@@ -12,7 +12,13 @@ A, B, C = ("a" * 36, "b" * 36, "c" * 36)
 def graph():
     adjacency = {A: {B: 1.0, C: 0.5}, B: {A: 1.0}, C: {A: 0.5}}
     stats = [
-        ArtistStats(mbid=A, name="Alpha", user_count=100, listen_count=700),
+        ArtistStats(
+            mbid=A,
+            name="Alpha",
+            user_count=100,
+            listen_count=700,
+            disambiguation="UK band",
+        ),
         ArtistStats(mbid=B, name="Beta", user_count=50, listen_count=350),
         ArtistStats(mbid=C, name="Gamma", user_count=10, listen_count=70),
     ]
@@ -27,6 +33,7 @@ def test_round_trip_preserves_everything(graph):
     restored = deserialise(serialise(graph))
     assert restored.mbids == graph.mbids
     assert restored.names == graph.names
+    assert restored.disambiguations == graph.disambiguations
     assert restored.popularity == pytest.approx(graph.popularity)
     assert np.array_equal(restored.offsets, graph.offsets)
     assert np.array_equal(restored.neighbours, graph.neighbours)

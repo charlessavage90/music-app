@@ -20,7 +20,6 @@ from pathlib import Path
 from artistpath_builder.archive import RawArchive
 from artistpath_builder.config import BuilderConfig
 from artistpath_builder.sources.base import SimilaritySource
-from artistpath_builder.sources.seeds import artist_stats_url
 
 logger = logging.getLogger(__name__)
 
@@ -32,8 +31,16 @@ class TransientFetchError(RuntimeError):
 
 
 def http_fetcher(config: BuilderConfig) -> Fetcher:
-    """The real network fetcher. Kept out of Crawler so tests inject a fake."""
+    """The real network fetcher. Kept out of Crawler so tests inject a fake.
+
+    Logs per-request latency and any rate-limit headers the server returns.
+    An 8-hour crawl that silently degrades is worse than a slow one that says
+    why, so this instrumentation is permanent rather than diagnostic.
+    """
     import httpx
+
+    # httpx logs every request at INFO, which drowns our own output.
+    logging.getLogger("httpx").setLevel(logging.WARNING)
 
     client = httpx.Client(
         headers={"User-Agent": config.user_agent},
@@ -42,10 +49,23 @@ def http_fetcher(config: BuilderConfig) -> Fetcher:
     )
 
     def fetch(url: str) -> bytes:
+        started = time.monotonic()
         try:
             response = client.get(url)
         except httpx.RequestError as exc:
             raise TransientFetchError(str(exc)) from exc
+        elapsed = time.monotonic() - started
+
+        remaining = response.headers.get("X-RateLimit-Remaining")
+        reset_in = response.headers.get("X-RateLimit-Reset-In")
+        logger.info(
+            "fetch %6.2fs http=%d remaining=%s reset_in=%s",
+            elapsed,
+            response.status_code,
+            remaining,
+            reset_in,
+        )
+
         if response.status_code == 429 or response.status_code >= 500:
             raise TransientFetchError(f"HTTP {response.status_code}")
         response.raise_for_status()
@@ -76,9 +96,6 @@ class Crawler:
     def similar_key(self, mbid: str) -> str:
         return f"similar/{self.source.name}/{mbid}.json"
 
-    def stats_key(self, mbid: str) -> str:
-        return f"stats/{mbid}.json"
-
     def crawl(self, bootstrap_mbids: list[str]) -> None:
         queue: deque[str] = deque()
         for mbid in bootstrap_mbids:
@@ -94,11 +111,10 @@ class Crawler:
             if mbid in self._done:
                 continue
 
+            # Similarity only. Popularity comes from the spark dump — the
+            # per-artist stats endpoint costs ~23s a call (findings 6a).
             payload = self._archive_or_fetch(
                 self.similar_key(mbid), self.source.request_url(mbid), mbid
-            )
-            self._archive_or_fetch(
-                self.stats_key(mbid), artist_stats_url(self.config, mbid), mbid
             )
             self._done.add(mbid)
             processed += 1

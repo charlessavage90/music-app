@@ -10,6 +10,22 @@
 
 **Spec:** `docs/superpowers/specs/2026-07-19-artist-path-alpha-design.md`. Where this plan and the spec disagree, the spec wins — raise it rather than improvising.
 
+## Amendment 2 — 2026-07-20: popularity moves to the spark dump
+
+**Tasks 2–10 are implemented and committed.** From here the code is the source of truth; the task bodies below are the record of how it was built. This amendment describes a change applied to that working code.
+
+**Trigger.** An instrumented trial crawl measured the per-artist stats endpoint at **~22.8s per call** against ~1.1s for similarity, with rate-limit headers showing we were *not* throttled (findings §6a). Stats accounted for ~95% of crawl time and made 75k artists a ~21-day job.
+
+**Change.** Popularity is no longer fetched per artist. It is derived offline from the 191GB ListenBrainz spark dump (new Task 12). Three consequences:
+
+1. **The crawler fetches similarity only.** `stats_key()` and the second fetch are removed. Crawl drops to ~1.3s per artist — ~27 hours serial, ~7 hours at 4-way concurrency.
+2. **Names and disambiguation are harvested from similarity responses.** Every neighbour row carries `name` and `comment`, so dropping the stats call forces the harvesting that was previously deferred — and delivers disambiguation for free, closing the known deviation recorded in the self-review.
+3. **The two pipelines are independent.** The similarity crawl and the popularity job both feed the graph build and neither blocks the other. The crawl can run before Task 12 exists.
+
+**Superseded:** Task 6's stats fetching, Task 9's `_archived_stats`, and Task 11's assumption that popularity lives in the archive.
+
+---
+
 ## Global Constraints
 
 Every task's requirements implicitly include these. All are copied from the spec.

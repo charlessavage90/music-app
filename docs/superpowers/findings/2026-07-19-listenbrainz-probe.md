@@ -151,6 +151,41 @@ Tasks 3, 4, 8, 10 are unaffected.
 
 ---
 
+## 6a. Measured latency — supersedes the §5 crawl estimate
+
+**Added 2026-07-20 after an instrumented trial crawl.** The §5 projection of ~8.3 hours was wrong because it assumed both endpoints were equally fast. They are not.
+
+```
+similar    0.37 – 1.94s    (mean ~1.1s)    no rate-limit headers present
+stats     18.08 – 26.76s   (mean ~22.8s)   X-RateLimit-Remaining: 29 of 30
+```
+
+**We are not being throttled.** `remaining=29` shows one request consumed from a 30-per-window budget. The per-artist listeners endpoint is simply slow — it appears to compute the aggregate on demand. The Labs similarity endpoint, which §8.1 named as the primary risk, is fast and returns no rate-limit headers at all.
+
+Observed end-to-end: ~25s per artist, i.e. ~0.27 req/s. At that rate 75,000 artists would take **~21 days**, not 8.3 hours.
+
+The similarity crawl alone, with the stats call removed, is ~1.3s per artist: **~27 hours serial, ~7 hours at 4-way concurrency** (still only ~3 req/s against Labs).
+
+### Why the §5 estimate was wrong
+
+It was derived from request *count* without measuring request *cost*. Two endpoints were assumed interchangeable because both returned quickly to a handful of manual probes against very popular artists. Any future throughput estimate in this project must come from a timed run, not from arithmetic.
+
+## 6b. Bulk popularity: no cheap source exists
+
+Searched for a way to avoid 75,000 slow stats calls. Findings:
+
+| Candidate | Result |
+|---|---|
+| `popular-artists-by-listeners` bulk endpoint | **HTTP 500.** Broken. |
+| ListenBrainz spark dump | **191GB** (`listenbrainz-spark-dump-2593-20260712`) |
+| MLHD+ (`/mlhd/`) | 16 × 15GB ≈ **240GB**, dated 2023 |
+| `labs/artist-credit-artist-credit-relations` | Dated 2019–2020; six years stale |
+| MusicBrainz postgres dumps | Full artist list and disambiguation, but **no popularity data** |
+
+**Decision: process the 191GB ListenBrainz spark dump.** Chosen over cheaper proxies (similarity-graph in-degree, Deezer `nb_fan`) because it is authoritative, it is genuinely Tier-1 data ownership per §1, and it ends the dependency rather than working around it. Cost is a one-time AWS processing job, estimated $30–50.
+
+**Consequence:** the similarity crawl and the popularity job become fully independent pipelines that both feed the graph build. The crawl no longer fetches stats and can run before the dump pipeline exists.
+
 ## 7. Verdict
 
 **GO.** Both data dependencies are live, CC0, well-shaped and adequately fast. The similarity data is richer than assumed (disambiguation included free). No fallback to MusicBrainz relationship data is needed.

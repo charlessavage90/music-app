@@ -47,7 +47,7 @@ class FakeFetcher:
             raise TransientFetchError("429 slow down")
         for mbid, neighbours in self.NEIGHBOURS.items():
             if mbid in url:
-                return _stats(mbid) if "/listeners" in url else _similar(*neighbours)
+                return _similar(*neighbours)
         return b"[]"
 
 
@@ -66,11 +66,19 @@ def _crawler(tmp_path, config, fetcher, name="checkpoint.json"):
     )
 
 
-def test_crawl_archives_both_similarity_and_stats(tmp_path, config):
+def test_crawl_archives_similarity(tmp_path, config):
     crawler = _crawler(tmp_path, config, FakeFetcher())
     crawler.crawl([A])
     assert crawler.archive.has(crawler.similar_key(A))
-    assert crawler.archive.has(crawler.stats_key(A))
+
+
+def test_crawl_never_fetches_per_artist_stats(tmp_path, config):
+    # The stats endpoint costs ~23s a call (findings 6a). Popularity comes
+    # from the spark dump instead; reintroducing this call would take the
+    # crawl from ~7 hours to ~3 weeks.
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+    assert not any("/listeners" in url for url in crawler.fetcher.calls)
 
 
 def test_responses_are_archived_verbatim(tmp_path, config):

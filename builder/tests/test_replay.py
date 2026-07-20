@@ -17,29 +17,24 @@ SIMILAR = {
     C: [(B, "Beta", 5)],
 }
 
-USERS = {A: 300, B: 200, C: 100}
 NAMES = {A: "Alpha", B: "Beta", C: "Gamma"}
+COMMENTS = {A: "UK band", B: "US duo", C: ""}
+
+# Derived offline from the spark dump; distinct listeners per artist.
+POPULARITY = {A: 300, B: 200, C: 100}
 
 
 def _similar_body(mbid: str) -> bytes:
     return json.dumps(
         [
-            {"artist_mbid": n, "name": name, "score": score}
-            for n, name, score in SIMILAR[mbid]
-        ]
-    ).encode()
-
-
-def _stats_body(mbid: str) -> bytes:
-    return json.dumps(
-        {
-            "payload": {
-                "artist_mbid": mbid,
-                "artist_name": NAMES[mbid],
-                "total_user_count": USERS[mbid],
-                "total_listen_count": USERS[mbid] * 7,
+            {
+                "artist_mbid": n,
+                "name": NAMES[n],
+                "comment": COMMENTS[n],
+                "score": score,
             }
-        }
+            for n, _, score in SIMILAR[mbid]
+        ]
     ).encode()
 
 
@@ -51,7 +46,7 @@ class RecordedFetcher:
         self.calls += 1
         for mbid in SIMILAR:
             if mbid in url:
-                return _stats_body(mbid) if "/listeners" in url else _similar_body(mbid)
+                return _similar_body(mbid)
         return b"[]"
 
 
@@ -70,7 +65,6 @@ def config():
 def _seed_archive(archive, source, mbids):
     for mbid in mbids:
         archive.put(f"similar/{source.name}/{mbid}.json", _similar_body(mbid))
-        archive.put(f"stats/{mbid}.json", _stats_body(mbid))
 
 
 def test_rebuild_from_archive_is_byte_identical_with_no_network(tmp_path, config):
@@ -86,10 +80,10 @@ def test_rebuild_from_archive_is_byte_identical_with_no_network(tmp_path, config
         fetcher=fetcher,
         checkpoint_path=tmp_path / "checkpoint.json",
     ).crawl([A])
-    # Two calls per artist (similarity + stats), three artists discovered.
-    assert fetcher.calls == 6
+    # One call per artist now that stats come from the dump.
+    assert fetcher.calls == 3
 
-    first = serialise(build_from_archive(config, archive, source))
+    first = serialise(build_from_archive(config, archive, source, POPULARITY))
 
     # Second build: same archive, a fetcher that raises if touched.
     Crawler(
@@ -100,7 +94,7 @@ def test_rebuild_from_archive_is_byte_identical_with_no_network(tmp_path, config
         checkpoint_path=tmp_path / "checkpoint2.json",
     ).crawl([A])
 
-    second = serialise(build_from_archive(config, archive, source))
+    second = serialise(build_from_archive(config, archive, source, POPULARITY))
 
     assert first == second
 
@@ -110,36 +104,49 @@ def test_replay_produces_a_connected_graph(tmp_path, config):
     source = ListenBrainzSource(config)
     _seed_archive(archive, source, [A, B, C])
 
-    graph = build_from_archive(config, archive, source)
+    graph = build_from_archive(config, archive, source, POPULARITY)
     assert graph.mbids == [A, B, C]
     assert graph.edge_count > 0
 
 
-def test_popularity_comes_from_archived_user_counts(tmp_path, config):
+def test_popularity_comes_from_the_supplied_table(tmp_path, config):
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
     _seed_archive(archive, source, [A, B, C])
 
-    graph = build_from_archive(config, archive, source)
+    graph = build_from_archive(config, archive, source, POPULARITY)
     # A has the most distinct listeners, C the fewest (spec 4.1).
     assert graph.popularity[graph.mbids.index(A)] == max(graph.popularity)
     assert graph.popularity[graph.mbids.index(C)] == min(graph.popularity)
+
+
+def test_names_and_disambiguation_are_harvested_from_neighbour_rows(tmp_path, config):
+    # There is no per-artist metadata record; an artist's name and
+    # disambiguation appear only where it is listed as someone else's
+    # neighbour.
+    archive = LocalArchive(tmp_path / "archive")
+    source = ListenBrainzSource(config)
+    _seed_archive(archive, source, [A, B, C])
+
+    graph = build_from_archive(config, archive, source, POPULARITY)
+    assert graph.names[graph.mbids.index(A)] == "Alpha"
+    assert graph.disambiguations[graph.mbids.index(A)] == "UK band"
 
 
 def test_artists_missing_from_the_archive_are_skipped(tmp_path, config):
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
     _seed_archive(archive, source, [A, B])
-    # C is absent — a crawl failure. The build must not raise.
-    graph = build_from_archive(config, archive, source)
+    # C was never crawled. The build must not raise.
+    graph = build_from_archive(config, archive, source, POPULARITY)
     assert C not in graph.mbids
 
 
-def test_artist_without_archived_stats_is_skipped(tmp_path, config):
+def test_artist_without_popularity_is_skipped(tmp_path, config):
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
-    _seed_archive(archive, source, [A, B])
-    archive.put(f"similar/{source.name}/{C}.json", _similar_body(C))
-    # C has neighbours but no popularity, so it cannot be routed through.
-    graph = build_from_archive(config, archive, source)
+    _seed_archive(archive, source, [A, B, C])
+    # C has neighbours but no popularity, so it cannot be weighed and is
+    # not a node.
+    graph = build_from_archive(config, archive, source, {A: 300, B: 200})
     assert C not in graph.mbids

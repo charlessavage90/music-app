@@ -21,6 +21,7 @@ Adjacency = dict[str, dict[str, float]]
 class Graph:
     mbids: list[str]
     names: list[str]
+    disambiguations: list[str]
     popularity: list[float]
     offsets: np.ndarray  # int32, length len(mbids) + 1
     neighbours: np.ndarray  # int32
@@ -106,6 +107,7 @@ def build_graph(
     index = {mbid: i for i, mbid in enumerate(mbids)}
 
     names = [stats_by_mbid[m].name for m in mbids]
+    disambiguations = [stats_by_mbid[m].disambiguation for m in mbids]
     # Distinct listeners, not plays — see spec section 4.1.
     popularity = _log_scaled([stats_by_mbid[m].user_count for m in mbids])
 
@@ -128,6 +130,7 @@ def build_graph(
     return Graph(
         mbids=mbids,
         names=names,
+        disambiguations=disambiguations,
         popularity=popularity,
         offsets=offsets,
         neighbours=np.asarray(neighbours, dtype=np.int32),

@@ -19,7 +19,7 @@ The tool no longer works. The Echo Nest was acquired by Spotify and shut down, a
 | Need | Source | Notes |
 |---|---|---|
 | Artist similarity | [ListenBrainz Labs `similar-artists`](https://labs.api.listenbrainz.org/similar-artists) | CC0, MusicBrainz-keyed, session-based collaborative filtering. Published by MetaBrainz [explicitly in response](https://blog.metabrainz.org/2024/11/28/pissed-off-by-spotify-enshittifying-more-api-endpoints-we-can-help/) to the Spotify deprecation. |
-| Artist popularity | ListenBrainz per-artist `total_user_count` | Distinct listeners, not plays — see §4.1. Used for popularity-weighted routing. |
+| Artist popularity | ListenBrainz **spark dump**, aggregated to distinct listeners per artist | Distinct listeners, not plays — see §4.1. The per-artist API costs ~23s a call (Task 1 findings §6a), so popularity is derived offline from the 191GB dump instead. This also makes popularity Tier-1 data we own outright. |
 | Track clips + art | Deezer API (primary), iTunes Search API (fallback) | 30s previews, no authentication. |
 
 Audio *energy* features have no free replacement. See §5.3.
@@ -102,7 +102,9 @@ Pipeline:
 
 1. **Acquire similarity data.** Behind a `SimilaritySource` interface with two implementations: bulk dump if one exists, otherwise a resumable rate-limited crawl of the Labs endpoint that checkpoints to disk, so a long fetch can be interrupted and resumed. The builder takes a **list** of sources; alpha configures exactly one.
 2. **Archive raw responses to S3, unmodified, as they are fetched.** Every subsequent rebuild replays from this archive rather than the network. This converts the crawl from a recurring dependency into a one-time event and is the primary mitigation for §8.1. Expected size a few GB; cost negligible. Non-negotiable — it must not be deferred as an optimisation.
-3. **Discover artists by snowball expansion.** Bootstrap from the top 1,000 artists (the most the sitewide stats endpoint will serve — it caps hard at 1,000 while advertising 10.4M), then expand breadth-first through the similarity graph itself until ~75,000 distinct artists are found. Popularity is fetched per artist. Verified in the Task 1 probe; see `docs/superpowers/findings/2026-07-19-listenbrainz-probe.md`.
+3. **Discover artists by snowball expansion.** Bootstrap from the top 1,000 artists (the most the sitewide stats endpoint will serve — it caps hard at 1,000 while advertising 10.4M), then expand breadth-first through the similarity graph itself until ~75,000 distinct artists are found. Verified in the Task 1 probe; see `docs/superpowers/findings/2026-07-19-listenbrainz-probe.md`.
+
+3a. **Derive popularity offline** from the ListenBrainz spark dump: distinct listeners per artist MBID. This is a **separate pipeline from the crawl**, and the two are independent — neither blocks the other. Both feed step 6.
 4. **Symmetrise edges.** Similarity is not mutual; one-way edges create dead ends. Where an edge exists in one direction only, mirror it.
 5. **Keep the largest connected component.** Guarantees a path exists between any two artists the UI can offer, so "no path found" can only ever result from user exclusions.
 6. **Emit** CSR arrays (`offsets: Int32Array`, `neighbours: Int32Array`, `scores: Float32Array`, `edgeType: Uint8Array`), an artist table (MBID, name, popularity, disambiguation), and a normalised-name index for autocomplete.

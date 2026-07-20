@@ -19,6 +19,36 @@ from artistpath_builder.models import EdgeType, SimilarArtist
 FIELD_MBID = "artist_mbid"
 FIELD_NAME = "name"
 FIELD_SCORE = "score"
+FIELD_COMMENT = "comment"
+
+
+def harvest_identities(payloads) -> dict[str, tuple[str, str]]:
+    """Collect (name, disambiguation) per MBID from neighbour rows.
+
+    There is no per-artist metadata record: an artist's name and
+    disambiguation appear only where it is listed as somebody else's
+    neighbour. Harvesting across every response is therefore the only way to
+    populate the artist table, and it supplies disambiguation
+    ("1980s-1990s US grunge band") at no extra cost.
+    """
+    identities: dict[str, tuple[str, str]] = {}
+    for payload in payloads:
+        try:
+            data = json.loads(payload)
+        except json.JSONDecodeError:
+            continue
+        for row in ListenBrainzSource._rows(data):
+            mbid = row.get(FIELD_MBID)
+            if not mbid:
+                continue
+            name = row.get(FIELD_NAME) or ""
+            comment = row.get(FIELD_COMMENT) or ""
+            existing = identities.get(mbid)
+            # Prefer the first non-empty name seen; deterministic because
+            # callers pass payloads in sorted order.
+            if existing is None or (not existing[0] and name):
+                identities[mbid] = (name, comment)
+    return identities
 
 
 class ListenBrainzSource:

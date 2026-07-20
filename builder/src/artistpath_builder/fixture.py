@@ -52,6 +52,7 @@ def extract_fixture(graph: Graph, size: int, seed_mbid: str) -> Graph:
     return Graph(
         mbids=[graph.mbids[i] for i in keep],
         names=[graph.names[i] for i in keep],
+        disambiguations=[graph.disambiguations[i] for i in keep],
         popularity=[graph.popularity[i] for i in keep],
         offsets=offsets,
         neighbours=np.asarray(neighbours, dtype=np.int32),

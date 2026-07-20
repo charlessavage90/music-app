@@ -38,6 +38,7 @@ def serialise(graph: Graph) -> bytes:
         {
             "mbids": graph.mbids,
             "names": graph.names,
+            "disambiguations": graph.disambiguations,
             "popularity": graph.popularity,
         },
         sort_keys=True,
@@ -100,6 +101,7 @@ def deserialise(payload: bytes) -> Graph:
     return Graph(
         mbids=metadata["mbids"],
         names=metadata["names"],
+        disambiguations=metadata["disambiguations"],
         popularity=metadata["popularity"],
         offsets=offsets,
         neighbours=neighbours,

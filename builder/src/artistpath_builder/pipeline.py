@@ -1,7 +1,13 @@
-"""Assemble a graph from the archive alone.
+"""Assemble a graph from the archive plus a popularity table.
 
 This function must never touch the network. The replay test enforces that by
 injecting a fetcher that raises.
+
+Two independent inputs:
+  - the similarity archive, filled by the crawler
+  - a popularity table, derived offline from the ListenBrainz spark dump
+
+Neither pipeline blocks the other.
 """
 
 from __future__ import annotations
@@ -19,52 +25,47 @@ from artistpath_builder.graph import (
 )
 from artistpath_builder.models import ArtistStats
 from artistpath_builder.sources.base import SimilaritySource
-from artistpath_builder.sources.seeds import parse_artist_stats
+from artistpath_builder.sources.listenbrainz import harvest_identities
 
 logger = logging.getLogger(__name__)
 
-
-def _archived_stats(archive: RawArchive) -> dict[str, ArtistStats]:
-    """Popularity for every artist whose stats response was archived."""
-    stats: dict[str, ArtistStats] = {}
-    for key in archive.keys():
-        if not key.startswith("stats/"):
-            continue
-        payload = archive.get(key)
-        if payload is None:
-            continue
-        try:
-            record = parse_artist_stats(payload)
-        except ValueError:
-            logger.warning("unparseable stats payload at %s", key)
-            continue
-        if record is not None:
-            stats[record.mbid] = record
-    return stats
+Popularity = dict[str, int]
 
 
 def build_from_archive(
     config: BuilderConfig,
     archive: RawArchive,
     source: SimilaritySource,
+    popularity: Popularity,
 ) -> Graph:
-    """Assemble a graph from archived responses alone. Never touches the network."""
-    stats = _archived_stats(archive)
-    # An artist with no popularity cannot be routed through, so it is not a node.
-    known = set(stats)
-    adjacency: Adjacency = {}
-    missing = 0
+    """Assemble a graph from archived responses and a popularity table.
 
-    for mbid in sorted(known):
-        payload = archive.get(f"similar/{source.name}/{mbid}.json")
-        if payload is None:
-            missing += 1
+    An artist needs both an archived similarity response and a popularity
+    entry to become a node: without neighbours it cannot be routed through,
+    and without popularity the cost function cannot weigh it.
+    """
+    prefix = f"similar/{source.name}/"
+    payloads: dict[str, bytes] = {}
+    for key in sorted(archive.keys()):
+        if not key.startswith(prefix) or not key.endswith(".json"):
             continue
-        neighbours = source.parse(payload, exclude_mbid=mbid)
-        adjacency[mbid] = {n.mbid: n.score for n in neighbours if n.mbid in known}
+        payload = archive.get(key)
+        if payload is not None:
+            payloads[key[len(prefix) : -len(".json")]] = payload
 
-    if missing:
-        logger.warning("%d artists had no archived similarity response", missing)
+    # Names and disambiguation live in neighbour rows, not in any per-artist
+    # record, so they are harvested across every response.
+    identities = harvest_identities(payloads.values())
+
+    known = {mbid for mbid in payloads if mbid in popularity}
+    skipped = len(payloads) - len(known)
+    if skipped:
+        logger.warning("%d crawled artists had no popularity entry", skipped)
+
+    adjacency: Adjacency = {}
+    for mbid in sorted(known):
+        neighbours = source.parse(payloads[mbid], exclude_mbid=mbid)
+        adjacency[mbid] = {n.mbid: n.score for n in neighbours if n.mbid in known}
 
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
@@ -76,4 +77,15 @@ def build_from_archive(
         if node in keep
     }
 
-    return build_graph(pruned, list(stats.values()), source.edge_type)
+    stats = [
+        ArtistStats(
+            mbid=mbid,
+            name=identities.get(mbid, ("", ""))[0],
+            user_count=popularity[mbid],
+            listen_count=0,  # not carried; popularity is distinct listeners
+            disambiguation=identities.get(mbid, ("", ""))[1],
+        )
+        for mbid in keep
+    ]
+
+    return build_graph(pruned, stats, source.edge_type)
