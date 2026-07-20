@@ -57,7 +57,9 @@ Sources fall into two tiers, and the distinction drives §3.1 and §8.1:
 
 ### Explicitly out of scope (future phases)
 
-Multi-artist pathing ("centre of these three artists"); track-level rather than artist-level pathing; full-track playback via connected streaming accounts; playlist export; per-hop explanations of *why* two artists connect; user accounts; subscriptions and billing; GenAI natural-language querying.
+Multi-artist pathing ("centre of these three artists"); album-level and track-level pathing as selectable modes; full-track playback via connected streaming accounts; playlist export; per-hop explanations of *why* two artists connect; user accounts; subscriptions and billing; GenAI natural-language querying.
+
+Per-hop explanation is the **highest-priority** of these, on evidence — see §10.
 
 Four seams are built now to keep these cheap later (§7). Nothing else is anticipated.
 
@@ -140,7 +142,7 @@ cost = w_type[type(a,b)] · (1 − similarity(a,b))  // prefer strong links
 
 - `pop` = log-scaled listen count, normalised to 0–1.
 - `floor` = the lower popularity of the two endpoint artists. This is what prevents a route between two household names detouring through an artist with 400 listeners.
-- `w_hop` is the primary lever on path length; target is 5–8 artists inclusive of endpoints.
+- `w_hop` is the primary lever on path length; target is **3–7 artists inclusive of endpoints**, matching the length the author found most useful in practice (§10.3).
 - `w_type` is a per-edge-type multiplier. Alpha has one type, so this is effectively a constant; it exists so that later sources can be weighted relative to each other, which is also the mechanism behind future path-steering ("prefer factual connections over taste ones").
 
 Weights are configuration, tuned against the fixture graph and a set of hand-checked real paths.
@@ -257,6 +259,38 @@ The cost-function weights determine whether paths feel smooth. There is no autom
 
 ---
 
-## 10. Open decisions
+## 10. Evidence from prior art: the stopgap LLM prompt
+
+After Boil the Frog went down, the author used a hand-written LLM prompt as a substitute ([`docs/sample-ai-prompt`](../../sample-ai-prompt)). It covers three use cases: artist-to-artist paths with bypass, the "centre" of three or more artists, and album-to-album recommendation. It worked with "varying success."
+
+It is the best available evidence of what this product is actually for, and it drives four decisions.
+
+### 10.1 The graph selects; the model narrates
+
+Every use case in the prompt asks the model to *choose* the artists. That is almost certainly the source of the "varying success" — a language model asked to pick artists will hallucinate acts, misattribute genres, and cannot guarantee that what it names exists, is correctly identified, or has a playable clip.
+
+**Constraint for all future GenAI work: the model must never select nodes.** Path selection belongs to the graph, which is verifiable, deterministic and guaranteed playable. The model's only job is to explain a path it has been handed. This inverts the prompt's structure while preserving its value, and it is the difference between a narration feature that works and a reproduction of the failure mode the prompt already exhibited.
+
+The prompt's voice and format guidance remain directly reusable as a drafting brief for that narration layer.
+
+### 10.2 Per-hop explanation is the priority future feature
+
+All three use cases require a stated connection between neighbours, and the prompt's general guidelines are concerned almost entirely with explanation quality. Explanation is not decoration on top of the path — for this author it is a substantial part of the value.
+
+Alpha still ships without it, deliberately: routing quality must be proven before meaning is layered on it, and an explanation of a bad path is worse than no explanation. But it should be the first feature considered after alpha, ahead of multi-artist pathing.
+
+Note the dependency: a *factual* explanation ("both tagged shoegaze", "shared band member") needs the typed-edge and genre-tag data from a Tier 1 source (§1). This is a second reason the MusicBrainz ingest is the most likely next pipeline addition.
+
+### 10.3 Path length
+
+The prompt asks for 3–7 artists inclusive of endpoints. §4.1 adopts this over the original tool's typical 5–8.
+
+### 10.4 Node granularity
+
+Use case 3 is album-based; the author has separately asked for track-based pathing. Both are wanted, as selectable modes rather than a single choice. The opaque-node-ID seam (§7.3) supports either; the cost is an additional graph artifact per granularity, not a redesign.
+
+---
+
+## 11. Open decisions
 
 None blocking. Product name is undecided; the repository working name is `music-app`.
