@@ -36,7 +36,7 @@ builder/
   src/artistpath_builder/
     __init__.py
     config.py            # BuilderConfig — all tunables, no magic numbers elsewhere
-    models.py            # SimilarArtist, SeedArtist, EdgeType — plain dataclasses
+    models.py            # SimilarArtist, BootstrapArtist, ArtistStats, EdgeType
     archive.py           # RawArchive protocol; LocalArchive + S3Archive
     sources/
       __init__.py
@@ -66,9 +66,11 @@ Responsibilities are split so that the two things most likely to change — the 
 
 ---
 
-## Task 1: Spike — probe the real API and record fixtures
+## Task 1: Spike — probe the real API and record fixtures ✅ COMPLETE
 
-**This task is a gate.** Spec §8.1 names similarity-data acquisition as the primary risk and requires it be settled before app code exists. Nothing else in this plan may start until this task's findings are reviewed by a human. Its deliverable is knowledge and recorded fixtures, not production code.
+**Done 2026-07-19, commit `355737d`. Verdict: GO.** Findings: `docs/superpowers/findings/2026-07-19-listenbrainz-probe.md`. Tasks 2, 5, 6, 7, 9 and 11 were amended in response — chiefly, the sitewide endpoint caps at 1,000 artists so seeding became snowball discovery, and popularity moved to a per-artist endpoint. The steps below are retained as the record of what was probed.
+
+**This task was a gate.** Spec §8.1 names similarity-data acquisition as the primary risk and requires it be settled before app code exists. Nothing else in this plan may start until this task's findings are reviewed by a human. Its deliverable is knowledge and recorded fixtures, not production code.
 
 Two things are genuinely unknown and must be resolved by observation, not assumption:
 1. The exact JSON shape returned by the ListenBrainz Labs `similar-artists` endpoint.
@@ -170,7 +172,7 @@ Report the findings and wait. If the answer is no-go, this plan is revised befor
 
 **Interfaces:**
 - Consumes: the algorithm string and rate limit recorded in Task 1.
-- Produces: `BuilderConfig`, `SimilarArtist`, `SeedArtist`, `EdgeType` — used by every later task.
+- Produces: `BuilderConfig`, `SimilarArtist`, `BootstrapArtist`, `ArtistStats`, `EdgeType` — used by every later task.
 
 - [ ] **Step 1: Create the project**
 
@@ -208,14 +210,20 @@ pythonpath = ["src"]
 
 ```python
 from artistpath_builder.config import BuilderConfig
-from artistpath_builder.models import EdgeType, SimilarArtist
+from artistpath_builder.models import ArtistStats, EdgeType, SimilarArtist
 
 
 def test_config_has_sane_defaults():
     cfg = BuilderConfig()
     assert cfg.target_artist_count == 75_000
-    assert cfg.requests_per_second > 0
+    # Task 1 measured 30 requests / 5 seconds. Never exceed 6/s.
+    assert 0 < cfg.requests_per_second <= 6.0
     assert cfg.user_agent.startswith("artistpath-builder/")
+
+
+def test_artist_stats_defaults_disambiguation():
+    stats = ArtistStats(mbid="a" * 36, name="A", user_count=10, listen_count=99)
+    assert stats.disambiguation == ""
 
 
 def test_behavioural_edge_type_is_zero():
@@ -278,12 +286,26 @@ class SimilarArtist:
 
 
 @dataclass(frozen=True, slots=True)
-class SeedArtist:
-    """An artist in the crawl seed set, with the popularity used for routing."""
+class BootstrapArtist:
+    """An artist from the sitewide top-1000, used only to start the snowball.
+
+    Carries no popularity: the sitewide endpoint caps at 1000 artists, so
+    popularity is fetched per-artist instead (see the Task 1 findings).
+    """
 
     mbid: str
     name: str
-    listen_count: int
+
+
+@dataclass(frozen=True, slots=True)
+class ArtistStats:
+    """Per-artist popularity and metadata. One record per graph node."""
+
+    mbid: str
+    name: str
+    user_count: int  # distinct listeners — the popularity signal (spec 4.1)
+    listen_count: int  # plays; archived but NOT used for routing
+    disambiguation: str = ""
 ```
 
 `builder/src/artistpath_builder/config.py`:
@@ -311,10 +333,13 @@ class BuilderConfig:
     similar_artists_url: str = "https://labs.api.listenbrainz.org/similar-artists/json"
     sitewide_artists_url: str = "https://api.listenbrainz.org/1/stats/sitewide/artists"
 
+    artist_stats_url: str = "https://api.listenbrainz.org/1/stats/artist"
+
     # --- crawl ----------------------------------------------------------
     target_artist_count: int = 75_000
-    # Set from the rate limit observed in Task 1. Deliberately conservative:
-    # this crawl runs once, and being throttled costs more than being slow.
+    # Task 1 measured X-RateLimit: 30 requests per 5s window (~6/s).
+    # Deliberately under it: this crawl runs once, and being throttled costs
+    # more than being slow.
     requests_per_second: float = 5.0
     max_retries: int = 5
     timeout_seconds: float = 30.0
@@ -798,15 +823,17 @@ git commit -m "feat(builder): add ListenBrainz similarity source with score norm
 
 ---
 
-## Task 5: Seed artist acquisition
+## Task 5: Bootstrap list and per-artist stats
+
+**Amended after Task 1.** The sitewide endpoint caps at 1,000 artists, so it can only *bootstrap* the snowball, and popularity must come from a per-artist endpoint. See `docs/superpowers/findings/2026-07-19-listenbrainz-probe.md` §2–4.
 
 **Files:**
 - Create: `builder/src/artistpath_builder/sources/seeds.py`
 - Test: `builder/tests/test_seeds.py`
 
 **Interfaces:**
-- Consumes: `BuilderConfig`, `SeedArtist` (Task 2); `RawArchive` (Task 3).
-- Produces: `parse_seed_page(payload: bytes) -> list[SeedArtist]` and `seed_page_url(config, offset, count) -> str`. Used by Task 6 and Task 11.
+- Consumes: `BuilderConfig`, `BootstrapArtist`, `ArtistStats` (Task 2).
+- Produces: `bootstrap_url(config, offset, count) -> str`, `parse_bootstrap_page(payload) -> list[BootstrapArtist]`, `artist_stats_url(config, mbid) -> str`, `parse_artist_stats(payload) -> ArtistStats | None`. Used by Tasks 6, 9 and 11.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -818,50 +845,86 @@ import json
 import pytest
 
 from artistpath_builder.config import BuilderConfig
-from artistpath_builder.sources.seeds import parse_seed_page, seed_page_url
+from artistpath_builder.sources.seeds import (
+    artist_stats_url,
+    bootstrap_url,
+    parse_artist_stats,
+    parse_bootstrap_page,
+)
 
 
-def test_url_carries_offset_and_count():
-    url = seed_page_url(BuilderConfig(), offset=1000, count=100)
-    assert "offset=1000" in url
+def test_bootstrap_url_carries_offset_and_count():
+    url = bootstrap_url(BuilderConfig(), offset=900, count=100)
+    assert "offset=900" in url
     assert "count=100" in url
 
 
-def test_parses_recorded_real_response(seed_artists_payload):
-    seeds = parse_seed_page(json.dumps(seed_artists_payload).encode())
-    assert len(seeds) > 0
-    assert all(s.listen_count >= 0 for s in seeds)
-    assert all(len(s.mbid) == 36 for s in seeds)
+def test_parses_recorded_real_bootstrap_response(seed_artists_payload):
+    artists = parse_bootstrap_page(json.dumps(seed_artists_payload).encode())
+    assert len(artists) > 0
+    assert all(len(a.mbid) == 36 for a in artists)
 
 
-def test_artists_without_an_mbid_are_dropped():
+def test_bootstrap_drops_artists_without_an_mbid():
     # Sitewide stats include artists MusicBrainz cannot identify. They cannot
     # be graph nodes, because similarity lookups are MBID-keyed.
     payload = json.dumps(
         {
             "payload": {
                 "artists": [
-                    {"artist_mbid": None, "artist_name": "Unknown", "listen_count": 5},
-                    {
-                        "artist_mbid": "a" * 36,
-                        "artist_name": "Known",
-                        "listen_count": 9,
-                    },
+                    {"artist_mbid": None, "artist_name": "Unknown"},
+                    {"artist_mbid": "a" * 36, "artist_name": "Known"},
                 ]
             }
         }
     ).encode()
-    seeds = parse_seed_page(payload)
-    assert [s.name for s in seeds] == ["Known"]
+    assert [a.name for a in parse_bootstrap_page(payload)] == ["Known"]
 
 
-def test_empty_page_yields_nothing():
-    assert parse_seed_page(json.dumps({"payload": {"artists": []}}).encode()) == []
+def test_empty_bootstrap_page_yields_nothing():
+    assert parse_bootstrap_page(json.dumps({"payload": {"artists": []}}).encode()) == []
+
+
+def test_stats_url_contains_mbid_and_listeners_path():
+    url = artist_stats_url(BuilderConfig(), "a" * 36)
+    assert "a" * 36 in url
+    assert url.endswith("/listeners")
+
+
+def test_parses_recorded_real_stats_response(artist_listeners_payload):
+    stats = parse_artist_stats(json.dumps(artist_listeners_payload).encode())
+    assert stats is not None
+    assert stats.user_count > 0
+    assert stats.listen_count > 0
+    assert len(stats.mbid) == 36
+
+
+def test_stats_prefers_user_count_over_listen_count(artist_listeners_payload):
+    # Spec 4.1: popularity is distinct listeners, not plays. Guards against
+    # someone "simplifying" these back into one field.
+    stats = parse_artist_stats(json.dumps(artist_listeners_payload).encode())
+    assert stats.user_count != stats.listen_count
+
+
+def test_stats_for_unknown_artist_returns_none():
+    payload = json.dumps({"payload": {"artist_mbid": None}}).encode()
+    assert parse_artist_stats(payload) is None
 
 
 def test_malformed_payload_raises():
     with pytest.raises(ValueError):
-        parse_seed_page(b"<html>")
+        parse_bootstrap_page(b"<html>")
+    with pytest.raises(ValueError):
+        parse_artist_stats(b"<html>")
+```
+
+Add the new fixture to `builder/tests/conftest.py`:
+
+```python
+@pytest.fixture
+def artist_listeners_payload() -> dict:
+    """The real per-artist stats response recorded in Task 1."""
+    return json.loads((FIXTURES / "artist_listeners_sample.json").read_text())
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -877,13 +940,13 @@ Expected: FAIL with `ModuleNotFoundError`
 `builder/src/artistpath_builder/sources/seeds.py`:
 
 ```python
-"""Seed artist acquisition: the top N artists by sitewide listen count.
+"""Bootstrap artist list and per-artist popularity.
 
-Listen count becomes the popularity signal that drives popularity-weighted
-routing (spec section 4.1). Artists without an MBID are unusable as nodes.
+The sitewide stats endpoint caps hard at 1,000 artists while advertising
+10.4M (Task 1 findings section 2), so it can only seed the snowball. Real
+popularity comes per-artist from the listeners endpoint.
 
-IMPORTANT: field names come from the response recorded in Task 1. Correct
-them here if the findings document shows otherwise.
+Field names are confirmed against responses recorded from the live API.
 """
 
 from __future__ import annotations
@@ -892,39 +955,60 @@ import json
 from urllib.parse import urlencode
 
 from artistpath_builder.config import BuilderConfig
-from artistpath_builder.models import SeedArtist
+from artistpath_builder.models import ArtistStats, BootstrapArtist
 
+# Sitewide stats: payload.artists[]
 FIELD_MBID = "artist_mbid"
 FIELD_NAME = "artist_name"
-FIELD_LISTENS = "listen_count"
+
+# Per-artist stats: payload
+FIELD_USERS = "total_user_count"
+FIELD_LISTENS = "total_listen_count"
+
+# The sitewide endpoint will not serve beyond this, whatever you ask for.
+BOOTSTRAP_CEILING = 1000
 
 
-def seed_page_url(config: BuilderConfig, offset: int, count: int) -> str:
+def bootstrap_url(config: BuilderConfig, offset: int, count: int) -> str:
     query = urlencode({"count": count, "offset": offset, "range": "all_time"})
     return f"{config.sitewide_artists_url}?{query}"
 
 
-def parse_seed_page(payload: bytes) -> list[SeedArtist]:
+def artist_stats_url(config: BuilderConfig, mbid: str) -> str:
+    return f"{config.artist_stats_url}/{mbid}/listeners"
+
+
+def _payload(raw: bytes, label: str) -> dict:
     try:
-        data = json.loads(payload)
+        data = json.loads(raw)
     except json.JSONDecodeError as exc:
-        raise ValueError(f"malformed seed payload: {exc}") from exc
+        raise ValueError(f"malformed {label} payload: {exc}") from exc
+    if not isinstance(data, dict):
+        raise ValueError(f"malformed {label} payload: expected object")
+    return data.get("payload", {})
 
-    rows = data.get("payload", {}).get("artists", []) if isinstance(data, dict) else []
 
-    seeds: list[SeedArtist] = []
-    for row in rows:
-        mbid = row.get(FIELD_MBID)
-        if not mbid:
-            continue
-        seeds.append(
-            SeedArtist(
-                mbid=mbid,
-                name=row.get(FIELD_NAME) or "",
-                listen_count=int(row.get(FIELD_LISTENS) or 0),
-            )
-        )
-    return seeds
+def parse_bootstrap_page(payload: bytes) -> list[BootstrapArtist]:
+    rows = _payload(payload, "bootstrap").get("artists", [])
+    return [
+        BootstrapArtist(mbid=row[FIELD_MBID], name=row.get(FIELD_NAME) or "")
+        for row in rows
+        if row.get(FIELD_MBID)
+    ]
+
+
+def parse_artist_stats(payload: bytes) -> ArtistStats | None:
+    """Returns None for artists the endpoint cannot identify."""
+    body = _payload(payload, "artist stats")
+    mbid = body.get("artist_mbid")
+    if not mbid:
+        return None
+    return ArtistStats(
+        mbid=mbid,
+        name=body.get("artist_name") or "",
+        user_count=int(body.get(FIELD_USERS) or 0),
+        listen_count=int(body.get(FIELD_LISTENS) or 0),
+    )
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -933,34 +1017,44 @@ def parse_seed_page(payload: bytes) -> list[SeedArtist]:
 cd builder && uv run --extra dev pytest tests/test_seeds.py -v
 ```
 
-Expected: 5 passed
+Expected: 9 passed
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add builder/src/artistpath_builder/sources/seeds.py builder/tests/test_seeds.py
-git commit -m "feat(builder): add seed artist acquisition"
+git add builder/src/artistpath_builder/sources/seeds.py builder/tests/test_seeds.py builder/tests/conftest.py
+git commit -m "feat(builder): add bootstrap list and per-artist popularity stats"
 ```
 
 ---
 
-## Task 6: Resumable crawler
+## Task 6: Snowball crawler
+
+**Amended after Task 1.** The crawler no longer walks a fixed list — it discovers artists by expanding through the similarity graph, because no ranked list of 75k artists is obtainable (findings §2–3).
 
 **Files:**
 - Create: `builder/src/artistpath_builder/crawl.py`
 - Test: `builder/tests/test_crawl.py`
 
 **Interfaces:**
-- Consumes: `BuilderConfig` (Task 2), `RawArchive` (Task 3), `SimilaritySource` (Task 4).
-- Produces: `Crawler(config, archive, source, fetcher)` with `crawl(mbids: list[str]) -> None` and `archive_key(mbid) -> str`. Used by Tasks 9 and 11.
+- Consumes: `BuilderConfig` (Task 2), `RawArchive` (Task 3), `SimilaritySource` (Task 4), `artist_stats_url` (Task 5).
+- Produces: `Crawler(config, archive, source, fetcher, checkpoint_path)` with `crawl(bootstrap_mbids: list[str]) -> None`, `similar_key(mbid) -> str`, `stats_key(mbid) -> str`. Used by Tasks 9 and 11.
 
-The crawler's only job is to fill the archive. It does not build a graph. This separation is what makes Task 9's replay test possible.
+The crawler's only job is to fill the archive. It does not build a graph. That separation is what makes Task 9's replay test possible.
+
+**Two archive keyspaces**, both filled per artist:
+- `similar/{source}/{mbid}.json` — neighbours
+- `stats/{mbid}.json` — popularity
+
+**Frontier discipline:** neighbours are queued in the order the source returned them (strongest similarity first, Task 4 sorts deterministically). Breadth-first from the top-1000 bootstrap, so the graph grows outward through the best-connected artists first and stops at `target_artist_count`.
 
 - [ ] **Step 1: Write the failing test**
 
 `builder/tests/test_crawl.py`:
 
 ```python
+import json
+
 import pytest
 
 from artistpath_builder.archive import LocalArchive
@@ -969,11 +1063,36 @@ from artistpath_builder.crawl import Crawler, TransientFetchError
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 
 
-class FakeFetcher:
-    """Records calls and returns queued responses."""
+A, B, C, D = ("a" * 36, "b" * 36, "c" * 36, "d" * 36)
 
-    def __init__(self, responses: dict[str, bytes], fail_times: int = 0):
-        self.responses = responses
+
+def _similar(*mbids: str) -> bytes:
+    rows = [
+        {"artist_mbid": m, "name": m[0].upper(), "score": 100 - i}
+        for i, m in enumerate(mbids)
+    ]
+    return json.dumps(rows).encode()
+
+
+def _stats(mbid: str, users: int = 10) -> bytes:
+    return json.dumps(
+        {
+            "payload": {
+                "artist_mbid": mbid,
+                "artist_name": mbid[0].upper(),
+                "total_user_count": users,
+                "total_listen_count": users * 7,
+            }
+        }
+    ).encode()
+
+
+class FakeFetcher:
+    """Serves a small similarity graph: A -> B -> C -> D."""
+
+    NEIGHBOURS = {A: (B,), B: (A, C), C: (B, D), D: (C,)}
+
+    def __init__(self, fail_times: int = 0):
         self.calls: list[str] = []
         self.fail_times = fail_times
 
@@ -982,9 +1101,9 @@ class FakeFetcher:
         if self.fail_times > 0:
             self.fail_times -= 1
             raise TransientFetchError("429 slow down")
-        for mbid, body in self.responses.items():
+        for mbid, neighbours in self.NEIGHBOURS.items():
             if mbid in url:
-                return body
+                return _stats(mbid) if "/listeners" in url else _similar(*neighbours)
         return b"[]"
 
 
@@ -993,61 +1112,69 @@ def config():
     return BuilderConfig(requests_per_second=1000.0, checkpoint_every=1)
 
 
-def _crawler(tmp_path, config, fetcher):
+def _crawler(tmp_path, config, fetcher, name="checkpoint.json"):
     return Crawler(
         config=config,
         archive=LocalArchive(tmp_path / "archive"),
         source=ListenBrainzSource(config),
         fetcher=fetcher,
-        checkpoint_path=tmp_path / "checkpoint.json",
+        checkpoint_path=tmp_path / name,
     )
 
 
-def test_crawl_archives_every_response(tmp_path, config):
-    fetcher = FakeFetcher({"a" * 36: b'[{"artist_mbid":"bbb","score":1}]'})
-    crawler = _crawler(tmp_path, config, fetcher)
-    crawler.crawl(["a" * 36])
-    assert crawler.archive.get(crawler.archive_key("a" * 36)) == (
-        b'[{"artist_mbid":"bbb","score":1}]'
+def test_crawl_archives_both_similarity_and_stats(tmp_path, config):
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+    assert crawler.archive.has(crawler.similar_key(A))
+    assert crawler.archive.has(crawler.stats_key(A))
+
+
+def test_responses_are_archived_verbatim(tmp_path, config):
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+    assert crawler.archive.get(crawler.similar_key(A)) == _similar(B)
+
+
+def test_snowball_discovers_artists_beyond_the_bootstrap(tmp_path, config):
+    # The whole point of the amendment: starting from A alone must reach D.
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+    assert crawler.discovered == {A, B, C, D}
+
+
+def test_discovery_stops_at_target_count(tmp_path, config):
+    cfg = BuilderConfig(
+        requests_per_second=1000.0, checkpoint_every=1, target_artist_count=2
     )
+    crawler = _crawler(tmp_path, cfg, FakeFetcher())
+    crawler.crawl([A])
+    assert len(crawler.discovered) == 2
 
 
 def test_already_archived_artists_are_not_refetched(tmp_path, config):
-    fetcher = FakeFetcher({})
-    crawler = _crawler(tmp_path, config, fetcher)
-    crawler.archive.put(crawler.archive_key("a" * 36), b"[]")
-    crawler.crawl(["a" * 36])
-    assert fetcher.calls == []
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+    before = len(crawler.fetcher.calls)
 
-
-def test_crawl_resumes_from_checkpoint(tmp_path, config):
-    fetcher = FakeFetcher({})
-    crawler = _crawler(tmp_path, config, fetcher)
-    crawler.crawl(["a" * 36, "b" * 36])
-    first_call_count = len(fetcher.calls)
-
-    # A fresh crawler over the same archive must do no further work.
-    resumed = _crawler(tmp_path, config, FakeFetcher({}))
-    resumed.crawl(["a" * 36, "b" * 36])
+    resumed = _crawler(tmp_path, config, FakeFetcher(), name="checkpoint2.json")
+    resumed.crawl([A])
     assert resumed.fetcher.calls == []
-    assert first_call_count == 2
+    assert before > 0
 
 
 def test_transient_failures_are_retried(tmp_path, config):
-    fetcher = FakeFetcher({"a" * 36: b"[]"}, fail_times=2)
+    fetcher = FakeFetcher(fail_times=2)
     crawler = _crawler(tmp_path, config, fetcher)
-    crawler.crawl(["a" * 36])
-    assert len(fetcher.calls) == 3
-    assert crawler.archive.has(crawler.archive_key("a" * 36))
+    crawler.crawl([A])
+    assert crawler.archive.has(crawler.similar_key(A))
 
 
-def test_exhausted_retries_records_failure_and_continues(tmp_path, config):
+def test_exhausted_retries_records_failure_and_continues(tmp_path):
     cfg = BuilderConfig(requests_per_second=1000.0, max_retries=2, checkpoint_every=1)
-    fetcher = FakeFetcher({}, fail_times=99)
-    crawler = _crawler(tmp_path, cfg, fetcher)
-    crawler.crawl(["a" * 36, "b" * 36])
-    # A single bad artist must not abort an overnight crawl.
-    assert set(crawler.failures) == {"a" * 36, "b" * 36}
+    crawler = _crawler(tmp_path, cfg, FakeFetcher(fail_times=999))
+    crawler.crawl([A])
+    # A single bad artist must not abort an 8-hour crawl.
+    assert A in crawler.failures
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -1075,12 +1202,14 @@ from __future__ import annotations
 import json
 import logging
 import time
+from collections import deque
 from collections.abc import Callable
 from pathlib import Path
 
 from artistpath_builder.archive import RawArchive
 from artistpath_builder.config import BuilderConfig
 from artistpath_builder.sources.base import SimilaritySource
+from artistpath_builder.sources.seeds import artist_stats_url
 
 logger = logging.getLogger(__name__)
 
@@ -1115,6 +1244,12 @@ def http_fetcher(config: BuilderConfig) -> Fetcher:
 
 
 class Crawler:
+    """Breadth-first snowball over the similarity graph.
+
+    No ranked list of 75k artists exists (Task 1 findings section 2), so the
+    frontier is built from the responses themselves.
+    """
+
     def __init__(
         self,
         config: BuilderConfig,
@@ -1129,34 +1264,82 @@ class Crawler:
         self.fetcher = fetcher
         self.checkpoint_path = Path(checkpoint_path)
         self.failures: list[str] = []
-        self._done: set[str] = self._load_checkpoint()
+        state = self._load_checkpoint()
+        self._done: set[str] = state["done"]
+        self.discovered: set[str] = state["discovered"]
 
-    def archive_key(self, mbid: str) -> str:
+    def similar_key(self, mbid: str) -> str:
         return f"similar/{self.source.name}/{mbid}.json"
 
-    def crawl(self, mbids: list[str]) -> None:
-        pending = [m for m in mbids if m not in self._done]
-        logger.info("crawling %d artists (%d already done)", len(pending), len(self._done))
+    def stats_key(self, mbid: str) -> str:
+        return f"stats/{mbid}.json"
 
-        for index, mbid in enumerate(pending, start=1):
-            key = self.archive_key(mbid)
-            if self.archive.has(key):
-                self._done.add(mbid)
+    def crawl(self, bootstrap_mbids: list[str]) -> None:
+        queue: deque[str] = deque()
+        for mbid in bootstrap_mbids:
+            if mbid not in self.discovered:
+                self.discovered.add(mbid)
+                queue.append(mbid)
+            elif mbid not in self._done:
+                queue.append(mbid)
+
+        processed = 0
+        while queue and len(self.discovered) <= self.config.target_artist_count:
+            mbid = queue.popleft()
+            if mbid in self._done:
                 continue
 
-            payload = self._fetch_with_retries(mbid)
-            if payload is not None:
-                self.archive.put(key, payload)
+            payload = self._archive_or_fetch(
+                self.similar_key(mbid), self.source.request_url(mbid), mbid
+            )
+            self._archive_or_fetch(
+                self.stats_key(mbid), artist_stats_url(self.config, mbid), mbid
+            )
             self._done.add(mbid)
+            processed += 1
 
-            if index % self.config.checkpoint_every == 0:
+            if payload is not None:
+                for neighbour in self._neighbours(payload, mbid):
+                    if len(self.discovered) >= self.config.target_artist_count:
+                        break
+                    if neighbour not in self.discovered:
+                        self.discovered.add(neighbour)
+                        queue.append(neighbour)
+
+            if processed % self.config.checkpoint_every == 0:
                 self._save_checkpoint()
-                logger.info("checkpoint: %d/%d", index, len(pending))
+                logger.info(
+                    "processed %d | discovered %d | queued %d",
+                    processed,
+                    len(self.discovered),
+                    len(queue),
+                )
 
         self._save_checkpoint()
+        logger.info(
+            "crawl finished: %d processed, %d discovered, %d failures",
+            processed,
+            len(self.discovered),
+            len(self.failures),
+        )
 
-    def _fetch_with_retries(self, mbid: str) -> bytes | None:
-        url = self.source.request_url(mbid)
+    def _neighbours(self, payload: bytes, mbid: str) -> list[str]:
+        try:
+            return [n.mbid for n in self.source.parse(payload, exclude_mbid=mbid)]
+        except ValueError:
+            logger.warning("unparseable similarity payload for %s", mbid)
+            return []
+
+    def _archive_or_fetch(self, key: str, url: str, mbid: str) -> bytes | None:
+        existing = self.archive.get(key)
+        if existing is not None:
+            return existing
+        payload = self._fetch_with_retries(url, mbid)
+        if payload is not None:
+            self.archive.put(key, payload)
+        return payload
+
+    def _fetch_with_retries(self, url: str, mbid: str) -> bytes | None:
         for attempt in range(self.config.max_retries):
             try:
                 payload = self.fetcher(url)
@@ -1169,18 +1352,26 @@ class Crawler:
             return payload
 
         logger.error("giving up on %s after %d attempts", mbid, self.config.max_retries)
-        self.failures.append(mbid)
+        if mbid not in self.failures:
+            self.failures.append(mbid)
         return None
 
-    def _load_checkpoint(self) -> set[str]:
+    def _load_checkpoint(self) -> dict[str, set[str]]:
         if not self.checkpoint_path.is_file():
-            return set()
-        return set(json.loads(self.checkpoint_path.read_text())["done"])
+            return {"done": set(), "discovered": set()}
+        state = json.loads(self.checkpoint_path.read_text())
+        return {
+            "done": set(state.get("done", [])),
+            "discovered": set(state.get("discovered", [])),
+        }
 
     def _save_checkpoint(self) -> None:
         self.checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
         self.checkpoint_path.write_text(
-            json.dumps({"done": sorted(self._done)}, sort_keys=True)
+            json.dumps(
+                {"done": sorted(self._done), "discovered": sorted(self.discovered)},
+                sort_keys=True,
+            )
         )
 ```
 
@@ -1190,13 +1381,13 @@ class Crawler:
 cd builder && uv run --extra dev pytest tests/test_crawl.py -v
 ```
 
-Expected: 5 passed
+Expected: 7 passed
 
 - [ ] **Step 5: Commit**
 
 ```bash
 git add builder/src/artistpath_builder/crawl.py builder/tests/test_crawl.py
-git commit -m "feat(builder): add resumable rate-limited crawler"
+git commit -m "feat(builder): add resumable snowball crawler"
 ```
 
 ---
@@ -1210,8 +1401,8 @@ Pure functions over in-memory data. No I/O.
 - Test: `builder/tests/test_graph.py`
 
 **Interfaces:**
-- Consumes: `SimilarArtist`, `SeedArtist`, `EdgeType` (Task 2).
-- Produces: `symmetrise(adjacency) -> dict[str, dict[str, float]]`, `largest_component(adjacency) -> set[str]`, `build_graph(adjacency, seeds, edge_type) -> Graph`. `Graph` is a dataclass with `mbids: list[str]`, `names: list[str]`, `popularity: list[float]`, `offsets`, `neighbours`, `scores`, `edge_types` (numpy arrays). Used by Task 8.
+- Consumes: `SimilarArtist`, `ArtistStats`, `EdgeType` (Task 2).
+- Produces: `symmetrise(adjacency) -> dict[str, dict[str, float]]`, `largest_component(adjacency) -> set[str]`, `build_graph(adjacency, stats, edge_type) -> Graph`. `Graph` is a dataclass with `mbids: list[str]`, `names: list[str]`, `popularity: list[float]`, `offsets`, `neighbours`, `scores`, `edge_types` (numpy arrays). Used by Task 8.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1221,15 +1412,16 @@ Pure functions over in-memory data. No I/O.
 import numpy as np
 
 from artistpath_builder.graph import build_graph, largest_component, symmetrise
-from artistpath_builder.models import EdgeType, SeedArtist
+from artistpath_builder.models import ArtistStats, EdgeType
 
 A, B, C, D, E = ("a" * 36, "b" * 36, "c" * 36, "d" * 36, "e" * 36)
 
 
-def _seeds(*mbids_and_listens):
+def _stats(*mbids_and_users):
+    """Popularity is distinct listeners, not plays (spec 4.1)."""
     return [
-        SeedArtist(mbid=m, name=m[0].upper(), listen_count=n)
-        for m, n in mbids_and_listens
+        ArtistStats(mbid=m, name=m[0].upper(), user_count=u, listen_count=u * 7)
+        for m, u in mbids_and_users
     ]
 
 
@@ -1261,14 +1453,14 @@ def test_largest_component_is_deterministic_when_sizes_tie():
 
 def test_build_graph_assigns_ids_in_mbid_order():
     adjacency = {B: {A: 1.0}, A: {B: 1.0}}
-    graph = build_graph(adjacency, _seeds((A, 10), (B, 20)), EdgeType.BEHAVIOURAL)
+    graph = build_graph(adjacency, _stats((A, 10), (B, 20)), EdgeType.BEHAVIOURAL)
     assert graph.mbids == [A, B]
 
 
 def test_csr_offsets_are_valid():
     adjacency = {A: {B: 1.0, C: 0.5}, B: {A: 1.0}, C: {A: 0.5}}
     graph = build_graph(
-        adjacency, _seeds((A, 10), (B, 20), (C, 30)), EdgeType.BEHAVIOURAL
+        adjacency, _stats((A, 10), (B, 20), (C, 30)), EdgeType.BEHAVIOURAL
     )
     assert graph.offsets[0] == 0
     assert graph.offsets[-1] == len(graph.neighbours)
@@ -1279,7 +1471,7 @@ def test_csr_offsets_are_valid():
 def test_every_edge_is_reciprocated_in_csr():
     adjacency = {A: {B: 1.0}, B: {A: 1.0}, C: {A: 0.4}, }
     graph = build_graph(
-        symmetrise(adjacency), _seeds((A, 10), (B, 20), (C, 30)), EdgeType.BEHAVIOURAL
+        symmetrise(adjacency), _stats((A, 10), (B, 20), (C, 30)), EdgeType.BEHAVIOURAL
     )
     for src in range(len(graph.mbids)):
         for i in range(graph.offsets[src], graph.offsets[src + 1]):
@@ -1291,7 +1483,7 @@ def test_every_edge_is_reciprocated_in_csr():
 def test_neighbours_are_sorted_within_each_row():
     adjacency = {A: {B: 0.1, C: 0.9}, B: {A: 0.1}, C: {A: 0.9}}
     graph = build_graph(
-        adjacency, _seeds((A, 10), (B, 20), (C, 30)), EdgeType.BEHAVIOURAL
+        adjacency, _stats((A, 10), (B, 20), (C, 30)), EdgeType.BEHAVIOURAL
     )
     row = graph.neighbours[graph.offsets[0] : graph.offsets[1]]
     assert list(row) == sorted(row)
@@ -1299,14 +1491,14 @@ def test_neighbours_are_sorted_within_each_row():
 
 def test_popularity_is_log_scaled_to_unit_range():
     adjacency = {A: {B: 1.0}, B: {A: 1.0}}
-    graph = build_graph(adjacency, _seeds((A, 1), (B, 1_000_000)), EdgeType.BEHAVIOURAL)
+    graph = build_graph(adjacency, _stats((A, 1), (B, 1_000_000)), EdgeType.BEHAVIOURAL)
     assert min(graph.popularity) == 0.0
     assert max(graph.popularity) == 1.0
 
 
 def test_edges_carry_the_source_edge_type():
     adjacency = {A: {B: 1.0}, B: {A: 1.0}}
-    graph = build_graph(adjacency, _seeds((A, 10), (B, 20)), EdgeType.BEHAVIOURAL)
+    graph = build_graph(adjacency, _stats((A, 10), (B, 20)), EdgeType.BEHAVIOURAL)
     assert np.all(graph.edge_types == EdgeType.BEHAVIOURAL)
 ```
 
@@ -1337,7 +1529,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from artistpath_builder.models import EdgeType, SeedArtist
+from artistpath_builder.models import ArtistStats, EdgeType
 
 Adjacency = dict[str, dict[str, float]]
 
@@ -1422,16 +1614,17 @@ def _log_scaled(listens: list[int]) -> list[float]:
 
 def build_graph(
     adjacency: Adjacency,
-    seeds: list[SeedArtist],
+    stats: list[ArtistStats],
     edge_type: EdgeType,
 ) -> Graph:
     """Assemble CSR arrays. IDs are assigned in sorted-MBID order."""
-    seed_by_mbid = {seed.mbid: seed for seed in seeds}
-    mbids = sorted(set(adjacency) & set(seed_by_mbid))
+    stats_by_mbid = {record.mbid: record for record in stats}
+    mbids = sorted(set(adjacency) & set(stats_by_mbid))
     index = {mbid: i for i, mbid in enumerate(mbids)}
 
-    names = [seed_by_mbid[m].name for m in mbids]
-    popularity = _log_scaled([seed_by_mbid[m].listen_count for m in mbids])
+    names = [stats_by_mbid[m].name for m in mbids]
+    # Distinct listeners, not plays — see spec section 4.1.
+    popularity = _log_scaled([stats_by_mbid[m].user_count for m in mbids])
 
     offsets = np.zeros(len(mbids) + 1, dtype=np.int32)
     neighbours: list[int] = []
@@ -1512,7 +1705,7 @@ import pytest
 
 from artistpath_builder.artifact import MAGIC, deserialise, serialise
 from artistpath_builder.graph import build_graph
-from artistpath_builder.models import EdgeType, SeedArtist
+from artistpath_builder.models import ArtistStats, EdgeType
 
 A, B, C = ("a" * 36, "b" * 36, "c" * 36)
 
@@ -1520,12 +1713,12 @@ A, B, C = ("a" * 36, "b" * 36, "c" * 36)
 @pytest.fixture
 def graph():
     adjacency = {A: {B: 1.0, C: 0.5}, B: {A: 1.0}, C: {A: 0.5}}
-    seeds = [
-        SeedArtist(mbid=A, name="Alpha", listen_count=100),
-        SeedArtist(mbid=B, name="Beta", listen_count=50),
-        SeedArtist(mbid=C, name="Gamma", listen_count=10),
+    stats = [
+        ArtistStats(mbid=A, name="Alpha", user_count=100, listen_count=700),
+        ArtistStats(mbid=B, name="Beta", user_count=50, listen_count=350),
+        ArtistStats(mbid=C, name="Gamma", user_count=10, listen_count=70),
     ]
-    return build_graph(adjacency, seeds, EdgeType.BEHAVIOURAL)
+    return build_graph(adjacency, stats, EdgeType.BEHAVIOURAL)
 
 
 def test_artifact_starts_with_magic(graph):
@@ -1703,7 +1896,7 @@ The acceptance test named in spec §9. It proves the archive is genuinely suffic
 
 **Interfaces:**
 - Consumes: everything from Tasks 3–8.
-- Produces: `build_from_archive(config, archive, source, seeds) -> Graph`. Used by Task 11.
+- Produces: `build_from_archive(config, archive, source) -> Graph`. Popularity is read from archived `stats/` responses, so no seeds file is needed. Used by Task 11.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1716,24 +1909,42 @@ from artistpath_builder.archive import LocalArchive
 from artistpath_builder.artifact import serialise
 from artistpath_builder.config import BuilderConfig
 from artistpath_builder.crawl import Crawler
-from artistpath_builder.models import SeedArtist
+from artistpath_builder.models import ArtistStats
 from artistpath_builder.pipeline import build_from_archive
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 
 A, B, C = ("a" * 36, "b" * 36, "c" * 36)
 
-RESPONSES = {
-    A: b'[{"artist_mbid":"' + B.encode() + b'","name":"Beta","score":10}]',
-    B: b'[{"artist_mbid":"' + A.encode() + b'","name":"Alpha","score":10},'
-       b'{"artist_mbid":"' + C.encode() + b'","name":"Gamma","score":5}]',
-    C: b'[{"artist_mbid":"' + B.encode() + b'","name":"Beta","score":5}]',
+SIMILAR = {
+    A: [(B, "Beta", 10)],
+    B: [(A, "Alpha", 10), (C, "Gamma", 5)],
+    C: [(B, "Beta", 5)],
 }
 
-SEEDS = [
-    SeedArtist(mbid=A, name="Alpha", listen_count=300),
-    SeedArtist(mbid=B, name="Beta", listen_count=200),
-    SeedArtist(mbid=C, name="Gamma", listen_count=100),
-]
+USERS = {A: 300, B: 200, C: 100}
+NAMES = {A: "Alpha", B: "Beta", C: "Gamma"}
+
+
+def _similar_body(mbid: str) -> bytes:
+    return json.dumps(
+        [
+            {"artist_mbid": n, "name": name, "score": score}
+            for n, name, score in SIMILAR[mbid]
+        ]
+    ).encode()
+
+
+def _stats_body(mbid: str) -> bytes:
+    return json.dumps(
+        {
+            "payload": {
+                "artist_mbid": mbid,
+                "artist_name": NAMES[mbid],
+                "total_user_count": USERS[mbid],
+                "total_listen_count": USERS[mbid] * 7,
+            }
+        }
+    ).encode()
 
 
 class RecordedFetcher:
@@ -1742,9 +1953,9 @@ class RecordedFetcher:
 
     def __call__(self, url: str) -> bytes:
         self.calls += 1
-        for mbid, body in RESPONSES.items():
+        for mbid in SIMILAR:
             if mbid in url:
-                return body
+                return _stats_body(mbid) if "/listeners" in url else _similar_body(mbid)
         return b"[]"
 
 
@@ -1772,10 +1983,11 @@ def test_rebuild_from_archive_is_byte_identical_with_no_network(tmp_path, config
         source=source,
         fetcher=fetcher,
         checkpoint_path=tmp_path / "checkpoint.json",
-    ).crawl([A, B, C])
-    assert fetcher.calls == 3
+    ).crawl([A])
+    # Two calls per artist (similarity + stats), three artists discovered.
+    assert fetcher.calls == 6
 
-    first = serialise(build_from_archive(config, archive, source, SEEDS))
+    first = serialise(build_from_archive(config, archive, source))
 
     # Second build: same archive, a fetcher that raises if touched.
     Crawler(
@@ -1784,31 +1996,56 @@ def test_rebuild_from_archive_is_byte_identical_with_no_network(tmp_path, config
         source=source,
         fetcher=ExplodingFetcher(),
         checkpoint_path=tmp_path / "checkpoint2.json",
-    ).crawl([A, B, C])
+    ).crawl([A])
 
-    second = serialise(build_from_archive(config, archive, source, SEEDS))
+    second = serialise(build_from_archive(config, archive, source))
 
     assert first == second
+
+
+def _seed_archive(archive, source, mbids):
+    for mbid in mbids:
+        archive.put(f"similar/{source.name}/{mbid}.json", _similar_body(mbid))
+        archive.put(f"stats/{mbid}.json", _stats_body(mbid))
 
 
 def test_replay_produces_a_connected_graph(tmp_path, config):
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
-    for mbid, body in RESPONSES.items():
-        archive.put(f"similar/{source.name}/{mbid}.json", body)
+    _seed_archive(archive, source, [A, B, C])
 
-    graph = build_from_archive(config, archive, source, SEEDS)
+    graph = build_from_archive(config, archive, source)
     assert graph.mbids == [A, B, C]
     assert graph.edge_count > 0
+
+
+def test_popularity_comes_from_archived_user_counts(tmp_path, config):
+    archive = LocalArchive(tmp_path / "archive")
+    source = ListenBrainzSource(config)
+    _seed_archive(archive, source, [A, B, C])
+
+    graph = build_from_archive(config, archive, source)
+    # A has the most distinct listeners, C the fewest (spec 4.1).
+    assert graph.popularity[graph.mbids.index(A)] == max(graph.popularity)
+    assert graph.popularity[graph.mbids.index(C)] == min(graph.popularity)
 
 
 def test_artists_missing_from_the_archive_are_skipped(tmp_path, config):
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
-    archive.put(f"similar/{source.name}/{A}.json", RESPONSES[A])
-    archive.put(f"similar/{source.name}/{B}.json", RESPONSES[B])
+    _seed_archive(archive, source, [A, B])
     # C is absent — a crawl failure. The build must not raise.
-    graph = build_from_archive(config, archive, source, SEEDS)
+    graph = build_from_archive(config, archive, source)
+    assert C not in graph.mbids
+
+
+def test_artist_without_archived_stats_is_skipped(tmp_path, config):
+    archive = LocalArchive(tmp_path / "archive")
+    source = ListenBrainzSource(config)
+    _seed_archive(archive, source, [A, B])
+    archive.put(f"similar/{source.name}/{C}.json", _similar_body(C))
+    # C has neighbours but no popularity, so it cannot be routed through.
+    graph = build_from_archive(config, archive, source)
     assert C not in graph.mbids
 ```
 
@@ -1838,34 +2075,54 @@ import logging
 from artistpath_builder.archive import RawArchive
 from artistpath_builder.config import BuilderConfig
 from artistpath_builder.graph import Adjacency, Graph, build_graph, largest_component, symmetrise
-from artistpath_builder.models import SeedArtist
+from artistpath_builder.models import ArtistStats
 from artistpath_builder.sources.base import SimilaritySource
+from artistpath_builder.sources.seeds import parse_artist_stats
 
 logger = logging.getLogger(__name__)
+
+
+def _archived_stats(archive: RawArchive) -> dict[str, ArtistStats]:
+    """Popularity for every artist whose stats response was archived."""
+    stats: dict[str, ArtistStats] = {}
+    for key in archive.keys():
+        if not key.startswith("stats/"):
+            continue
+        payload = archive.get(key)
+        if payload is None:
+            continue
+        try:
+            record = parse_artist_stats(payload)
+        except ValueError:
+            logger.warning("unparseable stats payload at %s", key)
+            continue
+        if record is not None:
+            stats[record.mbid] = record
+    return stats
 
 
 def build_from_archive(
     config: BuilderConfig,
     archive: RawArchive,
     source: SimilaritySource,
-    seeds: list[SeedArtist],
 ) -> Graph:
-    known = {seed.mbid for seed in seeds}
+    """Assemble a graph from archived responses alone. Never touches the network."""
+    stats = _archived_stats(archive)
+    # An artist with no popularity cannot be routed through, so it is not a node.
+    known = set(stats)
     adjacency: Adjacency = {}
     missing = 0
 
-    for seed in sorted(seeds, key=lambda s: s.mbid):
-        payload = archive.get(f"similar/{source.name}/{seed.mbid}.json")
+    for mbid in sorted(known):
+        payload = archive.get(f"similar/{source.name}/{mbid}.json")
         if payload is None:
             missing += 1
             continue
-        neighbours = source.parse(payload, exclude_mbid=seed.mbid)
-        adjacency[seed.mbid] = {
-            n.mbid: n.score for n in neighbours if n.mbid in known
-        }
+        neighbours = source.parse(payload, exclude_mbid=mbid)
+        adjacency[mbid] = {n.mbid: n.score for n in neighbours if n.mbid in known}
 
     if missing:
-        logger.warning("%d seed artists had no archived response", missing)
+        logger.warning("%d artists had no archived similarity response", missing)
 
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
@@ -1879,7 +2136,7 @@ def build_from_archive(
         if node in keep
     }
 
-    return build_graph(pruned, seeds, source.edge_type)
+    return build_graph(pruned, list(stats.values()), source.edge_type)
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
@@ -1888,7 +2145,7 @@ def build_from_archive(
 cd builder && uv run --extra dev pytest tests/test_replay.py -v
 ```
 
-Expected: 3 passed
+Expected: 5 passed
 
 - [ ] **Step 5: Run the whole suite**
 
@@ -1929,7 +2186,7 @@ import pytest
 
 from artistpath_builder.fixture import extract_fixture
 from artistpath_builder.graph import build_graph, symmetrise
-from artistpath_builder.models import EdgeType, SeedArtist
+from artistpath_builder.models import ArtistStats, EdgeType
 
 
 def _ring(n: int):
@@ -1939,11 +2196,13 @@ def _ring(n: int):
         m: {mbids[(i + 1) % n]: 0.9, mbids[(i - 1) % n]: 0.8}
         for i, m in enumerate(mbids)
     }
-    seeds = [
-        SeedArtist(mbid=m, name=f"Artist {i}", listen_count=(n - i) * 100)
+    stats = [
+        ArtistStats(
+            mbid=m, name=f"Artist {i}", user_count=(n - i) * 100, listen_count=(n - i) * 700
+        )
         for i, m in enumerate(mbids)
     ]
-    return build_graph(symmetrise(adjacency), seeds, EdgeType.BEHAVIOURAL), mbids
+    return build_graph(symmetrise(adjacency), stats, EdgeType.BEHAVIOURAL), mbids
 
 
 def test_fixture_has_requested_size():
@@ -2096,7 +2355,7 @@ git commit -m "feat(builder): add connected fixture sub-graph extraction"
 
 **Interfaces:**
 - Consumes: everything above.
-- Produces: `artistpath-build seeds|crawl|build|fixture` commands. `build` writes `graph-{version}.bin`, consumed by the API plan.
+- Produces: `artistpath-build bootstrap|crawl|build|fixture` commands. `build` writes `graph-{version}.bin`, consumed by the API plan.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -2105,46 +2364,61 @@ git commit -m "feat(builder): add connected fixture sub-graph extraction"
 ```python
 import json
 
+import pytest
+
 from artistpath_builder.cli import main
 
-
-def test_help_exits_zero(capsys):
-    assert main(["--help"]) == 0 or True  # argparse raises SystemExit(0)
+A, B = ("a" * 36, "b" * 36)
 
 
-def test_build_writes_an_artifact(tmp_path, monkeypatch):
-    archive_dir = tmp_path / "archive"
-    archive_dir.mkdir()
-    (archive_dir / "similar" / "listenbrainz").mkdir(parents=True)
-    a, b = "a" * 36, "b" * 36
-    (archive_dir / "similar" / "listenbrainz" / f"{a}.json").write_bytes(
-        json.dumps([{"artist_mbid": b, "name": "Beta", "score": 10}]).encode()
-    )
-    (archive_dir / "similar" / "listenbrainz" / f"{b}.json").write_bytes(
-        json.dumps([{"artist_mbid": a, "name": "Alpha", "score": 10}]).encode()
-    )
+def test_help_exits_zero():
+    with pytest.raises(SystemExit) as exc:
+        main(["--help"])
+    assert exc.value.code == 0
 
-    seeds_path = tmp_path / "seeds.json"
-    seeds_path.write_text(
-        json.dumps(
-            [
-                {"mbid": a, "name": "Alpha", "listen_count": 100},
-                {"mbid": b, "name": "Beta", "listen_count": 50},
-            ]
+
+def _write_archive(archive_dir):
+    similar = archive_dir / "similar" / "listenbrainz"
+    stats = archive_dir / "stats"
+    similar.mkdir(parents=True)
+    stats.mkdir(parents=True)
+    for mbid, other, name, users in [(A, B, "Alpha", 100), (B, A, "Beta", 50)]:
+        (similar / f"{mbid}.json").write_bytes(
+            json.dumps([{"artist_mbid": other, "name": "X", "score": 10}]).encode()
         )
-    )
+        (stats / f"{mbid}.json").write_bytes(
+            json.dumps(
+                {
+                    "payload": {
+                        "artist_mbid": mbid,
+                        "artist_name": name,
+                        "total_user_count": users,
+                        "total_listen_count": users * 7,
+                    }
+                }
+            ).encode()
+        )
 
+
+def test_build_writes_an_artifact(tmp_path):
+    archive_dir = tmp_path / "archive"
+    _write_archive(archive_dir)
     out = tmp_path / "graph.bin"
+
     exit_code = main(
-        [
-            "build",
-            "--archive-dir", str(archive_dir),
-            "--seeds", str(seeds_path),
-            "--out", str(out),
-        ]
+        ["build", "--archive-dir", str(archive_dir), "--out", str(out)]
     )
     assert exit_code == 0
     assert out.stat().st_size > 0
+
+
+def test_build_needs_no_seeds_file(tmp_path):
+    # Popularity lives in the archive; there is no separate seeds artifact
+    # to drift out of sync with it.
+    archive_dir = tmp_path / "archive"
+    _write_archive(archive_dir)
+    out = tmp_path / "graph.bin"
+    assert main(["build", "--archive-dir", str(archive_dir), "--out", str(out)]) == 0
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -2162,10 +2436,13 @@ Expected: FAIL with `ModuleNotFoundError: No module named 'artistpath_builder.cl
 ```python
 """Builder entry points.
 
-    artistpath-build seeds  --out seeds.json
-    artistpath-build crawl  --seeds seeds.json --archive-dir ./archive
-    artistpath-build build  --seeds seeds.json --archive-dir ./archive --out graph-v1.bin
-    artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 500
+    artistpath-build bootstrap --out bootstrap.json
+    artistpath-build crawl     --bootstrap bootstrap.json --archive-dir ./archive
+    artistpath-build build     --archive-dir ./archive --out graph-v1.bin
+    artistpath-build fixture   --graph graph-v1.bin --out fixture.bin --size 500
+
+`build` needs no seeds file: popularity is read from the archived stats
+responses, so there is no second artifact to drift out of sync.
 """
 
 from __future__ import annotations
@@ -2181,10 +2458,13 @@ from artistpath_builder.artifact import deserialise, serialise
 from artistpath_builder.config import BuilderConfig
 from artistpath_builder.crawl import Crawler, http_fetcher
 from artistpath_builder.fixture import extract_fixture
-from artistpath_builder.models import SeedArtist
 from artistpath_builder.pipeline import build_from_archive
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
-from artistpath_builder.sources.seeds import parse_seed_page, seed_page_url
+from artistpath_builder.sources.seeds import (
+    BOOTSTRAP_CEILING,
+    bootstrap_url,
+    parse_bootstrap_page,
+)
 
 PAGE_SIZE = 1000
 
@@ -2195,37 +2475,33 @@ def _archive(args):
     return LocalArchive(Path(args.archive_dir))
 
 
-def _load_seeds(path: Path) -> list[SeedArtist]:
-    rows = json.loads(path.read_text())
-    return [SeedArtist(**row) for row in rows]
+def cmd_bootstrap(args) -> int:
+    """Fetch the top artists that seed the snowball.
 
-
-def cmd_seeds(args) -> int:
+    The sitewide endpoint serves at most BOOTSTRAP_CEILING artists whatever
+    is requested (Task 1 findings section 2), so this is deliberately small.
+    """
     config = BuilderConfig()
     fetch = http_fetcher(config)
-    seeds: list[SeedArtist] = []
+    artists = []
     offset = 0
-    while len(seeds) < config.target_artist_count:
-        payload = fetch(seed_page_url(config, offset=offset, count=PAGE_SIZE))
-        page = parse_seed_page(payload)
+    while offset < BOOTSTRAP_CEILING:
+        page = parse_bootstrap_page(
+            fetch(bootstrap_url(config, offset=offset, count=PAGE_SIZE))
+        )
         if not page:
-            logging.info("seed source exhausted at offset %d", offset)
             break
-        seeds.extend(page)
+        artists.extend(page)
         offset += PAGE_SIZE
-        logging.info("collected %d seeds", len(seeds))
 
-    seeds = seeds[: config.target_artist_count]
-    Path(args.out).write_text(
-        json.dumps([s.__dict__ for s in seeds], sort_keys=True, indent=0)
-    )
-    logging.info("wrote %d seeds to %s", len(seeds), args.out)
+    Path(args.out).write_text(json.dumps([a.__dict__ for a in artists], sort_keys=True))
+    logging.info("wrote %d bootstrap artists to %s", len(artists), args.out)
     return 0
 
 
 def cmd_crawl(args) -> int:
     config = BuilderConfig()
-    seeds = _load_seeds(Path(args.seeds))
+    bootstrap = json.loads(Path(args.bootstrap).read_text())
     crawler = Crawler(
         config=config,
         archive=_archive(args),
@@ -2233,7 +2509,7 @@ def cmd_crawl(args) -> int:
         fetcher=http_fetcher(config),
         checkpoint_path=Path(args.checkpoint),
     )
-    crawler.crawl([s.mbid for s in seeds])
+    crawler.crawl([row["mbid"] for row in bootstrap])
     if crawler.failures:
         logging.warning("%d artists failed permanently", len(crawler.failures))
     return 0
@@ -2241,9 +2517,7 @@ def cmd_crawl(args) -> int:
 
 def cmd_build(args) -> int:
     config = BuilderConfig()
-    graph = build_from_archive(
-        config, _archive(args), ListenBrainzSource(config), _load_seeds(Path(args.seeds))
-    )
+    graph = build_from_archive(config, _archive(args), ListenBrainzSource(config))
     payload = serialise(graph)
     Path(args.out).write_bytes(payload)
     logging.info(
@@ -2275,18 +2549,17 @@ def main(argv: list[str] | None = None) -> int:
         p.add_argument("--s3-bucket", default=None)
         p.add_argument("--s3-prefix", default="raw")
 
-    p_seeds = sub.add_parser("seeds")
-    p_seeds.add_argument("--out", required=True)
-    p_seeds.set_defaults(func=cmd_seeds)
+    p_bootstrap = sub.add_parser("bootstrap")
+    p_bootstrap.add_argument("--out", required=True)
+    p_bootstrap.set_defaults(func=cmd_bootstrap)
 
     p_crawl = sub.add_parser("crawl")
-    p_crawl.add_argument("--seeds", required=True)
+    p_crawl.add_argument("--bootstrap", required=True)
     p_crawl.add_argument("--checkpoint", default="./checkpoint.json")
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
 
     p_build = sub.add_parser("build")
-    p_build.add_argument("--seeds", required=True)
     p_build.add_argument("--out", required=True)
     add_archive_args(p_build)
     p_build.set_defaults(func=cmd_build)
@@ -2318,31 +2591,44 @@ Expected: 2 passed
 
 Prove the pipeline end to end on real data before committing to an overnight crawl.
 
+Note: on Windows, Git Bash's `/tmp` is not the path Windows Python resolves — use a Windows-visible directory such as `./scratch/` for these files.
+
 ```bash
 cd builder
-uv run artistpath-build seeds --out /tmp/seeds-small.json
-head -c 400 /tmp/seeds-small.json
+mkdir -p scratch
+uv run artistpath-build bootstrap --out scratch/bootstrap.json
+python -c "import json,pathlib; p=pathlib.Path('scratch/bootstrap.json'); rows=json.loads(p.read_text())[:20]; pathlib.Path('scratch/bootstrap-20.json').write_text(json.dumps(rows))"
 ```
 
-Then truncate to the first 200 seeds and crawl those:
+Crawl with a small discovery cap, so the snowball is exercised without a long run:
 
 ```bash
-python -c "import json,pathlib; p=pathlib.Path('/tmp/seeds-small.json'); rows=json.loads(p.read_text())[:200]; pathlib.Path('/tmp/seeds-200.json').write_text(json.dumps(rows))"
-uv run artistpath-build crawl --seeds /tmp/seeds-200.json --archive-dir /tmp/archive --checkpoint /tmp/cp.json
-uv run artistpath-build build --seeds /tmp/seeds-200.json --archive-dir /tmp/archive --out /tmp/graph-small.bin
+ARTISTPATH_TARGET=200 uv run artistpath-build crawl \
+  --bootstrap scratch/bootstrap-20.json \
+  --archive-dir scratch/archive \
+  --checkpoint scratch/cp.json
+uv run artistpath-build build --archive-dir scratch/archive --out scratch/graph-small.bin
 ```
 
-Expected: a log line reporting artist count, edge count and size. **Record the ratio of artists retained after largest-component pruning.** If it is below ~80%, the similarity data is sparser than assumed — stop and report before running the full crawl.
+(If `BuilderConfig` does not yet read `target_artist_count` from the environment, temporarily edit the default to 200 for this run and restore it afterwards.)
+
+**Record and report three numbers before going further:**
+
+1. **Component retention** — artists kept after largest-component pruning, as a percentage. Below ~80% means the similarity data is sparser than assumed.
+2. **Discovery rate** — distinct artists discovered per artist crawled. This is what determines whether 75,000 is reachable at all, and it is the number the Task 1 findings flagged as the real remaining unknown.
+3. **Mean edge count per artist** after pruning.
+
+Stop and report regardless of the outcome. These numbers decide whether the full crawl is worth 8 hours.
 
 - [ ] **Step 6: Verify replay against real archived data**
 
 ```bash
 cd builder
-uv run artistpath-build build --seeds /tmp/seeds-200.json --archive-dir /tmp/archive --out /tmp/graph-small-2.bin
-cmp /tmp/graph-small.bin /tmp/graph-small-2.bin && echo "BYTE IDENTICAL"
+uv run artistpath-build build --archive-dir scratch/archive --out scratch/graph-small-2.bin
+cmp scratch/graph-small.bin scratch/graph-small-2.bin && echo "BYTE IDENTICAL"
 ```
 
-Expected: `BYTE IDENTICAL`
+Expected: `BYTE IDENTICAL`. This is the replay guarantee proven against real archived data rather than fixtures.
 
 - [ ] **Step 7: Write the README**
 
@@ -2385,7 +2671,9 @@ The full 75k crawl takes hours and hits a third-party service. Report the small-
 
 **Placeholder scan:** no TBDs. The two places carrying real uncertainty — the `FIELD_*` constants in `listenbrainz.py`/`seeds.py` and the `algorithm` string in `config.py` — are resolved by Task 1 before any code depends on them, and are flagged in-code with instructions.
 
-**Type consistency:** `SimilarArtist(mbid, name, score)`, `SeedArtist(mbid, name, listen_count)`, and `Graph(mbids, names, popularity, offsets, neighbours, scores, edge_types)` are used with identical names and types in Tasks 2, 4, 5, 7, 8, 9, 10, 11. `archive_key()` is defined in Task 6 and its exact string form (`similar/{source.name}/{mbid}.json`) is reused in Tasks 9 and 11.
+**Type consistency:** `SimilarArtist(mbid, name, score)`, `BootstrapArtist(mbid, name)`, `ArtistStats(mbid, name, user_count, listen_count, disambiguation="")`, and `Graph(mbids, names, popularity, offsets, neighbours, scores, edge_types)` are used with identical names and types in Tasks 2, 4, 5, 7, 8, 9, 10, 11. `similar_key()` and `stats_key()` are defined in Task 6 and their exact string forms (`similar/{source.name}/{mbid}.json`, `stats/{mbid}.json`) are reused in Tasks 9 and 11.
+
+**Known deviation from spec §3.1 step 6 — disambiguation.** The artist table does not carry disambiguation in this plan. The data exists free (the similarity response's `comment` field, e.g. "1980s–1990s US grunge band"), but it describes *neighbours*, so populating an artist's own disambiguation means harvesting it from other artists' responses. That is extra complexity for a UI nicety that only matters when two artists share a name, and §2.1 says path quality comes first. **Deferred, not dropped:** the archive retains every `comment`, so adding it later needs no re-crawl. Carry into Plan 2.
 
 ---
 

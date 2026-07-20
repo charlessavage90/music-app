@@ -19,7 +19,7 @@ The tool no longer works. The Echo Nest was acquired by Spotify and shut down, a
 | Need | Source | Notes |
 |---|---|---|
 | Artist similarity | [ListenBrainz Labs `similar-artists`](https://labs.api.listenbrainz.org/similar-artists) | CC0, MusicBrainz-keyed, session-based collaborative filtering. Published by MetaBrainz [explicitly in response](https://blog.metabrainz.org/2024/11/28/pissed-off-by-spotify-enshittifying-more-api-endpoints-we-can-help/) to the Spotify deprecation. |
-| Artist popularity | ListenBrainz listen counts | Used for popularity-weighted routing. |
+| Artist popularity | ListenBrainz per-artist `total_user_count` | Distinct listeners, not plays — see §4.1. Used for popularity-weighted routing. |
 | Track clips + art | Deezer API (primary), iTunes Search API (fallback) | 30s previews, no authentication. |
 
 Audio *energy* features have no free replacement. See §5.3.
@@ -102,7 +102,7 @@ Pipeline:
 
 1. **Acquire similarity data.** Behind a `SimilaritySource` interface with two implementations: bulk dump if one exists, otherwise a resumable rate-limited crawl of the Labs endpoint that checkpoints to disk, so a long fetch can be interrupted and resumed. The builder takes a **list** of sources; alpha configures exactly one.
 2. **Archive raw responses to S3, unmodified, as they are fetched.** Every subsequent rebuild replays from this archive rather than the network. This converts the crawl from a recurring dependency into a one-time event and is the primary mitigation for §8.1. Expected size a few GB; cost negligible. Non-negotiable — it must not be deferred as an optimisation.
-3. **Select artists.** Top ~75,000 by ListenBrainz listen count.
+3. **Discover artists by snowball expansion.** Bootstrap from the top 1,000 artists (the most the sitewide stats endpoint will serve — it caps hard at 1,000 while advertising 10.4M), then expand breadth-first through the similarity graph itself until ~75,000 distinct artists are found. Popularity is fetched per artist. Verified in the Task 1 probe; see `docs/superpowers/findings/2026-07-19-listenbrainz-probe.md`.
 4. **Symmetrise edges.** Similarity is not mutual; one-way edges create dead ends. Where an edge exists in one direction only, mirror it.
 5. **Keep the largest connected component.** Guarantees a path exists between any two artists the UI can offer, so "no path found" can only ever result from user exclusions.
 6. **Emit** CSR arrays (`offsets: Int32Array`, `neighbours: Int32Array`, `scores: Float32Array`, `edgeType: Uint8Array`), an artist table (MBID, name, popularity, disambiguation), and a normalised-name index for autocomplete.
@@ -155,7 +155,9 @@ cost = w_type[type(a,b)] · (1 − similarity(a,b))  // prefer strong links
      + w_hop                                      // tunes path length
 ```
 
-- `pop` = log-scaled listen count, normalised to 0–1.
+- `pop` = log-scaled **distinct listener count** (`total_user_count`), normalised to 0–1.
+
+  Not play count. This term exists to keep a path among comparably *well-known* artists, which is a question about how many people know an artist — not how heavily a few people play them. Play counts conflate the two: in the probe, Radiohead's single heaviest listener accounted for 135,184 of 7,088,378 plays, roughly 2% of the artist's entire total from one person. Superfan skew would corrupt exactly the judgement this term is making. (Amended 2026-07-19 after the Task 1 probe; the spec previously said listen count. Both figures arrive in the same response and are archived, so this is reversible without re-crawling.)
 - `floor(b)` = the lower popularity of the two endpoint artists, **softened globally with each successive bypass** (§4.3). Ordinarily this is what prevents a route between two household names detouring through an artist with 400 listeners; as the user keeps bypassing, that guard progressively lifts.
 - `avoidance(b)` = penalty decaying with graph distance from any "not for me" bypass, zero beyond two hops (§4.3).
 - `w_hop` is the primary lever on path length. There is **no specified target** — see §10.3. It is tuned empirically by listening to real paths, and the range that results is an output of tuning, not a requirement imposed on it. It must stay weak enough that a bypass can lengthen the path (§4.3).
