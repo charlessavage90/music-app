@@ -135,6 +135,8 @@ Two autocomplete artist inputs lead to an ordered run of artist cards. Each card
 
 Clicking play walks the entire path, auto-advancing on track end.
 
+A reroll can return a path of any length, longer or shorter than the one on screen (§4.3). The UI must present it as **a new path**, not as an edit of the old one — no animating a single card out and another in, since that would misrepresent what happened and imply a swap the engine deliberately does not perform. Card layout must stay readable as the path grows.
+
 All state lives in the URL — `/path/:from/:to?dislike=…&known=…` — so paths are shareable, and the browser back button naturally undoes a bypass. This is also the groundwork for saved paths later.
 
 ---
@@ -154,9 +156,9 @@ cost = w_type[type(a,b)] · (1 − similarity(a,b))  // prefer strong links
 ```
 
 - `pop` = log-scaled listen count, normalised to 0–1.
-- `floor(b)` = the lower popularity of the two endpoint artists, **relaxed near "known" bypasses** (§4.3). Ordinarily this is what prevents a route between two household names detouring through an artist with 400 listeners.
+- `floor(b)` = the lower popularity of the two endpoint artists, **softened globally with each successive bypass** (§4.3). Ordinarily this is what prevents a route between two household names detouring through an artist with 400 listeners; as the user keeps bypassing, that guard progressively lifts.
 - `avoidance(b)` = penalty decaying with graph distance from any "not for me" bypass, zero beyond two hops (§4.3).
-- `w_hop` is the primary lever on path length. There is **no specified target** — see §10.3. It is tuned empirically by listening to real paths, and the range that results is an output of tuning, not a requirement imposed on it.
+- `w_hop` is the primary lever on path length. There is **no specified target** — see §10.3. It is tuned empirically by listening to real paths, and the range that results is an output of tuning, not a requirement imposed on it. It must stay weak enough that a bypass can lengthen the path (§4.3).
 - `w_type` is a per-edge-type multiplier. Alpha has one type, so this is effectively a constant; it exists so that later sources can be weighted relative to each other, which is also the mechanism behind future path-steering ("prefer factual connections over taste ones").
 
 Weights are configuration, tuned against the fixture graph and a set of hand-checked real paths.
@@ -181,6 +183,26 @@ Alpha therefore has **two controls, carrying opposite signals**. Both trigger a 
 **Only the clicked artist is ever a hard exclusion.** Neighbourhood effects are soft costs. This matters: soft costs can bend a path but can never disconnect the graph, so the two modifiers cannot produce a spurious "no path" failure. Only the hard exclusion set can, and that failure mode is handled below.
 
 A reroll is simply another search — no cache invalidation, no recomputation of anything else.
+
+#### Regeneration is total, and the path may grow
+
+This is a load-bearing behaviour of the original, not an incidental one. Bypassing an artist regenerated the entire path, and a six-artist path could come back as nine. Because a popular artist often sits on the *only* direct route, removing one forces the search into longer, stranger territory — and those circuitous routes were where genuinely unfamiliar artists surfaced. **The expansion is the discovery mechanism.**
+
+Three rules follow, all of them prohibitions on things an implementer would otherwise do naturally:
+
+1. **No local repair.** Every reroll is a fresh search between the original endpoints. Patching the path around the removed artist, or reusing the previous path as a starting point, is forbidden — it is cheaper and it makes the UI feel more stable, which is exactly why it is tempting. It also reduces the feature to a one-for-one swap.
+2. **No length cap, and no preference for the previous length.** Path length is unconstrained (§10.3). A reroll that doubles the path is a correct result.
+3. **No stability bias.** Nothing rewards keeping previously-shown artists. Artists other than the bypassed one may vanish from the path; that is expected, not a bug.
+
+`w_hop` must be tuned weakly enough that rerolls can lengthen the path. If bypassing rarely changes path length, `w_hop` is too strong — treat that as a tuning failure, not as evidence the graph is sparse.
+
+#### Progressive relaxation
+
+Successive bypasses are cumulative evidence that the user wants something further from the obvious route. Each reroll therefore **softens `floor` globally**, not just near the bypassed artist, admitting progressively less famous artists as the user keeps pressing.
+
+Relaxation is stronger for "know them already" than for "not for me": knowing the artists means the popular route is exhausted and novelty is the goal, whereas disliking them is about direction, not fame.
+
+This is what produces the deliberately circuitous later rerolls. Without it, the `floor` term would fight the exact behaviour this section exists to protect.
 
 #### Tuning sequence (important)
 
@@ -289,6 +311,7 @@ The cost-function weights determine whether paths feel smooth. There is no autom
 | Archive replay | A rebuild sourced entirely from the S3 archive, with the network unavailable, produces a byte-identical graph to the original crawl |
 | Pathfinding | Against the fixture graph: every adjacent pair is a real edge; exclusions respected; identical queries deterministic; disconnection returns an explicit error; popularity smoothing measurably beats plain shortest-path on a smoothness metric |
 | Bypass semantics | "Not for me" measurably reduces average similarity to the bypassed artist across the new path; "know them already" does not, and admits lower-popularity artists that the base floor would have rejected. Neither soft modifier can ever cause a "no path" result — only hard exclusion can. |
+| Bypass regeneration | A reroll is free to change path length in either direction, and to drop artists other than the bypassed one. At least one fixture case must produce a **longer** path after a bypass — this is the regression test for `w_hop` being tuned too strongly and for local-repair creeping in. Successive bypasses must admit progressively lower-popularity artists. |
 | API | Integration against fixture graph with mocked Deezer |
 | Clip resolver | Mocked HTTP — fallback chain, cache hit/miss, missing-preview handling |
 | E2E | One Playwright run: search → path renders → bypass → new path excludes the artist and is fully reconfigured, not a one-for-one substitution |
