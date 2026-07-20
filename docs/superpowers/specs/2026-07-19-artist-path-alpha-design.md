@@ -41,6 +41,20 @@ Sources fall into two tiers, and the distinction drives §3.1 and §8.1:
 
 **Last.fm must never become load-bearing.** The roadmap includes paid subscribers, and a structural dependency on Last.fm would create a licensing obligation exactly when the product begins earning. It is permitted only as optional enrichment that can be disabled without degrading core routing.
 
+### Multi-source strategy: behavioural spine first, layer later
+
+Similarity comes in three flavours, matching the edge types in §3.1:
+
+- **Behavioural** — listener co-occurrence (ListenBrainz Labs). Best signal for *taste*; weakest for obscure artists. Alpha's sole source.
+- **Structural** — factual links: band membership, collaboration, label, influence. Sources: MusicBrainz relationships, Discogs (both CC0 bulk we own), Wikidata. Sparse but precise, strongest exactly where behavioural is thin.
+- **Descriptive** — shared genre/tags. Bulk CC0 parquet, **already downloaded** in the Task 1 sample dump (`artist_genre.parquet`, `artist_tag.parquet`). The cheapest augmentation, and the data behind a future per-hop "why".
+
+**Decision (2026-07-20): alpha ships behavioural-only, then layers.** Rationale: mixing edge types changes what a "path" *means*, and a blend cannot be tuned before a pure path can be heard; §2.1 wants one source excellent before enrichment; and typed edges make later addition configuration, not a rebuild — so waiting costs nothing.
+
+Evaluated and rejected as sources: **Spotify Million Playlist Dataset** (download withdrawn, request-only, non-commercial), **Last.fm** (non-commercial), **OLGA/AllMusic graph** (only 17k artists, murky licence).
+
+Queued for the iteration after path quality is judged, cheapest first: genre/tag descriptive edges, then MusicBrainz structural edges if the behavioural graph proves thin for obscure artists.
+
 ---
 
 ## 2. Scope
