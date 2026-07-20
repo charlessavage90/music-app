@@ -9,3 +9,7 @@ cdk.out/
 *.bin
 !tests/fixtures/*.bin
 .checkpoints/
+.pytest_cache/
+.coverage
+uv.lock
+builder/scratch/
