@@ -20,9 +20,6 @@ SIMILAR = {
 NAMES = {A: "Alpha", B: "Beta", C: "Gamma"}
 COMMENTS = {A: "UK band", B: "US duo", C: ""}
 
-# Derived offline from the spark dump; distinct listeners per artist.
-POPULARITY = {A: 300, B: 200, C: 100}
-
 
 def _similar_body(mbid: str) -> bytes:
     return json.dumps(
@@ -80,10 +77,10 @@ def test_rebuild_from_archive_is_byte_identical_with_no_network(tmp_path, config
         fetcher=fetcher,
         checkpoint_path=tmp_path / "checkpoint.json",
     ).crawl([A])
-    # One call per artist now that stats come from the dump.
+    # One call per artist: similarity only.
     assert fetcher.calls == 3
 
-    first = serialise(build_from_archive(config, archive, source, POPULARITY))
+    first = serialise(build_from_archive(config, archive, source))
 
     # Second build: same archive, a fetcher that raises if touched.
     Crawler(
@@ -94,7 +91,7 @@ def test_rebuild_from_archive_is_byte_identical_with_no_network(tmp_path, config
         checkpoint_path=tmp_path / "checkpoint2.json",
     ).crawl([A])
 
-    second = serialise(build_from_archive(config, archive, source, POPULARITY))
+    second = serialise(build_from_archive(config, archive, source))
 
     assert first == second
 
@@ -104,20 +101,31 @@ def test_replay_produces_a_connected_graph(tmp_path, config):
     source = ListenBrainzSource(config)
     _seed_archive(archive, source, [A, B, C])
 
-    graph = build_from_archive(config, archive, source, POPULARITY)
+    graph = build_from_archive(config, archive, source)
     assert graph.mbids == [A, B, C]
     assert graph.edge_count > 0
 
 
-def test_popularity_comes_from_the_supplied_table(tmp_path, config):
+def test_popularity_is_score_weighted_indegree(tmp_path, config):
+    # Graph A<->B<->C: B is the hub, receiving in-links from both A and C, so
+    # it is most popular; C is a leaf and least popular (findings 6f).
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
     _seed_archive(archive, source, [A, B, C])
 
-    graph = build_from_archive(config, archive, source, POPULARITY)
-    # A has the most distinct listeners, C the fewest (spec 4.1).
-    assert graph.popularity[graph.mbids.index(A)] == max(graph.popularity)
+    graph = build_from_archive(config, archive, source)
+    assert graph.popularity[graph.mbids.index(B)] == max(graph.popularity)
     assert graph.popularity[graph.mbids.index(C)] == min(graph.popularity)
+
+
+def test_popularity_needs_no_external_input(tmp_path, config):
+    # The whole point of in-degree: build takes only the archive.
+    archive = LocalArchive(tmp_path / "archive")
+    source = ListenBrainzSource(config)
+    _seed_archive(archive, source, [A, B, C])
+    # Signature has no popularity parameter; this call proves it.
+    graph = build_from_archive(config, archive, source)
+    assert graph.artist_count == 3
 
 
 def test_names_and_disambiguation_are_harvested_from_neighbour_rows(tmp_path, config):
@@ -128,25 +136,17 @@ def test_names_and_disambiguation_are_harvested_from_neighbour_rows(tmp_path, co
     source = ListenBrainzSource(config)
     _seed_archive(archive, source, [A, B, C])
 
-    graph = build_from_archive(config, archive, source, POPULARITY)
+    graph = build_from_archive(config, archive, source)
     assert graph.names[graph.mbids.index(A)] == "Alpha"
     assert graph.disambiguations[graph.mbids.index(A)] == "UK band"
 
 
-def test_artists_missing_from_the_archive_are_skipped(tmp_path, config):
+def test_uncrawled_neighbours_are_not_nodes(tmp_path, config):
+    # C is listed as B's neighbour but was never crawled, so it has no
+    # out-edges and cannot be routed through. It must not become a node, and
+    # must not contribute to anyone's in-degree.
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
     _seed_archive(archive, source, [A, B])
-    # C was never crawled. The build must not raise.
-    graph = build_from_archive(config, archive, source, POPULARITY)
-    assert C not in graph.mbids
-
-
-def test_artist_without_popularity_is_skipped(tmp_path, config):
-    archive = LocalArchive(tmp_path / "archive")
-    source = ListenBrainzSource(config)
-    _seed_archive(archive, source, [A, B, C])
-    # C has neighbours but no popularity, so it cannot be weighed and is
-    # not a node.
-    graph = build_from_archive(config, archive, source, {A: 300, B: 200})
+    graph = build_from_archive(config, archive, source)
     assert C not in graph.mbids

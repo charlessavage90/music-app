@@ -2,13 +2,11 @@
 
     artistpath-build bootstrap  --out bootstrap.json
     artistpath-build crawl      --bootstrap bootstrap.json --archive-dir ./archive
-    artistpath-build popularity --out popularity.json      # from the spark dump
-    artistpath-build build      --archive-dir ./archive --popularity popularity.json \\
-                                --out graph-v1.bin
+    artistpath-build build      --archive-dir ./archive --out graph-v1.bin
     artistpath-build fixture    --graph graph-v1.bin --out fixture.bin --size 500
 
-`crawl` and `popularity` are independent and can run in either order or at
-the same time; `build` needs both.
+Popularity is score-weighted in-degree, computed from the similarity archive
+during `build` (findings 6f). There is no separate popularity input.
 """
 
 from __future__ import annotations
@@ -26,12 +24,6 @@ from artistpath_builder.config import BuilderConfig
 from artistpath_builder.crawl import Crawler, http_fetcher
 from artistpath_builder.fixture import extract_fixture
 from artistpath_builder.pipeline import build_from_archive
-from artistpath_builder.popularity import (
-    aggregate_listeners,
-    iter_listen_artists,
-    read_popularity,
-    write_popularity,
-)
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 from artistpath_builder.sources.seeds import (
     BOOTSTRAP_CEILING,
@@ -108,39 +100,9 @@ def cmd_crawl(args) -> int:
     return 0
 
 
-def cmd_popularity(args) -> int:
-    """Aggregate distinct listeners per artist from spark-dump listen files.
-
-    Accepts newline-delimited JSON listens on stdin or from files, so the
-    191GB dump can be streamed through without ever landing whole on disk:
-
-        tar -xOf listenbrainz-spark-dump-*.tar | artistpath-build popularity \\
-            --out popularity.json
-    """
-    if args.listens:
-        lines = _iter_files(args.listens)
-    else:
-        lines = sys.stdin.buffer
-
-    popularity = aggregate_listeners(iter_listen_artists(lines))
-    write_popularity(popularity, Path(args.out))
-    logging.info("wrote popularity for %d artists to %s", len(popularity), args.out)
-    return 0
-
-
-def _iter_files(paths: list[str]):
-    for path in paths:
-        with open(path, "rb") as handle:
-            yield from handle
-
-
 def cmd_build(args) -> int:
     config = _config(args)
-    popularity = read_popularity(Path(args.popularity))
-    logging.info("loaded popularity for %d artists", len(popularity))
-    graph = build_from_archive(
-        config, _archive(args), ListenBrainzSource(config), popularity
-    )
+    graph = build_from_archive(config, _archive(args), ListenBrainzSource(config))
     payload = serialise(graph)
     Path(args.out).write_bytes(payload)
     mean_edges = graph.edge_count / graph.artist_count if graph.artist_count else 0
@@ -187,18 +149,8 @@ def main(argv: list[str] | None = None) -> int:
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
 
-    p_popularity = sub.add_parser("popularity")
-    p_popularity.add_argument("--out", required=True)
-    p_popularity.add_argument(
-        "--listens", nargs="*", default=None, help="listen files; omit to read stdin"
-    )
-    p_popularity.set_defaults(func=cmd_popularity)
-
     p_build = sub.add_parser("build")
     p_build.add_argument("--out", required=True)
-    p_build.add_argument(
-        "--popularity", required=True, help="table from the popularity command"
-    )
     add_archive_args(p_build)
     p_build.set_defaults(func=cmd_build)
 

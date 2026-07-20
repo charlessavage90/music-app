@@ -26,6 +26,27 @@
 
 ---
 
+## Amendment 3 — 2026-07-20: popularity is in-degree, not the spark dump
+
+**Amendment 2's spark-dump plan is withdrawn before implementation.** Inspecting real dump files (a 235MB sample and a 216MB incremental listens dump) showed the approach could not work, and a cheap validation found a better one.
+
+**What the dumps revealed (findings §6c–6e):**
+- Raw listen records carry a MusicBrainz artist ID on **0.03%** of rows — they hold free-text names and Spotify IDs. Aggregating them to per-artist popularity is impossible.
+- The 235MB *sample* dump does contain a pre-aggregated, MBID-keyed popularity table, but only ~5,255 artists. Too small to be the source, but perfect as **ground truth** for validating a proxy.
+- Deezer `nb_fan`, tested as a fallback, correlated **0.089** with ListenBrainz popularity — it measures a different listener population, which the ListenBrainz-derived similarity graph must not be mixed with.
+
+**What was adopted (findings §6f):** score-weighted in-degree of the similarity graph — the summed similarity of edges pointing at an artist. Validated at Spearman ~0.50 against the 5,255 ground-truth artists, free to compute, and the only popularity measure on the same population as the similarity data.
+
+**Consequences for the code (all applied):**
+1. `popularity.py` and `test_popularity.py` are **deleted**. There is no dump ingestion, no listen aggregation, no popularity table.
+2. `build_from_archive(config, archive, source)` computes in-degree internally and takes **no popularity argument**.
+3. The `popularity` CLI command and `build --popularity` flag are removed. `build` needs only the archive.
+4. Dead code from the withdrawn stats approach — `artist_stats_url`, `parse_artist_stats`, the `artist_stats_url` config field and their tests — is removed.
+
+**This makes Task 12 (spark-dump popularity pipeline) unnecessary; it is withdrawn.** The builder's public surface is now: `bootstrap → crawl → build → fixture`, with popularity emerging from the graph during `build`.
+
+---
+
 ## Global Constraints
 
 Every task's requirements implicitly include these. All are copied from the spec.

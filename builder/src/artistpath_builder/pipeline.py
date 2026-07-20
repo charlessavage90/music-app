@@ -1,18 +1,21 @@
-"""Assemble a graph from the archive plus a popularity table.
+"""Assemble a graph from the similarity archive alone.
 
 This function must never touch the network. The replay test enforces that by
 injecting a fetcher that raises.
 
-Two independent inputs:
-  - the similarity archive, filled by the crawler
-  - a popularity table, derived offline from the ListenBrainz spark dump
-
-Neither pipeline blocks the other.
+Popularity is **score-weighted in-degree** — the sum of similarity scores on
+edges pointing at an artist. It is computed from the archive itself, so there
+is no second data source to acquire or keep in sync. In-degree was validated
+against 5,255 ground-truth artists at Spearman ~0.50 and, crucially, is the
+only popularity measure computed on the same population as the similarity
+graph; every external source tested imported a population mismatch (findings
+sections 6d-6f).
 """
 
 from __future__ import annotations
 
 import logging
+from collections import defaultdict
 
 from artistpath_builder.archive import RawArchive
 from artistpath_builder.config import BuilderConfig
@@ -29,20 +32,18 @@ from artistpath_builder.sources.listenbrainz import harvest_identities
 
 logger = logging.getLogger(__name__)
 
-Popularity = dict[str, int]
-
 
 def build_from_archive(
     config: BuilderConfig,
     archive: RawArchive,
     source: SimilaritySource,
-    popularity: Popularity,
 ) -> Graph:
-    """Assemble a graph from archived responses and a popularity table.
+    """Assemble a graph from archived similarity responses alone.
 
-    An artist needs both an archived similarity response and a popularity
-    entry to become a node: without neighbours it cannot be routed through,
-    and without popularity the cost function cannot weigh it.
+    A node is any artist that has an archived similarity response (so it has
+    out-edges) and appears somewhere as a neighbour (so it has an in-degree
+    to serve as popularity). Isolated artists cannot be routed and are dropped
+    by the largest-component step regardless.
     """
     prefix = f"similar/{source.name}/"
     payloads: dict[str, bytes] = {}
@@ -53,19 +54,23 @@ def build_from_archive(
         if payload is not None:
             payloads[key[len(prefix) : -len(".json")]] = payload
 
+    known = set(payloads)
+
     # Names and disambiguation live in neighbour rows, not in any per-artist
     # record, so they are harvested across every response.
     identities = harvest_identities(payloads.values())
 
-    known = {mbid for mbid in payloads if mbid in popularity}
-    skipped = len(payloads) - len(known)
-    if skipped:
-        logger.warning("%d crawled artists had no popularity entry", skipped)
-
+    # Score-weighted in-degree over artists we crawled (findings 6f). Only
+    # edges between two crawled artists count, so popularity is measured on
+    # the same node set the graph is built from.
+    indegree: dict[str, float] = defaultdict(float)
     adjacency: Adjacency = {}
     for mbid in sorted(known):
         neighbours = source.parse(payloads[mbid], exclude_mbid=mbid)
-        adjacency[mbid] = {n.mbid: n.score for n in neighbours if n.mbid in known}
+        edges = {n.mbid: n.score for n in neighbours if n.mbid in known}
+        adjacency[mbid] = edges
+        for dst, score in edges.items():
+            indegree[dst] += score
 
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
@@ -77,12 +82,14 @@ def build_from_archive(
         if node in keep
     }
 
+    # In-degree is a float; ArtistStats.user_count is the integer popularity
+    # slot. Scale to preserve ordering — build_graph log-scales it anyway.
     stats = [
         ArtistStats(
             mbid=mbid,
             name=identities.get(mbid, ("", ""))[0],
-            user_count=popularity[mbid],
-            listen_count=0,  # not carried; popularity is distinct listeners
+            user_count=round(indegree[mbid] * 1000),
+            listen_count=0,  # not used; popularity is in-degree
             disambiguation=identities.get(mbid, ("", ""))[1],
         )
         for mbid in keep

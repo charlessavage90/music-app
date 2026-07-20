@@ -19,7 +19,6 @@ class BuilderConfig:
     )
     similar_artists_url: str = "https://labs.api.listenbrainz.org/similar-artists/json"
     sitewide_artists_url: str = "https://api.listenbrainz.org/1/stats/sitewide/artists"
-    artist_stats_url: str = "https://api.listenbrainz.org/1/stats/artist"
 
     # --- crawl ----------------------------------------------------------
     target_artist_count: int = 75_000

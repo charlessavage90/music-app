@@ -186,6 +186,81 @@ Searched for a way to avoid 75,000 slow stats calls. Findings:
 
 **Consequence:** the similarity crawl and the popularity job become fully independent pipelines that both feed the graph build. The crawl no longer fetches stats and can run before the dump pipeline exists.
 
+## 6c. The spark-dump plan is also wrong: raw listens carry no MBIDs
+
+**Added 2026-07-20 after inspecting real dump files.** Before committing to the 191GB spark dump, two dumps were downloaded and inspected — the 235MB sample dump and a 216MB daily incremental listens dump.
+
+**Raw listen records almost never carry a MusicBrainz artist ID.** In a 200,000-listen sample from the incremental dump:
+
+| Field | Coverage |
+|---|---|
+| non-empty `mbid_mapping` | 65 / 200,000 = **0.03%** |
+| any `artist_mbids` (incl. `additional_info`) | ~6.7% |
+
+The rest carry only a free-text `artist_name` and Spotify IDs. Aggregating raw listens to per-artist popularity is therefore not viable: it would be biased toward whichever submitting clients happen to include MBIDs, and would miss 93%+ of listens outright.
+
+**This invalidates the §6b decision** to process the spark dump — at least via raw listens. Whether the full spark dump ships a pre-computed, MBID-keyed popularity table (as the *sample* dump does) is unverified.
+
+### What the sample dump does contain
+
+The 235MB sample dump is not listens — it is metadata plus pre-aggregated tables:
+
+- `popularity/top_recording.csv` — **keyed by `artist_mbid`** with `total_listen_count` and `total_user_count` per recording. Rolling up to per-artist max gives **5,255 distinct artists** with real distinct-listener counts. Values are sane (top artists: Nirvana, Gorillaz, Radiohead).
+- `metadata/artists_cache.jsonl` — per-artist name, area, type, and **`tag_data`** (genre tags — the descriptive-edge data for the future "why" feature).
+- `spark/*.parquet` — artist_credit, artist_genre, artist_tag, recording_artist, etc.
+
+The sample covers only ~5k artists, so it cannot *be* the popularity source for a 75k graph. But it provides **two ground-truth sets for validating any popularity proxy**: these 5,255 artists with `total_user_count`, plus the 993 bootstrap artists with `listen_count` from §4.
+
+### Decision: validate similarity-graph in-degree against ground truth
+
+Rather than download 191GB on an unverified assumption, test the zero-cost proxy first. In-degree (how often an artist appears in others' similar-lists) is derived from data the crawl already fetches. Correlate it against the 5,255 known listener counts; adopt it only if the rank correlation is strong, fall back otherwise. Result recorded in §6d.
+
+## 6d. In-degree validation: moderate, and does not scale up
+
+**Added 2026-07-20.** Crawled real similarity data and correlated in-degree against the 5,255 ground-truth artists (Spearman rank correlation; the cost function cares about popularity *ordering*, not linear fit).
+
+| Sources crawled | Overlap with truth | Spearman |
+|---|---|---|
+| 400 | 913 | 0.501 |
+| 800 | 1,171 | 0.519 |
+| 1,200 | 1,432 | 0.505 |
+| 1,600 | 1,603 | 0.482 |
+| 2,000 | 1,745 | 0.455 |
+
+**The correlation does not improve with more sources — it drifts down.** The hypothesis that full-graph in-degree (75k sources) would be markedly stronger is falsified: adding less-popular source artists injects noise faster than it consolidates signal. In-degree caps around 0.5.
+
+Score-weighted in-degree (sum of similarity scores rather than a count) scored 0.521 vs 0.501 at 400 sources — marginally better, so the formula is not the limiter.
+
+**The top of the ranking is excellent, the mid-tail is noisy.** The ten highest-in-degree artists were Radiohead, Coldplay, The Beatles, Red Hot Chili Peppers, Muse, Gorillaz, Nirvana, Pink Floyd, Linkin Park, Arctic Monkeys — every one a genuine household name with a high listener count. In-degree reliably separates the famous from the obscure; it is imprecise in the middle.
+
+**Also measured (a positive surprise):** the similarity endpoint runs at ~0.46s per call including politeness delay, not the 1.3s estimated. A full 75k similarity crawl is ~5.5–9.5h serial depending on politeness, feasibly less with modest concurrency.
+
+## 6e. Deezer nb_fan is disqualified by population mismatch
+
+**Added 2026-07-20.** Before adopting the moderate in-degree proxy, tested whether Deezer's `nb_fan` — a real popularity figure — does better. Looked up 250 ground-truth artists on Deezer by name (250/250 matched) and correlated `nb_fan` against ListenBrainz listener counts.
+
+**Spearman: 0.089.** Effectively no correlation.
+
+The cause is not bad data — it is the *wrong* data. Deezer's audience (large in France, Europe, Brazil) has a different shape from ListenBrainz's (Western, tech-forward). An artist's Deezer standing predicts almost nothing about their ListenBrainz standing.
+
+This is decisive, and not only against Deezer. **The similarity graph is built from ListenBrainz listening sessions, so popularity must be measured on the same population to be coherent** in the cost function's `|pop(a) − pop(b)|` and floor terms. Any external popularity source imports a population mismatch. In-degree, computed from the similarity graph itself, is the only measure guaranteed to be population-consistent.
+
+## 6f. Decision: in-degree is popularity for alpha
+
+Every alternative has been empirically eliminated:
+
+| Source | Measured result | Verdict |
+|---|---|---|
+| Per-artist stats API | ~23s/call → ~3 weeks (§6a) | too slow |
+| Raw listen dumps | 0.03% carry MBIDs (§6c) | unusable |
+| 191GB spark dump | unverified it has MBID-keyed popularity | not pursued |
+| Deezer `nb_fan` | 0.089 correlation (§6e) | wrong population |
+| **Similarity in-degree** | **~0.50, free, population-consistent** | **adopted** |
+
+**Score-weighted in-degree** (sum of neighbour similarity scores) is adopted as the popularity signal for alpha: marginally better than a plain count, still free, computed from the archive during the graph build. No spark dump, no popularity pipeline, no external table.
+
+The 0.50 correlation is against a noisy ground truth (max-listeners-on-top-recording from a partial sample), so it likely understates true quality. This is an alpha decision, not a permanent one: §2.1 blesses later work that *deepens* pathing, and a genuine ListenBrainz artist-popularity table — should one become obtainable — would be a drop-in improvement validated against the same ground truth. The archive retains everything needed to recompute.
+
 ## 7. Verdict
 
 **GO.** Both data dependencies are live, CC0, well-shaped and adequately fast. The similarity data is richer than assumed (disambiguation included free). No fallback to MusicBrainz relationship data is needed.
