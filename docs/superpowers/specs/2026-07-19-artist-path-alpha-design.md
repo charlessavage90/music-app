@@ -57,7 +57,7 @@ This principle outranks the future-phase list. Anything on that list that would 
 - Generate a popularity-smoothed path between them
 - Render an ordered grid of artist cards: image, name, track title, play control
 - Sequential autoplay across the whole path
-- Bypass any artist → path rebuilds excluding them
+- Two bypass controls per artist — "not for me" and "know them already" — each rebuilding the whole path, shaped differently (§4.3)
 - Shareable URLs encoding the path and its exclusions
 - Deployed on AWS, CI/CD from GitHub
 
@@ -124,12 +124,18 @@ Node + TypeScript, Fastify, in a container. Loads the graph into typed arrays at
 | Endpoint | Purpose |
 |---|---|
 | `GET /api/artists/search?q=` | Prefix autocomplete over the name index |
-| `POST /api/path` | `{ sources: [id, id], exclude: id[] }` → ordered artist list |
+| `POST /api/path` | `{ sources: [id, id], exclude: { id, reason }[] }` → ordered artist list |
 | `GET /api/artists/:mbid/track` | Resolve clip URL, cover art, track title |
 
 ### 3.3 Web app
 
 React + Vite, served by the same container.
+
+Two autocomplete artist inputs lead to an ordered run of artist cards. Each card carries artist image, name, track title, a play control, and **two bypass controls** (§4.3) — "not for me" and "know them already".
+
+Clicking play walks the entire path, auto-advancing on track end.
+
+All state lives in the URL — `/path/:from/:to?dislike=…&known=…` — so paths are shareable, and the browser back button naturally undoes a bypass. This is also the groundwork for saved paths later.
 
 ---
 
@@ -142,12 +148,14 @@ Traversing edge `a → b`:
 ```
 cost = w_type[type(a,b)] · (1 − similarity(a,b))  // prefer strong links
      + w_jump  · |pop(a) − pop(b)|                // punish popularity cliffs
-     + w_floor · max(0, floor − pop(b))           // don't dive into obscurity
+     + w_floor · max(0, floor(b) − pop(b))        // don't dive into obscurity
+     + w_avoid · avoidance(b)                     // steer clear of disliked regions
      + w_hop                                      // tunes path length
 ```
 
 - `pop` = log-scaled listen count, normalised to 0–1.
-- `floor` = the lower popularity of the two endpoint artists. This is what prevents a route between two household names detouring through an artist with 400 listeners.
+- `floor(b)` = the lower popularity of the two endpoint artists, **relaxed near "known" bypasses** (§4.3). Ordinarily this is what prevents a route between two household names detouring through an artist with 400 listeners.
+- `avoidance(b)` = penalty decaying with graph distance from any "not for me" bypass, zero beyond two hops (§4.3).
 - `w_hop` is the primary lever on path length. There is **no specified target** — see §10.3. It is tuned empirically by listening to real paths, and the range that results is an output of tuning, not a requirement imposed on it.
 - `w_type` is a per-edge-type multiplier. Alpha has one type, so this is effectively a constant; it exists so that later sources can be weighted relative to each other, which is also the mechanism behind future path-steering ("prefer factual connections over taste ones").
 
@@ -159,11 +167,32 @@ Weights are configuration, tuned against the fixture graph and a set of hand-che
 
 Ties break on artist ID, so identical queries always return identical paths.
 
-### 4.3 Bypass
+### 4.3 Bypass — two kinds
 
-The exclusion set is skipped during edge relaxation. A reroll is simply another search — no cache invalidation, no recomputation of anything else.
+The original had a single bypass button, but in practice it was pressed for two opposite reasons: *this artist is wrong for me*, and *this artist is right, I just already know them*. Collapsing both into one exclusion throws away the more useful of the two signals.
 
-Exclusions can disconnect the graph. When no path exists the API returns an explicit "no path avoiding those artists" result and the UI says so, offering to clear exclusions. It must never fail silently or return a partial path.
+Alpha therefore has **two controls, carrying opposite signals**. Both trigger a full path reconfiguration, not a one-for-one substitution.
+
+| Control | Meaning | Effect on routing |
+|---|---|---|
+| **Not for me** | Negative. The region is wrong. | Hard-exclude the artist, **and** apply `avoidance` — a soft penalty to nearby artists decaying over two hops. The path routes around the stylistic region instead of offering a near-identical substitute. |
+| **Know them already** | Positive. The region is right; the artist is just not *new*. | Hard-exclude the artist, apply **no** neighbourhood penalty, and **relax `floor` locally** so the path may reach less famous artists in that style. Same neighbourhood, dug into more deeply. |
+
+**Only the clicked artist is ever a hard exclusion.** Neighbourhood effects are soft costs. This matters: soft costs can bend a path but can never disconnect the graph, so the two modifiers cannot produce a spurious "no path" failure. Only the hard exclusion set can, and that failure mode is handled below.
+
+A reroll is simply another search — no cache invalidation, no recomputation of anything else.
+
+#### Tuning sequence (important)
+
+These modifiers are tuned **after** the base cost function is tuned and judged good, never alongside it. Tuning three interacting behaviours simultaneously makes it impossible to attribute a bad path to a cause. The base weights are frozen before `w_avoid` and floor-relaxation are touched.
+
+#### Failure handling
+
+Hard exclusions can disconnect the graph. When no path exists the API returns an explicit "no path avoiding those artists" result and the UI says so, offering to clear exclusions. It must never fail silently or return a partial path.
+
+#### Future value
+
+"Know them already" is a durable statement of taste, not a transient routing instruction. Accumulated across sessions it is the seed of a genuine taste profile — the foundation of personalisation and real subscriber value. Alpha does not persist it (no accounts exist yet), but the signal is captured as a distinct type from day one so that nothing needs reinterpreting later.
 
 ---
 
@@ -259,9 +288,10 @@ The cost-function weights determine whether paths feel smooth. There is no autom
 | Builder | CSR construction, edge symmetrisation, largest-component extraction, name normalisation, edge-type tagging |
 | Archive replay | A rebuild sourced entirely from the S3 archive, with the network unavailable, produces a byte-identical graph to the original crawl |
 | Pathfinding | Against the fixture graph: every adjacent pair is a real edge; exclusions respected; identical queries deterministic; disconnection returns an explicit error; popularity smoothing measurably beats plain shortest-path on a smoothness metric |
+| Bypass semantics | "Not for me" measurably reduces average similarity to the bypassed artist across the new path; "know them already" does not, and admits lower-popularity artists that the base floor would have rejected. Neither soft modifier can ever cause a "no path" result — only hard exclusion can. |
 | API | Integration against fixture graph with mocked Deezer |
 | Clip resolver | Mocked HTTP — fallback chain, cache hit/miss, missing-preview handling |
-| E2E | One Playwright run: search → path renders → bypass → new path excludes the artist |
+| E2E | One Playwright run: search → path renders → bypass → new path excludes the artist and is fully reconfigured, not a one-for-one substitution |
 
 ---
 
