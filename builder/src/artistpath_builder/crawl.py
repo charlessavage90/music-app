@@ -98,11 +98,20 @@ class Crawler:
 
     def crawl(self, bootstrap_mbids: list[str]) -> None:
         queue: deque[str] = deque()
+
+        # Resume: the checkpoint persists the discovered/done sets but not the
+        # in-memory queue, so rebuild the pending frontier from their
+        # difference. This also re-queues artists that failed on a previous
+        # run (they are discovered but never marked done), so a transient
+        # server outage is retried on the next run rather than lost forever.
+        for mbid in sorted(self.discovered - self._done):
+            queue.append(mbid)
+
+        # Seed a fresh crawl, and pick up any bootstrap artist not yet seen
+        # (e.g. added to the bootstrap list between runs).
         for mbid in bootstrap_mbids:
             if mbid not in self.discovered:
                 self.discovered.add(mbid)
-                queue.append(mbid)
-            elif mbid not in self._done:
                 queue.append(mbid)
 
         processed = 0
@@ -111,21 +120,22 @@ class Crawler:
             if mbid in self._done:
                 continue
 
-            # Similarity only. Popularity comes from the spark dump — the
-            # per-artist stats endpoint costs ~23s a call (findings 6a).
             payload = self._archive_or_fetch(
                 self.similar_key(mbid), self.source.request_url(mbid), mbid
             )
+            # Only a successful fetch counts as done. A failed artist stays
+            # out of `done`, so `discovered - done` re-queues it next run.
+            if payload is None:
+                continue
             self._done.add(mbid)
             processed += 1
 
-            if payload is not None:
-                for neighbour in self._neighbours(payload, mbid):
-                    if len(self.discovered) >= self.config.target_artist_count:
-                        break
-                    if neighbour not in self.discovered:
-                        self.discovered.add(neighbour)
-                        queue.append(neighbour)
+            for neighbour in self._neighbours(payload, mbid):
+                if len(self.discovered) >= self.config.target_artist_count:
+                    break
+                if neighbour not in self.discovered:
+                    self.discovered.add(neighbour)
+                    queue.append(neighbour)
 
             if processed % self.config.checkpoint_every == 0:
                 self._save_checkpoint()

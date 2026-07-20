@@ -127,3 +127,55 @@ def test_exhausted_retries_records_failure_and_continues(tmp_path):
     crawler.crawl([A])
     # A single bad artist must not abort an 8-hour crawl.
     assert A in crawler.failures
+
+
+class _CrashAfter:
+    """Wraps a fetcher and raises a non-transient error after n calls, to
+    simulate a process crash or a network/system failure mid-crawl."""
+
+    def __init__(self, inner, n):
+        self.inner = inner
+        self.n = n
+        self.calls = 0
+
+    def __call__(self, url):
+        self.calls += 1
+        if self.calls > self.n:
+            raise RuntimeError("simulated crash / network drop")
+        return self.inner(url)
+
+
+def test_resume_continues_pending_frontier_after_crash(tmp_path, config):
+    # A crash mid-crawl leaves artists discovered but unprocessed. The
+    # checkpoint stores the discovered/done sets, not the queue, so resume
+    # must rebuild the frontier from their difference — otherwise it restarts
+    # with an empty queue and silently finishes a half-graph.
+    crasher = _CrashAfter(FakeFetcher(), n=2)
+    first = _crawler(tmp_path, config, crasher)
+    with pytest.raises(RuntimeError):
+        first.crawl([A])
+    # Partial progress: some processed, more discovered than done.
+    assert first._done < first.discovered
+    assert len(first._done) < 4
+
+    # Resume: same archive and checkpoint, healthy fetcher.
+    resumed = _crawler(tmp_path, config, FakeFetcher())
+    resumed.crawl([A])
+    assert resumed.discovered == {A, B, C, D}
+    assert {A, B, C, D}.issubset(resumed._done)
+
+
+def test_failed_artists_are_retried_on_a_fresh_run(tmp_path):
+    # A server outage that exhausts retries must not permanently skip an
+    # artist — a later run, after the server recovers, must retry it.
+    cfg = BuilderConfig(requests_per_second=1000.0, max_retries=2, checkpoint_every=1)
+    down = _crawler(tmp_path, cfg, FakeFetcher(fail_times=999))
+    down.crawl([A])
+    assert A in down.failures
+    assert not down.archive.has(down.similar_key(A))
+    assert A not in down._done  # not marked done, so it stays retryable
+
+    recovered = _crawler(tmp_path, cfg, FakeFetcher())
+    recovered.crawl([A])
+    assert recovered.archive.has(recovered.similar_key(A))
+    assert A in recovered._done
