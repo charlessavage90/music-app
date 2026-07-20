@@ -261,6 +261,27 @@ Every alternative has been empirically eliminated:
 
 The 0.50 correlation is against a noisy ground truth (max-listeners-on-top-recording from a partial sample), so it likely understates true quality. This is an alpha decision, not a permanent one: §2.1 blesses later work that *deepens* pathing, and a genuine ListenBrainz artist-popularity table — should one become obtainable — would be a drop-in improvement validated against the same ground truth. The archive retains everything needed to recompute.
 
+## 6g. First real graph (5,000 artists): the approach works end-to-end
+
+**Added 2026-07-20.** Crawled 5,000 artists (snowball from the top-1000 bootstrap, 0 failures) and built the first graph-scale artifact.
+
+**Connectivity — excellent.** 4,998 of 5,000 artists in the largest connected component (99.96%); only 2 islands dropped. 335,142 edges, ~67 per artist, 3.5MB. Far above the ~80% retention that would have signalled a data problem.
+
+**Popularity (in-degree) — sane.** Radiohead tops out at 1.0; the ordering matches intuition across the graph.
+
+**Path quality — smooth journeys are achievable, and it was a tuning question, not a graph question.** Naive starting weights (`w_hop=0.3`) produced short paths that jumped through popular hubs — e.g. Miles Davis → Radiohead → Daft Punk, the exact shortest-path failure the original tool avoided. Rewarding strong similarity and making hops cheap fixed it. With `w_sim=3, w_jump=1, w_floor=1, w_hop=0.02`:
+
+- **Miles Davis → Duke Ellington → Louis Armstrong → Ella Fitzgerald → Frank Sinatra → Michael Bublé → Mariah Carey → Britney Spears → Rihanna → Kendrick Lamar → The Weeknd → Daft Punk** — jazz through crooner, pop, R&B, hip-hop to electronic, every step adjacent.
+- **The Beatles → Fleetwood Mac → David Bowie → Brian Eno → Aphex Twin** — classic rock to electronic, with Eno as the natural bridge.
+
+These are musically literate paths — the Boil the Frog effect, reproduced.
+
+**Starting point for stage-2 tuning:** `w_sim=3, w_jump=1, w_floor=1, w_hop=0.02`. Not final — real tuning happens in stage 2 against the full graph — but a validated place to begin, not a guess.
+
+**Caveat.** This 5k graph is top-heavy (snowballed from the most popular artists), so it does not yet test obscure-artist paths — the case where behavioural data is thinnest and structural edges (deferred, §1) may later be needed. That is the open question the full 75k crawl answers.
+
+**UTF-8 verified** end to end: "Michael Bublé", "Beyoncé", "Sigur Rós" round-trip correctly through the artifact; earlier console mojibake was display-only.
+
 ## 7. Verdict
 
 **GO.** Both data dependencies are live, CC0, well-shaped and adequately fast. The similarity data is richer than assumed (disambiguation included free). No fallback to MusicBrainz relationship data is needed.
