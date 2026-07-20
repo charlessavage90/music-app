@@ -45,6 +45,12 @@ Sources fall into two tiers, and the distinction drives §3.1 and §8.1:
 
 ## 2. Scope
 
+### 2.1 Governing principle: depth over breadth
+
+**Excellent artist pathing beats mediocre artist, album and track pathing.** Where a decision trades quality of the artist path against a new capability, quality wins — including against features listed as future scope below.
+
+This principle outranks the future-phase list. Anything on that list that would degrade or merely distract from artist-path quality should be deferred again, however long it has been waiting. Work that *deepens* artist pathing — better routing, better coverage, explaining a hop — is compatible with this principle. Work that *widens* the product to new node types or new modes is not, until artist pathing is genuinely good.
+
 ### In scope (alpha)
 
 - Two artist inputs with autocomplete
@@ -59,7 +65,7 @@ Sources fall into two tiers, and the distinction drives §3.1 and §8.1:
 
 Multi-artist pathing ("centre of these three artists"); album-level and track-level pathing as selectable modes; full-track playback via connected streaming accounts; playlist export; per-hop explanations of *why* two artists connect; user accounts; subscriptions and billing; GenAI natural-language querying.
 
-Per-hop explanation is the **highest-priority** of these, on evidence — see §10.
+Per-hop explanation is the **highest-priority** of these (§10.2) — it deepens artist pathing rather than widening the product, so it is consistent with §2.1. The granularity items are the least urgent, by the same principle.
 
 Four seams are built now to keep these cheap later (§7). Nothing else is anticipated.
 
@@ -142,7 +148,7 @@ cost = w_type[type(a,b)] · (1 − similarity(a,b))  // prefer strong links
 
 - `pop` = log-scaled listen count, normalised to 0–1.
 - `floor` = the lower popularity of the two endpoint artists. This is what prevents a route between two household names detouring through an artist with 400 listeners.
-- `w_hop` is the primary lever on path length; target is **3–7 artists inclusive of endpoints**, matching the length the author found most useful in practice (§10.3).
+- `w_hop` is the primary lever on path length. There is **no specified target** — see §10.3. It is tuned empirically by listening to real paths, and the range that results is an output of tuning, not a requirement imposed on it.
 - `w_type` is a per-edge-type multiplier. Alpha has one type, so this is effectively a constant; it exists so that later sources can be weighted relative to each other, which is also the mechanism behind future path-steering ("prefer factual connections over taste ones").
 
 Weights are configuration, tuned against the fixture graph and a set of hand-checked real paths.
@@ -281,13 +287,17 @@ Alpha still ships without it, deliberately: routing quality must be proven befor
 
 Note the dependency: a *factual* explanation ("both tagged shoegaze", "shared band member") needs the typed-edge and genre-tag data from a Tier 1 source (§1). This is a second reason the MusicBrainz ingest is the most likely next pipeline addition.
 
-### 10.3 Path length
+### 10.3 Path length is not specified
 
-The prompt asks for 3–7 artists inclusive of endpoints. §4.1 adopts this over the original tool's typical 5–8.
+The prompt asks for 3–7 artists. **This was the author's guesswork at replicating the original and carries no evidential weight.** It must not be treated as a requirement, and an earlier draft of this spec wrongly adopted it as one.
 
-### 10.4 Node granularity
+Path length is an emergent property of the cost function, tuned by listening. Implementation should start `w_hop` at a value producing roughly five-artist paths purely as a place to begin, then tune on whether the *transitions* feel smooth — a longer path with good steps beats a short one that lurches. If tuning for smoothness consistently yields eight-artist paths, that is the answer, not a problem to correct.
 
-Use case 3 is album-based; the author has separately asked for track-based pathing. Both are wanted, as selectable modes rather than a single choice. The opaque-node-ID seam (§7.3) supports either; the cost is an additional graph artifact per granularity, not a redesign.
+### 10.4 Node granularity is genuinely distant
+
+Use case 3 is album-based and the author has separately mentioned track-based pathing. Both are wanted eventually, as selectable modes.
+
+They are, however, explicitly subordinate to §2.1. Albums and tracks are not scheduled and should not be planned toward. The opaque-node-ID seam (§7.3) is retained only because it costs nothing — internal IDs are integers regardless — and not as preparation for imminent work.
 
 ---
 
