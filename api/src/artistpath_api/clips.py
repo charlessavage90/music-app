@@ -44,25 +44,32 @@ class InMemoryClipCache:
 
 
 class DynamoClipCache:
-    """Production cache: DynamoDB with a 30-day TTL (spec 5.1)."""
+    """Production cache: DynamoDB with a 30-day TTL (spec 5.1).
+
+    The boto3 resource is created lazily on first use, so constructing the
+    cache (and therefore booting the app) never requires AWS to be reachable.
+    """
 
     def __init__(self, cfg: ApiConfig, table=None) -> None:
         self._cfg = cfg
-        if table is None:
-            import boto3
-
-            table = boto3.resource("dynamodb").Table(cfg.clip_table_name)
         self._table = table
 
+    def _get_table(self):
+        if self._table is None:
+            import boto3
+
+            self._table = boto3.resource("dynamodb").Table(self._cfg.clip_table_name)
+        return self._table
+
     def get(self, mbid: str) -> Clip | None:
-        item = self._table.get_item(Key={"mbid": mbid}).get("Item")
+        item = self._get_table().get_item(Key={"mbid": mbid}).get("Item")
         if not item:
             return None
         return Clip(item["preview_url"], item["title"], item["cover_url"])
 
     def put(self, mbid: str, clip: Clip) -> None:
         ttl = int(time.time()) + self._cfg.clip_ttl_days * 86400
-        self._table.put_item(
+        self._get_table().put_item(
             Item={
                 "mbid": mbid,
                 "preview_url": clip.preview_url,

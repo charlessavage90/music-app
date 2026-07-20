@@ -7,7 +7,9 @@ from __future__ import annotations
 import httpx
 from fastapi import FastAPI, HTTPException, Response
 
-from artistpath_api.clips import ClipResolver, DynamoClipCache
+from artistpath_api.clips import (
+    ClipResolver, DynamoClipCache, InMemoryClipCache,
+)
 from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.models import (
@@ -89,5 +91,6 @@ def build_default_app() -> FastAPI:
         r.raise_for_status()
         return r.json()
 
-    resolver = ClipResolver(cfg, DynamoClipCache(cfg), fetch_json)
+    cache = DynamoClipCache(cfg) if cfg.clip_cache == "dynamo" else InMemoryClipCache()
+    resolver = ClipResolver(cfg, cache, fetch_json)
     return create_app(store, search, resolver, cfg)

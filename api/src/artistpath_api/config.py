@@ -35,6 +35,9 @@ class ApiConfig:
     # --- clips ----------------------------------------------------------
     deezer_search_url: str = "https://api.deezer.com/search"
     itunes_search_url: str = "https://itunes.apple.com/search"
+    # "memory" (local dev, default) or "dynamo" (production). Memory means the
+    # server boots and serves paths without any AWS configuration.
+    clip_cache: str = os.environ.get("ARTISTPATH_CLIP_CACHE", "memory")
     clip_table_name: str = os.environ.get("ARTISTPATH_CLIP_TABLE", "artistpath-clips")
     clip_ttl_days: int = 30
     clip_http_timeout: float = 10.0
