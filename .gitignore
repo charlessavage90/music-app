@@ -13,3 +13,6 @@ cdk.out/
 .coverage
 uv.lock
 builder/scratch/
+api/.venv/
+api/.pytest_cache/
+api/dist/
