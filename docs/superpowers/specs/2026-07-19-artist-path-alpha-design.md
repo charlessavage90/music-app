@@ -24,6 +24,23 @@ The tool no longer works. The Echo Nest was acquired by Spotify and shut down, a
 
 Audio *energy* features have no free replacement. See §5.3.
 
+### Source durability and licensing
+
+Sources fall into two tiers, and the distinction drives §3.1 and §8.1:
+
+**Tier 1 — datasets you possess.** Cannot be revoked or rate-limited once downloaded.
+
+- [MusicBrainz](https://metabrainz.org/datasets/postgres-dumps) — full PostgreSQL dumps, twice weekly. Artist relationships (band membership, collaboration, aliases) plus community genre tags. Core data CC0; note derived data carries CC-BY-NC-SA and must be handled separately if used commercially.
+- [Discogs](https://data.discogs.com/) — monthly XML dumps, **CC0**. Group membership, aliases, label and release co-credits.
+
+**Tier 2 — live APIs.** Convenient, revocable, guest status.
+
+- ListenBrainz Labs — CC0. Alpha's primary source.
+- Deezer — used for clips; artist-relatedness available but undocumented.
+- Last.fm `artist.getSimilar` — broad coverage, **but [free for non-commercial use only](https://www.last.fm/api/tos)**. Commercial use requires a negotiated agreement and Last.fm reserves the right to a revenue share.
+
+**Last.fm must never become load-bearing.** The roadmap includes paid subscribers, and a structural dependency on Last.fm would create a licensing obligation exactly when the product begins earning. It is permitted only as optional enrichment that can be disabled without degrading core routing.
+
 ---
 
 ## 2. Scope
@@ -42,7 +59,7 @@ Audio *energy* features have no free replacement. See §5.3.
 
 Multi-artist pathing ("centre of these three artists"); track-level rather than artist-level pathing; full-track playback via connected streaming accounts; playlist export; per-hop explanations of *why* two artists connect; user accounts; subscriptions and billing; GenAI natural-language querying.
 
-Three seams are built now to keep these cheap later (§7). Nothing else is anticipated.
+Four seams are built now to keep these cheap later (§7). Nothing else is anticipated.
 
 ---
 
@@ -75,13 +92,22 @@ Python. Runs in CI on demand or schedule — **never at request time**. Emits on
 
 Pipeline:
 
-1. **Acquire similarity data.** Behind a `SimilaritySource` interface with two implementations: bulk dump if one exists, otherwise a resumable rate-limited crawl of the Labs endpoint that checkpoints to disk, so a long fetch can be interrupted and resumed. This is the only step with genuine acquisition risk (§8.1) and it is isolated so nothing downstream depends on which branch ran.
-2. **Select artists.** Top ~75,000 by ListenBrainz listen count.
-3. **Symmetrise edges.** Similarity is not mutual; one-way edges create dead ends. Where an edge exists in one direction only, mirror it.
-4. **Keep the largest connected component.** Guarantees a path exists between any two artists the UI can offer, so "no path found" can only ever result from user exclusions.
-5. **Emit** CSR arrays (`offsets: Int32Array`, `neighbours: Int32Array`, `scores: Float32Array`), an artist table (MBID, name, popularity, disambiguation), and a normalised-name index for autocomplete.
+1. **Acquire similarity data.** Behind a `SimilaritySource` interface with two implementations: bulk dump if one exists, otherwise a resumable rate-limited crawl of the Labs endpoint that checkpoints to disk, so a long fetch can be interrupted and resumed. The builder takes a **list** of sources; alpha configures exactly one.
+2. **Archive raw responses to S3, unmodified, as they are fetched.** Every subsequent rebuild replays from this archive rather than the network. This converts the crawl from a recurring dependency into a one-time event and is the primary mitigation for §8.1. Expected size a few GB; cost negligible. Non-negotiable — it must not be deferred as an optimisation.
+3. **Select artists.** Top ~75,000 by ListenBrainz listen count.
+4. **Symmetrise edges.** Similarity is not mutual; one-way edges create dead ends. Where an edge exists in one direction only, mirror it.
+5. **Keep the largest connected component.** Guarantees a path exists between any two artists the UI can offer, so "no path found" can only ever result from user exclusions.
+6. **Emit** CSR arrays (`offsets: Int32Array`, `neighbours: Int32Array`, `scores: Float32Array`, `edgeType: Uint8Array`), an artist table (MBID, name, popularity, disambiguation), and a normalised-name index for autocomplete.
 
 Expected artifact size: 40–80MB.
+
+#### Typed edges
+
+Every edge carries a source/type tag. Alpha emits a single type (`behavioural`, from ListenBrainz), so the cost function's type weighting is a no-op — but the format, the builder's source list, and the routing weights all accommodate more from day one.
+
+This is deliberate: adding a second source later is configuration and tuning, not a change to the artifact format or a re-render of the graph. It also means the eventual per-hop explanation feature has real provenance to draw on rather than a generated guess.
+
+Anticipated types, none built in alpha: `structural` (shared band membership or collaboration, from MusicBrainz/Discogs) and `descriptive` (shared genre tags).
 
 ### 3.2 API
 
@@ -106,15 +132,16 @@ React + Vite, served by the same container.
 Traversing edge `a → b`:
 
 ```
-cost = w_sim   · (1 − similarity(a,b))      // prefer strong links
-     + w_jump  · |pop(a) − pop(b)|          // punish popularity cliffs
-     + w_floor · max(0, floor − pop(b))     // don't dive into obscurity
-     + w_hop                                // tunes path length
+cost = w_type[type(a,b)] · (1 − similarity(a,b))  // prefer strong links
+     + w_jump  · |pop(a) − pop(b)|                // punish popularity cliffs
+     + w_floor · max(0, floor − pop(b))           // don't dive into obscurity
+     + w_hop                                      // tunes path length
 ```
 
 - `pop` = log-scaled listen count, normalised to 0–1.
 - `floor` = the lower popularity of the two endpoint artists. This is what prevents a route between two household names detouring through an artist with 400 listeners.
 - `w_hop` is the primary lever on path length; target is 5–8 artists inclusive of endpoints.
+- `w_type` is a per-edge-type multiplier. Alpha has one type, so this is effectively a constant; it exists so that later sources can be weighted relative to each other, which is also the mechanism behind future path-steering ("prefer factual connections over taste ones").
 
 Weights are configuration, tuned against the fixture graph and a set of hand-checked real paths.
 
@@ -175,11 +202,12 @@ Workflows: `ci` (lint, typecheck, test on PRs) · `deploy` (main → build, push
 
 ## 7. Seams for future phases
 
-Three, costing nothing now:
+Four, costing nothing now:
 
 1. **`POST /api/path` takes `sources: id[]`**, not `from`/`to`. Alpha passes two. Multi-artist pathing passes three without an API change.
 2. **Playback sits behind a `Player` interface** (`play(url)`, `pause()`, `onEnded`). A Spotify Web Playback SDK implementation drops in without touching UI or routing.
 3. **Node IDs are opaque integers** mapped to MBIDs at the edges. Track-level pathing changes what a node *is* without changing the search.
+4. **Edges are typed and the builder takes a source list** (§3.1). A second similarity source is a pipeline addition and a weight-tuning exercise, not a format migration. This is also what makes per-hop explanations and path steering tractable later.
 
 ---
 
@@ -189,7 +217,18 @@ Three, costing nothing now:
 
 No bulk similarity dump was confirmed to exist; the data may only be available per-artist from the Labs endpoint. A 75k-artist crawl is feasible if run politely and resumably, but is slow and depends on a third-party endpoint's continued availability and tolerance.
 
-*Mitigation:* the `SimilaritySource` interface isolates this; the crawl checkpoints and resumes; the artifact is cached in S3 so the crawl is a rare operation, not a dependency of running the app. **Implementation should begin here** — everything downstream assumes this data exists and is good.
+**The runtime exposure is nil.** The graph is a baked artifact; if ListenBrainz disappeared after a successful build, the app would serve paths indefinitely. The failure mode is staleness, not outage.
+
+Two genuine exposures remain, with mitigations:
+
+| Exposure | Mitigation |
+|---|---|
+| Source disappears **before** a first successful build | Build the graph first, before any application code. Nothing downstream is worth writing until the data is proven. |
+| Source disappears later, and a rebuild needs re-crawling | Raw responses archived to S3 (§3.1 step 2). Rebuilds replay the archive; the network is never required twice. |
+
+Longer-term independence comes from Tier 1 datasets (§1): MusicBrainz and Discogs publish full bulk dumps that, once downloaded, cannot be revoked. Alpha does not ingest them, but the typed-edge format (§3.1) means adopting one is additive. If ListenBrainz were permanently lost, MusicBrainz relationship data is a viable structural substitute — a different flavour of similarity, not a dead end.
+
+**Implementation should begin with the builder.** Everything downstream assumes this data exists and is good; that assumption should be tested first, on real data, before the API or UI exist.
 
 ### 8.2 Path quality is subjective
 
@@ -209,7 +248,8 @@ The cost-function weights determine whether paths feel smooth. There is no autom
 
 | Layer | Coverage |
 |---|---|
-| Builder | CSR construction, edge symmetrisation, largest-component extraction, name normalisation |
+| Builder | CSR construction, edge symmetrisation, largest-component extraction, name normalisation, edge-type tagging |
+| Archive replay | A rebuild sourced entirely from the S3 archive, with the network unavailable, produces a byte-identical graph to the original crawl |
 | Pathfinding | Against the fixture graph: every adjacent pair is a real edge; exclusions respected; identical queries deterministic; disconnection returns an explicit error; popularity smoothing measurably beats plain shortest-path on a smoothness metric |
 | API | Integration against fixture graph with mocked Deezer |
 | Clip resolver | Mocked HTTP — fallback chain, cache hit/miss, missing-preview handling |
