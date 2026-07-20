@@ -1,0 +1,222 @@
+# Artist Path — Alpha Design
+
+**Date:** 2026-07-19
+**Status:** Approved, ready for implementation planning
+**Scope:** Alpha only — a faithful rebuild of Boil the Frog, for personal use, deployed on AWS.
+
+---
+
+## 1. Background
+
+[Boil the Frog](https://musicmachinery.com/2013/01/02/boil-the-frog-2/) (Paul Lamere, 2013) let you name two artists and generated a smooth listening path between them — a grid of artists, each with a representative song clip, where every step sounded like a small move from the last. If you already knew an artist, or didn't like them, you could bypass them and the path rebuilt around them.
+
+It worked by building a similarity graph of ~100,000 artists from The Echo Nest, then routing between endpoints with a preference for **paths through artists of similar popularity** rather than shortest paths. Songs were chosen to be well-known while minimising energy difference between neighbours.
+
+The tool no longer works. The Echo Nest was acquired by Spotify and shut down, and on [2024-11-27 Spotify deprecated](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api) related-artists, recommendations, audio-features, audio-analysis and 30-second preview URLs for all newly registered applications. Rebuilding on Spotify is not possible for an app created today.
+
+### Replacement data sources
+
+| Need | Source | Notes |
+|---|---|---|
+| Artist similarity | [ListenBrainz Labs `similar-artists`](https://labs.api.listenbrainz.org/similar-artists) | CC0, MusicBrainz-keyed, session-based collaborative filtering. Published by MetaBrainz [explicitly in response](https://blog.metabrainz.org/2024/11/28/pissed-off-by-spotify-enshittifying-more-api-endpoints-we-can-help/) to the Spotify deprecation. |
+| Artist popularity | ListenBrainz listen counts | Used for popularity-weighted routing. |
+| Track clips + art | Deezer API (primary), iTunes Search API (fallback) | 30s previews, no authentication. |
+
+Audio *energy* features have no free replacement. See §5.3.
+
+---
+
+## 2. Scope
+
+### In scope (alpha)
+
+- Two artist inputs with autocomplete
+- Generate a popularity-smoothed path between them
+- Render an ordered grid of artist cards: image, name, track title, play control
+- Sequential autoplay across the whole path
+- Bypass any artist → path rebuilds excluding them
+- Shareable URLs encoding the path and its exclusions
+- Deployed on AWS, CI/CD from GitHub
+
+### Explicitly out of scope (future phases)
+
+Multi-artist pathing ("centre of these three artists"); track-level rather than artist-level pathing; full-track playback via connected streaming accounts; playlist export; per-hop explanations of *why* two artists connect; user accounts; subscriptions and billing; GenAI natural-language querying.
+
+Three seams are built now to keep these cheap later (§7). Nothing else is anticipated.
+
+---
+
+## 3. Architecture
+
+Three components with hard boundaries.
+
+```
+┌─────────────────┐   graph-v{n}.bin   ┌──────────────┐
+│  Builder        │ ─────────────────► │  S3          │
+│  (Python, CI)   │                    └──────┬───────┘
+└─────────────────┘                           │ fetch at boot
+                                              ▼
+┌─────────────────┐    HTTP     ┌──────────────────────────┐
+│  Web app        │ ◄─────────► │  API (Node/TS, Fastify)  │
+│  (React + Vite) │             │  graph resident in RAM   │
+└─────────────────┘             └───────────┬──────────────┘
+                                            │ cache
+                                            ▼
+                                     ┌──────────────┐
+                                     │  DynamoDB    │
+                                     └──────────────┘
+```
+
+**The graph is an immutable build artifact, never a database.** This is the decision the rest of the design rests on: it is what makes pathfinding sub-10ms, makes bypass-and-reroll feel instant, and makes deploys reproducible.
+
+### 3.1 Builder (offline)
+
+Python. Runs in CI on demand or schedule — **never at request time**. Emits one versioned artifact to S3.
+
+Pipeline:
+
+1. **Acquire similarity data.** Behind a `SimilaritySource` interface with two implementations: bulk dump if one exists, otherwise a resumable rate-limited crawl of the Labs endpoint that checkpoints to disk, so a long fetch can be interrupted and resumed. This is the only step with genuine acquisition risk (§8.1) and it is isolated so nothing downstream depends on which branch ran.
+2. **Select artists.** Top ~75,000 by ListenBrainz listen count.
+3. **Symmetrise edges.** Similarity is not mutual; one-way edges create dead ends. Where an edge exists in one direction only, mirror it.
+4. **Keep the largest connected component.** Guarantees a path exists between any two artists the UI can offer, so "no path found" can only ever result from user exclusions.
+5. **Emit** CSR arrays (`offsets: Int32Array`, `neighbours: Int32Array`, `scores: Float32Array`), an artist table (MBID, name, popularity, disambiguation), and a normalised-name index for autocomplete.
+
+Expected artifact size: 40–80MB.
+
+### 3.2 API
+
+Node + TypeScript, Fastify, in a container. Loads the graph into typed arrays at boot, pinned by a `GRAPH_VERSION` environment variable. Pathfinding touches no database and makes no network calls.
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /api/artists/search?q=` | Prefix autocomplete over the name index |
+| `POST /api/path` | `{ sources: [id, id], exclude: id[] }` → ordered artist list |
+| `GET /api/artists/:mbid/track` | Resolve clip URL, cover art, track title |
+
+### 3.3 Web app
+
+React + Vite, served by the same container.
+
+---
+
+## 4. Pathfinding
+
+### 4.1 Cost function
+
+Traversing edge `a → b`:
+
+```
+cost = w_sim   · (1 − similarity(a,b))      // prefer strong links
+     + w_jump  · |pop(a) − pop(b)|          // punish popularity cliffs
+     + w_floor · max(0, floor − pop(b))     // don't dive into obscurity
+     + w_hop                                // tunes path length
+```
+
+- `pop` = log-scaled listen count, normalised to 0–1.
+- `floor` = the lower popularity of the two endpoint artists. This is what prevents a route between two household names detouring through an artist with 400 listeners.
+- `w_hop` is the primary lever on path length; target is 5–8 artists inclusive of endpoints.
+
+Weights are configuration, tuned against the fixture graph and a set of hand-checked real paths.
+
+### 4.2 Algorithm
+
+**Bidirectional Dijkstra.** Not A\* — an abstract similarity graph has no coordinates, so no admissible heuristic is available, and an inadmissible one would silently return non-optimal paths. Bidirectional Dijkstra is exact, needs no heuristic, and runs in single-digit milliseconds at 75k nodes.
+
+Ties break on artist ID, so identical queries always return identical paths.
+
+### 4.3 Bypass
+
+The exclusion set is skipped during edge relaxation. A reroll is simply another search — no cache invalidation, no recomputation of anything else.
+
+Exclusions can disconnect the graph. When no path exists the API returns an explicit "no path avoiding those artists" result and the UI says so, offering to clear exclusions. It must never fail silently or return a partial path.
+
+---
+
+## 5. Tracks and playback
+
+### 5.1 Resolution
+
+Artist → Deezer artist search → top track → preview URL, cover art, title. iTunes Search API as fallback. If neither yields a preview, the card renders as unplayable but **remains in the path** — a missing clip must not alter routing.
+
+Cached in DynamoDB keyed by artist MBID, 30-day TTL.
+
+### 5.2 Loading behaviour
+
+`POST /api/path` returns immediately with artists only. The client resolves clips per-card in parallel. The path therefore renders instantly rather than blocking on the slowest external lookup.
+
+### 5.3 Deviation from the original
+
+The original minimised *energy* difference between adjacent songs using Echo Nest audio features. Those features are gone and have no free equivalent (AcousticBrainz is frozen). Alpha keeps the other half of the original rule — pick a **well-known** track — and drops energy smoothing. Revisit if a viable feature source appears; not a blocker.
+
+### 5.4 Playback
+
+30-second clips in an HTML `<audio>` element, no authentication. Clicking play walks the entire path, auto-advancing on track end. The player sits behind a `Player` interface (§7).
+
+---
+
+## 6. Infrastructure
+
+| Concern | Choice | Rationale |
+|---|---|---|
+| Compute | **App Runner** (ECR image) | Warm container required — an 80MB resident graph plus cold starts rules out Lambda. App Runner gives TLS, custom domain, autoscaling and deploys without ECS/ALB wiring. ~$10–20/mo. Plain container, so ECS Fargate later is a deploy change, not a rewrite. |
+| Graph storage | **S3**, version-pinned | Decouples data releases from code releases. Rebuild and roll forward without touching the app; roll back by changing one env var. |
+| Cache | **DynamoDB** on-demand | Clip cache is pure key→value. Costs pennies and **nothing while idle**; RDS would bill ~$15/mo to sit empty. Postgres arrives with accounts and billing, which are genuinely relational. |
+| Secrets | SSM Parameter Store | Free tier; Secrets Manager charges per secret. |
+| IaC | AWS CDK (TypeScript) | Same language as the application. |
+| CI/CD | GitHub Actions with **OIDC role assumption** | No long-lived AWS credentials in the repository, ever. |
+
+Workflows: `ci` (lint, typecheck, test on PRs) · `deploy` (main → build, push to ECR, release) · `build-graph` (manual/scheduled → run pipeline, upload to S3).
+
+### 6.1 Local development
+
+`docker-compose` runs the app against DynamoDB Local and a **~500-artist fixture graph committed to the repository**. A fresh clone runs without fetching the 80MB artifact. The same fixture is the test fixture.
+
+---
+
+## 7. Seams for future phases
+
+Three, costing nothing now:
+
+1. **`POST /api/path` takes `sources: id[]`**, not `from`/`to`. Alpha passes two. Multi-artist pathing passes three without an API change.
+2. **Playback sits behind a `Player` interface** (`play(url)`, `pause()`, `onEnded`). A Spotify Web Playback SDK implementation drops in without touching UI or routing.
+3. **Node IDs are opaque integers** mapped to MBIDs at the edges. Track-level pathing changes what a node *is* without changing the search.
+
+---
+
+## 8. Risks
+
+### 8.1 Similarity data acquisition (primary risk)
+
+No bulk similarity dump was confirmed to exist; the data may only be available per-artist from the Labs endpoint. A 75k-artist crawl is feasible if run politely and resumably, but is slow and depends on a third-party endpoint's continued availability and tolerance.
+
+*Mitigation:* the `SimilaritySource` interface isolates this; the crawl checkpoints and resumes; the artifact is cached in S3 so the crawl is a rare operation, not a dependency of running the app. **Implementation should begin here** — everything downstream assumes this data exists and is good.
+
+### 8.2 Path quality is subjective
+
+The cost-function weights determine whether paths feel smooth. There is no automated metric for "sounds right".
+
+*Mitigation:* weights are configuration, not code; tuning uses a set of hand-checked real paths; the smoothness test (§9) catches regressions against plain shortest-path but does not certify quality.
+
+### 8.3 Catalogue coverage
+
+75k artists is smaller than the original's 100k, and ListenBrainz's listener base skews differently from Echo Nest's. Obscure or non-Western artists may be missing.
+
+*Mitigation:* accepted for a personal-use alpha. Autocomplete only offers artists that are in the graph, so the failure mode is "not found", never a broken path.
+
+---
+
+## 9. Testing
+
+| Layer | Coverage |
+|---|---|
+| Builder | CSR construction, edge symmetrisation, largest-component extraction, name normalisation |
+| Pathfinding | Against the fixture graph: every adjacent pair is a real edge; exclusions respected; identical queries deterministic; disconnection returns an explicit error; popularity smoothing measurably beats plain shortest-path on a smoothness metric |
+| API | Integration against fixture graph with mocked Deezer |
+| Clip resolver | Mocked HTTP — fallback chain, cache hit/miss, missing-preview handling |
+| E2E | One Playwright run: search → path renders → bypass → new path excludes the artist |
+
+---
+
+## 10. Open decisions
+
+None blocking. Product name is undecided; the repository working name is `music-app`.
