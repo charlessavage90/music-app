@@ -72,3 +72,17 @@ def test_bad_magic_is_rejected(tmp_path):
     p.write_bytes(b"XXXX" + b"\x00" * 40)
     with pytest.raises(ValueError, match="magic"):
         GraphStore.load(p)
+
+
+def test_hub_penalty_is_higher_for_higher_degree(tmp_path):
+    # Node 0 has degree 3 (hub-ish), leaves have degree 1.
+    p = tmp_path / "g.bin"
+    _write_apg1(
+        p, ["a" * 36, "b" * 36, "c" * 36, "d" * 36], ["A", "B", "C", "D"],
+        ["", "", "", ""], [0.5, 0.5, 0.5, 0.5],
+        offsets=[0, 3, 4, 5, 6], neighbours=[1, 2, 3, 0, 0, 0],
+        scores=[0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+    )
+    g = GraphStore.load(p)
+    assert g.hub_penalty[0] >= g.hub_penalty[1]
+    assert 0.0 <= g.hub_penalty.min() and g.hub_penalty.max() <= 1.0

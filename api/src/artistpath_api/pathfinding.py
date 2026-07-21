@@ -103,6 +103,7 @@ def find_path(
                 + cfg.w_jump * abs(pop_u - pop_v)
                 + cfg.w_floor * max(0.0, floor - pop_v)
                 + cfg.w_avoid * avoid.get(v, 0.0)
+                + cfg.w_hub * float(store.hub_penalty[v])
                 + cfg.w_hop
             )
             nd = d + cost

@@ -29,10 +29,28 @@ class GraphStore:
     neighbours: np.ndarray  # int32, length E
     scores: np.ndarray      # float32, length E
     id_by_mbid: dict[str, int] = field(default_factory=dict)
+    hub_penalty: np.ndarray | None = None  # float32 0-1, computed if not given
 
     def __post_init__(self) -> None:
         if not self.id_by_mbid:
             self.id_by_mbid = {mbid: i for i, mbid in enumerate(self.mbids)}
+        if self.hub_penalty is None:
+            self.hub_penalty = self._compute_hub_penalty()
+
+    def _compute_hub_penalty(self) -> np.ndarray:
+        """Per-node hub-ness in 0-1, for the cost function's anti-hub term.
+
+        Log-scaled degree, zeroed at or below the median and rising to 1.0 at
+        the biggest hub — so typical/obscure artists carry no penalty and only
+        the famous crossroads are made expensive to route through.
+        """
+        degrees = np.diff(self.offsets).astype(np.float64)
+        log_deg = np.log1p(degrees)
+        median_log = float(np.median(log_deg))
+        span = float(log_deg.max()) - median_log
+        if span <= 0:
+            return np.zeros(len(degrees), dtype=np.float32)
+        return np.clip((log_deg - median_log) / span, 0.0, 1.0).astype(np.float32)
 
     @property
     def artist_count(self) -> int:

@@ -70,3 +70,31 @@ def test_source_equals_target_is_a_single_node():
         names=["A", "B"], popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
     )
     assert find_path(store, 0, 0, [], CFG) == [0]
+
+
+def test_w_hub_zero_is_a_noop():
+    # Default w_hub=0 must not change routing (the new term is opt-in).
+    store = make_store(
+        names=list("ABC"), popularity=[0.5, 0.5, 0.5],
+        undirected_edges=[(0, 2, 0.1), (0, 1, 0.95), (1, 2, 0.95)],
+    )
+    from dataclasses import replace
+    assert find_path(store, 0, 2, [], replace(CFG, w_hub=0.0)) == [0, 1, 2]
+
+
+def test_hub_penalty_routes_around_a_hub():
+    # 0->1->3 and 0->2->3 are both two strong hops. Node 1 is a hub (wired to
+    # 20 extra leaves); node 2 is low-degree. With w_hub high, avoid node 1.
+    from dataclasses import replace
+    edges = [(0, 1, 0.9), (1, 3, 0.9), (0, 2, 0.9), (2, 3, 0.9)]
+    edges += [(1, 10 + i, 0.5) for i in range(20)]  # make node 1 a hub
+    store = make_store(
+        names=[str(i) for i in range(30)],
+        popularity=[0.5] * 30,
+        undirected_edges=edges,
+    )
+    # Sanity: node 1 is the hub.
+    assert store.hub_penalty[1] > store.hub_penalty[2]
+    path = find_path(store, 0, 3, [], replace(CFG, w_hub=5.0))
+    assert 1 not in path
+    assert path == [0, 2, 3]

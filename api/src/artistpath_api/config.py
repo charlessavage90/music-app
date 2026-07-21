@@ -21,6 +21,10 @@ class ApiConfig:
     w_floor: float = 1.0  # discourage diving into obscurity
     w_hop: float = 0.02   # per-hop cost; low so paths can be long and smooth
     w_avoid: float = 1.0  # "not for me" neighbourhood penalty
+    # Penalty for routing through high-degree "hub" artists. Default 0.0 keeps
+    # it a no-op; the 2026-07-21 baseline showed hub-traversal is topological,
+    # so this term is the lever for the discovery goal. Set from a tuned search.
+    w_hub: float = 0.0
 
     # --- bypass shaping (spec 4.3) --------------------------------------
     floor_relax_known: float = 0.15    # each "known" bypass softens the floor
