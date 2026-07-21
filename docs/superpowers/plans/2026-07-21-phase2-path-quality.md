@@ -240,7 +240,14 @@ Run:
 cd builder && UV_LINK_MODE=copy uv run artistpath-build build \
   --archive-dir ./archive --out scratch/graph-timing-probe.bin
 ```
-Record the logged elapsed time. **Write it into the plan's Task 15 notes.** If a build exceeds 30 minutes, Task 15 runs builds sequentially in the background rather than interactively.
+Record the logged elapsed time by writing it to **`builder/scratch/BUILD-TIMING.txt`** (gitignored, and the same directory the artifacts land in):
+
+```bash
+echo "75k build from archive: <N> seconds, measured <date>, commit $(git rev-parse --short HEAD)" \
+  > builder/scratch/BUILD-TIMING.txt
+```
+
+Task 15 Step 2 reads that file to decide how to run the six builds. **If a build exceeds 30 minutes**, Task 15 runs them sequentially in the background rather than interactively.
 
 Then delete the probe artifact: `rm builder/scratch/graph-timing-probe.bin*`
 
@@ -3221,7 +3228,7 @@ if __name__ == "__main__":
 
 - [ ] **Step 2: Build all six arms**
 
-Use the timing from Task 1 Step 7 to decide whether to run these interactively or in the background.
+Read `builder/scratch/BUILD-TIMING.txt` (written by Task 1 Step 7) and multiply by six. If that total exceeds ~30 minutes, run the loop below with `run_in_background` rather than interactively.
 
 ```bash
 cd builder

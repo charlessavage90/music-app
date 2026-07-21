@@ -2,6 +2,22 @@
 
 *Notes from rebuilding a dead music tool, and the six ways we got it wrong first.*
 
+> **Role: NARRATIVE. Not project documentation.**
+>
+> This is a journal, written for people, about how the modelling went. **Do not use it as
+> context for development work, do not cite it, and do not instruct any change from it.**
+> It is not maintained to the standard of the project's technical documents and it will
+> lag reality between updates.
+>
+> For anything measured — scores, correlations, hub statistics, path quality — the single
+> authoritative record is
+> [`superpowers/findings/2026-07-21-scoring-adjudication.md`](superpowers/findings/2026-07-21-scoring-adjudication.md).
+> Start at [`README.md`](README.md) for the documentation map.
+>
+> Factual errors here get corrected when found. See the coda, *Trap 7*, for two
+> conclusions below that were themselves later overturned — the essay's own thesis,
+> proving itself once more.
+
 ---
 
 ## The premise
@@ -100,23 +116,45 @@ The optimizer did precisely what we asked. We'd asked for the wrong thing.
 
 The standard remedy for the 1013× problem is a formula that divides by each artist's overall listening volume — it stops famous artists looking similar to everyone simply by virtue of being famous.
 
-It over-corrected. Because it rewards connections that are *surprising* relative to how obscure both artists are, it inflated tiny scenes. A junk connection scored **6.6× higher** than the genuine bond between Miles Davis and Stan Getz.
+It over-corrected. Because it rewards connections that are *surprising* relative to how obscure both artists are, it inflated tiny scenes. Ask it for a path out of Miles Davis and it routed through the cast of *La La Land* — Miles Davis, then an actor, then a composer, then another actor.
 
 There's a real lesson here: raw numbers over-favour the famous, and the correction over-favours the obscure. The answer is somewhere in between, and where exactly is an empirical question, not a theoretical one.
+
+*(The specific figure this section originally quoted turned out not to reproduce against any graph we built. The conclusion survived; the number didn't. See Trap 7.)*
 
 ### Trap 5: Blaming the maths for our own bug
 
 We concluded the textbook formula was simply wrong for our data and moved on.
 
-A later review found the actual cause: we were applying two adjustments in the wrong order, which silently cancelled one of them out. The formula was fine. Our arithmetic wasn't. We'd blamed a well-established method for a bug we'd written ourselves — and nearly discarded the right approach because of it.
+A later review found what looked like the actual cause: we'd applied two adjustments in the wrong order, silently cancelling one of them. The formula was fine, we decided. Our arithmetic wasn't. We'd blamed a well-established method for a bug we'd written ourselves — and nearly discarded the right approach because of it.
+
+*(This is where the essay originally ended this section. It is wrong. See Trap 7.)*
 
 ### Trap 6: Mistaking a symptom for a law of nature
 
 Paths kept routing through famous artists. Radiohead turned up *everywhere* — the universal connector. We measured that every routing strategy did this, even the dumbest possible one, and concluded it was simply the shape of the data. Unfixable. A law of nature.
 
-It wasn't. A second analysis found that our similarity scores correlated **0.725 with artist fame** — meaning what we were calling "similarity" was substantially a popularity measure wearing a disguise. The router wasn't drawn to hubs because of the map's shape; it was drawn to them because we'd accidentally told it to be.
+Then a second analysis reported that our similarity scores were strongly correlated with artist fame — meaning what we called "similarity" was substantially a popularity measure in disguise. The router wasn't drawn to hubs because of the map's shape, we concluded; it was drawn to them because we'd accidentally told it to be.
 
 We'd also taken a single experiment — run on the broken data, changing five things at once — and elevated it into a principle. It didn't survive contact with a clean test.
+
+*(Nor, it turned out, did the correction. See Trap 7.)*
+
+### Trap 7: The corrections were traps too
+
+Traps 5 and 6 are both wrong. We found out the way we found out everything else here — by finally building the control we should have built first.
+
+**Trap 5's diagnosis was impossible.** The ordering bug is real and still sits in the code. But we went back and checked *which commit built which graph file*, and the graph that produced the bad paths predated the code containing the bug. It cannot have been the cause. We had four graph files sitting in one folder with no record of what built them, and we'd compared two that differed in **two** ways as though they differed in one. Both analyses built on that comparison collapsed.
+
+**And the formula was not fine.** Trap 4 was right all along: the textbook correction really does over-correct on this data. Trap 5 exonerated it on the strength of a bug that wasn't there, and very nearly shipped the film-soundtrack paths as an improvement.
+
+**Trap 6's correlation didn't reproduce.** Re-measured, it came out far weaker, and it flipped sign depending on which graph we measured. Worse, it was close to circular by construction: we define an artist's popularity as the sum of its own similarity scores, so correlating similarity with popularity partly correlates a quantity with itself. A positive number there is the *expected* result of the null hypothesis, not evidence against it.
+
+So is the hub problem topological or self-inflicted? **Still open.** The honest answer is that the experiment which settles it — rewiring the graph at random while preserving each artist's number of connections, then re-running the router — has not been run yet. It is the next thing on the list. What we do know is that the naive router, which reads no scores at all, seeks hubs nearly as hard as the smart one; and that a large fraction of routing decisions are currently being made on a coin-flip, because a percentile clip we added for tidiness made ~35,000 connections score identically at maximum and cost the router nothing to cross.
+
+The lesson is not that the earlier reviews were careless. Each was a real improvement on the one before, and each was believed because it was better. The lesson is narrower and more annoying: **a measurement with no control is a story, and stories are very hard to stop telling once written down.** Trap 5 and Trap 6 both read as satisfying reversals — the twist where the bug was ours all along, the twist where the law of nature was self-inflicted. Satisfying is not the same as true.
+
+Six traps, then a seventh made of the fixes to two of them. We now keep every measured number in exactly one file, and every graph records the commit that built it.
 
 ---
 
@@ -150,6 +188,6 @@ No amount of code review would have caught it. Ten minutes of listening did.
 
 75,000 artists. Four million connections. Routes in milliseconds. Paths that mostly feel like the original — jazz drifting through soul into hip-hop, black metal easing out to country over seven or eight steps.
 
-Still on the list: the fame bias in the similarity scores, some stubbornly repetitive routing, and those expiring clips.
+Still on the list: two structural defects in how the graph is built — a percentile clip that makes a large share of routing decisions free, and a neighbour limit applied at the wrong stage, which trims the obscure artists it was meant to protect while leaving the famous ones unbounded. Then the open question of whether the hub problem is the data's shape or our own doing. Then some stubbornly repetitive routing, and those expiring clips.
 
 The honest summary is that "which artists are similar?" has no single correct answer — only a series of defensible choices, each with a failure mode you won't see until you look for it in the right way. Most of the work wasn't building the thing. It was finding out what we'd got wrong, and being willing to check.

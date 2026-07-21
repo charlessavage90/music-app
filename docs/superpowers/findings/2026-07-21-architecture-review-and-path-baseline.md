@@ -180,7 +180,17 @@ router but **the metrics used to judge it**, and overturned three conclusions ab
 > these conclusions in operational form — is
 > `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md`.
 
-### 5.1 Hub-seeking is caused by the scoring, not the topology
+### 5.1 ~~Hub-seeking is caused by the scoring, not the topology~~
+
+> **[OVERTURNED — see the adjudication §5.1–5.3, §6 claims 18–20.]** The correlation
+> below **did not reproduce**: re-measured it is far weaker and its sign flips depending
+> on the artifact. It is also substantially circular — popularity is defined as a sum of
+> the very scores being correlated, so a positive value is the null expectation, not
+> evidence. The null model's *numbers* do reproduce, but they do **not** license this
+> conclusion: score-free BFS is enriched on the same null, and the full router has the
+> lowest max interior degree of the three routers tested. **Whether hub-seeking is
+> topological or scoring-caused is currently OPEN**, pending the configuration-model
+> rewire.
 
 Similarity scores correlate **+0.725 with endpoint degree**. Raw co-occurrence is a
 popularity measure wearing a similarity costume, and log scaling preserves the
@@ -195,6 +205,14 @@ unrelated journeys.
 
 ### 5.2 The binary hub-traversal metric is worthless
 
+> **[UPHELD — adjudication §6 claim 21.]** This subsection's conclusion survives. But
+> its *prescription* does not: **neighbour-set Jaccard is NOT "the one to optimise
+> against."** It correlates strongly and negatively with degree and is structurally
+> bounded by the degree ratio, so it restates the hub metric rather than corroborating
+> it. "Score-independent, therefore not circular" is a non-sequitur — independence from
+> the score *array* is not independence from the *intervention*. See adjudication
+> §4.1–4.3 for the replacement (Adamic–Adar, with the overlap coefficient as a guard).
+
 "Does any interior node exceed the top-1% degree threshold" returns **61–68% by chance**
 at path lengths 7–8. It is a proxy for path length, not for hub-seeking, which is why
 §4 saw it sit flat at 92–96% through a fix that genuinely helped. Replace it with:
@@ -206,6 +224,12 @@ at path lengths 7–8. It is a proxy for path length, not for hub-seeking, which
 
 ### 5.3 `w_jump` is not inert; `w_floor` is
 
+> **[PARTLY OVERTURNED — adjudication §5.4–5.5, §6 claims 23–24.]** `w_floor` being a
+> no-op is **upheld**. The product corollary below is **wrong**: the two bypass signals
+> are **not** behaviourally identical at runtime. `dislike` still applies
+> `avoidance_map`; only `known` degrades to a plain hard exclusion. A regression test
+> written to the claim below would assert the wrong thing.
+
 `w_jump` cuts max interior degree **3.2×** — invisible to the three metrics §4 compared,
 all of which are insensitive to interior degree. `w_floor` is a **provable** no-op: it
 reproduces the no-floor result to every digit, because routes never dive below
@@ -216,7 +240,23 @@ This has a product consequence that had gone unnoticed: "know them already" rela
 threshold that never binds, so **the two bypass signals are behaviourally identical at
 runtime** — the app's signature feature does not currently do what it claims.
 
-### 5.4 The full-cosine failure in §4 was our own bug
+### 5.4 ~~The full-cosine failure in §4 was our own bug~~
+
+> **[OVERTURNED — adjudication §1, §2.1–2.3, §6 claims 2 and 27.]** The ordering bug
+> described below is real code, but it **cannot** have caused the cosine rejection: the
+> artifact that produced the bad paths was built by a commit that contained no `log1p`
+> at all. Four graphs sat in one directory with no provenance and two were compared as
+> though they differed in one variable when they differed in two.
+>
+> **And §4's conclusion was right after all** — full cosine really does over-correct; the
+> film-soundtrack path reproduces verbatim on that artifact. §4's *numbers* were wrong,
+> its verdict was not.
+>
+> The prescription below (`similarity_damping ≈ 0.25` in log space, with the projected
+> figures) was **never measured against a built artifact** and no such artifact exists.
+> The primary defect is the **p99 clip**, which is upstream of the damping question
+> entirely — adjudication §2.5. Design that follows from this:
+> `../specs/2026-07-21-phase2-path-quality-design.md`.
 
 §4 concluded cosine "over-corrects". It does not. **The pipeline applies damping
 *before* `log1p`**, which silently degenerates log scaling into linear scaling. The

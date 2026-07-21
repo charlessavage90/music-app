@@ -2,6 +2,21 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Orient here first
+
+| Question | Answer |
+|---|---|
+| **Which documents can I trust?** | [`docs/README.md`](docs/README.md) — the documentation map. It classifies every doc by role and names which are superseded. **Read it before citing anything in `docs/`.** |
+| **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks 27 prior claims upheld/overturned/unresolved. |
+| **What is the next action?** | Gate 1, Phase 2 (path quality). Execute `docs/superpowers/plans/2026-07-21-phase2-path-quality.md` — **in a fresh session, subagent-driven**, not inline. Phase 1 (clips, bypass, frontend UX) is unplanned. |
+| **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
+| **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
+| **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. |
+
+**Never use as context:** `docs/how-we-map-similar-artists.md` (a narrative journal) and
+anything under `docs/reference/` (third-party material). Neither is maintained as
+project documentation.
+
 ## What this is
 
 **artistpath** — an app that builds a listenable "journey" of artist cards between
