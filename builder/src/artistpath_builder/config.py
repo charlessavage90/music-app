@@ -37,12 +37,26 @@ class BuilderConfig:
     #     sim(a,b) = cooc(a,b) / (mass(a) * mass(b)) ** similarity_damping
     # 0.0 = raw association strength (globally rescaled), 0.5 = full cosine.
     #
-    # Default 0.0 after measurement (findings 2026-07-21 §4): full cosine
+    # UNDER REVIEW — 0.0 is NOT a settled default. Do not rely on this comment
+    # to justify leaving it alone.
+    #
+    # This was set to 0.0 citing findings 2026-07-21 §4: "full cosine
     # over-corrects, inflating rare co-occurrences so that tight niche clusters
-    # (e.g. a film soundtrack's cast) outscore genuine musical neighbours by
-    # ~6x. Raw scores already rank good edges above junk (2357 vs 277 on the
-    # measured examples). Popularity is handled explicitly in the API's cost
-    # function (w_jump / w_floor / w_hub) rather than baked into similarity.
+    # outscore genuine musical neighbours by ~6x". That evidence does not
+    # reproduce against the built artifacts. In graph-75k-cosine.bin the cited
+    # junk edge ranks 327/337 (score 0.0094) while Miles Davis -> Stan Getz
+    # ranks 15/337 (0.222) — a 24x gap in the opposite direction to the claim.
+    # The accompanying "2357 vs 277" figure has no source in version control.
+    # Findings §5.4 independently retracted the same conclusion.
+    #
+    # The measured defect is the p99 clip in pipeline.py, not this knob: 34,696
+    # edges saturate at exactly 1.0 and their destinations have a median
+    # out-degree of 719 against a graph median of 49, so similarity is free
+    # into the hub core. See specs/2026-07-21-phase2-path-quality-design.md
+    # §1.1-1.2, which schedules the sweep that decides this value.
+    #
+    # 0.0 is retained only because it is what the current graph was built with.
+    # It is not endorsed.
     similarity_damping: float = 0.0
 
     # --- output ---------------------------------------------------------

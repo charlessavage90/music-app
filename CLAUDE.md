@@ -57,10 +57,17 @@ uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 50
 UV_LINK_MODE=copy uv run --extra dev pytest -q                 # all tests
 UV_LINK_MODE=copy uv run --extra dev pytest -q -k pathfinding  # single test / pattern
 
-# dev server against the committed 5k graph:
+# dev server against the local 5k graph:
 ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
   uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
+
+**No graph artifact is in git.** `.gitignore` excludes `builder/scratch/` and `*.bin`,
+with only `!tests/fixtures/*.bin` exempt — so a fresh clone has the test fixtures but
+none of the dev graphs. Build `graph-5k.bin` locally from an archive with the `build`
+and `fixture` commands above, or copy it from another machine. Adopted 75k artifacts
+are identified by recorded checksum in `docs/superpowers/findings/`, since they cannot
+be committed.
 
 ### frontend (from `frontend/`)
 ```bash
