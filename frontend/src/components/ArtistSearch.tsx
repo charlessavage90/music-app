@@ -12,11 +12,13 @@ export function ArtistSearch({ label, onSelect }: Props) {
   const [results, setResults] = useState<Artist[]>([]);
   const [open, setOpen] = useState(false);
   const inputId = useRef(`search-${Math.random().toString(36).slice(2)}`).current;
+  const selectedName = useRef<string | null>(null);
 
   useEffect(() => {
     const q = query.trim();
-    if (!q) {
+    if (!q || q === selectedName.current) {
       setResults([]);
+      setOpen(false);
       return;
     }
     const controller = new AbortController();
@@ -37,6 +39,7 @@ export function ArtistSearch({ label, onSelect }: Props) {
   }, [query]);
 
   function choose(artist: Artist) {
+    selectedName.current = artist.name;
     onSelect(artist);
     setQuery(artist.name);
     setOpen(false);
