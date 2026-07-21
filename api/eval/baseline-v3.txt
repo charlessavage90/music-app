@@ -1,0 +1,12 @@
+loading ../builder/scratch/graph-75k-v3.bin ...
+74,998 artists | top-1% degree threshold = 363
+
+=== random pairs (n=25) ===
+FULL cost function      hub-traversal  92.0%   len   7.6   max-interior-deg    2118   interior-pop 0.809   bottleneck-sim 0.472   mean-sim 0.809   [87s]
+similarity-only         hub-traversal  96.0%   len   7.7   max-interior-deg    4642   interior-pop 0.798   bottleneck-sim 0.474   mean-sim 0.804   [47s]
+plain BFS (shortest)    hub-traversal  92.0%   len   4.4   max-interior-deg    4259   interior-pop 0.762   bottleneck-sim 0.402   mean-sim 0.510   [18s]
+
+=== obscure pairs (n=25) ===
+FULL cost function      hub-traversal  96.0%   len   9.0   max-interior-deg    2454   interior-pop 0.772   bottleneck-sim 0.376   mean-sim 0.756   [109s]
+similarity-only         hub-traversal  96.0%   len   9.8   max-interior-deg    3644   interior-pop 0.753   bottleneck-sim 0.379   mean-sim 0.777   [58s]
+plain BFS (shortest)    hub-traversal  92.0%   len   5.7   max-interior-deg    3320   interior-pop 0.688   bottleneck-sim 0.357   mean-sim 0.465   [25s]

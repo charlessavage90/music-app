@@ -33,6 +33,18 @@ class BuilderConfig:
     # --- graph ----------------------------------------------------------
     max_neighbours_per_artist: int = 50
 
+    # Popularity correction applied to raw co-occurrence when scoring edges:
+    #     sim(a,b) = cooc(a,b) / (mass(a) * mass(b)) ** similarity_damping
+    # 0.0 = raw association strength (globally rescaled), 0.5 = full cosine.
+    #
+    # Default 0.0 after measurement (findings 2026-07-21 §4): full cosine
+    # over-corrects, inflating rare co-occurrences so that tight niche clusters
+    # (e.g. a film soundtrack's cast) outscore genuine musical neighbours by
+    # ~6x. Raw scores already rank good edges above junk (2357 vs 277 on the
+    # measured examples). Popularity is handled explicitly in the API's cost
+    # function (w_jump / w_floor / w_hub) rather than baked into similarity.
+    similarity_damping: float = 0.0
+
     # --- output ---------------------------------------------------------
     graph_version: str = "v1"
 

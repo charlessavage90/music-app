@@ -110,6 +110,39 @@ Second cause, independent: **non-artist entities are present in the graph** (edi
 
 The optimiser drove `w_floor` from 1.0 to ~0.06 — independently corroborating §2's conclusion that the obscurity-floor term does nothing useful. Two separate lines of evidence agree.
 
+---
+
+## 4. Normalisation fix — three attempts, measured
+
+The blocking issue from §3 was fixed by replacing per-artist normalisation. Three scorings were built and compared **by reading real paths**, not metrics alone.
+
+| Scoring | Result |
+|---|---|
+| **Per-artist max** (original) | Incommensurable: every artist's top edge = 1.0 whether raw was 11 or 11,147. Routed through junk (`jesus2099`). |
+| **Full cosine** `cooc/√(mass·mass)` | **Over-corrected.** Inflates rare co-occurrence: a junk edge scored **0.148 vs 0.022** for Miles Davis→Stan Getz — 6.6× backwards. Produced film-soundtrack nonsense (`Miles Davis → J. K. Simmons → Hank Levy → Justin Hurwitz → Emma Stone → Daft Punk` — two of those are actors). |
+| **Global raw + log scale** (adopted) | Coherent paths, well-spread scores, shorter routes. |
+
+**Adopted:** `sim = log1p(cooc) / log1p(p99)`, one formula graph-wide, with a `similarity_damping` knob (default `0.0`; `0.5` = cosine) kept for future tuning. Popularity is deliberately **not** baked into similarity — it is handled in the API cost function (`w_jump`/`w_floor`/`w_hub`), a cleaner separation of concerns.
+
+Log scaling mattered independently: linear scaling left p50=0.022/p75=0.053, so `w_sim·(1−sim)` was nearly constant and the similarity term could not discriminate. Log scaling gives p25=0.405 / p50=0.488 / p75=0.605.
+
+### Measured outcome (75k graph, `graph-75k-v3.bin`)
+
+| | Before | After |
+|---|---|---|
+| Path length | 13.0 / 14.2 | **7.6 / 9.0** (into the 5–8 design target) |
+| Max-interior-degree (spot checks) | up to 11,050 | **428–1,343** |
+| Junk/incoherent paths | present | gone |
+| Hub-traversal (binary) | 95% | **92–96% (unchanged)** |
+| Bottleneck similarity | 0.92 | 0.47 — **not comparable**, see below |
+
+Two honest caveats:
+
+1. **The smoothness numbers are not comparable across the fix.** The old 0.92 was inflated by per-artist normalisation (every artist's top edge was 1.0 by construction). The new 0.47 sits on a globally meaningful scale where median edge strength is 0.488. The metric is now honest, not worse.
+2. **Hub-traversal did not improve** on the binary metric, confirming §2's conclusion that it is topological. The `w_hub` term (built, still `0.0`) remains the lever — but it can now be tuned against a trustworthy yardstick, which was the whole point of this fix.
+
+**The popularity terms remain nearly inert** even after the fix: FULL vs similarity-only score 0.472/0.474 bottleneck, 7.6/7.7 length, 92%/96% hub — essentially identical. §2's finding survives independently of the normalisation bug.
+
 ### Meta-lesson, sharpened
 
 The harness earns its keep **only when paired with reading actual paths**. Metrics alone endorsed a clearly worse router. Both failure modes have now been seen in this project: eyeballing without metrics (missed hub-seeking) and metrics without eyeballing (endorsed gibberish). Both checks are required.

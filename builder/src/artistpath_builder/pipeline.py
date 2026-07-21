@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import logging
 import math
+
 from collections import defaultdict
 
 import numpy as np
@@ -74,19 +75,23 @@ def build_from_archive(
         raw_lists[mbid] = neighbours
         mass[mbid] = sum(n.score for n in neighbours) or 1.0
 
-    # --- Pass 2: cosine-corrected, globally comparable edge strength -------
-    # sim(a,b) = cooc(a,b) / sqrt(mass(a) * mass(b))
+    # --- Pass 2: globally comparable edge strength -------------------------
+    #     sim(a,b) = cooc(a,b) / (mass(a) * mass(b)) ** damping
     #
-    # Raw co-occurrence conflates similarity with popularity: two famous
-    # artists co-occur constantly simply because both are famous. Dividing by
-    # each artist's own mass yields "co-occur more than their popularity alone
-    # predicts" — the standard cosine measure — and, crucially, the SAME
-    # formula everywhere, so an edge score means the same thing graph-wide.
+    # The SAME formula everywhere, so a score means the same thing graph-wide —
+    # unlike the per-artist normalisation this replaced. `damping` controls how
+    # much popularity is discounted; see BuilderConfig.similarity_damping for
+    # why the default is 0.0 (full cosine over-corrects and inflates rare
+    # co-occurrences). Popularity is handled in the API's cost function.
+    damping = config.similarity_damping
     scored_adjacency: dict[str, list[tuple[str, float]]] = {}
     for mbid in sorted(known):
         mass_a = mass[mbid]
         scored = [
-            (n.mbid, n.score / math.sqrt(mass_a * mass[n.mbid]))
+            (
+                n.mbid,
+                n.score / ((mass_a * mass[n.mbid]) ** damping) if damping else n.score,
+            )
             for n in raw_lists[mbid]
             if n.mbid in known
         ]
@@ -94,18 +99,27 @@ def build_from_archive(
         scored.sort(key=lambda pair: (-pair[1], pair[0]))
         scored_adjacency[mbid] = scored[: config.max_neighbours_per_artist]
 
-    # Rescale globally into 0-1 using a robust maximum, so w_sim in the API's
-    # cost function operates on a stable scale.
+    # Rescale globally into 0-1, LOG-scaled against a robust maximum.
+    #
+    # Co-occurrence is power-law distributed, so linear scaling crushes the
+    # bulk of edges to near-zero (measured: p50 0.022, p75 0.053), leaving
+    # w_sim*(1-sim) almost constant and the similarity term unable to
+    # discriminate. Log scaling spreads the mass across 0-1, the same reason
+    # popularity is log-scaled in graph.py.
     all_scores = [s for edges in scored_adjacency.values() for _, s in edges]
     scale = float(np.percentile(all_scores, 99)) if all_scores else 1.0
     if scale <= 0:
         scale = 1.0
-    logger.info("cosine scale (p99) = %.6g", scale)
+    log_scale = math.log1p(scale)
+    logger.info("similarity scale (p99) = %.6g", scale)
 
     indegree: dict[str, float] = defaultdict(float)
     adjacency: Adjacency = {}
     for mbid, scored in scored_adjacency.items():
-        edges = {dst: min(1.0, value / scale) for dst, value in scored}
+        edges = {
+            dst: min(1.0, math.log1p(max(0.0, value)) / log_scale)
+            for dst, value in scored
+        }
         adjacency[mbid] = edges
         for dst, score in edges.items():
             indegree[dst] += score
