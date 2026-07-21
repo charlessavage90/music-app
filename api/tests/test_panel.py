@@ -85,6 +85,26 @@ def test_resolve_pairs_reports_dropped_mbids_rather_than_substituting():
     assert dropped == ["missing-mbid-aaaaaaaaaaaaaaaaaaaaaaaa"]
 
 
+def test_resolve_pairs_reports_both_endpoints_when_both_are_missing():
+    store = _store()
+    panel = {
+        "strata": {
+            "random": [
+                {
+                    "from": "missing-1-aaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "to": "missing-2-aaaaaaaaaaaaaaaaaaaaaaaaa",
+                },
+            ]
+        }
+    }
+    pairs, dropped = resolve_pairs(store, panel, "random")
+    assert pairs == []
+    assert dropped == [
+        "missing-1-aaaaaaaaaaaaaaaaaaaaaaaaa",
+        "missing-2-aaaaaaaaaaaaaaaaaaaaaaaaa",
+    ]
+
+
 def test_load_panel_rejects_a_malformed_file(tmp_path: Path):
     bad = tmp_path / "panel.json"
     bad.write_text(json.dumps({"nope": 1}), encoding="utf-8")

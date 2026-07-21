@@ -157,11 +157,14 @@ def resolve_pairs(
             continue
         a = store.id_by_mbid.get(entry["from"])
         b = store.id_by_mbid.get(entry["to"])
+        unresolved = False
         if a is None:
             dropped.append(entry["from"])
-            continue
+            unresolved = True
         if b is None:
             dropped.append(entry["to"])
+            unresolved = True
+        if unresolved:
             continue
         pairs.append((a, b))
     return pairs, dropped
