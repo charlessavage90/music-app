@@ -16,3 +16,6 @@ builder/scratch/
 api/.venv/
 api/.pytest_cache/
 api/dist/
+
+# Visual brainstorm companion
+.superpowers/
