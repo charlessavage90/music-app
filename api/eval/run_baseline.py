@@ -27,7 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from artistpath_api.config import ApiConfig
 from artistpath_api.evaluation import (
     bfs_shortest_path,
-    degree_percentile_threshold,
+    hub_node_set,
     out_degree,
     path_metrics,
     similarity_only_path,
@@ -61,12 +61,12 @@ def build_panel(store: GraphStore, n_each: int, rng: np.random.Generator):
     return {"random": random_pairs, "obscure": obscure_pairs}
 
 
-def run_variant(store, pairs, router, hub_threshold, cfg=None):
+def run_variant(store, pairs, router, hub_nodes, cfg=None):
     metrics = []
     for a, b in pairs:
         path = router(store, a, b, cfg) if cfg is not None else router(store, a, b)
         if path and len(path) >= 2:
-            metrics.append(path_metrics(store, path, hub_threshold))
+            metrics.append(path_metrics(store, path, hub_nodes))
     return summarise(metrics)
 
 
@@ -74,7 +74,7 @@ def fmt(s: dict) -> str:
     if not s:
         return "  (no paths)"
     return (
-        f"  hub-traversal {s['hub_traversal_rate']*100:5.1f}%   "
+        f"  hubfrac {s['mean_hubfrac']*100:5.1f}%   "
         f"len {s['mean_length']:5.1f}   "
         f"max-interior-deg {s['mean_max_interior_degree']:7.0f}   "
         f"interior-pop {s['mean_interior_pop']:.3f}   "
@@ -89,8 +89,8 @@ def main():
 
     print(f"loading {graph} ...")
     store = GraphStore.load(graph)
-    hub_threshold = degree_percentile_threshold(store, 0.01)
-    print(f"{store.artist_count:,} artists | top-1% degree threshold = {hub_threshold}")
+    hub_nodes = hub_node_set(store, 0.01)
+    print(f"{store.artist_count:,} artists | top-1% hub set size = {len(hub_nodes)}")
 
     rng = np.random.default_rng(SEED)
     panel = build_panel(store, n_each, rng)
@@ -110,7 +110,7 @@ def main():
         print(f"\n=== {subset} pairs (n={len(pairs)}) ===")
         for label, router, c in routers:
             t = time.time()
-            s = run_variant(store, pairs, router, hub_threshold, c)
+            s = run_variant(store, pairs, router, hub_nodes, c)
             print(f"{label:22s}{fmt(s)}   [{time.time()-t:.0f}s]")
 
 

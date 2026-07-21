@@ -29,25 +29,41 @@ def test_edge_score_returns_similarity_or_zero():
     assert edge_score(store, 0, 0) == 0.0  # no self-edge
 
 
-def test_hub_detection_flags_high_degree_interior_node():
-    # Star centre (node 0, degree 3) sits interior on 1->0->2.
+def test_hubfrac_is_the_fraction_of_interior_nodes_that_are_hubs():
+    # Path 1->0->2->3 has interior [0, 2]; only node 0 is in the hub set.
     store = make_store(
         names=list("ABCD"), popularity=[0.9, 0.3, 0.3, 0.3],
-        undirected_edges=[(0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9)],
+        undirected_edges=[(0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9), (2, 3, 0.9)],
     )
-    m = path_metrics(store, [1, 0, 2], hub_threshold=3)
-    assert m.hub_traversed is True
+    m = path_metrics(store, [1, 0, 2, 3], hub_nodes={0})
+    assert m.hubfrac == pytest.approx(0.5)
     assert m.max_interior_degree == 3
 
 
-def test_endpoints_are_not_counted_as_hubs():
-    # The high-degree node is an endpoint, so it must not count as hub-traversal.
+def test_hubfrac_ignores_endpoints_even_when_they_are_hubs():
     store = make_store(
         names=list("ABCD"), popularity=[0.9, 0.3, 0.3, 0.3],
         undirected_edges=[(0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9)],
     )
-    m = path_metrics(store, [0, 1], hub_threshold=3)
-    assert m.hub_traversed is False
+    m = path_metrics(store, [0, 1], hub_nodes={0})
+    assert m.hubfrac == 0.0
+
+
+def test_hubfrac_is_zero_for_a_path_with_no_interior():
+    store = make_store(
+        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
+    )
+    assert path_metrics(store, [0, 1], hub_nodes=set()).hubfrac == 0.0
+
+
+def test_ceiling_hops_counts_free_similarity_edges():
+    # Two hops: one at exactly 1.0 (free — w_sim*(1-sim) == 0), one at 0.5.
+    store = make_store(
+        names=list("ABC"), popularity=[0.5] * 3,
+        undirected_edges=[(0, 1, 1.0), (1, 2, 0.5)],
+    )
+    m = path_metrics(store, [0, 1, 2], hub_nodes=set())
+    assert m.ceiling_hops == pytest.approx(0.5)
 
 
 def test_bottleneck_is_the_weakest_link():
@@ -56,7 +72,7 @@ def test_bottleneck_is_the_weakest_link():
         names=list("ABC"), popularity=[0.5, 0.5, 0.5],
         undirected_edges=[(0, 1, 0.9), (1, 2, 0.2)],
     )
-    m = path_metrics(store, [0, 1, 2], hub_threshold=99)
+    m = path_metrics(store, [0, 1, 2], hub_nodes=set())
     assert m.bottleneck_sim == pytest.approx(0.2, abs=1e-6)  # float32
     assert m.mean_sim == pytest.approx(0.55, abs=1e-6)
 
@@ -93,16 +109,19 @@ def test_similarity_only_prefers_strong_edges():
     assert similarity_only_path(store, 0, 2) == [0, 1, 2]
 
 
-def test_summarise_aggregates_hub_rate():
+def test_summarise_aggregates_hubfrac_and_ceiling_hops():
     store = make_store(
         names=list("ABCD"), popularity=[0.9, 0.3, 0.3, 0.3],
-        undirected_edges=[(0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9)],
+        undirected_edges=[(0, 1, 1.0), (0, 2, 1.0), (0, 3, 0.5), (2, 3, 0.5)],
     )
-    hub = path_metrics(store, [1, 0, 2], hub_threshold=3)      # hub-traversed
-    no_hub = path_metrics(store, [1, 0], hub_threshold=99)     # not
-    s = summarise([hub, no_hub])
+    a = path_metrics(store, [1, 0, 2, 3], hub_nodes={0})   # hubfrac 0.5
+    b = path_metrics(store, [1, 0], hub_nodes={0})          # hubfrac 0.0
+    s = summarise([a, b])
     assert s["n"] == 2
-    assert s["hub_traversal_rate"] == 0.5
+    assert s["mean_hubfrac"] == pytest.approx(0.25)
+    assert "mean_adamic_adar" in s
+    assert "mean_overlap_coefficient" in s
+    assert "mean_ceiling_hops" in s
 
 
 import math
