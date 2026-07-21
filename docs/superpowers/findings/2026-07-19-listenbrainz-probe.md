@@ -1,5 +1,20 @@
 # ListenBrainz API Probe — Findings
 
+> ## ⚠ SUPERSEDED for similarity scoring and normalisation
+>
+> **Any statement here about score normalisation or the similarity distribution is
+> obsolete.** This document describes **per-artist max-normalisation**, which was deleted
+> in commit `284366c`. Most visibly, the "dividing by the row maximum yields 0.38–1.0"
+> note in §4 below describes a scheme that no longer exists — and the claim was wrong
+> even then (48 % of edges fell below 0.38).
+>
+> Current scoring facts live in one place:
+> [`2026-07-21-scoring-adjudication.md`](2026-07-21-scoring-adjudication.md).
+>
+> **Everything else here is still valid and still load-bearing** — the endpoint schema,
+> the 1,000-artist sitewide cap that forced snowball discovery, the rate limits, and the
+> §6d–6f popularity-source eliminations that justify score-weighted in-degree.
+
 **Date:** 2026-07-19
 **Task:** Plan 1, Task 1 (gate) — `docs/superpowers/plans/2026-07-19-graph-builder.md`
 **Verdict:** **GO**, with a required amendment to seed acquisition.

@@ -202,8 +202,31 @@ Also required:
 **Every overlap-based objective above is structurally blind to the failure this project
 keeps hitting.** All of them would score `Miles Davis → J. K. Simmons → Hank Levy →
 Justin Hurwitz → Emma Stone` *well* — it is a chain of dense, mutually-overlapping
-micro-neighbourhoods. Decoded paths are not a supplementary check here; they are the only
-instrument that detects this class of failure. Adjudication §4.3.
+micro-neighbourhoods. Adjudication §4.3. Hence:
+
+**Bad-path detector (required).** A screen that flags paths a human would call incoherent,
+run over every arm and reported as a count alongside the aggregate metrics. Two
+independent reviews reached this gap from opposite directions — the first architecture
+review asked for it as a harness component, and the adjudication showed every overlap
+metric is blind to exactly what it would catch. It was lost in between and is recovered
+here.
+
+It is a **screen, not an objective** — never optimised against, only used to reject.
+Optimising against it would invite the same gaming the tuning run already demonstrated.
+Candidate signals, to be chosen and calibrated in the plan against paths already known to
+be bad (the *La La Land* chain, the `jesus2099` route, the famous-core chains):
+
+- an interior node whose disambiguation or absent-name marks it as a non-musical entity;
+- a hop whose endpoints share no common neighbour at all (`CN = 0`);
+- a run of ≥ 3 consecutive interior nodes drawn from one tight micro-cluster — the
+  signature of a cast list or label roster;
+- a sharp interior discontinuity in degree or popularity, flagged relative to the path's
+  own distribution rather than a global threshold.
+
+Calibration target: it must flag the known-bad paths and must not flag the paths already
+judged good (Miles Davis → Daft Punk, Burzum → Dolly Parton). A detector that fires on
+everything is as useless as one that fires on nothing, so its false-positive rate on the
+good set is reported with it.
 
 **Implementation note:** compute set intersection/union with `np.intersect1d` over the
 CSR rows, which `graph.py` already sorts by destination id — O(d_u + d_v) with no Python
@@ -270,10 +293,42 @@ across arms rather than swept.
 
 ### B4. Scoring changes
 
-Two **separate** changes. **The rescale is a precondition, not a co-equal factor** — an
-earlier draft of this spec treated them as a 2 × 5 factorial, which is wrong.
+**Two structural preconditions, then one factor.** An earlier draft of this spec treated
+the rescale as a co-equal factor in a 2 × 5 factorial, which is wrong; and it missed the
+neighbour cap entirely. Both are defects that shape the degree distribution the sweep
+would be measured on, so both are fixed and verified before `d` is varied at all.
 
-**Factor R (rescale) — fix first, then re-establish the control.** `p99-log-clip`
+**Precondition 1 — the neighbour cap is applied before symmetrisation, and is therefore
+backwards.** `pipeline.py:100` caps each artist at `max_neighbours_per_artist = 50`;
+`pipeline.py:127` symmetrises *afterwards*. Symmetrisation adds a reverse edge for every
+incoming one, and nothing bounds how many neighbour lists an artist appears in.
+Measured on `graph-75k-v3.bin`:
+
+| | value |
+|---|---|
+| Configured cap | 50 |
+| Nodes exceeding it | **34,102 (45.5 %)** |
+| Maximum degree | **11,243 — 225× the cap** |
+| Nodes at degree ≤ 5 | 8,752 |
+| Share of edge endpoints in nodes above degree 1,000 | 9.8 % |
+
+So the cap truncates the **obscure tail**, where edges are scarce and alternative routes
+are most needed, while leaving **hubs entirely unbounded**. This is a structural
+hub-generating mechanism independent of any scoring choice, and it was identified in the
+first architecture review but tracked nowhere until now.
+
+It must be fixed *before* the sweep because **damping partly masks it**: cosine's maximum
+degree is 3,166 (63× the cap) and its share of edge endpoints above degree 1,000 is
+1.6 % rather than 9.8 %. A sweep run over the uncapped-hub graph would credit damping
+with a reduction that is really the cap defect being incidentally suppressed.
+
+Candidate fixes, to be decided in the plan: cap after symmetrisation; cap in-degree as
+well as out-degree; or drop the count cap and prune on score instead. Whichever is
+chosen, the diagnostics table (§B7) reports pre- and post-symmetrisation degree
+distributions so the effect is visible rather than inferred.
+
+**Precondition 2 (Factor R, rescale) — fix, then re-establish the control.**
+`p99-log-clip`
 (current) versus `percentile-rank`. The clip creates zero-cost edges in *every* build,
 and damping only relocates them: median destination degree of a free edge is 719 at
 `d = 0` and 9 at `d = 0.5`. 30–82 % of routed hops currently cost zero similarity, so
@@ -332,12 +387,18 @@ Determinism (spec §9) still holds within every arm: identical input, identical 
 {0, 0.5, 0.75, 1.0} with the centring dropped throughout — **three of those eight cells
 build a degenerate graph** (§B4). That grid is withdrawn.
 
-1. **Control:** `(clip, d = 0)`, byte-identical to today's artifact. Built once, to
-   anchor the comparison and prove the refactor changed nothing.
-2. **Rescale fix:** `(rank, d = 0)`. Adopt if it cuts ceiling hops below 30 % without
-   degrading decoded paths. This is the highest-confidence change in the phase.
-3. **Damping sweep, under the rank rescale only:** `d ∈ {0, 0.25, 0.5, 0.75}`, exact
-   points fixed after Step A and recorded before any build runs.
+1. **Control:** `(current cap, clip, d = 0)`, byte-identical to today's artifact. Built
+   once, to anchor the comparison and prove the refactor changed nothing.
+2. **Cap fix:** symmetrisation-aware cap, still `(clip, d = 0)`. Isolates the structural
+   change from the scoring change.
+3. **Rescale fix:** `(fixed cap, rank, d = 0)`. Adopt if it cuts ceiling hops below 30 %
+   without degrading decoded paths. This is the highest-confidence change in the phase.
+4. **Damping sweep, over the fixed cap and rank rescale only:** `d ∈ {0, 0.25, 0.5,
+   0.75}`, exact points fixed after Step A and recorded before any build runs.
+
+Steps 2 and 3 are each adopted or rejected on their own evidence before the next begins.
+Running them together would reproduce the original error — a comparison across two
+simultaneous changes, attributed to one of them.
 
 Note the open hypothesis this ordering is designed to test: **once the rescale is fixed,
 `d` may matter far less than either source document assumed**, because both observed
@@ -357,14 +418,50 @@ Deferred to a follow-up, conditional on the sweep result: shrinkage
 `mass^0.75` rather than the product. Recorded here so a null result is not mistaken for
 "scoring cannot be improved".
 
+### B6a. Deferred for discussion: an externally-anchored popularity metric
+
+**Not designed, not scheduled — recorded so it is not lost a second time.** Revisit after
+Phase 2 concludes, and decide then whether it is still needed.
+
+The first architecture review asked for a popularity metric built on **external
+ground-truth listener counts** rather than in-degree, specifically to escape the
+circularity of judging a popularity term with a popularity measure derived from the same
+scores. The circularity is real and worse than that review estimated: Spearman between an
+artist's summed out-scores and its degree is **0.987** (adjudication §5.2). In-degree is
+not *a* measure of centrality here, it very nearly *is* centrality.
+
+Why it is deferred rather than adopted now:
+
+- It is a larger change than the rest of Phase 2 — it needs an external data source
+  acquired, joined on MBID, and its population mismatch quantified. Every external
+  popularity source tested during Task 1 was eliminated for exactly that mismatch
+  (probe findings §6d–6f), so this is a research question, not a metric to slot in.
+- Phase 2 may reduce the need for it. If the cap and rescale fixes resolve hub-seeking
+  structurally, the popularity terms matter less and so does measuring them precisely.
+- The cheap non-circular check in §A4 — correlating raw co-occurrence against ListenBrainz
+  sitewide listener counts — provides a partial anchor at a fraction of the cost, and
+  should be done first regardless.
+
+**Open questions to answer when this is picked up:** is an external anchor still needed
+after the structural fixes; which source survives the population-mismatch test; and
+whether it belongs as a path metric, a validation check, or a replacement for in-degree
+popularity altogether. That last option would change the artifact and the cost function,
+so it is a Phase-3-or-later decision, not a metric tweak.
+
 ### B7. Diagnostics
 
 Per build, in the results table and the HTML export: N, E, degree p50/p99/max,
 popularity p25/p50/p75, **count of saturated (score = 1.0) edges and the median degree
-of their destinations**, `corr(score, log degree)`, node-set diff versus the control.
+of their destinations**, **fraction of routed hops at the ceiling**, **degree
+distribution both pre- and post-symmetrisation plus the count of nodes exceeding the
+configured cap**, **bad-path detector count**, `corr(score, log degree)`, and the
+node-set diff versus the control.
 
-Both defects in §1.1 and §1.2 were invisible in the existing summary output and fall
-straight out of these.
+Every structural defect found so far — the clip ceiling, the cap asymmetry, the confounded
+artifact provenance — was invisible in the existing summary output and falls straight out
+of these. The pre/post-symmetrisation split is what makes the cap defect legible: the
+current output reports only the post-symmetrisation degree, in which a cap of 50 and a
+maximum of 11,243 sit side by side without the contradiction ever surfacing.
 
 ### B8. Statistics
 
@@ -390,8 +487,9 @@ Adopt a candidate only if **all six** hold:
 4. **Ceiling hops below 30 %** — the fraction of routed hops at score 1.000. This is the
    defect that made every prior comparison uninterpretable; a candidate that leaves it in
    place has not fixed the thing that matters most.
-5. Hand-read decoded paths show no junk hops. **Not a formality and not delegable to the
-   metrics:** every overlap objective above scores the *La La Land* path well.
+5. Hand-read decoded paths show no junk hops, **and the bad-path detector count does not
+   rise**. Not a formality and not delegable to the overlap metrics, every one of which
+   scores the *La La Land* path well.
 6. The **held-out** panel slice, untouched during analysis, reproduces (1)–(4).
 
 Criteria 2, 4 and 6 are each traceable to a specific failure this project has already
@@ -410,7 +508,7 @@ Regenerate the 5k fixture from the adopted graph, record the result in
 | Unit | Responsibility | Depends on |
 |---|---|---|
 | `builder/…/pipeline.py` | Scoring: damping factor, rescale factor, entity filter | archive, `BuilderConfig` |
-| `builder/…/config.py` | `similarity_damping`, new `similarity_rescale`, entity-filter toggle | — |
+| `builder/…/config.py` | `similarity_damping`, new `similarity_rescale`, new cap-strategy knob, entity-filter toggle | — |
 | `api/…/evaluation.py` | Pure metrics over a `GraphStore`; no I/O | `GraphStore` |
 | `api/eval/nulls.py` *(new)* | Configuration-model rewiring, degree-biased walk | `GraphStore` |
 | `api/eval/panel.json` *(new)* | Frozen MBID panel + held-out flag | — |
@@ -444,6 +542,14 @@ default.
   expression exactly; percentile rescale produces a uniform score distribution.
 - **Determinism:** the existing offline replay test (which injects a raising fetcher to
   prove `build_from_archive` never touches the network) must still pass unchanged.
+- **Cap invariant:** a test asserting that under the fixed cap strategy no node's
+  post-symmetrisation degree exceeds the configured bound. The current code satisfies no
+  such invariant — the cap is 50 and the observed maximum is 11,243 — and nothing would
+  have caught that.
+- **Bad-path detector calibration:** it flags the known-bad paths (the *La La Land*
+  chain, the `jesus2099` route) and does not flag the known-good ones (Miles Davis →
+  Daft Punk, Burzum → Dolly Parton). Both directions asserted, since a detector that
+  fires on everything passes a one-sided test.
 - **Degeneracy guard:** a test asserting the pipeline never emits `nan` or an all-zero
   score array for any `(rescale, d)` combination the config permits. Dropping the
   centring under the clip rescale clamps 99.98 % of edges at `d = 0.5` and produces

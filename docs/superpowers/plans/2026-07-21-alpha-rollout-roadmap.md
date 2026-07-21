@@ -92,6 +92,8 @@ In brief, and cited rather than restated:
 - Missing regression tests: bypass differentiation, path-may-lengthen, determinism tie-break, smoothness-beats-BFS, clip failure modes
 - Make E2E CI-runnable (committed fixture, stubbed clips, no live APIs)
 
+**On bypass differentiation — assert the right thing.** The QA review found that `KNOWN` only ever reaches the floor helper and never a path-level test, and concluded you could delete the avoidance logic entirely with every test still green. The test gap is real, but its meaning has since changed: `dislike` **does** apply `avoidance_map` at runtime — it is working code that nothing covers, not dead code. Only `known` degrades to a plain hard exclusion, because the floor it relaxes never binds (C3). So the test to write asserts that `dislike` and `known` produce **different** paths from the same inputs, and that `dislike` steers around the neighbourhood rather than just excluding one node. A test written to the original framing would assert the wrong thing. See `../findings/2026-07-21-scoring-adjudication.md` §5.4–5.5.
+
 ### Phase 5: Deploy
 - Dockerfile, `/health` endpoint
 - **Real S3 graph loading** with `GRAPH_VERSION` (currently a local file path; the "swap the graph via one env var" story is unimplemented)
