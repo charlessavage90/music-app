@@ -46,7 +46,7 @@ Other notable single-reviewer findings:
 
 ### Conclusions — the harness corrected the review's prescription
 
-1. **Hub-traversal is topological, not caused by the popularity terms.** BFS (86–94%) and similarity-only (100%) also route through hubs — the graph is a hub-dense small world and hubs are its connective tissue. The full router's hub-rate is actually *lower* than similarity-only's. **Therefore quantile-transforming popularity (the ML reviewer's top fix) will NOT reduce hub-traversal.** Only an explicit anti-hub/degree penalty would.
+1. **[SUPERSEDED BY §5 — the metric behind this conclusion was confounded.]** ~~Hub-traversal is topological, not caused by the popularity terms.~~ BFS (86–94%) and similarity-only (100%) also route through hubs — the graph is a hub-dense small world and hubs are its connective tissue. The full router's hub-rate is actually *lower* than similarity-only's. **Therefore quantile-transforming popularity (the ML reviewer's top fix) will NOT reduce hub-traversal.** Only an explicit anti-hub/degree penalty would.
 
 2. **The popularity terms are a length regulator, not a popularity-smoother.** Their measurable effect is cutting length ~60% (33→13), at a small *cost* to smoothness (0.985→0.945). They do not keep paths among comparably-popular artists (interior pop ~0.72 regardless; obscure pairs still dive through the famous core). "Inert" was too strong; "mis-aimed" is accurate.
 
@@ -139,10 +139,86 @@ Log scaling mattered independently: linear scaling left p50=0.022/p75=0.053, so 
 Two honest caveats:
 
 1. **The smoothness numbers are not comparable across the fix.** The old 0.92 was inflated by per-artist normalisation (every artist's top edge was 1.0 by construction). The new 0.47 sits on a globally meaningful scale where median edge strength is 0.488. The metric is now honest, not worse.
-2. **Hub-traversal did not improve** on the binary metric, confirming §2's conclusion that it is topological. The `w_hub` term (built, still `0.0`) remains the lever — but it can now be tuned against a trustworthy yardstick, which was the whole point of this fix.
+2. **Hub-traversal did not improve** on the binary metric. ~~confirming §2's conclusion that it is topological.~~ **[SUPERSEDED BY §5: the binary metric cannot detect improvement — it reads 61–68% by chance at these path lengths. The fix did reduce hub-seeking; this metric was incapable of showing it.]** The `w_hub` term (built, still `0.0`) remains the lever — but it can now be tuned against a trustworthy yardstick, which was the whole point of this fix.
 
-**The popularity terms remain nearly inert** even after the fix: FULL vs similarity-only score 0.472/0.474 bottleneck, 7.6/7.7 length, 92%/96% hub — essentially identical. §2's finding survives independently of the normalisation bug.
+~~**The popularity terms remain nearly inert** even after the fix: FULL vs similarity-only score 0.472/0.474 bottleneck, 7.6/7.7 length, 92%/96% hub — essentially identical. §2's finding survives independently of the normalisation bug.~~ **[SUPERSEDED BY §5 — partially wrong. The three metrics compared here are all insensitive to what `w_jump` actually does: it cuts max interior degree 3.2×. `w_floor` is the genuinely inert term.]**
 
 ### Meta-lesson, sharpened
 
 The harness earns its keep **only when paired with reading actual paths**. Metrics alone endorsed a clearly worse router. Both failure modes have now been seen in this project: eyeballing without metrics (missed hub-seeking) and metrics without eyeballing (endorsed gibberish). Both checks are required.
+
+---
+
+## 5. Second ML review — the measurement itself was confounded
+
+**Date:** 2026-07-21, after §4 shipped. A second ML/graph review re-examined not the
+router but **the metrics used to judge it**, and overturned three conclusions above.
+
+> **Provenance note.** This section is reconstructed from the session record rather
+> than re-derived. The numbers below were measured during that review; the *expected*
+> post-fix figures are projections from it, not observed results. Re-measure before
+> treating any of them as current. The corresponding plan of record — which carries
+> these conclusions in operational form — is
+> `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md`.
+
+### 5.1 Hub-seeking is caused by the scoring, not the topology
+
+Similarity scores correlate **+0.725 with endpoint degree**. Raw co-occurrence is a
+popularity measure wearing a similarity costume, and log scaling preserves the
+correlation rather than removing it. Against a **degree-biased null model** — the
+control that §2 never built — length-normalised hub fraction is **0.641 vs 0.172, a
+3.7× enrichment**. The router seeks hubs far beyond what the graph's structure forces.
+
+§2 reached the opposite conclusion because it compared routers against *each other* on
+a raw rate, with no null. Every router looked hub-heavy, so hub-heaviness looked
+inherent. Corroborated experientially in dogfooding: Radiohead kept reappearing across
+unrelated journeys.
+
+### 5.2 The binary hub-traversal metric is worthless
+
+"Does any interior node exceed the top-1% degree threshold" returns **61–68% by chance**
+at path lengths 7–8. It is a proxy for path length, not for hub-seeking, which is why
+§4 saw it sit flat at 92–96% through a fix that genuinely helped. Replace it with:
+
+- **hubfrac** — fraction of interior nodes above the threshold, length-normalised.
+- **neighbour-set Jaccard** — score-independent, therefore not circular. This is the
+  one to optimise against; bottleneck similarity is derived from the same scores under
+  investigation and cannot adjudicate its own correctness.
+
+### 5.3 `w_jump` is not inert; `w_floor` is
+
+`w_jump` cuts max interior degree **3.2×** — invisible to the three metrics §4 compared,
+all of which are insensitive to interior degree. `w_floor` is a **provable** no-op: it
+reproduces the no-floor result to every digit, because routes never dive below
+`min(pop_source, pop_target)`, so the floor never binds. **Delete `w_floor` and
+`floor_relax_*`.**
+
+This has a product consequence that had gone unnoticed: "know them already" relaxes a
+threshold that never binds, so **the two bypass signals are behaviourally identical at
+runtime** — the app's signature feature does not currently do what it claims.
+
+### 5.4 The full-cosine failure in §4 was our own bug
+
+§4 concluded cosine "over-corrects". It does not. **The pipeline applies damping
+*before* `log1p`**, which silently degenerates log scaling into linear scaling. The
+inflated junk-edge scores were that ordering bug, not a property of cosine.
+
+Correct form — damp **in log space**, then percentile-rescale:
+
+```
+log1p(cooc) − d·(log mass_a + log mass_b − 2·log median_mass)
+```
+
+**Fix, in order:** entity filter first (`jesus2099`, `[unknown]`, `[anonymous]` are
+still nodes), *then* `similarity_damping ≈ 0.25` — filtering must precede damping,
+since damping re-inflates low-mass pairs. Expected: hubfrac 0.641 → 0.231, max interior
+degree 2118 → 913, bottleneck neighbour-Jaccard 0.0184 → 0.0346. `w_hub` stays dormant
+at `0.0`; damping does the job better than an explicit penalty.
+
+### Meta-lesson — the one this section adds
+
+§3 and §4 established that metrics need eyeballs and eyeballs need metrics. §5 adds the
+third failure mode: **a metric with no null model measures nothing.** Both prior reviews
+read 94–98% hub-traversal as an alarming signal when chance alone accounts for most of
+it. The 3.7× enrichment — the actual finding — only became visible once someone
+constructed the control. Build the null before believing the rate.
