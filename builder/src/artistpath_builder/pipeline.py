@@ -15,7 +15,10 @@ sections 6d-6f).
 from __future__ import annotations
 
 import logging
+import math
 from collections import defaultdict
+
+import numpy as np
 
 from artistpath_builder.archive import RawArchive
 from artistpath_builder.config import BuilderConfig
@@ -60,14 +63,49 @@ def build_from_archive(
     # record, so they are harvested across every response.
     identities = harvest_identities(payloads.values())
 
-    # Score-weighted in-degree over artists we crawled (findings 6f). Only
-    # edges between two crawled artists count, so popularity is measured on
-    # the same node set the graph is built from.
-    indegree: dict[str, float] = defaultdict(float)
-    adjacency: Adjacency = {}
+    # --- Pass 1: raw neighbour lists and per-artist co-occurrence mass -----
+    # The mass (sum of an artist's raw scores) is the marginal used to correct
+    # for popularity below. Computed over the FULL uncapped list, which is a
+    # better marginal estimate than the capped one.
+    raw_lists: dict[str, list] = {}
+    mass: dict[str, float] = {}
     for mbid in sorted(known):
         neighbours = source.parse(payloads[mbid], exclude_mbid=mbid)
-        edges = {n.mbid: n.score for n in neighbours if n.mbid in known}
+        raw_lists[mbid] = neighbours
+        mass[mbid] = sum(n.score for n in neighbours) or 1.0
+
+    # --- Pass 2: cosine-corrected, globally comparable edge strength -------
+    # sim(a,b) = cooc(a,b) / sqrt(mass(a) * mass(b))
+    #
+    # Raw co-occurrence conflates similarity with popularity: two famous
+    # artists co-occur constantly simply because both are famous. Dividing by
+    # each artist's own mass yields "co-occur more than their popularity alone
+    # predicts" — the standard cosine measure — and, crucially, the SAME
+    # formula everywhere, so an edge score means the same thing graph-wide.
+    scored_adjacency: dict[str, list[tuple[str, float]]] = {}
+    for mbid in sorted(known):
+        mass_a = mass[mbid]
+        scored = [
+            (n.mbid, n.score / math.sqrt(mass_a * mass[n.mbid]))
+            for n in raw_lists[mbid]
+            if n.mbid in known
+        ]
+        # Cap AFTER correction — the corrected ranking differs from the raw one.
+        scored.sort(key=lambda pair: (-pair[1], pair[0]))
+        scored_adjacency[mbid] = scored[: config.max_neighbours_per_artist]
+
+    # Rescale globally into 0-1 using a robust maximum, so w_sim in the API's
+    # cost function operates on a stable scale.
+    all_scores = [s for edges in scored_adjacency.values() for _, s in edges]
+    scale = float(np.percentile(all_scores, 99)) if all_scores else 1.0
+    if scale <= 0:
+        scale = 1.0
+    logger.info("cosine scale (p99) = %.6g", scale)
+
+    indegree: dict[str, float] = defaultdict(float)
+    adjacency: Adjacency = {}
+    for mbid, scored in scored_adjacency.items():
+        edges = {dst: min(1.0, value / scale) for dst, value in scored}
         adjacency[mbid] = edges
         for dst, score in edges.items():
             indegree[dst] += score

@@ -65,12 +65,23 @@ class ListenBrainzSource:
     def parse(
         self, payload: bytes, exclude_mbid: str | None = None
     ) -> list[SimilarArtist]:
+        """Neighbours with RAW co-occurrence scores, uncapped.
+
+        Deliberately does NOT normalise per-artist. Dividing by the artist's own
+        strongest neighbour made every artist's top edge score 1.0 regardless of
+        whether its raw count was 11 or 11,147 — a 1013x spread — which made
+        edge strengths incommensurable across artists and led the router to
+        prefer meaningless hops between obscure artists (findings
+        2026-07-21 §3). Global, popularity-corrected normalisation and the
+        neighbour cap now happen in the pipeline, where the whole graph is
+        visible.
+        """
         try:
             data = json.loads(payload)
         except json.JSONDecodeError as exc:
             raise ValueError(f"malformed similarity payload: {exc}") from exc
 
-        raw: list[tuple[str, str, float]] = []
+        neighbours: list[SimilarArtist] = []
         for row in self._rows(data):
             mbid = row.get(FIELD_MBID)
             if not mbid or mbid == exclude_mbid:
@@ -78,26 +89,15 @@ class ListenBrainzSource:
             score = row.get(FIELD_SCORE)
             if score is None:
                 continue
-            raw.append((mbid, row.get(FIELD_NAME) or "", float(score)))
+            neighbours.append(
+                SimilarArtist(
+                    mbid=mbid, name=row.get(FIELD_NAME) or "", score=float(score)
+                )
+            )
 
-        if not raw:
-            return []
-
-        # Upstream scores are unbounded co-occurrence counts, not a unit
-        # interval (Task 1 observed 4223-11156 for Radiohead). Normalise
-        # per-artist against the strongest neighbour so w_sim in the cost
-        # function has a consistent scale across artists.
-        highest = max(score for _, _, score in raw)
-        if highest <= 0:
-            return []
-
-        neighbours = [
-            SimilarArtist(mbid=mbid, name=name, score=score / highest)
-            for mbid, name, score in raw
-        ]
         # Deterministic order: strongest first, MBID breaks ties.
         neighbours.sort(key=lambda n: (-n.score, n.mbid))
-        return neighbours[: self._config.max_neighbours_per_artist]
+        return neighbours
 
     @staticmethod
     def _rows(data: object) -> list[dict]:

@@ -25,20 +25,29 @@ def test_parses_recorded_real_response(source, similar_artists_payload):
     assert len(neighbours) > 0
     first = neighbours[0]
     assert len(first.mbid) == 36
-    assert 0.0 <= first.score <= 1.0
+    assert first.score > 0
 
 
-def test_scores_are_normalised_to_unit_range(source, similar_artists_payload):
+def test_scores_stay_raw_not_per_artist_normalised(source, similar_artists_payload):
+    # Regression guard. Per-artist max-normalisation made every artist's top
+    # edge 1.0 whether its raw count was 11 or 11,147 (a 1013x spread), so edge
+    # strengths were incommensurable across artists and the router preferred
+    # meaningless hops between obscure artists (findings 2026-07-21 section 3).
+    # Scores must stay raw here; globally comparable, popularity-corrected
+    # normalisation happens in the pipeline.
     neighbours = source.parse(json.dumps(similar_artists_payload).encode())
-    assert all(0.0 <= n.score <= 1.0 for n in neighbours)
-    # The strongest neighbour anchors the scale.
-    assert max(n.score for n in neighbours) == pytest.approx(1.0)
+    assert max(n.score for n in neighbours) > 1.0
+    scores = [n.score for n in neighbours]
+    assert scores == sorted(scores, reverse=True)  # deterministic order
 
 
-def test_neighbour_count_is_capped_by_config(similar_artists_payload):
+def test_parse_does_not_cap_neighbours(similar_artists_payload):
+    # The cap moved to the pipeline, which applies it AFTER the cosine
+    # correction reorders neighbours. parse must return the full list so the
+    # pipeline can compute an accurate per-artist co-occurrence mass.
     source = ListenBrainzSource(BuilderConfig(max_neighbours_per_artist=10))
     neighbours = source.parse(json.dumps(similar_artists_payload).encode())
-    assert len(neighbours) == 10
+    assert len(neighbours) == 100
 
 
 def test_empty_response_yields_no_neighbours(source):
