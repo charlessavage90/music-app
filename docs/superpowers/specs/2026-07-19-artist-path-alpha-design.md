@@ -338,7 +338,7 @@ The cost-function weights determine whether paths feel smooth. There is no autom
 
 ## 10. Evidence from prior art: the stopgap LLM prompt
 
-After Boil the Frog went down, the author used a hand-written LLM prompt as a substitute ([`docs/sample-ai-prompt`](../../sample-ai-prompt)). It covers three use cases: artist-to-artist paths with bypass, the "centre" of three or more artists, and album-to-album recommendation. It worked with "varying success."
+After Boil the Frog went down, the author used a hand-written LLM prompt as a substitute ([`docs/reference/sample-ai-prompt`](../../reference/sample-ai-prompt)). It covers three use cases: artist-to-artist paths with bypass, the "centre" of three or more artists, and album-to-album recommendation. It worked with "varying success."
 
 It is the best available evidence of what this product is actually for, and it drives four decisions.
 
