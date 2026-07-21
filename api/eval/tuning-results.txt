@@ -1,0 +1,15 @@
+74,998 artists | hub threshold 357 | 40 train / 40 test pairs
+objective: smoothness - 1.0*hubpen - 0.3*len_dev (target len 7.0)
+
+=== baseline (current production weights, w_hub=0) ===
+  train          score -0.010 | hub-traversal  87.5% | max-hubpen 0.665 | len  13.0 | bottleneck-sim 0.913
+  test           score -0.123 | hub-traversal  95.0% | max-hubpen 0.746 | len  14.2 | bottleneck-sim 0.923
+
+=== tuned weights ===
+  w_sim = 5.918
+  w_jump = 2.131
+  w_floor = 0.058
+  w_hop = 0.079
+  w_hub = 4.123
+  train          score +0.195 | hub-traversal  40.0% | max-hubpen 0.367 | len  10.0 | bottleneck-sim 0.690
+  test           score +0.150 | hub-traversal  50.0% | max-hubpen 0.361 | len  11.8 | bottleneck-sim 0.716

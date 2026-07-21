@@ -65,3 +65,51 @@ Other notable single-reviewer findings:
 ### Meta-lesson
 
 The reviewers were right that the system was unvalidated and that hub-seeking was happening — but their specific remedy targeted the wrong cause. That was only discoverable by building the metric instead of acting on the recommendation. The harness is now the standing regression guard for all path-quality work.
+
+---
+
+## 3. Tier-2 weight tuning (Optuna) — metrics improved, product got worse
+
+**Date:** 2026-07-21. A hub-penalty term (`w_hub`, per-node log-degree hub-ness, zeroed below median) was added to the cost function and to `GraphStore`, defaulting to `0.0` so production routing was unchanged. Bayesian optimisation (Optuna TPE, 60 trials, 40 train / 40 test pairs, seed 7) then searched all five weights against a scalar objective:
+
+```
+score = bottleneck_similarity - 1.0*max_interior_hub_penalty - 0.3*length_deviation   (target len 7)
+```
+
+### Result: every metric improved
+
+| | Baseline (`w_hub=0`) | Tuned |
+|---|---|---|
+| Hub-traversal (test) | 95% | **50%** |
+| Smoothness (bottleneck sim) | 0.923 | 0.716 |
+| Path length | 14.2 | 11.8 |
+| Max-interior-degree (Miles→Daft) | 1817 | **59** |
+
+Tuned weights: `w_sim=5.918, w_jump=2.131, w_floor=0.058, w_hop=0.079, w_hub=4.123`. The improvement generalised (train 40% / test 50% hub-traversal), so it was not panel overfitting.
+
+### But the paths became incoherent — DO NOT ADOPT
+
+- **Miles Davis → Daft Punk**, tuned: `Miles Davis → Lenny White → Chanson Plus Bifluorée → 山根康広 → 室井憲一 → Ngọc Anh → jesus2099 → Jessica Harper → Paul Williams → Daft Punk`. Unrelated artists across several unconnected scenes — and **`jesus2099` is a MusicBrainz *editor account*, not a musician**.
+- **Burzum → Dolly Parton**, tuned: `Burzum → Westwind → Othila → Orchis → Pilori → Johnny Cash → Dolly Parton`. Lurches from obscure French black metal straight to Johnny Cash — the exact jarring transition the product exists to prevent.
+
+The optimiser gamed the objective. `w_hub` remains `0.0` in production; nothing shipped.
+
+### Root cause — promotes the normalisation finding from Medium to blocking
+
+Per-artist max-normalisation (§1, flagged by both the architect and ML reviewer, and originally ranked Medium) makes edge strengths **incommensurable across artists**: an obscure artist's best neighbour scores **1.0** because it is normalised against itself, so a hop between two nobodies looks *maximally similar* while being musically meaningless. The hub penalty pushed routing into exactly that sparse periphery, where the scores lie most. **The smoothness metric is therefore untrustworthy, and any tuning against it optimises a broken yardstick.**
+
+Second cause, independent: **non-artist entities are present in the graph** (editor accounts such as `jesus2099`), i.e. a data-quality gap in the crawl/build.
+
+### Revised order of work
+
+1. **Fix score normalisation** so edge strength is globally comparable — rank/percentile-normalise across the whole graph, or use a symmetric association measure (cosine / PMI / Jaccard over listener sets). Builder change + graph rebuild; **no re-crawl needed**, the archive is complete.
+2. **Filter non-artist entities** from the artist set.
+3. **Re-run the Tier-2 tuning** (`api/eval/tune_weights.py`) against the corrected metric, then re-check real paths before adopting anything.
+
+### What survives regardless
+
+The optimiser drove `w_floor` from 1.0 to ~0.06 — independently corroborating §2's conclusion that the obscurity-floor term does nothing useful. Two separate lines of evidence agree.
+
+### Meta-lesson, sharpened
+
+The harness earns its keep **only when paired with reading actual paths**. Metrics alone endorsed a clearly worse router. Both failure modes have now been seen in this project: eyeballing without metrics (missed hub-seeking) and metrics without eyeballing (endorsed gibberish). Both checks are required.
