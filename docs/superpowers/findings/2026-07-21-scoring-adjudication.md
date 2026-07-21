@@ -1,6 +1,8 @@
 # Scoring & Path-Quality Metrics — Adjudicated Record
 
 **Date:** 2026-07-21
+**Amended:** 2026-07-21 (§4.3 restated, §4.4 added, §6 rows 28–30 added, §8 note added) —
+see §4.4 for what changed and why.
 **Status:** This is the single consolidated quantitative record for edge scoring and
 path-quality metrics. It **supersedes** the contested sections of both source documents:
 
@@ -315,10 +317,115 @@ neutral on both axes is the control for it.
   optimisation. Falsifiable by a sweep in which AA and overlap coefficient move together;
   if they do, the cross-check can be demoted to a diagnostic.
 
-**Both remain secondary to reading decoded paths.** Every metric in this table would have
-scored `Miles Davis → J. K. Simmons → Hank Levy → Justin Hurwitz → Emma Stone` well:
-that path is a chain of dense, mutually-overlapping micro-neighbourhoods. Overlap-based
-objectives are structurally blind to the specific failure this project keeps hitting.
+**Both remain secondary to reading decoded paths.** No overlap metric in this table
+would have *rejected* `Miles Davis → J. K. Simmons → Hank Levy → Justin Hurwitz →
+Emma Stone → Daft Punk`: aggregated per path and compared against other routed paths in
+the same artifact, it sits in the **top quartile on all three** (Jaccard 78th percentile,
+overlap coefficient 72nd, Adamic–Adar 71st, of 120 random routed cosine paths; 84th /
+79th / 82nd when the null is restricted to length-matched paths). Overlap-based
+objectives are blind to the specific failure this project keeps hitting.
+
+> **Amended.** The sentence this paragraph replaced read: *"Every metric in this table
+> would have scored `Miles Davis → J. K. Simmons → …` well: that path is a chain of
+> dense, mutually-overlapping micro-neighbourhoods."* The **operational conclusion is
+> upheld and now quantified** (percentiles above). The **stated mechanism is overturned**:
+> the path's hops are *not* densely overlapping — see §4.4. And the claim was true only
+> at the *path-aggregate, within-artifact* level; read as a per-hop absolute value it is
+> false, which matters because a per-hop threshold is what a rejection screen needs.
+
+### 4.4 What "scores well" means — the level matters, and §4.3 conflated four of them
+
+Added on amendment, after Task 5's bad-path calibration measured per-hop Jaccard on this
+same path and reported values that appeared to contradict §4.3. Both readings turn out to
+be measuring different quantities. All figures below re-derived from the artifacts.
+
+**Per-hop values on the known-bad path** (`graph-75k-cosine.bin`, routed with production
+`ApiConfig`; `CN` excludes the two endpoints, per `evaluation.py`):
+
+| hop | d_u / d_v | CN | Jaccard | degree bound `min/max` | J / bound | overlap coef | Adamic–Adar |
+|---|---|---|---|---|---|---|---|
+| Miles Davis → J. K. Simmons | 337 / 17 | 3 | **0.0085** | 0.050 | 0.169 | 0.1765 | 0.55 |
+| J. K. Simmons → Hank Levy | 17 / 46 | 5 | **0.0862** | 0.370 | 0.233 | 0.2941 | 1.18 |
+| Hank Levy → Justin Hurwitz | 46 / 96 | 9 | **0.0677** | 0.479 | 0.141 | 0.1957 | 2.85 |
+| Justin Hurwitz → Emma Stone | 96 / 51 | 13 | **0.0970** | 0.531 | 0.183 | 0.2549 | 2.99 |
+| Emma Stone → Daft Punk | 51 / 128 | 13 | 0.0783 | 0.398 | 0.197 | 0.2549 | 2.10 |
+| **path geometric mean** | | | **0.0520** | | 0.182 | **0.2311** | **1.635** |
+
+Task 5's interior per-hop figures (0.086 / 0.068 / 0.097) **reproduce exactly**.
+
+Four different questions, four different answers:
+
+| Question asked of the bad path | Reference | Answer |
+|---|---|---|
+| **(a)** Per-hop absolute value, vs a fixed threshold | `_MICRO_CLUSTER_JACCARD = 0.5` | **0.068–0.097 — far below.** No high-Jaccard screen fires. |
+| **(b)** Per-hop, vs adjacent pairs in **its own** artifact | cosine adjacent-pair sample, n=6,000, seed 7: median J **0.0948**, OC **0.3333** | **Dead median.** Interior hops at percentiles **47 / 40 / 51** on J, **43 / 27 / 37** on OC. |
+| **(c)** Per-hop, vs **degree-matched** adjacent pairs (min- and max-degree both within 2×) | matched medians J 0.157 / 0.143 / 0.143 | **Below median** — percentiles **25 / 23 / 34** on J, **24 / 25 / 35** on OC. |
+| **(d)** Path aggregate (geometric mean over hops, as `path_metrics` computes it), vs other routed paths in the same artifact | 120 random routed cosine paths, seed 42: median J **0.0207**, OC **0.1318**, AA **0.789** | **Top quartile: percentiles 78 / 72 / 71** (length-matched, n=57: **84 / 79 / 82**). |
+
+**(d) is the level the evaluation harness operates at**, because `path_metrics` reports
+`geometric_mean` over hops. So §4.3's operational claim stands: none of the three overlap
+objectives would have flagged this path, and all three rank it above the median routed
+path in its own graph. **(a)–(c) are the levels a rejection screen operates at**, and
+there §4.3's phrasing is simply wrong.
+
+**Why (d) is high while (b) and (c) are not.** Not because the cast hops are good, but
+because the *baseline* is bad: the median random routed cosine path has path-level
+Jaccard 0.0207 (0.0120 length-matched), i.e. typical cosine routing is worse than the
+cast chain. A metric that ranks a known-bad path above the median only tells you the
+median is also bad. This is the same failure mode as reading a raw hub-traversal rate
+without a null (§5.3), one level up.
+
+**The "dense micro-neighbourhoods" mechanism is overturned.** The interior hops share
+**5, 9 and 13** common neighbours respectively — overlap coefficients 0.196–0.294 against
+a cosine adjacent-pair median of **0.3333**. In neighbour-set terms the *La La Land* cast
+is not a dense clique at all; it is a **loose** set of nodes. What binds it is the
+*similarity scores* (three consecutive edges at ≥0.996, produced by the p99 clip, §2.2 /
+§2.5), which no neighbour-set metric can see. The correct statement is not "overlap
+metrics score dense junk highly" but **"overlap metrics are blind to a defect that lives
+entirely in the score channel."** That is a stronger and more general claim.
+
+**Task 5's proposed mechanism — degree-ratio suppression — is not supported for the
+interior hops.** Its argument was that `jaccard ≤ min(d)/max(d)` and the cast members
+have very uneven degrees. Measured, their bounds are **0.370 / 0.479 / 0.531**, against a
+cosine adjacent-pair **median bound of 0.4237** — entirely typical, not uneven. Dividing
+the bound out leaves J/bound = **0.233 / 0.141 / 0.183** against a graph median J/bound
+of **0.2544**, still at or below median. Degree-ratio suppression explains only the
+*entry* hop `Miles Davis → J. K. Simmons` (bound 0.050, J 0.0085, percentile 8). The
+degree-ratio bound is a real property of Jaccard (§4.1 stands) but it is not what defeats
+the micro-cluster screen. **What defeats the screen is that the clique is not dense.**
+
+**A defect in the calibration set itself.** Task 5's eight "known-good" paths are routed
+on `graph-75k-v3.bin` and include `Miles Davis → Ella Fitzgerald → Dean Martin → Mariah
+Carey → Justin Timberlake → Daft Punk` — which **§0 of this document identifies as the
+other face of the same defect** (five consecutive hops at score 1.000). Measured, it is
+the highest-overlap path in either set: path-level Jaccard **0.1592**, the **98th
+percentile** of 120 random v3 paths (**100th** length-matched), and its
+`Ella Fitzgerald ~ Dean Martin` interior pair is **0.3723**. The single "false positive"
+in Task 5's sweep at `run=2, jaccard ∈ {0.35, 0.30}` is therefore a **true positive on a
+path the calibration set mislabelled as good**. This does not rescue the screen — the bad
+path still never fires at any threshold above 0.097 — but it means the sweep's
+false-positive column is not trustworthy as reported, and the screen should be
+re-calibrated against a good set that excludes ceiling-chained paths.
+
+**Consequences.**
+
+1. Task 5's headline — *no Jaccard threshold separates the known-bad path from the
+   known-good set* — is **upheld**, for a corrected reason.
+2. Swapping the micro-cluster signal from `jaccard` to `overlap_coefficient` (Task 5's
+   concern 2) **would not fix it**: the bad path's interior OC is 0.196–0.294, *below*
+   the graph median 0.3333. Measured, not hypothesised. Do not make that change expecting
+   it to work.
+3. A screen that catches this path must read the **score channel**, not the topology —
+   e.g. a run of consecutive hops at or near the similarity ceiling. `ceiling_hops`
+   already exists in `PathMetrics` and reads 3/5 = 0.60 on this path against a cosine
+   mean of 0.301 (§2.5). **Confidence: medium** — proposed from the mechanism above and
+   from `ceiling_hops` being the one metric that separates here; it is not yet swept
+   against a clean good set, and it is a within-artifact signal that will read ~0 once
+   the rescale of §7.1 removes the ceiling tie-mass. It is a diagnostic for the *current*
+   defect, not a durable quality screen.
+4. Nothing here changes §4.3's objective recommendation (AA primary, OC as
+   degree-neutrality guard). Both remain blind to this failure; that was always the
+   reason for a separate screen.
 
 ---
 
@@ -435,6 +542,12 @@ feature is not wholly inert.
 | 25 | Entity filter is not a quality lever (7 nodes, max degree 218) | spec §1.3 | **Not re-measured — unresolved** |
 | 26 | Configuration-model rewire null | spec §A3 | **Unmeasured** — remains the cleanest test for #19/#22 |
 | 27 | Projected `hubfrac 0.641 → 0.231`, `max interior degree 2118 → 913`, `Jaccard 0.0184 → 0.0346` under `d≈0.25` | findings §5.4 | **Unresolved** — projections, no `d=0.25` artifact exists; and per §2.5 no `d` fixes the clip defect |
+| 28 | §4.3: "every overlap metric would have scored the *La La Land* path well" | this doc §4.3 | **Upheld at the path-aggregate level, overstated as written** — path geomeans rank at percentiles 78 (J) / 72 (OC) / 71 (AA) of 120 random routed cosine paths, so none would reject it; but per hop the values are 0.068–0.097, at the cosine adjacent-pair median (0.0948) and *below* it degree-matched (pct 23–34). §4.3 now states the level (§4.4) |
+| 29 | §4.3: "…that path is a chain of dense, mutually-overlapping micro-neighbourhoods" | this doc §4.3 | **Overturned** — interior hops share only 5 / 9 / 13 common neighbours; OC 0.196–0.294 vs a cosine median of 0.3333. It is a *loose* set bound by ceiling-clipped scores, not a dense clique (§4.4) |
+| 30 | Task 5: Jaccard's degree-ratio bound suppresses the cast clique's overlap | task-5 report | **Overturned for the interior hops** — their bounds are 0.370 / 0.479 / 0.531 vs a graph median of 0.4237; J/bound 0.141–0.233 vs median 0.2544. True only of the entry hop (bound 0.050). Task 5's *conclusion* (no threshold separates) is **upheld** (§4.4) |
+| 31 | Task 5: swapping the micro-cluster signal to the overlap coefficient would fix it | task-5 report, concern 2 | **Overturned** — the bad path's interior OC (0.196–0.294) is below the cosine median (0.3333); the signal would still run the wrong way (§4.4) |
+| 32 | Task 5's eight "known-good" calibration paths are good | task-5 report | **Overturned in part** — one of them (`Miles Davis → Ella Fitzgerald → … → Daft Punk`) is the ceiling-chained defect of §0; it is the highest-overlap path measured (path J 0.1592, 98th pct of v3 paths) and is the sweep's sole low-threshold "false positive". Recalibrate against a good set that excludes ceiling-chained paths |
+| 33 | A consecutive-ceiling-hop run would catch this path where overlap cannot | §4.4, new | **Unresolved — hypothesis** — `ceiling_hops` reads 0.60 on the bad path vs a cosine mean of 0.301 (§2.5), but it has not been swept against a clean good set and it becomes uninformative once §7.1's rescale removes the ceiling tie-mass |
 
 ---
 
@@ -464,6 +577,12 @@ Ranked by strength of evidence.
    either document assumes, because both observed failure modes were clip artefacts. Test
    by sweeping `d` only under the rank rescale. Falsified if rank-rescaled `d = 0` and
    `d = 0.5` still produce qualitatively different path failures.
+8. **Do not report `badpath.screen_path`'s count as evidence of path quality, and do not
+   fix it by swapping `jaccard` for `overlap_coefficient`.** Direct consequence of §4.4:
+   the bad path's interior overlap is *below* the graph median on both metrics, so both
+   signals run the wrong way. Rebuild its calibration set first (it currently contains a
+   ceiling-chained path labelled good, #32), then calibrate a score-channel signal.
+   **Confidence: high on the negative; medium on the replacement (#33).**
 
 ---
 
@@ -505,6 +624,19 @@ Rank-identity checked with `np.argsort(np.argsort(·, kind='stable'), kind='stab
 `np.intersect1d` over CSR rows; `AA = (1/np.log(np.maximum(deg[inter],2))).sum()`;
 `OE = CN / (deg_u*deg_v*kappa/2m)` with `kappa = <k(k-1)>/<k> = 429.2`.
 
+**§4.4 levels.** Per-hop values use `jaccard`, `overlap_coefficient`, `adamic_adar` and
+`common_neighbours` from `api/src/artistpath_api/evaluation.py` directly, so the figures
+are exactly what the harness and `badpath.py` compute. Adjacent-pair reference: 6,000
+edges per artifact with `default_rng(7)`, sampling edge index `k` uniformly and
+recovering the source with `np.repeat(np.arange(N), np.diff(offsets))`. Degree-matched
+comparison: adjacent pairs whose min- *and* max-endpoint degree are both within a factor
+of 2 of the target hop's (n = 554 / 3,323 / 3,325 for the three interior hops). Path-level
+null: 120 uniformly random node pairs with `default_rng(42)`, routed by
+`find_path(store, a, b, [], ApiConfig())`, paths of length < 3 discarded, aggregated with
+`geometric_mean` exactly as `path_metrics` does; the length-matched sub-null keeps paths
+within ±1 node of the target's length (n = 57 cosine, 58 v3). `J / bound` uses
+`bound = min(d_u, d_v) / max(d_u, d_v)`, the structural ceiling on Jaccard.
+
 **§5.1–5.2 correlations.** Edge-level over all E with
 `src = np.repeat(np.arange(N), deg)`; node-level with
 `np.add.reduceat(scores, offsets[:-1])`.
@@ -529,3 +661,11 @@ scoring-free router that §2 already had was closer to the right control all alo
 And a fifth, more mundane: **record which commit built each artifact.** Half the
 disagreement between these two documents dissolves once you know that `graph-75k-cosine.bin`
 and `graph-75k-v3.bin` differ in two factors, not one.
+
+And a sixth, added on the §4.4 amendment: **"scores well" is not a proposition until you
+name the reference class.** §4.3 and Task 5 measured the same path with the same function
+and reached opposite verdicts, because one aggregated per path against other paths in the
+same artifact and the other read a per-hop value against a fixed threshold. Both numbers
+were right. When a metric claim is contested, state the level (per-hop / per-path), the
+reference (absolute / within-artifact / degree-conditioned), and the null, before
+arguing about the value.
