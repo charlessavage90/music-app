@@ -44,13 +44,21 @@ Deezer preview URLs are **signed and time-limited** (`hdnea=exp=…`). Measured:
 
 **Fix:** cache the **track identity** (stable) separately from the **signed URL** (volatile); re-resolve the URL per request. This also delivers the "play a different song" feature nearly free, since we hold a track list.
 
-### C3 — Bypasses don't lengthen paths / the two signals are identical
-`w_floor` is a provable no-op (it reproduces the no-floor result to every digit, because routes never dive below `min(pop_source, pop_target)`). "Know them already" relaxes a threshold that never binds, so progressive relaxation does nothing and the two bypass signals are **behaviourally identical at runtime**. Confirmed in use: repeated bypasses produced ~5-artist paths of well-known artists (Cayetana → Coheed and Cambria).
+### C3 — `w_floor` is a no-op; "know them already" has no real behaviour
+`w_floor` is a provable no-op — it reproduces the no-floor result to every digit, because routes never dive below `min(pop_source, pop_target)`, so the floor never binds. Delete `w_floor` and `floor_relax_*`, and give `known` a real behaviour.
 
-### C4 — Hub-seeking is real, and is caused by the scoring, not topology
-Similarity scores correlate **+0.725 with endpoint degree** — raw co-occurrence is a popularity measure in disguise, and log scaling preserves it. Length-normalised hub fraction is 0.641 against a degree-biased null of 0.172 (**3.7× enrichment**). The binary "any interior hub" metric is worthless (61–68% by chance at length 7–8).
+**Corrected:** an earlier version of this entry claimed the two bypass signals are *behaviourally identical at runtime*. That is wrong — `dislike` still applies `avoidance_map`; only `known` degrades to a plain hard exclusion. See `../findings/2026-07-21-scoring-adjudication.md` §5.4–5.5.
 
-**Fix (measured in memory):** `similarity_damping ≈ 0.25` applied **in log space** — `log1p(cooc) − d·(log mass_a + log mass_b − 2·log median_mass)`, then percentile-rescale. Expected: hub fraction 0.641 → 0.231, max interior degree 2118 → 913, bottleneck neighbour-Jaccard 0.0184 → 0.0346. **Note:** the current code damps *before* `log1p`, which silently degenerates log scaling into linear scaling — this ordering bug is why the earlier full-cosine attempt failed, not over-correction.
+### C4 — Hub-seeking: cause not established
+**This entry has been substantially overturned. Do not act on any figure previously recorded here.** The single quantitative record is now [`../findings/2026-07-21-scoring-adjudication.md`](../findings/2026-07-21-scoring-adjudication.md); the design that follows from it is [`../specs/2026-07-21-phase2-path-quality-design.md`](../specs/2026-07-21-phase2-path-quality-design.md).
+
+In brief, and cited rather than restated:
+
+- The `+0.725` score/degree correlation is **unreproducible** and substantially tautological (§5.1–5.2).
+- Hub-seeking is **not established as scoring-caused** — score-free BFS is 2.68× enriched on the same null, and the full router has the *lowest* max interior degree of the three routers tested (§5.3). The configuration-model rewire is the outstanding experiment.
+- The `similarity_damping ≈ 0.25` prescription and its projected figures were never measured against a built artifact (§6, claim 27).
+- The "damps before `log1p`" ordering bug is **real in current code but was not the cause** of the cosine rejection: the cosine artifact was built by a commit that had no `log1p` at all (§1, §2.1).
+- The primary defect is the **p99 clip**, which creates zero-cost edges in every build — 30–82 % of routed hops currently cost zero similarity — with damping deciding only whether they point at the famous core or at micro-cliques (§2.5).
 
 ---
 

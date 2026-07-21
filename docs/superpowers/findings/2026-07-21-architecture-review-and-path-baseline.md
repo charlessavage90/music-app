@@ -1,5 +1,24 @@
 # Architecture Review & Path-Quality Baseline
 
+> ## ⚠ SUPERSEDED for scoring and path-quality metrics
+>
+> **Every number in this document concerning similarity scoring, hub-seeking, or
+> path-quality metrics has been superseded by
+> [`2026-07-21-scoring-adjudication.md`](2026-07-21-scoring-adjudication.md),
+> which is the single quantitative record for those subjects.** That document's §6
+> tables 27 prior claims — from this file, from the roadmap, and from the Phase 2 spec —
+> as upheld, overturned, or unresolved.
+>
+> Do not cite a figure from §2, §4 or §5 below without checking §6 there first. Several
+> headline numbers in §5 — including the `+0.725` score/degree correlation and the
+> conclusion that hub-seeking is scoring-caused — **did not reproduce**. §5 says so
+> itself in its provenance note; the adjudication measured it.
+>
+> **This file is retained as narrative history**: how the reviews unfolded, what was
+> believed when, and why. Its non-scoring content (the architect and QA findings in §1 —
+> clip 500s, artifact length validation, sync boto3 on the event loop) is **not**
+> superseded and remains actionable.
+
 **Date:** 2026-07-21
 **Context:** After the full 75k graph was built and the backend proven end-to-end, three independent expert subagents (senior architect, senior QA engineer, ML/graph expert) critically reviewed the architecture, methodology, and plan. Their biggest finding — that path quality was validated only by eyeballing — was then tested with an objective evaluation harness (`api/eval/run_baseline.py`, metrics in `api/src/artistpath_api/evaluation.py`). This records both.
 

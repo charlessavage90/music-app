@@ -2,100 +2,65 @@
 
 **Date:** 2026-07-21
 **Gate:** 1 (personal use)
-**Status:** approved design, not yet planned
+**Status:** approved design, revised after adjudication, not yet planned
 **Supersedes:** the Phase 2 bullet list in `../plans/2026-07-21-alpha-rollout-roadmap.md`.
 The roadmap remains the plan of record for gate structure and for Phases 1 and 3–7;
 this spec replaces only its Phase 2 content.
+
+**Quantitative record:**
+[`../findings/2026-07-21-scoring-adjudication.md`](../findings/2026-07-21-scoring-adjudication.md).
+Every measured figure about scoring, hub-seeking, or path-quality metrics lives there and
+**is not restated here** — this spec cites section numbers instead. Three documents drifted
+apart by each keeping its own copy of the numbers; the rule now is one record, and specs
+and plans point at it.
 
 ---
 
 ## 1. Why this phase is not what the roadmap said
 
-The roadmap's Phase 2 assumed three things. Two are now measured to be wrong, and the
-third is not the defect it was believed to be.
+> **All quantitative claims in this section live in
+> [`../findings/2026-07-21-scoring-adjudication.md`](../findings/2026-07-21-scoring-adjudication.md).**
+> This spec cites that record and deliberately does not restate its figures. Three
+> documents drifted apart by each restating the same numbers; the rule now is that
+> numbers live in exactly one findings document and specs point at it.
 
-### 1.1 The rejected graph is better than the adopted one
+The roadmap's Phase 2 rested on a diagnosis that has since been measured and largely
+overturned. An earlier draft of this spec proposed its own replacement diagnosis, which
+was **also** overturned. Both are recorded in the adjudication; the four facts that
+survive and actually shape this phase are:
 
-Commit `fff422e` set `BuilderConfig.similarity_damping = 0.0` and recorded that full
-cosine (`d = 0.5`) "over-corrects". Both artifacts still exist in `builder/scratch/`.
-Miles Davis' top-12 neighbours, read directly from them:
+**1.1 The historical comparisons changed two variables at once.**
+`graph-75k-cosine.bin` and `graph-75k-v2.bin` were built by commit `284366c`, whose
+rescale is linear; only `graph-75k-v3.bin` has the `log1p` rescale from `fff422e`.
+Every conclusion drawn by comparing those artifacts — including this spec's first
+draft — is confounded. See adjudication §1.
 
-| `graph-75k-v3.bin` — d = 0.0, **current default** | `graph-75k-cosine.bin` — d = 0.5, **rejected** |
-|---|---|
-| Frank Sinatra, Chet Baker, Herbie Hancock, Nina Simone, Duke Ellington, Sonny Rollins, Ella Fitzgerald, **Led Zeppelin**, **Bob Dylan**, The Dave Brubeck Quartet, Bill Evans, **Pink Floyd** — all tied at exactly 1.0000 | Miles Davis Quintet .496, John Coltrane .403, Charles Mingus .295, Herbie Hancock .284, Charlie Parker .275, The Dave Brubeck Quartet .269, Thelonious Monk .267, Chet Baker .255, Duke Ellington .248, Bill Evans .242, Sonny Rollins .237, Gil Evans .236 |
+**1.2 Cosine really does over-correct.** Routing on the cosine artifact reproduces the
+film-soundtrack path verbatim. The neighbour *rankings* under cosine are better while
+the *routed paths* are worse, which is why ranking evidence alone was insufficient.
+Adjudication §2.3. The specific numbers in the original findings §4 are still refuted
+(§2.4), but its conclusion was right.
 
-The rejected ranking is clean jazz. The adopted one ties Led Zeppelin and Pink Floyd
-with John Coltrane at maximum similarity to Miles Davis.
+**1.3 The p99 clip is the primary defect, and it is upstream of the damping question.**
+It creates zero-cost edges in every build; `d` decides only *where* they point — the
+famous core at `d = 0`, micro-cliques at `d = 0.5`. Between **30 % and 82 % of routed
+hops currently cost zero similarity**, leaving the router to choose on `w_jump` and
+`w_hop` noise. Adjudication §2.5. **Consequence for this design: Factor R is a
+precondition, not a co-equal factor — the sweep's control cell is itself defective
+until the rescale is fixed.**
 
-The specific evidence in findings §4 — *"a junk edge scored 0.148 against 0.022 for
-Miles Davis → Stan Getz, 6.6× backwards"* — **does not reproduce in either built
-artifact**:
+**1.4 Hub-seeking is not established as scoring-caused.** The degree-biased null
+reproduces (0.1723, 3.66–4.09× enrichment) but does not license that inference:
+score-free BFS is 2.68× enriched on the same null, and the full router has the *lowest*
+max interior degree of the three routers tested. The `+0.725` correlation behind the
+claim is unreproducible and substantially tautological. Adjudication §5.1–5.3. The
+configuration-model rewire (§A3) remains the outstanding experiment that would settle it.
 
-| | J. K. Simmons | Stan Getz |
-|---|---|---|
-| v3 (d = 0.0) | rank 509 / 566, score 0.366 | rank 14 / 566, score 1.000 |
-| cosine (d = 0.5) | rank 327 / 337, score 0.0094 | rank 15 / 337, score 0.222 |
-
-Under cosine, Stan Getz outscores the junk edge **24× in the correct direction**.
-`Justin Hurwitz` and `Emma Stone` are neighbours of Miles Davis in neither graph.
-Findings §4 was measured on intermediates, not on the built graph.
-
-### 1.2 The real defect is the p99 clip, not the linear/log ordering
-
-`builder/src/artistpath_builder/pipeline.py:110-122` rescales scores as
-`min(1.0, log1p(value) / log1p(p99))`. By construction ~1% of edges saturate at
-exactly 1.0. Measured:
-
-| | edges at exactly 1.0 | median out-degree of those edges' **destinations** |
-|---|---|---|
-| v3 (d = 0.0) | 34,696 / 4,102,014 (0.85 %) | **719** |
-| cosine (d = 0.5) | 27,808 / 3,582,502 (0.78 %) | **9** |
-
-Graph median degree is 49 in both. So in the production graph, ~35k edges have
-`w_sim·(1 − similarity) = 0` — similarity is *free* — and that free tie-mass points at
-destinations with a median degree 14.7× the graph median. Dijkstra breaks the resulting
-tie on `w_jump·|Δpop| + w_hop` alone. **This is a direct mechanical route into the hub
-core, and it is an artefact of percentile clipping, not of damping.**
-
-Roadmap C4 attributed the cosine failure to damping being applied before `log1p`
-("degenerating log scaling into linear"). The compression is real — cosine's score
-p50 is 0.075 against v3's 0.488 — but rescaling is **monotone**, so it cannot invert a
-ranking, and cosine's ranking was never inverted. The ordering story identified a real
-defect and drew the wrong conclusion from it.
-
-### 1.3 The entity filter is not a quality lever
-
-Exactly **7** special-purpose entities exist in the graph, all identified by
-`"Special Purpose Artist"` in the disambiguation field: `[unknown]`, `[traditional]`,
-`[no artist]`, `[anonymous]`, `[theatre]`, `[dialogue]`, `[Disney]`. Maximum out-degree
-among them is **218**, against a top-1% threshold of 363. They are not hubs and removing
-them will not move path quality.
-
-It is still worth doing for correctness, and it must be done by **disambiguation match,
-never by name**. There are 22 bracket-named nodes in the graph; 7 are special-purpose
-and **15 are real bands** that a name-based `[...]` filter would delete, including
-`[Alexandros]`, `[dunkelbunt]`, `[:SITD:]`, `[re:jazz]`, `[ingenting]`, `[spunge]`,
-`[die!]`, `[bsd.u]`, `[ocean jams]` and `[The] Slowest Runner [In All the World]`.
-The full 22 are enumerated in the unit-test fixture (§7).
-
-### 1.4 There is an unresolved contradiction in the committed record
-
-- Findings §2 concluded hub-traversal is **topological** — BFS and similarity-only
-  routers do it too, so no scoring change will fix it.
-- Roadmap C4 concluded hub-seeking is **caused by the scoring** — score correlates
-  +0.725 with endpoint degree.
-
-Both are committed as conclusions. They disagree. No amount of sweeping damping values
-resolves this; a null model does. Settling it is a precondition for interpreting any
-sweep result, so it belongs in Step A.
-
-### 1.5 The numbers driving the plan are not in version control
-
-The +0.725 correlation, the 0.641-vs-0.172 hub enrichment (3.7×), and the projected
-0.641 → 0.231 improvement exist only in prose. The roadmap says, verbatim, *"Fix
-(measured in memory)"*. These figures currently pre-authorise an adoption criterion.
-Given §1.1 showed a recorded measurement that the artifacts contradict, none of them
-can be trusted until re-derived in committed code.
+**1.5 The entity filter is not a quality lever.** 7 special-purpose nodes, max degree
+218 against a top-1 % threshold of 363. Filter on the disambiguation field, never on the
+name: 22 nodes have bracketed names and 15 of them are real bands. This measurement is
+this spec's own and is listed unresolved in the adjudication's §6 (claim 25) pending
+independent re-measurement.
 
 ---
 
@@ -126,7 +91,22 @@ Step A  adjudicate ──gate──▶  Step B  sweep ──▶ adopt (or keep c
 
 ## 4. Step A — Adjudication
 
-### A1. Path-export tool
+**Most of Step A as originally specified has already been executed** by the adjudication
+(`../findings/2026-07-21-scoring-adjudication.md`, commit `48f7413`). What follows records
+what it settled and what genuinely remains.
+
+**Done — A2, retract or substantiate findings §4.** Settled: findings §4's *conclusion*
+was right (cosine over-corrects; the film-soundtrack path reproduces verbatim) while its
+*numbers* were wrong. Findings §5.4's ordering explanation is dead — the artifact it
+purported to explain was built by a commit that had no `log1p`. `config.py` and the
+findings doc have been corrected; the roadmap is corrected as part of this consolidation.
+
+**Done — A4, re-derive the uncommitted numbers.** The `+0.725` correlation is
+unreproducible and substantially tautological (Spearman between out-score sum and degree
+is +0.987). The degree-biased null reproduces at 0.1723 with 3.66–4.09× enrichment, but
+does not support the inference drawn from it. Adjudication §5.1–5.3.
+
+### A1. Path-export tool — still required
 
 **New:** `api/eval/export_paths.py`. Emits one self-contained HTML file.
 
@@ -136,55 +116,37 @@ Step A  adjudicate ──gate──▶  Step B  sweep ──▶ adopt (or keep c
   marked.
 - Header: the per-artifact diagnostics table from §B7.
 
-**Rank is mandatory, not decorative.** The v3 defect in §1.1 is invisible in scores
-(twelve consecutive `1.0000`s) and obvious in rank. Any comparison tool that shows only
-scores would have missed it, exactly as the original review did.
+**Rank is mandatory, not decorative**, and so is showing the *decoded path* rather than
+neighbour lists alone. Both source documents failed here, in opposite directions: one
+read scores without rank (twelve consecutive `1.0000`s hid the defect), the other read
+neighbour rankings without routing (better rankings hid worse paths). The tool must make
+both visible in one view.
 
-This tool is built in Step A because A2 needs it, and it is a permanent debugging
-asset — it is the roadmap's "path export" item, delivered early.
-
-### A2. Retract or substantiate findings §4
-
-Read ~15 paths across `graph-75k-v3.bin` and `graph-75k-cosine.bin` using A1. Then
-correct the record in all three places the §4 conclusion is load-bearing:
-
-1. `builder/src/artistpath_builder/config.py:38-46` — the comment justifying
-   `similarity_damping = 0.0` in production cites §4 directly.
-2. `docs/superpowers/findings/2026-07-21-architecture-review-and-path-baseline.md` §4.
-3. `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` C4.
-
-Correcting the record is a deliverable of this step, not a side effect. A wrong finding
-that stays committed will be re-used.
-
-### A3. Configuration-model null
+### A3. Configuration-model null — the one experiment still outstanding
 
 Rewire the graph preserving the exact degree sequence, randomising edge endpoints;
-re-run the router; measure hub fraction. Compare against the observed graph.
+re-run the router; measure hub fraction against the observed graph.
 
-- If the rewired graph hub-seeks comparably → hub-seeking is **topological** (findings
-  §2 is right) and scoring changes will not fix it.
-- If it does not → hub-seeking is **scoring-caused** (roadmap C4 is right).
+This is now the **highest-value unmeasured item in the phase**. The degree-biased walk
+null alone does not settle whether hub-seeking is topological or scoring-caused: it puts
+the full router at 3.66–4.09× enrichment, but score-free BFS is also 2.68× enriched on
+the same null, and the full router has the *lowest* max interior degree of the three
+routers tested. Turning the scoring off makes hub-seeking worse, which is the opposite
+of what findings §5.1 predicted.
 
-This adjudicates §1.4. Report both this null and a degree-biased random walk of matched
-length; they answer different questions and both are cheap.
+- Rewired graph hub-seeks comparably → **topological**; scoring changes will not fix it,
+  and findings §2's struck-through conclusion is reinstated.
+- It does not → **scoring-caused**, and §5.1's conclusion survives its broken evidence.
 
-### A4. Re-derive the uncommitted numbers
-
-In committed, tested code: the score/degree correlation, hub fraction, and the null
-baselines. Plus one **non-circular** check, because correlating similarity with degree
-is close to tautological — popularity is defined at `pipeline.py:124-125` as a sum of
-the very scores being correlated, and `E[cooc(a,b)] ∝ mass(a)·mass(b)` holds under
-independence for any co-occurrence process, so a positive correlation is the *null*
-expectation rather than evidence.
-
-The non-circular check: correlate raw co-occurrence against ListenBrainz sitewide
-listener counts. `BuilderConfig.sitewide_artists_url` already exists.
+Report it alongside the degree-biased walk null; they answer different questions.
 
 ### Gate
 
-Step A answers: **is damping the lever, and in which direction?** Its output sets
-Step B's grid. If A shows the answer is already determined by the existing artifacts,
-Step B narrows to a confirmation build rather than a sweep.
+Step A now answers a narrower question than originally posed. The rescale fix does not
+depend on it — that is established independently (§1.3) and proceeds regardless. What
+Step A settles is **how much of the remaining hub-seeking any scoring change can reach**,
+which sets how hard Step B should push on `d` and whether the dormant `w_hub` term comes
+back into scope.
 
 ---
 
@@ -195,20 +157,26 @@ Step B narrows to a confirmation build rather than a sweep.
 **Primary objective: Adamic–Adar**, `Σ_{w ∈ N(u) ∩ N(v)} 1 / log deg(w)`, over each
 adjacent path pair, aggregated as the **geometric mean over hops**.
 
-Why not raw Jaccard, which the earlier design proposed as primary: it is not an
-independent check. Measured over 6,000 sampled adjacent pairs in `graph-75k-v3.bin`,
-`corr(log Jaccard, log max-degree) = −0.655`, with median Jaccard falling 0.4545 →
-0.0087 across degree buckets — a 52× swing driven by degree alone. It is also
-structurally bounded: `J ≤ min(d_u, d_v) / max(d_u, d_v)`, so a degree-50 artist
-adjacent to Radiohead (degree 11,243) cannot exceed J = 0.0044 no matter how musically
-related. Bottleneck Jaccard is therefore a near-deterministic monotone function of
-`max_interior_degree`, which `PathMetrics` already reports. It restates the hub metric
-rather than corroborating it.
+**Mandatory co-reported guard: the overlap coefficient**, `|N(u) ∩ N(v)| / min(d_u, d_v)`.
+A candidate that improves Adamic–Adar *without* improving the overlap coefficient is
+**not adopted**. Rationale (adjudication §4.2–4.3): Adamic–Adar is the only candidate
+measured flat in max-degree (+0.110), but it carries a Spearman **+0.578 coupling to
+min-degree** — a specific, measured channel by which an optimiser could game it. The
+overlap coefficient is near-neutral on both axes (−0.004 / −0.062) and is the control
+for that channel. Neither source document considered it.
 
-Worse, it is gameable in the previously-observed direction: bottleneck Jaccard is
-*maximised* by routing through small, tight, mutually-overlapping neighbourhoods —
-a film cast list, a label roster — which is precisely the failure mode of the earlier
-tuning run.
+Why not raw Jaccard, which findings §5.2 called "the one to optimise against": it is not
+an independent check. `corr(log Jaccard, log max-degree) = −0.639` (Spearman −0.730),
+with median Jaccard falling 0.4000 → 0.0090 across degree buckets. It is structurally
+bounded by `J ≤ min(d_u, d_v) / max(d_u, d_v)`, so a degree-50 artist adjacent to
+Radiohead cannot exceed J = 0.0044 however musically related. Bottleneck Jaccard is
+therefore a near-deterministic monotone function of `max_interior_degree`, which
+`PathMetrics` already reports — it restates the hub metric rather than corroborating it.
+"Score-independent, therefore not circular" is a non-sequitur: independence from the
+score *array* is not independence from the *intervention*. Adjudication §4.1.
+
+Observed/expected overlap under a configuration model was also considered and rejected —
+at Spearman −0.880 against max-degree it is **worse** than Jaccard (adjudication §4.2).
 
 Adamic–Adar discounts hub-mediated overlap and is the standard link-prediction answer
 (Adamic & Adar 2003; Liben-Nowell & Kleinberg 2007).
@@ -218,15 +186,24 @@ Also required:
 - **Geometric mean, not bottleneck-min.** Over 7–9 hops a min is dominated by one noisy
   node. Measured zero-rate for common-neighbour overlap is 0.7 %, so log-space
   aggregation is safe with a small epsilon.
-- **`hubfrac`** replaces the binary `hub_traversed`, which is 61–68 % by chance at
-  length 7–8 and measures path length rather than hub-seeking. The hub set is **frozen
-  by MBID** from the control build — the per-graph top-1 % threshold itself moves (363
-  in v3, 278 in cosine), so a variant could otherwise "improve" purely by compressing
-  its degree distribution. Each variant's own threshold is reported as a diagnostic.
-- **Raw Jaccard retained as a diagnostic**, reported together with its correlation to
+- **`hubfrac`** replaces the binary `hub_traversed`, which reads **0.642 by chance** at
+  length 7.4 and measures path length rather than hub-seeking. Report it against **two**
+  baselines, not one: the degree-biased walk null (0.1723) **and a score-free BFS
+  control**. The walk null alone licenses the wrong inference — BFS is itself 2.68×
+  enriched, so a router can look hub-seeking against the walk null purely because the
+  topology is (adjudication §5.3). The hub set is **frozen by MBID** from the control
+  build, since the per-graph top-1 % threshold moves (363 in v3, 278 in cosine) and a
+  variant could otherwise "improve" by compressing its degree distribution.
+- **Raw Jaccard retained as a diagnostic**, reported with its correlation to
   `max_interior_degree` so its redundancy stays visible in the results table.
 - Existing `length`, `max_interior_degree`, `mean_interior_pop`, `bottleneck_sim`,
   `mean_sim` retained as diagnostics.
+
+**Every overlap-based objective above is structurally blind to the failure this project
+keeps hitting.** All of them would score `Miles Davis → J. K. Simmons → Hank Levy →
+Justin Hurwitz → Emma Stone` *well* — it is a chain of dense, mutually-overlapping
+micro-neighbourhoods. Decoded paths are not a supplementary check here; they are the only
+instrument that detects this class of failure. Adjudication §4.3.
 
 **Implementation note:** compute set intersection/union with `np.intersect1d` over the
 CSR rows, which `graph.py` already sorts by destination id — O(d_u + d_v) with no Python
@@ -293,12 +270,20 @@ across arms rather than swept.
 
 ### B4. Scoring changes
 
-Two **separate** changes, varied as two factors — not bundled.
+Two **separate** changes. **The rescale is a precondition, not a co-equal factor** — an
+earlier draft of this spec treated them as a 2 × 5 factorial, which is wrong.
 
-**Factor R (rescale).** `p99-log-clip` (current) versus `percentile-rank`. The clip is
-the confirmed 34,696-edge hub funnel of §1.2, and a rank transform has no tie mass at
-the ceiling. Bundling this with damping and sweeping only damping would attribute the
-clip fix to damping.
+**Factor R (rescale) — fix first, then re-establish the control.** `p99-log-clip`
+(current) versus `percentile-rank`. The clip creates zero-cost edges in *every* build,
+and damping only relocates them: median destination degree of a free edge is 719 at
+`d = 0` and 9 at `d = 0.5`. 30–82 % of routed hops currently cost zero similarity, so
+**the `(clip, d = 0)` control cell is itself defective and no `d` comparison run under
+the clip is interpretable** — including the historical one that rejected cosine
+(adjudication §2.5).
+
+Sequence: adopt the rank rescale, rebuild a clean control, verify that fewer than 30 %
+of routed hops sit at the ceiling, and only then sweep `d`. The clip arms are retained
+only as the byte-identity control described below, never as candidates for adoption.
 
 **Factor d (damping),** applied in log space:
 
@@ -309,14 +294,19 @@ score = rescale(raw)          # per factor R
 
 Two deliberate departures from roadmap C4's formula:
 
-- **No `2 · log(median_mass)` centring.** Under a rank transform it is a global additive
-  constant and therefore provably inert. It appears to matter only because of the clamp.
+- **No `2 · log(median_mass)` centring — but only because the rescale is a rank
+  transform.** Under a rank transform the term is a global additive constant and
+  provably inert (measured residual 3.55e-15, rank-identical). **Under the clip rescale
+  with a clamp it is mandatory, not optional:** dropping it clamps 78.67 % of edges at
+  `d = 0.25`, 99.98 % at `d = 0.5` — where `p99(raw) = 0.000` and the pipeline emits
+  `nan` — and 100 % at `d ≥ 0.75`. Adjudication §3.1–3.2. Any code path that combines
+  the clip with `d > 0` **must** keep the centring; the rank path must not bother.
 - **No clamp at 0.** Clamping collapses every edge below the threshold into a single tie
-  at the floor, then a single tie at the bottom of the rescale, then a uniform
-  `w_sim · (1 − 0) = 3.0` cost — the same tie-mass pathology as the ceiling defect,
-  mirrored. A rank transform handles negative values without help. If a floor is later
-  wanted, use NPMI (Bouma 2009), bounded in [−1, 1] and better behaved at small counts,
-  rather than raw clamping.
+  at the floor, then a uniform `w_sim · (1 − 0) = 3.0` cost — the same tie-mass pathology
+  as the ceiling defect, mirrored (30.62 % of edges tie at the floor at `d = 0.75`,
+  adjudication §3.3). A rank transform handles negative values without help. If a floor
+  is later wanted, use NPMI (Bouma 2009), bounded in [−1, 1] and better behaved at small
+  counts, rather than raw clamping.
 
 Naming what this is: `cooc / (mass_a^d · mass_b^d)` is the standard family — d = 0 raw,
 d = 0.5 cosine, d = 1 lift/PMI; in log space with a clamp it is PPMI, whose textbook
@@ -338,10 +328,22 @@ Determinism (spec §9) still holds within every arm: identical input, identical 
 
 ### B5. Grid
 
-Set by Step A's gate. The prior now points **upward** from roadmap C4's d ≈ 0.25 —
-cosine at 0.5 already reads well (§1.1), and the literature prior for context-distribution
-smoothing is ≈ 0.75. Expected shape is R ∈ {clip, percentile} × d ∈ {0, 0.5, 0.75, 1.0},
-with the exact grid fixed after A and recorded before any build runs.
+**Sequential, not factorial.** An earlier draft proposed R ∈ {clip, percentile} × d ∈
+{0, 0.5, 0.75, 1.0} with the centring dropped throughout — **three of those eight cells
+build a degenerate graph** (§B4). That grid is withdrawn.
+
+1. **Control:** `(clip, d = 0)`, byte-identical to today's artifact. Built once, to
+   anchor the comparison and prove the refactor changed nothing.
+2. **Rescale fix:** `(rank, d = 0)`. Adopt if it cuts ceiling hops below 30 % without
+   degrading decoded paths. This is the highest-confidence change in the phase.
+3. **Damping sweep, under the rank rescale only:** `d ∈ {0, 0.25, 0.5, 0.75}`, exact
+   points fixed after Step A and recorded before any build runs.
+
+Note the open hypothesis this ordering is designed to test: **once the rescale is fixed,
+`d` may matter far less than either source document assumed**, because both observed
+failure modes — the famous core at `d = 0` and the film-cast cliques at `d = 0.5` — were
+clip artefacts wearing different clothes. Falsified if rank-rescaled `d = 0` and
+`d = 0.5` still produce qualitatively different path failures (adjudication §7.7).
 
 ### B6. Deferred: the support axis
 
@@ -376,18 +378,25 @@ build runs. Holm correction across arms.
 
 ### B9. Adoption criterion
 
-Adopt a candidate only if **all four** hold:
+Adopt a candidate only if **all six** hold:
 
-1. Degree-controlled neighbour overlap (Adamic–Adar, geometric mean) improves over the
-   control, paired-significant.
-2. `hubfrac` moves toward the null **without** mean interior degree collapsing *below*
+1. Adamic–Adar (geometric mean over hops) improves over the control, paired-significant.
+2. The **overlap coefficient** improves too. A candidate that improves Adamic–Adar while
+   the overlap coefficient is flat or worse has moved along AA's measured +0.578
+   min-degree channel rather than genuinely improving, and is **not adopted**.
+3. `hubfrac` moves toward the null **without** mean interior degree collapsing *below*
    it. The lower guard is the explicit defence against the earlier failure, where an
-   anti-hub objective drove routing into the sparse periphery and produced incoherent
-   paths through unrelated artists.
-3. Hand-read paths show no junk hops.
-4. The **held-out** panel slice, untouched during analysis, reproduces (1) and (2).
+   anti-hub objective drove routing into the sparse periphery.
+4. **Ceiling hops below 30 %** — the fraction of routed hops at score 1.000. This is the
+   defect that made every prior comparison uninterpretable; a candidate that leaves it in
+   place has not fixed the thing that matters most.
+5. Hand-read decoded paths show no junk hops. **Not a formality and not delegable to the
+   metrics:** every overlap objective above scores the *La La Land* path well.
+6. The **held-out** panel slice, untouched during analysis, reproduces (1)–(4).
 
-Criterion 4 is what would have caught the earlier over-fit.
+Criteria 2, 4 and 6 are each traceable to a specific failure this project has already
+had — an objective gamed along an unmeasured axis, a defect invisible to the summary
+output, and an over-fit endorsed by the metrics it was tuned on.
 
 ### B10. Adoption
 
@@ -435,9 +444,13 @@ default.
   expression exactly; percentile rescale produces a uniform score distribution.
 - **Determinism:** the existing offline replay test (which injects a raising fetcher to
   prove `build_from_archive` never touches the network) must still pass unchanged.
-- **Evaluation unit tests:** `hubfrac`, Adamic–Adar, and Jaccard verified against a
-  hand-built toy graph with known values, including the endpoint-exclusion convention
-  and the empty-intersection case.
+- **Degeneracy guard:** a test asserting the pipeline never emits `nan` or an all-zero
+  score array for any `(rescale, d)` combination the config permits. Dropping the
+  centring under the clip rescale clamps 99.98 % of edges at `d = 0.5` and produces
+  `nan`; that must fail loudly at build time rather than silently shipping a null graph.
+- **Evaluation unit tests:** `hubfrac`, Adamic–Adar, the overlap coefficient, and Jaccard
+  verified against a hand-built toy graph with known values, including the
+  endpoint-exclusion convention and the empty-intersection case.
 - **Null model tests:** rewiring preserves the degree sequence exactly.
 - **Panel test:** loader fails loudly on an unresolvable MBID rather than skipping
   silently.
@@ -449,14 +462,18 @@ Snyk `snyk_code_scan` runs on the new and modified Python, per project conventio
 ## 8. Risks and open questions
 
 1. **Build wall-clock is unknown.** One 75k build from the archive has not been timed.
-   Eight arms could be minutes or hours; this decides serial versus parallel execution
+   Six builds could be minutes or hours; this decides serial versus parallel execution
    and is the first thing the plan must measure.
-2. **Step A may collapse Step B.** If the null model shows hub-seeking is topological,
-   damping is not the lever and Step B changes shape entirely. This is a feature of the
-   sequencing, not a risk to mitigate.
-3. **Disk.** Each 75k artifact is ~43 MB and `builder/scratch/` is gitignored; eight
-   arms is ~350 MB of untracked local state. Adopted artifacts must be identified by a
-   recorded checksum, since they cannot be committed.
+2. **The configuration-model null may reduce the damping sweep to a formality.** If it
+   shows hub-seeking is largely topological, no scoring change reaches it and Step B
+   narrows to adopting the rescale fix. A feature of the sequencing, not a risk to
+   mitigate — but the plan should not assume the sweep will happen.
+3. **Disk.** Each 75k artifact is ~43 MB and `builder/scratch/` is gitignored; six builds
+   is ~260 MB of untracked local state. Adopted artifacts must be identified by a
+   recorded checksum, since they cannot be committed. **Artifacts must also record the
+   commit that built them** — the confounded comparison in §1.1 happened because four
+   artifacts sat in one directory with no provenance and were compared as though they
+   differed in one variable.
 4. **`similarity_rescale` is a new public config knob.** Once the sweep concludes, the
    losing option should be deleted rather than left as a permanently supported mode.
 
@@ -472,9 +489,11 @@ weight retuning beyond the `w_jump = 0` control arm in §6.1; the support/shrink
 
 ## 10. References
 
+- **Quantitative record (cite this, do not restate it):**
+  `../findings/2026-07-21-scoring-adjudication.md`
 - Roadmap: `../plans/2026-07-21-alpha-rollout-roadmap.md`
-- Prior review and baseline: `../findings/2026-07-21-architecture-review-and-path-baseline.md`
-  (§4 to be corrected per A2)
+- Narrative history only — superseded for scoring and metrics:
+  `../findings/2026-07-21-architecture-review-and-path-baseline.md`
 - Original design: `2026-07-19-artist-path-alpha-design.md` (determinism, §9)
 - Adamic & Adar (2003); Liben-Nowell & Kleinberg (2007) — degree-discounted neighbourhood overlap
 - Levy, Goldberg & Dagan (TACL 2015) — context-distribution smoothing, shifted PPMI

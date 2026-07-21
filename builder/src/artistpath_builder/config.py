@@ -37,26 +37,29 @@ class BuilderConfig:
     #     sim(a,b) = cooc(a,b) / (mass(a) * mass(b)) ** similarity_damping
     # 0.0 = raw association strength (globally rescaled), 0.5 = full cosine.
     #
-    # UNDER REVIEW — 0.0 is NOT a settled default. Do not rely on this comment
-    # to justify leaving it alone.
+    # 0.0 is provisional. It is what the current graph was built with, not a
+    # value that has been shown correct.
     #
-    # This was set to 0.0 citing findings 2026-07-21 §4: "full cosine
-    # over-corrects, inflating rare co-occurrences so that tight niche clusters
-    # outscore genuine musical neighbours by ~6x". That evidence does not
-    # reproduce against the built artifacts. In graph-75k-cosine.bin the cited
-    # junk edge ranks 327/337 (score 0.0094) while Miles Davis -> Stan Getz
-    # ranks 15/337 (0.222) — a 24x gap in the opposite direction to the claim.
-    # The accompanying "2357 vs 277" figure has no source in version control.
-    # Findings §5.4 independently retracted the same conclusion.
+    # The rationale originally recorded here cited numbers that do not
+    # reproduce ("~6x", "2357 vs 277"). Its *conclusion* was nonetheless right:
+    # full cosine over-corrects. Routing on graph-75k-cosine.bin returns
+    # Miles Davis -> J. K. Simmons -> Hank Levy -> Justin Hurwitz ->
+    # Emma Stone, a film cast list. Raising this knob without fixing the
+    # rescale below trades one failure mode for another.
     #
-    # The measured defect is the p99 clip in pipeline.py, not this knob: 34,696
-    # edges saturate at exactly 1.0 and their destinations have a median
-    # out-degree of 719 against a graph median of 49, so similarity is free
-    # into the hub core. See specs/2026-07-21-phase2-path-quality-design.md
-    # §1.1-1.2, which schedules the sweep that decides this value.
+    # The primary defect is NOT this knob — it is the p99 clip in pipeline.py,
+    # which yields zero-cost edges in every build. Damping decides only where
+    # they point: median destination out-degree 719 at d=0 (the famous core),
+    # 9 at d=0.5 (micro-cliques). 30-82% of routed hops currently cost zero
+    # similarity. Fix the rescale first; this value is decided after that.
     #
-    # 0.0 is retained only because it is what the current graph was built with.
-    # It is not endorsed.
+    # NOTE: if this is ever raised above 0 while the clip rescale is still in
+    # use, the `- 2*log(median_mass)` centring term is MANDATORY. Without it,
+    # 78.7% of edges clamp to zero at d=0.25 and 99.98% at d=0.5, where the
+    # rescale emits nan. Under a rank rescale the term is inert.
+    #
+    # Full record: docs/superpowers/findings/2026-07-21-scoring-adjudication.md
+    # Design:      docs/superpowers/specs/2026-07-21-phase2-path-quality-design.md
     similarity_damping: float = 0.0
 
     # --- output ---------------------------------------------------------
