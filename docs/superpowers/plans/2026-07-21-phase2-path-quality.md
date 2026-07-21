@@ -667,9 +667,15 @@ def edge_score(store: GraphStore, u: int, v: int) -> float:
     return 0.0
 ```
 
-- [ ] **Step 5: Update the one existing caller**
+- [ ] **Step 5: Update the one existing caller — THROWAWAY, keep it minimal**
 
-In `api/eval/run_baseline.py`, `run_variant` currently passes `hub_threshold`. It is rewritten wholesale in Task 7; for now change line 69 so the suite stays green:
+> **`api/eval/run_baseline.py` is rewritten from scratch in Task 15 Step 1.**
+> Every line you touch here is discarded. Make the smallest change that keeps
+> the suite green — do not tidy this file, do not restructure it, do not add
+> tests for it. If it looks like it deserves better, that is what Task 15 is
+> for. (Task 15's rewrite is intentional, not a mistake to be reverted.)
+
+In `api/eval/run_baseline.py`, `run_variant` currently passes `hub_threshold`. Change line 69 so the suite stays green:
 
 ```python
             metrics.append(path_metrics(store, path, hub_threshold))
@@ -1158,6 +1164,23 @@ Run: `cd api && UV_LINK_MODE=copy uv run --extra dev pytest tests/test_badpath.p
 Expected: PASS, 7 passed
 
 - [ ] **Step 5: Calibrate against real known-bad and known-good paths**
+
+> **JUDGEMENT STEP — required reading first:**
+> `docs/superpowers/findings/2026-07-21-scoring-adjudication.md` **§4.3**
+> (why every overlap metric scores the *La La Land* path well) and **§2.3**
+> (the decoded path itself).
+>
+> Calibration is a two-sided target and both sides are load-bearing. The
+> temptation is to loosen thresholds until the known-bad path flags. Resist it:
+> a screen that fires on everything passes a one-sided check and is worthless
+> as adoption criterion 5. **Report the false-positive count on the good set
+> with every threshold you try, and stop at the loosest setting that still
+> separates them.**
+>
+> **If you cannot separate them at any threshold, stop and report that.** A
+> failed calibration is a real result — it means these three signals do not
+> capture the failure, and inventing a fourth to force a pass would be exactly
+> the objective-gaming this screen exists to prevent.
 
 Write a throwaway probe (in your scratch directory, **not** the repo):
 
@@ -2273,6 +2296,21 @@ Expected runtime: ~15–25 minutes (130 pairs × 4 routers at ~4 s/path, plus th
 
 - [ ] **Step 3: Interpret against the pre-registered decision rule**
 
+> **JUDGEMENT STEP — required reading first:**
+> `docs/superpowers/findings/2026-07-21-scoring-adjudication.md` **§5.3** (why
+> the walk null alone licenses the wrong inference) and **§6 claims 19–22**
+> (what this experiment is resolving).
+>
+> This step decides a question the committed record currently answers **both
+> ways**: findings §2 said hub-seeking is topological, §5.1 said it is caused by
+> the scoring. §2 was struck through on evidence that did not reproduce. Do not
+> assume §5.1 is therefore correct — that is the mistake that produced this
+> whole thread.
+>
+> **The decision rule below is pre-registered. Apply it to the numbers you get;
+> do not adjust it to fit them.** "Topological" is an acceptable and useful
+> answer that makes the rest of the phase cheaper.
+
 Write the interpretation **before** looking at further numbers:
 
 - **BFS-on-rewired hubfrac ≈ BFS-on-observed hubfrac** → hub-seeking is **topological**. The degree sequence alone explains it, no scoring change reaches it, findings §2 is reinstated, and the damping grid in Task 14 narrows to `d ∈ {0, 0.5}` as a confirmation rather than a search.
@@ -2642,6 +2680,21 @@ Implements spec §B4 precondition 2. The p99 clip yields zero-cost edges in ever
 - Consumes: `BuilderConfig`.
 - Produces: `rescale_scores(values: list[float], strategy: str, damping: float) -> list[float]` in `pipeline.py`; `BuilderConfig.similarity_rescale: str` with values `"p99_log_clip"` (current) and `"percentile_rank"`.
 
+> ### ⚠ This task and Task 14 are coupled. Do not reorder them.
+>
+> **Task 13 writes `rescale_scores` expecting RAW co-occurrence values.
+> Task 14 changes every caller to pass LOG-SPACE values**, and therefore
+> modifies the `p99_log_clip` branch to `expm1` its input back to raw space.
+>
+> That round-trip is exact only at `d = 0` — which is fine, because `d = 0` is
+> the only arm that uses the legacy rescale. But if Task 14 lands without that
+> change, the control arm silently applies `log1p` twice, byte-identity breaks,
+> and every downstream comparison is invalid.
+>
+> **Task 14 Step 5 re-runs this task's byte-identity check.** That gate is what
+> catches the mistake. Do not skip it, and do not "fix" a byte-identity failure
+> by relaxing the assertion.
+
 - [ ] **Step 1: Write the failing tests**
 
 ```python
@@ -2863,6 +2916,22 @@ Implements spec §B4 Factor d. Damping currently multiplies the raw score before
 - Consumes: `BuilderConfig.similarity_damping`, `BuilderConfig.similarity_rescale`.
 - Produces: `damped_strength(cooc, mass_a, mass_b, damping) -> float` in `pipeline.py`.
 
+> ### ⚠ Read before starting: this task breaks Task 13's assumption on purpose.
+>
+> Task 13 wrote `rescale_scores` expecting **raw co-occurrence** input. This
+> task makes every caller pass **log-space** values instead, because
+> `damped_strength` returns `log1p(cooc) − d·(…)`.
+>
+> **Step 4 therefore MUST change the `p99_log_clip` branch to `expm1` its input
+> back to raw space.** Skip it and the control arm applies `log1p` twice: the
+> scores change, byte-identity with `graph-75k-v3.bin` breaks, and every arm
+> comparison in Task 15 becomes uninterpretable — the exact class of error that
+> invalidated two prior analyses in this project.
+>
+> The `expm1`/`log1p` round-trip is exact only at `d = 0`. That is acceptable
+> because `d = 0` is the only arm using the legacy rescale; every damped arm
+> uses `percentile_rank`. **Step 5's byte-identity re-check is the gate.**
+
 - [ ] **Step 1: Write the failing tests**
 
 ```python
@@ -3046,7 +3115,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from artistpath_api.badpath import screen_path
 from artistpath_api.config import ApiConfig
-from artistpath_api.evaluation import hub_node_set, path_metrics, summarise
+from artistpath_api.evaluation import (
+    PathMetrics,
+    hub_node_set,
+    path_metrics,
+    summarise,
+)
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.pathfinding import find_path
 from diagnostics import artifact_diagnostics
@@ -3092,6 +3166,7 @@ def main() -> int:
 
     for router_name, cfg in (("full", full_cfg), ("w_jump_0", no_jump_cfg)):
         per_pair: list[dict] = []
+        metrics: list[PathMetrics] = []
         flagged = 0
         started = time.time()
         for stratum in AGGREGATED:
@@ -3107,6 +3182,7 @@ def main() -> int:
                 m = path_metrics(store, path, hub_nodes)
                 report = screen_path(store, path)
                 flagged += int(report.flagged)
+                metrics.append(m)
                 per_pair.append(
                     {
                         "stratum": stratum,
@@ -3118,17 +3194,7 @@ def main() -> int:
                 )
         output[router_name] = {
             "per_pair": per_pair,
-            "summary": summarise(
-                [
-                    dataclasses.replace(
-                        __import__("artistpath_api.evaluation", fromlist=["PathMetrics"]).PathMetrics(
-                            **{k: v for k, v in row.items()
-                               if k not in ("stratum", "from", "to", "flagged")}
-                        )
-                    )
-                    for row in per_pair
-                ]
-            ),
+            "summary": summarise(metrics),
             "flagged_paths": flagged,
             "seconds": round(time.time() - started, 1),
         }
@@ -3259,6 +3325,24 @@ cd api && PYTHONIOENCODING=utf-8 UV_LINK_MODE=copy uv run python eval/export_pat
 
 - [ ] **Step 6: Apply the adoption criterion**
 
+> ### 🛑 STOP — human decision point. Do not decide this autonomously.
+>
+> **Required reading:** `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`
+> **§4.3** (overlap metrics are blind to the failure mode), **§6** (27 prior
+> claims and their status), and **§7** (what follows for Phase 2).
+>
+> Present the evidence and the recommendation to the user; **do not adopt an
+> arm without their confirmation.** This project has twice adopted a change on
+> metrics that later proved wrong — once endorsing a router that routed through
+> a MusicBrainz editor account, once rejecting the scoring that was actually
+> better. Both passed a metrics check.
+>
+> Three things that must not happen here:
+> - **Do not relax a criterion to produce a winner.** All six or no adoption.
+> - **Do not treat criterion 5 as a formality.** Read the exported paths. Every
+>   overlap objective scores the *La La Land* chain well.
+> - **Do not report a criterion as met without the number that shows it.**
+
 A candidate is adopted only if **all six** hold (spec §B9):
 
 1. Adamic–Adar improves over control, paired-significant after Holm.
@@ -3357,4 +3441,25 @@ git commit -m "feat: adopt Phase 2 scoring; regenerate fixtures"
 
 **Deliberately not implemented:** §B6 (support/shrinkage axis) and §B6a (external popularity anchor) are marked deferred in the spec and are out of scope here.
 
-**Known sharp edge.** Task 14 Step 4 changes `rescale_scores`'s `p99_log_clip` branch to `expm1` its input, because Task 13 wrote that branch expecting raw values while Task 14 makes every caller pass log-space values. That round-trip is exact only at `d = 0`, which is the only arm using the legacy rescale — but the two tasks must not be reordered, and Task 14 Step 5's byte-identity re-check is what catches it if they are.
+**Known sharp edge.** Task 14 Step 4 changes `rescale_scores`'s `p99_log_clip` branch to `expm1` its input, because Task 13 wrote that branch expecting raw values while Task 14 makes every caller pass log-space values. That round-trip is exact only at `d = 0`, which is the only arm using the legacy rescale — but the two tasks must not be reordered, and Task 14 Step 5's byte-identity re-check is what catches it if they are. **This warning is repeated inside both Task 13 and Task 14**, because a worker executing one task in isolation will not read this section.
+
+## Execution notes
+
+**Three steps are judgement, not implementation**, and each carries a required-reading block naming the sections of the adjudication that must be read first:
+
+| Step | Decision | Autonomy |
+|---|---|---|
+| Task 5 Step 5 | Bad-path detector calibration | Delegable. Report thresholds *and* the false-positive count. A failed calibration is a valid result — do not invent a signal to force a pass. |
+| Task 10 Step 3 | Topological vs scoring-caused hub-seeking | Delegable against the pre-registered rule. Do not adjust the rule to fit the numbers. |
+| **Task 15 Step 6** | **Which arm to adopt** | **Human decision. Present evidence, do not adopt without confirmation.** |
+
+**Gates that stop work rather than warn** — none of these may be relaxed to proceed:
+
+- Task 12 Step 8 — mutual k-NN must retain ≥90 % of artists.
+- Task 13 Step 7 and Task 14 Step 5 — the control arm must be byte-identical to `graph-75k-v3.bin` with `filter_special_purpose=False`.
+- Task 5 Step 5 — the detector must separate known-bad from known-good.
+- Task 15 Step 7 — the held-out slice must reproduce criteria 1–4.
+
+**`api/eval/run_baseline.py` is rewritten wholesale in Task 15 Step 1.** Task 3 Step 5 patches it only to keep the suite green; that work is discarded by design.
+
+**Task 1 Step 7 measures a real 75k build.** Everything about how Task 15 is scheduled depends on that number, so it is not optional and cannot be estimated.
