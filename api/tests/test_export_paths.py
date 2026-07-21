@@ -38,6 +38,43 @@ def test_render_html_is_self_contained():
     assert "http://" not in html and "https://" not in html
 
 
+def test_render_html_escapes_hostile_artist_names():
+    # Artist names are arbitrary third-party MusicBrainz data — nothing stops
+    # one from containing markup. Prove render_html neutralises it rather than
+    # just checking the escaped form shows up somewhere in the output.
+    hostile = "<script>alert(\"x\")&'</script>"
+    rows = [
+        {
+            "pair": f"{hostile} -> C",
+            "cells": [
+                {
+                    "label": hostile,
+                    "hops": [
+                        {"name": hostile, "rank": None, "score": None, "degree": 2},
+                        {"name": "C", "rank": 1, "score": 0.4, "degree": 2},
+                    ],
+                    "flagged": True,
+                    "reasons": [f"non-musical interior entity: '{hostile}'"],
+                }
+            ],
+        }
+    ]
+    out = render_html(
+        artifacts=[{"label": hostile, "diagnostics": {hostile: hostile}}],
+        panel_name=hostile,
+        rows=rows,
+    )
+    # The raw hostile string must never appear unescaped anywhere in the page —
+    # not as a live <script> tag, not in an attribute, not in a text node.
+    assert "<script>alert(\"x\")&'</script>" not in out
+    assert "<script>" not in out
+    # Every dangerous character must have been converted to its entity form.
+    assert "&lt;script&gt;" in out
+    assert "&amp;" in out
+    assert "&#x27;" in out
+    assert "&quot;" in out
+
+
 def test_render_html_marks_ceiling_hops_and_flagged_paths():
     rows = [
         {
