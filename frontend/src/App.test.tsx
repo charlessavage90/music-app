@@ -1,7 +1,12 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 
-test('renders the app root', () => {
-  render(<App />);
-  expect(screen.getByTestId('app-root')).toBeInTheDocument();
+test('landing page renders at root', () => {
+  render(
+    <MemoryRouter initialEntries={['/']}>
+      <App />
+    </MemoryRouter>,
+  );
+  expect(screen.getByRole('heading', { name: /artist path/i })).toBeInTheDocument();
 });

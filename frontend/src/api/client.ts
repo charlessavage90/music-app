@@ -3,9 +3,11 @@ import type { Artist, Exclusion, Track } from './types';
 const BASE = import.meta.env.VITE_API_BASE ?? '/api';
 
 export class ApiError extends Error {
-  constructor(public status: number) {
+  status: number;
+  constructor(status: number) {
     super(`API error ${status}`);
     this.name = 'ApiError';
+    this.status = status;
   }
 }
 
