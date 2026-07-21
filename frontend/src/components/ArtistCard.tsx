@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useClip } from '@/hooks/useClip';
 import type { Artist, BypassReason } from '@/api/types';
 
@@ -6,11 +7,18 @@ interface Props {
   isPlaying: boolean;
   onPlay: (mbid: string) => void;
   onBypass: (mbid: string, reason: BypassReason) => void;
+  onClipResolved?: (mbid: string, url: string | null) => void;
 }
 
-export function ArtistCard({ artist, isPlaying, onPlay, onBypass }: Props) {
+export function ArtistCard({ artist, isPlaying, onPlay, onBypass, onClipResolved }: Props) {
   const clip = useClip(artist.mbid);
   const playable = clip.status === 'ready';
+
+  useEffect(() => {
+    if (clip.status === 'loading') return;
+    onClipResolved?.(artist.mbid, clip.track?.previewUrl ?? null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clip.status]);
 
   return (
     <div
