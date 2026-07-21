@@ -19,3 +19,5 @@ api/dist/
 
 # Visual brainstorm companion
 .superpowers/
+api/eval/baseline-results.txt
+api/scratch_server.log
