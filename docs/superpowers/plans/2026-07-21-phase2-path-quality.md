@@ -238,7 +238,7 @@ Expected: PASS, 69 passed (66 existing + 3 new)
 Run:
 ```bash
 cd builder && UV_LINK_MODE=copy uv run artistpath-build build \
-  --archive-dir ./archive --out scratch/graph-timing-probe.bin
+  --archive-dir ./scratch/graph-archive --out scratch/graph-timing-probe.bin
 ```
 Record the logged elapsed time by writing it to **`builder/scratch/BUILD-TIMING.txt`** (gitignored, and the same directory the artifacts land in):
 
@@ -2659,7 +2659,7 @@ from artistpath_builder.pipeline import build_from_archive
 from pathlib import Path
 for strategy in ('pre_symmetrise', 'mutual_knn'):
     cfg = BuilderConfig(cap_strategy=strategy)
-    g = build_from_archive(cfg, LocalArchive(Path('./archive')), ListenBrainzSource(cfg))
+    g = build_from_archive(cfg, LocalArchive(Path('./scratch/graph-archive')), ListenBrainzSource(cfg))
     print(f'{strategy:16s} artists={g.artist_count:,} edges={g.edge_count:,}')
 "
 ```
@@ -2871,7 +2871,7 @@ Expected: PASS, all tests
 
 ```bash
 cd builder && UV_LINK_MODE=copy uv run artistpath-build build \
-  --archive-dir ./archive --out scratch/graph-control.bin
+  --archive-dir ./scratch/graph-archive --out scratch/graph-control.bin
 python -c "
 import hashlib, pathlib
 a = hashlib.sha256(pathlib.Path('scratch/graph-control.bin').read_bytes()).hexdigest()
@@ -2894,7 +2894,7 @@ from artistpath_builder.artifact import serialise
 from pathlib import Path
 import hashlib
 cfg = BuilderConfig(filter_special_purpose=False)
-g = build_from_archive(cfg, LocalArchive(Path('./archive')), ListenBrainzSource(cfg))
+g = build_from_archive(cfg, LocalArchive(Path('./scratch/graph-archive')), ListenBrainzSource(cfg))
 print(hashlib.sha256(serialise(g)).hexdigest())
 print(hashlib.sha256(Path('scratch/graph-75k-v3.bin').read_bytes()).hexdigest())
 "
@@ -3251,7 +3251,7 @@ from pathlib import Path
 import time
 cfg = BuilderConfig(cap_strategy='$cap', similarity_rescale='$rescale', similarity_damping=$damping)
 t = time.monotonic()
-g = build_from_archive(cfg, LocalArchive(Path('./archive')), ListenBrainzSource(cfg))
+g = build_from_archive(cfg, LocalArchive(Path('./scratch/graph-archive')), ListenBrainzSource(cfg))
 payload = serialise(g)
 out = Path('scratch/graph-$name.bin')
 out.write_bytes(payload)
