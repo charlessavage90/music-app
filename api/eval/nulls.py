@@ -59,9 +59,11 @@ def configuration_model_rewire(
     by construction. Swaps producing a self-loop or a duplicate edge are
     rejected and retried, which is what keeps the result a simple graph.
 
-    Scores are carried along with their edges. They are meaningless in the
-    rewired graph — that is intentional. This null is for the score-free
-    question of whether the DEGREE SEQUENCE alone explains hub-seeking.
+    The original similarity scores are discarded, not carried along:
+    `_store_from_edges` fills every rewired edge with a uniform constant
+    placeholder instead. That is intentional — scores are meaningless once
+    edge endpoints are randomised. This null is for the score-free question
+    of whether the DEGREE SEQUENCE alone explains hub-seeking.
     """
     # Undirected edge list: keep u < v so each edge appears once.
     us, vs = [], []

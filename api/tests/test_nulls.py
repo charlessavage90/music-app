@@ -21,6 +21,31 @@ def _ring_with_hub():
     )
 
 
+def _hub_and_ring():
+    """A genuine hub (node 0, degree 6) plus a disjoint 5-node ring.
+
+    Node 0 ("A") is a spoke centre for six degree-1 leaves ("B"-"G"). Nodes
+    "H"-"L" form a separate 5-cycle at degree 2 each. Unlike `_ring_with_hub`,
+    this fixture has a real degree spread (1, 2, 6) so degree-sequence
+    preservation is checked on something other than a degree-regular graph.
+    Eleven edges is enough that most spoke/ring edge pairs are legal
+    double-edge swaps (a spoke and a ring edge never share an endpoint and a
+    swap between them can never collide with an existing edge), so the swap
+    loop does real work rather than hitting the `m < 2` early return.
+    """
+    return make_store(
+        names=list("ABCDEFGHIJKL"),
+        popularity=[0.5] * 12,
+        undirected_edges=[
+            # Six spokes: hub A (node 0) to leaves B-G (nodes 1-6).
+            (0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9),
+            (0, 4, 0.9), (0, 5, 0.9), (0, 6, 0.9),
+            # A separate 5-cycle: H-I-J-K-L-H (nodes 7-11).
+            (7, 8, 0.9), (8, 9, 0.9), (9, 10, 0.9), (10, 11, 0.9), (11, 7, 0.9),
+        ],
+    )
+
+
 def test_degree_biased_walk_returns_requested_length():
     store = _ring_with_hub()
     rng = np.random.default_rng(0)
@@ -67,3 +92,23 @@ def test_rewire_is_deterministic_under_a_fixed_seed():
     a = configuration_model_rewire(store, np.random.default_rng(11))
     b = configuration_model_rewire(store, np.random.default_rng(11))
     assert np.array_equal(a.neighbours, b.neighbours)
+
+
+def test_rewire_preserves_the_degree_sequence_on_a_graph_with_a_real_hub():
+    # Degree sequence by node index, read off the edge list in _hub_and_ring:
+    # A(0) has 6 spokes; B-G(1-6) have 1 edge each (their spoke); H-L(7-11)
+    # each sit in the 5-cycle, so degree 2 each.
+    expected = [6, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+    store = _hub_and_ring()
+    rng = np.random.default_rng(7)
+    rewired = configuration_model_rewire(store, rng)
+    assert list(np.diff(rewired.offsets)) == expected
+
+
+def test_rewire_produces_no_self_loops_on_a_graph_with_a_real_hub():
+    store = _hub_and_ring()
+    rng = np.random.default_rng(7)
+    rewired = configuration_model_rewire(store, rng)
+    for u in range(rewired.artist_count):
+        start, end = int(rewired.offsets[u]), int(rewired.offsets[u + 1])
+        assert u not in rewired.neighbours[start:end]
