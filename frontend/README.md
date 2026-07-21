@@ -1,32 +1,46 @@
-# React + TypeScript + Vite
+# artistpath web frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + Vite + TypeScript SPA for the artist-path app. Implements the
+Stage 3a spec (`docs/superpowers/specs/2026-07-20-stage3-web-frontend-design.md`).
 
-Currently, two official plugins are available:
+A vertical "journey" of artist cards between two chosen artists: each card has
+artwork, a 30-second clip with sequential autoplay, and two bypass controls
+("not for me" / "know them already") that reroll the whole path. All path state
+lives in the URL (`/path/:from/:to?dislike=…&known=…`), so paths are shareable
+and Back undoes a bypass.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Two-process dev loop
 
-## React Compiler
+The frontend proxies `/api` to the Python API. Run both:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Terminal 1 — API** (from `api/`, against the 5k graph):
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
+  uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+> On Windows under OneDrive, prefix `uv` commands with `UV_LINK_MODE=copy`.
+
+**Terminal 2 — web** (from `frontend/`):
+
+```bash
+npm run dev
+```
+
+Open the URL Vite prints (default http://localhost:5173).
+
+## Configuration
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `VITE_API_BASE` | `/api` | API base path used by the client. Leave as `/api` for the proxied dev setup. |
+| `VITE_API_PROXY` | `http://localhost:8000` | Where the dev server proxies `/api` (dev only). |
+
+## Testing
+
+```bash
+npm test          # unit + component (Vitest)
+npm run build     # typecheck (tsc) + production build
+npm run test:e2e  # Playwright (needs the API running on :8000)
+```
