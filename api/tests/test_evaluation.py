@@ -103,3 +103,90 @@ def test_summarise_aggregates_hub_rate():
     s = summarise([hub, no_hub])
     assert s["n"] == 2
     assert s["hub_traversal_rate"] == 0.5
+
+
+import math
+
+import numpy as np
+
+from artistpath_api.evaluation import (
+    adamic_adar,
+    common_neighbours,
+    geometric_mean,
+    jaccard,
+    neighbours_array,
+    overlap_coefficient,
+)
+
+
+def _triangle_with_hub():
+    # 0 and 1 are adjacent and share two common neighbours: 2 (degree 2) and
+    # 3 (degree 4, a hub). Node 3 also links 4 and 5 to inflate its degree.
+    return make_store(
+        names=list("ABCDEF"),
+        popularity=[0.5] * 6,
+        undirected_edges=[
+            (0, 1, 0.9),
+            (0, 2, 0.9), (1, 2, 0.9),
+            (0, 3, 0.9), (1, 3, 0.9),
+            (3, 4, 0.9), (3, 5, 0.9),
+        ],
+    )
+
+
+def test_neighbours_array_is_sorted_and_excludes_self():
+    store = _triangle_with_hub()
+    assert list(neighbours_array(store, 0)) == [1, 2, 3]
+
+
+def test_common_neighbours_excludes_the_two_endpoints():
+    # 0 and 1 are each other's neighbours, but neither is a *common* neighbour.
+    store = _triangle_with_hub()
+    assert list(common_neighbours(store, 0, 1)) == [2, 3]
+
+
+def test_adamic_adar_discounts_the_hub():
+    # AA = 1/log(deg 2) + 1/log(deg 4) = 1/log(2) + 1/log(4).
+    store = _triangle_with_hub()
+    expected = 1 / math.log(2) + 1 / math.log(4)
+    assert adamic_adar(store, 0, 1) == pytest.approx(expected, rel=1e-9)
+    # The hub contributes strictly less than the low-degree node — the whole point.
+    assert 1 / math.log(4) < 1 / math.log(2)
+
+
+def test_overlap_coefficient_divides_by_the_smaller_degree():
+    # |CN| = 2; deg(0) = 3, deg(1) = 3; min = 3.
+    store = _triangle_with_hub()
+    assert overlap_coefficient(store, 0, 1) == pytest.approx(2 / 3, rel=1e-9)
+
+
+def test_jaccard_uses_union_including_the_endpoints():
+    # N(0) = {1,2,3}, N(1) = {0,2,3}. Intersection {2,3} = 2; union {0,1,2,3} = 4.
+    store = _triangle_with_hub()
+    assert jaccard(store, 0, 1) == pytest.approx(2 / 4, rel=1e-9)
+
+
+def test_metrics_are_zero_when_no_common_neighbours():
+    store = make_store(
+        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
+    )
+    assert list(common_neighbours(store, 0, 1)) == []
+    assert adamic_adar(store, 0, 1) == 0.0
+    assert overlap_coefficient(store, 0, 1) == 0.0
+    assert jaccard(store, 0, 1) == 0.0
+
+
+def test_adamic_adar_skips_degree_one_common_neighbours():
+    # log(1) = 0 would divide by zero. A degree-1 node cannot be a common
+    # neighbour of two distinct nodes, but the guard must exist regardless.
+    store = _triangle_with_hub()
+    assert math.isfinite(adamic_adar(store, 0, 1))
+
+
+def test_geometric_mean_is_robust_to_a_single_zero():
+    # A plain product would collapse to 0; the epsilon floor keeps it finite
+    # and ordered, so one bad hop does not erase the rest of the path.
+    assert geometric_mean([1.0, 1.0, 1.0]) == pytest.approx(1.0)
+    assert geometric_mean([4.0, 1.0]) == pytest.approx(2.0)
+    assert 0.0 < geometric_mean([1.0, 0.0]) < 1.0
+    assert geometric_mean([]) == 0.0

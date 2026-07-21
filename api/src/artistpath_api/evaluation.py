@@ -13,6 +13,7 @@ these over a frozen panel of artist pairs.
 from __future__ import annotations
 
 import heapq
+import math
 from collections import deque
 from dataclasses import dataclass
 
@@ -37,6 +38,94 @@ def edge_score(store: GraphStore, u: int, v: int) -> float:
         if nb == v:
             return float(score)
     return 0.0
+
+
+# Common-neighbour overlap floors at this value before log-space aggregation,
+# so one zero-overlap hop cannot erase an entire path's score. Measured
+# zero-rate on the 75k graph is 0.7% (adjudication §4.3).
+_GEO_EPSILON = 1e-6
+
+
+def neighbours_array(store: GraphStore, node: int) -> np.ndarray:
+    """This node's neighbour ids as a sorted int32 view over the CSR row.
+
+    graph.py sorts each CSR row by destination id at build time, so this is
+    already sorted and needs no copy — which is what lets the set operations
+    below run in O(d_u + d_v) with no Python sets.
+    """
+    start, end = int(store.offsets[node]), int(store.offsets[node + 1])
+    return store.neighbours[start:end]
+
+
+def common_neighbours(store: GraphStore, u: int, v: int) -> np.ndarray:
+    """Neighbours shared by u and v, excluding u and v themselves.
+
+    Endpoint convention (spec §B1): for an *adjacent* pair, u is always in
+    N(v) and v is always in N(u), while u is never in N(u). Left in, the two
+    endpoints would inflate every adjacent pair's overlap by a constant that
+    varies with degree. They are excluded here and included in the union for
+    `jaccard`, which is the conventional definition.
+    """
+    shared = np.intersect1d(
+        neighbours_array(store, u), neighbours_array(store, v), assume_unique=True
+    )
+    return shared[(shared != u) & (shared != v)]
+
+
+def adamic_adar(store: GraphStore, u: int, v: int) -> float:
+    """Sum of 1/log(degree) over common neighbours.
+
+    The primary objective. Overlap through a hub counts for little; overlap
+    through an obscure artist counts for a lot — which is the property raw
+    Jaccard lacks (it correlates -0.639 with max-degree, adjudication §4.1).
+    """
+    total = 0.0
+    for w in common_neighbours(store, u, v):
+        degree = out_degree(store, int(w))
+        if degree > 1:  # log(1) == 0
+            total += 1.0 / math.log(degree)
+    return total
+
+
+def overlap_coefficient(store: GraphStore, u: int, v: int) -> float:
+    """|N(u) & N(v)| / min(deg u, deg v) — the degree-neutrality guard.
+
+    Adamic-Adar is flat in max-degree but couples to min-degree at Spearman
+    +0.578, a measured channel an optimiser could exploit. This is near-neutral
+    on both axes and is the control for that channel (adjudication §4.2-4.3).
+    Report both; never adopt on Adamic-Adar alone.
+    """
+    smaller = min(out_degree(store, u), out_degree(store, v))
+    if smaller == 0:
+        return 0.0
+    return len(common_neighbours(store, u, v)) / smaller
+
+
+def jaccard(store: GraphStore, u: int, v: int) -> float:
+    """|N(u) & N(v)| / |N(u) | N(v)| — DIAGNOSTIC ONLY.
+
+    Retained so its redundancy stays visible in the results table, not as an
+    objective. It is structurally bounded by min(d_u,d_v)/max(d_u,d_v), so it
+    is a near-deterministic function of max_interior_degree rather than an
+    independent check (adjudication §4.1).
+    """
+    union = np.union1d(neighbours_array(store, u), neighbours_array(store, v))
+    if union.size == 0:
+        return 0.0
+    return len(common_neighbours(store, u, v)) / union.size
+
+
+def geometric_mean(values: list[float]) -> float:
+    """Geometric mean with an epsilon floor.
+
+    Aggregation for per-hop overlap. A bottleneck (min) over 7-9 hops is
+    dominated by one noisy node; a plain product collapses to zero on any
+    single zero-overlap hop. The floor keeps the ordering meaningful.
+    """
+    if not values:
+        return 0.0
+    logs = [math.log(max(v, _GEO_EPSILON)) for v in values]
+    return math.exp(sum(logs) / len(logs))
 
 
 @dataclass(frozen=True, slots=True)
