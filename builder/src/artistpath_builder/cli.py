@@ -16,6 +16,7 @@ import dataclasses
 import json
 import logging
 import sys
+import time
 from pathlib import Path
 
 from artistpath_builder.archive import LocalArchive, S3Archive
@@ -23,6 +24,7 @@ from artistpath_builder.artifact import deserialise, serialise
 from artistpath_builder.config import BuilderConfig
 from artistpath_builder.crawl import Crawler, http_fetcher
 from artistpath_builder.fixture import extract_fixture
+from artistpath_builder.manifest import build_manifest, write_manifest
 from artistpath_builder.pipeline import build_from_archive
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 from artistpath_builder.sources.seeds import (
@@ -102,17 +104,22 @@ def cmd_crawl(args) -> int:
 
 def cmd_build(args) -> int:
     config = _config(args)
+    started = time.monotonic()
     graph = build_from_archive(config, _archive(args), ListenBrainzSource(config))
     payload = serialise(graph)
-    Path(args.out).write_bytes(payload)
+    elapsed = time.monotonic() - started
+    out = Path(args.out)
+    out.write_bytes(payload)
+    write_manifest(out, build_manifest(graph, config, payload, elapsed))
     mean_edges = graph.edge_count / graph.artist_count if graph.artist_count else 0
     logging.info(
-        "wrote %s: %d artists, %d edges (%.1f per artist), %.1f MB",
+        "wrote %s: %d artists, %d edges (%.1f per artist), %.1f MB, %.0fs",
         args.out,
         graph.artist_count,
         graph.edge_count,
         mean_edges,
         len(payload) / 1e6,
+        elapsed,
     )
     return 0
 
