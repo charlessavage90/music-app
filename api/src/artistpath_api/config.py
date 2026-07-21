@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass(frozen=True, slots=True)
@@ -31,6 +31,20 @@ class ApiConfig:
 
     # --- search ---------------------------------------------------------
     search_limit: int = 10
+
+    # --- CORS (stage 3a) ------------------------------------------------
+    # Allowed browser origins for the SPA. Dev default is the Vite server;
+    # production sets ARTISTPATH_CORS_ORIGINS (comma-separated) to the
+    # deployed frontend origin. Not needed when the SPA is proxied same-origin.
+    cors_origins: tuple[str, ...] = field(
+        default_factory=lambda: tuple(
+            o.strip()
+            for o in os.environ.get(
+                "ARTISTPATH_CORS_ORIGINS", "http://localhost:5173"
+            ).split(",")
+            if o.strip()
+        )
+    )
 
     # --- clips ----------------------------------------------------------
     deezer_search_url: str = "https://api.deezer.com/search"

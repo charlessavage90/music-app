@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import httpx
 from fastapi import FastAPI, HTTPException, Response
+from fastapi.middleware.cors import CORSMiddleware
 
 from artistpath_api.clips import (
     ClipResolver, DynamoClipCache, InMemoryClipCache,
@@ -36,6 +37,13 @@ def create_app(
     cfg: ApiConfig,
 ) -> FastAPI:
     app = FastAPI(title="Artist Path API")
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=list(cfg.cors_origins),
+        allow_methods=["GET", "POST"],
+        allow_headers=["content-type"],
+    )
 
     def artist_out(node: int) -> ArtistOut:
         return ArtistOut(
