@@ -519,3 +519,86 @@ The session that produced the analysis is **not** running the test. It knows whi
 is which and authored the analysis the test may overturn. A session knowing only "serve
 these two files, hand over two URLs" is structurally cleaner — this is about the integrity
 of the owner's ear, not about that session's conduct. Handover: `2026-07-22-HANDOFF-blind-test.md` (committed; `.superpowers/` is gitignored).
+
+---
+
+## 16. Task 15 blind listening test — RESULT (2026-07-22)
+
+Executed per `docs/superpowers/2026-07-22-HANDOFF-blind-test.md` by a session held
+deliberately blind: it read the handoff, Part C and Part D of `session-start`, and
+nothing else. It did **not** read the sweep findings, adjudication claims 41–45, or §15
+of this log before the verdict below was written and committed. That ordering was the
+owner's instruction, so that the recorded wording could not be shaded by knowing what
+it implied.
+
+### Mapping (randomised before serving, unblinded only after the verdict)
+
+| Frontend | API | Arm | sha256 |
+|---|---|---|---|
+| `localhost:5175` | `:8000` | **`d025`** | `2811e87d1c900e4ec233317c05143ccaec5a3f0e1fb3c531c04455594bb27e65` |
+| `localhost:5174` | `:8001` | **`capfix`** | `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237` |
+
+Both checksums verified against the file and its manifest sidecar before serving. The
+URLs were presented to the owner in randomised order (5174 first), because he held a
+prior from the Task 0 test about which port had won there.
+
+**Differential check passed before handover**: the same query (Miles Davis → Daft Punk)
+returned paths of length 5 and 8 with different mbid sequences across the two stacks, so
+the two stacks were demonstrably serving different artifacts and not one artifact against
+itself.
+
+### Verdict: `capfix` (served on 5174)
+
+The owner's report, **verbatim**:
+
+> Here is my feedback, sessions identified by port number. In general, both sessions did seem to include a lot of hubs, but there is a detectable difference, and it becomes most noticeable when using the bypass feature. My gut tells me to some extent, this is expected. The first path is most likely to route through hubs / well-known artists, but using either bypass *should* result in more "creative" routes that involve less well-known artists and require a longer path (more steps). I'll pause here and say that these conclusions are my gut instinct, not data-driven, but I'd also say that this is desired behavior and replicates to some degree the original boilthefrog product behavior. With that stated, here is my specific feedback:
+> 5174 feels like the superior option based on the experience. A good example to look at is The Shins pathed to System of a Down.
+>
+> 5174 produced a 6 artist path. After 4 bypasses, the path length started to grow to 6 length. After 7 bypasses, it jumped to 11. 9 bypasses reduced the path length back to 8, but started to show me artists I was unfamiliar with.
+>
+> Same start and end, 5175 produced a 4 artist path, and length didn't change until the 7th bypass, which only lengthened to 5. The next several bypasses only swapped out the artist that I bypassed, keeping the rest of the path the same, and just swapping the one well-known artist for another well-known artist. I pushed it further and further, and really at no point did the path avoid well-known artists or lengthen beyond 7 artists.
+>
+> I recognize the above feedback focuses on bypass. I don't know if there is any bias built into focusing on that area, so I also ran several paths and avoided using bypass. Some challenges in truly testing here because some examples of obscure artists that I know of weren't found in the system (e.g. Bee Caves) and using obscure artists that I *don't* know well creates a challenge where it's hard for me to tell how good the path is (Chinese Pianist Lang Lang is a good example of an obscure artist that I had a hard time evaluating).
+>
+> Routing Orville Peck to Kendrick Lamar produced pretty similar paths:
+> http://localhost:5174/path/437b356d-88f1-4dde-af5e-dec1c9d7dde4/381086ea-f511-4aba-bdf9-71c753dc5077
+> http://localhost:5175/path/437b356d-88f1-4dde-af5e-dec1c9d7dde4/381086ea-f511-4aba-bdf9-71c753dc5077
+>
+> Routing Young Gun Silver Fox to Gorguts also produced seemingly fairly similar paths:
+> http://localhost:5174/path/2e111d6d-fce9-46ff-b33a-7eed7300f9d4/a95ef44c-aeda-4222-9d57-10b28240e634
+> http://localhost:5175/path/2e111d6d-fce9-46ff-b33a-7eed7300f9d4/a95ef44c-aeda-4222-9d57-10b28240e634
+>
+> Routing Young Gun Silver Fox to Tony Williams was the best example I could find where the first generated path had real differences:
+> http://localhost:5174/path/2e111d6d-fce9-46ff-b33a-7eed7300f9d4/b6a30b58-6b00-47c4-a031-c62a6981461f
+> http://localhost:5175/path/2e111d6d-fce9-46ff-b33a-7eed7300f9d4/b6a30b58-6b00-47c4-a031-c62a6981461f
+>
+> I'm not familiar with Tony Williams, so it's hard to say for sure which artists within this path (on his side) are considered hubs. 5174 had a longer path that included several names I'm familiar with (Sinatra, Ray Charles), but also several artists on the Young Gun side that I don't think are as well known. 5175 produced a shorter path, that routed through Vulfpeck. My own music tastes may bias me, but to me Vulfpeck feels like a hub, and this path seems to transition faster to hubs (tricky because it's shorter)
+>
+> Summarizing a lot of "thinking out loud", my gut tells me 5174 is superior, but the conclusion is less directly related to the number of hubs found, and more drawn from the overall experience of generating paths, what the paths look like, and how the bypass function changes the paths. Hubs still appear quite frequently in both
+
+Translating ports to arms, and nothing else: **the owner preferred `capfix` over `d025`.**
+
+### Notes recorded alongside the verdict
+
+- The verdict is explicitly **not** a hub-count judgement. The owner states hubs appear
+  frequently in both arms, and that his preference derives from bypass behaviour and
+  overall path experience rather than from hub incidence.
+- The **discriminating channel was bypass**, not the first generated path. On three
+  no-bypass A/B comparisons he judged the arms similar (Orville Peck → Kendrick Lamar;
+  Young Gun Silver Fox → Gorguts) with one showing real differences (Young Gun Silver
+  Fox → Tony Williams). This is a channel the sweep did not measure and the test was not
+  designed around; it emerged from use.
+- The owner **volunteered a prior mid-report** — that first paths *should* favour hubs and
+  that bypass *should* lengthen paths and reach less-known artists, citing boilthefrog as
+  the reference behaviour. He flagged this himself as gut instinct rather than data, and
+  flagged the possible bias of concentrating on bypass. Recorded as stated; not adjudicated
+  here.
+- **Coverage limits he raised**: some obscure artists are absent from the graph (e.g. Bee
+  Caves), and obscure artists he does not know well (e.g. Lang Lang) are hard for him to
+  evaluate. Both bound how far a listening test can probe the obscure tail.
+- The pre-registered known limitation — that the arms differ in edge structure and a
+  determined search could distinguish them — was disclosed to the owner up front. He did
+  not report having identified the arms.
+
+**Run once. This result stands.** Per the handoff and §15, a second listening test is
+forbidden regardless of what the metrics say.
