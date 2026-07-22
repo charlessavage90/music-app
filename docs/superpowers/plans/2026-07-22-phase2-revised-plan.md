@@ -383,15 +383,49 @@ not repeat it.** Otherwise as written, with eight amendments:
      the existing null does not describe it and the comparison is ill-posed rather than
      failed. Measure BFS on each arm — cheap — and compare each router to its own graph's
      null.
-   - **Criterion 3's degree-collapse clause is retired, not waived.** It guarded against a
-     variant winning `hubfrac` by compressing its degree distribution. Under `mutual_knn`
-     degree is bounded by construction, so the measurement carries no information for any
-     arm from 2 onward — it reports the cap, not the routing. Its protective purpose is
-     already served by the **MBID-frozen hub set anchored on `control`**, which makes it
-     impossible for any variant to win by redefining who counts as a hub.
+   - **Criterion 3's degree-collapse clause is retired and replaced, not waived.** Under
+     `mutual_knn` degree is bounded by construction, so across arms 3–6 the clause varies
+     only within a capped band: it reports the cap, not the routing, and cannot discriminate
+     among the arms it now governs. Confirmed against the Task 0 measurements, not merely
+     assumed.
+
+     But it was reaching for **two** guards, and the frozen hub set closes only one.
+     `hubfrac` can fall because the router avoids hub artists — the behaviour wanted — or
+     because those artists **are not in the graph to route through**. The MBID-frozen set
+     fixes hub *identity*, so no variant can win by redefining who counts as a hub; it says
+     nothing about hub *presence*. Amendment 4's retention gate does not cover this either,
+     since it measures artists overall: an arm could retain most of the graph while
+     selectively shedding frozen hub nodes. Mutual k-NN prunes hub edges hardest by
+     construction — a hub's top-K rarely contains the obscure neighbours whose top-K
+     contains it — so this is a live mechanism, not a hypothetical one.
+
+     **Replacement guard, two numbers already available:** report, per arm, (a) how many
+     frozen hub MBIDs are present, and (b) their mean degree. `load_or_freeze_hub_set`'s
+     `if m in store.id_by_mbid` filter is exactly (a); (b) comes from the same lookup.
+     Presence catches hubs being *removed*; mean degree catches hubs being *neutered* —
+     present but pruned until they no longer function as hubs, which presence alone would
+     miss. **If an arm's `hubfrac` gain coincides with a large fall in either, the gain is
+     definitional rather than behavioural, and the arm does not pass criterion 3.**
+
+     This is what the degree clause was reaching for, expressed so that it is not degenerate
+     under a cap.
+
+   - **Overshoot passes.** With per-arm nulls, `hubfrac` falling *below* an arm's own null
+     becomes measurable for the first time, and it is already live rather than hypothetical.
+     Overshoot means the router avoids hubs more than a score-blind walker does, which is
+     the goal, not a defect. Pathological overshoot — `hubfrac` collapsing toward zero — is
+     already caught by criteria 1 and 2, since the Task 0 `w_hub` sweep shows it takes
+     Adamic–Adar down with it. Define it as passing so the criterion is not ambiguous at
+     the STOP block.
    - **Criterion 4 is unchanged at `mean_ceiling_hops` < 0.30**, and gates arms 3–6 exactly
      as designed — they are the arms that change the rescale, and the ceiling is what the
      rescale exists to fix.
+
+     **It certifies; it does not discriminate.** All four arms carry `percentile_rank`, and
+     adjudication §4.5 records that every rank variant drives exactly-zero-cost hops to
+     nil — so all four should clear it comfortably. That is the criterion working, not
+     failing. Do not read a uniform pass as evidence that nothing happened, and do not
+     expect criterion 4 to help choose between `rankfix` and the damping arms.
    - **Criterion 5** is unchanged: a veto, never a selector.
 
    **The honest consequence, stated in advance.** `capfix` does not address the ceiling
@@ -400,6 +434,11 @@ not repeat it.** Otherwise as written, with eight amendments:
    is an acceptable outcome, but only if it is *recorded* rather than absorbed: it becomes
    an open item carried into Phase 1 **with a success condition** (see the `closeout`
    skill's deferral rule), not a silently-passed criterion.
+
+   **This is a genuine fallback, not the expected path.** It requires all four rank arms to
+   fail criteria 1–3, since criterion 4 is expected to pass for all of them. If that is
+   where the evidence lands, treat it as a surprising result worth explaining rather than a
+   routine null.
 
    **This is not licence to relax anything for arms 3–6.** They face all six criteria at
    full strength. The scope narrowed; the bar did not move.
