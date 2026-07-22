@@ -149,7 +149,7 @@ class PathMetrics:
     overlap_coefficient: float   # mandatory degree-neutrality guard
     jaccard: float               # diagnostic only
     mean_common_neighbours: float  # DIAGNOSTIC — makes the AA/OC density effect
-                                    # visible (revised plan §2, amendment 3b):
+                                    # visible (revised plan §4, amendment 3b):
                                     # a graph with fewer edges depresses common-
                                     # neighbour metrics mechanically, and a reader
                                     # comparing artifacts with very different edge

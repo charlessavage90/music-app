@@ -62,8 +62,20 @@ def artifact_diagnostics(store: GraphStore, cap: int) -> dict:
 def frozen_hub_diagnostics(store: GraphStore, hub_nodes: set[int]) -> dict:
     """How many frozen hub MBIDs survive in this artifact, and their mean degree.
 
-    DESCRIPTIVE DIAGNOSTICS ONLY — not a pass/fail criterion (revised plan §2,
-    amendment 8's criterion-3 discussion). `hubfrac` falling can mean the router
+    These two numbers ARE criterion 3's replacement guard (revised plan §4,
+    amendment 8), not neutral colour. The plan's rule: if an arm's `hubfrac`
+    gain coincides with a large fall in either, the gain is definitional rather
+    than behavioural and the arm does not pass criterion 3. No threshold is
+    coded here — "a large fall" is a qualitative judgement made at Task 15
+    adjudication, against the arm's isolating baseline. Reporting them is this
+    function's job; applying the rule is not.
+
+    The guard is conditional on a `hubfrac` gain, which is what keeps it from
+    being degenerate under a degree cap: every arm from the second onward is
+    capped, so mean hub degree is near-constant across the arms it governs and
+    stays quiet there, firing only when an apparent improvement is definitional.
+
+    `hubfrac` falling can mean the router
     avoided hub artists (the wanted behaviour), that those artists are absent
     from this artifact, or that they were pruned until they no longer function
     structurally as hubs. Presence catches removal; mean degree catches

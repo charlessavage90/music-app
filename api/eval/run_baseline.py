@@ -72,9 +72,10 @@ def main() -> int:
 
     output: dict = {"label": label, "graph": graph_path, "held_out": held_out}
     output["diagnostics"] = artifact_diagnostics(store, cap=50)
-    # DESCRIPTIVE ONLY (revised plan §2, amendment 8's criterion-3 discussion) —
-    # explains why hubfrac moved, is not itself a pass/fail criterion. See
-    # frozen_hub_diagnostics' docstring.
+    # Criterion 3's replacement guard (revised plan §4, amendment 8). Reported
+    # here, applied at Task 15 adjudication: a hubfrac gain coinciding with a
+    # large fall in either number is definitional, not behavioural, and fails
+    # criterion 3. No threshold is coded — see frozen_hub_diagnostics' docstring.
     hub_diag = frozen_hub_diagnostics(store, hub_nodes)
     output["frozen_hub_diagnostics"] = hub_diag
     print(
