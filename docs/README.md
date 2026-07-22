@@ -59,7 +59,8 @@ that is how the drift began.
 | Document | Covers |
 |---|---|
 | `superpowers/specs/2026-07-21-phase2-path-quality-design.md` | Phase 2 design. Supersedes the roadmap's Phase 2 content only. |
-| `superpowers/plans/2026-07-21-phase2-path-quality.md` | Phase 2 implementation, 16 tasks. **Execute in a fresh session.** |
+| `superpowers/plans/2026-07-21-phase2-path-quality.md` | Phase 2 implementation, 16 tasks. **Execute in a fresh session.** Several of its inline test fixtures are arithmetically wrong — see the execution log §3 before trusting one. |
+| `superpowers/2026-07-21-phase2-execution-log.md` | **Running record of Phase 2 execution:** every decision and why, defects found in the plan and in the prior record, gate pass/fail state, open items, and deferred review findings. Read it before continuing or auditing Phase 2. |
 
 ### Complete
 
