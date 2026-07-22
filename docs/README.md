@@ -51,6 +51,7 @@ that is how the drift began.
 | Document | Covers |
 |---|---|
 | `superpowers/findings/2026-07-21-scoring-adjudication.md` | **All** scoring, hub-seeking, and path-quality figures. The single quantitative record. |
+| `superpowers/findings/2026-07-22-phase2-sweep-results.md` | Every figure from the Phase 2 six-arm sweep. Owns its numbers; linked from the adjudication's §6 (claims 41–45). |
 | `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | Gate structure and phase ordering. Its C4 is a pointer only — it holds no figures. |
 | `../CLAUDE.md` | How to work in this repo: commands, architecture, conventions. |
 
@@ -60,6 +61,7 @@ that is how the drift began.
 |---|---|
 | `superpowers/specs/2026-07-21-phase2-path-quality-design.md` | Phase 2 design. Supersedes the roadmap's Phase 2 content only. |
 | `superpowers/plans/2026-07-21-phase2-path-quality.md` | Phase 2 implementation, 16 tasks. **Execute in a fresh session.** Several of its inline test fixtures are arithmetically wrong — see the execution log §3 before trusting one. |
+| `superpowers/2026-07-22-HANDOFF-blind-test.md` | **Next action:** run the blind listening test that decides Phase 2's adopted arm. Written for a session with no prior context. Delete once the verdict is recorded and Task 16 is done. |
 | `superpowers/2026-07-21-phase2-execution-log.md` | **Running record of Phase 2 execution:** every decision and why, defects found in the plan and in the prior record, gate pass/fail state, open items, and deferred review findings. Read it before continuing or auditing Phase 2. |
 
 ### Complete

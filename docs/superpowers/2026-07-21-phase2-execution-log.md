@@ -459,3 +459,63 @@ pathological form because a graph pruned past usefulness takes Adamic–Adar dow
 
 Their job is to explain **why** `hubfrac` moved, so a reader can separate "routed around
 hubs" from "hubs were absent" from "hubs were pruned flat."
+
+---
+
+## 15. PRE-REGISTRATION — the `d025` vs `capfix` blind listening test (2026-07-22)
+
+**Written before the test was run. No listening evidence for `d025` exists at the time of
+writing.** The arms are built and the metrics are complete and committed
+(`findings/2026-07-22-phase2-sweep-results.md`); nobody has heard `d025`. Recorded now so a
+later reader can verify the readings were not fitted to a result.
+
+### Why a listening test is the right instrument here
+
+**This is the Task 0 mechanism** — blind, one-factor, owner-judged — which revised plan §4
+amendment 8 already recognises as a warrant class in its own right. `capfix`'s own warrant
+*is* a blind listen (execution log §12). `d025` is being held to **the same standard, not a
+lower one.**
+
+**It is not criterion 5 used as a selector.** Criterion 5 remains a veto. This is the
+mechanism that decided `capfix` in the first place, applied to a second candidate.
+
+**What justifies seeking further evidence after an inconvenient result.** This is the third
+time this phase that evidence has been sought following an unwelcome outcome, and that
+pattern deserves suspicion. The asymmetry that licenses it here: the sweep disqualified an
+**instrument**, not an arm. Adamic–Adar and the overlap coefficient sign-flip between
+slices at these effect sizes (§6 claim 41), and the specific claim that the rescale costs
+overlap is an analysis-slice artifact that reverses on held-out (§6 claim 42). That finding
+would have held identically had it favoured `capfix` — it is about the metric, not the
+candidate. Criterion 6 failed on precisely the channel shown to be unstable.
+
+### Pre-registered readings — fixed in advance
+
+| Verdict | Action |
+|---|---|
+| **`d025` clearly better** | **Adopt `d025`.** Record that criterion 6 failed on a channel shown to be unstable, that the package comparison reproduced on `hubfrac` and `ceiling_hops` across both slices, and that the Task 0 mechanism resolved it. **Show the working; do not bury it.** |
+| **No detectable difference** | **Adopt `capfix`**, per the pre-registered null outcome. The ceiling defect is carried to Phase 1 as an open item **with a success condition**. |
+| **`capfix` better** | **Adopt `capfix`.** Phase 2 closes on strong evidence. |
+
+### Run once
+
+**The test runs once. If the result is disliked, it stands. A second listening test is
+forbidden.** Under the "no detectable difference" and "`capfix` better" readings the
+pre-registered null outcome is unchanged from before this test existed, so the test cannot
+manufacture a win — it can only confirm the existing answer or overturn it on the same
+evidence class that produced it.
+
+### Conditions
+
+- Blind, two ports, mapping written to a file **before** serving; the owner receives two
+  bare URLs and no framing.
+- Judge the **artist sequences, not the clips** — the clip-resolution defects are live in
+  both arms, unrelated to Phase 2, and are Phase 1's work.
+- The blind is imperfect: the arms differ in edge structure, so a determined search could
+  distinguish them. Acceptable, and recorded here in advance rather than discovered after.
+
+### Session hygiene
+
+The session that produced the analysis is **not** running the test. It knows which artifact
+is which and authored the analysis the test may overturn. A session knowing only "serve
+these two files, hand over two URLs" is structurally cleaner — this is about the integrity
+of the owner's ear, not about that session's conduct. Handover: `2026-07-22-HANDOFF-blind-test.md` (committed; `.superpowers/` is gitignored).
