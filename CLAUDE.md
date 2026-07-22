@@ -169,6 +169,44 @@ This project uses the Superpowers workflow. Design docs live under `docs/superpo
 results). Source comments reference these (e.g. "spec §4.3", "findings 6f") — consult
 them when a decision looks arbitrary; it usually isn't.
 
+### Writing and reviewing plans here
+
+Five review rounds on the Phase 2 plans produced ten findings, and nine were two shapes.
+Both have cheap structural fixes; neither is caught by writing more carefully.
+
+**1. Comparisons with an uncontrolled variable.** Most findings were two things compared
+that differed in more ways than the author believed — a baseline anchored on the wrong
+arm, an artifact built by different code, variants differing by two knobs when the
+comparison assumed one.
+
+> **Any plan comparing variants must contain a factor table**: one row per variant, one
+> column per knob that varies, and the isolating baseline named per row.
+>
+> **A variant's baseline is the variant differing by exactly one column.** If none exists,
+> either build one or state explicitly that this is a package comparison and what it
+> therefore cannot tell you.
+
+The table is what makes this mechanical. You don't have to *notice* a confound — you read
+across the row and count the differences. This is not hypothetical rigour: a two-knob
+confound survived three rounds of prose review, including one written immediately after
+the reviewer had named that exact pattern. The table found it in a single pass.
+
+**2. Documents asserting things about the world that aren't true.** Plans have referenced
+functions that did not exist yet, and cross-references have gone stale after renumbering.
+
+> **Before executing a plan, grep every function, file, and config value it names.**
+> Anything that doesn't resolve is either not-yet-built — state the dependency — or stale.
+
+**How to ask for a plan review.** "Review this plan" finds prose problems. **"Check this
+plan's claims against the repo"** finds the confounds. Every high-value finding in Phase 2
+came from a reader with the *code* open, because a plan can be perfectly self-consistent
+and still wrong relative to `config.py`. Same cost, very different yield.
+
+**Closeout.** After finishing significant work, run the `closeout` skill
+(`.claude/skills/closeout/`) — a mechanical post-execution pass covering the retained
+execution log, deferral addresses, whether config defaults were actually flipped, orphaned
+modules, vacuous tests, and git finalisation.
+
 ## Security
 
 Per global instruction: run the Snyk `snyk_code_scan` tool on new/modified first-party
