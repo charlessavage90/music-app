@@ -431,6 +431,64 @@ re-calibrated against a good set that excludes ceiling-chained paths.
 
 ---
 
+### 4.5 The raw similarity signal is far coarser than any strategy assumed
+
+Measured during Phase 2 Task 13, on a real 75k build via `build_from_archive`. Nobody had
+looked at the raw score distribution before; both rescale strategies were designed as if
+it were continuous. It is not.
+
+| | |
+|---|---|
+| Raw scores fed to `rescale_scores` | 2,500,033 |
+| Distinct values among them | **5,304** |
+| Scores sharing their value with ≥1 other edge | 2,499,854 (**99.9928 %**) |
+| Largest tie group | 86,931 edges at raw value 12.0 (next: 86,607 at 11.0) |
+
+Raw ListenBrainz scores are session co-occurrence counts — small integers — so tie mass
+is the norm, not an edge case. **Any per-edge tuning is quantised by this**: no rescale,
+damping exponent or weight change can resolve a distinction the source data does not
+make. It bounds how much precision the `w_sim` term can carry.
+
+**Consequence for the rank rescale (§7.1).** A rank transform must therefore define its
+tie handling explicitly. Sequential ranking — assigning each tied edge a distinct
+consecutive rank — spreads that largest group across an output width of 0.0348, ≈0.10 of
+routing cost at `w_sim = 3`, or five hops' worth at `w_hop = 0.02`, ordered by nothing but
+position in the MBID-sorted array. Adopted instead: **average rank (midrank)**, so tied
+inputs receive identical outputs.
+
+The decisive argument was structural rather than empirical. Sequential ranking is a
+function of array *order*, so a later change to the cap strategy would silently re-price
+99.99 % of edges while remaining deterministic and topology-identical — undetectable by
+any test. Average rank is a function of the values.
+
+**Ceiling mass under each candidate**, post-symmetrise edges at similarity exactly 1.0
+(which cost `w_sim·(1−1) = 0` and are the defect of §2.2/§2.5):
+
+| Strategy | Edges at exactly 1.0 | Routed hops at zero similarity cost |
+|---|---|---|
+| `p99_log_clip` (v3, incumbent) | 34,696 (0.846 %) | **49.5 %** |
+| rank, sequential | 2 | 0 % |
+| rank, average (**adopted**) | **0** | **0 %** |
+| rank, dense | 2 | 0 % |
+
+The zero-cost pathology the rank rescale exists to remove is eliminated by every rank
+variant. **Dense rank is rejected on separate grounds:** it collapses similarity
+resolution so far that median routed-hop similarity falls to 0.0091 and median interior
+out-degree rises to 2,082 (against 443), turning Dijkstra into hub-seeking BFS.
+
+**What the rank rescale does not fix.** It abolishes exact-zero cost and its degeneracy,
+not cheapness: sub-0.2-cost edges *increase* 3.4× (1.83 % → 6.27 %), and 23.5 % of routed
+hops still cost less than `w_hop`.
+
+Sequential and average rank are routing-equivalent on the frozen panel — 39/40 identical
+paths on random pairs, and **50/50 identical (node-set Jaccard 1.000) on the obscure
+stratum**, which was checked specifically because tie handling perturbs popularity
+(score-weighted in-degree) by up to 0.184 on some low-degree nodes, and popularity carries
+weight 1.0 in the cost function. That perturbation is real in the score arrays and changes
+no routing decision.
+
+---
+
 ## 5. Also settled
 
 ### 5.1 A's `+0.725` score/degree correlation: unreproducible
@@ -556,6 +614,9 @@ feature is not wholly inert.
 | 33 | A consecutive-ceiling-hop run would catch this path where overlap cannot | §4.4, new | **Unresolved — hypothesis** — `ceiling_hops` reads 0.60 on the bad path vs a cosine mean of 0.301 (§2.5), but it has not been swept against a clean good set and it becomes uninformative once §7.1's rescale removes the ceiling tie-mass |
 | 34 | Hub-seeking is topological for shortest-path/similarity-only routing | [configuration-model null](2026-07-22-configuration-model-null.md) §4 | **Upheld — but on a single rewire realisation.** BFS-on-rewired 0.4769 vs BFS-on-observed 0.4370, i.e. 9.1 % *higher*, where the alternative branch required substantially lower. **Open for revisit:** one draw (seed 42), no error bar, no significance test, and the two compared means are n=130 vs n=129. Robust in sign, unquantified in magnitude — see that document §4.1. Tighten by drawing 10–20 independent rewires (~85 s each plus ~60 s routing) before any decision leans harder on this than Task 14's narrowed sweep does |
 | 35 | The production `FULL` router's hub-seeking is topological | [configuration-model null](2026-07-22-configuration-model-null.md) §4 | **Unresolved — untestable by this experiment.** `FULL` hubfrac 0.6966 sits well above the 0.4370–0.4769 topological baseline. The rewire replaces every edge score with a placeholder, so the real cost function cannot be run on it. Claim 34 must not be read as clearing the cost function here; the excess is a `w_jump`/popularity-term question |
+| 36 | The raw similarity signal is effectively continuous | implicit in both rescale designs | **Overturned** — 5,304 distinct values across 2,500,033 edges, 99.9928 % of them tied, largest group 86,931 edges. Per-edge tuning is quantised by the source data; no rescale or weight change resolves a distinction the counts do not make (§4.5) |
+| 37 | A rank rescale removes the zero-cost hop pathology | spec §7.1 | **Upheld** — routed hops at exactly zero similarity cost fall from 49.5 % under the incumbent clip to 0 % under every rank variant. But it removes *degeneracy*, not *cheapness*: sub-0.2-cost edges rise 3.4× and 23.5 % of routed hops still cost less than `w_hop` (§4.5) |
+| 38 | Rank-transform tie handling is a free choice | Phase 2 Task 13 | **Overturned — average rank adopted.** Sequential ranking is a function of array order, so a later cap-strategy change would silently re-price 99.99 % of edges while staying deterministic and topology-identical. Dense rank is separately rejected: it degenerates Dijkstra into hub-seeking BFS (median routed-hop similarity 0.0091, median interior degree 2,082). Sequential and average are routing-equivalent on the panel — 50/50 identical on the obscure stratum (§4.5) |
 
 ---
 
