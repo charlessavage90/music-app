@@ -231,6 +231,12 @@ This targets execution-log §6 open item 3 directly and costs no builds.
 
 ### The fork
 
+> **RESOLVED 2026-07-22 — row 1 fired.** `capfix` was preferred blind and decisively; the
+> verdict and both artifact checksums are in execution-log §12. Consequences: Task 15 is a
+> search for *incremental* gains over `capfix`, not for the fix; §4 amendment 3 re-baselines
+> the scoring arms accordingly; and Phase 1 keeps its original ordering, since row 2 — which
+> would have moved the routing weights ahead of the clip work — did not fire.
+
 | Task 0 result | What it means | Effect on the rest of this plan |
 |---|---|---|
 | **Problem visibly reduced** by `capfix` alone | The inverted cap was the core defect | Task 15 is now about incremental gains. Run it as written, but do not agonise over a marginal winner — if no arm clearly beats `capfix`, adopt `capfix` and close |
@@ -247,7 +253,7 @@ This targets execution-log §6 open item 3 directly and costs no builds.
 away.
 
 **Task 15 — build, evaluate, decide.** **Step 1 was pulled forward into Task 0 Step 1 — do
-not repeat it.** Otherwise as written, with five amendments:
+not repeat it.** Otherwise as written, with six amendments:
 
 1. **Rebuild `control` and `capfix` after Task 14 and require the hashes to be unchanged.**
    Task 0 built them *before* Task 14 modified `rescale_scores`'s `p99_log_clip` branch —
@@ -266,17 +272,49 @@ not repeat it.** Otherwise as written, with five amendments:
    intersection once, before any comparison, and run every paired test on that fixed set.
    Record the size of the intersection and what was dropped.
 
-3. **Criterion 5 applies to `control` plus the top two arms after criteria 1–4** — not all
-   six, which would cost hours and fatigue the judgement it depends on. Serve them blind,
-   as in Task 0 Step 4. Criterion 5 is a **veto, not a selector**: it can reject a
-   metric-winner, never crown a metric-loser. If it vetoes the front-runner, judge the next
-   arm rather than reopening the metrics.
+3. **Re-baseline criteria 1 and 2 for arms 3–6 against `capfix`, not `control`.**
 
-4. **The harness no longer emits a bad-path count** (C-1). See §5 below.
+   Task 0 resolved fork row 1: the cap fix won a blind listening test, and the mutual k-NN
+   cap cut edge count by roughly three quarters while retaining 98.9 % of artists. Two
+   consequences follow, and they point the same way.
 
-5. The Step 6 STOP block stands unchanged and in full. Adoption remains a human decision;
-   present evidence, do not choose. **Do not relax a criterion to produce a winner**, and
-   "no candidate beats the control" remains pre-authorised.
+   **(a) `control` is the wrong baseline for the scoring arms.** `rankfix`, `d025`, `d050`
+   and `d075` all carry `mutual_knn`. Measured against `control`, every one of them is
+   scored on a change they *share* — the cap fix, already settled — with the scoring change
+   they are meant to isolate riding underneath it invisibly. All four could pass "improves
+   over control" on the strength of something none of them contributed. **This is the same
+   two-factor confound as amendment 1, in a different costume, and it is the one that
+   invalidated two earlier analyses.**
+
+   The paired-test machinery does not change; only which arm goes first. Compare `capfix`
+   against `control` (settled by Task 0, reported for completeness) and arms 3–6 against
+   `capfix`.
+
+   **(b) Expect Adamic–Adar and overlap coefficient to fall for every `mutual_knn` arm,
+   and do not read that as a quality regression.** Both metrics are built from common
+   neighbours, so a large edge reduction depresses them mechanically. `capfix` may well
+   score *worse* than `control` on criteria 1 and 2 while being the arm already preferred
+   in a blind test.
+
+   If that happens, the metrics are confounded by density — not the listening test by
+   error. Overlap metrics have already been shown blind to a real failure mode on this
+   project (adjudication §4.4), which is why criterion 5 was elevated. **Record the density
+   effect explicitly in the findings document** so a future reader does not mistake it for
+   evidence against the cap fix.
+
+4. **Criterion 5 applies to `capfix` plus the top two arms after criteria 1–4** — not all
+   six, which would cost hours and fatigue the judgement it depends on. `capfix` is now the
+   reference arm, having already been judged. Serve them blind, as in Task 0 Step 4.
+   Criterion 5 is a **veto, not a selector**: it can reject a metric-winner, never crown a
+   metric-loser. If it vetoes the front-runner, judge the next arm rather than reopening the
+   metrics.
+
+5. **The harness no longer emits a bad-path count** (C-1). See §5 below.
+
+6. The Step 6 STOP block stands unchanged and in full. Adoption remains a human decision;
+   present evidence, do not choose. **Do not relax a criterion to produce a winner.** Note
+   that the pre-authorised null outcome now reads **"no candidate beats `capfix`"** — and
+   in that case `capfix` is adopted, not `control`.
 
 **Task 16 — adopt.** As written.
 
