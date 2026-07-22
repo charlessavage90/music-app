@@ -54,6 +54,37 @@ def symmetrise(adjacency: Adjacency) -> Adjacency:
     return result
 
 
+def mutual_knn_cap(adjacency: Adjacency, k: int) -> Adjacency:
+    """Keep edge (u,v) only if v is in u's top-k AND u is in v's top-k.
+
+    The cap this replaces was applied BEFORE symmetrisation. Symmetrisation
+    adds a reverse edge for every incoming one and nothing bounds how many
+    neighbour lists an artist appears in, so the cap truncated the obscure
+    tail — where alternative routes are scarcest — while leaving hubs
+    completely unbounded. A configured cap of 50 produced an observed maximum
+    degree of 11,243.
+
+    Mutual k-NN is the only formulation that both bounds degree at k and stays
+    symmetric by construction: union-kNN does not bound degree, and capping
+    after symmetrisation breaks symmetry again. It prunes harder than the old
+    scheme, so callers must check largest-component retention.
+
+    Ties break on lowest MBID, matching every other ordering decision in this
+    module (design §9).
+    """
+    top_k: dict[str, set[str]] = {}
+    for node, edges in adjacency.items():
+        ranked = sorted(edges.items(), key=lambda pair: (-pair[1], pair[0]))
+        top_k[node] = {dst for dst, _score in ranked[:k]}
+
+    result: Adjacency = {node: {} for node in adjacency}
+    for node, edges in adjacency.items():
+        for dst, score in edges.items():
+            if dst in top_k[node] and node in top_k.get(dst, set()):
+                result[node][dst] = score
+    return result
+
+
 def largest_component(adjacency: Adjacency) -> set[str]:
     """Return the biggest connected component.
 

@@ -29,6 +29,7 @@ from artistpath_builder.graph import (
     Graph,
     build_graph,
     largest_component,
+    mutual_knn_cap,
     symmetrise,
 )
 from artistpath_builder.models import ArtistStats
@@ -125,7 +126,11 @@ def build_from_archive(
         ]
         # Cap AFTER correction — the corrected ranking differs from the raw one.
         scored.sort(key=lambda pair: (-pair[1], pair[0]))
-        scored_adjacency[mbid] = scored[: config.max_neighbours_per_artist]
+        scored_adjacency[mbid] = (
+            scored
+            if config.cap_strategy == "mutual_knn"
+            else scored[: config.max_neighbours_per_artist]
+        )
 
     # Rescale globally into 0-1, LOG-scaled against a robust maximum.
     #
@@ -152,6 +157,8 @@ def build_from_archive(
         for dst, score in edges.items():
             indegree[dst] += score
 
+    if config.cap_strategy == "mutual_knn":
+        adjacency = mutual_knn_cap(adjacency, config.max_neighbours_per_artist)
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
     logger.info("largest component: %d of %d artists", len(keep), len(adjacency))

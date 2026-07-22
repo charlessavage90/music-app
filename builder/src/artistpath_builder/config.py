@@ -33,6 +33,15 @@ class BuilderConfig:
     # --- graph ----------------------------------------------------------
     max_neighbours_per_artist: int = 50
 
+    # How the neighbour cap is applied.
+    #   "pre_symmetrise" — legacy: cap each artist's own list, then symmetrise.
+    #                      Bounds nothing after symmetrisation.
+    #   "mutual_knn"     — keep an edge only if each endpoint ranks the other
+    #                      in its top-k. Bounds degree at k, stays symmetric.
+    # Retained as a knob only until Phase 2 concludes; delete the loser then
+    # (Phase 2 spec §8 risk 4).
+    cap_strategy: str = "pre_symmetrise"
+
     # Popularity correction applied to raw co-occurrence when scoring edges:
     #     sim(a,b) = cooc(a,b) / (mass(a) * mass(b)) ** similarity_damping
     # 0.0 = raw association strength (globally rescaled), 0.5 = full cosine.
