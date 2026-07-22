@@ -47,6 +47,41 @@ def is_special_purpose(disambiguation: str | None) -> bool:
     return bool(_SPECIAL_PURPOSE.search(disambiguation or ""))
 
 
+def rescale_scores(
+    values: list[float], strategy: str, damping: float
+) -> list[float]:
+    """Map raw edge strengths into 0-1.
+
+    `damping` is accepted so the degeneracy guard can be enforced here: under
+    the clip rescale with d > 0 the centring term is mandatory, and without it
+    the p99 collapses to zero and the whole array becomes nan.
+    """
+    if not values:
+        return []
+
+    if strategy == "p99_log_clip":
+        scale = float(np.percentile(values, 99))
+        if scale <= 0:
+            raise ValueError(
+                f"degenerate p99 ({scale}) under damping={damping}: the clip "
+                "rescale requires the centring term when damping > 0. Use "
+                "percentile_rank, or restore the centring."
+            )
+        log_scale = math.log1p(scale)
+        return [
+            min(1.0, math.log1p(max(0.0, v)) / log_scale) for v in values
+        ]
+
+    if strategy == "percentile_rank":
+        order = np.argsort(np.asarray(values, dtype=np.float64), kind="stable")
+        ranks = np.empty(len(values), dtype=np.float64)
+        ranks[order] = np.arange(len(values), dtype=np.float64)
+        denominator = max(len(values) - 1, 1)
+        return [float(r / denominator) for r in ranks]
+
+    raise ValueError(f"unknown rescale strategy: {strategy!r}")
+
+
 def build_from_archive(
     config: BuilderConfig,
     archive: RawArchive,
@@ -132,27 +167,26 @@ def build_from_archive(
             else scored[: config.max_neighbours_per_artist]
         )
 
-    # Rescale globally into 0-1, LOG-scaled against a robust maximum.
-    #
-    # Co-occurrence is power-law distributed, so linear scaling crushes the
-    # bulk of edges to near-zero (measured: p50 0.022, p75 0.053), leaving
-    # w_sim*(1-sim) almost constant and the similarity term unable to
-    # discriminate. Log scaling spreads the mass across 0-1, the same reason
-    # popularity is log-scaled in graph.py.
-    all_scores = [s for edges in scored_adjacency.values() for _, s in edges]
-    scale = float(np.percentile(all_scores, 99)) if all_scores else 1.0
-    if scale <= 0:
-        scale = 1.0
-    log_scale = math.log1p(scale)
-    logger.info("similarity scale (p99) = %.6g", scale)
+    # Map raw strength into 0-1 per the configured strategy. See
+    # BuilderConfig.similarity_rescale for why the legacy clip is a defect.
+    flat: list[float] = []
+    layout: list[tuple[str, list[str]]] = []
+    for mbid, scored in scored_adjacency.items():
+        layout.append((mbid, [dst for dst, _ in scored]))
+        flat.extend(value for _dst, value in scored)
+
+    rescaled = rescale_scores(
+        flat, strategy=config.similarity_rescale, damping=config.similarity_damping
+    )
 
     indegree: dict[str, float] = defaultdict(float)
     adjacency: Adjacency = {}
-    for mbid, scored in scored_adjacency.items():
-        edges = {
-            dst: min(1.0, math.log1p(max(0.0, value)) / log_scale)
-            for dst, value in scored
-        }
+    cursor = 0
+    for mbid, dsts in layout:
+        edges = {}
+        for dst in dsts:
+            edges[dst] = rescaled[cursor]
+            cursor += 1
         adjacency[mbid] = edges
         for dst, score in edges.items():
             indegree[dst] += score

@@ -71,6 +71,17 @@ class BuilderConfig:
     # Design:      docs/superpowers/specs/2026-07-21-phase2-path-quality-design.md
     similarity_damping: float = 0.0
 
+    # How raw edge strength is mapped into 0-1.
+    #   "p99_log_clip"    — legacy: min(1, log1p(v)/log1p(p99)). Saturates ~1%
+    #                       of edges at exactly 1.0, and those cost
+    #                       w_sim*(1-1.0) == 0 — free similarity. 30-82% of
+    #                       routed hops currently sit at that ceiling.
+    #   "percentile_rank" — rank transform. No ceiling tie-mass, and it handles
+    #                       the negative values that log-space damping produces
+    #                       without a clamp.
+    # Retained as a knob only until Phase 2 concludes (spec §8 risk 4).
+    similarity_rescale: str = "p99_log_clip"
+
     # Drop MusicBrainz placeholder entities ([unknown], [traditional],
     # [no artist], [anonymous], [theatre], [dialogue], [Disney]). Matched on
     # the DISAMBIGUATION field, never the name: 22 nodes have bracketed names
