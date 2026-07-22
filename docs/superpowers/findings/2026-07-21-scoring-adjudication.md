@@ -6,7 +6,7 @@ see §4.4 for what changed and why. **Amended:** 2026-07-22 (§5.3 note, §6 row
 updated) — the configuration-model rewire flagged as unmeasured in §5.3 has been run;
 see `2026-07-22-configuration-model-null.md`. **Amended:** 2026-07-22 (§4.5 added, §6 rows
 36–38) — the raw score distribution was measured for the first time and is far coarser
-than either rescale strategy assumed; see §4.5.
+than either rescale strategy assumed; see §4.5. **Amended:** 2026-07-22 (§4.6 added, §6 row 35 amended, rows 39–40) — the cap fix measured, and the router's hub-seeking traced away from the popularity term; see §4.6.
 **Status:** This is the single consolidated quantitative record for edge scoring and
 path-quality metrics. It **supersedes** the contested sections of both source documents:
 
@@ -491,6 +491,61 @@ no routing decision.
 
 ---
 
+### 4.6 The cap fix, measured — and where the router's hub-seeking actually comes from
+
+Phase 2 Task 0. Two 75k artifacts differing in **one** knob — where the neighbour cap is
+applied — routed over the panel's 100-pair analysis slice under five router configurations,
+against the frozen control-anchored hub set (751 MBIDs; membership identical to v3's).
+
+**Production weights, build-time effect of the cap fix alone:**
+
+| | `control` (`pre_symmetrise`) | `capfix` (`mutual_knn`) |
+|---|---|---|
+| hubfrac | 0.7150 | **0.3620** |
+| mean path length | 7.79 | **12.78** |
+| mean interior popularity | 0.806 | **0.592** |
+| mean max interior degree | 2,417 | **45** |
+| ceiling hops | 0.461 | 0.342 |
+| Adamic–Adar | 11.624 | 0.748 |
+
+Hub traversal roughly halves, paths lengthen by about five hops, and interior artists are
+markedly less popular — **from a build-time change with no routing change at all.** These
+three effects were independently predicted by the project owner in a *blind* twenty-minute
+listening comparison before any of these numbers existed (execution log §12).
+
+**Router sweep, both artifacts:**
+
+| router | control hubfrac | control max-int-deg | control AA | capfix hubfrac | capfix AA |
+|---|---|---|---|---|---|
+| production | 0.7150 | 2,417 | 11.624 | 0.3620 | 0.748 |
+| `w_jump = 0` | 0.6322 | **5,722** | 9.624 | 0.3450 | 0.626 |
+| `w_hub = 1` | 0.3738 | 1,305 | 3.043 | 0.1258 | 0.296 |
+| `w_hub = 4` | 0.1519 | 504 | 1.759 | 0.0191 | 0.098 |
+| `w_hub = 16` | **0.0000** | 88 | 1.175 | 0.0045 | 0.017 |
+
+**The popularity term is not the main driver.** Zeroing `w_jump` moves control's hubfrac
+0.7150 → 0.6322 — real but small against an excess of ~0.28 over the topological baseline
+(§6 claim 22, BFS 0.4370 on the same graph family). The suspicion recorded in claim 35 is
+largely refuted.
+
+**`w_jump = 0` lowers hubfrac while *raising* max interior degree** (2,417 → 5,722).
+Removing the popularity-cliff penalty lets the router cross much larger hubs while touching
+fewer of the top-1 % set. The two measures disagree; neither alone describes "hubbiness,"
+and any future tuning must report both.
+
+**`w_hub` is dormant at its default of 0 and is a very large lever — at a real price.**
+It drives control's hubfrac to exactly zero by `w_hub = 16`, but Adamic–Adar collapses
+roughly tenfold on the way, i.e. the router buys hub-avoidance by crossing hops that share
+almost no neighbours. **The bracketed values bind *on this artifact only*** — the penalty
+is log-degree normalised per graph (zeroed at that graph's median, 1.0 at its largest hub),
+so `w_hub = X` on control and `w_hub = X` on capfix are not comparable. Compare how hubfrac
+*responds*, never a shared value.
+
+**Not like-for-like:** the topological baseline was measured on the v3/control family.
+Comparing `capfix`'s 0.3620 against it is cross-graph. On `control` the comparison is valid.
+
+---
+
 ## 5. Also settled
 
 ### 5.1 A's `+0.725` score/degree correlation: unreproducible
@@ -615,10 +670,12 @@ feature is not wholly inert.
 | 32 | Task 5's eight "known-good" calibration paths are good | task-5 report | **Overturned in part** — one of them (`Miles Davis → Ella Fitzgerald → … → Daft Punk`) is the ceiling-chained defect of §0; it is the highest-overlap path measured (path J 0.1592, 98th pct of v3 paths) and is the sweep's sole low-threshold "false positive". Recalibrate against a good set that excludes ceiling-chained paths |
 | 33 | A consecutive-ceiling-hop run would catch this path where overlap cannot | §4.4, new | **Unresolved — hypothesis** — `ceiling_hops` reads 0.60 on the bad path vs a cosine mean of 0.301 (§2.5), but it has not been swept against a clean good set and it becomes uninformative once §7.1's rescale removes the ceiling tie-mass |
 | 34 | Hub-seeking is topological for shortest-path/similarity-only routing | [configuration-model null](2026-07-22-configuration-model-null.md) §4 | **Upheld — but on a single rewire realisation.** BFS-on-rewired 0.4769 vs BFS-on-observed 0.4370, i.e. 9.1 % *higher*, where the alternative branch required substantially lower. **Open for revisit:** one draw (seed 42), no error bar, no significance test, and the two compared means are n=130 vs n=129. Robust in sign, unquantified in magnitude — see that document §4.1. Tighten by drawing 10–20 independent rewires (~85 s each plus ~60 s routing) before any decision leans harder on this than Task 14's narrowed sweep does |
-| 35 | The production `FULL` router's hub-seeking is topological | [configuration-model null](2026-07-22-configuration-model-null.md) §4 | **Unresolved — untestable by this experiment.** `FULL` hubfrac 0.6966 sits well above the 0.4370–0.4769 topological baseline. The rewire replaces every edge score with a placeholder, so the real cost function cannot be run on it. Claim 34 must not be read as clearing the cost function here; the excess is a `w_jump`/popularity-term question |
+| 35 | The production `FULL` router's hub-seeking is topological | [configuration-model null](2026-07-22-configuration-model-null.md) §4 | **Unresolved — untestable by this experiment.** `FULL` hubfrac 0.6966 sits well above the 0.4370–0.4769 topological baseline. The rewire replaces every edge score with a placeholder, so the real cost function cannot be run on it. Claim 34 must not be read as clearing the cost function here; the excess is a `w_jump`/popularity-term question | **AMENDED 2026-07-22:** the `w_jump` suspicion is **largely refuted** — zeroing it moves control's hubfrac only 0.7150 → 0.6322 against an excess of ~0.28 (§4.6). The excess is still unexplained, but not mainly the popularity channel |
 | 36 | The raw similarity signal is effectively continuous | implicit in both rescale designs | **Overturned** — 5,304 distinct values across 2,500,033 edges, 99.9928 % of them tied, largest group 86,931 edges. Per-edge tuning is quantised by the source data; no rescale or weight change resolves a distinction the counts do not make (§4.5) |
 | 37 | A rank rescale removes the zero-cost hop pathology | spec §7.1 | **Upheld** — routed hops at exactly zero similarity cost fall from 49.5 % under the incumbent clip to 0 % under every rank variant. But it removes *degeneracy*, not *cheapness*: sub-0.2-cost edges rise 3.4× and 23.5 % of routed hops still cost less than `w_hop` (§4.5) |
 | 38 | Rank-transform tie handling is a free choice | Phase 2 Task 13 | **Overturned — average rank adopted.** Sequential ranking is a function of array order, so a later cap-strategy change would silently re-price 99.99 % of edges while staying deterministic and topology-identical. Dense rank is separately rejected: it degenerates Dijkstra into hub-seeking BFS (median routed-hop similarity 0.0091, median interior degree 2,082). Sequential and average are routing-equivalent on the panel — 50/50 identical on the obscure stratum (§4.5) |
+| 39 | The inverted neighbour cap is a material driver of hub-seeking | Phase 2 Task 0 | **Upheld, and it is the largest single lever found.** Fixing the cap alone halves hubfrac (0.7150 → 0.3620), lengthens paths (7.79 → 12.78) and lowers interior popularity (0.806 → 0.592), with no routing change. Independently preferred in a blind listening comparison before the numbers existed (§4.6, execution log §12) |
+| 40 | `w_hub` is dormant and would be an effective anti-hub lever | spec, cost function | **Upheld with a large caveat.** It drives hubfrac to 0.0000 by `w_hub = 16` on control, but Adamic–Adar collapses ~10× on the way — hub-avoidance bought by crossing hops with almost no shared neighbours. Values bind *per artifact only*; the penalty is per-graph normalised and does not transfer (§4.6) |
 
 ---
 
