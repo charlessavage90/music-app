@@ -4,7 +4,9 @@
 **Amended:** 2026-07-21 (§4.3 restated, §4.4 added, §6 rows 28–30 added, §8 note added) —
 see §4.4 for what changed and why. **Amended:** 2026-07-22 (§5.3 note, §6 rows 19/22
 updated) — the configuration-model rewire flagged as unmeasured in §5.3 has been run;
-see `2026-07-22-configuration-model-null.md`.
+see `2026-07-22-configuration-model-null.md`. **Amended:** 2026-07-22 (§4.5 added, §6 rows
+36–38) — the raw score distribution was measured for the first time and is far coarser
+than either rescale strategy assumed; see §4.5.
 **Status:** This is the single consolidated quantitative record for edge scoring and
 path-quality metrics. It **supersedes** the contested sections of both source documents:
 

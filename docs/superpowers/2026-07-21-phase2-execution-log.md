@@ -218,3 +218,43 @@ doubles it. Plan for it.
 | 12 Mutual k-NN cap | Complete. Gate passed |
 | 13 Rescale strategy | In progress |
 | 14–16 | Not started |
+
+---
+
+## 11. Addendum — Task 13 tie handling (2026-07-22)
+
+**D12. Rank-transform tie handling: average rank, not the plan's sequential rank.**
+Delegated to the graph analyst at the owner's request, then accepted. The plan prescribed
+strictly sequential ranks; raw scores are co-occurrence counts and 99.99 % of them are
+tied, so that assigned distinct costs to provably identical edges. Evidence and figures
+are in adjudication §4.5 and claim rows 36–38. Decisive argument was structural: sequential
+ranking is a function of array *order*, so a later cap-strategy change would silently
+re-price 99.99 % of edges while staying deterministic and topology-identical.
+
+**D13. The coarse-signal measurement goes in the main findings record**, not only here —
+adjudication §4.5. It bounds how much precision any similarity-based tuning can carry.
+
+### A correction to this log's own reporting
+
+An earlier figure reported to the owner during this work — "179 distinct similarity
+values" — **was wrong**. 179 is the count of values appearing exactly once; there are
+**5,304** distinct values. Caught by the analyst before it reached the findings record.
+It mattered: 179 levels implies a cost quantum of 0.0169, the real one is 0.00057.
+Recorded because this log's purpose is defeated if it only lists other people's errors.
+
+### Additions to §8 (operational facts)
+
+| Measurement | Value | Note |
+|---|---|---|
+| `find_path`, one query, **obscure** pair | **~3.0 s** | Roughly double a random pair. Task 15 routes all strata across six artifacts |
+| Warm 75k build, post-Task-12 code | 28.9–29.2 s | Unchanged from the Task 1 baseline |
+| Cold 75k build (first after idle) | **397 s** | OneDrive cache, not a regression — two immediate re-runs returned to ~28 s |
+
+### Addition to §9 (environment traps)
+
+**A hung process looks identical to a slow one.** A verification job sat for 13 minutes
+having accumulated 4.67 s of CPU, and showed **zero CPU movement across a 20-second
+sample** — it was blocked, not computing. Dijkstra is CPU-bound, so flat CPU is the
+diagnostic. Sampling `(Get-Process -Id N).CPU` twice separates the two cases in seconds;
+waiting on the log alone does not. Two long jobs in this phase hung this way and were
+only found by checking.
