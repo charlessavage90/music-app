@@ -100,7 +100,7 @@ The plan names four gates that stop work rather than warn.
 | Gate | Status |
 |---|---|
 | Task 5 Step 5 — the bad-path detector must separate known-bad from known-good | **FAILED.** No threshold separates them; at the shipped thresholds the screen passes everything. Root cause and the refuted fix are in adjudication §4.4. Rework deferred by D9 |
-| Task 12 Step 8 — mutual k-NN must retain ≥90% of artists | **In progress** |
+| Task 12 Step 8 — mutual k-NN must retain ≥90% of artists | **PASSED — 98.9%** (74,191 of 74,991 in the largest connected component). Max degree after the cap is exactly 50, against 11,241 under the old strategy on the same run. The reviewer traced the denominator through the code to confirm it is the largest component, not total surviving nodes |
 | Task 13 Step 7 / Task 14 Step 5 — the control arm must rebuild `graph-75k-v3.bin` byte-identically | Not yet reached |
 | Task 15 Step 7 — the held-out slice must reproduce criteria 1–4 | Not yet reached |
 
@@ -149,6 +149,10 @@ Each was raised by a task reviewer, judged non-blocking, and deliberately not fi
   index-shift immunity that is Task 6's entire purpose.
 - `panel.py` — `by_name` has no duplicate-name guard (no collision in the current run).
 - Task 11 — no end-to-end test that the build actually drops the filtered nodes.
+- `test_graph.py` — the mutual k-NN symmetry test uses an already-symmetric fixture, so
+  it cannot distinguish *enforcing* equal per-direction weights from merely *preserving*
+  them, and the docstring overclaims accordingly. No production consequence:
+  `symmetrise()` always runs immediately after the cap.
 
 **Hygiene**
 - Unused imports in several plan-prescribed test blocks.
@@ -211,5 +215,6 @@ doubles it. Plan for it.
 | 9 Path export tool | Complete, after two review fixes |
 | 10 Configuration-model experiment | Complete |
 | 11 Entity filter | Complete |
-| 12 Mutual k-NN cap | In progress |
-| 13–16 | Not started |
+| 12 Mutual k-NN cap | Complete. Gate passed |
+| 13 Rescale strategy | In progress |
+| 14–16 | Not started |
