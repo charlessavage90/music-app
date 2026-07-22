@@ -23,3 +23,18 @@ def test_does_not_flag_real_bands_with_bracketed_names():
 def test_handles_none_and_empty():
     assert not is_special_purpose("")
     assert not is_special_purpose(None)
+
+
+def test_matches_real_archive_disambiguation_variants():
+    # Measured against the 7 canonical special-purpose entities in the 75k
+    # archive: casing varies, and [unknown] uses an en dash (U+2013) where
+    # the others use an ASCII hyphen after "Artist". The matcher keys only
+    # on the phrase "special purpose", so neither varies the result.
+    real_variants = (
+        "Special Purpose Artist - Do not add releases here, if possible.",
+        "special purpose artist",
+        "Special Purpose Artist",
+        "Special Purpose Artist – Do not add releases here, if possible.",
+    )
+    for disambiguation in real_variants:
+        assert is_special_purpose(disambiguation)
