@@ -680,6 +680,16 @@ Source: `builder/scratch/graph-t15-capfix.bin`
 | `builder/scratch/graph-5k.bin` (5000 nodes) | `3029aaa2cdddc158e8d4ccb254a8df75b2f12fdca622f860cdf2572e322ecf64` | no — gitignored dev graph |
 | `{builder,api}/tests/fixtures/graph-fixture.bin` (500 nodes) | `a45d160aeafdfe46a5b584d78b37b54f5fbae116d365ae454cac97ae4d927750` | **yes, now** |
 
+> **⚠ BOTH CHECKSUMS ABOVE ARE SUPERSEDED — see §19.** They are correct as a record of what
+> Task 16 produced, and wrong as a description of the fixtures in the repo today. Both were
+> rebuilt on 2026-07-22 after the seed defect in §19, and a checksum is the only identity a
+> gitignored artifact has. Current values:
+>
+> | Artifact | sha256 |
+> |---|---|
+> | `builder/scratch/graph-5k.bin` | `642211cfcb5245f4bd4528631d3309c4c94212eeb742fe8db7cd16fe446c189d` |
+> | `{builder,api}/tests/fixtures/graph-fixture.bin` | `f30676533aa95f7b5fbbae33e1fe581fef6343e121d8f71e93fb5c8a4f6de9ba` |
+
 ### Gates
 
 - **All three suites green**: builder 93 passed, api 116 passed, frontend 31 passed.
@@ -808,3 +818,75 @@ Recorded because a silent check is indistinguishable from a skipped one.
   hazard warning at the point of use, and a developer about to raise damping needs the
   magnitude in front of them, not a link. The completed Phase 2 plan's own restatement was
   left alone: it is a historical record of what the plan said.
+
+---
+
+## 19. Post-closeout — the fixture seed defect (2026-07-22)
+
+Found *after* closeout, by booting the app rather than by any test. Recorded here because it
+supersedes §17's checksum table and because the failure mode generalises.
+
+### What happened
+
+`extract_fixture` does a breadth-first walk from a seed, and the CLI defaulted that seed to
+`graph.mbids[0]` — an arbitrary artist, whichever sorted first. **That produced a
+representative sample only by accident.** The pre-adoption graph left hubs unbounded (a
+configured cap of 50 produced an observed degree of 11,243), so a walk from anywhere reached
+the famous core within a hop or two and swept it in.
+
+Mutual k-NN bounds degree at k, which removes the accident. The first 5k dev graph built
+after adoption **contained neither Miles Davis nor Radiohead** — a local cluster around an
+obscure artist, produced by the same command that had always worked.
+
+**The committed 500-node test fixture had the identical defect**, regenerated in §17 with the
+same arbitrary seed. Both suites were running against a local cluster and **all 209 tests
+passed**, because a fixture that changes *character* still satisfies every assertion about
+its *shape*.
+
+### The generalisable part
+
+This is not a fixture bug. It is **a fix removing a property that something unrelated had
+silently come to depend on.** Nothing was broken, no test failed, no error was raised; a
+guarantee that had never been stated simply stopped holding. The Phase 2 work was correct
+and the dev tooling quietly became useless as a result.
+
+Worth carrying into Phase 1, which changes bypass routing: ask what *else* currently works
+only because of a property the change is about to remove.
+
+### Fixed
+
+Default seed is now the most popular artist, ties broken on lowest MBID so determinism
+(spec §9) is preserved; `--seed-mbid` still overrides. Both fixtures regenerated from
+`graph-t15-capfix.bin`. Verified by mutation — restoring the `mbids[0]` default turns the
+new test red. The 5k artifact is byte-identical to one built with The Beatles passed
+explicitly, confirming the default resolves to that artist rather than to something merely
+plausible.
+
+**Current checksums (these supersede §17's):**
+
+| Artifact | sha256 | In git |
+|---|---|---|
+| `builder/scratch/graph-5k.bin` (5000) | `642211cfcb5245f4bd4528631d3309c4c94212eeb742fe8db7cd16fe446c189d` | no |
+| `{builder,api}/tests/fixtures/graph-fixture.bin` (500) | `f30676533aa95f7b5fbbae33e1fe581fef6343e121d8f71e93fb5c8a4f6de9ba` | yes |
+
+Suites after the change: builder 96, api 116, frontend 31.
+
+### Two vacuous tests, written for this fix and caught before commit
+
+Both are the class §18's spot check exists to find, produced fresh while writing coverage
+for a bug about a silent assumption:
+
+- The first helper made an artist "popular" by adding incoming edges while leaving
+  `user_count` uniform. `build_graph` derives popularity from `user_count` (which the
+  pipeline fills with score-weighted in-degree), so it changed nothing and asserted against
+  a flat array.
+- The tie-break test used `_ring`, whose `user_count` strictly decreases — index 0 won on
+  popularity outright, so **the tie-break was never exercised** and the test would have
+  passed with it deleted. It now uses a genuinely tied fixture and asserts the tie is real
+  before asserting the ordering.
+
+### Process note
+
+Two branches carried concurrent sessions. `git checkout --` was used to undo a deliberate
+mutation on a file whose real edits were uncommitted, discarding both; the edits were
+rewritten. **Commit before mutating, or restore from a copy rather than from HEAD.**
