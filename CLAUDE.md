@@ -197,6 +197,32 @@ functions that did not exist yet, and cross-references have gone stale after ren
 > **Before executing a plan, grep every function, file, and config value it names.**
 > Anything that doesn't resolve is either not-yet-built — state the dependency — or stale.
 
+**3. Plans over ~8 tasks must name their own handoff points.** Subagent-driven execution
+caps how *wide* the controller's context gets — the code stays out — but not how *long*.
+The controller still reads one report per task and decides on most of them, so its context
+grows with **task count**, not with effort or delegation quality. Past roughly 8–12 tasks
+it is in long-context territory however well the work was delegated.
+
+> Choose the handoff seams **at authoring time**, where a track's output is a committed
+> artifact rather than a live understanding — then hand off there, retire the session, and
+> start the next track fresh. A **material mid-flight amendment is also a seam**: there is a
+> new governing document, and the next session reads it cold, which is the condition the
+> amendment was written for.
+
+A boundary you planned is cheap. One you discover at task 15 is expensive, and it gets
+deferred past the point it should have happened because handing off then feels like an
+admission. Phase 2 had a perfect seam at the Track A/Track B split and did not use it.
+
+**What makes handoffs cheap:** append to the retained execution log **per task**, not only
+at closeout. Decisions and reasoning, not narration. That is what makes sessions
+interchangeable rather than making one of them precious — and "the controller is warm" is
+never a reason to keep going, since a plan only its executor can continue is a plan that
+was under-recorded.
+
+**The degradation tell is a completeness failure, not a fluency one.** Watch for a session
+having to be *asked* for figures it already computed, or an item quietly dropping out of a
+tracking document. Both have happened here; both preceded any more obvious symptom.
+
 **How to ask for a plan review.** "Review this plan" finds prose problems. **"Check this
 plan's claims against the repo"** finds the confounds. Every high-value finding in Phase 2
 came from a reader with the *code* open, because a plan can be perfectly self-consistent
