@@ -73,8 +73,11 @@ app and judges the paths acceptable. The exported HTML from `export_paths.py` su
 that judgement; it does not substitute for it.
 
 This is a *strengthening* of the criterion, and it must be recorded as such in the findings
-document. All six criteria still apply. "No candidate beats the control" remains a
-pre-authorised outcome.
+document.
+
+**Superseded here by §4 amendments 7 and 8, written later:** the six criteria govern arms
+3–6 rather than every arm, and the pre-authorised null outcome now reads **"no candidate
+beats `capfix`"**. Criterion 5 itself is unchanged — a veto, never a selector.
 
 ### C-3. Open items 2 and 3 close by decision, not by investigation.
 
