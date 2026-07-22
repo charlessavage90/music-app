@@ -37,10 +37,14 @@ that is how the drift began.
 
 ## Current state
 
-- **Gate 1 (personal use).** Phase 2 (path quality) is planned and ready to execute;
-  Phase 1 (clips, bypass, frontend UX) is not yet planned.
-- **Next action:** execute `superpowers/plans/2026-07-21-phase2-path-quality.md` in a
-  **fresh session, subagent-driven**. It is deliberately self-contained.
+- **Gate 1 (personal use).** Phase 2 (path quality) is **nearly complete** — Tasks 0–15
+  executed on branch `phase2-path-quality` (open PR). Phase 1 (clips, bypass, frontend UX)
+  is not yet planned.
+- **Next action:** run the blind listening test in
+  `superpowers/2026-07-22-HANDOFF-blind-test.md`, which decides the adopted arm. Then
+  Task 16 (adopt), then the `closeout` skill.
+- The governing plan is `superpowers/plans/2026-07-22-phase2-revised-plan.md`, which
+  supersedes the remaining tasks of the 2026-07-21 plan.
 
 ---
 
