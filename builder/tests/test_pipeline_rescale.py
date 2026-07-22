@@ -60,3 +60,14 @@ def test_rescale_never_emits_nan_or_all_zero():
 def test_unknown_strategy_is_rejected():
     with pytest.raises(ValueError, match="unknown rescale strategy"):
         rescale_scores([1.0], strategy="nope", damping=0.0)
+
+
+def test_p99_log_clip_raises_on_degenerate_scale():
+    # The degeneracy guard itself. All-zero input drives p99 to exactly 0,
+    # which without this raise would divide log1p(v) by log1p(0) == 0 and
+    # emit nan for every edge — silently destroying the signal the router
+    # uses. It must fail loudly instead.
+    with pytest.raises(ValueError, match="degenerate p99"):
+        rescale_scores(
+            [0.0] * 100, strategy="p99_log_clip", damping=0.5
+        )
