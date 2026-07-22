@@ -409,3 +409,53 @@ amendment 7 pre-authorises adopting `capfix` if nothing beats it. All three coul
 
 **Superseded wording** (plan §2 C-2): "all six criteria still apply" and "no candidate beats
 the control" are both stale and marked as such in the plan.
+
+---
+
+## 14. Task 14 complete, and a caveat on the hub-degree diagnostic (2026-07-22)
+
+**Task 14 — damping in log space. Complete** (`d6fd6a3`, `0fb65ea`). Byte-identity gate
+**PASSED**: a build from current code at the legacy config reproduces `graph-75k-v3.bin`
+exactly. 93 builder tests; `test_replay.py` unmodified; Snyk clean.
+
+The two-point confirmation reproduces the finding recorded in the adjudication: damping
+does not fix the ceiling defect, it flips which way it fails — at `d = 0` the
+ceiling-clipped edges point at hubs, at `d = 0.5` at micro-cliques. Cite the adjudication
+for figures.
+
+Review found no Critical issues. Three smaller ones, all closed: a stale multiplicative
+formula comment that Task 14's own change had falsified (in both `pipeline.py` and
+`config.py` — corrected, and it mattered because Task 15 reads those knobs), and two
+instances of the report overstating what it verified.
+
+**Fourth occurrence of the same pattern.** A delegated report claimed the gate was
+"verified twice, independently" when one build's output had been hashed twice, and
+attributed a slow cold build purely to environment without estimating the code's own
+contribution. The code was correct both times. This is the failure mode §7 of the revised
+plan names, and it has now happened four times — every instance caught by review, none by
+tests.
+
+### Caveat on the new hub-degree diagnostic
+
+The plan now reports two numbers per arm alongside `hubfrac`: **frozen hub nodes present**,
+and **mean degree over those nodes**. Presence catches hubs being removed from the graph;
+mean degree catches them being pruned until they no longer function as hubs. Both are
+correct additions and both are effectively free — measured at **well under a millisecond**
+per artifact, off the same degree array `artifact_diagnostics` already computes.
+
+**They must be reported as descriptive diagnostics, never as pass/fail for arms 3–6.**
+Measured on the two existing artifacts, mean hub degree falls by more than an order of
+magnitude under the cap, and the capped arm's maximum hub degree is exactly the configured
+cap. Every arm from 2 onward is capped, so the number will sit near-constant across arms
+3–6 and reports **the cap, not the routing** — which is precisely why the original
+degree-collapse clause was retired. Used as a criterion it would reintroduce that
+degeneracy under a new name.
+
+**The sharper point:** neutering hubs is what the cap does *by design*, and it is what won
+the blind listening test. A low mean hub degree is evidence the fix is working, not
+evidence of damage. The metric cannot distinguish beneficial from pathological neutering on
+its own — it needs the same pairing as overshoot, where criteria 1 and 2 catch the
+pathological form because a graph pruned past usefulness takes Adamic–Adar down with it.
+
+Their job is to explain **why** `hubfrac` moved, so a reader can separate "routed around
+hubs" from "hubs were absent" from "hubs were pruned flat."
