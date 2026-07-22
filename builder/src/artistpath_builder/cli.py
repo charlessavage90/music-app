@@ -126,8 +126,8 @@ def cmd_build(args) -> int:
 
 def cmd_fixture(args) -> int:
     graph = deserialise(Path(args.graph).read_bytes())
-    seed = args.seed_mbid or graph.mbids[0]
-    fixture = extract_fixture(graph, size=args.size, seed_mbid=seed)
+    # seed_mbid=None means "most popular artist" — see fixture.most_popular_index.
+    fixture = extract_fixture(graph, size=args.size, seed_mbid=args.seed_mbid)
     Path(args.out).write_bytes(serialise(fixture))
     logging.info("wrote fixture: %d artists", fixture.artist_count)
     return 0
