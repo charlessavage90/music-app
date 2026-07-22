@@ -85,58 +85,26 @@ def rescale_scores(
     if strategy == "p99_log_clip":
         # Legacy path: input is already log1p(cooc) from damped_strength at
         # d = 0, so exponentiate back to raw space to reproduce the original
-        # expression exactly. Only valid at d = 0, which is the control arm.
+        # expression exactly. Only valid at d = 0, which is the adopted value.
         raw = [math.expm1(max(0.0, v)) for v in values]
         scale = float(np.percentile(raw, 99))
         if scale <= 0:
             raise ValueError(
                 f"degenerate p99 ({scale}) under damping={damping}: the clip "
-                "rescale requires the centring term when damping > 0. Use "
-                "percentile_rank, or restore the centring."
+                "rescale requires the `- 2*log(median_mass)` centring term "
+                "when damping > 0, and that term is not implemented. Restore "
+                "it before raising similarity_damping above 0."
             )
         log_scale = math.log1p(scale)
         return [
             min(1.0, math.log1p(max(0.0, v)) / log_scale) for v in raw
         ]
 
-    if strategy == "percentile_rank":
-        # Average rank (midrank / ECDF): every member of a tie group gets the
-        # group's mean sequential rank, rather than an arbitrary sequential
-        # rank that is a function of array order alone. Raw ListenBrainz
-        # scores are session co-occurrence counts, and ~99.99% of them share
-        # a value with at least one other edge — sequential ranking would
-        # give those provably-identical edges different costs, ordered by
-        # nothing but incidental position in the flattened array. Average
-        # rank is a function of the *values*, so it is stable under any
-        # reordering of equal-valued input (e.g. a different cap strategy),
-        # which sequential ranking is not.
-        #
-        # This is computed explicitly (group by sorted value, average the
-        # sequential ranks within each group, scatter back) rather than
-        # relying on any incidental tie-breaking behaviour of argsort, so the
-        # tie-equal property is guaranteed rather than accidental. It stays
-        # deterministic: np.unique sorts on value, and grouping/summation are
-        # both order-independent operations, so identical input still
-        # produces byte-identical output.
-        arr = np.asarray(values, dtype=np.float64)
-        n = len(values)
-        order = np.argsort(arr, kind="stable")
-        sorted_vals = arr[order]
-        sequential_ranks = np.arange(n, dtype=np.float64)
-        _unique_vals, inverse, counts = np.unique(
-            sorted_vals, return_inverse=True, return_counts=True
-        )
-        group_sums = np.bincount(
-            inverse, weights=sequential_ranks, minlength=len(counts)
-        )
-        group_avg_ranks = group_sums / counts
-        sorted_avg_ranks = group_avg_ranks[inverse]
-        ranks = np.empty(n, dtype=np.float64)
-        ranks[order] = sorted_avg_ranks
-        denominator = max(n - 1, 1)
-        return [float(r / denominator) for r in ranks]
-
-    raise ValueError(f"unknown rescale strategy: {strategy!r}")
+    raise ValueError(
+        f"unsupported rescale strategy: {strategy!r}. 'percentile_rank' lost "
+        "Phase 2 and its implementation was removed (spec §8 risk 4); "
+        "'p99_log_clip' is the only supported rescale. See execution log §16."
+    )
 
 
 def build_from_archive(
@@ -217,11 +185,11 @@ def build_from_archive(
         ]
         # Cap AFTER correction — the corrected ranking differs from the raw one.
         scored.sort(key=lambda pair: (-pair[1], pair[0]))
-        scored_adjacency[mbid] = (
-            scored
-            if config.cap_strategy == "mutual_knn"
-            else scored[: config.max_neighbours_per_artist]
-        )
+        # Uncapped here: mutual_knn_cap below applies the cap symmetrically,
+        # once both directions are known. (The legacy pre_symmetrise strategy
+        # truncated at this point instead; it was removed in Phase 2 — see
+        # BuilderConfig.cap_strategy.)
+        scored_adjacency[mbid] = scored
 
     # Map raw strength into 0-1 per the configured strategy. See
     # BuilderConfig.similarity_rescale for why the legacy clip is a defect.
@@ -247,8 +215,7 @@ def build_from_archive(
         for dst, score in edges.items():
             indegree[dst] += score
 
-    if config.cap_strategy == "mutual_knn":
-        adjacency = mutual_knn_cap(adjacency, config.max_neighbours_per_artist)
+    adjacency = mutual_knn_cap(adjacency, config.max_neighbours_per_artist)
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
     logger.info("largest component: %d of %d artists", len(keep), len(adjacency))

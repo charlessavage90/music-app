@@ -2,7 +2,12 @@
 
 **Date:** 2026-07-21
 **Gate:** 1 (personal use)
-**Status:** approved design, revised after adjudication, not yet planned
+**Status:** IMPLEMENTED and adopted, 2026-07-22. Adopted arm `capfix` —
+`cap_strategy="mutual_knn"`, `similarity_rescale="p99_log_clip"`,
+`similarity_damping=0.0` — chosen by the owner in a blind listening test against `d025`
+(execution log §16). §8 risk 4 discharged: the losing options are deleted and raise.
+**Not everything here was resolved** — the p99 ceiling defect survives adoption and is
+carried to Phase 1 as an open item.
 **Supersedes:** the Phase 2 bullet list in `../plans/2026-07-21-alpha-rollout-roadmap.md`.
 The roadmap remains the plan of record for gate structure and for Phases 1 and 3–7;
 this spec replaces only its Phase 2 content.

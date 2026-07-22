@@ -588,11 +588,24 @@ Translating ports to arms, and nothing else: **the owner preferred `capfix` over
   Young Gun Silver Fox → Gorguts) with one showing real differences (Young Gun Silver
   Fox → Tony Williams). This is a channel the sweep did not measure and the test was not
   designed around; it emerged from use.
-- The owner **volunteered a prior mid-report** — that first paths *should* favour hubs and
-  that bypass *should* lengthen paths and reach less-known artists, citing boilthefrog as
-  the reference behaviour. He flagged this himself as gut instinct rather than data, and
-  flagged the possible bias of concentrating on bypass. Recorded as stated; not adjudicated
-  here.
+- The owner **volunteered a prior mid-report** about desired bypass behaviour, citing
+  boilthefrog as the reference. He flagged it himself as gut instinct rather than data, and
+  flagged the possible bias of concentrating on bypass. Recorded as stated; **not
+  adjudicated here.**
+
+  **Stated precisely, in his own correction of this log's first draft** — which had
+  paraphrased it as "first paths *should* favour hubs", and he rejected that wording:
+
+  > I'd adjust that to: first paths are *expected* to favor hubs more so than bypassed
+  > paths. When tuning and adjusting, we're not aiming for a result like "first paths
+  > should never hit hubs". Part of our desired behavior however is that more bypasses
+  > (and especially bypasses of hubs) should result in fewer and fewer hubs in each
+  > iteration. This is something to explore in more depth at a later date.
+
+  The distinction is load-bearing for anyone tuning later: the target is a **monotone
+  decline in hub incidence across successive bypasses**, not a hub-free first path. A
+  tuning run that suppressed hubs in the first path would satisfy the paraphrase and miss
+  the actual goal.
 - **Coverage limits he raised**: some obscure artists are absent from the graph (e.g. Bee
   Caves), and obscure artists he does not know well (e.g. Lang Lang) are hard for him to
   evaluate. Both bound how far a listening test can probe the obscure tail.
@@ -602,3 +615,102 @@ Translating ports to arms, and nothing else: **the owner preferred `capfix` over
 
 **Run once. This result stands.** Per the handoff and §15, a second listening test is
 forbidden regardless of what the metrics say.
+
+---
+
+## 17. Task 16 — adopt (2026-07-22). Phase 2 closes.
+
+Executed inline rather than by subagent. The revised plan §7 lists Task 16 as
+"subagent + reviewer, mechanical"; that is a permission, not a requirement, and the task
+turned out to be nine edits plus three suite runs, below the threshold where delegation
+pays for its own context transfer. The plan's stated worry about delegated work — *bad
+reporting about correct code*, three times this phase — argues for doing and verifying in
+one place when the task is this size.
+
+### Adopted configuration
+
+`BuilderConfig` defaults are now the `capfix` arm:
+
+| Knob | Adopted | Deleted |
+|---|---|---|
+| `cap_strategy` | `mutual_knn` | `pre_symmetrise` — raises |
+| `similarity_rescale` | `p99_log_clip` | `percentile_rank` — raises |
+| `similarity_damping` | `0.0` | nothing — see below |
+
+**C-4 discharged, with one scope narrowing the owner approved.** Task 16 Step 1 said to
+delete the loser from *each of the three* knobs. Spec §8 risk 4 names only
+`similarity_rescale`; `config.py`'s own comments marked `cap_strategy` and
+`similarity_rescale`. Nothing marked damping, which is a continuous axis rather than a
+two-option switch — deleting it would have removed `damped_strength` entirely. **Decision:
+delete the two enum losers, keep damping as a supported float defaulting to 0.0.** The
+plan's "each knob" over-reached relative to both the spec and the code.
+
+Enforcement is a `BuilderConfig.__post_init__` raise, not just a comment, so a config
+carried over from a sweep script fails loudly instead of silently selecting removed code.
+`rescale_scores`'s `percentile_rank` branch and `pipeline.py`'s `pre_symmetrise` truncation
+are deleted, not commented out.
+
+### Two defects found while executing, both real, both fixed
+
+**1. The test fixtures were never actually committed.** `.gitignore` had `*.bin` with
+`!tests/fixtures/*.bin` as the exemption, and `CLAUDE.md` asserted that "a fresh clone has
+the test fixtures." Both were wrong: **a gitignore pattern containing a slash is anchored
+to the directory holding the `.gitignore`**, so `!tests/fixtures/*.bin` only ever matched a
+top-level `tests/fixtures/` that does not exist. `api/tests/fixtures/graph-fixture.bin` was
+untracked, so **the API suite could not run on a fresh clone at all.** Fixed to
+`!**/tests/fixtures/*.bin`; both fixtures now committed; `builder/scratch/` still ignored.
+
+This is the shape CLAUDE.md warns about — a document asserting something about the world
+that is not true — and it survived because nobody had cloned fresh.
+
+**2. The Snyk Low CWE-23 in `api/eval/export_paths.py` is fixed**, not accepted. Revised
+plan §5 required one or the other and flagged that it had twice been misreported as
+pre-existing. It was new on this branch. The output path is now resolved against the repo
+root and refused if it escapes; verified by running a `../../../../evil.json` argument and
+seeing it rejected. **Behaviour change worth knowing:** a relative output path is now
+interpreted relative to the repo root, not the current working directory.
+
+### Fixtures regenerated from the adopted graph
+
+Source: `builder/scratch/graph-t15-capfix.bin`
+(`c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237`).
+
+| Artifact | sha256 | In git |
+|---|---|---|
+| `builder/scratch/graph-5k.bin` (5000 nodes) | `3029aaa2cdddc158e8d4ccb254a8df75b2f12fdca622f860cdf2572e322ecf64` | no — gitignored dev graph |
+| `{builder,api}/tests/fixtures/graph-fixture.bin` (500 nodes) | `a45d160aeafdfe46a5b584d78b37b54f5fbae116d365ae454cac97ae4d927750` | **yes, now** |
+
+### Gates
+
+- **All three suites green**: builder 93 passed, api 116 passed, frontend 31 passed.
+- **One fixture-dependent assertion updated, not weakened.** `test_fixture_has_real_artists`
+  asserted `artist_count == 200`; the plan specifies `--size 500`, so the expectation moved
+  to 500. The assertion still pins an exact count.
+- **New tests added** rather than only changed: the adopted defaults are pinned
+  (`test_phase2_adopted_defaults`), and both deleted options are asserted to raise
+  (`test_losing_options_are_deleted_not_supported`,
+  `test_percentile_rank_was_deleted_and_raises`). Tests for the deleted `percentile_rank`
+  implementation were removed with it.
+- **Snyk clean**: 0 issues across `builder/src/artistpath_builder`, `api/src/artistpath_api`,
+  and `api/eval`.
+
+### Carried to Phase 1, with success conditions (roadmap Phase 1 section)
+
+1. **The p99 ceiling defect survives adoption.** The adopted rescale is still the clip. The
+   rank transform that removes the ceiling *lost* the blind test, so the defect is real but
+   not obviously worth fixing by that route. **Success condition:** a rescale that removes
+   the ceiling and wins or ties a blind listen, or an explicit recorded decision to keep it.
+2. **Bypass hub-decline is unmeasured.** The channel that decided this phase's adoption is
+   one the sweep never measured. **Success condition:** a hub-incidence-versus-bypass-count
+   measurement exists, and C3's fix moves it.
+
+Also filed: **C3 is reclassified in the roadmap** from a UX item to the pathfinding defect
+that leads Phase 1, per revised plan §6.
+
+### What should not be re-litigated
+
+`capfix` is adopted on two independent blind listening tests (§12, §16). Damping was tested
+at 0.25 / 0.5 / 0.75 and rejected. The overlap-family metrics are not trustworthy at these
+effect sizes (adjudication §6 claims 41–42) — that is a finding about the *instrument*, and
+it would have held identically had it favoured `capfix`. A third listening test is
+forbidden.

@@ -181,7 +181,15 @@ def main() -> int:
     if len(sys.argv) < 3:
         print(__doc__)
         return 2
-    out_path = Path(sys.argv[1])
+    # Constrain the output path to the repo. This is a local dev script and the
+    # argument is operator-supplied, so traversal is not a privilege boundary
+    # here — but it is a real unsanitised argv -> Path -> write flow (Snyk
+    # CWE-23, new on the Phase 2 branch), and pinning it costs three lines.
+    repo_root = Path(__file__).resolve().parents[2]
+    out_path = (repo_root / sys.argv[1]).resolve()
+    if not out_path.is_relative_to(repo_root):
+        print(f"refusing to write outside the repo: {out_path}")
+        return 2
     graph_paths = sys.argv[2:]
 
     timings = _new_timings()

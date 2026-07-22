@@ -65,14 +65,47 @@ In brief, and cited rather than restated:
 ## Gate 1 — Personal use
 
 ### Phase 1: Make it actually work
+
+**C3 leads this phase.** `w_floor` is a no-op and `known` degrades to a bare hard
+exclusion — that is a *pathfinding defect*, not a UX item, and filing it under "bypass"
+next to button fixes is part of why it sat unscheduled behind sixteen tasks of graph work
+(revised plan §6). It is a direct contributor to the founding complaint: rerolls returning
+artists at the same popularity band.
+
+- **Bypass (C3) — first:** delete `w_floor` and `floor_relax_*`; implement real
+  differentiation and progressive path lengthening; add the path-level tests QA found
+  missing. Carries the routing-weight work from Task 0 Step 6.
 - **Clips:** artist matching (C1); cache redesign — identity vs signed URL (C2)
-- **Bypass:** delete `w_floor` and `floor_relax_*`; implement real differentiation and progressive path lengthening (C3); add the path-level tests QA found missing
 - **Frontend UX** (all from dogfooding): "start over" / new-path control on the path page; card pause button (only the bottom bar works); stop audio on recompute; hide both bypass buttons on the **start and end** artists
 
-### Phase 2: Path quality
-- Graph rebuild: **entity filter** (`jesus2099`, `[unknown]`, `[anonymous]` are still nodes) **then** damping (C4) — filter first, since damping re-inflates low-mass pairs
-- Harness: replace binary `hub_traversed` with **hubfrac**; add **neighbour-set Jaccard** as the primary, score-independent objective
-- **Path export / logging** for debugging and review
+**Carried in from Phase 2, with success conditions:**
+
+- **The p99 ceiling defect survives adoption.** The adopted arm keeps `p99_log_clip`, which
+  saturates ~1 % of edges at exactly 1.0 at zero similarity cost. The rank transform that
+  removes it *lost* a blind listening test, so the defect is real but not obviously worth
+  fixing by that route. **Success condition:** either a rescale that removes the ceiling and
+  wins or ties a blind listen, or an explicit recorded decision to keep the ceiling.
+- **Bypass hub-decline is unmeasured.** The owner's stated target (execution log §16) is
+  that successive bypasses — especially of hubs — yield *progressively fewer* hubs, not that
+  first paths avoid hubs. No metric covers this; the Phase 2 sweep never measured bypass at
+  all, yet bypass is what decided the adoption test. **Success condition:** a hub-incidence-
+  versus-bypass-count measurement exists and C3's fix moves it.
+
+### Phase 2: Path quality — ✅ COMPLETE (2026-07-22)
+
+Adopted **`capfix`**: `cap_strategy="mutual_knn"`, `similarity_rescale="p99_log_clip"`,
+`similarity_damping=0.0`, entity filter on. Chosen by the owner in a blind listening test
+(execution log §16); the losing options are deleted and raise.
+
+- Graph rebuild: entity filter ✅ done. **Damping (C4) was tested and rejected** — d = 0.25 /
+  0.5 / 0.75 all built and evaluated, and the undamped arm won. The prediction above that
+  damping was needed did not survive measurement.
+- Harness: `hubfrac` ✅ done. **Neighbour-set Jaccard was not adopted as the primary
+  objective** — the overlap-family metrics proved unstable at these effect sizes and sign-
+  flipped between slices (adjudication §6 claims 41–42).
+- **Path export / logging** ✅ done (`api/eval/`).
+
+Figures: `../findings/2026-07-22-phase2-sweep-results.md`. Do not restate them here.
 
 **Gate 1 does not need:** deployment, CI, observability, auth, scale work.
 

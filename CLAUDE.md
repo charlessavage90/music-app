@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |---|---|
 | **Which documents can I trust?** | [`docs/README.md`](docs/README.md) — the documentation map. It classifies every doc by role and names which are superseded. **Read it before citing anything in `docs/`.** |
 | **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks 27 prior claims upheld/overturned/unresolved. |
-| **What is the next action?** | Gate 1, Phase 2 (path quality). Execute `docs/superpowers/plans/2026-07-21-phase2-path-quality.md` — **in a fresh session, subagent-driven**, not inline. Phase 1 (clips, bypass, frontend UX) is unplanned. |
+| **What is the next action?** | **Gate 1, Phase 1 — and it needs planning first.** Phase 2 is COMPLETE (adopted `capfix`, 2026-07-22; execution log §16). Phase 1 leads with **C3** — `w_floor` is a no-op and `known` degrades to a bare hard exclusion, a pathfinding defect, not a UX item — then clips (C1, C2), then frontend UX. Two items carry in from Phase 2 with success conditions; see the roadmap's Phase 1 section. |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
 | **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. |
@@ -77,9 +77,12 @@ ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
   uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
 
-**No graph artifact is in git.** `.gitignore` excludes `builder/scratch/` and `*.bin`,
-with only `!tests/fixtures/*.bin` exempt — so a fresh clone has the test fixtures but
-none of the dev graphs. Build `graph-5k.bin` locally from an archive with the `build`
+**No dev or production graph artifact is in git.** `.gitignore` excludes
+`builder/scratch/` and `*.bin`, with only `!**/tests/fixtures/*.bin` exempt — so a fresh
+clone has the two 500-node test fixtures but none of the dev graphs. (The `**/` matters
+and was wrong until 2026-07-22: a gitignore pattern containing a slash is anchored to the
+file's own directory, so the previous `!tests/fixtures/*.bin` exempted nothing and the
+fixtures were silently uncommitted.) Build `graph-5k.bin` locally from an archive with the `build`
 and `fixture` commands above, or copy it from another machine. Adopted 75k artifacts
 are identified by recorded checksum in `docs/superpowers/findings/`, since they cannot
 be committed.
@@ -123,8 +126,11 @@ source imported a population mismatch with the similarity graph. It's then log-s
 to 0–1 because raw counts are power-law distributed.
 
 ### Graph shape
-Similarity is not mutual, so edges are **symmetrised** (keep the stronger score), then
-pruned to the **largest connected component**. Keeping only that component guarantees a
+Similarity is not mutual, so edges are first filtered by **mutual k-NN** — an edge
+survives only if each endpoint ranks the other in its top-k — then **symmetrised** (keep
+the stronger score), then pruned to the **largest connected component**. Mutual k-NN is
+what actually bounds degree; the legacy alternative capped each artist's own list before
+symmetrising, which bounds nothing afterwards. It was deleted in Phase 2 and now raises. Keeping only that component guarantees a
 path exists between any two artists the UI offers — so a "no path" result can *only*
 come from user exclusions, never from missing graph structure.
 
