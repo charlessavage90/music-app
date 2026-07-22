@@ -91,6 +91,23 @@ artists at the same popularity band.
   all, yet bypass is what decided the adoption test. **Success condition:** a hub-incidence-
   versus-bypass-count measurement exists and C3's fix moves it.
 
+- **C3 modifies the channel that decided the adoption.** ⚠️ The blind test discriminated on
+  bypass behaviour, not on first paths — on three no-bypass comparisons the arms looked
+  similar (execution log §16). The comparison was **fair**: both arms ran identical API
+  code, so the only difference was the graph. But that code contains C3 — `w_floor` is a
+  no-op and `known` degrades to a bare hard exclusion — so the verdict describes how the
+  two graphs behave under a *partially broken* bypass. C3's fix changes bypass routing
+  materially, and the behaviour that separated the arms may not separate them the same way
+  afterwards.
+
+  **This is a watch item, not a redo, and the distinction matters:** re-testing because a
+  result was unwelcome is forbidden (execution log §15). Re-testing because the mechanism
+  under it changed is a different question. `graph-t15-capfix.bin` and `graph-t15-d025.bin`
+  both still exist with recorded checksums, so the check is cheap if it is warranted.
+  **Success condition:** after C3 lands, either confirm by use that bypass behaviour still
+  favours the adopted graph, or record an explicit decision that the pre-C3 comparison
+  stands. Do not let it lapse unexamined.
+
 ### Phase 2: Path quality — ✅ COMPLETE (2026-07-22)
 
 Adopted **`capfix`**: `cap_strategy="mutual_knn"`, `similarity_rescale="p99_log_clip"`,
