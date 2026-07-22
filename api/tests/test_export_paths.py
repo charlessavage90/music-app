@@ -75,7 +75,7 @@ def test_render_html_escapes_hostile_artist_names():
     assert "&quot;" in out
 
 
-def test_render_html_marks_ceiling_hops_and_flagged_paths():
+def test_render_html_marks_ceiling_hops():
     rows = [
         {
             "pair": "A -> C",
@@ -87,8 +87,6 @@ def test_render_html_marks_ceiling_hops_and_flagged_paths():
                         {"name": "B", "rank": 1, "score": 1.0, "degree": 900},
                         {"name": "C", "rank": 3, "score": 0.4, "degree": 2},
                     ],
-                    "flagged": True,
-                    "reasons": ["non-musical interior entity: 'B'"],
                 }
             ],
         }
@@ -96,5 +94,3 @@ def test_render_html_marks_ceiling_hops_and_flagged_paths():
     html = render_html(artifacts=[{"label": "control", "diagnostics": {}}],
                        panel_name="test", rows=rows)
     assert "ceiling" in html      # the 1.0 hop is marked
-    assert "flagged" in html
-    assert "non-musical" in html

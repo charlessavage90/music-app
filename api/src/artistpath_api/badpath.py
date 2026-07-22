@@ -1,5 +1,14 @@
 """A rejection screen for incoherent paths.
 
+CANCELLED (docs/superpowers/plans/2026-07-22-phase2-revised-plan.md §2 C-1).
+Not deferred — cancelled: it failed its Task 5 gate, was deferred twice, carries
+three known defects, and its calibration set contains a path mislabelled as
+good. Its only identified viable signal is recorded as self-obsoleting once the
+Task 13 rescale landed. This module and its tests (`api/tests/test_badpath.py`)
+are kept in the tree, intentionally unreferenced by the eval harness and by
+`export_paths.py` — do not re-wire `screen_path` into either without reopening
+that decision.
+
 NOT AN OBJECTIVE. Never optimise against this. An earlier tuning run improved
 every headline metric while routing through unrelated foreign-scene artists and
 a MusicBrainz editor account; a detector added to the objective would be gamed

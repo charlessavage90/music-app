@@ -31,7 +31,6 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from artistpath_api.badpath import screen_path  # noqa: E402
 from artistpath_api.config import ApiConfig  # noqa: E402
 from artistpath_api.graph_store import GraphStore  # noqa: E402
 from artistpath_api.pathfinding import find_path  # noqa: E402
@@ -47,12 +46,10 @@ th{background:#f4f4f4}
 .hop{white-space:nowrap}
 .ceiling{background:#ffe0e0;font-weight:600}
 .hub{color:#a00}
-.flagged{background:#fff4d6}
-.reason{color:#a05000;font-size:12px}
 .muted{color:#777;font-size:12px}
 @media(prefers-color-scheme:dark){
  body{background:#111;color:#eee}th{background:#222}th,td{border-color:#333}
- .ceiling{background:#4a1f1f}.flagged{background:#3a3116}.reason{color:#e0b070}
+ .ceiling{background:#4a1f1f}
 }
 """
 
@@ -129,8 +126,7 @@ def render_html(artifacts: list[dict], panel_name: str, rows: list[dict]) -> str
     for row in rows:
         parts.append(f"<tr><td>{html.escape(row['pair'])}</td>")
         for cell in row["cells"]:
-            css = " class='flagged'" if cell.get("flagged") else ""
-            parts.append(f"<td{css}>")
+            parts.append("<td>")
             for hop in cell["hops"]:
                 classes = []
                 if hop["score"] is not None and hop["score"] >= 1.0:
@@ -145,8 +141,8 @@ def render_html(artifacts: list[dict], panel_name: str, rows: list[dict]) -> str
                     else f" <span class='muted'>[deg {hop['degree']}]</span>"
                 )
                 parts.append(f"<div{attr}>{html.escape(hop['name'])}{detail}</div>")
-            for reason in cell.get("reasons", []):
-                parts.append(f"<div class='reason'>⚠ {html.escape(reason)}</div>")
+            if cell.get("note"):
+                parts.append(f"<div class='muted'>{html.escape(cell['note'])}</div>")
             parts.append("</td>")
         parts.append("</tr>")
     parts.append("</table></div>")
@@ -166,7 +162,6 @@ def _new_timings() -> dict[str, float]:
         "diagnostics": 0.0,
         "hub_cutoffs": 0.0,
         "find_path": 0.0,
-        "screen_path": 0.0,
         "hops": 0.0,
         "render_and_write": 0.0,
     }
@@ -232,30 +227,19 @@ def main() -> int:
                 a = store.id_by_mbid.get(entry["from"])
                 b = store.id_by_mbid.get(entry["to"])
                 if a is None or b is None:
-                    cells.append({"label": label, "hops": [], "flagged": False,
-                                  "reasons": ["endpoint absent from this artifact"]})
+                    cells.append({"label": label, "hops": [],
+                                  "note": "endpoint absent from this artifact"})
                     continue
                 t0 = time.perf_counter()
                 path = find_path(store, a, b, [], cfg)
                 timings["find_path"] += time.perf_counter() - t0
                 if not path:
-                    cells.append({"label": label, "hops": [], "flagged": False,
-                                  "reasons": ["no path"]})
+                    cells.append({"label": label, "hops": [], "note": "no path"})
                     continue
-                t0 = time.perf_counter()
-                report = screen_path(store, path)
-                timings["screen_path"] += time.perf_counter() - t0
                 t0 = time.perf_counter()
                 hops = _hops(store, path, hub_cutoffs[label])
                 timings["hops"] += time.perf_counter() - t0
-                cells.append(
-                    {
-                        "label": label,
-                        "hops": hops,
-                        "flagged": report.flagged,
-                        "reasons": report.reasons,
-                    }
-                )
+                cells.append({"label": label, "hops": hops})
             rows.append(
                 {
                     "pair": f"[{stratum}] {entry['from_name']} -> {entry['to_name']}",

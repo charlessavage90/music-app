@@ -1,118 +1,123 @@
-"""Baseline path-quality measurement over a frozen panel of artist pairs.
-
-Establishes the numbers the stage-2 review demanded: hub-traversal rate,
-smoothness, interior popularity, path length — for the full cost function
-versus a similarity-only router and plain BFS. If the full router scores like
-similarity-only, the popularity machinery is inert (review finding CRITICAL-1);
-the hub-traversal rate quantifies the hub-seeking degeneracy (CRITICAL-2).
-
-Re-run this after any weight change. The panel is frozen (seed) so numbers are
-comparable across runs. Success target from the review: hub-traversal well
-below 90%, without wrecking smoothness.
+"""Evaluate one artifact over the frozen panel.
 
 Usage:
-    cd api && UV_LINK_MODE=copy uv run python eval/run_baseline.py [graph.bin] [n_pairs]
+    cd api && PYTHONIOENCODING=utf-8 UV_LINK_MODE=copy uv run python \\
+        eval/run_baseline.py <graph.bin> <label> [--held-out]
+
+Writes eval/results-<label>.json with per-pair metric vectors, so paired
+significance tests run later without re-routing 130 paths.
+
+The bad-path screen (artistpath_api.badpath) is cancelled (plan §2 C-1) and is
+deliberately not imported here: this harness measures the FULL router and a
+w_jump = 0 router only, never the screen.
 """
 
 from __future__ import annotations
 
+import dataclasses
+import json
 import sys
 import time
 from pathlib import Path
 
-import numpy as np
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from artistpath_api.config import ApiConfig
 from artistpath_api.evaluation import (
-    bfs_shortest_path,
+    PathMetrics,
     hub_node_set,
-    out_degree,
     path_metrics,
-    similarity_only_path,
     summarise,
 )
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.pathfinding import find_path
+from diagnostics import artifact_diagnostics
+from panel import load_panel, resolve_pairs
 
-SEED = 42
-
-
-def build_panel(store: GraphStore, n_each: int, rng: np.random.Generator):
-    """Frozen panel: `n_each` random pairs + `n_each` obscure pairs (both
-    endpoints out-degree <= 5, where discovery is supposed to happen)."""
-    n = store.artist_count
-    degrees = np.diff(store.offsets)
-    obscure = np.where(degrees <= 5)[0]
-
-    random_pairs = []
-    while len(random_pairs) < n_each:
-        a, b = int(rng.integers(n)), int(rng.integers(n))
-        if a != b:
-            random_pairs.append((a, b))
-
-    obscure_pairs = []
-    while len(obscure_pairs) < n_each and len(obscure) > 1:
-        a, b = (int(x) for x in rng.choice(obscure, size=2, replace=False))
-        if a != b:
-            obscure_pairs.append((a, b))
-
-    return {"random": random_pairs, "obscure": obscure_pairs}
+AGGREGATED = ("random", "obscure", "popularity_weighted")
+HUB_SET_CACHE = Path(__file__).parent / "hub-nodes-control.json"
 
 
-def run_variant(store, pairs, router, hub_nodes, cfg=None):
-    metrics = []
-    for a, b in pairs:
-        path = router(store, a, b, cfg) if cfg is not None else router(store, a, b)
-        if path and len(path) >= 2:
-            metrics.append(path_metrics(store, path, hub_nodes))
-    return summarise(metrics)
+def load_or_freeze_hub_set(store: GraphStore) -> set[int]:
+    """Hub set frozen by MBID from the control build.
 
-
-def fmt(s: dict) -> str:
-    if not s:
-        return "  (no paths)"
-    return (
-        f"  hubfrac {s['mean_hubfrac']*100:5.1f}%   "
-        f"len {s['mean_length']:5.1f}   "
-        f"max-interior-deg {s['mean_max_interior_degree']:7.0f}   "
-        f"interior-pop {s['mean_interior_pop']:.3f}   "
-        f"bottleneck-sim {s['mean_bottleneck_sim']:.3f}   "
-        f"mean-sim {s['mean_sim']:.3f}"
+    A per-graph top-1% threshold moves between builds (363 vs 278 measured),
+    so a variant could "improve" purely by compressing its degree distribution.
+    """
+    if HUB_SET_CACHE.exists():
+        mbids = json.loads(HUB_SET_CACHE.read_text(encoding="utf-8"))
+        return {store.id_by_mbid[m] for m in mbids if m in store.id_by_mbid}
+    nodes = hub_node_set(store, 0.01)
+    HUB_SET_CACHE.write_text(
+        json.dumps(sorted(store.mbids[i] for i in nodes)), encoding="utf-8"
     )
+    return nodes
 
 
-def main():
-    graph = sys.argv[1] if len(sys.argv) > 1 else "../builder/scratch/graph-75k.bin"
-    n_each = int(sys.argv[2]) if len(sys.argv) > 2 else 50
+def main() -> int:
+    graph_path, label = sys.argv[1], sys.argv[2]
+    held_out = "--held-out" in sys.argv
 
-    print(f"loading {graph} ...")
-    store = GraphStore.load(graph)
-    hub_nodes = hub_node_set(store, 0.01)
-    print(f"{store.artist_count:,} artists | top-1% hub set size = {len(hub_nodes)}")
+    store = GraphStore.load(graph_path)
+    panel = load_panel(Path(__file__).parent / "panel.json")
+    hub_nodes = load_or_freeze_hub_set(store)
 
-    rng = np.random.default_rng(SEED)
-    panel = build_panel(store, n_each, rng)
+    full_cfg = ApiConfig()
+    # w_jump = 0 removes the popularity channel entirely: w_floor is a proven
+    # no-op and w_hub is dormant, so cost reduces to w_sim*(1-sim) + w_hop.
+    # Popularity is derived from the scores, so it is NOT frozen across arms
+    # even with identical weights (spec §6.1).
+    no_jump_cfg = dataclasses.replace(full_cfg, w_jump=0.0)
 
-    cfg = ApiConfig()
-    # Router adapters with a uniform (store, a, b[, cfg]) signature.
-    def full(store, a, b, cfg):
-        return find_path(store, a, b, [], cfg)
+    output: dict = {"label": label, "graph": graph_path, "held_out": held_out}
+    output["diagnostics"] = artifact_diagnostics(store, cap=50)
 
-    routers = [
-        ("FULL cost function", full, cfg),
-        ("similarity-only", lambda s, a, b: similarity_only_path(s, a, b), None),
-        ("plain BFS (shortest)", lambda s, a, b: bfs_shortest_path(s, a, b), None),
-    ]
+    for router_name, cfg in (("full", full_cfg), ("w_jump_0", no_jump_cfg)):
+        per_pair: list[dict] = []
+        metrics: list[PathMetrics] = []
+        started = time.time()
+        for stratum in AGGREGATED:
+            pairs, dropped = resolve_pairs(
+                store, panel, stratum, held_out=held_out
+            )
+            if dropped:
+                print(f"WARNING {stratum}: {len(dropped)} unresolvable mbids: {dropped[:3]}")
+            for a, b in pairs:
+                path = find_path(store, a, b, [], cfg)
+                if not path or len(path) < 3:
+                    continue
+                m = path_metrics(store, path, hub_nodes)
+                metrics.append(m)
+                per_pair.append(
+                    {
+                        "stratum": stratum,
+                        "from": store.mbids[a],
+                        "to": store.mbids[b],
+                        **dataclasses.asdict(m),
+                    }
+                )
+        output[router_name] = {
+            "per_pair": per_pair,
+            "summary": summarise(metrics),
+            "seconds": round(time.time() - started, 1),
+        }
+        s = output[router_name]["summary"]
+        print(
+            f"{label:22s} {router_name:9s} n={s.get('n', 0):3d} "
+            f"AA {s.get('mean_adamic_adar', 0):.4f}  "
+            f"OC {s.get('mean_overlap_coefficient', 0):.4f}  "
+            f"hubfrac {s.get('mean_hubfrac', 0):.4f}  "
+            f"ceiling {s.get('mean_ceiling_hops', 0):.3f}  "
+            f"len {s.get('mean_length', 0):.1f}"
+        )
 
-    for subset, pairs in panel.items():
-        print(f"\n=== {subset} pairs (n={len(pairs)}) ===")
-        for label, router, c in routers:
-            t = time.time()
-            s = run_variant(store, pairs, router, hub_nodes, c)
-            print(f"{label:22s}{fmt(s)}   [{time.time()-t:.0f}s]")
+    suffix = "-heldout" if held_out else ""
+    out = Path(__file__).parent / f"results-{label}{suffix}.json"
+    out.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    print(f"wrote {out}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
