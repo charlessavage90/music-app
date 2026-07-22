@@ -13,12 +13,39 @@ import numpy as np
 from artistpath_builder.graph import Graph
 
 
-def extract_fixture(graph: Graph, size: int, seed_mbid: str) -> Graph:
-    """Breadth-first expansion from a seed, so the result is always connected."""
-    try:
-        start = graph.mbids.index(seed_mbid)
-    except ValueError as exc:
-        raise KeyError(f"seed artist not in graph: {seed_mbid}") from exc
+def most_popular_index(graph: Graph) -> int:
+    """Index of the most popular artist. Ties break on lowest MBID.
+
+    This is the default fixture seed. It used to be `mbids[0]` — an arbitrary
+    artist, whichever sorted first — and that was harmless only by accident.
+    The pre-Phase-2 graph left hubs unbounded (a configured cap of 50 produced
+    an observed degree of 11,243), so a breadth-first walk from *anywhere*
+    reached the famous core within a hop or two and swept it in. Mutual k-NN
+    bounds degree at k, so the same walk now stays inside a local cluster: the
+    first fixture built after adoption contained neither Miles Davis nor
+    Radiohead. Seeding from the most popular artist makes the sample
+    representative by construction rather than by a property of the graph that
+    no longer holds.
+    """
+    return min(
+        range(len(graph.mbids)),
+        key=lambda i: (-graph.popularity[i], graph.mbids[i]),
+    )
+
+
+def extract_fixture(graph: Graph, size: int, seed_mbid: str | None = None) -> Graph:
+    """Breadth-first expansion from a seed, so the result is always connected.
+
+    `seed_mbid=None` seeds from the most popular artist — see
+    `most_popular_index` for why that default matters.
+    """
+    if seed_mbid is None:
+        start = most_popular_index(graph)
+    else:
+        try:
+            start = graph.mbids.index(seed_mbid)
+        except ValueError as exc:
+            raise KeyError(f"seed artist not in graph: {seed_mbid}") from exc
 
     chosen: list[int] = []
     seen = {start}

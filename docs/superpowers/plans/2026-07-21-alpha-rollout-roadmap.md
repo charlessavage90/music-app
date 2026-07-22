@@ -88,8 +88,64 @@ artists at the same popularity band.
 - **Bypass hub-decline is unmeasured.** The owner's stated target (execution log §16) is
   that successive bypasses — especially of hubs — yield *progressively fewer* hubs, not that
   first paths avoid hubs. No metric covers this; the Phase 2 sweep never measured bypass at
-  all, yet bypass is what decided the adoption test. **Success condition:** a hub-incidence-
-  versus-bypass-count measurement exists and C3's fix moves it.
+  all, yet bypass is what decided the adoption test. **Success condition:** a
+  discovery-payload-versus-bypass-count measurement exists and C3's fix moves it.
+
+  **Measure the payload, not the ratio.** Hubs are not a cost that accumulates — they are
+  slots that failed to deliver. What the product delivers is artists the listener does not
+  already know, so the primary is the **absolute count of non-hub interior artists**, per
+  path, plotted against bypass count. A worked case, from the owner: an 11-artist path with
+  4 hubs delivers 7 novel artists and beats a 4-artist path with 3 hubs delivering 1 —
+  despite having *more* hubs.
+
+  This is why hub **count** is the wrong primary (it ranks that case backwards) and why
+  `hubfrac` alone is insufficient (it ranks it correctly but is scale-invariant, reporting
+  roughly 0.5 → 0.28 where the delivered value went 1 → 7). Keep `hubfrac` as the
+  normalised companion. Payload also resists length-padding for free: a path that lengthens
+  by adding hubs adds no payload, so the curve stays flat.
+
+  **Open, decide when building it:** "non-hub" is a structural proxy for "novel", and the
+  two diverge — the owner called Vulfpeck a hub, which is almost certainly outside the top
+  1 % by degree. Perceived hub-ness is taste-relative; measured hub-ness is structural.
+  Offline you can only have the proxy. Bypass telemetry (Phase 7, worth pulling forward)
+  measures the real thing.
+
+  **Path length is an observable, not a target.** Track it alongside payload as a
+  diagnostic, but it has a ceiling set by attention rather than by graph structure — at some
+  point a journey stops feeling like one. No offline metric will find that boundary. It
+  belongs in `TEST-QUEUE.md`, discovered by use.
+
+- **Bypass substitution — an unresolved lead, deliberately scoped small.** In the adoption
+  test the owner observed `d025` responding to bypass by swapping the rejected artist for
+  another well-known one while leaving the rest of the path intact — the fingerprint of a
+  graph with dense local alternatives, where a near-equivalent stand-in is always available.
+  **Scope honestly: one path, 3–4 of 8–12 bypasses, mid-sequence, and not consistent for
+  that arm.** It is far too thin to explain the verdict and is recorded only so it is not
+  lost.
+
+  A plausible mechanism exists — `d025` retains materially more edges than `capfix` despite
+  the same mutual k-NN cap, because the cap selects top-K by score and damping changes
+  scores — but it is unsupported at this evidence level. **Cheap check if it matters:**
+  node overlap between the pre-bypass and post-bypass path. If one arm retains n−1 of n
+  nodes while another reroutes, the behaviour is systematic; if not, it was a property of
+  one region of the graph. Currently those two cannot be distinguished.
+
+- **C3 modifies the channel that decided the adoption.** ⚠️ The blind test discriminated on
+  bypass behaviour, not on first paths — on three no-bypass comparisons the arms looked
+  similar (execution log §16). The comparison was **fair**: both arms ran identical API
+  code, so the only difference was the graph. But that code contains C3 — `w_floor` is a
+  no-op and `known` degrades to a bare hard exclusion — so the verdict describes how the
+  two graphs behave under a *partially broken* bypass. C3's fix changes bypass routing
+  materially, and the behaviour that separated the arms may not separate them the same way
+  afterwards.
+
+  **This is a watch item, not a redo, and the distinction matters:** re-testing because a
+  result was unwelcome is forbidden (execution log §15). Re-testing because the mechanism
+  under it changed is a different question. `graph-t15-capfix.bin` and `graph-t15-d025.bin`
+  both still exist with recorded checksums, so the check is cheap if it is warranted.
+  **Success condition:** after C3 lands, either confirm by use that bypass behaviour still
+  favours the adopted graph, or record an explicit decision that the pre-C3 comparison
+  stands. Do not let it lapse unexamined.
 
 ### Phase 2: Path quality — ✅ COMPLETE (2026-07-22)
 

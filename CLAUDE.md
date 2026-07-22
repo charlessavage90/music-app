@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | **What is the next action?** | **Gate 1, Phase 1 — and it needs planning first.** Phase 2 is COMPLETE (adopted `capfix`, 2026-07-22; execution log §16). Phase 1 leads with **C3** — `w_floor` is a no-op and `known` degrades to a bare hard exclusion, a pathfinding defect, not a UX item — then clips (C1, C2), then frontend UX. Two items carry in from Phase 2 with success conditions; see the roadmap's Phase 1 section. |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
+| **What does the owner mean by "better"?** | `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — calibration for the blind listening test, this project's strongest evidence class. Read it before running one or interpreting a verdict. It records **preference, not evidence** — never treat it as criteria. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
 | **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. |
 
@@ -254,6 +255,34 @@ reviews are rare and targeted here.
 
 Closeout writes; session-start reads. Keep them in sync — if you change what one
 produces, change what the other consumes.
+
+### How to present results to the owner
+
+**"Don't draw conclusions, leave the decision to me" does not work as an instruction, and
+this repo does not use it.** Every presentation selects and frames, and both are
+inferential. A session told to withhold conclusions still makes them — in which table
+leads, which figure is bolded, which sentence opens the section — where the owner cannot
+challenge them, because they were never stated. Phase 2's "no candidate beats capfix" was
+a conclusion delivered as a summary, resting on selection that dropped the data
+contradicting it.
+
+**Conclude explicitly, label it, and still decline to decide.** Four parts, in this order:
+
+1. **Measured** — the numbers, no adjectives. Tables belong here and nowhere else.
+2. **What I infer from it** — plainly labelled as inference, and **in plain language.**
+   Someone who does not know what Adamic–Adar measures must be able to follow this section
+   and disagree with it. If a claim cannot survive being restated without its metric name,
+   that is worth knowing before it reaches a decision.
+3. **Weakest link** — the load-bearing assumption, and what would falsify it. State which
+   parts you would defend and which you would abandon cheaply.
+4. **Options and their consequences** — not a recommendation wearing a finding's clothes.
+
+**The summary must name whatever cuts against it.** A summary that omits contradicting
+data is wrong even when every number in it is right.
+
+**Exception — blind evaluations.** A session running a blind test says nothing beyond the
+bare mechanics, and is held ignorant of the expected outcome. There, the whole point is
+that no framing reaches the owner at all.
 
 ### When to recommend a review
 
