@@ -87,9 +87,10 @@ class BuilderConfig:
     # How raw edge strength is mapped into 0-1. ADOPTED: "p99_log_clip",
     # min(1, log1p(v)/log1p(p99)).
     #
-    # Adopted with a known defect, not because it is clean: it saturates ~1% of
-    # edges at exactly 1.0, and those cost w_sim*(1-1.0) == 0 — free
-    # similarity, with 30-82% of routed hops sitting at that ceiling. The
+    # Adopted with a known defect, not because it is clean: it saturates a
+    # small share of edges at exactly 1.0, and those cost w_sim*(1-1.0) == 0 —
+    # free similarity. For the measured share of edges and of routed hops, see
+    # the adjudication findings §2.5; figures are not restated here. The
     # alternative "percentile_rank" (rank transform, no ceiling tie-mass)
     # removed that defect and still LOST, in a blind listening test the owner
     # judged on path quality (execution log §16). The ceiling defect is

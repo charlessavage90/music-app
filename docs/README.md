@@ -37,14 +37,22 @@ that is how the drift began.
 
 ## Current state
 
-- **Gate 1 (personal use).** Phase 2 (path quality) is **nearly complete** — Tasks 0–15
-  executed on branch `phase2-path-quality` (open PR). Phase 1 (clips, bypass, frontend UX)
-  is not yet planned.
-- **Next action:** run the blind listening test in
-  `superpowers/2026-07-22-HANDOFF-blind-test.md`, which decides the adopted arm. Then
-  Task 16 (adopt), then the `closeout` skill.
-- The governing plan is `superpowers/plans/2026-07-22-phase2-revised-plan.md`, which
-  supersedes the remaining tasks of the 2026-07-21 plan.
+- **Gate 1 (personal use).** Phase 2 (path quality) is **COMPLETE**, 2026-07-22. All 16
+  tasks executed on branch `phase2-path-quality`. The blind listening test was run and the
+  owner adopted the **`capfix`** arm — `cap_strategy="mutual_knn"`,
+  `similarity_rescale="p99_log_clip"`, `similarity_damping=0.0`. See execution log §16
+  (verdict) and §17 (adoption).
+- **Next action: Phase 1, which needs planning first.** It leads with **C3** — `w_floor`
+  is a no-op and `known` degrades to a bare hard exclusion, a *pathfinding* defect rather
+  than the UX item it was filed as — then clips (C1, C2), then frontend UX. Two items
+  carry in from Phase 2 with success conditions; see the roadmap's Phase 1 section.
+- **Two Phase 2 predictions did not survive measurement**, and older prose still asserts
+  them. Damping ("C4") was tested at 0.25 / 0.5 / 0.75 and **rejected** — the undamped arm
+  won. Neighbour-set Jaccard was **not** adopted as the primary objective; the
+  overlap-family metrics sign-flip between slices at these effect sizes (adjudication §6
+  claims 41–42). The p99 ceiling defect **survives adoption** and is carried to Phase 1.
+- `superpowers/plans/2026-07-22-phase2-revised-plan.md` governed Tasks 14–16 and supersedes
+  the remaining tasks of the 2026-07-21 plan. Both are now historical.
 
 ---
 
@@ -63,15 +71,16 @@ that is how the drift began.
 
 | Document | Covers |
 |---|---|
-| `superpowers/specs/2026-07-21-phase2-path-quality-design.md` | Phase 2 design. Supersedes the roadmap's Phase 2 content only. |
-| `superpowers/plans/2026-07-21-phase2-path-quality.md` | Phase 2 implementation, 16 tasks. **Execute in a fresh session.** Several of its inline test fixtures are arithmetically wrong — see the execution log §3 before trusting one. |
-| `superpowers/2026-07-22-HANDOFF-blind-test.md` | **Next action:** run the blind listening test that decides Phase 2's adopted arm. Written for a session with no prior context. Delete once the verdict is recorded and Task 16 is done. |
-| `superpowers/2026-07-21-phase2-execution-log.md` | **Running record of Phase 2 execution:** every decision and why, defects found in the plan and in the prior record, gate pass/fail state, open items, and deferred review findings. Read it before continuing or auditing Phase 2. |
+| `superpowers/2026-07-21-phase2-execution-log.md` | **The audit trail for Phase 2, and the freshest truth in this directory.** Every decision and why, defects found in the plan and in the prior record, gate pass/fail state, open items, deferred findings. **§16 is the blind-test verdict; §17 is the adoption and the two defects it uncovered.** Where any other document disagrees with §16–17, this wins. Marked ACTIVE rather than COMPLETE because Phase 1 consumes its carried-forward items. |
+| `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | *(also listed as Authoritative)* Its **Phase 1 section is the live work queue**, including the two items carried in from Phase 2 with success conditions. |
 
 ### Complete
 
 | Document | Covers |
 |---|---|
+| `superpowers/specs/2026-07-21-phase2-path-quality-design.md` | Phase 2 design. **IMPLEMENTED and adopted 2026-07-22** (`capfix`); §8 risk 4 discharged. Supersedes the roadmap's Phase 2 content only. Its open questions were answered by the sweep — do not read it as a live agenda. |
+| `superpowers/plans/2026-07-21-phase2-path-quality.md` | Phase 2 implementation, 16 tasks. **All executed; do not execute again.** Tasks 14–16 were superseded mid-flight by the revised plan below. Several of its inline test fixtures are arithmetically wrong — see the execution log §3 before trusting one. |
+| `superpowers/plans/2026-07-22-phase2-revised-plan.md` | The mid-flight amendment governing Phase 2 Tasks 14–16, written by the owner after a full review. **Retained as the record of *why* the last three tasks differ from the original plan** — its §6 is what reclassified C3 into Phase 1. |
 | `superpowers/specs/2026-07-19-artist-path-alpha-design.md` | Original alpha design. Still the reference for determinism (§9) and the `APG1` format. |
 | `superpowers/specs/2026-07-20-stage3-web-frontend-design.md` | Frontend design. |
 | `superpowers/plans/2026-07-19-graph-builder.md` | Builder implementation. Shipped. |

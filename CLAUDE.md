@@ -10,6 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks 27 prior claims upheld/overturned/unresolved. |
 | **What is the next action?** | **Gate 1, Phase 1 — and it needs planning first.** Phase 2 is COMPLETE (adopted `capfix`, 2026-07-22; execution log §16). Phase 1 leads with **C3** — `w_floor` is a no-op and `known` degrades to a bare hard exclusion, a pathfinding defect, not a UX item — then clips (C1, C2), then frontend UX. Two items carry in from Phase 2 with success conditions; see the roadmap's Phase 1 section. |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
+| **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
 | **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. |
 

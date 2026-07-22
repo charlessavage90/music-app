@@ -714,3 +714,97 @@ at 0.25 / 0.5 / 0.75 and rejected. The overlap-family metrics are not trustworth
 effect sizes (adjudication §6 claims 41–42) — that is a finding about the *instrument*, and
 it would have held identically had it favoured `capfix`. A third listening test is
 forbidden.
+
+---
+
+## 18. Closeout — §6 and §7 resolved, every deferral given an address (2026-07-22)
+
+Revised plan §5 requires §7 triaged into "fix now" and "not doing", both lists retained.
+Closeout A3 requires every open finding to carry a **success condition**. This section is
+both. **Nothing below is left as an unranked backlog item.**
+
+### §6 open items — final status
+
+| # | Item | Status |
+|---|---|---|
+| 1 | Bad-path screen rework | **KILLED.** See below. |
+| 2 | The null result has no error bar | **OPEN → Phase 1.** Success condition: *before any decision leans on the configuration-model null more heavily than Task 14's narrowed sweep did.* If nothing ever leans on it harder, it never needs the error bar and the item expires unactioned — that is a legitimate terminal state. |
+| 3 | Production router's excess hub-seeking is unexplained | **OPEN → Phase 1, accepted as unexplained.** Revised plan §2 pre-authorised exactly this: Task 0 either answers it or it is carried. It was not answered. Success condition: *C3's routing-weight work either explains the excess or measures that it no longer exists.* Suspected to be the popularity term; still unproven. |
+| 4 | Task 16 must delete the losing option from each knob | **DONE**, with one approved narrowing — damping keeps its knob (§17). |
+
+**Item 1 is killed, not deferred again.** The bad-path screen was cancelled by revised plan
+§2 C-1. It is genuinely unwired: `screen_path` is imported by nothing but its own tests, and
+`run_baseline.py`'s header states it is deliberately not imported. This is a **kill on a
+closed path, not on a count** — the rework was deferred twice (D6, D9), and D9 already
+recorded the reason its only viable signal self-obsoletes: the ceiling-hop signal
+(claim 33) becomes uninformative once the rescale removes the ceiling tie-mass.
+
+That reasoning has now partly inverted and it does not revive the item. The adopted arm
+**kept** the clip, so the ceiling tie-mass still exists and the signal is not obsolete after
+all. The screen stays killed anyway, because its calibration set was independently defective
+(claim 32) and the module never earned its place in the product. **If the premise changes —
+if a future phase wants a bad-path screen — this is a revival decision with the reasoning
+above, not an archaeology project.**
+
+### §7 triage
+
+**FIXED NOW (1 item).**
+
+- **Snyk Low CWE-23, `api/eval/export_paths.py`.** Fixed in §17, not accepted. Output paths
+  resolve against the repo root and are refused if they escape; verified by running a
+  traversal argument. Revised plan §5 required fix-or-accept, and flagged that it had twice
+  been misreported as pre-existing. It was new on this branch.
+
+**NOT DOING — `badpath.py` and its tests (3 items).** Success condition: **closed, won't
+fix.** The module is cancelled and unwired. Fixing a docstring contradiction, an
+endpoint-incident hop, and a test that passes via the wrong signal, all inside dead code, is
+work with no consumer. These reopen only if the screen is revived, and they are listed here
+so a revival starts from a known defect list rather than a clean-looking module:
+- signal 2 iterates endpoint-incident hops though the docstring claims interior-only
+- module docstring and threshold comment assert contradictory things (§4.4 overturned the former)
+- `test_badpath.py`'s blank-name test passes via the wrong signal
+
+**NOT DOING — hygiene (3 items).** Success condition: **closed, won't fix.** Unused imports
+in plan-prescribed test blocks; `manifest.py`'s untyped `graph` parameter and its timing
+exclusions. None has a failure mode.
+
+**CARRIED to Phase 4 (CI + tests) — test-coverage gaps (7 items).** Success condition:
+**each is closed when Phase 4's test pass covers it, or explicitly dropped there.** Phase 4
+already owns "missing regression tests" in the roadmap, so these join a queue that exists
+rather than creating one. They are real gaps in live code, which is why they are not
+"won't fix":
+- `test_evaluation.py` — the degree-1 Adamic–Adar guard is never exercised
+- `test_diagnostics.py` — `corr_score_log_degree` uncovered, despite being the field that exposed the v2/v3 discrepancy
+- `test_stats.py` — Holm with duplicate p-values untested, so the documented tie-break is unverified
+- `test_panel.py` — nothing constructs two differently-ordered stores, which is Task 6's entire purpose
+- `panel.py` — `by_name` has no duplicate-name guard
+- Task 11 — no end-to-end test that the build drops filtered nodes
+- `test_graph.py` — the mutual k-NN symmetry test uses an already-symmetric fixture, so it cannot distinguish enforcing from preserving. **Now more load-bearing than when filed:** mutual k-NN is the adopted cap strategy, not one of two options.
+
+**CARRIED to Phase 4 — dependency hygiene (1 item).** `scipy>=1.14` has no upper bound and
+no tracked lockfile pins it. Success condition: **closed when CI pins a resolved dependency
+set.** A CI pipeline that cannot reproduce its own dependency versions is the actual defect;
+fixing the bound alone would not.
+
+### Closeout checks that produced nothing
+
+Recorded because a silent check is indistinguishable from a skipped one.
+
+- **B2 reachability.** Modules added this phase: `manifest.py`, `diagnostics.py`,
+  `panel.py`, `export_paths.py` are all imported by live callers. `nulls.py` and `stats.py`
+  are imported only by their own tests — **not orphans in the "built but never wired" sense:
+  both are research tooling invoked manually, and both produced findings that are in the
+  record** (the configuration-model null; the sweep's paired tests, sweep results §9).
+  `badpath.py` is the deliberate cancellation above.
+- **B3 vacuous-test spot check.** Three mutations, all caught by name-appropriate tests:
+  disabling the `cap_strategy` guard failed `test_losing_options_are_deleted_not_supported`;
+  removing the p99 clip's ceiling clamp failed
+  `test_p99_log_clip_reproduces_the_legacy_expression_exactly`; turning mutual k-NN into
+  union k-NN failed three `test_graph.py` tests including the degree bound. No vacuous test
+  found among the invariants that matter.
+- **Figure drift.** Two doc restatements of the zero-cost-hop share were converted to
+  citations (roadmap; `builder/.../config.py`). **Two figures in `config.py` were left as
+  literals deliberately** — the 78.7 % / 99.98 % clamp shares in the damping note are a
+  hazard warning at the point of use, and a developer about to raise damping needs the
+  magnitude in front of them, not a link. The completed Phase 2 plan's own restatement was
+  left alone: it is a historical record of what the plan said.

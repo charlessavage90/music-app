@@ -58,7 +58,7 @@ In brief, and cited rather than restated:
 - Hub-seeking is **not established as scoring-caused** — score-free BFS is 2.68× enriched on the same null, and the full router has the *lowest* max interior degree of the three routers tested (§5.3). The configuration-model rewire is the outstanding experiment.
 - The `similarity_damping ≈ 0.25` prescription and its projected figures were never measured against a built artifact (§6, claim 27).
 - The "damps before `log1p`" ordering bug is **real in current code but was not the cause** of the cosine rejection: the cosine artifact was built by a commit that had no `log1p` at all (§1, §2.1).
-- The primary defect is the **p99 clip**, which creates zero-cost edges in every build — 30–82 % of routed hops currently cost zero similarity — with damping deciding only whether they point at the famous core or at micro-cliques (§2.5).
+- The primary defect is the **p99 clip**, which creates zero-cost edges in every build — for the share of routed hops that cost zero similarity, see `../findings/2026-07-21-scoring-adjudication.md` §2.5 — with damping deciding only whether they point at the famous core or at micro-cliques (§2.5). **Still true after Phase 2:** the adopted arm keeps this rescale, and the defect is carried to Phase 1 above.
 
 ---
 
