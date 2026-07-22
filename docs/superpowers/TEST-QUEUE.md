@@ -17,13 +17,21 @@ the point.**
 survives only if each endpoint ranks the other in its top-k), which cuts the edge count to
 roughly a fifth of the old graph. Nothing in the API or frontend changed.
 
-**Before you can use it:** the dev graph must be rebuilt from the adopted artifact, since
-`graph-5k.bin` is gitignored and was regenerated locally at closeout.
+**Nothing to prepare on this machine** — the dev graph is already rebuilt from the adopted
+artifact and verified routing (`Miles Davis → Ella Fitzgerald → Mariah Carey → Justin
+Timberlake → Daft Punk`). Just start the two processes and use it.
+
+On any *other* machine, or after `git clean`, rebuild it first — it is gitignored:
 
 ```bash
 cd builder && UV_LINK_MODE=copy uv run artistpath-build fixture \
   --graph scratch/graph-t15-capfix.bin --out scratch/graph-5k.bin --size 5000
 ```
+
+The seed no longer needs specifying: the fixture now seeds from the most popular artist by
+default. It did not, briefly, and the resulting dev graph contained no famous artists at
+all — see execution log §19. If a rebuilt graph cannot find The Beatles, that regression is
+back.
 
 **What to exercise:**
 

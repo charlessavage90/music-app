@@ -114,3 +114,10 @@ about the tail, it needs an instrument other than the owner's ear.
   `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237`.
 - The 500-node test fixtures **are** committed now (they were silently not, until
   2026-07-22 — see execution log §17). The 5k dev graph is not; build it or copy it.
+- **A fix can break something by removing a property nothing declared it depended on.**
+  Bounding hub degree — the central Phase 2 change, and correct — silently turned the dev
+  fixture into a local cluster with no famous artists in it, because the fixture's default
+  seed had always relied on unbounded hubs to reach the famous core. No test failed; all 209
+  passed. Fixed (execution log §19), but **Phase 1 changes bypass routing, so ask the same
+  question there:** what currently works only because of a property C3's fix is about to
+  remove?

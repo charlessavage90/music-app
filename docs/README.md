@@ -63,6 +63,7 @@ that is how the drift began.
 | Document | Covers |
 |---|---|
 | `superpowers/findings/2026-07-21-scoring-adjudication.md` | **All** scoring, hub-seeking, and path-quality figures. The single quantitative record. |
+| `superpowers/WHAT-GOOD-LOOKS-LIKE.md` | **What the owner means by a better path.** Calibration for the blind listening test — this project's strongest evidence class, which decided the graph twice where the offline metrics decided it zero times. Read before interpreting any listening verdict. |
 | `superpowers/findings/2026-07-22-phase2-sweep-results.md` | Every figure from the Phase 2 six-arm sweep. Owns its numbers; linked from the adjudication's §6 (claims 41–45). |
 | `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | Gate structure and phase ordering. Its C4 is a pointer only — it holds no figures. |
 | `../CLAUDE.md` | How to work in this repo: commands, architecture, conventions. |
@@ -71,8 +72,10 @@ that is how the drift began.
 
 | Document | Covers |
 |---|---|
-| `superpowers/2026-07-21-phase2-execution-log.md` | **The audit trail for Phase 2, and the freshest truth in this directory.** Every decision and why, defects found in the plan and in the prior record, gate pass/fail state, open items, deferred findings. **§16 is the blind-test verdict; §17 is the adoption and the two defects it uncovered.** Where any other document disagrees with §16–17, this wins. Marked ACTIVE rather than COMPLETE because Phase 1 consumes its carried-forward items. |
+| `superpowers/2026-07-21-phase2-execution-log.md` | **The audit trail for Phase 2, and the freshest truth in this directory.** Every decision and why, defects found in the plan and in the prior record, gate pass/fail state, open items, deferred findings. **§16 is the blind-test verdict; §17 the adoption; §18 the closeout triage; §19 the fixture-seed defect found after closeout — which supersedes §17's checksums.** Where any other document disagrees with §16–19, this wins. Marked ACTIVE rather than COMPLETE because Phase 1 consumes its carried-forward items. |
 | `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | *(also listed as Authoritative)* Its **Phase 1 section is the live work queue**, including the two items carried in from Phase 2 with success conditions. |
+| `superpowers/2026-07-22-HANDOFF-phase1.md` | **Start here for Phase 1.** Written for a session with no prior context: what was overturned and must not be reverted, what is already updated, and what the previous session knew that is not otherwise in the record. Delete once Phase 1 has a written plan. |
+| `superpowers/TEST-QUEUE.md` | The async **use-the-app queue**. `closeout` appends; `session-start` reads it and flags stale entries. Catches the defect class tests structurally cannot. |
 
 ### Complete
 
