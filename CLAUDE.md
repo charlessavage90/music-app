@@ -202,10 +202,45 @@ plan's claims against the repo"** finds the confounds. Every high-value finding 
 came from a reader with the *code* open, because a plan can be perfectly self-consistent
 and still wrong relative to `config.py`. Same cost, very different yield.
 
-**Closeout.** After finishing significant work, run the `closeout` skill
-(`.claude/skills/closeout/`) — a mechanical post-execution pass covering the retained
-execution log, deferral addresses, whether config defaults were actually flipped, orphaned
-modules, vacuous tests, and git finalisation.
+### Two rituals bracket every chunk of work
+
+Both are mechanical and cheap by design — they ask *did we leave a mess* and *am I
+oriented*, never *did we do the right thing*. That second question is a review, and
+reviews are rare and targeted here.
+
+- **`session-start`** (`.claude/skills/session-start/`) — run it **before** doing
+  substantive work in a fresh session: what governs this work and what supersedes what,
+  which decisions are closed, whether another session is live in this tree, and which
+  gates would stop you. Also carries the two checks that can only fire at the start —
+  the cheapest-experiment scope check, and verifying one claim before building on a
+  report.
+- **`closeout`** (`.claude/skills/closeout/`) — run it **after** finishing significant
+  work: distil the retained execution log, give every deferral a success condition, check
+  config defaults were actually flipped, sweep for orphaned modules and vacuous tests,
+  queue the use-the-app test, and finalise git.
+
+Closeout writes; session-start reads. Keep them in sync — if you change what one
+produces, change what the other consumes.
+
+### How work lands: pull requests, always
+
+Development here is **pull-request driven against `origin`
+(`github.com/charlessavage90/music-app`, default branch `main`)**. Nothing is committed
+directly to `main`.
+
+- **Branch off `main`** for any piece of work, and **push the branch early** — the first
+  commit, not the last. Work that exists only in this working tree is unbacked: the repo
+  lives under OneDrive, which syncs files but is not a substitute for a remote, and a
+  phase's worth of commits is expensive to lose.
+- **Open the PR when the work is coherent, not when it is finished.** A draft PR gives the
+  work a durable address that survives any session ending.
+- **The PR body is where a reviewer picks up context** — see the `closeout` skill's D5 for
+  what it carries: a link to the retained execution log, gate outcomes *including
+  failures*, deferred findings with their success conditions, checksums for any adopted
+  artifact (they are gitignored and cannot be committed), and what is closed and should
+  not be re-litigated.
+- **Merge via the PR**, so `main`'s history records how work arrived rather than just what
+  arrived.
 
 ## Security
 

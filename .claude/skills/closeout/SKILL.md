@@ -236,8 +236,11 @@ Run them; do not assert green from memory. Evidence before assertions.
 
 ### D5. Open the PR
 
-Work happens on a branch, never directly on `main`. The PR body is where a reviewer
-picks up the context, so it carries:
+Development here is **pull-request driven against `origin`** — see `CLAUDE.md`, "How work
+lands". Nothing goes directly to `main`, and the branch should already have been pushed
+long before closeout; if it has not been, push it now and note that it was late.
+
+The PR body is where a reviewer picks up the context, so it carries:
 
 - A link to the retained execution log
 - **Gate outcomes, including failures** — a failed gate that was worked around is the
