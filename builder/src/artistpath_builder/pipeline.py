@@ -73,10 +73,40 @@ def rescale_scores(
         ]
 
     if strategy == "percentile_rank":
-        order = np.argsort(np.asarray(values, dtype=np.float64), kind="stable")
-        ranks = np.empty(len(values), dtype=np.float64)
-        ranks[order] = np.arange(len(values), dtype=np.float64)
-        denominator = max(len(values) - 1, 1)
+        # Average rank (midrank / ECDF): every member of a tie group gets the
+        # group's mean sequential rank, rather than an arbitrary sequential
+        # rank that is a function of array order alone. Raw ListenBrainz
+        # scores are session co-occurrence counts, and ~99.99% of them share
+        # a value with at least one other edge — sequential ranking would
+        # give those provably-identical edges different costs, ordered by
+        # nothing but incidental position in the flattened array. Average
+        # rank is a function of the *values*, so it is stable under any
+        # reordering of equal-valued input (e.g. a different cap strategy),
+        # which sequential ranking is not.
+        #
+        # This is computed explicitly (group by sorted value, average the
+        # sequential ranks within each group, scatter back) rather than
+        # relying on any incidental tie-breaking behaviour of argsort, so the
+        # tie-equal property is guaranteed rather than accidental. It stays
+        # deterministic: np.unique sorts on value, and grouping/summation are
+        # both order-independent operations, so identical input still
+        # produces byte-identical output.
+        arr = np.asarray(values, dtype=np.float64)
+        n = len(values)
+        order = np.argsort(arr, kind="stable")
+        sorted_vals = arr[order]
+        sequential_ranks = np.arange(n, dtype=np.float64)
+        _unique_vals, inverse, counts = np.unique(
+            sorted_vals, return_inverse=True, return_counts=True
+        )
+        group_sums = np.bincount(
+            inverse, weights=sequential_ranks, minlength=len(counts)
+        )
+        group_avg_ranks = group_sums / counts
+        sorted_avg_ranks = group_avg_ranks[inverse]
+        ranks = np.empty(n, dtype=np.float64)
+        ranks[order] = sorted_avg_ranks
+        denominator = max(n - 1, 1)
         return [float(r / denominator) for r in ranks]
 
     raise ValueError(f"unknown rescale strategy: {strategy!r}")

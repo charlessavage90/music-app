@@ -35,6 +35,53 @@ def test_percentile_rank_preserves_ordering():
     )
 
 
+def test_percentile_rank_ties_get_equal_average_rank():
+    # The entire point of the average-rank change: every member of a tie
+    # group must receive exactly the same output, regardless of where it
+    # sits in the input array. Sequential ranking (the prior behaviour)
+    # would instead scatter a tie group across distinct adjacent ranks
+    # ordered by nothing but incidental array position.
+    #
+    # values: two ties (1.0 x3, 5.0 x2) plus a singleton (9.0), deliberately
+    # interleaved so array order does not match value order.
+    values = [5.0, 1.0, 9.0, 1.0, 5.0, 1.0]
+    got = rescale_scores(values, strategy="percentile_rank", damping=0.0)
+
+    # Tie group 1.0 occupies sequential ranks {0, 1, 2} -> mean rank 1.0
+    # Tie group 5.0 occupies sequential ranks {3, 4} -> mean rank 3.5
+    # Singleton 9.0 occupies sequential rank {5} -> mean rank 5.0
+    denominator = len(values) - 1  # 5
+    expected_1 = 1.0 / denominator
+    expected_5 = 3.5 / denominator
+    expected_9 = 5.0 / denominator
+
+    assert got[1] == pytest.approx(expected_1)
+    assert got[3] == pytest.approx(expected_1)
+    assert got[5] == pytest.approx(expected_1)
+    assert got[0] == pytest.approx(expected_5)
+    assert got[4] == pytest.approx(expected_5)
+    assert got[2] == pytest.approx(expected_9)
+
+    # Every member of a tie group is bitwise-equal to the others, not just
+    # approximately equal -- this must fail loudly if a future change makes
+    # tie handling order-dependent again.
+    assert got[1] == got[3] == got[5]
+    assert got[0] == got[4]
+
+
+def test_percentile_rank_average_rank_is_order_independent():
+    # Average rank is a function of the *values*, not of array order. Two
+    # arrays with the same multiset of values but different arrangements
+    # must produce the same multiset of outputs -- this is the structural
+    # property that makes it safe against something like a cap-strategy
+    # change silently re-shuffling incidental order.
+    values_a = [1.0, 1.0, 2.0, 2.0, 2.0, 3.0]
+    values_b = [3.0, 2.0, 1.0, 2.0, 1.0, 2.0]
+    got_a = rescale_scores(values_a, strategy="percentile_rank", damping=0.0)
+    got_b = rescale_scores(values_b, strategy="percentile_rank", damping=0.0)
+    assert sorted(got_a) == pytest.approx(sorted(got_b))
+
+
 def test_percentile_rank_handles_negative_values():
     # Damping in log space produces negatives. A rank transform handles them;
     # the clamp this replaces collapsed them all into one tie at the floor.
