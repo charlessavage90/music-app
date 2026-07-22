@@ -10,9 +10,29 @@ def test_p99_log_clip_reproduces_the_legacy_expression_exactly():
     # Byte-identity for the control arm. The legacy expression is
     # min(1, log1p(v) / log1p(p99)), with p99 computed in RAW space —
     # np.percentile with linear interpolation does not commute with log1p.
-    values = [float(i) for i in range(1, 201)]
-    scale = float(np.percentile(values, 99))
-    expected = [min(1.0, math.log1p(v) / math.log1p(scale)) for v in values]
+    #
+    # Repaired for Task 14: this test was written under Task 13's contract,
+    # where rescale_scores's p99_log_clip branch received RAW co-occurrence
+    # values directly. Task 14 changes every caller to pass LOG-SPACE values
+    # (log1p(cooc) from damped_strength at d=0) and the branch now `expm1`s
+    # its input back to raw before reproducing the legacy expression — that
+    # is the whole point of Task 14's Step 4. Feeding this test raw integers
+    # 1..200 as if they were still the branch's raw-space input (the old
+    # fixture) now means log1p(200) ~= 5.3 gets treated as a co-occurrence
+    # count and expm1'd back to ~= 199, silently exercising a completely
+    # different part of the value range than intended — which is exactly
+    # what produced the observed failure (got[0] = 0.00505... instead of
+    # 0.13094...): raw=1.0 in the old fixture is now interpreted as
+    # log1p(cooc)=1.0, i.e. cooc = expm1(1.0) ~= 1.718, not cooc = 1.0.
+    #
+    # Fixed by feeding log-space input (log1p of the raw series) and keeping
+    # the expected value's derivation anchored to the RAW series, matching
+    # how build_from_archive -> damped_strength -> rescale_scores actually
+    # composes at d=0.
+    raw = [float(i) for i in range(1, 201)]
+    values = [math.log1p(v) for v in raw]
+    scale = float(np.percentile(raw, 99))
+    expected = [min(1.0, math.log1p(v) / math.log1p(scale)) for v in raw]
     got = rescale_scores(values, strategy="p99_log_clip", damping=0.0)
     assert got == pytest.approx(expected, abs=0.0)
 

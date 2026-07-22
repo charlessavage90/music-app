@@ -47,6 +47,29 @@ def is_special_purpose(disambiguation: str | None) -> bool:
     return bool(_SPECIAL_PURPOSE.search(disambiguation or ""))
 
 
+def damped_strength(
+    cooc: float, mass_a: float, mass_b: float, damping: float
+) -> float:
+    """Popularity-damped edge strength, computed IN LOG SPACE.
+
+        log1p(cooc) - d * (log mass_a + log mass_b)
+
+    d = 0 is raw association, d = 0.5 is cosine, d = 1 is PMI up to a constant.
+
+    No `- 2*log(median_mass)` centring: under the rank rescale it is a global
+    additive constant and provably inert. It is mandatory only under the legacy
+    clip rescale, where `rescale_scores` raises rather than silently emitting
+    nan.
+
+    No clamp at zero. Negative values are meaningful ordering information and
+    the rank transform consumes them directly.
+    """
+    strength = math.log1p(max(0.0, cooc))
+    if damping:
+        strength -= damping * (math.log(max(mass_a, 1.0)) + math.log(max(mass_b, 1.0)))
+    return strength
+
+
 def rescale_scores(
     values: list[float], strategy: str, damping: float
 ) -> list[float]:
@@ -60,7 +83,11 @@ def rescale_scores(
         return []
 
     if strategy == "p99_log_clip":
-        scale = float(np.percentile(values, 99))
+        # Legacy path: input is already log1p(cooc) from damped_strength at
+        # d = 0, so exponentiate back to raw space to reproduce the original
+        # expression exactly. Only valid at d = 0, which is the control arm.
+        raw = [math.expm1(max(0.0, v)) for v in values]
+        scale = float(np.percentile(raw, 99))
         if scale <= 0:
             raise ValueError(
                 f"degenerate p99 ({scale}) under damping={damping}: the clip "
@@ -69,7 +96,7 @@ def rescale_scores(
             )
         log_scale = math.log1p(scale)
         return [
-            min(1.0, math.log1p(max(0.0, v)) / log_scale) for v in values
+            min(1.0, math.log1p(max(0.0, v)) / log_scale) for v in raw
         ]
 
     if strategy == "percentile_rank":
@@ -182,10 +209,7 @@ def build_from_archive(
     for mbid in sorted(known):
         mass_a = mass[mbid]
         scored = [
-            (
-                n.mbid,
-                n.score / ((mass_a * mass[n.mbid]) ** damping) if damping else n.score,
-            )
+            (n.mbid, damped_strength(n.score, mass_a, mass[n.mbid], damping))
             for n in raw_lists[mbid]
             if n.mbid in known
         ]
