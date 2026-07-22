@@ -32,7 +32,7 @@ from artistpath_api.evaluation import (
 )
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.pathfinding import find_path
-from diagnostics import artifact_diagnostics
+from diagnostics import artifact_diagnostics, frozen_hub_diagnostics
 from panel import load_panel, resolve_pairs
 
 AGGREGATED = ("random", "obscure", "popularity_weighted")
@@ -72,6 +72,15 @@ def main() -> int:
 
     output: dict = {"label": label, "graph": graph_path, "held_out": held_out}
     output["diagnostics"] = artifact_diagnostics(store, cap=50)
+    # DESCRIPTIVE ONLY (revised plan §2, amendment 8's criterion-3 discussion) —
+    # explains why hubfrac moved, is not itself a pass/fail criterion. See
+    # frozen_hub_diagnostics' docstring.
+    hub_diag = frozen_hub_diagnostics(store, hub_nodes)
+    output["frozen_hub_diagnostics"] = hub_diag
+    print(
+        f"{label:22s} frozen hubs present={hub_diag['frozen_hubs_present']:3d} "
+        f"mean_degree={hub_diag['mean_frozen_hub_degree']:.1f}"
+    )
 
     for router_name, cfg in (("full", full_cfg), ("w_jump_0", no_jump_cfg)):
         per_pair: list[dict] = []

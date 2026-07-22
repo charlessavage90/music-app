@@ -122,6 +122,12 @@ def test_summarise_aggregates_hubfrac_and_ceiling_hops():
     assert "mean_adamic_adar" in s
     assert "mean_overlap_coefficient" in s
     assert "mean_ceiling_hops" in s
+    # Adjacency: N(0)={1,2,3}, N(1)={0}, N(2)={0,3}, N(3)={0,2}.
+    # Path a = [1,0,2,3]: hop (1,0) common={} (0); hop (0,2) common={3} (1);
+    #   hop (2,3) common={0} (1). Per-path mean = (0+1+1)/3 = 2/3.
+    # Path b = [1,0]: hop (1,0) common={} (0). Per-path mean = 0.
+    # Mean across paths = (2/3 + 0) / 2 = 1/3.
+    assert s["mean_common_neighbours"] == pytest.approx(1 / 3)
 
 
 import math
@@ -200,6 +206,27 @@ def test_adamic_adar_skips_degree_one_common_neighbours():
     # neighbour of two distinct nodes, but the guard must exist regardless.
     store = _triangle_with_hub()
     assert math.isfinite(adamic_adar(store, 0, 1))
+
+
+def test_mean_common_neighbours_averages_across_hops():
+    # Fixture adjacency (from _triangle_with_hub): N(0)={1,2,3}, N(1)={0,2,3},
+    # N(2)={0,1}, N(3)={0,1,4,5}, N(4)={3}, N(5)={3}.
+    # Path 4-3-0-1-2 (all real edges) has hops:
+    #   (4,3): N(4)&N(3) = {} minus endpoints            -> 0
+    #   (3,0): N(3)&N(0) = {1} (4,5,0 excluded/absent)    -> 1
+    #   (0,1): N(0)&N(1) = {2,3} minus endpoints          -> 2
+    #   (1,2): N(1)&N(2) = {0} minus endpoints            -> 1
+    # Mean = (0 + 1 + 2 + 1) / 4 = 1.0.
+    store = _triangle_with_hub()
+    m = path_metrics(store, [4, 3, 0, 1, 2], hub_nodes=set())
+    assert m.mean_common_neighbours == pytest.approx(1.0)
+
+
+def test_mean_common_neighbours_is_zero_for_a_path_with_no_hops():
+    store = make_store(
+        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
+    )
+    assert path_metrics(store, [0], hub_nodes=set()).mean_common_neighbours == 0.0
 
 
 def test_geometric_mean_is_robust_to_a_single_zero():

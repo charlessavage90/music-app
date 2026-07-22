@@ -5,7 +5,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "eval"))
 
-from diagnostics import artifact_diagnostics  # noqa: E402
+from diagnostics import artifact_diagnostics, frozen_hub_diagnostics  # noqa: E402
 
 from tests.conftest import make_store
 
@@ -46,3 +46,26 @@ def test_handles_a_graph_with_no_saturated_edges():
     d = artifact_diagnostics(store, cap=50)
     assert d["saturated_edges"] == 0
     assert d["saturated_dst_median_degree"] == 0.0
+
+
+def test_frozen_hub_diagnostics_counts_present_nodes_and_means_their_degree():
+    # _hub_store: node 0 has degree 5 (edges to 1-5); nodes 1-5 each have
+    # degree 1. hub_nodes simulates load_or_freeze_hub_set's already-filtered
+    # output: node ids known to exist in this artifact.
+    d = frozen_hub_diagnostics(_hub_store(), hub_nodes={0})
+    assert d["frozen_hubs_present"] == 1
+    assert d["mean_frozen_hub_degree"] == pytest.approx(5.0)
+
+
+def test_frozen_hub_diagnostics_averages_degree_over_multiple_present_nodes():
+    # Node 0 degree 5, node 1 degree 1 -> mean = (5 + 1) / 2 = 3.0.
+    d = frozen_hub_diagnostics(_hub_store(), hub_nodes={0, 1})
+    assert d["frozen_hubs_present"] == 2
+    assert d["mean_frozen_hub_degree"] == pytest.approx(3.0)
+
+
+def test_frozen_hub_diagnostics_is_zero_when_no_frozen_hubs_are_present():
+    # Simulates an artifact from which every frozen hub MBID is absent.
+    d = frozen_hub_diagnostics(_hub_store(), hub_nodes=set())
+    assert d["frozen_hubs_present"] == 0
+    assert d["mean_frozen_hub_degree"] == 0.0

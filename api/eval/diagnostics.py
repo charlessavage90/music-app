@@ -57,3 +57,33 @@ def artifact_diagnostics(store: GraphStore, cap: int) -> dict:
         ),
         "corr_score_log_degree": corr if np.isfinite(corr) else 0.0,
     }
+
+
+def frozen_hub_diagnostics(store: GraphStore, hub_nodes: set[int]) -> dict:
+    """How many frozen hub MBIDs survive in this artifact, and their mean degree.
+
+    DESCRIPTIVE DIAGNOSTICS ONLY — not a pass/fail criterion (revised plan §2,
+    amendment 8's criterion-3 discussion). `hubfrac` falling can mean the router
+    avoided hub artists (the wanted behaviour), that those artists are absent
+    from this artifact, or that they were pruned until they no longer function
+    structurally as hubs. Presence catches removal; mean degree catches
+    neutering. Both come off the same degree array `artifact_diagnostics`
+    already computes and cost well under a millisecond.
+
+    Every Task 15 arm from the second onward is degree-capped, so
+    `mean_frozen_hub_degree` is expected to sit near-constant across the arms
+    it would otherwise discriminate, and reports the cap rather than the
+    routing — do not wire either number into a threshold.
+
+    `hub_nodes` must already be filtered to ids present in this artifact (as
+    `load_or_freeze_hub_set` does via its `if m in store.id_by_mbid` check),
+    so `len(hub_nodes)` alone answers (a). Sorted before indexing so the result
+    cannot depend on set iteration order.
+    """
+    degrees = np.diff(store.offsets)
+    present = sorted(hub_nodes)
+    mean_degree = float(np.mean(degrees[present])) if present else 0.0
+    return {
+        "frozen_hubs_present": len(present),
+        "mean_frozen_hub_degree": mean_degree,
+    }

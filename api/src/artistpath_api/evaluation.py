@@ -148,6 +148,13 @@ class PathMetrics:
     adamic_adar: float           # PRIMARY objective, geometric mean over hops
     overlap_coefficient: float   # mandatory degree-neutrality guard
     jaccard: float               # diagnostic only
+    mean_common_neighbours: float  # DIAGNOSTIC — makes the AA/OC density effect
+                                    # visible (revised plan §2, amendment 3b):
+                                    # a graph with fewer edges depresses common-
+                                    # neighbour metrics mechanically, and a reader
+                                    # comparing artifacts with very different edge
+                                    # counts cannot tell that from a genuine quality
+                                    # regression without this number alongside it.
 
 
 def path_metrics(
@@ -170,6 +177,10 @@ def path_metrics(
     pops = [float(store.popularity[n]) for n in interior]
     hops = list(zip(path, path[1:]))
     sims = [edge_score(store, a, b) for a, b in hops]
+    # A fourth call per hop (adamic_adar/overlap_coefficient/jaccard above each
+    # already call common_neighbours once): acceptable, find_path dominates the
+    # harness's runtime, not this.
+    common_counts = [len(common_neighbours(store, a, b)) for a, b in hops]
 
     return PathMetrics(
         length=len(path),
@@ -187,6 +198,9 @@ def path_metrics(
             [overlap_coefficient(store, a, b) for a, b in hops]
         ),
         jaccard=geometric_mean([jaccard(store, a, b) for a, b in hops]),
+        mean_common_neighbours=(
+            (sum(common_counts) / len(common_counts)) if common_counts else 0.0
+        ),
     )
 
 
@@ -261,6 +275,10 @@ def summarise(metrics: list[PathMetrics]) -> dict[str, float]:
         "mean_adamic_adar": sum(m.adamic_adar for m in metrics) / n,
         "mean_overlap_coefficient": sum(m.overlap_coefficient for m in metrics) / n,
         "mean_jaccard": sum(m.jaccard for m in metrics) / n,
+        # DIAGNOSTIC — see PathMetrics.mean_common_neighbours. Report alongside
+        # mean_adamic_adar / mean_overlap_coefficient so a density-driven fall in
+        # those two is visible as a mechanism, not just asserted in prose.
+        "mean_common_neighbours": sum(m.mean_common_neighbours for m in metrics) / n,
     }
 
 
