@@ -356,3 +356,56 @@ The five `mutual_knn` arms in Task 15 will therefore be far cheaper than the con
 graph. Comparing `capfix` against it is cross-graph and not like-for-like. On `control` the
 comparison is valid and confirms the excess. Measuring BFS on `capfix` would close this and
 costs about 40 s, but it is a new measurement and Phase 2 is not opening one.
+
+---
+
+## 13. Pre-registration of the criteria resolution (2026-07-22)
+
+**Recorded so a later reader can verify this was not fitted to a result.**
+
+**When:** 2026-07-22, while Task 14 was still running. **What existed at the time:** the
+`control` and `capfix` artifacts and Task 0's results. **What did not exist:** any arm
+beyond those two, any Task 15 evidence, any paired test, any comparison table. Arms
+`rankfix`, `d025`, `d050` and `d075` had not been built.
+
+**The contradiction being resolved.** The six adoption criteria were drafted to adjudicate
+the rescale-and-damping question, before the cap fix was a candidate. Read literally they
+reject `capfix` — criterion 3's degree-collapse clause and criterion 4's ceiling threshold
+both fail against it — while Step 6 forbids relaxing a criterion to avoid that, and
+amendment 7 pre-authorises adopting `capfix` if nothing beats it. All three could not hold.
+
+**Owner decision: resolved by scope, not by softening** (plan §4 amendment 8).
+`capfix`'s warrant is Task 0 — blind, one-factor, owner-judged. Criteria 1–4 govern arms
+3–6 against their isolating baselines at full strength. The scope narrowed; the bar did not.
+
+**Verification against the Task 0 measurements**, performed at pre-registration time:
+
+- **Retiring criterion 3's degree-collapse clause is correct.** Measured max interior
+  degree is far lower under `mutual_knn` than under `pre_symmetrise` (adjudication §4.6),
+  and every arm from 2 onward carries the cap — so the clause would report the cap rather
+  than the routing and cannot discriminate among the arms it governs. Degenerate, confirmed
+  by measurement rather than assumed.
+- **One residual guard is NOT covered by the frozen hub set.** `hubfrac` can fall because
+  the router avoids hub artists (wanted) or because those artists are absent from the graph
+  (definitional). The frozen set fixes hub *identity* and closes the redefinition attack,
+  but does not separate these two. Amendment 4's retention gate measures *overall* artist
+  retention and would not catch a selective loss of frozen hub nodes.
+  **Guard adopted: report the count of frozen hub MBIDs present, per arm, alongside
+  `hubfrac`.** The harness already computes it. Measured for `capfix`: 750 of 751 present,
+  so the risk is currently negligible — but it is unmeasured for arms 3–6, and mutual k-NN
+  prunes hub edges hardest by construction.
+- **"Moves toward the null" needs a defined behaviour for overshoot.** Per-arm nulls make
+  overshoot measurable for the first time, and it is live rather than hypothetical.
+  Overshoot means the router avoids hubs more than a score-blind walker; pathological
+  overshoot looks like the Task 0 `w_hub` sweep — `hubfrac` collapsing with Adamic–Adar
+  collapsing alongside it — which criteria 1 and 2 already catch. Treat overshoot as
+  passing criterion 3, guarded by 1–2.
+- **Criterion 4 will not discriminate among arms 3–6.** All four carry `percentile_rank`,
+  and every rank variant eliminates zero-cost routed hops (adjudication §4.5), so all four
+  should pass comfortably. It remains the gate certifying the rescale fixed the ceiling; it
+  will not choose between `rankfix` and the damping arms.
+  **Consequence:** the "Phase 2 ships with the ceiling defect unfixed" fallback occurs only
+  if all four rank arms fail criteria 1–3. It is a genuine fallback, not the expected path.
+
+**Superseded wording** (plan §2 C-2): "all six criteria still apply" and "no candidate beats
+the control" are both stale and marked as such in the plan.
