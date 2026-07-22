@@ -255,6 +255,34 @@ reviews are rare and targeted here.
 Closeout writes; session-start reads. Keep them in sync — if you change what one
 produces, change what the other consumes.
 
+### How to present results to the owner
+
+**"Don't draw conclusions, leave the decision to me" does not work as an instruction, and
+this repo does not use it.** Every presentation selects and frames, and both are
+inferential. A session told to withhold conclusions still makes them — in which table
+leads, which figure is bolded, which sentence opens the section — where the owner cannot
+challenge them, because they were never stated. Phase 2's "no candidate beats capfix" was
+a conclusion delivered as a summary, resting on selection that dropped the data
+contradicting it.
+
+**Conclude explicitly, label it, and still decline to decide.** Four parts, in this order:
+
+1. **Measured** — the numbers, no adjectives. Tables belong here and nowhere else.
+2. **What I infer from it** — plainly labelled as inference, and **in plain language.**
+   Someone who does not know what Adamic–Adar measures must be able to follow this section
+   and disagree with it. If a claim cannot survive being restated without its metric name,
+   that is worth knowing before it reaches a decision.
+3. **Weakest link** — the load-bearing assumption, and what would falsify it. State which
+   parts you would defend and which you would abandon cheaply.
+4. **Options and their consequences** — not a recommendation wearing a finding's clothes.
+
+**The summary must name whatever cuts against it.** A summary that omits contradicting
+data is wrong even when every number in it is right.
+
+**Exception — blind evaluations.** A session running a blind test says nothing beyond the
+bare mechanics, and is held ignorant of the expected outcome. There, the whole point is
+that no framing reaches the owner at all.
+
 ### When to recommend a review
 
 **Reviews are never automatic.** When a trigger below is reached, *recommend* a partial or
