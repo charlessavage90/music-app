@@ -42,8 +42,9 @@ class BuilderConfig:
     # (Phase 2 spec §8 risk 4).
     cap_strategy: str = "pre_symmetrise"
 
-    # Popularity correction applied to raw co-occurrence when scoring edges:
-    #     sim(a,b) = cooc(a,b) / (mass(a) * mass(b)) ** similarity_damping
+    # Popularity correction applied to raw co-occurrence when scoring edges,
+    # in log space (see damped_strength in pipeline.py), no centring, no clamp:
+    #     score(a,b) = log1p(cooc(a,b)) - similarity_damping * (log(mass(a)) + log(mass(b)))
     # 0.0 = raw association strength (globally rescaled), 0.5 = full cosine.
     #
     # 0.0 is provisional. It is what the current graph was built with, not a

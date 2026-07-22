@@ -197,8 +197,10 @@ def build_from_archive(
         mass[mbid] = sum(n.score for n in neighbours) or 1.0
 
     # --- Pass 2: globally comparable edge strength -------------------------
-    #     sim(a,b) = cooc(a,b) / (mass(a) * mass(b)) ** damping
+    #     score(a,b) = log1p(cooc(a,b)) - damping * (log(mass(a)) + log(mass(b)))
     #
+    # Damping is applied in log space, as a subtraction — see damped_strength
+    # above, which does the actual computation (no centring, no clamping).
     # The SAME formula everywhere, so a score means the same thing graph-wide —
     # unlike the per-artist normalisation this replaced. `damping` controls how
     # much popularity is discounted; see BuilderConfig.similarity_damping for
