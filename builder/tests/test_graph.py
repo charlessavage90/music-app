@@ -1,6 +1,11 @@
 import numpy as np
 
-from artistpath_builder.graph import build_graph, largest_component, symmetrise
+from artistpath_builder.graph import (
+    build_graph,
+    largest_component,
+    mutual_knn_cap,
+    symmetrise,
+)
 from artistpath_builder.models import ArtistStats, EdgeType
 
 A, B, C, D, E = ("a" * 36, "b" * 36, "c" * 36, "d" * 36, "e" * 36)
@@ -102,3 +107,71 @@ def test_edges_carry_the_source_edge_type():
     adjacency = {A: {B: 1.0}, B: {A: 1.0}}
     graph = build_graph(adjacency, _stats((A, 10), (B, 20)), EdgeType.BEHAVIOURAL)
     assert np.all(graph.edge_types == EdgeType.BEHAVIOURAL)
+
+
+def test_mutual_knn_bounds_every_node_degree():
+    # A star: the centre "hub" is in everyone's list, so pre-symmetrisation
+    # capping leaves it unbounded. Mutual k-NN must bound it at k.
+    adjacency = {"hub": {}}
+    for i in range(10):
+        leaf = f"leaf{i}"
+        adjacency["hub"][leaf] = 1.0 - i * 0.01
+        adjacency[leaf] = {"hub": 1.0}
+    capped = mutual_knn_cap(adjacency, k=3)
+    assert all(len(edges) <= 3 for edges in capped.values())
+
+
+def test_mutual_knn_keeps_only_edges_in_both_top_k():
+    # a's top-1 is b; b's top-1 is c. So a-b survives only if b also ranks a
+    # first, which it does not.
+    adjacency = {
+        "a": {"b": 0.9, "c": 0.1},
+        "b": {"c": 0.9, "a": 0.5},
+        "c": {"b": 0.9, "a": 0.1},
+    }
+    capped = mutual_knn_cap(adjacency, k=1)
+    assert "b" in capped["c"] and "c" in capped["b"]
+    assert "b" not in capped.get("a", {})
+
+
+def test_mutual_knn_output_is_symmetric():
+    adjacency = {
+        "a": {"b": 0.9, "c": 0.8},
+        "b": {"a": 0.9, "c": 0.7},
+        "c": {"a": 0.8, "b": 0.7},
+    }
+    capped = mutual_knn_cap(adjacency, k=2)
+    for src, edges in capped.items():
+        for dst, score in edges.items():
+            assert capped[dst][src] == score
+
+
+def test_mutual_knn_breaks_score_ties_on_lowest_mbid():
+    # Determinism (design §9): equal scores must resolve the same way every run.
+    adjacency = {
+        "a": {"b": 0.5, "c": 0.5},
+        "b": {"a": 0.5},
+        "c": {"a": 0.5},
+    }
+    first = mutual_knn_cap(adjacency, k=1)
+    second = mutual_knn_cap(adjacency, k=1)
+    assert first == second
+    assert "b" in first["a"]  # lowest mbid wins the tie
+
+
+def test_mutual_knn_is_a_noop_below_the_cap():
+    adjacency = {"a": {"b": 0.9}, "b": {"a": 0.9}}
+    assert mutual_knn_cap(adjacency, k=50) == adjacency
+
+
+def test_symmetrise_preserves_the_mutual_knn_degree_bound():
+    # The invariant the old scheme never satisfied: after symmetrisation, no
+    # node exceeds the cap. Nothing in the codebase asserted this, which is how
+    # a cap of 50 and a max degree of 11,243 coexisted unnoticed.
+    adjacency = {"hub": {}}
+    for i in range(20):
+        leaf = f"leaf{i:02d}"
+        adjacency["hub"][leaf] = 1.0 - i * 0.01
+        adjacency[leaf] = {"hub": 1.0}
+    capped = symmetrise(mutual_knn_cap(adjacency, k=4))
+    assert max(len(edges) for edges in capped.values()) <= 4

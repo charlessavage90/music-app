@@ -21,7 +21,9 @@ def _client(fixture_store):
 
 
 def test_fixture_has_real_artists(fixture_store):
-    assert fixture_store.artist_count == 200
+    # 500 since Phase 2 Task 16 regenerated the fixture from the adopted
+    # `capfix` graph at the plan's specified --size 500 (was 200).
+    assert fixture_store.artist_count == 500
     assert all(len(m) == 36 for m in fixture_store.mbids)
 
 

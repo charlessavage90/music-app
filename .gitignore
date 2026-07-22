@@ -7,7 +7,11 @@ __pycache__/
 .venv/
 cdk.out/
 *.bin
-!tests/fixtures/*.bin
+# Must be **/ — a pattern containing a slash is anchored to this file's
+# directory, so the old `!tests/fixtures/*.bin` only ever matched a top-level
+# tests/fixtures/ that does not exist. Both graph fixtures were therefore
+# ignored, and a fresh clone could not run the API suite. Fixed 2026-07-22.
+!**/tests/fixtures/*.bin
 .checkpoints/
 .pytest_cache/
 .coverage

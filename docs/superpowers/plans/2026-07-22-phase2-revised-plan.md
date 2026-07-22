@@ -1,0 +1,530 @@
+# Phase 2 — Revised Plan (2026-07-22)
+
+**Role: ACTIVE. Supersedes the remaining tasks of
+[`2026-07-21-phase2-path-quality.md`](2026-07-21-phase2-path-quality.md).**
+Tasks 1–13 of that plan stand as executed. Tasks 14–16 are amended here. Where this
+document and the original disagree, **this document governs.**
+
+**This is a redirection, issued by the project owner after a full review of the Phase 2
+record.** The sections marked **CLOSED** are decisions already taken. They are not open
+questions, and they are not to be re-argued, re-litigated, or "checked" before being
+applied. Apply them.
+
+**No figures appear in this document.** The quantitative record remains
+`findings/2026-07-21-scoring-adjudication.md`. The audit trail remains
+`../2026-07-21-phase2-execution-log.md`.
+
+---
+
+## 1. Why this exists
+
+Phase 2 is 13 of 16 tasks complete and roughly 5–8 hours from done. Nothing is wrong with
+the work: the tests pass, the gates that were meant to hold held, and the review process
+caught real defects in the plan itself.
+
+What the review found is a proportion problem, not a correctness problem. Ten of sixteen
+tasks built measurement apparatus before a single graph was rebuilt, and the structural
+defect that most plausibly explains the product's core complaint — routes funnelling
+through the famous core — was found by Track B in one task and is **still switched off by
+default.** The cheapest experiment that could change the adoption decision has never been
+run.
+
+This plan runs it first, removes the one remaining item with unbounded cost and no
+demonstrated payoff, and takes Phase 2 to close.
+
+**Standing rule adopted for the rest of this project:** on any question that ends in a
+number, run the cheapest experiment that could change the decision *before* writing a
+plan.
+
+---
+
+## 2. CLOSED decisions — apply, do not evaluate
+
+### C-1. The bad-path screen is cancelled.
+
+Not deferred again. Cancelled.
+
+It failed its gate at Task 5, was deferred once (D6), re-deferred once (D9), carries three
+known defects, and its calibration set contains a path mislabelled as good. Its only
+identified viable signal is recorded as self-obsoleting once the Task 13 rescale lands —
+which it now has.
+
+**Do:** leave `badpath.py` and its tests in the tree, unreferenced, with a module-level
+note that the screen was cancelled and why, citing this section. Close the three deferred
+`badpath.py` findings in execution-log §7 as *cancelled with the screen*. Remove the
+screen rework from §6 open items.
+
+**"Unreferenced" requires edits — make them deliberately, before Task 15, not mid-run.**
+`export_paths.py` imports and calls `screen_path`, and Task 15's harness spec still emits a
+`flagged_paths` count. Remove both call sites and the count; keep the module and its tests.
+A cancelled screen left wired into the harness is how it gets silently re-adopted.
+
+**Do not:** attempt a rework, propose an alternative signal, or ask whether the
+cancellation should be reconsidered given new information from Task 14.
+
+### C-2. Adoption criterion 5 is replaced, not dropped.
+
+The original criterion 5 was *"read paths show no junk hops and `flagged_paths` does not
+rise."* The second clause dies with the screen. The first clause was always a proxy for
+"does this sound right to a human."
+
+**Replacement criterion 5:** the project owner uses the candidate artifact in the running
+app and judges the paths acceptable. The exported HTML from `export_paths.py` supports
+that judgement; it does not substitute for it.
+
+This is a *strengthening* of the criterion, and it must be recorded as such in the findings
+document.
+
+**Superseded here by §4 amendments 7 and 8, written later:** the six criteria govern arms
+3–6 rather than every arm, and the pre-authorised null outcome now reads **"no candidate
+beats `capfix`"**. Criterion 5 itself is unchanged — a veto, never a selector.
+
+### C-3. Open items 2 and 3 close by decision, not by investigation.
+
+- **The topological verdict has no error bar** (one rewire realisation). **Accepted as
+  directional.** Do not run additional draws. Record in the findings document that the
+  direction is relied upon and the magnitude is not.
+- **The production router's excess hub-seeking is unexplained.** Task 0 below either
+  answers it or it is accepted as open and carried into Phase 1.
+
+Neither item gates the branch merge.
+
+### C-4. Task 16's deletion requirement stands.
+
+The losing option is removed from each config knob and raises, not left as a supported
+mode. Unchanged from the original plan.
+
+---
+
+## 3. Task 0 — run this before Task 14
+
+**This is the cheapest experiment that could change the adoption decision, and it has never
+been run.** Everything downstream is calibrated by its result.
+
+It is not a detour: `capfix` is one of Task 15's six arms. This builds it early and attaches
+a listening session and a routing-time probe.
+
+- [ ] **Step 1 — first, pull Task 15 Step 1 forward and do it here.**
+
+Task 0 as originally written depended on code that does not exist. `load_or_freeze_hub_set`,
+`hub-nodes-control.json`, and the `w_jump = 0` router are all created by **Task 15 Step 1's
+wholesale rewrite of `run_baseline.py`**, which has not run. The current file is still the
+Task 3 stopgap, calling `hub_node_set(store, 0.01)` directly with no freezing and no cache.
+
+Do that rewrite now, exactly as Task 15 Step 1 specifies, with two modifications:
+
+- Apply **C-1** while writing it: no `screen_path` call, no `flagged_paths` count. Do not
+  write the cancelled screen into a brand-new file and then remove it a task later.
+- Note that this is the one genuinely code-shaped step in Task 0, so per §7 it is
+  subagent-and-reviewer work, unlike the rest of the task.
+
+Beyond unblocking Task 0, this means the probe below runs through **the same code path Task
+15 will use**. Otherwise Task 0 produces `hubfrac` from a throwaway script, Task 15 produces
+it from the harness, and any discrepancy between the two is unexplainable.
+
+Task 15 Step 1 is then already done; do not repeat it.
+
+- [ ] **Step 2 — build BOTH `control` and `capfix`.**
+
+Build two 75k artifacts with exactly the configurations Task 15 Step 2 specifies for its
+arms 1 and 2 — `control` (`pre_symmetrise`) and `capfix` (`mutual_knn`), every other knob
+at its current default. Pass config in the build script; do not edit tracked config files.
+Write both manifest sidecars. Two builds, roughly a minute total (execution log §8).
+
+**Building `control` here is not optional and not redundant.** It is required by Steps 3
+and 4 below, and it is the same artifact Task 15 reuses. One build solves both.
+
+- [ ] **Step 3 — anchor the frozen hub set on `control`, before routing anything.**
+
+`load_or_freeze_hub_set` writes `hub-nodes-control.json` on first use, and every later arm
+reads it. The file does not exist yet. **If `capfix` routes first it becomes the anchor,**
+and since its max degree is bounded at 50 against the control's four-figure maximum, its
+top-1%-by-degree is a materially different artist set. Every `hubfrac` in Task 15 would
+then be measured against a degree-compressed hub definition — which is precisely the
+"a variant wins by compressing its degree distribution" failure the frozen set exists to
+prevent.
+
+Route one throwaway query on `control` to force the freeze, or freeze it explicitly. Then
+confirm the file exists and record its artist count before any `capfix` query runs.
+
+**Commit `hub-nodes-control.json`.** It is frozen evaluation data, generated once and
+immutable thereafter — the same class of artifact as `panel.json`, which is tracked. It is
+not gitignored. It is also the single file that makes all six arms comparable: if it is
+lost or regenerated in a later session, the next arm to run silently re-anchors it, which
+is the exact failure this step exists to prevent, displaced in time.
+
+**Also check, and record:** `control` filters the special-purpose entities (the knob now
+defaults on), so it is *not* byte-identical to `graph-75k-v3.bin`, whose hub set produced
+the baseline in `findings/2026-07-22-configuration-model-null.md`. Report the overlap
+between the two hub sets. If it differs by more than a handful of nodes, Step 4's
+comparison against that baseline carries a caveat and must say so.
+
+- [ ] **Step 4 — serve BOTH artifacts, blind, and hand over.**
+
+Serve `control` and `capfix` on two ports. **Do not tell the owner which is which** —
+record the mapping in a file and hand over only the two URLs.
+
+Two reasons this matters. First, the app has been dogfooded against the 5k dev graph; a
+75k-vs-5k comparison would confound the cap fix with a 15× larger graph, and the whole
+point of Task 0 is a one-factor test. Second, criterion 5 is a subjective judgement made by
+someone who knows what he hopes to see. Blinding costs nothing here and removes the
+largest available bias.
+
+**The blind is imperfect, and that is acceptable.** `capfix` drops roughly 800 artists, so
+searching for a missing one identifies the instance. Not worth engineering around. Record
+the limitation in the log up front; if the owner does notice mid-session, that is a note in
+the record, not an invalidation of the judgement.
+
+- [ ] **Step 5 — OWNER: twenty minutes of use, across both.** 🛑
+
+The owner uses both and answers one question: **in which, if either, is the "everything
+routes through the famous core" problem less pronounced?** "No detectable difference" is a
+valid and important answer.
+
+**Judge the sequence of artists, not the clips.** The known clip-resolution defects —
+wrong-artist matching and signed-URL expiry against a 30-day cache — are live, unrelated to
+anything Phase 2 changes, and are Phase 1's work. They will surface as bad or missing audio
+on some cards in *both* instances. Criterion 5 is the one genuinely subjective measurement
+in this plan; letting a known unrelated defect colour it would waste the only human
+judgement the phase gets.
+
+Unblind afterwards. Record the verdict and the mapping in the execution log with both
+sha256s. Do not proceed without it.
+
+- [ ] **Step 6 — the routing-time probe, on BOTH artifacts.**
+
+Route the panel's analysis slice under three routers — production weights, `w_jump = 0`,
+and `w_hub` raised off its dormant default — against **both `control` and `capfix`**. No
+rebuilds; both artifacts are already loaded.
+
+**Why both.** The excess this probe exists to explain — the production router's `hubfrac`
+sitting well above the topological baseline — was measured on the v3/control-family graph.
+Probing `capfix` alone answers "does this channel bind on capfix," not "does it explain the
+excess we actually recorded."
+
+**Budget ~30–60 minutes, not ~20.** The bracketing below means several `w_hub` values, not
+one: two artifacts × (two fixed routers + roughly four `w_hub` values) × the analysis
+slice. Partly offset because `capfix` carries about a fifth of the control's edges, so
+Dijkstra is far cheaper there and the control dominates the total.
+
+**On the `w_hub` value — do not guess once.** A single arbitrary value that moves nothing is
+indistinguishable from "this channel doesn't matter," and that misreading routes you to fork
+row 3. Bracket instead: raise `w_hub` until it *demonstrably binds* — until `hubfrac` moves
+materially or path quality visibly degrades — then report the range. A negative is only
+informative once you have shown the term binds somewhere. If no value binds without wrecking
+paths, that is the finding, and it is a real one.
+
+**`w_hub` does not transfer between artifacts, and the report must say so.** The penalty is
+log-scaled degree, zeroed at the graph's median and rising to 1.0 at its largest hub — so it
+spans 0–1 on both and binds on both, but *at different values*, since `capfix` caps degree
+at 50 while the control's runs to four figures. Consequences, both mandatory:
+
+- Compare the two artifacts on **how `hubfrac` responds**, never on a shared `w_hub` value.
+  "`w_hub = X` on control vs `w_hub = X` on capfix" is a meaningless comparison.
+- Record every bracketed value as **"binds on this artifact,"** never as a tunable to carry
+  into Phase 1. A number lifted out of its context is this project's single most repeated
+  failure.
+
+Report `hubfrac` for each router and artifact against the topological baseline in
+`findings/2026-07-22-configuration-model-null.md`, subject to the Step 3 hub-set caveat.
+This targets execution-log §6 open item 3 directly and costs no builds.
+
+- [ ] **Step 7 — record and commit.** Verdict and probe numbers to the execution log; to
+      the adjudication's ledger if they bear on a numbered claim.
+
+### The fork
+
+> **RESOLVED 2026-07-22 — row 1 fired.** `capfix` was preferred blind and decisively; the
+> verdict and both artifact checksums are in execution-log §12. Consequences: Task 15 is a
+> search for *incremental* gains over `capfix`, not for the fix; §4 amendment 3 re-baselines
+> the scoring arms accordingly; and Phase 1 keeps its original ordering, since row 2 — which
+> would have moved the routing weights ahead of the clip work — did not fire.
+
+| Task 0 result | What it means | Effect on the rest of this plan |
+|---|---|---|
+| **Problem visibly reduced** by `capfix` alone | The inverted cap was the core defect | Task 15 is now about incremental gains. Run it as written, but do not agonise over a marginal winner — if no arm clearly beats `capfix`, adopt `capfix` and close |
+| **Unchanged**, and the probe moves `hubfrac` materially | The defect is at **routing time**, not build time | Task 15 still runs (the rescale question is real), but the routing weights become Phase 1's first work item, ahead of the clip fixes. Record this prominently |
+| **Unchanged**, and the probe moves nothing | Neither channel tested so far explains it | Complete Tasks 14–16 on the evidence available, adopt or don't, and close Phase 2 with the anomaly documented as open. Do not open a new investigation inside Phase 2 |
+
+---
+
+## 4. Tasks 14–16 — amended
+
+**Task 14 — damping in log space.** Unchanged. Two-point confirmation as already narrowed
+(D-decision recorded in the execution log). Observe the byte-identity gate; observe the
+`expm1` ordering hazard flagged in the original plan's Known Sharp Edge — it has not gone
+away.
+
+**Task 15 — build, evaluate, decide.** **Step 1 was pulled forward into Task 0 Step 1 — do
+not repeat it.** Otherwise as written, with eight amendments:
+
+1. **Rebuild `control` and `capfix` after Task 14 and require the hashes to be unchanged.**
+   Task 0 built them *before* Task 14 modified `rescale_scores`'s `p99_log_clip` branch —
+   the branch both arms use. The round-trip is exact at `d = 0` and both are `d = 0`, so
+   they should be identical. "Should be" is what byte-identity gates exist not to rely on,
+   and confirming an artifact's sha256 against its own manifest proves only that the file
+   on disk is unchanged, not that the code producing it is. Without this, Task 15 compares
+   one pre-Task-14 artifact against five post-Task-14 ones — **the exact two-factor
+   confound that invalidated two earlier analyses.** Cost: about a minute. A mismatch is a
+   finding, not a nuisance: stop and report it.
+
+   **State the dependency plainly, because a mismatch here is more expensive than it
+   looks:** Task 0's listening verdict — and therefore criterion 5's reference arm, and
+   therefore the fork resolution this whole plan now rests on — was formed against the
+   *pre-Task-14* `capfix`. If the rebuild does not match, what was judged by ear is not the
+   artifact under consideration, and `capfix` must be re-judged before Task 15 proceeds.
+
+2. **Fix the compared pair set once, across all six arms.** `capfix` and the other
+   `mutual_knn` arms drop roughly 800 artists, so some panel pairs will not resolve.
+   Step 4's code intersects control-with-arm *pairwise*, giving each arm a different `n`
+   and median deltas that are not comparable across arms. Instead compute the six-way
+   intersection once, before any comparison, and run every paired test on that fixed set.
+   Record the size of the intersection and what was dropped.
+
+3. **Compare each arm against the arm it differs from by ONE knob.** Task 0 resolved fork
+   row 1, which makes `control` the wrong baseline for everything downstream of it.
+
+   The arms form a chain, and each link changes exactly one thing:
+
+   | Arm | cap | rescale | damping | Isolating baseline |
+   |---|---|---|---|---|
+   | 1 `control` | `pre_symmetrise` | `p99_log_clip` | 0.0 | — |
+   | 2 `capfix` | `mutual_knn` | `p99_log_clip` | 0.0 | `control` — **settled by Task 0** |
+   | 3 `rankfix` | `mutual_knn` | `percentile_rank` | 0.0 | `capfix` — isolates the rescale |
+   | 4–6 `d025/050/075` | `mutual_knn` | `percentile_rank` | 0.25/0.5/0.75 | **`rankfix`** — isolates damping |
+
+   **Arms 4–6 differ from `capfix` by two knobs, not one.** Baselining them on `capfix`
+   would let a damping arm pass on the strength of the rescale it inherits — which is not
+   what it exists to test. This is the identical confound to amendment 1 and to (a) below,
+   one level further down, and it is the reason the original plan says each arm is "adopted
+   or rejected on its own evidence before the next."
+
+   **Also report arms 4–6 against `capfix`**, not as the isolating comparison but as
+   *rescale-plus-damping as a package against the incumbent to beat*. This matters if
+   `rankfix` loses: the damping arms all carry the rescale, so they would sit inside a
+   losing branch, and you need to see whether damping rescues it before rejecting the
+   branch wholesale.
+
+   The paired-test machinery does not change — only which arm goes first.
+
+   **(a) Why `control` cannot serve as the baseline.** Every arm from 2 onward carries
+   `mutual_knn`. Measured against `control`, each is scored on a change they all *share* —
+   the cap fix, already settled — with the change they exist to isolate riding underneath
+   it invisibly. **This is the two-factor confound that invalidated two earlier analyses.**
+
+   **(b) Expect Adamic–Adar and overlap coefficient to fall for every `mutual_knn` arm, and
+   do not read that as a quality regression.** Both are built from common neighbours, so a
+   large edge reduction depresses them mechanically. `capfix` may score *worse* than
+   `control` on criteria 1 and 2 while being the arm already preferred in a blind test.
+   Overlap metrics have already been shown blind to a real failure mode here (adjudication
+   §4.4), which is why criterion 5 was elevated.
+
+   **Sequencing — this one is expensive if missed.** The new `summarise()` field must exist
+   **before any arm is routed.** Added afterwards, it costs a full re-route of all six arms,
+   which is the expensive part of Task 15, not the cheap part.
+
+   **Make the density effect visible rather than asserted.** The Task 0 probe already shows
+   an order-of-magnitude Adamic–Adar drop between `control` and `capfix` — cite it by
+   section, do not restate it here. In the results table that will look alarming to anyone
+   reading without the explanation. Add **mean common-neighbours per hop** to `summarise()`
+   and report it alongside AA: one extra field, and it lets a reader see the mechanism in
+   the numbers instead of taking the prose's word for it.
+
+4. **Re-check the ≥90 % retention gate on every arm, not just `capfix`.** The gate has only
+   ever been measured for `mutual_knn` at damping 0. Mutual k-NN selects top-K **by score**,
+   and damping changes scores — so arms 4–6 select *different edges*, which can change the
+   largest connected component. `d075` has never been retention-checked at all.
+
+   Measure retention per arm at build time and record it. A large drop is a **finding**, to
+   be reported and adjudicated — not something to be discovered later as an unexplained `n`
+   in the comparison table.
+
+5. **Criterion 5 applies to `capfix` plus the top two arms after criteria 1–4** — not all
+   six, which would cost hours and fatigue the judgement it depends on. `capfix` is now the
+   reference arm, having already been judged. Serve them blind, as in Task 0 Step 4.
+   Criterion 5 is a **veto, not a selector**: it can reject a metric-winner, never crown a
+   metric-loser. If it vetoes the front-runner, judge the next arm rather than reopening the
+   metrics.
+
+6. **The harness no longer emits a bad-path count** (C-1). See §5 below.
+
+7. The Step 6 STOP block stands unchanged and in full. Adoption remains a human decision;
+   present evidence, do not choose. **Do not relax a criterion to produce a winner.** Note
+   that the pre-authorised null outcome now reads **"no candidate beats `capfix`"** — and
+   in that case `capfix` is adopted, not `control`.
+
+8. **The six criteria govern arms 3–6. `capfix` is warranted by Task 0, not by them.**
+
+   > **PRE-REGISTERED 2026-07-22, before any Task 15 evidence exists.** Task 14 was still
+   > running when this was written; no arm beyond `control` and `capfix` had been built and
+   > none had been evaluated. Recorded here and in the execution log so that a later reader
+   > can verify this was not fitted to a result. Owner decision, taken explicitly.
+
+   The six criteria were drafted to adjudicate **the rescale-and-damping question**, before
+   the cap fix was a candidate. Task 0 then answered a *different* question — the cap — by
+   a different and stronger method. Retrofitting criteria designed for one question onto an
+   arm that answers another is a category error, and read literally they would reject the
+   arm that won a blind listening test while Step 6 forbids relaxing them to avoid that.
+   Both cannot hold. This resolves it in advance rather than at the STOP block.
+
+   **`capfix`'s warrant is Task 0** — a blind, one-factor, owner-judged comparison against
+   `control`. That is the strongest evidence class this project has, and it is the reason
+   criterion 5 was elevated in the first place.
+
+   **Criteria 1–4 govern arms 3–6**, each against its isolating baseline (amendment 3),
+   asking the question they were written for: *does changing the rescale or the damping
+   improve on `capfix`?* With these adjustments:
+
+   - **Criteria 1 and 2** read **"improves over its isolating baseline"**, not "over
+     control". The original wording predates amendment 3 and a cold executor would default
+     to control.
+   - **Criterion 3's null must be measured per arm.** The topological baseline exists only
+     for the `v3`/`control` family; a `mutual_knn` arm has a different degree sequence, so
+     the existing null does not describe it and the comparison is ill-posed rather than
+     failed. Measure BFS on each arm — cheap — and compare each router to its own graph's
+     null.
+   - **Criterion 3's degree-collapse clause is retired and replaced, not waived.** Under
+     `mutual_knn` degree is bounded by construction, so across arms 3–6 the clause varies
+     only within a capped band: it reports the cap, not the routing, and cannot discriminate
+     among the arms it now governs. Confirmed against the Task 0 measurements, not merely
+     assumed.
+
+     But it was reaching for **two** guards, and the frozen hub set closes only one.
+     `hubfrac` can fall because the router avoids hub artists — the behaviour wanted — or
+     because those artists **are not in the graph to route through**. The MBID-frozen set
+     fixes hub *identity*, so no variant can win by redefining who counts as a hub; it says
+     nothing about hub *presence*. Amendment 4's retention gate does not cover this either,
+     since it measures artists overall: an arm could retain most of the graph while
+     selectively shedding frozen hub nodes. Mutual k-NN prunes hub edges hardest by
+     construction — a hub's top-K rarely contains the obscure neighbours whose top-K
+     contains it — so this is a live mechanism, not a hypothetical one.
+
+     **Replacement guard, two numbers already available:** report, per arm, (a) how many
+     frozen hub MBIDs are present, and (b) their mean degree. `load_or_freeze_hub_set`'s
+     `if m in store.id_by_mbid` filter is exactly (a); (b) comes from the same lookup.
+     Presence catches hubs being *removed*; mean degree catches hubs being *neutered* —
+     present but pruned until they no longer function as hubs, which presence alone would
+     miss. **If an arm's `hubfrac` gain coincides with a large fall in either, the gain is
+     definitional rather than behavioural, and the arm does not pass criterion 3.**
+
+     This is what the degree clause was reaching for, expressed so that it is not degenerate
+     under a cap.
+
+   - **Overshoot passes.** With per-arm nulls, `hubfrac` falling *below* an arm's own null
+     becomes measurable for the first time, and it is already live rather than hypothetical.
+     Overshoot means the router avoids hubs more than a score-blind walker does, which is
+     the goal, not a defect. Pathological overshoot — `hubfrac` collapsing toward zero — is
+     already caught by criteria 1 and 2, since the Task 0 `w_hub` sweep shows it takes
+     Adamic–Adar down with it. Define it as passing so the criterion is not ambiguous at
+     the STOP block.
+   - **Criterion 4 is unchanged at `mean_ceiling_hops` < 0.30**, and gates arms 3–6 exactly
+     as designed — they are the arms that change the rescale, and the ceiling is what the
+     rescale exists to fix.
+
+     **It certifies; it does not discriminate.** All four arms carry `percentile_rank`, and
+     adjudication §4.5 records that every rank variant drives exactly-zero-cost hops to
+     nil — so all four should clear it comfortably. That is the criterion working, not
+     failing. Do not read a uniform pass as evidence that nothing happened, and do not
+     expect criterion 4 to help choose between `rankfix` and the damping arms.
+   - **Criterion 5** is unchanged: a veto, never a selector.
+
+   **The honest consequence, stated in advance.** `capfix` does not address the ceiling
+   defect — it never claimed to; it leaves `p99_log_clip` in place. So if no arm beats it
+   and `capfix` is adopted, **Phase 2 ships with the primary scoring defect unfixed.** That
+   is an acceptable outcome, but only if it is *recorded* rather than absorbed: it becomes
+   an open item carried into Phase 1 **with a success condition** (see the `closeout`
+   skill's deferral rule), not a silently-passed criterion.
+
+   **This is a genuine fallback, not the expected path.** It requires all four rank arms to
+   fail criteria 1–3, since criterion 4 is expected to pass for all of them. If that is
+   where the evidence lands, treat it as a surprising result worth explaining rather than a
+   routine null.
+
+   **This is not licence to relax anything for arms 3–6.** They face all six criteria at
+   full strength. The scope narrowed; the bar did not move.
+
+**Task 16 — adopt.** As written.
+
+---
+
+## 5. Closeout — time-boxed
+
+- **Final whole-branch review: one hour, hard stop.** Triage execution-log §7 into "fix
+  now" and "not doing." Both lists go into the log. Hygiene findings do not gate the merge.
+- **The Snyk Low CWE-23 in `api/eval/export_paths.py`** is fixed or explicitly accepted
+  with a reason. It is **not** pre-existing — it is new on this branch, and has twice been
+  misreported as pre-existing.
+- **Then stop.** Phase 2 closes. The next work is Phase 1, and it is planned separately.
+
+---
+
+## 6. Reclassification for Phase 1
+
+**C3 — `w_floor` is a no-op and `known` degrades to a bare hard exclusion — is a
+pathfinding defect, not a UX item.** The roadmap files it under "Phase 1: bypass," next to
+button fixes, and that misfiling is part of why it is unscheduled behind sixteen tasks of
+graph work.
+
+It is a direct contributor to the founding complaint: rerolls returning artists at the same
+popularity band. When Phase 1 is planned, C3 leads it, with the routing-weight work from
+**Task 0 Step 6** if the fork sends it there.
+
+Note this in the roadmap at Task 16 Step 5. Do not fix it inside Phase 2.
+
+---
+
+## 7. How to execute this
+
+**Keep subagent-driven execution for implementation. Do not delegate interpretation.**
+
+Tasks 1–13 were executed almost entirely by subagents, with a reviewer per task, and that
+worked — it caught arithmetically impossible fixtures, a contract violation, an
+unsatisfiable git step, and a docstring contradicting its own code. Nothing here overturns
+that pattern. It is retained.
+
+But the remaining work is a different shape. Tasks 1–13 were *write code, test it, report*.
+Task 0 and Task 15 are *run a thing, look at the result, and hand a judgement to a human*.
+The distinction matters because this project's characteristic failure has not been bad
+code — it has been **bad reporting about correct code**, three times, each in a delegated
+report: Task 7's prose contradicted its own clean implementation; a distinct-value count
+was wrong by an order of magnitude; a Snyk finding was labelled pre-existing twice when it
+was new on this branch. All three were caught, but late, and by luck as much as process.
+
+So, per task:
+
+| Task | Mode | Why |
+|---|---|---|
+| **Task 0** | Controller runs it, or a subagent returns **raw output only** | Its product is an owner judgement. No interpretation layer between the numbers and the person deciding |
+| **Task 14** | Subagent + reviewer, as established | A genuine code task with a real sharp edge (the `expm1` round-trip) and a byte-identity gate to catch it |
+| **Task 15** | Controller drives; delegate the unattended compute if useful | Steps 3–5 are script runs; Step 6 is the human adoption decision. Do not let a subagent pre-digest the evidence that decision rests on |
+| **Task 16** | Subagent + reviewer | Mechanical: defaults, fixtures, docs |
+
+**The rule, stated once:** delegate execution freely; return raw numbers, not conclusions.
+Any step whose output feeds the Step 6 STOP block is reported with the figures that produced
+it, never as a verdict alone.
+
+**Parallelism: none is available.** Task 0's steps are sequential with a human stop at
+Step 5. Tasks 14 → 15 → 16 chain through byte-identity gates. Task 15's six arms must
+serialise regardless of who runs them — they share one working tree and `builder/scratch/`,
+and the hub set is frozen from whichever arm runs first, so `control` must anchor. Dispatch
+for isolation and review quality if you want them; do not expect a speedup.
+
+**One risk specific to delegation here:** a subagent handed Task 0 or Task 14 cold does not
+have the reasoning behind §2. The likeliest failure mode is a well-argued proposal to revive
+the bad-path screen. **Every brief written from this plan must quote §2 in full.**
+
+---
+
+## 8. What this plan does not change
+
+The Phase 2 process has been sound and the following are explicitly retained:
+
+- The single-source-of-numbers rule.
+- The execution log, and the discipline of recording when the plan itself was wrong.
+- Pre-registered decision rules, and the standing authorisation to return a null result.
+- The remaining hard gates: byte-identity of the control build, and the held-out slice
+  reproducing criteria 1–4.
+- Never optimise against a screen or a metric.
+
+The instruments built in Tasks 1–10 were expensive. Task 15 is where they pay for
+themselves. Finish it.

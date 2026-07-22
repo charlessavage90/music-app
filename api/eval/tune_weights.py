@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import optuna
 
 from artistpath_api.config import ApiConfig
-from artistpath_api.evaluation import degree_percentile_threshold, path_metrics, summarise
+from artistpath_api.evaluation import hub_node_set, path_metrics, summarise
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.pathfinding import find_path
 
@@ -58,12 +58,12 @@ def build_pairs(store, n_each, rng):
     return pairs
 
 
-def evaluate(store, pairs, cfg, hub_threshold):
+def evaluate(store, pairs, cfg, hub_nodes):
     metrics, max_hubpens = [], []
     for a, b, _ in pairs:
         path = find_path(store, a, b, [], cfg)
         if path and len(path) >= 2:
-            metrics.append(path_metrics(store, path, hub_threshold))
+            metrics.append(path_metrics(store, path, hub_nodes))
             interior = path[1:-1]
             max_hubpens.append(
                 max((float(store.hub_penalty[n]) for n in interior), default=0.0)
@@ -83,7 +83,7 @@ def score(s):
 def report(label, s):
     print(
         f"  {label:14s} score {score(s):+.3f} | "
-        f"hub-traversal {s['hub_traversal_rate']*100:5.1f}% | "
+        f"hubfrac {s['mean_hubfrac']*100:5.1f}% | "
         f"max-hubpen {s['mean_max_hubpen']:.3f} | "
         f"len {s['mean_length']:5.1f} | "
         f"bottleneck-sim {s['mean_bottleneck_sim']:.3f}"
@@ -96,14 +96,14 @@ def main():
     n_each = int(sys.argv[3]) if len(sys.argv) > 3 else 12
 
     store = GraphStore.load(graph)
-    hub_threshold = degree_percentile_threshold(store, 0.01)
+    hub_nodes = hub_node_set(store, 0.01)
     rng = np.random.default_rng(SEED)
     all_pairs = build_pairs(store, n_each * 2, rng)  # 2x, split in half
     rng.shuffle(all_pairs)
     split = len(all_pairs) // 2
     train, test = all_pairs[:split], all_pairs[split:]
 
-    print(f"{store.artist_count:,} artists | hub threshold {hub_threshold} | "
+    print(f"{store.artist_count:,} artists | hub set size {len(hub_nodes)} | "
           f"{len(train)} train / {len(test)} test pairs")
     print(f"objective: smoothness - {LAMBDA_HUB}*hubpen - {LAMBDA_LEN}*len_dev "
           f"(target len {TARGET_LEN})")
@@ -119,7 +119,7 @@ def main():
             w_hop=trial.suggest_float("w_hop", 0.0, 0.5),
             w_hub=trial.suggest_float("w_hub", 0.0, 8.0),
         )
-        return score(evaluate(store, train, cfg, hub_threshold))
+        return score(evaluate(store, train, cfg, hub_nodes))
 
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     study = optuna.create_study(
@@ -129,13 +129,13 @@ def main():
 
     best = replace(base, **study.best_params)
     print("\n=== baseline (current production weights, w_hub=0) ===")
-    report("train", evaluate(store, train, base, hub_threshold))
-    report("test", evaluate(store, test, base, hub_threshold))
+    report("train", evaluate(store, train, base, hub_nodes))
+    report("test", evaluate(store, test, base, hub_nodes))
     print("\n=== tuned weights ===")
     for k in ("w_sim", "w_jump", "w_floor", "w_hop", "w_hub"):
         print(f"  {k} = {getattr(best, k):.3f}")
-    report("train", evaluate(store, train, best, hub_threshold))
-    report("test", evaluate(store, test, best, hub_threshold))
+    report("train", evaluate(store, train, best, hub_nodes))
+    report("test", evaluate(store, test, best, hub_nodes))
 
 
 if __name__ == "__main__":

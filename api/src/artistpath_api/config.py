@@ -9,8 +9,10 @@ from dataclasses import dataclass, field
 @dataclass(frozen=True, slots=True)
 class ApiConfig:
     # --- graph ----------------------------------------------------------
-    # Dev default is the committed 5k graph; production sets ARTISTPATH_GRAPH
-    # to the 75k artifact. One env var swaps the graph without code changes.
+    # Dev default is a LOCALLY BUILT 5k graph — it is gitignored, not committed,
+    # so a fresh clone must build it (see CLAUDE.md, "No graph artifact is in
+    # git"). Production sets ARTISTPATH_GRAPH to the 75k artifact. One env var
+    # swaps the graph without code changes.
     graph_path: str = os.environ.get(
         "ARTISTPATH_GRAPH", "../builder/scratch/graph-5k.bin"
     )
