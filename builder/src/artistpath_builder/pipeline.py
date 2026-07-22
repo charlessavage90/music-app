@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import logging
 import math
+import re
 
 from collections import defaultdict
 
@@ -35,6 +36,14 @@ from artistpath_builder.sources.base import SimilaritySource
 from artistpath_builder.sources.listenbrainz import harvest_identities
 
 logger = logging.getLogger(__name__)
+
+# MusicBrainz marks placeholder entities in the disambiguation field.
+_SPECIAL_PURPOSE = re.compile(r"special purpose", re.IGNORECASE)
+
+
+def is_special_purpose(disambiguation: str | None) -> bool:
+    """True for MusicBrainz placeholder entities, matched on disambiguation."""
+    return bool(_SPECIAL_PURPOSE.search(disambiguation or ""))
 
 
 def build_from_archive(
@@ -64,6 +73,21 @@ def build_from_archive(
     # record, so they are harvested across every response.
     identities = harvest_identities(payloads.values())
 
+    # Drop placeholder entities BEFORE the mass computation, so they
+    # contribute to no marginal. Mass is computed over the full uncapped
+    # neighbour list, so leaving them in would perturb every score slightly.
+    if config.filter_special_purpose:
+        excluded = {
+            mbid
+            for mbid, (_name, disambiguation) in identities.items()
+            if is_special_purpose(disambiguation)
+        }
+        if excluded:
+            logger.info("filtered %d special-purpose entities", len(excluded))
+        known -= excluded
+    else:
+        excluded = set()
+
     # --- Pass 1: raw neighbour lists and per-artist co-occurrence mass -----
     # The mass (sum of an artist's raw scores) is the marginal used to correct
     # for popularity below. Computed over the FULL uncapped list, which is a
@@ -71,7 +95,11 @@ def build_from_archive(
     raw_lists: dict[str, list] = {}
     mass: dict[str, float] = {}
     for mbid in sorted(known):
-        neighbours = source.parse(payloads[mbid], exclude_mbid=mbid)
+        neighbours = [
+            n
+            for n in source.parse(payloads[mbid], exclude_mbid=mbid)
+            if n.mbid not in excluded
+        ]
         raw_lists[mbid] = neighbours
         mass[mbid] = sum(n.score for n in neighbours) or 1.0
 

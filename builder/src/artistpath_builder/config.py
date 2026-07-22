@@ -62,6 +62,13 @@ class BuilderConfig:
     # Design:      docs/superpowers/specs/2026-07-21-phase2-path-quality-design.md
     similarity_damping: float = 0.0
 
+    # Drop MusicBrainz placeholder entities ([unknown], [traditional],
+    # [no artist], [anonymous], [theatre], [dialogue], [Disney]). Matched on
+    # the DISAMBIGUATION field, never the name: 22 nodes have bracketed names
+    # and 15 of them are real bands. This is a correctness fix and is worth
+    # approximately nothing on hub metrics — see the Phase 2 spec §1.5.
+    filter_special_purpose: bool = True
+
     # --- output ---------------------------------------------------------
     graph_version: str = "v1"
 
