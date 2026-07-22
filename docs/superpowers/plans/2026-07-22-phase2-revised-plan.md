@@ -253,7 +253,7 @@ This targets execution-log §6 open item 3 directly and costs no builds.
 away.
 
 **Task 15 — build, evaluate, decide.** **Step 1 was pulled forward into Task 0 Step 1 — do
-not repeat it.** Otherwise as written, with six amendments:
+not repeat it.** Otherwise as written, with seven amendments:
 
 1. **Rebuild `control` and `capfix` after Task 14 and require the hashes to be unchanged.**
    Task 0 built them *before* Task 14 modified `rescale_scores`'s `p99_log_clip` branch —
@@ -265,6 +265,12 @@ not repeat it.** Otherwise as written, with six amendments:
    confound that invalidated two earlier analyses.** Cost: about a minute. A mismatch is a
    finding, not a nuisance: stop and report it.
 
+   **State the dependency plainly, because a mismatch here is more expensive than it
+   looks:** Task 0's listening verdict — and therefore criterion 5's reference arm, and
+   therefore the fork resolution this whole plan now rests on — was formed against the
+   *pre-Task-14* `capfix`. If the rebuild does not match, what was judged by ear is not the
+   artifact under consideration, and `capfix` must be re-judged before Task 15 proceeds.
+
 2. **Fix the compared pair set once, across all six arms.** `capfix` and the other
    `mutual_knn` arms drop roughly 800 artists, so some panel pairs will not resolve.
    Step 4's code intersects control-with-arm *pairwise*, giving each arm a different `n`
@@ -272,46 +278,70 @@ not repeat it.** Otherwise as written, with six amendments:
    intersection once, before any comparison, and run every paired test on that fixed set.
    Record the size of the intersection and what was dropped.
 
-3. **Re-baseline criteria 1 and 2 for arms 3–6 against `capfix`, not `control`.**
+3. **Compare each arm against the arm it differs from by ONE knob.** Task 0 resolved fork
+   row 1, which makes `control` the wrong baseline for everything downstream of it.
 
-   Task 0 resolved fork row 1: the cap fix won a blind listening test, and the mutual k-NN
-   cap cut edge count by roughly three quarters while retaining 98.9 % of artists. Two
-   consequences follow, and they point the same way.
+   The arms form a chain, and each link changes exactly one thing:
 
-   **(a) `control` is the wrong baseline for the scoring arms.** `rankfix`, `d025`, `d050`
-   and `d075` all carry `mutual_knn`. Measured against `control`, every one of them is
-   scored on a change they *share* — the cap fix, already settled — with the scoring change
-   they are meant to isolate riding underneath it invisibly. All four could pass "improves
-   over control" on the strength of something none of them contributed. **This is the same
-   two-factor confound as amendment 1, in a different costume, and it is the one that
-   invalidated two earlier analyses.**
+   | Arm | cap | rescale | damping | Isolating baseline |
+   |---|---|---|---|---|
+   | 1 `control` | `pre_symmetrise` | `p99_log_clip` | 0.0 | — |
+   | 2 `capfix` | `mutual_knn` | `p99_log_clip` | 0.0 | `control` — **settled by Task 0** |
+   | 3 `rankfix` | `mutual_knn` | `percentile_rank` | 0.0 | `capfix` — isolates the rescale |
+   | 4–6 `d025/050/075` | `mutual_knn` | `percentile_rank` | 0.25/0.5/0.75 | **`rankfix`** — isolates damping |
 
-   The paired-test machinery does not change; only which arm goes first. Compare `capfix`
-   against `control` (settled by Task 0, reported for completeness) and arms 3–6 against
-   `capfix`.
+   **Arms 4–6 differ from `capfix` by two knobs, not one.** Baselining them on `capfix`
+   would let a damping arm pass on the strength of the rescale it inherits — which is not
+   what it exists to test. This is the identical confound to amendment 1 and to (a) below,
+   one level further down, and it is the reason the original plan says each arm is "adopted
+   or rejected on its own evidence before the next."
 
-   **(b) Expect Adamic–Adar and overlap coefficient to fall for every `mutual_knn` arm,
-   and do not read that as a quality regression.** Both metrics are built from common
-   neighbours, so a large edge reduction depresses them mechanically. `capfix` may well
-   score *worse* than `control` on criteria 1 and 2 while being the arm already preferred
-   in a blind test.
+   **Also report arms 4–6 against `capfix`**, not as the isolating comparison but as
+   *rescale-plus-damping as a package against the incumbent to beat*. This matters if
+   `rankfix` loses: the damping arms all carry the rescale, so they would sit inside a
+   losing branch, and you need to see whether damping rescues it before rejecting the
+   branch wholesale.
 
-   If that happens, the metrics are confounded by density — not the listening test by
-   error. Overlap metrics have already been shown blind to a real failure mode on this
-   project (adjudication §4.4), which is why criterion 5 was elevated. **Record the density
-   effect explicitly in the findings document** so a future reader does not mistake it for
-   evidence against the cap fix.
+   The paired-test machinery does not change — only which arm goes first.
 
-4. **Criterion 5 applies to `capfix` plus the top two arms after criteria 1–4** — not all
+   **(a) Why `control` cannot serve as the baseline.** Every arm from 2 onward carries
+   `mutual_knn`. Measured against `control`, each is scored on a change they all *share* —
+   the cap fix, already settled — with the change they exist to isolate riding underneath
+   it invisibly. **This is the two-factor confound that invalidated two earlier analyses.**
+
+   **(b) Expect Adamic–Adar and overlap coefficient to fall for every `mutual_knn` arm, and
+   do not read that as a quality regression.** Both are built from common neighbours, so a
+   large edge reduction depresses them mechanically. `capfix` may score *worse* than
+   `control` on criteria 1 and 2 while being the arm already preferred in a blind test.
+   Overlap metrics have already been shown blind to a real failure mode here (adjudication
+   §4.4), which is why criterion 5 was elevated.
+
+   **Make the density effect visible rather than asserted.** The Task 0 probe already shows
+   an order-of-magnitude Adamic–Adar drop between `control` and `capfix` — cite it by
+   section, do not restate it here. In the results table that will look alarming to anyone
+   reading without the explanation. Add **mean common-neighbours per hop** to `summarise()`
+   and report it alongside AA: one extra field, and it lets a reader see the mechanism in
+   the numbers instead of taking the prose's word for it.
+
+4. **Re-check the ≥90 % retention gate on every arm, not just `capfix`.** The gate has only
+   ever been measured for `mutual_knn` at damping 0. Mutual k-NN selects top-K **by score**,
+   and damping changes scores — so arms 4–6 select *different edges*, which can change the
+   largest connected component. `d075` has never been retention-checked at all.
+
+   Measure retention per arm at build time and record it. A large drop is a **finding**, to
+   be reported and adjudicated — not something to be discovered later as an unexplained `n`
+   in the comparison table.
+
+5. **Criterion 5 applies to `capfix` plus the top two arms after criteria 1–4** — not all
    six, which would cost hours and fatigue the judgement it depends on. `capfix` is now the
    reference arm, having already been judged. Serve them blind, as in Task 0 Step 4.
    Criterion 5 is a **veto, not a selector**: it can reject a metric-winner, never crown a
    metric-loser. If it vetoes the front-runner, judge the next arm rather than reopening the
    metrics.
 
-5. **The harness no longer emits a bad-path count** (C-1). See §5 below.
+6. **The harness no longer emits a bad-path count** (C-1). See §5 below.
 
-6. The Step 6 STOP block stands unchanged and in full. Adoption remains a human decision;
+7. The Step 6 STOP block stands unchanged and in full. Adoption remains a human decision;
    present evidence, do not choose. **Do not relax a criterion to produce a winner.** Note
    that the pre-authorised null outcome now reads **"no candidate beats `capfix`"** — and
    in that case `capfix` is adopted, not `control`.
