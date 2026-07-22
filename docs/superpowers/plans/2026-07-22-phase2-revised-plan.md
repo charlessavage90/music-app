@@ -253,7 +253,7 @@ This targets execution-log §6 open item 3 directly and costs no builds.
 away.
 
 **Task 15 — build, evaluate, decide.** **Step 1 was pulled forward into Task 0 Step 1 — do
-not repeat it.** Otherwise as written, with seven amendments:
+not repeat it.** Otherwise as written, with eight amendments:
 
 1. **Rebuild `control` and `capfix` after Task 14 and require the hashes to be unchanged.**
    Task 0 built them *before* Task 14 modified `rescale_scores`'s `p99_log_clip` branch —
@@ -316,6 +316,10 @@ not repeat it.** Otherwise as written, with seven amendments:
    Overlap metrics have already been shown blind to a real failure mode here (adjudication
    §4.4), which is why criterion 5 was elevated.
 
+   **Sequencing — this one is expensive if missed.** The new `summarise()` field must exist
+   **before any arm is routed.** Added afterwards, it costs a full re-route of all six arms,
+   which is the expensive part of Task 15, not the cheap part.
+
    **Make the density effect visible rather than asserted.** The Task 0 probe already shows
    an order-of-magnitude Adamic–Adar drop between `control` and `capfix` — cite it by
    section, do not restate it here. In the results table that will look alarming to anyone
@@ -345,6 +349,57 @@ not repeat it.** Otherwise as written, with seven amendments:
    present evidence, do not choose. **Do not relax a criterion to produce a winner.** Note
    that the pre-authorised null outcome now reads **"no candidate beats `capfix`"** — and
    in that case `capfix` is adopted, not `control`.
+
+8. **The six criteria govern arms 3–6. `capfix` is warranted by Task 0, not by them.**
+
+   > **PRE-REGISTERED 2026-07-22, before any Task 15 evidence exists.** Task 14 was still
+   > running when this was written; no arm beyond `control` and `capfix` had been built and
+   > none had been evaluated. Recorded here and in the execution log so that a later reader
+   > can verify this was not fitted to a result. Owner decision, taken explicitly.
+
+   The six criteria were drafted to adjudicate **the rescale-and-damping question**, before
+   the cap fix was a candidate. Task 0 then answered a *different* question — the cap — by
+   a different and stronger method. Retrofitting criteria designed for one question onto an
+   arm that answers another is a category error, and read literally they would reject the
+   arm that won a blind listening test while Step 6 forbids relaxing them to avoid that.
+   Both cannot hold. This resolves it in advance rather than at the STOP block.
+
+   **`capfix`'s warrant is Task 0** — a blind, one-factor, owner-judged comparison against
+   `control`. That is the strongest evidence class this project has, and it is the reason
+   criterion 5 was elevated in the first place.
+
+   **Criteria 1–4 govern arms 3–6**, each against its isolating baseline (amendment 3),
+   asking the question they were written for: *does changing the rescale or the damping
+   improve on `capfix`?* With these adjustments:
+
+   - **Criteria 1 and 2** read **"improves over its isolating baseline"**, not "over
+     control". The original wording predates amendment 3 and a cold executor would default
+     to control.
+   - **Criterion 3's null must be measured per arm.** The topological baseline exists only
+     for the `v3`/`control` family; a `mutual_knn` arm has a different degree sequence, so
+     the existing null does not describe it and the comparison is ill-posed rather than
+     failed. Measure BFS on each arm — cheap — and compare each router to its own graph's
+     null.
+   - **Criterion 3's degree-collapse clause is retired, not waived.** It guarded against a
+     variant winning `hubfrac` by compressing its degree distribution. Under `mutual_knn`
+     degree is bounded by construction, so the measurement carries no information for any
+     arm from 2 onward — it reports the cap, not the routing. Its protective purpose is
+     already served by the **MBID-frozen hub set anchored on `control`**, which makes it
+     impossible for any variant to win by redefining who counts as a hub.
+   - **Criterion 4 is unchanged at `mean_ceiling_hops` < 0.30**, and gates arms 3–6 exactly
+     as designed — they are the arms that change the rescale, and the ceiling is what the
+     rescale exists to fix.
+   - **Criterion 5** is unchanged: a veto, never a selector.
+
+   **The honest consequence, stated in advance.** `capfix` does not address the ceiling
+   defect — it never claimed to; it leaves `p99_log_clip` in place. So if no arm beats it
+   and `capfix` is adopted, **Phase 2 ships with the primary scoring defect unfixed.** That
+   is an acceptable outcome, but only if it is *recorded* rather than absorbed: it becomes
+   an open item carried into Phase 1 **with a success condition** (see the `closeout`
+   skill's deferral rule), not a silently-passed criterion.
+
+   **This is not licence to relax anything for arms 3–6.** They face all six criteria at
+   full strength. The scope narrowed; the bar did not move.
 
 **Task 16 — adopt.** As written.
 
