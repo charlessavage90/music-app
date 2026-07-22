@@ -2,7 +2,9 @@
 
 **Date:** 2026-07-21
 **Amended:** 2026-07-21 (§4.3 restated, §4.4 added, §6 rows 28–30 added, §8 note added) —
-see §4.4 for what changed and why.
+see §4.4 for what changed and why. **Amended:** 2026-07-22 (§5.3 note, §6 rows 19/22
+updated) — the configuration-model rewire flagged as unmeasured in §5.3 has been run;
+see `2026-07-22-configuration-model-null.md`.
 **Status:** This is the single consolidated quantitative record for edge scoring and
 path-quality metrics. It **supersedes** the contested sections of both source documents:
 
@@ -490,6 +492,10 @@ Analytic degree-biased (stationary) hub probability = **0.1723**; uniform-node =
 - Still **unmeasured**: the configuration-model rewire (spec §A3). The degree-biased walk
   and the scoring-free routers are cheap and were run; the rewire was not, and it remains
   the cleanest null for "is it topology or scoring".
+  > **Amended 2026-07-22.** The rewire has since been run; see
+  > `2026-07-22-configuration-model-null.md` and §6 claims 19/22 below. It answers this
+  > question for shortest-path/similarity-only routing, not for the production `FULL`
+  > router.
 
 ### 5.4 `w_floor` is a no-op — A §5.3 upheld
 
@@ -533,10 +539,10 @@ feature is not wholly inert.
 | 16 | Adamic–Adar is the right primary objective | spec §B1 | **Upheld with a caveat** — flat in max-degree (+0.110) but Spearman +0.578 vs min-degree, an unmeasured pro-hub channel |
 | 17 | Observed/expected under a configuration model is a sound alternative | task framing | **Overturned** — Spearman −0.880 vs max-degree, worse than Jaccard |
 | 18 | `corr(score, endpoint degree) = +0.725` | findings §5.1 | **Overturned** — +0.259 to +0.287 on v3, sign unstable (−0.497 on cosine); closest analogue +0.706 is a different quantity |
-| 19 | Hub-seeking is caused by the scoring | findings §5.1 | **Overturned** — score-free BFS is 2.68× enriched on the same null; FULL has the *lowest* max interior degree of the three routers |
+| 19 | Hub-seeking is caused by the scoring | findings §5.1 | **Overturned, conclusively, for shortest-path/similarity-only routing** — score-free BFS is 2.68× enriched on the walk null (§5.3); the configuration-model rewire (spec §A3, run 2026-07-22) then closed the gap §5.3 itself flagged as still open: see `2026-07-22-configuration-model-null.md`. Left open for the production `FULL` router specifically — see that document §3.4/§4 |
 | 20 | Degree-biased null hubfrac = 0.172; enrichment 3.7× | findings §5.1 | **Upheld as measurements** (0.1723; 3.66–4.09×) — but they do not support #19 |
 | 21 | The binary hub-traversal metric reads 61–68 % by chance | findings §5.2 | **Upheld** — 0.642 at length 7.4 |
-| 22 | Findings §2: hub-traversal is topological (struck through) | findings §2 / §5 | **Partially reinstated** — right about the control, wrong to read a raw rate |
+| 22 | Findings §2: hub-traversal is topological (struck through) | findings §2 / §5 | **Reinstated in full for shortest-path/similarity-only routing** — the configuration-model rewire (`2026-07-22-configuration-model-null.md`) shows hub-traversal is not reduced (in fact rises) when community structure is destroyed and only the degree sequence is preserved, per the pre-registered rule in that document. §5.3's "partially reinstated" was correct as far as it went and is now superseded by this fuller result; the production `FULL` router's additional hub-seeking above this topological baseline is a separate, still-open question (see that document §3.4) |
 | 23 | `w_floor` is a provable no-op | findings §5.3 | **Upheld** — 20/20 identical paths, 0/20 dip below the floor |
 | 24 | The two bypass signals are behaviourally identical | findings §5.3 | **Overturned** — `dislike` still applies `avoidance_map`; only `known` degrades to a hard exclusion |
 | 25 | Entity filter is not a quality lever (7 nodes, max degree 218) | spec §1.3 | **Not re-measured — unresolved** |
@@ -572,7 +578,10 @@ Ranked by strength of evidence.
    **Confidence: medium** — AA's flatness is measured, its behaviour under optimisation
    is not.
 6. **Run the configuration-model rewire** (spec §A3) to close #19/#22 properly.
-   **Confidence: n/a — unmeasured, and it is the one cheap experiment still outstanding.**
+   ~~**Confidence: n/a — unmeasured, and it is the one cheap experiment still
+   outstanding.**~~ **Done 2026-07-22** — see `2026-07-22-configuration-model-null.md`
+   and §6 rows 19/22. Closed for shortest-path/similarity-only routing; the production
+   `FULL` router's excess hub-seeking over that baseline is a separate open question.
 7. **Hypothesis, not a finding:** once the rescale is fixed, `d` may matter far less than
    either document assumes, because both observed failure modes were clip artefacts. Test
    by sweeping `d` only under the rank rescale. Falsified if rank-rescaled `d = 0` and
