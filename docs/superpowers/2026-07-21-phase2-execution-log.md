@@ -258,3 +258,65 @@ sample** — it was blocked, not computing. Dijkstra is CPU-bound, so flat CPU i
 diagnostic. Sampling `(Get-Process -Id N).CPU` twice separates the two cases in seconds;
 waiting on the log alone does not. Two long jobs in this phase hung this way and were
 only found by checking.
+
+---
+
+## 12. Task 0 — the cap-fix listening test (2026-07-22)
+
+**Result: `capfix` preferred, blind, decisively. Fork row 1.**
+
+### Setup
+
+Two 75k artifacts, built from the same archive at commit `08c2831`, differing in exactly
+one knob — where the neighbour cap is applied. Everything else identical: same entity
+filter, same rescale (`p99_log_clip`), same damping (0.0), same scoring.
+
+| Arm | `cap_strategy` | artists | edges | sha256 |
+|---|---|---|---|---|
+| `arm1-control` | `pre_symmetrise` | 74,991 | 4,101,222 | `d3016bc06dd9e62de9e6edff3206ca9a3d8366243ca18b2588c0a7063042f57a` |
+| `arm2-capfix` | `mutual_knn` | 74,191 | 898,314 | `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237` |
+
+Served blind on two ports behind two frontends; the owner was given only two URLs and did
+not know the mapping. Instance A = `arm2-capfix` (:5175), Instance B = `arm1-control`
+(:5174). Mapping was written before serving and unblinded only after the verdict.
+
+`arm1-control`'s hash is byte-identical to the `graph-control.bin` built at commit
+`db6844a`, before the average-rank change landed — free confirmation that `d197d8e` did
+not touch the `p99_log_clip` path.
+
+### Verdict (owner, verbatim in substance)
+
+> "Little doubt in my mind that instance A is better. The 'famous core' problem is less
+> pronounced (though natural hub artists still show up in paths), the paths are longer,
+> and when using a bypass, the paths generally seem to trend longer and incorporate less
+> well-known artists the more a bypass is used. I don't want to claim perfection or
+> completion, but the difference in behavior was noticeable immediately — on the first
+> tested path."
+
+**Three observations, all mechanistically consistent with bounding degree after
+symmetrisation** — removing hubs' ability to act as universal shortcuts lengthens paths,
+surfaces less-known artists, and compounds under repeated bypass. None of this was
+suggested to the owner in advance.
+
+**Caveat recorded as stated:** natural hub artists still appear; this is not claimed as
+perfection or completion.
+
+### Why this carries weight
+
+Blind, one-factor, and decided on the first tested path. The cap defect had been known
+since Task 12 and was still switched off by default; this is the first time its effect on
+the actual product complaint was observed rather than inferred from metrics.
+
+### Consequence — fork row 1
+
+The inverted cap was the core defect. **Task 15 is now about incremental gains, not about
+finding the fix.** Per the revised plan: run it as written, but do not agonise over a
+marginal winner — if no arm clearly beats `capfix`, adopt `capfix` and close.
+
+### Note on a single controller probe
+
+Before handover, one verification query (`Miles Davis → Daft Punk`) returned 5 nodes on
+`capfix` against 6 on control — i.e. *shorter* on that one pair, opposite to the owner's
+general impression across several pairs. One pair is not a trend and the two are not in
+conflict, but it is recorded rather than dropped: path length is not monotonic in the fix,
+and Task 15's `mean_length` will measure it properly.
