@@ -222,6 +222,30 @@ reviews are rare and targeted here.
 Closeout writes; session-start reads. Keep them in sync — if you change what one
 produces, change what the other consumes.
 
+### When to recommend a review
+
+**Reviews are never automatic.** When a trigger below is reached, *recommend* a partial or
+team review to the owner and say what decision it would change — then wait. Running one
+unasked is how a project ends up relitigating its direction weekly.
+
+The filter, before recommending anything: **what decision would this review change?** If
+you cannot name one, do not recommend it. And **if you can name the specific worry, it is
+a targeted single-agent question, not a team** — a team review is for finding what you do
+not know to ask about.
+
+- **`ml-graph-analyst`** — derivation, never judgement. Recommend it before adopting a
+  normalisation, ranking or rescaling change; when a comparison spans graphs of different
+  structure; when a metric moves and you cannot tell property from bug; when a claim about
+  the graph is about to enter the record; or to critique an analysis before acting on it.
+  Never for interpreting evidence that feeds a human decision.
+- **Team review** (architect, security, quality, frontend, plus the graph analyst only if
+  a scoring question is open) — **at gate boundaries, after a period of real use.** Gate 1
+  → 2 and Gate 2 → 3. Staff the frontend explicitly: three backend-focused reviewers once
+  missed an entire defect class that twenty minutes of use found.
+- **Not triggers:** phase or plan completion, a merge, a milestone, or feeling uncertain
+  about direction. Those get `closeout`. Uncertainty about direction is the one thing a
+  team review reliably makes worse.
+
 ### How work lands: pull requests, always
 
 Development here is **pull-request driven against `origin`
