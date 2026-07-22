@@ -320,3 +320,39 @@ Before handover, one verification query (`Miles Davis → Daft Punk`) returned 5
 general impression across several pairs. One pair is not a trend and the two are not in
 conflict, but it is recorded rather than dropped: path length is not monotonic in the fix,
 and Task 15's `mean_length` will measure it properly.
+
+### Task 0 Step 6 — routing-time probe, both artifacts
+
+Analysis slice (100 pairs), frozen control-anchored hub set throughout, five router
+configurations per artifact. Numbers are in the adjudication (§6 claims 39–40); the
+operational points are here.
+
+- **`capfix` corroborates the blind verdict quantitatively.** All three effects the owner
+  reported from twenty minutes of use — less hub traversal, longer paths, less-known
+  interior artists — are present in the measurements, from a build-time change alone.
+- **The `w_jump` suspicion in claim 35 is largely refuted.** Zeroing the popularity term
+  moves control's hubfrac only modestly. It contributes; it is not the main driver.
+- **`w_hub` is dormant at its default of 0 and is a very large lever**, but buying hubfrac
+  with it costs a roughly tenfold collapse in Adamic–Adar — paths routed through hops with
+  almost no shared neighbours. Bracketed rather than guessed, per plan. Values recorded as
+  "binds on this artifact"; the penalty is per-graph normalised and does not transfer.
+- **Counter-intuitive detail worth keeping:** on control, `w_jump = 0` lowers hubfrac while
+  *raising* max interior degree. The two measures disagree; neither alone describes
+  "hubbiness."
+
+**Operational facts for Task 15:**
+
+| | |
+|---|---|
+| Panel pairs unresolvable on `capfix` | 2 of 100 |
+| Frozen hub MBIDs absent from `capfix` | 1 of 751 |
+| Routing cost, control | ~200 s per router pass (100 pairs) |
+| Routing cost, `capfix` | ~35 s per router pass — ~5× cheaper, it carries a fifth of the edges |
+
+The five `mutual_knn` arms in Task 15 will therefore be far cheaper than the control arm.
+
+**Caveat stated rather than glossed:** the topological baseline in
+`findings/2026-07-22-configuration-model-null.md` was measured on the v3/control-family
+graph. Comparing `capfix` against it is cross-graph and not like-for-like. On `control` the
+comparison is valid and confirms the excess. Measuring BFS on `capfix` would close this and
+costs about 40 s, but it is a new measurement and Phase 2 is not opening one.
