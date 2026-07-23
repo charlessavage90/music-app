@@ -544,6 +544,86 @@ instrument if anyone leans hard on the 15.6×.**
 
 **Scripts:** `builder/analysis/2026-07-23-popularity-stratification/validation/`.
 
+> **Before using the exits table above, read §2.11.** It establishes who the zero-exit
+> nodes actually are, and why the p90 threshold that defines an "exit" is a **gameable**
+> success criterion for any experiment that tries to fix this.
+
+---
+
+### 2.11 Who has zero exits — and a third conflation (2026-07-23)
+
+Prompted by the owner asking whether §2.10's zero-exit nodes are the lo-fi/chiptune
+cap-set artists or the Beatles-like ones. **The question has a false premise, and that is
+the finding: they are the same population.**
+
+#### The "micro-genre" artists are popular artists
+
+| artist | degree | **popularity percentile** | sub-p90 exits |
+|---|---|---|---|
+| Stonebank | 50 | **0.991** | 1 |
+| USAO | 50 | **0.988** | 5 |
+| saib. | 50 | **0.986** | **0** |
+| Lazerhawk | 50 | **0.986** | 1 |
+| Miami Nights 1984 | 50 | **0.982** | 1 |
+| idealism | 50 | **0.977** | 1 |
+| Purrple Cat | 50 | **0.966** | **0** |
+| CROOVE | 50 | 0.850 | **47** |
+
+§2.2 describes the top-25 by degree as "insular micro-genre artists," set against the
+famous ones. **Right about insularity, wrong about obscurity.** Popularity here is
+score-weighted co-listening, and lo-fi/synthwave artists are playlist staples, so they
+accumulate very high in-degree. They sit in the top 1–3 % by popularity, alongside The
+Beatles. CROOVE is the sole genuine outlier — below p90 itself, and the only one with a
+large exit count.
+
+#### Zero exits is a popularity property, not a degree property
+
+| popularity band | deg ≥45 | deg 20–44 | deg <20 |
+|---|---|---|---|
+| top 0.1 % | **75.0 %** (n=8) | 44.0 % (n=25) | **73.8 %** (n=42) |
+| p99–99.9 | 49.3 % (n=71) | 33.5 % (n=409) | 44.4 % (n=187) |
+| p95–99 | 25.3 % (n=293) | 9.7 % (n=1,914) | 14.5 % (n=761) |
+| p90–95 | 6.6 % (n=167) | 2.3 % (n=2,281) | 8.1 % (n=1,262) |
+| p50–90 | 0.0 % (n=195) | 0.0 % (n=10,570) | 1.5 % (n=18,911) |
+| below p50 | — | — | 0.8 % (n=37,095) |
+
+It rises monotonically with popularity inside **every** degree band and effectively
+vanishes below p90. **The graph is structurally normal everywhere except its top decile**,
+which is a single sealed stratum containing both Metallica and saib.
+
+**Two routes into it**, which is why the top row is U-shaped in degree — and this explains
+a number §2.10 left unexplained:
+
+- **Too few edges to have any obscure ones** — the §2.8 tie-break victims. The Beatles
+  (deg 7, 0 exits), Coldplay (deg 4, 0 exits).
+- **All 50 slots consumed by same-band peers** — the saturated ones. Metallica (deg 50,
+  0 exits), The Shins (deg 46, 0 exits).
+
+Different mechanisms, identical outcome. **This is why fixing §2.8 moves the exit rate only
+5.1 % → 3.9 %:** it repairs the first route and does nothing about the second.
+
+#### The third conflation — and it threatens the success criterion, not just the vocabulary
+
+The record has established **degree ≠ fame** (§2.6). This establishes **popularity ≠ fame**
+as well, at the top of the distribution, where a lo-fi producer and a Beatle score alike.
+
+For the judged paths it did not matter — Nina Simone, Aretha Franklin, Madonna and Bob Dylan
+are genuinely famous, so metric and ear agreed, and §2.9's tail finding is **not** weakened.
+
+**What it does threaten is any future experiment scored on "reaches below p90."** That
+criterion is gameable: a cost-function change could satisfy it by routing from Metallica into
+synthwave — a large popularity drop by the metric, and plausibly indistinguishable from the
+current behaviour to the listener. **Any attempt to fix the stratification needs a success
+criterion sharper than a popularity percentile** — decided artists, or a fame proxy that is
+not in-degree.
+
+**Labelled as inference, not measurement:** that saib. and Purrple Cat would not *feel*
+well-known to the owner is inferred from genre, not from any recorded verdict. He has never
+been shown one. If that inference is wrong, the gameability concern weakens — but the
+structural finding above does not depend on it.
+
+**Scripts:** `builder/analysis/2026-07-23-popularity-stratification/exits_by_band.py`.
+
 ---
 
 **Scripts — committed, not lost.** `builder/analysis/2026-07-22-cap-ranking-replay/`
