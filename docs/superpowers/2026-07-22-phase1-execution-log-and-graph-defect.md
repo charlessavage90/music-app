@@ -28,6 +28,15 @@ one rule). Nothing here supersedes
 > **§2.8** identifies the cause by one-knob intervention, and it is **not** what §2.4
 > suspected. Read **§2.8 first**, then §2.2's two correction notices. **§2.4 is overturned
 > with its sign inverted — do not act on it.** All four of §2.7's questions remain open.
+>
+> **Update 2026-07-23 — the decision has been made: repair + retune.** The owner chose the
+> repair-then-retune route; the governing design is
+> `specs/2026-07-23-defect-remediation-and-cost-retune-design.md`. **Track 1 (the §2.8
+> tie-break fix) is complete and the rebuilt artifact is adopted** — identity and
+> verification in `findings/2026-07-23-tiebreak-fix-adoption.md`. **Track 2 (the
+> cost-function retune) is next.** This document's §2 remains the authoritative record of
+> the defect and of the three conflated quantities (degree ≠ fame, popularity ≠ fame,
+> raw popularity ≠ percentile) — those warnings are still live.
 
 ---
 

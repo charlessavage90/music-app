@@ -37,7 +37,9 @@ that is how the drift began.
 
 ## Current state
 
-- ⛔ **Phase 1 is PAUSED, 2026-07-22; the diagnosis changed materially on 2026-07-23.**
+- ⛔ **The owner decided 2026-07-23: repair + retune. Track 1 is DONE and adopted; Track 2
+  is next.** The defect record and diagnosis below remain essential reading before touching
+  Phase 1 — the three conflated quantities it warns about are still live hazards.
   **Read [`superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md`](superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md)
   §2 before any Phase 1 work — and read §2.12 first, because it retracts a central claim of
   §2.9 and corrects §2.10 and §2.11.**

@@ -20,9 +20,10 @@ Phase 1 log §2.8. This log records decisions and deviations, not numbers.
 - **T3** 75k rebuild ×2 (determinism confirmed by identical sha256), then
   `analysis/2026-07-23-tiebreak-fix-verification/verify.py`: Arm 2 topology
   reproduced; shared-edge scores bit-identical to capfix; popularity
-  ordering preserved. No deviations: the build produced N=74,193 / E=898,006,
-  matching the reference experiment exactly, and the verification script
-  printed ALL CHECKS PASSED.
+  ordering preserved. No deviations: the rebuild reproduced the reference
+  experiment's node and edge counts exactly (figures in
+  `findings/2026-07-23-tiebreak-fix-adoption.md`), and the verification
+  script printed ALL CHECKS PASSED.
 - **T4** Adopted. Identity: `findings/2026-07-23-tiebreak-fix-adoption.md`.
   The 5k dev fixture is retired (spec §1 decision 4): `ApiConfig.graph_path`
   defaults to the adopted 75k artifact, smoke-checked through the default
