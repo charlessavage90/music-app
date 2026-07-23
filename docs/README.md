@@ -37,14 +37,23 @@ that is how the drift began.
 
 ## Current state
 
+- ⛔ **Phase 1 is PAUSED, 2026-07-22.** A defect was found in the connectivity structure of
+  the **adopted** graph artifact — the most popular artists are among the *least* connected
+  (The Beatles degree 7; Radiohead absent from the graph), and the degree-based hub metric
+  does **not** mean "famous." **Read
+  [`superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md`](superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md)
+  §2 before any Phase 1 work, and before trusting any `hubfrac`/payload figure anywhere.**
+  The owner's decision on how to handle it was outstanding when work stopped.
 - **Gate 1 (personal use).** Phase 2 (path quality) is **COMPLETE**, 2026-07-22. All 16
   tasks executed on branch `phase2-path-quality`. The blind listening test was run and the
   owner adopted the **`capfix`** arm — `cap_strategy="mutual_knn"`,
   `similarity_rescale="p99_log_clip"`, `similarity_damping=0.0`. See execution log §16
-  (verdict) and §17 (adoption).
-- **Next action: Phase 1, which needs planning first.** It leads with **C3** — `w_floor`
-  is a no-op and `known` degrades to a bare hard exclusion, a *pathfinding* defect rather
-  than the UX item it was filed as — then clips (C1, C2), then frontend UX. Two items
+  (verdict) and §17 (adoption). **That adoption is not overturned** — but §2 of the Phase 1
+  log is information that was not available when it was made.
+- **Phase 1 leads with C3** — `w_floor` is a no-op and `known` degrades to a bare hard
+  exclusion, a *pathfinding* defect rather than the UX item it was filed as — then clips
+  (C1, C2), then frontend UX. **Partially investigated, nothing implemented; see the Phase 1
+  log §3 and §6.** Two items
   carry in from Phase 2 with success conditions; see the roadmap's Phase 1 section.
 - **Two Phase 2 predictions did not survive measurement**, and older prose still asserts
   them. Damping ("C4") was tested at 0.25 / 0.5 / 0.75 and **rejected** — the undamped arm
@@ -74,7 +83,8 @@ that is how the drift began.
 |---|---|
 | `superpowers/2026-07-21-phase2-execution-log.md` | **The audit trail for Phase 2, and the freshest truth in this directory.** Every decision and why, defects found in the plan and in the prior record, gate pass/fail state, open items, deferred findings. **§16 is the blind-test verdict; §17 the adoption; §18 the closeout triage; §19 the fixture-seed defect found after closeout — which supersedes §17's checksums.** Where any other document disagrees with §16–19, this wins. Marked ACTIVE rather than COMPLETE because Phase 1 consumes its carried-forward items. |
 | `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | *(also listed as Authoritative)* Its **Phase 1 section is the live work queue**, including the two items carried in from Phase 2 with success conditions. |
-| `superpowers/2026-07-22-HANDOFF-phase1.md` | **Start here for Phase 1.** Written for a session with no prior context: what was overturned and must not be reverted, what is already updated, and what the previous session knew that is not otherwise in the record. Delete once Phase 1 has a written plan. |
+| `superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md` | ⛔ **Start here for Phase 1, and read §2 before any implementation.** One document by design: the **graph-structure defect that halted the work** (§2 — facts, discovery mechanism, suspected cause; deliberately no solutioning) **plus** the full Phase 1 progress record (§3 — including two independent ML-analyst reviews and what each overturned), what is closed (§4), artifacts (§5), and state of play (§6). Splitting it would let the progress record be picked up without the context that stopped it. **Owns its figures** — cite from here, do not restate. |
+| `superpowers/2026-07-22-HANDOFF-phase1.md` | Written at Phase 2 closeout for a cold session: what was overturned and must not be reverted, and what the previous session knew that is not otherwise in the record. **Superseded on Phase 1 status by the log above** — that document governs where they disagree. Still valid on Phase 2 outcomes. |
 | `superpowers/TEST-QUEUE.md` | The async **use-the-app queue**. `closeout` appends; `session-start` reads it and flags stale entries. Catches the defect class tests structurally cannot. |
 
 ### Complete
