@@ -315,6 +315,12 @@ not touch the `p99_log_clip` path.
 > completion, but the difference in behavior was noticeable immediately — on the first
 > tested path."
 
+> **⚠ Read the correction above (§12, "differing in exactly one knob").** The paragraph
+> below attributes these three observations to bounding degree after symmetrisation. That
+> attribution rests on a **package comparison** — the two arms differ in two knobs, not one —
+> so it is *a* mechanism consistent with the data rather than *the* one. The owner's blind
+> preference is not in question. Phase 1 log §2.8 has the genuine one-knob replay.
+
 **Three observations, all mechanistically consistent with bounding degree after
 symmetrisation** — removing hubs' ability to act as universal shortcuts lengthens paths,
 surfaces less-known artists, and compounds under repeated bypass. None of this was
