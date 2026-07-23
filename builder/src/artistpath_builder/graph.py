@@ -54,7 +54,9 @@ def symmetrise(adjacency: Adjacency) -> Adjacency:
     return result
 
 
-def mutual_knn_cap(adjacency: Adjacency, k: int) -> Adjacency:
+def mutual_knn_cap(
+    adjacency: Adjacency, k: int, ranking: Adjacency | None = None
+) -> Adjacency:
     """Keep edge (u,v) only if v is in u's top-k AND u is in v's top-k.
 
     The cap this replaces was applied BEFORE symmetrisation. Symmetrisation
@@ -69,12 +71,32 @@ def mutual_knn_cap(adjacency: Adjacency, k: int) -> Adjacency:
     after symmetrisation breaks symmetry again. It prunes harder than the old
     scheme, so callers must check largest-component retention.
 
+    `ranking`, when given, supplies the values used to order each node's
+    top-k; emitted scores still come from `adjacency`. It exists because the
+    p99 clip collapses the top ~1% of scores to exactly 1.0, and ranking those
+    tied values let the MBID tie-break decide which neighbours a saturated
+    artist kept — which is how the most famous artists lost nearly all their
+    edges (Phase 1 log §2.8). Callers that rescale destructively must pass the
+    pre-rescale strengths here. `ranking` must cover exactly the nodes of
+    `adjacency` (ValueError otherwise) and every edge of `adjacency`
+    (KeyError otherwise — loud by design).
+
     Ties break on lowest MBID, matching every other ordering decision in this
     module (design §9).
     """
+    if ranking is not None and set(ranking) != set(adjacency):
+        raise ValueError(
+            "ranking must cover exactly the nodes of adjacency; top-k "
+            "selection over a different node set is undefined"
+        )
+    rank_of = ranking if ranking is not None else adjacency
+
     top_k: dict[str, set[str]] = {}
     for node, edges in adjacency.items():
-        ranked = sorted(edges.items(), key=lambda pair: (-pair[1], pair[0]))
+        ranked = sorted(
+            ((dst, rank_of[node][dst]) for dst in edges),
+            key=lambda pair: (-pair[1], pair[0]),
+        )
         top_k[node] = {dst for dst, _score in ranked[:k]}
 
     result: Adjacency = {node: {} for node in adjacency}
