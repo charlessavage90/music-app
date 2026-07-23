@@ -1,6 +1,11 @@
 # C3 `known` mechanism — blind listen workload
 
-**Role: ACTIVE (evaluation protocol). Phase 1.** Decides, by ear, between the two
+**Role: COMPLETE (evaluation protocol, executed).** The blind listen ran and verdicts are
+recorded in the Phase 1 log §3.6–§3.9. The A-vs-C question is moot until Track 2's
+cost-function retune; re-running it on the new substrate is the 2026-07-23
+defect-remediation-and-cost-retune spec §4.4.
+
+**Historical protocol text follows — Phase 1.** Decides, by ear, between the two
 redesigned `known`-mechanism shapes that Stage 0 proved bind but that offline metrics
 **cannot** separate (AA/OC collapse while `mean_common_neighbours` rises — adjudication §4.3
 degree-coupling, confirmed live). This is the arbiter; the offline diagnostic feeds it, it

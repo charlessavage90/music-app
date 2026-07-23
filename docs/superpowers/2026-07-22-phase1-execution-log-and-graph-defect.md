@@ -60,6 +60,11 @@ In `graph-t15-capfix.bin` — the artifact adopted at the end of Phase 2 and the
 currently routes on — **the most popular artists are among the *least* connected nodes,
 and the highest-degree nodes are insular micro-genre artists.**
 
+> **⚠ CORRECTED 2026-07-23 — "currently routes on" is stale.** The app now routes on
+> `graph-t15-tiebreakfix.bin` (Track 1 of the repair+retune design); see
+> `findings/2026-07-23-tiebreak-fix-adoption.md`. `graph-t15-capfix.bin` remains this
+> section's baseline artifact — all measurements below are unchanged and still describe it.
+
 ### 2.2 The measurements
 
 All from `graph-t15-capfix.bin` (sha256 `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237`)
@@ -101,7 +106,7 @@ compared against `graph-t15-control.bin` (same crawl, legacy capping).
 | original `graph-75k.bin` | 74,998 | 4,014,354 | 44 | 357 | 11,050 |
 | `graph-t15-control.bin` | 74,991 | 4,101,222 | 49 | 363 | 11,241 |
 | `graph-t15-d025.bin` (damping 0.25) | 74,750 | 1,294,810 | 14 | 49 | 50 |
-| **`graph-t15-capfix.bin` (ADOPTED)** | **74,191** | **898,314** | **9** | **44** | **50** |
+| **`graph-t15-capfix.bin` (ADOPTED at time of measurement; superseded by `graph-t15-tiebreakfix.bin` 2026-07-23)** | **74,191** | **898,314** | **9** | **44** | **50** |
 
 - capfix median degree is **9**; the cap is **50**. So The Beatles (7), Coldplay (4),
   R.E.M. (3), Muse (4) sit **below the median connectivity of the graph**.
@@ -390,7 +395,7 @@ graph, either policy, never below the 95th percentile.
 | `graph-75k.bin` (original) | **−0.290** | **83.0 %** | 39.5 % |
 | `graph-t15-control.bin` | **−0.262** | **82.3 %** | 35.3 % |
 | `graph-t15-d050.bin` | ~~+0.380~~ → **+0.468** | ~~18.4 %~~ → **7.8 %** | ~~1.7 %~~ |
-| **`graph-t15-capfix.bin` (ADOPTED)** | **+0.597** | **5.2 %** | 0.5 % |
+| **`graph-t15-capfix.bin` (ADOPTED at time of measurement; superseded by `graph-t15-tiebreakfix.bin` 2026-07-23)** | **+0.597** | **5.2 %** | 0.5 % |
 | `graph-t15-rankfix.bin` | ~~+0.658~~ → **+0.596** | ~~3.5 %~~ → **3.9 %** | ~~0.3 %~~ |
 
 > **⚠ Two rows above were wrong and are struck.** Under a fixed popularity reference,
@@ -1159,6 +1164,13 @@ artifact's identity — this table points to it rather than restating its checks
   owner decision about whether it earns its own rebuild-and-re-adopt cycle. The next
   experiment is a three-knob cost-function sweep whose success criterion is still open
   (§7.1 item 5).
+  > **⚠ SUPERSEDED 2026-07-23 (later same day) — both clauses above are stale.** The
+  > "standalone owner decision" was made: the tie-break fix **was** rebuilt and adopted
+  > as Track 1 (see the bullet above and `findings/2026-07-23-tiebreak-fix-adoption.md`).
+  > And §7.1 item 5's success criterion is **no longer open** — it is settled by
+  > `specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §4.3 ("settles log
+  > §7.1 item 5"): scored on an external fame proxy, never in-graph popularity. Retained
+  > below as the record of what was still unresolved before that spec.
 - Two mechanism shapes are specified and prototyped but exist only in scratch.
 - Stage 1 of the diagnostic experiment was **never run** — Stage 0 gated it, then the
   listen superseded it, then §2 halted the work.

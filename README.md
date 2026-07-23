@@ -29,9 +29,11 @@ Three independent packages. The only thing they share is a binary file format.
 The **`APG1` artifact is the contract** between builder and api — not shared Python code.
 Both parse the format independently and share no modules.
 
-Pathfinding is Dijkstra over an in-memory graph of ~75,000 artists and ~4 million edges.
-A path query touches no database and no network. Clips are resolved separately per card,
-so the path renders immediately.
+Pathfinding is Dijkstra over an in-memory graph of ~75,000 artists, pruned by mutual
+k-NN to a fraction of its original edge count (exact counts:
+`docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`). A path query touches
+no database and no network. Clips are resolved separately per card, so the path renders
+immediately.
 
 ---
 

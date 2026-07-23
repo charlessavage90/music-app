@@ -1,6 +1,11 @@
 # C3 bypass diagnostic — experiment protocol
 
-**Role: ACTIVE (experiment protocol). Phase 1, Task 1.** This is the cheapest decisive
+**Role: COMPLETE (experiment protocol, executed).** Stage 0 ran; the A-vs-C question it
+feeds is moot until Track 2 lands a cost function a mechanism can reach obscurity through.
+Results are in the Phase 1 log §3; the re-run condition is the 2026-07-23
+defect-remediation-and-cost-retune spec §4.4.
+
+**Historical protocol text follows — Phase 1, Task 1.** This is the cheapest decisive
 experiment for the C3 mechanism choice, run *before* the rest of Phase 1 is planned. It
 produces a shortlist and a coherence guardrail; **it does not adopt anything.** Adoption of
 any scoring change still requires a blind listen (roadmap; offline metrics have decided the

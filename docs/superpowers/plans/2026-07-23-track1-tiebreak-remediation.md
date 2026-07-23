@@ -4,6 +4,13 @@
 
 **Goal:** Fix the §2.8 tie-break defect — `mutual_knn_cap` must rank top-k on unclipped damped strengths, not p99-clipped scores — then rebuild, verify against §2.8 Arm 2, and adopt the repaired 75k artifact.
 
+> **Role: COMPLETE — executed 2026-07-23; do not execute again.** The repaired artifact
+> (`graph-t15-tiebreakfix.bin`) was built, verified, and adopted. Outcomes and the
+> execution record are in `../2026-07-23-repair-and-retune-execution-log.md`; the
+> artifact's identity is owned by `../findings/2026-07-23-tiebreak-fix-adoption.md`. The
+> task checkboxes below are left unchecked as the historical plan record — this banner,
+> not the checkboxes, conveys completion.
+
 **Architecture:** One new optional `ranking` argument on `mutual_knn_cap` (builder), one wiring change in `build_from_archive`, no API changes, no APG1 format changes. Verification is a committed analysis script asserting the rebuild reproduces the Phase 1 log §2.8 Arm 2 topology and changes nothing else.
 
 **Tech Stack:** Python 3 / uv / pytest (builder package), numpy, the existing `artistpath-build` CLI.

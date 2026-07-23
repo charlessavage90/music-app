@@ -99,6 +99,13 @@ record currently carries as an assumption.
 
 ---
 
+## DONE — 2026-07-22 — Phase 2 adoption (`capfix`)
+
+**DONE.** Phase 1 log §3.1 records the owner completed this: no regressions found; only
+missing artists were already known to be absent.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-22 — Phase 2 adoption (`capfix`)
 
 **What changed.** The graph the app routes on. `cap_strategy` is now `mutual_knn` (an edge
@@ -110,6 +117,11 @@ artifact and verified routing (`Miles Davis → Ella Fitzgerald → Mariah Carey
 Timberlake → Daft Punk`). Just start the two processes and use it.
 
 On any *other* machine, or after `git clean`, rebuild it first — it is gitignored:
+
+> **⚠ SUPERSEDED 2026-07-23 — do not follow the command below.** The 5k fixture is
+> retired and `graph-t15-capfix.bin` is no longer the adopted artifact. The API now
+> defaults to the adopted 75k artifact (`graph-t15-tiebreakfix.bin`); see
+> `findings/2026-07-23-tiebreak-fix-adoption.md`. Nothing needs building for dev use.
 
 ```bash
 cd builder && UV_LINK_MODE=copy uv run artistpath-build fixture \
