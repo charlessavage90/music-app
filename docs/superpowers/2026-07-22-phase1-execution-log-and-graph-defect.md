@@ -319,7 +319,19 @@ Whether Arm 2 is *better to listen to* is unmeasured and is a product question, 
 question. Note also that §15–17 forbid a third listening test; whether that bars a listen of
 a **new** candidate on a **new** finding is a reading the owner should make deliberately.
 
-### 2.9 The larger finding — mutual k-NN inverted the graph's popularity assortativity (2026-07-23)
+### 2.9 The larger finding — mutual k-NN depletes famous→obscure edges (2026-07-23)
+
+> **⚠ VALIDATED AND PARTLY CORRECTED — read §2.10 first.** This section was written by an
+> outside consulting session and put to `ml-graph-analyst` for validation. The result:
+> **the core finding is upheld and strengthened; the framing below is wrong, and two of its
+> figures were measuring the wrong thing.** Specifically — the "before" graphs were **never**
+> disassortative in any useful sense (control sits at *exactly chance* against its own
+> degree-sequence null), so "mutual k-NN destroyed a property discovery needs" is not
+> supported. What is supported is one-sided and stronger: capfix **actively depletes** those
+> edges, 15.6× below a structure-preserving null. §2.10 owns the corrected figures.
+>
+> The original heading read "…inverted the graph's popularity assortativity". Retained
+> below for audit; **do not cite this section's numbers — cite §2.10.**
 
 **This supersedes §2.8 in importance.** §2.8's tie-break defect is real and explains
 Radiohead and The Beatles. It is **not** the reason the product does not surface obscure
@@ -361,15 +373,36 @@ graph, either policy, never below the 95th percentile.
 |---|---|---|---|
 | `graph-75k.bin` (original) | **−0.290** | **83.0 %** | 39.5 % |
 | `graph-t15-control.bin` | **−0.262** | **82.3 %** | 35.3 % |
-| `graph-t15-d050.bin` | +0.380 | 18.4 % | 1.7 % |
+| `graph-t15-d050.bin` | ~~+0.380~~ → **+0.468** | ~~18.4 %~~ → **7.8 %** | ~~1.7 %~~ |
 | **`graph-t15-capfix.bin` (ADOPTED)** | **+0.597** | **5.2 %** | 0.5 % |
-| `graph-t15-rankfix.bin` | **+0.658** | **3.5 %** | 0.3 % |
+| `graph-t15-rankfix.bin` | ~~+0.658~~ → **+0.596** | ~~3.5 %~~ → **3.9 %** | ~~0.3 %~~ |
+
+> **⚠ Two rows above were wrong and are struck.** Under a fixed popularity reference,
+> **capfix and rankfix are identical (+0.596 vs +0.596), not 0.06 apart** — the difference
+> was the rescale changing the *popularity vector*, not the graph. `d050` is +0.468 / 7.8 %.
+> Corrected values in §2.10.
 
 **Mutual k-NN inverted the sign.** Before it, the graph was *disassortative* — famous
 artists were connected mostly to obscure ones, which is exactly the structure a "journey to
 somewhere you haven't heard" needs. After it, famous artists are connected almost only to
 each other. **No cost function can route to an obscure artist along edges that do not
 exist.**
+
+> **⚠ THE PARAGRAPH ABOVE IS OVERTURNED. Both sentences.**
+>
+> *"Before it, the graph was disassortative"* — **no.** That figure is edge-weighted, so a
+> handful of nodes carrying 11,000–15,000 edges each supplied most of the endpoint pairs.
+> Node-weighted, the "before" graphs are **positive**: +0.250 uncapped, +0.185 control,
+> +0.186 original. And against its own degree-sequence null, control sends 81.3 % of
+> top-500 edges below p90 versus a null of 80.4 % — **ratio 1.01, exactly chance.** The old
+> graph was not steering famous artists toward obscure ones; it was connected to everything,
+> and most artists are obscure.
+>
+> *"No cost function can route along edges that do not exist"* — **too strong.** A p95–p99
+> artist has a **median of 4** sub-p90 neighbours out of 28, and only 12.6 % have none. It
+> is an *existence* problem only at the extreme top (63.5 % of the top 0.1 % have zero
+> exits) and a **competition** problem across the band the judged paths actually occupied.
+> See §2.10.
 
 The mechanism is the reciprocity rule, and it is **§2.4's candidate A, vindicated for a
 different quantity than it was tested on.** Obscure artists list famous ones; famous ones do
@@ -403,10 +436,113 @@ overturning A for the first does not clear it for the second.
   question.
 - **§17's carried success condition — "a hub-incidence-versus-bypass-count measurement
   exists" — is now satisfied.** The channel is flat, on both graphs.
-- A `capfix` vs `rankfix` blind listen is **not** the next step. They differ by 0.06 in
-  assortativity and behave identically on the tail.
+- A `capfix` vs `rankfix` blind listen is **not** the next step. ~~They differ by 0.06 in
+  assortativity~~ — **corrected: they are identical, +0.596 vs +0.596** — and behave
+  identically on the tail. *(The conclusion is strengthened, not weakened, by the
+  correction.)*
 
 **Scripts:** `builder/analysis/2026-07-23-popularity-stratification/`.
+
+---
+
+### 2.10 Validation of §2.9 — what survived, what was overturned (2026-07-23)
+
+`ml-graph-analyst`, briefed that §2.9 was an unverified outside claim and that overturning it
+was the useful outcome. Checkpointed; Part 2 not run. **This section owns the corrected
+figures — cite from here, not from §2.9.**
+
+#### The circularity confound was real, and asymmetric in the opposite direction to the worry
+
+Popularity is score-weighted in-degree, so §2.9 compared arms using each arm's own
+definition of "popular." Corrected by fixing a single reference — **pre-cap in-degree**,
+which `pipeline.py:206-217` computes one line *before* `mutual_knn_cap` at `:218`, i.e. the
+last point before any arm diverges.
+
+The contamination turned out to sit entirely on the **baseline** side. capfix's shipped
+popularity is Spearman **1.000000** against the fixed reference — never contaminated,
+because the pipeline computes in-degree pre-cap. Control's is **0.9737**, because the legacy
+`pre_symmetrise` strategy truncated out-lists *before* the in-degree sum.
+
+**93–95 % of the claimed movement survives**, and the sign change survives under three
+independent references (clipped in-degree, raw edge count, raw co-occurrence): Δ control→capfix
+of **0.815 / 0.803 / 0.800** against 0.859 claimed. Split-halves reproduce within 0.008;
+bootstrap SD ≤ 0.0009.
+
+#### The real finding, with the null §2.9 omitted
+
+| | observed | own-degree-sequence null | ratio |
+|---|---|---|---|
+| control | 81.3 % | 80.4 % | **1.01 — chance** |
+| **capfix** | **5.1 %** | 79.9 % | **0.064 — 15.6× depleted** |
+
+**capfix does not merely lack famous→obscure edges; it actively avoids them.** Density alone
+explains none of it — uniform pruning to capfix's edge count leaves 80.3 % (two seeds), and
+score-greedy pruning to the same density leaves 36.6 % while shattering the graph.
+
+#### Attribution — 2×2 factorial, one knob per axis
+
+| | score-ranked top-k | random-k (3 seeds) |
+|---|---|---|
+| **AND (mutual)** | **+0.596** | +0.499 / +0.500 / +0.499 |
+| **OR (union)** | −0.219 | −0.212 |
+
+Reciprocity knob **+0.815**; ranking knob +0.097; density −0.007. The `MUTUAL_TOPK` arm
+reproduces capfix exactly (74,191 / 898,314), which is what makes the rest interpretable.
+
+**§2.4's candidate A is legitimately revived for this quantity** — it now has the one-knob
+intervention it never had. It remains falsified for the degree collapse (§2.8).
+
+#### §2.8's tie-break is not this
+
+| arm | assortativity | top-500 exits below p90 |
+|---|---|---|
+| ranking on clipped scores (= capfix) | +0.596 | 5.1 % |
+| ranking on unclipped scores (= §2.8 Arm 2, restores Radiohead) | **+0.596** | **3.9 %** |
+
+Fixing §2.8 changes stratification by nothing, and makes the exit rate marginally worse.
+
+#### Existence vs competition — where the constraint actually binds
+
+| popularity band | n | median degree | median exits below p90 | % with **zero** exits |
+|---|---|---|---|---|
+| top 0.1 % | 74 | 17 | 0 | **63.5 %** |
+| p99–p99.9 | 675 | 28 | 1 | 38.8 % |
+| p95–p99 | 2,999 | 28 | **4** | 12.6 % |
+| p90–p95 | 3,749 | 25 | 10 | 4.5 % |
+
+Control, for contrast: **0.0 %** of nodes above p50 have zero sub-p90 exits, and its top
+0.1 % has a median of **2,170**.
+
+**So it is an existence problem only at the extreme top, and a competition problem across
+the band the judged paths occupied** — roughly 4 exits against ~24 same-band alternatives,
+under a cost function charging `w_jump·|Δpop|` to use them. This materially reopens the
+cost-function route, which §2.9 dismissed.
+
+#### The coupling — raised unprompted, and it is the trade everything turns on
+
+**Anything that restores disassortativity restores unbounded degree.** `UNION_TOPK` is the
+proof: identical k=50 cap, no reciprocity test, **max degree 11,153**. In this codebase the
+degree bound is an *effect* of the reciprocity requirement (`graph.py:57-74`), not a separate
+knob.
+
+Separating them requires a `cap_strategy` **that does not exist**: symmetric degree-quota
+selection, score-ranked, no reciprocity test — one branch in `mutual_knn_cap`. `d050` cannot
+substitute (two knobs: damping 0.5 *and* `percentile_rank`).
+
+Unbounded hubs are what `capfix` won its blind listen for removing, and the top-1 %-by-degree
+hub set behind `hubfrac`, `hub_penalty` and `payload` would move again.
+
+#### Weakest link, as stated by the analyst
+
+The degree-sequence null is a randomised greedy b-matching, not an exact configuration-model
+sample — 3.9 % of control's quota and 7.7 % of capfix's went unmet. Two seeds agree to three
+decimals and achieved max degree is exactly 50. **An exact rewiring is the stronger
+instrument if anyone leans hard on the 15.6×.**
+
+**Not measured by any of this:** whether stratification changes what the owner prefers.
+`capfix` won two blind listens carrying this structure.
+
+**Scripts:** `builder/analysis/2026-07-23-popularity-stratification/validation/`.
 
 ---
 
