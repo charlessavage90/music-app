@@ -627,12 +627,18 @@ API's CORS origin was widened by **environment variable**, so no shipped code wa
 **No shipped code was modified.** Nothing landed in `ApiConfig`, `pathfinding.py`, or any
 package. Both mechanisms exist only as throwaway scripts.
 
-**Throwaway scripts (NOT in git; scratchpad only, will be lost when the session's temp
-directory is cleaned):** `reconstruct.py`, `stage0.py`, `stage0b.py`, `stage0c.py`,
-`listen_gen.py`, `listen_serve/listen.html`, `unblind.py`, `hubcheck.py`, `beatles.py`,
-`compare_graphs.py`, `dropped.py`, plus `listen_public.json` (blinded) and
-`listen_secret.json` (sealed mapping + hidden metrics). **If any of this needs to survive,
-it must be committed deliberately.**
+**Research scripts — COMMITTED 2026-07-22** (they were scratchpad-only and about to be
+lost; each directory has a README):
+
+| Directory | Contents |
+|---|---|
+| `builder/analysis/2026-07-22-c3-bypass-mechanisms/` | §3's work: `reconstruct.py` (the owner's trace), `stage0.py` (the binding gate and the mirror-and-verify method of §3.10), `stage0b.py` (both redesigned shapes), `stage0c.py` (the **rejected** route-aware waypoint, kept as a negative result), `listen_gen.py`, `listen.html`, `unblind.py`, plus `listen_public.json` and `listen_secret.json` — the exact 36 paths judged, the sealed mapping, and the hidden per-path metrics. The blind test is un-blinded, so the secret file is no longer sensitive. |
+| `builder/analysis/2026-07-22-graph-defect-discovery/` | §2.2's discovery: `hubcheck.py`, `beatles.py`, `compare_graphs.py` (**has a known duplicate-name bug** — superseded by the next), `dropped.py`. |
+| `builder/analysis/2026-07-22-cap-ranking-replay/` | §2.8's one-knob intervention. |
+
+These are **research tooling invoked manually** — nothing imports them, which is correct
+(Phase 2 execution log §18, B2). Paths are hardcoded deliberately: they are a record of what
+was executed, not a maintained tool.
 
 **Artifact checksums** (gitignored; checksum is their only identity):
 
