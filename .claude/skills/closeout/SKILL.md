@@ -152,6 +152,37 @@ have. In each case the code was right and the sentence was wrong.
 Pay particular attention to names. A fixture or function named for behaviour it does
 not have will mislead every future reader, and renaming is cheap.
 
+### B5. Stale-description sweep — and it must include `.claude/`
+
+**Which files restate a measured figure or describe the system's shape, and did this
+work invalidate them?**
+
+Two mechanical questions, both grep-shaped.
+
+First, the one rule: figures live in `docs/superpowers/findings/` and everything else
+cites them by section. **A restatement that is currently correct is still a violation** —
+that is how drift starts. Five documents once each kept their own copy of the same
+figures and drifted into three mutually contradictory positions, invalidating two
+analyses before anyone noticed.
+
+Second, and the one that gets missed: **`.claude/` is context, and nothing else audits
+it.** Agent definitions and skill files are loaded into future sessions as authoritative
+description of the world. When the graph changed shape on 2026-07-22, the
+`ml-graph-analyst` definition went on describing the previous graph — node count, edge
+count and max degree all wrong by roughly a factor of five — while also asserting an
+equivalence between popularity and degree that the new graph falsifies, and pointing at a
+document the doc map names as never-use-as-context. It survived a full closeout because
+the sweep that ran covered `docs/` and `config.py` and stopped there.
+
+So grep both `docs/` and `.claude/` for restated numbers and for shape claims. Convert
+restatements to citations. Where a figure is deliberately inline as a hazard warning at
+the point of use, say so in the file so the next sweep does not re-open it.
+
+**This is the same failure class as D2 and as the fixture-seed defect**: a change removes
+a property that something unrelated had silently come to depend on. Nothing breaks, no
+test fails, no error is raised — a guarantee that was never stated simply stops holding.
+Descriptions are the most common thing to depend on it.
+
 ---
 
 ## Part C — Queued for the owner, asynchronously

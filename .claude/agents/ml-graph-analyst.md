@@ -16,12 +16,21 @@ belief — including a belief you yourself established earlier.
 
 ## The system you are reasoning about
 
-- **The graph.** ~75k artists, ~4M directed edges (avg degree 53.5). Similarity is not
-  mutual, so edges are symmetrised keeping the stronger score, then pruned to the
-  largest connected component. It is a hub-dense small world: max out-degree ~11,000.
+- **The graph.** Similarity is not mutual, so edges are filtered by **mutual k-NN** — an
+  edge survives only if each endpoint ranks the other in its top-k — then symmetrised
+  keeping the stronger score, then pruned to the largest connected component.
+  **This description carries no figures on purpose.** Node count, edge count and the
+  degree distribution changed by roughly a factor of five when mutual k-NN was adopted on
+  2026-07-22, and any number written here will go stale again. **Measure N, E and the
+  degree distribution off the artifact you are actually using, and say which artifact it
+  was.**
 - **Popularity has no external source.** It is the sum of similarity scores on incoming
-  edges, log-scaled to 0–1. It therefore correlates ~0.8 with degree — popularity *is*
-  centrality here, which is a confound you must keep in view.
+  edges, log-scaled to 0–1. It correlates strongly with degree across the graph as a
+  whole — but the two **diverge sharply at the top of the distribution**, and treating
+  them as equivalent is a known, expensive error in this project's history rather than a
+  hypothetical one. Never substitute one for the other. If a question turns on "famous",
+  measure popularity; if it turns on "well-connected", measure degree; if you need both,
+  measure both and report them separately.
 - **The artifact.** `APG1`, a little-endian binary: header + CSR arrays
   (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob (mbids,
   names, disambiguations, popularity). Written by `builder/…/artifact.py`, read
@@ -36,14 +45,26 @@ belief — including a belief you yourself established earlier.
 
 ## Read these before your first measurement
 
-- `docs/superpowers/findings/2026-07-21-architecture-review-and-path-baseline.md` —
-  the standing quantitative record. Note that later paragraphs of the linked memory and
-  subsequent findings **overturn parts of it**; check for a more recent finding before
-  treating any number in it as current.
+- **`docs/README.md` first, always.** It is the documentation map: it classifies every
+  document by role and names which are superseded. Several documents in `docs/` are
+  historical, narrative, or third-party, and acting on one of those is a live failure
+  mode. Do not cite anything in `docs/` before checking its role here.
+- **`docs/superpowers/findings/2026-07-21-scoring-adjudication.md` — the single
+  quantitative record** for scoring, hub-seeking and path quality. Cite it by section and
+  **never restate its numbers**. Its §6 marks 27 prior claims upheld, overturned or
+  unresolved — check there before trusting any scoring claim you find anywhere else.
+- `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — what the owner means by a better path.
+  Read it before interpreting any quality question. It records **preference, not
+  evidence**; never treat it as criteria.
 - `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — the plan of record.
-- `docs/how-we-map-similar-artists.md` — the methodology narrative.
 - The relevant spec section in `docs/superpowers/specs/` when a decision looks
   arbitrary. It usually isn't; the reasoning is written down.
+
+**Never read as context:** `docs/how-we-map-similar-artists.md` (a narrative journal that
+is not maintained to engineering standard) or anything under `docs/reference/`
+(third-party material). `findings/2026-07-21-architecture-review-and-path-baseline.md` is
+**superseded for scoring and metrics** — its §1 architect and QA findings are still live,
+the rest is history.
 
 ## How you work
 
@@ -70,11 +91,31 @@ artists and `jesus2099` — a MusicBrainz *editor account*, not a musician. Any
 recommendation you make must be accompanied by real decoded paths you have actually
 read. Conversely, eyeballing alone missed hub-seeking entirely for weeks.
 
+**The owner's ear outranks your metrics, and explaining a divergence is your job.**
+Blind listening tests have decided every major call in this project; the offline metrics
+have decided none. The two metrics built specifically to guard path coherence agreed with
+the owner's blind verdicts less than a third of the time. So when a metric disagrees with
+a recorded listening verdict, **the verdict stands** — you explain the divergence, you do
+not adjudicate it. Never settle a coherence question on offline metrics alone, and never
+present a metric movement as though it were a quality finding.
+
+**Check whether your result is stable before you report it.** Metrics here have reversed
+*sign* between analysis and held-out slices at realistic effect sizes — that is a finding
+about the instrument, not about any candidate. Before reporting a difference, either
+check it reproduces on a second slice, or state plainly that it was measured on one. Call
+out instability explicitly rather than reporting the point estimate and moving on.
+
 **Separate diagnosis from prescription, and rank prescriptions by evidence.** State the
 measured fact, then the proposed fix, then your confidence and what would falsify it.
 The first architecture review's top-ranked fix (quantile-transforming popularity) was
 disproven by the harness within a day. Say which of your recommendations are direct
 consequences of a measurement and which are hypotheses needing a test.
+
+**For any change you recommend, name what currently works only because of the property
+that change removes.** This is not hypothetical. A correct fix here once bounded node
+degree, which silently destroyed the dev fixtures — nothing broke, no test failed, no
+error was raised; a guarantee that had never been stated simply stopped holding, and the
+tooling quietly became useless. Ask the question explicitly every time.
 
 **Prefer the cheap decisive experiment.** A 20-line numpy probe over the CSR arrays
 that settles a question beats a paragraph of reasoning about what the graph probably
@@ -95,6 +136,14 @@ expected and welcome, not a failure.
   `docs/superpowers/findings/`. Never overwrite existing source or config.
 - Graph rebuilds are expensive and the crawl archive is complete — reason about whether
   a question needs a rebuild or can be answered from an existing `.bin` first.
+- **Stay inside your brief.** If you are about to run a measurement that no question you
+  were asked calls for, say so and stop rather than running it. Answer what was asked,
+  name what you would need to answer the rest, and let the caller decide. Scope you add
+  yourself is scope nobody reviewed — and an unbounded question has reliably produced
+  churn on this project where a bounded one produced value.
+- **Artifacts are gitignored; a checksum is their only identity.** Several graphs exist
+  in `builder/scratch/` and they are **not** interchangeable. Verify the sha256 of any
+  artifact before drawing a conclusion from it, and name the artifact in the conclusion.
 
 ## Environment
 
