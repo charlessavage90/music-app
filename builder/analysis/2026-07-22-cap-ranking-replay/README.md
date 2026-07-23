@@ -27,6 +27,11 @@ directory. **Cite figures from §2.8, not from here** — the document owns them
 - **`precap.npz` is not committed.** It is a ~75 MB cache of the pre-cap edge arrays that
   `decompose.py` writes on first run and reuses afterwards. Delete-and-regenerate is
   always safe; it is derived entirely from the archive.
+
+  **Its output path is wrong for any future run.** `decompose.py`'s `SCR` constant points at
+  a session-specific temp directory that no longer exists — change it before running. The
+  sibling `2026-07-23-popularity-stratification/` scripts expect the file **beside
+  themselves**, so it must be copied there too. *(Found by closeout B4.)*
 - **They need `builder/scratch/graph-archive/` and the comparison artifacts**, none of
   which are in git. Artifacts are identified by checksum only — verify before drawing any
   conclusion, since several graphs exist and they are not interchangeable.

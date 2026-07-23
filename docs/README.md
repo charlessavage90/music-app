@@ -37,13 +37,25 @@ that is how the drift began.
 
 ## Current state
 
-- ⛔ **Phase 1 is PAUSED, 2026-07-22.** A defect was found in the connectivity structure of
-  the **adopted** graph artifact — the most popular artists are among the *least* connected
-  (The Beatles degree 7; Radiohead absent from the graph), and the degree-based hub metric
-  does **not** mean "famous." **Read
-  [`superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md`](superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md)
-  §2 before any Phase 1 work, and before trusting any `hubfrac`/payload figure anywhere.**
-  The owner's decision on how to handle it was outstanding when work stopped.
+- ⛔ **Phase 1 is PAUSED, 2026-07-22; the diagnosis changed materially on 2026-07-23.**
+  **Read [`superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md`](superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md)
+  §2 before any Phase 1 work — and read §2.12 first, because it retracts a central claim of
+  §2.9 and corrects §2.10 and §2.11.**
+  - **What is settled.** Two real defects in the **adopted** artifact: the most popular
+    artists are among the least connected (The Beatles degree 7; Radiohead absent), caused
+    by an MBID tie-break over p99-clipped scores (§2.8); and famous→obscure edges are
+    depleted 15.6× below a structure-preserving null, caused by the mutual-k-NN reciprocity
+    rule (§2.10). Routed paths never present an artist below the ~95th popularity
+    percentile, at any bypass depth, on either graph tested (§2.9).
+  - **What it is NOT.** Not primarily a graph problem. Obscure artists are **2–3 hops** from
+    every famous artist tested, and even The Beatles have 7 admissible `known` substitutes.
+    **§2.12 concludes this is a cost-function problem** — the router prices the exits
+    correctly and declines them.
+  - **Three quantities that are not interchangeable** and have each caused an error here:
+    **degree ≠ fame** (§2.6), **popularity ≠ fame** at the top of the distribution (§2.11),
+    and **raw popularity ≠ percentile** (§2.12). Do not trust any `hubfrac`/payload figure,
+    and check which currency a claim is in before acting on it.
+  - The owner's decision on how to handle it is still outstanding.
 - **Gate 1 (personal use).** Phase 2 (path quality) is **COMPLETE**, 2026-07-22. All 16
   tasks executed on branch `phase2-path-quality`. The blind listening test was run and the
   owner adopted the **`capfix`** arm — `cap_strategy="mutual_knn"`,

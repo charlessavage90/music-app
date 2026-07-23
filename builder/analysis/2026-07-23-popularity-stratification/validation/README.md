@@ -16,9 +16,15 @@ that overturning it was the useful outcome. These produced every figure in **§2
 
 ## Two things to know before re-running
 
-- **They need `precap.npz`**, the pre-cap cache written by
-  `../../2026-07-22-cap-ranking-replay/decompose.py`. Regenerate it there first; it is ~75 MB
-  and deliberately not committed.
+- **They need `precap.npz` sitting in _this_ directory.** Every script here does
+  `np.load(Path(__file__).parent / "precap.npz")`, so it must be **beside the script**, not
+  wherever it was generated. It is ~75 MB and deliberately not committed.
+
+  It is written by `../../2026-07-22-cap-ranking-replay/decompose.py`, whose `SCR` constant
+  points at a **session-specific temp directory that no longer exists**. Change that constant
+  to this directory, or generate it and copy it here. *(Recorded rather than fixed: these
+  scripts are a record of what was executed, and the hardcoded paths are part of that record.
+  Found by closeout B4.)*
 - **Run them from the `api` venv, not `builder`** — `api` has scipy and `builder` does not:
 
   ```bash

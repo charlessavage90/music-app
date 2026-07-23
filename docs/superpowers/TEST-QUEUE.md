@@ -11,6 +11,45 @@ the point.**
 
 ---
 
+## QUEUED — 2026-07-23 — one labelled inference needs your ear, and nothing else
+
+**No shipped code changed.** The Phase 1 defect work (§2.8–§2.12) was measurement and record
+only. This entry exists for **one question a metric cannot answer**, and it should take five
+minutes rather than twenty.
+
+**The question: do these feel well-known to you?**
+
+> saib. · Purrple Cat · sleepy fish · Leavv · idealism · Miami Nights 1984 · Lazerhawk ·
+> Stonebank · Toonorth
+
+**Why it matters.** Every one of them scores in the **top 1–3 % by popularity** in the
+adopted graph — the same band as The Beatles — because popularity here is score-weighted
+co-listening and lo-fi/synthwave artists are playlist staples (§2.11).
+
+§2.11 records, **explicitly labelled as inference and never tested**, that they would *not*
+feel well-known to you. A great deal now rests on that:
+
+- If they **do not** feel well-known → the popularity metric does not mean fame at the top,
+  and any success criterion of the form "reaches below the Nth popularity percentile" is
+  **gameable**. A tuning run could satisfy it by routing you from Metallica into synthwave
+  and report success. §2.12 says the next experiment must be scored some other way.
+- If they **do** feel well-known → the metric is fine, the gameability concern drops, and
+  the next experiment gets much simpler to specify.
+
+**How to check.** Search each in the app. You do not need to route anywhere — the question is
+purely whether the name registers. Clips will help; clip defects are known and irrelevant here.
+
+**Optionally, if you have longer:** route `Metallica → Taylor Swift` and press *know them
+already* repeatedly. §2.9 measured that twenty bypasses never produce an interior artist
+below the ~95th popularity percentile on either graph tested. Seeing that failure directly is
+worth more than the table.
+
+**What "wrong" would look like:** nothing here can be wrong in the defect sense — no code
+changed. The only outcome is your verdict on the nine names, which settles a question the
+record currently carries as an assumption.
+
+---
+
 ## QUEUED — 2026-07-22 — Phase 2 adoption (`capfix`)
 
 **What changed.** The graph the app routes on. `cap_strategy` is now `mutual_knn` (an edge

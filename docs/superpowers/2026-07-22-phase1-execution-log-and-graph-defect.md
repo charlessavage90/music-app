@@ -726,6 +726,46 @@ only where a later section explicitly re-affirms it.
 
 ---
 
+### 2.13 Decisions, reversals, and what a fresh session needs (closeout A1/A2, 2026-07-23)
+
+#### Decisions taken, with reasoning
+
+| # | Decision | Reasoning |
+|---|---|---|
+| C1 | §2.8–§2.12 were produced by a **consulting session held deliberately away from the code**, so its inputs differed from the working session's | Disagreement between two readers is only informative if their inputs differ; a second reader who has acquired the first's information produces correlated errors that look like confirmation. The constraint was relaxed only when the owner asked for measurements. |
+| C2 | Used the existing **`rankfix` artifact** as the ceiling-removal comparison rather than building §2.8's Arm 2 | Their topology is identical (74,193 / 898,006). Building a second copy of an artifact already on disk would have cost a rebuild and proved nothing. |
+| C3 | Put §2.9 to `ml-graph-analyst` **after** committing it, rather than trusting it | A claim about the graph was entering the record, and the decision it pointed at — redesigning `cap_strategy` — is expensive builder work. It came back partly overturned. |
+| C4 | **Correction notices** over rewriting, but wrong *figures* struck inline | The doc-map rule is to mark superseded claims inline so a mid-document reader sees them. But this document declares it owns its figures, so a wrong number is worse than a wrong sentence — those are struck at the point of use. |
+| C5 | **Measured before listening**, with the reading pre-registered | A `capfix`-vs-`rankfix` listen was the obvious next step and would have burned the owner's ear on a null. The pre-registration is what made the null actionable rather than disappointing. |
+| C6 | Did **not** recommend building the new `cap_strategy` | §2.12 removed its motivation before anyone started. Deferred, not killed (§7.1). |
+
+#### Reversals — three, all of this session's own conclusions
+
+Recorded because the pattern matters more than any one of them: **the measurements held every
+time; the interpretations did not.**
+
+1. *"Blind-listen `capfix` vs `rankfix` next"* → withdrawn. They are identical at +0.596.
+2. *"The p99 ceiling defect is primary, the degree inversion is its symptom"* → reversed. The
+   stratification is caused by reciprocity; fixing the ceiling changes it by nothing.
+3. *"The graph is the binding constraint, not the cost function"* → **reversed** (§2.12).
+   Obscure artists are 2–3 hops away and the router declines them on price.
+
+#### What a fresh session needs that is not obvious from the sections above
+
+- **The analyst's Part 2 was never run.** It is gated on a `cap_strategy` branch that does
+  not exist (symmetric degree-quota selection, score-ranked, no reciprocity test). Do not
+  dispatch it expecting an answer; it needs a code change first.
+- **The C3 A-vs-C mechanism question is moot until the cost function is settled** (§2.9
+  consequences). Both prototypes were tuned on a substrate where no mechanism reached below
+  the 92nd percentile.
+- **The next experiment is a three-knob cost-function sweep** — `w_jump`, `w_sim`, and the
+  **currency of the `known` gate** — and its success criterion is an open design question
+  (§7.1 item 5), not a detail to settle while running it.
+- **`w_floor`'s inertness is not an independent defect** (§2.12). Fixing it in isolation
+  would achieve nothing.
+
+---
+
 **Scripts — committed, not lost.** `builder/analysis/2026-07-22-cap-ranking-replay/`
 holds `part1_probe.py`, `precheck_mbid.py`, `replay.py`, `decompose.py` and `replay.log`,
 with a README covering the hardcoded paths and what they need to run. The ~75 MB
@@ -1049,18 +1089,36 @@ was executed, not a maintained tool.
 
 **Artifact checksums** (gitignored; checksum is their only identity):
 
-- `graph-t15-capfix.bin` (adopted, and the subject of §2) — sha256
-  `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237`
-- Comparison artifacts used in §2.2: `graph-t15-control.bin`, `graph-t15-d025.bin`,
-  `graph-75k.bin`, all present in `builder/scratch/`.
+**All six artifacts compared in §2, with checksums.** These are gitignored, several exist,
+and they are **not interchangeable** — a conclusion drawn from the wrong one looks exactly
+like a correct one. Every probe script in `builder/analysis/` asserts the sha256 before
+measuring; keep that. *(Completed at closeout D3 — only `capfix` was recorded before, while
+§2.9–§2.12 compare five.)*
+
+| artifact | sha256 | used in |
+|---|---|---|
+| `graph-t15-capfix.bin` **(ADOPTED)** | `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237` | everything |
+| `graph-t15-rankfix.bin` | `87d9bf7edfc51fb13ee0fdf6a4216d01df7d3aa7f38b66ea9b7b8c2e7addae05` | §2.9 tail probe, §2.10 |
+| `graph-t15-control.bin` | `d3016bc06dd9e62de9e6edff3206ca9a3d8366243ca18b2588c0a7063042f57a` | §2.2, §2.9, §2.10 nulls |
+| `graph-75k.bin` (original) | `478426753de39282f99c0b8955a846d159deb656576026b265bec9060977d5ff` | §2.2, §2.9 |
+| `graph-t15-d050.bin` | `6fb52ff8e918cf14da6e4fc6fa52052a66d7bfdb35a7f910460c2c8868c80a20` | §2.9, §2.10 |
+| `graph-t15-d025.bin` | `2811e87d1c900e4ec233317c05143ccaec5a3f0e1fb3c531c04455594bb27e65` | §2.2 only — **do not cite, see §2.2's correction notice** |
 
 ---
 
 ## 6. State of play
 
 - **Phase 1 C3 is not implemented.** No mechanism is chosen; the A-vs-C question is
-  **unresolved** (no clear winner, pair-dependent).
+  **unresolved** (no clear winner, pair-dependent) — and **moot until the cost function is
+  settled** (§2.9, §2.13): both prototypes were tuned on a substrate where no mechanism
+  reached below the 92nd popularity percentile.
 - **Phase 1 is paused pending the owner's decision on §2.**
+- **Updated 2026-07-23:** the diagnosis changed. §2.12 concludes this is a **cost-function**
+  problem rather than a graph one. **No graph change is indicated by any of §2.8–§2.12** —
+  the §2.8 tie-break fix (Radiohead, The Beatles) remains real, cheap, and a standalone
+  owner decision about whether it earns its own rebuild-and-re-adopt cycle. The next
+  experiment is a three-knob cost-function sweep whose success criterion is still open
+  (§7.1 item 5).
 - Two mechanism shapes are specified and prototyped but exist only in scratch.
 - Stage 1 of the diagnostic experiment was **never run** — Stage 0 gated it, then the
   listen superseded it, then §2 halted the work.
@@ -1081,3 +1139,22 @@ was executed, not a maintained tool.
 - **Duplicate artist names** with distinct MBIDs (§2.2) — noticed, not investigated.
 - **Stage 1 of the diagnostic experiment**, if and when a mechanism is chosen — and note
   Stage 0 must be re-run first on the chosen mechanism (§3.7).
+
+### 7.1 Opened by the §2.8–§2.12 defect work (closeout A3, 2026-07-23)
+
+**Three of the five items below had no success condition when raised.** They do now.
+
+| # | Item | Success condition |
+|---|---|---|
+| 1 | **Exact configuration-model null.** §2.10's 15.6× depletion rests on a randomised greedy b-matching leaving 3.9–7.7 % of degree quota unmet, not an exact rewiring. | **Rebuild exactly if anyone challenges the 15.6×, or before it becomes load-bearing for adopting a new `cap_strategy`.** If neither happens it expires unactioned — a legitimate terminal state. |
+| 2 | **The MBID/in-degree coupling** in the archived source data (§2.8) — monotone, no proposed mechanism, never independently checked. | **Verify before citing it anywhere.** §2.8 already carries this warning inline. Nothing else depends on it; the intervention result holds without it. |
+| 3 | **Snyk: 3 Medium DOM XSS in `listen.html`** (`builder/analysis/2026-07-22-c3-bypass-mechanisms/`, lines 90/98/109). Artist names from a remote resource flow into the DOM unsanitised. MusicBrainz names are user-contributed. **Raised 2026-07-23, had no address.** | **Fix (`textContent` over `innerHTML`) before the harness is next used for a listening test, or explicitly accept and record why.** The project's precedent (Phase 2 log §17, the CWE-23) is fix-or-accept, not silent deferral. |
+| 4 | **`listen_secret.json` is committed** at a predictable path. Harmless for the completed test — it is un-blinded. But §15's session-hygiene rule requires the session *running* a blind test not to know the mapping, and the harness is preserved for reuse. **Raised 2026-07-23, had no address.** | **Before the next blind listen:** gitignore future `listen_secret*.json`, or have `listen_gen.py` write secrets outside the repo. Recorded in the harness README either way. |
+| 5 | **A cost-function experiment's success criterion** (§2.11, §2.12). "Reaches below p90" is gameable in *two* currencies — raw drops that stay famous, percentile drops that land in insular high-popularity genres. **Raised 2026-07-23, had no address.** | **Settled before the `w_jump`/`w_sim`/gate-currency sweep is specified, not after it reports success.** |
+
+**Conditions that came due this session:** §17's carried "a hub-incidence-versus-bypass-count
+measurement exists" — satisfied by §2.9's tail probe, and the channel is flat on both graphs.
+
+**Nothing was killed this session.** The new `cap_strategy` of §2.10 is **deferred, not
+killed** — §2.12 makes it unlikely to be the fix, which is not the same as its path being
+closed, and the standing rule is to kill on unreachability rather than on discouragement.

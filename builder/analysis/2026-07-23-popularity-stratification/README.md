@@ -40,8 +40,11 @@ from "what the owner is asking for", and the answer is flat under both.
 - `assortativity.py` needs five artifacts; it reports which are missing rather than failing.
 - `tail_probe.py` runs ~250 `find_path` calls at ~1.5 s each. Minutes, not seconds. Use
   `python -u`.
-- `coherence_probe.py` needs `precap.npz`, the pre-cap cache written by
-  `../2026-07-22-cap-ranking-replay/decompose.py`. Regenerate it there first.
+- `coherence_probe.py` needs `precap.npz` **in this directory** — it loads it from its own
+  `Path(__file__).parent`, not from wherever it was generated. It is written by
+  `../2026-07-22-cap-ranking-replay/decompose.py`, whose `SCR` constant points at a
+  session-specific temp directory that no longer exists; change that constant or copy the
+  file here. ~75 MB, deliberately not committed. *(Found by closeout B4.)*
 - One row of `coherence_probe.py` (Avril Lavigne → blink-182) fails to resolve because the
   MusicBrainz name uses a Unicode hyphen. That is the punctuation trap in Phase 2 log §9;
   the row is untested rather than negative.
