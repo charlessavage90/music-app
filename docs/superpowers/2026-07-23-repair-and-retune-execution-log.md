@@ -125,6 +125,67 @@ did *not* touch.
 | `CLAUDE.md` and `api/README.md` both restate `ApiConfig` cost-weight defaults | **Due when Track 2 changes any weight** — it will invalidate both copies at once, which is the moment to convert them to citations. |
 | Low-severity role/status drift: Phase 2 log header rationale, revised-plan in-file role, "Consequences for the paused work" heading, pre-fix `file:line` pointers in the Phase 1 log, two 2026-07-19/20 design specs still "ready for implementation" | **Sweep at the next closeout**, or when a reader is actually misled — none change what a session would *do*. |
 
+## Pre-Track-2 guards (2026-07-23)
+
+Executing `plans/2026-07-23-pre-track2-guards.md` — six structural guards that had to
+land between the Track 2 pre-registration and the Track 2 sweep. **Not Track 2**; no arm
+has run and no harness was written.
+
+**Branch decision.** Fresh branch `phase1-pre-track2-guards` off `main`, not an extension
+of `phase1-repair-and-retune`: that branch merged as PR #7 and `main` already carries
+Track 1, so extending it would have re-proposed merged commits.
+
+**P7 answered by the owner (2026-07-23): ≥ 1 intermediary IS a product invariant.**
+"Every path must have at least one artist in between the start and end." This discharges
+the labelled INFERENCE in pre-registration §4 — the guard is confirmed, not inferred.
+The guard itself is **not implemented here**; it ships with whichever Track 2 arm is
+adopted (pre-registration §4 gives the mechanics: mask the direct edge and re-run).
+
+### G1 — artifact acceptance assertions at build time
+
+**Where it runs, and why not in `build_from_archive`.** New module
+`builder/src/artistpath_builder/acceptance.py`, called from `cli.cmd_build` *before*
+`serialise`. `build_from_archive` is exercised throughout the suite with miniature
+archives whose graphs cannot satisfy production invariants; the invariants describe an
+emitted **artifact**, and `cmd_build` is the emission point. Criteria are a frozen
+dataclass (`PRODUCTION_ACCEPTANCE`) so the canonical set and every bound sit in one
+named place.
+
+**No CLI escape hatch.** `main()` takes `criteria` as a keyword argparse cannot set.
+A `--skip-acceptance` flag would be reached for at exactly the moment the guard matters.
+Tests substitute scaled criteria in-process.
+
+**What the three checks catch, and what they do not.** Measured against both real
+artifacts — the adopted one and `graph-t15-capfix.bin`, which log §2.8 records as
+reproducing the defective arm exactly (script and figures:
+`builder/analysis/2026-07-23-acceptance-bounds/`):
+
+- **Canonical presence** and the **famous-degree floors** are the §2.8 detectors. The
+  top-25-by-popularity median degree separates the two artifacts by roughly a factor of
+  five; the chosen floor sits about midway between them in ratio terms.
+- **Global shape bounds do NOT separate them**, and are not claimed to. Log §2.8 says so
+  directly ("the global shape does not move") — N, E and whole-graph median degree agree
+  to a fraction of a percent across the defect. They are recorded in code as a
+  **regression tripwire for a different failure** (a build silently losing much of the
+  graph). Stating this rather than quietly picking loose bounds is the plan's own
+  instruction.
+
+**Demonstrated against a negative case, twice.** In-suite
+(`tests/test_acceptance.py`): the same miniature archive built through the pre-Track-1
+path — one knob, whether `mutual_knn_cap` ranks clipped or unclipped scores, the same
+intervention log §2.8 used — deletes 6 of 10 famous artists from the component, and the
+check rejects it. At full scale: the adopted artifact is accepted, capfix is rejected on
+all three §2.8 detectors. **At miniature scale `k = 4` caps every degree at 4, so only
+deletion is visible there**; the degree floors are demonstrated by the full-scale script
+and by unit tests over hand-built graphs.
+
+**Knock-on: pre-registration P2 is now a no-op.** The canonical set includes every
+endpoint of pre-registration §2.3 (analysis set, held-out set, ordered reserve), and all
+24 were verified to resolve in the adopted artifact during bound selection — with
+`Nirvana` carrying the known duplicate (2 nodes; highest-popularity rule applied). The
+Track 2 session should **not** re-verify endpoint presence by hand. Pair 8 (the owner's
+captured bypass pair) is still unidentified under P1 and is therefore not represented.
+
 ## Track 2 — cost-function retune
 
 *(not started — next session begins here. Read the Track 1 use-the-app results
