@@ -138,6 +138,17 @@ The residual risk is a build-procedure mismatch versus the Arm 2 replay — cove
 
 ## 4. Track 2 — cost-function retune on the repaired graph
 
+> **Track 1 use-the-app results feed this section (owner, 2026-07-23).** See the
+> execution log's "Track 1 — use-the-app results" table. In short: **F2** (bypasses do
+> not surface more obscure artists) is direct ear-confirmation of §2.9 and is this
+> track's primary objective; **F3/F4/F6** sharpen the criteria below (`known` must reach
+> a *less-famous* neighbour; `dislike` must reroute rather than substitute; the obscure
+> tail must be reached without a coherence collapse or an immediate snap-back to fame);
+> **F5** is a diagnostic (flag only *sustained* single-region confinement, not one local
+> deviation). **F1 must be resolved before §4.3's success criterion is finalised:** a
+> minimum-intermediary guard (against the new zero-intermediary famous→famous paths the
+> Track 1 fix exposed) changes what the sweep optimises, so decide guard-vs-tuning first.
+
 ### 4.1 Problem being priced away
 
 Log §2.12: a single dive out of the famous stratum costs on the order of half the raw

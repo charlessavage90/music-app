@@ -11,6 +11,21 @@ the point.**
 
 ---
 
+## DONE — 2026-07-23 — tie-break fix adopted: famous-artist neighbourhoods changed
+
+**DONE 2026-07-23. No regression; no defect attributable to the fix.** Radiohead is
+searchable and routable (absent before); famous-artist neighbourhoods behave as
+score-ranked. Six findings recorded in
+`2026-07-23-repair-and-retune-execution-log.md` under "Track 1 — use-the-app results",
+each with a success condition. Headline: the owner confirmed by ear that **more bypasses
+do not surface more obscure artists** (F2) — direct experiential confirmation of §2.9 on
+the repaired graph, and the primary Track 2 motivation. One new standalone item: F1,
+zero-intermediary famous→famous paths (a new surface the fix exposed, candidate for a
+min-length guard). A stale API server on :8000 was found serving the *pre-fix* graph and
+cleared before testing — noted so a future tester checks the port first.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-23 — tie-break fix adopted: famous-artist neighbourhoods changed
 
 **What changed.** The graph the app routes on. The §2.8 tie-break fix is in: top-k
