@@ -109,6 +109,7 @@ that is how the drift began.
 | `superpowers/2026-07-22-HANDOFF-phase1.md` | Written at Phase 2 closeout for a cold session: what was overturned and must not be reverted, and what the previous session knew that is not otherwise in the record. **Superseded on Phase 1 status by the log above** — that document governs where they disagree. Still valid on Phase 2 outcomes. |
 | `superpowers/TEST-QUEUE.md` | The async **use-the-app queue**. `closeout` appends; `session-start` reads it and flags stale entries. Catches the defect class tests structurally cannot. |
 | `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` | **The governing design for resuming Phase 1** (owner-approved 2026-07-23). Track 1: builder fix for the §2.8 tie-break, rebuild, adopt by structural equivalence. Track 2: cost-function retune (currencies included) on the repaired graph, `known` mechanism, one blind listen. Records the owner's 2026-07-23 decisions in §1. |
+| `superpowers/2026-07-23-repair-and-retune-execution-log.md` | Retained execution log for the repair+retune work. Track 1 record; Track 2 continues it. |
 
 ### Complete
 
