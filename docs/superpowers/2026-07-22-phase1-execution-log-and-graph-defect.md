@@ -1061,6 +1061,29 @@ API's CORS origin was widened by **environment variable**, so no shipped code wa
 - **M3 is geometric-mean AA**, and the overlap coefficient is a mandatory co-guardrail.
   Both were independently confirmed by two analysts.
 
+### 4.1 Closed by the §2.8–§2.13 defect work (2026-07-23)
+
+- **The `capfix` adoption is not overturned.** `control` is disassortative *and* carries
+  degree-11,241 hubs, and the owner preferred `capfix` blind, twice. Both are true at once:
+  `capfix` removed the hub expressway **and** severed the route to obscurity. That is the
+  owner's own "improvement, not goodness" (Phase 2 log §12), now with a mechanism.
+- **`capfix` vs `rankfix` is not worth a listening test.** Identical assortativity (+0.596
+  under a fixed reference) and identical behaviour on the tail. A listen would burn the
+  owner's ear on a null.
+- **No graph change is indicated by §2.8–§2.12.** §2.10's alternative `cap_strategy` is
+  **deferred, not killed** — §2.12 removed its motivation before anyone built it, which is
+  discouragement rather than unreachability.
+- **The C3 A-vs-C mechanism question is moot** until the cost function is settled. Both
+  prototypes were tuned on a substrate where no mechanism reached below the 92nd popularity
+  percentile.
+- **`w_floor`'s inertness is not an independent defect** (§2.12). Fixing it alone achieves
+  nothing; it is a symptom of `w_jump`.
+- **§2.4's candidate A being falsified for the degree collapse and revived for the
+  stratification is not a re-reversal.** Two mechanisms, two symptoms; §2.10's 2×2 factorial
+  gave the revival the one-knob intervention §2.4 never had.
+- **`d025` is not a witness for anything.** Three knobs from `capfix`, not
+  `p99_log_clip` at all, and unbuildable with current code (§2.2's correction notice).
+
 ---
 
 ## 5. Artifacts
