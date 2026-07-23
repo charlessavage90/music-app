@@ -97,9 +97,19 @@ Invariants that must hold:
 3. **Full rebuild from the 75k archive**, then assert against log §2.8 Arm 2's recorded
    topology: same N and E as Arm 2, Radiohead present in the LCC at its recorded degree,
    The Beatles / Coldplay / R.E.M. at theirs, and the global shape unmoved (median
-   degree and frac-below-8 as recorded). The existing `rankfix` artifact's recorded
+   degree and frac-below-8 as recorded). ~~The existing `rankfix` artifact's recorded
    checksum is the expected identity if the build is byte-reproducing; if it differs,
-   the topology assertions govern and the discrepancy is investigated before adoption.
+   the topology assertions govern and the discrepancy is investigated before adoption.~~
+
+   > **⚠ CORRECTION (2026-07-23, post-adoption).** That expectation was never
+   > satisfiable and should not have been written as one. `rankfix` was built with
+   > `similarity_rescale="percentile_rank"`; this build uses `"p99_log_clip"`. The two
+   > rescales emit different edge scores by construction, so `rankfix`'s checksum could
+   > never match this build's regardless of topology. The checksums did differ, and
+   > adoption proceeded correctly — on the topology assertions above, plus bit-identical
+   > shared-edge scores against `capfix` (see
+   > `../findings/2026-07-23-tiebreak-fix-adoption.md`). The topology assertions were
+   > always what governed; a checksum match against `rankfix` was never on the table.
 4. **Checksum recorded** in the findings record and the PR body (artifacts are
    gitignored; the checksum is their only identity).
 

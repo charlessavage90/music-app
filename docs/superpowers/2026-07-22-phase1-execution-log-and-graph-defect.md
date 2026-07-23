@@ -1129,12 +1129,16 @@ measuring; keep that. *(Completed at closeout D3 — only `capfix` was recorded 
 
 | artifact | sha256 | used in |
 |---|---|---|
-| `graph-t15-capfix.bin` **(ADOPTED)** | `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237` | everything |
+| `graph-t15-capfix.bin` **(ADOPTED until 2026-07-23)** | `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237` | everything in §2; now the baseline the §2.8 tie-break fix was verified against |
+| `graph-t15-tiebreakfix.bin` **(ADOPTED — current)** | not restated here — see `findings/2026-07-23-tiebreak-fix-adoption.md`, which owns this artifact's identity | Track 1 remediation of §2.8 (spec `specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §3) |
 | `graph-t15-rankfix.bin` | `87d9bf7edfc51fb13ee0fdf6a4216d01df7d3aa7f38b66ea9b7b8c2e7addae05` | §2.9 tail probe, §2.10 |
 | `graph-t15-control.bin` | `d3016bc06dd9e62de9e6edff3206ca9a3d8366243ca18b2588c0a7063042f57a` | §2.2, §2.9, §2.10 nulls |
 | `graph-75k.bin` (original) | `478426753de39282f99c0b8955a846d159deb656576026b265bec9060977d5ff` | §2.2, §2.9 |
 | `graph-t15-d050.bin` | `6fb52ff8e918cf14da6e4fc6fa52052a66d7bfdb35a7f910460c2c8868c80a20` | §2.9, §2.10 |
 | `graph-t15-d025.bin` | `2811e87d1c900e4ec233317c05143ccaec5a3f0e1fb3c531c04455594bb27e65` | §2.2 only — **do not cite, see §2.2's correction notice** |
+
+`findings/2026-07-23-tiebreak-fix-adoption.md` is authoritative for the current adopted
+artifact's identity — this table points to it rather than restating its checksum.
 
 ---
 
@@ -1144,7 +1148,11 @@ measuring; keep that. *(Completed at closeout D3 — only `capfix` was recorded 
   **unresolved** (no clear winner, pair-dependent) — and **moot until the cost function is
   settled** (§2.9, §2.13): both prototypes were tuned on a substrate where no mechanism
   reached below the 92nd popularity percentile.
-- **Phase 1 is paused pending the owner's decision on §2.**
+- **Updated 2026-07-23:** the owner's decision on §2 was taken — repair + retune, per
+  `specs/2026-07-23-defect-remediation-and-cost-retune-design.md`. **Track 1 (the §2.8
+  tie-break repair) is complete and its artifact adopted** — identity owned by
+  `findings/2026-07-23-tiebreak-fix-adoption.md`, not restated here (§5 below points to
+  it). **Track 2 (the cost-function retune) is next**, not yet started.
 - **Updated 2026-07-23:** the diagnosis changed. §2.12 concludes this is a **cost-function**
   problem rather than a graph one. **No graph change is indicated by any of §2.8–§2.12** —
   the §2.8 tie-break fix (Radiohead, The Beatles) remains real, cheap, and a standalone

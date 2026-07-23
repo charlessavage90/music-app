@@ -19,6 +19,12 @@ popularity unchanged (summed pre-cap). Governing design:
 Supersedes `graph-t15-capfix.bin` (sha `c8af6eac…`) as the artifact the app
 routes on. capfix remains on disk as the §2 baseline.
 
+Its checksum does not, and could never, match `graph-t15-rankfix.bin`'s: rankfix was
+built with `similarity_rescale="percentile_rank"` against this build's `p99_log_clip`,
+so a checksum match was never possible and the spec's §3.2 item 3 expectation of one
+was wrong (corrected there 2026-07-23) — topology assertions plus bit-identical
+shared-edge scores against capfix governed adoption instead.
+
 ## Adoption basis — why no listening test
 
 Phase 1 log §4.1 closed this: the fix's topology (= §2.8 Arm 2 = rankfix's)
