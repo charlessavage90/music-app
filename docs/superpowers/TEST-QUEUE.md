@@ -11,7 +11,14 @@ the point.**
 
 ---
 
-## QUEUED — 2026-07-23 — one labelled inference needs your ear, and nothing else
+## DONE — 2026-07-23 — one labelled inference needs your ear, and nothing else
+
+**DONE 2026-07-23, verdict: "No, mostly unknown."** The §2.11 inference is confirmed —
+in-graph popularity does not mean fame at the top of the distribution, so a success
+criterion phrased as an in-graph popularity percentile is gameable. Consumed by
+`specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §1 and §4.3 (the next
+experiment is scored on an external fame proxy instead). The optional
+Metallica → Taylor Swift bypass walk was not run — §2.9 already measured that channel.
 
 **No shipped code changed.** The Phase 1 defect work (§2.8–§2.12) was measurement and record
 only. This entry exists for **one question a metric cannot answer**, and it should take five

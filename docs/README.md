@@ -55,7 +55,11 @@ that is how the drift began.
     **degree ≠ fame** (§2.6), **popularity ≠ fame** at the top of the distribution (§2.11),
     and **raw popularity ≠ percentile** (§2.12). Do not trust any `hubfrac`/payload figure,
     and check which currency a claim is in before acting on it.
-  - The owner's decision on how to handle it is still outstanding.
+  - **Decided 2026-07-23:** the owner chose **repair + retune** — fix the §2.8 tie-break
+    in the builder and retune the cost function on the repaired graph. The governing
+    design is `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md`;
+    its §1 also records the nine-names verdict (in-graph popularity ≠ fame at the top,
+    confirmed) and the owner's relaxation of the listening-test prohibition.
 - **Gate 1 (personal use).** Phase 2 (path quality) is **COMPLETE**, 2026-07-22. All 16
   tasks executed on branch `phase2-path-quality`. The blind listening test was run and the
   owner adopted the **`capfix`** arm — `cap_strategy="mutual_knn"`,
@@ -98,6 +102,7 @@ that is how the drift began.
 | `superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md` | ⛔ **Start here for Phase 1, and read §2 before any implementation.** One document by design: the **graph-structure defect that halted the work** (§2 — facts, discovery mechanism, suspected cause; deliberately no solutioning) **plus** the full Phase 1 progress record (§3 — including two independent ML-analyst reviews and what each overturned), what is closed (§4), artifacts (§5), and state of play (§6). Splitting it would let the progress record be picked up without the context that stopped it. **Owns its figures** — cite from here, do not restate. |
 | `superpowers/2026-07-22-HANDOFF-phase1.md` | Written at Phase 2 closeout for a cold session: what was overturned and must not be reverted, and what the previous session knew that is not otherwise in the record. **Superseded on Phase 1 status by the log above** — that document governs where they disagree. Still valid on Phase 2 outcomes. |
 | `superpowers/TEST-QUEUE.md` | The async **use-the-app queue**. `closeout` appends; `session-start` reads it and flags stale entries. Catches the defect class tests structurally cannot. |
+| `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` | **The governing design for resuming Phase 1** (owner-approved 2026-07-23). Track 1: builder fix for the §2.8 tie-break, rebuild, adopt by structural equivalence. Track 2: cost-function retune (currencies included) on the repaired graph, `known` mechanism, one blind listen. Records the owner's 2026-07-23 decisions in §1. |
 
 ### Complete
 
