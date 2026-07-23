@@ -55,11 +55,16 @@ that is how the drift began.
     **degree ≠ fame** (§2.6), **popularity ≠ fame** at the top of the distribution (§2.11),
     and **raw popularity ≠ percentile** (§2.12). Do not trust any `hubfrac`/payload figure,
     and check which currency a claim is in before acting on it.
-  - **Decided 2026-07-23:** the owner chose **repair + retune** — fix the §2.8 tie-break
-    in the builder and retune the cost function on the repaired graph. The governing
-    design is `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md`;
-    its §1 also records the nine-names verdict (in-graph popularity ≠ fame at the top,
+  - **Decided 2026-07-23:** the owner chose **repair + retune** — governing design
+    `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md`; its §1
+    also records the nine-names verdict (in-graph popularity ≠ fame at the top,
     confirmed) and the owner's relaxation of the listening-test prohibition.
+  - **Track 1 is DONE, 2026-07-23: the §2.8 tie-break is fixed and the rebuilt artifact
+    is adopted.** The app now routes on `graph-t15-tiebreakfix.bin` — identity and
+    verification in `superpowers/findings/2026-07-23-tiebreak-fix-adoption.md` (the
+    authoritative record for the adopted artifact's checksum). Radiohead is back;
+    famous-artist neighbourhoods are score-ranked, not MBID-ranked. Track 2 (cost-function
+    retune) is next and has its own plan.
 - **Gate 1 (personal use).** Phase 2 (path quality) is **COMPLETE**, 2026-07-22. All 16
   tasks executed on branch `phase2-path-quality`. The blind listening test was run and the
   owner adopted the **`capfix`** arm — `cap_strategy="mutual_knn"`,
@@ -91,6 +96,7 @@ that is how the drift began.
 | `superpowers/WHAT-GOOD-LOOKS-LIKE.md` | **What the owner means by a better path.** Calibration for the blind listening test — this project's strongest evidence class, which decided the graph twice where the offline metrics decided it zero times. Read before interpreting any listening verdict. |
 | `superpowers/findings/2026-07-22-phase2-sweep-results.md` | Every figure from the Phase 2 six-arm sweep. Owns its numbers; linked from the adjudication's §6 (claims 41–45). |
 | `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | Gate structure and phase ordering. Its C4 is a pointer only — it holds no figures. |
+| `superpowers/findings/2026-07-23-tiebreak-fix-adoption.md` | Identity (sha256) and verification record of the **adopted** 75k artifact, post tie-break fix. |
 | `../CLAUDE.md` | How to work in this repo: commands, architecture, conventions. |
 
 ### Active

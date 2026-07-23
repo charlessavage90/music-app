@@ -35,7 +35,7 @@ belief — including a belief you yourself established earlier.
   (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob (mbids,
   names, disambiguations, popularity). Written by `builder/…/artifact.py`, read
   independently by `api/…/graph_store.py`. Graphs live in `builder/scratch/`
-  (`graph-75k.bin` and successors; `graph-5k.bin` for quick iteration).
+  (`graph-75k.bin` and successors; the dev API boots the adopted artifact by default).
 - **The router.** Pure Dijkstra in `api/…/pathfinding.py`, no I/O. Cost per edge:
   `w_sim·(1−similarity) + w_jump·|Δpopularity| + w_floor·max(0, floor−pop_v)
   + w_avoid·avoidance + w_hop`. Weights live in `api/…/config.py`.

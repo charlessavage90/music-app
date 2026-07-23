@@ -9,12 +9,16 @@ from dataclasses import dataclass, field
 @dataclass(frozen=True, slots=True)
 class ApiConfig:
     # --- graph ----------------------------------------------------------
-    # Dev default is a LOCALLY BUILT 5k graph — it is gitignored, not committed,
-    # so a fresh clone must build it (see CLAUDE.md, "No graph artifact is in
-    # git"). Production sets ARTISTPATH_GRAPH to the 75k artifact. One env var
-    # swaps the graph without code changes.
+    # Default is the ADOPTED 75k artifact, by name — flipped at each adoption
+    # (spec 2026-07-23 §1 decision 4; closeout checks this default is not
+    # stale). It is gitignored: a fresh clone copies it (or the archive) from
+    # another machine and verifies the sha256 against
+    # docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md.
+    # The retired 5k dev fixture is NOT a substitute — its snowball shape
+    # misrepresents the obscure tail, which is what bypass work exercises.
+    # One env var swaps the graph without code changes.
     graph_path: str = os.environ.get(
-        "ARTISTPATH_GRAPH", "../builder/scratch/graph-5k.bin"
+        "ARTISTPATH_GRAPH", "../builder/scratch/graph-t15-tiebreakfix.bin"
     )
 
     # --- cost function weights (findings 6g) ----------------------------

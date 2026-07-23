@@ -75,9 +75,9 @@ uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 50
 UV_LINK_MODE=copy uv run --extra dev pytest -q                 # all tests
 UV_LINK_MODE=copy uv run --extra dev pytest -q -k pathfinding  # single test / pattern
 
-# dev server against the local 5k graph:
-ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
-  uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
+# dev server — boots the ADOPTED 75k graph by default (ApiConfig.graph_path);
+# ARTISTPATH_GRAPH overrides:
+uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
 
 **No dev or production graph artifact is in git.** `.gitignore` excludes
@@ -85,10 +85,10 @@ ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
 clone has the two 500-node test fixtures but none of the dev graphs. (The `**/` matters
 and was wrong until 2026-07-22: a gitignore pattern containing a slash is anchored to the
 file's own directory, so the previous `!tests/fixtures/*.bin` exempted nothing and the
-fixtures were silently uncommitted.) Build `graph-5k.bin` locally from an archive with the `build`
-and `fixture` commands above, or copy it from another machine. Adopted 75k artifacts
-are identified by recorded checksum in `docs/superpowers/findings/`, since they cannot
-be committed.
+fixtures were silently uncommitted.) On a fresh clone, copy the adopted 75k artifact (or
+the archive, and rebuild in ~30 s) from another machine — identity by the checksum in
+`docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`. The 5k dev fixture is
+retired; the `fixture` command remains only for the committed 500-node test fixtures.
 
 ### frontend (from `frontend/`)
 ```bash

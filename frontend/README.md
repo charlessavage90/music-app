@@ -13,11 +13,10 @@ and Back undoes a bypass.
 
 The frontend proxies `/api` to the Python API. Run both:
 
-**Terminal 1 — API** (from `api/`, against the 5k graph):
+**Terminal 1 — API** (from `api/`, boots the adopted 75k graph by default):
 
 ```bash
-ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
-  uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
+uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
 
 > On Windows under OneDrive, prefix `uv` commands with `UV_LINK_MODE=copy`.

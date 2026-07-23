@@ -52,7 +52,7 @@ path is unaffected).
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `ARTISTPATH_GRAPH` | `../builder/scratch/graph-5k.bin` | Which artifact to load. Point at the 75k graph in production. |
+| `ARTISTPATH_GRAPH` | `../builder/scratch/graph-t15-tiebreakfix.bin` | Which artifact to load; the adopted artifact, flipped at each adoption. |
 | `ARTISTPATH_CLIP_CACHE` | `memory` | `memory` (local dev — no AWS needed) or `dynamo` (production). |
 | `ARTISTPATH_CLIP_TABLE` | `artistpath-clips` | DynamoDB table name when the cache is `dynamo`. |
 
@@ -67,9 +67,8 @@ Deezer/iTunes reachability, and clips degrade to unplayable cards if missing.
 # tests
 UV_LINK_MODE=copy uv run --extra dev pytest -q
 
-# dev server against the 5k graph
-ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
-  uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
+# dev server — boots the adopted 75k graph by default
+uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
 
 Then, e.g.:

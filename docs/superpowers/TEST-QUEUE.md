@@ -11,6 +11,33 @@ the point.**
 
 ---
 
+## QUEUED — 2026-07-23 — tie-break fix adopted: famous-artist neighbourhoods changed
+
+**What changed.** The graph the app routes on. The §2.8 tie-break fix is in: top-k
+selection now ranks unclipped strengths, so ceiling-saturated famous artists keep their
+genuinely strongest neighbours instead of the lowest-MBID ones. ~0.4 % of nodes change
+neighbours; everything else is verified identical
+(`findings/2026-07-23-tiebreak-fix-adoption.md`). The dev API now boots the full
+adopted artifact by default — the 5k fixture is retired, so what you test is what
+the record measured.
+
+**What to exercise:**
+
+1. **Search Radiohead.** It was absent from the previous graph entirely; it must now be
+   searchable and routable. This is the headline change — worth ten seconds.
+2. **Routes that end at or pass through very famous artists** (The Beatles, Coldplay,
+   Muse, Nine Inch Nails…). Their neighbourhoods went from ~4–7 arbitrary survivors to
+   ~50 score-ranked ones, so first paths and bypaths around them may genuinely differ.
+3. **A couple of ordinary mid-popularity paths** as a regression check — these should
+   feel unchanged (their neighbourhoods are untouched).
+
+**What "wrong" would look like:** a "no path" without exclusions (structurally
+impossible, so a real defect); an artist that was searchable yesterday now absent;
+famous-endpoint paths that feel *worse* than before. Clip bugs remain known, unrelated,
+and queued (C1/C2).
+
+**Best bug report:** the URL from the address bar.
+
 ## DONE — 2026-07-23 — one labelled inference needs your ear, and nothing else
 
 **DONE 2026-07-23, verdict: "No, mostly unknown."** The §2.11 inference is confirmed —
