@@ -1,0 +1,67 @@
+[    0.3s] archive files: 75000
+[  100.9s]   read 20000
+[  201.7s]   read 40000
+[  307.4s]   read 60000
+[  388.4s] payloads read
+[  393.0s] identities: 139168
+[  393.0s] known after special-purpose filter: 74993  (excluded 7)
+[  395.8s]   scored 20000
+[  398.5s]   scored 40000
+[  400.9s]   scored 60000
+[  402.7s] pre-cap directed edges: 3990893
+[  402.8s] p99 raw=1455.000000  log_scale=7.283448  frac at ceiling=0.0100
+[  402.9s] capfix reference: N=74191 E=898314
+[  403.3s] ARM1(clipped): top-k computed
+[  405.6s] ARM1(clipped): mutual edges=898352  LCC N=74191  E=898314
+[  405.6s] ARM1 reproduces capfix N and E: True
+[  405.6s] ARM1 mbid set == capfix mbid set: True
+[  405.9s] ARM2(unclipped): top-k computed
+[  408.2s] ARM2(unclipped): mutual edges=898042  LCC N=74193  E=898006
+
+=== Radiohead terminal state ===
+in known set: yes; out-list len (known, deduped) = 100
+  ARM1: mutual-edge count pre-LCC = 0  in LCC = False
+  ARM2: mutual-edge count pre-LCC = 50  in LCC = True  degree=50
+  ARM1 component containing Radiohead: size 1 (ISOLATED SINGLETON)
+
+=== top-25 by capfix popularity (+ Radiohead) ===
+artist                           pop capfixD  arm1D  arm2D |out| ceilFrac recipFrac recip&ceil
+Radiohead                        nan       0      0     50   100    1.000     1.000        100
+The Beatles                     1.00       7      7     50   100    1.000     1.000        100
+Coldplay                        0.99       4      4     50   100    1.000     1.000        100
+Linkin Park                     0.98       6      6     48   100    1.000     0.990         99
+Gorillaz                        0.98      11     11     47   100    1.000     1.000        100
+R.E.M.                          0.95       3      3     47   100    1.000     1.000        100
+The Rolling Stones              0.94      10     10     50   100    1.000     1.000        100
+Michael Jackson                 0.94       9      9     39   100    1.000     0.920         92
+Aphex Twin                      0.94      30     30     40   100    0.800     0.840         68
+Nine Inch Nails                 0.94       5      5     36   100    1.000     0.970         97
+Muse                            0.93       4      4     50   100    1.000     1.000        100
+Pink Floyd                      0.93      39     39     50   100    1.000     1.000        100
+Red Hot Chili Peppers           0.93      28     28     50   100    1.000     1.000        100
+Johnny Cash                     0.93      11     11     19   100    1.000     0.860         86
+Arctic Monkeys                  0.93       9      9     47   100    1.000     1.000        100
+System of a Down                0.93       8      8     47   100    1.000     0.990         99
+The Strokes                     0.93       7      7     44   100    1.000     1.000        100
+U2                              0.92       5      5     47   100    1.000     1.000        100
+The Beach Boys                  0.91      17     17     41   100    1.000     0.840         84
+The Smashing Pumpkins           0.91       5      5     48   100    1.000     1.000        100
+Guns N’ Roses                   0.91       5      5     47   100    1.000     1.000        100
+Eminem                          0.91      17     17     34   100    1.000     0.900         90
+The Black Keys                  0.90      10     10     39   100    1.000     0.940         94
+Pixies                          0.90      10     10     41   100    1.000     1.000        100
+Depeche Mode                    0.90      41     41     33   100    1.000     1.000        100
+Air                             0.90      24     24     31   100    1.000     0.720         72
+
+=== aggregate ===
+ARM1 LCC N=74191  median deg=9  max=50  frac<8=0.449
+ARM2 LCC N=74193  median deg=9  max=50  frac<8=0.449
+  pop rank     1-   10: median ARM1=  6.5  median ARM2= 47.5  n=10
+  pop rank    11-   25: median ARM1= 10.0  median ARM2= 44.0  n=15
+  pop rank    26-   50: median ARM1= 18.0  median ARM2= 36.0  n=25
+  pop rank    51-  100: median ARM1= 22.5  median ARM2= 39.0  n=50
+  pop rank   101-  250: median ARM1= 27.0  median ARM2= 31.0  n=150
+  pop rank   251-  500: median ARM1= 28.0  median ARM2= 29.0  n=250
+  pop rank   501- 1000: median ARM1= 29.0  median ARM2= 28.0  n=500
+  pop rank  1001- 2500: median ARM1= 28.0  median ARM2= 27.0  n=1500
+[  408.4s] done

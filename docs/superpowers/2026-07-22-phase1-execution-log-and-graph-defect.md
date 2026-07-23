@@ -319,9 +319,12 @@ Whether Arm 2 is *better to listen to* is unmeasured and is a product question, 
 question. Note also that §15–17 forbid a third listening test; whether that bars a listen of
 a **new** candidate on a **new** finding is a reading the owner should make deliberately.
 
-**Scripts** (scratchpad, throwaway, not in git — will be lost): `precheck_mbid.py`,
-`replay.py`, `decompose.py`, with cached pre-cap arrays in `precap.npz` and the run log in
-`replay.log`.
+**Scripts — committed, not lost.** `builder/analysis/2026-07-22-cap-ranking-replay/`
+holds `part1_probe.py`, `precheck_mbid.py`, `replay.py`, `decompose.py` and `replay.log`,
+with a README covering the hardcoded paths and what they need to run. The ~75 MB
+`precap.npz` cache is **not** committed; `decompose.py` regenerates it from the archive.
+They were rescued from a scratchpad directory that was about to be cleaned — a checksum
+and a prose description are not enough to re-run an experiment.
 
 ---
 
