@@ -8,8 +8,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |---|---|
 | **Which documents can I trust?** | [`docs/README.md`](docs/README.md) — the documentation map. It classifies every doc by role and names which are superseded. **Read it before citing anything in `docs/`.** |
 | **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks 27 prior claims upheld/overturned/unresolved. |
-| **What is the next action?** | ⛔ **Phase 1 is PAUSED. Read [`docs/superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md`](docs/superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md) §2 — and read §2.12 FIRST, because it retracts a central claim of §2.9 and corrects §2.10–§2.11.** Two real defects in the **adopted** graph: famous artists are barely connected (The Beatles degree 7, Radiohead absent), from an MBID tie-break over p99-clipped scores; and famous→obscure edges are depleted 15.6× below null, from the mutual-k-NN reciprocity rule. Paths never present an artist below the ~95th popularity percentile at any bypass depth. **But §2.12 concludes this is a *cost-function* problem, not a graph one** — obscure artists are 2–3 hops away and the router prices those exits correctly and declines them. That document is one file on purpose: the progress record cannot be picked up without the context that halted it. **The outstanding decision is which of three routes to take** — tune the cost function (§2.12's three-knob sweep, needs no rebuild), redesign `cap_strategy` (§2.10, deferred not killed), or accept the stratification. **After that decision** Phase 1 resumes with C3, then clips (C1, C2), then frontend UX — see the roadmap's Phase 1 section. Note C3's A-vs-C mechanism question is **moot until the cost function is settled** (§2.13). |
-| **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `hubfrac`, "payload", `hub_penalty`, `w_hub` are all top-1%-by-*degree*); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile**, since the top decile spans half the raw range (§2.12). Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** |
+| **What is the next action?** | **Track 2 of the repair+retune design** — the cost-function retune. Read `docs/superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §4 and the execution log `docs/superpowers/2026-07-23-repair-and-retune-execution-log.md`. Track 1 (the §2.8 tie-break fix) is DONE and adopted — artifact identity in `docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`. The Phase 1 log's §2 remains the defect record; its §2.12 diagnosis (cost-function problem, not graph problem) is what Track 2 acts on. |
+| **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `hubfrac`, "payload", `hub_penalty`, `w_hub` are all top-1%-by-*degree*); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile** — see §2.12 for the extent of the gap. Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
 | **What does the owner mean by "better"?** | `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — calibration for the blind listening test, this project's strongest evidence class. Read it before running one or interpreting a verdict. It records **preference, not evidence** — never treat it as criteria. |
@@ -75,9 +75,9 @@ uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 50
 UV_LINK_MODE=copy uv run --extra dev pytest -q                 # all tests
 UV_LINK_MODE=copy uv run --extra dev pytest -q -k pathfinding  # single test / pattern
 
-# dev server against the local 5k graph:
-ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
-  uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
+# dev server — boots the ADOPTED 75k graph by default (ApiConfig.graph_path);
+# ARTISTPATH_GRAPH overrides:
+uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
 
 **No dev or production graph artifact is in git.** `.gitignore` excludes
@@ -85,10 +85,10 @@ ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
 clone has the two 500-node test fixtures but none of the dev graphs. (The `**/` matters
 and was wrong until 2026-07-22: a gitignore pattern containing a slash is anchored to the
 file's own directory, so the previous `!tests/fixtures/*.bin` exempted nothing and the
-fixtures were silently uncommitted.) Build `graph-5k.bin` locally from an archive with the `build`
-and `fixture` commands above, or copy it from another machine. Adopted 75k artifacts
-are identified by recorded checksum in `docs/superpowers/findings/`, since they cannot
-be committed.
+fixtures were silently uncommitted.) On a fresh clone, copy the adopted 75k artifact (or
+the archive, and rebuild in ~30 s) from another machine — identity by the checksum in
+`docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`. The 5k dev fixture is
+retired; the `fixture` command remains only for the committed 500-node test fixtures.
 
 ### frontend (from `frontend/`)
 ```bash
@@ -166,7 +166,9 @@ Deezer → iTunes fallback, cached) so the path renders immediately.
 
 ### Configuration is env-driven, all tunables centralized
 `ApiConfig` / `BuilderConfig` are the *only* place magic numbers live. Key API env vars:
-`ARTISTPATH_GRAPH` (swap 5k dev graph for 75k prod without code changes),
+`ARTISTPATH_GRAPH` (overrides the default graph path — the default is the adopted 75k
+artifact itself, so this is for pointing at a *different* artifact, not for a dev-vs-prod
+swap),
 `ARTISTPATH_CLIP_CACHE` (`memory` default — boots with **no AWS config** — or `dynamo`),
 `ARTISTPATH_CORS_ORIGINS`. The API is testable without a real artifact or network: the
 graph, search, and clip resolver are all injected into `create_app`.

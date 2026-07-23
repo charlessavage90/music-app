@@ -29,9 +29,11 @@ Three independent packages. The only thing they share is a binary file format.
 The **`APG1` artifact is the contract** between builder and api — not shared Python code.
 Both parse the format independently and share no modules.
 
-Pathfinding is Dijkstra over an in-memory graph of ~75,000 artists and ~4 million edges.
-A path query touches no database and no network. Clips are resolved separately per card,
-so the path renders immediately.
+Pathfinding is Dijkstra over an in-memory graph of ~75,000 artists, pruned by mutual
+k-NN to a fraction of its original edge count (exact counts:
+`docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`). A path query touches
+no database and no network. Clips are resolved separately per card, so the path renders
+immediately.
 
 ---
 
@@ -42,14 +44,16 @@ The project lives under OneDrive on Windows. **Prefix every `uv` command with
 `.venv`; `cd` into the package first.
 
 You need a graph artifact to run the API. **No graph is committed** — `.gitignore`
-excludes `builder/scratch/` and `*.bin` — so build one from an archive, or copy
-`graph-5k.bin` from another machine.
+excludes `builder/scratch/` and `*.bin`. On a fresh clone, copy the adopted 75k
+artifact (or the archive, and rebuild in ~30 s) from another machine — identity by
+the checksum in `docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`. The
+5k dev fixture is retired; the `fixture` command remains only for the committed
+500-node test fixtures.
 
 ```bash
-# terminal 1 — API on :8000
+# terminal 1 — API on :8000 (boots the adopted 75k graph by default)
 cd api
-ARTISTPATH_GRAPH=../builder/scratch/graph-5k.bin \
-  UV_LINK_MODE=copy uv run uvicorn artistpath_api.app:build_default_app \
+UV_LINK_MODE=copy uv run uvicorn artistpath_api.app:build_default_app \
   --factory --port 8000
 
 # terminal 2 — frontend on :5173, proxying /api to :8000

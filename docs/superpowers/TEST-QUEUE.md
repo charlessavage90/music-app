@@ -11,7 +11,56 @@ the point.**
 
 ---
 
-## QUEUED — 2026-07-23 — one labelled inference needs your ear, and nothing else
+## DONE — 2026-07-23 — tie-break fix adopted: famous-artist neighbourhoods changed
+
+**DONE 2026-07-23. No regression; no defect attributable to the fix.** Radiohead is
+searchable and routable (absent before); famous-artist neighbourhoods behave as
+score-ranked. Six findings recorded in
+`2026-07-23-repair-and-retune-execution-log.md` under "Track 1 — use-the-app results",
+each with a success condition. Headline: the owner confirmed by ear that **more bypasses
+do not surface more obscure artists** (F2) — direct experiential confirmation of §2.9 on
+the repaired graph, and the primary Track 2 motivation. One new standalone item: F1,
+zero-intermediary famous→famous paths (a new surface the fix exposed, candidate for a
+min-length guard). A stale API server on :8000 was found serving the *pre-fix* graph and
+cleared before testing — noted so a future tester checks the port first.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-07-23 — tie-break fix adopted: famous-artist neighbourhoods changed
+
+**What changed.** The graph the app routes on. The §2.8 tie-break fix is in: top-k
+selection now ranks unclipped strengths, so ceiling-saturated famous artists keep their
+genuinely strongest neighbours instead of the lowest-MBID ones. ~0.4 % of nodes change
+neighbours; everything else is verified identical
+(`findings/2026-07-23-tiebreak-fix-adoption.md`). The dev API now boots the full
+adopted artifact by default — the 5k fixture is retired, so what you test is what
+the record measured.
+
+**What to exercise:**
+
+1. **Search Radiohead.** It was absent from the previous graph entirely; it must now be
+   searchable and routable. This is the headline change — worth ten seconds.
+2. **Routes that end at or pass through very famous artists** (The Beatles, Coldplay,
+   Muse, Nine Inch Nails…). Their neighbourhoods went from ~4–7 arbitrary survivors to
+   ~50 score-ranked ones, so first paths and bypaths around them may genuinely differ.
+3. **A couple of ordinary mid-popularity paths** as a regression check — these should
+   feel unchanged (their neighbourhoods are untouched).
+
+**What "wrong" would look like:** a "no path" without exclusions (structurally
+impossible, so a real defect); an artist that was searchable yesterday now absent;
+famous-endpoint paths that feel *worse* than before. Clip bugs remain known, unrelated,
+and queued (C1/C2).
+
+**Best bug report:** the URL from the address bar.
+
+## DONE — 2026-07-23 — one labelled inference needs your ear, and nothing else
+
+**DONE 2026-07-23, verdict: "No, mostly unknown."** The §2.11 inference is confirmed —
+in-graph popularity does not mean fame at the top of the distribution, so a success
+criterion phrased as an in-graph popularity percentile is gameable. Consumed by
+`specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §1 and §4.3 (the next
+experiment is scored on an external fame proxy instead). The optional
+Metallica → Taylor Swift bypass walk was not run — §2.9 already measured that channel.
 
 **No shipped code changed.** The Phase 1 defect work (§2.8–§2.12) was measurement and record
 only. This entry exists for **one question a metric cannot answer**, and it should take five
@@ -50,6 +99,13 @@ record currently carries as an assumption.
 
 ---
 
+## DONE — 2026-07-22 — Phase 2 adoption (`capfix`)
+
+**DONE.** Phase 1 log §3.1 records the owner completed this: no regressions found; only
+missing artists were already known to be absent.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-22 — Phase 2 adoption (`capfix`)
 
 **What changed.** The graph the app routes on. `cap_strategy` is now `mutual_knn` (an edge
@@ -61,6 +117,11 @@ artifact and verified routing (`Miles Davis → Ella Fitzgerald → Mariah Carey
 Timberlake → Daft Punk`). Just start the two processes and use it.
 
 On any *other* machine, or after `git clean`, rebuild it first — it is gitignored:
+
+> **⚠ SUPERSEDED 2026-07-23 — do not follow the command below.** The 5k fixture is
+> retired and `graph-t15-capfix.bin` is no longer the adopted artifact. The API now
+> defaults to the adopted 75k artifact (`graph-t15-tiebreakfix.bin`); see
+> `findings/2026-07-23-tiebreak-fix-adoption.md`. Nothing needs building for dev use.
 
 ```bash
 cd builder && UV_LINK_MODE=copy uv run artistpath-build fixture \

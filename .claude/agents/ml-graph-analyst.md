@@ -35,7 +35,7 @@ belief — including a belief you yourself established earlier.
   (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob (mbids,
   names, disambiguations, popularity). Written by `builder/…/artifact.py`, read
   independently by `api/…/graph_store.py`. Graphs live in `builder/scratch/`
-  (`graph-75k.bin` and successors; `graph-5k.bin` for quick iteration).
+  (`graph-75k.bin` and successors; the dev API boots the adopted artifact by default).
 - **The router.** Pure Dijkstra in `api/…/pathfinding.py`, no I/O. Cost per edge:
   `w_sim·(1−similarity) + w_jump·|Δpopularity| + w_floor·max(0, floor−pop_v)
   + w_avoid·avoidance + w_hop`. Weights live in `api/…/config.py`.
@@ -131,9 +131,12 @@ expected and welcome, not a failure.
 - **You do not edit source.** You have no `Edit` tool by design. You investigate and
   recommend; the main agent applies changes. This preserves the separation that caught
   the bad tuned weights before they shipped.
-- **Use `Write` only for** new throwaway probe scripts (put them in the scratchpad
-  directory, not the repo) and new findings documents under
+- **Use `Write` only for** probe scripts and new findings documents under
   `docs/superpowers/findings/`. Never overwrite existing source or config.
+  Scripts that produce a recorded finding belong in `builder/analysis/<dated-dir>/` with
+  a README (2026-07-23 defect-remediation-and-cost-retune spec §4.2; Phase 1 log
+  ~lines 778–783 records scripts nearly lost when a scratchpad was cleaned) — do not put
+  them in a scratchpad directory, which is not durable.
 - Graph rebuilds are expensive and the crawl archive is complete — reason about whether
   a question needs a rebuild or can be answered from an existing `.bin` first.
 - **Stay inside your brief.** If you are about to run a measurement that no question you

@@ -28,6 +28,15 @@ one rule). Nothing here supersedes
 > **§2.8** identifies the cause by one-knob intervention, and it is **not** what §2.4
 > suspected. Read **§2.8 first**, then §2.2's two correction notices. **§2.4 is overturned
 > with its sign inverted — do not act on it.** All four of §2.7's questions remain open.
+>
+> **Update 2026-07-23 — the decision has been made: repair + retune.** The owner chose the
+> repair-then-retune route; the governing design is
+> `specs/2026-07-23-defect-remediation-and-cost-retune-design.md`. **Track 1 (the §2.8
+> tie-break fix) is complete and the rebuilt artifact is adopted** — identity and
+> verification in `findings/2026-07-23-tiebreak-fix-adoption.md`. **Track 2 (the
+> cost-function retune) is next.** This document's §2 remains the authoritative record of
+> the defect and of the three conflated quantities (degree ≠ fame, popularity ≠ fame,
+> raw popularity ≠ percentile) — those warnings are still live.
 
 ---
 
@@ -50,6 +59,11 @@ one rule). Nothing here supersedes
 In `graph-t15-capfix.bin` — the artifact adopted at the end of Phase 2 and the one the app
 currently routes on — **the most popular artists are among the *least* connected nodes,
 and the highest-degree nodes are insular micro-genre artists.**
+
+> **⚠ CORRECTED 2026-07-23 — "currently routes on" is stale.** The app now routes on
+> `graph-t15-tiebreakfix.bin` (Track 1 of the repair+retune design); see
+> `findings/2026-07-23-tiebreak-fix-adoption.md`. `graph-t15-capfix.bin` remains this
+> section's baseline artifact — all measurements below are unchanged and still describe it.
 
 ### 2.2 The measurements
 
@@ -92,7 +106,7 @@ compared against `graph-t15-control.bin` (same crawl, legacy capping).
 | original `graph-75k.bin` | 74,998 | 4,014,354 | 44 | 357 | 11,050 |
 | `graph-t15-control.bin` | 74,991 | 4,101,222 | 49 | 363 | 11,241 |
 | `graph-t15-d025.bin` (damping 0.25) | 74,750 | 1,294,810 | 14 | 49 | 50 |
-| **`graph-t15-capfix.bin` (ADOPTED)** | **74,191** | **898,314** | **9** | **44** | **50** |
+| **`graph-t15-capfix.bin` (ADOPTED at time of measurement; superseded by `graph-t15-tiebreakfix.bin` 2026-07-23)** | **74,191** | **898,314** | **9** | **44** | **50** |
 
 - capfix median degree is **9**; the cap is **50**. So The Beatles (7), Coldplay (4),
   R.E.M. (3), Muse (4) sit **below the median connectivity of the graph**.
@@ -381,7 +395,7 @@ graph, either policy, never below the 95th percentile.
 | `graph-75k.bin` (original) | **−0.290** | **83.0 %** | 39.5 % |
 | `graph-t15-control.bin` | **−0.262** | **82.3 %** | 35.3 % |
 | `graph-t15-d050.bin` | ~~+0.380~~ → **+0.468** | ~~18.4 %~~ → **7.8 %** | ~~1.7 %~~ |
-| **`graph-t15-capfix.bin` (ADOPTED)** | **+0.597** | **5.2 %** | 0.5 % |
+| **`graph-t15-capfix.bin` (ADOPTED at time of measurement; superseded by `graph-t15-tiebreakfix.bin` 2026-07-23)** | **+0.597** | **5.2 %** | 0.5 % |
 | `graph-t15-rankfix.bin` | ~~+0.658~~ → **+0.596** | ~~3.5 %~~ → **3.9 %** | ~~0.3 %~~ |
 
 > **⚠ Two rows above were wrong and are struck.** Under a fixed popularity reference,
@@ -1120,12 +1134,16 @@ measuring; keep that. *(Completed at closeout D3 — only `capfix` was recorded 
 
 | artifact | sha256 | used in |
 |---|---|---|
-| `graph-t15-capfix.bin` **(ADOPTED)** | `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237` | everything |
+| `graph-t15-capfix.bin` **(ADOPTED until 2026-07-23)** | `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237` | everything in §2; now the baseline the §2.8 tie-break fix was verified against |
+| `graph-t15-tiebreakfix.bin` **(ADOPTED — current)** | not restated here — see `findings/2026-07-23-tiebreak-fix-adoption.md`, which owns this artifact's identity | Track 1 remediation of §2.8 (spec `specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §3) |
 | `graph-t15-rankfix.bin` | `87d9bf7edfc51fb13ee0fdf6a4216d01df7d3aa7f38b66ea9b7b8c2e7addae05` | §2.9 tail probe, §2.10 |
 | `graph-t15-control.bin` | `d3016bc06dd9e62de9e6edff3206ca9a3d8366243ca18b2588c0a7063042f57a` | §2.2, §2.9, §2.10 nulls |
 | `graph-75k.bin` (original) | `478426753de39282f99c0b8955a846d159deb656576026b265bec9060977d5ff` | §2.2, §2.9 |
 | `graph-t15-d050.bin` | `6fb52ff8e918cf14da6e4fc6fa52052a66d7bfdb35a7f910460c2c8868c80a20` | §2.9, §2.10 |
 | `graph-t15-d025.bin` | `2811e87d1c900e4ec233317c05143ccaec5a3f0e1fb3c531c04455594bb27e65` | §2.2 only — **do not cite, see §2.2's correction notice** |
+
+`findings/2026-07-23-tiebreak-fix-adoption.md` is authoritative for the current adopted
+artifact's identity — this table points to it rather than restating its checksum.
 
 ---
 
@@ -1135,13 +1153,24 @@ measuring; keep that. *(Completed at closeout D3 — only `capfix` was recorded 
   **unresolved** (no clear winner, pair-dependent) — and **moot until the cost function is
   settled** (§2.9, §2.13): both prototypes were tuned on a substrate where no mechanism
   reached below the 92nd popularity percentile.
-- **Phase 1 is paused pending the owner's decision on §2.**
+- **Updated 2026-07-23:** the owner's decision on §2 was taken — repair + retune, per
+  `specs/2026-07-23-defect-remediation-and-cost-retune-design.md`. **Track 1 (the §2.8
+  tie-break repair) is complete and its artifact adopted** — identity owned by
+  `findings/2026-07-23-tiebreak-fix-adoption.md`, not restated here (§5 below points to
+  it). **Track 2 (the cost-function retune) is next**, not yet started.
 - **Updated 2026-07-23:** the diagnosis changed. §2.12 concludes this is a **cost-function**
   problem rather than a graph one. **No graph change is indicated by any of §2.8–§2.12** —
   the §2.8 tie-break fix (Radiohead, The Beatles) remains real, cheap, and a standalone
   owner decision about whether it earns its own rebuild-and-re-adopt cycle. The next
   experiment is a three-knob cost-function sweep whose success criterion is still open
   (§7.1 item 5).
+  > **⚠ SUPERSEDED 2026-07-23 (later same day) — both clauses above are stale.** The
+  > "standalone owner decision" was made: the tie-break fix **was** rebuilt and adopted
+  > as Track 1 (see the bullet above and `findings/2026-07-23-tiebreak-fix-adoption.md`).
+  > And §7.1 item 5's success criterion is **no longer open** — it is settled by
+  > `specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §4.3 ("settles log
+  > §7.1 item 5"): scored on an external fame proxy, never in-graph popularity. Retained
+  > below as the record of what was still unresolved before that spec.
 - Two mechanism shapes are specified and prototyped but exist only in scratch.
 - Stage 1 of the diagnostic experiment was **never run** — Stage 0 gated it, then the
   listen superseded it, then §2 halted the work.

@@ -532,6 +532,12 @@ pre-registered null outcome is unchanged from before this test existed, so the t
 manufacture a win — it can only confirm the existing answer or overturn it on the same
 evidence class that produced it.
 
+> **Scope note, owner, 2026-07-23:** this prohibition binds *this verdict* — re-testing a
+> closed result because it was unwelcome. It does **not** bar listening tests of new
+> candidates on new findings; the owner judged the blanket reading "too strong" and new
+> listens run where appropriate going forward. See
+> `specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §1.
+
 ### Conditions
 
 - Blind, two ports, mapping written to a file **before** serving; the owner receives two
@@ -752,6 +758,10 @@ at 0.25 / 0.5 / 0.75 and rejected. The overlap-family metrics are not trustworth
 effect sizes (adjudication §6 claims 41–42) — that is a finding about the *instrument*, and
 it would have held identically had it favoured `capfix`. A third listening test is
 forbidden.
+
+> **Scope note, owner, 2026-07-23:** "forbidden" means re-testing *this adoption*. New
+> candidates on new findings may be listened to — see §15's scope note and
+> `specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §1.
 
 ---
 

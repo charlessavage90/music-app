@@ -3,6 +3,17 @@
 **Role: ACTIVE.** Written 2026-07-22 at Phase 2 closeout, for a session with no prior
 context. Delete once Phase 1 has a written plan.
 
+> **⚠ SUPERSEDED 2026-07-23 — this file's stated deletion condition has been met.**
+> Phase 1 resumed 2026-07-23: the owner chose repair + retune, **Track 1 (the §2.8
+> tie-break fix) is done and its rebuilt artifact adopted**, and **Track 2 (the
+> cost-function retune) is next.** This file is retained only for its **Phase 2**
+> outcome notes (§2–§3 below) — those are still accurate. For current status, read
+> [`2026-07-23-repair-and-retune-execution-log.md`](2026-07-23-repair-and-retune-execution-log.md).
+> For the adopted artifact's identity, read
+> [`findings/2026-07-23-tiebreak-fix-adoption.md`](findings/2026-07-23-tiebreak-fix-adoption.md).
+> Do not act on §1's "Next action" or §6's artifact line below — both are corrected
+> inline where they appear.
+
 ---
 
 ## 1. Where things stand
@@ -24,6 +35,12 @@ Read **execution log §16 (verdict) and §17 (adoption)** before anything else i
 `docs/superpowers/`. Where another document disagrees with those two sections, they win.
 
 **Next action: plan Phase 1.** It is unplanned. It leads with **C3**.
+
+> **⚠ CORRECTED 2026-07-23 — no longer true.** Phase 1 resumed and was planned: Track 1
+> (§2.8 tie-break fix) is done and adopted; Track 2 (cost-function retune, which C3 is
+> now part of) is next per
+> `specs/2026-07-23-defect-remediation-and-cost-retune-design.md`. Current status:
+> `2026-07-23-repair-and-retune-execution-log.md`.
 
 ---
 
@@ -112,8 +129,15 @@ about the tail, it needs an instrument other than the owner's ear.
   in `builder/scratch/` and they are **not** interchangeable. The adopted one is
   `graph-t15-capfix.bin`, sha256
   `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237`.
+  > **⚠ CORRECTED 2026-07-23 — `graph-t15-capfix.bin` is no longer the adopted artifact.**
+  > It is now the §2 baseline. The app routes on `graph-t15-tiebreakfix.bin`; identity
+  > and checksum are owned by `findings/2026-07-23-tiebreak-fix-adoption.md` — do not
+  > cite the checksum above as current.
 - The 500-node test fixtures **are** committed now (they were silently not, until
   2026-07-22 — see execution log §17). The 5k dev graph is not; build it or copy it.
+  > **⚠ CORRECTED 2026-07-23 — the 5k dev fixture is retired.** The API now defaults to
+  > the adopted 75k artifact (spec `2026-07-23-defect-remediation-and-cost-retune-design.md`
+  > §1 decision 4); do not build or rely on `graph-5k.bin` for dev use.
 - **A fix can break something by removing a property nothing declared it depended on.**
   Bounding hub degree — the central Phase 2 change, and correct — silently turned the dev
   fixture into a local cluster with no famous artists in it, because the fixture's default

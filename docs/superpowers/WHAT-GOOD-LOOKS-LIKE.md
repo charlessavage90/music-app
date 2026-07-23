@@ -52,6 +52,33 @@ proxy. This is one reason metrics and ear disagreed throughout Phase 2 — they 
 measuring the same object.
 *Observation, one instance. Telemetry measures the real thing.*
 
+**5. `known` should route to an artist highly similar to K but *more obscure*.**
+"I know The Beatles, give me a Beatles-like act I haven't heard." The load-bearing word
+is *more obscure*: an occasional 1:1 swap on `known` is an acceptable outcome **only when
+the substitute is less famous than the artist bypassed.** A famous-for-famous swap
+(the owner's observed case: Bowie → Pink Floyd → Beatles) is not. This is not an
+endorsement of 1:1 swapping as the `known` mechanism — it is a bound on when the swap
+outcome is tolerable.
+*Owner-stated, 2026-07-23, from live use. The `known` semantic itself is his firm
+specification (Phase 1 log §3.4); the less-famous bound is the calibration for judging it.*
+
+**6. `dislike` should 1:1-swap much less often than `known`.**
+The two signals are meant to behave differently — `dislike` steers around a stylistic
+neighbourhood, `known` seeks a more-obscure cousin — so a bare one-for-one substitution
+is a stronger sign of failure on `dislike` than on `known`, where it is occasionally fine
+(see 5).
+*Owner-stated, 2026-07-23. Preference, not a threshold.*
+
+**7. On a long path, a local bypass deviation is correct; sustained confinement is the
+defect.**
+When a path is long (>~9), a single bypass sometimes changes only a few nodes near the
+bypass point. That is the *expected* behaviour — the path deviates locally to accommodate
+one rejection. It becomes a defect only if **several bypasses in a row** keep the changes
+confined to the same group of nodes. One or two local deviations are not "swapping."
+*Owner-stated, 2026-07-23, and gut-checked against use: he saw the acceptable form this
+session and did not see the defect form — local deviations resolved into larger changes
+within a further bypass or two.*
+
 ---
 
 ## How to run the test, calibrated

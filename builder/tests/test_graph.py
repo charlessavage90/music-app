@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from artistpath_builder.graph import (
     build_graph,
@@ -175,3 +176,71 @@ def test_symmetrise_preserves_the_mutual_knn_degree_bound():
         adjacency[leaf] = {"hub": 1.0}
     capped = symmetrise(mutual_knn_cap(adjacency, k=4))
     assert max(len(edges) for edges in capped.values()) <= 4
+
+
+def test_mutual_knn_ranks_on_the_ranking_argument_when_given():
+    # The Phase 1 log §2.8 defect scenario: emitted scores tied at the p99
+    # ceiling, unclipped strengths distinct. Selection must follow the
+    # ranking, not fall through to the MBID tie-break over the tied scores.
+    adjacency = {
+        "a": {"e": 1.0, "c": 1.0},  # both clipped to the ceiling
+        "e": {"a": 1.0},
+        "c": {"a": 1.0},
+    }
+    ranking = {
+        "a": {"e": 5.3, "c": 5.0},  # unclipped: e is genuinely stronger
+        "e": {"a": 5.3},
+        "c": {"a": 5.0},
+    }
+    capped = mutual_knn_cap(adjacency, k=1, ranking=ranking)
+    assert "e" in capped["a"]
+    assert "c" not in capped["a"]
+
+
+def test_mutual_knn_without_ranking_keeps_the_old_tie_break():
+    # Same inputs, no ranking: the lowest MBID wins the tie, as before.
+    adjacency = {
+        "a": {"e": 1.0, "c": 1.0},
+        "e": {"a": 1.0},
+        "c": {"a": 1.0},
+    }
+    capped = mutual_knn_cap(adjacency, k=1)
+    assert "c" in capped["a"]
+    assert "e" not in capped["a"]
+
+
+def test_mutual_knn_emits_adjacency_scores_not_ranking_values():
+    # The ranking decides membership only; the artifact still carries the
+    # rescaled scores.
+    adjacency = {
+        "a": {"e": 1.0},
+        "e": {"a": 1.0},
+    }
+    ranking = {
+        "a": {"e": 5.3},
+        "e": {"a": 5.3},
+    }
+    capped = mutual_knn_cap(adjacency, k=1, ranking=ranking)
+    assert capped["a"]["e"] == 1.0
+
+
+def test_mutual_knn_ranking_ties_still_break_on_lowest_mbid():
+    # Determinism (design §9) must survive the new argument: genuinely tied
+    # unclipped strengths resolve the same way every run.
+    adjacency = {
+        "a": {"e": 0.9, "c": 0.8},
+        "e": {"a": 0.9},
+        "c": {"a": 0.8},
+    }
+    ranking = {
+        "a": {"e": 2.0, "c": 2.0},
+        "e": {"a": 2.0},
+        "c": {"a": 2.0},
+    }
+    capped = mutual_knn_cap(adjacency, k=1, ranking=ranking)
+    assert "c" in capped["a"]
+
+
+def test_mutual_knn_rejects_ranking_with_a_different_node_set():
+    with pytest.raises(ValueError, match="ranking"):
+        mutual_knn_cap({"a": {}}, k=1, ranking={"b": {}})
