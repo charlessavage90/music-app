@@ -23,13 +23,19 @@ one rule). Nothing here supersedes
 > **Do not resume mechanism tuning, and do not treat any "hubfrac"/"payload" figure as
 > meaning "famous artists," until the owner has decided how to handle §2.** The decision is
 > the owner's and had not been made when this was written.
+>
+> **Update 2026-07-22 — the mechanism is now determined; the decision still is not.**
+> **§2.8** identifies the cause by one-knob intervention, and it is **not** what §2.4
+> suspected. Read **§2.8 first**, then §2.2's two correction notices. **§2.4 is overturned
+> with its sign inverted — do not act on it.** All four of §2.7's questions remain open.
 
 ---
 
 ## 1. How to read this document
 
-- **§2 is the blocker.** Facts, discovery mechanism, suspected cause. No solutions — by
-  explicit instruction, this document does **not** propose fixes or diagnose deeply.
+- **§2 is the blocker.** Facts, discovery mechanism, and — as of 2026-07-22 — the
+  determined cause in **§2.8**. Still **no solutions**: §2.8 says what the mechanism is,
+  not what to do about it. Read §2.8 before §2.4, which it overturns.
 - **§3 is the work record**, start to finish, including two independent ML-analyst reviews
   and what each overturned.
 - **§4 is what is closed** and must not be re-argued.
@@ -49,6 +55,14 @@ and the highest-degree nodes are insular micro-genre artists.**
 
 All from `graph-t15-capfix.bin` (sha256 `c8af6eaccc08de0a85db7f12b2fed101dc3acc720eda1781a6f3a945f50cf237`)
 compared against `graph-t15-control.bin` (same crawl, legacy capping).
+
+> **⚠ CORRECTED 2026-07-22 — neither comparison below isolates one variable.** The
+> degree measurements themselves are sound and are unchanged. What is corrected is what
+> they can be attributed to. **capfix vs control differs in two knobs**, not one:
+> whether reciprocity is required, *and* whether the top-k selection ranks clipped or
+> unclipped scores (the deleted `pre_symmetrise` arm truncated before `rescale_scores`
+> ran). **capfix vs d025 differs in three.** The isolating one-knob experiment has since
+> been run — see **§2.8**, which supersedes §2.4 and identifies the operative knob.
 
 **Degree of the most popular artists, control → capfix:**
 
@@ -92,8 +106,18 @@ lo-fi / synthwave / chiptune micro-genre artists, mixed with a few broad names:
 > AC/DC, idealism, 林俊傑, sleepy fish, Stonebank, EGOIST, Miami Nights 1984, Nirvana,
 > Metallica, Daft Punk, HM Surf, Kobaryo, Astronaut, Boney James, Purrple Cat, USAO
 
-**`d025` — the same mutual-kNN capping but with `similarity_damping=0.25` — does not show
-this:** Radiohead 50, The Beatles 50, Coldplay 50, all present and at the cap.
+**`d025` does not show this:** Radiohead 50, The Beatles 50, Coldplay 50, all present and
+at the cap.
+
+> **⚠ CORRECTED 2026-07-22 — the original wording of this line said `d025` was "the same
+> mutual-kNN capping but with `similarity_damping=0.25`". That is wrong, and it was the
+> load-bearing evidence that the effect is capfix-specific.** `d025` differs in **three**
+> knobs, not one. It is **not** `p99_log_clip` at all: it carries 642,643 distinct score
+> values and **zero** edges at exactly 1.0, which is impossible under the clip, where
+> ~1% of edges land at the ceiling by construction. It also **cannot be rebuilt with
+> current code** — `rescale_scores` now raises on that combination, since
+> `percentile_rank` was deleted at Task 16. **Do not cite `d025` as a witness for
+> anything.** §2.8's Arm 2 supersedes it as a genuine one-knob comparison.
 
 **What capfix dropped**, comparing MBID sets against control:
 
@@ -148,7 +172,23 @@ review. The chain was:
 his own perception of the artists in the result. No structural test asserts that famous
 artists remain well-connected, and none of the offline metrics would have revealed it.
 
-### 2.4 Suspected root cause (stated as suspicion; not investigated further, by instruction)
+### 2.4 Suspected root cause — ⛔ OVERTURNED 2026-07-22, WITH THE SIGN INVERTED
+
+> **This section was wrong. It is retained so the reasoning can be audited; do not act on
+> it and do not restate it. §2.8 replaces it with a measured mechanism.**
+>
+> The suspicion below claims famous artists' lists go **unreciprocated**. Measured, they
+> are **the most reciprocated in the graph** — 0.959 for the top 25 by popularity against
+> a graph-wide per-node median of 0.511, declining monotonically as artists get more
+> obscure. The mechanism is real and it is not the cause of the inversion: it explains the
+> graph's *overall* degree level, and it is identical in both arms of §2.8's experiment.
+>
+> It survived because it is consistent with every measurement in §2.2, and consistency
+> was all that was ever checked. **That is the lesson worth carrying: "consistent with
+> every observation" is not a cause.** Two mechanisms were consistent with the same
+> evidence and only intervention separated them.
+
+*Original text, retained for audit:*
 
 Mutual k-NN keeps an edge only if **each endpoint ranks the other in its top-k**. A broad,
 famous artist is listed by thousands of others, but its own top-k list is short and
@@ -161,6 +201,11 @@ clusters not at all**. This is consistent with every measurement in §2.2 and wi
 behaving differently (damping changes the scores, hence the top-k rankings, hence which
 edges are mutual). **It has not been verified beyond that consistency, and no deeper
 investigation was performed.**
+
+*(Two further errors in the passage above, for completeness: inbound edges do not exist
+when the cap runs — `symmetrise` runs one line later, at `pipeline.py:219` — so nothing
+inbound is pruned. And the `d025` clause rests on the mischaracterisation corrected in
+§2.2.)*
 
 ### 2.5 What cuts against alarm — required context
 
@@ -194,7 +239,89 @@ A session reading only §2.1–2.4 would over-correct. All of the following are 
 - Is Radiohead's absence a defect to correct, and are there other absences like it?
 - Does any of this change the Phase 2 adoption decision?
 
-**No solution is proposed in this document, by instruction.**
+**No solution is proposed in this document, by instruction.** §2.8 determines the
+*mechanism*; it does not answer any of the four questions above, all of which remain the
+owner's.
+
+### 2.8 The mechanism, determined by intervention (2026-07-22)
+
+Run by `ml-graph-analyst` in two checkpointed parts, briefed with two candidate mechanisms
+given unranked and a mandatory third "neither" slot, and required to pre-register the
+discriminating measurement before running it.
+
+**The experiment.** A replay of the build from the archive up to `pipeline.py:218`,
+branching on **exactly one knob**: whether the top-k selection inside `mutual_knn_cap`
+ranks **clipped** or **unclipped** scores. Same archive, same damping, same p99 (computed
+once over the full uncapped array, so emitted scores are identical between arms), same k,
+same tie-break code, same `symmetrise`, same `largest_component`.
+
+**Arm 1 reproduced `capfix` exactly** — N, E, MBID set, and every per-artist degree. That
+is what makes Arm 2 interpretable.
+
+| | Arm 1 (= capfix, clipped ranking) | Arm 2 (unclipped ranking) |
+|---|---|---|
+| Radiohead | **isolated singleton, 0 edges** | **degree 50, in the LCC** |
+| The Beatles | 7 | 50 |
+| Coldplay | 4 | 50 |
+| R.E.M. | 3 | 47 |
+| median degree, popularity rank 1–10 | 6.5 | 47.5 |
+| median degree, rank 11–25 | 10 | 44 |
+| median degree, rank 101–250 | 27 | 31 |
+| **median degree, whole graph** | **9** | **9** |
+| **frac of nodes with degree < 8** | **0.449** | **0.449** |
+| N / E | 74,191 / 898,314 | 74,193 / 898,006 |
+
+**The global shape does not move.** Two nodes and 308 edges differ, out of 74k and 898k.
+The inversion is entirely a top-of-distribution artefact.
+
+**Why it binds only at the top.** `p99_log_clip` collapses the top 1% of raw scores into a
+single value, so a node whose ceiling pool exceeds k has a top-k that is decided entirely
+by the tie-break — `sorted(..., key=lambda pair: (-pair[1], pair[0]))` at `graph.py:76-78`,
+i.e. **the k lowest destination MBIDs**. Source out-lists are hard-capped at 100 upstream.
+Only **285 nodes of 74,993 (0.4%)** have a ceiling pool above 50 — but 25 of the top 26 by
+popularity are **fully saturated**, all 100 entries tied. Among those 285, degree
+correlates with MBID rank at Spearman **−0.722**; among everyone else, **+0.105**, which is
+the graph-wide baseline, i.e. nothing.
+
+**Radiohead's terminal state:** zero surviving mutual edges, component size 1, removed by
+`largest_component`. Every one of its 50 selected partners is itself ceiling-saturated, so
+it had no exempt channel at all.
+
+**The reciprocity measurement that falsified §2.4:** fraction of pre-cap directed edges
+reciprocated is **0.4366** graph-wide, per-node median **0.511**; by popularity band,
+rank 1–25 → **0.959**, 26–100 → 0.852, 101–1,000 → 0.731, 1,001–10,000 → 0.634.
+
+**In plain language.** The similarity scores are counts, and the scoring step squashes the
+top 1% of them down to one identical value. Each artist then keeps its 50 best neighbours
+out of the 100 the data source gave it. For an ordinary artist that is a real choice. For a
+very famous artist *every* neighbour is in that squashed top 1%, so they are all tied, and
+the code falls back on keeping whichever 50 have the earliest-sorting random identifier.
+The neighbour has to make the same arbitrary choice back, and both have to agree — usually
+they do not. Radiohead's never agreed, so it connected to nothing and was deleted.
+
+**One finding recorded as measured-but-unverified.** In the archived source data, edge
+destinations skew monotonically toward high-hex MBIDs (first-hex share 0.0248 at `0` rising
+to 0.1125 at `f`, against a uniform crawled population), and famous artists average MBID
+percentile 0.772. If real, a tie-break keeping the *lowest* MBIDs is systematically
+anti-famous rather than merely arbitrary, and amplifies the effect roughly 3×. **This has
+no proposed mechanism and has not been independently checked. Verify before citing it.**
+Nothing above depends on it: Arm 2 recovers the graph regardless of *why* famous artists
+lose the coin toss.
+
+**What this does not fix.** Arm 2 still emits clipped scores. The p99 ceiling defect
+survives untouched — including §3.7's near-zero-cost hub expressway and the flattened
+transition signal. This accounts for **one of that defect's consequences**, not the defect.
+
+**What remains the owner's call, and is not decided here.** `capfix` was adopted on two
+blind listening tests, and §12 of the Phase 2 log attributes the win to removing hubs'
+ability to act as universal shortcuts — which is the same mechanism, in its extreme form.
+Whether Arm 2 is *better to listen to* is unmeasured and is a product question, not a graph
+question. Note also that §15–17 forbid a third listening test; whether that bars a listen of
+a **new** candidate on a **new** finding is a reading the owner should make deliberately.
+
+**Scripts** (scratchpad, throwaway, not in git — will be lost): `precheck_mbid.py`,
+`replay.py`, `decompose.py`, with cached pre-cap arrays in `precap.npz` and the run log in
+`replay.log`.
 
 ---
 
