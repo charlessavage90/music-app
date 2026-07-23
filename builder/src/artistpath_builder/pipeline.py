@@ -215,7 +215,18 @@ def build_from_archive(
         for dst, score in edges.items():
             indegree[dst] += score
 
-    adjacency = mutual_knn_cap(adjacency, config.max_neighbours_per_artist)
+    # Rank the cap on UNCLIPPED strengths. The clip rescale ties the top ~1%
+    # of scores at exactly 1.0; ranking those tied values let the MBID
+    # tie-break decide which neighbours a saturated artist kept, collapsing
+    # the most famous artists to near-zero degree (Phase 1 log §2.8). The
+    # emitted scores are still the rescaled ones.
+    ranking: Adjacency = {
+        mbid: {dst: strength for dst, strength in scored}
+        for mbid, scored in scored_adjacency.items()
+    }
+    adjacency = mutual_knn_cap(
+        adjacency, config.max_neighbours_per_artist, ranking=ranking
+    )
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
     logger.info("largest component: %d of %d artists", len(keep), len(adjacency))
