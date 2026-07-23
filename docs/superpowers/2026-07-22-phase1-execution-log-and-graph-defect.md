@@ -319,6 +319,97 @@ Whether Arm 2 is *better to listen to* is unmeasured and is a product question, 
 question. Note also that §15–17 forbid a third listening test; whether that bars a listen of
 a **new** candidate on a **new** finding is a reading the owner should make deliberately.
 
+### 2.9 The larger finding — mutual k-NN inverted the graph's popularity assortativity (2026-07-23)
+
+**This supersedes §2.8 in importance.** §2.8's tie-break defect is real and explains
+Radiohead and The Beatles. It is **not** the reason the product does not surface obscure
+artists. This is.
+
+#### What was measured
+
+Prompted by the owner's repeated note that *every* artist in the blind listen felt
+well-known, the interior artists of all 36 judged paths were scored against the graph's own
+popularity distribution.
+
+**Every interior artist in all 36 paths sits above the 90th popularity percentile.** 100%,
+in every arm, at every bypass depth. The least popular artist offered anywhere in the test
+was **Whitney Houston, 91.9th percentile**; 57% of the 102 distinct interior artists are
+above the **99th**. Pooled mean percentile by depth: d5 **0.982** → d20 **0.978**. On the
+shipped mechanism it moves the wrong way (0.992 → 0.994). Not an endpoint artifact — the
+deliberate "pop-obscure" pair ends at Wishbone Ash (87.6th percentile) and its interiors run
+0.992–0.994, i.e. the path routes **above its own destination** and never dips.
+
+#### The pre-registered follow-up, and its null
+
+Predicted before running: if removing the p99 ceiling opened the obscure tail, `rankfix`
+would reach lower. **It does not.** Same 3 pairs, shipped router, 20 bypasses, two victim
+policies (highest `hub_penalty`, and most-popular-interior):
+
+| graph | policy | d0 | d5 | d10 | d15 | d20 |
+|---|---|---|---|---|---|---|
+| capfix | hub_penalty | 0.995/0.981 | 0.993/0.981 | 0.994/0.981 | 0.994/0.981 | 0.995/0.981 |
+| capfix | most-popular | 0.995/0.981 | 0.995/0.981 | 0.992/0.982 | 0.994/0.981 | 0.991/0.965 |
+| rankfix | hub_penalty | 0.995/0.990 | 0.997/0.982 | 0.991/0.957 | 0.997/0.991 | 0.996/0.988 |
+| rankfix | most-popular | 0.995/0.990 | 0.988/0.950 | 0.997/0.982 | 0.990/0.950 | 0.991/0.957 |
+
+*(mean / lowest single interior percentile.)* **Flat everywhere.** Twenty bypasses, either
+graph, either policy, never below the 95th percentile.
+
+#### The cause — and it is the adopted cap strategy
+
+| artifact | popularity assortativity | neighbours of top-500 below p90 | below p50 |
+|---|---|---|---|
+| `graph-75k.bin` (original) | **−0.290** | **83.0 %** | 39.5 % |
+| `graph-t15-control.bin` | **−0.262** | **82.3 %** | 35.3 % |
+| `graph-t15-d050.bin` | +0.380 | 18.4 % | 1.7 % |
+| **`graph-t15-capfix.bin` (ADOPTED)** | **+0.597** | **5.2 %** | 0.5 % |
+| `graph-t15-rankfix.bin` | **+0.658** | **3.5 %** | 0.3 % |
+
+**Mutual k-NN inverted the sign.** Before it, the graph was *disassortative* — famous
+artists were connected mostly to obscure ones, which is exactly the structure a "journey to
+somewhere you haven't heard" needs. After it, famous artists are connected almost only to
+each other. **No cost function can route to an obscure artist along edges that do not
+exist.**
+
+The mechanism is the reciprocity rule, and it is **§2.4's candidate A, vindicated for a
+different quantity than it was tested on.** Obscure artists list famous ones; famous ones do
+not list back. Those edges are unreciprocated and pruned. §2.4 was correctly *falsified* as
+the cause of the **degree collapse** (§2.8 proved that is the tie-break) — but the asymmetry
+it described is real and produces the stratification. Two mechanisms, two different symptoms;
+overturning A for the first does not clear it for the second.
+
+#### What this does and does not establish
+
+- **Does not overturn the `capfix` adoption.** `control` is disassortative but carries
+  degree-11,241 hubs, and the owner preferred `capfix` blind, twice. Both things are true:
+  `capfix` removed the hub expressway *and* severed the route to obscurity. That is
+  precisely the owner's own summary of the Task 0 test — **improvement, not goodness.**
+- **Does not test a fix.** Whether a cap strategy exists that bounds degree *without*
+  inverting assortativity is **unmeasured**. `d050` sitting at +0.380 with 18.4 % is a
+  datapoint, not a recommendation; the damping arms were rejected on other grounds and
+  `d050` was never listened to.
+- **The link from assortativity to path behaviour is inference**, though the tail probe
+  measured the path behaviour directly on both graphs and found it flat on each.
+- **Thin evidence base for the path measurements:** 3 pairs, 102 distinct artists. The
+  assortativity figures are whole-artifact and not thin.
+
+#### Consequences for the paused work
+
+- **The A-vs-C mechanism question (§3.8) was decided on a substrate where no mechanism
+  reached below the 92nd percentile.** On the axis the owner cares about, the three arms are
+  indistinguishable. The bypass mechanism was never the binding constraint.
+- **§2.7's first open question is answered in one direction:** the *degree collapse* is not
+  what causes the coherence problems. Whether the *stratification* does is now the live
+  question.
+- **§17's carried success condition — "a hub-incidence-versus-bypass-count measurement
+  exists" — is now satisfied.** The channel is flat, on both graphs.
+- A `capfix` vs `rankfix` blind listen is **not** the next step. They differ by 0.06 in
+  assortativity and behave identically on the tail.
+
+**Scripts:** `builder/analysis/2026-07-23-popularity-stratification/`.
+
+---
+
 **Scripts — committed, not lost.** `builder/analysis/2026-07-22-cap-ranking-replay/`
 holds `part1_probe.py`, `precheck_mbid.py`, `replay.py`, `decompose.py` and `replay.log`,
 with a README covering the hardcoded paths and what they need to run. The ~75 MB

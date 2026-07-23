@@ -271,6 +271,28 @@ Two 75k artifacts, built from the same archive at commit `08c2831`, differing in
 one knob — where the neighbour cap is applied. Everything else identical: same entity
 filter, same rescale (`p99_log_clip`), same damping (0.0), same scoring.
 
+> **⚠ CORRECTED 2026-07-23 — "differing in exactly one knob" is FALSE, and this is the
+> primary warrant for the `capfix` adoption.** Changing `cap_strategy` changed **two**
+> things at once. The deleted `pre_symmetrise` arm truncated to the top-k on **unclipped**
+> strengths, *before* `rescale_scores` ran; `mutual_knn` ranks the top-k on **clipped**
+> scores, after. So `control` and `capfix` differ in whether reciprocity is required
+> **and** in whether the top-k selection can see the p99 ceiling. Established by code
+> reading and confirmed by a one-knob replay — see the Phase 1 log §2.8, which owns those
+> figures.
+>
+> **What this does and does not overturn.** The owner's blind preference for `capfix`
+> stands; he preferred it and that is not in question. What is overturned is the
+> *attribution* — this was a **package comparison**, so it does not establish that the
+> reciprocity rule caused the improvement. The sentence below, "three observations, all
+> mechanistically consistent with bounding degree after symmetrisation", is consistent
+> with the data and is **not** the only mechanism consistent with it.
+>
+> Two consequences worth carrying: a genuine one-knob arm against `capfix` (`rankfix`,
+> differing only in the rescale) exists, was built in the Task 15 sweep, and was **never
+> put to a listening test**; and adjudication §6 claim 39 ("the inverted neighbour cap is
+> a material driver of hub-seeking … upheld") rests in part on this comparison and
+> inherits the same caveat.
+
 | Arm | `cap_strategy` | artists | edges | sha256 |
 |---|---|---|---|---|
 | `arm1-control` | `pre_symmetrise` | 74,991 | 4,101,222 | `d3016bc06dd9e62de9e6edff3206ca9a3d8366243ca18b2588c0a7063042f57a` |

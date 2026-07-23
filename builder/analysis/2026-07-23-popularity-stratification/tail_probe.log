@@ -1,0 +1,48 @@
+
+==============================================================================
+capfix  N=74191  E=898314  median pop=0.302
+
+  --- victim policy: hubpen ---
+    Miles Davis  ->Daft Punk     d0: 0.993/0.993(n5)  d5: 0.991/0.987(n6)  d10: 0.988/0.982(n6)  d15: 0.988/0.982(n6)  d20: 0.991/0.987(n7)
+        d20: Miles Davis -> Nina Simone -> Leonard Cohen -> Nick Drake -> Yo La Tengo -> LCD Soundsystem -> Daft Punk
+    The Shins    ->Wishbone Ash  d0: 0.994/0.981(n8)  d5: 0.992/0.981(n8)  d10: 0.994/0.981(n9)  d15: 0.993/0.981(n9)  d20: 0.994/0.981(n10)
+        d20: The Shins -> Florence + the Machine -> Bastille -> Fall Out Boy -> Marilyn Manson -> Judas Priest -> ZZ Top -> Genesis -> Emerson, Lake & Palmer -> Wishbone Ash
+    Metallica    ->Taylor Swift  d0: 0.997/0.995(n4)  d5: 0.994/0.994(n4)  d10: 0.998/0.998(n5)  d15: 0.999/0.999(n4)  d20: 0.999/0.999(n5)
+        d20: Metallica -> Nirvana -> Moby -> Madonna -> Taylor Swift
+
+  --- victim policy: pop ---
+    Miles Davis  ->Daft Punk     d0: 0.993/0.993(n5)  d5: 0.997/0.997(n4)  d10: 0.985/0.982(n6)  d15: 0.991/0.982(n7)  d20: 0.998/0.997(n6)
+        d20: Miles Davis -> Tom Waits -> Wilco -> Spoon -> Beck -> Daft Punk
+    The Shins    ->Wishbone Ash  d0: 0.994/0.981(n8)  d5: 0.993/0.981(n9)  d10: 0.994/0.991(n11)  d15: 0.996/0.981(n13)  d20: 0.980/0.965(n7)
+        d20: The Shins -> The White Stripes -> Queen -> Electric Light Orchestra -> The Moody Blues -> Emerson, Lake & Palmer -> Wishbone Ash
+    Metallica    ->Taylor Swift  d0: 0.997/0.995(n4)  d5: 0.994/0.994(n4)  d10: 0.996/0.994(n6)  d15: 0.997/0.996(n7)  d20: 0.996/0.995(n6)
+        d20: Metallica -> Oasis -> The Smiths -> Yeah Yeah Yeahs -> Bon Iver -> Taylor Swift
+
+==============================================================================
+rankfix  N=74193  E=898006  median pop=0.430
+
+  --- victim policy: hubpen ---
+    Miles Davis  ->Daft Punk     d0: 0.994/0.990(n7)  d5: 0.998/0.997(n6)  d10: 0.982/0.957(n7)  d15: 0.997/0.992(n6)  d20: 0.993/0.988(n8)
+        d20: Miles Davis -> Ella Fitzgerald -> Michael Bublé -> Meghan Trainor -> Sam Smith -> Calvin Harris -> deadmau5 -> Daft Punk
+    The Shins    ->Wishbone Ash  d0: 0.994/0.991(n8)  d5: 0.996/0.982(n8)  d10: 0.995/0.991(n10)  d15: 0.996/0.991(n9)  d20: 0.996/0.991(n9)
+        d20: The Shins -> The Kooks -> Franz Ferdinand -> Placebo -> Marilyn Manson -> Ozzy Osbourne -> Rainbow -> Uriah Heep -> Wishbone Ash
+    Metallica    ->Taylor Swift  d0: 0.998/0.996(n5)  d5: 0.999/0.998(n5)  d10: 0.997/0.995(n6)  d15: 0.998/0.995(n5)  d20: 0.999/0.998(n5)
+        d20: Metallica -> U2 -> Elton John -> Lady Gaga -> Taylor Swift
+
+  --- victim policy: pop ---
+    Miles Davis  ->Daft Punk     d0: 0.994/0.990(n7)  d5: 0.974/0.950(n6)  d10: 0.998/0.998(n7)  d15: 0.980/0.950(n8)  d20: 0.980/0.957(n8)
+        d20: Miles Davis -> Sarah Vaughan -> Tony Bennett -> Michael Bublé -> Jason Mraz -> Maroon 5 -> Imagine Dragons -> Daft Punk
+    The Shins    ->Wishbone Ash  d0: 0.994/0.991(n8)  d5: 0.995/0.991(n9)  d10: 0.994/0.982(n8)  d15: 0.993/0.991(n9)  d20: 0.996/0.991(n10)
+        d20: The Shins -> Passion Pit -> Mumford & Sons -> Snow Patrol -> Oasis -> Aerosmith -> Deep Purple -> Rainbow -> Uriah Heep -> Wishbone Ash
+    Metallica    ->Taylor Swift  d0: 0.998/0.996(n5)  d5: 0.995/0.995(n5)  d10: 0.998/0.996(n6)  d15: 0.998/0.996(n7)  d20: 0.998/0.996(n5)
+        d20: Metallica -> Muse -> Arcade Fire -> Bon Iver -> Taylor Swift
+
+==============================================================================
+SUMMARY — mean / MIN interior popularity percentile, pooled over the 3 pairs
+graph     policy               d0              d5             d10             d15             d20
+capfix    hubpen      0.995/0.981     0.993/0.981     0.994/0.981     0.994/0.981     0.995/0.981
+capfix    pop         0.995/0.981     0.995/0.981     0.992/0.982     0.994/0.981     0.991/0.965
+rankfix   hubpen      0.995/0.990     0.997/0.982     0.991/0.957     0.997/0.991     0.996/0.988
+rankfix   pop         0.995/0.990     0.988/0.950     0.997/0.982     0.990/0.950     0.991/0.957
+
+(cell = mean interior percentile / lowest single interior artist reached)
