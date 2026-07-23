@@ -27,6 +27,15 @@ Recorded here because three open questions in the record were answered today:
    tests where appropriate going forward." Re-testing a *closed verdict* because it was
    unwelcome remains forbidden; a new candidate on a new finding may be listened to.
    A pointer note goes into the Phase 2 log at §15.
+4. **The 5k dev fixture is retired; dev defaults to the full 75k artifact.** Raised by
+   the owner (a deferred point from a prior session, never revisited): the 5k graph's
+   small shape makes manual results hard to trust. Confirmed against the record — unit
+   tests run on the two committed 500-node fixtures, not on it; it represents the
+   obscure tail worst (Phase 1 log §3.1 already abandoned it for testing); and its
+   seeding once produced a famous-artist-free dev graph (Phase 2 log §19). The full
+   artifact builds in ~30 s and loads fine at boot. `ApiConfig.graph_path` defaults to
+   the adopted artifact by name and is flipped at each adoption; the `fixture` command
+   survives only for the committed unit-test fixtures.
 
 ---
 
@@ -74,7 +83,9 @@ Invariants that must hold:
   `mutual_knn_cap`), so the popularity vector is invariant to this change.
 - **Determinism preserved** — the MBID tie-break stays for genuinely tied unclipped
   strengths; every ordering rule of spec §9 is untouched.
-- **No API change** — the APG1 contract is untouched; the api package needs no edit.
+- **No behavioural API change** — the APG1 contract is untouched. The only api-package
+  edit in Track 1 is the `ApiConfig.graph_path` *default* flipping to the adopted
+  artifact (decision input 4); routing code is untouched.
 
 ### 3.2 Verification
 
@@ -98,8 +109,10 @@ Invariants that must hold:
   identical stratification and identical tail behaviour; a listen would burn the
   owner's ear on a null. Adoption is by structural equivalence, recorded checksum, and
   the owner's ordinary use afterwards.
-- Rebuild the 5k dev fixture from the adopted artifact; verify The Beatles is findable
-  (the Phase 2 log §19 regression).
+- Flip `ApiConfig.graph_path`'s default to the adopted 75k artifact (decision input 4 —
+  the 5k dev fixture is retired) and smoke-check via that default: Radiohead and The
+  Beatles findable, a path routes between them. Update the dev-run guidance in
+  `CLAUDE.md` and the three READMEs.
 - Append a TEST-QUEUE entry: famous-endpoint neighbourhoods are the thing that changed —
   search Radiohead (now present), route through Beatles-class endpoints, bypass around
   them.

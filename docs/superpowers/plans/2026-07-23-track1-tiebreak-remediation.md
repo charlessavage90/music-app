@@ -19,7 +19,7 @@
 - Long-running Python with redirected output needs `python -u` (buffered jobs write 0-byte logs and look hung).
 - Determinism is a hard requirement (alpha design spec §9): every ordering decision explicit, ties break on lowest MBID.
 - **Figures rule:** expected values inside verification scripts are copies-for-execution and must carry a comment citing Phase 1 log §2.8, which owns them. Do not restate them in any new prose document except the one findings doc this plan creates (which then owns the *new* artifact's identity figures).
-- Branch: `phase1-repair-and-retune` (exists, pushed). Commit per task; do not touch `api/` or `frontend/` source.
+- Branch: `phase1-repair-and-retune` (exists, pushed). Commit per task. No `frontend/` changes; the only permitted `api/` change is Task 4's `ApiConfig.graph_path` default flip (spec §1 decision 4) — routing code stays untouched.
 - Artifacts are gitignored; a checksum in the findings doc is their only identity. Never `git add -A` (another session may share this tree).
 
 ---
@@ -536,27 +536,48 @@ invariance of shared-edge scores and popularity ordering vs capfix."
 
 ---
 
-### Task 4: Adopt — dev fixture, smoke check, and the adoption record
+### Task 4: Adopt — dev default flipped to the 75k artifact, smoke check, adoption record
+
+> **Amended 2026-07-23 (owner, spec §1 decision input 4):** the 5k dev fixture is
+> retired — its small shape makes manual results untrustworthy, unit tests run on the
+> committed 500-node fixtures instead, and its seeding once produced a famous-artist-free
+> dev graph (Phase 2 log §19). Dev now defaults to the full adopted artifact.
 
 **Files:**
-- Create: `builder/scratch/graph-5k.bin` (overwrite — gitignored dev fixture)
+- Modify: `api/src/artistpath_api/config.py:12-18` (the `graph_path` default and its comment)
+- Modify: `CLAUDE.md` (api dev-server command block; the "No dev or production graph artifact is in git" paragraph)
+- Modify: `README.md`, `api/README.md`, `frontend/README.md` (dev-run lines naming `graph-5k.bin`)
+- Modify: `.claude/agents/ml-graph-analyst.md:38` (the `graph-5k.bin` "quick iteration" mention)
 - Create: `docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`
 - Modify: `docs/README.md` (current-state block + findings table row)
 - Modify: `docs/superpowers/TEST-QUEUE.md` (new QUEUED entry at the top)
 
 **Interfaces:**
 - Consumes: Task 3's verified `graph-t15-tiebreakfix.bin` and the `verify.py` output (sha256, degree lines).
-- Produces: the adopted-artifact record every later session resolves identity against; the dev fixture the API's default `ARTISTPATH_GRAPH` points at.
+- Produces: the adopted-artifact record every later session resolves identity against; an API that boots the adopted 75k artifact by default.
 
-- [ ] **Step 1: Rebuild the 5k dev fixture from the adopted artifact**
+- [ ] **Step 1: Flip the dev default to the adopted artifact**
 
-```bash
-cd builder && UV_LINK_MODE=copy uv run artistpath-build fixture --graph scratch/graph-t15-tiebreakfix.bin --out scratch/graph-5k.bin --size 5000
+In `api/src/artistpath_api/config.py`, replace the `graph_path` block (lines 12–18) with:
+
+```python
+    # --- graph ----------------------------------------------------------
+    # Default is the ADOPTED 75k artifact, by name — flipped at each adoption
+    # (spec 2026-07-23 §1 decision 4; closeout checks this default is not
+    # stale). It is gitignored: a fresh clone copies it (or the archive) from
+    # another machine and verifies the sha256 against
+    # docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md.
+    # The retired 5k dev fixture is NOT a substitute — its snowball shape
+    # misrepresents the obscure tail, which is what bypass work exercises.
+    # One env var swaps the graph without code changes.
+    graph_path: str = os.environ.get(
+        "ARTISTPATH_GRAPH", "../builder/scratch/graph-t15-tiebreakfix.bin"
+    )
 ```
 
-Expected: `wrote fixture: 5000 artists`. (No `--seed-mbid`: the fixture seeds from the most popular artist by default — the execution log §19 regression is exactly this default missing.)
+- [ ] **Step 2: Smoke-check through the flipped default**
 
-- [ ] **Step 2: Smoke-check the fixture and a real path**
+Run from `api/` so the relative default resolves exactly as the dev server would:
 
 ```bash
 cd api && UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u - <<'EOF'
@@ -564,13 +585,15 @@ from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.pathfinding import find_path
 
-g = GraphStore.load("../builder/scratch/graph-5k.bin")
+cfg = ApiConfig()
+assert cfg.graph_path.endswith("graph-t15-tiebreakfix.bin"), cfg.graph_path
+g = GraphStore.load(cfg.graph_path)
 names = set(g.names)
 for want in ("Radiohead", "The Beatles"):
-    assert want in names, f"{want} missing from dev fixture — log 19 regression"
+    assert want in names, f"{want} missing from the adopted artifact"
 src = g.names.index("Radiohead")
 dst = g.names.index("The Beatles")
-path = find_path(g, src, dst, [], ApiConfig())
+path = find_path(g, src, dst, [], cfg)
 assert path and path[0] == src and path[-1] == dst
 print(" -> ".join(g.names[i] for i in path))
 EOF
@@ -578,13 +601,43 @@ EOF
 
 Expected: an artist path printed, Radiohead first, The Beatles last. (Radiohead being *searchable at all* is new behaviour — it was absent from the previous adopted graph.)
 
-- [ ] **Step 3: Run the API test suite (unchanged code, belt-and-braces)**
+- [ ] **Step 2b: Update the dev-run guidance that names `graph-5k.bin`**
+
+Four small text edits, same substance in each — the dev default is now the adopted
+artifact, `ARTISTPATH_GRAPH` still overrides, and `graph-5k.bin` is retired:
+
+1. `CLAUDE.md` api command block: the dev-server example becomes
+
+   ```bash
+   # dev server — boots the ADOPTED 75k graph by default (ApiConfig.graph_path);
+   # ARTISTPATH_GRAPH overrides:
+   uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
+   ```
+
+   and in the "No dev or production graph artifact is in git" paragraph, replace the
+   sentence starting `Build `graph-5k.bin` locally from an archive` with: "On a fresh
+   clone, copy the adopted 75k artifact (or the archive, and rebuild in ~30 s) from
+   another machine — identity by the checksum in
+   `docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`. The 5k dev fixture
+   is retired; the `fixture` command remains only for the committed 500-node test
+   fixtures."
+2. `README.md`: same replacement for its `graph-5k.bin` copy line and dev-server line.
+3. `api/README.md`: the `ARTISTPATH_GRAPH` table row default becomes
+   `../builder/scratch/graph-t15-tiebreakfix.bin` ("the adopted artifact; flipped at
+   each adoption"), and the dev-run example drops the env var.
+4. `frontend/README.md`: dev-run line drops the `ARTISTPATH_GRAPH=` prefix.
+5. `.claude/agents/ml-graph-analyst.md:38`: replace the parenthetical with
+   `(`graph-75k.bin` and successors; the dev API boots the adopted artifact by default)`.
+
+- [ ] **Step 3: Run the API test suite**
 
 ```bash
 cd api && UV_LINK_MODE=copy uv run --extra dev pytest -q
 ```
 
-Expected: ALL PASS (api reads committed test fixtures, not the dev graph; this guards against accidental api-side edits).
+Expected: ALL PASS (api tests inject committed 500-node fixtures, so the default flip
+must not disturb them — a failure here means some test secretly depended on the default
+path, which would itself be worth fixing before proceeding).
 
 - [ ] **Step 4: Write the adoption findings doc**
 
@@ -629,11 +682,12 @@ to capfix; popularity ordering preserved. Run output:
 <full verify.py output block>
 ```
 
-## Dev fixture
+## Dev default
 
-`builder/scratch/graph-5k.bin` rebuilt from the adopted artifact
-(fixture default seeding, most popular artist). Radiohead and The Beatles
-present; Radiohead → The Beatles routes.
+`ApiConfig.graph_path` now defaults to this artifact (spec §1 decision 4 —
+the 5k dev fixture is retired; unit tests keep the committed 500-node
+fixtures). Smoke-checked through the default: Radiohead and The Beatles
+findable; Radiohead → The Beatles routes.
 ```
 
 - [ ] **Step 5: Update `docs/README.md`**
@@ -676,8 +730,9 @@ Add at the top of `docs/superpowers/TEST-QUEUE.md` (below the header block):
 selection now ranks unclipped strengths, so ceiling-saturated famous artists keep their
 genuinely strongest neighbours instead of the lowest-MBID ones. ~0.4 % of nodes change
 neighbours; everything else is verified identical
-(`findings/2026-07-23-tiebreak-fix-adoption.md`). The dev 5k fixture is already rebuilt
-on this machine.
+(`findings/2026-07-23-tiebreak-fix-adoption.md`). The dev API now boots the full
+adopted artifact by default — the 5k fixture is retired, so what you test is what
+the record measured.
 
 **What to exercise:**
 
@@ -700,12 +755,13 @@ and queued (C1/C2).
 - [ ] **Step 7: Commit**
 
 ```bash
-git add docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md docs/README.md docs/superpowers/TEST-QUEUE.md
-git commit -m "docs: adopt graph-t15-tiebreakfix.bin, record identity and verification
+git add api/src/artistpath_api/config.py CLAUDE.md README.md api/README.md frontend/README.md .claude/agents/ml-graph-analyst.md docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md docs/README.md docs/superpowers/TEST-QUEUE.md
+git commit -m "feat: adopt graph-t15-tiebreakfix.bin; dev defaults to the 75k artifact
 
-Track 1 of the repair+retune design is done: the 2.8 tie-break fix is
-built, verified against Arm 2, and adopted without a listen per log 4.1.
-Dev fixture rebuilt; use-the-app entry queued."
+Track 1 of the repair+retune design: the 2.8 tie-break fix is built,
+verified against Arm 2, and adopted without a listen per log 4.1. The 5k
+dev fixture is retired (spec s1 decision 4) - ApiConfig.graph_path now
+defaults to the adopted artifact; use-the-app entry queued."
 ```
 
 ---
@@ -723,7 +779,7 @@ Dev fixture rebuilt; use-the-app entry queued."
 
 - [ ] **Step 1: Snyk scan the new/changed first-party code**
 
-Run the Snyk MCP code scan (`snyk_code_scan`) over the repo (changed Python: `builder/src/artistpath_builder/graph.py`, `builder/src/artistpath_builder/pipeline.py`, the two test files, `builder/analysis/2026-07-23-tiebreak-fix-verification/verify.py`). Fix any issue it reports in *these files* using the result context, rescan until they are clean. (Pre-existing accepted findings — the `listen.html` XSS trio, log §7.1 item 3 — are recorded as accepted; do not "fix" them here.)
+Run the Snyk MCP code scan (`snyk_code_scan`) over the repo (changed Python: `builder/src/artistpath_builder/graph.py`, `builder/src/artistpath_builder/pipeline.py`, the two test files, `builder/analysis/2026-07-23-tiebreak-fix-verification/verify.py`, `api/src/artistpath_api/config.py`). Fix any issue it reports in *these files* using the result context, rescan until they are clean. (Pre-existing accepted findings — the `listen.html` XSS trio, log §7.1 item 3 — are recorded as accepted; do not "fix" them here.)
 
 - [ ] **Step 2: Start the Track execution log**
 
@@ -754,8 +810,11 @@ Phase 1 log §2.8. This log records decisions and deviations, not numbers.
   reproduced; shared-edge scores bit-identical to capfix; popularity
   ordering preserved. <note any deviation here, or "no deviations">
 - **T4** Adopted. Identity: `findings/2026-07-23-tiebreak-fix-adoption.md`.
-  Dev 5k fixture rebuilt (Radiohead + Beatles present, path routes).
-  TEST-QUEUE entry queued. No api/frontend changes anywhere in Track 1.
+  The 5k dev fixture is retired (spec §1 decision 4): `ApiConfig.graph_path`
+  defaults to the adopted 75k artifact, smoke-checked through the default
+  (Radiohead + Beatles present, path routes). The only api edit in Track 1
+  is that default; routing code untouched. No frontend changes.
+  TEST-QUEUE entry queued.
 - **Seam:** Track 1 ends here per spec §2. Track 2 (cost-function retune)
   starts from the spec §4 + this log + the adoption findings doc, with its
   own plan, an `ml-graph-analyst` protocol review, and a pre-registration
@@ -805,7 +864,9 @@ Track 1 of docs/superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-
 - Execution log: docs/superpowers/2026-07-23-repair-and-retune-execution-log.md
 - Owner decisions recorded 2026-07-23: repair+retune route; nine-names
   verdict (popularity != fame at the top - external fame proxy for Track 2
-  scoring); listening-test prohibition scoped to closed verdicts only.
+  scoring); listening-test prohibition scoped to closed verdicts only; the
+  5k dev fixture is retired - ApiConfig.graph_path defaults to the adopted
+  75k artifact (dev tests what the record measured).
 - Deferred, unchanged: p99 ceiling rescale (behind a measured trigger),
   cap_strategy redesign, clips C1/C2, frontend UX.
 - Track 2 (cost-function retune) follows on this branch with its own plan.
