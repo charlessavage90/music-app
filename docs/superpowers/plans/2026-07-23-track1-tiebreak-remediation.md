@@ -544,7 +544,7 @@ invariance of shared-edge scores and popularity ordering vs capfix."
 > dev graph (Phase 2 log §19). Dev now defaults to the full adopted artifact.
 
 **Files:**
-- Modify: `api/src/artistpath_api/config.py:12-18` (the `graph_path` default and its comment)
+- Modify: `api/src/artistpath_api/config.py:11-18` (the `graph_path` default and its comment)
 - Modify: `CLAUDE.md` (api dev-server command block; the "No dev or production graph artifact is in git" paragraph)
 - Modify: `README.md`, `api/README.md`, `frontend/README.md` (dev-run lines naming `graph-5k.bin`)
 - Modify: `.claude/agents/ml-graph-analyst.md:38` (the `graph-5k.bin` "quick iteration" mention)
@@ -558,7 +558,7 @@ invariance of shared-edge scores and popularity ordering vs capfix."
 
 - [ ] **Step 1: Flip the dev default to the adopted artifact**
 
-In `api/src/artistpath_api/config.py`, replace the `graph_path` block (lines 12–18) with:
+In `api/src/artistpath_api/config.py`, replace the `graph_path` block (lines 11–18, from the `# --- graph ---` header through the closing paren) with:
 
 ```python
     # --- graph ----------------------------------------------------------
