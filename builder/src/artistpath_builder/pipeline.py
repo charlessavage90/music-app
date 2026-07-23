@@ -203,7 +203,7 @@ def build_from_archive(
         flat, strategy=config.similarity_rescale, damping=config.similarity_damping
     )
 
-    indegree: dict[str, float] = defaultdict(float)
+    score_weighted_indegree: dict[str, float] = defaultdict(float)
     adjacency: Adjacency = {}
     cursor = 0
     for mbid, dsts in layout:
@@ -213,7 +213,7 @@ def build_from_archive(
             cursor += 1
         adjacency[mbid] = edges
         for dst, score in edges.items():
-            indegree[dst] += score
+            score_weighted_indegree[dst] += score
 
     # Rank the cap on UNCLIPPED strengths. The clip rescale ties the top ~1%
     # of scores at exactly 1.0; ranking those tied values let the MBID
@@ -237,14 +237,14 @@ def build_from_archive(
         if node in keep
     }
 
-    # In-degree is a float; ArtistStats.user_count is the integer popularity
-    # slot. Scale to preserve ordering — build_graph log-scales it anyway.
+    # In-degree is a float; the ArtistStats slot is an integer. Scale to
+    # preserve ordering — build_graph log-scales it anyway.
     stats = [
         ArtistStats(
             mbid=mbid,
             name=identities.get(mbid, ("", ""))[0],
-            user_count=round(indegree[mbid] * 1000),
-            listen_count=0,  # not used; popularity is in-degree
+            pop_indegree_scaled=round(score_weighted_indegree[mbid] * 1000),
+            listen_count=0,  # not used; popularity is score-weighted in-degree
             disambiguation=identities.get(mbid, ("", ""))[1],
         )
         for mbid in keep

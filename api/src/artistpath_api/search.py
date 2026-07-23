@@ -38,7 +38,7 @@ class ArtistSearch:
             elif q in name:
                 substring.append(i)
 
-        pop = self._store.popularity
-        prefix.sort(key=lambda i: -pop[i])
-        substring.sort(key=lambda i: -pop[i])
+        pop_raw = self._store.pop_raw
+        prefix.sort(key=lambda i: -pop_raw[i])
+        substring.sort(key=lambda i: -pop_raw[i])
         return (prefix + substring)[: self._cfg.search_limit]

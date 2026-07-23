@@ -122,7 +122,7 @@ did *not* touch.
 | Item | Success condition |
 |---|---|
 | No `builder/README.md` (the other two packages have one) — pre-existing gap, not caused by this work | **When `builder/` is next worked on substantively** (i.e. Track 2's cap-strategy work, if it ever runs) — or accept permanently if the package README convention is dropped. |
-| `CLAUDE.md` and `api/README.md` both restate `ApiConfig` cost-weight defaults | **Due when Track 2 changes any weight** — it will invalidate both copies at once, which is the moment to convert them to citations. |
+| ~~`CLAUDE.md` and `api/README.md` both restate `ApiConfig` cost-weight defaults~~ **DISCHARGED 2026-07-23** by the pre-Track-2 guards (G2): both converted to citations, and `ApiConfig` now states in-file that it is the only definition. Came due early because G2 was editing that text anyway. |
 | Low-severity role/status drift: Phase 2 log header rationale, revised-plan in-file role, "Consequences for the paused work" heading, pre-fix `file:line` pointers in the Phase 1 log, two 2026-07-19/20 design specs still "ready for implementation" | **Sweep at the next closeout**, or when a reader is actually misled — none change what a session would *do*. |
 
 ## Pre-Track-2 guards (2026-07-23)
@@ -185,6 +185,84 @@ endpoint of pre-registration §2.3 (analysis set, held-out set, ordered reserve)
 `Nirvana` carrying the known duplicate (2 nodes; highest-popularity rule applied). The
 Track 2 session should **not** re-verify endpoint presence by hand. Pair 8 (the owner's
 captured bypass pair) is still unidentified under P1 and is therefore not represented.
+
+### G2 — put the currency in the name
+
+**Renamed in shipped code** (`api/src`, `builder/src`, plus `api/eval` — see below):
+`popularity` → `pop_raw` on both `GraphStore` and builder `Graph`; `hub_penalty` →
+`degree_hub_penalty`; `w_hub` → `w_degree_hub`; `hubfrac` → `top1pct_degree_frac`;
+`mean/max_interior_pop` → `…_pop_raw`; `hub_node_set` → `top_degree_node_set`;
+`effective_floor` → `effective_floor_raw`; local `pop_u`/`pop_v`/`floor` →
+`pop_raw_*`/`floor_raw`; builder `indegree` → `score_weighted_indegree`.
+`pop_pctl` is reserved and unused — Track 2's percentile machinery takes it.
+
+**Two currency lies found while renaming, both fixed.** `ArtistStats.user_count` was
+documented as "distinct listeners — the popularity signal (spec 4.1)" and `graph.py`
+carried "Distinct listeners, not plays". Neither is true: `pipeline.py` sets that field
+to `round(score_weighted_indegree * 1000)`. There is no listener data in the build at
+all. Renamed to `pop_indegree_scaled` with the history in the comment. This is the same
+error class as §2.6/§2.11/§2.12, sitting unnoticed in shipped code.
+
+**Two names are exempt, and had to be.** The `popularity` key in the APG1 metadata blob
+is the **builder↔api wire contract** — renaming it invalidates every existing artifact,
+including the adopted one, which the plan forbids rebuilding. The `popularity` field in
+the API's JSON response is consumed by the frontend (`frontend/src/api/types.ts`).
+Both keep their wire names, commented at the definition; only in-memory identifiers
+carry the currency.
+
+**Where the plan was wrong about the repo, and what it cost.** G2 says to leave
+`builder/analysis/` alone because those scripts are frozen records. Correct — but the
+plan assumed that meant renaming shipped code was safe for them. It is not: **sixteen
+frozen scripts import the shipped classes and read these attributes**, and four import
+`hub_node_set` by name. A plain rename breaks all of them at import or attribute access.
+Resolution: shipped code keeps **read-only aliases** under the old names (properties, so
+nothing can be written through them) plus one module-level alias for the function.
+Verified mechanically — all **80** symbols imported from shipped code across every
+script in `builder/analysis/` resolve, and the aliases were smoke-tested against the
+adopted artifact. The first draft of the mapping README claimed nothing imported
+`hub_node_set`; the grep that checked it found four. Recorded because "I checked" and
+"I asserted" are the distinction the §2.13 reversal pattern is about.
+
+**`api/eval/` was out of the plan's stated scope and had to come along.** It is live
+tooling, not a frozen record (`api/tests/test_diagnostics.py` covers it), and it imports
+`hub_node_set` and constructs `GraphStore(popularity=…)` — an alias cannot cover a
+constructor kwarg. Updated in full.
+
+**A serialisation trap, recorded in the mapping README.** Aliases are Python attributes
+and do not appear in `dataclasses.asdict` or `summarise()` output, so result JSON written
+before today (`api/eval/results-*.json`, `listen_secret.json`) carries `"hubfrac"` and
+`"mean_interior_pop"` while a fresh run emits the new keys. Any script comparing old JSON
+to new output must map the keys itself.
+
+**Deferral discharged:** "CLAUDE.md and `api/README.md` both restate `ApiConfig`
+cost-weight defaults" (Track 1 closeout table) — both converted to citations, and
+`ApiConfig` now says in-file that it is the only definition. While doing it, found
+CLAUDE.md's cost formula was **missing the `w_degree_hub` term entirely**; corrected.
+
+### G3, G4 — two rules added to CLAUDE.md
+
+G3: the factor table gains a required third section — *held constant, and why each is
+genuinely constant under the intervention* — with pre-registration §0's `w_floor` finding
+as the worked example. G4: no experimental arm runs until a pre-registration is committed,
+same worked example. Both are short by design; the existing rule earns its keep by being
+short.
+
+### G5 — bookkeeping
+
+**(a)** Note added to pre-registration §1.2 resolving the collision between guard G
+(applied in all arms) and mirror-and-verify (byte-identity against shipped `find_path`,
+which has no G) on the two direct-edge pairs. Sequence: verify with G **off**, then enable
+G uniformly. Log §3.10's "non-identical means stop" applies to the verification step only.
+The owner's P7 answer is recorded in the same place.
+
+**(b)** Both new documents registered in `docs/README.md` under Active.
+
+### G6 — two guards deliberately deferred
+
+| Deferred | Why not now | Success condition — due when |
+|---|---|---|
+| **Named-entity check as standing practice** — showing the owner the *names* a perceptual metric produces, not just the number | Pre-registration §5 already implements a stronger version for the fame proxy: 33 artists labelled into three buckets **without seeing fan counts**, scored for rank agreement and catastrophic inversions. A parallel practice invented now would duplicate it. | **After §5 runs.** Generalise its protocol into `closeout` (as an adoption-time step) and into `TEST-QUEUE.md`'s format, with its measured performance attached. |
+| **Artifact provenance registry** — every gitignored `.bin` carries its full build configuration and code commit, and any cross-artifact comparison must cite the rows and count the differing columns | Track 2 Stage A holds the artifact fixed and asserts its sha256, so the post-hoc-comparison confound is not live. The checksum table in Phase 1 log §5 is adequate for now. G1 also narrows the gap: a rebuilt artifact must now pass acceptance before it exists. | **When pre-registration §2.4 R0 or R2 fires** and a builder arm (p99 rescale, or the deferred `cap_strategy`) is scheduled — that is when new artifacts appear and log §2.2's two- and three-knob comparison errors become possible again. |
 
 ## Track 2 — cost-function retune
 

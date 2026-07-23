@@ -57,5 +57,5 @@ def test_similar_artist_is_comparable_and_frozen():
 
 
 def test_artist_stats_defaults_disambiguation():
-    stats = ArtistStats(mbid="a" * 36, name="A", user_count=10, listen_count=99)
+    stats = ArtistStats(mbid="a" * 36, name="A", pop_indegree_scaled=10, listen_count=99)
     assert stats.disambiguation == ""

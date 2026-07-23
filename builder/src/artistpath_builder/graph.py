@@ -22,11 +22,21 @@ class Graph:
     mbids: list[str]
     names: list[str]
     disambiguations: list[str]
-    popularity: list[float]
+    # Log-scaled score-weighted in-degree in 0-1. NOT a percentile, and NOT
+    # fame — log §2.11/§2.12 record both conflations and what each cost.
+    pop_raw: list[float]
     offsets: np.ndarray  # int32, length len(mbids) + 1
     neighbours: np.ndarray  # int32
     scores: np.ndarray  # float32
     edge_types: np.ndarray  # uint8
+
+    @property
+    def popularity(self) -> list[float]:
+        """Read-only alias for the frozen probe scripts in builder/analysis/.
+
+        Mapping table: builder/analysis/README.md.
+        """
+        return self.pop_raw
 
     @property
     def artist_count(self) -> int:
@@ -136,10 +146,14 @@ def largest_component(adjacency: Adjacency) -> set[str]:
 
 
 def _log_scaled(counts: list[int]) -> list[float]:
-    """Log-scale listener counts to 0-1 (spec section 4.1).
+    """Log-scale the popularity counts to 0-1 (spec section 4.1).
 
     Raw counts are power-law distributed; a linear scale would make every
     artist outside the top few hundred indistinguishable.
+
+    The output is a rescaled VALUE, not a percentile: the log scale compresses
+    the head, so equal steps here are wildly unequal steps in rank. That gap is
+    what log §2.12 records as the currency error.
     """
     logs = [math.log1p(max(0, n)) for n in counts]
     low, high = min(logs), max(logs)
@@ -161,8 +175,11 @@ def build_graph(
 
     names = [stats_by_mbid[m].name for m in mbids]
     disambiguations = [stats_by_mbid[m].disambiguation for m in mbids]
-    # Distinct listeners, not plays — see spec section 4.1.
-    popularity = _log_scaled([stats_by_mbid[m].user_count for m in mbids])
+    # Score-weighted in-degree, computed from the archive during `build`.
+    # There is no separate popularity source (findings 6f) — the field's old
+    # name and the "distinct listeners" comment that used to sit here were both
+    # inherited from a design that was never built.
+    pop_raw = _log_scaled([stats_by_mbid[m].pop_indegree_scaled for m in mbids])
 
     offsets = np.zeros(len(mbids) + 1, dtype=np.int32)
     neighbours: list[int] = []
@@ -184,7 +201,7 @@ def build_graph(
         mbids=mbids,
         names=names,
         disambiguations=disambiguations,
-        popularity=popularity,
+        pop_raw=pop_raw,
         offsets=offsets,
         neighbours=np.asarray(neighbours, dtype=np.int32),
         scores=np.asarray(scores, dtype=np.float32),

@@ -45,6 +45,11 @@ class ArtistStats:
 
     mbid: str
     name: str
-    user_count: int  # distinct listeners — the popularity signal (spec 4.1)
+    # Score-weighted in-degree, scaled to an integer slot. NOT a listener
+    # count: there is no separate popularity source, and this is summed from
+    # similarity scores in the archive during `build` (findings 6f). It was
+    # called `user_count` and documented as "distinct listeners" until
+    # 2026-07-23, which is the same class of currency error as log §2.6/§2.11.
+    pop_indegree_scaled: int
     listen_count: int  # plays; archived but NOT used for routing
     disambiguation: str = ""

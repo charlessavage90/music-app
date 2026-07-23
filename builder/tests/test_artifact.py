@@ -15,12 +15,12 @@ def graph():
         ArtistStats(
             mbid=A,
             name="Alpha",
-            user_count=100,
+            pop_indegree_scaled=100,
             listen_count=700,
             disambiguation="UK band",
         ),
-        ArtistStats(mbid=B, name="Beta", user_count=50, listen_count=350),
-        ArtistStats(mbid=C, name="Gamma", user_count=10, listen_count=70),
+        ArtistStats(mbid=B, name="Beta", pop_indegree_scaled=50, listen_count=350),
+        ArtistStats(mbid=C, name="Gamma", pop_indegree_scaled=10, listen_count=70),
     ]
     return build_graph(adjacency, stats, EdgeType.BEHAVIOURAL)
 
@@ -34,7 +34,7 @@ def test_round_trip_preserves_everything(graph):
     assert restored.mbids == graph.mbids
     assert restored.names == graph.names
     assert restored.disambiguations == graph.disambiguations
-    assert restored.popularity == pytest.approx(graph.popularity)
+    assert restored.pop_raw == pytest.approx(graph.pop_raw)
     assert np.array_equal(restored.offsets, graph.offsets)
     assert np.array_equal(restored.neighbours, graph.neighbours)
     assert np.array_equal(restored.scores, graph.scores)

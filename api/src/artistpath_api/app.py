@@ -50,7 +50,9 @@ def create_app(
             mbid=store.mbids[node],
             name=store.names[node],
             disambiguation=store.disambiguations[node],
-            popularity=float(store.popularity[node]),
+            # `popularity` is the API's JSON field name, consumed by the
+            # frontend (frontend/src/api/types.ts); it stays. The value is raw.
+            popularity=float(store.pop_raw[node]),
         )
 
     @app.get("/api/artists/search")

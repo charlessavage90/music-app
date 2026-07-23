@@ -84,7 +84,12 @@ curl -X POST http://localhost:8000/api/path -H "content-type: application/json" 
 
 ## Cost-function weights
 
-Path quality is governed by weights in `config.py`, starting from the values
-validated in stage 1 (`w_sim=3, w_jump=1, w_floor=1, w_hop=0.02`). These are a
-tuned starting point, not final — real tuning is a listen-and-adjust activity
-against the full 75k graph.
+Path quality is governed by the weights in `ApiConfig` (`config.py`), which is
+their **only** definition — read the defaults there rather than from a copy
+here. They started as the values validated in stage 1: a tuned starting point,
+not final. Real tuning is a listen-and-adjust activity against the full 75k
+graph.
+
+Every popularity-derived weight is in **raw** popularity currency, not
+percentile; the identifiers say so. See CLAUDE.md, "Quantities carry their
+currency in their name".

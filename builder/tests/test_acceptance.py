@@ -178,7 +178,7 @@ def _graph(names: list[str], degrees: list[int], pop: list[float]) -> Graph:
         mbids=[f"{i:036d}" for i in range(len(names))],
         names=names,
         disambiguations=[""] * len(names),
-        popularity=pop,
+        pop_raw=pop,
         offsets=offsets,
         neighbours=np.zeros(total, dtype=np.int32),
         scores=np.ones(total, dtype=np.float32),

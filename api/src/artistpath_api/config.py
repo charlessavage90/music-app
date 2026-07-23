@@ -22,15 +22,26 @@ class ApiConfig:
     )
 
     # --- cost function weights (findings 6g) ----------------------------
+    # THIS BLOCK IS THE ONLY DEFINITION OF THESE DEFAULTS. Prose that needs
+    # them cites this dataclass rather than copying the numbers; two copies
+    # went stale once already.
+    #
+    # Currency note: `w_jump` and `w_floor` both price RAW popularity
+    # (`GraphStore.pop_raw`), not percentile. Log §2.12 records that the two
+    # diverge sharply at the top of the distribution, and repricing them in
+    # percentile currency is exactly what the Track 2 sweep tests
+    # (specs/2026-07-23-track2-preregistration.md §1.3).
     w_sim: float = 3.0    # reward strong similarity
-    w_jump: float = 1.0   # punish popularity cliffs
-    w_floor: float = 1.0  # discourage diving into obscurity
+    w_jump: float = 1.0   # punish raw-popularity cliffs
+    w_floor: float = 1.0  # discourage diving below the raw-popularity floor
     w_hop: float = 0.02   # per-hop cost; low so paths can be long and smooth
     w_avoid: float = 1.0  # "not for me" neighbourhood penalty
-    # Penalty for routing through high-degree "hub" artists. Default 0.0 keeps
-    # it a no-op; the 2026-07-21 baseline showed hub-traversal is topological,
-    # so this term is the lever for the discovery goal. Set from a tuned search.
-    w_hub: float = 0.0
+    # Penalty for routing through high-DEGREE artists. Degree, not fame: log
+    # §2.6 records that the top-1%-by-degree set is largely insular micro-genre
+    # artists, so this term does not penalise famous artists and never did.
+    # Default 0.0 keeps it a no-op; the 2026-07-21 baseline showed
+    # hub-traversal is topological. Set from a tuned search.
+    w_degree_hub: float = 0.0
 
     # --- bypass shaping (spec 4.3) --------------------------------------
     floor_relax_known: float = 0.15    # each "known" bypass softens the floor

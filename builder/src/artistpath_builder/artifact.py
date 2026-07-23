@@ -39,7 +39,11 @@ def serialise(graph: Graph) -> bytes:
             "mbids": graph.mbids,
             "names": graph.names,
             "disambiguations": graph.disambiguations,
-            "popularity": graph.popularity,
+            # "popularity" is the APG1 wire key. It CANNOT be renamed without
+            # invalidating every existing artifact and breaking the api-side
+            # parser in lockstep — the format is the contract. Only the
+            # in-memory identifier carries the currency (`pop_raw`).
+            "popularity": graph.pop_raw,
         },
         sort_keys=True,
         separators=(",", ":"),
@@ -102,7 +106,7 @@ def deserialise(payload: bytes) -> Graph:
         mbids=metadata["mbids"],
         names=metadata["names"],
         disambiguations=metadata["disambiguations"],
-        popularity=metadata["popularity"],
+        pop_raw=metadata["popularity"],  # wire key -> in-memory name
         offsets=offsets,
         neighbours=neighbours,
         scores=scores,

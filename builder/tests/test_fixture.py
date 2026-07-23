@@ -17,7 +17,7 @@ def _ring(n: int):
         ArtistStats(
             mbid=m,
             name=f"Artist {i}",
-            user_count=(n - i) * 100,
+            pop_indegree_scaled=(n - i) * 100,
             listen_count=(n - i) * 700,
         )
         for i, m in enumerate(mbids)
@@ -77,10 +77,10 @@ def test_unknown_seed_raises():
 def _ring_with_one_popular_artist(n: int, popular: int):
     """A ring where one node is far more popular than the rest.
 
-    `build_graph` derives popularity from `user_count`, which the pipeline
+    `build_graph` derives popularity from `pop_indegree_scaled`, which the pipeline
     fills with score-weighted in-degree — so popularity is set here through
     that field, not by adding edges. An earlier version of this helper added
-    incoming edges and left `user_count` uniform, which changed nothing and
+    incoming edges and left `pop_indegree_scaled` uniform, which changed nothing and
     made the test assert against a flat popularity array.
     """
     mbids = [f"{i:036d}" for i in range(n)]
@@ -92,7 +92,7 @@ def _ring_with_one_popular_artist(n: int, popular: int):
         ArtistStats(
             mbid=m,
             name=f"Artist {i}",
-            user_count=100_000 if i == popular else 100,
+            pop_indegree_scaled=100_000 if i == popular else 100,
             listen_count=700,
         )
         for i, m in enumerate(mbids)
@@ -103,7 +103,7 @@ def _ring_with_one_popular_artist(n: int, popular: int):
 def _ring_with_tied_popularity(n: int):
     """A ring where every artist has identical popularity, so the default
     seed is decided purely by the tie-break. `_ring` cannot test this: its
-    user_count strictly decreases, so index 0 wins on popularity outright and
+    pop_indegree_scaled strictly decreases, so index 0 wins on popularity outright and
     a tie-break assertion there would pass without exercising the tie-break.
     """
     mbids = [f"{i:036d}" for i in range(n)]
@@ -112,7 +112,7 @@ def _ring_with_tied_popularity(n: int):
         for i, m in enumerate(mbids)
     }
     stats = [
-        ArtistStats(mbid=m, name=f"Artist {i}", user_count=500, listen_count=700)
+        ArtistStats(mbid=m, name=f"Artist {i}", pop_indegree_scaled=500, listen_count=700)
         for i, m in enumerate(mbids)
     ]
     return build_graph(symmetrise(adjacency), stats, EdgeType.BEHAVIOURAL), mbids
@@ -138,7 +138,7 @@ def test_default_seed_breaks_ties_on_lowest_mbid():
     # output for identical input. With popularity genuinely tied, only the
     # tie-break decides the seed, so this fails if it is ever dropped.
     graph, mbids = _ring_with_tied_popularity(10)
-    assert len(set(graph.popularity)) == 1, "fixture must actually be tied"
+    assert len(set(graph.pop_raw)) == 1, "fixture must actually be tied"
     assert graph.mbids[most_popular_index(graph)] == min(mbids)
     assert extract_fixture(graph, size=4).mbids == extract_fixture(graph, size=4).mbids
 

@@ -29,7 +29,7 @@ def most_popular_index(graph: Graph) -> int:
     """
     return min(
         range(len(graph.mbids)),
-        key=lambda i: (-graph.popularity[i], graph.mbids[i]),
+        key=lambda i: (-graph.pop_raw[i], graph.mbids[i]),
     )
 
 
@@ -80,7 +80,7 @@ def extract_fixture(graph: Graph, size: int, seed_mbid: str | None = None) -> Gr
         mbids=[graph.mbids[i] for i in keep],
         names=[graph.names[i] for i in keep],
         disambiguations=[graph.disambiguations[i] for i in keep],
-        popularity=[graph.popularity[i] for i in keep],
+        pop_raw=[graph.pop_raw[i] for i in keep],
         offsets=offsets,
         neighbours=np.asarray(neighbours, dtype=np.int32),
         scores=np.asarray(scores, dtype=np.float32),

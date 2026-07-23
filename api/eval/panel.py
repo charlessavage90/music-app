@@ -80,7 +80,7 @@ def generate_panel(store: GraphStore, rng: np.random.Generator) -> dict:
     # Popularity-weighted: uniform sampling over 75k nodes is dominated by the
     # obscure tail, so without this stratum the panel never tests the
     # mainstream -> mainstream case real users actually query.
-    pop = np.asarray(store.popularity, dtype=np.float64)
+    pop = np.asarray(store.pop_raw, dtype=np.float64)
     weights = pop / pop.sum() if pop.sum() > 0 else None
 
     drawn = {

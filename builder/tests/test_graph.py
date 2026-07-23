@@ -15,7 +15,7 @@ A, B, C, D, E = ("a" * 36, "b" * 36, "c" * 36, "d" * 36, "e" * 36)
 def _stats(*mbids_and_users):
     """Popularity is distinct listeners, not plays (spec 4.1)."""
     return [
-        ArtistStats(mbid=m, name=m[0].upper(), user_count=u, listen_count=u * 7)
+        ArtistStats(mbid=m, name=m[0].upper(), pop_indegree_scaled=u, listen_count=u * 7)
         for m, u in mbids_and_users
     ]
 
@@ -87,19 +87,19 @@ def test_neighbours_are_sorted_within_each_row():
 def test_popularity_is_log_scaled_to_unit_range():
     adjacency = {A: {B: 1.0}, B: {A: 1.0}}
     graph = build_graph(adjacency, _stats((A, 1), (B, 1_000_000)), EdgeType.BEHAVIOURAL)
-    assert min(graph.popularity) == 0.0
-    assert max(graph.popularity) == 1.0
+    assert min(graph.pop_raw) == 0.0
+    assert max(graph.pop_raw) == 1.0
 
 
 def test_popularity_uses_user_count_not_listen_count():
     # A has fewer plays but more distinct listeners, so it must rank higher.
     adjacency = {A: {B: 1.0}, B: {A: 1.0}}
     stats = [
-        ArtistStats(mbid=A, name="A", user_count=1000, listen_count=1000),
-        ArtistStats(mbid=B, name="B", user_count=10, listen_count=999_999),
+        ArtistStats(mbid=A, name="A", pop_indegree_scaled=1000, listen_count=1000),
+        ArtistStats(mbid=B, name="B", pop_indegree_scaled=10, listen_count=999_999),
     ]
     graph = build_graph(adjacency, stats, EdgeType.BEHAVIOURAL)
-    assert graph.popularity[graph.mbids.index(A)] > graph.popularity[
+    assert graph.pop_raw[graph.mbids.index(A)] > graph.pop_raw[
         graph.mbids.index(B)
     ]
 

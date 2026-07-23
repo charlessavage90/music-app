@@ -138,10 +138,14 @@ def geometric_mean(values: list[float]) -> float:
 @dataclass(frozen=True, slots=True)
 class PathMetrics:
     length: int                  # nodes in the path
-    hubfrac: float               # fraction of INTERIOR nodes in the frozen hub set
+    # Fraction of INTERIOR nodes in the frozen top-1%-BY-DEGREE set. Degree,
+    # not fame: log §2.6 records that this set is largely insular micro-genre
+    # artists post-capfix, so a low value means "few insular-cluster members",
+    # NOT "few famous artists". Reading it as fame produced a wrong conclusion.
+    top1pct_degree_frac: float
     max_interior_degree: int
-    mean_interior_pop: float
-    max_interior_pop: float
+    mean_interior_pop_raw: float
+    max_interior_pop_raw: float
     bottleneck_sim: float        # diagnostic — derived from the scores under test
     mean_sim: float              # diagnostic
     ceiling_hops: float          # fraction of hops at score 1.0 — see below
@@ -156,15 +160,31 @@ class PathMetrics:
                                     # counts cannot tell that from a genuine quality
                                     # regression without this number alongside it.
 
+    # Read-only aliases under the pre-2026-07-23 names, for the frozen probe
+    # scripts in builder/analysis/ that import this class. See the mapping
+    # table in builder/analysis/README.md. New code uses the explicit names.
+    @property
+    def hubfrac(self) -> float:
+        return self.top1pct_degree_frac
+
+    @property
+    def mean_interior_pop(self) -> float:
+        return self.mean_interior_pop_raw
+
+    @property
+    def max_interior_pop(self) -> float:
+        return self.max_interior_pop_raw
+
 
 def path_metrics(
-    store: GraphStore, path: list[int], hub_nodes: set[int]
+    store: GraphStore, path: list[int], top1pct_degree_nodes: set[int]
 ) -> PathMetrics:
     """Measure one path. Interior = nodes excluding the two user-chosen endpoints.
 
-    `hub_nodes` is a FROZEN set of node ids, not a per-graph threshold. The
-    top-1% degree cutoff moves between builds, so a threshold would let a
-    variant "improve" purely by compressing its degree distribution.
+    `top1pct_degree_nodes` is a FROZEN set of node ids, not a per-graph
+    threshold. The top-1% DEGREE cutoff moves between builds, so a threshold
+    would let a variant "improve" purely by compressing its degree
+    distribution.
 
     `ceiling_hops` is the fraction of hops whose similarity is exactly 1.0.
     Those hops cost w_sim*(1 - 1.0) == 0, so the router picks among them on
@@ -174,7 +194,7 @@ def path_metrics(
     """
     interior = path[1:-1]
     degs = [out_degree(store, n) for n in interior]
-    pops = [float(store.popularity[n]) for n in interior]
+    pops_raw = [float(store.pop_raw[n]) for n in interior]
     hops = list(zip(path, path[1:]))
     sims = [edge_score(store, a, b) for a, b in hops]
     # A fourth call per hop (adamic_adar/overlap_coefficient/jaccard above each
@@ -184,12 +204,14 @@ def path_metrics(
 
     return PathMetrics(
         length=len(path),
-        hubfrac=(sum(n in hub_nodes for n in interior) / len(interior))
+        top1pct_degree_frac=(
+            sum(n in top1pct_degree_nodes for n in interior) / len(interior)
+        )
         if interior
         else 0.0,
         max_interior_degree=max(degs) if degs else 0,
-        mean_interior_pop=(sum(pops) / len(pops)) if pops else 0.0,
-        max_interior_pop=max(pops) if pops else 0.0,
+        mean_interior_pop_raw=(sum(pops_raw) / len(pops_raw)) if pops_raw else 0.0,
+        max_interior_pop_raw=max(pops_raw) if pops_raw else 0.0,
         bottleneck_sim=min(sims) if sims else 1.0,
         mean_sim=(sum(sims) / len(sims)) if sims else 1.0,
         ceiling_hops=(sum(s >= 1.0 for s in sims) / len(sims)) if sims else 0.0,
@@ -265,10 +287,10 @@ def summarise(metrics: list[PathMetrics]) -> dict[str, float]:
         return {}
     return {
         "n": n,
-        "mean_hubfrac": sum(m.hubfrac for m in metrics) / n,
+        "mean_top1pct_degree_frac": sum(m.top1pct_degree_frac for m in metrics) / n,
         "mean_length": sum(m.length for m in metrics) / n,
         "mean_max_interior_degree": sum(m.max_interior_degree for m in metrics) / n,
-        "mean_interior_pop": sum(m.mean_interior_pop for m in metrics) / n,
+        "mean_interior_pop_raw": sum(m.mean_interior_pop_raw for m in metrics) / n,
         "mean_bottleneck_sim": sum(m.bottleneck_sim for m in metrics) / n,
         "mean_sim": sum(m.mean_sim for m in metrics) / n,
         "mean_ceiling_hops": sum(m.ceiling_hops for m in metrics) / n,
@@ -282,11 +304,19 @@ def summarise(metrics: list[PathMetrics]) -> dict[str, float]:
     }
 
 
-def hub_node_set(store: GraphStore, top_fraction: float) -> set[int]:
-    """Node ids in the top `top_fraction` by out-degree, as a frozen set.
+def top_degree_node_set(store: GraphStore, top_fraction: float) -> set[int]:
+    """Node ids in the top `top_fraction` by OUT-DEGREE, as a frozen set.
 
     Computed ONCE on the control build and reused across every variant.
+
+    Degree, not fame, not popularity — see PathMetrics.top1pct_degree_frac.
     """
     degrees = np.diff(store.offsets)
     cutoff = np.quantile(degrees, 1.0 - top_fraction)
     return {int(i) for i in np.where(degrees >= cutoff)[0]}
+
+
+# Alias under the pre-2026-07-23 name. Four frozen probe scripts in
+# builder/analysis/ import this by name and are deliberately never updated;
+# without this they fail at import. See builder/analysis/README.md.
+hub_node_set = top_degree_node_set

@@ -25,7 +25,7 @@ from artistpath_api.graph_store import GraphStore  # noqa: E402
 def artifact_diagnostics(store: GraphStore, cap: int) -> dict:
     """Structural summary of one built artifact."""
     degrees = np.diff(store.offsets)
-    pop = np.asarray(store.popularity, dtype=np.float64)
+    pop = np.asarray(store.pop_raw, dtype=np.float64)
     scores = np.asarray(store.scores, dtype=np.float64)
 
     saturated = np.isclose(scores, 1.0)
@@ -59,7 +59,7 @@ def artifact_diagnostics(store: GraphStore, cap: int) -> dict:
     }
 
 
-def frozen_hub_diagnostics(store: GraphStore, hub_nodes: set[int]) -> dict:
+def frozen_hub_diagnostics(store: GraphStore, top1pct_degree_nodes: set[int]) -> dict:
     """How many frozen hub MBIDs survive in this artifact, and their mean degree.
 
     These two numbers ARE criterion 3's replacement guard (revised plan §4,
@@ -87,13 +87,13 @@ def frozen_hub_diagnostics(store: GraphStore, hub_nodes: set[int]) -> dict:
     it would otherwise discriminate, and reports the cap rather than the
     routing — do not wire either number into a threshold.
 
-    `hub_nodes` must already be filtered to ids present in this artifact (as
+    `top1pct_degree_nodes` must already be filtered to ids present in this artifact (as
     `load_or_freeze_hub_set` does via its `if m in store.id_by_mbid` check),
-    so `len(hub_nodes)` alone answers (a). Sorted before indexing so the result
+    so `len(top1pct_degree_nodes)` alone answers (a). Sorted before indexing so the result
     cannot depend on set iteration order.
     """
     degrees = np.diff(store.offsets)
-    present = sorted(hub_nodes)
+    present = sorted(top1pct_degree_nodes)
     mean_degree = float(np.mean(degrees[present])) if present else 0.0
     return {
         "frozen_hubs_present": len(present),

@@ -8,11 +8,11 @@ from artistpath_api.graph_store import GraphStore
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
-def make_store(names, popularity, undirected_edges):
+def make_store(names, pop_raw, undirected_edges):
     """Build a GraphStore from a human-readable spec, for pathfinding tests.
 
     names: list of artist names (index = node id)
-    popularity: list of floats 0-1 (index = node id)
+    pop_raw: list of floats 0-1 (index = node id) — raw popularity, not percentile
     undirected_edges: list of (u, v, score) — each added in both directions
     """
     n = len(names)
@@ -34,7 +34,7 @@ def make_store(names, popularity, undirected_edges):
         mbids=[f"{i:036d}" for i in range(n)],
         names=list(names),
         disambiguations=[""] * n,
-        popularity=np.asarray(popularity, dtype=np.float32),
+        pop_raw=np.asarray(pop_raw, dtype=np.float32),
         offsets=offsets,
         neighbours=np.asarray(neighbours, dtype=np.int32),
         scores=np.asarray(scores, dtype=np.float32),

@@ -16,7 +16,9 @@ thresholds pre-registered here for the first time, or arm counts.
 
 **Basis.** Conclusions below rest on **code actually read** unless flagged otherwise:
 `api/src/artistpath_api/config.py`, `pathfinding.py`, `evaluation.py`, `clips.py`,
-`app.py` (path route), `graph_store.py` (hub_penalty field);
+`app.py` (path route), `graph_store.py` (`degree_hub_penalty` field — called
+`hub_penalty` when this document was written; renamed 2026-07-23 by the
+pre-Track-2 guards, see `builder/analysis/README.md` for the full mapping);
 `builder/src/artistpath_builder/pipeline.py`, `graph.py`;
 `builder/analysis/2026-07-23-popularity-stratification/` (`tail_probe.py`,
 `known_viability.py`, README). Claims resting on documents alone are flagged
@@ -93,10 +95,31 @@ concept exists; Stage A's F2 criterion needs no gate.
 |---|---|---|
 | Graph artifact | `graph-t15-tiebreakfix.bin`, sha256 per `../findings/2026-07-23-tiebreak-fix-adoption.md` | Track 1 output; asserted before every run (established script convention) |
 | Router | Mirror of production `find_path`, per log §3.10 mirror-and-verify | No shipped code edited before adoption |
-| Guard G: ≥ 1 intermediary | Applied in **all** arms including baseline | §4's F1 decision — uniform application keeps it out of the comparison |
+| Guard G: ≥ 1 intermediary | Applied in **all** arms including baseline | §4's F1 decision — uniform application keeps it out of the comparison. **Sequencing, added 2026-07-23:** see the note below §1.2. |
 | Bypass protocol | All-`known`, victim = most-popular interior (in-graph popularity; ties → lowest node id), walked independently per arm; snapshots d ∈ {0, 5, 10, 15, 20} | `tail_probe.py` / log §3.10 precedent. Victim selection deliberately stays in-graph (deterministic, no network); outcomes are scored externally. This currency separation is a modelling choice — see §6. |
 | `w_hop`, `w_avoid`, avoidance params | Production defaults (`config.py`) | Out of scope for the diagnosed defect |
 | Percentile definition | Rank over N of the artifact's popularity array, computed once at harness start; ties by average rank (P6) | Spec §4.2 |
+
+> **Note added 2026-07-23 (pre-Track-2 guards, G5a) — verify the mirror with guard G OFF,
+> then enable it everywhere.**
+>
+> As written, two requirements collide on the two direct-edge pairs (Radiohead → The
+> Beatles, Muse → Coldplay): guard G applies to **all** arms including baseline P (§1.2),
+> while P is defined as shipped `find_path` and is the mirror-and-verify target — "the
+> mirror must reproduce P byte-identically" (§1.4). On those pairs both cannot hold. Guard
+> G changes the path by construction, and shipped code has no G to compare against.
+>
+> **Sequence, so this is not discovered mid-run:** (1) verify the mirror against production
+> `find_path` with **G disabled**, on every pair, and require byte-identity there; (2) then
+> enable G uniformly across all arms including P, and run the sweep. Log §3.10 is explicit
+> that non-identical paths mean *stop, the harness is wrong* — that instruction applies to
+> step 1 only. Without this, a session executing §1.4 literally either concludes
+> verification failed or quietly skips the check on the two pairs it matters most for.
+
+> **P7 answered by the owner, 2026-07-23:** "Every path must have at least one artist in
+> between the start and end." The §4 INFERENCE is **confirmed**; ≥ 1 intermediary is a
+> product invariant, and the falsifier described in §4 did not fire. The guard still ships
+> only with the adopted arm — no shipped code changed here.
 
 ### 1.3 The columns
 

@@ -119,7 +119,7 @@ def _degrees(graph: Graph) -> np.ndarray:
 
 def _famous_order(graph: Graph) -> np.ndarray:
     """Node ids by descending popularity. Stable, so ties are id-ordered."""
-    return np.argsort(-np.asarray(graph.popularity, dtype=np.float64), kind="stable")
+    return np.argsort(-np.asarray(graph.pop_raw, dtype=np.float64), kind="stable")
 
 
 def check_acceptance(graph: Graph, criteria: AcceptanceCriteria) -> None:
