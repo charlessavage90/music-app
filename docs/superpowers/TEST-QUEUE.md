@@ -11,6 +11,41 @@ the point.**
 
 ---
 
+## QUEUED — 2026-07-23 — pre-Track-2 guards: a rename through the whole cost path
+
+**Expected outcome: nothing changes.** This is a regression check, and a short one.
+
+**What changed.** No behaviour, by intent. Every popularity- and degree-derived
+identifier in shipped code was renamed to carry its currency (`popularity` → `pop_raw`,
+`w_hub` → `w_degree_hub`, and so on), and the builder gained a check that refuses to
+emit a graph missing famous artists. **The graph itself is untouched** — same adopted
+artifact, same sha256, no rebuild. The cost function's arithmetic is unchanged; only the
+names of the quantities in it moved.
+
+**Why it is worth ten minutes anyway.** A rename that passes 258 tests can still have
+swapped two variables inside an expression that no test distinguishes. The suites cover
+the cost function's *behaviour* on small fixtures; they do not cover whether real paths
+between real artists still feel right.
+
+**What to exercise:**
+
+1. **Any two paths you already have a feel for.** Miles Davis → Daft Punk, or whatever
+   you used last time. They should be the same paths you saw yesterday.
+2. **Bypass a few times on one of them.** The floor relaxation is the part with the most
+   renamed variables (`base_floor_raw`, `floor_raw`, `effective_floor_raw`), so if a
+   rename crossed a wire, repeated bypass is where it shows.
+3. **Search two or three artists.** Search ranks by popularity and that read was renamed.
+
+**What "wrong" would look like:** paths that are *different* from what you remember for
+the same two artists — that is the whole signal here, since nothing was supposed to
+change. Also: bypass no longer lengthening or reaching further; search results in an
+odd order (e.g. obscure artists ranked above famous ones). A "no path" without
+exclusions remains structurally impossible and would be a real defect.
+
+**Clips (C1/C2) are still known, unrelated, and untouched.**
+
+**Best bug report:** the URL from the address bar.
+
 ## DONE — 2026-07-23 — tie-break fix adopted: famous-artist neighbourhoods changed
 
 **DONE 2026-07-23. No regression; no defect attributable to the fix.** Radiohead is

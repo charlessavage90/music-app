@@ -37,8 +37,12 @@ belief — including a belief you yourself established earlier.
   independently by `api/…/graph_store.py`. Graphs live in `builder/scratch/`
   (`graph-75k.bin` and successors; the dev API boots the adopted artifact by default).
 - **The router.** Pure Dijkstra in `api/…/pathfinding.py`, no I/O. Cost per edge:
-  `w_sim·(1−similarity) + w_jump·|Δpopularity| + w_floor·max(0, floor−pop_v)
-  + w_avoid·avoidance + w_hop`. Weights live in `api/…/config.py`.
+  `w_sim·(1−similarity) + w_jump·|Δpop_raw| + w_floor·max(0, floor_raw−pop_raw_v)
+  + w_avoid·avoidance + w_degree_hub·degree_hub_penalty + w_hop`. Weights and their
+  defaults live in `ApiConfig` (`api/…/config.py`) and are cited from there, never
+  restated. Both popularity terms are in **raw** currency, not percentile, and
+  `floor_raw` is the only depth-graduated term — everything else is static per request.
+  `w_degree_hub` defaults to 0.0, so that term is inert unless deliberately set.
 - **The evaluation harness.** `api/eval/run_baseline.py` with metrics in
   `api/…/evaluation.py`; `api/eval/tune_weights.py` drives Optuna. Results land in
   `api/eval/*.txt`.

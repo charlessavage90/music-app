@@ -55,7 +55,8 @@ One further code-vs-record item, load-bearing enough to shape the factor table:
 > the cost (`pathfinding.py:104`, weight 1.0 in `config.py`), `floor =
 > min(pop_source, pop_target)` in **raw** popularity, relaxed per bypass by
 > `floor_relax_*`. **INFERENCE:** any arm that succeeds at diving — the entire point of
-> this sweep — sends `pop_v` below the raw floor, at which point a weight-1.0 raw-currency
+> this sweep — sends `pop_raw_v` (named `pop_v` when this was written) below the raw
+> floor, at which point a weight-1.0 raw-currency
 > counter-term that was inert in the baseline switches on *only in the arms that work*.
 > Left unhandled, every "one-knob" currency or magnitude arm is actually a two-knob
 > change (the knob, plus a newly-live floor term). Falsifier: paths in candidate arms

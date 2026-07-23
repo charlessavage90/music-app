@@ -56,7 +56,8 @@ that is how the drift began.
     correctly and declines them.
   - **Three quantities that are not interchangeable** and have each caused an error here:
     **degree ≠ fame** (§2.6), **popularity ≠ fame** at the top of the distribution (§2.11),
-    and **raw popularity ≠ percentile** (§2.12). Do not trust any `hubfrac`/payload figure,
+    and **raw popularity ≠ percentile** (§2.12). Do not trust any
+    `top1pct_degree_frac` (named `hubfrac` before 2026-07-23) or payload figure,
     and check which currency a claim is in before acting on it.
   - **Decided 2026-07-23:** the owner chose **repair + retune** — governing design
     `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md`; its §1
@@ -105,6 +106,7 @@ that is how the drift began.
 | `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | Gate structure and phase ordering. Its C4 is a pointer only — it holds no figures. |
 | `superpowers/findings/2026-07-23-tiebreak-fix-adoption.md` | Identity (sha256) and verification record of the **adopted** 75k artifact, post tie-break fix. |
 | `superpowers/findings/2026-07-22-configuration-model-null.md` | Authoritative for its own figures — the exact configuration-model null referenced by Phase 1 log §2.10/§7.1 item 1. |
+| `superpowers/findings/2026-07-23-track2-protocol-analyst-review.md` | **AUTHORITATIVE for its own §2 measurements; ADVISORY on the protocol.** The `ml-graph-analyst` review of the Track 2 pre-registration, discharging its prerequisite **P8** and the design's §4.6 review gate. Verifies the pre-registration's §0 resolution table **in code**, and raises numbered protocol observations (O-series) and recommendations (PR-series) that the Track 2 session must read before running any arm. Scope is the **protocol only** — the harness is a separate review (P8b). Remit is derivation, not judgement: it says nothing about whether the experiment is worth running. Measurements: `builder/analysis/2026-07-23-track2-protocol-review/`. |
 | `../CLAUDE.md` | How to work in this repo: commands, architecture, conventions. |
 
 ### Active

@@ -13,7 +13,10 @@ A, B, C, D, E = ("a" * 36, "b" * 36, "c" * 36, "d" * 36, "e" * 36)
 
 
 def _stats(*mbids_and_users):
-    """Popularity is distinct listeners, not plays (spec 4.1)."""
+    """Popularity is score-weighted in-degree, not listeners and not plays.
+
+    `listen_count` is set here only to prove it is ignored.
+    """
     return [
         ArtistStats(mbid=m, name=m[0].upper(), pop_indegree_scaled=u, listen_count=u * 7)
         for m, u in mbids_and_users
@@ -91,8 +94,9 @@ def test_popularity_is_log_scaled_to_unit_range():
     assert max(graph.pop_raw) == 1.0
 
 
-def test_popularity_uses_user_count_not_listen_count():
-    # A has fewer plays but more distinct listeners, so it must rank higher.
+def test_popularity_uses_the_indegree_slot_not_listen_count():
+    # A has a far larger in-degree slot but fewer plays, so it must rank
+    # higher: listen_count is archived and never routed on.
     adjacency = {A: {B: 1.0}, B: {A: 1.0}}
     stats = [
         ArtistStats(mbid=A, name="A", pop_indegree_scaled=1000, listen_count=1000),
@@ -244,3 +248,23 @@ def test_mutual_knn_ranking_ties_still_break_on_lowest_mbid():
 def test_mutual_knn_rejects_ranking_with_a_different_node_set():
     with pytest.raises(ValueError, match="ranking"):
         mutual_knn_cap({"a": {}}, k=1, ranking={"b": {}})
+
+
+def test_graph_exposes_popularity_as_a_read_only_alias_for_pop_raw():
+    """The frozen probe scripts in builder/analysis/ read `.popularity`.
+
+    They are deliberate records of what was executed, never updated, and not
+    part of any suite — so a future rename would break the project's audit
+    trail silently. Mapping table: builder/analysis/README.md.
+    """
+    graph = build_graph(
+        {A: {B: 0.5}, B: {A: 0.5}},
+        [
+            ArtistStats(mbid=A, name="A", pop_indegree_scaled=10, listen_count=0),
+            ArtistStats(mbid=B, name="B", pop_indegree_scaled=1, listen_count=0),
+        ],
+        EdgeType.BEHAVIOURAL,
+    )
+    assert graph.popularity == graph.pop_raw
+    with pytest.raises(AttributeError):
+        graph.popularity = [0.0, 0.0]

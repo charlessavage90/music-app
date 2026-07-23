@@ -264,6 +264,85 @@ The owner's P7 answer is recorded in the same place.
 | **Named-entity check as standing practice** — showing the owner the *names* a perceptual metric produces, not just the number | Pre-registration §5 already implements a stronger version for the fame proxy: 33 artists labelled into three buckets **without seeing fan counts**, scored for rank agreement and catastrophic inversions. A parallel practice invented now would duplicate it. | **After §5 runs.** Generalise its protocol into `closeout` (as an adoption-time step) and into `TEST-QUEUE.md`'s format, with its measured performance attached. |
 | **Artifact provenance registry** — every gitignored `.bin` carries its full build configuration and code commit, and any cross-artifact comparison must cite the rows and count the differing columns | Track 2 Stage A holds the artifact fixed and asserts its sha256, so the post-hoc-comparison confound is not live. The checksum table in Phase 1 log §5 is adequate for now. G1 also narrows the gap: a rebuilt artifact must now pass acceptance before it exists. | **When pre-registration §2.4 R0 or R2 fires** and a builder arm (p99 rescale, or the deferred `cap_strategy`) is scheduled — that is when new artifacts appear and log §2.2's two- and three-knob comparison errors become possible again. |
 
+### P8 — `ml-graph-analyst` protocol review landed (2026-07-23)
+
+Run separately from the guards work, against the pre-registration and the working tree.
+Record: `findings/2026-07-23-track2-protocol-analyst-review.md` (owns its §2 figures);
+measurements committed to `builder/analysis/2026-07-23-track2-protocol-review/`.
+Registered in the doc map. **Its O-series observations and PR-series recommendations are
+the Track 2 session's to act on** — not restated here, and none was actioned by the guards
+work.
+
+Three of its items bear on the guards directly, recorded because they are corroboration
+from a reader who had the code open:
+
+- **O6 independently confirms P2 is discharged** — its M4 resolved all 12 pre-registered
+  pairs in the adopted artifact, matching G1's canonical-set verification. The
+  pre-registration's §7 still *lists* P2 as outstanding; the execution log and the review
+  both say otherwise.
+- **O8 independently confirms the mirror-and-verify / guard-G contradiction** that G5(a)
+  found and fixed, and adds one consequence the note does not cover: with G applied to P,
+  **no comparison anywhere in the design is against shipped behaviour on pairs 4–5**, so
+  the C5 no-regression inspection cannot see the d0 change the owner would notice there.
+- **O5 records that G2's rename hazard materialised** — the review read the working tree
+  mid-rename, so §0's `file:line` citations are correct against HEAD and stale against the
+  tree. Exactly the hazard G2's plan named. No action needed; the mapping table covers it.
+
+**O3 is a consequence of G3, not a defect in it.** `w_degree_hub` is missing from §1.2's
+constants table. It is genuinely constant under every intervention here (a zero weight
+cannot be un-zeroed by turning another knob), so it is a completeness gap against the
+dormant-term rule this work added — the rule finding its first omission on the document
+that motivated it.
+
+### Closeout (2026-07-23)
+
+**Mutation-tested the new guard rather than observing it pass.** Four mutants, all killed:
+disabling the canonical-presence check (2 tests red), the famous median-degree floor (2),
+the minimum-degree floor (1), and removing the `check_acceptance` call from `cmd_build`
+(1). The last one matters most — it proves the guard is wired into the emission point,
+not merely importable.
+
+**Gap found and closed at closeout:** nothing covered the compatibility aliases, so a
+future rename could have broken the frozen `builder/analysis/` scripts silently, surfacing
+only when someone tried to reproduce an old result. Added
+`api/tests/test_frozen_script_aliases.py` (and a builder-side equivalent in
+`test_graph.py`), including an assertion that the aliases are **read-only** so they cannot
+become a second way to write the same quantity. The builder alias is asserted in the
+builder's own suite, not the API's — importing `artistpath_builder` from `api/tests` would
+create exactly the coupling the APG1 format exists to avoid.
+
+**Doc audit (`doc-auditor`) found two HIGH defects, both caused by this work, both fixed:**
+
+- `CLAUDE.md`'s **orient table** — the first thing a fresh session reads — still named
+  `hubfrac` / `hub_penalty` / `w_hub` in the row warning about currency confusion. The row
+  telling you to check your currency was itself out of date.
+- `.claude/agents/ml-graph-analyst.md`'s cost formula **omitted the degree-hub term
+  entirely** and used the old names. This file is auto-loaded, and my own `.claude/` grep
+  missed it precisely because the defect was an *omission* — the term wasn't there to
+  match. A grep for stale names cannot find a missing one; that is the lesson.
+
+Two further ACTIVE documents carried stale identifiers and were corrected in place
+(`docs/README.md`, and the pre-registration's §0 `pop_v`). Historical plans keep their
+original names deliberately — renaming inside a frozen record would falsify it.
+
+**Snyk:** `builder/src`, `api/src` and `api/eval` clean. The three Medium DOM-XSS findings
+in `builder/analysis/.../listen.html` are the pre-existing owner-accepted ones (Phase 1 log
+§7.1 item 3) and are untouched.
+
+**Suites:** builder 112 passed, api 120 passed, frontend 31 passed. The frontend run is
+the check that matters for the rename — it is what confirms the API's JSON response
+contract still says `popularity`.
+
+**No config default was left unflipped (closeout A4):** this work added no runtime knob.
+`PRODUCTION_ACCEPTANCE` is the default and only the test suite substitutes it; the
+`w_degree_hub` change is a rename, not a new switch.
+
+**Artifact provenance (closeout D3): nothing was rebuilt.** The adopted artifact is
+unchanged at sha256 `4cb84ef9…b061dc8`, and `graph-t15-capfix.bin` (`c8af6eac…`) was read
+only as the negative case. Both asserted in-script before every measurement. The committed
+500-node test fixtures are untouched and still valid — the APG1 format did not change,
+which is exactly why the wire key had to keep its name.
+
 ## Track 2 — cost-function retune
 
 *(not started — next session begins here. Read the Track 1 use-the-app results
