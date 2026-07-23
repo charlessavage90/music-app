@@ -80,6 +80,51 @@ invariant, not a quality gradient, so it is the one candidate for a guard.
 the branch/PR thread holds them; if a durable copy is needed for Track 2's pair
 set, capture them into the Track 2 plan when it is written.
 
+### Closeout — doc audit (2026-07-23)
+
+The `doc-auditor` was run at closeout after an initial judgement call to skip it was
+**overruled by the owner** — correctly. The per-task and whole-branch reviews audited the
+*diff*; the doc audit audited the *whole doc set*, and found six High-severity defects in
+files this session never touched. Recording the lesson: **a session that edits documents
+cannot substitute diff review for a doc audit** — the stale claims were in the files it
+did *not* touch.
+
+**Fixed this session** (commit `914f6c4`, plus memory files outside the repo):
+
+- **Auto-loaded memory was the worst class.** Three memory files (`roadmap-pointer`,
+  `project-state`, `crawl-resume`) plus the `MEMORY.md` index still said Phase 1 was
+  PAUSED with the decision outstanding, named `capfix` as adopted, and pointed
+  `ARTISTPATH_GRAPH` at the original pre-Phase-2 graph. Memory loads into *every*
+  session, so a cold session would have received that simultaneously with the correct
+  in-repo status. Rewritten as pointers, figures stripped per the memory rule.
+- `2026-07-22-HANDOFF-phase1.md` — Role ACTIVE, no in-file supersession, still said
+  "Next action: plan Phase 1" and named capfix + checksum as "the adopted one" under a
+  *"still live"* heading. Banner + inline dated corrections added.
+- Phase 1 log — §2.1's unmarked present-tense "the one the app currently routes on";
+  §6's two mutually contradictory bullets; two mid-document `(ADOPTED)` markers on
+  capfix. **Adjudication on the markers:** they sit in *dated measurement* tables where
+  capfix genuinely was adopted, so they were **date-scoped, not reassigned** — history
+  preserved, while a `grep ADOPTED` no longer returns the superseded artifact as current.
+- Root `README.md` — a stale edge count (the pre-Phase-2 figure, ~4.5× off). Reworded to
+  cite rather than restate, per the figures rule.
+- `docs/README.md` — four unmapped documents added; the roadmap row's "live work queue"
+  framing corrected; **restated figures converted to citations** (the Phase 1 log owns
+  them and says so explicitly, so the restatements were violations even while correct).
+- Two C3 specs flipped ACTIVE → COMPLETE; the Track 1 plan gained a COMPLETE banner
+  (checkboxes deliberately left unticked as the historical record).
+- `CLAUDE.md`'s `ARTISTPATH_GRAPH` description (still framed as "5k dev → 75k prod") and
+  `.claude/agents/ml-graph-analyst.md`'s instruction to put probe scripts in a scratchpad
+  — the latter contradicted the convention the record paid for when scripts were nearly
+  lost to a scratchpad clean.
+
+**Deferred, with success conditions:**
+
+| Item | Success condition |
+|---|---|
+| No `builder/README.md` (the other two packages have one) — pre-existing gap, not caused by this work | **When `builder/` is next worked on substantively** (i.e. Track 2's cap-strategy work, if it ever runs) — or accept permanently if the package README convention is dropped. |
+| `CLAUDE.md` and `api/README.md` both restate `ApiConfig` cost-weight defaults | **Due when Track 2 changes any weight** — it will invalidate both copies at once, which is the moment to convert them to citations. |
+| Low-severity role/status drift: Phase 2 log header rationale, revised-plan in-file role, "Consequences for the paused work" heading, pre-fix `file:line` pointers in the Phase 1 log, two 2026-07-19/20 design specs still "ready for implementation" | **Sweep at the next closeout**, or when a reader is actually misled — none change what a session would *do*. |
+
 ## Track 2 — cost-function retune
 
 *(not started — next session begins here. Read the Track 1 use-the-app results
