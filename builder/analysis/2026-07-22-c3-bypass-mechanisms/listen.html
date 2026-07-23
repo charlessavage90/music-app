@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blind listen — C3 known mechanism</title>
+<style>
+  :root { color-scheme: light dark; --bg:#fff; --fg:#111; --mut:#666; --line:#ddd; --card:#f6f6f7; --accent:#3b6ea5; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14151a; --fg:#e8e8ea; --mut:#9aa; --line:#2c2e36; --card:#1e2027; --accent:#6ea3d8; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.5 system-ui,sans-serif; background:var(--bg); color:var(--fg); }
+  header { padding:16px 20px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:5; }
+  h1 { font-size:17px; margin:0 0 4px; }
+  .sub { color:var(--mut); font-size:13px; }
+  #status { font-size:12px; margin-top:6px; }
+  main { padding:20px; max-width:1200px; margin:0 auto; }
+  .pair { margin-bottom:40px; }
+  .pair > h2 { font-size:16px; border-bottom:2px solid var(--accent); padding-bottom:4px; }
+  .depth { margin:22px 0; }
+  .depth > h3 { font-size:13px; color:var(--mut); text-transform:uppercase; letter-spacing:.05em; margin:0 0 10px; }
+  .cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .journey { border:1px solid var(--line); border-radius:8px; padding:10px 12px; background:var(--card); }
+  .jtitle { font-weight:700; font-size:15px; margin:0 0 8px; display:flex; justify-content:space-between; align-items:center; }
+  .art { display:flex; align-items:center; gap:8px; padding:3px 0; font-size:14px; }
+  .art .n { flex:1; }
+  .art.end .n { color:var(--mut); font-style:italic; }
+  button.play { border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:5px; cursor:pointer; width:26px; height:26px; font-size:12px; }
+  button.play:hover { border-color:var(--accent); }
+  button.play.playing { background:var(--accent); color:#fff; }
+  button.play.none { opacity:.35; cursor:default; }
+  .verdict { margin-top:10px; font-size:13px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .verdict label { cursor:pointer; }
+  textarea.note { margin-top:8px; width:100%; min-height:38px; resize:vertical; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:13px/1.4 system-ui,sans-serif; }
+  textarea.note:focus { outline:none; border-color:var(--accent); }
+  #compile { position:fixed; bottom:16px; right:16px; padding:10px 16px; background:var(--accent); color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,.2); }
+  #out { position:fixed; inset:auto 16px 64px 16px; max-width:600px; margin:0 auto; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px; display:none; white-space:pre-wrap; font-family:monospace; font-size:12px; max-height:40vh; overflow:auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Blind listen — which journey is the better trip?</h1>
+  <div class="sub">Each row shows the same start→end at a bypass depth, as unlabeled journeys. Play the clips, judge which is the better <em>journey</em> and whether hubs thin out as depth grows (5→20). Journeys are shuffled; labels mean nothing across rows.</div>
+  <div id="status">loading…</div>
+</header>
+<main id="main"></main>
+<button id="compile">Compile my verdicts</button>
+<pre id="out"></pre>
+<audio id="player"></audio>
+<script>
+const API = "http://localhost:8000";
+const player = document.getElementById("player");
+let playingBtn = null;
+const clipCache = {};
+
+async function playClip(mbid, btn) {
+  if (playingBtn === btn && !player.paused) { player.pause(); btn.classList.remove("playing"); playingBtn=null; return; }
+  if (playingBtn) playingBtn.classList.remove("playing");
+  btn.textContent = "…";
+  try {
+    let url = clipCache[mbid];
+    if (url === undefined) {
+      const r = await fetch(`${API}/api/artists/${mbid}/track`);
+      url = (r.status === 200) ? (await r.json()).preview_url : null;
+      clipCache[mbid] = url;
+    }
+    if (!url) { btn.textContent="✕"; btn.classList.add("none"); return; }
+    player.src = url; await player.play();
+    btn.textContent="▶"; btn.classList.add("playing"); playingBtn=btn;
+  } catch(e) { btn.textContent="✕"; btn.classList.add("none"); }
+}
+player.onended = () => { if (playingBtn){ playingBtn.classList.remove("playing"); playingBtn.textContent="▶"; playingBtn=null; } };
+
+function artistRow(a, isEnd) {
+  const d = document.createElement("div"); d.className = "art" + (isEnd?" end":"");
+  const b = document.createElement("button"); b.className="play"; b.textContent="▶";
+  b.onclick = () => playClip(a.mbid, b);
+  const n = document.createElement("span"); n.className="n"; n.textContent=a.name;
+  d.append(b, n); return d;
+}
+
+const verdicts = {};
+const notes = {};
+fetch("listen_public.json").then(r=>r.json()).then(data => {
+  document.getElementById("status").textContent =
+    `graph ${data.graph} · ${data.pairs.length} pairs · clips from ${API} (start the API + open via http://localhost:8080)`;
+  const main = document.getElementById("main");
+  const DEPTHS = [5,10,15,20];
+  data.pairs.forEach((p, pi) => {
+    const sec = document.createElement("section"); sec.className="pair";
+    sec.innerHTML = `<h2>${p.from} → ${p.to} <span class="sub">(${p.label})</span></h2>`;
+    DEPTHS.forEach(depth => {
+      const arms = p.depths[depth]; if(!arms) return;
+      const dv = document.createElement("div"); dv.className="depth";
+      dv.innerHTML = `<h3>${depth} bypasses</h3>`;
+      const cols = document.createElement("div"); cols.className="cols";
+      Object.keys(arms).sort().forEach(tok => {
+        const j = document.createElement("div"); j.className="journey";
+        j.innerHTML = `<div class="jtitle">Journey ${tok}<span class="sub">${arms[tok].artists.length} stops</span></div>`;
+        arms[tok].artists.forEach((a,idx,arr) => j.append(artistRow(a, idx===0||idx===arr.length-1)));
+        cols.append(j);
+      });
+      dv.append(cols);
+      const vd = document.createElement("div"); vd.className="verdict";
+      vd.innerHTML = `<span>Best journey:</span>`;
+      const key = `${pi}|${depth}`;
+      Object.keys(arms).sort().concat(["tie"]).forEach(tok => {
+        const id=`v_${pi}_${depth}_${tok}`;
+        const l=document.createElement("label");
+        l.innerHTML=`<input type="radio" name="${key}" value="${tok}" id="${id}"> ${tok==="tie"?"no pref":tok}`;
+        l.querySelector("input").onchange=e=>{verdicts[key]=e.target.value;};
+        vd.append(l);
+      });
+      dv.append(vd);
+      const nt=document.createElement("textarea"); nt.className="note";
+      nt.placeholder="notes (optional) — where it felt off, whether hubs thinned, close call…";
+      nt.oninput=e=>{ notes[key]=e.target.value; };
+      dv.append(nt);
+      sec.append(dv);
+    });
+    main.append(sec);
+  });
+}).catch(e => { document.getElementById("status").textContent = "failed to load listen_public.json — serve this file via http.server on :8080"; });
+
+document.getElementById("compile").onclick = () => {
+  const out = document.getElementById("out");
+  const keys = [...new Set([...Object.keys(verdicts), ...Object.keys(notes)])]
+    .sort((a,b)=>{const[pa,da]=a.split("|").map(Number),[pb,db]=b.split("|").map(Number);return pa-pb||da-db;});
+  const lines = keys.map(k => {
+    const [pi,depth]=k.split("|");
+    const best = verdicts[k] || "(no pick)";
+    const note = (notes[k]||"").trim();
+    return `pair${pi} depth${depth}: best=${best}` + (note ? ` — ${note}` : "");
+  });
+  out.textContent = lines.length ? "VERDICTS (paste back to Claude):\n"+lines.join("\n") : "No verdicts or notes recorded yet.";
+  out.style.display = "block";
+};
+</script>
+</body>
+</html>
