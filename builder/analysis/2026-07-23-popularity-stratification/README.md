@@ -14,6 +14,14 @@ tie-break defect of §2.8, is why the product does not surface obscure artists.
 | `assortativity.py` | **The load-bearing one.** Across five artifacts: is the graph popularity-assortative, and can the router step from a famous artist toward an obscure one at all? Artifact-only, runs in seconds. |
 | `tail_probe.py` | Does bypassing ever reach obscure artists? `capfix` vs `rankfix`, one knob (the graph), shipped router, 3 pairs × 20 bypasses, two victim policies. Produced the null that redirected the work. |
 | `coherence_probe.py` | Are the hops the owner called incoherent the MBID-arbitrary ceiling edges? **Designed as a contrast and it failed to discriminate** — coherent and incoherent hops are identical in the graph. Kept because the failure is the finding. |
+| `exits_by_band.py` | Who has zero obscure exits — the famous artists or the micro-genre hubs? Answer: the premise is false, they are the same population (§2.11). |
+| `known_viability.py` | **Read this one before trusting the others.** Can the `known` bypass do what §3.4 specifies, for the artists users press it on? It can — and the finding that it *satisfies its gate while returning a famous artist* is what showed the other scripts here measure in the wrong currency (§2.12). |
+
+> **⚠ Currency warning.** `assortativity.py`, `tail_probe.py` and `exits_by_band.py` all
+> measure popularity in **percentile** units. The `known` gate and the `w_jump` cost term
+> use **raw popularity**, and the two diverge sharply at the top — the top decile spans half
+> the raw range. See §2.12. The measurements are correct; conclusions about *mechanism
+> viability* drawn from them are not.
 
 `tail_probe.log` is the run record for `tail_probe.py`.
 

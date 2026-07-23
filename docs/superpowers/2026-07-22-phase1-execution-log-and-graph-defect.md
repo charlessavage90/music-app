@@ -332,6 +332,13 @@ a **new** candidate on a **new** finding is a reading the owner should make deli
 >
 > The original heading read "…inverted the graph's popularity assortativity". Retained
 > below for audit; **do not cite this section's numbers — cite §2.10.**
+>
+> **⚠ SECOND CORRECTION — §2.12.** This section measures in **percentile** units while the
+> `known` gate and `w_jump` operate in **raw popularity**, and the two diverge sharply at
+> the top of the distribution. Its claim that *"no cost function can route to an obscure
+> artist along edges that do not exist"* is **fully retracted** — obscure artists are 2–3
+> hops from every famous artist tested, and even The Beatles have 7 admissible `known`
+> substitutes. **This is a cost-function problem, not a graph-structure problem.**
 
 **This supersedes §2.8 in importance.** §2.8's tie-break defect is real and explains
 Radiohead and The Beatles. It is **not** the reason the product does not surface obscure
@@ -623,6 +630,99 @@ been shown one. If that inference is wrong, the gameability concern weakens — 
 structural finding above does not depend on it.
 
 **Scripts:** `builder/analysis/2026-07-23-popularity-stratification/exits_by_band.py`.
+
+> **⚠ The "exits" measure above is in PERCENTILE units. §2.12 shows that is the wrong
+> currency for the mechanism, and corrects the conclusions drawn from it.**
+
+---
+
+### 2.12 The currency error — and why this is a cost-function problem, not a graph problem (2026-07-23)
+
+Prompted by the owner pushing on whether zero-exit artists are underserved, given that
+famous artists are the most likely path endpoints and the most likely `known` targets.
+**The answer reverses the direction of §2.9–§2.11.**
+
+#### `known` is satisfiable — and most satisfiable for exactly the famous artists
+
+Per §3.4's specification (route to an artist *highly similar to K but more obscure*) and
+§3.10's gates (pop drop ≥ 0.10; similarity ≥ 0.70 for the waypoint form):
+
+| popularity band | n | % with **zero** admissible substitutes | median # | % zero **with** sim gate |
+|---|---|---|---|---|
+| **top 0.1 %** | 75 | **0.0 %** | **17** | 0.0 % |
+| p99–99.9 | 667 | 0.3 % | 12 | 0.3 % |
+| p95–99 | 2,968 | 11.6 % | 5 | 23.0 % |
+| p90–95 | 3,710 | 23.9 % | 3 | 70.2 % |
+| p75–90 | 11,128 | 29.6 % | 2 | 92.9 % |
+| p50–75 | 18,548 | 42.8 % | 1 | 98.8 % |
+| **below p50** | 37,095 | **88.7 %** | **0** | 100.0 % |
+
+The Beatles have **7 of 7** neighbours admissible; Metallica 32, Bob Dylan 34, Pink Floyd 30.
+**The mechanism is unsatisfiable for obscure artists, not famous ones.** The similarity gate
+is what bites in the middle bands, not availability.
+
+#### But it satisfies its gate and returns a famous artist
+
+The Beatles' best substitute is **Paul Simon** — raw popularity **1.00 → 0.52**, clearing the
+0.10 gate by nearly 5×, and still at the **92.9th percentile**.
+
+**The cause is that the two currencies diverge at the top.** Raw popularity: median 0.302,
+p90 **0.495**, p99 0.677, max 1.00. So the top decile spans *half the entire raw range*, and
+a 0.10 raw drop from a superstar lands comfortably inside the famous stratum.
+
+> **This corrects §2.9, §2.10 and §2.11.** All three measure "exits" and stratification in
+> **percentile** units. The `known` gate and the `w_jump` cost term operate in **raw
+> popularity**. The two were never reconciled, and they disagree precisely where the product
+> operates. The structural measurements in those sections are arithmetically correct; the
+> **conclusions drawn from them about mechanism viability are not.**
+
+#### The obscure region is 2–3 hops away, not absent
+
+| from | → p90 | → p75 | → p50 |
+|---|---|---|---|
+| The Beatles | 2 | 2 | **3** |
+| Metallica | 2 | 2 | **2** |
+| The Shins | 2 | 2 | **2** |
+| Pink Floyd | 2 | 2 | **2** |
+| Taylor Swift | 1 | 2 | **2** |
+
+**§2.9's "no cost function can route to an obscure artist along edges that do not exist" is
+fully retracted**, and §2.10's softened "competition problem" still understates the
+proximity.
+
+#### What this makes the problem
+
+**A cost-function problem.** Beatles → Paul Simon costs `w_jump·|Δpop| = 1 × 0.48 ≈ 0.48`;
+remaining in the stratum costs ≈ `w_hop` = 0.02 per hop. **One dive costs twenty-four hops'
+worth of `w_hop`.** The router is not failing to find exits — it is correctly pricing them as
+expensive and declining.
+
+**`w_floor` being inert (§3.3) is a symptom of this, not a separate defect.** It was the term
+designed to counteract exactly this pressure. It never fires because `floor =
+min(pop_source, pop_target)` and `w_jump` prevents paths from dipping below the floor in the
+first place. One defect, two faces.
+
+#### Consequences
+
+- **The stratification work does not motivate a builder redesign on its own.** The new
+  `cap_strategy` of §2.10 remains an open design question, but it is **no longer the
+  cheapest or most likely fix** and should not be built on the strength of §2.9–§2.11.
+- **A cost-function experiment needs three knobs, not two:** `w_jump`, `w_sim`, **and the
+  currency of the `known` gate**. A gate expressed as a raw drop cannot express "less
+  famous" at the top of this distribution; a percentile-based or rank-based gate can.
+- **§2.11's gameability warning survives and sharpens.** Any success criterion must be
+  robust to *both* currency errors — raw drops that stay famous, and percentile drops that
+  land in insular high-popularity genres.
+
+#### Calibration note for a future reader
+
+§2.9 through §2.12 were produced by an **outside consulting session** over a single day, and
+§2.9's central framing has now been corrected **twice** — once by `ml-graph-analyst` (§2.10)
+and once by the owner's own question (this section). The underlying measurements have held
+each time; the **interpretations** have not. Treat any conclusion in this range as load-tested
+only where a later section explicitly re-affirms it.
+
+**Scripts:** `builder/analysis/2026-07-23-popularity-stratification/known_viability.py`.
 
 ---
 
