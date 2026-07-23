@@ -484,6 +484,118 @@ he judged neither materially affected the verdicts.
 
 Immediately after this, the questioning of `hubfrac` against his perception led to §2.
 
+### 3.9 The owner's verdict notes, verbatim
+
+**Why these are preserved rather than summarised.** Coherence decided the listen, and **no
+metric we have captures it** (§3.8). These notes are therefore the only operational
+description in the record of what the owner means by a coherent journey — a small labelled
+corpus of what reads as smooth versus jarring, in his own words. Anyone trying to define,
+learn, or test a coherence objective should start here rather than from a metric.
+
+Arms are named (the test was blind at the time; the mapping is in §3.8's table).
+
+**Miles Davis → Daft Punk**
+
+- *d5 (picked V0):* "Tough decision. [C] was discarded first as the Avril Lavigne and
+  Blink-182 hops felt wrong for the path (coherence). [V0] felt more coherent than [A]."
+- *d10 (picked A):* "[A] felt distinctively more coherent in this set and feels like fewer
+  hubs to me (or at least, a smaller ratio of hubs). [C]'s Taylor Swift → Daft Punk feels
+  like a big jump, and [V0] seems least coherent after Aretha Franklin."
+- *d15 (picked A):* "[A] feels overall most coherent, though the Kylie Minogue to Justin
+  Timberlake step feels off. I don't know those two artists' discography deeply, but I
+  suspect they both have a range of styles in their catalog which might explain why they are
+  neighbors. [C]'s Avril → Britney → Daft Punk hops don't make sense to me."
+- *d20 (picked A):* "The hardest of the three to differentiate. Surprising because based on
+  previous tests, more bypasses made issues more pronounced. From a hub perspective, this
+  pop-pop pairing may be a really challenging one… My feedback on all rows is driven more by
+  coherence than hub-elimination. **[A] ultimately chosen because the longer path genuinely
+  does feel like it transitions well to me, but nearly every step looks like a hub.**"
+
+**The Shins → Wishbone Ash**
+
+- *d5 (picked A):* "[C] discarded pretty quickly. The Shins to the White Stripes feels like a
+  leap that should have at least a step in between. **[A] inserts the Flaming Lips between
+  the Shins and the White Stripes, fixing the issue [C] has.** All 3 have many well-known
+  artists, but [A] wins on coherence."
+- *d10 (picked A):* "The Shins to Kings of Leon feels like a bit of a jump, but the
+  connection is real and all 3 have it. [V0]'s inclusion of Marilyn Manson doesn't land with
+  my ears… Kings of Leon → Green Day → CCR doesn't feel right."
+- *d15 (picked V0):* "[A] seems to go all over the place. Low coherence from my ears. [V0]
+  wins — this one feels like a path that's gone through bypasses but remains coherent. [C]
+  doesn't look that different from paths in the lesser-bypassed rows above."
+- *d20 (picked V0):* "A lot of hubs. What's interesting about this set is it feels like the
+  first few hops in each are less well-known, but then each lands on hubs. **[A] — feels like
+  it got gravitationally pulled towards a hub around step 3-4, then had to fight its way back
+  to Wishbone Ash.** [C] — I get the Florence → Sia transition, but then going to Justin
+  Timberlake and Mariah Carey feels like it headed in the wrong direction. [V0] — tempted to
+  eliminate because of the Bastille → Fall Out Boy → Marilyn Manson jump, but coherent enough
+  to rise above the other two."
+
+**Metallica → Taylor Swift**
+
+- *d5 (no preference):* "[A] and [V0] are the same path. [C] is interesting… a more
+  interesting path, with lesser known artists involved. The Daft Punk to Taylor Swift jump
+  feels like a leap, but could be explained by the pop genre and popularity of those artists.
+  I'm tempted to pick [C], but I will pick 'no pref'… [A] and [V0] being identical and [C]
+  including multiple artists that I like may be confounding." *(Recorded as a true
+  no-preference and excluded from the tally; the lean toward C is noted, not counted.)*
+- *d10 (picked C):* "[A] — to me, incoherent: Metallica to Oasis? Bon Iver to Ye to Taylor
+  Swift? Not registering with me. [V0] — similar; the Metallica jump to Bob Dylan doesn't
+  land as right. [C] — much more coherent, and feels like fewer hubs. Clearest winner I've
+  reviewed so far."
+- *d15 (picked C, radio left blank — verdict taken from the note):* "**A 4-clip, highly
+  popular artist path in the 15 category row is a red flag to me.** Discarding [V0]… [C] wins
+  out — fewer hubs while keeping coherent to my ears."
+- *d20 (picked C):* "[C] wins — I think it retains coherence while including fewer hubs."
+
+**His general observations on the exercise:**
+
+- The blind side-by-side format was **materially better than running two app instances
+  manually**; the improvement he asked for is verdicts written to disk rather than
+  copy-pasted (§7).
+- **Hub incidence felt high across every arm**, and he could not have chosen on hub incidence
+  alone — except on Metallica → Taylor Swift, which felt like it had fewer hubs overall,
+  especially at the deeper bypass counts.
+- Judging an unfamiliar artist from a **single clip** is a real limitation; he flagged the
+  rows where he suspected the clip was unrepresentative of a catalog.
+
+### 3.10 Reproducibility — parameters and the verification method
+
+**Parameters actually used.** The Stage 0 and listen figures cannot be reproduced without
+these; only `w_known` appears elsewhere in this log.
+
+| parameter | value | what it controls |
+|---|---|---|
+| substitute pop-drop gate | **≥ 0.10** | how much more obscure than K a node must be to qualify |
+| quality-cousin similarity gate | **≥ 0.70** | waypoint candidate admission (form C) |
+| `w_known` (multiplicative form) | swept **0.5**, **0.9** | the inert form of §3.6 |
+| `w_known` (additive form) | **1.0** | the binding form of §3.8 |
+| bypass policy | **all-`known`, bypass the highest `hub_penalty` interior artist each step, walked independently per arm** | each arm is driven by bypassing what *that arm* shows, which is how it would really be used |
+| snapshots | **5, 10, 15, 20** bypasses | the depth axis |
+| pair/token shuffle seed | **20260722** | blind token assignment, per pair |
+| hub set | **frozen top-1% by degree** (`hub_node_set(store, 0.01)`) | see §2.6 — this is the definition now in question |
+
+**The verification method — reuse this for any future mechanism test.** Stage 0's central
+claim ("the mechanism is inert") is only trustworthy because the comparison was built this
+way, and review #2 specifically checked that it isolated the mechanism:
+
+1. **Mirror** production `find_path` in the experiment harness rather than editing it.
+2. **Assert the mirror reproduces production exactly** on the real workload with the
+   mechanism switched off. If the paths are not identical, stop — the harness is wrong.
+3. **Only then** layer the mechanism on top. Any difference is now provably the mechanism
+   and not a reimplementation artifact.
+
+Its one known limitation, named by review #2: the self-check exercises the mechanism-**off**
+path only, so a bug in how the mechanism is *applied* would not be caught by it and still
+needs reading.
+
+**Blind-test integrity, if a listen is run again.** What made the listen genuinely blind:
+the generator emitted a **public** file (tokens + artist names only) and a **secret** file
+(token→arm mapping + hidden metrics); only a dedicated directory containing the page and the
+public file was served, so the secret file returned 404; tokens were **shuffled per pair**, so
+a token means a different arm in each pair and the listener cannot learn the pattern; and the
+API's CORS origin was widened by **environment variable**, so no shipped code was touched.
+
 ---
 
 ## 4. Closed — do not re-argue
