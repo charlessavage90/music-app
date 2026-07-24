@@ -869,3 +869,30 @@ Everything it needs is committed. Concrete shape:
 **Still open beyond P4** (unchanged): P6 percentile machinery, the C1–C6 arm harness, and
 the D4/D6/D7 + C3-anchor amendment. All wait on a fit proxy. No arm has run. Artifact
 untouched, sha256 `4cb84ef9…b061dc8`.
+
+---
+
+### Consulting-pass deferrals — documentation layer (2026-07-24)
+
+A consulting session on doc sprawl and context cost left two edits **applied** and two
+findings **deferred**. Recorded here so they survive the worker handoffs and come due on
+their own; they are documentation hygiene, not Track 2 experimental work.
+
+**Applied (on disk, in the meta-file edits carried across this handoff):**
+
+- **A standing-layer budget + displacement rule.** `CLAUDE.md` + `memory/` + both
+  `SKILL.md` bodies load unconditionally and grew 661 → ~1,440 lines in two days with every
+  addition justified. `CLAUDE.md` now states the layer is budgeted and additions are
+  displacement-only; `closeout` **D6** enforces it from the diff, and D6 is in the
+  mid-flight scaling because a handoff is when the delta is both non-zero and needed by the
+  successor.
+- **Rules do not get expiry conditions** (a hypothesis put to the consultant and killed):
+  the rules are invariants; what grows is the incident narrative attached to them, which is
+  load-bearing. D6 prices that growth instead.
+
+**Deferred — due when Track 2 *adoption* is recorded (a worker handoff does NOT satisfy this):**
+
+| Deferred | Why it waits | Success condition — due when | Owner |
+|---|---|---|---|
+| **Supersede Phase 1 log §2** — its correction notices now exceed its live content; write a short successor stating the surviving position, mark the original HISTORICAL, retain for audit | It is a live citation target for the in-flight Track 2 pre-registration; rewriting it mid-experiment risks a retraction, not a cleanup | **Track 2 adoption recorded** in this log | A short doc-editing session acting on the next `doc-auditor` (B1) report — **not** a Track 2 worker; minimum-scaling close |
+| **Relocate `CLAUDE.md` "Writing and reviewing plans here"** (~107 lines, 23% of the file) out of the standing layer, behind a pointer + the factor-table rule inline | It is the worked example the Track 2 pre-registration cites; moving it while the experiment is read cold by an incoming worker is the same timing hazard | **Track 2 adoption recorded** in this log | Same doc-editing session; this is the offsetting subtraction for the +lines D6 will show at this handoff |
