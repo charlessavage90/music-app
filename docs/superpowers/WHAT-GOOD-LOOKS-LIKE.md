@@ -26,8 +26,9 @@ it is a step that delivered nothing. So a longer path carrying more hubs can sti
 clearly better, if it carries more novel artists. The owner's worked case: an 11-artist
 path with 4 hubs beats a 4-artist path with 3 hubs, because it delivers 7 novel artists
 against 1. This is why the bypass metric is **discovery payload** (absolute count of
-non-hub interior artists), with `hubfrac` as a scale-invariant companion — see the
-roadmap's Phase 1 carry-ins.
+non-hub interior artists), with `top1pct_degree_frac` (named `hubfrac` before the
+2026-07-23 currency rename; see `builder/analysis/README.md`) as a scale-invariant
+companion — see the roadmap's Phase 1 carry-ins.
 *Firm. Owner-stated and reasoned, 2026-07-22.*
 
 **2. Bypass should progressively lengthen the path AND increase novelty — both, or
@@ -47,7 +48,7 @@ boundary, and it is not currently known.
 
 **4. Perceived hub-ness is taste-relative and will not match degree.**
 The owner called Vulfpeck a hub; it is almost certainly outside the top 1 % by degree,
-which is how `hubfrac` defines one. Offline measurement can only ever have the structural
+which is how `top1pct_degree_frac` defines one. Offline measurement can only ever have the structural
 proxy. This is one reason metrics and ear disagreed throughout Phase 2 — they were not
 measuring the same object.
 *Observation, one instance. Telemetry measures the real thing.*
