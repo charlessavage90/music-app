@@ -1059,3 +1059,65 @@ systematically re-checked. No escalation list — every finding was adjudicable 
 record.
 
 **No figures moved. No arm has run.** Adopted artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### Seams named before the sweep is built (2026-07-24)
+
+Written at authoring time per the CLAUDE.md rule, **before any scorer code exists**, because
+a seam that lives only in a session's chat evaporates at the next handoff — and this track
+has had two handoffs arrive unpredictably. Two seams, one nearer than the other, plus a
+correction to how the further one was first stated.
+
+**1. The near seam: the scorer is a handover object, and P8b lands on it.**
+
+The remaining Stage A work does not fit one session, and the boundary does not need to be
+judged by feel — **the pre-registration already names it.** §7's P8 records "P8b — the review
+of the *harness* — is not yet due: no harness exists." The C1–C6 scorer **is** that harness
+(the mirror is the *router*; the scorer is the *measurement*), so **P8b comes due the moment
+the scorer is committed and before any arm is scored.** A deferred prerequisite coming due is
+exactly what `session-start` §B tells a session to check for, and it falls here.
+
+So the sequence is: **build the scorer → commit it → P8b review → then arms.** The scorer is
+a committed, validated artifact, which is the cheap kind of handover object; and it puts the
+session that built the measuring instrument on the far side of a boundary from the session
+that reads the measurements, which is the pre-registration's own discipline applied one level
+down.
+
+**A second structural fact about the run, recorded so it is not discovered at arm nine.**
+The 15 runs are **not** one batch. §1.4's attachment arms are defined as *W + one knob*, and
+**W is chosen from the factorial results by rule R1**. So the run is two stages with a
+data-dependent gate between them: P + A0–A7 + A1u + X (11 runs) → compute C1 per cell → apply
+R1 → T1a, T1b, FL1, FL2 (4 runs). R1 is mechanical and pre-registered, so this is a
+sequencing constraint rather than a decision point, but a session planning "run 15 arms" as a
+single job has mis-planned it.
+
+**2. The far seam: nobody who has seen an arm result administers the blind listen — and the
+protocol already solves this better than by personnel.**
+
+First, a correction to how this session first stated it. It located the constraint at the
+scorer ("whoever built it holds a prior"). That under-states it: **anyone who runs the sweep
+sees arm results, because that is what running it means.** The constraint is *whoever has
+seen an arm result is ineligible to administer the listen*, and it binds unconditionally —
+including on a session that scrupulously formed no view. This session is additionally
+ineligible for the weaker, personal reason (it has twice written down a prediction that a
+fame-currency floor may surface lo-fi acts on downtempo-adjacent paths), but that is the
+lesser fact.
+
+**Second, and this is why the seam is cheaper than either framing suggested: the question was
+already solved here, twice, and solved structurally rather than by personnel.**
+`specs/2026-07-22-c3-known-mechanism-blind-listen.md` §5 and §7 make blindness a property of
+the **artifact**, not of the administrator: the arm→label mapping is *generated, sealed, and
+revealed only after all verdicts are recorded*, the generator emits real app URLs so the
+owner uses the product rather than a report, and the administering session is held to "nothing
+beyond the bare mechanics." That survives a handoff, and it does not depend on anyone's
+self-report of what they know — which a personnel rule always does.
+
+**What sealing does not cover, stated rather than assumed.** Sealing prevents *label* leakage,
+not *content recognition*. A session that has seen the arm outputs can often identify an arm
+from the artists on the path, which unseals the mapping from the inside. That residual is
+exactly what personnel separation buys, and it is small and cheap — so: **adopt the existing
+sealed-mapping protocol as the primary device, and treat "a session that has seen arm results
+does not administer" as a secondary guard that costs one planned boundary.** Do not re-derive
+the protocol; it is written and it has decided the graph twice.
+
+**Neither seam is a reason to slow down now.** The scorer is the next unit either way; naming
+the boundaries at authoring time is what makes them cheap when they arrive.
