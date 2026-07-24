@@ -8,7 +8,7 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23/24 — fourteen amendments (A1–A14); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result, A12 stops C6 gating because A11 inverted what it measures, A13 discharges D7, A14 adds two non-gating items on WGLL values 8-9. No factorial arm has run.**
+> **⚠ AMENDED 2026-07-23/24 — fifteen amendments (A1–A15); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result, A12 stops C6 gating because A11 inverted what it measures, A13 discharges D7, A14 adds two non-gating items on WGLL values 8-9, A15 fixes a resolver recall bug that poisoned P's baseline. No factorial arm has run.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
 > found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
@@ -680,6 +680,14 @@ this first.
 > fame floor (0).** Full rule, guard, residual-risk acceptance, and the currency caveat:
 > **A11 in full**, below.
 
+> **AMENDED 2026-07-24 (§9 A15) — the resolver gains an English-article recall fallback.**
+> Validating the scorer surfaced that the canonical resolver scores famous acts with
+> ambiguous short names (Justice, Rainbow, Ye→Kanye West) at fame 0, and they land in P's
+> own scored cells, corrupting the baseline medians. The fallback recovers the English
+> article under the **same** match clauses via Wikidata's label index, and is **proven
+> byte-identical on the §5 validation sample** — it changes no validated number. Full
+> statement: **A15 in full**, below.
+
 **Cost:** one short session plus ~10 minutes of owner time; a handful of API calls,
 cached to disk.
 
@@ -750,7 +758,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23/24, before any factorial arm ran
 
-Fourteen amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and two (A11, A12) on 2026-07-24 — A11 by the P4 proxy-pilot result, A12 by A11's own knock-on** (both proxies fired; these postdate the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
+Fifteen amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and two (A11, A12) on 2026-07-24 — A11 by the P4 proxy-pilot result, A12 by A11's own knock-on** (both proxies fired; these postdate the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -773,6 +781,7 @@ before it ran.
 | **A8** | **The A0 gate fired; the floor column stays off.** Identity failed on 1 cell of 252 (pair 1, first path). An exposure map over C1–C6 shows only **C5** crosses the change, and its fix costs zero extra runs: report the first-path inspection against **both P and A0**. Also records four corrections to the step-4 write-up, and the constraint that an FL arm's C3 gradient is partly its own device. | the A0 result + `findings/2026-07-23-a0-gate-analyst-review.md` | §1.4 A0 row · §1.5 · §2.4 R3 |
 | **A10** | **§5's sample is corrected and fixed, before any label is collected.** Two defects: (a) **S1 and S3 overlapped by four artists**, so "~33" was **29 distinct** and four artists would have been double-counted in every pooled statistic while appearing in two strata §5 reads differently — S3 is now the two F6 reaches only; (b) **§5's claim that S1's labels "already exist" is false** at the granularity its own scoring needs — the record holds one collective verdict ("mostly unknown"), not a per-artist three-bucket assignment, and cannot separate *heard of* from *never heard of*, which is where B_unk is computed. The nine are labelled with everyone else. S2's twelve are additionally fixed by a mechanical rule rather than hand-picked. **Sample committed as an artifact**, and the match-failure falsifier now fires at 6 rather than 7. | deriving the sample against the repo, before P4 | §5 sample · §5 strata · §5 falsifiers · `builder/analysis/2026-07-23-track2-fame-proxy/` |
 | **A9** | **Every remaining gate and branch trigger gets an effect size.** A gate without one cannot tell the finding it was written for from noise, and fires the expensive response either way. | the A0 gate having none | §9, below |
+| **A15** | **The fame resolver gains an English-article RECALL fallback; proven inert on the §5 validation sample.** The canonical resolver walks English opensearch's top-5, which buries acts whose bare name is a common word — Justice, Rainbow, **Ye (Kanye West)** all scored fame 0 and landed in **P's own scored cells at d0-d20**, corrupting the C1/C3 medians the whole sweep is measured against. The fallback reaches the entity via Wikidata's label index under the **same** identity+performer+musical clauses, and uses the English article's pageviews if one exists. `verify_resolver_equivalence.py` proves it leaves the validated sample's 9/29 matched/unmatched split **byte-identical** — it only recovers matches on names the sample did not contain, so the §5 falsifiers still describe the instrument. A recall bug fix, not a proxy change; **mine, because leaving Kanye at fame 0 in the baseline is not a defensible option to bless, and the equivalence is checkable rather than asserted.** | a poisoned baseline median found while validating the scorer on P | §5 inline note · A15 in full below · `builder/analysis/2026-07-24-track2-arm-scorer/{fame.py,verify_resolver_equivalence.py}` |
 | **A14** | **Two additions on `WHAT-GOOD-LOOKS-LIKE.md` values 8-9, both non-gating.** (a) A **d0 endpoint-fame-tracking diagnostic** per arm (§1.5), because value 9 records that fame tracking the endpoints is part of what made the reference product feel good and that eliminating famous artists would be an over-correction. (b) **C5's inspection is given its target:** the §1.5 no-regression inspection now asks explicitly whether d0 fame still tracks the endpoints, which is what value 9 says a reshaped first path should be judged against. **No threshold is taken from WGLL** — it holds none, and the rule is that a criterion contradicting a value is wrong, not that a value supplies a number. **Checked and found clean:** no existing criterion contradicts value 8 or 9. | the widened WGLL trigger + values 8-9 (cold-read adjudicator, 2026-07-24) | §1.5 (two bullets) · A14 note below |
 | **A13** | **D7 discharged: a guard-infeasible cell is dropped from ALL arms uniformly and reported.** A cell is infeasible when the walk cannot continue — no path, or a path with no interior left to bypass. Dropping it per-arm would let an arm that keeps a pair alive one bypass longer be scored on a cell its rival does not have: **arm-correlated missingness**, the exact selection confound §4's guard decision exists to prevent, returning by the back door. Implemented in `run_arms.py:drop_infeasible_uniformly`; the dropped set is written to the output and named in the report. | analyst **D7**, whose success condition was "pre-register this before the sweep" | §9 open table (D7 row) · `builder/analysis/2026-07-24-track2-arm-scorer/run_arms.py` |
 | **A12** | **C6 stops gating and becomes a reported diagnostic; the d15/d20 notability guard is the gating remnant.** A11 changed unmatched interiors from *dropped* to *scored at the fame floor*, which removes the silent-drop mechanism C6 was written to close (Attack 4) and turns match failure into a **marker of success**. Left as written, C6's 90 % floor and 5-point gap would cap an arm at ≈ 5.6 % obscure interiors — a depth limit nobody designed, contradicting the product's purpose. **Owner's decision, 2026-07-24: the app should route to artists with no English Wikipedia article.** Also discharges §2.2's permitted recalibration (does not fire). | A11's encoding change, caught before any arm ran | §2.2 C6 row + winning-configuration line · A12 in full below · `builder/analysis/2026-07-24-track2-arm-scorer/` |
@@ -974,6 +983,55 @@ Worth carrying forward: at the conservative 1.093, **C1's −1.0 threshold is al
 one of the owner's perception bands wide** — C1 asks for the middle interior to drop about
 one full step in how well he would know them. That is what the pre-registered number means
 in his units.
+
+### A15 in full — the resolver recall fallback, and why it is a bug fix not a proxy change
+
+*(2026-07-24, found while validating the scorer on production P, before any factorial arm.)*
+
+**The bug.** The canonical resolver (`fetch_pageviews.resolve`, A11-canonical) walks
+English opensearch's top-5 candidates. For an act whose bare name is a common word, the
+disambiguated band article is not in that top-5 — opensearch returns the concept. So
+**Justice → 'Justice' (rejected, not a musical act); Rainbow → 'Rainbow' (the colour); Ye →
+'Ye' (disambiguation)**, and all three score at the fame floor, 0. This is the exact
+place-name class the proxy README records fixing for Portishead/Sault, reached by a
+different miss. The §5 sample contained no such names, so validation passed over the blind
+spot.
+
+**Why it is not merely a guard case.** A11's guard flags an unmatched-but-notable interior
+for an owner glance at d15/d20. That is insufficient here for two reasons, both measured on
+P's own paths (`builder/analysis/2026-07-24-track2-arm-scorer/`):
+
+- **The misses land in P's scored cells, and P is the baseline.** Ye at Miles Davis→Daft
+  Punk **d0**; Rainbow at The Shins→Wishbone Ash **d0,1,2,3,5,10,15,20**; Justice at **d20**
+  on two pairs. C1 is `median F(candidate) − median F(P)`; a Kanye-at-0 inside P's d10–d20
+  cells makes the baseline wrong, so every candidate's contrast is wrong.
+- **Rainbow appears at d0–d5, below the guard's mandatory depth**, so the guard would not
+  even flag it. The corruption is invisible to the mechanism built to catch obscurity.
+
+**The fix, and why it changes no validated number.** `fame.py`'s
+`english_article_fallback`: when English opensearch misses, search **Wikidata's label
+index** (across languages) for an entity satisfying the **same three clauses** — identity,
+performer, musical — and if it carries an English article, use that article's pageviews.
+It is strictly a **recall** change on the identical accept criteria: it cannot accept
+anything the canonical resolver rejects on identity/performer/musical grounds; it only
+reaches articles opensearch's top-5 buried. `verify_resolver_equivalence.py` runs it over
+the committed 29-artist sample and asserts **all 9 canonical non-matches stay non-matches**
+— the validated split is preserved byte-for-byte, so the §5 falsifiers still describe the
+instrument. Recovered in real paths: Justice 5.303, Rainbow 5.708, Ye 6.587 — correctly
+ordered, Kanye the most famous.
+
+**Whose decision, stated per the CLAUDE.md rule.** Mine. It is a bug fix to the resolver's
+recall, not a change to what the proxy measures; leaving a household name at the fame floor
+in the baseline is not a residual to accept but an error to correct; and the neutrality
+claim is **checked by a committed script**, not asserted. What would make it the owner's: if
+the equivalence script ever fired — if the fallback recovered a match on the validation
+sample — the instrument would have moved and A11's validation would need revisiting. It does
+not fire.
+
+**Residual, stated.** The fallback still cannot see an act with **no** English article by
+any route (the genuine obscure tail — Miami Nights 1984, saib.), which is correct: those are
+real reach, and A11's absence-as-floor is exactly right for them. The guard's d15/d20 check
+still stands for the foreign/historically-notable case it was built for.
 
 ### What the amendments cost, stated plainly
 

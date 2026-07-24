@@ -10,10 +10,38 @@ directories; those own theirs.
 
 | File | What it is |
 |---|---|
-| `band_gap.py` / `band_gap.json` | Two checks that had to run **before** any arm: §2.2's permitted recalibration, and the coverage-by-bucket measurement that amendment **A12** rests on. Inputs are the already-committed blind labels and pageview counts — no new owner time, no network. |
+| `arms.py` | The 15 arms as data — factor table, isolating baselines, R1 selection eligibility, the package-contrast list. The sweep is **two stages**: 11 factorial/diagnostic runs, then R1 picks W, then 4 attachments. Prints its own factor table. |
+| `run_arms.py` | The walker. All-`known`, 20 bypasses, victim = most-popular interior (ties → lowest node id), independent per arm, guard G on everywhere, snapshots at {0,1,2,3,5,7,10,15,20}. Produces **paths only**. Implements **A13** (guard-infeasible cells dropped from all arms uniformly). |
+| `fame.py` | Fame resolution under **A11** (F = log10(1+pageviews), unmatched → 0). Imports the canonical resolver; adds the **A15** English-article recall fallback and the A11 d15/d20 notability guard. Disk-cached. |
+| `verify_resolver_equivalence.py` | Proves **A15**'s fallback leaves the §5 validation sample's 9/29 split byte-identical — a recall fix, not a proxy change. |
+| `score.py` | C1–C4 (gating), C6 (reported, **A12**), the C5/F5/repeat/A14-tracking diagnostics, and **R1**'s selection of W. Deterministic, offline, re-runnable. |
+| `band_gap.py` / `band_gap.json` | §2.2's permitted recalibration (does not fire) and the coverage-by-bucket measurement **A12** rests on. |
+| `fame_cache.json` | Network-expensive resolved fame, cached by name. Seeded with P's 156 interiors so the full run and the P8b review do not re-fetch them. |
 
-The scorer itself is not built yet. Sequence, per the execution log's seam entry: build it,
-commit it, **P8b review**, then arms.
+## Harness validated on production P — not an experimental arm
+
+P is production; its paths are already in the record (the A0 gate). Running the full
+pipeline on P alone validates the machinery without generating any experimental result, and
+the output is a sanity signal in its own right:
+
+- **C3 drop d5→d20 = 0.164**, against a 0.5 threshold — the scorer measures **production
+  failing the depth-gradient criterion**, which is F2 stated as a number. A candidate must
+  clear 0.5 to pass; production does not.
+- **C1 mean ΔF = 0.000** — P against itself, as it must be. Confirms the pairing is correct.
+- **C2 = 4/8** — production already reaches below B_unk in exactly the threshold number of
+  pairs. **Flagged for P8b:** C2's minimum is met by production itself on this pair set, so
+  C2 is close to non-discriminating here and C1/C3 carry the real load. Worth the reviewer's
+  eye.
+- **Resolver recall (A15) confirmed on real data:** Justice, Rainbow, and Ye (Kanye West)
+  were scoring at the fame floor and sitting in P's own scored cells; the fallback recovers
+  them (5.303 / 5.708 / 6.587) without disturbing the validated sample.
+
+## Sequence from here
+
+Per the execution log's seam entry: **P8b review of this harness → then the arms.** No
+factorial arm has been scored. The next session runs `run_arms.py` (no `--arms` filter) for
+the full stage-1 grid, `fame.py`, `score.py`, reads R1's W, then `run_arms.py --arms W …`
+plus `stage2(W)` for the attachments.
 
 ## §2.2's permitted recalibration — checked, does not fire
 

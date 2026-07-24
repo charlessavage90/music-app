@@ -115,6 +115,10 @@ def main() -> int:
                     help="P only, on one pair — validates the walker without "
                          "generating any experimental arm result")
     ap.add_argument("--out", default=str(HERE / "paths.json"))
+    ap.add_argument("--arms", nargs="*",
+                    help="run only these arms (stage 2 runs the attachments this way; "
+                         "also lets P be walked alone to validate the scorer without "
+                         "generating any experimental arm result)")
     args = ap.parse_args()
 
     digest = hashlib.sha256(GRAPH.read_bytes()).hexdigest()
@@ -132,6 +136,11 @@ def main() -> int:
     by_name = resolve_names(store, pop)
 
     arms: list[Arm] = [a for a in STAGE1 if a.name == "P"] if args.smoke else STAGE1
+    if args.arms:
+        wanted = set(args.arms)
+        unknown = wanted - {a.name for a in STAGE1}
+        assert not unknown, f"unknown arm(s): {sorted(unknown)}"
+        arms = [a for a in STAGE1 if a.name in wanted]
     pairs = ANALYSIS_PAIRS[:1] if args.smoke else ANALYSIS_PAIRS + HELD_OUT_PAIRS
     held_out = set() if args.smoke else {f"{a} -> {b}" for a, b in HELD_OUT_PAIRS}
 
