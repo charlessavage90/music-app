@@ -1,6 +1,11 @@
 # HANDOFF — Track 2, mid-track, 2026-07-23
 
-**Role: ACTIVE, and short-lived by design.** Written at retirement, for a session picking
+> **⚠ SUPERSEDED 2026-07-24 by [`2026-07-24-HANDOFF-track2.md`](2026-07-24-HANDOFF-track2.md).**
+> Its §1 loose ends are resolved: 1a (adjudication claim 23) done, 1c (build order) done,
+> 1e (PR body) done; 1b (C3 anchor) and 1d (D4/D6/D7) folded into the successor note's open
+> list. Retained for audit only. **Do not act on this file — read the 2026-07-24 note.**
+
+**Role: HISTORICAL as of 2026-07-24.** Written at retirement, for a session picking
 up cold. It records **only what is not already in the record.** Everything about what was
 done and why is in the execution log — read that first, then this:
 
