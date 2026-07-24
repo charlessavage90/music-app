@@ -260,6 +260,18 @@ that is the part that cannot be reconstructed afterward. Worked example:
 (§2.13 C5) with turning a disappointing null into an actionable one and with saving a blind
 listen that would have burned the owner's ear on nothing.
 
+> **Every gate and branch trigger needs its own effect size, not just every outcome.**
+> Fix the size of difference that fires it — or state that any difference at all is
+> decisive, and why. A trigger without one cannot tell the finding it was written for from
+> noise, and it fires the expensive response either way.
+
+Worked example, and it is the same document: Track 2's A0-vs-P gate was an exact-identity
+test over 252 cells whose failure branch roughly doubles the sweep. It fired on **one**
+cell, at a depth no criterion scores — the identical reading a 200-cell divergence would
+have got. Every *outcome* criterion in that pre-registration carries a threshold; its gates
+carried none, and nobody noticed until one fired and demanded a doubling on the strength of
+a single path.
+
 **2. Documents asserting things about the world that aren't true.** Plans have referenced
 functions that did not exist yet, and cross-references have gone stale after renumbering.
 
@@ -330,10 +342,21 @@ contradicting it.
 **Conclude explicitly, label it, and still decline to decide.** Four parts, in this order:
 
 1. **Measured** — the numbers, no adjectives. Tables belong here and nowhere else.
-2. **What I infer from it** — plainly labelled as inference, and **in plain language.**
-   Someone who does not know what Adamic–Adar measures must be able to follow this section
-   and disagree with it. If a claim cannot survive being restated without its metric name,
-   that is worth knowing before it reaches a decision.
+2. **What I infer from it** — plainly labelled as inference, and **in plain language:
+   what a person using the app would see.** Someone who does not know what Adamic–Adar
+   measures must be able to follow this section and disagree with it. If a claim cannot
+   survive being restated without its metric name, that is worth knowing before it reaches
+   a decision.
+
+   **Dropping the metric names is not enough — the same failure recurs in the experiment's
+   own coordinates.** A session coached away from jargon complied by writing `d0`, `C5`,
+   "the floor" and "the arms" instead. Those are exactly as opaque, and worse, they look
+   like plain English. `d0` is *the path you see before pressing any button*; `d20` is
+   *after twenty bypass presses*; "the floor" is *the rule that discourages routing through
+   artists more obscure than the two you picked*. Translate to what the user sees, then
+   check by the only test that matters: **could the owner disagree with this?** Not: did I
+   avoid jargon. He cannot disagree with a sentence whose subject he cannot identify, and a
+   decision he cannot argue with is not a decision he was given.
 3. **Weakest link** — the load-bearing assumption, and what would falsify it. State which
    parts you would defend and which you would abandon cheaply.
 4. **Options and their consequences** — not a recommendation wearing a finding's clothes.
@@ -345,6 +368,34 @@ data is wrong even when every number in it is right.
 bare mechanics, and is held ignorant of the expected outcome. There, the whole point is
 that no framing reaches the owner at all.
 
+### Whose decision is it — say so, every time
+
+**The rules above are about honest presentation. They have been read as rules about who
+decides, and that produces the mirror-image failure.** A session that had already settled a
+question on its own evidence tabled three options as equals and handed them over — then,
+asked whether to consult a subagent, handed over a second decision about the first. That is
+not deference. Sending the owner a choice he has no basis to make transfers the work while
+keeping the appearance of respecting his authority, and it is harder to push back on than a
+smuggled conclusion, because it arrives dressed as restraint.
+
+| His | Yours |
+|---|---|
+| What the app should do; what counts as better; whether a residual risk is acceptable; adoption; anything spending his time, his ear, or a one-shot resource like his blind labels | Methodology; run counts and which cells to run; what to measure and in what order; whether an argument is sound; every piece of experimental bookkeeping |
+
+**When you bring him a decision, state in one line why it is his rather than yours.** If
+that line is hard to write, the decision is yours — make it, show the reasoning, and say
+what would change it. "Conclude explicitly and still decline to decide" governs the left
+column only. On the right it is an abdication.
+
+**Before escalating anything, answer it yourself and write the answer down.** When a result
+touches several pre-registered criteria, what is owed is not an escalation but an
+**exposure map**: one row per criterion, whether it crosses the thing that changed, where,
+and what was actually measured there. It is the factor table's shape applied to a result,
+it is mechanical, and it dissolves most "should we consult someone" questions before they
+are asked. The session above had the measurement that closed its own worry sitting in its
+own table, and reported a criterion as endangered at a depth where its own figure was
+0.001 % — and that criterion turned out not to cross the changed knob at all.
+
 ### When to recommend a review
 
 **Reviews are never automatic.** When a trigger below is reached, *recommend* a partial or
@@ -355,6 +406,16 @@ The filter, before recommending anything: **what decision would this review chan
 you cannot name one, do not recommend it. And **if you can name the specific worry, it is
 a targeted single-agent question, not a team** — a team review is for finding what you do
 not know to ask about.
+
+**Before that filter, a cheaper one: can you answer it yourself from what you already
+have?** Write the answer out and see whether it holds. The `ml-graph-analyst` earned its
+standing here on genuine derivations nobody had done — arithmetic over the artifact showing
+that whole arms provably could not move. It is not the instrument for re-checking
+arithmetic you have already written down, and it is explicitly not the instrument for
+*which of these options should we take*, which is judgement and outside its remit. A
+session that escalates its own settled reasoning spends a session boundary and the owner's
+attention for nothing, and the recommendation itself becomes one more decision he did not
+need.
 
 - **`ml-graph-analyst`** — derivation, never judgement. Recommend it before adopting a
   normalisation, ranking or rescaling change; when a comparison spans graphs of different
