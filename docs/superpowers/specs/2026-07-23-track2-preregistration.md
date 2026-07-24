@@ -8,14 +8,16 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23 — five amendments (A1–A5), all made before any arm ran.**
+> **⚠ AMENDED 2026-07-23 — six amendments (A1–A6), all made before any arm ran.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
-> found three defects settled by arithmetic over the artifact. **§9 is the amendment
+> found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
+> plus D5 on the fame-proxy scoring rule (A6, landed early because the owner's labels are
+> a one-shot resource). **§9 is the amendment
 > index**; every affected passage below is also marked inline, because a reader who lands
 > mid-document never sees this banner. The pre-registration gate is undisturbed — the
 > amendments are themselves committed before any arm runs, and the commit timestamp is
-> the evidence. **The review's D4–D7 are NOT addressed here and remain open** (§9).
+> the evidence. **The review's D4, D6 and D7 are NOT addressed here and remain open** (§9).
 
 **Figures rule.** No measured scoring or path-quality figure is restated here. Every
 such reference is a citation into `../2026-07-22-phase1-execution-log-and-graph-defect.md`
@@ -558,20 +560,51 @@ B_unk. The spec's §6.1 sketches this; here is the runnable version.
 2. Fetch `nb_fan` for all 33 via Deezer **artist** search, exact-name match after
    pre-registered normalisation (P5). Record match failures — this doubles as the
    matching pilot for C6.
-3. Score:
-   - **Rank agreement:** Spearman between bucket ordinal and log fan count.
-   - **Catastrophic inversions:** count of *know well* artists whose fan count falls
-     below any *never heard of* artist's.
+3. Score — **amended 2026-07-23 (§9 A6), on analyst D5.** The scoring rule below replaces
+   the original, which was **not interpretable on this section's own sample**: the 33
+   artists are purposively stratified and roughly half extreme-end by construction, which
+   inflates a whole-sample Spearman (easy to pass for the wrong reason) *and* inflates an
+   absolute inversion count (easy to trip for the wrong reason). Neither was a population
+   property, so neither pass nor fail said anything. **The stratification is the right
+   sampling choice and is unchanged** — only the scoring respects it now.
+
+   **The four strata are named for reporting** (they are the sample definition above):
+   **S1** the nine anchor unknowns · **S2** the twelve judged-listen interiors ·
+   **S3** the six likely-reach artists · **S4** the six off-platform stress cases.
+   Every statistic below is reported per stratum as well as pooled.
+
+   - **Primary — mid-fame discrimination.** AUC (Mann–Whitney) of *know well* vs *heard
+     of* fan counts: the probability that a randomly chosen *know well* artist outranks a
+     randomly chosen *heard of* one. This is D5's "Spearman within the heard-of + know-well
+     subset" written in its interpretable form — over a two-level ordinal the two are the
+     same test — and it targets the regime the proxy's job actually lives in, which the
+     bimodal whole-sample statistic barely populates. **S4 excluded** (see inversions).
+   - **Secondary, reported and NOT gating — rank agreement.** Spearman ρ between bucket
+     ordinal and log fan count, **tie-corrected (average ranks on both variables)**, since
+     three buckets over 33 artists is heavily tied. Pooled and per stratum. Retained as a
+     diagnostic; it is no longer a falsifier, because on this sample a pass is
+     uninformative.
+   - **Catastrophic inversions, as a rate and split by stratum.** A *know well* artist
+     whose fan count falls below any *never heard of* artist's. Reported as a rate within
+     each stratum. **S4's inversions are read as Attack 3 blind spots, not as proxy
+     failure** — the stratum was deliberately enriched with off-platform fame to provoke
+     exactly this, so counting it against the proxy would be scoring the test against its
+     own design.
    - **Band separation:** B_unk := the largest threshold t such that ≥ 80 % of sampled
      artists below t were labelled *never heard of* (require ≥ 5 artists below t for it
-     to count).
+     to count). **Computed on the full sample including S4** — deliberately, so that an
+     off-platform artist the owner knows drags B_unk conservative rather than flattering it.
 
-**Pre-registered falsifiers — what forces a different proxy:**
+**Pre-registered falsifiers — what forces a different proxy** *(amended 2026-07-23, §9 A6;
+thresholds are pre-registered designer choices, not measured facts)*:
 
-- Spearman < **0.6**, or
-- more than **2** catastrophic inversions, or
+- **AUC < 0.70** on the primary test (S4 excluded), or
+- **more than 1** catastrophic inversion **outside S4**, or
 - no valid B_unk exists, or
 - artist-search match failure > **20 %** of the sample after normalisation.
+
+*(The whole-sample Spearman is reported but cannot fire a falsifier. The old thresholds —
+ρ < 0.6 and > 2 absolute inversions — are withdrawn.)*
 
 Any one fires → `nb_fan` is unfit; re-run the identical protocol (same labels, no
 re-asking the owner) against **Wikipedia pageviews** (the spec's named fallback). If
@@ -652,7 +685,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23, before any arm ran
 
-Five amendments, prompted by the `ml-graph-analyst` protocol review
+Six amendments, prompted by the `ml-graph-analyst` protocol review
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -672,6 +705,16 @@ before it ran.
 | **A3** | **The percentile currency level is mean-matched by definition,** so J-cur is a genuine one-column contrast; arm **A1u** added to keep the scale component visible. | **D3** (second half) | §1.3 J-cur row + note · §1.4 A1u · run count |
 | **A4** | **Read R6 added** — percentile arms moving ΔF positive while raw arms move it negative, with its mechanism, licenses and free falsifier. | **D3** (first half) | §2.4 |
 | **A5** | **Two completeness gaps closed:** `w_degree_hub` named in the held-constant table (analyst **O3**), and the S-mag column's degeneracy at ceiling-saturated endpoints stated up front. | O3 + new measurement | §1.2 · §1.3 note |
+| **A6** | **§5's scoring rule replaced** — AUC on the mid-fame regime as the primary falsifier, tie-corrected Spearman demoted to a non-gating diagnostic, inversions as a per-stratum rate with S4 read as blind spots, strata named for reporting. Sample unchanged. | **D5** | §5 |
+
+> **Why A6 landed here and not "when we get to P4".** The owner's labels are close to a
+> **one-shot resource.** §5 already makes them reusable across *proxies* — the same labels
+> re-run verbatim against Wikipedia pageviews if Deezer fails, with no re-asking — but they
+> are **not reusable across samples.** If the scoring rule turns out to need different
+> names, the owner has by then thought about the problem, and a second pass is contaminated
+> by his own first pass. So a defective interpretation rule does not merely delay P4; it
+> can spend the resource that P4 exists to acquire. Fixing the rule *before* the labels are
+> collected costs nothing; fixing it after costs the labels.
 
 ### What the amendments cost, stated plainly
 
@@ -691,14 +734,14 @@ merely uninformative.
 
 ### Still open — this amendment set does NOT discharge the review
 
-**D4, D5, D6, D7 and PR-A, PR-B are untouched.** Anyone reading §9 as "the review has been
+**D4, D6, D7 and PR-A, PR-B are untouched.** Anyone reading §9 as "the review has been
 addressed" would be wrong. In particular:
 
 | Open item | What it blocks | Success condition — due when |
 |---|---|---|
 | **PR-A** — run **A0 vs P** on the full pair × depth grid **as a gate, first**, not as one arm among fifteen (review O7) | Whether `w_floor`'s inertness transfers to `graph-t15-tiebreakfix.bin`. If A0 ≢ P, §1.4 requires re-anchoring with floor fully crossed — 16 cells plus attachments, outside the stated budget | **Before the factorial runs.** Report alongside it the fraction of examined nodes carrying a non-zero floor term, so "identity holds but the term is firing" is visible rather than inferred |
 | **D4** — C6 protects C1 (a median) but not C2 (an extreme) | Whether a lost obscure interior silently costs a C2 pass | Before scoring: make manual resolution mandatory for unmatched d15/d20 interiors, and pre-register unresolved cells as **C2-indeterminate**, not C2-fail |
-| **D5** — §5's Spearman and inversion falsifiers are not interpretable on §5's own purposive sample | The fame-proxy verdict (P4) | Before §5 runs: per-stratum reporting, Spearman additionally within the "heard of" + "know well" subset, inversions as a rate within the stress stratum, tie-corrected variant named |
+| ~~**D5**~~ | — | **CLOSED by A6 above**, ahead of P4 rather than at it, for the one-shot-resource reason given there |
 | **D6** — the held-out gate passes ~31 % of candidates under the null | Only the *labelling* of the held-out step as "confirmation" | Before the winner goes to held-out: either state 0.3125 in §2.2 or tighten to 4-of-4 |
 | **D7** — guard G undefined when the direct edge is a bridge | Arm-correlated missingness returning by the back door | Before the sweep: pre-register that a guard-infeasible cell is dropped from **all** arms uniformly and reported |
 | **PR-B** — cost decomposition on routed dive hops under both currencies | Settles R6/D3 directly rather than by edge-level marginals | Optional; if R6 fires, this is the confirmatory measurement |

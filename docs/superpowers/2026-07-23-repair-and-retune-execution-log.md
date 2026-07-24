@@ -76,9 +76,17 @@ invariant, not a quality gradient, so it is the one candidate for a guard.
 | **F6** | **Coherence wobble at the obscure end.** Force-disliking repeatedly *did* reach genuinely obscure artists (first time in testing), but coherence was uncertain — soundtracks, neoclassical/ambient (Max Richter, Ólafur Arnalds) appeared, and a single further bypass snapped back to very famous (Queen, Simon & Garfunkel). The "snap back" is the stratification's signature; the wobble is the coherence dimension Track 2 must hold *while* reaching down. | **Metric / criterion.** | Track 2 candidate reaches the obscure tail **without** a coherence collapse and **without** immediately snapping back to the famous stratum on the next bypass. Coherence is judged by the blind listen (offline metrics do not track it — Phase 1 log §4). |
 
 **Bypass sample URLs** for F3 and F6 are in the owner's 2026-07-23 test message
-(all path state lives in the URL, so they reproduce exactly). Not pasted here —
-the branch/PR thread holds them; if a durable copy is needed for Track 2's pair
-set, capture them into the Track 2 plan when it is written.
+(all path state lives in the URL, so they reproduce exactly).
+
+> **CORRECTION 2026-07-23.** This entry said "the branch/PR thread holds them."
+> **It does not** — PRs #7, #8 and #9 have zero comments between them, checked via
+> `gh`. The URLs exist only in the owner's chat message from that session and in his
+> browser history. Recording the correction rather than quietly fixing the sentence,
+> because "it is safe elsewhere" is exactly the belief that loses something: the
+> deferral was accepted on the strength of a durable copy that was never made.
+> **Consequence for P1:** the pair-8 endpoints must come from the owner or from
+> browser history; if neither yields them, §2.3's substitution rule fires
+> deterministically (Nirvana → CROOVE) and no judgement is required.
 
 ### Closeout — doc audit (2026-07-23)
 
@@ -463,3 +471,43 @@ despite three independent verifications).
 
 Run count 13 → 15. No change to the primary outcome, any effect-size threshold, the
 pair sets, or the attack analysis.
+
+**A6 added after external review of the ordering.** §5's scoring rule (analyst D5) was
+initially left in the open column, due "before §5 runs". That was wrong on sequencing, for
+a reason worth recording: **the owner's labels are reusable across proxies but not across
+samples.** §5 already anticipates re-running verbatim against Wikipedia pageviews if Deezer
+fails — same labels, no re-asking. But if the *scoring rule* turns out to need a different
+sample, he has by then thought about the problem, and a second pass is contaminated by his
+first. A defective interpretation rule therefore does not merely delay P4; it can spend the
+resource P4 exists to acquire. A6 landed in this amendment set instead.
+
+### Track 2 execution order (fixed 2026-07-23, before any step ran)
+
+Recorded because the order is not obvious and one step is easy to skip.
+
+| # | Step | Note |
+|---|---|---|
+| 1 | **This amendment set** (A1–A6) | Done. G5(a)'s mirror-verify sequencing already landed with the pre-Track-2 guards — **it is not outstanding**, and re-deriving it would be waste. |
+| 2 | **Build the minimal mirror; verify byte-identity against production `find_path` with guard G OFF** | The log §3.10 gate, and **the only step where failure means stop, the harness is wrong**. §1.2's G5(a) note scopes that instruction to this step alone. |
+| 3 | **Enable G uniformly across all arms including P** | Per §1.2. Carries analyst **O8**'s consequence: with G applied to P, no comparison anywhere is against shipped behaviour on pairs 4–5, so C5's no-regression inspection cannot see the d0 change the owner would notice there. |
+| 4 | **A0 vs P** on the full pair × depth grid | Settles the factorial's shape. Report alongside it the fraction of examined nodes carrying a non-zero floor term (PR-A). |
+| 5 | Scoring and the remaining arms | Built against a shape that is by then known. |
+
+**P4 runs in parallel, starting now.** It sits outside this chain entirely — it needs no
+harness, only the fixed name list, ten minutes of the owner's time, and an artist-search
+fetcher that must **not** reuse `clips.py` (§0). Its latency is owner-availability, not
+compute, so steps 2–4 proceed while it is outstanding.
+
+**Step 4 is a test whose pre-registered expectation is "no difference", and that is
+deliberate.** Stating it now so a pass is not misread later: **a pass is the good outcome
+and costs exactly one arm.** The alternative it buys insurance against — discovering
+mid-sweep that eight factorial cells are anchored on a constant that was never constant —
+is the expensive one. This project has already been saved once by a pre-registered null
+being read as informative rather than disappointing (log §2.13 C5); this is the same
+discipline applied earlier in the chain.
+
+**If A0 ≠ P, that is a pre-registered branch firing, not scope creep.** §1.4's A0 row
+already requires re-anchoring on P with floor as a fully crossed column — sixteen cells
+plus attachments, outside the stated budget. The session that hits it should write a
+**second dated amendment** and treat it as the design working as intended. Framing it now
+so it is not experienced as a late discovery or an admission.
