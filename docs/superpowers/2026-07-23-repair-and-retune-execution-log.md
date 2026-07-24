@@ -967,3 +967,49 @@ decision** — put to him, **not entered**. No sweep arm has run; still open bey
 percentile machinery, the C1–C6 harness, and the D4/D6/D7 + C3-anchor amendment. Adopted
 artifact untouched, sha256 `4cb84ef9…b061dc8`. Snyk clean on the new code and the modified
 `score.py`.
+
+### Obscure-tail attractor question — analyst run: NOT graph-limited (2026-07-24)
+
+The owner asked whether the graph is over-biased toward synthwave/lo-fi in the obscure
+region such that fame-reducing paths funnel into it regardless of start genre (would make
+Track 2's goal graph-limited, not tuning-limited). Answered myself first with a cheap probe
+(the 10 known lo-fi "unknowns" sit at the 97th–99th `pop_raw` percentile — top of the
+distribution, not the tail — and form a dense blob, ~44 % shared neighbours), then ran the
+`ml-graph-analyst`. Record: `builder/analysis/2026-07-24-obscure-tail-attractor/` (owns its
+figures).
+
+**Verdict: tuning-achievable, NOT graph-limited.** Graph is cleanly genre-modular (Louvain
+0.884, 68 communities). The chillhop/lo-fi community (comm40) is real and dense but **small
+(424 nodes, 0.57 %)**, sits at the 96th–99th `pop_raw` percentile (low external fame, high
+in-graph popularity), and is 97 % internal. Funnel test with the **shipped `find_path`**:
+across 110 cross-genre pairs, **0 of 586 interiors** land in comm40 (0.00× vs a 0.83 %
+null); repeated-`known` fame-descent stays *within* each genre corridor while `pop_raw`
+falls ~0.80→0.50; a control pair actually heading to lo-fi *does* enter it, so the test
+discriminates. **Independently spot-checked** (Metallica→Miles Davis, Johnny Cash→Aphex
+Twin, Beatles→Eminem: 0 blob interiors, sensible famous bridges) — claim holds.
+
+**Load-bearing caveat, carried into A11 and the sweep:** the whole test is in the shipped
+**raw-popularity** currency, and the blob is *high* raw-popularity, so the raw floor points
+away from it — part of *why* the funnel is zero. A **fame-currency** floor (the sweep's
+actual intervention) is the untested lever; it could surface these high-pop/low-fame lo-fi
+artists on downtempo-adjacent paths. The blind listen is the coherence arbiter.
+
+### P4 CLOSED — owner adopts Option C; pre-registration A11 committed (2026-07-24)
+
+Presented both proxies' results and two owner-requested free explorations (absence-as-signal
+and the attractor analysis). **The owner mis-stated a preference for B, then corrected to C**
+on the sunk-time reasoning (B's labelling premium exceeds the exposure it insures against;
+C's failure is a cheap re-score, not a shipped defect, and cannot pass the blind listen).
+
+**Decision recorded as the owner's:** the fame proxy for C1/C2 is **Wikipedia pageviews with
+an unmatched interior scored at the fame floor (0)** — §5's owner-labelling terminal fallback
+is **not** taken. Residual risk (a foreign/historically-notable absent artist scored obscure)
+accepted, with a d15/d20 guard (owner one-glance check of *potentially-notable* unmatched
+interiors: non-Latin name, or a non-English article exists). **Formalised as pre-registration
+amendment A11, committed before any factorial arm runs** — the timestamp is the gate. A11
+partially discharges D4 and carries the raw-vs-fame currency caveat above.
+
+**This is a material amendment to the governing document → a handoff seam** (CLAUDE.md rule).
+The fame-proxy track is closed; the sweep (P6 percentile machinery, the C1–C6 harness with
+the absence-as-floor + guard encoding, D4/D6/D7 + C3-anchor amendment, then the arms) is the
+next, fresh chunk. No factorial arm has run. Artifact untouched, sha256 `4cb84ef9…b061dc8`.

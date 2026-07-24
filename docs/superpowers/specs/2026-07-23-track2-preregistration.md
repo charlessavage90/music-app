@@ -653,6 +653,15 @@ degrades to the labelled ordinal scale. That outcome would be expensive but hone
 and it must be discovered **before** the sweep, which is the entire point of running
 this first.
 
+> **AMENDED 2026-07-24 (§9 A11) — both automated proxies fired, and the terminal
+> owner-labelling fallback is NOT taken.** Wikipedia pageviews passed the two falsifiers
+> Deezer failed but fired the *coverage* falsifier (blind to the modern-obscure tail). An
+> owner-approved post-hoc exploration found Wikipedia-*absence* predicts "never heard of"
+> (9/9 on the sample) and detects obscurity at AUC 0.954, so **absence is reinterpreted as
+> signal: the fame proxy is Wikipedia pageviews with an unmatched interior scored at the
+> fame floor (0).** Full rule, guard, residual-risk acceptance, and the currency caveat:
+> **A11 in full**, below.
+
 **Cost:** one short session plus ~10 minutes of owner time; a handful of API calls,
 cached to disk.
 
@@ -721,9 +730,9 @@ For the reviewer's convenience; each is argued in place above.
 
 ---
 
-## 9. Amendment index — 2026-07-23, before any arm ran
+## 9. Amendment index — 2026-07-23/24, before any factorial arm ran
 
-Ten amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo
+Eleven amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and A11 (2026-07-24) by the P4 proxy-pilot result** (both proxies fired; it postdates the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -746,6 +755,7 @@ before it ran.
 | **A8** | **The A0 gate fired; the floor column stays off.** Identity failed on 1 cell of 252 (pair 1, first path). An exposure map over C1–C6 shows only **C5** crosses the change, and its fix costs zero extra runs: report the first-path inspection against **both P and A0**. Also records four corrections to the step-4 write-up, and the constraint that an FL arm's C3 gradient is partly its own device. | the A0 result + `findings/2026-07-23-a0-gate-analyst-review.md` | §1.4 A0 row · §1.5 · §2.4 R3 |
 | **A10** | **§5's sample is corrected and fixed, before any label is collected.** Two defects: (a) **S1 and S3 overlapped by four artists**, so "~33" was **29 distinct** and four artists would have been double-counted in every pooled statistic while appearing in two strata §5 reads differently — S3 is now the two F6 reaches only; (b) **§5's claim that S1's labels "already exist" is false** at the granularity its own scoring needs — the record holds one collective verdict ("mostly unknown"), not a per-artist three-bucket assignment, and cannot separate *heard of* from *never heard of*, which is where B_unk is computed. The nine are labelled with everyone else. S2's twelve are additionally fixed by a mechanical rule rather than hand-picked. **Sample committed as an artifact**, and the match-failure falsifier now fires at 6 rather than 7. | deriving the sample against the repo, before P4 | §5 sample · §5 strata · §5 falsifiers · `builder/analysis/2026-07-23-track2-fame-proxy/` |
 | **A9** | **Every remaining gate and branch trigger gets an effect size.** A gate without one cannot tell the finding it was written for from noise, and fires the expensive response either way. | the A0 gate having none | §9, below |
+| **A11** | **The fame proxy resolved — Wikipedia pageviews with absence as the fame floor; §5's owner-labelling terminal fallback is NOT taken.** Both automated proxies fired (Deezer: AUC 0.68 + 2 inversions; Wikipedia: coverage 9/29). A post-hoc, owner-requested exploration showed Wikipedia-absence predicts "never heard of" (9/9) and detects obscurity at AUC 0.954, so an unmatched interior is scored at fame = 0. **Owner's decision; residual risk (a foreign/historically-notable absent artist scored obscure) accepted and guarded at d15/d20 — partially discharges D4.** | the P4 pilot result (both proxies fired) | §5 inline · A11 in full below · `builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/` + `.../2026-07-24-obscure-tail-attractor/` |
 
 | **A7** | **P1 discharged, and pair 8 substituted.** The owner's F6 trace pair resolved to **Miles Davis → Daft Punk** — pair 1. §2.3's substitution rule applied; pair 8 becomes **Nirvana → CROOVE** and pair 1 inherits the trace rationale. | P1's answer | §2.3 (three places) |
 
@@ -788,6 +798,62 @@ the identical reading a 200-cell systemic divergence would have got.
 **The general rule, now in CLAUDE.md:** fix the size of difference that fires a gate — or
 state that any difference at all is decisive, and why.
 
+### A11 in full — the fame proxy resolved: Wikipedia pageviews, absence as the fame floor
+
+*(2026-07-24, after the P4 proxy pilot, before any factorial arm. Records the owner's
+decision and the residual risk he has accepted.)*
+
+**Both automated proxies fired a §5 falsifier.** Deezer `nb_fan`: AUC 0.68 (< 0.70) and 2
+catastrophic inversions outside S4. English-Wikipedia pageviews: it *passes* the two Deezer
+failed (AUC 0.720; 0 inversions outside S4; valid B_unk at 239,239) but fires the
+**coverage** falsifier — 9 of 29 match failures (31 % > 6). The two are unfit for opposite
+reasons: Deezer misranks the mid-fame band; Wikipedia is blind to the modern-obscure tail.
+Record: `builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/` (owns its figures).
+
+**§5's written terminal fallback was owner-labelling of every evaluated-path artist. It is
+NOT taken.** An owner-requested post-hoc exploration (`.../explore_absence.py`, labelled
+post-hoc) found **Wikipedia-absence perfectly predicted "never heard of" on the labelled
+sample (9/9)**, and that encoding absence as the fame floor detects obscurity at **AUC
+0.954** (know-at-all vs never-heard, S4 excluded). The coverage failure is therefore
+reinterpreted as signal:
+
+> **The fame proxy for C1/C2 is English-Wikipedia monthly pageviews** (sum, agent=user,
+> fixed window 2025-07..2026-06, identity-checked musician-aware resolver), **with an
+> UNMATCHED interior scored at fame = 0 — below every matched artist (the fame floor).**
+> Rules canonical in
+> `builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/fetch_pageviews.py`.
+
+**Owner's decision; the residual risk is his and is recorded as accepted.** The one way
+"absence = obscure" breaks is a *foreign-language or historically-notable* artist the owner
+would know but who has no English article, scored as maximally obscure. It did not occur on
+the sample (the one off-platform-famous case, 林俊傑 → JJ Lin, *matched*; the one absent S4
+case, CROOVE, is a genuinely-unknown Korean rhythm-game producer). Chosen over the hybrid
+(owner-labels the ~31 % misses) because it is **free, reversible** (a scoring lens over
+retained raw data, not a product/graph change), and its failure **cannot ship** — the
+blind listen, proxy-independent, gates adoption.
+
+**Guard for the failure mode (this partially discharges D4).** At the scored depths — and
+**mandatorily at the C2 extremes d15/d20** — an unmatched interior that is *potentially
+notable* (a non-Latin-script name, or an article that exists in a **non**-English
+Wikipedia) is surfaced for a one-glance owner check before it is counted as maximal
+obscure-reach. D4 asked for manual resolution of unmatched d15/d20 interiors; under this
+encoding an unmatched interior is *reach*, not *indeterminate*, **except** where the guard
+flags it — which is where D4's concern actually lives.
+
+**The one caveat the graph-structure analysis flagged, carried forward.**
+`builder/analysis/2026-07-24-obscure-tail-attractor/` established (verdict: **not**
+graph-limited) that fame-reducing paths do not funnel into the dense lo-fi/chillhop
+community across genres — **but it measured this in the shipped raw-popularity currency**,
+and that community sits at *high* raw-popularity, so today's raw floor points away from it.
+A **fame-currency** floor (this proxy) is exactly the lever that test could not pre-judge:
+it could begin surfacing these high-popularity/low-fame lo-fi artists on
+downtempo/electronic-adjacent paths. **This is the single behaviour most worth watching in
+the sweep and the blind listen.**
+
+**What A11 does NOT change.** No change to the pair sets (§2.3), the arms or cost-function
+columns (§1.4), the primary outcome (§2.1), or the effect sizes (§2.2). Run count
+unchanged. No factorial arm has run.
+
 ### What the amendments cost, stated plainly
 
 Run count **13 → 15**; compute still on the order of an hour. No change to the primary
@@ -812,7 +878,7 @@ addressed" would be wrong. In particular:
 | Open item | What it blocks | Success condition — due when |
 |---|---|---|
 | **PR-A** — run **A0 vs P** on the full pair × depth grid **as a gate, first**, not as one arm among fifteen (review O7) | Whether `w_floor`'s inertness transfers to `graph-t15-tiebreakfix.bin`. If A0 ≢ P, §1.4 requires re-anchoring with floor fully crossed — 16 cells plus attachments, outside the stated budget | **Before the factorial runs.** Report alongside it the fraction of examined nodes carrying a non-zero floor term, so "identity holds but the term is firing" is visible rather than inferred |
-| **D4** — C6 protects C1 (a median) but not C2 (an extreme) | Whether a lost obscure interior silently costs a C2 pass | Before scoring: make manual resolution mandatory for unmatched d15/d20 interiors, and pre-register unresolved cells as **C2-indeterminate**, not C2-fail |
+| **D4** — C6 protects C1 (a median) but not C2 (an extreme) | Whether a lost obscure interior silently costs a C2 pass | **Partially addressed by A11:** under the absence-as-floor encoding an unmatched interior is *reach*, not indeterminate, so a lost obscure interior *helps* C2 rather than silently failing it. The residual risk inverts — a foreign/historically-notable unmatched artist wrongly counted as reach — and A11's d15/d20 guard (owner one-glance check of potentially-notable unmatched interiors) covers exactly that. What remains: implement the guard in the C2 scoring path |
 | ~~**D5**~~ | — | **CLOSED by A6 above**, ahead of P4 rather than at it, for the one-shot-resource reason given there |
 | **D6** — the held-out gate passes ~31 % of candidates under the null | Only the *labelling* of the held-out step as "confirmation" | Before the winner goes to held-out: either state 0.3125 in §2.2 or tighten to 4-of-4 |
 | **D7** — guard G undefined when the direct edge is a bridge | Arm-correlated missingness returning by the back door | Before the sweep: pre-register that a guard-infeasible cell is dropped from **all** arms uniformly and reported |
