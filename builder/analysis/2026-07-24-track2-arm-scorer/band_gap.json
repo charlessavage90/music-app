@@ -1,0 +1,73 @@
+{
+  "inputs": {
+    "labels": "labels.json",
+    "counts": "pageview_counts.json",
+    "n_labelled": 29
+  },
+  "fame_scale": "log10(1 + english wikipedia annual pageviews); unmatched -> 0 (A11)",
+  "recalibration_trigger": 1.0,
+  "band_gap": {
+    "as_scored": {
+      "know_well_median_F": 6.161208032601975,
+      "never_heard_median_F": 0.0,
+      "band_gap": 6.161208032601975,
+      "recalibration_fires": false
+    },
+    "matched_only": {
+      "know_well_median_F": 6.161208032601975,
+      "never_heard_median_F": 5.068304626902273,
+      "band_gap": 1.092903405699702,
+      "recalibration_fires": false
+    }
+  },
+  "coverage_by_bucket": {
+    "know well": {
+      "n": 7,
+      "matched": 7,
+      "rate": 1.0
+    },
+    "heard of": {
+      "n": 6,
+      "matched": 6,
+      "rate": 1.0
+    },
+    "never heard of": {
+      "n": 16,
+      "matched": 7,
+      "rate": 0.4375
+    }
+  },
+  "coverage_by_stratum": {
+    "S4": {
+      "n": 6,
+      "matched": 5,
+      "rate": 0.8333333333333334
+    },
+    "S2": {
+      "n": 12,
+      "matched": 12,
+      "rate": 1.0
+    },
+    "S1": {
+      "n": 9,
+      "matched": 1,
+      "rate": 0.1111111111111111
+    },
+    "S3": {
+      "n": 2,
+      "matched": 2,
+      "rate": 1.0
+    }
+  },
+  "unmatched": [
+    "CROOVE",
+    "Lazerhawk",
+    "Leavv",
+    "Miami Nights 1984",
+    "Purrple Cat",
+    "Toonorth",
+    "idealism",
+    "saib.",
+    "sleepy fish"
+  ]
+}

@@ -1059,3 +1059,348 @@ systematically re-checked. No escalation list — every finding was adjudicable 
 record.
 
 **No figures moved. No arm has run.** Adopted artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### Seams named before the sweep is built (2026-07-24)
+
+Written at authoring time per the CLAUDE.md rule, **before any scorer code exists**, because
+a seam that lives only in a session's chat evaporates at the next handoff — and this track
+has had two handoffs arrive unpredictably. Two seams, one nearer than the other, plus a
+correction to how the further one was first stated.
+
+**1. The near seam: the scorer is a handover object, and P8b lands on it.**
+
+The remaining Stage A work does not fit one session, and the boundary does not need to be
+judged by feel — **the pre-registration already names it.** §7's P8 records "P8b — the review
+of the *harness* — is not yet due: no harness exists." The C1–C6 scorer **is** that harness
+(the mirror is the *router*; the scorer is the *measurement*), so **P8b comes due the moment
+the scorer is committed and before any arm is scored.** A deferred prerequisite coming due is
+exactly what `session-start` §B tells a session to check for, and it falls here.
+
+So the sequence is: **build the scorer → commit it → P8b review → then arms.** The scorer is
+a committed, validated artifact, which is the cheap kind of handover object; and it puts the
+session that built the measuring instrument on the far side of a boundary from the session
+that reads the measurements, which is the pre-registration's own discipline applied one level
+down.
+
+**A second structural fact about the run, recorded so it is not discovered at arm nine.**
+The 15 runs are **not** one batch. §1.4's attachment arms are defined as *W + one knob*, and
+**W is chosen from the factorial results by rule R1**. So the run is two stages with a
+data-dependent gate between them: P + A0–A7 + A1u + X (11 runs) → compute C1 per cell → apply
+R1 → T1a, T1b, FL1, FL2 (4 runs). R1 is mechanical and pre-registered, so this is a
+sequencing constraint rather than a decision point, but a session planning "run 15 arms" as a
+single job has mis-planned it.
+
+**2. The far seam: nobody who has seen an arm result administers the blind listen — and the
+protocol already solves this better than by personnel.**
+
+First, a correction to how this session first stated it. It located the constraint at the
+scorer ("whoever built it holds a prior"). That under-states it: **anyone who runs the sweep
+sees arm results, because that is what running it means.** The constraint is *whoever has
+seen an arm result is ineligible to administer the listen*, and it binds unconditionally —
+including on a session that scrupulously formed no view. This session is additionally
+ineligible for the weaker, personal reason (it has twice written down a prediction that a
+fame-currency floor may surface lo-fi acts on downtempo-adjacent paths), but that is the
+lesser fact.
+
+**Second, and this is why the seam is cheaper than either framing suggested: the question was
+already solved here, twice, and solved structurally rather than by personnel.**
+`specs/2026-07-22-c3-known-mechanism-blind-listen.md` §5 and §7 make blindness a property of
+the **artifact**, not of the administrator: the arm→label mapping is *generated, sealed, and
+revealed only after all verdicts are recorded*, the generator emits real app URLs so the
+owner uses the product rather than a report, and the administering session is held to "nothing
+beyond the bare mechanics." That survives a handoff, and it does not depend on anyone's
+self-report of what they know — which a personnel rule always does.
+
+**What sealing does not cover, stated rather than assumed.** Sealing prevents *label* leakage,
+not *content recognition*. A session that has seen the arm outputs can often identify an arm
+from the artists on the path, which unseals the mapping from the inside. That residual is
+exactly what personnel separation buys, and it is small and cheap — so: **adopt the existing
+sealed-mapping protocol as the primary device, and treat "a session that has seen arm results
+does not administer" as a secondary guard that costs one planned boundary.** Do not re-derive
+the protocol; it is written and it has decided the graph twice.
+
+**Neither seam is a reason to slow down now.** The scorer is the next unit either way; naming
+the boundaries at authoring time is what makes them cheap when they arrive.
+
+### A12 — C6 stops gating; §2.2's recalibration discharged (2026-07-24, before any arm)
+
+Found while reading §1–§6 in full to write the arm scorer, which is what that read was for.
+
+**A11 inverted what C6 measures, and A11 recorded "no change to §2.2".** C6's ≥ 90 %
+coverage floor existed to close §3's Attack 4: under the original encoding an unmatched
+interior was **dropped from scoring**, so an arm routing into hard-to-match obscure artists
+would have its best evidence silently deleted. A11 changed unmatched to **scored at the fame
+floor**. Nothing is dropped now, so the mechanism C6 guarded no longer exists — and the
+quantity C6 measures has changed sign.
+
+**The measurement** (owned by `builder/analysis/2026-07-24-track2-arm-scorer/`): every
+artist the owner recognises resolves to an English Wikipedia article — *know well* 7/7,
+*heard of* 6/6 — and the stratum he does not recognise barely does: **S1, 1 of 9**. So match
+failure now marks the obscurity Track 2 exists to reach. Left gating, C6 caps an arm near
+**5.6 %** obscure interiors against a famous-heavy P, while **C2 is passed *by* unmatched
+artists** (F = 0 sits below B_unk by construction). Two criteria pulling opposite ways on one
+quantity.
+
+**Owner's decision, and it is his because it is about the product rather than the
+methodology:** the app should route to artists with **no** English Wikipedia article —
+"definitely", and he noted the question should not have needed asking.
+
+**He was right, and the diagnosis is worth recording because it is a routing defect, not a
+one-off.** `WHAT-GOOD-LOOKS-LIKE.md`'s first value already says *"the product delivers
+artists the listener does not already know."* This session did not read it. Two structural
+reasons, both fixable:
+
+1. **The standing layer states mechanism, not purpose.** `CLAUDE.md`'s "What this is"
+   describes cards, least-cost paths, clips and two bypass signals — end to end, what the app
+   *does*. A session can hold all of it and not know that delivering unknown artists is the
+   **point** rather than a property of a good path.
+2. **The document that says so declares itself out of scope.** Its orient-table trigger is
+   "read it before running a blind listen or interpreting a verdict", and its own header calls
+   it calibration for the blind test. A session designing a **success criterion** is doing
+   neither, honours that scoping, and misses value #1 — which is not listen-calibration at all
+   but the product's purpose, and governs any threshold.
+
+**Fix owned by the consultant session** (it is mid-flight in `CLAUDE.md` and the skills; a
+second writer there is the collision `session-start` §C warns about): a purpose line in "What
+this is", and widen the `WHAT-GOOD-LOOKS-LIKE` trigger to **before designing a success
+criterion**. This session commits it when they are done. **Displacement note for D6:** the
+purpose line is net-new and nothing comes out for it; the argument for paying it is that this
+is the second routing failure today — P6 was the first — and both were a session inheriting a
+description instead of checking the thing itself.
+
+**A12, committed before any arm runs.** C6 is removed from the gating set and becomes a
+per-arm and per-cell **report** (it still measures how much of a score rests on the absence
+assumption). The gating remnant is A11's **d15/d20 notability guard**, which must be
+*discharged* rather than merely reported — that is where the residual risk actually lives.
+Attack 4 is **not** simply closed: an arm whose reach is concentrated in unmatched artists is
+scored almost entirely on the absence assumption. Residual accepted on A11's reasoning — a
+scoring-lens error is a cheap re-score and cannot ship, because the listen gates adoption.
+
+**§2.2's one permitted recalibration is discharged and does not fire.** Band gap **6.161**
+under A11's encoding, **1.093** under the conservative matched-only reading; the rule fires
+only below 1.0. No threshold changes. Carried forward: at 1.093, **C1's −1.0 threshold is
+almost exactly one of the owner's perception bands** — so C1 asks for the middle interior to
+drop about one full step in how well he would know them.
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`. Work is on branch
+`track2-sweep`, off `main`.
+
+### Sanity-checking A12 against the new purpose line — the residual is two-sided (2026-07-24)
+
+The consulting session added `CLAUDE.md`'s "What it is for" paragraph and asked this session
+to check its own **A12** against it rather than take the assurance that nothing changed.
+Doing the check rather than reasoning about it found something neither session had.
+
+**The purpose paragraph carries two consequences.** The first — *a criterion capping how
+obscure the app may go is pointed the wrong way by default* — is A12 exactly; A12 is its
+direct application and needs no change. **The second is the one that bites:** *global
+notability is a proxy for the wrong quantity — the target is unknown **to this listener**,
+not unknown to everyone.*
+
+**Measured against the committed labels + pageview counts.** A11 names one residual — an
+**absent** artist wrongly scored obscure — and its d15/d20 guard is built for it. The
+mirror-image case had no guard and is commoner: of the artists labelled *never heard of*,
+**three score above B_unk** and are counted as famous rather than as reach — **Diana Krall,
+Perry Como, Max Richter**. That is 3 of 16 overall and **3 of the 7 the proxy can actually
+see**, so where Wikipedia has data on someone the owner does not know, it lands on the wrong
+side of his own line about **43 %** of the time. The reverse occurs once (Wishbone Ash,
+*know well*, below B_unk).
+
+**A12's rule does not change, and the direction is the reason.** The error is
+**conservative** — an artist he would enjoy discovering is counted as *not* reach — so it
+can only make **C2 harder** to pass. A proxy error that under-credits success cannot
+manufacture a false winner; it can only hide a real one. C1 and C3 never touch B_unk (both
+continuous medians), so only C2's absolute clause is exposed, and all three misses are
+near-misses at the band edge (F 5.48–5.50 vs B_unk 5.379).
+
+**Recorded as a pre-registered read rather than a redesign.** If C2 lands at **3 of 8** —
+one pair short — check first whether any d15/d20 interior in the failing pairs sits within
+~0.15 log10 above B_unk; that is this residual, not a shortfall. Written down now so it is a
+look-up later instead of a post-hoc rescue, which is the distinction §2.4 exists to enforce.
+
+**Process note, since it is the transferable part.** The consultant's own instruction was
+*sanity-check this yourself rather than take my word for it*, and the check paid — not by
+overturning its claim, which was correct, but by finding the unstated half of a residual on
+the way. "Verify one load-bearing claim before building on a report" is a `session-start`
+rule aimed at incoming reports; this is the same rule applied to a *concurrent* session's
+assurance, and it earned its keep twice today.
+
+**No arm has run.** Artifact untouched.
+
+### WGLL values 8–9 checked against every Track 2 criterion — A14 (2026-07-24)
+
+The cold-read adjudicator widened `WHAT-GOOD-LOOKS-LIKE.md`'s trigger to **"before
+designing anything that scores a path"** and added two values, with the asymmetry now stated
+in both `CLAUDE.md` and the doc map: **no threshold may be read off WGLL, but a criterion
+that contradicts a value in it is wrong.** That makes it a checkable rule, so it was checked
+against all of C1–C7 rather than assumed compatible.
+
+**Result: nothing contradicts. Two additions, both non-gating, and one item flagged for the
+owner.**
+
+**Value 8 (novelty is delivered *through* coherence, not traded against it) changes
+nothing, and confirms two existing choices.** §1.5 already records AA and the overlap family
+as *diagnostics only, never gating* — value 8 says those two were the **worst** predictors of
+the owner's verdict, so the pre-registration had this right in advance. §6 item 1 already
+concedes coherence has no offline metric and the listen decides. What value 8 does raise is
+the standing of **F5 (confinement)** and the **repeated-interior report**: they are the only
+offline proxies for Attack 2, which §3 already declines to close. It also supplies a pointer
+worth obeying — Phase 1 log **§3.9's verbatim verdict notes are the only description of what
+the owner means by coherent**; if a coherence metric ever looks tempting, start there rather
+than inventing one.
+
+**Value 9 (reducing famous artists is the live problem; eliminating them would be an
+over-correction; the bypass is the mechanism meant to carry obscurity) reaches three
+places.**
+
+1. **C3 is value 9's own criterion, restated.** "The more bypasses, the more obscure the path
+   becomes while staying coherent" *is* the within-arm depth gradient. Value 9 promotes C3
+   from one criterion among four to the mechanism the owner is actually describing. No change
+   to its threshold.
+2. **C5's inspection gains the target it lacked** (A14b). It was "inspect every changed d0
+   path, no numeric threshold." Value 9 says what to inspect *for*: does d0 fame still track
+   the endpoints? A reshaped first path that keeps two superstars mostly-popular is expected;
+   one that makes it obscure is the over-correction, and is a finding rather than a pass.
+3. **A free diagnostic the pre-registration did not have** (A14a): per-arm, the relationship
+   between endpoint fame and d0 interior fame. Costs nothing — every path and every fame
+   value is already computed. **Weak, and labelled so:** the pair set is famous-heavy by
+   design, so only The Shins → Wishbone Ash and Nirvana → CROOVE give any spread, and §6
+   item 4 already records obscure→obscure as untested entirely.
+
+**One apparent conflict, checked, and it dissolves — recorded because the check is the
+point.** §2.4 **R3** permits the gradient requirement to move to Stage B if FL1/FL2 also fail
+C3. First reading: that contradicts value 9, which names bypass-carried obscurity as the
+mechanism. It does not — **Stage B *is* the bypass-mechanism experiment**, so relocating the
+gradient there is value 9's own remedy, not a departure from it.
+
+**What survives is narrower, and is the owner's to weigh, not this session's.** R3 also says
+"C1/C2 remain binding for Stage A adoption regardless" — so Stage A could adopt an arm that
+fails C3, before Stage B exists, shipping a router whose obscurity is **static rather than
+bypass-carried**. Value 9 disfavours that. It is not a criterion contradicting a value, so
+the "criterion is wrong" rule does not fire and nothing is being changed on this basis; and
+the blind listen would very likely catch it. **Flagged, not actioned.**
+
+**Method note.** This session's first pass through value 9 produced the R3 conflict as a
+finding, and it was wrong. Writing out why before reporting it is what caught it — the same
+"answer it yourself and write the answer down" step that dissolved the earlier escalation.
+The near-miss is recorded because the finding would have been plausible, load-bearing, and
+false.
+
+**No arm has run.** Artifact untouched.
+
+### The two tightened process rules applied to the scorer — A16, and a B5 clean check (2026-07-24)
+
+The cold-read adjudicator (now retired) tightened three standing-layer rules and flagged two
+as touching the in-flight scorer. Both applied here rather than filed.
+
+**Factor-table rule → A16, and it caught a live defect.** The rule now requires a package
+comparison to name the conclusion it is *barred* from supporting **and** to confirm no
+read-of-results claims it — "a disclaimer nothing later reads is not a control." Applying it
+to **FL1 vs P** (the one package comparison in the arms table) found that **R5 made the
+barred claim**: "retain them if an FL arm is the winner — in which case the floor would then
+be load-bearing." An FL arm "winning" is judged against P, so that sentence attributes a
+*floor* effect to a comparison that changed the floor **and** everything W carries — exactly
+the attribution §1.4 says comes only from the one-column chain. Corrected: the floor is
+load-bearing only where **FL1 beats W** (not P) on a criterion W fails, characteristically
+C3's gradient; an FL arm that beats only P while tying W means W's static knobs did the work
+and the floor is deleted. **R3 was checked and is clean** — it already frames the FL arms as
+the vs-W gradient remedy and A8 already warns their gradient is partly self-manufactured.
+The rule earned its keep: the gap was a real one, present since the reads were first written,
+and invisible until the rule forced the barred-conclusion to be named next to the read that
+violated it.
+
+**B5 config-figure rule → checked, does not bind.** B5 now requires an inline restatement of
+a `config.py` clamp figure to cite adjudication §5.4 rather than be skipped. The scorer
+restates none: its only constants are the pre-registered §2.2 thresholds (cited to §2.2 in
+`score.py`), B_unk is read at runtime from the committed proxy `score.json`, and the cost
+weights live in `mirror.py`, not here. Recorded in the scorer README rather than passed over
+in silence — which is the behaviour the tightened B5 asks for.
+
+**Displacement rule → noted, no action owed.** The third change makes a net-new standing-
+layer addition the owner's call, not a session's. This session added nothing net-new to the
+standing layer (`CLAUDE.md`, skill bodies): the `CLAUDE.md` purpose paragraph it wanted was
+*rejected* for the WGLL-trigger route instead, and its `memory/` edits were status updates to
+existing pointers, not growth. So the rule constrains future work rather than requiring a
+retraction here.
+
+**No arm has run.** Artifact untouched.
+
+### Closeout at the scorer/P8b seam (2026-07-24)
+
+Full-ritual seam closeout — the work touched the cost-function evaluation apparatus. This
+session built the Stage A scorer, took the pre-registration A11 → A16, and committed two
+retired consultant sessions' work under their attributions. Distillation of what is not
+already in the per-task entries above:
+
+**The arc, in one line.** Picked up at the fame-proxy/sweep seam (P4 just closed, A11
+committed), ran closeout B1, resolved a merge race (PR #9/#10 landed while B1 ran), then
+built the scorer — and building it forced five amendments, each caught before any arm ran.
+
+**Decisions that reversed or corrected an earlier position:**
+- **A12 reversed A11's "no change to §2.2".** A11 recorded that it changed nothing downstream;
+  building the scorer showed it had inverted what C6 measures (unmatched went from *dropped*
+  to *scored*, so coverage now marks the obscurity the sweep seeks). C6 stops gating.
+- **A16 corrected R5**, which had attributed a floor effect to the FL1-vs-P *package*
+  comparison — the barred conclusion the factor-table rule (tightened this session by the
+  adjudicator) exists to catch. Routed through FL1-vs-W.
+- **A15 corrected the resolver**, not the pre-registration: famous acts with common-word names
+  (Justice, Rainbow, Ye) scored at the fame floor and poisoned P's own baseline medians. Fixed
+  by recall fallback, proven byte-identical on the §5 validation sample.
+
+**Defects found in the pre-registration itself (not the code):** R5's barred attribution
+(A16); D7 never pre-registered as a uniform drop (A13); C6's gate premise dissolved by A11
+(A12). All three were latent and invisible until the scorer forced each to be stated next to
+what it governed — the recurring lesson that an apparatus makes its own spec's gaps legible.
+
+**A near-miss recorded** (WGLL A14 check): the first pass produced an R3-vs-value-9 conflict
+as a finding; it was false (Stage B *is* the bypass mechanism). Writing out why before
+reporting caught it — the "answer it yourself and write it down" step.
+
+**Gate outcomes:** no experimental gate reached — no arm has run. The mirror byte-identity
+gate and A0-vs-P gate were passed in prior sessions and not re-run. **P8b (harness review) is
+now due** and is the next unit's first step.
+
+**Operational measurements with no other home:** the full stage-1 grid is ~40 s of compute
+(0.3 s per arm-pair walk × 11 arms × 12 pairs), against §1.4's "on the order of an hour"
+estimate — conservative by two orders of magnitude. The A11 notability guard flags **1 of 9**
+on the known-unmatched sample (CROOVE only), so it does not drown the owner's one-glance check.
+
+**B5 disposition:** the band-gap figures (owned by `builder/analysis/2026-07-24-track2-arm-scorer/`)
+are restated at the A12 discharge point in this log and in the pre-registration; both are
+point-of-decision restatements citing the owning dir, which the tightened B5 permits. No other
+scorer figure is restated outside its owner.
+
+**D6 standing-layer delta this session: 0 net-new by this session.** The branch's
+`CLAUDE.md`/`.claude` changes (+16/+67) are the consultant and adjudicator sessions' work,
+committed under their attributions. This session added nothing to the standing layer; its
+`memory/` edits were status updates to existing pointers (memory total 354 lines). Per the
+tightened D6, net-new standing-layer additions are the owner's call — none were made.
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### Closeout B1 — doc-auditor at the scorer seam (2026-07-24)
+
+Ran as part of the seam closeout. **One MEDIUM, two LOW; no HIGH, and no escalation list —
+every finding was adjudicable from the record.** A marked improvement on the day's earlier
+B1 passes, consistent with the docs being written per-amendment this session rather than
+reconstructed at closeout.
+
+- **MEDIUM (fixed):** A14's amendment-table row ended "· A14 note below", a dangling
+  forward-reference — no such note exists, and A14's row is self-contained (unlike A11/A12/
+  A15, which genuinely needed "in full" sections). A defect of omission, exactly the class
+  B1 exists for. Fixed by replacing the dead pointer with a precise §1.5 cross-reference and
+  an explicit "no separate section: this row is self-contained."
+- **LOW (fixed):** the active `2026-07-24-track2-arm-scorer/` harness was reachable from
+  `docs/` only at one hop (via the handoff), not catalogued. Added a note to
+  `builder/analysis/README.md` marking it as the one **live, non-frozen** directory — which
+  also corrects that file's opening "everything here is frozen, not a tool" claim, now that
+  an exception exists.
+- **LOW (no action, recorded):** the superseded fame-proxy handoff's P6 strikethrough
+  formatting (cosmetic, on an audit-retained superseded doc) and the "SUPERSEDED"/"Supersedes"
+  phrasing pair in the doc map (unambiguous on read). Polishing a superseded document is not
+  worth the churn; the auditor marked both optional.
+
+**Regression check passed:** the previous B1's fixes (P6 discharged in three docs, amendment
+banner count) remain in place. Cold-start navigation test passed.
+
+**No arm has run.**

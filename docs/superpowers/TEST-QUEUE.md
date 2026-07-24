@@ -11,6 +11,19 @@ the point.**
 
 ---
 
+## N/A — 2026-07-24 — Track 2 scorer built: nothing app-facing changed
+
+**Nothing to exercise.** This session built the Stage A arm scorer — offline analysis
+tooling in `builder/analysis/2026-07-24-track2-arm-scorer/` that never touches the running
+app. **No shipped code, no graph artifact, no config default, and no adoption changed**, and
+no experimental arm ran. The app routes on the same `graph-t15-tiebreakfix.bin` as before.
+
+Recorded per closeout C1's honesty rule rather than inventing a test. The next app-facing
+queue entry will come when an arm wins and a candidate is **adopted** into
+`ApiConfig`/`pathfinding.py` — which has not happened.
+
+Clips (C1/C2) remain known, unrelated, and untouched.
+
 ## DONE — 2026-07-23 — pre-Track-2 guards: a rename through the whole cost path
 
 **DONE 2026-07-23 — nothing found, which is the expected outcome.** No behaviour change

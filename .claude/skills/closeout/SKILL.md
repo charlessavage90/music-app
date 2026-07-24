@@ -134,7 +134,8 @@ closed. Say so plainly rather than marking it complete.
 ## Part B — Fresh session, mechanical
 
 These want fresh eyes, and none of them need the finishing session's context. Run
-them in a new session with the handoff note in hand.
+them in a new session with the handoff note in hand — **except B1, whose eyes are a
+subagent's rather than the session's; see "Who runs B1" below.**
 
 ### B1. Documentation audit
 
@@ -167,6 +168,33 @@ precise measurement of where the record is too thin, which is worth having.
 
 Check whether previous audit findings were ever actioned. A stale audit finding is
 worse than none, because it reads as settled.
+
+#### Who runs B1 — the one item in Part B the retiring session may do itself
+
+**The fresh eyes B1 needs are the auditor's, not the dispatching session's.**
+`doc-auditor` is a subagent and reads cold whoever spawns it, so the state of the session
+that pressed the button cannot contaminate the report. B2, B3 and B4 are different in kind
+— those are checks a session performs *with its own eyes*, and a warm session performs them
+badly. B1 was grouped with them by topic, not by mechanism.
+
+Both saves above confirm it: each was a case of **no cold reader being involved at all** —
+one skipped audit, one self-run grep. Neither was a warm session dispatching the auditor
+and getting a worse report for it.
+
+**So the retiring session may run B1, and at a mid-flight handoff it should.** Handing the
+audit forward puts documentation remediation on the successor's critical path and makes its
+first substantive read of the governing documents an audit brief rather than the work. That
+cost is observed, not theoretical: an incoming session on 2026-07-24 audited a
+pre-registration's bookkeeping sections adversarially, corrected a High-severity status
+defect — and came away unable to state what the experiment's own outcome criteria were. The
+successor should be *reading* a completed, remediated audit in the handoff note, not
+inheriting one.
+
+**Exception — when the degradation tell triggered the retirement.** Then the session's
+judgement about completeness is the faculty you have just stopped trusting, and adjudicating
+findings is judgement. Dispatch the auditor, fix only what is unambiguous from the record,
+and hand the remainder to the successor as a **named list** rather than as a task to
+rediscover. A scope-driven handoff carries no such problem.
 
 ### B2. Reachability sweep
 
@@ -231,8 +259,11 @@ document the doc map names as never-use-as-context. It survived a full closeout 
 the sweep that ran covered `docs/` and `config.py` and stopped there.
 
 So grep both `docs/` and `.claude/` for restated numbers and for shape claims. Convert
-restatements to citations. Where a figure is deliberately inline as a hazard warning at
-the point of use, say so in the file so the next sweep does not re-open it.
+restatements to citations. Where a figure is deliberately inline as a hazard warning at the
+point of use, it **cites the section that owns it, and the next sweep re-checks it against
+that section** rather than skipping it. An exemption that suppresses its own re-detection is
+how a correct restatement becomes a stale one — the drift the one-document rule exists to
+prevent.
 
 **This is the same failure class as D2 and as the fixture-seed defect**: a change removes
 a property that something unrelated had silently come to depend on. Nothing breaks, no
@@ -367,11 +398,20 @@ The PR body is where a reviewer picks up the context, so it carries:
 
 ```bash
 git diff --stat <base>..HEAD -- CLAUDE.md .claude/skills/ .claude/agents/
+wc -l ~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/*.md | tail -1
 ```
 
 Record the net line change in the retained log. **If it is positive, the commit message
-names what the addition replaces or shortens — or states that it is net-new and why nothing
-came out.** Net-new is legitimate; unexamined is not.
+names what the addition replaces or shortens.** If nothing came out, the addition needed the
+owner's agreement before it landed — net-new is his call, not the session's. A justification
+written by the session that wanted the lines is not a check; that is how this layer reached
+1,436 lines with every individual addition justified.
+
+**Both commands are needed, because `memory/` lives outside the repo and is not in git** —
+a diff cannot see it, yet it loads into every session and the budget rule names it. Take its
+total by line count and compare against the last figure recorded in the log. That is also
+why the number goes in the **log** and not only in a commit message: the log is the only
+place the two halves of this layer can be added together.
 
 This layer loads before a session reads anything else, so it is the only one where growth is
 unconditional. `docs/` routes around its own bulk — half the corpus is COMPLETE plans that
@@ -442,9 +482,20 @@ B2 (reachability), B3 (vacuous tests) and B4 (prose-versus-code) all want a fini
 artifact; run against something half-built they produce noise and false alarms, so they
 **travel with the work to the successor** rather than being run now. B1 and B5 stay, and
 matter more than usual: a mid-flight handoff normally happens because a governing document
-just changed, which is exactly when descriptions elsewhere go stale. A4 is usually
-inapplicable — unshipped work is the premise, not a defect — but say so rather than
-skipping it silently.
+just changed, which is exactly when descriptions elsewhere go stale. **B1 is run by the
+retiring session, not handed forward** — per "Who runs B1", with its degradation-tell
+exception. A4 is usually inapplicable — unshipped work is the premise, not a defect — but
+say so rather than skipping it silently.
+
+**Do not make B1 conditional on a document having changed.** That was proposed and the
+evidence killed it: on 2026-07-24 an audit at a handoff where no governing document had
+obviously changed found a High-severity defect anyway — a prerequisite recorded as open in
+three documents whose machinery had existed since execution-order step 2, each document
+having copied the list forward rather than re-checked it. The check a session would
+naturally run came back clean **and confirmed the wrong answer**, because the machinery sat
+inside the harness and nothing in shipped code referenced it. A change-triggered audit
+would have skipped the run that caught it. Propagating defects do not need a change to
+become live.
 
 Part D runs every time regardless of size, with D1 inverted per its mid-flight exception.
 An unopened PR is not a judgement call; a dirty tree is one only when it is handed over

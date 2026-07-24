@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `top1pct_degree_frac`, "payload", `degree_hub_penalty`, `w_degree_hub` are all top-1%-by-*degree*; they were named `hubfrac` / `hub_penalty` / `w_hub` until 2026-07-23, and older documents and every script under `builder/analysis/` still say so — mapping in `builder/analysis/README.md`); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile** — `pop_raw` is a value, never a rank; see §2.12 for the extent of the gap. Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
-| **What does the owner mean by "better"?** | `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — calibration for the blind listening test, this project's strongest evidence class. Read it before running one or interpreting a verdict. It records **preference, not evidence** — never treat it as criteria. |
+| **What does the owner mean by "better"?** | `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — calibration for the blind listening test, this project's strongest evidence class. Read it before running one, interpreting a verdict, **or designing anything that scores a path**. It records **preference, not evidence**: never read a threshold off it, but a criterion that contradicts it is wrong. Worked example — the Track 2 pre-registration's C4 exists because value 2 rules out fewer-but-obscurer. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
 | **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. |
 
@@ -227,8 +227,9 @@ comparison assumed one.
 > column per knob that varies, and the isolating baseline named per row.
 >
 > **A variant's baseline is the variant differing by exactly one column.** If none exists,
-> either build one or state explicitly that this is a package comparison and what it
-> therefore cannot tell you.
+> either build one or name the conclusion the comparison is barred from supporting — and
+> check that no read-of-results in the document then claims it. A disclaimer nothing later
+> reads is not a control.
 
 The table is what makes this mechanical. You don't have to *notice* a confound — you read
 across the row and count the differences. This is not hypothetical rigour: a two-knob
@@ -345,10 +346,11 @@ bodies load unconditionally, before a session reads a single project document. E
 layer is routed around by `docs/README.md`; this one is not, so it is the only place where
 growth is a standing tax. It was 661 lines on 2026-07-21 and 1,436 on 2026-07-23.
 
-> **Additions to it are displacement-only: name what the addition replaces or shortens, or
-> state that it is net-new and why nothing came out.** Checked at `closeout` **D6**, from
-> the diff. This is A3's rule — *a deferral must have an address* — applied to context
-> instead of to findings.
+> **Additions to it are displacement-only: name what the addition replaces or shortens —
+> and if you cannot, it is not a session's to add.** Propose it to the owner and leave the
+> file alone; growing the layer that taxes every future session is his call, not a
+> session's. Checked at `closeout` **D6**, from the diff. This is A3's rule — *a deferral
+> must have an address* — applied to context instead of to findings.
 
 **Rules here do not expire, and must not be given expiry conditions.** "Figures live in one
 document", `UV_LINK_MODE=copy`, currency-in-the-name: these are invariants, and a review

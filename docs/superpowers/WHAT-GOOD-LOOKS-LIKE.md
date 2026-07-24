@@ -1,6 +1,8 @@
 # What good looks like — calibration for the blind listening test
 
-**Role: ACTIVE, standing.** Update it whenever a blind test produces new articulation.
+**Role: ACTIVE, standing.** Update it whenever the owner articulates something new about
+what a good path is — usually a blind test, but direct articulation counts too (values 8
+and 9 came that way).
 
 The blind listening test is this project's strongest evidence class. It decided the graph
 twice, where the offline metrics decided it zero times, and it works because it converts a
@@ -23,7 +25,9 @@ No figures here — they live in `findings/2026-07-21-scoring-adjudication.md`.
 **1. Hubs are slots that failed to deliver, not costs that accumulate.**
 The product delivers artists the listener does not already know. A hub is not a penalty —
 it is a step that delivered nothing. So a longer path carrying more hubs can still be
-clearly better, if it carries more novel artists. The owner's worked case: an 11-artist
+clearly better, if it carries more novel artists — **bounded by 8: the comparison is
+between paths that are both coherent, and this value is not a licence to buy novelty with
+incoherence.** The owner's worked case: an 11-artist
 path with 4 hubs beats a 4-artist path with 3 hubs, because it delivers 7 novel artists
 against 1. This is why the bypass metric is **discovery payload** (absolute count of
 non-hub interior artists), with `top1pct_degree_frac` (named `hubfrac` before the
@@ -79,6 +83,32 @@ confined to the same group of nodes. One or two local deviations are not "swappi
 *Owner-stated, 2026-07-23, and gut-checked against use: he saw the acceptable form this
 session and did not see the defect form — local deviations resolved into larger changes
 within a further bypass or two.*
+
+**8. Novelty is delivered *through* coherence, not traded against it.**
+The unknown artists are the deliverable, but they have to arrive in a way that feels
+natural to the listener. The owner's worked case: a 10-artist path that routes cleanly
+from A to B with one very well-known artist in the middle is a good path, and it beats 8
+obscure artists that do not transition into one another or fit the endpoints. So value 1
+compares *coherent* paths; stated without that bound it is an overstatement. The record
+agrees: coherence decided nearly every selection in the blind listens, and the two offline
+metrics built to guard it (AA, overlap coefficient) were the **worst** predictors of the
+owner's verdict — Phase 1 log §3.8, restated in its §4. His §3.9 verbatim verdict notes
+are the only description anywhere of what he means by coherent; start there, not from a
+metric.
+*Owner-stated, 2026-07-24, correcting a restatement of value 1 that had dropped the bound.*
+
+**9. Reducing famous artists is the live problem; eliminating them would be an
+over-correction.**
+Much of development targets how often well-known artists appear and still does. What is
+*not* wanted is a router where they never appear. Part of why the reference product
+(boilthefrog) felt good is that **fame tracked the endpoints**: two very popular artists
+gave a mostly popular first path, two obscure ones a mostly obscure path. The mechanism
+that is meant to carry obscurity is the **bypass** — the more bypasses, the more obscure
+the path becomes *while staying coherent*, and the ideal router does that reliably for any
+artist pair. Extends value 2, which covers only the famous-endpoint first path, and bounds
+it in the other direction.
+*Owner-stated, 2026-07-24. His characterisation of boilthefrog; not independently verified
+against the article.*
 
 ---
 
