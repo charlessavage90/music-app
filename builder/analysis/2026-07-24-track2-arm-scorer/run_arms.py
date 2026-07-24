@@ -45,7 +45,7 @@ sys.path.insert(0, str(ROOT / "builder" / "analysis" / "2026-07-23-track2-sweep"
 GRAPH = ROOT / "builder" / "scratch" / "graph-t15-tiebreakfix.bin"
 EXPECT = "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8"
 
-from arms import MAX_DEPTH, SNAPSHOTS, STAGE1, Arm  # noqa: E402
+from arms import MAX_DEPTH, SNAPSHOTS, STAGE1, Arm, stage2  # noqa: E402
 from verify_mirror import ANALYSIS_PAIRS, HELD_OUT_PAIRS  # noqa: E402
 
 
@@ -87,15 +87,25 @@ def walk(store, src, dst, cfg, ctx, pop, find_path_mirror, Exclusion, KNOWN, sta
     return out
 
 
-def drop_infeasible_uniformly(per_arm: dict[str, dict[str, list]]) -> list[str]:
+def drop_infeasible_uniformly(
+    per_arm: dict[str, dict[str, list]], inherited: set[str] | None = None
+) -> list[str]:
     """Analyst D7: a cell infeasible in ANY arm is dropped from EVERY arm.
 
     Without this, an arm that keeps a pair alive one bypass longer than another is
     scored on a cell its rival does not have — arm-correlated missingness, which is
     the selection confound the guard decision (§4) exists to prevent, returning by
     the back door. Returns the dropped cell keys, for reporting.
+
+    **`inherited` is what makes the rule survive the two-stage split (P8b F3).** The
+    sweep runs stage 1, picks W, then runs the attachments — two invocations, so a
+    drop set computed within one of them spans only that one. A cell dropped in stage 1
+    but live in stage 2 would leave W scored on a different cell set in each stage,
+    which is the same confound across stages instead of across arms. Stage 2 therefore
+    reads stage 1's `dropped_cells_d7` and unions it in before dropping, and its own
+    new drops are reported so stage 1 can be re-scored against the union if any appear.
     """
-    dropped: set[str] = set()
+    dropped: set[str] = set(inherited or ())
     for arm_paths in per_arm.values():
         for pair_key, paths in arm_paths.items():
             for d in SNAPSHOTS:
@@ -116,9 +126,17 @@ def main() -> int:
                          "generating any experimental arm result")
     ap.add_argument("--out", default=str(HERE / "paths.json"))
     ap.add_argument("--arms", nargs="*",
-                    help="run only these arms (stage 2 runs the attachments this way; "
-                         "also lets P be walked alone to validate the scorer without "
-                         "generating any experimental arm result)")
+                    help="run only these stage-1 arms (also lets P be walked alone to "
+                         "validate the scorer without generating an experimental result)")
+    ap.add_argument("--stage2", metavar="W",
+                    help="run stage 2: the four attachment arms built on W, PLUS P, A0 "
+                         "and W itself. Those three are re-walked deliberately — the "
+                         "scorer needs P for C1, both P and A0 for C5 (A8), and W for "
+                         "R5's FL1-vs-W attribution, all from one file (P8b F3)")
+    ap.add_argument("--inherit-drops", metavar="PATHS_JSON",
+                    help="union this file's dropped_cells_d7 into the uniform drop. "
+                         "Defaults to --out's stage-1 sibling when --stage2 is used; "
+                         "A13 breaks across the stage boundary without it")
     args = ap.parse_args()
 
     digest = hashlib.sha256(GRAPH.read_bytes()).hexdigest()
@@ -136,10 +154,43 @@ def main() -> int:
     by_name = resolve_names(store, pop)
 
     arms: list[Arm] = [a for a in STAGE1 if a.name == "P"] if args.smoke else STAGE1
-    if args.arms:
+    inherited: set[str] = set()
+
+    if args.stage2:
+        assert not args.arms, "--stage2 and --arms are mutually exclusive"
+        w = args.stage2
+        w_arm = next((a for a in STAGE1 if a.name == w), None)
+        assert w_arm is not None, f"W must be a stage-1 arm; got {w!r}"
+        assert w_arm.adoptable, (
+            f"{w} is marked non-adoptable (a diagnostic or bound), so it cannot be W"
+        )
+        # P and A0 accompany the attachments because the scorer reads one file: C1 is
+        # paired against P, C5's inspection is against BOTH P and A0 (A8), and R5's
+        # floor attribution is FL1-vs-W (A16), not FL1-vs-P.
+        support = [a for a in STAGE1 if a.name in {"P", "A0", w}]
+        arms = support + stage2(w, w_arm.cfg)
+
+        drops_from = args.inherit_drops or str(Path(args.out).with_name("paths.json"))
+        src = Path(drops_from)
+        assert src.exists(), (
+            f"stage 1 output not found at {src}; A13's uniform drop cannot span the "
+            f"stage boundary without it (P8b F3). Pass --inherit-drops explicitly."
+        )
+        stage1_doc = json.loads(src.read_text(encoding="utf-8"))
+        assert stage1_doc.get("artifact_sha256") == digest, (
+            "stage 1 ran on a different artifact; the two stages are not comparable"
+        )
+        inherited = set(stage1_doc.get("dropped_cells_d7", []))
+        print(f"stage 2 on W={w}: {len(arms)} arms "
+              f"({', '.join(a.name for a in arms)})")
+        print(f"inheriting {len(inherited)} dropped cell(s) from {src.name}")
+    elif args.arms:
         wanted = set(args.arms)
         unknown = wanted - {a.name for a in STAGE1}
-        assert not unknown, f"unknown arm(s): {sorted(unknown)}"
+        assert not unknown, (
+            f"unknown arm(s): {sorted(unknown)}. Stage-2 attachment arms are not in "
+            f"STAGE1 — run them with --stage2 <W>, which also brings P, A0 and W."
+        )
         arms = [a for a in STAGE1 if a.name in wanted]
     pairs = ANALYSIS_PAIRS[:1] if args.smoke else ANALYSIS_PAIRS + HELD_OUT_PAIRS
     held_out = set() if args.smoke else {f"{a} -> {b}" for a, b in HELD_OUT_PAIRS}
@@ -169,7 +220,8 @@ def main() -> int:
         print(f"  {arm.name:<4} done  ({time.time() - t0:6.1f}s)   "
               f"floor term live on {frac:5.2f} % of {stats['examined']:,} relaxations")
 
-    dropped = drop_infeasible_uniformly(per_arm)
+    dropped = drop_infeasible_uniformly(per_arm, inherited)
+    new_drops = sorted(set(dropped) - inherited)
 
     out = {
         "artifact_sha256": digest,
@@ -177,6 +229,8 @@ def main() -> int:
         "snapshots": list(SNAPSHOTS),
         "max_depth": MAX_DEPTH,
         "arms": [a.name for a in arms],
+        "stage2_w": args.stage2,
+        "inherited_dropped_cells": sorted(inherited),
         "pairs": [f"{a} -> {b}" for a, b in pairs],
         "held_out_pairs": sorted(held_out),
         "dropped_cells_d7": dropped,
@@ -202,9 +256,19 @@ def main() -> int:
     if dropped:
         print(f"\nD7 — guard-infeasible cells, dropped from ALL arms ({len(dropped)}):")
         for c in dropped:
-            print(f"  - {c}")
+            print(f"  - {c}{'   [inherited]' if c in inherited else ''}")
     else:
         print("\nD7: no guard-infeasible cells.")
+
+    # A13 across the stage boundary: a NEW drop in stage 2 means stage 1's scored cell
+    # set is now wider than stage 2's, so W is compared on different cells in each. The
+    # fix is a re-score, not a re-route — scoring is free and offline.
+    if args.stage2 and new_drops:
+        print(f"\n⚠ {len(new_drops)} cell(s) newly infeasible in stage 2:")
+        for c in new_drops:
+            print(f"  - {c}")
+        print("  -> RE-SCORE stage 1 against the union before comparing the stages, or")
+        print("     W's cell set differs between them (A13 across the boundary, P8b F3).")
     return 0
 
 
