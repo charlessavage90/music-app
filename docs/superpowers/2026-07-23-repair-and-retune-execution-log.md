@@ -1377,3 +1377,30 @@ committed under their attributions. This session added nothing to the standing l
 tightened D6, net-new standing-layer additions are the owner's call — none were made.
 
 **No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### Closeout B1 — doc-auditor at the scorer seam (2026-07-24)
+
+Ran as part of the seam closeout. **One MEDIUM, two LOW; no HIGH, and no escalation list —
+every finding was adjudicable from the record.** A marked improvement on the day's earlier
+B1 passes, consistent with the docs being written per-amendment this session rather than
+reconstructed at closeout.
+
+- **MEDIUM (fixed):** A14's amendment-table row ended "· A14 note below", a dangling
+  forward-reference — no such note exists, and A14's row is self-contained (unlike A11/A12/
+  A15, which genuinely needed "in full" sections). A defect of omission, exactly the class
+  B1 exists for. Fixed by replacing the dead pointer with a precise §1.5 cross-reference and
+  an explicit "no separate section: this row is self-contained."
+- **LOW (fixed):** the active `2026-07-24-track2-arm-scorer/` harness was reachable from
+  `docs/` only at one hop (via the handoff), not catalogued. Added a note to
+  `builder/analysis/README.md` marking it as the one **live, non-frozen** directory — which
+  also corrects that file's opening "everything here is frozen, not a tool" claim, now that
+  an exception exists.
+- **LOW (no action, recorded):** the superseded fame-proxy handoff's P6 strikethrough
+  formatting (cosmetic, on an audit-retained superseded doc) and the "SUPERSEDED"/"Supersedes"
+  phrasing pair in the doc map (unambiguous on read). Polishing a superseded document is not
+  worth the churn; the auditor marked both optional.
+
+**Regression check passed:** the previous B1's fixes (P6 discharged in three docs, amendment
+banner count) remain in place. Cold-start navigation test passed.
+
+**No arm has run.**

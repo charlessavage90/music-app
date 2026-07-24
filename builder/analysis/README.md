@@ -5,6 +5,15 @@ maintenance, kept so a result can be re-derived and audited. They are not tools
 and are not updated when shipped code changes. The project nearly lost them
 once to a scratchpad clean (Phase 1 log §2, closing note).
 
+**One exception, and it is live:** `2026-07-24-track2-arm-scorer/` is the **active
+Stage A scoring harness** — the C1–C6 scorer the next Track 2 session runs after the
+P8b review. It is a *tool*, not yet a frozen record; it owns its figures in its own
+README. A reader arriving from `docs/` reaches it via the current handoff
+(`docs/superpowers/2026-07-24-HANDOFF-track2-scorer.md`) and pre-registration
+amendments A12–A16. Noted here because a `docs/`-first reader would not otherwise
+find it, and because it is the one directory this file's "frozen, not a tool"
+framing does not yet describe.
+
 ## Why this file exists
 
 On 2026-07-23 the shipped quantities were renamed so that **every popularity-
