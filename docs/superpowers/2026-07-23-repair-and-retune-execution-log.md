@@ -798,3 +798,74 @@ the four other new analysis packages (0 issues each).
 percentile tie-handling machinery, the §5 scoring code (buildable, not runnable until
 labels + counts exist), C1–C6 computation (needs scored arms), and the D4/D6/D7 + C3-anchor
 (handoff 1b) amendment. No arm has run. Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### P4 resolved — Deezer `nb_fan` FAILS §5; Wikipedia is the pre-registered next proxy (2026-07-23)
+
+Owner labelled the 29 blind the same session. Recorded in `labels.json` via
+`record_labels.py` (keyed by blind position, auditable). Fetched and scored;
+`builder/analysis/2026-07-23-track2-fame-proxy/` owns all figures. **Committed before any
+narration** — the falsifiers were pre-registered, and firing inconveniently is not licence
+to relitigate them.
+
+**Two of the four falsifiers fired:**
+
+| §5 test | Result | Falsifier | |
+|---|---|---|---|
+| Primary — AUC(know-well > heard-of), S4 excluded | **0.680** (n=5 vs 5) | < 0.70 | **FIRES** |
+| Catastrophic inversions outside S4 | **2** | > 1 | **FIRES** |
+| Spearman (diagnostic, non-gating) | 0.697 pooled | — | — |
+| B_unk | valid at 199,337 (81 % never-heard below) | none exists | clear |
+| Match failure | 3.4 % (CROOVE only, an S4 off-platform case) | > 20 % | clear |
+
+The two inversions: **Paul Simon (244k)** and **Death Cab for Cutie (199k)** are *know well*
+but sit below **Diana Krall (833k)**, *never heard of*. Mechanism is a Deezer market/genre
+skew, not noise: Paul Simon and Death Cab are under-followed on Deezer relative to their
+fame; Diana Krall (jazz-pop, older record-buying audience) is over-followed relative to how
+known she is. **Popularity ≠ fame again, on a third population** — this is the same failure
+the in-graph number has (§2.11) and the same the trace showed at path level (step-43),
+reproduced on Deezer follower counts.
+
+**The AUC miss is marginal (0.68 vs 0.70) and rests on two artists; it was NOT argued away,
+deliberately.** The 0.70 line was committed before the labels existed precisely so a
+near-miss cannot be relitigated post-hoc. The inversion falsifier fired outright. Both mean
+the same thing: `nb_fan` is unfit at this granularity.
+
+**A10 was vindicated twice by the labels themselves:** (1) S1 came back **all nine
+"never heard of"** — the earlier collective "mostly unknown" was actually *fully* unknown at
+three-bucket granularity, so assuming the buckets would have been wrong; (2) S2's spread put
+**Nick Drake (most in-graph-popular interior of pair 1) at only "heard of"** while
+**Whitney Houston (least popular of two pairs) at "know well"** — the popularity/fame
+inversion the mechanical selection surfaced is confirmed in the owner's own labels.
+
+**Pre-registered response (§5): re-run the identical protocol against Wikipedia pageviews,
+same labels, no re-asking.** This is methodology, not an owner decision — the labels are
+committed and reusable across proxies (the reusability A6 bought). Handed off here rather
+than executed **because Wikipedia matching is materially harder than Deezer's and deserves
+a fresh session**, not because it is blocked.
+
+### Next unit — the Wikipedia pageviews proxy (self-contained; fresh-session task)
+
+Everything it needs is committed. Concrete shape:
+
+- **`score.py` is already proxy-agnostic** — it reads `labels.json` + a `fan_counts.json`
+  shaped file and applies the four §5 falsifiers. Point it at a Wikipedia-counts file and it
+  scores unchanged. Do **not** re-collect or re-shuffle labels; `blind_order.json` and
+  `labels.json` are fixed.
+- **The hard part is name → article resolution**, which Deezer did not have. Wikipedia needs
+  a title lookup (MediaWiki `opensearch`/`query`), and it carries disambiguation and
+  cross-language cases the sample deliberately contains: **林俊傑 → "JJ Lin", EGOIST, CROOVE,
+  Wishbone Ash, saib./idealism/Purrple Cat** (lo-fi acts that may have no article at all — a
+  no-article is a *legitimate* proxy outcome, not a match to force). English Wikipedia
+  pageviews are the right target for an English-speaking owner; state that choice.
+- **Metric:** monthly pageviews over a fixed, pre-stated window via the Wikimedia REST
+  pageviews API, summed or averaged — fix the rule before fetching, and assert it, exactly
+  as Deezer fixed exact-match-after-P5 first.
+- **Match failure is still a measured falsifier** (> 6 of 29). A no-article artist counts as
+  a failure; do not hand-resolve it.
+- **If Wikipedia also fails:** the §5 terminal fallback is owner-labelling of every
+  evaluated-path artist — that spends real owner time and **is** his decision. Do not enter
+  it without putting it to him.
+
+**Still open beyond P4** (unchanged): P6 percentile machinery, the C1–C6 arm harness, and
+the D4/D6/D7 + C3-anchor amendment. All wait on a fit proxy. No arm has run. Artifact
+untouched, sha256 `4cb84ef9…b061dc8`.
