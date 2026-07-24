@@ -1,0 +1,25 @@
+{
+  "auc_primary": 0.68,
+  "auc_n_know": 5,
+  "auc_n_heard": 5,
+  "spearman_pooled": 0.6967450097462614,
+  "inversions_outside_s4": 2,
+  "inversion_names_outside_s4": [
+    "Paul Simon",
+    "Death Cab for Cutie"
+  ],
+  "never_heard_max": {
+    "fan": 833167,
+    "name": "Diana Krall"
+  },
+  "b_unk": {
+    "threshold": 199337,
+    "n_below": 16,
+    "frac_never": 0.8125
+  },
+  "match_failure_rate": 0.034482758620689655,
+  "falsifiers_fired": [
+    "AUC < 0.70",
+    ">1 inversion outside S4"
+  ]
+}

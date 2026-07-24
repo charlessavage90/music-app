@@ -1,0 +1,58 @@
+{
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "listen_graph": "c8af6eaccc08",
+  "strata": {
+    "S1": [
+      "saib.",
+      "Purrple Cat",
+      "sleepy fish",
+      "Leavv",
+      "idealism",
+      "Miami Nights 1984",
+      "Lazerhawk",
+      "Stonebank",
+      "Toonorth"
+    ],
+    "S2": [
+      "Whitney Houston",
+      "Paul Simon",
+      "Kylie Minogue",
+      "Perry Como",
+      "Alice Cooper",
+      "Death Cab for Cutie",
+      "Nick Drake",
+      "AC/DC",
+      "Nirvana",
+      "Diana Krall",
+      "Kasabian",
+      "Bastille"
+    ],
+    "S3": [
+      "Max Richter",
+      "Ólafur Arnalds"
+    ],
+    "S4": [
+      "Wishbone Ash",
+      "Chuck Berry",
+      "The Byrds",
+      "林俊傑",
+      "EGOIST",
+      "CROOVE"
+    ]
+  },
+  "s2_provenance": {
+    "Whitney Houston": "§5 named exemplar",
+    "Paul Simon": "§5 named exemplar",
+    "Kylie Minogue": "§5 named exemplar",
+    "Perry Como": "least popular interior, pop-pop cross-genre",
+    "Alice Cooper": "least popular interior, pop-obscure (owner's trace pair)",
+    "Death Cab for Cutie": "least popular interior, pop-pop distant",
+    "Nick Drake": "most popular interior, pop-pop cross-genre",
+    "AC/DC": "most popular interior, pop-obscure (owner's trace pair)",
+    "Nirvana": "most popular interior, pop-pop distant",
+    "Diana Krall": "median popular interior, pop-pop cross-genre",
+    "Kasabian": "median popular interior, pop-obscure (owner's trace pair)",
+    "Bastille": "median popular interior, pop-pop distant"
+  },
+  "distinct": 29
+}

@@ -76,9 +76,17 @@ invariant, not a quality gradient, so it is the one candidate for a guard.
 | **F6** | **Coherence wobble at the obscure end.** Force-disliking repeatedly *did* reach genuinely obscure artists (first time in testing), but coherence was uncertain — soundtracks, neoclassical/ambient (Max Richter, Ólafur Arnalds) appeared, and a single further bypass snapped back to very famous (Queen, Simon & Garfunkel). The "snap back" is the stratification's signature; the wobble is the coherence dimension Track 2 must hold *while* reaching down. | **Metric / criterion.** | Track 2 candidate reaches the obscure tail **without** a coherence collapse and **without** immediately snapping back to the famous stratum on the next bypass. Coherence is judged by the blind listen (offline metrics do not track it — Phase 1 log §4). |
 
 **Bypass sample URLs** for F3 and F6 are in the owner's 2026-07-23 test message
-(all path state lives in the URL, so they reproduce exactly). Not pasted here —
-the branch/PR thread holds them; if a durable copy is needed for Track 2's pair
-set, capture them into the Track 2 plan when it is written.
+(all path state lives in the URL, so they reproduce exactly).
+
+> **CORRECTION 2026-07-23.** This entry said "the branch/PR thread holds them."
+> **It does not** — PRs #7, #8 and #9 have zero comments between them, checked via
+> `gh`. The URLs exist only in the owner's chat message from that session and in his
+> browser history. Recording the correction rather than quietly fixing the sentence,
+> because "it is safe elsewhere" is exactly the belief that loses something: the
+> deferral was accepted on the strength of a durable copy that was never made.
+> **Consequence for P1:** the pair-8 endpoints must come from the owner or from
+> browser history; if neither yields them, §2.3's substitution rule fires
+> deterministically (Nirvana → CROOVE) and no judgement is required.
 
 ### Closeout — doc audit (2026-07-23)
 
@@ -300,7 +308,7 @@ in the G2 section above, next to the aliases it governs. Three deferrals total.)
 
 | Deferred | Why not now | Success condition — due when |
 |---|---|---|
-| **Named-entity check as standing practice** — showing the owner the *names* a perceptual metric produces, not just the number | Pre-registration §5 already implements a stronger version for the fame proxy: 33 artists labelled into three buckets **without seeing fan counts**, scored for rank agreement and catastrophic inversions. A parallel practice invented now would duplicate it. | **After §5 runs.** Generalise its protocol into `closeout` (as an adoption-time step) and into `TEST-QUEUE.md`'s format, with its measured performance attached. |
+| **Named-entity check as standing practice** — showing the owner the *names* a perceptual metric produces, not just the number | Pre-registration §5 already implements a stronger version for the fame proxy: 29 artists labelled into three buckets **without seeing fan counts**, scored for rank agreement and catastrophic inversions. A parallel practice invented now would duplicate it. | **After §5 runs.** Generalise its protocol into `closeout` (as an adoption-time step) and into `TEST-QUEUE.md`'s format, with its measured performance attached. |
 | **Artifact provenance registry** — every gitignored `.bin` carries its full build configuration and code commit, and any cross-artifact comparison must cite the rows and count the differing columns | Track 2 Stage A holds the artifact fixed and asserts its sha256, so the post-hoc-comparison confound is not live. The checksum table in Phase 1 log §5 is adequate for now. G1 also narrows the gap: a rebuilt artifact must now pass acceptance before it exists. | **When pre-registration §2.4 R0 or R2 fires** and a builder arm (p99 rescale, or the deferred `cap_strategy`) is scheduled — that is when new artifacts appear and log §2.2's two- and three-knob comparison errors become possible again. |
 
 ### P8 — `ml-graph-analyst` protocol review landed (2026-07-23)
@@ -401,6 +409,607 @@ evidence about path quality — which is Track 2's question, still open, F2 unto
 
 ## Track 2 — cost-function retune
 
-*(not started — next session begins here. Read the Track 1 use-the-app results
-above first: F2 is the objective, F1 is a guard decision that must precede the
-success-criterion spec, and F3–F6 are the criteria the sweep is judged on.)*
+*(No arm has run. No path has been routed. The harness does not exist.
+Read the Track 1 use-the-app results above first: F2 is the objective, F1 is
+settled as a guard, and F3–F6 are the criteria the sweep is judged on.)*
+
+### Pre-registration amended for analyst D1–D3 (2026-07-23)
+
+Branch `track2-prereg-amendments` off `main`. **Five amendments (A1–A5) to
+`specs/2026-07-23-track2-preregistration.md`, committed before any arm ran** —
+index in its new §9, each also marked inline at the passage it changes.
+
+**Why these three and not the rest.** D1, D2 and D3's first half are settled by
+**arithmetic over the artifact**, not by argument, and all three would have
+produced arms that provably could not move:
+
+- **D1** — P3's rule forces `s_max` one grid step below the ceiling, so T1's toll
+  came to **1.42 % of `w_hop`** (re-measured independently this session, matching
+  the review). The rule and the goal were in conflict: "bind only on saturated
+  edges" and "have a magnitude" cannot both come from one threshold on `sim`.
+  Fixed by decoupling them — an additive toll on score-exactly-1.0 edges, at two
+  pre-registered magnitudes (7.5× and 30× `w_hop`), which is also what makes a T1
+  null mean something.
+- **D2** — at `config.py`'s relax constant the floor hits zero at 6–7 bypasses
+  while C1 scores at d ≥ 10, so **FL1/FL2 were numerically identical to W in every
+  scored cell**. §2.4's R3 designated them as its remedy, so that branch was
+  unreachable. Fixed with a relax constant pre-registered in the pre-registration
+  rather than read from config, plus early snapshots (free — the walk visits every
+  depth anyway).
+- **D3** — added read **R6**, and made the percentile level mean-matched so J-cur
+  is genuinely one column, with diagnostic arm **A1u** holding the unnormalised
+  variant.
+
+**The prediction is on the record before the arms run, which is the point.**
+The review's D3 inference — that percentile arms will move ΔF the *wrong way*,
+because top-decile compression cheapens lateral famous↔famous moves faster than it
+cheapens exits — is now R6, with a free falsifier (**A1 beats A0 on C1**). The
+sweep therefore tests the review as well as the design, and neither outcome can be
+narrated after the fact.
+
+**A new measurement, and it changed the amendment.**
+`builder/analysis/2026-07-23-track2-toll-calibration/` (owns its figures; discharges
+review **PR-C**). Its **Q4 was not anticipated by the review**: ceiling saturation is
+rare across the graph but **near-universal among this sweep's endpoints** — 22 of 24
+carry at least one ceiling edge, eight are saturated on all 50 neighbours, against a
+mean of 3.5 for top-1%-by-degree nodes generally. Two consequences:
+
+1. It cuts **in favour** of T1 — the toll binds exactly where the sweep routes, so a
+   T1 null is informative rather than merely uninformative.
+2. It bounds the **S-mag column**, which nobody had flagged: where all 50 exits sit at
+   similarity 1.0, `w_sim · (1 − sim)` is an identical constant across them, so S-mag
+   **cannot discriminate on the first hop** out of those eight endpoints. Recorded in
+   §1.3 so A3/A5 are not read as "the dive barrier alone" without the caveat.
+
+**What was deliberately not done.** D4–D7 and PR-A/PR-B are **untouched and open**,
+tabulated with success conditions in §9's closing table so no one reads the amendment
+set as discharging the review. The highest-value one is **PR-A**: run **A0 vs P first,
+as a gate**, not as one arm among fifteen — if A0 ≢ P the factorial must be re-anchored
+with floor fully crossed, which is a redesign better found before fourteen other arms
+than after. P2 was marked discharged in §7 (it had remained listed as outstanding
+despite three independent verifications).
+
+Run count 13 → 15. No change to the primary outcome, any effect-size threshold, the
+pair sets, or the attack analysis.
+
+**A6 added after external review of the ordering.** §5's scoring rule (analyst D5) was
+initially left in the open column, due "before §5 runs". That was wrong on sequencing, for
+a reason worth recording: **the owner's labels are reusable across proxies but not across
+samples.** §5 already anticipates re-running verbatim against Wikipedia pageviews if Deezer
+fails — same labels, no re-asking. But if the *scoring rule* turns out to need a different
+sample, he has by then thought about the problem, and a second pass is contaminated by his
+first. A defective interpretation rule therefore does not merely delay P4; it can spend the
+resource P4 exists to acquire. A6 landed in this amendment set instead.
+
+### Track 2 execution order (fixed 2026-07-23, before any step ran)
+
+Recorded because the order is not obvious and one step is easy to skip.
+
+| # | Step | Note |
+|---|---|---|
+| 1 | **This amendment set** (A1–A6) | Done. G5(a)'s mirror-verify sequencing already landed with the pre-Track-2 guards — **it is not outstanding**, and re-deriving it would be waste. |
+| 2 | **Build the minimal mirror; verify byte-identity against production `find_path` with guard G OFF** | The log §3.10 gate, and **the only step where failure means stop, the harness is wrong**. §1.2's G5(a) note scopes that instruction to this step alone. |
+| 3 | **Enable G uniformly across all arms including P** | Per §1.2. Carries analyst **O8**'s consequence: with G applied to P, no comparison anywhere is against shipped behaviour on pairs 4–5, so C5's no-regression inspection cannot see the d0 change the owner would notice there. |
+| 4 | **A0 vs P** on the full pair × depth grid | Settles the factorial's shape. Report alongside it the fraction of examined nodes carrying a non-zero floor term (PR-A). |
+| 5 | Scoring and the remaining arms | Built against a shape that is by then known. |
+
+**P4 runs in parallel, starting now.** It sits outside this chain entirely — it needs no
+harness, only the fixed name list, ten minutes of the owner's time, and an artist-search
+fetcher that must **not** reuse `clips.py` (§0). Its latency is owner-availability, not
+compute, so steps 2–4 proceed while it is outstanding.
+
+**Step 4 is a test whose pre-registered expectation is "no difference", and that is
+deliberate.** Stating it now so a pass is not misread later: **a pass is the good outcome
+and costs exactly one arm.** The alternative it buys insurance against — discovering
+mid-sweep that eight factorial cells are anchored on a constant that was never constant —
+is the expensive one. This project has already been saved once by a pre-registered null
+being read as informative rather than disappointing (log §2.13 C5); this is the same
+discipline applied earlier in the chain.
+
+### P1 discharged — and the answer collided with pair 1 (2026-07-23)
+
+The owner supplied both URLs. Resolved against the adopted artifact in
+`builder/analysis/2026-07-23-f6-trace-capture/` (owns its figures); all 44 MBIDs resolve.
+
+**Both URLs carry the same endpoints and F3's bypass lists are a strict prefix of F6's**,
+so this is one continuous walk captured at 15 bypasses and again at 42 — not two traces.
+The pair is **Miles Davis → Daft Punk**, which is already **pair 1** of the analysis set.
+Amendment **A7** applies §2.3's substitution rule (pair 8 → Nirvana → CROOVE) and lets
+pair 1 inherit the trace rationale. **A7's trigger was interpreted, not executed** — the
+rule fires on "unrecoverable" and this pair was recovered-and-duplicated — so it is
+flagged in both the pre-registration and here as the judgement call it is. Reversal costs
+nothing before any arm runs; the alternative is seven analysis pairs, described as seven.
+
+**Two things the capture gives that the prose record could not:**
+
+1. **F3's example is verbatim in the URL.** The owner reported the unacceptable case as
+   "Bowie → Pink Floyd → Beatles". Known-presses #10, #11, #12 are David Bowie, Pink
+   Floyd, The Beatles, in that order. A reported impression independently confirmed after
+   the fact — rare here, and worth noting as a point *for* capturing URLs rather than
+   summarising sessions.
+2. **All 42 bypassed artists sit above the 97.7th in-graph popularity percentile**
+   (minimum: The Hives, 0.9773). Direct support for F2 and log §2.9 from the owner's own
+   session rather than a scripted walk. **Stated carefully:** this is the *rejected* set,
+   not the *offered* set, so it cannot show the router never offered anything obscure —
+   F6 records that he did reach Max Richter and Ólafur Arnalds, and neither appears here
+   precisely because he did not bypass them.
+
+**A currency note, since this is the project's recurring trap.** Every one of those 42 is
+genuinely famous, so here in-graph popularity and real fame coincide. That does **not**
+soften §2.11: its point is that the same top band *also* holds lo-fi and synthwave artists
+who are not famous. The band is a mixture and this trace drew the famous part of it. The
+external proxy is still required.
+
+**Also recoverable, and worth knowing: the interleaving is not.** `dislike` and `known`
+are separate URL parameters, so order within each list survives but the sequence between
+them is lost. Irrelevant to the sweep (all-`known`, scripted victim) but it bounds what
+this trace could ever be replayed as, and it is a small argument for a future single
+ordered bypass parameter if replay ever matters.
+
+### Step 43 — the snap-back reconstructed, and a design choice validated
+
+The owner supplied one further URL, one bypass past F6, not knowing whom he had bypassed.
+It is F6 plus one appended `dislike`, so it reconstructs exactly. Record:
+`builder/analysis/2026-07-23-f6-trace-capture/` §5 (owns its figures).
+
+He bypassed **Nancy Sinatra**. The path went from a **nine**-interior corridor —
+Frank Sinatra → Nancy Sinatra → Ennio Morricone → Hans Zimmer → Clint Mansell →
+Max Richter → Ólafur Arnalds → Tycho → deadmau5 — to a **four**-interior fallback:
+Nina Simone → Leonard Cohen → Simon & Garfunkel → Queen. **Queen and Simon & Garfunkel
+are the two artists he named in his F6 report**, so the reported snap-back is confirmed
+to the artist.
+
+**The load-bearing result: the in-graph metric cannot tell those two paths apart.**
+Minimum interior percentile 0.9829 versus 0.9820; medians 0.9940 versus 0.9909. Where it
+differs it marginally *favours the snap-back*. Max Richter (0.9862) and Ólafur Arnalds
+(0.9908) score as *more* popular than Queen (0.9820).
+
+**Why this matters more than one trace normally would.** §2.11 established
+popularity ≠ fame at artist level, and the nine-names verdict confirmed it at artist
+level. This is the first **path-level** demonstration, and it is on the exact contrast
+Track 2 is built to produce: a success criterion phrased in in-graph percentile would
+score the path he valued and the path he rejected as **indistinguishable**. The
+pre-registration already scores C1/C2 on an external fame proxy — so this **validates a
+choice already made** rather than prompting a new one. It also raises the cost of P4
+failing: with no fit proxy there is no fallback metric that can see this contrast, which
+strengthens §5's terminal fallback (owner-labelling) from "expensive but honest" to
+"expensive and apparently necessary".
+
+**Three observations, labelled as observations — n = 1, none pre-registered:**
+
+1. **The corridor had a single entrance.** One bypass did not substitute one artist; it
+   destroyed the route from Frank Sinatra onward. No second-cheapest way into the corridor
+   existed, so the router fell back wholesale. If it generalises, the §1.5 **F5**
+   diagnostic is the nearest instrument and it currently looks for the opposite pattern.
+2. **Payload collapsed 9 → 4.** Attack 5 / WHAT-GOOD #2 in the wild rather than argued.
+   **C4** exists for this and its threshold would flag a drop of five.
+3. **The floor had been dead for ~35 bypasses** at both states (zero from about bypass
+   5–6). Analyst **D2** observed in a real session rather than derived.
+
+None of these enters the record as a finding; per §2.4's interpretation discipline they
+are post-hoc and would need an `ml-graph-analyst` check to become one. They are recorded
+because they are cheap, and because item 1 may be worth a diagnostic the sweep does not
+currently carry.
+
+### Steps 2–4 executed (2026-07-23) — and the A0 branch fired
+
+**Step 2 — mirror built, gate PASSED.** `builder/analysis/2026-07-23-track2-sweep/`
+(owns its figures). 212 cells across all 12 pairs, byte-identical to shipped `find_path`
+with guard G off. The verification was written and run **before** the mirror existed; it
+failed on the missing module, then passed. Two pairs walked zero depths — Radiohead → The
+Beatles and Muse → Coldplay resolve direct, so with G off there is no interior and no
+victim. That is G5(a)'s contradiction in empirical form, and the reason the G-off-then-G-on
+sequence exists.
+
+Byte-identity needed three deliberate choices, recorded because "same algorithm" would not
+have sufficed: production's exact term-summation order (float addition is not associative),
+optional terms applied inside branches rather than as `+ 0.0`, and `(cost, node)` heap
+entries so ties break on node id identically.
+
+**Step 3 — guard G enabled uniformly.** Both arms below carry it.
+
+**Step 4 — A0 vs P: identity FAILED, on one cell in 252.**
+
+| | |
+|---|---|
+| Cells compared | 252 |
+| Identical | **251** |
+| Divergent | **Miles Davis → Daft Punk at d0**, and nothing else — that pair is identical at d1–d20 |
+
+At d0 the un-relaxed floor is 0.6726. **P** routes through Dean Martin (0.6668); **A0**
+through Michael Bublé (0.6563). Both dip below the floor — the floor does not prevent the
+dip, it picks the shallower one, and buys a sixth interior doing it.
+
+**The load-bearing measurement (PR-A, discharged).** Floor-term firing rate by depth,
+pooled over all 12 pairs: **51.3 % at d0**, 14.3 % at d1, 2.1 % at d2, 0.12 % at d3,
+0.005 % at d4, 0.001 % at d5, and **exactly 0.000 % at every depth from d6 to d20**.
+
+**What follows — three findings, the first two settled:**
+
+1. **Adjudication claim 23's mechanism is falsified, its conclusion nearly survives.**
+   Claim 23 said the floor never fires because `w_jump` stops paths dipping below it.
+   Paths do dip below it, and the term fires on half of all relaxations at d0. What holds
+   is only the outcome: 1 changed cell in 252. **This belongs in the adjudication's §6
+   claim table** — flagged, not edited here, since that document owns it.
+2. **§0's confound cannot occur in the scored window, and this is now measured rather than
+   argued.** The relaxed raw floor reaches zero after `ceil(base_floor / 0.15)` `known`
+   bypasses *regardless of arm*, and `max(0, 0 − pop_raw_v) = 0` thereafter — so it is zero
+   for every raw-floor arm at every scored depth (C1 at d ≥ 10, C2 at d15/d20). The term
+   cannot "switch on only in the arms that work". **Raw floor only** — the FL arms' pctl
+   floor with the A2 relax constant is alive to ~d18–20 by design and is untouched by this.
+3. **Where the floor does live is d0–d2 — exactly where C5's no-regression inspection
+   looks.** So it is not irrelevant; it is relevant precisely where no *scored* criterion
+   operates.
+
+**Stopped here deliberately.** §1.4 requires the design revision be recorded before
+proceeding, so no further arm has run. This is also a **material mid-flight amendment and
+therefore a handoff seam** by the CLAUDE.md rule — the next session reads a governing
+document that has changed, which is the condition the rule was written for.
+
+### The exposure map — what the floor change actually touches
+
+*Owed before any escalation, per the CLAUDE.md rule added 2026-07-23. Building it first
+would have dissolved most of what was escalated.* One row per pre-registered criterion:
+does the floor change cross it, where, and what was measured there.
+
+| Criterion | What it reads | Crosses the floor? | Measurement |
+|---|---|---|---|
+| **C1** | ΔF at ≥ 10 bypasses | **No** | Floor term identically zero at ≥ 7 bypasses for every raw-floor arm; P ≡ A0 at every depth ≥ 5 on all 12 pairs, both victim policies |
+| **C2** | absolute reach at 15 / 20 | **No** | as C1 |
+| **C3** | within-arm, 5 vs 20 | **No** | Every factorial cell A0–A7 has the floor **off**, so C3 is read inside an arm with no floor term at all. Even switched on, path exposure at 5 bypasses is zero |
+| **C4** | interior count at ≥ 10 | **No** | P ≡ A0 throughout that range |
+| **C5** | first path, vs P | **YES** | 1 pair of 12 differs, stable across both victim policies — pair 1, one interior substituted, 6 → 5 |
+| **C6** | proxy coverage | **No** | not a routing quantity |
+
+**One criterion crosses, and its fix costs zero extra runs.** A0 *is* production with the
+floor switched off, and its full grid already exists.
+
+### Decision — mine, and taken
+
+**Keep the floor off across the factorial (option 2), and report C5's first-path
+inspection against both P and A0.** No extra runs; one dated amendment.
+
+Stated per the CLAUDE.md rule on whose decision is whose: this is **methodology and run
+counts**, which is not the owner's column. The earlier version of this section tabled three
+options and handed them over — that was an abdication, and it is recorded as one.
+
+Why not the alternatives: **option 1** (cross the floor fully) roughly doubles the sweep,
+and the analyst review measured that its added cells do **not** buy a clean one-knob floor
+effect at depth — what they differ by there is *trajectory inheritance*, not a live floor.
+**Option 3** (floor-on cells to 5 bypasses only) would miss that inheritance entirely.
+What would change the decision: a demonstration that the d0–d2 asymmetry propagates into
+C1/C2 cells for some arm — the review looked and found P ≡ A0 at every depth ≥ 5 on both
+victim policies.
+
+### Corrections to the step-4 write-up, from the review
+
+Four of them, all mine, and two change what a reader would conclude:
+
+1. **The unconditional dead-bound is 7 `known` bypasses, not 6.** `ceil(base/0.15)` is 7 on
+   7 of the 12 pairs, which carry a strictly positive floor at 6. The measured zero at 6 was
+   a **routing** fact for the arms tested, not arithmetic. Scored depths are unaffected —
+   the claim was over-broad in span, not wrong where it was used.
+2. **"The added cells can differ only at d0–d5" was false.** Floor-value invariance is not
+   floor-*effect* invariance: a changed first path changes which artist gets bypassed, and
+   that carries forward. Measured at 2 of 12 pairs still differing after twenty bypasses
+   for the diagnostic twins, stable across both victim policies.
+3. **The 51 % figure does not show what I used it to show.** A relaxation is an *edge
+   examined during search*, not an artist on the finished path — reachable is not binding.
+   It cannot falsify a claim about paths.
+4. **Claim 23 contains no mechanism, so "its mechanism is falsified" is not a coherent
+   statement.** The `w_jump` sentence belongs to **log §2.12**; the pre-registration §0
+   cites the two jointly, which is where the conflation came from.
+
+**What should enter the adjudication's claim table** (flagged, not edited — that document
+owns it): claim 23's "no path dips below the floor" **does not transfer** to this artifact
+and pair set; the headline is **nearly upheld** — refuted as an absolute, upheld at one
+changed cell in 252. The original measurement is **not** retracted. And log §2.12's
+mechanism is **refined, not demolished**: removing `w_jump` deepens the dip 24×, so
+`w_jump` *bounds* the dip rather than preventing it.
+
+### Two findings from the review that change later reads
+
+- **The FL arms' C3 gradient is substantially manufactured by their own device.** The
+  percentile floor sits at ≈ 0.74–0.75 at 5 bypasses and 0 at 20 on all 12 pairs, so an FL
+  arm passing C3 is **not** the same evidence as a floor-off cell passing it. This needs to
+  be attached to §2.4's R3 read before any FL arm is interpreted.
+- **"The floor dies after five bypasses" is true of the scripted protocol, not of the
+  shipped product.** Under all-`dislike` (relax 0.08) the raw floor survives to 12
+  bypasses; 13 is the universal any-mix bound. Relevant to C3 landing, not to Stage A.
+
+### The gate had no effect size, and that is the general lesson
+
+The A0 gate was an exact-identity test over 252 cells whose failure branch roughly doubles
+the sweep. It fired on **one** cell, at a depth no criterion scores, and got the identical
+reading a 200-cell divergence would have got. Every *outcome* criterion in the
+pre-registration carries a threshold; its **gates carried none**. Now a CLAUDE.md rule.
+Amendment **A8** gives the remaining gates effect sizes.
+
+**If A0 ≠ P, that is a pre-registered branch firing, not scope creep.** §1.4's A0 row
+already requires re-anchoring on P with floor as a fully crossed column — sixteen cells
+plus attachments, outside the stated budget. The session that hits it should write a
+**second dated amendment** and treat it as the design working as intended. Framing it now
+so it is not experienced as a late discovery or an admission.
+
+### Session resumed from the mid-track handoff (2026-07-23) — bookkeeping cleared, P4 put to the owner
+
+Picked up cold from `2026-07-23-HANDOFF-track2.md`, cold-read verified against the owner
+before acting (three small gaps found, all in the handoff's own git bookkeeping — HEAD and
+commit count stale, PR title stale — none in the technical record; the handoff was sound
+where it mattered). **Convention fixed this session: one committer, and it is the session,
+not the consultant.** The three modified meta-files (`CLAUDE.md`, both `SKILL.md`) are a
+**consultant session's** in-flight edits, deliberately left uncommitted and out of every
+commit here.
+
+Work done, in order, each committed separately:
+
+1. **PR #9 title and body rewritten** to cover all ten commits and both gate outcomes
+   including the A0 failure. It had described only the first commit's D1–D3 scope.
+2. **Adjudication claim 23 amended** for the A0 result — the wording the A0 gate review
+   settled but nobody had applied. Refuted as an absolute, *nearly upheld* as an outcome
+   (1 changed cell in 252), original measurement not retracted. **Also fixed a
+   table-rendering defect:** the claim table has four columns, so the fifth-cell amendments
+   on claims 23 and 35 were dropped by the renderer — claim 35's 2026-07-22 amendment had
+   been invisible in rendered markdown since it was written. Both now sit inside the verdict
+   cell. *(This is the CLAUDE.md "blast radius includes every document that describes the
+   quantity" rule in miniature: the amendment was present in source and absent on screen.)*
+3. **Amendment A10 — §5's fame-proxy sample fixed and committed before any label**
+   (`builder/analysis/2026-07-23-track2-fame-proxy/`). Two defects, both found by deriving
+   the sample against the repo rather than reading the prose, both unrecoverable after
+   labelling (the A6 argument again — labels reusable across proxies, not across samples):
+   - **S1 and S3 overlapped by four artists.** saib., Purrple Cat, idealism and Miami
+     Nights 1984 are in S1's nine *and* were listed in S3. "~33" was **29 distinct**; the
+     four would have been double-counted in every pooled statistic and read under two
+     strata §5 interprets differently. S3 is now the two F6 reaches only, **n = 2, counts
+     not AUC**. Its purpose is unharmed — testing §2.11's inference is what S1 does.
+   - **§5's claim that S1's labels "already exist" is false** at three-bucket granularity.
+     The record holds one collective verdict ("mostly unknown"), assigns no artist to a
+     bucket, never splits *heard of* from *never heard of* (where B_unk lives), and by
+     "mostly" implies one of the nine was known without saying which. The nine are labelled
+     with everyone else; S1-anchors-the-unknown-end becomes a result, not an assumption.
+     Original verdict **not** retracted — it settled §2.11 and nothing more was asked of it.
+   - **S2's twelve fixed by a mechanical rule** (three named exemplars, then each judged
+     pair's least/most/median in-graph-popular interior, ties on lowest MBID) rather than
+     hand-picked. `pop_raw` spreads, never scores. **Selection is itself evidence:** Whitney
+     Houston is the *least* in-graph-popular interior of two of three pairs (0.5124) and
+     Nick Drake the *most* popular of one (0.7400, above Frank Sinatra and Ella Fitzgerald)
+     — §2.11 reproduced inside the sample built to test it. Match-failure falsifier now
+     fires at **6**, not 7 (proportion unchanged, denominator 29 not 33).
+4. **Blind label sheet emitted** in a sorted-then-seeded-shuffle order
+   (`blind_order.json`, seed 20260723), committed so the strata — S1 insular, S4
+   off-platform — do not leak grouping to the owner, and so the answer→stratum mapping is
+   auditable rather than reconstructed. Put to the owner; **he is labelling now.**
+5. **The Deezer fetcher built, P5-tested, probed** (`fetch_fame.py`, `test_p5.py`). Artist
+   search with exact P5 match, **shares no code with `clips.py`** (§0). P5 unit-tested
+   including the U+2010 trap and a guard that NFKC alone does not fix it. `--probe`
+   discharged §0's one external assumption against out-of-sample names (Radiohead /
+   Portishead / Sault): **`nb_fan` present on all three, 27k–4.06M**, so the field exists
+   and has ranking range. **The sample stays unfetched until the labels land** — §5's
+   protocol order (label, then fetch), and it is load-bearing: match failure is a *measured*
+   quantity, so silently swapping an unresolvable name would corrupt what C6 measures.
+
+**Ordering deviation, taken as methodology, not asked:** the handoff proposed fetcher →
+put-to-owner. Reversed to put-to-owner → fetcher, because the owner's ten minutes need only
+the name list, §5 numbers labelling as step 1 for a reason, and building the fetcher while
+he labels loses nothing. Snyk `snyk_code_scan` clean on all fame-proxy code and re-run over
+the four other new analysis packages (0 issues each).
+
+**State at this point:** P4 blocked on owner labels. Unblocked and not yet done — P6
+percentile tie-handling machinery, the §5 scoring code (buildable, not runnable until
+labels + counts exist), C1–C6 computation (needs scored arms), and the D4/D6/D7 + C3-anchor
+(handoff 1b) amendment. No arm has run. Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### P4 resolved — Deezer `nb_fan` FAILS §5; Wikipedia is the pre-registered next proxy (2026-07-23)
+
+Owner labelled the 29 blind the same session. Recorded in `labels.json` via
+`record_labels.py` (keyed by blind position, auditable). Fetched and scored;
+`builder/analysis/2026-07-23-track2-fame-proxy/` owns all figures. **Committed before any
+narration** — the falsifiers were pre-registered, and firing inconveniently is not licence
+to relitigate them.
+
+**Two of the four falsifiers fired:**
+
+| §5 test | Result | Falsifier | |
+|---|---|---|---|
+| Primary — AUC(know-well > heard-of), S4 excluded | **0.680** (n=5 vs 5) | < 0.70 | **FIRES** |
+| Catastrophic inversions outside S4 | **2** | > 1 | **FIRES** |
+| Spearman (diagnostic, non-gating) | 0.697 pooled | — | — |
+| B_unk | valid at 199,337 (81 % never-heard below) | none exists | clear |
+| Match failure | 3.4 % (CROOVE only, an S4 off-platform case) | > 20 % | clear |
+
+The two inversions: **Paul Simon (244k)** and **Death Cab for Cutie (199k)** are *know well*
+but sit below **Diana Krall (833k)**, *never heard of*. Mechanism is a Deezer market/genre
+skew, not noise: Paul Simon and Death Cab are under-followed on Deezer relative to their
+fame; Diana Krall (jazz-pop, older record-buying audience) is over-followed relative to how
+known she is. **Popularity ≠ fame again, on a third population** — this is the same failure
+the in-graph number has (§2.11) and the same the trace showed at path level (step-43),
+reproduced on Deezer follower counts.
+
+**The AUC miss is marginal (0.68 vs 0.70) and rests on two artists; it was NOT argued away,
+deliberately.** The 0.70 line was committed before the labels existed precisely so a
+near-miss cannot be relitigated post-hoc. The inversion falsifier fired outright. Both mean
+the same thing: `nb_fan` is unfit at this granularity.
+
+**A10 was vindicated twice by the labels themselves:** (1) S1 came back **all nine
+"never heard of"** — the earlier collective "mostly unknown" was actually *fully* unknown at
+three-bucket granularity, so assuming the buckets would have been wrong; (2) S2's spread put
+**Nick Drake (most in-graph-popular interior of pair 1) at only "heard of"** while
+**Whitney Houston (least popular of two pairs) at "know well"** — the popularity/fame
+inversion the mechanical selection surfaced is confirmed in the owner's own labels.
+
+**Pre-registered response (§5): re-run the identical protocol against Wikipedia pageviews,
+same labels, no re-asking.** This is methodology, not an owner decision — the labels are
+committed and reusable across proxies (the reusability A6 bought). Handed off here rather
+than executed **because Wikipedia matching is materially harder than Deezer's and deserves
+a fresh session**, not because it is blocked.
+
+### Next unit — the Wikipedia pageviews proxy (self-contained; fresh-session task)
+
+Everything it needs is committed. Concrete shape:
+
+- **`score.py` is already proxy-agnostic** — it reads `labels.json` + a `fan_counts.json`
+  shaped file and applies the four §5 falsifiers. Point it at a Wikipedia-counts file and it
+  scores unchanged. Do **not** re-collect or re-shuffle labels; `blind_order.json` and
+  `labels.json` are fixed.
+- **The hard part is name → article resolution**, which Deezer did not have. Wikipedia needs
+  a title lookup (MediaWiki `opensearch`/`query`), and it carries disambiguation and
+  cross-language cases the sample deliberately contains: **林俊傑 → "JJ Lin", EGOIST, CROOVE,
+  Wishbone Ash, saib./idealism/Purrple Cat** (lo-fi acts that may have no article at all — a
+  no-article is a *legitimate* proxy outcome, not a match to force). English Wikipedia
+  pageviews are the right target for an English-speaking owner; state that choice.
+- **Metric:** monthly pageviews over a fixed, pre-stated window via the Wikimedia REST
+  pageviews API, summed or averaged — fix the rule before fetching, and assert it, exactly
+  as Deezer fixed exact-match-after-P5 first.
+- **Match failure is still a measured falsifier** (> 6 of 29). A no-article artist counts as
+  a failure; do not hand-resolve it.
+- **If Wikipedia also fails:** the §5 terminal fallback is owner-labelling of every
+  evaluated-path artist — that spends real owner time and **is** his decision. Do not enter
+  it without putting it to him.
+
+**Still open beyond P4** (unchanged): P6 percentile machinery, the C1–C6 arm harness, and
+the D4/D6/D7 + C3-anchor amendment. All wait on a fit proxy. No arm has run. Artifact
+untouched, sha256 `4cb84ef9…b061dc8`.
+
+---
+
+### Consulting-pass deferrals — documentation layer (2026-07-24)
+
+A consulting session on doc sprawl and context cost left two edits **applied** and two
+findings **deferred**. Recorded here so they survive the worker handoffs and come due on
+their own; they are documentation hygiene, not Track 2 experimental work.
+
+**Applied (on disk, in the meta-file edits carried across this handoff):**
+
+- **A standing-layer budget + displacement rule.** `CLAUDE.md` + `memory/` + both
+  `SKILL.md` bodies load unconditionally and grew 661 → ~1,440 lines in two days with every
+  addition justified. `CLAUDE.md` now states the layer is budgeted and additions are
+  displacement-only; `closeout` **D6** enforces it from the diff, and D6 is in the
+  mid-flight scaling because a handoff is when the delta is both non-zero and needed by the
+  successor.
+- **Rules do not get expiry conditions** (a hypothesis put to the consultant and killed):
+  the rules are invariants; what grows is the incident narrative attached to them, which is
+  load-bearing. D6 prices that growth instead.
+
+**Deferred — due when Track 2 *adoption* is recorded (a worker handoff does NOT satisfy this):**
+
+| Deferred | Why it waits | Success condition — due when | Owner |
+|---|---|---|---|
+| **Supersede Phase 1 log §2** — its correction notices now exceed its live content; write a short successor stating the surviving position, mark the original HISTORICAL, retain for audit | It is a live citation target for the in-flight Track 2 pre-registration; rewriting it mid-experiment risks a retraction, not a cleanup | **Track 2 adoption recorded** in this log | A short doc-editing session acting on the next `doc-auditor` (B1) report — **not** a Track 2 worker; minimum-scaling close |
+| **Relocate `CLAUDE.md` "Writing and reviewing plans here"** (~107 lines, 23% of the file) out of the standing layer, behind a pointer + the factor-table rule inline | It is the worked example the Track 2 pre-registration cites; moving it while the experiment is read cold by an incoming worker is the same timing hazard | **Track 2 adoption recorded** in this log | Same doc-editing session; this is the offsetting subtraction for the +lines D6 will show at this handoff |
+
+---
+
+### Closeout B1 — doc-auditor (2026-07-24, fresh session)
+
+Ran as the handoff's stated first action. Two HIGH defects, both verified against source,
+both genuinely open (not live citation targets), both fixed (commit `5dbd9eb`):
+
+- **`docs/README.md` did not list `2026-07-24-HANDOFF-track2.md`**, and still described the
+  2026-07-23 handoff as ACTIVE. A cold session reading the map would have missed the newer
+  handoff. Added the row; marked the 2026-07-23 one SUPERSEDED.
+- **`WHAT-GOOD-LOOKS-LIKE.md` (AUTHORITATIVE) still used `hubfrac`** (pre-2026-07-23 name)
+  at two points describing the payload companion metric. Renamed to `top1pct_degree_frac`.
+
+MEDIUM/LOW findings left as-is and reported to owner, not actioned: stale names in the
+frozen Phase-1/Phase-2 logs (deliberate; Phase 1 log §2 is the deferred citation target
+above), the pre-registration's amendment-table order (cosmetic, in-flight citation target),
+and a handoff-sequencing non-issue.
+
+### P4 fallback RESOLVED — Wikipedia pageviews FAILS §5 on coverage; terminal fallback reached (2026-07-24)
+
+Built and ran the pre-registered second proxy. Figures owned by
+`builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/` (README + `score.json`).
+**Committed before any narration** (`7cbc31d`) — the falsifiers were pre-registered.
+
+**Result: one falsifier fires, and it is the coverage one — but Wikipedia passes the two
+Deezer failed.** AUC 0.720 (clear; Deezer 0.68), 0 catastrophic inversions outside S4
+(clear; Deezer 2), valid B_unk — but **match failure 9 of 29 (31 %) fires** (> 6 of 29).
+**The two proxies are unfit for opposite reasons:** Deezer sees everyone and misranks the
+mid-fame band; Wikipedia ranks well but is blind to the obscure tail — 8 of the 9 failures
+are the S1 lo-fi/synthwave stratum, which is *exactly* the band Track 2 must reach (F2).
+An artist absent from English Wikipedia is the kind of artist the sweep wants to route
+toward, so a proxy that cannot score that stratum cannot set C1/C2's reach criteria however
+well it ranks the rest. The coverage falsifier measures the real deficiency; it is **not
+argued away**, mirror-image to Deezer's near-miss AUC not being argued away.
+
+**All 9 failures verified genuine** (audited: for each, no opensearch candidate satisfies
+identity + performer + musicality). Miami Nights 1984 has no article at all; `idealism`
+resolves only to the philosophy concept and an unrelated album; the rest resolve only to
+wrong-spelling/wrong-entity candidates the identity clause correctly rejects (CROOVE →
+Russell Crowe, sleepy fish → Johnny Pearson, Leavv → an Italian film).
+
+**The resolver, and two corrections caught before any score was computed** (both
+identity-directed, not outcome-directed — the AUC was not looked at until the resolver was
+correct; this matters for the pre-registration discipline):
+
+1. `--probe` (out-of-sample, §0 discipline) killed the **bare-top-hit** rule: Portishead
+   and Sault resolve to the *town*, so a strict top-hit fails famous acts whose name is a
+   place — biasing against fame, fatal for an AUC test.
+2. The first sample run killed **musicality-alone**: it accepted fuzzy garbage that happens
+   to be musical. Fixed with an **identity** clause (the Wikidata entity must actually carry
+   the query name as a label/alias in any language — which also lets 林俊傑 → JJ Lin via its
+   zh alias) and a **performer** clause defined by *excluding works* rather than
+   whitelisting band types (a whitelist wrongly rejected Wishbone Ash, typed "rock band").
+
+**`score.py` was parametrised, not duplicated** (`--counts/--labels/--value-key/--out`);
+defaults reproduce the Deezer `score.json` **byte-identical** (verified via `git diff`), so
+the four falsifiers are computed by the same code for both proxies. This also makes the
+handoff's claim that `score.py` was "already proxy-agnostic" literally true — it was not
+(the paths and the `nb_fan` key were hardcoded); a small over-claim, recorded because "I
+checked" vs "I asserted" is the §2.13 distinction.
+
+**Where this leaves Track 2 — the terminal fallback, and it is the owner's call.** Both
+pre-registered proxies have now fired at least one §5 falsifier. Per §5 the terminal
+fallback is **owner-labelling of the evaluated-path artists only** (bounded: the sweep
+touches at most a few hundred distinct interiors; labels reusable across arms), with C1
+degrading to the labelled ordinal scale. **That spends real owner time and is his
+decision** — put to him, **not entered**. No sweep arm has run; still open beyond P4 are P6
+percentile machinery, the C1–C6 harness, and the D4/D6/D7 + C3-anchor amendment. Adopted
+artifact untouched, sha256 `4cb84ef9…b061dc8`. Snyk clean on the new code and the modified
+`score.py`.
+
+### Obscure-tail attractor question — analyst run: NOT graph-limited (2026-07-24)
+
+The owner asked whether the graph is over-biased toward synthwave/lo-fi in the obscure
+region such that fame-reducing paths funnel into it regardless of start genre (would make
+Track 2's goal graph-limited, not tuning-limited). Answered myself first with a cheap probe
+(the 10 known lo-fi "unknowns" sit at the 97th–99th `pop_raw` percentile — top of the
+distribution, not the tail — and form a dense blob, ~44 % shared neighbours), then ran the
+`ml-graph-analyst`. Record: `builder/analysis/2026-07-24-obscure-tail-attractor/` (owns its
+figures).
+
+**Verdict: tuning-achievable, NOT graph-limited.** Graph is cleanly genre-modular (Louvain
+0.884, 68 communities). The chillhop/lo-fi community (comm40) is real and dense but **small
+(424 nodes, 0.57 %)**, sits at the 96th–99th `pop_raw` percentile (low external fame, high
+in-graph popularity), and is 97 % internal. Funnel test with the **shipped `find_path`**:
+across 110 cross-genre pairs, **0 of 586 interiors** land in comm40 (0.00× vs a 0.83 %
+null); repeated-`known` fame-descent stays *within* each genre corridor while `pop_raw`
+falls ~0.80→0.50; a control pair actually heading to lo-fi *does* enter it, so the test
+discriminates. **Independently spot-checked** (Metallica→Miles Davis, Johnny Cash→Aphex
+Twin, Beatles→Eminem: 0 blob interiors, sensible famous bridges) — claim holds.
+
+**Load-bearing caveat, carried into A11 and the sweep:** the whole test is in the shipped
+**raw-popularity** currency, and the blob is *high* raw-popularity, so the raw floor points
+away from it — part of *why* the funnel is zero. A **fame-currency** floor (the sweep's
+actual intervention) is the untested lever; it could surface these high-pop/low-fame lo-fi
+artists on downtempo-adjacent paths. The blind listen is the coherence arbiter.
+
+### P4 CLOSED — owner adopts Option C; pre-registration A11 committed (2026-07-24)
+
+Presented both proxies' results and two owner-requested free explorations (absence-as-signal
+and the attractor analysis). **The owner mis-stated a preference for B, then corrected to C**
+on the sunk-time reasoning (B's labelling premium exceeds the exposure it insures against;
+C's failure is a cheap re-score, not a shipped defect, and cannot pass the blind listen).
+
+**Decision recorded as the owner's:** the fame proxy for C1/C2 is **Wikipedia pageviews with
+an unmatched interior scored at the fame floor (0)** — §5's owner-labelling terminal fallback
+is **not** taken. Residual risk (a foreign/historically-notable absent artist scored obscure)
+accepted, with a d15/d20 guard (owner one-glance check of *potentially-notable* unmatched
+interiors: non-Latin name, or a non-English article exists). **Formalised as pre-registration
+amendment A11, committed before any factorial arm runs** — the timestamp is the gate. A11
+partially discharges D4 and carries the raw-vs-fame currency caveat above.
+
+**This is a material amendment to the governing document → a handoff seam** (CLAUDE.md rule).
+The fame-proxy track is closed; the sweep (P6 percentile machinery, the C1–C6 harness with
+the absence-as-floor + guard encoding, D4/D6/D7 + C3-anchor amendment, then the arms) is the
+next, fresh chunk. No factorial arm has run. Artifact untouched, sha256 `4cb84ef9…b061dc8`.
