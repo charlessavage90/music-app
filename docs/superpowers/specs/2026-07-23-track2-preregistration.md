@@ -8,7 +8,7 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23 — nine amendments (A1–A9); A1–A7 before any arm ran, A8–A9 on the A0 gate result.**
+> **⚠ AMENDED 2026-07-23/24 — ten amendments (A1–A10); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
 > found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
@@ -617,7 +617,7 @@ Fixed before fetching, and committed as
      bimodal whole-sample statistic barely populates. **S4 excluded** (see inversions).
    - **Secondary, reported and NOT gating — rank agreement.** Spearman ρ between bucket
      ordinal and log fan count, **tie-corrected (average ranks on both variables)**, since
-     three buckets over 33 artists is heavily tied. Pooled and per stratum. Retained as a
+     three buckets over 29 artists is heavily tied. Pooled and per stratum. Retained as a
      diagnostic; it is no longer a falsifier, because on this sample a pass is
      uninformative.
    - **Catastrophic inversions, as a rate and split by stratum.** A *know well* artist

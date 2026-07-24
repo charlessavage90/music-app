@@ -6,8 +6,11 @@ Governing document: [`specs/2026-07-23-track2-preregistration.md`](../../../docs
 as amended by **A10** (§9). Artifact asserted in every script:
 `graph-t15-tiebreakfix.bin`, sha256 `4cb84ef9…b061dc8`.
 
-**Status: sample fixed, labels not yet collected, nothing fetched.** No fan count exists
-on this machine, which is the state §5's protocol requires at the moment the owner is asked.
+**Status (2026-07-24): COMPLETE for Deezer, and Deezer FAILED.** The owner labelled the
+29-artist sample blind; `nb_fan` was fetched and scored; **two of the four pre-registered
+falsifiers fired** (see §4). The pre-registered response is to re-run the identical protocol
+against Wikipedia pageviews, same labels — **not yet built.** Figures owned here and in
+`score.json`; the execution log cites them as a gate outcome and does not re-derive.
 
 ---
 
@@ -104,20 +107,58 @@ punctuation before matching, as P5 requires.
 
 ---
 
-## 3. What happens next, in order
+## 3. Protocol, as executed
 
-1. **Owner labels all 29 into three buckets, blind** — no fan counts exist yet, and the
-   session collecting the labels holds none.
-2. **Fetch `nb_fan` via Deezer artist search**, exact match after P5 normalisation
-   (NFKC fold + Unicode-punctuation folding). **Must not reuse `api/.../clips.py`**, which
-   calls Deezer *track* search first-hit with no name verification (§0) — that is the C1
-   wrong-artist failure mode in the code.
-3. **Score per §5 as amended by A6:** AUC on *know well* vs *heard of* (S4 excluded) as the
-   primary falsifier; tie-corrected Spearman as a non-gating diagnostic; catastrophic
-   inversions as a per-stratum rate with S4 read as Attack 3 blind spots; B_unk over the
-   full sample including S4.
+1. **Owner labelled all 29 into three buckets, blind** (2026-07-23). Recorded in
+   `labels.json` via `record_labels.py`, keyed by `blind_order.json` position so the
+   answer→artist→stratum mapping is auditable. No fan count existed on the machine when he
+   was asked.
+2. **`nb_fan` fetched via Deezer artist search** (`fetch_fame.py`), exact match after P5
+   normalisation (unit-tested in `test_p5.py`, including the U+2010 trap). Does **not** reuse
+   `clips.py` (§0). `--probe` first confirmed §0's external assumption out-of-sample —
+   `nb_fan` present on Radiohead / Portishead / Sault, 27k–4.06M.
+3. **Scored** per §5 as amended by A6 (`score.py` → `score.json`).
 
-**That `nb_fan` exists on Deezer artist objects remains an external assumption**, flagged
-as such in §0 and verified by nothing in this repo. Step 2 confirms or refutes it, and it
-is the cheapest thing in the chain to check — but it is not checked yet, and nothing should
-depend on it until it is.
+## 4. Result — Deezer `nb_fan` is UNFIT (§5). Figures owned here.
+
+| §5 test | Result | Pre-registered falsifier | |
+|---|---|---|---|
+| **Primary — AUC(know-well > heard-of), S4 excluded** | **0.680** (n=5 vs 5) | < 0.70 | **FIRES** |
+| **Catastrophic inversions outside S4** | **2** | > 1 | **FIRES** |
+| Spearman ρ, pooled (diagnostic, non-gating) | 0.697 | — | — |
+| B_unk (band separation) | valid at 199,337 (81.25 % never-heard below) | none exists | clear |
+| Match failure | 3.4 % (CROOVE only, an S4 off-platform case) | > 20 % (6 of 29) | clear |
+
+The two inversions: **Paul Simon (244,072 fans)** and **Death Cab for Cutie (199,337)** are
+labelled *know well* but sit below **Diana Krall (833,167)**, labelled *never heard of*.
+Per-stratum Spearman: S1/S3 single-bucket (undefined), S2 0.416, S4 0.791.
+
+**Mechanism — a Deezer market/genre skew, not noise.** Paul Simon and Death Cab are
+under-followed on Deezer relative to their fame; Diana Krall (jazz-pop, older record-buying
+audience) is over-followed relative to how known she is. This is popularity ≠ fame (Phase 1
+log §2.11) on a third population — after in-graph popularity and the path-level trace
+(execution log, step-43).
+
+**The AUC miss (0.68 vs 0.70) was not argued away.** The threshold was committed before the
+labels existed precisely so a near-miss cannot be relitigated post-hoc. The inversion
+falsifier fired outright. Both mean `nb_fan` is unfit at this granularity.
+
+**Two things the labels themselves confirmed** (both vindicating A10): S1 came back **all
+nine "never heard of"** — the earlier collective "mostly unknown" was *fully* unknown at
+three-bucket granularity; and **Nick Drake** (most in-graph-popular interior of pair 1) drew
+only *heard of* while **Whitney Houston** (least popular of two pairs) drew *know well* — the
+popularity/fame inversion the mechanical S2 selection surfaced, confirmed in the owner's own
+judgement.
+
+## 5. Next — Wikipedia pageviews (pre-registered §5 fallback), NOT built
+
+Same labels (committed, reusable across proxies), same 29 names, same scoring — `score.py`
+is proxy-agnostic and reads any `fan_counts.json`-shaped file. The open work is **name →
+article resolution**, which Deezer did not have: English-Wikipedia title lookup with
+disambiguation and cross-language cases the sample deliberately contains (林俊傑 → "JJ Lin";
+lo-fi acts that may have **no article**, which is a legitimate match failure, not something
+to force). Fix and assert the pageviews window before fetching, exactly as Deezer fixed
+exact-match-after-P5 first. Match failure > 6 of 29 is still a falsifier.
+
+**If Wikipedia also fails**, the §5 terminal fallback is owner-labelling of every
+evaluated-path artist — real owner time, and **his** decision. Not before.
