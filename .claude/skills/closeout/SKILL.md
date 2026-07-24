@@ -105,6 +105,27 @@ them in a new session with the handoff note in hand.
 
 Dispatch the `doc-auditor` agent. It reports; it does not edit.
 
+**This step is not skippable, and that is a finding rather than a caution.** It has now
+been weighed and nearly skipped twice, and on both occasions running it immediately found
+High-severity defects the session had no other way to see:
+
+- **2026-07-23, Track 1.** The session judged the audit unnecessary; the owner overruled
+  it. The audit found six High-severity defects in files that session never touched, the
+  worst class being auto-loaded memory carrying stale status into every cold session.
+- **2026-07-23, pre-Track-2 guards.** The session had already run its own targeted sweep
+  of `docs/` and `.claude/` for stale identifiers and found it clean. The audit then found
+  two High-severity defects **caused by that session's own work**: `CLAUDE.md`'s orient
+  table still naming renamed identifiers *in the row warning about that exact confusion*,
+  and the auto-loaded `ml-graph-analyst` definition describing the cost function with a
+  term missing.
+
+The second case is the one that generalises. **A self-run grep cannot find a defect of
+omission** — the sweep searched for wrong content and the defect was absent content, so it
+passed clean and the session believed it. A fresh reader checking whether each description
+is *complete* is a different operation from searching for known-bad strings, and only the
+first catches this class. **The strongest predictor that the audit will find something is
+a session concluding it does not need one.**
+
 Fix what the durable record can adjudicate. **Anything you cannot resolve from the
 record goes on an escalation list rather than being guessed at** — that list is also a
 precise measurement of where the record is too thin, which is worth having.

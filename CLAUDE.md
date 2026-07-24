@@ -145,7 +145,18 @@ commented at their definition.
 
 Shipped code also keeps a few **read-only aliases** under the pre-2026-07-23 names, purely
 so the frozen probe scripts in `builder/analysis/` keep executing. Never write new code
-against an alias; the mapping table is `builder/analysis/README.md`.
+against an alias; the mapping table is `builder/analysis/README.md`. They are deferred for
+removal, not permanent — condition in the repair+retune execution log.
+
+**A rename's blast radius includes every document that *describes* the quantity, not only
+those that *use the name*.** So the check after renaming is **not** "does the old
+identifier still appear anywhere" — it is "does every place that should describe this
+quantity still describe it correctly, **including by omission**." A grep for stale names
+cannot find a name that is not there. This is not hypothetical: the 2026-07-23 rename left
+`.claude/agents/ml-graph-analyst.md` describing the cost function with a whole term
+missing, and the sweep that searched `.claude/` for stale identifiers passed it clean,
+because the defect was the absence. That half cannot be mechanised, which is the argument
+**for** the `doc-auditor` step in `closeout`, not against it.
 
 ### Graph shape
 Similarity is not mutual, so edges are first filtered by **mutual k-NN** — an edge

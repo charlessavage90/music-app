@@ -196,12 +196,39 @@ captured bypass pair) is still unidentified under P1 and is therefore not repres
 `pop_raw_*`/`floor_raw`; builder `indegree` → `score_weighted_indegree`.
 `pop_pctl` is reserved and unused — Track 2's percentile machinery takes it.
 
-**Two currency lies found while renaming, both fixed.** `ArtistStats.user_count` was
-documented as "distinct listeners — the popularity signal (spec 4.1)" and `graph.py`
-carried "Distinct listeners, not plays". Neither is true: `pipeline.py` sets that field
-to `round(score_weighted_indegree * 1000)`. There is no listener data in the build at
-all. Renamed to `pop_indegree_scaled` with the history in the comment. This is the same
-error class as §2.6/§2.11/§2.12, sitting unnoticed in shipped code.
+#### The `user_count` near-miss — recorded as a near-miss, not as a comment fix
+
+`ArtistStats.user_count` was documented as "distinct listeners — the popularity signal
+(spec 4.1)", and `graph.py` carried "Distinct listeners, not plays". Neither is true:
+`pipeline.py` sets that field to `round(score_weighted_indegree * 1000)`, and **no
+listener data enters the build at all** — the per-artist listeners endpoint was
+eliminated as a popularity source during Task 1 (findings §6d–6f) and the name and
+comments outlived the design that justified them. Renamed to `pop_indegree_scaled`, with
+the history in the comment; a third copy of the same false claim in
+`builder/tests/test_graph.py` was corrected at closeout.
+
+**Nothing is invalidated.** The *values* were always correct — this is a naming and
+documentation defect, not an arithmetic one, and every measurement taken on this field
+stands.
+
+**But it is the same error class as §2.6/§2.11/§2.12 located where it does the most
+damage, and that is why it is recorded here rather than in a commit message.**
+`docs/README.md`'s standing rule is that **the code is the truth about the code — where a
+document and the source disagree, the source wins.** Here the source was lying about its
+own units, so the tiebreaker was compromised **in the same direction as the documents it
+exists to adjudicate**.
+
+Concretely, the near-miss: §2.11 established popularity ≠ fame by reasoning that lo-fi
+producers are playlist staples accumulating high co-listening in-degree. Anyone checking
+that reasoning against a field labelled "distinct listeners — the popularity signal"
+would have concluded the argument was **wrong** — the numbers would have looked like
+listener counts, for which the lo-fi mechanism does not obviously hold. That defect could
+have **blocked or delayed §2.11**, not merely coexisted with it. §2.11 survived because
+nobody performed the check the project's own rule prescribes.
+
+**What follows for the next session:** "verify the claim against the source" is necessary
+and not sufficient. When the source is a *name or a comment* rather than an expression,
+it is a document like any other and carries the same drift risk. Trace to the assignment.
 
 **Two names are exempt, and had to be.** The `popularity` key in the APG1 metadata blob
 is the **builder↔api wire contract** — renaming it invalidates every existing artifact,
@@ -222,6 +249,15 @@ script in `builder/analysis/` resolve, and the aliases were smoke-tested against
 adopted artifact. The first draft of the mapping README claimed nothing imported
 `hub_node_set`; the grep that checked it found four. Recorded because "I checked" and
 "I asserted" are the distinction the §2.13 reversal pattern is about.
+
+**The aliases have an expiry condition, decided by the owner 2026-07-23 — they are not
+permanent.** Every deferral here gets a success condition, and a compatibility layer with
+none would persist by default rather than by decision, leaving the next session unable to
+tell a load-bearing alias from leftover scaffolding.
+
+| Deferred | Success condition — due when |
+|---|---|
+| **Remove the read-only compatibility aliases** (`GraphStore.popularity`, `GraphStore.hub_penalty`, `PathMetrics.hubfrac` / `mean_interior_pop` / `max_interior_pop`, `Graph.popularity`, module-level `evaluation.hub_node_set`) | **When the `builder/analysis/` scripts are formally retired.** They exist for exactly one reason — keeping those frozen records runnable — so retirement of the scripts is what makes them leftover. Until then they are load-bearing and must not be removed as tidying. Guarded by `api/tests/test_frozen_script_aliases.py` and the builder-side equivalent; deleting the aliases means deleting those tests in the same change. Rejected alternative: "permanent, because the scripts are permanent." Defensible, but it makes the layer unfalsifiable — nothing would ever prompt a review. |
 
 **`api/eval/` was out of the plan's stated scope and had to come along.** It is live
 tooling, not a frozen record (`api/tests/test_diagnostics.py` covers it), and it imports
@@ -258,6 +294,9 @@ The owner's P7 answer is recorded in the same place.
 **(b)** Both new documents registered in `docs/README.md` under Active.
 
 ### G6 — two guards deliberately deferred
+
+*(A third deferral from this work — removing the G2 compatibility aliases — is recorded
+in the G2 section above, next to the aliases it governs. Three deferrals total.)*
 
 | Deferred | Why not now | Success condition — due when |
 |---|---|---|
