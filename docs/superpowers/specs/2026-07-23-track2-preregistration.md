@@ -8,7 +8,7 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23 — six amendments (A1–A6), all made before any arm ran.**
+> **⚠ AMENDED 2026-07-23 — seven amendments (A1–A7), all made before any arm ran.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
 > found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
@@ -327,27 +327,40 @@ lookup before any arm runs — substitution rule below if one fails.
 
 | # | Pair | Why it is in |
 |---|---|---|
-| 1 | Miles Davis → Daft Punk | canonical listen pair (log §3.8) |
+| 1 | Miles Davis → Daft Punk | canonical listen pair (log §3.8) — **and, as of P1's capture, the F6 trace pair itself**: the owner's 42-bypass reach-the-tail-then-snap-back walk ran on exactly this pair *(§9 A7)*. Doubly motivated. |
 | 2 | The Shins → Wishbone Ash | canonical; the famous→(relatively) obscure pair |
 | 3 | Metallica → Taylor Swift | canonical; the pair where a redesign previously won |
 | 4 | Radiohead → The Beatles | F1's direct-edge case; new surface Track 1 exposed |
 | 5 | Muse → Coldplay | F1's second direct-edge case |
 | 6 | Madonna → Bob Dylan | famous→famous across genre eras |
 | 7 | Pink Floyd → Aphex Twin | rock → electronic; both attested well-connected |
-| 8 | The owner's F6 bypass pair, captured from his 2026-07-23 test URLs (prerequisite P1) | the only pair with a recorded reach-the-tail-then-snap-back trace |
+| 8 | ~~The owner's F6 bypass pair, captured from his 2026-07-23 test URLs (prerequisite P1)~~ → **Nirvana → CROOVE** *(amended 2026-07-23, §9 A7)* | **P1 is discharged and the answer collided with pair 1**: the F6 trace pair *is* Miles Davis → Daft Punk. Leaving pair 8 as written would have made the analysis set seven distinct pairs presented as eight. The §2.3 substitution rule is applied and its ordered reserve advanced by one. |
 
 **Held-out set (4), used only to confirm the winner:** Arctic Monkeys → Johnny Cash;
 Michael Jackson → Gorillaz; System of a Down → R.E.M.; The Rolling Stones → Linkin Park.
 
 **Substitution rule** (deterministic, pre-registered): if an endpoint fails P2's lookup
 or a pair is unrecoverable (pair 8), substitute the next pair from this ordered reserve:
-Nirvana → CROOVE (Nirvana = the higher-popularity duplicate, per the established
-duplicate-name handling in the probe scripts); Aphex Twin → Johnny Cash. Substitutions
+~~Nirvana → CROOVE~~ **[consumed 2026-07-23 by A7]** (Nirvana = the higher-popularity
+duplicate, per the established duplicate-name handling in the probe scripts);
+Aphex Twin → Johnny Cash **[now head of the reserve]**. Substitutions
 recorded in the execution log before any arm runs.
 
+> **How the trigger was read, since it was not the literal one** *(§9 A7)*. The rule names
+> "unrecoverable"; pair 8 was *recovered*, and turned out to duplicate pair 1. The rule's
+> evident purpose is to keep eight distinct pairs, which a duplicate defeats just as
+> surely as a failed lookup, so it was applied. **Flagged rather than buried, because this
+> is an interpretation of a pre-registered rule rather than an execution of one** — the
+> class of move this document exists to make visible. Reversible at no cost before any arm
+> runs: the alternative is an analysis set of seven, stated as seven.
+
 **Known weakness, stated:** endpoints are famous-heavy by design (that is where the
-defect lives and where users start), with one deliberately obscure-target pair plus
-pair 8. The sweep says nothing about obscure→obscure journeys (§6).
+defect lives and where users start). *Amended 2026-07-23 (§9 A7):* the set now carries
+**two** deliberately obscure-target pairs — The Shins → Wishbone Ash and the substituted
+Nirvana → CROOVE — where it previously had one plus pair 8. Slightly less famous-heavy
+than designed, and worth recalling when reading C2, whose absolute-reach clause is easier
+to satisfy on an obscure-target pair. The sweep still says nothing about obscure→obscure
+journeys (§6).
 
 ### 2.4 The read of each possible result — written before any arm runs
 
@@ -653,7 +666,7 @@ cached to disk.
 
 | # | Prerequisite | Why |
 |---|---|---|
-| P1 | Capture the owner's F3/F6 bypass URLs from the 2026-07-23 test message into the Track 2 plan | Pair 8; the execution log says they live only in the branch/PR thread |
+| ~~P1~~ | ~~Capture the owner's F3/F6 bypass URLs~~ **DISCHARGED 2026-07-23.** Owner supplied both URLs; resolved against the adopted artifact in `builder/analysis/2026-07-23-f6-trace-capture/`. All 44 MBIDs resolve. **The trace pair collided with pair 1 — see §9 A7 for the substitution.** | Pair 8. *(The claim that they lived in the branch/PR thread was false — no PR carries a comment. Corrected in the execution log.)* |
 | ~~P2~~ | ~~Verify every §2.3 endpoint resolves in the Track 1 artifact~~ **DISCHARGED 2026-07-23 — do not redo.** All 24 endpoints (analysis, held-out, and reserve) verified three times independently: by G1's canonical-set bound selection, by the analyst review's M4, and by the toll-calibration Q4. `Nirvana` carries the known duplicate; highest-popularity rule applied. | Presence is no longer [DOC]-attested. The §2.3 substitution rule stands unused. |
 | ~~P3~~ | ~~Measure the largest non-ceiling edge score; set `s_max` just above it~~ **WITHDRAWN 2026-07-23 (§9 A1) — executing it as written produces an inert arm.** Replaced by: pre-registered additive toll magnitudes (§1.4), already measured in `builder/analysis/2026-07-23-track2-toll-calibration/`. **No action remains for the working session.** | The rule and the goal were in conflict: binding "only on ceiling-saturated edges" forces `s_max` one grid step below the ceiling, which forces the toll to ~1.4 % of `w_hop`. Decoupling the binding set from the magnitude resolves it. |
 | P4 | Run §5 (proxy validation + matching pilot) to verdict; apply the §2.2 recalibration rule if triggered | Nothing is scored until the proxy survives or is replaced |
@@ -685,7 +698,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23, before any arm ran
 
-Six amendments, prompted by the `ml-graph-analyst` protocol review
+Seven amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -705,6 +718,19 @@ before it ran.
 | **A3** | **The percentile currency level is mean-matched by definition,** so J-cur is a genuine one-column contrast; arm **A1u** added to keep the scale component visible. | **D3** (second half) | §1.3 J-cur row + note · §1.4 A1u · run count |
 | **A4** | **Read R6 added** — percentile arms moving ΔF positive while raw arms move it negative, with its mechanism, licenses and free falsifier. | **D3** (first half) | §2.4 |
 | **A5** | **Two completeness gaps closed:** `w_degree_hub` named in the held-constant table (analyst **O3**), and the S-mag column's degeneracy at ceiling-saturated endpoints stated up front. | O3 + new measurement | §1.2 · §1.3 note |
+| **A7** | **P1 discharged, and pair 8 substituted.** The owner's F6 trace pair resolved to **Miles Davis → Daft Punk** — pair 1. §2.3's substitution rule applied; pair 8 becomes **Nirvana → CROOVE** and pair 1 inherits the trace rationale. | P1's answer | §2.3 (three places) |
+
+> **A7's trigger was interpreted, not merely executed — the one amendment here that is a
+> judgement call.** §2.3's rule fires on a pair being *unrecoverable*; this pair was
+> recovered and collided. Applying the rule keeps eight distinct pairs, which is plainly
+> what it exists for, but a reader is entitled to disagree, so it is flagged here as well
+> as inline. **Cost of reversal: zero, before any arm runs** — the alternative is an
+> analysis set of seven pairs, described as seven. **Capture:**
+> `builder/analysis/2026-07-23-f6-trace-capture/`, which owns its figures and records two
+> things the prose record could not: the owner's F3 example ("Bowie → Pink Floyd →
+> Beatles") appears verbatim as known-presses #10–#12, and **every one of the 42 artists he
+> bypassed sits above the 97.7th in-graph popularity percentile.**
+
 | **A6** | **§5's scoring rule replaced** — AUC on the mid-fame regime as the primary falsifier, tie-corrected Spearman demoted to a non-gating diagnostic, inversions as a per-stratum rate with S4 read as blind spots, strata named for reporting. Sample unchanged. | **D5** | §5 |
 
 > **Why A6 landed here and not "when we get to P4".** The owner's labels are close to a

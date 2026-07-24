@@ -506,6 +506,46 @@ is the expensive one. This project has already been saved once by a pre-register
 being read as informative rather than disappointing (log §2.13 C5); this is the same
 discipline applied earlier in the chain.
 
+### P1 discharged — and the answer collided with pair 1 (2026-07-23)
+
+The owner supplied both URLs. Resolved against the adopted artifact in
+`builder/analysis/2026-07-23-f6-trace-capture/` (owns its figures); all 44 MBIDs resolve.
+
+**Both URLs carry the same endpoints and F3's bypass lists are a strict prefix of F6's**,
+so this is one continuous walk captured at 15 bypasses and again at 42 — not two traces.
+The pair is **Miles Davis → Daft Punk**, which is already **pair 1** of the analysis set.
+Amendment **A7** applies §2.3's substitution rule (pair 8 → Nirvana → CROOVE) and lets
+pair 1 inherit the trace rationale. **A7's trigger was interpreted, not executed** — the
+rule fires on "unrecoverable" and this pair was recovered-and-duplicated — so it is
+flagged in both the pre-registration and here as the judgement call it is. Reversal costs
+nothing before any arm runs; the alternative is seven analysis pairs, described as seven.
+
+**Two things the capture gives that the prose record could not:**
+
+1. **F3's example is verbatim in the URL.** The owner reported the unacceptable case as
+   "Bowie → Pink Floyd → Beatles". Known-presses #10, #11, #12 are David Bowie, Pink
+   Floyd, The Beatles, in that order. A reported impression independently confirmed after
+   the fact — rare here, and worth noting as a point *for* capturing URLs rather than
+   summarising sessions.
+2. **All 42 bypassed artists sit above the 97.7th in-graph popularity percentile**
+   (minimum: The Hives, 0.9773). Direct support for F2 and log §2.9 from the owner's own
+   session rather than a scripted walk. **Stated carefully:** this is the *rejected* set,
+   not the *offered* set, so it cannot show the router never offered anything obscure —
+   F6 records that he did reach Max Richter and Ólafur Arnalds, and neither appears here
+   precisely because he did not bypass them.
+
+**A currency note, since this is the project's recurring trap.** Every one of those 42 is
+genuinely famous, so here in-graph popularity and real fame coincide. That does **not**
+soften §2.11: its point is that the same top band *also* holds lo-fi and synthwave artists
+who are not famous. The band is a mixture and this trace drew the famous part of it. The
+external proxy is still required.
+
+**Also recoverable, and worth knowing: the interleaving is not.** `dislike` and `known`
+are separate URL parameters, so order within each list survives but the sequence between
+them is lost. Irrelevant to the sweep (all-`known`, scripted victim) but it bounds what
+this trace could ever be replayed as, and it is a small argument for a future single
+ordered bypass parameter if replay ever matters.
+
 **If A0 ≠ P, that is a pre-registered branch firing, not scope creep.** §1.4's A0 row
 already requires re-anchoring on P with floor as a fully crossed column — sixteen cells
 plus attachments, outside the stated budget. The session that hits it should write a
