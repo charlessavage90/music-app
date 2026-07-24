@@ -1121,3 +1121,66 @@ the protocol; it is written and it has decided the graph twice.
 
 **Neither seam is a reason to slow down now.** The scorer is the next unit either way; naming
 the boundaries at authoring time is what makes them cheap when they arrive.
+
+### A12 — C6 stops gating; §2.2's recalibration discharged (2026-07-24, before any arm)
+
+Found while reading §1–§6 in full to write the arm scorer, which is what that read was for.
+
+**A11 inverted what C6 measures, and A11 recorded "no change to §2.2".** C6's ≥ 90 %
+coverage floor existed to close §3's Attack 4: under the original encoding an unmatched
+interior was **dropped from scoring**, so an arm routing into hard-to-match obscure artists
+would have its best evidence silently deleted. A11 changed unmatched to **scored at the fame
+floor**. Nothing is dropped now, so the mechanism C6 guarded no longer exists — and the
+quantity C6 measures has changed sign.
+
+**The measurement** (owned by `builder/analysis/2026-07-24-track2-arm-scorer/`): every
+artist the owner recognises resolves to an English Wikipedia article — *know well* 7/7,
+*heard of* 6/6 — and the stratum he does not recognise barely does: **S1, 1 of 9**. So match
+failure now marks the obscurity Track 2 exists to reach. Left gating, C6 caps an arm near
+**5.6 %** obscure interiors against a famous-heavy P, while **C2 is passed *by* unmatched
+artists** (F = 0 sits below B_unk by construction). Two criteria pulling opposite ways on one
+quantity.
+
+**Owner's decision, and it is his because it is about the product rather than the
+methodology:** the app should route to artists with **no** English Wikipedia article —
+"definitely", and he noted the question should not have needed asking.
+
+**He was right, and the diagnosis is worth recording because it is a routing defect, not a
+one-off.** `WHAT-GOOD-LOOKS-LIKE.md`'s first value already says *"the product delivers
+artists the listener does not already know."* This session did not read it. Two structural
+reasons, both fixable:
+
+1. **The standing layer states mechanism, not purpose.** `CLAUDE.md`'s "What this is"
+   describes cards, least-cost paths, clips and two bypass signals — end to end, what the app
+   *does*. A session can hold all of it and not know that delivering unknown artists is the
+   **point** rather than a property of a good path.
+2. **The document that says so declares itself out of scope.** Its orient-table trigger is
+   "read it before running a blind listen or interpreting a verdict", and its own header calls
+   it calibration for the blind test. A session designing a **success criterion** is doing
+   neither, honours that scoping, and misses value #1 — which is not listen-calibration at all
+   but the product's purpose, and governs any threshold.
+
+**Fix owned by the consultant session** (it is mid-flight in `CLAUDE.md` and the skills; a
+second writer there is the collision `session-start` §C warns about): a purpose line in "What
+this is", and widen the `WHAT-GOOD-LOOKS-LIKE` trigger to **before designing a success
+criterion**. This session commits it when they are done. **Displacement note for D6:** the
+purpose line is net-new and nothing comes out for it; the argument for paying it is that this
+is the second routing failure today — P6 was the first — and both were a session inheriting a
+description instead of checking the thing itself.
+
+**A12, committed before any arm runs.** C6 is removed from the gating set and becomes a
+per-arm and per-cell **report** (it still measures how much of a score rests on the absence
+assumption). The gating remnant is A11's **d15/d20 notability guard**, which must be
+*discharged* rather than merely reported — that is where the residual risk actually lives.
+Attack 4 is **not** simply closed: an arm whose reach is concentrated in unmatched artists is
+scored almost entirely on the absence assumption. Residual accepted on A11's reasoning — a
+scoring-lens error is a cheap re-score and cannot ship, because the listen gates adoption.
+
+**§2.2's one permitted recalibration is discharged and does not fire.** Band gap **6.161**
+under A11's encoding, **1.093** under the conservative matched-only reading; the rule fires
+only below 1.0. No threshold changes. Carried forward: at 1.093, **C1's −1.0 threshold is
+almost exactly one of the owner's perception bands** — so C1 asks for the middle interior to
+drop about one full step in how well he would know them.
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`. Work is on branch
+`track2-sweep`, off `main`.

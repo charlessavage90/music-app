@@ -8,7 +8,7 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23/24 — eleven amendments (A1–A11); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result. No factorial arm has run.**
+> **⚠ AMENDED 2026-07-23/24 — twelve amendments (A1–A12); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result, A12 stops C6 gating because A11 inverted what it measures. No factorial arm has run.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
 > found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
@@ -306,12 +306,14 @@ execution log.
 | **C2** | Absolute reach | in ≥ **4 of 8** analysis pairs, at least one d15-or-d20 interior falls below **B_unk**, the owner-calibrated "would not know them" fame band from §5 |
 | **C3** | Within-arm depth gradient (F2's "progressively") | candidate's pooled median F at d20 ≤ pooled median F at d5 **− 0.5** |
 | **C4** | Payload guard (WHAT-GOOD #2: fewer-but-obscurer is not a win) | mean interior count over d ≥ 10 cells ≥ P's mean − **1** |
-| **C6** | Proxy coverage guard | ≥ **90 %** of each arm's distinct interior artists name-matched to the proxy, and candidate-vs-P coverage gap ≤ **5** points; unmatched names manually resolved where feasible, remaining gaps flagged per cell |
+| ~~**C6**~~ | ~~Proxy coverage guard~~ **AMENDED 2026-07-24 (§9 A12) — C6 NO LONGER GATES.** ~~≥ 90 % of each arm's distinct interior artists name-matched to the proxy, and candidate-vs-P coverage gap ≤ 5 points~~ | Under A11 an unmatched interior is **scored** at the fame floor rather than dropped, which dissolves Attack 4's silent-drop mechanism that C6 existed to close — and makes match failure a **marker of the obscurity the sweep exists to reach** (measured: 1 of 9 in the obscure stratum resolves, against 13 of 13 the owner recognises). Left gating, C6 would cap an arm at ≈ 5.6 % obscure interiors and so penalise success. **Coverage is now reported per arm and per cell, not thresholded.** The gating remnant is A11's **d15/d20 notability guard**. Full argument: **A12 in full**. |
 
 (C5 = no-regression inspection and C7 = dislike/known divergence are the §1.5 guards —
 reported, inspected, not thresholded.)
 
-**A winning configuration** passes C1–C4 and C6 on the analysis set, **then**
+**A winning configuration** passes C1–C4 ~~and C6~~ *(C6 no longer gates — §9 A12; the
+coverage figure is reported, and A11's d15/d20 notability guard must be discharged)* on the
+analysis set, **then**
 reproduces direction on the held-out set (mean ΔF < 0 and negative in ≥ 3 of 4
 held-out pairs — direction only; the held-out set is too small to re-test magnitude,
 which is the adjudication §6 claim 45 lesson), **then** goes to the blind listen
@@ -732,7 +734,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23/24, before any factorial arm ran
 
-Eleven amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and A11 (2026-07-24) by the P4 proxy-pilot result** (both proxies fired; it postdates the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
+Twelve amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and two (A11, A12) on 2026-07-24 — A11 by the P4 proxy-pilot result, A12 by A11's own knock-on** (both proxies fired; these postdate the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -755,6 +757,7 @@ before it ran.
 | **A8** | **The A0 gate fired; the floor column stays off.** Identity failed on 1 cell of 252 (pair 1, first path). An exposure map over C1–C6 shows only **C5** crosses the change, and its fix costs zero extra runs: report the first-path inspection against **both P and A0**. Also records four corrections to the step-4 write-up, and the constraint that an FL arm's C3 gradient is partly its own device. | the A0 result + `findings/2026-07-23-a0-gate-analyst-review.md` | §1.4 A0 row · §1.5 · §2.4 R3 |
 | **A10** | **§5's sample is corrected and fixed, before any label is collected.** Two defects: (a) **S1 and S3 overlapped by four artists**, so "~33" was **29 distinct** and four artists would have been double-counted in every pooled statistic while appearing in two strata §5 reads differently — S3 is now the two F6 reaches only; (b) **§5's claim that S1's labels "already exist" is false** at the granularity its own scoring needs — the record holds one collective verdict ("mostly unknown"), not a per-artist three-bucket assignment, and cannot separate *heard of* from *never heard of*, which is where B_unk is computed. The nine are labelled with everyone else. S2's twelve are additionally fixed by a mechanical rule rather than hand-picked. **Sample committed as an artifact**, and the match-failure falsifier now fires at 6 rather than 7. | deriving the sample against the repo, before P4 | §5 sample · §5 strata · §5 falsifiers · `builder/analysis/2026-07-23-track2-fame-proxy/` |
 | **A9** | **Every remaining gate and branch trigger gets an effect size.** A gate without one cannot tell the finding it was written for from noise, and fires the expensive response either way. | the A0 gate having none | §9, below |
+| **A12** | **C6 stops gating and becomes a reported diagnostic; the d15/d20 notability guard is the gating remnant.** A11 changed unmatched interiors from *dropped* to *scored at the fame floor*, which removes the silent-drop mechanism C6 was written to close (Attack 4) and turns match failure into a **marker of success**. Left as written, C6's 90 % floor and 5-point gap would cap an arm at ≈ 5.6 % obscure interiors — a depth limit nobody designed, contradicting the product's purpose. **Owner's decision, 2026-07-24: the app should route to artists with no English Wikipedia article.** Also discharges §2.2's permitted recalibration (does not fire). | A11's encoding change, caught before any arm ran | §2.2 C6 row + winning-configuration line · A12 in full below · `builder/analysis/2026-07-24-track2-arm-scorer/` |
 | **A11** | **The fame proxy resolved — Wikipedia pageviews with absence as the fame floor; §5's owner-labelling terminal fallback is NOT taken.** Both automated proxies fired (Deezer: AUC 0.68 + 2 inversions; Wikipedia: coverage 9/29). A post-hoc, owner-requested exploration showed Wikipedia-absence predicts "never heard of" (9/9) and detects obscurity at AUC 0.954, so an unmatched interior is scored at fame = 0. **Owner's decision; residual risk (a foreign/historically-notable absent artist scored obscure) accepted and guarded at d15/d20 — partially discharges D4.** | the P4 pilot result (both proxies fired) | §5 inline · A11 in full below · `builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/` + `.../2026-07-24-obscure-tail-attractor/` |
 
 | **A7** | **P1 discharged, and pair 8 substituted.** The owner's F6 trace pair resolved to **Miles Davis → Daft Punk** — pair 1. §2.3's substitution rule applied; pair 8 becomes **Nirvana → CROOVE** and pair 1 inherits the trace rationale. | P1's answer | §2.3 (three places) |
@@ -853,6 +856,78 @@ the sweep and the blind listen.**
 **What A11 does NOT change.** No change to the pair sets (§2.3), the arms or cost-function
 columns (§1.4), the primary outcome (§2.1), or the effect sizes (§2.2). Run count
 unchanged. No factorial arm has run.
+
+### A12 in full — C6 stops gating, because A11 inverted what it measures
+
+*(2026-07-24, after A11 and before any factorial arm. Figures owned by
+[`builder/analysis/2026-07-24-track2-arm-scorer/`](../../../builder/analysis/2026-07-24-track2-arm-scorer/).)*
+
+**What C6 was for.** §3's Attack 4 — coverage gaming. Under the original encoding an
+interior artist whose name did not resolve to the proxy was **dropped from scoring**, and
+match failure correlates with obscurity. So a configuration routing into hard-to-match
+obscure artists would have its most obscure evidence silently deleted, and — the sharper
+edge — so would the baseline, if coverage differed between arms. C6's ≥ 90 % floor and
+≤ 5-point candidate-vs-P gap closed exactly that.
+
+**What A11 did to it.** Under the adopted encoding an unmatched interior is **scored at the
+fame floor (0)**, not dropped. Nothing is deleted; there is no silent-drop channel left to
+game. **C6's premise is discharged by the encoding itself.**
+
+**Why leaving it in place is not the neutral option.** With drops eliminated, the quantity
+C6 measures has changed sign. Measured on the committed sample: every artist the owner
+recognises resolves (*know well* 7/7, *heard of* 6/6), and the stratum he does not
+recognise almost entirely fails to (**S1: 1 of 9**). Match failure is therefore a **marker
+of the obscurity Track 2 exists to reach** (F2). If a fraction *q* of an arm's distinct
+interiors are genuinely tail artists, roughly 0.89·*q* of them go unmatched — so C6's 90 %
+floor caps *q* near 11 %, and the ≤ 5-point gap against a famous-heavy P caps it near
+**5.6 %**. C6 would have become a **cap on how deep the sweep may go**, and it was never
+designed as one. Meanwhile **C2 is passed *by* unmatched artists** (F = 0 is below B_unk by
+construction): two criteria pulling opposite ways on one quantity, which A11 did not weigh
+when it recorded "no change to §2.2".
+
+**The owner's decision, 2026-07-24, recorded because it is his and not the methodology's.**
+Asked whether the app should route to artists with no English Wikipedia article: **yes,
+definitely** — and he noted the question should not have needed asking, since
+`WHAT-GOOD-LOOKS-LIKE.md`'s first value already states that *the product delivers artists
+the listener does not already know*. That is a product-purpose statement, so a criterion
+capping obscurity is wrong independently of the arithmetic above.
+
+**The amendment.**
+
+> **C6 is removed from the gating set.** Coverage is **reported** per arm and per cell —
+> distinct interiors, matched fraction, and the candidate-vs-P gap — because it remains a
+> real measure of how much of a score rests on the absence assumption. It fires nothing.
+>
+> **The gating remnant is A11's d15/d20 notability guard**, which is where the residual
+> risk actually lives: an unmatched interior that is *potentially notable* (non-Latin-script
+> name, or an article in a **non**-English Wikipedia) is surfaced for the owner's one-glance
+> check before it counts as obscure-reach. **A winning configuration must have that guard
+> discharged**, not merely reported.
+
+**What A12 does not change.** C1, C2, C3, C4 and their thresholds; the pair sets (§2.3);
+the arms and columns (§1.4); run count; the held-out rule. **No arm has run.**
+
+**Attack 4 after this amendment — stated, because it is not simply closed.** The
+silent-drop channel is gone, but a *residual* version survives: an arm whose obscure reach
+is concentrated in unmatched artists is scored almost entirely on the absence assumption,
+and the coverage report is the only place that is visible. It is reported rather than
+gated, and the d15/d20 guard plus the blind listen are the backstops. **Residual accepted**,
+on the same reasoning A11 used: a scoring-lens error is a cheap re-score, and it cannot
+ship, because the listen gates adoption.
+
+### §2.2's permitted recalibration — discharged, does not fire
+
+§2.2 allows exactly one threshold adjustment, before any arm runs: if the owner's *know
+well* and *never heard of* bands sit closer than **1.0 log10** apart, all log10 thresholds
+scale by `band_gap / 1.0`. Computed from the committed labels and pageview counts
+(`builder/analysis/2026-07-24-track2-arm-scorer/band_gap.py`, which owns the figures):
+**6.161** under A11's own encoding, **1.093** under the conservative matched-only reading.
+Neither is below 1.0, so **no threshold changes.**
+
+Worth carrying forward: at the conservative 1.093, **C1's −1.0 threshold is almost exactly
+one of the owner's perception bands wide** — C1 asks for the middle interior to drop about
+one full step in how well he would know them. That is what the pre-registered number means
+in his units.
 
 ### What the amendments cost, stated plainly
 
