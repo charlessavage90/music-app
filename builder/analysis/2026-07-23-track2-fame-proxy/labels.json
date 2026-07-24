@@ -1,0 +1,147 @@
+{
+  "CROOVE": {
+    "bucket": "never heard of",
+    "stratum": "S4",
+    "blind_pos": 1
+  },
+  "Nick Drake": {
+    "bucket": "heard of",
+    "stratum": "S2",
+    "blind_pos": 2
+  },
+  "saib.": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 3
+  },
+  "idealism": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 4
+  },
+  "Ólafur Arnalds": {
+    "bucket": "never heard of",
+    "stratum": "S3",
+    "blind_pos": 5
+  },
+  "林俊傑": {
+    "bucket": "never heard of",
+    "stratum": "S4",
+    "blind_pos": 6
+  },
+  "Toonorth": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 7
+  },
+  "Kasabian": {
+    "bucket": "heard of",
+    "stratum": "S2",
+    "blind_pos": 8
+  },
+  "Purrple Cat": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 9
+  },
+  "EGOIST": {
+    "bucket": "never heard of",
+    "stratum": "S4",
+    "blind_pos": 10
+  },
+  "Chuck Berry": {
+    "bucket": "know well",
+    "stratum": "S4",
+    "blind_pos": 11
+  },
+  "Lazerhawk": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 12
+  },
+  "sleepy fish": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 13
+  },
+  "Diana Krall": {
+    "bucket": "never heard of",
+    "stratum": "S2",
+    "blind_pos": 14
+  },
+  "Nirvana": {
+    "bucket": "know well",
+    "stratum": "S2",
+    "blind_pos": 15
+  },
+  "AC/DC": {
+    "bucket": "know well",
+    "stratum": "S2",
+    "blind_pos": 16
+  },
+  "Paul Simon": {
+    "bucket": "know well",
+    "stratum": "S2",
+    "blind_pos": 17
+  },
+  "Max Richter": {
+    "bucket": "never heard of",
+    "stratum": "S3",
+    "blind_pos": 18
+  },
+  "Death Cab for Cutie": {
+    "bucket": "know well",
+    "stratum": "S2",
+    "blind_pos": 19
+  },
+  "Wishbone Ash": {
+    "bucket": "know well",
+    "stratum": "S4",
+    "blind_pos": 20
+  },
+  "Miami Nights 1984": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 21
+  },
+  "Alice Cooper": {
+    "bucket": "heard of",
+    "stratum": "S2",
+    "blind_pos": 22
+  },
+  "Perry Como": {
+    "bucket": "never heard of",
+    "stratum": "S2",
+    "blind_pos": 23
+  },
+  "Bastille": {
+    "bucket": "heard of",
+    "stratum": "S2",
+    "blind_pos": 24
+  },
+  "The Byrds": {
+    "bucket": "heard of",
+    "stratum": "S4",
+    "blind_pos": 25
+  },
+  "Whitney Houston": {
+    "bucket": "know well",
+    "stratum": "S2",
+    "blind_pos": 26
+  },
+  "Leavv": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 27
+  },
+  "Kylie Minogue": {
+    "bucket": "heard of",
+    "stratum": "S2",
+    "blind_pos": 28
+  },
+  "Stonebank": {
+    "bucket": "never heard of",
+    "stratum": "S1",
+    "blind_pos": 29
+  }
+}
