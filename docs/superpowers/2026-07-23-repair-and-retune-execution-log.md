@@ -1013,3 +1013,49 @@ partially discharges D4 and carries the raw-vs-fame currency caveat above.
 The fame-proxy track is closed; the sweep (P6 percentile machinery, the C1–C6 harness with
 the absence-as-floor + guard encoding, D4/D6/D7 + C3-anchor amendment, then the arms) is the
 next, fresh chunk. No factorial arm has run. Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### Closeout B1 — doc-auditor at the sweep seam, and a status correction (2026-07-24)
+
+Second B1 of the day, run as the handoff's stated first action: the earlier one
+(commit `5dbd9eb`, above) predates A11, the P4 closure entries, and the two new
+`builder/analysis/` directories, so it had not seen the material changes.
+
+**One HIGH defect, and it is a defect of the class B1 exists for — a claim carried forward
+by copying rather than checking.** **P6 (the percentile machinery) was recorded as open work
+in three documents and has been built since execution-order step 2.** It is
+`MirrorContext.build` in `builder/analysis/2026-07-23-track2-sweep/mirror.py` — average rank
+over N with ties averaged, plus A3's `jump_scale_pctl` mean-matching ratio — committed in
+`2dedefd` and covered by the byte-identity gate that licensed the mirror. The three:
+pre-registration §0 (resolution table) and §7 (prerequisite P6), and the 2026-07-24 handoff
+§2. **The entry above ("P4 CLOSED") repeats it too**, in its closing list of what the sweep
+still contains; it is left standing as written, because a dated log entry is an audit trail
+and this correction is the amendment to it.
+
+**How it survived.** §0 and §7 were written before any step ran and were true then. Step 2
+built the machinery inside the harness while leaving `pop_pctl` unused in `api/src` —
+correctly, since shipped code is not edited before adoption — so the one mechanical check a
+session would reach for (*is `pop_pctl` used anywhere?*) returns clean and **confirms the
+stale reading**. Every document after that copied the prerequisite list forward rather than
+re-checking it. This is the B1 rationale in its exact stated form: a grep cannot find a
+defect whose evidence is an absence, and the session that wrote the handoff had no reason to
+doubt a line it had inherited.
+
+**Cost of not catching it: the next session builds a percentile machine that already exists,
+or stops to ask why the harness disagrees with its own pre-registration.** Neither is
+expensive alone; the second is a session boundary.
+
+**Fixed** in the pre-registration (§0 row, §7 P6 row — both marked as corrections, not
+amendments; no design changed) and in the handoff §2.
+
+**One MEDIUM, fixed:** the pre-registration's front banner still read "ten amendments
+(A1–A10)" while §9 enumerated eleven. A11 was marked inline and indexed but the banner was
+not updated — the mirror-image of the omission defect, and the reason the banner carries its
+own "a reader who lands mid-document never sees this" note.
+
+**Nothing else found.** The auditor's remaining items are pre-existing and already recorded:
+no `builder/` top-level README, the frozen analysis scripts' pre-rename aliases (deliberate,
+mapping in `builder/analysis/README.md`), and older `builder/analysis/` directories not
+systematically re-checked. No escalation list — every finding was adjudicable from the
+record.
+
+**No figures moved. No arm has run.** Adopted artifact untouched, sha256 `4cb84ef9…b061dc8`.
