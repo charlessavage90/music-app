@@ -591,6 +591,70 @@ are post-hoc and would need an `ml-graph-analyst` check to become one. They are 
 because they are cheap, and because item 1 may be worth a diagnostic the sweep does not
 currently carry.
 
+### Steps 2–4 executed (2026-07-23) — and the A0 branch fired
+
+**Step 2 — mirror built, gate PASSED.** `builder/analysis/2026-07-23-track2-sweep/`
+(owns its figures). 212 cells across all 12 pairs, byte-identical to shipped `find_path`
+with guard G off. The verification was written and run **before** the mirror existed; it
+failed on the missing module, then passed. Two pairs walked zero depths — Radiohead → The
+Beatles and Muse → Coldplay resolve direct, so with G off there is no interior and no
+victim. That is G5(a)'s contradiction in empirical form, and the reason the G-off-then-G-on
+sequence exists.
+
+Byte-identity needed three deliberate choices, recorded because "same algorithm" would not
+have sufficed: production's exact term-summation order (float addition is not associative),
+optional terms applied inside branches rather than as `+ 0.0`, and `(cost, node)` heap
+entries so ties break on node id identically.
+
+**Step 3 — guard G enabled uniformly.** Both arms below carry it.
+
+**Step 4 — A0 vs P: identity FAILED, on one cell in 252.**
+
+| | |
+|---|---|
+| Cells compared | 252 |
+| Identical | **251** |
+| Divergent | **Miles Davis → Daft Punk at d0**, and nothing else — that pair is identical at d1–d20 |
+
+At d0 the un-relaxed floor is 0.6726. **P** routes through Dean Martin (0.6668); **A0**
+through Michael Bublé (0.6563). Both dip below the floor — the floor does not prevent the
+dip, it picks the shallower one, and buys a sixth interior doing it.
+
+**The load-bearing measurement (PR-A, discharged).** Floor-term firing rate by depth,
+pooled over all 12 pairs: **51.3 % at d0**, 14.3 % at d1, 2.1 % at d2, 0.12 % at d3,
+0.005 % at d4, 0.001 % at d5, and **exactly 0.000 % at every depth from d6 to d20**.
+
+**What follows — three findings, the first two settled:**
+
+1. **Adjudication claim 23's mechanism is falsified, its conclusion nearly survives.**
+   Claim 23 said the floor never fires because `w_jump` stops paths dipping below it.
+   Paths do dip below it, and the term fires on half of all relaxations at d0. What holds
+   is only the outcome: 1 changed cell in 252. **This belongs in the adjudication's §6
+   claim table** — flagged, not edited here, since that document owns it.
+2. **§0's confound cannot occur in the scored window, and this is now measured rather than
+   argued.** The relaxed raw floor reaches zero after `ceil(base_floor / 0.15)` `known`
+   bypasses *regardless of arm*, and `max(0, 0 − pop_raw_v) = 0` thereafter — so it is zero
+   for every raw-floor arm at every scored depth (C1 at d ≥ 10, C2 at d15/d20). The term
+   cannot "switch on only in the arms that work". **Raw floor only** — the FL arms' pctl
+   floor with the A2 relax constant is alive to ~d18–20 by design and is untouched by this.
+3. **Where the floor does live is d0–d2 — exactly where C5's no-regression inspection
+   looks.** So it is not irrelevant; it is relevant precisely where no *scored* criterion
+   operates.
+
+**Stopped here deliberately.** §1.4 requires the design revision be recorded before
+proceeding, so no further arm has run. This is also a **material mid-flight amendment and
+therefore a handoff seam** by the CLAUDE.md rule — the next session reads a governing
+document that has changed, which is the condition the rule was written for.
+
+**Options put to the owner** (his call; consequences stated, no recommendation smuggled in
+as a finding):
+
+| | Option | Consequence |
+|---|---|---|
+| **1** | Follow §1.4 literally — re-anchor with floor as a fully crossed column | 16 factorial cells plus attachments ≈ 22 runs, roughly double. Fully controlled, unarguable. But the 8 added cells can differ from their floor-off twins **only at d0–d5**, by the arithmetic in finding 2 — so most of the purchased information concerns depths no criterion scores. |
+| **2** | Narrow amendment — keep floor **off** across the factorial as designed, on the measured ground that it cannot confound any scored cell; leave C5's d0 inspection referenced to P, which §1.5 already specifies | One dated amendment, no extra runs. Rests entirely on finding 2 being right — which is arithmetic plus a zero measured across 12.5 M relaxations, so it is checkable rather than trusted. |
+| **3** | Cross the floor only where it is alive — run the 8 floor-on cells to d5 and no further | Cheaper than 1, still fully controlled; awkward to report, since the arms have ragged depth coverage. |
+
 **If A0 ≠ P, that is a pre-registered branch firing, not scope creep.** §1.4's A0 row
 already requires re-anchoring on P with floor as a fully crossed column — sixteen cells
 plus attachments, outside the stated budget. The session that hits it should write a

@@ -155,6 +155,7 @@ def _dijkstra(
     ctx: MirrorContext,
     excludes: list[Exclusion],
     masked_edge: tuple[int, int] | None,
+    stats: dict[str, int] | None = None,
 ) -> list[int] | None:
     use_pctl_jump = cfg.jump_currency == PCTL
     w_jump_eff = cfg.w_jump
@@ -204,6 +205,11 @@ def _dijkstra(
             else:
                 floor_pen = max(0.0, floor_val - pop_raw_v)
 
+            if stats is not None:
+                stats["examined"] += 1
+                if floor_pen > 0.0:
+                    stats["floor_active"] += 1
+
             # Production's term order, preserved exactly — see module docstring.
             cost = (
                 cfg.w_sim * (1.0 - float(sim))
@@ -237,6 +243,7 @@ def find_path_mirror(
     excludes: list[Exclusion],
     cfg: SweepConfig,
     ctx: MirrorContext,
+    stats: dict[str, int] | None = None,
 ) -> list[int] | None:
     """Least-cost path under `cfg`. With `SweepConfig.production()`, byte-identical
     to `api.pathfinding.find_path`."""
@@ -246,7 +253,7 @@ def find_path_mirror(
     hard = {e.node for e in excludes} - {source, target}
     avoid = _avoidance_map(store, [e.node for e in excludes if e.reason == DISLIKE], cfg)
 
-    path = _dijkstra(store, source, target, hard, avoid, cfg, ctx, excludes, None)
+    path = _dijkstra(store, source, target, hard, avoid, cfg, ctx, excludes, None, stats)
 
     # Guard G (§4): a journey has at least one stop. Exclusions are node-based and
     # cannot forbid an edge, so mask the direct edge and re-run. Only the
@@ -254,6 +261,6 @@ def find_path_mirror(
     # reverse direction, since the search stops when `target` is popped.
     if cfg.guard_min_intermediary and path is not None and len(path) == 2:
         path = _dijkstra(store, source, target, hard, avoid, cfg, ctx, excludes,
-                         (source, target))
+                         (source, target), stats)
 
     return path
