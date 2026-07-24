@@ -11,6 +11,7 @@ Falsifiers (any one → `nb_fan` unfit → re-run identical protocol on Wikipedi
   * artist-search match failure > 20 % of the sample after normalisation.
 """
 
+import argparse
 import json
 import math
 from itertools import combinations
@@ -73,9 +74,23 @@ def b_unk(rows: list[dict]) -> dict:
 
 
 def main():
-    labels = json.loads((HERE / "labels.json").read_text(encoding="utf-8"))
-    fans = json.loads((HERE / "fan_counts.json").read_text(encoding="utf-8"))
-    fan_of = {r["query"]: r["nb_fan"] for r in fans["rows"]}
+    # Proxy-agnostic: defaults reproduce the Deezer run byte-for-byte; --counts / --value-key
+    # point the same falsifier math at the Wikipedia-pageviews file (§5 "identical protocol").
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--counts", type=Path, default=HERE / "fan_counts.json",
+                    help="a fan_counts.json-shaped file: rows[].query + a magnitude key")
+    ap.add_argument("--labels", type=Path, default=HERE / "labels.json",
+                    help="the fixed, committed labels — shared across proxies, never re-collected")
+    ap.add_argument("--value-key", default="nb_fan",
+                    help="per-row magnitude field: nb_fan (Deezer) or pageviews (Wikipedia)")
+    ap.add_argument("--out", type=Path, default=HERE / "score.json")
+    args = ap.parse_args()
+
+    labels = json.loads(args.labels.read_text(encoding="utf-8"))
+    fans = json.loads(args.counts.read_text(encoding="utf-8"))
+    # Internal magnitude carries the generic key `nb_fan` regardless of source, so the pure
+    # statistics below are unchanged; the source-specific field name lives only in --value-key.
+    fan_of = {r["query"]: r.get(args.value_key) for r in fans["rows"]}
 
     rows = []
     for name, lab in labels.items():
@@ -83,7 +98,7 @@ def main():
                      "nb_fan": fan_of.get(name)})
 
     scored = [r for r in rows if r["nb_fan"] is not None]
-    print(f"scored {len(scored)}/{len(rows)} (CROOVE unmatched, excluded from fan stats)\n")
+    print(f"scored {len(scored)}/{len(rows)} (unmatched excluded from magnitude stats)\n")
 
     # --- Primary: AUC, know-well vs heard-of, S4 excluded ---
     pool = [r for r in scored if r["stratum"] != "S4"]
@@ -144,7 +159,7 @@ def main():
         "never_heard_max": {"fan": never_max, "name": never_argmax},
         "b_unk": b, "match_failure_rate": rate, "falsifiers_fired": fired,
     }
-    (HERE / "score.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    args.out.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":

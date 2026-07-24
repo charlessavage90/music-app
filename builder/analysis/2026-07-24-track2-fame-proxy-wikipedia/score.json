@@ -1,0 +1,21 @@
+{
+  "auc_primary": 0.72,
+  "auc_n_know": 5,
+  "auc_n_heard": 5,
+  "spearman_pooled": 0.6529286250990105,
+  "inversions_outside_s4": 0,
+  "inversion_names_outside_s4": [],
+  "never_heard_max": {
+    "fan": 317718,
+    "name": "Diana Krall"
+  },
+  "b_unk": {
+    "threshold": 239239,
+    "n_below": 5,
+    "frac_never": 0.8
+  },
+  "match_failure_rate": 0.3103448275862069,
+  "falsifiers_fired": [
+    "match failure > 20%"
+  ]
+}

@@ -1,0 +1,460 @@
+{
+  "source": "en.wikipedia monthly pageviews (agent=user)",
+  "window": "20250701..20260630",
+  "metric": "sum of monthly pageviews over the window",
+  "resolver": "musician-aware: opensearch -> wikidata musicality filter",
+  "sample_size": 29,
+  "match_failures": 9,
+  "match_failure_rate": 0.3103448275862069,
+  "falsifier_fires": true,
+  "rows": [
+    {
+      "query": "AC/DC",
+      "matched": true,
+      "article": "AC/DC",
+      "opensearch_candidate": "AC/DC",
+      "wikidata": "Q27593",
+      "pageviews": 2141928,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Alice Cooper",
+      "matched": true,
+      "article": "Alice Cooper",
+      "opensearch_candidate": "Alice Cooper",
+      "wikidata": "Q332032",
+      "pageviews": 1562759,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Bastille",
+      "matched": true,
+      "article": "Bastille (band)",
+      "opensearch_candidate": "Bastille (band)",
+      "wikidata": "Q689",
+      "pageviews": 239239,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "CROOVE",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Crohn's disease",
+          "name mismatch"
+        ],
+        [
+          "Aleister Crowley",
+          "name mismatch"
+        ],
+        [
+          "Russell Crowe",
+          "name mismatch"
+        ],
+        [
+          "Oliver Cromwell",
+          "name mismatch"
+        ],
+        [
+          "Croup",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S4"
+    },
+    {
+      "query": "Chuck Berry",
+      "matched": true,
+      "article": "Chuck Berry",
+      "opensearch_candidate": "Chuck Berry",
+      "wikidata": "Q5921",
+      "pageviews": 985425,
+      "months_present": 12,
+      "stratum": "S4"
+    },
+    {
+      "query": "Death Cab for Cutie",
+      "matched": true,
+      "article": "Death Cab for Cutie",
+      "opensearch_candidate": "Death Cab for Cutie",
+      "wikidata": "Q16414",
+      "pageviews": 391479,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Diana Krall",
+      "matched": true,
+      "article": "Diana Krall",
+      "opensearch_candidate": "Diana Krall",
+      "wikidata": "Q155879",
+      "pageviews": 317718,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "EGOIST",
+      "matched": true,
+      "article": "Egoist (band)",
+      "opensearch_candidate": "Egoist (band)",
+      "wikidata": "Q4120051",
+      "pageviews": 26391,
+      "months_present": 12,
+      "stratum": "S4"
+    },
+    {
+      "query": "Kasabian",
+      "matched": true,
+      "article": "Kasabian",
+      "opensearch_candidate": "Kasabian",
+      "wikidata": "Q272517",
+      "pageviews": 302430,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Kylie Minogue",
+      "matched": true,
+      "article": "Kylie Minogue",
+      "opensearch_candidate": "Kylie Minogue",
+      "wikidata": "Q11998",
+      "pageviews": 2473014,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Lazerhawk",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Laserhawk",
+          "name mismatch"
+        ],
+        [
+          "The Transformers (TV series)",
+          "name mismatch"
+        ],
+        [
+          "Laser Hawk",
+          "name mismatch"
+        ],
+        [
+          "Mohawk hairstyle",
+          "name mismatch"
+        ],
+        [
+          "Hank Lazer",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S1"
+    },
+    {
+      "query": "Leavv",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Le avventure straordinarissime di Saturnino Farandola",
+          "name mismatch"
+        ],
+        [
+          "The Adventures of Pinocchio",
+          "name mismatch"
+        ],
+        [
+          "Le avventure di Laura Storm",
+          "name mismatch"
+        ],
+        [
+          "The Adventures of Gerard",
+          "name mismatch"
+        ],
+        [
+          "The Adventures of Pinocchio (1972 miniseries)",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S1"
+    },
+    {
+      "query": "Max Richter",
+      "matched": true,
+      "article": "Max Richter",
+      "opensearch_candidate": "Max Richter",
+      "wikidata": "Q714325",
+      "pageviews": 304423,
+      "months_present": 12,
+      "stratum": "S3"
+    },
+    {
+      "query": "Miami Nights 1984",
+      "matched": false,
+      "reason": "no search result",
+      "article": null,
+      "pageviews": null,
+      "stratum": "S1"
+    },
+    {
+      "query": "Nick Drake",
+      "matched": true,
+      "article": "Nick Drake",
+      "opensearch_candidate": "Nick Drake",
+      "wikidata": "Q211588",
+      "pageviews": 786946,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Nirvana",
+      "matched": true,
+      "article": "Nirvana (band)",
+      "opensearch_candidate": "Nirvana (band)",
+      "wikidata": "Q11649",
+      "pageviews": 1449465,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Paul Simon",
+      "matched": true,
+      "article": "Paul Simon",
+      "opensearch_candidate": "Paul Simon",
+      "wikidata": "Q4028",
+      "pageviews": 1653231,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Perry Como",
+      "matched": true,
+      "article": "Perry Como",
+      "opensearch_candidate": "Perry Como",
+      "wikidata": "Q333405",
+      "pageviews": 310460,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Purrple Cat",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Purple hat therapy",
+          "name mismatch"
+        ],
+        [
+          "Purple Hat",
+          "name mismatch"
+        ],
+        [
+          "Purple City Productions",
+          "name mismatch"
+        ],
+        [
+          "Purple City Music Festival",
+          "name mismatch"
+        ],
+        [
+          "Purple Cane, Nebraska",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S1"
+    },
+    {
+      "query": "Stonebank",
+      "matched": true,
+      "article": "Stonebank",
+      "opensearch_candidate": "Stonebank",
+      "wikidata": "Q60733760",
+      "pageviews": 1387,
+      "months_present": 12,
+      "stratum": "S1"
+    },
+    {
+      "query": "The Byrds",
+      "matched": true,
+      "article": "The Byrds",
+      "opensearch_candidate": "The Byrds",
+      "wikidata": "Q211526",
+      "pageviews": 531904,
+      "months_present": 12,
+      "stratum": "S4"
+    },
+    {
+      "query": "Toonorth",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Tolworth",
+          "name mismatch"
+        ],
+        [
+          "Thomas F. Toon",
+          "name mismatch"
+        ],
+        [
+          "Tom Northcott",
+          "name mismatch"
+        ],
+        [
+          "Tolworth Girls' School",
+          "name mismatch"
+        ],
+        [
+          "Tolworth Tower",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S1"
+    },
+    {
+      "query": "Whitney Houston",
+      "matched": true,
+      "article": "Whitney Houston",
+      "opensearch_candidate": "Whitney Houston",
+      "wikidata": "Q34389",
+      "pageviews": 2993737,
+      "months_present": 12,
+      "stratum": "S2"
+    },
+    {
+      "query": "Wishbone Ash",
+      "matched": true,
+      "article": "Wishbone Ash",
+      "opensearch_candidate": "Wishbone Ash",
+      "wikidata": "Q137758",
+      "pageviews": 180638,
+      "months_present": 12,
+      "stratum": "S4"
+    },
+    {
+      "query": "idealism",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Idealism",
+          "not a musical act"
+        ],
+        [
+          "Idealism (album)",
+          "not a performer (work?)"
+        ],
+        [
+          "Idealism in international relations",
+          "not a musical act"
+        ],
+        [
+          "Ideal (ethics)",
+          "name mismatch"
+        ],
+        [
+          "Idealism (Turkey)",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S1"
+    },
+    {
+      "query": "saib.",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Sai Baba of Shirdi",
+          "name mismatch"
+        ],
+        [
+          "Ismael Saibari",
+          "name mismatch"
+        ],
+        [
+          "Saibai Island",
+          "name mismatch"
+        ],
+        [
+          "G. N. Saibaba",
+          "name mismatch"
+        ],
+        [
+          "Sai Bhonsale",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S1"
+    },
+    {
+      "query": "sleepy fish",
+      "matched": false,
+      "reason": "no identity-matched musical performer among candidates",
+      "article": null,
+      "pageviews": null,
+      "candidates_checked": [
+        [
+          "Sleepy (short story)",
+          "name mismatch"
+        ],
+        [
+          "Johnny Pearson",
+          "name mismatch"
+        ],
+        [
+          "Mount Leona Fire",
+          "name mismatch"
+        ],
+        [
+          "Sleep in fish",
+          "name mismatch"
+        ],
+        [
+          "Sleeps with the Fishes",
+          "name mismatch"
+        ]
+      ],
+      "stratum": "S1"
+    },
+    {
+      "query": "Ólafur Arnalds",
+      "matched": true,
+      "article": "Ólafur Arnalds",
+      "opensearch_candidate": "Ólafur Arnalds",
+      "wikidata": "Q292972",
+      "pageviews": 69929,
+      "months_present": 12,
+      "stratum": "S3"
+    },
+    {
+      "query": "林俊傑",
+      "matched": true,
+      "article": "JJ Lin",
+      "opensearch_candidate": "林俊傑",
+      "wikidata": "Q716022",
+      "pageviews": 117031,
+      "months_present": 12,
+      "stratum": "S4"
+    }
+  ]
+}
