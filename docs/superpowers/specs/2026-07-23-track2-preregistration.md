@@ -8,6 +8,15 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
+> **⚠ AMENDED 2026-07-23 — five amendments (A1–A5), all made before any arm ran.**
+> The `ml-graph-analyst` protocol review
+> ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
+> found three defects settled by arithmetic over the artifact. **§9 is the amendment
+> index**; every affected passage below is also marked inline, because a reader who lands
+> mid-document never sees this banner. The pre-registration gate is undisturbed — the
+> amendments are themselves committed before any arm runs, and the commit timestamp is
+> the evidence. **The review's D4–D7 are NOT addressed here and remain open** (§9).
+
 **Figures rule.** No measured scoring or path-quality figure is restated here. Every
 such reference is a citation into `../2026-07-22-phase1-execution-log-and-graph-defect.md`
 (hereafter "log") or `../findings/2026-07-21-scoring-adjudication.md` (hereafter
@@ -42,7 +51,7 @@ Per the CLAUDE.md rule, everything spec §4 names was grepped. Results:
 | `find_path`, `ApiConfig.graph_path`, `w_sim` / `w_jump` / `w_floor` / `w_hop`, `floor_relax_known` / `floor_relax_dislike` | ✔ | `api/.../pathfinding.py`, `config.py` |
 | log §3.10 mirror-and-verify harness | ✔ | method recorded in log §3.10; prior implementation `builder/analysis/2026-07-22-c3-bypass-mechanisms/stage0.py` |
 | Popularity-**percentile** machinery | ✘ not built | Nothing in `api/src` computes popularity percentiles (`evaluation.py`'s only percentile function is over *degree*). Prior probes computed it ad hoc (`tail_probe.py`). To be built in the harness — see prerequisite P6 for the tie-handling rule. |
-| Expressway toll (`sim_eff = min(sim, s_max)`) | ✘ not built | Expected — spec proposes it as a harness knob. `s_max` needs a data-derived value (prerequisite P3). |
+| Expressway toll (`sim_eff = min(sim, s_max)`) | ✘ not built | Expected — spec proposes it as a harness knob. ~~`s_max` needs a data-derived value (prerequisite P3).~~ **AMENDED 2026-07-23 — see §9 A1.** Both the `min(sim, s_max)` form and P3's rule for setting `s_max` are **withdrawn**: under P3 as written the toll is inert by construction (analyst review D1, re-confirmed at 1.42 % of `w_hop` in `builder/analysis/2026-07-23-track2-toll-calibration/`). Replaced by an additive toll on ceiling edges at two pre-registered magnitudes; definition in §1.4. |
 | **The `known` gate ("raw drop")** | ✘ **not in shipped code** | The spec's §4.2 table lists "`known` gate currency, neutral: raw drop" as if a gate ships today. It does not. Shipped `known` is a **hard exclusion plus a floor relaxation feeding a term that never fires** (`pathfinding.py:78,34`; log §3.3). The pop-drop ≥ 0.10 / sim ≥ 0.70 gates exist only in analysis scripts (log §3.10; `known_viability.py`). Consequence: the gate-currency knob **cannot be a column of this sweep** — no Stage A arm can vary it. It belongs to the §4.4 mechanism experiment (Stage B below). |
 | Deezer `nb_fan` | ✘ nothing consumes it | `clips.py` calls Deezer **track** search (`config.deezer_search_url = api.deezer.com/search`), whose rows carry an artist object but are fetched for previews, first-hit, **with no name verification** — the C1 wrong-artist failure mode is visible in the code (`clips.py:98-107`). The fame harness needs a separate artist-search fetcher with exact-name matching; it must **not** reuse `clips.py`. That `nb_fan` is available on Deezer artist objects is an **external assumption of mine, verified against neither repo nor record** — confirmed or refuted in the §5 pilot before anything depends on it. |
 
@@ -97,8 +106,9 @@ concept exists; Stage A's F2 criterion needs no gate.
 | Graph artifact | `graph-t15-tiebreakfix.bin`, sha256 per `../findings/2026-07-23-tiebreak-fix-adoption.md` | Track 1 output; asserted before every run (established script convention) |
 | Router | Mirror of production `find_path`, per log §3.10 mirror-and-verify | No shipped code edited before adoption |
 | Guard G: ≥ 1 intermediary | Applied in **all** arms including baseline | §4's F1 decision — uniform application keeps it out of the comparison. **Sequencing, added 2026-07-23:** see the note below §1.2. |
-| Bypass protocol | All-`known`, victim = most-popular interior (in-graph popularity; ties → lowest node id), walked independently per arm; snapshots d ∈ {0, 5, 10, 15, 20} | `tail_probe.py` / log §3.10 precedent. Victim selection deliberately stays in-graph (deterministic, no network); outcomes are scored externally. This currency separation is a modelling choice — see §6. |
+| Bypass protocol | All-`known`, victim = most-popular interior (in-graph popularity; ties → lowest node id), walked independently per arm; snapshots **d ∈ {0, 1, 2, 3, 5, 7, 10, 15, 20}** *(amended 2026-07-23, §9 A2 — was {0, 5, 10, 15, 20})* | `tail_probe.py` / log §3.10 precedent. Victim selection deliberately stays in-graph (deterministic, no network); outcomes are scored externally. This currency separation is a modelling choice — see §6. **The walk is 20 bypasses regardless, so every depth is computed anyway; a snapshot is a recording decision, not a compute cost.** The added early depths are where the floor device is alive (§9 A2). |
 | `w_hop`, `w_avoid`, avoidance params | Production defaults (`config.py`) | Out of scope for the diagnosed defect |
+| `w_degree_hub` | 0.0 (`config.py:44`) | *Added 2026-07-23, §9 A5 — closes analyst O3.* Genuinely constant under every intervention here: **a zero weight cannot be un-zeroed by turning another knob**, so the degree-hub term contributes nothing in any arm. Listed explicitly because the dormant-term rule requires enumerating what is held fixed, not only what is turned — and this table's omission of it was that rule finding its first miss on the document that motivated it. |
 | Percentile definition | Rank over N of the artifact's popularity array, computed once at harness start; ties by average rank (P6) | Spec §4.2 |
 
 > **Note added 2026-07-23 (pre-Track-2 guards, G5a) — verify the mirror with guard G OFF,
@@ -129,10 +139,32 @@ Four knobs vary in Stage A. Production values from `config.py`: `w_sim = 3.0`,
 
 | Column | Levels | What it tests |
 |---|---|---|
-| J-cur: `w_jump` currency | raw \|Δpop\| / percentile \|Δpctl\| | §2.12's mechanism: raw currency overprices stratum exits at the top |
+| J-cur: `w_jump` currency | raw \|Δpop\| / percentile \|Δpctl\|, **mean-matched** *(amended 2026-07-23, §9 A3)* | §2.12's mechanism: raw currency overprices stratum exits at the top |
 | J-mag: `w_jump` weight | 1.0 / 0.3 | Cliff-penalty strength under each currency |
 | S-mag: `w_sim` weight | 3.0 / 1.5 | The dive-hop barrier (log §3.7: `w_sim` dominates genuine dive-hop cost) |
-| F: floor handling | **off** (`w_floor = 0`) / **pctl** (floor and relax computed in percentile currency, `w_floor = 1.0`) | Off isolates the cost knobs; pctl is the depth-graduating device (§0). Production raw floor appears only in P below — a raw floor is already known not to bind (claim 23) and, under a repriced `w_jump`, would fire in the wrong currency by construction. |
+| F: floor handling | **off** (`w_floor = 0`) / **pctl** (floor and relax computed in percentile currency, `w_floor = 1.0`, relax constant **pre-registered here, not read from `config.py`** — §9 A2) | Off isolates the cost knobs; pctl is the depth-graduating device (§0). Production raw floor appears only in P below — a raw floor is already known not to bind (claim 23) and, under a repriced `w_jump`, would fire in the wrong currency by construction. |
+
+> **Amendment 2026-07-23 (§9 A3) — the percentile level is mean-matched by definition.**
+> Swapping raw for percentile changes the jump term's overall **scale** as well as its
+> **geometry** (analyst review M2 owns the ratio); only the geometry is the intended
+> treatment. So J-cur = pctl is *defined* as
+> `w_jump_pctl = w_jump_raw × mean|Δpop_raw| / mean|Δpctl|`, with the ratio computed by
+> the harness at start-up over all directed CSR entries of the asserted artifact —
+> deterministic, and not a constant copied into this document. A scalar cannot remove the
+> geometry change (that *is* the treatment); it removes the scale confound, which makes
+> A1-vs-A0 a genuine one-column contrast. Arm **A1u** (§1.4) carries the unnormalised
+> variant as a diagnostic so the scale component stays visible rather than assumed away.
+
+> **A degeneracy in the S-mag column, stated rather than discovered mid-run**
+> *(added 2026-07-23, §9 A5; measurement: `builder/analysis/2026-07-23-track2-toll-calibration/` Q4).*
+> Eight of the pre-registered endpoints are **fully ceiling-saturated** — all 50 of their
+> neighbours sit at similarity exactly 1.0 — and 22 of 24 carry at least one ceiling edge.
+> Where similarity is constant across every exit, `w_sim · (1 − sim)` contributes an
+> identical constant to all of them, so **S-mag has no discriminating power on the first
+> hop out of those endpoints.** Its treatment effect there acts only through downstream
+> hops and through its weight *relative to* the jump term. This does not invalidate the
+> column — it bounds what an S-mag result can be attributed to, and it must be recalled
+> before reading A3/A5 as "the dive barrier alone".
 
 ### 1.4 The arms
 
@@ -158,27 +190,56 @@ the table names the primary reading per row.
 | A6 | raw | 0.3 | 1.5 | A2 or A3 | joint magnitude, raw |
 | A7 | pctl | 0.3 | 1.5 | A4 or A5 | joint magnitude, pctl |
 
+**One factorial diagnostic, not an attachment** *(added 2026-07-23, §9 A3)*. It hangs off
+A1, not off W, which is why it sits here rather than in the table below.
+
+| Arm | Definition | Isolating baseline | Purpose |
+|---|---|---|---|
+| **A1u** | A1 with the percentile jump term **unnormalised** | A1 (one column: mean-matching on → off) | Diagnostic. Exposes how much of any A1 effect is the currency's **scale** rather than its **geometry** — the confound §1.3's mean-matching note removes. **Not a candidate for adoption**, and not eligible to be W. |
+
 **Attachment arms** — added to cell **W**, where W is chosen by pre-registered rule
 R1: *the factorial cell with the largest primary contrast (§2.3 C1 statistic) that does
 not violate the payload guard C4; ties → the cell with fewer changed columns from A0;
 if no cell moves C1's statistic in the right direction, W := A7 (the most aggressive
 cell) so the attachments still get tested.* Rule fixed now; cell chosen by data.
+**R1 ranges over the eight factorial cells A0–A7 only** — A1u and X are diagnostics and
+are excluded from selection *(clarified 2026-07-23, §9 A3)*.
 
 | Arm | Definition | Isolating baseline | Purpose |
 |---|---|---|---|
-| T1 | W + expressway toll: `sim_eff = min(sim, s_max)` in the `w_sim` term, `s_max` from P3 (binds only on ceiling-saturated edges) | W | The cheap probe of whether the p99 ceiling binds (spec §5's recorded trigger) |
-| FL1 | W + floor **pctl** (floor = min endpoint *percentile*, relax `floor_relax_known` per bypass in percentile units, `w_floor = 1.0`) | W | The depth-graduating device: holds d0 high, admits progressively deeper dives per bypass |
+| **T1a** | W + additive expressway toll: `cost += w_sim · (1 − s_toll)` on every edge whose score is exactly 1.0, with **`s_toll = 0.95`** (toll = 7.5 × `w_hop`) *(amended 2026-07-23, §9 A1)* | W | The probe of whether the p99 ceiling **binds**, at a magnitude capable of changing a routing decision (spec §5's recorded trigger) |
+| **T1b** | T1a with **`s_toll = 0.80`** (toll = 30 × `w_hop`) *(added 2026-07-23, §9 A1)* | T1a | Toll magnitude. Makes a T1 null interpretable: a null at 30 × `w_hop` is evidence about the ceiling; a null at an inert magnitude is evidence about nothing. |
+| FL1 | W + floor **pctl** (floor = min endpoint *percentile*, `w_floor = 1.0`), relax **`floor_relax_known_pctl = 0.05` per bypass — pre-registered here, NOT `config.py`'s value** *(amended 2026-07-23, §9 A2)* | W | The depth-graduating device: holds d0 high, admits progressively deeper dives per bypass |
 | FL2 | FL1 with `w_floor = 3.0` | FL1 | Floor strength — whether the gradient needs a hard wall |
 | **X** | Corner: pctl, `w_jump = 0`, `w_sim = 1.5`, floor off, toll off | A7 (one column: J-mag 0.3 → 0) | **Reachability bound, not a candidate.** The cheapest-possible-dive member of the family. If X does not move the primary outcome, no arm in this family can — that is what makes the null in §2.4 R0 interpretable. Never adoptable (INFERENCE: it will wander incoherently; falsified if it both moves fame and survives the listen — a welcome surprise). |
 
-13 runs total (P, 8 factorial, T1, FL1, FL2, X). At the recorded harness cost per
-`find_path` call (README, popularity-stratification), the full grid over 8 pairs × 21
-calls per walk is roughly an hour of compute — comfortably a single working session.
+**15 runs total** (P, 8 factorial, A1u, T1a, T1b, FL1, FL2, X) *(amended 2026-07-23 from
+13 — §9 A1, A3)*. At the recorded harness cost per `find_path` call (README,
+popularity-stratification), the full grid over 8 pairs × 21 calls per walk is on the
+order of an hour of compute — still comfortably a single working session. The added
+snapshot depths (§9 A2) cost nothing: the walk visits every depth regardless.
+
+> **Why the toll is additive-on-ceiling rather than `min(sim, s_max)`**
+> *(amendment rationale, §9 A1; measurement:
+> `builder/analysis/2026-07-23-track2-toll-calibration/`).* The two forms differ in what
+> they bind on. `min(sim, s_max)` at a pre-registered magnitude would toll every
+> near-ceiling edge too, changing the binding set from "the p99 clip's own artifacts" to
+> "everything above `s_max`" — which is a different question from the one spec §5 asks.
+> The additive form binds on exactly the saturated edges and lets the magnitude be chosen
+> independently, which is what D1 requires. **This is not a disagreement with the governing
+> spec** — its §4.2 asks for "a similarity-cost floor binding only on ceiling-saturated
+> edges" and offers `min(sim, s_max)` only as an *e.g.*; the additive form satisfies the
+> stated requirement, which the example form provably could not. Hence no new row in §8.
+> **What a toll can and cannot do:** at a fully
+> saturated node it adds the same constant to all 50 exits, so it **cannot re-rank them**;
+> it makes multi-hop ceiling routes dearer relative to shorter or higher-cost
+> alternatives. T1 therefore asks "is the expressway's *cheapness* load-bearing?", not
+> "is its *ordering* wrong?" — and that is the question spec §5 records.
 
 **Multi-knob comparisons this design contains, labelled as such:** A6/A7 vs A0 are
 two- and three-column packages; they exist to bound the family's joint effect, and a
 win there **cannot be attributed to any single knob** — attribution comes only from the
-one-column chains (A1–A5, T1, FL1, FL2). FL1 vs P is a package comparison (floor
+one-column chains (A1–A5, A1u, T1a, T1b, FL1, FL2). FL1 vs P is a package comparison (floor
 currency *and* everything W carries); the isolating chain is P → A0 → … → W → FL1.
 Any result quoted outside this document must name which comparison it came from.
 
@@ -312,6 +373,16 @@ pair 8. The sweep says nothing about obscure→obscure journeys (§6).
   FL1/FL2 also fail C3, the family has no working depth device, and the gradient
   requirement **moves to Stage B** (the `known` mechanism becomes the gradient carrier);
   C1/C2 remain binding for Stage A adoption regardless.
+  > **Amended 2026-07-23 (§9 A2).** This branch was **unreachable as originally written**:
+  > at `config.py`'s `floor_relax_known`, the floor reached zero before the depths C1 and
+  > C2 score, making FL1/FL2 numerically identical to W in every scored cell (analyst
+  > review D2 — arithmetic, not inference). The remedy was inoperative. With the
+  > pre-registered relax constant and the added early snapshots, R3 is now reachable and
+  > reads as written. **A second consequence, recorded because it bears on the baseline:**
+  > the same arithmetic applies to production **P** in raw currency, so whatever depth
+  > gradient P shows inside the C1 window comes from the **exclusion set alone**, not from
+  > the floor. P is not a "router with a working depth device" and must not be described
+  > as one.
 - **R4 — passes offline, loses the blind listen.** Read: fame movement without
   coherence — F6's warning realised. The verdict notes (not the offline metrics) say
   what broke. Next lever is Stage B's mechanism shapes on this substrate — not another
@@ -321,6 +392,24 @@ pair 8. The sweep says nothing about obscure→obscure journeys (§6).
   proceed to Stage B (§4.4) on the adopted substrate; delete `w_floor`/`floor_relax_*`
   only per §4.4, or *retain* them if an FL arm is the winner — in which case the spec's
   §4.4 deletion clause is amended, since the floor would then be load-bearing.
+- **R6 — the percentile arms move ΔF the *wrong way* (positive) while the raw-magnitude
+  arms move it negative.** *Added 2026-07-23 (§9 A4), on the analyst review's D3.*
+  This branch exists because the graph's own geometry predicts it is the **modal**
+  outcome, and the original §2.4 had no read for it — which is the exact condition under
+  which a result gets interpreted post-hoc, the failure mode this section exists to
+  prevent. **Mechanism:** percentile currency compresses the top decile and stretches the
+  bulk, so lateral famous↔famous moves get *cheaper* faster than exits do; what Dijkstra
+  responds to is the price of an exit **relative to the alternative**, and that ratio
+  worsens substantially under the percentile swap (review §2 M2 owns the figures).
+  **Read:** the currency is not the mechanism — within `w_jump`, the knob that promotes
+  diving is **J-mag** (and X's `w_jump = 0`), not J-cur. **Licenses:** preferring the
+  raw-currency winner, and recording §2.12's currency framing as **specific to the
+  `known` gate** (where it is a threshold on a drop, and the argument is sound) rather
+  than to `w_jump` (where it is a price relative to alternatives). **Does not license:**
+  re-opening anything in log §4/§4.1, nor treating §2.12 as refuted — its diagnosis is
+  about *where* the router declines exits, and R6 would refine the mechanism, not the
+  diagnosis. **Falsifier, and it is free:** A1 beats A0 on C1. If it does, the review's
+  inference is wrong and is discarded — the sweep tests the review as well as the design.
 
 **Interpretation discipline:** the sections of this log-adjacent record that went wrong
 went wrong in interpretation, never measurement (log §2.13). Accordingly: any
@@ -532,8 +621,8 @@ cached to disk.
 | # | Prerequisite | Why |
 |---|---|---|
 | P1 | Capture the owner's F3/F6 bypass URLs from the 2026-07-23 test message into the Track 2 plan | Pair 8; the execution log says they live only in the branch/PR thread |
-| P2 | Verify every §2.3 endpoint resolves in the Track 1 artifact (by name lookup, duplicate-name rule = highest popularity) | Presence is [DOC]-attested only; substitution rule §2.3 if one fails |
-| P3 | Measure the largest non-ceiling edge score in the artifact; set `s_max` just above it | T1 must bind **only** on ceiling-saturated edges — a trivial measurement this document may not take |
+| ~~P2~~ | ~~Verify every §2.3 endpoint resolves in the Track 1 artifact~~ **DISCHARGED 2026-07-23 — do not redo.** All 24 endpoints (analysis, held-out, and reserve) verified three times independently: by G1's canonical-set bound selection, by the analyst review's M4, and by the toll-calibration Q4. `Nirvana` carries the known duplicate; highest-popularity rule applied. | Presence is no longer [DOC]-attested. The §2.3 substitution rule stands unused. |
+| ~~P3~~ | ~~Measure the largest non-ceiling edge score; set `s_max` just above it~~ **WITHDRAWN 2026-07-23 (§9 A1) — executing it as written produces an inert arm.** Replaced by: pre-registered additive toll magnitudes (§1.4), already measured in `builder/analysis/2026-07-23-track2-toll-calibration/`. **No action remains for the working session.** | The rule and the goal were in conflict: binding "only on ceiling-saturated edges" forces `s_max` one grid step below the ceiling, which forces the toll to ~1.4 % of `w_hop`. Decoupling the binding set from the magnitude resolves it. |
 | P4 | Run §5 (proxy validation + matching pilot) to verdict; apply the §2.2 recalibration rule if triggered | Nothing is scored until the proxy survives or is replaced |
 | P5 | Fix the name-normalisation rule for proxy matching (NFKC fold + Unicode-punctuation folding, exact match after) | Attack 4; the record's own hyphen trap |
 | P6 | Fix percentile tie-handling: average rank over the popularity array, computed once at harness start | Determinism; `np.argsort` alone is order-dependent among ties |
@@ -558,3 +647,59 @@ For the reviewer's convenience; each is argued in place above.
 5. **§4.4's unconditional deletion of `w_floor`/`floor_relax_*` is premature if an FL
    arm wins** (§2.4 R5) — the floor would then be the shipped depth device, and the
    deletion clause needs amending at adoption rather than assuming.
+
+---
+
+## 9. Amendment index — 2026-07-23, before any arm ran
+
+Five amendments, prompted by the `ml-graph-analyst` protocol review
+([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
+Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
+these were committed before any arm ran, and the commit timestamp is the evidence — which
+is the whole mechanism, and the reason an amendment is written and committed rather than
+applied silently at run time.
+
+**Why amend rather than execute as written.** Three of the review's findings are
+**arithmetic over the artifact, not opinion**: executing §1.4's T1 and FL arms literally
+would have produced arms that provably cannot move, and reported their nulls as evidence.
+An arm that cannot move is not a conservative test; it is a test whose result was fixed
+before it ran.
+
+| # | Amendment | Prompted by | Changes |
+|---|---|---|---|
+| **A1** | **T1's toll replaced and split into T1a/T1b.** The `min(sim, s_max)` form and P3's rule are withdrawn; the toll is now additive on edges at score exactly 1.0, at two pre-registered magnitudes (`s_toll` 0.95 and 0.80 = 7.5× and 30× `w_hop`). | **D1** | §0 T1 row · §1.4 arms + rationale · §7 P3 |
+| **A2** | **The floor device is recalibrated to survive the scored window,** and early snapshots added. `floor_relax_known_pctl = 0.05` is pre-registered here instead of reusing `config.py`'s value; snapshots become d ∈ {0,1,2,3,5,7,10,15,20}. **The constant is chosen so the floor traverses its range over the snapshot span rather than being spent before it:** taking the base floors from review §2 M4, it is still non-zero at every snapshot through **d15 on all 12 pairs**, and through **d19** on the ten pairs whose base percentile floor exceeds 0.95. Deliberately *not* read from `config.py` — reusing the shipped constant is precisely what made the arms inert. | **D2** | §1.2 bypass protocol · §1.3 F row · §1.4 FL1 · §2.4 R3 |
+| **A3** | **The percentile currency level is mean-matched by definition,** so J-cur is a genuine one-column contrast; arm **A1u** added to keep the scale component visible. | **D3** (second half) | §1.3 J-cur row + note · §1.4 A1u · run count |
+| **A4** | **Read R6 added** — percentile arms moving ΔF positive while raw arms move it negative, with its mechanism, licenses and free falsifier. | **D3** (first half) | §2.4 |
+| **A5** | **Two completeness gaps closed:** `w_degree_hub` named in the held-constant table (analyst **O3**), and the S-mag column's degeneracy at ceiling-saturated endpoints stated up front. | O3 + new measurement | §1.2 · §1.3 note |
+
+### What the amendments cost, stated plainly
+
+Run count **13 → 15**; compute still on the order of an hour. No change to the primary
+outcome (§2.1), to any effect-size threshold (§2.2), to the pair sets (§2.3), or to the
+attack analysis (§3). **No result was in hand when these were written** — no arm has run,
+no path has been routed.
+
+### Supporting measurement
+
+`builder/analysis/2026-07-23-track2-toll-calibration/` (README owns its figures Q1–Q4).
+It discharges the review's **PR-C** and re-confirms D1's arithmetic independently. Its
+**Q4 was not anticipated by the review** and cuts *in favour* of T1: ceiling saturation is
+rare in the graph at large but near-universal among this sweep's endpoints, so the toll
+binds where the sweep actually routes — which makes a T1 null informative rather than
+merely uninformative.
+
+### Still open — this amendment set does NOT discharge the review
+
+**D4, D5, D6, D7 and PR-A, PR-B are untouched.** Anyone reading §9 as "the review has been
+addressed" would be wrong. In particular:
+
+| Open item | What it blocks | Success condition — due when |
+|---|---|---|
+| **PR-A** — run **A0 vs P** on the full pair × depth grid **as a gate, first**, not as one arm among fifteen (review O7) | Whether `w_floor`'s inertness transfers to `graph-t15-tiebreakfix.bin`. If A0 ≢ P, §1.4 requires re-anchoring with floor fully crossed — 16 cells plus attachments, outside the stated budget | **Before the factorial runs.** Report alongside it the fraction of examined nodes carrying a non-zero floor term, so "identity holds but the term is firing" is visible rather than inferred |
+| **D4** — C6 protects C1 (a median) but not C2 (an extreme) | Whether a lost obscure interior silently costs a C2 pass | Before scoring: make manual resolution mandatory for unmatched d15/d20 interiors, and pre-register unresolved cells as **C2-indeterminate**, not C2-fail |
+| **D5** — §5's Spearman and inversion falsifiers are not interpretable on §5's own purposive sample | The fame-proxy verdict (P4) | Before §5 runs: per-stratum reporting, Spearman additionally within the "heard of" + "know well" subset, inversions as a rate within the stress stratum, tie-corrected variant named |
+| **D6** — the held-out gate passes ~31 % of candidates under the null | Only the *labelling* of the held-out step as "confirmation" | Before the winner goes to held-out: either state 0.3125 in §2.2 or tighten to 4-of-4 |
+| **D7** — guard G undefined when the direct edge is a bridge | Arm-correlated missingness returning by the back door | Before the sweep: pre-register that a guard-infeasible cell is dropped from **all** arms uniformly and reported |
+| **PR-B** — cost decomposition on routed dive hops under both currencies | Settles R6/D3 directly rather than by edge-level marginals | Optional; if R6 fires, this is the confirmatory measurement |
+| **O1, O2, O8, O9, O10** — reporting and framing items | Nothing structural; each asks for a sentence or a stratified report | At harness-writing time |

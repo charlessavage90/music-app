@@ -401,6 +401,65 @@ evidence about path quality — which is Track 2's question, still open, F2 unto
 
 ## Track 2 — cost-function retune
 
-*(not started — next session begins here. Read the Track 1 use-the-app results
-above first: F2 is the objective, F1 is a guard decision that must precede the
-success-criterion spec, and F3–F6 are the criteria the sweep is judged on.)*
+*(No arm has run. No path has been routed. The harness does not exist.
+Read the Track 1 use-the-app results above first: F2 is the objective, F1 is
+settled as a guard, and F3–F6 are the criteria the sweep is judged on.)*
+
+### Pre-registration amended for analyst D1–D3 (2026-07-23)
+
+Branch `track2-prereg-amendments` off `main`. **Five amendments (A1–A5) to
+`specs/2026-07-23-track2-preregistration.md`, committed before any arm ran** —
+index in its new §9, each also marked inline at the passage it changes.
+
+**Why these three and not the rest.** D1, D2 and D3's first half are settled by
+**arithmetic over the artifact**, not by argument, and all three would have
+produced arms that provably could not move:
+
+- **D1** — P3's rule forces `s_max` one grid step below the ceiling, so T1's toll
+  came to **1.42 % of `w_hop`** (re-measured independently this session, matching
+  the review). The rule and the goal were in conflict: "bind only on saturated
+  edges" and "have a magnitude" cannot both come from one threshold on `sim`.
+  Fixed by decoupling them — an additive toll on score-exactly-1.0 edges, at two
+  pre-registered magnitudes (7.5× and 30× `w_hop`), which is also what makes a T1
+  null mean something.
+- **D2** — at `config.py`'s relax constant the floor hits zero at 6–7 bypasses
+  while C1 scores at d ≥ 10, so **FL1/FL2 were numerically identical to W in every
+  scored cell**. §2.4's R3 designated them as its remedy, so that branch was
+  unreachable. Fixed with a relax constant pre-registered in the pre-registration
+  rather than read from config, plus early snapshots (free — the walk visits every
+  depth anyway).
+- **D3** — added read **R6**, and made the percentile level mean-matched so J-cur
+  is genuinely one column, with diagnostic arm **A1u** holding the unnormalised
+  variant.
+
+**The prediction is on the record before the arms run, which is the point.**
+The review's D3 inference — that percentile arms will move ΔF the *wrong way*,
+because top-decile compression cheapens lateral famous↔famous moves faster than it
+cheapens exits — is now R6, with a free falsifier (**A1 beats A0 on C1**). The
+sweep therefore tests the review as well as the design, and neither outcome can be
+narrated after the fact.
+
+**A new measurement, and it changed the amendment.**
+`builder/analysis/2026-07-23-track2-toll-calibration/` (owns its figures; discharges
+review **PR-C**). Its **Q4 was not anticipated by the review**: ceiling saturation is
+rare across the graph but **near-universal among this sweep's endpoints** — 22 of 24
+carry at least one ceiling edge, eight are saturated on all 50 neighbours, against a
+mean of 3.5 for top-1%-by-degree nodes generally. Two consequences:
+
+1. It cuts **in favour** of T1 — the toll binds exactly where the sweep routes, so a
+   T1 null is informative rather than merely uninformative.
+2. It bounds the **S-mag column**, which nobody had flagged: where all 50 exits sit at
+   similarity 1.0, `w_sim · (1 − sim)` is an identical constant across them, so S-mag
+   **cannot discriminate on the first hop** out of those eight endpoints. Recorded in
+   §1.3 so A3/A5 are not read as "the dive barrier alone" without the caveat.
+
+**What was deliberately not done.** D4–D7 and PR-A/PR-B are **untouched and open**,
+tabulated with success conditions in §9's closing table so no one reads the amendment
+set as discharging the review. The highest-value one is **PR-A**: run **A0 vs P first,
+as a gate**, not as one arm among fifteen — if A0 ≢ P the factorial must be re-anchored
+with floor fully crossed, which is a redesign better found before fourteen other arms
+than after. P2 was marked discharged in §7 (it had remained listed as outstanding
+despite three independent verifications).
+
+Run count 13 → 15. No change to the primary outcome, any effect-size threshold, the
+pair sets, or the attack analysis.
