@@ -1226,3 +1226,64 @@ rule aimed at incoming reports; this is the same rule applied to a *concurrent* 
 assurance, and it earned its keep twice today.
 
 **No arm has run.** Artifact untouched.
+
+### WGLL values 8–9 checked against every Track 2 criterion — A14 (2026-07-24)
+
+The cold-read adjudicator widened `WHAT-GOOD-LOOKS-LIKE.md`'s trigger to **"before
+designing anything that scores a path"** and added two values, with the asymmetry now stated
+in both `CLAUDE.md` and the doc map: **no threshold may be read off WGLL, but a criterion
+that contradicts a value in it is wrong.** That makes it a checkable rule, so it was checked
+against all of C1–C7 rather than assumed compatible.
+
+**Result: nothing contradicts. Two additions, both non-gating, and one item flagged for the
+owner.**
+
+**Value 8 (novelty is delivered *through* coherence, not traded against it) changes
+nothing, and confirms two existing choices.** §1.5 already records AA and the overlap family
+as *diagnostics only, never gating* — value 8 says those two were the **worst** predictors of
+the owner's verdict, so the pre-registration had this right in advance. §6 item 1 already
+concedes coherence has no offline metric and the listen decides. What value 8 does raise is
+the standing of **F5 (confinement)** and the **repeated-interior report**: they are the only
+offline proxies for Attack 2, which §3 already declines to close. It also supplies a pointer
+worth obeying — Phase 1 log **§3.9's verbatim verdict notes are the only description of what
+the owner means by coherent**; if a coherence metric ever looks tempting, start there rather
+than inventing one.
+
+**Value 9 (reducing famous artists is the live problem; eliminating them would be an
+over-correction; the bypass is the mechanism meant to carry obscurity) reaches three
+places.**
+
+1. **C3 is value 9's own criterion, restated.** "The more bypasses, the more obscure the path
+   becomes while staying coherent" *is* the within-arm depth gradient. Value 9 promotes C3
+   from one criterion among four to the mechanism the owner is actually describing. No change
+   to its threshold.
+2. **C5's inspection gains the target it lacked** (A14b). It was "inspect every changed d0
+   path, no numeric threshold." Value 9 says what to inspect *for*: does d0 fame still track
+   the endpoints? A reshaped first path that keeps two superstars mostly-popular is expected;
+   one that makes it obscure is the over-correction, and is a finding rather than a pass.
+3. **A free diagnostic the pre-registration did not have** (A14a): per-arm, the relationship
+   between endpoint fame and d0 interior fame. Costs nothing — every path and every fame
+   value is already computed. **Weak, and labelled so:** the pair set is famous-heavy by
+   design, so only The Shins → Wishbone Ash and Nirvana → CROOVE give any spread, and §6
+   item 4 already records obscure→obscure as untested entirely.
+
+**One apparent conflict, checked, and it dissolves — recorded because the check is the
+point.** §2.4 **R3** permits the gradient requirement to move to Stage B if FL1/FL2 also fail
+C3. First reading: that contradicts value 9, which names bypass-carried obscurity as the
+mechanism. It does not — **Stage B *is* the bypass-mechanism experiment**, so relocating the
+gradient there is value 9's own remedy, not a departure from it.
+
+**What survives is narrower, and is the owner's to weigh, not this session's.** R3 also says
+"C1/C2 remain binding for Stage A adoption regardless" — so Stage A could adopt an arm that
+fails C3, before Stage B exists, shipping a router whose obscurity is **static rather than
+bypass-carried**. Value 9 disfavours that. It is not a criterion contradicting a value, so
+the "criterion is wrong" rule does not fire and nothing is being changed on this basis; and
+the blind listen would very likely catch it. **Flagged, not actioned.**
+
+**Method note.** This session's first pass through value 9 produced the R3 conflict as a
+finding, and it was wrong. Writing out why before reporting it is what caught it — the same
+"answer it yourself and write the answer down" step that dissolved the earlier escalation.
+The near-miss is recorded because the finding would have been plausible, load-bearing, and
+false.
+
+**No arm has run.** Artifact untouched.
