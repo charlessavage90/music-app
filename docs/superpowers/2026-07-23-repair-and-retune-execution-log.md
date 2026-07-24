@@ -546,6 +546,51 @@ them is lost. Irrelevant to the sweep (all-`known`, scripted victim) but it boun
 this trace could ever be replayed as, and it is a small argument for a future single
 ordered bypass parameter if replay ever matters.
 
+### Step 43 — the snap-back reconstructed, and a design choice validated
+
+The owner supplied one further URL, one bypass past F6, not knowing whom he had bypassed.
+It is F6 plus one appended `dislike`, so it reconstructs exactly. Record:
+`builder/analysis/2026-07-23-f6-trace-capture/` §5 (owns its figures).
+
+He bypassed **Nancy Sinatra**. The path went from a **nine**-interior corridor —
+Frank Sinatra → Nancy Sinatra → Ennio Morricone → Hans Zimmer → Clint Mansell →
+Max Richter → Ólafur Arnalds → Tycho → deadmau5 — to a **four**-interior fallback:
+Nina Simone → Leonard Cohen → Simon & Garfunkel → Queen. **Queen and Simon & Garfunkel
+are the two artists he named in his F6 report**, so the reported snap-back is confirmed
+to the artist.
+
+**The load-bearing result: the in-graph metric cannot tell those two paths apart.**
+Minimum interior percentile 0.9829 versus 0.9820; medians 0.9940 versus 0.9909. Where it
+differs it marginally *favours the snap-back*. Max Richter (0.9862) and Ólafur Arnalds
+(0.9908) score as *more* popular than Queen (0.9820).
+
+**Why this matters more than one trace normally would.** §2.11 established
+popularity ≠ fame at artist level, and the nine-names verdict confirmed it at artist
+level. This is the first **path-level** demonstration, and it is on the exact contrast
+Track 2 is built to produce: a success criterion phrased in in-graph percentile would
+score the path he valued and the path he rejected as **indistinguishable**. The
+pre-registration already scores C1/C2 on an external fame proxy — so this **validates a
+choice already made** rather than prompting a new one. It also raises the cost of P4
+failing: with no fit proxy there is no fallback metric that can see this contrast, which
+strengthens §5's terminal fallback (owner-labelling) from "expensive but honest" to
+"expensive and apparently necessary".
+
+**Three observations, labelled as observations — n = 1, none pre-registered:**
+
+1. **The corridor had a single entrance.** One bypass did not substitute one artist; it
+   destroyed the route from Frank Sinatra onward. No second-cheapest way into the corridor
+   existed, so the router fell back wholesale. If it generalises, the §1.5 **F5**
+   diagnostic is the nearest instrument and it currently looks for the opposite pattern.
+2. **Payload collapsed 9 → 4.** Attack 5 / WHAT-GOOD #2 in the wild rather than argued.
+   **C4** exists for this and its threshold would flag a drop of five.
+3. **The floor had been dead for ~35 bypasses** at both states (zero from about bypass
+   5–6). Analyst **D2** observed in a real session rather than derived.
+
+None of these enters the record as a finding; per §2.4's interpretation discipline they
+are post-hoc and would need an `ml-graph-analyst` check to become one. They are recorded
+because they are cheap, and because item 1 may be worth a diagnostic the sweep does not
+currently carry.
+
 **If A0 ≠ P, that is a pre-registered branch firing, not scope creep.** §1.4's A0 row
 already requires re-anchoring on P with floor as a fully crossed column — sixteen cells
 plus attachments, outside the stated budget. The session that hits it should write a
