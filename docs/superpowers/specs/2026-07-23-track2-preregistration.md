@@ -626,8 +626,8 @@ cached to disk.
 | P4 | Run §5 (proxy validation + matching pilot) to verdict; apply the §2.2 recalibration rule if triggered | Nothing is scored until the proxy survives or is replaced |
 | P5 | Fix the name-normalisation rule for proxy matching (NFKC fold + Unicode-punctuation folding, exact match after) | Attack 4; the record's own hyphen trap |
 | P6 | Fix percentile tie-handling: average rank over the popularity array, computed once at harness start | Determinism; `np.argsort` alone is order-dependent among ties |
-| P7 | Confirm the ≥ 1-intermediary invariant with the owner (one question) | §4's labelled inference |
-| P8 | `ml-graph-analyst` review of this pre-registration and the harness before any arm runs | Spec §4.6 — both prior reviews of this experiment class found protocol defects |
+| ~~P7~~ | ~~Confirm the ≥ 1-intermediary invariant with the owner~~ **DISCHARGED 2026-07-23 — do not re-ask.** Owner: *"Every path must have at least one artist in between the start and end."* §4's labelled INFERENCE is confirmed, not inferred; recorded in §1.2's note and the execution log. | §4's labelled inference, now settled |
+| P8 | **Half discharged 2026-07-23.** The pre-registration review landed — [`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md); its D1–D3 are amended above (§9), its **D4–D7 and PR-A/PR-B remain open** (§9's closing table). **P8b — the review of the *harness* — is not yet due: no harness exists.** | Spec §4.6 — both prior reviews of this experiment class found protocol defects |
 
 ---
 
