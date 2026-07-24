@@ -11,6 +11,33 @@ the point.**
 
 ---
 
+## DONE — 2026-07-23 — pre-Track-2 guards: a rename through the whole cost path
+
+**DONE 2026-07-23 — nothing found, which is the expected outcome.** No behaviour change
+was intended and none was observed. Owner's summary: "everything seems stable and
+functions similar to other tests."
+
+- **Search (reported first — it is the first action a real user takes).** Order looks
+  correct, and one case is strongly confirmational: typing `The ` returns The Beatles,
+  The Rolling Stones, The Strokes, The Beach Boys. `My ` returns My Chemical Romance,
+  My Bloody Valentine, My Morning Jacket, then unfamiliar artists. **This is the most
+  discriminating evidence in the run** — search ranks on the renamed popularity quantity,
+  and if that read had been crossed with degree or with any other value, a prefix shared
+  by many artists is exactly where the wrong ones would surface first. They did not.
+- **Two familiar paths:** no discernible difference or issues. **Recorded caveat:** the
+  owner was not closely inspecting path content, so this is "nothing jumped out", not a
+  path-quality judgement — a weaker signal than the search result, and correctly so, since
+  path *quality* is Track 2's question and not this entry's.
+- **Repeated bypass, both buttons:** pressed `known` repeatedly and `dislike` repeatedly,
+  no issues on either.
+
+**What this does and does not license.** It clears the rename as a regression: the guards
+work is safe to merge. It says nothing about whether paths are *good* — the F2 complaint
+(more bypasses do not surface more obscure artists) is untouched and remains Track 2's
+objective.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-23 — pre-Track-2 guards: a rename through the whole cost path
 
 **Expected outcome: nothing changes.** This is a regression check, and a short one.

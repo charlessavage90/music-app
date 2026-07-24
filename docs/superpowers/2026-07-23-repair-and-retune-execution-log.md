@@ -382,6 +382,23 @@ only as the negative case. Both asserted in-script before every measurement. The
 500-node test fixtures are untouched and still valid — the APG1 format did not change,
 which is exactly why the wire key had to keep its name.
 
+### Use-the-app result (owner, 2026-07-23) — the rename is clear
+
+**Nothing found; the expected outcome.** Full record in `TEST-QUEUE.md`. Summary:
+"everything seems stable and functions similar to other tests."
+
+The load-bearing part is the **search** check, which the owner ran first on the reasoning
+that search is the first action a real user takes. Typing `The ` returned The Beatles,
+The Rolling Stones, The Strokes, The Beach Boys. That is the run's most discriminating
+evidence: search ranks on the renamed popularity read, and a high-frequency prefix is
+precisely where a crossed wire would put the wrong artists at the top. It did not.
+
+Two familiar paths showed no discernible difference, and repeated bypass on both buttons
+was clean. **Caveat recorded rather than smoothed over:** the owner was not closely
+inspecting path content, so the path result is "nothing jumped out", not a quality
+judgement. That is the right depth for a regression check and the wrong depth to cite as
+evidence about path quality — which is Track 2's question, still open, F2 untouched.
+
 ## Track 2 — cost-function retune
 
 *(not started — next session begins here. Read the Track 1 use-the-app results
