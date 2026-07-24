@@ -55,6 +55,59 @@ git status --short && git log --oneline -3 && git branch -vv
   This is not hypothetical here — HEAD has moved mid-conversation while two sessions were
   open. If so: do not run builds, do not start long jobs, and above all do not
   `git add -A`, which sweeps their work into your commit.
+
+  **Why this bites even when the two sessions touch disjoint files.** Concurrent *edits*
+  really are near-harmless — nothing overwrites, nothing conflicts. Two things are shared
+  by *processes* rather than by paths, and both surface at commit time:
+
+  - **Git records content, not authorship of uncommitted work.** `git status` shows you
+    modified paths with no way to tell yours from theirs. The boundary of "my work" lives
+    only in your memory of what you did. So `git add -A` — which substitutes *everything
+    present* for *what I did* — is a guess that happens to be correct whenever you are
+    alone, which is every previous time, which is exactly what makes it a habit.
+  - **The index, HEAD and the branch ref are one per tree.** `git add` stages into a shared
+    buffer, so their `add` lands inside your `commit`. `--amend`, `rebase`, `stash`, `reset`
+    and `checkout <other-branch>` all operate on the whole tree, including their
+    uncommitted work.
+
+  **So commit with a pathspec — `git commit -- <paths>` — which takes those paths from the
+  worktree and ignores the index entirely.** No `-A`, no `-a`, no `--amend`, no `rebase`,
+  no `stash`, no branch switch while another session is live. Under those constraints
+  concurrent commits are genuinely fine: git serialises them and nothing is lost.
+
+  **Simpler, if you would rather not carry that list — one session owns committing and the
+  other only edits.** This is a simplification, not a requirement; its value is removing a
+  standing judgement call at the moment a session is wrapping up and least careful. An
+  advisory or consulting session is the natural non-committer, since its output is analysis
+  and it can leave edits on disk for the owning session to land under an honest message.
+
+  **Ask the owner to tell the session already running that you exist** — it cannot detect
+  you the way you just detected it, because its own §C check ran before you arrived.
+
+  **Non-negotiable regardless of who commits: if you find changes you did not make, leave
+  them, name them to the owner, and commit around them.** Do not commit them, and do not
+  describe where they came from. On 2026-07-23 a session swept a second session's
+  `CLAUDE.md` edit into its own commit under the message *"written by the owner from this
+  session"* — entirely plausible from where it sat, and false. The mixing took seconds to
+  unwind; the invented provenance did not, because it reads as settled history. **No amount
+  of git discipline prevents this one.** It is prevented by a session declining to narrate
+  something it cannot know.
+
+  **If both sessions genuinely need to commit, the one arriving second takes a worktree:**
+
+  ```bash
+  git worktree add C:/Users/charl/worktrees/music-app-<purpose> -b <branch>
+  git worktree remove C:/Users/charl/worktrees/music-app-<purpose>   # when done
+  ```
+
+  **Put it outside OneDrive** — a sibling of the main tree gets synced, and OneDrive is
+  already the reason `UV_LINK_MODE=copy` exists. Note that **gitignored files do not come
+  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`. So the
+  worktree goes to whichever session does not need the graph — normally the advisory one,
+  which needs no setup at all if it is only reading documents. For a consulting session
+  there is a second reason beyond hygiene: a shared tree lets it read the other session's
+  half-finished reasoning, and a second opinion that has absorbed the first one's working
+  notes is not independent evidence.
 - **Check the test queue** left by the last closeout. Anything sitting untested gets
   flagged to the owner now. That flag is the only forcing function on the async
   use-the-app check, which is the one item that catches defects tests structurally cannot.
@@ -78,10 +131,27 @@ git status --short && git log --oneline -3 && git branch -vv
 
 ---
 
-## Two checks unique to session start
+## Three checks unique to session start
 
 These cannot fire later. By the time there is a plan, or a conclusion built on a report,
 the cost has already been paid.
+
+### Cold-read a mid-flight handoff back before acting on it
+
+**If the handoff note says the previous session was retired mid-work rather than at a
+seam, state back — before doing anything else — what you believe the situation is, what is
+decided, what is in flight, and what you would do next. Then wait for the owner to
+confirm.**
+
+A seam handoff is written from a finished position, and the committed artifacts corroborate
+it. A mid-flight handoff is written by a session retired *because* its completeness was
+suspect (`closeout` A2-mid), which makes it the document least able to vouch for itself.
+The successor is the only instrument that can test it — and only in the first minute, since
+after that you have absorbed the note's framing and can no longer see what it failed to say.
+
+Costs one message. Every gap it exposes is a handoff defect caught before anything is built
+on it, and it doubles as a measurement of which document was too thin: the note, or the
+retained log the note was supposed to be a delta against.
 
 ### The scope check — before any planning
 

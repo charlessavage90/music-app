@@ -302,7 +302,18 @@ was under-recorded.
 
 **The degradation tell is a completeness failure, not a fluency one.** Watch for a session
 having to be *asked* for figures it already computed, or an item quietly dropping out of a
-tracking document. Both have happened here; both preceded any more obvious symptom.
+tracking document. Both have happened here; both preceded any more obvious symptom. A third
+is a session **revising a firm claim under mild questioning with no new information in
+between** — the revision was available the whole time, and reading it as "scrutiny is
+working" gets it exactly backwards.
+
+> **When the tell fires, that is a mid-flight closeout — not a resolution to be more
+> careful.** Retire the session at the next stopping point, per `closeout`'s mid-flight
+> scaling (A2-mid, D1-mid) and `session-start`'s cold-read check.
+
+Both rituals trigger on **work** state — starting, finishing. Nothing triggers on
+**session** state, so this is the one boundary that has to be noticed deliberately rather
+than arriving on schedule. That asymmetry is why it has twice been the owner who spotted it.
 
 **How to ask for a plan review.** "Review this plan" finds prose problems. **"Check this
 plan's claims against the repo"** finds the confounds. Every high-value finding in Phase 2
@@ -328,6 +339,24 @@ reviews are rare and targeted here.
 
 Closeout writes; session-start reads. Keep them in sync — if you change what one
 produces, change what the other consumes.
+
+**The standing context layer is budgeted.** `CLAUDE.md` + `memory/` + both `SKILL.md`
+bodies load unconditionally, before a session reads a single project document. Every other
+layer is routed around by `docs/README.md`; this one is not, so it is the only place where
+growth is a standing tax. It was 661 lines on 2026-07-21 and 1,436 on 2026-07-23.
+
+> **Additions to it are displacement-only: name what the addition replaces or shortens, or
+> state that it is net-new and why nothing came out.** Checked at `closeout` **D6**, from
+> the diff. This is A3's rule — *a deferral must have an address* — applied to context
+> instead of to findings.
+
+**Rules here do not expire, and must not be given expiry conditions.** "Figures live in one
+document", `UV_LINK_MODE=copy`, currency-in-the-name: these are invariants, and a review
+trigger on them would be discharged by re-affirming them, adding a line and subtracting
+nothing. What grows is not the rule (2 lines, permanent) but the **incident narrative**
+attached to it (4–6 lines, and it is load-bearing — knowing what a check is *for* is what
+lets you apply it to a case it was not written for). That is a real trade-off, not a defect.
+The displacement rule prices it; an expiry date would shred the half worth keeping.
 
 ### How to present results to the owner
 

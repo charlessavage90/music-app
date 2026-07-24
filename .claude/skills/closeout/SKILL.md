@@ -1,6 +1,6 @@
 ---
 name: closeout
-description: Post-execution hygiene ritual for artistpath. Run this after finishing any significant chunk of development work — a completed phase, a plan executed to its last task, a track of work about to be merged, or a long session about to be retired. Use it whenever the user says a phase or plan is done, asks to wrap up or close out work, is about to merge a development branch, or is handing work to a fresh session. Also use it proactively when you are the session that just finished substantial work and are about to end. This is mechanical hygiene, not a code review — it takes about half an hour and answers yes/no questions only.
+description: Post-execution hygiene ritual for artistpath. Run this after finishing any significant chunk of development work — a completed phase, a plan executed to its last task, a track of work about to be merged, or a long session about to be retired. Use it whenever the user says a phase or plan is done, asks to wrap up or close out work, is about to merge a development branch, or is handing work to a fresh session. Also use it proactively when you are the session that just finished substantial work and are about to end. Use its mid-flight scaling when a session is being retired before its work reaches a natural seam — the owner says to hand over now, or the degradation tell fires (being asked for figures it already computed, an item dropping out of a tracking document, or revising a firm claim under mild questioning with no new information). This is mechanical hygiene, not a code review — it takes about half an hour and answers yes/no questions only.
 ---
 
 # Closeout
@@ -65,6 +65,41 @@ Thirty lines, aimed at a session that has never seen this work:
 
 That last line is the important one. If it comes back non-empty, the retained log has
 a hole and the note is the patch — fold it in rather than leaving it in a scratch file.
+
+#### A2-mid — when the retirement is mid-flight rather than at a seam
+
+**The last bullet changes form.** "What you know that is not in the durable record" is a
+self-report. It works at a seam, because the session is intact. But a mid-flight retirement
+is usually triggered by the opposite: the degradation tell in `CLAUDE.md` is a
+**completeness** failure, so the session's judgement about what is complete is precisely
+the faculty you have stopped trusting. Ask it to certify itself and you get a confident
+"everything's captured," and you lose whatever nobody thought to ask about.
+
+Replace the judgement with an enumeration. Ask for lists, not assessments:
+
+- **Every number computed that is not written down somewhere.** Enumerate; do not filter
+  for relevance. Being *asked* for a figure it already had is the named tell, so this is
+  the first place to look.
+- **Everything decided against, and why** — including options entertained for a moment and
+  dropped. Negative decisions leave no artifact and evaporate first. The successor
+  re-derives them, or does the rejected thing.
+- **Anything the owner said in conversation that is not yet in a file.** This has cost
+  something real here: the F3/F6 bypass URLs were recorded as living in the PR thread, and
+  no PR carried a comment. The deferral was accepted on the strength of a durable copy that
+  was never made.
+
+Two categories a seam-time closeout never needs, because at a seam the work concluded:
+
+- **The open decision** — the options, and **what you would do if you were continuing.**
+  Not "the owner's call." A successor inheriting a position can argue with it; one
+  inheriting a menu has to redo the reasoning that produced the menu.
+- **Anything in flight** — dispatched subagents, background jobs, half-written directories.
+  A cold session that finds an unexplained partial artifact in the tree cannot tell
+  abandoned from running, and will usually guess wrong in the expensive direction.
+
+**Do not settle the open question on the way out.** The pull to resolve one last thing so
+the handoff looks tidy is strong, and retirement is the worst moment to decide anything: a
+shaky conclusion reached while packing up enters the record as settled.
 
 ### A3. Give every deferred finding an address
 
@@ -275,6 +310,12 @@ This repo ignores more than is obvious:
 If work touched anything near those paths, `git status --ignored` over them takes
 seconds and prevents a silent loss.
 
+**Mid-flight exception — D1 inverts.** If work is being handed over rather than finished,
+the tree is *supposed* to be dirty, and cleaning it destroys the state the successor needs.
+Commit what is coherent, then **name every remaining untracked path in the handoff note:
+what it is, who wrote it, and whether it is still being written.** An unexplained partial
+directory is exactly what makes a cold session guess.
+
 ### D2. Regenerate committed fixtures if the artifact changed
 
 `tests/fixtures/*.bin` are the only binaries in git, and **both packages carry a copy**.
@@ -322,6 +363,38 @@ The PR body is where a reviewer picks up the context, so it carries:
   reasoning recorded. Without this, review reopens settled questions, which is expensive
   and demoralising
 
+### D6. The standing context layer is displacement-only
+
+```bash
+git diff --stat <base>..HEAD -- CLAUDE.md .claude/skills/ .claude/agents/
+```
+
+Record the net line change in the retained log. **If it is positive, the commit message
+names what the addition replaces or shortens — or states that it is net-new and why nothing
+came out.** Net-new is legitimate; unexamined is not.
+
+This layer loads before a session reads anything else, so it is the only one where growth is
+unconditional. `docs/` routes around its own bulk — half the corpus is COMPLETE plans that
+cost nothing — and that is why the corpus is not the problem. In two days this layer went
+661 → 1,436 lines while every individual addition was justified, which is the failure mode:
+the asymmetry is invisible per-commit and only visible in the total.
+
+Two traps, both already sprung here:
+
+- **Budget the layer, not a file.** A soft ceiling was once proposed on `CLAUDE.md` alone.
+  It was never adopted, and in the same period `CLAUDE.md` grew 38% while `session-start`
+  — unbudgeted, and the file whose own text promises "five minutes" — grew **53%**. Naming
+  one file relocates growth to the next one.
+- **The check is on the addition, not on a threshold.** A line count recorded against a
+  limit produces a number with no owner, read by nobody, at the moment the session that
+  added the lines is least motivated to act on it. Displacement fires at the point of
+  addition, in the artifact that records it, and is checkable from a diff.
+
+**Do not respond to a positive delta by giving rules expiry dates.** See `CLAUDE.md`,
+"Two rituals bracket every chunk of work" — rules here are invariants; the growth is in the
+narrative attached to them, and that narrative is what makes a rule transfer to a case it
+was not written for.
+
 ---
 
 ## Two standing rules
@@ -360,8 +433,22 @@ format, or the cost function.
 reachability, use it, clean tree. Half an hour combined, and they catch most of what
 matters.
 
-Part D runs every time regardless of size. A dirty tree or an unopened PR is not a
-judgement call.
+**Mid-flight retirement**, when a session is being handed over before its work reaches a
+natural seam — A1, **A2-mid**, A3, B1, B5, **D1-mid**, D3, **D6**. D6 belongs here
+specifically: a mid-flight handoff usually happens *because* a governing document changed,
+so the standing-layer delta is both non-zero and exactly what the successor needs recorded.
+
+B2 (reachability), B3 (vacuous tests) and B4 (prose-versus-code) all want a finished
+artifact; run against something half-built they produce noise and false alarms, so they
+**travel with the work to the successor** rather than being run now. B1 and B5 stay, and
+matter more than usual: a mid-flight handoff normally happens because a governing document
+just changed, which is exactly when descriptions elsewhere go stale. A4 is usually
+inapplicable — unshipped work is the premise, not a defect — but say so rather than
+skipping it silently.
+
+Part D runs every time regardless of size, with D1 inverted per its mid-flight exception.
+An unopened PR is not a judgement call; a dirty tree is one only when it is handed over
+explained.
 
 ## What this is not
 
