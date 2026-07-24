@@ -896,3 +896,74 @@ their own; they are documentation hygiene, not Track 2 experimental work.
 |---|---|---|---|
 | **Supersede Phase 1 log §2** — its correction notices now exceed its live content; write a short successor stating the surviving position, mark the original HISTORICAL, retain for audit | It is a live citation target for the in-flight Track 2 pre-registration; rewriting it mid-experiment risks a retraction, not a cleanup | **Track 2 adoption recorded** in this log | A short doc-editing session acting on the next `doc-auditor` (B1) report — **not** a Track 2 worker; minimum-scaling close |
 | **Relocate `CLAUDE.md` "Writing and reviewing plans here"** (~107 lines, 23% of the file) out of the standing layer, behind a pointer + the factor-table rule inline | It is the worked example the Track 2 pre-registration cites; moving it while the experiment is read cold by an incoming worker is the same timing hazard | **Track 2 adoption recorded** in this log | Same doc-editing session; this is the offsetting subtraction for the +lines D6 will show at this handoff |
+
+---
+
+### Closeout B1 — doc-auditor (2026-07-24, fresh session)
+
+Ran as the handoff's stated first action. Two HIGH defects, both verified against source,
+both genuinely open (not live citation targets), both fixed (commit `5dbd9eb`):
+
+- **`docs/README.md` did not list `2026-07-24-HANDOFF-track2.md`**, and still described the
+  2026-07-23 handoff as ACTIVE. A cold session reading the map would have missed the newer
+  handoff. Added the row; marked the 2026-07-23 one SUPERSEDED.
+- **`WHAT-GOOD-LOOKS-LIKE.md` (AUTHORITATIVE) still used `hubfrac`** (pre-2026-07-23 name)
+  at two points describing the payload companion metric. Renamed to `top1pct_degree_frac`.
+
+MEDIUM/LOW findings left as-is and reported to owner, not actioned: stale names in the
+frozen Phase-1/Phase-2 logs (deliberate; Phase 1 log §2 is the deferred citation target
+above), the pre-registration's amendment-table order (cosmetic, in-flight citation target),
+and a handoff-sequencing non-issue.
+
+### P4 fallback RESOLVED — Wikipedia pageviews FAILS §5 on coverage; terminal fallback reached (2026-07-24)
+
+Built and ran the pre-registered second proxy. Figures owned by
+`builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/` (README + `score.json`).
+**Committed before any narration** (`7cbc31d`) — the falsifiers were pre-registered.
+
+**Result: one falsifier fires, and it is the coverage one — but Wikipedia passes the two
+Deezer failed.** AUC 0.720 (clear; Deezer 0.68), 0 catastrophic inversions outside S4
+(clear; Deezer 2), valid B_unk — but **match failure 9 of 29 (31 %) fires** (> 6 of 29).
+**The two proxies are unfit for opposite reasons:** Deezer sees everyone and misranks the
+mid-fame band; Wikipedia ranks well but is blind to the obscure tail — 8 of the 9 failures
+are the S1 lo-fi/synthwave stratum, which is *exactly* the band Track 2 must reach (F2).
+An artist absent from English Wikipedia is the kind of artist the sweep wants to route
+toward, so a proxy that cannot score that stratum cannot set C1/C2's reach criteria however
+well it ranks the rest. The coverage falsifier measures the real deficiency; it is **not
+argued away**, mirror-image to Deezer's near-miss AUC not being argued away.
+
+**All 9 failures verified genuine** (audited: for each, no opensearch candidate satisfies
+identity + performer + musicality). Miami Nights 1984 has no article at all; `idealism`
+resolves only to the philosophy concept and an unrelated album; the rest resolve only to
+wrong-spelling/wrong-entity candidates the identity clause correctly rejects (CROOVE →
+Russell Crowe, sleepy fish → Johnny Pearson, Leavv → an Italian film).
+
+**The resolver, and two corrections caught before any score was computed** (both
+identity-directed, not outcome-directed — the AUC was not looked at until the resolver was
+correct; this matters for the pre-registration discipline):
+
+1. `--probe` (out-of-sample, §0 discipline) killed the **bare-top-hit** rule: Portishead
+   and Sault resolve to the *town*, so a strict top-hit fails famous acts whose name is a
+   place — biasing against fame, fatal for an AUC test.
+2. The first sample run killed **musicality-alone**: it accepted fuzzy garbage that happens
+   to be musical. Fixed with an **identity** clause (the Wikidata entity must actually carry
+   the query name as a label/alias in any language — which also lets 林俊傑 → JJ Lin via its
+   zh alias) and a **performer** clause defined by *excluding works* rather than
+   whitelisting band types (a whitelist wrongly rejected Wishbone Ash, typed "rock band").
+
+**`score.py` was parametrised, not duplicated** (`--counts/--labels/--value-key/--out`);
+defaults reproduce the Deezer `score.json` **byte-identical** (verified via `git diff`), so
+the four falsifiers are computed by the same code for both proxies. This also makes the
+handoff's claim that `score.py` was "already proxy-agnostic" literally true — it was not
+(the paths and the `nb_fan` key were hardcoded); a small over-claim, recorded because "I
+checked" vs "I asserted" is the §2.13 distinction.
+
+**Where this leaves Track 2 — the terminal fallback, and it is the owner's call.** Both
+pre-registered proxies have now fired at least one §5 falsifier. Per §5 the terminal
+fallback is **owner-labelling of the evaluated-path artists only** (bounded: the sweep
+touches at most a few hundred distinct interiors; labels reusable across arms), with C1
+degrading to the labelled ordinal scale. **That spends real owner time and is his
+decision** — put to him, **not entered**. No sweep arm has run; still open beyond P4 are P6
+percentile machinery, the C1–C6 harness, and the D4/D6/D7 + C3-anchor amendment. Adopted
+artifact untouched, sha256 `4cb84ef9…b061dc8`. Snyk clean on the new code and the modified
+`score.py`.
