@@ -39,7 +39,15 @@ review the A0 gate. **It completed**, its findings doc and scripts are committed
 **not** resume it. The harness note says a resumed agent can re-notify under the same task
 id; if a notification arrives for it, it is not new work.
 
-**No uncommitted files. No stashes.** Working tree clean at `d2aab59`.
+**No stashes. Everything this session produced is committed and pushed.**
+
+**But the tree is not clean:** three files carry **the owner's own in-flight edits**, made
+while this handoff was being written and deliberately **not** committed here —
+`CLAUDE.md`, `.claude/skills/closeout/SKILL.md`, `.claude/skills/session-start/SKILL.md`.
+(An earlier round of his `CLAUDE.md` rules *was* committed, at `d2aab59`, on his
+instruction; these are further edits on top.) **Do not sweep them into a commit of your
+own** — `git add -A` is how another session's work gets absorbed, and this repo has had
+two sessions live in one tree before. Ask before committing them.
 
 **The one half-built thing:** `builder/analysis/2026-07-23-track2-sweep/` holds the mirror
 (`mirror.py`), its gate (`verify_mirror.py`) and the A0 runner (`run_a0.py`). It has **no
@@ -142,7 +150,7 @@ minimum (The Hives, 0.9773) and a partial name list reached the README.
 |---|---|
 | Branch | `track2-prereg-amendments`, off `main` at `fa520c6` |
 | Pushed | **Yes**, tracking `origin/track2-prereg-amendments` |
-| Working tree | **Clean** — no uncommitted files, no stashes |
+| Working tree | **Not clean** — three files carry the *owner's* uncommitted in-flight edits (`CLAUDE.md`, `.claude/skills/closeout/SKILL.md`, `.claude/skills/session-start/SKILL.md`). Nothing of this session's is uncommitted. See §2 — do not sweep them into a commit. |
 | HEAD | `d2aab59` |
 | PR | **#9, OPEN, DRAFT.** Title and body cover only the first commit's scope and are stale — see 1e |
 
