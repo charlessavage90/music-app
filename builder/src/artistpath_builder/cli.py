@@ -19,6 +19,11 @@ import sys
 import time
 from pathlib import Path
 
+from artistpath_builder.acceptance import (
+    PRODUCTION_ACCEPTANCE,
+    AcceptanceCriteria,
+    check_acceptance,
+)
 from artistpath_builder.archive import LocalArchive, S3Archive
 from artistpath_builder.artifact import deserialise, serialise
 from artistpath_builder.config import BuilderConfig
@@ -106,6 +111,11 @@ def cmd_build(args) -> int:
     config = _config(args)
     started = time.monotonic()
     graph = build_from_archive(config, _archive(args), ListenBrainzSource(config))
+    # Refuse to write an artifact with the log §2.8 failure signature. This is
+    # the emission point, and nothing downstream re-checks: the artifact is
+    # gitignored, so a bad one is only ever caught by a human noticing a
+    # missing artist. Raises rather than warns, by design.
+    check_acceptance(graph, getattr(args, "criteria", PRODUCTION_ACCEPTANCE))
     payload = serialise(graph)
     elapsed = time.monotonic() - started
     out = Path(args.out)
@@ -133,7 +143,18 @@ def cmd_fixture(args) -> int:
     return 0
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(
+    argv: list[str] | None = None,
+    *,
+    criteria: AcceptanceCriteria = PRODUCTION_ACCEPTANCE,
+) -> int:
+    """`criteria` is deliberately NOT an argparse flag.
+
+    There is no way for a user to relax or skip the acceptance check from the
+    command line — an escape hatch on this guard would be the first thing
+    reached for when a build fails, which is exactly when it must hold. Tests
+    substitute scaled-down criteria by calling `main` in-process.
+    """
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     parser = argparse.ArgumentParser(prog="artistpath-build")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -169,6 +190,7 @@ def main(argv: list[str] | None = None) -> int:
     p_fixture.set_defaults(func=cmd_fixture)
 
     args = parser.parse_args(argv)
+    args.criteria = criteria
     return args.func(args)
 
 

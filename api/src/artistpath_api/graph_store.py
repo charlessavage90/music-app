@@ -24,25 +24,47 @@ class GraphStore:
     mbids: list[str]
     names: list[str]
     disambiguations: list[str]
-    popularity: np.ndarray  # float32, 0-1
+    # Popularity as stored: log-scaled score-weighted in-degree in 0-1. NOT a
+    # percentile — the gap between the two is large at the top of the
+    # distribution (Phase 1 log §2.12), which is why the basis is in the name.
+    pop_raw: np.ndarray  # float32, 0-1
     offsets: np.ndarray     # int32, length N+1
     neighbours: np.ndarray  # int32, length E
     scores: np.ndarray      # float32, length E
     id_by_mbid: dict[str, int] = field(default_factory=dict)
-    hub_penalty: np.ndarray | None = None  # float32 0-1, computed if not given
+    # Derived from DEGREE, not from popularity and not from fame (log §2.6).
+    degree_hub_penalty: np.ndarray | None = None  # float32 0-1, computed if not given
 
     def __post_init__(self) -> None:
         if not self.id_by_mbid:
             self.id_by_mbid = {mbid: i for i, mbid in enumerate(self.mbids)}
-        if self.hub_penalty is None:
-            self.hub_penalty = self._compute_hub_penalty()
+        if self.degree_hub_penalty is None:
+            self.degree_hub_penalty = self._compute_degree_hub_penalty()
 
-    def _compute_hub_penalty(self) -> np.ndarray:
+    # Read-only aliases under the pre-2026-07-23 names. The frozen probe
+    # scripts in builder/analysis/ import this class and read these attributes;
+    # they are deliberate records of what was executed and are not updated, so
+    # the old names must keep resolving. New code uses the explicit names —
+    # these are properties, so nothing can be written through them.
+    # Mapping table: builder/analysis/README.md.
+    @property
+    def popularity(self) -> np.ndarray:
+        return self.pop_raw
+
+    @property
+    def hub_penalty(self) -> np.ndarray | None:
+        return self.degree_hub_penalty
+
+    def _compute_degree_hub_penalty(self) -> np.ndarray:
         """Per-node hub-ness in 0-1, for the cost function's anti-hub term.
 
-        Log-scaled degree, zeroed at or below the median and rising to 1.0 at
+        Log-scaled DEGREE, zeroed at or below the median and rising to 1.0 at
         the biggest hub — so typical/obscure artists carry no penalty and only
-        the famous crossroads are made expensive to route through.
+        the high-degree crossroads are made expensive to route through.
+
+        Degree, not fame: log §2.6 records that the top-1%-by-degree set is
+        largely insular micro-genre artists, so a high penalty here means
+        "non-insular-cluster-member", NOT "famous".
         """
         degrees = np.diff(self.offsets).astype(np.float64)
         log_deg = np.log1p(degrees)
@@ -91,7 +113,10 @@ class GraphStore:
             mbids=meta["mbids"],
             names=meta["names"],
             disambiguations=meta["disambiguations"],
-            popularity=np.asarray(meta["popularity"], dtype=np.float32),
+            # "popularity" is the APG1 wire key and cannot be renamed without
+            # invalidating every existing artifact — the format is the
+            # builder/api contract. Only the in-memory name carries the basis.
+            pop_raw=np.asarray(meta["popularity"], dtype=np.float32),
             offsets=offsets,
             neighbours=neighbours,
             scores=scores,

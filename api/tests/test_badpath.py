@@ -5,13 +5,13 @@ from tests.conftest import make_store
 
 def _store_with_disambiguations(names, disambiguations, undirected_edges):
     base = make_store(
-        names=names, popularity=[0.5] * len(names), undirected_edges=undirected_edges
+        names=names, pop_raw=[0.5] * len(names), undirected_edges=undirected_edges
     )
     return GraphStore(
         mbids=base.mbids,
         names=base.names,
         disambiguations=list(disambiguations),
-        popularity=base.popularity,
+        pop_raw=base.pop_raw,
         offsets=base.offsets,
         neighbours=base.neighbours,
         scores=base.scores,
@@ -54,7 +54,7 @@ def test_does_not_flag_a_special_purpose_ENDPOINT():
 def test_flags_a_hop_with_no_common_neighbours():
     # 0-1 and 1-2 are adjacent but 1-2 share nothing: a leap with no context.
     store = make_store(
-        names=list("ABCD"), popularity=[0.5] * 4,
+        names=list("ABCD"), pop_raw=[0.5] * 4,
         undirected_edges=[(0, 1, 0.9), (0, 3, 0.9), (1, 3, 0.9), (1, 2, 0.9)],
     )
     report = screen_path(store, [0, 1, 2])
@@ -75,7 +75,7 @@ def test_flags_three_consecutive_nodes_from_one_micro_cluster():
         for b in [1, 2, 3, 6, 7][i + 1 :]
     ]
     store = make_store(
-        names=list("ABCDEFGH"), popularity=[0.5] * 8,
+        names=list("ABCDEFGH"), pop_raw=[0.5] * 8,
         undirected_edges=[
             (0, 1, 0.9), *clique,
             (3, 4, 0.9), (4, 5, 0.9), (0, 5, 0.9), (0, 4, 0.9),
@@ -87,7 +87,7 @@ def test_flags_three_consecutive_nodes_from_one_micro_cluster():
 
 def test_does_not_flag_a_clean_path():
     store = make_store(
-        names=list("ABCD"), popularity=[0.5] * 4,
+        names=list("ABCD"), pop_raw=[0.5] * 4,
         undirected_edges=[
             (0, 1, 0.9), (1, 2, 0.9), (2, 3, 0.9), (0, 2, 0.5), (1, 3, 0.5),
         ],
@@ -99,7 +99,7 @@ def test_does_not_flag_a_clean_path():
 
 def test_short_paths_are_never_flagged():
     store = make_store(
-        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
+        names=list("AB"), pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
     )
     assert screen_path(store, [0, 1]).flagged is False
 

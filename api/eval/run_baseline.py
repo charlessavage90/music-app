@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from artistpath_api.config import ApiConfig
 from artistpath_api.evaluation import (
     PathMetrics,
-    hub_node_set,
+    top_degree_node_set,
     path_metrics,
     summarise,
 )
@@ -48,7 +48,7 @@ def load_or_freeze_hub_set(store: GraphStore) -> set[int]:
     if HUB_SET_CACHE.exists():
         mbids = json.loads(HUB_SET_CACHE.read_text(encoding="utf-8"))
         return {store.id_by_mbid[m] for m in mbids if m in store.id_by_mbid}
-    nodes = hub_node_set(store, 0.01)
+    nodes = top_degree_node_set(store, 0.01)
     HUB_SET_CACHE.write_text(
         json.dumps(sorted(store.mbids[i] for i in nodes)), encoding="utf-8"
     )
@@ -61,11 +61,11 @@ def main() -> int:
 
     store = GraphStore.load(graph_path)
     panel = load_panel(Path(__file__).parent / "panel.json")
-    hub_nodes = load_or_freeze_hub_set(store)
+    top1pct_degree_nodes = load_or_freeze_hub_set(store)
 
     full_cfg = ApiConfig()
     # w_jump = 0 removes the popularity channel entirely: w_floor is a proven
-    # no-op and w_hub is dormant, so cost reduces to w_sim*(1-sim) + w_hop.
+    # no-op and w_degree_hub is dormant, so cost reduces to w_sim*(1-sim) + w_hop.
     # Popularity is derived from the scores, so it is NOT frozen across arms
     # even with identical weights (spec §6.1).
     no_jump_cfg = dataclasses.replace(full_cfg, w_jump=0.0)
@@ -76,7 +76,7 @@ def main() -> int:
     # here, applied at Task 15 adjudication: a hubfrac gain coinciding with a
     # large fall in either number is definitional, not behavioural, and fails
     # criterion 3. No threshold is coded — see frozen_hub_diagnostics' docstring.
-    hub_diag = frozen_hub_diagnostics(store, hub_nodes)
+    hub_diag = frozen_hub_diagnostics(store, top1pct_degree_nodes)
     output["frozen_hub_diagnostics"] = hub_diag
     print(
         f"{label:22s} frozen hubs present={hub_diag['frozen_hubs_present']:3d} "
@@ -97,7 +97,7 @@ def main() -> int:
                 path = find_path(store, a, b, [], cfg)
                 if not path or len(path) < 3:
                     continue
-                m = path_metrics(store, path, hub_nodes)
+                m = path_metrics(store, path, top1pct_degree_nodes)
                 metrics.append(m)
                 per_pair.append(
                     {

@@ -22,16 +22,30 @@ class Exclusion:
     reason: str  # DISLIKE or KNOWN
 
 
-def effective_floor(base_floor: float, excludes: list[Exclusion], cfg: ApiConfig) -> float:
+def effective_floor_raw(
+    base_floor_raw: float, excludes: list[Exclusion], cfg: ApiConfig
+) -> float:
     """Soften the obscurity floor as the user keeps bypassing (spec 4.3).
 
     Each successive bypass lifts the floor globally, letting the path reach
     less famous artists. "Known" relaxes more than "dislike": knowing the
     artists means the popular route is exhausted and novelty is the goal.
+
+    Floor and relaxation are both in RAW popularity units, not percentile —
+    a fixed raw step is a very different distance at the top of the
+    distribution than in the tail (log §2.12).
+
+    This is also the only depth-graduated device in the cost function:
+    everything else is static per request, and only the exclusion set and this
+    floor know how many bypasses have happened.
     """
     n_known = sum(1 for e in excludes if e.reason == KNOWN)
     n_dislike = sum(1 for e in excludes if e.reason == DISLIKE)
-    relaxed = base_floor - cfg.floor_relax_known * n_known - cfg.floor_relax_dislike * n_dislike
+    relaxed = (
+        base_floor_raw
+        - cfg.floor_relax_known * n_known
+        - cfg.floor_relax_dislike * n_dislike
+    )
     return max(0.0, relaxed)
 
 
@@ -77,8 +91,8 @@ def find_path(
     # Hard exclusions skip nodes entirely, but never the endpoints themselves.
     hard = {e.node for e in excludes} - {source, target}
 
-    base_floor = min(float(store.popularity[source]), float(store.popularity[target]))
-    floor = effective_floor(base_floor, excludes, cfg)
+    base_floor_raw = min(float(store.pop_raw[source]), float(store.pop_raw[target]))
+    floor_raw = effective_floor_raw(base_floor_raw, excludes, cfg)
     avoid = avoidance_map(
         store, [e.node for e in excludes if e.reason == DISLIKE], cfg
     )
@@ -93,17 +107,21 @@ def find_path(
             break
         if d > dist.get(u, float("inf")):
             continue
-        pop_u = float(store.popularity[u])
+        pop_raw_u = float(store.pop_raw[u])
         for v, sim in store.neighbours_of(u):
             if v in hard:
                 continue
-            pop_v = float(store.popularity[v])
+            pop_raw_v = float(store.pop_raw[v])
+            # Every popularity term here is in RAW currency. A percentile
+            # variant is the subject of the Track 2 sweep
+            # (specs/2026-07-23-track2-preregistration.md §1.3); if one is
+            # adopted, the new quantities carry `pctl` in their names.
             cost = (
                 cfg.w_sim * (1.0 - float(sim))
-                + cfg.w_jump * abs(pop_u - pop_v)
-                + cfg.w_floor * max(0.0, floor - pop_v)
+                + cfg.w_jump * abs(pop_raw_u - pop_raw_v)
+                + cfg.w_floor * max(0.0, floor_raw - pop_raw_v)
                 + cfg.w_avoid * avoid.get(v, 0.0)
-                + cfg.w_hub * float(store.hub_penalty[v])
+                + cfg.w_degree_hub * float(store.degree_hub_penalty[v])
                 + cfg.w_hop
             )
             nd = d + cost

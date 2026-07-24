@@ -7,11 +7,12 @@ import pytest
 from artistpath_api.graph_store import GraphStore
 
 
-def _write_apg1(path, mbids, names, disambiguations, popularity,
+def _write_apg1(path, mbids, names, disambiguations, pop_raw,
                 offsets, neighbours, scores):
+    # "popularity" is the wire key and stays; `pop_raw` is what it holds.
     meta = json.dumps(
         {"mbids": mbids, "names": names,
-         "disambiguations": disambiguations, "popularity": popularity},
+         "disambiguations": disambiguations, "popularity": pop_raw},
         separators=(",", ":"), ensure_ascii=False,
     ).encode("utf-8")
     header = struct.pack("<4sIIIQ", b"APG1", 1, len(mbids), len(neighbours), len(meta))
@@ -34,7 +35,7 @@ def test_load_round_trips_a_small_graph(tmp_path):
         mbids=["a" * 36, "b" * 36, "c" * 36],
         names=["Alpha", "Beta", "Gamma"],
         disambiguations=["UK band", "", ""],
-        popularity=[0.9, 0.5, 0.1],
+        pop_raw=[0.9, 0.5, 0.1],
         offsets=[0, 1, 3, 4],
         neighbours=[1, 0, 2, 1],
         scores=[0.8, 0.8, 0.6, 0.6],
@@ -44,7 +45,7 @@ def test_load_round_trips_a_small_graph(tmp_path):
     assert g.names[1] == "Beta"
     assert g.disambiguations[0] == "UK band"
     assert g.id_by_mbid["c" * 36] == 2
-    assert g.popularity.dtype == np.float32
+    assert g.pop_raw.dtype == np.float32
 
 
 def test_neighbours_of_yields_id_and_score(tmp_path):
@@ -74,7 +75,7 @@ def test_bad_magic_is_rejected(tmp_path):
         GraphStore.load(p)
 
 
-def test_hub_penalty_is_higher_for_higher_degree(tmp_path):
+def test_degree_hub_penalty_is_higher_for_higher_degree(tmp_path):
     # Node 0 has degree 3 (hub-ish), leaves have degree 1.
     p = tmp_path / "g.bin"
     _write_apg1(
@@ -84,5 +85,5 @@ def test_hub_penalty_is_higher_for_higher_degree(tmp_path):
         scores=[0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
     )
     g = GraphStore.load(p)
-    assert g.hub_penalty[0] >= g.hub_penalty[1]
-    assert 0.0 <= g.hub_penalty.min() and g.hub_penalty.max() <= 1.0
+    assert g.degree_hub_penalty[0] >= g.degree_hub_penalty[1]
+    assert 0.0 <= g.degree_hub_penalty.min() and g.degree_hub_penalty.max() <= 1.0

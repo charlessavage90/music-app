@@ -56,7 +56,8 @@ that is how the drift began.
     correctly and declines them.
   - **Three quantities that are not interchangeable** and have each caused an error here:
     **degree ≠ fame** (§2.6), **popularity ≠ fame** at the top of the distribution (§2.11),
-    and **raw popularity ≠ percentile** (§2.12). Do not trust any `hubfrac`/payload figure,
+    and **raw popularity ≠ percentile** (§2.12). Do not trust any
+    `top1pct_degree_frac` (named `hubfrac` before 2026-07-23) or payload figure,
     and check which currency a claim is in before acting on it.
   - **Decided 2026-07-23:** the owner chose **repair + retune** — governing design
     `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md`; its §1
@@ -105,6 +106,7 @@ that is how the drift began.
 | `superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` | Gate structure and phase ordering. Its C4 is a pointer only — it holds no figures. |
 | `superpowers/findings/2026-07-23-tiebreak-fix-adoption.md` | Identity (sha256) and verification record of the **adopted** 75k artifact, post tie-break fix. |
 | `superpowers/findings/2026-07-22-configuration-model-null.md` | Authoritative for its own figures — the exact configuration-model null referenced by Phase 1 log §2.10/§7.1 item 1. |
+| `superpowers/findings/2026-07-23-track2-protocol-analyst-review.md` | **AUTHORITATIVE for its own §2 measurements; ADVISORY on the protocol.** The `ml-graph-analyst` review of the Track 2 pre-registration, discharging its prerequisite **P8** and the design's §4.6 review gate. Verifies the pre-registration's §0 resolution table **in code**, and raises numbered protocol observations (O-series) and recommendations (PR-series) that the Track 2 session must read before running any arm. Scope is the **protocol only** — the harness is a separate review (P8b). Remit is derivation, not judgement: it says nothing about whether the experiment is worth running. Measurements: `builder/analysis/2026-07-23-track2-protocol-review/`. |
 | `../CLAUDE.md` | How to work in this repo: commands, architecture, conventions. |
 
 ### Active
@@ -117,7 +119,9 @@ that is how the drift began.
 | `superpowers/2026-07-22-HANDOFF-phase1.md` | Written at Phase 2 closeout for a cold session: what was overturned and must not be reverted, and what the previous session knew that is not otherwise in the record. **Superseded on Phase 1 status by the log above** — that document governs where they disagree. Still valid on Phase 2 outcomes. |
 | `superpowers/TEST-QUEUE.md` | The async **use-the-app queue**. `closeout` appends; `session-start` reads it and flags stale entries. Catches the defect class tests structurally cannot. |
 | `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` | **The governing design for resuming Phase 1** (owner-approved 2026-07-23). Track 1: builder fix for the §2.8 tie-break, rebuild, adopt by structural equivalence. Track 2: cost-function retune (currencies included) on the repaired graph, `known` mechanism, one blind listen. Records the owner's 2026-07-23 decisions in §1. |
-| `superpowers/2026-07-23-repair-and-retune-execution-log.md` | Retained execution log for the repair+retune work. Track 1 record; Track 2 continues it. |
+| `superpowers/2026-07-23-repair-and-retune-execution-log.md` | Retained execution log for the repair+retune work. Track 1 record, the pre-Track-2 guards, and Track 2 continues it. |
+| `superpowers/specs/2026-07-23-track2-preregistration.md` | **The Track 2 pre-registration.** Fixes the factor table, primary outcome, effect sizes, pair set, and the read of every possible result *including the null*, before any arm runs — the commit timestamp is the evidence it came first. Where it disagrees with the repair+retune design spec it says so inline (its §8 indexes the five disagreements); those are design corrections, not scope changes. Also the worked example for two CLAUDE.md rules (dormant-term check, pre-registration gate). Its §7 lists prerequisites P1–P8, which block running arms, not writing the plan. |
+| `superpowers/plans/2026-07-23-pre-track2-guards.md` | Six structural guards (G1–G6) that had to land between the pre-registration and the Track 2 sweep. **Executed 2026-07-23; do not execute again.** Outcomes in the repair+retune execution log under "Pre-Track-2 guards". |
 
 ### Complete
 

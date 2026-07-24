@@ -10,7 +10,7 @@ from tests.conftest import make_store
 def _client(cfg):
     store = make_store(
         names=["Radiohead", "Muse", "Coldplay"],
-        popularity=[0.9, 0.7, 0.8],
+        pop_raw=[0.9, 0.7, 0.8],
         undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (0, 2, 0.3)],
     )
     search = ArtistSearch(store, cfg)

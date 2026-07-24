@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | **Which documents can I trust?** | [`docs/README.md`](docs/README.md) — the documentation map. It classifies every doc by role and names which are superseded. **Read it before citing anything in `docs/`.** |
 | **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks 27 prior claims upheld/overturned/unresolved. |
 | **What is the next action?** | **Track 2 of the repair+retune design** — the cost-function retune. Read `docs/superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §4 and the execution log `docs/superpowers/2026-07-23-repair-and-retune-execution-log.md`. Track 1 (the §2.8 tie-break fix) is DONE and adopted — artifact identity in `docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`. The Phase 1 log's §2 remains the defect record; its §2.12 diagnosis (cost-function problem, not graph problem) is what Track 2 acts on. |
-| **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `hubfrac`, "payload", `hub_penalty`, `w_hub` are all top-1%-by-*degree*); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile** — see §2.12 for the extent of the gap. Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** |
+| **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `top1pct_degree_frac`, "payload", `degree_hub_penalty`, `w_degree_hub` are all top-1%-by-*degree*; they were named `hubfrac` / `hub_penalty` / `w_hub` until 2026-07-23, and older documents and every script under `builder/analysis/` still say so — mapping in `builder/analysis/README.md`); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile** — `pop_raw` is a value, never a rank; see §2.12 for the extent of the gap. Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
 | **What does the owner mean by "better"?** | `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — calibration for the blind listening test, this project's strongest evidence class. Read it before running one or interpreting a verdict. It records **preference, not evidence** — never treat it as criteria. |
@@ -128,6 +128,36 @@ was a deliberate choice (see `docs/superpowers/findings/`): every external popul
 source imported a population mismatch with the similarity graph. It's then log-scaled
 to 0–1 because raw counts are power-law distributed.
 
+### Quantities carry their currency in their name
+**Any popularity- or degree-derived quantity in shipped code names its basis in its
+identifier.** `pop_raw` is the stored 0–1 value; `pop_pctl` is reserved for a
+percentile and must not be used for anything else. Degree-derived quantities say
+*degree* — `degree_hub_penalty`, `w_degree_hub`, `top1pct_degree_frac`,
+`top_degree_node_set`. This is not tidiness: reading one of these currencies as another
+has produced three separate wrong conclusions here (§2.6, §2.11, §2.12 of the Phase 1
+log). **New quantities follow the convention** — in particular the percentile machinery
+a Track 2 adoption would add.
+
+Two names are exempt because they are **wire contracts, not identifiers**: the `popularity`
+key in the APG1 metadata blob (renaming it invalidates every existing artifact) and the
+`popularity` field in the API's JSON response (the frontend consumes it). Both are
+commented at their definition.
+
+Shipped code also keeps a few **read-only aliases** under the pre-2026-07-23 names, purely
+so the frozen probe scripts in `builder/analysis/` keep executing. Never write new code
+against an alias; the mapping table is `builder/analysis/README.md`. They are deferred for
+removal, not permanent — condition in the repair+retune execution log.
+
+**A rename's blast radius includes every document that *describes* the quantity, not only
+those that *use the name*.** So the check after renaming is **not** "does the old
+identifier still appear anywhere" — it is "does every place that should describe this
+quantity still describe it correctly, **including by omission**." A grep for stale names
+cannot find a name that is not there. This is not hypothetical: the 2026-07-23 rename left
+`.claude/agents/ml-graph-analyst.md` describing the cost function with a whole term
+missing, and the sweep that searched `.claude/` for stale identifiers passed it clean,
+because the defect was the absence. That half cannot be mechanised, which is the argument
+**for** the `doc-auditor` step in `closeout`, not against it.
+
 ### Graph shape
 Similarity is not mutual, so edges are first filtered by **mutual k-NN** — an edge
 survives only if each endpoint ranks the other in its top-k — then **symmetrised** (keep
@@ -145,12 +175,15 @@ boot; path queries touch no database and no network. `edge_types` is written but
 in alpha (all edges behavioural). Versioned in S3 in production — **never a database**.
 
 ### Pathfinding (api, `pathfinding.py`)
-Dijkstra over the in-memory `GraphStore`, pure/no I/O. Cost per edge (weights in
-`api/…/config.py`, `w_sim=3, w_jump=1, w_floor=1, w_hop=0.02`):
+Dijkstra over the in-memory `GraphStore`, pure/no I/O. Cost per edge — the weights and
+their defaults live in `ApiConfig` (`api/…/config.py`) and are **cited, never restated
+here**; two copies of them went stale once already:
 ```
-w_sim·(1−similarity) + w_jump·|Δpopularity| + w_floor·max(0, floor−pop_v)
-  + w_avoid·avoidance + w_hop
+w_sim·(1−similarity) + w_jump·|Δpop_raw| + w_floor·max(0, floor_raw−pop_raw_v)
+  + w_avoid·avoidance + w_degree_hub·degree_hub_penalty + w_hop
 ```
+Both popularity terms are in **raw** currency, and `floor_raw` is the only
+depth-graduated device in the function — everything else is static per request.
 Every path request is a **full regeneration** — no previous path is reused.
 
 The **two-signal bypass** shapes the reroll differently per signal:
@@ -201,6 +234,31 @@ The table is what makes this mechanical. You don't have to *notice* a confound �
 across the row and count the differences. This is not hypothetical rigour: a two-knob
 confound survived three rounds of prose review, including one written immediately after
 the reviewer had named that exact pattern. The table found it in a single pass.
+
+**The factor table needs a third section, because it cannot see a dormant term.** The
+table asks *which knobs did I turn* — and the confound that nearly broke the Track 2 sweep
+was a knob nobody turned.
+
+> **Held constant, and why each is genuinely constant under the intervention.** Enumerate
+> every term the comparison holds fixed, and for each, state why the intervention cannot
+> change its state. A term that is inert in the baseline *for a reason the intervention
+> removes* is not a constant — it is an uncontrolled variable that appears only in the
+> arms that succeed.
+
+Worked example: `specs/2026-07-23-track2-preregistration.md` §0. `w_floor` never fires in
+production because `w_jump` stops paths dipping below the floor — and diving below the
+floor is precisely what the sweep's successful arms do. Left alone it would have switched
+itself on in the winners only, making every "one-knob" attribution in the sweep wrong.
+Caught before the sweep rather than after, which is the difference between a design
+correction and a retraction.
+
+**No experimental arm runs until a pre-registration is committed.** It fixes the primary
+outcome, the effect size, the pair or sample set, and the read of every possible result
+including the null. The git commit timestamp is the evidence that it preceded the result —
+that is the part that cannot be reconstructed afterward. Worked example:
+`specs/2026-07-23-track2-preregistration.md`. The discipline is credited in the Phase 1 log
+(§2.13 C5) with turning a disappointing null into an actionable one and with saving a blind
+listen that would have burned the owner's ear on nothing.
 
 **2. Documents asserting things about the world that aren't true.** Plans have referenced
 functions that did not exist yet, and cross-references have gone stale after renumbering.

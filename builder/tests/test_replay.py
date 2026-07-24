@@ -114,8 +114,8 @@ def test_popularity_is_score_weighted_indegree(tmp_path, config):
     _seed_archive(archive, source, [A, B, C])
 
     graph = build_from_archive(config, archive, source)
-    assert graph.popularity[graph.mbids.index(B)] == max(graph.popularity)
-    assert graph.popularity[graph.mbids.index(C)] == min(graph.popularity)
+    assert graph.pop_raw[graph.mbids.index(B)] == max(graph.pop_raw)
+    assert graph.pop_raw[graph.mbids.index(C)] == min(graph.pop_raw)
 
 
 def test_popularity_needs_no_external_input(tmp_path, config):

@@ -11,6 +11,72 @@ the point.**
 
 ---
 
+## DONE — 2026-07-23 — pre-Track-2 guards: a rename through the whole cost path
+
+**DONE 2026-07-23 — nothing found, which is the expected outcome.** No behaviour change
+was intended and none was observed. Owner's summary: "everything seems stable and
+functions similar to other tests."
+
+- **Search (reported first — it is the first action a real user takes).** Order looks
+  correct, and one case is strongly confirmational: typing `The ` returns The Beatles,
+  The Rolling Stones, The Strokes, The Beach Boys. `My ` returns My Chemical Romance,
+  My Bloody Valentine, My Morning Jacket, then unfamiliar artists. **This is the most
+  discriminating evidence in the run** — search ranks on the renamed popularity quantity,
+  and if that read had been crossed with degree or with any other value, a prefix shared
+  by many artists is exactly where the wrong ones would surface first. They did not.
+- **Two familiar paths:** no discernible difference or issues. **Recorded caveat:** the
+  owner was not closely inspecting path content, so this is "nothing jumped out", not a
+  path-quality judgement — a weaker signal than the search result, and correctly so, since
+  path *quality* is Track 2's question and not this entry's.
+- **Repeated bypass, both buttons:** pressed `known` repeatedly and `dislike` repeatedly,
+  no issues on either.
+
+**What this does and does not license.** It clears the rename as a regression: the guards
+work is safe to merge. It says nothing about whether paths are *good* — the F2 complaint
+(more bypasses do not surface more obscure artists) is untouched and remains Track 2's
+objective.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-07-23 — pre-Track-2 guards: a rename through the whole cost path
+
+**Expected outcome: nothing changes.** This is a regression check, and a short one.
+
+**What changed.** No behaviour, by intent. A lot of quantities in the routing code were
+renamed so their names say what they measure, and the builder gained a check that refuses
+to produce a graph missing famous artists. **The graph itself is untouched** — same
+adopted artifact, same checksum, no rebuild. The routing sums the same numbers in the
+same order; only the labels on them moved. (Detail, if wanted: execution log,
+"Pre-Track-2 guards".)
+
+**Why it is worth ten minutes anyway.** A rename can swap two quantities inside a
+calculation and still pass every test, because the tests check the routing on tiny
+made-up graphs where two quantities that differ in the real world happen to be equal.
+Nothing automated checks whether real paths between real artists still feel right. That
+is the only thing this queue entry is for.
+
+**What to exercise:**
+
+1. **Any two paths you already have a feel for.** Miles Davis → Daft Punk, or whatever
+   you used last time. They should be the same paths you saw yesterday.
+2. **On one of them, press "know them already" five or six times in a row.** Use that
+   button rather than "not for me" — both were touched, but "know them already" pushes
+   hardest on the changed code, so it is where a mistake would show first. Then press
+   "not for me" two or three times on a fresh path, just to cover the other button.
+3. **Search two or three artists.** Search orders its results by popularity, which was
+   one of the quantities touched — so the check is simply that the obvious match comes
+   first, not buried under obscure artists with similar names.
+
+**What "wrong" would look like:** paths that are *different* from what you remember for
+the same two artists — that is the whole signal here, since nothing was supposed to
+change. Also: bypass no longer lengthening or reaching further; search results in an
+odd order (e.g. obscure artists ranked above famous ones). A "no path" without
+exclusions remains structurally impossible and would be a real defect.
+
+**Clips (C1/C2) are still known, unrelated, and untouched.**
+
+**Best bug report:** the URL from the address bar.
+
 ## DONE — 2026-07-23 — tie-break fix adopted: famous-artist neighbourhoods changed
 
 **DONE 2026-07-23. No regression; no defect attributable to the fix.** Radiohead is

@@ -14,7 +14,7 @@ from tests.conftest import make_store
 def _ring_with_hub():
     return make_store(
         names=list("ABCDE"),
-        popularity=[0.5] * 5,
+        pop_raw=[0.5] * 5,
         undirected_edges=[
             (0, 1, 0.9), (1, 2, 0.9), (2, 3, 0.9), (3, 4, 0.9), (4, 0, 0.9),
         ],
@@ -35,7 +35,7 @@ def _hub_and_ring():
     """
     return make_store(
         names=list("ABCDEFGHIJKL"),
-        popularity=[0.5] * 12,
+        pop_raw=[0.5] * 12,
         undirected_edges=[
             # Six spokes: hub A (node 0) to leaves B-G (nodes 1-6).
             (0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9),

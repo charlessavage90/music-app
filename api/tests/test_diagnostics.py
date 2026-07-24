@@ -14,7 +14,7 @@ def _hub_store():
     # Node 0 has degree 5; nodes 1-5 have degree 1. Cap of 2 is exceeded by node 0.
     return make_store(
         names=[f"n{i}" for i in range(6)],
-        popularity=[0.9] + [0.1] * 5,
+        pop_raw=[0.9] + [0.1] * 5,
         undirected_edges=[(0, i, 1.0) for i in range(1, 6)],
     )
 
@@ -41,7 +41,7 @@ def test_reports_degree_and_popularity_quantiles():
 
 def test_handles_a_graph_with_no_saturated_edges():
     store = make_store(
-        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.4)]
+        names=list("AB"), pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.4)]
     )
     d = artifact_diagnostics(store, cap=50)
     assert d["saturated_edges"] == 0
@@ -50,22 +50,22 @@ def test_handles_a_graph_with_no_saturated_edges():
 
 def test_frozen_hub_diagnostics_counts_present_nodes_and_means_their_degree():
     # _hub_store: node 0 has degree 5 (edges to 1-5); nodes 1-5 each have
-    # degree 1. hub_nodes simulates load_or_freeze_hub_set's already-filtered
+    # degree 1. top1pct_degree_nodes simulates load_or_freeze_hub_set's already-filtered
     # output: node ids known to exist in this artifact.
-    d = frozen_hub_diagnostics(_hub_store(), hub_nodes={0})
+    d = frozen_hub_diagnostics(_hub_store(), top1pct_degree_nodes={0})
     assert d["frozen_hubs_present"] == 1
     assert d["mean_frozen_hub_degree"] == pytest.approx(5.0)
 
 
 def test_frozen_hub_diagnostics_averages_degree_over_multiple_present_nodes():
     # Node 0 degree 5, node 1 degree 1 -> mean = (5 + 1) / 2 = 3.0.
-    d = frozen_hub_diagnostics(_hub_store(), hub_nodes={0, 1})
+    d = frozen_hub_diagnostics(_hub_store(), top1pct_degree_nodes={0, 1})
     assert d["frozen_hubs_present"] == 2
     assert d["mean_frozen_hub_degree"] == pytest.approx(3.0)
 
 
 def test_frozen_hub_diagnostics_is_zero_when_no_frozen_hubs_are_present():
     # Simulates an artifact from which every frozen hub MBID is absent.
-    d = frozen_hub_diagnostics(_hub_store(), hub_nodes=set())
+    d = frozen_hub_diagnostics(_hub_store(), top1pct_degree_nodes=set())
     assert d["frozen_hubs_present"] == 0
     assert d["mean_frozen_hub_degree"] == 0.0

@@ -105,6 +105,27 @@ them in a new session with the handoff note in hand.
 
 Dispatch the `doc-auditor` agent. It reports; it does not edit.
 
+**This step is not skippable, and that is a finding rather than a caution.** It has now
+been weighed and nearly skipped twice, and on both occasions running it immediately found
+High-severity defects the session had no other way to see:
+
+- **2026-07-23, Track 1.** The session judged the audit unnecessary; the owner overruled
+  it. The audit found six High-severity defects in files that session never touched, the
+  worst class being auto-loaded memory carrying stale status into every cold session.
+- **2026-07-23, pre-Track-2 guards.** The session had already run its own targeted sweep
+  of `docs/` and `.claude/` for stale identifiers and found it clean. The audit then found
+  two High-severity defects **caused by that session's own work**: `CLAUDE.md`'s orient
+  table still naming renamed identifiers *in the row warning about that exact confusion*,
+  and the auto-loaded `ml-graph-analyst` definition describing the cost function with a
+  term missing.
+
+The second case is the one that generalises. **A self-run grep cannot find a defect of
+omission** — the sweep searched for wrong content and the defect was absent content, so it
+passed clean and the session believed it. A fresh reader checking whether each description
+is *complete* is a different operation from searching for known-bad strings, and only the
+first catches this class. **The strongest predictor that the audit will find something is
+a session concluding it does not need one.**
+
 Fix what the durable record can adjudicate. **Anything you cannot resolve from the
 record goes on an escalation list rather than being guessed at** — that list is also a
 precise measurement of where the record is too thin, which is worth having.
@@ -200,6 +221,25 @@ minutes of use surfaced immediately.
 **This is asynchronous and does not block closeout.** The owner will not always have
 twenty minutes when a session ends. Write a short **test queue** instead: what changed,
 what to exercise, and what "wrong" would look like. Mark the item *queued*, and finish.
+
+**Write the entry for someone holding a mouse, not for the session that wrote the code.**
+Every step is a thing to *do* and a thing to *look at*. This is where an entry goes wrong:
+
+- **Never name an identifier, file or function in the steps.** "Press *know them already*
+  five or six times" is a step. "The floor relaxation is the part with the most renamed
+  variables (`base_floor_raw`, `floor_raw`, …)" is the author narrating their diff, and it
+  actively misleads — a reader reasonably asks whether it means one *kind* of bypass
+  matters more, which is a question the sentence raised and did not answer.
+- **If one variant of an action really is more revealing, say which and say so plainly**
+  ("use that button rather than the other one — it pushes hardest on what changed"). Half
+  an explanation is worse than none: it creates a decision the reader cannot make.
+- **Do not restate a test count.** It is stale within the session that wrote it.
+- Put implementation detail behind a single pointer to the execution log, for the reader
+  who wants it. Nobody testing the app needs it inline.
+
+The tell is a step the owner cannot act on without asking what a term means. Reread each
+step as a person who has not seen the diff — that pass takes a minute and is the whole
+difference between an entry that gets run and one that gets queried.
 
 The forcing function sits on the other end: **a session starting new work checks the
 queue first and flags anything that has been sitting untested.** That keeps it honest

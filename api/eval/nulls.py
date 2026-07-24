@@ -127,7 +127,7 @@ def _store_from_edges(
         mbids=list(template.mbids),
         names=list(template.names),
         disambiguations=list(template.disambiguations),
-        popularity=template.popularity.copy(),
+        pop_raw=template.pop_raw.copy(),
         offsets=offsets,
         neighbours=np.asarray(neighbours, dtype=np.int32),
         scores=np.full(len(neighbours), 0.5, dtype=np.float32),

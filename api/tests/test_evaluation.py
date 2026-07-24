@@ -14,7 +14,7 @@ from tests.conftest import make_store
 
 def test_out_degree_counts_neighbours():
     store = make_store(
-        names=list("ABC"), popularity=[0.5, 0.5, 0.5],
+        names=list("ABC"), pop_raw=[0.5, 0.5, 0.5],
         undirected_edges=[(0, 1, 0.9), (0, 2, 0.9)],
     )
     assert out_degree(store, 0) == 2
@@ -23,7 +23,7 @@ def test_out_degree_counts_neighbours():
 
 def test_edge_score_returns_similarity_or_zero():
     store = make_store(
-        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.73)]
+        names=list("AB"), pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.73)]
     )
     assert edge_score(store, 0, 1) == pytest.approx(0.73, abs=1e-6)  # float32
     assert edge_score(store, 0, 0) == 0.0  # no self-edge
@@ -32,47 +32,47 @@ def test_edge_score_returns_similarity_or_zero():
 def test_hubfrac_is_the_fraction_of_interior_nodes_that_are_hubs():
     # Path 1->0->2->3 has interior [0, 2]; only node 0 is in the hub set.
     store = make_store(
-        names=list("ABCD"), popularity=[0.9, 0.3, 0.3, 0.3],
+        names=list("ABCD"), pop_raw=[0.9, 0.3, 0.3, 0.3],
         undirected_edges=[(0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9), (2, 3, 0.9)],
     )
-    m = path_metrics(store, [1, 0, 2, 3], hub_nodes={0})
-    assert m.hubfrac == pytest.approx(0.5)
+    m = path_metrics(store, [1, 0, 2, 3], top1pct_degree_nodes={0})
+    assert m.top1pct_degree_frac == pytest.approx(0.5)
     assert m.max_interior_degree == 3
 
 
 def test_hubfrac_ignores_endpoints_even_when_they_are_hubs():
     store = make_store(
-        names=list("ABCD"), popularity=[0.9, 0.3, 0.3, 0.3],
+        names=list("ABCD"), pop_raw=[0.9, 0.3, 0.3, 0.3],
         undirected_edges=[(0, 1, 0.9), (0, 2, 0.9), (0, 3, 0.9)],
     )
-    m = path_metrics(store, [0, 1], hub_nodes={0})
-    assert m.hubfrac == 0.0
+    m = path_metrics(store, [0, 1], top1pct_degree_nodes={0})
+    assert m.top1pct_degree_frac == 0.0
 
 
 def test_hubfrac_is_zero_for_a_path_with_no_interior():
     store = make_store(
-        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
+        names=list("AB"), pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
     )
-    assert path_metrics(store, [0, 1], hub_nodes=set()).hubfrac == 0.0
+    assert path_metrics(store, [0, 1], top1pct_degree_nodes=set()).top1pct_degree_frac == 0.0
 
 
 def test_ceiling_hops_counts_free_similarity_edges():
     # Two hops: one at exactly 1.0 (free — w_sim*(1-sim) == 0), one at 0.5.
     store = make_store(
-        names=list("ABC"), popularity=[0.5] * 3,
+        names=list("ABC"), pop_raw=[0.5] * 3,
         undirected_edges=[(0, 1, 1.0), (1, 2, 0.5)],
     )
-    m = path_metrics(store, [0, 1, 2], hub_nodes=set())
+    m = path_metrics(store, [0, 1, 2], top1pct_degree_nodes=set())
     assert m.ceiling_hops == pytest.approx(0.5)
 
 
 def test_bottleneck_is_the_weakest_link():
     # Path 0-1-2 with edge sims 0.9 and 0.2; bottleneck is 0.2.
     store = make_store(
-        names=list("ABC"), popularity=[0.5, 0.5, 0.5],
+        names=list("ABC"), pop_raw=[0.5, 0.5, 0.5],
         undirected_edges=[(0, 1, 0.9), (1, 2, 0.2)],
     )
-    m = path_metrics(store, [0, 1, 2], hub_nodes=set())
+    m = path_metrics(store, [0, 1, 2], top1pct_degree_nodes=set())
     assert m.bottleneck_sim == pytest.approx(0.2, abs=1e-6)  # float32
     assert m.mean_sim == pytest.approx(0.55, abs=1e-6)
 
@@ -83,7 +83,7 @@ def test_degree_percentile_threshold_is_monotonic_and_bounded():
     # not give a lower cutoff. (On the real 75k graph top-1% = degree 357.)
     hub_edges = [(0, i, 0.9) for i in range(1, 21)]
     store = make_store(
-        names=[str(i) for i in range(21)], popularity=[0.5] * 21,
+        names=[str(i) for i in range(21)], pop_raw=[0.5] * 21,
         undirected_edges=hub_edges,
     )
     top1 = degree_percentile_threshold(store, 0.01)
@@ -94,7 +94,7 @@ def test_degree_percentile_threshold_is_monotonic_and_bounded():
 def test_bfs_finds_fewest_hops_route():
     # 0-1-2-3 and a direct 0-3; BFS must take the 1-hop direct edge.
     store = make_store(
-        names=list("ABCD"), popularity=[0.5] * 4,
+        names=list("ABCD"), pop_raw=[0.5] * 4,
         undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (2, 3, 0.9), (0, 3, 0.1)],
     )
     assert bfs_shortest_path(store, 0, 3) == [0, 3]
@@ -103,7 +103,7 @@ def test_bfs_finds_fewest_hops_route():
 def test_similarity_only_prefers_strong_edges():
     # 0-2 weak direct; 0-1-2 strong. Similarity-only routing takes the strong pair.
     store = make_store(
-        names=list("ABC"), popularity=[0.5, 0.5, 0.5],
+        names=list("ABC"), pop_raw=[0.5, 0.5, 0.5],
         undirected_edges=[(0, 2, 0.1), (0, 1, 0.95), (1, 2, 0.95)],
     )
     assert similarity_only_path(store, 0, 2) == [0, 1, 2]
@@ -111,14 +111,14 @@ def test_similarity_only_prefers_strong_edges():
 
 def test_summarise_aggregates_hubfrac_and_ceiling_hops():
     store = make_store(
-        names=list("ABCD"), popularity=[0.9, 0.3, 0.3, 0.3],
+        names=list("ABCD"), pop_raw=[0.9, 0.3, 0.3, 0.3],
         undirected_edges=[(0, 1, 1.0), (0, 2, 1.0), (0, 3, 0.5), (2, 3, 0.5)],
     )
-    a = path_metrics(store, [1, 0, 2, 3], hub_nodes={0})   # hubfrac 0.5
-    b = path_metrics(store, [1, 0], hub_nodes={0})          # hubfrac 0.0
+    a = path_metrics(store, [1, 0, 2, 3], top1pct_degree_nodes={0})   # top1pct_degree_frac 0.5
+    b = path_metrics(store, [1, 0], top1pct_degree_nodes={0})          # top1pct_degree_frac 0.0
     s = summarise([a, b])
     assert s["n"] == 2
-    assert s["mean_hubfrac"] == pytest.approx(0.25)
+    assert s["mean_top1pct_degree_frac"] == pytest.approx(0.25)
     assert "mean_adamic_adar" in s
     assert "mean_overlap_coefficient" in s
     assert "mean_ceiling_hops" in s
@@ -149,7 +149,7 @@ def _triangle_with_hub():
     # 3 (degree 4, a hub). Node 3 also links 4 and 5 to inflate its degree.
     return make_store(
         names=list("ABCDEF"),
-        popularity=[0.5] * 6,
+        pop_raw=[0.5] * 6,
         undirected_edges=[
             (0, 1, 0.9),
             (0, 2, 0.9), (1, 2, 0.9),
@@ -193,7 +193,7 @@ def test_jaccard_uses_union_including_the_endpoints():
 
 def test_metrics_are_zero_when_no_common_neighbours():
     store = make_store(
-        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
+        names=list("AB"), pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
     )
     assert list(common_neighbours(store, 0, 1)) == []
     assert adamic_adar(store, 0, 1) == 0.0
@@ -218,15 +218,15 @@ def test_mean_common_neighbours_averages_across_hops():
     #   (1,2): N(1)&N(2) = {0} minus endpoints            -> 1
     # Mean = (0 + 1 + 2 + 1) / 4 = 1.0.
     store = _triangle_with_hub()
-    m = path_metrics(store, [4, 3, 0, 1, 2], hub_nodes=set())
+    m = path_metrics(store, [4, 3, 0, 1, 2], top1pct_degree_nodes=set())
     assert m.mean_common_neighbours == pytest.approx(1.0)
 
 
 def test_mean_common_neighbours_is_zero_for_a_path_with_no_hops():
     store = make_store(
-        names=list("AB"), popularity=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
+        names=list("AB"), pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
     )
-    assert path_metrics(store, [0], hub_nodes=set()).mean_common_neighbours == 0.0
+    assert path_metrics(store, [0], top1pct_degree_nodes=set()).mean_common_neighbours == 0.0
 
 
 def test_geometric_mean_is_robust_to_a_single_zero():

@@ -17,7 +17,7 @@ def _store(n=40):
     edges += [(0, i, 0.9) for i in range(2, 12)]  # give node 0 a high degree
     return make_store(
         names=[f"artist{i}" for i in range(n)],
-        popularity=[i / n for i in range(n)],
+        pop_raw=[i / n for i in range(n)],
         undirected_edges=edges,
     )
 

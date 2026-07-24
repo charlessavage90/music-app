@@ -11,7 +11,7 @@ from tests.conftest import make_store
 def test_neighbour_rank_is_one_based_by_descending_score():
     # Node 0's neighbours: 1 (0.9), 2 (0.5), 3 (0.1).
     store = make_store(
-        names=list("ABCD"), popularity=[0.5] * 4,
+        names=list("ABCD"), pop_raw=[0.5] * 4,
         undirected_edges=[(0, 1, 0.9), (0, 2, 0.5), (0, 3, 0.1)],
     )
     assert neighbour_rank(store, 0, 1) == 1
@@ -21,7 +21,7 @@ def test_neighbour_rank_is_one_based_by_descending_score():
 
 def test_neighbour_rank_is_none_for_a_non_neighbour():
     store = make_store(
-        names=list("ABC"), popularity=[0.5] * 3, undirected_edges=[(0, 1, 0.9)]
+        names=list("ABC"), pop_raw=[0.5] * 3, undirected_edges=[(0, 1, 0.9)]
     )
     assert neighbour_rank(store, 0, 2) is None
 

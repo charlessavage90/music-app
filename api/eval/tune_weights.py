@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import optuna
 
 from artistpath_api.config import ApiConfig
-from artistpath_api.evaluation import hub_node_set, path_metrics, summarise
+from artistpath_api.evaluation import top_degree_node_set, path_metrics, summarise
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.pathfinding import find_path
 
@@ -58,15 +58,15 @@ def build_pairs(store, n_each, rng):
     return pairs
 
 
-def evaluate(store, pairs, cfg, hub_nodes):
+def evaluate(store, pairs, cfg, top1pct_degree_nodes):
     metrics, max_hubpens = [], []
     for a, b, _ in pairs:
         path = find_path(store, a, b, [], cfg)
         if path and len(path) >= 2:
-            metrics.append(path_metrics(store, path, hub_nodes))
+            metrics.append(path_metrics(store, path, top1pct_degree_nodes))
             interior = path[1:-1]
             max_hubpens.append(
-                max((float(store.hub_penalty[n]) for n in interior), default=0.0)
+                max((float(store.degree_hub_penalty[n]) for n in interior), default=0.0)
             )
     s = summarise(metrics)
     s["mean_max_hubpen"] = (sum(max_hubpens) / len(max_hubpens)) if max_hubpens else 0.0
@@ -96,14 +96,14 @@ def main():
     n_each = int(sys.argv[3]) if len(sys.argv) > 3 else 12
 
     store = GraphStore.load(graph)
-    hub_nodes = hub_node_set(store, 0.01)
+    top1pct_degree_nodes = top_degree_node_set(store, 0.01)
     rng = np.random.default_rng(SEED)
     all_pairs = build_pairs(store, n_each * 2, rng)  # 2x, split in half
     rng.shuffle(all_pairs)
     split = len(all_pairs) // 2
     train, test = all_pairs[:split], all_pairs[split:]
 
-    print(f"{store.artist_count:,} artists | hub set size {len(hub_nodes)} | "
+    print(f"{store.artist_count:,} artists | hub set size {len(top1pct_degree_nodes)} | "
           f"{len(train)} train / {len(test)} test pairs")
     print(f"objective: smoothness - {LAMBDA_HUB}*hubpen - {LAMBDA_LEN}*len_dev "
           f"(target len {TARGET_LEN})")
@@ -117,9 +117,9 @@ def main():
             w_jump=trial.suggest_float("w_jump", 0.0, 4.0),
             w_floor=trial.suggest_float("w_floor", 0.0, 4.0),
             w_hop=trial.suggest_float("w_hop", 0.0, 0.5),
-            w_hub=trial.suggest_float("w_hub", 0.0, 8.0),
+            w_degree_hub=trial.suggest_float("w_degree_hub", 0.0, 8.0),
         )
-        return score(evaluate(store, train, cfg, hub_nodes))
+        return score(evaluate(store, train, cfg, top1pct_degree_nodes))
 
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     study = optuna.create_study(
@@ -128,14 +128,14 @@ def main():
     study.optimize(objective, n_trials=n_trials, show_progress_bar=False)
 
     best = replace(base, **study.best_params)
-    print("\n=== baseline (current production weights, w_hub=0) ===")
-    report("train", evaluate(store, train, base, hub_nodes))
-    report("test", evaluate(store, test, base, hub_nodes))
+    print("\n=== baseline (current production weights, w_degree_hub=0) ===")
+    report("train", evaluate(store, train, base, top1pct_degree_nodes))
+    report("test", evaluate(store, test, base, top1pct_degree_nodes))
     print("\n=== tuned weights ===")
-    for k in ("w_sim", "w_jump", "w_floor", "w_hop", "w_hub"):
+    for k in ("w_sim", "w_jump", "w_floor", "w_hop", "w_degree_hub"):
         print(f"  {k} = {getattr(best, k):.3f}")
-    report("train", evaluate(store, train, best, hub_nodes))
-    report("test", evaluate(store, test, best, hub_nodes))
+    report("train", evaluate(store, train, best, top1pct_degree_nodes))
+    report("test", evaluate(store, test, best, top1pct_degree_nodes))
 
 
 if __name__ == "__main__":
