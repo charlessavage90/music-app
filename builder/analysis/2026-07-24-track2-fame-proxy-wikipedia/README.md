@@ -86,6 +86,29 @@ C1's statistic degrading to the labelled ordinal scale. **That fallback spends r
 time and is his decision — it must not be entered without putting it to him** (§5; handoff
 §2). No sweep arm has run. Adopted artifact untouched, sha256 `4cb84ef9…b061dc8`.
 
+## Post-hoc exploration (owner-requested; NOT pre-registered — `explore_absence.py`)
+
+Run *after* the falsifier fired, to test the idea the coverage failure hinted at: is
+Wikipedia **absence itself** a usable obscurity signal? These figures are exploratory and
+do not change the pre-registered verdict above.
+
+- **Absence perfectly predicts "never heard of" on this sample: P(never heard of | absent)
+  = 1.00** (all 9 misses). No miss was an artist the owner knew.
+- Encoding **absent = fame floor (0)**, the proxy separates *known-at-all* from *never
+  heard of* at **AUC 0.954** (S4 excluded) — vs 0.880 using matched artists only. The
+  absence signal carries most of the obscure-tail mass.
+- **Hybrid (Option B) burden on this sample:** Wikipedia covers 20/29 (69 %); the owner
+  would hand-label only the **9 misses (31 %)**.
+
+**Caveat, stated because the sample cannot test the failure mode.** The one way
+"absence = obscure" breaks is a *foreign-language / historically-notable* artist the owner
+would know but who has no English article. This sample contains almost no such opportunity:
+its one off-platform-famous case (林俊傑 / JJ Lin) **matched**, and its one absent S4 case
+(CROOVE — a Korean rhythm-game producer) was genuinely never-heard-of. So "0 counterexamples"
+is weak evidence about the sweep's broader population, where such artists will appear. The
+0.954 is also partly "easy": 9 of 13 never-heard are floored to 0 by absence, so the
+construction of the sample does much of the separating.
+
 ## Files
 
 - `fetch_pageviews.py` — the fetcher (`--probe` and sample modes). Rules canonical in its header.
