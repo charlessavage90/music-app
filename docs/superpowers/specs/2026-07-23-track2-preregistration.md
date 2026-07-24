@@ -916,6 +916,34 @@ gated, and the d15/d20 guard plus the blind listen are the backstops. **Residual
 on the same reasoning A11 used: a scoring-lens error is a cheap re-score, and it cannot
 ship, because the listen gates adoption.
 
+> **Addendum to A12, 2026-07-24, still before any factorial arm — the residual is
+> two-sided, and only one side was written down.** Added after `CLAUDE.md` gained its
+> purpose paragraph, whose second consequence is that *global notability is a proxy for the
+> wrong quantity — the target is unknown **to this listener**, not unknown to everyone.*
+> Checked against the committed sample rather than reasoned about, and it fires:
+>
+> **A11 names one residual — an absent artist wrongly scored obscure — and its d15/d20
+> guard is built for exactly that. The mirror-image case has no guard and is commoner.**
+> Of the artists the owner labelled *never heard of*, three score **above** B_unk and are
+> therefore counted as famous, not as reach: **Diana Krall, Perry Como, Max Richter**. That
+> is 3 of 16 overall, and **3 of the 7 that the proxy can actually see** — so when Wikipedia
+> can see an artist the owner does not know, it puts them on the wrong side of his own
+> "would not know them" line about **43 %** of the time. (The reverse also occurs once:
+> Wishbone Ash, labelled *know well*, scores below B_unk.)
+>
+> **This does not change A12's rule, and the direction is why.** The error is
+> **conservative**: an artist the owner would enjoy discovering is counted as *not* reach,
+> so it can only make C2 **harder** to pass. A proxy error that under-credits success cannot
+> manufacture a false winner — it can only hide a real one. C1 and C3 do not use B_unk at
+> all (both are continuous medians), so they are untouched; only C2's absolute clause is
+> exposed. All three misses are also **near-misses** at the band edge (F 5.48–5.50 against
+> B_unk 5.379), not gross misrankings.
+>
+> **What this buys is a pre-registered read, not a redesign.** If C2 comes in at **3 of 8**
+> — one pair short — the first thing to check is whether any d15/d20 interior in the failing
+> pairs sits within ~0.15 log10 above B_unk, because that is this residual and not a real
+> shortfall. Recorded now so it is a look-up rather than a post-hoc rescue.
+
 ### §2.2's permitted recalibration — discharged, does not fire
 
 §2.2 allows exactly one threshold adjustment, before any arm runs: if the owner's *know

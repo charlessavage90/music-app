@@ -1184,3 +1184,45 @@ drop about one full step in how well he would know them.
 
 **No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`. Work is on branch
 `track2-sweep`, off `main`.
+
+### Sanity-checking A12 against the new purpose line — the residual is two-sided (2026-07-24)
+
+The consulting session added `CLAUDE.md`'s "What it is for" paragraph and asked this session
+to check its own **A12** against it rather than take the assurance that nothing changed.
+Doing the check rather than reasoning about it found something neither session had.
+
+**The purpose paragraph carries two consequences.** The first — *a criterion capping how
+obscure the app may go is pointed the wrong way by default* — is A12 exactly; A12 is its
+direct application and needs no change. **The second is the one that bites:** *global
+notability is a proxy for the wrong quantity — the target is unknown **to this listener**,
+not unknown to everyone.*
+
+**Measured against the committed labels + pageview counts.** A11 names one residual — an
+**absent** artist wrongly scored obscure — and its d15/d20 guard is built for it. The
+mirror-image case had no guard and is commoner: of the artists labelled *never heard of*,
+**three score above B_unk** and are counted as famous rather than as reach — **Diana Krall,
+Perry Como, Max Richter**. That is 3 of 16 overall and **3 of the 7 the proxy can actually
+see**, so where Wikipedia has data on someone the owner does not know, it lands on the wrong
+side of his own line about **43 %** of the time. The reverse occurs once (Wishbone Ash,
+*know well*, below B_unk).
+
+**A12's rule does not change, and the direction is the reason.** The error is
+**conservative** — an artist he would enjoy discovering is counted as *not* reach — so it
+can only make **C2 harder** to pass. A proxy error that under-credits success cannot
+manufacture a false winner; it can only hide a real one. C1 and C3 never touch B_unk (both
+continuous medians), so only C2's absolute clause is exposed, and all three misses are
+near-misses at the band edge (F 5.48–5.50 vs B_unk 5.379).
+
+**Recorded as a pre-registered read rather than a redesign.** If C2 lands at **3 of 8** —
+one pair short — check first whether any d15/d20 interior in the failing pairs sits within
+~0.15 log10 above B_unk; that is this residual, not a shortfall. Written down now so it is a
+look-up later instead of a post-hoc rescue, which is the distinction §2.4 exists to enforce.
+
+**Process note, since it is the transferable part.** The consultant's own instruction was
+*sanity-check this yourself rather than take my word for it*, and the check paid — not by
+overturning its claim, which was correct, but by finding the unstated half of a residual on
+the way. "Verify one load-bearing claim before building on a report" is a `session-start`
+rule aimed at incoming reports; this is the same rule applied to a *concurrent* session's
+assurance, and it earned its keep twice today.
+
+**No arm has run.** Artifact untouched.
