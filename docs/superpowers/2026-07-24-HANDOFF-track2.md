@@ -35,8 +35,13 @@ the strongest predictor it finds something is a session concluding it needn't ru
 
 Per pre-registration §1.4 + §9's still-open table. Enumerated so it is not re-derived:
 
-- **P6 — percentile machinery** (tie-handling rule; §7/§0 note it is not built). `pop_pctl`
-  is reserved and unused for exactly this.
+- ~~**P6 — percentile machinery**~~ **CORRECTED 2026-07-24 by the doc audit: already built,
+  and this bullet was wrong.** It landed at execution-order step 2 in
+  `builder/analysis/2026-07-23-track2-sweep/mirror.py` (`MirrorContext.build`, commit
+  `2dedefd`) and is covered by the byte-identity gate. §7 and §0 of the pre-registration said
+  "not built" and this bullet copied them; all three are now corrected. `pop_pctl` remains
+  reserved and unused **in shipped code**, which is correct — shipped code is not edited
+  before adoption — and is what the stale reading mistook for the machinery not existing.
 - **The C1–C6 harness**, implementing the **A11 encoding**: score interiors on Wikipedia
   pageviews, **absent = 0 (fame floor)**, plus the **d15/d20 guard** (surface *potentially
   notable* unmatched interiors — non-Latin-script name, or an article exists in a **non**-
