@@ -730,3 +730,71 @@ already requires re-anchoring on P with floor as a fully crossed column — sixt
 plus attachments, outside the stated budget. The session that hits it should write a
 **second dated amendment** and treat it as the design working as intended. Framing it now
 so it is not experienced as a late discovery or an admission.
+
+### Session resumed from the mid-track handoff (2026-07-23) — bookkeeping cleared, P4 put to the owner
+
+Picked up cold from `2026-07-23-HANDOFF-track2.md`, cold-read verified against the owner
+before acting (three small gaps found, all in the handoff's own git bookkeeping — HEAD and
+commit count stale, PR title stale — none in the technical record; the handoff was sound
+where it mattered). **Convention fixed this session: one committer, and it is the session,
+not the consultant.** The three modified meta-files (`CLAUDE.md`, both `SKILL.md`) are a
+**consultant session's** in-flight edits, deliberately left uncommitted and out of every
+commit here.
+
+Work done, in order, each committed separately:
+
+1. **PR #9 title and body rewritten** to cover all ten commits and both gate outcomes
+   including the A0 failure. It had described only the first commit's D1–D3 scope.
+2. **Adjudication claim 23 amended** for the A0 result — the wording the A0 gate review
+   settled but nobody had applied. Refuted as an absolute, *nearly upheld* as an outcome
+   (1 changed cell in 252), original measurement not retracted. **Also fixed a
+   table-rendering defect:** the claim table has four columns, so the fifth-cell amendments
+   on claims 23 and 35 were dropped by the renderer — claim 35's 2026-07-22 amendment had
+   been invisible in rendered markdown since it was written. Both now sit inside the verdict
+   cell. *(This is the CLAUDE.md "blast radius includes every document that describes the
+   quantity" rule in miniature: the amendment was present in source and absent on screen.)*
+3. **Amendment A10 — §5's fame-proxy sample fixed and committed before any label**
+   (`builder/analysis/2026-07-23-track2-fame-proxy/`). Two defects, both found by deriving
+   the sample against the repo rather than reading the prose, both unrecoverable after
+   labelling (the A6 argument again — labels reusable across proxies, not across samples):
+   - **S1 and S3 overlapped by four artists.** saib., Purrple Cat, idealism and Miami
+     Nights 1984 are in S1's nine *and* were listed in S3. "~33" was **29 distinct**; the
+     four would have been double-counted in every pooled statistic and read under two
+     strata §5 interprets differently. S3 is now the two F6 reaches only, **n = 2, counts
+     not AUC**. Its purpose is unharmed — testing §2.11's inference is what S1 does.
+   - **§5's claim that S1's labels "already exist" is false** at three-bucket granularity.
+     The record holds one collective verdict ("mostly unknown"), assigns no artist to a
+     bucket, never splits *heard of* from *never heard of* (where B_unk lives), and by
+     "mostly" implies one of the nine was known without saying which. The nine are labelled
+     with everyone else; S1-anchors-the-unknown-end becomes a result, not an assumption.
+     Original verdict **not** retracted — it settled §2.11 and nothing more was asked of it.
+   - **S2's twelve fixed by a mechanical rule** (three named exemplars, then each judged
+     pair's least/most/median in-graph-popular interior, ties on lowest MBID) rather than
+     hand-picked. `pop_raw` spreads, never scores. **Selection is itself evidence:** Whitney
+     Houston is the *least* in-graph-popular interior of two of three pairs (0.5124) and
+     Nick Drake the *most* popular of one (0.7400, above Frank Sinatra and Ella Fitzgerald)
+     — §2.11 reproduced inside the sample built to test it. Match-failure falsifier now
+     fires at **6**, not 7 (proportion unchanged, denominator 29 not 33).
+4. **Blind label sheet emitted** in a sorted-then-seeded-shuffle order
+   (`blind_order.json`, seed 20260723), committed so the strata — S1 insular, S4
+   off-platform — do not leak grouping to the owner, and so the answer→stratum mapping is
+   auditable rather than reconstructed. Put to the owner; **he is labelling now.**
+5. **The Deezer fetcher built, P5-tested, probed** (`fetch_fame.py`, `test_p5.py`). Artist
+   search with exact P5 match, **shares no code with `clips.py`** (§0). P5 unit-tested
+   including the U+2010 trap and a guard that NFKC alone does not fix it. `--probe`
+   discharged §0's one external assumption against out-of-sample names (Radiohead /
+   Portishead / Sault): **`nb_fan` present on all three, 27k–4.06M**, so the field exists
+   and has ranking range. **The sample stays unfetched until the labels land** — §5's
+   protocol order (label, then fetch), and it is load-bearing: match failure is a *measured*
+   quantity, so silently swapping an unresolvable name would corrupt what C6 measures.
+
+**Ordering deviation, taken as methodology, not asked:** the handoff proposed fetcher →
+put-to-owner. Reversed to put-to-owner → fetcher, because the owner's ten minutes need only
+the name list, §5 numbers labelling as step 1 for a reason, and building the fetcher while
+he labels loses nothing. Snyk `snyk_code_scan` clean on all fame-proxy code and re-run over
+the four other new analysis packages (0 issues each).
+
+**State at this point:** P4 blocked on owner labels. Unblocked and not yet done — P6
+percentile tie-handling machinery, the §5 scoring code (buildable, not runnable until
+labels + counts exist), C1–C6 computation (needs scored arms), and the D4/D6/D7 + C3-anchor
+(handoff 1b) amendment. No arm has run. Artifact untouched, sha256 `4cb84ef9…b061dc8`.
