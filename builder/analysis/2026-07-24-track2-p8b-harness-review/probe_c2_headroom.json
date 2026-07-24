@@ -1,0 +1,145 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "arm": "P (production) only -- no experimental arm run",
+ "B_unk_fame_units": 5.3788,
+ "B_unk_pageviews": 239239,
+ "C2_threshold_pairs": 4,
+ "per_pair": [
+  {
+   "pair": "Miles Davis -> Daft Punk",
+   "d15_min_F": 5.9936,
+   "d15_min_artist": "Chuck Berry",
+   "d15_n_interiors": 8,
+   "d20_min_F": 5.5823,
+   "d20_min_artist": "deadmau5",
+   "d20_n_interiors": 8,
+   "min_F_over_C2_depths": 5.5823,
+   "min_artist": "deadmau5",
+   "margin_to_B_unk": 0.2034,
+   "reaches": false,
+   "hit_carried_by": null
+  },
+  {
+   "pair": "The Shins -> Wishbone Ash",
+   "d15_min_F": 5.1932,
+   "d15_min_artist": "Two Door Cinema Club",
+   "d15_n_interiors": 11,
+   "d20_min_F": 5.5415,
+   "d20_min_artist": "Foster the People",
+   "d20_n_interiors": 8,
+   "min_F_over_C2_depths": 5.1932,
+   "min_artist": "Two Door Cinema Club",
+   "margin_to_B_unk": -0.1856,
+   "reaches": true,
+   "hit_carried_by": "matched"
+  },
+  {
+   "pair": "Metallica -> Taylor Swift",
+   "d15_min_F": 6.0204,
+   "d15_min_artist": "U2",
+   "d15_n_interiors": 2,
+   "d20_min_F": 5.3032,
+   "d20_min_artist": "Justice",
+   "d20_n_interiors": 6,
+   "min_F_over_C2_depths": 5.3032,
+   "min_artist": "Justice",
+   "margin_to_B_unk": -0.0756,
+   "reaches": true,
+   "hit_carried_by": "matched"
+  },
+  {
+   "pair": "Radiohead -> The Beatles",
+   "d15_min_F": 6.1132,
+   "d15_min_artist": "Depeche Mode",
+   "d15_n_interiors": 2,
+   "d20_min_F": 6.3912,
+   "d20_min_artist": "Led Zeppelin",
+   "d20_n_interiors": 1,
+   "min_F_over_C2_depths": 6.1132,
+   "min_artist": "Depeche Mode",
+   "margin_to_B_unk": 0.7344,
+   "reaches": false,
+   "hit_carried_by": null
+  },
+  {
+   "pair": "Muse -> Coldplay",
+   "d15_min_F": 6.1402,
+   "d15_min_artist": "The Cure",
+   "d15_n_interiors": 1,
+   "d20_min_F": 5.636,
+   "d20_min_artist": "The Black Keys",
+   "d20_n_interiors": 3,
+   "min_F_over_C2_depths": 5.636,
+   "min_artist": "The Black Keys",
+   "margin_to_B_unk": 0.2571,
+   "reaches": false,
+   "hit_carried_by": null
+  },
+  {
+   "pair": "Madonna -> Bob Dylan",
+   "d15_min_F": 5.8666,
+   "d15_min_artist": "No Doubt",
+   "d15_n_interiors": 4,
+   "d20_min_F": 5.4774,
+   "d20_min_artist": "Cage the Elephant",
+   "d20_n_interiors": 5,
+   "min_F_over_C2_depths": 5.4774,
+   "min_artist": "Cage the Elephant",
+   "margin_to_B_unk": 0.0985,
+   "reaches": false,
+   "hit_carried_by": null
+  },
+  {
+   "pair": "Pink Floyd -> Aphex Twin",
+   "d15_min_F": 4.9364,
+   "d15_min_artist": "Bonobo",
+   "d15_n_interiors": 5,
+   "d20_min_F": 5.5367,
+   "d20_min_artist": "Placebo",
+   "d20_n_interiors": 4,
+   "min_F_over_C2_depths": 4.9364,
+   "min_artist": "Bonobo",
+   "margin_to_B_unk": -0.4424,
+   "reaches": true,
+   "hit_carried_by": "matched"
+  },
+  {
+   "pair": "Nirvana -> CROOVE",
+   "d15_min_F": 0.0,
+   "d15_min_artist": "Desired",
+   "d15_n_interiors": 10,
+   "d20_min_F": 0.0,
+   "d20_min_artist": "Desired",
+   "d20_n_interiors": 10,
+   "min_F_over_C2_depths": 0.0,
+   "min_artist": "Desired",
+   "margin_to_B_unk": -5.3788,
+   "reaches": true,
+   "hit_carried_by": "unmatched (F=0, absence assumption)"
+  }
+ ],
+ "summary": {
+  "P_reaches": 4,
+  "of": 8,
+  "reaching_pairs": [
+   "The Shins -> Wishbone Ash",
+   "Metallica -> Taylor Swift",
+   "Pink Floyd -> Aphex Twin",
+   "Nirvana -> CROOVE"
+  ],
+  "reaching_carried_by_unmatched": [
+   "Nirvana -> CROOVE"
+  ],
+  "failing_pairs_margin_above_B_unk": {
+   "Miles Davis -> Daft Punk": 0.2034,
+   "Radiohead -> The Beatles": 0.7344,
+   "Muse -> Coldplay": 0.2571,
+   "Madonna -> Bob Dylan": 0.0985
+  },
+  "failing_pairs_within_0.15_of_B_unk": [
+   "Madonna -> Bob Dylan"
+  ],
+  "median_margin_of_failing_pairs": 0.23025
+ },
+ "read": "C2 is a FLOOR that production already clears. Its evidential value is one-sided: it can fail a candidate that reaches FEWER pairs than P, and it cannot distinguish a candidate that reaches more. §3's Attack 1 (the famous ladder) is therefore closed by C2 only against a ladder that also loses P's existing reach; a ladder that leaves P's 4 reaching pairs alone passes C2 unchanged. On this pair set the discriminating load sits on C1 and C3."
+}

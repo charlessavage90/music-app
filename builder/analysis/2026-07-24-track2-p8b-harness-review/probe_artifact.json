@@ -1,0 +1,109 @@
+{
+ "Q1_artifact": {
+  "file": "graph-t15-tiebreakfix.bin",
+  "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "N": 74193,
+  "E_directed": 898006,
+  "E_undirected": 449003,
+  "degree": {
+   "min": 1,
+   "max": 50,
+   "mean": 12.103648592185246,
+   "median": 9.0,
+   "p99": 44.0
+  }
+ },
+ "Q2_scores": {
+  "min": 0.3411717414855957,
+  "max": 1.0,
+  "n_exactly_1": 17574,
+  "n_above_1": 0,
+  "frac_exactly_1": 0.019570025144598144,
+  "n_in_[0.999,1.0)": 118,
+  "verdict": "`sim >= 1.0` and `sim == 1.0` select the same edge set"
+ },
+ "Q3_currencies": {
+  "pctl_min": 0.002783318956221695,
+  "pctl_max": 1.0,
+  "jump_scale_pctl": 0.5364948605183316,
+  "mean_abs_dpop_raw": 0.07702204060829107,
+  "mean_abs_dpctl": 0.14356529069798848,
+  "w_hop": 0.02,
+  "mean_jump_cost_raw_in_w_hop": 3.8511020304145536,
+  "mean_jump_cost_pctl_meanmatched_in_w_hop": 3.8511020304145536,
+  "mean_jump_cost_pctl_unmatched_in_w_hop": 7.178264534899424,
+  "A1u_scale_vs_A1": 1.8639507544095677
+ },
+ "Q4_duplicate_names": {
+  "distinct_names": 72951,
+  "names_shared_by_2plus_nodes": 1058,
+  "nodes_involved": 2300,
+  "frac_nodes_with_a_shared_name": 0.031000229132128368,
+  "worst": [
+   [
+    "",
+    33
+   ],
+   [
+    "Gemini",
+    5
+   ],
+   [
+    "Ghost",
+    5
+   ],
+   [
+    "Nina",
+    5
+   ],
+   [
+    "Punch",
+    5
+   ],
+   [
+    "Solo",
+    5
+   ],
+   [
+    "Arcane",
+    4
+   ],
+   [
+    "Bliss",
+    4
+   ],
+   [
+    "Carnage",
+    4
+   ],
+   [
+    "Dream",
+    4
+   ]
+  ]
+ },
+ "Q5_X_is_not_a_dive_bound": {
+  "null_frac_pop_ascending_over_all_directed_edges": 0.4997850793869974,
+  "nodes_measured": 74193,
+  "X_cheapest_hop_ascends_frac": 0.8687072904451902,
+  "A0_cheapest_hop_ascends_frac": 0.8261291496502365,
+  "X_mean_dpop_of_cheapest_hop": 0.11717449474994467,
+  "A0_mean_dpop_of_cheapest_hop": 0.09182067364762062,
+  "note": "the jump term is |dpop|, symmetric: w_jump = 0 removes the price of CLIMBING as well as DIVING, so X is an extreme of the pricing axis, not a lower bound on fame"
+ },
+ "Q6_toll_magnitude": {
+  "formula": "toll = w_sim * (1 - toll_s)   (mirror.py:178)",
+  "w_hop": 0.02,
+  "T1a_s0.95_at_w_sim_3.0_in_w_hop": 7.500000000000001,
+  "T1a_s0.95_at_w_sim_1.5_in_w_hop": 3.7500000000000004,
+  "T1b_s0.80_at_w_sim_3.0_in_w_hop": 30.000000000000004,
+  "T1b_s0.80_at_w_sim_1.5_in_w_hop": 15.000000000000002,
+  "cells_with_w_sim_1.5": [
+   "A3",
+   "A5",
+   "A6",
+   "A7",
+   "X(ineligible)"
+  ]
+ }
+}

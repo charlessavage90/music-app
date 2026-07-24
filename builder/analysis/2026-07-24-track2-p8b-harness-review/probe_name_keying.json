@@ -1,0 +1,95 @@
+{
+ "artifact": {
+  "file": "graph-t15-tiebreakfix.bin",
+  "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "N": 74193
+ },
+ "blank_name_nodes": {
+  "n": 33,
+  "pop_raw": {
+   "min": 0.0,
+   "median": 0.18004873394966125,
+   "max": 0.5055443048477173
+  },
+  "pop_pctl": {
+   "min": 0.002783318956221695,
+   "median": 0.20343837610524046,
+   "max": 0.9121199051110632
+  },
+  "degree": {
+   "min": 1,
+   "median": 4.0,
+   "max": 28
+  },
+  "examples_mbid_disambig": [
+   {
+    "node": 2024,
+    "mbid": "06e1ca5b-9686-4ff5-9eb0-c9695c37c72e",
+    "disambiguation": "",
+    "pop_raw": 0.18229244649410248,
+    "degree": 5
+   },
+   {
+    "node": 5359,
+    "mbid": "12df23de-4a54-486c-ac3f-840a0f1d1fef",
+    "disambiguation": "",
+    "pop_raw": 0.15292035043239594,
+    "degree": 2
+   },
+   {
+    "node": 6835,
+    "mbid": "18197573-80e1-4184-bd66-54c7c8ceb8ed",
+    "disambiguation": "",
+    "pop_raw": 0.08590877801179886,
+    "degree": 2
+   },
+   {
+    "node": 14462,
+    "mbid": "3268543c-4d37-4502-a380-3eb5083339a1",
+    "disambiguation": "",
+    "pop_raw": 0.18864752352237701,
+    "degree": 4
+   },
+   {
+    "node": 15293,
+    "mbid": "355010c2-df90-40e8-bd4c-adbde25a0d21",
+    "disambiguation": "",
+    "pop_raw": 0.14681829512119293,
+    "degree": 4
+   },
+   {
+    "node": 17522,
+    "mbid": "3d0a762f-3bb0-4d88-bd62-5a68f6965f6e",
+    "disambiguation": "",
+    "pop_raw": 0.02659689635038376,
+    "degree": 1
+   }
+  ],
+  "why_it_matters": "fame.py would resolve the empty string; has_non_latin('') is False and a Wikidata label search for '' finds nothing, so such a node scores F = 0 (the fame floor = maximal reach) AND is not flagged by the A11 notability guard. All 33 also collapse onto one fame key."
+ },
+ "shared_name_nodes": {
+  "n": 2267,
+  "pop_raw": {
+   "min": 0.0,
+   "median": 0.2763952612876892,
+   "max": 0.8993790149688721
+  },
+  "pop_pctl": {
+   "min": 0.002783318956221695,
+   "median": 0.43258033211127883,
+   "max": 0.999663036445978
+  },
+  "degree": {
+   "min": 1,
+   "median": 8.0,
+   "max": 50
+  },
+  "distinct_shared_names": 1057,
+  "why_it_matters": "two different artists with the same name receive one fame value, whichever the resolver returns; C6's `distinct_interiors` under-counts by the same collapsing. resolve_names() in run_arms.py picks the highest-popularity duplicate for ENDPOINTS, but interiors are whatever the router visited."
+ },
+ "population_context": {
+  "frac_of_all_nodes_below_pctl_0.10": 0.1000229132128368,
+  "frac_of_blank_below_pctl_0.10": 0.2727272727272727,
+  "frac_of_shared_below_pctl_0.10": 0.12880458756065286
+ }
+}
