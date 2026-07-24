@@ -222,6 +222,25 @@ minutes of use surfaced immediately.
 twenty minutes when a session ends. Write a short **test queue** instead: what changed,
 what to exercise, and what "wrong" would look like. Mark the item *queued*, and finish.
 
+**Write the entry for someone holding a mouse, not for the session that wrote the code.**
+Every step is a thing to *do* and a thing to *look at*. This is where an entry goes wrong:
+
+- **Never name an identifier, file or function in the steps.** "Press *know them already*
+  five or six times" is a step. "The floor relaxation is the part with the most renamed
+  variables (`base_floor_raw`, `floor_raw`, …)" is the author narrating their diff, and it
+  actively misleads — a reader reasonably asks whether it means one *kind* of bypass
+  matters more, which is a question the sentence raised and did not answer.
+- **If one variant of an action really is more revealing, say which and say so plainly**
+  ("use that button rather than the other one — it pushes hardest on what changed"). Half
+  an explanation is worse than none: it creates a decision the reader cannot make.
+- **Do not restate a test count.** It is stale within the session that wrote it.
+- Put implementation detail behind a single pointer to the execution log, for the reader
+  who wants it. Nobody testing the app needs it inline.
+
+The tell is a step the owner cannot act on without asking what a term means. Reread each
+step as a person who has not seen the diff — that pass takes a minute and is the whole
+difference between an entry that gets run and one that gets queried.
+
 The forcing function sits on the other end: **a session starting new work checks the
 queue first and flags anything that has been sitting untested.** That keeps it honest
 without gating anything.

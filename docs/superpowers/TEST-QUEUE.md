@@ -15,26 +15,30 @@ the point.**
 
 **Expected outcome: nothing changes.** This is a regression check, and a short one.
 
-**What changed.** No behaviour, by intent. Every popularity- and degree-derived
-identifier in shipped code was renamed to carry its currency (`popularity` → `pop_raw`,
-`w_hub` → `w_degree_hub`, and so on), and the builder gained a check that refuses to
-emit a graph missing famous artists. **The graph itself is untouched** — same adopted
-artifact, same sha256, no rebuild. The cost function's arithmetic is unchanged; only the
-names of the quantities in it moved.
+**What changed.** No behaviour, by intent. A lot of quantities in the routing code were
+renamed so their names say what they measure, and the builder gained a check that refuses
+to produce a graph missing famous artists. **The graph itself is untouched** — same
+adopted artifact, same checksum, no rebuild. The routing sums the same numbers in the
+same order; only the labels on them moved. (Detail, if wanted: execution log,
+"Pre-Track-2 guards".)
 
-**Why it is worth ten minutes anyway.** A rename that passes 258 tests can still have
-swapped two variables inside an expression that no test distinguishes. The suites cover
-the cost function's *behaviour* on small fixtures; they do not cover whether real paths
-between real artists still feel right.
+**Why it is worth ten minutes anyway.** A rename can swap two quantities inside a
+calculation and still pass every test, because the tests check the routing on tiny
+made-up graphs where two quantities that differ in the real world happen to be equal.
+Nothing automated checks whether real paths between real artists still feel right. That
+is the only thing this queue entry is for.
 
 **What to exercise:**
 
 1. **Any two paths you already have a feel for.** Miles Davis → Daft Punk, or whatever
    you used last time. They should be the same paths you saw yesterday.
-2. **Bypass a few times on one of them.** The floor relaxation is the part with the most
-   renamed variables (`base_floor_raw`, `floor_raw`, `effective_floor_raw`), so if a
-   rename crossed a wire, repeated bypass is where it shows.
-3. **Search two or three artists.** Search ranks by popularity and that read was renamed.
+2. **On one of them, press "know them already" five or six times in a row.** Use that
+   button rather than "not for me" — both were touched, but "know them already" pushes
+   hardest on the changed code, so it is where a mistake would show first. Then press
+   "not for me" two or three times on a fresh path, just to cover the other button.
+3. **Search two or three artists.** Search orders its results by popularity, which was
+   one of the quantities touched — so the check is simply that the obvious match comes
+   first, not buried under obscure artists with similar names.
 
 **What "wrong" would look like:** paths that are *different* from what you remember for
 the same two artists — that is the whole signal here, since nothing was supposed to
