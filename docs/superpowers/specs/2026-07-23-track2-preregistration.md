@@ -554,18 +554,35 @@ sweep's scope narrows. Confirm before the sweep runs; it is one question.
 perception does, well enough to (a) score C1's contrasts and (b) set C2's absolute band
 B_unk. The spec's §6.1 sketches this; here is the runnable version.
 
-**Sample (~33 artists, fixed before fetching):**
+**Sample (29 distinct artists — amended 2026-07-23, §9 A10; "~33" double-counted four.
+Fixed before fetching, and committed as
+[`builder/analysis/2026-07-23-track2-fame-proxy/sample.json`](../../../builder/analysis/2026-07-23-track2-fame-proxy/sample.json)):**
 
-- The **nine names** from the settled test-queue item (owner verdict already recorded —
-  spec §1.2). Their labels exist; they anchor the "unknown" end.
+- The **nine names** from the settled test-queue item (spec §1.2). ~~Their labels exist;
+  they anchor the "unknown" end.~~ **CORRECTED 2026-07-23 (§9 A10): their labels do not
+  exist at the granularity this section's scoring needs.** The record holds one
+  *collective* verdict — "No, mostly unknown" — which assigns no artist to a bucket, never
+  separates *heard of* from *never heard of* (the boundary B_unk is computed at), and by
+  the word "mostly" implies at least one was known without recording which. **The nine are
+  labelled with everyone else, and S1 anchoring the unknown end is now something the labels
+  must show rather than an assumption.** The original verdict is not retracted; it settled
+  §2.11's inference, which was all it was asked.
 - **Twelve interiors from the judged listen paths** (names are in the committed
   `listen_public.json`), chosen to span the strata the record identifies: superstar
   endpoints-class, the log §2.9 band (e.g. Whitney Houston, Paul Simon, Kylie Minogue),
-  and each pair's least-famous interior.
-- **Six likely-reach artists** — where winning arms will actually land: F6's named
-  reaches (Max Richter, Ólafur Arnalds) and the log §2.11 insular-stratum artists
-  (saib., Purrple Cat, idealism, Miami Nights 1984). This directly tests §2.11's
-  *inference* that these would not feel famous to the owner — currently unverified.
+  and each pair's least-famous interior. **§9 A10 fixes the twelve by a mechanical rule**
+  (the three named exemplars, then each pair's least / most / median in-graph-popular
+  interior, filled in that order, ties on lowest MBID) rather than by hand, since "span the
+  strata" pins no set. Selection uses `pop_raw` only to *spread* the sample, never to score
+  it.
+- ~~**Six likely-reach artists**~~ **TWO likely-reach artists — amended 2026-07-23 (§9
+  A10).** F6's named reaches, **Max Richter** and **Ólafur Arnalds**. The four log §2.11
+  insular-stratum artists originally listed here (saib., Purrple Cat, idealism, Miami
+  Nights 1984) are **already in S1's nine** and are counted there only; as written they
+  were double-counted in every pooled statistic and appeared in two strata this section
+  reads differently. **S3's stated purpose is unharmed** — testing §2.11's inference that
+  these would not feel famous to the owner is exactly what S1 does, with nine artists
+  rather than four. **S3 is now n = 2 and reports counts only, not an AUC.**
 - **Six stress cases for Attack 3** — plausibly-off-platform fame: Wishbone Ash,
   Chuck Berry, The Byrds, 林俊傑, EGOIST, CROOVE.
 
@@ -587,8 +604,10 @@ B_unk. The spec's §6.1 sketches this; here is the runnable version.
 
    **The four strata are named for reporting** (they are the sample definition above):
    **S1** the nine anchor unknowns · **S2** the twelve judged-listen interiors ·
-   **S3** the six likely-reach artists · **S4** the six off-platform stress cases.
-   Every statistic below is reported per stratum as well as pooled.
+   **S3** the ~~six~~ **two** likely-reach artists (§9 A10) · **S4** the six off-platform
+   stress cases. Every statistic below is reported per stratum as well as pooled — **and
+   with the strata disjoint, which they were not as originally written.** S3 at n = 2
+   reports counts only.
 
    - **Primary — mid-fame discrimination.** AUC (Mann–Whitney) of *know well* vs *heard
      of* fan counts: the probability that a randomly chosen *know well* artist outranks a
@@ -618,7 +637,9 @@ thresholds are pre-registered designer choices, not measured facts)*:
 - **AUC < 0.70** on the primary test (S4 excluded), or
 - **more than 1** catastrophic inversion **outside S4**, or
 - no valid B_unk exists, or
-- artist-search match failure > **20 %** of the sample after normalisation.
+- artist-search match failure > **20 %** of the sample after normalisation. *(§9 A10: the
+  proportion is unchanged and deliberately not renegotiated, but the sample is 29 rather
+  than 33, so this now fires at **6** failures where it previously fired at 7.)*
 
 *(The whole-sample Spearman is reported but cannot fire a falsifier. The old thresholds —
 ρ < 0.6 and > 2 absolute inversions — are withdrawn.)*
@@ -702,7 +723,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23, before any arm ran
 
-Nine amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review
+Ten amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -723,6 +744,7 @@ before it ran.
 | **A4** | **Read R6 added** — percentile arms moving ΔF positive while raw arms move it negative, with its mechanism, licenses and free falsifier. | **D3** (first half) | §2.4 |
 | **A5** | **Two completeness gaps closed:** `w_degree_hub` named in the held-constant table (analyst **O3**), and the S-mag column's degeneracy at ceiling-saturated endpoints stated up front. | O3 + new measurement | §1.2 · §1.3 note |
 | **A8** | **The A0 gate fired; the floor column stays off.** Identity failed on 1 cell of 252 (pair 1, first path). An exposure map over C1–C6 shows only **C5** crosses the change, and its fix costs zero extra runs: report the first-path inspection against **both P and A0**. Also records four corrections to the step-4 write-up, and the constraint that an FL arm's C3 gradient is partly its own device. | the A0 result + `findings/2026-07-23-a0-gate-analyst-review.md` | §1.4 A0 row · §1.5 · §2.4 R3 |
+| **A10** | **§5's sample is corrected and fixed, before any label is collected.** Two defects: (a) **S1 and S3 overlapped by four artists**, so "~33" was **29 distinct** and four artists would have been double-counted in every pooled statistic while appearing in two strata §5 reads differently — S3 is now the two F6 reaches only; (b) **§5's claim that S1's labels "already exist" is false** at the granularity its own scoring needs — the record holds one collective verdict ("mostly unknown"), not a per-artist three-bucket assignment, and cannot separate *heard of* from *never heard of*, which is where B_unk is computed. The nine are labelled with everyone else. S2's twelve are additionally fixed by a mechanical rule rather than hand-picked. **Sample committed as an artifact**, and the match-failure falsifier now fires at 6 rather than 7. | deriving the sample against the repo, before P4 | §5 sample · §5 strata · §5 falsifiers · `builder/analysis/2026-07-23-track2-fame-proxy/` |
 | **A9** | **Every remaining gate and branch trigger gets an effect size.** A gate without one cannot tell the finding it was written for from noise, and fires the expensive response either way. | the A0 gate having none | §9, below |
 
 | **A7** | **P1 discharged, and pair 8 substituted.** The owner's F6 trace pair resolved to **Miles Davis → Daft Punk** — pair 1. §2.3's substitution rule applied; pair 8 becomes **Nirvana → CROOVE** and pair 1 inherits the trace rationale. | P1's answer | §2.3 (three places) |
