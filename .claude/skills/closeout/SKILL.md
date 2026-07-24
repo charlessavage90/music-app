@@ -259,8 +259,11 @@ document the doc map names as never-use-as-context. It survived a full closeout 
 the sweep that ran covered `docs/` and `config.py` and stopped there.
 
 So grep both `docs/` and `.claude/` for restated numbers and for shape claims. Convert
-restatements to citations. Where a figure is deliberately inline as a hazard warning at
-the point of use, say so in the file so the next sweep does not re-open it.
+restatements to citations. Where a figure is deliberately inline as a hazard warning at the
+point of use, it **cites the section that owns it, and the next sweep re-checks it against
+that section** rather than skipping it. An exemption that suppresses its own re-detection is
+how a correct restatement becomes a stale one — the drift the one-document rule exists to
+prevent.
 
 **This is the same failure class as D2 and as the fixture-seed defect**: a change removes
 a property that something unrelated had silently come to depend on. Nothing breaks, no
@@ -399,8 +402,10 @@ wc -l ~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memor
 ```
 
 Record the net line change in the retained log. **If it is positive, the commit message
-names what the addition replaces or shortens — or states that it is net-new and why nothing
-came out.** Net-new is legitimate; unexamined is not.
+names what the addition replaces or shortens.** If nothing came out, the addition needed the
+owner's agreement before it landed — net-new is his call, not the session's. A justification
+written by the session that wanted the lines is not a check; that is how this layer reached
+1,436 lines with every individual addition justified.
 
 **Both commands are needed, because `memory/` lives outside the repo and is not in git** —
 a diff cannot see it, yet it loads into every session and the budget rule names it. Take its

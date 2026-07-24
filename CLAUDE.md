@@ -227,8 +227,9 @@ comparison assumed one.
 > column per knob that varies, and the isolating baseline named per row.
 >
 > **A variant's baseline is the variant differing by exactly one column.** If none exists,
-> either build one or state explicitly that this is a package comparison and what it
-> therefore cannot tell you.
+> either build one or name the conclusion the comparison is barred from supporting — and
+> check that no read-of-results in the document then claims it. A disclaimer nothing later
+> reads is not a control.
 
 The table is what makes this mechanical. You don't have to *notice* a confound — you read
 across the row and count the differences. This is not hypothetical rigour: a two-knob
@@ -345,10 +346,11 @@ bodies load unconditionally, before a session reads a single project document. E
 layer is routed around by `docs/README.md`; this one is not, so it is the only place where
 growth is a standing tax. It was 661 lines on 2026-07-21 and 1,436 on 2026-07-23.
 
-> **Additions to it are displacement-only: name what the addition replaces or shortens, or
-> state that it is net-new and why nothing came out.** Checked at `closeout` **D6**, from
-> the diff. This is A3's rule — *a deferral must have an address* — applied to context
-> instead of to findings.
+> **Additions to it are displacement-only: name what the addition replaces or shortens —
+> and if you cannot, it is not a session's to add.** Propose it to the owner and leave the
+> file alone; growing the layer that taxes every future session is his call, not a
+> session's. Checked at `closeout` **D6**, from the diff. This is A3's rule — *a deferral
+> must have an address* — applied to context instead of to findings.
 
 **Rules here do not expire, and must not be given expiry conditions.** "Figures live in one
 document", `UV_LINK_MODE=copy`, currency-in-the-name: these are invariants, and a review
