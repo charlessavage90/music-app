@@ -242,3 +242,37 @@ def test_every_violation_is_reported_at_once():
 
 def test_healthy_graph_passes():
     check_acceptance(_graph(*_healthy()), CRITERIA)
+
+
+def test_a_nameless_artist_is_rejected():
+    """The F8 defect: 33 of these are in the adopted 75k artifact.
+
+    A nameless artist is unsearchable, cannot resolve a clip, and can only
+    ever surface as a blank interior card — see `acceptance.py`. The check
+    takes no criterion, so it fires against the scaled-down set too.
+    """
+    names, degrees, pop = _healthy()
+    names[5] = ""
+    with pytest.raises(ArtifactRejected, match="carry no name"):
+        check_acceptance(_graph(names, degrees, pop), CRITERIA)
+
+
+def test_a_whitespace_only_name_is_rejected():
+    """`.strip()`, not falsiness: " " is as unusable as "" and less visible."""
+    names, degrees, pop = _healthy()
+    names[5] = "   "
+    with pytest.raises(ArtifactRejected, match="carry no name"):
+        check_acceptance(_graph(names, degrees, pop), CRITERIA)
+
+
+def test_the_nameless_check_names_the_mbid_not_the_name():
+    """A blank name cannot identify itself in an error message.
+
+    Every other violation can quote the artist's name; this one structurally
+    cannot, so it must quote the mbid or be undiagnosable.
+    """
+    names, degrees, pop = _healthy()
+    names[5] = ""
+    with pytest.raises(ArtifactRejected) as excinfo:
+        check_acceptance(_graph(names, degrees, pop), CRITERIA)
+    assert f"{5:036d}" in str(excinfo.value)

@@ -11,6 +11,17 @@ inside `build_from_archive`: that function is exercised throughout the suite
 with miniature archives whose graphs cannot satisfy production invariants,
 and the invariants here describe a production *artifact*, not the function.
 
+⚠ **The blank-name check below currently rejects a production rebuild, by
+design.** The adopted 75k artifact contains 33 nameless artists (measured:
+`builder/analysis/2026-07-24-track2-p8b-harness-review/`, F8), and how to
+remediate them — drop, or backfill names from a new source — is an OPEN
+OWNER DECISION as of 2026-07-24. The tripwire lands ahead of the remediation
+on purpose: no production build is due before Track 2 adoption, and a check
+that refuses is what stops the deferral being silently forgotten. **Success
+condition: the owner picks drop-or-backfill, the chosen remediation lands in
+the build, and this check then passes on a rebuild.** Do not weaken it to
+unblock a build; implement the remediation.
+
 The criteria are data, not code, so the whole set lives in one place
 (`PRODUCTION_ACCEPTANCE`) and a test can substitute a scaled-down set.
 """
@@ -130,6 +141,28 @@ def check_acceptance(graph: Graph, criteria: AcceptanceCriteria) -> None:
     """
     problems: list[str] = []
     degrees = _degrees(graph)
+
+    # Every artist must have a name, and this check takes no criterion because
+    # there is no scaled-down version of it: zero is the only defensible count.
+    #
+    # A nameless artist cannot be reached through search (`api/…/search.py`: an
+    # empty name matches no query, and an empty query returns nothing) and
+    # cannot resolve a clip (`api/…/clips.py` passes the name itself as the
+    # provider query). So the ONLY way one can ever reach a user is as a blank
+    # interior card that the bypass buttons will still operate on.
+    #
+    # The cause is upstream and silent rather than a parse failure: an artist's
+    # name is only ever observed when it appears as *someone else's* neighbour
+    # (`sources/listenbrainz.py` — there is no per-artist metadata endpoint),
+    # and `pipeline.py` defaults an unseen one to "". Nothing objected, which
+    # is the same gap this module was created to close, one instance further on.
+    blank = [i for i, name in enumerate(graph.names) if not name.strip()]
+    if blank:
+        sample = ", ".join(graph.mbids[i] for i in blank[:3])
+        problems.append(
+            f"{len(blank)} artist(s) carry no name (e.g. {sample}) — "
+            f"unsearchable, clipless, and renderable only as a blank card"
+        )
 
     present = set(graph.names)
     missing = [name for name in criteria.canonical_names if name not in present]

@@ -1439,3 +1439,71 @@ switching itself on inside the diving arms is the confound this whole design was
 around.
 
 **No arm has run.** Artifact untouched.
+
+### Nameless artists — the owner's product argument, and a tripwire ahead of the remediation (2026-07-24)
+
+**Raised by the owner** off P8b's F8, which had noted 33 blank-named nodes only as a hazard to
+*fame keying*. His argument was the product one F8 did not make: a nameless artist cannot be
+entered as an endpoint, cannot yield a clip, and would be a poor card to show in a discovery
+tool regardless. **He is right on all three, and the third is worse than stated.**
+
+**Confirmed in code, not inferred:**
+
+- **Unsearchable by construction** — `search.py` returns `[]` for an empty query, and
+  `"".startswith(q)` is false for every non-empty query. No keystroke can surface one.
+- **Clipless** — `clips.py:89` passes the name itself as the provider query string.
+- **Not inert.** Degree runs to 28 and `pop_raw` to 0.5055 — mid-to-high. These sit *inside*
+  the similarity structure as ordinary routing waypoints, so the one way they can reach a user
+  is the worst one: a blank interior card the bypass buttons still operate on.
+
+**Cause — a default, not a parse failure.** `pipeline.py:245` reads
+`name=identities.get(mbid, ("", ""))[0]`, and a name is only ever observed when the artist
+appears as *someone else's* neighbour (`sources/listenbrainz.py`: no per-artist metadata
+endpoint exists), with `row.get(FIELD_NAME) or ""` accepting a missing one silently. Nothing
+downstream objected — the same gap `acceptance.py` was created to close, one instance on.
+
+**Blast radius measured: 36 of 74,193 (0.049 %).** Dropping the 33 and re-pruning to the
+largest component loses 3 further nodes, singletons that hung off a blank one.
+
+**Scope closed, and one adjacent class deliberately excluded.** All 33 are truly empty — no
+whitespace-only variants, and none of MusicBrainz's placeholder strings (`[unknown]`,
+`Various Artists`, `[no artist]`) are present at all. **111 nodes whose names are only digits
+or punctuation are NOT in this class and were left alone:** `69` is a Carl Craig alias,
+`7038634357` a real project name. They are searchable and clip-resolvable, so the argument does
+not reach them, and a tidy-looking regex here would eat real artists.
+
+**Sequencing — the fix is right, rebuilding now is not.** A new artifact invalidates the mirror
+byte-identity verification, the A0 gate's 252 cells, production's baseline fame medians (what
+every arm is scored against), the fame cache seeded with P's 156 interiors, and P8b's own
+measurements — Track 2 restarts from before the A0 gate. Against that: 0.049 % of nodes, in a
+**relative** comparison between arms on one fixed graph. A change that small flipping a ranking
+would mean the ranking was noise. **Rebuild is gated to Track 2 adoption**, when one happens
+anyway if a candidate wins.
+
+**The remediation is an OPEN OWNER DECISION — drop, or backfill names from a new source.**
+Backfill could recover up to 36 real artists but needs a data source the crawler does not have.
+Recommended: drop, at 0.049 %. **The owner deferred it 2026-07-24 after confirming it does not
+block progress** — and it does not, because the tripwire and the remediation separate.
+
+**What landed instead: the tripwire, in `acceptance.py`.** An unconditional zero-blank-names
+check — no criterion, because zero is the only defensible count, and it therefore fires against
+the scaled-down test set too. It quotes the **mbid**, since a blank name cannot identify itself
+in an error message. Three tests added; full builder suite 115 passed.
+
+**This deliberately rejects a production rebuild until the remediation lands.** That is the
+forcing function, and it is safe because `check_acceptance` runs at the emission point
+(`cli.py:118`) and **not** inside `build_from_archive` — so no test and nothing in the sweep
+path touches it, and no production build is due before adoption. Success condition recorded at
+the check itself: owner picks, remediation lands, check passes on rebuild. **Weakening the check
+to unblock a build is the one wrong response.**
+
+**Guarding the gap in the sweep meanwhile,** since today's artifact still contains all 33: fame
+keyed by **mbid** rather than name (P8b F8's fix, owed regardless), and **a blank-named interior
+must not count as obscurity reach** — it is an artifact defect, not a discovery success, and
+crediting one would let an arm bank a win on a card that renders empty.
+
+**A blank card is user-visible today** (33 of 74,193, paths 4–6 hops, so rare and never yet
+reported). Queued for the test queue rather than hotfixed: changing the router mid-experiment
+costs more than the rare empty card does.
+
+**No arm has run.** Artifact untouched.
