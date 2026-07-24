@@ -1404,3 +1404,38 @@ reconstructed at closeout.
 banner count) remain in place. Cold-start navigation test passed.
 
 **No arm has run.**
+
+### P8b dispatched — the harness review, on branch `track2-arms` (2026-07-24)
+
+Fresh session, picked up at the scorer/P8b seam. `session-start` ran clean: tree on `main` at
+`0cd6c70` (PR #11 merged, `track2-sweep` deleted), no concurrent session, artifact identity
+re-verified as `4cb84ef9…` against the handoff, test queue holding nothing stale. Working
+branch **`track2-arms`**, off `main`, pushed at the first commit.
+
+**P8b is the gate, and it was dispatched rather than deferred.** §7 lists the prerequisites as
+blocking all arms, and P8b flipped from "not yet due" to due the moment the scorer was
+committed. The builder session is barred from self-reviewing it, so this is the first session
+able to discharge it.
+
+**The brief was bounded in two ways that matter, and both are recorded because they are
+protocol, not preference:**
+
+- **The reviewer may run arm `P` only.** Any factorial or attachment arm run before P8b is
+  discharged would break the pre-registration gate — and would additionally make the reviewer
+  blind-listen-ineligible under the eligibility line. Static reading plus arithmetic over the
+  artifact is the intended method; the P8 review's highest-value findings (D1–D3) were exactly
+  that, and were arithmetic showing whole arms provably could not move.
+- **Derivation, not judgement.** The remit excludes whether the experiment is worth running and
+  which candidate to adopt. Those are the owner's, per CLAUDE.md's decision table.
+
+**Five items named for the reviewer**, four of them pre-existing open findings rather than new
+worries: C2's near-non-discrimination on this pair set (production itself scores the threshold
+minimum, so C1/C3 carry the load); **D4's residual** — §9's still-open table says the d15/d20
+notability guard remains to be wired into the **C2 scoring path**, and the scorer README
+describes it as living in `fame.py`, which is a discrepancy the review is asked to settle;
+A13's uniform infeasible-cell drop actually defeating arm-correlated missingness; arms provably
+incapable of moving; and **A8's floor column verified off in code**, since a dormant `w_floor`
+switching itself on inside the diving arms is the confound this whole design was restructured
+around.
+
+**No arm has run.** Artifact untouched.
