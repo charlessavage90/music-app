@@ -8,7 +8,7 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23 — seven amendments (A1–A7), all made before any arm ran.**
+> **⚠ AMENDED 2026-07-23 — nine amendments (A1–A9); A1–A7 before any arm ran, A8–A9 on the A0 gate result.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
 > found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
@@ -175,7 +175,7 @@ Four knobs vary in Stage A. Production values from `config.py`: `w_sim = 3.0`,
 | Arm | Definition | Isolating baseline | Purpose |
 |---|---|---|---|
 | **P** | Shipped `find_path`, production config, floor **raw** at 1.0 | — | Mirror-and-verify target: the mirror must reproduce P byte-identically before any knob turns (log §3.10). Also the user-facing comparison baseline for the primary outcome. |
-| **A0** | P's weights with `w_floor = 0` (raw currency, J-mag 1.0, S-mag 3.0, toll off) | **P** (one knob: floor off) | Re-verifies claim 23 on the Track 1 graph: pre-registered expectation is **path-identity to P on the full pair×depth grid**. If identity fails, the floor is already live on this artifact, claim 23 does not transfer, and the factorial below is re-anchored on P with floor as a fully crossed column — a design revision, recorded before proceeding. |
+| **A0** | P's weights with `w_floor = 0` (raw currency, J-mag 1.0, S-mag 3.0, toll off) | **P** (one knob: floor off) | Re-verifies claim 23 on the Track 1 graph: pre-registered expectation is **path-identity to P on the full pair×depth grid**. If identity fails, the floor is already live on this artifact, claim 23 does not transfer, and the factorial below is re-anchored on P with floor as a fully crossed column — a design revision, recorded before proceeding. **RUN 2026-07-23 — identity FAILED on 1 cell of 252** (pair 1, first path). Resolved by **A8**: the floor column stays OFF; the factorial is NOT re-anchored. See §9 A8 for the exposure map that settles it. |
 
 **Core factorial** — 2 × 2 × 2 over J-cur × J-mag × S-mag, floor off, toll off. A0 is
 the (raw, 1.0, 3.0) cell. In a full factorial every cell has a one-column neighbour;
@@ -253,7 +253,7 @@ answered.
 
 ### 1.5 Guards carried by every arm (from spec §4.3, two amended)
 
-- **No-regression at d0:** node overlap of each pair's d0 path vs P, reported per pair;
+- **No-regression at d0:** node overlap of each pair's d0 path **vs both P and A0**, reported per pair *(amended 2026-07-23, §9 A8 — A0 is production with the floor switched off, its grid already exists, and on 1 pair of 12 the two references disagree at d0; quoting only P would leave that cell unattributable)*;
   every changed d0 path is listed and inspected, not assumed benign. No numeric
   auto-pass threshold — inspection is the spec's own instruction. Note the tension
   honestly: static weights cannot dive at depth while leaving d0 untouched unless the
@@ -393,7 +393,11 @@ journeys (§6).
   > C2 score, making FL1/FL2 numerically identical to W in every scored cell (analyst
   > review D2 — arithmetic, not inference). The remedy was inoperative. With the
   > pre-registered relax constant and the added early snapshots, R3 is now reachable and
-  > reads as written. **A second consequence, recorded because it bears on the baseline:**
+  > reads as written. **Further amendment 2026-07-23 (§9 A8), and it constrains how an
+  > FL pass may be read:** the percentile floor sits at ≈ 0.74–0.75 at d5 and 0 at d20 on
+  > all 12 pairs, so an FL arm's C3 gradient is **substantially manufactured by the
+  > device itself**. An FL arm passing C3 is *not* the same evidence as a floor-off cell
+  > passing it, and must never be quoted as though it were. **A second consequence, recorded because it bears on the baseline:**
   > the same arithmetic applies to production **P** in raw currency, so whatever depth
   > gradient P shows inside the C1 window comes from the **exclusion set alone**, not from
   > the floor. P is not a "router with a working depth device" and must not be described
@@ -698,7 +702,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23, before any arm ran
 
-Seven amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer
+Nine amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -718,6 +722,9 @@ before it ran.
 | **A3** | **The percentile currency level is mean-matched by definition,** so J-cur is a genuine one-column contrast; arm **A1u** added to keep the scale component visible. | **D3** (second half) | §1.3 J-cur row + note · §1.4 A1u · run count |
 | **A4** | **Read R6 added** — percentile arms moving ΔF positive while raw arms move it negative, with its mechanism, licenses and free falsifier. | **D3** (first half) | §2.4 |
 | **A5** | **Two completeness gaps closed:** `w_degree_hub` named in the held-constant table (analyst **O3**), and the S-mag column's degeneracy at ceiling-saturated endpoints stated up front. | O3 + new measurement | §1.2 · §1.3 note |
+| **A8** | **The A0 gate fired; the floor column stays off.** Identity failed on 1 cell of 252 (pair 1, first path). An exposure map over C1–C6 shows only **C5** crosses the change, and its fix costs zero extra runs: report the first-path inspection against **both P and A0**. Also records four corrections to the step-4 write-up, and the constraint that an FL arm's C3 gradient is partly its own device. | the A0 result + `findings/2026-07-23-a0-gate-analyst-review.md` | §1.4 A0 row · §1.5 · §2.4 R3 |
+| **A9** | **Every remaining gate and branch trigger gets an effect size.** A gate without one cannot tell the finding it was written for from noise, and fires the expensive response either way. | the A0 gate having none | §9, below |
+
 | **A7** | **P1 discharged, and pair 8 substituted.** The owner's F6 trace pair resolved to **Miles Davis → Daft Punk** — pair 1. §2.3's substitution rule applied; pair 8 becomes **Nirvana → CROOVE** and pair 1 inherits the trace rationale. | P1's answer | §2.3 (three places) |
 
 > **A7's trigger was interpreted, not merely executed — the one amendment here that is a
@@ -741,6 +748,23 @@ before it ran.
 > by his own first pass. So a defective interpretation rule does not merely delay P4; it
 > can spend the resource that P4 exists to acquire. Fixing the rule *before* the labels are
 > collected costs nothing; fixing it after costs the labels.
+
+### A9 in full — effect sizes for the gates, not only the outcomes
+
+Every *outcome* criterion here carries a threshold (§2.2). Every *gate* did not, and the A0
+gate showed what that costs: an exact-identity test over 252 cells, whose failure branch
+roughly doubles the sweep, fired on **one** cell at a depth no criterion scores — and got
+the identical reading a 200-cell systemic divergence would have got.
+
+| Gate | Trigger as written | Effect size, fixed now |
+|---|---|---|
+| Mirror byte-identity (§1.4, step 2) | any difference | **Unchanged, and deliberately absolute.** Any difference means the harness is not the router, so there is nothing to size. This is the one gate where "any difference at all" is the correct trigger, and it is now stated rather than assumed. |
+| A0 vs P (§1.4) | any difference | **Superseded by the exposure map.** A divergence fires the re-anchor only if it lands on a cell some criterion reads — i.e. any depth ≥ 5, or a d0 cell whose reference cannot be doubled. A d0-only divergence is handled by dual-referencing C5 at zero cost. *(Applied retrospectively in A8; the map is the general form.)* |
+| §5 proxy falsification (P4) | four named falsifiers | Already sized (A6). |
+| Held-out confirmation (§2.2) | direction in ≥ 3 of 4 | Already sized; its 31 % null pass rate is analyst **D6**, still open. |
+
+**The general rule, now in CLAUDE.md:** fix the size of difference that fires a gate — or
+state that any difference at all is decisive, and why.
 
 ### What the amendments cost, stated plainly
 

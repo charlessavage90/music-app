@@ -646,14 +646,84 @@ proceeding, so no further arm has run. This is also a **material mid-flight amen
 therefore a handoff seam** by the CLAUDE.md rule — the next session reads a governing
 document that has changed, which is the condition the rule was written for.
 
-**Options put to the owner** (his call; consequences stated, no recommendation smuggled in
-as a finding):
+### The exposure map — what the floor change actually touches
 
-| | Option | Consequence |
-|---|---|---|
-| **1** | Follow §1.4 literally — re-anchor with floor as a fully crossed column | 16 factorial cells plus attachments ≈ 22 runs, roughly double. Fully controlled, unarguable. But the 8 added cells can differ from their floor-off twins **only at d0–d5**, by the arithmetic in finding 2 — so most of the purchased information concerns depths no criterion scores. |
-| **2** | Narrow amendment — keep floor **off** across the factorial as designed, on the measured ground that it cannot confound any scored cell; leave C5's d0 inspection referenced to P, which §1.5 already specifies | One dated amendment, no extra runs. Rests entirely on finding 2 being right — which is arithmetic plus a zero measured across 12.5 M relaxations, so it is checkable rather than trusted. |
-| **3** | Cross the floor only where it is alive — run the 8 floor-on cells to d5 and no further | Cheaper than 1, still fully controlled; awkward to report, since the arms have ragged depth coverage. |
+*Owed before any escalation, per the CLAUDE.md rule added 2026-07-23. Building it first
+would have dissolved most of what was escalated.* One row per pre-registered criterion:
+does the floor change cross it, where, and what was measured there.
+
+| Criterion | What it reads | Crosses the floor? | Measurement |
+|---|---|---|---|
+| **C1** | ΔF at ≥ 10 bypasses | **No** | Floor term identically zero at ≥ 7 bypasses for every raw-floor arm; P ≡ A0 at every depth ≥ 5 on all 12 pairs, both victim policies |
+| **C2** | absolute reach at 15 / 20 | **No** | as C1 |
+| **C3** | within-arm, 5 vs 20 | **No** | Every factorial cell A0–A7 has the floor **off**, so C3 is read inside an arm with no floor term at all. Even switched on, path exposure at 5 bypasses is zero |
+| **C4** | interior count at ≥ 10 | **No** | P ≡ A0 throughout that range |
+| **C5** | first path, vs P | **YES** | 1 pair of 12 differs, stable across both victim policies — pair 1, one interior substituted, 6 → 5 |
+| **C6** | proxy coverage | **No** | not a routing quantity |
+
+**One criterion crosses, and its fix costs zero extra runs.** A0 *is* production with the
+floor switched off, and its full grid already exists.
+
+### Decision — mine, and taken
+
+**Keep the floor off across the factorial (option 2), and report C5's first-path
+inspection against both P and A0.** No extra runs; one dated amendment.
+
+Stated per the CLAUDE.md rule on whose decision is whose: this is **methodology and run
+counts**, which is not the owner's column. The earlier version of this section tabled three
+options and handed them over — that was an abdication, and it is recorded as one.
+
+Why not the alternatives: **option 1** (cross the floor fully) roughly doubles the sweep,
+and the analyst review measured that its added cells do **not** buy a clean one-knob floor
+effect at depth — what they differ by there is *trajectory inheritance*, not a live floor.
+**Option 3** (floor-on cells to 5 bypasses only) would miss that inheritance entirely.
+What would change the decision: a demonstration that the d0–d2 asymmetry propagates into
+C1/C2 cells for some arm — the review looked and found P ≡ A0 at every depth ≥ 5 on both
+victim policies.
+
+### Corrections to the step-4 write-up, from the review
+
+Four of them, all mine, and two change what a reader would conclude:
+
+1. **The unconditional dead-bound is 7 `known` bypasses, not 6.** `ceil(base/0.15)` is 7 on
+   7 of the 12 pairs, which carry a strictly positive floor at 6. The measured zero at 6 was
+   a **routing** fact for the arms tested, not arithmetic. Scored depths are unaffected —
+   the claim was over-broad in span, not wrong where it was used.
+2. **"The added cells can differ only at d0–d5" was false.** Floor-value invariance is not
+   floor-*effect* invariance: a changed first path changes which artist gets bypassed, and
+   that carries forward. Measured at 2 of 12 pairs still differing after twenty bypasses
+   for the diagnostic twins, stable across both victim policies.
+3. **The 51 % figure does not show what I used it to show.** A relaxation is an *edge
+   examined during search*, not an artist on the finished path — reachable is not binding.
+   It cannot falsify a claim about paths.
+4. **Claim 23 contains no mechanism, so "its mechanism is falsified" is not a coherent
+   statement.** The `w_jump` sentence belongs to **log §2.12**; the pre-registration §0
+   cites the two jointly, which is where the conflation came from.
+
+**What should enter the adjudication's claim table** (flagged, not edited — that document
+owns it): claim 23's "no path dips below the floor" **does not transfer** to this artifact
+and pair set; the headline is **nearly upheld** — refuted as an absolute, upheld at one
+changed cell in 252. The original measurement is **not** retracted. And log §2.12's
+mechanism is **refined, not demolished**: removing `w_jump` deepens the dip 24×, so
+`w_jump` *bounds* the dip rather than preventing it.
+
+### Two findings from the review that change later reads
+
+- **The FL arms' C3 gradient is substantially manufactured by their own device.** The
+  percentile floor sits at ≈ 0.74–0.75 at 5 bypasses and 0 at 20 on all 12 pairs, so an FL
+  arm passing C3 is **not** the same evidence as a floor-off cell passing it. This needs to
+  be attached to §2.4's R3 read before any FL arm is interpreted.
+- **"The floor dies after five bypasses" is true of the scripted protocol, not of the
+  shipped product.** Under all-`dislike` (relax 0.08) the raw floor survives to 12
+  bypasses; 13 is the universal any-mix bound. Relevant to C3 landing, not to Stage A.
+
+### The gate had no effect size, and that is the general lesson
+
+The A0 gate was an exact-identity test over 252 cells whose failure branch roughly doubles
+the sweep. It fired on **one** cell, at a depth no criterion scores, and got the identical
+reading a 200-cell divergence would have got. Every *outcome* criterion in the
+pre-registration carries a threshold; its **gates carried none**. Now a CLAUDE.md rule.
+Amendment **A8** gives the remaining gates effect sizes.
 
 **If A0 ≠ P, that is a pre-registered branch firing, not scope creep.** §1.4's A0 row
 already requires re-anchoring on P with floor as a fully crossed column — sixteen cells
