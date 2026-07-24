@@ -36,6 +36,16 @@ the output is a sanity signal in its own right:
   were scoring at the fame floor and sitting in P's own scored cells; the fallback recovers
   them (5.303 / 5.708 / 6.587) without disturbing the validated sample.
 
+## Config-figure discipline (closeout B5, checked)
+
+The scorer restates **no** figure from `config.py` — in particular none of the p99
+similarity-clamp figures that B5 requires to cite adjudication §5.4. Its only numeric
+constants are the pre-registered §2.2 thresholds (`C1_MEAN_MAX = -1.0`, `C3_DROP_MIN = 0.5`,
+…), each cited to §2.2 in `score.py`, and B_unk is **read at runtime** from the committed
+`../2026-07-24-track2-fame-proxy-wikipedia/score.json`, never hard-coded. The cost weights
+live in `mirror.py` (not this directory) and are cited there. So B5's clamp-citation rule
+does not bind here — recorded rather than skipped, per the tightened B5.
+
 ## Sequence from here
 
 Per the execution log's seam entry: **P8b review of this harness → then the arms.** No

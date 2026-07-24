@@ -8,7 +8,7 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23/24 — fifteen amendments (A1–A15); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result, A12 stops C6 gating because A11 inverted what it measures, A13 discharges D7, A14 adds two non-gating items on WGLL values 8-9, A15 fixes a resolver recall bug that poisoned P's baseline. No factorial arm has run.**
+> **⚠ AMENDED 2026-07-23/24 — sixteen amendments (A1–A16); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result, A12 stops C6 gating because A11 inverted what it measures, A13 discharges D7, A14 adds two non-gating items on WGLL values 8-9, A15 fixes a resolver recall bug that poisoned P's baseline, A16 corrects R5's barred floor attribution. No factorial arm has run.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
 > found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
@@ -245,6 +245,17 @@ one-column chains (A1–A5, A1u, T1a, T1b, FL1, FL2). FL1 vs P is a package comp
 currency *and* everything W carries); the isolating chain is P → A0 → … → W → FL1.
 Any result quoted outside this document must name which comparison it came from.
 
+> **The conclusion FL1 vs P is barred from supporting** *(named per the CLAUDE.md
+> factor-table rule as tightened 2026-07-24; amendment §9 A16).* An FL1-beats-P result
+> shows **the package** works; it **cannot** support "the percentile floor is the working
+> depth device" or "the floor is load-bearing", because FL1 differs from P by the floor
+> **and** every knob W carries. That attribution comes only from **FL1 vs W** (one column:
+> floor off → pctl floor). And "the floor is *necessary*" is narrower still: it holds only
+> where **W fails a criterion that FL1 rescues** — if W already passes, an FL1 that merely
+> ties it leaves the floor doing nothing. **The read that must route through this is R5**
+> (its "the floor would then be load-bearing" clause), checked and corrected below so the
+> disclaimer is not one nothing reads.
+
 **What has no isolating baseline, stated per the CLAUDE.md rule:** there is no arm
 isolating "floor raw at production strength under a repriced `w_jump`" — deliberately
 (§1.3, F row). The design therefore **cannot tell** whether the production raw floor
@@ -426,9 +437,14 @@ journeys (§6).
   weight sweep, and not route-aware waypoint selection, which stays rejected (log §4).
 - **R5 — passes offline and the listen.** Adopt per spec §4.5 (weights, currency, and
   percentile machinery land in `ApiConfig`/`pathfinding.py` with path-level tests);
-  proceed to Stage B (§4.4) on the adopted substrate; delete `w_floor`/`floor_relax_*`
-  only per §4.4, or *retain* them if an FL arm is the winner — in which case the spec's
-  §4.4 deletion clause is amended, since the floor would then be load-bearing.
+  proceed to Stage B (§4.4) on the adopted substrate. **On `w_floor`/`floor_relax_*`,
+  corrected 2026-07-24 (§9 A16) so the read routes through the isolating contrast, not the
+  package:** delete them per §4.4 **unless FL1 vs W shows the floor is load-bearing** — i.e.
+  the winner is an FL arm *and* it beats **W** (not merely P) on a criterion W fails,
+  characteristically C3's gradient. An FL arm that wins the sweep only by beating P, while
+  tying W, means W's static knobs did the work and the floor is **not** load-bearing —
+  delete it. "An FL arm is the winner" alone does not amend the §4.4 deletion clause; "FL1
+  beats W" does.
 - **R6 — the percentile arms move ΔF the *wrong way* (positive) while the raw-magnitude
   arms move it negative.** *Added 2026-07-23 (§9 A4), on the analyst review's D3.*
   This branch exists because the graph's own geometry predicts it is the **modal**
@@ -758,7 +774,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23/24, before any factorial arm ran
 
-Fifteen amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and two (A11, A12) on 2026-07-24 — A11 by the P4 proxy-pilot result, A12 by A11's own knock-on** (both proxies fired; these postdate the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
+Sixteen amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and two (A11, A12) on 2026-07-24 — A11 by the P4 proxy-pilot result, A12 by A11's own knock-on** (both proxies fired; these postdate the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -781,6 +797,7 @@ before it ran.
 | **A8** | **The A0 gate fired; the floor column stays off.** Identity failed on 1 cell of 252 (pair 1, first path). An exposure map over C1–C6 shows only **C5** crosses the change, and its fix costs zero extra runs: report the first-path inspection against **both P and A0**. Also records four corrections to the step-4 write-up, and the constraint that an FL arm's C3 gradient is partly its own device. | the A0 result + `findings/2026-07-23-a0-gate-analyst-review.md` | §1.4 A0 row · §1.5 · §2.4 R3 |
 | **A10** | **§5's sample is corrected and fixed, before any label is collected.** Two defects: (a) **S1 and S3 overlapped by four artists**, so "~33" was **29 distinct** and four artists would have been double-counted in every pooled statistic while appearing in two strata §5 reads differently — S3 is now the two F6 reaches only; (b) **§5's claim that S1's labels "already exist" is false** at the granularity its own scoring needs — the record holds one collective verdict ("mostly unknown"), not a per-artist three-bucket assignment, and cannot separate *heard of* from *never heard of*, which is where B_unk is computed. The nine are labelled with everyone else. S2's twelve are additionally fixed by a mechanical rule rather than hand-picked. **Sample committed as an artifact**, and the match-failure falsifier now fires at 6 rather than 7. | deriving the sample against the repo, before P4 | §5 sample · §5 strata · §5 falsifiers · `builder/analysis/2026-07-23-track2-fame-proxy/` |
 | **A9** | **Every remaining gate and branch trigger gets an effect size.** A gate without one cannot tell the finding it was written for from noise, and fires the expensive response either way. | the A0 gate having none | §9, below |
+| **A16** | **The FL1-vs-P package comparison is given the conclusion it is barred from supporting, and R5 is corrected to route through the isolating contrast.** Applying the CLAUDE.md factor-table rule (as tightened 2026-07-24 — a package comparison must name the barred conclusion AND confirm no read claims it) surfaced that **R5's "the floor would then be load-bearing" was the barred attribution**, drawn from an FL-arm win judged against P. Corrected: the floor is load-bearing only if **FL1 beats W** on a criterion W fails; an FL arm that beats only P while tying W means the static knobs did the work and the floor is deleted. R3 checked and clean (it already frames FL vs W). No arm-count or threshold change. | the tightened factor-table rule (cold-read adjudicator, 2026-07-24) | §1.4 package note · §2.4 R5 |
 | **A15** | **The fame resolver gains an English-article RECALL fallback; proven inert on the §5 validation sample.** The canonical resolver walks English opensearch's top-5, which buries acts whose bare name is a common word — Justice, Rainbow, **Ye (Kanye West)** all scored fame 0 and landed in **P's own scored cells at d0-d20**, corrupting the C1/C3 medians the whole sweep is measured against. The fallback reaches the entity via Wikidata's label index under the **same** identity+performer+musical clauses, and uses the English article's pageviews if one exists. `verify_resolver_equivalence.py` proves it leaves the validated sample's 9/29 matched/unmatched split **byte-identical** — it only recovers matches on names the sample did not contain, so the §5 falsifiers still describe the instrument. A recall bug fix, not a proxy change; **mine, because leaving Kanye at fame 0 in the baseline is not a defensible option to bless, and the equivalence is checkable rather than asserted.** | a poisoned baseline median found while validating the scorer on P | §5 inline note · A15 in full below · `builder/analysis/2026-07-24-track2-arm-scorer/{fame.py,verify_resolver_equivalence.py}` |
 | **A14** | **Two additions on `WHAT-GOOD-LOOKS-LIKE.md` values 8-9, both non-gating.** (a) A **d0 endpoint-fame-tracking diagnostic** per arm (§1.5), because value 9 records that fame tracking the endpoints is part of what made the reference product feel good and that eliminating famous artists would be an over-correction. (b) **C5's inspection is given its target:** the §1.5 no-regression inspection now asks explicitly whether d0 fame still tracks the endpoints, which is what value 9 says a reshaped first path should be judged against. **No threshold is taken from WGLL** — it holds none, and the rule is that a criterion contradicting a value is wrong, not that a value supplies a number. **Checked and found clean:** no existing criterion contradicts value 8 or 9. | the widened WGLL trigger + values 8-9 (cold-read adjudicator, 2026-07-24) | §1.5 (two bullets) · A14 note below |
 | **A13** | **D7 discharged: a guard-infeasible cell is dropped from ALL arms uniformly and reported.** A cell is infeasible when the walk cannot continue — no path, or a path with no interior left to bypass. Dropping it per-arm would let an arm that keeps a pair alive one bypass longer be scored on a cell its rival does not have: **arm-correlated missingness**, the exact selection confound §4's guard decision exists to prevent, returning by the back door. Implemented in `run_arms.py:drop_infeasible_uniformly`; the dropped set is written to the output and named in the report. | analyst **D7**, whose success condition was "pre-register this before the sweep" | §9 open table (D7 row) · `builder/analysis/2026-07-24-track2-arm-scorer/run_arms.py` |

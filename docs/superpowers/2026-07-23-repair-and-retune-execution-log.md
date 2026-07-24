@@ -1287,3 +1287,40 @@ The near-miss is recorded because the finding would have been plausible, load-be
 false.
 
 **No arm has run.** Artifact untouched.
+
+### The two tightened process rules applied to the scorer — A16, and a B5 clean check (2026-07-24)
+
+The cold-read adjudicator (now retired) tightened three standing-layer rules and flagged two
+as touching the in-flight scorer. Both applied here rather than filed.
+
+**Factor-table rule → A16, and it caught a live defect.** The rule now requires a package
+comparison to name the conclusion it is *barred* from supporting **and** to confirm no
+read-of-results claims it — "a disclaimer nothing later reads is not a control." Applying it
+to **FL1 vs P** (the one package comparison in the arms table) found that **R5 made the
+barred claim**: "retain them if an FL arm is the winner — in which case the floor would then
+be load-bearing." An FL arm "winning" is judged against P, so that sentence attributes a
+*floor* effect to a comparison that changed the floor **and** everything W carries — exactly
+the attribution §1.4 says comes only from the one-column chain. Corrected: the floor is
+load-bearing only where **FL1 beats W** (not P) on a criterion W fails, characteristically
+C3's gradient; an FL arm that beats only P while tying W means W's static knobs did the work
+and the floor is deleted. **R3 was checked and is clean** — it already frames the FL arms as
+the vs-W gradient remedy and A8 already warns their gradient is partly self-manufactured.
+The rule earned its keep: the gap was a real one, present since the reads were first written,
+and invisible until the rule forced the barred-conclusion to be named next to the read that
+violated it.
+
+**B5 config-figure rule → checked, does not bind.** B5 now requires an inline restatement of
+a `config.py` clamp figure to cite adjudication §5.4 rather than be skipped. The scorer
+restates none: its only constants are the pre-registered §2.2 thresholds (cited to §2.2 in
+`score.py`), B_unk is read at runtime from the committed proxy `score.json`, and the cost
+weights live in `mirror.py`, not here. Recorded in the scorer README rather than passed over
+in silence — which is the behaviour the tightened B5 asks for.
+
+**Displacement rule → noted, no action owed.** The third change makes a net-new standing-
+layer addition the owner's call, not a session's. This session added nothing net-new to the
+standing layer (`CLAUDE.md`, skill bodies): the `CLAUDE.md` purpose paragraph it wanted was
+*rejected* for the WGLL-trigger route instead, and its `memory/` edits were status updates to
+existing pointers, not growth. So the rule constrains future work rather than requiring a
+retraction here.
+
+**No arm has run.** Artifact untouched.
