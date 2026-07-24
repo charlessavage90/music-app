@@ -1324,3 +1324,56 @@ existing pointers, not growth. So the rule constrains future work rather than re
 retraction here.
 
 **No arm has run.** Artifact untouched.
+
+### Closeout at the scorer/P8b seam (2026-07-24)
+
+Full-ritual seam closeout — the work touched the cost-function evaluation apparatus. This
+session built the Stage A scorer, took the pre-registration A11 → A16, and committed two
+retired consultant sessions' work under their attributions. Distillation of what is not
+already in the per-task entries above:
+
+**The arc, in one line.** Picked up at the fame-proxy/sweep seam (P4 just closed, A11
+committed), ran closeout B1, resolved a merge race (PR #9/#10 landed while B1 ran), then
+built the scorer — and building it forced five amendments, each caught before any arm ran.
+
+**Decisions that reversed or corrected an earlier position:**
+- **A12 reversed A11's "no change to §2.2".** A11 recorded that it changed nothing downstream;
+  building the scorer showed it had inverted what C6 measures (unmatched went from *dropped*
+  to *scored*, so coverage now marks the obscurity the sweep seeks). C6 stops gating.
+- **A16 corrected R5**, which had attributed a floor effect to the FL1-vs-P *package*
+  comparison — the barred conclusion the factor-table rule (tightened this session by the
+  adjudicator) exists to catch. Routed through FL1-vs-W.
+- **A15 corrected the resolver**, not the pre-registration: famous acts with common-word names
+  (Justice, Rainbow, Ye) scored at the fame floor and poisoned P's own baseline medians. Fixed
+  by recall fallback, proven byte-identical on the §5 validation sample.
+
+**Defects found in the pre-registration itself (not the code):** R5's barred attribution
+(A16); D7 never pre-registered as a uniform drop (A13); C6's gate premise dissolved by A11
+(A12). All three were latent and invisible until the scorer forced each to be stated next to
+what it governed — the recurring lesson that an apparatus makes its own spec's gaps legible.
+
+**A near-miss recorded** (WGLL A14 check): the first pass produced an R3-vs-value-9 conflict
+as a finding; it was false (Stage B *is* the bypass mechanism). Writing out why before
+reporting caught it — the "answer it yourself and write it down" step.
+
+**Gate outcomes:** no experimental gate reached — no arm has run. The mirror byte-identity
+gate and A0-vs-P gate were passed in prior sessions and not re-run. **P8b (harness review) is
+now due** and is the next unit's first step.
+
+**Operational measurements with no other home:** the full stage-1 grid is ~40 s of compute
+(0.3 s per arm-pair walk × 11 arms × 12 pairs), against §1.4's "on the order of an hour"
+estimate — conservative by two orders of magnitude. The A11 notability guard flags **1 of 9**
+on the known-unmatched sample (CROOVE only), so it does not drown the owner's one-glance check.
+
+**B5 disposition:** the band-gap figures (owned by `builder/analysis/2026-07-24-track2-arm-scorer/`)
+are restated at the A12 discharge point in this log and in the pre-registration; both are
+point-of-decision restatements citing the owning dir, which the tightened B5 permits. No other
+scorer figure is restated outside its owner.
+
+**D6 standing-layer delta this session: 0 net-new by this session.** The branch's
+`CLAUDE.md`/`.claude` changes (+16/+67) are the consultant and adjudicator sessions' work,
+committed under their attributions. This session added nothing to the standing layer; its
+`memory/` edits were status updates to existing pointers (memory total 354 lines). Per the
+tightened D6, net-new standing-layer additions are the owner's call — none were made.
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
