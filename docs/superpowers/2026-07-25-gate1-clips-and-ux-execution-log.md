@@ -155,8 +155,41 @@ frontend   42 passed (11 files)
 at the rebuild seam); Gate 2 → 3 content curation (owner); `jesus2099` / entity-filter
 coverage; the discovery report for non-artist entities.
 
-**Now approaching due:** **`builder/README.md` is missing** — condition is "written, or
-explicitly declined, before Gate 1 closes", and Gate 1 is down to its last items.
+**DISCHARGED 2026-07-25: `builder/README.md`.** Written, on the owner's instruction, at the
+moment its condition came due. Three things worth recording about it:
+
+- **It was never a doc-auditor invention.** It traces to Step 7 of
+  `plans/2026-07-19-graph-builder.md`, an unchecked box in a plan the doc map marks
+  COMPLETE. The real finding is that a *plan recorded as shipped had an unexecuted step*,
+  and nothing noticed until an audit found the gap months later.
+- **Its success condition had silently drifted.** The 2026-07-23 repair+retune log set it at
+  "when `builder/` is next worked on substantively (Track 2's cap-strategy work, **if it
+  ever runs**)"; the 2026-07-24 and 2026-07-25 handoffs restate it as "before Gate 1
+  closes". Those are different triggers — the first is now behind the path-quality pause and
+  would have deferred this indefinitely; the second is what made it due. **The later
+  documents rewrote the condition without marking that they had.** A deferral's condition
+  is as load-bearing as the deferral, and this one mutated in the copying.
+- **It carries no figures, deliberately.** It defers to `BuilderConfig`, `CLAUDE.md` and
+  `findings/` rather than restating. See §12 for a conflict found while writing it.
+
+## 12. A conflict in the record, found while writing `builder/README.md`
+
+Two committed documents disagree on how long a rebuild from the archive takes:
+
+- `CLAUDE.md` (line 89): copy the archive and **"rebuild in ~30 s"**.
+- `2026-07-25-HANDOFF-track2f-and-headroom.md` §5: the in-memory rebuild from the archived
+  responses takes **about the same as the ladder's ~461 s**.
+
+These may well be different operations — the handoff's is an analysis-side in-memory
+reconstruction, not `artistpath-build build` — but **nothing in either document says so**,
+and a reader planning around "30 seconds" who gets eight minutes has been misled by the
+record rather than by the tool.
+
+**Not resolved here, and deliberately not guessed at.** The README was written to carry no
+figure at all, which is the correct move regardless of which number is right. Resolving it
+needs someone to time both operations once and say which is which — cheap, but it is a
+measurement, and inventing the answer would put a third number into a record that already
+has two.
 
 ## 10. For the next session
 
