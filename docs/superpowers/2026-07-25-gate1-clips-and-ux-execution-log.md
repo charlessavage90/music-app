@@ -172,7 +172,43 @@ moment its condition came due. Three things worth recording about it:
 - **It carries no figures, deliberately.** It defers to `BuilderConfig`, `CLAUDE.md` and
   `findings/` rather than restating. See §12 for a conflict found while writing it.
 
-## 12. A conflict in the record, found while writing `builder/README.md`
+## 12. Post-closeout addition: a failure-mode defect that endangered the check itself
+
+**Added after this log's closeout, on the owner's question about starting the next phase in
+parallel.** It is a Gate 2 Phase 3 item ("clip failures degrade to 204 rather than HTTP
+500") pulled forward, and the reason is specific rather than convenience.
+
+**What was found.** The API package contains exactly one `raise_for_status()` and **zero**
+`try`/`except`, so any non-2xx or network error from either catalogue propagated out as a
+500. Pre-existing — but the C2 work interacts with it twice, and both interactions were
+introduced here:
+
+1. **The cache-hit path used to make no network call and now makes one**, so the defect
+   moved from firing on first resolution to firing on *every repeat view*.
+2. **`resolve`'s documented self-heal did not work in production.** It falls through to a
+   re-search only when `_preview_url` returns `None`; a withdrawn track is a **404, which
+   raises**. The test modelled that case as a 200-with-error-body — a shape Deezer does
+   produce — so it passed while the likelier path was broken. **Fixture not matching
+   reality**, which is the failure class this project keeps hitting, committed fresh three
+   commits after a closeout that had mutation-checked the same file.
+
+**Why it could not wait for the queued check.** Deezer rate-limits; a path view fires 8–10
+lookups; re-signing roughly doubles request volume for repeat views. A rate-limit during the
+hour-long check returns non-2xx → dead card → **indistinguishable from "the C2 fix failed."**
+The check would have been corrupted toward a false negative, and the owner would have had no
+way to tell from inside the result.
+
+**Fix.** A guard around the fetch call only — not the parsing, so a renamed field still
+surfaces as a bug rather than masquerading as an outage. Five new tests; removing the guard
+turns five red, including an app-level 204-not-500 assertion.
+
+**Process note worth keeping.** The mutation check destroyed the fix mid-run: `git checkout
+-- <path>` was used to revert a mutation, but the fix was still uncommitted, so the revert
+took both. It was caught immediately by the suite and re-applied. **Mutation-testing
+uncommitted code needs a copy, not `git checkout`** — the earlier rounds were safe only
+because the code under mutation was already committed.
+
+## 13. A conflict in the record, found while writing `builder/README.md`
 
 Two committed documents disagree on how long a rebuild from the archive takes:
 

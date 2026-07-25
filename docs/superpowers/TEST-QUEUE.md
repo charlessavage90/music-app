@@ -30,6 +30,13 @@ journey as yesterday; only the audio and the buttons are different.
    thirty days — so every play after the first hour was silent. The app now remembers
    *which track* to play rather than the link to it, and fetches a fresh link each time.
 
+**One thing that changed after this entry was first written.** A clip that fails to load
+now leaves the card silent instead of returning an error. That matters for *this* test
+rather than in general: the music catalogue limits how often we may ask it, and the fix to
+question 2 roughly doubles how often we ask. Without this, hitting that limit during your
+hour would have produced dead cards that looked exactly like question 2 failing — so a
+result you could not have trusted. Detail: the execution log's §12.
+
 **A deliberate trade you should know about before it looks like a bug.** When no track in
 the catalogue matches the artist, the card is now **silent instead of playing a stranger**.
 So you will see some cards with no audio that previously played something — that is the fix
