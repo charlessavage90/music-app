@@ -19,13 +19,17 @@ test('searchArtists returns artists', async () => {
   expect(out[0].name).toBe('Radiohead');
 });
 
-test('buildPath unwraps the artists array and sends sources+exclude', async () => {
-  const fetch = mockFetch(200, { artists: [{ mbid: 'x', name: 'A', disambiguation: '', popularity: 0.5 }] });
+test('buildPath returns artists and the stop rule, and sends sources+exclude', async () => {
+  const fetch = mockFetch(200, {
+    artists: [{ mbid: 'x', name: 'A', disambiguation: '', popularity: 0.5 }],
+    stop_rule: 'forced',
+  });
   vi.stubGlobal('fetch', fetch);
-  const out = await buildPath(['a', 'b'], [{ id: 'z', reason: 'dislike' }]);
-  expect(out).toHaveLength(1);
+  const result = await buildPath(['a', 'b'], []);
+  expect(result.artists).toHaveLength(1);
+  expect(result.stopRule).toBe('forced');
   const body = JSON.parse((fetch.mock.calls[0][1] as RequestInit).body as string);
-  expect(body).toEqual({ sources: ['a', 'b'], exclude: [{ id: 'z', reason: 'dislike' }] });
+  expect(body).toEqual({ sources: ['a', 'b'], exclude: [] });
 });
 
 test('getTrack maps snake_case to camelCase', async () => {

@@ -67,7 +67,12 @@ export function PathPage() {
       ) : (
         <div className={state.status === 'loading' ? 'opacity-60 transition-opacity' : ''}>
           {state.artists.length > 0 ? (
-            <JourneyList ref={journey} artists={state.artists} onBypass={handleBypass} />
+            <JourneyList
+              ref={journey}
+              artists={state.artists}
+              stopRule={state.stopRule}
+              onBypass={handleBypass}
+            />
           ) : (
             <p className="text-[var(--color-muted)]">Building your path…</p>
           )}
