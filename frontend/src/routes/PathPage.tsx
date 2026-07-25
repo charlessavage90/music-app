@@ -1,6 +1,7 @@
+import { useRef } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { usePath } from '@/hooks/usePath';
-import { JourneyList } from '@/components/JourneyList';
+import { JourneyList, type JourneyControls } from '@/components/JourneyList';
 import { PathStatus } from '@/components/PathStatus';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
 import type { BypassReason } from '@/api/types';
@@ -10,8 +11,13 @@ export function PathPage() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const state = usePath();
+  const journey = useRef<JourneyControls>(null);
 
+  // Every control that leaves or rebuilds the path silences the audio on the press
+  // itself. Leaving it to the rebuild meant a clip carried on over a darkened page
+  // until the new path arrived, which reads as the button not having worked.
   function go(next: URLSearchParams) {
+    journey.current?.stop();
     const qs = next.toString();
     navigate(`/path/${from}/${to}${qs ? `?${qs}` : ''}`);
   }
@@ -40,6 +46,7 @@ export function PathPage() {
             travels along so the boxes arrive filled in. */}
         <Link
           to={`/?${newPathParams.toString()}`}
+          onClick={() => journey.current?.stop()}
           className="text-[var(--color-muted)] hover:text-[var(--color-accent)]"
         >
           ← New path
@@ -60,7 +67,7 @@ export function PathPage() {
       ) : (
         <div className={state.status === 'loading' ? 'opacity-60 transition-opacity' : ''}>
           {state.artists.length > 0 ? (
-            <JourneyList artists={state.artists} onBypass={handleBypass} />
+            <JourneyList ref={journey} artists={state.artists} onBypass={handleBypass} />
           ) : (
             <p className="text-[var(--color-muted)]">Building your path…</p>
           )}

@@ -47,8 +47,10 @@ path is unaffected).
 **`204` also covers failure, never `5xx`.** A clip is decorative, so a
 catalogue that is down, rate-limiting, or missing the track degrades to a
 silent card. Only the *identity* of the track is cached; the signed preview
-URL expires within the hour and is re-resolved on every request, so a repeat
-view costs one lookup per card where it previously cost none.
+URL is short-lived and is re-resolved on every request, so a repeat view costs
+one lookup per card where it previously cost none. The measured signature
+lifetime lives in `docs/superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md`
+§15 and is cited, never restated here.
 
 ```json
 {"preview_url": "https://…", "title": "So What", "cover_url": "https://…"}

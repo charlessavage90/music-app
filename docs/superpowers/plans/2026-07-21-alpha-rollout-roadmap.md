@@ -21,7 +21,7 @@ Work is organised by **three release gates**, each with a different quality bar.
 Three expert reviewers read the code and found real defects. **Twenty minutes of actual use surfaced an entire class they all missed, including the single most severe bug of the session.**
 
 - All three reviewers were backend-focused; none flagged a frontend defect. Dogfooding found four.
-- The clip-expiry bug was **invisible to both code review and tests** — tests mock HTTP, so a URL that expires in an hour is indistinguishable from one that doesn't.
+- The clip-expiry bug was **invisible to both code review and tests** — tests mock HTTP, so a URL that expires part-way through a session is indistinguishable from one that doesn't. (The lifetime was later measured; the figure is owned by `../2026-07-25-gate1-clips-and-ux-execution-log.md` §15.)
 - The hub problem took ~90 minutes of graph analysis to establish; dogfooding confirmed it in three rerolls.
 
 **Practice going forward: dogfood before the next review round.** Reviewers answer "is this code sound"; only use answers "is this product right".
@@ -39,7 +39,16 @@ Deezer's general search matches **song titles as well as artists**, and we take 
 
 Graph resolution was correct; only the clip was wrong. **Fix:** match the returned track's artist name against the requested artist rather than taking the top hit.
 
-### C2 — Clips silently die after ~an hour
+### C2 — Clips silently die after a while
+
+> **✅ FIXED AND CLOSED 2026-07-25 (PR #19 server side, PR #20 browser side), confirmed in
+> use.** Read `../2026-07-25-gate1-clips-and-ux-execution-log.md` §15–§18 before this
+> section. **Two corrections to what follows:** the lifetime was measured at a specific
+> value that §15 owns — *"past the first hour"* below is a loose inference from the raw
+> observation, and materially too generous. And the fix needed a **browser** half as well as
+> a server one: the page must ask for a URL at the moment of play, not when the card is
+> drawn. The 30-day cache described below no longer holds URLs at all.
+
 Deezer preview URLs are **signed and time-limited** (`hdnea=exp=…`). Measured: a URL fetched at 09:41 had already expired by 10:12. We cache them for **30 days**. Every cache hit past the first hour serves a dead URL; the CDN returns an error page and the browser blocks it — the `OpaqueResponseBlocking` seen in the console log.
 
 **Fix:** cache the **track identity** (stable) separately from the **signed URL** (volatile); re-resolve the URL per request. This also delivers the "play a different song" feature nearly free, since we hold a track list.
@@ -72,11 +81,24 @@ next to button fixes is part of why it sat unscheduled behind sixteen tasks of g
 (revised plan §6). It is a direct contributor to the founding complaint: rerolls returning
 artists at the same popularity band.
 
+> **⚠ STATUS, 2026-07-25 — read before acting on this list.** "C3 leads this phase" is
+> **superseded**: C3 is path-quality work, and path-quality work is **PAUSED by owner
+> decision** (`../2026-07-25-HANDOFF-track2f-and-headroom.md` §0). Do not delete `w_floor`
+> or `floor_relax_*`. **Clips and all four UX items are DONE and CLOSED**, confirmed in use
+> — `../2026-07-25-gate1-clips-and-ux-execution-log.md` §15–§19. **The one open Gate 1 item
+> is F1, below.**
+
 - **Bypass (C3) — first:** delete `w_floor` and `floor_relax_*`; implement real
   differentiation and progressive path lengthening; add the path-level tests QA found
-  missing. Carries the routing-weight work from Task 0 Step 6.
-- **Clips:** artist matching (C1); cache redesign — identity vs signed URL (C2)
-- **Frontend UX** (all from dogfooding): "start over" / new-path control on the path page; card pause button (only the bottom bar works); stop audio on recompute; hide both bypass buttons on the **start and end** artists
+  missing. Carries the routing-weight work from Task 0 Step 6. — **PAUSED, see banner.**
+- **Clips:** artist matching (C1); cache redesign — identity vs signed URL (C2) — **DONE
+  and CLOSED 2026-07-25.**
+- **Frontend UX** (all from dogfooding): "start over" / new-path control on the path page; card pause button (only the bottom bar works); stop audio on recompute; hide both bypass buttons on the **start and end** artists — **DONE 2026-07-25.**
+- **F1 — a journey with no artists between the two you chose.** Added 2026-07-25; discovered
+  2026-07-23 as a surface the tie-break fix exposed. **The owner has decided every journey
+  needs at least one stop** — requirement settled, implementation deferred, and **not** inside
+  the path-quality pause. Success condition and reasoning:
+  `../2026-07-25-gate1-clips-and-ux-execution-log.md` §16 — cite it, do not restate it.
 
 **Carried in from Phase 2, with success conditions:**
 
@@ -234,7 +256,7 @@ Two measured facts to decide against, both from 2026-07-24 (record and figures:
 
 ## Known risk: the clip architecture has a Gate-3 ceiling
 
-Every path view fires ~8–10 clip lookups, and preview URLs expire hourly — so caching cannot absorb the load. A public spike would hammer Deezer, get us rate-limited, and **fail every clip for everyone simultaneously**.
+Every path view fires ~8–10 clip lookups, and preview URLs are short-lived (lifetime measured; `../2026-07-25-gate1-clips-and-ux-execution-log.md` §15 owns the figure, and it is *shorter* than assumed here) — so caching cannot absorb the load. A public spike would hammer Deezer, get us rate-limited, and **fail every clip for everyone simultaneously**.
 
 Not solved now. But the Gate-1 cache redesign (C2) must not foreclose the options: caching track **identity** separately from the **signed URL** keeps proxying or pre-signing available later. A five-minute design consideration now versus a rewrite at Gate 3.
 

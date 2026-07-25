@@ -102,9 +102,12 @@ that is how the drift began.
   `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §4. Current
   sequencing: see that spec and
   `superpowers/2026-07-23-repair-and-retune-execution-log.md`. **Clips (C1, C2) and the four
-  frontend UX items were built 2026-07-25** — record:
-  `superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md`. They are **fixed but not
-  confirmed in use**; the queued check in `superpowers/TEST-QUEUE.md` is what closes them.
+  frontend UX items are DONE and CLOSED 2026-07-25** — built in PR #19, completed in PR #20,
+  and **confirmed in use**. Record:
+  `superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md` (§15–§19 carry the clip
+  closure and two playback defects found in that use). **F1 — zero-intermediary paths — is
+  the remaining Gate 1 item**: the owner has decided every journey needs at least one stop,
+  implementation deferred, and it is not inside the path-quality pause (§16).
   Two items carry in from Phase 2 with success conditions; see the roadmap's Phase 1 section.
 - **Two Phase 2 predictions did not survive measurement**, and older prose still asserts
   them. Damping ("C4") was tested at 0.25 / 0.5 / 0.75 and **rejected** — the undamped arm

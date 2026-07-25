@@ -43,6 +43,33 @@ test('bypass is offered on the artists in the middle, never on the two you chose
   expect(screen.getByText('Kraftwerk')).toBeInTheDocument();
 });
 
+test('a card left mounted past the signature lifetime re-signs before playing', async () => {
+  // The span nothing asserted before (execution log §15): the old browser test
+  // advanced time and then *remounted*, which re-ran the effect and hid the bug.
+  // A real tab stays mounted, so the effect never re-runs and the URL rots in place.
+  const user = userEvent.setup();
+  vi.spyOn(Date, 'now').mockReturnValue(0);
+  const spy = vi.spyOn(client, 'getTrack');
+  spy.mockResolvedValue({ previewUrl: 'signed-at-zero', title: 'T', coverUrl: 'c' });
+
+  const stale = [
+    { mbid: 'stale-a', name: 'Alice Coltrane', disambiguation: '', popularity: 1 },
+    { mbid: 'stale-b', name: 'Sun Ra', disambiguation: '', popularity: 0.8 },
+  ];
+  render(<JourneyList artists={stale} onBypass={vi.fn()} />);
+  const firstPlay = (await screen.findAllByRole('button', { name: /play/i }))[0];
+  await waitFor(() => expect(firstPlay).toBeEnabled());
+  const afterDraw = spy.mock.calls.length;
+
+  // The tab sits open for twenty minutes. Nothing unmounts, nothing navigates.
+  vi.spyOn(Date, 'now').mockReturnValue(20 * 60 * 1000);
+  spy.mockResolvedValue({ previewUrl: 'signed-later', title: 'T', coverUrl: 'c' });
+
+  await user.click(firstPlay);
+
+  await waitFor(() => expect(spy.mock.calls.length).toBeGreaterThan(afterDraw));
+});
+
 test('audio stops when the path is recomputed', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });

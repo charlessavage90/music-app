@@ -12,7 +12,11 @@ interface Props {
   onPlay: (mbid: string) => void;
   onToggle?: () => void;
   onBypass: (mbid: string, reason: BypassReason) => void;
-  onClipResolved?: (mbid: string, url: string | null) => void;
+  /**
+   * Reports whether this artist has a clip at all — never its URL. The URL is
+   * signed and short-lived, so the player asks for one at the moment of play (C2).
+   */
+  onClipResolved?: (mbid: string, hasClip: boolean) => void;
 }
 
 export function ArtistCard({
@@ -24,7 +28,7 @@ export function ArtistCard({
 
   useEffect(() => {
     if (clip.status === 'loading') return;
-    onClipResolved?.(artist.mbid, clip.track?.previewUrl ?? null);
+    onClipResolved?.(artist.mbid, playable);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clip.status]);
 
