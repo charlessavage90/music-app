@@ -42,8 +42,9 @@ including `mutual_knn_cap`, `symmetrise` and `largest_component`, so the edge se
 - `unclipped` — `log1p(raw)/log1p(p99)`, the same expression **without** the `min`. ≥ 1.0
   exactly on the saturated edges.
 
-**Identity gate, run first:** the in-memory rebuild is serialised to a scratch path and its
-sha256 compared to the adopted artifact `4cb84ef9…b061dc8`. A mismatch means the archive does
+**Identity gate, run first:** the in-memory rebuild is serialised **to bytes that are hashed
+and discarded — no file is written** — and its sha256 compared to the adopted artifact
+`4cb84ef9…b061dc8`. A mismatch means the archive does
 not reproduce the adopted graph and **every figure below is void** — several graphs exist in
 `builder/scratch/` and they are not interchangeable.
 
@@ -97,3 +98,100 @@ probe; it does not predict its result, and it certainly does not license adoptio
 still needs a pre-registered arm, the offline gates, and a blind listen.
 
 It also says nothing about F2's depth clause. A rescale is static, like every Track 2F arm.
+
+---
+
+# Result: **WIDE**, by a factor of ten
+
+Both gates passed **before any figure was read**:
+
+- **Identity gate.** The in-memory rebuild serialises to `4cb84ef9…b061dc8` — it reproduces
+  the adopted artifact exactly, so this measures the graph the app actually routes on.
+- **Formula gate.** The unclipped expression agrees with the real `rescale_scores` on all
+  **3,951,579** unsaturated edges. The only difference is the clip.
+
+**Saturated edges: 39,952 of 3,991,531 directed edges = 1.00 %.** That is the p99 clip doing
+exactly what it says, and on its own it looks negligible. It is not, because of *where* those
+edges are.
+
+## Cost spread the clip erases, in multiples of `w_hop`
+
+Per node, across that node's own ceiling exits. Under the current clip this spread is
+**exactly zero** by construction. Renormalisation factor k = 0.7776 (the conservative,
+pre-registered rescale; the largest unclipped value is 1.286 in p99 units).
+
+| node set | n | median | mean | p10 | p90 | ≥ 1× | ≥ 7.5× |
+|---|---|---|---|---|---|---|---|
+| all nodes holding ≥ 2 ceiling edges | 1,201 | **10.01** | 9.82 | 1.98 | 16.83 | 95.5 % | 64.2 % |
+| **fully saturated** (every exit at the ceiling) | 303 | **14.50** | 14.72 | 11.59 | 18.67 | 100 % | 98.3 % |
+| **the 24 pre-registered endpoints** | 22 | **13.51** | 14.08 | 12.01 | 19.34 | 100 % | **100 %** |
+
+**Decision rule verdict: WIDE.** The pre-registered threshold was a median of 1 × `w_hop`; the
+measurement is **10.01 ×**.
+
+## Per-endpoint detail
+
+| endpoint | spread (× `w_hop`) | exits at ceiling |
+|---|---|---|
+| Aphex Twin | 22.03 | 40/40 — fully saturated |
+| Miles Davis | 19.34 | 26/34 |
+| Taylor Swift | 16.18 | 46/46 — fully saturated |
+| Bob Dylan | 15.89 | 43/43 — fully saturated |
+| Pink Floyd | 15.46 | 50/50 — fully saturated |
+| Daft Punk | 14.08 | 50/50 — fully saturated |
+| Johnny Cash | 14.04 | 19/19 — fully saturated |
+| R.E.M. | 13.94 | 47/47 — fully saturated |
+| The Rolling Stones | 13.93 | 50/50 — fully saturated |
+| Muse | 13.90 | 50/50 — fully saturated |
+| Michael Jackson | 13.57 | 39/39 — fully saturated |
+| Nirvana | 13.44 | 50/50 — fully saturated |
+| Gorillaz | 13.29 | 47/47 — fully saturated |
+| Metallica | 13.25 | 48/48 — fully saturated |
+| Coldplay | 13.15 | 50/50 — fully saturated |
+| System of a Down | 12.90 | 47/47 — fully saturated |
+| Arctic Monkeys | 12.62 | 47/47 — fully saturated |
+| Madonna | 12.61 | 29/29 — fully saturated |
+| Linkin Park | 12.07 | 48/48 — fully saturated |
+| The Beatles | 12.01 | 50/50 — fully saturated |
+| The Shins | 11.19 | 38/38 — fully saturated |
+| Radiohead | 10.95 | 50/50 — fully saturated |
+
+**21 of the 22 resolved endpoints are fully saturated.** This does not contradict the
+toll-calibration README's Q4 ("eight are fully saturated"): Q4 counts nodes whose **50**
+neighbours are all at the ceiling, and this counts nodes whose **every** exit is, whatever the
+degree. Both are correct under their own definition, and the broader one is the
+routing-relevant one — Johnny Cash with 19/19 has exactly as little similarity signal to route
+on as The Beatles with 50/50.
+
+## What this means, read against Track 2F
+
+The erased ordering is **the same order of magnitude as a toll that demonstrably changed
+routing**. Track 2F's ladder moved paths substantially at 7.5 × `w_hop` (`TF1`, −0.139) and
+further at 15 × (−0.177); **64.2 % of affected nodes, and 100 % of the pre-registered
+endpoints, are having cost differences larger than 7.5 × `w_hop` erased.**
+
+**State the disanalogy honestly:** a toll *adds* the same cost to every ceiling edge, while a
+rescale *redistributes* among them — some cheaper, some dearer. They are different operations
+of comparable magnitude, so this is a calibration of size, not a prediction of effect.
+
+**The mechanism, and it is the clearest statement of the defect yet reached.** At a fully
+saturated node every exit carries `w_sim · (1 − 1.0) = 0`, so the similarity term contributes
+**nothing to the choice**. `w_degree_hub` is 0 by default and avoidance is empty on a
+`known` walk, so what remains to discriminate 50 candidates is the **popularity** terms —
+the jump term and, where live, the floor. **At exactly the famous artists a journey starts and
+ends at, the router cannot see which neighbour is most similar, and picks on popularity
+instead.** That is a mechanistic account of why paths stay in famous territory, and it is the
+half no router-side knob could ever reach: Track 2F's `TF-D1` measured 2.0 structurally forced
+ceiling hops per journey, and these are those hops.
+
+## What this still does not license
+
+**Change is not improvement.** This licenses *pre-registering* the builder-side rescale as a
+probe with a real expected effect size. It does not predict the probe's result, and it
+certainly does not license adoption — that still needs the pre-registered arm, the offline
+gates, and a blind listen.
+
+It also says nothing about F2's depth clause. A rescale is static, like every Track 2F arm.
+And the rescale would change **every** score in the graph, not only the saturated ones, so it
+is an artifact change with a blast radius far beyond the 1.00 % of edges measured here — the
+p99-shift measurement already queued at the rebuild seam is what sizes that.

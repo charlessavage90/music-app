@@ -1,0 +1,39 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "saturated_directed_edges": 39952,
+ "total_directed_edges": 3991531,
+ "renormalisation_k": 0.7776426009503823,
+ "all_nodes_with_2plus_ceiling_edges": {
+  "n_nodes": 1201,
+  "median_x_w_hop": 10.011328169735856,
+  "mean_x_w_hop": 9.82001743917257,
+  "p10_x_w_hop": 1.9790076944262907,
+  "p90_x_w_hop": 16.83090183087597,
+  "median_x_w_hop_p99_units": 12.873945122734643,
+  "frac_over_1x": 0.95503746877602,
+  "frac_over_7_5x": 0.6419650291423813,
+  "frac_over_30x": 0.0
+ },
+ "fully_saturated_nodes": {
+  "n_nodes": 303,
+  "median_x_w_hop": 14.498741797496692,
+  "mean_x_w_hop": 14.72114562033729,
+  "p10_x_w_hop": 11.585591843696895,
+  "p90_x_w_hop": 18.669926378500854,
+  "median_x_w_hop_p99_units": 18.644479841738747,
+  "frac_over_1x": 1.0,
+  "frac_over_7_5x": 0.9834983498349835,
+  "frac_over_30x": 0.0
+ },
+ "pre_registered_endpoints": {
+  "n_nodes": 22,
+  "median_x_w_hop": 13.505289977790017,
+  "mean_x_w_hop": 14.084157323880254,
+  "p10_x_w_hop": 12.011582016992714,
+  "p90_x_w_hop": 19.34135188649898,
+  "median_x_w_hop_p99_units": 17.36696261403987,
+  "frac_over_1x": 1.0,
+  "frac_over_7_5x": 1.0,
+  "frac_over_30x": 0.0
+ }
+}

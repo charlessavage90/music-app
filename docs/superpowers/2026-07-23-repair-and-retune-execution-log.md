@@ -2217,3 +2217,54 @@ inputs it is the same class as the toll-calibration directory.
 **Track 2F does not touch F2's "progressively" clause and must not be read as doing so.** Every
 arm here is depth-independent by construction; `C3` fails on all of them. The depth carrier is
 still an open problem and the only depth-graduated device in the cost function is still dead.
+
+### ORDERING HEADROOM — the clip erases 10x w_hop, and the defect finally has a mechanism (2026-07-25)
+
+**Decision rule committed at `0e39522` before the measurement ran**; figures owned by
+`builder/analysis/2026-07-25-ceiling-ordering-headroom/`. Not an experimental arm — no path
+routed, nothing adoptable, same class as the toll-calibration directory — but it feeds a
+rebuild recommendation, so the threshold preceded the number and the git order is the evidence.
+
+**Both self-checks passed before any figure was read.** The in-memory rebuild from the archive
+**serialises to `4cb84ef9…b061dc8`** — it reproduces the adopted artifact exactly, so this
+measures the graph the app actually routes on rather than one of the several non-interchangeable
+graphs in `builder/scratch/`. And the unclipped expression agrees with the real `rescale_scores`
+on all 3,951,579 unsaturated edges, so the only difference is the clip. **No artifact was
+written** — `serialise()` was called to hash and the bytes discarded, so `acceptance.py`'s
+rebuild block is untouched.
+
+**Verdict: WIDE, by a factor of ten.** Pre-registered threshold was a median per-node ceiling
+cost spread of 1 × `w_hop`; measured **10.01 ×** over 1,201 nodes, **14.50 ×** over the 303
+fully saturated nodes, **13.51 ×** over the 22 resolved pre-registered endpoints — of which
+**100 % exceed 7.5 × `w_hop`**, a magnitude Track 2F proved changes routing (`TF1`, −0.139).
+Only 1.00 % of directed edges are saturated, which looks negligible until you see *where*.
+
+**A definitional reconciliation, recorded so it does not read as a contradiction.** This finds
+**21 of 22** endpoints fully saturated; the toll-calibration README's Q4 says **eight**. Q4
+counts nodes whose **50** neighbours are all at the ceiling; this counts nodes whose **every**
+exit is, at whatever degree. Both correct under their own definition, and the broader one is
+the routing-relevant one — Johnny Cash at 19/19 has exactly as little similarity signal to
+route on as The Beatles at 50/50.
+
+**The mechanism, and it is the clearest statement of the defect this project has reached.** At
+a fully saturated node every exit carries `w_sim · (1 − 1.0) = 0`, so the similarity term
+contributes **nothing to the choice**; `w_degree_hub` is 0 by default and avoidance is empty on
+a `known` walk, so what discriminates 50 candidates is the **popularity** terms alone. **At
+exactly the famous artists a journey starts and ends at, the router cannot see which neighbour
+is most similar, and routes on popularity instead.** That is a mechanistic account of why paths
+stay in famous territory — and it is precisely the half no router-side knob can reach, which is
+why Track 2F's toll bottomed out at 2.0 structurally forced ceiling hops per journey. §2.12's
+"cost-function problem" diagnosis and the graph-structure reading are not competing after all:
+the cost function is starved of the signal at the nodes that matter.
+
+**Disanalogy stated rather than buried:** a toll *adds* the same cost to every ceiling edge; a
+rescale *redistributes* among them. Comparable magnitude, different operation. This calibrates
+the size of what is being erased; it does not predict a rescale's effect.
+
+**What it licenses:** pre-registering the builder-side p99 rescale as a probe with a real
+expected effect size, at the rebuild seam alongside the p99-shift measurement and the
+blank-name remediation. **It does not license adoption, and change is not improvement** — the
+probe still needs its own pre-registration, the offline gates, and a blind listen. It says
+nothing about F2's depth clause; a rescale is static, like every Track 2F arm. And it does not
+size the rescale's blast radius: a new divisor moves **every** score in the graph, not only the
+1.00 % measured here, which is exactly what the queued p99-shift measurement is for.
