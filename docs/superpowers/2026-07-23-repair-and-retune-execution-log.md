@@ -1716,3 +1716,82 @@ measurement, due at the rebuild seam:** the actual p99 shift and the resulting s
 distribution. Cheap once a rebuild is happening anyway, and meaningless before.
 
 **No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### The discovery-report signals must be external to the graph — and the naive clip test fails on `jesus2099` (2026-07-24)
+
+**Record-only, from a consulting pass; amends the discovery-report line recorded above.
+Not for the current batch.**
+
+**The amendment is accepted, and the reasoning is the durable part.** A username-shaped scan is
+**retired** — by my own measurement, which returned 152 nodes whose visible top were real
+artists. Three results now say one thing: blank-named nodes at degree up to 28,
+`jesus2099` at degree 31 and `pop_raw` 0.3846, and 111 digit-only names that are mostly real.
+
+**The common cause, and it is the reason no predicate will fix this.** A non-artist entity that
+accumulates genuine listener co-occurrence is **graph-structurally indistinguishable** from an
+obscure real artist. Popularity here is score-weighted in-degree — it measures "people played
+this alongside other things" — which an editor account with a following earns honestly. **The
+distinguishing information is not in the graph; it is a fact about the outside world.** Any
+report built on degree, popularity, connectivity or name shape will keep returning Sadie Dupuis.
+
+**So the signals must be external, and Track 2 has already built all of them:** no clip
+resolves; no Wikipedia presence (the adopted fame proxy); non-trivial degree, i.e. actually
+routable. Intersect the three, scope to nodes that can appear as a **path interior** (the only
+ones a user can see, already recorded by the sweep, already seeded into the fame cache), and it
+is largely a join over sweep byproducts rather than new work. Still a report for human skim,
+**never an automated filter** — the 152-node result raises the stakes on that, it does not lower
+them.
+
+**Tested before recording, and the naive form of the key signal FAILS.** The proposal predicted
+`jesus2099` "should return nothing on both" providers. Measured against the live endpoints:
+
+| Query | Deezer top artist | iTunes top artist | "no clip" fires? |
+|---|---|---|---|
+| **`jesus2099`** | **`Mr.UNSTABLE`** | *(none)* | **NO — Deezer returns a match** |
+| `saib.` | `saib.` | `Saib` | no (correct — real) |
+| `Purrple Cat` | `Purrple Cat` | `Bcalm & Purrple Cat` | no |
+| `sleepy fish` | `Sleepy Fish` | `Afternoon Bike Ride & Sleepy Fish` | no |
+| `Leavv` · `Miami Nights 1984` · `Lazerhawk` · `Stonebank` · `Toonorth` | own name | own name | no |
+| `idealism` | `SwuM` *(wrong)* | `Idealism` | no — **saved by the fallback** |
+
+**Two things follow, and the first would have sunk the report silently.**
+
+1. **"No clip resolves" must be "no provider returns a NAME-MATCHING artist."** `jesus2099`
+   resolves a clip — for `Mr.UNSTABLE`. That is the known **C1 wrong-artist clip defect**
+   acting as camouflage: the naive test would have passed the one entity the report exists to
+   catch. The fix is free — the fame proxy already owns a name-matching rule (`name_matches`,
+   plus P5's NFKC + punctuation folding), so the report reuses it rather than inventing one.
+2. **Wikipedia-absence is NOT the discriminating signal for this population, and the clip
+   signal carries all the weight.** The nine S1 anchor artists are owner-confirmed **real**,
+   genuinely obscure, and **8 of 9 are Wikipedia-absent** — so that signal alone flags every
+   one of them. They are excluded only by resolving a clip. Which means the intersection works
+   *because* of the clip test, and getting the clip test right is load-bearing rather than
+   incidental.
+
+**Controls chosen deliberately, and this is why the test was worth running:** the S1 nine are
+the hardest available case — real, obscure, and Wikipedia-absent, i.e. they trip two of the
+three proposed signals. A design that survives them survives the population it will actually
+be run over.
+
+### Rebuild seam: the p99 shift goes FIRST, because it can come out exactly zero (2026-07-24)
+
+**Record-only ordering note; accepted as stated.** The measurement is computable now without a
+rebuild — drop the 510 affected edges from the raw score array and re-take
+`np.percentile(raw, 99)` — and deferring it is right, since it changes no decision before
+adoption.
+
+**But it goes first at the seam, not alongside the rest, because it is the only one of the
+three channels that can be exactly zero.** The 99th percentile over a discrete distribution
+with roughly 5,300 distinct values need not move when 0.057 % of edges leave.
+
+- **If it does not move:** the score array is unchanged and the blast radius collapses to the
+  popularity array plus the removed nodes. A substantial amount of re-verification becomes
+  **reusable rather than redone**.
+- **If it moves:** every edge is rescaled and everything downstream needs redoing anyway.
+
+Either way it **sizes all the remaining work**, so it precedes that work rather than
+accompanying it. Recorded as the first step of the rebuild seam, alongside the archive scan for
+the 33 MBIDs (which the drop-vs-backfill decision needs, and which is confirmatory rather than
+decisive — see the pre-registration's deferral entry).
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
