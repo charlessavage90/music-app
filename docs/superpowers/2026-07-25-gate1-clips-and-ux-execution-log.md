@@ -378,3 +378,69 @@ already run two closeouts and recorded the degradation tell:
 
 **Standing constraint for whoever does it:** the dev servers are running for the owner's
 question-1 check, and editing `frontend/src` hot-reloads his open tab.
+
+## 16. The use-the-app result — C1 closes, and F1's deferral condition is found to have lapsed
+
+**The owner ran question 1 on 2026-07-25.** Queue entry marked DONE there; this section is
+the durable half.
+
+### C1 is confirmed in use and closed
+
+Two pieces of evidence, and they are of different strengths — recorded separately because
+collapsing them would overstate the result.
+
+1. **The owner's pass: nothing wrong found**, across every card he pressed play on. He
+   recorded, unprompted, that **he could not remember which artists had produced wrong clips
+   before.** So this is a broad "nothing jumped out", not a retest of the known failure —
+   the same distinction the 2026-07-23 entry drew between its strong search result and its
+   weak path result, and it is the honest reading.
+2. **The targeted retest, run session-side against the live service.** The roadmap's §C1
+   worked example is a band whose name is also a song title by a different artist; the old
+   code took the first search hit and played the other artist's song. Resolved through the
+   running API, the endpoint now returns a track **by the band**, which is precisely the
+   result the roadmap predicts a correct implementation gives. Mechanical, so it did not
+   need the owner's ear and was not left to it.
+
+(2) is what closes C1: it exercises the documented failing case end-to-end rather than
+sampling. Combined with §15's live confirmation that the per-track lookup shapes are correct,
+**the "fixed-not-closed" deferral on C1 is discharged.** C2 is untouched by this — its
+question is BLOCKED and its browser half is still incomplete.
+
+### F1 was never fixed, and its due condition passed unnoticed
+
+**The owner reported Radiohead → Weezer returning a two-card path with no artists between
+them, and said he had thought this was decided unacceptable and fixed.** It was not.
+
+- **Recorded 2026-07-23** as F1 in the repair+retune log's Track 1 results — a *new surface*
+  exposed by the tie-break fix, not a regression.
+- **Never fixed.** No min-length guard exists in shipped code; `api/` and `frontend/` contain
+  no such symbol. §4 of this log decided against it explicitly: *"It is pathfinding, and
+  pathfinding is paused."*
+- **This work made it more visible without causing it.** Removing bypass from the start and
+  end cards was correct on its own terms, but on a path with no interior artists it leaves
+  **nothing on the page to press at all.** §6 predicted exactly this and the queue entry
+  warned about it; the owner met it anyway and read it as a regression. That is worth more
+  than the prediction: a case flagged in a document is not a case handled in the product.
+
+**The defect in the record, which is the part worth keeping.** F1's due condition was
+*"before Track 2's success criterion is finalised, since a min-length guard changes what the
+sweep optimises."* **Track 2's pre-registration was committed 2026-07-23 and the sweep ran to
+completion on 2026-07-24 without F1 ever being decided.** The condition came due, was not
+discharged, and nothing fired — then the path-quality pause moved F1 behind a second gate
+("blocked on path work resuming"), which reads like an intact deferral and is actually a
+lapsed one re-parked under a new condition.
+
+This is the **second** condition-drift found in two days: §9 records `builder/README.md`'s
+trigger silently rewritten across three handoffs. Both survived because a deferral's
+condition is copied forward as prose by whichever document restates it, and nothing compares
+the restatement to the original. The mechanism is identified here; **no fix is proposed, and
+inventing one is not this session's call.**
+
+### Status of F1 after this
+
+Unchanged and still parked — **but its classification is now an open question for the owner,
+not a settled one.** The 2026-07-23 entry calls it *"a structural invariant, not a tuning
+gradient"*, which is the argument that it is not path-quality work and therefore not inside
+the pause. §4 of this log classified it as pathfinding and stopped. Both readings are
+defensible from the record and the difference decides whether it can be worked on now.
+Whether a journey must contain at least one stop is a question about what the app should do.

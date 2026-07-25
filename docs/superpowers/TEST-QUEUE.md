@@ -39,6 +39,31 @@ press play on several cards, and listen for whether the voice matches the name o
 
 *Detail: the execution log's §15.*
 
+## DONE — 2026-07-25 — do the clips play the right artist, and do the buttons behave
+
+**DONE 2026-07-25, question 1 only. No defect found; one pre-existing issue re-surfaced.**
+
+- **Clips: nothing wrong found.** Every artist card the owner tested played an artist matching
+  the card. **Recorded caveat, and it matters:** he could not recall which artists produced
+  wrong clips before, so this is "nothing jumped out across the cards I happened to meet",
+  not "the known failure is gone". A weaker signal than a targeted retest, and correctly so.
+- **The targeted retest was then run session-side, against the live service**, because it is
+  mechanical and needs no ear. The roadmap's own worked example — the band whose name is also
+  a song title by a different artist — now returns a track **by the band**, where it
+  previously returned the same-named song by the rapper. That is the documented failure case,
+  exercised end-to-end through the running API, and it passes. Together with the live
+  verification in the execution log's §15, **C1 is confirmed in use and closed.**
+- **C2 remains fixed-not-closed** — its question is the blocked one above, and the browser
+  half is still incomplete.
+- **Zero intermediaries, reported unprompted: Radiohead → Weezer produced a two-card path
+  with nothing between them and nothing to press.** Not a new defect and not caused by the
+  UX work — it is the known famous→famous case, recorded 2026-07-23, never fixed. See §16 of
+  the execution log; the owner's expectation that it had been fixed is itself the finding.
+- The remaining interface items (pause on a card, audio stopping on bypass, the two controls
+  at the top, bypass hidden on the end cards) were not separately reported on.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-25 — do the clips play the right artist, and do the buttons behave
 
 **Scope note: the "does it still work an hour later" question is NOT part of this entry.**
