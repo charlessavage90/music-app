@@ -118,6 +118,12 @@ Gate 2 → 3 content-curation condition is in the roadmap.
   detail** — the diff was not empty — and only the hand check established the conclusion was
   nonetheless right. Its SHA was `efa4a79` if it is ever wanted.
 - **This session owned all commits.** No other session was live in the tree.
+- **Three merges landed after this note was written, none of them Track 2 work** — PR #13
+  (post-merge git state), **PR #14** (the stage-2 near-miss process finding, appended to the
+  execution log) and **PR #15** (identifier and read-of-result conventions; mandatory
+  displacement retired). Track 2's result is untouched by all three. **PR #15 changed rules a
+  successor is governed by**, so read `CLAUDE.md`'s plan-writing and presentation sections as
+  current rather than assuming they match what this note's author worked under.
 
 ## 9. Deferred findings — none came due at this seam
 
