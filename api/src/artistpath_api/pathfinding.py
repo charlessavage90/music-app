@@ -79,6 +79,7 @@ def find_path(
     target: int,
     excludes: list[Exclusion],
     cfg: ApiConfig,
+    forbidden_edge: tuple[int, int] | None = None,
 ) -> list[int] | None:
     """Least-cost path from source to target under the spec 4.1 cost function.
 
@@ -90,6 +91,14 @@ def find_path(
 
     # Hard exclusions skip nodes entirely, but never the endpoints themselves.
     hard = {e.node for e in excludes} - {source, target}
+
+    # Undirected: forbidding (a, b) must also forbid (b, a). Used to force a
+    # detour when the least-cost path is the two chosen artists and nothing
+    # else (F1). Empty in the ordinary case, so this costs one set lookup.
+    banned: set[tuple[int, int]] = set()
+    if forbidden_edge is not None:
+        a, b = forbidden_edge
+        banned = {(a, b), (b, a)}
 
     base_floor_raw = min(float(store.pop_raw[source]), float(store.pop_raw[target]))
     floor_raw = effective_floor_raw(base_floor_raw, excludes, cfg)
@@ -110,6 +119,8 @@ def find_path(
         pop_raw_u = float(store.pop_raw[u])
         for v, sim in store.neighbours_of(u):
             if v in hard:
+                continue
+            if (u, v) in banned:
                 continue
             pop_raw_v = float(store.pop_raw[v])
             # Every popularity term here is in RAW currency. A percentile

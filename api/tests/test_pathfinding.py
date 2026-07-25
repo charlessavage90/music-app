@@ -98,3 +98,41 @@ def test_degree_hub_penalty_routes_around_a_hub():
     path = find_path(store, 0, 3, [], replace(CFG, w_degree_hub=5.0))
     assert 1 not in path
     assert path == [0, 2, 3]
+
+
+def test_forbidden_edge_routes_around_the_direct_link():
+    # 0-1 direct and strong; 0-2-1 available. Forbidding 0-1 must use 2.
+    store = make_store(
+        names=["A", "B", "C"], pop_raw=[0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.95), (0, 2, 0.9), (1, 2, 0.9)],
+    )
+    assert find_path(store, 0, 1, [], CFG) == [0, 1]
+    assert find_path(store, 0, 1, [], CFG, forbidden_edge=(0, 1)) == [0, 2, 1]
+
+
+def test_forbidden_edge_is_undirected():
+    store = make_store(
+        names=["A", "B", "C"], pop_raw=[0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.95), (0, 2, 0.9), (1, 2, 0.9)],
+    )
+    # Given the other way round, the same edge must still be blocked.
+    assert find_path(store, 0, 1, [], CFG, forbidden_edge=(1, 0)) == [0, 2, 1]
+
+
+def test_forbidding_the_only_link_yields_no_path():
+    # B hangs off A by a single edge, as ~6,400 real artists do.
+    store = make_store(
+        names=["A", "B", "C"], pop_raw=[0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.9), (0, 2, 0.9)],
+    )
+    assert find_path(store, 0, 1, [], CFG, forbidden_edge=(0, 1)) is None
+
+
+def test_omitting_forbidden_edge_changes_nothing():
+    store = make_store(
+        names=list("ABCDE"), pop_raw=[0.5] * 5,
+        undirected_edges=[(i, i + 1, 0.9) for i in range(4)] + [(0, 2, 0.2)],
+    )
+    assert find_path(store, 0, 4, [], CFG) == find_path(
+        store, 0, 4, [], CFG, forbidden_edge=None
+    )
