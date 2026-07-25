@@ -1854,3 +1854,78 @@ sits in **5.86–5.97** against a B_unk of **5.379** — the whole grid lives ab
 **No threshold was touched, and none will be.** Stage 2 has not run; R1's fallback selects
 **W = A7** (no cell moved C1 in the right direction), which is the fallback firing as designed
 rather than a selection.
+
+### STAGE 2 RUN — still R0 overall, but the null has a DIRECTION: the ceiling toll (2026-07-24)
+
+**Stage 2 ran as pre-registered, on W = A7.** Recorded because I had argued for skipping it and
+was wrong: R1's fallback clause exists precisely for a null ("if no cell moves C1 in the right
+direction, W := A7 so the attachment arms still get tested"), so skipping would have meant
+overriding a pre-registered decision *after* seeing the result. Two further reasons the
+pre-registration was right and I was not: every stage-1 arm is **depth-independent by
+construction**, while F2 is a complaint *about depth* — and the FL arms are the only
+depth-varying arms in the design. Figures: `scores_stage2.json`, `paths_stage2.json`.
+
+**Overall verdict unchanged: R0, full null.** C1's threshold is −1.0; the best arm in either
+stage reaches **−0.177**, still **5.6× short**. Nothing is adoptable and no threshold moves.
+
+**But T1b is a coherent signal rather than noise, and it is the only one in fifteen arms:**
+
+| arm | C1 mean ΔF | C1 frac | C2 | C3 | C4 int | cov % | mean fame |
+|---|---|---|---|---|---|---|---|
+| P | 0.000 | 0.00 | **4/8** | 0.164 | 5.38 | 96.4 | 5.880 |
+| A7 (= W) | −0.053 | 0.54 | 1/8 | 0.066 | 3.58 | 95.1 | 5.945 |
+| T1a | −0.052 | 0.46 | 2/8 | **−0.066** | 3.79 | 94.8 | 5.966 |
+| **T1b** | **−0.177** | **0.71** | 3/8 | 0.092 | **6.54** ✓ | **97.5** | **5.672** |
+| FL1 / FL2 | −0.053 | 0.54 | 1/8 | 0.066 | 3.58 | 95.1 | 5.945 |
+
+T1b is the **most obscure arm across both stages** (mean pooled interior fame 5.672 against P's
+5.880 and stage 1's best 5.861), the **only arm to pass C4** — it makes paths *longer* than
+production, 6.54 interiors against 5.38 — and it carries the **highest proxy coverage**. At the
+C2 depths **31.2 % of its interiors fall below B_unk against production's 19.3 %** (30 of 96
+against 17 of 88).
+
+**And T1b still FAILS C2 relative to production, 3/8 against 4/8 — which is the finding, not a
+contradiction.** More below-band interiors spread over *fewer pairs* means it reaches deeper in
+fewer places. That is **Attack 2's signature** (the insular-cluster dive) appearing in the one
+arm that moved, and it must be carried into any follow-up: the pair-level criterion and the
+interior-level count disagree here, and **C2 is the one that encodes what the owner asked for.**
+
+**THE FLOOR IS DEAD, and this is the cleanest structural result of the day.** FL1 and FL2 are
+**byte-identical to each other and to A7 on all 72 analysis cells**, and their isolating
+contrasts are **exactly 0.000** — while the floor term fires on **10.40 % / 8.83 %** of
+relaxations against production's 2.94 %. So it is neither inert nor merely weak: **tripling
+`w_floor` changes nothing, because the floor is never the pivotal term in any routing decision
+at any depth.** This is PR-A's "the term is firing but the outcome is unchanged" in its sharpest
+possible form, and it means **the only depth-graduated device in the cost function cannot do the
+job it was designed for.** Established without reference to any fame measurement, which makes it
+the most robust conclusion in the run. §4.4's conditional deletion of `w_floor`/`floor_relax_*`
+now rests on direct evidence rather than an unfired condition, and A16's "load-bearing only if
+FL1 beats W" resolves cleanly to **no**.
+
+**The toll's magnitude does all the work, and its top is UNTESTED.** T1a-vs-A7 is **+0.001** —
+inert at the low magnitude — while T1b-vs-T1a is **−0.125**. And per **A17(b)**, because W = A7
+carries `w_sim` 1.5 rather than 3.0, the two magnitudes were **3.75× and 15× `w_hop`, not the
+7.5× and 30× §1.4 names** (the contrast table still prints §1.4's labels — a reporting wart, not
+a computation error). So the only mechanism that produced movement ran at **half** its intended
+strength, and its intended top magnitude has never been tested. A17(b) was written three days
+ago precisely so this figure would not be misquoted.
+
+**A17(c)'s falsifier fires again, and harder.** T1b (5.672) is far more obscure than corner X
+(5.932) — now a *tuned* arm beats the reachability bound by a wide margin, not merely production.
+R0 therefore licenses only "these fifteen configurations do not move it" and **not** "the
+repricing family is exhausted."
+
+**Where this points, and it is the pre-registered follow-up rather than a new idea.** §2.4 R0
+licenses "the p99 ceiling-rescale arm (builder)". The toll is the **routing-side probe of that
+same hypothesis**, and it is the only knob of fifteen that moved anything — evidence that the
+similarity **ceiling**, not the price of obscurity, is what holds paths in famous territory.
+Fixing it properly belongs in the builder (rescale rather than clip), needs its own
+pre-registration, and would change the artifact — so it sits behind the same rebuild seam as the
+blank-name remediation and the p99-shift measurement.
+
+**No blind listen.** Nothing cleared the offline gates, so there is nothing to listen to — the
+pre-registration saved the one-shot resource instead of spending it on a null, which is log
+§2.13 C5's discipline working as designed.
+
+**Held-out set untouched** (4 pairs), correctly: it confirms a winner's direction, and there is
+no winner.
