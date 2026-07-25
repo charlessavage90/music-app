@@ -17,6 +17,35 @@ does the ordinary orientation; no cold-read-back is owed.
 
 ---
 
+## 0. PAUSED — path-quality work is stopped by owner decision, 2026-07-25
+
+**Decided by the owner after this session's closeout had already run.** The app goes to
+**Gate 2 (friends & family)** instead; the next work is Gate 1 leftovers, not path quality.
+
+**The builder-side p99 rescale is NOT pre-registered, and must not be started.** The
+headroom measurement licenses *pre-registering* it — that is all it ever licensed, and no
+pre-registration exists. A session that begins designing, building or running it is acting
+without a governing document.
+
+**Resuming path work is the owner's trigger, not a session's.** Nothing in this file, in the
+execution log, or in the analysis directories constitutes a resume signal, however live the
+reasoning looks. The measurements are deliberately left mid-argument; that is what a pause
+looks like, not an invitation.
+
+### What is parked, with success conditions
+
+| Parked | Success condition |
+|---|---|
+| **The builder-side p99 rescale probe** | The owner resumes path work **and** it is pre-registered with its own document. Both, in that order. |
+| **Open question 1 — the *direction* of the restored ordering** | Unanswered and load-bearing. WIDE established the clip erases ordering large enough to change routes; it says **nothing about which way** those routes move. Restoring the ranking could route toward more obscure neighbours, or merely toward *different* famous ones. Condition: answered before any rescale is adopted — by the probe, or by a cheaper measurement if one exists. |
+| **Open question 2 — the nameless-artist decision (drop vs backfill)** | The owner decides, and `builder/src/artistpath_builder/acceptance.py` stops rejecting a production rebuild. It is the hard blocker: **no rebuild, therefore no rescale, until this is settled.** Weakening the check to unblock a build remains the one wrong response. |
+| **`TF2`, the full-strength toll arm** | Not adopted, not listened to. It failed the offline gates, so the pre-registration bars a blind listen. Condition: adoption would need a fresh pre-registration; a listen would need the owner's explicit deliberate deviation. |
+| **The depth carrier (F2's "progressively")** | Still unsolved and untouched by either unit here. No condition set — it needs a design, not a probe. |
+
+**§4 below is superseded by this section** on what to do next; it is retained as the record
+of the position this session held at the seam. Its step 1 (settle the nameless artists) is
+still owed *whenever* a rebuild is next wanted, for any reason.
+
 ## 1. State in five lines
 
 - **Track 2F is DONE.** The ceiling toll ran at full strength and past it — 8 magnitudes from
@@ -70,6 +99,11 @@ does the ordinary orientation; no cold-read-back is owed.
   first arm in either track to beat production on absolute reach.
 
 ## 4. The open decision, and what I would do
+
+> **⚠ SUPERSEDED by §0, 2026-07-25 — the owner paused path work after this was written.**
+> Nothing below is a live instruction. Step 1 survives only in the weaker form stated in §0:
+> the nameless-artist decision is owed before any rebuild, whatever the rebuild is for.
+> **Do not act on step 2.** *Original text follows.*
 
 **The rescale probe is now well-motivated and still un-pre-registered.** Nothing licenses
 running it yet: it needs its own pre-registration, and it changes the artifact, so it sits
