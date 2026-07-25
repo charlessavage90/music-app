@@ -86,5 +86,8 @@ class ApiConfig:
     # returns a song called The Format by AZ above the band). We ask for a
     # page of results and keep the first whose artist matches the one we
     # asked for, so this has to be wide enough to reach past the title
-    # collisions. 25 covers the observed cases with one request.
+    # collisions. 25 is a judgement, not a measurement: the one documented
+    # case (roadmap C1) needed 2, and nobody has measured how deep the worst
+    # case goes. Raise it if cards come back silent for artists that
+    # obviously have tracks.
     clip_search_limit: int = 25

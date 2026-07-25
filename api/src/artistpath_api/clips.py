@@ -3,7 +3,13 @@
 The path endpoint never calls this (spec 5.2); clips are resolved per-card on
 demand. A missing clip leaves the card unplayable but never alters routing.
 
-Response shapes verified against the live Deezer and iTunes APIs (2026-07).
+Search response shapes verified against the live Deezer and iTunes APIs
+(2026-07). The per-track lookup shapes added for C2 (`/track/{id}` and
+`/lookup?id=`) are taken from the published API documentation and have NOT
+been exercised against the live services — the tests inject a fake fetcher,
+so a wrong field name here would pass every test and produce a silent card.
+Confirming a clip still plays an hour after page load is the check that
+covers it, and it is queued in docs/superpowers/TEST-QUEUE.md.
 """
 
 from __future__ import annotations
@@ -83,8 +89,9 @@ class DynamoClipCache:
     """Production cache: DynamoDB with a 30-day TTL (spec 5.1).
 
     Stores track *identity* only. A signed preview URL must never be written
-    here: the TTL is 30 days and the signature lasts under an hour, which is
-    what made every cache hit past the first hour serve dead audio (C2).
+    here: the TTL is 30 days and the signature expires far sooner (measurement:
+    the roadmap's confirmed-diagnoses C2), which is what made every cache hit
+    past the first hour serve dead audio.
 
     The boto3 resource is created lazily on first use, so constructing the
     cache (and therefore booting the app) never requires AWS to be reachable.

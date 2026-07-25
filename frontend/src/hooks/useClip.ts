@@ -7,11 +7,11 @@ type ClipState = { status: 'loading' | 'ready' | 'none'; track: Track | null };
 /**
  * How long a resolved track may be reused before we ask the API again (C2).
  *
- * A track's preview URL is signed and short-lived — one was measured dead
- * within 31 minutes — and this cache holds that URL, so on a tab left open it
- * would serve expired audio however correct the server is. Ten minutes is
- * comfortably inside the observed lifetime, and the re-fetch is cheap: the
- * server keeps the track identity and only re-signs the URL.
+ * A track's preview URL is signed and short-lived (measurement: the roadmap's
+ * confirmed-diagnoses C2), and this cache holds that URL, so on a tab left
+ * open it would serve expired audio however correct the server is. Ten
+ * minutes sits well inside the lifetime recorded there, and the re-fetch is
+ * cheap: the server keeps the track identity and only re-signs the URL.
  */
 const CLIP_TTL_MS = 10 * 60 * 1000;
 

@@ -1,5 +1,8 @@
 # Documentation map
 
+**Role: AUTHORITATIVE.** The current classification of every document in `docs/`. Where
+another document disagrees with this one about a document's role, this wins.
+
 **Read this before citing any document in `docs/`.** It says which documents are
 authoritative, which are historical, and which must never be used as context.
 
@@ -98,9 +101,11 @@ that is how the drift began.
   cost-function retune, per
   `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` §4. Current
   sequencing: see that spec and
-  `superpowers/2026-07-23-repair-and-retune-execution-log.md`. Clips (C1, C2) and frontend
-  UX remain queued behind it. Two items carry in from Phase 2 with success conditions; see
-  the roadmap's Phase 1 section.
+  `superpowers/2026-07-23-repair-and-retune-execution-log.md`. **Clips (C1, C2) and the four
+  frontend UX items were built 2026-07-25** — record:
+  `superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md`. They are **fixed but not
+  confirmed in use**; the queued check in `superpowers/TEST-QUEUE.md` is what closes them.
+  Two items carry in from Phase 2 with success conditions; see the roadmap's Phase 1 section.
 - **Two Phase 2 predictions did not survive measurement**, and older prose still asserts
   them. Damping ("C4") was tested at 0.25 / 0.5 / 0.75 and **rejected** — the undamped arm
   won. Neighbour-set Jaccard was **not** adopted as the primary objective; the
@@ -164,6 +169,8 @@ that is how the drift began.
 | `superpowers/plans/2026-07-20-stage3-web-frontend.md` | Frontend implementation. Shipped. |
 | `superpowers/findings/2026-07-22-doc-audit-context-layer.md` | Documentation audit, navigation layer. |
 | `superpowers/findings/2026-07-22-doc-audit-technical-record.md` | Documentation audit, specs and plans. |
+| `superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md` | **The record of the Gate 1 clip and frontend-UX work, 2026-07-25** (PR #19). Both clip defects and all four dogfooding UX items. Carries three defects found **in the roadmap itself** — its stated cause for the wrong-artist bug was inaccurate as *located*, and its prescribed fix applied literally would have silenced every card. Also the mutation-check result, the deferred findings with success conditions, and the note that **C1/C2 are fixed but not closed** until the queued use-the-app check returns. Touches no routing, no graph, no weight. |
+| `superpowers/findings/2026-07-25-doc-audit-gate1-clips-ux.md` | `doc-auditor` report from the 2026-07-25 closeout (B1). Five findings, four actioned; **its recommendation to expand bare identifiers inside `TEST-QUEUE.md`'s steps was rejected** — `closeout` C1 forbids naming identifiers in owner-facing steps, and the entry correctly has none. Its identifier census and previous-findings check are the parts worth citing. |
 | `superpowers/plans/2026-07-23-track1-tiebreak-remediation.md` | Track 1 implementation plan. **Executed 2026-07-23; do not execute again.** Outcomes in `2026-07-23-repair-and-retune-execution-log.md`. |
 | `superpowers/specs/2026-07-22-c3-bypass-diagnostic-experiment.md` | C3 diagnostic protocol. **Executed** (Stage 0); Stage 1 superseded by Track 2. Results in the Phase 1 log §3. |
 | `superpowers/specs/2026-07-22-c3-known-mechanism-blind-listen.md` | C3 `known`-mechanism blind-listen protocol. **Executed**, verdicts recorded. Results in the Phase 1 log §3.6–§3.9; the A-vs-C re-run condition is the 2026-07-23 spec §4.4. |
