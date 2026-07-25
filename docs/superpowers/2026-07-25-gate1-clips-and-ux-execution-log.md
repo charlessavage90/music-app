@@ -256,16 +256,27 @@ Two committed documents disagree on how long a rebuild from the archive takes:
 - `2026-07-25-HANDOFF-track2f-and-headroom.md` §5: the in-memory rebuild from the archived
   responses takes **about the same as the ladder's ~461 s**.
 
-These may well be different operations — the handoff's is an analysis-side in-memory
-reconstruction, not `artistpath-build build` — but **nothing in either document says so**,
-and a reader planning around "30 seconds" who gets eight minutes has been misled by the
-record rather than by the tool.
+**RESOLVED 2026-07-25 by the closeout doc audit — they are different operations, and the
+record already contained the evidence.** The repair-and-retune execution log's ORDERING
+HEADROOM entry states that the in-memory rebuild called `serialise()` **only to hash, then
+discarded the bytes**, and that `acceptance.py`'s rebuild block was therefore untouched. So
+the ~461 s figure is the **analysis harness reconstructing the graph in memory for a
+measurement**, not `artistpath-build build` writing an artifact. The two numbers were never
+in conflict; nothing in either document said which was which.
 
-**Not resolved here, and deliberately not guessed at.** The README was written to carry no
-figure at all, which is the correct move regardless of which number is right. Resolving it
-needs someone to time both operations once and say which is which — cheap, but it is a
-measurement, and inventing the answer would put a third number into a record that already
-has two.
+**What is still unverified, and is a different claim:** whether `CLAUDE.md`'s **~30 s** is
+accurate for the production CLI. Nobody timed it here. It is plausible and it is untested —
+so it stays as a figure to check the next time anyone actually rebuilds, not as a known-good
+number.
+
+`2026-07-25-HANDOFF-track2f-and-headroom.md` §5 now carries an inline label so the ambiguity
+does not spread from the document a successor is most likely to read.
+
+**Method note.** The audit's reconstruction was checked against the cited line before being
+accepted, and it turned out to support a *firmer* conclusion than the audit itself drew
+("almost certainly different operations" → *definitively* different, since no artifact was
+written). Subagent findings are evidence to verify, not conclusions to adopt — in both
+directions.
 
 ## 14. Second closeout, run on the post-closeout increment
 
