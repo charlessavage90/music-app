@@ -24,6 +24,10 @@ class ArtistOut(BaseModel):
 
 class PathResponse(BaseModel):
     artists: list[ArtistOut]
+    # Whether the journey needed a stop forced into it, and whether one was
+    # possible. Wire contract, so snake_case; the frontend reads it as
+    # stopRule. Values are pathfinding.STOP_*.
+    stop_rule: str
 
 
 class TrackOut(BaseModel):
