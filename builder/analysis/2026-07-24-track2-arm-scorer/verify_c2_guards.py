@@ -38,6 +38,7 @@ from score import (  # noqa: E402
     C1_DEPTHS,
     C2_DEPTHS,
     SCORED_DEPTHS,
+    apply_uniform_blank_drop,
     blank_scored_cells,
     cell_median,
     score_arm,
@@ -152,13 +153,15 @@ def main() -> int:
     print("\nF8 — the uniform drop removes the cell from the CONTROL too")
     # The property that makes it non-directional. P never contained the blank node, but
     # its cell goes as well, so the two arms are still compared on identical cells.
+    #
+    # This calls PRODUCTION's drop, not a copy of it. Closeout B3 found the earlier
+    # version applied its own inline loop, so mutating score.py to drop per-arm — the
+    # directional bug — left this check passing clean. A test that reimplements the thing
+    # it is testing verifies only itself.
     doc = _doc({"p0": NAMELESS, "p1": PLAIN_OBSCURE, "p2": PLAIN_OBSCURE,
                 "p3": PLAIN_OBSCURE})
     cells = blank_scored_cells(doc)
-    for cell in cells:
-        pair, _, dtag = cell.rpartition("@d")
-        for arm in doc["paths"]:
-            doc["paths"][arm][pair][dtag] = None
+    apply_uniform_blank_drop(doc, cells)
     surviving = {
         arm: sorted(d for p in doc["paths"][arm] for d in doc["paths"][arm][p]
                     if doc["paths"][arm][p][d] is not None)

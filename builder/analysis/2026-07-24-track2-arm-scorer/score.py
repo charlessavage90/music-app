@@ -81,6 +81,21 @@ def blank_scored_cells(doc) -> dict[str, list[str]]:
     return {k: sorted(v) for k, v in sorted(out.items())}
 
 
+def apply_uniform_blank_drop(doc, blank_cells) -> None:
+    """Remove every contaminated cell from EVERY arm, in place. A13's rule, second cause.
+
+    A function rather than four lines inline in `main`, because the property that makes it
+    correct — the cell leaves the control as well as the treatment — is the whole point and
+    has to be testable. It was inline first, and closeout B3 caught that: mutating it to
+    drop per-arm (the directional bug this exists to prevent) left `verify_c2_guards.py`
+    passing clean, because the test applied its own loop rather than this code path.
+    """
+    for cell in blank_cells:
+        pair, _, dtag = cell.rpartition("@d")
+        for arm in doc["paths"]:
+            doc["paths"][arm][pair][dtag] = None
+
+
 def b_unk() -> float:
     """B_unk in fame units, read from the committed proxy score rather than restated."""
     s = json.loads((PROXY / "score.json").read_text(encoding="utf-8"))
@@ -398,10 +413,7 @@ def main() -> int:
                 "response is a UNIFORM cell drop: re-run with --blank-cells drop.\n"
                 "Do NOT drop the node instead; that is the directional fix this refuses."
             )
-        for cell in blank_cells:
-            pair, _, dtag = cell.rpartition("@d")
-            for arm in doc["paths"]:
-                doc["paths"][arm][pair][dtag] = None
+        apply_uniform_blank_drop(doc, blank_cells)
         doc["dropped_cells_blank_name"] = sorted(blank_cells)
         print(f"  -> dropped from ALL {len(doc['paths'])} arms uniformly "
               f"(pre-registered response; A13's rule applied to a second cause)")

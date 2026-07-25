@@ -1929,3 +1929,92 @@ pre-registration saved the one-shot resource instead of spending it on a null, w
 
 **Held-out set untouched** (4 pairs), correctly: it confirms a winner's direction, and there is
 no winner.
+
+### Closeout at the Track 2 completion seam (2026-07-24)
+
+Full-ritual seam closeout — the work touched the cost-function evaluation apparatus and ran the
+experiment. Distillation of what is not already in the per-entry records above.
+
+**The arc, in one line.** Picked up at the scorer/P8b seam; discharged P8b; fixed its four
+blocking findings; took the pre-registration A16 → A19; ran both sweep stages; got **R0, a full
+null**; adopted nothing.
+
+**Decisions that reversed or corrected an earlier position — three, and all three were mine:**
+
+- **I argued for skipping stage 2 and was wrong.** R1's fallback clause exists precisely for a
+  null, so skipping would have overridden a pre-registered decision *after* seeing the result.
+  Compounding it: every stage-1 arm is depth-independent by construction while F2 is a complaint
+  *about* depth, and the FL arms were the only depth-varying arms in the design — so the arms I
+  proposed dropping were the ones aimed at the actual complaint. The owner's question ("remind me
+  what stage 2 is") is what surfaced it.
+- **The F8 guard was under-implemented, and directionally so** — caught by a consulting pass. I
+  shipped a per-criterion **node** exclusion where the success condition asked for a fail-loud
+  assertion, leaving blank interiors in C1's and C3's medians. Corrected to cell level (A18).
+- **A18 replaced my own justification for deferring the rebuild.** "0.049 %, relative comparison"
+  is valid for a *random* 0.049 % and wrong for a bias concentrated in the treatment arms.
+
+**Defects found in my own work that no reviewer flagged:**
+
+- **F9's first cut mis-attributed the contrasts** — package-ness is a property of the pair, not
+  the arm, so keying off the arm name stamped the clean one-column contrasts as unattributable.
+- **Closeout B3 found a vacuous test in this session's own work.** `verify_c2_guards.py` passed
+  clean when production's uniform drop was mutated to per-arm — the exact directional bug the test
+  was written to prevent — because the test applied *its own inline loop* rather than the code path
+  `score.py` uses. Fixed by extracting `apply_uniform_blank_drop` so both call one implementation;
+  re-running the mutation now produces 2 failures. **This is the highest-value thing the closeout
+  found, and it was in a test I had written specifically to prove a guard worked.**
+
+**Gate outcomes.** P8b: discharged. The sweep's own gates: **all failed** — C1, C2, C3 failed for
+every arm; C4 passed only for T1b. A0-vs-P and mirror byte-identity were passed in prior sessions
+and not re-run. **No gate was worked around**; the null is reported as a null.
+
+**Corrections to the prior record:** Phase 2 Task 11's entity filter is complete **for placeholders
+only** (`jesus2099` still a node); the Phase 2 spec's mass-perturbation warning holds in its
+conclusion but its mechanism is dead (damping is 0.0) — the live channels are the p99 rescale and
+the popularity array.
+
+**Operational measurements with no other home:** stage 1 is **158 s** for 11 arms, stage 2 **113 s**
+for 7 — both far under §1.4's "order of an hour". Fame resolution dominates wall-clock: ~76 new
+names in stage 1 and ~117 in stage 2 at roughly 1 s each. **Zero guard-infeasible cells in either
+stage**, so A13's uniform-drop path has still never executed against a real drop; **zero
+blank-named interiors**, so A18's guard never fired on live data (it is verified only
+synthetically).
+
+**Closeout B1 (doc-auditor):** six findings, **two HIGH**, all status-staleness, **all
+adjudicable — no escalation list.** Both HIGH were in auto-loaded memory still saying "no arm
+scored" and "the open unit is the SWEEP". Expected: the sweep finished *after* those files were
+written. All six fixed. The auditor also correctly guessed that `project-state.md`, which it did
+not open, was stale — it was, naming the wrong branch and PR. Its cold-start navigation test
+found the entry points gave **three different answers** to "what is the next action"; that is
+what the memory and `CLAUDE.md` fixes close. Two recommendations **not** actioned and recorded
+instead: a missing `builder/README.md` (pre-existing, deferred with a condition in the handoff),
+and a `session-start` check of memory against the execution log — the latter is standing-layer
+work and therefore the owner's call.
+
+**B5 caught a violation I introduced during this very closeout:** the memory updates carried two
+measured figures, and memory holds pointers, not figures. Removed; memory is now figure-free.
+
+**B2 / B4 clean.** No orphans — `stage2` gained real callers via F3's fix. Three prose claims
+spot-checked against code and all held (no dislike walk exists, so C7's "needs a dislike walk" is
+accurate; `check_acceptance` is called only from `cli.py`, never inside `build_from_archive`).
+
+**A4 — default-flip: no new shipped knobs, and the work is deliberately NOT closed.** The only
+shipped change is `acceptance.py`'s unconditional blank-name check, which is an assertion rather
+than a knob. Stated plainly per A4: the blank-name **remediation** is an open owner decision, so
+that thread is open, not complete — and the check deliberately fails a production rebuild until it
+lands.
+
+**D2 — committed fixtures are NOT stale:** the artifact is unchanged (`4cb84ef9…`), so no
+regeneration is owed.
+
+**D4 — suites, run not remembered:** builder **115 passed**, api **120 passed**, frontend
+**31 passed (11 files)**.
+
+**D6 — standing-layer delta: `CLAUDE.md` net 0, memory 354 → 362 (+8).** `CLAUDE.md` is a pure
+one-row replacement of a stale orient answer. The memory **+8** is displacement, not growth: out
+came the pending-sweep narrative ("build the scorer, then run the arms"), the P4 pilot
+blow-by-blow, and the **now-discharged lo-fi caveat** (the sweep measured the floor as never
+pivotal, so a fame-currency floor cannot surface anything). In came the three things a cold
+session must not misread — that R0 does **not** reach "the family is exhausted", that T1b's two
+best numbers disagree and the pessimistic one governs, and that the toll ran at half strength.
+Nothing net-new was added without something coming out.

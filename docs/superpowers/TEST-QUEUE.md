@@ -11,6 +11,30 @@ the point.**
 
 ---
 
+## N/A — 2026-07-24 — Track 2 sweep RAN and returned a null: nothing app-facing changed
+
+**Nothing to exercise, and this time that is the headline rather than a technicality.** The
+Track 2 sweep ran to completion and **no configuration beat what the app already does**, so
+there is nothing to adopt and nothing changed. The app routes on the same graph as before,
+with the same weights. **A path you generate today is identical to one from yesterday.**
+
+Recorded per C1's honesty rule instead of inventing a test. What ran: fifteen candidate
+routing configurations, offline, against artists you and I never showed the app. What changed
+in the running app: nothing — no routing code, no graph, no setting.
+
+**One builder-side change that cannot affect you yet.** The graph *builder* now refuses to
+produce a graph containing artists with no name. It only fires when a graph is rebuilt, and no
+rebuild is due until you decide what to do about the 33 nameless artists already in the current
+one. Until then the app is untouched.
+
+**What is worth knowing, since it explains something you reported.** Your complaint that
+pressing *know them already* repeatedly does not surface more obscure artists now has a
+measured cause: the rule that was supposed to make repeated presses dig deeper is firing
+constantly and **changing nothing** — tripling its strength moves not a single path. That is
+diagnosed, not fixed, and the fix is a decision for you (see the handoff).
+
+Clips (C1/C2) remain known, unrelated, and untouched.
+
 ## N/A — 2026-07-24 — Track 2 scorer built: nothing app-facing changed
 
 **Nothing to exercise.** This session built the Stage A arm scorer — offline analysis

@@ -1,6 +1,13 @@
 # HANDOFF — Track 2, at the scorer/P8b seam, 2026-07-24
 
-**Role: ACTIVE, short-lived by design.** Written at a **clean seam** (the Stage A scorer is
+> **⛔ SUPERSEDED 2026-07-24, later the same day, by
+> [`2026-07-24-HANDOFF-track2-complete.md`](2026-07-24-HANDOFF-track2-complete.md).**
+> The open unit this note describes — *P8b, then the arms* — is **CLOSED**: P8b was
+> discharged and all 15 arms ran, returning **R0, a full null**. Every "no factorial arm
+> has run" statement below was true when written and is now false. **Retained for audit;
+> do not act on it.**
+
+**Role: HISTORICAL (was ACTIVE).** Written at a **clean seam** (the Stage A scorer is
 built, committed, and validated on production; no factorial arm has run), for a session
 picking up the **P8b harness review and then the arms** cold. Supersedes
 [`2026-07-24-HANDOFF-track2.md`](2026-07-24-HANDOFF-track2.md) (the fame-proxy/sweep seam
@@ -27,7 +34,7 @@ Read the record first, where it and this note disagree the record wins:
   (`arms.py`, `run_arms.py`, `fame.py`, `score.py`, `verify_resolver_equivalence.py`,
   `band_gap.py`, `README.md`, `fame_cache.json`). It **produces paths → resolves fame →
   scores C1–C6**, all offline and re-runnable. Validated end-to-end on production P.
-- **No factorial arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+- ~~**No factorial arm has run.**~~ **OVERTAKEN 2026-07-24: all 15 arms ran (R0, null).** Artifact still untouched, sha256 `4cb84ef9…b061dc8`.
 - **The pre-registration is at A16** (was A11 at session start). A12–A16 all predate any arm.
 
 ## 2. The open work — P8b, then the arms (this is the whole next unit)

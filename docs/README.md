@@ -37,8 +37,10 @@ that is how the drift began.
 
 ## Current state
 
-- ⛔ **The owner decided 2026-07-23: repair + retune. Track 1 is DONE and adopted; Track 2
-  is next.** The defect record and diagnosis below remain essential reading before touching
+- ⛔ **Repair + retune is DONE. Track 1 was adopted; Track 2 ran to completion 2026-07-24 and
+  returned a NULL (R0) — nothing adopted.** Current handoff:
+  [`superpowers/2026-07-24-HANDOFF-track2-complete.md`](superpowers/2026-07-24-HANDOFF-track2-complete.md).
+  **Next action is the owner's**, per pre-registration §2.4's pre-written read of R0.** The defect record and diagnosis below remain essential reading before touching
   Phase 1 — the three conflated quantities it warns about are still live hazards.
   **Read [`superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md`](superpowers/2026-07-22-phase1-execution-log-and-graph-defect.md)
   §2 before any Phase 1 work — and read §2.12 first, because it retracts a central claim of
@@ -67,15 +69,23 @@ that is how the drift began.
     is adopted.** The app now routes on `graph-t15-tiebreakfix.bin` — identity and
     verification in `superpowers/findings/2026-07-23-tiebreak-fix-adoption.md` (the
     authoritative record for the adopted artifact's checksum). Radiohead is back;
-    famous-artist neighbourhoods are score-ranked, not MBID-ranked. Track 2 (cost-function
-    retune) is next and has its own plan.
+    famous-artist neighbourhoods are score-ranked, not MBID-ranked.
+  - **Track 2 is COMPLETE and returned R0, a full null, 2026-07-24.** All 15 arms scored over
+    two stages; the best reached −0.177 against a −1.0 threshold. **Nothing adopted, no shipped
+    code changed, no blind listen run.** Firmest finding, and it needs no fame measurement: the
+    **floor device is never pivotal** — the two floor arms are byte-identical to their base
+    across every scored cell while the floor term fires 3× more often than production's, so the
+    only depth-graduated device in the cost function cannot do its job. **R0 does NOT license
+    "the repricing family is exhausted"** — A17(c)'s falsifier fired. Figures are owned by
+    `builder/analysis/2026-07-24-track2-arm-scorer/`; the execution log narrates them.
 - **Gate 1 (personal use).** Phase 2 (path quality) is **COMPLETE**, 2026-07-22. All 16
   tasks executed on branch `phase2-path-quality`. The blind listening test was run and the
   owner adopted the **`capfix`** arm — `cap_strategy="mutual_knn"`,
   `similarity_rescale="p99_log_clip"`, `similarity_damping=0.0`. See execution log §16
   (verdict) and §17 (adoption). **That adoption is not overturned** — but §2 of the Phase 1
   log is information that was not available when it was made.
-- **Phase 1 resumed 2026-07-23; Track 1 is done and adopted, Track 2 is next.** C3
+- **Phase 1 resumed 2026-07-23; Track 1 is done and adopted, and Track 2 has now run and
+  returned a null.** C3
   (`w_floor` is a no-op; `known` degrades to a bare hard exclusion — a *pathfinding*
   defect rather than the UX item it was filed as) is now folded into Track 2's
   cost-function retune, per
@@ -121,7 +131,8 @@ that is how the drift began.
 | `superpowers/2026-07-22-HANDOFF-phase1.md` | Written at Phase 2 closeout for a cold session: what was overturned and must not be reverted, and what the previous session knew that is not otherwise in the record. **Superseded on Phase 1 status by the log above** — that document governs where they disagree. Still valid on Phase 2 outcomes. |
 | `superpowers/2026-07-23-HANDOFF-track2.md` | **SUPERSEDED 2026-07-24** by `2026-07-23-HANDOFF-track2.md`'s successor below — its loose ends are closed or folded forward. Retained for audit; do not act on it. *(Original role: loose ends written at the 2026-07-23 mid-track retirement.)* |
 | `superpowers/2026-07-24-HANDOFF-track2.md` | **SUPERSEDED 2026-07-24 by `2026-07-24-HANDOFF-track2-scorer.md` below** — its one open unit (the sweep) is now half-built (the scorer exists) and re-described there. Retained for audit; do not act on it. *(Original role: fame-proxy/sweep seam handoff, P4 closed, A11 committed.)* |
-| `superpowers/2026-07-24-HANDOFF-track2-scorer.md` | **Handoff at the scorer/P8b seam, 2026-07-24. Supersedes the fame-proxy/sweep handoff above.** Written at a clean seam (Stage A scorer built, committed, validated on production; no arm run): work-state in three lines, the open unit (**P8b harness review, then the arms**), the blind-listen eligibility line, decisions not to re-argue (A12–A16), and git state (branch pushed, no PR yet). **Read the repair+retune execution log's Track 2 section first**; where the two disagree, the log wins. A seam handoff, not mid-flight — the successor does the ordinary `session-start`. |
+| `superpowers/2026-07-24-HANDOFF-track2-scorer.md` | **SUPERSEDED 2026-07-24 (same day) by `2026-07-24-HANDOFF-track2-complete.md` below.** Its open unit — P8b, then the arms — is closed: P8b was discharged and all 15 arms ran. Its "no factorial arm has run" statements are now false. Retained for audit; **do not act on it.** *(Original role: handoff at the scorer/P8b seam.)* |
+| `superpowers/2026-07-24-HANDOFF-track2-complete.md` | **The CURRENT Track 2 handoff, 2026-07-24 — written at the completion seam.** The sweep ran to completion and returned **R0, a full null**: 15 arms, best at −0.177 against a −1.0 threshold, **nothing adopted, no shipped code changed, no blind listen run**. Carries what R0 does and does **not** license (A17(c)'s falsifier fired, so it does not reach "the family is exhausted"), the firmest finding (the floor device is never pivotal), the open owner decision with the session's recommendation, and the **three items now queued behind one rebuild**. **Read the execution log's Track 2 section first**; where they disagree, the log wins. A seam handoff, not mid-flight. |
 | `superpowers/TEST-QUEUE.md` | The async **use-the-app queue**. `closeout` appends; `session-start` reads it and flags stale entries. Catches the defect class tests structurally cannot. |
 | `superpowers/specs/2026-07-23-defect-remediation-and-cost-retune-design.md` | **The governing design for resuming Phase 1** (owner-approved 2026-07-23). Track 1: builder fix for the §2.8 tie-break, rebuild, adopt by structural equivalence. Track 2: cost-function retune (currencies included) on the repaired graph, `known` mechanism, one blind listen. Records the owner's 2026-07-23 decisions in §1. |
 | `superpowers/2026-07-23-repair-and-retune-execution-log.md` | Retained execution log for the repair+retune work. Track 1 record, the pre-Track-2 guards, and Track 2 continues it. |
