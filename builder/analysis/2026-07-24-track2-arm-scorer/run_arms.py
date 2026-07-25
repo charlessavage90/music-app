@@ -133,6 +133,12 @@ def main() -> int:
                          "and W itself. Those three are re-walked deliberately — the "
                          "scorer needs P for C1, both P and A0 for C5 (A8), and W for "
                          "R5's FL1-vs-W attribution, all from one file (P8b F3)")
+    ap.add_argument("--arms-module", metavar="PY",
+                    help="Track 2F: import this file and use its build_arms(by_name) "
+                         "-> list[Arm] in place of STAGE1/stage2. Additive and default "
+                         "off, so every committed Track 2 figure stays reproducible "
+                         "from this script unchanged. Requires --inherit-drops (A13 "
+                         "does not span an invocation boundary on its own, P8b F3)")
     ap.add_argument("--inherit-drops", metavar="PATHS_JSON",
                     help="union this file's dropped_cells_d7 into the uniform drop. "
                          "Defaults to --out's stage-1 sibling when --stage2 is used; "
@@ -156,7 +162,33 @@ def main() -> int:
     arms: list[Arm] = [a for a in STAGE1 if a.name == "P"] if args.smoke else STAGE1
     inherited: set[str] = set()
 
-    if args.stage2:
+    if args.arms_module:
+        assert not (args.arms or args.stage2 or args.smoke), (
+            "--arms-module is exclusive with --arms/--stage2/--smoke"
+        )
+        assert args.inherit_drops, (
+            "--arms-module requires --inherit-drops: a drop set computed inside one "
+            "invocation spans only that invocation, so without it A13's uniform drop "
+            "breaks across the boundary exactly as it would across the stage split "
+            "(P8b F3)"
+        )
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("_arms_module", args.arms_module)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        arms = mod.build_arms({a.name: a for a in STAGE1})
+        src = Path(args.inherit_drops)
+        assert src.exists(), f"--inherit-drops file not found: {src}"
+        prior = json.loads(src.read_text(encoding="utf-8"))
+        assert prior.get("artifact_sha256") == digest, (
+            "--inherit-drops ran on a different artifact; the runs are not comparable"
+        )
+        inherited = set(prior.get("dropped_cells_d7", []))
+        print(f"external arms from {Path(args.arms_module).name}: {len(arms)} "
+              f"({', '.join(a.name for a in arms)})")
+        print(f"inheriting {len(inherited)} dropped cell(s) from {src.name}")
+    elif args.stage2:
         assert not args.arms, "--stage2 and --arms are mutually exclusive"
         w = args.stage2
         w_arm = next((a for a in STAGE1 if a.name == w), None)

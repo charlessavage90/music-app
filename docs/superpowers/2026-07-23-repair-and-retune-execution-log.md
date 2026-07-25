@@ -2127,3 +2127,93 @@ recommendation was formed from a summary rather than from the thing.**
 
 **Where this rule should finally live is the owner's decision and is being handled separately.**
 No standing-layer change is proposed here.
+
+### TRACK 2F — the ceiling toll at full strength: TFR0, but the bound holds this time (2026-07-25)
+
+**Pre-registration committed at `8074a32` before any arm ran** —
+`specs/2026-07-25-track2f-toll-full-strength-preregistration.md`. Artifact `4cb84ef9…b061dc8`,
+unchanged. Figures owned by `builder/analysis/2026-07-25-track2f-toll-ladder/`.
+
+**What was run.** A17(b) recorded that the toll's magnitude is `w_sim`-dependent, so `T1a`/`T1b`
+ran at 3.75× / 15× `w_hop` rather than §1.4's intended 7.5× / 30×, and the intended top had
+never been tested. Track 2F is a dose-response ladder on `W = A7`: 0, 3.75, 7.5, 15, 30, 60, 120
+and 7,500 × `w_hop`, the last as a ban corner. 10 arms, 461 s.
+
+**The harness change and its three proofs.** `mirror.py` gained `toll_hops` (toll =
+`toll_hops × w_hop`), additive and default-off, fixing A17(b) at its root — `toll_s` is
+`w_sim`-dependent, `toll_hops` names its own basis. `verify_mirror.py` passed byte-identical on
+all 212 cells; **`P`, `A0`, `A7`, `T1a_rpt` and `T1b_rpt` reproduced the committed
+`paths_stage2.json` byte-identically** on node ids and names, so the reproduction gate
+(`TFR5`) did not fire and every Track 2F figure is directly comparable to `scores_stage2.json`.
+The reproduction arms deliberately keep the original `toll_s` spec because the two forms are
+not bit-identical at the same nominal magnitude.
+
+**Result: `TFR0`, null on the primary criterion.** `M*` = **−0.198** (`TF2`, 30×), against the
+pre-registered −0.25 continuation trigger and `C1`'s −1.0 bar. **Nothing adopted, no shipped
+code changed, no blind listen run, no threshold touched.** Recorded plainly: this is a
+*near-boundary* null — 79 % of the way to the "partial" trigger — and saying so is honest
+reporting, while re-reading it as partial would be the threshold-shopping the pre-registration
+exists to prevent.
+
+**`TFR4`'s bound check HOLDS, and this is the difference from Track 2.** The ladder is monotone
+from 7.5× upward without exception (the single inversion is `T1a_rpt` vs `A7`, −0.0518 against
+−0.0525, at the magnitude already recorded as inert), and `TFX` is tied-lowest on `C1` and
+identical to `TF2` on every other criterion. Track 2's `X` failed exactly this check (A17(c)),
+which forced its null down to "these fifteen configurations". **Here the corner works, so the
+null may be stated at mechanism strength: tolling ceiling edges cannot move the primary outcome
+past −0.198 at any price.**
+
+**`TF-D1` is the finding that explains everything else.** Production takes **85.42 % of its hops
+on ceiling edges** (334 of 391). The toll drives that down monotonically — 82.84 → 65.51 → 46.67
+→ 30.58 → **28.86 %** — and then stops dead: `TF2`, `TF3`, `TF4` and `TFX` are all 144 of 499,
+identical. At 7,500× the router pays 150 cost units per hop rather than detour and still takes
+them, because **there is no alternative to take**. 144 forced hops over 72 scored cells is
+exactly 2.0 per path — one leaving a saturated endpoint, one arriving at another, which is the
+toll-calibration README's Q4 (eight of the 24 endpoints fully saturated) confirmed to the hop.
+**The ladder's limit is set by graph structure, not by price, and §1.4's intended top of 30× is
+exactly where it lands** — the magnitude was chosen correctly and everything past it is wasted.
+
+**The arm is better than production on everything except the primary criterion.** `TF2` scores
+`C2` **5/8 against production's 4/8** — the first arm in Track 2 or 2F to *beat* production on
+absolute reach, where every stage-1 arm went backwards to 1–2/8 — passes `C4` at 7.12 interiors
+against 5.38, improves `C3` to 0.232 against 0.164 (bar is 0.5, so still a fail), and carries the
+highest proxy coverage at 97.7 %. **The Attack 2 worry the Track 2 handoff carried forward does
+NOT survive to full strength:** `T1b` reached deeper in *fewer* pairs than production (3/8), the
+insular-cluster signature; at full strength the arm reaches *wider* (5/8), which is the opposite.
+
+**Guards all clean.** Zero blank-named interiors, so §0's directional non-constant never fired
+and A13/A18's uniform drop was not invoked. Zero guard-infeasible cells, as predicted — a toll
+re-prices edges and never removes them. No arm's `C2` pass rests on a flagged
+potentially-notable unmatched interior, so A11's d15/d20 guard is discharged without spending
+the owner's glance. Held-out set deliberately unread: it confirms a winner's direction and
+there is no winner.
+
+**One correction to my own working, recorded because the class matters.** I first read
+`C5_d0_changes` off `results` in `scores.json`, got `[]` from a `.get` default, and briefly
+believed no d0 path had changed at any magnitude. The key lives under `diagnostics`; d0 changes
+on **5 of 8 pairs**. Caught by checking the paths directly rather than trusting the field — the
+"verify one claim" habit applied to my own output, and the reason the C5 inspection in the
+README is real rather than a vacuous pass.
+
+**What this licenses, and the boundary that matters most.** `TFR0` as pre-registered: the
+ceiling's **cheapness** is not what holds paths in famous territory, and recommending against a
+rebuild *on that hypothesis*. It explicitly does **not** license "the p99 ceiling is fine".
+§1 bound 1 of the pre-registration is verified in the builder — `pipeline.py` stores
+`min(1.0, …)`, so the artifact retains no information distinguishing saturated edges from one
+another — which means **the ordering half of the ceiling hypothesis is untestable router-side
+and is untouched by this null.** `TF-D1` now gives that half a measured target rather than a
+hunch: 28.86 % of hops that no price can avoid, against 85 % in production today.
+
+**Where I would go next, stated as a position rather than a menu.** Before any rebuild, measure
+the **ordering headroom** from the archive, read-only: for the edges the p99 clip collapses to
+1.0, how much do their *unclipped* strengths actually differ? If they are nearly all equal, a
+rescale re-ranks nothing and the rebuild is pointless; if they span a wide range, the rescale has
+real headroom and the case is made before an artifact changes. The archive is present locally at
+`builder/scratch/graph-archive`, so this is a read-only measurement rather than a rebuild — the
+cheapest-experiment-first rule applied to the decision this null actually raises. It needs its
+own pre-registration only if it becomes an arm; as a structural measurement of the artifact's
+inputs it is the same class as the toll-calibration directory.
+
+**Track 2F does not touch F2's "progressively" clause and must not be read as doing so.** Every
+arm here is depth-independent by construction; `C3` fails on all of them. The depth carrier is
+still an open problem and the only depth-graduated device in the cost function is still dead.
