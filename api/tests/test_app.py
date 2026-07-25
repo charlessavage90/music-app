@@ -87,6 +87,28 @@ def test_track_endpoint_serves_no_clip_rather_than_the_wrong_artist():
     assert r.status_code == 204
 
 
+def test_track_endpoint_204_not_500_when_the_catalogue_fails():
+    """A rate-limited or unreachable catalogue must not 500 the card.
+
+    The production fetcher calls raise_for_status, so this is the shape a
+    Deezer 429 actually arrives in. A path view fires 8-10 of these.
+    """
+    store = make_store(
+        names=["Radiohead", "Muse", "Coldplay"],
+        pop_raw=[0.9, 0.7, 0.8],
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (0, 2, 0.3)],
+    )
+
+    async def fetch_json(url, params):
+        raise RuntimeError("429 Too Many Requests")
+
+    resolver = ClipResolver(CFG, InMemoryClipCache(), fetch_json)
+    client = TestClient(create_app(store, ArtistSearch(store, CFG), resolver, CFG))
+
+    r = client.get(f"/api/artists/{store.mbids[0]}/track")
+    assert r.status_code == 204
+
+
 def test_track_endpoint_204_when_no_clip():
     client, store = _client({"any": {"data": []}})
     r = client.get(f"/api/artists/{store.mbids[0]}/track")

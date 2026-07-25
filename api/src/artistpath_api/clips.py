@@ -141,6 +141,32 @@ class ClipResolver:
         self._cache = cache
         self._fetch = fetch_json
 
+    async def _get(self, url: str, params: dict) -> dict:
+        """Fetch, treating any failure as "no answer" rather than an error.
+
+        A clip is decorative — it never affects routing — so a catalogue that
+        is down, rate-limiting, or missing a track must produce a silent card
+        and never a 500. The production fetcher calls `raise_for_status`, so
+        failures arrive here as exceptions rather than as inspectable bodies;
+        a 404 for a withdrawn track is the common case, and it is what makes
+        `resolve`'s re-search fire.
+
+        Rate limiting is the live risk rather than a theoretical one: a path
+        view fires 8-10 lookups, and re-signing means a repeat view costs a
+        request per card where it used to cost none.
+
+        **Only the call is guarded**, deliberately. Wrapping the parsing too
+        would swallow our own bugs — a renamed field would look exactly like
+        an outage, which is the failure this whole area keeps producing.
+        """
+        try:
+            return await self._fetch(url, params)
+        except Exception:
+            # Deliberately broad: the fetcher is injected, so this layer
+            # cannot name the transport's exception types without coupling
+            # to httpx. Observability for this is a Gate 2 item.
+            return {}
+
     async def resolve(self, mbid: str, artist_name: str) -> Clip | None:
         """Resolve a playable clip, re-signing the URL on every request (C2).
 
@@ -166,11 +192,11 @@ class ClipResolver:
     async def _preview_url(self, identity: TrackIdentity) -> str | None:
         """Re-sign a known track. Returns None if it is no longer available."""
         if identity.source == "deezer":
-            body = await self._fetch(
+            body = await self._get(
                 f"{self._cfg.deezer_track_url}/{identity.track_id}", {}
             )
             return body.get("preview") or None
-        body = await self._fetch(
+        body = await self._get(
             self._cfg.itunes_lookup_url, {"id": identity.track_id}
         )
         for row in body.get("results", []):
@@ -182,7 +208,7 @@ class ClipResolver:
         return await self._from_deezer(artist_name) or await self._from_itunes(artist_name)
 
     async def _from_deezer(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        body = await self._fetch(
+        body = await self._get(
             self._cfg.deezer_search_url,
             {"q": artist_name, "limit": self._cfg.clip_search_limit},
         )
@@ -200,7 +226,7 @@ class ClipResolver:
         return None
 
     async def _from_itunes(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        body = await self._fetch(
+        body = await self._get(
             self._cfg.itunes_search_url,
             {
                 "term": artist_name,

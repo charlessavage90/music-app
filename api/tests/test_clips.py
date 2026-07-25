@@ -35,14 +35,27 @@ DEEZER_TITLE_COLLISION = {
 }
 
 
+class Boom(Exception):
+    """Stands in for httpx raising on a 404, a rate-limit, or a timeout.
+
+    The real fetcher calls `raise_for_status`, so a failing catalogue reaches
+    the resolver as an exception — never as a body it can inspect.
+    """
+
+
 def _resolver(responses, cache=None):
-    """responses maps a url-substring to the dict it returns."""
+    """responses maps a url-substring to the dict it returns.
+
+    A value that is an exception instance is raised instead of returned.
+    """
     calls = []
 
     async def fetch_json(url, params):
         calls.append((url, params))
         for frag, body in responses.items():
             if frag in url:
+                if isinstance(body, Exception):
+                    raise body
                 return body
         return {}
 
@@ -251,6 +264,75 @@ def test_dynamo_cache_writes_identity_and_no_url():
     assert table.written["track_id"] == "771"
     assert table.written["source"] == "deezer"
     assert "preview_url" not in table.written
+
+
+# --- a failing catalogue must never reach the caller -------------------
+#
+# The production fetcher calls raise_for_status, and nothing in the package
+# catches. A clip is decorative: any failure must degrade to a silent card,
+# never to a 500. Deezer rate-limits, and a path view fires 8-10 lookups.
+
+
+async def test_a_deezer_outage_falls_back_to_itunes():
+    r = _resolver({"deezer": Boom("429 rate limited"), "itunes": ITUNES_HIT})
+    clip = await r.resolve(MBID, "Radiohead")
+    assert clip.preview_url == "https://cdn.itunes/clip.m4a"
+
+
+async def test_both_catalogues_failing_yields_no_clip_rather_than_an_error():
+    r = _resolver({"deezer": Boom("500"), "itunes": Boom("timeout")})
+    assert await r.resolve(MBID, "Radiohead") is None
+
+
+async def test_a_404_on_the_cached_track_re_searches():
+    """The self-heal must fire on a raised 404, not only on an error body.
+
+    A track pulled from the catalogue is a 404 — the shape this path will
+    actually meet in production.
+    """
+    cache = InMemoryClipCache()
+    cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    r = _resolver({
+        "deezer.com/track/999": Boom("404 not found"),
+        "deezer.com/search": DEEZER_HIT,
+    }, cache=cache)
+
+    clip = await r.resolve(MBID, "Radiohead")
+    assert clip.preview_url == "https://cdn.deezer/clip.mp3"
+    assert cache.get(MBID).track_id == "771"
+
+
+async def test_a_rate_limited_lookup_does_not_evict_a_good_cached_track():
+    """A transient failure must not cost us the identity we already had."""
+    cache = InMemoryClipCache()
+    known = TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")
+    cache.put(MBID, known)
+    r = _resolver({
+        "deezer.com/track/771": Boom("429 rate limited"),
+        "deezer.com/search": Boom("429 rate limited"),
+        "itunes": Boom("429 rate limited"),
+    }, cache=cache)
+
+    assert await r.resolve(MBID, "Radiohead") is None
+    assert cache.get(MBID) == known  # still there for the next request
+
+
+async def test_a_bug_in_our_own_parsing_is_not_swallowed():
+    """Only the network call is guarded. Our own errors must still surface."""
+    class Exploding(dict):
+        def get(self, *a, **k):
+            raise AssertionError("parsing bug")
+
+    async def fetch_json(url, params):
+        return Exploding()
+
+    r = ClipResolver(CFG, InMemoryClipCache(), fetch_json)
+    try:
+        await r.resolve(MBID, "Radiohead")
+    except AssertionError as e:
+        assert "parsing bug" in str(e)
+    else:
+        raise AssertionError("a parsing bug was swallowed by the network guard")
 
 
 def test_dynamo_cache_treats_a_pre_c2_item_as_a_miss():
