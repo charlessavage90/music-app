@@ -11,7 +11,35 @@ the point.**
 
 ---
 
-## QUEUED — 2026-07-25 — clips should play the right artist, and still work an hour later
+## ⛔ BLOCKED — 2026-07-25 — do not run question 2 yet; it cannot pass
+
+**Found by a live check against the real music service, after this entry was written and
+before any of it was run.** Question 1 (does the clip play the right artist) is fine and
+worth doing. **Question 2 — does it still play an hour later — cannot pass yet, and would
+fail for a reason that has nothing to do with what it is testing.**
+
+**What is actually true.** The server half works, and it was verified live rather than
+argued: asking twice for the same artist returns the same song with a freshly signed link
+both times. That is the fix doing exactly its job. **The browser half is incomplete.** The
+page only asks for a new link when a card is first drawn. If you leave the tab open and come
+back, nothing on the page ever asks again, so it still holds the link it was given at the
+start — and those links now measurably last **15 minutes**, not the "under an hour" the
+record assumed. Pressing play after an hour would give you silence: the original bug,
+unchanged, on a page whose server has already been fixed.
+
+**So running it now would tell you "the fix failed" when the fix works.** That is the worst
+kind of result — a real-looking answer pointing at the wrong thing.
+
+**What is needed:** the page must ask for a fresh link at the moment you press play, rather
+than relying on the one it was handed when the card appeared. That is a small piece of
+design work, not a typo, and it has not been done.
+
+**Question 1 is unaffected — run that whenever you like.** It needs no waiting: open a path,
+press play on several cards, and listen for whether the voice matches the name on the card.
+
+*Detail: the execution log's §15.*
+
+## QUEUED (question 1 only) — 2026-07-25 — clips should play the right artist, and still work an hour later
 
 **This one is app-facing, and it is the first entry in a while that is.** Two clip defects
 and four interface annoyances are fixed. Nothing about *which artists* you get changed —

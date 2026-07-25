@@ -319,3 +319,62 @@ claimed or implied** — the work in §12 came from reading source, and the reco
 But this is the point at which a session should stop, and the owner had already decided the
 next phase starts fresh. That decision is correct and this note exists so it is not
 re-litigated as over-caution.
+
+## 15. Live verification after merge — the server half works, the browser half does not
+
+**Run after PR #19 merged, while starting the dev servers for the owner's check.** The first
+contact this code has ever had with the real services, and it changed the picture in both
+directions.
+
+### What was verified working, live
+
+Requesting the same artist's clip twice returns **the same track with a different signature**
+— identical track id and title, different `exp` and a completely different `hmac`. That is
+re-signing, observed rather than argued, and it discharges the weakest link this branch has
+carried since it was written: the per-track lookup shapes were taken from published API docs
+and had never been exercised. **They are correct.** The fresh URL was also fetched and
+returns `HTTP 206 audio/mpeg`, so it genuinely plays.
+
+Artist matching (C1) also confirmed live: the request returned Radiohead's own track.
+
+### The measurement that changed things
+
+**A Deezer preview signature is valid for 15 minutes.** Measured from the `exp` parameter
+against wall clock, twice. The roadmap's confirmed-diagnoses C2 records a URL fetched at
+09:41 and dead by 10:12 — consistent with 15 minutes, but it was read here as "somewhat
+under an hour", and the browser-side TTL was chosen against that looser reading.
+
+### The defect this exposed, which is in this branch's own work
+
+`useClip`'s effect depends on `[mbid]`. **The 10-minute expiry therefore guards a remount,
+never elapsed time on a card that stays mounted.** On a tab left open with no navigation the
+effect never re-runs, so `JourneyList`'s `urls` — and through it the player — keep the URL
+signed when the card was first drawn. At 15 minutes that URL is dead, and pressing play
+reproduces the **original C2 symptom on a page whose server is already fixed**.
+
+**Consequence: the queued hour-long check could not have passed**, and would have returned a
+confident false negative attributing failure to the server fix. The queue entry is marked
+BLOCKED for question 2; question 1 is unaffected.
+
+**Why the tests did not catch it.** The browser test asserts that a *newly mounted* hook
+re-fetches after the TTL, which is true and is what was implemented. Nothing asserts the
+behaviour of a component that stays mounted across the expiry, because no test advances time
+against a live component. The test was not vacuous — it tested the wrong span.
+
+### What the fix needs, so the next session does not re-derive it
+
+The URL must be fresh **at the moment of play**, not at the moment the card is drawn. Three
+options, not chosen here — this is design, and it should not be settled by a session that has
+already run two closeouts and recorded the degradation tell:
+
+1. **Re-resolve on play.** The play handler fetches a fresh track, then plays. Direct and
+   predictable; must also cover auto-advance on track end, which reads from the same list.
+2. **Retry once on audio error.** Covers expiry generically and costs nothing in the common
+   case, including the auto-advance path; needs the player seam to surface an error event.
+3. **Periodic refresh.** Simplest, but fires for every card whether or not it is ever played,
+   and multiplies requests against a service that rate-limits.
+
+(1) and (2) are complementary rather than alternatives. (3) is the one to argue against.
+
+**Standing constraint for whoever does it:** the dev servers are running for the owner's
+question-1 check, and editing `frontend/src` hot-reloads his open tab.
