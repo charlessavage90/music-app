@@ -1,6 +1,6 @@
 ---
 name: session-start
-description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. Many sessions here are not builders, and the owner starts builders with it instinctively. This is mechanical orientation, not exploration — about five minutes, answering four questions.
+description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. Many sessions here are not builders, and the owner starts builders with it instinctively. This is mechanical orientation, not exploration — about five minutes: four questions, then a name for the session.
 ---
 
 # Session start
@@ -8,9 +8,9 @@ description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — ru
 The mirror of the `closeout` skill: closeout writes, startup reads. Every check below
 consumes something a previous closeout produced, which is what keeps both cheap.
 
-**Answer four questions, then start.** This is not codebase exploration — `CLAUDE.md`
-already covers architecture, and re-deriving it is what makes fresh sessions expensive.
-Five minutes, then work.
+**Answer four questions, name the session, then start.** This is not codebase exploration
+— `CLAUDE.md` already covers architecture, and re-deriving it is what makes fresh sessions
+expensive. Five minutes, then work.
 
 ---
 
@@ -129,6 +129,28 @@ git status --short && git log --oneline -3 && git branch -vv
     log and looks dead while running perfectly. Use `python -u` or `PYTHONUNBUFFERED=1`.
     Three subagents lost real time to this one.
 
+## E. Name this session
+
+**Close your orientation with a `/rename` line for the owner to paste.** You cannot run it
+yourself — `/rename` is a built-in command, not a skill — so give him the finished line and
+nothing to compose.
+
+Name the **body of work, not the task**, in two to four words, taken from the governing
+document or the branch (A) — whichever a stranger would recognise faster:
+`/rename track2f-toll`, `/rename clip-cache-fix`, `/rename p99-rescale-prereg`.
+
+Two suffixes, and they are most of why this is worth doing:
+
+- `(handoff)` — you are continuing work a previous session retired **at a seam**.
+- `(handoff, mid-flight)` — the handoff note says the previous session was retired
+  **before** a seam. Same signal the cold-read check below keys off.
+
+So: `/rename track2f-toll (handoff, mid-flight)`.
+
+It costs one line and no tracking anywhere. What it buys is a `/resume` picker where a
+chain of handoffs reads as one chain rather than three unrelated entries — and a prompt box
+that tells you which body of work a window belongs to weeks later.
+
 ---
 
 ## Three checks unique to session start
@@ -196,6 +218,8 @@ dependency — or stale.
 **Full ritual** when executing a plan you did not write, resuming a phase, or acting on
 another session's conclusions.
 
-**Minimum** for a small, self-contained task in familiar territory: **A** (what governs)
-and **C** (repo state). Two minutes, and they catch the two failures that are expensive
-to unwind — working from a superseded document, and colliding with a live session.
+**Minimum** for a small, self-contained task in familiar territory: **A** (what governs),
+**C** (repo state), and **E** (the `/rename` line — it costs one line and is worth more on
+a short session, not less). Two minutes, and A and C catch the two failures that are
+expensive to unwind — working from a superseded document, and colliding with a live
+session.
