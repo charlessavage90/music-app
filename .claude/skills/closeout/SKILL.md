@@ -307,9 +307,9 @@ The tell is a step the owner cannot act on without asking what a term means. Rer
 step as a person who has not seen the diff — that pass takes a minute and is the whole
 difference between an entry that gets run and one that gets queried.
 
-The forcing function sits on the other end: **a session starting new work checks the
-queue first and flags anything that has been sitting untested.** That keeps it honest
-without gating anything.
+The forcing function sits on the other end: **`session-start` checks the queue and flags
+anything sitting untested** — so it fires when the owner runs that ritual, not on every
+session. That keeps it honest without gating anything.
 
 All path state lives in the URL, so a bug found weeks later is still one paste away
 from being reproducible.

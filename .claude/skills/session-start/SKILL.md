@@ -1,6 +1,6 @@
 ---
 name: session-start
-description: Orientation ritual for artistpath, run before doing substantive work in a fresh session. Use it whenever a session begins real work on this repo — the user says "pick up where we left off", "continue Phase 2", "execute the plan", "what's the status", "carry on with X", hands over a plan or handoff note, or asks you to start a task an earlier session set up. Also use it proactively when you are about to execute a plan you did not write, or act on a report you did not produce. This is mechanical orientation, not exploration — about five minutes, answering four questions.
+description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. Many sessions here are not builders, and the owner starts builders with it instinctively. This is mechanical orientation, not exploration — about five minutes, answering four questions.
 ---
 
 # Session start

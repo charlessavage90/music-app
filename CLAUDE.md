@@ -336,9 +336,10 @@ working" gets it exactly backwards.
 > careful.** Retire the session at the next stopping point, per `closeout`'s mid-flight
 > scaling (A2-mid, D1-mid) and `session-start`'s cold-read check.
 
-Both rituals trigger on **work** state — starting, finishing. Nothing triggers on
-**session** state, so this is the one boundary that has to be noticed deliberately rather
-than arriving on schedule. That asymmetry is why it has twice been the owner who spotted it.
+`closeout` triggers on **work** state — finishing; `session-start` triggers on the owner
+asking. Nothing triggers on **session** state, so this is the one boundary that has to be
+noticed deliberately rather than arriving on schedule. That asymmetry is why it has twice
+been the owner who spotted it.
 
 **How to ask for a plan review.** "Review this plan" finds prose problems. **"Check this
 plan's claims against the repo"** finds the confounds. Every high-value finding in Phase 2
@@ -351,12 +352,14 @@ Both are mechanical and cheap by design — they ask *did we leave a mess* and *
 oriented*, never *did we do the right thing*. That second question is a review, and
 reviews are rare and targeted here.
 
-- **`session-start`** (`.claude/skills/session-start/`) — run it **before** doing
-  substantive work in a fresh session: what governs this work and what supersedes what,
-  which decisions are closed, whether another session is live in this tree, and which
-  gates would stop you. Also carries the two checks that can only fire at the start —
-  the cheapest-experiment scope check, and verifying one claim before building on a
-  report.
+- **`session-start`** (`.claude/skills/session-start/`) — **the owner invokes this; a
+  session never runs it on its own initiative or suggests it.** Many sessions opened here
+  are not builders, and he starts builders with it instinctively, so self-triggering only
+  ever produced false positives to be argued out of. When he does run it: what governs
+  this work and what supersedes what, which decisions are closed, whether another session
+  is live in this tree, and which gates would stop you. Also carries the two checks that
+  can only fire at the start — the cheapest-experiment scope check, and verifying one
+  claim before building on a report.
 - **`closeout`** (`.claude/skills/closeout/`) — run it **after** finishing significant
   work: distil the retained execution log, give every deferral a success condition, check
   config defaults were actually flipped, sweep for orphaned modules and vacuous tests,
