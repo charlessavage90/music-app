@@ -273,6 +273,30 @@ have got. Every *outcome* criterion in that pre-registration carries a threshold
 carried none, and nobody noticed until one fired and demanded a doubling on the strength of
 a single path.
 
+> **And every read-of-result names the run state it presupposes.** A read reachable before
+> the design has finished running says so, and names what is still owed. Any instruction
+> that keeps a specified run alive gets **its own sentence there** — never a subordinate
+> clause of a rule about something else, because that is the half that degrades first.
+
+Same document again: R0's read presupposes all fifteen arms ("no arm, including corner X"),
+but R0 was detectable after eleven. The session got the null, opened §2.4 — the disciplined
+move, and it said so — found nothing about the four unrun arms, and recommended skipping
+them. What kept them alive was the tail of §1.4's rule for *selecting* W: "so the
+attachments still get tested". It recalled that rule's main clause accurately from memory;
+the subordinate clause did not survive. The owner asking what stage 2 was is what caught it,
+and those four arms produced the only signal in fifteen.
+
+> **No two load-bearing objects share an identifier, and new identifier series are
+> namespaced.** Prefix them (`T3-C1`) or pick disjoint letters, and check against every
+> document you cite. **Forward-only — never rename anything committed**; a frozen document's
+> value is that it is frozen.
+
+Track 2's pre-registration accumulated eleven collisions: `A1`–`A7` are simultaneously
+factorial arms and amendment IDs, `C1`–`C3` simultaneously success criteria and Phase 1
+defect IDs, and `R1` both the W-selection rule and a result branch. That last one cost the
+session above the rule that governed: its single retrieval surfaced the `R1` requiring
+corner X to have moved — X hadn't — so the applicable `R1` was never in view.
+
 **2. Documents asserting things about the world that aren't true.** Plans have referenced
 functions that did not exist yet, and cross-references have gone stale after renumbering.
 
@@ -346,11 +370,13 @@ bodies load unconditionally, before a session reads a single project document. E
 layer is routed around by `docs/README.md`; this one is not, so it is the only place where
 growth is a standing tax. It was 661 lines on 2026-07-21 and 1,436 on 2026-07-23.
 
-> **Additions to it are displacement-only: name what the addition replaces or shortens —
-> and if you cannot, it is not a session's to add.** Propose it to the owner and leave the
-> file alone; growing the layer that taxes every future session is his call, not a
-> session's. Checked at `closeout` **D6**, from the diff. This is A3's rule — *a deferral
-> must have an address* — applied to context instead of to findings.
+> **A session never grows this layer on its own authority: report the cost from the diff
+> and hand the decision over.** Growing the layer that taxes every future session is the
+> owner's call, not a session's. **Do not buy an addition by damaging something else** — a
+> displacement is real only where the thing removed had stopped earning its place.
+> Compressing a live passage to free lines has twice cost the exact clause that made a check
+> usable, and line arithmetic cannot tell that from a saving. Checked at `closeout` **D6**,
+> from the diff.
 
 **Rules here do not expire, and must not be given expiry conditions.** "Figures live in one
 document", `UV_LINK_MODE=copy`, currency-in-the-name: these are invariants, and a review
@@ -358,7 +384,9 @@ trigger on them would be discharged by re-affirming them, adding a line and subt
 nothing. What grows is not the rule (2 lines, permanent) but the **incident narrative**
 attached to it (4–6 lines, and it is load-bearing — knowing what a check is *for* is what
 lets you apply it to a case it was not written for). That is a real trade-off, not a defect.
-The displacement rule prices it; an expiry date would shred the half worth keeping.
+The budget rule prices it by making the cost visible and the decision the owner's; an expiry
+date would shred the half worth keeping — and so does compressing a narrative to free lines,
+which is why that is no longer the price of an addition.
 
 ### How to present results to the owner
 
@@ -385,9 +413,28 @@ contradicting it.
    like plain English. `d0` is *the path you see before pressing any button*; `d20` is
    *after twenty bypass presses*; "the floor" is *the rule that discourages routing through
    artists more obscure than the two you picked*. Translate to what the user sees, then
-   check by the only test that matters: **could the owner disagree with this?** Not: did I
+   check by the test that decides it: **could the owner disagree with this?** Not: did I
    avoid jargon. He cannot disagree with a sentence whose subject he cannot identify, and a
    decision he cannot argue with is not a decision he was given.
+
+   **So write the plain sentence once, at definition time, and quote it thereafter.** Every
+   criterion, arm and branch carries a plain-language sentence fixed in the pre-registration
+   beside its threshold, **before any result exists** — so it cannot be reshaped to fit one,
+   and a report whose wording drifts from it is as visible as a moved number. Owner-facing
+   text then gives identifier **and** sentence: `C1` alone is unusable; "C1 (does the typical
+   artist in the middle get less famous after ten or more presses)" is traceable *and*
+   readable.
+
+   **Two mechanical checks underneath that test, because on its own it passed a message
+   opening "R1's fallback picked W = A7 because nothing moved C1".** (a) Scan the message
+   for a bare letter-number token; every one gets its sentence. (b) Substitute the sentence
+   for the identifier and re-read: if the claim got broader or narrower, you wrote a
+   **summary**, not a translation. These two catch what a tired session's judgement misses;
+   they do **not** replace it, because both can be satisfied by a sentence he still cannot
+   argue with — "C1 (the paired median fame delta at depth ≥ 10)" passes (a) and (b) and
+   fails the test above. Run all three. And note the asymmetry that makes the test the
+   senior one: a confident wrong expansion is worse than the bare token, because an
+   identifier he cannot place makes him ask, and asking is what saved stage 2.
 3. **Weakest link** — the load-bearing assumption, and what would falsify it. State which
    parts you would defend and which you would abandon cheaply.
 4. **Options and their consequences** — not a recommendation wearing a finding's clothes.
@@ -424,8 +471,13 @@ touches several pre-registered criteria, what is owed is not an escalation but a
 and what was actually measured there. It is the factor table's shape applied to a result,
 it is mechanical, and it dissolves most "should we consult someone" questions before they
 are asked. The session above had the measurement that closed its own worry sitting in its
-own table, and reported a criterion as endangered at a depth where its own figure was
-0.001 % — and that criterion turned out not to cross the changed knob at all.
+own table: it reported a criterion as endangered at a depth where its own figure was
+0.001 %, and that criterion did not cross the changed knob at all.
+
+**The same check runs before recommending *against* a planned step: describe from source
+what it tests, then make the recommendation.** If describing it refutes the recommendation,
+the recommendation came from a summary — which is how the stage-2 skip nearly happened, and
+how it unravelled the moment the owner asked for the description.
 
 ### When to recommend a review
 
