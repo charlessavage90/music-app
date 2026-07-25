@@ -1615,3 +1615,104 @@ the largest-connected-component guarantee that makes "no path" attributable to u
 alone).
 
 **No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### `jesus2099` is still a node — Task 11 is complete for placeholders only (2026-07-24)
+
+**Record-only entry from a consulting session; no batch work.** One item in it was a live open
+loop and is now closed by measurement.
+
+**CONFIRMED, and it was worth the one query.** `jesus2099` — a MusicBrainz **editor account**,
+and the motivating case named by the 2026-07-21 architecture review — **is still a node in the
+adopted artifact**: index 54722, mbid `bcb4411c-346b-4450-b660-39a9faad74c0`, **degree 31**,
+`pop_raw` 0.3846 (mid-to-high), disambiguation `'shamo'`.
+
+**Why the shipped filter cannot catch it.** `is_special_purpose` (`pipeline.py:45`) matches a
+regex against the **disambiguation** field only, and is documented as "MusicBrainz placeholder
+entities". `'shamo'` carries no such marker, so no amount of tuning that predicate reaches an
+editor account — the field simply does not hold the information.
+
+**So the record needs correcting where it reads as closed.** Phase 2 Task 11 shipped an entity
+filter and the review's prescription was "entity filter first"; both are satisfied **for
+placeholders**. The artifact contains **zero** nodes with a `special purpose` disambiguation, so
+the filter demonstrably worked on its own class — P8b's finding that the placeholders are gone,
+confirmed here independently. The editor-account case was never covered and was not re-checked
+after Task 11. **Task 11 is complete for placeholders only.**
+
+**Not filed as a defect in the filter.** It is a coverage gap with no machine-readable
+definition available: nothing in the archive distinguishes an editor account from an artist.
+That is what makes the next item the right shape.
+
+### Three recorded lines on entity curation — where the blank-name drop belongs (2026-07-24)
+
+**Record-only. Not this batch; the first two are not due until the rebuild seam.**
+
+**1. The blank-name drop belongs INSIDE the existing entity filter, not beside it.**
+`filter_special_purpose` / `is_special_purpose` already own this seam in `build_from_archive`,
+with a config toggle and a two-directional test pattern. Three predicates, one stage:
+MusicBrainz placeholders (shipped), **empty names** (F8, pending the owner's drop-or-backfill
+decision), and a **curated MBID denylist** for the residue with no machine-readable definition —
+editor accounts, mis-ingested non-artists. **This is not new policy:** the Phase 2 design
+already names "an interior node whose disambiguation **or absent-name** marks it as a
+non-musical entity" as a bad-path signal, and `badpath.py` already emits `non-musical interior
+entity: unnamed node {node}`. So dropping the 33 **completes** the entity filter rather than
+adding a mechanism — and `jesus2099` is the first denylist entry, ready-made.
+
+**Denylist hygiene, if one lands:** data file not code; reason + date per entry; a missing entry
+**reports rather than fails** (an artifact must not become unbuildable because an MBID vanished
+upstream); and growth past a few dozen means some subset actually had a definition and wants a
+predicate instead.
+
+**2. There is no discovery mechanism, and that is the real gap.** Both known instances were
+found **by accident** — `jesus2099` from reading a tuned path, the 33 blanks from a harness
+review. Curation is therefore bounded by what the owner happens to trip over. The missing piece
+is a periodic report surfacing suspicious nodes for one human skim.
+
+**Measured caveat on that report, because the obvious heuristic is noisy.** A username-shaped
+scan (letters then 2+ trailing digits, no spaces) returns **152 nodes**, and the top of the list
+is mostly **real artists** — `Sad13` (Sadie Dupuis), `Soccer96`, `MNL48` ("Filipino girl
+group"), `Skech185` ("US emcee from Chicago"). So this must be a **report for human skim, never
+an automated filter**; a regex here would delete real artists, the same trap as the 111
+digit/punctuation-only names deliberately left alone earlier today.
+
+**3. Offensive artist names are the owner's product decision, with a gate-scoped success
+condition.** No technically correct answer exists. **Success condition: answered explicitly
+before Gate 2 → 3, even if the answer is "not yet."** At personal use a junk or offensive name
+is a curiosity; at public launch it is a different risk category — and the app's premise routes
+users through exactly the obscure stratum where upstream curation is weakest.
+
+### Costing the eventual rebuild — the spec's warning holds, its stated mechanism does not (2026-07-24)
+
+The consultant flagged the Phase 2 spec's warning that removing nodes "perturbs every mass
+slightly and therefore every score" — written for 7 nodes, against 33 — and asked whether it
+still applies given scoring changes since. **Checked in code: the conclusion holds and is
+strengthened, but the mechanism named is inoperative.**
+
+- **The mass channel is DEAD in the adopted configuration.** Exclusion does happen before mass
+  is computed (`pipeline.py:137`, and excluded nodes are filtered out of neighbour lists before
+  the sum), so the spec described the ordering correctly. But mass reaches a score only through
+  `damped_strength`'s `strength -= damping * (log mass_a + log mass_b)`, and the adopted
+  `similarity_damping` is **0.0** — damping was tested at 0.25/0.5/0.75 and rejected. A zero
+  coefficient means **mass cannot move any score.** The warning predates that rejection.
+- **The live channel is the p99 rescale, which was not named.** `similarity_rescale` is
+  `"p99_log_clip"`, and `rescale_scores` takes `scale = np.percentile(raw, 99)` over the
+  **global** flattened score array. Removing edges moves that percentile, which rescales **every
+  edge score in the graph**. The graph-wide-perturbation conclusion therefore survives — by a
+  different route, and one sized by how much the removed edges shift the 99th percentile rather
+  than by what mass they carried.
+- **A third channel, also unnamed: popularity.** `score_weighted_indegree` loses the removed
+  nodes' out-edge contributions, so their **neighbours'** `pop_raw` shifts — and `pop_raw` feeds
+  the cost function directly (`w_jump·|Δpop_raw|`, the floor) and the percentile array the
+  mirror builds at harness start.
+
+**Scale of the exposure, measured:** the 33 blanks touch **448 of 898,006 directed edges
+(0.0499 %)**; adding `jesus2099` makes it **510 (0.0568 %)**. Small, but graph-wide by
+construction rather than confined to the removed nodes.
+
+**Which strengthens gating the rebuild to adoption, exactly as the consultant argued.** A
+rebuild is not "remove 36 nodes and re-verify"; it produces a new score distribution and a new
+popularity array, so every figure measured against `4cb84ef9…` — the A0 gate's 252 cells, P's
+baseline medians, the fame cache's node identities — describes the old artifact. **Deferred
+measurement, due at the rebuild seam:** the actual p99 shift and the resulting score-delta
+distribution. Cheap once a rebuild is happening anyway, and meaningless before.
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.

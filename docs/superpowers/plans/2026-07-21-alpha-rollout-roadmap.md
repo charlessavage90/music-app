@@ -197,6 +197,27 @@ Figures: `../findings/2026-07-22-phase2-sweep-results.md`. Do not restate them h
 
 ## Gate 3 — Public
 
+### Gate 2 → 3 entry condition, added 2026-07-24: answer the content-curation question
+
+**Owner's decision, and it must be answered explicitly before this gate opens — even if the
+answer is "not yet".** Should the app filter artist names that are offensive, or junk?
+
+There is no technically correct answer, which is why it is recorded as a gate condition rather
+than a task. What makes it gate-scoped: **at personal use a junk or offensive name is a
+curiosity; at public launch it is a different risk category** — and this app's premise routes
+users through precisely the obscure stratum where upstream curation is weakest.
+
+Two measured facts to decide against, both from 2026-07-24 (record and figures:
+[`../2026-07-23-repair-and-retune-execution-log.md`](../2026-07-23-repair-and-retune-execution-log.md)):
+
+- **Non-artist entities are still present.** `jesus2099`, a MusicBrainz editor account, is a
+  node with degree 31 — the case the 2026-07-21 architecture review named, and one the shipped
+  placeholder filter structurally cannot reach.
+- **There is no discovery mechanism.** Both known instances were found by accident. A
+  username-shaped scan returns 152 nodes of which most are **real artists** (`Sad13`,
+  `Soccer96`, `MNL48`), so the remedy is a periodic report for human skim — never an automated
+  name filter, which would delete real artists.
+
 ### Phase 6: Scale & cost
 - Pathfinding performance: **result caching first** (queries are deterministic), then `scipy.sparse.csgraph` for the no-exclusion case. Pure-Python Dijkstra is GIL-bound, so concurrent heavy queries serialise
 - Concurrency testing (untested; the whole design bets on one shared in-memory graph)
