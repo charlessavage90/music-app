@@ -436,11 +436,98 @@ condition is copied forward as prose by whichever document restates it, and noth
 the restatement to the original. The mechanism is identified here; **no fix is proposed, and
 inventing one is not this session's call.**
 
-### Status of F1 after this
+### Status of F1 after this — the requirement is DECIDED, the implementation is DEFERRED
 
-Unchanged and still parked — **but its classification is now an open question for the owner,
-not a settled one.** The 2026-07-23 entry calls it *"a structural invariant, not a tuning
-gradient"*, which is the argument that it is not path-quality work and therefore not inside
-the pause. §4 of this log classified it as pathfinding and stopped. Both readings are
-defensible from the record and the difference decides whether it can be worked on now.
-Whether a journey must contain at least one stop is a question about what the app should do.
+**Owner's decision, 2026-07-25, verbatim: "every journey needs at least one stop."** He
+called it unambiguous, and deferred the implementation with the path-quality pause left in
+place.
+
+This answers **the first half of F1's original 2026-07-23 instruction** — *"confirm 'a
+journey needs ≥1 stop' as a requirement, then check whether Track 2 tuning makes direct paths
+rare before adding a guard"*. The second half is now moot in its original form: Track 2 and
+Track 2F both returned nulls, so no tuning is coming that could make direct paths rare, and
+the guard is the only remaining instrument. **A zero-intermediary path is therefore a defect
+against a stated requirement, not a candidate improvement** — a change of status, not of
+priority.
+
+**Success condition, written to survive restatement.** The previous condition lapsed silently
+(above), so this one is anchored to an observable rather than to an event someone must
+notice:
+
+> **F1 is discharged when a path request between two directly-adjacent artists returns at
+> least one intermediary, or returns an explicit "these two are neighbours" state that the
+> UI renders deliberately.** Verifiable at any time by requesting `Radiohead → Weezer`; it
+> currently returns two cards. **No document may restate this condition in other words** —
+> cite this section instead. Both prior drifts happened in the restating.
+
+**It is not blocked on the path-quality pause resuming.** The pause covers tuning the cost
+function and rebuilding the artifact; this is a structural invariant over the result, which
+is the distinction the 2026-07-23 entry drew when it called F1 *"a structural invariant, not
+a tuning gradient"*. It is blocked only on the owner scheduling it. Recorded explicitly
+because §4 of this log read it as inside the pause, and a future session will otherwise
+inherit that reading.
+
+## 17. C2's browser half — the URL is now signed at the moment of play
+
+**Branch `clip-freshness-on-play`.** Closes the defect §15 found in this branch's own work.
+Frontend only: no API change, no pathfinding, no graph, no config default.
+
+### What was wrong, restated so the fix is checkable against it
+
+A card resolved its clip once, on mount, and handed the resulting **signed URL** up to the
+player, which held it for the life of the card. Signatures last 15 minutes; cards live as
+long as the tab. So the player's copy rotted in place, and the 10-minute TTL guarding it
+only ever fired on a *remount* — which is why the existing test passed while the real span
+was unprotected.
+
+### The change
+
+**The player is given a resolver, not URLs.** `usePlayer(playables, resolveUrl)` now takes a
+list of *which artists have a clip* plus a function returning a URL signed now, and calls it
+at each start — press-play, and auto-advance on track end alike. `JourneyList` no longer
+stores URLs at all; it stores availability, which is what it actually needed. `ArtistCard`'s
+`onClipResolved` reports a boolean rather than a URL, so the stale value no longer exists to
+be held.
+
+**Plus a one-shot retry on audio error.** `Player` gained `onError`; a failure re-resolves
+once and replays, then gives up rather than looping. §15 called these two complementary and
+that is right for a specific reason now visible in the code: **`toggle()` must resume the
+loaded source rather than re-resolve**, or a new URL resets the element and re-seeks to zero
+— the exact regression the card-pause fix removed. So a clip that expires *while paused* is
+not covered by resolve-on-play, and the error retry is what covers it.
+
+**Option 3 from §15 (periodic refresh) stayed rejected**, on its own argument: it fires for
+cards nobody plays, against a service that rate-limits.
+
+### Two windows now, deliberately distinct
+
+`CLIP_TTL_MS` (10 min) governs **display** — title and cover art, which do not expire.
+`PLAYABLE_URL_MAX_AGE_MS` (5 min) governs **playback**. Splitting them is what lets the
+player be strict without multiplying lookups for artwork. The 5 minutes is a judgement, not a
+measurement, and is commented as such at its definition: it sits well inside the measured
+15-minute signature, and shortening it costs request volume against a rate-limited service.
+
+### Verification
+
+TDD throughout — every test was watched failing first, and the five that mattered failed
+because the resolver did not exist rather than because of a typo.
+
+| Check | Result |
+|---|---|
+| Frontend suite | **52 passed**, 11 files |
+| `npm run build` (tsc + vite) | **Pass** |
+| `npm run lint` | **Pass** — only the pre-existing `vite.config.ts` warning |
+| Snyk `snyk_code_scan` on `frontend/src` | **Pass**, 0 issues |
+| **Mutation check** | **Both killed.** Widening `PLAYABLE_URL_MAX_AGE_MS` to 24 h killed exactly the two expiry tests and nothing else; removing the one-shot retry guard killed exactly the anti-loop test. |
+
+**The test that matters is `JourneyList`'s "a card left mounted past the signature lifetime
+re-signs before playing"** — it advances the clock against a component that stays mounted,
+which §15 identified as the span no test covered. It is the one that fails if this fix is
+ever undone.
+
+### What this does *not* establish
+
+**It has not been exercised against the live service.** The suite proves the browser asks
+again; only use lands the whole chain. That is the queue's question 2, now unblocked — and
+the same "fixture may not match reality" caveat that §15 discharged for the server half
+applies here until it returns.
