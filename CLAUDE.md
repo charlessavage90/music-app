@@ -273,6 +273,30 @@ have got. Every *outcome* criterion in that pre-registration carries a threshold
 carried none, and nobody noticed until one fired and demanded a doubling on the strength of
 a single path.
 
+> **And every read-of-result names the run state it presupposes.** A read reachable before
+> the design has finished running says so, and names what is still owed. Any instruction
+> that keeps a specified run alive gets **its own sentence there** — never a subordinate
+> clause of a rule about something else, because that is the half that degrades first.
+
+Same document again: R0's read presupposes all fifteen arms ("no arm, including corner X"),
+but R0 was detectable after eleven. The session got the null, opened §2.4 — the disciplined
+move, and it said so — found nothing about the four unrun arms, and recommended skipping
+them. What kept them alive was the tail of §1.4's rule for *selecting* W: "so the
+attachments still get tested". It recalled that rule's main clause accurately from memory;
+the subordinate clause did not survive. The owner asking what stage 2 was is what caught it,
+and those four arms produced the only signal in fifteen.
+
+> **No two load-bearing objects share an identifier, and new identifier series are
+> namespaced.** Prefix them (`T3-C1`) or pick disjoint letters, and check against every
+> document you cite. **Forward-only — never rename anything committed**; a frozen document's
+> value is that it is frozen.
+
+Track 2's pre-registration accumulated eleven collisions: `A1`–`A7` are simultaneously
+factorial arms and amendment IDs, `C1`–`C3` simultaneously success criteria and Phase 1
+defect IDs, and `R1` both the W-selection rule and a result branch. That last one cost the
+session above the rule that governed: its single retrieval surfaced the `R1` requiring
+corner X to have moved — X hadn't — so the applicable `R1` was never in view.
+
 **2. Documents asserting things about the world that aren't true.** Plans have referenced
 functions that did not exist yet, and cross-references have gone stale after renumbering.
 
@@ -384,10 +408,25 @@ contradicting it.
    "the floor" and "the arms" instead. Those are exactly as opaque, and worse, they look
    like plain English. `d0` is *the path you see before pressing any button*; `d20` is
    *after twenty bypass presses*; "the floor" is *the rule that discourages routing through
-   artists more obscure than the two you picked*. Translate to what the user sees, then
-   check by the only test that matters: **could the owner disagree with this?** Not: did I
-   avoid jargon. He cannot disagree with a sentence whose subject he cannot identify, and a
-   decision he cannot argue with is not a decision he was given.
+   artists more obscure than the two you picked*. He cannot disagree with a sentence whose
+   subject he cannot identify, and a decision he cannot argue with is not a decision he was
+   given.
+
+   **So write the plain sentence once, at definition time, and quote it thereafter.** Every
+   criterion, arm and branch carries a plain-language sentence fixed in the pre-registration
+   beside its threshold, **before any result exists** — so it cannot be reshaped to fit one,
+   and a report whose wording drifts from it is as visible as a moved number. Owner-facing
+   text then gives identifier **and** sentence: `C1` alone is unusable; "C1 (does the typical
+   artist in the middle get less famous after ten or more presses)" is traceable *and*
+   readable.
+
+   **Two mechanical checks, replacing "could the owner disagree with this?"** — which was a
+   judgement asked of the session least able to make it, and which duly passed a message
+   opening "R1's fallback picked W = A7 because nothing moved C1". (a) Scan the message for
+   a bare letter-number token; every one gets its sentence. (b) Substitute the sentence for
+   the identifier and re-read: if the claim got broader or narrower, you wrote a **summary**,
+   not a translation. A confident wrong expansion is worse than the bare token — an
+   identifier he cannot place makes him ask, and asking is what saved stage 2.
 3. **Weakest link** — the load-bearing assumption, and what would falsify it. State which
    parts you would defend and which you would abandon cheaply.
 4. **Options and their consequences** — not a recommendation wearing a finding's clothes.
@@ -423,9 +462,13 @@ touches several pre-registered criteria, what is owed is not an escalation but a
 **exposure map**: one row per criterion, whether it crosses the thing that changed, where,
 and what was actually measured there. It is the factor table's shape applied to a result,
 it is mechanical, and it dissolves most "should we consult someone" questions before they
-are asked. The session above had the measurement that closed its own worry sitting in its
-own table, and reported a criterion as endangered at a depth where its own figure was
-0.001 % — and that criterion turned out not to cross the changed knob at all.
+are asked. The session above reported a criterion as endangered at a depth where its own
+table said 0.001 %, and that criterion did not cross the changed knob at all.
+
+**The same check runs before recommending *against* a planned step: describe from source
+what it tests, then make the recommendation.** If describing it refutes the recommendation,
+the recommendation came from a summary — which is how the stage-2 skip nearly happened, and
+how it unravelled the moment the owner asked for the description.
 
 ### When to recommend a review
 
