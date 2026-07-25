@@ -65,8 +65,8 @@ test('auto-advances to the next playable on track end', async () => {
 
 test('signs the URL at the moment of play, not when the card was drawn', async () => {
   // C2, browser side. The old shape took a URL resolved at mount and held it for
-  // the life of the card; a signature lasts 15 minutes, so a tab left open played
-  // silence. The player must ask for the URL when the button is pressed.
+  // the life of the card, far longer than a signature lasts (gate-1 execution log
+  // §15 owns that figure). The player must ask for the URL when the button is pressed.
   const user = userEvent.setup();
   let issued = 0;
   const resolve = async () => `signed-${++issued}`;

@@ -624,3 +624,118 @@ The double registration is pre-existing by inspection: `onEnded` has always used
 double-mounted. The old code would have queued two advances the same way. **This was not
 verified against the old build** — nobody had let a clip run to its end before, so the
 symptom had never been observed. Stated as inference, not measurement.
+
+## 19. Closeout on the playback work
+
+### Deferred findings (A3)
+
+**Discharged by this work:**
+
+| Finding | How |
+|---|---|
+| **C1/C2 confirmed in real use** (§9) | The owner's two runs plus a targeted live retest. **Both closed.** |
+| **Browser clip cache TTL is unmeasured** (§9) | Superseded: the TTL is now split in two, and the playback half is set against a *measured* signature lifetime. The display half (10 min, artwork) remains a judgement and is no longer safety-critical. |
+
+**New, each with a condition:**
+
+| Finding | Success condition |
+|---|---|
+| **`PLAYABLE_URL_MAX_AGE_MS = 5 min` is a judgement, not a measurement** | Accepted. Revisit only if clips die in use despite the fix, or if request volume against the rate-limited catalogue becomes a problem. |
+| **The skip is believed pre-existing but unverified against the old build** | Accepted, won't verify — the fix is identical either way and the old build is gone. Recorded so nobody later reads the inference as a measurement. |
+| **`e2e/playback.spec.ts` needs real Chrome and is not in any CI** | Run it by hand when touching the player. Condition: fold into whatever CI arrives before Gate 3, or explicitly decline then. |
+| **One retry per track, and `toggle()` does not refresh the budget** | Accepted. A clip that expires while paused *after* its retry was already spent stays silent until the card is re-played. Revisit if seen in use. |
+
+**Carried, unchanged, not yet due:** drop-vs-backfill for the 33 nameless artists (owner, at
+the rebuild seam); Gate 2 → 3 content curation (owner); `jesus2099` / entity-filter coverage;
+the discovery report for non-artist entities. **F1** now has a condition anchored to an
+observable — see §16, and note it is *not* blocked on the path-quality pause.
+
+### A4 — default-flip
+
+**No config knob was added, so nothing sits at an old default.** Both windows are module
+constants in `useClip.ts`, unconditional in effect; the player change has no flag and no
+alternative path. The work is shipped or it is not, and it is.
+
+### B2 — reachability
+
+**No orphans.** Every symbol this work introduced has an inbound import:
+`resolveFreshUrl` → `JourneyList`; `JourneyControls` → `PathPage`; `Player.onError` →
+`usePlayer`. The two new files are tests, reached by their runners.
+
+### B3 — vacuous-test check
+
+**Four deliberate mutations, all killed, each by exactly its target test:**
+
+| Mutation | Killed by |
+|---|---|
+| `PLAYABLE_URL_MAX_AGE_MS` widened to 24 h | The two expiry tests, and nothing else |
+| One-shot retry guard removed | The anti-loop test |
+| `onEnded` restored to accumulating | **`e2e/playback.spec.ts`** — *expected 1, received 2*, the defect exactly |
+| `journey.current?.stop()` removed from `go()` | Both new `PathPage` tests |
+
+Worth recording that the third is the only mutation in this project's history that **no unit
+test could have caught**, for the reason in §18.
+
+### B4 — prose versus code
+
+Two of this session's own comments overclaimed and were corrected:
+
+- `usePlayer.ts`'s `toggle()` said the error handler re-signs a URL that expired while
+  paused. True only while that track still has its one retry. Now says so.
+- A test comment restated the signature lifetime without citing the section that owns it.
+  Now cites §15.
+
+Both are the documented failure class — correct code, wrong sentence.
+
+### B5 — stale descriptions
+
+Swept `docs/`, `.claude/`, `api/README.md` and `frontend/` for the expiry figures. Every
+inline use in shipped code cites §15 as required. **One stale inference found outside this
+work:** the roadmap's C2 section reasons from "every cache hit past the first hour serves a
+dead URL", which the 15-minute measurement narrows. Its raw observation (09:41 → 10:12) is
+still correct; only the inference drawn from it is loose. Left for the documentation audit's
+report rather than edited blind, to avoid two writers on one file.
+
+### D6 — standing context layer
+
+`CLAUDE.md`, `.claude/skills/` and `.claude/agents/`: **net zero, untouched.**
+
+`memory/`: **412 → 435 lines, +23.** Spent on the clip memory file: C1/C2 marked closed, the
+15-minute figure corrected, and a block of player invariants added (handlers replace,
+detach-before-clearing, subscribing revives) plus the note that playback defects need the
+e2e rather than a unit test. **The case:** each invariant is one this work broke and paid
+for, and two of them fail *silently* — a future session re-introducing them gets a green
+suite. **This was not agreed in advance, which the rule requires.** Flagged to the owner as
+his call, with the offer to trim it back.
+
+**`CLAUDE.md`: net zero** — one line replaced with one line, correcting a status the audit
+found stale (below). A correction is not growth, and it did not need his agreement.
+
+## 20. Documentation audit (closeout B1)
+
+Dispatched at closeout. **Five High and four Medium.** Every High was a document still
+describing the clip work as unfinished, or restating an expiry figure that the measurement
+narrowed — and **the two highest-blast-radius files were both among them**, which is the
+same result as the last two audits on this project.
+
+| Finding | Outcome |
+|---|---|
+| `CLAUDE.md`'s orient table still said clips were "fixed, not closed" | **Fixed** — now records both closed and confirmed, and names F1 as the one remaining Gate 1 item. Net zero lines |
+| `docs/README.md` said "fixed but not confirmed in use" | **Fixed** — the authoritative map now matches |
+| `api/README.md` restated the expiry as "within the hour" | **Fixed** — now cites §15 and states no figure |
+| Roadmap: three places restating or reasoning from an hourly expiry (§Meta-lesson, §C2, §Gate-3 risk) | **Fixed** — all three now cite §15; none restates |
+| Roadmap's C2 diagnosis read as unsolved | **Fixed** — supersession banner recording that it is closed, that its *"past the first hour"* inference was too generous, and that the fix needed a browser half the section never contemplated |
+| Roadmap's Phase 1 still opened "C3 leads this phase" and prescribed deleting `w_floor` | **Fixed** — banner marking C3 paused, clips and UX done, and F1 as the open item. This was flagged in §6 four days ago and had not been actioned; the audit is what forced it |
+| Roadmap never mentioned F1 | **Fixed** — added to Phase 1 with a pointer to §16, not a restatement |
+| `2026-07-23-repair-and-retune-execution-log.md`'s F1 row carries the lapsed due condition | **Fixed** — inline supersession mark. The document is COMPLETE and frozen, so the original text is left intact beneath the mark, per the forward-only rule |
+| `TEST-QUEUE.md` line 100 restates the figure without citing §15 | **No change, deliberately.** That line sits inside the entry already marked ⛔ SUPERSEDED and retained as the record of what was believed at the time. Editing it would revise a frozen account; the live entry above it is what a reader acts on. Recorded so a future audit does not re-raise it as unactioned |
+
+**One correction to the audit itself:** it reported `CLAUDE.md` as 1,436 lines. That figure is
+the **whole standing context layer** — `CLAUDE.md` plus `memory/` plus both `SKILL.md` bodies —
+as recorded in `CLAUDE.md`'s own budget passage. The file itself is 544 lines. Noted because a
+wrong number about the budgeted layer is exactly the kind of thing that propagates.
+
+**Previous audit findings** (`findings/2026-07-25-doc-audit-gate1-clips-ux.md`) were checked:
+all five were actioned at the time, and the one deliberately rejected is still correctly
+rejected. Its `memory/` finding has since been overtaken — that file now records both defects
+closed.

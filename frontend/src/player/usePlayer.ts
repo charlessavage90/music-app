@@ -101,8 +101,9 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
       return;
     }
     // Resume the source already loaded rather than re-resolving: a new URL would
-    // reset the element and re-seek to zero. If it has expired while paused the
-    // error handler re-signs it, which is why the two halves are complementary.
+    // reset the element and re-seek to zero. If it expired while paused, the error
+    // handler re-signs it *if this track still has its one retry* — which is why
+    // resolve-on-play and retry-on-error are complementary rather than alternatives.
     const url = loadedUrlRef.current;
     if (currentRef.current && url) {
       player.play(url);
