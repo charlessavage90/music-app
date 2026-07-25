@@ -65,7 +65,30 @@ the median artist holds ~26 connections and 0.5 % hold two or fewer.
 tie-break decide which neighbours the *most* famous artists kept, and it worked:
 Radiohead, The Beatles and Coldplay all hold the full 50. MKS-1 is the band
 immediately below — artists popular enough to be searched for, not popular enough to
-be reciprocated. Nothing in the record covers them.
+be reciprocated. The Phase 1 log's §2.10 reaches the same separation independently
+("§2.8's tie-break is not this").
+
+**MKS-5a — the mechanism is NOT new to the record, and an earlier draft of this
+document wrongly said it was.** `2026-07-22-phase1-execution-log-and-graph-defect.md`
+**§2.10** already isolates the reciprocity rule as the dominant cause of
+famous↔obscure edge depletion, by a 2×2 factorial with one knob per axis, and owns
+those figures. **Cite §2.10 for the mechanism and its magnitude; do not cite this
+document for either.**
+
+What is new here is narrower, and it is the per-artist view: §2.10 measures a
+distributional property (assortativity, exit rates by popularity band), which does
+not say *which* artists are affected or how badly any individual one is. `MKS-1`–
+`MKS-3` name them and show the extreme tail — recognisable artists reduced to one
+edge, and that edge often musically arbitrary. `MKS-6` is new outright: the
+consequence for F1.
+
+**MKS-5b — a loosening is already known to be coupled to something the owner rejected.**
+§2.10 also records that in this codebase the degree bound is an *effect* of the
+reciprocity requirement, not a separate knob: dropping the both-ways test restores
+unbounded degree (its `UNION_TOPK` arm). Unbounded hubs are what `capfix` won its
+blind listen for removing. **Any future rule change must be read against §2.10's
+coupling before it is designed**, including a narrowly targeted one — a targeted rule
+may escape the coupling, but that has to be shown, not assumed.
 
 ## 2. Consequence already observed
 
@@ -94,7 +117,13 @@ the alternative (`2026-07-22-phase2-sweep-results.md`); discarding weak one-way 
 is its purpose, and this finding measures exactly that purpose operating. **No
 adoption, no rebuild, and no rule change is proposed here.** Any such change is
 path-quality work, is behind the owner's pause, and would need its own
-pre-registration.
+pre-registration — and per `MKS-5b` it must first answer §2.10's coupling.
+
+**Does not, second:** it does **not** reopen §2.12's conclusion that the routing
+shortfall is a cost-function problem rather than a graph problem. §2.12 is about
+whether obscure artists are *reachable*; this is about a specific set of artists being
+nearly unreachable. Both can hold at once, and nothing here was measured against
+§2.12's question.
 
 **Unmeasured, and deliberately so:** how much this degrades real paths. Stranded
 artists are also nearly unreachable *as* intermediaries, so the plausible harm is
