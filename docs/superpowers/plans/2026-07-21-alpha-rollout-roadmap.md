@@ -170,7 +170,7 @@ Figures: `../findings/2026-07-22-phase2-sweep-results.md`. Do not restate them h
 ## Gate 2 — Friends & family
 
 ### Phase 3: Robustness
-- Clip failures degrade to 204 rather than HTTP 500 (currently `raise_for_status` escapes past the iTunes fallback)
+- ~~Clip failures degrade to 204 rather than HTTP 500 (currently `raise_for_status` escapes past the iTunes fallback)~~ **DONE 2026-07-25**, pulled forward out of this phase because the C2 change made it urgent: re-signing added a network call to the cache-hit path, so a rate-limit during the queued use-the-app check would have produced dead cards indistinguishable from that check failing. Record: [`../2026-07-25-gate1-clips-and-ux-execution-log.md`](../2026-07-25-gate1-clips-and-ux-execution-log.md) §12.
 - Artifact **length validation** at load (silent corruption on a truncated S3 fetch)
 - Non-blocking DynamoDB (sync boto3 currently stalls the async event loop)
 - Input guards: `from == target`, invalid `reason` coercion

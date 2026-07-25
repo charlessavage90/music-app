@@ -170,7 +170,47 @@ moment its condition came due. Three things worth recording about it:
   documents rewrote the condition without marking that they had.** A deferral's condition
   is as load-bearing as the deferral, and this one mutated in the copying.
 - **It carries no figures, deliberately.** It defers to `BuilderConfig`, `CLAUDE.md` and
-  `findings/` rather than restating. See §12 for a conflict found while writing it.
+  `findings/` rather than restating. See §13 for a conflict found while writing it.
+
+## 10. For the next session
+
+- **Path-quality work is still paused.** Nothing here resumes it, and §6's third bullet is
+  a trap, not an instruction.
+- **PR #19 is open against `main` and not merged.** Merging is fine on the code; the
+  use-the-app check is what tells you whether C1 and C2 actually worked.
+- **Nothing is in flight.** One subagent (the closeout doc audit) was dispatched and
+  completed; its findings are actioned in §11.
+- **What I know that is not in the durable record: nothing.** Every judgement is either in
+  §3, §4, or a code comment at the point of use.
+
+## 11. Documentation audit (closeout B1)
+
+Full report: [`findings/2026-07-25-doc-audit-gate1-clips-ux.md`](findings/2026-07-25-doc-audit-gate1-clips-ux.md).
+Five findings. **Four actioned, one rejected**, plus two the audit missed that were fixed
+anyway.
+
+| Finding | Outcome |
+|---|---|
+| `docs/README.md` still said clips and UX "remain queued" | **Fixed** — now records them built, and fixed-not-closed |
+| `docs/README.md` had no role marker in its first ten lines | **Fixed** — marked AUTHORITATIVE |
+| `memory/clip-resolution-bugs.md` still read "do not re-investigate, just fix" | **Fixed** — the highest-risk item here, since memory auto-loads into every session and would have sent a cold session to redo shipped work |
+| `2026-07-22-HANDOFF-phase1.md` §4 describes clips/UX as outstanding | **Fixed** — inline supersession mark. The top banner already scoped the file to §2–§3, but the doc map's own rule requires the inline mark, since a reader landing mid-document never sees a banner |
+| `C1`/`C2` name four distinct objects | **No rename** — forward-only; committed documents stay frozen. Recorded as a hazard in §1 here and in the memory file. The audit's suggestion to namespace *future* clip items is sound and costs nothing to adopt when there is a next one |
+
+**Rejected: expanding bare identifiers inside the `TEST-QUEUE.md` entry.** The audit
+proposed inserting "C1 (does the clip play the artist on the card?)" into the owner-facing
+steps. `closeout` C1 says the opposite in terms — **"Never name an identifier, file or
+function in the steps"** — and the entry deliberately contains none in its steps. The three
+line numbers cited contain no identifier at all. Following this would have broken the rule
+it cited. Recorded because a future reader will otherwise see an unactioned finding and
+assume it lapsed.
+
+**Missed by the audit, found and fixed here:** `CLAUDE.md`'s orient table still named the
+Gate 1 leftovers as the next action, and `MEMORY.md`'s index line still described the clip
+bugs as merely diagnosed. Both are auto-loaded before any session reads a project document,
+which makes them the two highest-consequence files in the sweep — and both were missed.
+**The lesson is the one already in `closeout` B5:** the audit is a second reader, not the
+only one, and the session still owes its own sweep of the auto-loaded layer.
 
 ## 12. Post-closeout addition: a failure-mode defect that endangered the check itself
 
@@ -227,42 +267,44 @@ needs someone to time both operations once and say which is which — cheap, but
 measurement, and inventing the answer would put a third number into a record that already
 has two.
 
-## 10. For the next session
+## 14. Second closeout, run on the post-closeout increment
 
-- **Path-quality work is still paused.** Nothing here resumes it, and §6's third bullet is
-  a trap, not an instruction.
-- **PR #19 is open against `main` and not merged.** Merging is fine on the code; the
-  use-the-app check is what tells you whether C1 and C2 actually worked.
-- **Nothing is in flight.** One subagent (the closeout doc audit) was dispatched and
-  completed; its findings are actioned in §11.
-- **What I know that is not in the durable record: nothing.** Every judgement is either in
-  §3, §4, or a code comment at the point of use.
+The increment (§12, `builder/README.md`, the WGLL passage) got its own pass rather than
+riding on the first closeout's clean result. Four findings, all in this session's own work:
 
-## 11. Documentation audit (closeout B1)
+- **The log's sections were out of order.** §12 and §13 were inserted *before* §10 and §11,
+  so the document ran 1–9, 12, 13, 10, 11 — and the `builder/README.md` discharge note
+  pointed at "§12" for a conflict that had become §13. Fixed by **moving** the sections
+  rather than renumbering them, because `TEST-QUEUE.md` cites "§12" and the owner-facing
+  pointer should not move to accommodate an internal tidy-up.
+- **`api/README.md` described the track endpoint's `204` as meaning "no clip available"**,
+  which is now incomplete: `204` also covers a failing or rate-limited catalogue. A defect
+  **of omission** — the sentence was true and had stopped being complete, which is the class
+  a grep for wrong strings cannot find.
+- **The roadmap still listed the 500→204 fix as outstanding Gate 2 work.** Struck through
+  with the reason it was pulled forward, so a Gate 2 session does not plan it again.
+- **The new guard's docstring restated a figure** (clip lookups per path view) that the
+  roadmap's Gate-3 risk section owns. Converted to a citation at the point of use, per the
+  rule that an inline hazard figure names the section that owns it so the next sweep
+  re-checks it rather than skipping it.
 
-Full report: [`findings/2026-07-25-doc-audit-gate1-clips-ux.md`](findings/2026-07-25-doc-audit-gate1-clips-ux.md).
-Five findings. **Four actioned, one rejected**, plus two the audit missed that were fixed
-anyway.
+**A4:** no config knob was added by the increment; the guard is unconditional, so nothing
+sits at an old default. **B2:** the guard has four call sites, no orphan. **D6:** standing
+context layer unchanged by the increment — `CLAUDE.md` net zero, `.claude/` untouched,
+`memory/` still 412 lines.
 
-| Finding | Outcome |
-|---|---|
-| `docs/README.md` still said clips and UX "remain queued" | **Fixed** — now records them built, and fixed-not-closed |
-| `docs/README.md` had no role marker in its first ten lines | **Fixed** — marked AUTHORITATIVE |
-| `memory/clip-resolution-bugs.md` still read "do not re-investigate, just fix" | **Fixed** — the highest-risk item here, since memory auto-loads into every session and would have sent a cold session to redo shipped work |
-| `2026-07-22-HANDOFF-phase1.md` §4 describes clips/UX as outstanding | **Fixed** — inline supersession mark. The top banner already scoped the file to §2–§3, but the doc map's own rule requires the inline mark, since a reader landing mid-document never sees a banner |
-| `C1`/`C2` name four distinct objects | **No rename** — forward-only; committed documents stay frozen. Recorded as a hazard in §1 here and in the memory file. The audit's suggestion to namespace *future* clip items is sound and costs nothing to adopt when there is a next one |
+**Session-state note, recorded because nothing else triggers on it.** Three slips in this
+session, all mechanical rather than analytical, and the third is the one that matters:
 
-**Rejected: expanding bare identifiers inside the `TEST-QUEUE.md` entry.** The audit
-proposed inserting "C1 (does the clip play the artist on the card?)" into the owner-facing
-steps. `closeout` C1 says the opposite in terms — **"Never name an identifier, file or
-function in the steps"** — and the entry deliberately contains none in its steps. The three
-line numbers cited contain no identifier at all. Following this would have broken the rule
-it cited. Recorded because a future reader will otherwise see an unactioned finding and
-assume it lapsed.
+1. §12's `git checkout` destroyed an uncommitted fix (caught by the suite, re-applied).
+2. §12 and §13 were inserted out of numeric order in this file.
+3. **§14 was then inserted out of order too — the same defect, ten minutes after fixing it
+   and while writing the bullet describing it.**
 
-**Missed by the audit, found and fixed here:** `CLAUDE.md`'s orient table still named the
-Gate 1 leftovers as the next action, and `MEMORY.md`'s index line still described the clip
-bugs as merely diagnosed. Both are auto-loaded before any session reads a project document,
-which makes them the two highest-consequence files in the sweep — and both were missed.
-**The lesson is the one already in `closeout` B5:** the audit is a second reader, not the
-only one, and the session still owes its own sweep of the auto-loaded layer.
+Individually trivial and all caught. Together they are the completeness-failure signature
+`CLAUDE.md` names as the degradation tell, and (3) is the clearest form of it: a rule this
+session had just written down did not survive its own next edit. **No analytical error is
+claimed or implied** — the work in §12 came from reading source, and the record is complete.
+But this is the point at which a session should stop, and the owner had already decided the
+next phase starts fresh. That decision is correct and this note exists so it is not
+re-litigated as over-caution.

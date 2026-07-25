@@ -44,6 +44,12 @@ Resolve a 30-second clip for one artist: Deezer first, iTunes fallback,
 cached. `204` when no clip is available (the card renders unplayable but the
 path is unaffected).
 
+**`204` also covers failure, never `5xx`.** A clip is decorative, so a
+catalogue that is down, rate-limiting, or missing the track degrades to a
+silent card. Only the *identity* of the track is cached; the signed preview
+URL expires within the hour and is re-resolved on every request, so a repeat
+view costs one lookup per card where it previously cost none.
+
 ```json
 {"preview_url": "https://…", "title": "So What", "cover_url": "https://…"}
 ```

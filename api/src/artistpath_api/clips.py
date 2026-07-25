@@ -151,9 +151,11 @@ class ClipResolver:
         a 404 for a withdrawn track is the common case, and it is what makes
         `resolve`'s re-search fire.
 
-        Rate limiting is the live risk rather than a theoretical one: a path
-        view fires 8-10 lookups, and re-signing means a repeat view costs a
-        request per card where it used to cost none.
+        Rate limiting is the live risk rather than a theoretical one: a single
+        path view fires a clip lookup per card (count and consequence: the
+        roadmap's "the clip architecture has a Gate-3 ceiling"), and re-signing
+        means a *repeat* view now costs a request per card where it used to
+        cost none.
 
         **Only the call is guarded**, deliberately. Wrapping the parsing too
         would swallow our own bugs — a renamed field would look exactly like
