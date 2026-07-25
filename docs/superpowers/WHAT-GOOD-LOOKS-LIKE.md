@@ -121,6 +121,30 @@ against the article.*
   — obscure artists he does not know are hard to evaluate, and some he does know are
   missing from the graph entirely. Treat "no difference" in unfamiliar territory as
   *uninformative*, not as evidence of equivalence.
+- **Where that limit bites there is a cheap second opinion: Spotify monthly listeners, read
+  by hand.** The owner has premium access. For a handful of artists at a time — usually "is
+  this `known` substitute really *less famous* than the artist it replaced" (value 5) — it
+  separates **obscure** from **famous-but-not-to-him**, a distinction neither he nor in-graph
+  popularity can make (Phase 1 log §2.11: at the top, a lo-fi producer and a Beatle score
+  alike). It **complements rather than duplicates** the adopted fame proxy — English-Wikipedia
+  pageviews, with an artist who has no English article scored at the fame floor
+  (`specs/2026-07-23-track2-preregistration.md` §5 and A11) — which is blind to the
+  modern-obscure tail, exactly where streaming activity is strongest. The two fail in opposite
+  directions, which is what makes the second look informative rather than merely noisier.
+  - **This is not the eliminated external-popularity source** of
+    `findings/2026-07-19-listenbrainz-probe.md` §6d–6f. That elimination is about attaching an
+    outside catalogue's figures to graph nodes wholesale and silently; at two artists by hand
+    you *see* a miss instead of absorbing it. Monthly listeners is also **not in the Spotify
+    Web API** — it is a figure shown in the client only — so hand-reading is the only route,
+    and the practice cannot scale into a proxy by accident.
+  - **Three bounds.** **Never during a blind listen** — it is an information channel the
+    protocol excludes, and the record already carries one path comparison voided for less
+    (`2026-07-25-HANDOFF-track2f-and-headroom.md` §7). **Never inside a scored criterion or a
+    pre-registered read** without its own falsification test, which is a proxy change through
+    the back door. And **write down any check that changed your mind** — an informal look that
+    later moves a decision and left no trace is unauditable.
+  - *Instrument, not preference. It settles a fact; it never says what good looks like.
+    Capability noted 2026-07-25.*
 - **Ask a specific claim, do not ask an open question.** The articulation above came from
   the owner correcting concrete wrong claims, not from being asked what he wanted.
   Proposing a specific answer and letting him push on it works; "what makes a path good?"
