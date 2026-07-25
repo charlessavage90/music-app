@@ -11,6 +11,36 @@ the point.**
 
 ---
 
+## N/A — 2026-07-25 — two more experiments ran; the app is untouched
+
+**Nothing to exercise.** Two things ran today and **neither changed the app**. A path you
+generate now is identical to one from yesterday, and to one from the day before.
+
+What ran, in plain terms. First, the "charge extra for the motorway" idea from last time was
+re-run properly — it had accidentally been tested at half strength. This time it ran at full
+strength and well past it, to the point where those hops are priced so high the router avoids
+them unless it has no choice. It made journeys somewhat more obscure and somewhat longer, but
+nowhere near enough to count, so **nothing was adopted**. Second, a measurement was taken of
+the graph itself, reading the raw crawl data. It changed nothing — it only measured.
+
+**The one thing worth knowing, because it explains your complaint.** The app currently takes
+about 85% of its steps along connections it treats as "maximally similar". At your best-known
+artists — The Beatles, Radiohead, Pink Floyd and eighteen others we test with — **every single
+connection is in that category**, and they are all recorded with the identical number. So when
+the app is standing on one of those artists, it genuinely cannot tell which neighbour is the
+closest match, and falls back on picking someone of similar fame. That is diagnosed, not fixed,
+and fixing it would mean rebuilding the graph — which is a decision waiting on you.
+
+**Nothing is queued for you to test**, because there is nothing new to press. The next entry
+here will come when something is actually adopted into the running app.
+
+**One question to keep in mind for whenever a change does ship.** The most promising setting
+made journeys longer — around 7 stops instead of 5, occasionally 14. Nobody knows where a
+journey stops feeling like a journey, and no measurement will find it. That is a
+use-the-app question and it is yours to answer when the time comes.
+
+Clips remain known, unrelated, and untouched.
+
 ## N/A — 2026-07-24 — Track 2 sweep RAN and returned a null: nothing app-facing changed
 
 **Nothing to exercise, and this time that is the headline rather than a technicality.** The

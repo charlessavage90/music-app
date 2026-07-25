@@ -45,8 +45,24 @@ UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1 uv run python -u \
     --arms-module ../builder/analysis/2026-07-25-track2f-toll-ladder/toll_ladder.py \
     --inherit-drops ../builder/analysis/2026-07-24-track2-arm-scorer/paths.json \
     --out ../builder/analysis/2026-07-25-track2f-toll-ladder/paths.json
-# then fame.py and score.py with --arms-module, then diagnostics.py
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1 uv run python -u \
+  ../builder/analysis/2026-07-24-track2-arm-scorer/fame.py \
+    --paths ../builder/analysis/2026-07-25-track2f-toll-ladder/paths.json \
+    --out   ../builder/analysis/2026-07-25-track2f-toll-ladder/fame.json
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1 uv run python -u \
+  ../builder/analysis/2026-07-24-track2-arm-scorer/score.py \
+    --paths ../builder/analysis/2026-07-25-track2f-toll-ladder/paths.json \
+    --fame  ../builder/analysis/2026-07-25-track2f-toll-ladder/fame.json \
+    --arms-module ../builder/analysis/2026-07-25-track2f-toll-ladder/toll_ladder.py \
+    --out   ../builder/analysis/2026-07-25-track2f-toll-ladder/scores.json
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
+  ../builder/analysis/2026-07-25-track2f-toll-ladder/diagnostics.py
 ```
+
+**Nothing here is imported by shipped code, by design** — it is offline analysis.
+`toll_ladder.py` is loaded **by path** through `--arms-module`, so a grep for the module
+name finds no inbound import; the commands above are its only entry point, which is why
+they are written out in full rather than abbreviated.
 
 ## The harness change, and the proof it changed nothing
 

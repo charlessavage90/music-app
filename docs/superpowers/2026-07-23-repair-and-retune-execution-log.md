@@ -2148,7 +2148,9 @@ all 212 cells; **`P`, `A0`, `A7`, `T1a_rpt` and `T1b_rpt` reproduced the committ
 The reproduction arms deliberately keep the original `toll_s` spec because the two forms are
 not bit-identical at the same nominal magnitude.
 
-**Result: `TFR0`, null on the primary criterion.** `M*` = **−0.198** (`TF2`, 30×), against the
+**Result: `TFR0`, null on the primary criterion.** `M*` — the best any toll price managed, i.e.
+how much less famous the middle of a deeply-bypassed journey got at whichever price worked
+best — is **−0.198** (`TF2`, 30×), against the
 pre-registered −0.25 continuation trigger and `C1`'s −1.0 bar. **Nothing adopted, no shipped
 code changed, no blind listen run, no threshold touched.** Recorded plainly: this is a
 *near-boundary* null — 79 % of the way to the "partial" trigger — and saying so is honest
@@ -2268,3 +2270,86 @@ probe still needs its own pre-registration, the offline gates, and a blind liste
 nothing about F2's depth clause; a rescale is static, like every Track 2F arm. And it does not
 size the rescale's blast radius: a new divisor moves **every** score in the graph, not only the
 1.00 % measured here, which is exactly what the queued p99-shift measurement is for.
+
+### Closeout at the Track 2F / headroom seam (2026-07-25)
+
+Full-ritual seam closeout — the work ran an experiment and touched the cost-function
+evaluation apparatus. Distillation of what is not already in the two entries above.
+
+**A4, the default-flip check: inapplicable, and stated rather than skipped.** Track 2F added
+no shipped config knob. It added `toll_hops` to `mirror.py`, which is the offline sweep
+harness, not `ApiConfig` — default `None`, and production is provably untouched
+(`verify_mirror.py` byte-identical on 212 cells). Nothing was adopted, so there is no default
+to flip and no loser to delete.
+
+**B2, reachability: three new modules, none imported by shipped code, all reachable by
+documented command.** `toll_ladder.py` is loaded **by path** via `--arms-module`, so a grep
+for the module name finds no inbound import — an orphan by static analysis and not by fact.
+The ladder README's reproduce block previously abbreviated its last three steps to a comment;
+it now writes them out, because a command block is the only entry point those files have.
+
+**B3, vacuous-check on this work's own gates — both are real.** The reproduction gate was
+tested against pairs that genuinely differ (`TF2` vs `T1b`, `TF2` vs `FL1`, `A7` vs `T1b`) and
+reported DIFFER on all three while reporting IDENTICAL on the true pair. The formula gate was
+tested by perturbing the unclipped divisor by 0.1 %; it fired. A gate that only ever passes is
+worth nothing, and these two carry the entire headroom conclusion.
+
+**B4 caught one thing in this session's own work, and it was clean.** `diagnostics.py` pools
+interior fame behind `if mbid in fame`, which would silently drop unmatched artists and bias
+pooled fame **upward for exactly the arms that reach furthest** — the arms whose success is
+measured by reaching artists the proxy cannot see. Checked rather than assumed: the fame map
+holds 397 of 397 nodes, with the 5 unmatched present at the floor per A11. The filter is a
+defensive no-op and no bias exists. Recorded because the defect it would have been is the
+kind that never announces itself.
+
+**B5 found the real one.** `2026-07-24-HANDOFF-track2-complete.md` still said the toll "has
+never run at full strength" and recommended running it — both false as of this session. Fixed
+with a banner **and** inline marks at §2 and §4, per `docs/README.md`'s rule that a reader
+landing mid-document never sees the banner.
+
+**B1, the doc audit, found two HIGH defects this session had not seen.** Both were
+status staleness at entry points: `docs/README.md`'s "Current state" prose and `CLAUDE.md`'s
+orient table both still described Track 2's null as the latest state, while the role table
+below them already listed Track 2F — newer information sitting *after* older information in
+the same file. Both fixed. It also flagged one MEDIUM: a bare `M*` in this log with no
+plain-language expansion, now expanded inline. It confirmed what this session had asserted
+and could not self-check: no `TF`-series identifier collides with any committed identifier,
+every `TFR` branch names the run state it presupposes, `ml-graph-analyst.md` is current
+against `pathfinding.py`, and **the 21-vs-8 endpoint reconciliation holds** — the two
+directories use different definitions of "fully saturated" and both are correct under their
+own. **The audit was worth running at a seam where the session believed the record was
+clean**, which is the pattern the skill names.
+
+**D6 — the standing context layer, measured against `main` (`da5080d`).**
+
+| file | main | now | delta |
+|---|---|---|---|
+| `CLAUDE.md` | 540 | 544 | **+4** |
+| `.claude/skills/session-start/SKILL.md` | 201 | 226 | **+25** |
+| `.claude/skills/closeout/SKILL.md` | 516 | 516 | 0 |
+| **in-repo total** | **1,257** | **1,286** | **+29** |
+
+`memory/` (outside git, so no diff can see it): **404 lines** — the figure to diff against at
+the next closeout, and it gained one entry this session.
+
+**Nearly all of the +29 is another session's work, not Track 2F's.** A concurrent consulting
+session, scoped to skills/agents/hooks, made `session-start` owner-invoked only and added a
+session-naming section; this session landed those commits because it owned commits in the
+tree, and reported the cost in each commit message per the budget rule, since the authoring
+session was not present to report it. **Track 2F's own contribution to this layer is +1
+line** — the `-builder` naming suffix, owner-instructed. `.claude/agents/consultant.md` (+183)
+is **not** in this layer: an agent definition loads on invocation, not into every session.
+**The +29 is the owner's to keep or reject; he has it in the diff and was told at each step.**
+
+**D3, provenance.** Every conclusion in both entries above is against artifact
+`4cb84ef9…b061dc8`, asserted by sha256 in-script before each run. The headroom measurement
+additionally *re-derived* that checksum from the archive, which is the strongest form of
+artifact identity this project has recorded: the archive at `builder/scratch/graph-archive`
+(75,000 responses) reproduces the adopted artifact exactly under `BuilderConfig()` defaults.
+**No artifact was written** — `serialise()` was called to hash and the bytes discarded — so
+`acceptance.py`'s rebuild block is untouched and still enforcing.
+
+**D4, suites, run rather than remembered:** builder 115 passed, api 120 passed, frontend 31
+passed across 11 files. No test was added by this work and none needed changing.
+
+**D2 is inapplicable:** the graph did not change, so the committed fixtures are not stale.
