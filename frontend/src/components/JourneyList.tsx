@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArtistCard } from './ArtistCard';
 import { PlayerBar } from './PlayerBar';
 import { usePlayer } from '@/player/usePlayer';
+import { resolveFreshUrl } from '@/hooks/useClip';
 import type { Artist, BypassReason } from '@/api/types';
 
 interface Props {
@@ -10,19 +11,16 @@ interface Props {
 }
 
 export function JourneyList({ artists, onBypass }: Props) {
-  const [urls, setUrls] = useState<Record<string, string | null>>({});
-  const urlsRef = useRef(urls);
-  urlsRef.current = urls;
+  // Which artists have a clip — not where it lives. Holding the URL here is what
+  // let a tab left open serve a dead signature (C2); the player re-signs on play.
+  const [hasClip, setHasClip] = useState<Record<string, boolean>>({});
 
   const playables = useMemo(
-    () =>
-      artists
-        .map((a) => ({ mbid: a.mbid, url: urls[a.mbid] }))
-        .filter((p): p is { mbid: string; url: string } => !!p.url),
-    [artists, urls],
+    () => artists.filter((a) => hasClip[a.mbid]).map((a) => ({ mbid: a.mbid })),
+    [artists, hasClip],
   );
 
-  const player = usePlayer(playables);
+  const player = usePlayer(playables, resolveFreshUrl);
   const currentName = artists.find((a) => a.mbid === player.currentMbid)?.name ?? null;
 
   // Silence the previous path the moment a new one arrives — otherwise a clip
@@ -50,7 +48,9 @@ export function JourneyList({ artists, onBypass }: Props) {
               onPlay={player.playFrom}
               onToggle={player.toggle}
               onBypass={onBypass}
-              onClipResolved={(mbid, url) => setUrls((prev) => ({ ...prev, [mbid]: url }))}
+              onClipResolved={(mbid, available) =>
+                setHasClip((prev) => ({ ...prev, [mbid]: available }))
+              }
             />
           </li>
         ))}

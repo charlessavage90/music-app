@@ -11,7 +11,37 @@ the point.**
 
 ---
 
-## ⛔ BLOCKED — 2026-07-25 — do not run question 2 yet; it cannot pass
+## QUEUED — 2026-07-25 — does a clip still play after the tab has been open a while
+
+**This unblocks the entry below, which is kept for the record.** The reason it could not pass
+has been fixed: the page now asks for a fresh link **at the moment you press play**, instead
+of relying on the one it was handed when the card first appeared. A failure to play also
+retries once, silently, with a newly issued link.
+
+**What to exercise, and it needs patience rather than attention:**
+
+1. **Open a path and leave the tab open for at least twenty minutes.** Do not reload, do not
+   navigate away, do not press anything. Twenty minutes is chosen because a link now
+   measurably dies at fifteen, so anything shorter proves nothing.
+2. **Come back and press play on a card you have not played yet.** It should play normally.
+3. **Then press play on a card you *did* play at the start.** Same expectation.
+4. **Let a clip run to its end** and check the next card starts on its own.
+5. **Pause a card, wait a few minutes, press play again.** It should resume where it stopped,
+   not restart from the beginning — and it should not go silent.
+
+**What "wrong" would look like:** silence, or a visibly stuck play button, on a card that
+worked when the page was fresh. Also a clip that jumps back to the start when you resume it
+after a pause — that would mean the fix broke the pause behaviour you confirmed earlier.
+
+**Known and not a defect:** cards that were silent from the beginning stay silent. That is
+the wrong-artist fix declining to play a stranger, and it is unrelated to this.
+
+**Best bug report:** the URL from the address bar, plus roughly how long the tab had been
+open.
+
+*Detail: the execution log's §17. The original blocking notice follows.*
+
+## ⛔ SUPERSEDED — 2026-07-25 — was BLOCKED; the cause is now fixed, see above
 
 **Found by a live check against the real music service, after this entry was written and
 before any of it was run.** Question 1 (does the clip play the right artist) is fine and
