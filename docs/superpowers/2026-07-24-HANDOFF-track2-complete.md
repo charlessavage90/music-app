@@ -107,7 +107,16 @@ Gate 2 → 3 content-curation condition is in the roadmap.
 
 - **Nothing running.** Two subagents were dispatched (the P8b review, the closeout doc audit) and
   both completed; their findings are folded in.
-- **Branch `track2-arms`, off `main`, pushed. Draft PR #12** — body updated at closeout.
+- **MERGED to `main`: PR #12 → `793587d`, 2026-07-25.** No Track 2 branch remains — the next
+  piece of work branches fresh off `main`. The PR body carries the gate outcomes, the deferred
+  findings, and the do-not-re-litigate list.
+- **The stale `track2-prereg-amendments` branch was deleted** (local and `origin`) after checking
+  it line by line. Its one unmerged commit's substance had landed via PR #10; the only content
+  `main` lacked was **9 lines of pre-amendment text that A12, A13 and A16 deliberately
+  superseded**, so restoring any of it would have reverted an amendment. Recorded because the
+  memory note asserting the branch was "contained in main by content" was **wrong on the
+  detail** — the diff was not empty — and only the hand check established the conclusion was
+  nonetheless right. Its SHA was `efa4a79` if it is ever wanted.
 - **This session owned all commits.** No other session was live in the tree.
 
 ## 9. Deferred findings — none came due at this seam
