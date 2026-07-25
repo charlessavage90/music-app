@@ -1,11 +1,28 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArtistSearch } from '@/components/ArtistSearch';
 import type { Artist } from '@/api/types';
 
+/**
+ * The pair carried back by "New path", if we arrived that way.
+ *
+ * Only the id is used to route; the name is what fills the box. Both must be
+ * present to count as a choice, or "Find path" would enable on a half-known
+ * artist.
+ */
+function seedFrom(params: URLSearchParams, idKey: string, nameKey: string): Artist | null {
+  const mbid = params.get(idKey);
+  const name = params.get(nameKey);
+  if (!mbid || !name) return null;
+  return { mbid, name, disambiguation: '', popularity: 0 };
+}
+
 export function LandingPage() {
-  const [from, setFrom] = useState<Artist | null>(null);
-  const [to, setTo] = useState<Artist | null>(null);
+  const [params] = useSearchParams();
+  const [seedA] = useState(() => seedFrom(params, 'from', 'fromName'));
+  const [seedB] = useState(() => seedFrom(params, 'to', 'toName'));
+  const [from, setFrom] = useState<Artist | null>(seedA);
+  const [to, setTo] = useState<Artist | null>(seedB);
   const navigate = useNavigate();
 
   const sameArtist = !!from && !!to && from.mbid === to.mbid;
@@ -18,8 +35,8 @@ export function LandingPage() {
         Name two artists and hear a smooth path between them.
       </p>
       <div className="space-y-4">
-        <ArtistSearch label="From" onSelect={setFrom} />
-        <ArtistSearch label="To" onSelect={setTo} />
+        <ArtistSearch label="From" initial={seedA} onSelect={setFrom} />
+        <ArtistSearch label="To" initial={seedB} onSelect={setTo} />
       </div>
       {sameArtist && (
         <p className="mt-3 text-sm text-[var(--color-away)]">Pick two different artists.</p>

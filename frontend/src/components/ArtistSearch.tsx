@@ -4,15 +4,19 @@ import type { Artist } from '@/api/types';
 
 interface Props {
   label: string;
+  /** Already-chosen artist to open with — set when returning from a path. */
+  initial?: Artist | null;
   onSelect: (artist: Artist) => void;
 }
 
-export function ArtistSearch({ label, onSelect }: Props) {
-  const [query, setQuery] = useState('');
+export function ArtistSearch({ label, initial, onSelect }: Props) {
+  const [query, setQuery] = useState(initial?.name ?? '');
   const [results, setResults] = useState<Artist[]>([]);
   const [open, setOpen] = useState(false);
   const inputId = useRef(`search-${Math.random().toString(36).slice(2)}`).current;
-  const selectedName = useRef<string | null>(null);
+  // A prefilled name is already a choice, so it must not fire a search and
+  // drop a dropdown over the page the moment you arrive.
+  const selectedName = useRef<string | null>(initial?.name ?? null);
 
   useEffect(() => {
     const q = query.trim();

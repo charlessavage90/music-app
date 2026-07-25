@@ -52,13 +52,18 @@ any streaming service to have.
 5. **Look at the first and last cards.** The two artists you chose no longer offer "not for
    me" or "I know them" — rejecting them never made sense, since the whole journey is
    defined by them.
-6. **The "← Start over" link at the top.** It takes you back to picking two artists. Before
-   this, the only way off a path page was the browser's Back button.
+6. **The two controls at the top of a path.** "← New path" takes you back to picking two
+   artists, **with the pair you were just on already filled into the boxes** — so swapping
+   one end for a new artist does not mean retyping both. "↺ Reset path" throws away every
+   bypass you have pressed and puts you back on the original path between the same two
+   artists; it only appears once you have pressed something. Before this, the only way off
+   a path page was the browser's Back button.
 
 **What "wrong" would look like:** a clip that plays an obviously different artist (question
 1 failed); silence after an hour on a card that played earlier (question 2 failed); a card
 whose pause button still restarts the track; audio from a bypassed path continuing to play;
-a bypass button on the first or last card. Also worth a mention: **a path with only your two
+a bypass button on the first or last card; "New path" arriving at empty boxes, or with a
+dropdown of search results already covering the page. Also worth a mention: **a path with only your two
 artists and nothing in between now offers no bypass buttons at all** — that is expected
 given the change, but it leaves you with nothing to press, and it is the known
 zero-intermediary case (F1) rather than a new defect.
