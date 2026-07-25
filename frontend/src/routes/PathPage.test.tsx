@@ -10,7 +10,10 @@ afterEach(() => vi.restoreAllMocks());
 function renderAt(url: string) {
   return render(
     <MemoryRouter initialEntries={[url]}>
-      <Routes><Route path="/path/:from/:to" element={<PathPage />} /></Routes>
+      <Routes>
+        <Route path="/" element={<h1>Pick two artists</h1>} />
+        <Route path="/path/:from/:to" element={<PathPage />} />
+      </Routes>
     </MemoryRouter>,
   );
 }
@@ -18,21 +21,25 @@ function renderAt(url: string) {
 test('renders the path, then a bypass triggers a new request carrying the exclusion', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  // Three stops, because bypass is only offered on the interior — the two
+  // artists you chose are endpoints and cannot be rerouted away.
   const buildPath = vi.spyOn(client, 'buildPath')
     .mockResolvedValueOnce([
       { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
       { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
+      { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
     ])
     .mockResolvedValueOnce([
       { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
       { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7 },
+      { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
     ]);
 
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
 
-  const dislikeButtons = screen.getAllByRole('button', { name: /not for me/i });
-  await user.click(dislikeButtons[1]); // bypass Herbie
+  // The only bypass on offer is Herbie's — the interior of a three-stop path.
+  await user.click(screen.getByRole('button', { name: /not for me/i }));
 
   await waitFor(() =>
     expect(buildPath).toHaveBeenLastCalledWith(
@@ -42,6 +49,21 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
     ),
   );
   await screen.findByText('Sun Ra');
+});
+
+test('offers a start-over control that goes back to choosing two artists', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue([
+    { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
+    { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
+  ]);
+
+  renderAt('/path/m/d?known=h');
+  await screen.findByText('Herbie Hancock');
+
+  await user.click(screen.getByRole('link', { name: /start over/i }));
+  expect(await screen.findByText('Pick two artists')).toBeInTheDocument();
 });
 
 test('shows the no-path banner with a clear-exclusions action on 409', async () => {

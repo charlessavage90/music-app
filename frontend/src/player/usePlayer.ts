@@ -39,6 +39,12 @@ export function usePlayer(playables: Playable[]) {
     setIsPlaying(true);
   }
 
+  function stop() {
+    player.pause();
+    setIsPlaying(false);
+    setCurrentMbid(null);
+  }
+
   function toggle() {
     if (isPlaying) {
       player.pause();
@@ -48,5 +54,5 @@ export function usePlayer(playables: Playable[]) {
     }
   }
 
-  return { currentMbid, isPlaying, playFrom, toggle };
+  return { currentMbid, isPlaying, playFrom, toggle, stop };
 }

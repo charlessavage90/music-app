@@ -36,3 +36,49 @@ test('play fires onPlay when a clip exists', async () => {
   await user.click(screen.getByRole('button', { name: /play/i }));
   expect(onPlay).toHaveBeenCalledWith('playable');
 });
+
+test('the button on the playing card pauses it instead of restarting it', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  const onPlay = vi.fn();
+  const onToggle = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('nowplaying')} isCurrent isPlaying
+      onPlay={onPlay} onToggle={onToggle} onBypass={vi.fn()}
+    />,
+  );
+  await user.click(screen.getByRole('button', { name: /pause/i }));
+  expect(onToggle).toHaveBeenCalled();
+  expect(onPlay).not.toHaveBeenCalled();
+});
+
+test('the button on a paused card resumes it instead of restarting it', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  const onPlay = vi.fn();
+  const onToggle = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('paused')} isCurrent isPlaying={false}
+      onPlay={onPlay} onToggle={onToggle} onBypass={vi.fn()}
+    />,
+  );
+  await waitFor(() => expect(screen.getByRole('button', { name: /play/i })).toBeEnabled());
+  await user.click(screen.getByRole('button', { name: /play/i }));
+  expect(onToggle).toHaveBeenCalled();
+  expect(onPlay).not.toHaveBeenCalled();
+});
+
+test('an endpoint artist offers neither bypass button', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  render(
+    <ArtistCard
+      artist={artist('endpoint')} isEndpoint isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()}
+    />,
+  );
+  expect(screen.queryByRole('button', { name: /not for me/i })).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /know them/i })).not.toBeInTheDocument();
+  expect(screen.getByText('Miles Davis')).toBeInTheDocument();
+});

@@ -31,3 +31,19 @@ test('caches by mbid — second mount does not refetch', async () => {
   await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:T'));
   expect(spy).toHaveBeenCalledTimes(1);
 });
+
+test('refetches a clip old enough that its signed URL has expired', async () => {
+  // C2, browser side: this cache holds the signed preview URL too, so on a tab
+  // left open it serves dead audio exactly like the 30-day server cache did.
+  vi.spyOn(Date, 'now').mockReturnValue(0);
+  const spy = vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+
+  const { unmount } = render(<Harness mbid="longopen" />);
+  await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:T'));
+  unmount();
+
+  vi.spyOn(Date, 'now').mockReturnValue(45 * 60 * 1000); // 45 minutes later
+  render(<Harness mbid="longopen" />);
+  await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:T'));
+  expect(spy).toHaveBeenCalledTimes(2);
+});

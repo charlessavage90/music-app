@@ -5,12 +5,20 @@ import type { Artist, BypassReason } from '@/api/types';
 interface Props {
   artist: Artist;
   isPlaying: boolean;
+  /** This card owns the audio, playing or paused — so its button toggles. */
+  isCurrent?: boolean;
+  /** One of the two artists you chose. Neither bypass signal applies to them. */
+  isEndpoint?: boolean;
   onPlay: (mbid: string) => void;
+  onToggle?: () => void;
   onBypass: (mbid: string, reason: BypassReason) => void;
   onClipResolved?: (mbid: string, url: string | null) => void;
 }
 
-export function ArtistCard({ artist, isPlaying, onPlay, onBypass, onClipResolved }: Props) {
+export function ArtistCard({
+  artist, isPlaying, isCurrent, isEndpoint,
+  onPlay, onToggle, onBypass, onClipResolved,
+}: Props) {
   const clip = useClip(artist.mbid);
   const playable = clip.status === 'ready';
 
@@ -38,25 +46,31 @@ export function ArtistCard({ artist, isPlaying, onPlay, onBypass, onClipResolved
         </div>
         {isPlaying && <div className="text-xs text-[var(--color-accent)] mt-0.5">▮▮▮ now playing</div>}
       </div>
-      <button
-        type="button"
-        onClick={() => onBypass(artist.mbid, 'dislike')}
-        className="text-xs px-3 py-1.5 rounded-full border border-[var(--color-away)]/40 text-[var(--color-away)]"
-      >
-        ✕ Not for me
-      </button>
-      <button
-        type="button"
-        onClick={() => onBypass(artist.mbid, 'known')}
-        className="text-xs px-3 py-1.5 rounded-full border border-[var(--color-dig)]/40 text-[var(--color-dig)]"
-      >
-        ✓ I know them
-      </button>
+      {!isEndpoint && (
+        <>
+          <button
+            type="button"
+            onClick={() => onBypass(artist.mbid, 'dislike')}
+            className="text-xs px-3 py-1.5 rounded-full border border-[var(--color-away)]/40 text-[var(--color-away)]"
+          >
+            ✕ Not for me
+          </button>
+          <button
+            type="button"
+            onClick={() => onBypass(artist.mbid, 'known')}
+            className="text-xs px-3 py-1.5 rounded-full border border-[var(--color-dig)]/40 text-[var(--color-dig)]"
+          >
+            ✓ I know them
+          </button>
+        </>
+      )}
       <button
         type="button"
         aria-label={isPlaying ? 'Pause' : 'Play'}
         disabled={!playable}
-        onClick={() => onPlay(artist.mbid)}
+        // The card that owns the audio toggles it. Calling onPlay here would
+        // re-seek to zero, which is why only the bottom bar could pause.
+        onClick={() => (isCurrent ? onToggle?.() : onPlay(artist.mbid))}
         className="w-10 h-10 rounded-full flex-none bg-[var(--color-accent)] text-white flex items-center justify-center disabled:opacity-30"
       >
         {isPlaying ? '❚❚' : '▶'}
