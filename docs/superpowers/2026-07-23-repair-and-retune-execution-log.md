@@ -1795,3 +1795,62 @@ the 33 MBIDs (which the drop-vs-backfill decision needs, and which is confirmato
 decisive — see the pre-registration's deferral entry).
 
 **No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### STAGE 1 RUN — result is R0, a full null, and A17(c)'s falsifier FIRED (2026-07-24)
+
+**The first experimental arms of Track 2 have run.** Artifact `4cb84ef9…b061dc8`, unchanged.
+11 arms × 12 pairs × 21 depths, 158 s. **Zero guard-infeasible cells**, so A13's uniform-drop
+path is still unexercised (P8b listed that as undeterminable without a run; it remains so).
+Fame: 235/239 matched (98.3 %); **zero blank-named interiors**, so A18's cell guard did not
+fire and the `--blank-cells` default never triggered. Figures owned by
+`builder/analysis/2026-07-24-track2-arm-scorer/scores.json`.
+
+**Outcome: R0 — full null.** C1's threshold is mean ΔF ≤ −1.0 with ≥ 75 % of cells negative.
+The best arm reaches **−0.053 at 54 %**. That is not a near miss; it is roughly **one twentieth**
+of the pre-registered effect, and no arm exceeds −0.053.
+
+**Worse than null on three criteria — and C2 caught it, which is A17(a) vindicated within
+hours.** Production reaches below B_unk in 4 of 8 pairs; **every arm that moves paths reaches
+1 or 2 of 8**. A17(a) demoted C2 from discriminator to one-sided regression guard on the
+grounds that any arm passing C1 would pass C2 by construction — and its remaining job, catching
+a candidate that goes *backwards*, is exactly the job it did. C3's gradient also degrades
+(P 0.164 → arms 0.021–0.090) and C4's payload fails on the percentile arms (5.38 → 3.58
+interiors, against a 4.38 floor): **the arms that move most make paths shorter and less
+obscure.**
+
+**A17(c)'s falsifier fired, and this is the most consequential line in the run.** X is **not**
+the lowest fame profile: mean pooled interior fame **A3 5.861 < A0 5.880 = P 5.880 < … < X
+5.932**. Production itself is more obscure than the corner arm built to bound the family. So
+per A17(c), **R0 licenses only "these fifteen configurations do not move it" and does NOT
+license "the repricing family is exhausted."** Had P8b not measured X's symmetric jump term
+three days before the arms ran, this null would have been written up as a much stronger claim
+than the data supports — the amendment was committed before any arm and earned its keep
+immediately.
+
+**What R0 licenses, quoted from §2.4 as pre-registered:** firing spec §5's recorded triggers —
+the p99 ceiling-rescale arm (builder) and/or revisiting the deferred `cap_strategy`, each with
+its own pre-registration. **Does NOT license:** re-litigating the `capfix` adoption, mutual
+k-NN, or anything in log §4/§4.1; shipping any arm anyway; or quietly weakening the thresholds.
+
+**F6 confirmed exactly.** A0 is **identical to P on every scored statistic** (C1 0.000, C2 4/8,
+C3 0.164, C4 5.38) and differs in 1 of 72 analysis cells, at d0 — a depth no gating criterion
+reads. P8b F6 predicted precisely this: P's raw floor is dead at every depth C1 and C2 score,
+so A0's C1 row measures exclusion-history carryover, not a floor contrast.
+
+**Structural findings from the paths themselves, before fame entered:** no two arms produce
+identical path sets (so no arm is degenerate), and the pairwise cell-difference matrix shows
+**the currency swap is the dominant factor** — P/A0/A3 cluster within 4 cells of each other,
+A2/A6 within 7, and the five percentile arms within 3–18 of each other but 48–58 from P. The
+isolating one-column contrasts (P8b F9's machinery, first real use) put currency alone at
+−0.033 and every subsequent knob at −0.008 to −0.012, i.e. the factorial's later columns add
+almost nothing on top of the currency change.
+
+**A sign visible before scoring, worth recording as the shape of the null:** all **76** newly
+visited artists resolved a Wikipedia article, with F between 4.6 and 6.6. The arms did not
+route anywhere obscure; they rearranged famous artists. Every arm's pooled median interior fame
+sits in **5.86–5.97** against a B_unk of **5.379** — the whole grid lives above the owner's
+"would not know them" band, and the total spread across all eleven arms is ~0.1 fame units.
+
+**No threshold was touched, and none will be.** Stage 2 has not run; R1's fallback selects
+**W = A7** (no cell moved C1 in the right direction), which is the fallback firing as designed
+rather than a selection.
