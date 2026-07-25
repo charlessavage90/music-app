@@ -186,6 +186,13 @@ that is how the drift began.
   Memory holds **pointers and working preferences, not figures**.
 - **`.claude/agents/ml-graph-analyst.md`** — a reusable analysis-only subagent for graph,
   scoring, and metric questions. It has no `Edit` tool by design.
+- **`.claude/agents/doc-auditor.md`** — the project-local fork of the global auditor, and it
+  **shadows** the one in `~/.claude/agents/` inside this repo (project scope outranks user
+  scope). It carries two checks the global one does not: **I**, the identifier census — no
+  two load-bearing objects may share a name, and owner-facing text may not use a bare
+  letter-number token without its plain-language sentence; and **J**, reads-of-results
+  completeness for pre-registrations. It reports and never edits, and it may never propose
+  renaming an identifier in a committed document. Dispatched by `closeout` B1.
 - **The code is the truth about the code.** Where a document and the source disagree
   about behaviour, the source wins — and the document is a defect to be fixed.
 
