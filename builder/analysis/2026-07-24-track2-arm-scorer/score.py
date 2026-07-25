@@ -47,6 +47,38 @@ C3_DROP_MIN = 0.5
 C4_SLACK = 1.0
 C1_DEPTHS = (10, 15, 20)
 C2_DEPTHS = (15, 20)
+C3_DEPTHS = (5, 20)
+# Every depth some criterion reads. The blank-name assertion below is scoped to these:
+# a blank interior at an unscored depth cannot bias any statistic.
+SCORED_DEPTHS = tuple(sorted(set(C1_DEPTHS) | set(C2_DEPTHS) | set(C3_DEPTHS)))
+
+
+def blank_scored_cells(doc) -> dict[str, list[str]]:
+    """Cells whose scored interiors include a blank-named node. P8b F8's assertion.
+
+    **Why a CELL and not a NODE.** The tempting fix is to drop the blank node from the
+    statistic. That is silently directional: a blank name resolves to F = 0, so it drags
+    C1's median and C3's d20 median *down* — i.e. toward passing — and it appears
+    preferentially in the arms that dive, which is where blank names concentrate (2.7x in
+    the bottom popularity decile) and never in P, which has none. Removing the node
+    improves whichever arm produced it; removing the CELL from every arm cannot favour
+    any of them. That is A13's rule -- missingness must not correlate with arm -- applied
+    to a second cause of contamination.
+
+    Returns {cell_key: [arm, ...]}, the arms in which each cell is contaminated. The cell
+    is dropped from all of them or from none.
+    """
+    names = doc["node_names"]
+    out: dict[str, list[str]] = {}
+    for arm, by_pair in doc["paths"].items():
+        for pair, by_depth in by_pair.items():
+            for d in SCORED_DEPTHS:
+                path = by_depth.get(str(d))
+                if not path:
+                    continue
+                if any(not names[str(n)].strip() for n in path[1:-1]):
+                    out.setdefault(f"{pair}@d{d}", []).append(arm)
+    return {k: sorted(v) for k, v in sorted(out.items())}
 
 
 def b_unk() -> float:
@@ -83,36 +115,28 @@ def score_arm(arm, doc, F, analysis_pairs, B, guard):
     c1 = bool(deltas) and c1_mean <= C1_MEAN_MAX and c1_frac >= C1_FRAC_MIN
 
     # --- C2: absolute reach below the owner-calibrated band ---------------------
-    # Two guards, both P8b F2/F8, and they differ in kind:
+    # `potentially_notable` -> COUNTED, and REPORTED (P8b F2). A11 pre-registered
+    # unmatched-as-floor with an owner one-glance check, so the flag is an audit hook,
+    # not a filter; silently excluding these would change the adopted encoding. What was
+    # missing is that nothing read the flag: `fame.py` computes it graph-wide over all
+    # names including endpoints, which no criterion scores. Here it is narrowed to the
+    # interiors at the C2 depths a pass actually rests on.
     #
-    #   nameless -> EXCLUDED from reach. A node with no name is an artifact defect
-    #     (builder `acceptance.py` now rejects these; the adopted artifact predates it).
-    #     It resolves to the fame floor for want of anything to query, so counting it
-    #     would let an arm bank a C2 pass on a card that renders blank. Conservative:
-    #     this can only make C2 harder.
-    #
-    #   potentially_notable -> COUNTED, and REPORTED. A11 pre-registered unmatched-as-
-    #     floor with an owner one-glance check, so the flag is an audit hook, not a
-    #     filter; silently excluding these would change the adopted encoding. What was
-    #     missing is that nothing read the flag: `fame.py` computes it graph-wide over
-    #     all names including endpoints, which no criterion scores. Here it is narrowed
-    #     to the interiors at the C2 depths that a pass actually rests on.
-    reached, rests_on_notable, excluded_nameless = [], {}, {}
+    # Blank-named interiors are NOT handled here. They are removed at CELL level from
+    # every arm before scoring (`blank_scored_cells`), because a per-criterion node
+    # exclusion is directional -- see that function.
+    reached, rests_on_notable = [], {}
     for pair in analysis_pairs:
         hits = [n
                 for d in C2_DEPTHS
                 for n in interiors(A[pair][str(d)], keys)
                 if F[n] < B]
-        blank = sorted({n for n in hits if n in guard["nameless"]})
-        scored = [n for n in hits if n not in guard["nameless"]]
-        if blank:
-            excluded_nameless[pair] = blank
-        if scored:
+        if hits:
             reached.append(pair)
-            flagged = sorted({n for n in scored if n in guard["notable"]})
+            flagged = sorted({n for n in hits if n in guard["notable"]})
             # Only load-bearing if the flagged ones are the ONLY reason this pair
             # reached: that is the case a glance from the owner could overturn.
-            if flagged and len(flagged) == len({*scored}):
+            if flagged and len(flagged) == len({*hits}):
                 rests_on_notable[pair] = flagged
     c2 = len(reached) >= C2_PAIRS_MIN
 
@@ -163,9 +187,7 @@ def score_arm(arm, doc, F, analysis_pairs, B, guard):
                "which": reached,
                # P8b F2: a pass that rests ONLY on flagged-notable interiors is the one
                # the owner's glance could overturn. Empty means the pass is unconditional.
-               "rests_only_on_flagged_notable": rests_on_notable,
-               # P8b F8: reach these pairs would have shown on a nameless interior.
-               "nameless_excluded_from_reach": excluded_nameless},
+               "rests_only_on_flagged_notable": rests_on_notable},
         "C3": {"pass": c3, "drop_d5_to_d20": c3_drop},
         "C4": {"pass": c4, "mean_interiors": c4_arm, "P_mean": c4_p},
         "C6_reported_not_gated": {"coverage": cov, "distinct_interiors": len(distinct),
@@ -323,6 +345,12 @@ def main() -> int:
     ap.add_argument("--paths", default=str(HERE / "paths.json"))
     ap.add_argument("--fame", default=str(HERE / "fame.json"))
     ap.add_argument("--out", default=str(HERE / "scores.json"))
+    ap.add_argument("--blank-cells", choices=("fail", "drop"), default="fail",
+                    help="what to do when a scored interior has no name (P8b F8). "
+                         "'fail' (default) raises and lists them. 'drop' applies the "
+                         "PRE-REGISTERED response: remove the affected cells from ALL "
+                         "arms uniformly and report them. Decided before stage 1 ran, "
+                         "not after seeing which arm trips it.")
     ap.add_argument("--also-drop", metavar="PATHS_JSON",
                     help="union another run's dropped_cells_d7 into this one before "
                          "scoring. This is the re-score `run_arms.py --stage2` asks for "
@@ -352,6 +380,34 @@ def main() -> int:
     # score every interior at the floor (no mbid would ever hit), so fail loud instead.
     if not fame_doc.get("keyed_by", "").startswith("mbid"):
         raise SystemExit("fame.json is not mbid-keyed; re-run fame.py (P8b F8)")
+    # P8b F8's assertion, failing loud by default. The exposure this closes is
+    # DIRECTIONAL, not noise: blank names sit 2.7x concentrated in the bottom
+    # popularity decile, resolve to F = 0, and P has none — so contamination arrives
+    # in the diving arms and nowhere else, and it arrives pointing at "pass".
+    blank_cells = blank_scored_cells(doc)
+    if blank_cells:
+        print(f"\nP8b F8 — {len(blank_cells)} scored cell(s) contain a blank-named "
+              f"interior:")
+        for cell, arms_hit in blank_cells.items():
+            print(f"  - {cell}   in: {', '.join(arms_hit)}")
+        if args.blank_cells == "fail":
+            raise SystemExit(
+                "\nRefusing to score. A blank-named interior is an artifact defect that\n"
+                "resolves to the fame floor, so it reads as maximal obscurity and biases\n"
+                "C1 and C3 toward passing — in the diving arms only. The pre-registered\n"
+                "response is a UNIFORM cell drop: re-run with --blank-cells drop.\n"
+                "Do NOT drop the node instead; that is the directional fix this refuses."
+            )
+        for cell in blank_cells:
+            pair, _, dtag = cell.rpartition("@d")
+            for arm in doc["paths"]:
+                doc["paths"][arm][pair][dtag] = None
+        doc["dropped_cells_blank_name"] = sorted(blank_cells)
+        print(f"  -> dropped from ALL {len(doc['paths'])} arms uniformly "
+              f"(pre-registered response; A13's rule applied to a second cause)")
+    else:
+        doc["dropped_cells_blank_name"] = []
+
     B = b_unk()
     held = set(doc.get("held_out_pairs", []))
     analysis = [p for p in doc["pairs"] if p not in held]
@@ -428,14 +484,12 @@ def main() -> int:
             for pair, mbids in sorted(c2["rests_only_on_flagged_notable"].items()):
                 shown = ", ".join(fame_doc["names"].get(m, m) for m in mbids)
                 print(f"    {pair}: {shown}")
-        if c2["nameless_excluded_from_reach"]:
-            n = sum(len(v) for v in c2["nameless_excluded_from_reach"].values())
-            print(f"  {arm}: {n} nameless interior(s) excluded from C2 reach (P8b F8)")
 
     print(f"\nR1 selects W = {W}  ({why})")
 
     Path(args.out).write_text(json.dumps(
         {"b_unk_fame_units": B, "analysis_pairs": analysis,
+         "blank_name_cells_dropped": doc["dropped_cells_blank_name"],
          "W": W, "W_rationale": why, "results": results,
          "one_column_contrasts": contrasts, "diagnostics": extras},
         indent=1, ensure_ascii=False), encoding="utf-8")

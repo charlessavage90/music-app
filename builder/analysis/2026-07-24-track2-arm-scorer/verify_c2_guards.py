@@ -7,13 +7,17 @@ or the test proves nothing about the check".
 
 Both guards come from the P8b harness review:
 
-  F8  a nameless interior must NOT count as C2 reach. It resolves to the fame floor for
-      want of anything to query, so counting it would let an arm bank a pass on a card
-      that renders blank. Conservative — it can only make C2 harder.
+  F8  a blank-named interior contaminates its CELL, which is then dropped from every arm
+      or from none. Dropping the node instead would be directional: F = 0 drags C1's and
+      C3's medians toward passing, blank names concentrate 2.7x in the stratum the diving
+      arms target, and P has none — so a node-level fix silently improves exactly the arms
+      under test. Cell-level is A13's rule (missingness must not correlate with arm)
+      applied to a second cause. Default is to REFUSE to score; the uniform drop is the
+      pre-registered response, chosen before stage 1 rather than after seeing who trips it.
   F2  a flagged-notable interior DOES count (A11 pre-registered unmatched-as-floor), but
       a pass resting on nothing else must be reported for the owner's one-glance check.
       The distinction matters: excluding these would change the adopted encoding, whereas
-      excluding nameless ones fixes an artifact defect.
+      a blank name is an artifact defect and not a judgement about an artist at all.
 
 Offline, no artifact, no network. Run from anywhere:
     UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u verify_c2_guards.py
@@ -30,7 +34,14 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "builder" / "analysis" / "2026-07-23-track2-sweep"))
 sys.path.insert(0, str(ROOT / "api" / "src"))
 
-from score import C1_DEPTHS, C2_DEPTHS, score_arm  # noqa: E402
+from score import (  # noqa: E402
+    C1_DEPTHS,
+    C2_DEPTHS,
+    SCORED_DEPTHS,
+    blank_scored_cells,
+    cell_median,
+    score_arm,
+)
 
 B = 5.0          # B_unk for these fixtures
 FAMOUS = 7.0     # comfortably above B
@@ -99,14 +110,25 @@ def main() -> int:
         if not ok:
             failures.append(f"{label}: got {got!r}, wanted {want!r}")
 
-    print("F8 — a nameless interior must not count as reach")
-    c2 = _c2({f"p{i}": NAMELESS for i in range(4)})
-    check("4 nameless-only pairs reach nothing", c2["pairs_reached"], 0)
-    check("all 4 recorded as nameless-excluded",
-          len(c2["nameless_excluded_from_reach"]), 4)
-    check("C2 fails on nameless alone", c2["pass"], False)
+    print("F8 — a blank-named interior is detected at CELL level, per arm")
+    doc = _doc({f"p{i}": NAMELESS for i in range(4)})
+    cells = blank_scored_cells(doc)
+    check("one contaminated cell per pair per scored depth",
+          len(cells), 4 * len(SCORED_DEPTHS))
+    check("contamination attributed to arm X only (P is clean)",
+          sorted({a for v in cells.values() for a in v}), ["X"])
 
-    print("\nF8 — the same four pairs with a real obscure interior DO reach")
+    print("\nF8 — the directional bias this replaces: blank drags the median DOWN")
+    # The whole argument for cell-level in one assertion. A blank interior at F=0
+    # produces a *better-looking* C1/C3 for the arm that routed through it, so a
+    # node-level exclusion would remove evidence against the arm under test.
+    blank_med = cell_median([0, int(NAMELESS), 1], MBIDS, FAME)
+    plain_med = cell_median([0, int(PLAIN_OBSCURE), 1], MBIDS, FAME)
+    famous_med = cell_median([0, 10, 1], MBIDS, FAME)
+    check("blank scores below a genuinely obscure artist", blank_med < plain_med, True)
+    check("and far below the control's interior", blank_med < famous_med, True)
+
+    print("\nF8 — a real obscure interior DOES reach (the guard is not over-broad)")
     c2 = _c2({f"p{i}": PLAIN_OBSCURE for i in range(4)})
     check("4 plain-obscure pairs reach", c2["pairs_reached"], 4)
     check("C2 passes at the threshold", c2["pass"], True)
@@ -127,14 +149,30 @@ def main() -> int:
     check("only the flag-only pair is reported",
           sorted(c2["rests_only_on_flagged_notable"]), ["p0"])
 
-    print("\nMixed — nameless alongside a real reach does not suppress the pair")
-    doc = _doc({"p0": PLAIN_OBSCURE, "p1": NAMELESS, "p2": NAMELESS, "p3": NAMELESS})
-    # p1-p3 are nameless-only, so exactly one pair reaches: the guard is subtractive,
-    # never additive, which is what "conservative" has to mean.
-    c2 = score_arm("X", doc, FAME, ["p0", "p1", "p2", "p3"], B, GUARD)["C2"]
-    check("one pair reaches", c2["pairs_reached"], 1)
-    check("three nameless exclusions recorded",
-          len(c2["nameless_excluded_from_reach"]), 3)
+    print("\nF8 — the uniform drop removes the cell from the CONTROL too")
+    # The property that makes it non-directional. P never contained the blank node, but
+    # its cell goes as well, so the two arms are still compared on identical cells.
+    doc = _doc({"p0": NAMELESS, "p1": PLAIN_OBSCURE, "p2": PLAIN_OBSCURE,
+                "p3": PLAIN_OBSCURE})
+    cells = blank_scored_cells(doc)
+    for cell in cells:
+        pair, _, dtag = cell.rpartition("@d")
+        for arm in doc["paths"]:
+            doc["paths"][arm][pair][dtag] = None
+    surviving = {
+        arm: sorted(d for p in doc["paths"][arm] for d in doc["paths"][arm][p]
+                    if doc["paths"][arm][p][d] is not None)
+        for arm in doc["paths"]
+    }
+    check("P and X left with identical surviving cells",
+          surviving["P"] == surviving["X"], True)
+    check("p0's scored depths gone from BOTH arms",
+          all(doc["paths"][a]["p0"][str(d)] is None
+              for a in ("P", "X") for d in SCORED_DEPTHS), True)
+
+    print("\nF8 — a clean file is detected as clean (no false positives)")
+    check("no contaminated cells when every interior is named",
+          blank_scored_cells(_doc({f"p{i}": PLAIN_OBSCURE for i in range(4)})), {})
 
     print()
     if failures:
@@ -142,8 +180,9 @@ def main() -> int:
         for f in failures:
             print(f"  - {f}")
         return 1
-    print("all C2 guard checks passed — both guards demonstrably fire, and the")
-    print("nameless guard is subtractive only (it never manufactures a reach).")
+    print("all guard checks passed — both guards demonstrably fire; the blank-name")
+    print("guard acts on cells, removes them from the control as well as the treatment,")
+    print("and the bias it replaces is confirmed to point toward passing.")
     return 0
 
 
