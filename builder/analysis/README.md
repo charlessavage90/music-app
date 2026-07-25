@@ -6,13 +6,25 @@ and are not updated when shipped code changes. The project nearly lost them
 once to a scratchpad clean (Phase 1 log §2, closing note).
 
 **One exception, and it is live:** `2026-07-24-track2-arm-scorer/` is the **active
-Stage A scoring harness** — the C1–C6 scorer the next Track 2 session runs after the
-P8b review. It is a *tool*, not yet a frozen record; it owns its figures in its own
-README. A reader arriving from `docs/` reaches it via the current handoff
+Stage A scoring harness** — the C1–C6 scorer the next Track 2 session runs. It is a
+*tool*, not yet a frozen record; it owns its figures in its own README. A reader
+arriving from `docs/` reaches it via the current handoff
 (`docs/superpowers/2026-07-24-HANDOFF-track2-scorer.md`) and pre-registration
-amendments A12–A16. Noted here because a `docs/`-first reader would not otherwise
+amendments A12–A19. Noted here because a `docs/`-first reader would not otherwise
 find it, and because it is the one directory this file's "frozen, not a tool"
 framing does not yet describe.
+
+**Its review is frozen, and it is the authority for its own measurements:**
+`2026-07-24-track2-p8b-harness-review/` is the **P8b** `ml-graph-analyst` review of that
+harness — the pre-registration §7 prerequisite that gated the arms. Fourteen findings
+(two HIGH), the verdict "fit to run stage 1, not fit to run stage 2 as it then stood",
+and the probe scripts behind each. It owns the blank-name and duplicate-name figures,
+the floor-lifetime depths, and the X-bound measurement that **pre-registration A17
+turns into bounds on what a result licenses** — cite it from there rather than
+restating. There is deliberately **no `findings/` document** for it: a second copy
+would duplicate figures, which is the one rule `docs/README.md` puts above the others.
+Its F2/F3/F8/F9 fixes landed in the harness next door; F1 and F4–F11 are recorded as
+amendments **A17–A19**.
 
 ## Why this file exists
 

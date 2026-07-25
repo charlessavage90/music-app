@@ -1507,3 +1507,111 @@ reported). Queued for the test queue rather than hotfixed: changing the router m
 costs more than the rare empty card does.
 
 **No arm has run.** Artifact untouched.
+
+### P8b discharged: four code fixes, three amendments, and one correction to my own reasoning (2026-07-24)
+
+**P8b's verdict:** fit to run stage 1 as-is; **not** fit to run stage 2 (no executable path for
+the attachment arms). Fourteen findings, two HIGH. The mirror was re-verified byte-identical on
+all 212 cells, so the router is sound. Review and its measurements:
+`builder/analysis/2026-07-24-track2-p8b-harness-review/` (owns its figures).
+
+**Three of its claims were checked against the code before being acted on**, per the
+verify-one-claim rule, and all three held: `score.py` never read `potentially_notable`;
+`stage2()` had no caller and `run_arms.py` asserted arm names against `STAGE1` only; 33
+blank-named nodes, reproduced exactly.
+
+**Code fixes (commits `87101b3`, `d743c1c`).** F8 fame keyed by mbid, not name — resolution
+stays name-based since Wikipedia can only be queried by name, and the cache stays name-keyed
+since two nodes with one name share an article. F2 the A11 notability guard reaches C2's
+scoring path, narrowed to the interiors a pass rests on. F3 stage 2 runnable, with A13's
+uniform drop spanning the stage boundary. F9 the isolating one-column contrasts computed
+rather than declared.
+
+**Regression evidence:** production re-walked and re-scored with **every criterion value
+identical** — C1 0.000, C2 4/8, C3 0.164, C4 5.38, coverage 96.4 %, W still A7. A correctness
+fix that was not supposed to move the answer did not move it.
+
+**Two defects found in my own work, both worth recording because neither was in P8b:**
+
+1. **F9's first cut mis-attributed the contrasts.** Package-ness is a property of the *pair*,
+   not the arm: A6/A7's declared baselines are A2/A4 (one column away), while the packages are
+   A6/A7 **vs A0**. Keying off the arm name stamped the clean contrasts as unattributable.
+   Both blocks are now computed, so A7 appears twice with different figures and different
+   warnings. The irony is exact: `PACKAGE_CONTRASTS` had sat unread since the harness was
+   written, which made it the disclaimer-nothing-reads that A16's rule exists to catch — one
+   level below where A16 caught it.
+2. **The F8 guard was under-implemented, and directionally so** — caught by a consulting pass,
+   not by me. F8's success condition asks for an assertion *failing loud*; I shipped a
+   per-criterion **node** exclusion, and only in C2, leaving blank interiors in C1's and C3's
+   medians at F = 0. See the A18 entry below: a node-level exclusion improves whichever arm
+   produced the blank, invisibly, and only the treatment arms have any.
+
+**Three amendments, all before any arm ran — A17, A18, A19.**
+
+**A17** records P8b's six *reading* bounds. Two are worth restating here because they change
+what a result licenses: **C2 is a one-sided regression guard, not a discriminator** (P scores
+exactly its 4/8 minimum, so any arm meeting C1 meets C2 by construction) — so §3's Attack 1 is
+**re-attributed to C1's magnitude**, and its closure now rests on one criterion rather than
+two. And **X does not bound what §1.4 claims**: its jump term is symmetric, so zeroing it
+unprices climbing as well as diving, and X measures as *more* pop-ascending one hop out than
+the arm it bounds. R0's null therefore may not be read as "the family is exhausted" unless X's
+fame profile turns out lowest — a free falsifier once stage 1 runs.
+
+**The one owner decision in this batch was put to him and declined.** P8b offered either
+reporting C2 honestly as a regression guard (free, methodology, mine) or **amending C2's
+threshold now that production's baseline is known** (post-baseline threshold change, his). I
+took the free option and left the threshold as written, because loosening a threshold after
+seeing the baseline is the move pre-registration exists to prevent. The concession is recorded
+rather than buried.
+
+**A18 replaces the justification for deferring the rebuild, and this is the substantive
+correction of the day.** The nameless-artists entry above defended the deferral with "0.049 %
+of nodes, in a relative comparison between arms". **That is the reasoning for a random
+0.049 % and it is wrong here.** The measurements were already in P8b when I wrote it: blank
+names are **2.7× concentrated in the bottom popularity decile** — the stratum the diving arms
+aim at — they resolve to **F = 0** (maximal reach, satisfying C2 by construction and dragging
+C1/C3 toward passing), **P contains zero blank interiors**, and the A11 notability guard
+structurally cannot flag one. So it is a **bias with a known sign, absent from the control and
+present preferentially in the arms under test** — the "held constant, and why each is genuinely
+constant under the intervention" failure, the same shape as the `w_floor` catch that
+restructured this design.
+
+**The deferral is still correct; it is correct for a different reason.** It is safe *because
+the guards neutralise the exposure*, not because the exposure is small — remove a guard and it
+becomes unsafe immediately. Recorded as a row in §1.2's constants table whose "why" is a
+warning rather than a reason, which is the honest place for a term that is held constant by a
+guard rather than by nature.
+
+**The guard is now cell-level:** a scored cell containing a blank interior is dropped from
+**every arm or from none** (A13's rule, second cause), with a fail-loud default and the uniform
+drop as the **pre-registered** response — fixed before stage 1, not chosen after seeing which
+arm trips it. `verify_c2_guards.py` asserts the two properties the design turns on: the drop
+removes the cell from the **control** as well as the treatment, and the bias it replaces points
+toward passing.
+
+**A19 gates the blind listen** on zero blank-named interiors, with its response pre-registered:
+substitute from §2.3's ordered reserve applied to **both** arms; accept-and-record if the
+reserve is exhausted; **rebuild explicitly rejected**, because it changes the substrate and the
+listen would stop testing what the offline pass selected. A blank card has no name *and* no
+clip and would land preferentially on the candidate — a directional confound on the one
+measurement that cannot cheaply be re-run, and §6 already spends its "one burned listen" on
+Attack 2.
+
+**D4 fully discharged** (its C2-scoring-path remnant, by F2's fix). **A second exposure D4
+never named** — a blank name, which the notability flag cannot catch — is closed separately by
+A18.
+
+**The drop-vs-backfill deferral now has a first step and a success condition**, recorded in the
+pre-registration rather than executed: scan the archive for those 33 MBIDs before deciding.
+**Code reading already excludes the interesting reading** — `harvest_identities` iterates every
+archived response's rows, `_rows` filters nothing, and the rule is *prefer the first non-empty
+name*, so nothing in the build discards an available name. That downgrades the scan from
+decisive to confirmatory, and I said so rather than leaving the more attractive possibility
+open. It retains value as a falsifier: if those MBIDs never appear as rows at all, that
+contradicts their degree-28 presence in a mutual-kNN graph and something else is wrong. Two
+alternatives recorded as rejected while the reasoning is fresh — a placeholder name (makes them
+*searchable*, widening the blast radius) and filtering at API load (breaks the APG1 contract and
+the largest-connected-component guarantee that makes "no path" attributable to user exclusions
+alone).
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.

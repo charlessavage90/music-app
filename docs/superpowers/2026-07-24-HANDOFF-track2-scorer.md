@@ -15,7 +15,8 @@ Read the record first, where it and this note disagree the record wins:
 > **[`2026-07-23-repair-and-retune-execution-log.md`](2026-07-23-repair-and-retune-execution-log.md)**,
 > the "Track 2" section — in particular the tail entries from "Seams named before the sweep
 > is built" onward (A12, A13, A14, A15/scorer, A16, the two-sided residual).
-> Then **pre-registration §9** — the amendment index, now **A1–A16**.
+> Then **pre-registration §9** — the amendment index, now **A1–A19** (A17–A19 added
+> 2026-07-24 by the P8b harness review; still before any factorial arm).
 > `docs/README.md` classifies every document.
 
 ---
