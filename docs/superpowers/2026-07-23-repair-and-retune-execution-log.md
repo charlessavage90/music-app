@@ -2018,3 +2018,104 @@ pivotal, so a fame-currency floor cannot surface anything). In came the three th
 session must not misread — that R0 does **not** reach "the family is exhausted", that T1b's two
 best numbers disagree and the pessimistic one governs, and that the toll ran at half strength.
 Nothing net-new was added without something coming out.
+
+### PROCESS FINDING — the near-miss on stage 2, and the rule it attaches to (addendum, 2026-07-25)
+
+**Addendum to a closed record.** Track 2's result is not re-litigated here and nothing about it
+changes. This entry exists because the reasoning behind a near-miss lived only in conversation,
+and a rule without the narrative of what it is for does not transfer to the case it was not
+written for.
+
+**What nearly happened.** On getting the stage-1 null, this session **recommended skipping stage
+2**. Stage 2 then produced **T1b — the only coherent signal in fifteen arms**, and the finding
+that the floor device is never pivotal. Both would have been lost.
+
+#### The facts, separated from the inference
+
+**(a) §2.4's R0 read presupposes all fifteen arms, and points at none of the four unrun ones.**
+Its scope phrase is *"no arm, including corner X, moves C1's statistic materially"* — but R0 was
+**detectable after eleven**, because corner X is a stage-1 arm. Searching the whole R0 bullet for
+`T1`, `FL`, `stage 2`, `attach`, `unrun` and `four` returns **no match on any**. So the one
+section a session opens on getting a result was **silent about the four arms not yet run**.
+
+**(b) The retrieval trace at the decision point.** Between `score.py` emitting the stage-1 table
+and the report containing "Stage 2 is now questionable", this session retrieved **§2.4's R0
+bullet and nothing else** from the pre-registration — a `sed` range from the R0 line to the R1
+line, capped at 30 lines. **No other pre-registration section. No harness source read as text**
+(`paths.json`, `fame.json` and a log tail were read; `score.py` was *executed*, which imports
+`arms.py`, but no source file was retrieved).
+
+**(c) The controlling instruction is a subordinate clause.** What keeps the attachments alive is
+the tail of §1.4's rule for selecting W (lines 229–231):
+
+> *…if no cell moves C1's statistic in the right direction, W := A7 (the most aggressive cell)
+> **so the attachments still get tested.***
+
+The **main** clause of that rule is about *which cell becomes W*. This session **carried the main
+clause accurately from memory** — it wrote "R1's fallback picked W = A7 … the fallback firing as
+designed" — and the subordinate clause, the part that governs whether stage 2 happens at all, is
+what did not survive.
+
+**(d) `R1` names two distinct objects, and the retrieval surfaced the inapplicable one.** §1.4 R1
+is the **W-selection rule** (which contains the clause above). §2.4 R1 is a **result branch** —
+*"corner X moves, all tuned arms null"* — which **requires X to have moved.** X did not move
+(C1 −0.049). The `sed` range ran into the first line of the §2.4 R1 branch, so the only `R1` text
+retrieved at the decision point was the one that did not apply.
+
+**(e) The owner's question is what surfaced it.** He asked *"remind me what stage 2 is."* That
+forced a read from source, and the description contained its own refutation — two of them: every
+stage-1 arm is depth-independent by construction while F2 is a complaint *about* depth, and the
+attachments were the only depth-varying arms in the design. No new information arrived. **The
+correction depended on the owner happening to ask**, which is not a mechanism.
+
+#### What verification established, as fact
+
+Checked against the repo before being written down, because the reconstruction above is a
+document-based inference by a session that had not read the code:
+
+- **No run manifest exists.** **No amendment in A1–A19 states that all fifteen arms run
+  regardless of the stage-1 outcome.** Grepping *"all fifteen" / "all 15" / "fifteen arms" /
+  "15 arms" / "regardless of" / "must run" / "completion condition"* returns one hit (line 543)
+  and it is unrelated. The subordinate clause in (c) is the **only** instruction of its kind.
+- **The `R1` collision is real**, as described in (d).
+- **Four further collisions in the same document**, none previously recorded. **`A1`–`A7` are
+  both arm names** (line 232: *"R1 ranges over the eight factorial cells A0–A7"*) **and amendment
+  IDs** (§9) — a **seven-way** collision, wider than R1's. `A0` is arm-only; `A8`–`A19` are
+  amendment-only. **`C1`, `C2` and `C3` each name a §2.2 success criterion AND a Phase 1 defect**
+  — C1/C2 the clip defects (line 786), C3 the `w_floor`-no-op item (line 76: *"§4.4 deletes
+  `floor_relax_*` only at C3 landing"*). Checked and **not** collisions: `C4`, `F1`–`F6`, `D4`,
+  `D6`, `D7`, `O3`, `PR-A/B/C`, `T1`/`T1a`/`T1b`.
+- **Two near-collisions**, distinct from the above: bare **`P`** is the production arm while
+  `P1`–`P8b` are prerequisites; and **"stage"** carries two numbering systems — **Stage A / Stage
+  B** (17 occurrences, experiment phases, Stage B a separate future experiment) versus **stage 1 /
+  stage 2** (6 occurrences, run groups inside Stage A).
+- **Harness source uses `STAGE1` and `stage2` exclusively** for the run groups (`arms.py:86`,
+  `arms.py:116`, `run_arms.py:131` `--stage2`, `run_arms.py:232` `stage2_w`). **"Stage A" appears
+  in source only in module docstrings; "Stage B" appears nowhere in the arm-scorer source.** A
+  consulting session initially thought the Stage-A/stage-1 collision explained part of this and
+  **has since withdrawn that**; recorded for completeness, not as a cause.
+
+**The pre-registration was NOT edited and must not be.** Its value is that it is frozen; renaming
+an identifier post-hoc would damage the record. Every collision above is reported, not fixed.
+
+#### The rule this attaches to
+
+**A plan's branch structure is part of its pre-registration.** Skipping a stage the document
+specifies, after seeing a result, is a **protocol departure** — not a scheduling call — and it
+belongs in the same class as changing a threshold after seeing the baseline.
+
+**Why this was mis-filed, which is the transferable part.** `CLAUDE.md`'s decision table assigns
+"run counts and which cells to run" to the session. That is authority over methodology **not yet
+committed to**; it is not authority to cancel a run the pre-registration already specified. This
+session had spent the same day enforcing the identical discipline elsewhere — declining to loosen
+C2's threshold once production's baseline was visible, committing A17–A19 before any arm ran,
+fixing the response to a fired assertion in advance — and did not recognise the same rule when it
+arrived shaped like a schedule.
+
+**The diagnostic that would have caught it, and it is cheap:** *before recommending against a
+planned step, describe from source what it tests.* Here, describing stage 2 refuted the
+recommendation immediately. **If describing a thing refutes your recommendation about it, the
+recommendation was formed from a summary rather than from the thing.**
+
+**Where this rule should finally live is the owner's decision and is being handled separately.**
+No standing-layer change is proposed here.
