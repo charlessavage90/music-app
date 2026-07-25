@@ -40,7 +40,10 @@ criterion, no cap on length, no preference for a particular kind of intermediary
 This is the design's central choice and it is what keeps the work outside the pause:
 inserting an artist by any *new* rule would be scoring, and scoring is paused.
 
-Consequences accepted deliberately:
+Consequences accepted deliberately. **The two figures below come from a throwaway
+design-time prototype on a sample of 18 pairs, are owned by nothing, and must not be
+cited or restated** — they are here to show the shape of the trade, and anything
+resting on them needs its own measurement:
 
 - **Detour length varies.** Usually one stop; a sampled pair produced seven, because
   a chain of close matches can price below one distant jump. Not capped — the
