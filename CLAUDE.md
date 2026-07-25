@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |---|---|
 | **Which documents can I trust?** | [`docs/README.md`](docs/README.md) — the documentation map. It classifies every doc by role and names which are superseded. **Read it before citing anything in `docs/`.** |
 | **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks 27 prior claims upheld/overturned/unresolved. |
-| **What is the next action?** | **Owner's call — Track 2 is DONE and returned a NULL (R0), 2026-07-24.** All 15 arms scored; nothing adopted, no blind listen run. Read `docs/superpowers/2026-07-24-HANDOFF-track2-complete.md`, then the execution log `docs/superpowers/2026-07-23-repair-and-retune-execution-log.md` (Track 2 section, last four entries). Per pre-registration §2.4, R0 licenses a p99 ceiling-rescale probe and/or revisiting `cap_strategy` — each needs its own pre-registration; it does **not** license re-litigating `capfix` or weakening a threshold. Track 1 is DONE and adopted. |
+| **What is the next action?** | **Owner's call — Track 2, then Track 2F, both returned nulls; the ceiling ordering measurement came back WIDE, 2026-07-25.** Read `docs/superpowers/2026-07-25-HANDOFF-track2f-and-headroom.md`, then the execution log `docs/superpowers/2026-07-23-repair-and-retune-execution-log.md` (last two entries). **Nothing adopted, no shipped code changed, no blind listen run, no threshold touched.** Track 2F re-ran the ceiling toll at full strength — the previous handoff's own recommendation, now **executed, so do not run it again** — and the toll mechanism is exhausted with its bound holding. What that null does **not** close is the ceiling's *ordering*, which is untestable router-side; that was then measured read-only and is WIDE. So the live candidate is a builder-side p99 rescale — **but path-quality work is PAUSED by owner decision, 2026-07-25, and the rescale is NOT pre-registered: do not start it.** Resuming path work is his trigger, never a session's. **Next is Gate 1 leftovers, then Gate 2 (friends & family):** the two clip defects — *plays the wrong artist*, and *clips die after about an hour* (filed as C1/C2 in `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md`, **not** the Track 2 success criteria of the same names) — plus the four frontend UX items listed beside them there. Parked path-work state, each item with what it needs before it moves: the handoff's §0. Track 1 is DONE and adopted. |
 | **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `top1pct_degree_frac`, "payload", `degree_hub_penalty`, `w_degree_hub` are all top-1%-by-*degree*; they were named `hubfrac` / `hub_penalty` / `w_hub` until 2026-07-23, and older documents and every script under `builder/analysis/` still say so — mapping in `builder/analysis/README.md`); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile** — `pop_raw` is a value, never a rank; see §2.12 for the extent of the gap. Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
@@ -336,9 +336,10 @@ working" gets it exactly backwards.
 > careful.** Retire the session at the next stopping point, per `closeout`'s mid-flight
 > scaling (A2-mid, D1-mid) and `session-start`'s cold-read check.
 
-Both rituals trigger on **work** state — starting, finishing. Nothing triggers on
-**session** state, so this is the one boundary that has to be noticed deliberately rather
-than arriving on schedule. That asymmetry is why it has twice been the owner who spotted it.
+`closeout` triggers on **work** state — finishing; `session-start` triggers on the owner
+asking. Nothing triggers on **session** state, so this is the one boundary that has to be
+noticed deliberately rather than arriving on schedule. That asymmetry is why it has twice
+been the owner who spotted it.
 
 **How to ask for a plan review.** "Review this plan" finds prose problems. **"Check this
 plan's claims against the repo"** finds the confounds. Every high-value finding in Phase 2
@@ -351,10 +352,13 @@ Both are mechanical and cheap by design — they ask *did we leave a mess* and *
 oriented*, never *did we do the right thing*. That second question is a review, and
 reviews are rare and targeted here.
 
-- **`session-start`** (`.claude/skills/session-start/`) — run it **before** doing
-  substantive work in a fresh session: what governs this work and what supersedes what,
-  which decisions are closed, whether another session is live in this tree, and which
-  gates would stop you. Also carries the two checks that can only fire at the start —
+- **`session-start`** (`.claude/skills/session-start/`) — **the owner invokes this; a
+  session never runs it on its own initiative or suggests it.** Many sessions opened here
+  are not builders, and he starts builders with it instinctively, so self-triggering only
+  ever produced false positives to be argued out of. When he does run it: what governs
+  this work and what supersedes what, which decisions are closed, whether another session
+  is live in this tree, and which gates would stop you. Also carries the three checks that
+  can only fire at the start — cold-reading a mid-flight handoff back before acting on it,
   the cheapest-experiment scope check, and verifying one claim before building on a
   report.
 - **`closeout`** (`.claude/skills/closeout/`) — run it **after** finishing significant

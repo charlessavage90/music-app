@@ -282,7 +282,7 @@ def d0_regression(arm, doc, pairs):
     return out
 
 
-def one_column_contrasts(doc, F, analysis_pairs, arm_defs):
+def one_column_contrasts(doc, F, analysis_pairs, arm_defs, package_contrasts=None):
     """P8b F9: compute each arm against ITS OWN isolating baseline, not only against P.
 
     §1.4 is explicit that attribution to a knob comes only from the chain of comparisons
@@ -298,7 +298,8 @@ def one_column_contrasts(doc, F, analysis_pairs, arm_defs):
     directly comparable to the C1 column, just re-referenced.
     """
     keys, paths = doc["node_mbids"], doc["paths"]
-    from arms import PACKAGE_CONTRASTS
+    if package_contrasts is None:
+        from arms import PACKAGE_CONTRASTS as package_contrasts
 
     def delta(arm, base):
         """C1's paired-cell statistic, re-referenced from P to `base`."""
@@ -333,7 +334,7 @@ def one_column_contrasts(doc, F, analysis_pairs, arm_defs):
     # to be visible AND unattributable; A16's rule is that a disclaimer nothing reads
     # is not a control, so they are reported with the warning attached to the figure.
     package = {f"{a} vs {b}": {**delta(a, b), "cannot_attribute": why}
-               for (a, b), why in PACKAGE_CONTRASTS.items() if present(a, b)}
+               for (a, b), why in package_contrasts.items() if present(a, b)}
 
     return {"isolating": isolating, "package": package}
 
@@ -366,6 +367,10 @@ def main() -> int:
                          "PRE-REGISTERED response: remove the affected cells from ALL "
                          "arms uniformly and report them. Decided before stage 1 ran, "
                          "not after seeing which arm trips it.")
+    ap.add_argument("--arms-module", metavar="PY",
+                    help="Track 2F: take arm definitions (the isolating chain and the "
+                         "package list) from this file rather than from `arms.py`. Must "
+                         "be the same module the run used. Additive and default off.")
     ap.add_argument("--also-drop", metavar="PATHS_JSON",
                     help="union another run's dropped_cells_d7 into this one before "
                          "scoring. This is the re-score `run_arms.py --stage2` asks for "
@@ -445,16 +450,35 @@ def main() -> int:
         c6["gap_vs_P_points"] = 100.0 * (pcov - c6["coverage"])
 
     from arms import STAGE1, R1_ELIGIBLE, stage2
-    W, why = choose_W(results, R1_ELIGIBLE)
+    packages = None
 
-    # Arm definitions for whichever stage this file holds. Stage 2's attachments are not
-    # in STAGE1, so the isolating chain for them has to be rebuilt from the recorded W.
-    arm_defs = list(STAGE1)
-    stage2_w = doc.get("stage2_w")
-    if stage2_w:
-        w_cfg = next(a.cfg for a in STAGE1 if a.name == stage2_w)
-        arm_defs += stage2(stage2_w, w_cfg)
-    contrasts = one_column_contrasts(doc, F, analysis, arm_defs)
+    if args.arms_module:
+        # Track 2F: the run used externally-defined arms, so the isolating chain and the
+        # package list must come from the SAME module that defined them -- reading them
+        # from `arms` would silently drop every new arm out of the attribution table,
+        # which is the "disclaimer nothing reads" failure one level down (A16).
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("_arms_module", args.arms_module)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        arm_defs = mod.build_arms({a.name: a for a in STAGE1})
+        packages = getattr(mod, "PACKAGE_CONTRASTS", {})
+        # R1 selected W in Track 2 and W is an INPUT here, not an output. Running the
+        # rule again on a different arm set would print a selection nobody asked for.
+        W, why = doc["arms"][0], "not applicable: W is an input to this run, not selected"
+        if "A7" in doc["arms"]:
+            W, why = "A7", "W fixed as Track 2's R1 fallback; not re-selected here"
+    else:
+        W, why = choose_W(results, R1_ELIGIBLE)
+        # Arm definitions for whichever stage this file holds. Stage 2's attachments are
+        # not in STAGE1, so the isolating chain for them is rebuilt from the recorded W.
+        arm_defs = list(STAGE1)
+        stage2_w = doc.get("stage2_w")
+        if stage2_w:
+            w_cfg = next(a.cfg for a in STAGE1 if a.name == stage2_w)
+            arm_defs += stage2(stage2_w, w_cfg)
+    contrasts = one_column_contrasts(doc, F, analysis, arm_defs, packages)
 
     print(f"\n{'arm':<5} {'C1 meandF':>10} {'C1 frac':>8} {'C2':>6} {'C3 drop':>8} "
           f"{'C4 int':>7} {'cov%':>6}  gates")
@@ -497,7 +521,8 @@ def main() -> int:
                 shown = ", ".join(fame_doc["names"].get(m, m) for m in mbids)
                 print(f"    {pair}: {shown}")
 
-    print(f"\nR1 selects W = {W}  ({why})")
+    label = "W" if args.arms_module else "R1 selects W ="
+    print(f"\n{label} {W}  ({why})")
 
     Path(args.out).write_text(json.dumps(
         {"b_unk_fame_units": B, "analysis_pairs": analysis,

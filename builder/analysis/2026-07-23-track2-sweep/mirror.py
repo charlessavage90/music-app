@@ -22,6 +22,7 @@ Knobs implemented, per pre-registration §1.3–§1.4 as amended:
   S-mag  `w_sim`
   F      `floor_mode`     raw | pctl | off, with the pctl relax constant from A2
   toll   `toll_s`         additive toll on score-1.0 edges (amendment A1)
+         `toll_hops`      the same toll in multiples of `w_hop` (Track 2F)
   guard  `guard_min_intermediary`  guard G (§4); OFF for the verification step
 """
 
@@ -74,6 +75,25 @@ class SweepConfig:
     # Amendment A1: additive toll on ceiling-saturated edges. None = off.
     # Active toll magnitude is w_sim * (1 - toll_s).
     toll_s: float | None = None
+    # Track 2F: the SAME knob, specified in the currency §1.4 pre-registered it in.
+    # `toll_s` is w_sim-dependent, so one value means two different tolls under two
+    # different W -- which is exactly what A17(b) caught after the fact, §1.4's
+    # 7.5x/30x figures having been quoted for an S-mag of 3.0 while W carried 1.5.
+    # This names its own basis and is w_sim-independent: toll = toll_hops * w_hop.
+    # Mutually exclusive with toll_s; None = off, so production is untouched.
+    #
+    # NB for reproduction arms: the two specifications are NOT bit-identical at the
+    # same nominal magnitude (1.5*(1-0.80) = 0.29999999999999993 against
+    # 15*0.02 = 0.30000000000000004), so an arm reproducing a committed toll_s run
+    # must keep toll_s. Track 2F pre-registration §4, run order step 3.
+    toll_hops: float | None = None
+
+    def __post_init__(self) -> None:
+        if self.toll_s is not None and self.toll_hops is not None:
+            raise ValueError(
+                "toll_s and toll_hops are two specifications of one knob; set one. "
+                f"got toll_s={self.toll_s}, toll_hops={self.toll_hops}"
+            )
 
     # Guard G (§4). OFF for mirror verification, then enabled uniformly (G5a).
     guard_min_intermediary: bool = False
@@ -174,8 +194,13 @@ def _dijkstra(
             floor_val = _relaxed_floor(base, excludes, cfg.floor_relax_known,
                                        cfg.floor_relax_dislike)
 
-    toll_on = cfg.toll_s is not None
-    toll = cfg.w_sim * (1.0 - cfg.toll_s) if toll_on else 0.0
+    toll_on = cfg.toll_s is not None or cfg.toll_hops is not None
+    if cfg.toll_hops is not None:
+        toll = cfg.toll_hops * cfg.w_hop
+    elif cfg.toll_s is not None:
+        toll = cfg.w_sim * (1.0 - cfg.toll_s)
+    else:
+        toll = 0.0
 
     dist = {source: 0.0}
     prev: dict[int, int] = {}

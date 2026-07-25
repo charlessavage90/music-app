@@ -2127,3 +2127,229 @@ recommendation was formed from a summary rather than from the thing.**
 
 **Where this rule should finally live is the owner's decision and is being handled separately.**
 No standing-layer change is proposed here.
+
+### TRACK 2F — the ceiling toll at full strength: TFR0, but the bound holds this time (2026-07-25)
+
+**Pre-registration committed at `8074a32` before any arm ran** —
+`specs/2026-07-25-track2f-toll-full-strength-preregistration.md`. Artifact `4cb84ef9…b061dc8`,
+unchanged. Figures owned by `builder/analysis/2026-07-25-track2f-toll-ladder/`.
+
+**What was run.** A17(b) recorded that the toll's magnitude is `w_sim`-dependent, so `T1a`/`T1b`
+ran at 3.75× / 15× `w_hop` rather than §1.4's intended 7.5× / 30×, and the intended top had
+never been tested. Track 2F is a dose-response ladder on `W = A7`: 0, 3.75, 7.5, 15, 30, 60, 120
+and 7,500 × `w_hop`, the last as a ban corner. 10 arms, 461 s.
+
+**The harness change and its three proofs.** `mirror.py` gained `toll_hops` (toll =
+`toll_hops × w_hop`), additive and default-off, fixing A17(b) at its root — `toll_s` is
+`w_sim`-dependent, `toll_hops` names its own basis. `verify_mirror.py` passed byte-identical on
+all 212 cells; **`P`, `A0`, `A7`, `T1a_rpt` and `T1b_rpt` reproduced the committed
+`paths_stage2.json` byte-identically** on node ids and names, so the reproduction gate
+(`TFR5`) did not fire and every Track 2F figure is directly comparable to `scores_stage2.json`.
+The reproduction arms deliberately keep the original `toll_s` spec because the two forms are
+not bit-identical at the same nominal magnitude.
+
+**Result: `TFR0`, null on the primary criterion.** `M*` — the best any toll price managed, i.e.
+how much less famous the middle of a deeply-bypassed journey got at whichever price worked
+best — is **−0.198** (`TF2`, 30×), against the
+pre-registered −0.25 continuation trigger and `C1`'s −1.0 bar. **Nothing adopted, no shipped
+code changed, no blind listen run, no threshold touched.** Recorded plainly: this is a
+*near-boundary* null — 79 % of the way to the "partial" trigger — and saying so is honest
+reporting, while re-reading it as partial would be the threshold-shopping the pre-registration
+exists to prevent.
+
+**`TFR4`'s bound check HOLDS, and this is the difference from Track 2.** The ladder is monotone
+from 7.5× upward without exception (the single inversion is `T1a_rpt` vs `A7`, −0.0518 against
+−0.0525, at the magnitude already recorded as inert), and `TFX` is tied-lowest on `C1` and
+identical to `TF2` on every other criterion. Track 2's `X` failed exactly this check (A17(c)),
+which forced its null down to "these fifteen configurations". **Here the corner works, so the
+null may be stated at mechanism strength: tolling ceiling edges cannot move the primary outcome
+past −0.198 at any price.**
+
+**`TF-D1` is the finding that explains everything else.** Production takes **85.42 % of its hops
+on ceiling edges** (334 of 391). The toll drives that down monotonically — 82.84 → 65.51 → 46.67
+→ 30.58 → **28.86 %** — and then stops dead: `TF2`, `TF3`, `TF4` and `TFX` are all 144 of 499,
+identical. At 7,500× the router pays 150 cost units per hop rather than detour and still takes
+them, because **there is no alternative to take**. 144 forced hops over 72 scored cells is
+exactly 2.0 per path — one leaving a saturated endpoint, one arriving at another, which is the
+toll-calibration README's Q4 (eight of the 24 endpoints fully saturated) confirmed to the hop.
+**The ladder's limit is set by graph structure, not by price, and §1.4's intended top of 30× is
+exactly where it lands** — the magnitude was chosen correctly and everything past it is wasted.
+
+**The arm is better than production on everything except the primary criterion.** `TF2` scores
+`C2` **5/8 against production's 4/8** — the first arm in Track 2 or 2F to *beat* production on
+absolute reach, where every stage-1 arm went backwards to 1–2/8 — passes `C4` at 7.12 interiors
+against 5.38, improves `C3` to 0.232 against 0.164 (bar is 0.5, so still a fail), and carries the
+highest proxy coverage at 97.7 %. **The Attack 2 worry the Track 2 handoff carried forward does
+NOT survive to full strength:** `T1b` reached deeper in *fewer* pairs than production (3/8), the
+insular-cluster signature; at full strength the arm reaches *wider* (5/8), which is the opposite.
+
+**Guards all clean.** Zero blank-named interiors, so §0's directional non-constant never fired
+and A13/A18's uniform drop was not invoked. Zero guard-infeasible cells, as predicted — a toll
+re-prices edges and never removes them. No arm's `C2` pass rests on a flagged
+potentially-notable unmatched interior, so A11's d15/d20 guard is discharged without spending
+the owner's glance. Held-out set deliberately unread: it confirms a winner's direction and
+there is no winner.
+
+**One correction to my own working, recorded because the class matters.** I first read
+`C5_d0_changes` off `results` in `scores.json`, got `[]` from a `.get` default, and briefly
+believed no d0 path had changed at any magnitude. The key lives under `diagnostics`; d0 changes
+on **5 of 8 pairs**. Caught by checking the paths directly rather than trusting the field — the
+"verify one claim" habit applied to my own output, and the reason the C5 inspection in the
+README is real rather than a vacuous pass.
+
+**What this licenses, and the boundary that matters most.** `TFR0` as pre-registered: the
+ceiling's **cheapness** is not what holds paths in famous territory, and recommending against a
+rebuild *on that hypothesis*. It explicitly does **not** license "the p99 ceiling is fine".
+§1 bound 1 of the pre-registration is verified in the builder — `pipeline.py` stores
+`min(1.0, …)`, so the artifact retains no information distinguishing saturated edges from one
+another — which means **the ordering half of the ceiling hypothesis is untestable router-side
+and is untouched by this null.** `TF-D1` now gives that half a measured target rather than a
+hunch: 28.86 % of hops that no price can avoid, against 85 % in production today.
+
+**Where I would go next, stated as a position rather than a menu.** Before any rebuild, measure
+the **ordering headroom** from the archive, read-only: for the edges the p99 clip collapses to
+1.0, how much do their *unclipped* strengths actually differ? If they are nearly all equal, a
+rescale re-ranks nothing and the rebuild is pointless; if they span a wide range, the rescale has
+real headroom and the case is made before an artifact changes. The archive is present locally at
+`builder/scratch/graph-archive`, so this is a read-only measurement rather than a rebuild — the
+cheapest-experiment-first rule applied to the decision this null actually raises. It needs its
+own pre-registration only if it becomes an arm; as a structural measurement of the artifact's
+inputs it is the same class as the toll-calibration directory.
+
+**Track 2F does not touch F2's "progressively" clause and must not be read as doing so.** Every
+arm here is depth-independent by construction; `C3` fails on all of them. The depth carrier is
+still an open problem and the only depth-graduated device in the cost function is still dead.
+
+### ORDERING HEADROOM — the clip erases 10x w_hop, and the defect finally has a mechanism (2026-07-25)
+
+**Decision rule committed at `0e39522` before the measurement ran**; figures owned by
+`builder/analysis/2026-07-25-ceiling-ordering-headroom/`. Not an experimental arm — no path
+routed, nothing adoptable, same class as the toll-calibration directory — but it feeds a
+rebuild recommendation, so the threshold preceded the number and the git order is the evidence.
+
+**Both self-checks passed before any figure was read.** The in-memory rebuild from the archive
+**serialises to `4cb84ef9…b061dc8`** — it reproduces the adopted artifact exactly, so this
+measures the graph the app actually routes on rather than one of the several non-interchangeable
+graphs in `builder/scratch/`. And the unclipped expression agrees with the real `rescale_scores`
+on all 3,951,579 unsaturated edges, so the only difference is the clip. **No artifact was
+written** — `serialise()` was called to hash and the bytes discarded, so `acceptance.py`'s
+rebuild block is untouched.
+
+**Verdict: WIDE, by a factor of ten.** Pre-registered threshold was a median per-node ceiling
+cost spread of 1 × `w_hop`; measured **10.01 ×** over 1,201 nodes, **14.50 ×** over the 303
+fully saturated nodes, **13.51 ×** over the 22 resolved pre-registered endpoints — of which
+**100 % exceed 7.5 × `w_hop`**, a magnitude Track 2F proved changes routing (`TF1`, −0.139).
+Only 1.00 % of directed edges are saturated, which looks negligible until you see *where*.
+
+**A definitional reconciliation, recorded so it does not read as a contradiction.** This finds
+**21 of 22** endpoints fully saturated; the toll-calibration README's Q4 says **eight**. Q4
+counts nodes whose **50** neighbours are all at the ceiling; this counts nodes whose **every**
+exit is, at whatever degree. Both correct under their own definition, and the broader one is
+the routing-relevant one — Johnny Cash at 19/19 has exactly as little similarity signal to
+route on as The Beatles at 50/50.
+
+**The mechanism, and it is the clearest statement of the defect this project has reached.** At
+a fully saturated node every exit carries `w_sim · (1 − 1.0) = 0`, so the similarity term
+contributes **nothing to the choice**; `w_degree_hub` is 0 by default and avoidance is empty on
+a `known` walk, so what discriminates 50 candidates is the **popularity** terms alone. **At
+exactly the famous artists a journey starts and ends at, the router cannot see which neighbour
+is most similar, and routes on popularity instead.** That is a mechanistic account of why paths
+stay in famous territory — and it is precisely the half no router-side knob can reach, which is
+why Track 2F's toll bottomed out at 2.0 structurally forced ceiling hops per journey. §2.12's
+"cost-function problem" diagnosis and the graph-structure reading are not competing after all:
+the cost function is starved of the signal at the nodes that matter.
+
+**Disanalogy stated rather than buried:** a toll *adds* the same cost to every ceiling edge; a
+rescale *redistributes* among them. Comparable magnitude, different operation. This calibrates
+the size of what is being erased; it does not predict a rescale's effect.
+
+**What it licenses:** pre-registering the builder-side p99 rescale as a probe with a real
+expected effect size, at the rebuild seam alongside the p99-shift measurement and the
+blank-name remediation. **It does not license adoption, and change is not improvement** — the
+probe still needs its own pre-registration, the offline gates, and a blind listen. It says
+nothing about F2's depth clause; a rescale is static, like every Track 2F arm. And it does not
+size the rescale's blast radius: a new divisor moves **every** score in the graph, not only the
+1.00 % measured here, which is exactly what the queued p99-shift measurement is for.
+
+### Closeout at the Track 2F / headroom seam (2026-07-25)
+
+Full-ritual seam closeout — the work ran an experiment and touched the cost-function
+evaluation apparatus. Distillation of what is not already in the two entries above.
+
+**A4, the default-flip check: inapplicable, and stated rather than skipped.** Track 2F added
+no shipped config knob. It added `toll_hops` to `mirror.py`, which is the offline sweep
+harness, not `ApiConfig` — default `None`, and production is provably untouched
+(`verify_mirror.py` byte-identical on 212 cells). Nothing was adopted, so there is no default
+to flip and no loser to delete.
+
+**B2, reachability: three new modules, none imported by shipped code, all reachable by
+documented command.** `toll_ladder.py` is loaded **by path** via `--arms-module`, so a grep
+for the module name finds no inbound import — an orphan by static analysis and not by fact.
+The ladder README's reproduce block previously abbreviated its last three steps to a comment;
+it now writes them out, because a command block is the only entry point those files have.
+
+**B3, vacuous-check on this work's own gates — both are real.** The reproduction gate was
+tested against pairs that genuinely differ (`TF2` vs `T1b`, `TF2` vs `FL1`, `A7` vs `T1b`) and
+reported DIFFER on all three while reporting IDENTICAL on the true pair. The formula gate was
+tested by perturbing the unclipped divisor by 0.1 %; it fired. A gate that only ever passes is
+worth nothing, and these two carry the entire headroom conclusion.
+
+**B4 caught one thing in this session's own work, and it was clean.** `diagnostics.py` pools
+interior fame behind `if mbid in fame`, which would silently drop unmatched artists and bias
+pooled fame **upward for exactly the arms that reach furthest** — the arms whose success is
+measured by reaching artists the proxy cannot see. Checked rather than assumed: the fame map
+holds 397 of 397 nodes, with the 5 unmatched present at the floor per A11. The filter is a
+defensive no-op and no bias exists. Recorded because the defect it would have been is the
+kind that never announces itself.
+
+**B5 found the real one.** `2026-07-24-HANDOFF-track2-complete.md` still said the toll "has
+never run at full strength" and recommended running it — both false as of this session. Fixed
+with a banner **and** inline marks at §2 and §4, per `docs/README.md`'s rule that a reader
+landing mid-document never sees the banner.
+
+**B1, the doc audit, found two HIGH defects this session had not seen.** Both were
+status staleness at entry points: `docs/README.md`'s "Current state" prose and `CLAUDE.md`'s
+orient table both still described Track 2's null as the latest state, while the role table
+below them already listed Track 2F — newer information sitting *after* older information in
+the same file. Both fixed. It also flagged one MEDIUM: a bare `M*` in this log with no
+plain-language expansion, now expanded inline. It confirmed what this session had asserted
+and could not self-check: no `TF`-series identifier collides with any committed identifier,
+every `TFR` branch names the run state it presupposes, `ml-graph-analyst.md` is current
+against `pathfinding.py`, and **the 21-vs-8 endpoint reconciliation holds** — the two
+directories use different definitions of "fully saturated" and both are correct under their
+own. **The audit was worth running at a seam where the session believed the record was
+clean**, which is the pattern the skill names.
+
+**D6 — the standing context layer, measured against `main` (`da5080d`).**
+
+| file | main | now | delta |
+|---|---|---|---|
+| `CLAUDE.md` | 540 | 544 | **+4** |
+| `.claude/skills/session-start/SKILL.md` | 201 | 226 | **+25** |
+| `.claude/skills/closeout/SKILL.md` | 516 | 516 | 0 |
+| **in-repo total** | **1,257** | **1,286** | **+29** |
+
+`memory/` (outside git, so no diff can see it): **404 lines** — the figure to diff against at
+the next closeout, and it gained one entry this session.
+
+**Nearly all of the +29 is another session's work, not Track 2F's.** A concurrent consulting
+session, scoped to skills/agents/hooks, made `session-start` owner-invoked only and added a
+session-naming section; this session landed those commits because it owned commits in the
+tree, and reported the cost in each commit message per the budget rule, since the authoring
+session was not present to report it. **Track 2F's own contribution to this layer is +1
+line** — the `-builder` naming suffix, owner-instructed. `.claude/agents/consultant.md` (+183)
+is **not** in this layer: an agent definition loads on invocation, not into every session.
+**The +29 is the owner's to keep or reject; he has it in the diff and was told at each step.**
+
+**D3, provenance.** Every conclusion in both entries above is against artifact
+`4cb84ef9…b061dc8`, asserted by sha256 in-script before each run. The headroom measurement
+additionally *re-derived* that checksum from the archive, which is the strongest form of
+artifact identity this project has recorded: the archive at `builder/scratch/graph-archive`
+(75,000 responses) reproduces the adopted artifact exactly under `BuilderConfig()` defaults.
+**No artifact was written** — `serialise()` was called to hash and the bytes discarded — so
+`acceptance.py`'s rebuild block is untouched and still enforcing.
+
+**D4, suites, run rather than remembered:** builder 115 passed, api 120 passed, frontend 31
+passed across 11 files. No test was added by this work and none needed changing.
+
+**D2 is inapplicable:** the graph did not change, so the committed fixtures are not stale.

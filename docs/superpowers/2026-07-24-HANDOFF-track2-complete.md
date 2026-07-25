@@ -1,5 +1,13 @@
 # HANDOFF — Track 2 complete, result R0 (null), 2026-07-24
 
+> **⚠ PARTLY SUPERSEDED 2026-07-25 by
+> [`2026-07-25-HANDOFF-track2f-and-headroom.md`](2026-07-25-HANDOFF-track2f-and-headroom.md).**
+> **Track 2's own result is untouched and this remains the record of it.** What is stale is
+> everything this note says about *what happens next*: its §4 recommendation was executed
+> (Track 2F), and its §2 item 3 — "the toll has never run at full strength" — is no longer
+> true. Superseded claims are marked **inline** at §2 and §4, not only here, because a reader
+> landing mid-document never sees this banner.
+
 **Role: ACTIVE, short-lived by design.** Written at a **clean seam**: the Track 2 sweep ran to
 completion, returned a null, and nothing was adopted. Supersedes
 [`2026-07-24-HANDOFF-track2-scorer.md`](2026-07-24-HANDOFF-track2-scorer.md), whose open unit
@@ -51,7 +59,12 @@ the ordinary `session-start`; no cold-read-back is owed.
   production** (3/8 vs 4/8), because it concentrates them in fewer pairs. That is **Attack 2's
   signature** (the insular-cluster dive), and C2 is the criterion encoding what the owner asked
   for. Carry this into any follow-up.
-- **The toll ran at HALF its intended strength and its top is untested.** Per A17(b), because W
+- **⚠ RESOLVED 2026-07-25 — the toll has now run at full strength (Track 2F); the claim below
+  is history, not an open item.** It ran to 30× `w_hop` and beyond, to a ban corner at 7,500×.
+  Outcome `TFR0`, still a null on the primary criterion, but the ladder **saturates exactly at
+  30×** and its bound holds. Figures: `builder/analysis/2026-07-25-track2f-toll-ladder/`.
+  *Original text follows.* **The toll ran at HALF its intended strength and its top is
+  untested.** Per A17(b), because W
   = A7 carries `w_sim` 1.5 rather than 3.0, the magnitudes were 3.75× and 15× `w_hop`, not
   §1.4's 7.5× and 30×. The mechanism that produced the only signal has never run at full
   strength.
@@ -64,6 +77,13 @@ explicitly does **not** license re-litigating the `capfix` adoption, mutual k-NN
 §4/§4.1, shipping an arm anyway, or weakening a threshold.
 
 **What I would do if continuing** (not "the owner's call" — he can argue with a position):
+
+> **⚠ BOTH STEPS BELOW ARE DONE, 2026-07-25 — do not execute them again.** Step 1 ran as
+> Track 2F and returned `TFR0`, a null whose bound holds. Step 2's precondition was then
+> tested read-only instead of by rebuild: the ordering headroom came back **WIDE**, so the
+> builder-side rescale is now well-motivated but still un-pre-registered. Current position:
+> [`2026-07-25-HANDOFF-track2f-and-headroom.md`](2026-07-25-HANDOFF-track2f-and-headroom.md).
+> *Original text follows.*
 
 1. **Re-test the toll at its intended magnitude first**, in the router. Cheap, needs no rebuild,
    and it tells you whether the ceiling hypothesis has more in it than 15× showed. If a full-

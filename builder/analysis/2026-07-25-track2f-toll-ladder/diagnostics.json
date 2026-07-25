@@ -1,0 +1,106 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "analysis_pairs": [
+  "Miles Davis -> Daft Punk",
+  "The Shins -> Wishbone Ash",
+  "Metallica -> Taylor Swift",
+  "Radiohead -> The Beatles",
+  "Muse -> Coldplay",
+  "Madonna -> Bob Dylan",
+  "Pink Floyd -> Aphex Twin",
+  "Nirvana -> CROOVE"
+ ],
+ "length_flag_trigger": "mean interiors > 2x P (author's reporting trigger; WHAT-GOOD value 3 holds no threshold)",
+ "by_arm": {
+  "P": {
+   "TF_D1_ceiling_hops": 334,
+   "TF_D1_total_hops": 391,
+   "TF_D1_ceiling_frac": 0.8542199488491049,
+   "TF_D2_mean_interiors_d_ge_10": 5.375,
+   "TF_D2_max_interiors_d_ge_10": 11,
+   "pooled_median_interior_fame": 5.895914026219389,
+   "pooled_mean_interior_fame": 5.350628543289395
+  },
+  "A0": {
+   "TF_D1_ceiling_hops": 333,
+   "TF_D1_total_hops": 390,
+   "TF_D1_ceiling_frac": 0.8538461538461538,
+   "TF_D2_mean_interiors_d_ge_10": 5.375,
+   "TF_D2_max_interiors_d_ge_10": 11,
+   "pooled_median_interior_fame": 5.895914026219389,
+   "pooled_mean_interior_fame": 5.346230676512736
+  },
+  "A7": {
+   "TF_D1_ceiling_hops": 251,
+   "TF_D1_total_hops": 303,
+   "TF_D1_ceiling_frac": 0.8283828382838284,
+   "TF_D2_mean_interiors_d_ge_10": 3.5833333333333335,
+   "TF_D2_max_interiors_d_ge_10": 8,
+   "pooled_median_interior_fame": 5.9571147755648886,
+   "pooled_mean_interior_fame": 5.218919129041903
+  },
+  "T1a_rpt": {
+   "TF_D1_ceiling_hops": 207,
+   "TF_D1_total_hops": 316,
+   "TF_D1_ceiling_frac": 0.6550632911392406,
+   "TF_D2_mean_interiors_d_ge_10": 3.7916666666666665,
+   "TF_D2_max_interiors_d_ge_10": 9,
+   "pooled_median_interior_fame": 5.944053286097953,
+   "pooled_mean_interior_fame": 5.254790080042703
+  },
+  "TF1": {
+   "TF_D1_ceiling_hops": 175,
+   "TF_D1_total_hops": 375,
+   "TF_D1_ceiling_frac": 0.4666666666666667,
+   "TF_D2_mean_interiors_d_ge_10": 5.083333333333333,
+   "TF_D2_max_interiors_d_ge_10": 15,
+   "pooled_median_interior_fame": 5.834663535475876,
+   "pooled_mean_interior_fame": 5.22501945054066
+  },
+  "T1b_rpt": {
+   "TF_D1_ceiling_hops": 148,
+   "TF_D1_total_hops": 484,
+   "TF_D1_ceiling_frac": 0.30578512396694213,
+   "TF_D2_mean_interiors_d_ge_10": 6.541666666666667,
+   "TF_D2_max_interiors_d_ge_10": 14,
+   "pooled_median_interior_fame": 5.683797140744668,
+   "pooled_mean_interior_fame": 5.244103067208094
+  },
+  "TF2": {
+   "TF_D1_ceiling_hops": 144,
+   "TF_D1_total_hops": 499,
+   "TF_D1_ceiling_frac": 0.28857715430861725,
+   "TF_D2_mean_interiors_d_ge_10": 7.125,
+   "TF_D2_max_interiors_d_ge_10": 14,
+   "pooled_median_interior_fame": 5.681864183926106,
+   "pooled_mean_interior_fame": 5.263548146385753
+  },
+  "TF3": {
+   "TF_D1_ceiling_hops": 144,
+   "TF_D1_total_hops": 499,
+   "TF_D1_ceiling_frac": 0.28857715430861725,
+   "TF_D2_mean_interiors_d_ge_10": 7.125,
+   "TF_D2_max_interiors_d_ge_10": 14,
+   "pooled_median_interior_fame": 5.681864183926106,
+   "pooled_mean_interior_fame": 5.263157301135489
+  },
+  "TF4": {
+   "TF_D1_ceiling_hops": 144,
+   "TF_D1_total_hops": 499,
+   "TF_D1_ceiling_frac": 0.28857715430861725,
+   "TF_D2_mean_interiors_d_ge_10": 7.125,
+   "TF_D2_max_interiors_d_ge_10": 14,
+   "pooled_median_interior_fame": 5.685730097563229,
+   "pooled_mean_interior_fame": 5.263830055297656
+  },
+  "TFX": {
+   "TF_D1_ceiling_hops": 144,
+   "TF_D1_total_hops": 499,
+   "TF_D1_ceiling_frac": 0.28857715430861725,
+   "TF_D2_mean_interiors_d_ge_10": 7.125,
+   "TF_D2_max_interiors_d_ge_10": 14,
+   "pooled_median_interior_fame": 5.681864183926106,
+   "pooled_mean_interior_fame": 5.263695813306065
+  }
+ }
+}
