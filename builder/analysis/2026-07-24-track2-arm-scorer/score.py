@@ -47,6 +47,53 @@ C3_DROP_MIN = 0.5
 C4_SLACK = 1.0
 C1_DEPTHS = (10, 15, 20)
 C2_DEPTHS = (15, 20)
+C3_DEPTHS = (5, 20)
+# Every depth some criterion reads. The blank-name assertion below is scoped to these:
+# a blank interior at an unscored depth cannot bias any statistic.
+SCORED_DEPTHS = tuple(sorted(set(C1_DEPTHS) | set(C2_DEPTHS) | set(C3_DEPTHS)))
+
+
+def blank_scored_cells(doc) -> dict[str, list[str]]:
+    """Cells whose scored interiors include a blank-named node. P8b F8's assertion.
+
+    **Why a CELL and not a NODE.** The tempting fix is to drop the blank node from the
+    statistic. That is silently directional: a blank name resolves to F = 0, so it drags
+    C1's median and C3's d20 median *down* — i.e. toward passing — and it appears
+    preferentially in the arms that dive, which is where blank names concentrate (2.7x in
+    the bottom popularity decile) and never in P, which has none. Removing the node
+    improves whichever arm produced it; removing the CELL from every arm cannot favour
+    any of them. That is A13's rule -- missingness must not correlate with arm -- applied
+    to a second cause of contamination.
+
+    Returns {cell_key: [arm, ...]}, the arms in which each cell is contaminated. The cell
+    is dropped from all of them or from none.
+    """
+    names = doc["node_names"]
+    out: dict[str, list[str]] = {}
+    for arm, by_pair in doc["paths"].items():
+        for pair, by_depth in by_pair.items():
+            for d in SCORED_DEPTHS:
+                path = by_depth.get(str(d))
+                if not path:
+                    continue
+                if any(not names[str(n)].strip() for n in path[1:-1]):
+                    out.setdefault(f"{pair}@d{d}", []).append(arm)
+    return {k: sorted(v) for k, v in sorted(out.items())}
+
+
+def apply_uniform_blank_drop(doc, blank_cells) -> None:
+    """Remove every contaminated cell from EVERY arm, in place. A13's rule, second cause.
+
+    A function rather than four lines inline in `main`, because the property that makes it
+    correct — the cell leaves the control as well as the treatment — is the whole point and
+    has to be testable. It was inline first, and closeout B3 caught that: mutating it to
+    drop per-arm (the directional bug this exists to prevent) left `verify_c2_guards.py`
+    passing clean, because the test applied its own loop rather than this code path.
+    """
+    for cell in blank_cells:
+        pair, _, dtag = cell.rpartition("@d")
+        for arm in doc["paths"]:
+            doc["paths"][arm][pair][dtag] = None
 
 
 def b_unk() -> float:
@@ -55,25 +102,27 @@ def b_unk() -> float:
     return math.log10(1.0 + int(s["b_unk"]["threshold"]))
 
 
-def interiors(path, names) -> list[str]:
-    return [names[str(n)] for n in path[1:-1]] if path else []
+def interiors(path, keys) -> list[str]:
+    """Interior nodes as fame-table keys (mbids -- P8b F8), never names."""
+    return [keys[str(n)] for n in path[1:-1]] if path else []
 
 
-def cell_median(path, names, F) -> float | None:
-    ints = interiors(path, names)
+def cell_median(path, keys, F) -> float | None:
+    ints = interiors(path, keys)
     return statistics.median([F[n] for n in ints]) if ints else None
 
 
-def score_arm(arm, doc, F, analysis_pairs, B):
-    names, paths = doc["node_names"], doc["paths"]
+def score_arm(arm, doc, F, analysis_pairs, B, guard):
+    """`guard` carries the A11 flags, keyed like F: `notable` and `nameless` mbid sets."""
+    keys, paths = doc["node_mbids"], doc["paths"]
     P, A = paths["P"], paths[arm]
 
     # --- C1: paired per cell against P, analysis set, d >= 10 -------------------
     deltas = []
     for pair in analysis_pairs:
         for d in C1_DEPTHS:
-            mp = cell_median(P[pair][str(d)], names, F)
-            ma = cell_median(A[pair][str(d)], names, F)
+            mp = cell_median(P[pair][str(d)], keys, F)
+            ma = cell_median(A[pair][str(d)], keys, F)
             if mp is not None and ma is not None:
                 deltas.append(ma - mp)
     c1_mean = statistics.mean(deltas) if deltas else float("nan")
@@ -81,18 +130,34 @@ def score_arm(arm, doc, F, analysis_pairs, B):
     c1 = bool(deltas) and c1_mean <= C1_MEAN_MAX and c1_frac >= C1_FRAC_MIN
 
     # --- C2: absolute reach below the owner-calibrated band ---------------------
-    reached = []
+    # `potentially_notable` -> COUNTED, and REPORTED (P8b F2). A11 pre-registered
+    # unmatched-as-floor with an owner one-glance check, so the flag is an audit hook,
+    # not a filter; silently excluding these would change the adopted encoding. What was
+    # missing is that nothing read the flag: `fame.py` computes it graph-wide over all
+    # names including endpoints, which no criterion scores. Here it is narrowed to the
+    # interiors at the C2 depths a pass actually rests on.
+    #
+    # Blank-named interiors are NOT handled here. They are removed at CELL level from
+    # every arm before scoring (`blank_scored_cells`), because a per-criterion node
+    # exclusion is directional -- see that function.
+    reached, rests_on_notable = [], {}
     for pair in analysis_pairs:
-        hit = any(F[n] < B
-                  for d in C2_DEPTHS
-                  for n in interiors(A[pair][str(d)], names))
-        if hit:
+        hits = [n
+                for d in C2_DEPTHS
+                for n in interiors(A[pair][str(d)], keys)
+                if F[n] < B]
+        if hits:
             reached.append(pair)
+            flagged = sorted({n for n in hits if n in guard["notable"]})
+            # Only load-bearing if the flagged ones are the ONLY reason this pair
+            # reached: that is the case a glance from the owner could overturn.
+            if flagged and len(flagged) == len({*hits}):
+                rests_on_notable[pair] = flagged
     c2 = len(reached) >= C2_PAIRS_MIN
 
     # --- C3: within-arm gradient, pooled across pairs ---------------------------
     def pooled(d):
-        vals = [F[n] for pair in analysis_pairs for n in interiors(A[pair][str(d)], names)]
+        vals = [F[n] for pair in analysis_pairs for n in interiors(A[pair][str(d)], keys)]
         return statistics.median(vals) if vals else None
     m5, m20 = pooled(5), pooled(20)
     c3_drop = (m5 - m20) if (m5 is not None and m20 is not None) else float("nan")
@@ -100,7 +165,7 @@ def score_arm(arm, doc, F, analysis_pairs, B):
 
     # --- C4: payload -- fewer-but-obscurer is not a win (WGLL value 2) ----------
     def mean_count(src):
-        c = [len(interiors(src[pair][str(d)], names))
+        c = [len(interiors(src[pair][str(d)], keys))
              for pair in analysis_pairs for d in C1_DEPTHS if src[pair][str(d)]]
         return statistics.mean(c) if c else 0.0
     c4_arm, c4_p = mean_count(A), mean_count(P)
@@ -108,7 +173,7 @@ def score_arm(arm, doc, F, analysis_pairs, B):
 
     # --- C6: REPORTED, not gated (A12) -----------------------------------------
     distinct = {n for pair in analysis_pairs for d in C1_DEPTHS
-                for n in interiors(A[pair][str(d)], names)}
+                for n in interiors(A[pair][str(d)], keys)}
     cov = (sum(1 for n in distinct if F[n] > 0.0) / len(distinct)) if distinct else 0.0
 
     # --- F5: sustained confinement (>= 3 consecutive snapshots changing only the
@@ -122,7 +187,7 @@ def score_arm(arm, doc, F, analysis_pairs, B):
             if not pa or not pb:
                 run = 0
                 continue
-            changed = set(interiors(pa, names)) ^ set(interiors(pb, names))
+            changed = set(interiors(pa, keys)) ^ set(interiors(pb, keys))
             if changed and groups and changed <= groups[-1]:
                 run += 1
             else:
@@ -134,7 +199,10 @@ def score_arm(arm, doc, F, analysis_pairs, B):
     return {
         "C1": {"pass": c1, "mean_dF": c1_mean, "frac_negative": c1_frac, "n_cells": len(deltas)},
         "C2": {"pass": c2, "pairs_reached": len(reached), "of": len(analysis_pairs),
-               "which": reached},
+               "which": reached,
+               # P8b F2: a pass that rests ONLY on flagged-notable interiors is the one
+               # the owner's glance could overturn. Empty means the pass is unconditional.
+               "rests_only_on_flagged_notable": rests_on_notable},
         "C3": {"pass": c3, "drop_d5_to_d20": c3_drop},
         "C4": {"pass": c4, "mean_interiors": c4_arm, "P_mean": c4_p},
         "C6_reported_not_gated": {"coverage": cov, "distinct_interiors": len(distinct),
@@ -149,14 +217,14 @@ def endpoint_tracking(arm, doc, F, pairs):
     Weak by construction -- the pair set is famous-heavy, so there is little range. Kept
     honest by reporting the per-pair values rather than only a correlation.
     """
-    names, A = doc["node_names"], doc["paths"][arm]
+    keys, A = doc["node_mbids"], doc["paths"][arm]
     rows = []
     for pair in pairs:
         p0 = A[pair]["0"]
         if not p0:
             continue
-        ends = [names[str(p0[0])], names[str(p0[-1])]]
-        ints = interiors(p0, names)
+        ends = [keys[str(p0[0])], keys[str(p0[-1])]]
+        ints = interiors(p0, keys)
         if not ints:
             continue
         rows.append({"pair": pair,
@@ -179,19 +247,22 @@ def repeated_interiors(arm, doc, pairs, top=8):
     routing everything into one corner, which C1-C3 can all pass while every journey ends
     in the same place.
     """
-    names, A = doc["node_names"], doc["paths"][arm]
+    keys, names, A = doc["node_mbids"], doc["node_names"], doc["paths"][arm]
+    id_of = {keys[k]: k for k in keys}
     seen: dict[str, set[str]] = {}
     for pair in pairs:
         for d in doc["snapshots"]:
-            for n in interiors(A[pair][str(d)], names):
+            for n in interiors(A[pair][str(d)], keys):
                 seen.setdefault(n, set()).add(pair)
     ranked = sorted(seen.items(), key=lambda kv: (-len(kv[1]), kv[0]))
-    return [{"artist": n, "n_pairs": len(ps)} for n, ps in ranked[:top] if len(ps) > 1]
+    # Reported by name for readability, counted by mbid for correctness.
+    return [{"artist": names[id_of[n]], "mbid": n, "n_pairs": len(ps)}
+            for n, ps in ranked[:top] if len(ps) > 1]
 
 
 def d0_regression(arm, doc, pairs):
     """C5: d0 node overlap against BOTH P and A0 (amendment A8), listed for inspection."""
-    names, paths = doc["node_names"], doc["paths"]
+    keys, names, paths = doc["node_mbids"], doc["node_names"], doc["paths"]
     out = []
     for pair in pairs:
         a = paths[arm][pair]["0"]
@@ -201,13 +272,70 @@ def d0_regression(arm, doc, pairs):
             r = paths[ref][pair]["0"]
             if not a or not r:
                 continue
-            sa, sr = set(interiors(a, names)), set(interiors(r, names))
+            sa, sr = set(interiors(a, keys)), set(interiors(r, keys))
             if sa != sr:
                 out.append({"pair": pair, "vs": ref,
                             "overlap": len(sa & sr) / len(sa | sr) if (sa | sr) else 1.0,
+                            # Paths shown by name -- this is the human inspection list.
                             "arm_path": [names[str(n)] for n in a],
                             "ref_path": [names[str(n)] for n in r]})
     return out
+
+
+def one_column_contrasts(doc, F, analysis_pairs, arm_defs):
+    """P8b F9: compute each arm against ITS OWN isolating baseline, not only against P.
+
+    §1.4 is explicit that attribution to a knob comes only from the chain of comparisons
+    differing by exactly one column. Every criterion above is scored against P, which is
+    the right *outcome* reference but the wrong *attribution* reference: A5-vs-P differs
+    from P by two columns and cannot tell you what either did.
+
+    `Arm.baseline` and `PACKAGE_CONTRASTS` encoded that chain from the start and nothing
+    read them, which made the package-contrast note exactly the thing A16's rule exists
+    to catch -- a disclaimer nothing consumes -- one level down from where A16 found it.
+
+    The delta computed here is the same paired-cell median difference C1 uses, so it is
+    directly comparable to the C1 column, just re-referenced.
+    """
+    keys, paths = doc["node_mbids"], doc["paths"]
+    from arms import PACKAGE_CONTRASTS
+
+    def delta(arm, base):
+        """C1's paired-cell statistic, re-referenced from P to `base`."""
+        deltas = []
+        for pair in analysis_pairs:
+            for d in C1_DEPTHS:
+                mb = cell_median(paths[base][pair][str(d)], keys, F)
+                ma = cell_median(paths[arm][pair][str(d)], keys, F)
+                if mb is not None and ma is not None:
+                    deltas.append(ma - mb)
+        return {
+            "vs": base,
+            "mean_dF": statistics.mean(deltas) if deltas else float("nan"),
+            "frac_negative": (sum(1 for x in deltas if x < 0) / len(deltas))
+                             if deltas else 0.0,
+            "n_cells": len(deltas),
+        }
+
+    def present(*names):
+        return all(n in paths for n in names)
+
+    # The isolating chain: each arm against the arm one column away. `Arm.baseline`
+    # already encodes it, INCLUDING for A6/A7 — whose baselines are A2/A4, not A0.
+    # Package-ness is a property of the PAIR, not of the arm: A7-vs-A4 is a clean
+    # one-column contrast and A7-vs-A0 is the three-column package. Keying this by
+    # arm name would mislabel the clean ones.
+    isolating = {a.name: delta(a.name, a.baseline)
+                 for a in arm_defs
+                 if a.baseline is not None and present(a.name, a.baseline)}
+
+    # The named packages, computed rather than merely disclaimed. §1.4 requires them
+    # to be visible AND unattributable; A16's rule is that a disclaimer nothing reads
+    # is not a control, so they are reported with the warning attached to the figure.
+    package = {f"{a} vs {b}": {**delta(a, b), "cannot_attribute": why}
+               for (a, b), why in PACKAGE_CONTRASTS.items() if present(a, b)}
+
+    return {"isolating": isolating, "package": package}
 
 
 def choose_W(results, eligible):
@@ -232,10 +360,66 @@ def main() -> int:
     ap.add_argument("--paths", default=str(HERE / "paths.json"))
     ap.add_argument("--fame", default=str(HERE / "fame.json"))
     ap.add_argument("--out", default=str(HERE / "scores.json"))
+    ap.add_argument("--blank-cells", choices=("fail", "drop"), default="fail",
+                    help="what to do when a scored interior has no name (P8b F8). "
+                         "'fail' (default) raises and lists them. 'drop' applies the "
+                         "PRE-REGISTERED response: remove the affected cells from ALL "
+                         "arms uniformly and report them. Decided before stage 1 ran, "
+                         "not after seeing which arm trips it.")
+    ap.add_argument("--also-drop", metavar="PATHS_JSON",
+                    help="union another run's dropped_cells_d7 into this one before "
+                         "scoring. This is the re-score `run_arms.py --stage2` asks for "
+                         "when stage 2 finds a cell stage 1 did not (A13 across the "
+                         "stage boundary, P8b F3). Scoring is offline, so it is free.")
     args = ap.parse_args()
 
     doc = json.loads(Path(args.paths).read_text(encoding="utf-8"))
-    F = json.loads(Path(args.fame).read_text(encoding="utf-8"))["fame"]
+    if args.also_drop:
+        other = json.loads(Path(args.also_drop).read_text(encoding="utf-8"))
+        if other.get("artifact_sha256") != doc.get("artifact_sha256"):
+            raise SystemExit("--also-drop ran on a different artifact; not comparable")
+        extra = set(other.get("dropped_cells_d7", [])) - set(doc.get("dropped_cells_d7", []))
+        for cell in extra:
+            pair, _, dtag = cell.rpartition("@d")
+            for arm in doc["paths"]:
+                doc["paths"][arm][pair][dtag] = None
+        doc["dropped_cells_d7"] = sorted(set(doc.get("dropped_cells_d7", [])) | extra)
+        print(f"--also-drop: {len(extra)} additional cell(s) dropped from ALL arms")
+    fame_doc = json.loads(Path(args.fame).read_text(encoding="utf-8"))
+    F = fame_doc["fame"]
+    # Both keyed by mbid, like F (P8b F8). `notable` is an audit hook; `nameless` is a
+    # reach exclusion. See C2 in `score_arm` for why they are treated differently.
+    guard = {"notable": set(fame_doc.get("potentially_notable_unmatched", [])),
+             "nameless": set(fame_doc.get("nameless_nodes", []))}
+    # F13: nothing else binds these two files. A name-keyed fame.json would silently
+    # score every interior at the floor (no mbid would ever hit), so fail loud instead.
+    if not fame_doc.get("keyed_by", "").startswith("mbid"):
+        raise SystemExit("fame.json is not mbid-keyed; re-run fame.py (P8b F8)")
+    # P8b F8's assertion, failing loud by default. The exposure this closes is
+    # DIRECTIONAL, not noise: blank names sit 2.7x concentrated in the bottom
+    # popularity decile, resolve to F = 0, and P has none — so contamination arrives
+    # in the diving arms and nowhere else, and it arrives pointing at "pass".
+    blank_cells = blank_scored_cells(doc)
+    if blank_cells:
+        print(f"\nP8b F8 — {len(blank_cells)} scored cell(s) contain a blank-named "
+              f"interior:")
+        for cell, arms_hit in blank_cells.items():
+            print(f"  - {cell}   in: {', '.join(arms_hit)}")
+        if args.blank_cells == "fail":
+            raise SystemExit(
+                "\nRefusing to score. A blank-named interior is an artifact defect that\n"
+                "resolves to the fame floor, so it reads as maximal obscurity and biases\n"
+                "C1 and C3 toward passing — in the diving arms only. The pre-registered\n"
+                "response is a UNIFORM cell drop: re-run with --blank-cells drop.\n"
+                "Do NOT drop the node instead; that is the directional fix this refuses."
+            )
+        apply_uniform_blank_drop(doc, blank_cells)
+        doc["dropped_cells_blank_name"] = sorted(blank_cells)
+        print(f"  -> dropped from ALL {len(doc['paths'])} arms uniformly "
+              f"(pre-registered response; A13's rule applied to a second cause)")
+    else:
+        doc["dropped_cells_blank_name"] = []
+
     B = b_unk()
     held = set(doc.get("held_out_pairs", []))
     analysis = [p for p in doc["pairs"] if p not in held]
@@ -247,7 +431,7 @@ def main() -> int:
 
     results, extras = {}, {}
     for arm in doc["arms"]:
-        results[arm] = score_arm(arm, doc, F, analysis, B)
+        results[arm] = score_arm(arm, doc, F, analysis, B, guard)
         extras[arm] = {
             "endpoint_tracking_A14": endpoint_tracking(arm, doc, F, analysis),
             "repeated_interiors": repeated_interiors(arm, doc, analysis),
@@ -260,8 +444,17 @@ def main() -> int:
         c6 = results[arm]["C6_reported_not_gated"]
         c6["gap_vs_P_points"] = 100.0 * (pcov - c6["coverage"])
 
-    from arms import R1_ELIGIBLE
+    from arms import STAGE1, R1_ELIGIBLE, stage2
     W, why = choose_W(results, R1_ELIGIBLE)
+
+    # Arm definitions for whichever stage this file holds. Stage 2's attachments are not
+    # in STAGE1, so the isolating chain for them has to be rebuilt from the recorded W.
+    arm_defs = list(STAGE1)
+    stage2_w = doc.get("stage2_w")
+    if stage2_w:
+        w_cfg = next(a.cfg for a in STAGE1 if a.name == stage2_w)
+        arm_defs += stage2(stage2_w, w_cfg)
+    contrasts = one_column_contrasts(doc, F, analysis, arm_defs)
 
     print(f"\n{'arm':<5} {'C1 meandF':>10} {'C1 frac':>8} {'C2':>6} {'C3 drop':>8} "
           f"{'C4 int':>7} {'cov%':>6}  gates")
@@ -274,11 +467,43 @@ def main() -> int:
               f"{r['C4']['mean_interiors']:>7.2f} "
               f"{r['C6_reported_not_gated']['coverage']*100:>5.1f}  {gates}")
     print("\nUPPERCASE = passed, lowercase = failed. C6 is reported, not gated (A12).")
-    print(f"R1 selects W = {W}  ({why})")
+
+    # F9: attribution table. Separate from the gate table above on purpose -- that one
+    # answers "did this arm clear the bar", this one answers "what did the knob do".
+    if contrasts["isolating"]:
+        print("\nisolating one-column contrasts (P8b F9) — each arm vs the arm one "
+              "column away.\nThese are the ONLY contrasts a knob effect may be "
+              "attributed to (§1.4).")
+        print(f"{'arm':<5} {'vs':>5} {'mean dF':>9} {'frac<0':>7} {'cells':>6}  knob")
+        for a in arm_defs:
+            c = contrasts["isolating"].get(a.name)
+            if c:
+                print(f"{a.name:<5} {c['vs']:>5} {c['mean_dF']:>9.3f} "
+                      f"{c['frac_negative']:>7.2f} {c['n_cells']:>6}  {a.reading}")
+    if contrasts["package"]:
+        print("\npackage contrasts — computed, and NOT attributable to any single knob:")
+        for label, c in sorted(contrasts["package"].items()):
+            print(f"  {label:<12} mean dF {c['mean_dF']:>7.3f} over {c['n_cells']:>3} "
+                  f"cells   [{c['cannot_attribute']}]")
+
+    # F2/F8: an auditable C2. Silence here means no pass depended on a flagged artist.
+    for arm in doc["arms"]:
+        c2 = results[arm]["C2"]
+        if c2["rests_only_on_flagged_notable"]:
+            print(f"\n⚠ {arm}: C2 pass rests ONLY on flagged-notable interiors in "
+                  f"{len(c2['rests_only_on_flagged_notable'])} pair(s) — owner glance "
+                  f"required before this counts (A11 guard, wired per P8b F2):")
+            for pair, mbids in sorted(c2["rests_only_on_flagged_notable"].items()):
+                shown = ", ".join(fame_doc["names"].get(m, m) for m in mbids)
+                print(f"    {pair}: {shown}")
+
+    print(f"\nR1 selects W = {W}  ({why})")
 
     Path(args.out).write_text(json.dumps(
         {"b_unk_fame_units": B, "analysis_pairs": analysis,
-         "W": W, "W_rationale": why, "results": results, "diagnostics": extras},
+         "blank_name_cells_dropped": doc["dropped_cells_blank_name"],
+         "W": W, "W_rationale": why, "results": results,
+         "one_column_contrasts": contrasts, "diagnostics": extras},
         indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"\nwrote {args.out}")
     return 0

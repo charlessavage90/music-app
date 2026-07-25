@@ -270,7 +270,23 @@ log1p(cooc) − d·(log mass_a + log mass_b − 2·log median_mass)
 
 **Fix, in order:** entity filter first (`jesus2099`, `[unknown]`, `[anonymous]` are
 still nodes), *then* `similarity_damping ≈ 0.25` — filtering must precede damping,
-since damping re-inflates low-mass pairs. Expected: hubfrac 0.641 → 0.231, max interior
+since damping re-inflates low-mass pairs.
+
+> **⚠ PARTIALLY DISCHARGED — checked 2026-07-24, and the half that remains is this
+> paragraph's own motivating case.** Phase 2 Task 11 shipped the entity filter and it
+> works on **placeholders**: `[unknown]` / `[anonymous]` / `Various Artists` are gone,
+> and the adopted artifact contains zero nodes with a `special purpose` disambiguation.
+> **`jesus2099` is still a node** — degree 31, `pop_raw` 0.3846, disambiguation
+> `'shamo'`. `is_special_purpose` matches the **disambiguation** field only, so it
+> structurally cannot reach an editor account. Do not read "entity filter shipped" as
+> discharging this line. Full record, and where the remaining coverage belongs (one
+> filter stage, three predicates, `jesus2099` as the first denylist entry):
+> `../2026-07-23-repair-and-retune-execution-log.md`, the 2026-07-24 entries.
+>
+> **The damping half of this instruction is separately superseded:**
+> `similarity_damping` was tested at 0.25/0.5/0.75 in Phase 2 and **rejected** — the
+> undamped arm won, and the adopted value is 0.0. The figures in the next sentence are
+> from the pre-Track-1 graph and are superseded for scoring besides. Expected: hubfrac 0.641 → 0.231, max interior
 degree 2118 → 913, bottleneck neighbour-Jaccard 0.0184 → 0.0346. `w_hub` stays dormant
 at `0.0`; damping does the job better than an explicit penalty.
 

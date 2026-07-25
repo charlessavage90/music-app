@@ -1,0 +1,136 @@
+{
+ "b_unk_fame_units": 5.378833793740069,
+ "analysis_pairs": [
+  "Miles Davis -> Daft Punk",
+  "The Shins -> Wishbone Ash",
+  "Metallica -> Taylor Swift",
+  "Radiohead -> The Beatles",
+  "Muse -> Coldplay",
+  "Madonna -> Bob Dylan",
+  "Pink Floyd -> Aphex Twin",
+  "Nirvana -> CROOVE"
+ ],
+ "W": "A7",
+ "W_rationale": "no cell moved C1 in the right direction; R1's fallback applies",
+ "results": {
+  "P": {
+   "C1": {
+    "pass": false,
+    "mean_dF": 0.0,
+    "frac_negative": 0.0,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": true,
+    "pairs_reached": 4,
+    "of": 8,
+    "which": [
+     "The Shins -> Wishbone Ash",
+     "Metallica -> Taylor Swift",
+     "Pink Floyd -> Aphex Twin",
+     "Nirvana -> CROOVE"
+    ]
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.1637637951265738
+   },
+   "C4": {
+    "pass": true,
+    "mean_interiors": 5.375,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.963855421686747,
+    "distinct_interiors": 83,
+    "gap_vs_P_points": 0.0
+   },
+   "F5_confinement": []
+  }
+ },
+ "diagnostics": {
+  "P": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 6.171873201703383
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.861399782464546
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.016062609275332
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.430532590775052
+     }
+    ],
+    "correlation": 0.9483986821326338
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Queens of the Stone Age",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Arcade Fire",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Beck",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Depeche Mode",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Gorillaz",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Marilyn Manson",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Paramore",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pearl Jam",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [],
+   "floor_active_frac": 0.029351326190093254
+  }
+ }
+}

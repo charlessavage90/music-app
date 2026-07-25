@@ -1,0 +1,1989 @@
+{
+ "encoding": "A11: F = log10(1 + en.wikipedia annual pageviews); unmatched -> 0",
+ "n": 163,
+ "matched": 159,
+ "unmatched": 4,
+ "coverage": 0.9754601226993865,
+ "potentially_notable_unmatched": [
+  "CROOVE"
+ ],
+ "fame": {
+  "ABBA": 6.3044965595994045,
+  "AC/DC": 6.330805070875266,
+  "Aerosmith": 5.980422456761882,
+  "Alicia Keys": 6.126700132645376,
+  "Aphex Twin": 5.808595116450631,
+  "Arcade Fire": 5.595383775703357,
+  "Arctic Monkeys": 5.895914026219389,
+  "Aretha Franklin": 6.285872227069257,
+  "Bastille": 5.378833793740069,
+  "Beastie Boys": 6.067112906517214,
+  "Beck": 5.839814793547843,
+  "Billie Holiday": 5.908514507009008,
+  "Billy Joel": 6.556121989773814,
+  "Björk": 6.239348287579478,
+  "Black Sabbath": 6.562810496641975,
+  "Bloc Party": 5.468540799479662,
+  "Blur": 5.95325699127066,
+  "Bob Dylan": 6.628432970387057,
+  "Bon Iver": 5.70372115992702,
+  "Bonobo": 4.93644336498581,
+  "Breaking Benjamin": 5.671381142984851,
+  "CROOVE": 0.0,
+  "Cage the Elephant": 5.477383200044848,
+  "Calvin Harris": 5.793350980438315,
+  "Chuck Berry": 5.993624016745025,
+  "Coldplay": 6.162899406865292,
+  "Com Truise": 4.246843122251319,
+  "Creedence Clearwater Revival": 6.107573200044239,
+  "Crystal Castles": 5.515496320137759,
+  "Cut Copy": 4.688036975791138,
+  "Daft Punk": 6.105001336463371,
+  "Daryl Hall & John Oates": 5.810664580637122,
+  "David Bowie": 6.625171951467865,
+  "Dean Martin": 6.21704627076139,
+  "Deep Purple": 6.077511798276285,
+  "Depeche Mode": 6.11323855551869,
+  "Desired": 0.0,
+  "Dido": 5.865495433433547,
+  "Dire Straits": 6.034035358154606,
+  "Disturbed": 5.6736345712964225,
+  "Ella Fitzgerald": 5.752410337178498,
+  "Ellie Goulding": 5.948781568364003,
+  "Elton John": 6.4272633868126325,
+  "Elvis Presley": 6.741873220474976,
+  "Emerson, Lake & Palmer": 5.6701381940904065,
+  "Etta James": 5.729627196699101,
+  "Fleet Foxes": 5.244390938058167,
+  "Florence + the Machine": 5.994155637254465,
+  "Foo Fighters": 6.117008982151474,
+  "Foster the People": 5.54147814639588,
+  "Frank Sinatra": 6.488375271218041,
+  "Gorillaz": 6.441503312610343,
+  "Green Day": 6.230562078667822,
+  "Grizzly Bear": 4.990187846815526,
+  "Guns N’ Roses": 6.169424598808618,
+  "HOME": 0.0,
+  "Incubus": 5.665866987146156,
+  "Interpol": 5.523215627105045,
+  "Jason Derulo": 5.7514715677498,
+  "John Legend": 5.883004671590092,
+  "John Lennon": 6.568937874528452,
+  "Johnny Cash": 6.380908990236767,
+  "Journey": 6.126494088194803,
+  "Joy Division": 5.98752460463292,
+  "Justice": 5.303191736060861,
+  "Kaiser Chiefs": 5.3069330157351144,
+  "Keane": 5.466350012454094,
+  "Kings of Leon": 5.700271803346564,
+  "Korn": 6.016062609275332,
+  "Lana Del Rey": 6.362802234496374,
+  "Led Zeppelin": 6.391152729438022,
+  "Linkin Park": 6.3749848529825694,
+  "Lynyrd Skynyrd": 6.2689582809784286,
+  "M83": 5.380274571705851,
+  "MGMT": 5.798912248052462,
+  "Madonna": 6.633596805980479,
+  "Mariah Carey": 6.5247396565988005,
+  "Marilyn Manson": 6.282407064619249,
+  "Meghan Trainor": 6.0780059764109176,
+  "Metallica": 6.3557261480046,
+  "Michael Bublé": 6.041329905327553,
+  "Michael Jackson": 7.189716778378239,
+  "Miles Davis": 6.082874373618499,
+  "Moby": 5.784429699662445,
+  "Motörhead": 5.882984771381249,
+  "Muse": 5.881428597616056,
+  "My Chemical Romance": 6.139998972894192,
+  "Neil Young": 6.315054424634245,
+  "Neutral Milk Hotel": 5.468760747370461,
+  "Nick Drake": 5.895945484096512,
+  "Nina Simone": 5.906919813948182,
+  "Nine Inch Nails": 6.108374555341804,
+  "Nirvana": 6.161208032601975,
+  "No Doubt": 5.866551971269641,
+  "Norah Jones": 5.995057505969698,
+  "Oasis": 6.362230194018129,
+  "OneRepublic": 5.6515832700017405,
+  "Ozzy Osbourne": 7.258803403303059,
+  "P!nk": 6.244438188199861,
+  "PJ Harvey": 5.682444735480486,
+  "Pantera": 5.953491496105417,
+  "Papa Roach": 5.611486452062836,
+  "Paramore": 6.053420363796977,
+  "Pearl Jam": 6.069971700961596,
+  "Phoenix": 6.430116837446495,
+  "Pink Floyd": 6.360035325603906,
+  "Pixies": 5.853156526637673,
+  "Placebo": 5.5367149623741785,
+  "Portishead": 5.604320032019767,
+  "Queen": 6.306582631762121,
+  "Queens of the Stone Age": 5.9571147755648886,
+  "R.E.M.": 6.017606313398228,
+  "Radiohead": 6.225169923222963,
+  "Rage Against the Machine": 6.078346961732799,
+  "Rainbow": 5.70842344980129,
+  "Ray Charles": 6.100104027138003,
+  "Red Hot Chili Peppers": 6.3280989544648465,
+  "Rihanna": 6.588833852288783,
+  "Rise Against": 5.446516974085374,
+  "Sigur Rós": 5.422328790803482,
+  "Simon & Garfunkel": 5.905424008285575,
+  "Skrillex": 5.787291824995927,
+  "Slipknot": 6.162933728311852,
+  "Stevie Wonder": 6.292656058449035,
+  "System of a Down": 6.110610246219447,
+  "TANUKI": 0.0,
+  "Tame Impala": 6.195533252100221,
+  "Taylor Swift": 6.910975539912312,
+  "The Beatles": 6.599392850219704,
+  "The Black Keys": 5.635971049303266,
+  "The Clash": 5.853674489160783,
+  "The Cranberries": 6.0897469005700655,
+  "The Cure": 6.140171035553394,
+  "The Doors": 5.9143272873599955,
+  "The Jacksons": 6.304326774779294,
+  "The Killers": 5.894332680777789,
+  "The Kinks": 5.8055436738136255,
+  "The Offspring": 5.9657255497017365,
+  "The Prodigy": 6.029927320216255,
+  "The Raconteurs": 5.140913237373888,
+  "The Rolling Stones": 6.293641827863309,
+  "The Shins": 5.185712099870006,
+  "The Smashing Pumpkins": 6.067672571380777,
+  "The Strokes": 5.994140230739092,
+  "The Temptations": 5.8448007567795575,
+  "The White Stripes": 6.028711521794728,
+  "The Who": 6.076552338116484,
+  "The xx": 6.003705184679858,
+  "Tom Waits": 6.06889944832811,
+  "Toto": 5.979508312149392,
+  "Two Door Cinema Club": 5.193199758203068,
+  "U2": 6.020370399420912,
+  "Uriah Heep": 5.627128158726531,
+  "Vampire Weekend": 5.452125451863757,
+  "Washed Out": 4.614222059298785,
+  "Weezer": 5.939599614621659,
+  "Wishbone Ash": 5.256811520375379,
+  "Ye": 6.587317677546797,
+  "Yes": 6.006966369252905,
+  "ZZ Top": 6.029613446550814,
+  "alt‐J": 5.200927067194083,
+  "deadmau5": 5.582267956091819,
+  "twenty one pilots": 6.0101646426520885
+ },
+ "rows": {
+  "ABBA": {
+   "F": 6.3044965595994045,
+   "article": "ABBA",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "ABBA",
+   "pageviews": 2016027,
+   "query": "ABBA",
+   "wikidata": "Q18233"
+  },
+  "AC/DC": {
+   "F": 6.330805070875266,
+   "article": "AC/DC",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "AC/DC",
+   "pageviews": 2141928,
+   "query": "AC/DC",
+   "wikidata": "Q27593"
+  },
+  "Aerosmith": {
+   "F": 5.980422456761882,
+   "article": "Aerosmith",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Aerosmith",
+   "pageviews": 955921,
+   "query": "Aerosmith",
+   "wikidata": "Q126826"
+  },
+  "Alicia Keys": {
+   "F": 6.126700132645376,
+   "article": "Alicia Keys",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Alicia Keys",
+   "pageviews": 1338751,
+   "query": "Alicia Keys",
+   "wikidata": "Q121507"
+  },
+  "Aphex Twin": {
+   "F": 5.808595116450631,
+   "article": "Aphex Twin",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Aphex Twin",
+   "pageviews": 643568,
+   "query": "Aphex Twin",
+   "wikidata": "Q223161"
+  },
+  "Arcade Fire": {
+   "F": 5.595383775703357,
+   "article": "Arcade Fire",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Arcade Fire",
+   "pageviews": 393897,
+   "query": "Arcade Fire",
+   "wikidata": "Q58608"
+  },
+  "Arctic Monkeys": {
+   "F": 5.895914026219389,
+   "article": "Arctic Monkeys",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Arctic Monkeys",
+   "pageviews": 786889,
+   "query": "Arctic Monkeys",
+   "wikidata": "Q170599"
+  },
+  "Aretha Franklin": {
+   "F": 6.285872227069257,
+   "article": "Aretha Franklin",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Aretha Franklin",
+   "pageviews": 1931399,
+   "query": "Aretha Franklin",
+   "wikidata": "Q125121"
+  },
+  "Bastille": {
+   "F": 5.378833793740069,
+   "article": "Bastille (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Bastille (band)",
+   "pageviews": 239239,
+   "query": "Bastille",
+   "wikidata": "Q689"
+  },
+  "Beastie Boys": {
+   "F": 6.067112906517214,
+   "article": "Beastie Boys",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Beastie Boys",
+   "pageviews": 1167112,
+   "query": "Beastie Boys",
+   "wikidata": "Q214039"
+  },
+  "Beck": {
+   "F": 5.839814793547843,
+   "article": "Beck",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Beck",
+   "pageviews": 691535,
+   "query": "Beck",
+   "wikidata": "Q11901"
+  },
+  "Billie Holiday": {
+   "F": 5.908514507009008,
+   "article": "Billie Holiday",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Billie Holiday",
+   "pageviews": 810054,
+   "query": "Billie Holiday",
+   "wikidata": "Q104358"
+  },
+  "Billy Joel": {
+   "F": 6.556121989773814,
+   "article": "Billy Joel",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Billy Joel",
+   "pageviews": 3598503,
+   "query": "Billy Joel",
+   "wikidata": "Q194333"
+  },
+  "Björk": {
+   "F": 6.239348287579478,
+   "article": "Björk",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Björk",
+   "pageviews": 1735194,
+   "query": "Björk",
+   "wikidata": "Q42455"
+  },
+  "Black Sabbath": {
+   "F": 6.562810496641975,
+   "article": "Black Sabbath",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Black Sabbath",
+   "pageviews": 3654352,
+   "query": "Black Sabbath",
+   "wikidata": "Q47670"
+  },
+  "Bloc Party": {
+   "F": 5.468540799479662,
+   "article": "Bloc Party",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Bloc Party",
+   "pageviews": 294130,
+   "query": "Bloc Party",
+   "wikidata": "Q205838"
+  },
+  "Blur": {
+   "F": 5.95325699127066,
+   "article": "Blur (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Blur (band)",
+   "pageviews": 897959,
+   "query": "Blur",
+   "wikidata": "Q485820"
+  },
+  "Bob Dylan": {
+   "F": 6.628432970387057,
+   "article": "Bob Dylan",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Bob Dylan",
+   "pageviews": 4250430,
+   "query": "Bob Dylan",
+   "wikidata": "Q392"
+  },
+  "Bon Iver": {
+   "F": 5.70372115992702,
+   "article": "Bon Iver",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Bon Iver",
+   "pageviews": 505499,
+   "query": "Bon Iver",
+   "wikidata": "Q357340"
+  },
+  "Bonobo": {
+   "F": 4.93644336498581,
+   "article": "Bonobo (musician)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Bonobo (musician)",
+   "pageviews": 86385,
+   "query": "Bonobo",
+   "wikidata": "Q707967"
+  },
+  "Breaking Benjamin": {
+   "F": 5.671381142984851,
+   "article": "Breaking Benjamin",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Breaking Benjamin",
+   "pageviews": 469224,
+   "query": "Breaking Benjamin",
+   "wikidata": "Q271984"
+  },
+  "CROOVE": {
+   "F": 0.0,
+   "article": null,
+   "candidates_checked": [
+    [
+     "Crohn's disease",
+     "name mismatch"
+    ],
+    [
+     "Aleister Crowley",
+     "name mismatch"
+    ],
+    [
+     "Russell Crowe",
+     "name mismatch"
+    ],
+    [
+     "Oliver Cromwell",
+     "name mismatch"
+    ],
+    [
+     "Croup",
+     "name mismatch"
+    ]
+   ],
+   "guard": {
+    "foreign": {
+     "found": true,
+     "n_non_english": 1,
+     "non_english_wikis": [
+      "kowiki"
+     ],
+     "wikidata": "Q12580855"
+    },
+    "non_latin_name": false,
+    "potentially_notable": true
+   },
+   "matched": false,
+   "pageviews": null,
+   "query": "CROOVE",
+   "reason": "no identity-matched musical performer among candidates"
+  },
+  "Cage the Elephant": {
+   "F": 5.477383200044848,
+   "article": "Cage the Elephant",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Cage the Elephant",
+   "pageviews": 300180,
+   "query": "Cage the Elephant",
+   "wikidata": "Q68061"
+  },
+  "Calvin Harris": {
+   "F": 5.793350980438315,
+   "article": "Calvin Harris",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Calvin Harris",
+   "pageviews": 621370,
+   "query": "Calvin Harris",
+   "wikidata": "Q81637"
+  },
+  "Chuck Berry": {
+   "F": 5.993624016745025,
+   "article": "Chuck Berry",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Chuck Berry",
+   "pageviews": 985425,
+   "query": "Chuck Berry",
+   "wikidata": "Q5921"
+  },
+  "Coldplay": {
+   "F": 6.162899406865292,
+   "article": "Coldplay",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Coldplay",
+   "pageviews": 1455121,
+   "query": "Coldplay",
+   "wikidata": "Q45188"
+  },
+  "Com Truise": {
+   "F": 4.246843122251319,
+   "article": "Com Truise",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Com Truise",
+   "pageviews": 17653,
+   "query": "Com Truise",
+   "wikidata": "Q1113156"
+  },
+  "Creedence Clearwater Revival": {
+   "F": 6.107573200044239,
+   "article": "Creedence Clearwater Revival",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Creedence Clearwater Revival",
+   "pageviews": 1281070,
+   "query": "Creedence Clearwater Revival",
+   "wikidata": "Q192463"
+  },
+  "Crystal Castles": {
+   "F": 5.515496320137759,
+   "article": "Crystal Castles",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Crystal Castles",
+   "pageviews": 327714,
+   "query": "Crystal Castles",
+   "wikidata": "Q766824"
+  },
+  "Cut Copy": {
+   "F": 4.688036975791138,
+   "article": "Cut Copy",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Cut Copy",
+   "pageviews": 48756,
+   "query": "Cut Copy",
+   "wikidata": "Q573168"
+  },
+  "Daft Punk": {
+   "F": 6.105001336463371,
+   "article": "Daft Punk",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Daft Punk",
+   "pageviews": 1273506,
+   "query": "Daft Punk",
+   "wikidata": "Q185828"
+  },
+  "Daryl Hall & John Oates": {
+   "F": 5.810664580637122,
+   "article": "Hall & Oates",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Daryl Hall & John Oates",
+   "pageviews": 646642,
+   "query": "Daryl Hall & John Oates",
+   "wikidata": "Q733182"
+  },
+  "David Bowie": {
+   "F": 6.625171951467865,
+   "article": "David Bowie",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "David Bowie",
+   "pageviews": 4218634,
+   "query": "David Bowie",
+   "wikidata": "Q5383"
+  },
+  "Dean Martin": {
+   "F": 6.21704627076139,
+   "article": "Dean Martin",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Dean Martin",
+   "pageviews": 1648337,
+   "query": "Dean Martin",
+   "wikidata": "Q215359"
+  },
+  "Deep Purple": {
+   "F": 6.077511798276285,
+   "article": "Deep Purple",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Deep Purple",
+   "pageviews": 1195395,
+   "query": "Deep Purple",
+   "wikidata": "Q101505"
+  },
+  "Depeche Mode": {
+   "F": 6.11323855551869,
+   "article": "Depeche Mode",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Depeche Mode",
+   "pageviews": 1297891,
+   "query": "Depeche Mode",
+   "wikidata": "Q482964"
+  },
+  "Desired": {
+   "F": 0.0,
+   "article": null,
+   "candidates_checked": [
+    [
+     "Desire",
+     "name mismatch"
+    ],
+    [
+     "The Desired Effect Tour",
+     "name mismatch"
+    ],
+    [
+     "The Desired Woman",
+     "name mismatch"
+    ],
+    [
+     "Desired Effect",
+     "name mismatch"
+    ],
+    [
+     "Desired (film)",
+     "name mismatch"
+    ]
+   ],
+   "guard": {
+    "foreign": {
+     "found": false
+    },
+    "non_latin_name": false,
+    "potentially_notable": false
+   },
+   "matched": false,
+   "pageviews": null,
+   "query": "Desired",
+   "reason": "no identity-matched musical performer among candidates"
+  },
+  "Dido": {
+   "F": 5.865495433433547,
+   "article": "Dido (singer)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Dido (singer)",
+   "pageviews": 733660,
+   "query": "Dido",
+   "wikidata": "Q202550"
+  },
+  "Dire Straits": {
+   "F": 6.034035358154606,
+   "article": "Dire Straits",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Dire Straits",
+   "pageviews": 1081521,
+   "query": "Dire Straits",
+   "wikidata": "Q50040"
+  },
+  "Disturbed": {
+   "F": 5.6736345712964225,
+   "article": "Disturbed (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Disturbed (band)",
+   "pageviews": 471665,
+   "query": "Disturbed",
+   "wikidata": "Q131366"
+  },
+  "Ella Fitzgerald": {
+   "F": 5.752410337178498,
+   "article": "Ella Fitzgerald",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Ella Fitzgerald",
+   "pageviews": 565470,
+   "query": "Ella Fitzgerald",
+   "wikidata": "Q1768"
+  },
+  "Ellie Goulding": {
+   "F": 5.948781568364003,
+   "article": "Ellie Goulding",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Ellie Goulding",
+   "pageviews": 888753,
+   "query": "Ellie Goulding",
+   "wikidata": "Q31164"
+  },
+  "Elton John": {
+   "F": 6.4272633868126325,
+   "article": "Elton John",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Elton John",
+   "pageviews": 2674627,
+   "query": "Elton John",
+   "wikidata": "Q2808"
+  },
+  "Elvis Presley": {
+   "F": 6.741873220474976,
+   "article": "Elvis Presley",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Elvis Presley",
+   "pageviews": 5519162,
+   "query": "Elvis Presley",
+   "wikidata": "Q303"
+  },
+  "Emerson, Lake & Palmer": {
+   "F": 5.6701381940904065,
+   "article": "Emerson, Lake & Palmer",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Emerson, Lake & Palmer",
+   "pageviews": 467883,
+   "query": "Emerson, Lake & Palmer",
+   "wikidata": "Q273171"
+  },
+  "Etta James": {
+   "F": 5.729627196699101,
+   "article": "Etta James",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Etta James",
+   "pageviews": 536570,
+   "query": "Etta James",
+   "wikidata": "Q182725"
+  },
+  "Fleet Foxes": {
+   "F": 5.244390938058167,
+   "article": "Fleet Foxes",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Fleet Foxes",
+   "pageviews": 175545,
+   "query": "Fleet Foxes",
+   "wikidata": "Q852335"
+  },
+  "Florence + the Machine": {
+   "F": 5.994155637254465,
+   "article": "Florence and the Machine",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Florence + the Machine",
+   "pageviews": 986632,
+   "query": "Florence + the Machine",
+   "wikidata": "Q217360"
+  },
+  "Foo Fighters": {
+   "F": 6.117008982151474,
+   "article": "Foo Fighters",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Foo Fighters",
+   "pageviews": 1309208,
+   "query": "Foo Fighters",
+   "wikidata": "Q483718"
+  },
+  "Foster the People": {
+   "F": 5.54147814639588,
+   "article": "Foster the People",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Foster the People",
+   "pageviews": 347918,
+   "query": "Foster the People",
+   "wikidata": "Q61113"
+  },
+  "Frank Sinatra": {
+   "F": 6.488375271218041,
+   "article": "Frank Sinatra",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Frank Sinatra",
+   "pageviews": 3078755,
+   "query": "Frank Sinatra",
+   "wikidata": "Q40912"
+  },
+  "Gorillaz": {
+   "F": 6.441503312610343,
+   "article": "Gorillaz",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Gorillaz",
+   "pageviews": 2763778,
+   "query": "Gorillaz",
+   "wikidata": "Q189991"
+  },
+  "Green Day": {
+   "F": 6.230562078667822,
+   "article": "Green Day",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Green Day",
+   "pageviews": 1700442,
+   "query": "Green Day",
+   "wikidata": "Q47871"
+  },
+  "Grizzly Bear": {
+   "F": 4.990187846815526,
+   "article": "Grizzly Bear (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Grizzly Bear (band)",
+   "pageviews": 97765,
+   "query": "Grizzly Bear",
+   "wikidata": "Q568617"
+  },
+  "Guns N’ Roses": {
+   "F": 6.169424598808618,
+   "article": "Guns N' Roses",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Guns N' Roses",
+   "pageviews": 1477149,
+   "query": "Guns N’ Roses",
+   "wikidata": "Q11895"
+  },
+  "HOME": {
+   "F": 0.0,
+   "article": null,
+   "candidates_checked": [
+    [
+     "Home (disambiguation)",
+     "missing/disambig"
+    ],
+    [
+     "Homer",
+     "name mismatch"
+    ],
+    [
+     "Home Run Derby",
+     "name mismatch"
+    ],
+    [
+     "Home Depot",
+     "name mismatch"
+    ],
+    [
+     "Homeopathy",
+     "name mismatch"
+    ]
+   ],
+   "guard": {
+    "foreign": {
+     "found": false
+    },
+    "non_latin_name": false,
+    "potentially_notable": false
+   },
+   "matched": false,
+   "pageviews": null,
+   "query": "HOME",
+   "reason": "no identity-matched musical performer among candidates"
+  },
+  "Incubus": {
+   "F": 5.665866987146156,
+   "article": "Incubus (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Incubus (band)",
+   "pageviews": 463304,
+   "query": "Incubus",
+   "wikidata": "Q1661036"
+  },
+  "Interpol": {
+   "F": 5.523215627105045,
+   "article": "Interpol (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Interpol (band)",
+   "pageviews": 333591,
+   "query": "Interpol",
+   "wikidata": "Q331790"
+  },
+  "Jason Derulo": {
+   "F": 5.7514715677498,
+   "article": "Jason Derulo",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Jason Derulo",
+   "pageviews": 564249,
+   "query": "Jason Derulo",
+   "wikidata": "Q243639"
+  },
+  "John Legend": {
+   "F": 5.883004671590092,
+   "article": "John Legend",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "John Legend",
+   "pageviews": 763843,
+   "query": "John Legend",
+   "wikidata": "Q44857"
+  },
+  "John Lennon": {
+   "F": 6.568937874528452,
+   "article": "John Lennon",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "John Lennon",
+   "pageviews": 3706276,
+   "query": "John Lennon",
+   "wikidata": "Q1203"
+  },
+  "Johnny Cash": {
+   "F": 6.380908990236767,
+   "article": "Johnny Cash",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Johnny Cash",
+   "pageviews": 2403858,
+   "query": "Johnny Cash",
+   "wikidata": "Q42775"
+  },
+  "Journey": {
+   "F": 6.126494088194803,
+   "article": "Journey (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Journey (band)",
+   "pageviews": 1338116,
+   "query": "Journey",
+   "wikidata": "Q464749"
+  },
+  "Joy Division": {
+   "F": 5.98752460463292,
+   "article": "Joy Division",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Joy Division",
+   "pageviews": 971682,
+   "query": "Joy Division",
+   "wikidata": "Q172763"
+  },
+  "Justice": {
+   "F": 5.303191736060861,
+   "article": "Justice (band)",
+   "candidates_checked": [
+    [
+     "Justice",
+     "not a musical act"
+    ],
+    [
+     "Justice League (film)",
+     "name mismatch"
+    ],
+    [
+     "Justice League",
+     "name mismatch"
+    ],
+    [
+     "Justice and Development Party",
+     "name mismatch"
+    ],
+    [
+     "Justice of the peace",
+     "name mismatch"
+    ]
+   ],
+   "matched": true,
+   "months_present": 12,
+   "pageviews": 200997,
+   "query": "Justice",
+   "reason": "no identity-matched musical performer among candidates",
+   "via": "wikidata_fallback",
+   "wikidata": "Q329178"
+  },
+  "Kaiser Chiefs": {
+   "F": 5.3069330157351144,
+   "article": "Kaiser Chiefs",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Kaiser Chiefs",
+   "pageviews": 202736,
+   "query": "Kaiser Chiefs",
+   "wikidata": "Q192308"
+  },
+  "Keane": {
+   "F": 5.466350012454094,
+   "article": "Keane (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Keane (band)",
+   "pageviews": 292650,
+   "query": "Keane",
+   "wikidata": "Q484311"
+  },
+  "Kings of Leon": {
+   "F": 5.700271803346564,
+   "article": "Kings of Leon",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Kings of Leon",
+   "pageviews": 501500,
+   "query": "Kings of Leon",
+   "wikidata": "Q192486"
+  },
+  "Korn": {
+   "F": 6.016062609275332,
+   "article": "Korn",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Korn",
+   "pageviews": 1037677,
+   "query": "Korn",
+   "wikidata": "Q80304"
+  },
+  "Lana Del Rey": {
+   "F": 6.362802234496374,
+   "article": "Lana Del Rey",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Lana Del Rey",
+   "pageviews": 2305696,
+   "query": "Lana Del Rey",
+   "wikidata": "Q37150"
+  },
+  "Led Zeppelin": {
+   "F": 6.391152729438022,
+   "article": "Led Zeppelin",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Led Zeppelin",
+   "pageviews": 2461232,
+   "query": "Led Zeppelin",
+   "wikidata": "Q2331"
+  },
+  "Linkin Park": {
+   "F": 6.3749848529825694,
+   "article": "Linkin Park",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Linkin Park",
+   "pageviews": 2371290,
+   "query": "Linkin Park",
+   "wikidata": "Q261"
+  },
+  "Lynyrd Skynyrd": {
+   "F": 6.2689582809784286,
+   "article": "Lynyrd Skynyrd",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Lynyrd Skynyrd",
+   "pageviews": 1857625,
+   "query": "Lynyrd Skynyrd",
+   "wikidata": "Q158462"
+  },
+  "M83": {
+   "F": 5.380274571705851,
+   "article": "M83 (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "M83 (band)",
+   "pageviews": 240034,
+   "query": "M83",
+   "wikidata": "Q615471"
+  },
+  "MGMT": {
+   "F": 5.798912248052462,
+   "article": "MGMT",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "MGMT",
+   "pageviews": 629378,
+   "query": "MGMT",
+   "wikidata": "Q391969"
+  },
+  "Madonna": {
+   "F": 6.633596805980479,
+   "article": "Madonna",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Madonna",
+   "pageviews": 4301270,
+   "query": "Madonna",
+   "wikidata": "Q1744"
+  },
+  "Mariah Carey": {
+   "F": 6.5247396565988005,
+   "article": "Mariah Carey",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Mariah Carey",
+   "pageviews": 3347646,
+   "query": "Mariah Carey",
+   "wikidata": "Q41076"
+  },
+  "Marilyn Manson": {
+   "F": 6.282407064619249,
+   "article": "Marilyn Manson",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Marilyn Manson",
+   "pageviews": 1916050,
+   "query": "Marilyn Manson",
+   "wikidata": "Q186327"
+  },
+  "Meghan Trainor": {
+   "F": 6.0780059764109176,
+   "article": "Meghan Trainor",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Meghan Trainor",
+   "pageviews": 1196756,
+   "query": "Meghan Trainor",
+   "wikidata": "Q17403494"
+  },
+  "Metallica": {
+   "F": 6.3557261480046,
+   "article": "Metallica",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Metallica",
+   "pageviews": 2268433,
+   "query": "Metallica",
+   "wikidata": "Q15920"
+  },
+  "Michael Bublé": {
+   "F": 6.041329905327553,
+   "article": "Michael Bublé",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Michael Bublé",
+   "pageviews": 1099840,
+   "query": "Michael Bublé",
+   "wikidata": "Q153694"
+  },
+  "Michael Jackson": {
+   "F": 7.189716778378239,
+   "article": "Michael Jackson",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Michael Jackson",
+   "pageviews": 15478068,
+   "query": "Michael Jackson",
+   "wikidata": "Q2831"
+  },
+  "Miles Davis": {
+   "F": 6.082874373618499,
+   "article": "Miles Davis",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Miles Davis",
+   "pageviews": 1210247,
+   "query": "Miles Davis",
+   "wikidata": "Q93341"
+  },
+  "Moby": {
+   "F": 5.784429699662445,
+   "article": "Moby",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Moby",
+   "pageviews": 608736,
+   "query": "Moby",
+   "wikidata": "Q14045"
+  },
+  "Motörhead": {
+   "F": 5.882984771381249,
+   "article": "Motörhead",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Motörhead",
+   "pageviews": 763808,
+   "query": "Motörhead",
+   "wikidata": "Q19697"
+  },
+  "Muse": {
+   "F": 5.881428597616056,
+   "article": "Muse (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Muse (band)",
+   "pageviews": 761076,
+   "query": "Muse",
+   "wikidata": "Q22151"
+  },
+  "My Chemical Romance": {
+   "F": 6.139998972894192,
+   "article": "My Chemical Romance",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "My Chemical Romance",
+   "pageviews": 1380380,
+   "query": "My Chemical Romance",
+   "wikidata": "Q483285"
+  },
+  "Neil Young": {
+   "F": 6.315054424634245,
+   "article": "Neil Young",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Neil Young",
+   "pageviews": 2065638,
+   "query": "Neil Young",
+   "wikidata": "Q633"
+  },
+  "Neutral Milk Hotel": {
+   "F": 5.468760747370461,
+   "article": "Neutral Milk Hotel",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Neutral Milk Hotel",
+   "pageviews": 294279,
+   "query": "Neutral Milk Hotel",
+   "wikidata": "Q849875"
+  },
+  "Nick Drake": {
+   "F": 5.895945484096512,
+   "article": "Nick Drake",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Nick Drake",
+   "pageviews": 786946,
+   "query": "Nick Drake",
+   "wikidata": "Q211588"
+  },
+  "Nina Simone": {
+   "F": 5.906919813948182,
+   "article": "Nina Simone",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Nina Simone",
+   "pageviews": 807085,
+   "query": "Nina Simone",
+   "wikidata": "Q174957"
+  },
+  "Nine Inch Nails": {
+   "F": 6.108374555341804,
+   "article": "Nine Inch Nails",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Nine Inch Nails",
+   "pageviews": 1283436,
+   "query": "Nine Inch Nails",
+   "wikidata": "Q11647"
+  },
+  "Nirvana": {
+   "F": 6.161208032601975,
+   "article": "Nirvana (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Nirvana (band)",
+   "pageviews": 1449465,
+   "query": "Nirvana",
+   "wikidata": "Q11649"
+  },
+  "No Doubt": {
+   "F": 5.866551971269641,
+   "article": "No Doubt",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "No Doubt",
+   "pageviews": 735447,
+   "query": "No Doubt",
+   "wikidata": "Q43259"
+  },
+  "Norah Jones": {
+   "F": 5.995057505969698,
+   "article": "Norah Jones",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Norah Jones",
+   "pageviews": 988683,
+   "query": "Norah Jones",
+   "wikidata": "Q549981"
+  },
+  "Oasis": {
+   "F": 6.362230194018129,
+   "article": "Oasis (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Oasis (band)",
+   "pageviews": 2302661,
+   "query": "Oasis",
+   "wikidata": "Q382890"
+  },
+  "OneRepublic": {
+   "F": 5.6515832700017405,
+   "article": "OneRepublic",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "OneRepublic",
+   "pageviews": 448314,
+   "query": "OneRepublic",
+   "wikidata": "Q1438730"
+  },
+  "Ozzy Osbourne": {
+   "F": 7.258803403303059,
+   "article": "Ozzy Osbourne",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Ozzy Osbourne",
+   "pageviews": 18146939,
+   "query": "Ozzy Osbourne",
+   "wikidata": "Q133151"
+  },
+  "P!nk": {
+   "F": 6.244438188199861,
+   "article": "Pink (singer)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "P!nk",
+   "pageviews": 1755650,
+   "query": "P!nk",
+   "wikidata": "Q160009"
+  },
+  "PJ Harvey": {
+   "F": 5.682444735480486,
+   "article": "PJ Harvey",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "PJ Harvey",
+   "pageviews": 481331,
+   "query": "PJ Harvey",
+   "wikidata": "Q219772"
+  },
+  "Pantera": {
+   "F": 5.953491496105417,
+   "article": "Pantera",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Pantera",
+   "pageviews": 898444,
+   "query": "Pantera",
+   "wikidata": "Q180880"
+  },
+  "Papa Roach": {
+   "F": 5.611486452062836,
+   "article": "Papa Roach",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Papa Roach",
+   "pageviews": 408776,
+   "query": "Papa Roach",
+   "wikidata": "Q254371"
+  },
+  "Paramore": {
+   "F": 6.053420363796977,
+   "article": "Paramore",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Paramore",
+   "pageviews": 1130889,
+   "query": "Paramore",
+   "wikidata": "Q473466"
+  },
+  "Pearl Jam": {
+   "F": 6.069971700961596,
+   "article": "Pearl Jam",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Pearl Jam",
+   "pageviews": 1174820,
+   "query": "Pearl Jam",
+   "wikidata": "Q142701"
+  },
+  "Phoenix": {
+   "F": 6.430116837446495,
+   "article": "Joaquin Phoenix",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Joaquin Phoenix",
+   "pageviews": 2692258,
+   "query": "Phoenix",
+   "wikidata": "Q185140"
+  },
+  "Pink Floyd": {
+   "F": 6.360035325603906,
+   "article": "Pink Floyd",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Pink Floyd",
+   "pageviews": 2291053,
+   "query": "Pink Floyd",
+   "wikidata": "Q2306"
+  },
+  "Pixies": {
+   "F": 5.853156526637673,
+   "article": "Pixies (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Pixies (band)",
+   "pageviews": 713109,
+   "query": "Pixies",
+   "wikidata": "Q188464"
+  },
+  "Placebo": {
+   "F": 5.5367149623741785,
+   "article": "Placebo (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Placebo (band)",
+   "pageviews": 344123,
+   "query": "Placebo",
+   "wikidata": "Q484839"
+  },
+  "Portishead": {
+   "F": 5.604320032019767,
+   "article": "Portishead (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Portishead (band)",
+   "pageviews": 402086,
+   "query": "Portishead",
+   "wikidata": "Q191352"
+  },
+  "Queen": {
+   "F": 6.306582631762121,
+   "article": "Queen (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Queen (band)",
+   "pageviews": 2025734,
+   "query": "Queen",
+   "wikidata": "Q15862"
+  },
+  "Queens of the Stone Age": {
+   "F": 5.9571147755648886,
+   "article": "Queens of the Stone Age",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Queens of the Stone Age",
+   "pageviews": 905971,
+   "query": "Queens of the Stone Age",
+   "wikidata": "Q1243718"
+  },
+  "R.E.M.": {
+   "F": 6.017606313398228,
+   "article": "R.E.M.",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "R.E.M.",
+   "pageviews": 1041372,
+   "query": "R.E.M.",
+   "wikidata": "Q134969"
+  },
+  "Radiohead": {
+   "F": 6.225169923222963,
+   "article": "Radiohead",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Radiohead",
+   "pageviews": 1679460,
+   "query": "Radiohead",
+   "wikidata": "Q44190"
+  },
+  "Rage Against the Machine": {
+   "F": 6.078346961732799,
+   "article": "Rage Against the Machine",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Rage Against the Machine",
+   "pageviews": 1197696,
+   "query": "Rage Against the Machine",
+   "wikidata": "Q72092"
+  },
+  "Rainbow": {
+   "F": 5.70842344980129,
+   "article": "Rainbow (rock band)",
+   "candidates_checked": [
+    [
+     "Rainbow",
+     "not a musical act"
+    ],
+    [
+     "Rainbow flag (LGBTQ)",
+     "name mismatch"
+    ],
+    [
+     "Rainbow trout",
+     "not a musical act"
+    ],
+    [
+     "Tom Clancy's Rainbow Six Siege",
+     "name mismatch"
+    ],
+    [
+     "Rainbow Gathering",
+     "name mismatch"
+    ]
+   ],
+   "matched": true,
+   "months_present": 12,
+   "pageviews": 511002,
+   "query": "Rainbow",
+   "reason": "no identity-matched musical performer among candidates",
+   "via": "wikidata_fallback",
+   "wikidata": "Q16005"
+  },
+  "Ray Charles": {
+   "F": 6.100104027138003,
+   "article": "Ray Charles",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Ray Charles",
+   "pageviews": 1259226,
+   "query": "Ray Charles",
+   "wikidata": "Q544387"
+  },
+  "Red Hot Chili Peppers": {
+   "F": 6.3280989544648465,
+   "article": "Red Hot Chili Peppers",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Red Hot Chili Peppers",
+   "pageviews": 2128623,
+   "query": "Red Hot Chili Peppers",
+   "wikidata": "Q10708"
+  },
+  "Rihanna": {
+   "F": 6.588833852288783,
+   "article": "Rihanna",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Rihanna",
+   "pageviews": 3880018,
+   "query": "Rihanna",
+   "wikidata": "Q36844"
+  },
+  "Rise Against": {
+   "F": 5.446516974085374,
+   "article": "Rise Against",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Rise Against",
+   "pageviews": 279586,
+   "query": "Rise Against",
+   "wikidata": "Q246352"
+  },
+  "Sigur Rós": {
+   "F": 5.422328790803482,
+   "article": "Sigur Rós",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Sigur Rós",
+   "pageviews": 264440,
+   "query": "Sigur Rós",
+   "wikidata": "Q483828"
+  },
+  "Simon & Garfunkel": {
+   "F": 5.905424008285575,
+   "article": "Simon & Garfunkel",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Simon & Garfunkel",
+   "pageviews": 804310,
+   "query": "Simon & Garfunkel",
+   "wikidata": "Q484918"
+  },
+  "Skrillex": {
+   "F": 5.787291824995927,
+   "article": "Skrillex",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Skrillex",
+   "pageviews": 612761,
+   "query": "Skrillex",
+   "wikidata": "Q19004"
+  },
+  "Slipknot": {
+   "F": 6.162933728311852,
+   "article": "Slipknot (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Slipknot (band)",
+   "pageviews": 1455236,
+   "query": "Slipknot",
+   "wikidata": "Q254138"
+  },
+  "Stevie Wonder": {
+   "F": 6.292656058449035,
+   "article": "Stevie Wonder",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Stevie Wonder",
+   "pageviews": 1961805,
+   "query": "Stevie Wonder",
+   "wikidata": "Q714"
+  },
+  "System of a Down": {
+   "F": 6.110610246219447,
+   "article": "System of a Down",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "System of a Down",
+   "pageviews": 1290060,
+   "query": "System of a Down",
+   "wikidata": "Q45165"
+  },
+  "TANUKI": {
+   "F": 0.0,
+   "article": null,
+   "candidates_checked": [
+    [
+     "Tanuki statue",
+     "name mismatch"
+    ],
+    [
+     "Tanukichan",
+     "name mismatch"
+    ],
+    [
+     "Tanuki (restaurant)",
+     "not a musical act"
+    ],
+    [
+     "Tanuki to Kitsune",
+     "name mismatch"
+    ],
+    [
+     "Tanukitsuki",
+     "name mismatch"
+    ]
+   ],
+   "guard": {
+    "foreign": {
+     "found": false
+    },
+    "non_latin_name": false,
+    "potentially_notable": false
+   },
+   "matched": false,
+   "pageviews": null,
+   "query": "TANUKI",
+   "reason": "no identity-matched musical performer among candidates"
+  },
+  "Tame Impala": {
+   "F": 6.195533252100221,
+   "article": "Tame Impala",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Tame Impala",
+   "pageviews": 1568675,
+   "query": "Tame Impala",
+   "wikidata": "Q9619"
+  },
+  "Taylor Swift": {
+   "F": 6.910975539912312,
+   "article": "Taylor Swift",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Taylor Swift",
+   "pageviews": 8146583,
+   "query": "Taylor Swift",
+   "wikidata": "Q26876"
+  },
+  "The Beatles": {
+   "F": 6.599392850219704,
+   "article": "The Beatles",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Beatles",
+   "pageviews": 3975509,
+   "query": "The Beatles",
+   "wikidata": "Q1299"
+  },
+  "The Black Keys": {
+   "F": 5.635971049303266,
+   "article": "The Black Keys",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Black Keys",
+   "pageviews": 432484,
+   "query": "The Black Keys",
+   "wikidata": "Q606226"
+  },
+  "The Clash": {
+   "F": 5.853674489160783,
+   "article": "The Clash",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Clash",
+   "pageviews": 713960,
+   "query": "The Clash",
+   "wikidata": "Q125603"
+  },
+  "The Cranberries": {
+   "F": 6.0897469005700655,
+   "article": "The Cranberries",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Cranberries",
+   "pageviews": 1229551,
+   "query": "The Cranberries",
+   "wikidata": "Q483810"
+  },
+  "The Cure": {
+   "F": 6.140171035553394,
+   "article": "The Cure",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Cure",
+   "pageviews": 1380927,
+   "query": "The Cure",
+   "wikidata": "Q484427"
+  },
+  "The Doors": {
+   "F": 5.9143272873599955,
+   "article": "The Doors",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Doors",
+   "pageviews": 820969,
+   "query": "The Doors",
+   "wikidata": "Q45354"
+  },
+  "The Jacksons": {
+   "F": 6.304326774779294,
+   "article": "The Jackson 5",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Jackson 5",
+   "pageviews": 2015239,
+   "query": "The Jacksons",
+   "wikidata": "Q43267"
+  },
+  "The Killers": {
+   "F": 5.894332680777789,
+   "article": "The Killers",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Killers",
+   "pageviews": 784029,
+   "query": "The Killers",
+   "wikidata": "Q220730"
+  },
+  "The Kinks": {
+   "F": 5.8055436738136255,
+   "article": "The Kinks",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Kinks",
+   "pageviews": 639062,
+   "query": "The Kinks",
+   "wikidata": "Q188713"
+  },
+  "The Offspring": {
+   "F": 5.9657255497017365,
+   "article": "The Offspring",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Offspring",
+   "pageviews": 924113,
+   "query": "The Offspring",
+   "wikidata": "Q157041"
+  },
+  "The Prodigy": {
+   "F": 6.029927320216255,
+   "article": "The Prodigy",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Prodigy",
+   "pageviews": 1071339,
+   "query": "The Prodigy",
+   "wikidata": "Q7256860"
+  },
+  "The Raconteurs": {
+   "F": 5.140913237373888,
+   "article": "The Raconteurs",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Raconteurs",
+   "pageviews": 138328,
+   "query": "The Raconteurs",
+   "wikidata": "Q912909"
+  },
+  "The Rolling Stones": {
+   "F": 6.293641827863309,
+   "article": "The Rolling Stones",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Rolling Stones",
+   "pageviews": 1966263,
+   "query": "The Rolling Stones",
+   "wikidata": "Q11036"
+  },
+  "The Shins": {
+   "F": 5.185712099870006,
+   "article": "The Shins",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Shins",
+   "pageviews": 153359,
+   "query": "The Shins",
+   "wikidata": "Q58391"
+  },
+  "The Smashing Pumpkins": {
+   "F": 6.067672571380777,
+   "article": "The Smashing Pumpkins",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Smashing Pumpkins",
+   "pageviews": 1168617,
+   "query": "The Smashing Pumpkins",
+   "wikidata": "Q184217"
+  },
+  "The Strokes": {
+   "F": 5.994140230739092,
+   "article": "The Strokes",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Strokes",
+   "pageviews": 986597,
+   "query": "The Strokes",
+   "wikidata": "Q211583"
+  },
+  "The Temptations": {
+   "F": 5.8448007567795575,
+   "article": "The Temptations",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Temptations",
+   "pageviews": 699520,
+   "query": "The Temptations",
+   "wikidata": "Q846373"
+  },
+  "The White Stripes": {
+   "F": 6.028711521794728,
+   "article": "The White Stripes",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The White Stripes",
+   "pageviews": 1068344,
+   "query": "The White Stripes",
+   "wikidata": "Q268160"
+  },
+  "The Who": {
+   "F": 6.076552338116484,
+   "article": "The Who",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The Who",
+   "pageviews": 1192757,
+   "query": "The Who",
+   "wikidata": "Q93346"
+  },
+  "The xx": {
+   "F": 6.003705184679858,
+   "article": "The xx",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "The xx",
+   "pageviews": 1008567,
+   "query": "The xx",
+   "wikidata": "Q869367"
+  },
+  "Tom Waits": {
+   "F": 6.06889944832811,
+   "article": "Tom Waits",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Tom Waits",
+   "pageviews": 1171923,
+   "query": "Tom Waits",
+   "wikidata": "Q184805"
+  },
+  "Toto": {
+   "F": 5.979508312149392,
+   "article": "Toto (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Toto (band)",
+   "pageviews": 953911,
+   "query": "Toto",
+   "wikidata": "Q207472"
+  },
+  "Two Door Cinema Club": {
+   "F": 5.193199758203068,
+   "article": "Two Door Cinema Club",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Two Door Cinema Club",
+   "pageviews": 156026,
+   "query": "Two Door Cinema Club",
+   "wikidata": "Q777302"
+  },
+  "U2": {
+   "F": 6.020370399420912,
+   "article": "U2",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "U2",
+   "pageviews": 1048021,
+   "query": "U2",
+   "wikidata": "Q396"
+  },
+  "Uriah Heep": {
+   "F": 5.627128158726531,
+   "article": "Uriah Heep (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Uriah Heep (band)",
+   "pageviews": 423767,
+   "query": "Uriah Heep",
+   "wikidata": "Q108666"
+  },
+  "Vampire Weekend": {
+   "F": 5.452125451863757,
+   "article": "Vampire Weekend",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Vampire Weekend",
+   "pageviews": 283220,
+   "query": "Vampire Weekend",
+   "wikidata": "Q816452"
+  },
+  "Washed Out": {
+   "F": 4.614222059298785,
+   "article": "Washed Out",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Washed Out",
+   "pageviews": 41135,
+   "query": "Washed Out",
+   "wikidata": "Q1627479"
+  },
+  "Weezer": {
+   "F": 5.939599614621659,
+   "article": "Weezer",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Weezer",
+   "pageviews": 870160,
+   "query": "Weezer",
+   "wikidata": "Q209956"
+  },
+  "Wishbone Ash": {
+   "F": 5.256811520375379,
+   "article": "Wishbone Ash",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Wishbone Ash",
+   "pageviews": 180638,
+   "query": "Wishbone Ash",
+   "wikidata": "Q137758"
+  },
+  "Ye": {
+   "F": 6.587317677546797,
+   "article": "Kanye West",
+   "candidates_checked": [
+    [
+     "Ye",
+     "missing/disambig"
+    ],
+    [
+     "Year",
+     "name mismatch"
+    ],
+    [
+     "Yemen",
+     "not a musical act"
+    ],
+    [
+     "Yemeni civil war (2014–present)",
+     "name mismatch"
+    ],
+    [
+     "Boris Yeltsin",
+     "name mismatch"
+    ]
+   ],
+   "matched": true,
+   "months_present": 12,
+   "pageviews": 3866496,
+   "query": "Ye",
+   "reason": "no identity-matched musical performer among candidates",
+   "via": "wikidata_fallback",
+   "wikidata": "Q15935"
+  },
+  "Yes": {
+   "F": 6.006966369252905,
+   "article": "Yes (band)",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Yes (band)",
+   "pageviews": 1016169,
+   "query": "Yes",
+   "wikidata": "Q184386"
+  },
+  "ZZ Top": {
+   "F": 6.029613446550814,
+   "article": "ZZ Top",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "ZZ Top",
+   "pageviews": 1070565,
+   "query": "ZZ Top",
+   "wikidata": "Q136591"
+  },
+  "alt‐J": {
+   "F": 5.200927067194083,
+   "article": "Alt-J",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Alt-J",
+   "pageviews": 158827,
+   "query": "alt‐J",
+   "wikidata": "Q47996"
+  },
+  "deadmau5": {
+   "F": 5.582267956091819,
+   "article": "Deadmau5",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Deadmau5",
+   "pageviews": 382179,
+   "query": "deadmau5",
+   "wikidata": "Q49009"
+  },
+  "twenty one pilots": {
+   "F": 6.0101646426520885,
+   "article": "Twenty One Pilots",
+   "matched": true,
+   "months_present": 12,
+   "opensearch_candidate": "Twenty One Pilots",
+   "pageviews": 1023680,
+   "query": "twenty one pilots",
+   "wikidata": "Q7857806"
+  }
+ }
+}

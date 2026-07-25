@@ -8,7 +8,7 @@ including the null — for the sweep defined by
 Where it disagrees with that spec it says so inline; the disagreements are design
 corrections, not scope changes, and none reopens anything closed in the Phase 1 log §4/§4.1.
 
-> **⚠ AMENDED 2026-07-23/24 — sixteen amendments (A1–A16); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result, A12 stops C6 gating because A11 inverted what it measures, A13 discharges D7, A14 adds two non-gating items on WGLL values 8-9, A15 fixes a resolver recall bug that poisoned P's baseline, A16 corrects R5's barred floor attribution. No factorial arm has run.**
+> **⚠ AMENDED 2026-07-23/24 — nineteen amendments (A1–A19); A1–A7 before any arm ran, A8–A9 on the A0 gate result, A10 fixes §5's sample before any label, A11 resolves the fame proxy on the P4 pilot result, A12 stops C6 gating because A11 inverted what it measures, A13 discharges D7, A14 adds two non-gating items on WGLL values 8-9, A15 fixes a resolver recall bug that poisoned P's baseline, A16 corrects R5's barred floor attribution, and A17–A19 record the P8b harness review — A17 six bounds on what a result licenses (C2 is a regression guard, not a discriminator; X does not bound what §1.4 claims), A18 the blank-name exposure as a DIRECTIONAL confound with the guards made load-bearing, A19 a pre-listen assertion with its response pre-registered. No factorial arm has run.**
 > The `ml-graph-analyst` protocol review
 > ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md))
 > found three defects settled by arithmetic over the artifact (D1–D3, amendments A1–A5),
@@ -112,6 +112,31 @@ concept exists; Stage A's F2 criterion needs no gate.
 | `w_hop`, `w_avoid`, avoidance params | Production defaults (`config.py`) | Out of scope for the diagnosed defect |
 | `w_degree_hub` | 0.0 (`config.py:44`) | *Added 2026-07-23, §9 A5 — closes analyst O3.* Genuinely constant under every intervention here: **a zero weight cannot be un-zeroed by turning another knob**, so the degree-hub term contributes nothing in any arm. Listed explicitly because the dormant-term rule requires enumerating what is held fixed, not only what is turned — and this table's omission of it was that rule finding its first miss on the document that motivated it. |
 | Percentile definition | Rank over N of the artifact's popularity array, computed once at harness start; ties by average rank (P6) | Spec §4.2 |
+| Artist name availability | **NOT genuinely constant — see the note below** | *Added 2026-07-24, §9 **A18**.* The one entry in this table whose "why" is a warning rather than a reason. Listed because the rule is to enumerate what is held fixed **and check each is actually fixed under the intervention** — and this one is not. |
+
+> **Note added 2026-07-24 (§9 A18) — the blank-name exposure is the second dormant-term
+> catch, and it is directional.**
+>
+> 33 nodes in the adopted artifact carry **no name**. Under A11 an unresolvable artist
+> scores at the fame floor, so a blank-named interior reads as **maximal obscurity** — it
+> satisfies C2 by construction and drags C1's and C3's medians toward passing. The A11
+> notability guard cannot flag it: `has_non_latin("")` is False and an empty-string label
+> search returns nothing.
+>
+> **Why this is not a small-effect argument.** Blank names are **2.7× concentrated in the
+> bottom popularity decile** — the stratum the diving arms aim at — and **P contains zero
+> blank interiors** (measured, not assumed). So the contamination is absent from the control
+> and present preferentially in the arms under test, with a known sign. It is exactly the
+> `w_floor` pattern that restructured this design: *a term inert in the baseline for a
+> reason the intervention removes is not a constant.*
+>
+> **Held constant by a guard, not by nature.** Scoring refuses to run when a scored cell
+> contains a blank interior, and the pre-registered response is to drop that cell from
+> **every arm or none** (A13's rule, applied to a second cause). A node-level exclusion is
+> rejected: it would silently improve whichever arm produced the blank. The listen carries
+> its own assertion (**A19**). The builder now rejects such an artifact outright
+> (`acceptance.py`), but the adopted artifact predates that and the rebuild is gated to
+> Track 2 adoption — so for this sweep the guards are what make the column constant.
 
 > **Note added 2026-07-23 (pre-Track-2 guards, G5a) — verify the mirror with guard G OFF,
 > then enable it everywhere.**
@@ -213,7 +238,7 @@ are excluded from selection *(clarified 2026-07-23, §9 A3)*.
 | **T1b** | T1a with **`s_toll = 0.80`** (toll = 30 × `w_hop`) *(added 2026-07-23, §9 A1)* | T1a | Toll magnitude. Makes a T1 null interpretable: a null at 30 × `w_hop` is evidence about the ceiling; a null at an inert magnitude is evidence about nothing. |
 | FL1 | W + floor **pctl** (floor = min endpoint *percentile*, `w_floor = 1.0`), relax **`floor_relax_known_pctl = 0.05` per bypass — pre-registered here, NOT `config.py`'s value** *(amended 2026-07-23, §9 A2)* | W | The depth-graduating device: holds d0 high, admits progressively deeper dives per bypass |
 | FL2 | FL1 with `w_floor = 3.0` | FL1 | Floor strength — whether the gradient needs a hard wall |
-| **X** | Corner: pctl, `w_jump = 0`, `w_sim = 1.5`, floor off, toll off | A7 (one column: J-mag 0.3 → 0) | **Reachability bound, not a candidate.** The cheapest-possible-dive member of the family. If X does not move the primary outcome, no arm in this family can — that is what makes the null in §2.4 R0 interpretable. Never adoptable (INFERENCE: it will wander incoherently; falsified if it both moves fame and survives the listen — a welcome surprise). |
+| **X** | Corner: pctl, `w_jump = 0`, `w_sim = 1.5`, floor off, toll off | A7 (one column: J-mag 0.3 → 0) | **Reachability bound, not a candidate.** The cheapest-possible-dive member of the family. If X does not move the primary outcome, no arm in this family can — that is what makes the null in §2.4 R0 interpretable. **⚠ Bounded 2026-07-24 by §9 A17(c): this claim is weaker than written.** The jump term is symmetric, so `w_jump = 0` also removes the price of *climbing*; X is measured as MORE pop-ascending one hop out than the arm it bounds (86.9 % vs 82.6 %). An R0 null may not be read as "no arm in this family can move the outcome" unless X's fame profile turns out lowest — a free falsifier once stage 1 runs. Never adoptable (INFERENCE: it will wander incoherently; falsified if it both moves fame and survives the listen — a welcome surprise). |
 
 **15 runs total** (P, 8 factorial, A1u, T1a, T1b, FL1, FL2, X) *(amended 2026-07-23 from
 13 — §9 A1, A3)*. At the recorded harness cost per `find_path` call (README,
@@ -289,6 +314,16 @@ answered.
 - **F5 confinement diagnostic:** node-set overlap between consecutive snapshot paths;
   flag only *sustained* confinement to one region (≥ 3 consecutive bypasses changing
   only the same node group), not single local deviations.
+- **Pre-listen blank-name assertion, GATING the listen** *(added 2026-07-24, §9 **A19**)*.
+  Before any path goes to the blind listen, assert **zero blank-named interiors** across
+  the sampled walks. A blank card has no name *and* no clip (`clips.py` passes the name as
+  the provider query), and it lands preferentially on the diving candidate rather than the
+  control — a directional confound on the one measurement that cannot cheaply be re-run.
+  **Response, fixed before stage 1:** substitute the affected pair from §2.3's ordered
+  reserve, applied to **both** arms; if the reserve is exhausted, accept-and-record with the
+  blank card named in the write-up. **A rebuild is rejected as the response** — it changes
+  the substrate, so the listen would stop testing what the offline pass selected. Deciding
+  this *after* seeing which arm trips it is how a re-roll becomes arm-correlated selection.
 - **Endpoint-fame tracking, per arm, at d0** *(added 2026-07-24, §9 A14 — on
   `WHAT-GOOD-LOOKS-LIKE.md` value 9)*. For each arm, the relationship between a pair's
   **endpoint** fame and its **d0 interior** fame, reported across the pair set. Value 9
@@ -330,7 +365,7 @@ execution log.
 | # | Criterion | Threshold |
 |---|---|---|
 | **C1** | Relative depth contrast vs P | mean ΔF over d ≥ 10 cells ≤ **−1.0** (an order of magnitude in fan count), and ΔF < 0 in ≥ **75 %** of those cells |
-| **C2** | Absolute reach | in ≥ **4 of 8** analysis pairs, at least one d15-or-d20 interior falls below **B_unk**, the owner-calibrated "would not know them" fame band from §5 |
+| **C2** | Absolute reach | in ≥ **4 of 8** analysis pairs, at least one d15-or-d20 interior falls below **B_unk**, the owner-calibrated "would not know them" fame band from §5. *Threshold unchanged, but **§9 A17(a)** establishes this is a one-sided **regression guard**, not a discriminator: P scores exactly 4/8, so any arm meeting C1 meets C2 by construction. §3's Attack 1 is re-attributed to C1's magnitude. Blank-named interiors cannot contribute — their cell is dropped from every arm (**A18**).* |
 | **C3** | Within-arm depth gradient (F2's "progressively") | candidate's pooled median F at d20 ≤ pooled median F at d5 **− 0.5** |
 | **C4** | Payload guard (WHAT-GOOD #2: fewer-but-obscurer is not a win) | mean interior count over d ≥ 10 cells ≥ P's mean − **1** |
 | ~~**C6**~~ | ~~Proxy coverage guard~~ **AMENDED 2026-07-24 (§9 A12) — C6 NO LONGER GATES.** ~~≥ 90 % of each arm's distinct interior artists name-matched to the proxy, and candidate-vs-P coverage gap ≤ 5 points~~ | Under A11 an unmatched interior is **scored** at the fame floor rather than dropped, which dissolves Attack 4's silent-drop mechanism that C6 existed to close — and makes match failure a **marker of the obscurity the sweep exists to reach** (measured: 1 of 9 in the obscure stratum resolves, against 13 of 13 the owner recognises). Left gating, C6 would cap an arm at ≈ 5.6 % obscure interiors and so penalise success. **Coverage is now reported per arm and per cell, not thresholded.** The gating remnant is A11's **d15/d20 notability guard**. Full argument: **A12 in full**. |
@@ -394,6 +429,12 @@ journeys (§6).
 ### 2.4 The read of each possible result — written before any arm runs
 
 - **R0 — full null (no arm, including corner X, moves C1's statistic materially).**
+  **⚠ Amended 2026-07-24 by §9 A17(c) — read this alongside X's bound.** "The repricing
+  family is exhausted" rests on X bounding the family, and X's bound is measured as
+  weaker than §1.4 claims (its symmetric jump term also unprices *climbing*). **On a
+  full null, check X's fame profile first:** if it is the lowest of any arm, the bound
+  holds and the read below stands unchanged; if it is not, R0 licenses only "these
+  fifteen configurations do not move it", which does **not** reach the family.
   Read: the repricing family is exhausted; §2.12's "cost-function problem" diagnosis is
   **incomplete as stated** — the router's refusal is not (only) price-driven within
   reachable weight space. Licenses: firing spec §5's recorded triggers — schedule the
@@ -485,6 +526,15 @@ drop an order of magnitude; every artist is still someone he knows. The spec's r
 criterion **passes this config.** *Closed by C2:* an absolute-reach clause in the
 owner's own calibrated "would not know them" band, which a ladder of household names
 cannot satisfy — plus C3 forcing the profile to keep moving with depth.
+
+> **⚠ Re-attributed 2026-07-24 by §9 A17(a). C2 does NOT close this attack.** P scores
+> exactly C2's 4/8 minimum, and its four non-reaching pairs sit only 0.0985–0.7344 log10
+> above B_unk — so a ladder that merely preserves P's reaching pairs passes C2 unchanged.
+> **What closes it is C1's magnitude:** −1.0 log10 lands at 4.87, below the p10 (5.422) of
+> matched fame in P's own paths, which a ladder of household names cannot reach. C3's
+> depth gradient remains the second line as written. **The cost of this correction:**
+> Attack 1's closure now rests on **one** criterion rather than two, and C2 is demoted to
+> catching regressions. The threshold was deliberately not loosened — see A17(a).
 
 **Attack 2 — the insular-cluster dive (percentile currency's ghost).** A config
 satisfies fame-drop by always routing into one obscure-but-dense cluster (log §2.11's
@@ -774,7 +824,7 @@ For the reviewer's convenience; each is argued in place above.
 
 ## 9. Amendment index — 2026-07-23/24, before any factorial arm ran
 
-Sixteen amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **and two (A11, A12) on 2026-07-24 — A11 by the P4 proxy-pilot result, A12 by A11's own knock-on** (both proxies fired; these postdate the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
+Nineteen amendments — six prompted by the `ml-graph-analyst` protocol review, one (A7) by P1's answer, two (A8, A9) by the A0 gate result and its review, one (A10) by deriving §5's sample against the repo, **two (A11, A12) on 2026-07-24 — A11 by the P4 proxy-pilot result, A12 by A11's own knock-on**, and **three (A17–A19) by the P8b harness review and a consulting pass on it** (both proxies fired; these postdate the pilot exactly as A8/A9 postdate the A0 gate — **no factorial/sweep arm has run**)
 ([`../findings/2026-07-23-track2-protocol-analyst-review.md`](../findings/2026-07-23-track2-protocol-analyst-review.md)).
 Each is marked inline at the passage it changes. **The pre-registration gate is intact:**
 these were committed before any arm ran, and the commit timestamp is the evidence — which
@@ -789,6 +839,9 @@ before it ran.
 
 | # | Amendment | Prompted by | Changes |
 |---|---|---|---|
+| **A19** | **A pre-listen assertion, with its response pre-registered before stage 1.** No path reaches the blind listen until the sampled walks are asserted to contain **zero blank-named interiors**. A blank card has no name *and* no clip, and it would land preferentially on the candidate rather than the control (see A18), so it is a directional confound on the one measurement that cannot cheaply be re-run — and §6 already prices "one burned listen" as an accepted residual for Attack 2, which makes this a second, *avoidable* route to the same cost. **Response if it fires, fixed now:** substitute the affected pair from §2.3's ordered reserve, applying the same substitution to **both** arms. Fallback if the reserve is exhausted: accept-and-record, with the blank card named in the verdict write-up. **A rebuild is explicitly rejected as the response** — it changes the substrate, so the listen would no longer test what the offline pass selected. | consulting pass on P8b F8 | §1.5 listen bullet · A19 in full below |
+| **A18** | **The blank-name exposure is a DIRECTIONAL confound, and the deferred rebuild is safe only because the guards neutralise it.** The repair+retune log's first justification — "0.049 % of nodes, in a relative comparison between arms" — is the reasoning for a *random* 0.049 % and is **wrong here**: blank names are 2.7× concentrated in the bottom popularity decile, resolve to F = 0 (maximal reach), are **absent from P entirely**, and the diving arms aim at exactly that stratum. Bias with a known sign, absent from the control, present preferentially in the treatment. **This is the "held constant, and why each is genuinely constant" pattern** — the same shape as the `w_floor` catch that restructured this design. **The guards are therefore load-bearing, not belt-and-braces:** contamination is caught at **cell** level and the cell is dropped from every arm or none (A13's rule, second cause), with a fail-loud default. A node-level exclusion is rejected: it would silently improve whichever arm produced the blank. | consulting pass on P8b F8 | §1.2 constants table + its A18 note · A18 in full below · `.../2026-07-24-track2-arm-scorer/{score.py,verify_c2_guards.py}` |
+| **A17** | **P8b's harness review recorded as six bounds on what the sweep may conclude.** None changes a threshold or an arm count; each narrows a read. **(a) C2 is a one-sided regression guard, not a discriminator** — P scores exactly its 4/8 minimum and a uniform −1.0 median drop puts 7 of 8 pairs below B_unk, so any arm meeting C1 meets C2 by construction. **§3's Attack 1 is therefore NOT closed by C2** and is re-attributed to **C1's magnitude** (−1.0 lands below the p10 of matched fame in P's own paths). Threshold left as written — loosening it after seeing the baseline is what pre-registration exists to prevent. **(b) T1a/T1b's toll is W-dependent:** `toll = w_sim·(1−toll_s)` gives §1.4's 7.5×/30× `w_hop` only at `w_sim` 3.0; at 1.5 — which includes **A7, R1's fallback W** — it is 3.75×/15×. Neither is inert, so a T1 null survives, but §1.4's figures must not be quoted for an S-mag-1.5 W. **(c) X does not bound what §1.4 claims.** The jump term is `|Δpop|`, *symmetric*, so `w_jump=0` removes the price of climbing too: measured one hop out, X ascends on 86.9 % of cheapest hops against A0's 82.6 %. **§2.4 R0's interpretability rests on an inference this measurement points against** — R0's null must be read with that stated. Falsified for free once stage 1 runs. **(d) A0's knob cannot act at any depth C1 or C2 scores:** P's raw floor dies at d4–d7 per pair, so at d10/15/20 P's cost function *is* A0's and A0's C1 row measures exclusion-history carryover, not a floor contrast. Bounds A8. C3 is unaffected — it reads d5, where P's floor is live on 4 of 8 pairs. **(e) The percentile floor is arithmetically dead at d20 on every pair** (base ≤ 1.0, 0.05 × 20 = 1.0), alive d0–d15 on all 12 — A2's claim confirmed and tightened. So FL1/FL2 share W's cost function *exactly* at d20: C3 improvement can only be manufactured at **d5**, C1 can only be made less negative, and C2's d20 clause gives FL nothing W lacks. A8's warning, now a bound. **(f) R1 is under-specified** where cells move C1 negative but all fail C4; the code falls back to A7. Legitimately pre-registered (the code predates the arms) but named here rather than discovered at selection. | the **P8b** harness review — `builder/analysis/2026-07-24-track2-p8b-harness-review/` (README owns its figures; no `findings/` doc, deliberately — duplicating them would break the one-owner rule) | §2.2 C2 row · §3 Attack 1 · §1.4 T1/X rationale · §2.4 R0, R3, R5 · A17 in full below |
 | **A1** | **T1's toll replaced and split into T1a/T1b.** The `min(sim, s_max)` form and P3's rule are withdrawn; the toll is now additive on edges at score exactly 1.0, at two pre-registered magnitudes (`s_toll` 0.95 and 0.80 = 7.5× and 30× `w_hop`). | **D1** | §0 T1 row · §1.4 arms + rationale · §7 P3 |
 | **A2** | **The floor device is recalibrated to survive the scored window,** and early snapshots added. `floor_relax_known_pctl = 0.05` is pre-registered here instead of reusing `config.py`'s value; snapshots become d ∈ {0,1,2,3,5,7,10,15,20}. **The constant is chosen so the floor traverses its range over the snapshot span rather than being spent before it:** taking the base floors from review §2 M4, it is still non-zero at every snapshot through **d15 on all 12 pairs**, and through **d19** on the ten pairs whose base percentile floor exceeds 0.95. Deliberately *not* read from `config.py` — reusing the shipped constant is precisely what made the arms inert. | **D2** | §1.2 bypass protocol · §1.3 F row · §1.4 FL1 · §2.4 R3 |
 | **A3** | **The percentile currency level is mean-matched by definition,** so J-cur is a genuine one-column contrast; arm **A1u** added to keep the scale component visible. | **D3** (second half) | §1.3 J-cur row + note · §1.4 A1u · run count |
@@ -1050,6 +1103,170 @@ any route (the genuine obscure tail — Miami Nights 1984, saib.), which is corr
 real reach, and A11's absence-as-floor is exactly right for them. The guard's d15/d20 check
 still stands for the foreign/historically-notable case it was built for.
 
+### A17 in full — what P8b's review does and does not license
+
+Six bounds, itemised in the index row above. Three deserve their reasoning in full, because
+each closes a read that a later session would otherwise draw in good faith.
+
+**(a) C2 turns out to be a regression guard, and Attack 1 moves to C1.** The measurement is
+in the review's own directory: P's four non-reaching pairs sit only 0.0985–0.7344 log10 above
+B_unk, so a uniform −1.0 median drop — C1's own threshold — puts the median below B_unk on
+**7 of 8** pairs. C2 therefore cannot separate a candidate from production on this pair set;
+it can only catch a candidate that goes *backwards*, which is a real job but not the one §3
+assigned it. §3's Attack 1 ("a famous ladder that preserves P's reaching pairs") is
+**re-attributed to C1's magnitude**, which does close it: −1.0 lands at 4.87, below the p10
+(5.422) of matched fame in P's own paths.
+
+**Two responses were available and the cheap one was taken.** Reporting C2 honestly as a
+regression guard costs nothing and is a methodology call. *Amending C2's threshold relative
+to P* is a post-baseline threshold change — the owner's call, and it was **put to him and
+declined in favour of the free option**, because loosening a threshold after seeing the
+baseline is precisely the move pre-registration exists to prevent. The concession is
+recorded rather than buried: Attack 1's closure now rests on **one** criterion, not two.
+
+**(c) X's bound is weaker than §1.4 claims, and R0 must say so.** §1.4 introduces X as "the
+cheapest-possible-dive bound — if X does not move the primary outcome, no arm in this family
+can", which is what makes an R0 null *actionable* rather than merely disappointing. But the
+jump term is `w_jump·|Δpop_raw|` — **symmetric** — so setting `w_jump = 0` removes the price
+of climbing as well as diving. Measured one hop out over all 74,193 nodes: X's cheapest hop
+ascends in popularity **86.9 %** of the time against A0's **82.6 %**, mean Δpop +0.117 vs
++0.092, against an honest null of 0.4998 pop-ascending directed edges. X's local preference
+is *more* pop-ascending than the arm it is supposed to bound.
+
+**Weakest link, stated because it is load-bearing:** this is a one-hop greedy measurement,
+not Dijkstra over a whole route, so it establishes a **sign, not a path-level magnitude**, on
+one slice. It does not prove X fails to produce the lowest fame profile — it removes the
+*a priori* argument that it must. **Free falsifier:** if X's fame profile after stage 1 is in
+fact the lowest of any arm, this bound is discharged and R0 recovers its original force. Until
+then, an R0 null may not be read as "no arm in this family can move the outcome."
+
+**(d) and (e) are the same lesson in two places: a knob cannot be credited at a depth where it
+is arithmetically dead.** A0's raw floor dies at d4–d7 per pair, so P and A0 share a cost
+function at every depth C1 and C2 score, and A0's C1 row measures **exclusion-history
+carryover** rather than a floor contrast. The percentile floor is dead at d20 on every pair,
+so FL1/FL2 are identical to W there, and any C3 gradient they show is manufactured at **d5**.
+A8 already warned that an FL arm's gradient is partly its own device; this converts the warning
+into a bound with a depth attached.
+
+### A18 in full — the blank-name exposure is directional, and the guards are load-bearing
+
+**What the first justification got wrong.** The repair+retune log defended deferring the
+rebuild with "0.049 % of nodes, in a **relative** comparison between arms on one fixed graph —
+a change that small flipping a ranking would mean the ranking was noise." That argument is
+valid for a *random* 0.049 %. It does not apply here, and the measurements that break it were
+already in the P8b review when it was written:
+
+| Fact | Source | Why it breaks the symmetry |
+|---|---|---|
+| Blank names 2.7× concentrated in the bottom popularity decile (27.3 % vs a 10.0 % base rate) | P8b F8 | Not spread evenly — massed in the stratum the diving arms aim at |
+| A blank name resolves to **F = 0** | A11's encoding | Maximal reach; satisfies C2 by construction and drags C1/C3 medians toward passing |
+| **P contains zero blank interiors** | P8b, `paths_P.json` | Absent from the control by measurement, not by assumption |
+| The A11 notability guard cannot flag one | P8b F8 | `has_non_latin("")` is False and an empty-string label search finds nothing |
+
+Together: **a bias with a known sign, absent from the control, and present preferentially in
+the arms under test.** That is not a noise term to be dismissed by its size — it is the
+**"held constant, and why each is genuinely constant under the intervention"** failure from
+`CLAUDE.md`, and it is the same shape as the `w_floor` catch that restructured this whole
+design. A term inert in the baseline *for a reason the intervention removes* is not a constant.
+
+**The deferral stands; its justification is replaced.** Rebuilding now would invalidate the
+mirror byte-identity verification, the A0 gate's 252 cells, P's baseline medians, the fame
+cache and P8b's own measurements. That cost is real and the deferral is still right — **but it
+is right because the guards neutralise the exposure, not because the exposure is small.** If a
+guard were removed, the deferral would become unsafe immediately.
+
+**Which makes the guard semantics load-bearing, and the first implementation was wrong.**
+F8's success condition asks for an assertion that fails loud. The first pass instead excluded
+blank nodes from C2 only, leaving them in C1's and C3's medians at F = 0. **A node-level
+exclusion is itself directional** — removing the blank improves whichever arm routed through
+it, invisibly, and only the treatment arms have any. Corrected to **cell** level: a scored cell
+containing a blank interior is dropped from **every arm or from none**, which is A13's rule
+(missingness must not correlate with arm) applied to a second cause of contamination. Default
+is to refuse to score and list the cells; the uniform drop is the **pre-registered response**,
+fixed here rather than chosen after seeing which arm trips it. Verified in
+`verify_c2_guards.py`, which asserts both properties the design turns on: the drop removes the
+cell from the **control** as well as the treatment, and the bias it replaces points toward
+passing.
+
+### A19 in full — the pre-listen assertion and its pre-registered response
+
+**Why the listen needs its own assertion even though scoring now has one.** The scoring guard
+drops contaminated cells; it does not stop a blank-named artist appearing in a path that goes
+to the blind listen, because the listened path is chosen for *listening*, not scored by C1–C3.
+A blank card has **no name and no clip** — `clips.py` passes the name itself as the provider
+query — so it is not a subtle defect, it is a visibly broken card. And it would land
+preferentially on the candidate, since the candidate is the arm that dives.
+
+**That makes it a directional confound on the most expensive measurement in the project.** The
+owner's ear is close to a one-shot resource; §6 already accepts "one burned listen" as the
+residual for Attack 2. This is a **second route to the same cost, and unlike Attack 2's it is
+avoidable**, which is the whole argument for spending a paragraph on it now.
+
+**The response, fixed before stage 1 and before any arm's paths exist:**
+
+1. **Substitute the affected pair from §2.3's ordered reserve, applying the same substitution
+   to both arms.** This reuses machinery already pre-registered (§2.3's substitution rule and
+   its ordered reserve), keeps the arms comparable, and changes nothing about the graph.
+2. **If the reserve is exhausted: accept and record.** The listen proceeds, and the blank card
+   is named in the verdict write-up so the verdict can be discounted knowingly rather than
+   silently.
+3. **A rebuild is explicitly REJECTED as the response.** It is not free, and the reason is not
+   cost: a rebuild changes the substrate, so the listen would no longer be testing the
+   configuration the offline pass selected. Fixing the graph is the right move at adoption and
+   the wrong move between selection and listening.
+
+**Why this is decided now.** Deciding it after seeing which arm trips the assertion is how a
+re-roll becomes arm-correlated selection — regenerate until the candidate looks clean, and the
+listen is measuring the regeneration rather than the tuning.
+
+### The open owner decision behind A18/A19 — drop or backfill, with its first step
+
+**Deferred by the owner 2026-07-24**, after confirming it does not block the sweep: what to do
+about the 33 nameless nodes in the artifact. The tripwire (`acceptance.py` rejects such an
+artifact) landed ahead of the remediation deliberately, so the deferral cannot be forgotten —
+a production rebuild now fails until this is answered. **Not due until the Track 2 rebuild
+seam.**
+
+**First step, and it precedes the decision: scan the existing archive for those 33 MBIDs.**
+Offline, deterministic, no new source, no network, no rebuild. Two readings with different
+fixes:
+
+- **(a) the archived rows genuinely carry no name** for those MBIDs → dropping is the only
+  offline option, and "backfill needs a source the crawler does not have" is true.
+- **(b) the names are already in the archive** and the build is discarding them → a build bug,
+  the artists are recoverable for free, and backfill is the obvious answer.
+
+**Code reading already excludes (b), which downgrades the scan from decisive to
+confirmatory.** `harvest_identities` iterates **every** archived response's rows
+(`pipeline.py` passes all `similar/<source>/*.json` payloads), `_rows` filters nothing, and
+the rule is *prefer the first non-empty name seen* — so if any archived row anywhere named
+that MBID, the node would carry that name. Nothing in the build path discards an available
+name. Given the adopted artifact was built by this code, (a) follows.
+
+**The scan is still worth running, as a falsifier of that reading.** It distinguishes three
+outcomes, and the third would mean something else is wrong: rows carrying `"name": null`;
+rows carrying no name key; or **the MBID never appearing as a row at all** — which would
+contradict these nodes having degree up to 28 in a mutual-kNN graph (each partner ranked
+this node in its own top-k, so it appeared in ~28 archived responses and had ~28 chances to
+be named). Only the third outcome reopens (b).
+
+**Success condition on the deferral.** The scan runs; if (b), backfill from the archive; if
+(a), drop **and instrument the dropped count**, so growth is visible rather than silent.
+Revisit "add a real name source" only if a future crawl pushes the count materially higher —
+at 33 this is build hygiene; at thousands it is missing catalogue, which is a different
+question with a different answer.
+
+**Two alternatives recorded as REJECTED, because both will look tempting later:**
+
+- **A placeholder name ("Unknown Artist").** Strictly worse than dropping: it makes these
+  nodes **searchable**, widening the blast radius from structurally-unreachable to reachable,
+  and they are still clipless. It converts an invisible defect into a visible one.
+- **Filtering at API load rather than at build.** The worst option. It breaks "the APG1
+  artifact is the contract" by making the served graph differ from the built one, and it
+  silently breaks the **largest-connected-component guarantee** — which is what makes a "no
+  path" result provably attributable to user exclusions alone. That guarantee is load-bearing
+  for the whole product, and it holds only if pruning happens before the artifact is written.
+
 ### What the amendments cost, stated plainly
 
 Run count **13 → 15**; compute still on the order of an hour. No change to the primary
@@ -1074,7 +1291,7 @@ addressed" would be wrong. In particular:
 | Open item | What it blocks | Success condition — due when |
 |---|---|---|
 | **PR-A** — run **A0 vs P** on the full pair × depth grid **as a gate, first**, not as one arm among fifteen (review O7) | Whether `w_floor`'s inertness transfers to `graph-t15-tiebreakfix.bin`. If A0 ≢ P, §1.4 requires re-anchoring with floor fully crossed — 16 cells plus attachments, outside the stated budget | **Before the factorial runs.** Report alongside it the fraction of examined nodes carrying a non-zero floor term, so "identity holds but the term is firing" is visible rather than inferred |
-| **D4** — C6 protects C1 (a median) but not C2 (an extreme) | Whether a lost obscure interior silently costs a C2 pass | **Partially addressed by A11:** under the absence-as-floor encoding an unmatched interior is *reach*, not indeterminate, so a lost obscure interior *helps* C2 rather than silently failing it. The residual risk inverts — a foreign/historically-notable unmatched artist wrongly counted as reach — and A11's d15/d20 guard (owner one-glance check of potentially-notable unmatched interiors) covers exactly that. What remains: implement the guard in the C2 scoring path |
+| **D4** — C6 protects C1 (a median) but not C2 (an extreme) | Whether a lost obscure interior silently costs a C2 pass | **Partially addressed by A11:** under the absence-as-floor encoding an unmatched interior is *reach*, not indeterminate, so a lost obscure interior *helps* C2 rather than silently failing it. The residual risk inverts — a foreign/historically-notable unmatched artist wrongly counted as reach — and A11's d15/d20 guard (owner one-glance check of potentially-notable unmatched interiors) covers exactly that. ~~What remains: implement the guard in the C2 scoring path~~ **DISCHARGED 2026-07-24 (P8b F2).** The guard now reaches C2's scoring path: `score.py` narrows it to the interiors at the C2 depths a pass actually rests on, and reports per-arm which pairs reach **only** via a flagged artist — the case a glance from the owner could overturn. Previously it was computed in `fame.py`, graph-wide over all names including endpoints, and read by nothing. **A second exposure D4 did not name** — a *blank*-named interior, which the flag structurally cannot catch — is closed separately at cell level by **A18** |
 | ~~**D5**~~ | — | **CLOSED by A6 above**, ahead of P4 rather than at it, for the one-shot-resource reason given there |
 | **D6** — the held-out gate passes ~31 % of candidates under the null | Only the *labelling* of the held-out step as "confirmation" | Before the winner goes to held-out: either state 0.3125 in §2.2 or tighten to 4-of-4 |
 | ~~**D7**~~ — guard G undefined when the direct edge is a bridge | Arm-correlated missingness returning by the back door | **CLOSED 2026-07-24 by A13**, before the sweep as required: the uniform-drop rule is pre-registered and implemented in `run_arms.py:drop_infeasible_uniformly`, and the dropped set is reported |

@@ -30,6 +30,22 @@ The second is the load-bearing one and is why this module talks to Wikidata sepa
 the canonical resolver walks *English* opensearch, so when English has no article it
 never sees the entity at all, and the very case the guard exists for is invisible to it.
 
+**Resolution is by name; the JOIN is by mbid (P8b F8).** Wikipedia can only be queried by
+name, so the *cache* is keyed by name and that is correct — it caches network results, and
+two nodes with the same name have the same article. But the fame table this module emits is
+keyed by **mbid**, because the artifact does not make names unique: 1,057 names are shared
+by two or more nodes and 33 nodes carry no name at all (measured:
+`../2026-07-24-track2-p8b-harness-review/`). Keying the join by name would silently give a
+famous artist's fame to an obscure namesake, or vice versa.
+
+**Nameless nodes are a separate case, and they must not read as reach.** A node with an
+empty name cannot be resolved (an empty query matches nothing), so under A11's encoding it
+would land at the fame floor and register as maximal obscurity — a free C2 pass earned by
+an artifact defect rather than by routing. They are marked `nameless` here and excluded
+from C2's reach test in `score.py`. This is conservative: it can only make C2 harder. The
+underlying defect is fixed in the builder (`acceptance.py` rejects them) but the adopted
+artifact still contains all 33, and rebuilding is gated to Track 2 adoption.
+
 Cached to disk by artist name. Re-runs cost nothing, which matters because the scorer is
 re-run whenever a criterion changes and the network half must not be repeated.
 """
@@ -201,6 +217,20 @@ def resolve_all(names: list[str], cache: dict, verbose: bool = True) -> dict:
     if verbose and todo:
         print(f"resolving {len(todo)} uncached name(s) of {len(names)}")
     for i, name in enumerate(todo, 1):
+        if not name.strip():
+            # A nameless node cannot be looked up: an empty query matches nothing, and
+            # letting it fall through to `resolve` would manufacture an unmatched row
+            # that reads as maximal obscurity. Floored like any unmatched artist, but
+            # marked so `score.py` can refuse to count it as C2 reach (P8b F8).
+            cache[name] = {"matched": False, "nameless": True, "F": FAME_FLOOR,
+                           "guard": {"non_latin_name": False,
+                                     "foreign": {"found": False},
+                                     "potentially_notable": False}}
+            save_cache(cache)
+            if verbose:
+                print(f"  [{i:>3}/{len(todo)}] NAME nameless node -- floored, "
+                      f"excluded from C2 reach")
+            continue
         row = resolve(name)
         if not row.get("matched"):
             # RECALL fallback first: an English article opensearch's top-5 missed.
@@ -229,21 +259,25 @@ def resolve_all(names: list[str], cache: dict, verbose: bool = True) -> dict:
     return cache
 
 
-def names_from_paths(paths_doc: dict) -> list[str]:
-    """Every distinct artist name across all arms, pairs and snapshots.
+def nodes_from_paths(paths_doc: dict) -> list[tuple[str, str]]:
+    """Every distinct (mbid, name) across all arms, pairs and snapshots.
 
     Interiors AND endpoints. Endpoints are never scored by C1-C4 (§2.1 -- the scorer uses
     interiors only), but the A14 endpoint-tracking diagnostic (WGLL value 9) needs their
     fame, and resolving ~16 extra famous names is nearly free. Including them in the fame
     table cannot leak into a scored statistic, because every scoring path slices path[1:-1].
+
+    Returns node identity, not names (P8b F8): the fame table is keyed by mbid so that
+    duplicate and empty names cannot cross-contaminate the join.
     """
-    names = paths_doc["node_names"]
-    out: set[str] = set()
+    names, mbids = paths_doc["node_names"], paths_doc["node_mbids"]
+    out: set[tuple[str, str]] = set()
     for by_pair in paths_doc["paths"].values():
         for by_depth in by_pair.values():
             for path in by_depth.values():
                 if path:
-                    out.update(names[str(n)] for n in path)  # includes endpoints
+                    for n in path:  # includes endpoints
+                        out.add((mbids[str(n)], names[str(n)]))
     return sorted(out)
 
 
@@ -255,42 +289,58 @@ def main() -> int:
     args = ap.parse_args()
 
     if args.names:
-        names = list(args.names)
+        # --names has no node identity, so it keys by name. Testing path only; the
+        # scored path always goes through --paths and keys by mbid.
+        nodes = [(n, n) for n in args.names]
     else:
         doc = json.loads(Path(args.paths).read_text(encoding="utf-8"))
-        names = names_from_paths(doc)
-        print(f"{len(names)} distinct interior artists across all arms/pairs/snapshots")
+        nodes = nodes_from_paths(doc)
+        print(f"{len(nodes)} distinct interior artists across all arms/pairs/snapshots")
 
-    cache = resolve_all(names, load_cache())
+    cache = resolve_all(sorted({name for _, name in nodes}), load_cache())
 
-    rows = {n: cache[n] for n in names}
+    # Keyed by mbid (P8b F8). Two nodes sharing a name share a cache row and therefore
+    # a fame value -- correct, since they resolve to the same article -- but they are
+    # distinct entries here, so a path cannot pick up the wrong node's fame.
+    rows = {mbid: cache[name] for mbid, name in nodes}
+    name_of = {mbid: name for mbid, name in nodes}
     matched = sum(1 for r in rows.values() if r.get("matched"))
-    flagged = [n for n, r in rows.items()
-               if not r.get("matched") and r["guard"]["potentially_notable"]]
+    flagged = sorted(mbid for mbid, r in rows.items()
+                     if not r.get("matched") and r["guard"]["potentially_notable"])
+    nameless = sorted(mbid for mbid, r in rows.items() if r.get("nameless"))
 
     out = {
         "encoding": "A11: F = log10(1 + en.wikipedia annual pageviews); unmatched -> 0",
+        "keyed_by": "mbid (P8b F8 — names are neither unique nor always present)",
         "n": len(rows), "matched": matched, "unmatched": len(rows) - matched,
         "coverage": matched / len(rows) if rows else 0.0,
-        "potentially_notable_unmatched": sorted(flagged),
-        "fame": {n: r["F"] for n, r in rows.items()},
+        "potentially_notable_unmatched": flagged,
+        # Excluded from C2 reach by `score.py`; an artifact defect is not a discovery.
+        "nameless_nodes": nameless,
+        "names": name_of,
+        "fame": {mbid: r["F"] for mbid, r in rows.items()},
         "rows": rows,
     }
     Path(args.out).write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
+    if nameless:
+        print(f"\nP8b F8 — {len(nameless)} nameless node(s) present; floored and EXCLUDED "
+              f"from C2 reach: {', '.join(nameless)}")
 
     print(f"\nmatched {matched}/{len(rows)} = {out['coverage']*100:.1f} %  (reported, "
           f"NOT gated — amendment A12)")
     if flagged:
         print(f"\nA11 guard — unmatched but potentially notable ({len(flagged)}):")
-        for n in flagged:
-            g = rows[n]["guard"]
+        for mbid in flagged:
+            g = rows[mbid]["guard"]
             why = []
             if g["non_latin_name"]:
                 why.append("non-Latin name")
             if g["foreign"]["found"]:
                 why.append(f"{g['foreign']['n_non_english']} non-English article(s)")
-            print(f"  - {n}  ({'; '.join(why)})")
+            print(f"  - {name_of[mbid]}  ({'; '.join(why)})")
         print("  -> these need the owner's one-glance check before counting as reach.")
+        print("  -> `score.py` reports which of them a C2 pass actually RESTS on, at the")
+        print("     C2 depths and interiors only — this list is graph-wide (P8b F2).")
     else:
         print("\nA11 guard: no unmatched interior looks potentially notable.")
     print(f"\nwrote {args.out}")

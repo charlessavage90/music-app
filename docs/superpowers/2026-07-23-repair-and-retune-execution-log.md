@@ -1404,3 +1404,617 @@ reconstructed at closeout.
 banner count) remain in place. Cold-start navigation test passed.
 
 **No arm has run.**
+
+### P8b dispatched — the harness review, on branch `track2-arms` (2026-07-24)
+
+Fresh session, picked up at the scorer/P8b seam. `session-start` ran clean: tree on `main` at
+`0cd6c70` (PR #11 merged, `track2-sweep` deleted), no concurrent session, artifact identity
+re-verified as `4cb84ef9…` against the handoff, test queue holding nothing stale. Working
+branch **`track2-arms`**, off `main`, pushed at the first commit.
+
+**P8b is the gate, and it was dispatched rather than deferred.** §7 lists the prerequisites as
+blocking all arms, and P8b flipped from "not yet due" to due the moment the scorer was
+committed. The builder session is barred from self-reviewing it, so this is the first session
+able to discharge it.
+
+**The brief was bounded in two ways that matter, and both are recorded because they are
+protocol, not preference:**
+
+- **The reviewer may run arm `P` only.** Any factorial or attachment arm run before P8b is
+  discharged would break the pre-registration gate — and would additionally make the reviewer
+  blind-listen-ineligible under the eligibility line. Static reading plus arithmetic over the
+  artifact is the intended method; the P8 review's highest-value findings (D1–D3) were exactly
+  that, and were arithmetic showing whole arms provably could not move.
+- **Derivation, not judgement.** The remit excludes whether the experiment is worth running and
+  which candidate to adopt. Those are the owner's, per CLAUDE.md's decision table.
+
+**Five items named for the reviewer**, four of them pre-existing open findings rather than new
+worries: C2's near-non-discrimination on this pair set (production itself scores the threshold
+minimum, so C1/C3 carry the load); **D4's residual** — §9's still-open table says the d15/d20
+notability guard remains to be wired into the **C2 scoring path**, and the scorer README
+describes it as living in `fame.py`, which is a discrepancy the review is asked to settle;
+A13's uniform infeasible-cell drop actually defeating arm-correlated missingness; arms provably
+incapable of moving; and **A8's floor column verified off in code**, since a dormant `w_floor`
+switching itself on inside the diving arms is the confound this whole design was restructured
+around.
+
+**No arm has run.** Artifact untouched.
+
+### Nameless artists — the owner's product argument, and a tripwire ahead of the remediation (2026-07-24)
+
+**Raised by the owner** off P8b's F8, which had noted 33 blank-named nodes only as a hazard to
+*fame keying*. His argument was the product one F8 did not make: a nameless artist cannot be
+entered as an endpoint, cannot yield a clip, and would be a poor card to show in a discovery
+tool regardless. **He is right on all three, and the third is worse than stated.**
+
+**Confirmed in code, not inferred:**
+
+- **Unsearchable by construction** — `search.py` returns `[]` for an empty query, and
+  `"".startswith(q)` is false for every non-empty query. No keystroke can surface one.
+- **Clipless** — `clips.py:89` passes the name itself as the provider query string.
+- **Not inert.** Degree runs to 28 and `pop_raw` to 0.5055 — mid-to-high. These sit *inside*
+  the similarity structure as ordinary routing waypoints, so the one way they can reach a user
+  is the worst one: a blank interior card the bypass buttons still operate on.
+
+**Cause — a default, not a parse failure.** `pipeline.py:245` reads
+`name=identities.get(mbid, ("", ""))[0]`, and a name is only ever observed when the artist
+appears as *someone else's* neighbour (`sources/listenbrainz.py`: no per-artist metadata
+endpoint exists), with `row.get(FIELD_NAME) or ""` accepting a missing one silently. Nothing
+downstream objected — the same gap `acceptance.py` was created to close, one instance on.
+
+**Blast radius measured: 36 of 74,193 (0.049 %).** Dropping the 33 and re-pruning to the
+largest component loses 3 further nodes, singletons that hung off a blank one.
+
+**Scope closed, and one adjacent class deliberately excluded.** All 33 are truly empty — no
+whitespace-only variants, and none of MusicBrainz's placeholder strings (`[unknown]`,
+`Various Artists`, `[no artist]`) are present at all. **111 nodes whose names are only digits
+or punctuation are NOT in this class and were left alone:** `69` is a Carl Craig alias,
+`7038634357` a real project name. They are searchable and clip-resolvable, so the argument does
+not reach them, and a tidy-looking regex here would eat real artists.
+
+**Sequencing — the fix is right, rebuilding now is not.** A new artifact invalidates the mirror
+byte-identity verification, the A0 gate's 252 cells, production's baseline fame medians (what
+every arm is scored against), the fame cache seeded with P's 156 interiors, and P8b's own
+measurements — Track 2 restarts from before the A0 gate. Against that: 0.049 % of nodes, in a
+**relative** comparison between arms on one fixed graph. A change that small flipping a ranking
+would mean the ranking was noise. **Rebuild is gated to Track 2 adoption**, when one happens
+anyway if a candidate wins.
+
+**The remediation is an OPEN OWNER DECISION — drop, or backfill names from a new source.**
+Backfill could recover up to 36 real artists but needs a data source the crawler does not have.
+Recommended: drop, at 0.049 %. **The owner deferred it 2026-07-24 after confirming it does not
+block progress** — and it does not, because the tripwire and the remediation separate.
+
+**What landed instead: the tripwire, in `acceptance.py`.** An unconditional zero-blank-names
+check — no criterion, because zero is the only defensible count, and it therefore fires against
+the scaled-down test set too. It quotes the **mbid**, since a blank name cannot identify itself
+in an error message. Three tests added; full builder suite 115 passed.
+
+**This deliberately rejects a production rebuild until the remediation lands.** That is the
+forcing function, and it is safe because `check_acceptance` runs at the emission point
+(`cli.py:118`) and **not** inside `build_from_archive` — so no test and nothing in the sweep
+path touches it, and no production build is due before adoption. Success condition recorded at
+the check itself: owner picks, remediation lands, check passes on rebuild. **Weakening the check
+to unblock a build is the one wrong response.**
+
+**Guarding the gap in the sweep meanwhile,** since today's artifact still contains all 33: fame
+keyed by **mbid** rather than name (P8b F8's fix, owed regardless), and **a blank-named interior
+must not count as obscurity reach** — it is an artifact defect, not a discovery success, and
+crediting one would let an arm bank a win on a card that renders empty.
+
+**A blank card is user-visible today** (33 of 74,193, paths 4–6 hops, so rare and never yet
+reported). Queued for the test queue rather than hotfixed: changing the router mid-experiment
+costs more than the rare empty card does.
+
+**No arm has run.** Artifact untouched.
+
+### P8b discharged: four code fixes, three amendments, and one correction to my own reasoning (2026-07-24)
+
+**P8b's verdict:** fit to run stage 1 as-is; **not** fit to run stage 2 (no executable path for
+the attachment arms). Fourteen findings, two HIGH. The mirror was re-verified byte-identical on
+all 212 cells, so the router is sound. Review and its measurements:
+`builder/analysis/2026-07-24-track2-p8b-harness-review/` (owns its figures).
+
+**Three of its claims were checked against the code before being acted on**, per the
+verify-one-claim rule, and all three held: `score.py` never read `potentially_notable`;
+`stage2()` had no caller and `run_arms.py` asserted arm names against `STAGE1` only; 33
+blank-named nodes, reproduced exactly.
+
+**Code fixes (commits `87101b3`, `d743c1c`).** F8 fame keyed by mbid, not name — resolution
+stays name-based since Wikipedia can only be queried by name, and the cache stays name-keyed
+since two nodes with one name share an article. F2 the A11 notability guard reaches C2's
+scoring path, narrowed to the interiors a pass rests on. F3 stage 2 runnable, with A13's
+uniform drop spanning the stage boundary. F9 the isolating one-column contrasts computed
+rather than declared.
+
+**Regression evidence:** production re-walked and re-scored with **every criterion value
+identical** — C1 0.000, C2 4/8, C3 0.164, C4 5.38, coverage 96.4 %, W still A7. A correctness
+fix that was not supposed to move the answer did not move it.
+
+**Two defects found in my own work, both worth recording because neither was in P8b:**
+
+1. **F9's first cut mis-attributed the contrasts.** Package-ness is a property of the *pair*,
+   not the arm: A6/A7's declared baselines are A2/A4 (one column away), while the packages are
+   A6/A7 **vs A0**. Keying off the arm name stamped the clean contrasts as unattributable.
+   Both blocks are now computed, so A7 appears twice with different figures and different
+   warnings. The irony is exact: `PACKAGE_CONTRASTS` had sat unread since the harness was
+   written, which made it the disclaimer-nothing-reads that A16's rule exists to catch — one
+   level below where A16 caught it.
+2. **The F8 guard was under-implemented, and directionally so** — caught by a consulting pass,
+   not by me. F8's success condition asks for an assertion *failing loud*; I shipped a
+   per-criterion **node** exclusion, and only in C2, leaving blank interiors in C1's and C3's
+   medians at F = 0. See the A18 entry below: a node-level exclusion improves whichever arm
+   produced the blank, invisibly, and only the treatment arms have any.
+
+**Three amendments, all before any arm ran — A17, A18, A19.**
+
+**A17** records P8b's six *reading* bounds. Two are worth restating here because they change
+what a result licenses: **C2 is a one-sided regression guard, not a discriminator** (P scores
+exactly its 4/8 minimum, so any arm meeting C1 meets C2 by construction) — so §3's Attack 1 is
+**re-attributed to C1's magnitude**, and its closure now rests on one criterion rather than
+two. And **X does not bound what §1.4 claims**: its jump term is symmetric, so zeroing it
+unprices climbing as well as diving, and X measures as *more* pop-ascending one hop out than
+the arm it bounds. R0's null therefore may not be read as "the family is exhausted" unless X's
+fame profile turns out lowest — a free falsifier once stage 1 runs.
+
+**The one owner decision in this batch was put to him and declined.** P8b offered either
+reporting C2 honestly as a regression guard (free, methodology, mine) or **amending C2's
+threshold now that production's baseline is known** (post-baseline threshold change, his). I
+took the free option and left the threshold as written, because loosening a threshold after
+seeing the baseline is the move pre-registration exists to prevent. The concession is recorded
+rather than buried.
+
+**A18 replaces the justification for deferring the rebuild, and this is the substantive
+correction of the day.** The nameless-artists entry above defended the deferral with "0.049 %
+of nodes, in a relative comparison between arms". **That is the reasoning for a random
+0.049 % and it is wrong here.** The measurements were already in P8b when I wrote it: blank
+names are **2.7× concentrated in the bottom popularity decile** — the stratum the diving arms
+aim at — they resolve to **F = 0** (maximal reach, satisfying C2 by construction and dragging
+C1/C3 toward passing), **P contains zero blank interiors**, and the A11 notability guard
+structurally cannot flag one. So it is a **bias with a known sign, absent from the control and
+present preferentially in the arms under test** — the "held constant, and why each is genuinely
+constant under the intervention" failure, the same shape as the `w_floor` catch that
+restructured this design.
+
+**The deferral is still correct; it is correct for a different reason.** It is safe *because
+the guards neutralise the exposure*, not because the exposure is small — remove a guard and it
+becomes unsafe immediately. Recorded as a row in §1.2's constants table whose "why" is a
+warning rather than a reason, which is the honest place for a term that is held constant by a
+guard rather than by nature.
+
+**The guard is now cell-level:** a scored cell containing a blank interior is dropped from
+**every arm or from none** (A13's rule, second cause), with a fail-loud default and the uniform
+drop as the **pre-registered** response — fixed before stage 1, not chosen after seeing which
+arm trips it. `verify_c2_guards.py` asserts the two properties the design turns on: the drop
+removes the cell from the **control** as well as the treatment, and the bias it replaces points
+toward passing.
+
+**A19 gates the blind listen** on zero blank-named interiors, with its response pre-registered:
+substitute from §2.3's ordered reserve applied to **both** arms; accept-and-record if the
+reserve is exhausted; **rebuild explicitly rejected**, because it changes the substrate and the
+listen would stop testing what the offline pass selected. A blank card has no name *and* no
+clip and would land preferentially on the candidate — a directional confound on the one
+measurement that cannot cheaply be re-run, and §6 already spends its "one burned listen" on
+Attack 2.
+
+**D4 fully discharged** (its C2-scoring-path remnant, by F2's fix). **A second exposure D4
+never named** — a blank name, which the notability flag cannot catch — is closed separately by
+A18.
+
+**The drop-vs-backfill deferral now has a first step and a success condition**, recorded in the
+pre-registration rather than executed: scan the archive for those 33 MBIDs before deciding.
+**Code reading already excludes the interesting reading** — `harvest_identities` iterates every
+archived response's rows, `_rows` filters nothing, and the rule is *prefer the first non-empty
+name*, so nothing in the build discards an available name. That downgrades the scan from
+decisive to confirmatory, and I said so rather than leaving the more attractive possibility
+open. It retains value as a falsifier: if those MBIDs never appear as rows at all, that
+contradicts their degree-28 presence in a mutual-kNN graph and something else is wrong. Two
+alternatives recorded as rejected while the reasoning is fresh — a placeholder name (makes them
+*searchable*, widening the blast radius) and filtering at API load (breaks the APG1 contract and
+the largest-connected-component guarantee that makes "no path" attributable to user exclusions
+alone).
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### `jesus2099` is still a node — Task 11 is complete for placeholders only (2026-07-24)
+
+**Record-only entry from a consulting session; no batch work.** One item in it was a live open
+loop and is now closed by measurement.
+
+**CONFIRMED, and it was worth the one query.** `jesus2099` — a MusicBrainz **editor account**,
+and the motivating case named by the 2026-07-21 architecture review — **is still a node in the
+adopted artifact**: index 54722, mbid `bcb4411c-346b-4450-b660-39a9faad74c0`, **degree 31**,
+`pop_raw` 0.3846 (mid-to-high), disambiguation `'shamo'`.
+
+**Why the shipped filter cannot catch it.** `is_special_purpose` (`pipeline.py:45`) matches a
+regex against the **disambiguation** field only, and is documented as "MusicBrainz placeholder
+entities". `'shamo'` carries no such marker, so no amount of tuning that predicate reaches an
+editor account — the field simply does not hold the information.
+
+**So the record needs correcting where it reads as closed.** Phase 2 Task 11 shipped an entity
+filter and the review's prescription was "entity filter first"; both are satisfied **for
+placeholders**. The artifact contains **zero** nodes with a `special purpose` disambiguation, so
+the filter demonstrably worked on its own class — P8b's finding that the placeholders are gone,
+confirmed here independently. The editor-account case was never covered and was not re-checked
+after Task 11. **Task 11 is complete for placeholders only.**
+
+**Not filed as a defect in the filter.** It is a coverage gap with no machine-readable
+definition available: nothing in the archive distinguishes an editor account from an artist.
+That is what makes the next item the right shape.
+
+### Three recorded lines on entity curation — where the blank-name drop belongs (2026-07-24)
+
+**Record-only. Not this batch; the first two are not due until the rebuild seam.**
+
+**1. The blank-name drop belongs INSIDE the existing entity filter, not beside it.**
+`filter_special_purpose` / `is_special_purpose` already own this seam in `build_from_archive`,
+with a config toggle and a two-directional test pattern. Three predicates, one stage:
+MusicBrainz placeholders (shipped), **empty names** (F8, pending the owner's drop-or-backfill
+decision), and a **curated MBID denylist** for the residue with no machine-readable definition —
+editor accounts, mis-ingested non-artists. **This is not new policy:** the Phase 2 design
+already names "an interior node whose disambiguation **or absent-name** marks it as a
+non-musical entity" as a bad-path signal, and `badpath.py` already emits `non-musical interior
+entity: unnamed node {node}`. So dropping the 33 **completes** the entity filter rather than
+adding a mechanism — and `jesus2099` is the first denylist entry, ready-made.
+
+**Denylist hygiene, if one lands:** data file not code; reason + date per entry; a missing entry
+**reports rather than fails** (an artifact must not become unbuildable because an MBID vanished
+upstream); and growth past a few dozen means some subset actually had a definition and wants a
+predicate instead.
+
+**2. There is no discovery mechanism, and that is the real gap.** Both known instances were
+found **by accident** — `jesus2099` from reading a tuned path, the 33 blanks from a harness
+review. Curation is therefore bounded by what the owner happens to trip over. The missing piece
+is a periodic report surfacing suspicious nodes for one human skim.
+
+**Measured caveat on that report, because the obvious heuristic is noisy.** A username-shaped
+scan (letters then 2+ trailing digits, no spaces) returns **152 nodes**, and the top of the list
+is mostly **real artists** — `Sad13` (Sadie Dupuis), `Soccer96`, `MNL48` ("Filipino girl
+group"), `Skech185` ("US emcee from Chicago"). So this must be a **report for human skim, never
+an automated filter**; a regex here would delete real artists, the same trap as the 111
+digit/punctuation-only names deliberately left alone earlier today.
+
+**3. Offensive artist names are the owner's product decision, with a gate-scoped success
+condition.** No technically correct answer exists. **Success condition: answered explicitly
+before Gate 2 → 3, even if the answer is "not yet."** At personal use a junk or offensive name
+is a curiosity; at public launch it is a different risk category — and the app's premise routes
+users through exactly the obscure stratum where upstream curation is weakest.
+
+### Costing the eventual rebuild — the spec's warning holds, its stated mechanism does not (2026-07-24)
+
+The consultant flagged the Phase 2 spec's warning that removing nodes "perturbs every mass
+slightly and therefore every score" — written for 7 nodes, against 33 — and asked whether it
+still applies given scoring changes since. **Checked in code: the conclusion holds and is
+strengthened, but the mechanism named is inoperative.**
+
+- **The mass channel is DEAD in the adopted configuration.** Exclusion does happen before mass
+  is computed (`pipeline.py:137`, and excluded nodes are filtered out of neighbour lists before
+  the sum), so the spec described the ordering correctly. But mass reaches a score only through
+  `damped_strength`'s `strength -= damping * (log mass_a + log mass_b)`, and the adopted
+  `similarity_damping` is **0.0** — damping was tested at 0.25/0.5/0.75 and rejected. A zero
+  coefficient means **mass cannot move any score.** The warning predates that rejection.
+- **The live channel is the p99 rescale, which was not named.** `similarity_rescale` is
+  `"p99_log_clip"`, and `rescale_scores` takes `scale = np.percentile(raw, 99)` over the
+  **global** flattened score array. Removing edges moves that percentile, which rescales **every
+  edge score in the graph**. The graph-wide-perturbation conclusion therefore survives — by a
+  different route, and one sized by how much the removed edges shift the 99th percentile rather
+  than by what mass they carried.
+- **A third channel, also unnamed: popularity.** `score_weighted_indegree` loses the removed
+  nodes' out-edge contributions, so their **neighbours'** `pop_raw` shifts — and `pop_raw` feeds
+  the cost function directly (`w_jump·|Δpop_raw|`, the floor) and the percentile array the
+  mirror builds at harness start.
+
+**Scale of the exposure, measured:** the 33 blanks touch **448 of 898,006 directed edges
+(0.0499 %)**; adding `jesus2099` makes it **510 (0.0568 %)**. Small, but graph-wide by
+construction rather than confined to the removed nodes.
+
+**Which strengthens gating the rebuild to adoption, exactly as the consultant argued.** A
+rebuild is not "remove 36 nodes and re-verify"; it produces a new score distribution and a new
+popularity array, so every figure measured against `4cb84ef9…` — the A0 gate's 252 cells, P's
+baseline medians, the fame cache's node identities — describes the old artifact. **Deferred
+measurement, due at the rebuild seam:** the actual p99 shift and the resulting score-delta
+distribution. Cheap once a rebuild is happening anyway, and meaningless before.
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### The discovery-report signals must be external to the graph — and the naive clip test fails on `jesus2099` (2026-07-24)
+
+**Record-only, from a consulting pass; amends the discovery-report line recorded above.
+Not for the current batch.**
+
+**The amendment is accepted, and the reasoning is the durable part.** A username-shaped scan is
+**retired** — by my own measurement, which returned 152 nodes whose visible top were real
+artists. Three results now say one thing: blank-named nodes at degree up to 28,
+`jesus2099` at degree 31 and `pop_raw` 0.3846, and 111 digit-only names that are mostly real.
+
+**The common cause, and it is the reason no predicate will fix this.** A non-artist entity that
+accumulates genuine listener co-occurrence is **graph-structurally indistinguishable** from an
+obscure real artist. Popularity here is score-weighted in-degree — it measures "people played
+this alongside other things" — which an editor account with a following earns honestly. **The
+distinguishing information is not in the graph; it is a fact about the outside world.** Any
+report built on degree, popularity, connectivity or name shape will keep returning Sadie Dupuis.
+
+**So the signals must be external, and Track 2 has already built all of them:** no clip
+resolves; no Wikipedia presence (the adopted fame proxy); non-trivial degree, i.e. actually
+routable. Intersect the three, scope to nodes that can appear as a **path interior** (the only
+ones a user can see, already recorded by the sweep, already seeded into the fame cache), and it
+is largely a join over sweep byproducts rather than new work. Still a report for human skim,
+**never an automated filter** — the 152-node result raises the stakes on that, it does not lower
+them.
+
+**Tested before recording, and the naive form of the key signal FAILS.** The proposal predicted
+`jesus2099` "should return nothing on both" providers. Measured against the live endpoints:
+
+| Query | Deezer top artist | iTunes top artist | "no clip" fires? |
+|---|---|---|---|
+| **`jesus2099`** | **`Mr.UNSTABLE`** | *(none)* | **NO — Deezer returns a match** |
+| `saib.` | `saib.` | `Saib` | no (correct — real) |
+| `Purrple Cat` | `Purrple Cat` | `Bcalm & Purrple Cat` | no |
+| `sleepy fish` | `Sleepy Fish` | `Afternoon Bike Ride & Sleepy Fish` | no |
+| `Leavv` · `Miami Nights 1984` · `Lazerhawk` · `Stonebank` · `Toonorth` | own name | own name | no |
+| `idealism` | `SwuM` *(wrong)* | `Idealism` | no — **saved by the fallback** |
+
+**Two things follow, and the first would have sunk the report silently.**
+
+1. **"No clip resolves" must be "no provider returns a NAME-MATCHING artist."** `jesus2099`
+   resolves a clip — for `Mr.UNSTABLE`. That is the known **C1 wrong-artist clip defect**
+   acting as camouflage: the naive test would have passed the one entity the report exists to
+   catch. The fix is free — the fame proxy already owns a name-matching rule (`name_matches`,
+   plus P5's NFKC + punctuation folding), so the report reuses it rather than inventing one.
+2. **Wikipedia-absence is NOT the discriminating signal for this population, and the clip
+   signal carries all the weight.** The nine S1 anchor artists are owner-confirmed **real**,
+   genuinely obscure, and **8 of 9 are Wikipedia-absent** — so that signal alone flags every
+   one of them. They are excluded only by resolving a clip. Which means the intersection works
+   *because* of the clip test, and getting the clip test right is load-bearing rather than
+   incidental.
+
+**Controls chosen deliberately, and this is why the test was worth running:** the S1 nine are
+the hardest available case — real, obscure, and Wikipedia-absent, i.e. they trip two of the
+three proposed signals. A design that survives them survives the population it will actually
+be run over.
+
+### Rebuild seam: the p99 shift goes FIRST, because it can come out exactly zero (2026-07-24)
+
+**Record-only ordering note; accepted as stated.** The measurement is computable now without a
+rebuild — drop the 510 affected edges from the raw score array and re-take
+`np.percentile(raw, 99)` — and deferring it is right, since it changes no decision before
+adoption.
+
+**But it goes first at the seam, not alongside the rest, because it is the only one of the
+three channels that can be exactly zero.** The 99th percentile over a discrete distribution
+with roughly 5,300 distinct values need not move when 0.057 % of edges leave.
+
+- **If it does not move:** the score array is unchanged and the blast radius collapses to the
+  popularity array plus the removed nodes. A substantial amount of re-verification becomes
+  **reusable rather than redone**.
+- **If it moves:** every edge is rescaled and everything downstream needs redoing anyway.
+
+Either way it **sizes all the remaining work**, so it precedes that work rather than
+accompanying it. Recorded as the first step of the rebuild seam, alongside the archive scan for
+the 33 MBIDs (which the drop-vs-backfill decision needs, and which is confirmatory rather than
+decisive — see the pre-registration's deferral entry).
+
+**No arm has run.** Artifact untouched, sha256 `4cb84ef9…b061dc8`.
+
+### STAGE 1 RUN — result is R0, a full null, and A17(c)'s falsifier FIRED (2026-07-24)
+
+**The first experimental arms of Track 2 have run.** Artifact `4cb84ef9…b061dc8`, unchanged.
+11 arms × 12 pairs × 21 depths, 158 s. **Zero guard-infeasible cells**, so A13's uniform-drop
+path is still unexercised (P8b listed that as undeterminable without a run; it remains so).
+Fame: 235/239 matched (98.3 %); **zero blank-named interiors**, so A18's cell guard did not
+fire and the `--blank-cells` default never triggered. Figures owned by
+`builder/analysis/2026-07-24-track2-arm-scorer/scores.json`.
+
+**Outcome: R0 — full null.** C1's threshold is mean ΔF ≤ −1.0 with ≥ 75 % of cells negative.
+The best arm reaches **−0.053 at 54 %**. That is not a near miss; it is roughly **one twentieth**
+of the pre-registered effect, and no arm exceeds −0.053.
+
+**Worse than null on three criteria — and C2 caught it, which is A17(a) vindicated within
+hours.** Production reaches below B_unk in 4 of 8 pairs; **every arm that moves paths reaches
+1 or 2 of 8**. A17(a) demoted C2 from discriminator to one-sided regression guard on the
+grounds that any arm passing C1 would pass C2 by construction — and its remaining job, catching
+a candidate that goes *backwards*, is exactly the job it did. C3's gradient also degrades
+(P 0.164 → arms 0.021–0.090) and C4's payload fails on the percentile arms (5.38 → 3.58
+interiors, against a 4.38 floor): **the arms that move most make paths shorter and less
+obscure.**
+
+**A17(c)'s falsifier fired, and this is the most consequential line in the run.** X is **not**
+the lowest fame profile: mean pooled interior fame **A3 5.861 < A0 5.880 = P 5.880 < … < X
+5.932**. Production itself is more obscure than the corner arm built to bound the family. So
+per A17(c), **R0 licenses only "these fifteen configurations do not move it" and does NOT
+license "the repricing family is exhausted."** Had P8b not measured X's symmetric jump term
+three days before the arms ran, this null would have been written up as a much stronger claim
+than the data supports — the amendment was committed before any arm and earned its keep
+immediately.
+
+**What R0 licenses, quoted from §2.4 as pre-registered:** firing spec §5's recorded triggers —
+the p99 ceiling-rescale arm (builder) and/or revisiting the deferred `cap_strategy`, each with
+its own pre-registration. **Does NOT license:** re-litigating the `capfix` adoption, mutual
+k-NN, or anything in log §4/§4.1; shipping any arm anyway; or quietly weakening the thresholds.
+
+**F6 confirmed exactly.** A0 is **identical to P on every scored statistic** (C1 0.000, C2 4/8,
+C3 0.164, C4 5.38) and differs in 1 of 72 analysis cells, at d0 — a depth no gating criterion
+reads. P8b F6 predicted precisely this: P's raw floor is dead at every depth C1 and C2 score,
+so A0's C1 row measures exclusion-history carryover, not a floor contrast.
+
+**Structural findings from the paths themselves, before fame entered:** no two arms produce
+identical path sets (so no arm is degenerate), and the pairwise cell-difference matrix shows
+**the currency swap is the dominant factor** — P/A0/A3 cluster within 4 cells of each other,
+A2/A6 within 7, and the five percentile arms within 3–18 of each other but 48–58 from P. The
+isolating one-column contrasts (P8b F9's machinery, first real use) put currency alone at
+−0.033 and every subsequent knob at −0.008 to −0.012, i.e. the factorial's later columns add
+almost nothing on top of the currency change.
+
+**A sign visible before scoring, worth recording as the shape of the null:** all **76** newly
+visited artists resolved a Wikipedia article, with F between 4.6 and 6.6. The arms did not
+route anywhere obscure; they rearranged famous artists. Every arm's pooled median interior fame
+sits in **5.86–5.97** against a B_unk of **5.379** — the whole grid lives above the owner's
+"would not know them" band, and the total spread across all eleven arms is ~0.1 fame units.
+
+**No threshold was touched, and none will be.** Stage 2 has not run; R1's fallback selects
+**W = A7** (no cell moved C1 in the right direction), which is the fallback firing as designed
+rather than a selection.
+
+### STAGE 2 RUN — still R0 overall, but the null has a DIRECTION: the ceiling toll (2026-07-24)
+
+**Stage 2 ran as pre-registered, on W = A7.** Recorded because I had argued for skipping it and
+was wrong: R1's fallback clause exists precisely for a null ("if no cell moves C1 in the right
+direction, W := A7 so the attachment arms still get tested"), so skipping would have meant
+overriding a pre-registered decision *after* seeing the result. Two further reasons the
+pre-registration was right and I was not: every stage-1 arm is **depth-independent by
+construction**, while F2 is a complaint *about depth* — and the FL arms are the only
+depth-varying arms in the design. Figures: `scores_stage2.json`, `paths_stage2.json`.
+
+**Overall verdict unchanged: R0, full null.** C1's threshold is −1.0; the best arm in either
+stage reaches **−0.177**, still **5.6× short**. Nothing is adoptable and no threshold moves.
+
+**But T1b is a coherent signal rather than noise, and it is the only one in fifteen arms:**
+
+| arm | C1 mean ΔF | C1 frac | C2 | C3 | C4 int | cov % | mean fame |
+|---|---|---|---|---|---|---|---|
+| P | 0.000 | 0.00 | **4/8** | 0.164 | 5.38 | 96.4 | 5.880 |
+| A7 (= W) | −0.053 | 0.54 | 1/8 | 0.066 | 3.58 | 95.1 | 5.945 |
+| T1a | −0.052 | 0.46 | 2/8 | **−0.066** | 3.79 | 94.8 | 5.966 |
+| **T1b** | **−0.177** | **0.71** | 3/8 | 0.092 | **6.54** ✓ | **97.5** | **5.672** |
+| FL1 / FL2 | −0.053 | 0.54 | 1/8 | 0.066 | 3.58 | 95.1 | 5.945 |
+
+T1b is the **most obscure arm across both stages** (mean pooled interior fame 5.672 against P's
+5.880 and stage 1's best 5.861), the **only arm to pass C4** — it makes paths *longer* than
+production, 6.54 interiors against 5.38 — and it carries the **highest proxy coverage**. At the
+C2 depths **31.2 % of its interiors fall below B_unk against production's 19.3 %** (30 of 96
+against 17 of 88).
+
+**And T1b still FAILS C2 relative to production, 3/8 against 4/8 — which is the finding, not a
+contradiction.** More below-band interiors spread over *fewer pairs* means it reaches deeper in
+fewer places. That is **Attack 2's signature** (the insular-cluster dive) appearing in the one
+arm that moved, and it must be carried into any follow-up: the pair-level criterion and the
+interior-level count disagree here, and **C2 is the one that encodes what the owner asked for.**
+
+**THE FLOOR IS DEAD, and this is the cleanest structural result of the day.** FL1 and FL2 are
+**byte-identical to each other and to A7 on all 72 analysis cells**, and their isolating
+contrasts are **exactly 0.000** — while the floor term fires on **10.40 % / 8.83 %** of
+relaxations against production's 2.94 %. So it is neither inert nor merely weak: **tripling
+`w_floor` changes nothing, because the floor is never the pivotal term in any routing decision
+at any depth.** This is PR-A's "the term is firing but the outcome is unchanged" in its sharpest
+possible form, and it means **the only depth-graduated device in the cost function cannot do the
+job it was designed for.** Established without reference to any fame measurement, which makes it
+the most robust conclusion in the run. §4.4's conditional deletion of `w_floor`/`floor_relax_*`
+now rests on direct evidence rather than an unfired condition, and A16's "load-bearing only if
+FL1 beats W" resolves cleanly to **no**.
+
+**The toll's magnitude does all the work, and its top is UNTESTED.** T1a-vs-A7 is **+0.001** —
+inert at the low magnitude — while T1b-vs-T1a is **−0.125**. And per **A17(b)**, because W = A7
+carries `w_sim` 1.5 rather than 3.0, the two magnitudes were **3.75× and 15× `w_hop`, not the
+7.5× and 30× §1.4 names** (the contrast table still prints §1.4's labels — a reporting wart, not
+a computation error). So the only mechanism that produced movement ran at **half** its intended
+strength, and its intended top magnitude has never been tested. A17(b) was written three days
+ago precisely so this figure would not be misquoted.
+
+**A17(c)'s falsifier fires again, and harder.** T1b (5.672) is far more obscure than corner X
+(5.932) — now a *tuned* arm beats the reachability bound by a wide margin, not merely production.
+R0 therefore licenses only "these fifteen configurations do not move it" and **not** "the
+repricing family is exhausted."
+
+**Where this points, and it is the pre-registered follow-up rather than a new idea.** §2.4 R0
+licenses "the p99 ceiling-rescale arm (builder)". The toll is the **routing-side probe of that
+same hypothesis**, and it is the only knob of fifteen that moved anything — evidence that the
+similarity **ceiling**, not the price of obscurity, is what holds paths in famous territory.
+Fixing it properly belongs in the builder (rescale rather than clip), needs its own
+pre-registration, and would change the artifact — so it sits behind the same rebuild seam as the
+blank-name remediation and the p99-shift measurement.
+
+**No blind listen.** Nothing cleared the offline gates, so there is nothing to listen to — the
+pre-registration saved the one-shot resource instead of spending it on a null, which is log
+§2.13 C5's discipline working as designed.
+
+**Held-out set untouched** (4 pairs), correctly: it confirms a winner's direction, and there is
+no winner.
+
+### Closeout at the Track 2 completion seam (2026-07-24)
+
+Full-ritual seam closeout — the work touched the cost-function evaluation apparatus and ran the
+experiment. Distillation of what is not already in the per-entry records above.
+
+**The arc, in one line.** Picked up at the scorer/P8b seam; discharged P8b; fixed its four
+blocking findings; took the pre-registration A16 → A19; ran both sweep stages; got **R0, a full
+null**; adopted nothing.
+
+**Decisions that reversed or corrected an earlier position — three, and all three were mine:**
+
+- **I argued for skipping stage 2 and was wrong.** R1's fallback clause exists precisely for a
+  null, so skipping would have overridden a pre-registered decision *after* seeing the result.
+  Compounding it: every stage-1 arm is depth-independent by construction while F2 is a complaint
+  *about* depth, and the FL arms were the only depth-varying arms in the design — so the arms I
+  proposed dropping were the ones aimed at the actual complaint. The owner's question ("remind me
+  what stage 2 is") is what surfaced it.
+- **The F8 guard was under-implemented, and directionally so** — caught by a consulting pass. I
+  shipped a per-criterion **node** exclusion where the success condition asked for a fail-loud
+  assertion, leaving blank interiors in C1's and C3's medians. Corrected to cell level (A18).
+- **A18 replaced my own justification for deferring the rebuild.** "0.049 %, relative comparison"
+  is valid for a *random* 0.049 % and wrong for a bias concentrated in the treatment arms.
+
+**Defects found in my own work that no reviewer flagged:**
+
+- **F9's first cut mis-attributed the contrasts** — package-ness is a property of the pair, not
+  the arm, so keying off the arm name stamped the clean one-column contrasts as unattributable.
+- **Closeout B3 found a vacuous test in this session's own work.** `verify_c2_guards.py` passed
+  clean when production's uniform drop was mutated to per-arm — the exact directional bug the test
+  was written to prevent — because the test applied *its own inline loop* rather than the code path
+  `score.py` uses. Fixed by extracting `apply_uniform_blank_drop` so both call one implementation;
+  re-running the mutation now produces 2 failures. **This is the highest-value thing the closeout
+  found, and it was in a test I had written specifically to prove a guard worked.**
+
+**Gate outcomes.** P8b: discharged. The sweep's own gates: **all failed** — C1, C2, C3 failed for
+every arm; C4 passed only for T1b. A0-vs-P and mirror byte-identity were passed in prior sessions
+and not re-run. **No gate was worked around**; the null is reported as a null.
+
+**Corrections to the prior record:** Phase 2 Task 11's entity filter is complete **for placeholders
+only** (`jesus2099` still a node); the Phase 2 spec's mass-perturbation warning holds in its
+conclusion but its mechanism is dead (damping is 0.0) — the live channels are the p99 rescale and
+the popularity array.
+
+**Operational measurements with no other home:** stage 1 is **158 s** for 11 arms, stage 2 **113 s**
+for 7 — both far under §1.4's "order of an hour". Fame resolution dominates wall-clock: ~76 new
+names in stage 1 and ~117 in stage 2 at roughly 1 s each. **Zero guard-infeasible cells in either
+stage**, so A13's uniform-drop path has still never executed against a real drop; **zero
+blank-named interiors**, so A18's guard never fired on live data (it is verified only
+synthetically).
+
+**Closeout B1 (doc-auditor):** six findings, **two HIGH**, all status-staleness, **all
+adjudicable — no escalation list.** Both HIGH were in auto-loaded memory still saying "no arm
+scored" and "the open unit is the SWEEP". Expected: the sweep finished *after* those files were
+written. All six fixed. The auditor also correctly guessed that `project-state.md`, which it did
+not open, was stale — it was, naming the wrong branch and PR. Its cold-start navigation test
+found the entry points gave **three different answers** to "what is the next action"; that is
+what the memory and `CLAUDE.md` fixes close. Two recommendations **not** actioned and recorded
+instead: a missing `builder/README.md` (pre-existing, deferred with a condition in the handoff),
+and a `session-start` check of memory against the execution log — the latter is standing-layer
+work and therefore the owner's call.
+
+**B5 caught a violation I introduced during this very closeout:** the memory updates carried two
+measured figures, and memory holds pointers, not figures. Removed; memory is now figure-free.
+
+**B2 / B4 clean.** No orphans — `stage2` gained real callers via F3's fix. Three prose claims
+spot-checked against code and all held (no dislike walk exists, so C7's "needs a dislike walk" is
+accurate; `check_acceptance` is called only from `cli.py`, never inside `build_from_archive`).
+
+**A4 — default-flip: no new shipped knobs, and the work is deliberately NOT closed.** The only
+shipped change is `acceptance.py`'s unconditional blank-name check, which is an assertion rather
+than a knob. Stated plainly per A4: the blank-name **remediation** is an open owner decision, so
+that thread is open, not complete — and the check deliberately fails a production rebuild until it
+lands.
+
+**D2 — committed fixtures are NOT stale:** the artifact is unchanged (`4cb84ef9…`), so no
+regeneration is owed.
+
+**D4 — suites, run not remembered:** builder **115 passed**, api **120 passed**, frontend
+**31 passed (11 files)**.
+
+**D6 — standing-layer delta: `CLAUDE.md` net 0, memory 354 → 362 (+8).** `CLAUDE.md` is a pure
+one-row replacement of a stale orient answer. The memory **+8** is displacement, not growth: out
+came the pending-sweep narrative ("build the scorer, then run the arms"), the P4 pilot
+blow-by-blow, and the **now-discharged lo-fi caveat** (the sweep measured the floor as never
+pivotal, so a fame-currency floor cannot surface anything). In came the three things a cold
+session must not misread — that R0 does **not** reach "the family is exhausted", that T1b's two
+best numbers disagree and the pessimistic one governs, and that the toll ran at half strength.
+Nothing net-new was added without something coming out.

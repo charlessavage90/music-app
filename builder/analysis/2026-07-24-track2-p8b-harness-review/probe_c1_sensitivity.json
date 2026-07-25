@@ -1,0 +1,26 @@
+{
+ "arm": "P only",
+ "n_C1_cells": 24,
+ "P_cell_median_F": {
+  "mean": 5.8714,
+  "min": 4.6511,
+  "max": 6.6515
+ },
+ "matched_fame_distribution": {
+  "n_matched": 159,
+  "min": 4.2468,
+  "p10": 5.4223,
+  "median": 5.9951,
+  "max": 7.2588,
+  "fame_floor_for_unmatched": 0.0,
+  "gap_floor_to_least_famous_matched": 4.2468
+ },
+ "B_unk_fame_units": 5.3788,
+ "C1_clause_interaction": {
+  "required_total_drop_for_mean_-1.0": 24.0,
+  "cells_that_must_bottom_out_at_median_0": 4,
+  "as_frac_of_cells": 0.1667,
+  "C1_frac_negative_required": 0.75,
+  "verdict": "flooring 4 of 24 cells (17%) satisfies C1's MEAN clause, but C1 also requires dF < 0 in >= 75% of cells. An arm that reaches the floor on a minority of cells and leaves the rest unchanged therefore FAILS C1. The fraction clause is what stops the absence encoding buying a pass on a few cells; the two clauses are not redundant and both are load-bearing."
+ }
+}

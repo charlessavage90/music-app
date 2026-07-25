@@ -1,0 +1,3009 @@
+{
+ "b_unk_fame_units": 5.378833793740069,
+ "analysis_pairs": [
+  "Miles Davis -> Daft Punk",
+  "The Shins -> Wishbone Ash",
+  "Metallica -> Taylor Swift",
+  "Radiohead -> The Beatles",
+  "Muse -> Coldplay",
+  "Madonna -> Bob Dylan",
+  "Pink Floyd -> Aphex Twin",
+  "Nirvana -> CROOVE"
+ ],
+ "blank_name_cells_dropped": [],
+ "W": "A7",
+ "W_rationale": "no cell moved C1 in the right direction; R1's fallback applies",
+ "results": {
+  "P": {
+   "C1": {
+    "pass": false,
+    "mean_dF": 0.0,
+    "frac_negative": 0.0,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": true,
+    "pairs_reached": 4,
+    "of": 8,
+    "which": [
+     "The Shins -> Wishbone Ash",
+     "Metallica -> Taylor Swift",
+     "Pink Floyd -> Aphex Twin",
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.1637637951265738
+   },
+   "C4": {
+    "pass": true,
+    "mean_interiors": 5.375,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.963855421686747,
+    "distinct_interiors": 83,
+    "gap_vs_P_points": 0.0
+   },
+   "F5_confinement": []
+  },
+  "A0": {
+   "C1": {
+    "pass": false,
+    "mean_dF": 0.0,
+    "frac_negative": 0.0,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": true,
+    "pairs_reached": 4,
+    "of": 8,
+    "which": [
+     "The Shins -> Wishbone Ash",
+     "Metallica -> Taylor Swift",
+     "Pink Floyd -> Aphex Twin",
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.1637637951265738
+   },
+   "C4": {
+    "pass": true,
+    "mean_interiors": 5.375,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.963855421686747,
+    "distinct_interiors": 83,
+    "gap_vs_P_points": 0.0
+   },
+   "F5_confinement": []
+  },
+  "A1": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.03256772723450818,
+    "frac_negative": 0.5416666666666666,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 1,
+    "of": 8,
+    "which": [
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.021266311087012824
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 3.5833333333333335,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.9491525423728814,
+    "distinct_interiors": 59,
+    "gap_vs_P_points": 1.4702879313865602
+   },
+   "F5_confinement": []
+  },
+  "A2": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.03254927028074731,
+    "frac_negative": 0.4166666666666667,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 1,
+    "of": 8,
+    "which": [
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.07832513763913695
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 4.083333333333333,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.9594594594594594,
+    "distinct_interiors": 74,
+    "gap_vs_P_points": 0.4395962227287553
+   },
+   "F5_confinement": []
+  },
+  "A3": {
+   "C1": {
+    "pass": false,
+    "mean_dF": 0.0,
+    "frac_negative": 0.0,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": true,
+    "pairs_reached": 4,
+    "of": 8,
+    "which": [
+     "The Shins -> Wishbone Ash",
+     "Metallica -> Taylor Swift",
+     "Pink Floyd -> Aphex Twin",
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.08963379094293433
+   },
+   "C4": {
+    "pass": true,
+    "mean_interiors": 5.375,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.963855421686747,
+    "distinct_interiors": 83,
+    "gap_vs_P_points": 0.0
+   },
+   "F5_confinement": []
+  },
+  "A4": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.04424623627856835,
+    "frac_negative": 0.5,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 1,
+    "of": 8,
+    "which": [
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.04747107763944758
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 3.5833333333333335,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.95,
+    "distinct_interiors": 60,
+    "gap_vs_P_points": 1.3855421686747027
+   },
+   "F5_confinement": []
+  },
+  "A5": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.04177654306092941,
+    "frac_negative": 0.5833333333333334,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 1,
+    "of": 8,
+    "which": [
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.045841182556710436
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 3.5833333333333335,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.9482758620689655,
+    "distinct_interiors": 58,
+    "gap_vs_P_points": 1.5579559617781458
+   },
+   "F5_confinement": []
+  },
+  "A6": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.044119883103540425,
+    "frac_negative": 0.4166666666666667,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 1,
+    "of": 8,
+    "which": [
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.06986993135256814
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 4.125,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.958904109589041,
+    "distinct_interiors": 73,
+    "gap_vs_P_points": 0.495131209770594
+   },
+   "F5_confinement": []
+  },
+  "A7": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.05253425589812181,
+    "frac_negative": 0.5416666666666666,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 1,
+    "of": 8,
+    "which": [
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.06598380522654868
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 3.5833333333333335,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.9508196721311475,
+    "distinct_interiors": 61,
+    "gap_vs_P_points": 1.3035749555599496
+   },
+   "F5_confinement": []
+  },
+  "A1u": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.043577725242580856,
+    "frac_negative": 0.5833333333333334,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 1,
+    "of": 8,
+    "which": [
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.02243740441556774
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 3.625,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.9482758620689655,
+    "distinct_interiors": 58,
+    "gap_vs_P_points": 1.5579559617781458
+   },
+   "F5_confinement": []
+  },
+  "X": {
+   "C1": {
+    "pass": false,
+    "mean_dF": -0.04883242081216588,
+    "frac_negative": 0.4583333333333333,
+    "n_cells": 24
+   },
+   "C2": {
+    "pass": false,
+    "pairs_reached": 2,
+    "of": 8,
+    "which": [
+     "Pink Floyd -> Aphex Twin",
+     "Nirvana -> CROOVE"
+    ],
+    "rests_only_on_flagged_notable": {}
+   },
+   "C3": {
+    "pass": false,
+    "drop_d5_to_d20": 0.06656100877858151
+   },
+   "C4": {
+    "pass": false,
+    "mean_interiors": 3.75,
+    "P_mean": 5.375
+   },
+   "C6_reported_not_gated": {
+    "coverage": 0.95,
+    "distinct_interiors": 60,
+    "gap_vs_P_points": 1.3855421686747027
+   },
+   "F5_confinement": []
+  }
+ },
+ "one_column_contrasts": {
+  "isolating": {
+   "A0": {
+    "vs": "P",
+    "mean_dF": 0.0,
+    "frac_negative": 0.0,
+    "n_cells": 24
+   },
+   "A1": {
+    "vs": "A0",
+    "mean_dF": -0.03256772723450818,
+    "frac_negative": 0.5416666666666666,
+    "n_cells": 24
+   },
+   "A2": {
+    "vs": "A0",
+    "mean_dF": -0.03254927028074731,
+    "frac_negative": 0.4166666666666667,
+    "n_cells": 24
+   },
+   "A3": {
+    "vs": "A0",
+    "mean_dF": 0.0,
+    "frac_negative": 0.0,
+    "n_cells": 24
+   },
+   "A4": {
+    "vs": "A1",
+    "mean_dF": -0.011678509044060167,
+    "frac_negative": 0.16666666666666666,
+    "n_cells": 24
+   },
+   "A5": {
+    "vs": "A1",
+    "mean_dF": -0.009208815826421227,
+    "frac_negative": 0.041666666666666664,
+    "n_cells": 24
+   },
+   "A6": {
+    "vs": "A2",
+    "mean_dF": -0.01157061282279311,
+    "frac_negative": 0.08333333333333333,
+    "n_cells": 24
+   },
+   "A7": {
+    "vs": "A4",
+    "mean_dF": -0.008288019619553463,
+    "frac_negative": 0.041666666666666664,
+    "n_cells": 24
+   },
+   "A1u": {
+    "vs": "A1",
+    "mean_dF": -0.011009998008072674,
+    "frac_negative": 0.08333333333333333,
+    "n_cells": 24
+   },
+   "X": {
+    "vs": "A7",
+    "mean_dF": 0.0037018350859559326,
+    "frac_negative": 0.375,
+    "n_cells": 24
+   }
+  },
+  "package": {
+   "A6 vs A0": {
+    "vs": "A0",
+    "mean_dF": -0.044119883103540425,
+    "frac_negative": 0.4166666666666667,
+    "n_cells": 24,
+    "cannot_attribute": "2 columns (J-mag + S-mag), raw"
+   },
+   "A7 vs A0": {
+    "vs": "A0",
+    "mean_dF": -0.05253425589812181,
+    "frac_negative": 0.5416666666666666,
+    "n_cells": 24,
+    "cannot_attribute": "3 columns (J-cur + J-mag + S-mag)"
+   }
+  }
+ },
+ "diagnostics": {
+  "P": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 6.171873201703383
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.861399782464546
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.016062609275332
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.430532590775052
+     }
+    ],
+    "correlation": 0.9483986821326338
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Queens of the Stone Age",
+     "mbid": "7dc8f5bd-9d0b-4087-9f73-dc164950bbd8",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Beck",
+     "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Paramore",
+     "mbid": "44cf61b8-5197-448a-b82b-cef6ee89fac5",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Arcade Fire",
+     "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Marilyn Manson",
+     "mbid": "5dfdca28-9ddc-4853-933c-8bc97d87beec",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Cure",
+     "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pearl Jam",
+     "mbid": "83b9cbe7-9857-49e2-ab8e-b57b01038103",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Depeche Mode",
+     "mbid": "8538e728-ca0b-4321-b7e5-cff6565dd4c0",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [],
+   "floor_active_frac": 0.029351326190093254
+  },
+  "A0": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 6.041329905327553
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.861399782464546
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.016062609275332
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.430532590775052
+     }
+    ],
+    "correlation": 0.9498317054757184
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Queens of the Stone Age",
+     "mbid": "7dc8f5bd-9d0b-4087-9f73-dc164950bbd8",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Beck",
+     "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Paramore",
+     "mbid": "44cf61b8-5197-448a-b82b-cef6ee89fac5",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Arcade Fire",
+     "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Marilyn Manson",
+     "mbid": "5dfdca28-9ddc-4853-933c-8bc97d87beec",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Cure",
+     "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pearl Jam",
+     "mbid": "83b9cbe7-9857-49e2-ab8e-b57b01038103",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Depeche Mode",
+     "mbid": "8538e728-ca0b-4321-b7e5-cff6565dd4c0",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.03151623514069147
+  },
+  "A1": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 5.995057505969698
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.3046021258548475
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.246843122251319
+     }
+    ],
+    "correlation": 0.972129691943318
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Gorillaz",
+     "mbid": "e21857d5-3256-4547-afb3-4b6ded592596",
+     "n_pairs": 4
+    },
+    {
+     "artist": "R.E.M.",
+     "mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Foo Fighters",
+     "mbid": "67f66c07-6e61-4026-ade5-7e782fad3a5d",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Cure",
+     "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+     "n_pairs": 3
+    },
+    {
+     "artist": "U2",
+     "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Beatles",
+     "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Coldplay",
+     "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Michael Jackson",
+     "mbid": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "P",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.03232619726840893
+  },
+  "A2": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 6.059667940869235
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.053420363796977
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.430532590775052
+     }
+    ],
+    "correlation": 0.9564051592696904
+   },
+   "repeated_interiors": [
+    {
+     "artist": "The Cure",
+     "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+     "n_pairs": 5
+    },
+    {
+     "artist": "Beck",
+     "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Pearl Jam",
+     "mbid": "83b9cbe7-9857-49e2-ab8e-b57b01038103",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Tom Waits",
+     "mbid": "c3aeb863-7b26-4388-94e8-5a240f2be21b",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Arcade Fire",
+     "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Bob Dylan",
+     "mbid": "72c536dc-7137-4477-a521-567eeb840fa8",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Killers",
+     "mbid": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pixies",
+     "mbid": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.1111111111111111,
+     "arm_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "Sia",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "Sia",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.5714285714285714,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.5714285714285714,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.2,
+     "arm_path": [
+      "Metallica",
+      "Slipknot",
+      "Rise Against",
+      "Paramore",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.2,
+     "arm_path": [
+      "Metallica",
+      "Slipknot",
+      "Rise Against",
+      "Paramore",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.0328179498957634
+  },
+  "A3": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 6.041329905327553
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.861399782464546
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.016062609275332
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.430532590775052
+     }
+    ],
+    "correlation": 0.9498317054757184
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Queens of the Stone Age",
+     "mbid": "7dc8f5bd-9d0b-4087-9f73-dc164950bbd8",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Beck",
+     "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Bon Iver",
+     "mbid": "437a0e49-c6ae-42f6-a6c1-84f25ed366bc",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Paramore",
+     "mbid": "44cf61b8-5197-448a-b82b-cef6ee89fac5",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Arcade Fire",
+     "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Marilyn Manson",
+     "mbid": "5dfdca28-9ddc-4853-933c-8bc97d87beec",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Cure",
+     "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pearl Jam",
+     "mbid": "83b9cbe7-9857-49e2-ab8e-b57b01038103",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.03012260758365823
+  },
+  "A4": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 5.995057505969698
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.3046021258548475
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.246843122251319
+     }
+    ],
+    "correlation": 0.972129691943318
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Coldplay",
+     "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+     "n_pairs": 5
+    },
+    {
+     "artist": "Gorillaz",
+     "mbid": "e21857d5-3256-4547-afb3-4b6ded592596",
+     "n_pairs": 4
+    },
+    {
+     "artist": "R.E.M.",
+     "mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Arcade Fire",
+     "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+     "n_pairs": 3
+    },
+    {
+     "artist": "U2",
+     "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Rolling Stones",
+     "mbid": "b071f9fa-14b0-4217-8e97-eb41da73f598",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pixies",
+     "mbid": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Michael Jackson",
+     "mbid": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "P",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.033335045060223945
+  },
+  "A5": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 5.995057505969698
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.3046021258548475
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.246843122251319
+     }
+    ],
+    "correlation": 0.972129691943318
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Gorillaz",
+     "mbid": "e21857d5-3256-4547-afb3-4b6ded592596",
+     "n_pairs": 4
+    },
+    {
+     "artist": "R.E.M.",
+     "mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Foo Fighters",
+     "mbid": "67f66c07-6e61-4026-ade5-7e782fad3a5d",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Cure",
+     "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+     "n_pairs": 3
+    },
+    {
+     "artist": "U2",
+     "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Beatles",
+     "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Coldplay",
+     "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Michael Jackson",
+     "mbid": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "P",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.030834034366517448
+  },
+  "A6": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 6.059667940869235
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.053420363796977
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.430532590775052
+     }
+    ],
+    "correlation": 0.9564051592696904
+   },
+   "repeated_interiors": [
+    {
+     "artist": "The Cure",
+     "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+     "n_pairs": 5
+    },
+    {
+     "artist": "Beck",
+     "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Arcade Fire",
+     "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pearl Jam",
+     "mbid": "83b9cbe7-9857-49e2-ab8e-b57b01038103",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Killers",
+     "mbid": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pixies",
+     "mbid": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Gorillaz",
+     "mbid": "e21857d5-3256-4547-afb3-4b6ded592596",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The White Stripes",
+     "mbid": "11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5",
+     "n_pairs": 2
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.1111111111111111,
+     "arm_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "Sia",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "Sia",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.5714285714285714,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.5714285714285714,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.2,
+     "arm_path": [
+      "Metallica",
+      "Slipknot",
+      "Rise Against",
+      "Paramore",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.2,
+     "arm_path": [
+      "Metallica",
+      "Slipknot",
+      "Rise Against",
+      "Paramore",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.032233753365487824
+  },
+  "A7": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 5.995057505969698
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.3046021258548475
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.246843122251319
+     }
+    ],
+    "correlation": 0.972129691943318
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Coldplay",
+     "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+     "n_pairs": 5
+    },
+    {
+     "artist": "Gorillaz",
+     "mbid": "e21857d5-3256-4547-afb3-4b6ded592596",
+     "n_pairs": 4
+    },
+    {
+     "artist": "R.E.M.",
+     "mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Arcade Fire",
+     "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+     "n_pairs": 3
+    },
+    {
+     "artist": "U2",
+     "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+     "n_pairs": 3
+    },
+    {
+     "artist": "The Rolling Stones",
+     "mbid": "b071f9fa-14b0-4217-8e97-eb41da73f598",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Pixies",
+     "mbid": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Michael Jackson",
+     "mbid": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "P",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.032773788956436824
+  },
+  "A1u": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 5.995057505969698
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 6.3046021258548475
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.162899406865292
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 6.293641827863309
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.3658799732060185
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.948834127590567
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.246843122251319
+     }
+    ],
+    "correlation": 0.972129691943318
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Gorillaz",
+     "mbid": "e21857d5-3256-4547-afb3-4b6ded592596",
+     "n_pairs": 4
+    },
+    {
+     "artist": "R.E.M.",
+     "mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Daft Punk",
+     "mbid": "056e4f3e-d505-4dad-8ec1-d04f521cbb56",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Foo Fighters",
+     "mbid": "67f66c07-6e61-4026-ade5-7e782fad3a5d",
+     "n_pairs": 3
+    },
+    {
+     "artist": "U2",
+     "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Coldplay",
+     "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Michael Jackson",
+     "mbid": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Beck",
+     "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+     "n_pairs": 2
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Norah Jones",
+      "Dido",
+      "Eminem",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Pearl Jam",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "U2",
+      "Rihanna",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "P",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Gorillaz",
+      "Little Dragon",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.03114800378211152
+  },
+  "X": {
+   "endpoint_tracking_A14": {
+    "rows": [
+     {
+      "pair": "Miles Davis -> Daft Punk",
+      "endpoint_mean_F": 6.093937855040934,
+      "d0_interior_median_F": 6.306582631762121
+     },
+     {
+      "pair": "The Shins -> Wishbone Ash",
+      "endpoint_mean_F": 5.221261810122693,
+      "d0_interior_median_F": 5.839814793547843
+     },
+     {
+      "pair": "Metallica -> Taylor Swift",
+      "endpoint_mean_F": 6.633350843958456,
+      "d0_interior_median_F": 5.900217499661748
+     },
+     {
+      "pair": "Radiohead -> The Beatles",
+      "endpoint_mean_F": 6.412281386721334,
+      "d0_interior_median_F": 6.306582631762121
+     },
+     {
+      "pair": "Muse -> Coldplay",
+      "endpoint_mean_F": 6.0221640022406735,
+      "d0_interior_median_F": 5.919006401707439
+     },
+     {
+      "pair": "Madonna -> Bob Dylan",
+      "endpoint_mean_F": 6.631014888183768,
+      "d0_interior_median_F": 6.633306438536888
+     },
+     {
+      "pair": "Pink Floyd -> Aphex Twin",
+      "endpoint_mean_F": 6.084315221027269,
+      "d0_interior_median_F": 5.9818267041882685
+     },
+     {
+      "pair": "Nirvana -> CROOVE",
+      "endpoint_mean_F": 3.0806040163009873,
+      "d0_interior_median_F": 4.246843122251319
+     }
+    ],
+    "correlation": 0.9350008864547599
+   },
+   "repeated_interiors": [
+    {
+     "artist": "Queen",
+     "mbid": "0383dadf-2a4e-4d10-a46a-e9e041da8eb3",
+     "n_pairs": 5
+    },
+    {
+     "artist": "Daft Punk",
+     "mbid": "056e4f3e-d505-4dad-8ec1-d04f521cbb56",
+     "n_pairs": 5
+    },
+    {
+     "artist": "The White Stripes",
+     "mbid": "11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5",
+     "n_pairs": 4
+    },
+    {
+     "artist": "Imagine Dragons",
+     "mbid": "012151a8-0f9a-44c9-997f-ebd68b5389f9",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Green Day",
+     "mbid": "084308bd-1654-436f-ba03-df6697104e19",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Beck",
+     "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+     "n_pairs": 3
+    },
+    {
+     "artist": "Nirvana",
+     "mbid": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+     "n_pairs": 3
+    },
+    {
+     "artist": "U2",
+     "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+     "n_pairs": 3
+    }
+   ],
+   "C5_d0_changes": [
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Frank Sinatra",
+      "The Beach Boys",
+      "Queen",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Dean Martin",
+      "Mariah Carey",
+      "Alicia Keys",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "Miles Davis -> Daft Punk",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Miles Davis",
+      "Frank Sinatra",
+      "The Beach Boys",
+      "Queen",
+      "Daft Punk"
+     ],
+     "ref_path": [
+      "Miles Davis",
+      "Ella Fitzgerald",
+      "Michael Bublé",
+      "Meghan Trainor",
+      "John Legend",
+      "Ye",
+      "Daft Punk"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "P",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Soundgarden",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "The Shins -> Wishbone Ash",
+     "vs": "A0",
+     "overlap": 0.375,
+     "arm_path": [
+      "The Shins",
+      "Beck",
+      "Soundgarden",
+      "Black Sabbath",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ],
+     "ref_path": [
+      "The Shins",
+      "Beck",
+      "Rage Against the Machine",
+      "Pantera",
+      "Motörhead",
+      "Rainbow",
+      "Uriah Heep",
+      "Wishbone Ash"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "Muse",
+      "Imagine Dragons",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Metallica -> Taylor Swift",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Metallica",
+      "Muse",
+      "Imagine Dragons",
+      "Taylor Swift"
+     ],
+     "ref_path": [
+      "Metallica",
+      "Korn",
+      "Breaking Benjamin",
+      "Paramore",
+      "Taylor Swift"
+     ]
+    },
+    {
+     "pair": "Radiohead -> The Beatles",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Radiohead",
+      "Queen",
+      "The Beatles"
+     ],
+     "ref_path": [
+      "Radiohead",
+      "Coldplay",
+      "The Beatles"
+     ]
+    },
+    {
+     "pair": "Radiohead -> The Beatles",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Radiohead",
+      "Queen",
+      "The Beatles"
+     ],
+     "ref_path": [
+      "Radiohead",
+      "Coldplay",
+      "The Beatles"
+     ]
+    },
+    {
+     "pair": "Muse -> Coldplay",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Muse",
+      "Imagine Dragons",
+      "Coldplay"
+     ],
+     "ref_path": [
+      "Muse",
+      "The Rolling Stones",
+      "Coldplay"
+     ]
+    },
+    {
+     "pair": "Muse -> Coldplay",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Muse",
+      "Imagine Dragons",
+      "Coldplay"
+     ],
+     "ref_path": [
+      "Muse",
+      "The Rolling Stones",
+      "Coldplay"
+     ]
+    },
+    {
+     "pair": "Madonna -> Bob Dylan",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Madonna",
+      "Mariah Carey",
+      "Elvis Presley",
+      "Bob Dylan"
+     ],
+     "ref_path": [
+      "Madonna",
+      "ABBA",
+      "Elton John",
+      "Bob Dylan"
+     ]
+    },
+    {
+     "pair": "Madonna -> Bob Dylan",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Madonna",
+      "Mariah Carey",
+      "Elvis Presley",
+      "Bob Dylan"
+     ],
+     "ref_path": [
+      "Madonna",
+      "ABBA",
+      "Elton John",
+      "Bob Dylan"
+     ]
+    },
+    {
+     "pair": "Pink Floyd -> Aphex Twin",
+     "vs": "P",
+     "overlap": 0.0,
+     "arm_path": [
+      "Pink Floyd",
+      "Daft Punk",
+      "Massive Attack",
+      "Aphex Twin"
+     ],
+     "ref_path": [
+      "Pink Floyd",
+      "Depeche Mode",
+      "Moby",
+      "Aphex Twin"
+     ]
+    },
+    {
+     "pair": "Pink Floyd -> Aphex Twin",
+     "vs": "A0",
+     "overlap": 0.0,
+     "arm_path": [
+      "Pink Floyd",
+      "Daft Punk",
+      "Massive Attack",
+      "Aphex Twin"
+     ],
+     "ref_path": [
+      "Pink Floyd",
+      "Depeche Mode",
+      "Moby",
+      "Aphex Twin"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "P",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Daft Punk",
+      "M83",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    },
+    {
+     "pair": "Nirvana -> CROOVE",
+     "vs": "A0",
+     "overlap": 0.5,
+     "arm_path": [
+      "Nirvana",
+      "Daft Punk",
+      "M83",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ],
+     "ref_path": [
+      "Nirvana",
+      "Blur",
+      "MGMT",
+      "Crystal Castles",
+      "Washed Out",
+      "Com Truise",
+      "HOME",
+      "Desired",
+      "TANUKI",
+      "CROOVE"
+     ]
+    }
+   ],
+   "floor_active_frac": 0.03776944257044378
+  }
+ }
+}

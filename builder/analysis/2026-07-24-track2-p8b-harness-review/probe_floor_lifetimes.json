@@ -1,0 +1,338 @@
+{
+ "artifact": {
+  "file": "graph-t15-tiebreakfix.bin",
+  "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8"
+ },
+ "constants_read_from_code": {
+  "floor_relax_known_raw (ApiConfig, via SweepConfig)": 0.15,
+  "floor_relax_known_pctl (pre-registered, A2)": 0.05
+ },
+ "L1_L2_per_pair": [
+  {
+   "set": "analysis",
+   "pair": "Miles Davis -> Daft Punk",
+   "base_floor_raw": 0.672624,
+   "base_floor_pctl": 0.989527,
+   "raw_floor_dies_at_d": 5,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "analysis",
+   "pair": "The Shins -> Wishbone Ash",
+   "base_floor_raw": 0.474441,
+   "base_floor_pctl": 0.875633,
+   "raw_floor_dies_at_d": 4,
+   "pctl_floor_dies_at_d": 18,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "analysis",
+   "pair": "Metallica -> Taylor Swift",
+   "base_floor_raw": 0.719935,
+   "base_floor_pctl": 0.994299,
+   "raw_floor_dies_at_d": 5,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "analysis",
+   "pair": "Radiohead -> The Beatles",
+   "base_floor_raw": 0.998231,
+   "base_floor_pctl": 0.999987,
+   "raw_floor_dies_at_d": 7,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "analysis",
+   "pair": "Muse -> Coldplay",
+   "base_floor_raw": 0.931281,
+   "base_floor_pctl": 0.999865,
+   "raw_floor_dies_at_d": 7,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "analysis",
+   "pair": "Madonna -> Bob Dylan",
+   "base_floor_raw": 0.828643,
+   "base_floor_pctl": 0.998612,
+   "raw_floor_dies_at_d": 6,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "analysis",
+   "pair": "Pink Floyd -> Aphex Twin",
+   "base_floor_raw": 0.930716,
+   "base_floor_pctl": 0.999852,
+   "raw_floor_dies_at_d": 7,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "analysis",
+   "pair": "Nirvana -> CROOVE",
+   "base_floor_raw": 0.457082,
+   "base_floor_pctl": 0.850456,
+   "raw_floor_dies_at_d": 4,
+   "pctl_floor_dies_at_d": 18,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "held-out",
+   "pair": "Arctic Monkeys -> Johnny Cash",
+   "base_floor_raw": 0.92849,
+   "base_floor_pctl": 0.999811,
+   "raw_floor_dies_at_d": 7,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "held-out",
+   "pair": "Michael Jackson -> Gorillaz",
+   "base_floor_raw": 0.939564,
+   "base_floor_pctl": 0.999906,
+   "raw_floor_dies_at_d": 7,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "held-out",
+   "pair": "System of a Down -> R.E.M.",
+   "base_floor_raw": 0.927962,
+   "base_floor_pctl": 0.999798,
+   "raw_floor_dies_at_d": 7,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "set": "held-out",
+   "pair": "The Rolling Stones -> Linkin Park",
+   "base_floor_raw": 0.940312,
+   "base_floor_pctl": 0.999919,
+   "raw_floor_dies_at_d": 7,
+   "pctl_floor_dies_at_d": 20,
+   "raw_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "pctl_alive_at_snapshots": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    10,
+    15
+   ]
+  }
+ ],
+ "L1_summary": {
+  "raw floor dead by d": 7,
+  "pairs with raw floor alive at any d >= 10": [],
+  "read": "P's raw floor is identically zero everywhere in C1's window (d in {10,15,20}), so at those depths P's cost function EQUALS A0's. Any P-vs-A0 difference at d >= 10 is carried-over exclusion history from d0-d6, not a live floor term."
+ },
+ "L2_summary": {
+  "pairs with pctl floor alive at d15": [
+   "Miles Davis -> Daft Punk",
+   "The Shins -> Wishbone Ash",
+   "Metallica -> Taylor Swift",
+   "Radiohead -> The Beatles",
+   "Muse -> Coldplay",
+   "Madonna -> Bob Dylan",
+   "Pink Floyd -> Aphex Twin",
+   "Nirvana -> CROOVE",
+   "Arctic Monkeys -> Johnny Cash",
+   "Michael Jackson -> Gorillaz",
+   "System of a Down -> R.E.M.",
+   "The Rolling Stones -> Linkin Park"
+  ],
+  "pairs with pctl floor alive at d20": [],
+  "read": "base_floor_pctl <= 1.0 by definition and the relax constant is 0.05, so the percentile floor is ZERO at d20 for every pair without exception. FL1/FL2 and W therefore share an identical cost function at d20; any d20 difference is exclusion-history carryover. C3 (median d5 - median d20) can only be improved by the FL device RAISING d5, and C1 (d >= 10 vs P) can only be made less negative by it."
+ },
+ "L3_factorial_floor_is_inert": {
+  "w_floor_in_factorial_cells": 0.0,
+  "largest_representable_floor_penalty": 1.0,
+  "0.0_times_it_is_exactly_zero": true,
+  "adding_it_is_exact": true,
+  "note": "floor_mode stays RAW in the factorial cells (only w_floor is zeroed), so mirror.py still COMPUTES floor_val and still increments the stats['floor_active'] counter there -- the cost is inert, the PR-A diagnostic is not measuring a live term."
+ }
+}
