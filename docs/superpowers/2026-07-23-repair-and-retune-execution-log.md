@@ -886,6 +886,14 @@ their own; they are documentation hygiene, not Track 2 experimental work.
   displacement-only; `closeout` **D6** enforces it from the diff, and D6 is in the
   mid-flight scaling because a handoff is when the delta is both non-zero and needed by the
   successor.
+  > **⚠ SUPERSEDED 2026-07-25 — the displacement half only.** Mandatory displacement is
+  > dropped. A session still never grows the layer on its own authority and D6 still measures
+  > from the diff, but the price of an addition is now **reporting the cost and making the
+  > case**, not finding something to cut. Reason: paying in compression is done by the session
+  > that wants the lines, on prose it did not write, and it twice cost the exact clause that
+  > made a check usable — while the arithmetic recorded a saving. A displacement now counts
+  > only where the thing removed had stopped earning its place. See `CLAUDE.md`'s
+  > standing-layer rule and `closeout` D6 for the current wording.
 - **Rules do not get expiry conditions** (a hypothesis put to the consultant and killed):
   the rules are invariants; what grows is the incident narrative attached to them, which is
   load-bearing. D6 prices that growth instead.

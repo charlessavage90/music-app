@@ -370,11 +370,13 @@ bodies load unconditionally, before a session reads a single project document. E
 layer is routed around by `docs/README.md`; this one is not, so it is the only place where
 growth is a standing tax. It was 661 lines on 2026-07-21 and 1,436 on 2026-07-23.
 
-> **Additions to it are displacement-only: name what the addition replaces or shortens —
-> and if you cannot, it is not a session's to add.** Propose it to the owner and leave the
-> file alone; growing the layer that taxes every future session is his call, not a
-> session's. Checked at `closeout` **D6**, from the diff. This is A3's rule — *a deferral
-> must have an address* — applied to context instead of to findings.
+> **A session never grows this layer on its own authority: report the cost from the diff
+> and hand the decision over.** Growing the layer that taxes every future session is the
+> owner's call, not a session's. **Do not buy an addition by damaging something else** — a
+> displacement is real only where the thing removed had stopped earning its place.
+> Compressing a live passage to free lines has twice cost the exact clause that made a check
+> usable, and line arithmetic cannot tell that from a saving. Checked at `closeout` **D6**,
+> from the diff.
 
 **Rules here do not expire, and must not be given expiry conditions.** "Figures live in one
 document", `UV_LINK_MODE=copy`, currency-in-the-name: these are invariants, and a review
@@ -382,7 +384,9 @@ trigger on them would be discharged by re-affirming them, adding a line and subt
 nothing. What grows is not the rule (2 lines, permanent) but the **incident narrative**
 attached to it (4–6 lines, and it is load-bearing — knowing what a check is *for* is what
 lets you apply it to a case it was not written for). That is a real trade-off, not a defect.
-The displacement rule prices it; an expiry date would shred the half worth keeping.
+The budget rule prices it by making the cost visible and the decision the owner's; an expiry
+date would shred the half worth keeping — and so does compressing a narrative to free lines,
+which is why that is no longer the price of an addition.
 
 ### How to present results to the owner
 

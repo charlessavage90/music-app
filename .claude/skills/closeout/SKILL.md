@@ -394,7 +394,7 @@ The PR body is where a reviewer picks up the context, so it carries:
   reasoning recorded. Without this, review reopens settled questions, which is expensive
   and demoralising
 
-### D6. The standing context layer is displacement-only
+### D6. The standing context layer is the owner's to grow
 
 ```bash
 git diff --stat <base>..HEAD -- CLAUDE.md .claude/skills/ .claude/agents/
@@ -402,10 +402,13 @@ wc -l ~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memor
 ```
 
 Record the net line change in the retained log. **If it is positive, the commit message
-names what the addition replaces or shortens.** If nothing came out, the addition needed the
-owner's agreement before it landed — net-new is his call, not the session's. A justification
-written by the session that wanted the lines is not a check; that is how this layer reached
-1,436 lines with every individual addition justified.
+states the cost and the case** — what fires the new rule, and why it was worth the lines. It
+need not name a removal: a displacement counts only where the thing removed had stopped
+earning its place, and compressing live prose to free lines is not a displacement, it is
+damage with a receipt. Net-new is the owner's call, not the session's, and it needed his
+agreement before it landed. A justification written by the session that wanted the lines is
+not a check; that is how this layer reached 1,436 lines with every individual addition
+justified.
 
 **Both commands are needed, because `memory/` lives outside the repo and is not in git** —
 a diff cannot see it, yet it loads into every session and the budget rule names it. Take its
