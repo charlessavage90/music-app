@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
 | **What does the owner mean by "better"?** | `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — calibration for the blind listening test, this project's strongest evidence class. Read it before running one, interpreting a verdict, **or designing anything that scores a path**. It records **preference, not evidence**: never read a threshold off it, but a criterion that contradicts it is wrong. Worked example — the Track 2 pre-registration's C4 exists because value 2 rules out fewer-but-obscurer. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
-| **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. |
+| **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. Also `doc-auditor.md`, project-local and shadowing the global one; `closeout` B1 dispatches it, and `docs/README.md` says what it checks. |
 
 **Never use as context:** `docs/how-we-map-similar-artists.md` (a narrative journal) and
 anything under `docs/reference/` (third-party material). Neither is maintained as
