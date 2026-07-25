@@ -136,8 +136,9 @@ yourself — `/rename` is a built-in command, not a skill — so give him the fi
 nothing to compose.
 
 Name the **body of work, not the task**, in two to four words, taken from the governing
-document or the branch (A) — whichever a stranger would recognise faster:
-`/rename track2f-toll`, `/rename clip-cache-fix`, `/rename p99-rescale-prereg`.
+document or the branch (A) — whichever a stranger would recognise faster, and end it
+`-builder` if this session is one: `/rename track2f-toll-builder`,
+`/rename clip-cache-fix-builder`, `/rename p99-rescale-prereg-builder`.
 
 Two suffixes, and they are most of why this is worth doing:
 
@@ -145,7 +146,7 @@ Two suffixes, and they are most of why this is worth doing:
 - `(handoff, mid-flight)` — the handoff note says the previous session was retired
   **before** a seam. Same signal the cold-read check below keys off.
 
-So: `/rename track2f-toll (handoff, mid-flight)`.
+So: `/rename track2f-toll-builder (handoff, mid-flight)`.
 
 It costs one line and no tracking anywhere. What it buys is a `/resume` picker where a
 chain of handoffs reads as one chain rather than three unrelated entries — and a prompt box
