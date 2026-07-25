@@ -66,12 +66,25 @@ def test_path_requires_exactly_two_sources():
 
 
 def test_track_endpoint_returns_clip():
+    # store.mbids[0] is Radiohead; the row must name that artist and carry a
+    # track id, since C1 matches on the artist and C2 caches the id.
     client, store = _client({"any": {"data": [
-        {"preview": "clip.mp3", "title": "Song", "artist": {"picture_medium": "c.jpg"}}
+        {"id": 7, "preview": "clip.mp3", "title": "Song",
+         "artist": {"name": "Radiohead", "picture_medium": "c.jpg"}}
     ]}})
     r = client.get(f"/api/artists/{store.mbids[0]}/track")
     assert r.status_code == 200
     assert r.json()["preview_url"] == "clip.mp3"
+
+
+def test_track_endpoint_serves_no_clip_rather_than_the_wrong_artist():
+    """C1, end to end: a title collision must not reach the card."""
+    client, store = _client({"any": {"data": [
+        {"id": 8, "preview": "wrong.mp3", "title": "Radiohead",
+         "artist": {"name": "Some Other Band"}}
+    ]}})
+    r = client.get(f"/api/artists/{store.mbids[0]}/track")
+    assert r.status_code == 204
 
 
 def test_track_endpoint_204_when_no_clip():
