@@ -1,5 +1,6 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { StrictMode } from 'react';
 import { beforeEach, expect, test, vi } from 'vitest';
 import { usePlayer } from './usePlayer';
 
@@ -33,6 +34,25 @@ function Harness({ resolve }: { resolve: (mbid: string) => Promise<string | null
     </div>
   );
 }
+
+test('auto-advance under StrictMode plays the very next artist, not the one after', async () => {
+  // Reproduction of the skip found in use. main.tsx renders under StrictMode, and
+  // dispose() does not remove listeners, so every handler is registered twice in
+  // dev — meaning `ended` fires the advance twice for a single track ending.
+  const user = userEvent.setup();
+  render(
+    <StrictMode>
+      <Harness resolve={async (mbid) => `url-for-${mbid}`} />
+    </StrictMode>,
+  );
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(played).toEqual(['url-for-miles']));
+
+  await act(async () => { ended.forEach((cb) => cb()); });
+
+  await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('kraftwerk'));
+  expect(played).toEqual(['url-for-miles', 'url-for-kraftwerk']);
+});
 
 test('auto-advances to the next playable on track end', async () => {
   const user = userEvent.setup();

@@ -11,6 +11,50 @@ the point.**
 
 ---
 
+## QUEUED — 2026-07-25 — the three playback fixes from your last run
+
+**Ten minutes, no waiting.** This covers what your last run found. Nothing about *which
+artists* you get has changed — no routing, no cost function, no graph.
+
+**What to exercise:**
+
+1. **Play a clip and let it run to its end, twice over.** Each time, the card that starts
+   next should be **the one immediately below** the one that just finished. Previously it
+   jumped over one artist every time.
+2. **While a clip is playing, press "← New path".** The audio should stop the instant you
+   press it. Previously it kept playing.
+3. **While a clip is playing, press "↺ Reset path".** Same — silence on the press, not when
+   the new path finishes loading.
+4. **While a clip is playing, press a bypass button.** Same again.
+5. **Quick regression, because the fix touched the player itself:** play a card, pause it on
+   the card, resume it. It must carry on from where it stopped rather than restart. Then
+   check a clip still plays at all — the riskiest version of this fix silenced the app
+   completely, and it was caught in testing rather than in use.
+
+**What "wrong" would look like:** an artist skipped when a clip ends; audio continuing after
+any of those three buttons; a resumed clip restarting from the beginning; or cards that no
+longer play at all.
+
+**Known and unchanged:** a card with no clip is silent by design and is stepped over when a
+clip ends — that is correct, not a skip. A path with only your two artists still offers no
+bypass buttons; that is the zero-intermediary case, and you have decided every journey needs
+at least one stop, but it is not built yet.
+
+*Detail: the execution log's §18.*
+
+## DONE — 2026-07-25 — does a clip still play after the tab has been open a while
+
+**DONE 2026-07-25 — PASSED. C2 is closed.** Tested in one tab after the wait: an unplayed
+card, a previously played card, and a card left paused all played correctly. That exercises
+the whole chain against the live service — the browser asks for a new link, the server
+re-signs it, the audio plays — which is what no test could do.
+
+**Found while testing, and now fixed** (see the entry above): a finished clip skipped the
+next artist; "New path" did not stop the audio; and bypass / "Reset path" silenced it only
+once the new path had loaded.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-25 — does a clip still play after the tab has been open a while
 
 **This unblocks the entry below, which is kept for the record.** The reason it could not pass

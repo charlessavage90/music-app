@@ -99,6 +99,48 @@ test('"reset path" drops every bypass and keeps the same two artists', async () 
   );
 });
 
+// Distinct mbids: the clip cache is module-level and lives for the whole file, so
+// reusing ids the other tests resolved to "no clip" leaves the play button disabled.
+const AUDIBLE_THREE_STOP = [
+  { mbid: 'aud-m', name: 'Alice Coltrane', disambiguation: '', popularity: 1 },
+  { mbid: 'aud-h', name: 'Pharoah Sanders', disambiguation: '', popularity: 0.9 },
+  { mbid: 'aud-d', name: 'Sun Ra', disambiguation: '', popularity: 0.95 },
+];
+
+/** Renders a path whose cards have clips, and starts one playing. */
+async function renderPlaying(user: ReturnType<typeof userEvent.setup>, url: string) {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'buildPath')
+    .mockResolvedValueOnce(AUDIBLE_THREE_STOP)
+    // The rebuild never arrives, so anything that stops only on rebuild stays playing.
+    .mockReturnValueOnce(new Promise(() => {}));
+
+  renderAt(url);
+  await screen.findByText('Pharoah Sanders');
+  const play = (await screen.findAllByRole('button', { name: /play/i }))[0];
+  await waitFor(() => expect(play).toBeEnabled());
+  await user.click(play);
+  await waitFor(() => expect(screen.getByText(/now playing/i)).toBeInTheDocument());
+}
+
+test('pressing reset path stops the audio at once, not when the new path arrives', async () => {
+  const user = userEvent.setup();
+  await renderPlaying(user, '/path/m/d?known=h&dislike=z');
+
+  await user.click(screen.getByRole('button', { name: /reset path/i }));
+
+  await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
+});
+
+test('pressing a bypass stops the audio at once, not when the new path arrives', async () => {
+  const user = userEvent.setup();
+  await renderPlaying(user, '/path/m/d');
+
+  await user.click(screen.getByRole('button', { name: /not for me/i }));
+
+  await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
+});
+
 test('there is nothing to reset before any bypass is pressed', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
   vi.spyOn(client, 'buildPath').mockResolvedValue(THREE_STOP);

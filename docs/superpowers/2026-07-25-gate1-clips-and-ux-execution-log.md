@@ -531,3 +531,96 @@ ever undone.
 again; only use lands the whole chain. That is the queue's question 2, now unblocked — and
 the same "fixture may not match reality" caveat that §15 discharged for the server half
 applies here until it returns.
+
+> **DISCHARGED 2026-07-25 — see §18.** The owner ran it: a tab left open past the signature
+> lifetime plays correctly in every state. **C2 is closed.**
+
+## 18. C2 closes, and two playback defects the unit suite could not see
+
+**Owner's use-the-app run, 2026-07-25, on branch `clip-freshness-on-play`.**
+
+### C2 is closed
+
+**Question 2 passed in one tab**: after the wait, an unplayed card, a previously played card,
+and a card left paused all played correctly. That is the whole chain — browser asks, server
+re-signs, audio plays — exercised against the live service. **C1 and C2 are now both fixed
+*and* closed**, which ends the roadmap's clip work.
+
+### Two defects found by the same run
+
+Both were found by instructions 3, 4 and 6 of the check, and **neither was visible to the
+unit suite**, which was green throughout.
+
+| Symptom | Verdict |
+|---|---|
+| A finished clip skips the next artist and plays the one after | **Pre-existing, newly observed** — see below |
+| "New path" leaves the clip playing | **Regression from §17**, introduced today |
+| Bypass / "Reset path" silence the clip only when the rebuild lands | Pre-existing; the owner asked for immediate |
+
+### Root cause — one defect, two symptoms
+
+**`onEnded` / `onError` accumulated listeners, because `dispose()` never detached them and
+StrictMode mounts every effect twice in dev**, passing a fresh closure each time — so the
+DOM's same-reference de-duplication does not apply.
+
+- **The skip.** One track ending ran the advance twice. The two calls are separated by a
+  **microtask checkpoint**, which browsers perform between listener callbacks for events they
+  dispatch themselves. So call one finished moving to artist B before call two ran, and call
+  two then advanced B → C.
+- **"New path".** `dispose()` assigns `src = ''`, which resolves against the document URL and
+  makes the browser fire `error`. §17's new retry handler read that as a dead clip, fetched a
+  fresh URL and **resumed playback after the page had navigated away.** The retry is sound;
+  it was reachable from teardown.
+
+### Why every test missed it, which is the durable lesson
+
+**A dispatched event is not the same event.** `dispatchEvent` from JavaScript runs with a
+non-empty stack, so no microtask checkpoint occurs between listeners, both calls see artist A,
+and the token guard collapses them correctly. The suite therefore proved the advance correct
+**under the one condition that cannot occur in a browser.**
+
+Two environment facts had to be true at once for a reproduction, and each was found only by
+trying: **jsdom cannot do it** (no real media pipeline), and **Playwright's bundled Chromium
+cannot either** — it ships without the MP3 codec, so a clip never plays and never ends. The
+reproduction needed real Chrome (`test.use({ channel: 'chrome' })`) and a clip seeked to its
+own end. That is now `e2e/playback.spec.ts`.
+
+### The fix
+
+**At the `Player` seam, where the defect was** — not at the two call sites where it showed:
+
+- `onEnded` / `onError` **replace** rather than append.
+- `dispose()` **detaches before clearing the source**, so the teardown `error` reaches nobody,
+  and refuses further playback — which also covers a resolve still in flight when the page
+  navigates.
+- **Subscribing revives a disposed player.** Found by breaking it: a sticky `disposed` flag
+  silenced the app outright, because StrictMode cleans up and remounts on the *same* memoised
+  instance. Recorded because the failure was total and the cause invisible from the symptom.
+
+**Immediate silence on every control that leaves or rebuilds a path** (bypass, "Reset path",
+"New path"), via an imperative `stop` the page holds on the journey. Previously the audio ran
+on over a darkened page until the rebuild landed, which reads as the button not having worked.
+The owner asked for this explicitly after observing it.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| Frontend suite | **60 passed**, 12 files |
+| `npm run build`, `npm run lint` | **Pass** — only the pre-existing `vite.config.ts` warning |
+| Snyk `snyk_code_scan` on `frontend/src` | **Pass**, 0 issues |
+| `e2e/playback.spec.ts` in real Chrome | **Pass** — advance lands 0 → 1 → 2; navigation silences |
+| Mutation checks | **All killed.** Restoring the accumulating listener makes the e2e fail with *expected 1, received 2* — the exact defect. Removing the imperative stop makes both new `PathPage` tests fail on the audio persisting. |
+
+**One test was corrected rather than the code**: an assertion that a disposed element's `src`
+becomes `''`. It becomes the *document URL* — clearing `src` resolves against the document. The
+assertion now checks the clip is never loaded and playback never starts, which is the behaviour
+that matters.
+
+### The pre-existing claim, and its limit
+
+The double registration is pre-existing by inspection: `onEnded` has always used
+`addEventListener`, `dispose()` has never removed anything, and StrictMode has always
+double-mounted. The old code would have queued two advances the same way. **This was not
+verified against the old build** — nobody had let a clip run to its end before, so the
+symptom had never been observed. Stated as inference, not measurement.

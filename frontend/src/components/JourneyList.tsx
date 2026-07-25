@@ -1,16 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useImperativeHandle, useMemo, useRef, useState, type Ref } from 'react';
 import { ArtistCard } from './ArtistCard';
 import { PlayerBar } from './PlayerBar';
 import { usePlayer } from '@/player/usePlayer';
 import { resolveFreshUrl } from '@/hooks/useClip';
 import type { Artist, BypassReason } from '@/api/types';
 
+/** What the page can ask of the journey's audio from outside it. */
+export interface JourneyControls {
+  stop: () => void;
+}
+
 interface Props {
   artists: Artist[];
   onBypass: (mbid: string, reason: BypassReason) => void;
+  ref?: Ref<JourneyControls>;
 }
 
-export function JourneyList({ artists, onBypass }: Props) {
+export function JourneyList({ artists, onBypass, ref }: Props) {
   // Which artists have a clip — not where it lives. Holding the URL here is what
   // let a tab left open serve a dead signature (C2); the player re-signs on play.
   const [hasClip, setHasClip] = useState<Record<string, boolean>>({});
@@ -31,6 +37,11 @@ export function JourneyList({ artists, onBypass }: Props) {
   useEffect(() => {
     stopRef.current();
   }, [pathKey]);
+
+  // The controls that leave or rebuild a path live on the page, not on a card, and
+  // waiting for the rebuild to silence the audio reads as a lag rather than as a
+  // response to the press. So the page can stop it the moment a button is pressed.
+  useImperativeHandle(ref, () => ({ stop: () => stopRef.current() }), []);
 
   return (
     <>
