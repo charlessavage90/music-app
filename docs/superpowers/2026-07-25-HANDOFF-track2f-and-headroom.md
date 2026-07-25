@@ -128,7 +128,14 @@ The owner has been given this and has not yet chosen.
 
 **None.** Every figure is in a committed file. Two worth knowing that are not criteria: the
 ladder is ~461 s of compute for 10 arms, and the in-memory rebuild from the 75,000 archived
-responses takes about the same. Both are far cheaper than the "order of an hour" the Track 2
+responses takes about the same.
+
+> **Which rebuild, added 2026-07-25.** That ~461 s is the **analysis harness reconstructing
+> the graph in memory** — it hashes and discards the bytes, writing no artifact. It is **not**
+> `artistpath-build build`, which `CLAUDE.md` describes as ~30 s. The two are different
+> operations and were briefly read as contradicting each other; see
+> [`2026-07-25-gate1-clips-and-ux-execution-log.md`](2026-07-25-gate1-clips-and-ux-execution-log.md)
+> §13. The ~30 s figure itself remains untimed. Both are far cheaper than the "order of an hour" the Track 2
 pre-registration budgeted.
 
 ## 6. Things decided against, and why

@@ -7,9 +7,9 @@ import { LandingPage } from './LandingPage';
 
 afterEach(() => vi.restoreAllMocks());
 
-function setup() {
+function setup(url = '/') {
   return render(
-    <MemoryRouter initialEntries={['/']}>
+    <MemoryRouter initialEntries={[url]}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/path/:from/:to" element={<div data-testid="dest">dest</div>} />
@@ -28,6 +28,25 @@ test('navigates to the path route once both artists are chosen', async () => {
   await user.click(await screen.findByText('miles'));
   await user.type(screen.getByLabelText('To'), 'daft');
   await user.click(await screen.findByText('daft'));
+  await user.click(screen.getByRole('button', { name: /find path/i }));
+  expect(screen.getByTestId('dest')).toBeInTheDocument();
+});
+
+test('arrives from "new path" with both artists already filled in', async () => {
+  const search = vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
+  setup('/?from=m&fromName=Miles+Davis&to=d&toName=Daft+Punk');
+
+  expect(screen.getByLabelText('From')).toHaveValue('Miles Davis');
+  expect(screen.getByLabelText('To')).toHaveValue('Daft Punk');
+  // Prefilled names are already chosen, so they must not re-open a dropdown.
+  expect(search).not.toHaveBeenCalled();
+});
+
+test('a prefilled pair can be sent straight back off without retyping', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
+  setup('/?from=m&fromName=Miles+Davis&to=d&toName=Daft+Punk');
+
   await user.click(screen.getByRole('button', { name: /find path/i }));
   expect(screen.getByTestId('dest')).toBeInTheDocument();
 });

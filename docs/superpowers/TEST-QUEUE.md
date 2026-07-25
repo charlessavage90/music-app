@@ -11,6 +11,73 @@ the point.**
 
 ---
 
+## QUEUED — 2026-07-25 — clips should play the right artist, and still work an hour later
+
+**This one is app-facing, and it is the first entry in a while that is.** Two clip defects
+and four interface annoyances are fixed. Nothing about *which artists* you get changed —
+no routing, no cost function, no graph. The journey between any two artists is the same
+journey as yesterday; only the audio and the buttons are different.
+
+**The two questions this entry exists to answer**, and they need you rather than a test:
+
+1. **Does the clip play the artist on the card?** Previously the app searched the catalogue
+   and took the first result — but that search matches *song titles* as well as artist
+   names, so searching for the band The Format returned a song *called* "The Format" by a
+   rapper, and played that. Now the app checks the returned track actually belongs to the
+   artist named on the card.
+2. **Does a clip still play about an hour after you opened the page?** The audio links the
+   catalogue hands out are signed and expire within the hour, and we were storing them for
+   thirty days — so every play after the first hour was silent. The app now remembers
+   *which track* to play rather than the link to it, and fetches a fresh link each time.
+
+**One thing that changed after this entry was first written.** A clip that fails to load
+now leaves the card silent instead of returning an error. That matters for *this* test
+rather than in general: the music catalogue limits how often we may ask it, and the fix to
+question 2 roughly doubles how often we ask. Without this, hitting that limit during your
+hour would have produced dead cards that looked exactly like question 2 failing — so a
+result you could not have trusted. Detail: the execution log's §12.
+
+**A deliberate trade you should know about before it looks like a bug.** When no track in
+the catalogue matches the artist, the card is now **silent instead of playing a stranger**.
+So you will see some cards with no audio that previously played something — that is the fix
+working, not a regression. Worth reporting only if it happens to artists you would expect
+any streaming service to have.
+
+**What to exercise:**
+
+1. **Any path, and press play on several cards.** The one thing to watch is whether the
+   voice you hear plausibly belongs to the name on the card. Obscure artists are where this
+   was worst, so a path that digs is more informative than a famous one.
+2. **Leave the tab open, go and do something else for an hour, come back and press play.**
+   This is the whole of question 2 and there is no faster way to ask it. A clip that played
+   before you left must still play when you return.
+3. **The pause button on a card.** It only ever worked on the bar at the bottom of the
+   screen; pressing it on the card itself used to restart the track from the beginning. It
+   should now pause, and pressing again should resume from where it stopped.
+4. **Press a bypass button and listen.** Audio from the old path should stop when the new
+   one arrives, rather than playing over it.
+5. **Look at the first and last cards.** The two artists you chose no longer offer "not for
+   me" or "I know them" — rejecting them never made sense, since the whole journey is
+   defined by them.
+6. **The two controls at the top of a path.** "← New path" takes you back to picking two
+   artists, **with the pair you were just on already filled into the boxes** — so swapping
+   one end for a new artist does not mean retyping both. "↺ Reset path" throws away every
+   bypass you have pressed and puts you back on the original path between the same two
+   artists; it only appears once you have pressed something. Before this, the only way off
+   a path page was the browser's Back button.
+
+**What "wrong" would look like:** a clip that plays an obviously different artist (question
+1 failed); silence after an hour on a card that played earlier (question 2 failed); a card
+whose pause button still restarts the track; audio from a bypassed path continuing to play;
+a bypass button on the first or last card; "New path" arriving at empty boxes, or with a
+dropdown of search results already covering the page. Also worth a mention: **a path with only your two
+artists and nothing in between now offers no bypass buttons at all** — that is expected
+given the change, but it leaves you with nothing to press, and it is the known
+zero-intermediary case (F1) rather than a new defect.
+
+**Best bug report:** the URL from the address bar, plus the artist name on the card if a
+clip played the wrong person.
+
 ## N/A — 2026-07-25 — two more experiments ran; the app is untouched
 
 **Nothing to exercise.** Two things ran today and **neither changed the app**. A path you

@@ -1,16 +1,28 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useSearchParams } from 'react-router-dom';
 import { afterEach, expect, test, vi } from 'vitest';
 import * as client from '@/api/client';
 import { PathPage } from './PathPage';
 
 afterEach(() => vi.restoreAllMocks());
 
+/** Stands in for the landing page, reporting what the link handed it. */
+function LandingProbe() {
+  const [params] = useSearchParams();
+  const shown = ['from', 'fromName', 'to', 'toName']
+    .map((k) => `${k}=${params.get(k) ?? ''}`)
+    .join(' ');
+  return <div data-testid="landing">{shown}</div>;
+}
+
 function renderAt(url: string) {
   return render(
     <MemoryRouter initialEntries={[url]}>
-      <Routes><Route path="/path/:from/:to" element={<PathPage />} /></Routes>
+      <Routes>
+        <Route path="/" element={<LandingProbe />} />
+        <Route path="/path/:from/:to" element={<PathPage />} />
+      </Routes>
     </MemoryRouter>,
   );
 }
@@ -18,21 +30,25 @@ function renderAt(url: string) {
 test('renders the path, then a bypass triggers a new request carrying the exclusion', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  // Three stops, because bypass is only offered on the interior — the two
+  // artists you chose are endpoints and cannot be rerouted away.
   const buildPath = vi.spyOn(client, 'buildPath')
     .mockResolvedValueOnce([
       { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
       { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
+      { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
     ])
     .mockResolvedValueOnce([
       { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
       { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7 },
+      { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
     ]);
 
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
 
-  const dislikeButtons = screen.getAllByRole('button', { name: /not for me/i });
-  await user.click(dislikeButtons[1]); // bypass Herbie
+  // The only bypass on offer is Herbie's — the interior of a three-stop path.
+  await user.click(screen.getByRole('button', { name: /not for me/i }));
 
   await waitFor(() =>
     expect(buildPath).toHaveBeenLastCalledWith(
@@ -42,6 +58,56 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
     ),
   );
   await screen.findByText('Sun Ra');
+});
+
+const THREE_STOP = [
+  { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
+  { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
+  { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
+];
+
+test('"new path" goes back to choosing artists, carrying this pair with it', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue(THREE_STOP);
+
+  renderAt('/path/m/d?known=h');
+  await screen.findByText('Herbie Hancock');
+
+  await user.click(screen.getByRole('link', { name: /new path/i }));
+
+  const landing = await screen.findByTestId('landing');
+  // The pair travels with the link so the boxes arrive prefilled.
+  expect(landing).toHaveTextContent('from=m');
+  expect(landing).toHaveTextContent('fromName=Miles Davis');
+  expect(landing).toHaveTextContent('to=d');
+  expect(landing).toHaveTextContent('toName=Daft Punk');
+});
+
+test('"reset path" drops every bypass and keeps the same two artists', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  const buildPath = vi.spyOn(client, 'buildPath').mockResolvedValue(THREE_STOP);
+
+  renderAt('/path/m/d?known=h&dislike=z');
+  await screen.findByText('Herbie Hancock');
+
+  await user.click(screen.getByRole('button', { name: /reset path/i }));
+
+  await waitFor(() =>
+    expect(buildPath).toHaveBeenLastCalledWith(['m', 'd'], [], expect.any(AbortSignal)),
+  );
+});
+
+test('there is nothing to reset before any bypass is pressed', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue(THREE_STOP);
+
+  renderAt('/path/m/d');
+  await screen.findByText('Herbie Hancock');
+
+  expect(screen.queryByRole('button', { name: /reset path/i })).not.toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /new path/i })).toBeInTheDocument();
 });
 
 test('shows the no-path banner with a clear-exclusions action on 409', async () => {

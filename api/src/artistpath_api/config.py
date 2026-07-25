@@ -70,9 +70,24 @@ class ApiConfig:
     # --- clips ----------------------------------------------------------
     deezer_search_url: str = "https://api.deezer.com/search"
     itunes_search_url: str = "https://itunes.apple.com/search"
+    # Per-track lookups. A cached track's preview URL is re-resolved through
+    # these on every request, because the URL Deezer signs expires in under
+    # an hour while the track it points at does not (C2).
+    deezer_track_url: str = "https://api.deezer.com/track"
+    itunes_lookup_url: str = "https://itunes.apple.com/lookup"
     # "memory" (local dev, default) or "dynamo" (production). Memory means the
     # server boots and serves paths without any AWS configuration.
     clip_cache: str = os.environ.get("ARTISTPATH_CLIP_CACHE", "memory")
     clip_table_name: str = os.environ.get("ARTISTPATH_CLIP_TABLE", "artistpath-clips")
     clip_ttl_days: int = 30
     clip_http_timeout: float = 10.0
+    # Both catalogues match song *titles* as well as artist names, so the top
+    # hit is routinely someone else's track (C1: searching "The Format"
+    # returns a song called The Format by AZ above the band). We ask for a
+    # page of results and keep the first whose artist matches the one we
+    # asked for, so this has to be wide enough to reach past the title
+    # collisions. 25 is a judgement, not a measurement: the one documented
+    # case (roadmap C1) needed 2, and nobody has measured how deep the worst
+    # case goes. Raise it if cards come back silent for artists that
+    # obviously have tracks.
+    clip_search_limit: int = 25

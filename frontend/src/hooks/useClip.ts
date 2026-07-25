@@ -4,27 +4,47 @@ import type { Track } from '@/api/types';
 
 type ClipState = { status: 'loading' | 'ready' | 'none'; track: Track | null };
 
-const cache = new Map<string, Track | null>();
+/**
+ * How long a resolved track may be reused before we ask the API again (C2).
+ *
+ * A track's preview URL is signed and short-lived (measurement: the roadmap's
+ * confirmed-diagnoses C2), and this cache holds that URL, so on a tab left
+ * open it would serve expired audio however correct the server is. Ten
+ * minutes sits well inside the lifetime recorded there, and the re-fetch is
+ * cheap: the server keeps the track identity and only re-signs the URL.
+ */
+const CLIP_TTL_MS = 10 * 60 * 1000;
+
+const cache = new Map<string, { track: Track | null; at: number }>();
+
+function fresh(mbid: string) {
+  const entry = cache.get(mbid);
+  if (!entry || Date.now() - entry.at > CLIP_TTL_MS) return undefined;
+  return entry;
+}
+
+function stateFor(track: Track | null): ClipState {
+  return { status: track ? 'ready' : 'none', track };
+}
 
 export function useClip(mbid: string): ClipState {
-  const [state, setState] = useState<ClipState>(() =>
-    cache.has(mbid)
-      ? { status: cache.get(mbid) ? 'ready' : 'none', track: cache.get(mbid) ?? null }
-      : { status: 'loading', track: null },
-  );
+  const [state, setState] = useState<ClipState>(() => {
+    const entry = fresh(mbid);
+    return entry ? stateFor(entry.track) : { status: 'loading', track: null };
+  });
 
   useEffect(() => {
-    if (cache.has(mbid)) {
-      const cached = cache.get(mbid) ?? null;
-      setState({ status: cached ? 'ready' : 'none', track: cached });
+    const entry = fresh(mbid);
+    if (entry) {
+      setState(stateFor(entry.track));
       return;
     }
     let active = true;
     setState({ status: 'loading', track: null });
     getTrack(mbid)
       .then((track) => {
-        cache.set(mbid, track);
-        if (active) setState({ status: track ? 'ready' : 'none', track });
+        cache.set(mbid, { track, at: Date.now() });
+        if (active) setState(stateFor(track));
       })
       .catch(() => {
         if (active) setState({ status: 'none', track: null });

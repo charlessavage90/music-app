@@ -84,6 +84,12 @@ Then: clips (C1 artist matching, C2 cache identity vs signed URL), then frontend
 list in the roadmap's Phase 1 section, including the two carried-in items with success
 conditions.
 
+> **⚠ SUPERSEDED 2026-07-25 — this paragraph only.** Both clip defects and all four
+> frontend UX items were built on 2026-07-25; see
+> [`2026-07-25-gate1-clips-and-ux-execution-log.md`](2026-07-25-gate1-clips-and-ux-execution-log.md).
+> They are **fixed but not confirmed in use** — the queued check in `TEST-QUEUE.md` is what
+> closes them. Marked inline because a reader landing here never sees the banner at the top.
+
 ---
 
 ## 5. What I know that is not obvious from the record
