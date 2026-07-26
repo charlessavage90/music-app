@@ -280,6 +280,11 @@ artist also called FERG, with 23 monthly listeners.
 3. The owner typed FERG into **the app's search box**: one result, `FERG — fka A$AP Ferg`, no
    second entity. That settled it.
 
+**Nothing in the normal viewing flow would have caught this.** The disambiguation that names the
+artist appears in search and **not on the card** (`BYP-15`), so the correction required leaving
+the journey and going to a different screen — prompted by a session, not by anything the page
+showed.
+
 **Three things follow.**
 
 - **The graph is fine.** The app's search returns one FERG and its MusicBrainz disambiguation
@@ -294,8 +299,31 @@ artist also called FERG, with 23 monthly listeners.
   `../WHAT-GOOD-LOOKS-LIKE.md` licenses hand-reading Spotify monthly listeners to separate
   obscure from famous-but-not-to-him. That lookup is **by name**, so for a renamed or colliding
   artist it silently returns a different entity — and it fails *toward* reporting a spurious
-  discovery, which is the direction that flatters a result. **The disambiguation shown on the
-  card is the cheap guard**, and reading it first would have caught this in one second.
+  discovery, which is the direction that flatters a result. **Guard: read the MusicBrainz
+  disambiguation before trusting a name lookup.** Note `BYP-15` — in the shipped app that
+  disambiguation is **not on the card**, so nothing in the normal viewing flow offers it.
+
+**`BYP-15` — the card does not show the MusicBrainz disambiguation; search does.** *(Plain: the
+app knows this artist is "fka A$AP Ferg" and shows you that when you search, but the card in a
+journey just says FERG.)*
+
+Reported by the owner, 2026-07-25, correcting a draft of this section that assumed the card
+carried it.
+
+**This is a separate defect from `BYP-13` and survives a fix to it.** Had the disambiguation
+been on the card, the wrong clip would still have played — that is a resolver bug — **but the
+owner would not have been misled about who he was looking at**, which is what turned a clip
+defect into a false entry in this document.
+
+**Why it matters beyond this one card:** `2026-07-25-mutual-knn-stranding.md` `MKS-7` records
+**1,283 artist names shared by 2,838 artists — 3.83 % of the graph.** For any of them, a card
+gives the user no way to tell which entity they are being shown, while the data to disambiguate
+is already loaded and already rendered elsewhere in the same app.
+
+**What it would cost:** MusicBrainz disambiguations are optional, so most cards would be
+unchanged and the addition is conditional. **Whether the card should carry it is the owner's
+call** — it is a question about what the product shows, and the card has just been through a
+round of design. Recorded here, not proposed.
 
 ## 8. What this does and does not license
 
