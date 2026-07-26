@@ -11,7 +11,61 @@ the point.**
 
 ---
 
-## N/A — 2026-07-26 (latest) — a deploy was designed and reviewed; no code was written
+## QUEUED — 2026-07-26 (latest) — six fixes under the bonnet, and one you can see
+
+**Ten minutes, no waiting. Nothing is running** — start the two processes the usual way.
+The app was rebuilt today for the first time in a while, so this is a regression check
+first and a new-feature check second.
+
+**Nothing about *which artists* you get has changed.** No routing, no graph, no weighting,
+no cost function. Any journey you built yesterday is the same journey today — that is the
+main thing to confirm, because six separate pieces of the app were touched.
+
+**The one change you can actually see.** Putting the *same* artist in both boxes used to
+give you a single card and nothing to do. It now refuses, with a message asking you to
+pick two different artists. That was a real defect: a journey with one stop and no
+destination is not a journey.
+
+**Two failures you will no longer meet, and probably never noticed.** A card whose track
+information came back incomplete from the music service used to break that card outright;
+it now just plays, or stays quiet. Same for a hiccup in the clip store. Both used to be
+errors. You cannot easily provoke either on purpose — the point is that nothing new
+should break.
+
+**One limit that is new.** After about two hundred bypass presses on a single journey the
+app will now stop accepting more. Your longest recorded run was a hundred, so you should
+never reach it, but it is there deliberately — an unlimited list let a single request cost
+the server an unbounded amount of work.
+
+**What to exercise:**
+
+1. **Two or three journeys you already have a feel for.** These must be unchanged. This is
+   the most valuable thing in this entry — if a familiar pair produces a *different*
+   journey, something is wrong, because nothing about routing was supposed to move.
+2. **Put the same artist in both boxes.** You should get a clear refusal, not a single card.
+3. **Play clips on several cards, and press both bypass buttons a few times.** The clip
+   machinery was reorganised underneath — the behaviour should be identical to yesterday.
+4. **Press "New path" and "Reset path" once each**, as a quick regression on the controls
+   you confirmed last time.
+
+**What "wrong" would look like:** a familiar pair giving you a *different* journey; a card
+that no longer plays when it used to; the same-artist case still giving you one card; any
+error message you have not seen before; or a bypass press that does nothing.
+
+**One thing you will notice in the terminal, and it is deliberate.** The server now prints
+a line of dense JSON every time you build a journey or play a card. That is the new
+record-keeping, and it is the point of today's work — it is what will let us answer
+questions about how the app behaves once other people are using it. It is not an error,
+and it is not noise to be fixed.
+
+**Known and unchanged:** artists with only one connection still cannot appear in the middle
+of a journey. Clip playback defects are closed and unrelated.
+
+**Best bug report:** the URL from the address bar.
+
+*Detail: `docs/superpowers/2026-07-26-gate2-track-a-execution-log.md`.*
+
+## N/A — 2026-07-26 — a deploy was designed and reviewed; no code was written
 
 **Nothing to exercise, and nothing is running.** Today produced **documents only** — a design
 for putting the app on AWS, a four-person review of it, and an implementation plan. **Not one

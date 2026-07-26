@@ -33,6 +33,12 @@ run; none needed explanation.
 | 4 — cache/null-field 500s | 167 | **167** | `6f98b2a` |
 | 5 — path input guards | 171 | **171** | `3bf7da2` |
 | 6 — `/health` | 172 | **172** | `fe25964` |
+| 7 — telemetry emitter | 178 | **178** | `8bebea2` |
+| 8 — `path` event | 179 | **179** | `ed8c523` |
+| 9 — `clip` event + browser id | 180 | **180** | `b950d1c` |
+| 10 — round-trip verification | *(no code)* | — | — |
+
+Final: **api 180, builder 115, frontend 65, e2e 3** — all green.
 
 ---
 
@@ -110,14 +116,81 @@ rather than implicit.
 Definition of Done's "appended per task". The per-task commit messages carry the reasoning
 in the interim, so nothing was lost, but the requirement is now met going forward.
 
+## `TKA-6` — `DEP-16` is DISCHARGED: offline routing reproduces what the user was served
+
+Task 10, run against the **adopted** artifact, booted through the production entrypoint.
+
+**Identity gate first.** The service was booted with `ARTISTPATH_GRAPH_SHA256` **set** to
+the adopted artifact's digest rather than left empty. That is stronger than the plan asks
+for: it exercises the Task 2 checksum gate against the real file, and the service would
+have refused to boot on a mismatch. `/health` then returned all three values matching the
+manifest sidecar and the document that owns the figure
+(`findings/2026-07-23-tiebreak-fix-adoption.md`): **74,193 artists, 898,006 edges**, digest
+agreeing. **The digest is not restated here** — it is that document's figure.
+
+**The replay.** Two `path` events were emitted through the live API and replayed offline
+through `find_journey` against the same artifact, comparing the full mbid sequence and the
+stop rule. The replay script **read the events from the server's own log rather than
+taking them as arguments** — transcribing them by hand is exactly the step that would hide
+a mismatch.
+
+| event | bypass depth | result |
+|---|---|---|
+| `verify-round-trip-01` | 0 | **REPRODUCES** |
+| `verify-round-trip-02` | 2 (one `known`, one `dislike`) | **REPRODUCES** |
+
+Both matched exactly, sequence and stop rule. **The second one is the one that matters**:
+a zero-exclusion path would have verified only that the graph loaded, whereas the bypass
+case exercises the exclusion resolution, the reason coercion and the dedupe that Task 5
+changed. Journeys, for the record: `Radiohead → Coldplay → Adele → Amy Winehouse →
+Norah Jones → Miles Davis`, and with two bypasses `Radiohead → Björk → PJ Harvey →
+Tom Waits → Miles Davis`.
+
+**What this licenses and what it does not.** It licenses using telemetry as a faithful
+record of what the deployed router did — the design's §5 rests on production routing being
+identical to analysis routing, and this makes that *checked* rather than assumed. It says
+**nothing** about whether the paths are good; that is path-quality work and it is paused.
+
+## `TKA-7` — gates and scans
+
+- **e2e: 3 passed** against the live API (`DEP-30`). The Playwright `outputDir` move was
+  effective — no `EPERM` on the OneDrive tree, which was `TR-17`'s concern.
+- **`snyk_code_scan`: 0 issues** on `api/` **and** on `frontend/`. The frontend was scanned
+  because Task 9 modified `client.ts`; the plan only names `api/`. No rescan was needed
+  since nothing was found.
+
+## `TKA-8` — two small deviations from the plan text, both recorded
+
+Neither changes behaviour; both are noted so a reader diffing plan against code is not
+puzzled.
+
+1. **`import json` was added to `test_app.py`'s top import block**, not mid-file where the
+   plan's Task 8 snippet places it.
+2. **The frontend test uses `test(...)`, not the plan's `it(...)`.** The surrounding file
+   imports `test` from vitest and uses it throughout; `it` was not imported. Matching the
+   file's convention.
+
+Also worth recording as a **non-event**: `crypto.randomUUID()` was flagged before Task 9 as
+a possible failure under Vitest's jsdom environment. It worked. No shim needed.
+
 ---
 
 ## Owed at completion
 
-- `snyk_code_scan` on `api/`, per the global instruction, once first-party code is
-  modified — it is. Findings fixed and rescanned until clean.
-- Task 10's telemetry round-trip against the real graph, discharging `DEP-16`. **If it does
-  not reproduce, that is a finding and telemetry cannot be used for any conclusion** — not
-  a bug to work around.
-- The e2e suite as a mandatory gate (`DEP-30`).
-- A use-the-app queue entry, and PR #27 updated.
+- [x] `snyk_code_scan` clean on `api/` and `frontend/` — `TKA-7`.
+- [x] `DEP-16` discharged by Task 10 — `TKA-6`.
+- [x] Four suites green: api 180, builder 115, frontend 65, e2e 3.
+- [x] This log, appended per task from the Task 6 seam onward (`TKA-5` records the
+      late start).
+- [ ] PR #27 updated.
+- [ ] Use-the-app queue entry. **This is the first app-facing Track A change in a while**
+      and it deserves a real entry rather than an N/A: three of the six defect fixes are
+      reachable by an ordinary user (`from == target` now refused, cache blips no longer
+      500 a card, null catalogue fields no longer 500 a card).
+
+**Next: Track D** (frontend, six fenced items) — and the plan is explicit that **Track D is
+the condition that reverses the inline recommendation**: it is largely independent work
+across different files, so subagent fan-out is the better call there. Then Track B
+(infrastructure), then Track C (cutover). **`DEP-33` requires the team review to be re-run
+against the CDK stack before cutover** — seven of its findings concern a design rather than
+code.
