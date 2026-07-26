@@ -34,6 +34,11 @@ class GraphStore:
     id_by_mbid: dict[str, int] = field(default_factory=dict)
     # Derived from DEGREE, not from popularity and not from fame (log §2.6).
     degree_hub_penalty: np.ndarray | None = None  # float32 0-1, computed if not given
+    # sha256 of the bytes this store was parsed from, when known. Empty for a
+    # store built in a test. Reported by /health so "which graph is live" is
+    # answerable over HTTP — eighteen artifacts sit in builder/scratch/ and are
+    # not interchangeable.
+    source_sha256: str = ""
 
     def __post_init__(self) -> None:
         if not self.id_by_mbid:

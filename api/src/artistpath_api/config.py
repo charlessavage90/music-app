@@ -20,6 +20,11 @@ class ApiConfig:
     graph_path: str = os.environ.get(
         "ARTISTPATH_GRAPH", "../builder/scratch/graph-t15-tiebreakfix.bin"
     )
+    # Expected sha256 of the artifact. Empty skips verification (local dev);
+    # production sets it and the service refuses to boot on a mismatch. The
+    # value is in the artifact's manifest sidecar — do not transcribe it by
+    # hand (DEP-24).
+    graph_sha256: str = os.environ.get("ARTISTPATH_GRAPH_SHA256", "")
 
     # --- cost function weights (findings 6g) ----------------------------
     # THIS BLOCK IS THE ONLY DEFINITION OF THESE DEFAULTS. Prose that needs

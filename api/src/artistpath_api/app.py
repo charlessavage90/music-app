@@ -8,6 +8,7 @@ import httpx
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 
+from artistpath_api.artifact_source import load_graph
 from artistpath_api.clips import (
     ClipResolver, DynamoClipCache, InMemoryClipCache,
 )
@@ -95,7 +96,7 @@ def create_app(
 def build_default_app() -> FastAPI:
     """Production entrypoint: load the real graph and wire live dependencies."""
     cfg = ApiConfig()
-    store = GraphStore.load(cfg.graph_path)
+    store = load_graph(cfg.graph_path, cfg.graph_sha256)
     search = ArtistSearch(store, cfg)
     client = httpx.AsyncClient(timeout=cfg.clip_http_timeout)
 
