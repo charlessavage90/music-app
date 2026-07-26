@@ -134,14 +134,12 @@ closed. Say so plainly rather than marking it complete.
 **Sweep the ports, stop what this session owns, and leave a fresh detached server behind
 if C1 queued anything.**
 
-A session that starts a dev server in a background shell stays *subscribed* to it, and
-retiring the session does not end the subscription — only closing its terminal does. The
-terminal is deliberately kept open across a handover, so the outgoing session can still be
-asked what it knew. On 2026-07-25 a retired session woke and posted into the chat when a
-later session restarted the dev server. Nothing was damaged; the wake path is real and it
-is the retiring session's to close. This sits in Part A for the same reason everything else
-here does — **only the owning session can stop its own tasks**, and by Part B the closeout
-may be in a fresh one.
+A session that starts a dev server in a background shell stays *subscribed* to it: retiring
+the session does not end the subscription, and only closing its terminal does. The terminal
+is deliberately kept open across a handover so the outgoing session can still be asked what
+it knew — so the wake path has to be closed here rather than by closing the window. This
+sits in Part A because **only the owning session can stop its own tasks**, and by Part B the
+closeout may be in a fresh one.
 
 1. **Sweep by listener, not by task list.** A session sees only the tasks it owns, so
    `TaskList` reports an empty machine while yesterday's servers are still serving.
@@ -151,8 +149,8 @@ may be in a fresh one.
    ```
 
    Report each with its **start time against the HEAD commit date**. A listener older than
-   the work being closed out is serving code that predates it, and any manual test against
-   it is invalid while looking entirely normal.
+   the work being closed out serves code that predates it, so a manual test against it is
+   invalid and looks entirely normal.
 
 2. **Stop what this session owns** (`TaskStop`), and **name the listeners it does not** —
    those outlived a session that is gone, `TaskStop` cannot reach them, and freeing the port
@@ -166,7 +164,7 @@ may be in a fresh one.
 
 **Then say so in the closing message** — ports, PIDs, and that nothing owns them. A detached
 server outlives every session and every terminal, so the failure mode is the owner not
-knowing it is there. That is how :8000 came to be held by a process from the previous day.
+knowing it is there.
 
 ---
 
