@@ -117,11 +117,29 @@ def create_app(
         )
 
     @app.get("/api/artists/{mbid}/track")
-    async def get_track(mbid: str, response: Response):
+    async def get_track(mbid: str, request: Request, response: Response):
         node = store.id_by_mbid.get(mbid)
         if node is None:
             raise HTTPException(404, "unknown artist")
+        started = time.perf_counter()
         clip = await resolver.resolve(mbid, store.names[node])
+        duration_ms = (time.perf_counter() - started) * 1000.0
+
+        emit(
+            {
+                "event": "clip",
+                "journey_id": safe_journey_id(request.headers.get("x-journey-id")),
+                "mbid": mbid,
+                "name": store.names[node],
+                "resolved": clip is not None,
+                # Which catalogue answered. Three separate mechanisms produce a
+                # silent card and they are visually identical; this is what
+                # separates them (TR-15).
+                "source": clip.source if clip else None,
+                "duration_ms": round(duration_ms, 2),
+            }
+        )
+
         if clip is None:
             response.status_code = 204
             return None

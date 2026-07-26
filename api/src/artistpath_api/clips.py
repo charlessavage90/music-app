@@ -50,6 +50,7 @@ class Clip:
     preview_url: str
     title: str
     cover_url: str
+    source: str = ""  # "deezer" | "itunes" — for telemetry, not for the wire
 
 
 @dataclass(frozen=True, slots=True)
@@ -200,7 +201,7 @@ class ClipResolver:
         if identity is not None:
             url = await self._preview_url(identity)
             if url:
-                return Clip(url, identity.title, identity.cover_url)
+                return Clip(url, identity.title, identity.cover_url, identity.source)
             # The track has left the catalogue. Identity is stable, not
             # permanent, so fall through and find the artist another one.
 
@@ -215,7 +216,7 @@ class ClipResolver:
             await self._cache.put(mbid, identity)
         except Exception:
             pass
-        return Clip(url, identity.title, identity.cover_url)
+        return Clip(url, identity.title, identity.cover_url, identity.source)
 
     async def _preview_url(self, identity: TrackIdentity) -> str | None:
         """Re-sign a known track. Returns None if it is no longer available."""

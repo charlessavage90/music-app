@@ -2,6 +2,20 @@ import type { Artist, Exclusion, PathResult, StopRule, Track } from './types';
 
 const BASE = import.meta.env.VITE_API_BASE ?? '/api';
 
+/**
+ * One id per page session, so a sequence of bypass presses reads as one walk.
+ *
+ * Deliberately NOT in the URL: path state is the shareable artifact and the
+ * bug-report artifact, and an analytics id has no business in it. Resets on
+ * reload, so one human walk can log as two — the full exclusion list is in
+ * every event, so walks stay reconstructible regardless.
+ */
+const JOURNEY_ID = crypto.randomUUID().slice(0, 32);
+
+function withJourney(headers: Record<string, string> = {}): Record<string, string> {
+  return { ...headers, 'x-journey-id': JOURNEY_ID };
+}
+
 export class ApiError extends Error {
   status: number;
   constructor(status: number) {
@@ -24,7 +38,7 @@ export async function buildPath(
 ): Promise<PathResult> {
   const r = await fetch(`${BASE}/path`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: withJourney({ 'content-type': 'application/json' }),
     body: JSON.stringify({ sources, exclude }),
     signal,
   });
@@ -34,7 +48,10 @@ export async function buildPath(
 }
 
 export async function getTrack(mbid: string, signal?: AbortSignal): Promise<Track | null> {
-  const r = await fetch(`${BASE}/artists/${encodeURIComponent(mbid)}/track`, { signal });
+  const r = await fetch(`${BASE}/artists/${encodeURIComponent(mbid)}/track`, {
+    signal,
+    headers: withJourney(),
+  });
   if (r.status === 204) return null;
   if (!r.ok) throw new ApiError(r.status);
   const d = (await r.json()) as { preview_url: string; title: string; cover_url: string };

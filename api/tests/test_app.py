@@ -246,3 +246,24 @@ def test_path_request_emits_a_telemetry_event(capsys):
     assert ev["stop_rule"] in ("natural", "forced", "adjacent_only")
     assert [p["mbid"] for p in ev["path"]][0] == a
     assert isinstance(ev["duration_ms"], (int, float))
+
+
+def test_track_request_emits_a_clip_event(capsys):
+    client, store = _client()
+    client.get(
+        f"/api/artists/{store.mbids[0]}/track",
+        headers={"x-journey-id": "journey-0002"},
+    )
+    events = [
+        json.loads(ln)
+        for ln in capsys.readouterr().out.splitlines()
+        if ln.startswith("{")
+    ]
+    clip_events = [e for e in events if e["event"] == "clip"]
+    assert len(clip_events) == 1
+    ev = clip_events[0]
+    assert ev["journey_id"] == "journey-0002"
+    assert ev["mbid"] == store.mbids[0]
+    assert ev["resolved"] is False   # the test fetcher returns no clip
+    assert ev["source"] is None
+    assert isinstance(ev["duration_ms"], (int, float))
