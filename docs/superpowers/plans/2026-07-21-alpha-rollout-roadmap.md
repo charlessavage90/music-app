@@ -96,8 +96,10 @@ artists at the same popularity band.
 - **Frontend UX** (all from dogfooding): "start over" / new-path control on the path page; card pause button (only the bottom bar works); stop audio on recompute; hide both bypass buttons on the **start and end** artists — **DONE 2026-07-25.**
 - **F1 — a journey with no artists between the two you chose.** Added 2026-07-25; discovered
   2026-07-23 as a surface the tie-break fix exposed. **The owner has decided every journey
-  needs at least one stop** — requirement settled, implementation deferred, and **not** inside
-  the path-quality pause. Success condition and reasoning:
+  needs at least one stop**, and **it is now BUILT** (PR #23; record
+  `../2026-07-25-f1-minimum-stop-execution-log.md`). Never inside the path-quality pause.
+  **NOT discharged** — its condition is an observation, and that is the queued use-the-app
+  entry. Success condition and reasoning:
   `../2026-07-25-gate1-clips-and-ux-execution-log.md` §16 — cite it, do not restate it.
 
 **Carried in from Phase 2, with success conditions:**

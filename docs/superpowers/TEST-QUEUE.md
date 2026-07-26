@@ -35,8 +35,8 @@ the middle is exactly the journey you got yesterday.
 **Two things worth your opinion, because no measurement can settle them:**
 
 - **How long is too long?** Forcing a way round can produce a longer journey than you
-  asked for — usually one extra artist, but one test pair produced seven. If that
-  feels wrong, say so; it is capped at nothing right now, deliberately.
+  asked for. Usually it is one extra artist, but it can be a lot more. If that feels
+  wrong, say so; it is capped at nothing right now, deliberately.
 - **Famous pairs get a famous stop.** `Radiohead → Weezer` routes through The
   Beatles. That is the cheapest way round, not a preference. Worth knowing whether it
   reads as reasonable or as lazy.
@@ -76,7 +76,8 @@ longer play at all.
 **Known and unchanged:** a card with no clip is silent by design and is stepped over when a
 clip ends — that is correct, not a skip. A path with only your two artists still offers no
 bypass buttons; that is the zero-intermediary case, and you have decided every journey needs
-at least one stop, but it is not built yet.
+at least one stop. **⚠ 2026-07-25: that is now BUILT — see the newest entry at the top of
+this file. If you are running this older entry after the fact, expect an artist in between.**
 
 *Detail: the execution log's §18.*
 

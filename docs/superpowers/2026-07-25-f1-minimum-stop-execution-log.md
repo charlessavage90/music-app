@@ -11,6 +11,13 @@ Branch `f1-min-stop`, **PR #23, open and not merged.**
 **Figures are cited, not restated.** The graph figures this work rests on are owned by
 [`findings/2026-07-25-mutual-knn-stranding.md`](findings/2026-07-25-mutual-knn-stranding.md).
 
+Identifiers are namespaced **`FMS-`** — disjoint from `C`, `F`, `A`, `R`, `T3-`, `TF-`,
+`MKS-`, `ASC-` and `BYP-`, and from the bare `D`/`P` series already load-bearing in
+`findings/2026-07-23-track2-protocol-analyst-review.md` and
+`specs/2026-07-23-track2-preregistration.md`. **An earlier draft of this document used bare
+`D1`–`D4` and `P1`–`P3` and collided with both**; the documentation audit caught it within
+the hour and it was renamed before this document was cited anywhere.
+
 ---
 
 ## 1. What shipped
@@ -23,10 +30,10 @@ renders a line between the cards saying they are next to each other.
 **The detour is chosen by the existing cost function, unrestricted.** This is the load-
 bearing decision and the reason the work was allowed to proceed during the path-quality
 pause: any *new* rule for picking the inserted artist would be scoring, and scoring is
-paused. Two consequences were accepted rather than tuned away — detour length varies
-(median 1 artist, one sampled case 13) and a famous pair gets a famous stop
-(`Radiohead → Weezer` inserts The Beatles). Both are queued as use-the-app questions
-because no offline metric can settle them.
+paused. Two consequences were accepted rather than tuned away — detour length varies (§6
+owns the spread) and a famous pair gets a famous stop (`Radiohead → Weezer` inserts The
+Beatles). Both are queued as use-the-app questions because no offline metric can settle
+them.
 
 `stop_rule` is a wire contract: snake_case on the wire, `stopRule` in the frontend,
 typed as a closed three-literal union on both sides. It is a status, not a
@@ -35,7 +42,7 @@ not apply — noted because that exemption will be questioned.
 
 ## 2. Decisions taken, with reasoning
 
-**D1 — the message was built now rather than deferred.** The owner's original question was
+**FMS-D1 — the message was built now rather than deferred.** The owner's original question was
 whether the forcing could ship with the explanatory line deferred. It could: a status field
 on the response is the seam, because only the router can know a stop was forced (once
 inserted, the result is indistinguishable from any other path). The recommendation changed
@@ -44,19 +51,19 @@ artists a person might plausibly search (`Doves → Elbow`, `Dizzee Rascal → T
 `Serge Gainsbourg → Charlotte Gainsbourg`), not the exotic corner first assumed. **Owner
 chose to build it.**
 
-**D2 — the session's own exposure estimate was wrong and was corrected.** The first read
+**FMS-D2 — the session's own exposure estimate was wrong and was corrected.** The first read
 weighted by how many such pairs exist in the graph and concluded a user would have to go out
 of their way to meet one. That conflated *rare in the graph* with *rare in use*. The owner's
 push for the artist names is what exposed it. Recorded because the error is reusable: **a
 per-pair rate is not an exposure rate when users do not select uniformly.**
 
-**D3 — Tasks 4 and 5 of the plan were merged into one dispatch.** The plan had Task 4 ending
+**FMS-D3 — Tasks 4 and 5 of the plan were merged into one dispatch.** The plan had Task 4 ending
 with a deliberate typecheck failure that Task 5 resolved. A reviewer would rightly call an
 intermediate non-building commit a defect, and the split carried little review value since
 both halves are one prop added and consumed. Controller decision, not escalated: internal
 process with no bearing on shipped behaviour.
 
-**D4 — F1 is deliberately NOT marked discharged.** Its condition is anchored to an
+**FMS-D4 — F1 is deliberately NOT marked discharged.** Its condition is anchored to an
 observable (execution log of 2026-07-25, §16 — cite it, do not restate it), and that
 observation is the owner running the queued entry. Marking it closed on the strength of a
 passing test suite would repeat the exact failure that §16 documents.
@@ -65,14 +72,14 @@ passing test suite would repeat the exact failure that §16 documents.
 
 All three were in the plan, which this session wrote; none were implementation errors.
 
-**P1 — the verification's central check was tautological.** It compared `find_journey`
+**FMS-P1 — the verification's central check was tautological.** It compared `find_journey`
 against `find_path` for non-adjacent pairs, but `find_journey` re-runs `find_path` with
 identical arguments and returns it unchanged in exactly that case. It could not fail, and it
 never exercised the detour branch — the only branch the work added. Found by the task
 review. The loop is kept, **relabelled honestly as a guard on the early return**, and a new
 check samples adjacent pairs from the CSR arrays where the new code actually runs.
 
-**P2 — "adjacent implies the direct edge is cheapest" is false.** The replacement check
+**FMS-P2 — "adjacent implies the direct edge is cheapest" is false.** The replacement check
 asserted that any adjacent pair must hit the new branch. A weak direct connection can cost
 more than two strong hops, so the cheapest route between neighbours can already run through
 a third artist; `Tina Malia → Lafa Taylor` routes via Bassnectar and `natural` is correct
@@ -80,7 +87,7 @@ there. The implementer hit the assertion and **stopped rather than softening it*
 the only reason this was caught. The check now partitions by what the search actually
 returns, and the premise error is recorded in the script so it cannot cost a third round.
 
-**P3 — a figure was restated under a citation pointing at the wrong identifier.** The
+**FMS-P3 — a figure was restated under a citation pointing at the wrong identifier.** The
 `find_journey` docstring made an artist-level claim while citing `MKS-6`, which owns
 pair-level figures; the artist-level owner is `MKS-3`. Found by the final whole-branch
 review. Both restatements removed; nothing in this branch restates a figure.
@@ -93,7 +100,7 @@ contradicts.** Every one was caught by running against the real artifact, none b
 | Gate | Outcome |
 |---|---|
 | Per-task reviews (Tasks 1, 2, 3, 4+5) | **Passed clean, no fix rounds** |
-| Task 6 review | **Failed** — 1 Critical (P1), 1 Minor. Two fix rounds; round 1 blocked on P2 |
+| Task 6 review | **Failed** — 1 Critical (`FMS-P1`), 1 Minor. Two fix rounds; round 1 blocked on `FMS-P2` |
 | Final whole-branch review | **Failed** — 2 Important, 6 Minor. One fix wave, all eight addressed |
 | Fix-wave re-review | Passed, no new breakage, verdict ready to merge |
 | Real-graph verification | **Passed** — all four checks, 40 s |
