@@ -11,6 +11,68 @@ the point.**
 
 ---
 
+## QUEUED — 2026-07-26 (latest) — the phone, and the search box you caught
+
+**This one needs your phone, and that is the whole point of it.** Everything else here has
+been checked on a desktop browser; the main change cannot be.
+
+**Nothing about *which artists* you get has changed.** No routing, no graph, no weighting, no
+cost function. Any journey you built this morning is the same journey now. Seven separate
+things changed and none of them is the router.
+
+**The one you already know about.** You found this today: put two artists in, press "New
+path", type a different artist over one of the pre-filled names, press "Find path" — and it
+took you to the *old* artist. It now refuses. The moment you type over a chosen artist, the
+"Find path" button goes grey until you pick someone from the dropdown again. **The button
+going dead is the whole message** — there is no new wording to look for.
+
+Worth knowing, because it changes what to expect: this was never about the dropdown being
+slow. Waiting for it never helped. Only *clicking a name in it* ever chose an artist, and it
+still is.
+
+**The main event: open it on your phone.** Until today there was no phone layout at all — on
+an iPhone the artist's name was squeezed to nothing by the two bypass buttons sitting beside
+it. Now those two buttons take a row of their own underneath the artist, and the name gets
+the full width. On a desktop nothing should look any different from yesterday.
+
+**Four smaller things you may never see, which is the intention.**
+
+- A search that *failed* now says so, instead of looking identical to a search that found
+  nobody.
+- A request that never comes back now gives up after a while and offers you a "Try again"
+  button, instead of sitting on "Building your path…" forever.
+- A card that cannot actually start playing now stops claiming to play.
+- A mistyped or truncated link now lands on a page with a way back, instead of a blank screen.
+- Your phone's keyboard should stop "correcting" artist names as you type them.
+
+**What to exercise:**
+
+1. **Open the app on your phone and build two or three journeys.** Can you read every artist's
+   name? Can you hit both bypass buttons with a thumb without hitting the wrong one? Does the
+   bar at the bottom sit clear of the home indicator, or is it tucked underneath?
+2. **The search box, on your phone.** Type a few artist names the way you'd say them —
+   especially anything with an accent or unusual capitalisation. The keyboard should leave
+   them alone.
+3. **Your own defect, on either device.** Build a journey, press "New path", type over one of
+   the filled-in names, and try to press "Find path" straight away. It should be greyed out
+   until you choose from the dropdown.
+4. **Two or three familiar journeys on the desktop**, as a regression check. These must be
+   unchanged — that is the most valuable thing in this entry, because seven pieces of the app
+   were touched and none of them was supposed to move the routing.
+5. **Play a few clips and press both bypass buttons**, on both devices.
+
+**What "wrong" would look like:** a familiar pair giving you a *different* journey; an artist
+name still squashed on your phone; a bypass button you cannot reliably tap; the bottom bar
+hidden behind the home indicator; the keyboard still rewriting artist names; "Find path"
+staying live after you type over an artist; or a card that no longer plays when it used to.
+
+**Known and unchanged:** artists with only one connection still cannot appear in the middle of
+a journey. Clip playback defects are closed and unrelated.
+
+**Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
+
+*Detail: `docs/superpowers/2026-07-26-gate2-track-d-execution-log.md`.*
+
 ## DONE — 2026-07-26 — six fixes under the bonnet, and one you can see
 
 **DONE 2026-07-26 — PASSED on every step, and it found a defect that is not Track A's.**
