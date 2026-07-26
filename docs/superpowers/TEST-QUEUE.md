@@ -519,3 +519,51 @@ back.
 **Note on scope.** The owner has already used both arms extensively in the blind test. This
 entry is deliberately light: it is a post-adoption sanity check, not a repeat of that
 session.
+
+---
+
+## Queued 2026-07-26 — can you find the artists you'd actually type?
+
+**Status: QUEUED.** Nothing was changed in the app, so this is not a regression check. The
+census that prompted it was read-only. This asks one thing the census structurally cannot:
+whether the app can be *reached* for artists you know.
+
+**Why it is worth twenty minutes.** Roughly one in six artists in the graph holds one or two
+connections, and one connection means the app can never put that artist in the middle of a
+journey — it can only ever appear if you type it yourself. Well-known names are in that
+group. Separately, a band can be stored under a different spelling of its name than the one
+you would type, and then it looks absent.
+
+**What to exercise:**
+
+1. **Search for ten or fifteen artists you'd genuinely want to hear.** Type the name the way
+   you'd say it out loud, not a corrected version. If nothing comes up, try it without a
+   leading "The", and try the other spelling you'd expect. **Note both the ones that need a
+   second attempt and the ones you cannot find at all** — the second attempt is the finding.
+2. **Pick two artists you know are related, and see whether the journey between them offers
+   anyone in the middle.** Then try the same pair the other way round.
+3. **Try a few of the artists listed in the census report** — open
+   `builder/analysis/2026-07-26-low-degree-census/REPORT.md` and take a handful of names from
+   the top of either list. These are artists the app is unlikely ever to introduce you to.
+   **Search each one and then try to build a journey that passes through it.** Use the second
+   list rather than the first if you only have time for one: those artists have two
+   connections, so they *can* appear in the middle, which makes a failure more interesting
+   than a guaranteed one.
+
+**What "wrong" would look like:**
+
+- **An artist you'd definitely search for that returns nothing at all.** Worth reporting
+  regardless of cause.
+- **An artist you can only find on the second or third spelling.** This is the specific thing
+  being looked for, and it is easy to dismiss as your own typo. It is not.
+- **A journey that keeps returning just the two artists you typed**, with nobody in between.
+- **The same well-known artist appearing over and over** across different journeys.
+
+**What is already known and not worth reporting again:** that some artists have only one
+connection is measured and expected — the question is only whether it bites on artists you
+care about. Clip playback is closed and unrelated.
+
+**Best bug report:** for search, just the text you typed and what you expected. For a journey,
+the URL from the address bar — all path state lives in it, so it reproduces exactly.
+
+**Detail, for anyone who wants it:** `docs/superpowers/2026-07-26-low-degree-census-execution-log.md`.

@@ -141,6 +141,26 @@ def main() -> None:
     print(f"  -> a cut at {CUT} {'HOLDS' if worst <= CUT else 'FAILS'} on the six cases "
           "the stranding finding produced independently.")
 
+    # S1 must be able to FAIL the run, not merely report a failure. Caught by closeout
+    # B3: as first written this script printed 'FAILS' and exited 0, so a broken screen
+    # would have been a line of output in a passing run -- which is the vacuous-test
+    # shape B3 exists to find. Its siblings already gate (reciprocity.py exits non-zero
+    # on a graph mismatch); this one did not.
+    if worst == 0:
+        raise SystemExit(
+            "\nFAIL - no MKS-2 artist was found in the degree<=2 sets at all. Either the "
+            "census is not the one this check was written for, or the names have drifted; "
+            "either way S1 has not been evaluated and must not read as a pass."
+        )
+    if worst > CUT:
+        raise SystemExit(
+            f"\nFAIL - a known stranded artist sits at rank {worst}, outside a cut at "
+            f"{CUT}. The popularity screen does not reach the cases the stranding finding "
+            "found independently, so it must not be used to choose who to poll."
+        )
+    print(f"\nPASS - all {len(ranks)} MKS-2 artist(s) present in these sets fall inside "
+          f"the top {CUT}.")
+
 
 if __name__ == "__main__":
     main()
