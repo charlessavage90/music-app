@@ -22,13 +22,18 @@ from artistpath_api.search import ArtistSearch
 
 
 def _to_exclusions(store: GraphStore, raw: list[ExclusionIn]) -> list[Exclusion]:
-    out: list[Exclusion] = []
+    """Resolve wire exclusions to node ids, keeping the last reason per artist.
+
+    Deduplicated because avoidance_map takes a max() per node, so a repeated
+    dislike already changes nothing — it only costs another graph traversal.
+    """
+    by_node: dict[int, str] = {}
     for e in raw:
         node = store.id_by_mbid.get(e.id)
-        reason = e.reason if e.reason in (DISLIKE, KNOWN) else DISLIKE
-        if node is not None:
-            out.append(Exclusion(node, reason))
-    return out
+        if node is None:
+            continue
+        by_node[node] = e.reason if e.reason in (DISLIKE, KNOWN) else DISLIKE
+    return [Exclusion(node, reason) for node, reason in by_node.items()]
 
 
 def create_app(
@@ -68,6 +73,10 @@ def create_app(
         if any(i is None for i in ids):
             raise HTTPException(404, "unknown artist")
         source, target = ids
+        if source == target:
+            raise HTTPException(
+                422, "pick two different artists — a journey needs somewhere to go"
+            )
         excludes = _to_exclusions(store, req.exclude)
         journey = find_journey(store, source, target, excludes, cfg)
         if journey is None:

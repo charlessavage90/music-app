@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ExclusionIn(BaseModel):
@@ -14,7 +14,11 @@ class ExclusionIn(BaseModel):
 
 class PathRequest(BaseModel):
     sources: list[str]           # artist MBIDs; alpha passes exactly two
-    exclude: list[ExclusionIn] = []
+    # Bounded because avoidance_map runs a fresh graph traversal per entry
+    # (pathfinding.py), so an unbounded list is arbitrary attacker-controlled
+    # CPU on a GIL-bound handler. 200 is above the deepest real use recorded
+    # (a 100-press dogfooding run) with headroom. TR-12 / DEP-25.
+    exclude: list[ExclusionIn] = Field(default_factory=list, max_length=200)
 
 
 class ArtistOut(BaseModel):

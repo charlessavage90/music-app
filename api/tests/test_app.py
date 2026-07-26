@@ -171,3 +171,41 @@ def test_path_response_reports_two_artists_with_nothing_between():
     body = client.post("/api/path", json={"sources": [a, b], "exclude": []}).json()
     assert [x["name"] for x in body["artists"]] == ["A", "B"]
     assert body["stop_rule"] == "adjacent_only"
+
+
+def test_same_artist_for_both_endpoints_is_rejected():
+    client, store = _client()
+    mbid = store.mbids[0]
+    r = client.post("/api/path", json={"sources": [mbid, mbid], "exclude": []})
+    assert r.status_code == 422
+
+
+def test_an_over_long_exclude_list_is_rejected():
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    excludes = [{"id": store.mbids[1], "reason": "dislike"} for _ in range(201)]
+    r = client.post("/api/path", json={"sources": [a, b], "exclude": excludes})
+    assert r.status_code == 422
+
+
+def test_duplicate_exclusions_are_collapsed():
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    dupes = [{"id": store.mbids[1], "reason": "dislike"} for _ in range(50)]
+    r = client.post("/api/path", json={"sources": [a, b], "exclude": dupes})
+    assert r.status_code == 200
+
+
+def test_an_unrecognised_reason_is_still_coerced_to_dislike():
+    """Pins behaviour the deploy design relies on and nothing tested (TR-7).
+
+    Tightening ExclusionIn.reason to a Literal is the natural tidy-up and would
+    silently turn this 200 into a 422 for any client sending a stale reason.
+    """
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    r = client.post(
+        "/api/path",
+        json={"sources": [a, b], "exclude": [{"id": store.mbids[1], "reason": "BANANA"}]},
+    )
+    assert r.status_code == 200
