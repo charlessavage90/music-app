@@ -1,0 +1,238 @@
+{
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "arm": "P",
+  "seed": 20260726,
+  "strata": {
+    "OBSCURE": [
+      1,
+      5
+    ],
+    "ORDINARY": [
+      6,
+      15
+    ]
+  },
+  "pairs": [
+    {
+      "stratum": "OBSCURE",
+      "pair": "The John Barry Seven and Orchestra -> Charlotte Cardin",
+      "src_degree": 2,
+      "dst_degree": 5
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Anders Manga -> Isabelle Adjani",
+      "src_degree": 2,
+      "dst_degree": 2
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Sophia May -> KING",
+      "src_degree": 1,
+      "dst_degree": 5
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Roadkill Ghost Choir -> Space",
+      "src_degree": 1,
+      "dst_degree": 5
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Poli Correia -> Jerzy Knetig",
+      "src_degree": 1,
+      "dst_degree": 3
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Emer Kenny -> HOTT MT",
+      "src_degree": 4,
+      "dst_degree": 4
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "rkss -> EQ",
+      "src_degree": 5,
+      "dst_degree": 2
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "No Man’s Valley -> Kitten on the Keys",
+      "src_degree": 3,
+      "dst_degree": 4
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Frosen Pine -> Da'Ville",
+      "src_degree": 1,
+      "dst_degree": 4
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Ias -> Superorganism",
+      "src_degree": 2,
+      "dst_degree": 1
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Wondha Mountain -> Lillian Axe",
+      "src_degree": 2,
+      "dst_degree": 5
+    },
+    {
+      "stratum": "OBSCURE",
+      "pair": "Timeflies -> Mel Hinds",
+      "src_degree": 1,
+      "dst_degree": 3
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Perpetual Loop -> ELECTROCUTICA",
+      "src_degree": 12,
+      "dst_degree": 6
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "真宮寺さくら -> Angelo De Augustine",
+      "src_degree": 11,
+      "dst_degree": 10
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Monophace -> Tyrfing",
+      "src_degree": 9,
+      "dst_degree": 10
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Rimead -> The Asteroid No.4",
+      "src_degree": 12,
+      "dst_degree": 14
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Vinny Ferraro -> Emma Brammer",
+      "src_degree": 7,
+      "dst_degree": 8
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Aylin Aslım -> Malcolm McLaren",
+      "src_degree": 10,
+      "dst_degree": 12
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Blue Hawaii -> Ralph Larenzo",
+      "src_degree": 8,
+      "dst_degree": 7
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Wanda Group -> Tanya Lacey",
+      "src_degree": 9,
+      "dst_degree": 9
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Martin Stig Andersen -> Kandis",
+      "src_degree": 8,
+      "dst_degree": 7
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Crackhaus -> Greg Paulus",
+      "src_degree": 9,
+      "dst_degree": 15
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Stee Downes -> Mary Chapin Carpenter",
+      "src_degree": 11,
+      "dst_degree": 9
+    },
+    {
+      "stratum": "ORDINARY",
+      "pair": "Sievert -> Chip E.",
+      "src_degree": 7,
+      "dst_degree": 14
+    }
+  ],
+  "scored_walks": 216,
+  "interior_instances": 2982,
+  "distinct_interior": 543,
+  "min_degree": 4,
+  "max_degree": 50,
+  "median_degree_distinct": 29,
+  "distinct_below_10": 18,
+  "distinct_le_2": 0,
+  "cards_below_10": 100,
+  "share_below_10": 0.03314917127071823,
+  "share_le_2": 0.0,
+  "pairs_with_interior": 24,
+  "empty_pairs": [],
+  "by_stratum": {
+    "OBSCURE": {
+      "distinct": 358,
+      "below_10": 17,
+      "cards": 1596,
+      "min_degree": 4
+    },
+    "ORDINARY": {
+      "distinct": 336,
+      "below_10": 2,
+      "cards": 1386,
+      "min_degree": 5
+    }
+  },
+  "degree_histogram_distinct": {
+    "4": 2,
+    "5": 1,
+    "6": 2,
+    "7": 2,
+    "8": 3,
+    "9": 8,
+    "10": 4,
+    "11": 5,
+    "12": 7,
+    "13": 10,
+    "14": 9,
+    "15": 5,
+    "16": 18,
+    "17": 11,
+    "18": 13,
+    "19": 12,
+    "20": 15,
+    "21": 10,
+    "22": 16,
+    "23": 23,
+    "24": 22,
+    "25": 19,
+    "26": 13,
+    "27": 21,
+    "28": 12,
+    "29": 21,
+    "30": 14,
+    "31": 16,
+    "32": 18,
+    "33": 20,
+    "34": 16,
+    "35": 24,
+    "36": 13,
+    "37": 8,
+    "38": 11,
+    "39": 14,
+    "40": 14,
+    "41": 8,
+    "42": 17,
+    "43": 11,
+    "44": 10,
+    "45": 10,
+    "46": 12,
+    "47": 10,
+    "48": 4,
+    "49": 5,
+    "50": 4
+  },
+  "verdict": "DO NOT APPEAR"
+}
