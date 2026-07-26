@@ -15,7 +15,7 @@ from artistpath_api.clips import (
 from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.models import (
-    ArtistOut, ExclusionIn, PathRequest, PathResponse, TrackOut,
+    ArtistOut, ExclusionIn, HealthOut, PathRequest, PathResponse, TrackOut,
 )
 from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion, find_journey
 from artistpath_api.search import ArtistSearch
@@ -97,6 +97,17 @@ def create_app(
             return None
         return TrackOut(
             preview_url=clip.preview_url, title=clip.title, cover_url=clip.cover_url
+        )
+
+    @app.get("/health")
+    def health() -> HealthOut:
+        # Deliberately NOT under /api — App Runner's health checker reaches the
+        # origin directly, not through the CloudFront /api/* behaviour.
+        return HealthOut(
+            status="ok",
+            graph_sha256=store.source_sha256,
+            artists=store.artist_count,
+            edges=len(store.neighbours),
         )
 
     return app

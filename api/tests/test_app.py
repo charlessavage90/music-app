@@ -209,3 +209,14 @@ def test_an_unrecognised_reason_is_still_coerced_to_dislike():
         json={"sources": [a, b], "exclude": [{"id": store.mbids[1], "reason": "BANANA"}]},
     )
     assert r.status_code == 200
+
+
+def test_health_reports_artifact_identity():
+    client, store = _client()
+    r = client.get("/health")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["status"] == "ok"
+    assert body["artists"] == store.artist_count
+    assert body["edges"] == len(store.neighbours)
+    assert body["graph_sha256"] == store.source_sha256

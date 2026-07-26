@@ -40,3 +40,13 @@ class TrackOut(BaseModel):
     preview_url: str
     title: str
     cover_url: str
+
+
+class HealthOut(BaseModel):
+    status: str
+    # Identity of the artifact actually loaded, so "which graph is live" is
+    # answerable over HTTP. Eighteen artifacts sit in builder/scratch/ and are
+    # not interchangeable; a conclusion from the wrong one looks correct.
+    graph_sha256: str
+    artists: int
+    edges: int
