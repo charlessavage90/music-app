@@ -14,7 +14,13 @@ order:
 
 **Where they disagree, the design governs the plan, and §12 governs the rest of the design.**
 
-**No code has been written.** Today produced documents only.
+> **⚠ SUPERSEDED ON STATUS, 2026-07-26 (later the same day) — ~~"No code has been
+> written. Today produced documents only."~~** That was true when written and is now
+> false: **Track A was executed in full** — ten tasks, api 153 → 180, PR #27. This
+> handoff remains the record of the design and review work, and its "must not be
+> reverted" list below is **still live**. For Track A's outcome read
+> [`2026-07-26-gate2-track-a-execution-log.md`](2026-07-26-gate2-track-a-execution-log.md);
+> the next unbuilt unit is **Track D**, which has a scope fence but **no plan yet**.
 
 ## What is now true that was not
 

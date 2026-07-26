@@ -123,10 +123,14 @@ Task 10, run against the **adopted** artifact, booted through the production ent
 **Identity gate first.** The service was booted with `ARTISTPATH_GRAPH_SHA256` **set** to
 the adopted artifact's digest rather than left empty. That is stronger than the plan asks
 for: it exercises the Task 2 checksum gate against the real file, and the service would
-have refused to boot on a mismatch. `/health` then returned all three values matching the
-manifest sidecar and the document that owns the figure
-(`findings/2026-07-23-tiebreak-fix-adoption.md`): **74,193 artists, 898,006 edges**, digest
-agreeing. **The digest is not restated here** — it is that document's figure.
+have refused to boot on a mismatch. `/health` then returned **all three values — digest,
+artist count and edge count — matching** the manifest sidecar
+`builder/scratch/graph-t15-tiebreakfix.bin.json` and the document that owns them,
+[`findings/2026-07-23-tiebreak-fix-adoption.md`](findings/2026-07-23-tiebreak-fix-adoption.md).
+**None of the three is restated here.** An earlier draft of this log restated the artist
+and edge counts while explicitly noting it was withholding the digest — the one-figure rule
+covers all three equally, and citing two of three is how drift starts (found at closeout
+B1).
 
 **The replay.** Two `path` events were emitted through the live API and replayed offline
 through `find_journey` against the same artifact, comparing the full mbid sequence and the
@@ -172,6 +176,83 @@ puzzled.
 
 Also worth recording as a **non-event**: `crypto.randomUUID()` was flagged before Task 9 as
 a possible failure under Vitest's jsdom environment. It worked. No shim needed.
+
+## `TKA-9` — closeout B3: 14 mutations, 13 caught, and the survivor is a false comment
+
+Every invariant this work added was mutated and the guarding test re-run. **Thirteen went
+red.** Full list: the three APG1 bounds checks, the checksum mismatch, the journey-id
+validation, `emit`'s use of `json.dumps` over string formatting, both cache guards, the
+null-field coercion, the same-artist guard, the `exclude` bound, the exclusion dedupe, and
+`/health`'s digest.
+
+**One survived: dropping `count=` from `np.frombuffer`.** It is not a missing test — it is
+an **unreachable guard with a comment claiming otherwise.** The total-length check runs
+first and proves every subsequent slice is exactly the right size, so no payload reaching
+`take()` can be short. The comment read *"count= is load-bearing"*; it is defence in depth.
+Corrected in place, and the `count=` kept — it is what the code would degrade to if the
+length check were ever relaxed.
+
+**This is the `TKA-1` pattern pointing the other way.** There, prose understated what the
+code did; here it overstated. Both were caught by execution rather than by reading, which
+is the argument for B3 existing.
+
+## `TKA-10` — the two APG1 parsers are still not equivalent, and the builder is now behind
+
+Task 1's docstring claimed *"every bounds check here already exists in the builder's
+writer."* **Checked against `builder/…/artifact.py` `deserialise` — false.** The builder
+has the magic, version and truncation checks, which is the `TR-4` drift this task was
+closing. It does **not** have the two checks that are new to both parsers: the **over-long**
+case, and the **header-N vs metadata-length disagreement** (`TR-3`).
+
+So `TR-4`'s "the parsers had drifted" is right about the direction and incomplete about the
+extent: **two of the five checks were missing from both sides**, and `deserialise` still
+lacks them. A header/metadata mismatch loads clean on the builder side today.
+
+**Not fixed here, deliberately.** This reader is what serves users; the builder's parser is
+used by offline tooling on artifacts it just wrote. Recorded with a condition rather than
+carried as an unranked worry.
+
+| deferred | success condition |
+|---|---|
+| `TKA-10` — `deserialise` lacks the over-long and `TR-3` consistency checks | closes when the builder is next modified for any reason, **or** when an artifact is next rebuilt — whichever is first. Accepted-won't-fix is a legitimate answer; the risk is confined to offline tooling. |
+| `TKA-11` — the checksum gate ships **off** by default | `ARTISTPATH_GRAPH_SHA256` is empty unless set, and the design requires it *"in production"* with nothing enforcing that. Closes when **Track C confirms `/health` returns a non-empty `graph_sha256` against the deployed service.** That is now a checkable condition rather than a written intention, which is the only reason this is a deferral and not a defect. |
+
+**`TKA-11` is the A4 default-flip answer.** The knob's empty default is *correct* — local
+dev and the whole test suite must boot without it — so this is not unshipped work wearing a
+completion badge. But it is one forgotten environment variable away from being dead code in
+production, and nothing would say so.
+
+## `TKA-12` — `DEP-32` is blocked by `.gitignore` and Track B must fix that first
+
+`DEP-32` requires `uv.lock` committed and `uv sync --frozen` in the Dockerfile, because
+with no CI the image is the release artifact. **`.gitignore:18` ignores `uv.lock`, for both
+packages.** So `DEP-32` as written is unsatisfiable until that line changes.
+
+Recorded because this exact shape has bitten here before: closeout D1 notes a previous plan
+that instructed staging `api/uv.lock`, was unsatisfiable as written, and ended with the
+dependency pinned in `pyproject.toml` instead. **Track B's first task is the `.gitignore`
+change, not the Dockerfile.** Found at closeout D1; not fixed here, because committing a
+lockfile is a Track B decision with a Track B blast radius.
+
+## `TKA-13` — closeout D6: the standing context layer
+
+**In-repo half: net zero.** `git diff --stat main..HEAD -- CLAUDE.md .claude/skills/
+.claude/agents/` is empty. Nothing was added to the layer that taxes every future session.
+
+**Out-of-repo half: `memory/` totals 474 lines**, against **469** last recorded (`CLM-7`,
+2026-07-26). The +5 was **not written by this session** — no memory file was created or
+edited here. Recorded because D6 exists precisely to add the two halves together, and
+`CLM-7`'s finding was that `memory/` grew with the delta recorded nowhere. Whatever added
+those five lines did not record them either.
+
+**One change is recommended and deliberately NOT made: `CLAUDE.md` does not list
+`ARTISTPATH_GRAPH_SHA256`.** The doc audit raised this as HIGH, and it is a real defect of
+absence — the configuration section names three key API env vars and there are now four,
+with the new one required in production. **The fix is a one-line addition to the budgeted
+standing layer, which `CLAUDE.md` reserves to the owner** ("a session never grows this
+layer on its own authority: report the cost from the diff and hand the decision over").
+Cost: **+1 line**, net-new, no displacement offered. The case: it is the only env var whose
+absence silently disables a boot-time safety check. **Owner's call.**
 
 ---
 

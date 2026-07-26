@@ -96,10 +96,16 @@ class GraphStore:
     def from_bytes(cls, payload: bytes) -> "GraphStore":
         """Parse an APG1 payload.
 
-        Every bounds check here already exists in the builder's writer
-        (builder/src/artistpath_builder/artifact.py) and was missing from this
-        reader. The two parsers had drifted, undetected, in the half that is
-        about to start fetching over a network — see the team review's TR-4.
+        The magic, version and truncation checks exist in the builder's parser
+        (builder/…/artifact.py `deserialise`) and were missing here: the two
+        APG1 parsers had drifted, undetected, in the half that is about to
+        start fetching over a network — the team review's TR-4.
+
+        Two of the checks below are in NEITHER parser and are new to this one:
+        the over-long case, and the header-N vs metadata-length disagreement
+        (TR-3). `deserialise` still lacks both, so a mismatched artifact loads
+        clean on the builder side today. That is recorded rather than fixed
+        here — this reader is what serves users.
         """
         if len(payload) < _HEADER.size:
             raise ValueError("artifact truncated: shorter than header")
@@ -128,8 +134,12 @@ class GraphStore:
         def take(count: int, dtype: str, size: int) -> np.ndarray:
             nonlocal cursor
             end_ = cursor + count * size
-            # count= is load-bearing: without it a short buffer yields a SHORTER
-            # array rather than an error.
+            # count= is defence in depth, NOT the guard that fires: the total
+            # length check above already proves every slice is exactly right,
+            # so no payload reaching here can be short. Kept because without it
+            # a short buffer yields a SHORTER array rather than an error, and
+            # that is the failure this would degrade to if the check above were
+            # ever relaxed. Verified unreachable by mutation (closeout B3).
             arr = np.frombuffer(payload[cursor:end_], dtype=dtype, count=count)
             cursor = end_
             return arr

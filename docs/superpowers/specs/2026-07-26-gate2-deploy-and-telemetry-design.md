@@ -1,7 +1,14 @@
 # Gate 2 — AWS deploy and bypass telemetry (design)
 
 **Role: ACTIVE.** The governing design for Gate 2's deploy, owner-approved 2026-07-26.
-**Nothing here is implemented yet.** Where this and the roadmap
+**⚠ STATUS, 2026-07-26 — `Track A` IS IMPLEMENTED; the rest is not.** The original
+"nothing here is implemented yet" is **struck**, not deleted, because several §4 and §5
+passages are written in the future tense and still read as pending. Built and merged:
+`DEP-10`–`DEP-13`, `DEP-25`–`DEP-28`, `DEP-30`, `/health`, and both telemetry events;
+**`DEP-16` is DISCHARGED** by the round-trip verification. Record:
+[`../2026-07-26-gate2-track-a-execution-log.md`](../2026-07-26-gate2-track-a-execution-log.md)
+(`TKA-`), PR #27. **Tracks D, B and C remain unbuilt**, and `DEP-33` still requires the
+team review re-run against the CDK stack before cutover. Where this and the roadmap
 ([`../plans/2026-07-21-alpha-rollout-roadmap.md`](../plans/2026-07-21-alpha-rollout-roadmap.md))
 disagree on Gate 2 sequencing, **this document governs** — the two deviations are named
 explicitly in §1 and §8.
