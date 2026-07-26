@@ -122,6 +122,31 @@ over `api/src` 0 issues.
   suites; §7 now records what was asked versus what was done rather than asserting a
   verification nobody ran.
 
+### Added after merge, 2026-07-26 — the evaluation harness does not have F1
+
+Not a correction to this work, which never claimed otherwise: `eval/` was outside F1's
+scope and no document said it had changed. It is recorded here because **nothing said it
+had not**, and the consequence only bites a future measurement.
+
+`app.py:71` calls `find_journey`. `eval/run_baseline.py:97`, `eval/tune_weights.py:64` and
+`eval/export_paths.py:242` all call `find_path` directly. So for a graph-adjacent pair the
+harness still returns the two-card result the app no longer gives. Aggregate baselines are
+essentially unmoved — the eval samples pairs from a 75k-node graph, where adjacency is rare
+— but the divergence is concentrated entirely in the population F1 exists to change, so a
+measurement *about F1* drawn from the harness would be wrong while its headline numbers
+look untouched. **`FMS-N1`** — `N` for notes added after merge, disjoint from this
+document's `FMS-D` (decisions) and `FMS-P` (plan defects).
+
+`.claude/agents/ml-graph-analyst.md` now states this and requires an analyst to say which
+of the two it measured. That is a guard, not a fix.
+
+**Open, and the owner's: should the harness call `find_journey`?** Not decided here and
+nothing in `eval/` is touched — it changes what every path-quality measurement sees, and
+that work is paused. It is also not obviously right: tuning weights against `find_path` is
+defensible, because F1 adds no scoring. **Success condition:** settled either way when
+path-quality work resumes, before any harness result is read; or closed as "accepted, won't
+fix" if the divergence is judged immaterial with that reasoning recorded.
+
 ## 6. Operational measurements with no other home
 
 - Real-graph verification: **40 seconds** after sample sizes were cut (the first version
