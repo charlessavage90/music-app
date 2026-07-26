@@ -11,6 +11,25 @@ the point.**
 
 ---
 
+## DONE — 2026-07-26 — journeys now always have someone in the middle
+
+**DONE 2026-07-26 — PASSED, no notes.** Exercised by the owner; nothing wrong found and
+nothing worth commenting on. **This discharges F1** — its condition was an observation,
+and this is that observation. Gate 1's last item is closed.
+
+**Recorded caveat, per this file's precedent.** The report was "exercised and passed", so
+the record does **not** carry which pairs were tried, nor whether the `Doves → Elbow`
+"next to each other" line was seen. Read this as *no defect surfaced in ordinary use*,
+not as a per-step confirmation of the three numbered checks.
+
+**Two questions this entry asked are still unanswered, and a pass is not an answer to
+them:** how long a forced detour may get before a journey stops feeling like a journey
+(uncapped, deliberately), and whether routing two famous artists through a third famous
+one reads as reasonable or as lazy. Both are owner-judgement questions that no
+measurement settles; they carry forward.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-25 — journeys now always have someone in the middle
 
 **Ten minutes, no waiting.** Pick two artists who are very close to each other —
@@ -48,6 +67,20 @@ not have; or the "next to each other" line showing up on a normal journey.
 **Best bug report:** the URL from the address bar.
 
 ---
+
+## DONE — 2026-07-26 — the three playback fixes from your last run
+
+**DONE 2026-07-26 — PASSED, no notes.** Exercised by the owner; no defect found. The three
+playback defects found in the 2026-07-25 use run (a finished clip skipping the next artist;
+audio surviving "← New path"; audio surviving a bypass or "↺ Reset path") are **confirmed
+in use and closed.**
+
+**Recorded caveat.** As above, the record does not carry per-step confirmation — this is
+*nothing surfaced across ordinary use*, not five individually witnessed checks. The
+riskiest failure this entry guarded against (cards no longer playing at all) would have
+been unmissable, so a clean pass is strong evidence on that one specifically.
+
+*Original queued text follows.*
 
 ## QUEUED — 2026-07-25 — the three playback fixes from your last run
 
@@ -560,6 +593,25 @@ something is actually adopted into the running app.
 **The three entries below are still QUEUED and are the ones worth your time.**
 
 ---
+
+## DONE — 2026-07-26 — can you find the artists you'd actually type?
+
+**DONE 2026-07-26 — PASSED, nothing found.** Exercised by the owner; no artist reported as
+unfindable, none reported as needing a second spelling, and no journey reported as
+returning only the two typed artists.
+
+**What this does and does not settle.** A null here is the weakest of the three results
+recorded today, and deliberately so: the entry's value was in what it *found*, and the
+record does not carry which names were typed. So it does **not** close `CNS-1` (an artist
+can be stored under one name with no aliases, so it is unfindable under the name a user
+would type — Pretenders / The Pretenders). It says only that the failure did not surface
+on the names the owner happened to try. `CNS-1` stays open on the strength of its own
+worked example, which is a direct observation and outranks a non-observation here.
+
+Likewise it does not measure whether low-connection artists can be delivered mid-journey —
+that question moved to a committed-walk measurement rather than an app session.
+
+*Original queued text follows.*
 
 ## Queued 2026-07-26 — can you find the artists you'd actually type?
 
