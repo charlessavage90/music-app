@@ -131,10 +131,28 @@ material and nothing was renamed or renumbered:
 
 ## 8. Standing context layer (closeout D6)
 
-**Net zero.** `git diff --stat` over `CLAUDE.md`, `.claude/skills/` and `.claude/agents/`
-for this branch's commits returns empty — nothing was added, nothing compressed. `memory/`
-totals **469 lines**, unchanged from the figure `CLM-7` recorded on 2026-07-26.
+**In-repo half: net zero.** `git diff --stat` over `CLAUDE.md`, `.claude/skills/` and
+`.claude/agents/` for this branch's commits returns empty — nothing added, nothing
+compressed.
 
-Four documents were added under `docs/`, which is the routed-around layer and not the
-budgeted one. No addition to the standing layer was proposed, so no case for one is made
-here — that decision is the owner's and was not needed.
+**`memory/` half: 469 → 474 lines, a delta of +5.** This is a **positive delta and
+therefore the owner's call, not this session's.** The cost and the case, stated as D6
+requires:
+
+- **What it bought.** `roadmap-pointer.md` is auto-loaded into every session and stated
+  **"F1 is NOT discharged"** and **"Next: the owner runs that check"**. Both became false
+  today. Left alone, every future cold session would open believing a completed check was
+  still outstanding — the precise failure the closeout's B1 rationale cites from
+  2026-07-23 ("auto-loaded memory carrying stale status into every cold session").
+- **Where the +5 went.** Four lines are a pointer to the resume brief naming the blocking
+  question; one is the Gate 2 line. The status correction itself was line-neutral.
+- **What was not done.** No live passage was compressed to pay for it. `CLAUDE.md` warns
+  that buying lines that way has twice cost the clause that made a check usable, so the
+  delta is reported honestly rather than hidden behind a trim.
+- **If he wants it back to zero**, the resume-brief pointer is the removable part — the
+  brief is still reachable from `docs/README.md`. The status correction is not optional.
+
+**Note for the next closeout: the baseline figure is now 474, not `CLM-7`'s 469.**
+
+Six documents were added under `docs/`, which is the routed-around layer and not the
+budgeted one.
