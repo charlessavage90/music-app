@@ -522,6 +522,45 @@ session.
 
 ---
 
+## N/A — 2026-07-26 — a second measurement ran; the app is untouched
+
+**Nothing new to exercise, but the app is running and three older entries below are
+still waiting on you.**
+
+What ran: a read-only measurement asking *why* certain artists are barely connected,
+following on from the census below. **It changed nothing** — no routing, no graph, no
+setting. A journey you generate now is identical to one from yesterday.
+
+**Both servers are running and nothing owns them**, so they will outlive this session
+and every terminal. Started fresh today, after the latest change:
+
+| what | address | PID |
+|---|---|---|
+| the app | **http://localhost:5173** | 206500 |
+| the service behind it | http://127.0.0.1:8000 | 226716 |
+
+Open the first one in a browser and it works. **If you want them gone**, stop those two
+PIDs — nothing else will.
+
+**What was learned, in plain terms, because it explains something you may notice.**
+Some artists can never be offered to you in the middle of a journey, and there turned
+out to be two quite different reasons. For the ones you'd recognise — Meat Loaf, Elbow,
+The Cult, The Streets, Tom Jones — the data is all there: fifty similar artists, all of
+them in the app. The rule that builds the map then throws nearly all of it away, because
+it insists two artists both name each other, and a famous artist's neighbours are more
+listened-to than it is and name someone else. **Those are recoverable.** For the great
+majority by headcount, the music service simply never named more than one or two similar
+artists in the first place — and that turned out to be because of a cut-off *we* chose
+when asking it, not because the data does not exist. Changing that would mean collecting
+everything again from scratch.
+
+**Nothing is proposed and nothing was changed.** The next entry here will come when
+something is actually adopted into the running app.
+
+**The three entries below are still QUEUED and are the ones worth your time.**
+
+---
+
 ## Queued 2026-07-26 — can you find the artists you'd actually type?
 
 **Status: QUEUED.** Nothing was changed in the app, so this is not a regression check. The
