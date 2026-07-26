@@ -1,0 +1,5 @@
+# A mechanical re-dump of the adopted artifact's node table, regenerated in
+# seconds by dump_artifact_nodes.py. Not a result. Deliberately not committed —
+# see README.md, which says so explicitly because a session checking from a
+# branch where this directory does not exist cannot see this file (CLM-13).
+artifact_nodes.json
