@@ -35,10 +35,46 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent / "2026-07-24-track2-fame-proxy-wikipedia"))
+
+from fetch_pageviews import normalise  # noqa: E402  — A11's own identity normalisation
+
 SETS = {"degree_1": "1 connection", "degree_2": "2 connections"}
+
+
+def _base_title(title: str) -> str:
+    """Strip a trailing Wikipedia parenthetical, e.g. 'Tom Jones (singer)' -> 'Tom Jones'."""
+    return re.sub(r"\s*\([^)]*\)\s*$", "", title or "")
+
+
+def identity_class(name: str, article: str) -> str:
+    """How far the measured article's title is from the name the graph holds.
+
+    Three outcomes, and the third is the one that matters:
+
+      `exact`               - the titles agree after A11's normalisation.
+      `title_disambiguator` - the article is the name plus a parenthetical
+                              ('Proof (rapper)'). Wikipedia's own way of separating
+                              same-named topics; says nothing against the match.
+      `different_title`     - the article is about a DIFFERENTLY NAMED subject
+                              ('War' -> 'Axl Rose'). Sometimes legitimate, because
+                              the resolver accepts any Wikidata label or alias, so a
+                              real name ('Marcus Fureder' -> 'Parov Stelar') or a
+                              non-Latin name ('裸のラリーズ' -> 'Les Rallizes Denudes')
+                              lands here correctly. But so does every outright
+                              misidentification, which is why these are flagged for
+                              the eye rather than silently trusted.
+    """
+    if normalise(article) == normalise(name):
+        return "exact"
+    if normalise(_base_title(article)) == normalise(name):
+        return "title_disambiguator"
+    return "different_title"
 
 
 def load() -> tuple[dict, dict, dict]:
@@ -86,6 +122,8 @@ def enrich(rows: list[dict], cache: dict) -> list[dict]:
             r["potentially_notable"] = bool(g.get("potentially_notable"))
             r["non_latin_name"] = bool(g.get("non_latin_name"))
             r["foreign_wikis"] = (g.get("foreign") or {}).get("non_english_wikis") or []
+            r["identity"] = (identity_class(r["name"], r["article"])
+                             if r["matched"] else "unmatched")
         out.append(r)
     return out
 
@@ -93,11 +131,16 @@ def enrich(rows: list[dict], cache: dict) -> list[dict]:
 def fmt_row(i: int, r: dict) -> str:
     dis = f" — *{r['disambiguation']}*" if r["disambiguation"] else ""
     notes = []
+    if r.get("identity") == "different_title":
+        notes.append(f"⚠ **IDENTITY UNVERIFIED** — measured *{r['article']}*, a "
+                     f"differently-named subject"
+                     + (f", while the graph says *{r['disambiguation']}*"
+                        if r["disambiguation"] else ""))
+    elif r.get("identity") == "title_disambiguator":
+        notes.append(f"measured article: *{r['article']}*")
     if r["name_shared_with"]:
         notes.append(f"⚠ shares this name with {len(r['name_shared_with'])} other "
                      f"node(s) in the graph — the fame figure cannot tell them apart")
-    if r.get("article") and r["article"].strip().lower() != r["name"].strip().lower():
-        notes.append(f"measured article: *{r['article']}*")
     if r.get("via") == "wikidata_fallback":
         notes.append("recovered by the A15 fallback")
     if r.get("months_present") is not None and r["months_present"] < 12:
@@ -263,56 +306,103 @@ def main() -> int:
     # artists named this act as similar at all — which is a statement about what the
     # snowball reached, in the same family as the stranding split itself. Owner's
     # observation, 2026-07-26; recorded because it bears on what the graph can deliver.
-    L.append("\n### Famous but barely named by anyone — candidate crawl-coverage gaps\n")
-    L.append("**These are not simply screen imperfections, and they should not be filed as "
-             "instrument noise.** Popularity here is score-weighted in-degree over the "
-             "*full uncapped* neighbour lists, so a low value means **few crawled artists "
-             "named this act as similar at all**. When such an artist turns out to be "
-             "genuinely famous, that is evidence about what the snowball crawl reached — "
-             "the same class of question as the stranding split, and it belongs beside it.\n")
-    gaps = []
-    for k, label in SETS.items():
-        order = sorted([r for r in full[k] if (r["name"] or "").strip()],
-                       key=lambda r: (-r["pop_raw"], r["mbid"]))
-        rank_of = {r["mbid"]: i for i, r in enumerate(order, 1)}
-        for r in ranked(control[k]):
-            if r["fame_pageviews"] >= 10_000:
-                gaps.append((r, label, rank_of.get(r["mbid"], 0), len(order)))
-    gaps.sort(key=lambda t: -t[0]["fame_pageviews"])
-    if gaps:
-        L.append(f"{len(gaps)} of the {sum(len(control[k]) for k in SETS)} control artists "
-                 "clear 10,000 annual pageviews despite sitting below the popularity cut:\n")
-        for r, label, rk, tot in gaps:
-            art = (f" — measured article *{r['article']}*"
-                   if r.get("article") and r["article"].strip().lower()
-                   != r["name"].strip().lower() else "")
-            share = "; ⚠ name shared in-graph" if r["name_shared_with"] else ""
-            L.append(f"- **{r['name']}** — {r['fame_pageviews']:,} annual pageviews, "
-                     f"{label}, popularity rank {rk:,} of {tot:,}{art}{share}")
-        per_set = {lbl: sum(1 for g in gaps if g[1] == lbl) for lbl in SETS.values()}
-        L.append(f"\n**Scaled up**, the control samples 200 of each set's below-cut "
-                 "population, so each artist found here implies roughly 30 more in the "
-                 "full census: " + "; ".join(
-                     f"~{cnt * (len(full[k]) - len(screen[k])) / len(control[k]):.0f} for "
-                     f"{lbl}" for (k, lbl), cnt in zip(SETS.items(), per_set.values())) + ".\n")
-        L.append("**Before reading these as crawl gaps, two cheaper explanations have to be "
-                 "excluded, and this measurement does not exclude them.** (i) The artist is "
-                 "famous for something other than music — an actor or presenter with a "
-                 "recording credit — so English Wikipedia traffic is real but not musical "
-                 "reach, and few artists naming them as *similar* is then correct rather "
-                 "than a gap. (ii) The name collides with a more famous act outside the "
-                 "graph, inflating the pageview figure; rows carrying an in-graph collision "
-                 "are marked, but an out-of-graph collision is undetectable here, which is "
-                 "why the measured article title is printed. **The check that would settle "
-                 "it is per-artist and manual** — does this act have real listening reach in "
-                 "the population the crawl covers — and it is not run here.\n")
-    else:
-        L.append("**No control artist clears 10,000 annual pageviews.** On this sample the "
-                 "below-cut population contains no candidate coverage gap of that size — "
-                 "which is also the cleanest available evidence that the screen is not "
-                 "hiding a famous artist.\n")
+    L.append("\n### ⚠ Those leak figures are WITHDRAWN — the fame proxy misidentifies "
+             "artists at this end of the graph\n")
+    L.append("**The leak estimates above are not interpretable, and the coverage-gap "
+             "reading they were about to support is withdrawn.** Inspecting the "
+             "highest-fame control artists shows the proxy is not measuring the artist the "
+             "graph means. The two strongest supposed leaks are **Gosling → the article "
+             "*Ryan Gosling*** and **Kny → the article *Demon Slayer: Kimetsu no Yaiba***. "
+             "Neither is an obscure stranded musician who turned out to be famous; both are "
+             "a name-only lookup landing on a different subject.\n")
+    L.append("**Why the proxy does this here specifically, and why A11's validation did not "
+             "see it.** The resolver matches on a Wikidata label or alias and then requires "
+             "the entity to be a musical performer. It never consults the **disambiguation "
+             "the graph already holds**. At this end of the artifact the names are short and "
+             "generic — *War*, *Sparks*, *Shining*, *Proof*, *Psycho*, *Ariel*, *God*, "
+             "*Meth* — so a collision is likely, and when it happens the *more famous* "
+             "entity wins the pageview count by construction. A11 was validated on a "
+             "purposively-chosen sample of mostly-recognisable acts, where this barely "
+             "bites. **This is a scope limit on the adopted fame proxy, not a defect in "
+             "this census's use of it**, and it is not in the record.\n")
+    L.append("**The graph's own disambiguation contradicts the match in most of the clear "
+             "cases** — which is what makes them identifiable at all, and names the cheapest "
+             "possible fix:\n")
+    L.append("| graph name | the graph's disambiguation | article the proxy measured |")
+    L.append("|---|---|---|")
+    for nm, dis, art in (
+        ("War", "US funk/rock band", "Axl Rose"),
+        ("WATERS", "2010s US-Norwegian band", "Roger Waters"),
+        ("Cassidy", "US rapper Barry Reese", "David Cassidy"),
+        ("Sparks", "US rock and pop duo, The Mael brothers", "Jordin Sparks"),
+        ("Shining", "Norwegian jazz/metal/rock", "The Shining (novel)"),
+        ("Meth", "UK drum & bass artist", "Method Man"),
+        ("MZ", "French rap group", "Yusaku Maezawa"),
+        ("God", "Viking Metal band from Romania", "G.o.d"),
+        ("Divinity", "Finland/ambient project", "Divinity (series)"),
+        ("Psycho", "US rapper", "Psycho (novel)"),
+    ):
+        L.append(f"| {nm} | *{dis}* | **{art}** |")
+    L.append("")
+    counts = {}
+    for role, rows in (("delivered lists", [r for k in SETS for r in screen[k]]),
+                       ("control sample", [r for k in SETS for r in control[k]])):
+        m = [r for r in rows if r["matched"]]
+        diff = [r for r in m if r["identity"] == "different_title"]
+        dis = [r for r in m if r["identity"] == "title_disambiguator"]
+        counts[role] = (len(m), len(dis), len(diff))
+        L.append(f"**{role}:** of {len(m)} matched artists, {len(dis)} "
+                 f"({100*len(dis)/len(m):.0f} %) measured an article that is the same name "
+                 f"plus a Wikipedia parenthetical — **usually** right — and **{len(diff)} "
+                 f"({100*len(diff)/len(m):.0f} %) measured a differently-named subject**, "
+                 "which is where most misidentification lives.")
+    L.append("\n**The parenthetical class is not reliably safe either, so it is not a clean "
+             "bill of health.** Checked against the graph's disambiguation, the great "
+             "majority are right (*Elbow* → *Elbow (band)*, graph says *UK rock band*), but "
+             "there are real errors hiding in it: *Friends* → *Friends (Swedish band)* where "
+             "the graph says *Brooklyn based group, formed 2010*, and *Proof* → *Proof "
+             "(rapper)* — the US rapper of D12 — where the graph says *UK grime MC*. A "
+             "parenthetical means Wikipedia had to separate same-named topics, which is "
+             "exactly when picking the wrong one is possible.\n")
+    L.append("**`different_title` is an upper bound on that class's error, not the error "
+             "rate.** "
+             "The resolver accepts any Wikidata label or alias, so a real name resolving to "
+             "a stage name (*Marcus Füreder* → *Parov Stelar*) or a non-Latin name resolving "
+             "to its romanisation (*裸のラリーズ* → *Les Rallizes Dénudés*, *威神V* → *WayV*) "
+             "lands in this class **correctly**. By hand, roughly half to two-thirds of them "
+             "are genuine errors. Every one is flagged **⚠ IDENTITY UNVERIFIED** inline, so "
+             "the judgement is the reader's rather than a rate they have to trust.\n")
+    L.append("**Where the damage concentrates is the worst possible place: the top.** A "
+             "misidentified row inherits the *more famous* entity's pageviews, so it sorts "
+             "upward. The first twenty rows of each list — the part actually meant to be "
+             "eyeballed — carry a higher error density than the body.\n")
+    L.append("**What survives this, and it is the question that was asked.** The census was "
+             "run to find out whether recognisable artists are stranded where the app can "
+             "never introduce them. The correctly-identified rows answer that on their own: "
+             "Meat Loaf, Ringo Starr, Eddie Vedder, Aaron Carter, Paula Abdul, DJ Khaled and "
+             "Charlotte Gainsbourg at one connection; Marilyn Monroe, Jermaine Jackson, "
+             "Stevie Nicks, Barbra Streisand, Nick Jonas, Kid Rock, John Fogerty, Milli "
+             "Vanilli, Joe Cocker and Todd Rundgren at two. **The ordering is contaminated; "
+             "the finding is not.**\n")
+    with_dis = [r for k in SETS for r in screen[k] + control[k]
+                if r["matched"] and r["disambiguation"].strip()]
+    all_m = [r for k in SETS for r in screen[k] + control[k] if r["matched"]]
+    L.append(f"**The obvious fix — give the resolver the disambiguation the graph already "
+             f"holds — reaches less than half the problem, and misses the worst of it.** "
+             f"Only **{len(with_dis)} of {len(all_m)} ({100*len(with_dis)/len(all_m):.0f} %)** "
+             "matched rows carry a disambiguation at all; the other "
+             f"{len(all_m) - len(with_dis)} cannot be adjudicated this way even in "
+             "principle. **And the two most extreme errors are in that blind half** — "
+             "*Gosling* → *Ryan Gosling* and *Kny* → *Demon Slayer* both have an **empty** "
+             "disambiguation, so the check would pass them through untouched. It would "
+             "catch the *War* / *WATERS* / *Cassidy* / *Sparks* class and stop there.\n")
+    L.append("**So it is named as the cheapest *first* check, not as a fix**, and it is not "
+             "run here. Any change to the resolver is a change to **A11's adopted, validated "
+             "instrument** — not this measurement's to make, and re-scoring Track 2's "
+             "figures against a modified resolver is a separate decision needing its own "
+             "pre-registration.\n")
 
-    L.append("**What this does and does not establish.** It tests the screen against "
+    L.append("**What the control sample does and does not establish.** It tests the screen "
              "cases nothing selected for fame, which `verify_screen.py`'s ground truth "
              "could not: `MKS-2`'s six artists were found by noticing *recognisable* names "
              "among low-degree ones, so they were already correlated with being "
@@ -392,19 +482,17 @@ def main() -> int:
 
     leaked = [s for s in leak_summary if s[1] > 0]
     if leaked:
-        L.append("**7. The lists are the top of the *screened* set, and the control sample "
-                 "says that is not exactly the top of all 12,088.** " + "; ".join(
-                     f"for {lbl} roughly **{est:.0f}** of the {below:,} artists below the "
-                     f"cut would rank inside the delivered list"
-                     for lbl, cnt, est, below in leaked) +
-                 ". **The cut was deliberately not deepened** (owner's call, 2026-07-26): "
-                 "the ranked list is instrumental — its job was to answer *are recognisable "
-                 "artists stranded?*, which the top-11 pile-up of every known `MKS-2` case "
-                 "answers emphatically — and a more accurate ordering *below* the reliable "
-                 "zone buys a marginally better eyeball sample and nothing else. The "
-                 "artists concerned are not discarded: they are reported above as candidate "
-                 "crawl-coverage gaps, which is the more useful thing they are evidence "
-                 "of.\n")
+        L.append("**7. Whether the screen leaks is UNRESOLVED, because the instrument that "
+                 "would measure it is unreliable at this end of the graph.** The control "
+                 "sample's apparent leaks are dominated by misidentified rows (§'Those leak "
+                 "figures are WITHDRAWN'), so the estimates are not evidence of anything and "
+                 "are not restated here. **This does not reopen the cut**, which was "
+                 "deliberately not deepened (owner's call, 2026-07-26): the ranked list is "
+                 "instrumental, its question is answered by the correctly-identified rows, "
+                 "and a deeper cut measured with the same instrument would inherit the same "
+                 "contamination. **What it does mean is that the candidate crawl-coverage-gap "
+                 "reading is withdrawn rather than merely caveated** — it cannot be "
+                 "separated from misidentification without the disambiguation check.\n")
     else:
         L.append("**7. The lists are the top of the *screened* set, not provably the top of "
                  "all 12,088.** The control sample detected no leak, which bounds but does "
