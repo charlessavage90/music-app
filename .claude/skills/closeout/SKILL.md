@@ -129,6 +129,45 @@ changed it still pointed at the old behaviour.
 If the answer is "we haven't decided yet", that is fine, but it means the work is not
 closed. Say so plainly rather than marking it complete.
 
+### A5. Release the processes this session started
+
+**Sweep the ports, stop what this session owns, and leave a fresh detached server behind
+if C1 queued anything.**
+
+A session that starts a dev server in a background shell stays *subscribed* to it, and
+retiring the session does not end the subscription — only closing its terminal does. The
+terminal is deliberately kept open across a handover, so the outgoing session can still be
+asked what it knew. On 2026-07-25 a retired session woke and posted into the chat when a
+later session restarted the dev server. Nothing was damaged; the wake path is real and it
+is the retiring session's to close. This sits in Part A for the same reason everything else
+here does — **only the owning session can stop its own tasks**, and by Part B the closeout
+may be in a fresh one.
+
+1. **Sweep by listener, not by task list.** A session sees only the tasks it owns, so
+   `TaskList` reports an empty machine while yesterday's servers are still serving.
+
+   ```powershell
+   Get-NetTCPConnection -State Listen -LocalPort 8000,5173 | Select-Object LocalPort,OwningProcess
+   ```
+
+   Report each with its **start time against the HEAD commit date**. A listener older than
+   the work being closed out is serving code that predates it, and any manual test against
+   it is invalid while looking entirely normal.
+
+2. **Stop what this session owns** (`TaskStop`), and **name the listeners it does not** —
+   those outlived a session that is gone, `TaskStop` cannot reach them, and freeing the port
+   needs the PID. Stopping a task does not disturb the conversation, so the terminal stays
+   answerable afterwards.
+
+3. **If C1 queued an item, relaunch detached**, per the commands in `CLAUDE.md` — cite them,
+   do not restate them. Detached means no session owns it, so nothing can be woken by it; it
+   equally means nothing is watching, so **a failure to bind is silent. Verify both ports
+   answer before believing it started.** Record PID and port in the C1 entry.
+
+**Then say so in the closing message** — ports, PIDs, and that nothing owns them. A detached
+server outlives every session and every terminal, so the failure mode is the owner not
+knowing it is there. That is how :8000 came to be held by a process from the previous day.
+
 ---
 
 ## Part B — Fresh session, mechanical
@@ -472,12 +511,15 @@ changes later, revival is a decision rather than an archaeology project.
 **Full ritual** after a phase, or after anything touching the graph, the artifact
 format, or the cost function.
 
-**Minimum** after a small self-contained track — A4, B2, C1, D1. Default-flip,
-reachability, use it, clean tree. Half an hour combined, and they catch most of what
-matters.
+**Minimum** after a small self-contained track — A4, **A5**, B2, C1, D1. Default-flip,
+release the shells, reachability, use it, clean tree. Half an hour combined, and they catch
+most of what matters. A5 travels with C1: the queued test needs a server, and a stale one
+fails it for the wrong reason.
 
 **Mid-flight retirement**, when a session is being handed over before its work reaches a
-natural seam — A1, **A2-mid**, A3, B1, B5, **D1-mid**, D3, **D6**. D6 belongs here
+natural seam — A1, **A2-mid**, A3, **A5**, B1, B5, **D1-mid**, D3, **D6**. A5 matters most
+here: a mid-flight handover is precisely when the old terminal is kept open, which is the
+only condition under which an owned shell can wake a retired session. D6 belongs here
 specifically: a mid-flight handoff usually happens *because* a governing document changed,
 so the standing-layer delta is both non-zero and exactly what the successor needs recorded.
 

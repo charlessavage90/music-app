@@ -111,6 +111,9 @@ git status --short && git log --oneline -3 && git branch -vv
 - **Check the test queue** left by the last closeout. Anything sitting untested gets
   flagged to the owner now. That flag is the only forcing function on the async
   use-the-app check, which is the one item that catches defects tests structurally cannot.
+  **If the entry records a detached dev server, check it is still alive and started after
+  HEAD** — closeout leaves one running deliberately, owned by nobody, and a stale one fails
+  the queued test for a reason that has nothing to do with the work.
 - **Confirm artifact identity before drawing any conclusion from one.** Several graphs
   exist in `builder/scratch/` and **they are not interchangeable.** They cannot be
   committed, so a sha256 against the manifest sidecar is the only way to know which one
