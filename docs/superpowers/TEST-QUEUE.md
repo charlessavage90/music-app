@@ -11,6 +11,34 @@ the point.**
 
 ---
 
+## N/A — 2026-07-26 (latest) — a deploy was designed and reviewed; no code was written
+
+**Nothing to exercise, and nothing is running.** Today produced **documents only** — a design
+for putting the app on AWS, a four-person review of it, and an implementation plan. **Not one
+line of application code changed.** A journey you generate now is identical to one from this
+morning. Nothing is listening on any port.
+
+**What happened, in plain terms.** We settled how the app will be hosted so you can share it
+with a handful of people, and we decided to start collecting a record of what the app does
+when someone presses the two bypass buttons — because that record is the only thing that can
+answer the questions your ear can't, and it's worth having from the first few users rather
+than the hundredth.
+
+Then four reviewers went over the whole system, which had not been done in a long time. They
+found seven problems **in the plan rather than in the app**, and the most useful one was
+embarrassing: the plan claimed a particular kind of broken graph file would load silently and
+cause wrong answers. It doesn't — it fails loudly. Worse, the check written to prove the fix
+worked **would have passed before anything was fixed.** All of that is corrected now, before
+any code was written, which is the cheapest possible moment.
+
+**Two things they found that you would eventually have hit as a user, and both are now
+scheduled:** every link you shared would have failed to open for the person you sent it to,
+and the app has no phone layout at all — on an iPhone the artist's name gets squeezed to
+nothing. Neither was in the original plan.
+
+**Nothing is proposed for you to test.** The next entry here will come when something is
+actually built and running.
+
 ## N/A — 2026-07-26 (later) — two more measurements ran; the app is untouched
 
 **Nothing to exercise, and nothing is running.** Two measurements ran this afternoon and
