@@ -205,7 +205,7 @@ that is how the drift began.
 
 | Document | Status |
 |---|---|
-| `superpowers/findings/2026-07-19-listenbrainz-probe.md` | **Superseded for scoring and normalisation** (it describes per-artist normalisation, deleted in `284366c`). Everything else — endpoint schema, rate limits, the 1,000-artist sitewide cap, the §6d–6f popularity-source eliminations — is still valid and load-bearing. |
+| `superpowers/findings/2026-07-19-listenbrainz-probe.md` | **Superseded for scoring and normalisation** (it describes per-artist normalisation, deleted in `284366c`). Everything else — endpoint schema, rate limits, the 1,000-artist sitewide cap, the §6d–6f popularity-source eliminations — is still valid and load-bearing. **Read §6d–6f at its actual scope:** it eliminates external **popularity** from the **routing cost terms** (§6e's reason is that `|pop(a) − pop(b)|` and the floor compare two nodes of one graph, so the quantity must be defined on that graph's population), and §6f marks even that *"an alpha decision, not a permanent one"* with a named replacement condition. It says nothing about **fame**, a different currency — an external fame source has already passed a gate (Wikipedia pageviews, pre-registration amendment A11). **External fame sources are gated, not banned;** this row's earlier wording had been read three times as a general barrier. |
 | `superpowers/findings/2026-07-21-architecture-review-and-path-baseline.md` | **Superseded for scoring and metrics.** Retained as narrative history of how the reviews unfolded. Its architect and QA findings in §1 (clip 500s, artifact length validation, sync boto3 on the event loop) are **not** superseded and remain actionable. |
 
 ### Narrative — never use as context
