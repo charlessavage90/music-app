@@ -215,7 +215,26 @@ carried as an unranked worry.
 | deferred | success condition |
 |---|---|
 | `TKA-10` — `deserialise` lacks the over-long and `TR-3` consistency checks | closes when the builder is next modified for any reason, **or** when an artifact is next rebuilt — whichever is first. Accepted-won't-fix is a legitimate answer; the risk is confined to offline tooling. |
-| `TKA-11` — the checksum gate ships **off** by default | `ARTISTPATH_GRAPH_SHA256` is empty unless set, and the design requires it *"in production"* with nothing enforcing that. Closes when **Track C confirms `/health` returns a non-empty `graph_sha256` against the deployed service.** That is now a checkable condition rather than a written intention, which is the only reason this is a deferral and not a defect. |
+| `TKA-11` — the checksum gate ships **off** by default | `ARTISTPATH_GRAPH_SHA256` is empty unless set, and the design requires it *"in production"* with nothing enforcing that. Closes when **the CDK stack is shown in source to set `ARTISTPATH_GRAPH_SHA256` from the manifest sidecar**, re-checked by `DEP-33`'s review re-run before cutover. |
+
+> **`TKA-11a` — the first success condition written for `TKA-11` was VACUOUS, and it was
+> caught by running it rather than by reading it.** It said *"closes when Track C confirms
+> `/health` returns a non-empty `graph_sha256`."* It cannot: `load_graph` computes the
+> digest **unconditionally** and only the *comparison* is gated on `expected_sha256`, so
+> `source_sha256` — and therefore `/health` — is populated identically whether verification
+> ran or not. Observed directly at closeout A5, when a server started **without** the env
+> var reported a full digest.
+>
+> **This is `FMS-P1` / `TR-2` for the third time in this project, and the first in a
+> success condition rather than a test.** The pattern generalises past tests: any check
+> that would pass in both the fixed and unfixed world is vacuous, and a deferral's closing
+> condition is exactly such a check. Worth carrying into how conditions are written, not
+> just tests.
+>
+> **Not fixed in code, deliberately.** Making `/health` report *whether verification was
+> enforced* is a real option and would make the condition checkable over HTTP, but it is a
+> new wire field decided during a closeout. Named here so Track B/C can take it
+> deliberately.
 
 **`TKA-11` is the A4 default-flip answer.** The knob's empty default is *correct* — local
 dev and the whole test suite must boot without it — so this is not unshipped work wearing a

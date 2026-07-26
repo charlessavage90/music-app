@@ -13,7 +13,18 @@ the point.**
 
 ## QUEUED — 2026-07-26 (latest) — six fixes under the bonnet, and one you can see
 
-**Ten minutes, no waiting. Nothing is running** — start the two processes the usual way.
+**Ten minutes, no waiting. Both servers are already running and nothing owns them**, so
+they will outlive this session and every terminal. Started **after** the last commit, so
+they serve today's code:
+
+| what | address | PID |
+|---|---|---|
+| the app | **http://localhost:5173** | 211432 |
+| the service behind it | http://127.0.0.1:8000 | 231092 |
+
+Open the first one in a browser and it works. **If you want them gone**, stop those two
+PIDs — nothing else will.
+
 The app was rebuilt today for the first time in a while, so this is a regression check
 first and a new-feature check second.
 
