@@ -189,7 +189,14 @@ class ClipResolver:
         whose response already carries a signed URL — so the common paths are
         one round trip each.
         """
-        identity = await self._cache.get(mbid)
+        # A cache failure must never reach the caller. The endpoint's contract
+        # is a clip or silence, never a 500 (see this module's docstring), and
+        # in production the cache is DynamoDB, which can throttle (DEP-12).
+        try:
+            identity = await self._cache.get(mbid)
+        except Exception:
+            identity = None
+
         if identity is not None:
             url = await self._preview_url(identity)
             if url:
@@ -201,7 +208,13 @@ class ClipResolver:
         if found is None:
             return None
         identity, url = found
-        await self._cache.put(mbid, identity)
+        # A write failure happens AFTER a successful lookup, so the clip is
+        # already in hand. Losing it to a cache error would discard work we
+        # have done and silence a card that plays perfectly well (DEP-26).
+        try:
+            await self._cache.put(mbid, identity)
+        except Exception:
+            pass
         return Clip(url, identity.title, identity.cover_url)
 
     async def _preview_url(self, identity: TrackIdentity) -> str | None:
@@ -234,8 +247,11 @@ class ClipResolver:
                 identity = TrackIdentity(
                     source="deezer",
                     track_id=str(track_id),
-                    title=row.get("title", ""),
-                    cover_url=artist.get("picture_medium", ""),
+                    # `or ""` not a .get default: these keys can be present
+                    # with a JSON null, and TrackOut's fields are typed str,
+                    # so None here becomes a 500 at the endpoint.
+                    title=str(row.get("title") or ""),
+                    cover_url=str(artist.get("picture_medium") or ""),
                 )
                 return identity, preview
         return None
@@ -255,8 +271,8 @@ class ClipResolver:
                 identity = TrackIdentity(
                     source="itunes",
                     track_id=str(track_id),
-                    title=row.get("trackName", ""),
-                    cover_url=row.get("artworkUrl100", ""),
+                    title=str(row.get("trackName") or ""),
+                    cover_url=str(row.get("artworkUrl100") or ""),
                 )
                 return identity, preview
         return None

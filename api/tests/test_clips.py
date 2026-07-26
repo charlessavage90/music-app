@@ -342,6 +342,83 @@ async def test_dynamo_cache_treats_a_pre_c2_item_as_a_miss():
     assert await DynamoClipCache(CFG, FakeTable(stale)).get(MBID) is None
 
 
+class ExplodingCache:
+    """A cache whose every operation fails, like DynamoDB throttling."""
+
+    def __init__(self, fail_get=True, fail_put=True):
+        self.fail_get = fail_get
+        self.fail_put = fail_put
+
+    async def get(self, mbid):
+        if self.fail_get:
+            raise RuntimeError("dynamo unavailable")
+        return None
+
+    async def put(self, mbid, identity):
+        if self.fail_put:
+            raise RuntimeError("dynamo throttled")
+
+
+_DEEZER_OK = {
+    "data": [
+        {
+            "preview": "https://p.example/x.mp3",
+            "id": 5,
+            "title": "Song",
+            "artist": {"name": "Some Artist", "picture_medium": "cover"},
+        }
+    ]
+}
+
+
+async def test_a_failing_cache_read_is_treated_as_a_miss():
+    cfg = ApiConfig()
+
+    async def fetch_json(url, params):
+        return _DEEZER_OK
+
+    resolver = ClipResolver(cfg, ExplodingCache(fail_get=True, fail_put=False), fetch_json)
+    clip = await resolver.resolve("m1", "Some Artist")
+    assert clip is not None
+    assert clip.preview_url == "https://p.example/x.mp3"
+
+
+async def test_a_failing_cache_write_still_returns_the_clip():
+    """The catalogue lookup already succeeded; losing the clip to a cache
+    write failure would discard something we are holding."""
+    cfg = ApiConfig()
+
+    async def fetch_json(url, params):
+        return _DEEZER_OK
+
+    resolver = ClipResolver(cfg, ExplodingCache(fail_get=False, fail_put=True), fetch_json)
+    clip = await resolver.resolve("m1", "Some Artist")
+    assert clip is not None
+    assert clip.title == "Song"
+
+
+async def test_a_null_title_from_the_catalogue_does_not_crash():
+    cfg = ApiConfig()
+
+    async def fetch_json(url, params):
+        return {
+            "data": [
+                {
+                    "preview": "https://p.example/x.mp3",
+                    "id": 5,
+                    "title": None,
+                    "artist": {"name": "Some Artist", "picture_medium": None},
+                }
+            ]
+        }
+
+    resolver = ClipResolver(cfg, InMemoryClipCache(), fetch_json)
+    clip = await resolver.resolve("m1", "Some Artist")
+    assert clip is not None
+    assert clip.title == ""
+    assert clip.cover_url == ""
+
+
 async def test_dynamo_cache_round_trips_through_the_resolver():
     """Drives DynamoClipCache through ClipResolver rather than calling it directly.
 
