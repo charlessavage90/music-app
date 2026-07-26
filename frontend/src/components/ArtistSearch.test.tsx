@@ -41,6 +41,27 @@ test('reports null once the text no longer matches the chosen artist', async () 
   expect(onSelect).toHaveBeenCalledWith(null);
 });
 
+test('says so when the catalogue has no match', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
+  render(<ArtistSearch label="From" onSelect={vi.fn()} />);
+
+  await user.type(screen.getByLabelText('From'), 'zzzz');
+
+  expect(await screen.findByText(/no artists found/i)).toBeInTheDocument();
+});
+
+test('distinguishes a failed search from an empty one', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'searchArtists').mockRejectedValue(new Error('network'));
+  render(<ArtistSearch label="From" onSelect={vi.fn()} />);
+
+  await user.type(screen.getByLabelText('From'), 'miles');
+
+  expect(await screen.findByText(/search is unavailable/i)).toBeInTheDocument();
+  expect(screen.queryByText(/no artists found/i)).not.toBeInTheDocument();
+});
+
 test('does not query for empty input', async () => {
   const spy = vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
   render(<ArtistSearch label="From" onSelect={vi.fn()} />);

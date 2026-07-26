@@ -14,6 +14,9 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
   const [query, setQuery] = useState(initial?.name ?? '');
   const [results, setResults] = useState<Artist[]>([]);
   const [open, setOpen] = useState(false);
+  // A search that found nothing and a search that failed used to render
+  // identically as nothing. After the deploy the second is a real event.
+  const [status, setStatus] = useState<'idle' | 'empty' | 'failed'>('idle');
   const inputId = useRef(`search-${Math.random().toString(36).slice(2)}`).current;
   // A prefilled name is already a choice, so it must not fire a search and
   // drop a dropdown over the page the moment you arrive.
@@ -24,6 +27,7 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
     if (!q || q === selectedName.current) {
       setResults([]);
       setOpen(false);
+      setStatus('idle');
       return;
     }
     const controller = new AbortController();
@@ -32,9 +36,15 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
         .then((r) => {
           setResults(r);
           setOpen(true);
+          setStatus(r.length === 0 ? 'empty' : 'idle');
         })
-        .catch(() => {
-          /* aborted or transient — leave prior results */
+        .catch((err) => {
+          // An abort is this component superseding its own request, not a
+          // failure the user should be told about.
+          if (controller.signal.aborted || (err as Error)?.name === 'AbortError') return;
+          setResults([]);
+          setOpen(false);
+          setStatus('failed');
         });
     }, 250);
     return () => {
@@ -91,6 +101,11 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
             </li>
           ))}
         </ul>
+      )}
+      {status !== 'idle' && (
+        <p className="mt-1 text-sm text-[var(--color-muted)]">
+          {status === 'empty' ? 'No artists found.' : 'Search is unavailable — try again.'}
+        </p>
       )}
     </div>
   );
