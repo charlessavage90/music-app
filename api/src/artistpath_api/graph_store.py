@@ -85,7 +85,17 @@ class GraphStore:
 
     @classmethod
     def load(cls, path: str | Path) -> "GraphStore":
-        payload = Path(path).read_bytes()
+        return cls.from_bytes(Path(path).read_bytes())
+
+    @classmethod
+    def from_bytes(cls, payload: bytes) -> "GraphStore":
+        """Parse an APG1 payload.
+
+        Every bounds check here already exists in the builder's writer
+        (builder/src/artistpath_builder/artifact.py) and was missing from this
+        reader. The two parsers had drifted, undetected, in the half that is
+        about to start fetching over a network — see the team review's TR-4.
+        """
         if len(payload) < _HEADER.size:
             raise ValueError("artifact truncated: shorter than header")
         magic, version, n, e, meta_len = _HEADER.unpack_from(payload)
@@ -94,12 +104,28 @@ class GraphStore:
         if version != _FORMAT_VERSION:
             raise ValueError(f"unsupported artifact version {version}")
 
+        # Sections are fixed-width and the metadata blob is last, so the total
+        # length is fully determined by the header. A short read is truncation;
+        # a long one means the file is not what the header describes.
+        expected = _HEADER.size + (n + 1) * 4 + e * 4 + e * 4 + e * 1 + meta_len
+        if len(payload) < expected:
+            raise ValueError(
+                f"artifact truncated: header describes {expected} bytes, got {len(payload)}"
+            )
+        if len(payload) > expected:
+            raise ValueError(
+                f"artifact length mismatch: header describes {expected} bytes, "
+                f"got {len(payload)}"
+            )
+
         cursor = _HEADER.size
 
         def take(count: int, dtype: str, size: int) -> np.ndarray:
             nonlocal cursor
             end_ = cursor + count * size
-            arr = np.frombuffer(payload[cursor:end_], dtype=dtype)
+            # count= is load-bearing: without it a short buffer yields a SHORTER
+            # array rather than an error.
+            arr = np.frombuffer(payload[cursor:end_], dtype=dtype, count=count)
             cursor = end_
             return arr
 
@@ -108,6 +134,16 @@ class GraphStore:
         scores = take(e, "<f4", 4)
         take(e, "<u1", 1)  # edge_types — unused in alpha (all behavioural)
         meta = json.loads(payload[cursor : cursor + meta_len])
+
+        # The header's N and the metadata's length are two independent
+        # statements of the same fact. When they disagree the artifact loads
+        # clean and leaves pop_raw and degree_hub_penalty at different lengths,
+        # both indexed by node id in the cost function (TR-3).
+        if len(meta["mbids"]) != n:
+            raise ValueError(
+                f"artifact inconsistent: header says {n} nodes, "
+                f"metadata has {len(meta['mbids'])}"
+            )
 
         return cls(
             mbids=meta["mbids"],
