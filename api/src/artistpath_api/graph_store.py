@@ -34,6 +34,11 @@ class GraphStore:
     id_by_mbid: dict[str, int] = field(default_factory=dict)
     # Derived from DEGREE, not from popularity and not from fame (log §2.6).
     degree_hub_penalty: np.ndarray | None = None  # float32 0-1, computed if not given
+    # sha256 of the bytes this store was parsed from, when known. Empty for a
+    # store built in a test. Reported by /health so "which graph is live" is
+    # answerable over HTTP — eighteen artifacts sit in builder/scratch/ and are
+    # not interchangeable.
+    source_sha256: str = ""
 
     def __post_init__(self) -> None:
         if not self.id_by_mbid:
@@ -85,7 +90,23 @@ class GraphStore:
 
     @classmethod
     def load(cls, path: str | Path) -> "GraphStore":
-        payload = Path(path).read_bytes()
+        return cls.from_bytes(Path(path).read_bytes())
+
+    @classmethod
+    def from_bytes(cls, payload: bytes) -> "GraphStore":
+        """Parse an APG1 payload.
+
+        The magic, version and truncation checks exist in the builder's parser
+        (builder/…/artifact.py `deserialise`) and were missing here: the two
+        APG1 parsers had drifted, undetected, in the half that is about to
+        start fetching over a network — the team review's TR-4.
+
+        Two of the checks below are in NEITHER parser and are new to this one:
+        the over-long case, and the header-N vs metadata-length disagreement
+        (TR-3). `deserialise` still lacks both, so a mismatched artifact loads
+        clean on the builder side today. That is recorded rather than fixed
+        here — this reader is what serves users.
+        """
         if len(payload) < _HEADER.size:
             raise ValueError("artifact truncated: shorter than header")
         magic, version, n, e, meta_len = _HEADER.unpack_from(payload)
@@ -94,12 +115,32 @@ class GraphStore:
         if version != _FORMAT_VERSION:
             raise ValueError(f"unsupported artifact version {version}")
 
+        # Sections are fixed-width and the metadata blob is last, so the total
+        # length is fully determined by the header. A short read is truncation;
+        # a long one means the file is not what the header describes.
+        expected = _HEADER.size + (n + 1) * 4 + e * 4 + e * 4 + e * 1 + meta_len
+        if len(payload) < expected:
+            raise ValueError(
+                f"artifact truncated: header describes {expected} bytes, got {len(payload)}"
+            )
+        if len(payload) > expected:
+            raise ValueError(
+                f"artifact length mismatch: header describes {expected} bytes, "
+                f"got {len(payload)}"
+            )
+
         cursor = _HEADER.size
 
         def take(count: int, dtype: str, size: int) -> np.ndarray:
             nonlocal cursor
             end_ = cursor + count * size
-            arr = np.frombuffer(payload[cursor:end_], dtype=dtype)
+            # count= is defence in depth, NOT the guard that fires: the total
+            # length check above already proves every slice is exactly right,
+            # so no payload reaching here can be short. Kept because without it
+            # a short buffer yields a SHORTER array rather than an error, and
+            # that is the failure this would degrade to if the check above were
+            # ever relaxed. Verified unreachable by mutation (closeout B3).
+            arr = np.frombuffer(payload[cursor:end_], dtype=dtype, count=count)
             cursor = end_
             return arr
 
@@ -108,6 +149,16 @@ class GraphStore:
         scores = take(e, "<f4", 4)
         take(e, "<u1", 1)  # edge_types — unused in alpha (all behavioural)
         meta = json.loads(payload[cursor : cursor + meta_len])
+
+        # The header's N and the metadata's length are two independent
+        # statements of the same fact. When they disagree the artifact loads
+        # clean and leaves pop_raw and degree_hub_penalty at different lengths,
+        # both indexed by node id in the cost function (TR-3).
+        if len(meta["mbids"]) != n:
+            raise ValueError(
+                f"artifact inconsistent: header says {n} nodes, "
+                f"metadata has {len(meta['mbids'])}"
+            )
 
         return cls(
             mbids=meta["mbids"],

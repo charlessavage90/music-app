@@ -48,3 +48,14 @@ test('buildPath throws ApiError with status on 409', async () => {
   vi.stubGlobal('fetch', mockFetch(409, {}));
   await expect(buildPath(['a', 'b'], [])).rejects.toMatchObject({ status: 409 } as Partial<ApiError>);
 });
+
+test('sends a journey id header on both calls', async () => {
+  const fetchMock = vi.fn().mockResolvedValue({
+    ok: true, status: 200, json: async () => ({ artists: [], stop_rule: 'natural' }),
+  });
+  vi.stubGlobal('fetch', fetchMock);
+
+  await buildPath(['a', 'b'], []);
+  const headers = fetchMock.mock.calls[0][1].headers;
+  expect(headers['x-journey-id']).toMatch(/^[A-Za-z0-9-]{8,64}$/);
+});

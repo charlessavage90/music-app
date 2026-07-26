@@ -25,3 +25,4 @@ api/dist/
 .superpowers/
 api/eval/baseline-results.txt
 api/scratch_server.log
+.playwright-results/

@@ -388,6 +388,15 @@ policies (highest `hub_penalty`, and most-popular-interior):
 *(mean / lowest single interior percentile.)* **Flat everywhere.** Twenty bypasses, either
 graph, either policy, never below the 95th percentile.
 
+> **⚠ PROVENANCE, added 2026-07-26 — this table is about `capfix` and `rankfix`, and the
+> app runs neither.** The adopted artifact has **`rankfix`'s topology with `capfix`'s
+> scores**, and routing depends on the scores, so neither row is a measurement of the
+> running app. The claim as stated — "on either graph tested" — is exactly true and is the
+> form to quote; **what is not available is "the app never surfaces an artist below the
+> 95th percentile."** Recorded here because `DRV-1`'s provenance caveat was narrowed the
+> same day to §2.11 and §2.12, and this table is the one part of §2.9 that neither §2.10
+> supersedes nor §2.12 retracts. Re-measuring is cheap and has not been done.
+
 #### The cause — and it is the adopted cap strategy
 
 | artifact | popularity assortativity | neighbours of top-500 below p90 | below p50 |
@@ -562,6 +571,15 @@ instrument if anyone leans hard on the 15.6×.**
 
 **Not measured by any of this:** whether stratification changes what the owner prefers.
 `capfix` won two blind listens carrying this structure.
+
+> **⚠ POINTER added 2026-07-26 — the sentence above is exactly true and is often quoted
+> for more than it says.** "Carrying this structure" is not "endorsing this structure."
+> `findings/2026-07-26-low-degree-synthesis.md` **`SYN-6`** audits both listens against
+> their own arm tables: the first (Phase 2 log §12) varied the reciprocity rule, the degree
+> bound and the top-k ranking basis **together**, and the second (§16) ran `mutual_knn` on
+> **both** arms. **So neither listen separated reciprocity from the degree bound**, and per
+> this section's own coupling paragraph no artifact that could separate them has ever been
+> built. Nothing in §2.10 is withdrawn, renumbered, or re-measured by that pointer.
 
 **Scripts:** `builder/analysis/2026-07-23-popularity-stratification/validation/`.
 

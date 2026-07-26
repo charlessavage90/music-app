@@ -87,3 +87,59 @@ def test_degree_hub_penalty_is_higher_for_higher_degree(tmp_path):
     g = GraphStore.load(p)
     assert g.degree_hub_penalty[0] >= g.degree_hub_penalty[1]
     assert 0.0 <= g.degree_hub_penalty.min() and g.degree_hub_penalty.max() <= 1.0
+
+
+_HEADER = struct.Struct("<4sIIIQ")
+
+
+def _build_apg1(n_header: int, mbids: list[str], offsets: list[int],
+                neighbours: list[int], scores: list[float]) -> bytes:
+    """Assemble an APG1 payload, allowing header/metadata disagreement on purpose."""
+    meta = {
+        "mbids": mbids,
+        "names": [m.upper() for m in mbids],
+        "disambiguations": ["" for _ in mbids],
+        "popularity": [0.5 for _ in mbids],
+    }
+    blob = json.dumps(meta).encode()
+    e = len(neighbours)
+    body = (
+        struct.pack(f"<{len(offsets)}i", *offsets)
+        + struct.pack(f"<{e}i", *neighbours)
+        + struct.pack(f"<{e}f", *scores)
+        + bytes(e)
+    )
+    return _HEADER.pack(b"APG1", 1, n_header, e, len(blob)) + body + blob
+
+
+def _good() -> bytes:
+    return _build_apg1(2, ["a", "b"], [0, 1, 2], [1, 0], [0.9, 0.9])
+
+
+def test_good_artifact_still_loads():
+    store = GraphStore.from_bytes(_good())
+    assert store.artist_count == 2
+
+
+def test_truncated_artifact_raises_a_truncation_error(tmp_path):
+    payload = _good()
+    p = tmp_path / "t.bin"
+    p.write_bytes(payload[: len(payload) - 8])
+    with pytest.raises(ValueError, match="truncated"):
+        GraphStore.load(p)
+
+
+def test_over_long_artifact_raises(tmp_path):
+    p = tmp_path / "t.bin"
+    p.write_bytes(_good() + b"garbage!")
+    with pytest.raises(ValueError, match="length"):
+        GraphStore.load(p)
+
+
+def test_header_and_metadata_length_disagreement_raises():
+    # Header claims 4 nodes; metadata describes 2. This is the case that
+    # currently loads SILENTLY and leaves pop_raw and degree_hub_penalty at
+    # different lengths, both indexed by node id (TR-3).
+    payload = _build_apg1(4, ["a", "b"], [0, 1, 1, 1, 1], [0], [0.9])
+    with pytest.raises(ValueError, match="inconsistent"):
+        GraphStore.from_bytes(payload)

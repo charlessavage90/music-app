@@ -114,7 +114,17 @@ size of the class. It is sufficient to justify *investigating* a rule change.
 **Does not:** it is **not evidence that the graph would be better under a looser
 rule.** `mutual_knn` was adopted deliberately and won a blind listening test against
 the alternative (`2026-07-22-phase2-sweep-results.md`); discarding weak one-way links
-is its purpose, and this finding measures exactly that purpose operating. **No
+is its purpose, and this finding measures exactly that purpose operating.
+
+> **⚠ POINTER added 2026-07-26 — the sentence above is sound, but "won a blind listening
+> test" is easily read as the *rule* having been endorsed by ear, and it was not.**
+> `2026-07-26-low-degree-synthesis.md` **`SYN-6`** audits both listens: the 2026-07-22
+> comparison in Phase 2 log §12 varied reciprocity **and** the degree bound **and** the
+> top-k ranking basis together (its own correction notice says so), and the §16 comparison
+> ran `mutual_knn` on **both** arms. **What the ear endorsed is the degree bound.** This
+> does not weaken the paragraph's conclusion or `MKS-5b` — no alternative rule has been
+> listened to either — but a redesign argued against "the rule won a listen" is leaning on
+> a claim the record does not carry. Nothing here is renumbered or withdrawn. **No
 adoption, no rebuild, and no rule change is proposed here.** Any such change is
 path-quality work, is behind the owner's pause, and would need its own
 pre-registration — and per `MKS-5b` it must first answer §2.10's coupling.

@@ -156,6 +156,80 @@ they are indistinguishable without measuring *what the source offered* separatel
 re-crawling at a different threshold versus nothing. **A prediction can be directionally
 right and still point at the wrong bill.**
 
+### `SYN-6` — the ear has endorsed bounded degree; it has never been asked about the both-ways rule
+
+*(Plain: the owner's listening tests told us it was bad to let a handful of artists connect
+to thousands of others. He has never been asked what he thinks of the separate rule that two
+artists must each name the other.)*
+
+**A derivation from committed documents, not a claim about code.** Nothing was run, routed,
+rebuilt or read from source for this. It is an audit of what the two blind listens actually
+varied, against their own recorded arm tables, and each leg is verified below.
+
+Two blind listening tests decided the graph. **Neither varied the reciprocity requirement
+against a bounded-degree alternative:**
+
+| listen | arms | reciprocity | degree bound | what it can separate |
+|---|---|---|---|---|
+| Phase 2 log **§12** | `control` (`pre_symmetrise`) v `capfix` (`mutual_knn`) | **differs** | **differs** | a package, not a knob |
+| Phase 2 log **§16** | `capfix` v `d025` | **same — both `mutual_knn`** | same | rescale and damping only |
+
+- **§12 is a package comparison, and its own correction notice already says so.** That notice
+  records that changing `cap_strategy` changed **two** things at once — reciprocity, and
+  whether top-k selection can see the p99 ceiling — and states in terms that the comparison
+  "does not establish that the reciprocity rule caused the improvement." The losing arm also
+  bounds nothing after symmetrisation, so the winning arm carried reciprocity **and** a degree
+  bound against an arm carrying neither. Three columns, not one.
+- **§16 held reciprocity constant.** `d025` is `mutual_knn` as well
+  (`2026-07-22-phase2-sweep-results.md` §1), so the both-ways test was required on **both**
+  arms and the comparison ran on rescale, damping and density.
+- **No third listen bears, and this was checked rather than assumed.** The C3
+  `known`-mechanism blind listen (`../specs/2026-07-22-c3-known-mechanism-blind-listen.md`)
+  decides between two *shapes of the `known` button* with a production anchor, and its §8
+  pins **every** arm to a single artifact. Reciprocity is therefore constant across everything
+  it served. It is a cost-function comparison on a fixed graph and says nothing about the cap
+  rule.
+
+**So the listening evidence supports BOUNDED DEGREE and has never tested RECIPROCITY.** The
+distinction is not academic: Phase 1 log **§2.10** records that in this codebase the two are
+not separable knobs — dropping the both-ways test restores unbounded degree — and that
+separating them needs a `cap_strategy` **that does not exist**. No artifact has ever been built
+that a listener could have used to tell them apart, so the gap is structural rather than an
+oversight in either protocol.
+
+**What this does not do.** It does not weaken either verdict, does not propose a rule change,
+and does not reopen `MKS-5b`, which stands unchanged. Its practical effect is on **`MKS-5b`'s
+currency, not its force**: an argument that the *degree bound* must be preserved keeps its
+listening support; an argument that the *both-ways rule* won a listen does not have any. Note
+that this document's own §4 already states it in the correct currency — "bounded degree is what
+`capfix` won its blind listening test for delivering" — so the imprecision this item names lives
+elsewhere, not there.
+
+### `SYN-7` — both listening verdicts predate most of the calibration record
+
+*(Plain: the owner gave both of his verdicts on the graph before he had said most of what he
+has since said about what makes a path good.)*
+
+**A derivation from committed documents, not a claim about code.** It is a comparison of
+datestamps that the documents themselves carry; both were read before writing this.
+
+Both verdicts are dated **2026-07-22** (Phase 2 log §12 and §16). `../WHAT-GOOD-LOOKS-LIKE.md`
+dates **values 5, 6 and 7 to 2026-07-23**, and **values 8 and 9 to 2026-07-24** — five of its
+nine values, including **novelty is delivered *through* coherence, not traded against it**
+(value 8) and **reducing famous artists is the live problem; eliminating them would be an
+over-correction** (value 9).
+
+So the project's strongest instrument was read twice **before most of its calibration file
+existed.** That is not a defect in either verdict, and it is not a reason to re-run one — the
+file grew precisely *because* the record was being used, and value 8 was articulated by the
+owner correcting a restatement of value 1. What it bears on is narrower: **a 2026-07-22 verdict
+cannot be cited as the owner endorsing a criterion he articulated in 2026-07-23 or 2026-07-24.**
+The verdicts are evidence about the arms that were served; they are not evidence about values
+that did not yet exist.
+
+**What this does not do.** It does not invalidate, re-open or re-date either verdict, and it is
+not an argument for a third listen — Phase 2 log §15 governs that and is untouched here.
+
 ## 2. What this document does not establish
 
 - **Nothing about whether any rule change would be better.** No alternative rule was run,
@@ -197,6 +271,19 @@ blind spot in the same direction, so neither can audit the other.
 over the archive and the artifact, and neither depends on any fame claim. **What I would
 abandon on one contrary measurement:** `SYN-2`'s second half, and `SYN-3`'s ranking if the
 boundary row is moved far enough (the report's sensitivity table shows how far).
+
+**And one methodological error, recorded beside the substantive ones.** A consulting session
+proposed settling the deliverability question **by ordinary use of the app** — asking the owner
+to build journeys through low-connection artists and report whether they ever appeared. No
+amount of use could have settled it: the two candidate mechanisms are indistinguishable from
+the user's seat, because an artist that is *arithmetically* short of places to sit between two
+others and an artist the router *prices out* both produce the identical experience of never
+being offered. That is the confound `2026-07-26-committed-walk-deliverability.md` §5 leaves
+open, and it is why the question moved to a committed-walk measurement rather than an app
+session (`../TEST-QUEUE.md`, 2026-07-26). **The general form is the part worth keeping: use
+cannot discriminate between mechanisms that look the same from outside the app** — which is
+worth holding against this project's otherwise sound instinct to reach for use when a
+measurement looks expensive.
 
 ---
 

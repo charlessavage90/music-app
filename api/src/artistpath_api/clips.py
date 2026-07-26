@@ -14,6 +14,7 @@ covers it, and it is queued in docs/superpowers/TEST-QUEUE.md.
 
 from __future__ import annotations
 
+import asyncio
 import time
 import unicodedata
 from collections.abc import Awaitable, Callable
@@ -49,6 +50,7 @@ class Clip:
     preview_url: str
     title: str
     cover_url: str
+    source: str = ""  # "deezer" | "itunes" — for telemetry, not for the wire
 
 
 @dataclass(frozen=True, slots=True)
@@ -68,8 +70,8 @@ class TrackIdentity:
 
 
 class ClipCache(Protocol):
-    def get(self, mbid: str) -> TrackIdentity | None: ...
-    def put(self, mbid: str, identity: TrackIdentity) -> None: ...
+    async def get(self, mbid: str) -> TrackIdentity | None: ...
+    async def put(self, mbid: str, identity: TrackIdentity) -> None: ...
 
 
 class InMemoryClipCache:
@@ -78,10 +80,10 @@ class InMemoryClipCache:
     def __init__(self) -> None:
         self._store: dict[str, TrackIdentity] = {}
 
-    def get(self, mbid: str) -> TrackIdentity | None:
+    async def get(self, mbid: str) -> TrackIdentity | None:
         return self._store.get(mbid)
 
-    def put(self, mbid: str, identity: TrackIdentity) -> None:
+    async def put(self, mbid: str, identity: TrackIdentity) -> None:
         self._store[mbid] = identity
 
 
@@ -95,6 +97,12 @@ class DynamoClipCache:
 
     The boto3 resource is created lazily on first use, so constructing the
     cache (and therefore booting the app) never requires AWS to be reachable.
+
+    Both methods are async and hand the blocking boto3 call to a worker thread.
+    The clip endpoint is the only async route in the app, so a synchronous
+    round trip here blocks the event loop for every concurrent user (DEP-11).
+    asyncio.to_thread is used deliberately in preference to adding aioboto3 —
+    a thread fixes this without a new dependency.
     """
 
     def __init__(self, cfg: ApiConfig, table=None) -> None:
@@ -108,7 +116,7 @@ class DynamoClipCache:
             self._table = boto3.resource("dynamodb").Table(self._cfg.clip_table_name)
         return self._table
 
-    def get(self, mbid: str) -> TrackIdentity | None:
+    def _get_sync(self, mbid: str) -> TrackIdentity | None:
         item = self._get_table().get_item(Key={"mbid": mbid}).get("Item")
         # Items written before C2 carry a long-expired URL and no track id.
         # They cannot be re-resolved, so they are a miss and get overwritten.
@@ -121,7 +129,7 @@ class DynamoClipCache:
             cover_url=item["cover_url"],
         )
 
-    def put(self, mbid: str, identity: TrackIdentity) -> None:
+    def _put_sync(self, mbid: str, identity: TrackIdentity) -> None:
         ttl = int(time.time()) + self._cfg.clip_ttl_days * 86400
         self._get_table().put_item(
             Item={
@@ -133,6 +141,12 @@ class DynamoClipCache:
                 "ttl": ttl,
             }
         )
+
+    async def get(self, mbid: str) -> TrackIdentity | None:
+        return await asyncio.to_thread(self._get_sync, mbid)
+
+    async def put(self, mbid: str, identity: TrackIdentity) -> None:
+        await asyncio.to_thread(self._put_sync, mbid, identity)
 
 
 class ClipResolver:
@@ -176,11 +190,18 @@ class ClipResolver:
         whose response already carries a signed URL — so the common paths are
         one round trip each.
         """
-        identity = self._cache.get(mbid)
+        # A cache failure must never reach the caller. The endpoint's contract
+        # is a clip or silence, never a 500 (see this module's docstring), and
+        # in production the cache is DynamoDB, which can throttle (DEP-12).
+        try:
+            identity = await self._cache.get(mbid)
+        except Exception:
+            identity = None
+
         if identity is not None:
             url = await self._preview_url(identity)
             if url:
-                return Clip(url, identity.title, identity.cover_url)
+                return Clip(url, identity.title, identity.cover_url, identity.source)
             # The track has left the catalogue. Identity is stable, not
             # permanent, so fall through and find the artist another one.
 
@@ -188,8 +209,14 @@ class ClipResolver:
         if found is None:
             return None
         identity, url = found
-        self._cache.put(mbid, identity)
-        return Clip(url, identity.title, identity.cover_url)
+        # A write failure happens AFTER a successful lookup, so the clip is
+        # already in hand. Losing it to a cache error would discard work we
+        # have done and silence a card that plays perfectly well (DEP-26).
+        try:
+            await self._cache.put(mbid, identity)
+        except Exception:
+            pass
+        return Clip(url, identity.title, identity.cover_url, identity.source)
 
     async def _preview_url(self, identity: TrackIdentity) -> str | None:
         """Re-sign a known track. Returns None if it is no longer available."""
@@ -221,8 +248,11 @@ class ClipResolver:
                 identity = TrackIdentity(
                     source="deezer",
                     track_id=str(track_id),
-                    title=row.get("title", ""),
-                    cover_url=artist.get("picture_medium", ""),
+                    # `or ""` not a .get default: these keys can be present
+                    # with a JSON null, and TrackOut's fields are typed str,
+                    # so None here becomes a 500 at the endpoint.
+                    title=str(row.get("title") or ""),
+                    cover_url=str(artist.get("picture_medium") or ""),
                 )
                 return identity, preview
         return None
@@ -242,8 +272,8 @@ class ClipResolver:
                 identity = TrackIdentity(
                     source="itunes",
                     track_id=str(track_id),
-                    title=row.get("trackName", ""),
-                    cover_url=row.get("artworkUrl100", ""),
+                    title=str(row.get("trackName") or ""),
+                    cover_url=str(row.get("artworkUrl100") or ""),
                 )
                 return identity, preview
         return None

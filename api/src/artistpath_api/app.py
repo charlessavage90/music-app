@@ -4,30 +4,39 @@ app is testable without loading a real artifact or touching the network.
 
 from __future__ import annotations
 
+import time
+
 import httpx
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
+from artistpath_api.artifact_source import load_graph
 from artistpath_api.clips import (
     ClipResolver, DynamoClipCache, InMemoryClipCache,
 )
 from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.models import (
-    ArtistOut, ExclusionIn, PathRequest, PathResponse, TrackOut,
+    ArtistOut, ExclusionIn, HealthOut, PathRequest, PathResponse, TrackOut,
 )
 from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion, find_journey
 from artistpath_api.search import ArtistSearch
+from artistpath_api.telemetry import emit, safe_journey_id
 
 
 def _to_exclusions(store: GraphStore, raw: list[ExclusionIn]) -> list[Exclusion]:
-    out: list[Exclusion] = []
+    """Resolve wire exclusions to node ids, keeping the last reason per artist.
+
+    Deduplicated because avoidance_map takes a max() per node, so a repeated
+    dislike already changes nothing — it only costs another graph traversal.
+    """
+    by_node: dict[int, str] = {}
     for e in raw:
         node = store.id_by_mbid.get(e.id)
-        reason = e.reason if e.reason in (DISLIKE, KNOWN) else DISLIKE
-        if node is not None:
-            out.append(Exclusion(node, reason))
-    return out
+        if node is None:
+            continue
+        by_node[node] = e.reason if e.reason in (DISLIKE, KNOWN) else DISLIKE
+    return [Exclusion(node, reason) for node, reason in by_node.items()]
 
 
 def create_app(
@@ -42,7 +51,7 @@ def create_app(
         CORSMiddleware,
         allow_origins=list(cfg.cors_origins),
         allow_methods=["GET", "POST"],
-        allow_headers=["content-type"],
+        allow_headers=["content-type", "x-journey-id"],
     )
 
     def artist_out(node: int) -> ArtistOut:
@@ -60,33 +69,93 @@ def create_app(
         return [artist_out(i) for i in search.search(q)]
 
     @app.post("/api/path")
-    def build_path(req: PathRequest) -> PathResponse:
+    def build_path(req: PathRequest, request: Request) -> PathResponse:
         if len(req.sources) != 2:
             raise HTTPException(422, "alpha supports exactly two source artists")
         ids = [store.id_by_mbid.get(m) for m in req.sources]
         if any(i is None for i in ids):
             raise HTTPException(404, "unknown artist")
         source, target = ids
+        if source == target:
+            raise HTTPException(
+                422, "pick two different artists — a journey needs somewhere to go"
+            )
         excludes = _to_exclusions(store, req.exclude)
+        started = time.perf_counter()
         journey = find_journey(store, source, target, excludes, cfg)
+        duration_ms = (time.perf_counter() - started) * 1000.0
         if journey is None:
             raise HTTPException(409, "no path avoiding those artists")
         path, stop_rule = journey
+
+        emit(
+            {
+                "event": "path",
+                "journey_id": safe_journey_id(request.headers.get("x-journey-id")),
+                "source": {"mbid": store.mbids[source], "name": store.names[source]},
+                "target": {"mbid": store.mbids[target], "name": store.names[target]},
+                # The full accumulated list is what makes a walk reconstructible
+                # from a single event, without depending on neighbouring records.
+                "exclude": [{"id": e.id, "reason": e.reason} for e in req.exclude],
+                "bypass_depth": len(req.exclude),
+                "dislike_count": sum(1 for e in req.exclude if e.reason == DISLIKE),
+                "known_count": sum(1 for e in req.exclude if e.reason == KNOWN),
+                # Logged although reproducible from the inputs, so offline
+                # analysis can VERIFY that the deployed router reproduces what
+                # the user actually saw — config or artifact drift is a failure
+                # class this project has met before (DEP-14).
+                "path": [
+                    {"mbid": store.mbids[n], "name": store.names[n]} for n in path
+                ],
+                "stop_rule": stop_rule,
+                "duration_ms": round(duration_ms, 2),
+            }
+        )
+
         return PathResponse(
             artists=[artist_out(n) for n in path], stop_rule=stop_rule
         )
 
     @app.get("/api/artists/{mbid}/track")
-    async def get_track(mbid: str, response: Response):
+    async def get_track(mbid: str, request: Request, response: Response):
         node = store.id_by_mbid.get(mbid)
         if node is None:
             raise HTTPException(404, "unknown artist")
+        started = time.perf_counter()
         clip = await resolver.resolve(mbid, store.names[node])
+        duration_ms = (time.perf_counter() - started) * 1000.0
+
+        emit(
+            {
+                "event": "clip",
+                "journey_id": safe_journey_id(request.headers.get("x-journey-id")),
+                "mbid": mbid,
+                "name": store.names[node],
+                "resolved": clip is not None,
+                # Which catalogue answered. Three separate mechanisms produce a
+                # silent card and they are visually identical; this is what
+                # separates them (TR-15).
+                "source": clip.source if clip else None,
+                "duration_ms": round(duration_ms, 2),
+            }
+        )
+
         if clip is None:
             response.status_code = 204
             return None
         return TrackOut(
             preview_url=clip.preview_url, title=clip.title, cover_url=clip.cover_url
+        )
+
+    @app.get("/health")
+    def health() -> HealthOut:
+        # Deliberately NOT under /api — App Runner's health checker reaches the
+        # origin directly, not through the CloudFront /api/* behaviour.
+        return HealthOut(
+            status="ok",
+            graph_sha256=store.source_sha256,
+            artists=store.artist_count,
+            edges=len(store.neighbours),
         )
 
     return app
@@ -95,7 +164,7 @@ def create_app(
 def build_default_app() -> FastAPI:
     """Production entrypoint: load the real graph and wire live dependencies."""
     cfg = ApiConfig()
-    store = GraphStore.load(cfg.graph_path)
+    store = load_graph(cfg.graph_path, cfg.graph_sha256)
     search = ArtistSearch(store, cfg)
     client = httpx.AsyncClient(timeout=cfg.clip_http_timeout)
 

@@ -1,3 +1,5 @@
+import json
+
 from fastapi.testclient import TestClient
 
 from artistpath_api.app import create_app
@@ -171,3 +173,97 @@ def test_path_response_reports_two_artists_with_nothing_between():
     body = client.post("/api/path", json={"sources": [a, b], "exclude": []}).json()
     assert [x["name"] for x in body["artists"]] == ["A", "B"]
     assert body["stop_rule"] == "adjacent_only"
+
+
+def test_same_artist_for_both_endpoints_is_rejected():
+    client, store = _client()
+    mbid = store.mbids[0]
+    r = client.post("/api/path", json={"sources": [mbid, mbid], "exclude": []})
+    assert r.status_code == 422
+
+
+def test_an_over_long_exclude_list_is_rejected():
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    excludes = [{"id": store.mbids[1], "reason": "dislike"} for _ in range(201)]
+    r = client.post("/api/path", json={"sources": [a, b], "exclude": excludes})
+    assert r.status_code == 422
+
+
+def test_duplicate_exclusions_are_collapsed():
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    dupes = [{"id": store.mbids[1], "reason": "dislike"} for _ in range(50)]
+    r = client.post("/api/path", json={"sources": [a, b], "exclude": dupes})
+    assert r.status_code == 200
+
+
+def test_an_unrecognised_reason_is_still_coerced_to_dislike():
+    """Pins behaviour the deploy design relies on and nothing tested (TR-7).
+
+    Tightening ExclusionIn.reason to a Literal is the natural tidy-up and would
+    silently turn this 200 into a 422 for any client sending a stale reason.
+    """
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    r = client.post(
+        "/api/path",
+        json={"sources": [a, b], "exclude": [{"id": store.mbids[1], "reason": "BANANA"}]},
+    )
+    assert r.status_code == 200
+
+
+def test_health_reports_artifact_identity():
+    client, store = _client()
+    r = client.get("/health")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["status"] == "ok"
+    assert body["artists"] == store.artist_count
+    assert body["edges"] == len(store.neighbours)
+    assert body["graph_sha256"] == store.source_sha256
+
+
+def test_path_request_emits_a_telemetry_event(capsys):
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    client.post(
+        "/api/path",
+        json={"sources": [a, b], "exclude": [{"id": store.mbids[1], "reason": "known"}]},
+        headers={"x-journey-id": "journey-0001"},
+    )
+    lines = [ln for ln in capsys.readouterr().out.splitlines() if ln.startswith("{")]
+    events = [json.loads(ln) for ln in lines]
+    path_events = [e for e in events if e["event"] == "path"]
+    assert len(path_events) == 1
+    ev = path_events[0]
+    assert ev["journey_id"] == "journey-0001"
+    assert ev["source"]["mbid"] == a
+    assert ev["target"]["mbid"] == b
+    assert ev["bypass_depth"] == 1
+    assert ev["known_count"] == 1
+    assert ev["dislike_count"] == 0
+    assert ev["stop_rule"] in ("natural", "forced", "adjacent_only")
+    assert [p["mbid"] for p in ev["path"]][0] == a
+    assert isinstance(ev["duration_ms"], (int, float))
+
+
+def test_track_request_emits_a_clip_event(capsys):
+    client, store = _client()
+    client.get(
+        f"/api/artists/{store.mbids[0]}/track",
+        headers={"x-journey-id": "journey-0002"},
+    )
+    events = [
+        json.loads(ln)
+        for ln in capsys.readouterr().out.splitlines()
+        if ln.startswith("{")
+    ]
+    clip_events = [e for e in events if e["event"] == "clip"]
+    assert len(clip_events) == 1
+    ev = clip_events[0]
+    assert ev["journey_id"] == "journey-0002"
+    assert ev["mbid"] == store.mbids[0]
+    assert ev["resolved"] is False   # the test fetcher returns no clip
+    assert ev["source"] is None
+    assert isinstance(ev["duration_ms"], (int, float))
