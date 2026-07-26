@@ -214,6 +214,10 @@ is more than one.
   strings are not copied.
 - **No placeholders.** If a value is unknown, the prompt instructs the session to
   determine it. Never leave him a blank to fill.
+- **Nothing after the fence extends the prompt.** The closing fence ends it. If a
+  requirement occurs to you afterwards it goes *inside*, and you rewrite the block —
+  a trailing "and tell it to also check X" is content the receiving session will never
+  see, because he copies the block and not your sentence. Resume by addressing him.
 - **If the prompt must itself contain a fenced block, fence the outer one with `~~~`** so
   the inner backticks cannot close it early.
 
