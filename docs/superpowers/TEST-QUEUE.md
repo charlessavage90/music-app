@@ -11,6 +11,28 @@ the point.**
 
 ---
 
+## DONE — 2026-07-26 — six fixes under the bonnet, and one you can see
+
+**DONE 2026-07-26 — PASSED on every step, and it found a defect that is not Track A's.**
+Exercised by the owner. **No regression:** familiar journeys unchanged (the step this entry
+existed for), same-artist correctly refused, clips and all four controls — both bypass
+buttons, "New path", "Reset path" — behaving as expected.
+
+**Unlike the two preceding entries, this record carries per-step confirmation**, not "nothing
+surfaced": the owner reported against the numbered checks individually. That makes it the
+strongest pass in this file, and specifically it is direct evidence for check 1, which no
+test can supply.
+
+**Found in use, and it is pre-existing rather than new.** Typing over an already-chosen artist does not un-choose them: the box holds the typed text and
+the page holds the previously selected artist, and nothing reconciles the two. "Find path"
+stays enabled and routes to the **old** artist. The "New path" prefill did not introduce this —
+it removed what was masking it (before, the button began disabled, so you had to pick from the
+dropdown at least once). **It is not a race with the autocomplete**: waiting for the dropdown
+does not help, only clicking an entry in it does. Not attributable to Track A; `pathfinding.py`
+was never edited.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-26 (latest) — six fixes under the bonnet, and one you can see
 
 **Ten minutes, no waiting. Both servers are already running and nothing owns them**, so
