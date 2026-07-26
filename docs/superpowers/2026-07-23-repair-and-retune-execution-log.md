@@ -2419,6 +2419,54 @@ keeping whichever scores best is proxy-shopping through the back door. **Fix the
 before running anything** — beat the incumbent on the primary *and* fire no falsifier — and
 commit it first.
 
+**Four pieces of reasoning that did not otherwise survive into a document.** Recorded on the
+owner's prompt, after they dropped between the discussion and the first draft of this entry —
+the completeness-failure shape, caught at the same sitting.
+
+1. **The owner's listening data is two different datasets, and only one carries the objection
+   already on the record.** The Web API (top artists, followed, saved) is a single request,
+   tens-to-hundreds of artists, recency-weighted. The GDPR *extended streaming history* export
+   is complete play-by-play back to account creation and takes weeks to arrive. The roadmap's
+   *Dropped permanently* row for session-data ground truth cites **"multi-week acquisition"** —
+   that objection lands squarely on the export and **does not touch the API endpoints at all.**
+   Anyone revisiting this must say which of the two they mean.
+2. **Presence is strong evidence, absence is weak — and that is why a selection *frame* is the
+   safe use.** Listening data shows he knows an artist; its silence does not show he does not
+   (pre-streaming listening, radio, live, other platforms). A frame only ever draws from what
+   is present, so the unreliable half is never exercised. **Do not extend the parked frame item
+   into absence-based scoring** — that inherits exactly the failure the coverage falsifier hit,
+   and A11 only escaped it because Wikipedia-absence turned out to predict "never heard of",
+   which tracks notability rather than one person's platform habits.
+3. **Three other uses were considered and are not pursued**, so they are not fresh ground:
+   listening data as an *evaluation instrument* (score paths by interiors he has never played),
+   as a *product feature* (route around what the listener knows), and as *auto-seeding* for the
+   "know them already" button. The latter two are per-user state and per-user auth, which the
+   architecture does not have — path state lives in the URL and the build is deterministic.
+4. **The evaluation-instrument use is the item most likely to generate an argument for
+   un-pausing path work**, and that is a cost to price before starting it rather than discover
+   afterwards: measuring how many delivered artists he has never played produces a
+   path-quality finding whether or not anyone wanted one.
+
+**Provenance of the unverified claims underneath the above.** Several load-bearing statements
+in this survey are the session's general knowledge, **not checked against a source**: the
+surviving post-2024 Spotify API surface; that Spotify's `popularity` is recency-weighted and
+`followers` cumulative (this underpins the Kaggle-class elimination); the existence and
+turnaround of the GDPR export; and — **already committed** in `WHAT-GOOD-LOOKS-LIKE.md`'s
+calibration section — that **monthly listeners is not exposed by the Web API**, which is the
+stated reason the spot-check is necessarily manual and "cannot scale into a proxy by accident."
+**If that one is wrong, the committed note is wrong.** Each is cheap to verify and none has
+been.
+
+**Things the owner said, now in a file.**
+
+- **On this whole class of proposal:** *"ideas might be the wrong name — what I mostly have is
+  potential tools, options, data sources… worse than being useless, some of these could bring
+  negative impact."* This is the right default and it changed how the survey was run: for a
+  tool the downside is not wasted effort, it is a plausible-looking input contaminating the
+  record, which is the failure this project has actually suffered.
+- **He restated that he is aligned with the adopted fame proxy** — continued assent to A11,
+  recorded because nothing else records it.
+
 **Also noted, and it is the shape of the whole discussion:** one decision gates nearly
 everything above. Two items are live; every other item waits on the owner resuming path work.
 The session produced a queue behind a single call that is his, not a set of independent work.
