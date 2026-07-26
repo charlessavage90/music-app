@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { ApiError, buildPath } from '@/api/client';
-import type { Artist } from '@/api/types';
+import type { Artist, StopRule } from '@/api/types';
 import { decodeExclusions } from '@/lib/exclusions';
 
 export interface PathState {
   status: 'loading' | 'ready' | 'error';
   artists: Artist[];
+  stopRule: StopRule;
   error?: 'notfound' | 'nopath' | 'unknown';
 }
 
@@ -21,19 +22,21 @@ function classify(err: unknown): PathState['error'] {
 export function usePath(): PathState {
   const { from, to } = useParams();
   const [params] = useSearchParams();
-  const [state, setState] = useState<PathState>({ status: 'loading', artists: [] });
+  const [state, setState] = useState<PathState>({
+    status: 'loading', artists: [], stopRule: 'natural',
+  });
 
   const key = `${from}|${to}|${params.toString()}`;
 
   useEffect(() => {
     if (!from || !to) return;
     const controller = new AbortController();
-    setState((prev) => ({ status: 'loading', artists: prev.artists }));
+    setState((prev) => ({ status: 'loading', artists: prev.artists, stopRule: prev.stopRule }));
     buildPath([from, to], decodeExclusions(params), controller.signal)
-      .then((artists) => setState({ status: 'ready', artists }))
+      .then(({ artists, stopRule }) => setState({ status: 'ready', artists, stopRule }))
       .catch((err) => {
         if (controller.signal.aborted) return;
-        setState({ status: 'error', artists: [], error: classify(err) });
+        setState({ status: 'error', artists: [], stopRule: 'natural', error: classify(err) });
       });
     return () => controller.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -6,7 +6,12 @@ import { usePath } from './usePath';
 
 function Harness() {
   const state = usePath();
-  return <div data-testid="state">{state.status}:{state.error ?? ''}:{state.artists.map(a => a.name).join(',')}</div>;
+  return (
+    <>
+      <div data-testid="state">{state.status}:{state.error ?? ''}:{state.artists.map(a => a.name).join(',')}</div>
+      <div data-testid="stop-rule">{state.stopRule}</div>
+    </>
+  );
 }
 
 function renderAt(url: string) {
@@ -20,15 +25,16 @@ function renderAt(url: string) {
 afterEach(() => vi.restoreAllMocks());
 
 test('resolves and exposes artists', async () => {
-  vi.spyOn(client, 'buildPath').mockResolvedValue([
-    { mbid: 'a', name: 'Miles', disambiguation: '', popularity: 1 },
-  ]);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({
+    artists: [{ mbid: 'a', name: 'Miles', disambiguation: '', popularity: 1 }],
+    stopRule: 'natural',
+  });
   renderAt('/path/a/b');
   await waitFor(() => expect(screen.getByTestId('state')).toHaveTextContent('ready::Miles'));
 });
 
 test('passes decoded exclusions to buildPath', async () => {
-  const spy = vi.spyOn(client, 'buildPath').mockResolvedValue([]);
+  const spy = vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: [], stopRule: 'natural' });
   renderAt('/path/a/b?dislike=z&known=y');
   await waitFor(() => expect(spy).toHaveBeenCalledWith(
     ['a', 'b'],
@@ -47,4 +53,13 @@ test('maps 404 to notfound', async () => {
   vi.spyOn(client, 'buildPath').mockRejectedValue(new client.ApiError(404));
   renderAt('/path/a/b');
   await waitFor(() => expect(screen.getByTestId('state')).toHaveTextContent('error:notfound:'));
+});
+
+test('exposes the stop rule from the response', async () => {
+  vi.spyOn(client, 'buildPath').mockResolvedValue({
+    artists: [{ mbid: 'a', name: 'A', disambiguation: '', popularity: 0.5 }],
+    stopRule: 'adjacent_only',
+  });
+  renderAt('/path/a/b');
+  await waitFor(() => expect(screen.getByTestId('stop-rule')).toHaveTextContent('adjacent_only'));
 });

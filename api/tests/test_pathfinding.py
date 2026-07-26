@@ -1,5 +1,14 @@
 from artistpath_api.config import ApiConfig
-from artistpath_api.pathfinding import find_path
+from artistpath_api.pathfinding import (
+    DISLIKE,
+    KNOWN,
+    STOP_ADJACENT_ONLY,
+    STOP_FORCED,
+    STOP_NATURAL,
+    Exclusion,
+    find_journey,
+    find_path,
+)
 from tests.conftest import make_store
 
 CFG = ApiConfig()
@@ -98,3 +107,101 @@ def test_degree_hub_penalty_routes_around_a_hub():
     path = find_path(store, 0, 3, [], replace(CFG, w_degree_hub=5.0))
     assert 1 not in path
     assert path == [0, 2, 3]
+
+
+def test_forbidden_edge_routes_around_the_direct_link():
+    # 0-1 direct and strong; 0-2-1 available. Forbidding 0-1 must use 2.
+    store = make_store(
+        names=["A", "B", "C"], pop_raw=[0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.95), (0, 2, 0.9), (1, 2, 0.9)],
+    )
+    assert find_path(store, 0, 1, [], CFG) == [0, 1]
+    assert find_path(store, 0, 1, [], CFG, forbidden_edge=(0, 1)) == [0, 2, 1]
+
+
+def test_forbidden_edge_is_undirected():
+    store = make_store(
+        names=["A", "B", "C"], pop_raw=[0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.95), (0, 2, 0.9), (1, 2, 0.9)],
+    )
+    # Given the other way round, the same edge must still be blocked.
+    assert find_path(store, 0, 1, [], CFG, forbidden_edge=(1, 0)) == [0, 2, 1]
+
+
+def test_forbidding_the_only_link_yields_no_path():
+    # B hangs off A by a single edge, as some real artists do
+    # (findings/2026-07-25-mutual-knn-stranding.md, MKS-3).
+    store = make_store(
+        names=["A", "B", "C"], pop_raw=[0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.9), (0, 2, 0.9)],
+    )
+    assert find_path(store, 0, 1, [], CFG, forbidden_edge=(0, 1)) is None
+
+
+def test_omitting_forbidden_edge_changes_nothing():
+    store = make_store(
+        names=list("ABCDE"), pop_raw=[0.5] * 5,
+        undirected_edges=[(i, i + 1, 0.9) for i in range(4)] + [(0, 2, 0.2)],
+    )
+    assert find_path(store, 0, 4, [], CFG) == find_path(
+        store, 0, 4, [], CFG, forbidden_edge=None
+    )
+
+
+def test_journey_with_its_own_stop_is_left_alone():
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9)],
+    )
+    assert find_journey(store, 0, 2, [], CFG) == ([0, 1, 2], STOP_NATURAL)
+
+
+def test_two_neighbours_get_a_stop_forced_between_them():
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 1, 0.95), (0, 2, 0.9), (1, 2, 0.9)],
+    )
+    path, rule = find_journey(store, 0, 1, [], CFG)
+    assert rule == STOP_FORCED
+    assert path[0] == 0 and path[-1] == 1
+    assert len(path) >= 3
+
+
+def test_two_neighbours_with_nothing_between_them_fall_back():
+    # B's only connection is to A, so no stop can exist.
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 1, 0.9), (0, 2, 0.9)],
+    )
+    assert find_journey(store, 0, 1, [], CFG) == ([0, 1], STOP_ADJACENT_ONLY)
+
+
+def test_a_stop_is_never_forced_through_a_bypassed_artist():
+    # C is the only possible stop, and the user has rejected it.
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 1, 0.95), (0, 2, 0.9), (1, 2, 0.9)],
+    )
+    excludes = [Exclusion(node=2, reason=DISLIKE)]
+    assert find_journey(store, 0, 1, excludes, CFG) == ([0, 1], STOP_ADJACENT_ONLY)
+
+
+def test_journey_returns_none_when_exclusions_disconnect_the_endpoints():
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 2, 0.9), (2, 1, 0.9)],
+    )
+    excludes = [Exclusion(node=2, reason=DISLIKE)]
+    assert find_journey(store, 0, 1, excludes, CFG) is None
+
+
+def test_forcing_a_stop_never_drops_the_two_chosen_artists():
+    # Excluding an endpoint has never removed it, and the second search must
+    # not change that. Design section 6, test 5.
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 1, 0.95), (0, 2, 0.9), (1, 2, 0.9)],
+    )
+    excludes = [Exclusion(node=0, reason=DISLIKE), Exclusion(node=1, reason=KNOWN)]
+    path, _rule = find_journey(store, 0, 1, excludes, CFG)
+    assert path[0] == 0 and path[-1] == 1

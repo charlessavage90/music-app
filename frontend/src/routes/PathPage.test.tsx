@@ -33,16 +33,22 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
   // Three stops, because bypass is only offered on the interior — the two
   // artists you chose are endpoints and cannot be rerouted away.
   const buildPath = vi.spyOn(client, 'buildPath')
-    .mockResolvedValueOnce([
-      { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
-      { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
-      { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
-    ])
-    .mockResolvedValueOnce([
-      { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
-      { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7 },
-      { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
-    ]);
+    .mockResolvedValueOnce({
+      artists: [
+        { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
+        { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
+        { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
+      ],
+      stopRule: 'natural',
+    })
+    .mockResolvedValueOnce({
+      artists: [
+        { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
+        { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7 },
+        { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
+      ],
+      stopRule: 'natural',
+    });
 
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
@@ -69,7 +75,7 @@ const THREE_STOP = [
 test('"new path" goes back to choosing artists, carrying this pair with it', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  vi.spyOn(client, 'buildPath').mockResolvedValue(THREE_STOP);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
 
   renderAt('/path/m/d?known=h');
   await screen.findByText('Herbie Hancock');
@@ -87,7 +93,7 @@ test('"new path" goes back to choosing artists, carrying this pair with it', asy
 test('"reset path" drops every bypass and keeps the same two artists', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  const buildPath = vi.spyOn(client, 'buildPath').mockResolvedValue(THREE_STOP);
+  const buildPath = vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
 
   renderAt('/path/m/d?known=h&dislike=z');
   await screen.findByText('Herbie Hancock');
@@ -111,7 +117,7 @@ const AUDIBLE_THREE_STOP = [
 async function renderPlaying(user: ReturnType<typeof userEvent.setup>, url: string) {
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
   vi.spyOn(client, 'buildPath')
-    .mockResolvedValueOnce(AUDIBLE_THREE_STOP)
+    .mockResolvedValueOnce({ artists: AUDIBLE_THREE_STOP, stopRule: 'natural' })
     // The rebuild never arrives, so anything that stops only on rebuild stays playing.
     .mockReturnValueOnce(new Promise(() => {}));
 
@@ -143,7 +149,7 @@ test('pressing a bypass stops the audio at once, not when the new path arrives',
 
 test('there is nothing to reset before any bypass is pressed', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  vi.spyOn(client, 'buildPath').mockResolvedValue(THREE_STOP);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
 
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');

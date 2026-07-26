@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 from artistpath_api.app import create_app
 from artistpath_api.clips import ClipResolver, InMemoryClipCache
 from artistpath_api.config import ApiConfig
+from artistpath_api.pathfinding import DISLIKE
 from artistpath_api.search import ArtistSearch
 from tests.conftest import make_store
 
@@ -22,6 +23,16 @@ def _client(clip_responses=None):
 
     resolver = ClipResolver(CFG, InMemoryClipCache(), fetch_json)
     return TestClient(create_app(store, search, resolver, CFG)), store
+
+
+def _client_over(store):
+    """A client over a purpose-built graph, for tests that need a given shape."""
+
+    async def fetch_json(url, params):
+        return {}
+
+    resolver = ClipResolver(CFG, InMemoryClipCache(), fetch_json)
+    return TestClient(create_app(store, ArtistSearch(store, CFG), resolver, CFG))
 
 
 def test_search_endpoint_returns_matches():
@@ -113,3 +124,50 @@ def test_track_endpoint_204_when_no_clip():
     client, store = _client({"any": {"data": []}})
     r = client.get(f"/api/artists/{store.mbids[0]}/track")
     assert r.status_code == 204
+
+
+def test_path_response_reports_a_natural_journey():
+    # The existing fixture routes Radiohead -> Muse -> Coldplay: already has a stop.
+    client, store = _client()
+    a, c = store.mbids[0], store.mbids[2]
+    body = client.post("/api/path", json={"sources": [a, c], "exclude": []}).json()
+    assert body["stop_rule"] == "natural"
+    assert len(body["artists"]) >= 3
+
+
+def test_path_response_reports_a_forced_stop():
+    # Radiohead and Muse are directly connected; Coldplay is the way round.
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[1]
+    body = client.post("/api/path", json={"sources": [a, b], "exclude": []}).json()
+    assert body["stop_rule"] == "forced"
+    assert len(body["artists"]) >= 3
+    assert [x["name"] for x in body["artists"]][0] == "Radiohead"
+
+
+def test_path_endpoint_is_409_when_hard_exclusions_disconnect_the_endpoints():
+    # C is the only way from A to B; excluding it disconnects them.
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 2, 0.9), (2, 1, 0.9)],
+    )
+    client = _client_over(store)
+    a, b, c = store.mbids
+    r = client.post(
+        "/api/path",
+        json={"sources": [a, b], "exclude": [{"id": c, "reason": DISLIKE}]},
+    )
+    assert r.status_code == 409
+
+
+def test_path_response_reports_two_artists_with_nothing_between():
+    # B's only connection is to A, so no stop can exist between them.
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 1, 0.9), (0, 2, 0.9)],
+    )
+    client = _client_over(store)
+    a, b = store.mbids[0], store.mbids[1]
+    body = client.post("/api/path", json={"sources": [a, b], "exclude": []}).json()
+    assert [x["name"] for x in body["artists"]] == ["A", "B"]
+    assert body["stop_rule"] == "adjacent_only"

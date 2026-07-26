@@ -1,4 +1,4 @@
-import type { Artist, Exclusion, Track } from './types';
+import type { Artist, Exclusion, PathResult, StopRule, Track } from './types';
 
 const BASE = import.meta.env.VITE_API_BASE ?? '/api';
 
@@ -21,7 +21,7 @@ export async function buildPath(
   sources: string[],
   exclude: Exclusion[],
   signal?: AbortSignal,
-): Promise<Artist[]> {
+): Promise<PathResult> {
   const r = await fetch(`${BASE}/path`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -29,8 +29,8 @@ export async function buildPath(
     signal,
   });
   if (!r.ok) throw new ApiError(r.status);
-  const data = (await r.json()) as { artists: Artist[] };
-  return data.artists;
+  const data = (await r.json()) as { artists: Artist[]; stop_rule: StopRule };
+  return { artists: data.artists, stopRule: data.stop_rule };
 }
 
 export async function getTrack(mbid: string, signal?: AbortSignal): Promise<Track | null> {

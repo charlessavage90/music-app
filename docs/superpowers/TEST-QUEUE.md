@@ -11,6 +11,44 @@ the point.**
 
 ---
 
+## QUEUED — 2026-07-25 — journeys now always have someone in the middle
+
+**Ten minutes, no waiting.** Pick two artists who are very close to each other —
+`Radiohead → Weezer` is the one you reported, and any two artists you'd expect to
+sit right next to each other will do.
+
+**What changed.** Before, a pair like that gave you two cards and nothing to press.
+Now the app routes around the direct connection and puts at least one artist in
+between. Nothing else about paths changed — any journey that already had someone in
+the middle is exactly the journey you got yesterday.
+
+**What to exercise:**
+
+1. **`Radiohead → Weezer`.** It should now have at least one artist between them.
+2. **Two or three pairs you already have a feel for**, as a regression check. These
+   should be unchanged.
+3. **A pair that is very close but obscure** — try `Doves → Elbow`. This one *cannot*
+   be given a stop: Elbow has exactly one connection in the whole graph and it is to
+   Doves. You should get two cards **plus a line saying they're next to each other
+   and there's nobody in between**. The line appearing is the thing to check.
+
+**Two things worth your opinion, because no measurement can settle them:**
+
+- **How long is too long?** Forcing a way round can produce a longer journey than you
+  asked for. Usually it is one extra artist, but it can be a lot more. If that feels
+  wrong, say so; it is capped at nothing right now, deliberately.
+- **Famous pairs get a famous stop.** `Radiohead → Weezer` routes through The
+  Beatles. That is the cheapest way round, not a preference. Worth knowing whether it
+  reads as reasonable or as lazy.
+
+**What "wrong" would look like:** a pair that still gives you two cards with no
+explanation; a journey between two artists you know that has *changed* when it should
+not have; or the "next to each other" line showing up on a normal journey.
+
+**Best bug report:** the URL from the address bar.
+
+---
+
 ## QUEUED — 2026-07-25 — the three playback fixes from your last run
 
 **Ten minutes, no waiting.** This covers what your last run found. Nothing about *which
@@ -38,7 +76,8 @@ longer play at all.
 **Known and unchanged:** a card with no clip is silent by design and is stepped over when a
 clip ends — that is correct, not a skip. A path with only your two artists still offers no
 bypass buttons; that is the zero-intermediary case, and you have decided every journey needs
-at least one stop, but it is not built yet.
+at least one stop. **⚠ 2026-07-25: that is now BUILT — see the newest entry at the top of
+this file. If you are running this older entry after the fact, expect an artist in between.**
 
 *Detail: the execution log's §18.*
 
