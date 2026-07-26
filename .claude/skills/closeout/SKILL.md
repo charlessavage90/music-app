@@ -475,6 +475,29 @@ Two traps, both already sprung here:
 narrative attached to them, and that narrative is what makes a rule transfer to a case it
 was not written for.
 
+### D7. Mark the session retired — the last thing you write
+
+**Close with a `/rename` line prefixing `RETIRED-` to the session's current name.** You
+cannot run it yourself — `/rename` is a built-in command, not a skill — so hand him the
+finished line with nothing to compose:
+
+```
+/rename RETIRED-track2f-toll-builder (handoff, mid-flight)
+```
+
+**Prefix only.** Keep the name and any suffix `session-start` §E set, so a chain of handoffs
+still reads as one chain in the `/resume` picker.
+
+The terminal of a retired session is deliberately left open — to confirm the handoff landed,
+and to ask it what it knew. Nothing else marks it as finished: in the picker and the window
+title it is indistinguishable from a session still working, which is the same confusion
+`session-start` §C has to resolve from the other side. **If you do not know the current
+name, ask rather than guess** — a session renamed to a name it never had is worse than an
+unprefixed one.
+
+Put it in the same closing message as A5's dev-server statement: one message carrying
+everything he has to act on.
+
 ---
 
 ## Two standing rules
@@ -515,7 +538,7 @@ most of what matters. A5 travels with C1: the queued test needs a server, and a 
 fails it for the wrong reason.
 
 **Mid-flight retirement**, when a session is being handed over before its work reaches a
-natural seam — A1, **A2-mid**, A3, **A5**, B1, B5, **D1-mid**, D3, **D6**. A5 matters most
+natural seam — A1, **A2-mid**, A3, **A5**, B1, B5, **D1-mid**, D3, **D6**, **D7**. A5 matters most
 here: a mid-flight handover is precisely when the old terminal is kept open, which is the
 only condition under which an owned shell can wake a retired session. D6 belongs here
 specifically: a mid-flight handoff usually happens *because* a governing document changed,
