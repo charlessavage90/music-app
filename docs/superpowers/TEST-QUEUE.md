@@ -11,6 +11,33 @@ the point.**
 
 ---
 
+## N/A — 2026-07-26 (later) — two more measurements ran; the app is untouched
+
+**Nothing to exercise, and nothing is running.** Two measurements ran this afternoon and
+**neither changed the app**. No routing, no graph, no setting — a journey you generate now
+is identical to one from this morning.
+
+**The servers from earlier today have been stopped**, at your request. Nothing is
+listening on either port. If you want the app again, start it the usual way.
+
+**What was learned, in plain terms.** This morning's question was whether the barely-
+connected artists we counted are the reason the app never introduces you to them. The
+answer, from journeys the app had already produced: it never once put a barely-connected
+artist in the middle. That first check was weak on its own, because those journeys all ran
+between very famous artists. So a second run built journeys that **start and end** at
+barely-connected artists — the best possible chance for others like them to show up in the
+middle. They still almost never did.
+
+**What that does and does not mean.** It means being barely connected really is associated
+with never being offered to you. It does **not** mean we know why: it could be that the app
+weighs them up and passes over them, or simply that an artist with two connections has far
+fewer places it could sit between two others. Those point to opposite fixes, and nothing
+measured so far tells them apart. That is written down as the first thing to settle if this
+is ever picked up.
+
+**Nothing is proposed and nothing was changed.** The next entry here will come when
+something is actually adopted into the running app.
+
 ## DONE — 2026-07-26 — journeys now always have someone in the middle
 
 **DONE 2026-07-26 — PASSED, no notes.** Exercised by the owner; nothing wrong found and
