@@ -16,7 +16,7 @@ from artistpath_api.graph_store import GraphStore
 from artistpath_api.models import (
     ArtistOut, ExclusionIn, PathRequest, PathResponse, TrackOut,
 )
-from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion, find_path
+from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion, find_journey
 from artistpath_api.search import ArtistSearch
 
 
@@ -68,10 +68,13 @@ def create_app(
             raise HTTPException(404, "unknown artist")
         source, target = ids
         excludes = _to_exclusions(store, req.exclude)
-        path = find_path(store, source, target, excludes, cfg)
-        if path is None:
+        journey = find_journey(store, source, target, excludes, cfg)
+        if journey is None:
             raise HTTPException(409, "no path avoiding those artists")
-        return PathResponse(artists=[artist_out(n) for n in path])
+        path, stop_rule = journey
+        return PathResponse(
+            artists=[artist_out(n) for n in path], stop_rule=stop_rule
+        )
 
     @app.get("/api/artists/{mbid}/track")
     async def get_track(mbid: str, response: Response):

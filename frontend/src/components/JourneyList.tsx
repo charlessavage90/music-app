@@ -3,7 +3,7 @@ import { ArtistCard } from './ArtistCard';
 import { PlayerBar } from './PlayerBar';
 import { usePlayer } from '@/player/usePlayer';
 import { resolveFreshUrl } from '@/hooks/useClip';
-import type { Artist, BypassReason } from '@/api/types';
+import type { Artist, BypassReason, StopRule } from '@/api/types';
 
 /** What the page can ask of the journey's audio from outside it. */
 export interface JourneyControls {
@@ -12,11 +12,12 @@ export interface JourneyControls {
 
 interface Props {
   artists: Artist[];
+  stopRule: StopRule;
   onBypass: (mbid: string, reason: BypassReason) => void;
   ref?: Ref<JourneyControls>;
 }
 
-export function JourneyList({ artists, onBypass, ref }: Props) {
+export function JourneyList({ artists, stopRule, onBypass, ref }: Props) {
   // Which artists have a clip — not where it lives. Holding the URL here is what
   // let a tab left open serve a dead signature (C2); the player re-signs on play.
   const [hasClip, setHasClip] = useState<Record<string, boolean>>({});
@@ -63,6 +64,14 @@ export function JourneyList({ artists, onBypass, ref }: Props) {
                 setHasClip((prev) => ({ ...prev, [mbid]: available }))
               }
             />
+            {/* Some pairs cannot be given a stop: one of the two holds a single
+                connection in the graph, and it is to the other. Saying so beats
+                a page with two cards and nothing to press. */}
+            {stopRule === 'adjacent_only' && i === 0 && (
+              <p className="px-1 py-3 text-sm text-[var(--color-muted)]">
+                These two are next to each other — there&rsquo;s no artist in between.
+              </p>
+            )}
           </li>
         ))}
       </ol>

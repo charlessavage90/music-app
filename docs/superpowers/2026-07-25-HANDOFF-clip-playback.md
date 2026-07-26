@@ -1,5 +1,11 @@
 # HANDOFF — clips closed, two playback defects fixed, 2026-07-25
 
+> **⚠ PARTLY SUPERSEDED 2026-07-25 — on F1 only.** This note says F1 is "decided but not
+> built" (§2, §3, §5). **It is now built** — PR #23, record
+> [`2026-07-25-f1-minimum-stop-execution-log.md`](2026-07-25-f1-minimum-stop-execution-log.md).
+> Everything else here — the clip closures, the playback fixes, and what must not be
+> reverted — stands unchanged.
+
 **Role: ACTIVE, short-lived by design.** Written at a **clean seam**: the work ran to
 completion, PR #20 is open and ready, and nothing is in flight. **This is not a mid-flight
 handoff — the degradation tell did not fire, and no cold-read-back is owed.**
@@ -37,12 +43,12 @@ not revert these.
 | C1/C2 "fixed, not closed", awaiting confirmation | **Closed.** Confirmed in use, twice, plus a live retest of the documented failing case |
 | Clip URLs die "somewhat under an hour" | **15 minutes**, measured twice against wall clock. §15 owns the figure |
 | The queue's question 2 is BLOCKED | **DONE and passed** |
-| F1 — "does a journey need at least one stop" is an open question | **Decided by the owner: yes.** Requirement settled, implementation deferred. §16 |
+| F1 — "does a journey need at least one stop" is an open question | **Decided by the owner: yes.** Requirement settled. ~~Implementation deferred.~~ **⚠ SUPERSEDED — built 2026-07-25, PR #23.** §16 |
 | F1 is blocked on path work resuming | **It is not.** It is a structural invariant over the result, not cost-function tuning. Blocked only on the owner scheduling it |
 
 ## 3. Four things the successor must not get wrong
 
-- **F1 is decided but not built.** A zero-intermediary path is now a **defect against a
+- **⚠ SUPERSEDED — F1 is now BUILT (2026-07-25, PR #23).** *Original text:* **F1 is decided but not built.** A zero-intermediary path is now a **defect against a
   stated requirement**, not a candidate improvement. Its success condition is anchored to an
   observable in §16 and **must not be restated in other words** — two deferral conditions
   have already drifted in the copying, and one lapsed silently.

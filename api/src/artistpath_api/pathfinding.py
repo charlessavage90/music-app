@@ -79,6 +79,7 @@ def find_path(
     target: int,
     excludes: list[Exclusion],
     cfg: ApiConfig,
+    forbidden_edge: tuple[int, int] | None = None,
 ) -> list[int] | None:
     """Least-cost path from source to target under the spec 4.1 cost function.
 
@@ -90,6 +91,14 @@ def find_path(
 
     # Hard exclusions skip nodes entirely, but never the endpoints themselves.
     hard = {e.node for e in excludes} - {source, target}
+
+    # Undirected: forbidding (a, b) must also forbid (b, a). Used to force a
+    # detour when the least-cost path is the two chosen artists and nothing
+    # else (F1). Empty in the ordinary case, so this costs one set lookup.
+    banned: set[tuple[int, int]] = set()
+    if forbidden_edge is not None:
+        a, b = forbidden_edge
+        banned = {(a, b), (b, a)}
 
     base_floor_raw = min(float(store.pop_raw[source]), float(store.pop_raw[target]))
     floor_raw = effective_floor_raw(base_floor_raw, excludes, cfg)
@@ -110,6 +119,8 @@ def find_path(
         pop_raw_u = float(store.pop_raw[u])
         for v, sim in store.neighbours_of(u):
             if v in hard:
+                continue
+            if (u, v) in banned:
                 continue
             pop_raw_v = float(store.pop_raw[v])
             # Every popularity term here is in RAW currency. A percentile
@@ -136,3 +147,52 @@ def find_path(
     while path[-1] != source:
         path.append(prev[path[-1]])
     return path[::-1]
+
+
+# How a journey came to have (or lack) an artist between its two endpoints.
+# The frontend cannot re-derive this: once a stop is forced in, the result is
+# indistinguishable from an ordinary path. Requirement and success condition:
+# docs/superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md section 16.
+STOP_NATURAL = "natural"              # the least-cost path already had a stop
+STOP_FORCED = "forced"                # the two are neighbours; a stop was inserted
+STOP_ADJACENT_ONLY = "adjacent_only"  # neighbours, and nothing connects them both
+
+
+def find_journey(
+    store: GraphStore,
+    source: int,
+    target: int,
+    excludes: list[Exclusion],
+    cfg: ApiConfig,
+) -> tuple[list[int], str] | None:
+    """A path with at least one artist between the endpoints where possible.
+
+    Every journey needs at least one stop (owner's decision, 2026-07-25). When
+    the least-cost path is the two chosen artists and nothing else, search again
+    with their direct connection forbidden; the same cost function chooses the
+    detour, so no new scoring is introduced and this stays outside the paused
+    path-quality work.
+
+    Some pairs cannot be given a stop at all: some artists hold a single
+    connection in the graph (findings/2026-07-25-mutual-knn-stranding.md,
+    MKS-3), so their one neighbour has no route back except that connection
+    (same document, MKS-6, for the resulting pair-level count). Those fall
+    back to the two-card path and say so rather than returning nothing,
+    because a no-path result must only ever come from user exclusions.
+
+    The second search re-reads the same exclusions, so a stop is never forced
+    through an artist the user has already rejected.
+    """
+    path = find_path(store, source, target, excludes, cfg)
+    if path is None:
+        return None
+    if len(path) != 2:
+        # Includes the degenerate source == target case, which is length 1.
+        return path, STOP_NATURAL
+
+    detour = find_path(
+        store, source, target, excludes, cfg, forbidden_edge=(source, target)
+    )
+    if detour is None:
+        return path, STOP_ADJACENT_ONLY
+    return detour, STOP_FORCED
