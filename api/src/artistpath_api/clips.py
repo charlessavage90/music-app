@@ -14,6 +14,7 @@ covers it, and it is queued in docs/superpowers/TEST-QUEUE.md.
 
 from __future__ import annotations
 
+import asyncio
 import time
 import unicodedata
 from collections.abc import Awaitable, Callable
@@ -68,8 +69,8 @@ class TrackIdentity:
 
 
 class ClipCache(Protocol):
-    def get(self, mbid: str) -> TrackIdentity | None: ...
-    def put(self, mbid: str, identity: TrackIdentity) -> None: ...
+    async def get(self, mbid: str) -> TrackIdentity | None: ...
+    async def put(self, mbid: str, identity: TrackIdentity) -> None: ...
 
 
 class InMemoryClipCache:
@@ -78,10 +79,10 @@ class InMemoryClipCache:
     def __init__(self) -> None:
         self._store: dict[str, TrackIdentity] = {}
 
-    def get(self, mbid: str) -> TrackIdentity | None:
+    async def get(self, mbid: str) -> TrackIdentity | None:
         return self._store.get(mbid)
 
-    def put(self, mbid: str, identity: TrackIdentity) -> None:
+    async def put(self, mbid: str, identity: TrackIdentity) -> None:
         self._store[mbid] = identity
 
 
@@ -95,6 +96,12 @@ class DynamoClipCache:
 
     The boto3 resource is created lazily on first use, so constructing the
     cache (and therefore booting the app) never requires AWS to be reachable.
+
+    Both methods are async and hand the blocking boto3 call to a worker thread.
+    The clip endpoint is the only async route in the app, so a synchronous
+    round trip here blocks the event loop for every concurrent user (DEP-11).
+    asyncio.to_thread is used deliberately in preference to adding aioboto3 —
+    a thread fixes this without a new dependency.
     """
 
     def __init__(self, cfg: ApiConfig, table=None) -> None:
@@ -108,7 +115,7 @@ class DynamoClipCache:
             self._table = boto3.resource("dynamodb").Table(self._cfg.clip_table_name)
         return self._table
 
-    def get(self, mbid: str) -> TrackIdentity | None:
+    def _get_sync(self, mbid: str) -> TrackIdentity | None:
         item = self._get_table().get_item(Key={"mbid": mbid}).get("Item")
         # Items written before C2 carry a long-expired URL and no track id.
         # They cannot be re-resolved, so they are a miss and get overwritten.
@@ -121,7 +128,7 @@ class DynamoClipCache:
             cover_url=item["cover_url"],
         )
 
-    def put(self, mbid: str, identity: TrackIdentity) -> None:
+    def _put_sync(self, mbid: str, identity: TrackIdentity) -> None:
         ttl = int(time.time()) + self._cfg.clip_ttl_days * 86400
         self._get_table().put_item(
             Item={
@@ -133,6 +140,12 @@ class DynamoClipCache:
                 "ttl": ttl,
             }
         )
+
+    async def get(self, mbid: str) -> TrackIdentity | None:
+        return await asyncio.to_thread(self._get_sync, mbid)
+
+    async def put(self, mbid: str, identity: TrackIdentity) -> None:
+        await asyncio.to_thread(self._put_sync, mbid, identity)
 
 
 class ClipResolver:
@@ -176,7 +189,7 @@ class ClipResolver:
         whose response already carries a signed URL — so the common paths are
         one round trip each.
         """
-        identity = self._cache.get(mbid)
+        identity = await self._cache.get(mbid)
         if identity is not None:
             url = await self._preview_url(identity)
             if url:
@@ -188,7 +201,7 @@ class ClipResolver:
         if found is None:
             return None
         identity, url = found
-        self._cache.put(mbid, identity)
+        await self._cache.put(mbid, identity)
         return Clip(url, identity.title, identity.cover_url)
 
     async def _preview_url(self, identity: TrackIdentity) -> str | None:

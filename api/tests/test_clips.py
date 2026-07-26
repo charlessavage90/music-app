@@ -161,7 +161,7 @@ async def test_the_cache_never_holds_a_signed_url():
     r = _resolver({"deezer": DEEZER_HIT}, cache=cache)
     await r.resolve(MBID, "Radiohead")
 
-    identity = cache.get(MBID)
+    identity = await cache.get(MBID)
     assert identity == TrackIdentity(
         source="deezer", track_id="771",
         title="Paranoid Android", cover_url="https://cdn/rh.jpg",
@@ -172,7 +172,7 @@ async def test_the_cache_never_holds_a_signed_url():
 async def test_a_cached_track_gets_a_freshly_signed_url():
     """C2. The URL is re-resolved per request, so it is never the stale one."""
     cache = InMemoryClipCache()
-    cache.put(MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg"))
+    await cache.put(MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg"))
     r = _resolver({
         "deezer.com/track/771": {"id": 771, "preview": "https://cdn.deezer/FRESH.mp3"},
     }, cache=cache)
@@ -185,7 +185,7 @@ async def test_a_cached_track_gets_a_freshly_signed_url():
 async def test_a_cached_track_is_not_searched_for_again():
     """C2. Identity is stable; only the URL is volatile. Search is the expensive call."""
     cache = InMemoryClipCache()
-    cache.put(MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg"))
+    await cache.put(MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg"))
     r = _resolver({
         "deezer.com/track/771": {"preview": "https://cdn.deezer/fresh.mp3"},
     }, cache=cache)
@@ -203,7 +203,7 @@ async def test_a_cold_lookup_does_not_pay_for_a_second_round_trip():
 
 async def test_an_itunes_track_is_re_resolved_through_itunes():
     cache = InMemoryClipCache()
-    cache.put(MBID, TrackIdentity("itunes", "991", "Karma Police", "cover.jpg"))
+    await cache.put(MBID, TrackIdentity("itunes", "991", "Karma Police", "cover.jpg"))
     r = _resolver({
         "itunes.apple.com/lookup": {
             "results": [{"trackId": 991, "previewUrl": "https://cdn.itunes/fresh.m4a"}]
@@ -217,7 +217,7 @@ async def test_an_itunes_track_is_re_resolved_through_itunes():
 async def test_a_track_pulled_from_the_catalogue_is_searched_for_again():
     """Identity is stable but not permanent — a dead id must self-heal."""
     cache = InMemoryClipCache()
-    cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
     r = _resolver({
         "deezer.com/track/999": {"error": {"type": "DataException"}},
         "deezer.com/search": DEEZER_HIT,
@@ -225,14 +225,14 @@ async def test_a_track_pulled_from_the_catalogue_is_searched_for_again():
 
     clip = await r.resolve(MBID, "Radiohead")
     assert clip.preview_url == "https://cdn.deezer/clip.mp3"
-    assert cache.get(MBID) == TrackIdentity(
+    assert await cache.get(MBID) == TrackIdentity(
         "deezer", "771", "Paranoid Android", "https://cdn/rh.jpg"
     )
 
 
 async def test_no_clip_when_the_track_is_gone_and_the_artist_has_no_other():
     cache = InMemoryClipCache()
-    cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
     r = _resolver({
         "deezer.com/track/999": {},
         "deezer.com/search": {"data": []},
@@ -256,9 +256,9 @@ class FakeTable:
         self.written = Item
 
 
-def test_dynamo_cache_writes_identity_and_no_url():
+async def test_dynamo_cache_writes_identity_and_no_url():
     table = FakeTable()
-    DynamoClipCache(CFG, table).put(
+    await DynamoClipCache(CFG, table).put(
         MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")
     )
     assert table.written["track_id"] == "771"
@@ -291,7 +291,7 @@ async def test_a_404_on_the_cached_track_re_searches():
     actually meet in production.
     """
     cache = InMemoryClipCache()
-    cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
     r = _resolver({
         "deezer.com/track/999": Boom("404 not found"),
         "deezer.com/search": DEEZER_HIT,
@@ -299,14 +299,14 @@ async def test_a_404_on_the_cached_track_re_searches():
 
     clip = await r.resolve(MBID, "Radiohead")
     assert clip.preview_url == "https://cdn.deezer/clip.mp3"
-    assert cache.get(MBID).track_id == "771"
+    assert (await cache.get(MBID)).track_id == "771"
 
 
 async def test_a_rate_limited_lookup_does_not_evict_a_good_cached_track():
     """A transient failure must not cost us the identity we already had."""
     cache = InMemoryClipCache()
     known = TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")
-    cache.put(MBID, known)
+    await cache.put(MBID, known)
     r = _resolver({
         "deezer.com/track/771": Boom("429 rate limited"),
         "deezer.com/search": Boom("429 rate limited"),
@@ -314,7 +314,7 @@ async def test_a_rate_limited_lookup_does_not_evict_a_good_cached_track():
     }, cache=cache)
 
     assert await r.resolve(MBID, "Radiohead") is None
-    assert cache.get(MBID) == known  # still there for the next request
+    assert await cache.get(MBID) == known  # still there for the next request
 
 
 async def test_a_bug_in_our_own_parsing_is_not_swallowed():
@@ -335,8 +335,36 @@ async def test_a_bug_in_our_own_parsing_is_not_swallowed():
         raise AssertionError("a parsing bug was swallowed by the network guard")
 
 
-def test_dynamo_cache_treats_a_pre_c2_item_as_a_miss():
+async def test_dynamo_cache_treats_a_pre_c2_item_as_a_miss():
     """Items written before this fix hold a long-dead signed URL and no track id."""
     stale = {"mbid": MBID, "preview_url": "https://cdn.deezer/expired.mp3",
              "title": "Old", "cover_url": "cover.jpg"}
-    assert DynamoClipCache(CFG, FakeTable(stale)).get(MBID) is None
+    assert await DynamoClipCache(CFG, FakeTable(stale)).get(MBID) is None
+
+
+async def test_dynamo_cache_round_trips_through_the_resolver():
+    """Drives DynamoClipCache through ClipResolver rather than calling it directly.
+
+    The existing FakeTable tests call .get/.put straight, so nothing exercised
+    the cache through the code path production uses (TR-11).
+    """
+    cfg = ApiConfig()
+    table = FakeTable(
+        item={
+            "mbid": "m1",
+            "source": "deezer",
+            "track_id": "77",
+            "title": "T",
+            "cover_url": "c",
+        }
+    )
+    cache = DynamoClipCache(cfg, table)
+
+    async def fetch_json(url, params):
+        return {"preview": "https://signed.example/x.mp3"}
+
+    resolver = ClipResolver(cfg, cache, fetch_json)
+    clip = await resolver.resolve("m1", "Some Artist")
+    assert clip is not None
+    assert clip.preview_url == "https://signed.example/x.mp3"
+    assert clip.title == "T"
