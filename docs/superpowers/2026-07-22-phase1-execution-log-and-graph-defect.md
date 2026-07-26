@@ -563,6 +563,15 @@ instrument if anyone leans hard on the 15.6×.**
 **Not measured by any of this:** whether stratification changes what the owner prefers.
 `capfix` won two blind listens carrying this structure.
 
+> **⚠ POINTER added 2026-07-26 — the sentence above is exactly true and is often quoted
+> for more than it says.** "Carrying this structure" is not "endorsing this structure."
+> `findings/2026-07-26-low-degree-synthesis.md` **`SYN-6`** audits both listens against
+> their own arm tables: the first (Phase 2 log §12) varied the reciprocity rule, the degree
+> bound and the top-k ranking basis **together**, and the second (§16) ran `mutual_knn` on
+> **both** arms. **So neither listen separated reciprocity from the degree bound**, and per
+> this section's own coupling paragraph no artifact that could separate them has ever been
+> built. Nothing in §2.10 is withdrawn, renumbered, or re-measured by that pointer.
+
 **Scripts:** `builder/analysis/2026-07-23-popularity-stratification/validation/`.
 
 > **Before using the exits table above, read §2.11.** It establishes who the zero-exit

@@ -1,4 +1,4 @@
-# Derivations from the 2026-07-25 consulting session — one verified, six open
+# Derivations from the 2026-07-25 consulting session — one verified, six open (one since resolved)
 
 **Role: AUTHORITATIVE for `DRV-1` only** (a verification this session performed). **Everything
 else is a labelled hypothesis with a named check, and none of it is a finding.**
@@ -19,10 +19,34 @@ Identifiers are namespaced `DRV-n` — disjoint from `C`, `F`, `A`, `R`, `T3-`, 
 
 ## 1. Verified — the graph the diagnosis was measured on is not the graph we run
 
-**`DRV-1` — every table in Phase 1 log §2.9–§2.12 was computed on `graph-t15-capfix.bin`. The
-app has run `graph-t15-tiebreakfix.bin` since 2026-07-23, and none of those tables has been
-recomputed on it.** *(Plain: the measurements behind the project's central diagnosis were taken
-on an older version of the graph, six hours before the version we actually use was adopted.)*
+> **⚠ NARROWED 2026-07-26 — `DRV-1`'s range was over-broad. The exposed sections are §2.11
+> and §2.12, not §2.9–§2.12.** The narrowing was established from committed documents plus
+> the two manifest sidecars; **nothing was re-run, re-measured or rebuilt.**
+>
+> - **§2.10 is not exposed, and its reciprocity attribution applies to the adopted
+>   artifact.** Its "§2.8's tie-break is not this" table measures the adopted artifact's own
+>   topology, under its own name: the adoption record
+>   (`2026-07-23-tiebreak-fix-adoption.md`) states the fix's topology is that of **§2.8 Arm 2
+>   = `rankfix`'s**; Phase 1 log **§2.13 C2** records Arm 2 and `rankfix` as topologically
+>   identical and gives that as the reason a second artifact was never built; and the
+>   manifest sidecars for `graph-t15-tiebreakfix.bin` and `graph-t15-rankfix.bin` carry the
+>   **same `artists` and `edges` values**, differing only in `similarity_rescale`. §2.10's
+>   figures are computed against a **fixed pre-cap in-degree popularity reference** — that is
+>   its own circularity correction — so they are score-independent and do not turn on which
+>   rescale an artifact emits. The row therefore *is* a measurement of the graph in use.
+> - **§2.9 was never supported by the evidence below either.** The three scripts in the
+>   evidence table are §2.11's, §2.12's and `coherence_probe.py`; none is §2.9's or §2.10's.
+>   §2.9 needs no provenance caveat regardless: **§2.10 supersedes its figures and §2.12
+>   retracts its central claim**, so it is already barred from quotation on its own terms.
+> - **What is unchanged:** everything below about §2.11 and §2.12, including the concrete
+>   Beatles tell, `DRV-2`'s direction-of-error argument, and the recommended re-run. The two
+>   scripts that would settle it are still `known_viability.py` and `exits_by_band.py`.
+
+**`DRV-1` — ~~every table in Phase 1 log §2.9–§2.12~~ §2.11's and §2.12's tables were computed
+on `graph-t15-capfix.bin`. The app has run `graph-t15-tiebreakfix.bin` since 2026-07-23, and
+neither has been recomputed on it.** *(Plain: the measurements behind the project's central
+diagnosis were taken on an older version of the graph, six hours before the version we
+actually use was adopted.)*
 
 **Evidence, all of it mechanical:**
 
@@ -57,8 +81,9 @@ exposed:
   shortest paths.
 
 **So `DRV-1` is a provenance defect, not a refutation.** What it does invalidate is **any
-specific figure from §2.9–§2.12 quoted as a fact about the current app** — and the doc map's
-Current State does quote them as settled.
+specific figure from ~~§2.9–§2.12~~ §2.11 or §2.12 quoted as a fact about the current app** —
+and the doc map's Current State did quote them as settled *(the doc map was corrected, and the
+range narrowed, 2026-07-26 — see the notice above)*.
 
 **What would settle it:** re-run `known_viability.py` and `exits_by_band.py` against the
 adopted artifact. Both are committed, both are read-only, neither needs a rebuild. The scripts
@@ -92,6 +117,18 @@ the catalogue is undeliverable as a discovery.
 
 **Check:** none needed for the structural claim — it is a graph fact. What needs checking is
 `MKS-3`'s population (crawled artists only, or all artifact nodes), which decides the size.
+
+> **✅ RESOLVED 2026-07-26 by `2026-07-26-low-degree-census.md`** — the one item in §2 that is
+> no longer open. The structural claim stands and is no longer only structural: the census
+> **measures** the population `DRV-4` described, and it closes the check named above — the two
+> candidate populations are **nested, not alternatives** (every artifact node is a crawled
+> artist, from the pipeline's own ordering), and the resulting fractions differ immaterially.
+> **Figures belong to `builder/analysis/2026-07-26-low-degree-census/`; none is restated
+> here.** Two later runs bear on the same question from the delivery side rather than the
+> structural one — `findings/2026-07-26-committed-walk-deliverability.md` and its §7 — and
+> neither is required by `DRV-4`. **This resolves `DRV-4` only; `DRV-3` and `DRV-5`–`DRV-7`
+> remain open at hypothesis strength**, and §4's warning that `DRV-5` is among the likeliest
+> to fail is untouched.
 
 **`DRV-5` — §2.12's admissible-substitute counts may be inflated by leaves.** *(Plain: the
 record counted how many less-famous neighbours a famous artist has, but never asked whether
@@ -150,9 +187,10 @@ unverified artist identity; the card claim was an assumption about code that was
 
 **Applied to §2 above:** `DRV-3` and `DRV-5` are the two most likely to fail the same way —
 `DRV-3` because the cost function was never read at source, `DRV-5` because §2.12's script was
-never opened. `DRV-4` and `DRV-7` are structural and cheap to confirm. `DRV-1` is the only item
-here that was verified rather than reasoned, which is why it is the only one marked
-authoritative.
+never opened. `DRV-4` and `DRV-7` are structural and cheap to confirm — **and `DRV-4` since has
+been, which is the one item in §2 that has been closed rather than merely restated.** `DRV-1`
+is the only item here that was verified *at the time of writing*, which is why it is the only
+one marked authoritative.
 
 **The pattern is also the argument for the checks above being run before any of this is
 built on.**
