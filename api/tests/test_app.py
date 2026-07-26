@@ -1,3 +1,5 @@
+import json
+
 from fastapi.testclient import TestClient
 
 from artistpath_api.app import create_app
@@ -220,3 +222,27 @@ def test_health_reports_artifact_identity():
     assert body["artists"] == store.artist_count
     assert body["edges"] == len(store.neighbours)
     assert body["graph_sha256"] == store.source_sha256
+
+
+def test_path_request_emits_a_telemetry_event(capsys):
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    client.post(
+        "/api/path",
+        json={"sources": [a, b], "exclude": [{"id": store.mbids[1], "reason": "known"}]},
+        headers={"x-journey-id": "journey-0001"},
+    )
+    lines = [ln for ln in capsys.readouterr().out.splitlines() if ln.startswith("{")]
+    events = [json.loads(ln) for ln in lines]
+    path_events = [e for e in events if e["event"] == "path"]
+    assert len(path_events) == 1
+    ev = path_events[0]
+    assert ev["journey_id"] == "journey-0001"
+    assert ev["source"]["mbid"] == a
+    assert ev["target"]["mbid"] == b
+    assert ev["bypass_depth"] == 1
+    assert ev["known_count"] == 1
+    assert ev["dislike_count"] == 0
+    assert ev["stop_rule"] in ("natural", "forced", "adjacent_only")
+    assert [p["mbid"] for p in ev["path"]][0] == a
+    assert isinstance(ev["duration_ms"], (int, float))

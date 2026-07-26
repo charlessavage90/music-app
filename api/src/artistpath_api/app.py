@@ -4,8 +4,10 @@ app is testable without loading a real artifact or touching the network.
 
 from __future__ import annotations
 
+import time
+
 import httpx
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from artistpath_api.artifact_source import load_graph
@@ -19,6 +21,7 @@ from artistpath_api.models import (
 )
 from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion, find_journey
 from artistpath_api.search import ArtistSearch
+from artistpath_api.telemetry import emit, safe_journey_id
 
 
 def _to_exclusions(store: GraphStore, raw: list[ExclusionIn]) -> list[Exclusion]:
@@ -48,7 +51,7 @@ def create_app(
         CORSMiddleware,
         allow_origins=list(cfg.cors_origins),
         allow_methods=["GET", "POST"],
-        allow_headers=["content-type"],
+        allow_headers=["content-type", "x-journey-id"],
     )
 
     def artist_out(node: int) -> ArtistOut:
@@ -66,7 +69,7 @@ def create_app(
         return [artist_out(i) for i in search.search(q)]
 
     @app.post("/api/path")
-    def build_path(req: PathRequest) -> PathResponse:
+    def build_path(req: PathRequest, request: Request) -> PathResponse:
         if len(req.sources) != 2:
             raise HTTPException(422, "alpha supports exactly two source artists")
         ids = [store.id_by_mbid.get(m) for m in req.sources]
@@ -78,10 +81,37 @@ def create_app(
                 422, "pick two different artists — a journey needs somewhere to go"
             )
         excludes = _to_exclusions(store, req.exclude)
+        started = time.perf_counter()
         journey = find_journey(store, source, target, excludes, cfg)
+        duration_ms = (time.perf_counter() - started) * 1000.0
         if journey is None:
             raise HTTPException(409, "no path avoiding those artists")
         path, stop_rule = journey
+
+        emit(
+            {
+                "event": "path",
+                "journey_id": safe_journey_id(request.headers.get("x-journey-id")),
+                "source": {"mbid": store.mbids[source], "name": store.names[source]},
+                "target": {"mbid": store.mbids[target], "name": store.names[target]},
+                # The full accumulated list is what makes a walk reconstructible
+                # from a single event, without depending on neighbouring records.
+                "exclude": [{"id": e.id, "reason": e.reason} for e in req.exclude],
+                "bypass_depth": len(req.exclude),
+                "dislike_count": sum(1 for e in req.exclude if e.reason == DISLIKE),
+                "known_count": sum(1 for e in req.exclude if e.reason == KNOWN),
+                # Logged although reproducible from the inputs, so offline
+                # analysis can VERIFY that the deployed router reproduces what
+                # the user actually saw — config or artifact drift is a failure
+                # class this project has met before (DEP-14).
+                "path": [
+                    {"mbid": store.mbids[n], "name": store.names[n]} for n in path
+                ],
+                "stop_rule": stop_rule,
+                "duration_ms": round(duration_ms, 2),
+            }
+        )
+
         return PathResponse(
             artists=[artist_out(n) for n in path], stop_rule=stop_rule
         )
