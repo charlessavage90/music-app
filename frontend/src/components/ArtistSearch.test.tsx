@@ -62,6 +62,17 @@ test('distinguishes a failed search from an empty one', async () => {
   expect(screen.queryByText(/no artists found/i)).not.toBeInTheDocument();
 });
 
+test('opts out of the iOS keyboard rewriting artist names', () => {
+  render(<ArtistSearch label="From" onSelect={vi.fn()} />);
+  const input = screen.getByLabelText('From');
+
+  // Artist names are proper nouns autocorrect does not know, and iOS rewrites
+  // them mid-typing, so the query sent is not the query typed.
+  expect(input).toHaveAttribute('autocorrect', 'off');
+  expect(input).toHaveAttribute('autocapitalize', 'off');
+  expect(input).toHaveAttribute('spellcheck', 'false');
+});
+
 test('does not query for empty input', async () => {
   const spy = vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
   render(<ArtistSearch label="From" onSelect={vi.fn()} />);

@@ -83,6 +83,13 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
           }
         }}
         autoComplete="off"
+        // Artist names are proper nouns the keyboard does not know — "Sigur Rós",
+        // "MF DOOM", "!!!" — and iOS rewrites and auto-capitalises them mid-typing,
+        // so the query sent was not the query typed and a present artist came back
+        // empty.
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
       />
       {open && results.length > 0 && (
         <ul className="absolute z-10 mt-1 w-full rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] overflow-hidden">
