@@ -59,8 +59,9 @@ that the eval harness divergence left *"aggregate baselines essentially unmoved 
 samples pairs from a 75k-node graph, where adjacency is rare."* **Both halves were wrong.**
 The pair set is the frozen `panel.json`, not a random sample; and the three callers do not
 treat the two-card case alike — `run_baseline.py:98` discards it, `tune_weights.py:65` keeps
-it with an empty interior, `export_paths.py:244` exports it as a one-hop cell. Corrected in
-place, with the size of the effect marked **unmeasured**. The original was an inference
+it with an empty interior, and `export_paths.py` applies no length filter at all, so a
+two-card path falls past the no-path guard (`:244`) and is exported as a one-hop cell
+(`:250`). Corrected in place, with the size of the effect marked **unmeasured**. The original was an inference
 presented as fact, which is the failure `ml-graph-analyst`'s own "say unmeasured rather than
 likely" rule exists to stop.
 
@@ -96,9 +97,28 @@ figure is **435**, in `2026-07-25-f1-minimum-stop-execution-log.md` §7. The
 that loads unconditionally, by work between the F1 closeout and 2026-07-26, and the delta
 was recorded nowhere.** This is precisely what D6 names `memory/` for: it lives outside the
 repo, so no diff can see it, and only a line count compared against the last recorded figure
-will catch it. Not attributed here — attribution needs the session that did it, not a
-guess. **Success condition:** closed when a session reconciles the 435 → 469 growth against
-what was added, or accepts it explicitly with the reasoning recorded.
+will catch it.
+
+**Which files, so the reconciliation is tractable** (added after the documentation audit
+observed that naming a gap without enumerating it leaves the successor no way in). The 435
+figure was taken at the F1 closeout, 2026-07-25 ~20:51. Four memory files have been written
+since, by modification time:
+
+| File | Lines now | Written |
+|---|---|---|
+| `stop-refining-instrumental-artifacts.md` | 47 | 2026-07-26 09:56 |
+| `roadmap-pointer.md` | 68 | 2026-07-26 10:09 |
+| `clip-resolution-bugs.md` | 50 | 2026-07-26 10:09 |
+| `MEMORY.md` | 15 | 2026-07-26 10:09 |
+
+The other eight files predate the 435 reading and are unchanged. **The 34 lines are
+somewhere in those four**; the split cannot be recovered without the prior content, which
+`memory/` does not keep. The three at 10:09 are one write, and they precede the first
+`low-degree-census` commit (`c5de4ae`, 10:33). **Attribution is still not asserted** — the
+timestamps place the writes, they do not name the session.
+
+**Success condition:** closed when a session reconciles the 435 → 469 growth against those
+four files, or accepts it explicitly with the reasoning recorded.
 
 ## 5. What the session knew that is not otherwise written down
 
@@ -120,7 +140,31 @@ quoted claim each — the probe's §6 phrasing, and `WHAT-GOOD-LOOKS-LIKE.md:137
 75-line and 48-line entries were **not read in full**. "Clean" meant *no third-party content
 and no interleaving*; it did not mean the reasoning was reviewed.
 
-## 6. Operational measurements with no other home
+## 6. Gate outcome — the documentation audit (closeout B1)
+
+Dispatched 2026-07-26 against this branch. Report:
+`findings/2026-07-26-doc-audit-context-layer-maintenance.md`. **Two High, two Medium.**
+
+**`CLM-11`. Actioned — and it is the absence class again.** The audit's strongest finding was
+in a document this branch never touched: `2026-07-25-HANDOFF-clip-playback.md` §5 still
+carried *"what I would do if continuing: build F1 next"* as a live position, unmarked, and
+the design question it poses was settled by F1 itself. The file has a top banner and inline
+markers at two earlier claims; §5 was missed. **A reader landing mid-document never sees a
+banner** — which is precisely the rule `docs/README.md` states for supersession. Marked
+inline, both the numbered item and the paragraph.
+
+**`CLM-12`. One finding refuted; recorded so it is not re-actioned.** The audit carried
+forward a previous audit's claim that `docs/README.md` lacks a `**Role: AUTHORITATIVE**`
+marker in its first ten lines. **It is on line 3 and has been throughout.** A finding
+inherited from an earlier report and not re-checked against the file is the same
+stale-finding failure B1 exists to catch, arriving from the direction of the check itself.
+
+Also actioned: the `export_paths.py` line reference (right — see `CLM-5`), and the
+enumeration now in §4. **Not actioned, and the owner's:** the audit's Medium recommending a
+forward-reference warning at `CLAUDE.md`'s R1 worked example. That is a standing-layer edit,
+so it is his call, not a session's.
+
+## 7. Operational measurements with no other home
 
 - **The stale worktree, resolved.** `.git/worktrees/wt-bypass` printed
   `Permission denied` on every git command for the whole session. Cause:
