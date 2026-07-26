@@ -264,14 +264,43 @@ edited here. Recorded because D6 exists precisely to add the two halves together
 `CLM-7`'s finding was that `memory/` grew with the delta recorded nowhere. Whatever added
 those five lines did not record them either.
 
-**One change is recommended and deliberately NOT made: `CLAUDE.md` does not list
-`ARTISTPATH_GRAPH_SHA256`.** The doc audit raised this as HIGH, and it is a real defect of
-absence — the configuration section names three key API env vars and there are now four,
-with the new one required in production. **The fix is a one-line addition to the budgeted
-standing layer, which `CLAUDE.md` reserves to the owner** ("a session never grows this
-layer on its own authority: report the cost from the diff and hand the decision over").
-Cost: **+1 line**, net-new, no displacement offered. The case: it is the only env var whose
-absence silently disables a boot-time safety check. **Owner's call.**
+**One change was put to the owner and APPROVED: `CLAUDE.md` now lists
+`ARTISTPATH_GRAPH_SHA256`.** The doc audit raised its absence as HIGH, and it was a real
+defect of absence — the configuration section named three key API env vars and there are
+now four, the new one being the only one whose absence silently disables a boot-time safety
+check. Growing this layer is reserved to the owner; the cost and case were reported and he
+took it. **Cost: +3 lines net** (the standing layer's only growth in this work; everything
+else is net zero).
+
+**`TKA-14` — what was NOT added, and why it is the more useful record.** The owner's first
+instruction was to include the **literal sha256 value**. Weighing it surfaced that the
+digest already appears in **52 files** — a fact that reframed the question rather than
+settling it, and the session's initial "it would be recorded twice" was wrong.
+
+**About 48 of those are executing assertions**, not restatements: the frozen probe scripts
+under `builder/analysis/` each define `ADOPTED_SHA256 = …` and assert it against the loaded
+artifact. Replication there is *correct* — each script pins its own provenance and fails
+loudly if handed another graph — and CLAUDE.md protects those scripts as frozen records.
+**So the one-figure rule was never the binding constraint.** The question was whether to add
+the first copy of a **different kind**: one read by a human and retyped into a production
+config, executed by nothing.
+
+Three arguments carried it, and they are worth keeping because the same choice will recur
+at every future adoption:
+
+1. **A checksum compared against a copy is not a check.** Its only correct use is comparison
+   against an independent source; two hand-maintained copies guarantee someone eventually
+   verifies the wrong pair.
+2. **A rebuild splits the copies three ways.** The ~48 frozen scripts *should* keep the old
+   digest; the adoption record and sidecar *must* change; `CLAUDE.md` would become the only
+   must-update copy with nothing forcing it.
+3. **The realistic failure is not the loud one.** A stale digest refuses to boot during a
+   cutover — then someone "fixes" it by clearing the env var, and verification is off in
+   production silently and permanently. That is `TKA-11` realised, and `DEP-24` exists
+   because `TR-9`/`TR-10` flagged hand-transcription as its cause.
+
+**What landed instead is the retrieval instruction, not the value** — same line cost, and it
+stays true across every rebuild rather than going stale at the next one.
 
 ---
 

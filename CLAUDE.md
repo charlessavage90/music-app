@@ -203,7 +203,10 @@ Deezer → iTunes fallback, cached) so the path renders immediately.
 artifact itself, so this is for pointing at a *different* artifact, not for a dev-vs-prod
 swap),
 `ARTISTPATH_CLIP_CACHE` (`memory` default — boots with **no AWS config** — or `dynamo`),
-`ARTISTPATH_CORS_ORIGINS`. The API is testable without a real artifact or network: the
+`ARTISTPATH_CORS_ORIGINS`, `ARTISTPATH_GRAPH_SHA256` (verified at boot, so a wrong artifact
+refuses to start; optional locally, **required in production** — take the value from the
+artifact's manifest sidecar, **never transcribe it by hand**: `DEP-24`).
+The API is testable without a real artifact or network: the
 graph, search, and clip resolver are all injected into `create_app`.
 
 ## Workflow docs
