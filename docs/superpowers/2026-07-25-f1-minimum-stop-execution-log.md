@@ -129,12 +129,17 @@ scope and no document said it had changed. It is recorded here because **nothing
 had not**, and the consequence only bites a future measurement.
 
 `app.py:71` calls `find_journey`. `eval/run_baseline.py:97`, `eval/tune_weights.py:64` and
-`eval/export_paths.py:242` all call `find_path` directly. So for a graph-adjacent pair the
-harness still returns the two-card result the app no longer gives. Aggregate baselines are
-essentially unmoved — the eval samples pairs from a 75k-node graph, where adjacency is rare
-— but the divergence is concentrated entirely in the population F1 exists to change, so a
-measurement *about F1* drawn from the harness would be wrong while its headline numbers
-look untouched. **`FMS-N1`** — `N` for notes added after merge, disjoint from this
+`eval/export_paths.py:242` all call `find_path` directly, so for a graph-adjacent pair the
+harness still gets the two-card result the app no longer returns. **The three then treat that
+result differently — read from source, not measured:** `run_baseline.py:98` discards it
+(`len(path) < 3: continue`), so the baseline metrics never saw adjacent pairs and still do
+not; `tune_weights.py:65` keeps it (`len(path) >= 2`), so Optuna scores paths whose interior
+is empty; `export_paths.py:244` exports it as a one-hop cell. **Switching the harness to
+`find_journey` is therefore not a no-op on any of the three** — it would add to the baseline
+pairs that were previously dropped, and replace the degenerate contributions in the other two
+with real detours. The pair set is the frozen `panel.json`, not a random sample; **how many
+panel pairs are graph-adjacent is unmeasured**, so the size of the effect is unknown in all
+three cases. **`FMS-N1`** — `N` for notes added after merge, disjoint from this
 document's `FMS-D` (decisions) and `FMS-P` (plan defects).
 
 `.claude/agents/ml-graph-analyst.md` now states this and requires an analyst to say which
