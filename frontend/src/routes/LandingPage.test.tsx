@@ -51,6 +51,31 @@ test('a prefilled pair can be sent straight back off without retyping', async ()
   expect(screen.getByTestId('dest')).toBeInTheDocument();
 });
 
+test('typing over a prefilled artist disables "Find path" until one is chosen again', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
+  setup('/?from=m&fromName=Miles+Davis&to=d&toName=Daft+Punk');
+
+  const dest = screen.getByLabelText('To');
+  await user.clear(dest);
+  await user.type(dest, 'wilco');
+
+  // The box and the page must not disagree about who is chosen. Before this
+  // fix the button stayed live and routed to Daft Punk — the artist the user
+  // had just typed over — with no way to tell why.
+  expect(screen.getByRole('button', { name: /find path/i })).toBeDisabled();
+});
+
+test('a single edited character is enough to un-choose', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
+  setup('/?from=m&fromName=Miles+Davis&to=d&toName=Daft+Punk');
+
+  await user.type(screen.getByLabelText('To'), 'x');
+
+  expect(screen.getByRole('button', { name: /find path/i })).toBeDisabled();
+});
+
 test('blocks identical endpoints with a nudge', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockResolvedValue([
