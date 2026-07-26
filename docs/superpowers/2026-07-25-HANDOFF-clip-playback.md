@@ -80,12 +80,22 @@ use. Two things worth pointing at rather than repeating:
 2. **Run the queued check** — ten minutes, no waiting. It is the only thing standing between
    the playback fixes and "confirmed".
 3. **Then Gate 1 → Gate 2.** With clips closed, the remaining named Gate 1 item is F1.
+   ⚠ **SUPERSEDED — F1 was built and merged 2026-07-25 (PR #23).** See
+   `2026-07-25-HANDOFF-f1-minimum-stop.md`.
 
 **What I would do if continuing** (a position, not a menu): build F1 next. It is decided, it
 is small, it is outside the pause, and it is the last thing between here and a friends-and-
 family gate. The design question worth settling first is what the app should do when two
 artists genuinely are neighbours — force a detour, or say so on screen. That is a product
 question, so it is the owner's, but it is the only part that needs him.
+
+> ⚠ **SUPERSEDED, 2026-07-25 — do not act on the paragraph above.** F1 is **built and
+> merged** (PR #23); design `specs/2026-07-25-f1-minimum-stop-design.md`, record
+> `2026-07-25-f1-minimum-stop-execution-log.md`. The design question it names was settled:
+> **both** — a detour is forced where one exists, and the screen says so where none does
+> (`stop_rule` = `adjacent_only`). F1 is **not discharged**; its condition is the queued
+> use-the-app observation. Marked inline per `docs/README.md`'s rule, because a reader
+> landing in §5 never sees the banner at the top of this file.
 
 **Do not start the p99 rescale.** Still not pre-registered, still behind the pause, still the
 owner's trigger.

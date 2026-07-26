@@ -1,6 +1,6 @@
 ---
 name: session-start
-description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. Many sessions here are not builders, and the owner starts builders with it instinctively. This is mechanical orientation, not exploration — about five minutes: four questions, then a name for the session.
+description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. It is owed by any session that will act on repository state — edit, commit, run a job — not only by builders; but many sessions here only read and advise, and the owner starts the ones that act with it instinctively. A session that owes it and was not given it says so once and proceeds — a fact about itself, never a recommendation to run it. This is mechanical orientation, not exploration — about five minutes: four questions, then a name for the session.
 ---
 
 # Session start
@@ -111,6 +111,9 @@ git status --short && git log --oneline -3 && git branch -vv
 - **Check the test queue** left by the last closeout. Anything sitting untested gets
   flagged to the owner now. That flag is the only forcing function on the async
   use-the-app check, which is the one item that catches defects tests structurally cannot.
+  **If the entry records a detached dev server, check it is still alive and started after
+  HEAD** — closeout leaves one running deliberately, owned by nobody, and a stale one fails
+  the queued test for a reason that has nothing to do with the work.
 - **Confirm artifact identity before drawing any conclusion from one.** Several graphs
   exist in `builder/scratch/` and **they are not interchangeable.** They cannot be
   committed, so a sha256 against the manifest sidecar is the only way to know which one

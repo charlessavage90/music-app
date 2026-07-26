@@ -122,6 +122,37 @@ over `api/src` 0 issues.
   suites; §7 now records what was asked versus what was done rather than asserting a
   verification nobody ran.
 
+### Added after merge, 2026-07-26 — the evaluation harness does not have F1
+
+Not a correction to this work, which never claimed otherwise: `eval/` was outside F1's
+scope and no document said it had changed. It is recorded here because **nothing said it
+had not**, and the consequence only bites a future measurement.
+
+`app.py:71` calls `find_journey`. `eval/run_baseline.py:97`, `eval/tune_weights.py:64` and
+`eval/export_paths.py:242` all call `find_path` directly, so for a graph-adjacent pair the
+harness still gets the two-card result the app no longer returns. **The three then treat that
+result differently — read from source, not measured:** `run_baseline.py:98` discards it
+(`len(path) < 3: continue`), so the baseline metrics never saw adjacent pairs and still do
+not; `tune_weights.py:65` keeps it (`len(path) >= 2`), so Optuna scores paths whose interior
+is empty; `export_paths.py` applies no length filter at all, so a two-card path falls past
+the no-path guard (`:244`) and is exported as a one-hop cell (`:250`). **Switching the harness to
+`find_journey` is therefore not a no-op on any of the three** — it would add to the baseline
+pairs that were previously dropped, and replace the degenerate contributions in the other two
+with real detours. The pair set is the frozen `panel.json`, not a random sample; **how many
+panel pairs are graph-adjacent is unmeasured**, so the size of the effect is unknown in all
+three cases. **`FMS-N1`** — `N` for notes added after merge, disjoint from this
+document's `FMS-D` (decisions) and `FMS-P` (plan defects).
+
+`.claude/agents/ml-graph-analyst.md` now states this and requires an analyst to say which
+of the two it measured. That is a guard, not a fix.
+
+**Open, and the owner's: should the harness call `find_journey`?** Not decided here and
+nothing in `eval/` is touched — it changes what every path-quality measurement sees, and
+that work is paused. It is also not obviously right: tuning weights against `find_path` is
+defensible, because F1 adds no scoring. **Success condition:** settled either way when
+path-quality work resumes, before any harness result is read; or closed as "accepted, won't
+fix" if the divergence is judged immaterial with that reasoning recorded.
+
 ## 6. Operational measurements with no other home
 
 - Real-graph verification: **40 seconds** after sample sizes were cut (the first version

@@ -2353,3 +2353,126 @@ artifact identity this project has recorded: the archive at `builder/scratch/gra
 passed across 11 files. No test was added by this work and none needed changing.
 
 **D2 is inapplicable:** the graph did not change, so the committed fixtures are not stale.
+
+### DISCUSSION — external data sources and tools surveyed; two live items, the rest parked (2026-07-26)
+
+**Not experimental work.** A discussion session, owner-led, held during the path-quality
+pause. **Nothing was run, nothing measured, no arm, no graph touched, no figure produced.**
+Recorded because the eliminations below cost real reasoning and would otherwise be re-raised,
+and because one standing misreading was corrected at its source. **Nothing here is a resume
+signal for path work** — that trigger is the owner's alone.
+
+**The correction, and it is the most reusable thing in this entry.** The popularity-source
+eliminations in `findings/2026-07-19-listenbrainz-probe.md` §6d–6f have been read here — by
+this session, three times in one conversation, and invited by the docs-map wording — as a
+general barrier against external fame data. **They are not.** Their actual scope, from §6e's
+own text: popularity must be measured on the same population as the graph *to be coherent in
+the cost function's `|pop(a) − pop(b)|` and floor terms* — an argument about the arithmetic of
+comparing two nodes of one graph, covering **external popularity inside routing and nothing
+else**. §6d–6f never discusses *fame*, which is a different currency (Phase 1 log §2.11: at
+the top of the distribution a lo-fi producer and a Beatle score alike) and entered the project
+later. §6f additionally marks even the routing decision **"an alpha decision, not a permanent
+one"**, naming its replacement condition (a genuine ListenBrainz artist-popularity table) and
+its validation method. And an external *fame* source has already passed a gate: English
+Wikipedia pageviews, adopted as the fame proxy for the Track 2 scoring criteria by
+pre-registration amendment A11 — the amendment that resolved which fame source scores the
+criteria, and scored an artist with no English article at the fame floor. **External fame
+sources are gated, not banned.** `docs/README.md`'s row for the probe now carries the scope
+inline, because that row is where the overstatement was seeded.
+
+**Live now — two items, neither of them path work.**
+
+| Item | Why now |
+|---|---|
+| **Capture a Spotify listening snapshot** (the owner's own account: top artists, followed, saved) | Time-boxed. It is an uncontaminated *pre-app* baseline only until he listens to an artist the app surfaced — which is the product working. The app itself does not write to it (clips are Deezer/iTunes previews, not Spotify). One request, local file, **personal data: not in git.** |
+| **Fact-check whether MusicBrainz data dumps carry artist→Wikidata identity links** | The binding constraint on every external fame source here is **entity matching, not fame measurement** — it is what disqualified one candidate and nearly disqualified the adopted one. An ID join would replace name matching. Cheap, no owner time, and its answer shapes any future proxy work whichever source wins. |
+
+**Parked, with triggers.**
+
+| Parked | Trigger |
+|---|---|
+| **BoilTheFrog source review**, reshaped to one targeted question — *does it apply any popularity/fame term in path selection, or is it plain shortest-path?* | Path-quality work resumes; run it at the **front**, before the rescale probe is designed. Two bounds: it may return **mechanisms, never numbers** (its graph is Spotify related-artists, ours is ListenBrainz-derived and mutual-kNN filtered — a quantity from one is not a quantity about the other), and the report must state the repo's licence. Note the app **cannot be run** — the alpha design §1 records that its data source was deprecated — so the *behavioural* half of `WHAT-GOOD-LOOKS-LIKE` value 9 is unresolvable by anyone, and the value does not depend on the reference being accurate. |
+| **Wikidata sitelink count as a fame candidate** (how many language editions carry an article) | The mapping check above returns positive **and** path work resumes. It is a **new currency, not fame** — needs the §5 falsification protocol like any candidate, and an identifier carrying its own currency. Its appeal is that it is multilingual, which speaks to the residual risk A11 explicitly accepted: a foreign-language or historically-notable artist the owner would know, with no English article, scored as maximally obscure. |
+| **Draw evaluation pairs whose *interior territory* sits inside a cluster the owner listens to deeply** | A blind listen or a new pair set is being designed. **Not endpoints** — the pre-registration §2.3 set is already famous-heavy by design and he knows essentially all of them; the judgement limit bites at the interiors, not the ends. |
+| **A listening-derived frame for a future hand-labelling sample** | A new hand-labelling exercise is designed. **Frame only, never labels** — a mechanical selection rule written before collection (amendment A10 is the precedent: it replaced a hand-picked sample with a mechanical rule because "span the strata" pinned no set). Pre-filling a label is scoring, not selection. |
+| **A Spotify monthly-listener check as the second input at A11's guard** — the one-glance owner check on an unmatched interior that is *potentially notable* | That guard fires. It has never fired; the Track 2F closeout records it discharged without spending his glance. |
+
+**Two eliminations, and the reason is not the one that looks obvious.** Both candidates
+surveyed as fame sources — kworb's iTunes chart aggregation, and a Kaggle-hosted historical
+Spotify artist dataset — are **top-tail instruments, where the job is mid-band.** §6d already
+establishes that the free in-graph signal separates famous from obscure reliably and is
+imprecise in the middle; §5 states that mid-fame discrimination is the regime the proxy's job
+actually lives in. So the defect is not that either source covers a fraction of the graph — it
+is that the fraction is **not random**, and is thinnest exactly where discrimination is
+needed. Chart data additionally measures **current commercial activity, a flow, not fame, a
+stock**, so a universally-known artist inactive today scores near zero — worsening the
+residual risk A11 already accepted rather than repairing it. The Kaggle-class option carries a
+second defect the staleness framing hides: **unknown construction**. A popularity column that
+cannot be traced to a definition is the input class that produced three wrong conclusions here
+already. Both are recorded in the roadmap's *Dropped permanently* table.
+
+**Guard, if any new fame candidate is ever tested.** The owner's blind labels already exist
+and are reusable, and §5's protocol is committed with its falsifiers fixed, so a candidate can
+be run through that gate for **no new owner time**. That cheapness is the hazard: one
+candidate was pre-registered and one was its named fallback, and adding further candidates and
+keeping whichever scores best is proxy-shopping through the back door. **Fix the adoption rule
+before running anything** — beat the incumbent on the primary *and* fire no falsifier — and
+commit it first.
+
+**Four pieces of reasoning that did not otherwise survive into a document.** Recorded on the
+owner's prompt, after they dropped between the discussion and the first draft of this entry —
+the completeness-failure shape, caught at the same sitting.
+
+1. **The owner's listening data is two different datasets, and only one carries the objection
+   already on the record.** The Web API (top artists, followed, saved) is a single request,
+   tens-to-hundreds of artists, recency-weighted. The GDPR *extended streaming history* export
+   is complete play-by-play back to account creation and takes weeks to arrive. The roadmap's
+   *Dropped permanently* row for session-data ground truth cites **"multi-week acquisition"** —
+   that objection lands squarely on the export and **does not touch the API endpoints at all.**
+   Anyone revisiting this must say which of the two they mean.
+2. **Presence is strong evidence, absence is weak — and that is why a selection *frame* is the
+   safe use.** Listening data shows he knows an artist; its silence does not show he does not
+   (pre-streaming listening, radio, live, other platforms). A frame only ever draws from what
+   is present, so the unreliable half is never exercised. **Do not extend the parked frame item
+   into absence-based scoring** — that inherits exactly the failure the coverage falsifier hit,
+   and A11 only escaped it because Wikipedia-absence turned out to predict "never heard of",
+   which tracks notability rather than one person's platform habits.
+3. **Three other uses were considered and are not pursued**, so they are not fresh ground:
+   listening data as an *evaluation instrument* (score paths by interiors he has never played),
+   as a *product feature* (route around what the listener knows), and as *auto-seeding* for the
+   "know them already" button. The latter two are per-user state and per-user auth, which the
+   architecture does not have — path state lives in the URL and the build is deterministic.
+4. **The evaluation-instrument use is the item most likely to generate an argument for
+   un-pausing path work**, and that is a cost to price before starting it rather than discover
+   afterwards: measuring how many delivered artists he has never played produces a
+   path-quality finding whether or not anyone wanted one.
+
+**Provenance of the unverified claims underneath the above.** Several load-bearing statements
+in this survey are the session's general knowledge, **not checked against a source**: the
+surviving post-2024 Spotify API surface; that Spotify's `popularity` is recency-weighted and
+`followers` cumulative (this underpins the Kaggle-class elimination); the existence and
+turnaround of the GDPR export; and — **already committed** in `WHAT-GOOD-LOOKS-LIKE.md`'s
+calibration section — that **monthly listeners is not exposed by the Web API**, which is the
+stated reason the spot-check is necessarily manual and "cannot scale into a proxy by accident."
+**If that one is wrong, the committed note is wrong.** Each is cheap to verify and none has
+been.
+
+**Things the owner said, now in a file.**
+
+- **On this whole class of proposal:** *"ideas might be the wrong name — what I mostly have is
+  potential tools, options, data sources… worse than being useless, some of these could bring
+  negative impact."* This is the right default and it changed how the survey was run: for a
+  tool the downside is not wasted effort, it is a plausible-looking input contaminating the
+  record, which is the failure this project has actually suffered.
+- **He restated that he is aligned with the adopted fame proxy** — continued assent to A11,
+  recorded because nothing else records it.
+
+**Also noted, and it is the shape of the whole discussion:** one decision gates nearly
+everything above. Two items are live; every other item waits on the owner resuming path work.
+The session produced a queue behind a single call that is his, not a set of independent work.
+
+**Related, already landed:** the Spotify monthly-listener spot-check — a by-hand A-vs-B fame
+comparison for a handful of artists — was documented 2026-07-25 in
+`WHAT-GOOD-LOOKS-LIKE.md`'s calibration section, with three bounds (never during a blind
+listen, never inside a scored criterion without its own falsification test, and record any
+check that changed a decision).

@@ -43,9 +43,21 @@ belief — including a belief you yourself established earlier.
   restated. Both popularity terms are in **raw** currency, not percentile, and
   `floor_raw` is the only depth-graduated term — everything else is static per request.
   `w_degree_hub` defaults to 0.0, so that term is inert unless deliberately set.
+- **Every journey gets at least one stop** (F1, the owner's decision, 2026-07-25). **The app
+  calls `find_journey`, not `find_path`.** Where the least-cost path is exactly the two
+  chosen artists, it searches again with their direct connection forbidden and returns that
+  detour; where no detour exists it returns the pair. It returns `(path, stop_rule)` —
+  `natural` / `forced` / `adjacent_only`. **The detour is chosen by the unchanged cost
+  function**, which is why this landed inside the path-quality pause: it constrains the
+  result, it does not score. Design:
+  `docs/superpowers/specs/2026-07-25-f1-minimum-stop-design.md`.
 - **The evaluation harness.** `api/eval/run_baseline.py` with metrics in
   `api/…/evaluation.py`; `api/eval/tune_weights.py` drives Optuna. Results land in
-  `api/eval/*.txt`.
+  `api/eval/*.txt`. **All three of `run_baseline.py`, `tune_weights.py` and
+  `export_paths.py` call `find_path` directly**, so the harness still returns the two-card
+  result for adjacent pairs that the app no longer gives. Any path-length or intermediary
+  statistic taken from it is pre-F1 on exactly the pairs F1 changed — **say which of the two
+  you measured.**
 
 ## Read these before your first measurement
 

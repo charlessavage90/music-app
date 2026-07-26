@@ -129,6 +129,43 @@ changed it still pointed at the old behaviour.
 If the answer is "we haven't decided yet", that is fine, but it means the work is not
 closed. Say so plainly rather than marking it complete.
 
+### A5. Release the processes this session started
+
+**Sweep the ports, stop what this session owns, and leave a fresh detached server behind
+if C1 queued anything.**
+
+A session that starts a dev server in a background shell stays *subscribed* to it: retiring
+the session does not end the subscription, and only closing its terminal does. The terminal
+is deliberately kept open across a handover so the outgoing session can still be asked what
+it knew — so the wake path has to be closed here rather than by closing the window. This
+sits in Part A because **only the owning session can stop its own tasks**, and by Part B the
+closeout may be in a fresh one.
+
+1. **Sweep by listener, not by task list.** A session sees only the tasks it owns, so
+   `TaskList` reports an empty machine while yesterday's servers are still serving.
+
+   ```powershell
+   Get-NetTCPConnection -State Listen -LocalPort 8000,5173 | Select-Object LocalPort,OwningProcess
+   ```
+
+   Report each with its **start time against the HEAD commit date**. A listener older than
+   the work being closed out serves code that predates it, so a manual test against it is
+   invalid and looks entirely normal.
+
+2. **Stop what this session owns** (`TaskStop`), and **name the listeners it does not** —
+   those outlived a session that is gone, `TaskStop` cannot reach them, and freeing the port
+   needs the PID. Stopping a task does not disturb the conversation, so the terminal stays
+   answerable afterwards.
+
+3. **If C1 queued an item, relaunch detached**, per the commands in `CLAUDE.md` — cite them,
+   do not restate them. Detached means no session owns it, so nothing can be woken by it; it
+   equally means nothing is watching, so **a failure to bind is silent. Verify both ports
+   answer before believing it started.** Record PID and port in the C1 entry.
+
+**Then say so in the closing message** — ports, PIDs, and that nothing owns them. A detached
+server outlives every session and every terminal, so the failure mode is the owner not
+knowing it is there.
+
 ---
 
 ## Part B — Fresh session, mechanical
@@ -438,6 +475,29 @@ Two traps, both already sprung here:
 narrative attached to them, and that narrative is what makes a rule transfer to a case it
 was not written for.
 
+### D7. Mark the session retired — the last thing you write
+
+**Close with a `/rename` line prefixing `RETIRED-` to the session's current name.** You
+cannot run it yourself — `/rename` is a built-in command, not a skill — so hand him the
+finished line with nothing to compose:
+
+```
+/rename RETIRED-track2f-toll-builder (handoff, mid-flight)
+```
+
+**Prefix only.** Keep the name and any suffix `session-start` §E set, so a chain of handoffs
+still reads as one chain in the `/resume` picker.
+
+The terminal of a retired session is deliberately left open — to confirm the handoff landed,
+and to ask it what it knew. Nothing else marks it as finished: in the picker and the window
+title it is indistinguishable from a session still working, which is the same confusion
+`session-start` §C has to resolve from the other side. **If you do not know the current
+name, ask rather than guess** — a session renamed to a name it never had is worse than an
+unprefixed one.
+
+Put it in the same closing message as A5's dev-server statement: one message carrying
+everything he has to act on.
+
 ---
 
 ## Two standing rules
@@ -472,12 +532,15 @@ changes later, revival is a decision rather than an archaeology project.
 **Full ritual** after a phase, or after anything touching the graph, the artifact
 format, or the cost function.
 
-**Minimum** after a small self-contained track — A4, B2, C1, D1. Default-flip,
-reachability, use it, clean tree. Half an hour combined, and they catch most of what
-matters.
+**Minimum** after a small self-contained track — A4, **A5**, B2, C1, D1. Default-flip,
+release the shells, reachability, use it, clean tree. Half an hour combined, and they catch
+most of what matters. A5 travels with C1: the queued test needs a server, and a stale one
+fails it for the wrong reason.
 
 **Mid-flight retirement**, when a session is being handed over before its work reaches a
-natural seam — A1, **A2-mid**, A3, B1, B5, **D1-mid**, D3, **D6**. D6 belongs here
+natural seam — A1, **A2-mid**, A3, **A5**, B1, B5, **D1-mid**, D3, **D6**, **D7**. A5 matters most
+here: a mid-flight handover is precisely when the old terminal is kept open, which is the
+only condition under which an owned shell can wake a retired session. D6 belongs here
 specifically: a mid-flight handoff usually happens *because* a governing document changed,
 so the standing-layer delta is both non-zero and exactly what the successor needs recorded.
 

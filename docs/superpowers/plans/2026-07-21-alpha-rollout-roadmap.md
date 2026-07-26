@@ -273,6 +273,8 @@ Not solved now. But the Gate-1 cache redesign (C2) must not foreclose the option
 | Bidirectional Dijkstra | Wrong lever — the constant factor is interpreted Python. Caching first. |
 | Binary hub-traversal metric | Confounded by path length; replaced by hubfrac. |
 | Artifact metadata format, `S3Archive.has()` efficiency, typed-edge rewiring | Cosmetic or only relevant to work not scheduled. |
+| Chart-aggregation fame sources (kworb-class) | **Top-tail instrument where the job is mid-band.** Probe §6d already separates famous from obscure reliably and is imprecise in the middle; the pre-registration's §5 names mid-fame discrimination as the regime the proxy's job lives in. Coverage is not thin at random — it is thinnest where discrimination is needed. A second reason, **weaker and stated as such**: charts measure *current commercial activity* (a flow), not fame (a stock), so a universally-known but inactive artist scores near zero — worsening the residual risk amendment A11 already accepted. **That second reason rests on an unverified reading**; if kworb's extended pages carry cumulative or historical aggregates rather than current positions, it weakens. **The first reason is decisive on its own and does not depend on it.** Surveyed 2026-07-26. |
+| Historical third-party artist datasets (Kaggle-class snapshots) | Same top-tail defect, plus **unknown construction** — a popularity column that cannot be traced to a definition is the input class that has produced three wrong conclusions here. Staleness is the lesser problem and bites hardest in the mid-band. Surveyed 2026-07-26. |
 
 ---
 
