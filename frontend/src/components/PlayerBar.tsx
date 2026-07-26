@@ -7,7 +7,7 @@ interface Props {
 export function PlayerBar({ currentName, isPlaying, onToggle }: Props) {
   if (!currentName) return null;
   return (
-    <div className="fixed bottom-0 inset-x-0 border-t border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 flex items-center gap-3">
+    <div className="fixed bottom-0 inset-x-0 border-t border-[var(--color-border)] bg-[var(--color-surface)] px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex items-center gap-3">
       <button
         type="button"
         aria-label={isPlaying ? 'Pause' : 'Play'}

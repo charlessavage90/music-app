@@ -39,7 +39,7 @@ export function PathPage() {
   }
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-10 pb-24">
+    <main className="max-w-2xl mx-auto px-4 py-6 sm:py-10 pb-32">
       <div className="flex items-center gap-4 mb-6 text-sm">
         {/* Without this the path page is a dead end: every route back to
             picking two artists was the browser's Back button. The pair
