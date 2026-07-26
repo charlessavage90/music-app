@@ -1,5 +1,11 @@
 # HANDOFF — clips closed, two playback defects fixed, 2026-07-25
 
+> **⚠ PARTLY SUPERSEDED 2026-07-25 — on F1 only.** This note says F1 is "decided but not
+> built" (§2, §3, §5). **It is now built** — PR #23, record
+> [`2026-07-25-f1-minimum-stop-execution-log.md`](2026-07-25-f1-minimum-stop-execution-log.md).
+> Everything else here — the clip closures, the playback fixes, and what must not be
+> reverted — stands unchanged.
+
 **Role: ACTIVE, short-lived by design.** Written at a **clean seam**: the work ran to
 completion, PR #20 is open and ready, and nothing is in flight. **This is not a mid-flight
 handoff — the degradation tell did not fire, and no cold-read-back is owed.**
