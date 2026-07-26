@@ -173,12 +173,12 @@ def find_journey(
     detour, so no new scoring is introduced and this stays outside the paused
     path-quality work.
 
-    Some pairs cannot be given a stop at all: roughly 8 % of artists hold a
-    single connection in the graph, so their one neighbour has no route back
-    except that connection (findings/2026-07-25-mutual-knn-stranding.md,
-    MKS-6). Those fall back to the two-card path and say so rather than
-    returning nothing, because a no-path result must only ever come from user
-    exclusions.
+    Some pairs cannot be given a stop at all: some artists hold a single
+    connection in the graph (findings/2026-07-25-mutual-knn-stranding.md,
+    MKS-3), so their one neighbour has no route back except that connection
+    (same document, MKS-6, for the resulting pair-level count). Those fall
+    back to the two-card path and say so rather than returning nothing,
+    because a no-path result must only ever come from user exclusions.
 
     The second search re-reads the same exclusions, so a stop is never forced
     through an artist the user has already rejected.

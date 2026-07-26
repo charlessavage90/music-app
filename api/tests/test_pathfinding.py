@@ -129,7 +129,8 @@ def test_forbidden_edge_is_undirected():
 
 
 def test_forbidding_the_only_link_yields_no_path():
-    # B hangs off A by a single edge, as ~6,400 real artists do.
+    # B hangs off A by a single edge, as some real artists do
+    # (findings/2026-07-25-mutual-knn-stranding.md, MKS-3).
     store = make_store(
         names=["A", "B", "C"], pop_raw=[0.5, 0.5, 0.5],
         undirected_edges=[(0, 1, 0.9), (0, 2, 0.9)],

@@ -28,8 +28,16 @@ signals shape the reroll differently (see the spec §4.3).
 
 // response
 {"artists": [{"mbid": "…", "name": "Miles Davis", "disambiguation": "",
-              "popularity": 0.80}, …]}
+              "popularity": 0.80}, …],
+ "stop_rule": "natural"}
 ```
+
+`stop_rule` reports how the journey got its middle (F1; design
+`docs/superpowers/specs/2026-07-25-f1-minimum-stop-design.md`):
+- `"natural"` — the least-cost path already had at least one stop.
+- `"forced"` — the two artists were neighbours, so a detour was inserted.
+- `"adjacent_only"` — the two are neighbours and nothing connects them both;
+  the two-card path is returned as-is.
 
 - `422` if `sources` is not exactly two (alpha supports two; the list shape is
   future-proofed for multi-artist pathing).

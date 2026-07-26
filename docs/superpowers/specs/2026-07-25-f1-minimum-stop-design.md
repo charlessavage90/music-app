@@ -151,6 +151,30 @@ Before merge, against the adopted artifact:
 That third check is the important one: the whole design rests on the claim that
 non-adjacent paths are untouched, and it is cheap to demonstrate rather than assert.
 
+**Note added after merge, on what that third check actually verified.** This bullet
+asked for a byte-identical comparison, run against the live graph, over ordinary
+paths. `builder/analysis/2026-07-25-f1-verification/check.py`'s check 3 does not do
+that: `find_journey`'s own logic returns immediately, unmodified, whenever the
+least-cost path already has three or more cards (`len(path) != 2: return path,
+STOP_NATURAL`) — so any pair check 3 samples that reaches the comparison takes that
+line and hands back an identical result *by construction*, regardless of what the
+detour logic does. It is honestly relabelled in the script as a guard on that
+early-return line, not a live-graph comparison, once this was noticed (see the
+script's "Fix round 1" note). Check 4 is what actually exercises the branch this
+design adds, by sampling graph-adjacent pairs and partitioning them by what
+`find_path` itself returns.
+
+The bullet's claim — that ordinary (non-two-card) paths are untouched — still holds,
+but by a different route than "run and compare": it follows from `find_journey`'s
+control flow (the second search only ever runs when the first result is exactly the
+two endpoints) plus the unchanged `find_path`/pathfinding test suite, which nothing
+in this design modifies. No live-graph run demonstrates it; the claim is true by
+construction, not by measurement. Verifying it by actual comparison, if wanted, needs
+a differently-shaped check than either 3 or 4 above — sampling pairs whose *least-cost
+path* already has three or more cards (not pairs sampled at random, which are
+overwhelmingly non-adjacent and hit the same by-construction line) and confirming
+`find_journey` reproduces `find_path` on them. That check was not written.
+
 ## 8. Open, and the owner's
 
 - **Wording of the note.** Placeholder above.

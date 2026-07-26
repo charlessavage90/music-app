@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 from artistpath_api.app import create_app
 from artistpath_api.clips import ClipResolver, InMemoryClipCache
 from artistpath_api.config import ApiConfig
+from artistpath_api.pathfinding import DISLIKE
 from artistpath_api.search import ArtistSearch
 from tests.conftest import make_store
 
@@ -142,6 +143,21 @@ def test_path_response_reports_a_forced_stop():
     assert body["stop_rule"] == "forced"
     assert len(body["artists"]) >= 3
     assert [x["name"] for x in body["artists"]][0] == "Radiohead"
+
+
+def test_path_endpoint_is_409_when_hard_exclusions_disconnect_the_endpoints():
+    # C is the only way from A to B; excluding it disconnects them.
+    store = make_store(
+        names=list("ABC"), pop_raw=[0.5] * 3,
+        undirected_edges=[(0, 2, 0.9), (2, 1, 0.9)],
+    )
+    client = _client_over(store)
+    a, b, c = store.mbids
+    r = client.post(
+        "/api/path",
+        json={"sources": [a, b], "exclude": [{"id": c, "reason": DISLIKE}]},
+    )
+    assert r.status_code == 409
 
 
 def test_path_response_reports_two_artists_with_nothing_between():

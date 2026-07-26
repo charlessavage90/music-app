@@ -25,11 +25,12 @@ test('buildPath returns artists and the stop rule, and sends sources+exclude', a
     stop_rule: 'forced',
   });
   vi.stubGlobal('fetch', fetch);
-  const result = await buildPath(['a', 'b'], []);
+  const exclude = [{ id: 'z', reason: 'dislike' as const }];
+  const result = await buildPath(['a', 'b'], exclude);
   expect(result.artists).toHaveLength(1);
   expect(result.stopRule).toBe('forced');
   const body = JSON.parse((fetch.mock.calls[0][1] as RequestInit).body as string);
-  expect(body).toEqual({ sources: ['a', 'b'], exclude: [] });
+  expect(body).toEqual({ sources: ['a', 'b'], exclude });
 });
 
 test('getTrack maps snake_case to camelCase', async () => {

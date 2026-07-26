@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel
 
 
@@ -27,7 +29,7 @@ class PathResponse(BaseModel):
     # Whether the journey needed a stop forced into it, and whether one was
     # possible. Wire contract, so snake_case; the frontend reads it as
     # stopRule. Values are pathfinding.STOP_*.
-    stop_rule: str
+    stop_rule: Literal["natural", "forced", "adjacent_only"]
 
 
 class TrackOut(BaseModel):

@@ -219,10 +219,19 @@ if insert_counts:
     )
 else:
     mn = mx = median = None
+# This count is a SAMPLING ARTIFACT, not a rate, and must not be read as one.
+# edge_pairs is drawn by picking a random artist and then one of ITS edges
+# (see the loop above), so an artist with few connections has each of its
+# edges drawn far more often than that edge occurs in the graph -- exactly
+# the artists MKS-1 describes as strandable. That inflates this sample's
+# share of no-stop-possible pairs relative to the graph as a whole. The
+# pair-level rate, drawn without that bias, is owned by
+# findings/2026-07-25-mutual-knn-stranding.md (MKS-6); do not restate it
+# here, and do not average this figure into it.
 print(
     f"\nadjacent pairs sampled: {len(edge_pairs)} -> "
     f"no forcing needed: {no_forcing_needed}, forced: {forced}, "
-    f"no stop possible: {no_stop_possible}"
+    f"no stop possible in THIS BIASED SAMPLE (see comment above): {no_stop_possible}"
 )
 print(f"artists inserted per forced stop: min={mn}, median={median}, max={mx}")
 
