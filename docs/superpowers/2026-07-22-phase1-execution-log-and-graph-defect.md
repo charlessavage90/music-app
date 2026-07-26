@@ -388,6 +388,15 @@ policies (highest `hub_penalty`, and most-popular-interior):
 *(mean / lowest single interior percentile.)* **Flat everywhere.** Twenty bypasses, either
 graph, either policy, never below the 95th percentile.
 
+> **⚠ PROVENANCE, added 2026-07-26 — this table is about `capfix` and `rankfix`, and the
+> app runs neither.** The adopted artifact has **`rankfix`'s topology with `capfix`'s
+> scores**, and routing depends on the scores, so neither row is a measurement of the
+> running app. The claim as stated — "on either graph tested" — is exactly true and is the
+> form to quote; **what is not available is "the app never surfaces an artist below the
+> 95th percentile."** Recorded here because `DRV-1`'s provenance caveat was narrowed the
+> same day to §2.11 and §2.12, and this table is the one part of §2.9 that neither §2.10
+> supersedes nor §2.12 retracts. Re-measuring is cheap and has not been done.
+
 #### The cause — and it is the adopted cap strategy
 
 | artifact | popularity assortativity | neighbours of top-500 below p90 | below p50 |
