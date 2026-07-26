@@ -1,5 +1,11 @@
 # Track D — Frontend Implementation Plan
 
+> **⚠ EXECUTED 2026-07-26 — do not execute again.** Outcomes, including three defects found
+> in this plan itself, are in
+> [`../2026-07-26-gate2-track-d-execution-log.md`](../2026-07-26-gate2-track-d-execution-log.md).
+> Where that log and this plan disagree, **the log wins**. Superseded figures are struck
+> inline below as well as listed there.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans (recommended
 > for this plan — see "Execution recommendation" below, which **reverses** the recommendation
 > the Track A completion handoff made before the code had been read) or
@@ -1301,7 +1307,9 @@ Expected: PASS.
 - [ ] **Step 6: Run every suite**
 
 Run: `npm test && npm run lint && npm run build`
-Expected: frontend **78 passed**.
+Expected: frontend ~~**78 passed**~~ — **CORRECTED ON EXECUTION to 77.** This task's budget
+said two tests and its Step 1 specified one; the arithmetic, not the run, was wrong. See
+`TKD-7`.
 
 - [ ] **Step 7: Commit**
 
@@ -1330,7 +1338,8 @@ Claude-Session: https://claude.ai/code/session_01RboJGSeWS8sGqqBcVwB2ey"
 - Produces: nothing executable.
 
 **This task adds no test.** Its job is to prove the seven items land together and to leave
-the record a cold session reads. **Expected frontend total: 78. Expected e2e total: 4.**
+the record a cold session reads. **Expected frontend total: ~~78~~ 77 (corrected on execution,
+`TKD-7`). Expected e2e total: 4.**
 
 - [ ] **Step 1: Run everything, from a clean tree**
 
@@ -1340,7 +1349,7 @@ cd ../api && UV_LINK_MODE=copy uv run --extra dev pytest -q
 cd ../builder && UV_LINK_MODE=copy uv run --extra dev pytest -q
 ```
 
-Expected: frontend **78**, e2e **4**, api **180**, builder **115**. Any api or builder
+Expected: frontend ~~**78**~~ **77** (`TKD-7`), e2e **4**, api **180**, builder **115**. Any api or builder
 movement means this plan touched something it must not have — stop and find out what.
 
 - [ ] **Step 2: Check the desktop view by eye at both widths**
