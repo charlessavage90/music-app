@@ -60,12 +60,50 @@ browser ──→ CloudFront ─┤
                                                         └─→ stdout  — CloudWatch Logs
 ```
 
-**`DEP-8` — the single-origin choice removes CORS entirely rather than configuring it.**
-The browser talks to one origin, so `ApiConfig.cors_origins` goes **unset** in production.
-This is not an accident of the design; `api/src/artistpath_api/config.py`'s CORS block
-already anticipates it ("Not needed when the SPA is proxied same-origin"). It also means
-the API is not reachable except through CloudFront, so the password gate cannot be
-sidestepped by calling the API directly.
+> **⚠ CORRECTED 2026-07-26 by the team review — `DEP-8` as written contained TWO false
+> claims.** Record: `findings/2026-07-26-gate1-gate2-team-review.md` `TR-7`, `TR-8`. Both
+> were caught by two reviewers independently. **Do not implement the struck text.**
+
+**`DEP-8` — the single-origin choice removes CORS rather than configuring it.** The browser
+talks to one origin, so no cross-origin request is made in normal operation.
+`api/src/artistpath_api/config.py`'s CORS block anticipates this ("Not needed when the SPA
+is proxied same-origin").
+
+- **~~`cors_origins` goes unset in production.~~** **FALSE.** Verified at `config.py:60-68`:
+  **unset yields the dev default** `http://localhost:5173`, so the deployed API would
+  advertise that origin. The empty tuple requires setting `ARTISTPATH_CORS_ORIGINS` **to the
+  empty string**. The CDK stack sets it explicitly. Near-harmless in effect — but a plan
+  written faithfully from the original sentence produces the wrong config and, because
+  same-origin means no preflight ever fires, nothing would reveal it.
+- **~~The API is not reachable except through CloudFront, so the gate cannot be
+  sidestepped.~~** **FALSE, and two other decisions rested on it.** App Runner publishes its
+  own public `*.awsapprunner.com` URL and has no OAC equivalent, so the password gate
+  protects the SPA and not the API. **Fix: CloudFront injects a shared origin-secret header
+  on both behaviours and a FastAPI middleware rejects requests lacking it** — roughly ten
+  lines and one CDK property. VPC ingress is *not* an alternative here: CloudFront VPC
+  origins do not support App Runner. `DEP-17`'s cost reasoning is only true once this lands.
+
+**`TR-5` — the SPA needs a CloudFront fallback, or every shared link 403s.** The default
+behaviour serves a private S3 bucket, which holds no object at `/path/<mbid>/<mbid>`. The
+distribution needs `errorResponses` mapping **403 and 404 → `/index.html` with status 200**.
+**This is invisible locally**, because Vite serves `index.html` for unmatched paths — so it
+would pass every local check and fail on the first thing a friend does. It breaks the
+property CLAUDE.md gives as the *reason* path state lives in the URL.
+
+**`TR-6` — the `/api/*` behaviour must pin its cache policy, and one failure is silent.**
+CloudFront's defaults are wrong three ways: caching the freshly re-signed clip URL would
+**resurrect C2 — "clips die after a while"** (closed 2026-07-25, marked do-not-re-plan, and
+it would be diagnosed as a regression in closed work); dropping query strings makes every
+search return whatever `q` was cached first; and `GET`-only methods 405 the path POST. Pin
+`CACHING_DISABLED`, `ALLOW_ALL` methods, and an origin request policy that forwards the
+query string **and** the journey-id header of `DEP-6` — CloudFront strips unlisted headers.
+
+**`TR-7` (cont.) — two buckets, not one, and scoped IAM.** The SPA bucket sits behind OAC;
+the artifact bucket has **no CloudFront origin at all**, or the graph becomes a 14 MB
+download to anyone who guesses a filename that is printed in several committed documents.
+The App Runner instance role is scoped to the single artifact key and to `GetItem`/`PutItem`
+on the one clip table. App Runner needs **two** roles — an access role for the ECR pull and
+an instance role for runtime; do not merge them.
 
 **The password gate, stated at its real strength.** A CloudFront Function on viewer-request
 compares an HTTP basic-auth header against one shared secret, and returns 401 otherwise.
@@ -125,15 +163,39 @@ no work; one is not on the roadmap's list at all.
 | Invalid `reason` coercion | **already implemented** | nothing — `app.py` coerces any unrecognised reason to `dislike` |
 | Request logging, latency, clip success rate | absent | delivered by §5, same mechanism |
 
-**`DEP-10` — a truncated artifact currently loads successfully and serves wrong answers.**
-`GraphStore.load` validates the header, then slices the payload and passes each slice to
-`np.frombuffer` **without a `count` argument**. On a short buffer that yields a *shorter
-array*, not an error. Today the file is local and this is close to unreachable; fetching it
-over a network is what makes it live, which is exactly what the roadmap predicted ("silent
-corruption on a truncated S3 fetch"). **Two fixes, both cheap and both wanted:** compute the
-expected total byte length from the header's `N`, `E` and metadata length and check it
-before parsing anything, and pass `count=` to every `frombuffer` call so the parse itself
-cannot silently shrink.
+> **⚠ CORRECTED 2026-07-26 by the team review — the claim below was WRONG, and it was this
+> document's flagship §4 defect.** Record: `findings/2026-07-26-gate1-gate2-team-review.md`
+> `TR-1`–`TR-4`. Established by experiment, twice independently and then re-run by this
+> session. **Read the corrected version that follows the struck text; do not implement the
+> struck version.**
+
+**~~`DEP-10` — a truncated artifact currently loads successfully and serves wrong answers.~~**
+~~On a short buffer `np.frombuffer` without `count` yields a shorter array, not an error.~~
+
+**`DEP-10`, corrected — a truncated artifact RAISES, and the real silent case is a different
+one.** Every truncation tested raises `JSONDecodeError`, because **the metadata JSON blob is
+the last section of the layout**: any tail truncation — which is what a short S3 fetch
+produces — destroys the JSON, and `json.loads` raises before the short arrays reach a caller.
+The original reasoning stopped one section short of the format.
+
+**Three things this changes, and the third is the real defect:**
+
+1. **The fix is still wanted, but for error clarity rather than silence.** A truncated fetch
+   currently fails boot with an unhandled `JSONDecodeError` naming nothing about truncation,
+   in a service whose health check exists to report artifact identity. Compute the expected
+   total byte length from the header's `N`, `E` and metadata length, check it before parsing,
+   and pass `count=` to every `frombuffer` call.
+2. **The test must assert the specific error the fix introduces** — see §9, also corrected.
+3. **`TR-3` is the genuinely silent case and this document did not name it.** A header whose
+   `N` disagrees with the metadata length **loads clean**, leaving `pop_raw` and
+   `degree_hub_penalty` at *different lengths* while both are indexed by node id in the cost
+   function. **Guard: one assertion, `len(meta["mbids"]) == n.`**
+
+**`TR-4` — the fix already exists in the other package.** `builder/.../artifact.py:87-103`
+raises on both truncation cases; `api/.../graph_store.py:99-110` has no bounds checks at all.
+The two independent APG1 parsers have **already drifted, undetected**, in the reader that is
+about to start fetching over a network. That is the concrete answer to whether
+lockstep-by-hand is a liability, and it belongs in the record rather than in a comment.
 
 **`DEP-11` — sync boto3 on the async event loop.** `DynamoClipCache.get` and `.put` are
 synchronous and are called from inside the async clip endpoint, so every clip lookup blocks
@@ -291,9 +353,21 @@ executing it, per CLAUDE.md's rule about grepping everything a plan names.
 
 ## 9. Verification
 
-- **Every defect in §4 gets a test that fails before the fix.** The truncation case (`DEP-10`)
-  is the important one, because its current failure mode is silence: the test must assert
-  that a short artifact **raises**, not that a good one loads.
+- **Every defect in §4 gets a test that fails before the fix — and "fails before the fix" is
+  the requirement, not a figure of speech.**
+
+  > **⚠ CORRECTED 2026-07-26 (`TR-2`).** The original instruction here read: *"the test must
+  > assert that a short artifact **raises**, not that a good one loads."* **That test passes
+  > today, against unmodified source**, because every truncation already raises
+  > `JSONDecodeError` (§4, `DEP-10` corrected). Written to that brief, this task would have
+  > shipped a green vacuous test under this document's own flagship verification item — the
+  > `FMS-P1` pattern the F1 execution log already records once.
+  >
+  > **The corrected requirement:** the truncation test asserts the **specific** exception type
+  > and message the fix introduces, and a **separate** test covers `TR-3`, the header/metadata
+  > length mismatch, which is the case that genuinely loads silently. **Run every new test
+  > against unmodified source first and confirm it fails**; a test that passes before the
+  > commit is a defect in the test, not evidence about the code.
 - **`/health` reports the expected sha256** for the adopted artifact, checked against
   `findings/2026-07-23-tiebreak-fix-adoption.md`.
 - **A path built through CloudFront matches one built locally** for the same pair and
@@ -337,3 +411,43 @@ first track, not merely the convenient one.
 **Track B is the natural retirement point** if the session running it is long by then: its
 output is committed infrastructure code and a deployed stack, both of which a fresh session
 can read cold.
+
+> **⚠ AMENDED 2026-07-26 — a FOURTH track was added, and the order changed.** `TR-16`.
+> **Track D — frontend**, fenced by the owner at **six items**: responsive layout, search
+> failure vocabulary, request timeouts, surfacing a failed `play()`, a catch-all route, and
+> the iOS input attributes that stop autocorrect rewriting artist names. It exists because
+> the frontend reviewer was staffed explicitly and found there is **no responsive styling
+> anywhere in the application** — on a 390 px phone the artist name is squeezed toward zero
+> width. **Track D needs no AWS**, so the running order is **A → D → B → C**: both code
+> tracks land first, and the deploy then ships an already-fixed app rather than putting a
+> phone-broken one in front of friends.
+
+## 12. Amendments — 2026-07-26, after the team review
+
+**All arise from `findings/2026-07-26-gate1-gate2-team-review.md`, which ran before any
+implementation plan was written.** Marked inline above as well as listed here.
+
+| # | change | where |
+|---|---|---|
+| `DEP-19` | `DEP-10`'s premise **corrected** — truncation raises; the silent case is the header/metadata length mismatch (`TR-1`, `TR-3`) | §4 |
+| `DEP-20` | §9's truncation test instruction **corrected** — it prescribed a test that passes before the fix (`TR-2`) | §9 |
+| `DEP-21` | `DEP-8`'s two false claims **corrected**; origin-secret header added (`TR-7`, `TR-8`) | §2 |
+| `DEP-22` | CloudFront SPA fallback and `/api/*` cache policy **added** (`TR-5`, `TR-6`) | §2 |
+| `DEP-23` | Two buckets, scoped IAM, App Runner's two roles **added** (`TR-7`) | §2 |
+| `DEP-24` | S3 **versioning** on the graph bucket; upload and read the **sidecar manifest** rather than hand-transcribing a sha256 (`TR-9`, `TR-10`) | §3 |
+| `DEP-25` | `exclude` bounded at 200 and deduplicated — **re-filed into §4's defect table** by §4's own criterion (`TR-12`) | §4 |
+| `DEP-26` | `DEP-12` extended: the `put` path fails *after* a successful lookup, so return the clip anyway; and null upstream fields reach `TrackOut`'s `str` fields (`TR-13`) | §4 |
+| `DEP-27` | `journey_id` length- and charset-bounded, emitted via `json.dumps`; the `clip` event carries it too (`TR-14`, `TR-15`) | §5 |
+| `DEP-28` | `load_graph(uri, expected_sha, reader)` **injectable seam**, because `build_default_app` has zero coverage and `ApiConfig` reads env at two different times, so the obvious test passes for the wrong reason (`TR-11`) | §4, §6 |
+| `DEP-29` | **Track D added**, order becomes A → D → B → C (`TR-16`) | §11 |
+| `DEP-30` | **`npm run test:e2e` becomes a mandatory manual deploy step**, plus the `EPERM` fix that makes it runnable by default — converts an existing suite into the regression gate `DEP-15` says does not exist, with no CI (`TR-17`) | §6 |
+| `DEP-31` | **One CloudWatch billing alarm pulled from Gate 3 into Gate 2** — `DEP-17`'s success condition is "observe a month of billing", and an alarm is how you observe without remembering to look. Owner's decision | §6, §8 |
+| `DEP-32` | `uv.lock` committed, `uv sync --frozen` in the Dockerfile — with no CI the image is the release artifact | §6 |
+
+**Deferred to Gate 3 with their reasoning recorded**, not dropped: path latency at bypass
+depth, accessibility, link previews, and the silent dropping of unresolvable exclusion MBIDs.
+See the review's §6.
+
+**`DEP-33` — this review must be re-run against the CDK stack before cutover.** Seven of its
+blocking findings are about a design rather than about code, because `infra/` does not exist
+yet. That is a real limitation of the review, not a caveat on it.
