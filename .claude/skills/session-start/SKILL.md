@@ -1,6 +1,6 @@
 ---
 name: session-start
-description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. Many sessions here are not builders, and the owner starts builders with it instinctively. This is mechanical orientation, not exploration — about five minutes: four questions, then a name for the session.
+description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. It is owed by any session that will act on repository state — edit, commit, run a job — not only by builders; but many sessions here only read and advise, and the owner starts the ones that act with it instinctively. This is mechanical orientation, not exploration — about five minutes: four questions, then a name for the session.
 ---
 
 # Session start

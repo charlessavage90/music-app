@@ -353,9 +353,10 @@ oriented*, never *did we do the right thing*. That second question is a review, 
 reviews are rare and targeted here.
 
 - **`session-start`** (`.claude/skills/session-start/`) — **the owner invokes this; a
-  session never runs it on its own initiative or suggests it.** Many sessions opened here
-  are not builders, and he starts builders with it instinctively, so self-triggering only
-  ever produced false positives to be argued out of. When he does run it: what governs
+  session never runs it on its own initiative or suggests it.** It is owed by any session
+  acting on repository state, not only builders — but many opened here only read, and he
+  starts the ones that act with it instinctively, so self-triggering only ever produced
+  false positives to be argued out of. When he does run it: what governs
   this work and what supersedes what, which decisions are closed, whether another session
   is live in this tree, and which gates would stop you. Also carries the three checks that
   can only fire at the start — cold-reading a mid-flight handoff back before acting on it,
