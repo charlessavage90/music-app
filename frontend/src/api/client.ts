@@ -25,8 +25,58 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * A request we cut off ourselves, distinct from an abort the caller asked for.
+ *
+ * The distinction is load-bearing: `usePath` aborts on navigation and returns
+ * early when it sees its own signal aborted, so a timeout implemented by
+ * aborting the caller's signal would be swallowed and the page would sit on
+ * "Building your path…" forever — the exact defect this fixes.
+ */
+export class TimeoutError extends Error {
+  readonly ms: number;
+  constructor(ms: number) {
+    super(`Request timed out after ${ms}ms`);
+    this.name = 'TimeoutError';
+    this.ms = ms;
+  }
+}
+
+/** Chosen, not measured. Path is longest: Dijkstra at depth plus a cold instance. */
+const TIMEOUT_MS = { search: 8_000, path: 20_000, track: 10_000 } as const;
+
+async function fetchWithTimeout(
+  url: string,
+  init: RequestInit,
+  ms: number,
+  caller?: AbortSignal,
+): Promise<Response> {
+  const internal = new AbortController();
+  const relay = () => internal.abort();
+  if (caller?.aborted) internal.abort();
+  else caller?.addEventListener('abort', relay);
+
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    internal.abort();
+  }, ms);
+
+  try {
+    return await fetch(url, { ...init, signal: internal.signal });
+  } catch (err) {
+    if (timedOut) throw new TimeoutError(ms);
+    throw err;
+  } finally {
+    clearTimeout(timer);
+    caller?.removeEventListener('abort', relay);
+  }
+}
+
 export async function searchArtists(q: string, signal?: AbortSignal): Promise<Artist[]> {
-  const r = await fetch(`${BASE}/artists/search?q=${encodeURIComponent(q)}`, { signal });
+  const r = await fetchWithTimeout(
+    `${BASE}/artists/search?q=${encodeURIComponent(q)}`, {}, TIMEOUT_MS.search, signal,
+  );
   if (!r.ok) throw new ApiError(r.status);
   return (await r.json()) as Artist[];
 }
@@ -36,22 +86,28 @@ export async function buildPath(
   exclude: Exclusion[],
   signal?: AbortSignal,
 ): Promise<PathResult> {
-  const r = await fetch(`${BASE}/path`, {
-    method: 'POST',
-    headers: withJourney({ 'content-type': 'application/json' }),
-    body: JSON.stringify({ sources, exclude }),
+  const r = await fetchWithTimeout(
+    `${BASE}/path`,
+    {
+      method: 'POST',
+      headers: withJourney({ 'content-type': 'application/json' }),
+      body: JSON.stringify({ sources, exclude }),
+    },
+    TIMEOUT_MS.path,
     signal,
-  });
+  );
   if (!r.ok) throw new ApiError(r.status);
   const data = (await r.json()) as { artists: Artist[]; stop_rule: StopRule };
   return { artists: data.artists, stopRule: data.stop_rule };
 }
 
 export async function getTrack(mbid: string, signal?: AbortSignal): Promise<Track | null> {
-  const r = await fetch(`${BASE}/artists/${encodeURIComponent(mbid)}/track`, {
+  const r = await fetchWithTimeout(
+    `${BASE}/artists/${encodeURIComponent(mbid)}/track`,
+    { headers: withJourney() },
+    TIMEOUT_MS.track,
     signal,
-    headers: withJourney(),
-  });
+  );
   if (r.status === 204) return null;
   if (!r.ok) throw new ApiError(r.status);
   const d = (await r.json()) as { preview_url: string; title: string; cover_url: string };

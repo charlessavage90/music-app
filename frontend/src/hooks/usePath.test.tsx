@@ -55,6 +55,14 @@ test('maps 404 to notfound', async () => {
   await waitFor(() => expect(screen.getByTestId('state')).toHaveTextContent('error:notfound:'));
 });
 
+test('classifies a timeout distinctly from an unknown failure', async () => {
+  // A cold instance that never answers must not read as a generic failure:
+  // it is the one error state with a useful response (wait and retry).
+  vi.spyOn(client, 'buildPath').mockRejectedValue(new client.TimeoutError(20_000));
+  renderAt('/path/a/b');
+  await waitFor(() => expect(screen.getByTestId('state')).toHaveTextContent('error:timeout:'));
+});
+
 test('exposes the stop rule from the response', async () => {
   vi.spyOn(client, 'buildPath').mockResolvedValue({
     artists: [{ mbid: 'a', name: 'A', disambiguation: '', popularity: 0.5 }],

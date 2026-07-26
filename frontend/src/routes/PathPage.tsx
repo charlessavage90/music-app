@@ -63,7 +63,11 @@ export function PathPage() {
         )}
       </div>
       {state.status === 'error' && state.error ? (
-        <PathStatus error={state.error} onClearExclusions={() => go(clearExclusions(params))} />
+        <PathStatus
+          error={state.error}
+          onClearExclusions={() => go(clearExclusions(params))}
+          onRetry={state.retry}
+        />
       ) : (
         <div className={state.status === 'loading' ? 'opacity-60 transition-opacity' : ''}>
           {state.artists.length > 0 ? (

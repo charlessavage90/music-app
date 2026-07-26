@@ -49,6 +49,43 @@ test('buildPath throws ApiError with status on 409', async () => {
   await expect(buildPath(['a', 'b'], [])).rejects.toMatchObject({ status: 409 } as Partial<ApiError>);
 });
 
+test('buildPath times out rather than hanging forever', async () => {
+  vi.useFakeTimers();
+  // A server that accepts the request and never answers — the App Runner cold
+  // start case. Honours abort so the wrapper can actually cut it off.
+  vi.stubGlobal('fetch', (_url: string, init: RequestInit) =>
+    new Promise((_resolve, reject) => {
+      init.signal?.addEventListener('abort', () =>
+        reject(new DOMException('Aborted', 'AbortError')),
+      );
+    }),
+  );
+
+  const pending = buildPath(['a', 'b'], []);
+  const assertion = expect(pending).rejects.toMatchObject({ name: 'TimeoutError' });
+  await vi.advanceTimersByTimeAsync(20_000);
+  await assertion;
+  vi.useRealTimers();
+});
+
+test("a caller's own abort is not reported as a timeout", async () => {
+  vi.stubGlobal('fetch', (_url: string, init: RequestInit) =>
+    new Promise((_resolve, reject) => {
+      init.signal?.addEventListener('abort', () =>
+        reject(new DOMException('Aborted', 'AbortError')),
+      );
+    }),
+  );
+
+  const controller = new AbortController();
+  const pending = buildPath(['a', 'b'], [], controller.signal);
+  controller.abort();
+
+  // usePath returns early on its own abort; a TimeoutError here would be
+  // swallowed by that check and the screen would never change.
+  await expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+});
+
 test('sends a journey id header on both calls', async () => {
   const fetchMock = vi.fn().mockResolvedValue({
     ok: true, status: 200, json: async () => ({ artists: [], stop_rule: 'natural' }),
