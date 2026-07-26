@@ -11,6 +11,52 @@ the point.**
 
 ---
 
+## N/A — 2026-07-26 (later) — two more measurements ran; the app is untouched
+
+**Nothing to exercise, and nothing is running.** Two measurements ran this afternoon and
+**neither changed the app**. No routing, no graph, no setting — a journey you generate now
+is identical to one from this morning.
+
+**The servers from earlier today have been stopped**, at your request. Nothing is
+listening on either port. If you want the app again, start it the usual way.
+
+**What was learned, in plain terms.** This morning's question was whether the barely-
+connected artists we counted are the reason the app never introduces you to them. The
+answer, from journeys the app had already produced: it never once put a barely-connected
+artist in the middle. That first check was weak on its own, because those journeys all ran
+between very famous artists. So a second run built journeys that **start and end** at
+barely-connected artists — the best possible chance for others like them to show up in the
+middle. They still almost never did.
+
+**What that does and does not mean.** It means being barely connected really is associated
+with never being offered to you. It does **not** mean we know why: it could be that the app
+weighs them up and passes over them, or simply that an artist with two connections has far
+fewer places it could sit between two others. Those point to opposite fixes, and nothing
+measured so far tells them apart. That is written down as the first thing to settle if this
+is ever picked up.
+
+**Nothing is proposed and nothing was changed.** The next entry here will come when
+something is actually adopted into the running app.
+
+## DONE — 2026-07-26 — journeys now always have someone in the middle
+
+**DONE 2026-07-26 — PASSED, no notes.** Exercised by the owner; nothing wrong found and
+nothing worth commenting on. **This discharges F1** — its condition was an observation,
+and this is that observation. Gate 1's last item is closed.
+
+**Recorded caveat, per this file's precedent.** The report was "exercised and passed", so
+the record does **not** carry which pairs were tried, nor whether the `Doves → Elbow`
+"next to each other" line was seen. Read this as *no defect surfaced in ordinary use*,
+not as a per-step confirmation of the three numbered checks.
+
+**Two questions this entry asked are still unanswered, and a pass is not an answer to
+them:** how long a forced detour may get before a journey stops feeling like a journey
+(uncapped, deliberately), and whether routing two famous artists through a third famous
+one reads as reasonable or as lazy. Both are owner-judgement questions that no
+measurement settles; they carry forward.
+
+*Original queued text follows.*
+
 ## QUEUED — 2026-07-25 — journeys now always have someone in the middle
 
 **Ten minutes, no waiting.** Pick two artists who are very close to each other —
@@ -48,6 +94,20 @@ not have; or the "next to each other" line showing up on a normal journey.
 **Best bug report:** the URL from the address bar.
 
 ---
+
+## DONE — 2026-07-26 — the three playback fixes from your last run
+
+**DONE 2026-07-26 — PASSED, no notes.** Exercised by the owner; no defect found. The three
+playback defects found in the 2026-07-25 use run (a finished clip skipping the next artist;
+audio surviving "← New path"; audio surviving a bypass or "↺ Reset path") are **confirmed
+in use and closed.**
+
+**Recorded caveat.** As above, the record does not carry per-step confirmation — this is
+*nothing surfaced across ordinary use*, not five individually witnessed checks. The
+riskiest failure this entry guarded against (cards no longer playing at all) would have
+been unmissable, so a clean pass is strong evidence on that one specifically.
+
+*Original queued text follows.*
 
 ## QUEUED — 2026-07-25 — the three playback fixes from your last run
 
@@ -519,3 +579,109 @@ back.
 **Note on scope.** The owner has already used both arms extensively in the blind test. This
 entry is deliberately light: it is a post-adoption sanity check, not a repeat of that
 session.
+
+---
+
+## N/A — 2026-07-26 — a second measurement ran; the app is untouched
+
+**Nothing new to exercise, but the app is running and three older entries below are
+still waiting on you.**
+
+What ran: a read-only measurement asking *why* certain artists are barely connected,
+following on from the census below. **It changed nothing** — no routing, no graph, no
+setting. A journey you generate now is identical to one from yesterday.
+
+**Both servers are running and nothing owns them**, so they will outlive this session
+and every terminal. Started fresh today, after the latest change:
+
+| what | address | PID |
+|---|---|---|
+| the app | **http://localhost:5173** | 206500 |
+| the service behind it | http://127.0.0.1:8000 | 226716 |
+
+Open the first one in a browser and it works. **If you want them gone**, stop those two
+PIDs — nothing else will.
+
+**What was learned, in plain terms, because it explains something you may notice.**
+Some artists can never be offered to you in the middle of a journey, and there turned
+out to be two quite different reasons. For the ones you'd recognise — Meat Loaf, Elbow,
+The Cult, The Streets, Tom Jones — the data is all there: fifty similar artists, all of
+them in the app. The rule that builds the map then throws nearly all of it away, because
+it insists two artists both name each other, and a famous artist's neighbours are more
+listened-to than it is and name someone else. **Those are recoverable.** For the great
+majority by headcount, the music service simply never named more than one or two similar
+artists in the first place — and that turned out to be because of a cut-off *we* chose
+when asking it, not because the data does not exist. Changing that would mean collecting
+everything again from scratch.
+
+**Nothing is proposed and nothing was changed.** The next entry here will come when
+something is actually adopted into the running app.
+
+**The three entries below are still QUEUED and are the ones worth your time.**
+
+---
+
+## DONE — 2026-07-26 — can you find the artists you'd actually type?
+
+**DONE 2026-07-26 — PASSED, nothing found.** Exercised by the owner; no artist reported as
+unfindable, none reported as needing a second spelling, and no journey reported as
+returning only the two typed artists.
+
+**What this does and does not settle.** A null here is the weakest of the three results
+recorded today, and deliberately so: the entry's value was in what it *found*, and the
+record does not carry which names were typed. So it does **not** close `CNS-1` (an artist
+can be stored under one name with no aliases, so it is unfindable under the name a user
+would type — Pretenders / The Pretenders). It says only that the failure did not surface
+on the names the owner happened to try. `CNS-1` stays open on the strength of its own
+worked example, which is a direct observation and outranks a non-observation here.
+
+Likewise it does not measure whether low-connection artists can be delivered mid-journey —
+that question moved to a committed-walk measurement rather than an app session.
+
+*Original queued text follows.*
+
+## Queued 2026-07-26 — can you find the artists you'd actually type?
+
+**Status: QUEUED.** Nothing was changed in the app, so this is not a regression check. The
+census that prompted it was read-only. This asks one thing the census structurally cannot:
+whether the app can be *reached* for artists you know.
+
+**Why it is worth twenty minutes.** Roughly one in six artists in the graph holds one or two
+connections, and one connection means the app can never put that artist in the middle of a
+journey — it can only ever appear if you type it yourself. Well-known names are in that
+group. Separately, a band can be stored under a different spelling of its name than the one
+you would type, and then it looks absent.
+
+**What to exercise:**
+
+1. **Search for ten or fifteen artists you'd genuinely want to hear.** Type the name the way
+   you'd say it out loud, not a corrected version. If nothing comes up, try it without a
+   leading "The", and try the other spelling you'd expect. **Note both the ones that need a
+   second attempt and the ones you cannot find at all** — the second attempt is the finding.
+2. **Pick two artists you know are related, and see whether the journey between them offers
+   anyone in the middle.** Then try the same pair the other way round.
+3. **Try a few of the artists listed in the census report** — open
+   `builder/analysis/2026-07-26-low-degree-census/REPORT.md` and take a handful of names from
+   the top of either list. These are artists the app is unlikely ever to introduce you to.
+   **Search each one and then try to build a journey that passes through it.** Use the second
+   list rather than the first if you only have time for one: those artists have two
+   connections, so they *can* appear in the middle, which makes a failure more interesting
+   than a guaranteed one.
+
+**What "wrong" would look like:**
+
+- **An artist you'd definitely search for that returns nothing at all.** Worth reporting
+  regardless of cause.
+- **An artist you can only find on the second or third spelling.** This is the specific thing
+  being looked for, and it is easy to dismiss as your own typo. It is not.
+- **A journey that keeps returning just the two artists you typed**, with nobody in between.
+- **The same well-known artist appearing over and over** across different journeys.
+
+**What is already known and not worth reporting again:** that some artists have only one
+connection is measured and expected — the question is only whether it bites on artists you
+care about. Clip playback is closed and unrelated.
+
+**Best bug report:** for search, just the text you typed and what you expected. For a journey,
+the URL from the address bar — all path state lives in it, so it reproduces exactly.
+
+**Detail, for anyone who wants it:** `docs/superpowers/2026-07-26-low-degree-census-execution-log.md`.

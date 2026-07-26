@@ -1,0 +1,62 @@
+# Floored but possibly notable — A11's guard, fired
+
+These artists have **no English Wikipedia article**, so A11 scores them at the fame floor and they appear nowhere in the ranked lists. The guard flags them because a non-Latin name, or an article on a non-English Wikipedia, suggests the absence may be a gap in English Wikipedia rather than obscurity. Sorted by how many non-English Wikipedias carry them — the closest thing to a fame signal available for an artist English Wikipedia does not know.
+
+- **Brad Sucks** — 2 connections — 8+ non-English article(s): commons, da, de, es, fi, fr
+- **Kristina Rose** — 1 connection — 8+ non-English article(s): arz, bg, commons, de, es, fa
+- **Nomy** — 1 connection — 8+ non-English article(s): de, fi, fr, fy, it, ru
+- **Relax** — *Dutch hiphop group* — 1 connection — 4+ non-English article(s): bar, de, fr, nl
+- **ミライアカリ** — *バーチャルYouTuber* — 1 connection — non-Latin name; 4+ non-English article(s): commons, ja, ko, zh
+- **佐倉紗織** — 1 connection — non-Latin name; 4+ non-English article(s): arz, ja, ko, zh
+- **Jowan Safadi** — 1 connection — 3+ non-English article(s): ar, es, he
+- **MegaDriver** — *Brazilian video game heavy metal* — 1 connection — 3+ non-English article(s): fr, pt, ru
+- **Gianni Oddi** — 2 connections — 2+ non-English article(s): commons, it
+- **Gruesome** — *US death metal band from California/Florida* — 2 connections — 2+ non-English article(s): commons, fy
+- **Ichika Nito** — 1 connection — 2+ non-English article(s): ja, zh
+- **Jan Davis** — 2 connections — 2+ non-English article(s): commons, de
+- **Mourn** — *Catalonian rock band* — 1 connection — 2+ non-English article(s): ca, commons
+- **Mr. Da-Nos** — 2 connections — 2+ non-English article(s): de, ru
+- **Northern Lite** — 2 connections — 2+ non-English article(s): de, fr
+- **Pedro Soler** — *Flamenco guitarist* — 1 connection — 2+ non-English article(s): de, fr
+- **Rigby** — 2 connections — 2+ non-English article(s): commons, nl
+- **Six Sex** — 1 connection — 2+ non-English article(s): commons, es
+- **SpellBlast** — 2 connections — 2+ non-English article(s): pl, pt
+- **おやすみホログラム** — 1 connection — non-Latin name; 2+ non-English article(s): id, ja
+- **椿屋四重奏** — 1 connection — non-Latin name; 2+ non-English article(s): ja, ko
+- **A Lull** — 2 connections — 1+ non-English article(s): commons
+- **Bay Ledges** — 2 connections — 1+ non-English article(s): commons
+- **binaria** — 1 connection — 1+ non-English article(s): ja
+- **Blind Ego** — 2 connections — 1+ non-English article(s): nl
+- **Bob Seger & the Silver Bullet Band** — 1 connection — 1+ non-English article(s): de
+- **Celso Sim** — 2 connections — 1+ non-English article(s): pt
+- **Cemetery Sun** — 2 connections — 1+ non-English article(s): commons
+- **Chicago Underground Trio** — 2 connections — 1+ non-English article(s): it
+- **Clay and Friends** — 2 connections — 1+ non-English article(s): fr
+- **Drug Cabin** — 2 connections — 1+ non-English article(s): cs
+- **Holograms** — 2 connections — 1+ non-English article(s): sc
+- **Josie Dunne** — *pop/soul singer* — 1 connection — 1+ non-English article(s): commons
+- **Keith Power** — *Canadian score composer* — 2 connections — 1+ non-English article(s): it
+- **Korallreven** — 2 connections — 1+ non-English article(s): sv
+- **Kwoon** — 1 connection — 1+ non-English article(s): fr
+- **Lenno** — 1 connection — 1+ non-English article(s): fi
+- **Local Sound Style** — 1 connection — 1+ non-English article(s): ja
+- **Madd** — *Moroccan rapper* — 2 connections — 1+ non-English article(s): ary
+- **Max Urban** — 2 connections — 1+ non-English article(s): de
+- **Movimiento Original** — *Rap group from Chile* — 2 connections — 1+ non-English article(s): es
+- **My Material Season** — 1 connection — 1+ non-English article(s): ja
+- **Necro Facility** — 2 connections — 1+ non-English article(s): sv
+- **Radar** — *Christophe Goze & Francis Peyrat* — 1 connection — 1+ non-English article(s): et
+- **Red Fox** — *reggae deejay Gareth Shelton* — 1 connection — 1+ non-English article(s): no
+- **Shannon Hurley** — 2 connections — 1+ non-English article(s): commons
+- **Smoke Trees** — 1 connection — 1+ non-English article(s): de
+- **小松一也** — 1 connection — non-Latin name; 1+ non-English article(s): ja
+- **Сивый Яр** — *Russian black metal band* — 1 connection — non-Latin name
+- **ぶっちぎりP** — 2 connections — non-Latin name
+- **みかくにんぐッ！** — 2 connections — non-Latin name
+- **今西玲子** — *koto player* — 1 connection — non-Latin name
+- **前田早織** — 2 connections — non-Latin name
+- **星井美希** — *THE IDOLM@STER character* — 2 connections — non-Latin name
+- **棗いつき** — 1 connection — non-Latin name
+- **白津順子** — 2 connections — non-Latin name
+- **福原香織** — 2 connections — non-Latin name
+- **馬頭將器** — 1 connection — non-Latin name

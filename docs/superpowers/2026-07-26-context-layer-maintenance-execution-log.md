@@ -140,6 +140,12 @@ quoted claim each — the probe's §6 phrasing, and `WHAT-GOOD-LOOKS-LIKE.md:137
 75-line and 48-line entries were **not read in full**. "Clean" meant *no third-party content
 and no interleaving*; it did not mean the reasoning was reviewed.
 
+**The same limit produced a second wrong reading, `CLM-13`** — a file called unbacked
+because the session checked from a branch where the rule governing it did not exist. Both
+are the same shape: **a check run from the wrong vantage point returns a true answer to a
+different question.** In one case the vantage point was scope-of-diff rather than content;
+in the other it was the branch. Neither is caught by running the check more carefully.
+
 ## 6. Gate outcome — the documentation audit (closeout B1)
 
 Dispatched 2026-07-26 against this branch. Report:
@@ -182,5 +188,33 @@ so it is his call, not a session's.
   started after `5ffd60d`.
 - Roughly twenty orphaned `python` / `node` / `uvicorn` processes date from 2026-07-19
   onward. A5 is the forward fix; it does not sweep the existing backlog.
-- `builder/analysis/2026-07-26-low-degree-census/resolve.log` exists in no branch — every
-  other file in that directory is committed on `low-degree-census`. Left untouched.
+- ~~`builder/analysis/2026-07-26-low-degree-census/resolve.log` exists in no branch — every
+  other file in that directory is committed on `low-degree-census`. Left untouched.~~
+  **⚠ WITHDRAWN, `CLM-13`.** It is committed in no branch, but it is **deliberately
+  ignored**, by a one-line `.gitignore` *inside that directory* naming exactly `resolve.log`.
+  `git check-ignore -v` resolves it to
+  `builder/analysis/2026-07-26-low-degree-census/.gitignore:1`. There was never a loose end
+  here, and the entry should not have implied a pending decision.
+
+**`CLM-13`. Why it was misread, and the trap generalises.** The check ran from
+`skills-scope-updates`, where **that directory's `.gitignore` does not exist on disk** — it
+is tracked on `low-degree-census` only, and the same session's own file-by-file check had
+already recorded all sixteen tracked files as absent, `.gitignore` among them. With no rule
+on disk, `git status` correctly reported the file as untracked, and the session read that as
+unbacked.
+
+> **Whether a file is ignored is a branch-dependent question whenever the `.gitignore`
+> governing it is itself branch-scoped.** From a branch that does not carry the directory,
+> its deliberately-ignored artifacts are indistinguishable from strays. `git check-ignore -v`
+> answers it; `git status` alone does not, because it cannot report a rule that is not there.
+
+This will recur: `builder/analysis/` is a series of dated directories, several carry their
+own ignore rules, and each exists on one branch. **Before calling any file in one of them
+unbacked, check from a branch that has the directory, or run `git check-ignore -v`.**
+
+**How it was caught, which is the part worth keeping.** Not by tooling — by the **retired
+session whose terminal was still open**, which knew the rule was intentional. That fact
+existed in no file: the rule's *presence* was greppable, its *deliberateness* was not.
+This is a stronger case for the open-terminal habit than the one written into `closeout`
+**D7**, which covers confirming a handoff and asking factual questions. Here a retired
+session **overturned a live session's conclusion about the current tree**.

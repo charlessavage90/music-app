@@ -744,7 +744,12 @@ this first.
 > (9/9 on the sample) and detects obscurity at AUC 0.954, so **absence is reinterpreted as
 > signal: the fame proxy is Wikipedia pageviews with an unmatched interior scored at the
 > fame floor (0).** Full rule, guard, residual-risk acceptance, and the currency caveat:
-> **A11 in full**, below.
+> **A11 in full**, below. **⚠ A11 also carries a SCOPE NOTE added 2026-07-26** (beside "What
+> A11 does NOT change"): the resolver never consults the artifact's disambiguation, so on
+> populations with short generic names it can measure a different, more famous subject. A11
+> itself is unchanged and Track 2's result is not materially exposed; read
+> `../findings/2026-07-26-low-degree-census.md` §3 before applying this proxy to any
+> population other than §5's.
 
 > **AMENDED 2026-07-24 (§9 A15) — the resolver gains an English-article recall fallback.**
 > Validating the scorer surfaced that the canonical resolver scores famous acts with
@@ -855,7 +860,7 @@ before it ran.
 | **A14** | **Two additions on `WHAT-GOOD-LOOKS-LIKE.md` values 8-9, both non-gating.** (a) A **d0 endpoint-fame-tracking diagnostic** per arm (§1.5), because value 9 records that fame tracking the endpoints is part of what made the reference product feel good and that eliminating famous artists would be an over-correction. (b) **C5's inspection is given its target:** the §1.5 no-regression inspection now asks explicitly whether d0 fame still tracks the endpoints, which is what value 9 says a reshaped first path should be judged against. **No threshold is taken from WGLL** — it holds none, and the rule is that a criterion contradicting a value is wrong, not that a value supplies a number. **Checked and found clean:** no existing criterion contradicts value 8 or 9. | the widened WGLL trigger + values 8-9 (cold-read adjudicator, 2026-07-24) | §1.5 (two bullets — the C5 inspection target at the no-regression bullet, and the endpoint-tracking diagnostic bullet). *No separate "in full" section: this row is self-contained.* |
 | **A13** | **D7 discharged: a guard-infeasible cell is dropped from ALL arms uniformly and reported.** A cell is infeasible when the walk cannot continue — no path, or a path with no interior left to bypass. Dropping it per-arm would let an arm that keeps a pair alive one bypass longer be scored on a cell its rival does not have: **arm-correlated missingness**, the exact selection confound §4's guard decision exists to prevent, returning by the back door. Implemented in `run_arms.py:drop_infeasible_uniformly`; the dropped set is written to the output and named in the report. | analyst **D7**, whose success condition was "pre-register this before the sweep" | §9 open table (D7 row) · `builder/analysis/2026-07-24-track2-arm-scorer/run_arms.py` |
 | **A12** | **C6 stops gating and becomes a reported diagnostic; the d15/d20 notability guard is the gating remnant.** A11 changed unmatched interiors from *dropped* to *scored at the fame floor*, which removes the silent-drop mechanism C6 was written to close (Attack 4) and turns match failure into a **marker of success**. Left as written, C6's 90 % floor and 5-point gap would cap an arm at ≈ 5.6 % obscure interiors — a depth limit nobody designed, contradicting the product's purpose. **Owner's decision, 2026-07-24: the app should route to artists with no English Wikipedia article.** Also discharges §2.2's permitted recalibration (does not fire). | A11's encoding change, caught before any arm ran | §2.2 C6 row + winning-configuration line · A12 in full below · `builder/analysis/2026-07-24-track2-arm-scorer/` |
-| **A11** | **The fame proxy resolved — Wikipedia pageviews with absence as the fame floor; §5's owner-labelling terminal fallback is NOT taken.** Both automated proxies fired (Deezer: AUC 0.68 + 2 inversions; Wikipedia: coverage 9/29). A post-hoc, owner-requested exploration showed Wikipedia-absence predicts "never heard of" (9/9) and detects obscurity at AUC 0.954, so an unmatched interior is scored at fame = 0. **Owner's decision; residual risk (a foreign/historically-notable absent artist scored obscure) accepted and guarded at d15/d20 — partially discharges D4.** | the P4 pilot result (both proxies fired) | §5 inline · A11 in full below · `builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/` + `.../2026-07-24-obscure-tail-attractor/` |
+| **A11** | **The fame proxy resolved — Wikipedia pageviews with absence as the fame floor; §5's owner-labelling terminal fallback is NOT taken.** Both automated proxies fired (Deezer: AUC 0.68 + 2 inversions; Wikipedia: coverage 9/29). A post-hoc, owner-requested exploration showed Wikipedia-absence predicts "never heard of" (9/9) and detects obscurity at AUC 0.954, so an unmatched interior is scored at fame = 0. **Owner's decision; residual risk (a foreign/historically-notable absent artist scored obscure) accepted and guarded at d15/d20 — partially discharges D4.** **⚠ Carries a SCOPE NOTE (2026-07-26), not an amendment: the resolver never consults the artifact's disambiguation, so on populations with short generic names it can measure a different, more famous subject. A11 is unchanged and `R0` is not materially exposed; see `../findings/2026-07-26-low-degree-census.md` §3 (`CNS-2`) before applying the proxy outside §5's population.** | the P4 pilot result (both proxies fired) | §5 inline · A11 in full below · `builder/analysis/2026-07-24-track2-fame-proxy-wikipedia/` + `.../2026-07-24-obscure-tail-attractor/` |
 
 | **A7** | **P1 discharged, and pair 8 substituted.** The owner's F6 trace pair resolved to **Miles Davis → Daft Punk** — pair 1. §2.3's substitution rule applied; pair 8 becomes **Nirvana → CROOVE** and pair 1 inherits the trace rationale. | P1's answer | §2.3 (three places) |
 
@@ -953,6 +958,35 @@ the sweep and the blind listen.**
 **What A11 does NOT change.** No change to the pair sets (§2.3), the arms or cost-function
 columns (§1.4), the primary outcome (§2.1), or the effect sizes (§2.2). Run count
 unchanged. No factorial arm has run.
+
+> **⚠ SCOPE NOTE, 2026-07-26 — not an amendment, and it changes nothing above.** A11 is
+> **unchanged and remains the adopted proxy**; no threshold, arm, criterion or result is
+> revised, and Track 2's figures stand. This note exists because a later measurement applied
+> this resolver to a **different population** and found a limit that §5's validation sample
+> could not have surfaced.
+>
+> **The resolver matches a Wikidata label or alias, requires a musical performer, and never
+> consults the disambiguation the artifact already holds.** Where an artist's name is a short
+> generic word, it can therefore land on a **different, more famous subject** and report that
+> subject's pageviews — and since fame is the sort key, the wrong row rises to the top of any
+> ranked output. Measured examples: *War* → *Axl Rose*, *Gosling* → *Ryan Gosling*, *Kny* →
+> *Demon Slayer*.
+>
+> **This is a property of the population, not of the resolver's logic.** §5's sample is
+> purposively weighted to recognisable acts, where such collisions are rare; the effect is an
+> order of magnitude stronger among the artifact's barely-connected artists, whose names are
+> disproportionately short and generic.
+>
+> **Track 2 was checked, not assumed. `R0` is not materially exposed** — the rate over Track 2's
+> own interiors is small, only two cases are genuine errors (*Phoenix* → *Joaquin Phoenix*,
+> *Love* → *Sean Combs*), `C1` is a difference of medians, and one fame value per mbid means
+> the error largely cancels in a paired contrast. **Not re-scored**, and the one unchecked
+> residual is named there: whether a misidentified interior is *pivotal to a specific cell*.
+>
+> **Before applying this proxy to any population other than §5's, read
+> [`../findings/2026-07-26-low-degree-census.md`](../findings/2026-07-26-low-degree-census.md)
+> §3 (`CNS-2`)**, which owns this limit, its bound and its success condition. Rates are owned
+> by `builder/analysis/2026-07-26-low-degree-census/`.
 
 ### A12 in full — C6 stops gating, because A11 inverted what it measures
 
