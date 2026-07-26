@@ -31,7 +31,15 @@ export class HtmlAudioPlayer implements Player {
     // Only assigning a *different* src is what lets toggle() resume rather than
     // re-seek to zero, which is why the card's pause button used to restart.
     if (this.audio.src !== url) this.audio.src = url;
-    void this.audio.play();
+    // A rejected play() — autoplay policy, a decode failure — is the same event
+    // as a dead source from the journey's side: no audio is coming. Route it to
+    // the error channel, which already owns the one silent retry, rather than
+    // adding a second channel that would need its own policy and put the four
+    // player invariants back in play. jsdom returns undefined here, not a
+    // promise, which Promise.resolve normalises.
+    void Promise.resolve(this.audio.play()).catch(() => {
+      if (!this.disposed) this.errorCb?.();
+    });
   }
 
   pause(): void {

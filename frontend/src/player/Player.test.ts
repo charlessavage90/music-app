@@ -77,6 +77,35 @@ test('re-subscribing after a dispose revives the player (the StrictMode remount)
   expect(el.src).toContain('clip.mp3');
 });
 
+test('a rejected play() reaches the error handler', async () => {
+  // Autoplay policy, a decode failure, or a source the element refuses: the
+  // promise rejects and nothing on the page hears about it, so the card sits
+  // there claiming to play over silence.
+  const player = new HtmlAudioPlayer();
+  const onError = vi.fn();
+  player.onError(onError);
+  vi.spyOn(audioOf(player), 'play').mockRejectedValue(
+    new DOMException('play() failed', 'NotAllowedError'),
+  );
+
+  player.play('https://example.test/clip.mp3');
+  await vi.waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
+});
+
+test('a rejected play() on a disposed player reaches nobody', async () => {
+  const player = new HtmlAudioPlayer();
+  const onError = vi.fn();
+  player.onError(onError);
+  const el = audioOf(player);
+  vi.spyOn(el, 'play').mockRejectedValue(new DOMException('x', 'AbortError'));
+
+  player.play('https://example.test/clip.mp3');
+  player.dispose();
+  await new Promise((r) => setTimeout(r, 0));
+
+  expect(onError).not.toHaveBeenCalled();
+});
+
 test('a disposed player refuses to start playing again', () => {
   // Note: clearing src leaves the element pointing at the document URL, not at ''.
   // What matters is that the clip is never loaded and playback is never started.
