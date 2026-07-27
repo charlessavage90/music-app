@@ -230,13 +230,26 @@ layer is written in long single lines that `wc -l` cannot see change in:** `CLAU
 **Nothing was removed to pay for it** — no live passage was compressed to free space, which
 the standing rule warns has twice cost the exact clause that made a check usable.
 
-**Still open:**
+**Two further items were put to him and decided the same day:**
 
-| Item | Why it is his |
+| Item | Outcome |
 |---|---|
-| Whether the root `README.md`'s status line becomes a pure pointer (§5) | Small, but it is the project's public face and the wording is his. |
-| Whether **`TEST-QUEUE.md`** (1,135 lines, append-only, grows every closeout) gets archived past some depth | A change to a working ritual's cost, not a defect. |
-| Whether a future `closeout` records the **`builder/README.md` deferral** as discharged | The file was written 2026-07-25; two handoffs still carry it as an open deferred finding. Bookkeeping only. |
+| The root `README.md`'s status line (§5) | **DONE — reduced to what does not change between gates.** It carried the gate number and date while naming `NEXT.md` as the only document that states them; that line now says "pre-alpha. Not public." and points. |
+| The **`builder/README.md` deferral** | **DONE — struck as DISCHARGED in both handoffs that carried it** (`2026-07-24-HANDOFF-track2-complete.md`, `2026-07-25-HANDOFF-track2f-and-headroom.md`). The file was written 2026-07-25 in `0d8b999`, **before Gate 1 closed**, so the condition was met on time and nothing recorded it. Both entries were accurate when written — the file landed about an hour after the later handoff was committed. Struck in place rather than deleted, per this project's convention for handoffs. |
+
+**Still open, and deliberately not acted on:**
+
+| Item | Why it is his, and why it was left |
+|---|---|
+| Whether **`TEST-QUEUE.md`** (1,134 lines, append-only, grows every closeout) gets archived past some depth | A change to a working ritual's cost, not a defect — nothing in it is wrong. The session's position, which the owner accepted: **leave it** until `session-start` actually feels slow. Archiving early splits the audit trail for a cost not yet paid. |
+
+**`DAF-9` — a deferral with a success condition still needs something that checks it.** The
+`builder/README.md` item had a well-formed condition ("written, or explicitly declined, before
+Gate 1 closes"), that condition was satisfied **two days** before Gate 1 closed, and it sat
+open in two documents for another two days after that. The condition was not the weak part;
+**nothing was scheduled to read it.** Worth knowing the next time a deferral is written — and
+an argument for `closeout`'s deferral pass explicitly re-testing conditions rather than only
+checking that each has one.
 
 ### 7a. Role markers, swept to completion
 
