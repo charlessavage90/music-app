@@ -9,7 +9,7 @@ import App from '../App';
 // commonest cause live — an object synced by the runbook carries no
 // Cache-Control, so a browser holds index.html on heuristic freshness, and the
 // next deploy's `--delete` removes the hashed asset that stale copy points at.
-// The other half of the fix is the runbook's two-pass sync (infra/README.md §6);
+// The other half of the fix is the runbook's ordered sync (infra/README.md §6);
 // this half is what a visitor sees when it fails anyway.
 //
 // index.html is read from disk rather than restated here, so the file this

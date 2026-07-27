@@ -10,44 +10,44 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-27, after `DEP-33` blocker remediation stages 1–2.**
+**Last updated: 2026-07-27, after `DEP-33` blocker remediation stage 3.**
 
 ---
 
 ## Next
 
-**Stage 3 of the `DEP-33` remediation, then Track C.** PR #30 on `gate2-dep33-blockers`.
+**Track C — sync the SPA to the bucket.** PR #32 on `gate2-dep33-stage3` is open and carries
+stage 3.
 
-**The `DEP-33` blockers are mostly discharged.** Stages 1 and 2 are done and pushed
-(`RMD-0`…`RMD-10`), each at a planned seam. Read in this order:
+**The `DEP-33` blockers are discharged.** All three stages are done (`RMD-0`…`RMD-13`), each
+retired at a planned seam. Read in this order:
 
-1. [`2026-07-27-HANDOFF-dep33-stages-1-2.md`](2026-07-27-HANDOFF-dep33-stages-1-2.md) — the
-   current handoff. What was reversed, what must not be reverted back, what is still live.
-2. [`plans/2026-07-27-dep33-blocker-remediation.md`](plans/2026-07-27-dep33-blocker-remediation.md)
-   — §3 names the seams; stage 3 is `RMD-11`…`RMD-13`.
-3. [`2026-07-27-dep33-remediation-execution-log.md`](2026-07-27-dep33-remediation-execution-log.md)
-   — per-task reasoning, the mutation results, and the closeout's `A3`/`A4` tables.
+1. [`2026-07-27-HANDOFF-dep33-stage3.md`](2026-07-27-HANDOFF-dep33-stage3.md) — the current
+   handoff. What changed about the deploy procedure, what must not be reverted, what is still
+   live, and the one open decision.
+2. [`2026-07-27-dep33-remediation-execution-log.md`](2026-07-27-dep33-remediation-execution-log.md)
+   — per-task reasoning and the mutation results. Stages 1–2 are PR #30, stage 3 is PR #32.
+3. **`infra/README.md` §6 and §8a — read, do not remember.** §6 changed under stage 3: the
+   frontend sync is now **three ordered passes**, and the old single `aws s3 sync --delete` is
+   itself the defect (`FRO-1`). §8a is the cutover's first step.
 
-**Stage 3 is `RMD-11`, `RMD-12`, `RMD-13`** — the three findings that hit the first real
-user: nobody is told the username, a returning visitor gets a blank page after any redeploy,
-and no step anywhere proves the gate *admits* rather than only rejects. `RMD-13` cannot
-finish before Track C.
-
-**Then Track C** — sync the SPA to the bucket. The site is not usable until it lands: the
-bucket is empty, so the site currently serves the API and a password prompt. That is
-expected, not a defect.
+**Track C makes the site usable.** The bucket is empty, so the site today serves a password
+prompt and then an error. That is expected, not a defect. Track C also closes `RMD-6`, the
+stack drift it causes, and `RMD-13`'s browser half — the three things that all point at the
+same deploy.
 
 > **⚠ One defect is fixed in source and STILL LIVE in production.** `RMD-6`: the deployed API
 > serves `config.py`'s old dev CORS default, because an empty-valued environment variable
-> never reaches App Runner. It closes on the next deploy, not before. Exposure is small — only
-> `/health` is readable without the origin secret — but it is not zero. Detail in the handoff.
+> never reaches App Runner. **The owner accepted this exposure on 2026-07-27** rather than
+> deploy twice — that decision is settled, do not re-table it. Exposure is `/health` only.
 >
-> **That deploy will now refuse unless `ARTISTPATH_DEPLOY_IMAGE_TAG` is set** (`ARC-6`). This
-> is deliberate and is a change to the deploy procedure; `infra/README.md` §1 has it.
+> **The deploy will refuse unless `ARTISTPATH_DEPLOY_IMAGE_TAG` is set** (`ARC-6`). Deliberate,
+> and a change to the deploy procedure; `infra/README.md` §1 has it.
 
-**Two things are still owed before anyone else gets the URL:** the remaining `DEP-33` items
-(stage 3), and `TR-5`'s SPA fallback, which the deploy could not verify and which `RMD-13`
-is written to check.
+**One open decision, and it is the owner's:** whether to turn `infra/README.md` §6 into a
+script before running Track C. Every other stage 3 fix is held by a test; §6 is three ordered
+commands a person types, and the failure it prevents is invisible to whoever runs it. The
+retiring session's position and reasoning are in the handoff.
 
 ---
 
@@ -56,7 +56,7 @@ is written to check.
 | Gate | State |
 |---|---|
 | **Gate 1 — personal use** | **DONE and discharged.** `F1`, its last item, closed 2026-07-26. One live exception below (`BYP-13`). |
-| **Gate 2 — friends & family** | **In progress.** Tracks A, D and B are DONE; the API is **deployed on AWS** (PR #29). `DEP-33` blocker remediation stages 1–2 are done (PR #30); stage 3, then Track C. |
+| **Gate 2 — friends & family** | **In progress.** Tracks A, D and B are DONE; the API is **deployed on AWS** (PR #29). `DEP-33` blocker remediation is **fully discharged** — stages 1–2 (PR #30), stage 3 (PR #32). **Track C is all that remains.** |
 | **Gate 3 — public** | Not started. |
 
 A team review is scheduled at each gate boundary after a period of real use — staff the
@@ -82,9 +82,11 @@ frontend explicitly. See `CLAUDE.md`, "When to recommend a review".
 
 ## Waiting on hand-testing
 
-**Nothing, as of 2026-07-26.** The newest [`TEST-QUEUE.md`](TEST-QUEUE.md) entry is N/A —
-the engine is on the internet but there is nothing to press until Track C. `session-start`
-reads that file and flags anything sitting untested; it is the authority, not this line.
+**Nothing, as of 2026-07-27.** The newest [`TEST-QUEUE.md`](TEST-QUEUE.md) entry is N/A —
+the engine is on the internet but there is nothing to press until Track C. **The deferred
+phone section in that file is still deferred**: its trigger is the cutover, which has not
+happened. `session-start` reads that file and flags anything sitting untested; it is the
+authority, not this line.
 
 **`F1` is DISCHARGED, 2026-07-26** — every journey now gets at least one stop, or says why
 it cannot (PR #23). The owner ran the queued entry and it passed with no notes; its closing
