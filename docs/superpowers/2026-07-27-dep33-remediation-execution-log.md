@@ -334,3 +334,155 @@ this stage touched the frontend. Recorded as not-run rather than reported as pas
 
 **Working tree checked after the harness: no source residue.** The only modified file was
 `infra/tests/test_stack.py`, the intended change.
+
+---
+
+## Stage 2 — deploy safety
+
+### `RMD-6` — the CORS guarantee moved to where absence is safe
+
+**Fixed in source. NOT yet closed in production** — see the gate below.
+
+- **`config.py`** — `cors_origins` now defaults to **empty**, not `http://localhost:5173`.
+  Safe because dev is same-origin too: `frontend/vite.config.ts:21-23` proxies `/api` → `:8000`,
+  so the browser only ever talks to the Vite origin and no CORS header is involved either way.
+  The old default was never needed.
+- **`api/tests/test_cors.py`** rewritten. It asserted the dev default, so it had to change —
+  it now asserts the default allows **nothing**, plus an admitting case (an explicit origin
+  works) and the negative control.
+- **`stack.py` and `test_stack.py:108`** keep setting and asserting the empty value, with
+  comments demoting it from *the guarantee* to *a statement of intent*. Deleting either would
+  lose the record of why.
+- **`infra/README.md`** — `detect-stack-drift` added to §7's manual gates, with the two
+  always-drifted rows (`Cpu`, `Memory` unit normalisation) named so a real third difference
+  stands out.
+- **The record corrected in both places that carried the reversed claim**: Track B's execution
+  log §4 claim 1 and the handoff's must-not-revert list. Original wording preserved in both,
+  annotated rather than rewritten — a frozen document's value is that it is frozen.
+
+**Mutation gate:** restoring the old default → **red** (`test_the_default_config_allows_no_origin_at_all`).
+
+### `RMD-7` — `ARC-1`, rank 2: the storage stage now refuses by default
+
+The guard was a sentence in a README, and §2 is the first deploy command an operator meets —
+so the destructive path was also the most reachable one.
+
+**New module `deploy_stage.py` with a pure function**, `resolve_include_service(stage,
+confirm)`. It is separate from `app.py` for one reason: `app.py` does its work at import time
+and calls `app.synth()`, so nothing in it is testable — which is `QUA-10`, and why `TKB-7`'s
+protection rode on an unverified context string. Two strings in, one bool out, testable
+without CDK or AWS.
+
+`-c stage=storage` now raises unless `-c confirm-new-stack=true` is also given. **The guard is
+a flag rather than an AWS lookup deliberately:** synth must stay offline (the whole infra
+suite runs with no credentials), and a check that only works when configured is not a guard.
+
+**5 unit tests**, including that an unrecognised stage token fails toward the *safe* answer —
+a typo must not silently drop the distribution.
+
+**Verified through the real entrypoint, not only the unit:**
+
+| invocation | result |
+|---|---|
+| no stage flag | exit 0 |
+| `stage=storage`, unconfirmed | **exit 1**, refusal naming the distribution and the flag |
+| `stage=storage`, confirmed | exit 0 |
+
+Runbook §2 now opens with a skip-this-section warning and the check command; it also carries
+`ARC-1`'s correction to `TKB-7`'s stated mechanism (ECR is `Retain`, so a rollback **orphans
+fixed-name resources** rather than deleting the repository — the staging is right, the old
+explanation was not).
+
+### `RMD-8` — `ARC-2`, rank 7: log retention set, live
+
+Design §5 specified 90 days; never implemented, in no tracking document. **Applied to the
+live groups**, not merely documented:
+
+| log group | before | after |
+|---|---|---|
+| `/aws/apprunner/artistpath-api/…/application` | Never Expire | **90** |
+| `/aws/apprunner/artistpath-api/…/service` | Never Expire | **90** |
+
+**Left at Never Expire, deliberately:** the two `apprunner-availability-probe` groups
+(`TKB-8`'s only trace, empty and will never grow — the probe is gone) and the CDK
+auto-delete Lambda group (writes only on stack deletion). Recorded so the next reader knows
+it was a decision.
+
+Runbook gains **§5a as a numbered step**, not a note — CDK cannot create these groups, and the
+names contain the service id, so **recreating the service silently resets retention to Never
+Expire**. Carries the `MSYS_NO_PATHCONV=1` trap.
+
+### `RMD-9` — `ARC-5` closed properly; `ARC-4` made recoverable
+
+**`ARC-5`:** the service is now passed `ARTISTPATH_CLIP_TABLE`, read off the construct, so it
+renders as `{"Ref": "ClipTableED47A9EE"}` — CloudFormation resolves it from the table itself
+and the two **cannot** diverge, even in principle. `config.py` already read that variable; it
+was simply never sent. The test asserts the `Ref`, not a copied literal.
+
+This is what closes the gap the table-name test cannot: `infra/` cannot import `api/`, so no
+infra test can see `config.py`'s default. What it can do is stop the API needing that default.
+
+**`ARC-4`:** full de-hardcoding is a migration, not a cleanup — renaming a live table and
+repository is not something this plan deploys. **Runbook §10 added** so the failure is
+recoverable rather than merely surprising: what survives a stack delete, in what order to
+check, and which resource must *never* be deleted to clear a name conflict (the artifact
+bucket — `TR-9`'s only second copy of the adopted graph). It names the real fix and says why
+it was not taken.
+
+### `RMD-10` — `SEC-5`: a scaling ceiling
+
+`AutoScalingConfiguration` with `MaxSize: 2`, and the service wired to it. Without it the
+account default of 25 applies, and the origin secret rejects requests *inside* the container —
+after App Runner has counted and scaled on them. `DEP-17`'s claim that the gate bounds the
+bill is true through CloudFront and **false at the API origin**, the same shape `TR-7`
+corrected once.
+
+**2 is a cost ceiling, not a capacity estimate.** The test asserts both the value **and** that
+the service references it — a configuration nothing points at bounds nothing, which is `QUA-2`'s
+detached-resource shape again.
+
+### `ARC-6` — found live by the seam gate, and it was not on the plan
+
+**The stage-2 gate is "`cdk diff` shows only the intended changes", and the first run showed a
+fourth:** `ImageIdentifier` changing from the deployed `:9f5343d` to **`:latest`**.
+
+`infra/app.py` defaulted `image_tag` to `latest`, and `infra/.env.deploy` does not set the
+variable — so **the next `cdk deploy` would have silently repointed the live service at a
+floating tag**, contradicting the runbook's own rule that with no CI the tag is the only
+record of what is running. `ARC-6` sits in review §4 as a *cheap, non-blocking* fix; the diff
+showed it was one command away from being a live incident.
+
+**Now required** — a synth without it refuses, naming the variable (verified). Runbook §1
+updated, including that `.env.deploy` deliberately does **not** carry the tag: it is
+per-deploy, not per-machine, and persisting it is how you deploy the wrong commit.
+
+**This is the argument for the gate being a diff rather than a test.** No test in any package
+compares the synthesised template against what is actually deployed.
+
+### Stage 2 gate
+
+| check | result |
+|---|---|
+| builder | 115 passed |
+| api | 195 passed |
+| infra | 30 → **37** passed |
+| frontend unit + build | 78 passed, build green |
+| `cdk diff` vs deployed | **only the three intended changes** (autoscaling resource, its ARN on the service, `ARTISTPATH_CLIP_TABLE`) |
+| Snyk `api` | 0 issues |
+| Snyk `infra` | same 2 pre-existing lows, **no new** |
+
+> **⚠ `RMD-6` is FIXED-NOT-CLOSED, and drift is still DRIFTED. Both are expected and neither
+> is done.**
+>
+> Nothing in stage 2 was deployed. The running service is still image `9f5343d`, built before
+> the `config.py` change, so **the live API still answers a live probe with
+> `access-control-allow-origin: http://localhost:5173`** — re-measured after the source fix,
+> not assumed. Drift still reports the same three differences on `ApiService` for the same
+> reason.
+>
+> **`RMD-6`'s own done-condition, written in the plan before any of this, was "after
+> redeploy".** So this is the plan working, not a surprise — but the defect is live until a
+> deploy happens, and a deploy is Track C's step and the owner's call.
+>
+> The `ARTISTPATH_DEPLOY_IMAGE_TAG` fix means that deploy will now **stop** unless the operator
+> names the commit, which is the correct behaviour and a change to the deploy procedure.

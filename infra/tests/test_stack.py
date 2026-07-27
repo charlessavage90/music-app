@@ -158,13 +158,44 @@ def test_the_service_gets_every_environment_variable_the_api_reads():
 
 
 def test_cors_origins_is_present_and_empty_not_merely_unset():
-    # TR-8: unset yields the dev default http://localhost:5173
-    # (config.py's default_factory). The empty tuple requires setting the
-    # variable TO empty — and same-origin means no preflight ever fires to
-    # reveal the mistake.
+    # TR-8, and this test is CORRECT — it was also not enough, which is the
+    # interesting part.
+    #
+    # RMD-6, 2026-07-27: this assertion passed, the template was right, and
+    # production was still wrong. An empty-valued environment variable does not
+    # reach a running App Runner service, so the deployed API fell back to
+    # config.py's then-default of http://localhost:5173. Nothing in any of the
+    # four packages could see that: the gap is between the template and AWS.
+    #
+    # The guarantee now lives in ApiConfig.cors_origins, which defaults to empty
+    # (see api/tests/test_cors.py). This test keeps holding the template's
+    # intent; `detect-stack-drift` in the runbook's gates is what holds the
+    # deployed reality.
     got = _service_env()
     assert "ARTISTPATH_CORS_ORIGINS" in got
     assert got["ARTISTPATH_CORS_ORIGINS"] == ""
+
+
+def test_the_service_has_a_scaling_ceiling_and_is_wired_to_it():
+    # SEC-5: with no configuration the ACCOUNT default applies — 25 instances.
+    # The origin secret rejects requests inside the container, after App Runner
+    # has counted and scaled on them, so the gate does not bound the bill at the
+    # API origin (the shape TR-7 corrected once already).
+    (logical_id, config) = next(
+        iter(
+            template()
+            .find_resources("AWS::AppRunner::AutoScalingConfiguration")
+            .items()
+        )
+    )
+    assert config["Properties"]["MaxSize"] == 2
+
+    # A configuration the service does not reference bounds nothing — the same
+    # detached-resource shape as QUA-2.
+    (service,) = template().find_resources("AWS::AppRunner::Service").values()
+    assert service["Properties"]["AutoScalingConfigurationArn"] == {
+        "Fn::GetAtt": [logical_id, "AutoScalingConfigurationArn"]
+    }
 
 
 def test_the_health_check_targets_health_not_the_root():
@@ -365,15 +396,33 @@ def test_the_clip_table_matches_what_DynamoClipCache_writes():
 def test_the_clip_table_name_is_the_one_the_api_looks_for():
     # QUA-8: the name was unasserted, so renaming the table passed — and the
     # failure is a runtime error on the first clip lookup, in production.
-    #
-    # ARC-5: this literal exists twice, here and as ApiConfig.clip_table_name's
-    # default in api/src/artistpath_api/config.py, with NOTHING binding them.
-    # infra/ cannot import api/, so this test cannot close that gap — it only
-    # pins this side. RMD-9 closes it properly by passing the name through as an
-    # environment variable, at which point this assertion moves with it.
     assert (
         _resource_by_logical_id_prefix("AWS::DynamoDB::Table", "ClipTable")[
             "Properties"
         ]["TableName"]
         == "artistpath-clips"
     )
+
+
+def test_the_service_is_told_the_table_name_rather_than_guessing_it():
+    # ARC-5: the name was a literal in two packages — here and as
+    # ApiConfig.clip_table_name's default — with nothing binding them. It is now
+    # passed through as an environment variable read off the construct, so the
+    # table cannot be renamed without the service's variable moving with it.
+    #
+    # This is what closes the gap that the test above cannot: infra/ cannot
+    # import api/, so no infra test can see config.py's default. What it CAN do
+    # is stop the API needing that default at all.
+    (table_id,) = [
+        lid
+        for lid in template().find_resources("AWS::DynamoDB::Table")
+        if lid.startswith("ClipTable")
+    ]
+    got = _service_env()
+
+    assert "ARTISTPATH_CLIP_TABLE" in got, "the service must not rely on the default"
+    # A Ref, not a copied literal: CloudFormation resolves it from the table
+    # itself, so the two cannot diverge even in principle.
+    assert got["ARTISTPATH_CLIP_TABLE"] == {"Ref": table_id}, got[
+        "ARTISTPATH_CLIP_TABLE"
+    ]

@@ -13,6 +13,7 @@ from pathlib import Path
 
 import aws_cdk as cdk
 
+from artistpath_infra.deploy_stage import CONFIRM_FLAG, resolve_include_service
 from artistpath_infra.stack import ArtistpathStack, DeployInputs
 
 _SIDECAR = Path(
@@ -43,7 +44,15 @@ app = cdk.App()
 # `cdk deploy -c stage=storage` builds only what the image push and the
 # artifact upload need. The first deploy must use it: App Runner cannot be
 # created before the image is in ECR and the graph is in S3 (TKB-7).
-include_service = app.node.try_get_context("stage") != "storage"
+#
+# ARC-1: against a DEPLOYED stack the same flag deletes the CloudFront
+# distribution and every shared link with it, permanently. resolve_include_service
+# refuses unless the operator confirms the stack is new; see deploy_stage.py for
+# why the guard is a flag rather than an AWS lookup.
+include_service = resolve_include_service(
+    app.node.try_get_context("stage"),
+    app.node.try_get_context(CONFIRM_FLAG),
+)
 ArtistpathStack(
     app,
     "ArtistpathStack",
@@ -56,7 +65,13 @@ ArtistpathStack(
         site_password=_require("ARTISTPATH_DEPLOY_PASSWORD"),
         billing_alarm_usd=float(_require("ARTISTPATH_DEPLOY_BILLING_USD")),
         alarm_email=_require("ARTISTPATH_DEPLOY_ALARM_EMAIL"),
-        image_tag=os.environ.get("ARTISTPATH_DEPLOY_IMAGE_TAG", "latest"),
+        # ARC-6: this defaulted to "latest", contradicting the runbook's own
+        # rule that the tag is the only record of what is running. Caught live
+        # by `cdk diff` on 2026-07-27: .env.deploy does not set the variable, so
+        # the next deploy would have silently repointed the service from the
+        # deployed commit tag to `latest`. Required now — a deploy that cannot
+        # say what it is deploying should stop.
+        image_tag=_require("ARTISTPATH_DEPLOY_IMAGE_TAG"),
         include_service=include_service,
     ),
     env=cdk.Environment(region="us-east-1"),
