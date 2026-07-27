@@ -40,10 +40,14 @@ neither counts.**
 The first path is expected to route through well-known artists; that is not the failure.
 The failure is a bypass that swaps one well-known artist for another without lengthening
 or surfacing anything new. Length alone is not the goal — a path that lengthens while
-carrying the same or more hubs is a worse result, not a better one. Reference product:
-boilthefrog.
+carrying the same or more hubs is a worse result, not a better one.
 *Firm as intent. The owner flagged it himself as gut instinct rather than data-driven
 (execution log §16). Bypass telemetry is what would test it.*
+⚠ **This value once read "Reference product: boilthefrog". It is not** — boilthefrog's
+bypass does not do this, and the claim is struck rather than deleted so the correction stays
+visible. See the table below and `findings/2026-07-27-boilthefrog-source-review.md` `BTF-3`.
+**The value itself is unaffected**: it is the owner's preference, and a preference needs no
+precedent. What is withdrawn is only the appeal to one.
 
 **3. Path length has a ceiling set by attention, not by graph structure.**
 At some point a journey stops feeling like a journey. No offline metric will find that
@@ -107,8 +111,37 @@ that is meant to carry obscurity is the **bypass** — the more bypasses, the mo
 the path becomes *while staying coherent*, and the ideal router does that reliably for any
 artist pair. Extends value 2, which covers only the famous-endpoint first path, and bounds
 it in the other direction.
-*Owner-stated, 2026-07-24. His characterisation of boilthefrog; not independently verified
-against the article.*
+*Owner-stated, 2026-07-24. His characterisation of boilthefrog.* ✅ **The endpoint-tracking
+half is VERIFIED, 2026-07-27** — from boilthefrog's own design text, its code, and
+measurement (`BTF-2`); the earlier "not independently verified" caveat is lifted **on that
+clause only**. ⚠ **The bypass half is not** — obscurity there does not grow with bypass
+depth (`BTF-3`, same reading as value 2). And the mechanism was **not only the router**: its
+famous artists are near-leaves, so paths cannot pass through them (`BTF-1`).
+
+---
+
+## What came from boilthefrog, and what did not
+
+**Why this is here.** Values 2 and 9 both invoke boilthefrog, and it was read for the first
+time on 2026-07-27. Read this before citing it in either direction — "the reference product
+did X" has already been wrong once, in value 2. Evidence and identifiers:
+`findings/2026-07-27-boilthefrog-source-review.md`; figures in the analysis directory it
+cites. **No figures here.**
+
+| | shared with boilthefrog | new here — it has no analogue | deliberate deviation |
+|---|---|---|---|
+| **Routing** | a popularity-continuity term; fame tracks the endpoints on the first path | similarity **priced** in the cost function; any device that changes with bypass depth | its popularity term exists to **suppress** obscurity; it prices similarity at **zero**, using it only to decide which edges exist |
+| **Bypass** | a per-card button that excludes an artist and regenerates the whole path; endpoints never bypassable | **two signals** with different mechanisms (`dislike` vs `known`); neighbourhood decay around a rejection; obscurity that grows with depth (values 2, 5, 9b) | its single signal relaxes no popularity term, so it re-routes at the same fame level and settles |
+| **Graph** | an undirected similarity graph with a per-artist neighbour cap | pruned to one connected component, so **"no path" can only come from the user's own exclusions** — it never prunes, and a genuine no-path is reachable there | it excludes the obscure tail from the graph outright, and its famous artists are **near-leaves** by construction |
+| **App** | path state in the URL; shareable; 30-second clips per card | Back undoes a bypass | it never advanced its own novelty goal at the track level — the mechanism it advertised for that was never switched on (`BTF-8`) |
+
+**The one-line reading.** boilthefrog is a sound model for **the first path** and offers this
+project **nothing for the bypass ladder** — which is where values 1, 2, 5, 6 and 9's second
+half all live. Its goal was a smooth ride between two artists; ours is smooth *and*
+progressively unfamiliar. **Those are different products**, and the shared cost term is
+shared shape, not shared intent.
+
+*Added 2026-07-27, at the owner's instruction, replacing a bare reference claim.*
 
 ---
 
