@@ -212,16 +212,53 @@ no graph):
 
 ---
 
-## 7. Open, and the owner's to decide
+## 7. The standing-layer items — decided by the owner, 2026-07-27
+
+The three items below were escalated because they touch the budgeted standing context layer,
+which is his call and not a session's. **He authorised all three the same day; they are done.**
+The remaining rows are still open.
+
+| Item | Outcome |
+|---|---|
+| The stale **"27 prior claims"** in `CLAUDE.md` (`DAF-8`) | **DONE — dropped, not replaced with "45".** A count restated outside the table it describes is the drift mechanism itself; replacing one number with another only resets the clock. The row now says to read the count off §6. |
+| The **`consultant` agent**'s invisibility from every entry point | **DONE.** Added to `CLAUDE.md`'s orient table and `docs/README.md`'s agent list, carrying the fact a reader most needs: it is **not a subagent**, and a working session must never dispatch it as one, because its value is that its inputs are the owner's rather than another session's paraphrase. |
+| `CLAUDE.md` having no `Role:` marker | **DONE.** It was the only document in the role-labelled system without one. |
+
+**Cost of the above, measured from the diff per `closeout` **D6**, in characters because this
+layer is written in long single lines that `wc -l` cannot see change in:** `CLAUDE.md`
+**37,228 → 38,438** (+1,210 chars, 556 → 559 lines). `memory/` unchanged at 378 lines.
+**Nothing was removed to pay for it** — no live passage was compressed to free space, which
+the standing rule warns has twice cost the exact clause that made a check usable.
+
+**Still open:**
 
 | Item | Why it is his |
 |---|---|
-| Whether `CLAUDE.md`'s orient table drops the stale **"27 prior claims"** count (`DAF-8`) | It edits the unconditionally-loaded layer. A deletion, so it shrinks rather than grows — but the rule reserves that layer's contents to him without qualification. |
-| Whether the **`consultant` agent** becomes discoverable from the entry points | It is fully defined and actively used, and `grep -c consultant` returns **0** in `CLAUDE.md`, `docs/README.md` and `README.md`. Fixing it **grows** the standing layer, which is explicitly his decision. |
-| Whether `CLAUDE.md` itself gains a `Role:` marker | Same layer. It is the only document in the role-labelled system that does not declare its own role. |
 | Whether the root `README.md`'s status line becomes a pure pointer (§5) | Small, but it is the project's public face and the wording is his. |
 | Whether **`TEST-QUEUE.md`** (1,135 lines, append-only, grows every closeout) gets archived past some depth | A change to a working ritual's cost, not a defect. |
 | Whether a future `closeout` records the **`builder/README.md` deferral** as discharged | The file was written 2026-07-25; two handoffs still carry it as an open deferred finding. Bookkeeping only. |
+
+### 7a. Role markers, swept to completion
+
+Prompted by the owner asking whether the markers were consistent after §6's fixes. They were
+not — a mechanical sweep of the first twelve lines of every document found **eleven** more:
+
+- **Ten handoffs — every one written from 2026-07-26 onward** — had silently dropped the
+  `Role:` line the earlier eight all carried. No document decided to stop; the convention
+  simply lapsed partway through Gate 2's build tracks. Each now declares its **actual
+  supersession state** rather than a generic label, so the chain is readable from any file in
+  it without going via the map.
+- **`findings/2026-07-25-doc-audit-gate1-clips-ux.md` declared no role at all** — the exact
+  defect class it was itself written to check for in other documents. Marker added. Its
+  internal severity miscount (§2 of that file claims five HIGH findings; the table has seven
+  rows, two HIGH, and the summary sums to six) is recorded in a header caveat and **not
+  corrected in place** — the findings stand, only the arithmetic about them is wrong, and a
+  frozen report's value is that it is frozen.
+
+**The sweep now returns clean across all 86 documents under `docs/`.** Package READMEs
+(`api/`, `builder/`, `frontend/`, `infra/`, `builder/analysis/`) are **deliberately excluded
+rather than silently skipped**: the `Role:` convention is scoped to the project record, not to
+code documentation, and imposing it there would be inventing a rule rather than enforcing one.
 
 **Not escalated, because they are methodology and therefore mine:** the ten-way split, which
 checks each slice ran, what to re-verify, and which fixes were mechanical enough to apply
