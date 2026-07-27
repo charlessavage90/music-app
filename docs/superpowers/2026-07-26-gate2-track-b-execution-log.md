@@ -198,8 +198,18 @@ Under the corrected definition, for this session's work plus the follow-on maint
 
 | layer | delta | new baseline |
 |---|---|---|
-| **unconditional** | **−968 characters** | **43,649 characters** |
+| **unconditional** | **−968 characters** | **42,778 characters** |
 | **conditional** | **−75 lines** | **1,956 lines** (in-repo bodies +103, memory bodies −178) |
+
+> **The baseline above was corrected from 43,649 on 2026-07-27, and the delta was not.** The
+> original was measured with `wc -c` on a tree with `core.autocrlf=true`, so it counted a
+> phantom `\r` on every line *and* charged 3 bytes for every em-dash, `§`, `≠` and `⚠` in a
+> house style full of them — 871 characters, 2 %, of pure measurement artifact. **`−968`
+> stands**: both sides of that subtraction carried the same contamination, so it cancels, and
+> only the baseline was wrong. **Any figure produced by `wc -c` is not comparable to what D6
+> now produces** — same caveat as the historical 1,436-line figure below, and for the same
+> reason. A superseded baseline is worse than no baseline, because the next closeout diffs
+> against it.
 
 Memory was consolidated from **553 → 378 lines**, 13 files → 12. Memory lives outside the
 repo and cannot be committed, which is why its figures live here.
