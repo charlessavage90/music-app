@@ -131,8 +131,10 @@ closed. Say so plainly rather than marking it complete.
 
 ### A5. Release the processes this session started
 
-**Sweep the ports, stop what this session owns, and leave a fresh detached server behind
-if C1 queued anything.**
+**Sweep the ports, stop what this session owns, close what nothing needs, and leave a fresh
+detached server behind only if C1 queued something that requires one.** The default for a
+listener with no queued test behind it is **off** — a running server is not free, it is a
+stale artifact waiting to be tested against.
 
 A session that starts a dev server in a background shell stays *subscribed* to it: retiring
 the session does not end the subscription, and only closing its terminal does. The terminal
@@ -157,14 +159,37 @@ closeout may be in a fresh one.
    needs the PID. Stopping a task does not disturb the conversation, so the terminal stays
    answerable afterwards.
 
-3. **If C1 queued an item, relaunch detached**, per the commands in `CLAUDE.md` — cite them,
-   do not restate them. Detached means no session owns it, so nothing can be woken by it; it
-   equally means nothing is watching, so **a failure to bind is silent. Verify both ports
-   answer before believing it started.** Record PID and port in the C1 entry.
+3. **Give every surviving listener a disposition — a recommendation, not an observation.**
+   Two conditions, and they compose:
 
-**Then say so in the closing message** — ports, PIDs, and that nothing owns them. A detached
-server outlives every session and every terminal, so the failure mode is the owner not
-knowing it is there.
+   | | **Fresh** (started at or after HEAD) | **Stale** (started before HEAD) |
+   |---|---|---|
+   | **C1 queued an item** | Keep it. Say what it is for. | **Ask: restart or close.** It serves code that predates the work, so the queued test would pass or fail for the wrong reason. |
+   | **Nothing queued** | **Recommend closing it.** Nothing needs it. | **Close it**, and report that you did. |
+
+   The bottom-right cell is not a question. No queued test needs the server *and* the code
+   it serves is wrong: there is no case for keeping it, so do not table it as an option —
+   tabling it manufactures a decision out of a foregone conclusion, which is its own tax.
+   Closing a listener this session did not start is `Stop-Process -Id <pid>`; say in the
+   closing message that you stopped something you did not launch, and how to get it back
+   (the commands are in `CLAUDE.md`).
+
+   **Reporting a stale unowned listener without a disposition is the failure this step
+   exists to prevent.** On 2026-07-26 a closeout did exactly that: it reported both ports,
+   both PIDs, and correctly noted the API predated the origin-secret middleware — and then
+   left both running, with nothing queued that needed them. Every fact was right and no
+   action followed from any of them. The owner got a table.
+
+4. **If C1 queued an item and no fresh listener survives, relaunch detached**, per the
+   commands in `CLAUDE.md` — cite them, do not restate them. Detached means no session owns
+   it, so nothing can be woken by it; it equally means nothing is watching, so **a failure to
+   bind is silent. Verify both ports answer before believing it started.** Record PID and
+   port in the C1 entry.
+
+**Then say so in the closing message** — ports, PIDs, what you stopped, and what you left
+running *and why*. A detached server outlives every session and every terminal, so the
+failure mode is the owner not knowing it is there; a table of PIDs with no disposition is
+that same failure with more words.
 
 ---
 
@@ -202,6 +227,15 @@ a session concluding it does not need one.**
 Fix what the durable record can adjudicate. **Anything you cannot resolve from the
 record goes on an escalation list rather than being guessed at** — that list is also a
 precise measurement of where the record is too thin, which is worth having.
+
+**Escalate for want of evidence, never for want of authority.** A finding you have the
+facts to fix is yours to fix, and that includes `CLAUDE.md`, `.claude/` and `memory/` —
+D6 governs *growing* the standing layer, not *correcting* it. On 2026-07-26 the audit found
+`CLAUDE.md`'s next-action row still describing 2026-07-25 and unaware that three Gate 2
+tracks had landed; the session had every fact needed to fix it, escalated on authority
+grounds, and the row stayed wrong. An escalation list is a measurement of a thin record. A
+known-false statement parked on it is just a defect with a nicer name — and in the
+auto-loaded layer it misdirects every cold session before that session reads anything else.
 
 Check whether previous audit findings were ever actioned. A stale audit finding is
 worse than none, because it reads as settled.
@@ -369,11 +403,14 @@ This repo ignores more than is obvious:
 
 - `.superpowers/sdd/` — all briefs, reports and the progress ledger. This is why A1
   exists; without distillation they are gone.
-- `builder/scratch/` and `*.bin` — every graph artifact, with `!tests/fixtures/*.bin`
-  the sole exemption.
-- `api/uv.lock` — never tracked. A plan once instructed staging it; the step was
-  unsatisfiable as written and the dependency had to be pinned in `pyproject.toml`
-  instead.
+- `builder/scratch/` and `*.bin` — every graph artifact, with `!**/tests/fixtures/*.bin`
+  the sole exemption. The `**/` is load-bearing: a pattern containing a slash is anchored
+  to the gitignore's own directory, so the `!tests/fixtures/*.bin` **this file quoted until
+  2026-07-26** exempted nothing, and both fixtures were silently ignored for months.
+- `api/uv.lock` and `builder/uv.lock` are **committed**, deliberately, and must stay that
+  way: with no CI the Docker image is the release artifact, so `uv sync --frozen` has to
+  install what the tests ran against (DEP-32, 2026-07-26). They were ignored until Track B,
+  and this file said "never tracked" for a day after that stopped being true.
 
 If work touched anything near those paths, `git status --ignored` over them takes
 seconds and prevents a silent loss.
@@ -433,31 +470,91 @@ The PR body is where a reviewer picks up the context, so it carries:
 
 ### D6. The standing context layer is the owner's to grow
 
+**Report two numbers, never one. They are not the same layer and they do not cost the same.**
+
 ```bash
-git diff --stat <base>..HEAD -- CLAUDE.md .claude/skills/ .claude/agents/
-wc -l ~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/*.md | tail -1
+M=~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory
+
+# 1. UNCONDITIONAL — loads in every session before it reads anything. Characters.
+{ cat CLAUDE.md "$M/MEMORY.md"; \
+  sed -n '/^description:/p' .claude/skills/*/SKILL.md .claude/agents/*.md; } | wc -c
+
+# 2. CONDITIONAL — loads only on invocation, dispatch or recall. Lines.
+cat .claude/skills/*/SKILL.md .claude/agents/*.md \
+    $(ls $M/*.md | grep -v MEMORY.md) | wc -l
 ```
 
-Record the net line change in the retained log. **If it is positive, the commit message
-states the cost and the case** — what fires the new rule, and why it was worth the lines. It
+**What is in each, verified by observation on 2026-07-26 rather than assumed:**
+
+| Unconditional | Conditional |
+|---|---|
+| `CLAUDE.md`, in full | `SKILL.md` **bodies** — only on invocation |
+| `MEMORY.md` — the index **only** | Agent definition **bodies** — only on dispatch |
+| The `description:` line of every skill **and** every agent | `memory/*.md` **bodies** — only on recall, which is *unpredictable*: they load when not needed and miss when needed |
+
+**Two things this corrects, and both had been wrong for a while.** The rule used to name
+"`memory/` and both `SKILL.md` bodies" as unconditional. Neither is. And skill *descriptions*
+— which genuinely are unconditional, one per skill, and `closeout`'s is a full paragraph —
+were not counted at all.
+
+**The units differ deliberately.** The unconditional layer is written almost entirely in
+very long single lines — `CLAUDE.md`'s orient table is one row per line, and every
+`description:` is one line — so `wc -l` is blind to it. Rewriting the next-action row as a
+pointer on 2026-07-26 cut it from 2,135 characters to 637, roughly 375 tokens off every
+future session, and `git diff --numstat` reported `1 insertion, 1 deletion`. **Net zero.**
+A check that cannot see its largest available win is not a check. The conditional layer is
+ordinary wrapped prose, so lines are fine there.
+
+Record **both** deltas in the retained log. **If the unconditional one is positive, the
+commit message states the cost and the case** — what fires the new rule, and why it was
+worth it. A positive conditional delta is worth recording and is not the same alarm: those
+lines are paid by the sessions that ask for them. It
 need not name a removal: a displacement counts only where the thing removed had stopped
 earning its place, and compressing live prose to free lines is not a displacement, it is
 damage with a receipt. Net-new is the owner's call, not the session's, and it needed his
 agreement before it landed. A justification written by the session that wanted the lines is
 not a check; that is how this layer reached 1,436 lines with every individual addition
-justified.
+justified. **That 1,436 was measured under the old, over-broad definition** — it counted
+whole `SKILL.md` bodies as unconditional. The incident is real and the lesson stands; the
+number is not comparable to what the commands above produce, so do not diff against it.
 
-**Both commands are needed, because `memory/` lives outside the repo and is not in git** —
-a diff cannot see it, yet it loads into every session and the budget rule names it. Take its
-total by line count and compare against the last figure recorded in the log. That is also
-why the number goes in the **log** and not only in a commit message: the log is the only
-place the two halves of this layer can be added together.
+**Correcting this layer is not growing it, and it is not optional.** Three edits, three
+different owners, and conflating the first two leaves the layer accurate-but-frozen, which
+is the same harm as inaccurate:
 
-This layer loads before a session reads anything else, so it is the only one where growth is
-unconditional. `docs/` routes around its own bulk — half the corpus is COMPLETE plans that
-cost nothing — and that is why the corpus is not the problem. In two days this layer went
-661 → 1,436 lines while every individual addition was justified, which is the failure mode:
-the asymmetry is invisible per-commit and only visible in the total.
+| The edit | Whose call | The test |
+|---|---|---|
+| A statement in the layer is **false about the world** | **The session, here, now** | Net size ≈ 0 in that layer's own unit; no new rule, no new narrative, no new claim — the true statement replacing the false one |
+| A **new** rule, row, narrative or check | The owner, given the cost and the case | Net size positive |
+| The same facts in **different words** | The owner | This is where compressing live prose does its damage; it has twice cost the clause that made a check usable |
+
+A false statement in the auto-loaded layer is read by every cold session before it opens a
+single project document — it is the most expensive kind of stale text this project has, and
+the budget rule exists to protect that layer's value, not to freeze its contents. So the
+question is never *may I touch `CLAUDE.md`*; it is **which row of that table am I in.**
+
+**A correction that cannot be made in roughly the same number of lines is not a
+correction.** Report it as growth, with the wording you would use and the delta it costs,
+and let him decide. That is the honest escape hatch, and it is a sentence in the closing
+message rather than a decision withheld.
+
+**Both commands read `memory/`, which lives outside the repo and is not in git** — a diff
+cannot see it, yet `MEMORY.md` loads into every session. That is why these are totals
+compared against the last figures in the log rather than a `git diff`, and why the figures
+go in the **log** and not only in a commit message: the log is the only place the two halves
+of this layer can be tracked together.
+
+**Only the first number is a standing tax.** The unconditional layer is paid by every
+session before it reads anything else, whether or not that session needs a word of it — so
+growth there is the owner's call. The conditional layer is paid on demand by the session
+that invoked the skill, dispatched the agent, or had the memory recalled; a session that
+never touches graph analysis never pays for `ml-graph-analyst`. `docs/` is conditional too,
+and routes around its own bulk — half the corpus is COMPLETE plans that cost nothing — which
+is why a large `docs/` has never been the problem.
+
+The failure mode is the same in both, and it is that the asymmetry is invisible per-commit
+and only visible in the total: this layer once went 661 → 1,436 lines in two days while
+every individual addition was justified.
 
 Two traps, both already sprung here:
 
