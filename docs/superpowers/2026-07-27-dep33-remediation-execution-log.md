@@ -629,3 +629,117 @@ running. Swept by port rather than by task list, since a session sees only its o
 record. The identity of what is deployed — graph key, sha256, image tag — is owned by Track B's
 execution log §1 and is **cited from here, never restated** (see `B5` above, where restating it
 was this log's own defect).
+
+---
+
+## Stage 3 — the first user
+
+**The closeout section above covers stages 1–2 only.** Stage 3 ran in a later session, after
+PR #30 merged; this section is appended rather than interleaved so nothing already committed
+moves. Branch `gate2-dep33-stage3`.
+
+### `RMD-11` — `FRO-2`, rank 3: nobody was told the username
+
+The 401 now carries a body naming the username. It is substituted at synth time from
+`stack.py`'s new **`SITE_USERNAME`** constant — the same constant the admitted credential is
+built from — so the page cannot name a username the gate would reject. Naming it discloses
+nothing: this is a shared password, not authentication, and the function's own comment has
+always said so.
+
+`infra/README.md` §1 now states what to send a new visitor: **URL and password only**, because
+the page they hit tells them the username.
+
+**The mutation gate found two weak assertions before they landed, and both were mine.** This is
+the argument for running it on your own new tests rather than only on the ones under repair:
+
+| what the assertion was | why it passed the mutation that serves the whole credential |
+|---|---|
+| `password not in response` | It checks the **plaintext**. Basic auth is base64, not encryption, so a body leaking `Basic YXJ0...` hands over a working credential while containing no plaintext password at all. |
+| `username in body` | Satisfied by the page's own `<h1>artistpath</h1>` — the site's **name** passing a check meant for an **instruction**. |
+
+Both were tightened: the username is asserted as marked-up text, and the password check covers
+the encoded form and runs against the whole response rather than the body.
+
+**Mutations after the fix — 2, both CAUGHT:** the body serving the credential; the username
+substitution silently no-opping (caught by a fixture guard mirroring the existing
+`__EXPECTED_AUTH__` one).
+
+### `RMD-12` — `FRO-1` / `FRO-7`, rank 4: the blank page after a redeploy
+
+**Runbook half.** §6 was one `aws s3 sync --delete`. It is now three passes: hashed assets with
+a one-year immutable `Cache-Control` and **no `--delete`**, then `index.html` **last** with
+`no-cache`, then the invalidation.
+
+**The `--delete` split is an extension of what the plan specified, not something it called
+for.** The plan named the cache headers and the ordering. But deleting the previous build's
+assets while the previous `index.html` is still live re-opens the identical window for anyone
+mid-visit — so the prune is now a separate, later, optional step, with its cost stated (a few
+kilobytes of orphans) against the cost of running it early (a blank page). **The cutover deploy
+is exempt and says so:** the bucket is empty, so there are no returning visitors to protect.
+
+The machine-state caveat from the stages 1–2 handoff — `aws s3 sync`'s content-type guessing was
+verified on *this* machine and is not a repo property — is now **in the runbook** rather than in
+a handoff that expires.
+
+**Application half (`FRO-7`).** `frontend/index.html` carries static fallback markup inside
+`<div id="root">`. **Verified to survive `vite build` by reading `dist/index.html`**, not
+assumed — and the first attempt to verify it read a *stale* `dist/` from before the change,
+because `tsc -b && vite build` had failed at the `tsc` step and the build never ran. The
+apparent finding, "Vite strips the fallback", was an artifact of reading output that no build
+had produced.
+
+**Two design points, both of which a test now holds:**
+
+- **It must live inside `#root`.** React clears the container it owns, so there it disappears on
+  mount; placed *beside* `#root` it would be correct on the way in and then sit under the app
+  forever. The failure mode is not "the fallback is missing" — it is "the fallback never leaves".
+- **The test reads `index.html` through Vite's `?raw`, not `node:fs`.** The first draft broke
+  `npm run build`: `tsconfig.app.json` gives `src/` no node types, and adding them so one test
+  compiles would let **any** app module import node builtins and still typecheck. `vite/client`
+  already declares `?raw`.
+
+**Three tests, all shown red first. Mutation — the fallback moved to a sibling of `#root` —
+CAUGHT by all three.** The e2e spec exists because *every other e2e spec passes with the
+fallback still on the page*: they look for app elements, and leftover text does not stop those
+existing. Its assertion order is deliberate and is itself a finding — the fallback and the
+landing page share a heading, so asserting the heading first fails on a Playwright strict-mode
+violation, a real detection whose message says nothing about what broke.
+
+### `RMD-13` — `FRO-4`, rank 10: prove the gate admits
+
+**The step is written and cannot complete before Track C**, exactly as the plan anticipated.
+`infra/README.md` **§8a**, marked with an hourglass and carrying the reason running it early is
+worthless: the bucket is empty, so every path 403s whether the rewrite works or not.
+
+Two halves, and the split is the point:
+
+- **Mechanical (curl):** the gate admits at all; a shared `/path/<mbid>/<mbid>` link returns the
+  SPA entry point rather than a 403 (`TR-5` against the real distribution); `/api/*` works end
+  to end through CloudFront.
+- **Browser, and curl *structurally* cannot do it:** whether the browser re-attaches cached
+  basic credentials to the SPA's same-origin `fetch()` calls. `curl -u` re-sends the credential
+  explicitly on every request, which is precisely the behaviour in question. The whole app
+  depends on this and no browser has ever exercised it.
+
+§8a is also **the trigger the deferred phone section in `TEST-QUEUE.md` has been waiting on
+since 2026-07-26**, and it names the in-app-browser risk (WhatsApp, Instagram) as a risk to work
+around rather than a defect to fix at Gate 2.
+
+### Stage 3 gate
+
+| check | result |
+|---|---|
+| builder | **115 passed** |
+| api | **195 passed** |
+| infra | **41 passed** (38 before this stage) |
+| frontend unit | **80 passed** (78 before) |
+| `npm run build` | green — and it is what caught the tsconfig defect |
+| `npm run test:e2e` | **5 passed** (4 before). Run against the adopted artifact, sha256 `4cb84ef9…`, matched to its sidecar before the run |
+| `snyk_code_scan`, infra + frontend | frontend **0**; infra **2 lows, both pre-existing** — `test_stack.py:18` and `app.py:19`, neither in code this stage introduced. Their closing conditions in `A3` are unchanged. |
+
+**No listeners left on `:8000` or `:5173`.** The API was started for the e2e run and stopped;
+swept by port afterwards, not by task list.
+
+**Nothing was deployed.** `RMD-6` remains fixed-in-source and live in production. The owner
+accepted that exposure on 2026-07-27 rather than deploy twice — the decision the stages 1–2
+handoff put to him, resolved in favour of waiting for Track C.
