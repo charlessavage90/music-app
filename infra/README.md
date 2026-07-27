@@ -61,6 +61,12 @@ committed** — a password in a CDK source file is in the repository's history p
 > (`ARC-11`). It holds the four secrets above and deliberately **not** the image tag — the tag
 > is per-deploy, not per-machine, so persisting it is how you deploy the wrong commit.
 
+> **The username is `artistpath` and is not a secret** — `stack.py`'s `SITE_USERNAME`, which
+> is also the name substituted into the 401 page. **Send a new visitor the URL and the
+> password only**; the page they hit tells them the username (`RMD-11`, `FRO-2`). Before
+> 2026-07-27 the 401 had no body at all, so the first attempt of the first real visitor was
+> spent guessing a username nothing anywhere stated.
+
 The graph's sha256 is **not** a variable: `app.py` reads it from the sidecar. Never
 transcribe it by hand (`DEP-24`, `TR-10`) — its failure signature is "refuses to boot",
 during a cutover.

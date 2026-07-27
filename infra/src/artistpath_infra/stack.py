@@ -25,6 +25,12 @@ from aws_cdk import aws_sns as sns
 from aws_cdk import aws_sns_subscriptions as sns_subscriptions
 from constructs import Construct
 
+# The username half of the shared site credential. It is NOT a secret — the
+# password is — and RMD-11 serves it in the 401 body so a visitor knows what to
+# type. Named once and substituted into both halves, because a body naming a
+# username the gate would reject is FRO-2 with extra steps.
+SITE_USERNAME = "artistpath"
+
 
 @dataclass(frozen=True)
 class DeployInputs:
@@ -246,12 +252,13 @@ class ArtistpathStack(cdk.Stack):
         self.service.node.add_dependency(instance_role)
 
         expected_auth = "Basic " + base64.b64encode(
-            f"artistpath:{deploy.site_password}".encode()
+            f"{SITE_USERNAME}:{deploy.site_password}".encode()
         ).decode()
         function_code = (
             (Path(__file__).parent / "viewer_function.js")
             .read_text()
             .replace("__EXPECTED_AUTH__", expected_auth)
+            .replace("__EXPECTED_USERNAME__", SITE_USERNAME)
         )
         viewer_fn = cloudfront.Function(
             self,
