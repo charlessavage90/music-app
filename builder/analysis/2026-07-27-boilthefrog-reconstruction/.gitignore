@@ -1,0 +1,13 @@
+# The upstream BoilTheFrog repository, cloned on demand to re-run these scripts.
+#
+# NEVER COMMIT IT. Three reasons, in order of severity:
+#   1. It carries NO LICENCE and no copyright headers (see REPORT.md, "Licence"),
+#      so it is all-rights-reserved by default. Vendoring it here would be
+#      redistribution.
+#   2. It is ~121 MB, and this repo lives under OneDrive.
+#   3. It is third-party material. Per docs/README.md, that is never project
+#      documentation and does not belong in the project's own tree.
+#
+# This file exists because the directory is a natural target for `git add -A`,
+# and this session ran exactly that command against it before the clone landed.
+btf/

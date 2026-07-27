@@ -68,6 +68,19 @@ sit under `builder/analysis/` with full deliverables; they own the figures and y
 cite them, but reading them in sequence to reconstruct the story costs a day and the
 findings documents above exist precisely so you do not have to.
 
+**Background, not direction — added 2026-07-27, and deliberately outside the three.**
+`findings/2026-07-27-boilthefrog-source-review.md` reads the source of **boilthefrog**, the
+product this project's calibration record names as its reference. Read it for **context on
+what the reference product does and does not do** — it corrected `WHAT-GOOD-LOOKS-LIKE.md`
+in two places. **Do not read it for direction.** It is a study of a *different product with
+a different goal*: boilthefrog excludes obscure artists from its graph outright, and its
+author built its popularity term to keep listeners *away* from them. **It changes nothing in
+§1, §2, §3 or §5 of this brief.** In particular, the option it names is a **graph**
+intervention, so **this brief's §2 blocks it exactly as this brief's §2 blocks the degree
+floor** — if the router prices these artists out, changing the graph changes nothing. The
+boilthefrog document's own read-this-first box states that too, and **that box is the part to
+trust if its later sections read more enthusiastically.**
+
 ## 5. Closed, and what you may not spend
 
 **Closed — do not reopen, and do not re-argue:**
