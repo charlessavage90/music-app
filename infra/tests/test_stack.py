@@ -66,6 +66,66 @@ def test_the_image_repository_scans_on_push():
     )
 
 
+def _service_env() -> dict[str, str]:
+    (service,) = template().find_resources("AWS::AppRunner::Service").values()
+    pairs = service["Properties"]["SourceConfiguration"]["ImageRepository"][
+        "ImageConfiguration"
+    ]["RuntimeEnvironmentVariables"]
+    return {p["Name"]: p["Value"] for p in pairs}
+
+
+def test_the_service_gets_every_environment_variable_the_api_reads():
+    got = _service_env()
+    assert got["ARTISTPATH_GRAPH_SHA256"] == "0" * 64  # TKA-11
+    assert got["ARTISTPATH_CLIP_CACHE"] == "dynamo"
+    assert got["ARTISTPATH_ORIGIN_SECRET"] == "test-origin-secret"
+    assert "graph-test.bin" in str(got["ARTISTPATH_GRAPH"])
+
+
+def test_cors_origins_is_present_and_empty_not_merely_unset():
+    # TR-8: unset yields the dev default http://localhost:5173
+    # (config.py's default_factory). The empty tuple requires setting the
+    # variable TO empty — and same-origin means no preflight ever fires to
+    # reveal the mistake.
+    got = _service_env()
+    assert "ARTISTPATH_CORS_ORIGINS" in got
+    assert got["ARTISTPATH_CORS_ORIGINS"] == ""
+
+
+def test_the_health_check_targets_health_not_the_root():
+    template().has_resource_properties(
+        "AWS::AppRunner::Service",
+        {"HealthCheckConfiguration": {"Protocol": "HTTP", "Path": "/health"}},
+    )
+
+
+def test_the_instance_role_cannot_read_the_whole_artifact_bucket():
+    policies = template().find_resources("AWS::IAM::Policy")
+    statements = [
+        s
+        for p in policies.values()
+        for s in p["Properties"]["PolicyDocument"]["Statement"]
+    ]
+    s3_reads = [s for s in statements if "s3:GetObject" in str(s["Action"])]
+    assert s3_reads, "no s3 read grant found"
+    for statement in s3_reads:
+        assert "graph-test.bin" in str(statement["Resource"]), statement
+
+
+def test_the_two_app_runner_roles_are_not_merged():
+    # TR-7: an access role for the ECR pull and an instance role for runtime.
+    roles = template().find_resources("AWS::IAM::Role")
+    principals = str(
+        [
+            s["Principal"]
+            for r in roles.values()
+            for s in r["Properties"]["AssumeRolePolicyDocument"]["Statement"]
+        ]
+    )
+    assert "build.apprunner.amazonaws.com" in principals
+    assert "tasks.apprunner.amazonaws.com" in principals
+
+
 def test_the_clip_table_matches_what_DynamoClipCache_writes():
     # clips.py's _put_sync writes Item={"mbid": ..., "ttl": ...}. A mismatch
     # here is a runtime error that no test in api/ can catch.
