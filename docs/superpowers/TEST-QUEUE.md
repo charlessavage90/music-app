@@ -9,12 +9,24 @@ cannot.
 found, or DONE — nothing found. Do not delete entries; the record of what was exercised is
 the point.**
 
+> **⚠ Standing constraint until the Gate 2 deploy is live: the app runs only on the owner's
+> Windows desktop, so NOTHING HERE MAY ASK FOR A PHONE.** There is no hosted URL, and a phone
+> cannot reach `localhost` on another machine. An entry that asks for a real mobile device is
+> not merely inconvenient — it is unrunnable, and it will sit in this file looking like an
+> untested item when it is actually an impossible one. **Write the mobile half as an explicitly
+> DEFERRED section with its trigger named**, and put only desktop-runnable steps under "what
+> to exercise". Added 2026-07-26, when the Track D entry was queued asking for exactly that.
+> **This constraint expires at cutover** (Gate 2 Track C), not before.
+
 ---
 
-## QUEUED — 2026-07-26 (latest) — the phone, and the search box you caught
+## QUEUED — 2026-07-26 (latest) — the search box you caught, on the desktop
 
-**This one needs your phone, and that is the whole point of it.** Everything else here has
-been checked on a desktop browser; the main change cannot be.
+**⚠ Corrected before it was run.** This entry originally asked you to open the app on your
+phone. **You cannot** — the app runs only on this desktop and there is no address a phone
+could reach. The phone half is now a deferred section at the bottom with its trigger named,
+and everything under "what to exercise" is runnable on the desktop today. The mistake is
+recorded so the next entry does not repeat it.
 
 **Nothing about *which artists* you get has changed.** No routing, no graph, no weighting, no
 cost function. Any journey you built this morning is the same journey now. Seven separate
@@ -30,10 +42,18 @@ Worth knowing, because it changes what to expect: this was never about the dropd
 slow. Waiting for it never helped. Only *clicking a name in it* ever chose an artist, and it
 still is.
 
-**The main event: open it on your phone.** Until today there was no phone layout at all — on
-an iPhone the artist's name was squeezed to nothing by the two bypass buttons sitting beside
-it. Now those two buttons take a row of their own underneath the artist, and the name gets
-the full width. On a desktop nothing should look any different from yesterday.
+**The big change is one you cannot properly see yet.** Until today there was no phone layout
+at all — on an iPhone the artist's name was squeezed to nothing by the two bypass buttons
+sitting beside it. Now those buttons take a row of their own underneath the artist and the
+name gets the full width. **On a desktop nothing should look any different from yesterday**,
+and that is the only half you can check today.
+
+**You can preview the phone layout without a phone, and it is worth thirty seconds:** make
+your browser window very narrow — drag it in until it is roughly a third of your screen — and
+look at a journey. Below a certain width the two bypass buttons should drop onto their own
+line and the artist's name should stay readable. That checks the layout rules themselves. It
+does **not** check anything specific to a real phone, which is why the section at the bottom
+exists.
 
 **Four smaller things you may never see, which is the intention.**
 
@@ -43,33 +63,54 @@ the full width. On a desktop nothing should look any different from yesterday.
   button, instead of sitting on "Building your path…" forever.
 - A card that cannot actually start playing now stops claiming to play.
 - A mistyped or truncated link now lands on a page with a way back, instead of a blank screen.
-- Your phone's keyboard should stop "correcting" artist names as you type them.
+- A phone keyboard should stop "correcting" artist names as you type them. **Not checkable
+  here** — it needs a real phone.
 
-**What to exercise:**
+**What to exercise — all of this works on the desktop:**
 
-1. **Open the app on your phone and build two or three journeys.** Can you read every artist's
-   name? Can you hit both bypass buttons with a thumb without hitting the wrong one? Does the
-   bar at the bottom sit clear of the home indicator, or is it tucked underneath?
-2. **The search box, on your phone.** Type a few artist names the way you'd say them —
-   especially anything with an accent or unusual capitalisation. The keyboard should leave
-   them alone.
-3. **Your own defect, on either device.** Build a journey, press "New path", type over one of
-   the filled-in names, and try to press "Find path" straight away. It should be greyed out
-   until you choose from the dropdown.
-4. **Two or three familiar journeys on the desktop**, as a regression check. These must be
-   unchanged — that is the most valuable thing in this entry, because seven pieces of the app
-   were touched and none of them was supposed to move the routing.
-5. **Play a few clips and press both bypass buttons**, on both devices.
+1. **Your own defect.** Build a journey, press "New path", type over one of the filled-in
+   names, and try to press "Find path" straight away. It should be **greyed out** until you
+   choose a name from the dropdown. Then choose one and confirm it goes where you asked.
+   This is the main thing to confirm.
+2. **Two or three familiar journeys**, as a regression check. These must be unchanged — the
+   most valuable step in this entry, because seven pieces of the app were touched and none of
+   them was supposed to move the routing.
+3. **Play a few clips and press both bypass buttons a few times.** Nothing here was meant to
+   change, including the artwork on each card.
+4. **Drag the window narrow** and look at a journey, per above.
+5. **Type a nonsense address** — something like `localhost:5173/nowhere`. You should get a
+   short page saying there is nothing there, with a link back, rather than a blank screen.
 
-**What "wrong" would look like:** a familiar pair giving you a *different* journey; an artist
-name still squashed on your phone; a bypass button you cannot reliably tap; the bottom bar
-hidden behind the home indicator; the keyboard still rewriting artist names; "Find path"
-staying live after you type over an artist; or a card that no longer plays when it used to.
+**What "wrong" would look like:** a familiar pair giving you a *different* journey; "Find
+path" staying live after you type over an artist, or staying grey after you pick a new one;
+a card that no longer plays when it used to; missing cover artwork; the bypass buttons
+failing to drop onto their own line in a narrow window; or a nonsense address still showing
+a blank page.
 
 **Known and unchanged:** artists with only one connection still cannot appear in the middle of
 a journey. Clip playback defects are closed and unrelated.
 
 **Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
+
+### ⏳ DEFERRED until the app is live on AWS — the phone half
+
+**Trigger: the Gate 2 cutover, when there is a URL a phone can open.** Not runnable before
+then, and not a pending item against Track D — it is waiting on infrastructure that does not
+exist yet. Three things can only be answered on a real device, and all three are unverified
+today:
+
+1. **Is it actually usable in your hand?** Can you read every artist's name, and hit the right
+   bypass button with a thumb?
+2. **Does the bar at the bottom clear the home indicator**, or is it tucked underneath? The
+   code reserves space for it, but a desktop browser reports that space as zero, so the
+   reservation has never been exercised.
+3. **Does the keyboard leave artist names alone?** Type a few with accents or odd
+   capitalisation. This is an iOS behaviour and cannot be simulated here at all.
+
+**There is one way to bring this forward if you want it**, and it is optional: the dev server
+can be told to accept connections from other devices on your wifi, which would let your phone
+open it directly. It needs a Windows Firewall allow on first run. Say the word and I will set
+it up — otherwise this waits for the deploy, which is the next track anyway.
 
 *Detail: `docs/superpowers/2026-07-26-gate2-track-d-execution-log.md`.*
 

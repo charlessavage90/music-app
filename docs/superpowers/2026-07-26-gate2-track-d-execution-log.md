@@ -181,13 +181,38 @@ Recorded because they leave no other artifact.
 - **Accessibility, link previews, path-latency work.** Fenced out by the owner at the review
   and deferred to Gate 3. Not revisited.
 
+## 11a. `TKD-9` — Track D's headline item cannot be tested by use until Track C
+
+**Recorded because the first version of this track's use-the-app entry asked the owner to
+open the app on his phone, and he cannot.** The app runs only on his Windows desktop; there
+is no hosted URL, and a phone cannot reach another machine's `localhost`. The entry was
+corrected before it was run and `TEST-QUEUE.md`'s header now carries a standing constraint
+forbidding phone-dependent steps until cutover.
+
+**The general shape is worth more than the incident.** Track D was ordered *before* Track B
+so the deploy would ship a phone-usable app rather than putting a broken one in front of
+friends (`DEP-29`) — which is sound, and unchanged. But it has a consequence nobody stated at
+the time: **the verification of the responsive work necessarily comes after the thing it was
+sequenced ahead of.** Track D can be built before the deploy; it cannot be *confirmed* before
+it. Any residual risk in the phone layout therefore rides into cutover with it, and the honest
+reading of "Track D is done" is *done and desk-checked*, not *done and confirmed in use*.
+
+This is **not** an argument for reordering — building it first is still right, because the
+alternative is shipping a known-broken phone layout. It is an argument for expecting a
+follow-up entry after cutover, and for not treating the queue's silence in the interim as
+evidence.
+
+An optional bridge exists and was offered rather than taken unilaterally: binding the dev
+server to the LAN so a phone on the same wifi can reach it. It needs a firewall allow and it
+is the owner's call.
+
 ## 11. What this does not cover
 
-- **No real phone has run this.** The layout is verified at a 390 × 844 **emulated** viewport
-  in headless Chromium. Safari's rendering, the iOS keyboard actually honouring
-  `autocorrect="off"`, and `env(safe-area-inset-bottom)` resolving to a non-zero value on a
-  notched device are all **unverified** — the emulator reports zero for the inset. That is the
-  queued use-the-app entry's job and it is the reason it asks for a phone specifically.
+- **No real phone has run this, and none can until the deploy** (`TKD-9`). The layout is
+  verified at a 390 × 844 **emulated** viewport in headless Chromium. Safari's rendering, the
+  iOS keyboard actually honouring `autocorrect="off"`, and `env(safe-area-inset-bottom)`
+  resolving to a non-zero value on a notched device are all **unverified** — the emulator
+  reports zero for the inset, so the space the player bar reserves has never been exercised.
 - **The timeout copy has never been seen in use**, because provoking it needs a server that
   accepts and never answers. It is unit-tested and visually unverified.
 - **`TKD-3` is fixed for this machine's OneDrive layout.** A checkout outside OneDrive never
