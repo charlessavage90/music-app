@@ -276,6 +276,14 @@ that is how the drift began.
   Memory holds **pointers and working preferences, not figures**.
 - **`.claude/agents/ml-graph-analyst.md`** — a reusable analysis-only subagent for graph,
   scoring, and metric questions. It has no `Edit` tool by design.
+- **`.claude/agents/consultant.md`** — **not a subagent, and a working session must never
+  dispatch it as one.** It is launched as its own session (`claude --agent consultant --tools
+  Read,Grep,Glob`), reads the committed project record but never the code, and gives one
+  reasoned recommendation on one named decision, then stays in conversation. Its whole value
+  is that its inputs are the owner's rather than another session's paraphrase — dispatching it
+  from a working session destroys exactly that. **Added to this list 2026-07-27**: the agent
+  had existed and been used for some time while appearing in none of the entry points, so it
+  was discoverable only by listing `.claude/agents/` directly.
 - **`.claude/agents/doc-auditor.md`** — the project-local fork of the global auditor, and it
   **shadows** the one in `~/.claude/agents/` inside this repo (project scope outranks user
   scope). It carries two checks the global one does not: **I**, the identifier census — no

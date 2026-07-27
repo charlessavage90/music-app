@@ -1,5 +1,11 @@
 # Handoff — Track D complete, 2026-07-26 (night)
 
+**Role: COMPLETE — superseded on next actions** by [`2026-07-26-HANDOFF-track-b-complete.md`](2026-07-26-HANDOFF-track-b-complete.md)
+and, through the chain, by [`2026-07-27-HANDOFF-gate2-track-c.md`](2026-07-27-HANDOFF-gate2-track-c.md).
+**Still the record of Track D, and its do-not-revert list is live.** For status read
+[`NEXT.md`](NEXT.md). *(Role line added 2026-07-27; `docs/README.md` had also called this
+"the CURRENT handoff" three handoffs after it stopped being one.)*
+
 **Written at a clean seam. Nothing is in flight** — no subagents running, no background jobs,
 no half-written directories, no session-owned processes. **Two detached dev servers are
 deliberately left running**; see the bottom. Committed and pushed; **PR #28** on

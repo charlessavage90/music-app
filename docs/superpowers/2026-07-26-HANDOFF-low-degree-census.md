@@ -1,5 +1,11 @@
 # Handoff — the degree-1 / degree-2 census, 2026-07-26
 
+**Role: COMPLETE — superseded on next actions** by [`2026-07-26-HANDOFF-stranding-causes.md`](2026-07-26-HANDOFF-stranding-causes.md).
+**Still the record of the census seam.** Path-quality work is PAUSED and this is not a resume
+signal; the entry point if it ever resumes is
+[`2026-07-26-RESUME-BRIEF-path-quality.md`](2026-07-26-RESUME-BRIEF-path-quality.md).
+*(Role line added 2026-07-27, along with this file's first row in `docs/README.md`.)*
+
 **Written at a clean seam. Nothing is in flight.** The work is finished, committed and
 pushed; PR #25. Aimed at a session that has never seen this work.
 

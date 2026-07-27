@@ -1,5 +1,10 @@
 # Handoff — Gate 2 Track C complete, 2026-07-27
 
+**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+[`2026-07-27-HANDOFF-dep33-stage3.md`](2026-07-27-HANDOFF-dep33-stage3.md) on next actions.
+It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+*(Role line added 2026-07-27.)*
+
 **Written at a seam.** Track C was the last build track in Gate 2 and it is finished.
 **Nothing is in flight** — no subagents, no background jobs, no half-written directories,
 **no listeners on `:8000` or `:5173`** (swept by port, not assumed; an API was started for

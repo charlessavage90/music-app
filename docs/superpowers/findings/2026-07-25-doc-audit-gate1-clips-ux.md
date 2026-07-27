@@ -1,5 +1,16 @@
 # Documentation Audit — gate1-clips-and-ux completion
 
+**Role: COMPLETE.** A frozen `doc-auditor` report. *(Role line added 2026-07-27 — this was
+the one document in `docs/` that declared no role at all, which is the defect class it was
+itself written to check for.)*
+
+> **⚠ Do not cite this report's own finding counts.** Its summary says "Five HIGH-severity
+> findings"; the table below has **seven rows**, of which **two** are HIGH, and the severity
+> summary sums to six. Three numbers, none agreeing. **The findings themselves are untouched
+> and stand** — only the arithmetic about them is wrong. `docs/README.md`'s row for this
+> document uses the safer framing. Recorded 2026-07-27; not corrected in place, because a
+> frozen report's value is that it is frozen.
+
 **Date:** 2026-07-25  
 **Scope:** Documentation consistency after clips (C1/C2) fixes and four frontend UX items completed on branch `gate1-clips-and-ux` (PR #19, not yet merged to main)  
 **Audit rule basis:** Checks A (dead references), B (contradictions), C (duplicated facts), E (status clarity), F (existence), I (identifier collisions), and J (reads-of-results completeness) from project-local `doc-auditor.md`

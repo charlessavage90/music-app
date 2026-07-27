@@ -1,5 +1,12 @@
 # Handoff — Track B complete and deployed, 2026-07-26 (night)
 
+**Role: COMPLETE — superseded on next actions** by [`2026-07-27-HANDOFF-dep33-stages-1-2.md`](2026-07-27-HANDOFF-dep33-stages-1-2.md)
+and, through the chain, by [`2026-07-27-HANDOFF-gate2-track-c.md`](2026-07-27-HANDOFF-gate2-track-c.md).
+**Still the record of Track B.** One of its do-not-revert claims was later **reversed** — the
+empty `ARTISTPATH_CORS_ORIGINS` guarantee; that reversal is tracked in the `DEP-33` handoff
+above and inherited correctly by every later one. For status read [`NEXT.md`](NEXT.md).
+*(Role line added 2026-07-27.)*
+
 **Written at a clean seam.** Track B reached its planned boundary: the stack is deployed and
 verified, and `DEP-33`'s review has been run. **Nothing is in flight** — no subagents
 running, no background jobs, no half-written directories, no session-owned processes. Two
