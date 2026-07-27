@@ -181,7 +181,9 @@ closeout may be in a fresh one.
    action followed from any of them. The owner got a table.
 
 4. **If C1 queued an item that needs a local server and none survives, relaunch detached**,
-   per the commands in `CLAUDE.md` — cite them, do not restate them. Detached means no session owns
+   per the commands in `CLAUDE.md` — cite them, do not restate them. **Not every queued item
+   needs one, since the cutover of 2026-07-27**: an item exercising the deployed site needs
+   nothing running here, and a server started for it is a stale artifact by morning. Detached means no session owns
    it, so nothing can be woken by it; it equally means nothing is watching, so **a failure to
    bind is silent. Verify both ports answer before believing it started.** Record PID and
    port in the C1 entry.

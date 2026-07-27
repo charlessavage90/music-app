@@ -136,8 +136,8 @@ published bundle is always freshly built. No knob is sitting at a loser's value.
 
 ## §8. Standing context layer (D6)
 
-**Unconditional: 42,778 characters — unchanged. Conditional: 1,971 lines — unchanged, after
-a net-zero correction.**
+**Unconditional: 42,778 characters — unchanged. Conditional: 1,971 → 1,973 lines, +2, and
+the two are the owner's, granted explicitly.**
 
 `closeout`'s A5 carried a premise the cutover falsified. It said "**if C1 queued an item** and
 no fresh listener survives, relaunch detached", and the scaling section said "the queued test
@@ -146,14 +146,21 @@ test needed a local server. The newest queued entry exercises the deployed site 
 nothing running here, so a session following A5 literally would leave a pointless server
 behind, which A5's own rule calls a stale artifact waiting to be tested against.
 
-Corrected to "an item **that needs a local server**". Four lines out, four in; no new rule and
-no new narrative, which is what keeps it a correction the session may make rather than growth
-that is the owner's call.
+Corrected to "an item **that needs a local server**" — four lines out, four in, no new rule.
+That half was the session's to make.
 
-**First draft of this fix added two lines of explanatory narrative and was trimmed**, because
-D6's test for a correction is net ≈ 0 *and* no new narrative — and narrative is precisely the
-part that has to be bought rather than slipped in. The sentence dropped, and its cost, are in
-the closing message for the owner to accept or decline.
+**The +2 is narrative, and it was bought rather than slipped in.** The draft carried two
+extra lines saying *why* the rule is now conditional: that an item exercising the deployed
+site needs nothing running locally, and that a server started for it is stale by morning.
+D6's test for a correction is net ≈ 0 **and no new narrative**, so those two lines were cut,
+their cost priced, and the decision put to the owner — who granted them.
+
+**Worth recording that the trim-then-ask was the right order, not bureaucracy.** The bare
+qualifier states the rule without saying what makes it conditional, and A5's whole failure
+here was a session applying a rule whose premise it had no reason to question. The narrative
+is the part that would have prevented it. But which of those two considerations wins is a
+budget decision on a layer every `closeout` pays for, and that is not a session's to settle
+by writing the lines and reporting the total afterwards.
 
 **Found by `doc-auditor` (B1), on its second pass.** The first pass skipped `.claude/`
 entirely on the grounds that this session's own grep of it had come back clean — the exact
