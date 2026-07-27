@@ -15,10 +15,14 @@ import aws_cdk as cdk
 from aws_cdk import aws_apprunner as apprunner
 from aws_cdk import aws_cloudfront as cloudfront
 from aws_cdk import aws_cloudfront_origins as origins
+from aws_cdk import aws_cloudwatch as cloudwatch
+from aws_cdk import aws_cloudwatch_actions as cloudwatch_actions
 from aws_cdk import aws_dynamodb as dynamodb
 from aws_cdk import aws_ecr as ecr
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_s3 as s3
+from aws_cdk import aws_sns as sns
+from aws_cdk import aws_sns_subscriptions as sns_subscriptions
 from constructs import Construct
 
 
@@ -249,6 +253,27 @@ class ArtistpathStack(cdk.Stack):
             # the API's own errors too. The SPA fallback is in the viewer
             # function, which is per-behaviour (TKB-2).
         )
+
+        topic = sns.Topic(self, "AlarmTopic")
+        topic.add_subscription(sns_subscriptions.EmailSubscription(deploy.alarm_email))
+        # AWS/Billing is published only in us-east-1, and only once billing
+        # alerts are enabled in the account's billing preferences — without
+        # that the alarm sits in INSUFFICIENT_DATA forever (prerequisite P3).
+        cloudwatch.Alarm(
+            self,
+            "BillingAlarm",
+            metric=cloudwatch.Metric(
+                namespace="AWS/Billing",
+                metric_name="EstimatedCharges",
+                dimensions_map={"Currency": "USD"},
+                statistic="Maximum",
+                period=cdk.Duration.hours(6),
+            ),
+            threshold=deploy.billing_alarm_usd,
+            evaluation_periods=1,
+            comparison_operator=cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
+            treat_missing_data=cloudwatch.TreatMissingData.NOT_BREACHING,
+        ).add_alarm_action(cloudwatch_actions.SnsAction(topic))
 
         cdk.CfnOutput(
             self, "SiteUrl", value=f"https://{self.distribution.domain_name}"

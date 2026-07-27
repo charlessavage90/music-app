@@ -184,6 +184,20 @@ def test_the_artifact_bucket_is_not_an_origin():
     assert "ArtifactBucket" not in str(_distribution()["Origins"])
 
 
+def test_the_billing_alarm_uses_the_threshold_it_was_given():
+    # DEP-31: DEP-17's success condition is "observe a month of billing", and
+    # an alarm is how you observe without remembering to look.
+    template().has_resource_properties(
+        "AWS::CloudWatch::Alarm",
+        {
+            "MetricName": "EstimatedCharges",
+            "Namespace": "AWS/Billing",
+            "Threshold": 25.0,
+            "ComparisonOperator": "GreaterThanThreshold",
+        },
+    )
+
+
 def test_the_clip_table_matches_what_DynamoClipCache_writes():
     # clips.py's _put_sync writes Item={"mbid": ..., "ttl": ...}. A mismatch
     # here is a runtime error that no test in api/ can catch.
