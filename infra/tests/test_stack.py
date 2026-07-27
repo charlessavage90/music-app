@@ -191,6 +191,53 @@ def test_the_viewer_function_gates_on_the_password_and_rewrites_spa_routes():
     assert "401" in code
 
 
+def _viewer_request_arns(behaviour: dict) -> list:
+    """The viewer-request functions CloudFront will actually run on a behaviour.
+
+    A function that exists in the template but is associated with nothing runs
+    on nothing — which is QUA-2 exactly, and why the substring test above is
+    not enough on its own.
+    """
+    return [
+        association["FunctionARN"]
+        for association in behaviour.get("FunctionAssociations", [])
+        if association["EventType"] == "viewer-request"
+    ]
+
+
+def test_the_password_function_is_attached_to_the_site_itself():
+    # QUA-2, rank 1 of the DEP-33 review and the only blocking finding that is
+    # SILENT. Detaching the association leaves the API gated (it has its own
+    # origin-secret middleware) and the entire site publicly readable, with the
+    # site working perfectly for the owner the whole time. The pre-existing test
+    # above passes on a detached function: it reads the function's source, which
+    # is unchanged by detaching it.
+    #
+    # Measured against the deployed distribution 2026-07-27: the default
+    # behaviour carries exactly one viewer-request function, no Lambda@Edge,
+    # TrustedSigners disabled and TrustedKeyGroups disabled — so this function
+    # is the SOLE access control on the site, and nothing else would catch its
+    # removal.
+    (function_id,) = template().find_resources("AWS::CloudFront::Function").keys()
+    expected = {"Fn::GetAtt": [function_id, "FunctionARN"]}
+
+    assert _viewer_request_arns(_distribution()["DefaultCacheBehavior"]) == [expected]
+
+
+def test_the_password_function_is_attached_to_the_api_behaviour_too():
+    # The other half of QUA-2. /api/* is a separate behaviour with its own
+    # associations, so gating the site and gating the API are two independent
+    # facts and each needs its own assertion. The origin-secret middleware is a
+    # second layer here, not a substitute: it stops App Runner's public URL
+    # being a way round (TR-7), and says nothing about the edge.
+    (function_id,) = template().find_resources("AWS::CloudFront::Function").keys()
+    expected = {"Fn::GetAtt": [function_id, "FunctionARN"]}
+
+    (api_behaviour,) = _distribution()["CacheBehaviors"]
+    assert api_behaviour["PathPattern"] == "/api/*"
+    assert _viewer_request_arns(api_behaviour) == [expected]
+
+
 def test_the_api_origin_carries_the_shared_secret_header():
     custom = [o for o in _distribution()["Origins"] if "CustomOriginConfig" in o]
     assert custom, "no App Runner origin found"
