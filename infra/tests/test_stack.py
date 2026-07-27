@@ -31,3 +31,37 @@ def template() -> Template:
 
 def test_the_stack_synthesises():
     assert template().to_json()["Resources"]
+
+
+def test_the_artifact_bucket_is_versioned_because_it_is_the_only_second_copy():
+    # TR-9: acceptance.py refuses to rebuild the adopted artifact, so the only
+    # other copy is gitignored on one OneDrive-synced machine.
+    template().has_resource_properties(
+        "AWS::S3::Bucket",
+        {"VersioningConfiguration": {"Status": "Enabled"}},
+    )
+
+
+def test_both_buckets_block_all_public_access():
+    buckets = template().find_resources("AWS::S3::Bucket")
+    assert len(buckets) == 2
+    for bucket in buckets.values():
+        assert bucket["Properties"]["PublicAccessBlockConfiguration"] == {
+            "BlockPublicAcls": True,
+            "BlockPublicPolicy": True,
+            "IgnorePublicAcls": True,
+            "RestrictPublicBuckets": True,
+        }
+
+
+def test_the_clip_table_matches_what_DynamoClipCache_writes():
+    # clips.py's _put_sync writes Item={"mbid": ..., "ttl": ...}. A mismatch
+    # here is a runtime error that no test in api/ can catch.
+    template().has_resource_properties(
+        "AWS::DynamoDB::Table",
+        {
+            "KeySchema": [{"AttributeName": "mbid", "KeyType": "HASH"}],
+            "TimeToLiveSpecification": {"AttributeName": "ttl", "Enabled": True},
+            "BillingMode": "PAY_PER_REQUEST",
+        },
+    )

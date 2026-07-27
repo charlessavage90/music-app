@@ -10,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import aws_cdk as cdk
+from aws_cdk import aws_dynamodb as dynamodb
+from aws_cdk import aws_s3 as s3
 from constructs import Construct
 
 
@@ -36,3 +38,42 @@ class ArtistpathStack(cdk.Stack):
     ) -> None:
         super().__init__(scope, id_, **kwargs)
         self.deploy = deploy
+
+        self.spa_bucket = s3.Bucket(
+            self,
+            "SpaBucket",
+            block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
+            encryption=s3.BucketEncryption.S3_MANAGED,
+            enforce_ssl=True,
+            removal_policy=cdk.RemovalPolicy.DESTROY,
+            auto_delete_objects=True,
+        )
+
+        # No CloudFront origin, ever: the graph is a 14 MB file whose name is
+        # printed in several committed documents (TR-7). Versioned because
+        # acceptance.py refuses to rebuild the adopted artifact, so the upload
+        # is its only second copy (TR-9) — hence RETAIN as well.
+        self.artifact_bucket = s3.Bucket(
+            self,
+            "ArtifactBucket",
+            versioned=True,
+            block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
+            encryption=s3.BucketEncryption.S3_MANAGED,
+            enforce_ssl=True,
+            removal_policy=cdk.RemovalPolicy.RETAIN,
+        )
+
+        # Key and TTL attribute names are fixed by clips.py's DynamoClipCache;
+        # the table name matches ApiConfig.clip_table_name's default, so the
+        # service needs no override for it.
+        self.clip_table = dynamodb.Table(
+            self,
+            "ClipTable",
+            table_name="artistpath-clips",
+            partition_key=dynamodb.Attribute(
+                name="mbid", type=dynamodb.AttributeType.STRING
+            ),
+            time_to_live_attribute="ttl",
+            billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST,
+            removal_policy=cdk.RemovalPolicy.RETAIN,
+        )
