@@ -91,6 +91,27 @@ currently reports one medium — see `TKB-11`. Task 11's runbook therefore expor
 **deliberately not committed**: it would be a second derived manifest that can drift from
 `uv.lock`, and with no CI nothing would notice.
 
+**`TKB-4` — the obvious way to run that scan reports a clean result while scanning nothing,
+and this plan originally prescribed it.** Measured 2026-07-26, after the plan was written:
+
+| how the scan was run | result | what it means |
+|---|---|---|
+| `command=python` (system, has pip), `skip_unresolved=true`, real export | **0 issues** | looks clean |
+| same, but the export replaced by `jinja2==2.10`, `urllib3==1.24.1`, `requests==2.19.1` | **0 issues** | **vacuous** — those have well-known high-severity advisories |
+| venv **with pip** and the package **installed**, no `skip_unresolved`, `jinja2==2.10` | **7 issues** | the scan is real |
+
+Snyk's pip plugin resolves the tree from an actual environment. A uv-created venv has **no
+pip** (`python -m pip` → *No module named pip*), which produces *Failed to test pip project*;
+system python has pip but not the packages, which produces *Missing required packages*; and
+`skip_unresolved=true` turns that second error into a **green scan of zero packages**. The
+file format is irrelevant — hashes, markers and `# via` comments all scan fine.
+
+**Consequence for Task 11:** the runbook must not use `skip_unresolved`. Either install the
+export into a throwaway venv that has pip and scan that, or — better, and to be settled in
+Task 3 — scan the **built image**, which already contains the installed dependency set and is
+the actual release artifact. A step that cannot fail is not a gate, and this repo has now
+produced that shape three times (`FMS-P1`, `TR-2`, `TKB-4`).
+
 ---
 
 ## Prerequisites — the owner runs these, not the implementing session
