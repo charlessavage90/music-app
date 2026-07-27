@@ -321,8 +321,8 @@ caught. The cell is recorded in §(d) rather than deleted.
 
 ## 7. Calibration — which item I expect to be wrong
 
-**`BTF-3` is the most likely of these to be overturned**, and the reason is its instrument
-rather than its data. The press policy is a simulation of a human click. If a real user's
+**`BTF-3` (boilthefrog's bypass does not make paths progressively more obscure) is the most
+likely of these to be overturned**, and the reason is its instrument rather than its data. The press policy is a simulation of a human click. If a real user's
 bypass choices differ from "most popular interior artist" and from "uniformly random" in some
 structured way — and value 5 suggests they do, since users press `known` on artists they
 personally recognise — the ladder might not saturate as it does here.
@@ -330,14 +330,17 @@ personally recognise — the ladder might not saturate as it does here.
 **What would falsify it:** a press policy under which interior popularity keeps descending
 past twelve presses without reaching a fixed point.
 
-**What I would defend cheaply:** `BTF-1` and `BTF-2`. Both are arithmetic over the original's
-committed data plus the author's own stated design, and neither depends on a press model or a
-fame proxy. **What I would abandon on one contrary measurement:** `BTF-3`'s saturation claim,
-and `BTF-5`'s comparability claim, which leans on a share measured under a filter I could not
-reproduce.
+**What I would defend cheaply:** `BTF-1` (boilthefrog's famous artists are near-leaves, so
+paths cannot pass through them) and `BTF-2` (fame tracks the endpoints, and the author built
+it that way on purpose). Both are arithmetic over the original's committed data plus the
+author's own stated design, and neither depends on a press model or a fame proxy. **What I
+would abandon on one contrary measurement:** `BTF-3`'s saturation claim, and `BTF-5`'s claim
+(boilthefrog strands artists about as often as we do, differing only in *which* artists),
+which leans on a share measured under a filter I could not reproduce.
 
 **One thing I got wrong along the way, recorded because the correction is the useful part.**
-I first read `BTF-4` as a demonstration that reciprocity-free degree bounding *works*, which
+I first read `BTF-4` (a graph can be both reciprocity-free and degree-bounded — but that does
+not answer `SYN-6`) as a demonstration that reciprocity-free degree bounding *works*, which
 would have contradicted `MKS-5b` on the strength of an external graph. The factor table
 refuted it: removing the cap entirely barely moves the maximum degree, because the source list
 is short. The strong reading survived until the control was run, and the control was cheap.

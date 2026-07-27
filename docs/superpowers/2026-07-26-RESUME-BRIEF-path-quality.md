@@ -76,9 +76,10 @@ in two places. **Do not read it for direction.** It is a study of a *different p
 a different goal*: boilthefrog excludes obscure artists from its graph outright, and its
 author built its popularity term to keep listeners *away* from them. **It changes nothing in
 §1, §2, §3 or §5 of this brief.** In particular, the option it names is a **graph**
-intervention and **§2 blocks it exactly as §2 blocks the degree floor** — the read-this-first
-box at the head of that document says so, and is the part to trust if its later sections read
-more enthusiastically than that.
+intervention, so **this brief's §2 blocks it exactly as this brief's §2 blocks the degree
+floor** — if the router prices these artists out, changing the graph changes nothing. The
+boilthefrog document's own read-this-first box states that too, and **that box is the part to
+trust if its later sections read more enthusiastically.**
 
 ## 5. Closed, and what you may not spend
 
