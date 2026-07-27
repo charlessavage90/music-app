@@ -136,7 +136,13 @@ was never edited.
 
 *Original queued text follows.*
 
-## QUEUED — 2026-07-26 (latest) — six fixes under the bonnet, and one you can see
+## QUEUED — 2026-07-26 — six fixes under the bonnet, and one you can see
+<!-- Retained original text of the DONE entry above. "(latest)" was stripped 2026-07-26:
+     two headings in this file claimed it at once, which is ambiguous at a glance. Only the
+     newest QUEUED entry carries "(latest)". -->
+
+**⚠ This is the retained original text of an entry already marked DONE above. Do not run it
+as a fresh entry.**
 
 **Ten minutes, no waiting. Both servers are already running and nothing owns them**, so
 they will outlive this session and every terminal. Started **after** the last commit, so

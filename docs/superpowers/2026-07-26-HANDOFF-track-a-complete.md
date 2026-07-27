@@ -58,8 +58,12 @@ line is now false and is marked so in place.
 - **The mutation harness used for closeout B3 is disposable and not committed** — it lived
   in the scratchpad. If you want to re-run it, it patched a string, ran one selector,
   and `git checkout --` reverted. Cheap to rewrite; the *result* is in `TKA-9`.
-- **`.playwright-results/` is now created at the repo root** on any e2e run and is
-  gitignored. That is the `DEP-30` / `TR-17` fix working, not stray output.
+- ~~**`.playwright-results/` is now created at the repo root** on any e2e run and is
+  gitignored. That is the `DEP-30` / `TR-17` fix working, not stray output.~~
+  **⚠ SUPERSEDED 2026-07-26 by Track D (`TKD-3`).** This was **not** the fix working: the
+  repo root is under OneDrive too, so the run still failed with `EPERM` on two consecutive
+  attempts and blocked Track D's first task. `outputDir` is now `os.tmpdir()`, genuinely
+  outside sync. **Read `DEP-30` as discharged from Track D, not from Track A.**
 
 ## The open decision, and what I would do
 

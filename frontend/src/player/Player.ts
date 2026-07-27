@@ -37,8 +37,17 @@ export class HtmlAudioPlayer implements Player {
     // adding a second channel that would need its own policy and put the four
     // player invariants back in play. jsdom returns undefined here, not a
     // promise, which Promise.resolve normalises.
+    //
+    // Only the handler that was live when THIS play() started may hear about it.
+    // Checking `disposed` is not sufficient and neither is dispose() clearing
+    // the callback: StrictMode disposes and re-subscribes on the same instance,
+    // which revives it and installs a new handler, so a rejection from a
+    // superseded play() would reach that handler and buy a retry — restarting
+    // playback after the page had navigated away, which is the defect dispose()
+    // exists to prevent. Found by closeout B3.
+    const handlerAtPlay = this.errorCb;
     void Promise.resolve(this.audio.play()).catch(() => {
-      if (!this.disposed) this.errorCb?.();
+      if (!this.disposed && this.errorCb === handlerAtPlay) handlerAtPlay?.();
     });
   }
 

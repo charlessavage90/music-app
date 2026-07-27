@@ -82,9 +82,12 @@ anyway.
 
 **Not in Track D, and do not add them:** accessibility (ARIA, keyboard, focus), link
 previews / Open Graph, and path-latency work. All three were considered at the fence and
-**deferred to Gate 3 by the owner** — see the review's §6. `DEP-30` (the Playwright `EPERM`
+**deferred to Gate 3 by the owner** — see the review's §6. ~~`DEP-30` (the Playwright `EPERM`
 fix) is **already done in Track A**; `playwright.config.ts` already sets
-`outputDir: '../.playwright-results'`. Do not redo it.
+`outputDir: '../.playwright-results'`. Do not redo it.~~ **⚠ WRONG, corrected on execution
+(`TKD-3`): it was only PARTLY done.** The repo root is under OneDrive too, so the run still
+`EPERM`ed on two consecutive attempts and blocked Task 1. `outputDir` is now `os.tmpdir()`.
+**`DEP-30` is discharged from Track D, not from Track A.**
 
 ---
 

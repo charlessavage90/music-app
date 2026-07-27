@@ -120,7 +120,23 @@ and it needed to be.**
 `grep` over `frontend/src` returns **zero** hits for any breakpoint, media query or
 safe-area inset: there is no responsive styling in the application at all. On a 390 px
 phone the card row's non-shrinkable elements exceed the available width, so the artist
-name — the only content that matters — is squeezed toward zero. Alongside it: a search that
+name — the only content that matters — is squeezed toward zero.
+
+> **⚠ CORRECTED 2026-07-26 by Track D (`TKD-1`) — this paragraph's evidence is wrong and its
+> conclusion is right.** Two corrections, both verified against source:
+>
+> 1. **`grep` returns six hits, not zero** — `@media (max-width: 1024px)` in
+>    `frontend/src/App.css`. The conclusion survives because that file was imported by
+>    nothing and none of its selectors existed in any component: dead Vite scaffold, deleted
+>    by Track D. **The consequence is the part that matters — any verification of the layout
+>    fix phrased as "grep for a media query" passes BEFORE the fix**, which is the `FMS-P1` /
+>    `TR-2` vacuous-check pattern. Track D therefore verified by rendered geometry in a real
+>    browser: the interior artist name measured **0 px** at 390 px wide before, 200 px after.
+> 2. **The viewport meta tag already existed** in `frontend/index.html`. Nothing was blocking
+>    responsive CSS from taking effect; only the CSS was missing. Safe-area insets were
+>    genuinely absent, so that part of the claim stands.
+>
+> The squeeze itself is confirmed, and the fix landed in Track D (PR #28). Alongside it: a search that
 finds nothing and a search that *failed* render identically as nothing; no request carries a
 timeout, so a cold instance shows "Building your path…" indefinitely; and a rejected
 `play()` is discarded, leaving a card asserting "now playing" over silence.

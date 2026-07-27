@@ -106,6 +106,35 @@ test('a rejected play() on a disposed player reaches nobody', async () => {
   expect(onError).not.toHaveBeenCalled();
 });
 
+test('a rejected play() cannot reach a handler that replaced it after a dispose', async () => {
+  // Found by closeout B3: the test above passes because dispose() clears the
+  // callback, NOT because of the `disposed` flag it appears to be testing — so
+  // it survived that flag's removal. This covers the case neither mechanism
+  // catches. StrictMode disposes and re-subscribes on the SAME instance, which
+  // revives it and installs a new handler; a rejection from the superseded
+  // play() would then reach that handler and buy a retry, restarting playback
+  // after the page had navigated away. That is the defect dispose() exists to
+  // prevent (see the class docstring), reached by a different route.
+  const player = new HtmlAudioPlayer();
+  player.onError(vi.fn());
+  let reject!: (e: unknown) => void;
+  vi.spyOn(audioOf(player), 'play').mockReturnValue(
+    new Promise<void>((_resolve, rj) => {
+      reject = rj;
+    }),
+  );
+
+  player.play('https://example.test/clip.mp3');
+  player.dispose();
+
+  const revived = vi.fn();
+  player.onError(revived); // the StrictMode remount
+  reject(new DOMException('play() failed', 'NotAllowedError'));
+  await new Promise((r) => setTimeout(r, 0));
+
+  expect(revived).not.toHaveBeenCalled();
+});
+
 test('a disposed player refuses to start playing again', () => {
   // Note: clearing src leaves the element pointing at the document URL, not at ''.
   // What matters is that the clip is never loaded and playback is never started.
