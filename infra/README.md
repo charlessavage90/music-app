@@ -214,57 +214,53 @@ MSYS_NO_PATHCONV=1 aws logs describe-log-groups \
 
 ## 6. Build and sync the frontend
 
-**Three passes, in this order. Do not collapse them back into one `aws s3 sync --delete`**
-— that is `FRO-1`, and it is the defect a returning visitor meets rather than one you would
-ever see yourself.
+**One command. Do not publish by hand.**
 
 ```bash
-cd frontend && npm run build
-SPA=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
-  --query "Stacks[0].Outputs[?OutputKey=='SpaBucketName'].OutputValue" --output text)
-DIST=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
-  --query "Stacks[0].Outputs[?OutputKey=='DistributionId'].OutputValue" --output text)
-
-# Pass 1 — hashed assets, and NO --delete. Their names contain a content hash,
-# so a new build only ever adds names; nothing is overwritten.
-aws s3 sync dist/ "s3://$SPA/" --exclude index.html \
-  --cache-control "public,max-age=31536000,immutable"
-
-# Pass 2 — index.html LAST, and never cached. It is the only object that names
-# the hashed assets, so it must not be servable before they exist.
-aws s3 cp dist/index.html "s3://$SPA/index.html" --cache-control "no-cache"
-
-aws cloudfront create-invalidation --distribution-id $DIST --paths "/*"
+cd infra && UV_LINK_MODE=copy uv run python -m artistpath_infra.sync_frontend
 ```
 
-> **Why this shape.** `FRO-1`, verified live by the reviewer: an object uploaded the way the
-> old single-line sync uploaded it carries `ETag` and `Last-Modified` and **no
-> `Cache-Control`**, so browsers fall back to *heuristic* freshness and keep `index.html` for
-> a duration nobody chose. `--delete` then removes the hashed asset that stale copy points
-> at. The visitor's browser asks for a file that no longer exists, and there is no error
-> boundary — so the symptom is a **white screen with no text**, on a site that works
-> perfectly for everyone else. `no-cache` on `index.html` is what stops it recurring; the
-> immutable year on the assets is what makes that cheap.
->
-> **`--delete` moved out of pass 1 deliberately.** Deleting the old assets while the old
-> `index.html` is still live re-opens the same window for anyone mid-visit. Prune as a
-> **separate, later** step, once the new `index.html` has been live long enough that nobody
-> is still holding the previous one:
->
-> ```bash
-> aws s3 sync dist/ "s3://$SPA/" --delete --exclude index.html \
->   --cache-control "public,max-age=31536000,immutable"
-> ```
->
-> Skipping the prune costs a few kilobytes of orphaned assets. Running it too early costs a
-> blank page. **The cutover deploy is the one exception**: the bucket is empty, so there are
-> no returning visitors and no window to protect.
+It builds the SPA, resolves the bucket and distribution from the stack, and publishes in
+the only safe order. Add `--skip-build` to publish `frontend/dist` as it stands, and
+`--prune` to also delete assets the new build no longer names — see below for when that is
+safe. `--help` lists the rest.
 
-> **Machine-state caveat, and it is not a repo property.** `aws s3 sync` guesses
-> `Content-Type` from the file extension. It was checked on the deploy machine on 2026-07-27
-> and is correct (`.js → text/javascript`). **Re-check it if the deploy ever moves machines**:
-> a module script served as `text/plain` is refused by the browser and gives the *same* blank
-> page as `FRO-1`, from a completely different cause.
+> **Why this is a script and not three commands you type.** It was three commands, and it
+> was the only fix in stage 3 held by nothing. Every rule below is now an assertion in
+> `infra/tests/test_sync_frontend.py`, and each was checked by reintroducing the defect and
+> confirming the suite goes red. **The failure this prevents is invisible from the machine
+> that causes it** — you never meet the blank page yourself, only somebody who visited
+> before the change does — so "read the section carefully" was never going to be enough.
+> The commands themselves live in `sync_frontend.py`'s `plan_upload`; they are deliberately
+> not restated here, because a second copy is how the two drift apart.
+
+> **What the order is protecting, because you still need to know.** `FRO-1`, verified live
+> by the reviewer: an object uploaded by a plain `aws s3 sync` carries `ETag` and
+> `Last-Modified` and **no `Cache-Control`**, so browsers fall back to *heuristic* freshness
+> and keep `index.html` for a duration nobody chose. A `--delete` then removes the hashed
+> asset that stale copy points at. The visitor's browser asks for a file that no longer
+> exists, and there is no error boundary — so the symptom is a **white screen with no
+> text**, on a site that works perfectly for everyone else. `no-cache` on `index.html` is
+> what stops it recurring; the immutable year on the hashed assets is what makes that cheap.
+> `index.html` goes up **last** because it is the only object naming the hashed bundles: it
+> is the switch that makes a build live, and thrown early it names files that are not there
+> yet.
+
+> **`--prune` is off by default, and that is `FRO-1` too.** Deleting the old assets while
+> the old `index.html` is still live re-opens the same window for anyone mid-visit. Prune as
+> a **separate, later** run, once the new `index.html` has been live long enough that nobody
+> is still holding the previous one. Skipping it costs a few kilobytes of orphaned assets;
+> running it too early costs a blank page. **The cutover deploy is the one exception** — the
+> bucket is empty, so there is no returning visitor to protect and nothing to prune anyway.
+
+> **The `Content-Type` caveat is now checked rather than remembered.** `aws s3 sync` guesses
+> `Content-Type` from the file extension, and that is a property of the deploy *machine*,
+> not of this repository — a module script served as `text/plain` is refused by the browser
+> and gives the *same* blank page as `FRO-1`, from a completely different cause. The script
+> reads back one uploaded `.js` object and refuses if it is not a type a browser will
+> execute. **It does this between the two passes**, while the assets are up but nothing
+> names them yet, which is the last moment the check is free. It was previously a note
+> asking you to re-verify by hand if the deploy ever moved machines.
 
 > **`index.html` carries static fallback markup** (`FRO-7`) inside `<div id="root">`, so a
 > delivery failure shows a visitor readable text instead of white. It is verified to survive
