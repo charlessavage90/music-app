@@ -11,8 +11,10 @@ path state lives in the URL, so any journey is shareable and Back undoes a bypas
 It is a rebuild of the idea behind *Boil the Frog*, which stopped working when the music
 APIs it depended on were withdrawn.
 
-**Status: pre-alpha, local only.** Not deployed. See [Documentation](#documentation) for
-what is done and what is next.
+**Status: pre-alpha, deployed and password-gated for friends & family** (Gate 2, since
+2026-07-27). Not public. The address and how to get in are in
+[`docs/superpowers/NEXT.md`](docs/superpowers/NEXT.md), which is also the only document
+that states what is done and what is next.
 
 ---
 
