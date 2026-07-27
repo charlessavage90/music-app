@@ -2,6 +2,9 @@ node_modules/
 dist/
 .env
 .env.local
+# Deploy-time secrets (site password, origin secret). Never committed — a
+# password in a committed file is in the repository's history permanently.
+.env.deploy
 __pycache__/
 *.pyc
 .venv/

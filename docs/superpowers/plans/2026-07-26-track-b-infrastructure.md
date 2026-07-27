@@ -130,6 +130,35 @@ container scan at each deploy.
 
 ---
 
+## `TKB-8` — App Runner is closed to new customers, and this account can still use it
+
+**Found by the owner in the console, 2026-07-26, after Tasks 1–11 were built on it:**
+*"Starting April 30, 2026, AWS App Runner is no longer accepting new customers. Your existing
+App Runner services will remain operational and accessible. AWS continues to invest in
+security and availability, but we do not plan to introduce new features."* AWS recommends
+Amazon ECS Express Mode.
+
+**Measured rather than argued, because the banner does not say what it means for *this*
+account.** A throwaway service was created from a public image, reached `RUNNING` in ~4½
+minutes, served HTTP 200 on its public URL, and was deleted. Nothing remains. **This account
+can create App Runner services today.** Cost of the probe: cents.
+
+**Also measured: CDK cannot express the recommended replacement.** `aws-cdk-lib` 2.262.1
+contains no `ExpressMode` anywhere in `aws_ecs`. Adopting it today would move the deployment
+shape out of version control and into console state, which is the property `infra/` exists to
+prevent.
+
+**Owner's decision, 2026-07-26: proceed on App Runner**, with the explicit note that if it is
+fully deprecated, alternatives outside AWS are on the table rather than only ECS.
+
+**Condition to revisit:** the Gate 2 → 3 boundary, or immediately on any AWS end-of-life
+announcement. Migration is bounded — the container is portable, and what changes is one
+construct in `stack.py` plus the CloudFront origin. **The risk being accepted** is that AWS
+sets that schedule rather than us. Deploying sooner rather than later is mildly protective:
+a service that exists is grandfathered; one that does not may not be.
+
+---
+
 ## Prerequisites — the owner runs these, not the implementing session
 
 **None of the AWS-touching tasks (6 onward) can start until these are done.** Measured on
