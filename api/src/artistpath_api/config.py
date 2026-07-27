@@ -25,6 +25,11 @@ class ApiConfig:
     # value is in the artifact's manifest sidecar — do not transcribe it by
     # hand (DEP-24).
     graph_sha256: str = os.environ.get("ARTISTPATH_GRAPH_SHA256", "")
+    # Shared secret CloudFront injects on both behaviours. App Runner publishes
+    # its own public URL and has no OAC equivalent, so without this the
+    # password gate protects the SPA and not the API (TR-7). Empty disables the
+    # check: that is local dev and the whole test suite.
+    origin_secret: str = os.environ.get("ARTISTPATH_ORIGIN_SECRET", "")
 
     # --- cost function weights (findings 6g) ----------------------------
     # THIS BLOCK IS THE ONLY DEFINITION OF THESE DEFAULTS. Prose that needs
