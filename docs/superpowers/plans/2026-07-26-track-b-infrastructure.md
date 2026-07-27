@@ -106,11 +106,27 @@ system python has pip but not the packages, which produces *Missing required pac
 `skip_unresolved=true` turns that second error into a **green scan of zero packages**. The
 file format is irrelevant — hashes, markers and `# via` comments all scan fine.
 
-**Consequence for Task 11:** the runbook must not use `skip_unresolved`. Either install the
-export into a throwaway venv that has pip and scan that, or — better, and to be settled in
-Task 3 — scan the **built image**, which already contains the installed dependency set and is
-the actual release artifact. A step that cannot fail is not a gate, and this repo has now
-produced that shape three times (`FMS-P1`, `TR-2`, `TKB-4`).
+**Consequence for Task 11:** the runbook must not use `skip_unresolved`. A step that cannot
+fail is not a gate, and this repo has now produced that shape three times (`FMS-P1`, `TR-2`,
+`TKB-4`).
+
+**`TKB-5` — settled in Task 3: scan the image, and drop the requirements export entirely.**
+`snyk container test artistpath-api:<tag> --file=api/Dockerfile` tested **87 dependencies and
+found 2 high** on the first run, so it is demonstrably not vacuous. It is also strictly more
+faithful than any export: it scans the installed dependency set **plus** the OS packages, in
+the exact artifact that ships, and needs no venv, no pip and no second manifest. `TKB-3`'s
+export step is therefore **withdrawn** — the reason it existed (Snyk reads neither `uv.lock`
+nor a PEP-621 `pyproject.toml`) is real, but the image is a better answer to it.
+
+**`TKB-6` — two high-severity base-image vulnerabilities, accepted for now.**
+`attr/libattr1` and `acl/libacl1` (both *Link Following*, `SNYK-DEBIAN13-ATTR-17678182`,
+`SNYK-DEBIAN13-ACL-17677866`), both introduced by `python:3.12-slim` itself rather than by
+anything this project installs, and neither has a fixed Debian package to upgrade to. Snyk
+suggests an Alpine base; **do not take that suggestion** — Alpine is musl, and numpy would
+have to build from source or find musllinux wheels, which trades a low-exploitability local
+symlink issue for a build system that can break at any dependency bump. **Closes when Debian
+trixie publishes fixed `attr`/`acl` packages and the image is rebuilt** — check with the same
+container scan at each deploy.
 
 ---
 
@@ -1380,18 +1396,15 @@ aws cloudfront create-invalidation --distribution-id <id> --paths "/*"
    - `cd frontend && npm test && npm run build`
    - `cd frontend && npm run test:e2e` — **`DEP-30` makes this mandatory.** It needs the API
      on `:8000` and starts only the Vite server itself.
-   - **Dependency scan** (`TKB-3`), including the reason it looks roundabout:
+   - **Dependency scan — scan the image, not a manifest** (`TKB-5`). Snyk reads neither
+     `uv.lock` nor a PEP-621 `pyproject.toml`, and the export workaround scans nothing while
+     reporting clean (`TKB-4`). The image is both the release artifact and a scannable one:
 
 ```bash
-# Snyk reads neither uv.lock nor a PEP-621 pyproject.toml — measured
-# 2026-07-26, both api/ and builder/ return "no supported target files".
-# The export is deliberately NOT committed: a second derived manifest can
-# drift from uv.lock, and with no CI nothing would notice.
-cd api && UV_LINK_MODE=copy uv export --frozen --no-dev --no-emit-project \
-  --format requirements-txt > requirements.txt
-# then run snyk_code_scan / snyk SCA against api/requirements.txt
-rm requirements.txt
-cd ../frontend && npx snyk test   # reads package-lock.json directly
+# 87 dependencies incl. OS packages; verified non-vacuous 2026-07-26.
+snyk container test artistpath-api:<tag> --file=api/Dockerfile
+# Known and accepted: 2 highs from python:3.12-slim itself (TKB-6).
+cd frontend && npx snyk test   # reads package-lock.json directly
 ```
 7. **Rollback** — redeploy the previous image tag; the artifact bucket is versioned
    (`TR-9`), so a bad graph upload is recoverable by version id.
