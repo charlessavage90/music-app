@@ -23,6 +23,37 @@ reference is invoked in two of the nine calibration values. It had never been re
 
 ---
 
+> ## ⚠ If you arrived here while planning path-quality work, read this box first
+>
+> **BoilTheFrog was built to do a different job, and it cannot do ours.** Its author's stated
+> purpose for the popularity term was to stop paths that *"venture into back alleys that no
+> music fan should dare to tread"*, and its graph **excludes the obscure tail outright** by a
+> membership floor. A product whose core deliverable is artists you have not heard of cannot
+> take it as a target. Where it is a good model — **the first path** — it is a good model
+> precisely because that is the half where the two products agree.
+>
+> **Three specific ways this document can mislead a planner:**
+>
+> 1. **`BTF-4`'s "third option" does not survive contact with the resume brief's §2.** It is a
+>    **graph** intervention, so if the router is *pricing* these artists out rather than them
+>    being arithmetically short of places to fit, changing what the cap selects changes
+>    nothing — the same argument the brief makes against the degree floor. §2 blocks it too.
+>    It is also a rebuild. **It is a named option with an unmeasured payoff, in the sense of
+>    `SYN-3`; it is not a candidate and nothing here pre-registers it.**
+> 2. **`BTF-1` is seductive and is not a design to copy.** "Cap each artist to its four
+>    nearest-in-popularity neighbours" bounds degree beautifully — on a source that offers 20
+>    candidates, which ours does not, and in a graph that has already discarded the obscure
+>    tail. `MKS-5b` still binds, and `BTF-4` explains why this document does not answer it.
+> 3. **`BTF-3` is not evidence that value 2 is unreachable.** BoilTheFrog's bypass saturates
+>    because it is **primitive** — one signal, node-local, relaxing no popularity term and
+>    carrying nothing depth-graduated. Its ceiling is fully explained by what it lacks, and
+>    says nothing about what a designed bypass can reach.
+>
+> **Nothing in this document is a resume signal, a proposal, or a reason to re-sequence the
+> resume brief.** Its §2 blocker is untouched by everything measured here.
+
+---
+
 ## 1. The finding that matters most
 
 ### `BTF-1` — the famous artists are near-leaves, and that is what makes fame track the endpoints
