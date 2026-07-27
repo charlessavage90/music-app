@@ -13,22 +13,25 @@ it.
 Stage 3 fixed this in `infra/README.md` §6, as three ordered passes a person
 types. This module exists because that was the only fix in the stage held by
 nothing: a runbook step cannot fail a suite, and the operator who gets the order
-wrong is precisely the person who cannot observe the consequence.
+wrong is precisely the person who cannot observe the consequence. **§6 is now one
+command — this one** — and it no longer carries a copy of the commands, so the
+rules live here and in the tests rather than in two places that can drift.
 
 **Planning is separated from running** so the invariants are testable without
 AWS, without credentials and without a build — the same reason `deploy_stage.py`
 is a pure function rather than a branch inside `app.py`. `plan_upload` returns
-the commands; `main` runs them. Every rule §6 states in prose is an assertion in
-`test_sync_frontend.py`.
+the commands; `main` runs them. Every rule §6 used to state in prose is an
+assertion in `test_sync_frontend.py`, and each was checked by reintroducing the
+defect and confirming the suite goes red.
 
-**The content-type check is new here and is not in §6's command list.** §6 records
-it as a machine-state caveat — `aws s3 sync` guesses `Content-Type` from the file
-extension, it was correct on the deploy machine on 2026-07-27, and it must be
-re-checked if the deploy ever moves machines. A caveat that depends on the
-machine and is checked by remembering to check it is worth very little, and its
+**The content-type check has no counterpart in the old §6 commands.** It was a
+machine-state caveat there: `aws s3 sync` guesses `Content-Type` from the file
+extension, which is a property of the deploy machine rather than of this
+repository, and the note asked you to re-verify by hand if the deploy ever moved.
+A caveat discharged by remembering to discharge it is worth very little, and its
 failure is the *same blank page* as `FRO-1` from an unrelated cause. So it runs
 between the two passes: after the assets are up, before `index.html` makes them
-live.
+live — the last moment the check is free.
 """
 
 from __future__ import annotations

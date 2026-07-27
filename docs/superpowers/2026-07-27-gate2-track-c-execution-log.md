@@ -1,0 +1,153 @@
+# Gate 2 Track C — the app reaches the internet
+
+**Role: RETAINED RECORD for Track C.** Reasoning and corrections; not a narration of tasks
+(git has those) and not an implementation description (the code has that). Owns no
+path-quality figures — those live in `findings/2026-07-21-scoring-adjudication.md`.
+
+**Date: 2026-07-27.** Branch `gate2-track-c`, PR #33. One session, no handoff inside it.
+
+---
+
+## §1. What Track C actually was, versus what it was recorded as
+
+`NEXT.md` described Track C as "sync the SPA to the bucket". That is one of its four parts
+and the smallest. Closing `RMD-6` required a **new image**, because the fix lives in
+`api/…/config.py` (commit `78524d0`) rather than in the stack — so Track C was a full
+deploy: image build and push, stack update, SPA publish, then §8/§8a verification.
+
+This was established by reading `config.py` before planning anything, and it changed the
+shape of the work. A session that took the one-line description at face value would have
+published the SPA against an API still serving the old CORS default and recorded `RMD-6`
+as closed.
+
+## §2. The §6 script — the owner's decision, and what it cost
+
+The retiring stage 3 session put one open decision to the owner: whether to turn
+`infra/README.md` §6 into a script before running Track C. He agreed, and it was the first
+task.
+
+**Shape.** `infra/src/artistpath_infra/sync_frontend.py`, following `deploy_stage.py`'s
+precedent exactly: planning is a pure function, running is a thin shell around it, so every
+invariant is testable with no AWS, no credentials and no build. 17 tests.
+
+**Mutation-verified, ten mutations, all caught.** A green test is not evidence until it has
+been shown to go red. Each mutation is the real defect or a neighbour: collapse the passes
+into one `--delete` sync; publish `index.html` first; drop the `--exclude`; cache
+`index.html` for a year; invalidate before publishing; accept a build with no `index.html`;
+accept any content type; ignore the AWS fallback; prefer the fallback over the real PATH;
+probe `index.html` instead of a script.
+
+**Two things the runbook could only ask an operator to remember are now checked.**
+
+1. **`Content-Type`.** §6 recorded it as a machine-state caveat: `aws s3 sync` guesses from
+   the extension, it was correct on the deploy machine on 2026-07-27, re-check if the deploy
+   moves machines. A caveat discharged by remembering to discharge it is worth little, and
+   its failure is the *same blank page* as `FRO-1` from an unrelated cause. The script reads
+   back an uploaded `.js` and refuses. **It probes between the two passes** — assets up,
+   nothing naming them yet — which is the last moment the check is free. Measured live
+   during the cutover: `text/javascript`.
+2. **The AWS CLI off a stale PATH.** Recorded in project memory as a recurring trap and met
+   again here: `aws` is on the *machine* PATH, so it works in a new window while a shell
+   opened earlier cannot see it at all. Unhandled it is a `FileNotFoundError` partway
+   through a publish, after some objects are up.
+
+**`--prune` is off by default**, because deleting old assets while the old `index.html` is
+live re-opens `FRO-1` for anyone mid-visit.
+
+## §3. Three corrections to the record, all found by running the procedure
+
+**§3.1 — the drift gate would have fired on every future deploy.** `infra/README.md` §7 said
+"expect exactly two normalisation rows on `ApiService`; anything third is real and blocks the
+deploy." That was true only until `RMD-6` was fixed. The fix deliberately left the empty
+`ARTISTPATH_CORS_ORIGINS` in the template — `stack.py` keeps it as a statement of intent and
+the guarantee moved to `ApiConfig.cors_origins` — so App Runner goes on dropping it and the
+`REMOVE` row is **permanent by design**.
+
+Measured on both sides of the deploy: before, three rows; after, the same three, with the
+exposure gone from the running service. The row's index also moved (`/4` → `/5`) when the
+autoscaling configuration landed, so §7 now says match on the variable name, never the path.
+
+**A gate that always fires is one you learn to skip** — the same failure the section's own
+note about stale expected test counts is about.
+
+**§3.2 — `NEXT.md` claimed Track C closes the stack drift. It does not.** It closes the
+exposure only. Recorded here because the claim is now overturned and a well-meaning editor
+should not restore it.
+
+**§3.3 — two deploy traps, neither previously written down.**
+
+- `cdk diff` and `cdk deploy` print the site credential, base64-encoded, as part of the
+  viewer function's source. Not a leak in the function — the gate has to hold the credential
+  to compare against it — but the deploy output is not safe to paste anywhere.
+- `infra/.env.deploy`'s lines are `export NAME=value`. Bash sources it natively; PowerShell
+  cannot. A regex anchored on the variable name matches nothing, sets nothing, and surfaces
+  as `app.py` naming whichever secret it happens to check first — which reads as "that one
+  secret is missing" rather than "none of them loaded". Cost one failed deploy attempt.
+
+## §4. Gate outcomes
+
+All four §7 suites green, run in full: api **195**, builder **115**, infra **58** (41 before
+this work), frontend unit **80**, build clean, e2e **5**.
+
+**Container scan:** 87 dependencies, 0 critical, **exactly the two accepted base-image
+highs** (`attr/libattr1`, `acl/libacl1`, `TKB-6`) — confirmed by name at the high threshold
+rather than inferred from a count. Snyk again recommended the Alpine base the runbook warns
+against; not taken.
+
+**§8 verification:** site refuses without the password (401), App Runner refuses a request
+that did not come through CloudFront (403), and the live graph matches the sidecar
+mechanically on all three of sha256, artist count and edge count.
+
+**§8a ran for the first time in the project's history.** Every prior check proved only that
+the site *refuses*. All three pass: the gate admits (200), an authenticated API call through
+CloudFront succeeds (200), and `TR-5`'s SPA fallback returns the app shell for a shared
+journey link. That closes `RMD-13`/`FRO-4`'s mechanical half. Its browser half remains, and
+is now runnable for the first time — see `TEST-QUEUE.md`.
+
+**Log retention** was checked rather than assumed: 90 days on both groups. §5a did not need
+re-running because the service was *updated*, not recreated, so the log group names — which
+carry the service id — did not change.
+
+## §5. Closed, with the measurement rather than the assertion
+
+- **`RMD-6`.** Before the deploy the live API returned
+  `Access-Control-Allow-Origin: http://localhost:5173`. After, no CORS header at all. This
+  is the exposure the owner accepted on 2026-07-27 rather than deploy twice; that acceptance
+  has now expired by being fixed.
+- **`RMD-11`.** The production refusal page reads `username is <strong>artistpath</strong>`,
+  and carries no credential in plaintext or base64.
+- **`FRO-1`.** Verified on the live distribution: `index.html` is `Cache-Control: no-cache`,
+  hashed assets are `public,max-age=31536000,immutable` and `text/javascript`.
+
+## §6. Deferred, each with a success condition
+
+| Finding | Condition |
+|---|---|
+| Medium CSRF in `react-router@7.18.1` (`SNYK-JS-REACTROUTER-18313151`) | **Revisit only if the app adopts React Router's unstable RSC APIs.** The advisory is exploitable only with those enabled; this is a Vite SPA on `BrowserRouter` with no loaders, actions, fetchers or `Form`, so it does not reach us. The fix is a major bump to 8.3.0 and was declined on cutover day for a non-applicable advisory. |
+| Double-encoded text in artist disambiguations — The Beatles reads `UK rock band, â€œThe Fab Fourâ€` | **Next graph rebuild, which is the owner's call.** It is in the adopted artifact, and it is user-visible: `ArtistSearch.tsx:105` renders disambiguation in the search dropdown. Not introduced by Track C; found by reading a live response. |
+| Two Low Snyk findings in `infra/` — a hardcoded test fixture value, and `app.py` reading a path from an environment variable | **Accepted, won't fix.** The second is that tool's entire purpose. Neither is in new code. |
+| The `--prune` pass | **The next deploy after this one**, once the current `index.html` has been live long enough that nobody holds the previous one. Skipped at cutover because the bucket was empty — nothing to prune and no returning visitor to protect. |
+
+## §7. Not a defect: the default-flip check (A4)
+
+The script added two CLI flags, not config defaults. `--prune` defaults off and that **is**
+the shipped behaviour the work intended, per `FRO-1`; `--skip-build` defaults off so the
+published bundle is always freshly built. No knob is sitting at a loser's value.
+
+## §8. Standing context layer (D6)
+
+**Unconditional: 42,778 characters. Conditional: 1,971 lines.** Both **unchanged by this
+work** — neither `CLAUDE.md` nor anything under `.claude/` was touched, confirmed from the
+diff against `main`.
+
+## §9. Provenance (D3)
+
+No artifact was built, adopted or compared. The graph is unchanged:
+`graph-t15-tiebreakfix.bin`, sha256 `4cb84ef9…` per
+`findings/2026-07-23-tiebreak-fix-adoption.md`, verified three ways before the deploy (file
+against its sidecar, sidecar against that findings document) and once after (live `/health`
+against the sidecar). 74,193 artists, 898,006 edges.
+
+**Image `37d559e`** replaced `9f5343d` in App Runner. Digest
+`sha256:a0f4eb373b1224131928375e0633764d5cabcd44014ee0848d10735c7565a92b`, identical between
+the local build and the ECR push.
