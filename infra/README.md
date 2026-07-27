@@ -175,6 +175,17 @@ Outputs: `SiteUrl` (the CloudFront domain — this is the app), `ApiOriginUrl` (
 direct, used for `/health`), `ArtifactBucketName`, `SpaBucketName`, `EcrRepositoryUri`,
 `DistributionId`.
 
+> **`cdk diff` and `cdk deploy` print the site credential to your terminal**, base64-encoded,
+> as part of the viewer function's source. That is not a leak in the function — the gate has
+> to hold the credential to compare against it — but it does mean the deploy output is not
+> safe to paste into an issue, a chat, or a screenshot. Redact `Basic <...>` first.
+
+> **`.env.deploy`'s lines are `export NAME=value`, so it is shell-sourceable and PowerShell
+> is not.** `set -a; . ./.env.deploy; set +a` works in bash. In PowerShell the `export `
+> prefix must be stripped before each line is split on `=`; a regex anchored on the variable
+> name silently matches nothing and every variable stays unset, which surfaces as `app.py`
+> naming whichever secret it happens to check first.
+
 If the service reports `CREATE_FAILED`, read the App Runner application logs in CloudWatch
 before changing anything. The two likely causes both say so explicitly: a checksum mismatch
 (the §4 upload was partial) and a missing artifact key.
@@ -330,9 +341,26 @@ aws cloudformation describe-stack-resource-drifts --stack-name ArtistpathStack \
 > API served its dev default (`RMD-6`). No test in any of the four packages can see that
 > class of gap. One `detect-stack-drift` call found it immediately.
 >
-> **Two rows always report as drifted and are NOT drift.** App Runner normalises
-> `Cpu: "1 vCPU"` to `"1024"` and `Memory: "2 GB"` to `"2048"`. Expect exactly those two on
-> `ApiService` and nothing else; **anything third is real** and blocks the deploy.
+> **Three rows always report as drifted and are NOT drift.** All three are on `ApiService`:
+>
+> 1. `/InstanceConfiguration/Cpu` — App Runner normalises `"1 vCPU"` to `"1024"`.
+> 2. `/InstanceConfiguration/Memory` — likewise `"2 GB"` to `"2048"`.
+> 3. `/SourceConfiguration/.../RuntimeEnvironmentVariables/N` — `ARTISTPATH_CORS_ORIGINS`,
+>    expected `""`, actual `null`, `REMOVE`. **The index `N` moves** when the variable list
+>    changes, so match on the name, never the path.
+>
+> **Anything fourth is real** and blocks the deploy.
+>
+> **The third row was `RMD-6`'s symptom and is now permanent by design** — this section said
+> "expect exactly two, anything third is real" until 2026-07-27, which was correct only until
+> `RMD-6` was fixed. The fix did not remove the empty variable from the template: `stack.py`
+> keeps it deliberately as a statement of intent, and the guarantee moved to
+> `ApiConfig.cors_origins`, which now defaults to empty so arriving-or-not is equally safe.
+> App Runner still drops it, so it will drift forever. Verified after the Track C deploy:
+> the exposure was gone from the running service (`/health` no longer echoes an Origin) while
+> this row was still present. **Left as it was, the gate would have fired on every future
+> deploy** — and a gate that always fires is one you learn to skip, which is the same failure
+> the expected-test-counts note above is about.
 >
 > **Empty-valued environment variables are the known trap.** If a future variable must mean
 > "off", make the *absence* safe in `ApiConfig` rather than relying on an empty value
