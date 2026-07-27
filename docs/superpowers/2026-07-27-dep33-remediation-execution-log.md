@@ -16,9 +16,10 @@ path-quality pause is intact.
 ## §0 The three read-only AWS checks that preceded the plan
 
 Run 2026-07-27 at the owner's instruction, before any planning. They closed two open
-questions and found one new defect. **Account `826731842184` / `us-east-1`, confirmed via
-`sts get-caller-identity` before anything was read** — the identity check the execution log's
-§1 makes load-bearing.
+questions and found one new defect. **The account and region were confirmed via
+`sts get-caller-identity` before anything was read**, and match the deployed identity owned by
+[`2026-07-26-gate2-track-b-execution-log.md`](2026-07-26-gate2-track-b-execution-log.md) §1 —
+which owns those values and is cited, not restated, here and below.
 
 ### `RMD-A` — the billing alarm is `OK`, and its deferral closes
 
@@ -52,7 +53,7 @@ This closes item 2 of review §7's "unverified" list for retention specifically.
 ### `RMD-C` — `QUA-2`'s premise, measured on its load-bearing half
 
 Review §7 flagged rank 1's central claim as *an inference about CloudFront's behaviour model,
-not a measurement*. Distribution `E1S07XVIOW6A22`, read-only:
+not a measurement*. Read-only, against the distribution named in Track B's log §1:
 
 | behaviour | viewer-request fns | Lambda@Edge | TrustedSigners | TrustedKeyGroups |
 |---|---|---|---|---|
@@ -444,7 +445,8 @@ detached-resource shape again.
 ### `ARC-6` — found live by the seam gate, and it was not on the plan
 
 **The stage-2 gate is "`cdk diff` shows only the intended changes", and the first run showed a
-fourth:** `ImageIdentifier` changing from the deployed `:9f5343d` to **`:latest`**.
+fourth:** `ImageIdentifier` changing from **the deployed commit tag** (Track B log §1) to
+**`:latest`**.
 
 `infra/app.py` defaulted `image_tag` to `latest`, and `infra/.env.deploy` does not set the
 variable — so **the next `cdk deploy` would have silently repointed the live service at a
@@ -474,7 +476,8 @@ compares the synthesised template against what is actually deployed.
 > **⚠ `RMD-6` is FIXED-NOT-CLOSED, and drift is still DRIFTED. Both are expected and neither
 > is done.**
 >
-> Nothing in stage 2 was deployed. The running service is still image `9f5343d`, built before
+> Nothing in stage 2 was deployed. The running service is still on the image tag recorded in
+> Track B's log §1, built before
 > the `config.py` change, so **the live API still answers a live probe with
 > `access-control-allow-origin: http://localhost:5173`** — re-measured after the source fix,
 > not assumed. Drift still reports the same three differences on `ApiService` for the same
@@ -486,3 +489,143 @@ compares the synthesised template against what is actually deployed.
 >
 > The `ARTISTPATH_DEPLOY_IMAGE_TAG` fix means that deploy will now **stop** unless the operator
 > names the commit, which is the correct behaviour and a change to the deploy procedure.
+
+---
+
+## Closeout, 2026-07-27
+
+### A4 — the default-flip check, and it has a finding
+
+Five knobs moved. Four are closed; **one is the exact shape A4 exists to catch.**
+
+| knob | old | new | closed? |
+|---|---|---|---|
+| `ApiConfig.cors_origins` default | `http://localhost:5173` | `""` | **NO — see below** |
+| `ARTISTPATH_DEPLOY_IMAGE_TAG` default | `"latest"` | *(required)* | yes — the losing default is deleted, not left selectable |
+| `confirm-new-stack` context flag | *(did not exist)* | absence ⇒ refuse | yes — no default to leave stale |
+| `ARTISTPATH_CLIP_TABLE` on the service | *(not sent)* | sent as a CFN `Ref` | yes |
+| App Runner `MaxSize` | account default (25) | 2 | yes |
+
+> **`cors_origins` is flipped in source and NOT in the running application.** A4's own words:
+> *a knob sitting at its old default is unshipped work wearing a completion badge*. The
+> deployed service runs an image built before the change, and a live probe re-run at closeout
+> still returns the old behaviour. **This work is therefore not closed**, and saying so
+> plainly is what A4 asks for instead of marking it complete.
+>
+> It closes on the next deploy, which is Track C's step.
+
+### A3 — every open item has an address
+
+| item | condition to close |
+|---|---|
+| **`RMD-6` (CORS) — fixed-not-closed** | A live probe of the origin's `/health` with `Origin: http://localhost:5173` returns **no** `access-control-allow-origin` header. Requires a redeploy; Track C |
+| **Stack drift** | Re-run `detect-stack-drift` after that deploy: only the `Cpu`/`Memory` normalisation rows should remain |
+| **`RMD-11`, `RMD-12`** (stage 3) | Planned, not started. See the plan |
+| **`RMD-13` / `FRO-4`** | Cannot complete before Track C: the SPA bucket is empty, so every path 403s whether the rewrite works or not. The runbook step lands first, executes at cutover |
+| **`ARC-4`** — made recoverable, not fixed | Closes when the fixed physical names (`artistpath-api` ×3, `artistpath-clips`) are dropped in favour of generated ones. **That is a migration against live resources, not a cleanup** — so it closes at a moment when recreating the table and repository is acceptable, or never, as an accepted risk with runbook §10 as the mitigation |
+| **Snyk `CWE-547`** (`infra/tests/test_stack.py:18`) | Judged a false positive — synth-time test constants. Closes if a real credential ever enters a test file |
+| **Snyk `CWE-23`** (`infra/app.py`, sidecar path) | Operator-controlled at deploy time on the operator's own machine. Closes with a least-privilege pass on `infra/app.py`, or **accepted, won't fix** if `ARC-7` is closed some other way |
+| **`DEP-16`** telemetry round-trip | Unchanged by this work; still owed. Real logged data now exists to do it with |
+| **`DEP-17`** cost | Alarm confirmed working 2026-07-27, but its figure covers only hours of runtime. Closes on a month of billing (`DEP-31`) |
+| **The two unlisted mutations** in review §1 | Cannot be re-run — nothing records what they were. Closes only if whoever ran the review reconstructs them |
+
+**Nothing above has come due.** `RMD-6`'s and the drift item's conditions both point at the
+same deploy.
+
+### B2 — reachability
+
+One new module, `deploy_stage.py`. Imported by `infra/app.py:16` and called at `:52`, with
+its own test file. **Not an orphan.** No other module was created.
+
+### B3 — vacuous-test spot check
+
+**Discharged by the mutation work itself, at more depth than B3 asks for.** 16 mutations
+against the invariants that matter, every one confirmed red, with the four already-held
+properties re-run as controls. See `RMD-5`.
+
+### B5 — stale-description sweep
+
+**Found one violation, and it was this log's own.** Four restatements of deployed identity —
+account, region, distribution id, image tag — which Track B's execution log §1 owns and whose
+handoff explicitly says not to restate elsewhere. **Converted to citations.**
+
+Worth recording because it is the drift the one-document rule exists to prevent, and it was
+committed by the session that had just written a plan citing that rule. Restating a *currently
+correct* figure is still a violation; the image tag in particular would have gone stale at the
+next deploy, in a document claiming to describe what is deployed.
+
+Also checked and clean: no test counts restated in `infra/README.md` (`QUA-4`'s fix holds), no
+secrets or live URLs added to it.
+
+### B4 — prose-versus-code, and it caught a figure this work invalidated
+
+`deploy_stage.py`'s docstring and `infra/README.md` §2 both said the storage stage deletes
+**eight** resources, taken from review §2. **Measured: nine.**
+
+**The review's figure was correct when written, and `RMD-10` invalidated it** by adding an
+autoscaling configuration to the service half — in the same session, four tasks earlier. This
+is the failure class `CLAUDE.md` names: a change removes a property something unrelated had
+silently come to depend on, nothing breaks, no test fails.
+
+**Fixed by deriving rather than restating.** `test_deploy_stage.py` now computes the deleted
+set from the two synthesised templates and asserts its **membership** — distribution, service
+and viewer function in; every stateful resource out. Adding a service-side resource now updates
+the check instead of quietly invalidating prose. Both documents say nine and point at the test.
+
+Other prose checked against code and found accurate: the Vite proxy claim in `config.py`'s
+comment (`vite.config.ts:21-23`), `node` being a hard CDK dependency, the hardcoded test
+credential's base64, and `app.py` doing its work at import time.
+
+### B1 — documentation audit
+
+Dispatched `doc-auditor`. **Two HIGH findings, both fixed here** — both were adjudicable from
+the record, so neither belongs on an escalation list:
+
+1. **`docs/README.md` did not list the two new documents.** They declared their own roles
+   correctly but were unreachable from the authoritative map. **Added**, along with the new
+   handoff, and the Track B handoff row is now marked superseded-on-next-actions with its
+   reversed claim flagged.
+2. **`docs/superpowers/NEXT.md` was stale** — it still told the next session to execute the ten
+   blockers as its first work. **Rewritten**: stages 1–2 done, stage 3 next, the live `RMD-6`
+   exposure called out, and the gate-state row corrected.
+
+The second is the higher-value catch and it is a repeat of a named incident: on 2026-07-26 an
+audit found this same row stale, the session had the facts, escalated on authority grounds, and
+**the row stayed wrong**. `closeout` B1 was amended after that to say a finding you have the
+facts to fix is yours to fix. Fixed here rather than escalated.
+
+The audit confirmed clean: no restated figures, `RMD-` disjoint from every existing series, the
+CORS reversal correctly annotated in both places, and prior audit findings actioned.
+
+### D6 — the standing context layer
+
+| layer | measurement | delta |
+|---|---|---|
+| Unconditional (`CLAUDE.md` + `MEMORY.md` + skill/agent `description:` lines) | **42,778 characters** | **0** |
+| Conditional (`SKILL.md` bodies, agent bodies, `memory/*.md` bodies) | **1,971 lines** | **0** |
+
+**This work touched neither layer** — `git diff main...HEAD -- CLAUDE.md .claude/` is empty and
+nothing was written to `memory/`. No case to make, because nothing was added.
+
+### D4 — suites
+
+builder **115**, api **195**, infra **38**, frontend **78**, `npm run build` green. Run, not
+recalled.
+
+`npm run test:e2e` **not run**: it needs the API on `:8000`, and nothing in either stage touched
+the frontend. `DEP-30` makes it mandatory per *deploy*, and nothing was deployed.
+
+### A5 — processes
+
+**No listeners on `:8000` or `:5173`.** Nothing was started by this work and nothing was left
+running. Swept by port rather than by task list, since a session sees only its own tasks.
+
+### D2, D3 — not applicable, stated rather than skipped
+
+**D2 (fixtures):** the graph was not touched. No rebuild, no adoption, no artifact comparison —
+`pathfinding.py` was never opened and the committed 500-node fixtures are unaffected.
+
+**D3 (provenance):** no artifact was adopted or compared, so there is no new checksum to
+record. The identity of what is deployed — graph key, sha256, image tag — is owned by Track B's
+execution log §1 and is **cited from here, never restated** (see `B5` above, where restating it
+was this log's own defect).

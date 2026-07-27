@@ -71,7 +71,9 @@ during a cutover.
 >
 > **`-c stage=storage` against a deployed stack deletes the CloudFront distribution**, and a
 > distribution never returns with the same domain — **every link anyone has been sent breaks
-> permanently**, with no rollback. Synthesised and diffed: eight resources go (`ARC-1`).
+> permanently**, with no rollback. Nine resources go, the distribution among them (`ARC-1`;
+> the review measured eight, before `RMD-10` added the autoscaling configuration — the set is
+> derived in `tests/test_deploy_stage.py` rather than restated here).
 >
 > Since 2026-07-27 this **refuses to run** without an explicit confirmation flag, so the
 > destructive path is no longer the reachable one. The refusal names what would break. If you

@@ -20,7 +20,48 @@ the point.**
 
 ---
 
-## N/A — 2026-07-26 (latest) — the app is on the internet, but there is nothing to press yet
+## N/A — 2026-07-27 (latest) — safety work under the bonnet; nothing to press, and one thing to know
+
+**Nothing to exercise, and nothing changed about the app you use on this machine.** No
+routing, no graph, no weighting, no clips, no buttons. A journey you build today is the same
+journey as yesterday's. Nothing is running on any port — nothing was started.
+
+**What this was.** Four reviewers went over the new setup last week and found ten things that
+mattered. This session fixed most of them. Almost all of it is invisible: tests that were
+passing without actually checking anything, and guard rails around the deploy.
+
+**The one worth knowing about, because it is still true right now.** The thing on the
+internet is currently telling web browsers that a page running on *your own machine* is
+allowed to read from it. It was supposed to have been switched off, and the switch was
+written correctly — but the way it was switched off amounts to setting it to *nothing*, and a
+setting of nothing simply never arrives. So it has been on since the day it went up.
+
+**How much does that actually matter? Not very much, and I would rather say so than dress it
+up.** Almost everything on there refuses to answer anyone who does not come through the front
+door. The one thing left readable is a status page that says which version of the artist map
+is loaded. Nobody can reach your journeys, your clips, or anything else with it.
+
+**It is fixed, but not yet fixed *out there*.** The correction is written down and tested; it
+reaches the live site the next time the app is published, which is the next piece of work
+anyway. I checked again after making the fix rather than assuming, and confirmed the live
+version still has the old behaviour.
+
+**Two changes you will meet the next time the app is published**, both deliberate:
+
+- **Publishing now refuses to run unless it is told exactly which version it is publishing.**
+  It used to quietly fall back to "whatever is newest", which would have silently swapped what
+  is running. That was one command away from happening.
+- **The command that sets up a brand-new site now refuses** unless you confirm the site really
+  is brand new. Run by mistake against the live one, it would have deleted the address itself —
+  and an address, once deleted, never comes back. Every link anyone had been sent would have
+  died. That was previously prevented only by a sentence in a document.
+
+**Nothing is proposed for you to test.** The next real entry here comes when the app itself is
+up and there is something to press — which is the next track.
+
+*Detail: `docs/superpowers/2026-07-27-dep33-remediation-execution-log.md`.*
+
+## N/A — 2026-07-26 — the app is on the internet, but there is nothing to press yet
 
 **Nothing to exercise, and please do not go looking.** The app now has a home on the web
 instead of only living on this machine. But **only the engine went up, not the app itself** —

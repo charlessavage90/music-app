@@ -20,6 +20,29 @@ from artistpath_infra.deploy_stage import (
     STORAGE_STAGE,
     resolve_include_service,
 )
+from tests.test_stack import template
+
+
+def test_the_storage_stage_would_delete_the_distribution_and_what_else():
+    # Derived, never restated. The review measured this set at eight; it is nine
+    # since RMD-10 added the autoscaling configuration, and a comment carrying
+    # the old number is exactly the drift this test removes — adding a
+    # service-side resource now updates the check rather than invalidating prose.
+    #
+    # The membership assertion is the point, not the count: the CloudFront
+    # distribution being in here is the whole reason ARC-1's guard exists, since
+    # a distribution never returns with the same domain.
+    full = set(template().to_json()["Resources"])
+    storage = set(template(include_service=False).to_json()["Resources"])
+    deleted = full - storage
+
+    assert any(r.startswith("Distribution") for r in deleted), deleted
+    assert any(r.startswith("ApiService") for r in deleted), deleted
+    assert any(r.startswith("ViewerFunction") for r in deleted), deleted
+    # Nothing stateful may be in here: those live in the storage half precisely
+    # so the staged first deploy is safe to repeat.
+    for survivor in ("ArtifactBucket", "SpaBucket", "ClipTable", "ApiRepo"):
+        assert not any(r.startswith(survivor) for r in deleted), survivor
 
 
 def test_an_ordinary_deploy_builds_everything():

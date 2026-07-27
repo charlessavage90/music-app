@@ -3,8 +3,14 @@
 `ARC-1`. `cdk deploy -c stage=storage` builds only the pieces the first image
 push and artifact upload need. Against a **deployed** stack it does the opposite
 of what its name suggests: it synthesises a template without the App Runner
-service or the CloudFront distribution, and CloudFormation deletes the eight
-resources that are no longer in it — including the distribution.
+service or the CloudFront distribution, and CloudFormation deletes every resource
+that is no longer in it — **including the distribution**.
+
+The review measured that set at eight. It is **nine** as of 2026-07-27, because
+`RMD-10` added an autoscaling configuration to the service half. The count is not
+restated anywhere it can rot: `test_deploy_stage.py` derives it from the two
+synthesised templates and names the members, so adding a service-side resource
+updates the check instead of silently invalidating a comment.
 
 **A deleted CloudFront distribution does not come back with the same domain**,
 so every link ever shared dies permanently. `CLAUDE.md` gives shareable URLs as
