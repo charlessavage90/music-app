@@ -476,8 +476,13 @@ The PR body is where a reviewer picks up the context, so it carries:
 M=~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory
 
 # 1. UNCONDITIONAL — loads in every session before it reads anything. Characters.
+#    `tr -d '\r' | wc -m`, never `wc -c`: this tree is core.autocrlf=true so every line
+#    carries a phantom byte, and `wc -c` counts bytes, so every em-dash and § costs 3.
+#    Together that was 2% of the total — and the CR half moves when prose is rewrapped,
+#    which is the exact blindness characters were adopted to remove.
 { cat CLAUDE.md "$M/MEMORY.md"; \
-  sed -n '/^description:/p' .claude/skills/*/SKILL.md .claude/agents/*.md; } | wc -c
+  sed -n '/^description:/p' .claude/skills/*/SKILL.md .claude/agents/*.md; } \
+  | tr -d '\r' | wc -m
 
 # 2. CONDITIONAL — loads only on invocation, dispatch or recall. Lines.
 cat .claude/skills/*/SKILL.md .claude/agents/*.md \
@@ -510,8 +515,18 @@ commit message states the cost and the case** — what fires the new rule, and w
 worth it. A positive conditional delta is worth recording and is not the same alarm: those
 lines are paid by the sessions that ask for them. It
 need not name a removal: a displacement counts only where the thing removed had stopped
-earning its place, and compressing live prose to free lines is not a displacement, it is
-damage with a receipt. Net-new is the owner's call, not the session's, and it needed his
+earning its place, and **compressing live prose to make any of these numbers go down is not
+a displacement, it is damage with a receipt.**
+
+**That guardrail got more important when the unit got finer, not less.** Lines were coarse
+enough to resist the move — you could not shave a sentence off a paragraph and book a
+saving, because the paragraph still occupied its lines. Characters have no such friction:
+every tightened clause books a real-looking reduction, and the two occasions this project
+lost the exact wording that made a check usable were both paid for with arithmetic that
+looked like a win. **So the rule is on the edit, not the number.** Rewording to say the same
+thing in less space is the damaging move whatever it measures at; deleting something that
+has stopped earning its place is the legitimate one whatever it measures at. If you cannot
+say which of those you just did, you did the first. Net-new is the owner's call, not the session's, and it needed his
 agreement before it landed. A justification written by the session that wanted the lines is
 not a check; that is how this layer reached 1,436 lines with every individual addition
 justified. **That 1,436 was measured under the old, over-broad definition** — it counted
