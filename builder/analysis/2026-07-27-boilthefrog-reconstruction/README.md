@@ -20,6 +20,10 @@ Subject: `github.com/plamere/BoilTheFrog` at **`1f2cb60`** (2020-06-12, repo HEA
 ```bash
 git clone https://github.com/plamere/BoilTheFrog.git btf   # then: git -C btf checkout 1f2cb60
 # btf/ must sit in this directory, beside the scripts
+python verify_reconstruction.py # REPORT §(j) — RUN THIS FIRST. Positive controls;
+                                #   exits non-zero if the build has stopped
+                                #   responding to its inputs. It caught a real
+                                #   defect on its first run.
 python btf_graph_measure.py     # REPORT §(a) §(b), and the A-vs-B edge overlap in §(i)
 python btf_degree_vs_fame.py    # REPORT §(c)
 python btf_factor_table.py      # REPORT §(d)
@@ -27,8 +31,11 @@ python btf_bypass_ladder.py     # REPORT §(e)
 ```
 
 Pure standard library — no networkx, no numpy, no artistpath imports, no network access.
-The three later scripts import `btf_graph_measure` for its loaders. `btf/` is **not**
-committed here; it is a third-party repository and is cloned on demand.
+The four later scripts import `btf_graph_measure` for its loaders.
+
+**`btf/` is gitignored and must stay that way** — see `.gitignore` here for the reasons.
+The short one: **upstream carries no licence**, so it is all-rights-reserved by default and
+vendoring it would be redistribution. It is also ~121 MB, under OneDrive.
 
 ## The one thing that could not be reproduced
 

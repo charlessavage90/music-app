@@ -300,7 +300,12 @@ python btf_graph_measure.py     # (a) (b) and the A-vs-B overlap
 python btf_degree_vs_fame.py    # (c)
 python btf_factor_table.py      # (d)
 python btf_bypass_ladder.py     # (e)
+python verify_reconstruction.py # (j) -- run this FIRST; it exits non-zero if the
+                                #     build has stopped responding to its inputs
 ```
+
+`btf/` is **gitignored** and cloned on demand — it carries no licence (see above) and is
+~121 MB.
 
 Pure stdlib, no networkx, no artistpath imports. `btf_degree_vs_fame.py`,
 `btf_factor_table.py` and `btf_bypass_ladder.py` import `btf_graph_measure` for the loaders.
