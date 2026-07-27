@@ -45,7 +45,7 @@ def build(popularity, edge_lists, artist_bl, edge_bl, cap, criterion):
         else:
             pop = popularity[node]
             kept = [e for _, e in sorted(
-                (1 + M.POP_WEIGHT * abs(pop - popularity[e]) / 100.0, e)
+                (1 + M.POP_WEIGHT * abs(pop - popularity.get(e, 0)) / 100.0, e)
                 for e in good)[:cap]]
         for t in kept:
             nodes.add(t)

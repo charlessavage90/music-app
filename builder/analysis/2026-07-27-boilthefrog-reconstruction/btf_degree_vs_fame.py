@@ -38,7 +38,7 @@ def main():
         ]
         pop = popularity[node]
         weighted = sorted(
-            (1 + M.POP_WEIGHT * abs(pop - popularity[e]) / 100.0, e) for e in good
+            (1 + M.POP_WEIGHT * abs(pop - popularity.get(e, 0)) / 100.0, e) for e in good
         )
         kept = [e for _, e in weighted[:M.MAX_EDGES_PER_ARTIST]]
         out_deg[node] = len(kept)

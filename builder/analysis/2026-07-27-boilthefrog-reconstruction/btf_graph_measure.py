@@ -121,7 +121,7 @@ def build(popularity, edge_lists, artist_bl, edge_bl, simple_edges=False):
         else:
             pop = popularity[node]
             weighted = sorted(
-                (1 + POP_WEIGHT * abs(pop - popularity[e]) / 100.0, e) for e in good
+                (1 + POP_WEIGHT * abs(pop - popularity.get(e, 0)) / 100.0, e) for e in good
             )
             kept = [e for _, e in weighted[:MAX_EDGES_PER_ARTIST]]
 

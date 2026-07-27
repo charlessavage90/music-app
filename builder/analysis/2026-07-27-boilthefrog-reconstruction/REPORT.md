@@ -13,6 +13,27 @@ intact. This measures a **third-party repository**, not this project's graph.
 **Subject.** `github.com/plamere/BoilTheFrog` at `1f2cb60` (2020-06-12, repository HEAD),
 21 commits spanning 2014-06-08 → 2020-06-12.
 
+> ### Licence — checked, and it constrains what may be reused
+>
+> **There is no licence.** No `LICENSE`/`COPYING` file at any path, and no copyright or
+> licence header in any source file. A public repository with no licence grant is
+> **all-rights-reserved by default**: readable, not reusable.
+>
+> **What that permits.** Reading it, measuring it, describing it, and quoting short excerpts
+> for commentary — all of which this review does. The scripts here are an independent
+> reimplementation written to measure, not a port; **no upstream code is vendored, and the
+> clone is gitignored** (see `.gitignore` in this directory).
+>
+> **What it forbids, and it lands on this review's own suggestion.** `BTF-7` points at
+> upstream's `de_norm` as an answer to `CNS-1`. **That function may not be copied.** The
+> *behaviour* — normalise identically at index and query time, strip a leading "the", fold
+> accents and punctuation — is an idea and is free to reimplement; the code expressing it is
+> not. Anyone acting on `BTF-7` writes it from the description, not from the file.
+>
+> *Stated because the parked deferral that requested this review required it explicitly —
+> see `docs/superpowers/2026-07-23-repair-and-retune-execution-log.md`, "Parked, with
+> triggers". It was missed on the first pass and added at closeout.*
+
 ---
 
 ## (a) What is being reconstructed, and the one thing that could not be
@@ -288,6 +309,44 @@ Pure stdlib, no networkx, no artistpath imports. `btf_degree_vs_fame.py`,
 edges, 38,815 shared — Jaccard **17.13 %**; only **30.01 %** of shipped edges survive under
 similarity-rank selection. The two criteria produce substantially different graphs from
 identical crawl data.
+
+---
+
+## (j) Positive controls — added at closeout, and they found a defect
+
+`verify_reconstruction.py`, run per closeout **B3**. Every figure above rests on the build
+mirroring the original faithfully; a build that silently ignored one of its inputs would
+produce a plausible, wrong and entirely green report. So each input is perturbed and the
+output must **move**, in a direction predicted before the run.
+
+| | prediction | result |
+|---|---|---|
+| **C1** | raising `min_popularity` strictly shrinks the graph | ✅ floor 0/30/60 → 45,666 / 45,010 / 5,151 nodes |
+| **C2** | raising the per-source cap strictly raises mean degree | ✅ cap 1/4/8 → 1.67 / 5.75 / 10.12 |
+| **C3** | at cap 4 the two criteria differ materially | ✅ Jaccard 17.13 %, max degree 38 vs 67 |
+| **C4** | at a cap ≥ the longest source list the criterion **cannot** bind, so §(d)'s C and D must be identical | ✅ longest list 20 ≤ cap 20; edge sets and stats identical |
+| **C5** | the 3 skipped corrupt lines do not move the result | ✅ 95,056 of 95,059 parsed; build still 45,010 nodes |
+
+**C4 is the one worth having.** It derives §(d)'s vacuous cell from first principles rather
+than observing it — the difference between having understood that cell and having noticed it.
+
+> ### The control failed on first run, and the defect was real
+>
+> `build()` filtered candidates with `popularity.get(e, 0)` but computed the weight with
+> `popularity[e]`. The original uses `collections.defaultdict(int)`
+> (`new_crawler/artist_graph.py:53`), so an unknown target scores **0** and never raises;
+> the plain dict here raises `KeyError`.
+>
+> **No published figure is affected, and that is proven rather than asserted.** At the
+> shipped floor of 30 the filter excludes every unknown target before the weight is
+> computed, so the two are behaviourally identical there — the divergence is reachable only
+> at a floor ≤ 0, which is why every reported build ran clean. All five figures above
+> reproduce byte-identically after the fix.
+>
+> It is recorded because it is the fourth time in this document's own subject matter that a
+> mechanism looked right and was not exercised, and because **it was found by running a
+> control, not by reading the code** — which is the same way `TKD-2`, `TKA-1` and §(d)'s
+> vacuous cell were found.
 
 ---
 

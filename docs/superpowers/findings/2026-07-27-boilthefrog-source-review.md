@@ -260,6 +260,11 @@ stored, "The Pretenders" typed). It also handles accents, apostrophes and period
 versus "and" — its own test list is `N'sync`, `D'Angelo`, `R. Kelly`, `Beyoncé`,
 `Emerson, Lake & Palmer`.
 
+> ⚠ **The code may not be copied.** BoilTheFrog carries **no licence** — no `LICENSE` file,
+> no copyright header anywhere — so it is all-rights-reserved by default (§ "Licence"). The
+> *behaviour* is an idea and is free to reimplement; the function is not. Anyone acting on
+> this item **writes it from the description above, never from the file.**
+
 **Search-side only, and that is the point:** it needs no alias data, no rebuild, and no graph
 change, so it sits **outside** the path-quality pause and outside the rebuild block. Whether
 it fits artistpath's search is unexamined here — `api/src/artistpath_api/search.py` was not

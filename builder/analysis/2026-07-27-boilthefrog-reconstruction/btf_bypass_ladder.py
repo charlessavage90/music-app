@@ -40,7 +40,7 @@ def build_graph():
                 and popularity.get(e, 0) >= M.MIN_POPULARITY]
         pop = popularity[node]
         weighted = sorted(
-            (1 + M.POP_WEIGHT * abs(pop - popularity[e]) / 100.0, e) for e in good)
+            (1 + M.POP_WEIGHT * abs(pop - popularity.get(e, 0)) / 100.0, e) for e in good)
         for _, t in weighted[:M.MAX_EDGES_PER_ARTIST]:
             nodes.add(t)
             adj[node].add(t)
