@@ -54,6 +54,18 @@ def test_both_buckets_block_all_public_access():
         }
 
 
+def test_the_image_repository_scans_on_push():
+    # Scan-on-push is the only automated dependency check in the deployed
+    # path: Snyk reads neither uv.lock nor a PEP-621 pyproject.toml (TKB-3).
+    template().has_resource_properties(
+        "AWS::ECR::Repository",
+        {
+            "RepositoryName": "artistpath-api",
+            "ImageScanningConfiguration": {"ScanOnPush": True},
+        },
+    )
+
+
 def test_the_clip_table_matches_what_DynamoClipCache_writes():
     # clips.py's _put_sync writes Item={"mbid": ..., "ttl": ...}. A mismatch
     # here is a runtime error that no test in api/ can catch.

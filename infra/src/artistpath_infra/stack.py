@@ -11,6 +11,7 @@ from dataclasses import dataclass
 
 import aws_cdk as cdk
 from aws_cdk import aws_dynamodb as dynamodb
+from aws_cdk import aws_ecr as ecr
 from aws_cdk import aws_s3 as s3
 from constructs import Construct
 
@@ -76,4 +77,13 @@ class ArtistpathStack(cdk.Stack):
             time_to_live_attribute="ttl",
             billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST,
             removal_policy=cdk.RemovalPolicy.RETAIN,
+        )
+
+        self.repo = ecr.Repository(
+            self,
+            "ApiRepo",
+            repository_name="artistpath-api",
+            image_scan_on_push=True,
+            removal_policy=cdk.RemovalPolicy.RETAIN,
+            lifecycle_rules=[ecr.LifecycleRule(max_image_count=5)],
         )
