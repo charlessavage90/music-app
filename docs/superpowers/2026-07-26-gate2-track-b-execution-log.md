@@ -127,7 +127,60 @@ in the process would have caught it, and it is the third instance of this shape 
   whose exit code is unreliable is not a gate.
 - Docker Desktop must be running; the daemon is not started by the CLI.
 
-## §7 Cost of the probe
+## §7 `DEP-33` ran, and it is the most important outcome of this track
+
+**Discharged 2026-07-26.** Four reviewers against the deployed stack:
+[`findings/2026-07-26-track-b-cdk-review.md`](findings/2026-07-26-track-b-cdk-review.md).
+**45 findings, 10 blocking.** Nothing invalidates the deploy; everything blocking concerns
+the *next* deploy or the *first* user.
+
+**The finding that matters most is about this log's own §2.** Quality ran nineteen mutations
+and **ten went green** — including detaching the password function from the site's default
+behaviour, which would leave the entire site publicly readable with no test failing and no
+symptom the owner could see.
+
+> **Correction to this session's own method.** §2 records two mutation checks and they both
+> replicate — they were not wrong. The error was **generalising from two spot checks to a
+> suite**. Two mutations verify two assertions; they say nothing about the eighteen others.
+> The `TKB-4` lesson ("a green result from a new instrument is not evidence until it has been
+> shown to go red") applies to *each* assertion, not to the suite as a whole.
+
+**Two corrections to the record**, both in the review's §3:
+
+- **`TKB-7`'s stated mechanism is wrong.** The ECR repository carries `DeletionPolicy:
+  Retain`, so a create-rollback should not delete it. The staged deploy is still right, for
+  the opposite reason: rollback orphans fixed-name resources that block the retry (`ARC-4`).
+- **Task 11 Step 2's verification claim is overstated.** The read-only AWS commands were
+  verified; the runbook's test-count line and its `cd` chain were not, and both are wrong.
+
+## §8 Closeout checks
+
+- **A3 — deferrals.** Every deferred finding carries a condition: review §5 for the ten
+  `SEC-`/`ARC-`/`QUA-`/`FRO-` deferrals, and the plan's carried-items table for `TKB-`
+  and inherited `DEP-` items. **`TKA-11` and `TKA-12` both came due and both closed** (§2,
+  and Task 1). No other condition has come due.
+- **A4 — default flip.** Track B added one config knob, `ApiConfig.origin_secret`, defaulting
+  to empty. **That default is correct and deliberate, not unshipped work**: empty disables the
+  check, which is local dev and the whole test suite, and production sets it from the stack —
+  verified live (403 without the header, 200 with). The CDK-side `include_service` defaults to
+  `True`, i.e. the full stack; the storage stage is opt-in. Nothing is sitting at a losing
+  default. **`SEC-2` is the counter-argument and is filed**: the empty default means the gate
+  *fails open* if the variable is ever dropped.
+- **D3 — provenance.** The adopted artifact's checksum is owned by
+  `findings/2026-07-23-tiebreak-fix-adoption.md` and is **not restated here**. What is new is
+  that the same artifact now exists in S3, and its identity was confirmed against the
+  manifest sidecar through the deployed `/health` (§2).
+- **D6 — standing context layer.** In-repo half: `git diff --stat main..HEAD -- CLAUDE.md
+  .claude/skills/ .claude/agents/` is **empty — net zero**. Nothing was added to the layer
+  that taxes every future session. Out-of-repo half: `memory/` totals **547 lines**, against
+  **474** last recorded (`TKA-13`, 2026-07-26). **+73, and this session wrote all of it**:
+  `roadmap-pointer.md` rewritten for Gate 2 (the largest part), `project-state.md` corrected
+  where it said nothing was deployed, and a new `deploy-environment-traps.md`. The owner asked
+  for the memory update explicitly. The case for the new file: four Windows/Git Bash traps
+  that each cost real time tonight, one of which (`MSYS_NO_PATHCONV`) produces an error naming
+  the wrong cause.
+
+## §9 Cost of the probe
 
 `TKB-8`'s availability probe was a real App Runner service (0.25 vCPU / 0.5 GB, ~5 minutes,
 public sample image), created and deleted. Its log groups remain in CloudWatch and are the

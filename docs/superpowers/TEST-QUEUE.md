@@ -20,7 +20,39 @@ the point.**
 
 ---
 
-## DONE — 2026-07-26 (latest) — the search box you caught, on the desktop
+## N/A — 2026-07-26 (latest) — the app is on the internet, but there is nothing to press yet
+
+**Nothing to exercise, and please do not go looking.** The app now has a home on the web
+instead of only living on this machine. But **only the engine went up, not the app itself** —
+open the address today and you get a password box and then an error page. That is expected
+and is the next piece of work, not a fault.
+
+**Nothing about the app on your own machine changed.** No routing, no graph, no weighting.
+A journey you build here is the same journey as this morning.
+
+**The address and password are not written down here on purpose.** They are in the deploy
+record. **Please don't send either to anyone yet** — two things still need doing first, and
+one of them is that *nobody can currently guess the username*, which would just waste their
+time. Both are queued as the next session's first work.
+
+**What did get checked, mechanically, so you don't have to:** the thing on the internet is
+running exactly the same artist map as your machine — matched on three separate counts. The
+password box refuses to let anyone past. And the engine refuses to answer anyone who tries
+to reach it directly instead of through the front door.
+
+**What is worth knowing, because it explains the next entry.** Four reviewers went over the
+new setup. They found forty-five things, ten of which matter. The most interesting one:
+somebody could have accidentally left the whole site open to the public and **not one test
+would have failed** — it would have kept working perfectly for you the entire time. That
+class of problem is why the next session fixes tests before shipping anything else.
+
+**The next entry here will be a real one** — when the app itself is up, you will get an
+address, a password, and a list of things to try on it, including on your phone for the
+first time.
+
+*Detail: `docs/superpowers/2026-07-26-gate2-track-b-execution-log.md`.*
+
+## DONE — 2026-07-26 — the search box you caught, on the desktop
 
 **DONE 2026-07-26 — PASSED on all five steps, run before the merge.** Exercised by the owner
 against every numbered step individually:

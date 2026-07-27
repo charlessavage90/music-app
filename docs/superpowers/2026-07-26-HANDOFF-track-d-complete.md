@@ -68,6 +68,13 @@ Playwright `outputDir` claim (see `TKD-3` below).
 
 ## The open decision, and what I would do
 
+> **⚠ SUPERSEDED 2026-07-26, same day — Track B has been planned, built, deployed and
+> reviewed.** Record: [`2026-07-26-gate2-track-b-execution-log.md`](2026-07-26-gate2-track-b-execution-log.md);
+> current handoff: [`2026-07-26-HANDOFF-track-b-complete.md`](2026-07-26-HANDOFF-track-b-complete.md).
+> **`DEP-33` was run and is discharged** — and this section's recommendation to run it inside
+> Track B rather than after it was followed. The rest of this handoff stands as the record of
+> Track D and of the position at the time it was written.
+
 **Track B has a design and no plan.** Writing that plan is the next unit of work.
 
 **What I would do:** write it, and **run `DEP-33` as part of it rather than after it.** Seven

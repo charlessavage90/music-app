@@ -150,12 +150,20 @@ The SPA calls `/api` relative (`frontend/src/api/client.ts`), so it needs no bui
 
 **All four, every deploy.** `DEP-30` makes the e2e run mandatory rather than advisory.
 
+**Each block starts from the repo root.** `cd` is not cumulative here — run them as written:
+
 ```bash
-cd api      && UV_LINK_MODE=copy uv run --extra dev pytest -q     # expect 185 passed
-cd builder  && UV_LINK_MODE=copy uv run --extra dev pytest -q     # expect 115 passed
-cd infra    && UV_LINK_MODE=copy uv run --extra dev pytest -q     # expect 17 passed
-cd frontend && npm test && npm run build && npm run test:e2e
+cd "$(git rev-parse --show-toplevel)/api"      && UV_LINK_MODE=copy uv run --extra dev pytest -q
+cd "$(git rev-parse --show-toplevel)/builder"  && UV_LINK_MODE=copy uv run --extra dev pytest -q
+cd "$(git rev-parse --show-toplevel)/infra"    && UV_LINK_MODE=copy JSII_SILENCE_WARNING_DEPRECATED_NODE_VERSION=1 uv run --extra dev pytest -q
+cd "$(git rev-parse --show-toplevel)/frontend" && npm test && npm run build && npm run test:e2e
 ```
+
+**The gate is that each exits 0, not that it prints a particular number.** Expected counts
+were stated here and went stale within the day — the infra figure was wrong the moment
+`TKB-7` added a test, and a wrong expected count trains you to stop reading counts, which is
+the only thing that would catch a *deleted* assertion. If you want the counts, run the
+suites; they are not transcribed.
 
 `npm run test:e2e` **needs the API running on :8000**; it starts only the Vite server
 itself.
