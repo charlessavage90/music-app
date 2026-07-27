@@ -136,8 +136,13 @@ published bundle is always freshly built. No knob is sitting at a loser's value.
 
 ## §8. Standing context layer (D6)
 
-**Unconditional: 42,778 characters — unchanged. Conditional: 1,971 → 1,973 lines, +2, and
-the two are the owner's, granted explicitly.**
+**Unconditional: 42,778 characters — unchanged. Conditional: 1,971 → 1,983 lines, +12,
+every line of it granted explicitly by the owner.** Two additions, recorded separately
+below because they were decided separately.
+
+**⚠ The second was priced at +9 and cost +10.** A blank line was missed in the estimate.
+Reported because a budget rule whose quoted price is not the paid price is decoration —
+the error is small, and the tolerance for it being unremarked is zero.
 
 `closeout`'s A5 carried a premise the cutover falsified. It said "**if C1 queued an item** and
 no fresh listener survives, relaunch detached", and the scaling section said "the queued test
@@ -166,6 +171,38 @@ by writing the lines and reporting the total afterwards.
 entirely on the grounds that this session's own grep of it had come back clean — the exact
 inversion of why the sweep was reported. Sent back with that reasoning named, it found this
 and the root `README.md` defect in one run.
+
+### §8.1 — the auditor's own scope rule, +10 lines and a model change
+
+**The instrument had a defect, and it was in the definition rather than the run.** Nothing in
+`doc-auditor.md` said *what may narrow scope*. Every narrowing criterion it gave was about
+**size** ("large completed or historical documents", "exceeds roughly 4,000 lines"), while
+`## Scope`'s first line hands scope authority to the caller. Given caller authority, plus
+permission to narrow, plus no rule about valid reasons, reading "I already grepped this and it
+was clean" as scope guidance follows from the text. The agent was not being lazy; the file
+allowed it.
+
+**And the compensation for its own stated blind spot did not reach the expensive layer.** The
+definition names absence as its weakness and prescribes working check F mechanically — but
+check F is a list of `ls`-able things (README exists, per-package READMEs, a doc index) and
+never reaches agent or skill definitions, which is where an absence defect is auto-loaded into
+every future session.
+
+Two edits, in **both** the project-local fork and the global copy, per the fork's own
+instruction that a shared check is improved in both:
+
+1. `Agent and tooling definitions` in the default scope becomes **never droppable** — in
+   place, no new lines.
+2. A rule that **size is the only thing that may narrow scope**, that a caller's report of a
+   clean sweep moves an area *up* the list rather than off it, and that silently dropping
+   default scope is itself a reportable finding.
+
+**`model: haiku` → `model: sonnet`, both copies, the owner's decision.** The observed failure
+— deferring to the caller's framing over the caller's explicit instruction — is characteristic
+of a smaller model, and this agent is the instrument of last resort for a defect class careful
+sessions provably miss. It has now caught High-severity defects on three separate occasions,
+twice against sessions that had concluded it was unnecessary. **This changes per-run cost**,
+which is why it was his call and not the session's.
 
 ## §9. Provenance (D3)
 
