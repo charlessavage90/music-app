@@ -202,3 +202,71 @@ deployed site would refuse everybody, and the suite would have been green.
 `infra/src/` verified byte-identical to `HEAD` after all three reverts.
 
 **Suite: infra 20 → 27, green.**
+
+### `RMD-3` — `QUA-3`, rank 6: the middleware is tested on every gated route
+
+`api/tests/test_origin_secret.py` exercised **one** endpoint, and the review's mutations
+exploited exactly that: narrowing the middleware to GET-only passed 185 tests while leaving
+`POST /api/path` — the expensive Dijkstra — ungated.
+
+**Change:** a `GATED_ROUTES` table (method, path, body, served-status) parametrising three
+tests — refused without the header, refused with a wrong one, **served with the right one**.
+The admitting case matters for the same reason it did in `RMD-2`: without it a middleware
+that refuses everything passes, and the API would be dead behind a gate that "works".
+
+Routes covered: `GET /api/artists/search`, `POST /api/path`, `GET /api/artists/{mbid}/track`.
+That is every route `app.py` defines except `/health`, whose exemption is asserted separately
+and in both directions.
+
+**Mutation gate — three run, three caught:**
+
+| mutation | result |
+|---|---|
+| narrow the middleware to GET-only | **red** — both `POST /api/path` cases fail |
+| exempt `/track` | **red** — both `/track` cases fail |
+| delete the `/health` exemption | **red** — the exemption test fails |
+
+The third goes red for the **opposite** reason to the others: `/health` must stay exempt
+(must-not-revert #2), because App Runner's health checker reaches the origin directly and
+cannot be given the header. Gating it fails every deploy and rolls it back.
+
+**Suite: api 185 → 192, green.**
+
+### `RMD-4` — `SEC-1`: the origin secret is compared as bytes
+
+`hmac.compare_digest` raises `TypeError` on a non-ASCII `str`, so one byte >127 in
+`x-origin-secret` returned **500** and wrote a traceback into the telemetry log group —
+unauthenticated and remote. It fails closed, so it was never a bypass; it is a log-writing
+primitive.
+
+**Fix:** `app.py` now encodes both sides and compares bytes. Starlette decodes header values
+as latin-1, so encoding back with latin-1 round-trips the exact bytes from the wire. **The
+`hmac` call stays** — `QUA-13` records constant-time comparison as a permanent review-only
+invariant, and must-not-revert #7 says comparing bytes is the fix rather than a
+simplification of it.
+
+**The test needed a new harness.** The handoff records that `TestClient` cannot reproduce
+this: httpx rejects the non-ASCII header client-side with `UnicodeEncodeError` before the app
+is reached. `_raw_asgi_status()` builds the ASGI scope directly and drives the app, which is
+what a real request does.
+
+**A bypassing harness needs its own control**, so there is a second test asserting the raw
+path agrees with `TestClient` on all four cases both can express (no header, wrong header,
+right header, `/health`). Without it, a 403 from the harness would prove nothing about the
+app.
+
+**Mutation gate:** reverting to `str` comparison → **red**, with the exact error the handoff
+predicted: `TypeError: comparing strings with non-ASCII characters is not supported`.
+
+**Suite: api 192 → 194, green.**
+
+### Snyk — clean on what changed, two pre-existing lows recorded
+
+`api/src/artistpath_api`: **0 issues.** `infra`: **2 low, both pre-existing**, neither in code
+this work introduced. Recorded rather than fixed, because expanding scope mid-stage is how a
+plan stops being the plan:
+
+| issue | where | condition to close |
+|---|---|---|
+| Hardcoded non-cryptographic secret (`CWE-547`) | `infra/tests/test_stack.py:18` — the `DEPLOY` fixture's constants | Judged a false positive: these are synth-time test constants, and `test_viewer_function.py`'s hardcoded credential is deliberate and documented. Closes if a real credential ever enters a test file |
+| Path traversal (`CWE-23`) | `infra/app.py:18` — `ARTISTPATH_DEPLOY_SIDECAR` flows into `pathlib.Path` | Operator-controlled at deploy time on the operator's own machine, so not attacker-reachable. **Fold into `RMD-9`**, which already opens `infra/app.py` for `ARC-7`'s graph-key/sidecar coupling |
