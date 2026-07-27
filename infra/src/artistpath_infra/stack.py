@@ -41,6 +41,13 @@ class DeployInputs:
     billing_alarm_usd: float
     alarm_email: str
     image_tag: str
+    # TKB-7 — the first deploy is a chicken-and-egg: App Runner needs an image
+    # that cannot be pushed until ECR exists, and it needs the graph in a
+    # bucket that does not exist either. Creating the service in the same pass
+    # gives CREATE_FAILED and rolls the whole stack back, taking the ECR
+    # repository with it. `cdk deploy -c stage=storage` builds only the pieces
+    # the image push and artifact upload need; the default builds everything.
+    include_service: bool = True
 
 
 class ArtistpathStack(cdk.Stack):
@@ -97,6 +104,18 @@ class ArtistpathStack(cdk.Stack):
             removal_policy=cdk.RemovalPolicy.RETAIN,
             lifecycle_rules=[ecr.LifecycleRule(max_image_count=5)],
         )
+
+        if not deploy.include_service:
+            # Storage-only first pass (TKB-7). The billing alarm rides along:
+            # it is independent of the service and is the thing you least want
+            # to forget.
+            self._add_billing_alarm(deploy)
+            cdk.CfnOutput(
+                self, "ArtifactBucketName", value=self.artifact_bucket.bucket_name
+            )
+            cdk.CfnOutput(self, "SpaBucketName", value=self.spa_bucket.bucket_name)
+            cdk.CfnOutput(self, "EcrRepositoryUri", value=self.repo.repository_uri)
+            return
 
         # Two roles, deliberately not merged (TR-7): the access role pulls the
         # image, the instance role is what the running container gets.
@@ -254,6 +273,24 @@ class ArtistpathStack(cdk.Stack):
             # function, which is per-behaviour (TKB-2).
         )
 
+        self._add_billing_alarm(deploy)
+
+        cdk.CfnOutput(
+            self, "SiteUrl", value=f"https://{self.distribution.domain_name}"
+        )
+        cdk.CfnOutput(
+            self, "ApiOriginUrl", value=f"https://{self.service.attr_service_url}"
+        )
+        cdk.CfnOutput(
+            self, "ArtifactBucketName", value=self.artifact_bucket.bucket_name
+        )
+        cdk.CfnOutput(self, "SpaBucketName", value=self.spa_bucket.bucket_name)
+        cdk.CfnOutput(self, "EcrRepositoryUri", value=self.repo.repository_uri)
+        cdk.CfnOutput(
+            self, "DistributionId", value=self.distribution.distribution_id
+        )
+
+    def _add_billing_alarm(self, deploy: DeployInputs) -> None:
         topic = sns.Topic(self, "AlarmTopic")
         topic.add_subscription(sns_subscriptions.EmailSubscription(deploy.alarm_email))
         # AWS/Billing is published only in us-east-1, and only once billing
@@ -274,18 +311,3 @@ class ArtistpathStack(cdk.Stack):
             comparison_operator=cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
             treat_missing_data=cloudwatch.TreatMissingData.NOT_BREACHING,
         ).add_alarm_action(cloudwatch_actions.SnsAction(topic))
-
-        cdk.CfnOutput(
-            self, "SiteUrl", value=f"https://{self.distribution.domain_name}"
-        )
-        cdk.CfnOutput(
-            self, "ApiOriginUrl", value=f"https://{self.service.attr_service_url}"
-        )
-        cdk.CfnOutput(
-            self, "ArtifactBucketName", value=self.artifact_bucket.bucket_name
-        )
-        cdk.CfnOutput(self, "SpaBucketName", value=self.spa_bucket.bucket_name)
-        cdk.CfnOutput(self, "EcrRepositoryUri", value=self.repo.repository_uri)
-        cdk.CfnOutput(
-            self, "DistributionId", value=self.distribution.distribution_id
-        )

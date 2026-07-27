@@ -5,6 +5,8 @@ finding id is in the test name or a comment — deleting the assertion without
 reading it re-opens the defect.
 """
 
+from dataclasses import replace
+
 import aws_cdk as cdk
 from aws_cdk.assertions import Template
 
@@ -31,6 +33,27 @@ def template() -> Template:
 
 def test_the_stack_synthesises():
     assert template().to_json()["Resources"]
+
+
+def test_the_storage_only_stage_omits_the_service_and_the_distribution():
+    # TKB-7: the first deploy cannot create App Runner — the image is not in
+    # ECR yet and the graph is not in S3 yet, so it would CREATE_FAILED and
+    # roll the whole stack back, taking the ECR repository with it.
+    app = cdk.App()
+    stack = ArtistpathStack(
+        app,
+        "Storage",
+        deploy=replace(DEPLOY, include_service=False),
+        env=cdk.Environment(region="us-east-1"),
+    )
+    storage = Template.from_stack(stack)
+    assert storage.find_resources("AWS::AppRunner::Service") == {}
+    assert storage.find_resources("AWS::CloudFront::Distribution") == {}
+    # But the pieces the image push and the artifact upload need must exist,
+    # and so must the alarm — it is the thing you least want to forget.
+    assert len(storage.find_resources("AWS::S3::Bucket")) == 2
+    assert len(storage.find_resources("AWS::ECR::Repository")) == 1
+    assert len(storage.find_resources("AWS::CloudWatch::Alarm")) == 1
 
 
 def test_the_artifact_bucket_is_versioned_because_it_is_the_only_second_copy():

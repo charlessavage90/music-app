@@ -40,6 +40,10 @@ def _sidecar_sha256() -> str:
 
 
 app = cdk.App()
+# `cdk deploy -c stage=storage` builds only what the image push and the
+# artifact upload need. The first deploy must use it: App Runner cannot be
+# created before the image is in ECR and the graph is in S3 (TKB-7).
+include_service = app.node.try_get_context("stage") != "storage"
 ArtistpathStack(
     app,
     "ArtistpathStack",
@@ -53,6 +57,7 @@ ArtistpathStack(
         billing_alarm_usd=float(_require("ARTISTPATH_DEPLOY_BILLING_USD")),
         alarm_email=_require("ARTISTPATH_DEPLOY_ALARM_EMAIL"),
         image_tag=os.environ.get("ARTISTPATH_DEPLOY_IMAGE_TAG", "latest"),
+        include_service=include_service,
     ),
     env=cdk.Environment(region="us-east-1"),
 )
