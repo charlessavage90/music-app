@@ -180,6 +180,34 @@ symptom the owner could see.
   that each cost real time tonight, one of which (`MSYS_NO_PATHCONV`) produces an error naming
   the wrong cause.
 
+## §8b D6 — CORRECTION, appended 2026-07-27
+
+**§8's D6 entry ("in-repo net zero; memory 474 → 547 lines") is SUPERSEDED, not wrong at the
+time.** It was measured under a definition of the standing context layer that has since been
+shown by observation to be over-broad. It is left standing above rather than edited, because
+the superseded figure is the evidence for why the definition changed.
+
+**What actually loads unconditionally** is `CLAUDE.md` + `memory/MEMORY.md` (the index only)
++ the one-line `description:` of every skill and agent. `SKILL.md` bodies, agent definition
+bodies and `memory/*.md` bodies do **not** — they load on invocation, dispatch and recall
+respectively. `closeout` D6 now measures the two layers separately and **in different units**,
+because the unconditional layer is written in long single lines that `wc -l` cannot see change
+in.
+
+Under the corrected definition, for this session's work plus the follow-on maintenance:
+
+| layer | delta | new baseline |
+|---|---|---|
+| **unconditional** | **−968 characters** | **43,649 characters** |
+| **conditional** | **−75 lines** | **1,956 lines** (in-repo bodies +103, memory bodies −178) |
+
+Memory was consolidated from **553 → 378 lines**, 13 files → 12. Memory lives outside the
+repo and cannot be committed, which is why its figures live here.
+
+> **The historical 1,436-line figure is not comparable to any of these.** It was measured
+> under the old over-broad definition, and quoting it against the numbers above would compare
+> two different things — the exact error the one-document rule exists to prevent.
+
 ## §9 Cost of the probe
 
 `TKB-8`'s availability probe was a real App Runner service (0.25 vCPU / 0.5 GB, ~5 minutes,

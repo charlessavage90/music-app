@@ -120,16 +120,19 @@ deferral rests on the audience staying small, which nothing enforces or detects.
   scan is strictly better and needs no second manifest.
 - **An Alpine base image** to clear `TKB-6`'s two highs. numpy on musl is a worse trade.
 
-## Left running, deliberately — but stale
+## Nothing is left running — both dev servers were STOPPED
 
-Two **detached** servers, owned by no session, left by the Track A/D sessions:
+Two **detached** servers (frontend `:5173` PID 211432, api `:8000` PID 231092), owned by no
+session and left by the Track A/D sessions, **were stopped at the close of this work. Both
+ports are free** — verified, not assumed.
 
-| what | address | PID |
-|---|---|---|
-| frontend | http://localhost:5173 | 211432 |
-| api | http://127.0.0.1:8000 | 231092 |
+**Why they were stopped rather than left, and it is a rule now:** they started at 18:51
+against a HEAD of 21:53, so they served code predating this track — the API on `:8000` had
+no origin-secret middleware. **And nothing was queued behind them**: this track's queue entry
+needs no local server, because the app is not usable until Track C. Stale *and* nothing
+queued is the disposition `closeout` A5 now names as "close it and report that you did" —
+not a question to put to the owner.
 
-**They started at 18:51 and HEAD is 21:53, so they predate this work** — the API on :8000
-does **not** have the origin-secret middleware. That is fine for local use and wrong for any
-manual test of Track B. **Nothing will stop them but those PIDs.** No queue entry depends on
-them: the queued item for this work needs no local server.
+**If you need them, start them fresh** per the commands in `CLAUDE.md`. A server older than
+the work you are testing fails the test for a reason that has nothing to do with the work,
+and looks entirely normal doing it.
