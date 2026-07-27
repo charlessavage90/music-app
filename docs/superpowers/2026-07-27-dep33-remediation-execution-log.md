@@ -157,3 +157,48 @@ before these two tests, this mutation was invisible to the entire suite.
 empty), so no mutation residue reached the commit.
 
 **Suite: infra 18 → 20, green.**
+
+### `RMD-2` — `QUA-1`/`FRO-5`/`ARC-3`, rank 5: the function is now tested by running it
+
+Found independently by three reviewers. The one existing test asserts three substrings appear
+in the function's source, so inverting the gate passed all 18 tests.
+
+**New file `infra/tests/test_viewer_function.py`, 7 tests.** The function is JavaScript and
+the suite is pytest, so the tests **run it under node** — already a hard dependency of this
+package, since CDK synthesises through it. A machine that cannot run these cannot run any
+infra test, so the fixture **fails rather than skips** when node is absent: a silent skip is
+the same vacuity this file exists to remove.
+
+**Two design choices carry most of the value, and both are deliberate:**
+
+1. **The code comes from the synthesised template, not from `viewer_function.js` on disk.**
+   The password is substituted at synth time, and *"synth-time credential substitution
+   silently no-ops"* was one of the review's green mutations. Reading the source file would
+   not exercise it.
+2. **The expected credential is hardcoded** (`Basic YXJ0aXN0cGF0aDp0ZXN0LXBhc3N3b3Jk`), not
+   recomputed from `DeployInputs`. Deriving it the way `stack.py` derives it would move in
+   lockstep with a mutation to `stack.py` and stay green — precisely what makes a test
+   vacuous.
+
+**Coverage:** refusal with no password and with a wrong one; **admission with the right one**
+(the half a "does it 401?" test cannot see — without it, a function that refuses *everyone*
+passes); `www-authenticate` present so the browser actually prompts; and three `TR-5` rewrite
+cases — a shared journey link reaches `/index.html`, an `/api/*` call is not rewritten, a
+hashed asset is not rewritten.
+
+**Mutation gate — three run, three caught:**
+
+| mutation | result |
+|---|---|
+| invert the password comparison (`viewer_function.js:24`) | **red**, 5 tests fail |
+| make the synth-time `.replace()` a no-op (`stack.py:208`) | **red**, all 7 error on the placeholder guard |
+| drop the `/api/` guard from the rewrite (`viewer_function.js:42`) | **red**, `…api_call_is_not_rewritten` fails |
+
+**The second one is worth reading twice.** Under it, the *old* substring test still passed —
+`authorization`, `/index.html` and `401` are all still in a function body that compares
+against the literal placeholder `__EXPECTED_AUTH__`, which no browser will ever send. The
+deployed site would refuse everybody, and the suite would have been green.
+
+`infra/src/` verified byte-identical to `HEAD` after all three reverts.
+
+**Suite: infra 20 → 27, green.**
