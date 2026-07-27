@@ -180,8 +180,8 @@ closeout may be in a fresh one.
    left both running, with nothing queued that needed them. Every fact was right and no
    action followed from any of them. The owner got a table.
 
-4. **If C1 queued an item and no fresh listener survives, relaunch detached**, per the
-   commands in `CLAUDE.md` — cite them, do not restate them. Detached means no session owns
+4. **If C1 queued an item that needs a local server and none survives, relaunch detached**,
+   per the commands in `CLAUDE.md` — cite them, do not restate them. Detached means no session owns
    it, so nothing can be woken by it; it equally means nothing is watching, so **a failure to
    bind is silent. Verify both ports answer before believing it started.** Record PID and
    port in the C1 entry.
@@ -646,8 +646,8 @@ format, or the cost function.
 
 **Minimum** after a small self-contained track — A4, **A5**, B2, C1, D1. Default-flip,
 release the shells, reachability, use it, clean tree. Half an hour combined, and they catch
-most of what matters. A5 travels with C1: the queued test needs a server, and a stale one
-fails it for the wrong reason.
+most of what matters. A5 travels with C1: a queued test that needs a server fails against a
+stale one for the wrong reason.
 
 **Mid-flight retirement**, when a session is being handed over before its work reaches a
 natural seam — A1, **A2-mid**, A3, **A5**, B1, B5, **D1-mid**, D3, **D6**, **D7**. A5 matters most

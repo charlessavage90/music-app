@@ -136,9 +136,29 @@ published bundle is always freshly built. No knob is sitting at a loser's value.
 
 ## §8. Standing context layer (D6)
 
-**Unconditional: 42,778 characters. Conditional: 1,971 lines.** Both **unchanged by this
-work** — neither `CLAUDE.md` nor anything under `.claude/` was touched, confirmed from the
-diff against `main`.
+**Unconditional: 42,778 characters — unchanged. Conditional: 1,971 lines — unchanged, after
+a net-zero correction.**
+
+`closeout`'s A5 carried a premise the cutover falsified. It said "**if C1 queued an item** and
+no fresh listener survives, relaunch detached", and the scaling section said "the queued test
+needs a server". Both were true while the app ran only on the owner's desktop — every queued
+test needed a local server. The newest queued entry exercises the deployed site and needs
+nothing running here, so a session following A5 literally would leave a pointless server
+behind, which A5's own rule calls a stale artifact waiting to be tested against.
+
+Corrected to "an item **that needs a local server**". Four lines out, four in; no new rule and
+no new narrative, which is what keeps it a correction the session may make rather than growth
+that is the owner's call.
+
+**First draft of this fix added two lines of explanatory narrative and was trimmed**, because
+D6's test for a correction is net ≈ 0 *and* no new narrative — and narrative is precisely the
+part that has to be bought rather than slipped in. The sentence dropped, and its cost, are in
+the closing message for the owner to accept or decline.
+
+**Found by `doc-auditor` (B1), on its second pass.** The first pass skipped `.claude/`
+entirely on the grounds that this session's own grep of it had come back clean — the exact
+inversion of why the sweep was reported. Sent back with that reasoning named, it found this
+and the root `README.md` defect in one run.
 
 ## §9. Provenance (D3)
 
