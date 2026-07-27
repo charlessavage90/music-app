@@ -1,7 +1,11 @@
 # Stage 3a — Web Frontend Design
 
 **Date:** 2026-07-20
-**Status:** Approved, ready for implementation planning
+**Role: COMPLETE — shipped.** The frontend is live in `frontend/` and has since been reworked
+by Gate 2 Track D. Two details here have moved on: the **5k dev graph is retired**, and the
+code is on React 19. Where this and the code disagree, **the code wins**; for current status
+see [`../NEXT.md`](../NEXT.md). *(Read "Approved, ready for implementation planning" until
+2026-07-27.)*
 **Scope:** The web frontend only, built and validated locally against the existing Python/FastAPI API on the 5k graph. AWS packaging, deploy, and CI/CD are deferred to a separate Stage-3b infra spec.
 
 Parent design: [`2026-07-19-artist-path-alpha-design.md`](./2026-07-19-artist-path-alpha-design.md). Where this spec and the parent disagree, the reason is recorded inline (§1) — the parent predates the Stage-2 decision to build the API in Python.

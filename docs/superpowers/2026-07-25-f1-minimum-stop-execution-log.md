@@ -1,6 +1,8 @@
 # Execution log — F1, every journey gets at least one stop, 2026-07-25
 
-**Role: ACTIVE.** The retained record of the F1 implementation. Distilled from the
+**Role: COMPLETE.** The retained record of the F1 implementation. **F1 was discharged
+2026-07-26** — its condition was an observation and the observation happened; see
+[`NEXT.md`](NEXT.md), which owns status. *(This log read `Role: ACTIVE` until 2026-07-27.)* Distilled from the
 subagent-driven ledger at `.superpowers/sdd/2026-07-25-f1-minimum-stop/progress.md`,
 which is **gitignored and now deleted** — this document is what survives.
 

@@ -56,6 +56,24 @@ never copy a number into the log.
 
 ### A2. Write the handoff note
 
+**Start from this header, verbatim.** It is a template rather than a rule because the rule
+already existed, in two places, and ten consecutive handoffs dropped it anyway — every one
+written from 2026-07-26 on. Nothing decided to stop; freeform writing simply stopped emitting
+it, which no rule can prevent and a template does:
+
+```markdown
+# Handoff — <what completed>, <YYYY-MM-DD>
+
+**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+[`<previous handoff>`](<previous handoff>) on next actions. It does **not** state project
+status: for that read [`NEXT.md`](NEXT.md), which owns it.
+```
+
+Then **go back and edit the previous handoff's role line** to name this one as its successor,
+and say on which axis — *next actions only*, *status*, or *everything*. A chain where each
+link only points backwards cannot be read forwards, and a reader who lands mid-chain from a
+citation has no way to know they are not at the end.
+
 Thirty lines, aimed at a session that has never seen this work:
 
 - Which documents are now wrong, and in which direction
@@ -115,6 +133,22 @@ that clears the item with no work.
 This is cheap *because it happens at deferral time*, not here. The closeout check is
 two mechanical questions: does every open finding have a condition, and has any
 condition now come due?
+
+**Do not stop at the first question — it is the one that always gets answered.** Re-test each
+condition against reality: `ls` the file it names, check the gate state in `NEXT.md`, look at
+whether the rework happened. **A satisfied condition that nobody read is indistinguishable
+from an open item**, and it stays open indefinitely because every future closeout also only
+answers the first question.
+
+> Worked example, and it is why this paragraph exists. `builder/README.md is missing` carried
+> a well-formed condition — "written, or explicitly declined, before Gate 1 closes". The file
+> was written **two days before Gate 1 closed**. It then sat open in two handoffs until a
+> full-project audit found it on 2026-07-27. The condition was never the weak part. Nothing
+> was scheduled to read it.
+
+When a condition has come due, **strike the deferral in place where it lives** — struck, not
+deleted, with the date and what satisfied it. Deleting it destroys the evidence that it was
+tracked and discharged rather than forgotten.
 
 ### A4. The default-flip check
 
@@ -203,7 +237,24 @@ subagent's rather than the session's; see "Who runs B1" below.**
 
 ### B1. Documentation audit
 
-Dispatch the `doc-auditor` agent. It reports; it does not edit.
+**Run `scripts/docs-lint.sh` first. Paste its output.** Six mechanical checks in about ninety
+seconds: role markers, map completeness, dead relative links, plans claiming to be live,
+duplicate bare identifiers, restated figures. Hard failures must be fixed before the PR;
+candidates go to the auditor as input.
+
+Then dispatch the `doc-auditor` agent, **telling it the lint already ran** so it spends its
+budget on the semantic half. It reports; it does not edit.
+
+**Scope it to the diff** — the documents this work changed, plus every document citing them.
+A full-corpus audit is a separate, deliberate act that needs partitioning; see the agent's
+own Scope section.
+
+> **A green lint is not a clean audit, and neither replaces the other.** The lint exists
+> because the 2026-07-27 sweep found that ~three quarters of its own findings were
+> mechanically checkable and that every convention violated was *already written down* — the
+> failure was that nothing checked the prose. It also exists because that sweep's single most
+> valuable finding, a provenance banner attached to the one section it did not cover, is
+> invisible to any script. Run both, and never report one as the other.
 
 **This step is not skippable, and that is a finding rather than a caution.** It has now
 been weighed and nearly skipped twice, and on both occasions running it immediately found

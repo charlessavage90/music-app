@@ -1,7 +1,12 @@
 # Pre-Track-2 structural guards — implementation plan
 
-**Role: ACTIVE plan. Written 2026-07-23 by an outside consulting session, after the
-Track 2 pre-registration landed and before any Track 2 work begins.**
+> **⚠ EXECUTED 2026-07-23 — do not execute again.** All six guards landed before the Track 2
+> sweep ran; outcomes are in
+> [`../2026-07-23-repair-and-retune-execution-log.md`](../2026-07-23-repair-and-retune-execution-log.md).
+> Where that log and this plan disagree, **the log wins**.
+
+**Role: COMPLETE. Written 2026-07-23 by an outside consulting session, after the
+Track 2 pre-registration landed and before any Track 2 work began.**
 
 This plan is **not** Track 2. It is a short, self-contained chunk of structural work that
 must land **between** the Track 2 pre-registration and the Track 2 sweep, because two of

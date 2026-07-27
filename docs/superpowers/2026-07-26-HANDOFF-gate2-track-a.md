@@ -1,5 +1,10 @@
 # Handoff — Gate 2 design, team review, and the Track A plan, 2026-07-26
 
+**Role: HISTORICAL — superseded on status by [`2026-07-26-HANDOFF-track-a-complete.md`](2026-07-26-HANDOFF-track-a-complete.md).**
+Its "no code has been written" line is false. Everything else, including its do-not-revert
+list, stands. *(Role line added 2026-07-27; this file and nine sibling handoffs had silently
+dropped the marker the earlier eight carried.)*
+
 **Written at a clean seam. Nothing is in flight** — no subagents running, no background
 jobs, no half-written directories, no processes owned, no servers left listening. Committed
 and pushed; PR #27 on branch `gate2-deploy-and-telemetry`. Aimed at a session that has never

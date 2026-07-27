@@ -187,5 +187,9 @@ pre-registration budgeted.
 - **`jesus2099` / entity-filter coverage** — belongs inside the existing filter as a third
   predicate; due at the rebuild seam.
 - **The discovery report** for non-artist entities — due before Gate 2 → 3.
-- **`builder/README.md` is missing** — success condition: written, or explicitly declined,
-  before Gate 1 closes. Still open, still pre-existing.
+- ~~**`builder/README.md` is missing** — success condition: written, or explicitly declined,
+  before Gate 1 closes. Still open, still pre-existing.~~
+  **✅ DISCHARGED — written 2026-07-25 (`0d8b999`), before Gate 1 closed.** The file landed
+  roughly an hour *after* this handoff was committed, so "still open" was true at the moment
+  of writing and false within the hour. Struck 2026-07-27 by the full-project doc audit; the
+  same deferral is struck in `2026-07-24-HANDOFF-track2-complete.md`.

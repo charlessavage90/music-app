@@ -1,6 +1,13 @@
 # HANDOFF — Track 2, at the fame-proxy/sweep seam, 2026-07-24
 
-**Role: ACTIVE, short-lived by design.** Written at a **clean seam** (the fame-proxy track
+> **⚠ SUPERSEDED 2026-07-24** by [`2026-07-24-HANDOFF-track2-scorer.md`](2026-07-24-HANDOFF-track2-scorer.md),
+> and through it by the Track 2 completion handoff. **Its one open unit — the sweep — has
+> since run to completion and returned `R0`, a full null.** Statements below that no
+> factorial arm has run are **false**. Retained for audit; **do not act on it.** Banner added
+> 2026-07-27: every sibling in this chain got one at supersession time and this file was
+> missed.
+
+**Role: HISTORICAL, short-lived by design.** Written at a **clean seam** (the fame-proxy track
 concluded; pre-registration amendment A11 committed), for a session picking up the **sweep**
 cold. Records only what is not already in the record. Read the execution log first:
 

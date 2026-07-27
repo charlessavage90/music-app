@@ -1,6 +1,9 @@
 # Alpha Rollout Roadmap
 
 **Date:** 2026-07-21
+**Role: AUTHORITATIVE and ACTIVE** — the gate structure and phase ordering. **This is the one
+plan in `plans/` that is still live**; every other is executed and says so. It holds no
+figures, and it does not state current status: for that read [`../NEXT.md`](../NEXT.md).
 **Supersedes:** ad-hoc phase lists. This is the current plan of record.
 **Inputs:** three expert reviews (architect / QA / ML-graph), an ML follow-up review, an objective path-quality harness, and the first real dogfooding session.
 

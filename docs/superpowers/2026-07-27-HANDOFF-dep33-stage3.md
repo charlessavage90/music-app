@@ -1,5 +1,11 @@
 # Handoff — `DEP-33` remediation stage 3 complete, 2026-07-27
 
+**Role: COMPLETE — superseded on next actions** by the Track C *handoff*,
+[`2026-07-27-HANDOFF-gate2-track-c.md`](2026-07-27-HANDOFF-gate2-track-c.md) (not the Track C
+execution log — `docs/README.md` said "the Track C log" here until 2026-07-27, which points at
+the wrong document). **Still the record of stage 3.** For status read [`NEXT.md`](NEXT.md).
+*(Role line added 2026-07-27.)*
+
 **Written at a planned seam.** The plan named this boundary before any work started
 ([`plans/2026-07-27-dep33-blocker-remediation.md`](plans/2026-07-27-dep33-blocker-remediation.md)
 §3), and stage 3 reached it. **Nothing is in flight** — no subagents running, no background

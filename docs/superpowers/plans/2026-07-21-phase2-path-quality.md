@@ -1,5 +1,13 @@
 # Phase 2 — Path Quality Implementation Plan
 
+> **⚠ Role: HISTORICAL. EXECUTED 2026-07-22 — do not execute again.** All 16 tasks ran on
+> branch `phase2-path-quality`. **Tasks 14–16 were superseded mid-flight** by
+> [`2026-07-22-phase2-revised-plan.md`](2026-07-22-phase2-revised-plan.md); the record of
+> what actually happened is [`../2026-07-21-phase2-execution-log.md`](../2026-07-21-phase2-execution-log.md),
+> and where it and this plan disagree, **the log wins**. Figures quoted below are superseded
+> by [`../findings/2026-07-21-scoring-adjudication.md`](../findings/2026-07-21-scoring-adjudication.md),
+> which owns them; do not read a number off this plan.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Fix two structural defects in the similarity graph (an inverted neighbour cap and a percentile clip that makes ~half of all routed hops free), then decide the damping question against metrics that cannot be gamed the way the previous ones were.

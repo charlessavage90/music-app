@@ -156,5 +156,9 @@ Gate 2 → 3 content-curation condition is in the roadmap.
   the clip test must be name-matching (the naive form fails on `jesus2099`). Due before Gate 2 → 3.
 - **D6, PR-B, O-series** — the sweep's reporting items, now largely moot: there is no winner to
   report. **D4 and D7 are discharged.**
-- **`builder/README.md` is missing** (doc-audit finding, pre-existing and not caused by this
-  work). Success condition: written, or explicitly declined, before Gate 1 closes.
+- ~~**`builder/README.md` is missing** (doc-audit finding, pre-existing and not caused by this
+  work). Success condition: written, or explicitly declined, before Gate 1 closes.~~
+  **✅ DISCHARGED — `builder/README.md` was written 2026-07-25 (`0d8b999`), before Gate 1
+  closed, so the condition was met on time.** Nothing recorded it at the time; struck here
+  2026-07-27 by the full-project doc audit. This entry was accurate when written — the file
+  landed about an hour after this handoff was committed.

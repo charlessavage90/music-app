@@ -1,5 +1,10 @@
 # Handoff — `DEP-33` remediation, stages 1–2 complete, 2026-07-27
 
+**Role: COMPLETE — superseded on next actions** by [`2026-07-27-HANDOFF-dep33-stage3.md`](2026-07-27-HANDOFF-dep33-stage3.md)
+and, through it, by [`2026-07-27-HANDOFF-gate2-track-c.md`](2026-07-27-HANDOFF-gate2-track-c.md).
+**Still the record of stages 1–2**, and it carries the one reversed do-not-revert claim from
+Track B. For status read [`NEXT.md`](NEXT.md). *(Role line added 2026-07-27.)*
+
 **Written at a planned seam.** The plan named this boundary before any work started
 ([`plans/2026-07-27-dep33-blocker-remediation.md`](plans/2026-07-27-dep33-blocker-remediation.md)
 §3), and stage 2 reached it. **Nothing is in flight** — no subagents running, no background

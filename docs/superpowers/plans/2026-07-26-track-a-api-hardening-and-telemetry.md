@@ -1,5 +1,9 @@
 # Track A — API hardening and telemetry Implementation Plan
 
+> **⚠ EXECUTED 2026-07-26 — do not execute again.** Outcomes are in
+> [`../2026-07-26-gate2-track-a-execution-log.md`](../2026-07-26-gate2-track-a-execution-log.md)
+> (`TKA-`), PR #27, merged. Where that log and this plan disagree, **the log wins**.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: use **superpowers:executing-plans** for this plan — **inline, not subagent-driven.** Steps use checkbox (`- [ ]`) syntax for tracking.
 >
 > **Why inline, stated so the next session does not have to re-derive it.** The tasks are

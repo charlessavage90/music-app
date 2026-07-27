@@ -1,6 +1,11 @@
 # Plan — `DEP-33` blocker remediation, then Track C
 
-**Role: ACTIVE plan.** Identifier series `RMD-`, verified disjoint from `DEP-`, `TR-`,
+> **⚠ EXECUTED 2026-07-27 — do not execute again.** All three stages ran; outcomes are in
+> [`../2026-07-27-dep33-remediation-execution-log.md`](../2026-07-27-dep33-remediation-execution-log.md)
+> (`RMD-`), PRs #30 and #32, merged, and Track C — the cutover — landed after it (PR #33).
+> Where that log and this plan disagree, **the log wins**.
+
+**Role: COMPLETE.** Identifier series `RMD-`, verified disjoint from `DEP-`, `TR-`,
 `TKA-`, `TKD-`, `TKB-`, `FMS-`, `CNS-`, `ARC-`, `SEC-`, `QUA-`, `FRO-`, `BYP-` by
 repo-wide grep, 2026-07-27 (no matches).
 

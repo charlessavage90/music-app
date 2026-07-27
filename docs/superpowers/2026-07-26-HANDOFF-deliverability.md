@@ -1,5 +1,12 @@
 # Handoff — synthesis and deliverability, 2026-07-26
 
+**Role: COMPLETE.** The last handoff in the low-connection line of work; nothing supersedes it,
+and it deliberately names no successor — **path-quality work is PAUSED by owner decision and
+this is not a resume signal.** If it ever resumes, the entry point is
+[`2026-07-26-RESUME-BRIEF-path-quality.md`](2026-07-26-RESUME-BRIEF-path-quality.md). This is
+also the document that records **`F1` as discharged and Gate 1 as complete**; for current
+status read [`NEXT.md`](NEXT.md). *(Role line added 2026-07-27.)*
+
 **Written at a clean seam. Nothing is in flight** — no dispatched subagents still
 running, no background jobs, no half-written directories, no processes owned. Committed
 and pushed; PR #25. Aimed at a session that has never seen this work.

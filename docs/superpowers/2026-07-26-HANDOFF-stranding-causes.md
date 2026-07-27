@@ -1,5 +1,9 @@
 # Handoff — why the low-degree artists are low-degree, 2026-07-26
 
+**Role: COMPLETE — superseded on next actions** by [`2026-07-26-HANDOFF-deliverability.md`](2026-07-26-HANDOFF-deliverability.md).
+**Still the record of the stranding-causes seam**, and its do-not-revert list stands.
+Path-quality work is PAUSED and this is not a resume signal. *(Role line added 2026-07-27.)*
+
 **Written at a clean seam. Nothing is in flight** — no dispatched subagents, no
 background jobs, no half-written directories. Committed and pushed; PR #25.
 Aimed at a session that has never seen this work.

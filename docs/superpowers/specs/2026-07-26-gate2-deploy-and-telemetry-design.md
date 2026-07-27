@@ -1,14 +1,17 @@
 # Gate 2 — AWS deploy and bypass telemetry (design)
 
 **Role: ACTIVE.** The governing design for Gate 2's deploy, owner-approved 2026-07-26.
-**⚠ STATUS, 2026-07-26 — `Track A` IS IMPLEMENTED; the rest is not.** The original
-"nothing here is implemented yet" is **struck**, not deleted, because several §4 and §5
-passages are written in the future tense and still read as pending. Built and merged:
-`DEP-10`–`DEP-13`, `DEP-25`–`DEP-28`, `DEP-30`, `/health`, and both telemetry events;
-**`DEP-16` is DISCHARGED** by the round-trip verification. Record:
-[`../2026-07-26-gate2-track-a-execution-log.md`](../2026-07-26-gate2-track-a-execution-log.md)
-(`TKA-`), PR #27. **Tracks D, B and C remain unbuilt**, and `DEP-33` still requires the
-team review re-run against the CDK stack before cutover. Where this and the roadmap
+
+> **⚠ STATUS lives in [`../NEXT.md`](../NEXT.md), not here — read it there.** All of Gate 2's
+> tracks (A, D, B, `DEP-33` stages 1–3, and Track C, the cutover) are **DONE** as of
+> 2026-07-27 and the app is live. Several §4 and §5 passages are still written in the future
+> tense and read as pending; they are not. **This banner said "Tracks D, B and C remain
+> unbuilt" until 2026-07-27**, when a full-project doc audit found it — the drift this
+> project created `NEXT.md` to prevent, in a document that restated status rather than
+> pointing at it. Per-track records: `TKA-` (PR #27), `TKD-` (#28), `TKB-` (#29), `RMD-`
+> (#30, #32), Track C (#33).
+
+Where this and the roadmap
 ([`../plans/2026-07-21-alpha-rollout-roadmap.md`](../plans/2026-07-21-alpha-rollout-roadmap.md))
 disagree on Gate 2 sequencing, **this document governs** — the two deviations are named
 explicitly in §1 and §8.

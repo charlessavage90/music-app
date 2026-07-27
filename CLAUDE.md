@@ -2,19 +2,22 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Role: AUTHORITATIVE** for working conventions — commands, architecture, and how work is done
+here. It owns **no figures and no status**; both are pointed at below, never restated.
+
 ## Orient here first
 
 | Question | Answer |
 |---|---|
 | **Which documents can I trust?** | [`docs/README.md`](docs/README.md) — the documentation map. It classifies every doc by role and names which are superseded. **Read it before citing anything in `docs/`.** |
-| **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks 27 prior claims upheld/overturned/unresolved. |
+| **Where do scoring / path-quality figures live?** | Exactly one file: `docs/superpowers/findings/2026-07-21-scoring-adjudication.md`. Cite it by section; **never restate its numbers anywhere else.** Its §6 marks prior claims upheld/overturned/unresolved — **read the count off the table, never off a citation of it**: three documents said "27" until 2026-07-27, by which point it was 45. |
 | **What is the next action?** | Exactly one file: [`docs/superpowers/NEXT.md`](docs/superpowers/NEXT.md). **Read it before starting anything; never restate it here or anywhere else.** It owns gate state, what is closed and must not be re-planned, what is waiting on the owner, and the path-quality pause — and it is rewritten at every `closeout`, which is why it is a pointer and not a summary: this row went three tracks stale as a summary. **Two standing facts it cannot go stale on:** the next action is the **owner's call**, and **path-quality work is PAUSED** by his decision — resuming it is his trigger, never a session's. |
 | **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `top1pct_degree_frac`, "payload", `degree_hub_penalty`, `w_degree_hub` are all top-1%-by-*degree*; they were named `hubfrac` / `hub_penalty` / `w_hub` until 2026-07-23, and older documents and every script under `builder/analysis/` still say so — mapping in `builder/analysis/README.md`); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile** — `pop_raw` is a value, never a rank; see §2.12 for the extent of the gap. Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
 | **What does the owner mean by "better"?** | `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — calibration for the blind listening test, this project's strongest evidence class. Read it before running one, interpreting a verdict, **or designing anything that scores a path**. It records **preference, not evidence**: never read a threshold off it, but a criterion that contradicts it is wrong. Worked example — the Track 2 pre-registration's C4 exists because value 2 rules out fewer-but-obscurer. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
-| **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. Also `doc-auditor.md`, project-local and shadowing the global one; `closeout` B1 dispatches it, and `docs/README.md` says what it checks. |
+| **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. Also `doc-auditor.md`, project-local and shadowing the global one; `closeout` B1 dispatches it, and `docs/README.md` says what it checks. And `consultant.md` — **not a subagent**: it is launched as its own session (`claude --agent consultant`), reads only the committed record, and gives one reasoned recommendation on one named decision. Its whole value is that its inputs are the owner's, not another session's paraphrase, so a working session must never dispatch it. |
 
 **Never use as context:** `docs/how-we-map-similar-artists.md` (a narrative journal) and
 anything under `docs/reference/` (third-party material). Neither is maintained as

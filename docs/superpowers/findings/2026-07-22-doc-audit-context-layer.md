@@ -1,5 +1,16 @@
 # Documentation Audit: Context and Navigation Layer
 
+<!-- docs-lint: skip-links — this report QUOTES MEMORY.md's and CLAUDE.md's own link
+     syntax verbatim as evidence, including links to memory files that live outside the
+     repo (`roadmap-pointer.md`, `project-state.md`, `path-quality.md`) and a proposed
+     `superseded-docs.md` that was never written. They are quotations, not navigation, and
+     cannot resolve from here by design. Marker added 2026-07-27 when docs-lint first ran. -->
+
+**Role: COMPLETE.** A frozen `doc-auditor` report. *(Role line added 2026-07-27.)* It audited
+a navigation layer that has since been rewritten — `docs/README.md` did not exist when this
+was written — so read it as history. Spot checks in the 2026-07-27 full-project audit confirm
+its HIGH findings were resolved by that rewrite rather than silently dropped.
+
 **Date:** 2026-07-22
 **Scope:** 14 files (6 in repo + 8 in memory directory)
 **Audit criteria:** Dead references, duplicated figures (ONE-RECORD-RULE), contradictions, cold-start navigation, structure, gaps, staleness

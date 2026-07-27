@@ -1,0 +1,11 @@
+# Shell scripts MUST stay LF, even on Windows.
+#
+# This repo is developed on Windows with `core.autocrlf=true`, which rewrites LF to CRLF on
+# checkout. For a shell script that is fatal and non-obvious: the shebang becomes
+# `#!/usr/bin/env bash\r`, and bash reports `bad interpreter: ... ^M` — or, worse, a `\r`
+# lands mid-script and produces a syntax error pointing at the wrong line.
+#
+# The session that added `scripts/docs-lint.sh` did not hit this, because its own working
+# copy was written with LF and never re-checked-out. A fresh clone would have. Added
+# 2026-07-27, when `git add` warned "LF will be replaced by CRLF" on the new scripts.
+*.sh text eol=lf
