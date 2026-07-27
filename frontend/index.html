@@ -7,7 +7,36 @@
     <title>Artist Path</title>
   </head>
   <body>
-    <div id="root"></div>
+    <!--
+      FRO-7 / RMD-12. Anything that stops the JavaScript arriving renders the
+      same thing without this: a white screen with no text, which a friend
+      cannot describe and nobody can diagnose from a report of it.
+
+      It MUST live inside #root. React's createRoot clears the container it
+      owns, so placed here it disappears the moment the app mounts; placed
+      beside #root it would sit under the app forever. A test asserts both
+      halves — that a browser running no JS at all sees words, and that none of
+      this survives the mount.
+    -->
+    <div id="root">
+      <div
+        style="
+          font-family: system-ui, sans-serif;
+          max-width: 32rem;
+          margin: 4rem auto;
+          padding: 0 1rem;
+          line-height: 1.5;
+        "
+      >
+        <h1>Artist Path</h1>
+        <p>Loading&hellip;</p>
+        <p>
+          If this message is still here in a few seconds, the app did not load.
+          Reload the page. If reloading does not fix it, the site needs
+          attention — tell whoever sent you the link.
+        </p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
