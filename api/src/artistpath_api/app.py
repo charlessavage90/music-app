@@ -57,6 +57,18 @@ def create_app(
     )
 
     if cfg.origin_secret:
+        # SEC-1: compared as `str`, hmac.compare_digest raises TypeError on any
+        # non-ASCII character, so one byte >127 in this header returned 500 and
+        # wrote a traceback into the telemetry log group — an unauthenticated
+        # remote way to do that. It failed closed, so it was never a bypass.
+        #
+        # Comparing BYTES is the fix. It is NOT a simplification of the hmac
+        # call, which QUA-13 records as a permanent review-only invariant with
+        # no test behind it: the constant-time comparison must stay.
+        #
+        # Starlette decodes header values as latin-1, so encoding back with
+        # latin-1 round-trips the exact bytes that arrived on the wire.
+        expected_secret = cfg.origin_secret.encode("utf-8")
 
         @app.middleware("http")
         async def require_origin_secret(request: Request, call_next):
@@ -64,8 +76,11 @@ def create_app(
             # directly rather than through CloudFront, so gating it fails every
             # deploy and rolls it back. See health() below, which is deliberately
             # not under /api for the same reason.
+            supplied_secret = request.headers.get("x-origin-secret", "").encode(
+                "latin-1", "replace"
+            )
             if request.url.path != "/health" and not hmac.compare_digest(
-                request.headers.get("x-origin-secret", ""), cfg.origin_secret
+                supplied_secret, expected_secret
             ):
                 return JSONResponse({"detail": "forbidden"}, status_code=403)
             return await call_next(request)

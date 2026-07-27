@@ -80,10 +80,22 @@ in the process would have caught it, and it is the third instance of this shape 
 
 ## §4 Claims that must NOT be reverted
 
-1. **`ARTISTPATH_CORS_ORIGINS` is set to the empty string, not omitted.** Omitting it yields
-   `config.py`'s dev default `http://localhost:5173`. Same-origin means no preflight ever
-   fires, so nothing would reveal the mistake (`TR-8`). A test holds it and **goes red when
-   the line is deleted** — checked by mutation.
+1. ⚠️ **CORRECTED 2026-07-27 — this claim was true of the template and false of production.
+   See `RMD-6`.** Original text, preserved: *"`ARTISTPATH_CORS_ORIGINS` is set to the empty
+   string, not omitted. Omitting it yields `config.py`'s dev default `http://localhost:5173`.
+   Same-origin means no preflight ever fires, so nothing would reveal the mistake (`TR-8`). A
+   test holds it and goes red when the line is deleted — checked by mutation."*
+
+   **Every sentence of that is accurate, and the deployed API was still serving
+   `http://localhost:5173`.** An empty-valued environment variable does not reach a running
+   App Runner service: `detect-stack-drift` reported the variable `REMOVE`'d, and a live probe
+   of the origin's `/health` returned `access-control-allow-origin: http://localhost:5173`,
+   with a made-up origin correctly getting no header. **The instruction cannot be satisfied by
+   this mechanism.** The guarantee has moved to `ApiConfig.cors_origins`, which now defaults to
+   empty so *absence* is safe, and `detect-stack-drift` is now a runbook gate — it is the only
+   instrument here that can see a template-vs-AWS gap. Record:
+   [`2026-07-27-dep33-remediation-execution-log.md`](2026-07-27-dep33-remediation-execution-log.md)
+   §0 `RMD-D`.
 2. **The origin-secret middleware exempts `/health`.** App Runner's health checker reaches
    the origin directly and cannot be given the header; gating it fails every deploy and rolls
    it back. Also held by a mutation-checked test.

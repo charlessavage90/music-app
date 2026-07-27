@@ -64,15 +64,26 @@ class ApiConfig:
     search_limit: int = 10
 
     # --- CORS (stage 3a) ------------------------------------------------
-    # Allowed browser origins for the SPA. Dev default is the Vite server;
-    # production sets ARTISTPATH_CORS_ORIGINS (comma-separated) to the
-    # deployed frontend origin. Not needed when the SPA is proxied same-origin.
+    # Allowed browser origins for the SPA, comma-separated in
+    # ARTISTPATH_CORS_ORIGINS. The default is EMPTY — no origin is allowed.
+    #
+    # It defaulted to http://localhost:5173 until 2026-07-27, and that default
+    # was live in PRODUCTION, because the fix TR-8 prescribed does not survive
+    # contact with AWS: the stack sets this variable to the empty string, and an
+    # empty-valued environment variable does not reach a running App Runner
+    # service. Measured — drift detection reported it REMOVE'd, and the deployed
+    # API echoed access-control-allow-origin: http://localhost:5173 back to a
+    # live probe, with a made-up origin correctly getting nothing.
+    #
+    # So the guarantee lives HERE now, where absence is safe, rather than in a
+    # value something downstream has to carry successfully. Nothing is lost in
+    # dev: frontend/vite.config.ts proxies /api to :8000, so the browser only
+    # ever talks to the Vite origin and no CORS header is involved either way.
+    # A genuinely cross-origin deployment sets the variable explicitly.
     cors_origins: tuple[str, ...] = field(
         default_factory=lambda: tuple(
             o.strip()
-            for o in os.environ.get(
-                "ARTISTPATH_CORS_ORIGINS", "http://localhost:5173"
-            ).split(",")
+            for o in os.environ.get("ARTISTPATH_CORS_ORIGINS", "").split(",")
             if o.strip()
         )
     )

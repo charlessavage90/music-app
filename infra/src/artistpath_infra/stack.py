@@ -138,6 +138,26 @@ class ArtistpathStack(cdk.Stack):
         self.artifact_bucket.grant_read(instance_role, deploy.graph_key)
         self.clip_table.grant(instance_role, "dynamodb:GetItem", "dynamodb:PutItem")
 
+        # SEC-5: without this the account default applies — max 25 instances.
+        # The origin secret rejects requests INSIDE the container, after App
+        # Runner has already counted them and scaled on them, so DEP-17's claim
+        # that the gate stands between a forwarded link and an unbounded bill is
+        # true through CloudFront and false at the API origin. That is the same
+        # shape TR-7 corrected once already: a control that protects the front
+        # door while the origin answers on its own public URL.
+        #
+        # 2 is chosen for friends-and-family, where the expected concurrent load
+        # is a handful of people. It is a COST CEILING, not a capacity estimate:
+        # if the app is ever shared wider, raise it deliberately rather than
+        # discovering it as latency.
+        self.autoscaling = apprunner.CfnAutoScalingConfiguration(
+            self,
+            "ApiAutoScaling",
+            auto_scaling_configuration_name="artistpath-api",
+            min_size=1,
+            max_size=2,
+        )
+
         graph_uri = f"s3://{self.artifact_bucket.bucket_name}/{deploy.graph_key}"
 
         def _env(name: str, value: str):
@@ -167,15 +187,41 @@ class ArtistpathStack(cdk.Stack):
                                 _env("ARTISTPATH_GRAPH", graph_uri),
                                 _env("ARTISTPATH_GRAPH_SHA256", deploy.graph_sha256),
                                 _env("ARTISTPATH_CLIP_CACHE", "dynamo"),
+                                # ARC-5: passed through rather than left to
+                                # match ApiConfig.clip_table_name's default by
+                                # coincidence. Until 2026-07-27 "artistpath-clips"
+                                # was a literal in two packages with NOTHING
+                                # binding them, and a rename on either side is a
+                                # runtime error on the first clip lookup, in
+                                # production, that no test in either package can
+                                # catch. Reading it off the construct means the
+                                # table cannot be renamed without this moving.
+                                _env("ARTISTPATH_CLIP_TABLE", self.clip_table.table_name),
                                 _env("ARTISTPATH_ORIGIN_SECRET", deploy.origin_secret),
-                                # Present and EMPTY. Unset means the dev default
-                                # http://localhost:5173 (TR-8), and same-origin
-                                # means no preflight ever fires to reveal it.
+                                # Present and EMPTY — but this is now a
+                                # statement of intent, NOT the guarantee.
+                                #
+                                # RMD-6, measured 2026-07-27: an empty-valued
+                                # environment variable does not reach a running
+                                # App Runner service. Drift detection reported
+                                # this one REMOVE'd, and the deployed API was
+                                # serving config.py's old dev default. TR-8's
+                                # prescription — "set it to empty, never omit
+                                # it" — cannot be satisfied by this mechanism.
+                                #
+                                # The guarantee moved to ApiConfig.cors_origins,
+                                # which now defaults to empty, so ARRIVING or
+                                # NOT is equally safe. Keep this line anyway: it
+                                # documents the intent, and a cross-origin
+                                # deployment would set a real value here.
                                 _env("ARTISTPATH_CORS_ORIGINS", ""),
                             ],
                         )
                     ),
                 ),
+            ),
+            auto_scaling_configuration_arn=(
+                self.autoscaling.attr_auto_scaling_configuration_arn
             ),
             instance_configuration=(
                 apprunner.CfnService.InstanceConfigurationProperty(

@@ -23,12 +23,37 @@ DEPLOY = DeployInputs(
 )
 
 
-def template() -> Template:
+def template(**overrides) -> Template:
+    """Synthesise the stack, optionally varying one DeployInputs field.
+
+    The overrides exist for a specific class of vacuous test (QUA-7, QUA-9): an
+    assertion that a value equals the one DEPLOY happens to carry passes just as
+    well when the stack hardcodes it and ignores its input. Synthesising twice
+    with different inputs is what tells those apart.
+    """
     app = cdk.App()
+    deploy = replace(DEPLOY, **overrides) if overrides else DEPLOY
     stack = ArtistpathStack(
-        app, "Test", deploy=DEPLOY, env=cdk.Environment(region="us-east-1")
+        app, "Test", deploy=deploy, env=cdk.Environment(region="us-east-1")
     )
     return Template.from_stack(stack)
+
+
+def _resource_by_logical_id_prefix(type_: str, prefix: str) -> dict:
+    """CDK appends a hash to logical ids, so match on the construct id prefix.
+
+    Needed because `has_resource_properties` passes if ANY resource of the type
+    matches — which is QUA-6: the versioning assertion below was satisfied by
+    either bucket, so moving versioning from the artifact bucket to the SPA
+    bucket passed.
+    """
+    matches = {
+        lid: r
+        for lid, r in template().find_resources(type_).items()
+        if lid.startswith(prefix)
+    }
+    assert len(matches) == 1, f"expected one {prefix}* {type_}, got {list(matches)}"
+    return next(iter(matches.values()))
 
 
 def test_the_stack_synthesises():
@@ -59,9 +84,36 @@ def test_the_storage_only_stage_omits_the_service_and_the_distribution():
 def test_the_artifact_bucket_is_versioned_because_it_is_the_only_second_copy():
     # TR-9: acceptance.py refuses to rebuild the adopted artifact, so the only
     # other copy is gitignored on one OneDrive-synced machine.
-    template().has_resource_properties(
-        "AWS::S3::Bucket",
-        {"VersioningConfiguration": {"Status": "Enabled"}},
+    #
+    # QUA-6: this asserted only that SOME bucket was versioned, so moving
+    # versioning to the SPA bucket — which is rebuilt from source on every
+    # deploy and needs none — passed. Both halves are named now.
+    artifact = _resource_by_logical_id_prefix("AWS::S3::Bucket", "ArtifactBucket")
+    spa = _resource_by_logical_id_prefix("AWS::S3::Bucket", "SpaBucket")
+
+    assert artifact["Properties"]["VersioningConfiguration"] == {"Status": "Enabled"}
+    assert "VersioningConfiguration" not in spa["Properties"]
+
+
+def test_the_stateful_resources_are_retained_and_the_rebuildable_one_is_not():
+    # QUA-6: nothing asserted RETAIN, so flipping the artifact bucket to DESTROY
+    # passed — and that bucket holds the only second copy of the adopted graph
+    # (TR-9). The clip table and the image repository are retained for the same
+    # reason the deploy is staged: losing them is expensive and silent.
+    for type_, prefix in [
+        ("AWS::S3::Bucket", "ArtifactBucket"),
+        ("AWS::DynamoDB::Table", "ClipTable"),
+        ("AWS::ECR::Repository", "ApiRepo"),
+    ]:
+        assert _resource_by_logical_id_prefix(type_, prefix)["DeletionPolicy"] == (
+            "Retain"
+        ), f"{prefix} must be RETAIN"
+
+    # The SPA bucket is the deliberate exception: it is rebuilt from source by
+    # `s3 sync` on every deploy, so retaining it would only orphan it (ARC-4).
+    assert (
+        _resource_by_logical_id_prefix("AWS::S3::Bucket", "SpaBucket")["DeletionPolicy"]
+        == "Delete"
     )
 
 
@@ -106,13 +158,44 @@ def test_the_service_gets_every_environment_variable_the_api_reads():
 
 
 def test_cors_origins_is_present_and_empty_not_merely_unset():
-    # TR-8: unset yields the dev default http://localhost:5173
-    # (config.py's default_factory). The empty tuple requires setting the
-    # variable TO empty — and same-origin means no preflight ever fires to
-    # reveal the mistake.
+    # TR-8, and this test is CORRECT — it was also not enough, which is the
+    # interesting part.
+    #
+    # RMD-6, 2026-07-27: this assertion passed, the template was right, and
+    # production was still wrong. An empty-valued environment variable does not
+    # reach a running App Runner service, so the deployed API fell back to
+    # config.py's then-default of http://localhost:5173. Nothing in any of the
+    # four packages could see that: the gap is between the template and AWS.
+    #
+    # The guarantee now lives in ApiConfig.cors_origins, which defaults to empty
+    # (see api/tests/test_cors.py). This test keeps holding the template's
+    # intent; `detect-stack-drift` in the runbook's gates is what holds the
+    # deployed reality.
     got = _service_env()
     assert "ARTISTPATH_CORS_ORIGINS" in got
     assert got["ARTISTPATH_CORS_ORIGINS"] == ""
+
+
+def test_the_service_has_a_scaling_ceiling_and_is_wired_to_it():
+    # SEC-5: with no configuration the ACCOUNT default applies — 25 instances.
+    # The origin secret rejects requests inside the container, after App Runner
+    # has counted and scaled on them, so the gate does not bound the bill at the
+    # API origin (the shape TR-7 corrected once already).
+    (logical_id, config) = next(
+        iter(
+            template()
+            .find_resources("AWS::AppRunner::AutoScalingConfiguration")
+            .items()
+        )
+    )
+    assert config["Properties"]["MaxSize"] == 2
+
+    # A configuration the service does not reference bounds nothing — the same
+    # detached-resource shape as QUA-2.
+    (service,) = template().find_resources("AWS::AppRunner::Service").values()
+    assert service["Properties"]["AutoScalingConfigurationArn"] == {
+        "Fn::GetAtt": [logical_id, "AutoScalingConfigurationArn"]
+    }
 
 
 def test_the_health_check_targets_health_not_the_root():
@@ -191,6 +274,53 @@ def test_the_viewer_function_gates_on_the_password_and_rewrites_spa_routes():
     assert "401" in code
 
 
+def _viewer_request_arns(behaviour: dict) -> list:
+    """The viewer-request functions CloudFront will actually run on a behaviour.
+
+    A function that exists in the template but is associated with nothing runs
+    on nothing — which is QUA-2 exactly, and why the substring test above is
+    not enough on its own.
+    """
+    return [
+        association["FunctionARN"]
+        for association in behaviour.get("FunctionAssociations", [])
+        if association["EventType"] == "viewer-request"
+    ]
+
+
+def test_the_password_function_is_attached_to_the_site_itself():
+    # QUA-2, rank 1 of the DEP-33 review and the only blocking finding that is
+    # SILENT. Detaching the association leaves the API gated (it has its own
+    # origin-secret middleware) and the entire site publicly readable, with the
+    # site working perfectly for the owner the whole time. The pre-existing test
+    # above passes on a detached function: it reads the function's source, which
+    # is unchanged by detaching it.
+    #
+    # Measured against the deployed distribution 2026-07-27: the default
+    # behaviour carries exactly one viewer-request function, no Lambda@Edge,
+    # TrustedSigners disabled and TrustedKeyGroups disabled — so this function
+    # is the SOLE access control on the site, and nothing else would catch its
+    # removal.
+    (function_id,) = template().find_resources("AWS::CloudFront::Function").keys()
+    expected = {"Fn::GetAtt": [function_id, "FunctionARN"]}
+
+    assert _viewer_request_arns(_distribution()["DefaultCacheBehavior"]) == [expected]
+
+
+def test_the_password_function_is_attached_to_the_api_behaviour_too():
+    # The other half of QUA-2. /api/* is a separate behaviour with its own
+    # associations, so gating the site and gating the API are two independent
+    # facts and each needs its own assertion. The origin-secret middleware is a
+    # second layer here, not a substitute: it stops App Runner's public URL
+    # being a way round (TR-7), and says nothing about the edge.
+    (function_id,) = template().find_resources("AWS::CloudFront::Function").keys()
+    expected = {"Fn::GetAtt": [function_id, "FunctionARN"]}
+
+    (api_behaviour,) = _distribution()["CacheBehaviors"]
+    assert api_behaviour["PathPattern"] == "/api/*"
+    assert _viewer_request_arns(api_behaviour) == [expected]
+
+
 def test_the_api_origin_carries_the_shared_secret_header():
     custom = [o for o in _distribution()["Origins"] if "CustomOriginConfig" in o]
     assert custom, "no App Runner origin found"
@@ -210,6 +340,11 @@ def test_the_artifact_bucket_is_not_an_origin():
 def test_the_billing_alarm_uses_the_threshold_it_was_given():
     # DEP-31: DEP-17's success condition is "observe a month of billing", and
     # an alarm is how you observe without remembering to look.
+    #
+    # QUA-7: asserting Threshold == 25.0 while DEPLOY carries 25.0 passes even
+    # when the stack hardcodes 25.0 and ignores its input entirely — which was
+    # one of the review's green mutations. Synthesising a second time with a
+    # different value is what distinguishes them.
     template().has_resource_properties(
         "AWS::CloudWatch::Alarm",
         {
@@ -218,6 +353,30 @@ def test_the_billing_alarm_uses_the_threshold_it_was_given():
             "Threshold": 25.0,
             "ComparisonOperator": "GreaterThanThreshold",
         },
+    )
+    template(billing_alarm_usd=99.0).has_resource_properties(
+        "AWS::CloudWatch::Alarm", {"Threshold": 99.0}
+    )
+
+
+def test_the_image_tag_and_container_port_are_what_the_service_was_given():
+    # QUA-9: neither was asserted, so pinning the image to `latest` regardless
+    # of image_tag, and changing the container port, both passed. The tag is the
+    # whole of the runbook's rollback story (ARC-6, ARC-14) and a wrong port
+    # fails every health check.
+    def _image_repository(**overrides) -> dict:
+        (service,) = template(**overrides).find_resources(
+            "AWS::AppRunner::Service"
+        ).values()
+        return service["Properties"]["SourceConfiguration"]["ImageRepository"]
+
+    assert _image_repository()["ImageConfiguration"]["Port"] == "8000"
+
+    # The identifier is an Fn::Join, so the tag is asserted as a substring of
+    # the rendered intrinsic — and asserted to MOVE with its input.
+    assert ":test" in str(_image_repository()["ImageIdentifier"])
+    assert ":other-tag" in str(
+        _image_repository(image_tag="other-tag")["ImageIdentifier"]
     )
 
 
@@ -232,3 +391,38 @@ def test_the_clip_table_matches_what_DynamoClipCache_writes():
             "BillingMode": "PAY_PER_REQUEST",
         },
     )
+
+
+def test_the_clip_table_name_is_the_one_the_api_looks_for():
+    # QUA-8: the name was unasserted, so renaming the table passed — and the
+    # failure is a runtime error on the first clip lookup, in production.
+    assert (
+        _resource_by_logical_id_prefix("AWS::DynamoDB::Table", "ClipTable")[
+            "Properties"
+        ]["TableName"]
+        == "artistpath-clips"
+    )
+
+
+def test_the_service_is_told_the_table_name_rather_than_guessing_it():
+    # ARC-5: the name was a literal in two packages — here and as
+    # ApiConfig.clip_table_name's default — with nothing binding them. It is now
+    # passed through as an environment variable read off the construct, so the
+    # table cannot be renamed without the service's variable moving with it.
+    #
+    # This is what closes the gap that the test above cannot: infra/ cannot
+    # import api/, so no infra test can see config.py's default. What it CAN do
+    # is stop the API needing that default at all.
+    (table_id,) = [
+        lid
+        for lid in template().find_resources("AWS::DynamoDB::Table")
+        if lid.startswith("ClipTable")
+    ]
+    got = _service_env()
+
+    assert "ARTISTPATH_CLIP_TABLE" in got, "the service must not rely on the default"
+    # A Ref, not a copied literal: CloudFormation resolves it from the table
+    # itself, so the two cannot diverge even in principle.
+    assert got["ARTISTPATH_CLIP_TABLE"] == {"Ref": table_id}, got[
+        "ARTISTPATH_CLIP_TABLE"
+    ]

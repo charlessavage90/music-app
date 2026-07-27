@@ -68,7 +68,7 @@ Ordered by *what breaks and how silently*, not by reviewer.
 | 6 | `QUA-3` | **The origin-secret middleware is tested on one endpoint.** | Narrowing it to exempt `/track` passed 185 tests — and `/track` is the endpoint whose unrate-limited catalogue calls are the gate's stated reason for existing. Narrowing it to GET-only leaves `POST /api/path`, the expensive Dijkstra, ungated. |
 | 7 | `ARC-2` | **Design §5's 90-day CloudWatch retention was never implemented and is in no tracking document.** App Runner's log groups default to **Never Expire**. | The completeness-failure shape `CLAUDE.md` names: not decided against, simply dropped. Telemetry is `DEP-2`'s entire sink and it accumulates unbounded under a $25 alarm measuring the wrong thing. CDK cannot create these groups; it is two runbook commands. |
 | 8 | `ARC-4` | **Hardcoded physical names (`artistpath-clips`, `artistpath-api`) plus `RETAIN` means the stack cannot be recreated.** | Any teardown orphans two globally-named resources and the next `cdk deploy` fails `AlreadyExists`, discovered at the worst moment. |
-| 9 | `QUA-4` | **The runbook's own gate figure is wrong** — it says 17 infra tests; there are 18. | With no CI the runbook *is* the regression gate. A wrong expected count trains the operator to stop reading counts, which is the only thing that would catch a deleted assertion. Found by `ARC-10` too. |
+| 9 | `QUA-4` | ✅ **ALREADY FIXED — do not re-do.** The runbook's own gate figure was wrong — it said 17 infra tests; there are 18. | With no CI the runbook *is* the regression gate. A wrong expected count trains the operator to stop reading counts, which is the only thing that would catch a deleted assertion. Found by `ARC-10` too. **Closed in `6f49ab9`** (the closeout that committed this review), which **deleted** the expected counts rather than correcting them — the same reasoning, taken one step further. `infra/README.md` §7 now states the gate is that each suite exits 0. |
 | 10 | `FRO-4` | **No step anywhere proves the SPA fallback works**, and §8 contains no authenticated request to the site at all. | It proves the gate rejects; it never proves it admits. `TR-5` is the finding two reviewers found independently and it would ship unverified. |
 
 **Also fix before the URL is shared** (security's own pick, not formally blocking):
@@ -111,10 +111,15 @@ about `infra/app.py`. The next graph adoption will flip one and not the other (`
 
 ## §4 Cheap fixes, not blocking
 
+> ✅ **`ARC-9`/`QUA-5` are ALREADY FIXED — do not re-do.** Closed in `6f49ab9` alongside
+> `QUA-4`: `infra/README.md` §7's four gates now each start
+> `cd "$(git rev-parse --show-toplevel)/<pkg>"`, so they execute as pasted.
+
 `ARC-5` clip table name is a literal in two packages with nothing binding them (one line:
 pass `table_name` through as an env var, which also closes half of `ARC-4`) · `ARC-6`
 `image_tag` defaults to `latest`, contradicting the runbook's own rule · `ARC-7` graph key
-and sidecar are independent inputs · `ARC-9`/`QUA-5` the runbook's `cd` chain · `ARC-11` the
+and sidecar are independent inputs · ~~`ARC-9`/`QUA-5` the runbook's `cd` chain~~ (fixed,
+above) · `ARC-11` the
 actual secret file (`infra/.env.deploy`) is documented nowhere · `ARC-14` `max_image_count=5`
 bounds the rollback window · `ARC-15` `VITE_API_BASE` is inlined at build time and §6 does
 not check it (verified latent, not live) · `SEC-2` the origin-secret gate **fails open** if

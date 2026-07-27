@@ -53,9 +53,16 @@ task-by-task improvisation holds, and several fixes interact — `ARC-5` closes 
 
 Additional to the Track A and Track D lists, which remain live.
 
-1. **`ARTISTPATH_CORS_ORIGINS` is set to the empty string, not omitted** (`stack.py`).
-   Omitting it yields `config.py`'s dev default `http://localhost:5173`, and same-origin
-   means no preflight ever fires to reveal it (`TR-8`). Mutation-verified.
+1. ⚠️ **REVERSED 2026-07-27 on measurement — do not restore the old mechanism.** Original:
+   *"`ARTISTPATH_CORS_ORIGINS` is set to the empty string, not omitted (`stack.py`). Omitting
+   it yields `config.py`'s dev default `http://localhost:5173`, and same-origin means no
+   preflight ever fires to reveal it (`TR-8`). Mutation-verified."*
+
+   True of the template, false of production: an empty-valued environment variable never
+   reaches the running App Runner service, so the deployed API was serving the dev default.
+   Measured by drift detection **and** by a live probe with a negative control. The guarantee
+   now lives in `ApiConfig.cors_origins`, which defaults to empty — **`stack.py`'s line stays
+   as intent, and the API's default is what holds it.** See `RMD-6`.
 2. **The origin-secret middleware exempts `/health`** (`api/…/app.py`). App Runner's health
    checker reaches the origin directly and cannot be given the header; gating it fails every
    deploy. Mutation-verified.

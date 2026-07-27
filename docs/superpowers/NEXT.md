@@ -10,33 +10,44 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-26 (night), after Track B.**
+**Last updated: 2026-07-27, after `DEP-33` blocker remediation stages 1–2.**
 
 ---
 
 ## Next
 
-**The ten blocking findings from the `DEP-33` review, in the order given, then Track C.**
-The owner's instruction, 2026-07-26: the blockers are the first work of the next session,
-not a menu.
+**Stage 3 of the `DEP-33` remediation, then Track C.** PR #30 on `gate2-dep33-blockers`.
 
-1. [`findings/2026-07-26-track-b-cdk-review.md`](findings/2026-07-26-track-b-cdk-review.md)
-   — **§2 is the work queue, already ranked** by what breaks and how silently.
-2. [`2026-07-26-HANDOFF-track-b-complete.md`](2026-07-26-HANDOFF-track-b-complete.md) — the
-   current handoff. Reading order, seven must-not-revert claims, and what the finishing
-   session knew that is not otherwise written down.
-3. [`2026-07-26-gate2-track-b-execution-log.md`](2026-07-26-gate2-track-b-execution-log.md)
-   — §1 owns the deployed identity, §4 what must not be reverted, §6 the Windows traps.
+**The `DEP-33` blockers are mostly discharged.** Stages 1 and 2 are done and pushed
+(`RMD-0`…`RMD-10`), each at a planned seam. Read in this order:
 
-**Write a plan before executing.** Ten findings across four packages, and several interact —
-`ARC-5` closes half of `ARC-4`; `QUA-1`, `FRO-5` and `ARC-3` are the same missing test.
+1. [`2026-07-27-HANDOFF-dep33-stages-1-2.md`](2026-07-27-HANDOFF-dep33-stages-1-2.md) — the
+   current handoff. What was reversed, what must not be reverted back, what is still live.
+2. [`plans/2026-07-27-dep33-blocker-remediation.md`](plans/2026-07-27-dep33-blocker-remediation.md)
+   — §3 names the seams; stage 3 is `RMD-11`…`RMD-13`.
+3. [`2026-07-27-dep33-remediation-execution-log.md`](2026-07-27-dep33-remediation-execution-log.md)
+   — per-task reasoning, the mutation results, and the closeout's `A3`/`A4` tables.
+
+**Stage 3 is `RMD-11`, `RMD-12`, `RMD-13`** — the three findings that hit the first real
+user: nobody is told the username, a returning visitor gets a blank page after any redeploy,
+and no step anywhere proves the gate *admits* rather than only rejects. `RMD-13` cannot
+finish before Track C.
 
 **Then Track C** — sync the SPA to the bucket. The site is not usable until it lands: the
 bucket is empty, so the site currently serves the API and a password prompt. That is
 expected, not a defect.
 
-**Two things are owed before anyone else gets the URL:** the `DEP-33` review outcome acted
-on, and `TR-5`'s SPA fallback, which the deploy could not verify.
+> **⚠ One defect is fixed in source and STILL LIVE in production.** `RMD-6`: the deployed API
+> serves `config.py`'s old dev CORS default, because an empty-valued environment variable
+> never reaches App Runner. It closes on the next deploy, not before. Exposure is small — only
+> `/health` is readable without the origin secret — but it is not zero. Detail in the handoff.
+>
+> **That deploy will now refuse unless `ARTISTPATH_DEPLOY_IMAGE_TAG` is set** (`ARC-6`). This
+> is deliberate and is a change to the deploy procedure; `infra/README.md` §1 has it.
+
+**Two things are still owed before anyone else gets the URL:** the remaining `DEP-33` items
+(stage 3), and `TR-5`'s SPA fallback, which the deploy could not verify and which `RMD-13`
+is written to check.
 
 ---
 
@@ -45,7 +56,7 @@ on, and `TR-5`'s SPA fallback, which the deploy could not verify.
 | Gate | State |
 |---|---|
 | **Gate 1 — personal use** | **DONE and discharged.** `F1`, its last item, closed 2026-07-26. One live exception below (`BYP-13`). |
-| **Gate 2 — friends & family** | **In progress.** Tracks A, D and B are DONE; the API is **deployed on AWS** (PR #29, branch `gate2-track-b-infra`). Track C is next, behind the ten blockers. |
+| **Gate 2 — friends & family** | **In progress.** Tracks A, D and B are DONE; the API is **deployed on AWS** (PR #29). `DEP-33` blocker remediation stages 1–2 are done (PR #30); stage 3, then Track C. |
 | **Gate 3 — public** | Not started. |
 
 A team review is scheduled at each gate boundary after a period of real use — staff the
