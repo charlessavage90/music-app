@@ -1471,19 +1471,21 @@ Expected: `RUNNING`. If it is `CREATE_FAILED`, read the App Runner application l
 CloudWatch before changing anything: the two likely causes are a checksum mismatch (the
 upload in Task 6 was partial) and a missing artifact key, and both say so explicitly.
 
-- [ ] **Step 3: `/health` through CloudFront reports the artifact the sidecar names**
+- [ ] **Step 3: `/health` reports the artifact the sidecar names**
+
+> **⚠ CORRECTED during Task 9.** This step originally curled `/health` **through
+> CloudFront**. That is wrong and would have failed for a reason unrelated to what it
+> tests: **only `/api/*` is routed to App Runner**, so `/health` — deliberately not under
+> `/api` — is not reachable through the distribution at all. Through CloudFront it hits the
+> SPA bucket and comes back as `index.html`. It is checked at the **App Runner origin URL**,
+> which is where App Runner's own health checker reaches it, and the Task 2 middleware
+> exempts it so no header is needed.
 
 ```bash
-SITE=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
-  --query "Stacks[0].Outputs[?OutputKey=='SiteUrl'].OutputValue" --output text)
-curl -s -u "artistpath:$ARTISTPATH_DEPLOY_PASSWORD" "$SITE/api/../health" -o /dev/null -w "%{http_code}\n"
-curl -s -u "artistpath:$ARTISTPATH_DEPLOY_PASSWORD" "https://<app-runner-url>/health"
+API=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
+  --query "Stacks[0].Outputs[?OutputKey=='ApiOriginUrl'].OutputValue" --output text)
+curl -s "$API/health"
 ```
-
-`/health` is deliberately not under `/api`, so it is served by the default behaviour and the
-SPA-fallback rule leaves it alone (it has no extension — **verify this**; if the function
-rewrites `/health` to `/index.html`, add `/health` to the same exemption the `/api/` prefix
-gets, and add a test for it in Task 9).
 
 - [ ] **Step 4: Verify identity against the sidecar mechanically, as in Task 3 Step 5.**
       Same script, pointed at the deployed URL. This is design §9's `/health` check and

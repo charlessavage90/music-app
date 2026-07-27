@@ -7,10 +7,14 @@ docs/superpowers/plans/2026-07-26-track-b-infrastructure.md.
 
 from __future__ import annotations
 
+import base64
 from dataclasses import dataclass
+from pathlib import Path
 
 import aws_cdk as cdk
 from aws_cdk import aws_apprunner as apprunner
+from aws_cdk import aws_cloudfront as cloudfront
+from aws_cdk import aws_cloudfront_origins as origins
 from aws_cdk import aws_dynamodb as dynamodb
 from aws_cdk import aws_ecr as ecr
 from aws_cdk import aws_iam as iam
@@ -171,3 +175,92 @@ class ArtistpathStack(cdk.Stack):
             ),
         )
         self.service.node.add_dependency(instance_role)
+
+        expected_auth = "Basic " + base64.b64encode(
+            f"artistpath:{deploy.site_password}".encode()
+        ).decode()
+        function_code = (
+            (Path(__file__).parent / "viewer_function.js")
+            .read_text()
+            .replace("__EXPECTED_AUTH__", expected_auth)
+        )
+        viewer_fn = cloudfront.Function(
+            self,
+            "ViewerFunction",
+            code=cloudfront.FunctionCode.from_inline(function_code),
+            runtime=cloudfront.FunctionRuntime.JS_2_0,
+        )
+        fn_association = [
+            cloudfront.FunctionAssociation(
+                function=viewer_fn,
+                event_type=cloudfront.FunctionEventType.VIEWER_REQUEST,
+            )
+        ]
+
+        api_origin = origins.HttpOrigin(
+            self.service.attr_service_url,
+            protocol_policy=cloudfront.OriginProtocolPolicy.HTTPS_ONLY,
+            # The half of TR-7 that stops App Runner's own public URL being a
+            # way round the gate. Paired with the middleware in api/app.py.
+            custom_headers={"x-origin-secret": deploy.origin_secret},
+        )
+
+        self.distribution = cloudfront.Distribution(
+            self,
+            "Distribution",
+            default_behavior=cloudfront.BehaviorOptions(
+                origin=origins.S3BucketOrigin.with_origin_access_control(
+                    self.spa_bucket
+                ),
+                viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                function_associations=fn_association,
+            ),
+            additional_behaviors={
+                "/api/*": cloudfront.BehaviorOptions(
+                    origin=api_origin,
+                    viewer_protocol_policy=(
+                        cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+                    ),
+                    allowed_methods=cloudfront.AllowedMethods.ALLOW_ALL,
+                    # Caching a re-signed clip URL resurrects C2 (TR-6).
+                    cache_policy=cloudfront.CachePolicy.CACHING_DISABLED,
+                    origin_request_policy=cloudfront.OriginRequestPolicy(
+                        self,
+                        "ApiOriginRequestPolicy",
+                        query_string_behavior=(
+                            cloudfront.OriginRequestQueryStringBehavior.all()
+                        ),
+                        # Authorization is deliberately NOT forwarded: the
+                        # browser attaches it to same-origin fetches, the
+                        # viewer function checks it at the edge, and it has no
+                        # business reaching the API.
+                        header_behavior=(
+                            cloudfront.OriginRequestHeaderBehavior.allow_list(
+                                "x-journey-id", "content-type"
+                            )
+                        ),
+                        cookie_behavior=cloudfront.OriginRequestCookieBehavior.none(),
+                    ),
+                    function_associations=fn_association,
+                ),
+            },
+            default_root_object="index.html",
+            # NO error_responses: it is distribution-level and would rewrite
+            # the API's own errors too. The SPA fallback is in the viewer
+            # function, which is per-behaviour (TKB-2).
+        )
+
+        cdk.CfnOutput(
+            self, "SiteUrl", value=f"https://{self.distribution.domain_name}"
+        )
+        cdk.CfnOutput(
+            self, "ApiOriginUrl", value=f"https://{self.service.attr_service_url}"
+        )
+        cdk.CfnOutput(
+            self, "ArtifactBucketName", value=self.artifact_bucket.bucket_name
+        )
+        cdk.CfnOutput(self, "SpaBucketName", value=self.spa_bucket.bucket_name)
+        cdk.CfnOutput(self, "EcrRepositoryUri", value=self.repo.repository_uri)
+        cdk.CfnOutput(
+            self, "DistributionId", value=self.distribution.distribution_id
+        )

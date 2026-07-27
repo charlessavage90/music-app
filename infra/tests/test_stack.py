@@ -126,6 +126,64 @@ def test_the_two_app_runner_roles_are_not_merged():
     assert "tasks.apprunner.amazonaws.com" in principals
 
 
+def _distribution() -> dict:
+    (dist,) = template().find_resources("AWS::CloudFront::Distribution").values()
+    return dist["Properties"]["DistributionConfig"]
+
+
+def test_the_api_behaviour_disables_caching_or_C2_comes_back():
+    # TR-6: CloudFront's default would cache the freshly re-signed clip URL
+    # and resurrect "clips die after a while", closed 2026-07-25 and marked
+    # do-not-re-plan. It would present as a regression in closed work.
+    CACHING_DISABLED = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    (api_behaviour,) = _distribution()["CacheBehaviors"]
+    assert api_behaviour["PathPattern"] == "/api/*"
+    assert api_behaviour["CachePolicyId"] == CACHING_DISABLED
+    assert "POST" in api_behaviour["AllowedMethods"]
+
+
+def test_the_api_behaviour_forwards_the_query_string_and_the_journey_header():
+    (policy,) = template().find_resources("AWS::CloudFront::OriginRequestPolicy").values()
+    config = policy["Properties"]["OriginRequestPolicyConfig"]
+    # Without this every search returns whatever `q` was cached first (TR-6).
+    assert config["QueryStringsConfig"]["QueryStringBehavior"] == "all"
+    # CloudFront strips unlisted headers, which would silently drop DEP-6.
+    assert "x-journey-id" in str(config["HeadersConfig"]).lower()
+
+
+def test_the_distribution_has_no_custom_error_responses():
+    # TKB-2: errorResponses is distribution-level, so mapping 403/404 to
+    # index.html would rewrite the API's own 404 and the origin-secret 403
+    # into an HTML page with status 200, and the SPA would parse HTML as
+    # JSON. The SPA fallback lives in the viewer function instead, which is
+    # attached per behaviour.
+    assert "CustomErrorResponses" not in _distribution()
+
+
+def test_the_viewer_function_gates_on_the_password_and_rewrites_spa_routes():
+    (fn,) = template().find_resources("AWS::CloudFront::Function").values()
+    code = fn["Properties"]["FunctionCode"]
+    assert "authorization" in code
+    assert "/index.html" in code
+    assert "401" in code
+
+
+def test_the_api_origin_carries_the_shared_secret_header():
+    custom = [o for o in _distribution()["Origins"] if "CustomOriginConfig" in o]
+    assert custom, "no App Runner origin found"
+    headers = {
+        h["HeaderName"].lower(): h["HeaderValue"]
+        for o in custom
+        for h in o.get("OriginCustomHeaders", [])
+    }
+    assert headers.get("x-origin-secret") == "test-origin-secret"
+
+
+def test_the_artifact_bucket_is_not_an_origin():
+    # TR-7: or the graph is a 14 MB download to anyone who guesses the name.
+    assert "ArtifactBucket" not in str(_distribution()["Origins"])
+
+
 def test_the_clip_table_matches_what_DynamoClipCache_writes():
     # clips.py's _put_sync writes Item={"mbid": ..., "ttl": ...}. A mismatch
     # here is a runtime error that no test in api/ can catch.
