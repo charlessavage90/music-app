@@ -276,6 +276,16 @@ that is how the drift began.
   Memory holds **pointers and working preferences, not figures**.
 - **`.claude/agents/ml-graph-analyst.md`** — a reusable analysis-only subagent for graph,
   scoring, and metric questions. It has no `Edit` tool by design.
+- **`scripts/docs-lint.sh`** — the mechanical half of a documentation audit: role markers,
+  this map's own completeness, dead relative links, plans claiming to be live, duplicate bare
+  identifiers, restated figures. ~90 seconds, deterministic. **`closeout` B1 runs it before
+  dispatching `doc-auditor`.** A document that legitimately *quotes* other documents' link
+  syntax may opt out of the link check with `<!-- docs-lint: skip-links — reason -->`; one
+  file does. **A green lint is not a clean audit** — it cannot see whether a banner is
+  attached to the right section, which is what the 2026-07-27 sweep's best finding was.
+  Its positive control is `scripts/docs-lint-selftest.sh`, which proves every hard check can
+  go red; it caught a real bug on first run (`grep -i executed` matches "not yet executed",
+  so the check would have cleared the exact plan it exists to catch).
 - **`.claude/agents/consultant.md`** — **not a subagent, and a working session must never
   dispatch it as one.** It is launched as its own session (`claude --agent consultant --tools
   Read,Grep,Glob`), reads the committed project record but never the code, and gives one

@@ -48,8 +48,31 @@ impression. Do not shortcut them into a judgement.
 
 ## Scope
 
-Your caller should give you a file list. If they did not, propose one and say so in your
-report. Sensible default scope:
+**Run `scripts/docs-lint.sh` first, and say in your report that you did.** It covers six
+mechanical checks — role markers, map completeness, dead relative links, plans claiming to be
+live, duplicate bare identifiers, restated figures — deterministically and in about ninety
+seconds. **Do not re-do by reading what it already did by grepping.** Spend your budget on
+what it structurally cannot see: whether a banner is attached to the right section, whether a
+caveat's substance is still true, whether an expansion has drifted from its registered
+wording, and absence. Its candidate lists (checks 4–6) are *input to your judgement*, not
+findings — adjudicate them.
+
+**A green lint is not a clean audit, and must never be reported as one.** It could not have
+caught the 2026-07-27 audit's most valuable finding.
+
+**Default scope is the DIFF, not the corpus.** Unless your caller says otherwise, audit the
+documents changed in the git range they name, **plus every document that cites one of them**
+(`grep -rl` the changed filenames across `docs/`). The citing half is not optional: that is
+where supersession rots, and it is what a changed-files-only audit misses.
+
+**A full-corpus audit is a deliberate, rare act** — it is what the 2026-07-27 sweep was, and
+it needed ten parallel agents because the corpus is ~11× a single-pass budget. If a caller
+asks for one, say plainly that it needs partitioning and how you would split it, rather than
+skimming the whole thing alone. If they gave no range at all, propose the diff scope and say
+so in your report.
+
+When a caller does give an explicit file list, that list wins. Sensible default scope for a
+full audit, when one is genuinely wanted:
 
 - Entry points: root `README`, `CLAUDE.md` / `AGENTS.md`, contributing guides
 - Design and decision records: specs, ADRs, findings, RFCs

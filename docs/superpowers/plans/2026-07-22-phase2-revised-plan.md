@@ -6,7 +6,7 @@ Tasks 1–13 of that plan stand as executed. Tasks 14–16 were amended here and
 this document and the original disagree, **this document governs**; where it and
 [`../2026-07-21-phase2-execution-log.md`](../2026-07-21-phase2-execution-log.md) disagree,
 **the log wins**. (This banner read `Role: ACTIVE` until 2026-07-27, contradicting
-[`../README.md`](../README.md), which has classified it historical throughout.)
+[`docs/README.md`](../../README.md), which has classified it historical throughout.)
 
 **This is a redirection, issued by the project owner after a full review of the Phase 2
 record.** The sections marked **CLOSED** are decisions already taken. They are not open

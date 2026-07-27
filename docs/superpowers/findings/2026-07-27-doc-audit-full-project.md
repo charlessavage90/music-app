@@ -279,6 +279,50 @@ without asking. All are recorded above so they can be disagreed with.
 
 ---
 
+## 8a. What changed so this sweep does not need repeating
+
+Owner-approved 2026-07-27, after the audit. The diagnosis that drove it: **every convention
+this audit found violated was already written down** — the role-marker rule in two places,
+the map's completeness claim on its own line 3. **The failure was never missing prose, so more
+prose was never the fix.** Sorting the findings showed roughly three quarters were
+mechanically checkable.
+
+1. **`scripts/docs-lint.sh`** — six checks, ~90 seconds, deterministic: role markers, map
+   completeness, dead relative links, plans claiming to be live, duplicate bare identifiers,
+   restated figures. It would have caught ~22 of this audit's ~30 findings at zero context
+   cost. Opt-out for documents that *quote* link syntax: `<!-- docs-lint: skip-links -->`.
+2. **`scripts/docs-lint-selftest.sh`** — the positive control, per the standing rule that a
+   green from a new instrument is not evidence until it has been shown to go red. **It earned
+   itself on the first run**: `grep -i executed` matches "**not yet** executed", so check 4
+   would have cleared `track-b-infrastructure.md` — the exact plan it exists to catch. Found
+   by the control, not by review, which is the whole argument for having one.
+3. **`doc-auditor`'s default scope is now the diff**, plus every document citing a changed one.
+   Full-corpus audits are declared rare and deliberate, and the agent must say a corpus this
+   size needs partitioning rather than skim it alone. **This is the change that prevents the
+   ten-agent sweep from being the routine answer.**
+4. **`closeout` A2 carries the handoff header verbatim**, and requires editing the *previous*
+   handoff to name its successor. The `Role:` line lapsed across ten consecutive handoffs
+   because freeform writing stopped emitting it; a template fixes what a rule did not.
+5. **`closeout` A3 re-tests deferral conditions** rather than only checking each has one
+   (`DAF-9`), and strikes satisfied ones in place rather than deleting them.
+6. **`closeout` B1 runs the lint first** and tells the auditor, so the expensive instrument
+   spends its budget on the semantic half.
+
+**Standing-layer cost: zero.** The unconditionally loaded layer is `CLAUDE.md` +
+`MEMORY.md`'s index + every skill and agent `description:` line. None of the six touches any
+of them — a script is not context, and `SKILL.md` and agent bodies load on invocation and
+dispatch only. `CLAUDE.md` is byte-identical across this change.
+
+**What was deliberately not done: no new rule was added to `CLAUDE.md`.** Adding one would
+have discharged the concern by restating a rule that already existed and was already being
+violated — the exact failure mode the standing-layer budget exists to price.
+
+**`DAF-10` — the limit of all of this, stated so nobody mistakes green for clean.** A lint
+shifts the volume, not the ceiling. It could not have found `DAF-3`, this audit's most
+valuable finding, which required reading a banner, understanding what it disclaimed, and
+noticing it did not match where two other documents send readers. `doc-auditor` remains
+necessary; it is now aimed at the part it is good at.
+
 ## 8. What this audit did not cover
 
 - **Slice G (legacy plans, ~10,250 lines) ran targeted checks only** — status markers,
