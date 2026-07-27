@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+tests/
+scratch/
+scratch_server.log
+eval/
+*.bin
+# Task 11's runbook writes one here transiently for the dependency scan
+# (TKB-3); it must never enter the image.
+requirements.txt

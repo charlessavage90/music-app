@@ -107,6 +107,12 @@ artists and `jesus2099` — a MusicBrainz *editor account*, not a musician. Any
 recommendation you make must be accompanied by real decoded paths you have actually
 read. Conversely, eyeballing alone missed hub-seeking entirely for weeks.
 
+**A ranking is not a path, and improving one can worsen the other.** Neighbour rankings
+once improved under a change whose *routed paths* got worse; reading top-N lists and
+calling it evidence produced a wrong finding that survived into a spec. The app ships
+paths, so a neighbour-list improvement is a hypothesis about paths, never a measurement of
+them. Decode the path.
+
 **The owner's ear outranks your metrics, and explaining a divergence is your job.**
 Blind listening tests have decided every major call in this project; the offline metrics
 have decided none. The two metrics built specifically to guard path coherence agreed with

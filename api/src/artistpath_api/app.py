@@ -4,11 +4,13 @@ app is testable without loading a real artifact or touching the network.
 
 from __future__ import annotations
 
+import hmac
 import time
 
 import httpx
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from artistpath_api.artifact_source import load_graph
 from artistpath_api.clips import (
@@ -53,6 +55,20 @@ def create_app(
         allow_methods=["GET", "POST"],
         allow_headers=["content-type", "x-journey-id"],
     )
+
+    if cfg.origin_secret:
+
+        @app.middleware("http")
+        async def require_origin_secret(request: Request, call_next):
+            # /health is exempt: App Runner's health checker reaches the origin
+            # directly rather than through CloudFront, so gating it fails every
+            # deploy and rolls it back. See health() below, which is deliberately
+            # not under /api for the same reason.
+            if request.url.path != "/health" and not hmac.compare_digest(
+                request.headers.get("x-origin-secret", ""), cfg.origin_secret
+            ):
+                return JSONResponse({"detail": "forbidden"}, status_code=403)
+            return await call_next(request)
 
     def artist_out(node: int) -> ArtistOut:
         return ArtistOut(
