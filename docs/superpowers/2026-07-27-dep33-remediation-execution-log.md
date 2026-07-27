@@ -270,3 +270,67 @@ plan stops being the plan:
 |---|---|---|
 | Hardcoded non-cryptographic secret (`CWE-547`) | `infra/tests/test_stack.py:18` — the `DEPLOY` fixture's constants | Judged a false positive: these are synth-time test constants, and `test_viewer_function.py`'s hardcoded credential is deliberate and documented. Closes if a real credential ever enters a test file |
 | Path traversal (`CWE-23`) | `infra/app.py:18` — `ARTISTPATH_DEPLOY_SIDECAR` flows into `pathlib.Path` | Operator-controlled at deploy time on the operator's own machine, so not attacker-reachable. **Fold into `RMD-9`**, which already opens `infra/app.py` for `ARC-7`'s graph-key/sidecar coupling |
+
+### `RMD-5` — the cheap gaps closed, and the mutation set re-run
+
+**Four vacuous assertions strengthened in place** rather than supplemented, because a
+near-duplicate beside a weak test leaves the weak one to be trusted later:
+
+- **`QUA-6`** — the versioning test used `has_resource_properties`, which passes if **any**
+  bucket matches, so moving versioning to the SPA bucket passed. Both buckets are now named
+  via a logical-id-prefix helper, and the SPA bucket is asserted **not** versioned. A second
+  test asserts `RETAIN` on the artifact bucket, clip table and image repository, and `Delete`
+  on the SPA bucket — the deliberate exception, since it is rebuilt by `s3 sync` every deploy.
+- **`QUA-7`** — asserting `Threshold == 25.0` while `DEPLOY` carries `25.0` passes when the
+  stack hardcodes it. `template()` now takes overrides, and the test synthesises a second time
+  at `99.0`.
+- **`QUA-8`** — the table name is asserted. **`ARC-5` is not closed by this**: the literal
+  still exists twice, here and in `config.py`, and `infra/` cannot import `api/`. The comment
+  says so and points at `RMD-9`.
+- **`QUA-9`** — port asserted, and the image tag asserted to **move with its input**, same
+  technique as `QUA-7`.
+
+**Then the whole mutation set re-run**, via a harness that applies one mutation, runs that
+package's suite, and restores the file in a `finally` — so a crash cannot leave the tree
+mutated.
+
+**16 mutations, 0 missed.** Twelve the review recorded as green are now red; four it recorded
+as caught are still caught.
+
+| | result |
+|---|---|
+| the 12 previously-green mutations | **all RED** |
+| 4 controls the review recorded as caught | **all still RED** |
+
+**Why controls were included at all:** a suite change can *lose* a property while gaining
+others, and nothing else would notice. Re-running only the failures would have measured the
+fix without measuring the damage.
+
+> **`QUA-4`'s cousin: §1's own arithmetic does not reconcile, and this is recorded rather
+> than papered over.** §1 says *nineteen mutations, ten passed undetected*. Its table lists 10
+> rows marked *no* — but one of those rows is three middleware variants, so the rows describe
+> **12** undetected mutations, not ten. And 12 undetected plus 5 marked caught is **17**, not
+> the stated nineteen: two mutations are not in the table at all. The re-run covers everything
+> the table lists, minus one control (*`authorization` added to the origin-request allow-list*)
+> which CDK's synth raises on — framework-enforced, so there is no suite behaviour to measure.
+> **The two unlisted mutations cannot be re-run, because nothing records what they were.**
+> That is a real gap in the review's record and it belongs to whoever reconciles it; this log
+> does not invent a number for them.
+
+**Stage 1 gate — met.**
+
+| suite | result |
+|---|---|
+| builder | 115 passed |
+| api | 194 passed (was 185) |
+| infra | 30 passed (was 18) |
+| frontend unit | 78 passed |
+| frontend `npm run build` (incl. `tsc`) | green |
+| mutation set | 16/16 caught |
+
+**`npm run test:e2e` was NOT run.** It requires the API listening on `:8000` and nothing in
+this stage touched the frontend. Recorded as not-run rather than reported as passing —
+`DEP-30` makes it mandatory *per deploy*, and stage 1 does not deploy.
+
+**Working tree checked after the harness: no source residue.** The only modified file was
+`infra/tests/test_stack.py`, the intended change.

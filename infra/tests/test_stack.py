@@ -23,12 +23,37 @@ DEPLOY = DeployInputs(
 )
 
 
-def template() -> Template:
+def template(**overrides) -> Template:
+    """Synthesise the stack, optionally varying one DeployInputs field.
+
+    The overrides exist for a specific class of vacuous test (QUA-7, QUA-9): an
+    assertion that a value equals the one DEPLOY happens to carry passes just as
+    well when the stack hardcodes it and ignores its input. Synthesising twice
+    with different inputs is what tells those apart.
+    """
     app = cdk.App()
+    deploy = replace(DEPLOY, **overrides) if overrides else DEPLOY
     stack = ArtistpathStack(
-        app, "Test", deploy=DEPLOY, env=cdk.Environment(region="us-east-1")
+        app, "Test", deploy=deploy, env=cdk.Environment(region="us-east-1")
     )
     return Template.from_stack(stack)
+
+
+def _resource_by_logical_id_prefix(type_: str, prefix: str) -> dict:
+    """CDK appends a hash to logical ids, so match on the construct id prefix.
+
+    Needed because `has_resource_properties` passes if ANY resource of the type
+    matches — which is QUA-6: the versioning assertion below was satisfied by
+    either bucket, so moving versioning from the artifact bucket to the SPA
+    bucket passed.
+    """
+    matches = {
+        lid: r
+        for lid, r in template().find_resources(type_).items()
+        if lid.startswith(prefix)
+    }
+    assert len(matches) == 1, f"expected one {prefix}* {type_}, got {list(matches)}"
+    return next(iter(matches.values()))
 
 
 def test_the_stack_synthesises():
@@ -59,9 +84,36 @@ def test_the_storage_only_stage_omits_the_service_and_the_distribution():
 def test_the_artifact_bucket_is_versioned_because_it_is_the_only_second_copy():
     # TR-9: acceptance.py refuses to rebuild the adopted artifact, so the only
     # other copy is gitignored on one OneDrive-synced machine.
-    template().has_resource_properties(
-        "AWS::S3::Bucket",
-        {"VersioningConfiguration": {"Status": "Enabled"}},
+    #
+    # QUA-6: this asserted only that SOME bucket was versioned, so moving
+    # versioning to the SPA bucket — which is rebuilt from source on every
+    # deploy and needs none — passed. Both halves are named now.
+    artifact = _resource_by_logical_id_prefix("AWS::S3::Bucket", "ArtifactBucket")
+    spa = _resource_by_logical_id_prefix("AWS::S3::Bucket", "SpaBucket")
+
+    assert artifact["Properties"]["VersioningConfiguration"] == {"Status": "Enabled"}
+    assert "VersioningConfiguration" not in spa["Properties"]
+
+
+def test_the_stateful_resources_are_retained_and_the_rebuildable_one_is_not():
+    # QUA-6: nothing asserted RETAIN, so flipping the artifact bucket to DESTROY
+    # passed — and that bucket holds the only second copy of the adopted graph
+    # (TR-9). The clip table and the image repository are retained for the same
+    # reason the deploy is staged: losing them is expensive and silent.
+    for type_, prefix in [
+        ("AWS::S3::Bucket", "ArtifactBucket"),
+        ("AWS::DynamoDB::Table", "ClipTable"),
+        ("AWS::ECR::Repository", "ApiRepo"),
+    ]:
+        assert _resource_by_logical_id_prefix(type_, prefix)["DeletionPolicy"] == (
+            "Retain"
+        ), f"{prefix} must be RETAIN"
+
+    # The SPA bucket is the deliberate exception: it is rebuilt from source by
+    # `s3 sync` on every deploy, so retaining it would only orphan it (ARC-4).
+    assert (
+        _resource_by_logical_id_prefix("AWS::S3::Bucket", "SpaBucket")["DeletionPolicy"]
+        == "Delete"
     )
 
 
@@ -257,6 +309,11 @@ def test_the_artifact_bucket_is_not_an_origin():
 def test_the_billing_alarm_uses_the_threshold_it_was_given():
     # DEP-31: DEP-17's success condition is "observe a month of billing", and
     # an alarm is how you observe without remembering to look.
+    #
+    # QUA-7: asserting Threshold == 25.0 while DEPLOY carries 25.0 passes even
+    # when the stack hardcodes 25.0 and ignores its input entirely — which was
+    # one of the review's green mutations. Synthesising a second time with a
+    # different value is what distinguishes them.
     template().has_resource_properties(
         "AWS::CloudWatch::Alarm",
         {
@@ -265,6 +322,30 @@ def test_the_billing_alarm_uses_the_threshold_it_was_given():
             "Threshold": 25.0,
             "ComparisonOperator": "GreaterThanThreshold",
         },
+    )
+    template(billing_alarm_usd=99.0).has_resource_properties(
+        "AWS::CloudWatch::Alarm", {"Threshold": 99.0}
+    )
+
+
+def test_the_image_tag_and_container_port_are_what_the_service_was_given():
+    # QUA-9: neither was asserted, so pinning the image to `latest` regardless
+    # of image_tag, and changing the container port, both passed. The tag is the
+    # whole of the runbook's rollback story (ARC-6, ARC-14) and a wrong port
+    # fails every health check.
+    def _image_repository(**overrides) -> dict:
+        (service,) = template(**overrides).find_resources(
+            "AWS::AppRunner::Service"
+        ).values()
+        return service["Properties"]["SourceConfiguration"]["ImageRepository"]
+
+    assert _image_repository()["ImageConfiguration"]["Port"] == "8000"
+
+    # The identifier is an Fn::Join, so the tag is asserted as a substring of
+    # the rendered intrinsic — and asserted to MOVE with its input.
+    assert ":test" in str(_image_repository()["ImageIdentifier"])
+    assert ":other-tag" in str(
+        _image_repository(image_tag="other-tag")["ImageIdentifier"]
     )
 
 
@@ -278,4 +359,21 @@ def test_the_clip_table_matches_what_DynamoClipCache_writes():
             "TimeToLiveSpecification": {"AttributeName": "ttl", "Enabled": True},
             "BillingMode": "PAY_PER_REQUEST",
         },
+    )
+
+
+def test_the_clip_table_name_is_the_one_the_api_looks_for():
+    # QUA-8: the name was unasserted, so renaming the table passed — and the
+    # failure is a runtime error on the first clip lookup, in production.
+    #
+    # ARC-5: this literal exists twice, here and as ApiConfig.clip_table_name's
+    # default in api/src/artistpath_api/config.py, with NOTHING binding them.
+    # infra/ cannot import api/, so this test cannot close that gap — it only
+    # pins this side. RMD-9 closes it properly by passing the name through as an
+    # environment variable, at which point this assertion moves with it.
+    assert (
+        _resource_by_logical_id_prefix("AWS::DynamoDB::Table", "ClipTable")[
+            "Properties"
+        ]["TableName"]
+        == "artistpath-clips"
     )
