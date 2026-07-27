@@ -20,7 +20,33 @@ the point.**
 
 ---
 
-## QUEUED — 2026-07-26 (latest) — the search box you caught, on the desktop
+## DONE — 2026-07-26 (latest) — the search box you caught, on the desktop
+
+**DONE 2026-07-26 — PASSED on all five steps, run before the merge.** Exercised by the owner
+against every numbered step individually:
+
+1. **His own defect — confirmed resolved.** Typing over a chosen artist now un-chooses them
+   and "Find path" goes dead until one is picked again.
+2. **No journey changes noticed** on familiar pairs — the step this entry existed for, and
+   the one that matters most, since seven pieces of the app were touched and none of them
+   was supposed to move the routing.
+3. **No change to clips or playback behaviour.**
+4. **The narrow window shows the responsive layout working as intended.**
+5. **A nonsense address shows the new error page with a link back.**
+
+**This is a per-step confirmation, not "nothing surfaced"** — the stronger of the two shapes
+this file records, and the same standard as the Track A entry below rather than the weaker
+passes above it.
+
+**What it does NOT discharge: the deferred phone section at the bottom of this entry.** A
+narrow desktop window exercises the layout *rules*; it cannot exercise Safari's rendering,
+the iOS keyboard, or the home-indicator spacing — the emulator reports that spacing as zero,
+so the code path reserving it remains unexercised by anything. That section keeps its trigger
+(the Gate 2 cutover) and is not closed by this pass.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-07-26 — the search box you caught, on the desktop
 
 **⚠ Corrected before it was run.** This entry originally asked you to open the app on your
 phone. **You cannot** — the app runs only on this desktop and there is no address a phone

@@ -265,7 +265,7 @@ is the owner's call.
 | **B3** vacuous-test check | **Found one.** `TKD-10`; the only closeout item that changed shipped code. |
 | **B4** prose-versus-code | Checked the comments Track D wrote against their code. One was wrong and is fixed as part of `TKD-10` — the `!this.disposed` comment implied the flag was doing the work, and it was not. |
 | **B5** stale-description sweep | **`.claude/` is clean** — the only hit is `closeout/SKILL.md`'s own `npm test` command. `docs/` had one genuinely stale claim, in a **live handoff**: `2026-07-26-HANDOFF-track-a-complete.md` asserted the repo-root `outputDir` "is the `DEP-30` / `TR-17` fix working". Struck in place. **The many per-run suite counts across older logs are NOT restatement violations** — each is a dated measurement inside its own record, not a copy of a figure owned elsewhere. |
-| **C1** use-the-app | Queued, then **corrected** — see `TKD-9`. |
+| **C1** use-the-app | Queued, **corrected** (`TKD-9`), then **RUN AND PASSED on all five steps before the merge** — per-step confirmation, not "nothing surfaced". The owner's own defect is confirmed resolved and no journey changed. **The deferred phone section is NOT discharged by it** and keeps its cutover trigger. |
 | **D1** clean tree | Yes. |
 | **D2** fixtures | **Inapplicable** — no graph, artifact or builder change. |
 | **D3** artifact provenance | **Inapplicable** — nothing adopted or compared. The running API serves the adopted artifact, sha256 owned by `findings/2026-07-23-tiebreak-fix-adoption.md`; not restated here. |
