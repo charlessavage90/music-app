@@ -9,9 +9,166 @@ cannot.
 found, or DONE — nothing found. Do not delete entries; the record of what was exercised is
 the point.**
 
+> **⚠ Standing constraint until the Gate 2 deploy is live: the app runs only on the owner's
+> Windows desktop, so NOTHING HERE MAY ASK FOR A PHONE.** There is no hosted URL, and a phone
+> cannot reach `localhost` on another machine. An entry that asks for a real mobile device is
+> not merely inconvenient — it is unrunnable, and it will sit in this file looking like an
+> untested item when it is actually an impossible one. **Write the mobile half as an explicitly
+> DEFERRED section with its trigger named**, and put only desktop-runnable steps under "what
+> to exercise". Added 2026-07-26, when the Track D entry was queued asking for exactly that.
+> **This constraint expires at cutover** (Gate 2 Track C), not before.
+
 ---
 
-## QUEUED — 2026-07-26 (latest) — six fixes under the bonnet, and one you can see
+## DONE — 2026-07-26 (latest) — the search box you caught, on the desktop
+
+**DONE 2026-07-26 — PASSED on all five steps, run before the merge.** Exercised by the owner
+against every numbered step individually:
+
+1. **His own defect — confirmed resolved.** Typing over a chosen artist now un-chooses them
+   and "Find path" goes dead until one is picked again.
+2. **No journey changes noticed** on familiar pairs — the step this entry existed for, and
+   the one that matters most, since seven pieces of the app were touched and none of them
+   was supposed to move the routing.
+3. **No change to clips or playback behaviour.**
+4. **The narrow window shows the responsive layout working as intended.**
+5. **A nonsense address shows the new error page with a link back.**
+
+**This is a per-step confirmation, not "nothing surfaced"** — the stronger of the two shapes
+this file records, and the same standard as the Track A entry below rather than the weaker
+passes above it.
+
+**What it does NOT discharge: the deferred phone section at the bottom of this entry.** A
+narrow desktop window exercises the layout *rules*; it cannot exercise Safari's rendering,
+the iOS keyboard, or the home-indicator spacing — the emulator reports that spacing as zero,
+so the code path reserving it remains unexercised by anything. That section keeps its trigger
+(the Gate 2 cutover) and is not closed by this pass.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-07-26 — the search box you caught, on the desktop
+
+**⚠ Corrected before it was run.** This entry originally asked you to open the app on your
+phone. **You cannot** — the app runs only on this desktop and there is no address a phone
+could reach. The phone half is now a deferred section at the bottom with its trigger named,
+and everything under "what to exercise" is runnable on the desktop today. The mistake is
+recorded so the next entry does not repeat it.
+
+**Nothing about *which artists* you get has changed.** No routing, no graph, no weighting, no
+cost function. Any journey you built this morning is the same journey now. Seven separate
+things changed and none of them is the router.
+
+**The one you already know about.** You found this today: put two artists in, press "New
+path", type a different artist over one of the pre-filled names, press "Find path" — and it
+took you to the *old* artist. It now refuses. The moment you type over a chosen artist, the
+"Find path" button goes grey until you pick someone from the dropdown again. **The button
+going dead is the whole message** — there is no new wording to look for.
+
+Worth knowing, because it changes what to expect: this was never about the dropdown being
+slow. Waiting for it never helped. Only *clicking a name in it* ever chose an artist, and it
+still is.
+
+**The big change is one you cannot properly see yet.** Until today there was no phone layout
+at all — on an iPhone the artist's name was squeezed to nothing by the two bypass buttons
+sitting beside it. Now those buttons take a row of their own underneath the artist and the
+name gets the full width. **On a desktop nothing should look any different from yesterday**,
+and that is the only half you can check today.
+
+**You can preview the phone layout without a phone, and it is worth thirty seconds:** make
+your browser window very narrow — drag it in until it is roughly a third of your screen — and
+look at a journey. Below a certain width the two bypass buttons should drop onto their own
+line and the artist's name should stay readable. That checks the layout rules themselves. It
+does **not** check anything specific to a real phone, which is why the section at the bottom
+exists.
+
+**Four smaller things you may never see, which is the intention.**
+
+- A search that *failed* now says so, instead of looking identical to a search that found
+  nobody.
+- A request that never comes back now gives up after a while and offers you a "Try again"
+  button, instead of sitting on "Building your path…" forever.
+- A card that cannot actually start playing now stops claiming to play.
+- A mistyped or truncated link now lands on a page with a way back, instead of a blank screen.
+- A phone keyboard should stop "correcting" artist names as you type them. **Not checkable
+  here** — it needs a real phone.
+
+**What to exercise — all of this works on the desktop:**
+
+1. **Your own defect.** Build a journey, press "New path", type over one of the filled-in
+   names, and try to press "Find path" straight away. It should be **greyed out** until you
+   choose a name from the dropdown. Then choose one and confirm it goes where you asked.
+   This is the main thing to confirm.
+2. **Two or three familiar journeys**, as a regression check. These must be unchanged — the
+   most valuable step in this entry, because seven pieces of the app were touched and none of
+   them was supposed to move the routing.
+3. **Play a few clips and press both bypass buttons a few times.** Nothing here was meant to
+   change, including the artwork on each card.
+4. **Drag the window narrow** and look at a journey, per above.
+5. **Type a nonsense address** — something like `localhost:5173/nowhere`. You should get a
+   short page saying there is nothing there, with a link back, rather than a blank screen.
+
+**What "wrong" would look like:** a familiar pair giving you a *different* journey; "Find
+path" staying live after you type over an artist, or staying grey after you pick a new one;
+a card that no longer plays when it used to; missing cover artwork; the bypass buttons
+failing to drop onto their own line in a narrow window; or a nonsense address still showing
+a blank page.
+
+**Known and unchanged:** artists with only one connection still cannot appear in the middle of
+a journey. Clip playback defects are closed and unrelated.
+
+**Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
+
+### ⏳ DEFERRED until the app is live on AWS — the phone half
+
+**Trigger: the Gate 2 cutover, when there is a URL a phone can open.** Not runnable before
+then, and not a pending item against Track D — it is waiting on infrastructure that does not
+exist yet. Three things can only be answered on a real device, and all three are unverified
+today:
+
+1. **Is it actually usable in your hand?** Can you read every artist's name, and hit the right
+   bypass button with a thumb?
+2. **Does the bar at the bottom clear the home indicator**, or is it tucked underneath? The
+   code reserves space for it, but a desktop browser reports that space as zero, so the
+   reservation has never been exercised.
+3. **Does the keyboard leave artist names alone?** Type a few with accents or odd
+   capitalisation. This is an iOS behaviour and cannot be simulated here at all.
+
+**There is one way to bring this forward if you want it**, and it is optional: the dev server
+can be told to accept connections from other devices on your wifi, which would let your phone
+open it directly. It needs a Windows Firewall allow on first run. Say the word and I will set
+it up — otherwise this waits for the deploy, which is the next track anyway.
+
+*Detail: `docs/superpowers/2026-07-26-gate2-track-d-execution-log.md`.*
+
+## DONE — 2026-07-26 — six fixes under the bonnet, and one you can see
+
+**DONE 2026-07-26 — PASSED on every step, and it found a defect that is not Track A's.**
+Exercised by the owner. **No regression:** familiar journeys unchanged (the step this entry
+existed for), same-artist correctly refused, clips and all four controls — both bypass
+buttons, "New path", "Reset path" — behaving as expected.
+
+**Unlike the two preceding entries, this record carries per-step confirmation**, not "nothing
+surfaced": the owner reported against the numbered checks individually. That makes it the
+strongest pass in this file, and specifically it is direct evidence for check 1, which no
+test can supply.
+
+**Found in use, and it is pre-existing rather than new.** Typing over an already-chosen artist does not un-choose them: the box holds the typed text and
+the page holds the previously selected artist, and nothing reconciles the two. "Find path"
+stays enabled and routes to the **old** artist. The "New path" prefill did not introduce this —
+it removed what was masking it (before, the button began disabled, so you had to pick from the
+dropdown at least once). **It is not a race with the autocomplete**: waiting for the dropdown
+does not help, only clicking an entry in it does. Not attributable to Track A; `pathfinding.py`
+was never edited.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-07-26 — six fixes under the bonnet, and one you can see
+<!-- Retained original text of the DONE entry above. "(latest)" was stripped 2026-07-26:
+     two headings in this file claimed it at once, which is ambiguous at a glance. Only the
+     newest QUEUED entry carries "(latest)". -->
+
+**⚠ This is the retained original text of an entry already marked DONE above. Do not run it
+as a fresh entry.**
 
 **Ten minutes, no waiting. Both servers are already running and nothing owns them**, so
 they will outlive this session and every terminal. Started **after** the last commit, so

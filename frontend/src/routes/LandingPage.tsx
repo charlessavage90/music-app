@@ -29,7 +29,7 @@ export function LandingPage() {
   const ready = !!from && !!to && !sameArtist;
 
   return (
-    <main className="max-w-xl mx-auto px-4 py-16">
+    <main className="max-w-xl mx-auto px-4 py-10 sm:py-16">
       <h1 className="text-2xl font-semibold mb-6">Artist Path</h1>
       <p className="text-[var(--color-muted)] mb-8">
         Name two artists and hear a smooth path between them.
@@ -45,7 +45,7 @@ export function LandingPage() {
         type="button"
         disabled={!ready}
         onClick={() => from && to && navigate(`/path/${from.mbid}/${to.mbid}`)}
-        className="mt-6 rounded-lg bg-[var(--color-accent)] px-4 py-2 font-medium disabled:opacity-40"
+        className="mt-6 w-full sm:w-auto rounded-lg bg-[var(--color-accent)] px-4 py-2 font-medium disabled:opacity-40"
       >
         Find path
       </button>

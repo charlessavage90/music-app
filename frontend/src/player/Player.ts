@@ -31,7 +31,24 @@ export class HtmlAudioPlayer implements Player {
     // Only assigning a *different* src is what lets toggle() resume rather than
     // re-seek to zero, which is why the card's pause button used to restart.
     if (this.audio.src !== url) this.audio.src = url;
-    void this.audio.play();
+    // A rejected play() — autoplay policy, a decode failure — is the same event
+    // as a dead source from the journey's side: no audio is coming. Route it to
+    // the error channel, which already owns the one silent retry, rather than
+    // adding a second channel that would need its own policy and put the four
+    // player invariants back in play. jsdom returns undefined here, not a
+    // promise, which Promise.resolve normalises.
+    //
+    // Only the handler that was live when THIS play() started may hear about it.
+    // Checking `disposed` is not sufficient and neither is dispose() clearing
+    // the callback: StrictMode disposes and re-subscribes on the same instance,
+    // which revives it and installs a new handler, so a rejection from a
+    // superseded play() would reach that handler and buy a retry — restarting
+    // playback after the page had navigated away, which is the defect dispose()
+    // exists to prevent. Found by closeout B3.
+    const handlerAtPlay = this.errorCb;
+    void Promise.resolve(this.audio.play()).catch(() => {
+      if (!this.disposed && this.errorCb === handlerAtPlay) handlerAtPlay?.();
+    });
   }
 
   pause(): void {
