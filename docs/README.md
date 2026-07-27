@@ -40,6 +40,15 @@ that is how the drift began.
 
 ## Current state
 
+> **⚠ For *what to do next*, read [`superpowers/NEXT.md`](superpowers/NEXT.md) — it owns
+> status and sequencing, and this section does not.** The bullets below are retained for the
+> **defect record and the standing hazards**, which are this map's job: what you must know
+> before citing the documents it classifies. They lag: as of 2026-07-26 they do not mention
+> Gate 2's Tracks A, D or B, and the handoff they name as current is superseded. Where they
+> disagree with `NEXT.md` about status, `NEXT.md` wins; where they disagree about a *defect*,
+> the owning document wins. Added 2026-07-26, when a status summary in `CLAUDE.md` went three
+> tracks stale because three documents each kept a copy.
+
 - ⛔ **Repair + retune is DONE. Track 1 was adopted; Track 2 (2026-07-24) and Track 2F
   (2026-07-25) both returned nulls; the ceiling **ordering** measurement (2026-07-25) came
   back **WIDE** — nothing adopted at any point.** Current handoff:
@@ -139,6 +148,7 @@ that is how the drift began.
 
 | Document | Covers |
 |---|---|
+| `superpowers/NEXT.md` | **The next action, and the only document that states it.** Gate state, what is closed and must not be re-planned, what is waiting on the owner, and the path-quality pause. `CLAUDE.md`'s orient table points here rather than restating it — that row went three tracks stale as a summary, 2026-07-26, which is why status now follows the same one-document rule as figures. Rewritten wholesale at every `closeout`; owns no figures. **Where a handoff or an execution log disagrees with it about status, the fresher of those two wins and this document is stale** — fix it rather than working around it. |
 | `superpowers/findings/2026-07-21-scoring-adjudication.md` | **All** scoring, hub-seeking, and path-quality figures. The single quantitative record. |
 | `superpowers/WHAT-GOOD-LOOKS-LIKE.md` | **What the owner means by a better path.** Calibration for the blind listening test — this project's strongest evidence class, which decided the graph twice where the offline metrics decided it zero times. Read before interpreting any listening verdict, **and before designing anything that scores a path**: it holds no thresholds and must not be mined for any, but a criterion that contradicts a value in it is wrong (worked example: the Track 2 pre-registration's C4). |
 | `superpowers/findings/2026-07-22-phase2-sweep-results.md` | Every figure from the Phase 2 six-arm sweep. Owns its numbers; linked from the adjudication's §6 (claims 41–45). |
