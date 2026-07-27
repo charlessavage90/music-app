@@ -175,6 +175,17 @@ Outputs: `SiteUrl` (the CloudFront domain — this is the app), `ApiOriginUrl` (
 direct, used for `/health`), `ArtifactBucketName`, `SpaBucketName`, `EcrRepositoryUri`,
 `DistributionId`.
 
+> **`cdk diff` and `cdk deploy` print the site credential to your terminal**, base64-encoded,
+> as part of the viewer function's source. That is not a leak in the function — the gate has
+> to hold the credential to compare against it — but it does mean the deploy output is not
+> safe to paste into an issue, a chat, or a screenshot. Redact `Basic <...>` first.
+
+> **`.env.deploy`'s lines are `export NAME=value`, so it is shell-sourceable and PowerShell
+> is not.** `set -a; . ./.env.deploy; set +a` works in bash. In PowerShell the `export `
+> prefix must be stripped before each line is split on `=`; a regex anchored on the variable
+> name silently matches nothing and every variable stays unset, which surfaces as `app.py`
+> naming whichever secret it happens to check first.
+
 If the service reports `CREATE_FAILED`, read the App Runner application logs in CloudWatch
 before changing anything. The two likely causes both say so explicitly: a checksum mismatch
 (the §4 upload was partial) and a missing artifact key.
@@ -214,57 +225,53 @@ MSYS_NO_PATHCONV=1 aws logs describe-log-groups \
 
 ## 6. Build and sync the frontend
 
-**Three passes, in this order. Do not collapse them back into one `aws s3 sync --delete`**
-— that is `FRO-1`, and it is the defect a returning visitor meets rather than one you would
-ever see yourself.
+**One command. Do not publish by hand.**
 
 ```bash
-cd frontend && npm run build
-SPA=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
-  --query "Stacks[0].Outputs[?OutputKey=='SpaBucketName'].OutputValue" --output text)
-DIST=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
-  --query "Stacks[0].Outputs[?OutputKey=='DistributionId'].OutputValue" --output text)
-
-# Pass 1 — hashed assets, and NO --delete. Their names contain a content hash,
-# so a new build only ever adds names; nothing is overwritten.
-aws s3 sync dist/ "s3://$SPA/" --exclude index.html \
-  --cache-control "public,max-age=31536000,immutable"
-
-# Pass 2 — index.html LAST, and never cached. It is the only object that names
-# the hashed assets, so it must not be servable before they exist.
-aws s3 cp dist/index.html "s3://$SPA/index.html" --cache-control "no-cache"
-
-aws cloudfront create-invalidation --distribution-id $DIST --paths "/*"
+cd infra && UV_LINK_MODE=copy uv run python -m artistpath_infra.sync_frontend
 ```
 
-> **Why this shape.** `FRO-1`, verified live by the reviewer: an object uploaded the way the
-> old single-line sync uploaded it carries `ETag` and `Last-Modified` and **no
-> `Cache-Control`**, so browsers fall back to *heuristic* freshness and keep `index.html` for
-> a duration nobody chose. `--delete` then removes the hashed asset that stale copy points
-> at. The visitor's browser asks for a file that no longer exists, and there is no error
-> boundary — so the symptom is a **white screen with no text**, on a site that works
-> perfectly for everyone else. `no-cache` on `index.html` is what stops it recurring; the
-> immutable year on the assets is what makes that cheap.
->
-> **`--delete` moved out of pass 1 deliberately.** Deleting the old assets while the old
-> `index.html` is still live re-opens the same window for anyone mid-visit. Prune as a
-> **separate, later** step, once the new `index.html` has been live long enough that nobody
-> is still holding the previous one:
->
-> ```bash
-> aws s3 sync dist/ "s3://$SPA/" --delete --exclude index.html \
->   --cache-control "public,max-age=31536000,immutable"
-> ```
->
-> Skipping the prune costs a few kilobytes of orphaned assets. Running it too early costs a
-> blank page. **The cutover deploy is the one exception**: the bucket is empty, so there are
-> no returning visitors and no window to protect.
+It builds the SPA, resolves the bucket and distribution from the stack, and publishes in
+the only safe order. Add `--skip-build` to publish `frontend/dist` as it stands, and
+`--prune` to also delete assets the new build no longer names — see below for when that is
+safe. `--help` lists the rest.
 
-> **Machine-state caveat, and it is not a repo property.** `aws s3 sync` guesses
-> `Content-Type` from the file extension. It was checked on the deploy machine on 2026-07-27
-> and is correct (`.js → text/javascript`). **Re-check it if the deploy ever moves machines**:
-> a module script served as `text/plain` is refused by the browser and gives the *same* blank
-> page as `FRO-1`, from a completely different cause.
+> **Why this is a script and not three commands you type.** It was three commands, and it
+> was the only fix in stage 3 held by nothing. Every rule below is now an assertion in
+> `infra/tests/test_sync_frontend.py`, and each was checked by reintroducing the defect and
+> confirming the suite goes red. **The failure this prevents is invisible from the machine
+> that causes it** — you never meet the blank page yourself, only somebody who visited
+> before the change does — so "read the section carefully" was never going to be enough.
+> The commands themselves live in `sync_frontend.py`'s `plan_upload`; they are deliberately
+> not restated here, because a second copy is how the two drift apart.
+
+> **What the order is protecting, because you still need to know.** `FRO-1`, verified live
+> by the reviewer: an object uploaded by a plain `aws s3 sync` carries `ETag` and
+> `Last-Modified` and **no `Cache-Control`**, so browsers fall back to *heuristic* freshness
+> and keep `index.html` for a duration nobody chose. A `--delete` then removes the hashed
+> asset that stale copy points at. The visitor's browser asks for a file that no longer
+> exists, and there is no error boundary — so the symptom is a **white screen with no
+> text**, on a site that works perfectly for everyone else. `no-cache` on `index.html` is
+> what stops it recurring; the immutable year on the hashed assets is what makes that cheap.
+> `index.html` goes up **last** because it is the only object naming the hashed bundles: it
+> is the switch that makes a build live, and thrown early it names files that are not there
+> yet.
+
+> **`--prune` is off by default, and that is `FRO-1` too.** Deleting the old assets while
+> the old `index.html` is still live re-opens the same window for anyone mid-visit. Prune as
+> a **separate, later** run, once the new `index.html` has been live long enough that nobody
+> is still holding the previous one. Skipping it costs a few kilobytes of orphaned assets;
+> running it too early costs a blank page. **The cutover deploy is the one exception** — the
+> bucket is empty, so there is no returning visitor to protect and nothing to prune anyway.
+
+> **The `Content-Type` caveat is now checked rather than remembered.** `aws s3 sync` guesses
+> `Content-Type` from the file extension, and that is a property of the deploy *machine*,
+> not of this repository — a module script served as `text/plain` is refused by the browser
+> and gives the *same* blank page as `FRO-1`, from a completely different cause. The script
+> reads back one uploaded `.js` object and refuses if it is not a type a browser will
+> execute. **It does this between the two passes**, while the assets are up but nothing
+> names them yet, which is the last moment the check is free. It was previously a note
+> asking you to re-verify by hand if the deploy ever moved machines.
 
 > **`index.html` carries static fallback markup** (`FRO-7`) inside `<div id="root">`, so a
 > delivery failure shows a visitor readable text instead of white. It is verified to survive
@@ -334,9 +341,26 @@ aws cloudformation describe-stack-resource-drifts --stack-name ArtistpathStack \
 > API served its dev default (`RMD-6`). No test in any of the four packages can see that
 > class of gap. One `detect-stack-drift` call found it immediately.
 >
-> **Two rows always report as drifted and are NOT drift.** App Runner normalises
-> `Cpu: "1 vCPU"` to `"1024"` and `Memory: "2 GB"` to `"2048"`. Expect exactly those two on
-> `ApiService` and nothing else; **anything third is real** and blocks the deploy.
+> **Three rows always report as drifted and are NOT drift.** All three are on `ApiService`:
+>
+> 1. `/InstanceConfiguration/Cpu` — App Runner normalises `"1 vCPU"` to `"1024"`.
+> 2. `/InstanceConfiguration/Memory` — likewise `"2 GB"` to `"2048"`.
+> 3. `/SourceConfiguration/.../RuntimeEnvironmentVariables/N` — `ARTISTPATH_CORS_ORIGINS`,
+>    expected `""`, actual `null`, `REMOVE`. **The index `N` moves** when the variable list
+>    changes, so match on the name, never the path.
+>
+> **Anything fourth is real** and blocks the deploy.
+>
+> **The third row was `RMD-6`'s symptom and is now permanent by design** — this section said
+> "expect exactly two, anything third is real" until 2026-07-27, which was correct only until
+> `RMD-6` was fixed. The fix did not remove the empty variable from the template: `stack.py`
+> keeps it deliberately as a statement of intent, and the guarantee moved to
+> `ApiConfig.cors_origins`, which now defaults to empty so arriving-or-not is equally safe.
+> App Runner still drops it, so it will drift forever. Verified after the Track C deploy:
+> the exposure was gone from the running service (`/health` no longer echoes an Origin) while
+> this row was still present. **Left as it was, the gate would have fired on every future
+> deploy** — and a gate that always fires is one you learn to skip, which is the same failure
+> the expected-test-counts note above is about.
 >
 > **Empty-valued environment variables are the known trap.** If a future variable must mean
 > "off", make the *absence* safe in `ApiConfig` rather than relying on an empty value

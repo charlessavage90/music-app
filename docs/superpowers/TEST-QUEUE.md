@@ -9,18 +9,99 @@ cannot.
 found, or DONE — nothing found. Do not delete entries; the record of what was exercised is
 the point.**
 
-> **⚠ Standing constraint until the Gate 2 deploy is live: the app runs only on the owner's
-> Windows desktop, so NOTHING HERE MAY ASK FOR A PHONE.** There is no hosted URL, and a phone
-> cannot reach `localhost` on another machine. An entry that asks for a real mobile device is
-> not merely inconvenient — it is unrunnable, and it will sit in this file looking like an
-> untested item when it is actually an impossible one. **Write the mobile half as an explicitly
-> DEFERRED section with its trigger named**, and put only desktop-runnable steps under "what
-> to exercise". Added 2026-07-26, when the Track D entry was queued asking for exactly that.
-> **This constraint expires at cutover** (Gate 2 Track C), not before.
+> **✅ EXPIRED 2026-07-27 — the constraint below no longer applies, and its trigger is the
+> reason.** The Gate 2 cutover has happened: there is a hosted URL and a phone can reach it.
+> **Entries may now ask for a phone.** The deferred mobile section further down this file is
+> runnable for the first time — see the newest entry.
+>
+> *Retained for the record:* until the cutover, the app ran only on the owner's Windows
+> desktop, so no entry could ask for a phone — there was no hosted URL and a phone cannot
+> reach `localhost` on another machine. Such an entry was not merely inconvenient but
+> unrunnable, and would sit here looking untested when it was actually impossible. The rule
+> was to write the mobile half as an explicitly DEFERRED section with its trigger named.
+> Added 2026-07-26, when the Track D entry was queued asking for exactly that.
 
 ---
 
-## N/A — 2026-07-27 (latest) — three fixes for the first person you send the link to
+## QUEUED — 2026-07-27 (latest) — the app is on the internet, and this is the first real run
+
+**This is the first entry in this file with a URL in it.** The app is live. Open it from
+anything — your desktop, your phone, someone else's machine.
+
+**Address:** `https://d2n3xqz3pttguf.cloudfront.net`
+**Username:** `artistpath` — **Password:** the one in `infra/.env.deploy` on this machine.
+
+**Nothing about *which artists* you get has changed.** No routing, no graph, no weighting, no
+cost function. It is the same artist map as your desktop copy, checked mechanically on three
+separate counts. **A journey you build on the website is the same journey you would have got
+on your machine this morning** — that is the single most valuable thing to confirm.
+
+**Nothing is running on this machine and nothing needs to be.** No local servers were left
+behind. Everything below happens against the website.
+
+### The headline: the phone half is finally runnable
+
+**This is what has been waiting since 26 July.** Three things could never be answered without
+a real device, and all three are still unanswered:
+
+1. **Is it actually usable in your hand?** Can you read every artist's name, and hit the right
+   bypass button with a thumb?
+2. **Does the bar at the bottom clear the home indicator**, or is it tucked underneath? Space
+   is reserved for it, but a desktop browser reports that space as zero, so **that reservation
+   has never once been exercised by anything.**
+3. **Does the keyboard leave artist names alone?** Type a few with accents or odd
+   capitalisation. This is an iPhone behaviour and cannot be simulated on a desktop at all.
+
+### What to exercise
+
+1. **Two or three journeys you already have a feel for**, on the desktop first. These must be
+   unchanged. If a familiar pair gives you a *different* journey, something is wrong.
+2. **The same thing on your phone.** Then the three questions above.
+3. **Play clips and press both bypass buttons a few times**, on both. The clips come from the
+   same music service as before.
+4. **Send yourself a journey link** — copy the address bar mid-journey, open it fresh. It
+   should land you on that exact journey rather than an error. **This one has never been
+   proven in a browser**, only mechanically, and it is the thing that makes sharing work at
+   all.
+5. **Type a nonsense address** on the end, like `/nowhere`. You should get a short page with a
+   link back, not a blank screen.
+6. **Get the password wrong once, deliberately.** The refusal page should tell you the
+   username is `artistpath`. **When you share this with someone, send them the address and
+   the password only** — the page tells them the rest.
+
+### What "wrong" would look like
+
+A familiar pair giving a *different* journey; a shared link landing on an error instead of the
+journey; a blank white page with no text at all; the refusal page not naming the username; on
+the phone, an artist's name squeezed to nothing, or the bottom bar tucked under the home
+indicator; clips that no longer play.
+
+**If you ever see the words "the app did not load, reload the page"** — that is a message
+working as intended, not a new fault. Tell me if you see it, though.
+
+### Two things now true out there that were not
+
+- **The thing on the internet no longer tells browsers a page on your own machine may read
+  from it.** That was the exposure you accepted on 27 July rather than publish twice. It is
+  fixed *out there* now, confirmed by checking the live site before and after rather than
+  assuming.
+- **Publishing is now one command instead of three typed in a particular order.** The order
+  mattered and nothing enforced it; getting it wrong gave returning visitors a blank page and
+  was invisible to whoever published. It is now checked automatically, ten different ways.
+
+**Known and unchanged:** artists with only one connection still cannot appear in the middle of
+a journey. Clip playback defects are closed and unrelated.
+
+**One cosmetic fault I found and did not fix**, so it does not surprise you: some artists'
+short descriptions show mangled punctuation — The Beatles reads `UK rock band, â€œThe Fab
+Fourâ€` in the search dropdown. It is in the artist map itself, so fixing it means rebuilding
+the map, which is your call rather than mine.
+
+**Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
+
+*Detail: `docs/superpowers/2026-07-27-gate2-track-c-execution-log.md`.*
+
+## N/A — 2026-07-27 — three fixes for the first person you send the link to
 
 **Nothing to exercise, and nothing changed about the app on this machine.** No routing, no
 graph, no weighting, no clips, no buttons. A journey you build today is the same journey as
@@ -231,12 +312,15 @@ a journey. Clip playback defects are closed and unrelated.
 
 **Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
 
-### ⏳ DEFERRED until the app is live on AWS — the phone half
+### ✅ TRIGGER FIRED 2026-07-27 — was DEFERRED until the app was live on AWS
 
-**Trigger: the Gate 2 cutover, when there is a URL a phone can open.** Not runnable before
-then, and not a pending item against Track D — it is waiting on infrastructure that does not
-exist yet. Three things can only be answered on a real device, and all three are unverified
-today:
+**The cutover has happened and there is now a URL a phone can open, so this is runnable.**
+**It has been folded into the newest entry at the top of this file** — run it there, with the
+address and password, rather than here. This section is left in place because the entry it
+belongs to records what was and was not covered by the desktop pass.
+
+*Original text follows.* Three things can only be answered on a real device, and all three
+were unverified when this was written — and still are:
 
 1. **Is it actually usable in your hand?** Can you read every artist's name, and hit the right
    bypass button with a thumb?
