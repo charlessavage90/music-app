@@ -4,7 +4,9 @@
 [`plans/2026-07-27-dep33-blocker-remediation.md`](plans/2026-07-27-dep33-blocker-remediation.md).
 Governing review:
 [`findings/2026-07-26-track-b-cdk-review.md`](findings/2026-07-26-track-b-cdk-review.md) §2.
-PR #30 on `gate2-dep33-blockers`.
+**Two PRs, and the split matters when tracing a claim to its source:** stages 1–2 are
+**PR #30** on `gate2-dep33-blockers`; **stage 3** is **PR #32** on `gate2-dep33-stage3`.
+The header named only the first until stage 3 was appended.
 
 **Appended per task, not at closeout.** Decisions and reasoning, not narration.
 
@@ -629,3 +631,255 @@ running. Swept by port rather than by task list, since a session sees only its o
 record. The identity of what is deployed — graph key, sha256, image tag — is owned by Track B's
 execution log §1 and is **cited from here, never restated** (see `B5` above, where restating it
 was this log's own defect).
+
+---
+
+## Stage 3 — the first user
+
+**The closeout section above covers stages 1–2 only.** Stage 3 ran in a later session, after
+PR #30 merged; this section is appended rather than interleaved so nothing already committed
+moves. Branch `gate2-dep33-stage3`.
+
+### `RMD-11` — `FRO-2`, rank 3: nobody was told the username
+
+The 401 now carries a body naming the username. It is substituted at synth time from
+`stack.py`'s new **`SITE_USERNAME`** constant — the same constant the admitted credential is
+built from — so the page cannot name a username the gate would reject. Naming it discloses
+nothing: this is a shared password, not authentication, and the function's own comment has
+always said so.
+
+`infra/README.md` §1 now states what to send a new visitor: **URL and password only**, because
+the page they hit tells them the username.
+
+**The mutation gate found two weak assertions before they landed, and both were mine.** This is
+the argument for running it on your own new tests rather than only on the ones under repair:
+
+| what the assertion was | why it passed the mutation that serves the whole credential |
+|---|---|
+| `password not in response` | It checks the **plaintext**. Basic auth is base64, not encryption, so a body leaking `Basic YXJ0...` hands over a working credential while containing no plaintext password at all. |
+| `username in body` | Satisfied by the page's own `<h1>artistpath</h1>` — the site's **name** passing a check meant for an **instruction**. |
+
+Both were tightened: the username is asserted as marked-up text, and the password check covers
+the encoded form and runs against the whole response rather than the body.
+
+**Mutations after the fix — 2, both CAUGHT:** the body serving the credential; the username
+substitution silently no-opping (caught by a fixture guard mirroring the existing
+`__EXPECTED_AUTH__` one).
+
+### `RMD-12` — `FRO-1` / `FRO-7`, rank 4: the blank page after a redeploy
+
+**Runbook half.** §6 was one `aws s3 sync --delete`. It is now three passes: hashed assets with
+a one-year immutable `Cache-Control` and **no `--delete`**, then `index.html` **last** with
+`no-cache`, then the invalidation.
+
+**The `--delete` split is an extension of what the plan specified, not something it called
+for.** The plan named the cache headers and the ordering. But deleting the previous build's
+assets while the previous `index.html` is still live re-opens the identical window for anyone
+mid-visit — so the prune is now a separate, later, optional step, with its cost stated (a few
+kilobytes of orphans) against the cost of running it early (a blank page). **The cutover deploy
+is exempt and says so:** the bucket is empty, so there are no returning visitors to protect.
+
+The machine-state caveat from the stages 1–2 handoff — `aws s3 sync`'s content-type guessing was
+verified on *this* machine and is not a repo property — is now **in the runbook** rather than in
+a handoff that expires.
+
+**Application half (`FRO-7`).** `frontend/index.html` carries static fallback markup inside
+`<div id="root">`. **Verified to survive `vite build` by reading `dist/index.html`**, not
+assumed — and the first attempt to verify it read a *stale* `dist/` from before the change,
+because `tsc -b && vite build` had failed at the `tsc` step and the build never ran. The
+apparent finding, "Vite strips the fallback", was an artifact of reading output that no build
+had produced.
+
+**Two design points, both of which a test now holds:**
+
+- **It must live inside `#root`.** React clears the container it owns, so there it disappears on
+  mount; placed *beside* `#root` it would be correct on the way in and then sit under the app
+  forever. The failure mode is not "the fallback is missing" — it is "the fallback never leaves".
+- **The test reads `index.html` through Vite's `?raw`, not `node:fs`.** The first draft broke
+  `npm run build`: `tsconfig.app.json` gives `src/` no node types, and adding them so one test
+  compiles would let **any** app module import node builtins and still typecheck. `vite/client`
+  already declares `?raw`.
+
+**Three tests, all shown red first. Mutation — the fallback moved to a sibling of `#root` —
+CAUGHT by all three.** The e2e spec exists because *every other e2e spec passes with the
+fallback still on the page*: they look for app elements, and leftover text does not stop those
+existing. Its assertion order is deliberate and is itself a finding — the fallback and the
+landing page share a heading, so asserting the heading first fails on a Playwright strict-mode
+violation, a real detection whose message says nothing about what broke.
+
+### `RMD-13` — `FRO-4`, rank 10: prove the gate admits
+
+**The step is written and cannot complete before Track C**, exactly as the plan anticipated.
+`infra/README.md` **§8a**, marked with an hourglass and carrying the reason running it early is
+worthless: the bucket is empty, so every path 403s whether the rewrite works or not.
+
+Two halves, and the split is the point:
+
+- **Mechanical (curl):** the gate admits at all; a shared `/path/<mbid>/<mbid>` link returns the
+  SPA entry point rather than a 403 (`TR-5` against the real distribution); `/api/*` works end
+  to end through CloudFront.
+- **Browser, and curl *structurally* cannot do it:** whether the browser re-attaches cached
+  basic credentials to the SPA's same-origin `fetch()` calls. `curl -u` re-sends the credential
+  explicitly on every request, which is precisely the behaviour in question. The whole app
+  depends on this and no browser has ever exercised it.
+
+§8a is **where the deferred phone section in `TEST-QUEUE.md` lands** — but that section's
+trigger is the Track C cutover, which has **not** happened. §8a is the step it will run, not
+the signal to run it; the first wording here said "trigger" and would have sent the owner
+looking for a URL that does not exist yet. §8a also names the in-app-browser risk (WhatsApp,
+Instagram) as a risk to work around rather than a defect to fix at Gate 2.
+
+### Stage 3 gate
+
+| check | result |
+|---|---|
+| builder | **115 passed** |
+| api | **195 passed** |
+| infra | **41 passed** (38 before this stage) |
+| frontend unit | **80 passed** (78 before) |
+| `npm run build` | green — and it is what caught the tsconfig defect |
+| `npm run test:e2e` | **5 passed** (4 before). Run against the adopted artifact, sha256 `4cb84ef9…`, matched to its sidecar before the run |
+| `snyk_code_scan`, infra + frontend | frontend **0**; infra **2 lows, both pre-existing** — `test_stack.py:18` and `app.py:19`, neither in code this stage introduced. Their closing conditions in `A3` are unchanged. |
+
+**No listeners left on `:8000` or `:5173`.** The API was started for the e2e run and stopped;
+swept by port afterwards, not by task list.
+
+**Nothing was deployed.** `RMD-6` remains fixed-in-source and live in production. The owner
+accepted that exposure on 2026-07-27 rather than deploy twice — the decision the stages 1–2
+handoff put to him, resolved in favour of waiting for Track C.
+
+## Closeout, stage 3 — 2026-07-27
+
+**The "Closeout, 2026-07-27" section above belongs to stages 1–2.** This one is appended so
+neither moves.
+
+### A3 — every open item has an address
+
+Re-checked against the stages 1–2 `A3` table. **Two rows there are now discharged and one has
+changed state:**
+
+| item | was | now |
+|---|---|---|
+| `RMD-11`, `RMD-12` | "Planned, not started" | **CLOSED**, PR #32 |
+| `RMD-13` / `FRO-4` | "runbook step lands first, executes at cutover" | **step has landed** (`infra/README.md` §8a); still executes at cutover |
+| `RMD-6` (CORS), stack drift | Track C | **unchanged, and now an accepted exposure** — the owner decided 2026-07-27 to wait for Track C rather than deploy twice. The condition is the same; what changed is that the decision behind it is settled and should not be re-tabled |
+
+**Everything else in that table stands unchanged, and nothing else has come due.** The two
+Snyk lows were re-confirmed as the same two, in the same files, neither in code this stage
+introduced.
+
+**One new deferral, with its condition:** turning `infra/README.md` §6 into a script.
+**Condition — before or during Track C, at the owner's choice**; it is the one stage 3 fix
+nothing enforces. Position and reasoning in the stage 3 handoff. **Not** a silent backlog item:
+if Track C runs without it, that is a decision, and the runbook is what carries the risk.
+
+### A4 — the default-flip check
+
+**No configuration knob was added by this stage**, so there is no default to flip and nothing
+is sitting at a loser value. `SITE_USERNAME` is a constant with one meaning, not a toggle; the
+cache-control values are arguments in a runbook, not settings.
+
+**Stage 2's `A4` finding is unchanged and still open**: `cors_origins` is flipped in source and
+not in production. Stage 3 did not deploy, so it could not move.
+
+### A5 — processes
+
+**No listeners on `:8000` or `:5173`.** An API was started deliberately for the e2e run — the
+first e2e run since Track A, and the reason it was worth starting — and stopped afterwards.
+Swept by port rather than by task list. Nothing was left detached, because `C1` queued nothing
+that needs a server.
+
+### B1 — documentation audit
+
+Dispatched. **Three HIGH findings, all fixed here**, plus `NEXT.md`, which this closeout
+rewrites anyway:
+
+| finding | fix |
+|---|---|
+| `docs/README.md` said stage 3 was **NOT** executed | now records all three stages executed |
+| `docs/README.md` described this log as stages 1–2 | now stages 1–3, and names which PR owns which |
+| this log's header named **only PR #30** | now names both, because a claim in the stage 3 section traces to PR #32 |
+
+**Its MEDIUM finding — that stage 3 had no handoff — is discharged by writing one**
+(`2026-07-27-HANDOFF-dep33-stage3.md`), which was already owed under `A2`.
+
+**The audit did not open `.claude/`, and `B5` requires it.** Swept separately, by hand: no file
+under `.claude/` mentions the deploy, CORS, CloudFront, the sync procedure or the viewer
+function, so nothing in the auto-loaded layer was invalidated by this work. **Recorded because
+a reader of the audit report alone would not know that sweep happened** — the same
+absence-shaped gap `CLAUDE.md` warns about, arriving this time as a coverage gap in the
+instrument rather than in the documents.
+
+### B2 — reachability
+
+**No new module.** `SITE_USERNAME` is used twice in `stack.py` (`:255`, `:261`) and named in
+`viewer_function.js`'s comment. The two new test files are reached by their runners — verified
+by them running and reporting counts, not by assuming a glob matches.
+
+### B3 — vacuous-test spot check
+
+**Discharged by the mutation work, and it did not come back clean.** Four mutations against the
+new invariants; **two were MISSED on the first attempt**, both against tests this stage had
+just written. Detail in the stage 3 section above. The relevant closeout point is that `B3` is
+usually run against *inherited* tests, and here it was the session's own new ones that failed
+it — which is the cheaper place to find out.
+
+### B4 — prose-versus-code
+
+**One defect, and it was mine, written the same hour.** `indexFallback.test.tsx`'s header
+called `infra/README.md` §6 a **two-pass** sync. It is three. The comment was written from the
+plan's wording (`RMD-12` says "two-pass sync in the runbook") and the runbook then gained a
+third pass during implementation — so the prose was accurate to the plan and wrong about the
+artifact beside it. Fixed to name the property rather than the count.
+
+### B5 — stale-description sweep
+
+- **`findings/2026-07-26-track-b-cdk-review.md` §2 annotated** for `FRO-1`, `FRO-2` and
+  `FRO-4`, following `RMD-0`'s precedent: the substance is untouched, a status prefix is added
+  so nobody starts finished work. `FRO-4`'s marker is deliberately ⏳ rather than ✅.
+- **`.claude/` swept and clean** — see `B1`.
+- **`plans/2026-07-26-track-b-infrastructure.md:1419` still shows the old single-line sync, and
+  was deliberately left alone.** It is a completed plan, `docs/README.md` already labels it
+  "EXECUTED; do not execute again", and annotating frozen plans for every subsequent change is
+  unbounded. Recorded as a judgement so the next session can overturn it in one line rather
+  than rediscover it.
+- **No figure was restated.** The suite counts in the stage 3 section are that section's own
+  measurements; the artifact identity is cited, not copied.
+
+### C1 — use the application
+
+**Queued as N/A**, and honestly so: nothing on this machine changed for the owner. All three
+fixes are for the moment the link is first shared, which has not happened. The entry states
+what each fix was in plain terms, and flags that **the deferred phone section remains
+deferred** — its trigger is the cutover, not stage 3.
+
+### D1 — tree
+
+Clean. Ignored paths near the work are the expected ones (`frontend/dist/`,
+`frontend/test-results/`, `infra/.env.deploy`, venvs and caches). **Nothing meant to be kept
+was swallowed**; both `uv.lock` files remain tracked.
+
+### D2, D3 — stated rather than skipped
+
+**D2 (fixtures):** the graph was not touched. No rebuild, no adoption; `pathfinding.py` was
+never opened and the committed 500-node fixtures are unaffected.
+
+**D3 (provenance):** nothing was adopted or compared, so there is no new checksum. The e2e run
+booted the adopted artifact and its sha256 was matched against its sidecar **before** the run
+rather than assumed — the only reason it is mentioned at all.
+
+### D4 — suites
+
+builder **115**, api **195**, infra **41**, frontend unit **80**, `npm run build` green,
+`npm run test:e2e` **5**. Run at closeout, not recalled from earlier in the session.
+
+### D6 — the standing context layer
+
+| layer | measurement | delta |
+|---|---|---|
+| Unconditional (`CLAUDE.md` + `MEMORY.md` + skill/agent `description:` lines) | **42,778 characters** | **0** |
+| Conditional (`SKILL.md` bodies, agent bodies, `memory/*.md` bodies) | **1,971 lines** | **0** |
+
+**This work touched neither layer** — `git diff main...HEAD -- CLAUDE.md .claude/` is empty and
+nothing was written to `memory/`. No case to make, because nothing was added. Identical to the
+stages 1–2 figures, which is the expected result and was checked rather than assumed.

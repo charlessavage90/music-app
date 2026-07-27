@@ -61,6 +61,12 @@ committed** — a password in a CDK source file is in the repository's history p
 > (`ARC-11`). It holds the four secrets above and deliberately **not** the image tag — the tag
 > is per-deploy, not per-machine, so persisting it is how you deploy the wrong commit.
 
+> **The username is `artistpath` and is not a secret** — `stack.py`'s `SITE_USERNAME`, which
+> is also the name substituted into the 401 page. **Send a new visitor the URL and the
+> password only**; the page they hit tells them the username (`RMD-11`, `FRO-2`). Before
+> 2026-07-27 the 401 had no body at all, so the first attempt of the first real visitor was
+> spent guessing a username nothing anywhere stated.
+
 The graph's sha256 is **not** a variable: `app.py` reads it from the sidecar. Never
 transcribe it by hand (`DEP-24`, `TR-10`) — its failure signature is "refuses to boot",
 during a cutover.
@@ -208,15 +214,63 @@ MSYS_NO_PATHCONV=1 aws logs describe-log-groups \
 
 ## 6. Build and sync the frontend
 
+**Three passes, in this order. Do not collapse them back into one `aws s3 sync --delete`**
+— that is `FRO-1`, and it is the defect a returning visitor meets rather than one you would
+ever see yourself.
+
 ```bash
 cd frontend && npm run build
 SPA=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
   --query "Stacks[0].Outputs[?OutputKey=='SpaBucketName'].OutputValue" --output text)
 DIST=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
   --query "Stacks[0].Outputs[?OutputKey=='DistributionId'].OutputValue" --output text)
-aws s3 sync dist/ "s3://$SPA/" --delete
+
+# Pass 1 — hashed assets, and NO --delete. Their names contain a content hash,
+# so a new build only ever adds names; nothing is overwritten.
+aws s3 sync dist/ "s3://$SPA/" --exclude index.html \
+  --cache-control "public,max-age=31536000,immutable"
+
+# Pass 2 — index.html LAST, and never cached. It is the only object that names
+# the hashed assets, so it must not be servable before they exist.
+aws s3 cp dist/index.html "s3://$SPA/index.html" --cache-control "no-cache"
+
 aws cloudfront create-invalidation --distribution-id $DIST --paths "/*"
 ```
+
+> **Why this shape.** `FRO-1`, verified live by the reviewer: an object uploaded the way the
+> old single-line sync uploaded it carries `ETag` and `Last-Modified` and **no
+> `Cache-Control`**, so browsers fall back to *heuristic* freshness and keep `index.html` for
+> a duration nobody chose. `--delete` then removes the hashed asset that stale copy points
+> at. The visitor's browser asks for a file that no longer exists, and there is no error
+> boundary — so the symptom is a **white screen with no text**, on a site that works
+> perfectly for everyone else. `no-cache` on `index.html` is what stops it recurring; the
+> immutable year on the assets is what makes that cheap.
+>
+> **`--delete` moved out of pass 1 deliberately.** Deleting the old assets while the old
+> `index.html` is still live re-opens the same window for anyone mid-visit. Prune as a
+> **separate, later** step, once the new `index.html` has been live long enough that nobody
+> is still holding the previous one:
+>
+> ```bash
+> aws s3 sync dist/ "s3://$SPA/" --delete --exclude index.html \
+>   --cache-control "public,max-age=31536000,immutable"
+> ```
+>
+> Skipping the prune costs a few kilobytes of orphaned assets. Running it too early costs a
+> blank page. **The cutover deploy is the one exception**: the bucket is empty, so there are
+> no returning visitors and no window to protect.
+
+> **Machine-state caveat, and it is not a repo property.** `aws s3 sync` guesses
+> `Content-Type` from the file extension. It was checked on the deploy machine on 2026-07-27
+> and is correct (`.js → text/javascript`). **Re-check it if the deploy ever moves machines**:
+> a module script served as `text/plain` is refused by the browser and gives the *same* blank
+> page as `FRO-1`, from a completely different cause.
+
+> **`index.html` carries static fallback markup** (`FRO-7`) inside `<div id="root">`, so a
+> delivery failure shows a visitor readable text instead of white. It is verified to survive
+> `vite build`, and two Vitest tests hold it: one that a JS-less browser sees words, one that
+> React clears it on mount. **If you ever see that text on the live site, the app did not
+> load** — that is the message doing its job, not a new defect.
 
 The SPA calls `/api` relative (`frontend/src/api/client.ts`), so it needs no build-time URL.
 
@@ -316,6 +370,51 @@ h=json.load(urllib.request.urlopen(sys.argv[1]+'/health'))
 assert h['graph_sha256']==s['sha256'] and h['artists']==s['artists'] and h['edges']==s['edges']
 print('live graph matches the sidecar')" "$API"
 ```
+
+### 8a. Prove the gate ADMITS — not only that it rejects (`FRO-4`, `RMD-13`)
+
+**⏳ Runs at the Track C cutover, after §6 has put the SPA in the bucket. Not before.** Until
+then the bucket is empty and every path returns 403 whether the rewrite works or not, so
+running this early produces a red that means nothing.
+
+**Why it exists.** Every check in §8 proves the site *refuses*. Nothing anywhere makes an
+**authenticated** request, so `TR-5`'s SPA fallback — the rewrite that makes every shared
+journey link work at all — would ship having never been exercised against the real
+distribution. Review §7 names this one of three classes nobody verified. It almost certainly
+works. **So did `TR-5`.**
+
+**The mechanical half** — run it first; it needs no browser:
+
+```bash
+U="artistpath:$ARTISTPATH_DEPLOY_PASSWORD"
+# MBID_A / MBID_B: any two artists. Build one journey in the app and copy the
+# two ids straight out of the address bar — all path state lives in the URL.
+curl -s -o /dev/null -w "%{http_code}\n" -u "$U" "$SITE/"                      # expect 200
+curl -s -u "$U" "$SITE/path/$MBID_A/$MBID_B" | grep -c '<div id="root"'        # expect 1
+curl -s -o /dev/null -w "%{http_code}\n" -u "$U" "$SITE/api/artists/search?q=beatles"  # expect 200
+```
+
+- Line 1 is the gate admitting. **If this 401s, nobody can get in at all** and the site is
+  down for everyone, which no §8 check would have told you.
+- Line 2 is `TR-5`: a shared journey link holds no S3 object, so anything other than the
+  SPA's entry point means the rewrite is not running on the live distribution.
+- Line 3 is the whole `/api/*` behaviour end to end — CloudFront adding the origin secret,
+  App Runner accepting it. A 403 here is `TR-7` refusing CloudFront itself.
+
+**The browser half — three things curl structurally cannot answer.** Use a real phone for
+this; it is also the trigger the deferred phone section in `TEST-QUEUE.md` has been waiting
+on since 2026-07-26.
+
+1. **Does the password dialog appear and accept the credential?** The 401 body names the
+   username (`RMD-11`); confirm it is the username the dialog actually takes.
+2. **Does a path build from inside the app?** This is the one that matters most and the one
+   nothing has ever exercised: the SPA's `fetch()` calls are same-origin, so they only work
+   if the browser **re-attaches the cached basic credentials to them**. curl cannot test
+   this — it re-sends `-u` explicitly every time, which is precisely the behaviour in
+   question.
+3. **Do in-app browsers show the dialog at all?** WhatsApp's and Instagram's frequently do
+   not. If a link opened from a message never prompts, share it as a plain link people open
+   in Safari or Chrome instead. This is a known risk, not a defect to fix at Gate 2.
 
 ## 9. Rollback
 

@@ -29,6 +29,7 @@ vacuity this file exists to remove.
 
 from __future__ import annotations
 
+import base64
 import json
 import shutil
 import subprocess
@@ -70,6 +71,10 @@ def run_handler(tmp_path_factory):
     assert "__EXPECTED_AUTH__" not in code, (
         "the synth-time credential substitution did not happen — the deployed "
         "function would compare against the literal placeholder"
+    )
+    assert "__EXPECTED_USERNAME__" not in code, (
+        "the username substitution did not happen — the deployed function would "
+        "tell every refused visitor to type __EXPECTED_USERNAME__ (RMD-11)"
     )
 
     script = tmp_path_factory.mktemp("viewer_function") / "driver.js"
@@ -115,6 +120,63 @@ def test_the_refusal_asks_the_browser_for_credentials(run_handler):
     # prompts, so nobody can get in at all (adjacent to FRO-2).
     result = run_handler(_request("/", None))
     assert result["headers"]["www-authenticate"]["value"].startswith("Basic ")
+
+
+# --- the refusal has to be usable by a person (FRO-2, RMD-11) ---------------
+#
+# The credential is a username and a password. Only the password was ever
+# shared, and the browser asks for both, so the first attempt of the first real
+# visitor is spent guessing. These tests decode what the gate actually ADMITS
+# rather than restating a username: a body naming a username the gate would
+# reject is the same defect wearing a fix.
+
+
+def _credential() -> tuple[str, str]:
+    decoded = base64.b64decode(VALID_AUTH.split(" ", 1)[1]).decode()
+    username, password = decoded.split(":", 1)
+    return username, password
+
+
+def _body(result: dict) -> str:
+    assert "body" in result, f"the refusal carries no body: {result}"
+    body = result["body"]
+    # CloudFront Functions accept a bare string too. Assert the explicit form:
+    # `encoding` is what decides whether the markup is served as HTML or
+    # interpreted as base64 and delivered as rubble.
+    assert body["encoding"] == "text", body
+    return body["data"]
+
+
+def test_the_refusal_names_the_username_a_person_must_type(run_handler):
+    # Asserted as MARKED-UP text, not as a substring of the page. `username in
+    # body` passed the mutation that replaced the instruction with the whole
+    # credential, because the page is also *titled* artistpath — the site's own
+    # name satisfying a check meant for an instruction.
+    username, _ = _credential()
+    assert f"<strong>{username}</strong>" in _body(run_handler(_request("/")))
+
+
+def test_the_refusal_does_not_disclose_the_password(run_handler):
+    # The cheapest way to name the username is to substitute the whole
+    # credential, which serves the shared password to everyone refused —
+    # including whoever the gate exists to refuse.
+    #
+    # Both forms, and the encoded one is the one that matters: Basic auth is
+    # base64, not encryption, so a response leaking `Basic YXJ0...` hands over a
+    # working credential while containing no plaintext password at all. Checked
+    # against the entire response, because a header leaks it just as well.
+    _, password = _credential()
+    response = json.dumps(run_handler(_request("/")))
+    assert password not in response
+    assert VALID_AUTH not in response
+    assert VALID_AUTH.split(" ", 1)[1] not in response
+
+
+def test_the_refusal_body_is_served_as_html(run_handler):
+    # Without a content-type the browser renders the markup as plain text and
+    # the message arrives as visible tags.
+    result = run_handler(_request("/"))
+    assert result["headers"]["content-type"]["value"].startswith("text/html")
 
 
 # --- the SPA fallback (TR-5) ------------------------------------------------

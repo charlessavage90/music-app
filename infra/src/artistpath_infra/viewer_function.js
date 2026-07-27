@@ -16,7 +16,28 @@
 //    status 200 (TKB-2).
 //
 // __EXPECTED_AUTH__ is substituted at synth time from the environment. It is
-// never in git.
+// never in git. __EXPECTED_USERNAME__ is substituted from the same constant the
+// credential is built from (stack.py's SITE_USERNAME), so the name below cannot
+// drift from the name the gate admits.
+//
+// FRO-2 / RMD-11: the browser asks for a username and a password, only the
+// password is ever shared, and until 2026-07-27 the 401 carried no body — so
+// the first attempt of the first real visitor was spent guessing. Naming the
+// username discloses nothing: this is a shared password, not authentication
+// (see 1 above). The password is NOT named here, and a test asserts the whole
+// response does not contain it.
+var REFUSAL_BODY =
+  '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
+  '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+  '<title>artistpath</title></head>' +
+  '<body style="font-family:system-ui,sans-serif;max-width:32rem;' +
+  'margin:4rem auto;padding:0 1rem;line-height:1.5">' +
+  '<h1>artistpath</h1>' +
+  '<p>This site is password-protected while it is being shared privately.</p>' +
+  '<p>The username is <strong>__EXPECTED_USERNAME__</strong>.</p>' +
+  '<p>The password was sent to you separately. Reload the page to try again.</p>' +
+  '</body></html>';
+
 function handler(event) {
   var request = event.request;
   var headers = request.headers;
@@ -27,7 +48,9 @@ function handler(event) {
       statusDescription: 'Unauthorized',
       headers: {
         'www-authenticate': { value: 'Basic realm="artistpath"' },
+        'content-type': { value: 'text/html; charset=utf-8' },
       },
+      body: { encoding: 'text', data: REFUSAL_BODY },
     };
   }
 

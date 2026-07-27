@@ -20,7 +20,47 @@ the point.**
 
 ---
 
-## N/A — 2026-07-27 (latest) — safety work under the bonnet; nothing to press, and one thing to know
+## N/A — 2026-07-27 (latest) — three fixes for the first person you send the link to
+
+**Nothing to exercise, and nothing changed about the app on this machine.** No routing, no
+graph, no weighting, no clips, no buttons. A journey you build today is the same journey as
+yesterday's. Nothing is running on any port — nothing was started and nothing was left behind.
+
+**All three fixes are for the moment you actually send someone the address**, which has not
+happened yet. That is why there is nothing to press.
+
+**What was wrong, in plain terms.**
+
+1. **The password box asks for a name as well as a password, and nothing told anyone what the
+   name was.** You were only ever going to send the password. Their first go would have been a
+   guess. The refusal page now says the name to type. **When you do share the link, send the
+   address and the password only** — the page tells them the rest.
+2. **Anyone who had visited before would have got a blank white page after any update.** The
+   old publishing step deleted the files their browser was still holding on to. Publishing is
+   now three steps in a set order that closes that gap. This one you would never have seen
+   yourself: it only bites people who visited *before* a change.
+3. **If the app fails to arrive for any other reason, it now says so.** Before, every kind of
+   failure looked identical — a white screen with nothing on it, which nobody can describe to
+   you over a message. It now reads "the app did not load, reload the page". **If you ever see
+   that text, that is the message working, not a new fault.**
+
+**One thing was deliberately left unfinished, and it is the honest weak point.** Nothing has
+ever checked that the password box actually lets someone *in* — every check so far only proved
+it keeps people *out*. The check is now written down but cannot run until the app is actually on
+the site. It is the first thing that happens at the next step.
+
+**Still true from the last entry, unchanged:** the thing on the internet is still telling
+browsers that a page on your own machine may read from it. It is fixed in the code and reaches
+the live site the next time the app is published. You decided today to wait for that rather than
+publish twice, which is recorded.
+
+**The phone section further down this file is still waiting.** Its trigger is the app actually
+being live, which has not happened yet. Do not run it today — there is still no address a phone
+can open.
+
+*Detail: `docs/superpowers/2026-07-27-dep33-remediation-execution-log.md`, "Stage 3".*
+
+## N/A — 2026-07-27 — safety work under the bonnet; nothing to press, and one thing to know
 
 **Nothing to exercise, and nothing changed about the app you use on this machine.** No
 routing, no graph, no weighting, no clips, no buttons. A journey you build today is the same
