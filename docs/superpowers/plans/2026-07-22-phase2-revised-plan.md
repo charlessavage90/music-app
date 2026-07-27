@@ -1,9 +1,12 @@
 # Phase 2 — Revised Plan (2026-07-22)
 
-**Role: ACTIVE. Supersedes the remaining tasks of
-[`2026-07-21-phase2-path-quality.md`](2026-07-21-phase2-path-quality.md).**
-Tasks 1–13 of that plan stand as executed. Tasks 14–16 are amended here. Where this
-document and the original disagree, **this document governs.**
+**Role: HISTORICAL. EXECUTED 2026-07-22 — do not execute again.** Supersedes the remaining
+tasks of [`2026-07-21-phase2-path-quality.md`](2026-07-21-phase2-path-quality.md).
+Tasks 1–13 of that plan stand as executed. Tasks 14–16 were amended here and then run. Where
+this document and the original disagree, **this document governs**; where it and
+[`../2026-07-21-phase2-execution-log.md`](../2026-07-21-phase2-execution-log.md) disagree,
+**the log wins**. (This banner read `Role: ACTIVE` until 2026-07-27, contradicting
+[`../README.md`](../README.md), which has classified it historical throughout.)
 
 **This is a redirection, issued by the project owner after a full review of the Phase 2
 record.** The sections marked **CLOSED** are decisions already taken. They are not open
@@ -11,7 +14,7 @@ questions, and they are not to be re-argued, re-litigated, or "checked" before b
 applied. Apply them.
 
 **No figures appear in this document.** The quantitative record remains
-`findings/2026-07-21-scoring-adjudication.md`. The audit trail remains
+`../findings/2026-07-21-scoring-adjudication.md`. The audit trail remains
 `../2026-07-21-phase2-execution-log.md`.
 
 ---
@@ -155,7 +158,7 @@ is the exact failure this step exists to prevent, displaced in time.
 
 **Also check, and record:** `control` filters the special-purpose entities (the knob now
 defaults on), so it is *not* byte-identical to `graph-75k-v3.bin`, whose hub set produced
-the baseline in `findings/2026-07-22-configuration-model-null.md`. Report the overlap
+the baseline in `../findings/2026-07-22-configuration-model-null.md`. Report the overlap
 between the two hub sets. If it differs by more than a handful of nodes, Step 4's
 comparison against that baseline carries a caveat and must say so.
 
@@ -226,7 +229,7 @@ at 50 while the control's runs to four figures. Consequences, both mandatory:
   failure.
 
 Report `hubfrac` for each router and artifact against the topological baseline in
-`findings/2026-07-22-configuration-model-null.md`, subject to the Step 3 hub-set caveat.
+`../findings/2026-07-22-configuration-model-null.md`, subject to the Step 3 hub-set caveat.
 This targets execution-log §6 open item 3 directly and costs no builds.
 
 - [ ] **Step 7 — record and commit.** Verdict and probe numbers to the execution log; to

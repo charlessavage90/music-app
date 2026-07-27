@@ -1,5 +1,11 @@
 # Graph Builder Implementation Plan
 
+> **⚠ Role: HISTORICAL. EXECUTED and SHIPPED — do not execute again.** The builder described
+> here is live in `builder/`. Its forward-looking note that the API would be built with
+> "Fastify endpoints" was **wrong** — the API was built in Python/FastAPI; see
+> [`../specs/2026-07-20-stage3-web-frontend-design.md`](../specs/2026-07-20-stage3-web-frontend-design.md).
+> Where this plan and the code disagree, **the code wins**.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Produce a compact, deterministic artist-similarity graph artifact from ListenBrainz data, with every raw API response archived so the graph can be rebuilt forever without network access.

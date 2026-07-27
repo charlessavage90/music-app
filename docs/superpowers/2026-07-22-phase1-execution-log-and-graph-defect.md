@@ -591,6 +591,15 @@ instrument if anyone leans hard on the 15.6×.**
 
 ### 2.11 Who has zero exits — and a third conflation (2026-07-23)
 
+> **⚠ PROVENANCE, added 2026-07-27 — this section's tables were measured on
+> `graph-t15-capfix.bin`, which the app has not run since 2026-07-23.** It routes on
+> `graph-t15-tiebreakfix.bin`. See [`findings/2026-07-25-consulting-derivations.md`](findings/2026-07-25-consulting-derivations.md)
+> `DRV-1` (narrowed 2026-07-26 to §2.11 and §2.12 specifically). `DRV-2` argues the
+> **conclusions** survive, but **any individual figure below must not be quoted as a fact
+> about the running app until re-measured.** Added because `docs/README.md` and `NEXT.md`
+> both tell readers to open §2.12 first, and the caveat previously existed only in §2.9 —
+> the one section it does *not* cover.
+
 Prompted by the owner asking whether §2.10's zero-exit nodes are the lo-fi/chiptune
 cap-set artists or the Beatles-like ones. **The question has a false premise, and that is
 the finding: they are the same population.**
@@ -669,6 +678,16 @@ structural finding above does not depend on it.
 ---
 
 ### 2.12 The currency error — and why this is a cost-function problem, not a graph problem (2026-07-23)
+
+> **⚠ PROVENANCE, added 2026-07-27 — this section's tables were measured on
+> `graph-t15-capfix.bin`, which the app has not run since 2026-07-23.** It routes on
+> `graph-t15-tiebreakfix.bin`. See [`findings/2026-07-25-consulting-derivations.md`](findings/2026-07-25-consulting-derivations.md)
+> `DRV-1` (narrowed 2026-07-26 to §2.11 and §2.12 specifically). `DRV-2` argues the
+> **conclusions** survive — the pricing leg is artifact-independent and the exposed legs move
+> in the direction that *strengthens* this section — but **any individual figure below must
+> not be quoted as a fact about the running app until re-measured.** The visible tell needs
+> no tooling: the worked example below says the Beatles have 7 of 7 neighbours admissible,
+> while `MKS-5` records them holding the full 50 on the adopted graph.
 
 Prompted by the owner pushing on whether zero-exit artists are underserved, given that
 famous artists are the most likely path endpoints and the most likely `known` targets.

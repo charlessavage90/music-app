@@ -16,9 +16,14 @@ stands.
 ## 1. State in five lines
 
 - **F1 is BUILT.** Every journey now gets at least one stop, or says on screen why it
-  cannot. **PR #23 open against `main`, not merged.** Merging is the owner's.
-- **F1 is NOT discharged.** Its condition is an observation, and that observation is the
-  queued use-the-app entry. A passing suite does not close it.
+  cannot. ~~**PR #23 open against `main`, not merged.** Merging is the owner's.~~ **PR #23
+  was merged.**
+- ~~**F1 is NOT discharged.** Its condition is an observation, and that observation is the
+  queued use-the-app entry. A passing suite does not close it.~~ **⚠ STRUCK 2026-07-27:
+  `F1` was DISCHARGED on 2026-07-26** — the observation its condition named happened, and
+  Gate 1 is closed. Recorded in `2026-07-26-HANDOFF-deliverability.md` and
+  [`NEXT.md`](NEXT.md), which owns status. The reasoning above was right; only its
+  conclusion has been overtaken.
 - **Path-quality work is still paused.** This added no weight, no config knob, no
   cost-function change and no rebuild — a structural constraint over the *result*.
 - **Nothing is in flight.** The SDD workspace is deleted; no subagent or job is running.

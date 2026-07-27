@@ -1,7 +1,12 @@
 # Artist Path — Alpha Design
 
 **Date:** 2026-07-19
-**Status:** Approved, ready for implementation planning
+**Role: COMPLETE — shipped.** Still the reference for **determinism (§9) and the APG1
+format**, which is why it stays authoritative on those. Elsewhere it describes intent, not
+today's code: notably it predates the decision to build the API in Python/FastAPI rather than
+Fastify. Where it and the code disagree, **the code wins**; for current status see
+[`../NEXT.md`](../NEXT.md). *(Read "Approved, ready for implementation planning" until
+2026-07-27.)*
 **Scope:** Alpha only — a faithful rebuild of Boil the Frog, for personal use, deployed on AWS.
 
 ---

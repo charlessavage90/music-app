@@ -1,5 +1,11 @@
 # F1 Minimum-Stop Implementation Plan
 
+> **⚠ EXECUTED 2026-07-25 — do not execute again.** Outcomes are in
+> [`../2026-07-25-f1-minimum-stop-execution-log.md`](../2026-07-25-f1-minimum-stop-execution-log.md)
+> (`FMS-`), PR #23, merged. F1 itself was **discharged 2026-07-26** by the observation its
+> condition named — see [`../NEXT.md`](../NEXT.md). Where that log and this plan disagree,
+> **the log wins**.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Every journey returns at least one artist between the two chosen, or says on screen why it cannot.

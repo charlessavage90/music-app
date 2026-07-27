@@ -1,5 +1,11 @@
 # Stage 3a Web Frontend Implementation Plan
 
+> **⚠ Role: HISTORICAL. EXECUTED and SHIPPED — do not execute again.** The frontend described
+> here is live in `frontend/` and has since been reworked by Gate 2 Track D
+> ([`../2026-07-26-gate2-track-d-execution-log.md`](../2026-07-26-gate2-track-d-execution-log.md)).
+> Two details below have moved on: it targets React 18 (the code is on React 19) and the
+> **5k dev graph, which is retired**. Where this plan and the code disagree, **the code wins**.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build the React web frontend for the artist-path app — two autocomplete inputs, a vertical-journey of artist cards with clips and two bypass controls, sequential autoplay, reroll-as-new-path, and shareable URLs — running locally against the existing Python API on the 5k graph.

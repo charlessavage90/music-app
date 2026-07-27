@@ -71,6 +71,12 @@ lifetime lives in `docs/superpowers/2026-07-25-gate1-clips-and-ux-execution-log.
 | `ARTISTPATH_GRAPH` | `../builder/scratch/graph-t15-tiebreakfix.bin` | Which artifact to load; the adopted artifact, flipped at each adoption. |
 | `ARTISTPATH_CLIP_CACHE` | `memory` | `memory` (local dev — no AWS needed) or `dynamo` (production). |
 | `ARTISTPATH_CLIP_TABLE` | `artistpath-clips` | DynamoDB table name when the cache is `dynamo`. |
+| `ARTISTPATH_GRAPH_SHA256` | unset | Verified at boot, so a wrong artifact refuses to start. Optional locally, **required in production**. Take it from the artifact's manifest sidecar — never transcribe it by hand (`DEP-24`). |
+| `ARTISTPATH_CORS_ORIGINS` | empty | Allowed browser origins. Empty means none, deliberately — see `RMD-6`. |
+| `ARTISTPATH_ORIGIN_SECRET` | unset | Shared secret proving a request came via CloudFront rather than direct to the origin. |
+
+The last three were missing from this table until 2026-07-27 while being real fields on
+`ApiConfig`; read defaults from `config.py`, not from a copy here.
 
 The graph loads once at startup into numpy typed arrays; path queries touch no
 database and no network. With the default `memory` cache the server boots and

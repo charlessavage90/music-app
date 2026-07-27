@@ -1,5 +1,12 @@
 # Track 1 — Tie-break Remediation Implementation Plan
 
+> **⚠ Role: COMPLETE. EXECUTED 2026-07-23 — do not execute again.** The fix landed and the
+> rebuilt artifact was **adopted**; the app has routed on `graph-t15-tiebreakfix.bin` since.
+> Outcomes: [`../2026-07-23-repair-and-retune-execution-log.md`](../2026-07-23-repair-and-retune-execution-log.md);
+> artifact identity: [`../findings/2026-07-23-tiebreak-fix-adoption.md`](../findings/2026-07-23-tiebreak-fix-adoption.md).
+> Where those and this plan disagree, **they win**. Re-running this rebuilds and re-adopts an
+> artifact, which is the owner's call.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Fix the §2.8 tie-break defect — `mutual_knn_cap` must rank top-k on unclipped damped strengths, not p99-clipped scores — then rebuild, verify against §2.8 Arm 2, and adopt the repaired 75k artifact.

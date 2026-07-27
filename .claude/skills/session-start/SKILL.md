@@ -124,8 +124,9 @@ git status --short && git log --oneline -3 && git branch -vv
 - **Named gates in the governing plan, and their current state** — including any that
   *failed* and were worked around. A failed gate that someone routed around is the single
   most important thing to know before adding work on top of it.
-- **Environment traps.** These are in `CLAUDE.md` and in the execution log, and they are
-  still the first thing that breaks:
+- **Environment traps.** Only the first is in `CLAUDE.md`; the other two live in
+  `memory/deploy-environment-traps.md` and the execution logs. They are still the first
+  thing that breaks:
   - `UV_LINK_MODE=copy` on every `uv` command — OneDrive breaks hardlinks.
   - `PYTHONIOENCODING=utf-8` on anything printing artist names.
   - Python buffers stdout when redirected here, so a long background job writes a 0-byte

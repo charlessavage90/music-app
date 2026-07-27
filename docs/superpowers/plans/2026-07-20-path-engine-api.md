@@ -1,5 +1,10 @@
 # Path Engine & API Implementation Plan
 
+> **⚠ Role: HISTORICAL. EXECUTED and SHIPPED — do not execute again.** The service described
+> here is live in `api/` and has since been hardened by Gate 2 Track A
+> ([`../2026-07-26-gate2-track-a-execution-log.md`](../2026-07-26-gate2-track-a-execution-log.md)).
+> Where this plan and the code disagree, **the code wins**.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** A Python/FastAPI service that loads the graph artifact into memory and serves artist-path search, two-signal bypass rerolls, autocomplete, and 30-second clip resolution.

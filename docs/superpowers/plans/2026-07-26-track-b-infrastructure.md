@@ -4,7 +4,14 @@
 > (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use
 > checkbox (`- [ ]`) syntax for tracking.
 
-**Role: ACTIVE, not yet executed.** Governing design:
+> **⚠ EXECUTED 2026-07-26 — do not execute again.** Outcomes are in
+> [`../2026-07-26-gate2-track-b-execution-log.md`](../2026-07-26-gate2-track-b-execution-log.md)
+> (`TKB-`), PR #29, merged. Where that log and this plan disagree, **the log wins**. This
+> plan provisions live AWS infrastructure; re-running it is not idempotent. The banner below
+> said "Role: ACTIVE, not yet executed" until 2026-07-27, when a full-project doc audit
+> found it still asserting that after the stack had been deployed and the app was serving.
+
+**Role: COMPLETE.** Governing design:
 [`../specs/2026-07-26-gate2-deploy-and-telemetry-design.md`](../specs/2026-07-26-gate2-deploy-and-telemetry-design.md)
 — **read its §12 amendments first**; several §2–§4 passages are struck in place by them.
 Binding review: [`../findings/2026-07-26-gate1-gate2-team-review.md`](../findings/2026-07-26-gate1-gate2-team-review.md)
