@@ -23,6 +23,47 @@ the point.**
 
 ---
 
+## N/A — 2026-07-27 (later) — nothing to press, and one thing I told you that was wrong
+
+**Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no clips,
+no buttons — **not one line of application code changed today**. A journey you build now is the
+same journey as this morning's. Nothing was started on this machine and nothing was left
+behind; both ports were checked and were already empty.
+
+**The correction, and it is the reason this entry exists.** The last entry told you some
+artists' descriptions were mangled, and that The Beatles read `â€œThe Fab Fourâ€` in the
+search dropdown. **You said you had never seen that, in the live app or on your machine, and
+you were right.** I read the artist map itself and it holds the correct text with correct
+quotation marks. The mangling was in the tool *I* used to look at it, not in anything you
+have ever been shown. I have struck it from the record.
+
+**Why it is worth thirty seconds of your attention rather than none:** it was quietly becoming
+one of the reasons to rebuild the artist map, which is a decision of yours. It is no longer a
+reason for anything. **This is the second time this exact mistake has been made here**, so it
+is now written into the notes that carry across sessions.
+
+**Your phone run is recorded as passing on every one of the six things it asked for** — the
+strongest kind of result this file keeps. Two of them had never been seen working by a person
+before, only proved by machine: signing in, and **a link you shared opening correctly for
+someone who had never logged in**. That last one is the whole point of putting it on the
+internet, and it now works.
+
+**Still not covered, and no Android device can cover it:** anything specific to an iPhone —
+how Safari draws the page, the bar at the very bottom, and whether the keyboard alters artist
+names as you type them. Whether that matters depends entirely on who you send the link to.
+
+**One thing I found and deliberately did not fix**, so it does not surprise anyone later: the
+space the app reserves at the bottom of the screen for a phone's system bar is switched off by
+a setting elsewhere, so it has never actually done anything. **It causes no problem today** —
+the bar clears fine on its own, which is why your phone run passed — and it would only start
+mattering if someone changed that other setting believing the reservation had them covered.
+
+**The other thing today produced is a plan to move the project off OneDrive**, which is
+housekeeping on this machine and touches nothing you use.
+
+*Detail: `docs/superpowers/plans/2026-07-27-onedrive-migration.md` and
+`docs/superpowers/2026-07-27-HANDOFF-onedrive-migration.md`.*
+
 ## DONE — 2026-07-27 — the app is on the internet, and this is the first real run
 
 **DONE 2026-07-27 — PASSED on everything exercised, on a real phone, and it exposed one
