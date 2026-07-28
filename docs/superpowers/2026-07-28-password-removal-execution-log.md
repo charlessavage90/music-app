@@ -356,3 +356,57 @@ Everything was infrastructure, the viewer function, and documentation.
   `NEXT.md` and `infra/README.md`.
 - **The one thing genuinely owed is the queued iPhone test**, and only a person with an iPhone
   can discharge it.
+
+## Closeout — 2026-07-28, at the seam
+
+**Full ritual.** Ports 8000/5173/8138/8139 all free; nothing started, nothing left running, and
+the queued test exercises the deployed site so no local server is needed.
+
+**Suites (D4), all run rather than recalled:** builder **115**, api **214**, infra **63**,
+frontend **80**.
+
+**B3 — the gate's invariants were mutation-tested, not trusted green.** Three mutations, all
+caught: inverting the comparison (`!==` → `===`) fails **10** tests — that is `QUA-1`'s defect
+class, which once passed all 18; dropping the query string from the redirect fails **1**;
+removing the no-loop branch fails **2**.
+
+**B1 — the doc audit found three HIGH defects and all three were this session's own work.**
+Two were in `infra/README.md` §1a's re-verification block, written at `PW-6` while the password
+was still on: `PW-8` corrected §8 and §8a and never returned to §1a, so it still set the deleted
+`ARTISTPATH_DEPLOY_PASSWORD` and sent Basic auth. The third was the previous handoff's `--prune`
+claim, corrected in `NEXT.md` and here but not at its source. **All three are defects of
+omission or of not-going-back — exactly what the audit exists for and what a grep cannot find.**
+Fixed, and the corrected §1a block was then executed verbatim.
+
+**D6 — the standing context layer.**
+
+| Layer | Unit | Figure |
+|---|---|---|
+| Unconditional | characters | **43,692** |
+| Conditional | lines | **2,120** |
+
+**Both grew today, and the growth is `CLAUDE.md`'s environment note (+286 characters).** It was
+a **correction** — the note said the project lives under OneDrive and that `UV_LINK_MODE=copy` is
+required or `uv` fails, and neither was true. A first draft cost +464; it was trimmed by moving
+the detail into `memory/env-onedrive-uv.md`, which is conditional. The conditional +13 lines are
+the `closeout` D6 path fix and the App Runner tagging narrative.
+
+⚠ **The previous figures in this log are not comparable.** `closeout` D6 named the pre-migration
+memory slug, whose directory still exists, so it had been computing both numbers against a frozen
+copy that could never move. Corrected 2026-07-28; these are the first figures measured against
+the live one.
+
+**A3 — every deferral condition re-tested against reality, not merely confirmed to exist.** None
+has come due: no RSC machinery in the frontend (react-router CSRF), no `viewport-fit=cover` in
+`index.html` (safe-area inset), the App Runner service was not recreated and its CLI tags are
+still present, and `sync_frontend` appears in none of the four deploy logs (`--prune`).
+
+**A4 — three config fields were added** (`front_door_secret`, `site_hostname`,
+`certificate_arn`). None is a knob sitting at an old default: `app.py` `_require`s all three, so
+production cannot run without them. The `""` defaults exist only so the storage stage and the
+tests can synthesise without a certificate.
+
+**D2 is inapplicable** — the graph artifact did not change, so the committed fixtures are not
+stale. **D3:** what is live is image tag `37d559e` on the adopted artifact `4cb84ef9…`,
+unchanged all day; the ACM certificate is
+`arn:aws:acm:us-east-1:826731842184:certificate/0f61db68-cfc6-42e9-938c-70b5b6f081e5`.

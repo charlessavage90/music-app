@@ -1,6 +1,12 @@
 # Handoff — password removal Track A complete, at the Track B seam, 2026-07-28
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⛔ SUPERSEDED 2026-07-28 — on next actions AND on status — by
+[`2026-07-28-HANDOFF-password-removal-complete.md`](2026-07-28-HANDOFF-password-removal-complete.md).
+This document is fully spent: Track B ran to completion the same day, the password is off, and
+its "Your job" section is done. Do not act on its next actions.** Retained because it is still
+the record of *why Track B was shaped as it is* — the additive-reversible ordering, and the four
+things it warned a cold session would get wrong, all of which held. **One of its bullets was
+wrong and is struck in place; see the `--prune` item.** Originally superseded
 [`2026-07-27-HANDOFF-migration-phase-d.md`](2026-07-27-HANDOFF-migration-phase-d.md) **as the
 document to read first, and on next actions for *this* body of work only.** It does **not** state
 project status: for that read [`NEXT.md`](NEXT.md), which owns it.
@@ -73,11 +79,15 @@ Record: [`2026-07-28-password-removal-execution-log.md`](2026-07-28-password-rem
 
 ## What I know that is not in the durable record
 
-- **The `--prune` publish deferral comes due at Track B's first deploy.** `NEXT.md` records it as
-  "the next deploy after this one", skipped at cutover because the bucket was empty. PW-5 step 6
-  is that next deploy. **Nothing in the plan currently reads this deferral**, which is exactly the
-  failure mode `closeout` **A3** names — a satisfied condition nobody was scheduled to read.
-  Handle it at PW-5 or restate the condition. (Written as `closeout A3` rather than bare `A3`:
+- ⚠ **CORRECTED 2026-07-28 — this bullet was WRONG and is retained struck rather than deleted.**
+  It said the `--prune` publish deferral came due at Track B's first deploy, and that "PW-5 step 6
+  is that next deploy". **It is not.** `--prune` belongs to `sync_frontend.py`, the **frontend**
+  publish; `PW-5`–`PW-7` were infrastructure-only and never touched the SPA bucket, which still
+  holds the cutover's objects (verified: `sync_frontend` appears in none of the four deploy logs).
+  The condition is **the next FRONTEND publish**, and it has not come due. See `NEXT.md`'s
+  deferral table and the execution log's `PW-8` section. The original wording's underlying point
+  still stands and is why this was caught: `closeout` **A3** names exactly this failure — a
+  condition nobody is scheduled to read. (Written as `closeout A3` rather than bare `A3`:
   that token already means a Track 2 arm and a Gate 2→3 architect finding.)
 - **`docs-lint.sh`'s `CAND` output has a large pre-existing tail** — ~37 restated-figure
   candidates across path-quality documents this work never touched. They do not affect its exit

@@ -146,13 +146,12 @@ per 10 s**, against a predicted
 
 ```bash
 set -a && . ./.env.deploy && set +a
-H=$ARTISTPATH_SITE_HOSTNAME; PW=$ARTISTPATH_DEPLOY_PASSWORD
+H=$ARTISTPATH_SITE_HOSTNAME
 
-curl -s -o /dev/null -w '%{http_code}\n' "https://$H/"                              # 401
-curl -s -o /dev/null -w '%{http_code}\n' -u "artistpath:$PW" "https://$H/"          # 200
-curl -s -o /dev/null -w '%{http_code}\n' -u "artistpath:$PW" "https://$H/path/$A/$B"  # 200
-curl -s -o /dev/null -w '%{http_code}\n' -u "artistpath:$PW" \
-  "https://$H/api/artists/search?q=radiohead"                                        # 200
+# There is no password. Every one of these is unauthenticated.
+curl -s -o /dev/null -w '%{http_code}\n' "https://$H/"                            # 200
+curl -s -o /dev/null -w '%{http_code}\n' "https://$H/path/$A/$B"                  # 200
+curl -s -o /dev/null -w '%{http_code}\n' "https://$H/api/artists/search?q=radiohead"  # 200
 ```
 
 **The rate limit fires, and only on abuse.** Use a *famous* pair — an obscure pair takes ~560 ms
@@ -160,13 +159,16 @@ server-side, so sequential requests never reach 10 per 10 s and the test silentl
 
 ```bash
 for i in $(seq 1 60); do
-  curl -s -o /dev/null -w '%{http_code} ' -u "artistpath:$PW" \
+  curl -s -o /dev/null -w '%{http_code} ' \
     -X POST "https://$H/api/path" -H 'content-type: application/json' \
     -d "{\"sources\":[\"$A\",\"$B\"],\"exclude\":[]}"
 done; echo
 ```
 
-Expect ten `200`s then `429`. Measured 2026-07-28: first `429` at request **11**.
+Expect roughly ten `200`s, then `429`. **The exact index varies by a request or two** with where
+the 10-second window happens to fall — measured 2026-07-28 at request **11** on one run and **12**
+on another. Read "a 429 arrives in the low teens" as the pass; **60 × `200` is the failure**, and
+it almost always means the path pattern is not matching.
 
 **Peak real usage** is read from CloudWatch. Note `filter event = "path"` returns nothing —
 use `ispresent(bypass_depth)`, which is what actually distinguishes a path event from a clip
