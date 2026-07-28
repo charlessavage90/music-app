@@ -88,3 +88,17 @@ mechanism-shaped gap left after two repricing nulls.
 `findings/2026-07-25-router-ascent-gradient.md` §4 annotated with a dated discharge
 note pointing at the analysis directory; `docs/README.md` given the directory's
 authoritative row.
+
+## §6 — Owner set the ordering; Track 3 pre-registration committed
+
+The owner approved the recommended ordering (depth-directional device first; rescale
+parked until it answers; degree-floor axis not started; his spends last) and asked to
+proceed. `specs/2026-07-28-track3-depth-descent-preregistration.md` is committed —
+identifiers `DD-` (verified unused), device `w_known_ramp_pctl · k · pop_pctl(v)`,
+six-arm factor table over dose × floor with per-row isolating baselines, the floor
+declared a live interacting term in §0 rather than a constant (the Track 2 §0 lesson
+in mirror image), first-path invariance as a verified gate (DD-G2), fame keyed by
+MBID as a precondition (P8b F8, live for diving arms), and reads DD-R1/R2/R3 each
+naming their run state. No arm may run until DD-P1 (depth headroom), DD-P2 (pair
+set), DD-P3 (analyst review) and DD-P4 (harness + Snyk) discharge, in that order.
+Nothing in it schedules a blind listen, a rebuild, or any owner spend.
