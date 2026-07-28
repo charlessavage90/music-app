@@ -21,6 +21,7 @@ from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from typing import Protocol
 
+from artistpath_api.breaker import CatalogueBreaker
 from artistpath_api.config import ApiConfig
 
 FetchJson = Callable[[str, dict], Awaitable[dict]]
@@ -164,10 +165,23 @@ class DynamoClipCache:
 
 
 class ClipResolver:
-    def __init__(self, cfg: ApiConfig, cache: ClipCache, fetch_json: FetchJson) -> None:
+    def __init__(
+        self,
+        cfg: ApiConfig,
+        cache: ClipCache,
+        fetch_json: FetchJson,
+        breaker: CatalogueBreaker | None = None,
+    ) -> None:
         self._cfg = cfg
         self._cache = cache
         self._fetch = fetch_json
+        # Optional so every existing call site keeps working unchanged, and
+        # built from cfg when absent so production gets one without app.py
+        # having to know it exists.
+        self._breaker = breaker or CatalogueBreaker(
+            threshold=cfg.clip_breaker_threshold,
+            cooldown_s=cfg.clip_breaker_cooldown_s,
+        )
 
     async def _get(self, url: str, params: dict) -> dict:
         """Fetch, treating any failure as "no answer" rather than an error.
@@ -202,6 +216,23 @@ class ClipResolver:
             # cannot name the transport's exception types without coupling
             # to httpx. Observability for this is a Gate 2 item.
             return {}
+
+    async def _get_from(self, source: str, url: str, params: dict) -> dict:
+        """`_get`, but skipping a source that is inside its cooldown.
+
+        Raises CatalogueUnavailable WITHOUT calling out when the breaker is
+        open, so every caller's existing handling of that exception applies
+        unchanged — the breaker adds no new control flow anywhere else.
+        """
+        if self._breaker.is_open(source):
+            raise CatalogueUnavailable(f"{source} breaker open")
+        try:
+            body = await self._get(url, params)
+        except CatalogueUnavailable:
+            self._breaker.record_failure(source)
+            raise
+        self._breaker.record_success(source)
+        return body
 
     async def resolve(self, mbid: str, artist_name: str) -> Clip | None:
         """Resolve a playable clip, re-signing the URL on every request (C2).
@@ -249,12 +280,12 @@ class ClipResolver:
     async def _preview_url(self, identity: TrackIdentity) -> str | None:
         """Re-sign a known track. Returns None if it is no longer available."""
         if identity.source == "deezer":
-            body = await self._get(
-                f"{self._cfg.deezer_track_url}/{identity.track_id}", {}
+            body = await self._get_from(
+                "deezer", f"{self._cfg.deezer_track_url}/{identity.track_id}", {}
             )
             return body.get("preview") or None
-        body = await self._get(
-            self._cfg.itunes_lookup_url, {"id": identity.track_id}
+        body = await self._get_from(
+            "itunes", self._cfg.itunes_lookup_url, {"id": identity.track_id}
         )
         for row in body.get("results", []):
             if row.get("previewUrl"):
@@ -280,7 +311,8 @@ class ClipResolver:
             return None
 
     async def _from_deezer(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        body = await self._get(
+        body = await self._get_from(
+            "deezer",
             self._cfg.deezer_search_url,
             {"q": artist_name, "limit": self._cfg.clip_search_limit},
         )
@@ -301,7 +333,8 @@ class ClipResolver:
         return None
 
     async def _from_itunes(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        body = await self._get(
+        body = await self._get_from(
+            "itunes",
             self._cfg.itunes_search_url,
             {
                 "term": artist_name,

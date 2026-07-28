@@ -121,3 +121,15 @@ class ApiConfig:
     # case goes. Raise it if cards come back silent for artists that
     # obviously have tracks.
     clip_search_limit: int = 25
+
+    # --- clip circuit breaker (G3-A4 / G3-S2) ---------------------------
+    # Consecutive unavailable responses from ONE catalogue before we stop
+    # calling it. 5 rather than 1 or 2: a single transient error must not
+    # silence every card for a minute, which would be worse than the defect.
+    clip_breaker_threshold: int = 5
+    # How long to leave it alone afterwards. 60 s is a judgement, not a
+    # measurement — neither catalogue documents its rate-limit window. The
+    # first request after the cooldown is the probe; if it fails the breaker
+    # re-opens immediately, so a service that stays down costs one call a
+    # minute rather than five.
+    clip_breaker_cooldown_s: float = 60.0

@@ -918,11 +918,16 @@ class CatalogueBreaker:
         if opened is None:
             return False
         if self._now() - opened >= self._cooldown_s:
-            # Cooldown served. Reset fully rather than half-opening: one probe
-            # request per cooldown IS the half-open behaviour here, because the
-            # next real request is the probe and a failure re-opens immediately.
+            # ⚠ CORRECTED DURING EXECUTION 2026-07-28. This block originally
+            # also did `self._failures.pop(source, None)`, with a comment
+            # claiming a full reset *was* the half-open behaviour. It is not:
+            # resetting the count admits a further `threshold` requests every
+            # cooldown, so a permanently dead catalogue costs five calls a
+            # minute rather than one. Leaving the count at the threshold makes
+            # the next real request the probe, and a single failure re-opens.
+            # Caught by test_the_request_after_a_cooldown_is_the_probe_and_a_
+            # failure_reopens, which was written before the implementation.
             self._opened_at.pop(source, None)
-            self._failures.pop(source, None)
             return False
         return True
 

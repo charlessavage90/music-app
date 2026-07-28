@@ -1,3 +1,4 @@
+from artistpath_api.breaker import CatalogueBreaker
 from artistpath_api.clips import (
     CatalogueUnavailable, ClipResolver, DynamoClipCache, InMemoryClipCache,
     TrackIdentity,
@@ -44,7 +45,7 @@ class Boom(Exception):
     """
 
 
-def _resolver(responses, cache=None):
+def _resolver(responses, cache=None, breaker=None):
     """responses maps a url-substring to the dict it returns.
 
     A value that is an exception instance is raised instead of returned.
@@ -60,7 +61,7 @@ def _resolver(responses, cache=None):
                 return body
         return {}
 
-    r = ClipResolver(CFG, cache or InMemoryClipCache(), fetch_json)
+    r = ClipResolver(CFG, cache or InMemoryClipCache(), fetch_json, breaker=breaker)
     r.calls = calls
     return r
 
@@ -509,4 +510,37 @@ async def test_a_throttled_deezer_still_falls_through_to_itunes_on_a_cold_artist
 
     assert clip is not None
     assert clip.source == "itunes"
+    assert len(_deezer_calls(r)) == 1
+
+
+async def test_an_open_breaker_makes_no_outbound_call_at_all():
+    # The point of the whole task. PW-3 made one request cost one call instead
+    # of three; without a breaker, a thousand requests still cost a thousand
+    # calls to a service that is refusing us, which is what keeps the block in
+    # place rather than letting it clear.
+    breaker = CatalogueBreaker(threshold=2, cooldown_s=60.0)
+    r = _resolver({"deezer": CatalogueUnavailable("429")}, breaker=breaker)
+
+    for _ in range(5):
+        await r.resolve(MBID, "Radiohead")
+
+    assert len(_deezer_calls(r)) == 2, (
+        f"kept calling a refusing Deezer {len(_deezer_calls(r))} times; "
+        "the breaker should have stopped it after 2"
+    )
+
+
+async def test_an_open_deezer_breaker_leaves_itunes_usable():
+    # A breaker that silenced every card whenever one catalogue was throttled
+    # would be a worse defect than the one being fixed.
+    breaker = CatalogueBreaker(threshold=1, cooldown_s=60.0)
+    r = _resolver({
+        "deezer": CatalogueUnavailable("429"),
+        "itunes": ITUNES_HIT,
+    }, breaker=breaker)
+
+    await r.resolve(MBID, "Radiohead")          # trips the breaker
+    clip = await r.resolve("b" * 36, "Radiohead")
+
+    assert clip is not None and clip.source == "itunes"
     assert len(_deezer_calls(r)) == 1
