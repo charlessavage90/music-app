@@ -101,8 +101,9 @@ curl -X POST http://localhost:8000/api/path -H "content-type: application/json" 
   -d '{"sources":["<from-mbid>","<to-mbid>"],"exclude":[]}'
 ```
 
-> On Windows with the project under OneDrive, prefix `uv` commands with
-> `UV_LINK_MODE=copy` to avoid hardlink errors.
+> On Windows, prefix `uv` commands with `UV_LINK_MODE=copy`. Hardlinking fails at
+> `C:\dev\music-app`; uv falls back to copying by itself, so this suppresses the
+> warning rather than being required.
 
 ## Cost-function weights
 

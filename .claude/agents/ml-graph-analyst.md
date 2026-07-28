@@ -172,9 +172,11 @@ expected and welcome, not a failure.
 
 ## Environment
 
-The project is under OneDrive on Windows. **Prefix every `uv` command with
-`UV_LINK_MODE=copy`** or it fails with hardlink errors. Each Python package has its own
-`.venv`; `cd` into `builder/` or `api/` before running `uv`.
+The project lives at `C:\dev\music-app` on Windows (it moved off OneDrive on 2026-07-27).
+**Prefix every `uv` command with `UV_LINK_MODE=copy`** — not strictly required any more, as
+uv falls back to copying on its own, but hardlinking still fails here and the prefix skips a
+doomed attempt. Each Python package has its own `.venv`; `cd` into `builder/` or `api/`
+before running `uv`.
 
 ```bash
 cd api && UV_LINK_MODE=copy uv run python eval/run_baseline.py

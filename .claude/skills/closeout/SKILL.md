@@ -541,7 +541,10 @@ The PR body is where a reviewer picks up the context, so it carries:
 **Report two numbers, never one. They are not the same layer and they do not cost the same.**
 
 ```bash
-M=~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory
+# The slug is derived from the project path. Corrected 2026-07-28: this named the
+# pre-migration OneDrive slug, whose directory still EXISTS, so both numbers below were
+# silently computed against a frozen copy and could never move. Check it resolves.
+M=~/.claude/projects/C--dev-music-app/memory
 
 # 1. UNCONDITIONAL — loads in every session before it reads anything. Characters.
 #    `tr -d '\r' | wc -m`, never `wc -c`: this tree is core.autocrlf=true so every line

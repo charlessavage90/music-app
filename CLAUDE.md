@@ -48,12 +48,16 @@ no shared module to enforce it.
 
 ## Environment note (important)
 
-The project lives under OneDrive on Windows. **Prefix every `uv` command with
-`UV_LINK_MODE=copy`** or it fails with hardlink errors:
+The project lives at **`C:\dev\music-app`** — it moved off OneDrive on 2026-07-27, and that
+tree is now a **permanent archive, never the working tree**. **Prefix every `uv` command with
+`UV_LINK_MODE=copy`:**
 
 ```bash
 UV_LINK_MODE=copy uv run --extra dev pytest -q
 ```
+
+Hardlinking still fails here; uv falls back to copying by itself, so the prefix suppresses a
+warning rather than being strictly required. Keep it — detail in `memory/env-onedrive-uv.md`.
 
 Each Python package has its own `.venv` and `pyproject.toml`; `cd` into the package
 before running `uv`.
@@ -539,9 +543,9 @@ Development here is **pull-request driven against `origin`
 directly to `main`.
 
 - **Branch off `main`** for any piece of work, and **push the branch early** — the first
-  commit, not the last. Work that exists only in this working tree is unbacked: the repo
-  lives under OneDrive, which syncs files but is not a substitute for a remote, and a
-  phase's worth of commits is expensive to lose.
+  commit, not the last. Work that exists only in this working tree is unbacked: Backblaze
+  backs up `C:\dev` but that is not a substitute for a remote — it keeps no history and no
+  branches — and a phase's worth of commits is expensive to lose.
 - **Open the PR when the work is coherent, not when it is finished.** A draft PR gives the
   work a durable address that survives any session ending.
 - **The PR body is where a reviewer picks up context** — see the `closeout` skill's D5 for

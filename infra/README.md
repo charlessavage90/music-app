@@ -24,7 +24,9 @@ Governing design:
 - **The artifact and its sidecar on this machine.** Both are gitignored (`DEP-9`), so a
   deploy happens from a machine that has `builder/scratch/graph-t15-tiebreakfix.bin` and
   `…bin.json`. There is no way to fetch them from git.
-- **`UV_LINK_MODE=copy` on every `uv` command** — the repository is under OneDrive.
+- **`UV_LINK_MODE=copy` on every `uv` command** — hardlinking fails at `C:\dev\music-app`.
+  uv falls back to copying by itself, so this suppresses the warning rather than being
+  required. (The repository moved off OneDrive on 2026-07-27.)
 
 Verify before starting:
 

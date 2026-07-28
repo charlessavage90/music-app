@@ -16,9 +16,11 @@ execution log which disagrees with it wins and the staleness gets fixed rather t
 around. The "Closeout state" section below still describes the *previous* closeout and is
 unchanged.
 
-**Two of the three owner-owed items below have since been discharged and are struck.** Both
-were checked **by observation, not by reading a document**: the memory slug (item 1) and the
-two zombie API servers (item 3). **One remains: Task 9.**
+**All three owner-owed items below are now discharged and struck.** Each was checked **by
+observation, not by reading a document**: the memory slug (item 1), Backblaze (item 2,
+2026-07-28), and the two zombie API servers (item 3). **The migration axis carries no owner-owed
+item, and Task 12 is now DONE.** Tasks 10 and 11 are closed by owner decision — see item 2 —
+so **the OneDrive migration is complete and closed in full.**
 
 ---
 
@@ -36,9 +38,11 @@ two zombie API servers (item 3). **One remains: Task 9.**
 > nothing was deployed. Track B starts on a fresh branch off `main`.
 > This is a pointer, not a rewrite — the full rewrite is that plan's task PW-8.
 
-**The OneDrive migration is at its Phase D seam. One thing is owed on this axis, and it is the
-owner's: Task 9.** Items 1 and 3 below were owed when this section was written and are now
-**struck — both discharged by observation on 2026-07-27 (evening).**
+**The OneDrive migration is DONE in full, and nothing on this axis is owed by anyone.**
+Items 1–3 below are all **struck — discharged by observation**, items 1 and 3 on
+2026-07-27 (evening) and item 2 on 2026-07-28. **Phase D as planned no longer exists:** the
+owner decided on 2026-07-28 that the old tree costs nothing to keep and will be deleted by him
+whenever he chooses, which closes Tasks 10 and 11 and makes Phase D's irreversibility moot.
 
 Phases A–C ran on 2026-07-27 and passed —
 [`2026-07-27-onedrive-migration-execution-log.md`](2026-07-27-onedrive-migration-execution-log.md)
@@ -58,10 +62,28 @@ config default changed, and no test-queue entry is owed.
    `~/.claude/projects/C--dev-music-app/`. **This item was already stale when written here; the
    execution log was the fresher document and won.** The duplicate memory directory under the old
    slug is still retained deliberately until Task 11.
-2. **Verify Backblaze actually covers `C:\dev`** (Task 9) — folder included, `.bin`/`.json` not
+2. ~~**Verify Backblaze actually covers `C:\dev`** (Task 9) — folder included, `.bin`/`.json` not
    excluded, and an upload **completed** rather than queued. **This gates Task 11**, the
-   deletion of the OneDrive tree. Until it passes, OneDrive is still the only second copy of
-   the unreproducible archive.
+   deletion of the OneDrive tree.~~ **✅ DISCHARGED 2026-07-28 — `MIG-3` is CLOSED, and it was
+   closed by restore rather than by reading a backup UI.** The owner confirmed full coverage and
+   then **restored two files** to `C:\Users\charl\Downloads\C\dev\music-app`: the adopted
+   artifact `builder/scratch/graph-t15-tiebreakfix.bin` and one crawl-archive record,
+   `graph-archive/similar/listenbrainz/00006766-…95ec.json`. Both are **byte-identical to the
+   live files** (sha256 and length), and the artifact's hash agrees **four ways** — restored
+   file, live file, its manifest sidecar, and `findings/2026-07-23-tiebreak-fix-adoption.md`.
+   The JSON is intact as a *record*, not merely as bytes: it parses, holds 72 entries, and every
+   `reference_mbid` matches its filename. This settles all three sub-conditions — folder
+   included, `.bin`/`.json` not excluded by type or by size at 14 MB, and the upload **completed**
+   (bytes the service does not hold cannot be downloaded). **What it does not establish** is
+   whole-tree coverage: two files were sampled, not ~75,000. That gap no longer gates anything,
+   because Task 11 is closed.
+
+   **Tasks 10 and 11 are CLOSED by owner decision, 2026-07-28, and must not be re-planned.**
+   Keeping the OneDrive tree costs essentially nothing, so there is no deadline to delete it;
+   the owner will do so himself if he ever needs the space. Task 10 existed **only** to gate
+   Task 11 and therefore closes with it. **The consequence a session must not miss: the old tree
+   is now permanent-but-archival rather than a rollback awaiting deletion, so `MIG-10`'s
+   "those statements are still true" defence has expired** — see Task 12 below.
 
 3. ~~**Kill two zombie API servers before Task 11** (`MIG-11`, execution log §16). Ports **8138**
    and **8139**, PIDs `71076, 59236, 60412, 97220`.~~ **✅ DISCHARGED — `MIG-11` is CLOSED.**
@@ -73,8 +95,33 @@ config default changed, and no test-queue entry is owed.
    the hazard silently. **Do not kill PID 90324 on port 53342** — that is a Home Assistant
    sidecar from another project, and it was never in scope here.
 
-**Then Task 10: work from `C:\dev\music-app` for a few days before anything is deleted.** Phase
-D is irreversible and is deliberately not started.
+**Task 12 (`MIG-10`) is DONE, 2026-07-28 — the migration is complete and nothing on this axis
+remains.** It was deferred because ~8 documents say the project lives under OneDrive and that was
+*true of the tree that was still the rollback*; closing Tasks 10/11 expired that defence, since
+those statements became permanently wrong about the **working** tree and permanently true about a
+**dead** copy. Corrected in the **live documents only** — `CLAUDE.md`, both rituals,
+`ml-graph-analyst.md`, and the five READMEs. **The ~30 execution logs, plans and findings that
+mention OneDrive are historical and were deliberately left alone; do not "finish the job" on
+them.**
+
+**What was deliberately NOT changed, and must not be "tidied" later:** the
+`UV_LINK_MODE=copy` prefix stays on every documented `uv` command. Measured 2026-07-28 with the
+variable unset, uv **still fails to hardlink** at `C:\dev\music-app` — it warns, falls back to a
+full copy, and succeeds. So the prefix skips a doomed attempt and suppresses a warning rather than
+being required, and `CLAUDE.md` names it an invariant. Only the *reason* given for it was false,
+and that is what was corrected. This also refines `memory/env-onedrive-uv.md`, which recorded
+"clean, no hardlink error" — right about the error, wrong about the warning.
+
+> **One thing was already fixed rather than left for Task 12, because it was a silently broken
+> check rather than stale prose.** `closeout` **D6** defined `M` as the pre-migration memory slug
+> — a directory that **still exists**, so it ran clean while computing *both* its numbers against
+> a frozen copy that could never move. Corrected 2026-07-28 to `C--dev-music-app`; the corrected
+> command was run and both figures moved, which is the evidence the check can now go red. **The
+> figures are deliberately not restated here** — re-run D6 for them, since they change at every
+> closeout and this document owns none. The two
+> memory directories have diverged in 2 of 12 files (`MEMORY.md`, `env-onedrive-uv.md`); the
+> old-slug copy is **not** inside the OneDrive tree, so deleting that tree would never have
+> removed it — `NEXT.md` and the Track B handoff both implied otherwise and were wrong.
 
 > **OneDrive sync was paused for 24 h on 2026-07-27 and resumes by itself.** Nothing in Phases
 > A–C depends on it staying paused.

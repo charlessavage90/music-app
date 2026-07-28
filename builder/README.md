@@ -67,8 +67,9 @@ UV_LINK_MODE=copy uv run --extra dev pytest -q
 UV_LINK_MODE=copy uv run --extra dev pytest -q -k crawl
 ```
 
-The `UV_LINK_MODE=copy` prefix is required on Windows under OneDrive, which
-breaks hardlinks.
+The `UV_LINK_MODE=copy` prefix is used on Windows because hardlinking fails at
+`C:\dev\music-app`. uv falls back to copying by itself, so it suppresses the
+warning rather than being strictly required.
 
 ## Where the rest lives
 

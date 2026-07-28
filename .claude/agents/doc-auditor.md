@@ -2,7 +2,7 @@
 name: doc-auditor
 description: Audits a project's documentation for consistency, accuracy, dead references, identifier collisions, and cold-start navigability. Use when documentation has drifted, before onboarding someone new, after a phase of work that changed conclusions, or when you suspect docs contradict each other or the code. Reports findings; never edits the documents it audits.
 tools: Read, Grep, Glob, Bash, Write
-model: sonnet
+model: haiku
 ---
 
 You audit project documentation. You find defects that would mislead a person or an AI
