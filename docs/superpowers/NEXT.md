@@ -19,8 +19,8 @@ unchanged.
 **All three owner-owed items below are now discharged and struck.** Each was checked **by
 observation, not by reading a document**: the memory slug (item 1), Backblaze (item 2,
 2026-07-28), and the two zombie API servers (item 3). **The migration axis carries no owner-owed
-item.** Tasks 10 and 11 are closed by owner decision — see item 2 — and **Task 12 is the only
-migration task still open; it is a session's to do, not the owner's.**
+item, and Task 12 is now DONE.** Tasks 10 and 11 are closed by owner decision — see item 2 —
+so **the OneDrive migration is complete and closed in full.**
 
 ---
 
@@ -38,8 +38,8 @@ migration task still open; it is a session's to do, not the owner's.**
 > nothing was deployed. Track B starts on a fresh branch off `main`.
 > This is a pointer, not a rewrite — the full rewrite is that plan's task PW-8.
 
-**The OneDrive migration is DONE except for Task 12, and nothing on this axis is owed by the
-owner.** Items 1–3 below are all **struck — discharged by observation**, items 1 and 3 on
+**The OneDrive migration is DONE in full, and nothing on this axis is owed by anyone.**
+Items 1–3 below are all **struck — discharged by observation**, items 1 and 3 on
 2026-07-27 (evening) and item 2 on 2026-07-28. **Phase D as planned no longer exists:** the
 owner decided on 2026-07-28 that the old tree costs nothing to keep and will be deleted by him
 whenever he chooses, which closes Tasks 10 and 11 and makes Phase D's irreversibility moot.
@@ -95,17 +95,22 @@ config default changed, and no test-queue entry is owed.
    the hazard silently. **Do not kill PID 90324 on port 53342** — that is a Home Assistant
    sidecar from another project, and it was never in scope here.
 
-**Task 12 (`MIG-10`) is the one migration task still open, and it is now unblocked.** It was
-deferred because ~8 documents say the project lives under OneDrive and that was *true of the tree
-that was still the rollback*. **That defence has expired**: with the old tree kept indefinitely as
-an archive, those statements are now permanently wrong about the **working** tree and permanently
-true about a **dead** copy, and waiting no longer resolves the ambiguity. Two are live defects
-rather than stale prose, both in the standing context layer: `CLAUDE.md`'s environment note and
-`.claude/agents/ml-graph-analyst.md:175` tell every session the project is under OneDrive and to
-prefix every `uv` command with `UV_LINK_MODE=copy`, which `memory/env-onedrive-uv.md` records as
-**unnecessary at `C:\dev`**. **Scope it to the live documents only** — `CLAUDE.md`, the two
-rituals, `ml-graph-analyst.md`, and the four package READMEs. **The ~30 execution logs, plans and
-findings that mention OneDrive are historical and must NOT be edited.**
+**Task 12 (`MIG-10`) is DONE, 2026-07-28 — the migration is complete and nothing on this axis
+remains.** It was deferred because ~8 documents say the project lives under OneDrive and that was
+*true of the tree that was still the rollback*; closing Tasks 10/11 expired that defence, since
+those statements became permanently wrong about the **working** tree and permanently true about a
+**dead** copy. Corrected in the **live documents only** — `CLAUDE.md`, both rituals,
+`ml-graph-analyst.md`, and the five READMEs. **The ~30 execution logs, plans and findings that
+mention OneDrive are historical and were deliberately left alone; do not "finish the job" on
+them.**
+
+**What was deliberately NOT changed, and must not be "tidied" later:** the
+`UV_LINK_MODE=copy` prefix stays on every documented `uv` command. Measured 2026-07-28 with the
+variable unset, uv **still fails to hardlink** at `C:\dev\music-app` — it warns, falls back to a
+full copy, and succeeds. So the prefix skips a doomed attempt and suppresses a warning rather than
+being required, and `CLAUDE.md` names it an invariant. Only the *reason* given for it was false,
+and that is what was corrected. This also refines `memory/env-onedrive-uv.md`, which recorded
+"clean, no hardlink error" — right about the error, wrong about the warning.
 
 > **One thing was already fixed rather than left for Task 12, because it was a silently broken
 > check rather than stale prose.** `closeout` **D6** defined `M` as the pre-migration memory slug
