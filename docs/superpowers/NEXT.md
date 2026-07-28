@@ -10,18 +10,40 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-27, at the closeout after the phone run passed and the OneDrive
-migration was planned.** See "Closeout state" below for what was and was not run.
+**Last updated: 2026-07-27, at the OneDrive migration's Phase D seam — Phases A–C executed.**
+Updated mid-work rather than at a closeout, per this document's own rule that an execution log
+which disagrees with it wins and the staleness gets fixed rather than worked around. The
+"Closeout state" section below still describes the *previous* closeout and is unchanged.
 
 ---
 
 ## Next
 
-**Execute the OneDrive migration plan**, or decide not to yet. Twelve tasks, identifiers
-`MIG-`, destination `C:\dev\music-app`:
-[`plans/2026-07-27-onedrive-migration.md`](plans/2026-07-27-onedrive-migration.md), handed off
-at [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md),
-PR #35. **It touches no application code, no graph, no routing and no config default.**
+**The OneDrive migration is at its Phase D seam. Two things are owed, and both are the
+owner's.**
+
+Phases A–C ran on 2026-07-27 and passed —
+[`2026-07-27-onedrive-migration-execution-log.md`](2026-07-27-onedrive-migration-execution-log.md)
+is the record and is **fresher than the plan or its handoff**, both of which still read as
+though nothing has run. **`C:\dev\music-app` exists, is verified, and works**: all four suites
+green from it, all 18 graph artifacts byte-identical, and a running API serving `4cb84ef9…`.
+**The OneDrive tree is untouched and is the rollback.** No application code, graph, routing or
+config default changed, and no test-queue entry is owed.
+
+1. **Confirm the memory slug by observation** — open a session in `C:\dev\music-app` and check
+   Claude Code reads `~/.claude/projects/C--dev-music-app`. Memory was **copied** there, not
+   moved, so a wrong prediction costs nothing; until this is observed **`MIG-2` is mitigated,
+   not closed.**
+2. **Verify Backblaze actually covers `C:\dev`** (Task 9) — folder included, `.bin`/`.json` not
+   excluded, and an upload **completed** rather than queued. **This gates Task 11**, the
+   deletion of the OneDrive tree. Until it passes, OneDrive is still the only second copy of
+   the unreproducible archive.
+
+**Then Task 10: work from `C:\dev\music-app` for a few days before anything is deleted.** Phase
+D is irreversible and is deliberately not started.
+
+> **OneDrive sync was paused for 24 h on 2026-07-27 and resumes by itself.** Nothing in Phases
+> A–C depends on it staying paused.
 
 **The app is live and the phone run passed.** `https://d2n3xqz3pttguf.cloudfront.net`, username
 `artistpath`, password in `infra/.env.deploy`.
