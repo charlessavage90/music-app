@@ -13,14 +13,17 @@ and the invariants here describe a production *artifact*, not the function.
 
 ⚠ **The blank-name check below currently rejects a production rebuild, by
 design.** The adopted 75k artifact contains 33 nameless artists (measured:
-`builder/analysis/2026-07-24-track2-p8b-harness-review/`, F8), and how to
-remediate them — drop, or backfill names from a new source — is an OPEN
-OWNER DECISION as of 2026-07-24. The tripwire lands ahead of the remediation
-on purpose: no production build is due before Track 2 adoption, and a check
-that refuses is what stops the deferral being silently forgotten. **Success
-condition: the owner picks drop-or-backfill, the chosen remediation lands in
-the build, and this check then passes on a rebuild.** Do not weaken it to
-unblock a build; implement the remediation.
+`builder/analysis/2026-07-24-track2-p8b-harness-review/`, F8). **DECIDED
+2026-07-28, by the owner: DROP them** — remove nameless artists during
+`build`, before the largest-component prune, so a stranded neighbour of a
+dropped node is pruned rather than kept dangling. (The alternative,
+backfilling names by MBID, was declined.) The remediation is NOT yet
+implemented — this is a standing build rule, not a one-off patch, since any
+future crawl can mint new nameless nodes the same way. The tripwire stays
+until it lands: a check that refuses is what stops the deferral being
+silently forgotten. **Success condition: the drop rule lands in the build
+and this check then passes on a rebuild.** Do not weaken the check to
+unblock a build; implement the drop.
 
 The criteria are data, not code, so the whole set lives in one place
 (`PRODUCTION_ACCEPTANCE`) and a test can substitute a scaled-down set.

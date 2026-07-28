@@ -23,6 +23,33 @@ the point.**
 
 ---
 
+## N/A — 2026-07-28 (late) — path work resumed; measurements and a plan only; the app is untouched
+
+**Nothing to exercise, and nothing is running** — all ports were checked and are empty.
+No routing, no graph, no weighting, no cost function, and not one line of the app or the
+website changed. **A journey you build now is identical to one from this afternoon.**
+
+**What happened.** You restarted the path-quality work and set the goal: more obscure
+artists in the middle of journeys, fewer very famous ones, especially as you press the
+bypass buttons. Today measured where that problem actually lives and wrote the plan of
+attack, and both are committed. Two things the measurement settled, in plain terms: on a
+journey between two famous artists, the *first* path's famous middles are forced by the
+map itself — no setting can change them, and by your own stated preference they are
+correct anyway; and **the bypass buttons never actually dig** — after twenty presses the
+middle artists are as famous as at the start. That second one is the thing the coming
+work tries to fix, with a new rule that makes each press push the journey a little
+further off the beaten track. Nothing of that is built yet; nothing you can press has
+changed.
+
+**You also decided today:** the handful of artists with missing names get dropped from
+any future rebuild rather than repaired. Nothing visible changes until a rebuild happens.
+
+**⚠ The entry below this one is still the live one to run** — the redesigned app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing
+here supersedes a word of it.
+
+*Detail: `docs/superpowers/2026-07-28-asc5-path-ascent-execution-log.md`.*
+
 ## QUEUED (latest) — 2026-07-28 (night) — the redesign is finished, and it is LIVE
 
 <!-- Updated after the deploy: this entry was written while the redesign was local-only and

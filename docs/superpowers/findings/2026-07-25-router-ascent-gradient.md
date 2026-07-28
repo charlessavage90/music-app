@@ -114,6 +114,17 @@ the owner's:
 > a curiosity. If it holds, the next intervention is directional or builder-side, and is
 > **not** another repricing sweep.
 
+> **✅ DISCHARGED 2026-07-28 — both re-reads have run**, after the owner unpaused
+> path-quality work. Results, gates and pre-committed reads:
+> `builder/analysis/2026-07-28-asc5-path-ascent/` (`PLA-` series), which owns every
+> figure. In outline, without restating numbers: the path-level gradient is **absent on
+> famous-pair first paths** — the hop-minimal routes there are as famous as the delivered
+> ones, so `ASC-3` collapses *for that slice* — while the one obscure-endpoint pair moved
+> the other way; the `X`-vs-`A7` isolating contrast is **immaterial at path level in both
+> currencies**; and the pure-similarity cost climbs at one hop far above the null, which
+> is `ASC-4`'s mechanism in single-arm form. §6's caution is upheld: a fame criterion on
+> famous-pair first paths would be structurally unable to move.
+
 ## 5. Why this was not visible before — a process note, not a criticism
 
 The measurement was commissioned to answer a narrow question: *may `R0`'s null be read as
