@@ -168,3 +168,104 @@ from this log.
 not superstar*. Drawn famous endpoints span pctl 0.9102–0.9966, so the band is not
 collapsed to the bottom of the decile — but the pctl ≥ 0.999 band is structurally
 incapable of supporting this question at any price.
+
+---
+
+## §3 — DD-P3: analyst protocol review. FIRST HALF DISCHARGED.
+
+Dispatched on the owner's explicit instruction (a session does not dispatch a subagent
+here unsolicited). Report: `builder/analysis/2026-07-28-track3-depth-descent/DD-P3-analyst-review.md`;
+probes in `dd_p3_review_probes.py`. Derivation only, per its remit — it was not asked
+whether the track should proceed and did not say.
+
+**Confirmed clean:** the DD-P1 instrument on all four sub-questions, including a runtime
+spy on the exclusion lists actually passed to `find_path_mirror` across 21 depths on 4
+pairs (worth having — `obscure_hops` being constant across depths is also the signature
+of a silently unapplied exclusion set); DD-D3's unsatisfiability arithmetic, exactly,
+with two strengthenings the log had omitted; §2's realised-toll figures; the device's
+well-posedness as a Dijkstra node potential.
+
+**Two load-bearing findings re-verified by this session** rather than taken on report,
+per the standing rule about building on another agent's conclusions. Both reproduce.
+
+### DD-D4 — DD-A4 and DD-A5 are struck from the run
+
+The floor base is `min(pop_raw)` over the endpoints, measured 0.3081–0.4570 on the
+scored set, and it relaxes 0.15 per `known` — so **the floor is dead from k = 3** (k = 4
+on one pair). The shallowest depth any criterion reads is d5. Therefore DD-A4's cost
+function is **bit-identical to DD-A2's, and DD-A5's to DD-A3's, at every scored depth**:
+a third of the planned run cannot move any criterion. The floor axis is answerable only
+at d ∈ {0,1,2}, which §5 does not read.
+
+Worse, they would **fail DD-G2**: turning `w_floor` off changes the d0 path on
+Miles Davis→Daft Punk (7 hops vs 6). §3 says a gate failure voids the run, and the
+correct d0 reference for a floor-off arm is a floor-off zero-ramp arm, which Track 3's
+arm list does not contain.
+
+**Struck. The run is P, DD-A1, DD-A2, DD-A3.** Note the causation honestly: §0's
+argument for making the floor a live axis was correct against Track 2's famous pairs
+(floor alive to k ≤ 4–6) and was **voided by this session's own re-draw**, which moved
+the pair set obscure enough that the floor dies almost immediately.
+
+### DD-D5 — the device prices length and obscurity inseparably; §5 cannot attribute
+
+`w · k · Σ_interior pctl` factorises as *(interior count) × (mean interior pctl)*. Over
+the 8 analysis pairs at k = 10 the **length share of the toll differential runs
+69.6 %–96.1 %, median 80.7 %** — the device is around four-fifths a hop-count penalty.
+And the graph forecloses disentangling it after the fact: **on 6 of 12 pairs the
+unweighted shortest path is already entirely sub-decile** (independently reproduced this
+session — the same six), while production takes 10–17 hops through interiors at pctl
+0.94–0.99.
+
+So an arm that moves DD-C1 cannot be shown to have found obscurer artists rather than
+simply *shorter paths*. Track 2 had the instrument for this — `score.py`'s C4 payload
+guard, written against WGLL value 2 — and **§5 has no equivalent**; DD-C5 does not
+cover it, since a count of distinct sub-decile interiors rises with obscurity and does
+not fall with shortening. Finding 8 compounds it: pooled-median scoring is mechanically
+biased by length, and pure shortening alone moves the DD-C2 statistic 0.026–0.064
+downward with **zero** descent.
+
+**Adopted: DD-C6, a length control, fixed now with its plain sentence.** Mean interior
+count per arm vs P at the same cell. *(Plain: does the journey still have about as many
+artists in it, or did the app just make it shorter?)* An arm whose mean interior count
+falls more than **1.0** below P's is flagged in every table it appears in, and **DD-C1
+may not be read as descent for a flagged arm**. This is a qualifier on attribution, not
+a new success criterion — it cannot make a null into a pass.
+
+### DD-D6 — the currency gap, and the cheapest decisive test left
+
+DD-P1 certifies headroom in **percentile**; DD-C1/DD-C2 score in **fame** (log10
+pageviews). "An all-sub-decile route exists" does not entail "a route 1.0 log10 F below
+production's" — the §2.12 currency trap, in a new place. The analyst could not bound the
+gap (only 239 mbids join Track 2's `fame.json` to pctl, 202 of them at pctl ≥ 0.99).
+
+**This runs before any arm.** The all-obscure routes are already computed for all 12
+pairs at all 9 depths in `headroom_v2.json`; resolving F for their interiors with the
+committed `fame.py` gives headroom in DD-C1's own currency. **If that gap is well under
+1.0 log10, DD-C1 is unreachable at any `w` and the track ends in a null without running
+a single arm.** DD-G4 (MBID keying) must land first — the fame cache is name-keyed
+across all 439 entries, verified this session.
+
+### Carried into DD-P4
+
+- **DD-D7** — implement the toll on the **edge-relaxation target** (`cost(u→v) +=`), not
+  on node settle; a node-settled implementation silently prices nodes that never appear
+  on the returned path.
+- Count guard-G activations per arm beside `floor_active` (finding 10: guard G is listed
+  constant as a *setting*, but its activation is not, and the device makes the 2-node
+  direct path uniquely toll-free).
+- The directory needs a `README.md` (2026-07-23 spec §4.2) and no committed script
+  computes sub-decile degree, though DD-F1 quotes it.
+
+### Selection effect of the re-draw, bounded
+
+Unconditioned Monte-Carlo (300 draws/group): acceptance 83.3 % famous→mid, 99.3 %
+mid→mid. If an excluded pair's true effect lies between zero and the included pairs',
+the conditioned DD-C1 estimate overstates the unconditioned mean by **≤ 9.5 % relative**
+(≈0.09 log10 against a −1.0 threshold). One slice, n = 300/group, not reproduced —
+treat as indicative. The bound breaks only if excluded pairs' effect has the opposite
+sign, which DD-D5 makes live rather than free. Relative to journeys a *user* would
+actually request the selection is much larger and **unmeasured**; there is no request
+log. Composition shifts toward lower percentile, not lower degree — sub-decile degree is
+the discriminating variable (median 8 accepted vs 0 rejected), another case where degree
+and popularity answer differently.
