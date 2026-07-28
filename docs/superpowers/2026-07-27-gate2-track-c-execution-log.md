@@ -124,7 +124,23 @@ carry the service id — did not change.
 | Finding | Condition |
 |---|---|
 | Medium CSRF in `react-router@7.18.1` (`SNYK-JS-REACTROUTER-18313151`) | **Revisit only if the app adopts React Router's unstable RSC APIs.** The advisory is exploitable only with those enabled; this is a Vite SPA on `BrowserRouter` with no loaders, actions, fetchers or `Form`, so it does not reach us. The fix is a major bump to 8.3.0 and was declined on cutover day for a non-applicable advisory. |
-| Double-encoded text in artist disambiguations — The Beatles reads `UK rock band, â€œThe Fab Fourâ€` | **Next graph rebuild, which is the owner's call.** It is in the adopted artifact, and it is user-visible: `ArtistSearch.tsx:105` renders disambiguation in the search dropdown. Not introduced by Track C; found by reading a live response. |
+| ⚠ **RETRACTED 2026-07-27 — see below.** ~~Double-encoded text in artist disambiguations — The Beatles reads `UK rock band, â€œThe Fab Fourâ€`~~ | ~~**Next graph rebuild, which is the owner's call.** It is in the adopted artifact, and it is user-visible: `ArtistSearch.tsx:105` renders disambiguation in the search dropdown. Not introduced by Track C; found by reading a live response.~~ |
+
+> **⚠ RETRACTION, added 2026-07-27.** The row above is **wrong** and is struck rather than
+> deleted, per this project's practice of leaving the record legible.
+>
+> The adopted artifact (sha256 `4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8`,
+> matched against its sidecar before reading) holds `UK rock band, “The Fab Four”` — correct
+> UTF-8, U+201C/U+201D. Decoding those same bytes as cp1252 reproduces `â€œThe Fab Fourâ€`
+> character for character. **The corruption was in the tool that read the live response**;
+> "found by reading a live response" is precisely the tell, and the phrase was in the row all
+> along.
+>
+> Caught because the owner reported The Beatles had always rendered correctly for him, in
+> both the live app and dev. **It is the second occurrence of this mistake in the project** —
+> `findings/2026-07-19-listenbrainz-probe.md:298` records the same conclusion ("earlier
+> console mojibake was display-only"). Struck from `NEXT.md`'s deferral table; it was one of
+> the accumulating reasons for a graph rebuild and is no longer a reason for anything.
 | Two Low Snyk findings in `infra/` — a hardcoded test fixture value, and `app.py` reading a path from an environment variable | **Accepted, won't fix.** The second is that tool's entire purpose. Neither is in new code. |
 | The `--prune` pass | **The next deploy after this one**, once the current `index.html` has been live long enough that nobody holds the previous one. Skipped at cutover because the bucket was empty — nothing to prune and no returning visitor to protect. |
 

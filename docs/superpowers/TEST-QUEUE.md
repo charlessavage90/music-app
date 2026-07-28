@@ -23,7 +23,83 @@ the point.**
 
 ---
 
-## QUEUED — 2026-07-27 (latest) — the app is on the internet, and this is the first real run
+## DONE — 2026-07-27 — the app is on the internet, and this is the first real run
+
+**DONE 2026-07-27 — PASSED on everything exercised, on a real phone, and it exposed one
+inert piece of code.** Exercised by the owner on an **Android Pixel** against the live site.
+
+**Confirmed:**
+
+- **The password box lets someone *in*.** He signed in before doing anything else. This is
+  the first time in the project's history that has been witnessed by a human in a browser —
+  every check before the cutover proved only that the site *refuses*.
+- **No collision with the gesture bar at the bottom.** See the finding below for what this
+  does and does not prove.
+- **All buttons, and multiple bypasses, worked as expected on the phone.**
+- **Paths appear unchanged** — the single most valuable step in the entry, since the whole
+  cutover was supposed to move nothing about routing.
+
+**⚠ RETRACTED — the mangled artist descriptions were never real.** The owner reported that
+The Beatles has *always* rendered correctly, live and in dev, and he is right. Read straight
+out of the adopted artifact (sha256 `4cb84ef9…`, checked against its sidecar) the
+disambiguation is `UK rock band, “The Fab Four”` — correct UTF-8, correct curly quotes.
+Decoding those same bytes as cp1252 reproduces `â€œThe Fab Fourâ€` exactly. **The mangling
+was in the tool that read the live response, not in the artifact and not in the app.**
+
+This is the **second** time console mojibake has been mistaken for corrupt data here — see
+`findings/2026-07-19-listenbrainz-probe.md:298`, which recorded the same conclusion. It
+removes one of the reasons that had been accumulating for a graph rebuild. Corrected in
+`NEXT.md`; the two Track C records are annotated in place rather than rewritten.
+
+**⚠ Found while verifying the above, and it is not a user-visible fault today.** The bar at
+the bottom reserves space for the phone's system bar with
+`env(safe-area-inset-bottom)` (`frontend/src/components/PlayerBar.tsx:10`) — but
+`frontend/index.html:6` does **not** set `viewport-fit=cover`, and without it that value is
+**0 in every browser, on every device, including iPhones**. So the reservation has never
+been exercised because as written **nothing can exercise it**; it is inert code, not
+untested code.
+
+The bar clears the system bar anyway, which is why the pass is genuine: without
+`viewport-fit=cover` the browser already shrinks the page to avoid the inset, so the
+default does the job the reservation was written to do. **The risk is latent, not live** —
+it bites only if someone later adds `viewport-fit=cover` believing the reservation is
+covering them. Recorded, not fixed; no fix is proposed.
+
+**NOT covered by this pass, and it is not a criticism of it — an Android device cannot
+answer these:**
+
+- **iOS Safari rendering, and the iPhone home indicator specifically.** Question 2 of this
+  entry was written in iOS terms; a Pixel exercises a real browser and a real gesture bar,
+  which is genuinely more than any emulator did, but it is not Safari.
+- **Question 3 — does the keyboard leave artist names alone.** This was always an iOS
+  autocorrect behaviour and is unrunnable on Android.
+**Steps 3–6 then reported separately, all PASSED — so this is a per-step confirmation of
+all six**, the strongest shape this file records:
+
+- **Clips played**, exercised against the standard suite: pausing, bypassing, and letting one
+  clip run into the next. Behaviour consistent with the local dev app.
+- **The shared journey link works, and this is the headline.** He sent a path link to a
+  person who had **never signed in**; after authenticating, that exact path appeared. It had
+  never been proven in a browser before, only mechanically, and this is the first evidence
+  that sharing works end to end **for a recipient rather than for its author** — which is
+  the whole point of Gate 2.
+- **`/nowhere` showed the correct page with a link back.**
+- **A wrong password names `artistpath`** on the refusal page, confirming `RMD-11` in use.
+
+**Still not covered — iOS.** An Android device cannot answer these, and it is not a
+criticism of the run:
+
+- **iOS Safari rendering, and the iPhone home indicator specifically.** Question 2 was
+  written in iOS terms; a Pixel exercises a real browser and a real gesture bar, which is
+  more than any emulator managed, but it is not Safari.
+- **Question 3 — does the keyboard leave artist names alone.** Always an iOS autocorrect
+  behaviour; unrunnable on Android.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-07-27 — the app is on the internet, and this is the first real run
+<!-- "(latest)" stripped 2026-07-27 on completion, per the convention below: only a live
+     QUEUED entry carries it. -->
 
 **This is the first entry in this file with a URL in it.** The app is live. Open it from
 anything — your desktop, your phone, someone else's machine.
@@ -96,6 +172,12 @@ a journey. Clip playback defects are closed and unrelated.
 short descriptions show mangled punctuation — The Beatles reads `UK rock band, â€œThe Fab
 Fourâ€` in the search dropdown. It is in the artist map itself, so fixing it means rebuilding
 the map, which is your call rather than mine.
+<!-- ⚠ RETRACTED 2026-07-27: this paragraph is WRONG. The artifact is correct UTF-8; the
+     mangling was in the tool that read the live response. See the RETRACTED note in the DONE
+     marker at the top of this entry. Left in place because it is the text you were sent. -->
+
+> **⚠ The paragraph immediately above is RETRACTED and was never true** — see the DONE
+> marker at the top of this entry. Kept because it is what was queued.
 
 **Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
 

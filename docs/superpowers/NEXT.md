@@ -78,7 +78,7 @@ would have fired on every future deploy. Execution log §3.1.
 | Finding | Condition |
 |---|---|
 | Medium CSRF in `react-router@7.18.1` | Revisit **only if** the app adopts React Router's unstable RSC APIs. It is not exploitable without them, and this is a Vite SPA with none of that machinery. |
-| Mangled punctuation in artist descriptions (The Beatles reads `â€œThe Fab Fourâ€`) | **The next graph rebuild, which is the owner's call.** User-visible in the search dropdown. In the artifact, not the app. |
+| ~~Mangled punctuation in artist descriptions (The Beatles reads `â€œThe Fab Fourâ€`)~~ | **STRUCK 2026-07-27 — RETRACTED, it was never a defect.** The adopted artifact holds correct UTF-8 (`UK rock band, “The Fab Four”`), read straight out of it after a checksum match; the mangling was in the tool that read the live response. The owner reported it had always rendered correctly and was right. **This removes one of the reasons for a graph rebuild.** |
 | The `--prune` publish pass | The next deploy after this one. Skipped at cutover because the bucket was empty. |
 
 ---

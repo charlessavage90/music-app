@@ -90,7 +90,10 @@ after a period of real use and is his call.
   with the unstable RSC APIs enabled; this is a Vite SPA on `BrowserRouter` with no loaders,
   actions, fetchers or `Form`. Major bump, cutover day, non-applicable advisory. Condition
   for revisiting is in the execution log §6.
-- **Fixing the double-encoded artist descriptions** (`â€œThe Fab Fourâ€`). It is in the
+- ⚠ **RETRACTED 2026-07-27 — there was nothing to fix.** The artifact holds correct UTF-8;
+  the mangling was in the tool that read the live response. Full retraction in the execution
+  log's deferral table. The struck item follows.
+- ~~**Fixing the double-encoded artist descriptions** (`â€œThe Fab Fourâ€`). It is in the
   adopted artifact, so it needs a rebuild, which is the owner's call and not a Track C
-  decision. It *is* user-visible — `ArtistSearch.tsx:105` renders it.
+  decision. It *is* user-visible — `ArtistSearch.tsx:105` renders it.~~
 - **Running the `--prune` pass at cutover.** The bucket was empty; nothing to prune.
