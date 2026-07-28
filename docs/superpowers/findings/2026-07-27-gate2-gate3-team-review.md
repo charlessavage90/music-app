@@ -154,6 +154,7 @@ Gate 3 does not force. `file:line` citations are the reviewers'; verify before a
 | Q5 | MEDIUM | decision | No CI (`.github/` absent — a recorded deliberate position, DEP-3/15), so the strongest tests (5 Playwright specs) are the least likely to run: excluded from `npm test`, need a hand-started API the config does not launch. |
 | Q6 | LOW-MED | no | Builder↔api APG1 lockstep has no binding test; a consistently-applied metadata key rename passes both suites and `KeyError`s at the next real boot (loud, but at deploy time). Same conclusion as A7. |
 | Q7 | LOW | no | `badpath.py` (cancelled) and `evaluation.py` (offline analysis) ship in the API image; 117 tests maintain a cancelled feature. Dead weight, deliberate per docstrings. |
+| Q8 | NIT | no | Stale count in `test_frozen_script_aliases.py:5` — docstring says "Sixteen of those scripts import the shipped classes"; measured now, **53** files under `builder/analysis/` import `artistpath_api` (the "four import `hub_node_set`" half is correct). Same miscount class the migration plan §4 recorded ("read 16 until corrected"); count with `grep -F` per variant. Side note from the same reviewer: `builder/tests/fixtures/graph-fixture.bin` is a 124 KB committed binary **no builder test reads** (only the api copy is read). |
 
 ### Frontend
 
