@@ -344,8 +344,12 @@ So two things the reviewers inferred remain **inferred, not confirmed live**:
    through CloudFront — so it is **not measurable from outside at all**, with or without the
    classifier. It stays inferred from `stack.py:241-250`.
 
-**To close the remaining half**, the owner can run the full ladder himself against the live origin
-(the script is at `scratchpad/loadtest.py`), or approve it. It is a ~2–3 minute bounded burst
+**To close the remaining half**, the owner can run the full ladder against the live origin, or
+approve a session to. The ladder is fully specified by §1's table and this section — a short
+reconstruction (the session's own script lived only in its ephemeral scratchpad and is gone): a
+thread pool at concurrency 1→5→20→40 issuing `POST /api/path` with obscure-artist mbid pairs
+extracted from the adopted artifact, measuring throughput and p50/p95, plus a `/api/artists/search`
+probe during the 40-wide burst to gauge interactive latency. It is a ~2–3 minute bounded burst
 (~148 path requests total), not a sustained flood. Given the calibration already resolved the
 pivot in the finding's favour, this is now confirmation rather than a decision-changer — the
 per-request number was the part that could have collapsed the finding, and it did not.
