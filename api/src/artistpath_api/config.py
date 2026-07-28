@@ -63,6 +63,15 @@ class ApiConfig:
     # --- search ---------------------------------------------------------
     search_limit: int = 10
 
+    # --- request bounds (G3-S3) -----------------------------------------
+    # A body larger than this is refused before it is parsed. The schema bounds
+    # in models.py cannot fire until the whole body has been read into memory,
+    # which is the cost being avoided: the review measured a 2,000,000-element
+    # `sources` array buffering ~70 MB before the handler's two-source check
+    # rejected it. 64 KiB is ~30x the largest legitimate request (200
+    # exclusions at 64 bytes of id, plus JSON overhead).
+    max_body_bytes: int = 64 * 1024
+
     # --- CORS (stage 3a) ------------------------------------------------
     # Allowed browser origins for the SPA, comma-separated in
     # ARTISTPATH_CORS_ORIGINS. The default is EMPTY — no origin is allowed.
@@ -112,3 +121,15 @@ class ApiConfig:
     # case goes. Raise it if cards come back silent for artists that
     # obviously have tracks.
     clip_search_limit: int = 25
+
+    # --- clip circuit breaker (G3-A4 / G3-S2) ---------------------------
+    # Consecutive unavailable responses from ONE catalogue before we stop
+    # calling it. 5 rather than 1 or 2: a single transient error must not
+    # silence every card for a minute, which would be worse than the defect.
+    clip_breaker_threshold: int = 5
+    # How long to leave it alone afterwards. 60 s is a judgement, not a
+    # measurement — neither catalogue documents its rate-limit window. The
+    # first request after the cooldown is the probe; if it fails the breaker
+    # re-opens immediately, so a service that stays down costs one call a
+    # minute rather than five.
+    clip_breaker_cooldown_s: float = 60.0

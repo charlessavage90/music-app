@@ -14,7 +14,7 @@ from fastapi.responses import JSONResponse
 
 from artistpath_api.artifact_source import load_graph
 from artistpath_api.clips import (
-    ClipResolver, DynamoClipCache, InMemoryClipCache,
+    CatalogueUnavailable, ClipResolver, DynamoClipCache, InMemoryClipCache,
 )
 from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
@@ -55,6 +55,21 @@ def create_app(
         allow_methods=["GET", "POST"],
         allow_headers=["content-type", "x-journey-id"],
     )
+
+    @app.middleware("http")
+    async def limit_body_size(request: Request, call_next):
+        """Refuse an oversized body before Starlette reads it into memory.
+
+        Content-Length only. A chunked request carrying no such header still
+        gets buffered and is bounded only by the schema in models.py — recorded
+        as a deferral rather than fixed, because CloudFront and Cloudflare both
+        send Content-Length, so the case is currently unreachable, and reading
+        the stream to count it would cost more than it is worth (G3-S3).
+        """
+        declared = request.headers.get("content-length")
+        if declared and declared.isdigit() and int(declared) > cfg.max_body_bytes:
+            return JSONResponse({"detail": "request body too large"}, status_code=413)
+        return await call_next(request)
 
     if cfg.origin_secret:
         # SEC-1: compared as `str`, hmac.compare_digest raises TypeError on any
@@ -179,7 +194,19 @@ def create_app(
         )
 
     @app.get("/health")
-    def health() -> HealthOut:
+    async def health() -> HealthOut:
+        # `async def`, deliberately and load-bearingly (G3-A1). A sync def runs
+        # in Starlette's thread pool — the SAME pool as build_path — so under
+        # concurrent path requests /health queues rather than answers: the
+        # Gate 2->3 review measured 22.09 s at 40 concurrent, against App
+        # Runner's 5 s health-check timeout. Five misses replace the instance,
+        # its load shifts to the other one, which fails identically. The site
+        # did not degrade under load, it cycled.
+        #
+        # Safe on the event loop because this reads three in-memory attributes
+        # and does no I/O. search_artists and build_path do NOT qualify: on the
+        # event loop they would block every other request.
+        #
         # Deliberately NOT under /api — App Runner's health checker reaches the
         # origin directly, not through the CloudFront /api/* behaviour.
         return HealthOut(
@@ -201,6 +228,12 @@ def build_default_app() -> FastAPI:
 
     async def fetch_json(url: str, params: dict) -> dict:
         r = await client.get(url, params=params)
+        # The only place in the app that knows httpx status codes, which is why
+        # the classification lives here and not in clips.py (G3-A4): that module
+        # must not import the transport. 429 is the measured case; 5xx carries
+        # the same instruction — stop calling — from a different cause.
+        if r.status_code == 429 or r.status_code >= 500:
+            raise CatalogueUnavailable(f"{r.status_code} from {url}")
         r.raise_for_status()
         return r.json()
 

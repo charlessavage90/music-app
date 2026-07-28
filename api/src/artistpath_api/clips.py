@@ -21,9 +21,24 @@ from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from typing import Protocol
 
+from artistpath_api.breaker import CatalogueBreaker
 from artistpath_api.config import ApiConfig
 
 FetchJson = Callable[[str, dict], Awaitable[dict]]
+
+
+class CatalogueUnavailable(Exception):
+    """The catalogue refused to answer — throttling or an outage, not a miss.
+
+    Raised by the INJECTED fetcher, never by this module. Naming httpx's
+    exception types here would couple the resolver to the transport, which is
+    the reason `_get` is broad in the first place; classifying at the fetcher
+    keeps that boundary while giving this layer the one distinction it needs.
+
+    That distinction is the whole of G3-A4: a 429 that reads as "no such track"
+    makes `resolve` ask the same refusing service twice more, tripling our
+    outbound rate at exactly the moment it has to fall.
+    """
 
 
 def _fold(name: str) -> str:
@@ -150,10 +165,23 @@ class DynamoClipCache:
 
 
 class ClipResolver:
-    def __init__(self, cfg: ApiConfig, cache: ClipCache, fetch_json: FetchJson) -> None:
+    def __init__(
+        self,
+        cfg: ApiConfig,
+        cache: ClipCache,
+        fetch_json: FetchJson,
+        breaker: CatalogueBreaker | None = None,
+    ) -> None:
         self._cfg = cfg
         self._cache = cache
         self._fetch = fetch_json
+        # Optional so every existing call site keeps working unchanged, and
+        # built from cfg when absent so production gets one without app.py
+        # having to know it exists.
+        self._breaker = breaker or CatalogueBreaker(
+            threshold=cfg.clip_breaker_threshold,
+            cooldown_s=cfg.clip_breaker_cooldown_s,
+        )
 
     async def _get(self, url: str, params: dict) -> dict:
         """Fetch, treating any failure as "no answer" rather than an error.
@@ -177,11 +205,34 @@ class ClipResolver:
         """
         try:
             return await self._fetch(url, params)
+        except CatalogueUnavailable:
+            # NOT swallowed, and it is the one failure that must not be. The
+            # correct response to "you are calling me too much" is to stop
+            # calling, not to try harder — and a 429 read as a miss does the
+            # opposite (G3-A4).
+            raise
         except Exception:
             # Deliberately broad: the fetcher is injected, so this layer
             # cannot name the transport's exception types without coupling
             # to httpx. Observability for this is a Gate 2 item.
             return {}
+
+    async def _get_from(self, source: str, url: str, params: dict) -> dict:
+        """`_get`, but skipping a source that is inside its cooldown.
+
+        Raises CatalogueUnavailable WITHOUT calling out when the breaker is
+        open, so every caller's existing handling of that exception applies
+        unchanged — the breaker adds no new control flow anywhere else.
+        """
+        if self._breaker.is_open(source):
+            raise CatalogueUnavailable(f"{source} breaker open")
+        try:
+            body = await self._get(url, params)
+        except CatalogueUnavailable:
+            self._breaker.record_failure(source)
+            raise
+        self._breaker.record_success(source)
+        return body
 
     async def resolve(self, mbid: str, artist_name: str) -> Clip | None:
         """Resolve a playable clip, re-signing the URL on every request (C2).
@@ -199,7 +250,15 @@ class ClipResolver:
             identity = None
 
         if identity is not None:
-            url = await self._preview_url(identity)
+            try:
+                url = await self._preview_url(identity)
+            except CatalogueUnavailable:
+                # Throttled, not missing. Falling through to _search would ask
+                # the SAME service twice more for the same artist and harden
+                # the block (G3-A4). The card is silent for this request; the
+                # identity stays cached, so once we are let back in the next
+                # request costs one call again.
+                return None
             if url:
                 return Clip(url, identity.title, identity.cover_url, identity.source)
             # The track has left the catalogue. Identity is stable, not
@@ -221,12 +280,12 @@ class ClipResolver:
     async def _preview_url(self, identity: TrackIdentity) -> str | None:
         """Re-sign a known track. Returns None if it is no longer available."""
         if identity.source == "deezer":
-            body = await self._get(
-                f"{self._cfg.deezer_track_url}/{identity.track_id}", {}
+            body = await self._get_from(
+                "deezer", f"{self._cfg.deezer_track_url}/{identity.track_id}", {}
             )
             return body.get("preview") or None
-        body = await self._get(
-            self._cfg.itunes_lookup_url, {"id": identity.track_id}
+        body = await self._get_from(
+            "itunes", self._cfg.itunes_lookup_url, {"id": identity.track_id}
         )
         for row in body.get("results", []):
             if row.get("previewUrl"):
@@ -234,10 +293,26 @@ class ClipResolver:
         return None
 
     async def _search(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        return await self._from_deezer(artist_name) or await self._from_itunes(artist_name)
+        """Try each catalogue once, skipping any that is refusing us.
+
+        Falling through to a DIFFERENT service is not amplification — it is the
+        fallback doing its job. Only repeat calls to the service already saying
+        no are the defect (G3-A4).
+        """
+        try:
+            found = await self._from_deezer(artist_name)
+        except CatalogueUnavailable:
+            found = None
+        if found is not None:
+            return found
+        try:
+            return await self._from_itunes(artist_name)
+        except CatalogueUnavailable:
+            return None
 
     async def _from_deezer(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        body = await self._get(
+        body = await self._get_from(
+            "deezer",
             self._cfg.deezer_search_url,
             {"q": artist_name, "limit": self._cfg.clip_search_limit},
         )
@@ -258,7 +333,8 @@ class ClipResolver:
         return None
 
     async def _from_itunes(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        body = await self._get(
+        body = await self._get_from(
+            "itunes",
             self._cfg.itunes_search_url,
             {
                 "term": artist_name,

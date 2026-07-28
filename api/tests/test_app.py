@@ -1,6 +1,11 @@
+import asyncio
+import inspect
 import json
+import threading
 
+import anyio
 from fastapi.testclient import TestClient
+from httpx import ASGITransport, AsyncClient
 
 from artistpath_api.app import create_app
 from artistpath_api.clips import ClipResolver, InMemoryClipCache
@@ -267,3 +272,148 @@ def test_track_request_emits_a_clip_event(capsys):
     assert ev["resolved"] is False   # the test fetcher returns no clip
     assert ev["source"] is None
     assert isinstance(ev["duration_ms"], (int, float))
+
+
+# --- request bounds (PW-1: G3-S3, and the amplification half of G3-S4) -------
+#
+# One task because they are one fix. The 20 MB of CloudWatch the Gate 2->3
+# review measured came from unbounded id strings being echoed verbatim into the
+# telemetry line, so bounding the strings closes both findings.
+
+
+def test_an_oversized_sources_array_is_rejected_by_the_schema_not_the_handler():
+    # G3-S3: a 2,000,000-element array cost 442 ms and buffered ~70 MB before
+    # the `len(...) != 2` check in build_path rejected it. The bound has to be
+    # in the schema, which runs before the handler.
+    #
+    # Asserting `status_code == 422` alone is VACUOUS and passed before this
+    # fix existed: build_path already raises 422 for "alpha supports exactly
+    # two source artists" — but it raises it AFTER the whole array has been
+    # parsed and materialised, which is the entire finding. The two are told
+    # apart by the shape of `detail`: FastAPI gives a LIST of pydantic errors
+    # for a schema violation and a STRING for HTTPException's message.
+    client, _ = _client()
+    r = client.post("/api/path", json={"sources": ["x"] * 5000, "exclude": []})
+    assert r.status_code == 422
+    detail = r.json()["detail"]
+    assert isinstance(detail, list), (
+        "rejected by the handler, not the schema — the array was fully "
+        f"materialised before anything checked its size: {detail!r}"
+    )
+    assert any(e["type"] == "too_long" for e in detail), detail
+
+
+def test_an_oversized_exclusion_id_is_rejected():
+    # G3-S4: ExclusionIn.id is echoed verbatim into the telemetry line, so an
+    # unbounded string is a log-volume amplifier billed per GB, not only a
+    # parse cost. The review measured 1:1 amplification.
+    client, store = _client()
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [store.mbids[0], store.mbids[2]],
+            "exclude": [{"id": "z" * 5000, "reason": "dislike"}],
+        },
+    )
+    assert r.status_code == 422
+
+
+def test_an_oversized_exclusion_reason_is_rejected():
+    # `reason` is normalised to dislike/known in _to_exclusions, but the RAW
+    # value is what app.py logs. Bounding it at the normalisation would not
+    # bound the log line.
+    client, store = _client()
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [store.mbids[0], store.mbids[2]],
+            "exclude": [{"id": store.mbids[1], "reason": "z" * 5000}],
+        },
+    )
+    assert r.status_code == 422
+
+
+def test_a_body_over_the_limit_is_refused_before_parsing():
+    # The schema bounds cannot fire until the whole body has been read into
+    # memory. This is the cheap guard in front of that.
+    client, _ = _client()
+    r = client.post(
+        "/api/path",
+        content=b'{"sources":[],"exclude":[]}' + b" " * (CFG.max_body_bytes + 1),
+        headers={"content-type": "application/json"},
+    )
+    assert r.status_code == 413
+
+
+def test_an_ordinary_two_artist_request_still_works():
+    # The half a bounds test cannot see on its own: a limit set too tight
+    # refuses real traffic, and every test above passes when it does.
+    client, store = _client()
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [store.mbids[0], store.mbids[2]],
+            "exclude": [{"id": store.mbids[1], "reason": "dislike"}],
+        },
+    )
+    assert r.status_code == 200
+
+
+# --- /health off the thread pool (PW-2: G3-A1's feedback loop) ---------------
+
+
+def test_health_is_a_coroutine_so_it_never_queues_for_a_thread():
+    # /health shares Starlette's thread pool with build_path. The Gate 2->3
+    # review measured it at 22.09 s under 40 concurrent path requests, against
+    # App Runner's 5 s health-check timeout — and five misses replace the
+    # instance, whose load shifts to the other one, which fails the same way.
+    # The site did not degrade under load, it cycled.
+    #
+    # Asserted by introspection AS WELL AS behaviourally below, because the
+    # regression is a single keyword: `async def` reverted to `def` is
+    # invisible to every test that does not saturate the pool first.
+    client, _ = _client()
+    route = next(r for r in client.app.routes if getattr(r, "path", "") == "/health")
+    assert inspect.iscoroutinefunction(route.endpoint), (
+        "/health is a sync def and will queue behind saturated path requests"
+    )
+
+
+def test_health_answers_while_every_thread_pool_slot_is_occupied():
+    """The behavioural half: the property, not the keyword.
+
+    Occupies every thread-pool slot with a blocking sync endpoint, then asks
+    for /health. A sync /health cannot answer until a slot frees — the 22.09 s
+    the review measured. A coroutine answers off the event loop regardless.
+    """
+    client, _ = _client()
+    app = client.app
+
+    release = threading.Event()
+
+    @app.get("/blocking-probe")
+    def blocking_probe():  # sync on purpose: it consumes a pool slot
+        release.wait(timeout=10)
+        return {"ok": True}
+
+    async def exercise():
+        limiter = anyio.to_thread.current_default_thread_limiter()
+        original = limiter.total_tokens
+        limiter.total_tokens = 2  # saturate cheaply rather than spawning 40
+        try:
+            async with AsyncClient(
+                transport=ASGITransport(app=app), base_url="http://test"
+            ) as ac:
+                blockers = [
+                    asyncio.create_task(ac.get("/blocking-probe")) for _ in range(2)
+                ]
+                await asyncio.sleep(0.2)  # let both claim their slot
+                r = await asyncio.wait_for(ac.get("/health"), timeout=2.0)
+                assert r.status_code == 200
+                release.set()
+                await asyncio.gather(*blockers)
+        finally:
+            release.set()
+            limiter.total_tokens = original
+
+    asyncio.run(exercise())

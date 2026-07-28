@@ -1,5 +1,7 @@
+from artistpath_api.breaker import CatalogueBreaker
 from artistpath_api.clips import (
-    ClipResolver, DynamoClipCache, InMemoryClipCache, TrackIdentity,
+    CatalogueUnavailable, ClipResolver, DynamoClipCache, InMemoryClipCache,
+    TrackIdentity,
 )
 from artistpath_api.config import ApiConfig
 
@@ -43,7 +45,7 @@ class Boom(Exception):
     """
 
 
-def _resolver(responses, cache=None):
+def _resolver(responses, cache=None, breaker=None):
     """responses maps a url-substring to the dict it returns.
 
     A value that is an exception instance is raised instead of returned.
@@ -59,7 +61,7 @@ def _resolver(responses, cache=None):
                 return body
         return {}
 
-    r = ClipResolver(CFG, cache or InMemoryClipCache(), fetch_json)
+    r = ClipResolver(CFG, cache or InMemoryClipCache(), fetch_json, breaker=breaker)
     r.calls = calls
     return r
 
@@ -445,3 +447,118 @@ async def test_dynamo_cache_round_trips_through_the_resolver():
     assert clip is not None
     assert clip.preview_url == "https://signed.example/x.mp3"
     assert clip.title == "T"
+
+
+# --- a THROTTLED catalogue is not a missing track (PW-3: G3-A4, G3-S2) ------
+#
+# `_get` swallowed every exception into `{}`, so a 429 looked exactly like a
+# 404. `resolve` then fell through cache-hit -> search -> iTunes, so ONE user
+# request became TWO Deezer calls plus one iTunes call while Deezer was already
+# refusing us. viewer_function.js names that fan-out, in source, as the reason
+# the site's shared password exists.
+#
+# The classification happens in the INJECTED fetcher, not here: naming httpx's
+# exception types in clips.py is what the broad `except` exists to avoid.
+
+
+def _deezer_calls(resolver):
+    return [url for url, _ in resolver.calls if "deezer" in url]
+
+
+async def test_a_throttled_deezer_is_not_asked_again_for_the_same_artist():
+    # The cached-identity path re-signs a URL through /track. When that comes
+    # back 429, falling through to _search asks the SAME service twice more.
+    # One call is the correct number.
+    cache = InMemoryClipCache()
+    await cache.put(MBID, TrackIdentity("deezer", "999", "Song", "cover.jpg"))
+    r = _resolver({"deezer": CatalogueUnavailable("429")}, cache=cache)
+
+    clip = await r.resolve(MBID, "Radiohead")
+
+    assert clip is None
+    assert len(_deezer_calls(r)) == 1, (
+        f"asked a throttled Deezer {len(_deezer_calls(r))} times"
+    )
+
+
+async def test_a_track_that_left_the_catalogue_still_falls_through_to_a_search():
+    # The half the fix must not break. A 404 for a withdrawn track is a genuine
+    # miss, and re-searching is what keeps the card playable. Only
+    # UNAVAILABILITY stops the fall-through.
+    cache = InMemoryClipCache()
+    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    r = _resolver({
+        "deezer.com/track/999": Boom("404 not found"),
+        "deezer.com/search": DEEZER_HIT,
+    }, cache=cache)
+
+    clip = await r.resolve(MBID, "Radiohead")
+
+    assert clip is not None
+    assert clip.preview_url == "https://cdn.deezer/clip.mp3"
+
+
+async def test_a_throttled_deezer_still_falls_through_to_itunes_on_a_cold_artist():
+    # Falling through to a DIFFERENT service is not amplification — it is the
+    # fallback working. Only repeat calls to the refusing service are the bug.
+    r = _resolver({
+        "deezer": CatalogueUnavailable("429"),
+        "itunes": ITUNES_HIT,
+    })
+
+    clip = await r.resolve(MBID, "Radiohead")
+
+    assert clip is not None
+    assert clip.source == "itunes"
+    assert len(_deezer_calls(r)) == 1
+
+
+async def test_an_open_breaker_makes_no_outbound_call_at_all():
+    # The point of the whole task. PW-3 made one request cost one call instead
+    # of three; without a breaker, a thousand requests still cost a thousand
+    # calls to a service that is refusing us, which is what keeps the block in
+    # place rather than letting it clear.
+    breaker = CatalogueBreaker(threshold=2, cooldown_s=60.0)
+    r = _resolver({"deezer": CatalogueUnavailable("429")}, breaker=breaker)
+
+    for _ in range(5):
+        await r.resolve(MBID, "Radiohead")
+
+    assert len(_deezer_calls(r)) == 2, (
+        f"kept calling a refusing Deezer {len(_deezer_calls(r))} times; "
+        "the breaker should have stopped it after 2"
+    )
+
+
+async def test_an_open_deezer_breaker_leaves_itunes_usable():
+    # A breaker that silenced every card whenever one catalogue was throttled
+    # would be a worse defect than the one being fixed.
+    breaker = CatalogueBreaker(threshold=1, cooldown_s=60.0)
+    r = _resolver({
+        "deezer": CatalogueUnavailable("429"),
+        "itunes": ITUNES_HIT,
+    }, breaker=breaker)
+
+    await r.resolve(MBID, "Radiohead")          # trips the breaker
+    clip = await r.resolve("b" * 36, "Radiohead")
+
+    assert clip is not None and clip.source == "itunes"
+    assert len(_deezer_calls(r)) == 1
+
+
+async def test_a_resolver_built_without_one_still_gets_a_breaker():
+    # The wiring, not the guard. build_default_app constructs ClipResolver with
+    # no breaker argument and relies on the constructor default to arm one, and
+    # every other breaker test INJECTS a breaker — so a default that stopped
+    # arming it would leave the whole of PW-4 dead in production with all tests
+    # still green. That is G3-Q1's shape exactly, and it is the failure class
+    # the Gate 2->3 review named.
+    r = _resolver({"deezer": CatalogueUnavailable("429"), "itunes": {}})
+
+    for _ in range(CFG.clip_breaker_threshold + 3):
+        await r.resolve(MBID, "Radiohead")
+
+    assert len(_deezer_calls(r)) == CFG.clip_breaker_threshold, (
+        f"{len(_deezer_calls(r))} calls to a refusing Deezer with the DEFAULT "
+        f"breaker; expected it to stop at {CFG.clip_breaker_threshold}"
+    )
