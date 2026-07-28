@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-// Requires the API running on :8000 against the 5k graph, and the dev server (started by webServer).
+// Requires the API running on :8000, and the dev server (started by webServer).
+// (The 5k dev fixture this once named is retired; :8000 boots the adopted graph.)
 test('search, path, bypass produces a new path without the bypassed artist', async ({ page }) => {
   await page.goto('/');
 
@@ -16,7 +17,11 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   expect(before.length).toBeGreaterThan(1);
 
   // Bypass the second artist with "not for me".
-  const secondName = (await page.locator('ol li .font-semibold').nth(1).innerText());
+  // UI-13: located by data-testid, not `.font-semibold`. The endpoint eyebrow
+  // ("Starting artist") is also font-semibold, so .nth(1) silently became the
+  // FIRST card's name — and the assertion below then demanded that the start
+  // artist disappear, which it never can. A test hook must not be a style hook.
+  const secondName = await page.locator('ol li').nth(1).getByTestId('artist-name').innerText();
   await page.locator('ol li').nth(1).getByRole('button', { name: /not for me/i }).click();
 
   // URL now carries the exclusion, and the bypassed artist is gone from the new path.
