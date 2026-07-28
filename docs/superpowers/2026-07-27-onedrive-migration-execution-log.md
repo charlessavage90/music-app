@@ -119,6 +119,33 @@ attributes, matching `/COPY:DT`'s intent so no `ReadOnly`/reparse state carries)
 - `BLIND-MAPPING.json` specifically:
   `f3b0797076ac97516b912718165590853944885138a24cc25fcdfdb35624cf5f` on both sides.
 
+## §4a — A seventh thing the clone drops: git identity itself
+
+**Found the only way it could be found — the first commit from the new tree failed.**
+
+```
+Author identity unknown
+fatal: unable to auto-detect email address (got 'charl@DESKTOP-4070.(none)')
+```
+
+`user.name` and `user.email` were set with **`git config --local`** in the OneDrive tree, and
+**there is no global identity on this machine**. Local config lives in `.git/config`, which
+Task 2 deliberately does not copy — so a fresh clone cannot commit at all until identity is
+reproduced.
+
+*Resolution:* set `--local` in the new tree to the same two values, reproducing the arrangement
+rather than changing it. `git config --local --list` is now identical between the trees apart
+from remotes and branch tracking. **Deliberately not set globally** — that would alter this
+machine's behaviour for every other repository, which is outside a migration's remit.
+
+> **Same shape as §4, different category, which is why it is separate.** §4 is about files git
+> *ignores*; this is state git keeps *inside `.git`*, and cloning rather than copying `.git` is
+> exactly what discards it. **The two mitigations are in tension: `MIG-5`'s fix caused this.**
+> The trade is still right — a failed commit is loud and cost one minute, where imported
+> reparse-point corruption is quiet — but it means **anything else in `.git/config` is silently
+> gone too.** Checked: nothing else in the old tree's local config is non-default beyond
+> identity and remotes.
+
 ## §5 — Task 1 method correction: one traversal, and a manifest instead of a total
 
 **The first inventory script was wrong in a way worth recording, because it is the same class
