@@ -223,3 +223,104 @@ self-corrects once "Got it" is pressed, and moving it is the owner's call — qu
    the queue entry and owned by nobody.
 3. **The iPhone script is still unrun and still owed.** It was carried forward into the newest
    queue entry; nothing in this work touches or answers it.
+
+---
+
+# Owner changes and the deploy — same session, 2026-07-28 (night)
+
+The owner used the local build, asked for three changes, added one telemetry field, and
+approved the deploy. All of it landed in the same session as Tasks 8–13.
+
+## 14. What the owner changed after using it
+
+Three cosmetic/copy changes (`UI-14`) and one telemetry change (`UI-15`).
+
+- **The landing clip-length line was removed**, the decorative three-dot rail above it kept.
+  The test was **inverted rather than deleted** — it now asserts the line is absent, so
+  restoring it is a deliberate act rather than an accident.
+- **The landing intro was rewritten.** The brief was to explain the **how** at user level and
+  tie to coherence, explicitly **not** to promise obscurity. That bound is the owner's and it
+  is correct: the first path between two famous artists is expected to be famous
+  (`WHAT-GOOD-LOOKS-LIKE.md` value 9), so a front page promising unfamiliar artists writes a
+  cheque the first screen does not cash. Obscurity is introduced by the bypass explainer on
+  the journey page, which is unchanged.
+  - **The old sentence described the wrong product.** "Name two artists and hear a smooth
+    path between them" names only smoothness, which is `WHAT-GOOD-LOOKS-LIKE.md`'s
+    description of **boilthefrog**'s goal; this project's is "smooth *and* progressively
+    unfamiliar". Noticing that is what produced the option set.
+  - **`listeners share` was verified before shipping, not assumed** — edges come from
+    ListenBrainz similar-artists (`builder/…/sources/listenbrainz.py`) and every edge in the
+    artifact is behavioural (`graph_store.py:150`). The claim on the front page is literal.
+- **The journey rail spans full height and the arrow at its foot is gone.** The loading
+  screen's rail was deliberately **left alone** — it is a different element that animates
+  top-to-bottom and never carried the arrow.
+- **`path_length` is now logged as an explicit integer.** Log Insights cannot aggregate over
+  the length of a JSON array, so every `by path_length` query previously needed an offline
+  pass. **It is not a `DEP-7` metric**: it is cardinality of the response, not a scoring
+  choice, and `bypass_depth` is the exact precedent — also an integer count of an array that
+  is itself logged in full.
+
+**Spec §7's copy table was annotated, not rewritten.** That table is frozen so a *session*
+cannot reshape copy to fit what it built; it is not a constraint on the owner changing his
+own product. Both old strings are struck through in place with the reasoning beside them.
+
+## 15. The deploy
+
+PR #43 merged to `main` as `d68ef7a`; image `d68ef7a`; SPA published. Docs followed on
+`post-deploy-doc-sync` (PR #44).
+
+**`cdk diff` before deploying was worth the two minutes**: it showed exactly one change, the
+App Runner image tag `37d559e` → `d68ef7a`, which established in advance that this was an
+in-place **update** and not a service replacement — the condition the App Runner tag deferral
+keys on. Confirmed after the fact by reading the tags back.
+
+| Gate | Outcome |
+|---|---|
+| `cdk deploy` | **PASS** — `UPDATE_COMPLETE`, 171.3 s, no IAM or security-group diff |
+| §8, the site refuses | **PASS** — site root `301`, App Runner direct `403` (`TR-7`) |
+| §8, graph identity, mechanical | **PASS** — live `/health` matches the sidecar on sha256, artists and edges |
+| §8a, the front door **admits** | **PASS** — root `200`, `TR-5` SPA fallback on a cold journey link, `/api/*` `200` |
+| §8a, old address still works | **PASS** — `301` with query string intact, follows to `200` |
+| App Runner CLI tags | **PASS** — survived; deferral tested and **did not fire** |
+| New route live through the front door | **PASS** — `GET /api/artists/{mbid}` |
+| Live bundle is this build | **PASS** — served `index.html` names `index-BLZUsNpG.js`, matching the local build hash |
+| Browser on the live site | **PASS** — renders correctly, **zero console errors** |
+
+**The strongest check is not in the runbook.** A journey built against production returned the
+**identical eight artists in the identical order** as the same journey locally — which is
+direct evidence for the claim every queue entry has had to make on trust, that routing did not
+move. Recommend adding it to §8; it costs one `curl` and it is the only check here that tests
+the thing users would actually notice.
+
+**`path_length` was verified end to end**, not merely deployed: a real journey against
+production was read back out of CloudWatch as `"path_length":8`, agreeing with its
+eight-element array.
+
+**Both environment traps in `memory/deploy-environment-traps.md` fired exactly as recorded** —
+the AWS CLI is not on the shell PATH (it is at `C:\Program Files\Amazon\AWSCLIV2\aws.exe`),
+and the `/aws/apprunner/...` log-group name needs `MSYS2_ARG_CONV_EXCL='*'` or MSYS rewrites
+it into a Windows path. The memory was correct on both and cost nothing to apply.
+
+## 16. Measurements
+
+- **Deploy**: CloudFormation 171.3 s; total `cdk deploy` 189.4 s.
+- **Production routing**: `duration_ms 21.31` for an 8-artist path at `bypass_depth 0`.
+  ⚠ `duration_ms` times the Dijkstra call **only** — not clip resolution and not transport —
+  so it is not comparable to how long the page feels.
+- **Bundle after the owner's changes**: JS 256.52 kB (gzip 81.72), CSS 27.45 kB (gzip 6.24).
+- **Suites at closeout**: builder **115**, api **217**, frontend **107 in 18 files**.
+- **D6, the standing context layer**: unconditional **43,692 characters**; conditional
+  **2,120 lines**. **Both deltas exactly 0** against §7's baseline — no `CLAUDE.md`, no
+  `.claude/`, no `memory/` was touched by any of this.
+
+## 17. Deferrals — state at closeout
+
+| Deferral | State |
+|---|---|
+| The `--prune` publish pass | ⚠ **TRIGGERED, and now owed as a SEPARATE LATER RUN.** The publish deliberately omitted it: `infra/README.md` §6 is explicit that pruning *during* a publish re-opens the `FRO-1` blank-page window for anyone mid-visit. `NEXT.md` carries the corrected wording. |
+| App Runner CLI tags vanish if the service is replaced | **Tested against reality and did not fire** — the service was updated, not replaced; `app=musicapp` read back present. |
+| Rate-limit headroom before sharing beyond friends and family | Unchanged. Not due. |
+| Front-door secret rotation; `react-router` CSRF; `env(safe-area-inset-bottom)`; chunked-body bounding; `G3-S4` disclosure | All unchanged and none came due. |
+
+**`UI-D3` held throughout**: `env(safe-area-inset-bottom)` is still inert and
+`viewport-fit=cover` is still absent.
