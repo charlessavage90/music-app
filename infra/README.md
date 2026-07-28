@@ -37,18 +37,37 @@ docker info > /dev/null && echo "docker ok"
 
 ## 1. Environment
 
-**Five variables are required and two are optional. The two secrets must never be
+**Seven variables are required and two are optional. The two secrets must never be
 committed** — a password in a CDK source file is in the repository's history permanently.
 
 | variable | required | what it is |
 |---|---|---|
-| `ARTISTPATH_DEPLOY_PASSWORD` | yes | the shared site password |
+| `ARTISTPATH_FRONT_DOOR_SECRET` | yes | shared secret proving a request came through Cloudflare (`PW-7`). **Must equal the Cloudflare Transform Rule's `x-front-door` value** |
 | `ARTISTPATH_DEPLOY_ORIGIN_SECRET` | yes | long random string; CloudFront sends it to App Runner |
 | `ARTISTPATH_DEPLOY_BILLING_USD` | yes | billing alarm threshold, in dollars |
 | `ARTISTPATH_DEPLOY_ALARM_EMAIL` | yes | where the alarm goes (confirm the SNS subscription email once) |
 | `ARTISTPATH_DEPLOY_IMAGE_TAG` | **yes** | the commit tag being deployed — **never `latest`** (see below) |
+| `ARTISTPATH_SITE_HOSTNAME` | **yes** | the permanent public name, `musicapp.cmiller.io` (`PW-5`, `G3-A5`) |
+| `ARTISTPATH_CERTIFICATE_ARN` | **yes** | us-east-1 ACM certificate for that name (`PW-5`) |
 | `ARTISTPATH_DEPLOY_GRAPH_KEY` | no | defaults to `graph-t15-tiebreakfix.bin` |
 | `ARTISTPATH_DEPLOY_SIDECAR` | no | defaults to `../builder/scratch/graph-t15-tiebreakfix.bin.json` |
+
+> **The certificate must be in `us-east-1`** — CloudFront accepts one from no other region —
+> and it is requested **out of band**, not by CDK. CDK could request it, but DNS validation
+> would block the deploy on a record only the operator can add, and `synth` must stay offline
+> (`deploy_stage.py`'s docstring).
+>
+> **⚠ Never delete the ACM validation `CNAME` from Cloudflare.** ACM reuses that same record to
+> renew the certificate automatically. Removed, renewal fails silently roughly thirteen months
+> later and the site goes down when the certificate expires. It is harmless to keep and must be
+> **DNS-only (grey cloud)** — proxied, it answers with Cloudflare's address and ACM never
+> validates, which is the single most common way issuance stalls.
+>
+> A certificate not yet attached to anything reports `RenewalEligibility: INELIGIBLE`. That is
+> expected and clears once CloudFront is using it.
+
+Unlike the image tag, both of these are **per-machine and stable**, so they belong in
+`infra/.env.deploy` alongside the secrets.
 
 > **`ARTISTPATH_DEPLOY_IMAGE_TAG` became required on 2026-07-27** (`ARC-6`). It defaulted to
 > `latest`, which contradicts this runbook's own rule that the tag is the only record of what
@@ -63,15 +82,102 @@ committed** — a password in a CDK source file is in the repository's history p
 > (`ARC-11`). It holds the four secrets above and deliberately **not** the image tag — the tag
 > is per-deploy, not per-machine, so persisting it is how you deploy the wrong commit.
 
-> **The username is `artistpath` and is not a secret** — `stack.py`'s `SITE_USERNAME`, which
-> is also the name substituted into the 401 page. **Send a new visitor the URL and the
-> password only**; the page they hit tells them the username (`RMD-11`, `FRO-2`). Before
-> 2026-07-27 the 401 had no body at all, so the first attempt of the first real visitor was
-> spent guessing a username nothing anywhere stated.
+> **There is no longer a site password, and there is no username.** `PW-7` removed both on
+> 2026-07-28: `SITE_USERNAME`, `site_password` and `ARTISTPATH_DEPLOY_PASSWORD` are gone.
+> **Send a new visitor the URL and nothing else.** The `RMD-11` / `FRO-2` history — the 401
+> page had to name the username, because only the password was ever shared — is retained in
+> git and no longer applies to anything live.
+>
+> ⚠ **`ARTISTPATH_FRONT_DOOR_SECRET` is not a replacement password and must never be given to
+> a visitor.** It is how CloudFront tells Cloudflare's traffic from a direct hit on the
+> generated CloudFront address, which bypasses the rate limit. Anyone holding it can bypass
+> that limit. **Rotating it means changing the Cloudflare Transform Rule and redeploying
+> together** — between the two the site refuses everyone, so do them back to back.
 
 The graph's sha256 is **not** a variable: `app.py` reads it from the sidecar. Never
 transcribe it by hand (`DEP-24`, `TR-10`) — its failure signature is "refuses to boot",
 during a cutover.
+
+## 1a. The Cloudflare front door
+
+Established `PW-6`, 2026-07-28, with the site password still on — **`PW-7` then removed the
+password the same day, and this front door is now the only access control there is.** Closes
+`G3-A2` (*nothing anywhere limits how many requests one person can send*) at no cost, replacing
+the AWS WAF the Gate 2→3 review assumed. Traffic path:
+
+```
+browser ──> Cloudflare (musicapp.cmiller.io) ──> CloudFront ──> App Runner
+```
+
+| Setting | Value |
+|---|---|
+| DNS record | `CNAME musicapp` → `d2n3xqz3pttguf.cloudfront.net`, **Proxied (orange)** |
+| ACM validation record | `_09d26615…` — **DNS-only (grey), and must stay** |
+| SSL/TLS mode | **Full (strict)** |
+| Transform Rule | Modify Request Header, static `x-front-door`, value in `ARTISTPATH_FRONT_DOOR_SECRET` |
+| Rate limiting | `URI Path equals /api/path`, by IP, **10 requests / 10 s**, Block 10 s |
+| HTML caching | **Verified none** on 2026-07-28 — no Cache Rule or Page Rule caches HTML or sets "Cache Everything" |
+
+> **⚠ The rate-limit period is 10 s, not the 60 s the plan specifies.** This Cloudflare plan
+> offers **only** 10-second periods, for both the window and the block. **Do not scale the
+> plan's `30 / 60 s` linearly to `5 / 10 s`** — a short window is burst-hostile, and the plan
+> chose the generous end deliberately because friends behind one office NAT or one mobile
+> carrier share an IP. Because the block is also 10 s, `10 / 10 s` reproduces the plan's
+> *sustained* cap of ~0.5 req/s per IP while restoring the burst allowance the shorter window
+> would otherwise remove.
+
+> **⚠ Measured headroom is thinner than the arithmetic predicted, and this is the number to
+> re-derive before Gate 3.** The owner's `PW-6` step 7b run — two journeys, well over 20
+> bypasses, **deliberately fast and barely looking at the paths** — peaked at **6 path requests
+per 10 s**, against a predicted
+> ~1.7. So **one** fast user sits comfortably under 10; **two** behind a single IP would reach
+> 12 and be blocked. Acceptable for Gate 2 (a handful of friends, rarely simultaneous).
+> **Not obviously acceptable for a public launch**, where carrier-grade NAT puts unrelated
+> strangers on one address. The five custom security rules are unspent and are the lever —
+> a second rule keyed on something other than raw IP.
+
+> **A CloudFront invalidation does NOT purge Cloudflare.** Today that is harmless because
+> nothing caches HTML. If HTML caching is ever enabled, §6's deploy **must** gain a Cloudflare
+> purge step, or returning visitors get a stale `index.html` referencing deleted asset hashes —
+> `FRO-1`, which is invisible to whoever deploys because it only bites people who visited
+> *before* the deploy.
+
+### Re-verifying the front door
+
+```bash
+set -a && . ./.env.deploy && set +a
+H=$ARTISTPATH_SITE_HOSTNAME
+
+# There is no password. Every one of these is unauthenticated.
+curl -s -o /dev/null -w '%{http_code}\n' "https://$H/"                            # 200
+curl -s -o /dev/null -w '%{http_code}\n' "https://$H/path/$A/$B"                  # 200
+curl -s -o /dev/null -w '%{http_code}\n' "https://$H/api/artists/search?q=radiohead"  # 200
+```
+
+**The rate limit fires, and only on abuse.** Use a *famous* pair — an obscure pair takes ~560 ms
+server-side, so sequential requests never reach 10 per 10 s and the test silently proves nothing:
+
+```bash
+for i in $(seq 1 60); do
+  curl -s -o /dev/null -w '%{http_code} ' \
+    -X POST "https://$H/api/path" -H 'content-type: application/json' \
+    -d "{\"sources\":[\"$A\",\"$B\"],\"exclude\":[]}"
+done; echo
+```
+
+Expect roughly ten `200`s, then `429`. **The exact index varies by a request or two** with where
+the 10-second window happens to fall — measured 2026-07-28 at request **11** on one run and **12**
+on another. Read "a 429 arrives in the low teens" as the pass; **60 × `200` is the failure**, and
+it almost always means the path pattern is not matching.
+
+**Peak real usage** is read from CloudWatch. Note `filter event = "path"` returns nothing —
+use `ispresent(bypass_depth)`, which is what actually distinguishes a path event from a clip
+event:
+
+```
+fields @timestamp | filter ispresent(bypass_depth)
+| stats count() as n by bin(10s) | sort n desc | limit 10
+```
 
 ## 2. First deploy only — the storage stage
 
@@ -343,15 +449,45 @@ aws cloudformation describe-stack-resource-drifts --stack-name ArtistpathStack \
 > API served its dev default (`RMD-6`). No test in any of the four packages can see that
 > class of gap. One `detect-stack-drift` call found it immediately.
 >
-> **Three rows always report as drifted and are NOT drift.** All three are on `ApiService`:
+> **Five rows across two resources always report as drifted and are NOT drift.**
+>
+> On `ApiService`:
 >
 > 1. `/InstanceConfiguration/Cpu` — App Runner normalises `"1 vCPU"` to `"1024"`.
 > 2. `/InstanceConfiguration/Memory` — likewise `"2 GB"` to `"2048"`.
 > 3. `/SourceConfiguration/.../RuntimeEnvironmentVariables/N` — `ARTISTPATH_CORS_ORIGINS`,
 >    expected `""`, actual `null`, `REMOVE`. **The index `N` moves** when the variable list
 >    changes, so match on the name, never the path.
+> 4. `/Tags`, `REMOVE` — the `app=musicapp` tag, applied by CLI. See below.
 >
-> **Anything fourth is real** and blocks the deploy.
+> On `ApiAutoScaling`, which before 2026-07-28 never appeared here at all:
+>
+> 5. `/Tags`, `REMOVE` — same tag, same reason.
+>
+> **Anything sixth is real** and blocks the deploy.
+>
+> **Rows 4 and 5 are deliberate and were added 2026-07-28** (`PW-5`). Both App Runner
+> resources are **excluded from CDK tagging in `stack.py`** and tagged out of band:
+>
+> ```bash
+> aws apprunner tag-resource --region us-east-1 --resource-arn "$ARN" --tags Key=app,Value=musicapp
+> ```
+>
+> **This is not tidiness that can be cleaned up — tagging them through CDK is a deadlock.**
+> App Runner's `Tags` property is immutable, so adding one forces a **replacement**; the service
+> carries an explicit `service_name`, and CloudFormation creates a replacement *before* deleting
+> the original, so App Runner refuses the duplicate name. **Measured, not reasoned:** a real
+> deploy on 2026-07-28 failed and rolled back with
+> *"Service with the provided name already exists: artistpath-api."* Retrying cannot help.
+> `test_app_runner_is_deliberately_left_untagged` pins the exclusion; deleting it re-breaks the
+> deploy.
+>
+> **`REMOVE` here reads from the template's point of view** — the tag exists in AWS and not in
+> the template. It does not mean anything was removed.
+>
+> ⚠ **If either App Runner resource is ever replaced, the CLI tags go with it.** Nothing
+> restores them automatically. Re-run the two `tag-resource` calls after any deploy that
+> recreates the service.
 >
 > **The third row was `RMD-6`'s symptom and is now permanent by design** — this section said
 > "expect exactly two, anything third is real" until 2026-07-27, which was correct only until
@@ -377,7 +513,7 @@ SITE=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
   --query "Stacks[0].Outputs[?OutputKey=='SiteUrl'].OutputValue" --output text)
 
 curl -s "$API/health"                                    # identity of the live graph
-curl -s -o /dev/null -w "%{http_code}\n" "$SITE/"        # expect 401 without the password
+curl -s -o /dev/null -w "%{http_code}\n" "$SITE/"        # expect 301 -> musicapp.cmiller.io
 curl -s -o /dev/null -w "%{http_code}\n" "$API/api/artists/search?q=a"   # expect 403
 ```
 
@@ -397,50 +533,67 @@ assert h['graph_sha256']==s['sha256'] and h['artists']==s['artists'] and h['edge
 print('live graph matches the sidecar')" "$API"
 ```
 
-### 8a. Prove the gate ADMITS — not only that it rejects (`FRO-4`, `RMD-13`)
+### 8a. Prove the front door ADMITS — not only that it refuses (`FRO-4`, `RMD-13`)
 
-**⏳ Runs at the Track C cutover, after §6 has put the SPA in the bucket. Not before.** Until
-then the bucket is empty and every path returns 403 whether the rewrite works or not, so
-running this early produces a red that means nothing.
+**Renamed and rewritten at `PW-7`, 2026-07-28.** It previously read "Prove the gate ADMITS" and
+described the shared password, which no longer exists. **The section is kept, not deleted** —
+the property it protects is unchanged and is the reason it was written.
 
-**Why it exists.** Every check in §8 proves the site *refuses*. Nothing anywhere makes an
-**authenticated** request, so `TR-5`'s SPA fallback — the rewrite that makes every shared
-journey link work at all — would ship having never been exercised against the real
+**Why it exists.** Every check in §8 proves the site *refuses*. Nothing there makes a request
+that should be **admitted**, so `TR-5`'s SPA fallback — the rewrite that makes every shared
+journey link work at all — could ship having never been exercised against the real
 distribution. Review §7 names this one of three classes nobody verified. It almost certainly
 works. **So did `TR-5`.**
 
-**The mechanical half** — run it first; it needs no browser:
+**The mechanical half** — needs no browser, and is `PW-7`'s step 7 verbatim:
 
 ```bash
-U="artistpath:$ARTISTPATH_DEPLOY_PASSWORD"
+H=$ARTISTPATH_SITE_HOSTNAME
+OLD=d2n3xqz3pttguf.cloudfront.net
 # MBID_A / MBID_B: any two artists. Build one journey in the app and copy the
 # two ids straight out of the address bar — all path state lives in the URL.
-curl -s -o /dev/null -w "%{http_code}\n" -u "$U" "$SITE/"                      # expect 200
-curl -s -u "$U" "$SITE/path/$MBID_A/$MBID_B" | grep -c '<div id="root"'        # expect 1
-curl -s -o /dev/null -w "%{http_code}\n" -u "$U" "$SITE/api/artists/search?q=beatles"  # expect 200
+
+curl -s -o /dev/null -w "%{http_code}\n" "https://$H/"                       # expect 200
+curl -s "https://$H/path/$MBID_A/$MBID_B" | grep -c '<div id="root"'          # expect 1
+curl -s -o /dev/null -w "%{http_code}\n" "https://$H/api/artists/search?q=beatles"  # expect 200
+
+# The old address must REDIRECT, not refuse — every link shared before PW-7 points at it.
+curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" "https://$OLD/path/$MBID_A/$MBID_B?known=$MBID_C"   # 301 + query string intact
+curl -sL -o /dev/null -w "%{http_code}\n" "https://$OLD/path/$MBID_A/$MBID_B"  # expect 200
 ```
 
-- Line 1 is the gate admitting. **If this 401s, nobody can get in at all** and the site is
-  down for everyone, which no §8 check would have told you.
-- Line 2 is `TR-5`: a shared journey link holds no S3 object, so anything other than the
-  SPA's entry point means the rewrite is not running on the live distribution.
-- Line 3 is the whole `/api/*` behaviour end to end — CloudFront adding the origin secret,
-  App Runner accepting it. A 403 here is `TR-7` refusing CloudFront itself.
+- Line 1 is the front door admitting. **If this refuses, the site is down for everyone**, and
+  no §8 check would have told you.
+- Line 2 is `TR-5`: a shared journey link holds no S3 object, so anything other than the SPA's
+  entry point means the rewrite is not running on the live distribution.
+- Line 3 is the whole `/api/*` behaviour end to end — CloudFront adding the origin secret, App
+  Runner accepting it. A 403 here is `TR-7` refusing CloudFront itself.
+- Lines 4 and 5 are the reason `PW-7` redirects rather than refusing. **A 403 on the old
+  address would break every link already shared**, and the query string carries bypass state,
+  so dropping it silently changes the journey the recipient sees.
 
-**The browser half — three things curl structurally cannot answer.** Use a real phone for
-this; it is also the trigger the deferred phone section in `TEST-QUEUE.md` has been waiting
-on since 2026-07-26.
+**And the bypass must stay closed** — this is the check that keeps `PW-6` from being
+decorative. Connect straight to CloudFront while claiming to be the real host:
 
-1. **Does the password dialog appear and accept the credential?** The 401 body names the
-   username (`RMD-11`); confirm it is the username the dialog actually takes.
-2. **Does a path build from inside the app?** This is the one that matters most and the one
-   nothing has ever exercised: the SPA's `fetch()` calls are same-origin, so they only work
-   if the browser **re-attaches the cached basic credentials to them**. curl cannot test
-   this — it re-sends `-u` explicitly every time, which is precisely the behaviour in
-   question.
-3. **Do in-app browsers show the dialog at all?** WhatsApp's and Instagram's frequently do
-   not. If a link opened from a message never prompts, share it as a plain link people open
-   in Safari or Chrome instead. This is a known risk, not a defect to fix at Gate 2.
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" --connect-to "$H:443:$OLD:443" "https://$H/"   # expect 403, NOT a redirect loop
+```
+
+A 200 here means anyone who learns the CloudFront address can bypass Cloudflare's rate limit
+entirely. A 301 means the no-loop branch is broken. Measured 2026-07-28: **403**, and the
+refusal does not contain the secret.
+
+**The browser half — what curl structurally cannot answer.**
+
+1. **Does a path build from inside the app?** The one that matters most. curl fetches one URL;
+   it never runs the SPA's own `fetch()` calls.
+2. **Do in-app browsers work?** WhatsApp's and Instagram's used to be a real risk because they
+   often suppress the Basic-auth dialog. **`PW-7` closed that class entirely** — there is no
+   dialog any more, so a link opened from a message behaves like any other link. Recorded
+   because it was a listed Gate 2 risk and is now resolved rather than merely untested.
+3. **iOS Safari, and whether a clip plays at all on an iPhone.** Unanswered by anything, and
+   unanswerable on Android. This is the review's `G3-F2`; the script lives in the current
+   `TEST-QUEUE.md` entry.
 
 ## 9. Rollback
 

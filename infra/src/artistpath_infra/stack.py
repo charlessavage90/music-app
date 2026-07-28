@@ -7,12 +7,12 @@ docs/superpowers/plans/2026-07-26-track-b-infrastructure.md.
 
 from __future__ import annotations
 
-import base64
 from dataclasses import dataclass
 from pathlib import Path
 
 import aws_cdk as cdk
 from aws_cdk import aws_apprunner as apprunner
+from aws_cdk import aws_certificatemanager as acm
 from aws_cdk import aws_cloudfront as cloudfront
 from aws_cdk import aws_cloudfront_origins as origins
 from aws_cdk import aws_cloudwatch as cloudwatch
@@ -25,11 +25,10 @@ from aws_cdk import aws_sns as sns
 from aws_cdk import aws_sns_subscriptions as sns_subscriptions
 from constructs import Construct
 
-# The username half of the shared site credential. It is NOT a secret — the
-# password is — and RMD-11 serves it in the 401 body so a visitor knows what to
-# type. Named once and substituted into both halves, because a body naming a
-# username the gate would reject is FRO-2 with extra steps.
-SITE_USERNAME = "artistpath"
+# Cost attribution: every resource this stack creates carries `app=<this>`, so
+# a Cost Explorer filter can separate this project from anything else sharing
+# the account. Named once so the stack and its test cannot drift apart.
+APP_TAG_VALUE = "musicapp"
 
 
 @dataclass(frozen=True)
@@ -43,10 +42,23 @@ class DeployInputs:
     graph_key: str
     graph_sha256: str
     origin_secret: str
-    site_password: str
+    # Shared secret proving a request arrived through Cloudflare, where the rate
+    # limit lives (PW-7, replacing DEP-4's shared site password). Injected by a
+    # Cloudflare Transform Rule as `x-front-door`; the viewer function refuses
+    # anything else. Not authentication — see viewer_function.js.
+    front_door_secret: str
     billing_alarm_usd: float
     alarm_email: str
     image_tag: str
+    # The permanent public name. G3-A5: until 2026-07-28 the site was welded to
+    # CloudFront's generated domain, which cannot be recreated, moved between
+    # accounts, or migrated off CloudFront — so every link ever shared was
+    # pinned to infrastructure rather than to a name we control.
+    site_hostname: str = ""
+    # us-east-1 ACM certificate for site_hostname. Requested out of band and
+    # passed in: CDK could request it, but DNS validation would block synth on
+    # a record only the operator can add, and synth must stay offline.
+    certificate_arn: str = ""
     # TKB-7 — the first deploy is a chicken-and-egg: App Runner needs an image
     # that cannot be pushed until ECR exists, and it needs the graph in a
     # bucket that does not exist either. Creating the service in the same pass
@@ -62,6 +74,30 @@ class ArtistpathStack(cdk.Stack):
     ) -> None:
         super().__init__(scope, id_, **kwargs)
         self.deploy = deploy
+
+        # Every taggable resource this account holds belongs to this app, so the
+        # tag goes on at the stack and CDK propagates it to each construct.
+        # Applied here rather than in app.py so synth tests can see it — a tag
+        # added at the App would be invisible to every test in this suite.
+        #
+        # ⚠ App Runner is EXCLUDED, and this is not a preference. Its Tags
+        # property is immutable, so adding one forces a REPLACEMENT — and the
+        # service carries an explicit service_name, so the replacement cannot
+        # succeed: CloudFormation creates the new resource before deleting the
+        # old, and App Runner refuses the duplicate name. Measured on a real
+        # deploy, 2026-07-28, which failed and rolled back:
+        #   "Service with the provided name already exists: artistpath-api."
+        # Retrying cannot help; it is a deadlock, not a transient error.
+        # Those two resources are tagged out of band instead — infra/README.md
+        # §1, which also records the resulting drift as deliberate.
+        cdk.Tags.of(self).add(
+            "app",
+            APP_TAG_VALUE,
+            exclude_resource_types=[
+                "AWS::AppRunner::Service",
+                "AWS::AppRunner::AutoScalingConfiguration",
+            ],
+        )
 
         self.spa_bucket = s3.Bucket(
             self,
@@ -251,14 +287,11 @@ class ArtistpathStack(cdk.Stack):
         )
         self.service.node.add_dependency(instance_role)
 
-        expected_auth = "Basic " + base64.b64encode(
-            f"{SITE_USERNAME}:{deploy.site_password}".encode()
-        ).decode()
         function_code = (
             (Path(__file__).parent / "viewer_function.js")
             .read_text()
-            .replace("__EXPECTED_AUTH__", expected_auth)
-            .replace("__EXPECTED_USERNAME__", SITE_USERNAME)
+            .replace("__FRONT_DOOR_SECRET__", deploy.front_door_secret)
+            .replace("__SITE_HOSTNAME__", deploy.site_hostname)
         )
         viewer_fn = cloudfront.Function(
             self,
@@ -321,6 +354,16 @@ class ArtistpathStack(cdk.Stack):
                 ),
             },
             default_root_object="index.html",
+            # Empty means "generated domain only", which is what the storage
+            # stage and every test that does not care about the hostname get.
+            domain_names=[deploy.site_hostname] if deploy.site_hostname else None,
+            certificate=(
+                acm.Certificate.from_certificate_arn(
+                    self, "SiteCertificate", deploy.certificate_arn
+                )
+                if deploy.certificate_arn
+                else None
+            ),
             # NO error_responses: it is distribution-level and would rewrite
             # the API's own errors too. The SPA fallback is in the viewer
             # function, which is per-behaviour (TKB-2).

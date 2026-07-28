@@ -10,16 +10,18 @@ from dataclasses import replace
 import aws_cdk as cdk
 from aws_cdk.assertions import Template
 
-from artistpath_infra.stack import ArtistpathStack, DeployInputs
+from artistpath_infra.stack import APP_TAG_VALUE, ArtistpathStack, DeployInputs
 
 DEPLOY = DeployInputs(
     graph_key="graph-test.bin",
     graph_sha256="0" * 64,
     origin_secret="test-origin-secret",
-    site_password="test-password",
+    front_door_secret="test-front-door-secret",
     billing_alarm_usd=25.0,
     alarm_email="nobody@example.com",
     image_tag="test",
+    site_hostname="artistpath.test.invalid",
+    certificate_arn="arn:aws:acm:us-east-1:000000000000:certificate/test",
 )
 
 
@@ -266,12 +268,20 @@ def test_the_distribution_has_no_custom_error_responses():
     assert "CustomErrorResponses" not in _distribution()
 
 
-def test_the_viewer_function_gates_on_the_password_and_rewrites_spa_routes():
+def test_the_viewer_function_gates_on_the_front_door_and_rewrites_spa_routes():
+    # PW-7: the gate now asks "did this arrive through Cloudflare?" rather than
+    # "does this carry the shared password?". Substring-level only, and
+    # deliberately so — QUA-1 records that this shape of assertion passed an
+    # INVERTED gate, which is why tests/test_viewer_function.py executes the
+    # function instead. This one survives as a cheap synth-level smoke check
+    # that the right function reached the template at all.
     (fn,) = template().find_resources("AWS::CloudFront::Function").values()
     code = fn["Properties"]["FunctionCode"]
-    assert "authorization" in code
+    assert "x-front-door" in code
     assert "/index.html" in code
-    assert "401" in code
+    # 301 for a stale link on the old address, 403 for the no-loop case.
+    assert "301" in code
+    assert "403" in code
 
 
 def _viewer_request_arns(behaviour: dict) -> list:
@@ -426,3 +436,97 @@ def test_the_service_is_told_the_table_name_rather_than_guessing_it():
     assert got["ARTISTPATH_CLIP_TABLE"] == {"Ref": table_id}, got[
         "ARTISTPATH_CLIP_TABLE"
     ]
+
+
+def test_the_distribution_serves_the_custom_hostname():
+    # G3-A5: without an alternate domain name CloudFront 403s any request whose
+    # Host is not its own generated address, so Cloudflare cannot be put in
+    # front at all. Asserted against an OVERRIDDEN value, not DEPLOY's, so an
+    # assertion that happens to match the fixture cannot pass vacuously.
+    t = template(site_hostname="probe.example.org")
+    t.has_resource_properties(
+        "AWS::CloudFront::Distribution",
+        {"DistributionConfig": {"Aliases": ["probe.example.org"]}},
+    )
+
+
+def test_the_distribution_uses_the_supplied_certificate():
+    t = template(certificate_arn="arn:aws:acm:us-east-1:111111111111:certificate/probe")
+    t.has_resource_properties(
+        "AWS::CloudFront::Distribution",
+        {
+            "DistributionConfig": {
+                "ViewerCertificate": {
+                    "AcmCertificateArn": (
+                        "arn:aws:acm:us-east-1:111111111111:certificate/probe"
+                    )
+                }
+            }
+        },
+    )
+
+
+# Named individually and asserted per resource, because `has_resource_properties`
+# passes if ANY resource of the type matches (QUA-6) — a tag that landed on one
+# bucket and nothing else would satisfy a looser assertion. Every entry here is
+# billable, which is the point of the tag.
+_MUST_CARRY_APP_TAG = [
+    ("AWS::CloudFront::Distribution", "Distribution"),
+    ("AWS::DynamoDB::Table", "ClipTable"),
+    ("AWS::S3::Bucket", "SpaBucket"),
+    ("AWS::S3::Bucket", "ArtifactBucket"),
+    ("AWS::ECR::Repository", "ApiRepo"),
+    ("AWS::CloudWatch::Alarm", "BillingAlarm"),
+]
+
+
+def test_every_billable_resource_carries_the_app_tag():
+    # Cost attribution: without this a Cost Explorer filter cannot separate this
+    # project from anything else in the account, and the billing alarm is the
+    # only spend control there is.
+    resources = template().to_json()["Resources"]
+    want = {"Key": "app", "Value": APP_TAG_VALUE}
+    missing = []
+
+    for type_, prefix in _MUST_CARRY_APP_TAG:
+        matches = [
+            lid
+            for lid, r in resources.items()
+            if r["Type"] == type_ and lid.startswith(prefix)
+        ]
+        assert len(matches) == 1, f"expected one {prefix}* {type_}, got {matches}"
+        tags = resources[matches[0]].get("Properties", {}).get("Tags") or []
+        if want not in tags:
+            missing.append((type_, matches[0], tags))
+
+    assert not missing, f"resources missing {want}: {missing}"
+
+
+def test_app_runner_is_deliberately_left_untagged():
+    # This asserts an ABSENCE, and it is load-bearing. Adding `app=musicapp` to
+    # these two looks like an obvious omission and closing it is a deadlock:
+    # App Runner's Tags property is immutable, so a tag forces a REPLACEMENT,
+    # and the service has an explicit service_name, so CloudFormation cannot
+    # create the replacement before deleting the original —
+    #   "Service with the provided name already exists: artistpath-api."
+    # Measured on a real deploy that failed and rolled back, 2026-07-28. The
+    # two are tagged out of band instead; the drift is deliberate and recorded
+    # in infra/README.md §1. Delete this test and the next deploy fails.
+    resources = template().to_json()["Resources"]
+    want = {"Key": "app", "Value": APP_TAG_VALUE}
+
+    for type_, prefix in [
+        ("AWS::AppRunner::Service", "ApiService"),
+        ("AWS::AppRunner::AutoScalingConfiguration", "ApiAutoScaling"),
+    ]:
+        matches = [
+            lid
+            for lid, r in resources.items()
+            if r["Type"] == type_ and lid.startswith(prefix)
+        ]
+        assert len(matches) == 1, f"expected one {prefix}* {type_}, got {matches}"
+        tags = resources[matches[0]].get("Properties", {}).get("Tags") or []
+        assert want not in tags, (
+            f"{matches[0]} must NOT carry {want} — it forces an impossible "
+            "replacement; see this test's comment"
+        )

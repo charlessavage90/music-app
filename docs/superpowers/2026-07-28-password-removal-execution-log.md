@@ -1,4 +1,4 @@
-# Execution log — removing the password (Track A), 2026-07-28
+# Execution log — removing the password, 2026-07-28
 
 **Role: ACTIVE — the retained execution log for
 [`plans/2026-07-28-password-removal-load-hardening.md`](plans/2026-07-28-password-removal-load-hardening.md).**
@@ -197,3 +197,216 @@ flipped, no AWS or Cloudflare state changed. The live site is exactly as it was.
 The OneDrive migration's **Task 9 → 10 → 11** state is untouched. Task 9 (confirm Backblaze
 completed an upload covering `C:\dev`) still gates Task 11, and Task 11 is still the irreversible
 deletion of the rollback tree.
+
+---
+
+# Track B — the front door, 2026-07-28
+
+**Written by the session that executed it, appended per task.** Track A stopped at the plan's
+named seam; Track B ran `PW-5` → `PW-8` in one session. **`PW-9` is unrun** and is gated on the
+owner's approval, not on readiness.
+
+**The title of this file now understates it.** It says "(Track A)". Both tracks are here.
+
+## PW-5 — custom domain and certificate (`G3-A5`) ✅
+
+Certificate `arn:aws:acm:us-east-1:826731842184:certificate/0f61db68-…` for
+`musicapp.cmiller.io`, us-east-1, DNS-validated, **ISSUED**, `RenewalEligibility: ELIGIBLE`
+once attached. Free.
+
+**The plan's two tests were run RED first** and failed with the predicted `TypeError` on the
+unexpected `DeployInputs` keyword.
+
+**⚠ `PW-5` was deployed TWICE. The first attempt failed and rolled back.** The cause was not in
+the plan — it was an addition the owner asked for mid-task: tag every resource `app=musicapp`
+for cost attribution.
+
+```
+UPDATE_FAILED AWS::AppRunner::Service ApiService
+"Service with the provided name already exists: artistpath-api."
+```
+
+**App Runner's `Tags` property is immutable**, so adding one forces a **replacement**; the
+service carries an explicit `service_name`, and CloudFormation creates the replacement *before*
+deleting the original. App Runner refuses the duplicate name. **This is a deadlock, not a
+transient error — retrying cannot help.**
+
+Nothing was damaged: the failure occurred **before** App Runner was touched, so there was no
+outage, the original service stayed `RUNNING`, and the rollback was clean (checked for orphaned
+autoscaling revisions — there were none; the concern was unfounded).
+
+**Resolution:** both App Runner resources are excluded from CDK tagging via
+`exclude_resource_types` and tagged **out of band** by CLI.
+`test_app_runner_is_deliberately_left_untagged` asserts the **absence** and carries the reason,
+because closing that "gap" looks obviously correct and re-breaks the deploy. Verified by
+mutation: removing the exclusion makes it fail.
+
+**Three measurement lessons, all of which changed what was reported:**
+
+1. **`cdk diff`'s default change-set method does not report tag-only changes.** It showed 4
+   resources changing; `--method=template` showed 12. It *does* report replacements accurately.
+   **Read both** — one for blast radius, one for coverage.
+2. **`cdk deploy … | tee` reports exit code 0 on failure**, because a pipeline's status is the
+   last command's. The first failed deploy looked successful to anything checking `$?`. It was
+   caught by reading the log. Every later deploy redirected to a file instead.
+3. Tagging reaches **12** resources; the 9 it misses are bucket/IAM policies, CloudFront
+   `OriginRequestPolicy` and `OriginAccessControl`, an SNS subscription and CDK's auto-delete
+   helper — **none taggable in CloudFormation, none billable.**
+
+## PW-6 — Cloudflare front door and rate limiting (`G3-A2`) ✅
+
+Established **with the password still on**, which is the whole safety property of the ordering.
+
+**⚠ The rate limit is `10 requests / 10 s`, block `10 s` — NOT the plan's `30 / 60 s`.** The
+owner's Cloudflare plan offers **only** 10-second periods, for both window and block.
+
+**It was deliberately NOT rescaled linearly to `5 / 10 s`.** A short window is burst-hostile,
+and the plan chose the generous end because friends behind one NAT share an IP. Because the
+block is also 10 s, `10 / 10 s` reproduces the plan's *sustained* ~0.5 req/s per IP while
+restoring the burst allowance.
+
+**The plan's `~1.9 s per request` figure was challenged and then CONFIRMED.** A first probe
+measured ~0.1 s and the session reported the plan contradicted. **That was wrong** — it timed a
+single cheap artist pair. The owner's CloudWatch summary (p90 **1916 ms** at bypass depth 0)
+is the better evidence, and `duration_ms` measures `find_journey` alone (`app.py:130-132`), so
+it is pure compute with no network.
+
+**What actually drives latency is the artist PAIR, not bypass depth.** Measured: flat from 0 to
+100 exclusions; but 68 ms (Arctic Monkeys → The Beatles) to 563 ms (Kraftwerk → Fela Kuti) across
+pairs. **Consequence for the runbook:** the abuse test must use a *famous* pair, or sequential
+requests never reach 10 per 10 s and the test silently proves nothing.
+
+**Check 6.4 — and the plan aims it at the wrong leg.** The plan says to prove the front-door
+header reaches **the origin**, suggesting the origin-request allow-list. It never can:
+CloudFront forwards only `x-journey-id` and `content-type` to App Runner. **`PW-7` enforces the
+header in the viewer function, at the edge**, so that is where it was verified — with a
+**control**: through Cloudflare the probe reads `1`, straight to CloudFront it reads `0`. A probe
+that always returned `1` would have passed the check exactly as the plan words it.
+
+Instrumented via a temporary response header, **not `console.log`** — a CloudFront Function's
+stdout is what the test harness parses as JSON, and logging broke 10 tests. The probe was removed
+in `PW-7`, which rewrites that block anyway, so it cost no extra deploy.
+
+**Gate 7b, and it cuts against the threshold.** The owner's browser run peaked at **6 path
+requests per 10 s** against a predicted 1.7 — 3.5× the session's estimate. So one fast user is
+fine; **two behind one IP would reach 12 and be blocked.** ⚠ The owner then qualified it: he was
+*barely looking at the paths*, so **6 is an upper bound on an attentive user, not typical use.**
+Recorded in `NEXT.md` as a deferral to re-derive before a public launch.
+
+## PW-7 — the password is gone (`G3-S7`) ✅
+
+**The gate was replaced, not deleted.** It now asks "did this arrive through Cloudflare?" That
+keeps the SPA-fallback coverage and closes the bypass that would make `PW-6` decorative: the
+generated CloudFront address answers on its own name and never touches the rate limit — **TR-7's
+defect one layer up, and this project has already shipped it once.**
+
+All five gates passed against production, plus **one negative test the plan does not call for**:
+connecting straight to CloudFront while spoofing `Host: musicapp.cmiller.io` — the fail-closed
+branch — returns **403**, does not loop, and does not leak the secret. That is the only route by
+which the rate limit could have been evaded.
+
+**Confirmed by the owner in a real browser, on a new device, in an incognito window** — which is
+what rules out cached Basic-auth credentials, the confound that would make a still-protected site
+look open.
+
+`test_stack.py`'s substring assertion still described the password. It was updated rather than
+deleted, with a comment saying why it is **not** the real test: `QUA-1` records that this exact
+shape passed an **inverted** gate.
+
+## PW-8 — runbook, retention, and the record ✅
+
+- **Log retention verified against the live service: 90 days on both groups.** §5a had been run.
+- **`infra/README.md` §8a renamed and rewritten** — it was "Prove the gate ADMITS" and described
+  a password that no longer exists. **Kept, not deleted:** the property it protects is unchanged.
+  **Every command in it was then executed verbatim** and returns exactly the documented result.
+- §1's variable table, the username note, §8's expectation and §7's drift rows all corrected.
+
+**⚠ A deferral the Track B handoff mis-read.** It said the `--prune` publish deferral came due at
+`PW-5`'s deploy. **It did not.** `--prune` belongs to `sync_frontend.py`, the *frontend* publish;
+`PW-5`–`PW-7` were infrastructure-only and never touched the SPA bucket, which still holds the
+cutover's objects. Verified: `sync_frontend` appears in none of the four deploy logs. The
+condition is now stated as **the next frontend publish**.
+
+**Drift has two new permanent rows.** `detect-stack-drift` now reports `/Tags REMOVE` on both
+`ApiService` and `ApiAutoScaling` — the latter had never appeared in drift detection at all.
+**Measured, not predicted**, and recorded in §7; left alone the gate would have fired on every
+future deploy, which is how a gate becomes one you skip.
+
+## State at the end of Track B
+
+| | |
+|---|---|
+| infra | **63 passed** |
+| api | 214 passed |
+| docs-lint | hard checks pass |
+| Deployed | `ArtistpathStack`, image tag `37d559e` (unchanged — no API code shipped) |
+| Live | `https://musicapp.cmiller.io`, **no password** |
+| Certificate | ISSUED, in use, renewal ELIGIBLE |
+
+**No application code changed in Track B.** No routing, no graph, no cost function, no clips.
+Everything was infrastructure, the viewer function, and documentation.
+
+## What a session picking this up must not get wrong
+
+- **`PW-9` is the only unrun task**, and it is gated on the owner's approval.
+- **Gate 3 is NOT open.** The password coming off is not Gate 3; the review's blocking set still
+  gates it.
+- **Do not raise `max_size=2`**, do not tag App Runner through CDK, do not delete the ACM
+  validation CNAME, do not rescale the rate limit to `5 / 10 s`. Each has a measured reason in
+  `NEXT.md` and `infra/README.md`.
+- **The one thing genuinely owed is the queued iPhone test**, and only a person with an iPhone
+  can discharge it.
+
+## Closeout — 2026-07-28, at the seam
+
+**Full ritual.** Ports 8000/5173/8138/8139 all free; nothing started, nothing left running, and
+the queued test exercises the deployed site so no local server is needed.
+
+**Suites (D4), all run rather than recalled:** builder **115**, api **214**, infra **63**,
+frontend **80**.
+
+**B3 — the gate's invariants were mutation-tested, not trusted green.** Three mutations, all
+caught: inverting the comparison (`!==` → `===`) fails **10** tests — that is `QUA-1`'s defect
+class, which once passed all 18; dropping the query string from the redirect fails **1**;
+removing the no-loop branch fails **2**.
+
+**B1 — the doc audit found three HIGH defects and all three were this session's own work.**
+Two were in `infra/README.md` §1a's re-verification block, written at `PW-6` while the password
+was still on: `PW-8` corrected §8 and §8a and never returned to §1a, so it still set the deleted
+`ARTISTPATH_DEPLOY_PASSWORD` and sent Basic auth. The third was the previous handoff's `--prune`
+claim, corrected in `NEXT.md` and here but not at its source. **All three are defects of
+omission or of not-going-back — exactly what the audit exists for and what a grep cannot find.**
+Fixed, and the corrected §1a block was then executed verbatim.
+
+**D6 — the standing context layer.**
+
+| Layer | Unit | Figure |
+|---|---|---|
+| Unconditional | characters | **43,692** |
+| Conditional | lines | **2,120** |
+
+**Both grew today, and the growth is `CLAUDE.md`'s environment note (+286 characters).** It was
+a **correction** — the note said the project lives under OneDrive and that `UV_LINK_MODE=copy` is
+required or `uv` fails, and neither was true. A first draft cost +464; it was trimmed by moving
+the detail into `memory/env-onedrive-uv.md`, which is conditional. The conditional +13 lines are
+the `closeout` D6 path fix and the App Runner tagging narrative.
+
+⚠ **The previous figures in this log are not comparable.** `closeout` D6 named the pre-migration
+memory slug, whose directory still exists, so it had been computing both numbers against a frozen
+copy that could never move. Corrected 2026-07-28; these are the first figures measured against
+the live one.
+
+**A3 — every deferral condition re-tested against reality, not merely confirmed to exist.** None
+has come due: no RSC machinery in the frontend (react-router CSRF), no `viewport-fit=cover` in
+`index.html` (safe-area inset), the App Runner service was not recreated and its CLI tags are
+still present, and `sync_frontend` appears in none of the four deploy logs (`--prune`).
+
+**A4 — three config fields were added** (`front_door_secret`, `site_hostname`,
+`certificate_arn`). None is a knob sitting at an old default: `app.py` `_require`s all three, so
+production cannot run without them. The `""` defaults exist only so the storage stage and the
+tests can synthesise without a certificate.
+
+**D2 is inapplicable** — the graph artifact did not change, so the committed fixtures are not
+stale. **D3:** what is live is image tag `37d559e` on the adopted artifact `4cb84ef9…`,
+unchanged all day; the ACM certificate is
+`arn:aws:acm:us-east-1:826731842184:certificate/0f61db68-cfc6-42e9-938c-70b5b6f081e5`.

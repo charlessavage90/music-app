@@ -23,6 +23,67 @@ the point.**
 
 ---
 
+## QUEUED (latest) — 2026-07-28 — the password is gone, and there is one thing only an iPhone can answer
+
+**The address is `https://musicapp.cmiller.io` and there is nothing to type.** No username, no
+password, no dialog. Send it to someone and they just open it.
+
+**You have already confirmed the password is gone** — new device, incognito window — so that half
+is done. What follows is everything else.
+
+**Nothing about *which artists* you get has changed.** No routing, no graph, no weighting, no cost
+function, and not one line of the app itself was touched. **A journey you build today is the same
+journey as yesterday's.** That is the single most valuable thing to confirm, because four separate
+pieces of plumbing moved underneath it.
+
+**Old links still work.** Anything you sent anyone at the old `d2n3xqz3pttguf...` address now
+redirects to the new one and keeps its place in the journey — including which artists had been
+bypassed. Worth testing with a link you actually sent someone earlier.
+
+### 1. The ordinary run — ten minutes
+
+1. **Two or three journeys you know well.** They must be unchanged.
+2. **Play clips and press both bypass buttons** several times.
+3. **Send yourself a journey link** from the new address, open it fresh.
+4. **Dig out an old link** if you have one, and confirm it lands on the journey rather than an
+   error page.
+5. **Type a nonsense address** like `/nowhere` — expect a short page with a way back.
+
+**What "wrong" looks like:** a familiar pair giving a *different* journey; a link landing on an
+error; a page saying "this request did not arrive through the front door" (that means something is
+genuinely broken — tell me); or clips that no longer play.
+
+### 2. The iPhone script — the one thing nothing else can answer ⚠
+
+**This is not optional and it is not covered by anything above.** Your phone run in July was an
+Android Pixel. **Nobody has ever opened this app on an iPhone.** Three things are unanswered, and
+the first one is the one that matters:
+
+1. **Does a clip play at all?** iOS refuses to play audio unless a real tap starts it, and the app
+   may or may not satisfy that rule. **The very first tap on a play button answers this.** If it
+   is silent, everything else is moot.
+2. **Does the bar at the bottom clear the home indicator**, or is it tucked underneath?
+3. **Does the keyboard leave artist names alone** as you type them — accents, odd capitalisation?
+
+**Why it needs a person and not a test:** if clips silently fail on iOS, the app looks like it is
+working perfectly and just happens to have no sound. There is no error, no message, and nothing in
+any log distinguishes that from an artist we genuinely have no clip for. **A borrowed iPhone for
+ten minutes settles it. Nothing else will.**
+
+### 3. What is new underneath, in case you notice it
+
+- **There is a limit on how fast one person can build journeys** — about ten in ten seconds. You
+  will not reach it in normal use; you got nowhere near it even when deliberately hammering it.
+  If you ever do, journeys briefly stop loading and then recover on their own.
+- **The site now sits behind Cloudflare.** That is what enforces the limit, and it is what
+  replaced the job the password was quietly doing.
+
+**Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
+For the iPhone questions, just tell me which of the three failed.
+
+*Detail: `docs/superpowers/2026-07-28-password-removal-execution-log.md`. Runbook: `infra/README.md`
+§1a and §8a.*
+
 ## N/A — 2026-07-28 — work towards dropping the password; nothing is live yet
 
 **Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no clips, no
