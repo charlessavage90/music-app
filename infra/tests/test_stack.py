@@ -464,7 +464,6 @@ def test_the_distribution_uses_the_supplied_certificate():
 # billable, which is the point of the tag.
 _MUST_CARRY_APP_TAG = [
     ("AWS::CloudFront::Distribution", "Distribution"),
-    ("AWS::AppRunner::Service", "ApiService"),
     ("AWS::DynamoDB::Table", "ClipTable"),
     ("AWS::S3::Bucket", "SpaBucket"),
     ("AWS::S3::Bucket", "ArtifactBucket"),
@@ -493,3 +492,33 @@ def test_every_billable_resource_carries_the_app_tag():
             missing.append((type_, matches[0], tags))
 
     assert not missing, f"resources missing {want}: {missing}"
+
+
+def test_app_runner_is_deliberately_left_untagged():
+    # This asserts an ABSENCE, and it is load-bearing. Adding `app=musicapp` to
+    # these two looks like an obvious omission and closing it is a deadlock:
+    # App Runner's Tags property is immutable, so a tag forces a REPLACEMENT,
+    # and the service has an explicit service_name, so CloudFormation cannot
+    # create the replacement before deleting the original —
+    #   "Service with the provided name already exists: artistpath-api."
+    # Measured on a real deploy that failed and rolled back, 2026-07-28. The
+    # two are tagged out of band instead; the drift is deliberate and recorded
+    # in infra/README.md §1. Delete this test and the next deploy fails.
+    resources = template().to_json()["Resources"]
+    want = {"Key": "app", "Value": APP_TAG_VALUE}
+
+    for type_, prefix in [
+        ("AWS::AppRunner::Service", "ApiService"),
+        ("AWS::AppRunner::AutoScalingConfiguration", "ApiAutoScaling"),
+    ]:
+        matches = [
+            lid
+            for lid, r in resources.items()
+            if r["Type"] == type_ and lid.startswith(prefix)
+        ]
+        assert len(matches) == 1, f"expected one {prefix}* {type_}, got {matches}"
+        tags = resources[matches[0]].get("Properties", {}).get("Tags") or []
+        assert want not in tags, (
+            f"{matches[0]} must NOT carry {want} — it forces an impossible "
+            "replacement; see this test's comment"
+        )

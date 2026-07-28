@@ -362,15 +362,45 @@ aws cloudformation describe-stack-resource-drifts --stack-name ArtistpathStack \
 > API served its dev default (`RMD-6`). No test in any of the four packages can see that
 > class of gap. One `detect-stack-drift` call found it immediately.
 >
-> **Three rows always report as drifted and are NOT drift.** All three are on `ApiService`:
+> **Five rows across two resources always report as drifted and are NOT drift.**
+>
+> On `ApiService`:
 >
 > 1. `/InstanceConfiguration/Cpu` — App Runner normalises `"1 vCPU"` to `"1024"`.
 > 2. `/InstanceConfiguration/Memory` — likewise `"2 GB"` to `"2048"`.
 > 3. `/SourceConfiguration/.../RuntimeEnvironmentVariables/N` — `ARTISTPATH_CORS_ORIGINS`,
 >    expected `""`, actual `null`, `REMOVE`. **The index `N` moves** when the variable list
 >    changes, so match on the name, never the path.
+> 4. `/Tags`, `REMOVE` — the `app=musicapp` tag, applied by CLI. See below.
 >
-> **Anything fourth is real** and blocks the deploy.
+> On `ApiAutoScaling`, which before 2026-07-28 never appeared here at all:
+>
+> 5. `/Tags`, `REMOVE` — same tag, same reason.
+>
+> **Anything sixth is real** and blocks the deploy.
+>
+> **Rows 4 and 5 are deliberate and were added 2026-07-28** (`PW-5`). Both App Runner
+> resources are **excluded from CDK tagging in `stack.py`** and tagged out of band:
+>
+> ```bash
+> aws apprunner tag-resource --region us-east-1 --resource-arn "$ARN" --tags Key=app,Value=musicapp
+> ```
+>
+> **This is not tidiness that can be cleaned up — tagging them through CDK is a deadlock.**
+> App Runner's `Tags` property is immutable, so adding one forces a **replacement**; the service
+> carries an explicit `service_name`, and CloudFormation creates a replacement *before* deleting
+> the original, so App Runner refuses the duplicate name. **Measured, not reasoned:** a real
+> deploy on 2026-07-28 failed and rolled back with
+> *"Service with the provided name already exists: artistpath-api."* Retrying cannot help.
+> `test_app_runner_is_deliberately_left_untagged` pins the exclusion; deleting it re-breaks the
+> deploy.
+>
+> **`REMOVE` here reads from the template's point of view** — the tag exists in AWS and not in
+> the template. It does not mean anything was removed.
+>
+> ⚠ **If either App Runner resource is ever replaced, the CLI tags go with it.** Nothing
+> restores them automatically. Re-run the two `tag-resource` calls after any deploy that
+> recreates the service.
 >
 > **The third row was `RMD-6`'s symptom and is now permanent by design** — this section said
 > "expect exactly two, anything third is real" until 2026-07-27, which was correct only until

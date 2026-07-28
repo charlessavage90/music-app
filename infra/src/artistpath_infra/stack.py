@@ -82,7 +82,25 @@ class ArtistpathStack(cdk.Stack):
         # tag goes on at the stack and CDK propagates it to each construct.
         # Applied here rather than in app.py so synth tests can see it — a tag
         # added at the App would be invisible to every test in this suite.
-        cdk.Tags.of(self).add("app", APP_TAG_VALUE)
+        #
+        # ⚠ App Runner is EXCLUDED, and this is not a preference. Its Tags
+        # property is immutable, so adding one forces a REPLACEMENT — and the
+        # service carries an explicit service_name, so the replacement cannot
+        # succeed: CloudFormation creates the new resource before deleting the
+        # old, and App Runner refuses the duplicate name. Measured on a real
+        # deploy, 2026-07-28, which failed and rolled back:
+        #   "Service with the provided name already exists: artistpath-api."
+        # Retrying cannot help; it is a deadlock, not a transient error.
+        # Those two resources are tagged out of band instead — infra/README.md
+        # §1, which also records the resulting drift as deliberate.
+        cdk.Tags.of(self).add(
+            "app",
+            APP_TAG_VALUE,
+            exclude_resource_types=[
+                "AWS::AppRunner::Service",
+                "AWS::AppRunner::AutoScalingConfiguration",
+            ],
+        )
 
         self.spa_bucket = s3.Bucket(
             self,
