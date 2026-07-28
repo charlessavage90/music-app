@@ -43,7 +43,7 @@ export class TimeoutError extends Error {
 }
 
 /** Chosen, not measured. Path is longest: Dijkstra at depth plus a cold instance. */
-const TIMEOUT_MS = { search: 8_000, path: 20_000, track: 10_000 } as const;
+const TIMEOUT_MS = { search: 8_000, path: 20_000, track: 10_000, artist: 8_000 } as const;
 
 async function fetchWithTimeout(
   url: string,
@@ -99,6 +99,20 @@ export async function buildPath(
   if (!r.ok) throw new ApiError(r.status);
   const data = (await r.json()) as { artists: Artist[]; stop_rule: StopRule };
   return { artists: data.artists, stopRule: data.stop_rule };
+}
+
+/**
+ * One artist by MBID. In-memory on the server: no network, no pathfinding.
+ *
+ * Exists for the loading screen — a shared link carries only MBIDs, so without
+ * this the two endpoint cards cannot be named until the path itself returns.
+ */
+export async function getArtist(mbid: string, signal?: AbortSignal): Promise<Artist> {
+  const r = await fetchWithTimeout(
+    `${BASE}/artists/${encodeURIComponent(mbid)}`, {}, TIMEOUT_MS.artist, signal,
+  );
+  if (!r.ok) throw new ApiError(r.status);
+  return (await r.json()) as Artist;
 }
 
 export async function getTrack(mbid: string, signal?: AbortSignal): Promise<Track | null> {
