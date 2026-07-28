@@ -324,3 +324,31 @@ it into a Windows path. The memory was correct on both and cost nothing to apply
 
 **`UI-D3` held throughout**: `env(safe-area-inset-bottom)` is still inert and
 `viewport-fit=cover` is still absent.
+
+## 18. Closeout findings against this session's own output
+
+**Three, and the pattern across them is that the mechanical checks passed on all three.**
+
+1. **`B5` — `docs/README.md`'s row for the demoted handoff restated its own stale status.**
+   The `HISTORICAL` banner was prepended and the old row body survived, so one row asserted
+   both "superseded and spent" *and* "Tasks 8–13 are not started, and nothing is deployed".
+   `docs-lint.sh` passed it: a row can be internally contradictory and satisfy every
+   mechanical check, because each half is individually well-formed.
+2. **`B1` — the plan and the spec were still marked `ACTIVE` after the deploy**, the plan
+   still reading "Tasks 8–13 are outstanding". Found by `doc-auditor`, both HIGH, both real.
+   **The session had already updated `docs/README.md`'s rows for these same two documents**,
+   so the map said COMPLETE and the territory said ACTIVE — and the territory is what a cold
+   session opens first.
+3. **`B4` verified the load-bearing prose rather than assuming it.** `RerollNotice`'s comment
+   claims `dislike` penalises the *neighbourhood* decaying over `avoid_radius`, and `known`
+   relaxes the floor *more aggressively*. Both true: `avoidance_map` decays over
+   `cfg.avoid_radius`, and `floor_relax_known` (0.15) exceeds `floor_relax_dislike` (0.08).
+   The user-facing explainer is therefore accurate to the router, which the spec requires.
+
+**Finding 2 is the one worth carrying forward, and it is the third instance of this class
+here.** A self-run grep could not have found it: nothing was *wrong* to search for, the role
+lines were simply not updated. `CLAUDE.md` already records that "a grep for stale names cannot
+find a name that is not there"; this is the same defect wearing a different hat — **a grep for
+stale status cannot find a status that was never changed.** It is also a specific new failure
+mode worth naming: **updating the index and not the indexed document**, which feels like
+completion because the thing you were reading is now correct.

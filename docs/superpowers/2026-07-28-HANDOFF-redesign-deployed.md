@@ -42,10 +42,13 @@ of the app, and after that whatever he decides. Two mechanical items are owed an
 
 ## Which documents are now wrong, and in which direction
 
-- **The plan and the spec are COMPLETE, not active.** The spec's §7 copy table is annotated
-  where the owner changed two landing strings; the annotation is authoritative over the rows.
-- **`docs/README.md` should gain a row for this handoff** if it does not have one — the
-  doc-audit at closeout is the check for that.
+- **The plan and the spec are COMPLETE, not active** — and their role lines now say so. They
+  did not until the closeout audit caught it: `docs/README.md`'s rows had been updated and the
+  documents themselves had not, so the two likeliest entry points still said Tasks 8–13 were
+  outstanding. The spec's §7 copy table is annotated where the owner changed two landing
+  strings; the annotation is authoritative over the rows.
+- **`docs/README.md` carries a row for this handoff**, and the previous handoff's row no
+  longer claims to be current.
 - **Nothing in `CLAUDE.md`, `.claude/` or `memory/` was touched**, so nothing there went stale
   from this work. D6 deltas are exactly 0 in both layers.
 
