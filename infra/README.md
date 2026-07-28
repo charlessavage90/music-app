@@ -92,6 +92,83 @@ The graph's sha256 is **not** a variable: `app.py` reads it from the sidecar. Ne
 transcribe it by hand (`DEP-24`, `TR-10`) — its failure signature is "refuses to boot",
 during a cutover.
 
+## 1a. The Cloudflare front door
+
+Established `PW-6`, 2026-07-28, **with the site password still on**. Closes `G3-A2` (*nothing
+anywhere limits how many requests one person can send*) at no cost, replacing the AWS WAF the
+Gate 2→3 review assumed. Traffic path:
+
+```
+browser ──> Cloudflare (musicapp.cmiller.io) ──> CloudFront ──> App Runner
+```
+
+| Setting | Value |
+|---|---|
+| DNS record | `CNAME musicapp` → `d2n3xqz3pttguf.cloudfront.net`, **Proxied (orange)** |
+| ACM validation record | `_09d26615…` — **DNS-only (grey), and must stay** |
+| SSL/TLS mode | **Full (strict)** |
+| Transform Rule | Modify Request Header, static `x-front-door`, value in `ARTISTPATH_FRONT_DOOR_SECRET` |
+| Rate limiting | `URI Path equals /api/path`, by IP, **10 requests / 10 s**, Block 10 s |
+| HTML caching | **Verified none** on 2026-07-28 — no Cache Rule or Page Rule caches HTML or sets "Cache Everything" |
+
+> **⚠ The rate-limit period is 10 s, not the 60 s the plan specifies.** This Cloudflare plan
+> offers **only** 10-second periods, for both the window and the block. **Do not scale the
+> plan's `30 / 60 s` linearly to `5 / 10 s`** — a short window is burst-hostile, and the plan
+> chose the generous end deliberately because friends behind one office NAT or one mobile
+> carrier share an IP. Because the block is also 10 s, `10 / 10 s` reproduces the plan's
+> *sustained* cap of ~0.5 req/s per IP while restoring the burst allowance the shorter window
+> would otherwise remove.
+
+> **⚠ Measured headroom is thinner than the arithmetic predicted, and this is the number to
+> re-derive before Gate 3.** The owner's `PW-6` step 7b run — two journeys, well over 20
+> bypasses, deliberately fast — peaked at **6 path requests per 10 s**, against a predicted
+> ~1.7. So **one** fast user sits comfortably under 10; **two** behind a single IP would reach
+> 12 and be blocked. Acceptable for Gate 2 (a handful of friends, rarely simultaneous).
+> **Not obviously acceptable for a public launch**, where carrier-grade NAT puts unrelated
+> strangers on one address. The five custom security rules are unspent and are the lever —
+> a second rule keyed on something other than raw IP.
+
+> **A CloudFront invalidation does NOT purge Cloudflare.** Today that is harmless because
+> nothing caches HTML. If HTML caching is ever enabled, §6's deploy **must** gain a Cloudflare
+> purge step, or returning visitors get a stale `index.html` referencing deleted asset hashes —
+> `FRO-1`, which is invisible to whoever deploys because it only bites people who visited
+> *before* the deploy.
+
+### Re-verifying the front door
+
+```bash
+set -a && . ./.env.deploy && set +a
+H=$ARTISTPATH_SITE_HOSTNAME; PW=$ARTISTPATH_DEPLOY_PASSWORD
+
+curl -s -o /dev/null -w '%{http_code}\n' "https://$H/"                              # 401
+curl -s -o /dev/null -w '%{http_code}\n' -u "artistpath:$PW" "https://$H/"          # 200
+curl -s -o /dev/null -w '%{http_code}\n' -u "artistpath:$PW" "https://$H/path/$A/$B"  # 200
+curl -s -o /dev/null -w '%{http_code}\n' -u "artistpath:$PW" \
+  "https://$H/api/artists/search?q=radiohead"                                        # 200
+```
+
+**The rate limit fires, and only on abuse.** Use a *famous* pair — an obscure pair takes ~560 ms
+server-side, so sequential requests never reach 10 per 10 s and the test silently proves nothing:
+
+```bash
+for i in $(seq 1 60); do
+  curl -s -o /dev/null -w '%{http_code} ' -u "artistpath:$PW" \
+    -X POST "https://$H/api/path" -H 'content-type: application/json' \
+    -d "{\"sources\":[\"$A\",\"$B\"],\"exclude\":[]}"
+done; echo
+```
+
+Expect ten `200`s then `429`. Measured 2026-07-28: first `429` at request **11**.
+
+**Peak real usage** is read from CloudWatch. Note `filter event = "path"` returns nothing —
+use `ispresent(bypass_depth)`, which is what actually distinguishes a path event from a clip
+event:
+
+```
+fields @timestamp | filter ispresent(bypass_depth)
+| stats count() as n by bin(10s) | sort n desc | limit 10
+```
+
 ## 2. First deploy only — the storage stage
 
 > ## ⛔ SKIP THIS SECTION unless `ArtistpathStack` does not exist yet

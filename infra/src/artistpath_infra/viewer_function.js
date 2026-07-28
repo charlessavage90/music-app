@@ -42,6 +42,14 @@ function handler(event) {
   var request = event.request;
   var headers = request.headers;
 
+  // TEMPORARY — PW-6 step 6 check 4. Proves the Cloudflare front-door header
+  // reaches this function BEFORE PW-7 makes the site depend on it. Reported as
+  // a response header on the 401 below, PRESENCE ONLY — never the value, which
+  // is the shared secret. NOT console.log: a CloudFront Function's stdout is
+  // what the test harness parses as JSON, so logging breaks 10 tests.
+  // PW-7 replaces this with the enforcing check. Remove it then.
+  var frontDoorPresent = headers['x-front-door'] ? '1' : '0';
+
   if (!headers.authorization || headers.authorization.value !== '__EXPECTED_AUTH__') {
     return {
       statusCode: 401,
@@ -49,6 +57,8 @@ function handler(event) {
       headers: {
         'www-authenticate': { value: 'Basic realm="artistpath"' },
         'content-type': { value: 'text/html; charset=utf-8' },
+        // TEMPORARY, PW-6 check 4 — see the note at the top of handler().
+        'x-front-door-probe': { value: frontDoorPresent },
       },
       body: { encoding: 'text', data: REFUSAL_BODY },
     };
