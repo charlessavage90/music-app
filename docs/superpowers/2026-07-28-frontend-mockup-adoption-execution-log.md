@@ -1,6 +1,6 @@
 # Frontend mockup adoption — execution log, 2026-07-28
 
-**Role: ACTIVE — Tasks 1–7 of 13 complete.** The retained record for
+**Role: ACTIVE — all 13 tasks complete.** The retained record for
 [`plans/2026-07-28-frontend-mockup-adoption.md`](plans/2026-07-28-frontend-mockup-adoption.md),
 governed by
 [`specs/2026-07-28-frontend-mockup-adoption-design.md`](specs/2026-07-28-frontend-mockup-adoption-design.md).
@@ -145,3 +145,81 @@ phone. Nothing here has been seen in a browser.
    `PlayerBar.tsx` is deliberately inert and the deferral in `NEXT.md` stands.
 5. **`UI-8`: this work will be the next FRONTEND publish**, which is the `--prune` deferral's
    trigger — `infra/src/artistpath_infra/sync_frontend.py`, not the next `cdk deploy`.
+
+---
+
+# Tasks 8–13 — second session, 2026-07-28 (night)
+
+Picked up cold from the Task 7 seam handoff. **All five items in §8 above were applied**; the
+`renderAt` warning (§8.3) was checked and **resolved in the plan's favour** — the helper exists
+at `PathPage.test.tsx:19` with the signature the plan assumed. Verifying it cost one grep and
+is the only reason that is known rather than assumed.
+
+## 9. Final state — all 13 tasks
+
+| | At the seam | Now |
+|---|---|---|
+| Frontend unit tests | 91 in 15 files | **107 in 18 files** |
+| API tests | 217 | **217** (no API code touched) |
+| e2e | **NOT RUN** | **5 passed** — the seam's honest weak point, now closed |
+| Lint | 1 warning (`vite.config.ts`, pre-existing) | **1 warning, same one** |
+| Snyk (`frontend/src`, `frontend/e2e`) | — | **0 issues, both** |
+| Production JS / CSS | 250.55 kB / 24.93 kB | **256.74 kB / 27.57 kB** (gzip 81.74 / 6.26) |
+
+**As with §1, this table is the only copy of these counts.** The 16 new tests are:
+`PathSkeleton` 3, `RerollNotice` 4, `PathIntro` 5, `PathPage` 4.
+
+## 10. Defects found in the plan's Tasks 8–13
+
+Three, all in test code, none in the design. The plan's own self-review predicted the *class*
+of the second and third but not the instances.
+
+1. **Task 11's two count assertions could never have passed.** The plan asserts
+   `getByText(/in 3 steps/i)` against a sentence its own component splits across three text
+   nodes — the count sits in its own `<span>` for the brighter colour. `getByText` matches a
+   node's **own** text children, so no element's text ever reads "in 3 steps". The component is
+   right and the assertion was wrong; both now read the line's `textContent`. **Mutation-checked**
+   by dropping the plural, which turned it red — this file's standing rule after the vacuous
+   `UI-7` test (§4).
+2. **Task 12's three test snippets called `renderAt` before spying on `buildPath`**, so they
+   would have hit the real client and hung. Rewritten in the file's existing style. A fourth
+   case was added pinning that the message names the signal **actually pressed** — the plan
+   tested `dislike` only, and the whole point of the feature is that the two buttons differ.
+3. **The plan says Task 12 leaves "the existing eight" passing.** There are **seven**.
+
+## 11. The e2e failure, which was a test defect and not the app
+
+`path.spec.ts` failed on first run: it demanded the bypassed artist disappear, and found
+`Miles Davis` — the **start** endpoint, which can never be removed.
+
+**Cause.** The spec located the artist name with `page.locator('ol li .font-semibold').nth(1)`.
+Task 8 added the endpoint eyebrow ("STARTING ARTIST"), which is **also** `font-semibold`, so
+`.nth(1)` silently became the *first* card's name instead of the second's. Fixed to
+`getByTestId('artist-name')`.
+
+**This is the same coupling `UI-5` fixed in `responsive.spec.ts`, in a file the fix missed** —
+and it was invisible at the seam precisely because e2e was the one gate not run there. The
+lesson is not "check the other spec": it is that **a deferred gate hides the defects its own
+work created**, and this one was created by the task committed immediately before it.
+
+## 12. Seen in a browser — the seam's weak point, closed
+
+The seam recorded that **nothing had been seen in a browser** and that 91 green jsdom tests were
+consistent with a card that looks wrong on a phone. Six screens were captured against the live
+API (adopted 75k artifact, sha256 `4cb84ef9…`, verified against `/health` rather than assumed):
+landing at 1200px and 390px, the skeleton, the journey at both widths, and a held path mid-reroll.
+
+All six render as designed. **One cosmetic observation, deliberately not changed:** on a first
+visit the reroll notice (`pt-24`) lands over the **open explainer** rather than over the journey,
+because the explainer occupies that space until dismissed. It is the design as drawn, it
+self-corrects once "Got it" is pressed, and moving it is the owner's call — queued as such.
+
+## 13. What a successor must not get wrong
+
+1. **The `--prune` deferral is now due on the next publish of this branch**, not on the next
+   `cdk deploy`. `infra/src/artistpath_infra/sync_frontend.py`.
+2. **Two servers were left running deliberately** so the queued test is runnable: API on `:8000`
+   (PID 93400) and Vite on `:5173` (PID 274380), both started after HEAD. They are recorded in
+   the queue entry and owned by nobody.
+3. **The iPhone script is still unrun and still owed.** It was carried forward into the newest
+   queue entry; nothing in this work touches or answers it.

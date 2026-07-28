@@ -10,20 +10,29 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-28 (evening), at the frontend mockup adoption seam.**
+**Last updated: 2026-07-28 (night), on completing the frontend mockup adoption.**
 
 ---
 
 ## Next
 
-**The frontend redesign is HALF BUILT and is the work in progress.** Tasks 1–7 of 13 are
-complete, committed and pushed on branch `frontend-mockup-adoption`; **Tasks 8–13 are not
-started.** The next action is to continue that plan in a fresh session.
+**The frontend redesign is COMPLETE — all 13 tasks — and is waiting on two owner decisions.**
+Committed and pushed on branch `frontend-mockup-adoption`, PR open. **It is not merged and not
+deployed.**
 
-- Handoff: [`2026-07-28-HANDOFF-frontend-mockup-adoption.md`](2026-07-28-HANDOFF-frontend-mockup-adoption.md)
-- Record: [`2026-07-28-frontend-mockup-adoption-execution-log.md`](2026-07-28-frontend-mockup-adoption-execution-log.md)
+The next action is the owner's, and it is two things in order:
+
+1. **Look at it** — the queued use-the-app test ([`TEST-QUEUE.md`](TEST-QUEUE.md), the
+   **QUEUED (latest)** entry). It is running on this machine right now: the app at
+   `localhost:5173` (PID 274380), the engine at `:8000` (PID 93400), both started after HEAD
+   and owned by nobody.
+2. **Then decide whether to merge and publish it.** Publishing is what makes the phone half of
+   that entry runnable, and it is the trigger for the `--prune` deferral below.
+
+- Record: [`2026-07-28-frontend-mockup-adoption-execution-log.md`](2026-07-28-frontend-mockup-adoption-execution-log.md) — §9–§13 are the second session
 - Plan: [`plans/2026-07-28-frontend-mockup-adoption.md`](plans/2026-07-28-frontend-mockup-adoption.md)
 - Spec: [`specs/2026-07-28-frontend-mockup-adoption-design.md`](specs/2026-07-28-frontend-mockup-adoption-design.md)
+- Seam handoff (Tasks 1–7, now historical): [`2026-07-28-HANDOFF-frontend-mockup-adoption.md`](2026-07-28-HANDOFF-frontend-mockup-adoption.md)
 
 **Nothing is deployed.** The live site is exactly as the password-removal work left it; the
 redesign exists only on the branch. **It touches no routing, graph, cost function or weight**,
@@ -38,11 +47,12 @@ so it changes which artists you get not at all.
 > The old `d2n3xqz3pttguf.cloudfront.net` address **redirects** and keeps its query string, so
 > every link shared before today still works.
 
-**One thing is owed and it is the owner's: the queued use-the-app test**
-([`TEST-QUEUE.md`](TEST-QUEUE.md), the 2026-07-28 **QUEUED** entry — not the newer N/A above
-it, which discharges nothing). It carries the **iPhone script**,
-which is the only unanswered question that matters — no test, emulator or Android device can
-tell us whether a clip plays at all on an iPhone, and `G3-F1` means a failure there is silent.
+**One thing is owed and it is the owner's, unchanged and untouched by the redesign: the
+iPhone script.** It has been carried forward into the newest **QUEUED (latest)** entry in
+[`TEST-QUEUE.md`](TEST-QUEUE.md) and is still unrun. It is the only unanswered question that
+matters — no test, emulator or Android device can tell us whether a clip plays at all on an
+iPhone, and `G3-F1` means a failure there is silent. **It needs the live site, not the local
+copy the redesign is running on.**
 **The redesign does not touch this and does not answer it.**
 
 **`PW-9` is the only unrun task in the password-removal plan** — the concurrency ladder against
@@ -102,7 +112,7 @@ Runbook: `infra/README.md` — **§1a is the front door, §8a is how to re-verif
 | **The rate limit's headroom** — one fast user peaked at 6 requests/10 s against a limit of 10, so **two behind one IP would be blocked** | **Before sharing beyond friends and family.** Carrier-grade NAT puts strangers on one address. The five unspent Cloudflare rules are the lever. ⚠ The 6 was measured while stress-testing, *not* reading paths — treat it as an upper bound on an attentive user, not typical use. |
 | **The front-door secret has no rotation procedure** | **If it is ever suspected leaked.** Rotating means changing Cloudflare and redeploying *together*; between the two the site refuses everyone. Anyone holding it can bypass the rate limit. |
 | **App Runner's CLI tags vanish if the service is replaced** | **After any deploy that recreates the service.** Nothing restores them; the two `tag-resource` calls are in `infra/README.md` §7. |
-| The `--prune` publish pass | **The next FRONTEND publish** (`sync_frontend.py`), not the next `cdk deploy`. ⚠ **Corrected 2026-07-28** — the Track B handoff said `PW-5`'s deploy was the trigger. It was not: `PW-5`–`PW-7` were infrastructure-only and never touched the SPA bucket, which still holds the cutover's objects. |
+| The `--prune` publish pass | **The next FRONTEND publish** (`sync_frontend.py`), not the next `cdk deploy`. ⚠ **NOW DUE on publishing the redesign** — that is the next frontend publish. ⚠ **Corrected 2026-07-28** — the Track B handoff said `PW-5`'s deploy was the trigger. It was not: `PW-5`–`PW-7` were infrastructure-only and never touched the SPA bucket, which still holds the cutover's objects. |
 | Medium CSRF in `react-router@7.18.1` | Revisit **only if** the app adopts React Router's unstable RSC APIs. Not exploitable without them. |
 | `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is **inert** | **Only if someone adds `viewport-fit=cover`.** Latent, not live. |
 | Reading the request stream to bound chunked bodies | The Content-Length guard covers every path CloudFront and Cloudflare can produce. |

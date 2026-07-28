@@ -23,7 +23,97 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-07-28 (evening) — the app is being restyled; half of it is done and none of it is live
+## QUEUED (latest) — 2026-07-28 (night) — the redesign is finished, and it is running on your machine right now
+
+**This is the other half of the entry below, and it is the real one.** The app you sent me a
+mockup of is now built end to end. **It is not on the website** — this is on your machine only,
+so the address you have still looks exactly as it did.
+
+**Nothing about *which artists* you get has changed.** No routing, no graph, no weighting, no
+cost function — **a journey you build now is the same journey as this morning's.** Not one line
+of the router was touched. That is the most valuable thing to confirm, because the app looks
+different enough that you will be inclined to trust it less.
+
+### It is already running — two things, and nothing owns them
+
+| what | address | PID |
+|---|---|---|
+| **the app** | **http://localhost:5173** | 274380 |
+| the engine behind it | http://127.0.0.1:8000 | 93400 |
+
+Open the first one and it works. They were started after the last commit, so they serve
+today's code, and they will outlive every terminal. **If you want them gone**, stop those two
+PIDs; nothing else will.
+
+### What to exercise — twenty minutes, all on the desktop
+
+1. **The front screen.** New type, a rounded search box, a pill "Find path" button, and a line
+   at the bottom about clip length. Then **drag the window narrow**, to about a third of your
+   screen, and look again.
+2. **Two or three journeys you know well.** These **must be unchanged**. Same artists, same
+   order. If a familiar pair gives you a *different* journey, something is wrong and it is the
+   most important thing you could tell me.
+3. **The new loading screen.** This is the one you have never seen: your two artists at top and
+   bottom with shimmering placeholders between them, and a line reading *"Listening for the
+   steps between them…"*. It replaces the old plain "Building your path…". **On a fast machine
+   against a warm engine it may flash past** — the honest way to see it is to build a path
+   between two obscure artists, or just watch the top of the screen as you press Find path.
+4. **Press both bypass buttons, several times.** The app now *says what it is doing*, and says
+   something different for each: **✕ Not for me** → "Steering around that sound"; **✓ I know
+   them** → "Digging for someone newer". The old journey **stays on screen, dimmed**, while the
+   new one is found — it no longer blanks out.
+5. **The new explainer.** Above every journey there is now a line saying how many artists are in
+   between, and a fold-out **"What do the two buttons do?"** — open on your first visit. It says
+   the thing that has always been true and has never been written down anywhere: **either button
+   rebuilds the whole journey, not just the card you pressed.** Press **"Got it"**, then reload
+   the page: **it should stay shut.** Press the question again and it should open.
+6. **Copy a journey's address mid-way through and open it in a new tab.** It should land on that
+   exact journey. This is the shared-link case, and it now has a proper loading screen instead
+   of a bare line.
+
+**What "wrong" looks like:** a familiar pair giving a *different* journey; the explainer
+re-opening after you dismissed it; a bypass press blanking the page instead of dimming it; the
+wrong message for the button you pressed; an artist's name squeezed to nothing in a narrow
+window; or clips that no longer play.
+
+### One thing I noticed and deliberately did not change
+
+**On a first visit, the "Steering around that sound" message lands on top of the open
+explainer box** rather than over the journey — because on a first visit the explainer is open and
+takes that space. Once you press "Got it" it sits where it was designed to. It is cosmetic, it
+is the design as drawn rather than a fault, and **moving it is your call** — say the word and it
+is a one-line change.
+
+### ⏸ The phone half is DEFERRED, and its trigger is publishing this
+
+**Do not try this on your phone yet** — there is no address a phone can reach, because the
+redesign is not on the website. The phone layout is built and was exercised at phone width by a
+machine, but that checks the *rules*, not a real device. **Trigger: the next publish.**
+
+### ⚠ Still owed, and this work does not touch it: the iPhone script
+
+**This is now the live location for it** — it is carried forward from the entry below, which has
+never been run. **Nobody has ever opened this app on an iPhone**, and three questions are
+unanswered:
+
+1. **Does a clip play at all?** iOS refuses to play audio unless a real tap starts it. **The very
+   first tap on a play button answers this.** If it is silent, everything else is moot.
+2. **Does the bar at the bottom clear the home indicator**, or is it tucked underneath?
+3. **Does the keyboard leave artist names alone** as you type them — accents, odd capitalisation?
+
+**Why it needs a person:** if clips silently fail on iOS, the app looks like it is working
+perfectly and just happens to have no sound. No error, no message, and nothing in any log
+distinguishes that from an artist we genuinely have no clip for. **A borrowed iPhone for ten
+minutes settles it. Nothing else will.** It needs the live site, not this local copy.
+
+**Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
+
+*Detail: `docs/superpowers/2026-07-28-frontend-mockup-adoption-execution-log.md`.*
+
+## N/A — 2026-07-28 (evening) — the app is being restyled; half of it is done and none of it is live
+<!-- "(latest)" stripped 2026-07-28 (night): the redesign is now finished and has its own
+     QUEUED entry above, which is the live one. Per the convention below, only that carries
+     "(latest)". This entry's "nothing to press yet" is now out of date — the other half landed. -->
 
 **Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no cost
 function — **a journey you build today is the same journey as this morning's.** Nothing was
@@ -64,9 +154,11 @@ and still waiting, immediately below.
      convention below. This entry is STILL LIVE and still owed — section 2, the iPhone
      script, has never been run. -->
 
-> **⚠ STILL OUTSTANDING as of 2026-07-28 evening.** The newer entry above is an N/A and
-> discharges nothing here. **Section 2 below — the iPhone script — remains the single most
-> valuable unrun test on this project.**
+> **⚠ STILL OUTSTANDING as of 2026-07-28 night, and NOTHING here has been discharged.**
+> **Section 2 below — the iPhone script — remains the single most valuable unrun test on this
+> project.** It has been **carried forward into the newest QUEUED entry at the top of this
+> file**; run it there, against the live site. This entry is left intact because sections 1 and
+> 3 are about the live site as it stands today and are still runnable as written.
 
 **The address is `https://musicapp.cmiller.io` and there is nothing to type.** No username, no
 password, no dialog. Send it to someone and they just open it.

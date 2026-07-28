@@ -1,6 +1,9 @@
 # Handoff — frontend mockup adoption, Tasks 1–7 of 13, 2026-07-28
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: HISTORICAL — discharged 2026-07-28 (night).** Tasks 8–13 were executed from this note
+and all 13 tasks are now complete; see the execution log's §9–§13, which is fresher than this
+document on everything. Kept because it is the record of what the seam handed over, and
+because §"What was overturned and must NOT be reverted" still governs. Supersedes
 [`2026-07-28-HANDOFF-password-removal-complete.md`](2026-07-28-HANDOFF-password-removal-complete.md)
 **on next actions only.** It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.
