@@ -1,0 +1,194 @@
+{
+ "PLA_G1_reproduction": {
+  "null": 0.4998,
+  "A0": 0.8261,
+  "X": 0.8687,
+  "expected": {
+   "null": 0.4998,
+   "A0": 0.8261,
+   "X": 0.8687
+  },
+  "pass": true
+ },
+ "PLA_R3_one_hop": {
+  "nodes_measured": 74193,
+  "null_frac_pop_ascending_over_all_directed_edges": 0.4997850793869974,
+  "ascent_frac": {
+   "A0": 0.8261291496502365,
+   "A7": 0.8484088795438923,
+   "X": 0.8687072904451902
+  },
+  "mean_dpop_of_cheapest_hop": {
+   "A0": 0.09182067364762062,
+   "A7": 0.10367236395366729,
+   "X": 0.11717449474994467
+  },
+  "delta_X_minus_A7": 0.020298410901297914,
+  "read": "ambiguous band"
+ },
+ "PLA_G3_degree1_interiors": {
+  "count": 0,
+  "cases": []
+ },
+ "PLA_R1_path_level_climb": {
+  "per_pair": {
+   "Miles Davis -> Daft Punk": {
+    "geodesic_dist": 4,
+    "delivered_hops_d0": 7,
+    "geodesic_interior_count": 32,
+    "delivered_interior_median_pctl": 0.9932876860038817,
+    "geodesic_interior_median_pctl": 0.9976345158507656,
+    "diff": -0.004346829846883837
+   },
+   "The Shins -> Wishbone Ash": {
+    "geodesic_dist": 6,
+    "delivered_hops_d0": 7,
+    "geodesic_interior_count": 45,
+    "delivered_interior_median_pctl": 0.9937257386241104,
+    "geodesic_interior_median_pctl": 0.9970347207246064,
+    "diff": -0.0033089821004960163
+   },
+   "Metallica -> Taylor Swift": {
+    "geodesic_dist": 3,
+    "delivered_hops_d0": 4,
+    "geodesic_interior_count": 23,
+    "delivered_interior_median_pctl": 0.9948107612680612,
+    "geodesic_interior_median_pctl": 0.9995686866508519,
+    "diff": -0.004757925382790629
+   },
+   "Madonna -> Bob Dylan": {
+    "geodesic_dist": 3,
+    "delivered_hops_d0": 3,
+    "geodesic_interior_count": 26,
+    "delivered_interior_median_pctl": 0.9990430235065775,
+    "geodesic_interior_median_pctl": 0.9985375781755446,
+    "diff": 0.0005054453310329166
+   },
+   "Pink Floyd -> Aphex Twin": {
+    "geodesic_dist": 3,
+    "delivered_hops_d0": 3,
+    "geodesic_interior_count": 14,
+    "delivered_interior_median_pctl": 0.9995889044640932,
+    "geodesic_interior_median_pctl": 0.9991845481992667,
+    "diff": 0.0004043562648264887
+   },
+   "Nirvana -> CROOVE": {
+    "geodesic_dist": 8,
+    "delivered_hops_d0": 9,
+    "geodesic_interior_count": 146,
+    "delivered_interior_median_pctl": 0.991818524908346,
+    "geodesic_interior_median_pctl": 0.9379245740780677,
+    "diff": 0.05389395083027826
+   },
+   "Arctic Monkeys -> Johnny Cash": {
+    "geodesic_dist": 2,
+    "delivered_hops_d0": 3,
+    "geodesic_interior_count": 1,
+    "delivered_interior_median_pctl": 0.9998584753073108,
+    "geodesic_interior_median_pctl": 0.9999865214578392,
+    "diff": -0.00012804615052841584
+   },
+   "Michael Jackson -> Gorillaz": {
+    "geodesic_dist": 2,
+    "delivered_hops_d0": 3,
+    "geodesic_interior_count": 3,
+    "delivered_interior_median_pctl": 0.999952825102437,
+    "geodesic_interior_median_pctl": 0.9995552081086909,
+    "diff": 0.00039761699374607495
+   },
+   "System of a Down -> R.E.M.": {
+    "geodesic_dist": 2,
+    "delivered_hops_d0": 2,
+    "geodesic_interior_count": 20,
+    "delivered_interior_median_pctl": 0.9998382574940694,
+    "geodesic_interior_median_pctl": 0.9991845481992667,
+    "diff": 0.0006537092948026846
+   },
+   "The Rolling Stones -> Linkin Park": {
+    "geodesic_dist": 2,
+    "delivered_hops_d0": 2,
+    "geodesic_interior_count": 13,
+    "delivered_interior_median_pctl": 0.9999730429156782,
+    "geodesic_interior_median_pctl": 0.9995686866508519,
+    "diff": 0.00040435626482637765
+   }
+  },
+  "pairs_excluded_dist_lt_2": [
+   {
+    "pair": "Radiohead -> The Beatles",
+    "geodesic_dist": 1
+   },
+   {
+    "pair": "Muse -> Coldplay",
+    "geodesic_dist": 1
+   }
+  ],
+  "n_pairs_included": 10,
+  "D_median_delivered_minus_geodesic_pctl": 0.0004009866292862263,
+  "read": "ASC-3 COLLAPSES at path level; famous interiors are arithmetic"
+ },
+ "PLA_R2_P_interior_pctl_by_depth": {
+  "0": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 35,
+   "median_pctl": 0.994837718352383,
+   "min_pctl": 0.902037955574725
+  },
+  "1": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 38,
+   "median_pctl": 0.9980860470131551,
+   "min_pctl": 0.902037955574725
+  },
+  "2": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 38,
+   "median_pctl": 0.9976345158507656,
+   "min_pctl": 0.902037955574725
+  },
+  "3": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 37,
+   "median_pctl": 0.9981669182661204,
+   "min_pctl": 0.902037955574725
+  },
+  "5": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 44,
+   "median_pctl": 0.9973716842786284,
+   "min_pctl": 0.902037955574725
+  },
+  "7": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 35,
+   "median_pctl": 0.995956437351736,
+   "min_pctl": 0.902037955574725
+  },
+  "10": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 49,
+   "median_pctl": 0.9979916972180289,
+   "min_pctl": 0.902037955574725
+  },
+  "15": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 50,
+   "median_pctl": 0.9959429588095752,
+   "min_pctl": 0.902037955574725
+  },
+  "20": {
+   "n_pairs_with_cell": 12,
+   "n_interiors_pooled": 58,
+   "median_pctl": 0.9979040866939832,
+   "min_pctl": 0.902037955574725
+  }
+ },
+ "PLA_R4_path_level_X_vs_A7": {
+  "a_fame_log10_from_committed_scores": 0.0037018350859559326,
+  "a_source": "scores.json one_column_contrasts.isolating.X (vs A7), exact per F9",
+  "b_median_paired_interior_pctl_diff_d_ge_10": -0.0018768869959026047,
+  "b_mean_paired_interior_pctl_diff_d_ge_10": -0.00664005403397791,
+  "b_n_paired_cells": 36,
+  "read_a": "jump price immaterial at path level (|dF| <= 0.1)"
+ }
+}
