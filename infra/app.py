@@ -62,7 +62,7 @@ ArtistpathStack(
         ),
         graph_sha256=_sidecar_sha256(),
         origin_secret=_require("ARTISTPATH_DEPLOY_ORIGIN_SECRET"),
-        site_password=_require("ARTISTPATH_DEPLOY_PASSWORD"),
+        front_door_secret=_require("ARTISTPATH_FRONT_DOOR_SECRET"),
         billing_alarm_usd=float(_require("ARTISTPATH_DEPLOY_BILLING_USD")),
         alarm_email=_require("ARTISTPATH_DEPLOY_ALARM_EMAIL"),
         # ARC-6: this defaulted to "latest", contradicting the runbook's own

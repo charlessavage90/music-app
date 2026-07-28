@@ -16,7 +16,7 @@ DEPLOY = DeployInputs(
     graph_key="graph-test.bin",
     graph_sha256="0" * 64,
     origin_secret="test-origin-secret",
-    site_password="test-password",
+    front_door_secret="test-front-door-secret",
     billing_alarm_usd=25.0,
     alarm_email="nobody@example.com",
     image_tag="test",
@@ -268,12 +268,20 @@ def test_the_distribution_has_no_custom_error_responses():
     assert "CustomErrorResponses" not in _distribution()
 
 
-def test_the_viewer_function_gates_on_the_password_and_rewrites_spa_routes():
+def test_the_viewer_function_gates_on_the_front_door_and_rewrites_spa_routes():
+    # PW-7: the gate now asks "did this arrive through Cloudflare?" rather than
+    # "does this carry the shared password?". Substring-level only, and
+    # deliberately so — QUA-1 records that this shape of assertion passed an
+    # INVERTED gate, which is why tests/test_viewer_function.py executes the
+    # function instead. This one survives as a cheap synth-level smoke check
+    # that the right function reached the template at all.
     (fn,) = template().find_resources("AWS::CloudFront::Function").values()
     code = fn["Properties"]["FunctionCode"]
-    assert "authorization" in code
+    assert "x-front-door" in code
     assert "/index.html" in code
-    assert "401" in code
+    # 301 for a stale link on the old address, 403 for the no-loop case.
+    assert "301" in code
+    assert "403" in code
 
 
 def _viewer_request_arns(behaviour: dict) -> list:

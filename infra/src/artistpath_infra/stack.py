@@ -7,7 +7,6 @@ docs/superpowers/plans/2026-07-26-track-b-infrastructure.md.
 
 from __future__ import annotations
 
-import base64
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -26,12 +25,6 @@ from aws_cdk import aws_sns as sns
 from aws_cdk import aws_sns_subscriptions as sns_subscriptions
 from constructs import Construct
 
-# The username half of the shared site credential. It is NOT a secret — the
-# password is — and RMD-11 serves it in the 401 body so a visitor knows what to
-# type. Named once and substituted into both halves, because a body naming a
-# username the gate would reject is FRO-2 with extra steps.
-SITE_USERNAME = "artistpath"
-
 # Cost attribution: every resource this stack creates carries `app=<this>`, so
 # a Cost Explorer filter can separate this project from anything else sharing
 # the account. Named once so the stack and its test cannot drift apart.
@@ -49,7 +42,11 @@ class DeployInputs:
     graph_key: str
     graph_sha256: str
     origin_secret: str
-    site_password: str
+    # Shared secret proving a request arrived through Cloudflare, where the rate
+    # limit lives (PW-7, replacing DEP-4's shared site password). Injected by a
+    # Cloudflare Transform Rule as `x-front-door`; the viewer function refuses
+    # anything else. Not authentication — see viewer_function.js.
+    front_door_secret: str
     billing_alarm_usd: float
     alarm_email: str
     image_tag: str
@@ -290,14 +287,11 @@ class ArtistpathStack(cdk.Stack):
         )
         self.service.node.add_dependency(instance_role)
 
-        expected_auth = "Basic " + base64.b64encode(
-            f"{SITE_USERNAME}:{deploy.site_password}".encode()
-        ).decode()
         function_code = (
             (Path(__file__).parent / "viewer_function.js")
             .read_text()
-            .replace("__EXPECTED_AUTH__", expected_auth)
-            .replace("__EXPECTED_USERNAME__", SITE_USERNAME)
+            .replace("__FRONT_DOOR_SECRET__", deploy.front_door_secret)
+            .replace("__SITE_HOSTNAME__", deploy.site_hostname)
         )
         viewer_fn = cloudfront.Function(
             self,
