@@ -62,12 +62,18 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
 
   return (
     <div className="relative">
-      <label htmlFor={inputId} className="block text-sm text-[var(--color-muted)] mb-1">
+      {/* UI-3: the text stays "From"/"To" and is uppercased in CSS.
+          getByLabelText is an exact match and four test files depend on it. */}
+      <label
+        htmlFor={inputId}
+        className="block mb-[9px] text-[11px] font-medium uppercase tracking-[.09em] text-[var(--color-label)]"
+      >
         {label}
       </label>
       <input
         id={inputId}
-        className="w-full rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] px-3 py-2 outline-none focus:border-[var(--color-accent)]"
+        className="w-full h-[52px] sm:h-[54px] rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] px-4 sm:px-[18px] text-[19px] sm:text-[20px] tracking-[-.01em] outline-none transition-shadow hover:border-[var(--color-border-hover)] focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(74,144,217,.14)]"
+        placeholder="Search an artist"
         value={query}
         onChange={(e) => {
           const next = e.target.value;
@@ -92,17 +98,19 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
         spellCheck={false}
       />
       {open && results.length > 0 && (
-        <ul className="absolute z-10 mt-1 w-full rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] overflow-hidden">
+        <ul className="absolute z-10 left-0 right-0 top-[calc(100%+8px)] rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-1.5 shadow-[0_24px_48px_-12px_rgba(0,0,0,.75),0_2px_6px_rgba(0,0,0,.4)]">
           {results.map((a) => (
             <li key={a.mbid}>
               <button
                 type="button"
-                className="w-full text-left px-3 py-2 hover:bg-[var(--color-accent)]/20"
+                className="flex w-full items-baseline gap-[7px] rounded-lg px-3 py-3 text-left hover:bg-[var(--color-accent)]/10"
                 onClick={() => choose(a)}
               >
-                {a.name}
+                <span className="text-[15px] tracking-[-.005em] whitespace-nowrap">{a.name}</span>
                 {a.disambiguation && (
-                  <span className="text-[var(--color-muted)] text-sm"> — {a.disambiguation}</span>
+                  <span className="text-[12.5px] text-[var(--color-note)] truncate">
+                    — {a.disambiguation}
+                  </span>
                 )}
               </button>
             </li>
@@ -110,7 +118,7 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
         </ul>
       )}
       {status !== 'idle' && (
-        <p className="mt-1 text-sm text-[var(--color-muted)]">
+        <p className="mt-2 text-sm text-[var(--color-muted)]">
           {status === 'empty' ? 'No artists found.' : 'Search is unavailable — try again.'}
         </p>
       )}
