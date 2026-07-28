@@ -85,7 +85,7 @@ PR #33.
 | Gate | State |
 |---|---|
 | **Gate 1 — personal use** | **DONE and discharged.** One live exception below (`BYP-13`). |
-| **Gate 2 — friends & family** | **All tracks DONE, and the phone run has now passed** (2026-07-27, per-step on all six checks, Android Pixel). The app is on the internet, the gate admits, and **real use has begun**. What remains is the Gate 2 → 3 team review — **COMMISSIONED by the owner on 2026-07-27 (evening) and in progress. It is no longer an open recommendation; do not re-recommend it.** Staffed architect / security / quality / frontend. The graph analyst is **deliberately not staffed**: no scoring question is open, path quality is PAUSED, and staffing it would invite work inside the pause. |
+| **Gate 2 — friends & family** | **All tracks DONE, and the phone run has now passed** (2026-07-27, per-step on all six checks, Android Pixel). The app is on the internet, the gate admits, and **real use has begun**. The Gate 2 → 3 team review — commissioned by the owner and **DELIVERED 2026-07-27 (evening); do not re-commission or re-recommend it.** Read it before opening Gate 3: [`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md) (PR #38) — it owns its own findings and their triage. It records Gate-3-blocking issues and, in §6, the owner-facing decisions they raise. **None are actioned and Gate 3 is not opened; the blocking set gates Gate 3, not Phase D.** |
 | **Gate 3 — public** | Not started. |
 
 A team review is scheduled at each gate boundary **after a period of real use** — staff the
