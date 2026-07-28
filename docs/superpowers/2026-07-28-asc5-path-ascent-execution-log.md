@@ -135,8 +135,13 @@ rebuild. The `acceptance.py` check is the forcing function; do not weaken it.
 - **A5**: ports 8000, 5173, 8138, 8139 all free; nothing started, nothing owned,
   nothing left running. The queued test-queue entries need no local server (live site).
 - **B1**: `docs-lint.sh` — 3 hard failures found (the three new documents unclassified
-  in `docs/README.md`), fixed, re-run clean (exit 0). `doc-auditor` dispatched scoped
-  to the diff; findings and remediation recorded below when it reports.
+  in `docs/README.md`), fixed, re-run clean (exit 0). `doc-auditor` ran scoped to the
+  diff: **no HIGH findings, two MEDIUM** — one already satisfied when it reported (the
+  2026-07-25 handoff's role line, a race with this closeout's own edit), one real and
+  fixed (`docs/README.md`'s Current-state section had no fresh signal that the pause
+  ended, so its "pause is intact" row tails could be misread as current; an unpause
+  notice now heads the section). Identifier census clean; discharge-order consistency
+  verified in three documents; figure discipline verified.
 - **B2**: `asc5_path_ascent.py` is a self-contained analysis script; nothing imports
   it and nothing should. No shipped module was created.
 - **B3**: no tests were added; the instrument's green-goes-red evidence is PLA-G1
