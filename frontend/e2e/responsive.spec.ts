@@ -35,7 +35,11 @@ test('a journey is usable at phone width', async ({ page }) => {
 
   // 2. The artist name must get real width, not a sliver. 160px is well under
   //    what the fixed layout gives it and well over what the broken one does.
-  const box = await interior.locator('.font-semibold').first().boundingBox();
+  // UI-5: pinned to the element, not to its typography. This was
+  // `.locator('.font-semibold')` — a Tailwind class doing test duty, which the
+  // 2026-07-28 restyle moves. It would have failed for a reason unrelated to
+  // what this spec measures.
+  const box = await interior.getByTestId('artist-name').first().boundingBox();
   expect(box).not.toBeNull();
   expect(box!.width).toBeGreaterThan(160);
 
