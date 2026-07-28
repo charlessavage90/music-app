@@ -1,7 +1,11 @@
 # HANDOFF — Track 2F null, ordering headroom WIDE, 2026-07-25
 
-**Role: ACTIVE, short-lived by design.** Written at a **clean seam**: both units ran to
-completion, nothing was adopted, and no work is in flight. Supersedes
+**Role: HISTORICAL as of 2026-07-28 — superseded by
+[`2026-07-28-HANDOFF-track3-preregistered.md`](2026-07-28-HANDOFF-track3-preregistered.md)
+on next actions.** Its §0 pause is over: the owner unpaused path-quality work on
+2026-07-28, and the successor note carries what happens next. This note remains the
+record of the Track 2F / headroom seam itself. Originally: written at a **clean seam**:
+both units ran to completion, nothing was adopted, and no work was in flight. Supersedes
 [`2026-07-24-HANDOFF-track2-complete.md`](2026-07-24-HANDOFF-track2-complete.md) **on what
 happens next only** — that note remains the record of Track 2's own result, and its §2 and §4
 carry inline supersession marks.

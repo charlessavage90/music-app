@@ -117,3 +117,45 @@ This is a standing build rule (future crawls can mint new nameless nodes), and i
 **not implemented by this session**: no rebuild is due, Track 3 needs none, and
 implementing it belongs to whichever session next touches the builder ahead of a
 rebuild. The `acceptance.py` check is the forcing function; do not weaken it.
+
+## §8 — Closeout record (run 2026-07-28, at the seam)
+
+- **A1/A2**: this log is the retained record; handoff
+  `2026-07-28-HANDOFF-track3-preregistered.md` written, previous handoff's role line
+  edited to point forward. No `.superpowers/sdd/` ledger existed (no subagent-driven
+  development this session).
+- **A3**: every open deferral re-tested against `NEXT.md`'s table; none newly due. The
+  `--prune` pass ripens ~2026-07-29 (not yet). The near-geodesic re-read is absorbed
+  into DD-P1 with that stated as its condition. The nameless remediation now carries
+  its condition (before the next production rebuild) with `acceptance.py` as the
+  forcing function.
+- **A4**: no shipped config knob was added — the Track 3 knob exists only in the
+  pre-registration, not in code. Not closed *because* nothing shipped; stated rather
+  than skipped.
+- **A5**: ports 8000, 5173, 8138, 8139 all free; nothing started, nothing owned,
+  nothing left running. The queued test-queue entries need no local server (live site).
+- **B1**: `docs-lint.sh` — 3 hard failures found (the three new documents unclassified
+  in `docs/README.md`), fixed, re-run clean (exit 0). `doc-auditor` dispatched scoped
+  to the diff; findings and remediation recorded below when it reports.
+- **B2**: `asc5_path_ascent.py` is a self-contained analysis script; nothing imports
+  it and nothing should. No shipped module was created.
+- **B3**: no tests were added; the instrument's green-goes-red evidence is PLA-G1
+  (reproduces committed figures exactly) plus the first run's honest failure.
+- **B5**: stale-description sweep found and fixed: `CLAUDE.md`'s orient row (pause
+  claim, now false), `memory/roadmap-pointer.md` (same), `memory/MEMORY.md` index line
+  (same), and `memory/path-quality.md` restating "27 prior claims" — the exact stale
+  count `CLAUDE.md` warns about, converted to a read-the-table instruction.
+- **D1**: tree clean at final commit; no gitignored path touched except reading
+  committed analysis outputs.
+- **D2**: artifact unchanged; fixtures untouched. **D3**: artifact identity asserted
+  and recorded in every output (`4cb84ef9…`).
+- **D4**: suites run, not asserted — builder **115 passed**, api **217 passed**,
+  frontend **107 passed** (18 files).
+- **D6**: unconditional **43,692 → 43,773 characters (+81)**; conditional **2,120 →
+  2,121 lines (+1)**. The +81 is the `CLAUDE.md` orient-row correction: the false
+  "PAUSED" claim replaced by the invariant plus both pause dates and a pointer to
+  `NEXT.md`. A pure removal would have been net-negative but would have deleted the
+  guard against a stale-copy reversion; the residual cost is flagged as the owner's to
+  keep or trim. The +1 line is the memory corrections.
+- **C1**: queued — the N/A entry at the top of `TEST-QUEUE.md`; the redesign entry
+  below it remains the live one to run.

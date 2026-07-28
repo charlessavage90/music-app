@@ -10,61 +10,45 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-28 (night), on completing the frontend mockup adoption.**
+**Last updated: 2026-07-28 (late night), on the ASC-5 / Track 3 closeout.**
 
 ---
 
 ## Next
 
-**The frontend redesign is COMPLETE, MERGED and DEPLOYED.** All 13 tasks, plus the owner's
-three copy/rail changes and `path_length` telemetry. PR #43 merged to `main` (`d68ef7a`);
-image `d68ef7a` on App Runner; SPA published 2026-07-28 night.
-
-**Verified after the deploy, mechanically:** live graph matches the sidecar on checksum,
-artist count and edge count; the front door admits (`200`), the SPA fallback serves a cold
-journey link, `/api/*` works end to end, and the old CloudFront address still redirects with
-its query string intact. A production journey returned the **identical path** to the same
-journey locally. App Runner was **updated, not replaced**, and its CLI tags survived.
-
-The next action is the owner's:
-
-1. **Use it** — the queued use-the-app test ([`TEST-QUEUE.md`](TEST-QUEUE.md), the
-   **QUEUED (latest)** entry), now against `https://musicapp.cmiller.io`. **The phone half's
-   trigger has fired** and the iPhone script is no longer blocked on anything.
-2. **The `--prune` pass is now owed as a separate, later run** — see the deferral table.
-
-- Record: [`2026-07-28-frontend-mockup-adoption-execution-log.md`](2026-07-28-frontend-mockup-adoption-execution-log.md) — §9–§13 are the second session
-- Plan: [`plans/2026-07-28-frontend-mockup-adoption.md`](plans/2026-07-28-frontend-mockup-adoption.md)
-- Spec: [`specs/2026-07-28-frontend-mockup-adoption-design.md`](specs/2026-07-28-frontend-mockup-adoption-design.md)
-- Seam handoff (Tasks 1–7, now historical): [`2026-07-28-HANDOFF-frontend-mockup-adoption.md`](2026-07-28-HANDOFF-frontend-mockup-adoption.md)
-
-**It touches no routing, graph, cost function or weight**, so it changes which artists you get
-not at all — confirmed against production, not just asserted.
-
-> ## 🔓 The site password is GONE, and the site is public.
+> ## 🔓 Path-quality work is UNPAUSED — owner decision, 2026-07-28.
 >
-> **`https://musicapp.cmiller.io`** — no username, no password. Confirmed in a real browser on
-> a new device in an incognito window, 2026-07-28, which is what rules out cached credentials.
-> **Send anyone the URL and nothing else.**
->
-> The old `d2n3xqz3pttguf.cloudfront.net` address **redirects** and keeps its query string, so
-> every link shared before today still works.
+> His goal, in his words: improve the frequency of obscure artists (and/or reduce the
+> frequency of very famous artists) in path interiors, **especially when the bypass
+> buttons are used.**
 
-**One thing is owed and it is the owner's, unchanged and untouched by the redesign: the
-iPhone script.** It has been carried forward into the newest **QUEUED (latest)** entry in
-[`TEST-QUEUE.md`](TEST-QUEUE.md) and is still unrun. It is the only unanswered question that
-matters — no test, emulator or Android device can tell us whether a clip plays at all on an
-iPhone, and `G3-F1` means a failure there is silent. **It needs the live site, not the local
-copy the redesign is running on.**
-**The redesign does not touch this and does not answer it.**
+**The next action: execute Track 3 from its pre-registration, in a fresh session reading it
+cold** — [`specs/2026-07-28-track3-depth-descent-preregistration.md`](specs/2026-07-28-track3-depth-descent-preregistration.md).
+Discharge order (its §4): **DD-P2 → DD-P1 → DD-P3 → DD-P4**, then arms. Nothing in it
+schedules a blind listen, a rebuild, or any owner spend.
 
-**`PW-9` is the only unrun task in the password-removal plan** — the concurrency ladder against
-the live origin. It is gated on the owner's approval, not on readiness. It is not a blocker for
-anything currently planned.
+- Handoff: [`2026-07-28-HANDOFF-track3-preregistered.md`](2026-07-28-HANDOFF-track3-preregistered.md)
+- Record: [`2026-07-28-asc5-path-ascent-execution-log.md`](2026-07-28-asc5-path-ascent-execution-log.md)
+- Evidence that shaped it: `builder/analysis/2026-07-28-asc5-path-ascent/` (ASC-5 is
+  **discharged** — famous-pair first-path interiors are structurally forced; the bypass
+  ladder's popularity profile is flat to d20; the jump price is immaterial at path level)
+- PR: **#45** (branch `asc5-path-ascent-reread`)
 
-Password-removal record: [`2026-07-28-password-removal-execution-log.md`](2026-07-28-password-removal-execution-log.md).
-Plan: [`plans/2026-07-28-password-removal-load-hardening.md`](plans/2026-07-28-password-removal-load-hardening.md).
-Runbook: `infra/README.md` — **§1a is the front door, §8a is how to re-verify it.**
+**Decided 2026-07-28 and recorded at the tripwire (`acceptance.py`): the 33 nameless
+artists are DROPPED, not backfilled.** The remediation is a standing build rule, not yet
+implemented; the acceptance check stays in force and still blocks any production rebuild
+until it lands. Implementing it belongs to whichever session next touches the builder ahead
+of a rebuild.
+
+**Still owed by the owner, unchanged by any of this:**
+
+1. **The use-the-app test** — [`TEST-QUEUE.md`](TEST-QUEUE.md), the **QUEUED (latest)**
+   entry (the redesign, against `https://musicapp.cmiller.io`), including the phone half.
+2. **The iPhone script** — carried inside that same entry; still the single most valuable
+   unrun test on the project.
+3. **The `--prune` publish pass** — see the deferral table; ripe from about 2026-07-29.
+
+`PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
 
 ## Gate state
 
@@ -72,73 +56,49 @@ Runbook: `infra/README.md` — **§1a is the front door, §8a is how to re-verif
 |---|---|
 | **Gate 1 — personal use** | **DONE and discharged.** One live exception (`BYP-13`). |
 | **Gate 2 — friends & family** | **DONE, and the password that defined it is now off.** |
-| **Gate 3 — public** | **NOT OPEN.** The password coming off is *not* Gate 3. The Gate 2→3 review's blocking set still gates it: [`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md). This work implemented the **minimum load-related subset** that let the password come off, and nothing more. |
+| **Gate 3 — public** | **NOT OPEN.** The Gate 2→3 review's blocking set still gates it: [`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md). |
 
 ## Closed — do not re-plan or re-investigate
 
-- **The OneDrive migration is COMPLETE, all twelve tasks.** Task 9 discharged by restore;
-  Tasks 10 and 11 **closed by owner decision** (the old tree is kept indefinitely as an
-  archive — he will delete it himself if he ever wants the space); Task 12 done. **Nothing on
-  this axis is owed by anyone.** The old tree is **never the working tree** — do not edit it.
-- **`G3-A5`** — closed by the move to `musicapp.cmiller.io`, a hostname the owner has
-  confirmed permanent.
-- **`G3-A2`** — closed by the Cloudflare rate limit.
-- **`G3-S7`** — closed by `PW-7`. The gate was **replaced, not deleted**.
-- **`G3-A3` does not fire** under a shed-load-at-the-edge design. Argued out before any code.
-  Do not re-add it to the blocking set.
-- **In-app browsers (WhatsApp, Instagram) suppressing the auth dialog** — a listed Gate 2
-  risk, **now structurally impossible**: there is no dialog.
+- **Track 2, Track 2F and the ceiling toll are exhausted nulls. Do not re-run any of them.**
+- **Loosening the both-ways cap is rejected** (`MKS-5b`); any targeted alternative must
+  demonstrate its bound by simulation first.
+- **Famous-pair first-path fame is barred as a scoring criterion** — structurally unable to
+  move (PLA-R1, 2026-07-28). This includes any future rescale pre-registration.
+- **The nameless-artist question is decided** (drop). What remains is implementation, above.
+- **The builder-side p99 rescale stays parked** until Track 3 answers: DD-R2 names it the
+  next candidate on a Track 3 null with headroom present.
+- **The OneDrive migration is COMPLETE**; the old tree is an archive, never the working tree.
+- **`G3-A5`, `G3-A2`, `G3-S7`** closed as recorded; **`G3-A3` does not fire** — do not
+  re-add it. In-app-browser auth suppression is structurally impossible (no dialog).
 - **`RMD-6`, `RMD-11`, `RMD-12`, `RMD-13`, `FRO-1`, `FRO-4`**, the `DEP-33` blockers, the
-  Gate 1 clip work, **Track 1**, **Track 2 / 2F / the ceiling toll**.
-  - ⚠ **One exception, live:** `BYP-13` — a card playing a clip by a *different artist of the
-    same name*. Not path-quality work and **not inside the pause**.
+  Gate 1 clip work, **Track 1**.
+  - ⚠ **One exception, live:** `BYP-13` — a card playing a clip by a *different artist of
+    the same name*. Not Track 3 work and not inside any pause.
 
 ## Must not be changed, and each has a reason
 
-- **`max_size=2` (`stack.py`)** — it is the **cost ceiling**, not a capacity setting, and it
-  is the only automatic spend control there is. Raising it deletes that, with a billing email
-  up to six hours late as the sole detector. It reads like the obvious capacity fix. It is not.
-- **App Runner is excluded from CDK tagging** — tagging it forces a replacement that
-  **cannot succeed** (explicit `service_name`; CloudFormation builds the replacement first).
-  Measured by a real deploy that failed and rolled back. `test_app_runner_is_deliberately_left_untagged`
-  pins it.
-- **The ACM validation `CNAME` at Cloudflare** — ACM reuses it to auto-renew. Delete it and
-  the certificate silently fails to renew in ~13 months and the site goes down.
-- **The rate limit is `10 / 10 s`, not the plan's `30 / 60 s`** — the Cloudflare plan offers
-  only 10-second periods. Do **not** rescale it linearly to `5 / 10 s`; see `infra/README.md`
-  §1a for why.
+- **`max_size=2` (`stack.py`)** — the **cost ceiling**, the only automatic spend control.
+- **App Runner is excluded from CDK tagging** — tagging forces a replacement that cannot
+  succeed; pinned by `test_app_runner_is_deliberately_left_untagged`.
+- **The ACM validation `CNAME` at Cloudflare** — delete it and the certificate silently
+  fails to renew in ~13 months.
+- **The rate limit is `10 / 10 s`, not `30 / 60 s`** — see `infra/README.md` §1a.
+- **The `acceptance.py` blank-name check** — do not weaken it to unblock a build;
+  implement the drop rule.
 
 ## Deferred, with conditions
 
 | Finding | Condition |
 |---|---|
-| **The rate limit's headroom** — one fast user peaked at 6 requests/10 s against a limit of 10, so **two behind one IP would be blocked** | **Before sharing beyond friends and family.** Carrier-grade NAT puts strangers on one address. The five unspent Cloudflare rules are the lever. ⚠ The 6 was measured while stress-testing, *not* reading paths — treat it as an upper bound on an attentive user, not typical use. |
-| **The front-door secret has no rotation procedure** | **If it is ever suspected leaked.** Rotating means changing Cloudflare and redeploying *together*; between the two the site refuses everyone. Anyone holding it can bypass the rate limit. |
-| **App Runner's CLI tags vanish if the service is replaced** | **After any deploy that recreates the service.** Nothing restores them; the two `tag-resource` calls are in `infra/README.md` §7. |
-| The `--prune` publish pass | ⚠ **TRIGGERED and now OWED as a separate run.** The redesign published 2026-07-28 night without `--prune`, which is correct: `infra/README.md` §6 is explicit that pruning *during* a publish re-opens the blank-page window (`FRO-1`) for anyone mid-visit. Run `sync_frontend.py --prune --skip-build` **once the new `index.html` has been live long enough that nobody still holds the previous one** — a day is ample. Cost of skipping: a few kB of orphaned assets. Cost of running it too early: a white screen for a returning visitor. |
-| Medium CSRF in `react-router@7.18.1` | Revisit **only if** the app adopts React Router's unstable RSC APIs. Not exploitable without them. |
-| `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is **inert** | **Only if someone adds `viewport-fit=cover`.** Latent, not live. |
-| Reading the request stream to bound chunked bodies | The Content-Length guard covers every path CloudFront and Cloudflare can produce. |
-| **`G3-S4`'s disclosure half** — what the app records about visitors, and that it says so nowhere | **The owner's call.** The amplification half (log volume) is closed. Now more pressing: the visitors are strangers. |
-
----
-
-## Path quality is PAUSED — owner decision, 2026-07-25
-
-**A separate track from the gates, and it is stopped. Resuming it is the owner's trigger,
-never a session's.**
-
-- Track 2 and Track 2F **both returned nulls**; the ceiling *ordering* measurement came back
-  **WIDE**. **Nothing adopted, no shipped code changed, no blind listen run.**
-- **Track 2F's full-strength toll re-run is already EXECUTED. Do not run it again.**
-- **The live candidate is a builder-side p99 rescale, and it is NOT pre-registered. Do not
-  start it.**
-
-**If it is ever resumed, the entry point is
-[`2026-07-26-RESUME-BRIEF-path-quality.md`](2026-07-26-RESUME-BRIEF-path-quality.md)** — read
-it in full first. It is not itself a resume signal.
-
-**Before acting on any path-quality claim**, read
-[`2026-07-22-phase1-execution-log-and-graph-defect.md`](2026-07-22-phase1-execution-log-and-graph-defect.md)
-§2 — and §2.12 first, because it retracts a central claim of §2.9. The three quantities that
-are not interchangeable (**degree ≠ popularity ≠ fame**) are live hazards.
+| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild.** The acceptance check is the forcing function. |
+| The `--prune` publish pass | **Ripe from ~2026-07-29** (a day after the redesign publish). `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. Cost of skipping: a few kB of orphans; cost of running early: a white screen for a returning visitor (`FRO-1`). |
+| **The rate limit's headroom** — two users behind one IP could collide | **Before sharing beyond friends and family.** |
+| **The front-door secret has no rotation procedure** | **If it is ever suspected leaked.** |
+| **App Runner's CLI tags vanish if the service is replaced** | **After any deploy that recreates the service** — `infra/README.md` §7. |
+| The near-geodesic ensemble re-read (PLA-R1's weakest link) | **Absorbed into DD-P1**, which measures headroom where it matters — at bypass depth on Track 3's pairs. A standalone first-path version is only owed if someone wants to lean on PLA-R1's "arithmetic" reading beyond what DD-P1 covers. |
+| Medium CSRF in `react-router@7.18.1` | Only if the app adopts React Router's unstable RSC APIs. |
+| `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is inert | Only if someone adds `viewport-fit=cover`. |
+| Reading the request stream to bound chunked bodies | The Content-Length guard covers every reachable path. |
+| **`G3-S4`'s disclosure half** — what the app records about visitors | **The owner's call.** |
+| The `STC-6` lower-threshold re-crawl probe | If Track 3 nulls with headroom present (DD-R2), it is the other graph-side candidate beside the rescale. |
