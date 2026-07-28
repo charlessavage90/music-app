@@ -375,6 +375,20 @@ whole-tree total. Two separate traversals agreeing.
 2. **A long job's output file should be uniquely named per run**, not a fixed path a retry will
    share with its own zombie.
 
+## §13 — Task 9: Backblaze coverage. IN PROGRESS — the owner's, and it gates Task 11.
+
+`MIG-3` cannot be verified from here: it needs the Backblaze account. Three things, and the
+third is the one that is usually assumed:
+
+1. `C:\dev` is in the backup selection.
+2. `.bin` and `.json` are not caught by an exclusion rule. **→ checked, §13a.**
+3. The archive has **completed** an upload rather than merely been queued.
+
+**This gates Task 11** (deleting the OneDrive tree). Until it passes, OneDrive remains the only
+second copy and must not be deleted. Retention note: Backblaze purges a deleted file after
+~30 days on the default plan, weaker than OneDrive's behaviour — so `MIG-1` and `MIG-3` are not
+independent risks.
+
 ## §13a — Task 9, check 2 of 3: the exclusion list. MEASURED, and it is safe on what matters.
 
 The owner supplied Backblaze's editable extension-exclusion list, 2026-07-27. Every entry was
@@ -420,21 +434,135 @@ OneDrive into a backup that was **silently incomplete for reasons that predate t
 owner has said so explicitly. The gate is unchanged: **an upload that has finished**, not one
 that is queued or running.
 
-## §13 — Task 9: Backblaze coverage. IN PROGRESS — the owner's, and it gates Task 11.
+## §15 — Closeout, run 2026-07-27 at the Phase D seam
 
-`MIG-3` cannot be verified from here: it needs the Backblaze account. Three things, and the
-third is the one that is usually assumed:
+**A1** — no new `.superpowers/sdd/` ledger to distil; `progress.md` last changed 2026-07-23,
+four days before this work. Execution was inline, not subagent-driven, and this log was written
+per task rather than at the end.
 
-1. `C:\dev` is in the backup selection.
-2. `.bin` and `.json` are not caught by an exclusion rule.
-3. The archive has **completed** an upload rather than merely been queued.
+**A3 — every deferral condition re-tested against reality, not merely confirmed to exist.**
+None has come due:
 
-**This gates Task 11** (deleting the OneDrive tree). Until it passes, OneDrive remains the only
-second copy and must not be deleted. Retention note: Backblaze purges a deleted file after
-~30 days on the default plan, weaker than OneDrive's behaviour — so `MIG-1` and `MIG-3` are not
-independent risks.
+| Deferral | Condition | Re-tested |
+|---|---|---|
+| `react-router` CSRF | only if the app adopts unstable RSC APIs | **0** RSC/`unstable_` references in `frontend/src/` — not met |
+| `env(safe-area-inset-bottom)` inert | only if someone adds `viewport-fit=cover` | `frontend/index.html:6` still `width=device-width, initial-scale=1.0` — not met; still latent |
+| `--prune` publish pass | the next deploy after 2026-07-27's | no deploy occurred (0 commits touching `infra/`) — not met |
 
-## §14 — Stopping at the Phase D seam
+**A4 — inapplicable, stated rather than skipped.** This work added no config knob, so there is
+no default to flip. It changed no default either: `ApiConfig.graph_path` is untouched and still
+relative.
+
+**A5 — see §15a.** **B2, B3, B4** — B2 and B3 are inapplicable: this work created no module and
+wrote no test. B4 applies narrowly and passed: the three code claims this log makes were each
+checked against source — `HealthOut.graph_sha256` (`models.py:50`, populated at `app.py:187`),
+`ApiConfig.graph_path` being relative (`config.py:20`), and the `MIG-9` count.
+
+**B1** — `docs-lint.sh` hard checks **pass**; its 38 figure candidates are all pre-existing in
+historical documents and none is in a file this work touched. `doc-auditor` dispatched, scoped
+to the diff plus the two documents citing it.
+
+**D2** — inapplicable; the graph did not change, so the committed fixtures are not stale.
+**D3** — discharged: all 18 `.bin` sha256 are in §9 and the adopted artifact's checksum is in
+the PR body, which is the only identity a gitignored artifact will ever have.
+
+**D4 — suites re-run at closeout rather than asserted from memory**, from `C:\dev\music-app`:
+**builder 115 · api 195 · infra 58 · frontend 80** (+ e2e 5, run earlier in §10). All green.
+
+### §15c — B1: what the auditor found, and one of them was a false claim in this log
+
+**Six HIGH findings, all fixed from the record; none escalated.** `docs-lint` was clean, which
+is exactly the pattern `closeout` warns about — the lint's own header says a green run is not a
+clean audit.
+
+| # | Finding | Resolution |
+|---|---|---|
+| 1 | The previous handoff still self-declared `Role: ACTIVE — nothing supersedes it` | **Already fixed** — the role line was rewritten while the auditor was reading. Its report was accurate when taken. |
+| 2 | The **plan** still self-declared `ACTIVE, not yet executed` | Banner added: partially executed, Phases A–C done, log wins on status. |
+| 3 | **`NEXT.md` omitted `MIG-11`** | Added as a third owed item. |
+| 4 | `docs/README.md`'s log row listed "three things a successor needs" and omitted `MIG-11` | Now four, with `MIG-11` named as the most safety-critical. |
+| 5 | **`docs/README.md` still pointed at the old memory slug** | Corrected. |
+| 6 | **This log claimed `session-start` §C sweeps two ports. It sweeps none.** | Corrected in §12. |
+
+> **Findings 3, 4 and 5 are the case for this step, and all three are defects of *omission*.**
+> `MIG-11` is the live, safety-critical item at this seam — it is what makes Task 11's deletion
+> fail — and it was **missing from the two documents a cold session reads first**. A session
+> clearing Backblaze and proceeding to Task 11 on `NEXT.md`'s enumerated "two things owed" would
+> have walked directly into it. Nothing in this log was wrong; the propagation simply did not
+> happen, and no grep finds a bullet that is not there.
+>
+> **Finding 5 is the sharper one.** `docs/README.md` carried the *same* stale memory path that
+> was deliberately fixed in `CLAUDE.md` earlier in this session, for the stated reason that it
+> was actively misleading a live session. The fix was applied to the file where the defect was
+> noticed and not to the class. **`docs/README.md` was open and edited three times today** and
+> the line survived every pass.
+>
+> **Finding 6 is the "confident prose about correct code" class, in this document.** The claim
+> was written while diagnosing `MIG-11`, was plausible, and was never checked against
+> `session-start/SKILL.md`. The truth is worse than the claim and strengthens the finding:
+> one ritual checks two ports, the other checks none.
+
+### §15a — A5: the port sweep, and why it swept more than two ports
+
+**Swept by listener across all ports, not by the two the ritual names** — that is `MIG-11`'s
+lesson applied to the check that missed it. Three artistpath-adjacent listeners, **all stale
+against HEAD** (`bd42494`, 2026-07-27 22:16):
+
+| Port | PIDs | Started | Tree | Disposition |
+|---|---|---|---|---|
+| 8138 | 60412, 71076 | 2026-07-20 19:41 | **OLD** | Close — stale, nothing queued needs it |
+| 8139 | 97220, 59236 | 2026-07-20 19:44 | **OLD** | Close — same |
+| 53342 | 90324 | 2026-07-20 19:28 | *different project* | **Leave.** Home Assistant MCP sidecar, not artistpath |
+
+`:8000` and `:5173` are both free. Nothing was started by this session that is still running.
+
+> **⚠ The close could not be performed: `Stop-Process` and `kill` were both refused by the
+> tool-permission classifier.** Recorded rather than worked around. The disposition stands and
+> the commands are in the closing message and the test-queue entry — **this is an owner action,
+> and it is a Task 11 prerequisite**, since those two hold the old tree's `.venv` open.
+>
+> A5's table calls stale-and-unneeded "not a question", and it isn't. The blocker is capability,
+> not judgement, which is a different thing from the failure A5 was written against — that one
+> was a session reporting PIDs with no disposition. **The disposition is given.**
+
+### §15b — D6: the standing context layer
+
+**Unconditional: 43,423 → 43,406 characters, −17. Conditional: 2,090 → 2,104 lines, +14.**
+
+Measured against the true pre-work baseline (merge-base `4c58e7d` with the pre-move `memory/`),
+not against the last figure in the record — see the caveat below.
+
+| Edit | Layer | Delta | Row of D6's table |
+|---|---|---|---|
+| `CLAUDE.md` project-memory path | unconditional | 37,606 → 37,573 = **−33** | *False about the world* — the session's call |
+| `MEMORY.md` index line for the uv guard | unconditional | 2,631 → 2,647 = **+16** | *False about the world* — the rule became location-dependent |
+| `memory/env-onedrive-uv.md` body | conditional | **+14 lines** | Paid on recall, by the session that recalls it |
+
+**No new rule, no new narrative, no new check.** Both unconditional edits replace a statement
+that had become false with the true one, and the pair nets **−17**. The explanatory clause
+drafted for `CLAUDE.md` was **cut rather than argued for**, because it would have made the pair
+positive and turned a correction into growth.
+
+> **⚠ Do not diff these against the last recorded figures (42,778 / 1,983, Track C).** Between
+> that measurement and this work's baseline the unconditional layer grew **+645 characters** and
+> the conditional layer **+107 lines**, all of it in PR #35's `B1` remediation and **none of it
+> this branch's**. Recorded here so the next sweep does not attribute it to the migration — the
+> same courtesy Track D extended over its unexplained +5.
+
+> **`closeout`'s own D6 command block hardcodes the old memory path** —
+> `C--Users-charl-OneDrive-Claude-Projects-music-app` — and as of today it resolves to the
+> retained duplicate rather than the live directory. It still returns a number, which is the
+> hazard: it will silently measure a frozen copy once memory diverges. **That is `MIG-10` /
+> Task 12's business** (`.claude/skills/closeout/SKILL.md` is on its list) and is deliberately
+> left for it, because until Task 11 the old path is still real. Both figures above were
+> computed against the **new** path.
+
+## §16 — Stopping at the Phase D seam
+
+*(Numbered §14 when first written, before the closeout sections were appended after it.
+Renumbered to §16 so heading order and section order agree — the only external citation,
+`NEXT.md`, was updated with it. This project's 2026-07-25 clips log records the identical
+defect, twice in one document; apparently it is easy to reproduce.)*
 
 Phases A, B and C are complete apart from Task 9. **Two complete copies exist and everything so
 far is reversible.** Phase D deletes the rollback and is not started.
@@ -474,7 +602,15 @@ present nor gone.
 processes is not a call to make silently. **Kill both before Task 11**, and re-check for
 non-standard ports rather than only `:8000`/`:5173`.
 
-> **Second-order finding worth more than the incident: the port sweep in `closeout` A5 and
-> `session-start` §C only ever looks at `:8000` and `:5173`.** These two survived a week and
-> multiple sweeps precisely because they were not on those ports. A sweep that checks two known
-> ports cannot find a process on a third, and it reports "clean" either way.
+> **Second-order finding worth more than the incident, and the doc audit sharpened it.**
+> `closeout` A5's sweep looks at exactly two ports —
+> `Get-NetTCPConnection -State Listen -LocalPort 8000,5173`
+> (`.claude/skills/closeout/SKILL.md:184`). A sweep that checks two known ports cannot find a
+> process on a third, and it reports "clean" either way.
+>
+> **`session-start` §C is worse, and an earlier draft of this section got it wrong.** It was
+> written here as also sweeping those two ports. **It sweeps nothing** — verified against
+> source: §C checks `git status`, the test queue and artifact identity, and its only
+> server-related step confirms that a *specific, queue-recorded* detached server is still alive.
+> There is no general listener check at session start at all. So the stronger statement is that
+> **one ritual checks two ports and the other checks none**, which is how these survived a week.

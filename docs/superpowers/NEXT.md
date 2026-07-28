@@ -24,8 +24,9 @@ owner's.**
 
 Phases A–C ran on 2026-07-27 and passed —
 [`2026-07-27-onedrive-migration-execution-log.md`](2026-07-27-onedrive-migration-execution-log.md)
-is the record and is **fresher than the plan or its handoff**, both of which still read as
-though nothing has run. **`C:\dev\music-app` exists, is verified, and works**: all four suites
+is the record, and
+[`2026-07-27-HANDOFF-migration-phase-d.md`](2026-07-27-HANDOFF-migration-phase-d.md) is the
+current handoff. **The plan itself still reads as though nothing has run**; the log wins. **`C:\dev\music-app` exists, is verified, and works**: all four suites
 green from it, all 18 graph artifacts byte-identical, and a running API serving `4cb84ef9…`.
 **The OneDrive tree is untouched and is the rollback.** No application code, graph, routing or
 config default changed, and no test-queue entry is owed.
@@ -38,6 +39,14 @@ config default changed, and no test-queue entry is owed.
    excluded, and an upload **completed** rather than queued. **This gates Task 11**, the
    deletion of the OneDrive tree. Until it passes, OneDrive is still the only second copy of
    the unreproducible archive.
+
+3. **Kill two zombie API servers before Task 11** (`MIG-11`, execution log §16). Ports **8138**
+   and **8139**, PIDs `71076, 59236, 60412, 97220`, running from the **old** tree's `.venv`
+   since 2026-07-20. They hold that tree's files open, so **Task 11's deletion will fail
+   partially** — leaving the rollback copy neither present nor gone, its worst state. Stopping
+   them was attempted and **blocked by the tool-permission classifier**, so it needs the owner.
+   **Do not kill PID 90324 on port 53342** — that is a Home Assistant sidecar from another
+   project.
 
 **Then Task 10: work from `C:\dev\music-app` for a few days before anything is deleted.** Phase
 D is irreversible and is deliberately not started.

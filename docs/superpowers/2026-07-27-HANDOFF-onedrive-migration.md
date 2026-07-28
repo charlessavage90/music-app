@@ -1,8 +1,16 @@
 # Handoff — the OneDrive migration is planned, not started, 2026-07-27
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-07-27-HANDOFF-gate2-track-c.md`](2026-07-27-HANDOFF-gate2-track-c.md) on next actions.
-It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+**Role: SUPERSEDED — on next actions AND on status**, 2026-07-27, by
+[`2026-07-27-HANDOFF-migration-phase-d.md`](2026-07-27-HANDOFF-migration-phase-d.md), written at
+the Phase D seam once Phases A–C had executed. **This document's "no task in it has run" is no
+longer true**, and its four don't-get-this-wrong items have all been consumed. Retained because
+it is still the record of *why the plan is shaped as it is*: the `clamp` evaluation, the
+`MIG-5` firing, and the archive-is-the-asset framing are unchanged and still correct. It
+supersedes [`2026-07-27-HANDOFF-gate2-track-c.md`](2026-07-27-HANDOFF-gate2-track-c.md) on next
+actions, and that document's four must-not-revert items still govern. For status read
+[`NEXT.md`](NEXT.md), which owns it.
+
+*Original framing follows, retained for audit.*
 
 **Written at a seam.** The plan is committed; no task in it has run. **Nothing is in flight** —
 no subagents, no background jobs, no listeners on `:8000` or `:5173` (checked by port at
