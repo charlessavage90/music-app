@@ -88,3 +88,8 @@ test('blocks identical endpoints with a nudge', async () => {
   await user.click((await screen.findAllByText('Radiohead'))[0]);
   expect(screen.getByText(/pick two different artists/i)).toBeInTheDocument();
 });
+
+test('the landing page states how long each clip runs', () => {
+  setup();
+  expect(screen.getByText(/path length varies — 30 seconds each/i)).toBeInTheDocument();
+});
