@@ -1,6 +1,12 @@
 # Handoff — Gate 2 Track C complete, 2026-07-27
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+> **⚠ SUPERSEDED 2026-07-27 on next actions** by
+> [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md).
+> Its "your job: probably nothing yet" is **spent, not wrong** — the phone run it was waiting
+> on has happened and passed. Its "do not revert these" list is untouched and still governs.
+> Retained for audit.
+
+**Role: SUPERSEDED on next actions; ACTIVE for its four must-not-revert items.** Supersedes
 [`2026-07-27-HANDOFF-dep33-stage3.md`](2026-07-27-HANDOFF-dep33-stage3.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 *(Role line added 2026-07-27.)*

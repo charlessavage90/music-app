@@ -10,37 +10,40 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-27, after Gate 2 Track C — the cutover.**
+**Last updated: 2026-07-27, after the phone run passed and the OneDrive migration was
+planned.** ⚠ **This was a partial update, not a `closeout`** — see "What is owed" at the
+bottom.
 
 ---
 
 ## Next
 
-**Use the app, on a phone, and tell me what you find.** That is the whole of the next action,
-and it is the owner's.
+**Execute the OneDrive migration plan**, or decide not to yet. Twelve tasks, identifiers
+`MIG-`, destination `C:\dev\music-app`:
+[`plans/2026-07-27-onedrive-migration.md`](plans/2026-07-27-onedrive-migration.md), handed off
+at [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md),
+PR #35. **It touches no application code, no graph, no routing and no config default.**
 
-**The app is live.** `https://d2n3xqz3pttguf.cloudfront.net`, username `artistpath`, password
-in `infra/.env.deploy`. It serves the same artist map as the desktop copy, verified
-mechanically.
+**The app is live and the phone run passed.** `https://d2n3xqz3pttguf.cloudfront.net`, username
+`artistpath`, password in `infra/.env.deploy`.
 
-The queued entry at the top of [`TEST-QUEUE.md`](TEST-QUEUE.md) is the first real one in this
-file's history to carry a URL, and it folds in **the phone section that has been deferred
-since 2026-07-26**. Its trigger — a URL a phone can open — has now fired. Three questions
-about a real device remain unanswered by anything, including the reserved space for the home
-indicator, which **no test or emulator has ever exercised**.
+**The queue is empty.** The 2026-07-27 entry is DONE **per-step on all six checks** — the first
+run against the live site, on an Android Pixel. Sign-in and the shared journey link were both
+witnessed by a human for the first time, the link opened by a recipient who had never logged
+in. **iOS remains unexercised**: Safari rendering, the iPhone home indicator and iOS keyboard
+behaviour are unanswered by anything, and an Android device cannot answer them.
+
+> **Nothing is running on the owner's machine and nothing needs to be.**
 
 Record: [`2026-07-27-gate2-track-c-execution-log.md`](2026-07-27-gate2-track-c-execution-log.md).
 PR #33.
-
-> **Nothing is running on the owner's machine and nothing needs to be.** The queued test runs
-> against the website.
 
 ## Gate state
 
 | Gate | State |
 |---|---|
 | **Gate 1 — personal use** | **DONE and discharged.** One live exception below (`BYP-13`). |
-| **Gate 2 — friends & family** | **All tracks DONE.** A, D, B, `DEP-33` stages 1–3, and **Track C — the cutover — landed 2026-07-27**. The app is on the internet and the gate admits. What remains is *use*, not build: the queued phone run, and then the Gate 2 → 3 team review, which is scheduled after a period of real use and is the owner's to call. |
+| **Gate 2 — friends & family** | **All tracks DONE, and the phone run has now passed** (2026-07-27, per-step on all six checks, Android Pixel). The app is on the internet, the gate admits, and **real use has begun**. What remains is the Gate 2 → 3 team review — **its "after a period of real use" condition is closer to met than it has ever been, and recommending it is now live. It is the owner's call and has not been put to him.** Staff the frontend explicitly. |
 | **Gate 3 — public** | Not started. |
 
 A team review is scheduled at each gate boundary **after a period of real use** — staff the
@@ -80,6 +83,15 @@ would have fired on every future deploy. Execution log §3.1.
 | Medium CSRF in `react-router@7.18.1` | Revisit **only if** the app adopts React Router's unstable RSC APIs. It is not exploitable without them, and this is a Vite SPA with none of that machinery. |
 | ~~Mangled punctuation in artist descriptions (The Beatles reads `â€œThe Fab Fourâ€`)~~ | **STRUCK 2026-07-27 — RETRACTED, it was never a defect.** The adopted artifact holds correct UTF-8 (`UK rock band, “The Fab Four”`), read straight out of it after a checksum match; the mangling was in the tool that read the live response. The owner reported it had always rendered correctly and was right. **This removes one of the reasons for a graph rebuild.** |
 | The `--prune` publish pass | The next deploy after this one. Skipped at cutover because the bucket was empty. |
+| `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is **inert** — `index.html` never sets `viewport-fit=cover`, so it is 0 on every device | **Only if someone adds `viewport-fit=cover`.** Latent, not live: the default viewport already avoids the inset, which is why the phone run passed. No fix proposed. Found 2026-07-27. |
+
+## What is owed — this was a partial update, not a `closeout`
+
+Recorded so the next session does not mistake this file for a closed-out one. **Not done:**
+the deferral re-test sweep (`A3`), the orphaned-module and vacuous-test sweep, `D6`'s
+standing-layer measurement, and the doc-auditor step (`B1`) — though `scripts/docs-lint.sh`
+passes. The `TEST-QUEUE` entry, the handoff and this file were updated because they could not
+wait; everything else a `closeout` does is still owed.
 
 ---
 

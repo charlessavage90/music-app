@@ -52,7 +52,26 @@ of these fail silently.
 | `MIG-2` | **Project memory silently orphaned.** `~/.claude/projects/` is keyed by the slugified absolute path. Move the repo and Claude Code looks up `C--dev-music-app`, finds nothing, and starts with no memory. Ten memory files plus all session history. | **Certain** if unhandled | High | **Silent — nothing errors.** Task 8. |
 | `MIG-3` | **Backblaze does not actually cover the new location**, or excludes `.bin`/`.json` by policy. The backup is assumed, not verified. | Unknown | **Severe** — combines with `MIG-1` into total loss | **Silent.** Task 9, and it gates Task 11. |
 | `MIG-4` | **Secrets left behind.** `infra/.env.deploy` and `.claude/settings.local.json` are gitignored, so a `git clone` does not carry them. | **Certain** if unhandled | Medium — deploys fail | Loud (failed deploy), but late. Task 3. |
-| `MIG-5` | **`.git` corruption carried across.** `.git/logs/` and `refs/` have previously held `ReadOnly` + Files On-Demand attributes that git could not delete. Copying `.git` risks importing that state. | Medium | Medium | Loud, but awkward to unpick. **Avoided structurally** — Task 2 clones instead of copying. |
+| `MIG-5` | **`.git` corruption carried across.** `.git/logs/` and `refs/` have previously held `ReadOnly` + Files On-Demand attributes that git could not delete. Copying `.git` risks importing that state. | **Observed, not estimated — see below** | Medium | Loud, but awkward to unpick. **Avoided structurally** — Task 2 clones instead of copying. |
+
+> **`MIG-5` is not hypothetical. It fired during the writing of this plan**, 2026-07-27, on
+> the push that created the branch carrying this document:
+>
+> ```
+> error: failed to delete '.git/worktrees/lfcheck': Permission denied
+> ```
+>
+> `.git/worktrees/lfcheck/` is a stale registration for a worktree that no longer exists —
+> `git worktree list` shows only the main tree — which git tried to prune and could not.
+> Its `logs/` and `refs/` carry `0x431` = `ReadOnly` + `Directory` + `Archive` +
+> `ReparsePoint`: **the same two directory names and the same attribute combination** the
+> 2026-07-26 incident recorded.
+>
+> **Deliberately not repaired.** Clearing `ReadOnly` inside `.git` under OneDrive to fix
+> something Task 2 erases by construction is the wrong trade, and the commit and push both
+> succeeded regardless — it is noise, not damage. It will keep printing on operations that
+> prune, until the move. **This is the strongest single argument for cloning rather than
+> copying**, and it arrived unprompted.
 | `MIG-6` | **OneDrive fights the operation**, or deletion of the old tree propagates to the cloud before the new tree is proven. | Medium | Medium | Loud. Mitigated by pausing sync (Task 1) and by never using `move`. |
 | `MIG-7` | **Some archive files are OneDrive placeholders** (`RecallOnDataAccess`), so a copy produces empty stubs. | **Low** — a 2,000-file sample showed 0 dehydrated, attribute `0x420` = `Archive`+`ReparsePoint` only | Severe if true | **Silent.** Folded into `MIG-1`'s byte-total check, which does not rely on the sample. |
 | `MIG-8` | **Virtualenvs break.** Windows venvs embed absolute paths in their shims; they are not relocatable. | **Certain** | Trivial | Loud and immediate. Recreated in Task 5, not copied. |
