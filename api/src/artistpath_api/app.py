@@ -14,7 +14,7 @@ from fastapi.responses import JSONResponse
 
 from artistpath_api.artifact_source import load_graph
 from artistpath_api.clips import (
-    ClipResolver, DynamoClipCache, InMemoryClipCache,
+    CatalogueUnavailable, ClipResolver, DynamoClipCache, InMemoryClipCache,
 )
 from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
@@ -228,6 +228,12 @@ def build_default_app() -> FastAPI:
 
     async def fetch_json(url: str, params: dict) -> dict:
         r = await client.get(url, params=params)
+        # The only place in the app that knows httpx status codes, which is why
+        # the classification lives here and not in clips.py (G3-A4): that module
+        # must not import the transport. 429 is the measured case; 5xx carries
+        # the same instruction — stop calling — from a different cause.
+        if r.status_code == 429 or r.status_code >= 500:
+            raise CatalogueUnavailable(f"{r.status_code} from {url}")
         r.raise_for_status()
         return r.json()
 

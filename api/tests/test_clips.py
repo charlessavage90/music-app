@@ -1,5 +1,6 @@
 from artistpath_api.clips import (
-    ClipResolver, DynamoClipCache, InMemoryClipCache, TrackIdentity,
+    CatalogueUnavailable, ClipResolver, DynamoClipCache, InMemoryClipCache,
+    TrackIdentity,
 )
 from artistpath_api.config import ApiConfig
 
@@ -445,3 +446,67 @@ async def test_dynamo_cache_round_trips_through_the_resolver():
     assert clip is not None
     assert clip.preview_url == "https://signed.example/x.mp3"
     assert clip.title == "T"
+
+
+# --- a THROTTLED catalogue is not a missing track (PW-3: G3-A4, G3-S2) ------
+#
+# `_get` swallowed every exception into `{}`, so a 429 looked exactly like a
+# 404. `resolve` then fell through cache-hit -> search -> iTunes, so ONE user
+# request became TWO Deezer calls plus one iTunes call while Deezer was already
+# refusing us. viewer_function.js names that fan-out, in source, as the reason
+# the site's shared password exists.
+#
+# The classification happens in the INJECTED fetcher, not here: naming httpx's
+# exception types in clips.py is what the broad `except` exists to avoid.
+
+
+def _deezer_calls(resolver):
+    return [url for url, _ in resolver.calls if "deezer" in url]
+
+
+async def test_a_throttled_deezer_is_not_asked_again_for_the_same_artist():
+    # The cached-identity path re-signs a URL through /track. When that comes
+    # back 429, falling through to _search asks the SAME service twice more.
+    # One call is the correct number.
+    cache = InMemoryClipCache()
+    await cache.put(MBID, TrackIdentity("deezer", "999", "Song", "cover.jpg"))
+    r = _resolver({"deezer": CatalogueUnavailable("429")}, cache=cache)
+
+    clip = await r.resolve(MBID, "Radiohead")
+
+    assert clip is None
+    assert len(_deezer_calls(r)) == 1, (
+        f"asked a throttled Deezer {len(_deezer_calls(r))} times"
+    )
+
+
+async def test_a_track_that_left_the_catalogue_still_falls_through_to_a_search():
+    # The half the fix must not break. A 404 for a withdrawn track is a genuine
+    # miss, and re-searching is what keeps the card playable. Only
+    # UNAVAILABILITY stops the fall-through.
+    cache = InMemoryClipCache()
+    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    r = _resolver({
+        "deezer.com/track/999": Boom("404 not found"),
+        "deezer.com/search": DEEZER_HIT,
+    }, cache=cache)
+
+    clip = await r.resolve(MBID, "Radiohead")
+
+    assert clip is not None
+    assert clip.preview_url == "https://cdn.deezer/clip.mp3"
+
+
+async def test_a_throttled_deezer_still_falls_through_to_itunes_on_a_cold_artist():
+    # Falling through to a DIFFERENT service is not amplification — it is the
+    # fallback working. Only repeat calls to the refusing service are the bug.
+    r = _resolver({
+        "deezer": CatalogueUnavailable("429"),
+        "itunes": ITUNES_HIT,
+    })
+
+    clip = await r.resolve(MBID, "Radiohead")
+
+    assert clip is not None
+    assert clip.source == "itunes"
+    assert len(_deezer_calls(r)) == 1

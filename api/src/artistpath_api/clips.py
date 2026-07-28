@@ -26,6 +26,20 @@ from artistpath_api.config import ApiConfig
 FetchJson = Callable[[str, dict], Awaitable[dict]]
 
 
+class CatalogueUnavailable(Exception):
+    """The catalogue refused to answer — throttling or an outage, not a miss.
+
+    Raised by the INJECTED fetcher, never by this module. Naming httpx's
+    exception types here would couple the resolver to the transport, which is
+    the reason `_get` is broad in the first place; classifying at the fetcher
+    keeps that boundary while giving this layer the one distinction it needs.
+
+    That distinction is the whole of G3-A4: a 429 that reads as "no such track"
+    makes `resolve` ask the same refusing service twice more, tripling our
+    outbound rate at exactly the moment it has to fall.
+    """
+
+
 def _fold(name: str) -> str:
     """Casefold, strip accents, and collapse whitespace for artist matching.
 
@@ -177,6 +191,12 @@ class ClipResolver:
         """
         try:
             return await self._fetch(url, params)
+        except CatalogueUnavailable:
+            # NOT swallowed, and it is the one failure that must not be. The
+            # correct response to "you are calling me too much" is to stop
+            # calling, not to try harder — and a 429 read as a miss does the
+            # opposite (G3-A4).
+            raise
         except Exception:
             # Deliberately broad: the fetcher is injected, so this layer
             # cannot name the transport's exception types without coupling
@@ -199,7 +219,15 @@ class ClipResolver:
             identity = None
 
         if identity is not None:
-            url = await self._preview_url(identity)
+            try:
+                url = await self._preview_url(identity)
+            except CatalogueUnavailable:
+                # Throttled, not missing. Falling through to _search would ask
+                # the SAME service twice more for the same artist and harden
+                # the block (G3-A4). The card is silent for this request; the
+                # identity stays cached, so once we are let back in the next
+                # request costs one call again.
+                return None
             if url:
                 return Clip(url, identity.title, identity.cover_url, identity.source)
             # The track has left the catalogue. Identity is stable, not
@@ -234,7 +262,22 @@ class ClipResolver:
         return None
 
     async def _search(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
-        return await self._from_deezer(artist_name) or await self._from_itunes(artist_name)
+        """Try each catalogue once, skipping any that is refusing us.
+
+        Falling through to a DIFFERENT service is not amplification — it is the
+        fallback doing its job. Only repeat calls to the service already saying
+        no are the defect (G3-A4).
+        """
+        try:
+            found = await self._from_deezer(artist_name)
+        except CatalogueUnavailable:
+            found = None
+        if found is not None:
+            return found
+        try:
+            return await self._from_itunes(artist_name)
+        except CatalogueUnavailable:
+            return None
 
     async def _from_deezer(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
         body = await self._get(
