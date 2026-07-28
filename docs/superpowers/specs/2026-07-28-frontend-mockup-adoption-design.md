@@ -1,8 +1,11 @@
 # Frontend mockup adoption: design, 2026-07-28
 
-**Role: ACTIVE.** Design for adopting the owner's Claude Design mockup as the app's
-interface. Supersedes nothing. Does **not** state project status — that is
-[`../NEXT.md`](../NEXT.md).
+**Role: COMPLETE — implemented, merged and deployed 2026-07-28.** Design for adopting the
+owner's Claude Design mockup as the app's interface. Supersedes nothing. **Still
+authoritative for the redesign's *intent*, and its §2 owner decisions are closed** — but it
+no longer describes work to be done. ⚠ **The owner changed two landing strings after the
+deploy; §7's copy table is annotated in place** and the annotation wins over the rows. Does
+**not** state project status — that is [`../NEXT.md`](../NEXT.md).
 
 **Identifier series: `UI-`.** Namespaced deliberately and checked against the repo
 (`UI-n` appears nowhere else, 2026-07-28). Forward-only: nothing here renames a

@@ -23,29 +23,32 @@ the point.**
 
 ---
 
-## QUEUED (latest) — 2026-07-28 (night) — the redesign is finished, and it is running on your machine right now
+## QUEUED (latest) — 2026-07-28 (night) — the redesign is finished, and it is LIVE
+
+<!-- Updated after the deploy: this entry was written while the redesign was local-only and
+     carried two PIDs. It is now published, so the local servers are stopped and every check
+     below runs against the real address — including the phone half, whose trigger has fired. -->
 
 **This is the other half of the entry below, and it is the real one.** The app you sent me a
-mockup of is now built end to end. **It is not on the website** — this is on your machine only,
-so the address you have still looks exactly as it did.
+mockup of is now built end to end **and it is on the website**. Everything below runs against
+**`https://musicapp.cmiller.io`** — nothing is running on your machine and nothing needs to be.
 
 **Nothing about *which artists* you get has changed.** No routing, no graph, no weighting, no
 cost function — **a journey you build now is the same journey as this morning's.** Not one line
 of the router was touched. That is the most valuable thing to confirm, because the app looks
 different enough that you will be inclined to trust it less.
 
-### It is already running — two things, and nothing owns them
+### The address, and what was already checked mechanically
 
-| what | address | PID |
-|---|---|---|
-| **the app** | **http://localhost:5173** | 274380 |
-| the engine behind it | http://127.0.0.1:8000 | 93400 |
+**`https://musicapp.cmiller.io`** — no username, no password. Old `d2n3xqz3pttguf…` links still
+redirect and keep their place in the journey, confirmed after this deploy.
 
-Open the first one and it works. They were started after the last commit, so they serve
-today's code, and they will outlive every terminal. **If you want them gone**, stop those two
-PIDs; nothing else will.
+**Checked already, so you don't have to:** the live engine is running the same artist map as
+your machine (matched on checksum, artist count and edge count); a journey built against the
+live site returned **the identical eight artists in the identical order** as the same journey
+locally; a shared journey link opens cold; and the page loads with **no browser errors**.
 
-### What to exercise — twenty minutes, all on the desktop
+### What to exercise — twenty minutes
 
 1. **The front screen.** New type, a rounded search box, a pill "Find path" button, and a line
    at the bottom about clip length. Then **drag the window narrow**, to about a third of your
@@ -84,11 +87,13 @@ takes that space. Once you press "Got it" it sits where it was designed to. It i
 is the design as drawn rather than a fault, and **moving it is your call** — say the word and it
 is a one-line change.
 
-### ⏸ The phone half is DEFERRED, and its trigger is publishing this
+### ✅ TRIGGER FIRED — the phone half is runnable now
 
-**Do not try this on your phone yet** — there is no address a phone can reach, because the
-redesign is not on the website. The phone layout is built and was exercised at phone width by a
-machine, but that checks the *rules*, not a real device. **Trigger: the next publish.**
+**It was deferred on "the next publish", and that publish has happened.** Open
+`https://musicapp.cmiller.io` on your phone. The phone layout was exercised at phone width by a
+machine — the two bypass buttons drop onto their own row and the artist's name gets the full
+width — but that checks the *rules*, not a real device. **On a phone, check the journey is
+readable and both bypass buttons are hittable with a thumb.**
 
 ### ⚠ Still owed, and this work does not touch it: the iPhone script
 
@@ -104,7 +109,8 @@ unanswered:
 **Why it needs a person:** if clips silently fail on iOS, the app looks like it is working
 perfectly and just happens to have no sound. No error, no message, and nothing in any log
 distinguishes that from an artist we genuinely have no clip for. **A borrowed iPhone for ten
-minutes settles it. Nothing else will.** It needs the live site, not this local copy.
+minutes settles it. Nothing else will.** It needs the live site — which is now up, so there is
+nothing left blocking it.
 
 **Best bug report:** the URL from the address bar, and a screenshot if it is a layout problem.
 
