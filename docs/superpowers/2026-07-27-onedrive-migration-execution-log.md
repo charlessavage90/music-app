@@ -342,8 +342,40 @@ far is reversible.** Phase D deletes the rollback and is not started.
 
 **State at the seam:**
 
-- Old tree: untouched, clean, at `4c58e7d`. **Still the rollback.**
-- New tree: `C:\dev\music-app`, verified by tests, by checksum, and by a running service.
+- Old tree: untouched, clean, at `4c58e7d`. **Still the rollback.** Archive intact, 75,000 files.
+- New tree: `C:\dev\music-app`, on branch `onedrive-migration-phases-abc`, clean, archive
+  intact, verified by tests, by checksum, and by a running service. PR #36.
 - OneDrive sync: **paused by the owner for 24 h from 2026-07-27.** It will resume on its own.
   Nothing in Phases A–C depends on it staying paused, and Task 11 is where it matters again.
-- Nothing running: `:8000` and `:5173` both free; no subagents, no background jobs.
+- This session started nothing that is still running: `:8000` and `:5173` both free, no
+  subagents, no background jobs.
+
+### ⚠ `MIG-11` — two API servers from the OLD tree are running, and they will block Task 11
+
+**Found during the closing sweep. Not started by this session, and this log does not speculate
+about where they came from.**
+
+| Port | Listening PID | Process started |
+|---|---|---|
+| 8138 | 60412 | 2026-07-20 19:41 |
+| 8139 | 97220 | 2026-07-20 19:44 |
+
+Both run `artistpath_api.app:build_default_app` from
+**`C:\Users\charl\OneDrive\Claude Projects\music-app\api\.venv\Scripts\uvicorn.exe`** — the
+*old* tree's virtualenv. They are on non-standard ports, so every port check in this project's
+rituals (`:8000` and `:5173`) has been reporting "nothing running" while they were up.
+
+**Why it matters, and it is not the obvious reason.** They are harmless today — nothing routes
+through them. But **a live process holds open file handles on the old tree's `.venv`, and Task
+11 deletes that tree.** On Windows an open handle makes deletion fail partially and noisily,
+leaving a half-deleted tree — which is the worst state for a rollback copy, since it is neither
+present nor gone.
+
+**Deliberately left running.** They are not this session's, and stopping another session's
+processes is not a call to make silently. **Kill both before Task 11**, and re-check for
+non-standard ports rather than only `:8000`/`:5173`.
+
+> **Second-order finding worth more than the incident: the port sweep in `closeout` A5 and
+> `session-start` §C only ever looks at `:8000` and `:5173`.** These two survived a week and
+> multiple sweeps precisely because they were not on those ports. A sweep that checks two known
+> ports cannot find a process on a third, and it reports "clean" either way.
