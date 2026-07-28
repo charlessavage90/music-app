@@ -1,6 +1,13 @@
 # Handoff — password removal complete, the site is public, 2026-07-28
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ACTIVE — ⚠ NO LONGER THE CURRENT HANDOFF. Superseded 2026-07-28 on next actions ONLY**
+by [`2026-07-28-HANDOFF-frontend-mockup-adoption.md`](2026-07-28-HANDOFF-frontend-mockup-adoption.md),
+which is a **different body of work** (frontend, half-finished) and discharges none of this one.
+**Everything below about deployed infrastructure still stands, and so does the one thing this
+document says is owed: the queued iPhone test.** Read the successor for what to *do*; read this
+for what is *true of the running site*.
+
+Supersedes
 [`2026-07-28-HANDOFF-password-removal-track-b.md`](2026-07-28-HANDOFF-password-removal-track-b.md)
 on next actions **and** on status — that document is now fully spent. It does **not** state
 project status: for that read [`NEXT.md`](NEXT.md), which owns it.

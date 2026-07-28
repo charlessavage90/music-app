@@ -10,11 +10,24 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-28, after `PW-8`.**
+**Last updated: 2026-07-28 (evening), at the frontend mockup adoption seam.**
 
 ---
 
 ## Next
+
+**The frontend redesign is HALF BUILT and is the work in progress.** Tasks 1–7 of 13 are
+complete, committed and pushed on branch `frontend-mockup-adoption`; **Tasks 8–13 are not
+started.** The next action is to continue that plan in a fresh session.
+
+- Handoff: [`2026-07-28-HANDOFF-frontend-mockup-adoption.md`](2026-07-28-HANDOFF-frontend-mockup-adoption.md)
+- Record: [`2026-07-28-frontend-mockup-adoption-execution-log.md`](2026-07-28-frontend-mockup-adoption-execution-log.md)
+- Plan: [`plans/2026-07-28-frontend-mockup-adoption.md`](plans/2026-07-28-frontend-mockup-adoption.md)
+- Spec: [`specs/2026-07-28-frontend-mockup-adoption-design.md`](specs/2026-07-28-frontend-mockup-adoption-design.md)
+
+**Nothing is deployed.** The live site is exactly as the password-removal work left it; the
+redesign exists only on the branch. **It touches no routing, graph, cost function or weight**,
+so it changes which artists you get not at all.
 
 > ## 🔓 The site password is GONE, and the site is public.
 >
@@ -26,15 +39,17 @@ those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by sec
 > every link shared before today still works.
 
 **One thing is owed and it is the owner's: the queued use-the-app test**
-([`TEST-QUEUE.md`](TEST-QUEUE.md), the 2026-07-28 entry). It carries the **iPhone script**,
+([`TEST-QUEUE.md`](TEST-QUEUE.md), the 2026-07-28 **QUEUED** entry — not the newer N/A above
+it, which discharges nothing). It carries the **iPhone script**,
 which is the only unanswered question that matters — no test, emulator or Android device can
 tell us whether a clip plays at all on an iPhone, and `G3-F1` means a failure there is silent.
+**The redesign does not touch this and does not answer it.**
 
-**`PW-9` is the only unrun task in the plan** — the concurrency ladder against the live
-origin. It is gated on the owner's approval, not on readiness. It is not a blocker for
+**`PW-9` is the only unrun task in the password-removal plan** — the concurrency ladder against
+the live origin. It is gated on the owner's approval, not on readiness. It is not a blocker for
 anything currently planned.
 
-Record: [`2026-07-28-password-removal-execution-log.md`](2026-07-28-password-removal-execution-log.md).
+Password-removal record: [`2026-07-28-password-removal-execution-log.md`](2026-07-28-password-removal-execution-log.md).
 Plan: [`plans/2026-07-28-password-removal-load-hardening.md`](plans/2026-07-28-password-removal-load-hardening.md).
 Runbook: `infra/README.md` — **§1a is the front door, §8a is how to re-verify it.**
 

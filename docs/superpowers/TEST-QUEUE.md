@@ -23,7 +23,50 @@ the point.**
 
 ---
 
-## QUEUED (latest) — 2026-07-28 — the password is gone, and there is one thing only an iPhone can answer
+## N/A (latest) — 2026-07-28 (evening) — the app is being restyled; half of it is done and none of it is live
+
+**Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no cost
+function — **a journey you build today is the same journey as this morning's.** Nothing was
+started on this machine and nothing was left behind; all four ports were checked and are empty.
+**The website is completely untouched** — none of this has been published, so the address you
+have behaves exactly as it did.
+
+**What this is.** You sent me a design mockup of the app and asked for it to be built. It is
+about half built, on a branch, and deliberately stopped halfway at a planned resting point.
+
+**Why there is nothing to press yet.** The half that is done is the front screen and the look of
+each artist card. The half that is not done is the new *loading* screen — the one that shows your
+two artists with shimmering placeholders between them while it thinks. Until that is wired in,
+the app still shows the old plain "Building your path…" line, so **you would be looking at a
+half-dressed app and wondering which bits were deliberate.** Better to look once, when it is
+whole.
+
+**The one thing worth knowing now, because it is a change in behaviour rather than looks.** When
+you press one of the two bypass buttons, the app currently just dims the path while it rebuilds.
+It will soon also tell you *what it is doing*, and differently for each button — "Steering around
+that sound" for **✕ Not for me**, "Digging for someone newer" for **✓ I know them**. That is the
+first time the app will have admitted that the two buttons do different things. There will also
+be a short note above each path explaining that either button **rebuilds the whole journey**, not
+just the card you pressed — which has always been true and has never been said anywhere.
+
+**The next entry here will be the real one**, when the other half lands: the front screen, the
+loading screen, a shared link, and the new explanation, on desktop and on a phone.
+
+**⚠ One thing is still owed from the previous entry and this work does not touch it: the iPhone
+script.** Whether a clip plays at all on an iPhone is still genuinely unknown — nobody has ever
+opened this app on one — and no test, emulator or Android device can answer it. It is unchanged
+and still waiting, immediately below.
+
+*Detail: `docs/superpowers/2026-07-28-frontend-mockup-adoption-execution-log.md`.*
+
+## QUEUED — 2026-07-28 — the password is gone, and there is one thing only an iPhone can answer
+<!-- "(latest)" stripped 2026-07-28 evening: only the newest entry carries it, per the
+     convention below. This entry is STILL LIVE and still owed — section 2, the iPhone
+     script, has never been run. -->
+
+> **⚠ STILL OUTSTANDING as of 2026-07-28 evening.** The newer entry above is an N/A and
+> discharges nothing here. **Section 2 below — the iPhone script — remains the single most
+> valuable unrun test on this project.**
 
 **The address is `https://musicapp.cmiller.io` and there is nothing to type.** No username, no
 password, no dialog. Send it to someone and they just open it.
