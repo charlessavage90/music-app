@@ -114,6 +114,18 @@ def create_app(
     def search_artists(q: str) -> list[ArtistOut]:
         return [artist_out(i) for i in search.search(q)]
 
+    # Registered AFTER /api/artists/search deliberately: FastAPI matches in
+    # declaration order, so the reverse makes {mbid} swallow the literal path.
+    # A pure in-memory lookup — no network, no pathfinding, no clip resolution.
+    # Exists so a cold load from a shared link can name the two endpoint
+    # artists on the loading screen, where the URL carries only MBIDs.
+    @app.get("/api/artists/{mbid}")
+    def get_artist(mbid: str) -> ArtistOut:
+        node = store.id_by_mbid.get(mbid)
+        if node is None:
+            raise HTTPException(404, "unknown artist")
+        return artist_out(node)
+
     @app.post("/api/path")
     def build_path(req: PathRequest, request: Request) -> PathResponse:
         if len(req.sources) != 2:
