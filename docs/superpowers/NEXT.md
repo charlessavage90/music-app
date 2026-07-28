@@ -10,17 +10,23 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-27, at the OneDrive migration's Phase D seam — Phases A–C executed.**
-Updated mid-work rather than at a closeout, per this document's own rule that an execution log
-which disagrees with it wins and the staleness gets fixed rather than worked around. The
-"Closeout state" section below still describes the *previous* closeout and is unchanged.
+**Last updated: 2026-07-27 (evening), at the OneDrive migration's Phase D seam — Phases A–C
+executed.** Updated mid-work rather than at a closeout, per this document's own rule that an
+execution log which disagrees with it wins and the staleness gets fixed rather than worked
+around. The "Closeout state" section below still describes the *previous* closeout and is
+unchanged.
+
+**Two of the three owner-owed items below have since been discharged and are struck.** Both
+were checked **by observation, not by reading a document**: the memory slug (item 1) and the
+two zombie API servers (item 3). **One remains: Task 9.**
 
 ---
 
 ## Next
 
-**The OneDrive migration is at its Phase D seam. Two things are owed, and both are the
-owner's.**
+**The OneDrive migration is at its Phase D seam. One thing is owed, and it is the owner's:
+Task 9.** Items 1 and 3 below were owed when this section was written and are now **struck —
+both discharged by observation on 2026-07-27 (evening).**
 
 Phases A–C ran on 2026-07-27 and passed —
 [`2026-07-27-onedrive-migration-execution-log.md`](2026-07-27-onedrive-migration-execution-log.md)
@@ -31,22 +37,28 @@ green from it, all 18 graph artifacts byte-identical, and a running API serving 
 **The OneDrive tree is untouched and is the rollback.** No application code, graph, routing or
 config default changed, and no test-queue entry is owed.
 
-1. **Confirm the memory slug by observation** — open a session in `C:\dev\music-app` and check
-   Claude Code reads `~/.claude/projects/C--dev-music-app`. Memory was **copied** there, not
-   moved, so a wrong prediction costs nothing; until this is observed **`MIG-2` is mitigated,
-   not closed.**
+1. ~~**Confirm the memory slug by observation** — open a session in `C:\dev\music-app` and check
+   Claude Code reads `~/.claude/projects/C--dev-music-app`.~~ **✅ DISCHARGED — `MIG-2` is CLOSED,
+   not merely mitigated.** Closed in the execution log §11 ("Task 8 CLOSED — the slug was
+   confirmed by observation"), and confirmed a further time on 2026-07-27 (evening) by a session
+   running from `C:\dev\music-app` that loaded its memory index from
+   `~/.claude/projects/C--dev-music-app/`. **This item was already stale when written here; the
+   execution log was the fresher document and won.** The duplicate memory directory under the old
+   slug is still retained deliberately until Task 11.
 2. **Verify Backblaze actually covers `C:\dev`** (Task 9) — folder included, `.bin`/`.json` not
    excluded, and an upload **completed** rather than queued. **This gates Task 11**, the
    deletion of the OneDrive tree. Until it passes, OneDrive is still the only second copy of
    the unreproducible archive.
 
-3. **Kill two zombie API servers before Task 11** (`MIG-11`, execution log §16). Ports **8138**
-   and **8139**, PIDs `71076, 59236, 60412, 97220`, running from the **old** tree's `.venv`
-   since 2026-07-20. They hold that tree's files open, so **Task 11's deletion will fail
-   partially** — leaving the rollback copy neither present nor gone, its worst state. Stopping
-   them was attempted and **blocked by the tool-permission classifier**, so it needs the owner.
-   **Do not kill PID 90324 on port 53342** — that is a Home Assistant sidecar from another
-   project.
+3. ~~**Kill two zombie API servers before Task 11** (`MIG-11`, execution log §16). Ports **8138**
+   and **8139**, PIDs `71076, 59236, 60412, 97220`.~~ **✅ DISCHARGED — `MIG-11` is CLOSED.**
+   Measured 2026-07-27 (evening): ports **8138, 8139, 8000 and 5173 are all free**, and all four
+   PIDs are **gone**. Nothing is holding the old tree's files open, so the failure mode this item
+   guarded against — a partial Task 11 deletion leaving the rollback copy neither present nor
+   gone — no longer applies. **Task 11 must still re-check both ports immediately before
+   deleting**, since this measurement ages: an old-tree server started after it would reinstate
+   the hazard silently. **Do not kill PID 90324 on port 53342** — that is a Home Assistant
+   sidecar from another project, and it was never in scope here.
 
 **Then Task 10: work from `C:\dev\music-app` for a few days before anything is deleted.** Phase
 D is irreversible and is deliberately not started.
@@ -73,7 +85,7 @@ PR #33.
 | Gate | State |
 |---|---|
 | **Gate 1 — personal use** | **DONE and discharged.** One live exception below (`BYP-13`). |
-| **Gate 2 — friends & family** | **All tracks DONE, and the phone run has now passed** (2026-07-27, per-step on all six checks, Android Pixel). The app is on the internet, the gate admits, and **real use has begun**. What remains is the Gate 2 → 3 team review — **its "after a period of real use" condition is closer to met than it has ever been, and recommending it is now live. It is the owner's call and has not been put to him.** Staff the frontend explicitly. |
+| **Gate 2 — friends & family** | **All tracks DONE, and the phone run has now passed** (2026-07-27, per-step on all six checks, Android Pixel). The app is on the internet, the gate admits, and **real use has begun**. The Gate 2 → 3 team review — commissioned by the owner and **DELIVERED 2026-07-27 (evening); do not re-commission or re-recommend it.** Read it before opening Gate 3: [`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md) (PR #38) — it owns its own findings and their triage. It records Gate-3-blocking issues and, in §6, the owner-facing decisions they raise. **None are actioned and Gate 3 is not opened; the blocking set gates Gate 3, not Phase D.** |
 | **Gate 3 — public** | Not started. |
 
 A team review is scheduled at each gate boundary **after a period of real use** — staff the
