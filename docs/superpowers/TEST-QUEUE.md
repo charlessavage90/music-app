@@ -23,6 +23,46 @@ the point.**
 
 ---
 
+## N/A — 2026-07-27 (evening) — the project files moved house; the app did not change
+<!-- No "(latest)": per the convention below, only a live QUEUED entry carries it. This is N/A. -->
+
+
+**Nothing to exercise.** No routing, no graph, no weighting, no clips, no buttons — **not one
+line of application code changed.** A journey you build now is the same journey as this morning,
+and the website is untouched. This was housekeeping on your machine.
+
+**What happened.** The project now lives at `C:\dev\music-app` instead of inside OneDrive. The
+old copy is still there, untouched, as a safety net. Both copies were compared file by file —
+all 75,052 of them — and every one matches. The collection of artist data that took four and a
+quarter hours to gather, and **cannot be gathered again**, arrived intact.
+
+**⚠ Two things ARE running on this machine, and unusually, they are not mine.** Two copies of
+the app's engine have been running quietly since 20 July, on ports **8138** and **8139**. They
+are harmless today and nothing uses them. **They matter because they are holding the old copy of
+the project open**, and the last step of this job deletes it — which would then half-fail. I
+tried to stop them and was blocked from doing so, so it needs you:
+
+```
+Stop-Process -Id 71076,59236,60412,97220 -Force
+```
+
+**Do not stop anything else.** There is a third thing listening, on port 53342, and it belongs
+to your Home Assistant project rather than this one.
+
+**Two things worth thirty seconds of your attention.**
+
+- **Checking the backup found a real problem that had nothing to do with this project.** Several
+  files were not being backed up at all. You forced a rescan and it is now uploading over 6 GB
+  that had never been included. That was luck in our favour: the last step of this job deletes
+  the only other copy of the irreplaceable data, and it would have been deleted into a backup
+  that was quietly incomplete.
+- **Nothing gets deleted until that backup finishes.** That is deliberate, and it is the gate.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something changes
+about the app itself.
+
+*Detail: `docs/superpowers/2026-07-27-onedrive-migration-execution-log.md`.*
+
 ## N/A — 2026-07-27 (later) — nothing to press, and one thing I told you that was wrong
 
 **Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no clips,

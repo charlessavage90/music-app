@@ -1,6 +1,19 @@
 # Plan — move the project out of OneDrive
 
-**Role: ACTIVE, not yet executed.** Identifier series `MIG-`, verified disjoint from `RMD-`,
+> **⚠ PARTIALLY EXECUTED 2026-07-27 — Phases A–C are DONE; Phase D (Tasks 10–12) is NOT
+> STARTED.** For what actually ran, and for four things found in execution that this document
+> does not carry, read
+> [`../2026-07-27-onedrive-migration-execution-log.md`](../2026-07-27-onedrive-migration-execution-log.md);
+> where it disagrees with this plan on status, **the log wins**. Current handoff:
+> [`../2026-07-27-HANDOFF-migration-phase-d.md`](../2026-07-27-HANDOFF-migration-phase-d.md).
+> **Two owner-owned gates stand before Phase D**, and `MIG-11` — two zombie API servers holding
+> the old tree open — must be cleared before Task 11. The plan is otherwise unchanged and still
+> governs the *method*.
+>
+> **§0's "1.1 GB" for `graph-archive` is a pre-measurement estimate.** The measured figure is
+> **900,518,765 bytes**, owned by the execution log's Task 1 table — cite that, not this.
+
+**Role: ACTIVE, PARTIALLY EXECUTED — see the banner above.** Identifier series `MIG-`, verified disjoint from `RMD-`,
 `DEP-`, `TR-`, `TKA-`, `TKD-`, `TKB-`, `FMS-`, `CNS-`, `ARC-`, `SEC-`, `QUA-`, `FRO-`,
 `BYP-`, `DAF-` by repo-wide grep, 2026-07-27 (no matches).
 
