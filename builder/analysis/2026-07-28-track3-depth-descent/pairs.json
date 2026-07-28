@@ -1,0 +1,191 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "seed": 20260728,
+ "band_edges": {
+  "famous_min": 0.9,
+  "mid": [
+   0.5,
+   0.9
+  ]
+ },
+ "carry_over_rule": "first 4 both-famous pairs in the frozen Track 2 ANALYSIS_PAIRS order; 6 qualified, the pre-registration said 4",
+ "held_out_rule": {
+  "stratified": {
+   "carry_over": 2,
+   "famous_mid": 1,
+   "mid_mid": 1
+  }
+ },
+ "rejects": {
+  "degenerate": 0,
+  "no_guard_path": 0
+ },
+ "groups": {
+  "carry_over": [
+   "Miles Davis -> Daft Punk",
+   "Metallica -> Taylor Swift",
+   "Radiohead -> The Beatles",
+   "Muse -> Coldplay"
+  ],
+  "famous_mid": [
+   "The Mills Brothers -> Tracey Chattaway",
+   "Megadeth -> Mala Rodríguez",
+   "Daniel Avery -> Rita Marley",
+   "Lykke Li -> Nobunny"
+  ],
+  "mid_mid": [
+   "t-low -> L‐Vis 1990",
+   "Verbose -> Daniel Herskedal",
+   "Menswear -> 洲崎綾",
+   "Natasha Kmeto -> Vanbot"
+  ]
+ },
+ "analysis_pairs": [
+  {
+   "pair": "Metallica -> Taylor Swift",
+   "src": "Metallica",
+   "dst": "Taylor Swift",
+   "src_mbid": "65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab",
+   "dst_mbid": "20244d07-534f-4eff-b4d4-930878889970",
+   "src_pctl": 0.9991778089281863,
+   "dst_pctl": 0.9942985766659478,
+   "src_degree": 48,
+   "dst_degree": 46,
+   "group": "carry_over"
+  },
+  {
+   "pair": "Muse -> Coldplay",
+   "src": "Muse",
+   "dst": "Coldplay",
+   "src_mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+   "dst_mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+   "src_pctl": 0.9998652145783912,
+   "dst_pctl": 0.9999730429156782,
+   "src_degree": 50,
+   "dst_degree": 50,
+   "group": "carry_over"
+  },
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "src": "The Mills Brothers",
+   "dst": "Tracey Chattaway",
+   "src_mbid": "fb1080d4-aaf7-430e-b588-6a6ce79e2eb3",
+   "dst_mbid": "26551d8a-f771-4780-83e7-b3219de6a63a",
+   "src_pctl": 0.9743233771835238,
+   "dst_pctl": 0.7791271296096615,
+   "src_degree": 32,
+   "dst_degree": 20,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "src": "Daniel Avery",
+   "dst": "Rita Marley",
+   "src_mbid": "3e7aa4a4-5b7e-46a3-a7ff-c57044fa1b64",
+   "dst_mbid": "efc381ba-ea68-49ca-af91-bebdd40fe1d8",
+   "src_pctl": 0.9101857343109769,
+   "dst_pctl": 0.6251213068794479,
+   "src_degree": 12,
+   "dst_degree": 5,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Lykke Li -> Nobunny",
+   "src": "Lykke Li",
+   "dst": "Nobunny",
+   "src_mbid": "cc7d4686-ea02-45fd-956e-94c1a322558c",
+   "dst_mbid": "f22a6369-8942-471b-8b9f-522dec4479e0",
+   "src_pctl": 0.9979243045072245,
+   "dst_pctl": 0.8847045503558335,
+   "src_degree": 18,
+   "dst_degree": 35,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Verbose -> Daniel Herskedal",
+   "src": "Verbose",
+   "dst": "Daniel Herskedal",
+   "src_mbid": "b96ff292-9bff-42eb-84e8-55c16b376597",
+   "dst_mbid": "81acb7ca-994b-4df4-9e97-911b48767836",
+   "src_pctl": 0.6143115160664222,
+   "dst_pctl": 0.5604243045072245,
+   "src_degree": 17,
+   "dst_degree": 19,
+   "group": "mid_mid"
+  },
+  {
+   "pair": "Menswear -> 洲崎綾",
+   "src": "Menswear",
+   "dst": "洲崎綾",
+   "src_mbid": "d1b7d13a-1f1e-4855-92c4-10c31ebfedeb",
+   "dst_mbid": "9f297aa6-dd27-4385-8b50-5bb3ce031338",
+   "src_pctl": 0.6902967974983826,
+   "dst_pctl": 0.6625579577312918,
+   "src_degree": 15,
+   "dst_degree": 16,
+   "group": "mid_mid"
+  },
+  {
+   "pair": "Natasha Kmeto -> Vanbot",
+   "src": "Natasha Kmeto",
+   "dst": "Vanbot",
+   "src_mbid": "85c13357-7e12-48b6-9d5c-c3d96b977ba6",
+   "dst_mbid": "a5db16f8-dadc-4885-88e3-6cff50fa44f3",
+   "src_pctl": 0.6132332326935519,
+   "dst_pctl": 0.5377466573215441,
+   "src_degree": 6,
+   "dst_degree": 11,
+   "group": "mid_mid"
+  }
+ ],
+ "held_out_pairs": [
+  {
+   "pair": "Miles Davis -> Daft Punk",
+   "src": "Miles Davis",
+   "dst": "Daft Punk",
+   "src_mbid": "561d854a-6a28-4aa7-8c99-323e6ce46c2a",
+   "dst_mbid": "056e4f3e-d505-4dad-8ec1-d04f521cbb56",
+   "src_pctl": 0.9936246495579039,
+   "dst_pctl": 0.9895271727409963,
+   "src_degree": 34,
+   "dst_degree": 50,
+   "group": "carry_over"
+  },
+  {
+   "pair": "Radiohead -> The Beatles",
+   "src": "Radiohead",
+   "dst": "The Beatles",
+   "src_mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+   "dst_mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+   "src_pctl": 1.0,
+   "dst_pctl": 0.9999865214578392,
+   "src_degree": 50,
+   "dst_degree": 50,
+   "group": "carry_over"
+  },
+  {
+   "pair": "Megadeth -> Mala Rodríguez",
+   "src": "Megadeth",
+   "dst": "Mala Rodríguez",
+   "src_mbid": "a9044915-8be3-4c7e-b11f-9e2d2ea0a91e",
+   "dst_mbid": "7d6d748f-13fc-4f9c-adc8-087d34c4bdef",
+   "src_pctl": 0.9978434332542592,
+   "dst_pctl": 0.7321678887211559,
+   "src_degree": 33,
+   "dst_degree": 12,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "t-low -> L‐Vis 1990",
+   "src": "t-low",
+   "dst": "L‐Vis 1990",
+   "src_mbid": "2a84c169-7bcf-406c-b7bc-a079d648812f",
+   "dst_mbid": "a419996d-c78e-4c5e-a1cf-fb6537d8aa56",
+   "src_pctl": 0.5588001401768384,
+   "dst_pctl": 0.8504016605563942,
+   "src_degree": 19,
+   "dst_degree": 30,
+   "group": "mid_mid"
+  }
+ ]
+}
