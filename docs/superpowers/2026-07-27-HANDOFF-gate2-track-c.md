@@ -1,6 +1,12 @@
 # Handoff — Gate 2 Track C complete, 2026-07-27
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+> **⚠ SUPERSEDED 2026-07-27 on next actions** by
+> [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md).
+> Its "your job: probably nothing yet" is **spent, not wrong** — the phone run it was waiting
+> on has happened and passed. Its "do not revert these" list is untouched and still governs.
+> Retained for audit.
+
+**Role: SUPERSEDED on next actions; ACTIVE for its four must-not-revert items.** Supersedes
 [`2026-07-27-HANDOFF-dep33-stage3.md`](2026-07-27-HANDOFF-dep33-stage3.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 *(Role line added 2026-07-27.)*
@@ -18,6 +24,12 @@ next actions.** Two of that note's statements are now spent rather than wrong �
 ---
 
 ## Your job: probably nothing yet
+
+> **⚠ SPENT — this section is no longer the next action.** The phone run happened on
+> 2026-07-27 and passed on all six checks. Current next action:
+> [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md).
+> *(Inline marker added because this document is over 100 lines and a reader arriving from a
+> citation would not see the banner at the top.)*
 
 **The next action is the owner's, and it is to use the app on a phone.** The queued entry at
 the top of [`TEST-QUEUE.md`](TEST-QUEUE.md) is the first in this file's history with a URL in
@@ -90,7 +102,10 @@ after a period of real use and is his call.
   with the unstable RSC APIs enabled; this is a Vite SPA on `BrowserRouter` with no loaders,
   actions, fetchers or `Form`. Major bump, cutover day, non-applicable advisory. Condition
   for revisiting is in the execution log §6.
-- **Fixing the double-encoded artist descriptions** (`â€œThe Fab Fourâ€`). It is in the
+- ⚠ **RETRACTED 2026-07-27 — there was nothing to fix.** The artifact holds correct UTF-8;
+  the mangling was in the tool that read the live response. Full retraction in the execution
+  log's deferral table. The struck item follows.
+- ~~**Fixing the double-encoded artist descriptions** (`â€œThe Fab Fourâ€`). It is in the
   adopted artifact, so it needs a rebuild, which is the owner's call and not a Track C
-  decision. It *is* user-visible — `ArtistSearch.tsx:105` renders it.
+  decision. It *is* user-visible — `ArtistSearch.tsx:105` renders it.~~
 - **Running the `--prune` pass at cutover.** The bucket was empty; nothing to prune.
