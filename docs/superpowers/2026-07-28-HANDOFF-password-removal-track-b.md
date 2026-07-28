@@ -15,7 +15,11 @@ project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 Track A is complete, committed and verified. **Nothing is in flight: no subagents, no background
 jobs, no listeners on any port.**
 
-**Branch `password-removal-load-hardening`, draft PR #39.**
+**Track A is MERGED to `main`** — PR #39, merge commit `1117d35`, 2026-07-28. Suites re-run on
+`main` after the merge: api 214, infra 58. **Start Track B on a fresh branch off `main`**; the
+`password-removal-load-hardening` branch is merged and spent (it still exists only because
+deleting it was blocked by the tool-permission classifier — deleting it is safe, its commits are
+in `main`).
 Plan: [`plans/2026-07-28-password-removal-load-hardening.md`](plans/2026-07-28-password-removal-load-hardening.md).
 Record: [`2026-07-28-password-removal-execution-log.md`](2026-07-28-password-removal-execution-log.md).
 

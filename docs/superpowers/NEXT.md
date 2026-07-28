@@ -31,8 +31,9 @@ two zombie API servers (item 3). **One remains: Task 9.**
 > [`2026-07-28-HANDOFF-password-removal-track-b.md`](2026-07-28-HANDOFF-password-removal-track-b.md),
 > which is now **the handoff to read first**; its plan is
 > [`plans/2026-07-28-password-removal-load-hardening.md`](plans/2026-07-28-password-removal-load-hardening.md).
-> **It discharges nothing below.** Track A (API hardening) is done and committed on branch
-> `password-removal-load-hardening`, PR #39; **the live site and the password are unchanged.**
+> **It discharges nothing below.** Track A (API hardening) is **MERGED to `main`** — PR #39,
+> merge commit `1117d35`, 2026-07-28 — and **the live site and the password are unchanged by it**:
+> nothing was deployed. Track B starts on a fresh branch off `main`.
 > This is a pointer, not a rewrite — the full rewrite is that plan's task PW-8.
 
 **The OneDrive migration is at its Phase D seam. One thing is owed on this axis, and it is the
