@@ -285,6 +285,60 @@ the plan's stated pass conditions**, plus `npm run build` and `npm run lint` cle
 > *verification criterion* ("`MEMORY.md` and all ten files present"), and a successor checking
 > for ten against eleven gets an ambiguous pass. The eleven are indexed in `MEMORY.md`.
 
+### ✅ Task 8 CLOSED — the slug was confirmed by observation, 2026-07-27
+
+**The prediction was right.** A session launched in `C:\dev\music-app` by the owner, and
+confirmed from two independent directions:
+
+- **Filesystem:** a new transcript `8b940b3d-…jsonl` was written into
+  `~/.claude/projects/C--dev-music-app/` at 21:59. **No new project directory was created**,
+  which is what a correct prediction looks like — a wrong one makes its own directory.
+- **The session itself** read `MEMORY.md` out of `C--dev-music-app/memory/` and reproduced all
+  **eleven** index entries. That independently confirms the eleven-not-ten correction above.
+
+**`MIG-2` is closed**, not merely mitigated. The duplicate under the old slug is retained
+deliberately until Task 11: if Phase D is rolled back, the old tree becomes authoritative again
+and needs its memory.
+
+### The confirming session found one thing, and it was a real defect
+
+It flagged that **`CLAUDE.md` still pointed at the old project-memory path** — line 19 named
+`~/.claude/projects/C--Users-charl-OneDrive-Claude-Projects-music-app/memory/`, which by then
+described nothing the session was actually reading.
+
+**Fixed now rather than deferred to Task 12**, because it is the one item in `MIG-10`'s list
+that was *actively misleading a live session* rather than merely describing a stale fact.
+
+> **Budget accounting, per `CLAUDE.md`'s rule that the standing layer is measured from the
+> diff.** The fix is a **pure path substitution with no added prose**: the old slug is 49
+> characters, the new one 16, so `CLAUDE.md` is **33 characters shorter**. No explanatory clause
+> was added — one was drafted and dropped, because it would have turned a saving into a ~27
+> character growth, and growth is the owner's call.
+>
+> **The rest of `MIG-10` is deliberately NOT done.** `CLAUDE.md`'s environment note, the three
+> READMEs, `ml-graph-analyst.md` and `session-start/SKILL.md` all still say the project lives
+> under OneDrive — **and that is still true of the tree that is still the rollback.** Correcting
+> them now would make the record wrong for the copy we might roll back to. They travel with
+> Task 12, after Task 11.
+
+### Project memory updated — and the `UV_LINK_MODE` guard is now evidenced, not inferred
+
+`memory/env-onedrive-uv.md` said "The project lives under `C:\Users\charl\OneDrive\...`"
+verbatim. Rewritten to be **location-dependent**, which is what it now is:
+
+- **In `C:\dev\music-app` the override is not needed** — measured, per Task 12's instruction to
+  test the guard before removing it anywhere. Three `uv sync --extra dev` runs and four full
+  pytest suites, `UV_LINK_MODE` unset, no hardlink error.
+- **In the old tree it is still required**, so the rule is not retired, only scoped.
+
+`MEMORY.md`'s index line was corrected too; it is in the **unconditional** layer, and the new
+wording costs **+13 characters**. Recorded because that layer is budgeted and the cost is
+supposed to be visible rather than assumed negligible.
+
+> **This is deliberately not the same call as `CLAUDE.md`'s environment note above.** Memory is
+> keyed to `C--dev-music-app` and therefore *describes the new tree*; `CLAUDE.md` is one file
+> serving both trees until Task 11.
+
 ## §12 — Incident: two writers raced on the baseline file, and `TaskStop` is why
 
 **Recorded because the failure is the project's own standing hazard — an instrument that
@@ -321,7 +375,32 @@ whole-tree total. Two separate traversals agreeing.
 2. **A long job's output file should be uniquely named per run**, not a fixed path a retry will
    share with its own zombie.
 
-## §13 — Task 9: Backblaze coverage. NOT RUN — the owner's, and it gates Task 11.
+## §13a — Task 9, check 2 of 3: the exclusion list. MEASURED, and it is safe on what matters.
+
+The owner supplied Backblaze's editable extension-exclusion list, 2026-07-27. Every entry was
+matched against the new tree rather than judged by eye.
+
+**`json` and `bin` are NOT on the list.** The whole irreplaceable asset — 75,000 archive files
+and all 18 graph artifacts — is covered. That is the finding that could have sunk Task 9.
+
+**One extension catches real files: `log`** — 11 files, 4,475,426 bytes.
+
+| Bytes | File |
+|---|---|
+| 4,068,500 | `builder/scratch/full-crawl.log` — **the only account of how the unreproducible archive was produced** |
+| 290,591 | `builder/scratch/graph-crawl.log` |
+| 106,077 | `builder/analysis/2026-07-26-low-degree-census/resolve.log` (`CNS-` run record) |
+| 4,432 / 4,211 | `…cap-ranking-replay/replay.log`, `…popularity-stratification/tail_probe.log` |
+| ~1,600 | six small build/gate logs |
+
+**Recommended to the owner: remove `log`, change nothing else.** These are not the asset, but
+they are unreproducible *provenance* for it, at 4.5 MB against 1.4 GB.
+
+**`exe` and `dll` match only inside `.venv` and `node_modules`** (32 and 5 files) — regenerable
+by construction (`MIG-8`), so excluding them is correct. Every other entry — VM images, disk
+images, installers, Windows system files — has **zero** matches here.
+
+## §13 — Task 9: Backblaze coverage. IN PROGRESS — the owner's, and it gates Task 11.
 
 `MIG-3` cannot be verified from here: it needs the Backblaze account. Three things, and the
 third is the one that is usually assumed:
