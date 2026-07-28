@@ -23,6 +23,50 @@ the point.**
 
 ---
 
+## N/A — 2026-07-28 — work towards dropping the password; nothing is live yet
+
+**Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no clips, no
+buttons — **not one line of what you'd call the app changed.** A journey you build now is the same
+journey as yesterday's, and **the website is exactly as it was, password and all.** Nothing was
+started on this machine and nothing was left behind; all four ports were checked and are empty.
+
+**What this was.** The password on the site is quietly doing three jobs, not one. It keeps
+strangers out, but it also stops anyone hammering the server, and it stops the app asking the
+music service for clips faster than that service will tolerate. **You can't take it off until
+something else is doing the second and third jobs**, which is what this work is.
+
+Today did the half that lives inside the app itself:
+
+- **The app can no longer be made to do unlimited work by a single request.** Someone could
+  previously send a list of two million artists and the server would read all of it before
+  noticing it only wanted two.
+- **The check that tells AWS "the app is alive" can no longer be drowned out by traffic.** This
+  is the one worth knowing about. Under load that check was waiting in the same queue as
+  everyone's journeys and taking 22 seconds against a 5-second deadline — so AWS would conclude
+  the app was dead and restart it, moving all the traffic to the second copy, which would then
+  fail the same way. **The site wasn't getting slow under heavy use, it was restarting itself in
+  a loop.** It now answers immediately. This doesn't make anything faster; it stops busy turning
+  into broken.
+- **When the music service tells us to back off, the app now hears it.** Before, "you're asking
+  too often" and "we don't have that track" looked identical, so being told to slow down made the
+  app ask *three times instead of once* — which is how you turn a brief telling-off into a long
+  one. It now asks once, and after five refusals it leaves that service alone for a minute and
+  uses the other one.
+
+**The one thing you might notice, whenever this does go live:** a card that would have played
+something may occasionally stay silent for up to a minute while the app waits out a telling-off.
+That's deliberate, and it's the alternative to every card going silent for much longer.
+
+**Nothing is proposed for you to test.** The next entry here will be a real one, and it will be
+the big one: **the address with no password on it**, plus a short list for a friend with an
+iPhone — because whether clips play at all on an iPhone is still genuinely unknown, and no test,
+emulator, or Android phone can answer it.
+
+**One thing is waiting on you before any of that:** a certificate for `musicapp.cmiller.io`. The
+commands are in the plan.
+
+*Detail: `docs/superpowers/2026-07-28-password-removal-execution-log.md`. PR #39.*
+
 ## N/A — 2026-07-27 (evening, later) — a Gate 3 readiness review ran; the app is untouched
 
 **Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no clips, no

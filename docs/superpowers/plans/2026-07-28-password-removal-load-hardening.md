@@ -1877,11 +1877,24 @@ table exists to not be.
 Stated because a summary that omits what cuts against it is wrong even when every number in it is
 right.
 
-- **It does not open Gate 3, and does not move the app closer to it in the review's terms.** The
-  blocking set the review named for Gate 3 is `G3-A1`, `G3-A2`, `G3-A3`, `G3-A4`, `G3-S1`,
-  `G3-S2`, `G3-S3`, `G3-Q1`, `G3-Q2`, `G3-F1`, `G3-F2`. This plan closes six and a half of those
-  eleven. **`G3-Q1`, `G3-Q2`, `G3-F1` and `G3-F2` are untouched**, and `G3-A1`'s capacity half is
-  deferred above.
+- **It does not open Gate 3.** It does reduce the blocking set, so "no closer to Gate 3" would be
+  false — but **Gate 3 is a state, not a score**, and no number of closed findings opens it. The
+  itemised tally, so a reader can check the arithmetic rather than take it:
+
+  | Review blocking finding | Plain sentence | Status after this plan |
+  |---|---|---|
+  | `G3-A2` | nothing limits how many requests one person can send | **closed** — PW-6 |
+  | `G3-A4` / `G3-S2` | a throttled catalogue is asked three times, not once | **closed** — PW-3, PW-4 |
+  | `G3-S3` | a request can carry an unlimited list | **closed** — PW-1 |
+  | `G3-A3` | the knob capping the bill is the knob capping capacity | **does not fire** — load is shed at the edge, `max_size=2` unchanged |
+  | `G3-A1` / `G3-S1` | request cost is caller-chosen; the server does one at a time | **half** — PW-2 closes the restart cascade; the ~1.5 req/s capacity half is **deferred** above. `G3-S1` is the same finding measured differently and has no separate task. |
+  | `G3-Q1` | the guards are tested, the wiring arming them is not | **untouched** |
+  | `G3-Q2` | the publisher can ignore its own upload order | **untouched** |
+  | `G3-F1` | a clip failure tells the user nothing | **untouched** |
+  | `G3-F2` | clips may never play on an iPhone | **untouched** — deferred to a borrowed device |
+
+  So: six closed, one that does not fire, one half, four untouched. **The four untouched still
+  gate Gate 3**, and two of them (`G3-F1`, `G3-F2`) are what a stranger would actually meet.
 - **It does not make the app faster.** PW-2 stops slow becoming an outage. Nothing here raises
   the ~1.5 req/s ceiling, and PW-6 deliberately *reduces* what one person can ask for.
 - **It does not change anything about which artists you get.** No routing, no graph, no cost

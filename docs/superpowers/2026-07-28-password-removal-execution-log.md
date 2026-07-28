@@ -129,13 +129,35 @@ without edit.
 
 ---
 
+## Closeout findings — the ritual caught two things the work did not
+
+**`A4` (default-flip) found an untested wiring path, and it is `G3-Q1`'s exact shape.**
+`build_default_app` constructs `ClipResolver` with **no** breaker argument and relies on the
+constructor default to arm one — while **every** breaker test injected one explicitly. A default
+that stopped arming the breaker would have left the whole of PW-4 dead in production with every
+test still green. That is the defect class the Gate 2→3 review named twice and the class this
+project keeps producing.
+
+Closed by `test_a_resolver_built_without_one_still_gets_a_breaker`, which exercises the *default*
+path. Verified non-vacuous by mutation — raising the default threshold to 10⁹ produced 8 calls to
+a refusing Deezer against an expected 5, and the test failed.
+
+**`D1` (clean tree) was run too early and reported a false green.** The tree was clean when
+checked, then the `A4` fix dirtied it, and nothing re-checked. Caught by the `B1` doc audit, which
+found the resulting test-count contradiction between this log and the handoff. **The ordering
+lesson is real: D1 belongs after Part B's fixes land, which is what the skill says and what this
+closeout did not do.**
+
 ## State at the seam
 
 **All four suites green**, run 2026-07-28 from `C:\dev\music-app`:
 
 | builder | api | infra | frontend unit |
 |---|---|---|---|
-| 115 ✅ | **213 ✅** (was 195; +18) | 58 ✅ | 80 ✅ |
+| 115 ✅ | **214 ✅** (was 195; +19) | 58 ✅ | 80 ✅ |
+
+**This table owns the api count. Nothing else restates it** — `docs/README.md` and the handoff
+cite it, because the three disagreed for exactly as long as it took the audit to notice.
 
 Frontend e2e not run — it needs a hand-started API and nothing in Track A touches the frontend.
 

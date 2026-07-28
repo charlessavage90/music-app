@@ -24,15 +24,27 @@ two zombie API servers (item 3). **One remains: Task 9.**
 
 ## Next
 
-**The OneDrive migration is at its Phase D seam. One thing is owed, and it is the owner's:
-Task 9.** Items 1 and 3 below were owed when this section was written and are now **struck —
-both discharged by observation on 2026-07-27 (evening).**
+> **⚠ TWO things are owed and both are the owner's. This section named only one until
+> 2026-07-28.** A second, unrelated body of work is now live — **removing the site password** —
+> and it is blocked on an owner action of its own: **request an ACM certificate for
+> `musicapp.cmiller.io` in us-east-1.** Its handoff is
+> [`2026-07-28-HANDOFF-password-removal-track-b.md`](2026-07-28-HANDOFF-password-removal-track-b.md),
+> which is now **the handoff to read first**; its plan is
+> [`plans/2026-07-28-password-removal-load-hardening.md`](plans/2026-07-28-password-removal-load-hardening.md).
+> **It discharges nothing below.** Track A (API hardening) is done and committed on branch
+> `password-removal-load-hardening`, PR #39; **the live site and the password are unchanged.**
+> This is a pointer, not a rewrite — the full rewrite is that plan's task PW-8.
+
+**The OneDrive migration is at its Phase D seam. One thing is owed on this axis, and it is the
+owner's: Task 9.** Items 1 and 3 below were owed when this section was written and are now
+**struck — both discharged by observation on 2026-07-27 (evening).**
 
 Phases A–C ran on 2026-07-27 and passed —
 [`2026-07-27-onedrive-migration-execution-log.md`](2026-07-27-onedrive-migration-execution-log.md)
 is the record, and
 [`2026-07-27-HANDOFF-migration-phase-d.md`](2026-07-27-HANDOFF-migration-phase-d.md) is the
-current handoff. **The plan itself still reads as though nothing has run**; the log wins. **`C:\dev\music-app` exists, is verified, and works**: all four suites
+migration's handoff — **still live for Tasks 9–11, but no longer the *current* handoff**; see
+the box above. **The plan itself still reads as though nothing has run**; the log wins. **`C:\dev\music-app` exists, is verified, and works**: all four suites
 green from it, all 18 graph artifacts byte-identical, and a running API serving `4cb84ef9…`.
 **The OneDrive tree is untouched and is the rollback.** No application code, graph, routing or
 config default changed, and no test-queue entry is owed.

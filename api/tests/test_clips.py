@@ -544,3 +544,21 @@ async def test_an_open_deezer_breaker_leaves_itunes_usable():
 
     assert clip is not None and clip.source == "itunes"
     assert len(_deezer_calls(r)) == 1
+
+
+async def test_a_resolver_built_without_one_still_gets_a_breaker():
+    # The wiring, not the guard. build_default_app constructs ClipResolver with
+    # no breaker argument and relies on the constructor default to arm one, and
+    # every other breaker test INJECTS a breaker — so a default that stopped
+    # arming it would leave the whole of PW-4 dead in production with all tests
+    # still green. That is G3-Q1's shape exactly, and it is the failure class
+    # the Gate 2->3 review named.
+    r = _resolver({"deezer": CatalogueUnavailable("429"), "itunes": {}})
+
+    for _ in range(CFG.clip_breaker_threshold + 3):
+        await r.resolve(MBID, "Radiohead")
+
+    assert len(_deezer_calls(r)) == CFG.clip_breaker_threshold, (
+        f"{len(_deezer_calls(r))} calls to a refusing Deezer with the DEFAULT "
+        f"breaker; expected it to stop at {CFG.clip_breaker_threshold}"
+    )

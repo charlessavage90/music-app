@@ -1,9 +1,18 @@
 # Handoff — OneDrive migration Phases A–C complete, at the Phase D seam, 2026-07-27
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md) on next
-actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns
-it.
+**Role: ACTIVE, but no longer the CURRENT handoff.** Superseded 2026-07-28 by
+[`2026-07-28-HANDOFF-password-removal-track-b.md`](2026-07-28-HANDOFF-password-removal-track-b.md)
+**as the document to read first only** — that is a different body of work (removing the site
+password) and it discharges nothing here.
+
+> **⚠ This document is still LIVE on its own axis. Tasks 9, 10 and 11 remain owed and are NOT
+> superseded.** Task 9 (Backblaze upload *completed*, not queued) still gates Task 11, and Task 11
+> is still the irreversible deletion of the rollback tree. Everything below still governs the
+> migration. Read the newer handoff first, then come back here — it does not replace this.
+
+Supersedes [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md)
+on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
+owns it.
 
 **Written at a seam** — the plan's own named Phase D seam, not a mid-flight retirement. Phases
 A–C are complete and verified; Phase D is not started. Nothing is in flight: no subagents, no
