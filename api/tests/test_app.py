@@ -251,6 +251,11 @@ def test_path_request_emits_a_telemetry_event(capsys):
     assert ev["stop_rule"] in ("natural", "forced", "adjacent_only")
     assert [p["mbid"] for p in ev["path"]][0] == a
     assert isinstance(ev["duration_ms"], (int, float))
+    # The integer must agree with the array it summarises, or every Log Insights
+    # aggregate over it is quietly wrong. Pins the currency too: TOTAL artists,
+    # not the interior count the UI displays.
+    assert ev["path_length"] == len(ev["path"])
+    assert ev["path_length"] >= 2
 
 
 def test_track_request_emits_a_clip_event(capsys):

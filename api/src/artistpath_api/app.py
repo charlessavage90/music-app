@@ -165,6 +165,18 @@ def create_app(
                 "path": [
                     {"mbid": store.mbids[n], "name": store.names[n]} for n in path
                 ],
+                # Redundant with `path`, and deliberately so — the same trade
+                # `bypass_depth` already makes against `exclude`. Log Insights
+                # cannot aggregate over the length of a JSON array, so without
+                # this every `by path_length` query needs an offline pass.
+                #
+                # TOTAL artists INCLUDING both endpoints. This is NOT the figure
+                # the UI shows: the result line counts artists BETWEEN the two
+                # chosen (UI-D7), so it reads `path_length - 2`. Hops are
+                # `path_length - 1`. Naming the currency here because reading one
+                # of these as another is a defect class this project has met
+                # three times.
+                "path_length": len(path),
                 "stop_rule": stop_rule,
                 "duration_ms": round(duration_ms, 2),
             }
