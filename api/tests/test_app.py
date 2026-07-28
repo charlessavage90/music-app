@@ -267,3 +267,88 @@ def test_track_request_emits_a_clip_event(capsys):
     assert ev["resolved"] is False   # the test fetcher returns no clip
     assert ev["source"] is None
     assert isinstance(ev["duration_ms"], (int, float))
+
+
+# --- request bounds (PW-1: G3-S3, and the amplification half of G3-S4) -------
+#
+# One task because they are one fix. The 20 MB of CloudWatch the Gate 2->3
+# review measured came from unbounded id strings being echoed verbatim into the
+# telemetry line, so bounding the strings closes both findings.
+
+
+def test_an_oversized_sources_array_is_rejected_by_the_schema_not_the_handler():
+    # G3-S3: a 2,000,000-element array cost 442 ms and buffered ~70 MB before
+    # the `len(...) != 2` check in build_path rejected it. The bound has to be
+    # in the schema, which runs before the handler.
+    #
+    # Asserting `status_code == 422` alone is VACUOUS and passed before this
+    # fix existed: build_path already raises 422 for "alpha supports exactly
+    # two source artists" — but it raises it AFTER the whole array has been
+    # parsed and materialised, which is the entire finding. The two are told
+    # apart by the shape of `detail`: FastAPI gives a LIST of pydantic errors
+    # for a schema violation and a STRING for HTTPException's message.
+    client, _ = _client()
+    r = client.post("/api/path", json={"sources": ["x"] * 5000, "exclude": []})
+    assert r.status_code == 422
+    detail = r.json()["detail"]
+    assert isinstance(detail, list), (
+        "rejected by the handler, not the schema — the array was fully "
+        f"materialised before anything checked its size: {detail!r}"
+    )
+    assert any(e["type"] == "too_long" for e in detail), detail
+
+
+def test_an_oversized_exclusion_id_is_rejected():
+    # G3-S4: ExclusionIn.id is echoed verbatim into the telemetry line, so an
+    # unbounded string is a log-volume amplifier billed per GB, not only a
+    # parse cost. The review measured 1:1 amplification.
+    client, store = _client()
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [store.mbids[0], store.mbids[2]],
+            "exclude": [{"id": "z" * 5000, "reason": "dislike"}],
+        },
+    )
+    assert r.status_code == 422
+
+
+def test_an_oversized_exclusion_reason_is_rejected():
+    # `reason` is normalised to dislike/known in _to_exclusions, but the RAW
+    # value is what app.py logs. Bounding it at the normalisation would not
+    # bound the log line.
+    client, store = _client()
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [store.mbids[0], store.mbids[2]],
+            "exclude": [{"id": store.mbids[1], "reason": "z" * 5000}],
+        },
+    )
+    assert r.status_code == 422
+
+
+def test_a_body_over_the_limit_is_refused_before_parsing():
+    # The schema bounds cannot fire until the whole body has been read into
+    # memory. This is the cheap guard in front of that.
+    client, _ = _client()
+    r = client.post(
+        "/api/path",
+        content=b'{"sources":[],"exclude":[]}' + b" " * (CFG.max_body_bytes + 1),
+        headers={"content-type": "application/json"},
+    )
+    assert r.status_code == 413
+
+
+def test_an_ordinary_two_artist_request_still_works():
+    # The half a bounds test cannot see on its own: a limit set too tight
+    # refuses real traffic, and every test above passes when it does.
+    client, store = _client()
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [store.mbids[0], store.mbids[2]],
+            "exclude": [{"id": store.mbids[1], "reason": "dislike"}],
+        },
+    )
+    assert r.status_code == 200

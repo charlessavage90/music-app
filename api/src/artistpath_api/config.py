@@ -63,6 +63,15 @@ class ApiConfig:
     # --- search ---------------------------------------------------------
     search_limit: int = 10
 
+    # --- request bounds (G3-S3) -----------------------------------------
+    # A body larger than this is refused before it is parsed. The schema bounds
+    # in models.py cannot fire until the whole body has been read into memory,
+    # which is the cost being avoided: the review measured a 2,000,000-element
+    # `sources` array buffering ~70 MB before the handler's two-source check
+    # rejected it. 64 KiB is ~30x the largest legitimate request (200
+    # exclusions at 64 bytes of id, plus JSON overhead).
+    max_body_bytes: int = 64 * 1024
+
     # --- CORS (stage 3a) ------------------------------------------------
     # Allowed browser origins for the SPA, comma-separated in
     # ARTISTPATH_CORS_ORIGINS. The default is EMPTY — no origin is allowed.

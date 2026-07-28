@@ -56,6 +56,21 @@ def create_app(
         allow_headers=["content-type", "x-journey-id"],
     )
 
+    @app.middleware("http")
+    async def limit_body_size(request: Request, call_next):
+        """Refuse an oversized body before Starlette reads it into memory.
+
+        Content-Length only. A chunked request carrying no such header still
+        gets buffered and is bounded only by the schema in models.py — recorded
+        as a deferral rather than fixed, because CloudFront and Cloudflare both
+        send Content-Length, so the case is currently unreachable, and reading
+        the stream to count it would cost more than it is worth (G3-S3).
+        """
+        declared = request.headers.get("content-length")
+        if declared and declared.isdigit() and int(declared) > cfg.max_body_bytes:
+            return JSONResponse({"detail": "request body too large"}, status_code=413)
+        return await call_next(request)
+
     if cfg.origin_secret:
         # SEC-1: compared as `str`, hmac.compare_digest raises TypeError on any
         # non-ASCII character, so one byte >127 in this header returned 500 and
