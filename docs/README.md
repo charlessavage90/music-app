@@ -48,6 +48,11 @@ that is how the drift began.
 > disagree with `NEXT.md` about status, `NEXT.md` wins; where they disagree about a *defect*,
 > the owning document wins. Added 2026-07-26, when a status summary in `CLAUDE.md` went three
 > tracks stale because three documents each kept a copy.
+>
+> ⚠ **2026-07-28: path-quality work is UNPAUSED by owner decision.** Every "the pause is
+> intact" tail in the bullets and rows below was true when its document was written and is
+> **not** a claim about today — the governing document for the resumed work is named in
+> `NEXT.md` (the Track 3 pre-registration).
 
 - ⛔ **Repair + retune is DONE. Track 1 was adopted; Track 2 (2026-07-24) and Track 2F
   (2026-07-25) both returned nulls; the ceiling **ordering** measurement (2026-07-25) came
