@@ -245,6 +245,21 @@ candidates go to the auditor as input.
 Then dispatch the `doc-auditor` agent, **telling it the lint already ran** so it spends its
 budget on the semantic half. It reports; it does not edit.
 
+> **Invoking `closeout` IS the request for this subagent. Do not ask.** Sessions here carry a
+> standing instruction not to spawn subagents unasked — that instruction is about a session
+> fanning out on its own initiative, and it has no purchase on an agent dispatched by a skill
+> the owner deliberately ran. Reading "unless the user requested it" as needing a *separate*
+> mention of the subagent is too narrow, and it turns a settled question back into an open one.
+>
+> **Asking is not the safe side of this call.** On 2026-07-27 a session tabled it as a choice
+> and offered "skip" as a reasoned option; had that been taken, two HIGH defects in that
+> session's own output would have shipped — `docs/README.md` carrying two rows both claiming
+> to be the current handoff, and `NEXT.md` asserting closeout work was undone that was
+> already done. The question manufactured a real chance of the wrong outcome out of one that
+> was already answered. **A prior session's recorded decision to skip B1 is not precedent** —
+> the Track C handoff records exactly that, flagged as an open item rather than a clean
+> result, and it is the thing to override rather than follow.
+
 **Scope it to the diff** — the documents this work changed, plus every document citing them.
 A full-corpus audit is a separate, deliberate act that needs partitioning; see the agent's
 own Scope section.
