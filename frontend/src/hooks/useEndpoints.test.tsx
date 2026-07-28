@@ -17,11 +17,24 @@ test('resolves both endpoint artists', async () => {
 
 // UI-7: a decorative lookup must never be able to turn a working page into an
 // error page. The path request is the real one.
-test('a failed lookup yields nulls and never throws', async () => {
-  vi.spyOn(client, 'getArtist').mockRejectedValue(new Error('boom'));
+//
+// ⚠ Deliberately MIXED — one lookup fails, one succeeds — and that is the whole
+// point of the test. The obvious version fails BOTH and asserts both are null,
+// and it is vacuous: when Promise.all rejects, .then never runs, so state stays
+// at its INITIAL value of null, which is what the assertion reads. It passes
+// against code with no error handling at all. Caught by mutation at closeout
+// 2026-07-28.
+//
+// Asserting that the SURVIVING lookup still lands is what cannot be faked: it
+// only happens if the failure was swallowed per-promise rather than taking the
+// pair down with it.
+test('one failed lookup does not take the other down', async () => {
+  vi.spyOn(client, 'getArtist').mockImplementation(async (mbid: string) => {
+    if (mbid === 'b') throw new Error('boom');
+    return artist(mbid, 'Nirvana');
+  });
   const { result } = renderHook(() => useEndpoints('a', 'b'));
-  await waitFor(() => expect(client.getArtist).toHaveBeenCalled());
-  expect(result.current.from).toBeNull();
+  await waitFor(() => expect(result.current.from?.name).toBe('Nirvana'));
   expect(result.current.to).toBeNull();
 });
 
