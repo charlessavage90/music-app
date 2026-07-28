@@ -106,3 +106,14 @@ before P2; caught on re-read the same hour and corrected with an explicit
 discharge-order sentence rather than a renumber (identifiers are forward-only).
 Nothing in the pre-registration schedules a blind listen, a rebuild, or any owner
 spend.
+
+## §7 — Owner decision recorded: nameless artists are DROPPED
+
+**2026-07-28, the owner, in this session: the 33 nameless artists are to be dropped,
+not backfilled.** Recorded at the tripwire itself (`acceptance.py` docstring), which
+stays in force until the drop rule is implemented in `build` — before the
+largest-component prune, so stranded neighbours are pruned rather than left dangling.
+This is a standing build rule (future crawls can mint new nameless nodes), and it is
+**not implemented by this session**: no rebuild is due, Track 3 needs none, and
+implementing it belongs to whichever session next touches the builder ahead of a
+rebuild. The `acceptance.py` check is the forcing function; do not weaken it.
