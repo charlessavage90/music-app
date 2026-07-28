@@ -1,7 +1,9 @@
 # Frontend Mockup Adoption Implementation Plan
 
-**Role: ACTIVE — partially executed.** Tasks 1–7 are complete, committed and pushed on
-branch `frontend-mockup-adoption`; **Tasks 8–13 are outstanding.** Governed by
+**Role: COMPLETE — all 13 tasks executed, merged (`d68ef7a`) and deployed 2026-07-28.**
+Kept as the record of what was planned and in what order; **it is not a live instruction and
+nothing here is outstanding.** ⚠ **Two of its own code/test snippets are known wrong** — see
+the execution log's §3 and §10 before reusing anything from this document. Governed by
 [`../specs/2026-07-28-frontend-mockup-adoption-design.md`](../specs/2026-07-28-frontend-mockup-adoption-design.md),
 which wins where the two disagree. Progress is recorded in
 [`../2026-07-28-frontend-mockup-adoption-execution-log.md`](../2026-07-28-frontend-mockup-adoption-execution-log.md).
