@@ -95,7 +95,13 @@ DD-P1's headroom present is a mechanism-strength statement (DD-R2).
   where blank names concentrate, so F8's hazard is live in this track and the fix is
   a precondition, not a deferral).
 
-## §4 — Prerequisites, discharged in order, before any arm
+## §4 — Prerequisites, all discharged before any arm
+
+**Discharge order: DD-P2 → DD-P1 → DD-P3 → DD-P4.** The headroom measurement runs on
+the pair set, so DD-P2 precedes DD-P1 despite the numbering; the numbering is kept
+because identifiers are forward-only once committed. (DD-P1 needs P walks on the
+eight new pairs — P is production and walking it is validation, not an experimental
+arm, per the P8b precedent.)
 
 - **DD-P1 — depth headroom.** For every pair × C-window depth cell on a P walk: does
   a guard-compliant path exist, within **+2 hops** of P's delivered length at that

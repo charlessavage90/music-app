@@ -99,6 +99,10 @@ six-arm factor table over dose × floor with per-row isolating baselines, the fl
 declared a live interacting term in §0 rather than a constant (the Track 2 §0 lesson
 in mirror image), first-path invariance as a verified gate (DD-G2), fame keyed by
 MBID as a precondition (P8b F8, live for diving arms), and reads DD-R1/R2/R3 each
-naming their run state. No arm may run until DD-P1 (depth headroom), DD-P2 (pair
-set), DD-P3 (analyst review) and DD-P4 (harness + Snyk) discharge, in that order.
-Nothing in it schedules a blind listen, a rebuild, or any owner spend.
+naming their run state. No arm may run until all four prerequisites discharge, in the
+order DD-P2 (pair set) → DD-P1 (depth headroom, which runs on those pairs) → DD-P3
+(analyst review) → DD-P4 (harness + Snyk). The first committed version listed P1
+before P2; caught on re-read the same hour and corrected with an explicit
+discharge-order sentence rather than a renumber (identifiers are forward-only).
+Nothing in the pre-registration schedules a blind listen, a rebuild, or any owner
+spend.
