@@ -1,4 +1,10 @@
 {
+    // Three packages here each have their own .venv (api, builder, infra), and the
+    // convention is to cd into a package and use `uv run`, which resolves the right
+    // one itself. Auto-activation picks api/.venv for the whole workspace, so it
+    // both pastes an activation line into every new terminal and mislabels the
+    // prompt when you are working in builder/ or infra/.
+    "python.terminal.activateEnvironment": false,
     "snyk.advanced.autoSelectOrganization": true,
     "snyk.advanced.organization": "cf965b28-f28b-4da5-af0e-2dc1384e22ff"
 }
