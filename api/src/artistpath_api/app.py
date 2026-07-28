@@ -114,6 +114,18 @@ def create_app(
     def search_artists(q: str) -> list[ArtistOut]:
         return [artist_out(i) for i in search.search(q)]
 
+    # Registered AFTER /api/artists/search deliberately: FastAPI matches in
+    # declaration order, so the reverse makes {mbid} swallow the literal path.
+    # A pure in-memory lookup — no network, no pathfinding, no clip resolution.
+    # Exists so a cold load from a shared link can name the two endpoint
+    # artists on the loading screen, where the URL carries only MBIDs.
+    @app.get("/api/artists/{mbid}")
+    def get_artist(mbid: str) -> ArtistOut:
+        node = store.id_by_mbid.get(mbid)
+        if node is None:
+            raise HTTPException(404, "unknown artist")
+        return artist_out(node)
+
     @app.post("/api/path")
     def build_path(req: PathRequest, request: Request) -> PathResponse:
         if len(req.sources) != 2:
@@ -153,6 +165,18 @@ def create_app(
                 "path": [
                     {"mbid": store.mbids[n], "name": store.names[n]} for n in path
                 ],
+                # Redundant with `path`, and deliberately so — the same trade
+                # `bypass_depth` already makes against `exclude`. Log Insights
+                # cannot aggregate over the length of a JSON array, so without
+                # this every `by path_length` query needs an offline pass.
+                #
+                # TOTAL artists INCLUDING both endpoints. This is NOT the figure
+                # the UI shows: the result line counts artists BETWEEN the two
+                # chosen (UI-D7), so it reads `path_length - 2`. Hops are
+                # `path_length - 1`. Naming the currency here because reading one
+                # of these as another is a defect class this project has met
+                # three times.
+                "path_length": len(path),
                 "stop_rule": stop_rule,
                 "duration_ms": round(duration_ms, 2),
             }

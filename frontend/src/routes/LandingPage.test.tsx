@@ -88,3 +88,11 @@ test('blocks identical endpoints with a nudge', async () => {
   await user.click((await screen.findAllByText('Radiohead'))[0]);
   expect(screen.getByText(/pick two different artists/i)).toBeInTheDocument();
 });
+
+// Removed at the owner's request 2026-07-28: the decorative three-dot rail
+// stays, the clip-length line under it does not. Asserted as absent rather than
+// deleted, so restoring the line is a deliberate act and not an accident.
+test('the landing page does not state clip length', () => {
+  setup();
+  expect(screen.queryByText(/30 seconds/i)).not.toBeInTheDocument();
+});

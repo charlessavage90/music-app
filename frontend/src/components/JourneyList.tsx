@@ -46,8 +46,10 @@ export function JourneyList({ artists, stopRule, onBypass, ref }: Props) {
 
   return (
     <>
-      <ol className="relative flex flex-col gap-2 pl-5">
-        <span className="absolute left-1.5 top-3 bottom-3 w-[3px] rounded bg-gradient-to-b from-[var(--color-accent)] to-[var(--color-dig)]" />
+      {/* The rail spans the full height of the journey, and there is no arrow
+          at its foot — both at the owner's request, 2026-07-28. */}
+      <ol className="relative flex flex-col gap-3.5 pl-[19px]">
+        <span className="absolute left-0 inset-y-0 w-[3px] rounded-full bg-gradient-to-b from-[var(--color-accent)] via-[var(--color-rail-mid)] to-[var(--color-dig)]" />
         {artists.map((artist, i) => (
           <li key={artist.mbid}>
             <ArtistCard
@@ -57,6 +59,9 @@ export function JourneyList({ artists, stopRule, onBypass, ref }: Props) {
               // The two artists you chose are the journey's endpoints; there is
               // nothing to reroute if you reject them.
               isEndpoint={i === 0 || i === artists.length - 1}
+              endpointLabel={
+                i === 0 ? 'start' : i === artists.length - 1 ? 'destination' : undefined
+              }
               onPlay={player.playFrom}
               onToggle={player.toggle}
               onBypass={onBypass}

@@ -29,26 +29,50 @@ export function LandingPage() {
   const ready = !!from && !!to && !sameArtist;
 
   return (
-    <main className="max-w-xl mx-auto px-4 py-10 sm:py-16">
-      <h1 className="text-2xl font-semibold mb-6">Artist Path</h1>
-      <p className="text-[var(--color-muted)] mb-8">
-        Name two artists and hear a smooth path between them.
+    <main className="mx-auto flex min-h-screen w-full max-w-[520px] flex-col px-7 pt-11 pb-9 sm:pt-14">
+      <h1 className="text-[27px] sm:text-[38px] font-medium tracking-[-.02em] sm:tracking-[-.025em] leading-[1.1] sm:leading-[1.05]">
+        Artist Path
+      </h1>
+      {/* Owner-chosen 2026-07-28. Explains the HOW at user level and stops
+          short of promising obscurity: the first path between two famous
+          artists is expected to be famous, and the bypass explainer on the
+          journey page is where digging is introduced. "Listeners share" is
+          literal — edges come from ListenBrainz similar-artists and every edge
+          in the artifact is behavioural. */}
+      <p className="mt-3 sm:mt-3.5 max-w-[290px] sm:max-w-[400px] text-[14.5px] sm:text-base leading-[1.5] text-[var(--color-muted)] text-pretty">
+        Name two artists and hear the route between them. Each step lands on someone their
+        listeners share, so one sound eases into the next.
       </p>
-      <div className="space-y-4">
+
+      <div className="mt-11 sm:mt-10 flex flex-col gap-5">
         <ArtistSearch label="From" initial={seedA} onSelect={setFrom} />
         <ArtistSearch label="To" initial={seedB} onSelect={setTo} />
+        {sameArtist && (
+          <p className="text-sm text-[var(--color-away)]">Pick two different artists.</p>
+        )}
+        <button
+          type="button"
+          disabled={!ready}
+          onClick={() => from && to && navigate(`/path/${from.mbid}/${to.mbid}`)}
+          className="mt-1.5 h-[52px] sm:h-[54px] w-full rounded-full bg-[var(--color-accent)] text-[15.5px] sm:text-base font-semibold tracking-[.01em] text-[var(--color-bg)] transition-opacity enabled:hover:bg-[#5b9ce0] disabled:cursor-not-allowed disabled:opacity-30"
+        >
+          Find path
+        </button>
       </div>
-      {sameArtist && (
-        <p className="mt-3 text-sm text-[var(--color-away)]">Pick two different artists.</p>
-      )}
-      <button
-        type="button"
-        disabled={!ready}
-        onClick={() => from && to && navigate(`/path/${from.mbid}/${to.mbid}`)}
-        className="mt-6 w-full sm:w-auto rounded-lg bg-[var(--color-accent)] px-4 py-2 font-medium disabled:opacity-40"
-      >
-        Find path
-      </button>
+
+      {/* A miniature of the journey the app builds: your artist, someone in
+          between, their artist. Decorative — the three dots carry the same
+          colours as the two bypass signals and the rail. The clip-length line
+          that sat under this was removed 2026-07-28 at the owner's request. */}
+      <div className="mt-auto flex flex-col items-center pt-10">
+        <div className="flex items-center gap-2" aria-hidden>
+          <span className="block size-[5px] rounded-full bg-[var(--color-away)]" />
+          <span className="block h-px w-[22px] bg-[var(--color-border)]" />
+          <span className="block size-[5px] rounded-full bg-[var(--color-muted)]" />
+          <span className="block h-px w-[22px] bg-[var(--color-border)]" />
+          <span className="block size-[5px] rounded-full bg-[var(--color-dig)]" />
+        </div>
+      </div>
     </main>
   );
 }

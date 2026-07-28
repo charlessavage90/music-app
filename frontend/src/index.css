@@ -1,6 +1,10 @@
 @import "tailwindcss";
+@import "@fontsource-variable/dm-sans";
 
 @theme {
+  --font-sans: 'DM Sans Variable', system-ui, sans-serif;
+
+  /* Existing eight — the mockup uses these exact values. Do not change. */
   --color-bg: #0f1115;
   --color-surface: #181a1f;
   --color-border: #2a2d34;
@@ -9,7 +13,39 @@
   --color-accent: #4a90d9;
   --color-away: #e8a0a0;
   --color-dig: #a0d9b4;
+
+  /* Added 2026-07-28 for the mockup. Named by role, not by shade. */
+  --color-label: #6f7580;          /* uppercase field labels, landing footer */
+  --color-note: #7d838e;           /* dropdown disambiguation, card eyebrows */
+  --color-placeholder: #5c626d;
+  --color-endpoint: #3b4048;       /* endpoint card border */
+  --color-border-hover: #343841;
+  --color-inert: #20232a;          /* disabled play button, skeleton base */
+  --color-inert-fg: #3c414a;       /* disabled play glyph */
+  --color-rail-mid: #7bb0cf;       /* the rail gradient's middle stop */
 }
 
 :root { color-scheme: dark; }
-body { background: var(--color-bg); color: var(--color-text); }
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+input { font-family: inherit; }
+input::placeholder { color: var(--color-placeholder); }
+
+/* From the mockup. `ap-caret` is deliberately NOT ported: it fakes a text
+   cursor the mockup needs because it has no real <input>. */
+@keyframes ap-shimmer {
+  0%   { background-position: -260px 0; }
+  100% { background-position: 260px 0; }
+}
+@keyframes ap-pulse {
+  0%, 100% { opacity: .5; }
+  50%      { opacity: 1; }
+}
+@keyframes ap-grow {
+  0%   { transform: scaleY(.12); }
+  100% { transform: scaleY(1); }
+}

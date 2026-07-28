@@ -251,6 +251,11 @@ def test_path_request_emits_a_telemetry_event(capsys):
     assert ev["stop_rule"] in ("natural", "forced", "adjacent_only")
     assert [p["mbid"] for p in ev["path"]][0] == a
     assert isinstance(ev["duration_ms"], (int, float))
+    # The integer must agree with the array it summarises, or every Log Insights
+    # aggregate over it is quietly wrong. Pins the currency too: TOTAL artists,
+    # not the interior count the UI displays.
+    assert ev["path_length"] == len(ev["path"])
+    assert ev["path_length"] >= 2
 
 
 def test_track_request_emits_a_clip_event(capsys):
@@ -417,3 +422,28 @@ def test_health_answers_while_every_thread_pool_slot_is_occupied():
             limiter.total_tokens = original
 
     asyncio.run(exercise())
+
+
+def test_artist_lookup_returns_the_artist():
+    client, store = _client()
+    r = client.get(f"/api/artists/{store.mbids[0]}")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["name"] == "Radiohead"
+    assert body["mbid"] == store.mbids[0]
+
+
+def test_artist_lookup_404s_on_an_unknown_mbid():
+    client, _ = _client()
+    assert client.get("/api/artists/not-a-real-mbid").status_code == 404
+
+
+# REGRESSION GUARD, not a red-first test: this passes before the change too.
+# It exists because FastAPI matches routes in declaration order, so registering
+# {mbid} ahead of `search` would make it swallow the literal path and this is
+# the only thing that would notice.
+def test_artist_lookup_does_not_shadow_the_search_route():
+    client, _ = _client()
+    r = client.get("/api/artists/search", params={"q": "rad"})
+    assert r.status_code == 200
+    assert r.json()[0]["name"] == "Radiohead"

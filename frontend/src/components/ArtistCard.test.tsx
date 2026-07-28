@@ -82,3 +82,33 @@ test('an endpoint artist offers neither bypass button', async () => {
   expect(screen.queryByRole('button', { name: /know them/i })).not.toBeInTheDocument();
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
 });
+
+test('an endpoint card carries its eyebrow label', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  render(
+    <ArtistCard
+      artist={artist('start')} isEndpoint endpointLabel="start" isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()}
+    />,
+  );
+  expect(screen.getByText('Starting artist')).toBeInTheDocument();
+});
+
+test('a destination card carries the other eyebrow label', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  render(
+    <ArtistCard
+      artist={artist('dest')} isEndpoint endpointLabel="destination" isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()}
+    />,
+  );
+  expect(screen.getByText('Destination artist')).toBeInTheDocument();
+});
+
+// UI-5: the e2e responsive spec used to find this by the Tailwind class
+// `.font-semibold`, which this task moves. A test hook must not be a style hook.
+test('the artist name carries a stable test hook', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  render(<ArtistCard artist={artist('hook')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
+  expect(screen.getByTestId('artist-name')).toHaveTextContent('Miles Davis');
+});

@@ -164,3 +164,68 @@ test('shows the no-path banner with a clear-exclusions action on 409', async () 
   expect(await screen.findByText(/no path avoiding those artists/i)).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /clear exclusions/i })).toBeInTheDocument();
 });
+
+test('a first load shows the skeleton, not the old text line', async () => {
+  // The path never lands, so the skeleton is what is on screen throughout.
+  vi.spyOn(client, 'buildPath').mockImplementation(() => new Promise(() => {}));
+  vi.spyOn(client, 'getArtist').mockImplementation(async (mbid: string) => ({
+    mbid,
+    name: mbid === 'm' ? 'Miles Davis' : 'Daft Punk',
+    disambiguation: '',
+    popularity: 0,
+  }));
+
+  renderAt('/path/m/d');
+
+  // Named from the decorative lookup, since no path has arrived to name them.
+  expect(await screen.findByText('Miles Davis')).toBeInTheDocument();
+  expect(screen.getByText('Daft Punk')).toBeInTheDocument();
+  expect(screen.getByText(/listening for the steps between them/i)).toBeInTheDocument();
+  expect(screen.queryByText(/building your path/i)).not.toBeInTheDocument();
+});
+
+test('a bypass press holds the old path and names what it is doing', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath')
+    .mockResolvedValueOnce({ artists: THREE_STOP, stopRule: 'natural' })
+    // The rebuild never lands, so the held path stays on screen to be asserted.
+    .mockReturnValueOnce(new Promise(() => {}));
+
+  renderAt('/path/m/d');
+  await screen.findByText('Herbie Hancock');
+
+  await user.click(screen.getByRole('button', { name: /not for me/i }));
+
+  // UI-D4: the previous path is held and dimmed, never replaced by the skeleton.
+  expect(await screen.findByText(/steering around that sound/i)).toBeInTheDocument();
+  expect(screen.getByText('Herbie Hancock')).toBeInTheDocument();
+  expect(screen.queryByText(/listening for the steps between them/i)).not.toBeInTheDocument();
+});
+
+test('the reroll message names the signal that was actually pressed', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath')
+    .mockResolvedValueOnce({ artists: THREE_STOP, stopRule: 'natural' })
+    .mockReturnValueOnce(new Promise(() => {}));
+
+  renderAt('/path/m/d');
+  await screen.findByText('Herbie Hancock');
+
+  await user.click(screen.getByRole('button', { name: /know them/i }));
+
+  expect(await screen.findByText(/digging for someone newer/i)).toBeInTheDocument();
+  expect(screen.queryByText(/steering around that sound/i)).not.toBeInTheDocument();
+});
+
+// UI-D7: what the line counts is the artists BETWEEN the two chosen, which is
+// what is visible on screen — not hops. THREE_STOP has exactly one.
+test('the result line counts the artists in between', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
+
+  renderAt('/path/m/d');
+
+  expect(await screen.findByText(/we found a path/i)).toHaveTextContent(/in 1 step\./i);
+});
