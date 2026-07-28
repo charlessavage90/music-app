@@ -10,7 +10,7 @@ from dataclasses import replace
 import aws_cdk as cdk
 from aws_cdk.assertions import Template
 
-from artistpath_infra.stack import ArtistpathStack, DeployInputs
+from artistpath_infra.stack import APP_TAG_VALUE, ArtistpathStack, DeployInputs
 
 DEPLOY = DeployInputs(
     graph_key="graph-test.bin",
@@ -20,6 +20,8 @@ DEPLOY = DeployInputs(
     billing_alarm_usd=25.0,
     alarm_email="nobody@example.com",
     image_tag="test",
+    site_hostname="artistpath.test.invalid",
+    certificate_arn="arn:aws:acm:us-east-1:000000000000:certificate/test",
 )
 
 
@@ -426,3 +428,68 @@ def test_the_service_is_told_the_table_name_rather_than_guessing_it():
     assert got["ARTISTPATH_CLIP_TABLE"] == {"Ref": table_id}, got[
         "ARTISTPATH_CLIP_TABLE"
     ]
+
+
+def test_the_distribution_serves_the_custom_hostname():
+    # G3-A5: without an alternate domain name CloudFront 403s any request whose
+    # Host is not its own generated address, so Cloudflare cannot be put in
+    # front at all. Asserted against an OVERRIDDEN value, not DEPLOY's, so an
+    # assertion that happens to match the fixture cannot pass vacuously.
+    t = template(site_hostname="probe.example.org")
+    t.has_resource_properties(
+        "AWS::CloudFront::Distribution",
+        {"DistributionConfig": {"Aliases": ["probe.example.org"]}},
+    )
+
+
+def test_the_distribution_uses_the_supplied_certificate():
+    t = template(certificate_arn="arn:aws:acm:us-east-1:111111111111:certificate/probe")
+    t.has_resource_properties(
+        "AWS::CloudFront::Distribution",
+        {
+            "DistributionConfig": {
+                "ViewerCertificate": {
+                    "AcmCertificateArn": (
+                        "arn:aws:acm:us-east-1:111111111111:certificate/probe"
+                    )
+                }
+            }
+        },
+    )
+
+
+# Named individually and asserted per resource, because `has_resource_properties`
+# passes if ANY resource of the type matches (QUA-6) — a tag that landed on one
+# bucket and nothing else would satisfy a looser assertion. Every entry here is
+# billable, which is the point of the tag.
+_MUST_CARRY_APP_TAG = [
+    ("AWS::CloudFront::Distribution", "Distribution"),
+    ("AWS::AppRunner::Service", "ApiService"),
+    ("AWS::DynamoDB::Table", "ClipTable"),
+    ("AWS::S3::Bucket", "SpaBucket"),
+    ("AWS::S3::Bucket", "ArtifactBucket"),
+    ("AWS::ECR::Repository", "ApiRepo"),
+    ("AWS::CloudWatch::Alarm", "BillingAlarm"),
+]
+
+
+def test_every_billable_resource_carries_the_app_tag():
+    # Cost attribution: without this a Cost Explorer filter cannot separate this
+    # project from anything else in the account, and the billing alarm is the
+    # only spend control there is.
+    resources = template().to_json()["Resources"]
+    want = {"Key": "app", "Value": APP_TAG_VALUE}
+    missing = []
+
+    for type_, prefix in _MUST_CARRY_APP_TAG:
+        matches = [
+            lid
+            for lid, r in resources.items()
+            if r["Type"] == type_ and lid.startswith(prefix)
+        ]
+        assert len(matches) == 1, f"expected one {prefix}* {type_}, got {matches}"
+        tags = resources[matches[0]].get("Properties", {}).get("Tags") or []
+        if want not in tags:
+            missing.append((type_, matches[0], tags))
+
+    assert not missing, f"resources missing {want}: {missing}"

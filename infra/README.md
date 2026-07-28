@@ -37,7 +37,7 @@ docker info > /dev/null && echo "docker ok"
 
 ## 1. Environment
 
-**Five variables are required and two are optional. The two secrets must never be
+**Seven variables are required and two are optional. The two secrets must never be
 committed** — a password in a CDK source file is in the repository's history permanently.
 
 | variable | required | what it is |
@@ -47,8 +47,27 @@ committed** — a password in a CDK source file is in the repository's history p
 | `ARTISTPATH_DEPLOY_BILLING_USD` | yes | billing alarm threshold, in dollars |
 | `ARTISTPATH_DEPLOY_ALARM_EMAIL` | yes | where the alarm goes (confirm the SNS subscription email once) |
 | `ARTISTPATH_DEPLOY_IMAGE_TAG` | **yes** | the commit tag being deployed — **never `latest`** (see below) |
+| `ARTISTPATH_SITE_HOSTNAME` | **yes** | the permanent public name, `musicapp.cmiller.io` (`PW-5`, `G3-A5`) |
+| `ARTISTPATH_CERTIFICATE_ARN` | **yes** | us-east-1 ACM certificate for that name (`PW-5`) |
 | `ARTISTPATH_DEPLOY_GRAPH_KEY` | no | defaults to `graph-t15-tiebreakfix.bin` |
 | `ARTISTPATH_DEPLOY_SIDECAR` | no | defaults to `../builder/scratch/graph-t15-tiebreakfix.bin.json` |
+
+> **The certificate must be in `us-east-1`** — CloudFront accepts one from no other region —
+> and it is requested **out of band**, not by CDK. CDK could request it, but DNS validation
+> would block the deploy on a record only the operator can add, and `synth` must stay offline
+> (`deploy_stage.py`'s docstring).
+>
+> **⚠ Never delete the ACM validation `CNAME` from Cloudflare.** ACM reuses that same record to
+> renew the certificate automatically. Removed, renewal fails silently roughly thirteen months
+> later and the site goes down when the certificate expires. It is harmless to keep and must be
+> **DNS-only (grey cloud)** — proxied, it answers with Cloudflare's address and ACM never
+> validates, which is the single most common way issuance stalls.
+>
+> A certificate not yet attached to anything reports `RenewalEligibility: INELIGIBLE`. That is
+> expected and clears once CloudFront is using it.
+
+Unlike the image tag, both of these are **per-machine and stable**, so they belong in
+`infra/.env.deploy` alongside the secrets.
 
 > **`ARTISTPATH_DEPLOY_IMAGE_TAG` became required on 2026-07-27** (`ARC-6`). It defaulted to
 > `latest`, which contradicts this runbook's own rule that the tag is the only record of what

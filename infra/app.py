@@ -72,6 +72,8 @@ ArtistpathStack(
         # deployed commit tag to `latest`. Required now — a deploy that cannot
         # say what it is deploying should stop.
         image_tag=_require("ARTISTPATH_DEPLOY_IMAGE_TAG"),
+        site_hostname=_require("ARTISTPATH_SITE_HOSTNAME"),
+        certificate_arn=_require("ARTISTPATH_CERTIFICATE_ARN"),
         include_service=include_service,
     ),
     env=cdk.Environment(region="us-east-1"),
