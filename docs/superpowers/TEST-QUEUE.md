@@ -23,6 +23,35 @@ the point.**
 
 ---
 
+## N/A — 2026-07-27 (evening, later) — a Gate 3 readiness review ran; the app is untouched
+
+**Nothing to exercise, and nothing is running.** No routing, no graph, no weighting, no clips, no
+buttons — **not one line of application code changed.** A journey you build now is the same journey
+as this morning's, and the website is untouched. Both ports were checked and are free; nothing was
+started.
+
+**What happened.** Four reviewers went over the whole system to answer one question: *what breaks
+when the app goes from a handful of people behind a password to anyone on the internet?* They found
+real things, but **all of them are decisions and future work, not something to press today.** The
+headline: quite a lot is currently kept safe only by the password, and opening the app to the public
+is the act of removing it. None of that changes the app you use now.
+
+**Three of the findings are yours to decide, and they are written up for you** (in the review record
+below), not queued here because there is nothing to *do* in the app:
+
+- Whether to put a proper web address in front of the site before sharing it widely — cheap now,
+  impossible to retrofit for links already sent.
+- What the app should record about the strangers who use it, and whether it should say so.
+- **Whether to borrow an iPhone for ten minutes.** There is a short, ordered script that would settle
+  the one thing no test and no Android phone can: whether music plays at all on an iPhone. The first
+  tap answers it.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about the app
+itself changes.
+
+*Detail: `docs/superpowers/findings/2026-07-27-gate2-gate3-team-review.md` (§6 is the decisions
+and the borrowed-iPhone script; §7 the live load test). PRs #37, #38.*
+
 ## N/A — 2026-07-27 (evening) — the project files moved house; the app did not change
 <!-- No "(latest)": per the convention below, only a live QUEUED entry carries it. This is N/A. -->
 
