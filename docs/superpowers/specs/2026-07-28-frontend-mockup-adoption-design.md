@@ -185,9 +185,22 @@ later regardless — firing them during the load moves them earlier and they are
 
 Fixed at definition time so wording cannot be reshaped later to fit an implementation.
 
+> **⚠ Two landing strings were changed by the OWNER on 2026-07-28, after the work shipped.**
+> Recorded here rather than rewritten, because the point of this table is that it is frozen:
+> the rule it enforces is that a *session* cannot reshape copy, not that the owner cannot.
+> - **Landing footer: REMOVED.** The decorative three-dot rail above it stays.
+>   `LandingPage.test.tsx` now asserts the line is *absent*, so restoring it is deliberate.
+> - **Landing intro** was `Name two artists and hear a smooth path between them.` It is now
+>   `Name two artists and hear the route between them. Each step lands on someone their
+>   listeners share, so one sound eases into the next.` The brief was to explain the **how**
+>   at user level and tie to coherence — and explicitly **not** to promise obscurity, because
+>   the first path between two famous artists is expected to be famous
+>   (`WHAT-GOOD-LOOKS-LIKE.md` value 9). Obscurity is introduced by the bypass explainer on
+>   the journey page, which is unchanged.
+
 | Where | String |
 |---|---|
-| Landing footer | `Path length varies — 30 seconds each` |
+| Landing footer | ~~`Path length varies — 30 seconds each`~~ — **removed, see above** |
 | Loading heading | `{from} → {to}` |
 | Loading subtitle | `Listening for the steps between them…` |
 | Loading footer | `This usually takes a few seconds` |

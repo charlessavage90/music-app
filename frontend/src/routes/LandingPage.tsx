@@ -33,8 +33,15 @@ export function LandingPage() {
       <h1 className="text-[27px] sm:text-[38px] font-medium tracking-[-.02em] sm:tracking-[-.025em] leading-[1.1] sm:leading-[1.05]">
         Artist Path
       </h1>
+      {/* Owner-chosen 2026-07-28. Explains the HOW at user level and stops
+          short of promising obscurity: the first path between two famous
+          artists is expected to be famous, and the bypass explainer on the
+          journey page is where digging is introduced. "Listeners share" is
+          literal — edges come from ListenBrainz similar-artists and every edge
+          in the artifact is behavioural. */}
       <p className="mt-3 sm:mt-3.5 max-w-[290px] sm:max-w-[400px] text-[14.5px] sm:text-base leading-[1.5] text-[var(--color-muted)] text-pretty">
-        Name two artists and hear a smooth path between them.
+        Name two artists and hear the route between them. Each step lands on someone their
+        listeners share, so one sound eases into the next.
       </p>
 
       <div className="mt-11 sm:mt-10 flex flex-col gap-5">
@@ -55,8 +62,9 @@ export function LandingPage() {
 
       {/* A miniature of the journey the app builds: your artist, someone in
           between, their artist. Decorative — the three dots carry the same
-          colours as the two bypass signals and the rail. */}
-      <div className="mt-auto flex flex-col items-center gap-3.5 pt-10">
+          colours as the two bypass signals and the rail. The clip-length line
+          that sat under this was removed 2026-07-28 at the owner's request. */}
+      <div className="mt-auto flex flex-col items-center pt-10">
         <div className="flex items-center gap-2" aria-hidden>
           <span className="block size-[5px] rounded-full bg-[var(--color-away)]" />
           <span className="block h-px w-[22px] bg-[var(--color-border)]" />
@@ -64,9 +72,6 @@ export function LandingPage() {
           <span className="block h-px w-[22px] bg-[var(--color-border)]" />
           <span className="block size-[5px] rounded-full bg-[var(--color-dig)]" />
         </div>
-        <p className="text-[11.5px] tracking-[.02em] text-[var(--color-label)]">
-          Path length varies — 30 seconds each
-        </p>
       </div>
     </main>
   );

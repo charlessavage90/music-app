@@ -46,11 +46,10 @@ export function JourneyList({ artists, stopRule, onBypass, ref }: Props) {
 
   return (
     <>
+      {/* The rail spans the full height of the journey, and there is no arrow
+          at its foot — both at the owner's request, 2026-07-28. */}
       <ol className="relative flex flex-col gap-3.5 pl-[19px]">
-        <span className="absolute left-0 top-1.5 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[var(--color-accent)] via-[var(--color-rail-mid)] to-[var(--color-dig)]" />
-        <span className="absolute left-[-2px] bottom-0 text-[10px] leading-none text-[var(--color-dig)]" aria-hidden>
-          ▾
-        </span>
+        <span className="absolute left-0 inset-y-0 w-[3px] rounded-full bg-gradient-to-b from-[var(--color-accent)] via-[var(--color-rail-mid)] to-[var(--color-dig)]" />
         {artists.map((artist, i) => (
           <li key={artist.mbid}>
             <ArtistCard
