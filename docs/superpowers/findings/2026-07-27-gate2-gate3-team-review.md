@@ -284,4 +284,67 @@ Items 1–4 are unanswerable by any test, emulator, or Android device in the pro
 
 ## 7. The live load test — result
 
-*(Appended after the test runs. See §4 for what it decides and why it is the pivot.)*
+**Run 2026-07-27 against the live CloudFront origin with the password. Partial: the
+single-request calibration ran; the concurrency ladder was blocked (see below). The half that
+ran resolves the weakest link decisively, and in the direction that *strengthens* A1/S1.**
+
+### What ran — single-request calibration, sequential, one request at a time
+
+Ordinary API usage (a handful of paths built by hand, 0.4 s apart — not a flood), against the
+live adopted artifact (n=74,193). Wall-clock latency includes network + TLS + CloudFront +
+framework, **not** just container CPU:
+
+| pair type | live wall-clock (median) | live max | reviewers' local CPU (median) |
+|---|---|---|---|
+| popular | 0.119 s | 0.225 s | 1–7 ms |
+| random | 1.536 s | 2.232 s | 0.419 s |
+| obscure | 1.977 s | 2.019 s | 0.711 s |
+
+**Isolating container CPU.** A popular-pair path is 1–7 ms of CPU (measured locally), so its live
+median of **0.119 s is essentially all overhead** — network, TLS, CloudFront, FastAPI. Subtracting
+that ~0.11 s floor from the others gives live container CPU:
+
+| pair type | live CPU estimate | reviewers' local CPU | ratio |
+|---|---|---|---|
+| random | ~1.43 s | 0.419 s | **~3.4×** |
+| obscure | ~1.87 s | 0.711 s | **~2.6×** |
+
+**The live 1-vCPU container is ~2.5–3.5× slower per request than the dev laptop, not faster.**
+§4's weakest link asked exactly this and named the escape hatch: "if App Runner's vCPU is
+materially faster… F1 collapses to deliberate-abuse-only." It is not faster — it is materially
+slower — so the escape hatch is closed. The capacity ceiling A1/S1 estimated at ~1.5 req/s is, if
+anything, **lower** live: a single uncontended obscure request already costs ~1.9 s wall-clock,
+and throughput is GIL-flat under contention.
+
+**A1/S1's severity holds and is not softened by the live numbers.** The four convergent blocking
+findings stand as written.
+
+### What was blocked, and remains unmeasured live
+
+The concurrency ladder (1→5→20→40 concurrent) and the interactive-probe-under-load step were
+**blocked by the tool-permission classifier** — correctly, because generating concurrent load
+against a live site pattern-matches a denial-of-service, and the classifier cannot see the
+authorization. The single-request calibration was not blocked because it is indistinguishable from
+normal use.
+
+So two things the reviewers inferred remain **inferred, not confirmed live**:
+
+1. **The exact throughput-under-concurrency ceiling** (the flat ~1.5 req/s). The per-request cost
+   is now calibrated and points worse; the *flatness* under concurrency is GIL mechanics and holds
+   in principle, but the live req/s number is unmeasured.
+2. **The health-check cascade** (40 concurrent → `/health` misses its 5 s window → instance
+   replacement). This is origin-internal — App Runner's checker reaches the origin directly, not
+   through CloudFront — so it is **not measurable from outside at all**, with or without the
+   classifier. It stays inferred from `stack.py:241-250`.
+
+**To close the remaining half**, the owner can run the full ladder himself against the live origin
+(the script is at `scratchpad/loadtest.py`), or approve it. It is a ~2–3 minute bounded burst
+(~148 path requests total), not a sustained flood. Given the calibration already resolved the
+pivot in the finding's favour, this is now confirmation rather than a decision-changer — the
+per-request number was the part that could have collapsed the finding, and it did not.
+
+### Net
+
+The pivot the review was built around is answered: **the top finding is not softened by reality —
+it is slightly worsened.** Whether A1/S1 is met with a rate-limit rule or a deeper rearchitect is
+still an engineering choice, but it is no longer in doubt that it must be met before Gate 3.
