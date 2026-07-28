@@ -194,7 +194,19 @@ def create_app(
         )
 
     @app.get("/health")
-    def health() -> HealthOut:
+    async def health() -> HealthOut:
+        # `async def`, deliberately and load-bearingly (G3-A1). A sync def runs
+        # in Starlette's thread pool — the SAME pool as build_path — so under
+        # concurrent path requests /health queues rather than answers: the
+        # Gate 2->3 review measured 22.09 s at 40 concurrent, against App
+        # Runner's 5 s health-check timeout. Five misses replace the instance,
+        # its load shifts to the other one, which fails identically. The site
+        # did not degrade under load, it cycled.
+        #
+        # Safe on the event loop because this reads three in-memory attributes
+        # and does no I/O. search_artists and build_path do NOT qualify: on the
+        # event loop they would block every other request.
+        #
         # Deliberately NOT under /api — App Runner's health checker reaches the
         # origin directly, not through the CloudFront /api/* behaviour.
         return HealthOut(

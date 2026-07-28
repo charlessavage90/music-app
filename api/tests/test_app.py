@@ -1,6 +1,11 @@
+import asyncio
+import inspect
 import json
+import threading
 
+import anyio
 from fastapi.testclient import TestClient
+from httpx import ASGITransport, AsyncClient
 
 from artistpath_api.app import create_app
 from artistpath_api.clips import ClipResolver, InMemoryClipCache
@@ -352,3 +357,63 @@ def test_an_ordinary_two_artist_request_still_works():
         },
     )
     assert r.status_code == 200
+
+
+# --- /health off the thread pool (PW-2: G3-A1's feedback loop) ---------------
+
+
+def test_health_is_a_coroutine_so_it_never_queues_for_a_thread():
+    # /health shares Starlette's thread pool with build_path. The Gate 2->3
+    # review measured it at 22.09 s under 40 concurrent path requests, against
+    # App Runner's 5 s health-check timeout — and five misses replace the
+    # instance, whose load shifts to the other one, which fails the same way.
+    # The site did not degrade under load, it cycled.
+    #
+    # Asserted by introspection AS WELL AS behaviourally below, because the
+    # regression is a single keyword: `async def` reverted to `def` is
+    # invisible to every test that does not saturate the pool first.
+    client, _ = _client()
+    route = next(r for r in client.app.routes if getattr(r, "path", "") == "/health")
+    assert inspect.iscoroutinefunction(route.endpoint), (
+        "/health is a sync def and will queue behind saturated path requests"
+    )
+
+
+def test_health_answers_while_every_thread_pool_slot_is_occupied():
+    """The behavioural half: the property, not the keyword.
+
+    Occupies every thread-pool slot with a blocking sync endpoint, then asks
+    for /health. A sync /health cannot answer until a slot frees — the 22.09 s
+    the review measured. A coroutine answers off the event loop regardless.
+    """
+    client, _ = _client()
+    app = client.app
+
+    release = threading.Event()
+
+    @app.get("/blocking-probe")
+    def blocking_probe():  # sync on purpose: it consumes a pool slot
+        release.wait(timeout=10)
+        return {"ok": True}
+
+    async def exercise():
+        limiter = anyio.to_thread.current_default_thread_limiter()
+        original = limiter.total_tokens
+        limiter.total_tokens = 2  # saturate cheaply rather than spawning 40
+        try:
+            async with AsyncClient(
+                transport=ASGITransport(app=app), base_url="http://test"
+            ) as ac:
+                blockers = [
+                    asyncio.create_task(ac.get("/blocking-probe")) for _ in range(2)
+                ]
+                await asyncio.sleep(0.2)  # let both claim their slot
+                r = await asyncio.wait_for(ac.get("/health"), timeout=2.0)
+                assert r.status_code == 200
+                release.set()
+                await asyncio.gather(*blockers)
+        finally:
+            release.set()
+            limiter.total_tokens = original
+
+    asyncio.run(exercise())
