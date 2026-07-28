@@ -10,9 +10,8 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-27, after the phone run passed and the OneDrive migration was
-planned.** ⚠ **This was a partial update, not a `closeout`** — see "What is owed" at the
-bottom.
+**Last updated: 2026-07-27, at the closeout after the phone run passed and the OneDrive
+migration was planned.** See "Closeout state" below for what was and was not run.
 
 ---
 
@@ -85,13 +84,22 @@ would have fired on every future deploy. Execution log §3.1.
 | The `--prune` publish pass | The next deploy after this one. Skipped at cutover because the bucket was empty. |
 | `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is **inert** — `index.html` never sets `viewport-fit=cover`, so it is 0 on every device | **Only if someone adds `viewport-fit=cover`.** Latent, not live: the default viewport already avoids the inset, which is why the phone run passed. No fix proposed. Found 2026-07-27. |
 
-## What is owed — this was a partial update, not a `closeout`
+## Closeout state — run 2026-07-27, and this section is the result
 
-Recorded so the next session does not mistake this file for a closed-out one. **Not done:**
-the deferral re-test sweep (`A3`), the orphaned-module and vacuous-test sweep, `D6`'s
-standing-layer measurement, and the doc-auditor step (`B1`) — though `scripts/docs-lint.sh`
-passes. The `TEST-QUEUE` entry, the handoff and this file were updated because they could not
-wait; everything else a `closeout` does is still owed.
+**⚠ This section said a closeout had not been run. It was written mid-session and then not
+revisited, and the closeout ran afterwards — so it understated what was done. Corrected by
+the doc audit that same closeout dispatched.**
+
+**Done:** `A3` (every deferral condition re-tested against reality, not merely confirmed to
+exist — see the table above), `A5` (both ports swept; nothing listening, nothing started),
+`B1` (**`docs-lint` passes and `doc-auditor` ran, scoped to the diff — it found three HIGH
+defects, all fixed**), `B4`, `B5`, `C1`, `D1`, `D3`, `D4` (**builder 115, api 195, infra 58,
+frontend 80 — all green**), `D5` (PR #35), `D6` (**unconditional layer delta 0**; conditional
++14 lines in `memory/`).
+
+**Genuinely still owed:** `B2` (reachability) and `B3` (vacuous-test spot check). Both want a
+finished artifact and this session produced no code, so they travel with the migration work
+rather than being run against nothing. `A4` is inapplicable — no config knob was added.
 
 ---
 

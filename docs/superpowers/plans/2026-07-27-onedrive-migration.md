@@ -75,7 +75,7 @@ of these fail silently.
 | `MIG-6` | **OneDrive fights the operation**, or deletion of the old tree propagates to the cloud before the new tree is proven. | Medium | Medium | Loud. Mitigated by pausing sync (Task 1) and by never using `move`. |
 | `MIG-7` | **Some archive files are OneDrive placeholders** (`RecallOnDataAccess`), so a copy produces empty stubs. | **Low** — a 2,000-file sample showed 0 dehydrated, attribute `0x420` = `Archive`+`ReparsePoint` only | Severe if true | **Silent.** Folded into `MIG-1`'s byte-total check, which does not rely on the sample. |
 | `MIG-8` | **Virtualenvs break.** Windows venvs embed absolute paths in their shims; they are not relocatable. | **Certain** | Trivial | Loud and immediate. Recreated in Task 5, not copied. |
-| `MIG-9` | **16 frozen `builder/analysis/` scripts stop resolving** — they hardcode `C:\Users\charl\OneDrive\...`. | **Certain** | Low | Silent until one is run. **Accepted** — see §4. |
+| `MIG-9` | **26 frozen `builder/analysis/` scripts stop resolving** — they hardcode `C:\Users\charl\OneDrive\...`. | **Certain** | Low | Silent until one is run. **Accepted** — see §4. |
 | `MIG-10` | **Documentation still says "the project lives under OneDrive"** in ~8 places including `CLAUDE.md`, both rituals and three READMEs. | **Certain** if unhandled | Low, but it is the standing context layer | Loud to a reader, silent to a tool. Task 12. |
 
 **Not risks, checked and dismissed:**
@@ -83,8 +83,8 @@ of these fail silently.
 - `ApiConfig.graph_path` is **relative** (`"../builder/scratch/graph-t15-tiebreakfix.bin"`),
   so the API default survives the move untouched.
 - Disk space. C: has 1030 GB free against a 2.4 GB tree.
-- Path length. `C:\dev\music-app` is **32 characters shorter** than the current root, so every
-  `MAX_PATH` margin improves.
+- Path length. `C:\dev\music-app` is **33 characters shorter** than the current root (49 → 16),
+  so every `MAX_PATH` margin improves.
 
 ## 2. Two things that get better, and are worth stating as objectives
 
@@ -154,7 +154,9 @@ and are the pass condition.
 *Verify:* four green runs, plus `npm run build` and `npm run lint`.
 
 **Task 7 — prove it serves the same graph.** Boot the API from the new tree and read
-`/health`, which reports `source_sha256`.
+`/health`. **The wire field is `graph_sha256`** (`api/…/models.py`, `HealthOut`) — not
+`source_sha256`, which is the internal `GraphStore` attribute it is populated from and does
+not appear in the response.
 *Verify:* it reports `4cb84ef9…`. This closes the loop from artifact bytes through to a
 running service without trusting any intermediate step.
 
@@ -220,6 +222,14 @@ found nothing.
 `.claude/skills/session-start/SKILL.md` (both the worktree guidance and the `UV_LINK_MODE`
 trap) all assert the project is under OneDrive.
 
+> **Project memory is on this list too, and it is the easy one to miss.**
+> `memory/env-onedrive-uv.md:11` says "The project lives under `C:\Users\charl\OneDrive\...`"
+> verbatim, and `MEMORY.md`'s index line points at it. **Task 8 renames the memory
+> *directory*, which makes it feel handled — its *contents* are a separate gap.** That file is
+> also where `UV_LINK_MODE=copy` is justified, so it is the document the test above actually
+> settles. Found by the doc audit, 2026-07-27; it was absent from this list, which is a defect
+> of omission and the class no grep finds.
+
 > **Test `UV_LINK_MODE=copy` before removing it from anywhere.** It exists because OneDrive
 > breaks hardlinks; that reason is gone, but "the reason is gone" is an inference and this
 > project does not remove a working guard on one. Run `uv sync` without it, confirm, then
@@ -230,8 +240,20 @@ trap) all assert the project is under OneDrive.
 
 ## 4. Accepted, not fixed
 
-**`MIG-9` — the 16 frozen `builder/analysis/` scripts will stop resolving.** Owner's
+**`MIG-9` — the 26 frozen `builder/analysis/` scripts will stop resolving.** Owner's
 decision, 2026-07-27: leave them broken and record it.
+
+> **The count was 16 in the first version of this plan and 16 is wrong.** Recorded because the
+> error is more instructive than the figure. The original grep used a regex alternation across
+> both slash styles; the backslash branch silently matched **nothing**, so the number returned
+> was the forward-slash form alone and looked entirely plausible. The doc audit caught that it
+> was wrong — and proposed 27, which is also wrong.
+>
+> **Count each variant separately with `grep -F`, which has no escaping to get wrong:**
+> 16 forward-slash + 10 backslash, **no overlap, 26 total**, across seven directories.
+> This is the project's own standing rule about instruments — a green result from one that has
+> never been shown to go red is not evidence — applied to a one-line grep, which is exactly
+> where it is easiest to skip.
 
 The tension is real and is recorded here so nobody rediscovers it as a defect: `CLAUDE.md`
 keeps read-only aliases in *shipped* code specifically so these scripts keep executing. After

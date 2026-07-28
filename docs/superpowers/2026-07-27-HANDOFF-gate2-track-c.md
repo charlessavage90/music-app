@@ -25,6 +25,12 @@ next actions.** Two of that note's statements are now spent rather than wrong �
 
 ## Your job: probably nothing yet
 
+> **⚠ SPENT — this section is no longer the next action.** The phone run happened on
+> 2026-07-27 and passed on all six checks. Current next action:
+> [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md).
+> *(Inline marker added because this document is over 100 lines and a reader arriving from a
+> citation would not see the banner at the top.)*
+
 **The next action is the owner's, and it is to use the app on a phone.** The queued entry at
 the top of [`TEST-QUEUE.md`](TEST-QUEUE.md) is the first in this file's history with a URL in
 it, and it folds in the mobile section deferred since 2026-07-26 whose trigger has now fired.

@@ -43,6 +43,12 @@ Everything after deletes the rollback.
 - **The archive is the asset, not the artifacts.** 75,000 files, 1.1 GB, ~4¼ h to re-crawl and
   **not reproducible**. Verify it by bytes and count, never by eye. A count match with a byte
   mismatch is the placeholder failure and is a stop.
+- **`MIG-9`'s count was wrong in the first version of this plan, and the way it was wrong is
+  worth more than the number.** It said 16; it is **26**. A regex alternation across two slash
+  styles matched **nothing** on the backslash branch and returned a plausible figure. The doc
+  audit caught it was wrong and proposed 27, also wrong. **Count each variant separately with
+  `grep -F`.** This plan asks you to verify a 75,000-file copy by count and bytes — run that
+  check the same way, because this is exactly how it would fail silently.
 
 ## What I know that is not in the durable record
 
@@ -72,10 +78,17 @@ Everything after deletes the rollback.
 
 ## What is owed that this session did not do
 
-- **A full `closeout` was not run.** This note and the `NEXT.md` edit are the parts that could
-  not wait. Not done: the deferral re-test sweep (`A3`), the orphaned-module and vacuous-test
-  sweep, `D6`'s standing-layer measurement, and the doc-auditor step (`B1`) — though
-  `scripts/docs-lint.sh` passes.
+> **⚠ This section was written before the closeout ran and then corrected after it.** It said
+> a closeout had not happened; one did. `NEXT.md`'s "Closeout state" section owns the full
+> account — read that, not this. **Only `B2` and `B3` are genuinely still owed**, and both
+> travel with the migration work because they need a finished artifact and this session
+> produced no code.
+
+- **`B1` ran and mattered.** `docs-lint` passes, and `doc-auditor` — scoped to the diff —
+  found **three HIGH defects**, all fixed before merge. Two were in this session's own output
+  and it could not see either: `docs/README.md` briefly had **two rows both claiming to be
+  "the CURRENT handoff"**, and this section understated what had been done.
+  **The third is the one to carry forward: `MIG-9`'s script count was wrong.**
 - **The Gate 2 → 3 team review is now genuinely due to be *recommended*.** Its condition —
   "after a period of real use" — is closer to met than it has ever been, since real use has
   now happened on a real device. **It is the owner's call and was not put to him.**
