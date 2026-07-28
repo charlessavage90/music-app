@@ -1,7 +1,8 @@
 # Gate 2 → Gate 3 team review — 2026-07-27
 
-**Role: ACTIVE finding.** The record of the Gate 2 → 3 boundary review, commissioned by the
-owner on 2026-07-27 after the Gate 2 cutover and the first real phone run. Four reviewers —
+**Role: AUTHORITATIVE for its own measurements and triage.** The record of the Gate 2 → 3
+boundary review, commissioned by the owner on 2026-07-27 after the Gate 2 cutover and the first
+real phone run. Four reviewers —
 architect, security, quality, frontend — each with the code open, read-only. The graph analyst
 was **deliberately not staffed**: no scoring question is open and path quality is PAUSED, so
 staffing it would have invited work inside the pause.
@@ -117,60 +118,65 @@ currently written down nowhere.
 Severity is stated **and** whether it bites *at Gate 3 specifically* or is a general improvement
 Gate 3 does not force. `file:line` citations are the reviewers'; verify before acting.
 
+**Identifiers are namespaced `G3-`** (Gate 2→3 review), the reviewer encoded in the letter —
+`G3-A` architect, `G3-S` security, `G3-Q` quality, `G3-F` frontend. Cite them in that form: bare
+`A1`/`F2`/`C1` collide with Track 2 arms, closeout items, and the earlier reviews' own findings
+(`TR-`, `ARC-`/`SEC-`/`QUA-`/`FRO-`). Forward-only — these are fixed at first commit.
+
 ### Architecture
 
 | ID | Sev | Gate-3? | Finding |
 |---|---|---|---|
-| A1 | HIGH | blocking | Request CPU cost is caller-chosen and varies ~100–300×, on one GIL-bound process capped at 2 instances. `pathfinding.py:113-142`, sync `def` at `app.py:103`, single worker `Dockerfile:22`, `max_size=2` `stack.py:159-165`. |
-| A2 | HIGH | blocking | No rate limiting anywhere (no WAF, no CloudFront rule). The only throttle is the password, which `viewer_function.js:5-9` documents *in source* as the compensating control for the clip fan-out. |
-| A3 | HIGH | blocking | Cost ceiling and capacity ceiling are the same knob (`max_size=2`), so fixing A1 deletes the only automatic cost control. Sole detector is a 6-hour-period billing email; no throttle, no kill switch, no log retention. |
-| A4 | HIGH | blocking | Under Deezer 429s, clip resolution triples its own outbound rate (`clips.py:178-184` treats 429 as a miss and falls through hit→search→iTunes). No backoff, no circuit breaker. |
-| A5 | MEDIUM | irreversible | Site welded to the auto-generated CloudFront domain (`stack.py:331-333`); no custom domain, cert, or Route 53 anywhere. **The one item where the cost of deferring is unbounded and the cost of acting now is near zero.** |
-| A6 | MEDIUM | no | APG1 consistency check covers only `mbids`; the exact skew its own comment describes (`popularity` short) loads clean and 500s per-artist. Neighbour ids unchecked. Fix: three length asserts. |
-| A7 | MEDIUM | no | Nothing tests the two APG1 parsers against each other; a builder-side layout change surfaces first at production boot (fails closed → bad deploy, not corruption). |
-| A8 | MEDIUM | no | Fixed mutable S3 graph key: a wrong upload detonates at the next instance replacement, not at upload time. Content-addressed keys would make it atomic. |
-| A9 | MEDIUM | no | CloudFront caches nothing under `/api/*`, including `/api/artists/search`, which is a pure function of an immutable graph — the legitimate half of the keystroke load is cacheable. |
+| G3-A1 | HIGH | blocking | Request CPU cost is caller-chosen and varies ~100–300×, on one GIL-bound process capped at 2 instances. `pathfinding.py:113-142`, sync `def` at `app.py:103`, single worker `Dockerfile:22`, `max_size=2` `stack.py:159-165`. |
+| G3-A2 | HIGH | blocking | No rate limiting anywhere (no WAF, no CloudFront rule). The only throttle is the password, which `viewer_function.js:5-9` documents *in source* as the compensating control for the clip fan-out. |
+| G3-A3 | HIGH | blocking | Cost ceiling and capacity ceiling are the same knob (`max_size=2`), so fixing G3-A1 deletes the only automatic cost control. Sole detector is a 6-hour-period billing email; no throttle, no kill switch, no log retention. |
+| G3-A4 | HIGH | blocking | Under Deezer 429s, clip resolution triples its own outbound rate (`clips.py:178-184` treats 429 as a miss and falls through hit→search→iTunes). No backoff, no circuit breaker. |
+| G3-A5 | MEDIUM | irreversible | Site welded to the auto-generated CloudFront domain (`stack.py:331-333`); no custom domain, cert, or Route 53 anywhere. **The one item where the cost of deferring is unbounded and the cost of acting now is near zero.** |
+| G3-A6 | MEDIUM | no | APG1 consistency check covers only `mbids`; the exact skew its own comment describes (`popularity` short) loads clean and 500s per-artist. Neighbour ids unchecked. Fix: three length asserts. |
+| G3-A7 | MEDIUM | no | Nothing tests the two APG1 parsers against each other; a builder-side layout change surfaces first at production boot (fails closed → bad deploy, not corruption). |
+| G3-A8 | MEDIUM | no | Fixed mutable S3 graph key: a wrong upload detonates at the next instance replacement, not at upload time. Content-addressed keys would make it atomic. |
+| G3-A9 | MEDIUM | no | CloudFront caches nothing under `/api/*`, including `/api/artists/search`, which is a pure function of an immutable graph — the legitimate half of the keystroke load is cacheable. |
 
 ### Security
 
 | ID | Sev | Gate-3? | Finding |
 |---|---|---|---|
-| S1 | HIGH | blocking | Same as A1, measured as a hard ~1.5 req/s ceiling for the whole internet + the health-check cascade (40 concurrent → `/health` 22 s). Total self-sustaining outage for the cost of 40 sockets. |
-| S2 | HIGH | blocking | Clip endpoint is an unauthenticated outbound proxy: every request, cache hit included, fires a live Deezer/iTunes call from the shared egress IP (`clips.py:201-204`, by design per `config.py:94-98`). One `while true` loop silences clips for everyone. |
-| S3 | MEDIUM | blocking | `PathRequest.sources` has no `max_length`; a 70 MB array is fully materialised before the 2-source check. `ExclusionIn.id` likewise unconstrained; no body-size limit anywhere. |
-| S4 | MEDIUM | no | Unbounded attacker strings written verbatim to CloudWatch (`app.py:130`), no retention, billed per GB. Secondary: raw bypass counts let an outsider poison the Phase 7 "ground truth" telemetry. |
-| S5 | MEDIUM | no | No CloudFront access logging (diagnosis-by-probe stops working with strangers), no response-headers policy (no HSTS/CSP — and `ArtistCard.tsx:43` interpolates a remote `coverUrl` into inline CSS), no WAF. |
-| S6 | LOW | no (pre-existing) | API container runs as root (`Dockerfile`, no `USER`). One line; contained by App Runner isolation and a near-empty instance role. |
-| S7 | LOW | operational | The password and the SPA fallback are one CloudFront function; deleting it to open Gate 3 403s every shared link. Removal procedure unwritten. |
+| G3-S1 | HIGH | blocking | Same as G3-A1, measured as a hard ~1.5 req/s ceiling for the whole internet + the health-check cascade (40 concurrent → `/health` 22 s). Total self-sustaining outage for the cost of 40 sockets. |
+| G3-S2 | HIGH | blocking | Clip endpoint is an unauthenticated outbound proxy: every request, cache hit included, fires a live Deezer/iTunes call from the shared egress IP (`clips.py:201-204`, by design per `config.py:94-98`). One `while true` loop silences clips for everyone. |
+| G3-S3 | MEDIUM | blocking | `PathRequest.sources` has no `max_length`; a 70 MB array is fully materialised before the 2-source check. `ExclusionIn.id` likewise unconstrained; no body-size limit anywhere. |
+| G3-S4 | MEDIUM | no | Unbounded attacker strings written verbatim to CloudWatch (`app.py:130`), no retention, billed per GB. Secondary: raw bypass counts let an outsider poison the Phase 7 "ground truth" telemetry. |
+| G3-S5 | MEDIUM | no | No CloudFront access logging (diagnosis-by-probe stops working with strangers), no response-headers policy (no HSTS/CSP — and `ArtistCard.tsx:43` interpolates a remote `coverUrl` into inline CSS), no WAF. |
+| G3-S6 | LOW | no (pre-existing) | API container runs as root (`Dockerfile`, no `USER`). One line; contained by App Runner isolation and a near-empty instance role. |
+| G3-S7 | LOW | operational | The password and the SPA fallback are one CloudFront function; deleting it to open Gate 3 403s every shared link. Removal procedure unwritten. |
 
 ### Quality
 
 | ID | Sev | Gate-3? | Finding |
 |---|---|---|---|
-| Q1 | HIGH | blocking | `build_default_app` (`app.py:195-209`) has zero coverage; three separate one-line mutations — drop the sha256 check, force `InMemoryClipCache`, drop the HTTP timeout — each pass all 448 tests. This is DEP-24 / QUA-2's shape: every guard tested, the wiring that arms them untested. |
-| Q2 | HIGH | blocking | `sync_frontend.main` free to ignore the plan it built; swapping the asset/index upload order passes all 58 infra tests including the one named for that bug, because it asserts list order not call order. FRO-1's second form. |
-| Q3 | MEDIUM | no | `/health`'s artifact-identity assertion is vacuous: `source_sha256` is `''` for every test fixture, so the assert is `'' == ''`. Hardcoding `graph_sha256=""` passes all 195 api tests. |
-| Q4 | MEDIUM | relevant | The cold-start timeout UI (`PathStatus.tsx:26-39`) and its retry counter (`usePath.ts:28,35`) are unreachable by any test; deleting either strands the first stranger of the day on a cold instance. |
-| Q5 | MEDIUM | decision | No CI (`.github/` absent — a recorded deliberate position, DEP-3/15), so the strongest tests (5 Playwright specs) are the least likely to run: excluded from `npm test`, need a hand-started API the config does not launch. |
-| Q6 | LOW-MED | no | Builder↔api APG1 lockstep has no binding test; a consistently-applied metadata key rename passes both suites and `KeyError`s at the next real boot (loud, but at deploy time). Same conclusion as A7. |
-| Q7 | LOW | no | `badpath.py` (cancelled) and `evaluation.py` (offline analysis) ship in the API image; 117 tests maintain a cancelled feature. Dead weight, deliberate per docstrings. |
-| Q8 | NIT | no | Stale count in `test_frozen_script_aliases.py:5` — docstring says "Sixteen of those scripts import the shipped classes"; measured now, **53** files under `builder/analysis/` import `artistpath_api` (the "four import `hub_node_set`" half is correct). Same miscount class the migration plan §4 recorded ("read 16 until corrected"); count with `grep -F` per variant. Side note from the same reviewer: `builder/tests/fixtures/graph-fixture.bin` is a 124 KB committed binary **no builder test reads** (only the api copy is read). |
+| G3-Q1 | HIGH | blocking | `build_default_app` (`app.py:195-209`) has zero coverage; three separate one-line mutations — drop the sha256 check, force `InMemoryClipCache`, drop the HTTP timeout — each pass all 448 tests. This is DEP-24 / QUA-2's shape: every guard tested, the wiring that arms them untested. |
+| G3-Q2 | HIGH | blocking | `sync_frontend.main` free to ignore the plan it built; swapping the asset/index upload order passes all 58 infra tests including the one named for that bug, because it asserts list order not call order. FRO-1's second form. |
+| G3-Q3 | MEDIUM | no | `/health`'s artifact-identity assertion is vacuous: `source_sha256` is `''` for every test fixture, so the assert is `'' == ''`. Hardcoding `graph_sha256=""` passes all 195 api tests. |
+| G3-Q4 | MEDIUM | relevant | The cold-start timeout UI (`PathStatus.tsx:26-39`) and its retry counter (`usePath.ts:28,35`) are unreachable by any test; deleting either strands the first stranger of the day on a cold instance. |
+| G3-Q5 | MEDIUM | decision | No CI (`.github/` absent — a recorded deliberate position, DEP-3/15), so the strongest tests (5 Playwright specs) are the least likely to run: excluded from `npm test`, need a hand-started API the config does not launch. |
+| G3-Q6 | LOW-MED | no | Builder↔api APG1 lockstep has no binding test; a consistently-applied metadata key rename passes both suites and `KeyError`s at the next real boot (loud, but at deploy time). Same conclusion as G3-A7. |
+| G3-Q7 | LOW | no | `badpath.py` (cancelled) and `evaluation.py` (offline analysis) ship in the API image; 117 tests maintain a cancelled feature. Dead weight, deliberate per docstrings. |
+| G3-Q8 | NIT | no | Stale count in `test_frozen_script_aliases.py:5` — docstring says "Sixteen of those scripts import the shipped classes"; measured now, **51** `.py` files under `builder/analysis/` import `artistpath_api` by an actual import statement (53 *mention* it, 2 of those in comments; the "four import `hub_node_set`" half is correct). Same miscount class the migration plan §4 recorded ("read 16 until corrected"); count with `grep -F` per variant. Side note from the same reviewer: `builder/tests/fixtures/graph-fixture.bin` is a 124 KB committed binary **no builder test reads** (only the api copy is read). |
 
 ### Frontend
 
 | ID | Sev | Gate-3? | Finding |
 |---|---|---|---|
-| F1 | HIGH | blocking | Any clip failure ends in `clear()` — bottom bar vanishes, "now playing" gone, no message, no retry. Three distinct failure routes (`Player.ts:49-51`, `useClip.ts:45,51`, `usePlayer.ts:74-76`) look identical to the user. |
-| F2 | HIGH | blocking if confirmed | `play()` is never called in the tap's synchronous turn (`usePlayer.ts:49` awaits a URL first) — the exact thing iOS Safari rejects. Worst reading: no clip ever plays on iPhone and the app never says why. **One tap on a real device confirms or kills it.** |
-| F3 | MED-HIGH | relevant | A shared link truncated in transit yields a *different journey* silently — the server skips unknown ids (`app.py:38-39`) and the frontend never notices. Sharing is the Gate 3 distribution mechanism. |
-| F4 | MEDIUM | relevant | With a screen reader/keyboard the journey is 8 identically-named buttons; a bypass press drops focus to `body` with no announcement; search results and errors are never announced. Three aria attributes in the whole app. |
-| F5 | MEDIUM | no | "Find path", "Clear exclusions", "Try again" render at 2.75 : 1 (measured) — the buttons a first-timer and an error-stranded user must find are the least readable elements on screen. |
-| F6 | MEDIUM | no | The search dropdown never closes on blur/outside-click/Escape and covers the "To" field; the first interaction anyone has can select an artist they'd rejected. |
-| F7 | LOW-MED | relevant | A shared link shows a near-empty page for up to 20 s without naming the two artists; and with the gate gone, every link previews identically (constant `<title>`, no OG tags). |
-| F8 | LOW | no | Play/pause display is driven by app bookkeeping, not audio events — an incoming call / tab switch / Bluetooth pause stops sound while the UI still says "now playing". No MediaSession metadata. |
-| F9 | LOW | no | `ApiError` discards the server's message, so same-artist (422) and the 201st-bypass cap arrive as the generic "Something went wrong". |
-| F10 | LOW | no | Audio keeps playing through the browser Back button — the one control the project documents as the bypass undo. |
-| F11 | LOW | no | "No preview available" conflates three causes and never retries for the page's life. |
+| G3-F1 | HIGH | blocking | Any clip failure ends in `clear()` — bottom bar vanishes, "now playing" gone, no message, no retry. Three distinct failure routes (`Player.ts:49-51`, `useClip.ts:45,51`, `usePlayer.ts:74-76`) look identical to the user. |
+| G3-F2 | HIGH | blocking if confirmed | `play()` is never called in the tap's synchronous turn (`usePlayer.ts:49` awaits a URL first) — the exact thing iOS Safari rejects. Worst reading: no clip ever plays on iPhone and the app never says why. **One tap on a real device confirms or kills it.** |
+| G3-F3 | MED-HIGH | relevant | A shared link truncated in transit yields a *different journey* silently — the server skips unknown ids (`app.py:38-39`) and the frontend never notices. Sharing is the Gate 3 distribution mechanism. |
+| G3-F4 | MEDIUM | relevant | With a screen reader/keyboard the journey is 8 identically-named buttons; a bypass press drops focus to `body` with no announcement; search results and errors are never announced. Three aria attributes in the whole app. |
+| G3-F5 | MEDIUM | no | "Find path", "Clear exclusions", "Try again" render at 2.75 : 1 (measured) — the buttons a first-timer and an error-stranded user must find are the least readable elements on screen. |
+| G3-F6 | MEDIUM | no | The search dropdown never closes on blur/outside-click/Escape and covers the "To" field; the first interaction anyone has can select an artist they'd rejected. |
+| G3-F7 | LOW-MED | relevant | A shared link shows a near-empty page for up to 20 s without naming the two artists; and with the gate gone, every link previews identically (constant `<title>`, no OG tags). |
+| G3-F8 | LOW | no | Play/pause display is driven by app bookkeeping, not audio events — an incoming call / tab switch / Bluetooth pause stops sound while the UI still says "now playing". No MediaSession metadata. |
+| G3-F9 | LOW | no | `ApiError` discards the server's message, so same-artist (422) and the 201st-bypass cap arrive as the generic "Something went wrong". |
+| G3-F10 | LOW | no | Audio keeps playing through the browser Back button — the one control the project documents as the bypass undo. |
+| G3-F11 | LOW | no | "No preview available" conflates three causes and never retries for the page's life. |
 
 ---
 
@@ -178,12 +184,12 @@ Gate 3 does not force. `file:line` citations are the reviewers'; verify before a
 
 **Both capacity reviewers flagged the same one, unprompted: every timing is from a Windows dev
 laptop, not a 1-vCPU App Runner container.** The *shape* — flat throughput, linear latency growth,
-GIL serialisation — holds anywhere and is what A1/S1 rest on. The absolute per-request cost could
+GIL serialisation — holds anywhere and is what G3-A1/G3-S1 rest on. The absolute per-request cost could
 differ by ~2× either way.
 
 **Both converged on the same falsification test, and it is the cheapest decisive experiment
 available:** run the concurrency ladder against the live CloudFront origin (with the password) and
-read `/health` latency at 40 concurrent. Ten minutes. It decides whether A1/S1 is "add a
+read `/health` latency at 40 concurrent. Ten minutes. It decides whether G3-A1/G3-S1 is "add a
 rate-limit rule" or "rearchitect", and the roadmap records that concurrency has **never** been
 measured against the real deployment.
 
@@ -191,7 +197,7 @@ Secondary: the health-check *cascade* half is inferred from `stack.py:241-250`, 
 against App Runner's documented behaviour; if the response is gentler than instance replacement,
 that half is wrong. The capacity half is not.
 
-Cheaply abandoned if falsified: F2's iOS-specific half (one tap settles it), and F5's contrast
+Cheaply abandoned if falsified: G3-F2's iOS-specific half (one tap settles it), and G3-F5's contrast
 figures (computed from CSS, not sampled from a screenshot).
 
 ---
@@ -229,7 +235,7 @@ where vacuity was expected and not found:
 - **The real defect history in `TEST-QUEUE.md` is well covered** — clip-plays-wrong-artist, URL
   expiry, skip-next-card, audio-survives-navigation, pause-restart, stale-search-box,
   blank-page-no-JS, nameless-artist all have tests that would catch a recurrence. The gaps are
-  Q1/Q4 (wiring and cold-start UI) and `BYP-13` (no test can — different identifier spaces).
+  G3-Q1/G3-Q4 (wiring and cold-start UI) and `BYP-13` (no test can — different identifier spaces).
 - **iOS zoom-on-focus avoided** (16px input); autocorrect/autocapitalise/spellcheck off, accents
   normalised both sides. Deep links resolve; no-JS fallback is real and well-worded; every network
   call has a timeout; refresh mid-journey is safe.
@@ -242,14 +248,14 @@ where vacuity was expected and not found:
 
 **Owner's calls** (each stated with why it is his):
 
-- **The custom domain (A5)** — irreversible either way, window closes at publish; it trades a
+- **The custom domain (G3-A5)** — irreversible either way, window closes at publish; it trades a
   cert + DNS record now against every future shared link. What "shareable" is worth is his.
-- **Telemetry retention and a privacy notice (S4)** — every request logs the two artists, the full
+- **Telemetry retention and a privacy notice (G3-S4)** — every request logs the two artists, the full
   path, and every rejection with reason, retained forever, no notice anywhere in the SPA. Fine for
   six friends; a disclosure decision for strangers, currently unowned. What the app should collect
   about people is his.
 - **Whether to borrow an iPhone for ten minutes** — spends his time and a one-shot device; the
-  frontend reviewer's ordered script (below) settles F2 on the first tap. No test can.
+  frontend reviewer's ordered script (below) settles G3-F2 on the first tap. No test can.
 - **Whether Gate 3 proceeds on this timeline**, given the blocking set above.
 
 **Mine, and here they are** (methodology, bookkeeping, soundness — made, not tabled):
@@ -259,7 +265,7 @@ where vacuity was expected and not found:
   re-reported). The inert `safe-area-inset-bottom` deferral is correctly worded and stays; the
   frontend reviewer confirmed only a web-app manifest would make it live, and none exists.
 - **Sequencing recommendation:** run the ten-minute live-origin load test *before* planning any
-  remediation. Four blocking findings (A1/A2/A3/A4 ≈ S1/S2/S3) are one underlying issue whose
+  remediation. Four blocking findings (G3-A1/G3-A2/G3-A3/G3-A4 ≈ G3-S1/G3-S2/G3-S3) are one underlying issue whose
   severity — a week of rearchitecting vs. an afternoon adding a rate-limit rule — turns entirely on
   that one measurement. Planning first would repeat the recorded failure: a sixteen-task plan
   written to decide a question a short experiment answered.
@@ -268,16 +274,16 @@ where vacuity was expected and not found:
 
 1. **Does any clip play at all?** Open a journey, tap ▶ on the second card immediately; then wait
    5 minutes and tap ▶ on a different card. The second tap is the one that goes to the network
-   first — the F2 case. Yes/no.
+   first — the G3-F2 case. Yes/no.
 2. **Does the ringer switch silence it without saying so?** Phone on silent, tap a working card —
-   if it says "now playing" and you hear nothing, that is permanent iPhone confusion (F8).
+   if it says "now playing" and you hear nothing, that is permanent iPhone confusion (G3-F8).
 3. **Interruption:** start a clip, switch apps 10 s or take a call, return — does the card still
    claim to play, how many taps to recover.
 4. **Does the bottom bar sit under Safari's own toolbar** (not the home indicator — the deferred
    item; Safari's bottom bar specifically, which the Pixel could not exercise).
 5. **Predictive-text strip** — type "sigur ro", "mf doom"; the suggestion strip is the one thing
    code cannot suppress.
-6. **The search dropdown over the "To" field (F6)** — worst with a thumb.
+6. **The search dropdown over the "To" field (G3-F6)** — worst with a thumb.
 
 Items 1–4 are unanswerable by any test, emulator, or Android device in the project today.
 
@@ -287,7 +293,7 @@ Items 1–4 are unanswerable by any test, emulator, or Android device in the pro
 
 **Run 2026-07-27 against the live CloudFront origin with the password. Partial: the
 single-request calibration ran; the concurrency ladder was blocked (see below). The half that
-ran resolves the weakest link decisively, and in the direction that *strengthens* A1/S1.**
+ran resolves the weakest link decisively, and in the direction that *strengthens* G3-A1/G3-S1.**
 
 ### What ran — single-request calibration, sequential, one request at a time
 
@@ -312,12 +318,12 @@ that ~0.11 s floor from the others gives live container CPU:
 
 **The live 1-vCPU container is ~2.5–3.5× slower per request than the dev laptop, not faster.**
 §4's weakest link asked exactly this and named the escape hatch: "if App Runner's vCPU is
-materially faster… F1 collapses to deliberate-abuse-only." It is not faster — it is materially
-slower — so the escape hatch is closed. The capacity ceiling A1/S1 estimated at ~1.5 req/s is, if
+materially faster… G3-A1/G3-S1 collapses to deliberate-abuse-only." It is not faster — it is materially
+slower — so the escape hatch is closed. The capacity ceiling G3-A1/G3-S1 estimated at ~1.5 req/s is, if
 anything, **lower** live: a single uncontended obscure request already costs ~1.9 s wall-clock,
 and throughput is GIL-flat under contention.
 
-**A1/S1's severity holds and is not softened by the live numbers.** The four convergent blocking
+**G3-A1/G3-S1's severity holds and is not softened by the live numbers.** The four convergent blocking
 findings stand as written.
 
 ### What was blocked, and remains unmeasured live
@@ -347,5 +353,5 @@ per-request number was the part that could have collapsed the finding, and it di
 ### Net
 
 The pivot the review was built around is answered: **the top finding is not softened by reality —
-it is slightly worsened.** Whether A1/S1 is met with a rate-limit rule or a deeper rearchitect is
+it is slightly worsened.** Whether G3-A1/G3-S1 is met with a rate-limit rule or a deeper rearchitect is
 still an engineering choice, but it is no longer in doubt that it must be met before Gate 3.
