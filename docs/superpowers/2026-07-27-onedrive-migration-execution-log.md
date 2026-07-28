@@ -400,6 +400,26 @@ they are unreproducible *provenance* for it, at 4.5 MB against 1.4 GB.
 by construction (`MIG-8`), so excluding them is correct. Every other entry — VM images, disk
 images, installers, Windows system files — has **zero** matches here.
 
+### §13b — Checking the backup found a real, pre-existing failure unrelated to this project
+
+**Recorded because it is the best available argument for `MIG-3`'s framing, and it was
+accidental.** `MIG-3` exists because Backblaze coverage was **assumed rather than verified** —
+its likelihood column reads "Unknown", which is unusual in that register and was deliberate.
+
+Acting on it, the owner found Backblaze **was not backing up several files, unrelated to this
+project**. He forced a full rescan; it is now uploading **over 6 GB that had never been
+included**. `C:\dev` files were observed in the queue.
+
+**The finding is not about this project at all** — and that is the point. A risk register entry
+whose value showed up entirely outside the register's own scope. The migration's exposure was
+never the interesting part; the instrument being untested was. Had Task 11 been run on the
+assumption that "Backblaze covers this machine", the archive would have been deleted from
+OneDrive into a backup that was **silently incomplete for reasons that predate this work**.
+
+**This does NOT discharge Task 9.** A rescan in progress is not a completed upload, and the
+owner has said so explicitly. The gate is unchanged: **an upload that has finished**, not one
+that is queued or running.
+
 ## §13 — Task 9: Backblaze coverage. IN PROGRESS — the owner's, and it gates Task 11.
 
 `MIG-3` cannot be verified from here: it needs the Backblaze account. Three things, and the
