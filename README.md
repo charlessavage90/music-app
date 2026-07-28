@@ -42,9 +42,10 @@ immediately.
 
 ## Quick start
 
-The project lives under OneDrive on Windows. **Prefix every `uv` command with
-`UV_LINK_MODE=copy`** or it fails with hardlink errors. Each Python package has its own
-`.venv`; `cd` into the package first.
+The project lives at `C:\dev\music-app` on Windows (it moved off OneDrive on 2026-07-27).
+**Prefix every `uv` command with `UV_LINK_MODE=copy`** — not strictly required any more, as
+uv falls back to copying on its own, but hardlinking still fails here. Each Python package
+has its own `.venv`; `cd` into the package first.
 
 You need a graph artifact to run the API. **No graph is committed** — `.gitignore`
 excludes `builder/scratch/` and `*.bin`. On a fresh clone, copy the adopted 75k

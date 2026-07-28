@@ -100,8 +100,9 @@ git status --short && git log --oneline -3 && git branch -vv
   git worktree remove C:/Users/charl/worktrees/music-app-<purpose>   # when done
   ```
 
-  **Put it outside OneDrive** — a sibling of the main tree gets synced, and OneDrive is
-  already the reason `UV_LINK_MODE=copy` exists. Note that **gitignored files do not come
+  **The OneDrive reason for this path has expired** — the tree moved to `C:\dev` on
+  2026-07-27, so a sibling of the main tree is no longer synced and any location works. The
+  path above is kept because it is what the commands say. Note that **gitignored files do not come
   along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`. So the
   worktree goes to whichever session does not need the graph — normally the advisory one,
   which needs no setup at all if it is only reading documents. For a consulting session
@@ -127,7 +128,8 @@ git status --short && git log --oneline -3 && git branch -vv
 - **Environment traps.** Only the first is in `CLAUDE.md`; the other two live in
   `memory/deploy-environment-traps.md` and the execution logs. They are still the first
   thing that breaks:
-  - `UV_LINK_MODE=copy` on every `uv` command — OneDrive breaks hardlinks.
+  - `UV_LINK_MODE=copy` on every `uv` command — hardlinking still fails at `C:\dev`. Not
+    strictly required since the move off OneDrive (uv falls back to copying), but keep it.
   - `PYTHONIOENCODING=utf-8` on anything printing artist names.
   - Python buffers stdout when redirected here, so a long background job writes a 0-byte
     log and looks dead while running perfectly. Use `python -u` or `PYTHONUNBUFFERED=1`.

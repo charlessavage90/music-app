@@ -19,7 +19,8 @@ The frontend proxies `/api` to the Python API. Run both:
 uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
 
-> On Windows under OneDrive, prefix `uv` commands with `UV_LINK_MODE=copy`.
+> On Windows, prefix `uv` commands with `UV_LINK_MODE=copy` — hardlinking fails at
+> `C:\dev\music-app`, though uv falls back to copying by itself.
 
 **Terminal 2 — web** (from `frontend/`):
 
