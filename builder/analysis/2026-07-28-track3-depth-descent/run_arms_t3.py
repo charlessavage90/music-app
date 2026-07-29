@@ -54,9 +54,22 @@ EXPECT = "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8"
 RAMPS = {"P": 0.0, "DD-A1": 0.01, "DD-A2": 0.03, "DD-A3": 0.10}
 
 
+def in_dir(arg: str) -> Path:
+    """Resolve `arg` as a bare filename inside this directory.
+
+    `--out` names an output file *in this directory*; a separator or parent reference
+    is a mistake rather than a use case. Also closes the path-traversal finding Snyk
+    raises on the argparse -> path flow.
+    """
+    if Path(arg).name != arg or arg in ("", ".", ".."):
+        raise ValueError(f"expected a bare filename in {HERE}, got {arg!r}")
+    return HERE / arg
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default=str(HERE / "t3_paths.json"))
+    ap.add_argument("--out", default="t3_paths.json",
+                    help="output filename, in this directory")
     args = ap.parse_args()
 
     digest = hashlib.sha256(GRAPH.read_bytes()).hexdigest()
@@ -148,9 +161,9 @@ def main() -> int:
         "node_names": {str(n): store.names[n] for n in sorted(seen)},
         "node_mbids": {str(n): store.mbids[n] for n in sorted(seen)},
     }
-    Path(args.out).write_text(json.dumps(out, indent=1, ensure_ascii=False),
-                              encoding="utf-8")
-    print(f"\nwrote {args.out}  ({len(seen):,} distinct nodes across all snapshots)")
+    out_path = in_dir(args.out)
+    out_path.write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"\nwrote {out_path}  ({len(seen):,} distinct nodes across all snapshots)")
     return 0
 
 

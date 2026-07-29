@@ -48,6 +48,14 @@ C1_WINDOW = (10, 15, 20) # DD-C1's depths; the branch trigger keys on these
 TRIGGER_FRAC = 0.30      # > 30 % of C1-window cells lacking headroom => re-draw
 
 
+# Exactly two pair sets exist — the DD-P2 draw and the DD-P1 re-draw — and each has one
+# correct output. Fixing both as a literal mapping rather than taking free-form paths
+# makes a mismatched input/output pair impossible (scoring `pairs.json` into
+# `headroom_v2.json` would be silent and wrong), and it leaves no argparse -> path flow
+# for a traversal to travel down.
+PAIR_SETS = {"pairs.json": "headroom.json", "pairs_v2.json": "headroom_v2.json"}
+
+
 def bfs_hops(offsets, neighbours, allowed, src: int, dst: int) -> int | None:
     """Fewest hops src->dst using only `allowed` nodes, with the direct src->dst edge
     masked so the result is always guard-compliant (>= 1 interior)."""
@@ -73,11 +81,17 @@ def bfs_hops(offsets, neighbours, allowed, src: int, dst: int) -> int | None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pairs", default="pairs.json",
-                    help="pair-set file in this directory (pairs_v2.json for the "
-                         "post-trigger re-draw)")
-    ap.add_argument("--out", default="headroom.json")
+    ap.add_argument("--pairs", default="pairs.json", choices=sorted(PAIR_SETS),
+                    help="which pair set to score; the output name follows from it")
     args = ap.parse_args()
+    # Literal branch rather than a table lookup: both filenames are string constants in
+    # the source, so no argument text reaches a path at all. `PAIR_SETS` stays as the
+    # single declaration of which sets exist (argparse validates against it).
+    if args.pairs == "pairs_v2.json":
+        pairs_name, out_name = "pairs_v2.json", "headroom_v2.json"
+    else:
+        pairs_name, out_name = "pairs.json", "headroom.json"
+    pairs_path, out_path = HERE / pairs_name, HERE / out_name
 
     digest = hashlib.sha256(GRAPH.read_bytes()).hexdigest()
     assert digest == EXPECT, f"WRONG ARTIFACT: {digest}"      # DD-G3
@@ -103,8 +117,8 @@ def main() -> int:
         if prev is None or pop[i] > pop[prev]:
             by_name[nm] = i
 
-    doc = json.loads((HERE / args.pairs).read_text(encoding="utf-8"))
-    assert doc["artifact_sha256"] == digest, f"{args.pairs} drawn on a different artifact"
+    doc = json.loads(pairs_path.read_text(encoding="utf-8"))
+    assert doc["artifact_sha256"] == digest, f"{pairs_name} drawn on a different artifact"
     entries = [dict(e, split="analysis") for e in doc["analysis_pairs"]]
     entries += [dict(e, split="held_out") for e in doc["held_out_pairs"]]
 
@@ -206,9 +220,8 @@ def main() -> int:
         },
         "cells": results,
     }
-    (HERE / args.out).write_text(json.dumps(out, indent=1, ensure_ascii=False),
-                                 encoding="utf-8")
-    print(f"\nwrote {HERE / args.out}")
+    out_path.write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"\nwrote {out_path}")
     return 0
 
 
