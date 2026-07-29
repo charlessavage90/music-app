@@ -322,6 +322,47 @@ never be read off it. The arms are run as pre-registered; DD-C5 (payload) and DD
 those terms rather than resolved by a criterion. **No blind listen is scheduled by this
 finding** — that remains his call.
 
+---
+
+## §5 — DD-P4 and the arms. RUN COMPLETE; DD-R1 fires.
+
+**Figures owned by `builder/analysis/2026-07-28-track3-depth-descent/REPORT.md` and
+`t3_scores.json`.** Not restated here beyond what a read needs.
+
+`mirror.py` gained `w_known_ramp_pctl`, default 0.0, applied to the edge-relaxation
+target (DD-D7) with the target endpoint exempt, added only when live so production's
+expression is executed unchanged. **DD-G1 re-earned** (byte-identical on 212/212 cells);
+**DD-G2/DD-C3 PASS** on all 16 pairs including anchors. Snyk clean on both touched
+directories. `run_arms_t3.py` imports the committed walker rather than adding a flag to
+it, so no committed Track 2 file changed and every Track 2 figure still reproduces.
+
+**DD-P3 finding 10 did not materialise.** Guard G fired 42 times in *every* arm
+including P, and the floor stayed live on 1.11–1.19 % of relaxations across all four.
+Neither varies with the knob — so the one term §0 could not certify as constant is
+constant in fact. Known because it was counted, not because it was assumed.
+
+**DD-R1 fires — an adoptable candidate exists.** DD-A2 (`w = 0.03`) passes DD-C1 and
+DD-C2 with DD-C3 holding, and DD-R1's presupposed run state is satisfied in full;
+nothing is owed for this read. **DD-R2 and DD-R3 do not apply.**
+
+**Both qualifiers fire on every arm.** DD-C6: the journey shortens by a mean 5.74
+interiors at DD-A2 (~13 → ~7), so **DD-C1 may not be read as descent** — the DD-D5
+confound arriving exactly where predicted, which is why DD-C6 was adopted before the run
+and not after seeing the table. DD-C4: median per-hop similarity falls 0.980 → 0.736.
+DD-C4 gates nothing by design (offline coherence metrics were the worst predictors of the
+owner's verdict), but a 0.244 drop is not a rounding error.
+
+**Two findings the pre-registration did not anticipate.** (1) Production **fails DD-C2 in
+the negative direction** — its middles get *more* famous as bypasses accumulate. The
+owner's original complaint, in fame currency, on this pair set, for the first time. (2)
+DD-C2 is **non-monotone in `w`**: at the strong dose the path is near-maximally obscure by
+d5, leaving little room to descend by d20, so the gradient compresses against its own
+floor. **DD-A3 is not "more of DD-A2"** — it trades depth-gradient for absolute obscurity.
+
+**What is owed to the owner and to nobody else:** whether ~7 mostly-obscure artists beat
+~13 mostly-famous ones carrying about 1.5 obscure. It lands on the value tension recorded
+in §4. **No blind listen and no adoption are scheduled by this track** (prereg §7).
+
 ### Selection effect of the re-draw, bounded
 
 Unconditioned Monte-Carlo (300 draws/group): acceptance 83.3 % famous→mid, 99.3 %
