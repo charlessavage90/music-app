@@ -193,3 +193,61 @@ that judgement is his, is not scheduled here, and any cross-track candidate comp
 must be recomputed under one statistic first** (the prereg's comparability guard — TB and
 DD scores use different cell statistics and hop definitions). This wording is fixed; no
 summary may soften it. TB-R0, TB-R1 and TB-R3 do not apply.
+
+## §6 — Closeout record (2026-07-29)
+
+**Suites (D4), run not asserted:** builder **115 passed**, api **217 passed**, frontend
+**107 passed** — identical to the Track 3 closeout's counts, the check that shipped code
+was untouched by this track (the only committed-file change outside docs and the analysis
+directory is `mirror.py`'s additive, default-off term; TB-G1 at 212/212 is the direct
+evidence).
+
+**A4 — default-flip inapplicable by design, stated not skipped:** `w_known_thresh_pctl`
+defaults 0.0 and **must stay there** — analysis mirror, nothing adopted; unshipped is the
+premise.
+
+**A5 — no listener on 8000, 5173, 8138 or 8139.** Nothing started, nothing left running;
+this session's background jobs (arms, fame fetch, suites) all completed. No queued item
+needs a local server.
+
+**A3 — deferrals swept, conditions re-tested:** the A11-flag deferral came due this track
+and is **discharged** (TB-G4, struck in `NEXT.md`'s table); the **nameless drop rule is
+now DUE** (its condition is the rebuild plan, which is the next work — carried into the
+plan's scope via the handoff); `--prune` ripe since today, owner's; two new deferrals
+recorded with conditions (`TB-P5H-7`; the candidate-pool recompute).
+
+**B2 — reachability:** every new module is a CLI entry in the directory README's script
+table; `tb_p1_probe_ceiling` is additionally imported by `tb_p3_ceiling` (one
+implementation of the ceiling, deliberate). No orphans.
+
+**B3 — vacuous-test check, discharged in the strongest available form:** TB-G2 carried an
+explicit non-vacuity check (d1 differs from P on 11–12/16 pairs per arm — the gate can
+fire on the thing adjacent to it), and TB-P5 independently reproduced the entire run
+(0/432) and every headline figure without importing the scorer. No new suite tests were
+written; the criteria live in analysis scripts whose vacuity is what TB-P5 exists to test.
+
+**B4 — prose-vs-code:** performed by TB-P5 across the runner, scorer and mirror (32
+verified-clean claims), and it caught two prose defects in this log's own §2–§3
+(TB-P5H-3/4), both corrected in place and marked — the fifth recorded instance here of a
+cold reader finding defects in documentation its author had just written.
+
+**B5 — stale-description sweep incl. `.claude/`:** the mirror change is analysis-only, so
+no agent definition describes it wrongly; `CLAUDE.md`'s what-is-better orient row was the
+one stale description found (it named WGLL alone after WGLL stopped governing alone) —
+corrected, delta below. `NEXT.md` rewritten with no figures.
+
+**B1 — lint + audit:** `docs-lint.sh` hard checks **passed**; candidates were
+weight-constants coinciding with adjudication decimals, handed to the auditor.
+`doc-auditor` dispatched post-edit (avoiding Track 3's race); outcome recorded in the PR
+when it reported.
+
+**D6 — the standing context layer:** unconditional **44,113 characters (delta +340 from
+43,773)**; conditional **2,121 lines (delta 0)**. The +340 is the orient-row correction
+above — reported to the owner with the wording and the option to revert, per the D6 rule
+that a correction costing net characters is his to ratify. Nothing added to `memory/`.
+
+**D1/D3:** tree clean at commit; no artifact adopted or created — the one artifact in
+play remains `graph-t15-tiebreakfix.bin`, sha256 asserted by every script.
+
+**D5:** PR opened from `requirements-track3b`; body carries the gate outcomes, the
+verdict pointer, deferrals, and the closed list.

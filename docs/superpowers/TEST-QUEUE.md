@@ -23,6 +23,35 @@ the point.**
 
 ---
 
+## N/A — 2026-07-29 — you rewrote what "good" means, and another measurement track ran; the app is untouched
+
+**Nothing to exercise, and nothing is running** — all four ports were checked and are
+empty; nothing was started on this machine and nothing was left behind. No routing, no
+graph, no weighting, no cost function, and not one line of the app or the website changed.
+**A journey you build now is identical to one from yesterday.**
+
+**What happened, in plain terms.** You rewrote the product requirements and they now govern
+— including your call that journeys between two famous artists never digging up anyone
+obscure is a **defect to fix**, not a limitation to live with. Then the follow-up experiment
+you approved ran end to end in a day. Its answer: **even when adding an obscure artist to a
+journey costs nothing and every famous artist carries a price, the app still prefers to make
+the journey shorter rather than swap famous artists for obscure ones.** That closes the book
+on fixing this by tuning the router. The fix now runs through rebuilding the artist map
+itself, which is what the next session will plan.
+
+**You also parked two decisions on purpose**, so nobody should relitigate them without you:
+whether any of the shorter-but-obscurer journey settings ever ships, and any listening test
+on them.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-29-track3b-execution-log.md`.*
+
 ## N/A — 2026-07-28 (night, later) — a measurement track ran; nothing you can press changed
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are empty;
