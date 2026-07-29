@@ -23,6 +23,38 @@ the point.**
 
 ---
 
+## N/A — 2026-07-28 (night, later) — a measurement track ran; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are empty;
+nothing was started on this machine and nothing was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A journey
+you build now is identical to one from this afternoon.**
+
+**What happened.** The plan of attack written earlier today was carried out end to end. It
+was all measurement — the app was never touched, and nothing has been adopted.
+
+**Two things worth thirty seconds, because they change what is worth trying next.**
+
+- **For journeys between two very famous artists, obscure middles are impossible.** Not
+  expensive — absent. Radiohead connects to fifty artists and every one of them is in the
+  most popular tenth; the same is true of The Beatles, Metallica, Muse, Coldplay and the
+  rest. Every setting tried, including one far stronger than anything anyone would ship,
+  delivered **zero** lesser-known artists on those journeys. That half of what you asked for
+  cannot be fixed by any setting, only by changing how the map is built.
+- **For journeys where at least one end is less famous, a setting was found that works** —
+  it roughly doubles the number of genuinely obscure artists you get. **But it also makes
+  the journey shorter, about thirteen middle artists down to about seven**, and that is a
+  trade only you can judge. It is written up for you and nothing has been decided.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-28-track3-depth-descent-execution-log.md`.*
+
 ## N/A — 2026-07-28 (late) — path work resumed; measurements and a plan only; the app is untouched
 
 **Nothing to exercise, and nothing is running** — all ports were checked and are empty.

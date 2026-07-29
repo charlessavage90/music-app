@@ -1,0 +1,189 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "seed": 20260728,
+ "supersedes": "pairs.json (DD-P1 trigger fired; this is the prescribed re-draw)",
+ "band_edges": {
+  "famous_min": 0.9,
+  "mid": [
+   0.5,
+   0.9
+  ]
+ },
+ "draw_rule": "DD-P1 headroom required at draw time; see module docstring",
+ "rejects": {
+  "no_obscure_route": 2
+ },
+ "groups": {
+  "famous_mid": [
+   "The Mills Brothers -> Tracey Chattaway",
+   "Daniel Avery -> Rita Marley",
+   "Bluetech -> L‐Vis 1990",
+   "Patti Smith -> Daniel Herskedal",
+   "Jenny Owen Youngs -> 洲崎綾",
+   "Emancipator -> Vanbot"
+  ],
+  "mid_mid": [
+   "Engine-EarZ Experiment -> Dusk + Blackdown",
+   "Shirley Collins -> D",
+   "Tails -> Fingers Inc.",
+   "Mikey Murka -> Disiz",
+   "钟茌 -> The Koolaid Electric Company",
+   "Openzone Bar -> Gjallarhorn"
+  ]
+ },
+ "analysis_pairs": [
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "src": "The Mills Brothers",
+   "dst": "Tracey Chattaway",
+   "src_mbid": "fb1080d4-aaf7-430e-b588-6a6ce79e2eb3",
+   "dst_mbid": "26551d8a-f771-4780-83e7-b3219de6a63a",
+   "src_pctl": 0.9743233771835238,
+   "dst_pctl": 0.7791271296096615,
+   "src_degree": 32,
+   "dst_degree": 20,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "src": "Daniel Avery",
+   "dst": "Rita Marley",
+   "src_mbid": "3e7aa4a4-5b7e-46a3-a7ff-c57044fa1b64",
+   "dst_mbid": "efc381ba-ea68-49ca-af91-bebdd40fe1d8",
+   "src_pctl": 0.9101857343109769,
+   "dst_pctl": 0.6251213068794479,
+   "src_degree": 12,
+   "dst_degree": 5,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "src": "Patti Smith",
+   "dst": "Daniel Herskedal",
+   "src_mbid": "d135874d-9cae-4fef-97e3-36acbd9f5a26",
+   "dst_mbid": "81acb7ca-994b-4df4-9e97-911b48767836",
+   "src_pctl": 0.9879771403924952,
+   "dst_pctl": 0.5604243045072245,
+   "src_degree": 7,
+   "dst_degree": 19,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "src": "Jenny Owen Youngs",
+   "dst": "洲崎綾",
+   "src_mbid": "e24bca91-8106-464a-bc42-757f1ab24af3",
+   "dst_mbid": "9f297aa6-dd27-4385-8b50-5bb3ce031338",
+   "src_pctl": 0.94041136510675,
+   "dst_pctl": 0.6625579577312918,
+   "src_degree": 27,
+   "dst_degree": 16,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "src": "Tails",
+   "dst": "Fingers Inc.",
+   "src_mbid": "1eee2f3d-b43d-46d7-920f-e9af8178f8b2",
+   "dst_mbid": "6bf6b3f0-3388-481f-8ae8-4023e1a76d70",
+   "src_pctl": 0.5716923657537201,
+   "dst_pctl": 0.7607828337287039,
+   "src_degree": 6,
+   "dst_degree": 39,
+   "group": "mid_mid"
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "src": "Mikey Murka",
+   "dst": "Disiz",
+   "src_mbid": "ce007e48-3c98-4e5f-b9a0-5d4fb37a5dbf",
+   "dst_mbid": "daba3096-88f2-4322-9b00-10938b0220b8",
+   "src_pctl": 0.5260001078283373,
+   "dst_pctl": 0.8882763640284667,
+   "src_degree": 17,
+   "dst_degree": 23,
+   "group": "mid_mid"
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "src": "钟茌",
+   "dst": "The Koolaid Electric Company",
+   "src_mbid": "0bf6231c-08d2-4715-a392-e116f9980685",
+   "dst_mbid": "27a85cc3-bc5e-46e9-92f8-12735810798b",
+   "src_pctl": 0.5162146862195385,
+   "dst_pctl": 0.5508478003019194,
+   "src_degree": 11,
+   "dst_degree": 18,
+   "group": "mid_mid"
+  },
+  {
+   "pair": "Openzone Bar -> Gjallarhorn",
+   "src": "Openzone Bar",
+   "dst": "Gjallarhorn",
+   "src_mbid": "4b4bbfe8-5e21-4f0d-8445-cc6037538cf5",
+   "dst_mbid": "4134d0cb-7e39-4b3f-9135-c6c927f7c3e0",
+   "src_pctl": 0.6720940263101143,
+   "dst_pctl": 0.61075318093595,
+   "src_degree": 2,
+   "dst_degree": 12,
+   "group": "mid_mid"
+  }
+ ],
+ "held_out_pairs": [
+  {
+   "pair": "Bluetech -> L‐Vis 1990",
+   "src": "Bluetech",
+   "dst": "L‐Vis 1990",
+   "src_mbid": "54980b39-7dea-4e2b-8b1f-21322a464ef5",
+   "dst_mbid": "a419996d-c78e-4c5e-a1cf-fb6537d8aa56",
+   "src_pctl": 0.9734742290273884,
+   "dst_pctl": 0.8504016605563942,
+   "src_degree": 34,
+   "dst_degree": 30,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Emancipator -> Vanbot",
+   "src": "Emancipator",
+   "dst": "Vanbot",
+   "src_mbid": "aa1d4315-5246-42b2-b62b-f997d046d8b2",
+   "dst_mbid": "a5db16f8-dadc-4885-88e3-6cff50fa44f3",
+   "src_pctl": 0.9966438430019409,
+   "dst_pctl": 0.5377466573215441,
+   "src_degree": 42,
+   "dst_degree": 11,
+   "group": "famous_mid"
+  },
+  {
+   "pair": "Engine-EarZ Experiment -> Dusk + Blackdown",
+   "src": "Engine-EarZ Experiment",
+   "dst": "Dusk + Blackdown",
+   "src_mbid": "dc9bb3e0-716b-4378-a530-53650f642eb6",
+   "dst_mbid": "5df4d5cd-704e-451d-bbfe-1e5361bff545",
+   "src_pctl": 0.590211882682769,
+   "dst_pctl": 0.5719619365969377,
+   "src_degree": 18,
+   "dst_degree": 11,
+   "group": "mid_mid"
+  },
+  {
+   "pair": "Shirley Collins -> D",
+   "src": "Shirley Collins",
+   "dst": "D",
+   "src_mbid": "d7db2c9e-40f1-451a-b868-782b6dce7fbf",
+   "dst_mbid": "fb2fc344-0294-4edd-995f-cc3eee53e5ad",
+   "src_pctl": 0.8492829415570412,
+   "dst_pctl": 0.69653736251887,
+   "src_degree": 32,
+   "dst_degree": 32,
+   "group": "mid_mid"
+  }
+ ],
+ "unscored_anchor_pairs": [
+  "Miles Davis -> Daft Punk",
+  "Metallica -> Taylor Swift",
+  "Radiohead -> The Beatles",
+  "Muse -> Coldplay"
+ ],
+ "unscored_anchor_note": "all-famous; cannot pass DD-P1 by any choice of pairs. Walked for DD-G2 (first-path identity) and reported; excluded from DD-C1/C2/C4/C5."
+}

@@ -1,0 +1,105 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "held_out": {
+  "pairs": [
+   "Bluetech -> L‐Vis 1990",
+   "Emancipator -> Vanbot",
+   "Engine-EarZ Experiment -> Dusk + Blackdown",
+   "Shirley Collins -> D"
+  ],
+  "gates_nothing": true,
+  "results": {
+   "P": {
+    "n_cells": 12,
+    "c1_mean": 0.0,
+    "c1_neg_frac": 0.0,
+    "c2_drop": 0.18012409308799082,
+    "c5_mean": 1.75,
+    "c6_mean_len_delta": 0,
+    "c1_meets": false,
+    "c2_meets": false
+   },
+   "DD-A1": {
+    "n_cells": 12,
+    "c1_mean": -0.8281090130065676,
+    "c1_neg_frac": 1.0,
+    "c2_drop": 0.3605803004742407,
+    "c5_mean": 1.9166666666666667,
+    "c6_mean_len_delta": -3.5,
+    "c1_meets": false,
+    "c2_meets": false
+   },
+   "DD-A2": {
+    "n_cells": 12,
+    "c1_mean": -1.2583570156565393,
+    "c1_neg_frac": 0.9166666666666666,
+    "c2_drop": 0.9458602418668303,
+    "c5_mean": 3.0833333333333335,
+    "c6_mean_len_delta": -5.583333333333333,
+    "c1_meets": true,
+    "c2_meets": true
+   },
+   "DD-A3": {
+    "n_cells": 12,
+    "c1_mean": -1.7033233624995876,
+    "c1_neg_frac": 1.0,
+    "c2_drop": 0.7679225232813005,
+    "c5_mean": 3.9166666666666665,
+    "c6_mean_len_delta": -5.833333333333333,
+    "c1_meets": true,
+    "c2_meets": true
+   }
+  }
+ },
+ "anchors": {
+  "pairs": [
+   "Miles Davis -> Daft Punk",
+   "Metallica -> Taylor Swift",
+   "Radiohead -> The Beatles",
+   "Muse -> Coldplay"
+  ],
+  "descriptive_only": true,
+  "results": {
+   "P": {
+    "n_cells": 12,
+    "c1_mean": 0.0,
+    "c1_neg_frac": 0.0,
+    "c2_drop": 0.050677010665721056,
+    "c5_mean": 0,
+    "c6_mean_len_delta": 0,
+    "c1_meets": false,
+    "c2_meets": false
+   },
+   "DD-A1": {
+    "n_cells": 12,
+    "c1_mean": -0.09835088081402277,
+    "c1_neg_frac": 0.5833333333333334,
+    "c2_drop": 0.42333706156656703,
+    "c5_mean": 0,
+    "c6_mean_len_delta": -1.5,
+    "c1_meets": false,
+    "c2_meets": false
+   },
+   "DD-A2": {
+    "n_cells": 12,
+    "c1_mean": -0.07116117245137477,
+    "c1_neg_frac": 0.5833333333333334,
+    "c2_drop": 0.3495659535075326,
+    "c5_mean": 0,
+    "c6_mean_len_delta": -1.5833333333333333,
+    "c1_meets": false,
+    "c2_meets": false
+   },
+   "DD-A3": {
+    "n_cells": 12,
+    "c1_mean": -0.000539307805796474,
+    "c1_neg_frac": 0.5,
+    "c2_drop": 0.26344595090375567,
+    "c5_mean": 0,
+    "c6_mean_len_delta": -1.5,
+    "c1_meets": false,
+    "c2_meets": false
+   }
+  }
+ }
+}

@@ -1,0 +1,485 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "cells": [
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 4.779963618744542,
+   "limit_mean_F": 3.59942908998064,
+   "gap": -1.1805345287639022,
+   "p_interiors": 10,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 4.629067761077779,
+   "limit_mean_F": 3.59942908998064,
+   "gap": -1.0296386710971386,
+   "p_interiors": 12,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 4.581385120145996,
+   "limit_mean_F": 3.59942908998064,
+   "gap": -0.9819560301653563,
+   "p_interiors": 10,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 4.508749761261834,
+   "limit_mean_F": 3.59942908998064,
+   "gap": -0.9093206712811939,
+   "p_interiors": 11,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 5.156102796400553,
+   "limit_mean_F": 2.519094883637737,
+   "gap": -2.637007912762816,
+   "p_interiors": 14,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 5.352457859757574,
+   "limit_mean_F": 2.519094883637737,
+   "gap": -2.8333629761198367,
+   "p_interiors": 13,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 5.4233959542853984,
+   "limit_mean_F": 2.519094883637737,
+   "gap": -2.9043010706476613,
+   "p_interiors": 14,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 5.238910801003558,
+   "limit_mean_F": 2.519094883637737,
+   "gap": -2.719815917365821,
+   "p_interiors": 17,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 5.194327633199007,
+   "limit_mean_F": 4.65401776448915,
+   "gap": -0.5403098687098575,
+   "p_interiors": 11,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 5.1274795498344865,
+   "limit_mean_F": 4.65401776448915,
+   "gap": -0.47346178534533667,
+   "p_interiors": 10,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 5.04642888780721,
+   "limit_mean_F": 4.65401776448915,
+   "gap": -0.39241112331805983,
+   "p_interiors": 9,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 4.969487352224541,
+   "limit_mean_F": 4.65401776448915,
+   "gap": -0.31546958773539124,
+   "p_interiors": 13,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 5.1407344332250835,
+   "limit_mean_F": 1.9708606107137265,
+   "gap": -3.1698738225113567,
+   "p_interiors": 12,
+   "limit_interiors": 8
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 5.4602004728893325,
+   "limit_mean_F": 1.9708606107137265,
+   "gap": -3.4893398621756058,
+   "p_interiors": 17,
+   "limit_interiors": 8
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 5.426263756876281,
+   "limit_mean_F": 1.9708606107137265,
+   "gap": -3.4554031461625545,
+   "p_interiors": 13,
+   "limit_interiors": 8
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 5.362520980560904,
+   "limit_mean_F": 1.9708606107137265,
+   "gap": -3.3916603698471777,
+   "p_interiors": 16,
+   "limit_interiors": 8
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 4.656175621469636,
+   "limit_mean_F": 0.0,
+   "gap": -4.656175621469636,
+   "p_interiors": 15,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 4.369315265680024,
+   "limit_mean_F": 0.0,
+   "gap": -4.369315265680024,
+   "p_interiors": 16,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 3.555945054728208,
+   "limit_mean_F": 0.0,
+   "gap": -3.555945054728208,
+   "p_interiors": 14,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 4.492232426397582,
+   "limit_mean_F": 0.0,
+   "gap": -4.492232426397582,
+   "p_interiors": 17,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 5.2163429028309425,
+   "limit_mean_F": 1.5239677766803816,
+   "gap": -3.692375126150561,
+   "p_interiors": 11,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 5.398748283667353,
+   "limit_mean_F": 1.5239677766803816,
+   "gap": -3.8747805069869714,
+   "p_interiors": 14,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 4.932015858949353,
+   "limit_mean_F": 1.5239677766803816,
+   "gap": -3.4080480822689716,
+   "p_interiors": 11,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 5.029356832024467,
+   "limit_mean_F": 1.5239677766803816,
+   "gap": -3.5053890553440854,
+   "p_interiors": 11,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 4.7891745459368815,
+   "limit_mean_F": 0.5761621689393029,
+   "gap": -4.213012376997579,
+   "p_interiors": 14,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 5.05565561381851,
+   "limit_mean_F": 0.5761621689393029,
+   "gap": -4.479493444879207,
+   "p_interiors": 18,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 4.266266589846335,
+   "limit_mean_F": 0.5761621689393029,
+   "gap": -3.690104420907032,
+   "p_interiors": 12,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 5.030651538212928,
+   "limit_mean_F": 0.5761621689393029,
+   "gap": -4.454489369273626,
+   "p_interiors": 17,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Openzone Bar -> Gjallarhorn",
+   "split": "analysis",
+   "depth": 5,
+   "p_mean_F": 3.503475476745521,
+   "limit_mean_F": 1.7461881631748621,
+   "gap": -1.757287313570659,
+   "p_interiors": 10,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Openzone Bar -> Gjallarhorn",
+   "split": "analysis",
+   "depth": 10,
+   "p_mean_F": 3.6904149590849173,
+   "limit_mean_F": 1.7461881631748621,
+   "gap": -1.9442267959100552,
+   "p_interiors": 10,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Openzone Bar -> Gjallarhorn",
+   "split": "analysis",
+   "depth": 15,
+   "p_mean_F": 3.918375928643438,
+   "limit_mean_F": 1.7461881631748621,
+   "gap": -2.1721877654685757,
+   "p_interiors": 12,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Openzone Bar -> Gjallarhorn",
+   "split": "analysis",
+   "depth": 20,
+   "p_mean_F": 4.094308120662831,
+   "limit_mean_F": 1.7461881631748621,
+   "gap": -2.3481199574879685,
+   "p_interiors": 15,
+   "limit_interiors": 5
+  },
+  {
+   "pair": "Bluetech -> L‐Vis 1990",
+   "split": "held_out",
+   "depth": 5,
+   "p_mean_F": 4.486347392455165,
+   "limit_mean_F": 3.96652418450652,
+   "gap": -0.5198232079486447,
+   "p_interiors": 6,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Bluetech -> L‐Vis 1990",
+   "split": "held_out",
+   "depth": 10,
+   "p_mean_F": 4.619938798502687,
+   "limit_mean_F": 3.96652418450652,
+   "gap": -0.6534146139961674,
+   "p_interiors": 8,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Bluetech -> L‐Vis 1990",
+   "split": "held_out",
+   "depth": 15,
+   "p_mean_F": 4.457838952665096,
+   "limit_mean_F": 3.96652418450652,
+   "gap": -0.4913147681585759,
+   "p_interiors": 7,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Bluetech -> L‐Vis 1990",
+   "split": "held_out",
+   "depth": 20,
+   "p_mean_F": 5.072048985081922,
+   "limit_mean_F": 3.96652418450652,
+   "gap": -1.1055248005754024,
+   "p_interiors": 12,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Emancipator -> Vanbot",
+   "split": "held_out",
+   "depth": 5,
+   "p_mean_F": 5.060156241166254,
+   "limit_mean_F": 3.676225431290614,
+   "gap": -1.3839308098756402,
+   "p_interiors": 8,
+   "limit_interiors": 3
+  },
+  {
+   "pair": "Emancipator -> Vanbot",
+   "split": "held_out",
+   "depth": 10,
+   "p_mean_F": 5.126899325920955,
+   "limit_mean_F": 3.676225431290614,
+   "gap": -1.450673894630341,
+   "p_interiors": 6,
+   "limit_interiors": 3
+  },
+  {
+   "pair": "Emancipator -> Vanbot",
+   "split": "held_out",
+   "depth": 15,
+   "p_mean_F": 5.035837172172817,
+   "limit_mean_F": 3.676225431290614,
+   "gap": -1.3596117408822033,
+   "p_interiors": 7,
+   "limit_interiors": 3
+  },
+  {
+   "pair": "Emancipator -> Vanbot",
+   "split": "held_out",
+   "depth": 20,
+   "p_mean_F": 5.413742327270074,
+   "limit_mean_F": 3.676225431290614,
+   "gap": -1.7375168959794602,
+   "p_interiors": 12,
+   "limit_interiors": 3
+  },
+  {
+   "pair": "Engine-EarZ Experiment -> Dusk + Blackdown",
+   "split": "held_out",
+   "depth": 5,
+   "p_mean_F": 4.735828638387156,
+   "limit_mean_F": 2.892931387118976,
+   "gap": -1.8428972512681803,
+   "p_interiors": 11,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Engine-EarZ Experiment -> Dusk + Blackdown",
+   "split": "held_out",
+   "depth": 10,
+   "p_mean_F": 4.64401820556052,
+   "limit_mean_F": 2.892931387118976,
+   "gap": -1.7510868184415438,
+   "p_interiors": 12,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Engine-EarZ Experiment -> Dusk + Blackdown",
+   "split": "held_out",
+   "depth": 15,
+   "p_mean_F": 4.49888757396995,
+   "limit_mean_F": 2.892931387118976,
+   "gap": -1.6059561868509737,
+   "p_interiors": 10,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Engine-EarZ Experiment -> Dusk + Blackdown",
+   "split": "held_out",
+   "depth": 20,
+   "p_mean_F": 3.341866794141669,
+   "limit_mean_F": 2.892931387118976,
+   "gap": -0.44893540702269297,
+   "p_interiors": 11,
+   "limit_interiors": 4
+  },
+  {
+   "pair": "Shirley Collins -> D",
+   "split": "held_out",
+   "depth": 5,
+   "p_mean_F": 5.700244730789053,
+   "limit_mean_F": 3.8102715308921358,
+   "gap": -1.8899731998969171,
+   "p_interiors": 17,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Shirley Collins -> D",
+   "split": "held_out",
+   "depth": 10,
+   "p_mean_F": 5.455968283867916,
+   "limit_mean_F": 3.8102715308921358,
+   "gap": -1.6456967529757804,
+   "p_interiors": 16,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Shirley Collins -> D",
+   "split": "held_out",
+   "depth": 15,
+   "p_mean_F": 5.581306808845744,
+   "limit_mean_F": 3.8102715308921358,
+   "gap": -1.771035277953608,
+   "p_interiors": 19,
+   "limit_interiors": 6
+  },
+  {
+   "pair": "Shirley Collins -> D",
+   "split": "held_out",
+   "depth": 20,
+   "p_mean_F": 5.47328990614406,
+   "limit_mean_F": 3.8102715308921358,
+   "gap": -1.6630183752519239,
+   "p_interiors": 16,
+   "limit_interiors": 6
+  }
+ ]
+}
