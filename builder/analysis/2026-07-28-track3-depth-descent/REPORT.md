@@ -26,6 +26,14 @@ shortening, not descent.
 pre-registration set out to test** — roughly **7 mostly-obscure artists against today's
 13 mostly-famous** — **and that trade is the owner's to judge, not a criterion's.**
 
+**One further qualifier, found by the harness review and verified independently
+(§8): about 45 % of DD-A2's fame movement is carried by artists with no English
+Wikipedia article, scored at the fame floor.** Over matched interiors only, DD-A2's
+DD-C1 is **−0.709** and would not meet −1.0. The floor is A11's adopted encoding and an
+unmatched artist genuinely is *reach*, so this is not a defect — but the pass is a
+statement about **unfindable** artists as much as about **less famous** ones, and a
+summary omitting it would mislead by selection.
+
 ## §1 — Gates
 
 | gate | result |
@@ -35,7 +43,7 @@ pre-registration set out to test** — roughly **7 mostly-obscure artists agains
 | **DD-G3** artifact identity | asserted in every script |
 | **DD-G4** fame keyed by mbid; no blank-named scored interior | **PASS** |
 | **DD-P3 first half** protocol review | discharged — `DD-P3-analyst-review.md` |
-| **DD-P3 second half** harness review (P8b precedent) | see `DD-P3-harness-review.md` |
+| **DD-P3 second half** harness review (P8b precedent) | **DISCHARGED** — `DD-P3-harness-review.md`; every headline figure reproduced independently, zero disagreements |
 
 ⚠ **DD-R1 was first read with DD-P3's second half unclosed** — caught by the owner's
 consultant review, not by this session. The harness review is precisely the guard against
@@ -51,9 +59,11 @@ a criterion reporting PASS for a reason other than the effect it names.
 | **DD-A3** | 0.10 | **−1.923** | 83 % | **PASS** | +0.364 | — | 4.87 | 101 | **−6.52** ⚠ | 0.583 ⚠ |
 
 Realised toll at k = 10, pctl = 1: DD-A1 5× `w_hop`, DD-A2 15×, DD-A3 50× — matching §2's
-factor table exactly. Guard G fired 42 times in **every** arm including P, and the floor
-stayed live on 1.11–1.19 % of relaxations across all four: neither varies with the knob,
-so DD-P3's finding-10 exposure did not materialise.
+factor table exactly. Guard G fired 42 times in **every** arm including P and the floor
+stayed live on 1.11–1.19 % across all four, neither varying with the knob. ⚠ **Corrected:**
+all 42 activations come from just two pairs at all 21 depths — both **unscored anchors
+with adjacent endpoints**. No scored pair is adjacent, so guard G had nothing to fire on
+at any `w`: DD-P3's finding-10 exposure is **untested rather than disproven**.
 
 ## §3 — Exposure map: one row per criterion × the changed knob
 
@@ -105,14 +115,23 @@ not a price the router declines to pay, there is nothing to buy. **Every measure
 
 ## §6 — Other reads
 
-**Production fails DD-C2 in the negative direction: −0.158.** Its middles get *more*
-famous as bypasses accumulate. That is the owner's original complaint, measured in fame
-currency on this pair set for the first time.
+⚠ **RETRACTED — production's negative depth gradient.** This REPORT previously said
+production "fails DD-C2 in the negative direction: −0.158 — its middles get *more* famous
+as bypasses accumulate", read as the owner's original complaint confirmed in fame
+currency. **The sign is not robust.** The single A13-dropped cell is an analysis pair at
+d20 only, so DD-C2's two pools come from different pair sets; under three alternative
+poolings production reads **+0.076, +0.020, +0.020**. Production's depth gradient here is
+**indistinguishable from zero** — still a failure of DD-C2's ≥ 0.5, but a materially
+weaker statement than the one made, and the stronger one is withdrawn rather than
+restated.
+
+**DD-A2's DD-C2 pass is robust to the same test**: 0.644 / 0.801 / 0.847 / 0.847, every
+pooling ≥ 0.5.
 
 **DD-C2 is non-monotone in `w`** (0.275 → 0.644 → 0.364 on analysis). At `w = 0.10` the
-path is already near-maximally obscure by d5, so little room remains to descend by d20 —
-the gradient compresses against its own floor. **DD-A3 is not "more of DD-A2"**: it trades
-depth-gradient for absolute obscurity.
+path is already near-maximally obscure by d5, so little room remains to descend by d20.
+**DD-A3 is not "more of DD-A2"** — and its gradient is largely a **pooling artefact**,
+collapsing 0.364 → **+0.016** under length-unweighted pooling.
 
 **DD-C4 flags every arm and the drop is large** (0.980 → 0.736 at DD-A2). It gates nothing
 by design — the record is explicit that offline coherence metrics were the *worst*

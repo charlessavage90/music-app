@@ -38,8 +38,12 @@ scores in fame**; do not read one as the other anywhere in this directory.
 | `dd_p3_review_probes.py` | **DD-P3**: the analyst's probes (written by the review, not by the executing session) | *(stdout)* |
 | `dd_f1_provenance.py` | reproduces DD-F1's band series and named sub-decile degrees | `dd_f1_provenance.json` |
 | `dd_d6_gap.py` | **DD-D6**: the ceiling probe — is DD-C1 reachable at *any* strength | `gap_paths.json`, `gap_result.json` |
+| `run_arms_t3.py` | **DD-P4**: walks P, DD-A1, DD-A2, DD-A3 over 12 scored pairs + 4 unscored anchors | `t3_paths.json` |
+| `score_t3.py` | the pre-registered scorer, DD-C1–DD-C6, analysis set | `t3_scores.json` |
+| `score_t3_supplementary.py` | held-out confirmation and the descriptive anchor table — **neither is a criterion** | `t3_supplementary.json` |
+| `dd_p3_harness_probes.py`, `dd_p3_harness_probes2.py` | **DD-P3 second half**: the harness review's probes (written by the review) | *(stdout)* |
 
-`DD-P3-analyst-review.md` is the analyst's report. `gap_fame.json` is fame resolved by
+`DD-P3-analyst-review.md` (protocol) and `DD-P3-harness-review.md` (harness) are the two halves of DD-P3. `gap_fame.json` is fame resolved by
 the committed `fame.py`; `fame_run.log` is its network run.
 
 All scripts are run from `api/` (the mirror imports `artistpath_api`):

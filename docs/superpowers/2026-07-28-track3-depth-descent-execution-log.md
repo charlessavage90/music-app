@@ -351,10 +351,16 @@ expression is executed unchanged. **DD-G1 re-earned** (byte-identical on 212/212
 directories. `run_arms_t3.py` imports the committed walker rather than adding a flag to
 it, so no committed Track 2 file changed and every Track 2 figure still reproduces.
 
-**DD-P3 finding 10 did not materialise.** Guard G fired 42 times in *every* arm
-including P, and the floor stayed live on 1.11–1.19 % of relaxations across all four.
-Neither varies with the knob — so the one term §0 could not certify as constant is
-constant in fact. Known because it was counted, not because it was assumed.
+**DD-P3 finding 10 did not materialise** — but ⚠ **corrected in §8, and the original
+wording overclaimed.** Guard G fired 42 times in *every* arm including P and the floor
+stayed live on 1.11–1.19 % across all four, neither varying with the knob. This log first
+read that as "the one term §0 could not certify as constant is constant **in fact**".
+It is not: the harness review instrumented the walk and found all 42 activations come
+from exactly two pairs at all 21 depths — `Radiohead → The Beatles` and `Muse → Coldplay`,
+both **unscored anchors with adjacent endpoints**. **No scored pair is adjacent, so guard
+G had no scored pair it could fire on at any `w`.** The mechanism is **untested by
+exposure, not disproven.** Counting it was still the right call — it converted an
+assumption into a measurement, which is how the overclaim became visible at all.
 
 ### The verdict, in the shape it must be summarised in everywhere
 
@@ -382,12 +388,18 @@ and not after seeing the table. DD-C4: median per-hop similarity falls 0.980 →
 DD-C4 gates nothing by design (offline coherence metrics were the worst predictors of the
 owner's verdict), but a 0.244 drop is not a rounding error.
 
-**Two findings the pre-registration did not anticipate.** (1) Production **fails DD-C2 in
-the negative direction** — its middles get *more* famous as bypasses accumulate. The
-owner's original complaint, in fame currency, on this pair set, for the first time. (2)
-DD-C2 is **non-monotone in `w`**: at the strong dose the path is near-maximally obscure by
-d5, leaving little room to descend by d20, so the gradient compresses against its own
-floor. **DD-A3 is not "more of DD-A2"** — it trades depth-gradient for absolute obscurity.
+**Two findings the pre-registration did not anticipate.** (1) ⚠ **RETRACTED — see §8.**
+This log and an owner-facing summary both claimed production "fails DD-C2 in the negative
+direction (−0.158) — its middles get *more* famous as bypasses accumulate", read as the
+owner's original complaint confirmed in fame currency. **The sign is not robust.** It is
+negative only under the exact pooling scored and positive under all three alternative
+poolings (§8, DD-P3H-2). The claim is withdrawn, not restated: production's depth
+gradient on this pair set is **indistinguishable from zero**, which is still a failure of
+DD-C2's ≥ 0.5 but is a materially weaker statement than the one made. (2) DD-C2 is
+**non-monotone in `w`** — at the strong dose the path is near-maximally obscure by d5,
+leaving little room to descend by d20. **DD-A3 is not "more of DD-A2"**; and per §8 its
+gradient is largely a pooling artefact, collapsing to +0.016 under a length-unweighted
+pooling.
 
 **What is owed to the owner and to nobody else:** whether ~7 mostly-obscure artists beat
 ~13 mostly-famous ones carrying about 1.5 obscure. It lands on the value tension recorded
@@ -474,3 +486,91 @@ transfer.
 
 **It inherits DD-F1 unchanged:** it can do nothing for famous-to-famous journeys either,
 for the same structural reason — §6's anchor table.
+
+---
+
+## §8 — DD-P3 second half: the harness review. DISCHARGED.
+
+Report: `builder/analysis/2026-07-28-track3-depth-descent/DD-P3-harness-review.md`;
+probes `dd_p3_harness_probes.py`, `dd_p3_harness_probes2.py`. Dispatched only after the
+owner's consultant review caught that it had never run — **DD-R1 had been read with a
+mandated gate open**, and that is this session's error, not the pre-registration's.
+
+**Confirmed clean, and these are results.** The device implements §1 exactly including
+DD-D7 (`k` correct, term on the relaxation target, target exempt, no node-settle branch);
+the byte-identity argument is sound three ways and **the gate is not vacuous** — d1 paths
+differ from P on 11–12 of 16 pairs while d0 differs on 0; the A13 drop is uniform with
+zero arm-correlated missingness; DD-C6 matches its adopted definition exactly; and **every
+headline figure reproduced independently with zero disagreements**, by a route that did
+not import `score_t3.py`. The reviewer's own average-rank percentile matched
+`MirrorContext.pctl` to `max|diff| = 0.0`.
+
+### DD-D8 — DD-A2's pass depends substantially on the fame floor. Verified independently.
+
+Under A11's adopted encoding an artist with no English Wikipedia article scores `F = 0`.
+The unmatched share of scored interiors **rises with the knob**: P 6.8 % → DD-A1 12.1 % →
+DD-A2 **20.0 %** → DD-A3 **33.1 %**. Recomputing DD-C1 over **matched interiors only**:
+
+| arm | DD-C1, all interiors | DD-C1, matched only |
+|---|---|---|
+| DD-A1 | −0.658 | −0.400 |
+| **DD-A2** | **−1.287 (PASS)** | **−0.709** |
+| DD-A3 | −1.923 | −0.985 |
+
+**Roughly 45 % of DD-A2's effect is carried by artists scored at the fame floor, and
+neither DD-A2 nor DD-A3 would meet −1.0 without them.** This is **not a defect** — the
+encoding is the owner's adopted decision, resting on absence having predicted "never heard
+of" 9/9 on the labelled sample, and an unmatched artist genuinely is *reach*. But it means
+the pass is a statement about **unfindable** artists as much as about **less famous** ones,
+and any owner-facing summary that omits this is misleading by selection.
+
+**The A11 guard is implemented but unread.** `fame.py` flags unmatched-but-potentially-
+notable interiors (19 mbids here) and Track 2's `score.py` reads that flag; `score_t3.py`
+never does. Bounded, and it cannot overturn the result: under the strongest counterfactual
+the guard could produce — every flagged artist reclassified as famous as a typical
+production interior — DD-A2 still passes on both DD-C1 (−1.160) and DD-C2 (+0.562). The
+**29 unflagged unmatched interiors are not bounded** by that argument; A11's two detectors
+are the pre-registered mechanism and were not re-opened.
+
+### DD-P3H-2 — DD-C2's pooling, and the retraction in §5
+
+The single A13-dropped cell is an **analysis** pair at d20 only, so DD-C2's d5 and d20
+pools are drawn from different pair sets. The scorer honours the drop exactly as written;
+this is a property of differencing two pooled medians across depths. Four poolings, this
+session's own recomputation:
+
+| arm | as scored | pair dropped at both depths | per-pair median | both |
+|---|---|---|---|---|
+| **P** | **−0.158** | **+0.076** | **+0.020** | **+0.020** |
+| DD-A1 | +0.275 | +0.353 | +0.392 | +0.392 |
+| **DD-A2** | **+0.644** | +0.801 | +0.847 | +0.847 |
+| DD-A3 | +0.364 | +0.411 | **+0.016** | +0.016 |
+
+**DD-A2's pass is robust** — 0.644–0.847, every pooling ≥ 0.5. **Production's negative
+gradient is not** (§5's retraction). **DD-A3's gradient is largely a pooling artefact**,
+collapsing 0.364 → 0.016.
+
+⚠ **This session's figures differ from the review's in the per-pair column** (it reported
+P −0.200, DD-A2 0.540, DD-A3 0.028 against +0.020, 0.847, 0.016 here), so the two used
+different per-pair definitions. **Recorded rather than reconciled**, because every
+conclusion is unchanged or strengthened under both: DD-A2 robust, DD-A3 artefactual,
+production's sign unstable — and under *these* figures production's claim is weaker still,
+negative under one pooling of four rather than three.
+
+### Disclosed variants, no verdict changes
+
+- **DD-C4 uses all hops; §5 says "interior hops".** Disclosed in the code and the exposure
+  map. Under the literal reading DD-A1 would **not** flag (drop 0.056 vs 0.143); DD-A2 and
+  DD-A3 flag either way. DD-C4 gates nothing, so no read moves. Side fact: P's interior
+  hops are ceiling-saturated at exactly 1.000 — the endpoint-adjacent hops are what pull
+  P to 0.980.
+- **DD-C1 aggregates within a cell by mean; Track 2's committed C1 used the cell median**,
+  and Track 2 is where the −1.0 threshold was calibrated. §5 fixes only the outer
+  statistic, so this is not contrary to the pre-registration. Under Track 2's median:
+  DD-A2 −1.317, DD-A3 −2.252 — **every pass/fail identical**. It matters only because the
+  mean is the more floor-exposed of the two (DD-D8).
+- **DD-C6 covers DD-C1's window only**; DD-C2 has no length control while its pooled
+  interior counts move sharply. Stated as a gap, not repaired — repairing it after seeing
+  the result is the move pre-registration prevents.
+- `DD-P3H-12`'s note that `t3_supplementary.json` was absent is **stale**: the review ran
+  concurrently with its creation. Verified present.
