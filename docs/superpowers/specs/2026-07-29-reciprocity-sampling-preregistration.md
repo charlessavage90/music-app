@@ -225,4 +225,40 @@ one named risk.
 
 Append-only. Nothing above is edited once committed; a correction is a new dated entry here.
 
-*(none yet)*
+### `RC-A1` — 2026-07-29, before any arm ran: adopt the AS sample as the seed set
+
+**Nothing above is edited. §2 is superseded by this entry on the seed set only; every
+criterion, gate and read stands as written.**
+
+`analysis/2026-07-29-cap-selection-sim/as_raw_records.json` already holds, for **200
+artists — 40 per stratum, the same five bands, drawn with the same fixed seed 20260729 from
+the same verified artifact** — the full candidate list under **both** `ALG-B` and `ALG-E`
+(`ALG-E` is the AS label for the production setting; its algorithm string is
+`BuilderConfig.algorithm` verbatim). Those were fetched **today**.
+
+**The seed set for this run is therefore that 200, not the 150 of §2.** Three reasons, all
+of which make the design stronger rather than cheaper-and-worse:
+
+1. **The seed side costs nothing and needs no drift control at all** — both arms' seed lists
+   were fetched today, in one interleaved pass, so no seed comparison spans the archive's age.
+2. **More seeds per band than §2 asked for** (40 everywhere, against 25/25/25/25/50). The
+   lower half loses its double weight and gains nothing; `RC-G2`'s thresholds (≥ 15, and ≥ 30
+   for the lower half) are still met with margin, so no band changes readability.
+3. **Directly comparable with `AS-C1`**, which was scored on this exact sample. A rate
+   measured on the same artists as the count is what `AS-H2` asked for.
+
+**`RC-G1` is retargeted and becomes free.** Its purpose was to check the nine-day-old archive
+against today's service before any cross-arm read leans on it. With this amendment the archive
+is used only for **`RC-ARM-P`'s sampled-candidate lists**, so the gate compares AS's live
+production seed lists (2026-07-29) against the archived responses for those same artists
+(2026-07-20) — **all 200 of them, no fetches**, instead of 40 fetched ones. **Threshold is
+unchanged:** it fires if more than 10% of comparable artists differ from their archived top-50
+by more than 5 members, and on firing `RC-ARM-P`'s candidate lists must be re-fetched live
+before any cross-arm read.
+
+**Cost after this amendment:** `RC-ARM-B` needs its sampled candidates fetched live —
+200 seeds × up to 10 sampled candidates ≈ 2,000 requests at ~1.25 s ≈ **40 minutes**, up from
+the ~30 minutes §3 estimated, because the sample grew from 150 seeds to 200.
+`RC-ARM-P`'s candidates come from the archive wherever present.
+
+**`m = 10` is unchanged**, as is every threshold in §4 and §5.
