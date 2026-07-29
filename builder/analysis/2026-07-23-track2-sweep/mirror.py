@@ -88,6 +88,22 @@ class SweepConfig:
     # must keep toll_s. Track 2F pre-registration §4, run order step 3.
     toll_hops: float | None = None
 
+    # Track 3 (DD-P4): the depth-descent device. A node toll in PERCENTILE currency,
+    # growing linearly with the number of `known` bypasses:
+    #
+    #     cost(u->v) += w_known_ramp_pctl * k * pctl(v)   for every relaxed node v
+    #                                                     except the target endpoint
+    #
+    # 0.0 = off, so every committed Track 2 and 2F figure reproduces from this file
+    # unchanged, and `production()` is untouched. At k = 0 the term is exactly zero
+    # AND is not added at all (see `_dijkstra`), which is what makes DD-G2 -- every
+    # arm's first path byte-identical to production's -- hold by construction rather
+    # than by floating-point luck.
+    #
+    # DD-D7: applied to the edge-relaxation TARGET, not on node settle. A node-settled
+    # implementation would price nodes that never appear on the returned path.
+    w_known_ramp_pctl: float = 0.0
+
     def __post_init__(self) -> None:
         if self.toll_s is not None and self.toll_hops is not None:
             raise ValueError(
@@ -194,6 +210,12 @@ def _dijkstra(
             floor_val = _relaxed_floor(base, excludes, cfg.floor_relax_known,
                                        cfg.floor_relax_dislike)
 
+    # Track 3: k is the number of `known` bypasses so far, fixed for the whole request,
+    # so the ramp is a constant multiplier here rather than part of the search state.
+    n_known = sum(1 for e in excludes if e.reason == KNOWN)
+    ramp = cfg.w_known_ramp_pctl * n_known
+    ramp_on = ramp != 0.0
+
     toll_on = cfg.toll_s is not None or cfg.toll_hops is not None
     if cfg.toll_hops is not None:
         toll = cfg.toll_hops * cfg.w_hop
@@ -246,6 +268,12 @@ def _dijkstra(
             )
             if toll_on and float(sim) >= 1.0:
                 cost += toll
+            # Track 3 (DD-P4). Target exempt: the final hop into B is on every complete
+            # path exactly once, so tolling it adds a constant to all alternatives and
+            # distorts nothing. Added only when live, never as `+ 0.0`, per the module
+            # docstring's byte-identity rule -- this is what discharges DD-G2 at k = 0.
+            if ramp_on and v != target:
+                cost += ramp * pctl_v
 
             nd = d + cost
             if nd < dist.get(v, float("inf")):
@@ -285,6 +313,13 @@ def find_path_mirror(
     # source->target direction is masked: a shortest path to `target` cannot use the
     # reverse direction, since the search stops when `target` is popped.
     if cfg.guard_min_intermediary and path is not None and len(path) == 2:
+        # DD-P3 finding 10: guard G is constant as a *setting* but not in its
+        # *activation*. The Track 3 device exempts the target, so the 2-node direct
+        # path is the unique zero-toll path at every k while every alternative grows
+        # linearly -- guard G can therefore fire in an arm where it does not fire in P.
+        # Counted so that is visible rather than inferred.
+        if stats is not None:
+            stats["guard_fired"] = stats.get("guard_fired", 0) + 1
         path = _dijkstra(store, source, target, hard, avoid, cfg, ctx, excludes,
                          (source, target), stats)
 
