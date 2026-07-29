@@ -238,3 +238,16 @@ Amendments are appended here with a date and a reason, **never by editing a comm
 clause**. A material mid-flight amendment is also a handoff seam (CLAUDE.md).
 
 *None yet.*
+
+**2026-07-29, post-run — `AS-H1`, a read-structure gap.** `AS-R1` and `AS-R5` were
+written as if the strata would agree about `ALG-A`; they do not (it clears the bar at
+top 1%, not at top 0.1%), so **neither read fires as written**. Recorded in the execution
+log §4 rather than resolved toward whichever read flatters the result. Any successor
+pre-registration must make its reads stratum-aware. Same shape as `TB-P5H-7`.
+
+**2026-07-29, post-run — `AS-H2`, a criterion confound found after the fact.** `AS-C1`
+and `AS-C5` are absolute counts, so they conflate "fewer sub-decile candidates" with
+"fewer candidates at all". `ALG-B` returns 58% fewer candidates below the median, which
+is the whole of its apparent decrease there. Execution log §5 reports the rate as an
+explicitly post-hoc diagnostic. **A successor design should pre-register the rate
+alongside the count.** No clause above is edited.
