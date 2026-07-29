@@ -277,7 +277,22 @@ rather than a deferral.
 - The directory needs a `README.md` (2026-07-23 spec §4.2) and no committed script
   computes sub-decile degree, though DD-F1 quotes it.
 
-### DD-D6 result — DD-C1 is reachable, and the mechanism is shortening
+### Selection effect of the re-draw, bounded
+
+Unconditioned Monte-Carlo (300 draws/group): acceptance 83.3 % famous→mid, 99.3 %
+mid→mid. If an excluded pair's true effect lies between zero and the included pairs',
+the conditioned DD-C1 estimate overstates the unconditioned mean by **≤ 9.5 % relative**
+(≈0.09 log10 against a −1.0 threshold). One slice, n = 300/group, not reproduced —
+treat as indicative. The bound breaks only if excluded pairs' effect has the opposite
+sign, which DD-D5 makes live rather than free. Relative to journeys a *user* would
+actually request the selection is much larger and **unmeasured**; there is no request
+log. Composition shifts toward lower percentile, not lower degree — sub-decile degree is
+the discriminating variable (median 8 accepted vs 0 rejected), another case where degree
+and popularity answer differently.
+
+---
+
+## §4 — DD-D6: the ceiling, and the value tension it exposes
 
 Figures owned by `gap_result.json` / `gap_paths.json`. Fame matched 322/366 = 88.0 %
 (reported, not gated — A12); 11 unmatched-but-potentially-notable carry the A11 guard.
@@ -341,9 +356,24 @@ including P, and the floor stayed live on 1.11–1.19 % of relaxations across al
 Neither varies with the knob — so the one term §0 could not certify as constant is
 constant in fact. Known because it was counted, not because it was assumed.
 
-**DD-R1 fires — an adoptable candidate exists.** DD-A2 (`w = 0.03`) passes DD-C1 and
-DD-C2 with DD-C3 holding, and DD-R1's presupposed run state is satisfied in full;
-nothing is owed for this read. **DD-R2 and DD-R3 do not apply.**
+### The verdict, in the shape it must be summarised in everywhere
+
+**DD-R1 fired on the letter.** DD-A2 (`w = 0.03`) passes DD-C1 and DD-C2 with DD-C3
+holding. **The mechanism claim — that the device buys obscurity by pricing depth — is
+UNRESOLVED**, because DD-C6 flags every arm: the fame movement is substantially
+shortening, not descent. **What exists is a measured candidate for a *different* trade
+than the one the pre-registration set out to test** — roughly 7 mostly-obscure artists
+against today's 13 mostly-famous — **and that trade is the owner's to judge, not a
+criterion's.** This wording is fixed; no summary may soften it. **DD-R2 and DD-R3 do
+not apply.**
+
+⚠ **DD-R1 was first read with DD-P3's second half unclosed.** The pre-registration makes
+DD-P3 two halves — protocol review, *then* harness review once the toll lands (P8b's
+precedent) — and the harness review had not run when the result above was first
+presented. Caught by the owner's consultant review, not by this session. **The read is
+provisional until §6 records that review passing**, and the failure mode it guards
+against is precisely a criterion reporting PASS for a reason other than the effect it
+names.
 
 **Both qualifiers fire on every arm.** DD-C6: the journey shortens by a mean 5.74
 interiors at DD-A2 (~13 → ~7), so **DD-C1 may not be read as descent** — the DD-D5
@@ -363,15 +393,84 @@ floor. **DD-A3 is not "more of DD-A2"** — it trades depth-gradient for absolut
 ~13 mostly-famous ones carrying about 1.5 obscure. It lands on the value tension recorded
 in §4. **No blind listen and no adoption are scheduled by this track** (prereg §7).
 
-### Selection effect of the re-draw, bounded
+---
 
-Unconditioned Monte-Carlo (300 draws/group): acceptance 83.3 % famous→mid, 99.3 %
-mid→mid. If an excluded pair's true effect lies between zero and the included pairs',
-the conditioned DD-C1 estimate overstates the unconditioned mean by **≤ 9.5 % relative**
-(≈0.09 log10 against a −1.0 threshold). One slice, n = 300/group, not reproduced —
-treat as indicative. The bound breaks only if excluded pairs' effect has the opposite
-sign, which DD-D5 makes live rather than free. Relative to journeys a *user* would
-actually request the selection is much larger and **unmeasured**; there is no request
-log. Composition shifts toward lower percentile, not lower degree — sub-decile degree is
-the discriminating variable (median 8 accepted vs 0 rejected), another case where degree
-and popularity answer differently.
+## §6 — Supplementary: held-out confirmation and the all-famous anchors
+
+**Figures owned by `t3_supplementary.json`**, produced by `score_t3_supplementary.py` —
+a separate module, so the pre-registered scorer stays exactly as it was when it produced
+the committed result.
+
+**Correction to the record.** `REPORT.md` previously said the 4 held-out pairs were
+"reported separately". **They were not** — `score_t3.py` evaluates every criterion on the
+analysis set and uses the held-out pairs only for the blank-name assertion. The claim was
+false when written, caught by the owner's consultant review. Fixed in the REPORT and the
+figures now exist.
+
+### Held-out confirmation — gates nothing
+
+| arm | C1 | % neg | C2 | C5/cell | length vs P |
+|---|---|---|---|---|---|
+| P | 0.000 | 0 % | +0.180 | 1.75 | 0.00 |
+| DD-A1 | −0.828 | 100 % | +0.361 | 1.92 | −3.50 |
+| **DD-A2** | **−1.258** | 92 % | **+0.946** | 3.08 | −5.58 |
+| DD-A3 | −1.703 | 100 % | +0.768 | 3.92 | −5.83 |
+
+**DD-A2 meets both analysis-set thresholds out-of-sample**, and DD-A3 meets them here
+having missed DD-C2 on the analysis set (0.364 → 0.768) — a variance signal worth
+carrying, not a promotion. **This is confirmatory only and gates nothing**: it was never
+pre-registered as a gate, and converting a held-out set into one *after* seeing the
+analysis result is the move pre-registration exists to prevent.
+
+### All-famous anchors — DESCRIPTIVE ONLY, no criterion
+
+| arm | C1 | % neg | C5/cell | length vs P |
+|---|---|---|---|---|
+| P | 0.000 | 0 % | **0.00** | 0.00 |
+| DD-A1 | −0.098 | 58 % | **0.00** | −1.50 |
+| DD-A2 | −0.071 | 58 % | **0.00** | −1.58 |
+| DD-A3 | −0.001 | 50 % | **0.00** | −1.50 |
+
+**The device does essentially nothing on famous-to-famous journeys, at any strength.**
+Fame movement is −0.098 to −0.001 — indistinguishable from zero and *non-monotone* in
+`w`. And the payload column is **0.00 for every arm including production**: across all
+12 anchor cells, at every strength up to 50× `w_hop`, **not one interior below the top
+popularity decile was ever delivered.**
+
+This is DD-F1 confirmed at the level of the device rather than the graph. The
+disconnection is not a price the router declines to pay; there is nothing to buy. **The
+owner's original complaint was about famous pairs, and every measured win here is on
+mid-band pairs.** No criterion is evaluated on these and none may be.
+
+---
+
+## §7 — Track 3b: a named, unstarted option
+
+**NOT STARTED, and not to be started without its own pre-registration.** Recorded at the
+owner's instruction so it does not have to be re-derived, and explicitly **not** a tweak
+to Track 3 — it changes the device, so it needs its own committed design, gates and
+reads before any arm.
+
+**The thresholded toll.**
+
+> `cost(u→v) += w_known_ramp_pctl · k · max(0, pctl(v) − 0.90)`
+
+**Why it is the natural successor.** It prices *only* top-decile interiors and is exactly
+zero on the sub-decile band — so it is **length-neutral precisely where DD-D5's confound
+lives**. Track 3's device charges for every interior, including obscure ones, which is
+why roughly four-fifths of its price is a length penalty and why DD-C6 flags every arm.
+Under the thresholded form, adding an obscure artist is free, so shortening is no longer
+rewarded as a side effect of seeking obscurity.
+
+**Properties preserved:** additive, non-negative (so Dijkstra remains valid), and exactly
+zero at k = 0 (so DD-G2 — the first journey untouched — still holds by construction).
+
+**What a Track 3b pre-registration would have to settle before running**, none of it
+assumed here: whether 0.90 is the right knee or itself a factor axis; whether DD-C6 stays
+a qualifier or becomes a criterion now that the device is designed to be length-neutral;
+and a fresh magnitude ladder, since the realised toll per interior is far smaller than
+Track 3's (`pctl − 0.90 ≤ 0.10` against `pctl ≤ 1.0`) and Track 3's `w` values would not
+transfer.
+
+**It inherits DD-F1 unchanged:** it can do nothing for famous-to-famous journeys either,
+for the same structural reason — §6's anchor table.
