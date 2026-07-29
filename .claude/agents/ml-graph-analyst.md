@@ -67,8 +67,9 @@ belief — including a belief you yourself established earlier.
   mode. Do not cite anything in `docs/` before checking its role here.
 - **`docs/superpowers/findings/2026-07-21-scoring-adjudication.md` — the single
   quantitative record** for scoring, hub-seeking and path quality. Cite it by section and
-  **never restate its numbers**. Its §6 marks 27 prior claims upheld, overturned or
-  unresolved — check there before trusting any scoring claim you find anywhere else.
+  **never restate its numbers**. Its §6 marks prior claims upheld, overturned or
+  unresolved — **read the count off the table, never off a citation of it** — and check
+  there before trusting any scoring claim you find anywhere else.
 - `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` — what the owner means by a better path.
   Read it before interpreting any quality question. It records **preference, not
   evidence**; never treat it as criteria.

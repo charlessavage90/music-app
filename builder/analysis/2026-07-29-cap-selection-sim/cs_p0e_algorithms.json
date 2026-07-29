@@ -1,0 +1,332 @@
+{
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "endpoint": "https://labs.api.listenbrainz.org/similar-artists/json",
+  "production_algorithm": "session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30",
+  "url_shape_confirmed": "https://labs.api.listenbrainz.org/similar-artists/json?artist_mbids=<mbid>&algorithm=<algorithm>",
+  "radiohead_mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+  "invalid_value_probes": [
+    {
+      "algorithm": "session_based_days_7500_session_300_contribution_5_threshold_10_limit_500_filter_True_skip_30",
+      "status": 400,
+      "body_head": "<!doctype html>\n<html lang=en>\n<title>400 Bad Request</title>\n<h1>Bad Request</h1>\n<p>1 validation error for SimilarArtistsViewerInput<br>algorithm<br>  value is not a valid enumeration member; permitted: &#39;session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_9000_session_300_contribution_5_threshold_15_limit_50_skip_30&#39;, &#39;session_based_days_75_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_1800_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39; (type=type_error.enum; enum_values=[&lt;AlgorithmEnum.session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30: &#39;session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;&gt;, &lt;AlgorithmEnum.session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30: &#39;sessi"
+    },
+    {
+      "algorithm": "session_based_days_7500_session_300_contribution_5_threshold_5_limit_100_filter_True_skip_30",
+      "status": 400,
+      "body_head": "<!doctype html>\n<html lang=en>\n<title>400 Bad Request</title>\n<h1>Bad Request</h1>\n<p>1 validation error for SimilarArtistsViewerInput<br>algorithm<br>  value is not a valid enumeration member; permitted: &#39;session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_9000_session_300_contribution_5_threshold_15_limit_50_skip_30&#39;, &#39;session_based_days_75_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_1800_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39; (type=type_error.enum; enum_values=[&lt;AlgorithmEnum.session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30: &#39;session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;&gt;, &lt;AlgorithmEnum.session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30: &#39;sessi"
+    },
+    {
+      "algorithm": "definitely_not_a_real_algorithm",
+      "status": 400,
+      "body_head": "<!doctype html>\n<html lang=en>\n<title>400 Bad Request</title>\n<h1>Bad Request</h1>\n<p>1 validation error for SimilarArtistsViewerInput<br>algorithm<br>  value is not a valid enumeration member; permitted: &#39;session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_9000_session_300_contribution_5_threshold_15_limit_50_skip_30&#39;, &#39;session_based_days_75_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30&#39;, &#39;session_based_days_1800_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39; (type=type_error.enum; enum_values=[&lt;AlgorithmEnum.session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30: &#39;session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30&#39;&gt;, &lt;AlgorithmEnum.session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30: &#39;sessi"
+    }
+  ],
+  "claimed_algorithms": [
+    {
+      "algorithm": "session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+      "accepted": true,
+      "artists": [
+        {
+          "name": "Radiohead",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.938174
+        },
+        {
+          "name": "The Beatles",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.929292
+        },
+        {
+          "name": "Metallica",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.923395
+        },
+        {
+          "name": "Muse",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.934117
+        },
+        {
+          "name": "Coldplay",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.933928
+        }
+      ]
+    },
+    {
+      "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+      "accepted": true,
+      "artists": [
+        {
+          "name": "Radiohead",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 13,
+          "below_top_decile": 15,
+          "below_median": 6,
+          "min_candidate_pctl": 0.236548
+        },
+        {
+          "name": "The Beatles",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 27,
+          "below_top_decile": 14,
+          "below_median": 6,
+          "min_candidate_pctl": 0.228475
+        },
+        {
+          "name": "Metallica",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 26,
+          "below_top_decile": 13,
+          "below_median": 7,
+          "min_candidate_pctl": 0.002783
+        },
+        {
+          "name": "Muse",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 21,
+          "below_top_decile": 14,
+          "below_median": 7,
+          "min_candidate_pctl": 0.228475
+        },
+        {
+          "name": "Coldplay",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 17,
+          "below_top_decile": 14,
+          "below_median": 6,
+          "min_candidate_pctl": 0.228475
+        }
+      ]
+    },
+    {
+      "algorithm": "session_based_days_9000_session_300_contribution_5_threshold_15_limit_50_skip_30",
+      "accepted": true,
+      "artists": [
+        {
+          "name": "Radiohead",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.938174
+        },
+        {
+          "name": "The Beatles",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.929292
+        },
+        {
+          "name": "Metallica",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 1,
+          "below_median": 0,
+          "min_candidate_pctl": 0.834025
+        },
+        {
+          "name": "Muse",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.943094
+        },
+        {
+          "name": "Coldplay",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.933928
+        }
+      ]
+    },
+    {
+      "algorithm": "session_based_days_75_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30",
+      "accepted": true,
+      "artists": [
+        {
+          "name": "Radiohead",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 1,
+          "below_median": 0,
+          "min_candidate_pctl": 0.78406
+        },
+        {
+          "name": "The Beatles",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.929292
+        },
+        {
+          "name": "Metallica",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.932715
+        },
+        {
+          "name": "Muse",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 1,
+          "below_median": 0,
+          "min_candidate_pctl": 0.885635
+        },
+        {
+          "name": "Coldplay",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.944698
+        }
+      ]
+    },
+    {
+      "algorithm": "session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30",
+      "accepted": true,
+      "artists": [
+        {
+          "name": "Radiohead",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.938174
+        },
+        {
+          "name": "The Beatles",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.929292
+        },
+        {
+          "name": "Metallica",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.923395
+        },
+        {
+          "name": "Muse",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.943094
+        },
+        {
+          "name": "Coldplay",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.933928
+        }
+      ]
+    },
+    {
+      "algorithm": "session_based_days_1800_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+      "accepted": true,
+      "artists": [
+        {
+          "name": "Radiohead",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.938174
+        },
+        {
+          "name": "The Beatles",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.929292
+        },
+        {
+          "name": "Metallica",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.923395
+        },
+        {
+          "name": "Muse",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.943094
+        },
+        {
+          "name": "Coldplay",
+          "status": 200,
+          "returned": 100,
+          "absent_from_artifact": 0,
+          "below_top_decile": 0,
+          "below_median": 0,
+          "min_candidate_pctl": 0.933928
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "artifact": {
+    "path": "C:\\dev\\music-app\\builder\\scratch\\graph-t15-tiebreakfix.bin",
+    "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+    "artists": 74193,
+    "edges": 898006
+  },
+  "arm": "CS-0 (production control: mutual k-NN, similarity rank, k = 50)",
+  "degree": {
+    "max": 50,
+    "p99": 44.0,
+    "median": 9.0,
+    "mean": 12.103648592185246,
+    "configured_k": 50,
+    "count_at_or_above_k": 78,
+    "count_above_k": 0
+  },
+  "stranding": {
+    "degree_le_2": 12088,
+    "degree_le_2_share": 0.16292642163007293,
+    "degree_eq_1": 6396
+  },
+  "superstars": [
+    {
+      "name": "Radiohead",
+      "degree": 50,
+      "pop_pctl": 1.0,
+      "neighbours_below_top_decile": 0,
+      "neighbours_below_median": 0,
+      "min_neighbour_pctl": 0.981966
+    },
+    {
+      "name": "The Beatles",
+      "degree": 50,
+      "pop_pctl": 0.999987,
+      "neighbours_below_top_decile": 0,
+      "neighbours_below_median": 0,
+      "min_neighbour_pctl": 0.945291
+    },
+    {
+      "name": "Metallica",
+      "degree": 48,
+      "pop_pctl": 0.999178,
+      "neighbours_below_top_decile": 0,
+      "neighbours_below_median": 0,
+      "min_neighbour_pctl": 0.975321
+    },
+    {
+      "name": "Muse",
+      "degree": 50,
+      "pop_pctl": 0.999865,
+      "neighbours_below_top_decile": 0,
+      "neighbours_below_median": 0,
+      "min_neighbour_pctl": 0.957367
+    },
+    {
+      "name": "Coldplay",
+      "degree": 50,
+      "pop_pctl": 0.999973,
+      "neighbours_below_top_decile": 0,
+      "neighbours_below_median": 0,
+      "min_neighbour_pctl": 0.944549
+    }
+  ],
+  "top_decile_population": {
+    "artists": 7420,
+    "with_zero_downward_edges": 907,
+    "with_zero_downward_edges_share": 0.12223719676549866,
+    "mean_downward_edges": 8.640700808625336,
+    "median_downward_edges": 6.0
+  }
+}

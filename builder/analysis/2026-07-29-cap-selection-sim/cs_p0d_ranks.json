@@ -1,0 +1,20 @@
+{
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "source_limit": 100,
+  "obscure_candidate_ranks_top1pct": {
+    "total_obscure_candidates": 4136,
+    "mean_rank": 64.526,
+    "median_rank": 69.0,
+    "p25_rank": 47.0,
+    "p75_rank": 86.0,
+    "share_in_last_decile_of_list": 0.174807,
+    "reading": "mean rank near LIMIT => the list is truncated against obscure candidates and `limit` binds; mean rank near the middle => it is not."
+  },
+  "saturation_random_sample": {
+    "sampled": 3000,
+    "seed": 20260729,
+    "mean_returned": 56.259,
+    "share_at_limit": 0.391,
+    "median_returned": 53.0
+  }
+}

@@ -1,0 +1,1435 @@
+{
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "governing": "docs/superpowers/specs/2026-07-29-algorithm-selection-preregistration.md",
+  "AS-G1_integrity": {
+    "ALG-E": {
+      "requests": 200,
+      "ok": 200,
+      "share_ok": 1.0,
+      "AS-G1_void": false
+    },
+    "ALG-B": {
+      "requests": 200,
+      "ok": 200,
+      "share_ok": 1.0,
+      "AS-G1_void": false
+    },
+    "ALG-A": {
+      "requests": 200,
+      "ok": 200,
+      "share_ok": 1.0,
+      "AS-G1_void": false
+    },
+    "ALG-F": {
+      "requests": 200,
+      "ok": 200,
+      "share_ok": 1.0,
+      "AS-G1_void": false
+    },
+    "ALG-D": {
+      "requests": 200,
+      "ok": 200,
+      "share_ok": 1.0,
+      "AS-G1_void": false
+    },
+    "ALG-C": {
+      "requests": 200,
+      "ok": 200,
+      "share_ok": 1.0,
+      "AS-G1_void": false
+    }
+  },
+  "AS-G2_informativeness": {
+    "rows": [
+      {
+        "arm": "ALG-B",
+        "vs": "ALG-E",
+        "stratum": "top_0.1pct",
+        "criterion": "AS-C1_mean",
+        "baseline": 1.175,
+        "arm_value": 11.25,
+        "delta": 10.075,
+        "bar_3x_AS-N": 0.15,
+        "DECISIVE": true
+      },
+      {
+        "arm": "ALG-B",
+        "vs": "ALG-E",
+        "stratum": "top_1pct_below_0.1pct",
+        "criterion": "AS-C1_mean",
+        "baseline": 5.15,
+        "arm_value": 11.35,
+        "delta": 6.2,
+        "bar_3x_AS-N": 0.3,
+        "DECISIVE": true
+      }
+    ],
+    "PASS": true,
+    "reading": "PASS -> proceed to the SS5 reads. FAIL -> AS-R2 (the null) fires; a larger sample is NOT the remedy (SS4)."
+  },
+  "AS-N_noise_floor": {
+    "top_0.1pct": {
+      "AS-C1_mean": 0.05,
+      "AS-C2_mean": 0.0,
+      "AS-C5_mean": 0.0
+    },
+    "top_1pct_below_0.1pct": {
+      "AS-C1_mean": 0.1,
+      "AS-C2_mean": 0.0,
+      "AS-C5_mean": 0.0
+    },
+    "top_decile_below_1pct": {
+      "AS-C1_mean": 0.025,
+      "AS-C2_mean": 0.1,
+      "AS-C5_mean": 0.025
+    },
+    "pctl_50_to_90": {
+      "AS-C1_mean": 1.3,
+      "AS-C2_mean": 0.0,
+      "AS-C5_mean": 0.45
+    },
+    "below_median": {
+      "AS-C1_mean": 0.2,
+      "AS-C2_mean": 0.05,
+      "AS-C5_mean": 0.05
+    }
+  },
+  "by_arm_by_stratum": {
+    "ALG-E": {
+      "top_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 1.175,
+        "AS-C2_mean": 0.025,
+        "AS-C5_mean": 0.075,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 7466.15,
+        "AS-C4_score_rank50_mean": 2956.225,
+        "AS-C4_score_last_mean": 2088.275,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_1pct_below_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 5.15,
+        "AS-C2_mean": 0.125,
+        "AS-C5_mean": 0.225,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 3578.95,
+        "AS-C4_score_rank50_mean": 1221.05,
+        "AS-C4_score_last_mean": 822.8,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_decile_below_1pct": {
+        "artists": 40,
+        "AS-C1_mean": 27.7,
+        "AS-C2_mean": 0.85,
+        "AS-C5_mean": 1.75,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 926.625,
+        "AS-C4_score_rank50_mean": 228.875,
+        "AS-C4_score_last_mean": 140.675,
+        "AS-C1_is_lower_bound": true
+      },
+      "pctl_50_to_90": {
+        "artists": 40,
+        "AS-C1_mean": 33.6,
+        "AS-C2_mean": 5.875,
+        "AS-C5_mean": 6.425,
+        "returned_mean": 85.875,
+        "AS-C4_share_short_of_limit": 0.35,
+        "AS-C4_score_rank1_mean": 180.275,
+        "AS-C4_score_rank50_mean": 39.6364,
+        "AS-C4_score_last_mean": 23.675,
+        "AS-C1_is_lower_bound": true
+      },
+      "below_median": {
+        "artists": 40,
+        "AS-C1_mean": 7.175,
+        "AS-C2_mean": 1.775,
+        "AS-C5_mean": 2.2,
+        "returned_mean": 16.375,
+        "AS-C4_share_short_of_limit": 1.0,
+        "AS-C4_score_rank1_mean": 51.15,
+        "AS-C4_score_rank50_mean": 14.0,
+        "AS-C4_score_last_mean": 12.85,
+        "AS-C1_is_lower_bound": true
+      }
+    },
+    "ALG-B": {
+      "top_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 11.25,
+        "AS-C2_mean": 16.775,
+        "AS-C5_mean": 4.025,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 3162.05,
+        "AS-C4_score_rank50_mean": 1207.85,
+        "AS-C4_score_last_mean": 875.55,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_1pct_below_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 11.35,
+        "AS-C2_mean": 15.325,
+        "AS-C5_mean": 2.725,
+        "returned_mean": 98.05,
+        "AS-C4_share_short_of_limit": 0.025,
+        "AS-C4_score_rank1_mean": 1666.025,
+        "AS-C4_score_rank50_mean": 572.2821,
+        "AS-C4_score_last_mean": 384.525,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_decile_below_1pct": {
+        "artists": 40,
+        "AS-C1_mean": 28.95,
+        "AS-C2_mean": 9.225,
+        "AS-C5_mean": 2.525,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 533.325,
+        "AS-C4_score_rank50_mean": 138.2,
+        "AS-C4_score_last_mean": 87.025,
+        "AS-C1_is_lower_bound": true
+      },
+      "pctl_50_to_90": {
+        "artists": 40,
+        "AS-C1_mean": 28.1,
+        "AS-C2_mean": 8.875,
+        "AS-C5_mean": 4.65,
+        "returned_mean": 68.9,
+        "AS-C4_share_short_of_limit": 0.525,
+        "AS-C4_score_rank1_mean": 98.4103,
+        "AS-C4_score_rank50_mean": 29.4815,
+        "AS-C4_score_last_mean": 17.5897,
+        "AS-C1_is_lower_bound": true
+      },
+      "below_median": {
+        "artists": 40,
+        "AS-C1_mean": 3.05,
+        "AS-C2_mean": 0.825,
+        "AS-C5_mean": 0.8,
+        "returned_mean": 6.85,
+        "AS-C4_share_short_of_limit": 1.0,
+        "AS-C4_score_rank1_mean": 38.0667,
+        "AS-C4_score_rank50_mean": 11.0,
+        "AS-C4_score_last_mean": 13.1333,
+        "AS-C1_is_lower_bound": true
+      }
+    },
+    "ALG-A": {
+      "top_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 1.225,
+        "AS-C2_mean": 0.05,
+        "AS-C5_mean": 0.075,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 2648.5,
+        "AS-C4_score_rank50_mean": 937.45,
+        "AS-C4_score_last_mean": 655.225,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_1pct_below_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 5.875,
+        "AS-C2_mean": 0.15,
+        "AS-C5_mean": 0.3,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 1310.8,
+        "AS-C4_score_rank50_mean": 418.625,
+        "AS-C4_score_last_mean": 275.075,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_decile_below_1pct": {
+        "artists": 40,
+        "AS-C1_mean": 25.775,
+        "AS-C2_mean": 0.75,
+        "AS-C5_mean": 1.825,
+        "returned_mean": 94.875,
+        "AS-C4_share_short_of_limit": 0.175,
+        "AS-C4_score_rank1_mean": 281.325,
+        "AS-C4_score_rank50_mean": 69.2308,
+        "AS-C4_score_last_mean": 41.2,
+        "AS-C1_is_lower_bound": true
+      },
+      "pctl_50_to_90": {
+        "artists": 40,
+        "AS-C1_mean": 18.7,
+        "AS-C2_mean": 1.875,
+        "AS-C5_mean": 2.95,
+        "returned_mean": 51.275,
+        "AS-C4_share_short_of_limit": 0.75,
+        "AS-C4_score_rank1_mean": 63.6111,
+        "AS-C4_score_rank50_mean": 17.85,
+        "AS-C4_score_last_mean": 12.3056,
+        "AS-C1_is_lower_bound": true
+      },
+      "below_median": {
+        "artists": 40,
+        "AS-C1_mean": 1.475,
+        "AS-C2_mean": 0.1,
+        "AS-C5_mean": 0.425,
+        "returned_mean": 3.125,
+        "AS-C4_share_short_of_limit": 1.0,
+        "AS-C4_score_rank1_mean": 26.2,
+        "AS-C4_score_rank50_mean": NaN,
+        "AS-C4_score_last_mean": 13.0,
+        "AS-C1_is_lower_bound": true
+      }
+    },
+    "ALG-F": {
+      "top_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 1.175,
+        "AS-C2_mean": 0.05,
+        "AS-C5_mean": 0.075,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 2578.725,
+        "AS-C4_score_rank50_mean": 917.5,
+        "AS-C4_score_last_mean": 639.125,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_1pct_below_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 5.975,
+        "AS-C2_mean": 0.15,
+        "AS-C5_mean": 0.3,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 1286.675,
+        "AS-C4_score_rank50_mean": 405.8,
+        "AS-C4_score_last_mean": 269.0,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_decile_below_1pct": {
+        "artists": 40,
+        "AS-C1_mean": 25.8,
+        "AS-C2_mean": 0.85,
+        "AS-C5_mean": 1.85,
+        "returned_mean": 94.375,
+        "AS-C4_share_short_of_limit": 0.175,
+        "AS-C4_score_rank1_mean": 276.15,
+        "AS-C4_score_rank50_mean": 69.1316,
+        "AS-C4_score_last_mean": 40.55,
+        "AS-C1_is_lower_bound": true
+      },
+      "pctl_50_to_90": {
+        "artists": 40,
+        "AS-C1_mean": 17.4,
+        "AS-C2_mean": 1.875,
+        "AS-C5_mean": 2.5,
+        "returned_mean": 50.275,
+        "AS-C4_share_short_of_limit": 0.725,
+        "AS-C4_score_rank1_mean": 60.2162,
+        "AS-C4_score_rank50_mean": 17.65,
+        "AS-C4_score_last_mean": 11.973,
+        "AS-C1_is_lower_bound": true
+      },
+      "below_median": {
+        "artists": 40,
+        "AS-C1_mean": 1.275,
+        "AS-C2_mean": 0.15,
+        "AS-C5_mean": 0.375,
+        "returned_mean": 3.0,
+        "AS-C4_share_short_of_limit": 1.0,
+        "AS-C4_score_rank1_mean": 26.1053,
+        "AS-C4_score_rank50_mean": NaN,
+        "AS-C4_score_last_mean": 13.2632,
+        "AS-C1_is_lower_bound": true
+      }
+    },
+    "ALG-D": {
+      "top_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 2.5,
+        "AS-C2_mean": 0.1,
+        "AS-C5_mean": 0.275,
+        "returned_mean": 99.175,
+        "AS-C4_share_short_of_limit": 0.025,
+        "AS-C4_score_rank1_mean": 335.55,
+        "AS-C4_score_rank50_mean": 87.425,
+        "AS-C4_score_last_mean": 57.275,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_1pct_below_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 7.95,
+        "AS-C2_mean": 0.55,
+        "AS-C5_mean": 0.55,
+        "returned_mean": 86.2,
+        "AS-C4_share_short_of_limit": 0.375,
+        "AS-C4_score_rank1_mean": 155.025,
+        "AS-C4_score_rank50_mean": 37.9143,
+        "AS-C4_score_last_mean": 23.7,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_decile_below_1pct": {
+        "artists": 40,
+        "AS-C1_mean": 3.175,
+        "AS-C2_mean": 0.2,
+        "AS-C5_mean": 0.275,
+        "returned_mean": 20.875,
+        "AS-C4_share_short_of_limit": 0.925,
+        "AS-C4_score_rank1_mean": 33.0,
+        "AS-C4_score_rank50_mean": 17.3333,
+        "AS-C4_score_last_mean": 11.5161,
+        "AS-C1_is_lower_bound": true
+      },
+      "pctl_50_to_90": {
+        "artists": 40,
+        "AS-C1_mean": 0.275,
+        "AS-C2_mean": 0.025,
+        "AS-C5_mean": 0.0,
+        "returned_mean": 0.725,
+        "AS-C4_share_short_of_limit": 1.0,
+        "AS-C4_score_rank1_mean": 22.0,
+        "AS-C4_score_rank50_mean": NaN,
+        "AS-C4_score_last_mean": 12.4286,
+        "AS-C1_is_lower_bound": true
+      },
+      "below_median": {
+        "artists": 40,
+        "AS-C1_mean": 0.025,
+        "AS-C2_mean": 0.0,
+        "AS-C5_mean": 0.025,
+        "returned_mean": 0.05,
+        "AS-C4_share_short_of_limit": 1.0,
+        "AS-C4_score_rank1_mean": 15.5,
+        "AS-C4_score_rank50_mean": NaN,
+        "AS-C4_score_last_mean": 15.5,
+        "AS-C1_is_lower_bound": false
+      }
+    },
+    "ALG-C": {
+      "top_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 1.45,
+        "AS-C2_mean": 0.05,
+        "AS-C5_mean": 0.125,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 7929.925,
+        "AS-C4_score_rank50_mean": 3045.7,
+        "AS-C4_score_last_mean": 2021.825,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_1pct_below_0.1pct": {
+        "artists": 40,
+        "AS-C1_mean": 9.0,
+        "AS-C2_mean": 0.475,
+        "AS-C5_mean": 0.225,
+        "returned_mean": 100.0,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 3766.975,
+        "AS-C4_score_rank50_mean": 1216.575,
+        "AS-C4_score_last_mean": 658.3,
+        "AS-C1_is_lower_bound": true
+      },
+      "top_decile_below_1pct": {
+        "artists": 40,
+        "AS-C1_mean": 36.4,
+        "AS-C2_mean": 4.4,
+        "AS-C5_mean": 5.65,
+        "returned_mean": 95.575,
+        "AS-C4_share_short_of_limit": 0.0,
+        "AS-C4_score_rank1_mean": 952.05,
+        "AS-C4_score_rank50_mean": 223.4,
+        "AS-C4_score_last_mean": 55.075,
+        "AS-C1_is_lower_bound": true
+      },
+      "pctl_50_to_90": {
+        "artists": 40,
+        "AS-C1_mean": 22.55,
+        "AS-C2_mean": 4.725,
+        "AS-C5_mean": 4.55,
+        "returned_mean": 54.325,
+        "AS-C4_share_short_of_limit": 0.25,
+        "AS-C4_score_rank1_mean": 209.325,
+        "AS-C4_score_rank50_mean": 45.2,
+        "AS-C4_score_last_mean": 19.125,
+        "AS-C1_is_lower_bound": true
+      },
+      "below_median": {
+        "artists": 40,
+        "AS-C1_mean": 4.225,
+        "AS-C2_mean": 0.725,
+        "AS-C5_mean": 1.475,
+        "returned_mean": 9.05,
+        "AS-C4_share_short_of_limit": 0.975,
+        "AS-C4_score_rank1_mean": 54.7895,
+        "AS-C4_score_rank50_mean": 16.0,
+        "AS-C4_score_last_mean": 19.0263,
+        "AS-C1_is_lower_bound": true
+      }
+    }
+  },
+  "AS-C3_overlap_vs_baseline": {
+    "ALG-B": {
+      "top_0.1pct": {
+        "AS-C3_jaccard_mean": 0.4193,
+        "AS-C3_spearman_on_shared_mean": 0.6749,
+        "pairs": 40
+      },
+      "top_1pct_below_0.1pct": {
+        "AS-C3_jaccard_mean": 0.4903,
+        "AS-C3_spearman_on_shared_mean": 0.7278,
+        "pairs": 40
+      },
+      "top_decile_below_1pct": {
+        "AS-C3_jaccard_mean": 0.6249,
+        "AS-C3_spearman_on_shared_mean": 0.8481,
+        "pairs": 40
+      },
+      "pctl_50_to_90": {
+        "AS-C3_jaccard_mean": 0.5298,
+        "AS-C3_spearman_on_shared_mean": 0.7853,
+        "pairs": 40
+      },
+      "below_median": {
+        "AS-C3_jaccard_mean": 0.3251,
+        "AS-C3_spearman_on_shared_mean": 0.748,
+        "pairs": 40
+      }
+    },
+    "ALG-A": {
+      "top_0.1pct": {
+        "AS-C3_jaccard_mean": 0.7456,
+        "AS-C3_spearman_on_shared_mean": 0.863,
+        "pairs": 40
+      },
+      "top_1pct_below_0.1pct": {
+        "AS-C3_jaccard_mean": 0.7061,
+        "AS-C3_spearman_on_shared_mean": 0.8317,
+        "pairs": 40
+      },
+      "top_decile_below_1pct": {
+        "AS-C3_jaccard_mean": 0.6097,
+        "AS-C3_spearman_on_shared_mean": 0.7686,
+        "pairs": 40
+      },
+      "pctl_50_to_90": {
+        "AS-C3_jaccard_mean": 0.3727,
+        "AS-C3_spearman_on_shared_mean": 0.6755,
+        "pairs": 40
+      },
+      "below_median": {
+        "AS-C3_jaccard_mean": 0.1391,
+        "AS-C3_spearman_on_shared_mean": 0.6215,
+        "pairs": 40
+      }
+    },
+    "ALG-F": {
+      "top_0.1pct": {
+        "AS-C3_jaccard_mean": 0.7507,
+        "AS-C3_spearman_on_shared_mean": 0.8667,
+        "pairs": 40
+      },
+      "top_1pct_below_0.1pct": {
+        "AS-C3_jaccard_mean": 0.6993,
+        "AS-C3_spearman_on_shared_mean": 0.8358,
+        "pairs": 40
+      },
+      "top_decile_below_1pct": {
+        "AS-C3_jaccard_mean": 0.6077,
+        "AS-C3_spearman_on_shared_mean": 0.7687,
+        "pairs": 40
+      },
+      "pctl_50_to_90": {
+        "AS-C3_jaccard_mean": 0.3632,
+        "AS-C3_spearman_on_shared_mean": 0.6215,
+        "pairs": 40
+      },
+      "below_median": {
+        "AS-C3_jaccard_mean": 0.1323,
+        "AS-C3_spearman_on_shared_mean": 0.7599,
+        "pairs": 40
+      }
+    },
+    "ALG-D": {
+      "top_0.1pct": {
+        "AS-C3_jaccard_mean": 0.5654,
+        "AS-C3_spearman_on_shared_mean": 0.701,
+        "pairs": 40
+      },
+      "top_1pct_below_0.1pct": {
+        "AS-C3_jaccard_mean": 0.4298,
+        "AS-C3_spearman_on_shared_mean": 0.5921,
+        "pairs": 40
+      },
+      "top_decile_below_1pct": {
+        "AS-C3_jaccard_mean": 0.122,
+        "AS-C3_spearman_on_shared_mean": 0.4473,
+        "pairs": 40
+      },
+      "pctl_50_to_90": {
+        "AS-C3_jaccard_mean": 0.0063,
+        "AS-C3_spearman_on_shared_mean": 0.3028,
+        "pairs": 40
+      },
+      "below_median": {
+        "AS-C3_jaccard_mean": 0.0056,
+        "AS-C3_spearman_on_shared_mean": null,
+        "pairs": 40
+      }
+    },
+    "ALG-C": {
+      "top_0.1pct": {
+        "AS-C3_jaccard_mean": 0.7981,
+        "AS-C3_spearman_on_shared_mean": 0.9941,
+        "pairs": 40
+      },
+      "top_1pct_below_0.1pct": {
+        "AS-C3_jaccard_mean": 0.6987,
+        "AS-C3_spearman_on_shared_mean": 0.9874,
+        "pairs": 40
+      },
+      "top_decile_below_1pct": {
+        "AS-C3_jaccard_mean": 0.5919,
+        "AS-C3_spearman_on_shared_mean": 0.9651,
+        "pairs": 40
+      },
+      "pctl_50_to_90": {
+        "AS-C3_jaccard_mean": 0.5502,
+        "AS-C3_spearman_on_shared_mean": 0.8908,
+        "pairs": 40
+      },
+      "below_median": {
+        "AS-C3_jaccard_mean": 0.4561,
+        "AS-C3_spearman_on_shared_mean": 0.7132,
+        "pairs": 40
+      }
+    }
+  },
+  "comparisons_vs_baseline": [
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 1.175,
+      "arm_value": 11.25,
+      "delta": 10.075,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.075,
+      "arm_value": 4.025,
+      "delta": 3.95,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.025,
+      "arm_value": 16.775,
+      "delta": 16.75,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 5.15,
+      "arm_value": 11.35,
+      "delta": 6.2,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.225,
+      "arm_value": 2.725,
+      "delta": 2.5,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.125,
+      "arm_value": 15.325,
+      "delta": 15.2,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 27.7,
+      "arm_value": 28.95,
+      "delta": 1.25,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 1.75,
+      "arm_value": 2.525,
+      "delta": 0.775,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.85,
+      "arm_value": 9.225,
+      "delta": 8.375,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C1_mean",
+      "baseline": 33.6,
+      "arm_value": 28.1,
+      "delta": -5.5,
+      "bar_3x_AS-N": 3.9,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C5_mean",
+      "baseline": 6.425,
+      "arm_value": 4.65,
+      "delta": -1.775,
+      "bar_3x_AS-N": 1.35,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C2_mean",
+      "baseline": 5.875,
+      "arm_value": 8.875,
+      "delta": 3.0,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C1_mean",
+      "baseline": 7.175,
+      "arm_value": 3.05,
+      "delta": -4.125,
+      "bar_3x_AS-N": 0.6,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C5_mean",
+      "baseline": 2.2,
+      "arm_value": 0.8,
+      "delta": -1.4,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-B",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C2_mean",
+      "baseline": 1.775,
+      "arm_value": 0.825,
+      "delta": -0.95,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 1.175,
+      "arm_value": 1.225,
+      "delta": 0.05,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.075,
+      "arm_value": 0.075,
+      "delta": 0.0,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.025,
+      "arm_value": 0.05,
+      "delta": 0.025,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 5.15,
+      "arm_value": 5.875,
+      "delta": 0.725,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.225,
+      "arm_value": 0.3,
+      "delta": 0.075,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.125,
+      "arm_value": 0.15,
+      "delta": 0.025,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 27.7,
+      "arm_value": 25.775,
+      "delta": -1.925,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 1.75,
+      "arm_value": 1.825,
+      "delta": 0.075,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.85,
+      "arm_value": 0.75,
+      "delta": -0.1,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C1_mean",
+      "baseline": 33.6,
+      "arm_value": 18.7,
+      "delta": -14.9,
+      "bar_3x_AS-N": 3.9,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C5_mean",
+      "baseline": 6.425,
+      "arm_value": 2.95,
+      "delta": -3.475,
+      "bar_3x_AS-N": 1.35,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C2_mean",
+      "baseline": 5.875,
+      "arm_value": 1.875,
+      "delta": -4.0,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C1_mean",
+      "baseline": 7.175,
+      "arm_value": 1.475,
+      "delta": -5.7,
+      "bar_3x_AS-N": 0.6,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C5_mean",
+      "baseline": 2.2,
+      "arm_value": 0.425,
+      "delta": -1.775,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-A",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C2_mean",
+      "baseline": 1.775,
+      "arm_value": 0.1,
+      "delta": -1.675,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 1.175,
+      "arm_value": 1.175,
+      "delta": 0.0,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.075,
+      "arm_value": 0.075,
+      "delta": 0.0,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.025,
+      "arm_value": 0.05,
+      "delta": 0.025,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 5.15,
+      "arm_value": 5.975,
+      "delta": 0.825,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.225,
+      "arm_value": 0.3,
+      "delta": 0.075,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.125,
+      "arm_value": 0.15,
+      "delta": 0.025,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 27.7,
+      "arm_value": 25.8,
+      "delta": -1.9,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 1.75,
+      "arm_value": 1.85,
+      "delta": 0.1,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.85,
+      "arm_value": 0.85,
+      "delta": 0.0,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C1_mean",
+      "baseline": 33.6,
+      "arm_value": 17.4,
+      "delta": -16.2,
+      "bar_3x_AS-N": 3.9,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C5_mean",
+      "baseline": 6.425,
+      "arm_value": 2.5,
+      "delta": -3.925,
+      "bar_3x_AS-N": 1.35,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C2_mean",
+      "baseline": 5.875,
+      "arm_value": 1.875,
+      "delta": -4.0,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C1_mean",
+      "baseline": 7.175,
+      "arm_value": 1.275,
+      "delta": -5.9,
+      "bar_3x_AS-N": 0.6,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C5_mean",
+      "baseline": 2.2,
+      "arm_value": 0.375,
+      "delta": -1.825,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-F",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C2_mean",
+      "baseline": 1.775,
+      "arm_value": 0.15,
+      "delta": -1.625,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 1.175,
+      "arm_value": 2.5,
+      "delta": 1.325,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.075,
+      "arm_value": 0.275,
+      "delta": 0.2,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.025,
+      "arm_value": 0.1,
+      "delta": 0.075,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 5.15,
+      "arm_value": 7.95,
+      "delta": 2.8,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.225,
+      "arm_value": 0.55,
+      "delta": 0.325,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.125,
+      "arm_value": 0.55,
+      "delta": 0.425,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 27.7,
+      "arm_value": 3.175,
+      "delta": -24.525,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 1.75,
+      "arm_value": 0.275,
+      "delta": -1.475,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.85,
+      "arm_value": 0.2,
+      "delta": -0.65,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C1_mean",
+      "baseline": 33.6,
+      "arm_value": 0.275,
+      "delta": -33.325,
+      "bar_3x_AS-N": 3.9,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C5_mean",
+      "baseline": 6.425,
+      "arm_value": 0.0,
+      "delta": -6.425,
+      "bar_3x_AS-N": 1.35,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C2_mean",
+      "baseline": 5.875,
+      "arm_value": 0.025,
+      "delta": -5.85,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C1_mean",
+      "baseline": 7.175,
+      "arm_value": 0.025,
+      "delta": -7.15,
+      "bar_3x_AS-N": 0.6,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C5_mean",
+      "baseline": 2.2,
+      "arm_value": 0.025,
+      "delta": -2.175,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-D",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C2_mean",
+      "baseline": 1.775,
+      "arm_value": 0.0,
+      "delta": -1.775,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 1.175,
+      "arm_value": 1.45,
+      "delta": 0.275,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.075,
+      "arm_value": 0.125,
+      "delta": 0.05,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.025,
+      "arm_value": 0.05,
+      "delta": 0.025,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 5.15,
+      "arm_value": 9.0,
+      "delta": 3.85,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 0.225,
+      "arm_value": 0.225,
+      "delta": 0.0,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_1pct_below_0.1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.125,
+      "arm_value": 0.475,
+      "delta": 0.35,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": false
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C1_mean",
+      "baseline": 27.7,
+      "arm_value": 36.4,
+      "delta": 8.7,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C5_mean",
+      "baseline": 1.75,
+      "arm_value": 5.65,
+      "delta": 3.9,
+      "bar_3x_AS-N": 0.075,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "top_decile_below_1pct",
+      "criterion": "AS-C2_mean",
+      "baseline": 0.85,
+      "arm_value": 4.4,
+      "delta": 3.55,
+      "bar_3x_AS-N": 0.3,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C1_mean",
+      "baseline": 33.6,
+      "arm_value": 22.55,
+      "delta": -11.05,
+      "bar_3x_AS-N": 3.9,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C5_mean",
+      "baseline": 6.425,
+      "arm_value": 4.55,
+      "delta": -1.875,
+      "bar_3x_AS-N": 1.35,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "pctl_50_to_90",
+      "criterion": "AS-C2_mean",
+      "baseline": 5.875,
+      "arm_value": 4.725,
+      "delta": -1.15,
+      "bar_3x_AS-N": 1.0,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C1_mean",
+      "baseline": 7.175,
+      "arm_value": 4.225,
+      "delta": -2.95,
+      "bar_3x_AS-N": 0.6,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C5_mean",
+      "baseline": 2.2,
+      "arm_value": 1.475,
+      "delta": -0.725,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    },
+    {
+      "arm": "ALG-C",
+      "vs": "ALG-E",
+      "stratum": "below_median",
+      "criterion": "AS-C2_mean",
+      "baseline": 1.775,
+      "arm_value": 0.725,
+      "delta": -1.05,
+      "bar_3x_AS-N": 0.15,
+      "DECISIVE": true
+    }
+  ]
+}

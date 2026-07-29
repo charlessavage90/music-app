@@ -1,6 +1,10 @@
 # Handoff — requirements baseline + Track 3b executed, 2026-07-29
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED — this is NOT the current handoff.** Superseded on **next actions only**
+by [`2026-07-29-HANDOFF-algorithm-selection.md`](2026-07-29-HANDOFF-algorithm-selection.md),
+which is current. Everything below about what completed in *this* session's work remains
+accurate; its "what the next session does" is stale — that session ran, and re-sequenced
+the task order it names (the cap-selection simulation moved from first to third). Supersedes
 [`2026-07-28-HANDOFF-track3-executed.md`](2026-07-28-HANDOFF-track3-executed.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
