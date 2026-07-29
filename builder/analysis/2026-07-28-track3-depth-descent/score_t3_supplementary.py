@@ -123,7 +123,7 @@ def main() -> int:
     for arm in arms:
         if arm == "P":
             continue
-        a, h = None, hold[arm]
+        h = hold[arm]
         print(f"    {arm}: analysis-set thresholds would be "
               f"{'MET' if h['c1_meets'] and h['c2_meets'] else 'NOT met'} here "
               f"(C1 {'y' if h['c1_meets'] else 'n'}, C2 {'y' if h['c2_meets'] else 'n'})")

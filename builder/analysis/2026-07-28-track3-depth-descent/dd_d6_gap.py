@@ -62,12 +62,11 @@ def min_pctl_path(store, pctl, src: int, dst: int, hard: set[int],
     specifies. Guard G is enforced by masking the direct edge, so the result always has
     at least one interior and is comparable with P's guard-on paths.
     """
-    from mirror import _dijkstra
-
-    # A node-weighted Dijkstra expressed through the committed relaxation would need the
-    # device to exist; at the limit it is a plain Dijkstra on (BIG*pctl(v) + base), and
-    # base is bounded by ~20 while BIG*pctl separates by >= 1e6 * 1e-5, so the ordering
-    # is the pctl-sum ordering with base as tie-break.
+    # Deliberately NOT routed through `mirror._dijkstra`: at the limit this is a plain
+    # Dijkstra on (BIG*pctl(v) + base), and computing it here is what makes the ceiling
+    # independent of DD-P4's toll implementation. `base` is bounded by ~20 while
+    # BIG*pctl separates by >= 1e6 * 1e-5, so the ordering is the pctl-sum ordering
+    # with base as the tie-break.
     offsets, neighbours, scores = store.offsets, store.neighbours, store.scores
     dist = {src: 0.0}
     prev: dict[int, int] = {}
