@@ -1,11 +1,21 @@
 # Handoff — ASC-5 discharged and Track 3 pre-registered, 2026-07-28
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⛔ HISTORICAL — SUPERSEDED 2026-07-28 on next actions** by
+[`2026-07-28-HANDOFF-track3-executed.md`](2026-07-28-HANDOFF-track3-executed.md), which executed
+the work this note handed over. **Its next action — "execute Track 3" — is SPENT; do not act on
+it.** Its direction-changes below remain in force and must not be reverted.
+
+⚠ **Two things it says that Track 3's execution overturned**, so a reader landing here alone is
+not misled: the pre-registration's **carry-over count of 4 is wrong — there are 6** (`DD-D1`),
+and its **DD-P1 branch trigger is unsatisfiable by construction** (`DD-D3`). Two of its six arms
+were also struck as bit-identical to two others (`DD-D4`). See the Track 3 execution log.
+
+*(Original role: ACTIVE — the CURRENT handoff. Supersedes
 [`2026-07-25-HANDOFF-track2f-and-headroom.md`](2026-07-25-HANDOFF-track2f-and-headroom.md) on next
 actions, and [`2026-07-28-HANDOFF-redesign-deployed.md`](2026-07-28-HANDOFF-redesign-deployed.md)
 **as the document to read first only** — that is a different body of work, this discharges none
 of it, and what it says is still owed (the `--prune` pass, the queued use-the-app test, the
-iPhone script) is still owed. It does **not** state project status: for that read
+iPhone script) is still owed.)* It does **not** state project status: for that read
 [`NEXT.md`](NEXT.md), which owns it.
 
 **This is a seam handoff, not mid-flight.** The work concluded: the ASC-5 re-reads ran with

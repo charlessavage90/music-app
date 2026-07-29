@@ -10,7 +10,7 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-28 (late night), on the ASC-5 / Track 3 closeout.**
+**Last updated: 2026-07-28 (late night), on the Track 3 execution closeout.**
 
 ---
 
@@ -22,17 +22,41 @@ those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by sec
 > frequency of very famous artists) in path interiors, **especially when the bypass
 > buttons are used.**
 
-**The next action: execute Track 3 from its pre-registration, in a fresh session reading it
-cold** — [`specs/2026-07-28-track3-depth-descent-preregistration.md`](specs/2026-07-28-track3-depth-descent-preregistration.md).
-Discharge order (its §4): **DD-P2 → DD-P1 → DD-P3 → DD-P4**, then arms. Nothing in it
-schedules a blind listen, a rebuild, or any owner spend.
+**Track 3 is EXECUTED and read (2026-07-28). The next action is the owner's decision, and
+nothing is scheduled.**
 
-- Handoff: [`2026-07-28-HANDOFF-track3-preregistered.md`](2026-07-28-HANDOFF-track3-preregistered.md)
-- Record: [`2026-07-28-asc5-path-ascent-execution-log.md`](2026-07-28-asc5-path-ascent-execution-log.md)
-- Evidence that shaped it: `builder/analysis/2026-07-28-asc5-path-ascent/` (ASC-5 is
-  **discharged** — famous-pair first-path interiors are structurally forced; the bypass
-  ladder's popularity profile is flat to d20; the jump price is immaterial at path level)
-- PR: **#45** (branch `asc5-path-ascent-reread`)
+**What he is deciding.** Track 3 produced a candidate that passes both pre-registered
+criteria — but for a *different* trade than the one it set out to test: roughly **7
+mostly-obscure artists against today's ~13 mostly-famous**. Whether that is better is
+"what counts as better", which is his, and it sits on a real tension between two recorded
+values in [`WHAT-GOOD-LOOKS-LIKE.md`](WHAT-GOOD-LOOKS-LIKE.md) — value 1 counts novelty
+absolutely and is satisfied; value 2 wants bypass to *lengthen* and add novelty, and the
+lengthening half fails. **No blind listen, no adoption and no further arms are scheduled**;
+all three are his.
+
+The verdict in its fixed wording, and no summary may soften it: *DD-R1 fired on the letter;
+the mechanism claim (depth-priced descent) is UNRESOLVED because DD-C6 flags every arm;
+what exists is a measured candidate for a different trade, and that trade is the owner's to
+judge.*
+
+- Handoff: [`2026-07-28-HANDOFF-track3-executed.md`](2026-07-28-HANDOFF-track3-executed.md)
+- Record: [`2026-07-28-track3-depth-descent-execution-log.md`](2026-07-28-track3-depth-descent-execution-log.md)
+- Figures and the deliverable: `builder/analysis/2026-07-28-track3-depth-descent/`
+  (`REPORT.md`)
+- PR: **#46** (branch `track3-depth-descent`)
+
+**Two structural findings that outlive the decision**, both in the execution log: superstar
+endpoints have **zero** edges below the top popularity decile, so famous-to-famous journeys
+cannot be routed through obscure interiors **at any price** — confirmed at device level, the
+arms delivered nothing on them at any strength. And where obscure routes exist they are
+*shorter* than what production delivers, so the router is not avoiding them for distance.
+
+**A named successor exists and is UNSTARTED:** the **thresholded toll** (execution log §7),
+length-neutral exactly where Track 3's confound lives. **It needs its own pre-registration
+and is not a tweak.** Starting it is the owner's call.
+
+*Prior track, for context only:* `builder/analysis/2026-07-28-asc5-path-ascent/` (ASC-5,
+discharged; PR #45, merged) is what shaped Track 3's design.
 
 **Decided 2026-07-28 and recorded at the tripwire (`acceptance.py`): the 33 nameless
 artists are DROPPED, not backfilled.** The remediation is a standing build rule, not yet
@@ -44,6 +68,7 @@ of a rebuild.
 
 1. **The use-the-app test** — [`TEST-QUEUE.md`](TEST-QUEUE.md), the **QUEUED (latest)**
    entry (the redesign, against `https://musicapp.cmiller.io`), including the phone half.
+   **Still untested as of the Track 3 closeout.**
 2. **The iPhone script** — carried inside that same entry; still the single most valuable
    unrun test on the project.
 3. **The `--prune` publish pass** — see the deferral table; ripe from about 2026-07-29.
@@ -66,8 +91,14 @@ of a rebuild.
 - **Famous-pair first-path fame is barred as a scoring criterion** — structurally unable to
   move (PLA-R1, 2026-07-28). This includes any future rescale pre-registration.
 - **The nameless-artist question is decided** (drop). What remains is implementation, above.
-- **The builder-side p99 rescale stays parked** until Track 3 answers: DD-R2 names it the
-  next candidate on a Track 3 null with headroom present.
+- **Track 3's own results are closed and must not be re-litigated.** DD-A4/DD-A5 are
+  **struck** (bit-identical to DD-A2/DD-A3 at every scored depth) — do not re-add them to
+  reach "six arms". The pair set is **`pairs_v2.json`**, the DD-P1 remedy. The all-famous
+  anchors are **unscored by design**, and the held-out set **gates nothing** and must never
+  be promoted to a gate.
+- **The builder-side p99 rescale stays parked.** DD-R2 named it the successor *on a null*;
+  Track 3 did **not** null, so its trigger did not fire and the rescale is not next by
+  default. Same for the `STC-6` re-crawl.
 - **The OneDrive migration is COMPLETE**; the old tree is an archive, never the working tree.
 - **`G3-A5`, `G3-A2`, `G3-S7`** closed as recorded; **`G3-A3` does not fire** — do not
   re-add it. In-app-browser auth suppression is structurally impossible (no dialog).
@@ -91,8 +122,10 @@ of a rebuild.
 
 | Finding | Condition |
 |---|---|
-| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild.** The acceptance check is the forcing function. |
-| The `--prune` publish pass | **Ripe from ~2026-07-29** (a day after the redesign publish). `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. Cost of skipping: a few kB of orphans; cost of running early: a white screen for a returning visitor (`FRO-1`). |
+| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild.** The acceptance check is the forcing function. **Checked 2026-07-28: not due** — Track 3 did no rebuild. |
+| **Track 3b — the thresholded toll**, `w · k · max(0, pctl(v) − 0.90)` | **UNSTARTED, and the owner's trigger.** Ripe only if he wants the mechanism question Track 3 could not answer. Needs its own pre-registration (execution log §7 says what it must settle); it is not a tweak to Track 3. |
+| **`score_t3.py` does not read A11's `potentially_notable_unmatched` flag**, which Track 2's scorer does | **Before any further fame-scored arm on mid-band pairs.** Bounded and non-decisive for Track 3 (execution log §8), but the flag exists to get an owner glance and nothing currently reads it. |
+| The `--prune` publish pass | **Checked 2026-07-28: not yet due — ripe from ~2026-07-29**, i.e. tomorrow. (a day after the redesign publish). `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. Cost of skipping: a few kB of orphans; cost of running early: a white screen for a returning visitor (`FRO-1`). |
 | **The rate limit's headroom** — two users behind one IP could collide | **Before sharing beyond friends and family.** |
 | **The front-door secret has no rotation procedure** | **If it is ever suspected leaked.** |
 | **App Runner's CLI tags vanish if the service is replaced** | **After any deploy that recreates the service** — `infra/README.md` §7. |

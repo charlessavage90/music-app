@@ -574,3 +574,69 @@ negative under one pooling of four rather than three.
   the result is the move pre-registration prevents.
 - `DD-P3H-12`'s note that `t3_supplementary.json` was absent is **stale**: the review ran
   concurrently with its creation. Verified present.
+
+---
+
+## §9 — Closeout
+
+**Suites (D4), all run, not asserted from memory:** builder **115 passed**, api **217
+passed**, frontend **107 passed** (18 files).
+
+**D6 — the standing context layer: unconditional 43,773 characters (delta 0), conditional
+2,121 lines (delta 0).** Track 3 added nothing to the layer every session pays for.
+`CLAUDE.md` and `memory/` were not touched: nothing here changed a working convention, and
+the one transferable lesson (below) is a recommendation to the owner rather than an adopted
+rule.
+
+**A5 — no listener on 8000, 5173, 8138 or 8139.** Nothing was started by this work and
+nothing was left running. No queued item needs a local server: the live test-queue entry
+exercises the deployed site.
+
+**A4 — the default-flip check is inapplicable, and saying so rather than skipping it.**
+`w_known_ramp_pctl` defaults to 0.0 and **must stay there**: it lives in the analysis
+mirror, not shipped code, and nothing is adopted. Unshipped is the premise, not a defect.
+
+**B2 — no orphans.** Every new module is a CLI entry point listed in the analysis
+directory's README script table; `dd_p1_headroom` is additionally imported by
+`draw_pairs_v2` for `bfs_hops`.
+
+**B3 — the vacuous-test check was already discharged by DD-P3's harness review**, in the
+strongest available form: DD-G2 is the gate most at risk of being vacuous (an arm is
+*supposed* to match production at d0), and the review showed it is not — d1 paths differ
+from P on 11–16 of 16 pairs while d0 differs on none. A gate that fires on nothing adjacent
+to it would have shown up exactly there.
+
+**B4 found two dead-code items, and the first is this check's own shape.** `dd_d6_gap.py`
+imported `mirror._dijkstra` inside `min_pctl_path` and never used it — which implied the
+ceiling was computed *through* the device, the opposite of the docstring's claim and of the
+design. Removed; the comment now states the reason. Also an unused local in the
+supplementary scorer. Both re-run: `t3_supplementary.json` is byte-identical, so no result
+moved.
+
+**B1 — the lint had one hard failure and the audit found three HIGH defects, all in this
+session's own output.** The lint: the execution log was unclassified in `docs/README.md`.
+The audit, after the lint passed:
+
+1. **`NEXT.md` was never updated** — it still said "the next action: execute Track 3" after
+   Track 3 had been executed.
+2. **The previous handoff still declared itself "the CURRENT handoff. Nothing supersedes
+   it."** The closeout's A2 step was performed in `docs/README.md`'s *row* for that document
+   but not in the document itself, so the chain read forwards from the map and backwards
+   from the file.
+3. **This session's own handoff falsely claimed `NEXT.md` was "already updated".** Written
+   while deferring the `NEXT.md` rewrite to avoid racing the auditor, and never reconciled.
+   A false statement in a live document, of exactly the class the audit exists to catch.
+
+All three fixed. **The pattern is worth keeping**: every defect was in documentation this
+session wrote in the previous hour, and none was visible to the session that wrote it. That
+is the fourth recorded instance here of a self-run check passing while a cold reader found
+real defects.
+
+**The transferable lesson, and it is a recommendation to the owner, not an adopted rule.**
+The pre-registration scheduled its own analyst protocol review **third**, after the pair
+draw and the headroom measurement. Nearly everything that review found — the length
+confound (DD-D5), the currency gap (DD-D6), the struck arms (DD-D4) — was derivable from the
+document plus the artifact with **no measurements at all**. Running it first would have cost
+the same and landed before anything was built on the old design. **Not written into
+`CLAUDE.md`**: growing the standing layer is the owner's call, and this is one track's
+experience rather than an established invariant.
