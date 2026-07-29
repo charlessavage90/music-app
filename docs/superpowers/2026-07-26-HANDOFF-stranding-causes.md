@@ -88,6 +88,13 @@ conditions are parked and neither is due:
 - **`STC-6`** — if a re-crawl is ever considered *for any reason*, the
   co-occurrence threshold is examined at the same time, because the crawl is the
   only moment it can be changed.
+  > ⚠ **DISCHARGED AND KILLED 2026-07-29.** This instruction was carried out: a re-crawl
+  > was considered, the threshold was examined, and it has **no lower setting available** —
+  > the `algorithm` parameter is a closed enum and production is already at its floor. There
+  > is nothing left to examine at a future crawl. See
+  > `2026-07-29-algorithm-selection-execution-log.md` §9. **The "threshold this project
+  > chose" wording in item 1 above remains correct** — do not revert that; only this
+  > remedy is dead.
 
 **What I would do if I were continuing: nothing here.** The measurement is
 complete and the next thing this project needs is use, not more analysis. The

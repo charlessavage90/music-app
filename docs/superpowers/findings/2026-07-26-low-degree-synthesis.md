@@ -97,7 +97,10 @@ permissive rule reaches few of them, and those it does reach are all at the popu
 new here, and this item exists only to rank it against the other two causes:** of the three
 in `SYN-1`, the co-occurrence cut-off in `BuilderConfig.algorithm` is the one with the
 largest reach by headcount, and it is inside this project's control rather than a limit of
-the source. `STC-6` also records that the length limit was **checked and provably cannot**
+the source. ⚠ **That last clause is CORRECTED 2026-07-29: it is a limit of the source after
+all** — the `algorithm` enum is closed and production sits at the lowest available
+threshold, so `STC-6` is killed. See `2026-07-26-stranding-causes.md` §6's correction
+banner, which owns this. `STC-6` also records that the length limit was **checked and provably cannot**
 produce a short list — do not re-open that as an objection.
 
 **Its payoff is unmeasured**, and `STC-6` says so: nobody knows how many artists a lower

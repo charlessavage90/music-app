@@ -174,6 +174,16 @@ So SOURCE-THIN means "the source named almost nobody **above the threshold we
 asked for**", not "the source knows nothing". **Re-crawling at a lower threshold
 is inside this project's control**, which the remedy table in §1 originally denied.
 
+> ⚠ **CORRECTED 2026-07-29 — the second sentence above is now FALSE, and `STC-6` is
+> KILLED rather than deferred.** The `algorithm` parameter is a **closed enum**: only
+> `threshold_10` and `threshold_15` exist and production is already on **10**, so there is
+> no lower threshold to ask for. The distinction this section drew — "above the threshold we
+> chose" rather than "the source knows nothing" — **still stands and is still the right
+> correction**; what does not survive is the remedy it implied. Validated live; see
+> `../specs/2026-07-29-algorithm-selection-preregistration.md` §0 and
+> `../2026-07-29-algorithm-selection-execution-log.md` §9, which own the figures. Nothing
+> else in this document is affected.
+
 **What is not established:** how many artists it would actually help, or whether
 the extra edges would be good ones. It is a full re-crawl and the new edges rest
 on weaker evidence by construction. **This is a named option with an unmeasured
