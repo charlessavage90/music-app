@@ -51,9 +51,16 @@ cannot be routed through obscure interiors **at any price** — confirmed at dev
 arms delivered nothing on them at any strength. And where obscure routes exist they are
 *shorter* than what production delivers, so the router is not avoiding them for distance.
 
-**A named successor exists and is UNSTARTED:** the **thresholded toll** (execution log §7),
-length-neutral exactly where Track 3's confound lives. **It needs its own pre-registration
-and is not a tweak.** Starting it is the owner's call.
+**The named successor is now STARTED — owner's trigger pulled 2026-07-29:** the
+**thresholded toll** (execution log §7) is pre-registered as **Track 3b**
+([`specs/2026-07-29-track3b-thresholded-toll-preregistration.md`](specs/2026-07-29-track3b-thresholded-toll-preregistration.md),
+branch `product-requirements-baseline`, with `PRODUCT-REQUIREMENTS.md` — the owner's
+Must/Should/Expect restatement that now governs where it and `WHAT-GOOD-LOOKS-LIKE.md`
+disagree). No arm has run; first prerequisite is the TB-P1 analyst protocol review,
+**dispatched on the owner's word**. Same-day owner rulings recorded there: REQ-Q1 (payload
+currency = fame, with conditions), and the famous-pair structural gap (DD-F1) is **ruled a
+defect, not an accepted limitation** — its remedy is graph-side and separately decided
+(cap-selection simulation agreed as the feasibility step; unstarted).
 
 *Prior track, for context only:* `builder/analysis/2026-07-28-asc5-path-ascent/` (ASC-5,
 discharged; PR #45, merged) is what shaped Track 3's design.
@@ -123,8 +130,8 @@ of a rebuild.
 | Finding | Condition |
 |---|---|
 | **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild.** The acceptance check is the forcing function. **Checked 2026-07-28: not due** — Track 3 did no rebuild. |
-| **Track 3b — the thresholded toll**, `w · k · max(0, pctl(v) − 0.90)` | **UNSTARTED, and the owner's trigger.** Ripe only if he wants the mechanism question Track 3 could not answer. Needs its own pre-registration (execution log §7 says what it must settle); it is not a tweak to Track 3. |
-| **`score_t3.py` does not read A11's `potentially_notable_unmatched` flag**, which Track 2's scorer does | **Before any further fame-scored arm on mid-band pairs.** Bounded and non-decisive for Track 3 (execution log §8), but the flag exists to get an owner glance and nothing currently reads it. |
+| **Track 3b — the thresholded toll**, `w · k · max(0, pctl(v) − 0.90)` | ✅ **TRIGGERED 2026-07-29 — pre-registered** (`specs/2026-07-29-track3b-thresholded-toll-preregistration.md`); no arm run yet. |
+| **`score_t3.py` does not read A11's `potentially_notable_unmatched` flag**, which Track 2's scorer does | **Before any further fame-scored arm on mid-band pairs.** ✅ **Came due 2026-07-29** — Track 3b is that arm; its TB-G4 gate is the discharge (the TB scorer must read the flag). |
 | The `--prune` publish pass | **Checked 2026-07-28: not yet due — ripe from ~2026-07-29**, i.e. tomorrow. (a day after the redesign publish). `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. Cost of skipping: a few kB of orphans; cost of running early: a white screen for a returning visitor (`FRO-1`). |
 | **The rate limit's headroom** — two users behind one IP could collide | **Before sharing beyond friends and family.** |
 | **The front-door secret has no rotation procedure** | **If it is ever suspected leaked.** |
