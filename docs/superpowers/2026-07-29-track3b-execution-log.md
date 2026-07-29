@@ -87,5 +87,52 @@ must not treat those cells as failures of the device. **15 ceiling interiors car
 A11 potentially-notable flag** — the TB scorer reads the flag (TB-G4) and TB-C1(i)'s
 counterfactual will bound them if arms pass.
 
-**Next: TB-P4** — the device into the mirror, TB-G1/TB-G2 re-earned, runner and scorer,
-then the arms.
+## §3 — TB-P4 and the arms. RUN COMPLETE, SCORED. ⚠ NO VERDICT IS READ IN THIS SECTION.
+
+**This section states measurements only. The pre-registration orders TB-P5 (the harness
+review) before any verdict is read; TB-P5 has not yet reported as of this section, so any
+sentence here that looks like a verdict is provisional and is superseded by §4.**
+
+**Harness.** `mirror.py` gained `w_known_thresh_pctl` (live-only, edge-relaxation target,
+target exempt, knee constant `KNOWN_THRESH_PCTL_KNEE = 0.90`). **TB-G1 re-earned:
+212/212 cells byte-identical** with the device off. Snyk clean (0 issues) on all new
+scripts. Runner and scorer are new modules importing committed code; no committed Track
+2/3 file changed except `mirror.py`'s additive term.
+
+**The run.** 4 arms × 16 pairs × 21 depths, ~9 minutes. **TB-G2 PASS** (d0 identical to
+P on all 16 pairs, every arm) **with non-vacuity held** (d1 differs from P on 11–12
+pairs per arm). **Zero A13 drops** — unlike Track 3, no cell went guard-infeasible, so
+all 24 C1-window analysis cells score. Guard G fired 42 times in every arm including P —
+the same two unscored adjacent anchors as Track 3; no scored-pair activation.
+
+**Scores (figures owned by `tb_scores.json`; criteria as amended).**
+
+| arm | w | TB-C1 all | neg % | matched | counterfactual | C1? | TB-C2 per-pair | pooled | C2? | TB-C5/cell | TB-C5b | TB-C6 C1w | TB-C6 d5 | TB-C4 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| P | 0 | 0.000 | 0 % | 0.000 | 0.000 | — | +0.015 | −0.048 | — | 1.54 | 24 | 0.00 | 0.00 | 1.000 |
+| TB-A1 | 0.10 | −0.554 | 67 % | −0.372 | −0.471 | — | **+0.626** | +0.352 | **PASS** | 2.00 | 12 | **−3.67** ⚠ | −1.00 | 0.947 |
+| TB-A2 | 0.30 | **−1.080** | 88 % | −0.769 | **−1.040** | **PASS** | +0.475 | +0.457 | — | 4.00 | 6 | **−4.96** ⚠ | −2.88 ⚠ | 0.807 ⚠ |
+| TB-A3 | 1.00 | **−1.709** | 96 % | −1.068 | −1.375 | **PASS** | +0.213 | +0.485 | — | 6.08 | 0 | **−5.62** ⚠ | −4.38 ⚠ | 0.670 ⚠ |
+
+**Mechanical observations, no verdict:**
+
+- **No arm passes TB-C1 and TB-C2 together.** TB-A2/TB-A3 pass TB-C1 (including the
+  counterfactual); both miss TB-C2's per-pair primary (0.475 / 0.213 against 0.5).
+  TB-A1 passes TB-C2 and misses TB-C1. The gradient is **non-monotone in `w`** again —
+  at strength the path is near-maximally obscure by d5, and the victim-supply mechanism
+  (§0's row) is live: **sub-decile victims 0 → 3 → 14 → 56 across the ladder**, the
+  first direct measurement of TB-P1 F4's predicted dynamic.
+- **TB-C6 flags every arm, in both windows** (TB-A1's d5 window sits exactly at −1.00,
+  the flag boundary; its C1-window −3.67 flags it regardless).
+- **TB-C1(ii) fires on TB-A2**: matched-only −0.769 misses −1.0, so the fixed wording
+  applies — *the pass is carried substantially by artists with no English Wikipedia
+  article*. The counterfactual (i) nonetheless holds (−1.040). TB-A3's matched-only is
+  −1.068 — the first arm in either track whose pass survives on matched artists alone.
+- **TB-C5b (the REQ-Q1 degree diagnostic, first use): P's scored interiors include 24
+  distinct top-1%-degree artists; TB-A3's include 0.** The device moves the journey off
+  the well-connected stepping stones entirely at strength.
+- **TB-C4 (interior hops, gates nothing): 1.000 → 0.947 → 0.807 → 0.670.** P's interior
+  hops are ceiling-saturated at exactly 1.000 (DD-P3H's side fact, reproduced); the
+  drops at TB-A2/A3 are large.
+
+**Next: TB-P5, the harness review — dispatched before any read, per §5's amended order.**
