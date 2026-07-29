@@ -102,10 +102,17 @@ with **0 or 1 edges to the bottom 90 %**. Removing the top decile does not lengt
 these journeys, it *disconnects* them: Radiohead, Metallica, Muse, Coldplay, Taylor
 Swift, Miles Davis, Madonna, Bob Dylan, Pink Floyd, Aphex Twin and Megadeth each have
 degree 29–50 in the graph and **degree 0** in the sub-decile graph. Across the whole
-artifact the share of artists with zero sub-decile edges rises 4.5 % → 10.3 % → 20.1 %
-→ 45.1 % → **80.0 %** across pctl bands [0.90,0.95) … [0.999,1.0]. This is the
-per-pair, all-depths extension of PLA-R1 and is consistent with §2.10's famous↔obscure
-edge depletion under mutual k-NN.
+artifact the share of artists with zero sub-decile edges rises **4.5 % → 10.3 % →
+20.1 % → 45.1 % → 80.0 %** across the pctl bands [0.900,0.950), [0.950,0.980),
+[0.980,0.990), [0.990,0.999), [0.999,1.000). This is the per-pair, all-depths extension
+of PLA-R1 and is consistent with §2.10's famous↔obscure edge depletion under mutual
+k-NN.
+
+**Band edges are stated in full deliberately.** The series is reproducible only under
+these exact edges — DD-P3 had to search six schemes to recover them from an elided
+quotation, and two neighbouring schemes give visibly different numbers. Reproduced by
+`dd_f1_provenance.py` → `dd_f1_provenance.json`, which also owns the named endpoints'
+sub-decile degrees; before it, no committed script computed the quantity the log quoted.
 
 **DD-F2 — the +2 hop slack never bound anything.** All 54 failing cells were
 *unreachable*, none "reachable but too long", so the slack constant did no work. Where
@@ -239,12 +246,25 @@ pageviews). "An all-sub-decile route exists" does not entail "a route 1.0 log10 
 production's" — the §2.12 currency trap, in a new place. The analyst could not bound the
 gap (only 239 mbids join Track 2's `fame.json` to pctl, 202 of them at pctl ≥ 0.99).
 
-**This runs before any arm.** The all-obscure routes are already computed for all 12
-pairs at all 9 depths in `headroom_v2.json`; resolving F for their interiors with the
-committed `fame.py` gives headroom in DD-C1's own currency. **If that gap is well under
-1.0 log10, DD-C1 is unreachable at any `w` and the track ends in a null without running
-a single arm.** DD-G4 (MBID keying) must land first — the fame cache is name-keyed
-across all 439 entries, verified this session.
+**This runs before any arm.** Implemented in `dd_d6_gap.py`, and strengthened from what
+the analyst proposed: rather than scoring the *shortest* all-obscure route (an existence
+witness, not an optimum), it computes the **`w → ∞` ceiling** — the path minimising
+Σ pctl over interiors, which is the limit the device converges to as its strength grows.
+No arm at any `w` can be more obscure than that. The ceiling is computed directly rather
+than through the device, **so a bug in DD-P4's toll can neither flatter nor spoil it**.
+If the ceiling's fame gap is well short of −1.0 log10, DD-C1 is unreachable at any
+strength and the dose ladder is answering a question whose answer is already fixed.
+
+**DD-G4 correction.** Its first half is **already satisfied by committed code**:
+`fame.py` emits a table keyed by mbid (`"keyed_by": "mbid"`, P8b F8), and the name-keyed
+*cache* underneath it is deliberate and correct — two nodes sharing a name share a
+Wikipedia article. This session initially read the name-keyed cache as the defect DD-G4
+names; it is not. What **is** outstanding is DD-G4's second half, the assertion that no
+scored interior is blank-named, which `fame.py` does not enforce (it marks nameless nodes
+and `score.py` merely excludes them from C2 reach). That assertion is implemented in
+`dd_d6_gap.py::score` and must be carried into DD-P4's scorer — the arms that dive aim
+exactly where blank names concentrate, which is why the pre-registration made it a gate
+rather than a deferral.
 
 ### Carried into DD-P4
 

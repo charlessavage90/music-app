@@ -1,0 +1,121 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "top_decile": 0.9,
+ "band_edges": [
+  0.9,
+  0.95,
+  0.98,
+  0.99,
+  0.999,
+  1.01
+ ],
+ "series": [
+  {
+   "lo": 0.9,
+   "hi": 0.95,
+   "n": 3710,
+   "mean_sub_degree": 12.01078167115903,
+   "zero_frac": 0.045283018867924525
+  },
+  {
+   "lo": 0.95,
+   "hi": 0.98,
+   "n": 2226,
+   "mean_sub_degree": 7.034591194968553,
+   "zero_frac": 0.10287511230907458
+  },
+  {
+   "lo": 0.98,
+   "hi": 0.99,
+   "n": 742,
+   "mean_sub_degree": 3.733153638814016,
+   "zero_frac": 0.20080862533692723
+  },
+  {
+   "lo": 0.99,
+   "hi": 0.999,
+   "n": 667,
+   "mean_sub_degree": 1.6341829085457271,
+   "zero_frac": 0.4512743628185907
+  },
+  {
+   "lo": 0.999,
+   "hi": 1.0,
+   "n": 75,
+   "mean_sub_degree": 0.4666666666666667,
+   "zero_frac": 0.8
+  }
+ ],
+ "named": {
+  "Radiohead": {
+   "pctl": 1.0,
+   "degree": 50,
+   "sub_degree": 0
+  },
+  "The Beatles": {
+   "pctl": 0.9999865214578392,
+   "degree": 50,
+   "sub_degree": 0
+  },
+  "Metallica": {
+   "pctl": 0.9991778089281863,
+   "degree": 48,
+   "sub_degree": 0
+  },
+  "Taylor Swift": {
+   "pctl": 0.9942985766659478,
+   "degree": 46,
+   "sub_degree": 0
+  },
+  "Muse": {
+   "pctl": 0.9998652145783912,
+   "degree": 50,
+   "sub_degree": 0
+  },
+  "Coldplay": {
+   "pctl": 0.9999730429156782,
+   "degree": 50,
+   "sub_degree": 0
+  },
+  "Miles Davis": {
+   "pctl": 0.9936246495579039,
+   "degree": 34,
+   "sub_degree": 0
+  },
+  "Daft Punk": {
+   "pctl": 0.9895271727409963,
+   "degree": 50,
+   "sub_degree": 3
+  },
+  "Madonna": {
+   "pctl": 0.9986117101574293,
+   "degree": 29,
+   "sub_degree": 0
+  },
+  "Bob Dylan": {
+   "pctl": 0.999110416217382,
+   "degree": 43,
+   "sub_degree": 0
+  },
+  "Pink Floyd": {
+   "pctl": 0.9998517360362303,
+   "degree": 50,
+   "sub_degree": 0
+  },
+  "Aphex Twin": {
+   "pctl": 0.9998921716627129,
+   "degree": 40,
+   "sub_degree": 0
+  },
+  "Megadeth": {
+   "pctl": 0.9978434332542592,
+   "degree": 33,
+   "sub_degree": 0
+  },
+  "Lykke Li": {
+   "pctl": 0.9979243045072245,
+   "degree": 18,
+   "sub_degree": 1
+  }
+ }
+}
