@@ -64,5 +64,28 @@ it:** the pre-run forecast now on record says the likeliest end state of this tr
 mechanism question answered *negatively* for the toll family. That is a designed outcome
 with a pre-committed reading, not a failure of the track; the run is cheap and proceeds.
 
-**Next per the amended order: TB-P2a** (fame fetch for the ceiling's 30 new interiors),
-then the TB-P3(a) gate read.
+## §2 — TB-P2a and TB-P3: the ceiling gate. DISCHARGED — GATE PASSES.
+
+**TB-P2a.** `tb_p3_ceiling.py --emit` recomputed the ceiling paths, **asserting all 35
+cells reproduce the review's committed `tb_p1_ceiling.json` stats exactly** (interior
+count and median pctl exact, base cost to 1e-9) — the review's figures and this track's
+instrument now corroborate each other. Fame fetched for the ceiling's new interiors via
+the committed A11 instrument, name cache shared (`tb_ceiling_fame.json`). TB-G4's
+blank-name assertion: **PASS** over every scored interior.
+
+**TB-P3(a) — GATE PASSES: −2.554 against −1.0** (mean over 23 analysis C1-window cells
+of the ceiling-vs-P mean-interior-fame gap; cell-median variant −2.889; 18/23 cells
+clear individually; figures owned by `tb_p3_gate.json`). **The arms run.**
+
+**Two reads worth carrying, neither a criterion.** (1) TB-P1 F3 warned the pctl→fame map
+might not deliver: it did — the base-cost-tie-break ceiling reaches −2.55, nearly DD-D6's
+obscurity-extreme LIMIT (−2.73), so the fame-currency risk did not materialise on this
+pair set. (2) One pair (`Patti Smith → Daniel Herskedal`) has thin fame headroom
+(−0.30 to −0.46 per cell) and one (`Openzone Bar → Gjallarhorn`) is marginal — 5 of the
+23 cells cannot individually clear −1.0 even at the limit, so a per-cell read of any arm
+must not treat those cells as failures of the device. **15 ceiling interiors carry the
+A11 potentially-notable flag** — the TB scorer reads the flag (TB-G4) and TB-C1(i)'s
+counterfactual will bound them if arms pass.
+
+**Next: TB-P4** — the device into the mirror, TB-G1/TB-G2 re-earned, runner and scorer,
+then the arms.

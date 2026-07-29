@@ -1,0 +1,148 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "gate_statistic_mean_of_cell_mean_gap": -2.5543916450185438,
+ "variant_mean_of_cell_median_gap": -2.889316251970793,
+ "threshold": -1.0,
+ "pass": true,
+ "cells": [
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "depth": 10,
+   "d_mean_F": -4.629067761077779,
+   "d_median_F": -5.467080197392663
+  },
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "depth": 15,
+   "d_mean_F": -4.581385120145996,
+   "d_median_F": -5.764821148743891
+  },
+  {
+   "pair": "The Mills Brothers -> Tracey Chattaway",
+   "depth": 20,
+   "d_mean_F": -4.508749761261834,
+   "d_median_F": -5.5367149623741785
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "depth": 10,
+   "d_mean_F": -3.062582960576276,
+   "d_median_F": -3.5326626920052178
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "depth": 15,
+   "d_mean_F": -3.133521055104101,
+   "d_median_F": -3.508553566026209
+  },
+  {
+   "pair": "Daniel Avery -> Rita Marley",
+   "depth": 20,
+   "d_mean_F": -2.9490359018222607,
+   "d_median_F": -3.42770660085153
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "depth": 10,
+   "d_mean_F": -0.4588644703469793,
+   "d_median_F": -0.6385429684538266
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "depth": 15,
+   "d_mean_F": -0.37781380831970246,
+   "d_median_F": -0.04263006884866005
+  },
+  {
+   "pair": "Patti Smith -> Daniel Herskedal",
+   "depth": 20,
+   "d_mean_F": -0.3008722727370339,
+   "d_median_F": -0.8449902746335791
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "depth": 10,
+   "d_mean_F": -2.6602079505201015,
+   "d_median_F": -2.17107041085693
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "depth": 15,
+   "d_mean_F": -2.6262712345070502,
+   "d_median_F": -2.019809355176858
+  },
+  {
+   "pair": "Jenny Owen Youngs -> 洲崎綾",
+   "depth": 20,
+   "d_mean_F": -2.5625284581916734,
+   "d_median_F": -1.943512105610612
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "depth": 10,
+   "d_mean_F": -2.468194269998442,
+   "d_median_F": -3.171636220153556
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "depth": 15,
+   "d_mean_F": -1.6548240590466257,
+   "d_median_F": -2.7220091043288077
+  },
+  {
+   "pair": "Tails -> Fingers Inc.",
+   "depth": 20,
+   "d_mean_F": -2.5911114307159995,
+   "d_median_F": -3.223736329397126
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "depth": 10,
+   "d_mean_F": -2.3651983375685446,
+   "d_median_F": -1.7600723961261506
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "depth": 15,
+   "d_mean_F": -1.8984659128505448,
+   "d_median_F": -1.1182791163881598
+  },
+  {
+   "pair": "Mikey Murka -> Disiz",
+   "depth": 20,
+   "d_mean_F": -1.9958068859256586,
+   "d_median_F": -1.1576428946116755
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "depth": 10,
+   "d_mean_F": -4.503661337090448,
+   "d_median_F": -5.4981025873052385
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "depth": 15,
+   "d_mean_F": -3.714272313118274,
+   "d_median_F": -4.565695528751202
+  },
+  {
+   "pair": "钟茌 -> The Koolaid Electric Company",
+   "depth": 20,
+   "d_mean_F": -4.478657261484867,
+   "d_median_F": -5.751787023801051
+  },
+  {
+   "pair": "Openzone Bar -> Gjallarhorn",
+   "depth": 10,
+   "d_mean_F": -0.5009771517288986,
+   "d_median_F": -1.177324456924668
+  },
+  {
+   "pair": "Openzone Bar -> Gjallarhorn",
+   "depth": 15,
+   "d_mean_F": -0.7289381212874191,
+   "d_median_F": -1.4098937865664545
+  }
+ ],
+ "a11_flagged_ceiling_interiors": 15
+}

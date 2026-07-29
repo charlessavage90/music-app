@@ -23,6 +23,17 @@ claim (Phase 1 log §2.11).
 All three are read-only with respect to committed Track 2 / Track 3 artefacts: they
 import `mirror.py` and `run_arms.walk` and edit nothing.
 
+## Track scripts (TB-P3 → TB-P4 → arms → scoring)
+
+| script | what it computes | reads | writes |
+|---|---|---|---|
+| `tb_p3_ceiling.py --emit` | TB-P3's ceiling paths per C1-window cell, asserting every cell reproduces `tb_p1_ceiling.json`'s committed stats exactly; emits them in the `fame.py` paths-doc shape for TB-P2a | artifact, `pairs_v2.json`, `t3_paths.json`, `tb_p1_ceiling.json` | `tb_ceiling_paths.json` |
+| *(TB-P2a)* `../2026-07-24-track2-arm-scorer/fame.py --paths tb_ceiling_paths.json` | fame for the ceiling's interiors, committed A11 instrument, shared name cache | `tb_ceiling_paths.json` | `tb_ceiling_fame.json` |
+| `tb_p3_ceiling.py --score` | the TB-P3(a) gate: mean over analysis C1-window cells of the ceiling-vs-P mean-interior-fame gap, against −1.0; TB-G4 blank-name assertion; A11 flag count | `tb_ceiling_paths.json`, `tb_ceiling_fame.json` | `tb_p3_gate.json` |
+| `run_arms_tb.py` | the four arms (P, TB-A1/A2/A3 at w ∈ {0.10, 0.30, 1.00}) over all 16 pairs × 21 depths; TB-G2 + non-vacuity; the §0 victim-rule counter (sub-decile victims per arm per depth) | artifact, `pairs_v2.json` | `tb_paths.json` |
+| *(TB-P2b)* `fame.py --paths tb_paths.json` | fame for the arms' interiors | `tb_paths.json` | `tb_fame.json` |
+| `score_tb.py` | TB-C1 (all / matched-only / counterfactual, cell-median form) · TB-C2 (per-pair primary + pooled variant) · TB-C4 (interior hops) · TB-C5(a)(b) · TB-C6 (both windows); held-out supplementary; anchors descriptive | artifact, `tb_paths.json`, `tb_fame.json` | `tb_scores.json` |
+
 ## How to run
 
 ```bash
