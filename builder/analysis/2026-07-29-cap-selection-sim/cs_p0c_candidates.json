@@ -1,0 +1,82 @@
+{
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "archive": "C:\\dev\\music-app\\builder\\scratch\\graph-archive",
+  "note": "candidates_* are counted BEFORE cap, symmetrisation and component prune -- what the crawl offered. 'absent_from_artifact' candidates were dropped by the special-purpose filter, the cap or the prune.",
+  "superstars": [
+    {
+      "name": "Radiohead",
+      "own_pctl": 1.0,
+      "kept_degree": 50,
+      "kept_below_top_decile": 0,
+      "candidates_returned": 100,
+      "candidates_absent_from_artifact": 0,
+      "candidates_in_artifact": 100,
+      "candidates_below_top_decile": 0,
+      "candidates_below_median": 0,
+      "min_candidate_pctl": 0.938174,
+      "example_obscure_candidates": []
+    },
+    {
+      "name": "The Beatles",
+      "own_pctl": 0.999987,
+      "kept_degree": 50,
+      "kept_below_top_decile": 0,
+      "candidates_returned": 100,
+      "candidates_absent_from_artifact": 0,
+      "candidates_in_artifact": 100,
+      "candidates_below_top_decile": 0,
+      "candidates_below_median": 0,
+      "min_candidate_pctl": 0.929292,
+      "example_obscure_candidates": []
+    },
+    {
+      "name": "Metallica",
+      "own_pctl": 0.999178,
+      "kept_degree": 48,
+      "kept_below_top_decile": 0,
+      "candidates_returned": 100,
+      "candidates_absent_from_artifact": 0,
+      "candidates_in_artifact": 100,
+      "candidates_below_top_decile": 0,
+      "candidates_below_median": 0,
+      "min_candidate_pctl": 0.923395,
+      "example_obscure_candidates": []
+    },
+    {
+      "name": "Muse",
+      "own_pctl": 0.999865,
+      "kept_degree": 50,
+      "kept_below_top_decile": 0,
+      "candidates_returned": 100,
+      "candidates_absent_from_artifact": 0,
+      "candidates_in_artifact": 100,
+      "candidates_below_top_decile": 0,
+      "candidates_below_median": 0,
+      "min_candidate_pctl": 0.943094,
+      "example_obscure_candidates": []
+    },
+    {
+      "name": "Coldplay",
+      "own_pctl": 0.999973,
+      "kept_degree": 50,
+      "kept_below_top_decile": 0,
+      "candidates_returned": 100,
+      "candidates_absent_from_artifact": 0,
+      "candidates_in_artifact": 100,
+      "candidates_below_top_decile": 0,
+      "candidates_below_median": 0,
+      "min_candidate_pctl": 0.933928,
+      "example_obscure_candidates": []
+    }
+  ],
+  "top_1pct_population": {
+    "artists_with_archive": 742,
+    "mean_candidates_returned": 100.0,
+    "mean_candidates_absent_from_artifact": 0.167,
+    "mean_candidates_below_top_decile": 5.574,
+    "median_candidates_below_top_decile": 4.0,
+    "share_with_zero_obscure_candidates": 0.157682,
+    "mean_KEPT_below_top_decile": 1.516,
+    "discard_ratio_obscure": 0.727998
+  }
+}

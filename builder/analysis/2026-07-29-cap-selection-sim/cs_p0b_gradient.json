@@ -1,0 +1,66 @@
+{
+  "artifact": {
+    "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+    "artists": 74193
+  },
+  "arm": "CS-0 (production control)",
+  "note": "Bands are disjoint. 'downward' = neighbour below the 90th percentile.",
+  "bands": [
+    {
+      "band": "top decile, below top 1%",
+      "pctl_range": [
+        0.9,
+        0.99
+      ],
+      "artists": 6678,
+      "mean_degree": 26.032,
+      "zero_downward_share": 0.081761,
+      "mean_edges_below_top_decile": 9.432,
+      "median_edges_below_top_decile": 7.0,
+      "mean_edges_below_median": 0.521,
+      "mean_edges_below_own_pctl": 16.99
+    },
+    {
+      "band": "top 1%, below top 0.1%",
+      "pctl_range": [
+        0.99,
+        0.999
+      ],
+      "artists": 667,
+      "mean_degree": 28.552,
+      "zero_downward_share": 0.451274,
+      "mean_edges_below_top_decile": 1.634,
+      "median_edges_below_top_decile": 1.0,
+      "mean_edges_below_median": 0.136,
+      "mean_edges_below_own_pctl": 21.121
+    },
+    {
+      "band": "top 0.1%, below top 0.01%",
+      "pctl_range": [
+        0.999,
+        0.9999
+      ],
+      "artists": 67,
+      "mean_degree": 38.328,
+      "zero_downward_share": 0.791045,
+      "mean_edges_below_top_decile": 0.448,
+      "median_edges_below_top_decile": 0.0,
+      "mean_edges_below_median": 0.03,
+      "mean_edges_below_own_pctl": 30.806
+    },
+    {
+      "band": "top 0.01%",
+      "pctl_range": [
+        0.9999,
+        1.0
+      ],
+      "artists": 8,
+      "mean_degree": 47.625,
+      "zero_downward_share": 0.875,
+      "mean_edges_below_top_decile": 0.625,
+      "median_edges_below_top_decile": 0.0,
+      "mean_edges_below_median": 0.0,
+      "mean_edges_below_own_pctl": 45.375
+    }
+  ]
+}
