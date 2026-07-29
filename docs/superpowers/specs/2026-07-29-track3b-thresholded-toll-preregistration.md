@@ -17,10 +17,12 @@ log's own instruction.
 
 **The first governing requirements document is
 [`PRODUCT-REQUIREMENTS.md`](../PRODUCT-REQUIREMENTS.md)** — the first track designed
-against it. The requirements it serves: REQ-13 *(repeated bypasses must dig up less
-famous artists)*, REQ-14 *(no bypass mechanism may treat length as its objective —
-which this device satisfies by construction, unlike Track 3's)*, REQ-9 *(novelty
-through coherence — untestable offline; TB-C4 is a tripwire only)*. Payload currency
+against it. The requirements it serves: **REQ-13** *(repeated bypasses must dig up
+less famous artists)* is the warrant; **REQ-14** *(no bypass mechanism may treat added
+length as its objective)* is a constraint the device satisfies by construction; **REQ-9**
+*(novelty through coherence — untestable offline; TB-C4 is a tripwire only)*. *(Reworded
+per TB-P1 F10: REQ-14 does not prohibit rewarding shortening, and the Track 3 contrast
+belongs to DD-C6's flag, not to REQ-14.)* Payload currency
 follows the REQ-Q1 ruling (fame, dual-reported, A11 guard read, mbid-keyed frozen
 snapshots).
 
@@ -48,12 +50,17 @@ assumed.
 | `w_jump = 1.0`, raw currency | production | untouched; licensed constant by PLA-R4 (jump price immaterial at path level in both currencies). |
 | `w_degree_hub = 0.0` | production | degree appears nowhere in the device. |
 | `w_hop = 0.02` | production | the unit all magnitudes below are stated in. |
-| **the raw floor (`w_floor`)** | **production RAW — constant, NOT an axis, and here is why that is safe** | the floor term depends only on the endpoints' min `pop_raw` and on k (relaxing 0.15 per `known`), never on path content — so no device can wake it. On **this** pair set it is dead from k = 3 (k = 4 on one pair): floor bases 0.3081–0.4570, measured at DD-D4. The shallowest scored depth is d5. A floor axis here would reproduce Track 3's struck arms (DD-A4/DD-A5, bit-identical at every scored depth) — **and re-adding them is barred by `NEXT.md`'s closed list.** The floor axis is answerable only at d ∈ {0,1,2}, which nothing scores. |
+| **the raw floor (`w_floor`)** | **production RAW — constant, NOT an axis** *(argument corrected per TB-P1 F5)* | the floor **base** depends only on the endpoints' min `pop_raw` and on k (relaxing 0.15 per `known`); the **penalty** depends on the relaxation target, so the device does interact with it wherever the base is positive. On **this** pair set the base is zero from k = 3 (k = 4 on one pair, DD-D4 — reproduced exactly by TB-P1), so the penalty is identically zero at every scored depth (shallowest d5) regardless of path content. It is **live at d1–d2**, which only TB-G2's non-vacuity check reads. A floor axis here would reproduce Track 3's struck arms (DD-A4/DD-A5, bit-identical at every scored depth) — **and re-adding them is barred by `NEXT.md`'s closed list.** |
 | guard G (min one intermediary) | ON everywhere incl. P | as Track 2 §1.2. Activations are **counted per arm** (Track 3's carried item): no scored pair is adjacent, so expected exposure is zero on scored pairs — an activation on a scored pair is an anomaly to investigate, not data. |
 | the knee, **0.90** | fixed, not an axis | 0.90 is the boundary the whole instrument chain is calibrated at: DD-P1 headroom certifies sub-decile routes, DD-C5/TB-C5 count sub-decile interiors, DD-F1's structural finding is stated at it. Varying the knee is a second factor column and doubles the run for a question (knee placement) that only matters if the mechanism works at all. **Pre-committed follow-up, not smuggled in:** a knee axis may be proposed only after TB-R1, in its own amendment. |
 | victim rule, all-`known` walk, snapshots {0,1,2,3,5,7,10,15,20}, max depth 20 | Track 2's exactly | imported from committed `run_arms.py` lineage (`run_arms_t3.py` precedent: import, never reimplement). The `dislike` ramp is out of scope — REQ-30/REQ-31 make it a different mechanism; noted, not smuggled in. |
 | pair set | `pairs_v2.json`, frozen | inherited unchanged (§3). The device cannot alter a frozen file; re-drawing would break comparability with Track 3 for no design reason. |
 | fame instrument | A11 exactly (`builder/analysis/2026-07-24-track2-arm-scorer/fame.py`), extended not modified | new interiors need fame fetches (TB-P2), appended to a frozen mbid-keyed snapshot. The encoding (unmatched → floor) is the owner's adopted decision and is not revisited here; its exposure is handled at TB-C1's robustness conditions instead. |
+| **the victim rule × the sub-decile subgraph** | **NOT constant in its effect — added per TB-P1 F4, the one term this device genuinely wakes** | measured (TB-P1, independently re-verified): **0/252** of production's victims are sub-decile, so P's exclusion sets never remove a node the device wants to route through — while an arm that descends draws its victims **from** the sub-decile subgraph and progressively excludes its own supply (all-sub-decile routes carry 4–9 interiors, median 6, against a 20-press walk). The Track 2 §0 shape in mirror image: inert in the baseline for a reason the intervention removes. **Instrumented, not assumed:** TB-P4 counts sub-decile victims per arm per depth. Named in advance as a candidate mechanism for a non-monotone TB-C2. |
+| `w_known_ramp_pctl = 0.0` — Track 3's device, living in the same `mirror.py` | stays 0.0 in every arm | not set by any TB config; a sibling device sharing a file is the single most confusable constant here, so it is stated (TB-P1 F6). |
+| `w_avoid`, `avoid_penalty`, `avoid_decay`, `avoid_radius` | production / unused | the walk is all-`known`, so the avoidance map is empty in every arm (TB-P1 F6). |
+| `toll_s`, `toll_hops` (the Track 2/2F ceiling toll) | `None` | not set by any TB config (TB-P1 F6). |
+| `jump_mean_match` | unused | only reachable under `jump_currency = pctl`, which no arm sets (TB-P1 F6). |
 
 ## §1 — The device
 
@@ -69,7 +76,9 @@ on the returned path):
   construction (REQ-34 preserved structurally; TB-G2 verifies rather than assumes).
 - **On any sub-decile interior the term is exactly zero at every `w` and every k.**
   This is the design property the track exists to test: Track 3's device charged for
-  *every* interior, so ~80 % of its price was a hop-count penalty (DD-D5) and
+  *every* interior — the median length share of its toll differential against the
+  all-obscure route was 80.7 % (DD-D5, stated in that form per TB-P1 F14; this
+  device's same-form figure is 0.500, TB-P1 F2 — halved, not removed) — and
   shortening was rewarded as a side effect. Here, adding an obscure artist is free —
   **length-neutral exactly where DD-D5's confound lives.**
 - What the device does **not** remove: shortening still saves toll by *dropping*
@@ -94,17 +103,24 @@ One axis. Every variant's isolating baseline differs by exactly one column.
 | **TB-A3** | 1.00 | TB-A2 | dose; at k=20 the toll on one typical famous interior (≈2.0) is commensurate with the whole sim term (≤3.0) | 50× |
 
 **Dose derivation, so the ladder is comparable to Track 3's in the currency that
-matters.** The toll binds only above the knee, so Track 3's `w` values do not
-transfer (`pctl − 0.90 ≤ 0.10` against `pctl ≤ 1.0` — execution log §7). The
-comparable quantity is the **realised toll per production-typical famous interior**:
-production's d ≥ 10 interiors sit at median pctl ≈ 0.998 (PLA-R2), so per interior
-the toll is `w · k · 0.098 ≈ w·k/10`, and at k = 10 the realised toll per such
-interior is ≈ `w`. Setting `w ∈ {0.10, 0.30, 1.00}` therefore reproduces Track 3's
-realised ladder of 5× / 15× / 50× `w_hop` per famous interior at k = 10 — the span
-across which Track 3's device produced its (confounded) movement. **Magnitude
-escalation beyond TB-A3 is barred in advance**, by the same argument as DD-R2's: at
-k = 20 its per-interior toll already rivals the entire similarity term, so "not
-strong enough" is not an available reading of a null.
+matters.** *(⚠ AMENDED per TB-P1 F1 — the original premise quoted PLA-R2's pctl ≈
+0.998, a figure measured on Track 2's pair set, violating this document's own
+cross-track comparability guard.)* The toll binds only above the knee, so Track 3's
+`w` values do not transfer (`pctl − 0.90 ≤ 0.10` against `pctl ≤ 1.0` — execution
+log §7). Measured on **this** pair set (TB-P1 F1 owns the figures): production's
+C1-window interiors sit at median pctl **0.9810** (above-knee median **0.9864**,
+and only **88.6 %** are above the knee at all), so the realised ladder is
+**≈4× / 13× / 43× `w_hop` at the median above-knee interior** — not the nominal
+5×/15×/50×. **And there is no typical payment under this device:** the per-interior
+price at TB-A2 spans 1.9×–14.9× (8× spread) where Track 3's spanned 12.5×–15.0×,
+so a null at TB-A1 may not be read as "a uniform price was ignored". The ladder
+`w ∈ {0.10, 0.30, 1.00}` is retained unchanged because it demonstrably brackets the
+per-cell crossover dose (TB-P1 clean row 11: `w*` median 0.2808; the ceiling
+undercut on 3/23, 14/23 and 23/23 cells respectively), which is the property a
+mechanism-strength null needs. **Magnitude escalation beyond TB-A3 is barred in
+advance**, by the same argument as DD-R2's: at k = 20 its per-interior toll already
+rivals the entire similarity term, so "not strong enough" is not an available
+reading of a null.
 
 ## §3 — The pair set: inherited, not redrawn
 
@@ -112,8 +128,10 @@ strong enough" is not an available reading of a null.
 committed** — the DD-P1 remedy set: 12 headroom-passing pairs (6 famous→mid, 6
 mid→mid), split 8 analysis / 4 held-out (4/2 per group), drawn with DD-P1 headroom as
 a draw-time precondition, seed 20260728. Inheriting it keeps three things Track 3
-already paid for: **100 % certified headroom** (108/108 C1-window cells — so a null
-here is a mechanism statement, not a pair-set artefact), the frozen fame table
+already paid for: **100 % certified headroom** (108/108 scored cells across all nine
+snapshot depths, of which 36/36 are C1-window and 24/24 analysis — denominator
+relabelled per TB-P1 F9; so a null here is a mechanism statement, not a pair-set
+artefact), the frozen fame table
 (`t3_fame.json`, extended not rebuilt), and direct comparability of every TB
 criterion against Track 3's committed figures on identical cells.
 
@@ -165,10 +183,14 @@ artifact with no measurements at all. Here the review runs **first**.
   interior premise; (b) does the §6 ceiling construction (TB-P3) correctly
   characterise the `w → ∞` limit of this device; (c) is TB-C2's pre-committed pooling
   well-defined on this pair set given the known A13-drop asymmetry (DD-P3H-2).
-- **TB-P2 — fame extension.** Fetch fame for interiors newly delivered by the ceiling
-  probe and the arms, mbid-keyed, appended to the frozen snapshot; A11's two
-  detectors unchanged; blank-name assertion at fetch time. The fetch precedes any
-  criterion evaluation (DD-G4 discipline).
+- **TB-P2 — fame extension, in two discharges** *(split per TB-P1 F8 — as one item it
+  depended on outputs that do not exist at its position in the order)*: **TB-P2a** —
+  the ceiling probe emits its paths, and fame is fetched for its new interiors
+  **before TB-P3(a) is read** (TB-P1 sizing: 78 distinct ceiling interiors, 48
+  already in committed tables, **30 new fetches**, 0 blank-named). **TB-P2b** — the
+  same for the arms' new interiors, before any criterion is evaluated. Mbid-keyed,
+  appended to the frozen snapshot; A11's two detectors unchanged; blank-name
+  assertion at fetch time (DD-G4 discipline).
 - **TB-P3 — the ceiling probe, a go/no-go gate with its own effect size.** The
   `w → ∞` limit of this device routes toll-free, and DD-P1 certifies a toll-free
   (all-sub-decile-interior) route exists for every scored cell — so the limit is
@@ -178,22 +200,35 @@ artifact with no measurements at all. Here the review runs **first**.
   the device, so a device bug can neither flatter nor spoil it (the DD-D6 principle).
   Two measurements:
   - **(a) GATE.** Mean fame gap vs P over C1-window analysis cells. **If it fails to
-    clear −1.0 log10, the arms are not run** (TB-R3): no dose can beat the `w → ∞`
-    limit, so TB-C1 would be unreachable and the ladder would be answering a question
-    whose answer is already fixed. *(Plain: first check that even a perfect version
-    of this rule could make the journeys one full step less famous — if it can't, we
-    don't spend the run.)*
-  - **(b) FORECAST, gates nothing.** The ceiling's mean interior count vs P. Track
-    3's (unthresholded) ceiling shortened 13 → 5; if **this** ceiling preserves
-    length, the mechanism has structural room and the ladder tests whether finite
-    doses find it; if it also shortens, TB-R2 is the likely outcome and the run
-    proceeds knowing that. Recorded before arms so the forecast cannot be reshaped
-    to fit them.
+    clear −1.0 log10, the arms are not run** (TB-R3). *(Reasoning restated per TB-P1
+    F3: the ceiling bounds the **toll** at P's exclusion state, not fame, and the
+    pctl→fame map is DD-D6's non-monotone one — so a failure is strong pre-committed
+    evidence that the ladder cannot reach TB-C1, not a proof of it; the stop is a
+    judgement about cost, and it is stated as one.)* *(Plain: first check that even a
+    perfect version of this rule could make the journeys one full step less famous —
+    if it can't, we don't spend the run.)*
+  - **(b) FORECAST, gates nothing — and it is RECORDED, pre-arm (TB-P1 F2):** the
+    ceiling's mean interior count is **6.52 against P's 13.35** — a paired delta of
+    **−6.83**, 6.8× TB-C6's flag threshold (figures owned by
+    `builder/analysis/2026-07-29-track3b-thresholded-toll/TB-P1-protocol-review.md`).
+    **This ceiling also shortens**, so by this document's own sentence TB-R2 is the
+    likely outcome, and the run proceeds knowing that. The forecast does **not**
+    pre-judge the arms: the ladder reaches the limit on only 5/23 cells at its top
+    rung (TB-P1 F3), the arms walk their own victim sequences (§0's victim-rule
+    row), and this device's length-share of the toll differential is half Track 3's
+    (median 0.500 vs 0.807) — the confound is halved, not removed. *(Original text,
+    retained: Track 3's unthresholded ceiling shortened 13 → 5; if this ceiling
+    preserved length the mechanism had structural room. Recorded before arms so the
+    forecast cannot be reshaped to fit them — which is why it is recorded here, now,
+    from the review rather than from any arm.)*
 - **TB-P4 — harness.** `mirror.py` gains the thresholded term behind a config field
   defaulting to 0.0, on the edge-relaxation target (DD-D7), destination exempt;
   runner and scorer are **new modules importing committed code**, never edits to
   committed Track 2/3 files (so every prior figure still reproduces). Snyk scan on
-  changed code before first run. Guard-G activation counter per arm.
+  changed code before first run. Counters per arm per depth: guard-G activations,
+  `floor_active`, and **sub-decile victims** (§0's victim-rule row, per TB-P1 F4).
+  The analysis directory gets a `README.md` script table (2026-07-23 spec §4.2,
+  added per TB-P1 F15).
 - **TB-P5 — `ml-graph-analyst` harness review after the arms land, BEFORE the
   verdict is read.** Non-optional and explicitly ordered: Track 3's DD-R1 was first
   read with this gate open, caught by the owner's consultant review. The verdict in
@@ -206,10 +241,13 @@ Fame is the committed A11 instrument (F = log10(1+pageviews), unmatched → floo
 mbid-keyed, frozen. Cell = pair × depth. C1 window = d ∈ {10, 15, 20}, analysis
 pairs.
 
-- **TB-C1 (primary).** Paired ΔF vs P per cell, **cell statistic = median interior F
-  difference** (Track 2's calibrated form — chosen over Track 3's cell mean because
-  the median is the less floor-exposed of the two, DD-D8), mean over the 24 C1-window
-  cells ≤ **−1.0** log10, with ≥ **75 %** of cells negative. *(Plain: after ten or
+- **TB-C1 (primary).** Paired ΔF vs P per cell, **cell statistic = (median interior
+  F of the arm) − (median interior F of P) at the same cell** — Track 2's
+  `score.py::cell_median` form (wording made exact per TB-P1 F12; chosen over Track
+  3's cell mean because the median is the less floor-exposed of the two, DD-P3H-4,
+  with DD-D8 the motivating finding — citation per TB-P1 F14) — mean over the
+  C1-window cells surviving the uniform A13 drop (24 before any drop) ≤ **−1.0**
+  log10, with ≥ **75 %** of surviving cells negative. *(Plain: after ten or
   more presses of "I know them", the typical artist in the middle is about one full
   step less known than today's app gives you, and this holds across most journeys
   rather than being bought by a few.)*
@@ -218,8 +256,9 @@ pairs.
   and an unmatched artist genuinely is reach. Two robustness conditions pre-committed:
   - **(i)** the A11-guard counterfactual must hold — reclassifying every
     `potentially_notable_unmatched` interior as a production-typical famous artist
-    (F = P's C1-window median), the arm still passes. An arm that fails this
-    counterfactual is **not a pass**.
+    (F = P's **matched-interior** C1-window median — constant fixed per TB-P1 F13,
+    DD-P3H-1's form), the arm still passes. An arm that fails this counterfactual is
+    **not a pass**.
   - **(ii)** if matched-only misses −1.0 while the primary passes, every statement of
     the pass carries this fixed wording: *"the pass is carried substantially by
     artists with no English Wikipedia article."*
@@ -234,23 +273,34 @@ pairs.
   untouched.)*
 - **TB-C4 (coherence tripwire — reported, gates nothing).** Median per-hop similarity
   over **interior hops** (both ends interiors — the definition Track 3's §5 stated
-  and its code did not implement; fixed here explicitly, DD-P3H's disclosed variant
-  resolved in favour of the stated design) at d ≥ 10, per arm vs P. Drop > **0.10**
+  and its code did not implement; fixed here explicitly, DD-P3H-3's disclosed
+  variant — citation numbered per TB-P1 F14 — resolved in favour of the stated
+  design) at d ≥ 10, per arm vs P. Drop > **0.10**
   absolute flags the arm in every table. It cannot gate: offline coherence metrics
   were the worst predictors of the owner's verdict (Phase 1 log §3.8); REQ-9 is
   adjudicated by ear or not at all. *(Plain: if the steps stop sounding like
   neighbours, this number won't prove it — but a big drop is a warning worth a
   flag.)*
-- **TB-C5 (deliverability, reported).** Distinct interior artists below pctl 0.90 at
-  d ≥ 10 per arm (continuity with DD-C5), **plus** the fame distribution of delivered
-  interiors (REQ-Q1: fame is the requirement currency; the pctl count is the
-  artifact-currency diagnostic). *(Plain: how many genuinely less-known artists
-  actually appeared on screen, and how obscure they really are.)*
+- **TB-C5 (deliverability, reported).** **(a)** Distinct interior artists below pctl
+  0.90 at d ≥ 10 per arm (continuity with DD-C5) plus the fame distribution of
+  delivered interiors. *(Relabelled per TB-P1 F11: the pctl count is an
+  **artifact-currency diagnostic** and carries no REQ-Q1 warrant.)* **(b)** REQ-Q1's
+  actual secondary diagnostic — the **degree**-based count, distinct
+  top-1 %-by-degree interiors per arm — reported at any TB-R1/TB-R2 presentation,
+  because it catches the one failure fame cannot see: an obscure structural
+  connector the router over-uses, which is by construction a *win* under (a).
+  *(Plain: how many genuinely less-known artists actually appeared on screen, how
+  obscure they really are — and whether the app is leaning on the same
+  well-connected stepping stones every time.)*
 - **TB-C6 (length criterion — promoted from Track 3's qualifier, and this is the §7
-  question the Track 3 log left to this document).** Mean interior count per arm vs P
-  over C1-window cells; an arm falling more than **1.0** below P is flagged in every
-  table. **Promoted because the device's entire design claim is length-neutral
-  descent: TB-R1 requires the passing arm to be unflagged.** A flagged pass is not
+  question the Track 3 log left to this document).** Mean interior count per arm vs
+  P, **measured over every depth any criterion reads — the C1 window AND d5**
+  *(window extended per TB-P1 F7, chosen now rather than after any table exists:
+  without d5, a TB-C2 pass could be carried by a length change at d5 that nothing
+  measures — DD-P3H-9's gap, load-bearing once TB-C6 gates TB-R1)*; an arm falling
+  more than **1.0** below P **in either window** is flagged in every table.
+  **Promoted because the device's entire design claim is length-neutral descent:
+  TB-R1 requires the passing arm to be unflagged.** A flagged pass is not
   discarded — it is TB-R2, and under REQ-14 shortening is not a product defect — but
   it may not be called descent. *(Plain: did the app find less-famous artists to fill
   the journey, or did it just make the journey shorter?)*
@@ -258,9 +308,12 @@ pairs.
 ## §7 — Reads. Each names the run state it presupposes.
 
 - **TB-R3 — the ceiling gate fails.** Presupposes: TB-P1–TB-P3 only; **arms not
-  run.** If TB-P3(a) fails to clear −1.0: no dose of this device can reach TB-C1, and
-  the number itself is the finding — the pctl-headroom → fame-delivery currency gap
-  (DD-D6's trap) measured at this device's limit. The record states it with the
+  run.** If TB-P3(a) fails to clear −1.0: **strong pre-committed evidence — not
+  proof (restated per TB-P1 F3)** — that no dose can reach TB-C1: the ceiling bounds
+  the toll at P's exclusion state, TB-C1 is scored in fame, and the pctl→fame map is
+  DD-D6's non-monotone one. The stop is a pre-committed judgement about cost, stated
+  as one, and the number itself is the finding — the pctl-headroom → fame-delivery
+  currency gap measured at this device's limit. The record states it with the
   ceiling figures and the track stops. Successor: none scheduled by this document;
   the cap-selection simulation (separately agreed 2026-07-29) proceeds regardless.
 - **TB-R1 — mechanism confirmed.** Presupposes: all 4 walks scored, TB-P1–TB-P5 all
@@ -305,3 +358,25 @@ listen or a rebuild — both the owner's, the rebuild additionally behind the
 nameless-artist drop rule implementation. The all-famous pair class is out of scope
 by structure (DD-F1, ruled a defect 2026-07-29 with a graph-side remedy path — a
 different track).
+
+## §9 — TB-P1 amendment record (2026-07-29, pre-arm)
+
+TB-P1 (`builder/analysis/2026-07-29-track3b-thresholded-toll/TB-P1-protocol-review.md`,
+figures owned there) returned **15 findings — 4 HIGH — and 23 claims verified clean**.
+Every amendment above is marked in place with its finding ID; this table is the index.
+**No arm had run and the harness did not exist when these were adopted.** F4's 0/252
+figure was independently re-verified by the dispatching session (probe re-run,
+byte-identical output) before amendment; Snyk clean on the probe scripts.
+
+| finding | amendment |
+|---|---|
+| **F1 (HIGH)** | §2's premise replaced with measured `pairs_v2` figures (median pctl 0.9810, realised ladder ≈4×/13×/43× at the median, 8× per-interior dispersion recorded). Ladder values unchanged — they bracket the per-cell crossover, which is the property a null needs. |
+| **F2 (HIGH)** | TB-P3(b)'s forecast recorded pre-arm: **the ceiling also shortens** (−6.83 interiors, 6.8× the flag threshold), so TB-R2 is the likely outcome and the run proceeds knowing that. |
+| **F3 (HIGH)** | TB-P3(a)/TB-R3 restated as strong evidence, not proof — the ceiling bounds toll, not fame. |
+| **F4 (HIGH)** | §0 gains the victim-rule row — the one term this device genuinely wakes (0/252 of P's victims are sub-decile; a descending arm eats its own supply). TB-P4 gains the sub-decile-victim counter. |
+| F5 | §0's floor argument corrected (base vs penalty; live at d1–d2, which only TB-G2's non-vacuity check reads). |
+| F6 | Four §0 rows added, including Track 3's own knob staying 0.0 in the shared mirror. |
+| F7 | TB-C6's window extended to d5, so TB-C2 is length-controlled too. |
+| F8 | TB-P2 split into TB-P2a (ceiling, before TB-P3(a) is read) and TB-P2b (arms, before any criterion). |
+| F9 | §3's headroom denominator relabelled (108/108 all-depths; 36/36 C1-window; 24/24 analysis). |
+| F10–F15 | Preamble REQ-14 wording, TB-C5 currency relabel + degree diagnostic added as (b), TB-C1 statistic wording and counterfactual constant fixed, four citations corrected, directory README required at TB-P4. |
