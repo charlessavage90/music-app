@@ -1,4 +1,24 @@
 {
+ "12012": {
+  "F": 3.5464192668351915,
+  "article": "12012",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "12012",
+  "pageviews": 3518,
+  "query": "12012",
+  "wikidata": "Q2735579"
+ },
+ "13th Floor Elevators": {
+  "F": 4.973469610496657,
+  "article": "The 13th Floor Elevators",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The 13th Floor Elevators",
+  "pageviews": 94073,
+  "query": "13th Floor Elevators",
+  "wikidata": "Q861190"
+ },
  "1991": {
   "F": 0.0,
   "article": null,
@@ -201,6 +221,16 @@
   "query": "AC/DC",
   "wikidata": "Q27593"
  },
+ "AURORA": {
+  "F": 5.8743223345048,
+  "article": "Aurora (singer)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Aurora (singer)",
+  "pageviews": 748724,
+  "query": "AURORA",
+  "wikidata": "Q19329827"
+ },
  "AWOLNATION": {
   "F": 5.019240950395851,
   "article": "Awolnation",
@@ -329,6 +359,16 @@
   "query": "Airhead",
   "wikidata": "Q4698705"
  },
+ "Airlock": {
+  "F": 2.7450747915820575,
+  "article": "Airlock (band)",
+  "matched": true,
+  "months_present": 7,
+  "opensearch_candidate": "Airlock (band)",
+  "pageviews": 555,
+  "query": "Airlock",
+  "wikidata": "Q4043420"
+ },
  "Akhenaton": {
   "F": 4.104862518141077,
   "article": "Akhenaton (rapper)",
@@ -338,6 +378,43 @@
   "pageviews": 12730,
   "query": "Akhenaton",
   "wikidata": "Q417651"
+ },
+ "Akin Yai": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Cyne",
+    "name mismatch"
+   ],
+   [
+    "Filiz Akın",
+    "name mismatch"
+   ],
+   [
+    "Akin Famewo",
+    "name mismatch"
+   ],
+   [
+    "Akin Ayodele",
+    "name mismatch"
+   ],
+   [
+    "Didem Akın",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Akin Yai",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Akon": {
   "F": 6.076186253850018,
@@ -358,6 +435,16 @@
   "pageviews": 5078,
   "query": "Akrobatik",
   "wikidata": "Q385852"
+ },
+ "Akua Naru": {
+  "F": 3.631139250256811,
+  "article": "Akua Naru",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Akua Naru",
+  "pageviews": 4276,
+  "query": "Akua Naru",
+  "wikidata": "Q19631208"
  },
  "Al Bowlly": {
   "F": 4.983635306646282,
@@ -388,6 +475,16 @@
   "pageviews": 1656089,
   "query": "Alanis Morissette",
   "wikidata": "Q130742"
+ },
+ "Albert Ayler": {
+  "F": 4.689663965015771,
+  "article": "Albert Ayler",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Albert Ayler",
+  "pageviews": 48939,
+  "query": "Albert Ayler",
+  "wikidata": "Q457125"
  },
  "Alex Mills": {
   "F": 0.0,
@@ -425,6 +522,16 @@
   "pageviews": null,
   "query": "Alex Mills",
   "reason": "no identity-matched musical performer among candidates"
+ },
+ "Alex de Grassi": {
+  "F": 3.7829024059746446,
+  "article": "Alex De Grassi",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Alex De Grassi",
+  "pageviews": 6065,
+  "query": "Alex de Grassi",
+  "wikidata": "Q2641556"
  },
  "Alexandre Desplat": {
   "F": 5.235533496814025,
@@ -485,6 +592,43 @@
   "pageviews": 12755,
   "query": "Allan Taylor",
   "wikidata": "Q1798534"
+ },
+ "Ambassadeurs": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Ambassadeurs",
+    "name mismatch"
+   ],
+   [
+    "Les Ambassadeurs (film)",
+    "not a performer (work?)"
+   ],
+   [
+    "Ambassadors of the United States",
+    "name mismatch"
+   ],
+   [
+    "Ambassador",
+    "not a musical act"
+   ],
+   [
+    "Ambassadors and envoys from Russia to Poland (1763–1794)",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Ambassadeurs",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "America": {
   "F": 5.816585284089521,
@@ -596,6 +740,35 @@
   "query": "Amy Winehouse",
   "wikidata": "Q15897"
  },
+ "Ancient Astronauts": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Ancient astronauts",
+    "not a musical act"
+   ],
+   [
+    "Ancient Astronauts (album)",
+    "not a performer (work?)"
+   ],
+   [
+    "Ancient astronauts",
+    "not a musical act"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Ancient Astronauts",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Anderson .Paak": {
   "F": 5.875186322194885,
   "article": "Anderson .Paak",
@@ -605,6 +778,16 @@
   "pageviews": 750215,
   "query": "Anderson .Paak",
   "wikidata": "Q20810369"
+ },
+ "Anne Briggs": {
+  "F": 4.47373506746172,
+  "article": "Anne Briggs",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Anne Briggs",
+  "pageviews": 29766,
+  "query": "Anne Briggs",
+  "wikidata": "Q261542"
  },
  "Another Electronic Musician": {
   "F": 0.0,
@@ -747,6 +930,39 @@
   "query": "Ariana Grande",
   "wikidata": "Q151892"
  },
+ "Artemis": {
+  "F": 5.770660585451419,
+  "article": "Artemis (novel)",
+  "candidates_checked": [
+   [
+    "Artemis",
+    "not a musical act"
+   ],
+   [
+    "Artemis program",
+    "not a musical act"
+   ],
+   [
+    "Artemis II",
+    "name mismatch"
+   ],
+   [
+    "Artemis Fowl",
+    "name mismatch"
+   ],
+   [
+    "Artemisia Gentileschi",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 589739,
+  "query": "Artemis",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q43262764"
+ },
  "Arve Henriksen": {
   "F": 3.7366354976868212,
   "article": "Arve Henriksen",
@@ -756,6 +972,43 @@
   "pageviews": 5452,
   "query": "Arve Henriksen",
   "wikidata": "Q711785"
+ },
+ "Asonat": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Natsuko Aso",
+    "name mismatch"
+   ],
+   [
+    "Asona Town",
+    "name mismatch"
+   ],
+   [
+    "Aso Kujū National Park",
+    "name mismatch"
+   ],
+   [
+    "Bridgestone Aso Open",
+    "name mismatch"
+   ],
+   [
+    "Association football",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Asonat",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Assia": {
   "F": 3.3328422669943514,
@@ -789,6 +1042,31 @@
   "reason": "no identity-matched musical performer among candidates",
   "via": "wikidata_fallback",
   "wikidata": "Q2867157"
+ },
+ "August Wilhelmsson": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "August Wilhelm von Hofmann",
+    "name mismatch"
+   ],
+   [
+    "August Wilhelm Schlegel",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "August Wilhelmsson",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Autechre": {
   "F": 5.123224236562196,
@@ -897,6 +1175,16 @@
   "query": "BADBADNOTGOOD",
   "wikidata": "Q4840142"
  },
+ "BAND‐MAID": {
+  "F": 4.904358444135988,
+  "article": "Band-Maid",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Band-Maid",
+  "pageviews": 80233,
+  "query": "BAND‐MAID",
+  "wikidata": "Q17222593"
+ },
  "BAR9": {
   "F": 0.0,
   "article": null,
@@ -934,6 +1222,26 @@
   "query": "BAR9",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "BARELY ALIVE": {
+  "F": 3.5268559871258747,
+  "article": "Barely Alive",
+  "matched": true,
+  "months_present": 7,
+  "opensearch_candidate": "Barely Alive",
+  "pageviews": 3363,
+  "query": "BARELY ALIVE",
+  "wikidata": "Q104431809"
+ },
+ "BB Brunes": {
+  "F": 3.7952541825808828,
+  "article": "BB Brunes",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "BB Brunes",
+  "pageviews": 6240,
+  "query": "BB Brunes",
+  "wikidata": "Q72478"
+ },
  "BLACKPINK": {
   "F": 6.347743812994868,
   "article": "Blackpink",
@@ -953,6 +1261,16 @@
   "pageviews": 98034,
   "query": "BROCKHAMPTON",
   "wikidata": "Q30612260"
+ },
+ "BROODS": {
+  "F": 4.296906397977758,
+  "article": "Broods",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Broods",
+  "pageviews": 19810,
+  "query": "BROODS",
+  "wikidata": "Q15379163"
  },
  "BUCK‐TICK": {
   "F": 4.839804745203147,
@@ -1116,6 +1434,16 @@
   "pageviews": 239239,
   "query": "Bastille",
   "wikidata": "Q689"
+ },
+ "Bear McCreary": {
+  "F": 5.2860138657302524,
+  "article": "Bear McCreary",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Bear McCreary",
+  "pageviews": 193202,
+  "query": "Bear McCreary",
+  "wikidata": "Q621437"
  },
  "Beastie Boys": {
   "F": 6.067112906517214,
@@ -1311,6 +1639,26 @@
   "query": "Bibio",
   "wikidata": "Q3111737"
  },
+ "Bicep": {
+  "F": 4.708029774040427,
+  "article": "Bicep (duo)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Bicep (duo)",
+  "pageviews": 51053,
+  "query": "Bicep",
+  "wikidata": "Q28855240"
+ },
+ "Big Boi": {
+  "F": 5.492786920676703,
+  "article": "Big Boi",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Big Boi",
+  "pageviews": 311018,
+  "query": "Big Boi",
+  "wikidata": "Q371202"
+ },
  "Big Bud": {
   "F": 0.0,
   "article": null,
@@ -1367,6 +1715,26 @@
   "pageviews": 307663,
   "query": "Big Thief",
   "wikidata": "Q28228836"
+ },
+ "Biga Ranx": {
+  "F": 3.770336441095149,
+  "article": "Biga Ranx",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Biga Ranx",
+  "pageviews": 5892,
+  "query": "Biga Ranx",
+  "wikidata": "Q16232375"
+ },
+ "Bigflo & Oli": {
+  "F": 4.493764667567145,
+  "article": "Bigflo & Oli",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Bigflo & Oli",
+  "pageviews": 31171,
+  "query": "Bigflo & Oli",
+  "wikidata": "Q20666368"
  },
  "Bill Withers": {
   "F": 5.679395187009339,
@@ -1427,6 +1795,16 @@
   "pageviews": 7817,
   "query": "Birdy Nam Nam",
   "wikidata": "Q737499"
+ },
+ "Bitter:Sweet": {
+  "F": 3.891927534220675,
+  "article": "Bitter:Sweet",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Bitter:Sweet",
+  "pageviews": 7796,
+  "query": "Bitter:Sweet",
+  "wikidata": "Q878934"
  },
  "Björk": {
   "F": 6.239348287579478,
@@ -1656,6 +2034,16 @@
   "query": "Blur",
   "wikidata": "Q485820"
  },
+ "Blxst": {
+  "F": 4.48267353350333,
+  "article": "Blxst",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Blxst",
+  "pageviews": 30385,
+  "query": "Blxst",
+  "wikidata": "Q106427550"
+ },
  "BoA": {
   "F": 5.4197145903128225,
   "article": "BoA",
@@ -1705,6 +2093,48 @@
   "pageviews": 296913,
   "query": "Bobby Womack",
   "wikidata": "Q388286"
+ },
+ "Bobmo": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Bob Mould",
+    "name mismatch"
+   ],
+   [
+    "Bob Monkhouse",
+    "name mismatch"
+   ],
+   [
+    "Bob Mortimer",
+    "name mismatch"
+   ],
+   [
+    "Bob Moses (band)",
+    "name mismatch"
+   ],
+   [
+    "Bob Morley",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": true,
+    "n_non_english": 1,
+    "non_english_wikis": [
+     "frwiki"
+    ],
+    "wikidata": "Q2908067"
+   },
+   "non_latin_name": false,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Bobmo",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Bon Iver": {
   "F": 5.70372115992702,
@@ -1858,6 +2288,39 @@
   "query": "Bright Eyes",
   "wikidata": "Q915714"
  },
+ "Brigitte": {
+  "F": 3.456214155357989,
+  "article": "Brigitte (duo)",
+  "candidates_checked": [
+   [
+    "Brigitte",
+    "not a musical act"
+   ],
+   [
+    "Brigitte Bardot",
+    "name mismatch"
+   ],
+   [
+    "Brigitte Nielsen",
+    "name mismatch"
+   ],
+   [
+    "Bridget of Sweden",
+    "name mismatch"
+   ],
+   [
+    "Brigitte Macron",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 2858,
+  "query": "Brigitte",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q2925381"
+ },
  "Bring Me the Horizon": {
   "F": 5.869609508941593,
   "article": "Bring Me the Horizon",
@@ -1961,6 +2424,16 @@
   "query": "Bryan Ferry",
   "wikidata": "Q216179"
  },
+ "Buraka Som Sistema": {
+  "F": 4.034828915655837,
+  "article": "Buraka Som Sistema",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Buraka Som Sistema",
+  "pageviews": 10834,
+  "query": "Buraka Som Sistema",
+  "wikidata": "Q1010243"
+ },
  "Burial": {
   "F": 5.120093309340506,
   "article": "Burial (musician)",
@@ -1993,6 +2466,16 @@
   "reason": "no identity-matched musical performer among candidates",
   "via": "wikidata_fallback",
   "wikidata": "Q552245"
+ },
+ "Burt Bacharach": {
+  "F": 5.672457157253545,
+  "article": "Burt Bacharach",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Burt Bacharach",
+  "pageviews": 470388,
+  "query": "Burt Bacharach",
+  "wikidata": "Q212762"
  },
  "Buzzcocks": {
   "F": 5.346595485628397,
@@ -2288,6 +2771,43 @@
   "query": "Cat Stevens",
   "wikidata": "Q154216"
  },
+ "Caural": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Mush Records",
+    "name mismatch"
+   ],
+   [
+    "Caucasus",
+    "name mismatch"
+   ],
+   [
+    "Causality",
+    "name mismatch"
+   ],
+   [
+    "Caucasian race",
+    "name mismatch"
+   ],
+   [
+    "Caucasian Albania",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Caural",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Chance the Rapper": {
   "F": 5.631710554924352,
   "article": "Chance the Rapper",
@@ -2438,6 +2958,43 @@
   "query": "Chilly Gonzales",
   "wikidata": "Q1532874"
  },
+ "Chime": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Chime",
+    "missing/disambig"
+   ],
+   [
+    "Chimera (genetics)",
+    "name mismatch"
+   ],
+   [
+    "Chimes at Midnight",
+    "name mismatch"
+   ],
+   [
+    "Chimera (mythology)",
+    "name mismatch"
+   ],
+   [
+    "Chimelong Ocean Kingdom",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Chime",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Chinese Man": {
   "F": 4.060546755126169,
   "article": "Chinese Man (band)",
@@ -2585,6 +3142,53 @@
   "query": "Cise Star",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "ClariS": {
+  "F": 4.586137025230793,
+  "article": "ClariS",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "ClariS",
+  "pageviews": 38559,
+  "query": "ClariS",
+  "wikidata": "Q1051860"
+ },
+ "Clatterbox": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Clatterbridge Cancer Centre NHS Foundation Trust",
+    "name mismatch"
+   ],
+   [
+    "Clatterbridge Health Park",
+    "name mismatch"
+   ],
+   [
+    "Clatterford End, Stanford Rivers",
+    "name mismatch"
+   ],
+   [
+    "Kenneth Clatterbaugh",
+    "name mismatch"
+   ],
+   [
+    "Clatterbridge",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Clatterbox",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Clem Leek": {
   "F": 0.0,
   "article": null,
@@ -2631,6 +3235,16 @@
   "pageviews": 79289,
   "query": "Clint Mansell",
   "wikidata": "Q297232"
+ },
+ "Clubroot": {
+  "F": 2.9360107957152097,
+  "article": "Clubroot (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Clubroot (musician)",
+  "pageviews": 862,
+  "query": "Clubroot",
+  "wikidata": "Q5136548"
  },
  "Cluster": {
   "F": 4.449185170727684,
@@ -2734,6 +3348,43 @@
   "pageviews": 17653,
   "query": "Com Truise",
   "wikidata": "Q1113156"
+ },
+ "Commodo": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Commodore 64",
+    "name mismatch"
+   ],
+   [
+    "Commodore International",
+    "name mismatch"
+   ],
+   [
+    "Commodore (United States)",
+    "name mismatch"
+   ],
+   [
+    "Commodores",
+    "name mismatch"
+   ],
+   [
+    "Commodore 64 peripherals",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Commodo",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Commodores": {
   "F": 5.58074483719776,
@@ -2851,6 +3502,16 @@
   "pageviews": 306926,
   "query": "Culture Club",
   "wikidata": "Q50037"
+ },
+ "Culture Shock": {
+  "F": 3.9628426812012423,
+  "article": "Culture Shock (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Culture Shock (musician)",
+  "pageviews": 9179,
+  "query": "Culture Shock",
+  "wikidata": "Q19664045"
  },
  "Curve": {
   "F": 4.735758537443739,
@@ -2988,6 +3649,16 @@
   "pageviews": null,
   "query": "D1",
   "reason": "no identity-matched musical performer among candidates"
+ },
+ "DEEN": {
+  "F": 5.649068942355984,
+  "article": "James Deen",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "James Deen",
+  "pageviews": 445726,
+  "query": "DEEN",
+  "wikidata": "Q332641"
  },
  "DEVO": {
   "F": 5.803439361108571,
@@ -3292,6 +3963,16 @@
   "query": "Dario Marianelli",
   "wikidata": "Q360399"
  },
+ "Darkstar": {
+  "F": 3.5869247081448203,
+  "article": "Darkstar (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Darkstar (band)",
+  "pageviews": 3862,
+  "query": "Darkstar",
+  "wikidata": "Q2561455"
+ },
  "Daryl Hall & John Oates": {
   "F": 5.810664580637122,
   "article": "Hall & Oates",
@@ -3301,6 +3982,26 @@
   "pageviews": 646642,
   "query": "Daryl Hall & John Oates",
   "wikidata": "Q733182"
+ },
+ "Datsik": {
+  "F": 4.297782389363258,
+  "article": "Datsik (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Datsik (musician)",
+  "pageviews": 19850,
+  "query": "Datsik",
+  "wikidata": "Q1998551"
+ },
+ "Daughtry": {
+  "F": 5.573289438604204,
+  "article": "Chris Daughtry",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Chris Daughtry",
+  "pageviews": 374359,
+  "query": "Daughtry",
+  "wikidata": "Q877858"
  },
  "Davey Graham": {
   "F": 4.4169399175410415,
@@ -3769,6 +4470,16 @@
   "query": "Disturbed",
   "wikidata": "Q131366"
  },
+ "Doctor P": {
+  "F": 3.853637381958594,
+  "article": "Doctor P",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Doctor P",
+  "pageviews": 7138,
+  "query": "Doctor P",
+  "wikidata": "Q21061"
+ },
  "Dodge & Fuski": {
   "F": 3.153204900084284,
   "article": "Dodge & Fuski",
@@ -3788,6 +4499,16 @@
   "pageviews": 809,
   "query": "Dominique Dalcan",
   "wikidata": "Q3035088"
+ },
+ "Domo Genesis": {
+  "F": 4.690630157507832,
+  "article": "Domo Genesis",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Domo Genesis",
+  "pageviews": 49048,
+  "query": "Domo Genesis",
+  "wikidata": "Q4249819"
  },
  "Dr. Dre": {
   "F": 6.116845080161496,
@@ -3894,6 +4615,16 @@
   "query": "Dustin O’Halloran",
   "wikidata": "Q770687"
  },
+ "D’espairsRay": {
+  "F": 4.019739232674706,
+  "article": "D'espairsRay",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "D'espairsRay",
+  "pageviews": 10464,
+  "query": "D’espairsRay",
+  "wikidata": "Q1273059"
+ },
  "EVAN GIIA": {
   "F": 3.6417714706539592,
   "article": "Evan Giia",
@@ -3964,6 +4695,16 @@
   "query": "Ed Sheeran",
   "wikidata": "Q47447"
  },
+ "Eivør": {
+  "F": 4.779820073711451,
+  "article": "Eivør (singer)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Eivør (singer)",
+  "pageviews": 60230,
+  "query": "Eivør",
+  "wikidata": "Q272898"
+ },
  "Electric Light Orchestra": {
   "F": 5.92722403351128,
   "article": "Electric Light Orchestra",
@@ -3973,6 +4714,16 @@
   "pageviews": 845714,
   "query": "Electric Light Orchestra",
   "wikidata": "Q218255"
+ },
+ "Eliot Lipp": {
+  "F": 3.147985320683805,
+  "article": "Eliot Lipp",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Eliot Lipp",
+  "pageviews": 1405,
+  "query": "Eliot Lipp",
+  "wikidata": "Q5361242"
  },
  "Ella Fitzgerald": {
   "F": 5.752410337178498,
@@ -4099,6 +4850,86 @@
   "query": "Ennio Morricone",
   "wikidata": "Q23848"
  },
+ "Enya": {
+  "F": 6.109132550290729,
+  "article": "Enya",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Enya",
+  "pageviews": 1285678,
+  "query": "Enya",
+  "wikidata": "Q38257"
+ },
+ "Epic North": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Epimorphism",
+    "name mismatch"
+   ],
+   [
+    "ECAC Northeast tournament",
+    "name mismatch"
+   ],
+   [
+    "Epe, North Rhine-Westphalia",
+    "name mismatch"
+   ],
+   [
+    "Eric Northman",
+    "name mismatch"
+   ],
+   [
+    "Eric Forth",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Epic North",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Era": {
+  "F": 4.7302330060776905,
+  "article": "Era (musical project)",
+  "candidates_checked": [
+   [
+    "Era",
+    "not a musical act"
+   ],
+   [
+    "Erasmus",
+    "name mismatch"
+   ],
+   [
+    "Erasmus Programme",
+    "name mismatch"
+   ],
+   [
+    "Eratosthenes",
+    "name mismatch"
+   ],
+   [
+    "Eraserhead",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 53731,
+  "query": "Era",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q646039"
+ },
  "Eric Clapton": {
   "F": 6.374439649022264,
   "article": "Eric Clapton",
@@ -4108,6 +4939,16 @@
   "pageviews": 2368315,
   "query": "Eric Clapton",
   "wikidata": "Q48187"
+ },
+ "Erin McCarley": {
+  "F": 3.5374412834079476,
+  "article": "Erin McCarley",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Erin McCarley",
+  "pageviews": 3446,
+  "query": "Erin McCarley",
+  "wikidata": "Q5389188"
  },
  "Erykah Badu": {
   "F": 5.890880780962894,
@@ -4155,6 +4996,16 @@
   "pageviews": null,
   "query": "Essenger",
   "reason": "no identity-matched musical performer among candidates"
+ },
+ "Esthero": {
+  "F": 4.552850654460561,
+  "article": "Esthero",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Esthero",
+  "pageviews": 35714,
+  "query": "Esthero",
+  "wikidata": "Q3058998"
  },
  "Etta James": {
   "F": 5.729627196699101,
@@ -4296,6 +5147,26 @@
   "via": "wikidata_fallback",
   "wikidata": "Q15648254"
  },
+ "FIELD OF VIEW": {
+  "F": 3.898560644939712,
+  "article": "Field of View",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Field of View",
+  "pageviews": 7916,
+  "query": "FIELD OF VIEW",
+  "wikidata": "Q1057751"
+ },
+ "FKA twigs": {
+  "F": 6.133975218949934,
+  "article": "FKA Twigs",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "FKA Twigs",
+  "pageviews": 1361366,
+  "query": "FKA twigs",
+  "wikidata": "Q15291033"
+ },
  "Fairport Convention": {
   "F": 5.303504923239513,
   "article": "Fairport Convention",
@@ -4325,6 +5196,16 @@
   "pageviews": 714194,
   "query": "Fall Out Boy",
   "wikidata": "Q485811"
+ },
+ "FaltyDL": {
+  "F": 3.258397804095509,
+  "article": "FaltyDL",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "FaltyDL",
+  "pageviews": 1812,
+  "query": "FaltyDL",
+  "wikidata": "Q5432821"
  },
  "Father John Misty": {
   "F": 5.510313056468484,
@@ -4389,6 +5270,16 @@
   "reason": "no identity-matched musical performer among candidates",
   "via": "wikidata_fallback",
   "wikidata": "Q691139"
+ },
+ "Faust": {
+  "F": 5.037860575419942,
+  "article": "Faust (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Faust (musician)",
+  "pageviews": 109108,
+  "query": "Faust",
+  "wikidata": "Q554527"
  },
  "Feadz": {
   "F": 3.6001012556913907,
@@ -4505,6 +5396,53 @@
   "matched": false,
   "pageviews": null,
   "query": "Five Seasons",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Five for Fighting": {
+  "F": 5.104285622957062,
+  "article": "Five for Fighting",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Five for Fighting",
+  "pageviews": 127140,
+  "query": "Five for Fighting",
+  "wikidata": "Q337844"
+ },
+ "Fjordne": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Fjord",
+    "name mismatch"
+   ],
+   [
+    "Fjord (film)",
+    "name mismatch"
+   ],
+   [
+    "Fjords and channels of Chile",
+    "name mismatch"
+   ],
+   [
+    "Fjordman",
+    "name mismatch"
+   ],
+   [
+    "Anders Fjordbach",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Fjordne",
   "reason": "no identity-matched musical performer among candidates"
  },
  "Flavia Coelho": {
@@ -4667,6 +5605,43 @@
   "query": "Foo Fighters",
   "wikidata": "Q483718"
  },
+ "Footsie": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Footsie",
+    "missing/disambig"
+   ],
+   [
+    "Footsies",
+    "name mismatch"
+   ],
+   [
+    "FTSE 250 Index",
+    "name mismatch"
+   ],
+   [
+    "Blanket sleeper",
+    "name mismatch"
+   ],
+   [
+    "Maurice Britt",
+    "not a musical act"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Footsie",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Forces of Nature": {
   "F": 2.7015679850559273,
   "article": "Forces of Nature (book)",
@@ -4813,6 +5788,16 @@
   "pageviews": null,
   "query": "Fox",
   "reason": "no identity-matched musical performer among candidates"
+ },
+ "Fox Stevenson": {
+  "F": 4.260095249663711,
+  "article": "Fox Stevenson",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Fox Stevenson",
+  "pageviews": 18200,
+  "query": "Fox Stevenson",
+  "wikidata": "Q17278989"
  },
  "Foxygen": {
   "F": 4.443716607769532,
@@ -4966,6 +5951,16 @@
   "query": "Fugazi",
   "wikidata": "Q277865"
  },
+ "Fukkk Offf": {
+  "F": 3.171433900943008,
+  "article": "Fukkk Offf",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Fukkk Offf",
+  "pageviews": 1483,
+  "query": "Fukkk Offf",
+  "wikidata": "Q5507603"
+ },
  "Fun": {
   "F": 5.707663837356417,
   "article": "Fun (band)",
@@ -5110,6 +6105,16 @@
   "query": "Gabriela Robin",
   "wikidata": "Q224981"
  },
+ "Galaxie 500": {
+  "F": 4.825497520557007,
+  "article": "Galaxie 500",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Galaxie 500",
+  "pageviews": 66910,
+  "query": "Galaxie 500",
+  "wikidata": "Q176240"
+ },
  "Gang of Four": {
   "F": 5.26425098218697,
   "article": "Gang of Four (band)",
@@ -5139,6 +6144,16 @@
   "pageviews": 9449,
   "query": "Garmarna",
   "wikidata": "Q505925"
+ },
+ "Gavin Bryars": {
+  "F": 4.337259539750276,
+  "article": "Gavin Bryars",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Gavin Bryars",
+  "pageviews": 21739,
+  "query": "Gavin Bryars",
+  "wikidata": "Q713939"
  },
  "Gavin Clark": {
   "F": 4.067925949681522,
@@ -5193,6 +6208,36 @@
   "via": "wikidata_fallback",
   "wikidata": "Q851834"
  },
+ "Gene Autry": {
+  "F": 5.6206159090988175,
+  "article": "Gene Autry",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Gene Autry",
+  "pageviews": 417460,
+  "query": "Gene Autry",
+  "wikidata": "Q342723"
+ },
+ "Gene Krupa and His Orchestra": {
+  "F": 0.0,
+  "article": null,
+  "guard": {
+   "foreign": {
+    "found": true,
+    "n_non_english": 1,
+    "non_english_wikis": [
+     "dewiki"
+    ],
+    "wikidata": "Q42303191"
+   },
+   "non_latin_name": false,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Gene Krupa and His Orchestra",
+  "reason": "no search result"
+ },
  "Genesis": {
   "F": 6.100724041006168,
   "article": "Genesis (band)",
@@ -5202,6 +6247,16 @@
   "pageviews": 1261025,
   "query": "Genesis",
   "wikidata": "Q151012"
+ },
+ "George Benson": {
+  "F": 5.558177975377343,
+  "article": "George Benson",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "George Benson",
+  "pageviews": 361557,
+  "query": "George Benson",
+  "wikidata": "Q348459"
  },
  "George Harrison": {
   "F": 6.468012617448677,
@@ -5222,6 +6277,36 @@
   "pageviews": 3183006,
   "query": "George Michael",
   "wikidata": "Q130311"
+ },
+ "Ghetts": {
+  "F": 5.304085341979912,
+  "article": "Ghetts",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Ghetts",
+  "pageviews": 201411,
+  "query": "Ghetts",
+  "wikidata": "Q5556594"
+ },
+ "Ghosts of Paraguay": {
+  "F": 0.0,
+  "article": null,
+  "guard": {
+   "foreign": {
+    "found": true,
+    "n_non_english": 1,
+    "non_english_wikis": [
+     "itwiki"
+    ],
+    "wikidata": "Q48839107"
+   },
+   "non_latin_name": false,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Ghosts of Paraguay",
+  "reason": "no search result"
  },
  "Gjallarhorn": {
   "F": 3.458939861890326,
@@ -5272,6 +6357,16 @@
   "pageviews": 5249,
   "query": "Goldmund",
   "wikidata": "Q5762948"
+ },
+ "Goo Goo Dolls": {
+  "F": 5.969079809884001,
+  "article": "Goo Goo Dolls",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Goo Goo Dolls",
+  "pageviews": 931278,
+  "query": "Goo Goo Dolls",
+  "wikidata": "Q730046"
  },
  "Gorillaz": {
   "F": 6.441503312610343,
@@ -5413,6 +6508,39 @@
   "query": "HAIM",
   "wikidata": "Q868810"
  },
+ "HEALTH": {
+  "F": 4.312410102994809,
+  "article": "Health (game terminology)",
+  "candidates_checked": [
+   [
+    "Health",
+    "not a musical act"
+   ],
+   [
+    "Health and appearance of Michael Jackson",
+    "name mismatch"
+   ],
+   [
+    "Health effects of smoking tobacco",
+    "name mismatch"
+   ],
+   [
+    "Healthcare in the United States",
+    "name mismatch"
+   ],
+   [
+    "Health insurance",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 20530,
+  "query": "HEALTH",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q668136"
+ },
  "HOME": {
   "F": 0.0,
   "article": null,
@@ -5450,6 +6578,16 @@
   "query": "HOME",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "Halou": {
+  "F": 3.6152133348013584,
+  "article": "Halou",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Halou",
+  "pageviews": 4122,
+  "query": "Halou",
+  "wikidata": "Q1572116"
+ },
  "Halsey": {
   "F": 6.353181789081168,
   "article": "Halsey (singer)",
@@ -5480,6 +6618,16 @@
   "query": "Hans Zimmer",
   "wikidata": "Q76364"
  },
+ "Harmonia": {
+  "F": 4.341770750028927,
+  "article": "Harmonia (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Harmonia (band)",
+  "pageviews": 21966,
+  "query": "Harmonia",
+  "wikidata": "Q568238"
+ },
  "Harold Budd": {
   "F": 4.664876919831211,
   "article": "Harold Budd",
@@ -5489,6 +6637,16 @@
   "pageviews": 46224,
   "query": "Harold Budd",
   "wikidata": "Q728029"
+ },
+ "Haruka Nakamura": {
+  "F": 4.177940307008608,
+  "article": "Haruka Nakamura (composer)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Haruka Nakamura (composer)",
+  "pageviews": 15063,
+  "query": "Haruka Nakamura",
+  "wikidata": "Q125935611"
  },
  "Heart": {
   "F": 5.966249236660833,
@@ -5509,6 +6667,16 @@
   "pageviews": 5519,
   "query": "Hector Zazou",
   "wikidata": "Q2327625"
+ },
+ "Hedningarna": {
+  "F": 3.742568034366142,
+  "article": "Hedningarna",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Hedningarna",
+  "pageviews": 5527,
+  "query": "Hedningarna",
+  "wikidata": "Q1422979"
  },
  "Helios": {
   "F": 0.0,
@@ -5547,6 +6715,16 @@
   "query": "Helios",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "Henrik Schwarz": {
+  "F": 3.382197210377454,
+  "article": "Henrik Schwarz",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Henrik Schwarz",
+  "pageviews": 2410,
+  "query": "Henrik Schwarz",
+  "wikidata": "Q123173"
+ },
  "Hiatus": {
   "F": 3.5795549604009986,
   "article": "The Hiatus",
@@ -5580,6 +6758,16 @@
   "via": "wikidata_fallback",
   "wikidata": "Q614462"
  },
+ "Hidden Orchestra": {
+  "F": 3.7301360039966776,
+  "article": "Hidden Orchestra",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Hidden Orchestra",
+  "pageviews": 5371,
+  "query": "Hidden Orchestra",
+  "wikidata": "Q80611"
+ },
  "Hillsong UNITED": {
   "F": 4.894044543774748,
   "article": "Hillsong United",
@@ -5599,6 +6787,16 @@
   "pageviews": 12261,
   "query": "Hindi Zahra",
   "wikidata": "Q463514"
+ },
+ "HoneyWorks": {
+  "F": 4.51774996285426,
+  "article": "HoneyWorks",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "HoneyWorks",
+  "pageviews": 32941,
+  "query": "HoneyWorks",
+  "wikidata": "Q19960542"
  },
  "Hoobastank": {
   "F": 5.368855651964641,
@@ -5639,6 +6837,16 @@
   "pageviews": 1037,
   "query": "Hoven Droven",
   "wikidata": "Q256236"
+ },
+ "Howie Day": {
+  "F": 4.682650405781463,
+  "article": "Howie Day",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Howie Day",
+  "pageviews": 48155,
+  "query": "Howie Day",
+  "wikidata": "Q1352927"
  },
  "Hoyaa": {
   "F": 0.0,
@@ -5978,6 +7186,16 @@
   "query": "JPEGMAFIA",
   "wikidata": "Q50415953"
  },
+ "Jack Black": {
+  "F": 6.417271689009038,
+  "article": "Jack Black",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Jack Black",
+  "pageviews": 2613795,
+  "query": "Jack Black",
+  "wikidata": "Q483907"
+ },
  "Jack Johnson": {
   "F": 5.682255216100553,
   "article": "Jack Johnson (musician)",
@@ -5988,6 +7206,16 @@
   "query": "Jack Johnson",
   "wikidata": "Q297097"
  },
+ "Jack Jones": {
+  "F": 5.218551259265074,
+  "article": "Jack Jones (American singer)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Jack Jones (American singer)",
+  "pageviews": 165405,
+  "query": "Jack Jones",
+  "wikidata": "Q201569"
+ },
  "Jack White": {
   "F": 6.3816856990889255,
   "article": "Jack White",
@@ -5997,6 +7225,16 @@
   "pageviews": 2408161,
   "query": "Jack White",
   "wikidata": "Q272031"
+ },
+ "Jackson C. Frank": {
+  "F": 4.912020012108253,
+  "article": "Jackson C. Frank",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Jackson C. Frank",
+  "pageviews": 81661,
+  "query": "Jackson C. Frank",
+  "wikidata": "Q3107729"
  },
  "Jaga Jazzist": {
   "F": 3.946697837245742,
@@ -6205,6 +7443,16 @@
   "query": "Jessie J",
   "wikidata": "Q18814"
  },
+ "Jessie Ware": {
+  "F": 5.632183873943584,
+  "article": "Jessie Ware",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Jessie Ware",
+  "pageviews": 428729,
+  "query": "Jessie Ware",
+  "wikidata": "Q218042"
+ },
  "Jethro Tull": {
   "F": 5.864728174030622,
   "article": "Jethro Tull (band)",
@@ -6245,6 +7493,16 @@
   "query": "Jme",
   "wikidata": "Q1385721"
  },
+ "Jo Stafford": {
+  "F": 4.891063321788053,
+  "article": "Jo Stafford",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Jo Stafford",
+  "pageviews": 77814,
+  "query": "Jo Stafford",
+  "wikidata": "Q254748"
+ },
  "Joan Baez": {
   "F": 6.123224236562196,
   "article": "Joan Baez",
@@ -6255,6 +7513,16 @@
   "query": "Joan Baez",
   "wikidata": "Q131725"
  },
+ "Joep Beving": {
+  "F": 4.271888052660484,
+  "article": "Joep Beving",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Joep Beving",
+  "pageviews": 18701,
+  "query": "Joep Beving",
+  "wikidata": "Q29317677"
+ },
  "Joey Bada$$": {
   "F": 5.524012943032435,
   "article": "Joey Badass",
@@ -6264,6 +7532,16 @@
   "pageviews": 334204,
   "query": "Joey Bada$$",
   "wikidata": "Q3201552"
+ },
+ "JoeyStarr": {
+  "F": 4.303714308653711,
+  "article": "Joeystarr",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Joeystarr",
+  "pageviews": 20123,
+  "query": "JoeyStarr",
+  "wikidata": "Q762906"
  },
  "John Cale": {
   "F": 5.689068109779764,
@@ -6294,6 +7572,16 @@
   "pageviews": 3706276,
   "query": "John Lennon",
   "wikidata": "Q1203"
+ },
+ "John Martyn": {
+  "F": 5.256686483344739,
+  "article": "John Martyn",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "John Martyn",
+  "pageviews": 180586,
+  "query": "John Martyn",
+  "wikidata": "Q472578"
  },
  "John Mayer": {
   "F": 6.034279437194994,
@@ -6365,6 +7653,53 @@
   "query": "Joni Mitchell",
   "wikidata": "Q205721"
  },
+ "Jordan Critz": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Jordan Ritter",
+    "name mismatch"
+   ],
+   [
+    "Jordan Litz",
+    "name mismatch"
+   ],
+   [
+    "Jordan Craters",
+    "name mismatch"
+   ],
+   [
+    "Jordan Fitzpatrick",
+    "name mismatch"
+   ],
+   [
+    "The Ready Set",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Jordan Critz",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Josh Homme": {
+  "F": 5.839448506802764,
+  "article": "Josh Homme",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Josh Homme",
+  "pageviews": 690952,
+  "query": "Josh Homme",
+  "wikidata": "Q1708504"
+ },
  "Josh Kumra": {
   "F": 3.589502796263764,
   "article": "Josh Kumra",
@@ -6374,6 +7709,16 @@
   "pageviews": 3885,
   "query": "Josh Kumra",
   "wikidata": "Q6289073"
+ },
+ "Joshua Radin": {
+  "F": 4.469689499141104,
+  "article": "Joshua Radin",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Joshua Radin",
+  "pageviews": 29490,
+  "query": "Joshua Radin",
+  "wikidata": "Q955724"
  },
  "Joss Stone": {
   "F": 5.563460912777851,
@@ -6424,6 +7769,16 @@
   "pageviews": 23748,
   "query": "Joy Orbison",
   "wikidata": "Q14159313"
+ },
+ "Judee Sill": {
+  "F": 5.1052614586794025,
+  "article": "Judee Sill",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Judee Sill",
+  "pageviews": 127426,
+  "query": "Judee Sill",
+  "wikidata": "Q271443"
  },
  "Julia Michaels": {
   "F": 5.289758356770946,
@@ -6602,6 +7957,43 @@
   "query": "Jóhann Jóhannsson",
   "wikidata": "Q428347"
  },
+ "KARRA": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Karras",
+    "name mismatch"
+   ],
+   [
+    "Alex Karras",
+    "name mismatch"
+   ],
+   [
+    "Karratha, Western Australia",
+    "name mismatch"
+   ],
+   [
+    "Karrar (tank)",
+    "name mismatch"
+   ],
+   [
+    "Ted Karras (offensive lineman)",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "KARRA",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "KAYTRANADA": {
   "F": 5.307164307090027,
   "article": "Kaytranada",
@@ -6661,6 +8053,16 @@
   "pageviews": 109125,
   "query": "Kamasi Washington",
   "wikidata": "Q16221677"
+ },
+ "Kari Jobe": {
+  "F": 5.107715221552831,
+  "article": "Kari Jobe",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Kari Jobe",
+  "pageviews": 128148,
+  "query": "Kari Jobe",
+  "wikidata": "Q513041"
  },
  "Kasso": {
   "F": 0.0,
@@ -6728,6 +8130,16 @@
   "pageviews": 102965,
   "query": "Kate Higgins",
   "wikidata": "Q2330871"
+ },
+ "Kate Nash": {
+  "F": 5.566465776396316,
+  "article": "Kate Nash",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Kate Nash",
+  "pageviews": 368523,
+  "query": "Kate Nash",
+  "wikidata": "Q237548"
  },
  "Kate Walsh": {
   "F": 3.5852350633657752,
@@ -6886,6 +8298,16 @@
   "pageviews": 579494,
   "query": "Kenny Loggins",
   "wikidata": "Q435965"
+ },
+ "Keri Noble": {
+  "F": 3.539828558377898,
+  "article": "Keri Noble",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Keri Noble",
+  "pageviews": 3465,
+  "query": "Keri Noble",
+  "wikidata": "Q6393877"
  },
  "Kevin Irving": {
   "F": 0.0,
@@ -7081,6 +8503,16 @@
   "query": "Klaxons",
   "wikidata": "Q840882"
  },
+ "Klaypex": {
+  "F": 3.4235735197327357,
+  "article": "Klaypex",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Klaypex",
+  "pageviews": 2651,
+  "query": "Klaypex",
+  "wikidata": "Q18343446"
+ },
  "Klein & M.B.O.": {
   "F": 3.46553155697355,
   "article": "Klein + M.B.O.",
@@ -7201,6 +8633,48 @@
   "query": "Koven",
   "wikidata": "Q106091172"
  },
+ "Kraddy": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Kray twins",
+    "name mismatch"
+   ],
+   [
+    "Kra–Dai languages",
+    "name mismatch"
+   ],
+   [
+    "Kra–Dai-speaking peoples",
+    "name mismatch"
+   ],
+   [
+    "Krazy Kat",
+    "name mismatch"
+   ],
+   [
+    "Krav Maga",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": true,
+    "n_non_english": 1,
+    "non_english_wikis": [
+     "skwiki"
+    ],
+    "wikidata": "Q6435793"
+   },
+   "non_latin_name": false,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Kraddy",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Kraftwerk": {
   "F": 5.709665057040561,
   "article": "Kraftwerk",
@@ -7271,6 +8745,80 @@
   "query": "Ky‐Mani Marley",
   "wikidata": "Q741513"
  },
+ "L.D.": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "LD",
+    "missing/disambig"
+   ],
+   [
+    "L.D. 50 (album)",
+    "name mismatch"
+   ],
+   [
+    "L.D.U. Loja",
+    "name mismatch"
+   ],
+   [
+    "L.D.U. Portoviejo",
+    "name mismatch"
+   ],
+   [
+    "L.D.U. Cuenca",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "L.D.",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "LAXX": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Never Say Die Records",
+    "name mismatch"
+   ],
+   [
+    "Laxmikant–Pyarelal",
+    "name mismatch"
+   ],
+   [
+    "Laxative",
+    "name mismatch"
+   ],
+   [
+    "Halldór Laxness",
+    "name mismatch"
+   ],
+   [
+    "Lakshmi",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "LAXX",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "LCD Soundsystem": {
   "F": 5.590825122255761,
   "article": "LCD Soundsystem",
@@ -7324,6 +8872,16 @@
   "via": "wikidata_fallback",
   "wikidata": "Q2253334"
  },
+ "LTJ Bukem": {
+  "F": 4.6464037262230695,
+  "article": "LTJ Bukem",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "LTJ Bukem",
+  "pageviews": 44299,
+  "query": "LTJ Bukem",
+  "wikidata": "Q921236"
+ },
  "La Caution": {
   "F": 4.199645493080167,
   "article": "La Caution",
@@ -7363,6 +8921,26 @@
   "pageviews": 4488911,
   "query": "Lady Gaga",
   "wikidata": "Q19848"
+ },
+ "Ladyhawke": {
+  "F": 5.002528902545451,
+  "article": "Ladyhawke (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Ladyhawke (musician)",
+  "pageviews": 100583,
+  "query": "Ladyhawke",
+  "wikidata": "Q237197"
+ },
+ "Ladytron": {
+  "F": 4.979639412222907,
+  "article": "Ladytron",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Ladytron",
+  "pageviews": 95419,
+  "query": "Ladytron",
+  "wikidata": "Q831841"
  },
  "Laika": {
   "F": 3.979866922564903,
@@ -7474,6 +9052,16 @@
   "query": "Lazerhawk",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "Le Castle Vania": {
+  "F": 4.179379417881757,
+  "article": "Le Castle Vania",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Le Castle Vania",
+  "pageviews": 15113,
+  "query": "Le Castle Vania",
+  "wikidata": "Q6506654"
+ },
  "Leavv": {
   "F": 0.0,
   "article": null,
@@ -7551,6 +9139,16 @@
   "query": "LiSA",
   "wikidata": "Q333333"
  },
+ "Lifehouse": {
+  "F": 5.153933707624922,
+  "article": "Lifehouse (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Lifehouse (band)",
+  "pageviews": 142538,
+  "query": "Lifehouse",
+  "wikidata": "Q845790"
+ },
  "Lights & Motion": {
   "F": 3.494432898726399,
   "article": "Lights & Motion",
@@ -7560,6 +9158,16 @@
   "pageviews": 3121,
   "query": "Lights & Motion",
   "wikidata": "Q16962622"
+ },
+ "Lil Uzi Vert": {
+  "F": 5.851360487663033,
+  "article": "Lil Uzi Vert",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Lil Uzi Vert",
+  "pageviews": 710166,
+  "query": "Lil Uzi Vert",
+  "wikidata": "Q23771950"
  },
  "Lil Wayne": {
   "F": 6.140352146708493,
@@ -7580,6 +9188,16 @@
   "pageviews": 1384773,
   "query": "Limp Bizkit",
   "wikidata": "Q240767"
+ },
+ "Linda Perhacs": {
+  "F": 4.480553062699267,
+  "article": "Linda Perhacs",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Linda Perhacs",
+  "pageviews": 30237,
+  "query": "Linda Perhacs",
+  "wikidata": "Q538395"
  },
  "Lindsey Stirling": {
   "F": 5.599938719308871,
@@ -7760,6 +9378,16 @@
   "query": "London Elektricity",
   "wikidata": "Q1858715"
  },
+ "London Grammar": {
+  "F": 5.112018173653894,
+  "article": "London Grammar",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "London Grammar",
+  "pageviews": 129424,
+  "query": "London Grammar",
+  "wikidata": "Q14557360"
+ },
  "Lorde": {
   "F": 6.102992851348428,
   "article": "Lorde",
@@ -7842,6 +9470,36 @@
   "reason": "no identity-matched musical performer among candidates",
   "via": "wikidata_fallback",
   "wikidata": "Q216936"
+ },
+ "Love Spirals Downwards": {
+  "F": 4.04493154614916,
+  "article": "Love Spirals Downwards",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Love Spirals Downwards",
+  "pageviews": 11089,
+  "query": "Love Spirals Downwards",
+  "wikidata": "Q6691331"
+ },
+ "Lovespirals": {
+  "F": 3.214843848047698,
+  "article": "Lovespirals",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Lovespirals",
+  "pageviews": 1639,
+  "query": "Lovespirals",
+  "wikidata": "Q6692503"
+ },
+ "Lucky Dube": {
+  "F": 5.193441851493627,
+  "article": "Lucky Dube",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Lucky Dube",
+  "pageviews": 156113,
+  "query": "Lucky Dube",
+  "wikidata": "Q380147"
  },
  "Lucy Schwartz": {
   "F": 3.9152942830226865,
@@ -8288,6 +9946,129 @@
   "query": "Madvillain",
   "wikidata": "Q370373"
  },
+ "Magazine": {
+  "F": 4.9101386198130985,
+  "article": "Magazine (band)",
+  "candidates_checked": [
+   [
+    "Magazine",
+    "not a musical act"
+   ],
+   [
+    "Magazine (firearms)",
+    "not a musical act"
+   ],
+   [
+    "List of magazines by circulation",
+    "name mismatch"
+   ],
+   [
+    "Magazine Dreams",
+    "name mismatch"
+   ],
+   [
+    "Seth Magaziner",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 81308,
+  "query": "Magazine",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q1475584"
+ },
+ "Magnetic Man": {
+  "F": 3.984797257089293,
+  "article": "Magnetic Man",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Magnetic Man",
+  "pageviews": 9655,
+  "query": "Magnetic Man",
+  "wikidata": "Q1884353"
+ },
+ "Mahogany": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Mahogany",
+    "not a musical act"
+   ],
+   [
+    "Mahogany Soul",
+    "name mismatch"
+   ],
+   [
+    "Mahogany (film)",
+    "not a performer (work?)"
+   ],
+   [
+    "Honey Mahogany",
+    "name mismatch"
+   ],
+   [
+    "Mahogany Ship",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Mahogany",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Mahotella Queens": {
+  "F": 3.837777769553733,
+  "article": "Mahotella Queens",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Mahotella Queens",
+  "pageviews": 6882,
+  "query": "Mahotella Queens",
+  "wikidata": "Q1760208"
+ },
+ "Malory": {
+  "F": 2.6364878963533656,
+  "article": "Yohann Malory",
+  "candidates_checked": [
+   [
+    "Thomas Malory",
+    "not a musical act"
+   ],
+   [
+    "Mallory Swanson",
+    "name mismatch"
+   ],
+   [
+    "Malory Towers (TV series)",
+    "name mismatch"
+   ],
+   [
+    "Malory Towers",
+    "name mismatch"
+   ],
+   [
+    "Malorie Blackman",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 432,
+  "query": "Malory",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q3546362"
+ },
  "Manga Saint Hilare": {
   "F": 0.0,
   "article": null,
@@ -8332,6 +10113,53 @@
   "matched": false,
   "pageviews": null,
   "query": "Manila Killa",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Marc Ribot": {
+  "F": 4.752471006722434,
+  "article": "Marc Ribot",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Marc Ribot",
+  "pageviews": 56554,
+  "query": "Marc Ribot",
+  "wikidata": "Q539506"
+ },
+ "Marcus Warner": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Marcus Wareing",
+    "name mismatch"
+   ],
+   [
+    "Marcus Harness",
+    "name mismatch"
+   ],
+   [
+    "Marcus Walker (basketball)",
+    "name mismatch"
+   ],
+   [
+    "Marcus Waterman",
+    "name mismatch"
+   ],
+   [
+    "Marcus Carver",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Marcus Warner",
   "reason": "no identity-matched musical performer among candidates"
  },
  "Mariah Carey": {
@@ -8391,6 +10219,16 @@
   "query": "Marina P",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "Marié Digby": {
+  "F": 4.066698550422995,
+  "article": "Marié Digby",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Marié Digby",
+  "pageviews": 11659,
+  "query": "Marié Digby",
+  "wikidata": "Q236762"
+ },
  "Maroon 5": {
   "F": 5.860078550448915,
   "article": "Maroon 5",
@@ -8420,6 +10258,43 @@
   "pageviews": 80769,
   "query": "Martina Topley‐Bird",
   "wikidata": "Q433167"
+ },
+ "MartyParty": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "The Marty Party Hit Pack",
+    "name mismatch"
+   ],
+   [
+    "Marxism",
+    "name mismatch"
+   ],
+   [
+    "Martin E. Marty",
+    "name mismatch"
+   ],
+   [
+    "Mario Party",
+    "name mismatch"
+   ],
+   [
+    "Martin Marty (bishop)",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "MartyParty",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Marvin Gaye": {
   "F": 6.203979628574282,
@@ -8598,6 +10473,16 @@
   "query": "Metallica",
   "wikidata": "Q15920"
  },
+ "Method Man & Redman": {
+  "F": 4.842827579929976,
+  "article": "Method Man & Redman",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Method Man & Redman",
+  "pageviews": 69634,
+  "query": "Method Man & Redman",
+  "wikidata": "Q3180433"
+ },
  "Metrik": {
   "F": 4.012415374762433,
   "article": "Metrik",
@@ -8633,6 +10518,16 @@
   "query": "Michael Bublé",
   "wikidata": "Q153694"
  },
+ "Michael Chapman": {
+  "F": 4.287264125798977,
+  "article": "Michael Chapman (singer)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Michael Chapman (singer)",
+  "pageviews": 19375,
+  "query": "Michael Chapman",
+  "wikidata": "Q5323401"
+ },
  "Michael Hedges": {
   "F": 4.705410373246214,
   "article": "Michael Hedges",
@@ -8662,6 +10557,16 @@
   "pageviews": 196857,
   "query": "Michael W. Smith",
   "wikidata": "Q357515"
+ },
+ "Michal Menert": {
+  "F": 3.693990610460777,
+  "article": "Michal Menert",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Michal Menert",
+  "pageviews": 4942,
+  "query": "Michal Menert",
+  "wikidata": "Q16221910"
  },
  "Mick Jenkins": {
   "F": 4.391658328722475,
@@ -8874,6 +10779,27 @@
   "query": "Mimosa",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "Mind Vortex": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "RAM Records",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Mind Vortex",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Mirah": {
   "F": 4.285219643202061,
   "article": "Mirah",
@@ -8893,6 +10819,43 @@
   "pageviews": 577166,
   "query": "Misfits",
   "wikidata": "Q311785"
+ },
+ "Miss Palmer": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Miss Palmer",
+    "missing/disambig"
+   ],
+   [
+    "Miss America",
+    "name mismatch"
+   ],
+   [
+    "Miss Americana",
+    "name mismatch"
+   ],
+   [
+    "Miss America (Marvel Comics)",
+    "name mismatch"
+   ],
+   [
+    "Miss America 2022",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Miss Palmer",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Moby": {
   "F": 5.784429699662445,
@@ -8964,6 +10927,16 @@
   "query": "Moor Mother",
   "wikidata": "Q28450408"
  },
+ "Morcheeba": {
+  "F": 5.090963076595732,
+  "article": "Morcheeba",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Morcheeba",
+  "pageviews": 123299,
+  "query": "Morcheeba",
+  "wikidata": "Q749019"
+ },
  "Moriarty": {
   "F": 3.981501488148247,
   "article": "Moriarty (band)",
@@ -8996,6 +10969,16 @@
   "reason": "no identity-matched musical performer among candidates",
   "via": "wikidata_fallback",
   "wikidata": "Q919230"
+ },
+ "Mors Syphilitica": {
+  "F": 3.539327063539375,
+  "article": "Mors Syphilitica",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Mors Syphilitica",
+  "pageviews": 3461,
+  "query": "Mors Syphilitica",
+  "wikidata": "Q274024"
  },
  "Moth Equals": {
   "F": 0.0,
@@ -9319,6 +11302,26 @@
   "query": "Nat King Cole",
   "wikidata": "Q137042"
  },
+ "Natasha Bedingfield": {
+  "F": 5.578681606040673,
+  "article": "Natasha Bedingfield",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Natasha Bedingfield",
+  "pageviews": 379036,
+  "query": "Natasha Bedingfield",
+  "wikidata": "Q212906"
+ },
+ "Naâman": {
+  "F": 4.143108522762512,
+  "article": "Naâman",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Naâman",
+  "pageviews": 13902,
+  "query": "Naâman",
+  "wikidata": "Q16666227"
+ },
  "Neil Young": {
   "F": 6.315054424634245,
   "article": "Neil Young",
@@ -9399,6 +11402,16 @@
   "query": "Nickelback",
   "wikidata": "Q483802"
  },
+ "Nicki Minaj": {
+  "F": 6.576603345419782,
+  "article": "Nicki Minaj",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Nicki Minaj",
+  "pageviews": 3772274,
+  "query": "Nicki Minaj",
+  "wikidata": "Q162202"
+ },
  "Nico": {
   "F": 5.696760784592504,
   "article": "Nico",
@@ -9418,6 +11431,16 @@
   "pageviews": 3259,
   "query": "Nicola Hitchcock",
   "wikidata": "Q7029042"
+ },
+ "Nicolas Jaar": {
+  "F": 4.795024483682169,
+  "article": "Nicolas Jaar",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Nicolas Jaar",
+  "pageviews": 62376,
+  "query": "Nicolas Jaar",
+  "wikidata": "Q261566"
  },
  "Nightmares on Wax": {
   "F": 4.808400049108029,
@@ -9458,6 +11481,16 @@
   "pageviews": 9844,
   "query": "Nils Petter Molvær",
   "wikidata": "Q738139"
+ },
+ "Nina Gordon": {
+  "F": 4.918596438731519,
+  "article": "Nina Gordon",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Nina Gordon",
+  "pageviews": 82907,
+  "query": "Nina Gordon",
+  "wikidata": "Q457330"
  },
  "Nina Simone": {
   "F": 5.906919813948182,
@@ -9519,6 +11552,39 @@
   "query": "Norah Jones",
   "wikidata": "Q549981"
  },
+ "Notch": {
+  "F": 4.123459619443338,
+  "article": "Notch (musician)",
+  "candidates_checked": [
+   [
+    "Notch",
+    "missing/disambig"
+   ],
+   [
+    "Notch signaling pathway",
+    "not a musical act"
+   ],
+   [
+    "Notch proteins",
+    "not a musical act"
+   ],
+   [
+    "Notch regulated ankyrin repeat protein",
+    "name mismatch"
+   ],
+   [
+    "Notch 1",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 13287,
+  "query": "Notch",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q7062525"
+ },
  "Novelist": {
   "F": 3.808750972349595,
   "article": "Novelist (musician)",
@@ -9528,6 +11594,16 @@
   "pageviews": 6437,
   "query": "Novelist",
   "wikidata": "Q18160990"
+ },
+ "Nujabes": {
+  "F": 5.539819787194769,
+  "article": "Nujabes",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Nujabes",
+  "pageviews": 346592,
+  "query": "Nujabes",
+  "wikidata": "Q462347"
  },
  "Num Num": {
   "F": 0.0,
@@ -9652,6 +11728,16 @@
   "pageviews": 10363,
   "query": "Oh Land",
   "wikidata": "Q262446"
+ },
+ "Oh Wonder": {
+  "F": 4.704570875189504,
+  "article": "Oh Wonder",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Oh Wonder",
+  "pageviews": 50648,
+  "query": "Oh Wonder",
+  "wikidata": "Q21452721"
  },
  "Ohmega Watts": {
   "F": 3.164352855784437,
@@ -9815,6 +11901,16 @@
   "query": "Orelsan",
   "wikidata": "Q2813374"
  },
+ "Ornette Coleman": {
+  "F": 5.066635226714102,
+  "article": "Ornette Coleman",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Ornette Coleman",
+  "pageviews": 116582,
+  "query": "Ornette Coleman",
+  "wikidata": "Q208797"
+ },
  "Otis Redding": {
   "F": 5.868813069408793,
   "article": "Otis Redding",
@@ -9882,6 +11978,43 @@
   "query": "Ozzy Osbourne",
   "wikidata": "Q133151"
  },
+ "O’Flynn": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Stephen O'Flynn",
+    "name mismatch"
+   ],
+   [
+    "Patrick O'Flynn",
+    "name mismatch"
+   ],
+   [
+    "John O'Flynn",
+    "name mismatch"
+   ],
+   [
+    "Frank O'Flynn",
+    "name mismatch"
+   ],
+   [
+    "O'Flynn",
+    "not a musical act"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "O’Flynn",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "P!nk": {
   "F": 6.244438188199861,
   "article": "Pink (singer)",
@@ -9891,6 +12024,16 @@
   "pageviews": 1755650,
   "query": "P!nk",
   "wikidata": "Q160009"
+ },
+ "P.O.D.": {
+  "F": 5.518462611133268,
+  "article": "P.O.D.",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "P.O.D.",
+  "pageviews": 329960,
+  "query": "P.O.D.",
+  "wikidata": "Q494743"
  },
  "PJ Harvey": {
   "F": 5.682444735480486,
@@ -9979,6 +12122,16 @@
   "query": "Papa Roach",
   "wikidata": "Q254371"
  },
+ "Para One": {
+  "F": 3.650598898172657,
+  "article": "Para One",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Para One",
+  "pageviews": 4472,
+  "query": "Para One",
+  "wikidata": "Q924492"
+ },
  "Paramore": {
   "F": 6.053420363796977,
   "article": "Paramore",
@@ -9988,6 +12141,80 @@
   "pageviews": 1130889,
   "query": "Paramore",
   "wikidata": "Q473466"
+ },
+ "Pase Rock": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Phase-locked loop",
+    "name mismatch"
+   ],
+   [
+    "Tasha Page-Lockhart",
+    "name mismatch"
+   ],
+   [
+    "Post-rock",
+    "name mismatch"
+   ],
+   [
+    "Pete Rock",
+    "name mismatch"
+   ],
+   [
+    "Pete Rock production discography",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Pase Rock",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Patchwork": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Patchwork",
+    "not a musical act"
+   ],
+   [
+    "Patchwork Girl (hypertext)",
+    "name mismatch"
+   ],
+   [
+    "Patchwork (board game)",
+    "not a musical act"
+   ],
+   [
+    "Patchwork quilt",
+    "name mismatch"
+   ],
+   [
+    "Patchwork stingaree",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Patchwork",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Patti Smith": {
   "F": 6.142473625986628,
@@ -10100,6 +12327,26 @@
   "query": "Pendulum",
   "wikidata": "Q20672"
  },
+ "Pere Ubu": {
+  "F": 4.9357037119312555,
+  "article": "Pere Ubu",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Pere Ubu",
+  "pageviews": 86238,
+  "query": "Pere Ubu",
+  "wikidata": "Q1500073"
+ },
+ "Perfume": {
+  "F": 4.972864424940717,
+  "article": "Perfume (Japanese band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Perfume (Japanese band)",
+  "pageviews": 93942,
+  "query": "Perfume",
+  "wikidata": "Q494703"
+ },
  "Perry Farrell": {
   "F": 5.496344200889316,
   "article": "Perry Farrell",
@@ -10150,6 +12397,16 @@
   "query": "Peter Gabriel",
   "wikidata": "Q175195"
  },
+ "Peter Sandberg": {
+  "F": 2.950364854376123,
+  "article": "Peter Sandberg",
+  "matched": true,
+  "months_present": 9,
+  "opensearch_candidate": "Peter Sandberg",
+  "pageviews": 891,
+  "query": "Peter Sandberg",
+  "wikidata": "Q137189307"
+ },
  "Peter Tosh": {
   "F": 5.403333324824068,
   "article": "Peter Tosh",
@@ -10159,6 +12416,16 @@
   "pageviews": 253123,
   "query": "Peter Tosh",
   "wikidata": "Q273049"
+ },
+ "Philip Glass": {
+  "F": 5.573260435172762,
+  "article": "Philip Glass",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Philip Glass",
+  "pageviews": 374334,
+  "query": "Philip Glass",
+  "wikidata": "Q189729"
  },
  "Phillip Boa and the Voodooclub": {
   "F": 3.864866914328526,
@@ -10189,6 +12456,16 @@
   "pageviews": 2692258,
   "query": "Phoenix",
   "wikidata": "Q185140"
+ },
+ "Photek": {
+  "F": 4.312092690393716,
+  "article": "Photek",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Photek",
+  "pageviews": 20515,
+  "query": "Photek",
+  "wikidata": "Q1349876"
  },
  "Phutureprimitive": {
   "F": 0.0,
@@ -10224,6 +12501,16 @@
   "pageviews": 2291053,
   "query": "Pink Floyd",
   "wikidata": "Q2306"
+ },
+ "Pitch Black": {
+  "F": 3.393399695293102,
+  "article": "Pitch Black (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Pitch Black (band)",
+  "pageviews": 2473,
+  "query": "Pitch Black",
+  "wikidata": "Q7198825"
  },
  "Pixies": {
   "F": 5.853156526637673,
@@ -10285,6 +12572,39 @@
   "query": "Playboi Carti",
   "wikidata": "Q27671080"
  },
+ "Pomme": {
+  "F": 4.786282812624306,
+  "article": "Pomme (singer)",
+  "candidates_checked": [
+   [
+    "Pomme",
+    "missing/disambig"
+   ],
+   [
+    "Pomegranate",
+    "name mismatch"
+   ],
+   [
+    "Pomeranian Voivodeship",
+    "name mismatch"
+   ],
+   [
+    "Pomerania",
+    "name mismatch"
+   ],
+   [
+    "Pomelo",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 61133,
+  "query": "Pomme",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q42397176"
+ },
  "Popcaan": {
   "F": 4.823702402056048,
   "article": "Popcaan",
@@ -10294,6 +12614,16 @@
   "pageviews": 66634,
   "query": "Popcaan",
   "wikidata": "Q7229119"
+ },
+ "Popol Vuh": {
+  "F": 4.711807229041191,
+  "article": "Popol Vuh (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Popol Vuh (band)",
+  "pageviews": 51499,
+  "query": "Popol Vuh",
+  "wikidata": "Q706764"
  },
  "Populous": {
   "F": 4.058046230395282,
@@ -10347,6 +12677,43 @@
   "pageviews": 402086,
   "query": "Portishead",
   "wikidata": "Q191352"
+ },
+ "Poté": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Poté",
+    "not a musical act"
+   ],
+   [
+    "Potée Lorraine",
+    "name mismatch"
+   ],
+   [
+    "Potée",
+    "name mismatch"
+   ],
+   [
+    "Pote (disambiguation)",
+    "missing/disambig"
+   ],
+   [
+    "Potential enlargement of the European Union",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Poté",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Pretenders": {
   "F": 5.673662193427611,
@@ -10410,6 +12777,26 @@
   "pageviews": 4384948,
   "query": "Prince",
   "wikidata": "Q7542"
+ },
+ "Prince Paul": {
+  "F": 4.886631706988978,
+  "article": "Prince Paul (producer)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Prince Paul (producer)",
+  "pageviews": 77024,
+  "query": "Prince Paul",
+  "wikidata": "Q34269"
+ },
+ "Princess Nokia": {
+  "F": 5.180315156471691,
+  "article": "Princess Nokia",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Princess Nokia",
+  "pageviews": 151465,
+  "query": "Princess Nokia",
+  "wikidata": "Q16235152"
  },
  "Priscilla Ahn": {
   "F": 4.522952569067417,
@@ -10541,6 +12928,16 @@
   "via": "wikidata_fallback",
   "wikidata": "Q16671861"
  },
+ "Quicksilver Messenger Service": {
+  "F": 5.064600234811348,
+  "article": "Quicksilver Messenger Service",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Quicksilver Messenger Service",
+  "pageviews": 116037,
+  "query": "Quicksilver Messenger Service",
+  "wikidata": "Q1382357"
+ },
  "R.E.M.": {
   "F": 6.017606313398228,
   "article": "R.E.M.",
@@ -10570,6 +12967,16 @@
   "pageviews": 40854,
   "query": "RJD2",
   "wikidata": "Q1933793"
+ },
+ "RZA": {
+  "F": 5.985546820303789,
+  "article": "RZA",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "RZA",
+  "pageviews": 967267,
+  "query": "RZA",
+  "wikidata": "Q52447"
  },
  "Rachael Yamagata": {
   "F": 4.696880371682762,
@@ -10866,6 +13273,16 @@
   "query": "Red Velvet",
   "wikidata": "Q17466114"
  },
+ "Redman": {
+  "F": 5.416876725906987,
+  "article": "Redman (rapper)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Redman (rapper)",
+  "pageviews": 261141,
+  "query": "Redman",
+  "wikidata": "Q313138"
+ },
  "Regina Spektor": {
   "F": 5.488370192968008,
   "article": "Regina Spektor",
@@ -10875,6 +13292,16 @@
   "pageviews": 307871,
   "query": "Regina Spektor",
   "wikidata": "Q229274"
+ },
+ "Rick Ross": {
+  "F": 5.780050747832115,
+  "article": "Rick Ross",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Rick Ross",
+  "pageviews": 602629,
+  "query": "Rick Ross",
+  "wikidata": "Q297831"
  },
  "Ricky Ranking": {
   "F": 0.0,
@@ -11004,6 +13431,16 @@
   "query": "Robert Owens",
   "wikidata": "Q3436023"
  },
+ "Robin Guthrie": {
+  "F": 5.056054478380405,
+  "article": "Robin Guthrie",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Robin Guthrie",
+  "pageviews": 113776,
+  "query": "Robin Guthrie",
+  "wikidata": "Q3939268"
+ },
  "Robyn": {
   "F": 5.925416784081546,
   "article": "Robyn",
@@ -11132,6 +13569,53 @@
   "query": "Rome in Silver",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "Rone": {
+  "F": 3.891648943870559,
+  "article": "Rone (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Rone (musician)",
+  "pageviews": 7791,
+  "query": "Rone",
+  "wikidata": "Q3441742"
+ },
+ "Roses Gabor": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Gabrielle Rose (actress)",
+    "name mismatch"
+   ],
+   [
+    "Gabrielle Rose (swimmer)",
+    "name mismatch"
+   ],
+   [
+    "Gabriella Rose",
+    "name mismatch"
+   ],
+   [
+    "Abbott Laboratories",
+    "name mismatch"
+   ],
+   [
+    "Boryana Rossa",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Roses Gabor",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Roxy Music": {
   "F": 5.662132375110189,
   "article": "Roxy Music",
@@ -11218,6 +13702,16 @@
   "pageviews": null,
   "query": "S-Type",
   "reason": "no identity-matched musical performer among candidates"
+ },
+ "SBTRKT": {
+  "F": 4.23792056635038,
+  "article": "Sbtrkt",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Sbtrkt",
+  "pageviews": 17294,
+  "query": "SBTRKT",
+  "wikidata": "Q1518508"
  },
  "SHERBETS": {
   "F": 0.0,
@@ -11312,6 +13806,16 @@
   "query": "Sam Cooke",
   "wikidata": "Q295919"
  },
+ "Sam Dew": {
+  "F": 4.345550157487743,
+  "article": "Sam Dew",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Sam Dew",
+  "pageviews": 22158,
+  "query": "Sam Dew",
+  "wikidata": "Q20685408"
+ },
  "Sam Smith": {
   "F": 5.900585586649962,
   "article": "Sam Smith",
@@ -11322,6 +13826,16 @@
   "query": "Sam Smith",
   "wikidata": "Q15123969"
  },
+ "Sampha": {
+  "F": 4.894077800110005,
+  "article": "Sampha",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Sampha",
+  "pageviews": 78356,
+  "query": "Sampha",
+  "wikidata": "Q15629610"
+ },
  "San Holo": {
   "F": 4.250810204025981,
   "article": "San Holo",
@@ -11331,6 +13845,53 @@
   "pageviews": 17815,
   "query": "San Holo",
   "wikidata": "Q21621487"
+ },
+ "Santessa": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Santería",
+    "name mismatch"
+   ],
+   [
+    "Santeramo in Colle",
+    "name mismatch"
+   ],
+   [
+    "Sannyasa",
+    "name mismatch"
+   ],
+   [
+    "Tobias Santelmann",
+    "name mismatch"
+   ],
+   [
+    "Santa Sabina",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Santessa",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Santigold": {
+  "F": 5.2464813465458375,
+  "article": "Santigold",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Santigold",
+  "pageviews": 176392,
+  "query": "Santigold",
+  "wikidata": "Q240343"
  },
  "Sara Bareilles": {
   "F": 5.748711191725204,
@@ -11361,6 +13922,16 @@
   "pageviews": 161125,
   "query": "Sarah Vaughan",
   "wikidata": "Q229513"
+ },
+ "Saul Williams": {
+  "F": 5.327691936101054,
+  "article": "Saul Williams",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Saul Williams",
+  "pageviews": 212662,
+  "query": "Saul Williams",
+  "wikidata": "Q533369"
  },
  "ScHoolboy Q": {
   "F": 5.226862722031381,
@@ -11497,6 +14068,16 @@
   "query": "Shameboy",
   "wikidata": "Q642726"
  },
+ "Shana Halligan": {
+  "F": 4.004192356259714,
+  "article": "Shana Halligan",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Shana Halligan",
+  "pageviews": 10096,
+  "query": "Shana Halligan",
+  "wikidata": "Q26702446"
+ },
  "Sharon Van Etten": {
   "F": 5.172264236271953,
   "article": "Sharon Van Etten",
@@ -11624,6 +14205,16 @@
   "query": "Sigur Rós",
   "wikidata": "Q483828"
  },
+ "Silver Apples": {
+  "F": 4.60535892548885,
+  "article": "Silver Apples",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Silver Apples",
+  "pageviews": 40304,
+  "query": "Silver Apples",
+  "wikidata": "Q687866"
+ },
  "Simon & Garfunkel": {
   "F": 5.905424008285575,
   "article": "Simon & Garfunkel",
@@ -11643,6 +14234,26 @@
   "pageviews": 458231,
   "query": "Simple Minds",
   "wikidata": "Q748836"
+ },
+ "Simple Plan": {
+  "F": 5.575332200748137,
+  "article": "Simple Plan",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Simple Plan",
+  "pageviews": 376124,
+  "query": "Simple Plan",
+  "wikidata": "Q485825"
+ },
+ "Singapore Sling": {
+  "F": 3.4602963267574753,
+  "article": "Singapore Sling (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Singapore Sling (band)",
+  "pageviews": 2885,
+  "query": "Singapore Sling",
+  "wikidata": "Q7523117"
  },
  "Siouxsie and the Banshees": {
   "F": 5.785879119209165,
@@ -11674,6 +14285,16 @@
   "query": "Skepta",
   "wikidata": "Q164446"
  },
+ "Skillet": {
+  "F": 5.753426010449828,
+  "article": "Skillet (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Skillet (band)",
+  "pageviews": 566794,
+  "query": "Skillet",
+  "wikidata": "Q374747"
+ },
  "Skream": {
   "F": 4.472258992389032,
   "article": "Skream",
@@ -11694,6 +14315,43 @@
   "query": "Skrillex",
   "wikidata": "Q19004"
  },
+ "Skywave": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Skywave",
+    "not a musical act"
+   ],
+   [
+    "SkyWave Mobile Communications",
+    "name mismatch"
+   ],
+   [
+    "Over-the-horizon radar",
+    "name mismatch"
+   ],
+   [
+    "Eliot Lipp",
+    "name mismatch"
+   ],
+   [
+    "Skywalker family",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Skywave",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Sleeping With Sirens": {
   "F": 5.274081610030239,
   "article": "Sleeping with Sirens",
@@ -11703,6 +14361,16 @@
   "pageviews": 187966,
   "query": "Sleeping With Sirens",
   "wikidata": "Q1972270"
+ },
+ "Sleepy Sun": {
+  "F": 3.7304592600457687,
+  "article": "Sleepy Sun",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Sleepy Sun",
+  "pageviews": 5375,
+  "query": "Sleepy Sun",
+  "wikidata": "Q7539987"
  },
  "Slipknot": {
   "F": 6.162933728311852,
@@ -11842,6 +14510,16 @@
   "query": "Soom T",
   "wikidata": "Q24014250"
  },
+ "Sorrow": {
+  "F": 4.333950804387247,
+  "article": "Sorrow (The McCoys song)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Sorrow (The McCoys song)",
+  "pageviews": 21574,
+  "query": "Sorrow",
+  "wikidata": "Q3044927"
+ },
  "Sorten Muld": {
   "F": 3.0132586652835167,
   "article": "Sorten Muld",
@@ -11872,6 +14550,16 @@
   "query": "Spiritualized",
   "wikidata": "Q1144015"
  },
+ "Squarepusher": {
+  "F": 4.916190659980537,
+  "article": "Squarepusher",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Squarepusher",
+  "pageviews": 82449,
+  "query": "Squarepusher",
+  "wikidata": "Q553861"
+ },
  "St. Vincent": {
   "F": 5.81982482005913,
   "article": "St. Vincent (musician)",
@@ -11881,6 +14569,16 @@
   "pageviews": 660426,
   "query": "St. Vincent",
   "wikidata": "Q238795"
+ },
+ "Stand High Patrol": {
+  "F": 3.833083334178343,
+  "article": "Stand High Patrol",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Stand High Patrol",
+  "pageviews": 6808,
+  "query": "Stand High Patrol",
+  "wikidata": "Q30643578"
  },
  "Stars of the Lid": {
   "F": 4.577905216795529,
@@ -11922,6 +14620,16 @@
   "query": "Stereolab",
   "wikidata": "Q334652"
  },
+ "Steve Conte": {
+  "F": 4.420054815778764,
+  "article": "Steve Conte",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Steve Conte",
+  "pageviews": 26305,
+  "query": "Steve Conte",
+  "wikidata": "Q2482035"
+ },
  "Stevie Wonder": {
   "F": 6.292656058449035,
   "article": "Stevie Wonder",
@@ -11931,6 +14639,16 @@
   "pageviews": 1961805,
   "query": "Stevie Wonder",
   "wikidata": "Q714"
+ },
+ "Stiff Little Fingers": {
+  "F": 5.061343137720079,
+  "article": "Stiff Little Fingers",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Stiff Little Fingers",
+  "pageviews": 115170,
+  "query": "Stiff Little Fingers",
+  "wikidata": "Q1538935"
  },
  "Stig of the Dump": {
   "F": 3.230704313612569,
@@ -12001,6 +14719,16 @@
   "pageviews": 826727,
   "query": "Sublime",
   "wikidata": "Q591691"
+ },
+ "Submotion Orchestra": {
+  "F": 3.690727543870367,
+  "article": "Submotion Orchestra",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Submotion Orchestra",
+  "pageviews": 4905,
+  "query": "Submotion Orchestra",
+  "wikidata": "Q7631711"
  },
  "Subscape": {
   "F": 0.0,
@@ -12119,6 +14847,48 @@
   "query": "Suncatcher",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "Superpoze": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Superpower",
+    "name mismatch"
+   ],
+   [
+    "Supernova",
+    "name mismatch"
+   ],
+   [
+    "Superpesis",
+    "name mismatch"
+   ],
+   [
+    "Superposition principle",
+    "name mismatch"
+   ],
+   [
+    "Supramolecular chemistry",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": true,
+    "n_non_english": 1,
+    "non_english_wikis": [
+     "frwiki"
+    ],
+    "wikidata": "Q22249333"
+   },
+   "non_latin_name": false,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Superpoze",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Surkin": {
   "F": 4.775064051018494,
   "article": "Surkin",
@@ -12233,6 +15003,16 @@
   "pageviews": null,
   "query": "TANUKI",
   "reason": "no identity-matched musical performer among candidates"
+ },
+ "TOWA TEI": {
+  "F": 4.796234257131124,
+  "article": "Towa Tei",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Towa Tei",
+  "pageviews": 62550,
+  "query": "TOWA TEI",
+  "wikidata": "Q1193049"
  },
  "TTC": {
   "F": 3.6651117370750512,
@@ -12435,6 +15215,16 @@
   "query": "Teebs",
   "wikidata": "Q7694194"
  },
+ "Tegan and Sara": {
+  "F": 5.252911256504334,
+  "article": "Tegan and Sara",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Tegan and Sara",
+  "pageviews": 179023,
+  "query": "Tegan and Sara",
+  "wikidata": "Q734756"
+ },
  "Teki Latex": {
   "F": 3.5953859808091417,
   "article": "Teki Latex",
@@ -12488,6 +15278,26 @@
   "query": "Terravita",
   "wikidata": "Q20685753"
  },
+ "Terry Callier": {
+  "F": 4.6897704401885925,
+  "article": "Terry Callier",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Terry Callier",
+  "pageviews": 48951,
+  "query": "Terry Callier",
+  "wikidata": "Q14541"
+ },
+ "Terry Riley": {
+  "F": 4.879353969925782,
+  "article": "Terry Riley",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Terry Riley",
+  "pageviews": 75744,
+  "query": "Terry Riley",
+  "wikidata": "Q365243"
+ },
  "The Alan Parsons Project": {
   "F": 5.654363315744308,
   "article": "The Alan Parsons Project",
@@ -12507,6 +15317,16 @@
   "pageviews": 17251,
   "query": "The Album Leaf",
   "wikidata": "Q1780979"
+ },
+ "The Alchemist": {
+  "F": 5.592627478825608,
+  "article": "The Alchemist (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Alchemist (musician)",
+  "pageviews": 391405,
+  "query": "The Alchemist",
+  "wikidata": "Q704757"
  },
  "The Allman Brothers Band": {
   "F": 5.799511476180547,
@@ -12779,6 +15599,16 @@
   "query": "The Cure",
   "wikidata": "Q484427"
  },
+ "The Cutler": {
+  "F": 2.7558748556724915,
+  "article": "The Cutler",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Cutler",
+  "pageviews": 569,
+  "query": "The Cutler",
+  "wikidata": "Q7728522"
+ },
  "The Decemberists": {
   "F": 5.208274701583933,
   "article": "The Decemberists",
@@ -13044,6 +15874,16 @@
   "query": "The Moody Blues",
   "wikidata": "Q211965"
  },
+ "The Moon and the Nightspirit": {
+  "F": 3.5423273827739745,
+  "article": "The Moon and the Nightspirit",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Moon and the Nightspirit",
+  "pageviews": 3485,
+  "query": "The Moon and the Nightspirit",
+  "wikidata": "Q947046"
+ },
  "The Myrrors": {
   "F": 0.0,
   "article": null,
@@ -13081,6 +15921,27 @@
   "query": "The Myrrors",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "The Nat King Cole Trio": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Nat King Cole",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "The Nat King Cole Trio",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "The Offspring": {
   "F": 5.9657255497017365,
   "article": "The Offspring",
@@ -13100,6 +15961,16 @@
   "pageviews": 1311,
   "query": "The Out Crowd",
   "wikidata": "Q7755624"
+ },
+ "The Pentangle": {
+  "F": 5.089735597587947,
+  "article": "Pentangle (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Pentangle Collection",
+  "pageviews": 122951,
+  "query": "The Pentangle",
+  "wikidata": "Q1427551"
  },
  "The Piano Guys": {
   "F": 4.601386312645053,
@@ -13131,6 +16002,16 @@
   "query": "The Presidents of the United States of America",
   "wikidata": "Q176430"
  },
+ "The Pretty Things": {
+  "F": 4.607798033979387,
+  "article": "The Pretty Things",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Pretty Things",
+  "pageviews": 40531,
+  "query": "The Pretty Things",
+  "wikidata": "Q1364657"
+ },
  "The Prodigy": {
   "F": 6.029927320216255,
   "article": "The Prodigy",
@@ -13141,6 +16022,16 @@
   "query": "The Prodigy",
   "wikidata": "Q7256860"
  },
+ "The Qemists": {
+  "F": 4.051808294317092,
+  "article": "The Qemists",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Qemists",
+  "pageviews": 11266,
+  "query": "The Qemists",
+  "wikidata": "Q2067701"
+ },
  "The Raconteurs": {
   "F": 5.140913237373888,
   "article": "The Raconteurs",
@@ -13150,6 +16041,16 @@
   "pageviews": 138328,
   "query": "The Raconteurs",
   "wikidata": "Q912909"
+ },
+ "The Ragga Twins": {
+  "F": 4.067628716728246,
+  "article": "Ragga Twins",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Ragga Twins",
+  "pageviews": 11684,
+  "query": "The Ragga Twins",
+  "wikidata": "Q6098237"
  },
  "The Remote Viewer": {
   "F": 0.0,
@@ -13171,6 +16072,16 @@
   "pageviews": null,
   "query": "The Remote Viewer",
   "reason": "no identity-matched musical performer among candidates"
+ },
+ "The Residents": {
+  "F": 5.151287090414683,
+  "article": "The Residents",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Residents",
+  "pageviews": 141672,
+  "query": "The Residents",
+  "wikidata": "Q947955"
  },
  "The Rolling Stones": {
   "F": 6.293641827863309,
@@ -13202,6 +16113,21 @@
   "query": "The Shins",
   "wikidata": "Q58391"
  },
+ "The Silk Demise": {
+  "F": 0.0,
+  "article": null,
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "The Silk Demise",
+  "reason": "no search result"
+ },
  "The Smashing Pumpkins": {
   "F": 6.067672571380777,
   "article": "The Smashing Pumpkins",
@@ -13221,6 +16147,16 @@
   "pageviews": 942305,
   "query": "The Smiths",
   "wikidata": "Q180598"
+ },
+ "The Sonics": {
+  "F": 4.825075424613678,
+  "article": "The Sonics",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Sonics",
+  "pageviews": 66845,
+  "query": "The Sonics",
+  "wikidata": "Q904921"
  },
  "The Spaceape": {
   "F": 3.656098202012832,
@@ -13355,6 +16291,16 @@
   "via": "wikidata_fallback",
   "wikidata": "Q3523058"
  },
+ "The United States of America": {
+  "F": 4.470425192639137,
+  "article": "The United States of America (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The United States of America (band)",
+  "pageviews": 29540,
+  "query": "The United States of America",
+  "wikidata": "Q166433"
+ },
  "The Velvet Underground": {
   "F": 5.860582939479996,
   "article": "The Velvet Underground",
@@ -13405,6 +16351,16 @@
   "query": "The Weeknd",
   "wikidata": "Q2121062"
  },
+ "The West Coast Pop Art Experimental Band": {
+  "F": 4.44015312977356,
+  "article": "The West Coast Pop Art Experimental Band",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The West Coast Pop Art Experimental Band",
+  "pageviews": 27551,
+  "query": "The West Coast Pop Art Experimental Band",
+  "wikidata": "Q1779066"
+ },
  "The White Stripes": {
   "F": 6.028711521794728,
   "article": "The White Stripes",
@@ -13444,6 +16400,31 @@
   "pageviews": 1008567,
   "query": "The xx",
   "wikidata": "Q869367"
+ },
+ "Theory of a Deadman": {
+  "F": 4.997364538048965,
+  "article": "Theory of a Deadman",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Theory of a Deadman",
+  "pageviews": 99394,
+  "query": "Theory of a Deadman",
+  "wikidata": "Q744242"
+ },
+ "They Dream By Day": {
+  "F": 0.0,
+  "article": null,
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "They Dream By Day",
+  "reason": "no search result"
  },
  "Thievery Corporation": {
   "F": 5.139460325399969,
@@ -13515,6 +16496,43 @@
   "query": "Three Days Grace",
   "wikidata": "Q486825"
  },
+ "Throwing Snow": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Throwing sports",
+    "name mismatch"
+   ],
+   [
+    "Throwing Stones",
+    "name mismatch"
+   ],
+   [
+    "Throwing Stones (role-playing game)",
+    "name mismatch"
+   ],
+   [
+    "List of The Real Housewives of Cheshire episodes",
+    "name mismatch"
+   ],
+   [
+    "Defenestration",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Throwing Snow",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "Thundercat": {
   "F": 5.5798544494102345,
   "article": "Thundercat (musician)",
@@ -13524,6 +16542,16 @@
   "pageviews": 380061,
   "query": "Thundercat",
   "wikidata": "Q15285290"
+ },
+ "Thylacine": {
+  "F": 3.313234291694724,
+  "article": "Thylacine (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Thylacine (band)",
+  "pageviews": 2056,
+  "query": "Thylacine",
+  "wikidata": "Q7799596"
  },
  "Thåström": {
   "F": 4.024772913079632,
@@ -13631,6 +16659,64 @@
   "pageviews": 1171923,
   "query": "Tom Waits",
   "wikidata": "Q184805"
+ },
+ "Tommy Dorsey and His Orchestra": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Tommy Dorsey",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Tommy Dorsey and His Orchestra",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Tony Anderson": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Anthony Anderson (disambiguation)",
+    "missing/disambig"
+   ],
+   [
+    "Tony Anderson (rugby league)",
+    "not a musical act"
+   ],
+   [
+    "Tony Anderson (Australian rules footballer)",
+    "not a musical act"
+   ],
+   [
+    "Tony Andreason",
+    "name mismatch"
+   ],
+   [
+    "Tom Anderson (Alaska politician)",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Tony Anderson",
+  "reason": "no identity-matched musical performer among candidates"
  },
  "Toonorth": {
   "F": 0.0,
@@ -13822,6 +16908,80 @@
   "via": "wikidata_fallback",
   "wikidata": "Q336977"
  },
+ "Trolley Snatcha": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Never Say Die Records",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": false,
+   "potentially_notable": false
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "Trolley Snatcha",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "Tropics": {
+  "F": 2.9057958803678687,
+  "article": "Tropics (musician)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Tropics (musician)",
+  "pageviews": 804,
+  "query": "Tropics",
+  "wikidata": "Q20714043"
+ },
+ "Truth": {
+  "F": 3.15106325335375,
+  "article": "Truth (Chingiz song)",
+  "candidates_checked": [
+   [
+    "Truth",
+    "not a musical act"
+   ],
+   [
+    "Sojourner Truth",
+    "not a musical act"
+   ],
+   [
+    "Truth Social",
+    "not a musical act"
+   ],
+   [
+    "The Truth About Love",
+    "name mismatch"
+   ],
+   [
+    "Truth and Reconciliation Commission (South Africa)",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 1415,
+  "query": "Truth",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q61997162"
+ },
+ "TrySail": {
+  "F": 4.055531225050898,
+  "article": "TrySail",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "TrySail",
+  "pageviews": 11363,
+  "query": "TrySail",
+  "wikidata": "Q20041713"
+ },
  "Two Door Cinema Club": {
   "F": 5.193199758203068,
   "article": "Two Door Cinema Club",
@@ -13927,6 +17087,16 @@
   "via": "wikidata_fallback",
   "wikidata": "Q3608376"
  },
+ "U137": {
+  "F": 3.2041199826559246,
+  "article": "U137 (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "U137 (band)",
+  "pageviews": 1599,
+  "query": "U137",
+  "wikidata": "Q25212104"
+ },
  "U2": {
   "F": 6.020370399420912,
   "article": "U2",
@@ -13936,6 +17106,39 @@
   "pageviews": 1048021,
   "query": "U2",
   "wikidata": "Q396"
+ },
+ "UA": {
+  "F": 4.479906267005072,
+  "article": "Ua (singer)",
+  "candidates_checked": [
+   [
+    "UA",
+    "missing/disambig"
+   ],
+   [
+    "UAE Pro League",
+    "name mismatch"
+   ],
+   [
+    "UAE Team Emirates XRG",
+    "name mismatch"
+   ],
+   [
+    "UAB Blazers",
+    "name mismatch"
+   ],
+   [
+    "UAB Blazers football",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 30192,
+  "query": "UA",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q455980"
  },
  "UNKLE": {
   "F": 4.945650733956227,
@@ -13966,6 +17169,16 @@
   "pageviews": 1409,
   "query": "UnsraW",
   "wikidata": "Q2989579"
+ },
+ "Until the Ribbon Breaks": {
+  "F": 3.474798818800631,
+  "article": "Until the Ribbon Breaks",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Until the Ribbon Breaks",
+  "pageviews": 2983,
+  "query": "Until the Ribbon Breaks",
+  "wikidata": "Q19881622"
  },
  "Uriah Heep": {
   "F": 5.627128158726531,
@@ -14163,6 +17376,16 @@
   "query": "Wax Tailor",
   "wikidata": "Q3566783"
  },
+ "Wayne Shorter": {
+  "F": 5.232952932771053,
+  "article": "Wayne Shorter",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Wayne Shorter",
+  "pageviews": 170982,
+  "query": "Wayne Shorter",
+  "wikidata": "Q317161"
+ },
  "Weathertunes": {
   "F": 0.0,
   "article": null,
@@ -14209,6 +17432,16 @@
   "pageviews": 870160,
   "query": "Weezer",
   "wikidata": "Q209956"
+ },
+ "Wes Montgomery": {
+  "F": 5.110060828444125,
+  "article": "Wes Montgomery",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Wes Montgomery",
+  "pageviews": 128842,
+  "query": "Wes Montgomery",
+  "wikidata": "Q298601"
  },
  "Whiney": {
   "F": 0.0,
@@ -14289,6 +17522,16 @@
   "pageviews": 2993737,
   "query": "Whitney Houston",
   "wikidata": "Q34389"
+ },
+ "Wiki": {
+  "F": 7.0397112415192336,
+  "article": "Wikipedia",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Wikipedia",
+  "pageviews": 10957493,
+  "query": "Wiki",
+  "wikidata": "Q52"
  },
  "Wilco": {
   "F": 5.555125900521659,
@@ -14383,6 +17626,26 @@
   "query": "Wooden Shjips",
   "wikidata": "Q3569825"
  },
+ "Wu‐Tang Clan": {
+  "F": 6.144213858357694,
+  "article": "Wu-Tang Clan",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Wu-Tang Clan",
+  "pageviews": 1393842,
+  "query": "Wu‐Tang Clan",
+  "wikidata": "Q52463"
+ },
+ "XTC": {
+  "F": 5.4639556661407225,
+  "article": "XTC",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "XTC",
+  "pageviews": 291041,
+  "query": "XTC",
+  "wikidata": "Q1413926"
+ },
  "Xzibit": {
   "F": 5.4602406444082865,
   "article": "Xzibit",
@@ -14392,6 +17655,16 @@
   "pageviews": 288562,
   "query": "Xzibit",
   "wikidata": "Q189078"
+ },
+ "Yaeji": {
+  "F": 4.58441038541748,
+  "article": "Yaeji",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Yaeji",
+  "pageviews": 38406,
+  "query": "Yaeji",
+  "wikidata": "Q44279160"
  },
  "Yann Tiersen": {
   "F": 4.825562421998024,
@@ -14553,6 +17826,16 @@
   "query": "ZZ Top",
   "wikidata": "Q136591"
  },
+ "Zack de la Rocha": {
+  "F": 5.9180738689532895,
+  "article": "Zack de la Rocha",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Zack de la Rocha",
+  "pageviews": 828082,
+  "query": "Zack de la Rocha",
+  "wikidata": "Q139933"
+ },
  "Zara Larsson": {
   "F": 6.621303226822222,
   "article": "Zara Larsson",
@@ -14562,6 +17845,16 @@
   "pageviews": 4181221,
   "query": "Zara Larsson",
   "wikidata": "Q4177928"
+ },
+ "ZerO One": {
+  "F": 2.376576957056512,
+  "article": "Zero One (song)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Zero One (song)",
+  "pageviews": 237,
+  "query": "ZerO One",
+  "wikidata": "Q63190308"
  },
  "Zero 7": {
   "F": 4.9779064276371185,
@@ -14646,6 +17939,28 @@
   "query": "Zola Jesus",
   "wikidata": "Q2606202"
  },
+ "a crowd of rebellion": {
+  "F": 0.0,
+  "article": null,
+  "guard": {
+   "foreign": {
+    "found": true,
+    "n_non_english": 3,
+    "non_english_wikis": [
+     "huwiki",
+     "jawiki",
+     "kowiki"
+    ],
+    "wikidata": "Q22006854"
+   },
+   "non_latin_name": false,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "a crowd of rebellion",
+  "reason": "no search result"
+ },
  "alt‐J": {
   "F": 5.200927067194083,
   "article": "Alt-J",
@@ -14655,6 +17970,26 @@
   "pageviews": 158827,
   "query": "alt‐J",
   "wikidata": "Q47996"
+ },
+ "blink‐182": {
+  "F": 6.017769345541019,
+  "article": "Blink-182",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Blink-182",
+  "pageviews": 1041763,
+  "query": "blink‐182",
+  "wikidata": "Q482477"
+ },
+ "clammbon": {
+  "F": 3.6152133348013584,
+  "article": "Clammbon",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "Clammbon",
+  "pageviews": 4122,
+  "query": "clammbon",
+  "wikidata": "Q5125454"
  },
  "deadmau5": {
   "F": 5.582267956091819,
@@ -14849,6 +18184,50 @@
   "query": "oshi",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "sToa": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Stoat",
+    "name mismatch"
+   ],
+   [
+    "Stoa USA",
+    "name mismatch"
+   ],
+   [
+    "Stoa Poikile",
+    "name mismatch"
+   ],
+   [
+    "Ryan Stoa",
+    "name mismatch"
+   ],
+   [
+    "List of stoae",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": true,
+    "n_non_english": 3,
+    "non_english_wikis": [
+     "dewiki",
+     "ruwiki",
+     "ukwiki"
+    ],
+    "wikidata": "Q2350459"
+   },
+   "non_latin_name": false,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "sToa",
+  "reason": "no identity-matched musical performer among candidates"
+ },
  "saib.": {
   "F": 0.0,
   "article": null,
@@ -14923,6 +18302,16 @@
   "query": "sleepy fish",
   "reason": "no identity-matched musical performer among candidates"
  },
+ "the GazettE": {
+  "F": 4.789728741870535,
+  "article": "The Gazette (band)",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "The Gazette (band)",
+  "pageviews": 61620,
+  "query": "the GazettE",
+  "wikidata": "Q256319"
+ },
  "twenty one pilots": {
   "F": 6.0101646426520885,
   "article": "Twenty One Pilots",
@@ -14984,6 +18373,88 @@
   "query": "内田真礼",
   "wikidata": "Q44552"
  },
+ "初音ミク": {
+  "F": 0.0,
+  "article": null,
+  "candidates_checked": [
+   [
+    "Hatsune Miku",
+    "not a musical act"
+   ],
+   [
+    "Hatsune Miku: Project Diva",
+    "name mismatch"
+   ],
+   [
+    "Hatsune Miku: Project Diva 2nd",
+    "name mismatch"
+   ],
+   [
+    "Hatsune Miku: Project Diva Arcade",
+    "name mismatch"
+   ],
+   [
+    "Hatsune Miku: Project Diva F",
+    "name mismatch"
+   ]
+  ],
+  "guard": {
+   "foreign": {
+    "found": false
+   },
+   "non_latin_name": true,
+   "potentially_notable": true
+  },
+  "matched": false,
+  "pageviews": null,
+  "query": "初音ミク",
+  "reason": "no identity-matched musical performer among candidates"
+ },
+ "加藤登紀子": {
+  "F": 3.736237098904729,
+  "article": "Tokiko Kato",
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 5447,
+  "query": "加藤登紀子",
+  "reason": "no search result",
+  "via": "wikidata_fallback",
+  "wikidata": "Q1078163"
+ },
+ "加藤達也": {
+  "F": 3.6816029987308685,
+  "article": "Tatsuya Kato",
+  "candidates_checked": [
+   [
+    "Masaya Kato",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 4803,
+  "query": "加藤達也",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q13954808"
+ },
+ "原神玲": {
+  "F": 4.023869501388332,
+  "article": "Rei Harakami",
+  "candidates_checked": [
+   [
+    "Genshin Impact",
+    "name mismatch"
+   ]
+  ],
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 10564,
+  "query": "原神玲",
+  "reason": "no identity-matched musical performer among candidates",
+  "via": "wikidata_fallback",
+  "wikidata": "Q5359149"
+ },
  "喜多郎": {
   "F": 4.778939502912978,
   "article": "Kitarō",
@@ -14993,6 +18464,59 @@
   "pageviews": 60108,
   "query": "喜多郎",
   "wikidata": "Q273652"
+ },
+ "守永初美": {
+  "F": 2.7403626894942437,
+  "article": "Hatsumi Morinaga",
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 549,
+  "query": "守永初美",
+  "reason": "no search result",
+  "via": "wikidata_fallback",
+  "wikidata": "Q3826593"
+ },
+ "山田タマル": {
+  "F": 2.9222062774390163,
+  "article": "Yamada Tamaru",
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 835,
+  "query": "山田タマル",
+  "reason": "no search result",
+  "via": "wikidata_fallback",
+  "wikidata": "Q11470113"
+ },
+ "影山ヒロノブ": {
+  "F": 4.469262225177402,
+  "article": "Hironobu Kageyama",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "影山ヒロノブ",
+  "pageviews": 29461,
+  "query": "影山ヒロノブ",
+  "wikidata": "Q1074038"
+ },
+ "村下孝蔵": {
+  "F": 3.760874638052189,
+  "article": "Kōzō Murashita",
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 5765,
+  "query": "村下孝蔵",
+  "reason": "no search result",
+  "via": "wikidata_fallback",
+  "wikidata": "Q3273684"
+ },
+ "松任谷由実": {
+  "F": 4.687082844604371,
+  "article": "Yumi Matsutoya",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "松任谷由実",
+  "pageviews": 48649,
+  "query": "松任谷由実",
+  "wikidata": "Q267471"
  },
  "松本晃彦": {
   "F": 0.0,
@@ -15089,6 +18613,17 @@
   "via": "wikidata_fallback",
   "wikidata": "Q10760311"
  },
+ "砂原良徳": {
+  "F": 3.569958818096594,
+  "article": "Yoshinori Sunahara",
+  "matched": true,
+  "months_present": 12,
+  "pageviews": 3714,
+  "query": "砂原良徳",
+  "reason": "no search result",
+  "via": "wikidata_fallback",
+  "wikidata": "Q2601021"
+ },
  "菅野よう子": {
   "F": 5.071333271990927,
   "article": "Yoko Kanno",
@@ -15119,6 +18654,16 @@
   "pageviews": null,
   "query": "藤澤慶昌",
   "reason": "no search result"
+ },
+ "遠藤正明": {
+  "F": 4.029708362514895,
+  "article": "Masaaki Endoh",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "遠藤正明",
+  "pageviews": 10707,
+  "query": "遠藤正明",
+  "wikidata": "Q1374355"
  },
  "野見祐二": {
   "F": 3.63558426631123,
@@ -15162,6 +18707,16 @@
   "reason": "no identity-matched musical performer among candidates",
   "via": "wikidata_fallback",
   "wikidata": "Q1055081"
+ },
+ "雨宮天": {
+  "F": 4.808440554725745,
+  "article": "Sora Amamiya",
+  "matched": true,
+  "months_present": 12,
+  "opensearch_candidate": "雨宮天",
+  "pageviews": 64333,
+  "query": "雨宮天",
+  "wikidata": "Q14635194"
  },
  "黒沢ともよ": {
   "F": 0.0,

@@ -1,6 +1,12 @@
 # Handoff — Track 3 executed and read, 2026-07-28
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-07-29 on next actions** by
+[`2026-07-29-HANDOFF-requirements-track3b.md`](2026-07-29-HANDOFF-requirements-track3b.md)
+— the owner's decision this handoff said was pending has been taken and reframed: the
+requirements were rewritten (`PRODUCT-REQUIREMENTS.md`), Track 3b ran to a read (TB-R2),
+the candidate decisions are PARKED, and the next work is graph-rebuild planning. Its Track
+3 record and do-not-revert list stand unchanged. *(Original role line: ACTIVE, the CURRENT
+handoff.)* Supersedes
 [`2026-07-28-HANDOFF-track3-preregistered.md`](2026-07-28-HANDOFF-track3-preregistered.md)
 on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.

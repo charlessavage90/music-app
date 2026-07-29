@@ -4,6 +4,14 @@
 what a good path is — usually a blind test, but direct articulation counts too (values 8
 and 9 came that way).
 
+> ⚠ **2026-07-29: [`PRODUCT-REQUIREMENTS.md`](PRODUCT-REQUIREMENTS.md) now sits above
+> this record.** It is the owner's Must/Should/Expect restatement of these values as
+> requirements; **where the two disagree, it governs**, and its §10 lists every known
+> disagreement (currently: value 2's lengthening clause is superseded as a documentation
+> conflation, and value 5 is promoted to a requirement). This file remains the
+> calibration record — provenance, worked cases, the boilthefrog delineation, and the
+> test protocol live here and nowhere else.
+
 The blind listening test is this project's strongest evidence class. It decided the graph
 twice, where the offline metrics decided it zero times, and it works because it converts a
 question the owner cannot audit (graph structure) into one he can (does this feel right).
@@ -43,6 +51,12 @@ or surfacing anything new. Length alone is not the goal — a path that lengthen
 carrying the same or more hubs is a worse result, not a better one.
 *Firm as intent. The owner flagged it himself as gut instinct rather than data-driven
 (execution log §16). Bypass telemetry is what would test it.*
+⚠ **Partly SUPERSEDED 2026-07-29** — `PRODUCT-REQUIREMENTS.md` §10, REQ-13/14/19. The
+owner states the "both, or neither counts" framing was a conflation introduced during
+documentation: the requirement is that bypass **increases novelty**; lengthening is an
+**expected side-effect** of holding coherence at increasing obscurity, never a goal. The
+failure reading — a bypass that swaps famous-for-famous without surfacing anything new —
+stands unchanged. Struck in place, not deleted, per this file's convention.
 ⚠ **This value once read "Reference product: boilthefrog". It is not** — boilthefrog's
 bypass does not do this, and the claim is struck rather than deleted so the correction stays
 visible. See the table below and `findings/2026-07-27-boilthefrog-source-review.md` `BTF-3`.

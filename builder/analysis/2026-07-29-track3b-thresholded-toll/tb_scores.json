@@ -1,0 +1,267 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "thresholds": {
+  "c1": -1.0,
+  "c1_neg_frac": 0.75,
+  "c2": 0.5,
+  "c4_flag": 0.1,
+  "c5_pctl": 0.9,
+  "c6_flag": 1.0,
+  "counterfactual_F": 5.229561543744921,
+  "top_degree_cut": 44.0
+ },
+ "wording_ii": "the pass is carried substantially by artists with no English Wikipedia article",
+ "n_analysis_pairs": 8,
+ "results": {
+  "P": {
+   "arm": "P",
+   "w": 0.0,
+   "c1_all": {
+    "mean": 0.0,
+    "neg_frac": 0.0,
+    "n": 24,
+    "pass": false
+   },
+   "c1_matched": {
+    "mean": 0.0,
+    "neg_frac": 0.0,
+    "n": 24,
+    "pass": false
+   },
+   "c1_counterfactual": {
+    "mean": 0.0,
+    "neg_frac": 0.0,
+    "n": 24,
+    "pass": false
+   },
+   "c1_pass": false,
+   "c1_wording_ii": false,
+   "a11": {
+    "scored_interiors": 195,
+    "unmatched": 9,
+    "flagged": 2
+   },
+   "c2_per_pair": 0.01506863521613866,
+   "c2_n_pairs": 8,
+   "c2_pooled": -0.04768745568749111,
+   "c2_pass": false,
+   "c4_median_sim": 1.0,
+   "c5_mean_per_cell": 1.5416666666666667,
+   "c5_distinct": 16,
+   "c5_fame_quartiles": [
+    0.0,
+    3.7366354976868212,
+    4.301160264469209,
+    4.589949601325708,
+    5.451551576782085
+   ],
+   "c5b_top_degree_distinct": 24,
+   "c6_c1_window": 0,
+   "c6_d5": 0,
+   "c6_flagged": false,
+   "c4_drop_vs_p": 0.0,
+   "c4_flagged": false
+  },
+  "TB-A1": {
+   "arm": "TB-A1",
+   "w": 0.1,
+   "c1_all": {
+    "mean": -0.5542343054132515,
+    "neg_frac": 0.6666666666666666,
+    "n": 24,
+    "pass": false
+   },
+   "c1_matched": {
+    "mean": -0.3715329621463661,
+    "neg_frac": 0.625,
+    "n": 24,
+    "pass": false
+   },
+   "c1_counterfactual": {
+    "mean": -0.47126760794841427,
+    "neg_frac": 0.625,
+    "n": 24,
+    "pass": false
+   },
+   "c1_pass": false,
+   "c1_wording_ii": false,
+   "a11": {
+    "scored_interiors": 163,
+    "unmatched": 15,
+    "flagged": 4
+   },
+   "c2_per_pair": 0.6261264766230021,
+   "c2_n_pairs": 8,
+   "c2_pooled": 0.3518570172358322,
+   "c2_pass": true,
+   "c4_median_sim": 0.9466802179813385,
+   "c5_mean_per_cell": 2,
+   "c5_distinct": 25,
+   "c5_fame_quartiles": [
+    0.0,
+    3.513217600067939,
+    3.979866922564903,
+    4.470586878096166,
+    5.825046187397494
+   ],
+   "c5b_top_degree_distinct": 12,
+   "c6_c1_window": -3.6666666666666665,
+   "c6_d5": -1,
+   "c6_flagged": true,
+   "c4_drop_vs_p": 0.0533197820186615,
+   "c4_flagged": false
+  },
+  "TB-A2": {
+   "arm": "TB-A2",
+   "w": 0.3,
+   "c1_all": {
+    "mean": -1.080019055683002,
+    "neg_frac": 0.875,
+    "n": 24,
+    "pass": true
+   },
+   "c1_matched": {
+    "mean": -0.7691839533325777,
+    "neg_frac": 0.9583333333333334,
+    "n": 24,
+    "pass": false
+   },
+   "c1_counterfactual": {
+    "mean": -1.040309883940837,
+    "neg_frac": 0.875,
+    "n": 24,
+    "pass": true
+   },
+   "c1_pass": true,
+   "c1_wording_ii": true,
+   "a11": {
+    "scored_interiors": 150,
+    "unmatched": 25,
+    "flagged": 6
+   },
+   "c2_per_pair": 0.4752957695996227,
+   "c2_n_pairs": 8,
+   "c2_pooled": 0.4566037749061689,
+   "c2_pass": false,
+   "c4_median_sim": 0.807383120059967,
+   "c5_mean_per_cell": 4,
+   "c5_distinct": 69,
+   "c5_fame_quartiles": [
+    0.0,
+    2.6364878963533656,
+    3.979866922564903,
+    4.589949601325708,
+    5.9180738689532895
+   ],
+   "c5b_top_degree_distinct": 6,
+   "c6_c1_window": -4.958333333333333,
+   "c6_d5": -2.875,
+   "c6_flagged": true,
+   "c4_drop_vs_p": 0.19261687994003296,
+   "c4_flagged": true
+  },
+  "TB-A3": {
+   "arm": "TB-A3",
+   "w": 1.0,
+   "c1_all": {
+    "mean": -1.7089799528884773,
+    "neg_frac": 0.9583333333333334,
+    "n": 24,
+    "pass": true
+   },
+   "c1_matched": {
+    "mean": -1.0684760424445106,
+    "neg_frac": 0.9583333333333334,
+    "n": 24,
+    "pass": true
+   },
+   "c1_counterfactual": {
+    "mean": -1.37452385368905,
+    "neg_frac": 0.9583333333333334,
+    "n": 24,
+    "pass": true
+   },
+   "c1_pass": true,
+   "c1_wording_ii": false,
+   "a11": {
+    "scored_interiors": 168,
+    "unmatched": 40,
+    "flagged": 7
+   },
+   "c2_per_pair": 0.2132191486869277,
+   "c2_n_pairs": 8,
+   "c2_pooled": 0.4853366935617771,
+   "c2_pass": false,
+   "c4_median_sim": 0.6703969836235046,
+   "c5_mean_per_cell": 6.083333333333333,
+   "c5_distinct": 129,
+   "c5_fame_quartiles": [
+    0.0,
+    0.0,
+    3.908109540392552,
+    4.60535892548885,
+    7.0397112415192336
+   ],
+   "c5b_top_degree_distinct": 0,
+   "c6_c1_window": -5.625,
+   "c6_d5": -4.375,
+   "c6_flagged": true,
+   "c4_drop_vs_p": 0.32960301637649536,
+   "c4_flagged": true
+  }
+ },
+ "supplementary": {
+  "held_out": {
+   "P": {
+    "c1_mean": 0.0,
+    "c1_neg_frac": 0.0,
+    "c5_mean_per_cell": 1.75,
+    "len_vs_p": 0
+   },
+   "TB-A1": {
+    "c1_mean": -0.7931671265610661,
+    "c1_neg_frac": 0.6666666666666666,
+    "c5_mean_per_cell": 1.9166666666666667,
+    "len_vs_p": -3.6666666666666665
+   },
+   "TB-A2": {
+    "c1_mean": -0.7870198431956538,
+    "c1_neg_frac": 0.9166666666666666,
+    "c5_mean_per_cell": 3.0833333333333335,
+    "len_vs_p": -5.333333333333333
+   },
+   "TB-A3": {
+    "c1_mean": -2.1329629992092545,
+    "c1_neg_frac": 1.0,
+    "c5_mean_per_cell": 4.5,
+    "len_vs_p": -5.916666666666667
+   }
+  },
+  "anchors": {
+   "P": {
+    "c1_mean": 0.0,
+    "c1_neg_frac": 0.0,
+    "c5_mean_per_cell": 0,
+    "len_vs_p": 0
+   },
+   "TB-A1": {
+    "c1_mean": -0.10368218818049464,
+    "c1_neg_frac": 0.5833333333333334,
+    "c5_mean_per_cell": 0,
+    "len_vs_p": -1.3333333333333333
+   },
+   "TB-A2": {
+    "c1_mean": -0.03846394422880891,
+    "c1_neg_frac": 0.4166666666666667,
+    "c5_mean_per_cell": 0,
+    "len_vs_p": -1.5833333333333333
+   },
+   "TB-A3": {
+    "c1_mean": -0.08009841263368234,
+    "c1_neg_frac": 0.5,
+    "c5_mean_per_cell": 0.5833333333333334,
+    "len_vs_p": -0.75
+   }
+  }
+ }
+}

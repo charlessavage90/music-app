@@ -10,68 +10,59 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-28 (late night), on the Track 3 execution closeout.**
+**Last updated: 2026-07-29, on the requirements + Track 3b closeout.**
 
 ---
 
 ## Next
 
-> ## 🔓 Path-quality work is UNPAUSED — owner decision, 2026-07-28.
+> ## The next session PLANS THE GRAPH REBUILD — owner's instruction, 2026-07-29.
 >
-> His goal, in his words: improve the frequency of obscure artists (and/or reduce the
-> frequency of very famous artists) in path interiors, **especially when the bypass
-> buttons are used.**
+> Routing-side devices are exhausted for his goal (below), so the goal now runs through
+> how the map is built. Entry points and constraints are in the handoff:
+> [`2026-07-29-HANDOFF-requirements-track3b.md`](2026-07-29-HANDOFF-requirements-track3b.md).
+> The agreed first task is the **cap-selection simulation from the archive** — it is also
+> `MKS-5b`'s required demonstration. **The nameless-artist drop rule comes due inside this
+> plan** (its condition: before the next production rebuild); `acceptance.py` stays
+> unweakened.
 
-**Track 3 is EXECUTED and read (2026-07-28). The next action is the owner's decision, and
-nothing is scheduled.**
+**The requirements baseline changed 2026-07-29:**
+[`PRODUCT-REQUIREMENTS.md`](PRODUCT-REQUIREMENTS.md) (identifiers `REQ-`) is the owner's
+Must/Should/Expect restatement and **governs where it and `WHAT-GOOD-LOOKS-LIKE.md`
+disagree** (its §10 lists the disagreements). Same-day rulings recorded there: payload
+currency is fame with conditions (`REQ-Q1`), and the famous-pair structural gap (`DD-F1`)
+is **a defect, not an accepted limitation** — most user-entered endpoints are famous, so
+that pair class carries the app's implied promise.
 
-**What he is deciding.** Track 3 produced a candidate that passes both pre-registered
-criteria — but for a *different* trade than the one it set out to test: roughly **7
-mostly-obscure artists against today's ~13 mostly-famous**. Whether that is better is
-"what counts as better", which is his, and it sits on a real tension between two recorded
-values in [`WHAT-GOOD-LOOKS-LIKE.md`](WHAT-GOOD-LOOKS-LIKE.md) — value 1 counts novelty
-absolutely and is satisfied; value 2 wants bypass to *lengthen* and add novelty, and the
-lengthening half fails. **No blind listen, no adoption and no further arms are scheduled**;
-all three are his.
+**Track 3b is EXECUTED and read (2026-07-29, same day as its pre-registration): TB-R2
+fired.** The verdict in its fixed wording lives in
+[`2026-07-29-track3b-execution-log.md`](2026-07-29-track3b-execution-log.md) §5 and no
+summary may soften it. In brief for orientation only: the toll family cannot produce
+length-preserving descent on this graph; the thresholded form was its best case; the
+mechanism question Track 3 left unresolved is resolved **negatively** for routing-side
+toll devices. All prerequisites ran in the amended order — protocol review first, harness
+review before the read — and the harness review reproduced the run completely and
+independently. Record: the execution log; figures:
+`builder/analysis/2026-07-29-track3b-thresholded-toll/`. Branch: `requirements-track3b`
+(PR opened at this closeout).
 
-The verdict in its fixed wording, and no summary may soften it: *DD-R1 fired on the letter;
-the mechanism claim (depth-priced descent) is UNRESOLVED because DD-C6 flags every arm;
-what exists is a measured candidate for a different trade, and that trade is the owner's to
-judge.*
+## PARKED — owner's explicit decision, 2026-07-29; his trigger, never a session's
 
-- Handoff: [`2026-07-28-HANDOFF-track3-executed.md`](2026-07-28-HANDOFF-track3-executed.md)
-- Record: [`2026-07-28-track3-depth-descent-execution-log.md`](2026-07-28-track3-depth-descent-execution-log.md)
-- Figures and the deliverable: `builder/analysis/2026-07-28-track3-depth-descent/`
-  (`REPORT.md`)
-- PR: **#46** (branch `track3-depth-descent`)
+- **The candidate-pool product decision** — whether a shortened-but-obscure bypass
+  candidate (Track 3's DD-A2 or a TB arm) ships at all, judged on requirements terms
+  where shortening is priced by him, not by a criterion.
+- **The one-statistic cross-track recompute** that must precede any DD-vs-TB comparison
+  (cheap; no new walks; see the handoff).
+- **Any blind listen on a router-only candidate** — the agreed sequencing defers the
+  listen to the full stack (graph + device).
 
-**Two structural findings that outlive the decision**, both in the execution log: superstar
-endpoints have **zero** edges below the top popularity decile, so famous-to-famous journeys
-cannot be routed through obscure interiors **at any price** — confirmed at device level, the
-arms delivered nothing on them at any strength. And where obscure routes exist they are
-*shorter* than what production delivers, so the router is not avoiding them for distance.
-
-**A named successor exists and is UNSTARTED:** the **thresholded toll** (execution log §7),
-length-neutral exactly where Track 3's confound lives. **It needs its own pre-registration
-and is not a tweak.** Starting it is the owner's call.
-
-*Prior track, for context only:* `builder/analysis/2026-07-28-asc5-path-ascent/` (ASC-5,
-discharged; PR #45, merged) is what shaped Track 3's design.
-
-**Decided 2026-07-28 and recorded at the tripwire (`acceptance.py`): the 33 nameless
-artists are DROPPED, not backfilled.** The remediation is a standing build rule, not yet
-implemented; the acceptance check stays in force and still blocks any production rebuild
-until it lands. Implementing it belongs to whichever session next touches the builder ahead
-of a rebuild.
-
-**Still owed by the owner, unchanged by any of this:**
+**Still owed by the owner, unchanged:**
 
 1. **The use-the-app test** — [`TEST-QUEUE.md`](TEST-QUEUE.md), the **QUEUED (latest)**
    entry (the redesign, against `https://musicapp.cmiller.io`), including the phone half.
-   **Still untested as of the Track 3 closeout.**
-2. **The iPhone script** — carried inside that same entry; still the single most valuable
+2. **The iPhone script** — carried inside that entry; still the single most valuable
    unrun test on the project.
-3. **The `--prune` publish pass** — see the deferral table; ripe from about 2026-07-29.
+3. **The `--prune` publish pass** — ripe since 2026-07-29; see the deferral table.
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
 
@@ -86,26 +77,27 @@ of a rebuild.
 ## Closed — do not re-plan or re-investigate
 
 - **Track 2, Track 2F and the ceiling toll are exhausted nulls. Do not re-run any of them.**
+- **Track 3's results are closed** (DD-A4/DD-A5 struck; pair set `pairs_v2.json`; anchors
+  unscored; held-out gates nothing) **and Track 3b's results are now closed on the same
+  terms** — do not re-run its arms or re-litigate TB-R2.
+- **The routing-side toll family is closed for descent claims**: no toll-shaped bypass
+  term may claim length-preserving descent; any explicit length-preserving constraint is a
+  **new device needing its own pre-registration**, which must consume `TB-P5H-7` (TB-C2's
+  gap in the read structure) at design time.
 - **Loosening the both-ways cap is rejected** (`MKS-5b`); any targeted alternative must
   demonstrate its bound by simulation first.
-- **Famous-pair first-path fame is barred as a scoring criterion** — structurally unable to
-  move (PLA-R1, 2026-07-28). This includes any future rescale pre-registration.
-- **The nameless-artist question is decided** (drop). What remains is implementation, above.
-- **Track 3's own results are closed and must not be re-litigated.** DD-A4/DD-A5 are
-  **struck** (bit-identical to DD-A2/DD-A3 at every scored depth) — do not re-add them to
-  reach "six arms". The pair set is **`pairs_v2.json`**, the DD-P1 remedy. The all-famous
-  anchors are **unscored by design**, and the held-out set **gates nothing** and must never
-  be promoted to a gate.
-- **The builder-side p99 rescale stays parked.** DD-R2 named it the successor *on a null*;
-  Track 3 did **not** null, so its trigger did not fire and the rescale is not next by
-  default. Same for the `STC-6` re-crawl.
+- **Famous-pair first-path fame is barred as a scoring criterion** (PLA-R1).
+- **The nameless-artist question is decided** (drop). Implementation comes due in the
+  rebuild plan, above.
+- **The builder-side p99 rescale stays parked** (DD-R2's trigger never fired); same for
+  the `STC-6` re-crawl as a standalone — both are candidate *inputs* to the rebuild plan,
+  not commitments.
 - **The OneDrive migration is COMPLETE**; the old tree is an archive, never the working tree.
-- **`G3-A5`, `G3-A2`, `G3-S7`** closed as recorded; **`G3-A3` does not fire** — do not
-  re-add it. In-app-browser auth suppression is structurally impossible (no dialog).
+- **`G3-A5`, `G3-A2`, `G3-S7`** closed as recorded; **`G3-A3` does not fire**.
 - **`RMD-6`, `RMD-11`, `RMD-12`, `RMD-13`, `FRO-1`, `FRO-4`**, the `DEP-33` blockers, the
   Gate 1 clip work, **Track 1**.
   - ⚠ **One exception, live:** `BYP-13` — a card playing a clip by a *different artist of
-    the same name*. Not Track 3 work and not inside any pause.
+    the same name*. Not path work and not inside any pause.
 
 ## Must not be changed, and each has a reason
 
@@ -117,21 +109,24 @@ of a rebuild.
 - **The rate limit is `10 / 10 s`, not `30 / 60 s`** — see `infra/README.md` §1a.
 - **The `acceptance.py` blank-name check** — do not weaken it to unblock a build;
   implement the drop rule.
+- **The mirror's two device knobs (`w_known_ramp_pctl`, `w_known_thresh_pctl`) stay 0.0**
+  — analysis-only; nothing is adopted; TB-G1 is the evidence production is untouched.
 
 ## Deferred, with conditions
 
 | Finding | Condition |
 |---|---|
-| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild.** The acceptance check is the forcing function. **Checked 2026-07-28: not due** — Track 3 did no rebuild. |
-| **Track 3b — the thresholded toll**, `w · k · max(0, pctl(v) − 0.90)` | **UNSTARTED, and the owner's trigger.** Ripe only if he wants the mechanism question Track 3 could not answer. Needs its own pre-registration (execution log §7 says what it must settle); it is not a tweak to Track 3. |
-| **`score_t3.py` does not read A11's `potentially_notable_unmatched` flag**, which Track 2's scorer does | **Before any further fame-scored arm on mid-band pairs.** Bounded and non-decisive for Track 3 (execution log §8), but the flag exists to get an owner glance and nothing currently reads it. |
-| The `--prune` publish pass | **Checked 2026-07-28: not yet due — ripe from ~2026-07-29**, i.e. tomorrow. (a day after the redesign publish). `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. Cost of skipping: a few kB of orphans; cost of running early: a white screen for a returning visitor (`FRO-1`). |
+| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild — NOW DUE: the rebuild plan is the next work and must schedule it.** |
+| **`TB-P5H-7`** — TB-C2's failure by TB-C1-passing arms is consumed by no pre-registered read | **If any successor bypass-device pre-registration is written** — its reads must consume every criterion combination. |
+| **The candidate-pool recompute** (one statistic across DD and TB arms) | **If the owner picks up the parked candidate decision.** |
+| The `--prune` publish pass | **Ripe since 2026-07-29** — `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. Cost of skipping: a few kB of orphans; cost of running early: a white screen for a returning visitor (`FRO-1`). |
+| ✅ `score_t3.py` A11-flag deferral | **DISCHARGED 2026-07-29** — TB-G4: the Track 3b scorer reads the flag; verified by TB-P5. Struck, kept for the record. |
 | **The rate limit's headroom** — two users behind one IP could collide | **Before sharing beyond friends and family.** |
 | **The front-door secret has no rotation procedure** | **If it is ever suspected leaked.** |
 | **App Runner's CLI tags vanish if the service is replaced** | **After any deploy that recreates the service** — `infra/README.md` §7. |
-| The near-geodesic ensemble re-read (PLA-R1's weakest link) | **Absorbed into DD-P1**, which measures headroom where it matters — at bypass depth on Track 3's pairs. A standalone first-path version is only owed if someone wants to lean on PLA-R1's "arithmetic" reading beyond what DD-P1 covers. |
+| The near-geodesic ensemble re-read (PLA-R1's weakest link) | **Absorbed into DD-P1**; a standalone version only if someone leans on PLA-R1's "arithmetic" reading beyond DD-P1's cover. |
 | Medium CSRF in `react-router@7.18.1` | Only if the app adopts React Router's unstable RSC APIs. |
 | `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is inert | Only if someone adds `viewport-fit=cover`. |
 | Reading the request stream to bound chunked bodies | The Content-Length guard covers every reachable path. |
 | **`G3-S4`'s disclosure half** — what the app records about visitors | **The owner's call.** |
-| The `STC-6` lower-threshold re-crawl probe | If Track 3 nulls with headroom present (DD-R2), it is the other graph-side candidate beside the rescale. |
+| The `STC-6` lower-threshold re-crawl probe | An input to the rebuild plan, not a standalone item — decided there. |

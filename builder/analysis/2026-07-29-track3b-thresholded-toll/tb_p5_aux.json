@@ -1,0 +1,214 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "flag_list": {
+  "list_len": 20,
+  "derived_from_rows": 20,
+  "identical": true,
+  "unmatched_rows_without_guard": 0,
+  "unmatched_total": 108,
+  "flag_share_of_unmatched": 0.18518518518518517
+ },
+ "degree": {
+  "N": 74193,
+  "p99_cut": 44.0,
+  "committed_cut": 44.0,
+  "nodes_ge_cut": 940,
+  "share_ge_cut_pct": 1.266965886269594,
+  "max_degree": 50,
+  "median_degree": 9.0
+ },
+ "c1_counterfactual_family": {
+  "P": {
+   "primary": 0.0,
+   "cf_flagged_only": 0.0,
+   "cf_all_unmatched": 0.0,
+   "matched_only": 0.0,
+   "cf_flagged_shift": 0.0,
+   "cf_all_unmatched_shift": 0.0,
+   "primary_margin_vs_-1.0": 1.0,
+   "cf_margin_vs_-1.0": 1.0,
+   "cf_all_unmatched_passes": false
+  },
+  "TB-A1": {
+   "primary": -0.5542343054132514,
+   "cf_flagged_only": -0.4712676079484143,
+   "cf_all_unmatched": -0.22938475944769957,
+   "matched_only": -0.3715329621463661,
+   "cf_flagged_shift": 0.08296669746483704,
+   "cf_all_unmatched_shift": 0.3248495459655518,
+   "primary_margin_vs_-1.0": 0.44576569458674864,
+   "cf_margin_vs_-1.0": 0.5287323920515856,
+   "cf_all_unmatched_passes": false
+  },
+  "TB-A2": {
+   "primary": -1.080019055683002,
+   "cf_flagged_only": -1.040309883940837,
+   "cf_all_unmatched": -0.577205182354379,
+   "matched_only": -0.7691839533325777,
+   "cf_flagged_shift": 0.03970917174216515,
+   "cf_all_unmatched_shift": 0.502813873328623,
+   "primary_margin_vs_-1.0": -0.08001905568300205,
+   "cf_margin_vs_-1.0": -0.0403098839408369,
+   "cf_all_unmatched_passes": false
+  },
+  "TB-A3": {
+   "primary": -1.708979952888477,
+   "cf_flagged_only": -1.37452385368905,
+   "cf_all_unmatched": -0.7337404641510528,
+   "matched_only": -1.0684760424445106,
+   "cf_flagged_shift": 0.334456099199427,
+   "cf_all_unmatched_shift": 0.9752394887374243,
+   "primary_margin_vs_-1.0": -0.708979952888477,
+   "cf_margin_vs_-1.0": -0.37452385368905006,
+   "cf_all_unmatched_passes": false
+  }
+ },
+ "c2_pooling_family": {
+  "P": {
+   "per_pair_median_PRIMARY": 0.01506863521613866,
+   "per_pair_mean": -0.07556026084382617,
+   "pooled_median": -0.04768745568749111,
+   "pooled_mean": -0.026084532894027568,
+   "sorted_per_pair": [
+    -0.700199597367722,
+    -0.4554299058432276,
+    -0.3302393413873457,
+    0.009837126050770806,
+    0.020300144381506513,
+    0.20834740949946617,
+    0.28770760422474595,
+    0.3551944736911965
+   ],
+   "median_is_avg_of": [
+    0.009837126050770806,
+    0.020300144381506513
+   ],
+   "margin_vs_0.5": -0.48493136478386134,
+   "range_across_poolings": [
+    -0.07556026084382617,
+    0.01506863521613866
+   ],
+   "passes_under": []
+  },
+  "TB-A1": {
+   "per_pair_median_PRIMARY": 0.6261264766230021,
+   "per_pair_mean": 0.5410161561553455,
+   "pooled_median": 0.3518570172358322,
+   "pooled_mean": 0.592502730037622,
+   "sorted_per_pair": [
+    -0.4687450093208696,
+    -0.18807581570756593,
+    0.0,
+    0.4717983944901789,
+    0.7804545587558254,
+    0.9618073181294289,
+    1.2901970699409988,
+    1.4806927329547674
+   ],
+   "median_is_avg_of": [
+    0.4717983944901789,
+    0.7804545587558254
+   ],
+   "margin_vs_0.5": 0.12612647662300214,
+   "range_across_poolings": [
+    0.3518570172358322,
+    0.6261264766230021
+   ],
+   "passes_under": [
+    "per_pair_median_PRIMARY",
+    "per_pair_mean",
+    "pooled_mean"
+   ]
+  },
+  "TB-A2": {
+   "per_pair_median_PRIMARY": 0.4752957695996227,
+   "per_pair_mean": 0.4660892958572524,
+   "pooled_median": 0.4566037749061689,
+   "pooled_mean": 0.44599266677213567,
+   "sorted_per_pair": [
+    -0.2628231808897299,
+    -0.1713413975173328,
+    -0.07681637008835995,
+    0.2940644460993296,
+    0.6565270930999159,
+    0.7567255446021659,
+    1.2524926986976839,
+    1.2798855328543466
+   ],
+   "median_is_avg_of": [
+    0.2940644460993296,
+    0.6565270930999159
+   ],
+   "margin_vs_0.5": -0.02470423040037728,
+   "range_across_poolings": [
+    0.44599266677213567,
+    0.4752957695996227
+   ],
+   "passes_under": []
+  },
+  "TB-A3": {
+   "per_pair_median_PRIMARY": 0.2132191486869277,
+   "per_pair_mean": 0.3322955194865126,
+   "pooled_median": 0.4853366935617771,
+   "pooled_mean": 0.5493253885137994,
+   "sorted_per_pair": [
+    -1.5319737351936722,
+    -0.7926507138773546,
+    -0.1263833934098253,
+    0.0,
+    0.4264382973738554,
+    1.2876926571808944,
+    1.565650702064139,
+    1.8295903417540635
+   ],
+   "median_is_avg_of": [
+    0.0,
+    0.4264382973738554
+   ],
+   "margin_vs_0.5": -0.2867808513130723,
+   "range_across_poolings": [
+    0.2132191486869277,
+    0.5493253885137994
+   ],
+   "passes_under": [
+    "pooled_mean"
+   ]
+  }
+ },
+ "cell_sets": {
+  "ceiling_n": 23,
+  "arms_scored_n": 24,
+  "in_arms_not_in_ceiling": [
+   "Openzone Bar -> Gjallarhorn@d20"
+  ],
+  "in_ceiling_not_in_arms": [],
+  "arms_dropped_cells": [],
+  "ceiling_cells_clearing_-1.0_mean_form": 18,
+  "ceiling_cells_clearing_-1.0_median_form": 20,
+  "gate_stat_form": "cell MEAN gap; TB-C1's form is the cell MEDIAN gap",
+  "gate_mean_form": -2.5543916450185438,
+  "gate_median_form": -2.889316251970793,
+  "thin_pair_ceiling_cells": {
+   "Patti Smith -> Daniel Herskedal@d10": [
+    -0.4588644703469793,
+    -0.6385429684538266
+   ],
+   "Patti Smith -> Daniel Herskedal@d15": [
+    -0.37781380831970246,
+    -0.04263006884866005
+   ],
+   "Patti Smith -> Daniel Herskedal@d20": [
+    -0.3008722727370339,
+    -0.8449902746335791
+   ],
+   "Openzone Bar -> Gjallarhorn@d10": [
+    -0.5009771517288986,
+    -1.177324456924668
+   ],
+   "Openzone Bar -> Gjallarhorn@d15": [
+    -0.7289381212874191,
+    -1.4098937865664545
+   ]
+  }
+ }
+}

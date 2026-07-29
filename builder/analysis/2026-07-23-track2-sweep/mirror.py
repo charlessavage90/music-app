@@ -39,6 +39,8 @@ from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion
 RAW = "raw"
 PCTL = "pctl"
 OFF = "off"
+# Track 3b: the knee is fixed by pre-registration (§0 — not an axis in that track).
+KNOWN_THRESH_PCTL_KNEE = 0.90
 
 
 @dataclass(frozen=True, slots=True)
@@ -103,6 +105,18 @@ class SweepConfig:
     # DD-D7: applied to the edge-relaxation TARGET, not on node settle. A node-settled
     # implementation would price nodes that never appear on the returned path.
     w_known_ramp_pctl: float = 0.0
+
+    # Track 3b (TB-P4): the THRESHOLDED toll. Prices only above-knee interiors, so a
+    # sub-decile interior is toll-free at any strength — length-neutral where Track 3's
+    # DD-D5 confound lives (Track 3b prereg §1):
+    #
+    #     cost(u->v) += w_known_thresh_pctl * k * max(0, pctl(v) - KNOWN_THRESH_PCTL_KNEE)
+    #
+    # 0.0 = off. Same rules as the ramp term above: relaxation target only (DD-D7),
+    # target endpoint exempt, added only when live — never as `+ 0.0` — so TB-G2 holds
+    # by construction and every committed Track 2/2F/3 figure reproduces from this file
+    # unchanged.
+    w_known_thresh_pctl: float = 0.0
 
     def __post_init__(self) -> None:
         if self.toll_s is not None and self.toll_hops is not None:
@@ -215,6 +229,9 @@ def _dijkstra(
     n_known = sum(1 for e in excludes if e.reason == KNOWN)
     ramp = cfg.w_known_ramp_pctl * n_known
     ramp_on = ramp != 0.0
+    # Track 3b (TB-P4): same constant-per-request shape as the ramp.
+    thresh = cfg.w_known_thresh_pctl * n_known
+    thresh_on = thresh != 0.0
 
     toll_on = cfg.toll_s is not None or cfg.toll_hops is not None
     if cfg.toll_hops is not None:
@@ -274,6 +291,9 @@ def _dijkstra(
             # docstring's byte-identity rule -- this is what discharges DD-G2 at k = 0.
             if ramp_on and v != target:
                 cost += ramp * pctl_v
+            # Track 3b (TB-P4): thresholded — zero on sub-decile targets at any w.
+            if thresh_on and v != target:
+                cost += thresh * max(0.0, pctl_v - KNOWN_THRESH_PCTL_KNEE)
 
             nd = d + cost
             if nd < dist.get(v, float("inf")):
