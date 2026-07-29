@@ -1,0 +1,1153 @@
+{
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "checks": {
+  "fame_join": {
+   "scored_interior_nodes": 802,
+   "mbids_missing_from_fame": [],
+   "blank_named_nodes_anywhere_in_node_names": 0,
+   "node_names_total": 893,
+   "duplicate_mbids_across_node_ids": 0,
+   "fame_table_n": 893,
+   "fame_matched": 785,
+   "fame_unmatched": 108,
+   "flag_list_len": 20,
+   "flag_all_unmatched": true,
+   "nameless_nodes_in_fame": 0
+  },
+  "counterfactual": {
+   "pool_n": 299,
+   "median": 5.229561543744921,
+   "committed": 5.229561543744921,
+   "all_interiors_median_for_contrast": 5.120093309340506
+  },
+  "g2": {
+   "d0_differing_pairs": {
+    "TB-A1": [],
+    "TB-A2": [],
+    "TB-A3": []
+   },
+   "d1_differing_count": {
+    "TB-A1": 11,
+    "TB-A2": 11,
+    "TB-A3": 12
+   },
+   "n_pairs": 16,
+   "d1_differing_scored_only": {
+    "TB-A1": 9,
+    "TB-A2": 9,
+    "TB-A3": 10
+   }
+  }
+ },
+ "disc": {
+  "max": [
+   "TB-A3.c1_all.mean",
+   2.220446049250313e-16
+  ],
+  "top10": [
+   [
+    "TB-A3.c1_all.mean",
+    2.220446049250313e-16
+   ],
+   [
+    "TB-A1.c1_all.mean",
+    1.1102230246251565e-16
+   ],
+   [
+    "TB-A1.c1_cf.mean",
+    5.551115123125783e-17
+   ],
+   [
+    "counterfactual_F",
+    0.0
+   ],
+   [
+    "top_degree_cut",
+    0.0
+   ],
+   [
+    "P.c1_all.mean",
+    0.0
+   ],
+   [
+    "P.c1_all.negfrac",
+    0.0
+   ],
+   [
+    "P.c1_all.n",
+    0.0
+   ],
+   [
+    "P.c1_matched.mean",
+    0.0
+   ],
+   [
+    "P.c1_matched.negfrac",
+    0.0
+   ]
+  ],
+  "n_figures_compared": 86
+ },
+ "per_arm": {
+  "P": {
+   "c1": {
+    "all": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "n": 24
+    },
+    "matched": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "n": 24
+    },
+    "counterfactual": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "n": 24
+    }
+   },
+   "c1_per_pair_mean": {
+    "The Mills Brothers -> Tracey Chattaway": 0.0,
+    "Daniel Avery -> Rita Marley": 0.0,
+    "Patti Smith -> Daniel Herskedal": 0.0,
+    "Jenny Owen Youngs -> 洲崎綾": 0.0,
+    "Tails -> Fingers Inc.": 0.0,
+    "Mikey Murka -> Disiz": 0.0,
+    "钟茌 -> The Koolaid Electric Company": 0.0,
+    "Openzone Bar -> Gjallarhorn": 0.0
+   },
+   "c1_leave_one_pair_out": {
+    "The Mills Brothers -> Tracey Chattaway": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    },
+    "Daniel Avery -> Rita Marley": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    },
+    "Patti Smith -> Daniel Herskedal": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    },
+    "Jenny Owen Youngs -> 洲崎綾": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    },
+    "Tails -> Fingers Inc.": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    },
+    "Mikey Murka -> Disiz": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    },
+    "钟茌 -> The Koolaid Electric Company": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "mean": 0.0,
+     "neg_frac": 0.0,
+     "passes": false
+    }
+   },
+   "c1_thin_pairs_cells": {
+    "Patti Smith -> Daniel Herskedal": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    }
+   },
+   "c1_cells": [
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     10,
+     0.0
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     15,
+     0.0
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     20,
+     0.0
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     10,
+     0.0
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     15,
+     0.0
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     20,
+     0.0
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     10,
+     0.0
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     15,
+     0.0
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     20,
+     0.0
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     10,
+     0.0
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     15,
+     0.0
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     20,
+     0.0
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     10,
+     0.0
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     15,
+     0.0
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     20,
+     0.0
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     10,
+     0.0
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     15,
+     0.0
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     20,
+     0.0
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     10,
+     0.0
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     15,
+     0.0
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     20,
+     0.0
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     10,
+     0.0
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     15,
+     0.0
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     20,
+     0.0
+    ]
+   ],
+   "c2": {
+    "per_pair_median": 0.01506863521613866,
+    "n_pairs": 8,
+    "pooled_median": -0.04768745568749111,
+    "per_pair_mean": -0.07556026084382617,
+    "pooled_mean": -0.026084532894027568,
+    "per_pair_deltas": {
+     "The Mills Brothers -> Tracey Chattaway": 0.28770760422474595,
+     "Daniel Avery -> Rita Marley": 0.020300144381506513,
+     "Patti Smith -> Daniel Herskedal": 0.3551944736911965,
+     "Jenny Owen Youngs -> 洲崎綾": -0.3302393413873457,
+     "Tails -> Fingers Inc.": 0.20834740949946617,
+     "Mikey Murka -> Disiz": 0.009837126050770806,
+     "钟茌 -> The Koolaid Electric Company": -0.700199597367722,
+     "Openzone Bar -> Gjallarhorn": -0.4554299058432276
+    },
+    "pairs_negative": 3,
+    "pairs_ge_0p5": 0
+   },
+   "c4": {
+    "median": 1.0,
+    "n_interior_hops": 298,
+    "frac_exactly_1": 0.5033557046979866,
+    "mean": 0.9263502275383713
+   },
+   "c5": {
+    "mean_per_cell": 1.5416666666666667,
+    "distinct": 16,
+    "c5b_top_degree_distinct": 24,
+    "distinct_all_interiors": 195
+   },
+   "c6": {
+    "c1_window_mean": 0.0,
+    "d5_mean": 0.0,
+    "c1_window_median": 0.0,
+    "d5_median": 0.0,
+    "d5_deltas": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "flag_mean": false,
+    "flag_cell_median": false,
+    "d5_mean_exact_repr": "0.0"
+   },
+   "a11": {
+    "distinct": 195,
+    "distinct_unmatched": 9,
+    "distinct_unmatched_pct": 4.615384615384615,
+    "occurrences": 322,
+    "occ_unmatched": 23,
+    "occ_unmatched_pct": 7.142857142857143,
+    "occ_flagged": 4,
+    "occ_F_zero_pct": 7.142857142857143
+   }
+  },
+  "TB-A1": {
+   "c1": {
+    "all": {
+     "mean": -0.5542343054132514,
+     "neg_frac": 0.6666666666666666,
+     "n": 24
+    },
+    "matched": {
+     "mean": -0.3715329621463661,
+     "neg_frac": 0.625,
+     "n": 24
+    },
+    "counterfactual": {
+     "mean": -0.4712676079484143,
+     "neg_frac": 0.625,
+     "n": 24
+    }
+   },
+   "c1_per_pair_mean": {
+    "The Mills Brothers -> Tracey Chattaway": -0.7728119587608703,
+    "Daniel Avery -> Rita Marley": -0.1007505089353975,
+    "Patti Smith -> Daniel Herskedal": 0.08299793901545123,
+    "Jenny Owen Youngs -> 洲崎綾": -0.5632298670798092,
+    "Tails -> Fingers Inc.": -1.4137850445889582,
+    "Mikey Murka -> Disiz": -0.20349373778789678,
+    "钟茌 -> The Koolaid Electric Company": -0.5178512262228893,
+    "Openzone Bar -> Gjallarhorn": -0.9449500389456413
+   },
+   "c1_leave_one_pair_out": {
+    "The Mills Brothers -> Tracey Chattaway": {
+     "mean": -0.5230089263635916,
+     "neg_frac": 0.6190476190476191,
+     "passes": false
+    },
+    "Daniel Avery -> Rita Marley": {
+     "mean": -0.6190177049100876,
+     "neg_frac": 0.7142857142857143,
+     "passes": false
+    },
+    "Patti Smith -> Daniel Herskedal": {
+     "mean": -0.6452674831887802,
+     "neg_frac": 0.6666666666666666,
+     "passes": false
+    },
+    "Jenny Owen Youngs -> 洲崎綾": {
+     "mean": -0.5529492251751716,
+     "neg_frac": 0.6190476190476191,
+     "passes": false
+    },
+    "Tails -> Fingers Inc.": {
+     "mean": -0.43144134267386475,
+     "neg_frac": 0.6190476190476191,
+     "passes": false
+    },
+    "Mikey Murka -> Disiz": {
+     "mean": -0.604340100788302,
+     "neg_frac": 0.7142857142857143,
+     "passes": false
+    },
+    "钟茌 -> The Koolaid Electric Company": {
+     "mean": -0.5594318881547318,
+     "neg_frac": 0.6666666666666666,
+     "passes": false
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "mean": -0.4984177720514815,
+     "neg_frac": 0.7142857142857143,
+     "passes": false
+    }
+   },
+   "c1_thin_pairs_cells": {
+    "Patti Smith -> Daniel Herskedal": {
+     "10": -0.42096924017850945,
+     "15": 0.7835813538753857,
+     "20": -0.11361829665052259
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "10": 0.230323468708451,
+     "15": -3.078488689023017,
+     "20": 0.013315103477641976
+    }
+   },
+   "c1_cells": [
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     10,
+     -0.6678233628734329
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     15,
+     -0.336925978007252
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     20,
+     -1.313686535401926
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     10,
+     0.04048165055128994
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     15,
+     0.024109125979008716
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     20,
+     -0.36684230333649115
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     10,
+     -0.42096924017850945
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     15,
+     0.7835813538753857
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     20,
+     -0.11361829665052259
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     10,
+     -0.4852757234444782
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     15,
+     -0.38060788591314587
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     20,
+     -0.8238059918818035
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     10,
+     -0.055986480864540944
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     15,
+     -2.5560538804037956
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     20,
+     -1.629314772498538
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     10,
+     -0.8540749253746265
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     15,
+     0.23375658596016535
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     20,
+     0.009837126050770806
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     10,
+     -0.694072253628228
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     15,
+     0.8852183726798781
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     20,
+     -1.744699797720318
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     10,
+     0.230323468708451
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     15,
+     -3.078488689023017
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     20,
+     0.013315103477641976
+    ]
+   ],
+   "c2": {
+    "per_pair_median": 0.6261264766230021,
+    "n_pairs": 8,
+    "pooled_median": 0.3518570172358322,
+    "per_pair_mean": 0.5410161561553455,
+    "pooled_mean": 0.592502730037622,
+    "per_pair_deltas": {
+     "The Mills Brothers -> Tracey Chattaway": 1.4806927329547674,
+     "Daniel Avery -> Rita Marley": 0.4717983944901789,
+     "Patti Smith -> Daniel Herskedal": -0.18807581570756593,
+     "Jenny Owen Youngs -> 洲崎綾": 0.7804545587558254,
+     "Tails -> Fingers Inc.": 1.2901970699409988,
+     "Mikey Murka -> Disiz": 0.0,
+     "钟茌 -> The Koolaid Electric Company": 0.9618073181294289,
+     "Openzone Bar -> Gjallarhorn": -0.4687450093208696
+    },
+    "pairs_negative": 2,
+    "pairs_ge_0p5": 4
+   },
+   "c4": {
+    "median": 0.9466802179813385,
+    "n_interior_hops": 210,
+    "frac_exactly_1": 0.28095238095238095,
+    "mean": 0.8733549464316596
+   },
+   "c5": {
+    "mean_per_cell": 2.0,
+    "distinct": 25,
+    "c5b_top_degree_distinct": 12,
+    "distinct_all_interiors": 163
+   },
+   "c6": {
+    "c1_window_mean": -3.6666666666666665,
+    "d5_mean": -1.0,
+    "c1_window_median": -4.0,
+    "d5_median": -1.0,
+    "d5_deltas": [
+     1,
+     -3,
+     -2,
+     1,
+     -3,
+     0,
+     -2,
+     0
+    ],
+    "flag_mean": true,
+    "flag_cell_median": true,
+    "d5_mean_exact_repr": "-1.0"
+   },
+   "a11": {
+    "distinct": 163,
+    "distinct_unmatched": 15,
+    "distinct_unmatched_pct": 9.202453987730062,
+    "occurrences": 234,
+    "occ_unmatched": 26,
+    "occ_unmatched_pct": 11.11111111111111,
+    "occ_flagged": 4,
+    "occ_F_zero_pct": 11.11111111111111
+   }
+  },
+  "TB-A2": {
+   "c1": {
+    "all": {
+     "mean": -1.080019055683002,
+     "neg_frac": 0.875,
+     "n": 24
+    },
+    "matched": {
+     "mean": -0.7691839533325777,
+     "neg_frac": 0.9583333333333334,
+     "n": 24
+    },
+    "counterfactual": {
+     "mean": -1.040309883940837,
+     "neg_frac": 0.875,
+     "n": 24
+    }
+   },
+   "c1_per_pair_mean": {
+    "The Mills Brothers -> Tracey Chattaway": -1.1181932997249735,
+    "Daniel Avery -> Rita Marley": -0.6859812391929742,
+    "Patti Smith -> Daniel Herskedal": -0.041135576662567765,
+    "Jenny Owen Youngs -> 洲崎綾": -1.0098700946821855,
+    "Tails -> Fingers Inc.": -2.173542456292895,
+    "Mikey Murka -> Disiz": -1.3105604531562984,
+    "钟茌 -> The Koolaid Electric Company": -2.307821800121442,
+    "Openzone Bar -> Gjallarhorn": 0.006952474369319302
+   },
+   "c1_leave_one_pair_out": {
+    "The Mills Brothers -> Tracey Chattaway": {
+     "mean": -1.074565592248435,
+     "neg_frac": 0.8571428571428571,
+     "passes": true
+    },
+    "Daniel Avery -> Rita Marley": {
+     "mean": -1.1363101723244344,
+     "neg_frac": 0.8571428571428571,
+     "passes": true
+    },
+    "Patti Smith -> Daniel Herskedal": {
+     "mean": -1.22843098125735,
+     "neg_frac": 0.9047619047619048,
+     "passes": true
+    },
+    "Jenny Owen Youngs -> 洲崎綾": {
+     "mean": -1.0900403358259758,
+     "neg_frac": 0.8571428571428571,
+     "passes": true
+    },
+    "Tails -> Fingers Inc.": {
+     "mean": -0.9238014270244458,
+     "neg_frac": 0.8571428571428571,
+     "passes": false
+    },
+    "Mikey Murka -> Disiz": {
+     "mean": -1.0470845703296738,
+     "neg_frac": 0.8571428571428571,
+     "passes": true
+    },
+    "钟茌 -> The Koolaid Electric Company": {
+     "mean": -0.9046186636203677,
+     "neg_frac": 0.8571428571428571,
+     "passes": false
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "mean": -1.2353007028333336,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    }
+   },
+   "c1_thin_pairs_cells": {
+    "Patti Smith -> Daniel Herskedal": {
+     "10": -0.2795715375048271,
+     "15": 0.7835813538753857,
+     "20": -0.6274165463582619
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "10": 0.013782307199302402,
+     "15": 0.021234188953868305,
+     "20": -0.0141590730452128
+    }
+   },
+   "c1_cells": [
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     10,
+     -1.0587967662282738
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     15,
+     -0.8774718440460312
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     20,
+     -1.4183112889006155
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     10,
+     -0.7403350524609946
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     15,
+     -0.7660376631716996
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     20,
+     -0.5515710019462281
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     10,
+     -0.2795715375048271
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     15,
+     0.7835813538753857
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     20,
+     -0.6274165463582619
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     10,
+     -0.7503008709850816
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     15,
+     -1.7757083725496483
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     20,
+     -0.5036010405118265
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     10,
+     -4.992521955480536
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     15,
+     -0.19734468216804402
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     20,
+     -1.330760731230105
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     10,
+     -1.7291468448613796
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     15,
+     -1.3077148008855701
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     20,
+     -0.8948197137219456
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     10,
+     -3.9245737517910584
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     15,
+     -0.29549673632763707
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     20,
+     -2.7033949122456304
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     10,
+     0.013782307199302402
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     15,
+     0.021234188953868305
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     20,
+     -0.0141590730452128
+    ]
+   ],
+   "c2": {
+    "per_pair_median": 0.4752957695996227,
+    "n_pairs": 8,
+    "pooled_median": 0.4566037749061689,
+    "per_pair_mean": 0.4660892958572524,
+    "pooled_mean": 0.44599266677213567,
+    "per_pair_deltas": {
+     "The Mills Brothers -> Tracey Chattaway": 1.2524926986976839,
+     "Daniel Avery -> Rita Marley": 0.6565270930999159,
+     "Patti Smith -> Daniel Herskedal": -0.07681637008835995,
+     "Jenny Owen Youngs -> 洲崎綾": 0.2940644460993296,
+     "Tails -> Fingers Inc.": 0.7567255446021659,
+     "Mikey Murka -> Disiz": -0.2628231808897299,
+     "钟茌 -> The Koolaid Electric Company": 1.2798855328543466,
+     "Openzone Bar -> Gjallarhorn": -0.1713413975173328
+    },
+    "pairs_negative": 3,
+    "pairs_ge_0p5": 4
+   },
+   "c4": {
+    "median": 0.807383120059967,
+    "n_interior_hops": 179,
+    "frac_exactly_1": 0.0446927374301676,
+    "mean": 0.7973049286357518
+   },
+   "c5": {
+    "mean_per_cell": 4.0,
+    "distinct": 69,
+    "c5b_top_degree_distinct": 6,
+    "distinct_all_interiors": 150
+   },
+   "c6": {
+    "c1_window_mean": -4.958333333333333,
+    "d5_mean": -2.875,
+    "c1_window_median": -5.0,
+    "d5_median": -3.5,
+    "d5_deltas": [
+     -2,
+     -3,
+     -5,
+     3,
+     -4,
+     -7,
+     -5,
+     0
+    ],
+    "flag_mean": true,
+    "flag_cell_median": true,
+    "d5_mean_exact_repr": "-2.875"
+   },
+   "a11": {
+    "distinct": 150,
+    "distinct_unmatched": 25,
+    "distinct_unmatched_pct": 16.666666666666668,
+    "occurrences": 203,
+    "occ_unmatched": 31,
+    "occ_unmatched_pct": 15.270935960591133,
+    "occ_flagged": 6,
+    "occ_F_zero_pct": 15.270935960591133
+   }
+  },
+  "TB-A3": {
+   "c1": {
+    "all": {
+     "mean": -1.708979952888477,
+     "neg_frac": 0.9583333333333334,
+     "n": 24
+    },
+    "matched": {
+     "mean": -1.0684760424445106,
+     "neg_frac": 0.9583333333333334,
+     "n": 24
+    },
+    "counterfactual": {
+     "mean": -1.37452385368905,
+     "neg_frac": 0.9583333333333334,
+     "n": 24
+    }
+   },
+   "c1_per_pair_mean": {
+    "The Mills Brothers -> Tracey Chattaway": -0.7571454566485635,
+    "Daniel Avery -> Rita Marley": -0.7754187014702051,
+    "Patti Smith -> Daniel Herskedal": -0.3466695486532843,
+    "Jenny Owen Youngs -> 洲崎綾": -1.8866526708158753,
+    "Tails -> Fingers Inc.": -4.3314406364629745,
+    "Mikey Murka -> Disiz": -1.332265615958277,
+    "钟茌 -> The Koolaid Electric Company": -2.8641930448240838,
+    "Openzone Bar -> Gjallarhorn": -1.3780539482745537
+   },
+   "c1_leave_one_pair_out": {
+    "The Mills Brothers -> Tracey Chattaway": {
+     "mean": -1.8449563094941794,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    },
+    "Daniel Avery -> Rita Marley": {
+     "mean": -1.8423458459482305,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    },
+    "Patti Smith -> Daniel Herskedal": {
+     "mean": -1.9035957249220765,
+     "neg_frac": 1.0,
+     "passes": true
+    },
+    "Jenny Owen Youngs -> 洲崎綾": {
+     "mean": -1.683598136041706,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    },
+    "Tails -> Fingers Inc.": {
+     "mean": -1.3343427123778344,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    },
+    "Mikey Murka -> Disiz": {
+     "mean": -1.7627962867356488,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    },
+    "钟茌 -> The Koolaid Electric Company": {
+     "mean": -1.5439495111833907,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "mean": -1.756255096404752,
+     "neg_frac": 0.9523809523809523,
+     "passes": true
+    }
+   },
+   "c1_thin_pairs_cells": {
+    "Patti Smith -> Daniel Herskedal": {
+     "10": -0.41526622249516354,
+     "15": 0.28771471759374556,
+     "20": -0.912457141058435
+    },
+    "Openzone Bar -> Gjallarhorn": {
+     "10": -1.800968520172665,
+     "15": -0.8600001969075564,
+     "20": -1.47319312774344
+    }
+   },
+   "c1_cells": [
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     10,
+     -0.6046897774679652
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     15,
+     -1.330965775145291
+    ],
+    [
+     "The Mills Brothers -> Tracey Chattaway",
+     20,
+     -0.33578081733243437
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     10,
+     -0.31783233288810475
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     15,
+     -1.6415814681860192
+    ],
+    [
+     "Daniel Avery -> Rita Marley",
+     20,
+     -0.36684230333649115
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     10,
+     -0.41526622249516354
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     15,
+     0.28771471759374556
+    ],
+    [
+     "Patti Smith -> Daniel Herskedal",
+     20,
+     -0.912457141058435
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     10,
+     -1.9269694282297203
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     15,
+     -1.69323125873369
+    ],
+    [
+     "Jenny Owen Youngs -> 洲崎綾",
+     20,
+     -2.0397573254842154
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     10,
+     -4.992521955480536
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     15,
+     -4.542894839655787
+    ],
+    [
+     "Tails -> Fingers Inc.",
+     20,
+     -3.4589051142526017
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     10,
+     -1.7291468448613796
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     15,
+     -1.3728302892915063
+    ],
+    [
+     "Mikey Murka -> Disiz",
+     20,
+     -0.8948197137219456
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     10,
+     -1.38059915262785
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     15,
+     -4.565695528751202
+    ],
+    [
+     "钟茌 -> The Koolaid Electric Company",
+     20,
+     -2.646284453093199
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     10,
+     -1.800968520172665
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     15,
+     -0.8600001969075564
+    ],
+    [
+     "Openzone Bar -> Gjallarhorn",
+     20,
+     -1.47319312774344
+    ]
+   ],
+   "c2": {
+    "per_pair_median": 0.2132191486869277,
+    "n_pairs": 8,
+    "pooled_median": 0.4853366935617771,
+    "per_pair_mean": 0.33229551948651254,
+    "pooled_mean": 0.5493253885137994,
+    "per_pair_deltas": {
+     "The Mills Brothers -> Tracey Chattaway": -0.7926507138773546,
+     "Daniel Avery -> Rita Marley": 0.0,
+     "Patti Smith -> Daniel Herskedal": 0.4264382973738554,
+     "Jenny Owen Youngs -> 洲崎綾": 1.565650702064139,
+     "Tails -> Fingers Inc.": 1.8295903417540635,
+     "Mikey Murka -> Disiz": -0.1263833934098253,
+     "钟茌 -> The Koolaid Electric Company": -1.5319737351936722,
+     "Openzone Bar -> Gjallarhorn": 1.2876926571808944
+    },
+    "pairs_negative": 3,
+    "pairs_ge_0p5": 3
+   },
+   "c4": {
+    "median": 0.6703969836235046,
+    "n_interior_hops": 163,
+    "frac_exactly_1": 0.006134969325153374,
+    "mean": 0.6774963312353824
+   },
+   "c5": {
+    "mean_per_cell": 6.083333333333333,
+    "distinct": 129,
+    "c5b_top_degree_distinct": 0,
+    "distinct_all_interiors": 168
+   },
+   "c6": {
+    "c1_window_mean": -5.625,
+    "d5_mean": -4.375,
+    "c1_window_median": -6.0,
+    "d5_median": -5.5,
+    "d5_deltas": [
+     -4,
+     -7,
+     -4,
+     3,
+     -8,
+     -7,
+     -8,
+     0
+    ],
+    "flag_mean": true,
+    "flag_cell_median": true,
+    "d5_mean_exact_repr": "-4.375"
+   },
+   "a11": {
+    "distinct": 168,
+    "distinct_unmatched": 40,
+    "distinct_unmatched_pct": 23.80952380952381,
+    "occurrences": 187,
+    "occ_unmatched": 45,
+    "occ_unmatched_pct": 24.06417112299465,
+    "occ_flagged": 10,
+    "occ_F_zero_pct": 24.06417112299465
+   }
+  }
+ }
+}

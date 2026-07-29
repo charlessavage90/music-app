@@ -76,6 +76,11 @@ blank-name assertion: **PASS** over every scored interior.
 **TB-P3(a) — GATE PASSES: −2.554 against −1.0** (mean over 23 analysis C1-window cells
 of the ceiling-vs-P mean-interior-fame gap; cell-median variant −2.889; 18/23 cells
 clear individually; figures owned by `tb_p3_gate.json`). **The arms run.**
+⚠ *Denominator corrected per TB-P5H-4: the ceiling's 23 cells are 23 **of the 24 the
+arms score** — the ceiling probe inherited Track 3's drop set (`Openzone Bar →
+Gjallarhorn@d20`), which TB's own run does not have. Immaterial to the gate; material to
+any "of the 23" statement. And per TB-P5H-5 the ceiling is not a per-cell bound in either
+direction — the arms cross it on up to 7/23 cells, because exclusion sets differ.*
 
 **Two reads worth carrying, neither a criterion.** (1) TB-P1 F3 warned the pctl→fame map
 might not deliver: it did — the base-cost-tie-break ceiling reaches −2.55, nearly DD-D6's
@@ -118,8 +123,12 @@ the same two unscored adjacent anchors as Track 3; no scored-pair activation.
 
 - **No arm passes TB-C1 and TB-C2 together.** TB-A2/TB-A3 pass TB-C1 (including the
   counterfactual); both miss TB-C2's per-pair primary (0.475 / 0.213 against 0.5).
-  TB-A1 passes TB-C2 and misses TB-C1. The gradient is **non-monotone in `w`** again —
-  at strength the path is near-maximally obscure by d5, and the victim-supply mechanism
+  TB-A1 passes TB-C2 and misses TB-C1. ⚠ *This sentence originally read "the gradient is
+  non-monotone in `w` again" — **corrected per TB-P5H-3**: the primary gradient is
+  **strictly monotone decreasing** (0.626 / 0.475 / 0.213), the opposite of Track 3's
+  mid-rung peak, and "again" asserted a continuity the figures do not have.* The
+  monotone decay is what running out of headroom at d5 predicts — at strength the path
+  is near-maximally obscure by d5, and the victim-supply mechanism
   (§0's row) is live: **sub-decile victims 0 → 3 → 14 → 56 across the ladder**, the
   first direct measurement of TB-P1 F4's predicted dynamic.
 - **TB-C6 flags every arm, in both windows** (TB-A1's d5 window sits exactly at −1.00,
@@ -135,4 +144,52 @@ the same two unscored adjacent anchors as Track 3; no scored-pair activation.
   hops are ceiling-saturated at exactly 1.000 (DD-P3H's side fact, reproduced); the
   drops at TB-A2/A3 are large.
 
-**Next: TB-P5, the harness review — dispatched before any read, per §5's amended order.**
+## §4 — TB-P5: the harness review. DISCHARGED.
+
+Report: `builder/analysis/2026-07-29-track3b-thresholded-toll/TB-P5-harness-review.md`
+(persisted verbatim from the reviewer); probes `tb_p5_probe_{rewalk,rescore,aux}.py`,
+Snyk clean. **12 findings — 2 HIGH, 5 MED, 5 LOW — and 32 claims verified clean, with a
+complete independent reproduction:** an independently written percentile, Dijkstra, walk
+and victim rule (built from `ApiConfig` + `pathfinding.py` + the prereg §1 text, not from
+`mirror.py`) returned **0 path mismatches across all 432 scored snapshot cells**, and 86
+headline figures re-derived without importing `score_tb.py` agree to ≤ 2.2 × 10⁻¹⁶.
+
+**What the findings add to the tables, none of it changing which read fires:**
+
+- **TB-P5H-1 (HIGH):** TB-A2's TB-C1 pass is carried by two of eight pairs — removing
+  either sinks it (margins 0.080 primary / 0.040 counterfactual). **TB-A3's pass is
+  robust** (worst leave-one-out −1.334; all eight pairs individually clear −1.0).
+- **TB-P5H-2 (HIGH):** TB-C2 is pooling-unstable for TB-A1/TB-A3 (the printed secondary
+  *inverts* the ladder ordering); **TB-A2's TB-C2 failure is the one pooling-stable
+  result** (0.446–0.475 under all four poolings). The §7 read is insensitive to the whole
+  pooling family because TB-C6 flags every arm.
+- **TB-P5H-3/4/5:** two wording defects in this log's own §2–§3, corrected in place and
+  marked; the ceiling is not a per-cell bound in either direction.
+- **TB-P5H-6:** the A11 exposure quantified — unmatched share rises with dose (7.1 % →
+  24.1 % at TB-A3); the pre-registered counterfactual bounds only the flagged 18.5 % of
+  it. The criteria stand as registered; the size is now on record.
+- **TB-P5H-7:** no §7 read consumes the fact that both TB-C1-passing arms also miss
+  TB-C2 — stated in §5 below so it cannot be lost, and carried as a design item for any
+  successor pre-registration.
+
+## §5 — The verdict, in the shape it must be summarised in everywhere
+
+**TB-R2 fired on the letter, and TB-P5 verifies it is the only read whose condition
+holds.** TB-A2 and TB-A3 pass TB-C1 — TB-A3 robustly, and as the first arm in either
+track whose pass survives on Wikipedia-matched artists alone — but **every TB-C1-passing
+arm is TB-C6-flagged in both windows**, and both also miss TB-C2's per-pair primary
+(0.475 / 0.213 against 0.5), which no pre-registered read consumes and is therefore
+stated here (TB-P5H-7). **The pre-committed reading: the toll family cannot produce
+length-preserving descent on this graph — the thresholded form was its best case**, so no
+further toll-shaped term may claim descent without an explicit length-preserving
+constraint, and any such constraint is a new device needing its own pre-registration.
+**The mechanism question Track 3 left UNRESOLVED is resolved, negatively, for this device
+family**: even with obscure interiors toll-free, the router prefers dropping famous
+interiors to replacing them, and at strength the walk's own bypass victims start coming
+from the obscure supply itself (0 → 56 of 240 across the ladder — TB-P1 F4's dynamic,
+measured). **The candidate pool for the owner's product decision is DD-A2 and the best TB
+arm, judged on requirements terms where shortening is priced by him, not by a criterion;
+that judgement is his, is not scheduled here, and any cross-track candidate comparison
+must be recomputed under one statistic first** (the prereg's comparability guard — TB and
+DD scores use different cell statistics and hop definitions). This wording is fixed; no
+summary may soften it. TB-R0, TB-R1 and TB-R3 do not apply.

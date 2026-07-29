@@ -33,6 +33,9 @@ import `mirror.py` and `run_arms.walk` and edit nothing.
 | `run_arms_tb.py` | the four arms (P, TB-A1/A2/A3 at w ∈ {0.10, 0.30, 1.00}) over all 16 pairs × 21 depths; TB-G2 + non-vacuity; the §0 victim-rule counter (sub-decile victims per arm per depth) | artifact, `pairs_v2.json` | `tb_paths.json` |
 | *(TB-P2b)* `fame.py --paths tb_paths.json` | fame for the arms' interiors | `tb_paths.json` | `tb_fame.json` |
 | `score_tb.py` | TB-C1 (all / matched-only / counterfactual, cell-median form) · TB-C2 (per-pair primary + pooled variant) · TB-C4 (interior hops) · TB-C5(a)(b) · TB-C6 (both windows); held-out supplementary; anchors descriptive | artifact, `tb_paths.json`, `tb_fame.json` | `tb_scores.json` |
+| `tb_p5_probe_rewalk.py` | TB-P5: independent re-implementation (own percentile, Dijkstra, cost from `ApiConfig`+`pathfinding.py`, walk, victim rule) re-walks all arms; 0/432 mismatches | artifact, `pairs_v2.json`, `tb_paths.json` | `tb_p5_rewalk.json` |
+| `tb_p5_probe_rescore.py` | TB-P5: independent rescoring of every headline figure without importing `score_tb.py`; per-pair spread; leave-one-pair-out; thin-pair cells; A11 shares | `tb_paths.json`, `tb_fame.json` | `tb_p5_rescore.json` |
+| `tb_p5_probe_aux.py` | TB-P5: A11 flag derivation; degree-cut sizing; counterfactual family; TB-C2 pooling family; ceiling-vs-arms cell sets; TB-C4 saturation | artifact, `tb_*.json` | `tb_p5_aux.json` |
 
 ## How to run
 

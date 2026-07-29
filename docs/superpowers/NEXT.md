@@ -51,16 +51,26 @@ cannot be routed through obscure interiors **at any price** — confirmed at dev
 arms delivered nothing on them at any strength. And where obscure routes exist they are
 *shorter* than what production delivers, so the router is not avoiding them for distance.
 
-**The named successor is now STARTED — owner's trigger pulled 2026-07-29:** the
-**thresholded toll** (execution log §7) is pre-registered as **Track 3b**
-([`specs/2026-07-29-track3b-thresholded-toll-preregistration.md`](specs/2026-07-29-track3b-thresholded-toll-preregistration.md),
-branch `product-requirements-baseline`, with `PRODUCT-REQUIREMENTS.md` — the owner's
-Must/Should/Expect restatement that now governs where it and `WHAT-GOOD-LOOKS-LIKE.md`
-disagree). No arm has run; first prerequisite is the TB-P1 analyst protocol review,
-**dispatched on the owner's word**. Same-day owner rulings recorded there: REQ-Q1 (payload
-currency = fame, with conditions), and the famous-pair structural gap (DD-F1) is **ruled a
-defect, not an accepted limitation** — its remedy is graph-side and separately decided
-(cap-selection simulation agreed as the feasibility step; unstarted).
+**Track 3b is EXECUTED and read (2026-07-29, same day as its pre-registration):**
+**TB-R2 fired** — the toll family cannot produce length-preserving descent on this graph;
+the thresholded form was its best case. Verdict in fixed wording:
+[`2026-07-29-track3b-execution-log.md`](2026-07-29-track3b-execution-log.md) §5; no
+summary may soften it. All prerequisites discharged in the amended order (TB-P1 review
+first — 15 findings folded in pre-arm; TB-P5 harness review before the read — complete
+independent reproduction, 0/432 mismatches). **The mechanism question Track 3 left
+unresolved is resolved negatively for routing-side toll devices.** Branch
+`product-requirements-baseline`, with `PRODUCT-REQUIREMENTS.md` (governs where it and
+`WHAT-GOOD-LOOKS-LIKE.md` disagree) and the same-day owner rulings: REQ-Q1 (payload
+currency = fame, with conditions) and the famous-pair structural gap (DD-F1) **ruled a
+defect, not an accepted limitation**.
+
+**What is now the owner's, nothing scheduled:** (1) the product decision on the
+shortened-but-obscure candidate pool — DD-A2 and the best TB arm, judged on requirements
+terms; any cross-track comparison must first be recomputed under one statistic; (2) the
+**cap-selection simulation** (agreed 2026-07-29 as the graph-side feasibility step,
+UNSTARTED) — now the only live path to his stated goal, since routing-side devices are
+exhausted for length-preserving descent and structurally inert on famous pairs (DD-F1);
+(3) the blind listen, still deferred to the full stack by the agreed sequencing.
 
 *Prior track, for context only:* `builder/analysis/2026-07-28-asc5-path-ascent/` (ASC-5,
 discharged; PR #45, merged) is what shaped Track 3's design.
