@@ -1,0 +1,94 @@
+{
+  "archive": "C:\\dev\\music-app\\builder\\scratch\\graph-archive",
+  "full_build": {
+    "artists": 74193,
+    "edges": 898006
+  },
+  "config_algorithm": "session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30",
+  "targets": [
+    {
+      "target": 1000,
+      "fetched": 1000,
+      "trial_nodes": 979,
+      "trial_edges": 19494,
+      "closed": 14,
+      "closed_in_trial_graph": 12,
+      "degree_exact_match": 11,
+      "degree_delta_median": 0.0,
+      "degree_delta_mean": 0.083,
+      "degree_delta_min": 0,
+      "degree_delta_max": 1,
+      "closed_by_band": {
+        "top 0.1%": 8,
+        "top 1%": 1,
+        "top 10%": 2,
+        "upper half": 1,
+        "lower half": 0
+      },
+      "closed_without_ruler": 0
+    },
+    {
+      "target": 2000,
+      "fetched": 1997,
+      "trial_nodes": 1969,
+      "trial_edges": 37926,
+      "closed": 200,
+      "closed_in_trial_graph": 197,
+      "degree_exact_match": 188,
+      "degree_delta_median": 0,
+      "degree_delta_mean": 0.061,
+      "degree_delta_min": 0,
+      "degree_delta_max": 2,
+      "closed_by_band": {
+        "top 0.1%": 68,
+        "top 1%": 90,
+        "top 10%": 35,
+        "upper half": 2,
+        "lower half": 2
+      },
+      "closed_without_ruler": 0
+    },
+    {
+      "target": 3000,
+      "fetched": 2995,
+      "trial_nodes": 2958,
+      "trial_edges": 53900,
+      "closed": 376,
+      "closed_in_trial_graph": 371,
+      "degree_exact_match": 365,
+      "degree_delta_median": 0,
+      "degree_delta_mean": 0.019,
+      "degree_delta_min": 0,
+      "degree_delta_max": 2,
+      "closed_by_band": {
+        "top 0.1%": 75,
+        "top 1%": 199,
+        "top 10%": 88,
+        "upper half": 6,
+        "lower half": 3
+      },
+      "closed_without_ruler": 0
+    },
+    {
+      "target": 5000,
+      "fetched": 4978,
+      "trial_nodes": 4926,
+      "trial_edges": 86006,
+      "closed": 705,
+      "closed_in_trial_graph": 691,
+      "degree_exact_match": 666,
+      "degree_delta_median": 0,
+      "degree_delta_mean": 0.049,
+      "degree_delta_min": 0,
+      "degree_delta_max": 4,
+      "closed_by_band": {
+        "top 0.1%": 75,
+        "top 1%": 336,
+        "top 10%": 232,
+        "upper half": 29,
+        "lower half": 19
+      },
+      "closed_without_ruler": 0
+    }
+  ]
+}
