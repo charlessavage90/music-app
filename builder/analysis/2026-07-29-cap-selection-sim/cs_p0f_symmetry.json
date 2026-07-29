@@ -1,0 +1,152 @@
+{
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "k": 50,
+  "seed": 20260729,
+  "sampled_artists": 400,
+  "reciprocated_pairs_examined": 9487,
+  "symmetry": {
+    "score_identical_both_directions": 9486,
+    "score_differs": 1,
+    "share_identical": 0.999895,
+    "max_ratio_when_differing": 2.4
+  },
+  "rank_asymmetry": {
+    "mean_abs_rank_difference": 28.989,
+    "median_abs_rank_difference": 23.0,
+    "spearman_rank_vs_rank": 0.1211
+  },
+  "mutual_test": {
+    "both_endpoints_rank_each_other_in_top_k": 4872,
+    "only_one_does_EDGE_REJECTED": 3629,
+    "rejection_share": 0.426891
+  },
+  "who_refuses": {
+    "note": "gap = refuser_pctl - refused_pctl. Positive means the MORE popular endpoint is the one that failed to rank the other in its top-k, i.e. the famous->obscure direction is what the mutual test cuts.",
+    "mean_gap": 0.1617,
+    "median_gap": 0.1262,
+    "share_refuser_more_popular": 0.873519,
+    "rejections_examined": 3629
+  },
+  "examples": [
+    {
+      "kept_it_in_top_k": "Mr. Rain",
+      "kept_pctl": 0.5067,
+      "refused_it": "Rkomi",
+      "refuser_pctl": 0.8612,
+      "rank_each_way": [
+        6,
+        78
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Mr. Rain",
+      "kept_pctl": 0.5067,
+      "refused_it": "Elodie",
+      "refuser_pctl": 0.8497,
+      "rank_each_way": [
+        9,
+        68
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Mr. Rain",
+      "kept_pctl": 0.5067,
+      "refused_it": "Baby K",
+      "refuser_pctl": 0.8249,
+      "rank_each_way": [
+        12,
+        63
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Mr. Rain",
+      "kept_pctl": 0.5067,
+      "refused_it": "Alessandra Amoroso",
+      "refuser_pctl": 0.8727,
+      "rank_each_way": [
+        16,
+        96
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Geri Soriano-Lightwood",
+      "kept_pctl": 0.2612,
+      "refused_it": "Phildel",
+      "refuser_pctl": 0.8775,
+      "rank_each_way": [
+        3,
+        64
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Geri Soriano-Lightwood",
+      "kept_pctl": 0.2612,
+      "refused_it": "Ja\u00ebl",
+      "refuser_pctl": 0.7542,
+      "rank_each_way": [
+        4,
+        52
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Rob Bacon",
+      "kept_pctl": 0.0587,
+      "refused_it": "PJ Morton",
+      "refuser_pctl": 0.7353,
+      "rank_each_way": [
+        10,
+        73
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Rouge Rouge",
+      "kept_pctl": 0.823,
+      "refused_it": "Seelenluft",
+      "refuser_pctl": 0.4986,
+      "rank_each_way": [
+        50,
+        87
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Reverend Clewie Brown",
+      "kept_pctl": 0.4437,
+      "refused_it": "Rouge Rouge",
+      "refuser_pctl": 0.823,
+      "rank_each_way": [
+        59,
+        15
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Melonie Cannon",
+      "kept_pctl": 0.4421,
+      "refused_it": "Rouge Rouge",
+      "refuser_pctl": 0.823,
+      "rank_each_way": [
+        66,
+        33
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Lacquer",
+      "kept_pctl": 0.2405,
+      "refused_it": "Rouge Rouge",
+      "refuser_pctl": 0.823,
+      "rank_each_way": [
+        79,
+        2
+      ]
+    },
+    {
+      "kept_it_in_top_k": "Despina Ricci",
+      "kept_pctl": 0.4753,
+      "refused_it": "Rouge Rouge",
+      "refuser_pctl": 0.823,
+      "rank_each_way": [
+        80,
+        19
+      ]
+    }
+  ]
+}
