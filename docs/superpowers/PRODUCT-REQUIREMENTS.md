@@ -77,12 +77,18 @@ obscurity being bought by incoherence, the failure mode the owner's own use run 
 (`findings/2026-07-25-bypass-depth-use-run.md` `BYP-11`: genre departure preceding
 obscurity).
 
-⚠ **REQ-Q1 (open — owner decision pending): discovery payload's currency.** Value 1
-defines the bypass discovery metric as the count of **non-hub** interior artists — degree
-currency. The chain above implies the natural currency is **fame** (count of obscure
-interior artists), which is what Track 3's criteria actually scored. Until the owner
-decides, any new scored criterion must name which currency its payload is in; neither
-reading is licensed by default.
+✅ **REQ-Q1 (RESOLVED 2026-07-29, owner ruling): discovery payload is scored in
+fame.** Value 1's degree-based count (non-hub interiors) is retained as a **secondary
+diagnostic only** — never a criterion — because it catches the one failure fame cannot
+see: an obscure structural connector the router over-uses. Conditions on any
+fame-currency payload criterion, fixed with the ruling: (a) always reported twice — all
+interiors and matched-only, the DD-D8 shape, so the fame-floor mass is visible rather
+than absorbed; (b) the A11 notability guard must be read by the scorer; (c) mbid-keyed,
+frozen snapshots only. **Offline scoring and live telemetry deliberately use different
+currencies:** telemetry stays in artifact currencies (popularity/degree), because the
+pageview proxy is too weak at the obscure end to commit production monitoring to —
+revisit only if a fame source with genuine per-mbid coverage appears. The offline↔live
+currency gap is accepted and remains unmeasured (DD-D6).
 
 ---
 
@@ -245,6 +251,11 @@ superstar endpoints have zero edges below the top popularity decile
 REQ-37 is currently **unachievable on famous-to-famous pairs at any router setting**.
 Resolving that is a graph-construction question and an owner decision; this document
 states the requirement, not the remedy.
+**Ruled 2026-07-29: this is a defect, not an accepted limitation.** Most user-entered
+endpoints are at the famous end, so this pair class carries the app's implied promise —
+corroborated by early friends-and-family feedback ("I must choose bands that have a lot
+of listeners in common because most of the pathways have been bands I know"). The remedy
+is graph-side by necessity; its design and cost are unstarted and separately decided.
 
 ## 9. Testing and evaluation
 
