@@ -277,6 +277,51 @@ rather than a deferral.
 - The directory needs a `README.md` (2026-07-23 spec §4.2) and no committed script
   computes sub-decile degree, though DD-F1 quotes it.
 
+### DD-D6 result — DD-C1 is reachable, and the mechanism is shortening
+
+Figures owned by `gap_result.json` / `gap_paths.json`. Fame matched 322/366 = 88.0 %
+(reported, not gated — A12); 11 unmatched-but-potentially-notable carry the A11 guard.
+DD-G4's blank-name assertion passed: no scored interior is blank-named.
+
+**The ceiling clears DD-C1 comfortably.** Mean fame gap against production, C1 window
+(d ≥ 10), analysis pairs: **−2.72 log10** (median −3.15, range −4.49 to −0.32), with
+**19 of 24 cells** past DD-C1's −1.0. So the track is not chasing an unreachable
+threshold, and the dose ladder is worth running.
+
+**But the ceiling reaches it by cutting the journey, not by swapping artists.** Interior
+count, C1 window: production median **13**, ceiling median **5** — a median drop of 8.
+DD-C6 flags this by a wide margin, so **the ceiling's DD-C1 movement may not be read as
+descent**. This is DD-D5 confirmed at the limit rather than argued.
+
+**And the counterweight, which inverts the obvious reading.** Counting sub-decile
+interiors in absolute terms — the discovery-payload shape WGLL value 1 defines, an
+absolute count and not a rate:
+
+| C1 window, analysis (n = 24) | production | ceiling |
+|---|---|---|
+| interiors | 13 | 5 |
+| of those, below pctl 0.90 | 2 | 5 |
+
+**The ceiling delivers more genuinely obscure artists in 24 of 24 cells — no
+exceptions** (48/48 across all cells; mean payload 1.54 → 4.88). Production's long path
+is mostly a parade of well-known artists carrying about two obscure ones; the ceiling is
+a short path that is almost entirely obscure. So the shortening does **not** cost novelty
+in the owner's own metric — it raises both the rate and the absolute count.
+
+**This lands on a genuine tension between two recorded owner values, and resolving it is
+his, not a session's.** WGLL **value 1** measures novelty as an absolute count and its
+worked example has more artists winning — the ceiling satisfies it. WGLL **value 2** says
+bypass should *lengthen* the path **and** increase novelty, "both, or neither counts" —
+the ceiling fails its lengthening half while passing its novelty half. His stated Track 3
+goal is phrased as *frequency* of obscure artists in interiors, which the ceiling improves
+on both readings (2/13 → 5/5).
+
+**Nothing here decides that.** WGLL records preference, not evidence, and a threshold may
+never be read off it. The arms are run as pre-registered; DD-C5 (payload) and DD-C6
+(length) are both reported beside DD-C1 at DD-R1, and the trade-off is put to the owner in
+those terms rather than resolved by a criterion. **No blind listen is scheduled by this
+finding** — that remains his call.
+
 ### Selection effect of the re-draw, bounded
 
 Unconditioned Monte-Carlo (300 draws/group): acceptance 83.3 % famous→mid, 99.3 %
