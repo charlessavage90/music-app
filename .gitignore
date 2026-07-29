@@ -27,6 +27,13 @@ api/.venv/
 api/.pytest_cache/
 api/dist/
 
+# Regenerable analysis caches, not results. This one is a 7.6 MB dict of every
+# artist's degree and popularity percentile from a full build; calibrate.py
+# rebuilds it from the archive in ~2 minutes. Left untracked it shows up in
+# `git status` for every future session, which is exactly the condition a
+# `git add -A` sweeps up by accident.
+builder/analysis/*/full-build-degrees.json
+
 # Visual brainstorm companion
 .superpowers/
 api/eval/baseline-results.txt
