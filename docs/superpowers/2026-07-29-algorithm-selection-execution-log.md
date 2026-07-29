@@ -127,3 +127,67 @@ co-occurrence evidence. That is an ear question under `REQ-38`.
 | Stranding under `ALG-B` (`AS-H2`) | **Before any adoption decision** — needs a built graph; the candidate-supply drop is measured, its graph-level effect is not. |
 | Stratum-aware reads (`AS-H1`) | **If any successor algorithm pre-registration is written.** |
 | Edge-quality / blind listen | **If the owner picks up the re-crawl** — `REQ-38`. |
+
+---
+
+## 8. The scope probes that preceded the design (`CS-P0` … `CS-P0f`)
+
+Run before the pre-registration existed, because the simulation the owner had agreed to as
+the first task rested on a premise testable in minutes. Scripts and outputs:
+`builder/analysis/2026-07-29-cap-selection-sim/`. Artifact `4cb84ef9…` asserted by every one.
+
+- **`CS-P0` / `CS-P0b`** — reproduced `DD-F1` independently (all five named superstars have
+  zero neighbours below the top decile) and found the top-decile *population* is 87.8% **not**
+  defective. Banded, the collapse is monotone and concentrated at the very top: the
+  zero-downward share runs 8.2% → 45.1% → 79.1% → 87.5% from the top decile inward. **So
+  "famous artists have no downward edges" was aimed at the wrong population.**
+- **`CS-P0c`** — the decisive one. Superstars are offered **zero** sub-decile candidates by
+  the crawl itself, so no cap rule can select one. For the top 1% broadly candidates do
+  exist (mean 5.57) and the cap discards **72.8%**. This is what re-sequenced the plan.
+- **`CS-P0d`** — obscure candidates rank late (mean 64.5 of 100); famous artists' lists
+  saturate the limit, most artists' do not (39.1% of a 3,000 sample).
+- **`CS-P0e`** — validated the owner's finding that `algorithm` is a **closed enum**. Killed
+  two levers: see §9.
+- **`CS-P0f`** — the source `score` is symmetric (9,486 of 9,487 reciprocated pairs identical
+  both directions; rank correlation between directions **0.12**). So mutual k-NN adds no
+  similarity evidence — it re-tests one number against each endpoint's *other* scores, and
+  where it rejects an edge the refusing endpoint is the **more popular** one **87.4%** of the
+  time (42.7% of reciprocated pairs rejected). This derives Phase 1 log §2.10's depletion
+  finding arithmetically from source data rather than observing it in the artifact. **No rule
+  change is proposed; `MKS-5b` still requires a simulated degree bound first.**
+
+## 9. `STC-6` is killed, not deferred — and one of this session's own recommendations is retracted
+
+The `algorithm` parameter accepts only six values. `threshold` is 10 or 15 and production is
+already on **10**; `limit` is 100 or 50 and `limit_500` is rejected.
+
+- **`STC-6`** — "re-crawl at a lower co-occurrence threshold" — has **nothing lower to ask
+  for.** Its condition is *known-unreachable*, which the closeout standing rule makes a kill
+  rather than a reschedule. Struck in `NEXT.md`.
+- **"Re-crawl asking for longer candidate lists" is retracted.** It was this session's own
+  recommendation, made before `CS-P0e` ran, and it is impossible.
+
+## 10. Closeout record
+
+**D4:** builder 115 passed, api 217 passed, frontend 107 passed across 18 files. Run, not
+recalled.
+
+**D6 — the standing context layer:** unconditional **44,113 characters (delta 0)**;
+conditional **2,121 lines (delta 0)**. Nothing was added to `CLAUDE.md`, `.claude/` or
+`memory/` this session. The two `docs/README.md` rows are conditional-corpus, not standing
+layer.
+
+**D1/D3:** tree clean at commit. No artifact adopted, created or modified — the only
+artifact in play remains `graph-t15-tiebreakfix.bin`, sha256
+`4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8`, asserted by every
+script here. **No new archive was written**; `build` remains offline.
+
+**A4 (default-flip):** no config knob was added or changed. `BuilderConfig.algorithm` still
+carries `contribution_5`; `ALG-B` is a *candidate*, and flipping it is the re-crawl decision,
+which is the owner's. Nothing is sitting at an old default pretending to be shipped.
+
+**B2 (reachability):** the nine new files are standalone analysis probes, imported by nothing
+by design — the established pattern for `builder/analysis/`. Not orphans.
+
+**B3 (vacuous tests):** no tests were added, so nothing to spot-check. The suites above are
+pre-existing and were run as a regression check only.

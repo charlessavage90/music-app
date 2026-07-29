@@ -23,6 +23,47 @@ the point.**
 
 ---
 
+## N/A — 2026-07-29 (later) — we found out why famous journeys stay famous; the app is untouched
+
+**Nothing to exercise, and nothing is running** — all four ports were checked and are empty;
+nothing was started on this machine and nothing was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A journey
+you build now is identical to one from this morning.**
+
+**What happened, in plain terms — and it is genuinely good news after this morning's dead end.**
+
+Earlier today the answer was that journeys between two famous artists can never pass through
+anyone obscure, and that no amount of tuning could fix it. That is still true of tuning. But
+**you** noticed that the address we use to fetch "artists similar to X" has a settings string
+in it, and that only a handful of settings are allowed. That turned out to be the whole thing.
+
+We checked all six permitted settings against 200 artists. **One of them differs from ours by
+a single value, and it changes the picture completely:** where our current setting offers
+Radiohead essentially nobody outside the most popular tenth of artists, that one offers about
+eleven — and some of them are genuinely obscure, not merely less famous. **So the reason
+famous journeys stay famous is a setting we picked, not a fact about the data.**
+
+**Two honest caveats, because this is not a free win.**
+
+- **It also seems to offer *fewer* suggestions for artists who are already obscure** — about
+  40% as many. That probably means more artists ending up with almost no connections, which is
+  the same underlying cause as journeys that have nobody in the middle. We have not measured
+  that properly yet, and the next piece of work does.
+- **Switching would mean rebuilding the map from scratch**, about four and a quarter hours,
+  and it would be a genuinely *different* map rather than a patched one — less than half of
+  each famous artist's connections would be the same. Every measurement we have about journey
+  quality was taken on the current map. **That is your decision and nothing has been done
+  toward it.**
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-29-algorithm-selection-execution-log.md`.*
+
 ## N/A — 2026-07-29 — you rewrote what "good" means, and another measurement track ran; the app is untouched
 
 **Nothing to exercise, and nothing is running** — all four ports were checked and are
