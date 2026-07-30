@@ -1,0 +1,7 @@
+# Raw collector outputs: regenerable from the commands in README.md, and large.
+# Derived summaries (ct_coverage.json, ct_limit_interiors.json, ct_retrodict.json)
+# are committed.
+ct_wikidata_genres.json
+ct_mb_sample_raw.json
+ct_limit_tags_raw.json
+ct_path_tags_raw.json
