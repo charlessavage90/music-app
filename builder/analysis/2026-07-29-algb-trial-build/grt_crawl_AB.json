@@ -1,0 +1,15 @@
+{
+  "GRT_G1_archive_untouched": true,
+  "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+  "arm": "AB",
+  "control_write_refusals": [],
+  "discovered": 3000,
+  "done": 3000,
+  "elapsed_seconds": 1100.2,
+  "failure_mbids": [],
+  "failures": 0,
+  "overlay_writes": 0,
+  "production_archive_files_after": 75000,
+  "production_archive_files_before": 75000,
+  "target": 3000
+}

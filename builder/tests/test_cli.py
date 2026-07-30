@@ -7,6 +7,13 @@ from artistpath_builder.cli import main
 
 A, B = ("a" * 36, "b" * 36)
 
+# ALG-B: the named re-crawl candidate (AS log §7). Differs from production by
+# contribution_3.
+ALG_B = (
+    "session_based_days_7500_session_300_contribution_3"
+    "_threshold_10_limit_100_filter_True_skip_30"
+)
+
 # These tests exercise the CLI plumbing on a two-artist archive, which cannot
 # satisfy the production structural invariants. The invariants themselves are
 # tested in test_acceptance.py; here they are relaxed so the commands under
@@ -89,6 +96,38 @@ def test_fixture_command_round_trips(tmp_path):
     )
     assert exit_code == 0
     assert fixture_path.stat().st_size > 0
+
+
+def test_config_threads_algorithm_override():
+    import argparse
+
+    from artistpath_builder.cli import _config
+    from artistpath_builder.config import PERMITTED_ALGORITHMS
+
+    args = argparse.Namespace(target=None, algorithm=ALG_B)
+    assert _config(args).algorithm == ALG_B
+    assert ALG_B in PERMITTED_ALGORITHMS
+
+
+def test_config_rejects_a_value_outside_the_closed_enum():
+    import argparse
+
+    from artistpath_builder.cli import _config
+
+    args = argparse.Namespace(target=None, algorithm="definitely_not_a_real_algorithm")
+    with pytest.raises(SystemExit):
+        _config(args)
+
+
+def test_config_default_algorithm_is_production():
+    # Flipping this default IS the re-crawl decision, which is the owner's
+    # (NEXT.md). A trial run overrides it per-invocation; nothing else may.
+    import argparse
+
+    from artistpath_builder.cli import _config
+    from artistpath_builder.config import PRODUCTION_ALGORITHM
+
+    assert _config(argparse.Namespace()).algorithm == PRODUCTION_ALGORITHM
 
 
 def test_bootstrap_serialisation_round_trips(tmp_path):

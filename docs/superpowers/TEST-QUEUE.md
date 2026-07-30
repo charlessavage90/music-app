@@ -23,7 +23,106 @@ the point.**
 
 ---
 
-## N/A — 2026-07-29 (latest) — we measured the price of the new setting; the app is untouched
+## N/A — 2026-07-29 (latest) — we built a trial map with the new setting; the app is untouched
+
+**Nothing to exercise. No web servers are running** — all four ports were checked and are
+empty. No routing, no graph, no weighting, no cost function, and not one line of the app or
+the website changed. **A journey you build now is identical to one from this afternoon.** The
+trial map that got built is a scratch file nothing points at; the app still uses the same map
+it did this morning.
+
+> ### ✅ THE OVERNIGHT RUN FINISHED — and it is worth thirty seconds
+>
+> **It completed cleanly: 75,000 artists collected, nothing failed, and the irreplaceable
+> existing collection was untouched.** A map was then built from it in 78 seconds. **The app
+> is still using the old map, nothing has been adopted, and there is still nothing to test.**
+>
+> **What the new map shows, in plain terms.** It is genuinely a *different* map rather than
+> a better or worse version of the same one — nearly a third of today's artists never appear
+> in it at all, and it reaches roughly as many artists we have never seen.
+>
+> - **It cuts far more artists off the map entirely: 6,499 against 800.** Among the obscure
+>   artists it does reach, it strands about **7%**, where today's setting strands **0.08%**.
+>   That is yesterday's worry, confirmed at full size.
+> - **R.E.M. ends up with 6 connections, down from 47.** Pixies drops to 3, The xx to 1.
+> - **And the safety check does not notice any of it — the map built and passed.** The check
+>   looks at the most popular artists, and these artists lose so much popularity along with
+>   their connections that they drop off the list before it looks. That blind spot is now
+>   confirmed rather than suspected. It is not a reason to weaken the check.
+>
+> **All of that is at one particular setting of a knob nobody has tuned yet**, and the probe
+> from last night showed that knob moves the stranding a great deal. Tuning it is the next
+> piece of work, it needs no more downloading, and **nothing is decided.**
+>
+> *(The note below is from when it was still running, and is kept as sent.)*
+>
+> ### ⚠ ONE THING IS RUNNING OVERNIGHT, and you started it deliberately
+>
+> **A full data-gathering run for the new setting**, begun late on 2026-07-29 at your
+> instruction. It is **collecting only** — it downloads similar-artist data into a scratch
+> folder and **builds no map, changes no setting, and touches nothing the app uses.** The
+> app is unaffected while it runs and unaffected when it finishes.
+>
+> - **Expect roughly 7½ hours**, so it may still be going when you wake. That is fine.
+> - **If it stopped early** — laptop slept, network dropped — **just run the same command
+>   again.** It resumes from where it got to and re-downloads nothing.
+> - **The irreplaceable existing collection cannot be harmed by it**: the new data is
+>   filed separately, which is one of the things built today.
+> - **When it finishes, nothing happens automatically.** Turning it into a map is a
+>   separate 29-second step, and *using* that map is a further decision that still owes a
+>   listening test.
+>
+> Command, log location and morning checks: the execution log below, and the handoff.
+
+**What happened, in plain terms.** This afternoon we measured the price of switching to the
+new setting. Tonight we did the engineering that had to happen before anyone *could* switch,
+then built a small trial map with the new setting to see what actually breaks.
+
+**Three things are worth knowing, and the third is the one that surprised us.**
+
+- **The artists with missing names are now dropped automatically, and you were right to say
+  drop them.** You checked three of them by hand and MusicBrainz says "artist not found" for
+  all three — they are deleted entries that live on in the similarity data. So repairing
+  them was never actually possible. A full rebuild of today's map now completes and passes
+  its own safety checks, which it refused to do before.
+- **The thing we predicted would break, breaks — but worse than we thought and quieter.**
+  Under the new setting R.E.M. goes from 47 connections down to **6**. We expected that. What
+  we did not expect is that **the safety check that exists to catch exactly this does not
+  notice.** The check looks at the most popular artists — but an artist that loses its
+  connections also loses its popularity, so R.E.M. quietly drops off the list the check
+  examines before the check runs. It is a blind spot, and we only found it by building the
+  thing rather than reasoning about it.
+- **The new setting cuts more artists off the map entirely.** Roughly twice as many as the
+  current setting, at the small scale we tested. That is the same worry as this afternoon's,
+  now seen in a built map rather than estimated.
+
+**Also honest about our own work, twice over.** A safety wrapper stopped us from accidentally
+writing into the irreplaceable collection of artist data — it turned out our own assumption
+about that data was wrong, and the wrapper caught it rather than a person. And a routine
+end-of-work check found that one test we had written was passing without actually testing
+anything; it took three attempts to write one that genuinely fails when the code is broken.
+Both are fixed and both are recorded.
+
+**One thing we could not do:** the security scanner needs you to log in (`snyk auth`), so it
+has not run over tonight's code. It is written down in every commit rather than quietly
+skipped.
+
+**None of this decides anything.** Whether to rebuild the map with the new setting is still
+your call and still parked. What changed tonight is that it is now *possible* to do, and the
+price is measured instead of guessed.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-29-graph-rebuild-track-a-execution-log.md`.*
+
+## N/A — 2026-07-29 (earlier) — we measured the price of the new setting; the app is untouched
+<!-- "(latest)" stripped 2026-07-29 (night): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running** — all four ports were checked and are empty;
 nothing was started on this machine and nothing was left behind. No routing, no graph, no

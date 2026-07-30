@@ -1,0 +1,80 @@
+{
+  "archive": "C:\\dev\\music-app\\builder\\scratch\\grt-archive-algb\\similar\\listenbrainz\\session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+  "artists": {
+    "PJ Harvey": {
+      "degree": {
+        "100": 46,
+        "50": 10,
+        "60": 13,
+        "75": 25
+      },
+      "in_archive": true,
+      "top100_fully_fetched": false
+    },
+    "Pixies": {
+      "degree": {
+        "100": 22,
+        "50": 3,
+        "60": 4,
+        "75": 9
+      },
+      "in_archive": true,
+      "top100_fully_fetched": true
+    },
+    "R.E.M.": {
+      "degree": {
+        "100": 68,
+        "50": 6,
+        "60": 10,
+        "75": 26
+      },
+      "in_archive": true,
+      "top100_fully_fetched": true
+    },
+    "The xx": {
+      "degree": {
+        "100": 10,
+        "50": 1,
+        "60": 3,
+        "75": 4
+      },
+      "in_archive": true,
+      "top100_fully_fetched": true
+    }
+  },
+  "caveats": [
+    "ranks on raw source score, not pipeline damped strengths",
+    "3,000-node trial archive, not the 74k production graph",
+    "measures only the benefit of raising k; MKS-5b's hub cost is unmeasured here"
+  ],
+  "floor": 8,
+  "population": {
+    "100": {
+      "below_floor": 225,
+      "below_floor_share": 0.075,
+      "mean_degree": 38.17,
+      "nodes_with_an_edge": 2973
+    },
+    "50": {
+      "below_floor": 792,
+      "below_floor_share": 0.264,
+      "mean_degree": 16.33,
+      "nodes_with_an_edge": 2883
+    },
+    "60": {
+      "below_floor": 571,
+      "below_floor_share": 0.1903,
+      "mean_degree": 20.43,
+      "nodes_with_an_edge": 2917
+    },
+    "75": {
+      "below_floor": 401,
+      "below_floor_share": 0.1337,
+      "mean_degree": 26.74,
+      "nodes_with_an_edge": 2952
+    }
+  },
+  "pre_registered": false,
+  "probe": "GRT-P3",
+  "responses": 3000
+}

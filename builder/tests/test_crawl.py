@@ -165,6 +165,46 @@ def test_resume_continues_pending_frontier_after_crash(tmp_path, config):
     assert {A, B, C, D}.issubset(resumed._done)
 
 
+ALG_B = (
+    "session_based_days_7500_session_300_contribution_3"
+    "_threshold_10_limit_100_filter_True_skip_30"
+)
+
+
+def test_production_algorithm_keeps_the_flat_archive_key(tmp_path, config):
+    # 75,000 existing responses live at this layout and are not moved.
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    assert crawler.similar_key(A) == f"similar/listenbrainz/{A}.json"
+
+
+def test_nondefault_algorithm_gets_its_own_archive_subtree(tmp_path):
+    # RC-H3: the key did not encode the algorithm, so ALG-B responses stored
+    # beside production ones would be served to every future build as if they
+    # were production data.
+    cfg = BuilderConfig(requests_per_second=1000.0, algorithm=ALG_B)
+    crawler = _crawler(tmp_path, cfg, FakeFetcher())
+    assert crawler.similar_key(A) == f"similar/listenbrainz/{ALG_B}/{A}.json"
+
+
+def test_checkpoint_refuses_to_resume_under_a_different_algorithm(tmp_path, config):
+    # Same hazard on the other axis: a resumed crawl would treat the other
+    # algorithm's finished artists as done and silently skip every one.
+    _crawler(tmp_path, config, FakeFetcher()).crawl([A])
+    algb = BuilderConfig(requests_per_second=1000.0, algorithm=ALG_B)
+    with pytest.raises(ValueError, match="RC-H3"):
+        _crawler(tmp_path, algb, FakeFetcher())
+
+
+def test_legacy_checkpoint_without_algorithm_field_still_resumes(tmp_path, config):
+    # Every checkpoint written before this change predates the field; a
+    # missing field means the production algorithm, not a refusal.
+    (tmp_path / "checkpoint.json").write_text(
+        json.dumps({"done": [A], "discovered": [A, B]})
+    )
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    assert crawler.discovered == {A, B}
+
+
 def test_failed_artists_are_retried_on_a_fresh_run(tmp_path):
     # A server outage that exhausts retries must not permanently skip an
     # artist — a later run, after the server recovers, must retry it.

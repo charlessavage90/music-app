@@ -1,0 +1,182 @@
+{
+  "GRT_C4_comparison": {
+    "lower half": {
+      "read": false,
+      "reason": "a band unread in one or both arms"
+    },
+    "top 0.1%": {
+      "A0_exclusion_rate": 0.0,
+      "AB_exclusion_rate": 0.0,
+      "bar": 2.0,
+      "ratio": null,
+      "read": true,
+      "verdict": "NOT DECISIVE (reported with its figure; not 'no effect')"
+    },
+    "top 1%": {
+      "A0_exclusion_rate": 0.0,
+      "AB_exclusion_rate": 0.00873,
+      "bar": 2.0,
+      "ratio": null,
+      "read": true,
+      "verdict": "NOT DECISIVE (reported with its figure; not 'no effect')"
+    },
+    "top 10%": {
+      "A0_exclusion_rate": 0.0,
+      "AB_exclusion_rate": 0.0202,
+      "bar": 2.0,
+      "ratio": null,
+      "read": true,
+      "verdict": "NOT DECISIVE (reported with its figure; not 'no effect')"
+    },
+    "upper half": {
+      "A0_exclusion_rate": 0.0,
+      "AB_exclusion_rate": 0.01515,
+      "bar": 2.0,
+      "ratio": null,
+      "read": true,
+      "verdict": "NOT DECISIVE (reported with its figure; not 'no effect')"
+    }
+  },
+  "arms": {
+    "A0": {
+      "GRT_C1_rem": {
+        "degree": 47,
+        "floor": 8,
+        "in_graph": true,
+        "readable": true,
+        "subject": "R.E.M.",
+        "verdict": "REFUTES RC-P2 (at or above floor)"
+      },
+      "GRT_C2_canonical": {
+        "absent": [
+          "CROOVE",
+          "Wishbone Ash"
+        ],
+        "of": 24,
+        "present": 22
+      },
+      "GRT_C3_top25": {
+        "all_readable": true,
+        "median_degree": 47.0,
+        "median_floor": 25.0,
+        "median_passes": true,
+        "min_degree": 34,
+        "min_floor": 8,
+        "min_passes": true,
+        "sample": 25,
+        "worst_artist": "Eminem"
+      },
+      "GRT_C4_component_by_band": {
+        "lower half": {
+          "read": false,
+          "readable_members": 10,
+          "reason": "under-populated (< 30); RC-G2 refuses to pool"
+        },
+        "top 0.1%": {
+          "excluded": 0,
+          "exclusion_rate": 0.0,
+          "read": true,
+          "readable_members": 75
+        },
+        "top 1%": {
+          "excluded": 0,
+          "exclusion_rate": 0.0,
+          "read": true,
+          "readable_members": 326
+        },
+        "top 10%": {
+          "excluded": 0,
+          "exclusion_rate": 0.0,
+          "read": true,
+          "readable_members": 290
+        },
+        "upper half": {
+          "excluded": 0,
+          "exclusion_rate": 0.0,
+          "read": true,
+          "readable_members": 48
+        }
+      },
+      "GRT_C4_overall_exclusion_rate": 0.01367,
+      "GRT_G2_fetch_rate": 1.0,
+      "algorithm": "session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30",
+      "arm": "A0",
+      "built_edges": 53902,
+      "built_nodes": 2959,
+      "fetched": 3000,
+      "pre_prune_population": 3000,
+      "readable_core": 754
+    },
+    "AB": {
+      "GRT_C1_rem": {
+        "degree": 6,
+        "floor": 8,
+        "in_graph": true,
+        "readable": true,
+        "subject": "R.E.M.",
+        "verdict": "CONFIRMS RC-P2 (below floor)"
+      },
+      "GRT_C2_canonical": {
+        "absent": [
+          "CROOVE",
+          "Wishbone Ash"
+        ],
+        "of": 24,
+        "present": 22
+      },
+      "GRT_C3_top25": {
+        "all_readable": true,
+        "median_degree": 46.0,
+        "median_floor": 25.0,
+        "median_passes": true,
+        "min_degree": 31,
+        "min_floor": 8,
+        "min_passes": true,
+        "sample": 25,
+        "worst_artist": "Greg Kurstin"
+      },
+      "GRT_C4_component_by_band": {
+        "lower half": {
+          "excluded": 1,
+          "exclusion_rate": 0.03333,
+          "read": true,
+          "readable_members": 30
+        },
+        "top 0.1%": {
+          "excluded": 0,
+          "exclusion_rate": 0.0,
+          "read": true,
+          "readable_members": 72
+        },
+        "top 1%": {
+          "excluded": 2,
+          "exclusion_rate": 0.00873,
+          "read": true,
+          "readable_members": 229
+        },
+        "top 10%": {
+          "excluded": 4,
+          "exclusion_rate": 0.0202,
+          "read": true,
+          "readable_members": 198
+        },
+        "upper half": {
+          "excluded": 1,
+          "exclusion_rate": 0.01515,
+          "read": true,
+          "readable_members": 66
+        }
+      },
+      "GRT_C4_overall_exclusion_rate": 0.032,
+      "GRT_G2_fetch_rate": 1.0,
+      "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+      "arm": "AB",
+      "built_edges": 53006,
+      "built_nodes": 2904,
+      "fetched": 3000,
+      "pre_prune_population": 3000,
+      "readable_core": 785
+    }
+  },
+  "target": 3000
+}
