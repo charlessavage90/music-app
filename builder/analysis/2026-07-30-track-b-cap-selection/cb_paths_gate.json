@@ -1,0 +1,69 @@
+{
+  "class_labels_present": true,
+  "deterministic": true,
+  "gate_passed": true,
+  "paths_moved_under_perturbation": 18,
+  "production_weights_summary": {
+    "overall": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 20,
+      "pairs_with_sub_decile_interior": 18,
+      "path_length": {
+        "max": 14,
+        "mean": 10.3,
+        "median": 9.5
+      },
+      "readable_per_CRS_G3": true,
+      "sub_decile_interior_share": 0.20445,
+      "top1pct_degree_frac_own": 0.15602,
+      "top1pct_degree_frac_production": 0.15602
+    },
+    "per_class": {
+      "top 0.1% x lower": {
+        "invalid_walks": 0,
+        "no_path": 0,
+        "pairs_attempted": 12,
+        "pairs_with_sub_decile_interior": 11,
+        "path_length": {
+          "max": 13,
+          "mean": 9.66667,
+          "median": 9.0
+        },
+        "readable_per_CRS_G3": true,
+        "sub_decile_interior_share": 0.21939,
+        "top1pct_degree_frac_own": 0.21003,
+        "top1pct_degree_frac_production": 0.21003
+      },
+      "top 1% x lower": {
+        "invalid_walks": 0,
+        "no_path": 0,
+        "pairs_attempted": 8,
+        "pairs_with_sub_decile_interior": 7,
+        "path_length": {
+          "max": 14,
+          "mean": 11.25,
+          "median": 11.0
+        },
+        "readable_per_CRS_G3": true,
+        "sub_decile_interior_share": 0.18204,
+        "top1pct_degree_frac_own": 0.075,
+        "top1pct_degree_frac_production": 0.075
+      }
+    },
+    "weights": {
+      "avoid_decay": 0.5,
+      "avoid_penalty": 0.5,
+      "avoid_radius": 2,
+      "floor_relax_dislike": 0.08,
+      "floor_relax_known": 0.15,
+      "w_avoid": 1.0,
+      "w_degree_hub": 0.0,
+      "w_floor": 1.0,
+      "w_hop": 0.02,
+      "w_jump": 1.0,
+      "w_sim": 3.0
+    }
+  },
+  "walks_valid": true
+}

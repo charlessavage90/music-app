@@ -1,0 +1,245 @@
+{
+  "ALG-B": {
+    "checks": {
+      "degree_Pixies": true,
+      "degree_R.E.M.": true,
+      "degree_Radiohead": true,
+      "degree_The xx": true,
+      "exclusion_rate": true,
+      "lower_half_stranded": true
+    },
+    "passed": true,
+    "scored": {
+      "acceptance_descriptive": {
+        "passes": true,
+        "problems": []
+      },
+      "band_stranding": {
+        "lower half": {
+          "absent_share_of_frame": 0.55763,
+          "crawled_by_this_archive": 17646,
+          "crawled_then_stranded": 1236,
+          "in_adopted_frame": 37096,
+          "never_crawled": 19450,
+          "stranded_share_of_crawled": 0.07004
+        },
+        "top 0.1%": {
+          "absent_share_of_frame": 0.0,
+          "crawled_by_this_archive": 75,
+          "crawled_then_stranded": 0,
+          "in_adopted_frame": 75,
+          "never_crawled": 0,
+          "stranded_share_of_crawled": 0.0
+        },
+        "top 1%": {
+          "absent_share_of_frame": 0.01199,
+          "crawled_by_this_archive": 667,
+          "crawled_then_stranded": 8,
+          "in_adopted_frame": 667,
+          "never_crawled": 0,
+          "stranded_share_of_crawled": 0.01199
+        },
+        "top 10%": {
+          "absent_share_of_frame": 0.01527,
+          "crawled_by_this_archive": 6624,
+          "crawled_then_stranded": 48,
+          "in_adopted_frame": 6678,
+          "never_crawled": 54,
+          "stranded_share_of_crawled": 0.00725
+        },
+        "upper half": {
+          "absent_share_of_frame": 0.12818,
+          "crawled_by_this_archive": 26125,
+          "crawled_then_stranded": 252,
+          "in_adopted_frame": 29677,
+          "never_crawled": 3552,
+          "stranded_share_of_crawled": 0.00965
+        }
+      },
+      "component_exclusion": {
+        "excluded_absolute": 6499,
+        "exclusion_rate": 0.08669,
+        "kept": 68467,
+        "pre_prune": 74966
+      },
+      "edges": 811784,
+      "hub_structure": {
+        "degree_below_acceptance_floor_share": 0.46944,
+        "degree_le_1_share": 0.09881,
+        "max_degree": 50,
+        "mean_degree": 11.857,
+        "median_degree": 8.0,
+        "p99_degree": 45,
+        "top1pct_degree_mass_frac": 0.04006,
+        "top_degree_node_set_overlap_with_production": 0.58491
+      },
+      "nodes": 68467,
+      "tracers": {
+        "PJ Harvey": {
+          "below_acceptance_floor": false,
+          "degree": 10,
+          "in_component": true,
+          "inside_top25_sample": false,
+          "popularity_rank": 275
+        },
+        "Pixies": {
+          "below_acceptance_floor": true,
+          "degree": 3,
+          "in_component": true,
+          "inside_top25_sample": false,
+          "popularity_rank": 5730
+        },
+        "R.E.M.": {
+          "below_acceptance_floor": true,
+          "degree": 6,
+          "in_component": true,
+          "inside_top25_sample": false,
+          "popularity_rank": 38
+        },
+        "Radiohead": {
+          "below_acceptance_floor": false,
+          "degree": 48,
+          "in_component": true,
+          "inside_top25_sample": true,
+          "popularity_rank": 10
+        },
+        "The Beatles": {
+          "below_acceptance_floor": false,
+          "degree": 50,
+          "in_component": true,
+          "inside_top25_sample": true,
+          "popularity_rank": 0
+        },
+        "The xx": {
+          "below_acceptance_floor": true,
+          "degree": 1,
+          "in_component": true,
+          "inside_top25_sample": false,
+          "popularity_rank": 12317
+        }
+      }
+    }
+  },
+  "ALG-E": {
+    "checks": {
+      "degree_Pixies": true,
+      "degree_R.E.M.": true,
+      "degree_Radiohead": true,
+      "degree_The xx": true,
+      "exclusion_rate": true,
+      "lower_half_stranded": true
+    },
+    "passed": true,
+    "scored": {
+      "acceptance_descriptive": {
+        "passes": true,
+        "problems": []
+      },
+      "band_stranding": {
+        "lower half": {
+          "absent_share_of_frame": 0.00078,
+          "crawled_by_this_archive": 37096,
+          "crawled_then_stranded": 29,
+          "in_adopted_frame": 37096,
+          "never_crawled": 0,
+          "stranded_share_of_crawled": 0.00078
+        },
+        "top 0.1%": {
+          "absent_share_of_frame": 0.0,
+          "crawled_by_this_archive": 75,
+          "crawled_then_stranded": 0,
+          "in_adopted_frame": 75,
+          "never_crawled": 0,
+          "stranded_share_of_crawled": 0.0
+        },
+        "top 1%": {
+          "absent_share_of_frame": 0.0,
+          "crawled_by_this_archive": 667,
+          "crawled_then_stranded": 0,
+          "in_adopted_frame": 667,
+          "never_crawled": 0,
+          "stranded_share_of_crawled": 0.0
+        },
+        "top 10%": {
+          "absent_share_of_frame": 0.00015,
+          "crawled_by_this_archive": 6678,
+          "crawled_then_stranded": 1,
+          "in_adopted_frame": 6678,
+          "never_crawled": 0,
+          "stranded_share_of_crawled": 0.00015
+        },
+        "upper half": {
+          "absent_share_of_frame": 0.0002,
+          "crawled_by_this_archive": 29677,
+          "crawled_then_stranded": 6,
+          "in_adopted_frame": 29677,
+          "never_crawled": 0,
+          "stranded_share_of_crawled": 0.0002
+        }
+      },
+      "component_exclusion": {
+        "excluded_absolute": 800,
+        "exclusion_rate": 0.01067,
+        "kept": 74157,
+        "pre_prune": 74957
+      },
+      "edges": 897620,
+      "hub_structure": {
+        "degree_below_acceptance_floor_share": 0.44874,
+        "degree_le_1_share": 0.08616,
+        "max_degree": 50,
+        "mean_degree": 12.104,
+        "median_degree": 9.0,
+        "p99_degree": 44,
+        "top1pct_degree_mass_frac": 0.03889,
+        "top_degree_node_set_overlap_with_production": 1.0
+      },
+      "nodes": 74157,
+      "tracers": {
+        "PJ Harvey": {
+          "below_acceptance_floor": false,
+          "degree": 17,
+          "in_component": true,
+          "inside_top25_sample": false,
+          "popularity_rank": 52
+        },
+        "Pixies": {
+          "below_acceptance_floor": false,
+          "degree": 41,
+          "in_component": true,
+          "inside_top25_sample": true,
+          "popularity_rank": 23
+        },
+        "R.E.M.": {
+          "below_acceptance_floor": false,
+          "degree": 47,
+          "in_component": true,
+          "inside_top25_sample": true,
+          "popularity_rank": 5
+        },
+        "Radiohead": {
+          "below_acceptance_floor": false,
+          "degree": 50,
+          "in_component": true,
+          "inside_top25_sample": true,
+          "popularity_rank": 0
+        },
+        "The Beatles": {
+          "below_acceptance_floor": false,
+          "degree": 50,
+          "in_component": true,
+          "inside_top25_sample": true,
+          "popularity_rank": 1
+        },
+        "The xx": {
+          "below_acceptance_floor": false,
+          "degree": 35,
+          "in_component": true,
+          "inside_top25_sample": false,
+          "popularity_rank": 38
+        }
+      }
+    }
+  },
+  "gate_passed": true
+}

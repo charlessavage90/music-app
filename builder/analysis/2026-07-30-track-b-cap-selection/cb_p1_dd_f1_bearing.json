@@ -1,0 +1,367 @@
+{
+  "archives": {
+    "ALG-B": {
+      "responses_scanned": 75000,
+      "superstars": {
+        "Coldplay": {
+          "listers_not_in_adopted_frame": 3086,
+          "max_reverse_only_sub_decile_score": 1476.0,
+          "mutual_sub_decile_listers": 14,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 1861.0,
+          "own_list_score_tail": 1509.0,
+          "per_band": {
+            "lower half": {
+              "listers": 1025,
+              "max_score": 2945.0,
+              "max_score_within_top_j": 2945.0,
+              "within_top_j": 638
+            },
+            "top 10%": {
+              "listers": 1505,
+              "max_score": 3803.0,
+              "max_score_within_top_j": 3803.0,
+              "within_top_j": 765
+            },
+            "upper half": {
+              "listers": 3226,
+              "max_score": 2363.0,
+              "max_score_within_top_j": 2363.0,
+              "within_top_j": 1573
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 4237,
+          "reverse_only_sub_decile_within_top_j": 2201,
+          "sub_decile_listers": 4251,
+          "sub_decile_listers_within_top_j": 2211,
+          "total_listers": 8842
+        },
+        "Metallica": {
+          "listers_not_in_adopted_frame": 202,
+          "max_reverse_only_sub_decile_score": 418.0,
+          "mutual_sub_decile_listers": 7,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 657.0,
+          "own_list_score_tail": 468.0,
+          "per_band": {
+            "lower half": {
+              "listers": 57,
+              "max_score": 1417.0,
+              "max_score_within_top_j": 691.0,
+              "within_top_j": 23
+            },
+            "top 10%": {
+              "listers": 76,
+              "max_score": 1921.0,
+              "max_score_within_top_j": 1921.0,
+              "within_top_j": 26
+            },
+            "upper half": {
+              "listers": 72,
+              "max_score": 909.0,
+              "max_score_within_top_j": 909.0,
+              "within_top_j": 16
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 122,
+          "reverse_only_sub_decile_within_top_j": 36,
+          "sub_decile_listers": 129,
+          "sub_decile_listers_within_top_j": 39,
+          "total_listers": 407
+        },
+        "Muse": {
+          "listers_not_in_adopted_frame": 515,
+          "max_reverse_only_sub_decile_score": 711.0,
+          "mutual_sub_decile_listers": 4,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 1170.0,
+          "own_list_score_tail": 808.0,
+          "per_band": {
+            "lower half": {
+              "listers": 169,
+              "max_score": 1391.0,
+              "max_score_within_top_j": 303.0,
+              "within_top_j": 69
+            },
+            "top 10%": {
+              "listers": 173,
+              "max_score": 2671.0,
+              "max_score_within_top_j": 2613.0,
+              "within_top_j": 36
+            },
+            "upper half": {
+              "listers": 358,
+              "max_score": 1034.0,
+              "max_score_within_top_j": 689.0,
+              "within_top_j": 92
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 523,
+          "reverse_only_sub_decile_within_top_j": 161,
+          "sub_decile_listers": 527,
+          "sub_decile_listers_within_top_j": 161,
+          "total_listers": 1215
+        },
+        "Radiohead": {
+          "listers_not_in_adopted_frame": 2700,
+          "max_reverse_only_sub_decile_score": 1497.0,
+          "mutual_sub_decile_listers": 15,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 2022.0,
+          "own_list_score_tail": 1532.0,
+          "per_band": {
+            "lower half": {
+              "listers": 1139,
+              "max_score": 3301.0,
+              "max_score_within_top_j": 3301.0,
+              "within_top_j": 852
+            },
+            "top 10%": {
+              "listers": 1347,
+              "max_score": 3835.0,
+              "max_score_within_top_j": 3835.0,
+              "within_top_j": 743
+            },
+            "upper half": {
+              "listers": 3489,
+              "max_score": 3419.0,
+              "max_score_within_top_j": 3419.0,
+              "within_top_j": 1928
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 4613,
+          "reverse_only_sub_decile_within_top_j": 2770,
+          "sub_decile_listers": 4628,
+          "sub_decile_listers_within_top_j": 2780,
+          "total_listers": 8675
+        },
+        "The Beatles": {
+          "listers_not_in_adopted_frame": 5731,
+          "max_reverse_only_sub_decile_score": 2304.0,
+          "mutual_sub_decile_listers": 14,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 3030.0,
+          "own_list_score_tail": 2344.0,
+          "per_band": {
+            "lower half": {
+              "listers": 2336,
+              "max_score": 6538.0,
+              "max_score_within_top_j": 6538.0,
+              "within_top_j": 2035
+            },
+            "top 10%": {
+              "listers": 2346,
+              "max_score": 6396.0,
+              "max_score_within_top_j": 6396.0,
+              "within_top_j": 1588
+            },
+            "upper half": {
+              "listers": 7477,
+              "max_score": 6305.0,
+              "max_score_within_top_j": 6305.0,
+              "within_top_j": 5313
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 9799,
+          "reverse_only_sub_decile_within_top_j": 7334,
+          "sub_decile_listers": 9813,
+          "sub_decile_listers_within_top_j": 7348,
+          "total_listers": 17890
+        }
+      }
+    },
+    "ALG-E": {
+      "responses_scanned": 75000,
+      "superstars": {
+        "Coldplay": {
+          "listers_not_in_adopted_frame": 360,
+          "max_reverse_only_sub_decile_score": 2757.0,
+          "mutual_sub_decile_listers": 0,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 4362.0,
+          "own_list_score_tail": 3524.0,
+          "per_band": {
+            "lower half": {
+              "listers": 3122,
+              "max_score": 1109.0,
+              "max_score_within_top_j": 1109.0,
+              "within_top_j": 2389
+            },
+            "top 10%": {
+              "listers": 2517,
+              "max_score": 9919.0,
+              "max_score_within_top_j": 9919.0,
+              "within_top_j": 1453
+            },
+            "upper half": {
+              "listers": 7106,
+              "max_score": 2757.0,
+              "max_score_within_top_j": 2757.0,
+              "within_top_j": 4132
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 10228,
+          "reverse_only_sub_decile_within_top_j": 6521,
+          "sub_decile_listers": 10228,
+          "sub_decile_listers_within_top_j": 6521,
+          "total_listers": 13105
+        },
+        "Metallica": {
+          "listers_not_in_adopted_frame": 98,
+          "max_reverse_only_sub_decile_score": 2452.0,
+          "mutual_sub_decile_listers": 0,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 3841.0,
+          "own_list_score_tail": 2719.0,
+          "per_band": {
+            "lower half": {
+              "listers": 967,
+              "max_score": 873.0,
+              "max_score_within_top_j": 873.0,
+              "within_top_j": 682
+            },
+            "top 10%": {
+              "listers": 546,
+              "max_score": 8788.0,
+              "max_score_within_top_j": 8788.0,
+              "within_top_j": 339
+            },
+            "upper half": {
+              "listers": 2034,
+              "max_score": 2452.0,
+              "max_score_within_top_j": 2452.0,
+              "within_top_j": 946
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 3001,
+          "reverse_only_sub_decile_within_top_j": 1628,
+          "sub_decile_listers": 3001,
+          "sub_decile_listers_within_top_j": 1628,
+          "total_listers": 3645
+        },
+        "Muse": {
+          "listers_not_in_adopted_frame": 244,
+          "max_reverse_only_sub_decile_score": 2541.0,
+          "mutual_sub_decile_listers": 0,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 4319.0,
+          "own_list_score_tail": 3161.0,
+          "per_band": {
+            "lower half": {
+              "listers": 1905,
+              "max_score": 1416.0,
+              "max_score_within_top_j": 1416.0,
+              "within_top_j": 1302
+            },
+            "top 10%": {
+              "listers": 1394,
+              "max_score": 10286.0,
+              "max_score_within_top_j": 10286.0,
+              "within_top_j": 727
+            },
+            "upper half": {
+              "listers": 4085,
+              "max_score": 2541.0,
+              "max_score_within_top_j": 2541.0,
+              "within_top_j": 1955
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 5990,
+          "reverse_only_sub_decile_within_top_j": 3257,
+          "sub_decile_listers": 5990,
+          "sub_decile_listers_within_top_j": 3257,
+          "total_listers": 7628
+        },
+        "Radiohead": {
+          "listers_not_in_adopted_frame": 356,
+          "max_reverse_only_sub_decile_score": 2927.0,
+          "mutual_sub_decile_listers": 0,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 5629.0,
+          "own_list_score_tail": 4223.0,
+          "per_band": {
+            "lower half": {
+              "listers": 4090,
+              "max_score": 1174.0,
+              "max_score_within_top_j": 1174.0,
+              "within_top_j": 3429
+            },
+            "top 10%": {
+              "listers": 2505,
+              "max_score": 11156.0,
+              "max_score_within_top_j": 11156.0,
+              "within_top_j": 1685
+            },
+            "upper half": {
+              "listers": 8686,
+              "max_score": 2927.0,
+              "max_score_within_top_j": 2927.0,
+              "within_top_j": 5636
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 12776,
+          "reverse_only_sub_decile_within_top_j": 9065,
+          "sub_decile_listers": 12776,
+          "sub_decile_listers_within_top_j": 9065,
+          "total_listers": 15637
+        },
+        "The Beatles": {
+          "listers_not_in_adopted_frame": 384,
+          "max_reverse_only_sub_decile_score": 2296.0,
+          "mutual_sub_decile_listers": 0,
+          "own_list_len": 100,
+          "own_list_score_floor_at_50": 5135.0,
+          "own_list_score_tail": 3600.0,
+          "per_band": {
+            "lower half": {
+              "listers": 4095,
+              "max_score": 1474.0,
+              "max_score_within_top_j": 1474.0,
+              "within_top_j": 3427
+            },
+            "top 10%": {
+              "listers": 2325,
+              "max_score": 10872.0,
+              "max_score_within_top_j": 10872.0,
+              "within_top_j": 1473
+            },
+            "upper half": {
+              "listers": 8703,
+              "max_score": 2296.0,
+              "max_score_within_top_j": 2296.0,
+              "within_top_j": 5701
+            }
+          },
+          "q2_reverse_only_all_below_tail": true,
+          "q2_trim50_would_delete_all_reverse_only": true,
+          "reverse_only_sub_decile_listers": 12798,
+          "reverse_only_sub_decile_within_top_j": 9128,
+          "sub_decile_listers": 12798,
+          "sub_decile_listers_within_top_j": 9128,
+          "total_listers": 15507
+        }
+      }
+    }
+  },
+  "design_time": true,
+  "probe": "CB-P1",
+  "top_j": 50
+}

@@ -1,8 +1,14 @@
 # Handoff — graph rebuild Track A executed, 2026-07-29
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-07-29-HANDOFF-reciprocity.md`](2026-07-29-HANDOFF-reciprocity.md) on next actions.
-It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+**Role: ⚠ SUPERSEDED 2026-07-30 on next actions** by
+[`2026-07-30-HANDOFF-track-b-design.md`](2026-07-30-HANDOFF-track-b-design.md) — the
+Track B work this handoff named was designed through its `CB-4` seam, **and the owner
+re-scoped it on the way**: cap-**rule** selection, not the k-only simulation described
+below. Everything this document records about Track A remains accurate. *(Original
+role: ACTIVE, the CURRENT handoff. Supersedes
+[`2026-07-29-HANDOFF-reciprocity.md`](2026-07-29-HANDOFF-reciprocity.md) on next
+actions.)* It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
+which owns it.
 
 **This is a seam handoff, not mid-flight.** The plan was written and executed to its last
 task in one session; every gate was reached and read. Nothing is in flight, no subagent is
