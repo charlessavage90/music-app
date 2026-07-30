@@ -141,6 +141,33 @@ def test_names_and_disambiguation_are_harvested_from_neighbour_rows(tmp_path, co
     assert graph.disambiguations[graph.mbids.index(A)] == "UK band"
 
 
+ALG_B = (
+    "session_based_days_7500_session_300_contribution_3"
+    "_threshold_10_limit_100_filter_True_skip_30"
+)
+
+
+def test_build_reads_only_its_own_algorithms_subtree(tmp_path, config):
+    # RC-H3, build side. The flat tree (production) and the ALG-B sub-tree
+    # sit in one archive; each build must see only its own, and the flat
+    # build must not sweep the sub-tree in through the shared prefix.
+    algb_config = BuilderConfig(requests_per_second=1000.0, algorithm=ALG_B)
+    source = ListenBrainzSource(config)
+    archive = LocalArchive(tmp_path / "archive")
+    _seed_archive(archive, source, [A, B, C])  # flat: A<->B<->C
+    # ALG-B tree: A and B only, so C was never crawled under ALG-B.
+    for mbid in (A, B):
+        archive.put(f"similar/{source.name}/{ALG_B}/{mbid}.json", _similar_body(mbid))
+
+    flat_graph = build_from_archive(config, archive, source)
+    algb_graph = build_from_archive(
+        algb_config, archive, ListenBrainzSource(algb_config)
+    )
+
+    assert sorted(flat_graph.mbids) == sorted([A, B, C])
+    assert C not in algb_graph.mbids
+
+
 def test_uncrawled_neighbours_are_not_nodes(tmp_path, config):
     # C is listed as B's neighbour but was never crawled, so it has no
     # out-edges and cannot be routed through. It must not become a node, and

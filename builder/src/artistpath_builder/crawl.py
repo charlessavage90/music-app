@@ -18,7 +18,7 @@ from collections.abc import Callable
 from pathlib import Path
 
 from artistpath_builder.archive import RawArchive
-from artistpath_builder.config import BuilderConfig
+from artistpath_builder.config import PRODUCTION_ALGORITHM, BuilderConfig
 from artistpath_builder.sources.base import SimilaritySource
 
 logger = logging.getLogger(__name__)
@@ -94,7 +94,15 @@ class Crawler:
         self.discovered: set[str] = state["discovered"]
 
     def similar_key(self, mbid: str) -> str:
-        return f"similar/{self.source.name}/{mbid}.json"
+        # The production archive predates algorithm-scoped keys and keeps its
+        # flat layout — 75,000 responses, irreplaceable, and every existing
+        # script finds them there. Every OTHER algorithm gets its own
+        # sub-tree, so two algorithms' responses can never be mistaken for one
+        # another (RC-H3: the key did not encode the algorithm, so a re-crawl
+        # aimed at the existing archive would silently return production data).
+        if self.config.algorithm == PRODUCTION_ALGORITHM:
+            return f"similar/{self.source.name}/{mbid}.json"
+        return f"similar/{self.source.name}/{self.config.algorithm}/{mbid}.json"
 
     def crawl(self, bootstrap_mbids: list[str]) -> None:
         queue: deque[str] = deque()
@@ -191,6 +199,17 @@ class Crawler:
         if not self.checkpoint_path.is_file():
             return {"done": set(), "discovered": set()}
         state = json.loads(self.checkpoint_path.read_text())
+        # Every checkpoint written before the algorithm was selectable
+        # predates this field, so a missing one means the production
+        # algorithm rather than a refusal.
+        stored = state.get("algorithm", PRODUCTION_ALGORITHM)
+        if stored != self.config.algorithm:
+            raise ValueError(
+                f"checkpoint {self.checkpoint_path} was written by a crawl "
+                f"under {stored!r}; refusing to resume it under "
+                f"{self.config.algorithm!r} (RC-H3 — a resumed crawl would "
+                "silently skip every artist the other algorithm finished)"
+            )
         return {
             "done": set(state.get("done", [])),
             "discovered": set(state.get("discovered", [])),
@@ -200,7 +219,11 @@ class Crawler:
         self.checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
         self.checkpoint_path.write_text(
             json.dumps(
-                {"done": sorted(self._done), "discovered": sorted(self.discovered)},
+                {
+                    "algorithm": self.config.algorithm,
+                    "done": sorted(self._done),
+                    "discovered": sorted(self.discovered),
+                },
                 sort_keys=True,
             )
         )

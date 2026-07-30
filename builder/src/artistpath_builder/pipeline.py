@@ -23,7 +23,7 @@ from collections import defaultdict
 import numpy as np
 
 from artistpath_builder.archive import RawArchive
-from artistpath_builder.config import BuilderConfig
+from artistpath_builder.config import PRODUCTION_ALGORITHM, BuilderConfig
 from artistpath_builder.graph import (
     Adjacency,
     Graph,
@@ -119,14 +119,25 @@ def build_from_archive(
     to serve as popularity). Isolated artists cannot be routed and are dropped
     by the largest-component step regardless.
     """
-    prefix = f"similar/{source.name}/"
+    # RC-H3, build side: responses are keyed by algorithm, so a build reads
+    # only the tree its own algorithm wrote. Production keeps the flat layout
+    # (see Crawler.similar_key); every other algorithm has a sub-tree.
+    if config.algorithm == PRODUCTION_ALGORITHM:
+        prefix = f"similar/{source.name}/"
+    else:
+        prefix = f"similar/{source.name}/{config.algorithm}/"
     payloads: dict[str, bytes] = {}
     for key in sorted(archive.keys()):
         if not key.startswith(prefix) or not key.endswith(".json"):
             continue
+        mbid = key[len(prefix) : -len(".json")]
+        if "/" in mbid:
+            # A scoped sub-tree nested under the flat production layout —
+            # another algorithm's data, never this build's.
+            continue
         payload = archive.get(key)
         if payload is not None:
-            payloads[key[len(prefix) : -len(".json")]] = payload
+            payloads[mbid] = payload
 
     known = set(payloads)
 
