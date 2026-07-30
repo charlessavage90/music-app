@@ -23,7 +23,58 @@ the point.**
 
 ---
 
+## N/A — 2026-07-29 (latest) — we measured the price of the new setting; the app is untouched
+
+**Nothing to exercise, and nothing is running** — all four ports were checked and are empty;
+nothing was started on this machine and nothing was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A journey
+you build now is identical to one from this afternoon.**
+
+**What happened, in plain terms — and it is a mixed answer rather than a good or bad one.**
+
+This afternoon's entry said the setting we currently use is *why* journeys between two famous
+artists never dig up anyone obscure, and that switching would mean rebuilding the whole map. It
+also flagged one worry: the promising setting seemed to offer *fewer* suggestions for artists
+who are already obscure. **That worry was the thing to check before spending four and a quarter
+hours, and it checks out badly.**
+
+- **Under the new setting, nearly half of obscure artists would end up with too few
+  connections to appear in the middle of a journey at all** — up from about one in seven today.
+  Ten of the forty obscure artists we tested came back with **no suggestions whatsoever**.
+- **The reason is supply, not rejection.** The new setting simply offers an obscure artist
+  fewer artists to connect to — roughly half as many. The connections it does offer actually
+  hold up *better* than today's. So this is not something that could be tuned away.
+- **And as things stand it would not even build.** The map has a safety check that refuses to
+  publish if certain well-known artists go missing. Under the new setting **R.E.M. connects to
+  nobody at all**, along with Pixies, The xx and PJ Harvey — so the check would stop it. That
+  is a fixable engineering problem, not a dead end, but it is real work that nobody had costed.
+
+**One thing worth knowing about how this was done, because it went wrong in our favour.** The
+first tool built for this job could not answer the question — it could only reach famous
+artists, when the question was about obscure ones. That was caught by testing the tool before
+trusting it, which cost about twenty minutes and saved an hour of fetching plus a wrong answer.
+The replacement was cheaper anyway.
+
+**Also honest about a mistake in our own measurement:** the first version of the scoring quietly
+skipped the very artists that were worst affected, which made the problem look about half as bad
+as it is. Both numbers are recorded side by side rather than just the corrected one.
+
+**None of this decides anything.** Whether to rebuild the map is your call and it is still
+parked. What has changed is that its price is now measured instead of guessed.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-29-reciprocity-execution-log.md`.*
+
 ## N/A — 2026-07-29 (later) — we found out why famous journeys stay famous; the app is untouched
+<!-- "(latest)" stripped 2026-07-29 (latest): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
+
 
 **Nothing to exercise, and nothing is running** — all four ports were checked and are empty;
 nothing was started on this machine and nothing was left behind. No routing, no graph, no

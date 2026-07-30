@@ -1,0 +1,343 @@
+{
+  "rc_p1": {
+    "seeds": 40,
+    "seeds_algb_returned_nothing": 10,
+    "pre_registered_seeds": 30,
+    "share_below_2_production": 0.15,
+    "share_below_2_algb": 0.475,
+    "delta_points": 32.5,
+    "median_d_hat_production": 5.0,
+    "median_d_hat_algb": 2.0,
+    "ratio": 0.4,
+    "pre_registered_delta_points": 16.67,
+    "pre_registered_ratio": 0.45
+  },
+  "rc_p2": {
+    "collapsed_top_0.1pct": [
+      {
+        "name": "R.E.M.",
+        "d_hat_algb": 0.0,
+        "d_hat_production": 50.0,
+        "is_canonical": true
+      },
+      {
+        "name": "Pixies",
+        "d_hat_algb": 0.0,
+        "d_hat_production": 45.0,
+        "is_canonical": false
+      },
+      {
+        "name": "The xx",
+        "d_hat_algb": 0.0,
+        "d_hat_production": 30.0,
+        "is_canonical": false
+      },
+      {
+        "name": "PJ Harvey",
+        "d_hat_algb": 0.0,
+        "d_hat_production": 10.0,
+        "is_canonical": false
+      }
+    ],
+    "canonical_names_collapsed": [
+      "R.E.M."
+    ],
+    "min_d_hat_over_top_25_of_sample": 0.0,
+    "famous_min_degree_floor": 8,
+    "would_fail_min_degree_clause": true
+  },
+  "rc_p3": {
+    "candidate_in_adopted_artifact": {
+      "sampled": 337,
+      "reciprocated": 208,
+      "rate": 0.6172
+    },
+    "candidate_absent_from_artifact": {
+      "sampled": 63,
+      "reciprocated": 39,
+      "rate": 0.619
+    }
+  },
+  "below_median_rows": [
+    {
+      "mbid": "00d3c986-5e57-40d1-beed-eb1e8f6b6ca4",
+      "name": "The Button Down Brass",
+      "prod": 14.399999999999999,
+      "algb": 10.799999999999999,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "100d17ac-0e19-4aa2-8020-bfe50b6effaa",
+      "name": "Factice Factory",
+      "prod": 3.0,
+      "algb": 2.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "136b7b54-76d4-47a9-8fcb-d164303f60af",
+      "name": "Fifthpower",
+      "prod": 1.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "1a47df76-6357-449b-9c0b-941c19f339c2",
+      "name": "KAKATO",
+      "prod": 1.0,
+      "algb": 0.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "1edd4a0d-7688-4bfb-8de7-df400103a623",
+      "name": "The New Jazz Orchestra",
+      "prod": 10.8,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "22cd1b33-903c-494a-81d1-d53a5c26cde3",
+      "name": "Section X",
+      "prod": 6.6,
+      "algb": 5.6000000000000005,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "29297f58-bdfd-4042-b58e-74c1f810bf86",
+      "name": "Uncle Nephew",
+      "prod": 1.0,
+      "algb": 2.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "2a2ef92c-4aa3-485e-8baf-92551a62cd22",
+      "name": "\u9cf3\u51f0\u706b\u51db",
+      "prod": 14.4,
+      "algb": 3.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "2a6ab7a6-0e12-4b8e-ba14-6ccc12eb75ee",
+      "name": "JJT",
+      "prod": 5.0,
+      "algb": 5.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "2df67f25-ce0c-499a-959b-3b939f45ce12",
+      "name": "SoGreatandPowerful",
+      "prod": 11.4,
+      "algb": 2.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "33a23cda-043d-484c-9228-09317be1ebe5",
+      "name": "Titi DJ",
+      "prod": 18.9,
+      "algb": 17.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "3dca355e-6fdf-4615-8949-95469772e6e6",
+      "name": "Freddy Mellow",
+      "prod": 8.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "3e6bdf2a-cdda-46ac-a941-07c3397626c4",
+      "name": "Silly Fools",
+      "prod": 3.0,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "43b4fa60-de39-4b4f-b501-a7afec5092f2",
+      "name": "Cosmos Sound Club",
+      "prod": 12.9,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "4fc8df81-1d7b-4728-95b1-970ac3de3956",
+      "name": "Local Daddies",
+      "prod": 1.0,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "5254cd9f-4684-4a5a-8644-08c2567a1bb2",
+      "name": "David Hirschfelder",
+      "prod": 5.0,
+      "algb": 10.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "60f1712d-d510-467f-bd17-2e7b95e1ec57",
+      "name": "BSoul",
+      "prod": 2.0,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "83a8cc6f-9622-49ad-956e-58c59935f7be",
+      "name": "Ipman",
+      "prod": 7.5,
+      "algb": 4.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "848a1f71-c8b5-458b-8b05-a20ea1e962de",
+      "name": "UTFO",
+      "prod": 7.0,
+      "algb": 2.5,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "86a90c46-1a2e-434f-af42-f4903651d0bc",
+      "name": "Vanbur",
+      "prod": 4.8,
+      "algb": 2.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "8e8bb979-baec-4312-8f2b-980e03257eb0",
+      "name": "Bing Ji Ling",
+      "prod": 8.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "8e986c66-2429-49a2-a32b-4ad3de114929",
+      "name": "\u30b5\u30b5\u30ad\u30c8\u30e2\u30b3",
+      "prod": 4.8,
+      "algb": 3.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "93f87f3d-4351-4fa2-abf1-80e86fb499b2",
+      "name": "Kenoma",
+      "prod": 3.8000000000000003,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "a11e90f6-85ba-4f7d-afec-d223f46e1734",
+      "name": "Schubert",
+      "prod": 2.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "a8711b29-da36-4ad6-8ebf-a54023c22ed2",
+      "name": "The Cobra",
+      "prod": 0.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "b23a7841-0069-4f65-9c41-202b70e7298a",
+      "name": "CIRCRUSH",
+      "prod": 4.0,
+      "algb": 3.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "b611904b-b972-4e30-8861-11b1d7f3f48f",
+      "name": "Besv\u00e4rjelsen",
+      "prod": 8.4,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "b9c29df4-3f1d-4b0b-99bf-52b5695244ad",
+      "name": "Felix Hagan & The Family",
+      "prod": 8.8,
+      "algb": 4.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "ba9d597c-4424-40a9-85b6-e8b115dadb12",
+      "name": "Poynt Blanc",
+      "prod": 2.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "cad5cddc-e94c-4012-b65b-161cb634aad1",
+      "name": "Me and My Friends",
+      "prod": 6.6,
+      "algb": 3.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "cba76057-c7d0-4ab9-a104-eb2ba4a6ecca",
+      "name": "Jackal",
+      "prod": 11.600000000000001,
+      "algb": 9.600000000000001,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "dc73d450-5202-4679-9938-422ecc8413d5",
+      "name": "Monoque",
+      "prod": 5.0,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "ea34239e-4e43-48eb-91db-55688ca00ff3",
+      "name": "Doo Wop",
+      "prod": 8.4,
+      "algb": 4.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "eca4a8fb-7068-441d-9e83-35dfa70e3d9e",
+      "name": "Issa Bamba",
+      "prod": 1.0,
+      "algb": 2.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "f1e26e91-41d2-4200-b291-2a3fe2ca2832",
+      "name": "\u306b\u304a",
+      "prod": 2.4000000000000004,
+      "algb": 2.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "f22a4144-58d4-4bb5-971d-e6818f15cd07",
+      "name": "Lab Frequency",
+      "prod": 4.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    },
+    {
+      "mbid": "fa088d46-39c8-4ec5-a2f9-73e4e119f910",
+      "name": "Golshifteh Farahani",
+      "prod": 2.0,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "fa93c17e-ddb8-4747-8164-7b05d42edaaf",
+      "name": "Drew Seeley",
+      "prod": 5.0,
+      "algb": 4.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "fd99ed3e-479b-4071-8e88-b024f47c5754",
+      "name": "Napalm",
+      "prod": 3.0,
+      "algb": 1.0,
+      "algb_returned_nothing": false
+    },
+    {
+      "mbid": "ff19a8c3-5972-4273-92cb-f76c1e58c49f",
+      "name": "Tee Flowers",
+      "prod": 6.0,
+      "algb": 0.0,
+      "algb_returned_nothing": true
+    }
+  ]
+}

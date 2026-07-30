@@ -1,0 +1,3696 @@
+{
+  "governing_document": "docs/superpowers/specs/2026-07-29-reciprocity-sampling-preregistration.md",
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "rc_g1": {
+    "compared": 200,
+    "differing": 0,
+    "share": 0.0,
+    "threshold_share": 0.1,
+    "member_tolerance": 5,
+    "fired": false
+  },
+  "placeholders_dropped_from_sample": {
+    "RC-ARM-P": 0,
+    "RC-ARM-B": 0
+  },
+  "sampled_candidates_unresolved": {
+    "RC-ARM-P": 0,
+    "RC-ARM-B": 0
+  },
+  "bands": {
+    "top_0.1pct": {
+      "plain": "the very most famous artists",
+      "seeds_in_both_arms": 40,
+      "rc_g2_floor": 15,
+      "readable": true,
+      "RC-ARM-P": {
+        "median_n_cand": 50.0,
+        "mean_recip": 0.775,
+        "median_d_hat": 45.0,
+        "share_d_hat_below_2": 0.0
+      },
+      "RC-ARM-B": {
+        "median_n_cand": 50.0,
+        "mean_recip": 0.6175,
+        "median_d_hat": 35.0,
+        "share_d_hat_below_2": 0.1
+      }
+    },
+    "top_1pct_below_0.1pct": {
+      "plain": "very famous artists",
+      "seeds_in_both_arms": 40,
+      "rc_g2_floor": 15,
+      "readable": true,
+      "RC-ARM-P": {
+        "median_n_cand": 50.0,
+        "mean_recip": 0.6375,
+        "median_d_hat": 30.0,
+        "share_d_hat_below_2": 0.0
+      },
+      "RC-ARM-B": {
+        "median_n_cand": 50.0,
+        "mean_recip": 0.5625,
+        "median_d_hat": 30.0,
+        "share_d_hat_below_2": 0.025
+      }
+    },
+    "top_decile_below_1pct": {
+      "plain": "well-known artists",
+      "seeds_in_both_arms": 40,
+      "rc_g2_floor": 15,
+      "readable": true,
+      "RC-ARM-P": {
+        "median_n_cand": 50.0,
+        "mean_recip": 0.54,
+        "median_d_hat": 25.0,
+        "share_d_hat_below_2": 0.025
+      },
+      "RC-ARM-B": {
+        "median_n_cand": 50.0,
+        "mean_recip": 0.51,
+        "median_d_hat": 25.0,
+        "share_d_hat_below_2": 0.05
+      }
+    },
+    "pctl_50_to_90": {
+      "plain": "moderately known artists",
+      "seeds_in_both_arms": 39,
+      "rc_g2_floor": 15,
+      "readable": true,
+      "RC-ARM-P": {
+        "median_n_cand": 50,
+        "mean_recip": 0.4667,
+        "median_d_hat": 20.0,
+        "share_d_hat_below_2": 0.0513
+      },
+      "RC-ARM-B": {
+        "median_n_cand": 50,
+        "mean_recip": 0.4615,
+        "median_d_hat": 20.0,
+        "share_d_hat_below_2": 0.0513
+      }
+    },
+    "below_median": {
+      "plain": "obscure artists",
+      "seeds_in_both_arms": 30,
+      "rc_g2_floor": 30,
+      "readable": true,
+      "RC-ARM-P": {
+        "median_n_cand": 13.0,
+        "mean_recip": 0.4505,
+        "median_d_hat": 5.0,
+        "share_d_hat_below_2": 0.1333
+      },
+      "RC-ARM-B": {
+        "median_n_cand": 5.5,
+        "mean_recip": 0.5545,
+        "median_d_hat": 2.25,
+        "share_d_hat_below_2": 0.3
+      }
+    }
+  },
+  "criteria": {
+    "RC-C1": {
+      "plain": "how many obscure artists end up with too few connections to appear in the middle of a journey at all",
+      "share_below_2_production": 0.1333,
+      "share_below_2_algb": 0.3,
+      "delta_points": 16.67,
+      "verdict": "material"
+    },
+    "RC-C2": {
+      "plain": "whether the typical obscure artist ends up with far fewer connections under the new setting",
+      "median_d_hat_production": 5.0,
+      "median_d_hat_algb": 2.25,
+      "ratio": 0.45,
+      "verdict": "material"
+    },
+    "RC-C3": {
+      "plain": "whether famous artists keep enough connections for the build to accept the result at all",
+      "median_d_hat_algb_top_bands": 30.0,
+      "floor": 25.0,
+      "verdict": "passes"
+    },
+    "RC-C4": {
+      "plain": "whether the new setting offers fewer candidates, or the same number but fewer that point back",
+      "per_band": {
+        "top_0.1pct": {
+          "RC-ARM-P": {
+            "median_n_cand": 50.0,
+            "mean_recip": 0.775
+          },
+          "RC-ARM-B": {
+            "median_n_cand": 50.0,
+            "mean_recip": 0.6175
+          }
+        },
+        "top_1pct_below_0.1pct": {
+          "RC-ARM-P": {
+            "median_n_cand": 50.0,
+            "mean_recip": 0.6375
+          },
+          "RC-ARM-B": {
+            "median_n_cand": 50.0,
+            "mean_recip": 0.5625
+          }
+        },
+        "top_decile_below_1pct": {
+          "RC-ARM-P": {
+            "median_n_cand": 50.0,
+            "mean_recip": 0.54
+          },
+          "RC-ARM-B": {
+            "median_n_cand": 50.0,
+            "mean_recip": 0.51
+          }
+        },
+        "pctl_50_to_90": {
+          "RC-ARM-P": {
+            "median_n_cand": 50,
+            "mean_recip": 0.4667
+          },
+          "RC-ARM-B": {
+            "median_n_cand": 50,
+            "mean_recip": 0.4615
+          }
+        },
+        "below_median": {
+          "RC-ARM-P": {
+            "median_n_cand": 13.0,
+            "mean_recip": 0.4505
+          },
+          "RC-ARM-B": {
+            "median_n_cand": 5.5,
+            "mean_recip": 0.5545
+          }
+        }
+      }
+    }
+  },
+  "per_seed": {
+    "RC-ARM-P": {
+      "005795e2-9ee7-46f3-8e61-8c0e4b3d760e": {
+        "stratum": "pctl_50_to_90",
+        "name": "Steven Sharp Nelson",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "00d3c986-5e57-40d1-beed-eb1e8f6b6ca4": {
+        "stratum": "below_median",
+        "name": "The Button Down Brass",
+        "n_cand": 48,
+        "recip": 0.3,
+        "d_hat": 14.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "02e5ab4c-7391-4614-ab0f-961b155c5887": {
+        "stratum": "pctl_50_to_90",
+        "name": "Les Gordon",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "050322b5-7269-4d7d-83af-8dccd6876cdc": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Highway Superstar",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "0bd6ba12-1568-4b05-97e2-ec4aab47af0a": {
+        "stratum": "pctl_50_to_90",
+        "name": "Kill the Client",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "0bf2ecce-e370-43ab-b728-7247e98f9ac0": {
+        "stratum": "pctl_50_to_90",
+        "name": "Lily McKenzie",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "100d17ac-0e19-4aa2-8020-bfe50b6effaa": {
+        "stratum": "below_median",
+        "name": "Factice Factory",
+        "n_cand": 6,
+        "recip": 0.5,
+        "d_hat": 3.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "10df7475-e4cd-4f9b-aa05-effd1b95992b": {
+        "stratum": "pctl_50_to_90",
+        "name": "Harlem",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "136b7b54-76d4-47a9-8fcb-d164303f60af": {
+        "stratum": "below_median",
+        "name": "Fifthpower",
+        "n_cand": 1,
+        "recip": 1.0,
+        "d_hat": 1.0,
+        "sampled_usable": 1,
+        "sampled_exhaustive": true
+      },
+      "19b3c333-bfc3-4915-ace8-cdb4a5a79a9b": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Delroy Wilson",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "1a47df76-6357-449b-9c0b-941c19f339c2": {
+        "stratum": "below_median",
+        "name": "KAKATO",
+        "n_cand": 3,
+        "recip": 0.3333,
+        "d_hat": 1.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "1d80c978-409a-4024-961f-da0c7e3b1095": {
+        "stratum": "top_decile_below_1pct",
+        "name": "TrySail",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "1edd4a0d-7688-4bfb-8de7-df400103a623": {
+        "stratum": "below_median",
+        "name": "The New Jazz Orchestra",
+        "n_cand": 12,
+        "recip": 0.9,
+        "d_hat": 10.8,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "1f0f167a-9ff7-4a0f-ac1a-5b36d44738dc": {
+        "stratum": "pctl_50_to_90",
+        "name": "Gillian Hills",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "22cd1b33-903c-494a-81d1-d53a5c26cde3": {
+        "stratum": "below_median",
+        "name": "Section X",
+        "n_cand": 22,
+        "recip": 0.3,
+        "d_hat": 6.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "22d8f80a-6e2d-41cf-be36-104f5192ffcf": {
+        "stratum": "pctl_50_to_90",
+        "name": "Fu\u2010Schnickens",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "242b5585-a436-4105-85cc-7ec195e96d26": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Synkro",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "26eaac94-68f0-482c-9479-931190092457": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Joep Beving",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "29297f58-bdfd-4042-b58e-74c1f810bf86": {
+        "stratum": "below_median",
+        "name": "Uncle Nephew",
+        "n_cand": 5,
+        "recip": 0.2,
+        "d_hat": 1.0,
+        "sampled_usable": 5,
+        "sampled_exhaustive": true
+      },
+      "2a2ef92c-4aa3-485e-8baf-92551a62cd22": {
+        "stratum": "below_median",
+        "name": "\u9cf3\u51f0\u706b\u51db",
+        "n_cand": 18,
+        "recip": 0.8,
+        "d_hat": 14.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "2a6ab7a6-0e12-4b8e-ba14-6ccc12eb75ee": {
+        "stratum": "below_median",
+        "name": "JJT",
+        "n_cand": 8,
+        "recip": 0.625,
+        "d_hat": 5.0,
+        "sampled_usable": 8,
+        "sampled_exhaustive": true
+      },
+      "2aef84c4-6b8a-460c-80ab-7ae62d60ad83": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Rin",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "2df67f25-ce0c-499a-959b-3b939f45ce12": {
+        "stratum": "below_median",
+        "name": "SoGreatandPowerful",
+        "n_cand": 19,
+        "recip": 0.6,
+        "d_hat": 11.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "2f253ad2-e391-48c3-a79c-f44b9a8a0981": {
+        "stratum": "top_decile_below_1pct",
+        "name": "ColdWorld",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3007f845-ebf8-4882-83e7-9e22d51ed732": {
+        "stratum": "pctl_50_to_90",
+        "name": "Entertainment System",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "309c62ba-7a22-4277-9f67-4a162526d18a": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Beck",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "33a23cda-043d-484c-9228-09317be1ebe5": {
+        "stratum": "below_median",
+        "name": "Titi DJ",
+        "n_cand": 27,
+        "recip": 0.7,
+        "d_hat": 18.9,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "35508fc3-7da2-4adb-986f-2c6b79117d21": {
+        "stratum": "pctl_50_to_90",
+        "name": "Diane Charlemagne",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3b083ea2-1aee-46d7-bd2a-1bc60f6169ec": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Arcis",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3b4e9c28-f7b8-459d-ac48-e790dd9249c5": {
+        "stratum": "pctl_50_to_90",
+        "name": "The Teknoist",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3dca355e-6fdf-4615-8949-95469772e6e6": {
+        "stratum": "below_median",
+        "name": "Freddy Mellow",
+        "n_cand": 10,
+        "recip": 0.8,
+        "d_hat": 8.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": true
+      },
+      "3e6bdf2a-cdda-46ac-a941-07c3397626c4": {
+        "stratum": "below_median",
+        "name": "Silly Fools",
+        "n_cand": 6,
+        "recip": 0.5,
+        "d_hat": 3.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "43b4fa60-de39-4b4f-b501-a7afec5092f2": {
+        "stratum": "below_median",
+        "name": "Cosmos Sound Club",
+        "n_cand": 43,
+        "recip": 0.3,
+        "d_hat": 12.9,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "447cbd23-3588-4884-8baa-f513cac1d14a": {
+        "stratum": "pctl_50_to_90",
+        "name": "JEREMIAH KANE",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "4fc8df81-1d7b-4728-95b1-970ac3de3956": {
+        "stratum": "below_median",
+        "name": "Local Daddies",
+        "n_cand": 1,
+        "recip": 1.0,
+        "d_hat": 1.0,
+        "sampled_usable": 1,
+        "sampled_exhaustive": true
+      },
+      "5254cd9f-4684-4a5a-8644-08c2567a1bb2": {
+        "stratum": "below_median",
+        "name": "David Hirschfelder",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5441c29d-3602-4898-b1a1-b77fa23b8e50": {
+        "stratum": "top_0.1pct",
+        "name": "David Bowie",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "55ef024a-6cc0-49ed-8ce2-2e12193c0f46": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Survivor",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "58d7914a-4322-48b2-829f-9da1bf358629": {
+        "stratum": "pctl_50_to_90",
+        "name": "A\u30fbZU\u30fbNA",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "59e22818-9da1-42be-bdd6-b1124b4a67b9": {
+        "stratum": "pctl_50_to_90",
+        "name": "Aaron Tippin",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5b11f4ce-a62d-471e-81fc-a69a8278c7da": {
+        "stratum": "top_0.1pct",
+        "name": "Nirvana",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5cbef01b-cc35-4f52-af7b-d0df0c4f61b9": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Sonic Youth",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5cc03b39-9b7d-43d6-a1d9-321c2e3aec50": {
+        "stratum": "pctl_50_to_90",
+        "name": "Dead Fish",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "606bf117-494f-4864-891f-09d63ff6aa4b": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Rise Against",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "60f1712d-d510-467f-bd17-2e7b95e1ec57": {
+        "stratum": "below_median",
+        "name": "BSoul",
+        "n_cand": 9,
+        "recip": 0.2222,
+        "d_hat": 2.0,
+        "sampled_usable": 9,
+        "sampled_exhaustive": true
+      },
+      "62dc94cc-f611-4345-87cb-b914796a4a45": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Hooverphonic",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "63f38f77-9aae-4e1b-8947-aca325b7759f": {
+        "stratum": "pctl_50_to_90",
+        "name": "Lazlo Bane",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "656d5d90-e05d-4265-adcc-afb27d16a5c6": {
+        "stratum": "pctl_50_to_90",
+        "name": "Hunter Hunted",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab": {
+        "stratum": "top_0.1pct",
+        "name": "Metallica",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "66c662b6-6e2f-4930-8610-912e24c63ed1": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "AC/DC",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "677cb360-fd68-4a19-9a9d-e710b9204ba8": {
+        "stratum": "pctl_50_to_90",
+        "name": "Croatian Amor",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "6805e4d5-f550-40fe-b731-05dc8229e74b": {
+        "stratum": "top_decile_below_1pct",
+        "name": "HEALTH",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04": {
+        "stratum": "top_0.1pct",
+        "name": "Weezer",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7364dea6-ca9a-48e3-be01-b44ad0d19897": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "a\u2010ha",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "73ed3b2f-6d5e-46c6-8f75-952c383f6b33": {
+        "stratum": "top_decile_below_1pct",
+        "name": "GosT",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "751adfe4-6e40-4ab4-866c-ed14f5087d76": {
+        "stratum": "pctl_50_to_90",
+        "name": "Evan Call",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7527f6c2-d762-4b88-b5e2-9244f1e34c46": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Deftones",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "753a1564-aaef-4d39-bc68-4a8d5e328cf7": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Miike Snow",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "796bc8a9-efd1-43e8-bacf-5eba68835928": {
+        "stratum": "pctl_50_to_90",
+        "name": "PEDRO SAMPAIO",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7aeca08c-8b87-4d85-8cc9-6189a946d2e4": {
+        "stratum": "pctl_50_to_90",
+        "name": "Fear of Men",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7bd66c18-cb33-49aa-9279-140acedbdb49": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Ty Dolla $ign",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7bd92ac9-6b2e-4e88-812a-60499ec60a9d": {
+        "stratum": "pctl_50_to_90",
+        "name": "I Am Kloot",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7c20f558-d664-42bd-b6f1-81acf9dbb72d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "t.A.T.u.",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7dac70fc-4608-4181-b67b-c26ca2dc9d2d": {
+        "stratum": "pctl_50_to_90",
+        "name": "Secrets of the Moon",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7db4af7c-99bd-4d86-9315-5daa053ca0a5": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Pional",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7e35659f-f3bb-4c28-bcf5-47bd5cfa2bca": {
+        "stratum": "top_decile_below_1pct",
+        "name": "The Tallest Man on Earth",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "813a79f0-1878-466a-831b-cec332ba510c": {
+        "stratum": "pctl_50_to_90",
+        "name": "Osvaldo Pugliese",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "83a8cc6f-9622-49ad-956e-58c59935f7be": {
+        "stratum": "below_median",
+        "name": "Ipman",
+        "n_cand": 15,
+        "recip": 0.5,
+        "d_hat": 7.5,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "840179a0-7dc7-49e2-ae26-4737c2b33ef7": {
+        "stratum": "pctl_50_to_90",
+        "name": "The Sherlocks",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "848a1f71-c8b5-458b-8b05-a20ea1e962de": {
+        "stratum": "below_median",
+        "name": "UTFO",
+        "n_cand": 35,
+        "recip": 0.2,
+        "d_hat": 7.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8538e728-ca0b-4321-b7e5-cff6565dd4c0": {
+        "stratum": "top_0.1pct",
+        "name": "Depeche Mode",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "859d0860-d480-4efd-970c-c05d5f1776b8": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Beyonc\u00e9",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "86a90c46-1a2e-434f-af42-f4903651d0bc": {
+        "stratum": "below_median",
+        "name": "Vanbur",
+        "n_cand": 16,
+        "recip": 0.3,
+        "d_hat": 4.8,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "86e736b4-93e2-40ff-9e1c-fb7c63fef5f6": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Barenaked Ladies",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "875203e1-8e58-4b86-8dcb-7190faf411c5": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "J. Cole",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8b9a69ea-b60e-46c8-a1a5-93c56e7e4f35": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Dirtyphonics",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8c32bb01-58a3-453b-8050-8c0620edb0e5": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Stone Temple Pilots",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8d455809-96b3-4bb6-8829-ea4beb580d35": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Phoenix",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8e8bb979-baec-4312-8f2b-980e03257eb0": {
+        "stratum": "below_median",
+        "name": "Bing Ji Ling",
+        "n_cand": 20,
+        "recip": 0.4,
+        "d_hat": 8.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8e986c66-2429-49a2-a32b-4ad3de114929": {
+        "stratum": "below_median",
+        "name": "\u30b5\u30b5\u30ad\u30c8\u30e2\u30b3",
+        "n_cand": 16,
+        "recip": 0.3,
+        "d_hat": 4.8,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8f92558c-2baa-4758-8c38-615519e9deda": {
+        "stratum": "top_0.1pct",
+        "name": "The Clash",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9357482a-9517-456e-b949-e7370e926034": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Poli\u00e7a",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "936addc3-91aa-49de-8ec0-0dc186de151f": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Misfits",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "93f87f3d-4351-4fa2-abf1-80e86fb499b2": {
+        "stratum": "below_median",
+        "name": "Kenoma",
+        "n_cand": 19,
+        "recip": 0.2,
+        "d_hat": 3.8,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "94c89f67-8c6e-4317-8186-8aad506bf2ae": {
+        "stratum": "top_decile_below_1pct",
+        "name": "The Milk Carton Kids",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "965da996-2921-45b7-a19b-b1ca62cc775d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "MAITRO",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "97b226c8-7140-4da3-91ac-15e62e131a81": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Macklemore & Ryan Lewis",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9afee8b9-0cb8-4e85-9d20-329dbf7d8cc5": {
+        "stratum": "pctl_50_to_90",
+        "name": "SIDEPIECE",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9b15ff5e-5bd1-43c2-821d-e31240aad334": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "supercell",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9be5414e-b906-4659-9c59-012ba7f7a154": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Om Unit",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9beb62b2-88db-4cea-801e-162cd344ee53": {
+        "stratum": "top_0.1pct",
+        "name": "Beastie Boys",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9df31471-e54e-43ba-bbe8-38fd94c63dbb": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Shearwater",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9efff43b-3b29-4082-824e-bc82f646f93d": {
+        "stratum": "top_0.1pct",
+        "name": "The Doors",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9f9953f0-68bb-4ce3-aace-2f44c87f0aa3": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Bibio",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9fff2f8a-21e6-47de-a2b8-7f449929d43f": {
+        "stratum": "top_0.1pct",
+        "name": "Drake",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a11e90f6-85ba-4f7d-afec-d223f46e1734": {
+        "stratum": "below_median",
+        "name": "Schubert",
+        "n_cand": 2,
+        "recip": 1.0,
+        "d_hat": 2.0,
+        "sampled_usable": 2,
+        "sampled_exhaustive": true
+      },
+      "a670aad2-7915-49ba-bacf-25f1931098ee": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Mikkel Metal",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a7c4e0b6-dfcc-4808-b84f-71b048be227d": {
+        "stratum": "pctl_50_to_90",
+        "name": "Xibalba",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a8711b29-da36-4ad6-8ebf-a54023c22ed2": {
+        "stratum": "below_median",
+        "name": "The Cobra",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a8982cb0-7886-4e60-9f6a-3b71baa370e6": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Tennis",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a96ac800-bfcb-412a-8a63-0a98df600700": {
+        "stratum": "top_0.1pct",
+        "name": "Modest Mouse",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a972372a-6d87-4b21-8f5c-5ba6e2d640b0": {
+        "stratum": "pctl_50_to_90",
+        "name": "Myka 9",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ab1a3c79-6e4c-4fe3-89d2-0e1d031e594e": {
+        "stratum": "pctl_50_to_90",
+        "name": "Triola",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ada7a83c-e3e1-40f1-93f9-3e73dbc9298a": {
+        "stratum": "top_0.1pct",
+        "name": "Arctic Monkeys",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "adf3879a-e091-4f73-8792-861a7a3e3abe": {
+        "stratum": "pctl_50_to_90",
+        "name": "Don Cherry",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "af37c51c-0790-4a29-b995-456f98a6b8c9": {
+        "stratum": "top_0.1pct",
+        "name": "Vampire Weekend",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b071f9fa-14b0-4217-8e97-eb41da73f598": {
+        "stratum": "top_0.1pct",
+        "name": "The Rolling Stones",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+        "stratum": "top_0.1pct",
+        "name": "The Beatles",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b1cfd018-b393-4632-babc-8a343edb4baa": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Tommy Dorsey",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b23a7841-0069-4f65-9c41-202b70e7298a": {
+        "stratum": "below_median",
+        "name": "CIRCRUSH",
+        "n_cand": 10,
+        "recip": 0.4,
+        "d_hat": 4.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": true
+      },
+      "b611904b-b972-4e30-8861-11b1d7f3f48f": {
+        "stratum": "below_median",
+        "name": "Besv\u00e4rjelsen",
+        "n_cand": 14,
+        "recip": 0.6,
+        "d_hat": 8.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b632d986-88dc-4743-bc61-b0e8058a0d77": {
+        "stratum": "pctl_50_to_90",
+        "name": "Andreas Tilliander",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b6b2bb8d-54a9-491f-9607-7b546023b433": {
+        "stratum": "top_0.1pct",
+        "name": "Pixies",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b7302cd1-8f0d-46ce-b869-872922c4002d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "SoulChef",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b7539c32-53e7-4908-bda3-81449c367da6": {
+        "stratum": "top_0.1pct",
+        "name": "Lana Del Rey",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b7ffd2af-418f-4be2-bdd1-22f8b48613da": {
+        "stratum": "top_0.1pct",
+        "name": "Nine Inch Nails",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b847e9d2-c931-4daf-900c-42c7b2c42e16": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Front Line Assembly",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b9c29df4-3f1d-4b0b-99bf-52b5695244ad": {
+        "stratum": "below_median",
+        "name": "Felix Hagan & The Family",
+        "n_cand": 22,
+        "recip": 0.4,
+        "d_hat": 8.8,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ba0d6274-db14-4ef5-b28d-657ebde1a396": {
+        "stratum": "top_0.1pct",
+        "name": "The Smashing Pumpkins",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ba122363-b404-4a8f-b518-7563a62eb963": {
+        "stratum": "pctl_50_to_90",
+        "name": "Buddy",
+        "n_cand": 41,
+        "recip": 0.2,
+        "d_hat": 8.2,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ba617653-44e4-404f-91cd-f74adce5687d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Baden Powell",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ba9d597c-4424-40a9-85b6-e8b115dadb12": {
+        "stratum": "below_median",
+        "name": "Poynt Blanc",
+        "n_cand": 3,
+        "recip": 0.6667,
+        "d_hat": 2.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "bbc5b66b-d037-4f26-aecf-0b129e7f876a": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Jimmy Eat World",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bc5e6e42-73ba-44fa-a41e-3379402f0429": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Screaming Trees",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bc6c0149-2c01-4fc4-803d-8ff656270442": {
+        "stratum": "pctl_50_to_90",
+        "name": "\u6469\u5929\u697c\u30aa\u30da\u30e9",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bd057a0c-a7b6-47bf-8dc3-45e0efac1798": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "NERO",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bd13909f-1c29-4c27-a874-d4aaf27c5b1a": {
+        "stratum": "top_0.1pct",
+        "name": "Fleetwood Mac",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c0252a1b-0133-46bb-8c4f-cade46349ec3": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Alestorm",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c1aa2ec9-53e7-4d90-8d36-bac75832e986": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "The Supremes",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c296e10c-110a-4103-9e77-47bfebb7fb2e": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Bob Marley & The Wailers",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c33c2065-b1c3-4406-b066-d33a9e2ea71a": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "OneRepublic",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c5c2ea1c-4bde-4f4d-bd0b-47b200bf99d6": {
+        "stratum": "top_0.1pct",
+        "name": "The xx",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c8b03190-306c-4120-bb0b-6f2ebfc06ea9": {
+        "stratum": "top_0.1pct",
+        "name": "The Weeknd",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cad5cddc-e94c-4012-b65b-161cb634aad1": {
+        "stratum": "below_median",
+        "name": "Me and My Friends",
+        "n_cand": 11,
+        "recip": 0.6,
+        "d_hat": 6.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cb67438a-7f50-4f2b-a6f1-2bb2729fd538": {
+        "stratum": "top_0.1pct",
+        "name": "Air",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cba76057-c7d0-4ab9-a104-eb2ba4a6ecca": {
+        "stratum": "below_median",
+        "name": "Jackal",
+        "n_cand": 29,
+        "recip": 0.4,
+        "d_hat": 11.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cbcbb22c-3a8d-46af-b4ba-09c98f0d7931": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "J Dilla",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cbef45a9-7acb-4325-94c9-70081ac8d1b8": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Tycho",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cfe572bf-840f-4bed-934a-f69f4b1e90d4": {
+        "stratum": "top_decile_below_1pct",
+        "name": "White Zombie",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d1115ccf-3c6b-440b-9005-73224ecff98e": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Drop Dead, Gorgeous",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d15721d8-56b4-453d-b506-fc915b14cba2": {
+        "stratum": "top_0.1pct",
+        "name": "The Black Keys",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d27c480c-bda4-45c9-85b4-2af7f9212b16": {
+        "stratum": "pctl_50_to_90",
+        "name": "Bilders",
+        "n_cand": 32,
+        "recip": 0.8,
+        "d_hat": 25.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d30ada67-1b32-4b70-a07e-0f9aaaa345dc": {
+        "stratum": "pctl_50_to_90",
+        "name": "Orup",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d4a1404d-e00c-4bac-b3ba-e3557f6468d6": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Ace of Base",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d5cc67b8-1cc4-453b-96e8-44487acdebea": {
+        "stratum": "top_0.1pct",
+        "name": "Beach House",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d5da1841-9bc8-4813-9f89-11098090148e": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "The Fall",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d5fc2626-48f1-4822-a943-e4180a6f3c66": {
+        "stratum": "pctl_50_to_90",
+        "name": "DJ CLONEPA",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d6285d95-8ee1-4de2-8ceb-ff90098ab1d1": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Yuksek",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d6ed7887-a401-47a8-893c-34b967444d26": {
+        "stratum": "top_0.1pct",
+        "name": "Ramones",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d7661452-b95a-4609-a57f-a0dc5b353dec": {
+        "stratum": "pctl_50_to_90",
+        "name": "JVOX",
+        "n_cand": 46,
+        "recip": 0.5,
+        "d_hat": 23.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d786f59b-1836-4ddb-8393-ab753edbe984": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Clairo",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "da357978-095d-4621-a7ee-2c0f336c5e8a": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Her\u2019s",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "dbc5809c-7837-4b6f-961e-340d64fbb41c": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Bud Powell",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "dc73d450-5202-4679-9938-422ecc8413d5": {
+        "stratum": "below_median",
+        "name": "Monoque",
+        "n_cand": 6,
+        "recip": 0.8333,
+        "d_hat": 5.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "dd0ecd9d-ef3c-4eff-bd6a-79cf8b2627cb": {
+        "stratum": "pctl_50_to_90",
+        "name": "Black Star Liner",
+        "n_cand": 42,
+        "recip": 0.7,
+        "d_hat": 29.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "dd564de7-8f62-4747-8246-11c1af876a54": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Jennifer Thomas",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e1e05cce-3922-44e1-8f20-015abe5e309d": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Social Distortion",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e21857d5-3256-4547-afb3-4b6ded592596": {
+        "stratum": "top_0.1pct",
+        "name": "Gorillaz",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e28fdaf6-022d-4a34-9d1b-d3a560573a14": {
+        "stratum": "pctl_50_to_90",
+        "name": "Ingrid Lucia and The Flying Neutrinos",
+        "n_cand": 33,
+        "recip": 0.9,
+        "d_hat": 29.7,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e3214827-bd09-4d53-a88c-893d61556352": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Zaz",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e390d54f-92f0-4039-9dd3-e8eac130b4c0": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Nicola Conte",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e3cb4543-210f-499a-b0d1-3882c312dfb9": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Rainbow",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e4a51f17-a57b-47b1-b37b-f552d0f8e9e6": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Travis Scott",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e54be6b7-5c26-4b47-bb3f-c137429b9b55": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Sara Bareilles",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e54e065f-0ce6-4779-9a9a-afd7b997471f": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Less Than Jake",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e57f0cac-4f56-473c-8d7e-d93f753fd586": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Steve Miller Band",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e5d928e1-b020-4dd8-9497-7aaee1b337bd": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Nadia Ali",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e795e03d-b5d5-4a5f-834d-162cfb308a2c": {
+        "stratum": "top_0.1pct",
+        "name": "PJ Harvey",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e7ee5f13-baf5-4a87-b58b-f871c137d4f5": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Julie London",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e852986c-8ffd-45e3-9934-554612569c8b": {
+        "stratum": "pctl_50_to_90",
+        "name": "Baby Smoove",
+        "n_cand": 41,
+        "recip": 0.3,
+        "d_hat": 12.3,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ea34239e-4e43-48eb-91db-55688ca00ff3": {
+        "stratum": "below_median",
+        "name": "Doo Wop",
+        "n_cand": 21,
+        "recip": 0.4,
+        "d_hat": 8.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ea4dfa26-f633-4da6-a52a-f49ea4897b58": {
+        "stratum": "top_0.1pct",
+        "name": "R.E.M.",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ea7260de-e1b1-43f1-bb11-f78274a36308": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Lost Frequencies",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "eab76c9f-ff91-4431-b6dd-3b976c598020": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Infected Mushroom",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ebfc1398-8d96-47e3-82c3-f782abcdb13d": {
+        "stratum": "top_0.1pct",
+        "name": "The Beach Boys",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "eca4a8fb-7068-441d-9e83-35dfa70e3d9e": {
+        "stratum": "below_median",
+        "name": "Issa Bamba",
+        "n_cand": 3,
+        "recip": 0.3333,
+        "d_hat": 1.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "f181961b-20f7-459e-89de-920ef03c7ed0": {
+        "stratum": "top_0.1pct",
+        "name": "The Strokes",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f1e26e91-41d2-4200-b291-2a3fe2ca2832": {
+        "stratum": "below_median",
+        "name": "\u306b\u304a",
+        "n_cand": 12,
+        "recip": 0.2,
+        "d_hat": 2.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f205743d-4441-471d-a3af-66f584738e29": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Skip James",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f22942a1-6f70-4f48-866e-238cb2308fbd": {
+        "stratum": "top_0.1pct",
+        "name": "Aphex Twin",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f22a4144-58d4-4bb5-971d-e6818f15cd07": {
+        "stratum": "below_median",
+        "name": "Lab Frequency",
+        "n_cand": 5,
+        "recip": 0.8,
+        "d_hat": 4.0,
+        "sampled_usable": 5,
+        "sampled_exhaustive": true
+      },
+      "f27ec8db-af05-4f36-916e-3d57f91ecf5e": {
+        "stratum": "top_0.1pct",
+        "name": "Michael Jackson",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f338cde2-7cc4-49e0-83e4-a0ac1a3b6d46": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Ben Gold",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f4a31f0a-51dd-4fa7-986d-3095c40c5ed9": {
+        "stratum": "top_0.1pct",
+        "name": "Evanescence",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387": {
+        "stratum": "top_0.1pct",
+        "name": "Ariana Grande",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f59c5520-5f46-4d2c-b2c4-822eabf53419": {
+        "stratum": "top_0.1pct",
+        "name": "Linkin Park",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f5eea9e8-68f4-403b-9ea3-f1c2dce5b6fc": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Geoxor",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6": {
+        "stratum": "top_0.1pct",
+        "name": "Tyler, The Creator",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f6f2326f-6b25-4170-b89d-e235b25508e8": {
+        "stratum": "top_0.1pct",
+        "name": "Sigur R\u00f3s",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f7441bc7-d7de-4813-a2fc-31a4033d396d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Gracie Abrams",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f82f3a3e-29c2-42ca-b589-bc5dc210fa9e": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "The Kooks",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f89be4a9-ce23-4f95-9a20-005ff891db0b": {
+        "stratum": "pctl_50_to_90",
+        "name": "Mark Franklin",
+        "n_cand": 17,
+        "recip": 0.8,
+        "d_hat": 13.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f90e8b26-9e52-4669-a5c9-e28529c47894": {
+        "stratum": "top_0.1pct",
+        "name": "Snoop Dogg",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "fa088d46-39c8-4ec5-a2f9-73e4e119f910": {
+        "stratum": "below_median",
+        "name": "Golshifteh Farahani",
+        "n_cand": 3,
+        "recip": 0.6667,
+        "d_hat": 2.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "fa93c17e-ddb8-4747-8164-7b05d42edaaf": {
+        "stratum": "below_median",
+        "name": "Drew Seeley",
+        "n_cand": 10,
+        "recip": 0.5,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": true
+      },
+      "fa97dd36-1b82-43d7-a6e4-2adeafd59cef": {
+        "stratum": "top_0.1pct",
+        "name": "Fleet Foxes",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "fc7bbf00-fbaa-4736-986b-b3ac0266ca9b": {
+        "stratum": "top_0.1pct",
+        "name": "alt\u2010J",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "fd99ed3e-479b-4071-8e88-b024f47c5754": {
+        "stratum": "below_median",
+        "name": "Napalm",
+        "n_cand": 6,
+        "recip": 0.5,
+        "d_hat": 3.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "fdb53441-e5e6-4657-9aad-8dab672e1cdc": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Purity Ring",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ff19a8c3-5972-4273-92cb-f76c1e58c49f": {
+        "stratum": "below_median",
+        "name": "Tee Flowers",
+        "n_cand": 6,
+        "recip": 1.0,
+        "d_hat": 6.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      }
+    },
+    "RC-ARM-B": {
+      "005795e2-9ee7-46f3-8e61-8c0e4b3d760e": {
+        "stratum": "pctl_50_to_90",
+        "name": "Steven Sharp Nelson",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "00d3c986-5e57-40d1-beed-eb1e8f6b6ca4": {
+        "stratum": "below_median",
+        "name": "The Button Down Brass",
+        "n_cand": 36,
+        "recip": 0.3,
+        "d_hat": 10.8,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "02e5ab4c-7391-4614-ab0f-961b155c5887": {
+        "stratum": "pctl_50_to_90",
+        "name": "Les Gordon",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "050322b5-7269-4d7d-83af-8dccd6876cdc": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Highway Superstar",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "0bd6ba12-1568-4b05-97e2-ec4aab47af0a": {
+        "stratum": "pctl_50_to_90",
+        "name": "Kill the Client",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "100d17ac-0e19-4aa2-8020-bfe50b6effaa": {
+        "stratum": "below_median",
+        "name": "Factice Factory",
+        "n_cand": 3,
+        "recip": 0.6667,
+        "d_hat": 2.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "10df7475-e4cd-4f9b-aa05-effd1b95992b": {
+        "stratum": "pctl_50_to_90",
+        "name": "Harlem",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "19b3c333-bfc3-4915-ace8-cdb4a5a79a9b": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Delroy Wilson",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "1a47df76-6357-449b-9c0b-941c19f339c2": {
+        "stratum": "below_median",
+        "name": "KAKATO",
+        "n_cand": 3,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "1d80c978-409a-4024-961f-da0c7e3b1095": {
+        "stratum": "top_decile_below_1pct",
+        "name": "TrySail",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "1f0f167a-9ff7-4a0f-ac1a-5b36d44738dc": {
+        "stratum": "pctl_50_to_90",
+        "name": "Gillian Hills",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "22cd1b33-903c-494a-81d1-d53a5c26cde3": {
+        "stratum": "below_median",
+        "name": "Section X",
+        "n_cand": 14,
+        "recip": 0.4,
+        "d_hat": 5.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "22d8f80a-6e2d-41cf-be36-104f5192ffcf": {
+        "stratum": "pctl_50_to_90",
+        "name": "Fu\u2010Schnickens",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "242b5585-a436-4105-85cc-7ec195e96d26": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Synkro",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "26eaac94-68f0-482c-9479-931190092457": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Joep Beving",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "29297f58-bdfd-4042-b58e-74c1f810bf86": {
+        "stratum": "below_median",
+        "name": "Uncle Nephew",
+        "n_cand": 7,
+        "recip": 0.2857,
+        "d_hat": 2.0,
+        "sampled_usable": 7,
+        "sampled_exhaustive": true
+      },
+      "2a2ef92c-4aa3-485e-8baf-92551a62cd22": {
+        "stratum": "below_median",
+        "name": "\u9cf3\u51f0\u706b\u51db",
+        "n_cand": 3,
+        "recip": 1.0,
+        "d_hat": 3.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "2a6ab7a6-0e12-4b8e-ba14-6ccc12eb75ee": {
+        "stratum": "below_median",
+        "name": "JJT",
+        "n_cand": 6,
+        "recip": 0.8333,
+        "d_hat": 5.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "2aef84c4-6b8a-460c-80ab-7ae62d60ad83": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Rin",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "2df67f25-ce0c-499a-959b-3b939f45ce12": {
+        "stratum": "below_median",
+        "name": "SoGreatandPowerful",
+        "n_cand": 3,
+        "recip": 0.6667,
+        "d_hat": 2.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "2f253ad2-e391-48c3-a79c-f44b9a8a0981": {
+        "stratum": "top_decile_below_1pct",
+        "name": "ColdWorld",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3007f845-ebf8-4882-83e7-9e22d51ed732": {
+        "stratum": "pctl_50_to_90",
+        "name": "Entertainment System",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "309c62ba-7a22-4277-9f67-4a162526d18a": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Beck",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "33a23cda-043d-484c-9228-09317be1ebe5": {
+        "stratum": "below_median",
+        "name": "Titi DJ",
+        "n_cand": 17,
+        "recip": 1.0,
+        "d_hat": 17.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "35508fc3-7da2-4adb-986f-2c6b79117d21": {
+        "stratum": "pctl_50_to_90",
+        "name": "Diane Charlemagne",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3b083ea2-1aee-46d7-bd2a-1bc60f6169ec": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Arcis",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3b4e9c28-f7b8-459d-ac48-e790dd9249c5": {
+        "stratum": "pctl_50_to_90",
+        "name": "The Teknoist",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "3e6bdf2a-cdda-46ac-a941-07c3397626c4": {
+        "stratum": "below_median",
+        "name": "Silly Fools",
+        "n_cand": 1,
+        "recip": 1.0,
+        "d_hat": 1.0,
+        "sampled_usable": 1,
+        "sampled_exhaustive": true
+      },
+      "447cbd23-3588-4884-8baa-f513cac1d14a": {
+        "stratum": "pctl_50_to_90",
+        "name": "JEREMIAH KANE",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "4fc8df81-1d7b-4728-95b1-970ac3de3956": {
+        "stratum": "below_median",
+        "name": "Local Daddies",
+        "n_cand": 1,
+        "recip": 1.0,
+        "d_hat": 1.0,
+        "sampled_usable": 1,
+        "sampled_exhaustive": true
+      },
+      "5254cd9f-4684-4a5a-8644-08c2567a1bb2": {
+        "stratum": "below_median",
+        "name": "David Hirschfelder",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5441c29d-3602-4898-b1a1-b77fa23b8e50": {
+        "stratum": "top_0.1pct",
+        "name": "David Bowie",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "55ef024a-6cc0-49ed-8ce2-2e12193c0f46": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Survivor",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "58d7914a-4322-48b2-829f-9da1bf358629": {
+        "stratum": "pctl_50_to_90",
+        "name": "A\u30fbZU\u30fbNA",
+        "n_cand": 49,
+        "recip": 0.8,
+        "d_hat": 39.2,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "59e22818-9da1-42be-bdd6-b1124b4a67b9": {
+        "stratum": "pctl_50_to_90",
+        "name": "Aaron Tippin",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5b11f4ce-a62d-471e-81fc-a69a8278c7da": {
+        "stratum": "top_0.1pct",
+        "name": "Nirvana",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5cbef01b-cc35-4f52-af7b-d0df0c4f61b9": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Sonic Youth",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "5cc03b39-9b7d-43d6-a1d9-321c2e3aec50": {
+        "stratum": "pctl_50_to_90",
+        "name": "Dead Fish",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "606bf117-494f-4864-891f-09d63ff6aa4b": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Rise Against",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "60f1712d-d510-467f-bd17-2e7b95e1ec57": {
+        "stratum": "below_median",
+        "name": "BSoul",
+        "n_cand": 4,
+        "recip": 0.25,
+        "d_hat": 1.0,
+        "sampled_usable": 4,
+        "sampled_exhaustive": true
+      },
+      "62dc94cc-f611-4345-87cb-b914796a4a45": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Hooverphonic",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "63f38f77-9aae-4e1b-8947-aca325b7759f": {
+        "stratum": "pctl_50_to_90",
+        "name": "Lazlo Bane",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "656d5d90-e05d-4265-adcc-afb27d16a5c6": {
+        "stratum": "pctl_50_to_90",
+        "name": "Hunter Hunted",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab": {
+        "stratum": "top_0.1pct",
+        "name": "Metallica",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "66c662b6-6e2f-4930-8610-912e24c63ed1": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "AC/DC",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "677cb360-fd68-4a19-9a9d-e710b9204ba8": {
+        "stratum": "pctl_50_to_90",
+        "name": "Croatian Amor",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "6805e4d5-f550-40fe-b731-05dc8229e74b": {
+        "stratum": "top_decile_below_1pct",
+        "name": "HEALTH",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04": {
+        "stratum": "top_0.1pct",
+        "name": "Weezer",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7364dea6-ca9a-48e3-be01-b44ad0d19897": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "a\u2010ha",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "73ed3b2f-6d5e-46c6-8f75-952c383f6b33": {
+        "stratum": "top_decile_below_1pct",
+        "name": "GosT",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "751adfe4-6e40-4ab4-866c-ed14f5087d76": {
+        "stratum": "pctl_50_to_90",
+        "name": "Evan Call",
+        "n_cand": 19,
+        "recip": 0.3,
+        "d_hat": 5.7,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7527f6c2-d762-4b88-b5e2-9244f1e34c46": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Deftones",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "753a1564-aaef-4d39-bc68-4a8d5e328cf7": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Miike Snow",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "796bc8a9-efd1-43e8-bacf-5eba68835928": {
+        "stratum": "pctl_50_to_90",
+        "name": "PEDRO SAMPAIO",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7aeca08c-8b87-4d85-8cc9-6189a946d2e4": {
+        "stratum": "pctl_50_to_90",
+        "name": "Fear of Men",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7bd66c18-cb33-49aa-9279-140acedbdb49": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Ty Dolla $ign",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7bd92ac9-6b2e-4e88-812a-60499ec60a9d": {
+        "stratum": "pctl_50_to_90",
+        "name": "I Am Kloot",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7c20f558-d664-42bd-b6f1-81acf9dbb72d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "t.A.T.u.",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7dac70fc-4608-4181-b67b-c26ca2dc9d2d": {
+        "stratum": "pctl_50_to_90",
+        "name": "Secrets of the Moon",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7db4af7c-99bd-4d86-9315-5daa053ca0a5": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Pional",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "7e35659f-f3bb-4c28-bcf5-47bd5cfa2bca": {
+        "stratum": "top_decile_below_1pct",
+        "name": "The Tallest Man on Earth",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "813a79f0-1878-466a-831b-cec332ba510c": {
+        "stratum": "pctl_50_to_90",
+        "name": "Osvaldo Pugliese",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "83a8cc6f-9622-49ad-956e-58c59935f7be": {
+        "stratum": "below_median",
+        "name": "Ipman",
+        "n_cand": 5,
+        "recip": 0.8,
+        "d_hat": 4.0,
+        "sampled_usable": 5,
+        "sampled_exhaustive": true
+      },
+      "840179a0-7dc7-49e2-ae26-4737c2b33ef7": {
+        "stratum": "pctl_50_to_90",
+        "name": "The Sherlocks",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "848a1f71-c8b5-458b-8b05-a20ea1e962de": {
+        "stratum": "below_median",
+        "name": "UTFO",
+        "n_cand": 25,
+        "recip": 0.1,
+        "d_hat": 2.5,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8538e728-ca0b-4321-b7e5-cff6565dd4c0": {
+        "stratum": "top_0.1pct",
+        "name": "Depeche Mode",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "859d0860-d480-4efd-970c-c05d5f1776b8": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Beyonc\u00e9",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "86a90c46-1a2e-434f-af42-f4903651d0bc": {
+        "stratum": "below_median",
+        "name": "Vanbur",
+        "n_cand": 8,
+        "recip": 0.25,
+        "d_hat": 2.0,
+        "sampled_usable": 8,
+        "sampled_exhaustive": true
+      },
+      "86e736b4-93e2-40ff-9e1c-fb7c63fef5f6": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Barenaked Ladies",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "875203e1-8e58-4b86-8dcb-7190faf411c5": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "J. Cole",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8b9a69ea-b60e-46c8-a1a5-93c56e7e4f35": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Dirtyphonics",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8c32bb01-58a3-453b-8050-8c0620edb0e5": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Stone Temple Pilots",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8d455809-96b3-4bb6-8829-ea4beb580d35": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Phoenix",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "8e986c66-2429-49a2-a32b-4ad3de114929": {
+        "stratum": "below_median",
+        "name": "\u30b5\u30b5\u30ad\u30c8\u30e2\u30b3",
+        "n_cand": 6,
+        "recip": 0.5,
+        "d_hat": 3.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "8f92558c-2baa-4758-8c38-615519e9deda": {
+        "stratum": "top_0.1pct",
+        "name": "The Clash",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9357482a-9517-456e-b949-e7370e926034": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Poli\u00e7a",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "936addc3-91aa-49de-8ec0-0dc186de151f": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Misfits",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "93f87f3d-4351-4fa2-abf1-80e86fb499b2": {
+        "stratum": "below_median",
+        "name": "Kenoma",
+        "n_cand": 9,
+        "recip": 0.1111,
+        "d_hat": 1.0,
+        "sampled_usable": 9,
+        "sampled_exhaustive": true
+      },
+      "94c89f67-8c6e-4317-8186-8aad506bf2ae": {
+        "stratum": "top_decile_below_1pct",
+        "name": "The Milk Carton Kids",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "965da996-2921-45b7-a19b-b1ca62cc775d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "MAITRO",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "97b226c8-7140-4da3-91ac-15e62e131a81": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Macklemore & Ryan Lewis",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9afee8b9-0cb8-4e85-9d20-329dbf7d8cc5": {
+        "stratum": "pctl_50_to_90",
+        "name": "SIDEPIECE",
+        "n_cand": 36,
+        "recip": 0.2,
+        "d_hat": 7.2,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9b15ff5e-5bd1-43c2-821d-e31240aad334": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "supercell",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9be5414e-b906-4659-9c59-012ba7f7a154": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Om Unit",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9beb62b2-88db-4cea-801e-162cd344ee53": {
+        "stratum": "top_0.1pct",
+        "name": "Beastie Boys",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9df31471-e54e-43ba-bbe8-38fd94c63dbb": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Shearwater",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9efff43b-3b29-4082-824e-bc82f646f93d": {
+        "stratum": "top_0.1pct",
+        "name": "The Doors",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9f9953f0-68bb-4ce3-aace-2f44c87f0aa3": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Bibio",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "9fff2f8a-21e6-47de-a2b8-7f449929d43f": {
+        "stratum": "top_0.1pct",
+        "name": "Drake",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a670aad2-7915-49ba-bacf-25f1931098ee": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Mikkel Metal",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a7c4e0b6-dfcc-4808-b84f-71b048be227d": {
+        "stratum": "pctl_50_to_90",
+        "name": "Xibalba",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a8982cb0-7886-4e60-9f6a-3b71baa370e6": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Tennis",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a96ac800-bfcb-412a-8a63-0a98df600700": {
+        "stratum": "top_0.1pct",
+        "name": "Modest Mouse",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "a972372a-6d87-4b21-8f5c-5ba6e2d640b0": {
+        "stratum": "pctl_50_to_90",
+        "name": "Myka 9",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ab1a3c79-6e4c-4fe3-89d2-0e1d031e594e": {
+        "stratum": "pctl_50_to_90",
+        "name": "Triola",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ada7a83c-e3e1-40f1-93f9-3e73dbc9298a": {
+        "stratum": "top_0.1pct",
+        "name": "Arctic Monkeys",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "adf3879a-e091-4f73-8792-861a7a3e3abe": {
+        "stratum": "pctl_50_to_90",
+        "name": "Don Cherry",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "af37c51c-0790-4a29-b995-456f98a6b8c9": {
+        "stratum": "top_0.1pct",
+        "name": "Vampire Weekend",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b071f9fa-14b0-4217-8e97-eb41da73f598": {
+        "stratum": "top_0.1pct",
+        "name": "The Rolling Stones",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+        "stratum": "top_0.1pct",
+        "name": "The Beatles",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b1cfd018-b393-4632-babc-8a343edb4baa": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Tommy Dorsey",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b23a7841-0069-4f65-9c41-202b70e7298a": {
+        "stratum": "below_median",
+        "name": "CIRCRUSH",
+        "n_cand": 6,
+        "recip": 0.5,
+        "d_hat": 3.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "b611904b-b972-4e30-8861-11b1d7f3f48f": {
+        "stratum": "below_median",
+        "name": "Besv\u00e4rjelsen",
+        "n_cand": 1,
+        "recip": 1.0,
+        "d_hat": 1.0,
+        "sampled_usable": 1,
+        "sampled_exhaustive": true
+      },
+      "b632d986-88dc-4743-bc61-b0e8058a0d77": {
+        "stratum": "pctl_50_to_90",
+        "name": "Andreas Tilliander",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b6b2bb8d-54a9-491f-9607-7b546023b433": {
+        "stratum": "top_0.1pct",
+        "name": "Pixies",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b7302cd1-8f0d-46ce-b869-872922c4002d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "SoulChef",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b7539c32-53e7-4908-bda3-81449c367da6": {
+        "stratum": "top_0.1pct",
+        "name": "Lana Del Rey",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b7ffd2af-418f-4be2-bdd1-22f8b48613da": {
+        "stratum": "top_0.1pct",
+        "name": "Nine Inch Nails",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b847e9d2-c931-4daf-900c-42c7b2c42e16": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Front Line Assembly",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "b9c29df4-3f1d-4b0b-99bf-52b5695244ad": {
+        "stratum": "below_median",
+        "name": "Felix Hagan & The Family",
+        "n_cand": 6,
+        "recip": 0.6667,
+        "d_hat": 4.0,
+        "sampled_usable": 6,
+        "sampled_exhaustive": true
+      },
+      "ba0d6274-db14-4ef5-b28d-657ebde1a396": {
+        "stratum": "top_0.1pct",
+        "name": "The Smashing Pumpkins",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ba122363-b404-4a8f-b518-7563a62eb963": {
+        "stratum": "pctl_50_to_90",
+        "name": "Buddy",
+        "n_cand": 35,
+        "recip": 0.6,
+        "d_hat": 21.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ba617653-44e4-404f-91cd-f74adce5687d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Baden Powell",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bbc5b66b-d037-4f26-aecf-0b129e7f876a": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Jimmy Eat World",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bc5e6e42-73ba-44fa-a41e-3379402f0429": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Screaming Trees",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bc6c0149-2c01-4fc4-803d-8ff656270442": {
+        "stratum": "pctl_50_to_90",
+        "name": "\u6469\u5929\u697c\u30aa\u30da\u30e9",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bd057a0c-a7b6-47bf-8dc3-45e0efac1798": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "NERO",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "bd13909f-1c29-4c27-a874-d4aaf27c5b1a": {
+        "stratum": "top_0.1pct",
+        "name": "Fleetwood Mac",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c0252a1b-0133-46bb-8c4f-cade46349ec3": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Alestorm",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c1aa2ec9-53e7-4d90-8d36-bac75832e986": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "The Supremes",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c296e10c-110a-4103-9e77-47bfebb7fb2e": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Bob Marley & The Wailers",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c33c2065-b1c3-4406-b066-d33a9e2ea71a": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "OneRepublic",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c5c2ea1c-4bde-4f4d-bd0b-47b200bf99d6": {
+        "stratum": "top_0.1pct",
+        "name": "The xx",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "c8b03190-306c-4120-bb0b-6f2ebfc06ea9": {
+        "stratum": "top_0.1pct",
+        "name": "The Weeknd",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cad5cddc-e94c-4012-b65b-161cb634aad1": {
+        "stratum": "below_median",
+        "name": "Me and My Friends",
+        "n_cand": 5,
+        "recip": 0.6,
+        "d_hat": 3.0,
+        "sampled_usable": 5,
+        "sampled_exhaustive": true
+      },
+      "cb67438a-7f50-4f2b-a6f1-2bb2729fd538": {
+        "stratum": "top_0.1pct",
+        "name": "Air",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cba76057-c7d0-4ab9-a104-eb2ba4a6ecca": {
+        "stratum": "below_median",
+        "name": "Jackal",
+        "n_cand": 24,
+        "recip": 0.4,
+        "d_hat": 9.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cbcbb22c-3a8d-46af-b4ba-09c98f0d7931": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "J Dilla",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cbef45a9-7acb-4325-94c9-70081ac8d1b8": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Tycho",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "cfe572bf-840f-4bed-934a-f69f4b1e90d4": {
+        "stratum": "top_decile_below_1pct",
+        "name": "White Zombie",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d1115ccf-3c6b-440b-9005-73224ecff98e": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Drop Dead, Gorgeous",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d15721d8-56b4-453d-b506-fc915b14cba2": {
+        "stratum": "top_0.1pct",
+        "name": "The Black Keys",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d27c480c-bda4-45c9-85b4-2af7f9212b16": {
+        "stratum": "pctl_50_to_90",
+        "name": "Bilders",
+        "n_cand": 29,
+        "recip": 1.0,
+        "d_hat": 29.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d30ada67-1b32-4b70-a07e-0f9aaaa345dc": {
+        "stratum": "pctl_50_to_90",
+        "name": "Orup",
+        "n_cand": 28,
+        "recip": 0.4,
+        "d_hat": 11.2,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d4a1404d-e00c-4bac-b3ba-e3557f6468d6": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Ace of Base",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d5cc67b8-1cc4-453b-96e8-44487acdebea": {
+        "stratum": "top_0.1pct",
+        "name": "Beach House",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d5da1841-9bc8-4813-9f89-11098090148e": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "The Fall",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d5fc2626-48f1-4822-a943-e4180a6f3c66": {
+        "stratum": "pctl_50_to_90",
+        "name": "DJ CLONEPA",
+        "n_cand": 34,
+        "recip": 0.7,
+        "d_hat": 23.8,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d6285d95-8ee1-4de2-8ceb-ff90098ab1d1": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Yuksek",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d6ed7887-a401-47a8-893c-34b967444d26": {
+        "stratum": "top_0.1pct",
+        "name": "Ramones",
+        "n_cand": 50,
+        "recip": 0.2,
+        "d_hat": 10.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d7661452-b95a-4609-a57f-a0dc5b353dec": {
+        "stratum": "pctl_50_to_90",
+        "name": "JVOX",
+        "n_cand": 34,
+        "recip": 0.6,
+        "d_hat": 20.4,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "d786f59b-1836-4ddb-8393-ab753edbe984": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Clairo",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "da357978-095d-4621-a7ee-2c0f336c5e8a": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Her\u2019s",
+        "n_cand": 50,
+        "recip": 0.5,
+        "d_hat": 25.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "dbc5809c-7837-4b6f-961e-340d64fbb41c": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Bud Powell",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "dc73d450-5202-4679-9938-422ecc8413d5": {
+        "stratum": "below_median",
+        "name": "Monoque",
+        "n_cand": 2,
+        "recip": 0.5,
+        "d_hat": 1.0,
+        "sampled_usable": 2,
+        "sampled_exhaustive": true
+      },
+      "dd0ecd9d-ef3c-4eff-bd6a-79cf8b2627cb": {
+        "stratum": "pctl_50_to_90",
+        "name": "Black Star Liner",
+        "n_cand": 34,
+        "recip": 0.8,
+        "d_hat": 27.2,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "dd564de7-8f62-4747-8246-11c1af876a54": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Jennifer Thomas",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e1e05cce-3922-44e1-8f20-015abe5e309d": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Social Distortion",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e21857d5-3256-4547-afb3-4b6ded592596": {
+        "stratum": "top_0.1pct",
+        "name": "Gorillaz",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e28fdaf6-022d-4a34-9d1b-d3a560573a14": {
+        "stratum": "pctl_50_to_90",
+        "name": "Ingrid Lucia and The Flying Neutrinos",
+        "n_cand": 20,
+        "recip": 0.9,
+        "d_hat": 18.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e3214827-bd09-4d53-a88c-893d61556352": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Zaz",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e390d54f-92f0-4039-9dd3-e8eac130b4c0": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Nicola Conte",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e3cb4543-210f-499a-b0d1-3882c312dfb9": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Rainbow",
+        "n_cand": 22,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e4a51f17-a57b-47b1-b37b-f552d0f8e9e6": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Travis Scott",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e54be6b7-5c26-4b47-bb3f-c137429b9b55": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Sara Bareilles",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e54e065f-0ce6-4779-9a9a-afd7b997471f": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Less Than Jake",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e57f0cac-4f56-473c-8d7e-d93f753fd586": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Steve Miller Band",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e5d928e1-b020-4dd8-9497-7aaee1b337bd": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Nadia Ali",
+        "n_cand": 50,
+        "recip": 0.1,
+        "d_hat": 5.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e795e03d-b5d5-4a5f-834d-162cfb308a2c": {
+        "stratum": "top_0.1pct",
+        "name": "PJ Harvey",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e7ee5f13-baf5-4a87-b58b-f871c137d4f5": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Julie London",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "e852986c-8ffd-45e3-9934-554612569c8b": {
+        "stratum": "pctl_50_to_90",
+        "name": "Baby Smoove",
+        "n_cand": 22,
+        "recip": 0.6,
+        "d_hat": 13.2,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ea34239e-4e43-48eb-91db-55688ca00ff3": {
+        "stratum": "below_median",
+        "name": "Doo Wop",
+        "n_cand": 8,
+        "recip": 0.5,
+        "d_hat": 4.0,
+        "sampled_usable": 8,
+        "sampled_exhaustive": true
+      },
+      "ea4dfa26-f633-4da6-a52a-f49ea4897b58": {
+        "stratum": "top_0.1pct",
+        "name": "R.E.M.",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ea7260de-e1b1-43f1-bb11-f78274a36308": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Lost Frequencies",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "eab76c9f-ff91-4431-b6dd-3b976c598020": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Infected Mushroom",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "ebfc1398-8d96-47e3-82c3-f782abcdb13d": {
+        "stratum": "top_0.1pct",
+        "name": "The Beach Boys",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "eca4a8fb-7068-441d-9e83-35dfa70e3d9e": {
+        "stratum": "below_median",
+        "name": "Issa Bamba",
+        "n_cand": 3,
+        "recip": 0.6667,
+        "d_hat": 2.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "f181961b-20f7-459e-89de-920ef03c7ed0": {
+        "stratum": "top_0.1pct",
+        "name": "The Strokes",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f1e26e91-41d2-4200-b291-2a3fe2ca2832": {
+        "stratum": "below_median",
+        "name": "\u306b\u304a",
+        "n_cand": 3,
+        "recip": 0.6667,
+        "d_hat": 2.0,
+        "sampled_usable": 3,
+        "sampled_exhaustive": true
+      },
+      "f205743d-4441-471d-a3af-66f584738e29": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Skip James",
+        "n_cand": 50,
+        "recip": 0.7,
+        "d_hat": 35.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f22942a1-6f70-4f48-866e-238cb2308fbd": {
+        "stratum": "top_0.1pct",
+        "name": "Aphex Twin",
+        "n_cand": 50,
+        "recip": 0.8,
+        "d_hat": 40.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f27ec8db-af05-4f36-916e-3d57f91ecf5e": {
+        "stratum": "top_0.1pct",
+        "name": "Michael Jackson",
+        "n_cand": 50,
+        "recip": 0.3,
+        "d_hat": 15.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f338cde2-7cc4-49e0-83e4-a0ac1a3b6d46": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Ben Gold",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f4a31f0a-51dd-4fa7-986d-3095c40c5ed9": {
+        "stratum": "top_0.1pct",
+        "name": "Evanescence",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387": {
+        "stratum": "top_0.1pct",
+        "name": "Ariana Grande",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f59c5520-5f46-4d2c-b2c4-822eabf53419": {
+        "stratum": "top_0.1pct",
+        "name": "Linkin Park",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f5eea9e8-68f4-403b-9ea3-f1c2dce5b6fc": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Geoxor",
+        "n_cand": 50,
+        "recip": 0.0,
+        "d_hat": 0.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6": {
+        "stratum": "top_0.1pct",
+        "name": "Tyler, The Creator",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f6f2326f-6b25-4170-b89d-e235b25508e8": {
+        "stratum": "top_0.1pct",
+        "name": "Sigur R\u00f3s",
+        "n_cand": 50,
+        "recip": 0.4,
+        "d_hat": 20.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f7441bc7-d7de-4813-a2fc-31a4033d396d": {
+        "stratum": "top_decile_below_1pct",
+        "name": "Gracie Abrams",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f82f3a3e-29c2-42ca-b589-bc5dc210fa9e": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "The Kooks",
+        "n_cand": 50,
+        "recip": 0.6,
+        "d_hat": 30.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f89be4a9-ce23-4f95-9a20-005ff891db0b": {
+        "stratum": "pctl_50_to_90",
+        "name": "Mark Franklin",
+        "n_cand": 17,
+        "recip": 0.8,
+        "d_hat": 13.6,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "f90e8b26-9e52-4669-a5c9-e28529c47894": {
+        "stratum": "top_0.1pct",
+        "name": "Snoop Dogg",
+        "n_cand": 50,
+        "recip": 1.0,
+        "d_hat": 50.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "fa088d46-39c8-4ec5-a2f9-73e4e119f910": {
+        "stratum": "below_median",
+        "name": "Golshifteh Farahani",
+        "n_cand": 1,
+        "recip": 1.0,
+        "d_hat": 1.0,
+        "sampled_usable": 1,
+        "sampled_exhaustive": true
+      },
+      "fa93c17e-ddb8-4747-8164-7b05d42edaaf": {
+        "stratum": "below_median",
+        "name": "Drew Seeley",
+        "n_cand": 7,
+        "recip": 0.5714,
+        "d_hat": 4.0,
+        "sampled_usable": 7,
+        "sampled_exhaustive": true
+      },
+      "fa97dd36-1b82-43d7-a6e4-2adeafd59cef": {
+        "stratum": "top_0.1pct",
+        "name": "Fleet Foxes",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "fc7bbf00-fbaa-4736-986b-b3ac0266ca9b": {
+        "stratum": "top_0.1pct",
+        "name": "alt\u2010J",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      },
+      "fd99ed3e-479b-4071-8e88-b024f47c5754": {
+        "stratum": "below_median",
+        "name": "Napalm",
+        "n_cand": 5,
+        "recip": 0.2,
+        "d_hat": 1.0,
+        "sampled_usable": 5,
+        "sampled_exhaustive": true
+      },
+      "fdb53441-e5e6-4657-9aad-8dab672e1cdc": {
+        "stratum": "top_1pct_below_0.1pct",
+        "name": "Purity Ring",
+        "n_cand": 50,
+        "recip": 0.9,
+        "d_hat": 45.0,
+        "sampled_usable": 10,
+        "sampled_exhaustive": false
+      }
+    }
+  }
+}

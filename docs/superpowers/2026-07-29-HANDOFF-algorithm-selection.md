@@ -1,6 +1,11 @@
 # Handoff — source algorithm selection measured, 2026-07-29
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: HISTORICAL — superseded on next actions by
+[`2026-07-29-HANDOFF-reciprocity.md`](2026-07-29-HANDOFF-reciprocity.md), which is the CURRENT
+handoff.** Read that one first. This document's own next action — `AS-H2`'s `--target`-capped
+trial crawl — **has been retired as an instrument and must not be revived from here**; the
+successor answered `AS-H2` a different way and says why. Everything else below stands as the
+record of the algorithm-selection track. It supersedes
 [`2026-07-29-HANDOFF-requirements-track3b.md`](2026-07-29-HANDOFF-requirements-track3b.md)
 on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.
