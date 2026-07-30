@@ -4,10 +4,16 @@
 > (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use
 > checkbox (`- [ ]`) syntax for tracking.
 
-**Role: ACTIVE — this is the governing document for this work.** It supersedes nothing. It
-implements a **subset** of `findings/2026-07-27-gate2-gate3-team-review.md`, which remains
-AUTHORITATIVE for the findings themselves and their triage. Where this plan describes a
-finding, the review wins.
+**Role: COMPLETE except `PW-9` — executed through `PW-8` and DEPLOYED 2026-07-28; the
+password is off and `https://musicapp.cmiller.io` is live.** Marked 2026-07-30 by a doc
+audit: this line read ACTIVE for two days after the work shipped. **`PW-9` (the
+concurrency ladder) is the one unrun task, deliberately open** — gated on the owner's
+approval, blocks nothing, and tracked in `NEXT.md`, which owns its status; do not read
+this plan as having live next actions. *(Original role: ACTIVE — the governing document
+for this work.)* It supersedes nothing. It implements a **subset** of
+`findings/2026-07-27-gate2-gate3-team-review.md`, which remains AUTHORITATIVE for the
+findings themselves and their triage. Where this plan describes a finding, the review
+wins.
 
 **Goal:** Make the live app safe to run without the shared password, so friends and family can
 use it by following a link — **without opening Gate 3**.
