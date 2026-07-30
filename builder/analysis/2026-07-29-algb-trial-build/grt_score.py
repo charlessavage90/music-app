@@ -90,12 +90,89 @@ def _band(pctl: float | None) -> str | None:
     return None
 
 
-def _arm_config(arm: str) -> tuple[BuilderConfig, LocalArchive]:
+class SubsetArchive:
+    """An archive view restricted to one arm's own crawled artists.
+
+    Necessary, and its absence was a real defect caught by a dry run on A0
+    before AB finished collecting. `build_from_archive` reads EVERY key under
+    its prefix, so pointing the control arm at the production archive built
+    the whole 74,157-node graph rather than the 3,000-node capped one — which
+    destroys the coverage matching the control exists to provide, and made two
+    derived figures visibly impossible (a negative exclusion rate and a fetch
+    rate above 1).
+
+    Applied to BOTH arms so they are symmetric. For AB it is a near no-op,
+    since that archive holds only AB's crawl; for A0 it is what makes the arm
+    a control at all.
+    """
+
+    def __init__(self, inner, allowed_mbids: set[str], prefix: str) -> None:
+        self._inner = inner
+        self._allowed = allowed_mbids
+        self._prefix = prefix
+
+    def _permitted(self, key: str) -> bool:
+        if not key.startswith(self._prefix) or not key.endswith(".json"):
+            return False
+        mbid = key[len(self._prefix) : -len(".json")]
+        return "/" not in mbid and mbid in self._allowed
+
+    def put(self, key: str, payload: bytes) -> None:
+        raise RuntimeError("SubsetArchive is read-only")
+
+    def get(self, key: str):
+        return self._inner.get(key) if self._permitted(key) else None
+
+    def has(self, key: str) -> bool:
+        return self._permitted(key) and self._inner.has(key)
+
+    def keys(self):
+        for key in self._inner.keys():
+            if self._permitted(key):
+                yield key
+
+
+def _arm_config(arm: str) -> tuple[BuilderConfig, object]:
+    """Config plus an archive view holding ONLY this arm's crawled artists."""
+    fetched = _fetched_mbids(arm)
     if arm == "AB":
         cfg = BuilderConfig(algorithm=ALG_B, target_artist_count=TARGET)
-        return cfg, LocalArchive(SCRATCH / "grt-archive-algb")
-    cfg = BuilderConfig(algorithm=PRODUCTION_ALGORITHM, target_artist_count=TARGET)
-    return cfg, LocalArchive(PRODUCTION_ARCHIVE)
+        base = LocalArchive(SCRATCH / "grt-archive-algb")
+        prefix = f"similar/listenbrainz/{ALG_B}/"
+    else:
+        cfg = BuilderConfig(algorithm=PRODUCTION_ALGORITHM, target_artist_count=TARGET)
+        base = OverlayReader(
+            LocalArchive(PRODUCTION_ARCHIVE), LocalArchive(SCRATCH / "grt-overlay-alge")
+        )
+        prefix = "similar/listenbrainz/"
+    return cfg, SubsetArchive(base, fetched, prefix)
+
+
+class OverlayReader:
+    """Read-only twin of grt_run.OverlayArchive, so scoring sees the same
+    responses collection did — production plus the 5 overlay fetches."""
+
+    def __init__(self, base, overlay) -> None:
+        self._base, self._overlay = base, overlay
+
+    def put(self, key: str, payload: bytes) -> None:
+        raise RuntimeError("OverlayReader is read-only")
+
+    def get(self, key: str):
+        found = self._base.get(key)
+        return found if found is not None else self._overlay.get(key)
+
+    def has(self, key: str) -> bool:
+        return self._base.has(key) or self._overlay.has(key)
+
+    def keys(self):
+        seen = set()
+        for k in self._base.keys():
+            seen.add(k)
+            yield k
+        for k in self._overlay.keys():
+            if k not in seen:
+                yield k
 
 
 def _fetched_mbids(arm: str) -> set[str]:
@@ -143,10 +220,10 @@ def score_arm(arm: str, ruler: dict[str, float]) -> dict:
     name_to_mbid = {name: graph.mbids[i] for i, name in enumerate(graph.names)}
 
     fetched = _fetched_mbids(arm)
+    # The archive view is already restricted to this arm's crawl (see
+    # SubsetArchive), so the population is exactly what the build read.
     payloads = _arm_payloads(cfg, archive, source)
-    # For the control arm the production archive holds 75,000 responses; this
-    # arm's population is only what IT discovered.
-    population = fetched & set(payloads) if arm == "A0" else set(payloads)
+    population = set(payloads)
 
     # --- GRT-G3 readable core -------------------------------------------
     # An artist is READABLE when every one of its own top-k candidates was
@@ -249,7 +326,13 @@ def score_arm(arm: str, ruler: dict[str, float]) -> dict:
         "pre_prune_population": len(population),
         "fetched": len(fetched),
         "readable_core": len(readable),
-        "GRT_G2_fetch_rate": round(len(fetched) / max(1, len(population)), 4),
+        # GRT-G2: of everything this arm set out to fetch, what share landed.
+        # Read from the crawl record, not inferred from the archive.
+        "GRT_G2_fetch_rate": round(
+            json.loads((HERE / f"grt_crawl_{arm}.json").read_text())["done"]
+            / max(1, json.loads((HERE / f"grt_crawl_{arm}.json").read_text())["discovered"]),
+            4,
+        ),
         "GRT_C1_rem": grt_c1,
         "GRT_C2_canonical": grt_c2,
         "GRT_C3_top25": grt_c3,
