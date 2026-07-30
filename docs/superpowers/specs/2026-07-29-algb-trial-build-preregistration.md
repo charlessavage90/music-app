@@ -294,3 +294,53 @@ archived responses (up to nine days old) and fresh ones. `RC-G1` measured that d
 found it small — 0 of 200 seeds differed from their archived top-50 by more than 5
 members — so this is recorded as a known, bounded impurity in the control arm, not
 waved away. It does **not** affect `AB`, which is fetched fresh throughout.
+
+### `GRT-P1` (post-hoc) — `GRT-C4`'s effect size is undefined against a zero baseline
+
+**The pre-registered read does not fire, and the pre-registration is at fault, not the
+result.** `GRT-C4` fixed a ratio bar (`AB ≥ 2 × A0`). The control's readable-core
+exclusion rate is **exactly 0.0 in every band**, so the ratio is undefined and the scorer
+— correctly, per its own rule — returned "NOT DECISIVE" in all four comparable bands,
+including one where `AB` excludes 2.0% of readable top-decile artists and `A0` excludes
+none.
+
+**A ratio bar cannot express "the baseline is zero and the trial arm is not."** An
+absolute-difference bar, or a rule for the zero-baseline case, was owed and is absent.
+Same shape as `AS-H1` and `TB-P5H-7`: recorded as a read-structure gap, **not re-labelled
+into whichever reading flatters the result.** The pre-registered verdict stands as "not
+decisive"; the raw figures are reported beside it and a successor may fix the bar.
+
+### `GRT-P2` (post-hoc) — the acceptance check cannot see the artist it was written for
+
+**`RC-P2` predicted an `ALG-B` artifact would be *refused* by `check_acceptance` on the
+top-25 minimum degree floor. At trial scale it is not refused, and the reason is more
+consequential than the prediction.**
+
+Measured, both arms, same target:
+
+| | `A0` (ALG-E) | `AB` (ALG-B) |
+|---|---|---|
+| R.E.M. degree | 47 | **6** |
+| R.E.M. popularity rank | 7 of 2,959 | **62 of 2,904** |
+| Inside the top-25 sample the floor inspects | **yes** | **no** |
+| In the largest component | yes | yes |
+
+**The degree collapse `RC-P2` predicted is real and large — and it hides itself.**
+Popularity here is score-weighted in-degree, so an artist that loses its reciprocated
+edges loses its popularity too, and popularity is what selects the top-25 sample that
+`famous_min_degree_floor` examines. The check therefore looks straight past the artist
+whose collapse it exists to detect, **once the collapse is severe enough**. A milder
+collapse would be caught; a total one is invisible.
+
+The `canonical_names` clause does not catch it either: R.E.M. remains *in* the largest
+component, just barely connected, and that clause tests presence, not degree.
+
+**So `RC-P2` is confirmed on its mechanism and refuted on its consequence**, and both
+halves must travel together. Whether the same holds at production scale is **not
+established here** — R.E.M.'s rank among 74,000 artists is not its rank among 2,904 — and
+that is `RC-P2`'s surviving live question, now sharpened: the thing to check is not "does
+the build refuse" but "does the guard still cover the artists it names".
+
+**No change is proposed to `acceptance.py` here.** Weakening it is barred, and
+strengthening it is a design question with its own trade-offs, outside this
+pre-registration's scope.

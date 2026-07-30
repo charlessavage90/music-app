@@ -201,7 +201,109 @@ measured; the mechanism is a hypothesis and is labelled as one.
 
 ### `AB` trial arm — collection
 
-*(recorded on completion)*
+3,000 discovered, 3,000 fetched, **0 failures**, 0 overlay writes (it has its own
+archive), production archive 75,000 → 75,000. **18.3 minutes** — under the 41-minute
+budget, because live latency ran nearer 0.3 s than the 0.617 s measured earlier the same
+evening. `GRT-G2` passes at 100%.
+
+### Scorer defect, found before the trial result existed
+
+A dry run of the scorer against `A0` alone — deliberately, while `AB` was still
+collecting — exposed that `build_from_archive` reads **every** key under its prefix, so
+the control arm was building the whole 74,157-node production graph instead of its
+3,000-node capped one. That would have restored the two-column confound the factor table
+exists to prevent. Two impossible derived figures are what surfaced it: an exclusion rate
+of **−23.76** and a fetch rate of **1.0017**.
+
+Fixed with `SubsetArchive`, applied to both arms symmetrically. **Cross-validated
+against an independently written harness:** the corrected control builds 2,959 nodes /
+53,902 edges where `builder/analysis/2026-07-29-trial-crawl-calibration/` recorded 2,958
+/ 53,900 at the same target — two harnesses, different sessions, agreeing to within one
+node. Committed before `AB` finished, so no result could have shaped it.
+
+### Gates
+
+| Gate | Outcome |
+|---|---|
+| **`GRT-G1`** archive safety | **PASS**, and it earned its keep — see `GRT-A1`. 75,000 files before and after, both arms. |
+| **`GRT-G2`** arm integrity | **PASS**, 100% on both arms (bar was 95%). Zero fetch failures across 6,000 requests. |
+| **`GRT-G3`** readability | **PASS** for every read taken. Readable core 754 (`A0`) and 785 (`AB`). Every top-25 artist readable in both arms; R.E.M. readable in both. |
+
+### `GRT-C1` — R.E.M. against the degree floor
+
+| | `A0` (ALG-E) | `AB` (ALG-B) |
+|---|---|---|
+| Degree | 47 | **6** |
+| Floor | 8 | 8 |
+
+**`RC-P2`'s degree-collapse prediction is CONFIRMED by a real build**, not merely
+sampled. R.E.M. holds 6 connections under `ALG-B` against 47 under the control at
+identical coverage.
+
+### `GRT-C2` / `GRT-C3` — the acceptance clauses
+
+Both clauses **pass in both arms**, and `GRT-P2` records why that is not the reassurance
+it looks like.
+
+- **`GRT-C2`:** 22 of 24 canonical names present in *both* arms. The two absent — CROOVE
+  and Wishbone Ash — are absent from the **control too**, so they are coverage artifacts
+  of the 3,000 cap, exactly the attribution the criterion was written to force. **No
+  canonical name is lost to the algorithm.** R.E.M. remains in the largest component.
+- **`GRT-C3`:** top-25 median degree 46.0 (`AB`) vs 47.0 (`A0`), both far above the 25.0
+  floor; minimum 31 vs 34, both far above the 8 floor. `RC-C3`'s sampled pass is
+  reproduced by a build.
+
+### `GRT-P2` — the finding that matters most, and it was not predicted
+
+**The predicted build refusal did not happen, and the reason is a blind spot in the
+guard.** R.E.M.'s popularity rank falls from **7 of 2,959** to **62 of 2,904** — because
+popularity *is* score-weighted in-degree, so an artist that loses its edges loses its
+popularity in the same motion. The top-25 sample that `famous_min_degree_floor` inspects
+is selected *by popularity*, so R.E.M. drops out of the sample and the floor never
+examines it.
+
+**The check is structurally unable to detect the collapse it was written for, once the
+collapse is severe enough.** A mild collapse is caught; a total one is invisible. Full
+detail and the caveat about production scale: `GRT-P2` in the pre-registration.
+
+### `GRT-C4` — component membership (`RC-H1`), the primary outcome
+
+Exclusion rate = share of an arm's **readable** artists that fall outside the largest
+component.
+
+| Band | `A0` (ALG-E) | `AB` (ALG-B) | pre-registered verdict |
+|---|---|---|---|
+| top 0.1% | 0.0% (75) | 0.0% (72) | not decisive |
+| top 1% | 0.0% (326) | 0.87% (229) | not decisive |
+| top 10% | 0.0% (290) | 2.02% (198) | not decisive |
+| upper half | 0.0% (48) | 1.52% (66) | not decisive |
+| lower half | *unread* (10) | 3.33% (30) | unread in one arm |
+| **overall, whole population** | **1.37%** | **3.20%** | — |
+
+*(readable members in brackets; `A0`'s lower half is under-populated at 10 and `RC-G2`
+refuses to pool it)*
+
+**`GRT-R0`, the pre-registered null, does not fire cleanly and neither does its
+alternative** — because the effect size is broken, not because the arms agree.
+`GRT-P1` records it: the bar was a **ratio** (`AB ≥ 2 × A0`) and the control's readable
+exclusion rate is **exactly zero in every band**, so the ratio is undefined and every
+band returned "not decisive" — including the top decile, where `AB` strands 2% of
+readable artists and `A0` strands none. **The pre-registered verdict is left standing as
+written and the raw figures are reported beside it**; the read is not re-labelled to fit
+the result. A successor pre-registration owes an absolute-difference bar or an explicit
+zero-baseline rule.
+
+**What can be said without the broken bar:** `ALG-B` excludes readable artists from the
+largest component in three of four comparable bands where `ALG-E` excludes none, and its
+whole-population exclusion rate is **2.3× the control's** (3.20% vs 1.37%). That is a
+real difference in the direction `AS-H2` feared. It is **not** the pre-registered read,
+and it must not be quoted as though a threshold had been crossed.
+
+**Coverage caveat, per §1:** the two arms reached different 3,000-artist sets, so these
+are rates, never counts. And none of this reaches production scale — the capped crawl's
+readable core is structurally famous, which is why `AS-H2` retired it for obscure-artist
+questions in the first place. The lower-half band is readable here at exactly 30 members,
+the minimum, and only in one arm.
 
 ## §7 Test suite
 
