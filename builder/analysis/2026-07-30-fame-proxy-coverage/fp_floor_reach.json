@@ -1,0 +1,91 @@
+{
+ "source": "../2026-07-24-track2-arm-scorer/paths.json",
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "arms_pooled": [
+  "P",
+  "A0",
+  "A1",
+  "A2",
+  "A3",
+  "A4",
+  "A5",
+  "A6",
+  "A7",
+  "A1u",
+  "X"
+ ],
+ "per_depth": {
+  "0": {
+   "interior_slots": 327,
+   "distinct_interiors": 57,
+   "floor_share_distinct": 0.0526,
+   "floor_share_slots": 0.1009,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "1": {
+   "interior_slots": 350,
+   "distinct_interiors": 70,
+   "floor_share_distinct": 0.0429,
+   "floor_share_slots": 0.0943,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "2": {
+   "interior_slots": 352,
+   "distinct_interiors": 63,
+   "floor_share_distinct": 0.0476,
+   "floor_share_slots": 0.0938,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "3": {
+   "interior_slots": 360,
+   "distinct_interiors": 76,
+   "floor_share_distinct": 0.0395,
+   "floor_share_slots": 0.0917,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "5": {
+   "interior_slots": 392,
+   "distinct_interiors": 95,
+   "floor_share_distinct": 0.0316,
+   "floor_share_slots": 0.0842,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "7": {
+   "interior_slots": 381,
+   "distinct_interiors": 104,
+   "floor_share_distinct": 0.0288,
+   "floor_share_slots": 0.0866,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "10": {
+   "interior_slots": 433,
+   "distinct_interiors": 109,
+   "floor_share_distinct": 0.0275,
+   "floor_share_slots": 0.0762,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "15": {
+   "interior_slots": 457,
+   "distinct_interiors": 106,
+   "floor_share_distinct": 0.0283,
+   "floor_share_slots": 0.0722,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  },
+  "20": {
+   "interior_slots": 495,
+   "distinct_interiors": 123,
+   "floor_share_distinct": 0.0244,
+   "floor_share_slots": 0.0667,
+   "lb_covered_distinct": 1.0,
+   "median_band": "top 1%"
+  }
+ }
+}

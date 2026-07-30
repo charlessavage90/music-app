@@ -23,7 +23,31 @@ the point.**
 
 ---
 
-## N/A — 2026-07-30 (later, latest) — the experiment ran and is read; the app is untouched
+## N/A — 2026-07-30 (latest) — we measured how well our "how famous is this artist" yardstick works; the app is untouched
+
+**Nothing to exercise, and nothing is running** — ports 8000 and 5173 were checked and are
+empty, and no Python process from this work survives. No routing, no graph, no weighting,
+no cost function, and not one line of the app or the website changed. **A journey you build
+now is identical to one from yesterday.**
+
+What happened is measurement only, on the yardstick we use *behind the scenes* to judge how
+obscure an artist is when we score experiments. It never touched what you see.
+
+**One thing worth knowing, in case it changes what you'd want tested later:** the yardstick
+copes fine with the artists the app currently shows you, and goes blind on more than a third
+of the artists it *would* show you if we succeeded at making journeys more obscure. So if a
+future change does make journeys reach further into unknown artists, the way we measure that
+change may need fixing first. That is a decision waiting for you, not a bug in the app.
+
+**Still owed and unchanged:** the queued entry further down (the redesign, against
+`https://musicapp.cmiller.io`), including the phone half. Nothing here displaces it.
+
+**Detail, for anyone who wants it:**
+`docs/superpowers/2026-07-30-fame-proxy-coverage-execution-log.md`.
+
+---
+
+## N/A — 2026-07-30 (later) — the experiment ran and is read; the app is untouched
 
 **Nothing to exercise, and nothing is running** — ports 8000, 5173, 8138 and 8139 were
 checked and are empty. No routing, no graph, no weighting, no cost function, and not one

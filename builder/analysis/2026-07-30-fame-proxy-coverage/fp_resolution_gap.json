@@ -1,0 +1,90 @@
+{
+ "post_hoc": true,
+ "track2_scored_artists": 1296,
+ "track2_unmatched": 185,
+ "unmatched_resolvable_by_mbid": 10,
+ "unmatched_genuinely_absent": 169,
+ "unmatched_name_ambiguous_in_graph": 6,
+ "unmatched_not_in_artifact": 0,
+ "resolution_failure_share_of_checkable": 0.0559,
+ "recovered": [
+  {
+   "name": "\u521d\u97f3\u30df\u30af",
+   "mbid": "130d679a-9a92-4373-8348-0800b6b93a30",
+   "article": "https://en.wikipedia.org/wiki/Hatsune_Miku",
+   "languages": 50,
+   "band": "top 10%"
+  },
+  {
+   "name": "\u9ed2\u6ca2\u3068\u3082\u3088",
+   "mbid": "e7388c0e-d80a-4f55-b76a-4e256a579f79",
+   "article": "https://en.wikipedia.org/wiki/Tomoyo_Kurosawa",
+   "languages": 16,
+   "band": "upper half"
+  },
+  {
+   "name": "\u6d32\u5d0e\u7dbe",
+   "mbid": "9f297aa6-dd27-4385-8b50-5bb3ce031338",
+   "article": "https://en.wikipedia.org/wiki/Aya_Suzaki",
+   "languages": 14,
+   "band": "upper half"
+  },
+  {
+   "name": "A\u2010WA",
+   "mbid": "cc448b70-4c20-4ea4-a818-053494aee734",
+   "article": "https://en.wikipedia.org/wiki/A-WA",
+   "languages": 13,
+   "band": "upper half"
+  },
+  {
+   "name": "Helios",
+   "mbid": "50a32791-ee43-4c67-aabc-3dc65e4a9838",
+   "article": "https://en.wikipedia.org/wiki/Keith_Kenniff",
+   "languages": 6,
+   "band": "top 10%"
+  },
+  {
+   "name": "Amp",
+   "mbid": "c60f9fb1-b519-4c70-ba0c-d89b9e96aff1",
+   "article": "https://en.wikipedia.org/wiki/Amp_(band)",
+   "languages": 2,
+   "band": "upper half"
+  },
+  {
+   "name": "Bad Computer",
+   "mbid": "7dcb5105-7780-4a6c-aaaa-63e0bc6f1eaa",
+   "article": "https://en.wikipedia.org/wiki/Bad_Computer",
+   "languages": 1,
+   "band": "top 10%"
+  },
+  {
+   "name": "Chime",
+   "mbid": "de7bddc4-e9c8-43b5-af57-4a0c463951a4",
+   "article": "https://en.wikipedia.org/wiki/Chime_(musician)",
+   "languages": 1,
+   "band": "top 10%"
+  },
+  {
+   "name": "Frisco",
+   "mbid": "422bc4fc-0df9-4cd6-8f01-606a8d0193fa",
+   "article": "https://en.wikipedia.org/wiki/Frisco_(rapper)",
+   "languages": 1,
+   "band": "upper half"
+  },
+  {
+   "name": "Mahogany",
+   "mbid": "7ae235e2-429b-4162-9783-c038d820331a",
+   "article": "https://en.wikipedia.org/wiki/Mahogany_(band)",
+   "languages": 1,
+   "band": "upper half"
+  }
+ ],
+ "ambiguous_names": [
+  "1991",
+  "D",
+  "Fox",
+  "L.D.",
+  "Logos",
+  "Zion"
+ ]
+}
