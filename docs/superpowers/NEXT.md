@@ -10,7 +10,7 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-29, on the algorithm-selection closeout.**
+**Last updated: 2026-07-29, on the reciprocity-sampling closeout.**
 
 ---
 
@@ -19,27 +19,28 @@ those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by sec
 > ## The next session WRITES THE GRAPH REBUILD PLAN, cold from the committed record.
 >
 > Entry point is the handoff:
-> [`2026-07-29-HANDOFF-algorithm-selection.md`](2026-07-29-HANDOFF-algorithm-selection.md).
-> **The task order changed on 2026-07-29 — read it before assuming the old one.** The
-> cap-selection simulation is no longer first; it is third.
+> [`2026-07-29-HANDOFF-reciprocity.md`](2026-07-29-HANDOFF-reciprocity.md).
 >
-> **The agreed next experiment is `AS-H2`'s trial crawl** — a `--target`-capped crawl on
-> `ALG-B`, built, to measure stranding before anyone commits 4¼ hours. Recommended and
-> **not run.** It is methodology, not a decision awaiting the owner.
+> **The experiment the previous two handoffs were waiting on has run.** There is no
+> outstanding experiment gating the plan. The four strands and their order are unchanged;
+> two items inside them are now known to be harder than they looked, and the handoff names
+> both.
 
-**Algorithm selection is EXECUTED and read (2026-07-29).** Record:
-[`2026-07-29-algorithm-selection-execution-log.md`](2026-07-29-algorithm-selection-execution-log.md);
-pre-registration `specs/2026-07-29-algorithm-selection-preregistration.md`, committed before
-any arm ran; figures `builder/analysis/2026-07-29-cap-selection-sim/`. Branch
-`graph-rebuild-plan`, PR #48.
+**Reciprocity sampling is EXECUTED and read (2026-07-29).** Record:
+[`2026-07-29-reciprocity-execution-log.md`](2026-07-29-reciprocity-execution-log.md);
+pre-registration `specs/2026-07-29-reciprocity-sampling-preregistration.md`, committed before
+any arm ran; figures `builder/analysis/2026-07-29-reciprocity-sampling/` and
+`builder/analysis/2026-07-29-trial-crawl-calibration/`. Branch
+`graph-rebuild-trial-crawl`, PR #49.
 
-In brief for orientation only, and **no summary may soften either half**: `ALG-B`
-(`days_7500 · contribution_3`, one parameter from production) is the **named re-crawl
-candidate** — it lifts obscure-candidate yield at the very top where production offers
-almost nothing. **But `AS-H2`: it returns 58% fewer candidates for obscure artists, so it
-plausibly strands MORE of them**, and `AS-R3` fires — it is a **replacement graph, not a
-patch**, so every path-quality figure this project holds was measured on the current
-setting. Nothing measures whether its new edges are any *good* (`REQ-38`).
+In brief for orientation only, and **no summary may keep one half without the other**:
+`ALG-B` **does** strand obscure artists — `AS-H2`'s candidate-supply drop translates into
+lost connections, and the cause is **supply, not reciprocation** (for obscure artists the
+count halves while the share pointing back rises). **And** an `ALG-B` artifact is predicted to
+be **refused by the build** on two acceptance clauses, because R.E.M. reciprocates nothing.
+**But** `ALG-B` still does what `AS-C1` credited it with, and the median famous artist clears
+the build's own degree floor. `AS-R3` still stands: it is a **replacement graph, not a patch**,
+and nothing measures whether its new edges are any *good* (`REQ-38`).
 
 **The requirements baseline is unchanged since 2026-07-29:**
 [`PRODUCT-REQUIREMENTS.md`](PRODUCT-REQUIREMENTS.md) (`REQ-`) governs where it and
@@ -55,7 +56,9 @@ limitation**.
 - **Any blind listen on a router-only candidate** — the listen is deferred to the full
   stack (graph + device).
 - **The `ALG-B` re-crawl itself** — 4¼ hours, a new archive, a new graph, and it retires the
-  existing path-quality figures. His call, and it owes a blind listen before adoption.
+  existing path-quality figures. His call, and it owes a blind listen before adoption. **Its
+  price is now measured rather than suspected**, and it is not currently buildable: see the
+  two blockers below.
 
 **Still owed by the owner, unchanged:**
 
@@ -81,6 +84,11 @@ limitation**.
   `CS-P0e`). `limit` cannot exceed 100; `threshold` cannot go below 10 and production is
   already there. **Do not propose raising the candidate-list length or lowering the
   threshold — neither is possible.**
+- **The `--target`-capped trial crawl is RETIRED as the instrument for `AS-H2`** — its
+  readable core is structurally famous (3 artists below the median at target 3,000), so it
+  cannot answer a question about obscure artists. **Retired for that question, not for all
+  questions:** it remains the only way to reach component membership (`RC-H1`). Do not
+  re-propose it for stranding.
 - ~~**`STC-6`** — the lower-threshold re-crawl probe.~~ **KILLED 2026-07-29**: its
   condition became *known-unreachable* (no lower threshold exists), which the closeout
   standing rule makes a kill rather than a reschedule. Struck, kept for the record.
@@ -91,15 +99,18 @@ limitation**.
   length-preserving constraint is a **new device needing its own pre-registration**, which
   must consume `TB-P5H-7` at design time.
 - **Loosening the both-ways cap is rejected** (`MKS-5b`); any targeted alternative must
-  demonstrate its bound by simulation first. ⚠ **`CS-P0f` explains what that rule is
-  actually doing** — the source `score` is symmetric, so mutual k-NN adds no similarity
-  evidence and cuts the famous→obscure direction 87.4% of the time. **That is not a licence
-  to change it**; `MKS-5b` is untouched.
+  demonstrate its bound by simulation first. ⚠ **Two findings now bear on it and neither
+  changes it.** `CS-P0f`: the source `score` is symmetric, so mutual k-NN adds no similarity
+  evidence and cuts the famous→obscure direction 87.4% of the time. `RC-A2`: under `ALG-B`
+  four of forty top-0.1% artists sit at rank 50–97 in their own candidates' lists, just
+  outside the cut. **Neither is a licence to change `k`**; both are inputs to the
+  cap-selection simulation.
 - **The cap-selection simulation is RE-ORDERED, not cancelled** — still owed under
-  `MKS-5b`, now the third strand of the rebuild plan. `CS-P0c` showed it cannot fix `DD-F1`.
+  `MKS-5b`, the third strand of the rebuild plan. `CS-P0c` showed it cannot fix `DD-F1`, and
+  `RC-A2` shows it **interacts with any algorithm change** rather than composing with it.
 - **Famous-pair first-path fame is barred as a scoring criterion** (PLA-R1).
 - **The nameless-artist question is decided** (drop). Implementation comes due in the
-  rebuild plan.
+  rebuild plan, and it now **gates that plan's own first build**.
 - **The builder-side p99 rescale stays parked** (DD-R2's trigger never fired) — a candidate
   *input* to the rebuild plan, not a commitment.
 - **The OneDrive migration is COMPLETE**; the old tree is an archive, never the working tree.
@@ -118,7 +129,7 @@ limitation**.
   fails to renew in ~13 months.
 - **The rate limit is `10 / 10 s`, not `30 / 60 s`** — see `infra/README.md` §1a.
 - **The `acceptance.py` blank-name check** — do not weaken it to unblock a build;
-  implement the drop rule.
+  implement the drop rule. **It now blocks trial builds too, which is the point.**
 - **The mirror's two device knobs (`w_known_ramp_pctl`, `w_known_thresh_pctl`) stay 0.0**
   — analysis-only; nothing is adopted; TB-G1 is the evidence production is untouched.
 - **`BuilderConfig.algorithm` still carries `contribution_5`** — `ALG-B` is a candidate,
@@ -128,10 +139,13 @@ limitation**.
 
 | Finding | Condition |
 |---|---|
-| **Stranding under `ALG-B`** (`AS-H2`) | **Before any adoption decision** — the trial crawl above. The candidate-supply drop is measured; its graph-level effect is not. |
-| **Stratum-aware reads** (`AS-H1`) | **If any successor algorithm pre-registration is written** — two of five reads did not fire because they assumed the popularity bands would agree. |
+| **Component membership under `ALG-B`** (`RC-H1`) | **Before any adoption decision.** Sampling cannot reach it; it needs a real build, which needs the drop rule first. This is the surviving half of `AS-H2`. |
+| **`RC-P2`'s predicted build refusal** — R.E.M. and the top-25 minimum degree floor | **Confirmed or refuted by the first `ALG-B` trial build.** Predicted from sampling, never observed from a build. |
+| **`RC-H3`** — the archive key does not encode the algorithm | **Before any re-crawl that writes into an existing archive**, or it silently returns the old setting's data. |
+| **No way to select the algorithm for a build** — `BuilderConfig` is frozen, `cli.py` threads only `--target` | **Before any trial build on a non-default algorithm.** |
+| **Re-scoring `rc_raw_records.json` at a different `k`** — full candidate lists were stored to make this possible without new requests | **If the cap-selection simulation is designed** (strand 3); consume `RC-A2` at design time. |
 | **`ALG-B` edge quality / blind listen** | **If the owner picks up the re-crawl** (`REQ-38`). |
-| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild — DUE: the rebuild plan must schedule it.** |
+| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild — DUE: the rebuild plan must schedule it, and it gates the plan's own first build.** |
 | **`TB-P5H-7`** — TB-C2's failure by TB-C1-passing arms is consumed by no pre-registered read | **If any successor bypass-device pre-registration is written.** |
 | **The candidate-pool recompute** (one statistic across DD and TB arms) | **If the owner picks up the parked candidate decision.** |
 | The `--prune` publish pass | **Ripe since 2026-07-29** — `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. |
@@ -143,5 +157,7 @@ limitation**.
 | `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is inert | Only if someone adds `viewport-fit=cover`. |
 | Reading the request stream to bound chunked bodies | The Content-Length guard covers every reachable path. |
 | **`G3-S4`'s disclosure half** — what the app records about visitors | **The owner's call.** |
+| ✅ **Stranding under `ALG-B`** (`AS-H2`), connection-count half | **DISCHARGED 2026-07-29** — measured by `RC`; `RC-R1` fired on both the pre-registered and the corrected read. Struck, kept for the record. Its component-membership half is live above as `RC-H1`. |
+| ✅ **Stratum-aware reads** (`AS-H1`) | **DISCHARGED 2026-07-29** — the successor algorithm pre-registration was written and honoured it: `RC` keeps all five fame bands separate and `RC-G2` refuses to pool an under-populated band. Struck, kept for the record. |
 | ✅ `score_t3.py` A11-flag deferral | **DISCHARGED 2026-07-29** — TB-G4, verified by TB-P5. Struck, kept for the record. |
 | ✅ **`STC-6`** lower-threshold re-crawl probe | **KILLED 2026-07-29** — no lower threshold exists (`CS-P0e`). Struck, kept for the record. |
