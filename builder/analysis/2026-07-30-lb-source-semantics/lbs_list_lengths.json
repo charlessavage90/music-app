@@ -1,0 +1,55 @@
+{
+  "source": "builder\\analysis\\2026-07-29-cap-selection-sim\\as_raw_records.json",
+  "arms": {
+    "ALG-E": "session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30",
+    "ALG-B": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+    "ALG-A": "session_based_days_1825_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+    "ALG-F": "session_based_days_1800_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+    "ALG-D": "session_based_days_75_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30",
+    "ALG-C": "session_based_days_9000_session_300_contribution_5_threshold_15_limit_50_skip_30"
+  },
+  "list_lengths": {
+    "ALG-E": {
+      "n": 200,
+      "min": 1,
+      "median": 100.0,
+      "max": 100,
+      "at_max": 146
+    },
+    "ALG-B": {
+      "n": 200,
+      "min": 0,
+      "median": 100.0,
+      "max": 100,
+      "at_max": 138
+    },
+    "ALG-A": {
+      "n": 200,
+      "min": 0,
+      "median": 100.0,
+      "max": 100,
+      "at_max": 123
+    },
+    "ALG-F": {
+      "n": 200,
+      "min": 0,
+      "median": 100.0,
+      "max": 100,
+      "at_max": 124
+    },
+    "ALG-D": {
+      "n": 200,
+      "min": 0,
+      "median": 7.0,
+      "max": 100,
+      "at_max": 67
+    },
+    "ALG-C": {
+      "n": 200,
+      "min": 0,
+      "median": 100.0,
+      "max": 100,
+      "at_max": 111
+    }
+  }
+}
