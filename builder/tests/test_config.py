@@ -45,6 +45,23 @@ def test_damping_remains_a_supported_continuous_knob():
     assert BuilderConfig(similarity_damping=0.25).similarity_damping == 0.25
 
 
+def test_default_algorithm_is_production():
+    from artistpath_builder.config import PRODUCTION_ALGORITHM
+
+    assert BuilderConfig().algorithm == PRODUCTION_ALGORITHM
+    assert "contribution_5" in PRODUCTION_ALGORITHM
+
+
+def test_permitted_algorithms_is_the_closed_enum_of_six():
+    # CS-P0e validated the endpoint accepts exactly six values; anything else
+    # returns HTTP 400. Pinned so a seventh cannot be added without a probe.
+    from artistpath_builder.config import PERMITTED_ALGORITHMS, PRODUCTION_ALGORITHM
+
+    assert len(PERMITTED_ALGORITHMS) == 6
+    assert PRODUCTION_ALGORITHM in PERMITTED_ALGORITHMS
+    assert len(set(PERMITTED_ALGORITHMS)) == 6
+
+
 def test_behavioural_edge_type_is_zero():
     # Alpha emits exactly one edge type; downstream reads it as uint8.
     assert EdgeType.BEHAVIOURAL == 0

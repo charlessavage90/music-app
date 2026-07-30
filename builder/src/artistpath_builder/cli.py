@@ -26,7 +26,7 @@ from artistpath_builder.acceptance import (
 )
 from artistpath_builder.archive import LocalArchive, S3Archive
 from artistpath_builder.artifact import deserialise, serialise
-from artistpath_builder.config import BuilderConfig
+from artistpath_builder.config import PERMITTED_ALGORITHMS, BuilderConfig
 from artistpath_builder.crawl import Crawler, http_fetcher
 from artistpath_builder.fixture import extract_fixture
 from artistpath_builder.manifest import build_manifest, write_manifest
@@ -42,11 +42,31 @@ PAGE_SIZE = 1000
 
 
 def _config(args) -> BuilderConfig:
-    """Allow the discovery cap to be overridden for trial runs."""
+    """Allow the discovery cap and the source algorithm to be overridden for
+    trial runs.
+
+    The DEFAULT stays the production algorithm: flipping the default is the
+    re-crawl decision, which is the owner's (NEXT.md).
+
+    Validation lives here at the CLI boundary rather than in
+    `BuilderConfig.__post_init__` — analysis harnesses under builder/analysis/
+    construct configs directly and own their own validation, and the frozen
+    dataclass stays a dumb container.
+    """
+    overrides: dict = {}
     target = getattr(args, "target", None)
     if target:
-        return BuilderConfig(target_artist_count=target)
-    return BuilderConfig()
+        overrides["target_artist_count"] = target
+    algorithm = getattr(args, "algorithm", None)
+    if algorithm:
+        if algorithm not in PERMITTED_ALGORITHMS:
+            raise SystemExit(
+                f"unknown algorithm {algorithm!r}: the endpoint accepts a "
+                "closed enum of six values (CS-P0e) — see "
+                "artistpath_builder.config.PERMITTED_ALGORITHMS"
+            )
+        overrides["algorithm"] = algorithm
+    return BuilderConfig(**overrides)
 
 
 def _archive(args):
@@ -174,11 +194,21 @@ def main(
     p_crawl.add_argument(
         "--target", type=int, default=None, help="discovery cap; for trial runs"
     )
+    p_crawl.add_argument(
+        "--algorithm",
+        default=None,
+        help="source algorithm for trial runs; default is production's (ALG-E)",
+    )
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
 
     p_build = sub.add_parser("build")
     p_build.add_argument("--out", required=True)
+    p_build.add_argument(
+        "--algorithm",
+        default=None,
+        help="which algorithm's archive tree to build from; default production's",
+    )
     add_archive_args(p_build)
     p_build.set_defaults(func=cmd_build)
 

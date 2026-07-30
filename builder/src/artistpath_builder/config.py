@@ -8,15 +8,45 @@ from artistpath_builder import __version__
 
 CONTACT_EMAIL = "charlessavagemiller@gmail.com"
 
+# The live endpoint's `algorithm` parameter is a CLOSED ENUM of exactly these
+# six values — validated 2026-07-29 (CS-P0e; probes and the 400s they returned
+# are recorded in
+# builder/analysis/2026-07-29-cap-selection-sim/cs_p0e_algorithms.json).
+# Arm labels ALG-A..ALG-F are the AS pre-registration's. Do not add values:
+# anything outside this set returns HTTP 400.
+PRODUCTION_ALGORITHM = (  # ALG-E — the adopted 75k archive's algorithm
+    "session_based_days_7500_session_300_contribution_5"
+    "_threshold_10_limit_100_filter_True_skip_30"
+)
+PERMITTED_ALGORITHMS = (
+    PRODUCTION_ALGORITHM,
+    # ALG-B — the named re-crawl candidate (AS log §7); differs from
+    # production by contribution_3.
+    "session_based_days_7500_session_300_contribution_3"
+    "_threshold_10_limit_100_filter_True_skip_30",
+    # ALG-A
+    "session_based_days_1825_session_300_contribution_3"
+    "_threshold_10_limit_100_filter_True_skip_30",
+    # ALG-F
+    "session_based_days_1800_session_300_contribution_3"
+    "_threshold_10_limit_100_filter_True_skip_30",
+    # ALG-D
+    "session_based_days_75_session_300_contribution_5"
+    "_threshold_10_limit_100_filter_True_skip_30",
+    # ALG-C
+    "session_based_days_9000_session_300_contribution_5"
+    "_threshold_15_limit_50_skip_30",
+)
+
 
 @dataclass(frozen=True, slots=True)
 class BuilderConfig:
     # --- source ---------------------------------------------------------
-    # Confirmed working against the live endpoint in Task 1.
-    algorithm: str = (
-        "session_based_days_7500_session_300_contribution_5"
-        "_threshold_10_limit_100_filter_True_skip_30"
-    )
+    # Confirmed working against the live endpoint in Task 1. Changing this
+    # DEFAULT is the re-crawl decision itself and is the owner's (NEXT.md);
+    # a trial run overrides it per-invocation via `artistpath-build
+    # crawl|build --algorithm`.
+    algorithm: str = PRODUCTION_ALGORITHM
     similar_artists_url: str = "https://labs.api.listenbrainz.org/similar-artists/json"
     sitewide_artists_url: str = "https://api.listenbrainz.org/1/stats/sitewide/artists"
 
