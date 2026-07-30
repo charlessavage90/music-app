@@ -78,6 +78,13 @@ This work touched neither `CLAUDE.md`, `memory/`, nor any skill or agent file.
 **A5 — ports:** 8000 and 5173 both empty at closeout; this session started no listeners
 (its network activity was outbound API clients only).
 
+**B1 — documentation audit:** lint hard checks passed (candidates all pre-existing);
+the diff-scoped `doc-auditor` run reported **no defects** — figures verified against
+the committed JSONs, supersession chain correct, `COH-` census clean, the two
+outstanding 2026-07-27 audit items correctly untouched. One map defect was found and
+fixed by this session *before* the audit (the track-b-runs row still claiming CURRENT
+beside the fame-proxy row), and the audit confirmed the fix.
+
 ## §7 What was decided against, and why
 
 - **Gating on raw-tag coverage** — tags are a dirtier vocabulary and the instrument
