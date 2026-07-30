@@ -180,13 +180,88 @@ obscure.** Others: 黒沢ともよ (16), 洲崎綾 (14), A‐WA (13, a non-stand
 Small in count, wrong in a specific and correlated direction, and **eliminated outright by
 the MBID join** — `P434` *is* the MusicBrainz artist ID.
 
-### `FPC-8` — the magnitude question
+### `FPC-8` — multilingual pageviews are NOT a materially different ranking instrument
 
-*Running at the time of writing; read fixed in `fp_magnitude.py` before execution: ≥10% of
-sampled artists moving ≥20 rank percentiles between English-only and all-language pageviews
-makes multilingual a materially different instrument; <5% means English is an adequate
-stand-in. A high pooled correlation is pre-committed as **not** closing the question,
-because the defect being looked for is a misranked tail underneath a strong aggregate.*
+*(Plain: adding up every language's Wikipedia readership instead of just English barely
+changes who ranks above whom. A small minority move a lot; most do not.)*
+
+125 artists with English articles, stratified, same window as the adopted proxy:
+
+| quantity | measured | pre-committed reading |
+|---|---|---|
+| ρ(English views, all-language views) | **0.9586** | pre-committed as **not** closing it |
+| median English share of total views | **0.7046** | — |
+| artists with English share < 0.35 | **11.2%** | — |
+| **moved ≥ 20 rank percentiles** | **4.0%** | **< 5% ⇒ English is adequate** |
+
+**Verdict: English is an adequate stand-in**, on the pre-registered threshold. I committed
+in advance that a high pooled correlation would *not* settle this and that the misranked
+tail had to be read separately — it was, and it is 4.0%, below the line.
+
+The tail is real but small, and skews as expected: the largest mover has an English share
+of **0.8%** and shifts 48 rank percentiles. So multilingual is the better instrument *for
+that 4%*, and not worth the complexity for the rest.
+
+**This does not carry over to `FPC-5`.** Coverage and magnitude are different questions:
+multilingual adds real *coverage* (7.1/6.8 points) while adding little *ranking* value. A
+design could reasonably take the coverage and ignore the magnitude.
+
+### `FPC-10` — MBID keying trades quiet nulls for loud errors, and that is the point
+
+*(Plain: matching artists by name sometimes scored a completely different person or thing —
+a Roman emperor, a TV series, an adult film actor. Matching by ID does not.)*
+
+Comparing the frozen name-search resolver against `P434` on the 1,090 Track 2 artists
+resolvable to a unique artifact name:
+
+| outcome | count |
+|---|---|
+| same entity, both resolved | 1,036 |
+| **wrong entity under name search** | **18** |
+| recovered by MBID (was at the floor) | 10 |
+| lost by MBID (name-matched, no `P434` link) | 26 |
+| name ambiguous in the artifact — excluded | 37 |
+
+The wrong-entity cases are severe, not marginal:
+
+| artist in the graph | name search scored | pageviews it used |
+|---|---|---|
+| Love (folk-rock band) | **Sean Combs** | 5,912,387 |
+| NERO (band) | **Nero**, the Roman emperor | 1,538,517 |
+| Survivor (band) | **Survivor**, the TV series | 1,371,631 |
+| DEEN (band) | **James Deen**, adult film actor | 445,726 |
+| Trim (musician) | **Guido Gezelle**, 19th-c. Flemish poet | 4,877 |
+
+**On count this is close to a wash — 28 improvements against 26 losses. On error character
+it is not.** A loss becomes a floor score: a visible null, and `FPC-1` says the floor is
+usually correct anyway. A wrong entity is invisible corruption of the exact quantity a fame
+criterion reads, wrong by orders of magnitude, in whichever direction the collision happens
+to point.
+
+**The 37 excluded rows understate the case.** Those are names carried by two artists in the
+artifact — the `GOOSE`/`Goose` class. Name search cannot separate them even in principle;
+MBID keying handles them natively. They are excluded here only because the comparison needs
+a unique key.
+
+### `FPC-11` — the instrument built to remove silent errors reproduced one, and validation caught it
+
+*(Plain: my first version of the ID lookup picked the wrong answer for Neil Young, for a
+reason that looked sensible and was not.)*
+
+`fp_wikidata.py` broke ties between two Wikidata items claiming the same `P434` by keeping
+the one with **more language Wikipedias**. Neil Young's MBID is claimed both by `Q633`
+(correct) and by `Q25820` — Thomas Young, the physicist, an erroneous claim upstream — and
+the physicist has more sitelinks. The tie-break chose him.
+
+**54 MBIDs are multiply claimed.** Repaired by preferring a music signal (occupation, genre,
+label, music-service identifiers) and never sitelink count: **9 corrected, 21 already right,
+24 refused as ambiguous and scored at the floor.** Refusing is deliberate — a refused answer
+is auditable, a lucky guess is the thing being fixed.
+
+Recorded rather than quietly patched, for two reasons: it is the same defect class this
+document complains about, reproduced by the instrument built to remove it; and **it was
+caught by the validation pass, not by review** — which is the fourth time on this project
+that running the check beat reading the code.
 
 ## 2. The identity finding, separable from everything else
 

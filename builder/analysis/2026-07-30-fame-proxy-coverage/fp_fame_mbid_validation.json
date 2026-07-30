@@ -1,0 +1,596 @@
+{
+ "population": "Track 2 fame_cache.json, resolvable to a unique artifact name",
+ "cached_artists": 1296,
+ "comparable": 1090,
+ "agree_same_entity": 1036,
+ "wrong_entity_under_name_search": 18,
+ "recovered_by_mbid": 10,
+ "lost_by_mbid": 26,
+ "name_ambiguous_in_artifact": 37,
+ "not_in_artifact": 0,
+ "wrong_entity_rows": [
+  {
+   "name": "DEEN",
+   "mbid": "10527799-f2d3-471a-bd67-a47bcbd2c686",
+   "band": "lower half",
+   "old_article": "James Deen",
+   "new_article": "Deen (band)",
+   "old_qid": "Q332641",
+   "new_qid": "Q615110",
+   "old_pageviews": 445726
+  },
+  {
+   "name": "DRAM",
+   "mbid": "6247d69d-426f-440f-97e0-74a9a0b00358",
+   "band": "top 10%",
+   "old_article": "Play (theatre)",
+   "new_article": "DRAM (musician)",
+   "old_qid": "Q25379",
+   "new_qid": "Q25138504",
+   "old_pageviews": 66182
+  },
+  {
+   "name": "Danzig",
+   "mbid": "8925a01a-8608-411d-a90b-f3a52d061208",
+   "band": "top 10%",
+   "old_article": "Glenn Danzig",
+   "new_article": "Danzig (band)",
+   "old_qid": "Q354654",
+   "new_qid": "Q649175",
+   "old_pageviews": 414441
+  },
+  {
+   "name": "Daughtry",
+   "mbid": "21e3292e-dac8-4609-b57d-402f926aa41f",
+   "band": "upper half",
+   "old_article": "Chris Daughtry",
+   "new_article": "Daughtry (band)",
+   "old_qid": "Q877858",
+   "new_qid": "Q873413",
+   "old_pageviews": 374359
+  },
+  {
+   "name": "Faust",
+   "mbid": "0568e321-d42b-4da4-a025-2643c9fc13dd",
+   "band": "upper half",
+   "old_article": "Faust (musician)",
+   "new_article": "Faust (band)",
+   "old_qid": "Q554527",
+   "new_qid": "Q679697",
+   "old_pageviews": 109108
+  },
+  {
+   "name": "HEALTH",
+   "mbid": "6805e4d5-f550-40fe-b731-05dc8229e74b",
+   "band": "top 10%",
+   "old_article": "Health (game terminology)",
+   "new_article": "Health (band)",
+   "old_qid": "Q668136",
+   "new_qid": "Q656287",
+   "old_pageviews": 20530
+  },
+  {
+   "name": "Kaya Project",
+   "mbid": "f2a5a441-bc7a-43c3-bdbe-c6c4c8010c48",
+   "band": "top 10%",
+   "old_article": "Kaya Project",
+   "new_article": "Seb Taylor",
+   "old_qid": "Q137886371",
+   "new_qid": "Q7442312",
+   "old_pageviews": 1207
+  },
+  {
+   "name": "LFO",
+   "mbid": "e6d0179f-b899-4563-b6c6-88715aaae0b8",
+   "band": "top 10%",
+   "old_article": "LFO (American band)",
+   "new_article": "LFO (British band)",
+   "old_qid": "Q1758534",
+   "new_qid": "Q1798055",
+   "old_pageviews": 244617
+  },
+  {
+   "name": "Love",
+   "mbid": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47",
+   "band": "top 10%",
+   "old_article": "Sean Combs",
+   "new_article": "Love (band)",
+   "old_qid": "Q216936",
+   "new_qid": "Q664248",
+   "old_pageviews": 5912387
+  },
+  {
+   "name": "NERO",
+   "mbid": "bd057a0c-a7b6-47bf-8dc3-45e0efac1798",
+   "band": "top 1%",
+   "old_article": "Nero",
+   "new_article": "Nero (band)",
+   "old_qid": "Q1413",
+   "new_qid": "Q1066310",
+   "old_pageviews": 1538517
+  },
+  {
+   "name": "Omar",
+   "mbid": "8c41073b-4229-4eda-b45d-34513ed61304",
+   "band": "upper half",
+   "old_article": "Omar Khayyam",
+   "new_article": "Omar Lye-Fook",
+   "old_qid": "Q35900",
+   "new_qid": "Q3351879",
+   "old_pageviews": 223413
+  },
+  {
+   "name": "Survivor",
+   "mbid": "55ef024a-6cc0-49ed-8ce2-2e12193c0f46",
+   "band": "top 10%",
+   "old_article": "Survivor (American TV series)",
+   "new_article": "Survivor (band)",
+   "old_qid": "Q28856068",
+   "new_qid": "Q1135315",
+   "old_pageviews": 1371631
+  },
+  {
+   "name": "Tosca",
+   "mbid": "3231d12a-c42d-4977-b2a4-a6e4d87978e1",
+   "band": "top 10%",
+   "old_article": "Tosca",
+   "new_article": "Tosca (band)",
+   "old_qid": "Q192941",
+   "new_qid": "Q284999",
+   "old_pageviews": 241054
+  },
+  {
+   "name": "Trim",
+   "mbid": "2151818d-8cf9-4c0f-b992-ffde4bf711ac",
+   "band": "upper half",
+   "old_article": "Guido Gezelle",
+   "new_article": "Trim (musician)",
+   "old_qid": "Q336977",
+   "new_qid": "Q7842119",
+   "old_pageviews": 4877
+  },
+  {
+   "name": "Truth",
+   "mbid": "bfad21ad-c2fa-47f2-8d12-d9f9da8bbff1",
+   "band": "upper half",
+   "old_article": "Truth (Chingiz song)",
+   "new_article": "Truth (duo)",
+   "old_qid": "Q61997162",
+   "new_qid": "Q7848269",
+   "old_pageviews": 1415
+  },
+  {
+   "name": "Underworld",
+   "mbid": "ba2f4f3b-0293-4bc8-bb94-2f73b5207343",
+   "band": "top 1%",
+   "old_article": "Underworld (film series)",
+   "new_article": "Underworld (band)",
+   "old_qid": "Q82332",
+   "new_qid": "Q849429",
+   "old_pageviews": 683381
+  },
+  {
+   "name": "WISE",
+   "mbid": "754241ca-1590-4ecb-92c0-7e70eae62b63",
+   "band": "lower half",
+   "old_article": "Wise (composer)",
+   "new_article": "Wise (rapper)",
+   "old_qid": "Q8027437",
+   "new_qid": "Q4354212",
+   "old_pageviews": 2176
+  },
+  {
+   "name": "Wiki",
+   "mbid": "383b0514-362e-4aeb-9950-04a75fc0210c",
+   "band": "upper half",
+   "old_article": "Wikipedia",
+   "new_article": "Wiki (rapper)",
+   "old_qid": "Q52",
+   "new_qid": "Q39069646",
+   "old_pageviews": 10957493
+  }
+ ],
+ "recovered_rows": [
+  {
+   "name": "Amp",
+   "mbid": "c60f9fb1-b519-4c70-ba0c-d89b9e96aff1",
+   "band": "upper half",
+   "old_article": null,
+   "new_article": "Amp (band)",
+   "old_qid": null,
+   "new_qid": "Q3614650",
+   "old_pageviews": null
+  },
+  {
+   "name": "A\u2010WA",
+   "mbid": "cc448b70-4c20-4ea4-a818-053494aee734",
+   "band": "upper half",
+   "old_article": null,
+   "new_article": "A-WA",
+   "old_qid": null,
+   "new_qid": "Q21844934",
+   "old_pageviews": null
+  },
+  {
+   "name": "Bad Computer",
+   "mbid": "7dcb5105-7780-4a6c-aaaa-63e0bc6f1eaa",
+   "band": "top 10%",
+   "old_article": null,
+   "new_article": "Bad Computer",
+   "old_qid": null,
+   "new_qid": "Q122172981",
+   "old_pageviews": null
+  },
+  {
+   "name": "Chime",
+   "mbid": "de7bddc4-e9c8-43b5-af57-4a0c463951a4",
+   "band": "top 10%",
+   "old_article": null,
+   "new_article": "Chime (musician)",
+   "old_qid": null,
+   "new_qid": "Q140168002",
+   "old_pageviews": null
+  },
+  {
+   "name": "Frisco",
+   "mbid": "422bc4fc-0df9-4cd6-8f01-606a8d0193fa",
+   "band": "upper half",
+   "old_article": null,
+   "new_article": "Frisco (rapper)",
+   "old_qid": null,
+   "new_qid": "Q60733802",
+   "old_pageviews": null
+  },
+  {
+   "name": "Helios",
+   "mbid": "50a32791-ee43-4c67-aabc-3dc65e4a9838",
+   "band": "top 10%",
+   "old_article": null,
+   "new_article": "Keith Kenniff",
+   "old_qid": null,
+   "new_qid": "Q5762948",
+   "old_pageviews": null
+  },
+  {
+   "name": "Mahogany",
+   "mbid": "7ae235e2-429b-4162-9783-c038d820331a",
+   "band": "upper half",
+   "old_article": null,
+   "new_article": "Mahogany (band)",
+   "old_qid": null,
+   "new_qid": "Q6734719",
+   "old_pageviews": null
+  },
+  {
+   "name": "\u521d\u97f3\u30df\u30af",
+   "mbid": "130d679a-9a92-4373-8348-0800b6b93a30",
+   "band": "top 10%",
+   "old_article": null,
+   "new_article": "Hatsune Miku",
+   "old_qid": null,
+   "new_qid": "Q552682",
+   "old_pageviews": null
+  },
+  {
+   "name": "\u6d32\u5d0e\u7dbe",
+   "mbid": "9f297aa6-dd27-4385-8b50-5bb3ce031338",
+   "band": "upper half",
+   "old_article": null,
+   "new_article": "Aya Suzaki",
+   "old_qid": null,
+   "new_qid": "Q888218",
+   "old_pageviews": null
+  },
+  {
+   "name": "\u9ed2\u6ca2\u3068\u3082\u3088",
+   "mbid": "e7388c0e-d80a-4f55-b76a-4e256a579f79",
+   "band": "upper half",
+   "old_article": null,
+   "new_article": "Tomoyo Kurosawa",
+   "old_qid": null,
+   "new_qid": "Q1955926",
+   "old_pageviews": null
+  }
+ ],
+ "lost_rows": [
+  {
+   "name": "Boy Better Know",
+   "mbid": "ded07c37-7103-4d08-9b25-84b42728d545",
+   "band": "upper half",
+   "old_article": "Boy Better Know",
+   "new_article": null,
+   "old_qid": "Q4952056",
+   "new_qid": null,
+   "old_pageviews": 59079
+  },
+  {
+   "name": "Captain Beefheart & His Magic Band",
+   "mbid": "8dcd04e4-7695-4d80-bae9-1d7d680a38ef",
+   "band": "top 10%",
+   "old_article": "The Magic Band",
+   "new_article": null,
+   "old_qid": "Q820040",
+   "new_qid": null,
+   "old_pageviews": 27020
+  },
+  {
+   "name": "Cassian",
+   "mbid": "8695c165-4cfd-48fd-a56a-f9be815e3f90",
+   "band": "upper half",
+   "old_article": "Nina Cassian",
+   "new_article": null,
+   "old_qid": "Q2735531",
+   "new_qid": "Q12305536",
+   "old_pageviews": 5020
+  },
+  {
+   "name": "Dimension",
+   "mbid": "50b41344-7a92-4e53-8c93-f38c66cf68f3",
+   "band": "top 10%",
+   "old_article": "Dimension (musician)",
+   "new_article": null,
+   "old_qid": "Q112913243",
+   "new_qid": "Q110306616",
+   "old_pageviews": 19206
+  },
+  {
+   "name": "Dodge & Fuski",
+   "mbid": "b73f644b-9e6c-4d0c-839d-45df4998a9ff",
+   "band": "top 10%",
+   "old_article": "Dodge & Fuski",
+   "new_article": null,
+   "old_qid": "Q138451775",
+   "new_qid": null,
+   "old_pageviews": 1422
+  },
+  {
+   "name": "EVAN GIIA",
+   "mbid": "4e8d889a-6041-4b9e-9389-d896c9af34f6",
+   "band": "lower half",
+   "old_article": "Evan Giia",
+   "new_article": null,
+   "old_qid": "Q107297510",
+   "new_qid": null,
+   "old_pageviews": 4382
+  },
+  {
+   "name": "Fever Ray",
+   "mbid": "f7df5df4-4dfa-459d-972b-1ba051c15ddc",
+   "band": "top 1%",
+   "old_article": "Karin Dreijer",
+   "new_article": null,
+   "old_qid": "Q260570",
+   "new_qid": "Q55662676",
+   "old_pageviews": 128951
+  },
+  {
+   "name": "Forces of Nature",
+   "mbid": "47b49eb3-5ce6-4461-9f7a-27c2390f3d22",
+   "band": "upper half",
+   "old_article": "Forces of Nature (book)",
+   "new_article": null,
+   "old_qid": "Q28451556",
+   "new_qid": null,
+   "old_pageviews": 502
+  },
+  {
+   "name": "Gabriela Robin",
+   "mbid": "7b36bd95-064e-4501-8027-5bcdb9f4c0d3",
+   "band": "upper half",
+   "old_article": "Yoko Kanno",
+   "new_article": null,
+   "old_qid": "Q224981",
+   "new_qid": "Q3048586",
+   "old_pageviews": 117850
+  },
+  {
+   "name": "Hiatus",
+   "mbid": "6fae7e97-2ea8-47d7-9fe6-a345c9427d83",
+   "band": "top 10%",
+   "old_article": "The Hiatus",
+   "new_article": null,
+   "old_qid": "Q614462",
+   "new_qid": null,
+   "old_pageviews": 3797
+  },
+  {
+   "name": "Isis",
+   "mbid": "5e521e8c-0ab2-44c4-8fd8-14d8d3321265",
+   "band": "top 10%",
+   "old_article": "Isis (band)",
+   "new_article": null,
+   "old_qid": "Q740430",
+   "new_qid": null,
+   "old_pageviews": 93283
+  },
+  {
+   "name": "Malory",
+   "mbid": "a9244555-f2c3-4781-b2c4-61b5f959fdef",
+   "band": "upper half",
+   "old_article": "Yohann Malory",
+   "new_article": null,
+   "old_qid": "Q3546362",
+   "new_qid": "Q1253483",
+   "old_pageviews": 432
+  },
+  {
+   "name": "Mr. Fingers",
+   "mbid": "1e47567e-5192-43b9-af98-75e4998f9e52",
+   "band": "upper half",
+   "old_article": "Larry Heard",
+   "new_article": null,
+   "old_qid": "Q1375814",
+   "new_qid": null,
+   "old_pageviews": 29551
+  },
+  {
+   "name": "Murkage Dave",
+   "mbid": "9f02af13-3bc8-4aef-9d0a-d2996d67cba2",
+   "band": "lower half",
+   "old_article": "Murkage Dave",
+   "new_article": null,
+   "old_qid": "Q111181740",
+   "new_qid": null,
+   "old_pageviews": 4218
+  },
+  {
+   "name": "NESS",
+   "mbid": "a6a1edfd-6246-40d0-9201-5c4f569a5e23",
+   "band": "lower half",
+   "old_article": "Nessbeal",
+   "new_article": null,
+   "old_qid": "Q290264",
+   "new_qid": null,
+   "old_pageviews": 2320
+  },
+  {
+   "name": "Populous",
+   "mbid": "e1ce2605-8406-4933-b7d8-89e106e3b6ed",
+   "band": "top 10%",
+   "old_article": "Populous (series)",
+   "new_article": null,
+   "old_qid": "Q3262052",
+   "new_qid": "Q139470411",
+   "old_pageviews": 11429
+  },
+  {
+   "name": "Quench",
+   "mbid": "91790b6d-3b93-43f6-a77a-de410057b08c",
+   "band": "upper half",
+   "old_article": "Quench (musician)",
+   "new_article": null,
+   "old_qid": "Q16671861",
+   "new_qid": null,
+   "old_pageviews": 2050
+  },
+  {
+   "name": "SKisM",
+   "mbid": "e5fa0264-504b-4c56-bfb3-127e7bc0a276",
+   "band": "top 10%",
+   "old_article": "SKisM",
+   "new_article": null,
+   "old_qid": "Q11891735",
+   "new_qid": null,
+   "old_pageviews": 5066
+  },
+  {
+   "name": "Stig of the Dump",
+   "mbid": "577a7bdc-8397-4999-b61c-d644d0fe94f9",
+   "band": "upper half",
+   "old_article": "Stig of the Dump (rapper)",
+   "new_article": null,
+   "old_qid": "Q7616461",
+   "new_qid": null,
+   "old_pageviews": 1700
+  },
+  {
+   "name": "Tasha Baxter",
+   "mbid": "c49d01ef-6f39-4de5-8944-eaf0c1a1e836",
+   "band": "top 10%",
+   "old_article": "Tasha Baxter",
+   "new_article": null,
+   "old_qid": "Q78025697",
+   "new_qid": null,
+   "old_pageviews": 3761
+  },
+  {
+   "name": "The Architect",
+   "mbid": "423503fb-7e9e-44fd-8315-c70474f8cae1",
+   "band": "upper half",
+   "old_article": "The Architect (Kacey Musgraves song)",
+   "new_article": null,
+   "old_qid": "Q131394465",
+   "new_qid": null,
+   "old_pageviews": 12876
+  },
+  {
+   "name": "The Flashbulb",
+   "mbid": "24786816-025f-49f4-9787-4945a3311f96",
+   "band": "top 10%",
+   "old_article": "Benn Jordan",
+   "new_article": null,
+   "old_qid": "Q3121935",
+   "new_qid": null,
+   "old_pageviews": 82824
+  },
+  {
+   "name": "Thylacine",
+   "mbid": "e095407c-4103-4c66-b616-0dab1db05106",
+   "band": "top 10%",
+   "old_article": "Thylacine (band)",
+   "new_article": null,
+   "old_qid": "Q7799596",
+   "new_qid": "Q59205384",
+   "old_pageviews": 2056
+  },
+  {
+   "name": "U137",
+   "mbid": "6426ea3d-624b-4a66-ae82-14a150acf4b1",
+   "band": "top 10%",
+   "old_article": "U137 (band)",
+   "new_article": null,
+   "old_qid": "Q25212104",
+   "new_qid": null,
+   "old_pageviews": 1599
+  },
+  {
+   "name": "Warrior Queen",
+   "mbid": "c3f4e3f6-8eea-41f9-91ff-0a13fa616b3c",
+   "band": "top 10%",
+   "old_article": "Boudica (2003 film)",
+   "new_article": null,
+   "old_qid": "Q4949360",
+   "new_qid": null,
+   "old_pageviews": 26006
+  },
+  {
+   "name": "ZerO One",
+   "mbid": "f48c1319-315f-4d92-9596-29151c2cdf38",
+   "band": "upper half",
+   "old_article": "Zero One (song)",
+   "new_article": null,
+   "old_qid": "Q63190308",
+   "new_qid": null,
+   "old_pageviews": 237
+  }
+ ],
+ "ambiguous_names": [
+  "1991",
+  "Air",
+  "Airhead",
+  "Artemis",
+  "Biosphere",
+  "Burial",
+  "Chris Jones",
+  "Cyrus",
+  "D",
+  "DRS",
+  "Darkstar",
+  "Deluxe",
+  "Era",
+  "Fox",
+  "Gemini",
+  "Genesis",
+  "Justice",
+  "Khalid",
+  "Knapsack",
+  "L.D.",
+  "Locust",
+  "Logos",
+  "Lush",
+  "Magazine",
+  "Marilyn Manson",
+  "Nico",
+  "Nirvana",
+  "Paul Simon",
+  "Perfume",
+  "Phoenix",
+  "Pitch Black",
+  "Placebo",
+  "Rainbow",
+  "Rone",
+  "Sorrow",
+  "XTC",
+  "Zion"
+ ]
+}
