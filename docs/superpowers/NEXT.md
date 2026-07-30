@@ -8,60 +8,50 @@ rather than working around it.
 
 **Maintenance.** Rewritten wholesale at `closeout`, not appended to. It is short by design:
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
-those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
+Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and its raw
+`cb_scores.json`); the adopted graph's stay in
+`findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-30, on the Track B design closeout.**
+**Last updated: 2026-07-30, on the Track B runs closeout.**
 
 ---
 
 ## Next
 
-> ## The next work is TRACK B's RUNS AND READS — `CB-5` then `CB-6`, in a fresh session.
+> ## TRACK B IS COMPLETE — runs, reads and report. **The next action is the owner's.**
 >
 > Entry point is the handoff:
-> [`2026-07-30-HANDOFF-track-b-design.md`](2026-07-30-HANDOFF-track-b-design.md).
->
-> **Track B's design phase is DONE through its named seam.** The plan
-> (`plans/2026-07-30-graph-rebuild-track-b.md`) carries the owner's 2026-07-30 scope
-> rulings in §0 — **cap-RULE selection, not k-tuning; the degree bound is a scoping
-> constraint of this track, not a settled product conclusion; the uncapped row is a
-> reference barred from selection**. The pre-registration
-> (`specs/2026-07-30-track-b-cap-selection-preregistration.md`, `CRS-`, amended
-> `A1`–`A5` pre-scoring) is committed; every instrument gate has run green **and** red.
-> The runs are offline, deterministic, and under an hour of compute. **Three
-> order-sensitive obligations bind the successor** — scorer dry-run first,
-> `ALG-E`-`MK50`'s `C5` scored before any other `C5` (`CRS-A2`), reads in the prereg's
-> own order — the handoff lists them.
->
-> **Adoption of anything remains PARKED and is the owner's**, and it still owes a blind
-> listen (`REQ-38`).
-
-**The `LBS` semantics note is AUTHORITATIVE for the source algorithm's parameters**
-(`findings/2026-07-30-lb-algorithm-semantics.md`): read from LB's own source, corrects the
-2024 staff forum comment twice, supersedes every earlier paraphrase. `contribution` — the
-one token separating `ALG-B` from production — is a per-user cap; `LBS-4` gives the
-mechanism-shaped account of `RC-R1`'s stranding as labelled inference.
+> [`2026-07-30-HANDOFF-track-b-runs.md`](2026-07-30-HANDOFF-track-b-runs.md).
+> The results of record are
+> [`findings/2026-07-30-track-b-cap-selection-results.md`](findings/2026-07-30-track-b-cap-selection-results.md)
+> (four-part report; measured / inferred / weakest link / options). **Nothing is queued
+> for a working session.** The two parked decisions below now have the pre-registered
+> recommendation input Track B existed to produce; **both still owe a blind listen
+> (`REQ-38`) regardless of the numbers.**
 
 **The requirements baseline is unchanged since 2026-07-29:**
 [`PRODUCT-REQUIREMENTS.md`](PRODUCT-REQUIREMENTS.md) (`REQ-`) governs where it and
 [`WHAT-GOOD-LOOKS-LIKE.md`](WHAT-GOOD-LOOKS-LIKE.md) disagree (its §10 lists the
-disagreements). `DD-F1` remains **a defect, not an accepted limitation** — and the
-prereg's §0 bearing table now says, per family, which cap rules can even address it.
+disagreements). **`DD-F1` remains a defect, not an accepted limitation** — Track B's `R2`
+read measured where it can and cannot be moved; the results note owns that reading.
 
 ## PARKED — owner's explicit decision; his trigger, never a session's
 
+- **The cap-rule decision for any rebuild** — Track B's `R1` is its input; adoption of
+  any rule owes the blind listen.
+- **`ALG-B` adoption** — Track B's `R0`, `R2`, `R3` (`CRS-C6`) are its inputs, beside
+  `RC-R1`'s stranding figures; adoption retires the existing path-quality figures and
+  owes a blind listen (`REQ-38`).
+- **The router-side pricing track** (plan §0 ruling 2) — `R2`'s `ALG-E` null is its
+  motivating evidence: the quota edges exist and production weights decline them. Needs
+  its own pre-registration, which must consume `TB-P5H-7`.
 - **The candidate-pool product decision** — whether a shortened-but-obscure bypass
   candidate (Track 3's DD-A2 or a TB arm) ships at all.
 - **The one-statistic cross-track recompute** that must precede any DD-vs-TB comparison.
-- **Any blind listen on a router-only candidate** — the listen is deferred to the full
-  stack (graph + device).
-- **`ALG-B` adoption** — the archive and artifact exist (`GRT-P4`); what remains parked is
-  adoption, which retires the existing path-quality figures and owes a blind listen
-  (`REQ-38`). Track B's `CRS-C6` and `CRS-R3` are direct inputs to it.
-- **Re-evaluating bounded-degree itself** (router-priced unbounded graphs) — opened as a
-  legitimate future track by the owner's 2026-07-30 ruling (plan §0), his trigger, and it
-  would owe its own blind listen. Track B's uncapped reference row exists to give it
-  measured baselines.
+- **Any blind listen on a router-only candidate** — deferred to the full stack.
+- **Re-evaluating bounded-degree itself** (router-priced unbounded graphs) — Track B's
+  `UC` reference rows now give it measured baselines; his trigger; owes its own blind
+  listen.
 
 **Still owed by the owner, unchanged:**
 
@@ -83,33 +73,37 @@ prereg's §0 bearing table now says, per family, which cap rules can even addres
 
 ## Closed — do not re-plan or re-investigate
 
-- **The source `algorithm` parameter is a CLOSED ENUM of six values** (validated live,
-  `CS-P0e`). `limit` cannot exceed 100; `threshold` cannot go below 10 and production is
-  already there. **Do not propose raising the candidate-list length or lowering the
-  threshold — neither is possible.** Parameter semantics are now `LBS-`'s, from source.
-- **`CS-P0c` must not be cited as "no cap rule can fix `DD-F1`"** — its own text scopes it
-  to rules selecting from a node's own list, and `CB-P1` measured the reverse direction:
-  the union family's raw material exists in the tens of thousands. The prereg's §0 table
-  owns per-family bearing; **only `banded_quota` union cells bear on `DD-F1`** among
-  selectable rules, and a `CRS-C5` null elsewhere is confirmation, not a finding.
-- **The `--target`-capped trial crawl is RETIRED as the instrument for `AS-H2`** — retired
-  for that question, not for all questions (it remains the only way to reach component
-  membership). Do not re-propose it for stranding.
-- **Track 2, Track 2F and the ceiling toll are exhausted nulls. Do not re-run any of them.**
-- **Track 3's and Track 3b's results are closed** — do not re-run their arms or re-litigate
-  TB-R2.
+- **Track B's cells and reads are closed.** Builds are byte-deterministic and the raw
+  outputs are committed — do not re-run cells to "check"; re-running is only ever
+  instrument work under a harness change that re-fires `CRS-G1`.
+- **`R2`'s `ALG-E` null must not be cited as "the quota rule cannot fix `DD-F1`"** — it
+  is "the router declines the quota edges *at production weights*"; the pricing track
+  above owns the difference.
+- **`PS100` ≡ `MK100`, byte-identical, both archives** (`LBS-3`) — one graph, never two
+  data points. And **`proximity_select` at bound 50 measured materially worse on
+  stranding on both archives** — do not re-propose it as a candidate without new grounds.
+- **The pair-set attrition decision is closed** — the `× lower` classes are unreadable
+  per `CRS-G3` at the committed draw; a redraw is a new §8 amendment designed cold, the
+  owner's trigger if he wants obscure-endpoint path reads.
+- **The source `algorithm` parameter is a CLOSED ENUM of six values** (`CS-P0e`);
+  `limit` ≤ 100, `threshold` ≥ 10, production already at both edges. Parameter semantics
+  are `LBS-`'s, from source (`findings/2026-07-30-lb-algorithm-semantics.md`).
+- **`CS-P0c` must not be cited as "no cap rule can fix `DD-F1`"** — scoped to own-list
+  selection; the prereg's §0 table owns per-family bearing.
+- **The `--target`-capped trial crawl is RETIRED for `AS-H2`** (only).
+- **Track 2, Track 2F and the ceiling toll are exhausted nulls. Do not re-run any.**
+- **Track 3's and Track 3b's results are closed** — do not re-run their arms or
+  re-litigate TB-R2.
 - **The routing-side toll family is closed for descent claims**; any explicit
-  length-preserving constraint is a **new device needing its own pre-registration**, which
-  must consume `TB-P5H-7` at design time.
-- **Loosening the both-ways cap without a simulated bound is rejected** (`MKS-5b`) — and
-  **Track B is that simulation being run**, not a violation of it. `CS-P0f` and `RC-A2`
-  are consumed at its design time (prereg §0).
-- **Famous-pair first-path fame is barred as a scoring criterion** (PLA-R1) — the Track B
-  prereg resolves its applicability from its grounds: presence-of-obscure is measured,
-  fame-of-interior never is.
-- **The nameless-artist question is decided** (drop; implemented, `GR-1`, standing rule).
+  length-preserving constraint is a new device needing its own pre-registration
+  consuming `TB-P5H-7`.
+- **Loosening the both-ways cap without a simulated bound was rejected (`MKS-5b`) — and
+  Track B is that simulation, now RUN.** Its results note is the record.
+- **Famous-pair first-path fame is barred as a scoring criterion** (PLA-R1); Track B's
+  prereg resolved its applicability and `CRS-C5` measured presence, not fame.
+- **The nameless-artist question is decided** (drop; implemented, `GR-1`).
 - **The builder-side p99 rescale stays parked** (DD-R2's trigger never fired).
-- **The OneDrive migration is COMPLETE**; the old tree is an archive, never the working tree.
+- **The OneDrive migration is COMPLETE**; the old tree is an archive.
 - **`G3-A5`, `G3-A2`, `G3-S7`** closed as recorded; **`G3-A3` does not fire**.
 - **`RMD-6`, `RMD-11`, `RMD-12`, `RMD-13`, `FRO-1`, `FRO-4`**, the `DEP-33` blockers, the
   Gate 1 clip work, **Track 1**.
@@ -130,20 +124,20 @@ prereg's §0 bearing table now says, per family, which cap rules can even addres
 - **The mirror's two device knobs (`w_known_ramp_pctl`, `w_known_thresh_pctl`) stay 0.0.**
 - **`BuilderConfig.algorithm` still carries `contribution_5`**; changing it *is* the
   re-crawl decision. Likewise `max_neighbours_per_artist = 50` and
-  `cap_strategy = "mutual_knn"` — **Track B is analysis-only and moves no default**.
+  `cap_strategy = "mutual_knn"` — **Track B was analysis-only and moved no default.**
 
 ## Deferred, with conditions
 
 | Finding | Condition |
 |---|---|
-| **Track B runs and reads** (`CB-5`/`CB-6`) | **The named next work.** Fresh session, prereg read cold, order-sensitive obligations in the handoff. |
-| ✅ **Re-scoring `rc_raw_records.json` at a different `k`** | **DISCHARGED 2026-07-30 by supersession** — both full archives are on disk, so the cells answer the question directly (prereg §0). Struck, kept for the record. |
-| **`CRS-A5` endpoint re-verification** | **One request at `CB-5` scoring time**, before the descriptive `C6` companion is used; descriptive only either way. |
-| **The `LBS` `filter` token's meaning** | **Accepted, won't chase** — absent from current upstream master, and it cannot bear on the `ALG-B` decision (both arms carry `filter_True`). Reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
-| **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**, reopening condition unchanged: if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |
-| **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. The Track B harness complies (reads via `ReadOnlyArchive`). |
+| ✅ **Track B runs and reads** (`CB-5`/`CB-6`) | **DISCHARGED 2026-07-30** — run to completion; results note is the record. Struck, kept for the record. |
+| ✅ **`CRS-A5` endpoint re-verification** | **DISCHARGED 2026-07-30** — one request at scoring time, 200, companion delivered descriptive-only. Struck. |
+| **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |
+| **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
+| **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**; reopen if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |
+| **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. Track B's harness complied throughout (`ReadOnlyArchive`). |
 | **`ALG-B` edge quality / blind listen** | **If the owner picks up the re-crawl** (`REQ-38`). |
-| **`TB-P5H-7`** | **If any successor bypass-device pre-registration is written.** `CRS` is not one. |
+| **`TB-P5H-7`** | **If any successor bypass-device or router-pricing pre-registration is written.** |
 | **The candidate-pool recompute** | **If the owner picks up the parked candidate decision.** |
 | The `--prune` publish pass | **Ripe since 2026-07-29** — `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. |
 | **The rate limit's headroom** | **Before sharing beyond friends and family.** |

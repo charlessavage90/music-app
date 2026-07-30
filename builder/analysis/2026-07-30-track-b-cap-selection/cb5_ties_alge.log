@@ -1,0 +1,15 @@
+capturing ALG-E pipeline …
+  captured: 74957 nodes
+  ALG-E-MK50         binding=37006 tied_share=0.58115 (0.3s)
+  ALG-E-MK60         binding=34306 tied_share=0.61018 (0.3s)
+  ALG-E-MK75         binding=30690 tied_share=0.6593 (0.3s)
+  ALG-E-MK100        binding=0 tied_share=None (0.0s)
+  ALG-E-TUw-50-50    binding=11841 tied_share=0.31915 (7.3s)
+  ALG-E-TUw-50-100   binding=4893 tied_share=0.40364 (7.1s)
+  ALG-E-TUw-100-100  binding=7782 tied_share=0.4522 (11.3s)
+  ALG-E-TUq-50-50    binding=12044 tied_share=0.31601 (7.3s)
+  ALG-E-TUq-50-100   binding=4876 tied_share=0.40135 (7.0s)
+  ALG-E-PS50         binding=37006 tied_share=0.00011 (0.7s)
+  ALG-E-PS100        binding=0 tied_share=None (0.0s)
+  ALG-E-UC           binding=0 tied_share=None (0.0s)
+wrote cb_ties-ALG-E.json

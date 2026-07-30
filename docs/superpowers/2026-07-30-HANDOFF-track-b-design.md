@@ -1,9 +1,14 @@
 # Handoff — Track B designed through its seam (CB-4), 2026-07-30
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-07-30 on next actions** by
+[`2026-07-30-HANDOFF-track-b-runs.md`](2026-07-30-HANDOFF-track-b-runs.md) — the
+`CB-5`/`CB-6` work it names ran to completion the same day, and its three
+order-sensitive obligations were all discharged as written. Everything it records about
+the design phase remains accurate, and its do-not-revert list stands. *(Original role:
+ACTIVE — the CURRENT handoff. Supersedes
 [`2026-07-29-HANDOFF-graph-rebuild-track-a.md`](2026-07-29-HANDOFF-graph-rebuild-track-a.md)
 on next actions. It does **not** state project status: for that read
-[`NEXT.md`](NEXT.md), which owns it.
+[`NEXT.md`](NEXT.md), which owns it.)*
 
 **This is a seam handoff, not mid-flight** — the seam is the one the plan named at
 authoring time (`CB-4`): the pre-registration is committed, every instrument gate has

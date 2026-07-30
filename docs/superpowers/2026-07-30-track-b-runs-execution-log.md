@@ -303,3 +303,63 @@ options): [`findings/2026-07-30-track-b-cap-selection-results.md`](findings/2026
 `cb_scores.json`. Weakest link named there: the path half rests on 22
 famous-pair journeys after the `CRS-G3` attrition; the stranding half uses no
 pairs and is defended everywhere.
+
+## Closeout record
+
+- **A1** — this document is the retained log, appended per task through the run.
+- **A2** — handoff written at the completion seam
+  (`2026-07-30-HANDOFF-track-b-runs.md`); the design handoff's role line now
+  names it.
+- **A3** — every deferral in `NEXT.md` re-checked against reality: two came due
+  **and were discharged by this work** (the Track B runs themselves; the
+  `CRS-A5` re-verification — struck in place with dates). One new deferral
+  added with its condition (the `× lower` path-read redraw). None of the
+  remaining conditions has come due — the ripest is still `--prune`
+  (2026-07-29, owner's).
+- **A4** — inapplicable, stated rather than skipped: this track added no config
+  knob anywhere; `cb_run_cells.py` is a CLI with no defaults that gate shipped
+  behaviour, and every `BuilderConfig`/`ApiConfig` default is untouched by
+  design (plan global constraints).
+- **A5** — ports 8000, 5173, 8138, 8139 swept: **all empty.** This session
+  started no server and leaves none; the queued use-the-app test targets the
+  deployed site and needs nothing local.
+- **B1** — `docs-lint.sh`: **hard checks passed**; CAND list is small-decimal
+  coincidences, handed to the auditor as input. `doc-auditor` dispatched
+  scoped to this closeout's diff; outcome recorded below when it reports.
+- **B2** — reachability: `cb_run_cells.py` is a CLI orchestrator; it imports
+  the three gated modules and nothing imports it, which is its intended shape.
+  No orphan modules were created.
+- **B3** — no new tests were written this session; the invariants this work
+  leans on are the three instrument gates, whose red halves were re-run and
+  went red-capable at the scoring commit (`cb5_gates.log`).
+- **B4** — prose-vs-code on the runner's own claims, checked against the file:
+  the `--phase score` baseline guard exists (`SystemExit` before
+  `cb_c5_baseline.json`); the `CRS-H1` operationalisation in the docstring
+  matches `_rank_cut_ties`/`_instrumented_trim` (primary-key equality at the
+  boundary); the subprocess timeout is real and covers all builds. No
+  divergence found.
+- **B5** — no standing description is invalidated: the graph, artifact format
+  and cost function are unchanged; `CLAUDE.md`, memory and `.claude/` were
+  neither touched nor made stale (the `ml-graph-analyst` definition describes
+  the adopted graph, which did not move). Track B figures live in the results
+  note + `cb_scores.json` only; `NEXT.md` points and does not restate.
+- **C1** — N/A entry queued in `TEST-QUEUE.md` (the app is untouched); the
+  2026-07-28 redesign entry remains the live one and is re-flagged there.
+- **D1** — tree clean at commit time; the two `cb5_ties_*.log` transcripts
+  were the only strays and are committed with this closeout. Nothing swallowed
+  by `.gitignore` that should not be: the cell binaries are gitignored by
+  design and their identity lives in the embedded manifests (D3).
+- **D2** — inapplicable: no adopted artifact changed; committed test fixtures
+  untouched.
+- **D3** — provenance: every cell's sha256, params and diagnostics are
+  embedded per cell in `cb_scores.json` (committed); the adopted artifact's
+  sha is asserted in code by `cb_metrics.fame_frame`.
+- **D4** — suites, run not asserted: builder **129 passed**, api **217
+  passed**, frontend **107 passed (18 files)**. Outputs in the session
+  transcript; nothing skipped.
+- **Snyk** — `snyk_code_scan` on the analysis directory (includes the new
+  runner): **0 issues.**
+- **D6** — standing-context layer, measured with the skill's commands:
+  unconditional **44,183 characters**, conditional **2,154 lines** — **both
+  deltas exactly 0** against the design closeout's figures, as expected for a
+  session that touched neither `CLAUDE.md`, memory, skills nor agents.

@@ -223,12 +223,14 @@ coverage — the 31% frontier-divergence lesson from `GRT-P4`).
       Plus a red half the plan did not ask for: at `w_sim = 0` the paths must **move**
       (16 of 20 did) — a router harness returning the same answer under any weights is
       wired to nothing.
-- [ ] The prereg (CB-4) must resolve `PLA-R1` applicability explicitly: the bar on
+- [x] The prereg (CB-4) must resolve `PLA-R1` applicability explicitly: the bar on
       famous-pair first-path fame as a criterion was derived under `ALG-E` structure,
       where those interiors are forced; whether it binds reads on non-`ALG-E` cells is a
       question for the prereg, answered from `PLA-R1`'s own grounds, not assumed either
-      way.
-- [ ] Commit.
+      way. *(Done in the prereg's §0; this box and the one below were left unticked at
+      the design closeout though the work was done and recorded under CB-4 — annotated
+      2026-07-30 by the runs session rather than left to read as open.)*
+- [x] Commit.
 
 ### CB-4: The pre-registration — **SEAM: commit, then hand off or continue fresh**
 
@@ -288,25 +290,29 @@ its git timestamp is the part that cannot be reconstructed. It must contain, per
       the ceiling), and an archive-invariant popularity ruler is authorized as a
       descriptive-only companion to `C6` (`CRS-A5`).
 
-### CB-5: Run the cells and score them
+### CB-5: Run the cells and score them — **DONE 2026-07-30**
 
-- [ ] **Dry-run the scorer against the cheapest cell first** (production `ALG-E`
+- [x] **Dry-run the scorer against the cheapest cell first** (production `ALG-E`
       mutual/k=50 — already built by CB-1's gate) *before* the full sweep, per the Track A
       scorer-defect lesson: the fix cannot be shaped by a result that does not exist yet.
-- [ ] Run all cells (`python -u`, log to the analysis dir). Builds are ~78 s at production
+      **Passed** — 82 pairs, 0.37 s/pair, structural output on the published anchors.
+- [x] Run all cells (`python -u`, log to the analysis dir). Builds are ~78 s at production
       scale (`GRT-P4`), so the full grid is minutes-to-an-hour of compute, not overnight.
-- [ ] Write `cb_scores.json` + per-cell manifests; commit raw outputs before any read.
+      **All 24 built at 27–37 s each; `CRS-G4` never fired.**
+- [x] Write `cb_scores.json` + per-cell manifests; commit raw outputs before any read.
+      **Committed at `35e63bf`, manifests embedded, before any read was opened.**
 
-### CB-6: Read, and the report
+### CB-6: Read, and the report — **DONE 2026-07-30**
 
-- [ ] Read every pre-registered criterion in the prereg's own order, nulls included, with
-      the run-state sentence checked per read.
-- [ ] **Exposure map before any escalation**: one row per criterion × changed knob, per
-      `CLAUDE.md`.
-- [ ] Report in the four-part shape (measured / inferred-in-plain-language / weakest link
+- [x] Read every pre-registered criterion in the prereg's own order, nulls included, with
+      the run-state sentence checked per read. **Six reads in the execution log §CB-6.**
+- [x] **Exposure map before any escalation**: one row per criterion × changed knob, per
+      `CLAUDE.md`. **In the log; nothing required escalation.**
+- [x] Report in the four-part shape (measured / inferred-in-plain-language / weakest link
       / options), naming whatever cuts against the headline. The `uncapped` row appears
       in *measured* and never in *options*.
-- [ ] Closeout per the skill: execution log retained per task, `NEXT.md` rewrite,
+      **`findings/2026-07-30-track-b-cap-selection-results.md`.**
+- [x] Closeout per the skill: execution log retained per task, `NEXT.md` rewrite,
       docs-map rows, `TEST-QUEUE.md` entry (expected N/A — the app is untouched), Snyk
       scan on the new harness code.
 

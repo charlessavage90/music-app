@@ -23,7 +23,54 @@ the point.**
 
 ---
 
-## N/A — 2026-07-30 (latest) — we designed the experiment that picks the connection rule; the app is untouched
+## N/A — 2026-07-30 (later, latest) — the experiment ran and is read; the app is untouched
+
+**Nothing to exercise, and nothing is running** — ports 8000, 5173, 8138 and 8139 were
+checked and are empty. No routing, no graph, no weighting, no cost function, and not one
+line of the app or the website changed. **A journey you build now is identical to one from
+yesterday.** Everything below is measurement; nothing was adopted.
+
+**What happened, in plain terms.** The experiment designed yesterday ran end to end today,
+under the rules committed before any result existed. Three ways of choosing connections
+competed on equal terms, on both the current data and the candidate data:
+
+- **Today's rule lost its first real competition — on map coverage.** A rule that pools
+  both artists' suggestion lists and then trims back to the *same* 50-connection budget
+  loses **one artist** from the map where today's rule loses **800**, and the
+  most-connected artists end up *less* dominant, not more. Whether it *sounds* as good is
+  the one thing no offline number can say — a listening test still stands between any of
+  this and the app.
+- **The candidate data's alarming numbers were mostly our own cut-off, not the data.**
+  "R.E.M. drops to 6 connections, 6,499 artists cut off" was measured with our
+  must-be-mutual rule at 50. Widen the window, or drop the must-be-mutual requirement,
+  and the candidate data keeps nearly everyone.
+- **On today's data, journeys between two famous artists cannot be made to pass through
+  anyone obscure by any connection rule.** We built maps where every famous artist is
+  force-connected to its ten strongest obscure partners, checked those connections exist —
+  and the journey-builder routed around every one of them. The way it prices fame jumps
+  is the blocker, and that is router work, deliberately out of this experiment's scope.
+  On the candidate data, those journeys *do* occasionally dig up someone obscure, even
+  under today's rule.
+- **One feared cost measured small:** the candidate data's surviving connections lean
+  famous by about a third of the bar we set for "matters".
+
+**None of this decides anything.** Which rule any rebuild uses, and whether the candidate
+data is adopted at all, are your parked decisions — now with numbers where there were
+guesses, and a listening test owed before anything ships either way.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something
+about the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-30-track-b-runs-execution-log.md`; the report is
+`docs/superpowers/findings/2026-07-30-track-b-cap-selection-results.md`.*
+
+## N/A — 2026-07-30 — we designed the experiment that picks the connection rule; the app is untouched
+<!-- "(latest)" stripped 2026-07-30 (later): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running** — all four ports were checked and are
 empty. No routing, no graph, no weighting, no cost function, and not one line of the app
