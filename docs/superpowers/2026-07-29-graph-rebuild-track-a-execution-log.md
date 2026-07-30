@@ -516,6 +516,27 @@ on the unconditional layer, paid by every future session. Not taken unilaterally
 
 **D4:** builder **129**, api **217**, frontend **107**. Run, not recalled.
 
+**✅ `snyk_code_scan` — RUN and CLEAN for this work, discharging the item §9 carried
+across two closeouts.** The CLI is not on `PATH` in this environment (the same trap
+`memory/deploy-environment-traps.md` records for the AWS CLI), but Snyk is available as an
+MCP server with its own auth tool; that is the route that works here and is worth knowing
+before deferring the check again.
+
+- `builder/src/artistpath_builder/` — **0 issues.** This covers every line `GR-1`, `GR-2`
+  and `GR-3` touched.
+- `builder/analysis/2026-07-29-algb-trial-build/` — **0 issues.**
+
+**13 findings exist elsewhere under `builder/analysis/`, none of them from this work, and
+none fixed — deliberately.** Three Medium DOM-XSS in
+`2026-07-22-c3-bypass-mechanisms/listen.html` and ten Low path-traversal in the Track 2
+arm scorer and the low-degree census, all of the shape *command-line argument flows into
+`pathlib.Path`*. They are **frozen probe scripts** (`CLAUDE.md` names them as such), run
+locally by the owner, where the "attacker" supplying the argument is the person typing the
+command; `listen.html` is a local listening-test page that is never served. The global
+instruction obliges a fix for issues in **newly introduced or modified** code, which these
+are not, and editing a frozen probe would break the reproducibility that makes it frozen.
+**Recorded rather than actioned, and left with a condition** — see §9.
+
 **B1 — a gap in the FIRST closeout, corrected here.** That pass ran `docs-lint.sh` and
 **never dispatched `doc-auditor`**. The skill is explicit that invoking `closeout` *is* the
 request for that subagent, and a green lint is not an audit — the lint cannot see a defect
@@ -563,7 +584,15 @@ local server.
 
 ## §9 Owed, and not discharged
 
-- **`snyk_code_scan` has NOT been run** on any of the three code diffs — the Snyk CLI is
-  unauthenticated in this environment and authenticating is a browser flow only the owner
-  can complete. The global instruction requires it on new first-party code. Owed on
-  GR-1/GR-2/GR-3; recorded in each commit message rather than left implicit.
+- ✅ ~~**`snyk_code_scan` has NOT been run** on any of the three code diffs.~~
+  **DISCHARGED 2026-07-30 — run and CLEAN**: 0 issues across
+  `builder/src/artistpath_builder/` and the new analysis probes. See §8b, including the
+  route that works here (MCP, not the CLI, which is not on `PATH`). Struck, kept for the
+  record.
+- **13 pre-existing Snyk findings under `builder/analysis/`, none from this work**
+  (3 Medium DOM-XSS in `2026-07-22-c3-bypass-mechanisms/listen.html`; 10 Low
+  path-traversal in the Track 2 arm scorer and the low-degree census). **Condition: if any
+  of those probe scripts is ever un-frozen and edited, fix its findings then; if
+  `listen.html` is ever served rather than opened locally, fix it before that happens.**
+  Otherwise **accepted, won't fix** — a legitimate terminal state here, because the
+  argument source is the owner's own command line and the page is never served.
