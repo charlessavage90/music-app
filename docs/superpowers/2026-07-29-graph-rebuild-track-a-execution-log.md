@@ -512,6 +512,55 @@ block documents `--target` but not the `--algorithm` flag this track added. The 
 **incomplete, not false**, so it is growth rather than a correction — roughly 60 characters
 on the unconditional layer, paid by every future session. Not taken unilaterally.
 
+## §8b Second closeout — after the overnight crawl, 2026-07-30
+
+**D4:** builder **129**, api **217**, frontend **107**. Run, not recalled.
+
+**B1 — a gap in the FIRST closeout, corrected here.** That pass ran `docs-lint.sh` and
+**never dispatched `doc-auditor`**. The skill is explicit that invoking `closeout` *is* the
+request for that subagent, and a green lint is not an audit — the lint cannot see a defect
+of omission, which is the class that has twice bitten this project. The auditor was
+dispatched this time, scoped to the diff and told the lint had already run. Lint itself:
+clean, 0 hard failures.
+
+**B5 found two stale figures in live documents, both fixed:**
+
+- **`NEXT.md` still listed the `ALG-B` re-crawl as a parked, un-run item costing 4¼ hours.**
+  It has *run*. That is a status error in the document that owns status, and it is the more
+  serious of the two. Struck as an action; the **adoption** half stays parked, which is a
+  genuinely different decision.
+- **The RC execution log §6 says a full build takes "~2 minutes".** It is ~29 s (78 s for
+  the larger `ALG-B` archive), measured twice on real builds. That document *owns*
+  operational measurements, so a wrong figure there is worse than usual. Annotated in place
+  rather than rewritten, per the convention for COMPLETE records. `CLAUDE.md`'s "~30 s" was
+  right throughout and is untouched.
+
+Frozen documents carrying the old 4¼-hour figure — the AS pre-registration, the superseded
+algorithm-selection handoff, the OneDrive plan — are **deliberately left alone**. A
+pre-registration's value is that it is frozen.
+
+**B2:** the four `GRT` probes have zero inbound imports, which is the established
+`builder/analysis/` pattern for standalone probes. Not orphans.
+
+**B3:** no new tests were added by the overnight work, so there is nothing new to
+break-test. The first closeout's three-attempt spot check stands.
+
+**A4:** still correct and still deliberate — `BuilderConfig.algorithm` carries
+`contribution_5`. The re-crawl ran on a **per-invocation override**; no default moved.
+**This is the one place the distinction matters most**: an `ALG-B` archive and artifact now
+exist on disk, and nothing points at either.
+
+**A5:** all four ports swept, **all empty**. The overnight crawl completed and exited; no
+detached process survives it. The queued item exercises the deployed site and needs no
+local server.
+
+**D6 — standing context layer, unchanged again:**
+
+| Layer | Unit | Total | Delta |
+|---|---|---|---|
+| Unconditional | characters | **44,113** | **0** |
+| Conditional | lines | **2,122** | **0** |
+
 ## §9 Owed, and not discharged
 
 - **`snyk_code_scan` has NOT been run** on any of the three code diffs — the Snyk CLI is

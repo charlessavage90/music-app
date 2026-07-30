@@ -141,8 +141,14 @@ entities drawn.
   fetched live, 0 failures. Wall clock ≈ 25 minutes at a 0.4 s pause. Raw records 19.0 MB.
 - **The production archive is intact:** 75,000 responses under
   `builder/scratch/graph-archive/similar/listenbrainz/`.
-- **A full build from the archive takes ~2 minutes** and reproduces the adopted artifact's
-  node and edge counts exactly.
+- ~~**A full build from the archive takes ~2 minutes**~~ and reproduces the adopted
+  artifact's node and edge counts exactly.
+  ⚠ **CORRECTED 2026-07-30: the build takes ~29 seconds** (78 s for the larger `ALG-B`
+  archive), measured twice on real full builds —
+  `2026-07-29-graph-rebuild-track-a-execution-log.md` §5 and §7b. `CLAUDE.md`'s "~30 s"
+  was right all along and needs no edit; this line was the outlier. Annotated in place
+  rather than rewritten, per the convention for COMPLETE records. The node/edge
+  reproduction claim stands.
 
 ## §7 Provenance (D3)
 

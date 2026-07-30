@@ -66,12 +66,14 @@ limitation**.
 - **The one-statistic cross-track recompute** that must precede any DD-vs-TB comparison.
 - **Any blind listen on a router-only candidate** — the listen is deferred to the full
   stack (graph + device).
-- **The `ALG-B` re-crawl itself** — 4¼ hours, a new archive, a new graph, and it retires the
-  existing path-quality figures. His call, and it owes a blind listen before adoption. **Its
-  price is now measured rather than suspected, and both blockers that made it unbuildable
-  are cleared** (2026-07-29): the drop rule has landed and the algorithm is selectable. What
-  it now owes is a judgement, not engineering — plus `GRT-P2`'s open question of whether the
-  acceptance guard still covers the artists it names at production scale.
+- ✅ **The `ALG-B` re-crawl itself — RUN 2026-07-29 → 30 on the owner's instruction, and no
+  longer parked.** 75,000 fetched, 0 failures; a full `ALG-B` graph was built and read
+  (`GRT-P4`). **It took ~7.6 hours, not the 4¼ this entry claimed** — that figure predates
+  a ~4× slowdown at the endpoint and is corrected here rather than carried forward. The
+  archive and artifact exist in `builder/scratch/` and are gitignored.
+  **What remains parked is ADOPTION**, which is a different decision: it retires the
+  existing path-quality figures, and it owes a blind listen (`REQ-38`). Struck as an
+  action, kept because the adoption half is still his.
 
 **Still owed by the owner, unchanged:**
 
