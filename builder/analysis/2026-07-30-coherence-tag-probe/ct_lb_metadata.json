@@ -1,0 +1,47 @@
+{
+ "identical_genre_sets": 871,
+ "both_resolved": 872,
+ "artists_per_second": 26.14,
+ "bands": {
+  "top 0.1%": {
+   "n": 75,
+   "mb_genre": 75,
+   "lb_genre": 75,
+   "lb_tag": 75,
+   "both_resolved": 75,
+   "identical_genre_sets": 75
+  },
+  "top 1%": {
+   "n": 300,
+   "mb_genre": 299,
+   "lb_genre": 299,
+   "lb_tag": 300,
+   "both_resolved": 299,
+   "identical_genre_sets": 299
+  },
+  "top 10%": {
+   "n": 300,
+   "mb_genre": 263,
+   "lb_genre": 263,
+   "lb_tag": 272,
+   "both_resolved": 263,
+   "identical_genre_sets": 263
+  },
+  "upper half": {
+   "n": 300,
+   "mb_genre": 163,
+   "lb_genre": 165,
+   "lb_tag": 176,
+   "both_resolved": 163,
+   "identical_genre_sets": 162
+  },
+  "lower half": {
+   "n": 300,
+   "mb_genre": 72,
+   "lb_genre": 73,
+   "lb_tag": 85,
+   "both_resolved": 72,
+   "identical_genre_sets": 72
+  }
+ }
+}

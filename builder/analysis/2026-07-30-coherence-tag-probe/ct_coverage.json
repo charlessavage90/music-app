@@ -1,0 +1,58 @@
+{
+ "seed": 20260730,
+ "per_band": 300,
+ "gate": {
+  "band": "lower half",
+  "bar": 0.5,
+  "rate": 0.3533,
+  "verdict": "KILL -- step 2 does not run",
+  "within_noise": false
+ },
+ "bands": {
+  "top 0.1%": {
+   "n": 75,
+   "resolved": 75,
+   "mb_genre": 75,
+   "mb_tag": 75,
+   "p136": 75,
+   "union_genre": 75,
+   "union_genre_of_resolved": 75
+  },
+  "top 1%": {
+   "n": 300,
+   "resolved": 300,
+   "mb_genre": 299,
+   "mb_tag": 300,
+   "p136": 298,
+   "union_genre": 300,
+   "union_genre_of_resolved": 300
+  },
+  "top 10%": {
+   "n": 300,
+   "resolved": 300,
+   "mb_genre": 263,
+   "mb_tag": 272,
+   "p136": 243,
+   "union_genre": 283,
+   "union_genre_of_resolved": 283
+  },
+  "upper half": {
+   "n": 300,
+   "resolved": 300,
+   "mb_genre": 163,
+   "mb_tag": 174,
+   "p136": 163,
+   "union_genre": 208,
+   "union_genre_of_resolved": 208
+  },
+  "lower half": {
+   "n": 300,
+   "resolved": 300,
+   "mb_genre": 72,
+   "mb_tag": 84,
+   "p136": 69,
+   "union_genre": 106,
+   "union_genre_of_resolved": 106
+  }
+ }
+}

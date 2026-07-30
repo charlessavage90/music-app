@@ -1,0 +1,27 @@
+{
+ "top 0.1%": {
+  "artists": 75,
+  "has_item": 75,
+  "has_p136": 75
+ },
+ "top 1%": {
+  "artists": 667,
+  "has_item": 667,
+  "has_p136": 660
+ },
+ "top 10%": {
+  "artists": 6678,
+  "has_item": 5878,
+  "has_p136": 5267
+ },
+ "upper half": {
+  "artists": 29677,
+  "has_item": 19877,
+  "has_p136": 15570
+ },
+ "lower half": {
+  "artists": 37096,
+  "has_item": 13619,
+  "has_p136": 8508
+ }
+}

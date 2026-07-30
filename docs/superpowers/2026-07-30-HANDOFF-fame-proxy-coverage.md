@@ -1,6 +1,9 @@
 # Handoff — fame-proxy coverage probes, 2026-07-30
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions by
+[`2026-07-30-HANDOFF-coherence-tag-probe.md`](2026-07-30-HANDOFF-coherence-tag-probe.md)**
+(2026-07-30, the coherence probe closeout) — its own record below is untouched and
+remains accurate. Supersedes
 [`2026-07-30-HANDOFF-track-b-runs.md`](2026-07-30-HANDOFF-track-b-runs.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
