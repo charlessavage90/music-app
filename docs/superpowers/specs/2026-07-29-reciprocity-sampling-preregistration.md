@@ -262,3 +262,43 @@ the ~30 minutes §3 estimated, because the sample grew from 150 seeds to 200.
 `RC-ARM-P`'s candidates come from the archive wherever present.
 
 **`m = 10` is unchanged**, as is every threshold in §4 and §5.
+
+### `RC-A2` — 2026-07-29, POST-RUN: three findings against this design's own output
+
+**Nothing above is edited and no threshold is changed.** `rc_score.py` and `rc_scores.json`
+stand as the pre-registered read. These are post-hoc, live in `rc_posthoc.py`, and are
+labelled post-hoc wherever they are reported. **`RC-R1` fired on the pre-registered read
+and fires on the corrected one too — the correction changes magnitude, not verdict.**
+
+- **`RC-P1` — a denominator defect in the pre-registered scorer, biasing toward the null.**
+  `rc_score.py` skips a seed with no usable sampled candidate. **Ten of forty below-median
+  seeds returned zero candidates under `ALG-B`**, so the pre-registered read dropped exactly
+  the maximally stranded artists from the arm that strands them. An artist with no candidates
+  has no edges and is dropped by `largest_component`; its degree is **0**, not missing.
+  Corrected on a denominator of all 40: the share with fewer than two connections goes
+  **15.0% → 47.5% (+32.5 points)** where the pre-registered read said +16.7, and the median
+  goes **5.0 → 2.0** (ratio 0.40 against the pre-registered 0.45). **Both readings cross
+  `RC-C1` and `RC-C2`'s material thresholds**, which is why this is a correction of magnitude
+  and not of outcome. Reported as a pair, never as the more severe figure alone.
+- **`RC-P2` — the famous side fails acceptance by clauses `RC-C3` did not pre-register.**
+  `RC-C3` fixed only the median against `famous_median_degree_floor`, and it **passes** (30.0
+  against a floor of 25.0). But `PRODUCTION_ACCEPTANCE` also carries
+  `famous_min_degree_floor = 8` over the top 25, and 24 `canonical_names` that must be in the
+  largest component. **Four of forty top-0.1% seeds reciprocate nothing at all under `ALG-B`
+  — R.E.M., Pixies, The xx, PJ Harvey — and R.E.M. is a canonical name.** The minimum over
+  the sample's top 25 is **0.0 against a floor of 8**. Pre-registering only the median was a
+  gap in this design; an `ALG-B` artifact is predicted to be **refused by `check_acceptance`**
+  on two clauses this document never named.
+- **`RC-P3` — the mechanism I proposed is NOT supported by my own data.** The hypothesis was
+  that `ALG-B`'s appeal (more obscure candidates for famous artists, `AS-C1`) is self-cancelling
+  because mutual k-NN would delete exactly those edges. Split by whether the candidate exists
+  in the adopted artifact at all, reciprocation is **0.617 vs 0.619** — indistinguishable.
+  **The obscurity of the candidate is not the discriminator.** Recorded because it was
+  proposed before it was tested.
+- **What the collapse actually is, and it is a `k` interaction.** Diagnosed on the four
+  collapsed artists: under `ALG-B` they appear in their own candidates' lists at **rank 50–97,
+  or not at all** — just outside the top-50 cut. So mutual k-NN rejects the edge correctly and
+  the estimator is not at fault. **This is not a licence to raise `k`:** `MKS-5b` rejects
+  loosening the both-ways cap and requires any targeted alternative to demonstrate its bound
+  by simulation first. It is evidence that the **cap-selection simulation (strand 3) and a
+  successor algorithm interact**, and it belongs to that strand's design, not to this one.
