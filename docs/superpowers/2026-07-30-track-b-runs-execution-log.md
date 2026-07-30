@@ -324,8 +324,12 @@ pairs and is defended everywhere.
   started no server and leaves none; the queued use-the-app test targets the
   deployed site and needs nothing local.
 - **B1** — `docs-lint.sh`: **hard checks passed**; CAND list is small-decimal
-  coincidences, handed to the auditor as input. `doc-auditor` dispatched
-  scoped to this closeout's diff; outcome recorded below when it reports.
+  coincidences, handed to the auditor as input. `doc-auditor` ran scoped to
+  this closeout's diff: **no HIGH, no MEDIUM; one LOW** (an ambiguous
+  antecedent in the plan's CB-3 annotation — fixed in place). It verified
+  figures in the results note against `cb_scores.json`, found the identifier
+  census collision-free, the supersession chain readable forwards, and the
+  `REQ-38` blind-listen obligation present in every owner-facing summary.
 - **B2** — reachability: `cb_run_cells.py` is a CLI orchestrator; it imports
   the three gated modules and nothing imports it, which is its intended shape.
   No orphan modules were created.

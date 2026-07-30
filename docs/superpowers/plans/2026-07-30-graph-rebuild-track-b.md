@@ -227,9 +227,10 @@ coverage — the 31% frontier-divergence lesson from `GRT-P4`).
       famous-pair first-path fame as a criterion was derived under `ALG-E` structure,
       where those interiors are forced; whether it binds reads on non-`ALG-E` cells is a
       question for the prereg, answered from `PLA-R1`'s own grounds, not assumed either
-      way. *(Done in the prereg's §0; this box and the one below were left unticked at
-      the design closeout though the work was done and recorded under CB-4 — annotated
-      2026-07-30 by the runs session rather than left to read as open.)*
+      way. *(Done in the prereg's §0; this PLA-R1 checkbox and the Commit checkbox
+      directly below it were left unticked at the design closeout though the work was
+      done and recorded under CB-4 — annotated 2026-07-30 by the runs session rather
+      than left to read as open.)*
 - [x] Commit.
 
 ### CB-4: The pre-registration — **SEAM: commit, then hand off or continue fresh**
