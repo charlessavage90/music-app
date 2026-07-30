@@ -149,6 +149,33 @@ def build_from_archive(
     else:
         excluded = set()
 
+    # Nameless artists are dropped, unconditionally (owner decision
+    # 2026-07-28, recorded in NEXT.md; REQ-2). An artist whose name never
+    # appears in any neighbour row is unsearchable, clipless, and renderable
+    # only as a blank card. Dropped here, beside the placeholder entities and
+    # before the mass computation, so it contributes to no marginal — and a
+    # neighbour stranded by the drop falls out at the largest-component
+    # prune rather than dangling.
+    #
+    # Backfilling names by MBID was the declined alternative, and it is also
+    # impossible: the three most popular nameless MBIDs in the adopted
+    # artifact return "Artist not found" from MusicBrainz (owner, 2026-07-29).
+    # They are deleted or merged upstream entities that survive in the
+    # similarity data. A future crawl can mint more the same way, so this is a
+    # standing build rule rather than a one-off patch.
+    nameless = {
+        mbid
+        for mbid, (name, _disambiguation) in identities.items()
+        if not name.strip()
+    }
+    # An artist with an archived response that never appears as anyone's
+    # neighbour has no identity row at all: same defect, same fate.
+    nameless |= known - identities.keys()
+    if nameless & known:
+        logger.info("dropped %d nameless artists", len(nameless & known))
+    excluded |= nameless
+    known -= nameless
+
     # --- Pass 1: raw neighbour lists and per-artist co-occurrence mass -----
     # The mass (sum of an artist's raw scores) is the marginal used to correct
     # for popularity below. Computed over the FULL uncapped list, which is a
