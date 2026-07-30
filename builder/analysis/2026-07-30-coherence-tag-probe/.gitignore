@@ -1,7 +1,8 @@
-# Raw collector outputs: regenerable from the commands in README.md, and large.
+# Large raw collector outputs: regenerable from the commands in README.md.
 # Derived summaries (ct_coverage.json, ct_limit_interiors.json, ct_retrodict.json)
-# are committed.
+# are committed -- and so are the small path-artist raws (ct_path_tags_raw.json,
+# ct_path_p136_raw.json), because MB tag data moves over time and the scored
+# retrodiction result must stay reproducible from the repo alone.
 ct_wikidata_genres.json
 ct_mb_sample_raw.json
 ct_limit_tags_raw.json
-ct_path_tags_raw.json
