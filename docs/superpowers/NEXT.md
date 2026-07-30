@@ -80,6 +80,18 @@ read measured where it can and cannot be moved; the results note owns that readi
   **reopening of the instrument line on a route-population gate** (`COH-3`'s 74.2%
   on delivered interiors is the recorded argument; a reopening is a new
   pre-registration designed cold, never a re-read of the fired gate).
+  **A third strand, owner-raised 2026-07-30 after the probe and explicitly flagged
+  worth a future session: tag-aware neighbour SELECTION at build time, at the top of
+  the graph.** The probe's kill was about *scoring paths*; selection lives where
+  candidates are many and labels near-total (top bands 94–100%, `COH-2`), and barely
+  operates where labels are dark — the coverage failure and this use are close to
+  complementary. Three caveats travel with it: it *reorders* candidate lists and
+  cannot add famous→obscure supply (that stays with candidate supply and router
+  pricing); tags spent on construction are spent as an evaluator — §7's self-audit
+  circularity in new clothes, leaving the 11 blind verdicts as the only independent
+  check; and picking it up is Track-B-shaped work — a selection-rule change, so a
+  rebuild, a pre-registration with a factor table, and a blind listen (`REQ-38`).
+  `COH-5` makes the data side cheap (~47 min for a full tag frame).
 - **The cap-rule decision for any rebuild** — Track B's `R1` is its input; adoption of
   any rule owes the blind listen.
 - **`ALG-B` adoption** — Track B's `R0`, `R2`, `R3` (`CRS-C6`) are its inputs, beside
