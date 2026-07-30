@@ -1,0 +1,24 @@
+pairs: drawn 82, routable everywhere 39
+  ff-top01pct             10  readable
+  ff-top1pct              12  readable
+  lower half x lower       1  UNREADABLE per CRS-G3
+  top 0.1% x lower         3  UNREADABLE per CRS-G3
+  top 1% x lower           4  UNREADABLE per CRS-G3
+  top 10% x lower          6  UNREADABLE per CRS-G3
+  upper half x lower       3  UNREADABLE per CRS-G3
+{
+  "ff-top01pct": {
+    "no_path": 0,
+    "pairs_attempted": 10,
+    "pairs_with_sub_decile_interior": 0,
+    "readable_per_CRS_G3": true
+  },
+  "ff-top1pct": {
+    "no_path": 0,
+    "pairs_attempted": 12,
+    "pairs_with_sub_decile_interior": 0,
+    "readable_per_CRS_G3": true
+  }
+}
+ff-top1pct: baseline C5 = 0/12 → ZERO — §2 stands as written
+ff-top01pct: baseline C5 = 0/10 → ZERO — §2 stands as written

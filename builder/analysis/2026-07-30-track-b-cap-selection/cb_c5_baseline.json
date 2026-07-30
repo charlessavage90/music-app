@@ -1,0 +1,138 @@
+{
+  "cell": "ALG-E-MK50",
+  "famous_classes": {
+    "ff-top01pct": {
+      "no_path": 0,
+      "pairs_attempted": 10,
+      "pairs_with_sub_decile_interior": 0,
+      "readable_per_CRS_G3": true
+    },
+    "ff-top1pct": {
+      "no_path": 0,
+      "pairs_attempted": 12,
+      "pairs_with_sub_decile_interior": 0,
+      "readable_per_CRS_G3": true
+    }
+  },
+  "full_per_class": {
+    "ff-top01pct": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 10,
+      "pairs_with_sub_decile_interior": 0,
+      "path_length": {
+        "max": 5,
+        "mean": 3.4,
+        "median": 3.0
+      },
+      "readable_per_CRS_G3": true,
+      "sub_decile_interior_share": 0.0,
+      "top1pct_degree_frac_own": 0.61111,
+      "top1pct_degree_frac_production": 0.61111
+    },
+    "ff-top1pct": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 12,
+      "pairs_with_sub_decile_interior": 0,
+      "path_length": {
+        "max": 10,
+        "mean": 6.5,
+        "median": 6.0
+      },
+      "readable_per_CRS_G3": true,
+      "sub_decile_interior_share": 0.0,
+      "top1pct_degree_frac_own": 0.25903,
+      "top1pct_degree_frac_production": 0.25903
+    },
+    "lower half x lower": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 1,
+      "pairs_with_sub_decile_interior": 1,
+      "path_length": {
+        "max": 19,
+        "mean": 19.0,
+        "median": 19.0
+      },
+      "readable_per_CRS_G3": false,
+      "sub_decile_interior_share": 0.17647,
+      "top1pct_degree_frac_own": 0.0,
+      "top1pct_degree_frac_production": 0.0
+    },
+    "top 0.1% x lower": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 3,
+      "pairs_with_sub_decile_interior": 2,
+      "path_length": {
+        "max": 12,
+        "mean": 9.33333,
+        "median": 9.0
+      },
+      "readable_per_CRS_G3": false,
+      "sub_decile_interior_share": 0.1619,
+      "top1pct_degree_frac_own": 0.34762,
+      "top1pct_degree_frac_production": 0.34762
+    },
+    "top 1% x lower": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 4,
+      "pairs_with_sub_decile_interior": 3,
+      "path_length": {
+        "max": 14,
+        "mean": 11.0,
+        "median": 11.0
+      },
+      "readable_per_CRS_G3": false,
+      "sub_decile_interior_share": 0.10417,
+      "top1pct_degree_frac_own": 0.06944,
+      "top1pct_degree_frac_production": 0.06944
+    },
+    "top 10% x lower": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 6,
+      "pairs_with_sub_decile_interior": 5,
+      "path_length": {
+        "max": 14,
+        "mean": 12.16667,
+        "median": 12.5
+      },
+      "readable_per_CRS_G3": false,
+      "sub_decile_interior_share": 0.10682,
+      "top1pct_degree_frac_own": 0.07348,
+      "top1pct_degree_frac_production": 0.07348
+    },
+    "upper half x lower": {
+      "invalid_walks": 0,
+      "no_path": 0,
+      "pairs_attempted": 3,
+      "pairs_with_sub_decile_interior": 3,
+      "path_length": {
+        "max": 16,
+        "mean": 13.0,
+        "median": 12.0
+      },
+      "readable_per_CRS_G3": false,
+      "sub_decile_interior_share": 0.16455,
+      "top1pct_degree_frac_own": 0.12169,
+      "top1pct_degree_frac_production": 0.12169
+    }
+  },
+  "protocol": "CRS-A2: per-class baseline scored before any other cell's C5 is opened. A class at zero keeps \u00a72's 'any nonzero is decisive'; a nonzero class needs a further \u00a78 entry fixing its bar blind before any candidate C5 is read.",
+  "weights": {
+    "avoid_decay": 0.5,
+    "avoid_penalty": 0.5,
+    "avoid_radius": 2,
+    "floor_relax_dislike": 0.08,
+    "floor_relax_known": 0.15,
+    "w_avoid": 1.0,
+    "w_degree_hub": 0.0,
+    "w_floor": 1.0,
+    "w_hop": 0.02,
+    "w_jump": 1.0,
+    "w_sim": 3.0
+  }
+}

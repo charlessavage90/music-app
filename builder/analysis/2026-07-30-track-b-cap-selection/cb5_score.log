@@ -1,0 +1,33 @@
+ALG-E-MK50         scored in    8.3s  max_deg=50 bound=50 G2=PASS
+ALG-E-MK60         scored in    9.7s  max_deg=60 bound=60 G2=PASS
+ALG-E-MK75         scored in   11.6s  max_deg=75 bound=75 G2=PASS
+ALG-E-MK100        scored in   14.6s  max_deg=100 bound=100 G2=PASS
+ALG-E-TUw-50-50    scored in   13.3s  max_deg=50 bound=50 G2=PASS
+ALG-E-TUw-50-100   scored in   18.9s  max_deg=100 bound=100 G2=PASS
+ALG-E-TUw-100-100  scored in   21.2s  max_deg=100 bound=100 G2=PASS
+ALG-E-TUq-50-50    scored in   13.0s  max_deg=50 bound=50 G2=PASS
+ALG-E-TUq-50-100   scored in   18.7s  max_deg=100 bound=100 G2=PASS
+ALG-E-PS50         scored in   10.9s  max_deg=50 bound=50 G2=PASS
+ALG-E-PS100        scored in   14.2s  max_deg=100 bound=100 G2=PASS
+ALG-E-UC           scored in   62.4s  max_deg=15631 bound=None G2=n/a
+ALG-B-MK50         scored in    7.3s  max_deg=50 bound=50 G2=PASS
+ALG-B-MK60         scored in    9.0s  max_deg=60 bound=60 G2=PASS
+ALG-B-MK75         scored in   11.1s  max_deg=75 bound=75 G2=PASS
+ALG-B-MK100        scored in   15.3s  max_deg=100 bound=100 G2=PASS
+ALG-B-TUw-50-50    scored in   13.3s  max_deg=50 bound=50 G2=PASS
+ALG-B-TUw-50-100   scored in   20.3s  max_deg=100 bound=100 G2=PASS
+ALG-B-TUw-100-100  scored in   22.2s  max_deg=100 bound=100 G2=PASS
+ALG-B-TUq-50-50    scored in   13.2s  max_deg=50 bound=50 G2=PASS
+ALG-B-TUq-50-100   scored in   20.2s  max_deg=100 bound=100 G2=PASS
+ALG-B-PS50         scored in   10.4s  max_deg=50 bound=50 G2=PASS
+ALG-B-PS100        scored in   15.2s  max_deg=100 bound=100 G2=PASS
+ALG-B-UC           scored in   66.8s  max_deg=17883 bound=None G2=n/a
+computing CRS-C6 survival split …
+CRS-A5 endpoint re-verification: {'status_code': 200, 'confirmed': True, 'sample': [{'artist_mbid': 'a74b1b7f-71a5-4011-9441-d0b5e4122711', 'total_listen_count': 133749383, 'total_user_count': 455551}]}
+fetching CRS-A5 companion counts …
+  a5 companion: 10/50 batches
+  a5 companion: 20/50 batches
+  a5 companion: 30/50 batches
+  a5 companion: 40/50 batches
+  a5 companion: 50/50 batches
+wrote cb_scores.json (24 cells); G2 violations: none

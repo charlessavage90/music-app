@@ -1,0 +1,118 @@
+{
+  "ALG-B-MK100": {
+    "elapsed_seconds": 29.6,
+    "file": "ALG-B-mutual_knn-k100.bin",
+    "status": "built"
+  },
+  "ALG-B-MK50": {
+    "elapsed_seconds": 27.6,
+    "file": "ALG-B-mutual_knn-k50.bin",
+    "status": "built"
+  },
+  "ALG-B-MK60": {
+    "elapsed_seconds": 27.9,
+    "file": "ALG-B-mutual_knn-k60.bin",
+    "status": "built"
+  },
+  "ALG-B-MK75": {
+    "elapsed_seconds": 28.4,
+    "file": "ALG-B-mutual_knn-k75.bin",
+    "status": "built"
+  },
+  "ALG-B-PS100": {
+    "elapsed_seconds": 30.0,
+    "file": "ALG-B-proximity_select-k100.bin",
+    "status": "built"
+  },
+  "ALG-B-PS50": {
+    "elapsed_seconds": 28.6,
+    "file": "ALG-B-proximity_select-k50.bin",
+    "status": "built"
+  },
+  "ALG-B-TUq-50-100": {
+    "elapsed_seconds": 33.1,
+    "file": "ALG-B-trimmed_union-d100-j50-trimbanded_quota.bin",
+    "status": "built"
+  },
+  "ALG-B-TUq-50-50": {
+    "elapsed_seconds": 33.0,
+    "file": "ALG-B-trimmed_union-d50-j50-trimbanded_quota.bin",
+    "status": "built"
+  },
+  "ALG-B-TUw-100-100": {
+    "elapsed_seconds": 36.9,
+    "file": "ALG-B-trimmed_union-d100-j100.bin",
+    "status": "built"
+  },
+  "ALG-B-TUw-50-100": {
+    "elapsed_seconds": 33.3,
+    "file": "ALG-B-trimmed_union-d100-j50.bin",
+    "status": "built"
+  },
+  "ALG-B-TUw-50-50": {
+    "elapsed_seconds": 32.9,
+    "file": "ALG-B-trimmed_union-d50-j50.bin",
+    "status": "built"
+  },
+  "ALG-B-UC": {
+    "elapsed_seconds": 30.4,
+    "file": "ALG-B-uncapped-none.bin",
+    "status": "built"
+  },
+  "ALG-E-MK100": {
+    "elapsed_seconds": 29.4,
+    "file": "ALG-E-mutual_knn-k100.bin",
+    "status": "built"
+  },
+  "ALG-E-MK50": {
+    "file": "ALG-E-mutual_knn-k50.bin",
+    "status": "kept"
+  },
+  "ALG-E-MK60": {
+    "elapsed_seconds": 28.2,
+    "file": "ALG-E-mutual_knn-k60.bin",
+    "status": "built"
+  },
+  "ALG-E-MK75": {
+    "elapsed_seconds": 28.2,
+    "file": "ALG-E-mutual_knn-k75.bin",
+    "status": "built"
+  },
+  "ALG-E-PS100": {
+    "elapsed_seconds": 30.0,
+    "file": "ALG-E-proximity_select-k100.bin",
+    "status": "built"
+  },
+  "ALG-E-PS50": {
+    "file": "ALG-E-proximity_select-k50.bin",
+    "status": "kept"
+  },
+  "ALG-E-TUq-50-100": {
+    "elapsed_seconds": 32.9,
+    "file": "ALG-E-trimmed_union-d100-j50-trimbanded_quota.bin",
+    "status": "built"
+  },
+  "ALG-E-TUq-50-50": {
+    "file": "ALG-E-trimmed_union-d50-j50-trimbanded_quota.bin",
+    "status": "kept"
+  },
+  "ALG-E-TUw-100-100": {
+    "elapsed_seconds": 36.7,
+    "file": "ALG-E-trimmed_union-d100-j100.bin",
+    "status": "built"
+  },
+  "ALG-E-TUw-50-100": {
+    "elapsed_seconds": 32.8,
+    "file": "ALG-E-trimmed_union-d100-j50.bin",
+    "status": "built"
+  },
+  "ALG-E-TUw-50-50": {
+    "file": "ALG-E-trimmed_union-d50-j50.bin",
+    "status": "kept"
+  },
+  "ALG-E-UC": {
+    "elapsed_seconds": 30.0,
+    "file": "ALG-E-uncapped-none.bin",
+    "status": "built"
+  }
+}
