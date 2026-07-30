@@ -1,0 +1,102 @@
+{
+  "ALG-B-MK100": {
+    "elapsed_seconds": 0.0,
+    "nodes_with_binding_cut": 0,
+    "tie_dominated_CRS_H1": false,
+    "tied_cut_share": null,
+    "tied_cuts": 0
+  },
+  "ALG-B-MK50": {
+    "elapsed_seconds": 0.3,
+    "nodes_with_binding_cut": 36626,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.6203,
+    "tied_cuts": 22719
+  },
+  "ALG-B-MK60": {
+    "elapsed_seconds": 0.3,
+    "nodes_with_binding_cut": 33922,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.65848,
+    "tied_cuts": 22337
+  },
+  "ALG-B-MK75": {
+    "elapsed_seconds": 0.3,
+    "nodes_with_binding_cut": 30648,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.70239,
+    "tied_cuts": 21527
+  },
+  "ALG-B-PS100": {
+    "elapsed_seconds": 0.0,
+    "nodes_with_binding_cut": 0,
+    "tie_dominated_CRS_H1": false,
+    "tied_cut_share": null,
+    "tied_cuts": 0
+  },
+  "ALG-B-PS50": {
+    "elapsed_seconds": 0.7,
+    "nodes_with_binding_cut": 36626,
+    "tie_dominated_CRS_H1": false,
+    "tied_cut_share": 0.00025,
+    "tied_cuts": 9
+  },
+  "ALG-B-TUq-50-100": {
+    "CRS_H2_quota_frame_disagreement": {
+      "reserved_slots": 104257,
+      "reserved_sub_decile_under_adopted_frame": 71574,
+      "share_sub_decile_under_adopted_frame": 0.68652
+    },
+    "elapsed_seconds": 7.1,
+    "instrumentation_validated_against_artifact": true,
+    "nodes_with_binding_cut": 5213,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.47324,
+    "tied_cuts": 2467
+  },
+  "ALG-B-TUq-50-50": {
+    "CRS_H2_quota_frame_disagreement": {
+      "reserved_slots": 120424,
+      "reserved_sub_decile_under_adopted_frame": 88837,
+      "share_sub_decile_under_adopted_frame": 0.7377
+    },
+    "elapsed_seconds": 7.3,
+    "instrumentation_validated_against_artifact": true,
+    "nodes_with_binding_cut": 12051,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.38876,
+    "tied_cuts": 4685
+  },
+  "ALG-B-TUw-100-100": {
+    "elapsed_seconds": 11.5,
+    "instrumentation_validated_against_artifact": true,
+    "nodes_with_binding_cut": 8150,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.53141,
+    "tied_cuts": 4331
+  },
+  "ALG-B-TUw-50-100": {
+    "elapsed_seconds": 7.4,
+    "instrumentation_validated_against_artifact": true,
+    "nodes_with_binding_cut": 5229,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.47084,
+    "tied_cuts": 2462
+  },
+  "ALG-B-TUw-50-50": {
+    "elapsed_seconds": 7.5,
+    "instrumentation_validated_against_artifact": true,
+    "nodes_with_binding_cut": 11861,
+    "tie_dominated_CRS_H1": true,
+    "tied_cut_share": 0.3874,
+    "tied_cuts": 4595
+  },
+  "ALG-B-UC": {
+    "elapsed_seconds": 0.0,
+    "nodes_with_binding_cut": 0,
+    "note": "no cut exists; reference row",
+    "tie_dominated_CRS_H1": false,
+    "tied_cut_share": null,
+    "tied_cuts": 0
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "drawn": 82,
+  "kept_routable_everywhere": 39,
+  "per_class_drawn": {
+    "ff-top01pct": 10,
+    "ff-top1pct": 12,
+    "lower half x lower": 12,
+    "top 0.1% x lower": 12,
+    "top 1% x lower": 12,
+    "top 10% x lower": 12,
+    "upper half x lower": 12
+  },
+  "per_class_kept": {
+    "ff-top01pct": 10,
+    "ff-top1pct": 12,
+    "lower half x lower": 1,
+    "top 0.1% x lower": 3,
+    "top 1% x lower": 4,
+    "top 10% x lower": 6,
+    "upper half x lower": 3
+  },
+  "restricted_to_cells": [
+    "ALG-B-MK100",
+    "ALG-B-MK50",
+    "ALG-B-MK60",
+    "ALG-B-MK75",
+    "ALG-B-PS100",
+    "ALG-B-PS50",
+    "ALG-B-TUq-50-100",
+    "ALG-B-TUq-50-50",
+    "ALG-B-TUw-100-100",
+    "ALG-B-TUw-50-100",
+    "ALG-B-TUw-50-50",
+    "ALG-B-UC",
+    "ALG-E-MK100",
+    "ALG-E-MK50",
+    "ALG-E-MK60",
+    "ALG-E-MK75",
+    "ALG-E-PS100",
+    "ALG-E-PS50",
+    "ALG-E-TUq-50-100",
+    "ALG-E-TUq-50-50",
+    "ALG-E-TUw-100-100",
+    "ALG-E-TUw-50-100",
+    "ALG-E-TUw-50-50",
+    "ALG-E-UC"
+  ],
+  "seed": 20260730,
+  "triples": [
+    [
+      "top 0.1% x lower",
+      "67f66c07-6e61-4026-ade5-7e782fad3a5d",
+      "fe52973b-06b8-4b17-af23-a7af1d5ec8d4"
+    ],
+    [
+      "top 0.1% x lower",
+      "f1106b17-dcbb-45f6-b938-199ccfab50cc",
+      "9d458da8-1ece-432c-b6ed-e5ae96a47eba"
+    ],
+    [
+      "top 0.1% x lower",
+      "b7ffd2af-418f-4be2-bdd1-22f8b48613da",
+      "8110906f-7b7c-4fe0-b147-81efb2314a62"
+    ],
+    [
+      "top 1% x lower",
+      "b2dbfc09-b332-408b-a235-1850e41971c5",
+      "6a9042ea-5f6c-4731-baf8-97a12aa0ded4"
+    ],
+    [
+      "top 1% x lower",
+      "ce7bba8b-026b-4aa6-bddb-f98ed6d595e4",
+      "63ef2325-62d8-4d1d-b8bd-b3c0de5127dd"
+    ],
+    [
+      "top 1% x lower",
+      "800760de-bdf8-43a2-8fe0-44a2401a5515",
+      "360d6b3f-a57a-419a-90ff-e3c4ac6fddb9"
+    ],
+    [
+      "top 1% x lower",
+      "f3bf61f8-97d4-4e52-a73d-2ddbbe8196c8",
+      "db5a1262-dcc9-430b-a440-faf5c7390e8c"
+    ],
+    [
+      "top 10% x lower",
+      "7cd2d860-c6d7-4be2-af50-57c51ee45687",
+      "00ed154e-8679-42f0-8f42-e59bd7e185af"
+    ],
+    [
+      "top 10% x lower",
+      "91f7a868-d82e-4cfb-9cd9-a2ffd7faac25",
+      "1efdd3ab-94a4-4e64-8be9-1712ccf67c6e"
+    ],
+    [
+      "top 10% x lower",
+      "fb407c75-3474-4a01-9d96-2d71e8e48a7d",
+      "c09048fd-3eea-4d4c-ae2f-91fde636af0e"
+    ],
+    [
+      "top 10% x lower",
+      "375a3c4c-7898-47f0-ad0e-443a75148c7a",
+      "9c99df85-78f0-4725-b700-62691f526543"
+    ],
+    [
+      "top 10% x lower",
+      "99d3093f-e7fa-48b0-80da-6826af69d29c",
+      "929fbe85-fa4c-4122-916f-f30745ffc5b3"
+    ],
+    [
+      "top 10% x lower",
+      "f3c95ad4-215b-4519-8660-84c9f467da05",
+      "749715a9-f679-46fd-89df-d47f1df2b824"
+    ],
+    [
+      "upper half x lower",
+      "7fdebde4-3cb7-4739-86f7-17f4b84eae25",
+      "29a712d1-47bc-42f7-a4ec-6bc1ab937d77"
+    ],
+    [
+      "upper half x lower",
+      "6a006fec-7dec-44b8-b057-3f1ad8087992",
+      "e2c21f14-e48c-4cab-9c22-a6d731ef3c7b"
+    ],
+    [
+      "upper half x lower",
+      "1f98f7e5-fbb4-49fb-b399-9d81619769fb",
+      "2eea1e87-ad45-49f7-8de7-a55f02f6db67"
+    ],
+    [
+      "lower half x lower",
+      "783719e1-524d-495a-a1de-e37ce1cdd66b",
+      "2d0f2678-bb2c-42ff-9ebd-349488d0cccc"
+    ],
+    [
+      "ff-top1pct",
+      "48262e82-db9f-4a92-b650-dfef979b73ec",
+      "d8661c02-f423-4d72-8044-40ff05daf7a1"
+    ],
+    [
+      "ff-top1pct",
+      "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+      "20244d07-534f-4eff-b4d4-930878889970"
+    ],
+    [
+      "ff-top1pct",
+      "cf82a38f-9413-4333-bacb-ca5b6db95794",
+      "b267ca80-034e-4dc1-9ed4-ec45f1fed41d"
+    ],
+    [
+      "ff-top1pct",
+      "a21b2652-62ed-4767-a3d2-0aa802abf080",
+      "b29020d6-5dbf-4c99-b16f-c009f8a712ff"
+    ],
+    [
+      "ff-top1pct",
+      "410c9baf-5469-44f6-9852-826524b80c61",
+      "69b39eab-6577-46a4-a9f5-817839092033"
+    ],
+    [
+      "ff-top1pct",
+      "54799c0e-eb45-4eea-996d-c4d71a63c499",
+      "b2dbfc09-b332-408b-a235-1850e41971c5"
+    ],
+    [
+      "ff-top1pct",
+      "be540c02-7898-4b79-9acc-c8122c7d9e83",
+      "f7625f34-1799-42a4-a1c6-22b5377c767b"
+    ],
+    [
+      "ff-top1pct",
+      "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f",
+      "cc0b7089-c08d-4c10-b6b0-873582c17fd6"
+    ],
+    [
+      "ff-top1pct",
+      "ac7e838c-3d95-47c2-92a9-81767ad7c217",
+      "5334edc0-5faf-4ca5-b1df-000de3e1f752"
+    ],
+    [
+      "ff-top1pct",
+      "faabb55d-3c9e-4c23-8779-732ac2ee2c0d",
+      "78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2"
+    ],
+    [
+      "ff-top1pct",
+      "f41490ce-fe39-435d-86c0-ab5ce098b423",
+      "f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62"
+    ],
+    [
+      "ff-top1pct",
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+      "8b22acd6-20e6-4463-a75c-c14b5cfdb666"
+    ],
+    [
+      "ff-top01pct",
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+      "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387"
+    ],
+    [
+      "ff-top01pct",
+      "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+      "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6"
+    ],
+    [
+      "ff-top01pct",
+      "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+      "eeb1195b-f213-4ce1-b28c-8565211f8e43"
+    ],
+    [
+      "ff-top01pct",
+      "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+      "ca891d65-d9b0-4258-89f7-e6ba29d83767"
+    ],
+    [
+      "ff-top01pct",
+      "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86",
+      "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6"
+    ],
+    [
+      "ff-top01pct",
+      "b6b2bb8d-54a9-491f-9607-7b546023b433",
+      "8970d868-0723-483b-a75b-51088913d3d4"
+    ],
+    [
+      "ff-top01pct",
+      "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+      "bd13909f-1c29-4c27-a874-d4aaf27c5b1a"
+    ],
+    [
+      "ff-top01pct",
+      "e795e03d-b5d5-4a5f-834d-162cfb308a2c",
+      "9a709693-b4f8-4da9-8cc1-038c911a61be"
+    ],
+    [
+      "ff-top01pct",
+      "f82bcf78-5b69-4622-a5ef-73800768d9ac",
+      "c8b03190-306c-4120-bb0b-6f2ebfc06ea9"
+    ],
+    [
+      "ff-top01pct",
+      "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+      "d6ed7887-a401-47a8-893c-34b967444d26"
+    ]
+  ]
+}

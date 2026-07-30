@@ -1,0 +1,10 @@
+GREEN ALG-E: PASS (74157 artists, 897620 edges, 73feffa03856…)
+GREEN ALG-B: PASS (68467 artists, 811784 edges, d008a2b5e0c2…)
+RED   ALG-E k=49: PASS (73947 artists, 878028 edges, 7f5642d6bc7d…)
+ALG-E: PASS — exclusion 0.01067, lower-half stranded 0.00078, R.E.M. degree 47
+ALG-B: PASS — exclusion 0.08669, lower-half stranded 0.07004, R.E.M. degree 6
+GREEN determinism: PASS (20 pairs, 0 unroutable)
+GREEN walk validity: PASS (0 invalid)
+GREEN class labels: PASS (2 classes in output)
+RED   w_sim=0 moves paths: PASS (18/20 changed)
+      median length 9.5, hub-transit(own) 0.15602, sub-decile interiors 0.20445

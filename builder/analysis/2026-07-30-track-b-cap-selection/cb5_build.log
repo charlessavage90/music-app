@@ -1,0 +1,24 @@
+ALG-E-MK50         kept        ALG-E-mutual_knn-k50.bin
+ALG-E-MK60         built    28.2s  ALG-E-mutual_knn-k60.bin
+ALG-E-MK75         built    28.2s  ALG-E-mutual_knn-k75.bin
+ALG-E-MK100        built    29.4s  ALG-E-mutual_knn-k100.bin
+ALG-E-TUw-50-50    kept        ALG-E-trimmed_union-d50-j50.bin
+ALG-E-TUw-50-100   built    32.8s  ALG-E-trimmed_union-d100-j50.bin
+ALG-E-TUw-100-100  built    36.7s  ALG-E-trimmed_union-d100-j100.bin
+ALG-E-TUq-50-50    kept        ALG-E-trimmed_union-d50-j50-trimbanded_quota.bin
+ALG-E-TUq-50-100   built    32.9s  ALG-E-trimmed_union-d100-j50-trimbanded_quota.bin
+ALG-E-PS50         kept        ALG-E-proximity_select-k50.bin
+ALG-E-PS100        built    30.0s  ALG-E-proximity_select-k100.bin
+ALG-E-UC           built    30.0s  ALG-E-uncapped-none.bin
+ALG-B-MK50         built    27.6s  ALG-B-mutual_knn-k50.bin
+ALG-B-MK60         built    27.9s  ALG-B-mutual_knn-k60.bin
+ALG-B-MK75         built    28.4s  ALG-B-mutual_knn-k75.bin
+ALG-B-MK100        built    29.6s  ALG-B-mutual_knn-k100.bin
+ALG-B-TUw-50-50    built    32.9s  ALG-B-trimmed_union-d50-j50.bin
+ALG-B-TUw-50-100   built    33.3s  ALG-B-trimmed_union-d100-j50.bin
+ALG-B-TUw-100-100  built    36.9s  ALG-B-trimmed_union-d100-j100.bin
+ALG-B-TUq-50-50    built    33.0s  ALG-B-trimmed_union-d50-j50-trimbanded_quota.bin
+ALG-B-TUq-50-100   built    33.1s  ALG-B-trimmed_union-d100-j50-trimbanded_quota.bin
+ALG-B-PS50         built    28.6s  ALG-B-proximity_select-k50.bin
+ALG-B-PS100        built    30.0s  ALG-B-proximity_select-k100.bin
+ALG-B-UC           built    30.4s  ALG-B-uncapped-none.bin
