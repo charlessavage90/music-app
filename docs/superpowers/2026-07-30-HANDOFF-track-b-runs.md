@@ -1,9 +1,13 @@
 # Handoff — Track B runs and reads complete, 2026-07-30
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ Role: SUPERSEDED 2026-07-30 (later) on NEXT ACTIONS ONLY** by
+[`2026-07-30-HANDOFF-fame-proxy-coverage.md`](2026-07-30-HANDOFF-fame-proxy-coverage.md).
+**Everything it records about Track B remains accurate and is not superseded** — the
+successor is a different line of work (fame instrumentation) and touched no Track B
+document, figure or conclusion. *(Original role: ACTIVE — the CURRENT handoff. Supersedes
 [`2026-07-30-HANDOFF-track-b-design.md`](2026-07-30-HANDOFF-track-b-design.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
-owns it.
+owns it.)*
 
 **This is a seam handoff** — Track B is complete through `CB-6`: all 24 cells built and
 scored, raw outputs committed before any read, the six reads written in the prereg's own

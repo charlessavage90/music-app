@@ -18,16 +18,28 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 
 ## Next
 
-> ## TRACK B IS COMPLETE — runs, reads and report. **The next action is the owner's.**
+> ## TRACK B IS COMPLETE, and so are the FAME-PROXY COVERAGE probes. **The next action is the owner's, and there are now two open questions rather than one.**
 >
-> Entry point is the handoff:
-> [`2026-07-30-HANDOFF-track-b-runs.md`](2026-07-30-HANDOFF-track-b-runs.md).
-> The results of record are
-> [`findings/2026-07-30-track-b-cap-selection-results.md`](findings/2026-07-30-track-b-cap-selection-results.md)
-> (four-part report; measured / inferred / weakest link / options). **Nothing is queued
-> for a working session.** The two parked decisions below now have the pre-registered
-> recommendation input Track B existed to produce; **both still owe a blind listen
-> (`REQ-38`) regardless of the numbers.**
+> Entry point is the current handoff:
+> [`2026-07-30-HANDOFF-fame-proxy-coverage.md`](2026-07-30-HANDOFF-fame-proxy-coverage.md),
+> which supersedes the Track B one **on next actions only** — Track B's own record is
+> untouched and remains accurate.
+>
+> **Track B** — results of record:
+> [`findings/2026-07-30-track-b-cap-selection-results.md`](findings/2026-07-30-track-b-cap-selection-results.md).
+> The two parked decisions below now have the pre-registered recommendation input it
+> existed to produce; **both still owe a blind listen (`REQ-38`) regardless of the
+> numbers.**
+>
+> **Fame-proxy coverage** (branch `fame-proxy-coverage`, PR #53) — descriptive scope
+> probes, **nothing adopted, no criterion fixed, no currency changed, Track B untouched**.
+> Findings: [`findings/2026-07-30-fame-proxy-coverage.md`](findings/2026-07-30-fame-proxy-coverage.md)
+> (`FPC-`). **Read its §0 first: it corrects the premise the work began from** — the
+> Wikipedia floor is *not* actively corrupting fame-currency measurements, and **no Track 2
+> or Track 3 verdict changes.** What it did establish is a **sequencing** question, now
+> parked below.
+>
+> **Nothing is queued for a working session.**
 
 **The requirements baseline is unchanged since 2026-07-29:**
 [`PRODUCT-REQUIREMENTS.md`](PRODUCT-REQUIREMENTS.md) (`REQ-`) governs where it and
@@ -37,6 +49,23 @@ read measured where it can and cannot be moved; the results note owns that readi
 
 ## PARKED — owner's explicit decision; his trigger, never a session's
 
+- **Whether the fame instrument is fixed BEFORE or AFTER the graph work** — the sequencing
+  question `FPC-9` raised. The ruler is adequate for what the router does today (`FPC-2`)
+  and blind on 38.7% of what it would deliver on the most obscure route the graph admits
+  (`FPC-9`), so **the criteria that would judge a successful obscurity push are the ones
+  that go blind during it.** The retiring session's position, argued in the handoff: do it
+  first. **`FPC-2` and `FPC-9` must be quoted together; either alone gives the wrong
+  answer.**
+- **Whether a currency change re-reads prior fame-scored results** — must be fixed *before*
+  any recompute, never after seeing one. `FPC-1`/`FPC-2` say nothing currently needs it.
+- **The coherence thread** — execution log
+  [`2026-07-30-fame-proxy-coverage-execution-log.md`](2026-07-30-fame-proxy-coverage-execution-log.md)
+  §7. Two halves, neither proposed: that the past failure of coherence metrics was
+  *misdiagnosed* (both failed metrics were topological, auditing the graph they came from,
+  while the owner's verdict notes are genre/era/scene judgments), and that the cost
+  function assumes coherence is **additive along edges** while `PRODUCT-REQUIREMENTS`'s own
+  second clause is not. Untried instrument named there: MusicBrainz tags — with the honest
+  warning that its coverage thins in the same tail, which is this failure mode twice.
 - **The cap-rule decision for any rebuild** — Track B's `R1` is its input; adoption of
   any rule owes the blind listen.
 - **`ALG-B` adoption** — Track B's `R0`, `R2`, `R3` (`CRS-C6`) are its inputs, beside
@@ -132,6 +161,11 @@ read measured where it can and cannot be moved; the results note owns that readi
 |---|---|
 | ✅ **Track B runs and reads** (`CB-5`/`CB-6`) | **DISCHARGED 2026-07-30** — run to completion; results note is the record. Struck, kept for the record. |
 | ✅ **`CRS-A5` endpoint re-verification** | **DISCHARGED 2026-07-30** — one request at scoring time, 200, companion delivered descriptive-only. Struck. |
+| **`FPC-9`'s falsifier — an obscure-endpoint pair set for floor reach** | **If any realistic candidate device reaches materially more obscurity than production.** `FPC-9` used Track 3's `LIMIT` arm, a ceiling rather than a shippable route, and rests on 62 interiors from one arm on twelve pairs. Falsified by a device that reaches more obscurity *without* approaching `LIMIT`'s interior percentiles. |
+| **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **When, and only when, a currency decision is made.** Its current sentence ("blind in the modern-obscure tail") is *true*, so adding `FPC-3`/`FPC-9`'s extent is growth in the owner's own requirements layer, not a correction. Raised by the doc-auditor 2026-07-30 and deliberately not actioned. |
+| **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **If a currency decision adopts the MBID-keyed proxy.** ~33k pageview requests, ~3–4 h, resumable. The `--validate` path already answered the decision-relevant question; the build is only needed once something scores against it. |
+| **MusicBrainz tag/genre coverage as a coherence instrument** | **If the owner picks up the coherence thread** (execution log §7). **Probe coverage before building anything on it** — tags thin in the same obscure tail the Wikipedia proxy is blind in, which would be this failure mode twice; the `FPC-` probes are the template. |
+| **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
 | **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |
 | **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
 | **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**; reopen if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |

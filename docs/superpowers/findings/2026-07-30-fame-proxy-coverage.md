@@ -57,6 +57,10 @@ unique name. **10 have an English article after all; 169 genuinely have none.** 
 *(Plain: the artists the app actually shows you are almost never ones the fame ruler is
 blind to — and the deeper you press bypass, the less true it gets.)*
 
+⚠ **This verdict is CONDITIONAL on production's current routing, and `FPC-9` is where that
+is tested.** Read the two together; quoting this one alone gives the wrong answer about
+what happens if the obscurity work succeeds.
+
 Pooled across Track 2's eleven arms, the share of **distinct routed interiors** with no
 English article runs **5.3% at bypass depth 0 down to 2.4% at depth 20**, monotonically.
 By delivered slots, 10.1% down to 6.7%. ListenBrainz covers **100%** of routed interiors
@@ -210,6 +214,15 @@ design could reasonably take the coverage and ignore the magnitude.
 
 *(Plain: matching artists by name sometimes scored a completely different person or thing —
 a Roman emperor, a TV series, an adult film actor. Matching by ID does not.)*
+
+**This defect class was already recorded, and this is its measurement at scale.**
+`2026-07-26-low-degree-census.md` §3 (`CNS-2`) found that the adopted resolver
+*"misidentifies artists where names are short and generic, and the error inflates fame
+rather than deflating it"* — because the more famous subject wins the pageview count by
+construction, and fame is the sort key, so the wrong row sorts to the top of any ranked
+list. `FPC-10` did not discover that class; it quantifies it on a routed population and
+names a fix `CNS-2` did not have. **The direction holds:** every one of the largest cases
+below is an inflation, which is what `CNS-2` predicted.
 
 Comparing the frozen name-search resolver against `P434` on the 1,090 Track 2 artists
 resolvable to a unique artifact name:
