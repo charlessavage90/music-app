@@ -67,6 +67,14 @@ reported as "λ **and** the neutral rule", never as a clean single knob.
 **Agreement** between two artists is the Jaccard overlap of their normalised genre-label
 sets: shared labels divided by total distinct labels. 0 = nothing in common, 1 = identical.
 
+**The label set is fixed here as the `COH-2` union genre**: ListenBrainz's genre-whitelisted
+tags (a faithful transport for MusicBrainz genres — `COH-5` measured 99.9% identical sets)
+**∪** Wikidata P136, both through `ct_common.norm_genre`. This is the same vocabulary the
+`COH-` coverage figures were measured in, so `TAS-1` is comparable with them rather than
+merely adjacent. **The widest-vocabulary variant is not used**: `COH-6` measured it as
+near-identical in the tail, so it would add a second vocabulary for no gain. Pinned before any
+run; a change after a result is an §8 amendment.
+
 **Selection form (build time).** The value used to decide which neighbours an artist keeps:
 
 ```
