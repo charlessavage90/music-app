@@ -16,16 +16,21 @@ those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by sec
 
 ## Next
 
-> ## The next action is the OWNER'S CALL between two things, and neither is started.
+> ## The next experiment is TRACK B — the cap-selection simulation, at production scale.
 >
 > Entry point is the handoff:
 > [`2026-07-29-HANDOFF-graph-rebuild-track-a.md`](2026-07-29-HANDOFF-graph-rebuild-track-a.md).
 >
-> **Track A is done.** The rebuild plan was written *and executed*: an `ALG-B` trial build
-> now exists and both blockers it was run to answer have been answered. The two candidates
-> for what follows are **Track B (the cap-selection simulation, `MKS-5b`)**, which is
-> session-shaped work needing its own plan and pre-registration, and **the `ALG-B` re-crawl
-> decision itself**, which is his and stays PARKED below.
+> **Track A is done, and the `ALG-B` re-crawl has since been RUN** (owner's instruction,
+> overnight 2026-07-29 → 30). A full `ALG-B` archive and a built `ALG-B` graph now exist;
+> **nothing is adopted.** Both questions the trial left open are answered — see `GRT-P4`
+> below — and the answers put the cap simulation on the critical path rather than after it:
+> **every figure is at `k = 50`, and the stranding is heavily cap-dependent.** It needs its
+> own plan and pre-registration, it runs **offline** from the archive now on disk, and it
+> must price `MKS-5b`'s hub cost, which nothing has yet measured.
+>
+> **Adoption remains PARKED and is the owner's**, and it still owes a blind listen
+> (`REQ-38`).
 
 **Graph rebuild Track A is EXECUTED (2026-07-29).** Record:
 [`2026-07-29-graph-rebuild-track-a-execution-log.md`](2026-07-29-graph-rebuild-track-a-execution-log.md);
@@ -149,8 +154,9 @@ limitation**.
 |---|---|
 | ✅ **Component membership under `ALG-B`** (`RC-H1`) | **DISCHARGED 2026-07-29** at trial scale — `GRT-C4`. `ALG-B` excludes readable artists from the largest component in three of four comparable bands where `ALG-E` excludes none (whole-population 3.20% vs 1.37%). ⚠ **The pre-registered ratio bar is undefined against a zero baseline and returned "not decisive" everywhere** (`GRT-P1`); the figures stand, the threshold verdict does not. Struck, kept for the record. |
 | ✅ **`RC-P2`'s predicted build refusal** | **DISCHARGED 2026-07-29 — REFUTED, and the reason supersedes it.** No refusal: both clauses pass. R.E.M.'s degree collapse is confirmed (47 → 6) but the guard cannot see it (`GRT-P2`). Struck, kept for the record; replaced by the live item below. |
-| **`GRT-P2` — does the acceptance guard still cover the artists it names, at production scale?** | **Before any `ALG-B` adoption.** Measured at trial scale only, where R.E.M. left the top-25-by-popularity sample the degree floor inspects. Rank among 2,904 is not rank among 74,000. **Do not weaken `acceptance.py`; strengthening it is a design question with its own trade-offs.** |
-| **`GRT-P1` — `GRT-C4`'s effect size** | **If any successor pre-registers a component-membership read.** A ratio bar cannot express "the baseline is zero and the trial arm is not"; an absolute-difference bar or an explicit zero-baseline rule is owed. Same shape as `AS-H1`. |
+| ✅ **`GRT-P2` — does the acceptance guard cover the artists it names?** | **DISCHARGED 2026-07-30 — CONFIRMED BLIND at production scale** (`GRT-P4`). On a real 68,467-node `ALG-B` graph, R.E.M. holds 6 connections at popularity rank 38, Pixies 3 at rank 5,730, The xx 1 at rank 12,317 — **all outside the top-25 sample the degree floor inspects, and the build passes**. `acceptance.py` cannot detect this failure mode at any scale. **Do not weaken it**; strengthening it is a design question of its own and is not proposed. Struck, kept for the record. |
+| ✅ **`GRT-P1` — `GRT-C4`'s effect size** | **DISCHARGED 2026-07-30** — the broken ratio bar was a *trial-scale* artifact of a zero baseline. At production scale the baseline is non-zero (1.07%) and the pre-registered 2× bar works as written: `ALG-B` excludes at **8.12×**, decisively material. A successor pre-registering a zero-baseline-capable read is still the tidier fix but is no longer blocking. Struck, kept for the record. |
+| **The cap-selection simulation at production scale** (`MKS-5b`, strand 3) | **Before any `ALG-B` adoption decision — now the decisive next experiment, not a follow-up.** Every `GRT-P4` figure is at `k = 50`, and `GRT-P3` measured `ALG-B`'s stranding as heavily cap-dependent. The overnight archive makes this answerable **offline, at full scale**. Must consume `RC-A2` and price `MKS-5b`'s hub cost, which no probe here has measured. |
 | **`snyk_code_scan` never ran on the `GR-1`/`GR-2`/`GR-3` diffs** | **Whenever the Snyk CLI is authenticated** (`snyk auth` is a browser flow only the owner can complete). Required by the global instruction on new first-party code. |
 | ✅ **`RC-H3`** — the archive key does not encode the algorithm | **DISCHARGED 2026-07-29** (`GR-3`) — production keeps the flat layout, every other algorithm gets a sub-tree, and the checkpoint refuses a mismatched resume. Struck, kept for the record. |
 | ✅ **No way to select the algorithm for a build** | **DISCHARGED 2026-07-29** (`GR-2`) — `--algorithm` on both `crawl` and `build`, validated against the closed enum. The default is unchanged and flipping it is still the re-crawl decision. Struck, kept for the record. |

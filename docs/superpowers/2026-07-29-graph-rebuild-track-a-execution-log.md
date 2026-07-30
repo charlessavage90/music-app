@@ -357,6 +357,92 @@ graph, and it prices no hub cost at all.
 simulation is now known to bear directly on the re-crawl decision rather than merely
 following it.
 
+## §7b `GRT-P4` (post-hoc) — the full `ALG-B` crawl and build, 2026-07-30
+
+The owner authorised a **full `ALG-B` crawl** overnight after the closeout. It ran to
+completion: **75,000 fetched, 0 failures**, 0.83 GB, and the production archive was
+untouched at 75,000 (`GR-3`'s scoping is what made this safe to run at all). Checkpoint
+and archive both verified as genuinely `ALG-B`, with zero unscoped files.
+
+**Recorded correction: a full crawl is ~7.6 hours at the endpoint's current speed, not the
+4¼ hours in the record** — that figure dates from when the endpoint ran ~4× faster.
+
+**The build succeeded and PASSED `check_acceptance`:** 68,467 artists, 811,784 edges, 78 s.
+`ALG-B` artifact sha256
+`d008a2b5e0c23cf31b3f12357fa1fccff55d209ec18f54c872cdae9bf4a0757f`; the `ALG-E` comparison
+build is `GR-4`'s (`73feffa0…`). Both carry the drop rule, so the two differ in exactly one
+column. 27 nameless artists dropped here against 36 under `ALG-E` — a different archive
+sees a different set of neighbour rows, so a different set of artists never acquires a
+name.
+
+### `GRT-P2` — CONFIRMED at production scale
+
+The trial left this open on the grounds that "rank among 2,904 is not rank among 74,000".
+It is now measured on a full graph, and the guard is blind exactly as predicted:
+
+| artist | `ALG-E` degree (rank) | `ALG-B` degree (rank) | inside the top-25 sample? |
+|---|---|---|---|
+| R.E.M. | 47 (5) | **6** (38) | **no** |
+| Pixies | 41 (23) | **3** (5,730) | **no** |
+| The xx | 35 (38) | **1** (12,317) | **no** |
+| Radiohead | 50 (0) | 48 (10) | yes |
+
+**The build passes** — top-25 median degree 45.0 against a floor of 25.0, minimum 28
+against a floor of 8, and **no canonical name is missing**. Three of the four artists
+`RC-A2` named collapse to single digits, and every one of them has fallen out of the sample
+the floor inspects, because losing edges loses the popularity that put them there.
+**`acceptance.py` cannot detect this failure mode at any scale.** No change is proposed
+here; weakening it is barred and strengthening it is a design question of its own.
+
+### `GRT-C4` — decisive at production scale, where the trial could not be
+
+| | `ALG-E` | `ALG-B` |
+|---|---|---|
+| Artists cut off the map | 800 | **6,499** |
+| Exclusion rate | 1.07% | **8.67%** |
+
+**Ratio 8.12× against a 2× bar — decisively material**, and unconfounded: each rate is
+computed inside that arm's own crawled population. `GRT-P1`'s broken ratio bar was a
+trial-scale artifact of a zero baseline; at full scale the baseline is non-zero and the
+pre-registered bar works as written.
+
+### The confound in this probe's own first draft, caught before reporting
+
+**The two arms' BFS frontiers diverge far more than expected: `ALG-B` never crawled
+23,056 (31.1%) of the adopted artifact's artists, and reached ~23k the adopted crawl never
+saw.** So measuring "absent from the component" against the adopted frame conflates **never
+crawled** with **stranded** — and the first draft did exactly that, reporting 55.8% of
+below-median artists "absent" when the stranded share is **7.0%**. Restricted to artists
+each arm actually crawled:
+
+| band | `ALG-E` stranded | `ALG-B` stranded | `ALG-B` never crawled |
+|---|---|---|---|
+| top 0.1% | 0.00% | 0.00% | 0 |
+| top 1% | 0.00% | 1.20% | 0 |
+| top 10% | 0.01% | 0.73% | 54 |
+| upper half | 0.02% | 0.97% | 3,552 |
+| **lower half** | **0.08%** | **7.00%** | **19,450** |
+
+`ALG-B` strands the obscure artists it crawls at roughly **88×** production's rate. Both
+denominators are kept in the output so the gap stays visible.
+
+### What this does and does not settle
+
+**Settles:** `RC-R1`'s stranding is real, large, and reproduced by a real build;
+`RC-P2`'s refusal is refuted for good, with the mechanism (`GRT-P2`) confirmed instead;
+`AS-R3` is understated if anything — `ALG-B` is not merely a different graph, it is a
+different *population*, 31% disjoint on crawl coverage alone.
+
+**Does not settle, and this is the live question:** every figure above is at **`k = 50`**.
+`GRT-P3` measured that `ALG-B`'s stranding is heavily cap-dependent (26.4% → 7.5% below the
+degree floor across k = 50 → 100 on the trial archive). **The cap-selection simulation is
+now answerable at production scale, offline, from this archive** — which is what the
+overnight crawl bought, and it is the decisive next experiment rather than a follow-up.
+
+**Nothing is adopted.** `BuilderConfig.algorithm` still carries `contribution_5`; the API
+still boots `graph-t15-tiebreakfix.bin`; the `ALG-B` artifact is a gitignored scratch file
+nothing points at. A blind listen is still owed before any adoption (`REQ-38`).
+
 ## §8 Closeout record
 
 **D4 — suites run, not recalled:** builder **129 passed**, api **217 passed**, frontend

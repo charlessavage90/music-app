@@ -31,6 +31,31 @@ the website changed. **A journey you build now is identical to one from this aft
 trial map that got built is a scratch file nothing points at; the app still uses the same map
 it did this morning.
 
+> ### ✅ THE OVERNIGHT RUN FINISHED — and it is worth thirty seconds
+>
+> **It completed cleanly: 75,000 artists collected, nothing failed, and the irreplaceable
+> existing collection was untouched.** A map was then built from it in 78 seconds. **The app
+> is still using the old map, nothing has been adopted, and there is still nothing to test.**
+>
+> **What the new map shows, in plain terms.** It is genuinely a *different* map rather than
+> a better or worse version of the same one — nearly a third of today's artists never appear
+> in it at all, and it reaches roughly as many artists we have never seen.
+>
+> - **It cuts far more artists off the map entirely: 6,499 against 800.** Among the obscure
+>   artists it does reach, it strands about **7%**, where today's setting strands **0.08%**.
+>   That is yesterday's worry, confirmed at full size.
+> - **R.E.M. ends up with 6 connections, down from 47.** Pixies drops to 3, The xx to 1.
+> - **And the safety check does not notice any of it — the map built and passed.** The check
+>   looks at the most popular artists, and these artists lose so much popularity along with
+>   their connections that they drop off the list before it looks. That blind spot is now
+>   confirmed rather than suspected. It is not a reason to weaken the check.
+>
+> **All of that is at one particular setting of a knob nobody has tuned yet**, and the probe
+> from last night showed that knob moves the stranding a great deal. Tuning it is the next
+> piece of work, it needs no more downloading, and **nothing is decided.**
+>
+> *(The note below is from when it was still running, and is kept as sent.)*
+>
 > ### ⚠ ONE THING IS RUNNING OVERNIGHT, and you started it deliberately
 >
 > **A full data-gathering run for the new setting**, begun late on 2026-07-29 at your

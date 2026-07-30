@@ -105,9 +105,19 @@ place), and the plan's own status line (marked executed).
   on the three nameless MBIDs ("Artist not found" on all three) is recorded in the
   execution log §2 and in `pipeline.py`'s comment, and it is what upgraded the drop
   decision from preference to only-available-option.
-- **⚠ ONE THING IS IN FLIGHT, started after this handoff was first written.** A **full
-  `ALG-B` crawl to 75,000 artists**, launched late 2026-07-29 on the owner's explicit
-  instruction, running detached and owned by nobody:
+- **✅ NOTHING IS IN FLIGHT ANY MORE.** The overnight crawl described below **completed at
+  2026-07-30**: 75,000 fetched, 0 failures, production archive untouched. A full `ALG-B`
+  graph was then built from it (68,467 nodes / 811,784 edges, sha256 `d008a2b5…`) and both
+  open questions were read — **`GRT-P4`, execution log §7b**. Headline: `GRT-P2` is
+  **confirmed** (the acceptance guard is blind — R.E.M. at degree 6 sits outside the sample
+  the floor inspects, and the build passes), and `GRT-C4` is **decisive** at production
+  scale (8.67% vs 1.07% excluded, ratio 8.12×). **Nothing adopted.** The next experiment is
+  the cap simulation, now on the critical path because every figure is at `k = 50`.
+
+  *(The description below is as written while it was running, and its command is the one to
+  re-run if a future crawl is ever needed.)* A **full `ALG-B` crawl to 75,000 artists**,
+  launched late 2026-07-29 on the owner's explicit instruction, running detached and owned
+  by nobody:
 
   ```
   uv run artistpath-build crawl --bootstrap ./scratch/bootstrap.json \
