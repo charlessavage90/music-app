@@ -12,18 +12,29 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-30, on the Track B runs closeout.**
+**Last updated: 2026-07-30, on the coherence tag probe closeout.**
 
 ---
 
 ## Next
 
-> ## TRACK B IS COMPLETE, and so are the FAME-PROXY COVERAGE probes. **The next action is the owner's, and there are now two open questions rather than one.**
+> ## TRACK B, the FAME-PROXY COVERAGE probes, and the COHERENCE TAG PROBE are all COMPLETE. **The next action is the owner's; the two open questions below are unchanged.**
 >
 > Entry point is the current handoff:
-> [`2026-07-30-HANDOFF-fame-proxy-coverage.md`](2026-07-30-HANDOFF-fame-proxy-coverage.md),
-> which supersedes the Track B one **on next actions only** — Track B's own record is
-> untouched and remains accurate.
+> [`2026-07-30-HANDOFF-coherence-tag-probe.md`](2026-07-30-HANDOFF-coherence-tag-probe.md),
+> which supersedes the fame-proxy-coverage one **on next actions only** — that record,
+> and Track B's, are untouched and remain accurate.
+>
+> **Coherence tag probe** (branch `coherence-tag-probe`) — a one-day falsification
+> probe of the §7 coherence thread, owner-directed. **Its kill gate fired: tag/genre
+> coverage thins in the obscure tail the way Wikipedia's does, and the pre-registered
+> retrodiction against the 11 blind verdicts was never run — the verdicts remain an
+> unconsumed falsifier.** Findings:
+> [`findings/2026-07-30-coherence-tag-probe.md`](findings/2026-07-30-coherence-tag-probe.md)
+> (`COH-`). **`COH-2` (the band-level kill) and `COH-3` (the delivered-route
+> counterpoint) must be quoted together — either alone gives the wrong answer**, the
+> same pairing rule as `FPC-2`/`FPC-9`. Nothing adopted, no criterion fixed, neither
+> open decision below settled.
 >
 > **Track B** — results of record:
 > [`findings/2026-07-30-track-b-cap-selection-results.md`](findings/2026-07-30-track-b-cap-selection-results.md).
@@ -60,12 +71,15 @@ read measured where it can and cannot be moved; the results note owns that readi
   any recompute, never after seeing one. `FPC-1`/`FPC-2` say nothing currently needs it.
 - **The coherence thread** — execution log
   [`2026-07-30-fame-proxy-coverage-execution-log.md`](2026-07-30-fame-proxy-coverage-execution-log.md)
-  §7. Two halves, neither proposed: that the past failure of coherence metrics was
-  *misdiagnosed* (both failed metrics were topological, auditing the graph they came from,
-  while the owner's verdict notes are genre/era/scene judgments), and that the cost
-  function assumes coherence is **additive along edges** while `PRODUCT-REQUIREMENTS`'s own
-  second clause is not. Untried instrument named there: MusicBrainz tags — with the honest
-  warning that its coverage thins in the same tail, which is this failure mode twice.
+  §7. **Its instrument half was probed 2026-07-30 and the kill gate fired** (`COH-`,
+  above): §7's own warning — tag coverage thins in the same tail — measured true at
+  band level, so no tag-based instrument gets built on this artifact's population as
+  measured. What remains parked, still the owner's trigger: the **structural half**
+  (the cost function assumes coherence is additive along edges while
+  `PRODUCT-REQUIREMENTS`'s second clause is not — untouched, unproposed), and any
+  **reopening of the instrument line on a route-population gate** (`COH-3`'s 74.2%
+  on delivered interiors is the recorded argument; a reopening is a new
+  pre-registration designed cold, never a re-read of the fired gate).
 - **The cap-rule decision for any rebuild** — Track B's `R1` is its input; adoption of
   any rule owes the blind listen.
 - **`ALG-B` adoption** — Track B's `R0`, `R2`, `R3` (`CRS-C6`) are its inputs, beside
@@ -164,7 +178,8 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **`FPC-9`'s falsifier — an obscure-endpoint pair set for floor reach** | **If any realistic candidate device reaches materially more obscurity than production.** `FPC-9` used Track 3's `LIMIT` arm, a ceiling rather than a shippable route, and rests on 62 interiors from one arm on twelve pairs. Falsified by a device that reaches more obscurity *without* approaching `LIMIT`'s interior percentiles. |
 | **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **When, and only when, a currency decision is made.** Its current sentence ("blind in the modern-obscure tail") is *true*, so adding `FPC-3`/`FPC-9`'s extent is growth in the owner's own requirements layer, not a correction. Raised by the doc-auditor 2026-07-30 and deliberately not actioned. |
 | **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **If a currency decision adopts the MBID-keyed proxy.** ~33k pageview requests, ~3–4 h, resumable. The `--validate` path already answered the decision-relevant question; the build is only needed once something scores against it. |
-| **MusicBrainz tag/genre coverage as a coherence instrument** | **If the owner picks up the coherence thread** (execution log §7). **Probe coverage before building anything on it** — tags thin in the same obscure tail the Wikipedia proxy is blind in, which would be this failure mode twice; the `FPC-` probes are the template. |
+| ✅ **MusicBrainz tag/genre coverage as a coherence instrument** | **DISCHARGED 2026-07-30** — the coherence tag probe ran exactly this check and its kill gate fired (`COH-2`, vocabulary-robust per `COH-6`); the retrodiction stayed unrun. Struck, kept for the record. |
+| **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
 | **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |
 | **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |

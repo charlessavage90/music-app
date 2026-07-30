@@ -31,7 +31,13 @@ the obscure tail (`FPC-3`: 27.4% EN-article coverage in the lower-half band).
 | `ct_wikidata_genres.py` | 1A | P136 genre presence, full artifact, banded, both denominators |
 | `ct_mb_sample.py` | 1B | MB genre/tag coverage, stratified 300/band sample — **carries the kill gate** |
 | `ct_limit_interiors.py` | 1C | Genre union coverage on `FPC-9`'s LIMIT-arm interiors (descriptive) |
+| `ct_lb_metadata.py` | 1D | LB batched metadata as a transport for MB tags (owner's question; outside the gate) |
 | `ct_retrodict.py` | 2 | **Only if the gate passes.** Pre-registered path score vs the 11 verdicts |
+
+**Outcome (2026-07-30): the gate KILLED** — lower-half union coverage 35.3% against the
+50% bar. `ct_retrodict.py` was never run and must not be run against these verdicts
+without being reported as a second attempt. Findings of record:
+`docs/superpowers/findings/2026-07-30-coherence-tag-probe.md` (`COH-1`–`COH-5`).
 
 **Kill gate (fixed in `ct_mb_sample.py` before any fetch):** step 2 runs only if
 union-genre coverage (≥1 MB genre or ≥1 P136; all-sampled denominator) in the **lower

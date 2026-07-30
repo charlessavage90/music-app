@@ -1,0 +1,35 @@
+{
+ "note": "COH-6, post-hoc owner-requested read; cannot move the gate",
+ "bands": {
+  "top 0.1%": {
+   "n": 75,
+   "genre_union": 75,
+   "widest": 75
+  },
+  "top 1%": {
+   "n": 300,
+   "genre_union": 300,
+   "widest": 300
+  },
+  "top 10%": {
+   "n": 300,
+   "genre_union": 283,
+   "widest": 284
+  },
+  "upper half": {
+   "n": 300,
+   "genre_union": 208,
+   "widest": 213
+  },
+  "lower half": {
+   "n": 300,
+   "genre_union": 106,
+   "widest": 116
+  }
+ },
+ "limit_interiors": {
+  "n": 62,
+  "genre_union": 46,
+  "widest": 46
+ }
+}

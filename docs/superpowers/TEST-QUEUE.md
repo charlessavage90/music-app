@@ -23,7 +23,55 @@ the point.**
 
 ---
 
-## N/A — 2026-07-30 (latest) — we measured how well our "how famous is this artist" yardstick works; the app is untouched
+## N/A — 2026-07-30 (latest, night) — we asked whether genre labels could judge journey flow; the answer was no, and we stopped
+
+**Nothing to exercise, and nothing is running** — ports 8000 and 5173 were checked and are
+empty, and nothing from this work survives it. No routing, no graph, no weighting, no cost
+function, and not one line of the app or the website changed. **A journey you build now is
+identical to one from this morning.**
+
+**What happened, in plain terms.** You know how you judge journeys by whether each step
+*sounds* like a sensible next listen — genre, era, scene. We asked whether the genre labels
+that exist on the public music databases cover enough of our artists to build a measure of
+that. We wrote down, in advance, the level of coverage below which the idea is dead, and
+committed the exact scoring method we would have used — before looking at anything.
+
+- **The idea died at its own bar, and that is the honest result, not a failure.** In the
+  obscure half of the map — the part the app exists to explore — roughly two artists in
+  three have no genre label anywhere we looked. That is the same hole our fame yardstick
+  has, in the same place. Building a "does this journey hang together" measure on labels
+  that vanish exactly where journeys get interesting would repeat the mistake we just
+  finished measuring, so we stopped at the pre-agreed stopping point.
+- **Your mid-run question closed a door properly:** counting *every* label anyone ever
+  applied, not just proper genre labels, moves the number barely at all. The dark artists
+  have no labels of any kind. So this is not a labelling-choice problem we could tune away.
+- **One genuinely useful thing against the grain:** the specific obscure artists a journey
+  would actually pass through are labelled about twice as well as the obscure population at
+  large. Not enough to un-fire the stopping rule, but it is the first thing any future
+  attempt should look at.
+- **And your other suggestion paid off:** the fast bulk source you pointed at returns the
+  same labels as the slow official one, 99.9% identically, about thirty times faster. If
+  labels are ever worth collecting for the whole map, it is under an hour of work now, not
+  a day.
+
+**Your listening verdicts from July were never touched.** The scoring method that would
+have been tested against them is committed and unused, so that small, irreplaceable set of
+judgments is still available, unburned, for any future attempt.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something
+about the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-30-coherence-tag-probe-execution-log.md`.*
+
+---
+
+## N/A — 2026-07-30 — we measured how well our "how famous is this artist" yardstick works; the app is untouched
+<!-- "(latest)" stripped 2026-07-30 (night): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running** — ports 8000 and 5173 were checked and are
 empty, and no Python process from this work survives. No routing, no graph, no weighting,

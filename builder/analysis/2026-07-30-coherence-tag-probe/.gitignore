@@ -7,3 +7,5 @@ ct_wikidata_genres.json
 ct_mb_sample_raw.json
 ct_limit_tags_raw.json
 ct_lb_metadata_raw.json
+# Run logs stay untracked, per the FPC template convention.
+*.log
