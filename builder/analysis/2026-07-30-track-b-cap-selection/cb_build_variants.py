@@ -150,7 +150,9 @@ def _top_j(ranking: Adjacency, adjacency: Adjacency, j: int,
 
 
 def cap_trimmed_union(adjacency: Adjacency, ranking: Adjacency,
-                      pop: dict[str, float], *, j: int, d: int) -> Adjacency:
+                      pop: dict[str, float], *, j: int, d: int,
+                      trim: str = "weakest_first",
+                      quota: float = 0.2) -> Adjacency:
     """Non-reciprocal: top-j UNION, then a hard degree ceiling of d.
 
     Union alone bounds nothing (a famous artist appears in unboundedly many
@@ -163,10 +165,38 @@ def cap_trimmed_union(adjacency: Adjacency, ranking: Adjacency,
     processed in a fixed order and deletion only ever lowers a degree, so a
     node brought to d cannot later rise above it.
 
-    Determinism: nodes processed by (-degree, mbid); at an over-degree node,
-    weakest edges go first, ties broken on highest neighbour MBID so the
-    surviving set is a function of the input alone.
+    THE TRIM KEY IS NOT A DETAIL -- it decides whether this family can bear on
+    DD-F1 at all (CB-P1, consultant item 2 validated 2026-07-30):
+
+      weakest_first   Delete lowest pair-strength first. By CS-P0f symmetry +
+                      the source's 100-cap, every reverse-ONLY edge at a
+                      superstar scores below its own list's tail, so this trim
+                      provably deletes ALL union-added famous->obscure edges
+                      wherever the node's own list supplies >= d edges. The
+                      family then bears on obscure-end stranding only.
+                      (A popularity-proximity trim shares this blindness for a
+                      different reason: reverse-only sub-decile edges carry
+                      the LARGEST fame gap by construction, so a
+                      keep-closest-popularity trim deletes them first too. It
+                      is deliberately not implemented; the proximity idea is
+                      covered by the proximity_select family.)
+
+      banded_quota    Reserve floor(quota*d) slots at every over-degree node
+                      for its strongest partners below the top popularity
+                      decile OF THIS BUILD'S OWN POPULATION (a shipped rule
+                      cannot consult a frame that only exists in analysis);
+                      remaining slots fill by strength. The one implemented
+                      trim that can RETAIN famous->obscure edges bounded, and
+                      therefore the one union configuration that bears on
+                      DD-F1.
+
+    Determinism: nodes processed by (-degree, mbid); deletions ordered by the
+    trim key with ties broken on highest neighbour MBID, so the surviving set
+    is a function of the input alone.
     """
+    if trim not in ("weakest_first", "banded_quota"):
+        raise ValueError(f"unknown trim {trim!r}")
+
     keep = _top_j(ranking, adjacency, j, lambda u, v: (-ranking[u][v], v))
 
     # Union, then symmetrise on the stronger score, giving an undirected graph.
@@ -183,11 +213,32 @@ def cap_trimmed_union(adjacency: Adjacency, ranking: Adjacency,
         return max(ranking.get(u, {}).get(v, float("-inf")),
                    ranking.get(v, {}).get(u, float("-inf")))
 
+    if trim == "banded_quota":
+        # Top-decile threshold over THIS build's own population, by rank.
+        # pop is a VALUE (log-scaled), so the cut is taken on sorted rank,
+        # never on the value itself (pop_raw is not a percentile, §2.12).
+        ranked_pop = sorted(pop.values())
+        cut_index = int(len(ranked_pop) * 0.9)
+        decile_threshold = ranked_pop[min(cut_index, len(ranked_pop) - 1)]
+        reserve = int(quota * d)
+
     for node in sorted(result, key=lambda n: (-len(result[n]), n)):
         excess = len(result[node]) - d
         if excess <= 0:
             continue
-        doomed = sorted(result[node], key=lambda v: (strength(node, v), _desc(v)))[:excess]
+        if trim == "weakest_first":
+            doomed = sorted(
+                result[node], key=lambda v: (strength(node, v), _desc(v))
+            )[:excess]
+        else:
+            by_strength = sorted(
+                result[node], key=lambda v: (-strength(node, v), v)
+            )
+            sub_decile = [v for v in by_strength if pop[v] < decile_threshold]
+            reserved = set(sub_decile[:reserve])
+            rest = [v for v in by_strength if v not in reserved]
+            kept = set(list(reserved) + rest[: d - len(reserved)])
+            doomed = [v for v in by_strength if v not in kept]
         for victim in doomed:
             result[node].pop(victim, None)
             result[victim].pop(node, None)
@@ -521,6 +572,7 @@ def bound_check() -> dict:
     cases = [
         ("mutual_knn", {"k": 50}, 50),
         ("trimmed_union", {"j": 50, "d": 50}, 50),
+        ("trimmed_union", {"j": 50, "d": 50, "trim": "banded_quota"}, 50),
         ("proximity_select", {"k": 50}, 50),
     ]
     results = {}
@@ -535,7 +587,7 @@ def bound_check() -> dict:
         observed = int(degrees.max())
         holds = observed <= bound
         ok_all = ok_all and holds
-        results[rule] = {
+        row = {
             "params": params,
             "stated_bound": bound,
             "observed_max_degree": observed,
@@ -544,9 +596,10 @@ def bound_check() -> dict:
             "edges": manifest["edges"],
             "mean_degree": round(float(degrees.mean()), 2),
         }
-        print(f"{rule:17} max degree {observed:>5} (bound {bound}) "
+        results[manifest["cell"]] = row
+        print(f"{manifest['cell']:45} max degree {observed:>5} (bound {bound}) "
               f"{'PASS' if holds else 'FAIL'} — {manifest['artists']} artists, "
-              f"{manifest['edges']} edges, mean {results[rule]['mean_degree']}")
+              f"{manifest['edges']} edges, mean {row['mean_degree']}")
 
     results["bound_check_passed"] = ok_all
     (HERE / "cb_bound_check.json").write_text(

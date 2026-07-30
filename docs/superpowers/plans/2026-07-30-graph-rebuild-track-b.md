@@ -239,28 +239,37 @@ The document that makes the runs evidence. Committed before any comparative cell
 its git timestamp is the part that cannot be reconstructed. It must contain, per
 `CLAUDE.md`'s plan rules:
 
-- [ ] The **factor table** — every cell, one column per knob, isolating baseline per row;
+- [x] The **factor table** — every cell, one column per knob, isolating baseline per row;
       the matched-bound rule for cross-family comparisons; the `uncapped` row marked
-      barred from selection (§0 ruling 3).
-- [ ] The **held-constant section** carrying the two dormant terms above plus anything
-      found while building CB-1..3.
-- [ ] **Criteria with effect sizes and plain-language sentences fixed at definition
+      barred from selection (§0 ruling 3). **Done — 24 cells, §1 there.**
+- [x] The **held-constant section** carrying the two dormant terms above plus anything
+      found while building CB-1..3. **Done, §0 there** — including the resolution of the
+      `w_degree_hub` dormancy by single-weight-set pre-commitment.
+- [x] **Criteria with effect sizes and plain-language sentences fixed at definition
       time** — every gate and branch trigger with its own effect size. Calibration
       sources: `GRT-P3`'s trial k-curve (the only prior k-sensitivity data) and the
       production-vs-`ALG-B` gap from `GRT-P4`. Note the determinism point explicitly:
       builds are byte-deterministic, so there is no noise floor and every threshold is a
-      **materiality** bar, not a significance bar.
-- [ ] **Consumes at design time, by ID:** `RC-A2` (rank 50–97 mechanism), `LBS-3` (the
-      100 ceiling), `LBS-4` (contribution mechanism, labelled inference), `MKS-5b` (what
-      "price the hub cost" must mean here: `top1pct_degree_frac`, max degree, and
-      hub-transit rate are the offered proxies, and **no offline coherence proxy exists**
-      — the prereg says so plainly), `SYN-6`/§0 ruling 2, `PLA-R1` applicability (CB-3),
-      and the re-scoring deferral on `rc_raw_records.json`.
-- [ ] **Every read names the run state it presupposes**, one sentence per read; any
-      instruction keeping a cell alive gets its own sentence (the Track 2 §1.4 lesson).
-- [ ] New identifier series for cells/criteria/gates/reads, namespaced and
-      collision-checked (the `CB-` series is this plan's; the prereg picks its own,
-      disjoint).
+      **materiality** bar, not a significance bar. **Done — `CRS-C1`–`C6`, §2 there.**
+- [x] **Consumes at design time, by ID** — done, §0's table, including three inputs this
+      checklist did not anticipate: **consultant items 1–3 (2026-07-30), validated
+      before adoption** — item 1 against `CS-P0c`'s own text, items 1–2 by a new
+      design-time probe (`CB-P1`, `cb_p1_dd_f1_bearing.py`, both archives scanned), item
+      3 adopted as pre-registered criterion `CRS-C6`. `CB-P1`'s findings: superstars
+      have **thousands of reverse-only sub-decile listers** (9,065 within top-50 for
+      Radiohead alone on `ALG-E` — `CS-P0c`'s bar does not cover the union family), and
+      **every reverse-only edge scores below the target's own-list tail in all 10
+      rows** — so weakest-first trim provably deletes them all, and a **banded-quota
+      trim** (implemented, bound verified at exactly 50) is the only selectable
+      configuration bearing on `DD-F1`. The prereg's §0 carries the per-family bearing
+      table; a `CRS-C5` null on a family marked "no" is confirmation, not a finding.
+- [x] **Every read names the run state it presupposes** — done, §4, five reads with
+      null pre-commitments.
+- [x] New identifier series — **`CRS-`**, grepped free across `docs/`, `builder/`,
+      `api/`, `frontend/`.
+- [x] `PLA-R1` resolved from its grounds (prereg §0): the bar's letter kept everywhere
+      (no fame-of-interior criterion); `CRS-C5` counts sub-decile **presence**, which
+      the bar's structural-forcing ground does not reach.
 - [ ] Commit. **This is the plan's named seam** — the natural handoff point if the
       session is long: the next session reads the prereg cold, which is the condition it
       was written for.
