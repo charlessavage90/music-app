@@ -1,0 +1,60 @@
+{
+ "top 0.1%": {
+  "artists": 75,
+  "lb_covered": 1.0,
+  "has_wikidata": 1.0,
+  "has_en_article": 1.0,
+  "has_any_language_article": 1.0,
+  "multilang_gain_points": 0.0,
+  "rho_lb_vs_sitelinks_within_band": 0.3847,
+  "n_both_signals": 75
+ },
+ "top 1%": {
+  "artists": 667,
+  "lb_covered": 1.0,
+  "has_wikidata": 1.0,
+  "has_en_article": 0.9955,
+  "has_any_language_article": 1.0,
+  "multilang_gain_points": 0.45,
+  "rho_lb_vs_sitelinks_within_band": 0.4805,
+  "n_both_signals": 667
+ },
+ "top 10%": {
+  "artists": 6678,
+  "lb_covered": 1.0,
+  "has_wikidata": 0.8802,
+  "has_en_article": 0.8296,
+  "has_any_language_article": 0.8657,
+  "multilang_gain_points": 3.61,
+  "rho_lb_vs_sitelinks_within_band": 0.502,
+  "n_both_signals": 5781
+ },
+ "upper half": {
+  "artists": 29677,
+  "lb_covered": 0.9998,
+  "has_wikidata": 0.6698,
+  "has_en_article": 0.5703,
+  "has_any_language_article": 0.6414,
+  "multilang_gain_points": 7.11,
+  "rho_lb_vs_sitelinks_within_band": 0.3186,
+  "n_both_signals": 19034
+ },
+ "lower half": {
+  "artists": 37096,
+  "lb_covered": 0.999,
+  "has_wikidata": 0.3671,
+  "has_en_article": 0.2741,
+  "has_any_language_article": 0.3426,
+  "multilang_gain_points": 6.85,
+  "rho_lb_vs_sitelinks_within_band": 0.2084,
+  "n_both_signals": 12705
+ },
+ "_whole_artifact": {
+  "artists": 74193,
+  "lb_covered": 0.9994,
+  "at_wikipedia_floor": 40822,
+  "at_wikipedia_floor_share": 0.5502,
+  "rho_lb_vs_sitelinks_pooled": 0.4365,
+  "duplicate_mbid_to_two_items": 54
+ }
+}
