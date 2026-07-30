@@ -105,8 +105,33 @@ place), and the plan's own status line (marked executed).
   on the three nameless MBIDs ("Artist not found" on all three) is recorded in the
   execution log §2 and in `pipeline.py`'s comment, and it is what upgraded the drop
   decision from preference to only-available-option.
-- **Nothing is in flight.** Two gitignored trial archives and two checkpoints sit in
-  `builder/scratch/` (`grt-archive-algb/`, `grt-overlay-alge/`,
-  `grt-checkpoint-*.json`) plus the verification artifact
-  `graph-dropnameless-verify.bin`. All are finished, none is being written, and all are
-  regenerable — the trial archive in ~18 minutes, the artifact in 29 seconds.
+- **⚠ ONE THING IS IN FLIGHT, started after this handoff was first written.** A **full
+  `ALG-B` crawl to 75,000 artists**, launched late 2026-07-29 on the owner's explicit
+  instruction, running detached and owned by nobody:
+
+  ```
+  uv run artistpath-build crawl --bootstrap ./scratch/bootstrap.json \
+    --archive-dir ./scratch/grt-archive-algb \
+    --algorithm <ALG-B> --checkpoint ./scratch/checkpoint-algb-full.json
+  ```
+
+  **It is collection only** — it fills `scratch/grt-archive-algb/` and builds nothing,
+  adopts nothing, and cannot reach the production archive (`GR-3` scopes the keys).
+  **~7.6 hours** at the endpoint's measured speed, and it **resumes cleanly** if
+  interrupted: re-run the same command. It began by serving the trial's 3,000 responses
+  from disk without a single fetch, which is the expected and correct start.
+
+  **The record's "4¼ hours" for a full crawl is stale** — that was measured when the
+  endpoint ran ~4× faster (0.141 s/artist against tonight's 0.367 s including the delay).
+  `NEXT.md` still carries the old figure in its PARKED section; treat 7.6 h as current.
+
+  **A fresh checkpoint path was mandatory and this is a live trap for anyone re-running
+  it.** Reusing `grt-checkpoint-algb.json` (the trial's, 3,000 discovered / 3,000 done)
+  makes the crawl **finish instantly having done nothing** — the pending queue rebuilds as
+  `discovered − done` = ∅ and every bootstrap seed is already marked discovered. It looks
+  exactly like success.
+
+- **Everything else is finished and static.** Two gitignored trial archives and their
+  checkpoints in `builder/scratch/` (`grt-archive-algb/` — now also the destination of the
+  running crawl, `grt-overlay-alge/`, `grt-checkpoint-*.json`) plus the verification
+  artifact `graph-dropnameless-verify.bin`. All regenerable — the artifact in 29 seconds.

@@ -25,11 +25,29 @@ the point.**
 
 ## N/A — 2026-07-29 (latest) — we built a trial map with the new setting; the app is untouched
 
-**Nothing to exercise, and nothing is running** — all four ports were checked and are empty;
-nothing was started on this machine and nothing was left behind. No routing, no graph, no
-weighting, no cost function, and not one line of the app or the website changed. **A journey
-you build now is identical to one from this afternoon.** The trial map that got built is a
-scratch file nothing points at; the app still uses the same map it did this morning.
+**Nothing to exercise. No web servers are running** — all four ports were checked and are
+empty. No routing, no graph, no weighting, no cost function, and not one line of the app or
+the website changed. **A journey you build now is identical to one from this afternoon.** The
+trial map that got built is a scratch file nothing points at; the app still uses the same map
+it did this morning.
+
+> ### ⚠ ONE THING IS RUNNING OVERNIGHT, and you started it deliberately
+>
+> **A full data-gathering run for the new setting**, begun late on 2026-07-29 at your
+> instruction. It is **collecting only** — it downloads similar-artist data into a scratch
+> folder and **builds no map, changes no setting, and touches nothing the app uses.** The
+> app is unaffected while it runs and unaffected when it finishes.
+>
+> - **Expect roughly 7½ hours**, so it may still be going when you wake. That is fine.
+> - **If it stopped early** — laptop slept, network dropped — **just run the same command
+>   again.** It resumes from where it got to and re-downloads nothing.
+> - **The irreplaceable existing collection cannot be harmed by it**: the new data is
+>   filed separately, which is one of the things built today.
+> - **When it finishes, nothing happens automatically.** Turning it into a map is a
+>   separate 29-second step, and *using* that map is a further decision that still owes a
+>   listening test.
+>
+> Command, log location and morning checks: the execution log below, and the handoff.
 
 **What happened, in plain terms.** This afternoon we measured the price of switching to the
 new setting. Tonight we did the engineering that had to happen before anyone *could* switch,
