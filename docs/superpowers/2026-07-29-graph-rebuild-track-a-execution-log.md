@@ -160,7 +160,50 @@ records. That figure is not wrong so much as stale/generous; budget from 29 s.
 drop rule lands in the build and this check then passes on a rebuild"). The tripwire
 stays in place, unweakened, as a standing rule for future crawls.
 
-## §6 Test suite
+## §6 GR-5 / GR-6 — the `GRT` trial build
+
+Pre-registration:
+[`specs/2026-07-29-algb-trial-build-preregistration.md`](specs/2026-07-29-algb-trial-build-preregistration.md),
+committed at `770b3fb` **before any arm ran**; harness (`grt_run.py`, `grt_score.py`)
+committed at `26b8160`, **before either produced a result**.
+
+**The scope check changed the design and is recorded in §0 of that document.** `RC-A2`
+already diagnosed reciprocation by hand, and re-checking one named artist costs ~101
+read-only requests rather than a crawl. The single irreplaceable output is `GRT-C4`,
+component membership (`RC-H1`), which sampling structurally cannot reach.
+
+### `GRT-A1` — the control arm's assumption was refuted by its own first run
+
+The pre-registration asserted that a 3,000-target BFS stays inside the production
+archive, so the `ALG-E` control could read it for free. **That is false**, and the
+structural guard is what caught it: after ~1,400 artists the frontier reached
+`4365b045-…`, absent from the archive's 75,000, and `ReadOnlyArchive` refused the write
+and aborted rather than silently extending an irreplaceable asset.
+
+**`GRT-G1` held — 75,000 files before and after, nothing written.** Amended to an
+overlay (reads fall through to production, writes land in
+`builder/scratch/grt-overlay-alge/`), which keeps the production archive unwritable *by
+construction* rather than relaxing the guard. Amendment committed before the re-run.
+
+**Measured, and it puts a number on the gap:** the control arm needed **5 overlay writes
+across 3,000 artists (0.17%)**. So the production archive is *nearly* closed under
+one-hop neighbours but not exactly — enough to abort a naive control arm, not enough to
+matter to anything else. The likely mechanism is that a resumed crawl rebuilds its
+frontier as `sorted(discovered − done)` rather than in BFS order, so production's 75,000
+is not the breadth-first first 75,000. **Unverified**: the production checkpoint no
+longer exists in this tree, so its `discovered` set cannot be consulted. The absence is
+measured; the mechanism is a hypothesis and is labelled as one.
+
+### `A0` control arm — collection
+
+3,000 discovered, 3,000 fetched, **0 failures**, 5 overlay writes, production archive
+75,000 → 75,000. `GRT-G2` (≥95% fetched) passes at 100%.
+
+### `AB` trial arm — collection
+
+*(recorded on completion)*
+
+## §7 Test suite
 
 | Point | Result |
 |---|---|
@@ -172,7 +215,7 @@ stays in place, unweakened, as a standing rule for future crawls.
 `test_replay.py`'s byte-identical rebuild test passes at every point, which is the
 determinism sentinel for the flat production path.
 
-## §7 Owed, and not discharged
+## §8 Owed, and not discharged
 
 - **`snyk_code_scan` has NOT been run** on any of the three code diffs — the Snyk CLI is
   unauthenticated in this environment and authenticating is a browser flow only the owner
