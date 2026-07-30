@@ -1,0 +1,90 @@
+{
+ "P@d5": {
+  "arm": "P",
+  "depth": 5,
+  "distinct_interiors": 131,
+  "interior_slots": 139,
+  "floor_share_distinct": 0.0687,
+  "floor_share_slots": 0.0647,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.9833,
+  "median_interior_band": "top 10%"
+ },
+ "P@d10": {
+  "arm": "P",
+  "depth": 10,
+  "distinct_interiors": 143,
+  "interior_slots": 152,
+  "floor_share_distinct": 0.0629,
+  "floor_share_slots": 0.0592,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.9858,
+  "median_interior_band": "top 10%"
+ },
+ "P@d15": {
+  "arm": "P",
+  "depth": 15,
+  "distinct_interiors": 131,
+  "interior_slots": 138,
+  "floor_share_distinct": 0.084,
+  "floor_share_slots": 0.0797,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.9856,
+  "median_interior_band": "top 10%"
+ },
+ "P@d20": {
+  "arm": "P",
+  "depth": 20,
+  "distinct_interiors": 155,
+  "interior_slots": 168,
+  "floor_share_distinct": 0.071,
+  "floor_share_slots": 0.0655,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.982,
+  "median_interior_band": "top 10%"
+ },
+ "LIMIT@d5": {
+  "arm": "LIMIT",
+  "depth": 5,
+  "distinct_interiors": 62,
+  "interior_slots": 62,
+  "floor_share_distinct": 0.3871,
+  "floor_share_slots": 0.3871,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.6072,
+  "median_interior_band": "upper half"
+ },
+ "LIMIT@d10": {
+  "arm": "LIMIT",
+  "depth": 10,
+  "distinct_interiors": 62,
+  "interior_slots": 62,
+  "floor_share_distinct": 0.3871,
+  "floor_share_slots": 0.3871,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.6072,
+  "median_interior_band": "upper half"
+ },
+ "LIMIT@d15": {
+  "arm": "LIMIT",
+  "depth": 15,
+  "distinct_interiors": 62,
+  "interior_slots": 62,
+  "floor_share_distinct": 0.3871,
+  "floor_share_slots": 0.3871,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.6072,
+  "median_interior_band": "upper half"
+ },
+ "LIMIT@d20": {
+  "arm": "LIMIT",
+  "depth": 20,
+  "distinct_interiors": 62,
+  "interior_slots": 62,
+  "floor_share_distinct": 0.3871,
+  "floor_share_slots": 0.3871,
+  "lb_covered_distinct": 1.0,
+  "median_interior_pctl": 0.6072,
+  "median_interior_band": "upper half"
+ }
+}

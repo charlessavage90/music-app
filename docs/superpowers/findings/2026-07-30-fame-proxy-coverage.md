@@ -34,6 +34,12 @@ It binds on the graph's population, not on current routed output — and it woul
 binding precisely when the product starts succeeding at the thing `REQ-37` and `DD-F1`
 demand.
 
+**`FPC-9` then measured that last clause instead of leaving it as an inference, and it
+fired.** On the most obscure route this artifact admits, **38.7%** of delivered interiors
+are invisible to the fame ruler. So both halves are true and neither may be quoted without
+the other: *the ruler is adequate for what the router does today, and goes blind on more
+than a third of what it would deliver if the obscurity work succeeded.*
+
 ## 1. Findings
 
 ### `FPC-1` — the floor is mostly real, not an artifact of name matching
@@ -64,6 +70,38 @@ verdict stands on the distinct measure at every scored depth.
 **The mechanism is the interesting part**, and it corroborates rather than contradicts the
 record: the router never descends far enough to enter the blind region. That is `§2.9`'s
 finding and `DD-F1`'s, arriving from a third direction.
+
+### `FPC-9` — on the most obscure route the graph admits, the ruler goes blind on 38.7%
+
+*(Identifier allocated after `FPC-8`; placed here because it is `FPC-2`'s test. Nothing is
+renumbered.)*
+
+*(Plain: today's router stays famous, so the fame ruler copes. Push the router as hard
+toward obscure artists as this graph physically allows, and more than a third of the
+artists it hands you are ones the ruler cannot rank at all.)*
+
+`FPC-2`'s weakest link was that it rested on Track 2's famous-skewed pair set. Track 3's
+committed paths test it on more obscure pairs **and** carry a `LIMIT` arm — the
+`w → ∞` min-sum-percentile route, the most obscure path the graph admits, not a tuned
+candidate but the ceiling.
+
+| arm | distinct interiors | no EN article | LB covered | median interior pctl |
+|---|---|---|---|---|
+| production, d5–d20 | 131–155 | 6.3–8.4% | 100% | 0.982–0.986 (top 10%) |
+| **`LIMIT`, all depths** | 62 | **38.7%** | **100%** | **0.6072 (upper half)** |
+
+**Pre-committed read: `≥ 25%` on the `LIMIT` arm makes `FPC-2`'s verdict CONDITIONAL on
+production's current pricing.** It is 38.7%. The verdict is conditional.
+
+This is the finding that changes what the coverage numbers mean. `FPC-3`'s latent blindness
+is no longer an inference from the population — it is a measured property of the route the
+router would take if the obscurity work succeeded. **The instrument fails exactly where the
+product is trying to go**, and the criteria that would judge that work are the ones that go
+blind.
+
+Bounded, and stated in the probe before it ran: this is bounded by *this artifact*. A graph
+rebuilt to carry famous→obscure edges would move the reachable route again, and no
+measurement here anticipates that.
 
 ### `FPC-3` — but 55% of the artifact is invisible to the ruler
 
@@ -166,11 +204,17 @@ Cost note: query **Wikidata for `P434`**, do not crawl MusicBrainz for its exter
 
 ## 3. Weakest link
 
-**`FPC-2` carries the most weight and rests on one arm-set.** It pools Track 2's eleven
-arms on one artifact and one pair set — a pair set pre-registered for a different question
-and skewed toward famous endpoints. A pair set drawn at the obscure end could put routed
-interiors into the blind region at any depth. **What would falsify it:** floor share above
-10% of distinct interiors on an obscure-endpoint pair set.
+**`FPC-2`'s weakest link was tested and it fired** — see `FPC-9`. What remains weak is
+`FPC-9` itself: it rests on **62 distinct interiors from one arm on twelve pairs**, and the
+`LIMIT` route is a construct nobody proposes shipping. It is a ceiling, not a forecast. Its
+value is that it bounds the question — no router on this artifact can deliver more
+obscurity than that — and a ceiling is exactly what a latent-risk claim needs.
+
+**What would falsify `FPC-9`'s reading:** a realistic candidate device that reaches
+materially more obscurity than production *without* approaching the `LIMIT` route's
+interior percentiles. Track B's `R2` result — quota edges present at famous nodes and
+declined at production weights — is the nearest live evidence, and it points at the router,
+not the ruler.
 
 **What I would defend cheaply:** `FPC-3` and `FPC-4` — both are counts over the whole
 artifact against two APIs, and neither depends on a fame claim, a pair set, or a router.
