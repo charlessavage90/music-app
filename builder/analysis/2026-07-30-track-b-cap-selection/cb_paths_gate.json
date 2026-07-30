@@ -1,0 +1,32 @@
+{
+  "deterministic": true,
+  "gate_passed": true,
+  "paths_moved_under_perturbation": 16,
+  "production_weights_summary": {
+    "invalid_walks": 0,
+    "no_path": 0,
+    "pairs_attempted": 20,
+    "path_length": {
+      "max": 19,
+      "mean": 11.85,
+      "median": 11.5
+    },
+    "sub_decile_interior_share": 0.14869,
+    "top1pct_degree_frac_own": 0.12382,
+    "top1pct_degree_frac_production": 0.12382,
+    "weights": {
+      "avoid_decay": 0.5,
+      "avoid_penalty": 0.5,
+      "avoid_radius": 2,
+      "floor_relax_dislike": 0.08,
+      "floor_relax_known": 0.15,
+      "w_avoid": 1.0,
+      "w_degree_hub": 0.0,
+      "w_floor": 1.0,
+      "w_hop": 0.02,
+      "w_jump": 1.0,
+      "w_sim": 3.0
+    }
+  },
+  "walks_valid": true
+}

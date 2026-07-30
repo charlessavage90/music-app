@@ -1,0 +1,35 @@
+{
+  "gate_passed": true,
+  "green_ALG-B": {
+    "byte_identical": true,
+    "expected": {
+      "artists": 68467,
+      "edges": 811784,
+      "sha256": "d008a2b5e0c23cf31b3f12357fa1fccff55d209ec18f54c872cdae9bf4a0757f"
+    },
+    "got": {
+      "artists": 68467,
+      "edges": 811784,
+      "sha256": "d008a2b5e0c23cf31b3f12357fa1fccff55d209ec18f54c872cdae9bf4a0757f"
+    }
+  },
+  "green_ALG-E": {
+    "byte_identical": true,
+    "expected": {
+      "artists": 74157,
+      "edges": 897620,
+      "sha256": "73feffa03856f55dda134b84aa5ee40073495ae16f27e8116a4d961b65a69faa"
+    },
+    "got": {
+      "artists": 74157,
+      "edges": 897620,
+      "sha256": "73feffa03856f55dda134b84aa5ee40073495ae16f27e8116a4d961b65a69faa"
+    }
+  },
+  "red_k49": {
+    "artists": 73947,
+    "differs_from_production": true,
+    "edges": 878028,
+    "sha256": "7f5642d6bc7d6f831aae15332a7a0b218547ed892bacde89113f4c8d7ef622df"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "bound_check_passed": true,
+  "mutual_knn": {
+    "artists": 74157,
+    "bound_holds": true,
+    "edges": 897620,
+    "mean_degree": 12.1,
+    "observed_max_degree": 50,
+    "params": {
+      "k": 50
+    },
+    "stated_bound": 50
+  },
+  "proximity_select": {
+    "artists": 72609,
+    "bound_holds": true,
+    "edges": 1242404,
+    "mean_degree": 17.11,
+    "observed_max_degree": 50,
+    "params": {
+      "k": 50
+    },
+    "stated_bound": 50
+  },
+  "trimmed_union": {
+    "artists": 74956,
+    "bound_holds": true,
+    "edges": 1636070,
+    "mean_degree": 21.83,
+    "observed_max_degree": 50,
+    "params": {
+      "d": 50,
+      "j": 50
+    },
+    "stated_bound": 50
+  }
+}

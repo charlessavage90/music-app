@@ -92,7 +92,7 @@ The deliverable is a read against pre-registered criteria plus the four-part pre
 |---|---|---|---|
 | `mutual_knn(k)` | k ∈ {50, 60, 75, 100} | degree ≤ k by construction | Incumbent family; k = 50 on `ALG-E` is production and is every cell's anchor. Ceiling 100 per `LBS-3` (source lists cap at 100). |
 | `trimmed_union(j, D)` | top-j union, hard ceiling D | edge-deletion trim to D, both endpoints, weakest-first, MBID tie-break | Non-reciprocal. Symmetrise first (keep stronger), then delete whole edges at over-D nodes — deletion preserves symmetry where per-node truncation (the deleted legacy strategy) does not. |
-| `proximity_select(k)` | k, selection key per `BTF-4` | degree ≤ k by construction | Mutual k-NN shape with a different selection key (popularity-proximity-weighted, the `BTF-4` shape). **The prereg pins the exact key from `builder/analysis/2026-07-27-boilthefrog-reconstruction/` before any cell runs** — this plan deliberately does not invent the formula. |
+| `proximity_select(k)` | k, selection key per `BTF-4` | degree ≤ k by construction | Mutual k-NN shape with a different selection key (popularity-proximity-weighted, the `BTF-4` shape). **The prereg pins the exact key from `builder/analysis/2026-07-27-boilthefrog-reconstruction/` before any cell runs** — this plan deliberately does not invent the formula. **Found during `CB-1`, not invented:** the reference's key is `weight = 1 + pop_weight·\|Δpop\|/100` with `sorted(...)[:cap]` ascending, so the ordering is `\|Δpop\|` ascending for any positive `pop_weight`; implemented as `popularity_proximity`. **One adaptation CB-4 must ratify:** BoilTheFrog applies that key to an undirected **union**, which bounds degree only empirically (max 38 at cap 4, 147 uncapped — its source lists are ≤20, so the unbounded regime cannot arise there). A union here would be unbounded, so this rule keeps the both-ways mechanism and swaps only the ordering key. |
 | *(reference)* `uncapped` | — | **none — barred from selection** | §0 ruling 3. Descriptive row only. |
 
 Two axes beside the family: **archive** ∈ {`ALG-E` production flat layout, `ALG-B`
@@ -140,17 +140,26 @@ params: dict) -> Graph` mirroring `build_from_archive`'s stages (identity harves
 `builder/scratch/cb-cells/<archive>-<rule>-<params>.bin` (gitignored) with a manifest
 JSON (sha256, node/edge counts, params) beside it.
 
-- [ ] Implement `build_variant` with `rule="mutual_knn"` delegating to `mutual_knn_cap`
+- [x] Implement `build_variant` with `rule="mutual_knn"` delegating to `mutual_knn_cap`
       unchanged; `trimmed_union` and `proximity_select` as harness-local functions with
       the determinism rules (sorted iteration, MBID tie-break) stated in their docstrings.
-- [ ] **Instrument gate, green half:** `build_variant(production archive, ALG-E,
+- [x] **Instrument gate, green half:** `build_variant(production archive, ALG-E,
       mutual_knn, k=50)` must reproduce the `GR-4` verification build byte-for-byte —
       compare sha256 against the value recorded in
       `2026-07-29-graph-rebuild-track-a-execution-log.md` §7b (cited, not restated here).
-- [ ] **Instrument gate, red half:** rerun with `k=49` and confirm the sha256 *changes*.
+      **PASSED on both archives**, `ALG-E` and `ALG-B`, byte-identical on sha256, node
+      count and edge count.
+- [x] **Instrument gate, red half:** rerun with `k=49` and confirm the sha256 *changes*.
       A green identity from an instrument never shown to go red is not evidence
       (`working-style` memory; the `RC-H3` vacuous-test lesson took three attempts).
-- [ ] Commit.
+      **PASSED** — different sha, 73,947 artists against 74,157.
+- [x] **Added during execution — the bound check.** The identity gate exercises
+      `mutual_knn` only, because it is the one rule with shipped code and a reference
+      build behind it. The two harness-local rules had never executed, and their **stated
+      degree bound is the load-bearing property** §0 ruling 2 requires of a candidate, so
+      `--bound-check` builds each on `ALG-E` and asserts max degree ≤ the stated bound.
+      Finding a leaked bound at `CB-5` would be finding it late.
+- [x] Commit.
 
 ### CB-2: Structural metrics module
 
@@ -168,14 +177,22 @@ artists) with degree and popularity rank per cell; and a descriptive
 `check_acceptance`-clause evaluation per cell (would the guard pass? — context for
 `GRT-P2`, never a criterion).
 
-- [ ] Implement; fame bands read from the adopted artifact (sha `4cb84ef9…` asserted, the
+- [x] Implement; fame bands read from the adopted artifact (sha `4cb84ef9…` asserted, the
       `as_run_arms.py` pattern).
-- [ ] **Instrument gate:** run against the `GR-4` `ALG-E` build and the `GRT-P4` `ALG-B`
+- [x] **Instrument gate:** run against the `GR-4` `ALG-E` build and the `GRT-P4` `ALG-B`
       build and confirm it reproduces the already-published figures for both (stranding
       by band, exclusion rates, tracer degrees — the values in the execution log §7b).
       Two independently produced graphs agreeing with published numbers is this module's
-      green-and-red in one step: a bug that moves numbers cannot match both.
-- [ ] Commit.
+      green-and-red in one step: a bug that moves numbers cannot match both. **PASSED on
+      both**, including every tracer degree.
+- [x] **Naming correction made during execution:** the plan listed
+      `top1pct_degree_frac` among CB-2's structural metrics. That name is **already
+      taken** — `builder/analysis/README.md` defines it as a *path* metric (fraction of
+      interior nodes in the frozen top-1%-by-degree set), so reusing it for a graph-level
+      quantity would have been precisely the currency collision §2.6 exists to prevent.
+      CB-2 emits `top1pct_degree_mass_frac` (share of edge endpoints held by the top 1%
+      by degree); the path-interior quantity keeps its name and lives in CB-3.
+- [x] Commit.
 
 ### CB-3: Path-level module (hub transit under the real router)
 
@@ -192,13 +209,20 @@ no-path count. Pair sample: stratified over the adopted frame, fixed seed, **onl
 whose endpoints exist in every compared cell** (else the read confounds routing with
 coverage — the 31% frontier-divergence lesson from `GRT-P4`).
 
-- [ ] Implement. Weights: production `ApiConfig()` defaults, **stated in the output**, per
+- [x] Implement. Weights: production `ApiConfig()` defaults, **stated in the output**, per
       the `w_degree_hub` dormancy note above; the prereg decides whether any second
       weight-set runs and pre-commits its read.
-- [ ] **Instrument gate:** route 20 pairs on the production artifact and confirm
+- [x] **Instrument gate:** route 20 pairs on the production artifact and confirm
       determinism (identical paths on a re-run) and at least one pair reproducing a
       known journey (the live-vs-local identity check pattern from the mockup-adoption
-      log §15).
+      log §15). **PASSED, with the known-journey half substituted** — no committed
+      reference journey exists to compare against (the mockup-adoption check compared
+      live against local, both live systems, which this offline harness has no analogue
+      of). Replaced by a stronger structural check: **every emitted path is validated as
+      a real walk in that graph's own CSR**, which a mis-wired store cannot satisfy.
+      Plus a red half the plan did not ask for: at `w_sim = 0` the paths must **move**
+      (16 of 20 did) — a router harness returning the same answer under any weights is
+      wired to nothing.
 - [ ] The prereg (CB-4) must resolve `PLA-R1` applicability explicitly: the bar on
       famous-pair first-path fame as a criterion was derived under `ALG-E` structure,
       where those interiors are forced; whether it binds reads on non-`ALG-E` cells is a
