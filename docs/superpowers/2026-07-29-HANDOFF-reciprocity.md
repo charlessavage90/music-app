@@ -1,6 +1,14 @@
 # Handoff — reciprocity sampling measured, 2026-07-29
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-07-29 (latest) on next actions** by
+[`2026-07-29-HANDOFF-graph-rebuild-track-a.md`](2026-07-29-HANDOFF-graph-rebuild-track-a.md)
+— the plan this handoff asked for was written **and executed to its last task**, so **its
+named next action is spent**. One claim below is now **corrected, not merely superseded**:
+it states that `RC-P2` predicts an `ALG-B` artifact would be refused by the build. A real
+trial build shows **no refusal** — the degree collapse is confirmed and larger than
+sampled, but the guard cannot see it (`GRT-P2`). Everything else here remains accurate.
+
+*(Original role: ACTIVE, the CURRENT handoff.)* Supersedes
 [`2026-07-29-HANDOFF-algorithm-selection.md`](2026-07-29-HANDOFF-algorithm-selection.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.

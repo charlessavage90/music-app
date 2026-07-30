@@ -17,13 +17,20 @@ design.** The adopted 75k artifact contains 33 nameless artists (measured:
 2026-07-28, by the owner: DROP them** — remove nameless artists during
 `build`, before the largest-component prune, so a stranded neighbour of a
 dropped node is pruned rather than kept dangling. (The alternative,
-backfilling names by MBID, was declined.) The remediation is NOT yet
-implemented — this is a standing build rule, not a one-off patch, since any
-future crawl can mint new nameless nodes the same way. The tripwire stays
-until it lands: a check that refuses is what stops the deferral being
-silently forgotten. **Success condition: the drop rule lands in the build
-and this check then passes on a rebuild.** Do not weaken the check to
-unblock a build; implement the drop.
+backfilling names by MBID, was declined — and is also impossible: the three
+most popular nameless MBIDs return "Artist not found" from MusicBrainz,
+checked by the owner 2026-07-29. They are deleted or merged upstream
+entities that survive in the similarity data.)
+
+✅ **DISCHARGED 2026-07-29 (`GR-1`/`GR-4`).** The drop rule is implemented in
+`pipeline.py` and a full rebuild from the production archive passes this
+check. It removes 36 artists where the emitted graph showed 33 — the rule
+runs pre-prune, over a larger population — and 3 further nodes are pruned as
+stranded neighbours of dropped ones. Struck, kept for the record.
+
+**The tripwire stays, and is now a standing build rule rather than a
+deferral:** any future crawl can mint new nameless nodes the same way. Do
+not weaken the check to unblock a build.
 
 The criteria are data, not code, so the whole set lives in one place
 (`PRODUCTION_ACCEPTANCE`) and a test can substitute a scaled-down set.

@@ -4,7 +4,16 @@
 > (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps
 > use checkbox (`- [ ]`) syntax for tracking.
 
-**Role: ACTIVE.** Written 2026-07-29, cold from the committed record, per
+**Role: ⚠ EXECUTED 2026-07-29 — all six tasks (`GR-1`–`GR-6`) ran to completion in the
+session that wrote this. Read
+[`../2026-07-29-graph-rebuild-track-a-execution-log.md`](../2026-07-29-graph-rebuild-track-a-execution-log.md)
+beside it, which is fresher on everything that ran.** This document remains authoritative
+for task structure, the factor table and the strand ordering. **`GR-5` left two design
+decisions explicitly open — the control arm's archive and the trial target — and the
+pre-registration closed both**; read that document, not this one, for what was actually
+run.
+
+*(Original role: ACTIVE.)* Written 2026-07-29, cold from the committed record, per
 [`../2026-07-29-HANDOFF-reciprocity.md`](../2026-07-29-HANDOFF-reciprocity.md) and
 `NEXT.md`. Identifier series `GR-`, collision-checked against `docs/` (no prior use).
 

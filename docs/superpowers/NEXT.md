@@ -10,37 +10,43 @@ rather than working around it.
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 those live in `findings/2026-07-21-scoring-adjudication.md` and are cited by section.
 
-**Last updated: 2026-07-29, on the reciprocity-sampling closeout.**
+**Last updated: 2026-07-29, on the graph-rebuild Track A closeout.**
 
 ---
 
 ## Next
 
-> ## The next session WRITES THE GRAPH REBUILD PLAN, cold from the committed record.
+> ## The next action is the OWNER'S CALL between two things, and neither is started.
 >
 > Entry point is the handoff:
-> [`2026-07-29-HANDOFF-reciprocity.md`](2026-07-29-HANDOFF-reciprocity.md).
+> [`2026-07-29-HANDOFF-graph-rebuild-track-a.md`](2026-07-29-HANDOFF-graph-rebuild-track-a.md).
 >
-> **The experiment the previous two handoffs were waiting on has run.** There is no
-> outstanding experiment gating the plan. The four strands and their order are unchanged;
-> two items inside them are now known to be harder than they looked, and the handoff names
-> both.
+> **Track A is done.** The rebuild plan was written *and executed*: an `ALG-B` trial build
+> now exists and both blockers it was run to answer have been answered. The two candidates
+> for what follows are **Track B (the cap-selection simulation, `MKS-5b`)**, which is
+> session-shaped work needing its own plan and pre-registration, and **the `ALG-B` re-crawl
+> decision itself**, which is his and stays PARKED below.
 
-**Reciprocity sampling is EXECUTED and read (2026-07-29).** Record:
-[`2026-07-29-reciprocity-execution-log.md`](2026-07-29-reciprocity-execution-log.md);
-pre-registration `specs/2026-07-29-reciprocity-sampling-preregistration.md`, committed before
-any arm ran; figures `builder/analysis/2026-07-29-reciprocity-sampling/` and
-`builder/analysis/2026-07-29-trial-crawl-calibration/`. Branch
-`graph-rebuild-trial-crawl`, PR #49.
+**Graph rebuild Track A is EXECUTED (2026-07-29).** Record:
+[`2026-07-29-graph-rebuild-track-a-execution-log.md`](2026-07-29-graph-rebuild-track-a-execution-log.md);
+plan `plans/2026-07-29-graph-rebuild-track-a.md`; pre-registration
+`specs/2026-07-29-algb-trial-build-preregistration.md`, committed before any arm ran;
+figures `builder/analysis/2026-07-29-algb-trial-build/`. Branch `graph-rebuild-planning`.
+
+**Three builder changes shipped**, all defaults untouched: the nameless-artist drop rule,
+`--algorithm` selection for trial runs, and algorithm-scoped archive keys (`RC-H3`). A full
+production rebuild now passes `check_acceptance`.
 
 In brief for orientation only, and **no summary may keep one half without the other**:
-`ALG-B` **does** strand obscure artists — `AS-H2`'s candidate-supply drop translates into
-lost connections, and the cause is **supply, not reciprocation** (for obscure artists the
-count halves while the share pointing back rises). **And** an `ALG-B` artifact is predicted to
-be **refused by the build** on two acceptance clauses, because R.E.M. reciprocates nothing.
-**But** `ALG-B` still does what `AS-C1` credited it with, and the median famous artist clears
-the build's own degree floor. `AS-R3` still stands: it is a **replacement graph, not a patch**,
-and nothing measures whether its new edges are any *good* (`REQ-38`).
+`ALG-B` **does** strand obscure artists (`RC-R1`, unchanged — supply, not reciprocation),
+**and** the trial build confirms R.E.M.'s degree collapse is real and larger than sampled
+(**6** connections against **47** in a coverage-matched control). **But the predicted build
+refusal did not happen**, and the reason is the finding that matters: **the guard cannot see
+the collapse it was written for** (`GRT-P2`) — popularity *is* score-weighted in-degree, so a
+collapsing artist loses the popularity that would have put it in the sample the degree floor
+inspects. R.E.M. falls from popularity rank 7 to 62 and the check looks past it. **Not
+established at production scale.** `AS-R3` still stands: replacement graph, not a patch, and
+nothing measures whether its new edges are any *good* (`REQ-38`).
 
 **The requirements baseline is unchanged since 2026-07-29:**
 [`PRODUCT-REQUIREMENTS.md`](PRODUCT-REQUIREMENTS.md) (`REQ-`) governs where it and
@@ -57,8 +63,10 @@ limitation**.
   stack (graph + device).
 - **The `ALG-B` re-crawl itself** — 4¼ hours, a new archive, a new graph, and it retires the
   existing path-quality figures. His call, and it owes a blind listen before adoption. **Its
-  price is now measured rather than suspected**, and it is not currently buildable: see the
-  two blockers below.
+  price is now measured rather than suspected, and both blockers that made it unbuildable
+  are cleared** (2026-07-29): the drop rule has landed and the algorithm is selectable. What
+  it now owes is a judgement, not engineering — plus `GRT-P2`'s open question of whether the
+  acceptance guard still covers the artists it names at production scale.
 
 **Still owed by the owner, unchanged:**
 
@@ -139,13 +147,17 @@ limitation**.
 
 | Finding | Condition |
 |---|---|
-| **Component membership under `ALG-B`** (`RC-H1`) | **Before any adoption decision.** Sampling cannot reach it; it needs a real build, which needs the drop rule first. This is the surviving half of `AS-H2`. |
-| **`RC-P2`'s predicted build refusal** — R.E.M. and the top-25 minimum degree floor | **Confirmed or refuted by the first `ALG-B` trial build.** Predicted from sampling, never observed from a build. |
-| **`RC-H3`** — the archive key does not encode the algorithm | **Before any re-crawl that writes into an existing archive**, or it silently returns the old setting's data. |
-| **No way to select the algorithm for a build** — `BuilderConfig` is frozen, `cli.py` threads only `--target` | **Before any trial build on a non-default algorithm.** |
+| ✅ **Component membership under `ALG-B`** (`RC-H1`) | **DISCHARGED 2026-07-29** at trial scale — `GRT-C4`. `ALG-B` excludes readable artists from the largest component in three of four comparable bands where `ALG-E` excludes none (whole-population 3.20% vs 1.37%). ⚠ **The pre-registered ratio bar is undefined against a zero baseline and returned "not decisive" everywhere** (`GRT-P1`); the figures stand, the threshold verdict does not. Struck, kept for the record. |
+| ✅ **`RC-P2`'s predicted build refusal** | **DISCHARGED 2026-07-29 — REFUTED, and the reason supersedes it.** No refusal: both clauses pass. R.E.M.'s degree collapse is confirmed (47 → 6) but the guard cannot see it (`GRT-P2`). Struck, kept for the record; replaced by the live item below. |
+| **`GRT-P2` — does the acceptance guard still cover the artists it names, at production scale?** | **Before any `ALG-B` adoption.** Measured at trial scale only, where R.E.M. left the top-25-by-popularity sample the degree floor inspects. Rank among 2,904 is not rank among 74,000. **Do not weaken `acceptance.py`; strengthening it is a design question with its own trade-offs.** |
+| **`GRT-P1` — `GRT-C4`'s effect size** | **If any successor pre-registers a component-membership read.** A ratio bar cannot express "the baseline is zero and the trial arm is not"; an absolute-difference bar or an explicit zero-baseline rule is owed. Same shape as `AS-H1`. |
+| **`snyk_code_scan` never ran on the `GR-1`/`GR-2`/`GR-3` diffs** | **Whenever the Snyk CLI is authenticated** (`snyk auth` is a browser flow only the owner can complete). Required by the global instruction on new first-party code. |
+| ✅ **`RC-H3`** — the archive key does not encode the algorithm | **DISCHARGED 2026-07-29** (`GR-3`) — production keeps the flat layout, every other algorithm gets a sub-tree, and the checkpoint refuses a mismatched resume. Struck, kept for the record. |
+| ✅ **No way to select the algorithm for a build** | **DISCHARGED 2026-07-29** (`GR-2`) — `--algorithm` on both `crawl` and `build`, validated against the closed enum. The default is unchanged and flipping it is still the re-crawl decision. Struck, kept for the record. |
+| **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. Measured at 5 escapes per 3,000 artists. |
 | **Re-scoring `rc_raw_records.json` at a different `k`** — full candidate lists were stored to make this possible without new requests | **If the cap-selection simulation is designed** (strand 3); consume `RC-A2` at design time. |
 | **`ALG-B` edge quality / blind listen** | **If the owner picks up the re-crawl** (`REQ-38`). |
-| **Nameless-artist drop rule** (decision made: drop) | **Before the next production rebuild — DUE: the rebuild plan must schedule it, and it gates the plan's own first build.** |
+| ✅ **Nameless-artist drop rule** | **DISCHARGED 2026-07-29** (`GR-1`/`GR-4`) — implemented in `pipeline.py`, and a full production rebuild passes `check_acceptance`. Removes 36 pre-prune (the emitted graph showed 33 — different populations, both correct) plus 3 stranded neighbours. The owner's MusicBrainz check settled it beyond preference: all three sampled nameless MBIDs return "Artist not found", so backfilling was never available. The tripwire stays as a standing build rule. Struck, kept for the record. |
 | **`TB-P5H-7`** — TB-C2's failure by TB-C1-passing arms is consumed by no pre-registered read | **If any successor bypass-device pre-registration is written.** |
 | **The candidate-pool recompute** (one statistic across DD and TB arms) | **If the owner picks up the parked candidate decision.** |
 | The `--prune` publish pass | **Ripe since 2026-07-29** — `sync_frontend.py --prune --skip-build` once nobody still holds the previous `index.html`. |

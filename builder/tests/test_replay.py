@@ -149,8 +149,7 @@ ALG_B = (
 
 def test_build_reads_only_its_own_algorithms_subtree(tmp_path, config):
     # RC-H3, build side. The flat tree (production) and the ALG-B sub-tree
-    # sit in one archive; each build must see only its own, and the flat
-    # build must not sweep the sub-tree in through the shared prefix.
+    # sit in one archive; each build must see only its own.
     algb_config = BuilderConfig(requests_per_second=1000.0, algorithm=ALG_B)
     source = ListenBrainzSource(config)
     archive = LocalArchive(tmp_path / "archive")
@@ -159,13 +158,66 @@ def test_build_reads_only_its_own_algorithms_subtree(tmp_path, config):
     for mbid in (A, B):
         archive.put(f"similar/{source.name}/{ALG_B}/{mbid}.json", _similar_body(mbid))
 
-    flat_graph = build_from_archive(config, archive, source)
     algb_graph = build_from_archive(
         algb_config, archive, ListenBrainzSource(algb_config)
     )
-
-    assert sorted(flat_graph.mbids) == sorted([A, B, C])
     assert C not in algb_graph.mbids
+
+
+def test_a_foreign_algorithm_subtree_cannot_perturb_the_flat_build(tmp_path, config):
+    """The flat (production) build must be byte-identical whether or not
+    another algorithm's sub-tree is sitting beside it (RC-H3).
+
+    Two earlier versions of this test were VACUOUS and both were caught by
+    closeout B3 break-the-code spot checks on 2026-07-29. They are recorded
+    because each failed for a different reason and the second is subtle:
+
+      1. Asserting on `mbids` proved nothing — a nested key parses into a
+         bogus mbid that no real artist lists as a neighbour, so mutual k-NN
+         drops its edges and `largest_component` drops the node. The node
+         list is identical either way.
+      2. Asserting byte-identity while contaminating with COPIES of the same
+         responses also proved nothing — that raises every artist's in-degree
+         by roughly the same factor, and `pop_raw` is normalised, so the
+         perturbation cancels exactly.
+
+    So the contaminant here is deliberately ASYMMETRIC: a sub-tree node
+    pointing hard at the graph's LEAST popular artist. Its edge is still
+    dropped by mutual k-NN, but in-degree is accumulated BEFORE the cap, so
+    it moves that artist's popularity relative to everyone else's — which is
+    precisely the silent corruption RC-H3 warns about.
+
+    ⚠ **This invariant is defended TWICE, so breaking ONE guard will not turn
+    this test red.** A future break-the-code spot check needs to know that,
+    because it looks exactly like vacuity and is not:
+
+      - the RC-H3 nested-key skip in `build_from_archive`, and
+      - the GR-1 drop rule's orphan clause (`known - identities.keys()`) —
+        a nested-key pseudo-mbid never appears as anyone's neighbour, so it
+        has no identity row and is dropped as nameless.
+
+    Verified 2026-07-29 by disabling each alone (output unchanged) and both
+    together: the contaminated build then inverts the popularity ordering
+    outright, carrying C from least popular (0.0) to most popular (1.0). The
+    corruption is real and severe; the redundancy is deliberate defence in
+    depth, and the RC-H3 skip is kept so the isolation does not silently
+    depend on the drop rule staying where it is.
+    """
+    source = ListenBrainzSource(config)
+    # C is the leaf: lowest in-degree in the A<->B<->C fixture.
+    contaminant = json.dumps(
+        [{"artist_mbid": C, "name": "Gamma", "comment": "", "score": 5000}]
+    ).encode()
+
+    clean = LocalArchive(tmp_path / "clean")
+    _seed_archive(clean, source, [A, B, C])
+    expected = serialise(build_from_archive(config, clean, source))
+
+    contaminated = LocalArchive(tmp_path / "contaminated")
+    _seed_archive(contaminated, source, [A, B, C])
+    contaminated.put(f"similar/{source.name}/{ALG_B}/{'d' * 36}.json", contaminant)
+
+    assert serialise(build_from_archive(config, contaminated, source)) == expected
 
 
 def test_uncrawled_neighbours_are_not_nodes(tmp_path, config):

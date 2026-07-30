@@ -153,8 +153,10 @@ the mutual-k-NN cap and can mint new edges. A net loss of 386 against 36 dropped
 (mean degree ~12, so ~430 edge-ends naively) is consistent with that partial offset. No
 figure here needs explaining away.
 
-**Cost, corrected.** The build takes **~29 seconds**, not the "~2 minutes" the RC log §6
-records. That figure is not wrong so much as stale/generous; budget from 29 s.
+**Cost, corrected — and `CLAUDE.md` was right.** The build takes **~29 seconds**. RC log
+§6 says "~2 minutes"; `CLAUDE.md` says "rebuild in ~30 s". **The RC log is the outlier and
+`CLAUDE.md` needs no edit** — noted explicitly so a future sweep does not "correct" the
+accurate one to match the stale one. Budget from 29 s.
 
 **This discharges the second half of `acceptance.py`'s standing success condition** ("the
 drop rule lands in the build and this check then passes on a rebuild"). The tripwire
@@ -317,7 +319,76 @@ the minimum, and only in one arm.
 `test_replay.py`'s byte-identical rebuild test passes at every point, which is the
 determinism sentinel for the flat production path.
 
-## §8 Owed, and not discharged
+## §8 Closeout record
+
+**D4 — suites run, not recalled:** builder **129 passed**, api **217 passed**, frontend
+**107 passed** across 18 files.
+
+**B3 — the vacuous-test spot check earned its place, and it took three attempts.** The
+`RC-H3` isolation test was written, broken deliberately, and **stayed green** — twice.
+
+1. Asserting on `mbids` proved nothing: a nested key parses to a bogus mbid nobody lists
+   as a neighbour, so mutual k-NN strips its edges and `largest_component` drops it. The
+   node list is identical either way.
+2. Asserting byte-identity while contaminating with *copies* of the same responses also
+   proved nothing: that lifts every artist's in-degree by roughly the same factor and
+   `pop_raw` is normalised, so the perturbation cancels exactly.
+
+The third version contaminates **asymmetrically** — a sub-tree node pointing hard at the
+graph's least popular artist — and the invariant is real: with **both** guards disabled the
+contaminated build **inverts the popularity ordering**, carrying that artist from 0.0 to
+1.0.
+
+**And the reason the first two breaks stayed green is itself a finding: the invariant is
+defended twice, by `RC-H3`'s nested-key skip *and* by `GR-1`'s orphan clause** (a
+nested-key pseudo-mbid has no identity row, so the drop rule removes it as nameless).
+Disabling either alone changes nothing. That is recorded in the test's own docstring,
+because a future spot check will otherwise re-derive it from scratch and reasonably
+conclude the test is vacuous.
+
+**B2 — reachability:** the two new analysis modules are imported by nothing outside their
+own directory, which is the established `builder/analysis/` pattern for standalone probes.
+Not orphans. Every other changed file is package source or a test.
+
+**B5 — stale descriptions:** `.claude/` describes nothing this work changed (swept for
+archive-key, algorithm, nameless and node-count claims). **`CLAUDE.md` needs no edit** —
+including its "rebuild in ~30 s", which this track confirms rather than contradicts.
+
+**A4 — default-flip:** `BuilderConfig.algorithm` still carries `contribution_5`, and that
+is correct rather than unfinished — flipping it **is** the re-crawl decision and is the
+owner's. `--algorithm` is a per-invocation override with no default change, pinned by
+`test_config_default_algorithm_is_production`. No other knob was added.
+
+**A5 — processes:** all four ports (8000, 5173, 8138, 8139) swept and **empty**. Nothing
+was started detached and nothing was left running; the queued test exercises the deployed
+site and needs no local server.
+
+**D3 — provenance.** Nothing adopted. Artifacts produced, all gitignored and all
+regenerable:
+
+| Artifact | sha256 / identity |
+|---|---|
+| `scratch/graph-dropnameless-verify.bin` | `73feffa03856f55dda134b84aa5ee40073495ae16f27e8116a4d961b65a69faa`, built at `dd7bbe3` |
+| Adopted artifact (ruler + frame, unchanged) | `4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8`, asserted at run time by the scorer |
+| `scratch/grt-archive-algb/` | 3,000 `ALG-B` responses, ~18 min to regenerate |
+| `scratch/grt-overlay-alge/` | 5 responses production never held (`GRT-A1`) |
+
+**D6 — the standing context layer:**
+
+| Layer | Unit | Total | Delta this track |
+|---|---|---|---|
+| Unconditional | characters | **44,113** | **0** |
+| Conditional | lines | **2,122** | **0** |
+
+Neither layer was touched: no `CLAUDE.md` edit, no new or changed skill or agent, nothing
+written to `memory/`. **These are the totals for the next closeout to compare against.**
+
+**One growth item NOT taken, and it is the owner's call.** `CLAUDE.md`'s builder command
+block documents `--target` but not the `--algorithm` flag this track added. The line is
+**incomplete, not false**, so it is growth rather than a correction — roughly 60 characters
+on the unconditional layer, paid by every future session. Not taken unilaterally.
+
+## §9 Owed, and not discharged
 
 - **`snyk_code_scan` has NOT been run** on any of the three code diffs — the Snyk CLI is
   unauthenticated in this environment and authenticating is a browser flow only the owner
