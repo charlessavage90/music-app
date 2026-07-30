@@ -47,6 +47,46 @@ class ArchiveWriteRefused(RuntimeError):
     """The control arm tried to write into the production archive."""
 
 
+class OverlayArchive:
+    """Reads through to a base archive; writes ONLY to an overlay.
+
+    Added by GRT-A1 (pre-run for AB, mid-collection for A0), after
+    ReadOnlyArchive fired on the first A0 attempt and refuted the
+    pre-registration's assumption that a 3,000-target BFS stays inside the
+    production archive. It does not: the production 75,000 is not closed under
+    one-hop neighbours, so a fresh BFS escapes it within ~1,400 artists.
+
+    The base stays strictly read-only — the guarantee ReadOnlyArchive gave is
+    kept, because nothing here can write to it — while the handful of genuinely
+    new responses land beside it and are counted.
+    """
+
+    def __init__(self, base: RawArchive, overlay: RawArchive) -> None:
+        self._base = base
+        self._overlay = overlay
+        self.written: list[str] = []
+
+    def put(self, key: str, payload: bytes) -> None:
+        self._overlay.put(key, payload)
+        self.written.append(key)
+
+    def get(self, key: str):
+        found = self._base.get(key)
+        return found if found is not None else self._overlay.get(key)
+
+    def has(self, key: str) -> bool:
+        return self._base.has(key) or self._overlay.has(key)
+
+    def keys(self):
+        seen = set()
+        for k in self._base.keys():
+            seen.add(k)
+            yield k
+        for k in self._overlay.keys():
+            if k not in seen:
+                yield k
+
+
 class ReadOnlyArchive:
     """Wraps an archive and refuses every write.
 
@@ -90,7 +130,12 @@ def run_arm(arm: str) -> dict:
         checkpoint = SCRATCH / "grt-checkpoint-algb.json"
     elif arm == "A0":
         config = BuilderConfig(algorithm=PRODUCTION_ALGORITHM, target_artist_count=TARGET)
-        archive = ReadOnlyArchive(LocalArchive(PRODUCTION_ARCHIVE))
+        # GRT-A1: read-through to production, writes to an overlay. The
+        # production archive remains unwritable by construction.
+        archive = OverlayArchive(
+            LocalArchive(PRODUCTION_ARCHIVE),
+            LocalArchive(SCRATCH / "grt-overlay-alge"),
+        )
         checkpoint = SCRATCH / "grt-checkpoint-alge.json"
     else:
         raise SystemExit(f"unknown arm {arm!r}")
@@ -126,6 +171,10 @@ def run_arm(arm: str) -> dict:
         "production_archive_files_after": after,
         "GRT_G1_archive_untouched": before == after,
         "control_write_refusals": getattr(archive, "refusals", []),
+        # GRT-A1: responses this arm had to fetch because production never
+        # held them. A direct measure of how far a fresh BFS escapes the
+        # production archive's coverage.
+        "overlay_writes": len(getattr(archive, "written", [])),
     }
     (HERE / f"grt_crawl_{arm}.json").write_text(
         json.dumps(result, indent=2, sort_keys=True), encoding="utf-8"

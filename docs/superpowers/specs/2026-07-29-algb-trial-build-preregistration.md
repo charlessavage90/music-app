@@ -250,3 +250,47 @@ here asks it to be reached.
 *(Appended below, never edited above this line. Pre-run amendments are marked
 `GRT-A<n> (pre-run)`; post-run ones `(post-hoc)` and are not permitted to change any
 threshold or read.)*
+
+### `GRT-A1` — the control arm gets an overlay archive
+
+**Status: pre-run for `AB` (which has not run); mid-collection for `A0`, which aborted
+without producing any scored result. Changes collection plumbing only. No threshold, no
+criterion, no read, and no effect size is touched.**
+
+**§2's stated assumption is refuted by measurement, and this amendment exists to record
+that before fixing it.** §2 said: "every artist a 3,000-target BFS reaches is already in
+[the production archive], because production crawled the same bootstrap to 75,000." The
+first `A0` attempt disproved it. After ~1,400 artists processed, the BFS reached
+`4365b045-388b-42a5-91b5-b860dbcbf9f7`, which is **not** among the archive's 75,000
+responses, and `ReadOnlyArchive` refused the write and aborted the run — the behaviour
+§2 specified for exactly this case.
+
+**What it means, and it is a finding in its own right: the production archive's 75,000
+responses are not closed under one-hop neighbours.** Even a small fresh crawl escapes
+their coverage quickly. The likely mechanism is that the production crawl was resumed
+repeatedly, and `Crawler.crawl` rebuilds a resumed frontier as `sorted(discovered − done)`
+rather than in BFS order — so production's particular 75,000 is not the *breadth-first*
+first 75,000, and a fresh BFS takes a different route out. **Not verified**: the
+production checkpoint no longer exists in this tree (only the archive does), so its
+`discovered` set cannot be consulted, and the mechanism above is a hypothesis while the
+absence itself is measured fact.
+
+**`GRT-G1` held.** The archive was counted at 75,000 files before and after, and the
+refused artist is confirmed absent — nothing was written. The structural guard did the
+job it was specified for.
+
+**The fix: `OverlayArchive`.** Reads fall through to the production archive; writes go to
+`builder/scratch/grt-overlay-alge/`. The production archive stays unwritable *by
+construction*, so `GRT-G1`'s guarantee is unchanged rather than relaxed. The count of
+overlay writes is recorded (`overlay_writes`) and is itself the measurement of how far
+`A0`'s frontier leaves production's coverage.
+
+**Why not the alternative.** Running `A0` entirely fresh would re-fetch ~3,000 responses
+already on disk, costing ~41 minutes of someone else's service to obtain data we hold.
+The overlay fetches only what is genuinely missing.
+
+**Consequence for the reads, stated because it is not nil.** `A0` is now a mixture of
+archived responses (up to nine days old) and fresh ones. `RC-G1` measured that drift and
+found it small — 0 of 200 seeds differed from their archived top-50 by more than 5
+members — so this is recorded as a known, bounded impurity in the control arm, not
+waved away. It does **not** affect `AB`, which is fetched fresh throughout.
