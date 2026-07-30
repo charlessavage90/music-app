@@ -319,6 +319,44 @@ the minimum, and only in one arm.
 `test_replay.py`'s byte-identical rebuild test passes at every point, which is the
 determinism sentinel for the flat production path.
 
+## §7a `GRT-P3` (post-hoc, NOT pre-registered) — ALG-B's measured cost is largely a cap artifact
+
+Run after the closeout, to answer the owner's sequencing question: is there an advantage
+to running Track B (cap selection) **before** the re-crawl? Every `ALG-B` measurement in
+this track was taken at `k = 50`, and `RC-A2` located the collapsed top-0.1% artists at
+rank **50–97** in their own candidates' lists — just outside the cut. So the question is
+answerable offline from the trial archive.
+Script and figures: `builder/analysis/2026-07-29-algb-trial-build/grt_k_sensitivity.py`.
+
+Degree of the four artists `RC-A2` found reciprocating nothing (floor is 8):
+
+| artist | k=50 | k=60 | k=75 | k=100 | top-100 fully fetched |
+|---|---|---|---|---|---|
+| R.E.M. | **6** | 10 | 26 | 68 | yes |
+| Pixies | 3 | 4 | 9 | 22 | yes |
+| The xx | 1 | 3 | 4 | 10 | yes |
+| PJ Harvey | 10 | 13 | 25 | 46 | no — lower bound |
+
+Population, same archive: artists below the degree floor fall **26.4% → 19.0% → 13.4% →
+7.5%** across those four values of `k`, while mean degree rises **16.3 → 20.4 → 26.7 →
+38.2**.
+
+**Both of this track's headline costs for `ALG-B` — R.E.M.'s collapse and the roughly
+doubled exclusion rate — are substantially artifacts of `k = 50` rather than properties of
+the algorithm.** R.E.M. clears the floor by `k = 60`.
+
+**This is not a licence to raise `k`, and must never be cited as one.** It measures only
+the *benefit* side. `MKS-5b` exists because loosening the both-ways cap restores unbounded
+degree, and removing unbounded hubs is what `capfix` won its blind listen for — the mean
+degree more than doubling across this range is exactly that cost appearing, unpriced. Three
+caveats, carried in the script's own docstring: it ranks on raw source scores rather than
+the pipeline's damped strengths, it runs on a 3,000-node trial archive rather than the 74k
+graph, and it prices no hub cost at all.
+
+**What it licenses is the sequencing conclusion and nothing more:** the cap-selection
+simulation is now known to bear directly on the re-crawl decision rather than merely
+following it.
+
 ## §8 Closeout record
 
 **D4 — suites run, not recalled:** builder **129 passed**, api **217 passed**, frontend
