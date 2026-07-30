@@ -23,7 +23,49 @@ the point.**
 
 ---
 
-## N/A — 2026-07-29 (latest) — we built a trial map with the new setting; the app is untouched
+## N/A — 2026-07-30 (latest) — we designed the experiment that picks the connection rule; the app is untouched
+
+**Nothing to exercise, and nothing is running** — all four ports were checked and are
+empty. No routing, no graph, no weighting, no cost function, and not one line of the app
+or the website changed. **A journey you build now is identical to one from yesterday.**
+
+**What happened, in plain terms.** You asked us to re-question the early decision about how
+artists get connected on the map — the rule that requires two artists to each rank the
+other highly before they get linked, and the cut-off of fifty. Today built the experiment
+that puts that question to numbers:
+
+- **We found out what the data supplier's settings actually mean**, from their own code
+  rather than a forum post. Two things the forum post said turned out to be wrong, and the
+  one setting that separates the candidate map from today's map finally has a definition:
+  it limits how much any single listener can contribute to a pair of artists being called
+  similar. Lowering it — which is what the candidate map does — means a pair needs **four**
+  distinct people to have listened to both, where today three devoted fans are enough.
+  That is very plausibly *why* the candidate map cuts off so many obscure artists, though
+  that part is reasoned rather than measured.
+- **Three ways of choosing connections will now compete on equal terms** — today's rule at
+  several cut-offs, and two challengers, one of which can do something today's rule
+  provably cannot: keep a few connections from very famous artists down to obscure ones.
+  A fourth, no-limit-at-all version runs alongside for reference only.
+- **Every measurement rule was written down and committed before any result exists**, so
+  no number can quietly reshape what counts as winning. An outside review of the design
+  caught two real gaps before anything ran; both are fixed and on the record.
+
+**None of this decides anything.** The experiment itself is the next session's work, its
+result is a recommendation, and whether anything ships is your call — after a listening
+test, as always.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something
+about the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-30-track-b-design-execution-log.md`.*
+
+## N/A — 2026-07-29 — we built a trial map with the new setting; the app is untouched
+<!-- "(latest)" stripped 2026-07-30: only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise. No web servers are running** — all four ports were checked and are
 empty. No routing, no graph, no weighting, no cost function, and not one line of the app or
