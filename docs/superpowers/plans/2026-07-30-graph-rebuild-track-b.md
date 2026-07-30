@@ -270,9 +270,23 @@ its git timestamp is the part that cannot be reconstructed. It must contain, per
 - [x] `PLA-R1` resolved from its grounds (prereg §0): the bar's letter kept everywhere
       (no fame-of-interior criterion); `CRS-C5` counts sub-decile **presence**, which
       the bar's structural-forcing ground does not reach.
-- [ ] Commit. **This is the plan's named seam** — the natural handoff point if the
+- [x] Commit. **This is the plan's named seam** — the natural handoff point if the
       session is long: the next session reads the prereg cold, which is the condition it
       was written for.
+- [x] **Second consultant round, post-commitment (2026-07-30): five findings, all
+      verified against the files before adoption, recorded as `CRS-A1`–`A5` in the
+      prereg's §8.** The two blocking ones were real: the path harness could not
+      express `CRS-C5`, `CRS-R2`'s subset, or `CRS-G3` (fixed, gate re-run green with a
+      new labels check, before any cell was scored); and `C5`'s "structurally zero"
+      baseline claim over-reached the drawn pool — `CS-P0b`'s own series shows even the
+      top-0.1% band is only 87.5% zero-downward, so the baseline is now **measured
+      first** on `ALG-E`-`MK50` and any nonzero class gets its bar fixed blind via a
+      further §8 entry. Plus: `R0`'s null no longer conflates the rank cut with
+      reciprocity (`CRS-A3`), the `MK100`-vs-`TUw-100-100` reciprocity isolation got
+      its own read `R1a` (`CRS-A4` — at k=100 the mutual rank test is vacuous per
+      `LBS-3`, so that cell pair differs by exactly the reciprocity requirement below
+      the ceiling), and an archive-invariant popularity ruler is authorized as a
+      descriptive-only companion to `C6` (`CRS-A5`).
 
 ### CB-5: Run the cells and score them
 

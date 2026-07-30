@@ -241,4 +241,61 @@ never substitute for it.
 
 ## §8 Amendments — append-only
 
-*(none yet)*
+*(Numbering note, cosmetic, recorded 2026-07-30: §6–§7 do not exist; amendments sit at
+§8 to match the `GRT`/`RC` convention, and renumbering a committed document is barred.)*
+
+All five entries below were appended 2026-07-30, after a second consultant read of the
+committed document against the `CB-1`–`CB-3` harness, **before any cell was scored**.
+Each was verified against the files before adoption. No clause above this section has
+been edited; where an entry corrects one, the entry governs.
+
+- **`CRS-A1` — instrument aligned to the pre-registered quantities (BLOCKING, fixed).**
+  Verified as reported: `draw_pairs` returned `sorted(set(pairs))`, discarding each
+  pair's class, and `route_sample` pooled every pair into single means — so `CRS-C5`
+  (a **count** over famous-famous pairs), `CRS-R2`'s famous-pair subset, and
+  `CRS-G3`'s per-band readability were not computable from the output. **Fixed before
+  any cell was scored**: pairs now carry class labels end to end, `route_sample`
+  reports per class (including `pairs_with_sub_decile_interior` with its denominator
+  and a `readable_per_CRS_G3` flag), and the `CB-3` gate re-ran green with a new
+  labels check. **No criterion changed** — the harness now matches the document, which
+  is instrument work under the committed prereg, not a design change.
+- **`CRS-A2` — `CRS-C5`'s baseline claim was over-broad, and the decisiveness rule is
+  now gated on a baseline measurement (BLOCKING, protocol fixed).** §2 asserts the
+  famous-pair baseline is "exactly zero on `ALG-E`-`MK50`, structurally", citing
+  `CS-P0`/`CS-P0b` — but that zero was measured for the **five named superstars**,
+  while the drawn famous pools span whole bands, and `CS-P0b`'s own series shows the
+  bands are not clean: zero-downward runs 8.2% → 45.1% → 79.1% → **87.5%** inward, so
+  even the top-0.1% band holds sub-decile edges for ~1 artist in 8. The pair draw now
+  carries two famous classes (`ff-top1pct`, `ff-top01pct`) because their expected
+  baselines differ. **Protocol, fixed now:** `ALG-E`-`MK50`'s `C5` is scored **first**,
+  per class, before any other cell's `C5` is opened. For any class measured at zero
+  there, §2's "any nonzero count is decisive" stands as written. For any class measured
+  nonzero, a further §8 entry fixes the numeric bar against that measured baseline
+  **before** any candidate cell's `C5` is read — the bar is set blind to every number
+  it will judge, which is the property the timestamp exists to protect.
+- **`CRS-A3` — `CRS-R0`'s null pre-commitment conflated the rank cut with the rule.**
+  As committed it read a flat k-curve as "the cap is not the operative lever". A flat
+  k-curve within `mutual_knn` shows the **rank window** is not binding; it says nothing
+  about the **reciprocity requirement**, and separating those is plan §0 ruling 1's
+  entire purpose. `R0`'s null now reads: *k within mutual k-NN is not the operative
+  lever for stranding at production scale; `R0` cannot speak to reciprocity — `R1` and
+  `R1a` do.*
+- **`CRS-A4` — `R1a`, the reciprocity isolation, promoted to its own read.** At
+  `k = 100` the mutual rank test is vacuous (source lists cap at 100, `LBS-3`), so
+  `MK100` is the **maximal mutual graph**, and `MK100` vs `TUw-100-100` at matched
+  bound differs by **exactly the reciprocity requirement** at nodes below the ceiling —
+  the cleanest isolation in the grid of the owner's stated concern, and it was sitting
+  unnamed inside the matched-bound sweep. **Read, fixed now:** `CRS-C1`/`C2` between
+  that cell pair, per archive; presupposes both cells built and scored; each read
+  reports the share of nodes at the ceiling, where the trim contaminates the isolation,
+  and confines its claim to below-ceiling nodes. Nulls follow `R1`'s pre-commitment.
+- **`CRS-A5` — an archive-invariant second ruler for `CRS-C6`, descriptive only.** The
+  consultant reports `POST /1/popularity/artist` (MBID-keyed, 1000/request,
+  `total_user_count`) returned 200/200 with zero nulls on stratified seeds down to
+  12-listener artists. **`C6`'s criterion is unchanged and stays in the adopted-frame
+  percentile currency.** If, at scoring time, one re-verifying request confirms the
+  endpoint, `C6` may additionally be reported in `total_user_count` currency as a
+  robustness companion — descriptive, never able to fire or veto the criterion. Caveat
+  carried verbatim from the same source: this table is **not a fame source**; it and
+  the Wikipedia proxy under-represent the same artists by the same ~10×, so their
+  agreement is a shared blind spot, not corroboration.
