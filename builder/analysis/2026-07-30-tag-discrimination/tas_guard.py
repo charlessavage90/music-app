@@ -51,28 +51,60 @@ from tas_common import HERE, fame_frame
 from tas_select import LAMBDAS, TAS4_KILL_TURNOVER, agreement_field, edge_turnover, mask_tag
 from tas_signal import LOWER_HALF, TOP_1PCT
 from tas_tags import label_sets
-from td_turnover import K, Capture, mutual_undirected
+from td_turnover import K, Capture, mask_multiplicative, mutual_undirected, uniform_field
 
 OUT = HERE / "tas_guard.json"
 
 ADVERSE_FRACTION = 0.10  # spec TAS-6
 SHUFFLE_SEED = 20260730
 
-# NOT a pre-registered bar. The spec says the red check must report "large"
-# turnover and fixes no number, so this is a harness-liveness line chosen here:
-# materially above the TAS-4 kill bar. Named rather than left implicit.
+# The seed and symmetry td_turnover's committed MULT-SYM arms were run at.
+# TAS-AM3a compares against those figures, so this must not drift.
+TD2_MULT_SEED = 303
+
+# TAS-AM3b, fixed in the amendment BEFORE the control ran: at or above this
+# ratio, TAS-4's turnover cannot be attributed to genre structure.
+AM3B_UNSAFE_RATIO = 0.50
+
+# WITHDRAWN with the naive shuffle. Was never pre-registered -- the spec's red
+# check fixed no number, and this was a liveness line chosen by the session.
 RED_LIVENESS_TURNOVER = 5 * TAS4_KILL_TURNOVER
 
 SUB_DECILE = 0.10  # context only, not a criterion
 
 
 def randomised_labels(labels: dict[str, set[str]], seed: int) -> dict[str, set[str]]:
-    """Shuffle label sets between artists, preserving the labelled share."""
+    """WITHDRAWN by TAS-AM3. Shuffles label sets between ALL artists.
+
+    Retained, not deleted: its figure is cited in TAS-AM3 as the evidence that
+    the direction was known before the amendment was written, so the function
+    that produced it must stay runnable. Do not use it as a control -- it moves
+    two knobs, because it changes WHICH artists are labelled and so halves the
+    count of pairs where the rule acts.
+    """
     rng = random.Random(seed)
     keys = sorted(labels)
     values = [labels[k] for k in keys]
     rng.shuffle(values)
     return dict(zip(keys, values))
+
+
+def permuted_labels_among_labelled(
+    labels: dict[str, set[str]], seed: int
+) -> dict[str, set[str]]:
+    """TAS-AM3b's control: permute label sets among LABELLED artists only.
+
+    Holds fixed exactly which artists carry labels -- and therefore the number
+    of pairs where the device acts, its symmetry, and the set-size
+    distribution. One knob moves: which labels a given artist holds.
+    """
+    rng = random.Random(seed)
+    labelled = sorted(k for k, v in labels.items() if v)
+    values = [labels[k] for k in labelled]
+    rng.shuffle(values)
+    out = dict(labels)
+    out.update(zip(labelled, values))
+    return out
 
 
 def is_adverse(baseline: int, arm: int) -> bool:
@@ -99,6 +131,43 @@ def touches_sub_decile(keys: np.ndarray, pctl: np.ndarray, n: int) -> int:
     """Context only: connections with at least one end in the bottom 10%."""
     pu, pv = pctl[keys // n], pctl[keys % n]
     return int((np.minimum(pu, pv) < SUB_DECILE).sum())
+
+
+def _am3a_equivalence(cap: Capture) -> dict:
+    """TAS-AM3a: prove the ranking path IS td_turnover's, and can move a lot.
+
+    Passes only if the mask is bit-identical to mask_multiplicative AND the
+    turnover reproduces the committed TD-2 MULT-SYM figures to five decimals.
+    A large response is thereby demonstrated against a fixed external
+    reference rather than against a threshold someone chose.
+    """
+    committed = {
+        row["arm"]: row["turnover_frac"]
+        for row in json.loads((HERE / "td_turnover.json").read_text(encoding="utf-8"))["arms"]
+    }
+    base_edges = mutual_undirected(cap, cap.pos < K)
+    cells: dict[str, dict] = {}
+    for lam in (value for value in LAMBDAS if value > 0):
+        field = uniform_field(cap.s_node, cap.s_cand, cap.n, TD2_MULT_SEED, True)
+        mask = mask_tag(cap, field, lam)
+        identical = bool(np.array_equal(mask, mask_multiplicative(cap, lam, TD2_MULT_SEED, True)))
+        turnover = edge_turnover(base_edges, mutual_undirected(cap, mask))
+        measured = round(turnover["turnover_share"], 5)
+        expected = committed[f"MULT-SYM-{lam}"]
+        cells[str(lam)] = {
+            "mask_bit_identical": identical,
+            "turnover": measured,
+            "td2_committed_turnover": expected,
+            "reproduces": identical and measured == expected,
+        }
+        print(f"  lambda={lam}: bit-identical={identical} "
+              f"turnover={measured} vs TD-2 {expected}", flush=True)
+    return {
+        "reference": "td_turnover.json MULT-SYM arms (synthetic symmetric field, "
+                     f"seed {TD2_MULT_SEED})",
+        "per_lambda": cells,
+        "passes": all(cell["reproduces"] for cell in cells.values()),
+    }
 
 
 def _arms(cap: Capture, field: np.ndarray, pctl: np.ndarray) -> tuple[dict, dict]:
@@ -154,7 +223,20 @@ def main() -> None:
     print("TAS-6 (selection half), real tag frame:", flush=True)
     real_base, real_arms = _arms(cap, agreement_field(cap, labels), pctl)
 
-    print("RED check, shuffled tag frame:", flush=True)
+    print("TAS-AM3a: liveness and equivalence against the committed TD-2 field:", flush=True)
+    am3a = _am3a_equivalence(cap)
+
+    print("TAS-AM3b: null control, labels permuted among labelled artists only:", flush=True)
+    permuted = permuted_labels_among_labelled(labels, SHUFFLE_SEED)
+    labelled_keys = [k for k, v in labels.items() if v]
+    null_moved = sum(1 for k in labelled_keys if permuted[k] != labels[k])
+    _null_base, null_arms = _arms(cap, agreement_field(cap, permuted), pctl)
+    null_ratio = {
+        lam: round(null_arms[lam]["turnover_share"] / real_arms[lam]["turnover_share"], 4)
+        for lam in real_arms
+    }
+
+    print("WITHDRAWN naive shuffle, re-run for the record only:", flush=True)
     shuffled = randomised_labels(labels, SHUFFLE_SEED)
     moved = sum(1 for k in labels if shuffled[k] != labels[k])
     _red_base, red_arms = _arms(cap, agreement_field(cap, shuffled), pctl)
@@ -172,16 +254,33 @@ def main() -> None:
             "per_lambda": real_arms,
             "adverse_at_any_lambda": any(cell["adverse"] for cell in real_arms.values()),
         },
-        "red_check": {
+        "tas_am3a_liveness_and_equivalence": am3a,
+        "tas_am3b_null_control": {
+            "seed": SHUFFLE_SEED,
+            "labelled_artists_whose_labels_moved": null_moved,
+            "per_lambda_turnover": {lam: cell["turnover_share"] for lam, cell in null_arms.items()},
+            "real_per_lambda_turnover": {
+                lam: cell["turnover_share"] for lam, cell in real_arms.items()
+            },
+            "null_over_real": null_ratio,
+            "attribution_unsafe_threshold": AM3B_UNSAFE_RATIO,
+            "attribution_unsafe": any(v >= AM3B_UNSAFE_RATIO for v in null_ratio.values()),
+            "note": "A SMALL null is the CORRECT result, not a failure (TAS-AM3b). "
+                    "Below the threshold, report the ratio and nothing more -- no "
+                    "claim about tags is licensed by this control.",
+        },
+        "withdrawn_naive_shuffle": {
+            "status": "WITHDRAWN by TAS-AM3; re-run for the record only, never a check",
             "seed": SHUFFLE_SEED,
             "artists_whose_labels_moved": moved,
             "liveness_threshold_turnover": RED_LIVENESS_TURNOVER,
             "liveness_threshold_is_pre_registered": False,
             "per_lambda_turnover": {lam: cell["turnover_share"] for lam, cell in red_arms.items()},
             "fired": all(value >= RED_LIVENESS_TURNOVER for value in red_turnovers),
-            "note": "The real-vs-shuffled gap is an INSTRUMENT reading, not a "
-                    "pre-registered criterion. Reading it as evidence about tags "
-                    "needs its own pre-registration, designed cold.",
+            "why_withdrawn": "Shuffling labels destroys genre overlap rather than "
+                             "randomising it, so no randomised frame can produce large "
+                             "turnover for a Jaccard device. It also moves two knobs: it "
+                             "changes WHICH artists are labelled.",
         },
     }
     Path(args.out).write_text(json.dumps(result, indent=1), encoding="utf-8")
