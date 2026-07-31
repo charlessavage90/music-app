@@ -499,19 +499,22 @@ def iqr(values: list[float]) -> float:
 
 
 def main() -> None:
-    from artistpath_builder.artifact import deserialise
+    # The API's reader, not the builder's: TAS-5 uses it too, so both read the
+    # graph through one code path. artifact.deserialise returns raw CSR arrays
+    # and has no per-node accessor (verified 2026-07-30).
+    from artistpath_api.graph_store import GraphStore
     from tas_common import ADOPTED
 
-    graph = deserialise(ADOPTED.read_bytes())
+    store = GraphStore.from_bytes(ADOPTED.read_bytes())
     labels = label_sets()
     frame = fame_frame()
 
     # --- TAS-1: coverage by edge class -----------------------------------
     counts: dict[str, list[int]] = {"ff": [0, 0], "fo": [0, 0], "oo": [0, 0]}
-    for u_idx, mbid_u in enumerate(graph.mbids):
+    for u_idx, mbid_u in enumerate(store.mbids):
         pu = frame.get(mbid_u, 0.0)
-        for v_idx in graph.neighbours_of_index(u_idx):
-            mbid_v = graph.mbids[v_idx]
+        for v_idx, _sim in store.neighbours_of(u_idx):
+            mbid_v = store.mbids[v_idx]
             if mbid_v <= mbid_u:
                 continue  # each undirected edge once
             cls = edge_class(pu, frame.get(mbid_v, 0.0))
@@ -524,13 +527,13 @@ def main() -> None:
     spreads: list[float] = []
     pairs_for_rho: list[tuple[float, float]] = []
     identical_order = considered = 0
-    for u_idx, mbid_u in enumerate(graph.mbids):
+    for u_idx, mbid_u in enumerate(store.mbids):
         u_set = labels.get(mbid_u, set())
         if not u_set:
             continue
         vals: list[tuple[float, float]] = []
-        for v_idx, sim in graph.neighbours_with_scores(u_idx):
-            a = agreement(u_set, labels.get(graph.mbids[v_idx], set()))
+        for v_idx, sim in store.neighbours_of(u_idx):
+            a = agreement(u_set, labels.get(store.mbids[v_idx], set()))
             if a is not None:
                 vals.append((float(sim), a))
         if len(vals) < 4:
@@ -585,9 +588,11 @@ if __name__ == "__main__":
 Run: `UV_LINK_MODE=copy uv run python -m pytest analysis/2026-07-30-tag-discrimination/test_tas_signal.py -v`
 Expected: PASS (3 tests)
 
-- [ ] **Step 5: Verify the artifact reader method names against source**
+- [ ] **Step 5: ✅ DONE — the invented accessors were replaced**
 
-`graph.neighbours_of_index` and `graph.neighbours_with_scores` are written from the CSR shape. **Grep `builder/src/artistpath_builder/artifact.py` for the real accessor names and fix the calls before running.** A plan naming a method that does not exist is this project's second characteristic failure; resolve it rather than working around it.
+Verified 2026-07-30. `graph.neighbours_of_index` and `graph.neighbours_with_scores` **do not exist**: `artifact.deserialise` returns raw CSR arrays (`offsets`, `neighbours`, `scores`) with no such methods. The code above now uses the API's `GraphStore` instead, whose real accessors are `mbids`, `pop_raw`, and `neighbours_of(node_id) -> Iterator[tuple[int, float]]`.
+
+That is also the better choice on its own merits: `TAS-1/2/3` and `TAS-5` now read the graph through one code path rather than two, so an inconsistency between them is impossible rather than merely unlikely.
 
 - [ ] **Step 6: Run it and read the two gates**
 

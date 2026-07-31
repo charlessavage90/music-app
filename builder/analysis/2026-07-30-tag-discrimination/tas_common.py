@@ -57,6 +57,15 @@ _COH = HERE.parent / "2026-07-30-coherence-tag-probe"
 if str(_COH) not in sys.path:
     sys.path.insert(0, str(_COH))
 
+# The API package is a separate package with its own venv, but it is pure
+# Python over numpy, so importing it from the builder venv works. Done here
+# once so TAS-1/2/3 and TAS-5 read the graph through the SAME reader --
+# artifact.deserialise returns raw CSR arrays with no per-node accessor, and
+# two readers would be two chances to disagree. Precedent: td_pathedges.py:85.
+_API_SRC = HERE.parent.parent.parent / "api" / "src"
+if str(_API_SRC) not in sys.path:
+    sys.path.insert(0, str(_API_SRC))
+
 from ct_common import (  # noqa: E402,F401
     ADOPTED,
     ADOPTED_SHA,
