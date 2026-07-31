@@ -186,13 +186,27 @@ real independent signal the cap and router absorb — and they point at differen
 
 ### `TAS-4` — would it change which neighbours survive selection? *(gate)*
 
-*Plain: swapping two neighbours out of fifty will not change a journey you would notice.*
+> ### ⚠ THIS SECTION IS AMENDED BY [`TAS-AM1`](#tas-am1--tas-4-changes-its-measured-quantity-its-statistic-and-its-bar) — READ IT BEFORE ACTING ON ANYTHING BELOW.
+>
+> Its **measured quantity, its summary statistic and its bar all changed**, and the plain
+> sentence immediately below was **withdrawn as false**. The text is left standing rather
+> than rewritten because a pre-registration whose errors are edited away cannot be checked;
+> git records what was committed, and this marker records that it no longer governs.
+>
+> **Current:** edge turnover, deletions and creations reported separately, mean not median,
+> **kill at ≤ 1%**.
+
+~~*Plain: swapping two neighbours out of fifty will not change a journey you would notice.*~~
+**← WITHDRAWN AS FALSE by `TAS-AM1`.** `TD-2` measured that swap rate as ~8.4% of all
+connections differing and `TD-4` as roughly one journey in three containing a deleted
+connection. The replacement sentence is in `TAS-AM1`.
 
 Simulated over the archive, no rebuild: the top-50 set under λ = 0 versus each λ > 0, for
 artists whose own candidate list exceeds 50 (the only artists for whom selection has a
 choice to make; the share of such artists and of edges incident on them is reported).
 
-**Kill for the build-time architecture: if at every λ the median artist swaps ≤ 2 of 50.**
+~~**Kill for the build-time architecture: if at every λ the median artist swaps ≤ 2 of 50.**~~
+**← WITHDRAWN by `TAS-AM1`; superseded by turnover ≤ 1% at every λ.**
 
 **Bounded, and stated now:** this measures the *input* to a rebuild, not its output. Mutual
 selection means one artist's reordering can delete an edge the other still ranks, so the

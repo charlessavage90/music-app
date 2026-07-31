@@ -1,0 +1,236 @@
+# Retained execution log — tag discrimination probe (`TAS-`), 2026-07-30
+
+**Role: RETAINED EXECUTION LOG. Owns no figures.** Criteria figures belong to
+`builder/analysis/2026-07-30-tag-discrimination/` and the findings document written when
+the probe completes; scoring and path-quality figures stay in
+`findings/2026-07-21-scoring-adjudication.md`. Cited here, never restated.
+
+Governing document: [`specs/2026-07-30-tag-discrimination-probe-preregistration.md`](specs/2026-07-30-tag-discrimination-probe-preregistration.md).
+Plan: [`plans/2026-07-30-tag-discrimination-probe.md`](plans/2026-07-30-tag-discrimination-probe.md).
+Handoff: [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
+
+**Scope reached: Tasks 1–3 of 8.** Both gate reads resolved and passed. Tasks 4–8 unrun.
+
+---
+
+## §1 What the owner asked for, and how the question changed under it
+
+He asked to continue investigating tag-aware neighbour **selection at build time** — the
+third coherence strand parked in `NEXT.md`. Three of his interventions changed the design
+materially, and each is recorded because the reasoning does not survive in the diff.
+
+**§1.1 The goal is coherence, not obscurity.** Chosen explicitly. This is what makes the
+whole track evidence-poor: the two metrics ever built to judge flow were the worst
+predictors of his verdicts (Phase 1 §3.8), the tag instrument that might have replaced them
+was killed the previous night (`COH-2`), and spending tags on *construction* spends them as
+an *evaluator*. **There is no offline scoreboard for this track and cannot be one.** Every
+other track here ends in a recommendation; this one ends at a listening test or nowhere.
+
+**§1.2 "Will this run on the full 100 or the 50 cap?"** The literal answer is that ranking
+already spans the full pre-cap list (`graph.py:106–110` sorts every candidate, then takes
+50), and that this is the *only* reason the device can do anything: reordering within the
+surviving 50 is a no-op, since the resulting *set* becomes the edges. All effect comes from
+candidates crossing the 50 line.
+
+His deeper argument — the cap was itself a coherence device, so tags might let it loosen —
+was **half right, and the half that is right favours him**: the blind listen that adopted
+`capfix` fixed the *rule* (mutual k-NN, p99 clip, damping 0), **not the bound of 50**, which
+was inherited from the config default. Less stands behind that number than "the cap was
+blind-listened" implies.
+
+**§1.3 Why no arm runs at bound 100, decided against his initial vote.** He voted to test
+both bounds. Ranking is **provably never consulted** at k = 100: the source caps candidate
+lists at 100 (`CS-P0e`), so top-100 of a ≤100 list cuts nothing and the sort result is
+discarded. Track B proved this byte-identically without setting out to — `PS100` ≡ `MK100`
+on both archives (`LBS-3`), two *different ranking rules* producing one graph. A λ sweep at
+bound 100 would be a column of identical graphs. He accepted this and the vote changed.
+
+**What survives of his argument, and it strengthens:** at a loose bound the only thing still
+pruning is the **mutual requirement** — the mechanism he has been questioning. Track B's
+`R1a` isolated reciprocity at k = 100 and returned **null on both archives**. Parked as a
+separate experiment at his instruction (spec §7), explicitly not ruled out.
+
+**§1.4 "Can the router favour higher-ranked neighbours instead?"** A better idea than the
+build-time design on cost — no rebuild, reversible, context-aware, and it does not retire
+every existing path-quality figure. Against it: **this router has ignored three consecutive
+pricing changes** (Track 2's repricing family, Track 3b's toll, Track B's `R2` quota edges
+present-and-declined), while structural changes have moved things. That asymmetry is now a
+standing caution inside `TAS-5` so a null there cannot be misreported as "tags do not work".
+
+Resolved by **not choosing**: the architecture question is left open for the probe to inform,
+which is why the probe measures both selection (`TAS-4`) and routing (`TAS-5`).
+
+---
+
+## §2 Defects found in the plan itself
+
+Four, all in documents this session wrote, all found by the plan's own
+verify-against-source steps. **None would have raised an error.** Each is the project's
+characteristic failure — confident prose about correct code — and the tally is the argument
+for keeping those steps as checkboxes rather than assumptions.
+
+| # | The plan said | What was true |
+|---|---|---|
+| 1 | `neutral_for` medians each candidate against the first candidate | Must be against the **artist**. A different quantity, and not the one §1 defines. Its test only asserted non-`None`, so it would have passed. |
+| 2 | The Wikidata half of the vocabulary is already on disk | **Wrong twice.** `fp_wikidata.json` holds item presence (`qid`, `wikis`, `enwiki`) and *no genres*; `ct_wikidata_genres.json` holds genre **counts**, not labels, because `COH-1` only needed presence. **P136 labels were never persisted.** Unfixed, `label_sets()` would have silently returned half-labelled data for the whole graph. |
+| 3 | `graph.neighbours_of_index` / `neighbours_with_scores` | Neither exists. `artifact.deserialise` returns raw CSR arrays with no per-node accessor. |
+| 4 | The P136 guard need only check the file **exists** | A partial frame reads as "these artists have no genres" — silent and wrong. Now checks coverage of every graph node. |
+
+Defect 3's fix improved the design rather than merely repairing it: `TAS-1/2/3` and `TAS-5`
+now read the graph through the API's `GraphStore`, one code path, so a disagreement between
+the coverage measurement and the routing measurement is structurally impossible.
+
+---
+
+## §3 Decisions taken, with reasoning
+
+**§3.1 Keep P136 rather than drop it to save an hour.** Tempting argument against: its
+coverage is concentrated in the obscure tail, where the actuator is silent anyway. Wrong in
+the case that matters — agreement needs labels at **both** ends, and the candidates a
+binding (famous, long-listed) artist chooses between include obscure ones. P136 labels there
+are what make a famous→obscure pair *resolvable* rather than neutral, which is the
+population `TAS-6` guards.
+
+**§3.2 A new collector rather than editing a frozen probe.** `ct_wikidata_genres.py` is
+committed `COH-` work; editing it to serve a later question is how a record stops
+reproducing what it claims to have measured. `tas_wikidata.py` is new.
+
+**§3.3 The neutral rule is per-artist, and it is the one dormant term.** Median agreement
+between the artist and its **own** labelled candidates, never zero — zero is a positive
+claim of dissimilarity, and applying it to missing data would demote unlabelled candidates,
+which are disproportionately obscure. Per-artist rather than a global constant because
+agreement levels vary by artist. It is **inert at λ = 0 and active in every arm**, the same
+shape as `w_floor` in the Track 2 pre-registration's §0, so it is pinned by test and any
+finding must be reported as "λ **and** the neutral rule".
+
+**§3.4 Escalated one question to `ml-graph-analyst`, and declined to escalate two.** The
+cheap filter closed the other two: bound-100 inertness was already derived with an
+independent witness, and the per-artist median's rank-neutrality was worked out and held.
+The one dispatched — the conversion from per-artist swaps to built-map change — was not
+arithmetic already written down, and its answer changed a committed gate. **See §4.**
+
+**§3.5 Did not change `testpaths`.** All 34 analysis tests pass, so adding `analysis` would
+work, but it changes what every builder `pytest` run collects and is beyond the task.
+Deferred by the owner with a condition (§6).
+
+---
+
+## §4 Corrections to the record made by this session
+
+**§4.1 `TAS-4`'s original bar was withdrawn as false, before it ran** (`TAS-AM1`). Three
+independent findings from the `TD-` derivations, each sufficient on its own:
+
+- Mutual selection does **not** amplify deletions as suspected (≈1.07×) — but every swap
+  also *promotes* a neighbour, and per-artist swap counting never saw the creations. The
+  conversion is ≈2.11×, linear over the observable range, stable across placement and
+  endpoint-correlation regimes and two archives. The old bar admitted ~8.4% of the map
+  differing as a "kill".
+- The **median** reads 0 while 6.3% of the map moves, because the device is inert wherever
+  labels are missing — the zero-inflated case `TAS-1` exists to expect, not a corner case.
+- The defence for a permissive bar was **refuted with the sign reversed**. Journeys route
+  through connections sitting *deeper* in both endpoints' lists than average, so they are
+  deleted at 1.09–1.26× the population rate, never below 1.0. The analyst proposed that
+  hypothesis and then killed it.
+
+The withdrawn plain sentence is **kept in the document, marked false**. A
+pre-registration's value is that its errors stay visible.
+
+**§4.2 `TAS-AM2` fixes a substrate ambiguity `TAS-AM1` left open.** `TAS-2` asks about an
+artist's *candidates*; the artifact holds only the ≤50 survivors. Measuring there would
+have answered a different question on an already-similarity-selected population and biased
+toward a kill. Rule now stated per criterion: selection-side on the pre-cap capture,
+map-side on the adopted artifact, never compared across.
+
+**§4.3 Nothing in the prior record is overturned by this session's measurements.** `COH-`,
+`FPC-`, Track B and the adjudication are untouched. `COH-2` is *corroborated*: this
+session's independently-collected frame agrees with its banded figures to within half a
+point when weighted by band size.
+
+---
+
+## §5 Gate outcomes
+
+| Gate | Outcome |
+|---|---|
+| `TAS-1` — labels at both ends of famous–famous connections | **PASSED**, far above bar |
+| `TAS-2` — does agreement vary between candidates | **PASSED**, well clear of both the kill and the weak-signal flag |
+| `TAS-3` — diagnostic, no bar | Signal largely **independent** of similarity; the great majority of candidate lists are not already in agreement order — the opposite of the failure mode it was written to catch |
+| `TAS-4`, `TAS-5`, `TAS-6` | **NOT REACHED.** Unrun, not null. |
+
+Figures: `builder/analysis/2026-07-30-tag-discrimination/tas_signal.json` and
+`tas_tags.json`.
+
+**Instrument checks:** the `TD-` reconstruction reproduces `ALG-E-mutual_knn-k50.bin`
+edge-for-edge (`td_turnover.py --verify`), and this session's three edge classes sum to
+exactly the adopted artifact's independently-measured edge count. The randomised-label
+**red** check belongs to Task 7 and has **not** run — `TAS-4`/`TAS-5` results must not be
+believed before it does.
+
+---
+
+## §6 Deferrals opened by this session, each with a condition
+
+| Deferral | Condition |
+|---|---|
+| **Adding `analysis` to `testpaths`** | Deferred by the owner 2026-07-30. All 34 analysis tests pass, so it would work cleanly. **Revisit if any `TAS-` test needs to gate a merge, or at the closeout that retires this probe** — whichever first. Until then the `TAS-` tests run only when invoked explicitly, so "pinned by test" means pinned by a test someone must remember to run. |
+| **`TAS-3`'s pooled correlation mixes within-list and between-artist variation** | **Accepted, won't chase** unless a `TAS-4`/`TAS-5` null needs adjudicating. The per-list already-ordered share answers the operational question directly and points the same way; a third statistic would change no decision. |
+| **Replacing mutual k-NN with a tag-based degree limiter** | Owner-raised, parked as a **separate experiment** (spec §7). Not ruled out — ruled separate. Needs its own pre-registration designed cold. Track B's `R1a` corroborates its premise. |
+| **The path-carrying measurement cannot say whether a rerouted journey *reads* differently** | **Structural, not chaseable offline** — it is the blind listen's (`REQ-38`). Recorded so no future session mistakes the journey-touch figure for a disruption figure; it is a **ceiling**. |
+
+---
+
+## §7 Operational measurements with no other home
+
+- **ListenBrainz batched metadata sustained ~37–40 artists/s** over the full artifact,
+  above `COH-5`'s measured 26/s. Whole-graph collection took well under the 47 minutes
+  `COH-5` projected. 50-MBID batches, no throttling observed.
+- **Wikidata P136 label collection** over the full artifact completed in the same window at
+  250-MBID batches — smaller than `COH-1`'s 600 because a label query returns one row per
+  (artist, genre) rather than one per artist.
+- **The label collector recovers what the count collector found**: artists with ≥1
+  English-labelled P136 genre differ from the earlier count-based total by **one artist**,
+  so the English-label filter loses essentially nothing.
+- **`norm_genre` ASCII-folds, so the union genre is a LATIN-SCRIPT vocabulary.** Non-Latin
+  labels normalise to the empty string and are dropped; an artist whose only genres are
+  Japanese or Korean reads as **unlabelled** and takes the neutral value. Correct — overlap
+  across disjoint vocabularies is not computable — but it means `TAS-1`'s coverage must be
+  read as Latin-script coverage. Diacritics fold rather than vanish, so it is a script
+  limit, not a language limit. `COH-2` shares the property, so the two records stay
+  comparable. Pinned by test.
+- **Captures live in the session scratchpad, not the repo** (~20 MB each), regenerable in
+  ~2 min via `td_capture.py`. `td_turnover.py --verify` makes a stale one impossible to use
+  silently.
+
+### Artifact provenance (D3) — recomputed at closeout, not transcribed
+
+Both are gitignored, so a checksum is the only identity they will ever have. Verified with
+`sha256sum` during this closeout and matching what §8's amendments assert:
+
+| sha256 | file | used for |
+|---|---|---|
+| `4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8` | `builder/scratch/graph-t15-tiebreakfix.bin` | the **adopted** artifact — `TAS-1`, and `TAS-5` when it runs (map-side, `TAS-AM2`) |
+| `73feffa03856f55dda134b84aa5ee40073495ae16f27e8116a4d961b65a69faa` | `builder/scratch/cb-cells/ALG-E-mutual_knn-k50.bin` | Track B cell — the green check for the pre-cap capture used by `TAS-2`/`TAS-3`, and by `TAS-4` when it runs (selection-side) |
+
+**These two are NOT interchangeable** and differ by 36 artists / 193 edges. Which one a
+figure came from is the difference between a valid read and an invalid one — hence
+`TAS-AM2`'s standing rule that no read compares across them.
+
+---
+
+## §8 Standing context layer (D6)
+
+Unconditional layer: **44,183 characters**. Conditional layer: **2,154 lines**.
+Measured with the D6 commands; the memory-directory slug was confirmed to resolve first.
+
+**Both unchanged by this session — delta zero on each**, verified from the diff rather than
+asserted: `git diff --stat 1d34d81..HEAD -- CLAUDE.md .claude/` is empty, and every
+`memory/*.md` predates this session. No `CLAUDE.md` row, memory file, skill description or
+agent definition was added, removed or reworded. The two amendments and the substrate rule
+live in the pre-registration, which is conditional `docs/` and costs a session nothing
+unless it reads it.
+
+> **Recorded because it is the exact failure this project keeps having.** The first draft
+> of this section stated both figures **without running the commands** — they were plausible,
+> internally consistent, and wrong by 39% and 92% respectively. Caught before commit only
+> because D6 names the commands and running them is cheap. A retained log is precisely where
+> a fabricated figure would have become the baseline every future closeout diffed against.

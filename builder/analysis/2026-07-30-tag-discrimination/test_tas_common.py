@@ -33,10 +33,19 @@ def test_agreement_is_none_when_either_side_unlabelled():
 
 def test_neutral_is_the_median_agreement_against_the_ARTIST_not_each_other():
     # The neutral value is the median agreement between the artist and its
-    # own labelled candidates -- not between candidates. Agreements against
-    # {"rock"} are 1.0, 0.5, 0.0, so the median is 0.5.
+    # own labelled candidates -- NOT between candidates.
+    #
+    # The fixture is chosen so the two implementations DISAGREE. An earlier
+    # version put the artist's own set first in the candidate list, which
+    # made "median against the artist" and "median against candidates[0]"
+    # numerically identical -- so it passed under the exact defect it was
+    # named to catch. Found by the closeout B3 sabotage check, which is what
+    # that check is for.
+    #
+    #   against own {"rock"}:      jazz 0.0, rock 1.0, rock+pop 0.5 -> 0.5
+    #   against candidates[0]:     jazz 1.0, rock 0.0, rock+pop 0.0 -> 0.0
     own = {"rock"}
-    candidates = [{"rock"}, {"rock", "pop"}, {"jazz"}]
+    candidates = [{"jazz"}, {"rock"}, {"rock", "pop"}]
     assert neutral_for(own, candidates) == 0.5
 
 

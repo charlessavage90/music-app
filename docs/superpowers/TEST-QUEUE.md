@@ -23,7 +23,59 @@ the point.**
 
 ---
 
-## N/A — 2026-07-30 (latest, night) — we asked whether genre labels could judge journey flow; the answer was no, and we stopped
+## N/A — 2026-07-30 (latest, late night) — we checked whether genre labels are worth building with; so far, yes
+
+**Nothing to exercise, and nothing is running** — all four ports were checked and are empty,
+and both data-gathering jobs have finished and exited. No routing, no graph, no weighting,
+no cost function, and not one line of the app or the website changed. **A journey you build
+now is identical to one from this morning.**
+
+**What happened, in plain terms.** Last night we asked whether genre labels could be used to
+*judge* whether a journey flows well, and the answer was no — too many artists have no
+labels. You then asked the different question: could genre labels help *build* the map in the
+first place, by influencing which artists get connected to which. That is a separate idea and
+it survives so far.
+
+Three things were measured, and all three came back the encouraging way:
+
+- **Where the idea would actually act, the labels are there.** Among connections between two
+  well-known artists — the ones you have said matter most — virtually every connection has
+  genre labels at both ends. The labels thin out among obscure artists, as before, but there
+  the idea simply does nothing rather than doing something wrong.
+- **The labels genuinely tell artists apart.** Of the hundred-odd artists similar to any
+  given artist, some share far more genre labels with them than others. Had they all looked
+  alike, the idea would have been dead on the spot.
+- **And this is the one that mattered most: the labels are not just repeating what we
+  already know.** The worry was that artists who are similar automatically share genres, in
+  which case genre labels add nothing at all. Measured, the overlap between the two is weak,
+  and for the overwhelming majority of artists the genre ordering is genuinely different from
+  the similarity ordering. There is real room for this to change something.
+
+**What it does not mean.** Nothing has been decided, built, or adopted, and **none of this
+says the journeys would sound better** — no offline number can say that, which is why this
+idea ends at a listening test or nowhere. The next step measures whether it would actually
+change which artists get connected, and after that, whether journeys change at all.
+
+**One correction we made to our own rules before running anything.** The bar we had written
+down for "this changes nothing worth caring about" turned out to be far too loose — it would
+have let through a change affecting about one connection in twelve across the whole map, and
+roughly one journey in three. You set the replacement bar. The old wording is kept in the
+document, marked as wrong, rather than quietly deleted.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+*Detail: `docs/superpowers/2026-07-30-tag-discrimination-execution-log.md`.*
+
+---
+
+## N/A — 2026-07-30 (night) — we asked whether genre labels could judge journey flow; the answer was no, and we stopped
+<!-- "(latest)" stripped 2026-07-30 (late night): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running** — ports 8000 and 5173 were checked and are
 empty, and nothing from this work survives it. No routing, no graph, no weighting, no cost

@@ -12,18 +12,37 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-30, on the coherence tag probe closeout.**
+**Last updated: 2026-07-30, on the tag discrimination probe closeout (Tasks 1–3 of 8).**
 
 ---
 
 ## Next
 
-> ## TRACK B, the FAME-PROXY COVERAGE probes, and the COHERENCE TAG PROBE are all COMPLETE. **The next action is the owner's; the two open questions below are unchanged.**
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE and PART-RUN — Tasks 1–3 of 8 done, both gates PASSED, Tasks 4–8 unrun. **A fresh session continues it at Task 4, by the owner's instruction.**
 >
 > Entry point is the current handoff:
-> [`2026-07-30-HANDOFF-coherence-tag-probe.md`](2026-07-30-HANDOFF-coherence-tag-probe.md),
-> which supersedes the fame-proxy-coverage one **on next actions only** — that record,
-> and Track B's, are untouched and remain accurate.
+> [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
+> Governing document is the pre-registration
+> [`specs/2026-07-30-tag-discrimination-probe-preregistration.md`](specs/2026-07-30-tag-discrimination-probe-preregistration.md)
+> (`TAS-`), which **wins wherever the plan disagrees**. **Read its §8 first:** `TAS-AM1`
+> withdraws `TAS-4`'s original bar as **false** and `TAS-AM2` fixes the substrate per
+> criterion.
+>
+> **The owner picked up the third coherence strand on 2026-07-30** — tag-aware neighbour
+> selection, parked below until then. The probe tests the assumption both candidate
+> architectures share: whether genre agreement discriminates between the candidates an
+> artist already has, or merely restates the similarity score. **Nothing adopted, no
+> criterion fixed, no weight, default or currency changed, no rebuild, and no blind listen
+> spent.** Two owner decisions taken and recorded: the goal is **coherence, not obscurity**,
+> and `TAS-4`'s materiality bar is **1% edge turnover**.
+>
+> **The architecture question — build-time selection vs router-side pricing — is
+> deliberately still OPEN**, and the probe exists to inform it. The retiring session's
+> position, argued in the handoff: run Task 4 next, unchanged.
+>
+> The coherence tag probe, Track B and the fame-proxy probes are **COMPLETE and their
+> records are untouched and remain accurate**; the coherence-tag-probe handoff is superseded
+> **on next actions only**.
 >
 > **Coherence tag probe** (branch `coherence-tag-probe`) — a one-day falsification
 > probe of the §7 coherence thread, owner-directed. **Its kill gate fired: tag/genre
@@ -80,6 +99,16 @@ read measured where it can and cannot be moved; the results note owns that readi
   **reopening of the instrument line on a route-population gate** (`COH-3`'s 74.2%
   on delivered interiors is the recorded argument; a reopening is a new
   pre-registration designed cold, never a re-read of the fired gate).
+  **⚠ The third strand is NO LONGER PARKED — the owner picked it up 2026-07-30 and it is
+  the live work; see "Next" above.** Its caveats below were all carried into the
+  pre-registration rather than lost: the reordering limit is stated in `TAS-4`'s bound, the
+  self-audit circularity is why the track has no offline scoreboard and ends at a blind
+  listen, and the Track-B-shaped cost is why `TAS-` measures before proposing a rebuild.
+  **One caveat was measured and turned out to understate the case:** the strand assumed
+  selection "reorders candidate lists", which is true — but `TD-2` measured that reordering
+  converts to roughly twice as much map change as per-artist counting suggests, because
+  every swap also *creates* a connection. Retained below as written.
+  *(Original text, superseded on status only:)*
   **A third strand, owner-raised 2026-07-30 after the probe and explicitly flagged
   worth a future session: tag-aware neighbour SELECTION at build time, at the top of
   the graph.** The probe's kill was about *scoring paths*; selection lives where
@@ -191,12 +220,15 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **When, and only when, a currency decision is made.** Its current sentence ("blind in the modern-obscure tail") is *true*, so adding `FPC-3`/`FPC-9`'s extent is growth in the owner's own requirements layer, not a correction. Raised by the doc-auditor 2026-07-30 and deliberately not actioned. |
 | **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **If a currency decision adopts the MBID-keyed proxy.** ~33k pageview requests, ~3–4 h, resumable. The `--validate` path already answered the decision-relevant question; the build is only needed once something scores against it. |
 | ✅ **MusicBrainz tag/genre coverage as a coherence instrument** | **DISCHARGED 2026-07-30** — the coherence tag probe ran exactly this check and its kill gate fired (`COH-2`, vocabulary-robust per `COH-6`); the retrodiction stayed unrun. Struck, kept for the record. |
+| **Adding `analysis` to builder's `testpaths`** | **Deferred by the owner 2026-07-30.** All 34 analysis tests pass, so it would work cleanly, but it changes what every builder `pytest` run collects. **Revisit if any `TAS-` test needs to gate a merge, or at the closeout that retires the `TAS-` probe.** Until then `TAS-` tests run only when invoked explicitly. |
+| **Replacing mutual k-NN with a tag-based degree limiter** | **Owner-raised 2026-07-30, ruled SEPARATE and explicitly NOT ruled out.** Needs its own pre-registration designed cold; mixing it with `TAS-` would make every attribution ambiguous. Track B's `R1a` corroborates the premise — reciprocity in isolation at k = 100 was null on both archives. **Condition: if the owner triggers it**, as with every other cap-adjacent decision. |
+| **`TAS-4`/`TAS-5` results are not believable until the red instrument check runs** | **Before any `TAS-` finding is written.** Task 7 carries the randomised-label check; a harness that has only ever come back green is not evidence. Not a deferral of work so much as an ordering constraint that must not be lost between sessions. |
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
 | **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |
 | **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
 | **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**; reopen if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |
-| **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. Track B's harness complied throughout (`ReadOnlyArchive`). |
+| **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. Track B's harness complied throughout (`ReadOnlyArchive`). **Condition fired again 2026-07-30** — the `TAS-`/`TD-` capture reads the archive through the same Track B helper and therefore through `ReadOnlyArchive`; complied, verified at closeout. **Stays open**: it is a standing condition on future harnesses, not a one-off to discharge. |
 | **`ALG-B` edge quality / blind listen** | **If the owner picks up the re-crawl** (`REQ-38`). |
 | **`TB-P5H-7`** | **If any successor bypass-device or router-pricing pre-registration is written.** |
 | **The candidate-pool recompute** | **If the owner picks up the parked candidate decision.** |

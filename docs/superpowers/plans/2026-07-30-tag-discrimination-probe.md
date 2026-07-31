@@ -1,5 +1,11 @@
 # Tag Discrimination Probe (TAS-) Implementation Plan
 
+**Role: ACTIVE — Tasks 1–3 executed 2026-07-30 and their checkboxes are annotated in
+place; Tasks 4–8 are unrun.** Governing document is the pre-registration beside it
+(`specs/2026-07-30-tag-discrimination-probe-preregistration.md`), which **wins wherever
+this plan disagrees** — its §8 amendments have already overtaken this plan's Task 4 once.
+Status and next action are `NEXT.md`'s, not this document's.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Measure whether genre-label agreement discriminates between the candidates an artist already has, so the choice between build-time selection and router-side pricing can be made on numbers rather than intuition.
@@ -731,11 +737,11 @@ def simulate_top_k(
     reproduces the production ordering bit for bit.
     """
     own_set = labels.get(own, set())
-    resolved = [
-        a for dst in strengths
-        if (a := agreement(own_set, labels.get(dst, set()))) is not None
-    ]
-    neutral = statistics.median(resolved) if len(resolved) >= 2 else 0.15
+    # neutral_for, NOT a local reimplementation. tas_common exists so the
+    # neutral rule has exactly ONE resolution path; an inline median with a
+    # hardcoded fallback here would be a second, free to drift from it, and
+    # the rule is the pre-registration's one dormant term.
+    neutral = neutral_for(own_set, [labels.get(dst, set()) for dst in strengths])
     ranked = sorted(
         strengths,
         key=lambda dst: (
@@ -1052,7 +1058,6 @@ def find_path_coh(store, source, target, cfg, labels, w_coh):
     dist = {source: 0.0}
     prev: dict[int, int] = {}
     pq: list[tuple[float, int]] = [(0.0, source)]
-    neutral = 0.15
     while pq:
         d, u = heapq.heappop(pq)
         if u == target:
@@ -1061,7 +1066,13 @@ def find_path_coh(store, source, target, cfg, labels, w_coh):
             continue
         pop_raw_u = float(store.pop_raw[u])
         u_set = labels.get(store.mbids[u], set())
-        for v, sim in store.neighbours_of(u):
+        # Per-artist neutral, via the ONE resolution path -- not a hardcoded
+        # constant. An earlier draft inlined 0.15 here, which would have made
+        # the routing arm use a different neutral rule from the selection arm
+        # while both documents claimed they shared one.
+        neighbours = list(store.neighbours_of(u))
+        neutral = neutral_for(u_set, [labels.get(store.mbids[v], set()) for v, _ in neighbours])
+        for v, sim in neighbours:
             pop_raw_v = float(store.pop_raw[v])
             a = resolved_agreement(u_set, labels.get(store.mbids[v], set()), neutral)
             cost = (
