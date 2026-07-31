@@ -555,3 +555,65 @@ ranking path and the `w_coh` grid in place of λ.
 **Nothing else moves.** No criterion, bar, weight, default, currency or substrate changes.
 `TAS-6`'s adverse selection-side verdict is untouched and still bars an adoption recommendation
 per §5. `TAS-4`'s figures are unchanged; what changes is whether they are believable.
+
+### `TAS-AM4` — evaluating the `REL-` enriched frame as a CANDIDATE for §1's vocabulary
+
+**⚠ APPENDED AFTER RESULTS EXIST**, like `TAS-AM3` and unlike `TAS-AM1`/`TAS-AM2`. What
+existed when this was written: all of `TAS-1`…`TAS-4`, `TAS-6`'s selection half (**adverse**),
+`TAS-AM3a`/`b`, and the complete `REL-` record including its headline coverage figures and
+`REL-3`'s fidelity median. **Assume it could have been fitted to those.** Every read below is
+fixed before the evaluation runs, and — deliberately — **`TAS-2`'s bars are reused unchanged
+rather than new ones being invented**, which is the main thing keeping this honest.
+
+#### What this amendment does and does not do
+
+**It does NOT change §1's vocabulary.** §1 stays pinned to the `COH-2` union genre, and every
+committed `TAS-` figure stands on it. This amendment authorises **measuring a candidate frame
+beside the committed one** and fixes how that comparison is read. Adopting the candidate would
+be a further amendment and, per `NEXT.md`, the owner's trigger.
+
+#### Why it is worth measuring at all, and why the answer is not obvious
+
+`TAS-6` went adverse because unlabelled candidates — disproportionately obscure — are squeezed
+out at the cap boundary. `REL-` more than doubles lower-half coverage, which attacks that cause
+directly. **But `REL-3` measured the recovered labels at a modest median overlap with truth:
+they land in the right region rather than recovering an artist's genres.**
+
+**That matters more here than it does for a coverage instrument, and the reason is specific.**
+`TAS-`'s agreement is *itself* a Jaccard, computed **between two artists**. If both sides are
+derived, the errors compound, and the direction of the bias is unknown in advance: if derived
+labels drift toward broad common genres, unrelated artists start to look alike and the signal
+**flattens**; if the errors are independent, agreement is **attenuated** toward zero. Both
+degrade discrimination, which is this probe's entire premise. **So a frame can raise coverage
+and destroy the signal at the same time**, and that is exactly what this evaluation checks
+before anything expensive is run.
+
+#### The candidate frames
+
+- **`W0`** — the committed §1 frame. The isolating baseline.
+- **`W1`** — `W0` ∪ `REL-`'s `F1` (MusicBrainz release-group genres, strict attributability).
+- **`W6`** — `W1` ∪ Discogs genre ∪ Discogs style, i.e. `REL-`'s full `F6` added to `W0`.
+
+One knob between `W0` and `W1` (a source), one between `W1` and `W6` (a second source).
+Substrate is the **pre-cap capture**, per `TAS-AM2`, because `TAS-2`/`TAS-3` are selection-side.
+
+#### Reads, fixed here before it runs
+
+1. **`TAS-2`'s existing bars apply unchanged to every candidate frame.** A candidate whose
+   median within-list IQR falls below the **0.02** kill is **dead for `TAS-`** and no coverage
+   figure rescues it. Below the **0.10** weak-signal flag it carries that flag, exactly as the
+   committed frame would have.
+2. **A material fall in `TAS-2` spread relative to `W0`, even while clearing the bar, is
+   reported as the headline** — not buried under the coverage gain. Stating this now because
+   the coverage number is the attractive one and will be the tempting lead.
+3. **`TAS-3` stays diagnostic and carries no bar** — unchanged from §2, and no threshold is
+   invented for it here. Its rank correlation and already-ordered share are reported for every
+   frame. A rise in either means the enriched signal is *more* redundant with similarity, which
+   is the flattening failure above showing up in a second place.
+4. **The share of candidate slots where the rule ACTS** (both ends labelled) is reported per
+   frame. This is descriptive and has no bar. It is the quantity that would drive any `TAS-6`
+   improvement, so it is what makes a re-run worth its cost — or not.
+5. **Nothing here licenses a `TAS-4` or `TAS-6` re-run, an adoption, or a rebuild.** If every
+   read is favourable the outcome is a *recommendation to the owner*, not an enactment.
+   **`TAS-6`'s adverse verdict on the committed frame stands regardless of what this shows** —
+   it is not retroactively softened by a better frame existing.
