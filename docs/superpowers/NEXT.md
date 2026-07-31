@@ -12,13 +12,13 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-30, at the tag discrimination probe's stop point (Tasks 1–4 of 8, plus Task 7's two selection-side checks).**
+**Last updated: 2026-07-31, after `TAS-AM3` resolved the instrument question (Tasks 1–4 of 8, plus Task 7's selection-side halves).**
 
 ---
 
 ## Next
 
-> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE and BLOCKED — Tasks 1–4 of 8 done plus both selection-side checks from Task 7. **`TAS-6` came back ADVERSE and the RED instrument check did not fire. Tasks 5–8 are NOT started, and the next action is `TAS-AM3`, not Task 5.**
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE — Tasks 1–4 of 8, plus Task 7's selection-side halves and `TAS-AM3`. **`TAS-6` is ADVERSE, which bars adopting the BUILD-TIME architecture. The instrument question is resolved and `TAS-4` is believable. Tasks 5–8 unrun; the next action is the OWNER'S — see below.**
 >
 > Entry point is the current handoff:
 > [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
@@ -53,17 +53,24 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > `tas_guard.json` before judging materiality, and note that **no bar may be revisited now
 > that a result exists**.
 >
-> **2. The RED instrument check DID NOT FIRE**, so **`TAS-4`'s result is still not
-> believable**. Measured: shuffling labels does not randomise genre overlap, it destroys it,
-> so a Jaccard-overlap device cannot produce large turnover on a shuffled frame *by
-> construction*. The evidence says the **check** is mis-specified, not the harness — but that
-> is this session's reading, and §10.2 states what would falsify it.
+> **2. ✅ The red check is RESOLVED — `TAS-4`'s figures ARE believable.** The original check
+> was **withdrawn as unachievable** by **`TAS-AM3`** (§8): a Jaccard-overlap device cannot
+> produce large change on a randomised label frame, because randomising labels destroys
+> overlap rather than randomising it. Its replacement, **`TAS-AM3a`**, passes at every λ —
+> the ranking path is **bit-identical** to `td_turnover`'s verified one and reproduces the
+> committed `TD-2` figures to five decimals. **Discharged for the SELECTION side only; the
+> routing side still owes its own**, and `TAS-AM3` specifies it.
 >
-> **The plan's own branch here says STOP, and the session stopped. Tasks 5–8 are NOT
-> started.** What is owed first is **`TAS-AM3`**: a replacement control preserving agreement
-> strength while destroying which candidate carries it. **It must be committed before it
-> runs** — designing a control after seeing a result is exactly when the timestamp matters.
-> It is not written yet.
+> **`TAS-AM3b`'s null control corrected the withdrawn check, against tags** — holding fixed
+> which artists are labelled roughly doubles the null, so the withdrawn version had
+> overstated how much of `TAS-4`'s turnover came from genre structure. Attribution is still
+> not unsafe. **Read `TAS-AM3b`'s clause before quoting the ratio: below the threshold it is
+> reported and nothing more, and no claim about tags is licensed by it.**
+>
+> **`TAS-AM3` is the first amendment appended AFTER results existed** — it says so at its
+> head and names the hazard. Read that disclosure before relying on it.
+>
+> **Tasks 5–8 are still NOT started.** Execution log §11.
 >
 > The coherence tag probe, Track B and the fame-proxy probes are **COMPLETE and their
 > records are untouched and remain accurate**; the coherence-tag-probe handoff is superseded
@@ -247,7 +254,8 @@ read measured where it can and cannot be moved; the results note owns that readi
 | ✅ **MusicBrainz tag/genre coverage as a coherence instrument** | **DISCHARGED 2026-07-30** — the coherence tag probe ran exactly this check and its kill gate fired (`COH-2`, vocabulary-robust per `COH-6`); the retrodiction stayed unrun. Struck, kept for the record. |
 | **Adding `analysis` to builder's `testpaths`** | **Deferred by the owner 2026-07-30.** Every analysis test passes, so it would work cleanly, but it changes what every builder `pytest` run collects. **Revisit if any `TAS-` test needs to gate a merge, or at the closeout that retires the `TAS-` probe.** Until then `TAS-` tests run only when invoked explicitly. *(This row carried a count of "34" until 2026-07-30; it was stale, and the count is not this document's to own — read it off `pytest analysis/ -q`.)* |
 | **Replacing mutual k-NN with a tag-based degree limiter** | **Owner-raised 2026-07-30, ruled SEPARATE and explicitly NOT ruled out.** Needs its own pre-registration designed cold; mixing it with `TAS-` would make every attribution ambiguous. Track B's `R1a` corroborates the premise — reciprocity in isolation at k = 100 was null on both archives. **Condition: if the owner triggers it**, as with every other cap-adjacent decision. |
-| **`TAS-4`/`TAS-5` results are not believable until the red instrument check runs** | **Before any `TAS-` finding is written.** Task 7 carries the randomised-label check; a harness that has only ever come back green is not evidence. Not a deferral of work so much as an ordering constraint that must not be lost between sessions. **⚠ Now guards a result that EXISTS rather than a hypothetical one — `TAS-4` ran 2026-07-30.** |
+| ✅ **`TAS-4` is not believable until the red instrument check runs** | **DISCHARGED 2026-07-31 for the SELECTION side** — the original check was withdrawn as unachievable (`TAS-AM3`) and its replacement `TAS-AM3a` passed at every λ. Struck, kept for the record. |
+| **`TAS-5` is not believable until the ROUTING-side red check runs** | **Before any `TAS-` finding is written.** `TAS-AM3` specifies it as `TAS-AM3a`/`b` with `find_path_coh` in place of the ranking path. Still owed; the routing harness does not exist yet. |
 | **Tag-aware selection increases the map's total edge count** | **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. `w_degree_hub` is dormant *because of the current graph's top-degree set*, and the pre-registration's held-constant row saying so is **scoped to this probe, which rebuilds nothing — it does not transfer to a rebuild.** Execution log §9.4/§9.5. |
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |

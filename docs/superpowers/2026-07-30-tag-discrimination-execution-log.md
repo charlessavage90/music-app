@@ -408,3 +408,125 @@ seeing a result, which is precisely when that evidence matters most. Not written
 
 **This is also a seam.** A material mid-flight amendment means the next session has a new
 governing document and should read it cold.
+
+---
+
+## §11 `TAS-AM3` written, committed, and run
+
+Written after §10's stop, committed **before** it ran (`ffc1029`), then run. The amendment
+itself discloses that it is the first one appended *after* results existed and names the
+hazard that creates. Figures in `tas_guard.json`.
+
+### §11.1 `TAS-AM3a` passes on both conditions, at every λ
+
+*Plain: prove the measuring device can register a big change, by giving it a big change we
+already know the answer to.*
+
+The selection masks are **bit-identical** to `td_turnover.mask_multiplicative`, and turnover
+reproduces the committed `TD-2` `MULT-SYM` figures **to five decimals at every λ**.
+
+Two things follow, and the second is what the withdrawn check was reaching for. The new
+ranking path **is** the already-verified one rather than resembling it — a stronger claim than
+the original check could have made. And the harness demonstrably reports very large turnover
+when a large signal exists, shown against a **fixed external reference** rather than a
+threshold a session picked, which is exactly the weakness that made the withdrawn check's
+non-firing ambiguous.
+
+**The red check is DISCHARGED for the selection side, and `TAS-4`'s figures are believable.**
+The routing side still owes its own; `TAS-AM3` specifies the same pair for it.
+
+### §11.2 `TAS-AM3b` corrected the withdrawn check's reading, against tags
+
+*Plain: check that the change we measured comes from genres sitting where they actually sit,
+rather than from any label-shaped nudge at all.*
+
+The ratio of null turnover to real turnover sits just under a quarter and is strikingly flat
+across the whole λ grid — below the 0.50 line fixed in the amendment before the control ran,
+so attribution is not unsafe.
+
+**But the withdrawn shuffle had implied a ratio less than half that size.** Holding fixed
+*which* artists are labelled — the one knob the naive version also moved — roughly doubles the
+null. The naive shuffle halved the number of pairs where the device acts, which suppressed the
+null and **overstated how much of `TAS-4`'s turnover was attributable to genre structure.**
+
+**The correction runs against the idea, not for it**, and it is the second time in this probe
+that a check has moved a number in the unflattering direction (the first was `TAS-AM1`). It is
+also the direct answer to the owner's stated reason for doing this work — that it might catch
+another error. It did.
+
+Per `TAS-AM3b`'s pre-registered read, below the threshold the ratio is **reported and nothing
+more**: no claim about tags is licensed by this control, and reading it as one would need its
+own pre-registration designed cold.
+
+### §11.3 What is retained rather than deleted, and why
+
+`randomised_labels` stays runnable and its output stays in `tas_guard.json` under
+`withdrawn_naive_shuffle` with its reason. `TAS-AM3` cites that figure as the evidence that the
+direction was known **before** the amendment was written, so deleting the function that
+produced it would break the only check a reader has on the amendment's own good faith.
+
+---
+
+## §12 Owner input during this session, recorded because it does not survive in the diff
+
+### §12.1 An architecture instinct, explicitly **NOT** a directive
+
+The owner stated, and labelled as instinct rather than fact or instruction, that **the routing
+side looks like the better home for genre discrimination** — and that if genres are to
+influence the graph side, it only makes sense **as part of addressing mutual k-NN**.
+
+**Recorded so a later session does not mistake it for a ruling.** He asked to be challenged,
+and was. The challenge, and what survived it:
+
+- **Against the routing half of his instinct:** this router has shrugged off **three
+  consecutive** pricing changes (Track 2's repricing family, Track 3b's toll, Track B's `R2`
+  quota edges present-and-declined). The selection side has just demonstrated it can move
+  16–40% of the map. His instinct favours the architecture with the worse record here.
+- **For it, on better grounds than he gave:** all three of those changes **re-priced
+  quantities the router already had**. `TAS-3` measured genre agreement as only weakly related
+  to similarity, so it is new information rather than a re-pricing of old. The three nulls may
+  not transfer. Held loosely — "this time is different" is always available — and `TAS-5` is
+  what would settle it.
+- **His second instinct has mechanical support and is the stronger one.** Tag-aware selection
+  raises density *by raising mutuality*, so the genre signal acts directly on the mechanism
+  mutual k-NN implements; and `TAS-6`'s adverse result looks like a mutuality artifact, since
+  famous→obscure links die at a boundary that must be cleared at both ends while the obscure
+  end is usually unlabelled. Track B's `R1a` already found reciprocity at k = 100 doing
+  nothing measurable.
+- **Refinement offered:** §7 rules those two **separate** because mixing a ranking change with
+  a structural one makes every attribution ambiguous. The defensible form is **sequence, not
+  combine** — settle mutual k-NN, then re-ask the genre question against whatever replaces it.
+
+He also directed that `TAS-AM3` be done regardless, on the grounds that it was cheap and might
+catch something. **It did** — see §11.2, and the correction ran against the idea.
+
+### §12.2 A parallel investigation into richer tag sources — read-only, another session
+
+The owner is having a second session investigate **Discogs** and **MusicBrainz release tags**,
+aggregated across an artist's releases, as potentially richer sources than the frame this probe
+uses. Explicitly nothing to act on here. Four things that bear on it, recorded so this session's
+knowledge reaches it:
+
+1. **The vocabulary is pinned by §1 and a change is a §8 amendment, not an improvement.**
+   Swapping the frame breaks comparability with the `COH-` coverage figures, which is the
+   reason §1 fixed it in the first place.
+2. **The decision-relevant question is narrower than "are there more tags".** It is
+   **specifically whether coverage rises in the OBSCURE TAIL** — `TAS-6`'s adverse result is
+   driven by unlabelled candidates, which are disproportionately obscure, being squeezed out.
+   A richer frame that only thickens labels on artists who already had them changes nothing
+   here. One that lifts the bottom half could plausibly flip `TAS-6`.
+3. **`COH-6` is the closest prior result and should be read before spending.** It measured the
+   widest-vocabulary variant as near-identical *in the tail*, which is prior evidence that
+   widening the vocabulary does not help where it matters. It does **not** settle the question
+   — release tags aggregated over a discography are genuinely different from artist-level wide
+   tags — but it is the relevant base rate. `COH-5` separately measured ListenBrainz as a
+   99.9%-faithful transport for MusicBrainz *genres*, so MB genres are already in hand.
+4. **Discogs is a genuinely independent source**, unlike anything in the current frame, and so
+   does not inherit MusicBrainz's blind spot. It carries the **population-mismatch** trap
+   instead — the one that killed every external popularity source — plus a Discogs-ID ↔ MBID
+   mapping problem whose coverage must be measured before any tag figure derived through it
+   means anything.
+
+**Practical note for that session:** the adopted artifact and the archive are **gitignored**,
+so they do not appear in a `git worktree`. Any coverage measurement against the real population
+must point at `builder/scratch/` in the main tree explicitly.
