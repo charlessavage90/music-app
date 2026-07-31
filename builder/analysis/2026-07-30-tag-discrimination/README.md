@@ -139,5 +139,32 @@ so the two cannot drift apart again.
 Union genre = LB genre-whitelisted tags ∪ Wikidata P136, both through the **frozen**
 `ct_common.norm_genre`. Same vocabulary as the `COH-` coverage figures, so `TAS-1` is
 comparable with them. **Not** the widest tag union (`COH-6` measured that as
-near-identical in the tail). `fp_wikidata.json` is already on disk from the `FPC-` work,
-so only the LB half needs collecting (~47 min).
+near-identical in the tail).
+
+> **⚠ Correction to an earlier line in this file, and to the implementation plan.** Both
+> said the P136 half was already on disk and only the LB half needed collecting. **That is
+> wrong.** `fp_wikidata.json` holds *item* presence (`qid`, `wikis`, `enwiki`) and no
+> genres at all; `ct_wikidata_genres.json` holds genre **counts** (`{"genres": 10}`), not
+> labels, because `COH-1` only ever needed presence. **The P136 labels were never
+> persisted and are not recoverable from either output.** `tas_wikidata.py` collects them,
+> and `ct_wikidata_genres.py` is left frozen rather than edited to serve a later question.
+> Verified by inspecting both files rather than trusting the plan.
+
+**The union genre is a LATIN-SCRIPT vocabulary, and that is not a choice made here.**
+`norm_genre` ASCII-folds, so a label with no Latin characters normalises to the empty
+string and is dropped: `パンク` → `''`, `한국` → `''`. An artist whose only genres are
+non-Latin therefore reads as **unlabelled** and takes the neutral value rather than
+scoring zero agreement — correct, since overlap across disjoint vocabularies is not
+computable, but it means `TAS-1`'s coverage must be read as Latin-script coverage.
+Diacritics fold rather than vanish (`Música popular brasileira` survives), so it is a
+script limit, not a language limit. `COH-2`'s figures share the property, so the two
+records stay comparable. Pinned by
+`test_non_latin_only_artists_read_as_UNLABELLED_and_that_is_recorded`.
+
+## Deferred, with a condition
+
+**Adding `analysis` to `testpaths`** — deferred by the owner 2026-07-30. All 34 analysis
+tests pass today, so it would work cleanly, but it changes what every `pytest` run in the
+builder package collects. **Condition: revisit if any `TAS-` test ever needs to gate a
+merge, or at the closeout that retires this probe** — whichever comes first. Until then
+the explicit command above is the only thing running these tests.
