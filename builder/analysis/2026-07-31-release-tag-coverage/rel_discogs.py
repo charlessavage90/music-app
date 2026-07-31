@@ -62,13 +62,22 @@ def _labels(release: ET.Element, container: str) -> list[str]:
     return sorted(label for label in out if label)
 
 
-def collect(wanted: set[str]) -> dict[str, list[dict]]:
-    """One streaming pass over the 61.6 GB XML.
+def collect(wanted: set[str]) -> dict[str, dict]:
+    """One streaming pass over the 61.6 GB XML, accumulating UNIONS in place.
 
-    iterparse with element clearing -- the file is one enormous <releases>
-    root and holding parsed children would exhaust memory long before the end.
+    THE FIRST VERSION STORED ONE DICT PER (artist, release) AND WAS KILLED BY
+    THE OS at ~13M of ~20M releases, having accumulated ~5M records. Nothing
+    downstream ever needed that granularity: REL-C2's shuffle operates on
+    RELEASE GROUPS, not on Discogs releases, so per-release detail here was
+    pure cost. Folding each release into the artist's running union bounds
+    memory at 74k artists x a few small sets.
+
+    Counts are kept because REL-2's ceiling needs "has >= 1 attributable
+    release", and n_all - n_attr is what the filter costs on the Discogs side.
     """
-    per_artist: dict[str, list[dict]] = defaultdict(list)
+    per_artist: dict[str, dict] = defaultdict(
+        lambda: {"g": set(), "s": set(), "n_attr": 0, "n_all": 0}
+    )
     began = time.time()
     seen = kept = 0
     # `elem.clear()` alone is NOT enough: the emptied <release> shells stay
@@ -91,22 +100,30 @@ def collect(wanted: set[str]) -> dict[str, list[dict]]:
         # Producer / Written-By / Mastered By / Lacquer Cut By.
         mine = [i for i in ids if i in wanted]
         if mine:
-            record = {
-                "g": _labels(elem, "genres"),
-                "s": _labels(elem, "styles"),
-                "a": discogs_is_attributable(ids),
-            }
+            attributable = discogs_is_attributable(ids)
+            genres = _labels(elem, "genres") if attributable else ()
+            styles = _labels(elem, "styles") if attributable else ()
             for artist_id in mine:
-                per_artist[artist_id].append(record)
+                bucket = per_artist[artist_id]
+                bucket["n_all"] += 1
+                if attributable:
+                    bucket["n_attr"] += 1
+                    bucket["g"].update(genres)
+                    bucket["s"].update(styles)
                 kept += 1
         elem.clear()
         root.clear()
         if seen % 1_000_000 == 0:
             mins = (time.time() - began) / 60
-            print(f"  {seen:,} releases, {kept:,} kept ({mins:.1f} min)", flush=True)
+            print(f"  {seen:,} releases, {kept:,} kept, "
+                  f"{len(per_artist):,} artists ({mins:.1f} min)", flush=True)
     print(f"  pass done: {seen:,} releases in "
           f"{(time.time() - began) / 60:.1f} min, {kept:,} kept", flush=True)
-    return dict(per_artist)
+    return {
+        k: {"g": sorted(v["g"]), "s": sorted(v["s"]),
+            "n_attr": v["n_attr"], "n_all": v["n_all"]}
+        for k, v in per_artist.items()
+    }
 
 
 def main() -> None:
@@ -123,20 +140,17 @@ def main() -> None:
     per_discogs = collect(set(mbid_to_discogs.values()))
     OUT_RAW.write_text(json.dumps(per_discogs), encoding="utf-8")
 
-    def sets_for(field: str, *, strict: bool) -> dict[str, set[str]]:
+    def sets_for(field: str) -> dict[str, set[str]]:
+        """Collector already applied the strict filter -- see collect()."""
         out: dict[str, set[str]] = {}
         for mbid in mbids:
             discogs_id = mbid_to_discogs.get(mbid)
-            labels: set[str] = set()
-            for rel in per_discogs.get(discogs_id, ()) if discogs_id else ():
-                if strict and not rel["a"]:
-                    continue
-                labels |= set(rel[field])
-            out[mbid] = labels
+            bucket = per_discogs.get(discogs_id) if discogs_id else None
+            out[mbid] = set(bucket[field]) if bucket else set()
         return out
 
-    f4 = sets_for("g", strict=True)
-    f5 = sets_for("s", strict=True)
+    f4 = sets_for("g")
+    f5 = sets_for("s")
 
     # --- REL-2: the full ceiling, both halves and their product
     print(f"\n{'band':>12} {'unlab':>7} {'has id':>8} {'id+releases':>12} {'product':>8}")
@@ -150,7 +164,7 @@ def main() -> None:
         has_rel = [
             m
             for m in has_id
-            if any(r["a"] for r in per_discogs.get(mbid_to_discogs[m], ()))
+            if (per_discogs.get(mbid_to_discogs[m]) or {}).get("n_attr", 0) > 0
         ]
         rel2[b] = {
             "unlabelled": len(unlab),
