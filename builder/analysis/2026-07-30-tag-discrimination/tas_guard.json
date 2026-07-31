@@ -1,0 +1,61 @@
+{
+ "substrate": "pre-cap capture of the ALG-E archive (TAS-AM2, selection side). Routing halves of TAS-6 and the red check remain Task 7's. Never compare these figures with TAS-1 or TAS-5.",
+ "tas6_selection_half": {
+  "definition": "one end in the top 1% by fame percentile, the other in the lower half, over the FIXED adopted frame",
+  "adverse_threshold": 0.1,
+  "baseline": {
+   "edges": 448828,
+   "famous_to_obscure": 93,
+   "touching_sub_decile": 10017
+  },
+  "per_lambda": {
+   "0.25": {
+    "edges": 474088,
+    "turnover_share": 0.16429,
+    "famous_to_obscure": 87,
+    "famous_to_obscure_change": -0.06452,
+    "adverse": false,
+    "touching_sub_decile": 9790
+   },
+   "0.5": {
+    "edges": 487149,
+    "turnover_share": 0.25463,
+    "famous_to_obscure": 85,
+    "famous_to_obscure_change": -0.08602,
+    "adverse": false,
+    "touching_sub_decile": 9742
+   },
+   "1.0": {
+    "edges": 496631,
+    "turnover_share": 0.34004,
+    "famous_to_obscure": 83,
+    "famous_to_obscure_change": -0.10753,
+    "adverse": true,
+    "touching_sub_decile": 9683
+   },
+   "2.0": {
+    "edges": 501508,
+    "turnover_share": 0.40379,
+    "famous_to_obscure": 79,
+    "famous_to_obscure_change": -0.15054,
+    "adverse": true,
+    "touching_sub_decile": 9658
+   }
+  },
+  "adverse_at_any_lambda": true
+ },
+ "red_check": {
+  "seed": 20260730,
+  "artists_whose_labels_moved": 58760,
+  "liveness_threshold_turnover": 0.05,
+  "liveness_threshold_is_pre_registered": false,
+  "per_lambda_turnover": {
+   "0.25": 0.01651,
+   "0.5": 0.0266,
+   "1.0": 0.03624,
+   "2.0": 0.04174
+  },
+  "fired": false,
+  "note": "The real-vs-shuffled gap is an INSTRUMENT reading, not a pre-registered criterion. Reading it as evidence about tags needs its own pre-registration, designed cold."
+ }
+}
