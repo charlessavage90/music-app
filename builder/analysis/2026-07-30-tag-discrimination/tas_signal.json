@@ -1,0 +1,30 @@
+{
+ "substrate_note": "TAS-1 on the adopted artifact; TAS-2/TAS-3 on the pre-cap capture (TAS-AM2). Never compare across.",
+ "labelled_nodes": 40437,
+ "tas1": {
+  "coverage_by_class": {
+   "ff": 0.9996,
+   "fo": 0.5503,
+   "oo": 0.1712
+  },
+  "edges_by_class": {
+   "ff": 5478,
+   "fo": 398510,
+   "oo": 45015
+  },
+  "coverage_all_edges": 0.5177,
+  "gate_ff": 0.8,
+  "passes": true
+ },
+ "tas2_tas3": {
+  "lists_considered": 38782,
+  "lists_excluded_too_few_labelled": 1654,
+  "median_iqr": 0.1726,
+  "mean_iqr": 0.2122,
+  "kills": false,
+  "weak_signal_flag": false,
+  "spearman_strength_vs_agreement": 0.1857,
+  "identical_order_share": 0.0307,
+  "pairs_scored": 2622389
+ }
+}

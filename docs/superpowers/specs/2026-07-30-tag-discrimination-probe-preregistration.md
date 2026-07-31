@@ -423,3 +423,35 @@ here can say whether the replacement *reads* differently. That remains the blind
 plain sentence. §4's green check is unaffected and if anything strengthened — turnover is
 derived from the same per-artist top-50 sets it validates. `TAS-6`'s `TAS-4`-side measurement
 is unit-independent and unchanged.
+
+### `TAS-AM2` — the substrate rule, stated for every criterion rather than two
+
+**Appended 2026-07-30, still before any `TAS-` criterion was measured.** `TAS-AM1` named the
+substrate for `TAS-4` and `TAS-5` and left the others implicit. Writing `TAS-2` revealed that
+the implicit answer was ambiguous, and the ambiguity is not cosmetic: **`TAS-2` asks about an
+artist's *candidates* — its own pre-cap similar-artist list of up to 100 — and the built
+artifact holds only the ≤ 50 that survived selection.** Measuring spread among survivors
+would answer a different question from the one §2 asks, on an already-similarity-selected
+population, and would bias toward a kill.
+
+**The rule, and it is one line: selection-side criteria run on the pre-cap capture;
+map-side criteria run on the adopted artifact.**
+
+| criterion | substrate | why |
+|---|---|---|
+| `TAS-1` | adopted artifact | It asks about *connections the map has*. Those exist only post-selection. |
+| `TAS-2`, `TAS-3` | pre-cap capture (`ALG-E`) | They ask about the *candidates selection chooses among*, which the artifact has already discarded. |
+| `TAS-4` | pre-cap capture (`ALG-E`) | Per `TAS-AM1`; unchanged. |
+| `TAS-5` | adopted artifact | It asks what the *app* routes today. |
+| `TAS-6` | both, each on its own side's substrate | Its two halves measure the two architectures separately and are never combined. |
+
+**The standing constraint from `TAS-AM1` widens accordingly: no read may compare a figure
+from the capture side against one from the artifact side.** They differ by 36 artists and
+193 edges (0.05% / 0.04%) — small, but a difference nobody controlled. Within either side,
+every arm-to-baseline comparison remains clean, which is what the criteria actually need.
+
+**Capture provenance.** `td_capture.py` regenerates it in ~2 minutes from the archive through
+`ReadOnlyArchive`; the `.npz` lives in scratch and is deliberately not committed (~20 MB,
+byte-deterministic from committed code). `td_turnover.py --verify` asserts the reconstruction
+reproduces `ALG-E-mutual_knn-k50.bin` edge-for-edge, so a lost or stale capture cannot pass
+silently.
