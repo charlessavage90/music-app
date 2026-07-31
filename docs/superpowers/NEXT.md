@@ -12,13 +12,13 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-30, at the tag discrimination probe's Seam A (Tasks 1–4 of 8).**
+**Last updated: 2026-07-30, at the tag discrimination probe's stop point (Tasks 1–4 of 8, plus Task 7's two selection-side checks).**
 
 ---
 
 ## Next
 
-> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE and PART-RUN — Tasks 1–4 of 8 done, all three gates so far PASSED, Tasks 5–8 unrun. **A fresh session continues it at Task 5.**
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE and BLOCKED — Tasks 1–4 of 8 done plus both selection-side checks from Task 7. **`TAS-6` came back ADVERSE and the RED instrument check did not fire. Tasks 5–8 are NOT started, and the next action is `TAS-AM3`, not Task 5.**
 >
 > Entry point is the current handoff:
 > [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
@@ -44,8 +44,26 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > does not exist yet**, and per the pre-registration's §5 a `TAS-5` result read without
 > `TAS-4` beside it — or vice versa — is uninterpretable.
 >
-> **⚠ `TAS-4`'s result is not yet believable: the randomised-label RED instrument check is
-> Task 7 and has not run.** A harness that has only ever come back green is not evidence.
+> **⚠ TWO STOP-LEVEL RESULTS, both 2026-07-30, both recorded in execution log §10.**
+>
+> **1. `TAS-6` is ADVERSE** (*"does this make the app worse at reaching unknown artists"*).
+> Famous→obscure connections fall at every λ and cross the 10% bar at the top two. Per the
+> pre-registration's §5 this **bars any recommendation to adopt, whatever `TAS-4` and `TAS-5`
+> show** — it is not outweighed by `TAS-4` having survived. Its denominator is thin; read
+> `tas_guard.json` before judging materiality, and note that **no bar may be revisited now
+> that a result exists**.
+>
+> **2. The RED instrument check DID NOT FIRE**, so **`TAS-4`'s result is still not
+> believable**. Measured: shuffling labels does not randomise genre overlap, it destroys it,
+> so a Jaccard-overlap device cannot produce large turnover on a shuffled frame *by
+> construction*. The evidence says the **check** is mis-specified, not the harness — but that
+> is this session's reading, and §10.2 states what would falsify it.
+>
+> **The plan's own branch here says STOP, and the session stopped. Tasks 5–8 are NOT
+> started.** What is owed first is **`TAS-AM3`**: a replacement control preserving agreement
+> strength while destroying which candidate carries it. **It must be committed before it
+> runs** — designing a control after seeing a result is exactly when the timestamp matters.
+> It is not written yet.
 >
 > The coherence tag probe, Track B and the fame-proxy probes are **COMPLETE and their
 > records are untouched and remain accurate**; the coherence-tag-probe handoff is superseded

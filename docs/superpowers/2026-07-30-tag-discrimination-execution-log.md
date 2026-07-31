@@ -337,3 +337,74 @@ Two things it shows, both recorded here as **reasoning**, with the numbers in
 | **Tag-aware selection increases total edge count** | **Before any rebuild pre-registration is written.** Mutual k-NN bounds each artist's own list, not the count of *mutual* pairs, so a symmetric ranking signal raises mean degree. Track B's cap work, `w_degree_hub` (dormant, and dormant *because of the current graph's top-degree set*), and `CRS-C4`'s hub cost all sit downstream of degree. A rebuild arm must measure it, and the `§0` held-constant row asserting `w_degree_hub` stays dormant is scoped to *this* probe, which rebuilds nothing — **it does not transfer to a rebuild.** |
 | **797 capture nodes carry no labels because the tag frame's population is the adopted artifact, not the capture** | **Accepted, won't chase.** They are the nodes the largest-component prune removes, they carry 18 baseline edges between them, and they are treated exactly as genuinely unlabelled artists are. A second-order effect survives — such a node can still occupy a top-50 slot in an in-component artist's candidate list — and is not measured. Reopen only if a rebuild arm's turnover needs attributing to the node. |
 | **One new Snyk Low finding: a CLI `--out` path flows into `pathlib.Path` (`tas_select.py`)** | **Recorded, not fixed, and the acceptance is the owner's to extend.** It is the same class as the four pre-existing findings in this directory's frozen `td_*` probes and the 13 already accepted under `builder/analysis/`. It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path would break the intended usage. Flagged rather than absorbed silently, because a session should not widen an accepted-risk set on its own authority. |
+
+---
+
+## §10 The two selection-side checks, brought forward from Task 7
+
+Run immediately after §9, not at Task 7. Reordering is a methodology call: the red check is
+what makes `TAS-4` believable at all, both selection-side halves need only `tas_select.py`,
+and carrying an uncertified gate result through two more tasks is the risk the deferral was
+written to prevent. **The routing halves of both remain Task 7's** — they need `tas_route.py`.
+Figures in `tas_guard.json`.
+
+### §10.1 `TAS-6` is ADVERSE — and this bars an adoption recommendation
+
+*Plain sentence, quoted from the spec: "does this make the app worse at reaching unknown
+artists — the thing you called a defect rather than a limitation?"*
+
+**It does.** Famous→obscure connections fall at **every** λ, crossing the 10% adverse bar at
+the top two. Per §5's read — "`TAS-6` adverse, anything else positive → no adoption
+recommendation, whatever else holds" — this stands regardless of `TAS-4` having survived, and
+regardless of anything `TAS-5` may later show.
+
+The mechanism is the one `TAS-6` was written to catch, and it is the **neutral rule's**, which
+is why every finding here is reported as "λ **and** the neutral rule". Unlabelled candidates
+take a per-artist median; labelled genre-matching candidates are boosted *above* that median;
+unlabelled candidates are disproportionately obscure. The neutral rule stops them being sent
+to the bottom, which was its job, but it cannot stop them being squeezed out at the margin.
+
+**The criterion's denominator is thin, and that is information rather than a defence.** The
+baseline population is small enough that the reader must see it before judging materiality —
+it is in `tas_guard.json`. **No bar is being revisited after seeing a result**, and the
+thinness cuts both ways: it is also a statement about how few direct famous→obscure
+connections this graph has at all, which is `DD-F1` measured from a new angle.
+
+### §10.2 The red check did not fire, and the check is what is wrong
+
+The pre-registered red check (§4) feeds the harness a randomised tag frame and requires large
+turnover. It did not clear the liveness line. **That line was this session's, not
+pre-registered** — §4 fixes no number — and `tas_guard.json` carries a field saying so.
+
+**Measured rather than asserted, because the alternative reading is that the harness is
+broken:** shuffling labels does not *randomise* overlap, it **destroys** it. On a 4,000-node
+sample, agreement is exactly zero on the great majority of labelled pairs under the shuffled
+frame against roughly a third under the real one, and both-ends-labelled slots more than
+halve — real labelling is correlated with having a long candidate list, and shuffling breaks
+that. A near-constant multiplier cannot reorder anything.
+
+**So a Jaccard-overlap device cannot produce large turnover on a shuffled frame by
+construction.** §4's red check was written generically and does not fit an overlap-based
+device. This is a defect in the instrument check, not in the instrument.
+
+**That claim is doing a lot of work, so here is what would falsify it** and what supports it:
+the green check passes for the shuffled frame too (λ = 0 reproduces the baseline whatever the
+field says, asserted in code); `td_turnover.py --verify` is exact; all 37 `TD-2` arms
+reproduce; and the harness demonstrably reports large turnover on the real frame. A harness
+that could not report large change would have failed the last of those.
+
+**The plan's Task 7 Step 5 says to stop on this branch, and this session stopped.** Tasks 5–8
+were not started.
+
+### §10.3 What is owed before the probe continues
+
+A replacement control that preserves agreement *strength* while destroying *which candidate
+carries it* — permuting the agreement field within each artist's candidate list is the
+obvious candidate, since it holds each artist's own distribution exactly fixed.
+
+**It is a `TAS-AM3` and it must be committed before it runs.** The git timestamp is the only
+evidence that a control's design preceded its result, and this one is being designed *after*
+seeing a result, which is precisely when that evidence matters most. Not written yet.
+
+**This is also a seam.** A material mid-flight amendment means the next session has a new
+governing document and should read it cold.
