@@ -283,10 +283,17 @@ rather than pooled.
 fifty neighbours per artist, and identical paths for every pair. A mismatch means the harness
 is wrong and nothing it produces counts.
 
-**Red:** the same harness, fed a randomised tag frame, must report large swap rates and large
-path-change rates. A measurement that has only ever come back green is not evidence yet — the
-standing rule in project memory, and the reason this is written down before the run rather
-than offered afterwards as reassurance.
+> ### ⚠ THE RED CHECK BELOW IS AMENDED BY [`TAS-AM3`](#tas-am3--the-red-check-cannot-fire-as-written-and-is-replaced-by-two) — READ IT BEFORE ACTING ON IT.
+>
+> It is **withdrawn as unachievable**, not merely mis-tuned: for an *overlap*-based device,
+> randomising labels destroys overlap rather than randomising it, so no randomised frame can
+> produce large change. Text left standing per the `TAS-AM1` precedent.
+
+~~**Red:** the same harness, fed a randomised tag frame, must report large swap rates and large
+path-change rates.~~ **← WITHDRAWN AS UNACHIEVABLE by `TAS-AM3`.** A measurement that has only
+ever come back green is not evidence yet — the standing rule in project memory, and the reason
+this is written down before the run rather than offered afterwards as reassurance. **That
+principle is unchanged and `TAS-AM3` serves it; only the mechanism is replaced.**
 
 Both checks are run and their outputs recorded whatever the arms show.
 
@@ -469,3 +476,82 @@ every arm-to-baseline comparison remains clean, which is what the criteria actua
 byte-deterministic from committed code). `td_turnover.py --verify` asserts the reconstruction
 reproduces `ALG-E-mutual_knn-k50.bin` edge-for-edge, so a lost or stale capture cannot pass
 silently.
+
+### `TAS-AM3` — the red check cannot fire as written, and is replaced by two
+
+**⚠ APPENDED AFTER RESULTS EXIST, unlike `TAS-AM1` and `TAS-AM2`.** Both of those were
+written before any `TAS-` criterion had a number. This one is not, and the disclosure matters
+more than the amendment:
+
+**What existed when this was written:** `TAS-1`, `TAS-2`, `TAS-3` (Task 3), `TAS-4`'s full λ
+grid (Task 4), `TAS-6`'s selection half (**adverse**), and the original red check's output
+(**did not fire**). **So this amendment is not blind, and a reader must assume it could have
+been fitted to those results.** The specific hazard: a null control can be chosen to produce a
+small number, which would flatter `TAS-4`. Two things bound that hazard, and neither removes
+it — **the naive shuffle's figure already existed and is committed** (`tas_guard.json`, commit
+`bc57732`), so the direction was known and is on the record before this text; and every read
+below is fixed here, before the replacement runs.
+
+#### Why the original is unachievable rather than mis-tuned
+
+The device is **Jaccard overlap**. Shuffling genre labels between artists does not give artists
+*random* genres in common — it gives them **none** in common, because real genre sets are
+specific and long-tailed. Measured on a 4,000-node sample (execution log §10.2): agreement is
+exactly zero on 92.3% of label-carrying pairs under a shuffled frame against 36.5% under the
+real one, mean 0.018 against 0.175, 90th percentile 0.000 against 0.500. A near-constant
+multiplier cannot reorder anything.
+
+**This generalises: every correct null control must report a small number here**, because
+turnover is driven by overlap and randomisation is what destroys overlap. §4 asked for
+something that cannot exist for this class of device. It was conflating two different jobs.
+
+#### `TAS-AM3a` — the liveness-and-equivalence check *(replaces the red check's stated job)*
+
+*Plain: prove the measuring device can register a big change, by giving it a big change we
+already know the answer to.*
+
+Feed the **synthetic symmetric field** from `td_turnover.uniform_field` through `tas_select`'s
+ranking path.
+
+**Passes only if both hold: (i)** the resulting selection mask is **bit-identical** to
+`td_turnover.mask_multiplicative`'s at the same λ and seed, and **(ii)** the turnover
+reproduces the committed `TD-2` `MULT-SYM` figures to five decimal places. **Any mismatch
+voids every `TAS-4` figure.**
+
+This is stronger than the original intent: it proves the new code path *is* the already-verified
+one rather than merely resembling it, and `TD-2`'s committed field is known to produce large
+turnover, so a large response is demonstrated against a fixed external reference rather than
+against a judgement call. It is deterministic and therefore a unit test, not an experiment.
+
+#### `TAS-AM3b` — the null control *(new, and NOT a gate)*
+
+*Plain: check that the change we measured comes from genres sitting where they actually sit,
+rather than from any label-shaped nudge at all.*
+
+Permute label sets **among labelled artists only** — holding fixed exactly *which* artists
+carry labels, and therefore the count of pairs where the rule acts. One knob: which labels an
+artist holds. (The naive shuffle moved sets among **all** artists and so also halved the
+both-ends-labelled pair count, a second knob; that is why it is replaced rather than reused.)
+
+**Reads, fixed here before it runs:**
+
+- **A small null turnover is the CORRECT result and is not a failure.** Stating this in advance
+  because the original check's framing makes a small number look like a fault.
+- **If the null reaches ≥ 50% of the real turnover at any λ**, then `TAS-4`'s turnover cannot
+  be attributed to genre structure, and every `TAS-4` figure must be reported carrying that
+  caveat.
+- **If the null stays below 50%**, report the ratio and nothing more. **No claim about tags is
+  licensed by this control** — it is an instrument reading, and reading it as evidence about
+  genres would need its own pre-registration designed cold. This clause exists because the
+  control is genuinely informative, which is exactly what makes over-reading it tempting.
+
+#### Scope of this amendment
+
+**`TAS-AM3a`/`b` replace the red check for BOTH architectures.** The routing side inherits the
+identical flaw — shuffled labels cannot change paths either, for the same reason — so Task 7's
+routing-side red check is replaced by the same pair, with `find_path_coh` in place of the
+ranking path and the `w_coh` grid in place of λ.
+
+**Nothing else moves.** No criterion, bar, weight, default, currency or substrate changes.
+`TAS-6`'s adverse selection-side verdict is untouched and still bars an adoption recommendation
+per §5. `TAS-4`'s figures are unchanged; what changes is whether they are believable.
