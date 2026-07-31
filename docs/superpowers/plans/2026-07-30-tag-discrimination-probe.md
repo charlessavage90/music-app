@@ -609,13 +609,21 @@ git commit -m "TAS-1/2/3: coverage by edge class, within-list spread, collineari
 
 ### Task 4: TAS-4 — would selection change? *(Seam A ends here)*
 
+> **⚠ GOVERNED BY `TAS-AM1`.** This task implements the **amended** `TAS-4`: it measures
+> **edge turnover** (deletions and creations reported separately), **not** per-artist swaps;
+> the median is retired in favour of the mean; and the kill bar is **turnover ≤ 1% at every
+> λ**. The original "median ≤ 2 swaps of 50" bar is **withdrawn as false** — `TD-2` measured
+> it as admitting ~8.4% of all connections differing. Read §8 `TAS-AM1` before writing code.
+
 **Files:**
 - Create: `builder/analysis/2026-07-30-tag-discrimination/tas_select.py`
 - Test: `builder/analysis/2026-07-30-tag-discrimination/test_tas_select.py`
 
 **Interfaces:**
-- Consumes: `tas_common.{resolved_agreement, neutral_for}`; `tas_tags.label_sets`; pipeline intermediates via the Track B capture precedent (`analysis/2026-07-30-track-b-cap-selection/cb_run_cells.py:185 _capture_pipeline`).
-- Produces: `simulate_top_k(strengths, label_sets, lam, k) -> set[str]`; writes `tas_select.json` with per-λ median swap counts and the binding-artist share.
+- Consumes: `tas_common.{resolved_agreement, neutral_for}`; `tas_tags.label_sets`; the frozen capture from `td_capture.py` (already built — do **not** re-run `_capture_pipeline`; `TD-1` froze it as int-id CSR arrays in an `.npz` and nothing downstream re-reads the archive).
+- Produces: `simulate_top_k(strengths, label_sets, lam, k, own) -> set[str]`; `edge_turnover(base_sets, arm_sets) -> dict` returning `{"deleted": int, "created": int, "turnover_share": float}`; writes `tas_select.json` with per-λ turnover, deletions, creations, per-class breakdown and the binding-artist share.
+
+**Reuse, do not reimplement.** `td_turnover.py` in the same directory already reconstructs `mutual_knn_cap`'s top-50 selection over the capture and computes symmetric-difference turnover, and its green check (`--verify`) asserts the reconstruction reproduces a real build edge-for-edge. Import its turnover machinery and supply the tag-driven ranking in place of its synthetic perturbation; the only new code is the ranking function.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -661,9 +669,25 @@ still ranks, so the built consequence of a given swap rate is not derivable
 from here alone. Stated in the spec and repeated because it is the easiest
 thing to over-read.
 
-KILL for the build-time architecture: if at every lambda the median artist
-swaps <= 2 of 50. Plain: swapping two neighbours out of fifty will not change
-a journey you would notice.
+KILL for the build-time architecture (AMENDED, TAS-AM1): if at every lambda
+the symmetric-difference EDGE TURNOVER is <= 1%. Plain: if fewer than one
+connection in a hundred is different across the whole map, no journey will
+change in a way you could notice.
+
+  The original bar -- "median artist swaps <= 2 of 50" -- is WITHDRAWN AS
+  FALSE and is not implemented here. TD-2 measured that swap rate as ~8.4% of
+  all connections differing (turnover ~= 2.11 x the swap rate: mutual
+  selection is near-neutral on deletions, but every swap also PROMOTES a
+  neighbour and per-artist swap counting never saw the creations). TD-3
+  measured the median as reading 0 while 6.3% of the map moved, because the
+  device is inert wherever labels are missing -- the zero-inflated case TAS-1
+  exists to expect. TD-4 refuted the remaining defence: routed connections sit
+  DEEPER in both endpoints' lists than average, so they are deleted at
+  1.09-1.26x the population rate, never below 1.0.
+
+  Report deletions and creations SEPARATELY, and break both out per pair
+  class. Famous-famous is the most exposed class per connection and the least
+  per journey (those journeys are half as long); a pooled figure hides both.
 
 Selection binds ONLY where an artist's own list exceeds k. The share of such
 artists, and of edges incident on them, is reported -- the lever cannot reach
@@ -685,7 +709,7 @@ from tas_tags import label_sets
 OUT = HERE / "tas_select.json"
 LAMBDAS = [0.0, 0.25, 0.5, 1.0, 2.0]
 K = 50
-TAS4_KILL_MEDIAN_SWAPS = 2
+TAS4_KILL_TURNOVER = 0.01  # TAS-AM1; owner set this materiality line 2026-07-30
 
 
 def simulate_top_k(
@@ -719,37 +743,49 @@ def simulate_top_k(
 
 
 def main() -> None:
-    import sys
-    _TB = HERE.parent / "2026-07-30-track-b-cap-selection"
-    if str(_TB) not in sys.path:
-        sys.path.insert(0, str(_TB))
-    from cb_run_cells import _capture_pipeline
+    # TD-1 already froze the capture as int-id CSR arrays. Load it; do NOT
+    # re-run _capture_pipeline and do NOT re-read the archive.
+    from td_turnover import load_capture, mutual_edge_set
 
-    _adjacency, ranking, _stats = _capture_pipeline("production")
+    capture = load_capture()
+    ranking = capture.ranking          # mbid -> {dst: strength}
     labels = label_sets()
-
     binding = {u: s for u, s in ranking.items() if len(s) > K}
-    swaps: dict[float, list[int]] = {lam: [] for lam in LAMBDAS if lam > 0}
-    for u, strengths in binding.items():
-        base = simulate_top_k(strengths, labels, 0.0, K, own=u)
-        for lam in swaps:
-            arm = simulate_top_k(strengths, labels, lam, K, own=u)
-            swaps[lam].append(K - len(base & arm))
+
+    base_sets = {u: simulate_top_k(s, labels, 0.0, K, own=u) for u, s in ranking.items()}
+    base_edges = mutual_edge_set(base_sets)
+
+    per_lambda: dict[str, dict] = {}
+    for lam in (value for value in LAMBDAS if value > 0):
+        arm_sets = {u: simulate_top_k(s, labels, lam, K, own=u) for u, s in ranking.items()}
+        arm_edges = mutual_edge_set(arm_sets)
+        deleted = len(base_edges - arm_edges)
+        created = len(arm_edges - base_edges)
+        per_lambda[str(lam)] = {
+            "deleted": deleted,
+            "created": created,
+            "turnover_share": round((deleted + created) / len(base_edges), 5),
+            # Mean, never median: TD-3 measured the median reading 0 while
+            # 6.3% of the map moved, because the device is inert wherever
+            # labels are missing.
+            "mean_swaps": round(
+                statistics.fmean(K - len(base_sets[u] & arm_sets[u]) for u in binding), 3
+            ),
+        }
 
     result = {
+        "substrate": "ALG-E-mutual_knn-k50 (TAS-AM1); NOT the adopted artifact",
+        "baseline_edges": len(base_edges),
         "binding_artists": len(binding),
-        "total_artists": len(ranking),
         "binding_share": round(len(binding) / len(ranking), 4),
-        "median_swaps": {str(lam): statistics.median(v) for lam, v in swaps.items()},
-        "mean_swaps": {str(lam): round(statistics.fmean(v), 2) for lam, v in swaps.items()},
-        "kill_threshold": TAS4_KILL_MEDIAN_SWAPS,
+        "per_lambda": per_lambda,
+        "kill_threshold_turnover": TAS4_KILL_TURNOVER,
+        "tas4_kills": all(
+            cell["turnover_share"] <= TAS4_KILL_TURNOVER for cell in per_lambda.values()
+        ),
     }
-    result["tas4_kills"] = all(
-        m <= TAS4_KILL_MEDIAN_SWAPS for m in result["median_swaps"].values()
-    )
     OUT.write_text(json.dumps(result, indent=1), encoding="utf-8")
-    for key, value in result.items():
-        print(f"{key}: {value}")
+    print(json.dumps(result, indent=1))
 
 
 if __name__ == "__main__":
@@ -761,14 +797,19 @@ if __name__ == "__main__":
 Run: `UV_LINK_MODE=copy uv run python -m pytest analysis/2026-07-30-tag-discrimination/test_tas_select.py -v`
 Expected: PASS (3 tests)
 
-- [ ] **Step 5: Verify `_capture_pipeline`'s real signature and return shape**
+- [ ] **Step 5: Verify `td_turnover.py`'s real helper names and return shapes**
 
-Grep `analysis/2026-07-30-track-b-cap-selection/cb_run_cells.py:185`. Its archive argument name and its three return values must match the call above; fix the call to match the source, not the other way round.
+`load_capture` and `mutual_edge_set` are written from `TD-2`'s description, not read off the file. **Grep `analysis/2026-07-30-tag-discrimination/td_turnover.py` and fix the calls to match the source, not the other way round.** In particular confirm whether the capture exposes `ranking` as an mbid-keyed dict or as int-id CSR arrays — `TD-1` froze it as the latter, so an id-mapping step may be needed between it and `simulate_top_k`, which is mbid-keyed.
+
+Also run its green check before trusting anything downstream:
+
+Run: `UV_LINK_MODE=copy uv run python -u analysis/2026-07-30-tag-discrimination/td_turnover.py --verify`
+Expected: the reconstructed selection reproduces `ALG-E-mutual_knn-k50.bin` edge-for-edge. **If it does not, stop** — every turnover figure depends on it.
 
 - [ ] **Step 6: Run it**
 
 Run: `UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-07-30-tag-discrimination/tas_select.py`
-Expected: per-λ median swap counts and the binding share.
+Expected: per-λ turnover with deletions and creations separated, the binding share, and `tas4_kills` against the 1% bar.
 
 - [ ] **Step 7: Commit — SEAM A**
 

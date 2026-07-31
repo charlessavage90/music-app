@@ -347,5 +347,79 @@ express "the whole path reads as one journey"); bound-100 adoption; and any blin
 
 ## §8 Amendments — append-only
 
-*(None yet. Entries appended here after commit, never edited in place; nothing above is
-renumbered once committed.)*
+*(Entries appended after commit, never edited in place; nothing above is renumbered. The
+amendment series is `TAS-AM`, deliberately **not** `TAS-A`, so an amendment ID can never be
+misread as a criterion ID — the collision that cost Track 2 eleven ambiguous identifiers.)*
+
+### `TAS-AM1` — `TAS-4` changes its measured quantity, its statistic, and its bar
+
+**Appended 2026-07-30, before any `TAS-` criterion was measured.** No tag frame existed and
+no `TAS-1`…`TAS-6` number had been produced when this was written. What did exist were four
+instrument derivations (`TD-1`…`TD-4`,
+`builder/analysis/2026-07-30-tag-discrimination/`), commissioned specifically to check
+whether `TAS-4`'s bar meant what it claimed. It did not.
+
+**Three findings, each of which independently breaks the original `TAS-4`:**
+
+1. **`TD-2` — per-artist swaps are not the quantity the gate is about.** Mutual selection was
+   suspected of *amplifying* deletions; measured, it is near-neutral (deletions ≈ 1.07× the
+   per-artist swap rate). But every swap also *promotes* a neighbour, and promoted neighbours
+   become surviving connections at nearly the same rate. Per-artist swap counting sees only
+   the drop. The conversion is linear over the observable range and stable across placement
+   and endpoint-correlation regimes and across two archives: **turnover ≈ 2.11 × the
+   per-artist swap rate.** The original bar of "median ≤ 2 swaps of 50" therefore admitted
+   **~8.4% of all connections differing** as a kill.
+2. **`TD-3` — the median cannot see the shape this design predicts.** The device is inert
+   wherever labels are missing, and `TAS-1` exists because coverage is expected to be uneven.
+   Measured: a reranking touching 30% of artists changes 6.3% of the map and reports
+   **median = 0** — an unambiguous kill. Zero-inflation is the expected case, not a corner.
+3. **`TD-4` — the defence for a permissive bar is refuted, with the sign reversed.** The
+   hypothesis (offered by the analyst, then tested by it) was that journeys ride strong
+   top-of-list connections and would be insulated from a boundary reranking. Routed
+   connections instead sit *deeper* in both endpoints' lists than average (median rank
+   position 28 vs 26; 30 for famous-famous), so they are deleted at **1.09–1.26× the
+   population rate in all 25 arms, never below 1.0.** Famous-famous is the most exposed class
+   per connection (≈1.29×) and the least exposed per journey, because those journeys are
+   about half as long — different questions, and a pooled figure hides both.
+
+**What `TAS-4` now measures.** The **symmetric-difference edge turnover of the simulated
+mutual k-NN edge set against the λ = 0 baseline, with deletions and creations reported
+separately**, not per-artist top-50 swaps. Both are also reported per pair class.
+
+**Statistic.** The median is retired for this criterion. Turnover is a population quantity;
+where a per-artist figure is still reported it is the **mean**, which `TD-3` measured as
+exactly proportional to turnover.
+
+**New kill bar: turnover ≤ 1% at every λ.** *(≈ 4,500 of ~449,000 connections; ≈ 0.24 swaps
+per artist.)* **The owner set this figure on 2026-07-30**, after being shown the conversion
+in journey terms — it is a materiality line, which is his, not a derivation. The reasoning
+he was given and accepted: a kill gate should fire only when the intervention is provably
+inert, and one connection in twelve is not that.
+
+**New plain sentence, replacing the one `TD-2`/`TD-4` contradicted.** The old sentence —
+*"swapping two neighbours out of fifty will not change a journey you would notice"* — is
+**withdrawn as false**, and is recorded here rather than deleted because a pre-registration's
+value is that its errors stay visible. The replacement:
+
+> *Plain: if fewer than one connection in a hundred is different across the whole map, no
+> journey will change in a way you could notice. At the original bar, about one journey in
+> three would have contained a connection that no longer exists.*
+
+**Substrate, stated because it is an uncontrolled difference between two criteria.** The
+adopted artifact predates the nameless-artist drop and cannot be reproduced from the pipeline
+capture (36 artists / 193 edges, 0.05% / 0.04%). `TAS-4`'s simulation therefore runs on the
+Track B `ALG-E-mutual_knn-k50` cell (sha `73feffa0…a69faa`) while `TAS-5` routes on the
+adopted artifact. **Both `TAS-4` arms and its λ = 0 baseline sit on the same substrate**, so
+no arm-to-baseline comparison spans graphs; the difference is between criteria, not within
+one, and no read may compare a `TAS-4` figure with a `TAS-5` figure without saying so.
+
+**What `TAS-4` does NOT gain from this amendment.** It still measures the input to a rebuild
+rather than its output, and `TD-4`'s journey-level figure is a **ceiling on disruption, not
+disruption**: a deleted connection may be routed around near-identically, and nothing offline
+here can say whether the replacement *reads* differently. That remains the blind listen's.
+
+**Consequential edits, all within this amendment and none above it.** §5's read
+"`TAS-4` kills, `TAS-5` survives" now fires on turnover rather than swaps and carries the new
+plain sentence. §4's green check is unaffected and if anything strengthened — turnover is
+derived from the same per-artist top-50 sets it validates. `TAS-6`'s `TAS-4`-side measurement
+is unit-independent and unchanged.
