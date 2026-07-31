@@ -15,7 +15,7 @@ WHAT IS STORED, AND WHY IT IS PER-RELEASE RATHER THAN PRE-AGGREGATED
   which artist owns which release while preserving each artist's release
   count. A pre-aggregated union could not be shuffled.
 
-Run from `builder/` (~5 min), AFTER rel_artist_dump.py:
+Run from `builder/` (measured 2.4 min), AFTER rel_artist_dump.py:
     UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
         analysis/2026-07-31-release-tag-coverage/rel_rg_dump.py
 """

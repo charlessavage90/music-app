@@ -12,15 +12,47 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-31, after `TAS-AM3` resolved the instrument question (Tasks 1–4 of 8, plus Task 7's selection-side halves).**
+**Last updated: 2026-07-31, at the `REL-` release-tag coverage probe's closeout. `TAS-` is unchanged and still owes Tasks 5–8.**
 
 ---
 
 ## Next
 
-> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE — Tasks 1–4 of 8, plus Task 7's selection-side halves and `TAS-AM3`. **`TAS-6` is ADVERSE, which bars adopting the BUILD-TIME architecture. The instrument question is resolved and `TAS-4` is believable. Tasks 5–8 unrun; the next action is the OWNER'S — see below.**
+> ## The RELEASE-TAG COVERAGE PROBE (`REL-`) is COMPLETE. **`REL-1` PASSED — release aggregation clears `COH-2`'s 50% bar in the obscure tail. Nothing adopted. The next action is the OWNER'S.**
 >
 > Entry point is the current handoff:
+> [`2026-07-31-HANDOFF-release-tag-coverage.md`](2026-07-31-HANDOFF-release-tag-coverage.md).
+> Governing document:
+> [`specs/2026-07-31-release-tag-coverage-preregistration.md`](specs/2026-07-31-release-tag-coverage-preregistration.md)
+> (`REL-`) — **read its §8 first**; both amendments correct the same conflation and
+> **`REL-AM2` was written after the headline figure was known and says so.** Figures:
+> [`findings/2026-07-31-release-tag-coverage.md`](findings/2026-07-31-release-tag-coverage.md).
+>
+> **A parallel investigation commissioned by the owner, not a continuation of `TAS-`.** It
+> asked whether aggregating an artist's *release* tags labels the artists carrying no genre
+> label today. Census over all 74,193 artists from local dumps; no API, no sampling.
+>
+> **`REL-1` and what cuts against it must be quoted together** — the same pairing rule as
+> `COH-2`/`COH-3` and `FPC-2`/`FPC-9`. The bar cleared and the coverage gain lands in the tail
+> (`REL-6` not adverse); **but `REL-3`'s fidelity median is modest, its ratio bar is a
+> degenerate pass, and a large minority of the unlabelled tail is reached by neither source.**
+> Read the findings' §0 and `REL-3` together before acting.
+>
+> **`REL-4` inverted the design's framing:** Discogs — the arm expected to be awkward — is the
+> stronger source in the obscure tail, and the two independent sources agree on at least one
+> label for nearly every artist they both reach. That agreement is the strongest thing in the
+> record.
+>
+> **Nothing adopted, no criterion fixed, no weight, default, currency or vocabulary changed,
+> no rebuild, no blind listen spent. `TAS-` §1's vocabulary is UNTOUCHED** — a passing frame is
+> a *candidate* for a `TAS-` §8 amendment, never an enactment. **It says nothing about whether
+> `TAS-6` would flip**, which needs a rebuild this probe does not license.
+>
+> ---
+>
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) is UNCHANGED and STILL LIVE — Tasks 1–4 of 8, plus Task 7's selection-side halves and `TAS-AM3`. **`TAS-6` is ADVERSE, which bars adopting the BUILD-TIME architecture. The instrument question is resolved and `TAS-4` is believable. Tasks 5–8 unrun; the next action is the OWNER'S — see below.**
+>
+> Its handoff remains authoritative for that track's internals:
 > [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
 > Governing document is the pre-registration
 > [`specs/2026-07-30-tag-discrimination-probe-preregistration.md`](specs/2026-07-30-tag-discrimination-probe-preregistration.md)
@@ -260,6 +292,9 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
 | **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |
+| ✅ **The `REL-` release-dump union pass** | **CLOSED 2026-07-31 — the path is known-unreachable, not deferred again.** Its §7 condition was "if and only if `REL-1` lands in 45.0–49.9%". `REL-1` cleared the bar outright, so the condition can never fire for this run, and the 345 GB dump was deleted after measurement. Reopening needs a new pre-registration designed cold. Struck, kept for the record. |
+| **Whether `REL-`'s frame is taken into `TAS-`** | **The owner's trigger.** A `TAS-` §1 vocabulary change is an amendment to a frozen document and a rebuild spends his ear (`REQ-38`). The retiring session's position is in the `REL-` handoff and is *not yet*: `REL-3`'s fidelity median is what should govern, and a cheap read on whether coarse agreement suffices for what `TAS-` does — answerable against the committed `TAS-` harness with no rebuild — should come first. |
+| **`REL-3`'s ratio bar is degenerate and must not be reused as written** | **Before any successor pre-registration expresses a bar as a multiple of a null.** The null median was exactly zero, so "≥ 3× the null" was satisfied by a division by zero. A ratio bar needs a stated floor on the denominator, or a difference bar instead. |
 | **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
 | **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**; reopen if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |
 | **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. Track B's harness complied throughout (`ReadOnlyArchive`). **Condition fired again 2026-07-30** — the `TAS-`/`TD-` capture reads the archive through the same Track B helper and therefore through `ReadOnlyArchive`; complied, verified at closeout. **Stays open**: it is a standing condition on future harnesses, not a one-off to discharge. |

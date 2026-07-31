@@ -38,16 +38,16 @@ aggregation unit, not the pressing.
 ## Run order — it is not arbitrary
 
 ```bash
-# 1. REL-7 (fidelity) + REL-2(a) (the MBID -> Discogs mapping).   ~2 min
+# 1. REL-7 (fidelity) + REL-2(a) (MBID -> Discogs mapping). measured 2.2 min
 #    FIRST, because REL-C1's tolerance IS REL-7's drift figure.
 UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
     analysis/2026-07-31-release-tag-coverage/rel_artist_dump.py
 
-# 2. F1/F2/F3 -- REL-1, REL-5, REL-6.                             ~5 min
+# 2. F1/F2/F3 -- REL-1, REL-5, REL-6.                     measured 2.4 min
 UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
     analysis/2026-07-31-release-tag-coverage/rel_rg_dump.py
 
-# 3. F4/F5 + REL-2 in full.                                       ~35 min
+# 3. F4/F5 + REL-2 in full.                              measured 22.2 min
 UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
     analysis/2026-07-31-release-tag-coverage/rel_discogs.py
 
@@ -55,6 +55,10 @@ UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
 #    and prints no criterion when it does.
 UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
     analysis/2026-07-31-release-tag-coverage/rel_score.py
+
+# 5. REL-4 -- needs BOTH sources, so it runs last.                <1 min
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
+    analysis/2026-07-31-release-tag-coverage/rel_union.py
 
 # tests (the dormant term is pinned here)
 UV_LINK_MODE=copy uv run --extra dev pytest -q \
@@ -73,6 +77,7 @@ tests run only when invoked explicitly.
 | `rel_rg_dump.py` | `F1`/`F2`/`F3` → `REL-1`, `REL-5`, `REL-6` |
 | `rel_discogs.py` | `F4`/`F5` → `REL-2` in full, `REL-4` inputs |
 | `rel_score.py` | `REL-C1`, `REL-C2`, `REL-3` |
+| `rel_union.py` | `F6` → `REL-4`, plus the cross-source agreement and its vocabulary confound |
 | `test_rel_common.py` | Pins the filter, the label rules and the `None`-not-zero Jaccard contract |
 
 `*_raw.json` are gitignored: large, and regenerable from the commands above. Derived

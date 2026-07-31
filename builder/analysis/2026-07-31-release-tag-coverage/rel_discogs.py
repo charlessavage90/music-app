@@ -25,7 +25,7 @@ MAPPING IS BY ID, NEVER BY NAME
   Name matching is explicitly REJECTED, not deferred (spec section 7): it is
   the population-mismatch trap that killed every external popularity source.
 
-Run from `builder/` (~35 min), AFTER rel_artist_dump.py:
+Run from `builder/` (measured 22.2 min), AFTER rel_artist_dump.py:
     UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
         analysis/2026-07-31-release-tag-coverage/rel_discogs.py
 """

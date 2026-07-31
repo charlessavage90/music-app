@@ -23,7 +23,7 @@ TWO OUTPUTS, AND THEY ARE DELIBERATELY NOT INTERCHANGEABLE
 ORDERING: this runs FIRST. REL-C1's pass tolerance is REL-7's drift figure,
 so the cross-check must exist before the liveness check can be judged.
 
-Run from `builder/` (~4 min):
+Run from `builder/` (measured 2.2 min):
     UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
         analysis/2026-07-31-release-tag-coverage/rel_artist_dump.py
 """

@@ -135,6 +135,13 @@ device lands in the right *region*, it does not recover the artist's genres.
 | MusicBrainz only | 1,153 |
 | **neither** | **10,757** |
 
+**⚠ `F6`'s 71.0% is a coincidence, not a cap being hit.** The pre-registration's §0 records an
+absolute *ceiling* of 71.0% derived from MusicBrainz release existence alone, and `F6`'s
+measured coverage lands on the same figure. They are different quantities computed from
+different populations — `F6` combines two sources and is not bounded by the MusicBrainz-only
+ceiling at all. Flagged because a reader who noticed the match would reasonably conclude the
+frame had saturated, and it has not.
+
 **This inverts the framing the probe was designed under.** Discogs was the awkward arm — the
 independent source carrying a population-mismatch trap. In the obscure tail it is the
 **stronger** one: it reaches four times as many artists alone as MusicBrainz does, and
