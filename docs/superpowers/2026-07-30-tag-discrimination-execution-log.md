@@ -558,3 +558,73 @@ knowledge reaches it:
 **Practical note for that session:** the adopted artifact and the archive are **gitignored**,
 so they do not appear in a `git worktree`. Any coverage measurement against the real population
 must point at `builder/scratch/` in the main tree explicitly.
+
+---
+
+## §13 `TAS-AM4` — the `REL-` frame evaluated as a candidate
+
+Amendment committed before it ran (`17716dc`), then run. **§1's vocabulary is unchanged and
+every committed `TAS-` figure still stands on it.** Figures in `tas_frame_eval.json`.
+
+### §13.1 The reads, in the order `TAS-AM4` fixed them
+
+1. **No candidate is killed.** Both enriched frames clear `TAS-2`'s kill bar and its
+   weak-signal flag with room, using **`TAS-2`'s existing bars unchanged** — the main thing
+   keeping an after-the-fact amendment honest.
+2. **The spread fall is the headline, per the read that pre-committed it to being one.** The
+   within-list spread falls under both candidates, and by more than twice as much when Discogs
+   is added on top of MusicBrainz. The flattening `TAS-AM4` predicted is present.
+3. **`TAS-3`, diagnostic and unbarred:** rank correlation with similarity **rises** under both
+   candidates — the same failure showing up in the second place it could. The already-ordered
+   share falls, but see §13.3 before reading that as headroom.
+4. **Reach — the share of candidate slots where the rule acts at all — rises substantially**,
+   and this is the quantity that would drive any `TAS-6` improvement.
+
+### §13.2 The comparison was confounded, and the control did not rescue it
+
+`_tas2_tas3` scores every artist it *can*, and enrichment makes far more artists scorable. So
+the first pass moved **the frame and the population together** — and the artists that became
+scorable are precisely the obscure ones `REL-` reached, whose spread there was every reason to
+expect to differ. **Composition and real degradation have opposite implications**, and
+`TAS-AM4`'s read 2 presupposes the like-for-like one.
+
+`signal_on()` re-measures every frame on `W0`'s scorable set. That is valid as a one-knob
+control because labels only ever **accumulate**, so `W0`'s scorable set is scorable under every
+candidate.
+
+**The control changed almost nothing — the degradation is real, on the same artists.**
+Recorded because a control that is only reported when it helps is not a control, and this one
+was run expecting it might overturn the result.
+
+### §13.3 One confound the control does **not** remove
+
+Fixing the population fixes **which artists** are scored, not **how many of each artist's
+candidates** are. Under an enriched frame the same artist has more scorable candidates, and a
+longer list is less likely to be *coincidentally* in agreement order. **So the fall in the
+already-ordered share must not be read as "more reordering headroom"** — it is at least partly
+a list-length artifact. The rank correlation is the cleaner of the two `TAS-3` readings here,
+and it moves the other way.
+
+### §13.4 What this does and does not license
+
+**It licenses a recommendation and nothing else** — `TAS-AM4` read 5, fixed before the run.
+No `TAS-4`/`TAS-6` re-run, no adoption, no rebuild. **`TAS-6`'s adverse verdict on the
+committed frame stands and is not retroactively softened by a better frame existing.**
+
+**The session's position, argued rather than asserted:** if a re-run happens, it should use
+**`W1` (MusicBrainz release groups only), not `W6`.** The Discogs increment buys the smaller
+share of the remaining reach for roughly as much spread again — the trade is clearly
+diminishing, and `W1` keeps the signal closest to the one every committed figure was measured
+on. Which cells to run is methodology and therefore the session's; **whether to spend on a
+re-run at all is the owner's**, since a `§1` vocabulary change is an amendment to a frozen
+document and any adoption downstream spends his ear (`REQ-38`).
+
+### §13.5 Operational
+
+`np.load` on an `.npz` returns a **lazy** `NpzFile`: each `z["key"]` access decompresses the
+whole array. The first draft of `signal_on` indexed `z["rank"]` **inside** the inner loop,
+decompressing a 4-million-element array once per candidate slot. It ran for over an hour of CPU
+before being killed, having produced nothing — and it looked merely slow rather than wrong,
+because the invocation also piped through `tail`, which buffered all progress output away.
+**Two lessons, both cheap:** materialise every array from an `.npz` once, as the committed
+`_tas2_tas3` already did; and do not pipe a long unattended run through `tail`.
