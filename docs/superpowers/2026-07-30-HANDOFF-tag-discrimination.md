@@ -1,6 +1,10 @@
 # Handoff — tag discrimination probe, Tasks 1–3 of 8, 2026-07-30
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-07-31 on NEXT ACTIONS ONLY** by
+[`2026-07-31-HANDOFF-release-tag-coverage.md`](2026-07-31-HANDOFF-release-tag-coverage.md).
+**This document REMAINS AUTHORITATIVE for the `TAS-` track's internals, and `TAS-` Tasks 5–8
+are still owed and unrun** — the `REL-` probe was a parallel investigation, not a
+continuation, and touched none of them. Supersedes
 [`2026-07-30-HANDOFF-coherence-tag-probe.md`](2026-07-30-HANDOFF-coherence-tag-probe.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.

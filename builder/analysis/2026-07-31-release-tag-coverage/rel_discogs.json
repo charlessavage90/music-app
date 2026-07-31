@@ -1,0 +1,110 @@
+{
+ "artists_with_discogs_id": 64137,
+ "rel_2_ceiling": {
+  "top 1%": {
+   "unlabelled": 1,
+   "with_discogs_id": 1,
+   "with_id_share": 1.0,
+   "with_attributable_release": 1,
+   "product_share": 1.0
+  },
+  "top 10%": {
+   "unlabelled": 464,
+   "with_discogs_id": 447,
+   "with_id_share": 0.9634,
+   "with_attributable_release": 406,
+   "product_share": 0.875
+  },
+  "upper half": {
+   "unlabelled": 9332,
+   "with_discogs_id": 8111,
+   "with_id_share": 0.8692,
+   "with_attributable_release": 6776,
+   "product_share": 0.7261
+  },
+  "lower half": {
+   "unlabelled": 23959,
+   "with_discogs_id": 16772,
+   "with_id_share": 0.7,
+   "with_attributable_release": 12049,
+   "product_share": 0.5029
+  }
+ },
+ "coverage": {
+  "top 0.1%": {
+   "n": 75,
+   "F0": {
+    "count": 75,
+    "share": 1.0
+   },
+   "F4": {
+    "count": 75,
+    "share": 1.0
+   },
+   "F5": {
+    "count": 75,
+    "share": 1.0
+   }
+  },
+  "top 1%": {
+   "n": 667,
+   "F0": {
+    "count": 666,
+    "share": 0.9985
+   },
+   "F4": {
+    "count": 667,
+    "share": 1.0
+   },
+   "F5": {
+    "count": 667,
+    "share": 1.0
+   }
+  },
+  "top 10%": {
+   "n": 6678,
+   "F0": {
+    "count": 6214,
+    "share": 0.9305
+   },
+   "F4": {
+    "count": 6620,
+    "share": 0.9913
+   },
+   "F5": {
+    "count": 6610,
+    "share": 0.9898
+   }
+  },
+  "upper half": {
+   "n": 29677,
+   "F0": {
+    "count": 20345,
+    "share": 0.6855
+   },
+   "F4": {
+    "count": 27121,
+    "share": 0.9139
+   },
+   "F5": {
+    "count": 26942,
+    "share": 0.9078
+   }
+  },
+  "lower half": {
+   "n": 37096,
+   "F0": {
+    "count": 13137,
+    "share": 0.3541
+   },
+   "F4": {
+    "count": 25186,
+    "share": 0.6789
+   },
+   "F5": {
+    "count": 24530,
+    "share": 0.6613
+   }
+  }
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "coverage": {
+  "top 0.1%": {
+   "n": 75,
+   "F1": 1.0,
+   "F4": 1.0,
+   "F5": 1.0,
+   "F6": 1.0,
+   "F0": 1.0,
+   "rel_4_increment": 0.0
+  },
+  "top 1%": {
+   "n": 667,
+   "F1": 1.0,
+   "F4": 1.0,
+   "F5": 1.0,
+   "F6": 1.0,
+   "F0": 0.9985,
+   "rel_4_increment": 0.0
+  },
+  "top 10%": {
+   "n": 6678,
+   "F1": 0.9868,
+   "F4": 0.9913,
+   "F5": 0.9898,
+   "F6": 0.9948,
+   "F0": 0.9305,
+   "rel_4_increment": 0.0079
+  },
+  "upper half": {
+   "n": 29677,
+   "F1": 0.8762,
+   "F4": 0.9139,
+   "F5": 0.9078,
+   "F6": 0.9294,
+   "F0": 0.6855,
+   "rel_4_increment": 0.0532
+  },
+  "lower half": {
+   "n": 37096,
+   "F1": 0.5876,
+   "F4": 0.6789,
+   "F5": 0.6613,
+   "F6": 0.71,
+   "F0": 0.3541,
+   "rel_4_increment": 0.1224
+  }
+ },
+ "rel_4_agreement": {
+  "artists_both_sources_reach": 13057,
+  "median_jaccard": 0.4,
+  "share_sharing_any_label": 0.9661,
+  "vocabulary_confound": "MB folksonomy vs Discogs' closed 15-value genre list -- exact match is depressed by vocabulary, not by disagreement"
+ },
+ "lower_half_unlabelled_reach": {
+  "n": 23959,
+  "mb_only": 1153,
+  "discogs_only": 4542,
+  "both": 7507,
+  "neither": 10757
+ }
+}

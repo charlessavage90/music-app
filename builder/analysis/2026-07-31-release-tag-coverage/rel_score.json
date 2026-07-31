@@ -1,0 +1,25 @@
+{
+ "instrument_checks": {
+  "rel_c1_pass": true,
+  "rel_c1_gap": 0.002,
+  "rel_c1_tolerance": 0.005,
+  "rel_c2_pass": true,
+  "rel_c2_lower_half_coverage_real": 0.5876,
+  "rel_c2_lower_half_coverage_shuffled": 0.6345
+ },
+ "criteria_read": true,
+ "rel_3": {
+  "scorable_matched": 34935,
+  "scorable_null": 36335,
+  "median_matched": 0.25,
+  "median_null": 0.0,
+  "ratio": Infinity,
+  "ratio_bar": 3.0,
+  "ratio_pass": true,
+  "zero_overlap_matched": 0.1276,
+  "zero_overlap_null": 0.6148,
+  "zero_overlap_margin_bar": 0.2,
+  "zero_overlap_pass": true,
+  "share_at_half_or_better": 0.2109
+ }
+}
