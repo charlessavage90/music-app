@@ -81,3 +81,63 @@ strength. The arms fix the *size* of the reordering, never its content — so th
 rows say nothing about what λ the real tag signal would need (`TAS-3` names exactly that
 hazard). The transfer function itself is a property of the graph's mutuality structure,
 which is what makes it reusable whatever the tag frame turns out to look like.
+
+---
+
+# The probe proper (`TAS-`)
+
+**Added after the `TD-` derivations above, which exist to make `TAS-4` measure the right
+quantity.** The `TD-` scripts are instrument work on the graph's mutuality structure and
+use no tag data; the `tas_*` scripts below are the pre-registered probe and use nothing
+else. Both series live here because the second consumes the first — `TAS-4` reuses
+`td_turnover.py`'s reconstruction and its green check rather than reimplementing them.
+
+Governing document:
+`docs/superpowers/specs/2026-07-30-tag-discrimination-probe-preregistration.md`.
+Implementation plan: `docs/superpowers/plans/2026-07-30-tag-discrimination-probe.md`.
+**Read §8 `TAS-AM1` before touching `TAS-4`:** its original bar is withdrawn as false.
+
+| script | what it is |
+|---|---|
+| `tas_common.py` | Shared loading and **the agreement device** — Jaccard over union-genre labels, plus the neutral rule for unlabelled pairs. The only place either is defined. |
+| `tas_tags.py` | Full-graph union-genre tag frame over the LB batched transport (`COH-5`). Resumable. |
+| `tas_signal.py` | `TAS-1` (coverage by edge class), `TAS-2` (within-list spread), `TAS-3` (collinearity diagnostic). Carries both gate reads. |
+| `tas_select.py` | `TAS-4` — edge turnover under the λ grid, per `TAS-AM1`. |
+| `tas_pairs.py` | The §3 pair draw, own seed, classes carried end to end. |
+| `tas_route.py` | `TAS-5` — routing under a harness-local coherence term. |
+| `tas_guard.py` | `TAS-6` obscurity guard, and the randomised-label red instrument check. |
+
+## The neutral rule is the one dormant term
+
+It is inert at λ = 0 and active in every arm, so a bad choice cannot show up in the
+baseline. It is fixed in `tas_common.py`, pinned by `test_tas_common.py`, and **must not
+move after any result exists** — a change is a §8 amendment, not an edit.
+
+> **⚠ Those tests do NOT run in the default suite.** `pyproject.toml` sets
+> `testpaths = ["tests"]`, so `uv run --extra dev pytest -q` collects 129 tests and none
+> of them are these. Run them explicitly:
+>
+> ```bash
+> UV_LINK_MODE=copy uv run --extra dev pytest analysis/2026-07-30-tag-discrimination/ -q
+> ```
+>
+> This is pre-existing — two earlier probes (`2026-07-23-track2-fame-proxy`,
+> `2026-07-24-track2-fame-proxy-wikipedia`) carry test files in the same position. All 34
+> analysis tests pass today, so adding `analysis` to `testpaths` would work cleanly; that
+> is a shared-config change for the owner to make, not a probe's to take. **Until then,
+> "pinned by test" means pinned by a test somebody has to remember to run** — so the
+> command above belongs in any closeout that touches this directory.
+
+`neutral_for` takes the artist's **own** label set: the neutral value is the median
+agreement between the artist and its own labelled candidates. An earlier draft in the
+implementation plan measured candidates against each other, which is a different
+quantity; the corrected version has exactly one resolution path (`resolved_agreement`)
+so the two cannot drift apart again.
+
+## Vocabulary
+
+Union genre = LB genre-whitelisted tags ∪ Wikidata P136, both through the **frozen**
+`ct_common.norm_genre`. Same vocabulary as the `COH-` coverage figures, so `TAS-1` is
+comparable with them. **Not** the widest tag union (`COH-6` measured that as
+near-identical in the tail). `fp_wikidata.json` is already on disk from the `FPC-` work,
+so only the LB half needs collecting (~47 min).
