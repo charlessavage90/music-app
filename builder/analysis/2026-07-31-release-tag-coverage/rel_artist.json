@@ -1,0 +1,95 @@
+{
+ "graph_nodes": 74193,
+ "matched_in_dump": 74158,
+ "absent_from_dump": 35,
+ "rel_7_fidelity": {
+  "comparison": "MB artist dump `genres` vs the LB half of the frame alone -- NOT vs F0 (REL-AM1)",
+  "bands": {
+   "top 0.1%": {
+    "n": 75,
+    "lb_half_labelled": 75,
+    "dump_labelled": 75,
+    "both_labelled": 75,
+    "identical_genre_sets": 75,
+    "drift_share": 0.0,
+    "p136_only_share": 0.0
+   },
+   "top 1%": {
+    "n": 667,
+    "lb_half_labelled": 663,
+    "dump_labelled": 662,
+    "both_labelled": 662,
+    "identical_genre_sets": 660,
+    "drift_share": 0.0015,
+    "p136_only_share": 0.0045
+   },
+   "top 10%": {
+    "n": 6678,
+    "lb_half_labelled": 5819,
+    "dump_labelled": 5814,
+    "both_labelled": 5814,
+    "identical_genre_sets": 5804,
+    "drift_share": 0.0007,
+    "p136_only_share": 0.0591
+   },
+   "upper half": {
+    "n": 29677,
+    "lb_half_labelled": 16188,
+    "dump_labelled": 16148,
+    "both_labelled": 16148,
+    "identical_genre_sets": 16096,
+    "drift_share": 0.0013,
+    "p136_only_share": 0.1401
+   },
+   "lower half": {
+    "n": 37096,
+    "lb_half_labelled": 9058,
+    "dump_labelled": 9035,
+    "both_labelled": 9035,
+    "identical_genre_sets": 9023,
+    "drift_share": 0.0006,
+    "p136_only_share": 0.11
+   }
+  },
+  "both_labelled": 31734,
+  "identical_genre_sets": 31658,
+  "overall_drift_share": 0.0009
+ },
+ "rel_2a_discogs_mapping": {
+  "top 0.1%": {
+   "n": 75,
+   "unlabelled": 0,
+   "unlabelled_with_discogs": 0,
+   "unlabelled_with_discogs_share": null,
+   "all_with_discogs_share": 1.0
+  },
+  "top 1%": {
+   "n": 667,
+   "unlabelled": 1,
+   "unlabelled_with_discogs": 1,
+   "unlabelled_with_discogs_share": 1.0,
+   "all_with_discogs_share": 1.0
+  },
+  "top 10%": {
+   "n": 6678,
+   "unlabelled": 464,
+   "unlabelled_with_discogs": 447,
+   "unlabelled_with_discogs_share": 0.9634,
+   "all_with_discogs_share": 0.9927
+  },
+  "upper half": {
+   "n": 29677,
+   "unlabelled": 9332,
+   "unlabelled_with_discogs": 8111,
+   "unlabelled_with_discogs_share": 0.8692,
+   "all_with_discogs_share": 0.9416
+  },
+  "lower half": {
+   "n": 37096,
+   "unlabelled": 23959,
+   "unlabelled_with_discogs": 16772,
+   "unlabelled_with_discogs_share": 0.7,
+   "all_with_discogs_share": 0.777
+  }
+ }
+}

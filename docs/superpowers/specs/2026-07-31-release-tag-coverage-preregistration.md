@@ -358,5 +358,34 @@ beside **every** `F4`/`F5`/`F6` figure. **No read below is reachable before `REL
 
 ## §8 Amendments — append-only
 
-*(None. Any amendment appended after a result exists says so at its head and names the hazard,
-per `TAS-AM3`.)*
+*(Any amendment appended after a result exists says so at its head and names the hazard, per
+`TAS-AM3`.)*
+
+### `REL-AM1` — `REL-7` compared two different things, and `REL-C1`'s tolerance inherited the error
+
+**⚠ APPENDED AFTER A RESULT EXISTED.** `REL-7`'s first figure (11.73%) had been produced when
+this was written. The hazard is the one `TAS-AM3` names: an amendment written with a number in
+view can be shaped by that number, and the reader cannot tell from the text alone. Read it
+knowing that. What limits the damage here is that the defect is a **conflation of two sources**,
+visible from the code without reference to any outcome, and that **no criterion bar moves**.
+
+**What was wrong.** §2 specifies `REL-7` as the dump's artist-level tags/genres *against the
+committed `tas_tags` LB frame*, to separate snapshot drift from findings. The implementation
+compared the dump's `genres` against **`F0`** — which is LB genres **∪ Wikidata P136**. Those
+two differ by an entire source, so the measured 11.73% is dominated by P136's contribution and
+is close to silent about drift. The per-band pattern shows it: the dump's genres were a subset
+of `F0` in **100.0%** of artists labelled by both, in every band, which is what you would see
+if the difference were *additive source coverage* rather than disagreement.
+
+**Why it is not cosmetic.** `REL-C1`'s pass tolerance **is** this figure. At 11.73% the
+liveness check would admit a pipeline that mislabelled one artist in nine — it could not go
+red, which is the entire property an instrument check exists to have.
+
+**The correction.** `REL-7` compares the dump's `genres` against the **LB genre half of the
+frame alone** — like with like, the same quantity `COH-5` measured at n = 872. The Wikidata
+P136 contribution is reported beside it as its own descriptive column, because it is worth
+knowing and is **not** drift.
+
+**Scope: `REL-7`'s statistic and `REL-C1`'s tolerance, and nothing else.** `REL-1`'s 50% bar,
+`REL-3`'s null-relative bars, `REL-6`'s adverse condition, the §1 validity filter and the §5
+read table are all untouched, and none of them had produced a figure when this was written.
