@@ -1,0 +1,77 @@
+{
+ "substrate": "pre-cap capture of the ALG-E archive (TAS-AM2, selection side). Section 1's vocabulary is UNCHANGED; these are candidates measured beside the committed frame, not an adoption.",
+ "bars": {
+  "tas2_kill_iqr": 0.02,
+  "tas2_weak_flag_iqr": 0.1,
+  "note": "TAS-2's EXISTING bars, reused unchanged (TAS-AM4). TAS-3 is diagnostic and carries no bar, as in section 2."
+ },
+ "frames": {
+  "W0": {
+   "on_fixed_W0_population": {
+    "lists_considered": 38782,
+    "median_iqr": 0.1726,
+    "kills": false,
+    "weak_signal_flag": false,
+    "spearman": 0.1857,
+    "identical_order_share": 0.0307
+   },
+   "labelled_nodes": 40437,
+   "acting_slot_share": 0.658,
+   "tas2_median_iqr": 0.1726,
+   "tas2_mean_iqr": 0.2122,
+   "tas2_kills": false,
+   "tas2_weak_signal_flag": false,
+   "tas3_spearman": 0.1857,
+   "tas3_identical_order_share": 0.0307,
+   "lists_considered": 38782,
+   "lists_excluded_too_few_labelled": 1654
+  },
+  "W1": {
+   "on_fixed_W0_population": {
+    "lists_considered": 38782,
+    "median_iqr": 0.16,
+    "kills": false,
+    "weak_signal_flag": false,
+    "spearman": 0.2049,
+    "identical_order_share": 0.0084
+   },
+   "labelled_nodes": 55131,
+   "acting_slot_share": 0.8404,
+   "tas2_median_iqr": 0.1591,
+   "tas2_mean_iqr": 0.1795,
+   "tas2_kills": false,
+   "tas2_weak_signal_flag": false,
+   "tas3_spearman": 0.2001,
+   "tas3_identical_order_share": 0.0104,
+   "lists_considered": 52539,
+   "lists_excluded_too_few_labelled": 2591,
+   "iqr_change_vs_W0_POOLED_CONFOUNDED": -0.0782,
+   "iqr_change_vs_W0_fixed_population": -0.073,
+   "acting_slot_change_vs_W0": 0.2772
+  },
+  "W6": {
+   "on_fixed_W0_population": {
+    "lists_considered": 38782,
+    "median_iqr": 0.1418,
+    "kills": false,
+    "weak_signal_flag": false,
+    "spearman": 0.2179,
+    "identical_order_share": 0.0028
+   },
+   "labelled_nodes": 61306,
+   "acting_slot_share": 0.8969,
+   "tas2_median_iqr": 0.1415,
+   "tas2_mean_iqr": 0.1564,
+   "tas2_kills": false,
+   "tas2_weak_signal_flag": false,
+   "tas3_spearman": 0.2143,
+   "tas3_identical_order_share": 0.005,
+   "lists_considered": 58117,
+   "lists_excluded_too_few_labelled": 3188,
+   "iqr_change_vs_W0_POOLED_CONFOUNDED": -0.1802,
+   "iqr_change_vs_W0_fixed_population": -0.1784,
+   "acting_slot_change_vs_W0": 0.3631
+  }
+ },
+ "any_candidate_killed": false
+}
