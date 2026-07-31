@@ -515,17 +515,45 @@ knowledge reaches it:
    driven by unlabelled candidates, which are disproportionately obscure, being squeezed out.
    A richer frame that only thickens labels on artists who already had them changes nothing
    here. One that lifts the bottom half could plausibly flip `TAS-6`.
-3. **`COH-6` is the closest prior result and should be read before spending.** It measured the
-   widest-vocabulary variant as near-identical *in the tail*, which is prior evidence that
-   widening the vocabulary does not help where it matters. It does **not** settle the question
-   — release tags aggregated over a discography are genuinely different from artist-level wide
-   tags — but it is the relevant base rate. `COH-5` separately measured ListenBrainz as a
-   99.9%-faithful transport for MusicBrainz *genres*, so MB genres are already in hand.
+3. **⚠ CORRECTED — `COH-5` and `COH-6` do NOT bound this question, and this session first said
+   they did.** The original wording called `COH-6` "the base rate to beat" and said MusicBrainz
+   genres were "already in hand" via `COH-5`. **Both were wrong against the question actually
+   being asked**, and the error is recorded rather than silently fixed because it is the shape
+   this project keeps hitting — treating a source as one undifferentiated thing.
+
+   - **`COH-5` is a claim about a TRANSPORT, not about what data exists.** It measured
+     ListenBrainz against MusicBrainz-direct on **artist-level** genre sets (871/872 identical)
+     and concluded LB delivers MB's artist tags ~29× faster. **Release and release-group tags
+     live in different tables that no probe here has ever touched.**
+   - **`COH-6`'s widest union is entirely artist-level** — any MB tag ∪ any LB tag ∪ any MB
+     genre ∪ any P136 statement. Its conclusion is scoped by its own words: unseen artists
+     carry no tags of any kind *"in any source measured here"*. **Release-level data was not
+     among them, so `COH-6` is silent on aggregation, not evidence against it.**
+
+   **What `COH-6` does give this question is the size of the prize:** widening the
+   artist-level vocabulary bought only +3.4 points in the lower half (35.3% → 38.7%), so
+   **roughly 61% of lower-half artists carry no artist-level tag from any source**. That is the
+   target population, and it is large.
+
+   **Two mechanisms, both plausible, which is what makes it worth measuring rather than
+   arguing.** For it: MusicBrainz tagging effort attaches to the thing a person just added,
+   usually a *release*, so an obscure artist with one album can have the album tagged while the
+   artist entity stays bare. Against it: the indifference that left the artist untagged
+   plausibly left the releases untagged too.
 4. **Discogs is a genuinely independent source**, unlike anything in the current frame, and so
    does not inherit MusicBrainz's blind spot. It carries the **population-mismatch** trap
    instead — the one that killed every external popularity source — plus a Discogs-ID ↔ MBID
    mapping problem whose coverage must be measured before any tag figure derived through it
-   means anything.
+   means anything. Discogs has no artist-level tags at all, so it needs the **same**
+   release-aggregation method, not a different one.
+5. **Three design constraints that are cheap to state and expensive to discover.** (a) Draw the
+   sample from artists **unlabelled today**, not from obscure artists generally, or the
+   headline is diluted by artists who already have labels; band it as `COH-2` did so the two
+   are comparable. (b) **Aggregation introduces a validity failure that coverage cannot show** —
+   various-artists compilations and splits attribute other people's genres, and a prolific
+   cross-genre artist aggregates to a muddy union, so coverage can rise while labels get worse.
+   Decide which release types count *before* running. (c) A high tag rate among the artists that
+   resolve to a Discogs ID is **not** a gain of that size if resolution itself is partial.
 
 **Practical note for that session:** the adopted artifact and the archive are **gitignored**,
 so they do not appear in a `git worktree`. Any coverage measurement against the real population
