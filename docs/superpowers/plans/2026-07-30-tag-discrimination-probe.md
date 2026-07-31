@@ -1,7 +1,7 @@
 # Tag Discrimination Probe (TAS-) Implementation Plan
 
-**Role: ACTIVE — Tasks 1–3 executed 2026-07-30 and their checkboxes are annotated in
-place; Tasks 4–8 are unrun.** Governing document is the pre-registration beside it
+**Role: ACTIVE — Tasks 1–4 executed 2026-07-30 and their checkboxes are annotated in
+place; Tasks 5–8 are unrun.** Governing document is the pre-registration beside it
 (`specs/2026-07-30-tag-discrimination-probe-preregistration.md`), which **wins wherever
 this plan disagrees** — its §8 amendments have already overtaken this plan's Task 4 once.
 Status and next action are `NEXT.md`'s, not this document's.
@@ -808,14 +808,26 @@ if __name__ == "__main__":
 Run: `UV_LINK_MODE=copy uv run python -m pytest analysis/2026-07-30-tag-discrimination/test_tas_select.py -v`
 Expected: PASS (3 tests)
 
-- [ ] **Step 5: Verify `td_turnover.py`'s real helper names and return shapes**
+- [ ] **Step 5: ✅ DONE — the mismatch was larger than predicted, and Steps 1/3 above are superseded by the committed code**
 
-`load_capture` and `mutual_edge_set` are written from `TD-2`'s description, not read off the file. **Grep `analysis/2026-07-30-tag-discrimination/td_turnover.py` and fix the calls to match the source, not the other way round.** In particular confirm whether the capture exposes `ranking` as an mbid-keyed dict or as int-id CSR arrays — `TD-1` froze it as the latter, so an id-mapping step may be needed between it and `simulate_top_k`, which is mbid-keyed.
+Verified 2026-07-30. **`load_capture` and `mutual_edge_set` do not exist**, and the shortfall
+is not the predicted id-mapping step: `td_turnover.py` expresses a selection as a **boolean
+mask over one flattened candidate array** and computes turnover by numpy set operations on
+packed `u * n + v` edge keys, so `simulate_top_k(...) -> set[str]` over MBID-keyed dicts is a
+different **data model**, not a different spelling. The real interface is `Capture(path)`
+(int-id CSR: `offsets` / `cand` / `rank` / `mbids`), `mutual_undirected(cap, mask)` and
+`swaps_per_node(cap, base, new)`.
 
-Also run its green check before trusting anything downstream:
+The committed `tas_select.py` and `test_tas_select.py` are the record; Steps 1 and 3 above
+are kept unedited as the draft they were. All three of the plan's pinned properties survive
+in the committed tests, rewritten against the real interface.
 
-Run: `UV_LINK_MODE=copy uv run python -u analysis/2026-07-30-tag-discrimination/td_turnover.py --verify`
-Expected: the reconstructed selection reproduces `ALG-E-mutual_knn-k50.bin` edge-for-edge. **If it does not, stop** — every turnover figure depends on it.
+The green check **passed**: `exact_match: true` against `ALG-E-mutual_knn-k50.bin`. Note the
+real invocation needs `--capture <path.npz>` (required) and, to protect the committed `TD-`
+record, `--out` pointed at scratch — `td_turnover.py` runs its full 37-arm sweep after the
+verify block and would otherwise overwrite `td_turnover.json`:
+
+Run: `UV_LINK_MODE=copy uv run python -u analysis/2026-07-30-tag-discrimination/td_turnover.py --capture <path.npz> --verify --out <scratch>/td_turnover_reproduced.json`
 
 - [ ] **Step 6: Run it**
 

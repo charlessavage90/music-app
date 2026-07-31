@@ -12,13 +12,13 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-30, on the tag discrimination probe closeout (Tasks 1–3 of 8).**
+**Last updated: 2026-07-30, at the tag discrimination probe's Seam A (Tasks 1–4 of 8).**
 
 ---
 
 ## Next
 
-> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE and PART-RUN — Tasks 1–3 of 8 done, both gates PASSED, Tasks 4–8 unrun. **A fresh session continues it at Task 4, by the owner's instruction.**
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE and PART-RUN — Tasks 1–4 of 8 done, all three gates so far PASSED, Tasks 5–8 unrun. **A fresh session continues it at Task 5.**
 >
 > Entry point is the current handoff:
 > [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
@@ -37,8 +37,15 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > and `TAS-4`'s materiality bar is **1% edge turnover**.
 >
 > **The architecture question — build-time selection vs router-side pricing — is
-> deliberately still OPEN**, and the probe exists to inform it. The retiring session's
-> position, argued in the handoff: run Task 4 next, unchanged.
+> deliberately still OPEN**, and the probe exists to inform it. `TAS-4` has now answered the
+> build-time half and **did not kill it** — figures in
+> `builder/analysis/2026-07-30-tag-discrimination/tas_select.json`, reasoning in §9 of the
+> execution log. **`TAS-5` (the router half) is unrun, so the comparison the decision needs
+> does not exist yet**, and per the pre-registration's §5 a `TAS-5` result read without
+> `TAS-4` beside it — or vice versa — is uninterpretable.
+>
+> **⚠ `TAS-4`'s result is not yet believable: the randomised-label RED instrument check is
+> Task 7 and has not run.** A harness that has only ever come back green is not evidence.
 >
 > The coherence tag probe, Track B and the fame-proxy probes are **COMPLETE and their
 > records are untouched and remain accurate**; the coherence-tag-probe handoff is superseded
@@ -220,9 +227,10 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **When, and only when, a currency decision is made.** Its current sentence ("blind in the modern-obscure tail") is *true*, so adding `FPC-3`/`FPC-9`'s extent is growth in the owner's own requirements layer, not a correction. Raised by the doc-auditor 2026-07-30 and deliberately not actioned. |
 | **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **If a currency decision adopts the MBID-keyed proxy.** ~33k pageview requests, ~3–4 h, resumable. The `--validate` path already answered the decision-relevant question; the build is only needed once something scores against it. |
 | ✅ **MusicBrainz tag/genre coverage as a coherence instrument** | **DISCHARGED 2026-07-30** — the coherence tag probe ran exactly this check and its kill gate fired (`COH-2`, vocabulary-robust per `COH-6`); the retrodiction stayed unrun. Struck, kept for the record. |
-| **Adding `analysis` to builder's `testpaths`** | **Deferred by the owner 2026-07-30.** All 34 analysis tests pass, so it would work cleanly, but it changes what every builder `pytest` run collects. **Revisit if any `TAS-` test needs to gate a merge, or at the closeout that retires the `TAS-` probe.** Until then `TAS-` tests run only when invoked explicitly. |
+| **Adding `analysis` to builder's `testpaths`** | **Deferred by the owner 2026-07-30.** Every analysis test passes, so it would work cleanly, but it changes what every builder `pytest` run collects. **Revisit if any `TAS-` test needs to gate a merge, or at the closeout that retires the `TAS-` probe.** Until then `TAS-` tests run only when invoked explicitly. *(This row carried a count of "34" until 2026-07-30; it was stale, and the count is not this document's to own — read it off `pytest analysis/ -q`.)* |
 | **Replacing mutual k-NN with a tag-based degree limiter** | **Owner-raised 2026-07-30, ruled SEPARATE and explicitly NOT ruled out.** Needs its own pre-registration designed cold; mixing it with `TAS-` would make every attribution ambiguous. Track B's `R1a` corroborates the premise — reciprocity in isolation at k = 100 was null on both archives. **Condition: if the owner triggers it**, as with every other cap-adjacent decision. |
-| **`TAS-4`/`TAS-5` results are not believable until the red instrument check runs** | **Before any `TAS-` finding is written.** Task 7 carries the randomised-label check; a harness that has only ever come back green is not evidence. Not a deferral of work so much as an ordering constraint that must not be lost between sessions. |
+| **`TAS-4`/`TAS-5` results are not believable until the red instrument check runs** | **Before any `TAS-` finding is written.** Task 7 carries the randomised-label check; a harness that has only ever come back green is not evidence. Not a deferral of work so much as an ordering constraint that must not be lost between sessions. **⚠ Now guards a result that EXISTS rather than a hypothetical one — `TAS-4` ran 2026-07-30.** |
+| **Tag-aware selection increases the map's total edge count** | **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. `w_degree_hub` is dormant *because of the current graph's top-degree set*, and the pre-registration's held-constant row saying so is **scoped to this probe, which rebuilds nothing — it does not transfer to a rebuild.** Execution log §9.4/§9.5. |
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
 | **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |

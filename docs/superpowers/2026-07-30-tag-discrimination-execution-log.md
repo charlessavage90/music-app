@@ -9,7 +9,9 @@ Governing document: [`specs/2026-07-30-tag-discrimination-probe-preregistration.
 Plan: [`plans/2026-07-30-tag-discrimination-probe.md`](plans/2026-07-30-tag-discrimination-probe.md).
 Handoff: [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
 
-**Scope reached: Tasks 1–3 of 8.** Both gate reads resolved and passed. Tasks 4–8 unrun.
+**Scope reached: Tasks 1–4 of 8.** Three gate reads resolved and passed. Tasks 5–8 unrun.
+Task 4 was executed by a second session on 2026-07-30 and is recorded in **§9**, appended
+rather than folded into the sections above so the two sessions' work stays separable.
 
 ---
 
@@ -155,16 +157,18 @@ point when weighted by band size.
 | `TAS-1` — labels at both ends of famous–famous connections | **PASSED**, far above bar |
 | `TAS-2` — does agreement vary between candidates | **PASSED**, well clear of both the kill and the weak-signal flag |
 | `TAS-3` — diagnostic, no bar | Signal largely **independent** of similarity; the great majority of candidate lists are not already in agreement order — the opposite of the failure mode it was written to catch |
-| `TAS-4`, `TAS-5`, `TAS-6` | **NOT REACHED.** Unrun, not null. |
+| `TAS-4` — would it change which neighbours survive selection | **PASSED (does not kill)**, by a wide margin at every λ, in the amended `TAS-AM1` currency of edge turnover. Added §9. |
+| `TAS-5`, `TAS-6` | **NOT REACHED.** Unrun, not null. |
 
-Figures: `builder/analysis/2026-07-30-tag-discrimination/tas_signal.json` and
-`tas_tags.json`.
+Figures: `builder/analysis/2026-07-30-tag-discrimination/tas_signal.json`,
+`tas_tags.json` and `tas_select.json`.
 
 **Instrument checks:** the `TD-` reconstruction reproduces `ALG-E-mutual_knn-k50.bin`
 edge-for-edge (`td_turnover.py --verify`), and this session's three edge classes sum to
-exactly the adopted artifact's independently-measured edge count. The randomised-label
-**red** check belongs to Task 7 and has **not** run — `TAS-4`/`TAS-5` results must not be
-believed before it does.
+exactly the adopted artifact's independently-measured edge count. Re-run at Task 4 on a
+regenerated capture and still exact; see §9.1. The randomised-label **red** check belongs to
+Task 7 and has **not** run — **`TAS-4`'s result must not be believed before it does**, and
+that now applies to a result that exists rather than to a hypothetical one.
 
 ---
 
@@ -234,3 +238,102 @@ unless it reads it.
 > internally consistent, and wrong by 39% and 92% respectively. Caught before commit only
 > because D6 names the commands and running them is cheap. A retained log is precisely where
 > a fabricated figure would have become the baseline every future closeout diffed against.
+
+---
+
+## §9 Task 4 — `TAS-4`, executed by a second session, 2026-07-30
+
+Appended rather than merged into §1–§8 above: those record the first session's work, and a
+reader needs to be able to tell which session measured what. **Figures live in
+`tas_select.json`**, per this document's role line; nothing below restates one.
+
+### §9.1 The three instrument checks, all run before any arm was read
+
+The order matters and is the reason this section leads with it: `TAS-4` is a gate, and a
+gate read on an unverified harness is worth nothing.
+
+1. **Green, asserted in `main()` rather than assumed.** λ = 0 must reproduce the baseline
+   selection bit for bit. It is an `assert`, so the run cannot produce a number if it fails.
+2. **`td_turnover.py --verify`.** The reconstruction reproduces `ALG-E-mutual_knn-k50.bin`
+   edge for edge on a freshly regenerated capture — the sha matches what §8's amendment
+   asserts, and `exact_match` is true.
+3. **The regenerated capture reproduces the committed `TD-2` record exactly** — all 37 arms,
+   every field. This was not in the plan. It is nearly free once the capture is rebuilt, and
+   it closes the one gap the handoff flagged: the captures live in a session scratchpad and
+   do not survive, so **every `TD-` figure in the record was resting on a file no later
+   session could see.** It is now known to be regenerable, not merely assumed to be.
+
+**The red check is still owed and still Task 7's.** Nothing in §9 is believable until it
+runs. This is the deferral `NEXT.md` carries as an ordering constraint, and it now guards a
+result that exists.
+
+### §9.2 The plan's Task 4 did not describe the code it was written against
+
+The handoff predicted a keying mismatch in `load_capture` / `mutual_edge_set`. It is a
+**data-model** mismatch, and larger than predicted: neither name exists, and `td_turnover.py`
+expresses a selection as a **boolean mask over one flattened candidate array**, computing
+turnover by numpy set operations on packed `u * n + v` edge keys. The plan's
+`simulate_top_k(...) -> set[str]` over MBID-keyed dicts is a different shape, not a different
+spelling.
+
+Resolved by keeping the plan's **pinned properties** and rewriting them against the real
+interface — λ = 0 exactness, a genre match promoted past a stronger mismatch at the cap
+boundary, an unlabelled candidate not demoted. The plan's Step 5 existed precisely to catch
+this, which makes **four** plan defects found by verify-against-source steps the plan itself
+carried. That is now the strongest single argument in this record for not skipping one.
+
+### §9.3 Decisions taken, with reasoning
+
+**The neutral rule is called, never inlined.** An inline median would roughly halve the
+agreement field's runtime. It would also be a second copy of the pre-registration's **one
+dormant term** — inert at λ = 0, active in every arm — free to drift from the routing arm's
+copy in Task 6 while both documents claimed they shared one rule. `tas_common` exists to make
+that impossible; buying speed by defeating it would be a poor trade.
+
+**Nodes absent from the fixed fame frame are counted `unframed`, not defaulted to percentile
+zero.** `tas_signal` uses `frame.get(mbid, 0.0)`, which is safe there because it runs on the
+artifact the frame is built from, so the default never fires. On the capture side it fires,
+and percentile 0 would silently class those connections obscure–obscure — moving a per-class
+figure with no trace. Pinned by test, and the measured count matches the largest-component
+prune's edge count exactly, which is the arithmetic that confirms the classification is
+right rather than merely defensible.
+
+**The median is reported and labelled retired.** `TAS-AM1` retires it as the statistic. It is
+still emitted under an explicit `_RETIRED_STATISTIC` name so `TD-3`'s zero-inflation is
+visible in this record rather than taken on trust from another one.
+
+**Maximum reuse of `td_turnover.py`, zero edits to it.** `Capture`, `mutual_undirected` and
+`swaps_per_node` are imported. The only new machinery is the ranking field, which supplies
+real tag agreement where `TD-2` supplied a synthetic uniform one. The frozen probe was not
+touched, and its committed output was protected during re-running by pointing `--out` at
+scratch.
+
+### §9.4 What the comparison against `TD-2` bought, and what it cost nothing to get
+
+`TD-2`'s `MULT-IND` / `MULT-SYM` arms use **the same functional form, the same substrate and
+the same λ values** as `TAS-4`, differing in exactly one column: the field is a synthetic
+uniform draw rather than real tag agreement. That is an isolating baseline in the factor
+table's sense, and it was already committed — so `TAS-4` acquired a one-knob control for
+free, and one nobody designed for it.
+
+Two things it shows, both recorded here as **reasoning**, with the numbers in
+`tas_select.json` and `td_turnover.json`:
+
+- **The real tag signal reorders considerably *less* than a uniform random field at the same
+  λ.** Expected, and worth stating because it means the λ grid's numbers are not a generic
+  property of the functional form — they are a property of tags.
+- **Tag-aware selection makes the map denser: creations exceed deletions at every λ, and by a
+  wider margin than even the *symmetric* synthetic arm.** Jaccard is symmetric, so two
+  artists sharing genres promote each other, and genre agreement is clustered in a way a
+  random symmetric field is not. **This is a structural consequence nothing in the
+  pre-registration anticipated**, and it is not a `TAS-4` finding — `TAS-4` asks whether
+  selection would change, and the answer does not depend on it. It is flagged in §9.5 as
+  something a rebuild pre-registration must handle.
+
+### §9.5 Deferrals opened by Task 4
+
+| Deferral | Condition |
+|---|---|
+| **Tag-aware selection increases total edge count** | **Before any rebuild pre-registration is written.** Mutual k-NN bounds each artist's own list, not the count of *mutual* pairs, so a symmetric ranking signal raises mean degree. Track B's cap work, `w_degree_hub` (dormant, and dormant *because of the current graph's top-degree set*), and `CRS-C4`'s hub cost all sit downstream of degree. A rebuild arm must measure it, and the `§0` held-constant row asserting `w_degree_hub` stays dormant is scoped to *this* probe, which rebuilds nothing — **it does not transfer to a rebuild.** |
+| **797 capture nodes carry no labels because the tag frame's population is the adopted artifact, not the capture** | **Accepted, won't chase.** They are the nodes the largest-component prune removes, they carry 18 baseline edges between them, and they are treated exactly as genuinely unlabelled artists are. A second-order effect survives — such a node can still occupy a top-50 slot in an in-component artist's candidate list — and is not measured. Reopen only if a rebuild arm's turnover needs attributing to the node. |
+| **One new Snyk Low finding: a CLI `--out` path flows into `pathlib.Path` (`tas_select.py`)** | **Recorded, not fixed, and the acceptance is the owner's to extend.** It is the same class as the four pre-existing findings in this directory's frozen `td_*` probes and the 13 already accepted under `builder/analysis/`. It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path would break the intended usage. Flagged rather than absorbed silently, because a session should not widen an accepted-risk set on its own authority. |
