@@ -389,3 +389,43 @@ knowing and is **not** drift.
 **Scope: `REL-7`'s statistic and `REL-C1`'s tolerance, and nothing else.** `REL-1`'s 50% bar,
 `REL-3`'s null-relative bars, `REL-6`'s adverse condition, the §1 validity filter and the §5
 read table are all untouched, and none of them had produced a figure when this was written.
+
+### `REL-AM2` — `REL-C1` carried the same defect `REL-AM1` fixed, and it was a weak check anyway
+
+**⚠ APPENDED AFTER `REL-1`, `REL-5` AND `REL-6` HAD PRODUCED FIGURES, AND THE AUTHOR HAD SEEN
+THEM.** This is a worse disclosure position than `REL-AM1`'s and must be read as such: the
+headline result (`REL-1` = 58.8%, a pass) was known when this amendment was written, so the
+usual protection — that the author could not have known which way the repair would push — is
+**absent**. What is offered in its place is that (a) the defect is identical to one already
+disclosed and committed in `REL-AM1`, at a second site that fix missed, and (b) the repair
+makes the check **stricter**, not looser: its tolerance falls from 11.73% to 0.5%.
+
+**What was wrong, part one — the same conflation.** `REL-C1` compared the dump's artist-level
+`genres` against `F0` (LB ∪ P136) and failed at an 11.73% gap. That is P136's contribution,
+exactly as in `REL-AM1`. The check went red for a defect in **itself**, not in the pipeline.
+
+**What was wrong, part two, and it matters more.** Fixing only the comparand would have made
+`REL-C1` compare the dump's genres against the LB half — which is *precisely what `REL-7`
+already measures*. The check would then pass by construction whenever `REL-7` showed low
+drift, and would test **no code at all**. A check that duplicates another measurement is not
+an instrument check; it is a second copy of a number.
+
+**The correction.** `REL-C1` now exercises the **actual aggregation code path**. It builds a
+synthetic per-artist structure in which each artist has exactly one attributable pseudo-release
+carrying that artist's own dump-level genres, pushes it through the same `frame_sets()` that
+produces `F1`, and requires the output to equal the LB half of the frame artist-for-artist.
+That tests `frame_sets`, `aggregate`, the strict-filter flag and the MBID keying — the
+machinery `REL-1` actually rides on — rather than re-testing the data.
+
+**Pass condition:** disagreeing artists ≤ `max(REL-7 drift, 0.5%)`. Set-level equality, not a
+count match: a pipeline that labelled the right *number* of artists with the wrong *labels*
+must fail, and a count comparison would let it through.
+
+**Scope: `REL-C1`'s construction and pass condition only.** No criterion bar moves. `REL-1`'s
+50% bar, `REL-3`'s null-relative bars and `REL-6`'s adverse condition are untouched, and
+**`REL-1`, `REL-5` and `REL-6`'s figures are not recomputed by this amendment** — they were
+produced by `rel_rg_dump.py`, which this does not modify.
+
+**`REL-C2` passed and is unchanged.** Its shuffled lower-half coverage came back *higher* than
+the real one (63.5% vs 58.8%), which is the invariance §4 predicted in advance and the reason
+that figure is barred from being read as evidence about `REL-1`.

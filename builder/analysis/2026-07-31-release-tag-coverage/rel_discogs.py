@@ -71,9 +71,14 @@ def collect(wanted: set[str]) -> dict[str, list[dict]]:
     per_artist: dict[str, list[dict]] = defaultdict(list)
     began = time.time()
     seen = kept = 0
-    context = ET.iterparse(str(DISCOGS_RELEASES), events=("end",))
-    for _event, elem in context:
-        if elem.tag != "release":
+    # `elem.clear()` alone is NOT enough: the emptied <release> shells stay
+    # attached to the root as siblings, so the tree still grows without bound
+    # over ~20M releases. Holding the root and clearing it too is what actually
+    # bounds memory.
+    context = ET.iterparse(str(DISCOGS_RELEASES), events=("start", "end"))
+    _event, root = next(context)
+    for event, elem in context:
+        if event != "end" or elem.tag != "release":
             continue
         seen += 1
         artists = elem.find("artists")
@@ -95,6 +100,7 @@ def collect(wanted: set[str]) -> dict[str, list[dict]]:
                 per_artist[artist_id].append(record)
                 kept += 1
         elem.clear()
+        root.clear()
         if seen % 1_000_000 == 0:
             mins = (time.time() - began) / 60
             print(f"  {seen:,} releases, {kept:,} kept ({mins:.1f} min)", flush=True)

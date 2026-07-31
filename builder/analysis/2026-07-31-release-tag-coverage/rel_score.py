@@ -43,6 +43,7 @@ from rel_common import (
     fame_frame,
     graph_mbids,
     jaccard,
+    lb_genre_sets,
 )
 from rel_artist_dump import OUT as ARTIST_OUT, OUT_INDEX as ARTIST_INDEX
 from rel_rg_dump import OUT_RAW as RG_RAW, frame_sets
@@ -104,18 +105,36 @@ def main() -> None:
     drift = artist_summary["rel_7_fidelity"]["overall_drift_share"]
     print(f"REL-7 drift (REL-C1's tolerance): {drift:.2%}")
 
-    # ---------- REL-C1: can the pipeline recover an answer we already have?
-    # Feed it ARTIST-level tags from the dump in place of release-level ones.
-    artist_as_frame = {
-        m: set((index.get(m) or {}).get("genres") or []) for m in mbids
+    # ---------- REL-C1 (as corrected by REL-AM2): does the AGGREGATION CODE
+    # recover an answer we already have?
+    #
+    # Two defects in the first version, both fixed here. It compared against
+    # F0 (LB U P136) and so failed on P136's contribution, the same conflation
+    # REL-AM1 fixed in REL-7. And fixing only the comparand would have made it
+    # compare the dump's genres against the LB half -- which is exactly what
+    # REL-7 measures, so it would have passed by construction and tested NO
+    # CODE. A check that duplicates another measurement is not a check.
+    #
+    # So it now runs the real path: give each artist one attributable
+    # pseudo-release carrying their own dump-level genres, push it through the
+    # SAME frame_sets() that builds F1, and require set equality against the LB
+    # half. This exercises frame_sets, aggregate, the strict-filter flag and
+    # the MBID keying -- the machinery REL-1 actually rides on.
+    lb_only = lb_genre_sets()
+    synthetic = {
+        m: [{"g": sorted((index.get(m) or {}).get("genres") or []), "t": [], "a": True}]
+        for m in mbids
     }
-    recovered = sum(1 for m in mbids if artist_as_frame[m])
-    known = sum(1 for m in mbids if f0[m])
-    c1_gap = abs(recovered - known) / len(mbids)
-    c1_pass = c1_gap <= max(drift, 0.005) + 1e-9
-    print(f"REL-C1: pipeline on artist-level tags labels {recovered:,}; "
-          f"F0 labels {known:,}; gap {c1_gap:.2%} "
-          f"-> {'PASS' if c1_pass else 'FAIL'}")
+    recovered_sets = frame_sets(synthetic, mbids, field="g", strict=True)
+    # Set equality, not a count match: a pipeline labelling the right NUMBER of
+    # artists with the WRONG labels must fail, and counts would let it through.
+    disagree = [m for m in mbids if recovered_sets[m] != lb_only[m]]
+    c1_gap = len(disagree) / len(mbids)
+    c1_tolerance = max(drift, 0.005)
+    c1_pass = c1_gap <= c1_tolerance + 1e-9
+    print(f"REL-C1: aggregation path over artist-level tags disagrees with the "
+          f"LB half on {len(disagree):,}/{len(mbids):,} artists ({c1_gap:.2%}, "
+          f"tolerance {c1_tolerance:.2%}) -> {'PASS' if c1_pass else 'FAIL'}")
 
     # ---------- REL-C2: shuffle ownership
     f1 = frame_sets(per_artist, mbids, field="g", strict=True)
@@ -179,7 +198,7 @@ def main() -> None:
                 "instrument_checks": {
                     "rel_c1_pass": c1_pass,
                     "rel_c1_gap": round(c1_gap, 4),
-                    "rel_c1_tolerance": round(max(drift, 0.005), 4),
+                    "rel_c1_tolerance": round(c1_tolerance, 4),
                     "rel_c2_pass": c2_pass,
                     "rel_c2_lower_half_coverage_real": round(cov_real, 4),
                     "rel_c2_lower_half_coverage_shuffled": round(cov_shuf, 4),
