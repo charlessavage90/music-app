@@ -1,5 +1,27 @@
 # The Discogs style vocabulary, in full
 
+## Owner read, 2026-08-01 — calibration, his words, lightly condensed
+
+> - Styles with at least 400 carriers look like true sub-genres ("k pop", "death
+>   metal", "chillwave", "indie pop") — real terms people would recognize and use
+>   to describe the type of music they like.
+> - 200–400 carriers: a mix — some fit the group above ("city pop", "reggaeton",
+>   "britpop", "ragtime"), some are more niche descriptors ("melodic death metal",
+>   "sludge metal", "cloud rap").
+> - 100–200: still a mix of probably-good labels ("brass band", "hyperpop", even
+>   "nursery rhymes") and some that start to truly look useless ("son", "dj battle
+>   tool", "footwork", "ye ye").
+> - Below 100, especially below 20: degrades on a gradient — real descriptors
+>   mixed with labels that are confusing, super-niche, or so broad their meaning
+>   is unclear ("mass", "lied", "serial").
+>
+> These cutoff points aren't hard lines and there are exceptions in both
+> directions across all groups, but they're where the transitions seemed clear.
+
+This is a preference/calibration record in the WHAT-GOOD-LOOKS-LIKE sense: no
+threshold may be read off it as a bar, but a criterion that contradicts it is
+wrong.
+
 **737** distinct style labels reach **54,321** artists; the closed genre list has **16** labels reaching **55,831**. Every style-carrying artist also carries a genre (the REL- record), which is why styles can never add reach — only sharpness, or noise.
 
 Sorted by carrier count, descending. `weight` is the rarity weight `ln(N / carriers)` the weighted schemes would give one shared occurrence of the label.
