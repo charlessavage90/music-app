@@ -170,6 +170,14 @@ probe says the resulting journeys sound better.
   graph artist (`wgt_release_raw.json`; descriptive, no `WGT-` reading consumes it). The
   owner's parked label-affinity and junk-label-clustering ideas start from data now, not
   from a fresh 322 GiB stream.
+- **Discogs genres and styles are hierarchical — styles are genre-children** (owner-
+  verified 2026-08-01 against Discogs' documentation and its release-submission form,
+  which filters selectable styles by chosen genre). This is the *mechanism* behind §1's
+  zero-incremental-reach bound, which was measured before it was explained. The
+  style→parent-genre mapping is not published, and our aggregated JSONs flattened the
+  per-release pairing — but the on-disk Discogs dump retains it, so the table is one
+  pass away if a hierarchical agreement device (style agreement conditional on genre
+  agreement — a family nobody has proposed) is ever designed.
 
 ## §7 Weakest links
 
