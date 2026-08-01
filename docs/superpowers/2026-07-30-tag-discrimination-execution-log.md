@@ -628,3 +628,67 @@ before being killed, having produced nothing — and it looked merely slow rathe
 because the invocation also piped through `tail`, which buffered all progress output away.
 **Two lessons, both cheap:** materialise every array from an `.npz` once, as the committed
 `_tas2_tas3` already did; and do not pipe a long unattended run through `tail`.
+
+---
+
+## §14 Closeout
+
+### §14.1 Artifact provenance (D3) — recomputed, not transcribed
+
+| sha256 | file | used for |
+|---|---|---|
+| `4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8` | `builder/scratch/graph-t15-tiebreakfix.bin` | the **adopted** artifact — the fixed fame frame for `TAS-6` and `TAS-AM4`, and `TAS-1`/`TAS-5`'s map-side substrate |
+| `73feffa03856f55dda134b84aa5ee40073495ae16f27e8116a4d961b65a69faa` | `builder/scratch/cb-cells/ALG-E-mutual_knn-k50.bin` | the green check's target — the pre-cap capture reproduces it **edge for edge** |
+| `893609e97fb31f2a679a5e8005f7488d771414658d671a9eee979a757b550d90` | `alge_capture.npz` (session scratchpad, **not** the repo) | the selection-side substrate for `TAS-2`/`TAS-3`/`TAS-4`/`TAS-6`/`TAS-AM3`/`TAS-AM4` |
+
+**The capture will not survive this session** and is regenerable from committed code via
+`td_capture.py` in ~6.5 min cold. Its sha is recorded anyway, so a future regeneration that
+does *not* match is detectable rather than silent — and it reproduced the committed `TD-2`
+record's 37 arms exactly, which is the stronger check.
+
+**The first two are NOT interchangeable** and differ by 36 artists / 193 edges. `TAS-AM2`'s
+standing rule holds: no read compares a capture-side figure against an artifact-side one.
+
+### §14.2 Standing context layer (D6)
+
+Unconditional layer: **44,183 characters.** Conditional layer: **2,154 lines.**
+
+**Delta zero on both, verified from the diff rather than asserted.**
+`git diff --stat 3049fcd..HEAD -- CLAUDE.md .claude/` is empty, and every `memory/*.md`
+predates this session. No `CLAUDE.md` row, memory file, skill description or agent definition
+was added, removed or reworded — including across the `REL-` merge. Two amendments, a new
+handoff and five log sections all live in conditional `docs/`, which costs a session nothing
+unless it reads them.
+
+### §14.3 Closeout outcomes
+
+- **A4 default-flip: inapplicable, and said rather than skipped.** This work added no config
+  knob. `BuilderConfig` and `ApiConfig` are untouched; `w_coh` still does not exist and this
+  probe does not propose it.
+- **A5:** no listener on 8000/5173/4173/3000. This session started no server and left none
+  running. Nothing was queued that needs one.
+- **B1:** `docs-lint.sh` hard checks passed; `doc-auditor` returned **no findings**. **But
+  three defects in the probe directory's `README.md` were found outside the audit** by
+  checking whether the files it lists exist — two scripts listed that do not (`tas_pairs.py`,
+  `tas_route.py`, Tasks 5 and 6), and a description of the randomised-label red check that
+  `TAS-AM3` had withdrawn. **Recorded as a limitation of "audit clean", not as a criticism of
+  it:** file existence is not a class that reading prose detects.
+- **B2:** `tas_select` and `tas_guard` have inbound imports. `tas_frame_eval` has none and is
+  **not an orphan** — it is a command-line entry point, the same shape as `tas_signal` and
+  `td_turnover`. Asked rather than assumed, per B2's own framing.
+- **B3:** four deliberate mutations — an off-by-one in the top-*k* mask, the neutral rule
+  returning zero, turnover ignoring creations, and unframed nodes classed as obscure — **all
+  went red**, then restored green with a clean tree. The tests are not vacuous.
+- **B4/B5:** every docstring reuse claim verified against the imports. `ml-graph-analyst.md`
+  carries all six cost-function terms and is current — checked because it is the file that
+  once described that function with a term missing. Neither `NEXT.md` nor this log restates a
+  criterion figure; both cite.
+- **D4:** builder 129, api 217, frontend 107 across 18 files. All pass. The probe's own 42
+  tests run only when invoked explicitly — `testpaths` is still `["tests"]` by the owner's
+  deferral, whose condition is **not** due, since it fires at the closeout that *retires* this
+  probe and Tasks 5–8 are unrun.
+- **Snyk:** 7 findings in the probe directory, all **Low**, all one class (a CLI `--out` path
+  reaching `pathlib.Path`). Three are this session's. Same class as the 13 already accepted
+  under `builder/analysis/`; it cannot be meaningfully sanitised, because captures
+  deliberately live outside the repo. **Recorded in `NEXT.md`'s deferral table rather than
+  absorbed** — widening an accepted-risk set is the owner's call.
