@@ -23,6 +23,43 @@ the point.**
 
 ---
 
+## N/A — 2026-08-01 — we finished testing the genre idea, and it did not work
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are empty; no
+server was started and none was left behind. No routing, no graph, no weighting, no cost
+function, and not one line of the app or the website changed. **A journey you build now is
+identical to one from yesterday.**
+
+**What happened, in plain terms.** We had two ways genres might improve the journeys: change
+which artists get connected when the map is built, or leave the map alone and let genre nudge
+each step as a journey is put together. We had already found the first one makes the app worse
+at reaching obscure artists, which rules it out. This session tested the second.
+
+- **Turning genre on changed almost every journey** — around nine in ten. That looked like a
+  strong result.
+- **Then we scrambled the genres at random and ran it again. Almost exactly the same journeys
+  changed.** So the change was never about genre. It is what happens when you add *any* new
+  cost to every step of a long journey — and journeys here run to about a dozen steps for
+  obscure artists, where changing one artist anywhere makes the whole thing count as different.
+- **We checked the measuring equipment first, both ways**, and it is sound: our copy of the
+  route-builder returns exactly what the real app returns when the genre setting is off, and
+  when we turn genre up until nothing else matters, journeys go precisely where genre alone
+  says they should. So this is a real "no", not a broken instrument.
+
+**One thing we found by accident that is worth telling you.** On the 120 journeys we tested,
+the app currently delivers **no artist at all from the least-famous tenth** in the middle of a
+journey. Not "few" — none. That is the thing you have called a defect rather than a limitation,
+and this is the sharpest measurement of it we have. It also means the safety check we had
+written for this experiment could not do anything, since you cannot measure a fall from zero.
+
+**What it does not mean.** Nothing has been decided, built or adopted, and none of this says
+your journeys would sound better or worse. That still needs your ears — no offline measurement
+can say it, and this session did not spend any of your listening time.
+
+Detail, if you want it: `docs/superpowers/2026-07-30-tag-discrimination-execution-log.md` §16.
+
+---
+
 ## N/A — 2026-07-31 — we tested whether genre labels could shape the map, and found a catch
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are empty; no

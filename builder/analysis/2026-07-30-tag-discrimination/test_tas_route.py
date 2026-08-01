@@ -54,9 +54,15 @@ def test_zero_weight_ignores_labels_entirely(cfg):
 
 
 def test_a_dominating_weight_routes_through_the_agreeing_neighbour(cfg):
+    # `d` (node 3) is the agreeing neighbour, deliberately the HIGHER id.
+    # THIS MATTERS: with the two routes identical on every production term, a
+    # tie-break on lowest id picks node 1 -- so an earlier version of this test,
+    # which expected [0, 1, 2], PASSED with the coherence term zeroed out. It was
+    # green for the wrong reason. Caught by closeout B3 on 2026-08-01; expecting
+    # the higher-id route is what makes the coherence term load-bearing here.
     store = FakeStore()
-    labels = {"a": {"rock"}, "b": {"rock"}, "c": {"rock"}, "d": {"jazz"}}
-    assert find_path_coh(store, 0, 2, cfg, labels, 1e6 * cfg.w_sim) == [0, 1, 2], \
+    labels = {"a": {"rock"}, "b": {"jazz"}, "c": {"rock"}, "d": {"rock"}}
+    assert find_path_coh(store, 0, 2, cfg, labels, 1e6 * cfg.w_sim) == [0, 3, 2], \
         "the coherence term did not reach the cost function"
 
 

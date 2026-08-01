@@ -9,9 +9,16 @@ Governing document: [`specs/2026-07-30-tag-discrimination-probe-preregistration.
 Plan: [`plans/2026-07-30-tag-discrimination-probe.md`](plans/2026-07-30-tag-discrimination-probe.md).
 Handoff: [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
 
-**Scope reached: Tasks 1–4 of 8.** Three gate reads resolved and passed. Tasks 5–8 unrun.
-Task 4 was executed by a second session on 2026-07-30 and is recorded in **§9**, appended
-rather than folded into the sections above so the two sessions' work stays separable.
+**Scope reached: Tasks 1–7 of 8, across three sessions. Only Task 8 (the findings document
+and the owner-facing read) is unrun.** Each session's work is appended rather than folded in,
+so the three stay separable: **§1–§8** are the first, **§9–§14** the second (Task 4, Task 7's
+selection halves, `TAS-AM3`, `TAS-AM4`, closeout), **§15–§16** the third (the Discogs
+attribution correction, the rarity-weighting diagnostic, and `TAS-R1`–`TAS-R4` on the routing
+side).
+
+**The routing-side plan is a separate document** —
+[`plans/2026-07-31-tas5-routing-execution-plan.md`](plans/2026-07-31-tas5-routing-execution-plan.md)
+supersedes the original plan's Tasks 5, 6 and Task 7's routing halves; see §16.1 for why.
 
 ---
 
@@ -791,3 +798,147 @@ Recorded as a standing caution: intuitions about what these label sources *do* a
 here, which is an argument for decomposing a frame question rather than reasoning about it — and
 for treating "the enriched frame blunts the signal" as exactly the kind of summary that needed
 this decomposition before it entered the record.
+
+---
+
+## §16 The routing side, `TAS-R1`–`TAS-R4` — the instrument works and the result is a null
+
+**2026-08-01, same session as §15.** Governing plan:
+[`plans/2026-07-31-tas5-routing-execution-plan.md`](plans/2026-07-31-tas5-routing-execution-plan.md),
+which supersedes the original plan's Tasks 5, 6 and Task 7's routing halves. Figures:
+`tas_route.json`, `tas_route_guard.json`. **Tasks 1–7 of the probe are now complete; Task 8
+(findings and the owner-facing read) is deliberately unrun.**
+
+### §16.1 Why a new plan rather than executing the old Tasks 5–7
+
+Five things in the inherited tasks no longer described the code, and **one was a trap rather
+than merely stale**: Task 7 Step 5 still instructed the executor to make the randomised-label
+red check fire and *stop* if it did not — the check `TAS-AM3` **withdrew as unachievable**. A
+fresh executor following the plan would have "fixed" the harness until a shuffle fired, which
+is precisely what the handoff forbids. The others: `tas_guard.py` already existed where the
+plan said *Create*; `tas_select.simulate_top_k` never existed at all; `neutral_for` was called
+without being imported; and the baseline was recomputed once per weight.
+
+**The trap is the finding, not the staleness.** A plan that is merely out of date gets
+corrected on contact. A plan that instructs the executor to defeat a withdrawn check reads as
+authoritative and would have been followed.
+
+### §16.2 `TAS-AM5` — an amendment written before any routing figure existed
+
+**`TAS-AM3`'s scope clause does not transfer to the routing side, and `TAS-AM2` is why.**
+`TAS-AM3a` passes on bit-identity against `td_turnover.mask_multiplicative` and on reproducing
+`TD-2` — both on the pre-cap capture — while `TAS-AM2` puts `TAS-5` on the adopted artifact and
+forbids reading one against the other. There is no artifact-side reference to be identical to,
+and `td_pathedges.json` is not one: it is measured on `ALG-E` too.
+
+What transfers is the *property*: a fixed external reference rather than a judgement call.
+`TAS-AM5b` supplies one by **computing the reference independently** — a plain Dijkstra whose
+only cost is `(1 − agreement)` — and requiring the forked router at a dominating weight to
+reach that optimum exactly. Totals rather than node sequences, so ties are not read as defects.
+
+**This is the first amendment on this probe written before its results existed**, and it says
+so at its head. `TAS-AM3` and `TAS-AM4` both had to disclose the opposite. The git commit
+timestamp is the evidence, which is the half that cannot be reconstructed afterwards.
+
+### §16.3 Outcomes
+
+- **`TAS-AM5a` (equivalence): PASSED, 0 mismatches on the full draw.** The fork returns
+  production's paths exactly at zero weight. This is what licenses the fork omitting the
+  bypass machinery — proved, not argued.
+- **`TAS-AM5b` (liveness): PASSED, 0 failures.** The term reaches the cost function and can
+  fully redirect a journey to the coherence-optimal route.
+- **`TAS-5`: does not kill.** Journeys change at every non-zero weight, in every class.
+- **⚠ `TAS-AM5c` (null control): FIRES.** Permuting labels among labelled artists reproduces
+  nearly all of the real change rate, far above the pre-registered clause. **`TAS-5`'s change
+  is NOT attributable to genre structure**, and every `TAS-5` figure carries that caveat.
+- **⚠ `TAS-6`'s routing half is VACUOUS.** The baseline count of sub-decile interior artists is
+  **zero** — production routing delivers no bottom-decile artist mid-journey on any drawn pair
+  — so a 10% reduction cannot be measured and the adverse test returns false by construction.
+  **"Not adverse" here is a division-by-zero artifact, not a safety finding.** The zero is
+  itself a corroboration of `DD-F1`.
+
+**So neither architecture has an adoption case.** The build-time side is barred by `TAS-6`'s
+adverse *selection* half; the router side survives its kill bar but on a change the null
+control says is not about genre. **This is the fourth router intervention on this project to
+fail to demonstrate a real effect — and the first that looked like a success until the control
+ran.**
+
+### §16.4 Two deflations recorded before the null control ran
+
+Both were committed in `TAS-R3`'s message *before* `TAS-AM5c` existed, and both anticipated
+its shape. Recorded because a caveat written after a result is worth much less:
+
+1. **The gentlest weight is not gentle.** At `0.25 × w_sim` the added term is comparable in
+   size to the similarity term beside it. No cell in the grid is a light touch.
+2. **One substitution makes a whole journey "changed".** Journeys average roughly six hops
+   between famous artists and twelve between obscure ones, so near-total path-level change is
+   close to arithmetically forced. The class ordering in the results matches what path length
+   alone predicts, which is the tell.
+
+### §16.5 Defects found in this session's own output
+
+- **A test that was green for the wrong reason, caught by closeout B3.** With both routes
+  identical on every production term, a tie-break on lowest node id produced the expected path,
+  so `test_a_dominating_weight_routes_through_the_agreeing_neighbour` **passed with the
+  coherence term zeroed out**. Fixed by expecting the higher-id route. Four other mutations went
+  red as they should; this one did not, and only mutation testing could have found it.
+- **A substrate error in this session's own reporting, corrected in §15.5.** "Approximately
+  zero" was measured on the artifact and quoted as though it governed the selection side.
+- **`docs/README.md` did not classify the new plan** — caught by `docs-lint.sh`, fixed.
+
+### §16.6 Closeout, 2026-08-01
+
+**Artifact provenance (D3) — recomputed, not transcribed.** Unchanged from §14.1: the adopted
+artifact and the `ALG-E` reference cell carry the same sha256s, and **the regenerated
+`alge_capture.npz` matches §14.1's recorded value byte for byte**. That check existed only
+because §14.1 wrote the sha down against a future regeneration; it has now fired and passed.
+**No artifact was built, adopted or modified by this work.**
+
+**Standing context layer (D6).** Unconditional layer: **44,183 characters.** Conditional layer:
+**2,154 lines.** **Delta zero on both, verified from the diff rather than asserted** —
+`git diff --stat 5d66118..HEAD -- CLAUDE.md .claude/` is empty and every `memory/*.md` predates
+this session. Two new probe modules, a new plan, a new handoff, an amendment and two log
+sections all live in conditional `docs/` and `builder/analysis/`, which cost a session nothing
+unless it reads them.
+
+**Closeout outcomes:**
+
+- **A4 default-flip: inapplicable, and said rather than skipped.** This work added no config
+  knob. `w_coh` still does not exist in `ApiConfig`, deliberately — it is harness-local, and
+  shipping it would be an adoption this probe does not license.
+- **A5:** no listener on 8000/5173/4173/3000. This session started no server and left none
+  running. The queued test needs none.
+- **B1:** `docs-lint.sh` **failed one hard check** — the new plan was not classified in
+  `docs/README.md` — fixed, then clean. The `doc-auditor` then found **seven live HIGH
+  defects, all staleness in `NEXT.md`, the probe `README.md` and the superseded handoff**,
+  every one of which would have told a cold reader that Tasks 5–8 were unrun and pointed it at
+  the trap. All fixed. **One of its findings was stale on arrival** — it audited a snapshot
+  taken before §16 was appended and reported the section missing; its `LOW` finding (that path
+  *cost* might be compared) was checked against source and is clean, since `tas_route.py:206`
+  compares path lists. **Checking each finding against current state, rather than accepting or
+  dismissing the report wholesale, is the lesson.**
+- **B2:** `tas_pairs`, `tas_route` and `tas_route_guard` all have inbound imports.
+  `tas_frame_split` and `tas_weighting` have none and are **not orphans** — both are
+  command-line entry points with `main()` and a `__main__` guard, the same shape as
+  `tas_signal` and `tas_frame_eval`. Asked rather than assumed.
+- **B3: this found a real defect, and only mutation testing could have.** Five deliberate
+  mutations — counting path endpoints, defaulting an unframed artist to obscure, the neutral
+  rule returning zero, the coherence term zeroed, and similarity leaking into the
+  agreement-only reference. Four went red immediately. **The fifth did not: with two routes
+  identical on every production term, a tie-break on lowest node id produced the expected
+  path, so `test_a_dominating_weight_routes_through_the_agreeing_neighbour` passed with the
+  coherence term switched off.** Fixed by expecting the higher-id route; re-mutated and now
+  red. **Standing lesson: when a fixture offers two symmetric routes, assert the one a
+  tie-break would not pick.**
+- **B4/B5:** docstring claims checked against the imports beside them. `.claude/` swept for
+  stale shape claims and references to this work — **no reference to `TAS-5`, the routing side
+  or `tas_route` exists there**, so nothing in the auto-loaded layer went stale.
+- **D4:** builder 129, analysis 106, api 217, frontend 107 across 18 files. All pass. The
+  probe's own tests still run only when invoked explicitly — `testpaths` is unchanged by the
+  owner's deferral, whose condition is **not yet due**: it fires at the closeout that
+  *retires* this probe, and Task 8 is unrun.
+- **Snyk:** 11 findings in the probe directory, all **Low**, all one class (a CLI path
+  reaching `pathlib.Path` or `json.dump`). **Four are this session's.** Same class as the 13
+  already accepted under `builder/analysis/`; it cannot be meaningfully sanitised, because
+  captures deliberately live outside the repo. **Recorded in `NEXT.md`'s deferral table rather
+  than absorbed** — widening an accepted-risk set is the owner's call.

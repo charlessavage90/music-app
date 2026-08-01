@@ -1,6 +1,14 @@
 # Handoff — `TAS-4`, `TAS-6`'s selection half, `TAS-AM3` and `TAS-AM4`, 2026-07-31
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ Role: SUPERSEDED 2026-08-01 on next actions by
+[`2026-08-01-HANDOFF-tas5-routing.md`](2026-08-01-HANDOFF-tas5-routing.md)**, which continues
+this same track and is the CURRENT handoff. **This document remains authoritative for the
+`TAS-AM3`/`TAS-AM4` work's own internals**, but its status claims are stale: it says "Tasks 5–8
+NOT started" and treats the routing-side instrument question as owed. **Tasks 5–7 have since
+run** — `TAS-AM5a`/`b` passed, `TAS-AM5c` fired, and `TAS-6`'s routing half is vacuous. Its
+"open decision" section is also settled: `TAS-5` ran, and it was the right call.
+
+*(Original role line, retained:)* Supersedes
 [`2026-07-31-HANDOFF-release-tag-coverage.md`](2026-07-31-HANDOFF-release-tag-coverage.md)
 and [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md)
 on **next actions only** — both remain authoritative for their own tracks' internals. It does

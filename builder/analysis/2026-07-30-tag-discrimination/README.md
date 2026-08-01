@@ -115,7 +115,7 @@ heads; `TAS-AM5` was written before any routing figure existed and says that.**
 | `tas_pairs.py` | The §3 pair draw — pre-registered seed `20260730-tas`, classes carried end to end, 40 per class. Verified deterministic **across processes**, not just within one. Output: `tas_pairs.json`. |
 | `tas_route.py` | `TAS-5` — routing under a harness-local `w_coh` term, plus `TAS-AM5a` (equivalence) over the full draw on the adopted artifact. Aborts if `TAS-AM5a` fails. Output: `tas_route.json`. |
 | `tas_weighting.py` | **Diagnostic, not a criterion.** Should shared labels be weighted by how *rare* they are? Reports within-list reordering, selection turnover, and a retracted prediction. §1's device is **unchanged**. Figures: `tas_weighting.json`; reasoning: execution log §15. |
-| ⚠ `tas_route_guard.py` | **NOT YET BUILT** — `TAS-AM5b` (liveness), `TAS-AM5c` (null control) and `TAS-6`'s **routing** half. **No `TAS-5` outcome read is licensed until these have run** (§5). |
+| `tas_route_guard.py` | **BUILT AND RUN 2026-08-01.** `TAS-AM5b` (liveness — **passed**), `TAS-AM5c` (null control — **FIRED**) and `TAS-6`'s **routing** half (**vacuous**: the sub-decile baseline is zero, so the bar cannot fire and "not adverse" is a division-by-zero artifact). **`TAS-5`'s change is NOT attributable to genre structure** and every `TAS-5` figure carries that caveat. Output: `tas_route_guard.json`. Does **not** modify `tas_guard.py`, which holds the committed selection-side record. |
 
 ## The neutral rule is the one dormant term
 
