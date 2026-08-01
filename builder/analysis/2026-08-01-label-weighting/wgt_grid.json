@@ -1,0 +1,654 @@
+{
+ "frames": {
+  "W0": {
+   "cells": {
+    "plain": {
+     "median_iqr": 0.1726,
+     "spearman_vs_similarity": 0.1821
+    },
+    "rarity": {
+     "median_iqr": 0.1495,
+     "spearman_vs_similarity": 0.1867,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 1.0,
+       "p10": 0.9721,
+       "share_below_0.99": 0.247,
+       "share_below_0.9": 0.0157
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9955,
+       "p10": 0.9664,
+       "share_below_0.99": 0.3751,
+       "share_below_0.9": 0.0132
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.032247177739153914
+      },
+      "0.5": {
+       "turnover_share": 0.0448835982420163
+      },
+      "1.0": {
+       "turnover_share": 0.053325305911229866
+      },
+      "2.0": {
+       "turnover_share": 0.05632412643467303
+      }
+     }
+    },
+    "evidence": {
+     "median_iqr": 0.1514,
+     "spearman_vs_similarity": 0.2033,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 1.0,
+       "p10": 0.9269,
+       "share_below_0.99": 0.3464,
+       "share_below_0.9": 0.066
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9878,
+       "p10": 0.9154,
+       "share_below_0.99": 0.523,
+       "share_below_0.9": 0.0762
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.05399208585747794
+      },
+      "0.5": {
+       "turnover_share": 0.07403484354889367
+      },
+      "1.0": {
+       "turnover_share": 0.08607396638550553
+      },
+      "2.0": {
+       "turnover_share": 0.09280809079815278
+      }
+     }
+    },
+    "rarity_nosingle": {
+     "median_iqr": 0.1502,
+     "spearman_vs_similarity": 0.1865,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 1.0,
+       "p10": 0.972,
+       "share_below_0.99": 0.2476,
+       "share_below_0.9": 0.0157
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9955,
+       "p10": 0.9664,
+       "share_below_0.99": 0.3759,
+       "share_below_0.9": 0.0132
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.032238740486998194
+      },
+      "0.5": {
+       "turnover_share": 0.04476659091982125
+      },
+      "1.0": {
+       "turnover_share": 0.0531863697594391
+      },
+      "2.0": {
+       "turnover_share": 0.05629222265646809
+      }
+     }
+    }
+   },
+   "acting_slot_share": 0.658,
+   "singleton_union_mass_share_rarity": 0.0061
+  },
+  "W1": {
+   "cells": {
+    "plain": {
+     "median_iqr": 0.16,
+     "spearman_vs_similarity": 0.2048
+    },
+    "rarity": {
+     "median_iqr": 0.1397,
+     "spearman_vs_similarity": 0.2015,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9805,
+       "p10": 0.9273,
+       "share_below_0.99": 0.6229,
+       "share_below_0.9": 0.0567
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9741,
+       "p10": 0.9356,
+       "share_below_0.99": 0.8216,
+       "share_below_0.9": 0.0281
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.04826053412338823
+      },
+      "0.5": {
+       "turnover_share": 0.07120523708989909
+      },
+      "1.0": {
+       "turnover_share": 0.08868464289165942
+      },
+      "2.0": {
+       "turnover_share": 0.09933746099660053
+      }
+     }
+    },
+    "evidence": {
+     "median_iqr": 0.1389,
+     "spearman_vs_similarity": 0.2231,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9666,
+       "p10": 0.8788,
+       "share_below_0.99": 0.6601,
+       "share_below_0.9": 0.1409
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9551,
+       "p10": 0.8855,
+       "share_below_0.99": 0.8606,
+       "share_below_0.9": 0.1364
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.06377658228774419
+      },
+      "0.5": {
+       "turnover_share": 0.09482191165019707
+      },
+      "1.0": {
+       "turnover_share": 0.11952836570986759
+      },
+      "2.0": {
+       "turnover_share": 0.1349300674235307
+      }
+     }
+    },
+    "rarity_nosingle": {
+     "median_iqr": 0.1401,
+     "spearman_vs_similarity": 0.201,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9806,
+       "p10": 0.9273,
+       "share_below_0.99": 0.6225,
+       "share_below_0.9": 0.0563
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9742,
+       "p10": 0.9355,
+       "share_below_0.99": 0.8211,
+       "share_below_0.9": 0.0279
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.04824380748475263
+      },
+      "0.5": {
+       "turnover_share": 0.07109084633106692
+      },
+      "1.0": {
+       "turnover_share": 0.08863631970619504
+      },
+      "2.0": {
+       "turnover_share": 0.09921295195837625
+      }
+     }
+    }
+   },
+   "acting_slot_share": 0.8404,
+   "singleton_union_mass_share_rarity": 0.0034
+  },
+  "W4": {
+   "cells": {
+    "plain": {
+     "median_iqr": 0.1565,
+     "spearman_vs_similarity": 0.1942
+    },
+    "rarity": {
+     "median_iqr": 0.136,
+     "spearman_vs_similarity": 0.2029,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9659,
+       "p10": 0.8898,
+       "share_below_0.99": 0.753,
+       "share_below_0.9": 0.1177
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.962,
+       "p10": 0.91,
+       "share_below_0.99": 0.9189,
+       "share_below_0.9": 0.0753
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.056667752415791806
+      },
+      "0.5": {
+       "turnover_share": 0.08547686504241775
+      },
+      "1.0": {
+       "turnover_share": 0.10839947850761149
+      },
+      "2.0": {
+       "turnover_share": 0.1225665563604925
+      }
+     }
+    },
+    "evidence": {
+     "median_iqr": 0.1354,
+     "spearman_vs_similarity": 0.2247,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9386,
+       "p10": 0.8192,
+       "share_below_0.99": 0.7761,
+       "share_below_0.9": 0.2838
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9293,
+       "p10": 0.843,
+       "share_below_0.99": 0.9308,
+       "share_below_0.9": 0.2933
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.07526747012101927
+      },
+      "0.5": {
+       "turnover_share": 0.11520725357543886
+      },
+      "1.0": {
+       "turnover_share": 0.14814026611449826
+      },
+      "2.0": {
+       "turnover_share": 0.16770637688936588
+      }
+     }
+    },
+    "rarity_nosingle": {
+     "median_iqr": 0.1365,
+     "spearman_vs_similarity": 0.2023,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.966,
+       "p10": 0.8901,
+       "share_below_0.99": 0.7525,
+       "share_below_0.9": 0.1173
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9621,
+       "p10": 0.9102,
+       "share_below_0.99": 0.9184,
+       "share_below_0.9": 0.0753
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.056498626109760884
+      },
+      "0.5": {
+       "turnover_share": 0.08541492673297396
+      },
+      "1.0": {
+       "turnover_share": 0.10827485716476859
+      },
+      "2.0": {
+       "turnover_share": 0.12236904868377903
+      }
+     }
+    }
+   },
+   "acting_slot_share": 0.8969,
+   "singleton_union_mass_share_rarity": 0.0032
+  },
+  "W5": {
+   "cells": {
+    "plain": {
+     "median_iqr": 0.1403,
+     "spearman_vs_similarity": 0.2339
+    },
+    "rarity": {
+     "median_iqr": 0.1262,
+     "spearman_vs_similarity": 0.2181,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9807,
+       "p10": 0.9338,
+       "share_below_0.99": 0.676,
+       "share_below_0.9": 0.0471
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9775,
+       "p10": 0.9465,
+       "share_below_0.99": 0.84,
+       "share_below_0.9": 0.0157
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.039366938776371395
+      },
+      "0.5": {
+       "turnover_share": 0.062035866005123716
+      },
+      "1.0": {
+       "turnover_share": 0.07977713425499472
+      },
+      "2.0": {
+       "turnover_share": 0.09090031058253163
+      }
+     }
+    },
+    "evidence": {
+     "median_iqr": 0.1256,
+     "spearman_vs_similarity": 0.2322,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9606,
+       "p10": 0.8713,
+       "share_below_0.99": 0.7333,
+       "share_below_0.9": 0.1569
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9517,
+       "p10": 0.8808,
+       "share_below_0.99": 0.907,
+       "share_below_0.9": 0.1506
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.059210762293992414
+      },
+      "0.5": {
+       "turnover_share": 0.09292408470344067
+      },
+      "1.0": {
+       "turnover_share": 0.12030154257214801
+      },
+      "2.0": {
+       "turnover_share": 0.13723770926444967
+      }
+     }
+    },
+    "rarity_nosingle": {
+     "median_iqr": 0.1264,
+     "spearman_vs_similarity": 0.2178,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9808,
+       "p10": 0.934,
+       "share_below_0.99": 0.6752,
+       "share_below_0.9": 0.0468
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9776,
+       "p10": 0.9467,
+       "share_below_0.99": 0.8389,
+       "share_below_0.9": 0.0156
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.039326850244012564
+      },
+      "0.5": {
+       "turnover_share": 0.06190209812887116
+      },
+      "1.0": {
+       "turnover_share": 0.07952007135442937
+      },
+      "2.0": {
+       "turnover_share": 0.09075827588819028
+      }
+     }
+    }
+   },
+   "acting_slot_share": 0.8917,
+   "singleton_union_mass_share_rarity": 0.002
+  },
+  "W6": {
+   "cells": {
+    "plain": {
+     "median_iqr": 0.1418,
+     "spearman_vs_similarity": 0.2178
+    },
+    "rarity": {
+     "median_iqr": 0.1256,
+     "spearman_vs_similarity": 0.2145,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9752,
+       "p10": 0.9165,
+       "share_below_0.99": 0.7354,
+       "share_below_0.9": 0.0704
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9729,
+       "p10": 0.9365,
+       "share_below_0.99": 0.8932,
+       "share_below_0.9": 0.0277
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.04236739430224345
+      },
+      "0.5": {
+       "turnover_share": 0.06549651067943567
+      },
+      "1.0": {
+       "turnover_share": 0.0850018612419981
+      },
+      "2.0": {
+       "turnover_share": 0.09722510786047861
+      }
+     }
+    },
+    "evidence": {
+     "median_iqr": 0.124,
+     "spearman_vs_similarity": 0.2289,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9496,
+       "p10": 0.8464,
+       "share_below_0.99": 0.7754,
+       "share_below_0.9": 0.2118
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.9424,
+       "p10": 0.8649,
+       "share_below_0.99": 0.9314,
+       "share_below_0.9": 0.2005
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.062455854158958664
+      },
+      "0.5": {
+       "turnover_share": 0.09887314582641007
+      },
+      "1.0": {
+       "turnover_share": 0.12894645987914463
+      },
+      "2.0": {
+       "turnover_share": 0.14764672300680387
+      }
+     }
+    },
+    "rarity_nosingle": {
+     "median_iqr": 0.1259,
+     "spearman_vs_similarity": 0.2142,
+     "rank_correlation_vs_plain": {
+      "all": {
+       "artists": 71117,
+       "median": 0.9753,
+       "p10": 0.9167,
+       "share_below_0.99": 0.735,
+       "share_below_0.9": 0.0703
+      },
+      "where_cap_binds": {
+       "artists": 37006,
+       "median": 0.973,
+       "p10": 0.9366,
+       "share_below_0.99": 0.8927,
+       "share_below_0.9": 0.0278
+      }
+     },
+     "selection_turnover_vs_plain": {
+      "0.0": {
+       "turnover_share": 0.0
+      },
+      "0.25": {
+       "turnover_share": 0.04237159866805691
+      },
+      "0.5": {
+       "turnover_share": 0.0653414297654653
+      },
+      "1.0": {
+       "turnover_share": 0.0847086915179441
+      },
+      "2.0": {
+       "turnover_share": 0.09698365012961975
+      }
+     }
+    }
+   },
+   "acting_slot_share": 0.8969,
+   "singleton_union_mass_share_rarity": 0.002
+  }
+ },
+ "WGT-2_style_question": {
+  "rarity": {
+   "spread_deltas": {
+    "style_W5_vs_W1": -0.0135,
+    "style_W6_vs_W4": -0.0104,
+    "genre_W4_vs_W1": -0.0037,
+    "genre_W6_vs_W5": -0.0006
+   },
+   "redundancy_deltas": {
+    "style_W5_vs_W1": 0.0166,
+    "style_W6_vs_W4": 0.0116,
+    "genre_W4_vs_W1": 0.0014,
+    "genre_W6_vs_W5": -0.0036
+   },
+   "verdict": "NOT_REVERSED"
+  },
+  "evidence": {
+   "spread_deltas": {
+    "style_W5_vs_W1": -0.0133,
+    "style_W6_vs_W4": -0.0114,
+    "genre_W4_vs_W1": -0.0035,
+    "genre_W6_vs_W5": -0.0016
+   },
+   "redundancy_deltas": {
+    "style_W5_vs_W1": 0.0091,
+    "style_W6_vs_W4": 0.0042,
+    "genre_W4_vs_W1": 0.0016,
+    "genre_W6_vs_W5": -0.0033
+   },
+   "verdict": "NOT_REVERSED"
+  }
+ },
+ "WGT-1_fame_leak_gate": {
+  "bar": 0.5,
+  "spearman_vs_fame_labelled_artists": {
+   "EV-A_votes": 0.4345,
+   "EV-G_rg_count": 0.4983
+  },
+  "degraded_to_presence": [],
+  "s0_fallbacks": 0,
+  "note": "FPC-9 caveat: computed where fame is measurable, blind exactly where the leak would matter most."
+ },
+ "with_release": false,
+ "capture_sha256": "893609e97fb31f2a679a5e8005f7488d771414658d671a9eee979a757b550d90",
+ "note": "DIAGNOSTIC ONLY, WGT- pre-registration governs. Absolute agreement values are not comparable across cells; reads are orderings, turnovers and signs."
+}
