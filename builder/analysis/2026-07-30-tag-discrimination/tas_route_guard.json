@@ -1,0 +1,144 @@
+{
+ "substrate": {
+  "note": "ADOPTED ARTIFACT per TAS-AM2. Never compare against a capture-side figure."
+ },
+ "baselines_agree_at_zero_weight": true,
+ "tas_am5b_liveness": {
+  "dominating_w_coh_multiple_of_w_sim": 1000000.0,
+  "pairs_checked": 120,
+  "failures": [],
+  "passes": true,
+  "compares": "TOTAL (1 - agreement) along the path, NOT the node sequence -- tie-safe and threshold-free (TAS-AM5b)."
+ },
+ "tas_am5c_null_control": {
+  "seed": 909,
+  "null_over_real_ratio_by_weight": {
+   "0.25": 0.9822,
+   "0.5": 0.9824,
+   "1.0": 0.9913,
+   "2.0": 0.9913
+  },
+  "reaches_half_at_any_weight": true,
+  "read": "A SMALL null is the CORRECT result, not a failure. If the ratio reaches 0.5 at any weight, TAS-5's change cannot be attributed to genre structure and every figure carries that caveat. Below 0.5: report the ratio and NOTHING MORE -- no claim about tags is licensed by this control (TAS-AM5c)."
+ },
+ "tas6_routing_half": {
+  "baseline_sub_decile_interiors": 0,
+  "by_weight": {
+   "0.25": {
+    "sub_decile_interiors": 0,
+    "change_vs_baseline": null,
+    "adverse": false
+   },
+   "0.5": {
+    "sub_decile_interiors": 0,
+    "change_vs_baseline": null,
+    "adverse": false
+   },
+   "1.0": {
+    "sub_decile_interiors": 2,
+    "change_vs_baseline": null,
+    "adverse": false
+   },
+   "2.0": {
+    "sub_decile_interiors": 2,
+    "change_vs_baseline": null,
+    "adverse": false
+   }
+  },
+  "note": "ROUTING half only. The SELECTION half is in tas_guard.json, on the ALG-E capture, and TAS-AM2 forbids comparing the two. The selection half is ADVERSE and bars adoption regardless of this."
+ },
+ "real_grid": {
+  "0.0": {
+   "changed_share_by_class": {
+    "ff": 0.0,
+    "fo": 0.0,
+    "oo": 0.0
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.0,
+   "sub_decile_interiors": 0
+  },
+  "0.25": {
+   "changed_share_by_class": {
+    "ff": 0.9,
+    "fo": 0.95,
+    "oo": 0.95
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.9333,
+   "sub_decile_interiors": 0
+  },
+  "0.5": {
+   "changed_share_by_class": {
+    "ff": 0.925,
+    "fo": 0.95,
+    "oo": 0.975
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.95,
+   "sub_decile_interiors": 0
+  },
+  "1.0": {
+   "changed_share_by_class": {
+    "ff": 0.925,
+    "fo": 0.975,
+    "oo": 1.0
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.9667,
+   "sub_decile_interiors": 2
+  },
+  "2.0": {
+   "changed_share_by_class": {
+    "ff": 0.925,
+    "fo": 0.975,
+    "oo": 1.0
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.9667,
+   "sub_decile_interiors": 2
+  }
+ },
+ "null_grid": {
+  "0.0": {
+   "changed_share_by_class": {
+    "ff": 0.0,
+    "fo": 0.0,
+    "oo": 0.0
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.0,
+   "sub_decile_interiors": 0
+  },
+  "0.25": {
+   "changed_share_by_class": {
+    "ff": 0.9,
+    "fo": 0.925,
+    "oo": 0.925
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.9167,
+   "sub_decile_interiors": 0
+  },
+  "0.5": {
+   "changed_share_by_class": {
+    "ff": 0.9,
+    "fo": 0.925,
+    "oo": 0.975
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.9333,
+   "sub_decile_interiors": 0
+  },
+  "1.0": {
+   "changed_share_by_class": {
+    "ff": 0.925,
+    "fo": 0.95,
+    "oo": 1.0
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.9583,
+   "sub_decile_interiors": 0
+  },
+  "2.0": {
+   "changed_share_by_class": {
+    "ff": 0.925,
+    "fo": 0.95,
+    "oo": 1.0
+   },
+   "changed_share_pooled_FOR_THE_NULL_RATIO_ONLY": 0.9583,
+   "sub_decile_interiors": 0
+  }
+ }
+}

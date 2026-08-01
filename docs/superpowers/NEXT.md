@@ -12,7 +12,7 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-31, at the `TAS-AM3`/`TAS-AM4` closeout. `TAS-` Tasks 5–8 are still owed.**
+**Last updated: 2026-08-01, at the `TAS-R1`–`TAS-R4` closeout. `TAS-` Tasks 1–7 are COMPLETE; only Task 8 (the findings document) is owed.**
 
 ---
 
@@ -21,7 +21,7 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > ## The RELEASE-TAG COVERAGE PROBE (`REL-`) is COMPLETE. **`REL-1` PASSED — release aggregation clears `COH-2`'s 50% bar in the obscure tail. Nothing adopted. The next action is the OWNER'S.**
 >
 > Entry point is the current handoff:
-> [`2026-07-31-HANDOFF-tas-am3-am4.md`](2026-07-31-HANDOFF-tas-am3-am4.md).
+> [`2026-08-01-HANDOFF-tas5-routing.md`](2026-08-01-HANDOFF-tas5-routing.md).
 > The `REL-` handoff below is **superseded on next actions** and stays authoritative for its
 > own probe's internals.
 > [`2026-07-31-HANDOFF-release-tag-coverage.md`](2026-07-31-HANDOFF-release-tag-coverage.md).
@@ -53,12 +53,37 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 >
 > ---
 >
-> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE — Tasks 1–4 of 8, plus Task 7's selection-side halves, `TAS-AM3` and `TAS-AM4`. **`TAS-6` is ADVERSE, which bars adopting the BUILD-TIME architecture. The instrument question is resolved for the SELECTION side and `TAS-4` is believable. Tasks 5–8 unrun; the next action is the OWNER'S — see below.**
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) — Tasks 1–7 COMPLETE, 2026-08-01. **NEITHER ARCHITECTURE HAS AN ADOPTION CASE.** Only Task 8 (the findings document) is owed, and the next action is the OWNER'S.
 >
-> **`TAS-AM4` evaluated the `REL-` enriched frame as a CANDIDATE and licensed a recommendation only.** No candidate is killed and reach rises substantially, but the signal measurably blunts — and that fall held on a fixed population, so it is real rather than composition. **§1's vocabulary is UNCHANGED.** Figures: `builder/analysis/2026-07-30-tag-discrimination/tas_frame_eval.json`; reasoning: execution log §13. **The retiring session's position: run `TAS-5` next rather than a re-run** — the router-side architecture is untouched by the adverse `TAS-6`, and §5 says either read alone is uninterpretable. **If a re-run happens anyway, use `W1`, not `W6`.**
+> **⚠ Execute the routing side ONLY from
+> [`plans/2026-07-31-tas5-routing-execution-plan.md`](plans/2026-07-31-tas5-routing-execution-plan.md).**
+> The older probe plan's Tasks 5, 6 and Task 7's routing halves are **superseded and contain a
+> trap**: Task 7 Step 5 instructs the executor to make the randomised-label red check fire and
+> stop if it does not — the check `TAS-AM3` **withdrew as unachievable**. Do not follow it.
 >
-> Its handoff remains authoritative for that track's internals:
-> [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
+> **The build-time side is barred** — `TAS-6`'s **selection** half is ADVERSE, and §5 says that
+> bars an adoption recommendation whatever else shows.
+>
+> **The router side survives its kill bar on a change that is not about genre.** `TAS-5` did not
+> kill: journeys change at every non-zero weight in every class. **But `TAS-AM5c`'s null control
+> FIRED** — permuting labels among labelled artists reproduces nearly all of the same change,
+> far above the pre-registered clause. **Per `TAS-AM5c`, `TAS-5`'s change CANNOT be attributed
+> to genre structure, and every `TAS-5` figure must be quoted carrying that caveat.** Both
+> instrument checks passed first (`TAS-AM5a` equivalence, `TAS-AM5b` liveness), so this is a
+> real null and not a broken harness.
+>
+> **⚠ `TAS-6`'s ROUTING half is VACUOUS and must not be read as a pass.** Its baseline count of
+> sub-decile interior artists is **zero** — production routing delivers no bottom-decile artist
+> mid-journey on any drawn pair — so a 10% reduction cannot be measured and "not adverse" is a
+> division-by-zero artifact. That zero is itself a corroboration of `DD-F1`.
+>
+> Figures: `tas_route.json`, `tas_route_guard.json`. Reasoning: execution log **§16**.
+>
+> **`TAS-AM4` evaluated the `REL-` enriched frame as a CANDIDATE and licensed a recommendation only.** No candidate is killed and reach rises substantially, but the signal measurably blunts — and that fall held on a fixed population, so it is real rather than composition. **§1's vocabulary is UNCHANGED.** Figures: `tas_frame_eval.json`; reasoning: execution log §13. **`tas_frame_split` has since decomposed that result** — the Discogs **style** column causes the blunting, not the coarse genre column, and `W4` dominates `W6` on reach, spread and redundancy alike (execution log §15). **`W6` must not be the frame any future amendment names.**
+>
+> Current handoff:
+> [`2026-08-01-HANDOFF-tas5-routing.md`](2026-08-01-HANDOFF-tas5-routing.md). The two 2026-07-31
+> handoffs and the 2026-07-30 one remain authoritative for their own tracks' internals only.
 > Governing document is the pre-registration
 > [`specs/2026-07-30-tag-discrimination-probe-preregistration.md`](specs/2026-07-30-tag-discrimination-probe-preregistration.md)
 > (`TAS-`), which **wins wherever the plan disagrees**. **Read its §8 first:** `TAS-AM1`
@@ -73,13 +98,14 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > spent.** Two owner decisions taken and recorded: the goal is **coherence, not obscurity**,
 > and `TAS-4`'s materiality bar is **1% edge turnover**.
 >
-> **The architecture question — build-time selection vs router-side pricing — is
-> deliberately still OPEN**, and the probe exists to inform it. `TAS-4` has now answered the
+> **The architecture question — build-time selection vs router-side pricing — was left OPEN
+> for the probe to inform, and the probe has now answered it: NEITHER side has an adoption
+> case.** `TAS-4` has now answered the
 > build-time half and **did not kill it** — figures in
 > `builder/analysis/2026-07-30-tag-discrimination/tas_select.json`, reasoning in §9 of the
-> execution log. **`TAS-5` (the router half) is unrun, so the comparison the decision needs
-> does not exist yet**, and per the pre-registration's §5 a `TAS-5` result read without
-> `TAS-4` beside it — or vice versa — is uninterpretable.
+> execution log. **`TAS-5` (the router half) has now RUN** — see the top of this section. §5
+> requires the two to be read together, and they now can be: the build-time half is barred by
+> the adverse guard, and the router half's change is not attributable to genre.
 >
 > **⚠ TWO STOP-LEVEL RESULTS, both 2026-07-30, both recorded in execution log §10.**
 >
@@ -95,8 +121,10 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > produce large change on a randomised label frame, because randomising labels destroys
 > overlap rather than randomising it. Its replacement, **`TAS-AM3a`**, passes at every λ —
 > the ranking path is **bit-identical** to `td_turnover`'s verified one and reproduces the
-> committed `TD-2` figures to five decimals. **Discharged for the SELECTION side only; the
-> routing side still owes its own**, and `TAS-AM3` specifies it.
+> committed `TD-2` figures to five decimals. **Discharged for the SELECTION side by `TAS-AM3a`; the ROUTING
+> side is discharged separately by `TAS-AM5a`/`b`, both passed 2026-08-01** — `TAS-AM3`'s
+> scope clause could not supply it, because its pass conditions live on the capture while
+> `TAS-AM2` puts `TAS-5` on the artifact.
 >
 > **`TAS-AM3b`'s null control corrected the withdrawn check, against tags** — holding fixed
 > which artists are labelled roughly doubles the null, so the withdrawn version had
@@ -107,7 +135,7 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > **`TAS-AM3` is the first amendment appended AFTER results existed** — it says so at its
 > head and names the hazard. Read that disclosure before relying on it.
 >
-> **Tasks 5–8 are still NOT started.** Execution log §11.
+> **Tasks 5–7 are DONE (execution log §16); only Task 8, the findings document, is unrun.**
 >
 > The coherence tag probe, Track B and the fame-proxy probes are **COMPLETE and their
 > records are untouched and remain accurate**; the coherence-tag-probe handoff is superseded
@@ -292,14 +320,19 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **Adding `analysis` to builder's `testpaths`** | **Deferred by the owner 2026-07-30.** Every analysis test passes, so it would work cleanly, but it changes what every builder `pytest` run collects. **Revisit if any `TAS-` test needs to gate a merge, or at the closeout that retires the `TAS-` probe.** Until then `TAS-` tests run only when invoked explicitly. *(This row carried a count of "34" until 2026-07-30; it was stale, and the count is not this document's to own — read it off `pytest analysis/ -q`.)* |
 | **Replacing mutual k-NN with a tag-based degree limiter** | **Owner-raised 2026-07-30, ruled SEPARATE and explicitly NOT ruled out.** Needs its own pre-registration designed cold; mixing it with `TAS-` would make every attribution ambiguous. Track B's `R1a` corroborates the premise — reciprocity in isolation at k = 100 was null on both archives. **Condition: if the owner triggers it**, as with every other cap-adjacent decision. |
 | ✅ **`TAS-4` is not believable until the red instrument check runs** | **DISCHARGED 2026-07-31 for the SELECTION side** — the original check was withdrawn as unachievable (`TAS-AM3`) and its replacement `TAS-AM3a` passed at every λ. Struck, kept for the record. |
-| **`TAS-5` is not believable until the ROUTING-side red check runs** | **Before any `TAS-` finding is written.** `TAS-AM3` specifies it as `TAS-AM3a`/`b` with `find_path_coh` in place of the ranking path. Still owed; the routing harness does not exist yet. |
-| **One new Snyk Low finding per module added under `builder/analysis/`** | **Recorded, not fixed; extending the acceptance is the owner's.** A CLI `--out` path flows into `pathlib.Path` — the same class as the 13 already accepted here, now 7 in this directory. It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path breaks intended usage. |
+| ✅ **`TAS-5` is not believable until the ROUTING-side red check runs** | **DISCHARGED 2026-08-01.** `TAS-AM3`'s scope clause could not supply it — its pass conditions live on the pre-cap capture while `TAS-AM2` puts `TAS-5` on the artifact — so `TAS-AM5` constructed one, written **before any routing figure existed**. `TAS-AM5a` (equivalence) and `TAS-AM5b` (liveness) both passed on the full draw. Struck, kept for the record. |
+| **Task 8 — the `TAS-` findings document is unwritten** | **Before the probe is retired.** Tasks 1–7 are complete and §5's condition for an outcome read is met (full grid, both instrument checks in hand). The findings must carry `TAS-AM5c`'s caveat on every `TAS-5` figure, and must not read `TAS-6`'s routing half as a pass. |
+| **`TAS-6`'s routing half is unmeasurable on the committed draw** | **If, and only if, an obscure-endpoint draw is ever made for routing.** Its baseline is zero sub-decile interior artists, so no reduction can be measured and "not adverse" is a division-by-zero artifact. Not a defect of the run — a property of what production routing delivers, and a corroboration of `DD-F1`. |
+| **Rarity-weighted agreement is a measured candidate device** | **The owner's trigger; it changes §1, which is an §8 amendment.** Weighting shared labels by how rare they are moves selection materially — above the owner's own 1% materiality bar — while leaving an artist's candidate ordering almost intact; the cap is what converts the small reordering into map change. Figures `tas_weighting.json`, reasoning execution log §15. **Nothing says the reweighted map is better**, and the spread comparison there is scale-confounded and must not be cited as evidence either way. |
+| **`W4` was never evaluated as a `TAS-` candidate frame** | **If the owner triggers a vocabulary change.** `tas_frame_split` shows it dominates `W6` on reach, spread and redundancy; `TAS-AM4` only ever evaluated `W0`/`W1`/`W6`. A `W4` evaluation would be a new §8 amendment designed cold. |
+| **Tag clustering as a junk-label filter, owner-raised 2026-08-01** | **Unmeasured; the owner's trigger.** The current whitelist keeps a tag only if MusicBrainz classifies it as a genre — an ontology decision, which is why `british invasion` is discarded despite binding coherent artists. The owner's proposal: a real label's carriers cluster in the map, a junk label's scatter. Frequency alone cannot separate them, since `seen live` and a genuine niche genre are both rare. |
+| **One new Snyk Low finding per module added under `builder/analysis/`** | **Recorded, not fixed; extending the acceptance is the owner's.** A CLI `--out` path flows into `pathlib.Path` — the same class as the 13 already accepted here, **now 11 in this directory** (`tas_frame_split.py`, `tas_weighting.py`, `tas_route.py` and `tas_route_guard.py` added four on 2026-08-01; `tas_route.py`'s is a `json.dump` variant of the same class). It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path breaks intended usage. |
 | **Tag-aware selection increases the map's total edge count** | **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. `w_degree_hub` is dormant *because of the current graph's top-degree set*, and the pre-registration's held-constant row saying so is **scoped to this probe, which rebuilds nothing — it does not transfer to a rebuild.** Execution log §9.4/§9.5. |
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
 | **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |
 | ✅ **The `REL-` release-dump union pass** | **CLOSED 2026-07-31 — the path is known-unreachable, not deferred again.** Its §7 condition was "if and only if `REL-1` lands in 45.0–49.9%". `REL-1` cleared the bar outright, so the condition can never fire for this run, and the 345 GB dump was deleted after measurement. Reopening needs a new pre-registration designed cold. Struck, kept for the record. |
-| **Whether `REL-`'s frame is taken into `TAS-`** | **The owner's trigger.** A `TAS-` §1 vocabulary change is an amendment to a frozen document and a rebuild spends his ear (`REQ-38`). The retiring session's position is in the `REL-` handoff and is *not yet*: `REL-3`'s fidelity median is what should govern, and a cheap read on whether coarse agreement suffices for what `TAS-` does — answerable against the committed `TAS-` harness with no rebuild — should come first. |
+| **Whether `REL-`'s frame is taken into `TAS-`** | **The owner's trigger, unchanged.** A `TAS-` §1 vocabulary change is an amendment to a frozen document and a rebuild spends his ear (`REQ-38`). **The cheap read this row asked for has now RUN** — execution log §15, figures `tas_frame_split.json`. It does not settle the trigger, but it changes which frame a decision would be about: the Discogs **style** column, not the coarse genre column, is what costs discrimination, and `W4` (`W1` + Discogs genre only) dominates the previously-evaluated `W6` on reach, spread and redundancy alike. **`W6` should not be the candidate any future amendment names.** `REL-3`'s fidelity median still governs, and nothing measured says `W4` is good enough to adopt. |
 | **`REL-3`'s ratio bar is degenerate and must not be reused as written** | **Before any successor pre-registration expresses a bar as a multiple of a null.** The null median was exactly zero, so "≥ 3× the null" was satisfied by a division by zero. A ratio bar needs a stated floor on the denominator, or a difference bar instead. |
 | **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
 | **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**; reopen if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |

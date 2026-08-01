@@ -97,8 +97,11 @@ Governing document:
 Implementation plan: `docs/superpowers/plans/2026-07-30-tag-discrimination-probe.md`.
 **Read all of §8 before touching anything.** `TAS-AM1` withdraws `TAS-4`'s original bar as
 false; `TAS-AM2` fixes the substrate per criterion; **`TAS-AM3` withdraws the red instrument
-check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candidate frame.
-**`TAS-AM3` and `TAS-AM4` were appended after results existed and say so at their heads.**
+check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candidate frame;
+**`TAS-AM5` constructs the ROUTING-side instrument check**, which `TAS-AM3`'s scope clause
+could not supply because its pass conditions live on the capture while `TAS-5` runs on the
+artifact. **`TAS-AM3` and `TAS-AM4` were appended after results existed and say so at their
+heads; `TAS-AM5` was written before any routing figure existed and says that.**
 
 | script | what it is |
 |---|---|
@@ -108,8 +111,11 @@ check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candi
 | `tas_select.py` | `TAS-4` — edge turnover under the λ grid, per `TAS-AM1`. |
 | `tas_guard.py` | `TAS-6` obscurity guard **(selection half only — the routing half is still owed)**, plus `TAS-AM3a` (liveness and equivalence) and `TAS-AM3b` (null control). **The randomised-label red check it originally carried is WITHDRAWN by `TAS-AM3`**; `randomised_labels` is retained and runnable only because `TAS-AM3` cites its figure. |
 | `tas_frame_eval.py` | `TAS-AM4` — evaluates the `REL-` enriched frames as **candidates** beside the committed one. Changes no vocabulary. |
-| ⚠ `tas_pairs.py` | **NOT YET BUILT** — Task 5. The §3 pair draw, own seed, classes carried end to end. |
-| ⚠ `tas_route.py` | **NOT YET BUILT** — Task 6. `TAS-5` — routing under a harness-local coherence term. |
+| `tas_frame_split.py` | **Diagnostic, not a criterion.** Decomposes `TAS-AM4`'s `W6` into its two Discogs columns (`W4` = closed 15-value genre, `W5` = ~600-value style), isolating each twice. Reproduces `TAS-AM4`'s committed figures and aborts if it cannot. Figures: `tas_frame_split.json`; reasoning: execution log §15. |
+| `tas_pairs.py` | The §3 pair draw — pre-registered seed `20260730-tas`, classes carried end to end, 40 per class. Verified deterministic **across processes**, not just within one. Output: `tas_pairs.json`. |
+| `tas_route.py` | `TAS-5` — routing under a harness-local `w_coh` term, plus `TAS-AM5a` (equivalence) over the full draw on the adopted artifact. Aborts if `TAS-AM5a` fails. Output: `tas_route.json`. |
+| `tas_weighting.py` | **Diagnostic, not a criterion.** Should shared labels be weighted by how *rare* they are? Reports within-list reordering, selection turnover, and a retracted prediction. §1's device is **unchanged**. Figures: `tas_weighting.json`; reasoning: execution log §15. |
+| `tas_route_guard.py` | **BUILT AND RUN 2026-08-01.** `TAS-AM5b` (liveness — **passed**), `TAS-AM5c` (null control — **FIRED**) and `TAS-6`'s **routing** half (**vacuous**: the sub-decile baseline is zero, so the bar cannot fire and "not adverse" is a division-by-zero artifact). **`TAS-5`'s change is NOT attributable to genre structure** and every `TAS-5` figure carries that caveat. Output: `tas_route_guard.json`. Does **not** modify `tas_guard.py`, which holds the committed selection-side record. |
 
 ## The neutral rule is the one dormant term
 
@@ -126,9 +132,11 @@ move after any result exists** — a change is a §8 amendment, not an edit.
 > ```
 >
 > This is pre-existing — two earlier probes (`2026-07-23-track2-fame-proxy`,
-> `2026-07-24-track2-fame-proxy-wikipedia`) carry test files in the same position. All 34
-> analysis tests pass today, so adding `analysis` to `testpaths` would work cleanly; that
-> is a shared-config change for the owner to make, not a probe's to take. **Until then,
+> `2026-07-24-track2-fame-proxy-wikipedia`) carry test files in the same position. Every
+> analysis test passes today, so adding `analysis` to `testpaths` would work cleanly; that
+> is a shared-config change for the owner to make, not a probe's to take. **Read the count
+> off the command above — this file does not own it, and the number here went stale once
+> already.** **Until then,
 > "pinned by test" means pinned by a test somebody has to remember to run** — so the
 > command above belongs in any closeout that touches this directory.
 

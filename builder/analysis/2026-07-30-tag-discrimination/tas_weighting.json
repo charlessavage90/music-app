@@ -1,0 +1,150 @@
+{
+ "note": "DIAGNOSTIC ONLY. Not a TAS- criterion, not pre-registered, licenses nothing. Section 1's device is UNCHANGED and every committed TAS- figure stands on plain Jaccard.",
+ "substrate": "pre-cap ALG-E capture (TAS-AM2). No reading here crosses to the artifact side.",
+ "capture": "C:/Users/charl/AppData/Local/Temp/claude/C--dev-music-app/543dbdc4-93e2-48e1-94e3-4a386f79cd4e/scratchpad/alge_capture.npz",
+ "weighting_under_test": "log(N / artists_carrying_the_label) per label",
+ "A_vocabulary_shape": {
+  "distinct_labels": 2015,
+  "artist_label_occurrences": 125764,
+  "top20_share_of_occurrences": 0.3342,
+  "labels_on_exactly_one_artist": 514,
+  "singleton_share_of_vocabulary": 0.2551,
+  "most_common": [
+   [
+    "pop",
+    5205
+   ],
+   [
+    "hip hop",
+    4767
+   ],
+   [
+    "rock",
+    4169
+   ],
+   [
+    "electronic",
+    4135
+   ],
+   [
+    "alternative rock",
+    2771
+   ],
+   [
+    "jazz",
+    2562
+   ],
+   [
+    "indie rock",
+    2350
+   ],
+   [
+    "pop rock",
+    1747
+   ],
+   [
+    "folk",
+    1529
+   ],
+   [
+    "indie pop",
+    1318
+   ],
+   [
+    "soul",
+    1301
+   ],
+   [
+    "punk rock",
+    1301
+   ],
+   [
+    "singer songwriter",
+    1245
+   ],
+   [
+    "house",
+    1237
+   ],
+   [
+    "j pop",
+    1188
+   ]
+  ],
+  "note": "A label carried by exactly ONE artist can never create agreement with anyone, so the useful rare labels are those on a handful."
+ },
+ "B_label_count_vs_fame": {
+  "labelled_artists_with_a_fame_percentile": 40436,
+  "spearman_fame_vs_label_count": 0.3652,
+  "median_label_count_by_fame_decile": {
+   "0.0-0.1": 1.0,
+   "0.1-0.2": 1.0,
+   "0.2-0.3": 1.0,
+   "0.3-0.4": 2.0,
+   "0.4-0.5": 2.0,
+   "0.5-0.6": 2.0,
+   "0.6-0.7": 2.0,
+   "0.7-0.8": 2.0,
+   "0.8-0.9": 3.0,
+   "0.9-1.0": 4.0
+  }
+ },
+ "C_does_it_reorder_and_does_the_map_change": {
+  "within_list_rank_correlation": {
+   "all_artists": {
+    "artists": 71117,
+    "median": 1.0,
+    "p10": 0.9721,
+    "share_below_0.99": 0.247,
+    "share_below_0.9": 0.0157
+   },
+   "where_cap_binds": {
+    "artists": 37006,
+    "median": 0.9955,
+    "p10": 0.9664,
+    "share_below_0.99": 0.3751,
+    "share_below_0.9": 0.0132
+   }
+  },
+  "selection_turnover_same_lambda_only_the_measure_differs": {
+   "0.0": {
+    "plain_edges": 448828,
+    "weighted_edges": 448828,
+    "turnover_share": 0.0
+   },
+   "0.25": {
+    "plain_edges": 474088,
+    "weighted_edges": 473738,
+    "turnover_share": 0.032247177739153914
+   },
+   "0.5": {
+    "plain_edges": 487149,
+    "weighted_edges": 486820,
+    "turnover_share": 0.0448835982420163
+   },
+   "1.0": {
+    "plain_edges": 496631,
+    "weighted_edges": 497416,
+    "turnover_share": 0.053325305911229866
+   },
+   "2.0": {
+    "plain_edges": 501508,
+    "weighted_edges": 502917,
+    "turnover_share": 0.05632412643467303
+   }
+  },
+  "spread_REPORTED_NOT_RELIED_ON": {
+   "plain_median_iqr": 0.0,
+   "weighted_median_iqr": 0.0,
+   "why_not_relied_on": "Comparing IQR across two MEASURES is scale-confounded; the weighted measure compresses its range by design. The scale-free reading is the rank correlation above."
+  },
+  "read": "The lambda=0 cell MUST be exactly 0.00% -- both measures are forced to select identically there. Rank correlation says the list barely reorders; turnover says the map changes materially. The CAP reconciles them: only the top 50 survive, so a shuffle at the cut line changes who is kept."
+ },
+ "D_retracted_prediction": {
+  "labelled_candidate_slots": 2625433,
+  "spearman_label_count_vs_agreement": -0.1308,
+  "retraction": "This session predicted that famous artists' long tails of stray tags would suppress agreement through the Jaccard denominator STRONGLY ENOUGH to make the device partly a fame measurement. Label count IS strongly fame-linked (reading B), and the effect on agreement is present and negative -- but weak. The strong form of the prediction is RETRACTED.",
+  "substrate_changes_this_number_and_that_is_the_point": "Measured on the pre-cap CANDIDATE slots (this reading) the correlation is about -0.13. Measured over the adopted artifact's surviving EDGES it is about -0.02. Both are weak, and they are not comparable -- TAS-AM2 forbids reading one against the other. The gap is itself informative: surviving edges are the strong pairs, where agreement is high whatever the label count, so the denominator effect has less room to show among them. An earlier statement in this session that the effect was 'approximately zero' was true of the artifact reading and OVERSTATED the retraction for the selection-side one.",
+  "do_not_read_banded_medians_as_a_trend": "Artists with one label each can only score 0.0 or 1.0, so a band median of 0.5 means 'about half match', not 'small sets agree strongly'. The rank correlation is the honest statistic."
+ }
+}
