@@ -1,0 +1,113 @@
+{
+ "substrate": {
+  "file": "graph-t15-tiebreakfix.bin",
+  "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "note": "ADOPTED ARTIFACT per TAS-AM2. Never compare against a capture-side figure."
+ },
+ "pair_seed": "20260730-tas",
+ "weight_multiples_of_w_sim": [
+  0.0,
+  0.25,
+  0.5,
+  1.0,
+  2.0
+ ],
+ "w_sim": 3.0,
+ "tas_am5a_equivalence": {
+  "pairs_checked": 120,
+  "mismatches": [],
+  "passes": true,
+  "what_it_licenses": "The fork's omission of excludes, avoidance_map, effective_floor_raw and forbidden_edge -- proved equivalent, not argued."
+ },
+ "per_weight": {
+  "0.0": {
+   "ff": {
+    "n": 40,
+    "changed": 0,
+    "changed_share": 0.0
+   },
+   "fo": {
+    "n": 40,
+    "changed": 0,
+    "changed_share": 0.0
+   },
+   "oo": {
+    "n": 40,
+    "changed": 0,
+    "changed_share": 0.0
+   }
+  },
+  "0.25": {
+   "ff": {
+    "n": 40,
+    "changed": 36,
+    "changed_share": 0.9
+   },
+   "fo": {
+    "n": 40,
+    "changed": 38,
+    "changed_share": 0.95
+   },
+   "oo": {
+    "n": 40,
+    "changed": 38,
+    "changed_share": 0.95
+   }
+  },
+  "0.5": {
+   "ff": {
+    "n": 40,
+    "changed": 37,
+    "changed_share": 0.925
+   },
+   "fo": {
+    "n": 40,
+    "changed": 38,
+    "changed_share": 0.95
+   },
+   "oo": {
+    "n": 40,
+    "changed": 39,
+    "changed_share": 0.975
+   }
+  },
+  "1.0": {
+   "ff": {
+    "n": 40,
+    "changed": 37,
+    "changed_share": 0.925
+   },
+   "fo": {
+    "n": 40,
+    "changed": 39,
+    "changed_share": 0.975
+   },
+   "oo": {
+    "n": 40,
+    "changed": 40,
+    "changed_share": 1.0
+   }
+  },
+  "2.0": {
+   "ff": {
+    "n": 40,
+    "changed": 37,
+    "changed_share": 0.925
+   },
+   "fo": {
+    "n": 40,
+    "changed": 39,
+    "changed_share": 0.975
+   },
+   "oo": {
+    "n": 40,
+    "changed": 40,
+    "changed_share": 1.0
+   }
+  }
+ },
+ "tas5_kills": false,
+ "kill_rule": "TAS-5 kills ONLY if unchanged in EVERY class at EVERY weight. A pooled bar is explicitly rejected (section 2).",
+ "null_caution": "A TAS-5 null is WEAK evidence about tags specifically -- three consecutive router repricings have already returned nulls. It must not be reported as 'tags do not work'.",
+ "still_owed": "TAS-AM5b (liveness) and TAS-AM5c (null control) live in tas_route_guard.py, with TAS-6's routing half. No outcome read is licensed until those have run (section 5)."
+}

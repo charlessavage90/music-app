@@ -97,8 +97,11 @@ Governing document:
 Implementation plan: `docs/superpowers/plans/2026-07-30-tag-discrimination-probe.md`.
 **Read all of §8 before touching anything.** `TAS-AM1` withdraws `TAS-4`'s original bar as
 false; `TAS-AM2` fixes the substrate per criterion; **`TAS-AM3` withdraws the red instrument
-check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candidate frame.
-**`TAS-AM3` and `TAS-AM4` were appended after results existed and say so at their heads.**
+check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candidate frame;
+**`TAS-AM5` constructs the ROUTING-side instrument check**, which `TAS-AM3`'s scope clause
+could not supply because its pass conditions live on the capture while `TAS-5` runs on the
+artifact. **`TAS-AM3` and `TAS-AM4` were appended after results existed and say so at their
+heads; `TAS-AM5` was written before any routing figure existed and says that.**
 
 | script | what it is |
 |---|---|
@@ -110,7 +113,9 @@ check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candi
 | `tas_frame_eval.py` | `TAS-AM4` — evaluates the `REL-` enriched frames as **candidates** beside the committed one. Changes no vocabulary. |
 | `tas_frame_split.py` | **Diagnostic, not a criterion.** Decomposes `TAS-AM4`'s `W6` into its two Discogs columns (`W4` = closed 15-value genre, `W5` = ~600-value style), isolating each twice. Reproduces `TAS-AM4`'s committed figures and aborts if it cannot. Figures: `tas_frame_split.json`; reasoning: execution log §15. |
 | `tas_pairs.py` | The §3 pair draw — pre-registered seed `20260730-tas`, classes carried end to end, 40 per class. Verified deterministic **across processes**, not just within one. Output: `tas_pairs.json`. |
-| ⚠ `tas_route.py` | **NOT YET BUILT** — Task 6. `TAS-5` — routing under a harness-local coherence term. |
+| `tas_route.py` | `TAS-5` — routing under a harness-local `w_coh` term, plus `TAS-AM5a` (equivalence) over the full draw on the adopted artifact. Aborts if `TAS-AM5a` fails. Output: `tas_route.json`. |
+| `tas_weighting.py` | **Diagnostic, not a criterion.** Should shared labels be weighted by how *rare* they are? Reports within-list reordering, selection turnover, and a retracted prediction. §1's device is **unchanged**. Figures: `tas_weighting.json`; reasoning: execution log §15. |
+| ⚠ `tas_route_guard.py` | **NOT YET BUILT** — `TAS-AM5b` (liveness), `TAS-AM5c` (null control) and `TAS-6`'s **routing** half. **No `TAS-5` outcome read is licensed until these have run** (§5). |
 
 ## The neutral rule is the one dormant term
 
