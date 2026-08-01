@@ -617,3 +617,85 @@ Substrate is the **pre-cap capture**, per `TAS-AM2`, because `TAS-2`/`TAS-3` are
    read is favourable the outcome is a *recommendation to the owner*, not an enactment.
    **`TAS-6`'s adverse verdict on the committed frame stands regardless of what this shows** —
    it is not retroactively softened by a better frame existing.
+
+### `TAS-AM5` — the routing-side instrument check, constructed rather than inherited
+
+**⚠ WRITTEN BEFORE ANY ROUTING RESULT EXISTS**, unlike `TAS-AM3` and `TAS-AM4`. What existed
+when this was written: all of `TAS-1`…`TAS-4`, `TAS-6`'s selection half, `TAS-AM3a`/`b`,
+`TAS-AM4`, and the `tas_frame_split` diagnostic. **No `TAS-5` arm had been run and no routing
+figure of any kind existed.** Stated so a later reader can price it differently from the two
+amendments above, which could have been fitted to results and say so.
+
+**Why `TAS-AM3`'s scope clause cannot simply be applied.** `TAS-AM3` says the routing red check
+is `TAS-AM3a`/`b` "with `find_path_coh` in place of the ranking path". But `TAS-AM3a` passes on
+bit-identity against `td_turnover.mask_multiplicative` and on reproducing the committed `TD-2`
+figures — **both on the pre-cap `ALG-E` capture.** `TAS-AM2` puts `TAS-5` on the **adopted
+artifact** and forbids comparing a capture-side figure with an artifact-side one. There is
+therefore no committed artifact-side reference to be identical to, and `td_pathedges.json` is
+not one: it is measured on `ALG-E-mutual_knn-k50.bin`.
+
+`TAS-AM3a`'s *property* is what transfers: **prove the device registers a large change, against
+a fixed external reference rather than a judgement call, and prove the code path IS the
+verified one rather than resembling it.** Both clauses below preserve that property on the
+correct substrate. Neither introduces a threshold.
+
+#### `TAS-AM5a` — equivalence *(replaces `TAS-AM3a`'s clause (i) for the routing side)*
+
+*Plain: prove the copy of the router used for this experiment is the real router, by checking
+it returns the app's own answer on every journey we test.*
+
+At `w_coh = 0`, `find_path_coh` must return a path **identical to production
+`find_path(store, source, target, [], cfg)`** — same node sequence, in order — for **every pair
+in the §3 draw**, on the adopted artifact. Not a sample and not a fixture: the full draw, the
+real artifact.
+
+**Any single mismatch voids every `TAS-5` figure.** This is what licenses the fork's omission of
+`excludes`, `avoidance_map`, `effective_floor_raw` and `forbidden_edge`: the omission is
+*proved* equivalent rather than argued to be.
+
+#### `TAS-AM5b` — liveness *(replaces `TAS-AM3a`'s clause (ii) for the routing side)*
+
+*Plain: prove the genre term can move a journey, by turning it up until it is the only thing
+that matters and checking the journey goes exactly where it then should.*
+
+The reference is **computed independently rather than borrowed**, which is what removes the
+judgement call. Run plain Dijkstra over the adopted artifact with the per-edge cost
+`(1 − agreement(u, v))` **alone** — every other term dropped — and record, per pair, the optimal
+total. Then run `find_path_coh` at a **dominating** weight `w_coh = 10⁶ × w_sim`.
+
+**Passes only if, for every pair in the draw, the total `(1 − agreement)` along
+`find_path_coh`'s returned path equals the independently computed optimum to within 1e-9.**
+
+**Totals are compared, not node sequences**, and deliberately: at a dominating weight the
+remaining terms act purely as a tie-break among equally coherent paths, so requiring an
+identical sequence would fail on ties that are not defects. The total is exact, tie-safe, and
+threshold-free.
+
+**A failure here means the term is not reaching the cost function at all** — the inert-harness
+failure `TAS-AM3a` was built to catch, in the form it takes on this side.
+
+#### `TAS-AM5c` — the null control *(the routing analogue of `TAS-AM3b`; NOT a gate)*
+
+*Plain: check any change we see comes from genres sitting where they actually sit, rather than
+from any label-shaped nudge at all.*
+
+Permute label sets **among labelled artists only**, holding fixed exactly which artists carry
+labels — reusing `tas_guard.permuted_labels_among_labelled`, the same function and the same
+one-knob argument as `TAS-AM3b`. Re-run the full `w_coh` grid over the draw and report the
+per-class path-change rate.
+
+**Reads, fixed here before it runs, and deliberately identical to `TAS-AM3b`'s:**
+
+- **A small null change rate is the CORRECT result and is not a failure.**
+- **If the null reaches ≥ 50% of the real path-change rate at any weight**, `TAS-5`'s change
+  cannot be attributed to genre structure, and every `TAS-5` figure must be reported carrying
+  that caveat.
+- **If the null stays below 50%, report the ratio and nothing more. No claim about tags is
+  licensed by this control.**
+
+#### Scope of this amendment
+
+**Nothing else moves.** No criterion, bar, weight, default, currency, vocabulary or substrate
+changes. `TAS-6`'s adverse selection-side verdict is untouched and still bars an adoption
+recommendation per §5. §1's vocabulary stays the `COH-2` union genre; **`TAS-AM4`'s candidate
+frames are NOT used here**, and neither is `W4`, whatever `tas_frame_split` shows about it.
