@@ -772,9 +772,19 @@ that the coarse 15-value list would make unrelated artists look alike, and that 
 list would be the valuable half. The measurement reversed both.
 
 Earlier the same session predicted that famous artists' long tails of stray tags would suppress
-their agreement through the Jaccard denominator, making the device partly a fame measurement.
-Label count is indeed strongly fame-linked, but the effect on agreement measured at
-approximately zero, and **that prediction was retracted rather than softened.**
+their agreement through the Jaccard denominator **strongly enough to make the device partly a
+fame measurement**. Label count is indeed strongly fame-linked, but the effect on agreement is
+weak, and **the strong form of that prediction was retracted.**
+
+**A correction to how that retraction was first stated, kept because it is the same substrate
+error this log keeps warning about.** The session first reported the effect as "approximately
+zero". That figure was measured over the **adopted artifact's surviving edges**; on the
+**pre-cap candidate slots** — the selection-side substrate, and the one that actually governs
+this device — it is roughly six times larger, though still weak. `TAS-AM2` forbids reading one
+against the other, and the gap is informative rather than contradictory: surviving edges are the
+strong pairs, where agreement is high whatever the label count, so the denominator effect has
+less room to show among them. **The retraction stands; "approximately zero" overstated it.**
+Both figures are in `tas_weighting.json`, each labelled with its substrate.
 
 **Two confident mechanistic predictions, both falsified by cheap measurement in one session.**
 Recorded as a standing caution: intuitions about what these label sources *do* are not reliable
