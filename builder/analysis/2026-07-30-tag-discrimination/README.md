@@ -95,7 +95,10 @@ else. Both series live here because the second consumes the first — `TAS-4` re
 Governing document:
 `docs/superpowers/specs/2026-07-30-tag-discrimination-probe-preregistration.md`.
 Implementation plan: `docs/superpowers/plans/2026-07-30-tag-discrimination-probe.md`.
-**Read §8 `TAS-AM1` before touching `TAS-4`:** its original bar is withdrawn as false.
+**Read all of §8 before touching anything.** `TAS-AM1` withdraws `TAS-4`'s original bar as
+false; `TAS-AM2` fixes the substrate per criterion; **`TAS-AM3` withdraws the red instrument
+check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candidate frame.
+**`TAS-AM3` and `TAS-AM4` were appended after results existed and say so at their heads.**
 
 | script | what it is |
 |---|---|
@@ -103,9 +106,10 @@ Implementation plan: `docs/superpowers/plans/2026-07-30-tag-discrimination-probe
 | `tas_tags.py` | Full-graph union-genre tag frame over the LB batched transport (`COH-5`). Resumable. |
 | `tas_signal.py` | `TAS-1` (coverage by edge class), `TAS-2` (within-list spread), `TAS-3` (collinearity diagnostic). Carries both gate reads. |
 | `tas_select.py` | `TAS-4` — edge turnover under the λ grid, per `TAS-AM1`. |
-| `tas_pairs.py` | The §3 pair draw, own seed, classes carried end to end. |
-| `tas_route.py` | `TAS-5` — routing under a harness-local coherence term. |
-| `tas_guard.py` | `TAS-6` obscurity guard, and the randomised-label red instrument check. |
+| `tas_guard.py` | `TAS-6` obscurity guard **(selection half only — the routing half is still owed)**, plus `TAS-AM3a` (liveness and equivalence) and `TAS-AM3b` (null control). **The randomised-label red check it originally carried is WITHDRAWN by `TAS-AM3`**; `randomised_labels` is retained and runnable only because `TAS-AM3` cites its figure. |
+| `tas_frame_eval.py` | `TAS-AM4` — evaluates the `REL-` enriched frames as **candidates** beside the committed one. Changes no vocabulary. |
+| ⚠ `tas_pairs.py` | **NOT YET BUILT** — Task 5. The §3 pair draw, own seed, classes carried end to end. |
+| ⚠ `tas_route.py` | **NOT YET BUILT** — Task 6. `TAS-5` — routing under a harness-local coherence term. |
 
 ## The neutral rule is the one dormant term
 

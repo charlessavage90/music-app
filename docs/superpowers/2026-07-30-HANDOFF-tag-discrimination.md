@@ -1,10 +1,13 @@
 # Handoff — tag discrimination probe, Tasks 1–3 of 8, 2026-07-30
 
-**Role: ⚠ SUPERSEDED 2026-07-31 on NEXT ACTIONS ONLY** by
-[`2026-07-31-HANDOFF-release-tag-coverage.md`](2026-07-31-HANDOFF-release-tag-coverage.md).
+**Role: ⚠ SUPERSEDED 2026-07-31 on NEXT ACTIONS ONLY.** The current handoff is
+[`2026-07-31-HANDOFF-tas-am3-am4.md`](2026-07-31-HANDOFF-tas-am3-am4.md), which continues
+*this* track; [`2026-07-31-HANDOFF-release-tag-coverage.md`](2026-07-31-HANDOFF-release-tag-coverage.md)
+sits between them in date order but was a **parallel** investigation.
 **This document REMAINS AUTHORITATIVE for the `TAS-` track's internals, and `TAS-` Tasks 5–8
-are still owed and unrun** — the `REL-` probe was a parallel investigation, not a
-continuation, and touched none of them. Supersedes
+are still owed and unrun** — but note that Task 4 and Task 7's two selection-side halves HAVE
+since run, and §8 has gained `TAS-AM3` and `TAS-AM4`, so its "what the next session must not
+revert" list is no longer complete on its own. Supersedes
 [`2026-07-30-HANDOFF-coherence-tag-probe.md`](2026-07-30-HANDOFF-coherence-tag-probe.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.

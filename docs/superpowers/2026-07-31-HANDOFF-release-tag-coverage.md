@@ -1,6 +1,10 @@
 # Handoff — the release-tag coverage probe (`REL-`), 2026-07-31
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-07-31 on NEXT ACTIONS ONLY** by
+[`2026-07-31-HANDOFF-tas-am3-am4.md`](2026-07-31-HANDOFF-tas-am3-am4.md).
+**This document REMAINS AUTHORITATIVE for the `REL-` probe's internals** — its frames, its
+aggregation device, its validity filter and its bars. The `REL-` record is complete and
+untouched; only "what to do next" moved on. Supersedes
 [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.

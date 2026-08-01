@@ -23,6 +23,45 @@ the point.**
 
 ---
 
+## N/A — 2026-07-31 — we tested whether genre labels could shape the map, and found a catch
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are empty; no
+server was started and none was left behind. No routing, no graph, no weighting, no cost
+function, and not one line of the app or the website changed. **A journey you build now is
+identical to one from yesterday.**
+
+**What happened, in plain terms.** We were asking whether genre labels could help decide which
+artists get connected to which, when the map is built. Three things came out of it.
+
+- **The idea would change the map a lot.** At the gentlest setting we tried, about one
+  connection in six across the whole map would be different. So this is not a change that
+  quietly does nothing.
+- **But it would make the app slightly worse at reaching obscure artists** — the thing you
+  called a defect rather than a limitation. Direct connections from a well-known artist to an
+  obscure one drop at every setting, and at the stronger settings they drop enough to trip the
+  guard we had written in advance. **That guard blocks us from recommending this, and it does
+  so regardless of anything else we found.**
+- **A safety check we had designed turned out to be impossible to pass**, for a reason that
+  says nothing about the idea. We had planned to scramble the genre labels and confirm the
+  measurement still reacted. But scrambling labels does not give artists *random* genres in
+  common — it gives them *none* in common, so nothing moves. We replaced it with a check that
+  works, and that one passed.
+
+**And separately, the other investigation you commissioned paid off.** Looking at what artists
+*released*, rather than at their artist page, roughly doubles how many obscure artists we know
+a genre for. We tested whether that richer information still tells artists apart well enough to
+be useful, and it does — though it is measurably blunter, and adding the second source costs
+more sharpness than it gains reach.
+
+**What it does not mean.** Nothing has been decided, built or adopted, and **none of this says
+the journeys would sound better or worse** — no offline measurement can say that. That still
+needs your ears.
+
+Detail, if you want it: `docs/superpowers/2026-07-30-tag-discrimination-execution-log.md`
+§9–§13.
+
+---
+
 ## N/A — 2026-07-30 (latest, late night) — we checked whether genre labels are worth building with; so far, yes
 
 **Nothing to exercise, and nothing is running** — all four ports were checked and are empty,

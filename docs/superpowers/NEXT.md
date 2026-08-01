@@ -12,7 +12,7 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-07-31, at the `REL-` release-tag coverage probe's closeout. `TAS-` is unchanged and still owes Tasks 5–8.**
+**Last updated: 2026-07-31, at the `TAS-AM3`/`TAS-AM4` closeout. `TAS-` Tasks 5–8 are still owed.**
 
 ---
 
@@ -21,6 +21,9 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > ## The RELEASE-TAG COVERAGE PROBE (`REL-`) is COMPLETE. **`REL-1` PASSED — release aggregation clears `COH-2`'s 50% bar in the obscure tail. Nothing adopted. The next action is the OWNER'S.**
 >
 > Entry point is the current handoff:
+> [`2026-07-31-HANDOFF-tas-am3-am4.md`](2026-07-31-HANDOFF-tas-am3-am4.md).
+> The `REL-` handoff below is **superseded on next actions** and stays authoritative for its
+> own probe's internals.
 > [`2026-07-31-HANDOFF-release-tag-coverage.md`](2026-07-31-HANDOFF-release-tag-coverage.md).
 > Governing document:
 > [`specs/2026-07-31-release-tag-coverage-preregistration.md`](specs/2026-07-31-release-tag-coverage-preregistration.md)
@@ -50,7 +53,9 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 >
 > ---
 >
-> ## The TAG DISCRIMINATION PROBE (`TAS-`) is UNCHANGED and STILL LIVE — Tasks 1–4 of 8, plus Task 7's selection-side halves and `TAS-AM3`. **`TAS-6` is ADVERSE, which bars adopting the BUILD-TIME architecture. The instrument question is resolved and `TAS-4` is believable. Tasks 5–8 unrun; the next action is the OWNER'S — see below.**
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) is LIVE — Tasks 1–4 of 8, plus Task 7's selection-side halves, `TAS-AM3` and `TAS-AM4`. **`TAS-6` is ADVERSE, which bars adopting the BUILD-TIME architecture. The instrument question is resolved for the SELECTION side and `TAS-4` is believable. Tasks 5–8 unrun; the next action is the OWNER'S — see below.**
+>
+> **`TAS-AM4` evaluated the `REL-` enriched frame as a CANDIDATE and licensed a recommendation only.** No candidate is killed and reach rises substantially, but the signal measurably blunts — and that fall held on a fixed population, so it is real rather than composition. **§1's vocabulary is UNCHANGED.** Figures: `builder/analysis/2026-07-30-tag-discrimination/tas_frame_eval.json`; reasoning: execution log §13. **The retiring session's position: run `TAS-5` next rather than a re-run** — the router-side architecture is untouched by the adverse `TAS-6`, and §5 says either read alone is uninterpretable. **If a re-run happens anyway, use `W1`, not `W6`.**
 >
 > Its handoff remains authoritative for that track's internals:
 > [`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md).
@@ -288,6 +293,7 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **Replacing mutual k-NN with a tag-based degree limiter** | **Owner-raised 2026-07-30, ruled SEPARATE and explicitly NOT ruled out.** Needs its own pre-registration designed cold; mixing it with `TAS-` would make every attribution ambiguous. Track B's `R1a` corroborates the premise — reciprocity in isolation at k = 100 was null on both archives. **Condition: if the owner triggers it**, as with every other cap-adjacent decision. |
 | ✅ **`TAS-4` is not believable until the red instrument check runs** | **DISCHARGED 2026-07-31 for the SELECTION side** — the original check was withdrawn as unachievable (`TAS-AM3`) and its replacement `TAS-AM3a` passed at every λ. Struck, kept for the record. |
 | **`TAS-5` is not believable until the ROUTING-side red check runs** | **Before any `TAS-` finding is written.** `TAS-AM3` specifies it as `TAS-AM3a`/`b` with `find_path_coh` in place of the ranking path. Still owed; the routing harness does not exist yet. |
+| **One new Snyk Low finding per module added under `builder/analysis/`** | **Recorded, not fixed; extending the acceptance is the owner's.** A CLI `--out` path flows into `pathlib.Path` — the same class as the 13 already accepted here, now 7 in this directory. It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path breaks intended usage. |
 | **Tag-aware selection increases the map's total edge count** | **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. `w_degree_hub` is dormant *because of the current graph's top-degree set*, and the pre-registration's held-constant row saying so is **scoped to this probe, which rebuilds nothing — it does not transfer to a rebuild.** Execution log §9.4/§9.5. |
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
