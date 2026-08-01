@@ -23,6 +23,49 @@ the point.**
 
 ---
 
+## N/A — 2026-08-01 (later) — we tested whether counting labels unequally helps; the answer closes some doors and opens one
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are empty;
+no server was started and none was left behind. No routing, no graph, no weighting, no cost
+function, and not one line of the app or the website changed. **A journey you build now is
+identical to one from this morning.**
+
+**What happened, in plain terms.** We asked whether genre labels work better when a shared
+rare label ("chillwave") counts for more than a shared common one ("rock"), and when a label
+lots of people vouched for counts for more than a drive-by one. Four answers came back, and
+you were part of two of them:
+
+- **Counting labels unequally genuinely changes which artists would get connected** — far
+  past the bar you set for "matters". So the knob is real. Whether the changed map *sounds*
+  better is a question only your ears can answer, and nothing was adopted.
+- **The fine style labels are now a closed door, and we finally know why.** We tried five
+  different ways of filtering or weighting them — including keeping only the ones you
+  picked out as real sub-genres, and fixing the spelling mismatches between the two
+  databases. Every version failed the same way, and the reason turned out to be simple:
+  **the style labels a person would actually use are the ones the app's similarity data
+  already knows.** They add nothing new.
+- **Counting individual pressings of albums turned out to smuggle fame in** — famous albums
+  get pressed more — so that idea was excluded by a rule we wrote down before seeing any
+  number.
+- **Your twenty-artist review is now part of the permanent record**, and it is the sharpest
+  evidence yet that most of the map's "unknown artists with no releases" are not artists at
+  all but leftover credits — session players, one-track features. The two real ones you
+  found would be wrongly deleted by any simple cleanup rule, which is exactly why that
+  decision is parked for you rather than made.
+
+**What it does not mean.** Nothing has been decided, built or adopted; no listening time
+was spent. The one concrete thing waiting on you is a direction call, not a test: whether
+the next piece of work is the big map-building re-question, which now has everything it
+needs to start.
+
+Detail, if you want it: `docs/superpowers/2026-08-01-label-weighting-execution-log.md`.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+---
+
 ## N/A — 2026-08-01 — we finished testing the genre idea, and it did not work
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are empty; no

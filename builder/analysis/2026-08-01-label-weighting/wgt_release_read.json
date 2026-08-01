@@ -1,0 +1,32 @@
+{
+ "note": "WGT-4, pre-registration \u00a74. The branch below is the rule firing, not a judgement.",
+ "WGT-4a": {
+  "artists_gaining_first_label": 329,
+  "bar": 742,
+  "fired": false
+ },
+ "WGT-4b": {
+  "within_list_spearman_with_vs_without": {
+   "artists": 53808,
+   "median": 0.9957,
+   "p10": 0.9714,
+   "share_below_0.99": 0.2797,
+   "share_below_0.9": 0.0182
+  },
+  "material_share_bar": 0.25,
+  "material": true
+ },
+ "WGT-4c": {
+  "spearman_mean_releases_per_rg_vs_fame": 0.406,
+  "bar": 0.37,
+  "fired": true,
+  "artists": 60422
+ },
+ "ev_r_leak_gate_context": {
+  "EV-A_votes": 0.4328,
+  "EV-G_rg_count": 0.4993,
+  "EV-R_release_count": 0.3358
+ },
+ "branch": "3: EXCLUDED -- ordering movement is fame-shaped; recorded as a leak finding",
+ "ev_r_admitted": false
+}

@@ -1,0 +1,578 @@
+{
+ "note": "Descriptive product research, outside the WGT- pre-registration by its \u00a78. No criterion, no bar; the seed fixes the draw.",
+ "seed": "20260801-tail-sample",
+ "population": "no MB release group and no Discogs release",
+ "population_size": 7686,
+ "graph_size": 74193,
+ "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+ "sample": [
+  {
+   "mbid": "ace1bb51-196f-4e92-b4d4-3ac3fe54c4d9",
+   "name": "Jazon Phantoms",
+   "disambiguation": "",
+   "pop_raw": 0.0806,
+   "pop_pctl_in_graph": 0.0678,
+   "degree": 1,
+   "top_neighbours": [
+    {
+     "name": "Christian Pacaud",
+     "score": 0.411
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/ace1bb51-196f-4e92-b4d4-3ac3fe54c4d9",
+   "youtube_search": "https://www.youtube.com/results?search_query=Jazon+Phantoms",
+   "spotify_search": "https://open.spotify.com/search/Jazon%20Phantoms"
+  },
+  {
+   "mbid": "b6ae98a7-2c25-43f8-aa96-fe70bf2216fd",
+   "name": "\u3046\u3069\u3093\u30b2\u30eb\u30b2",
+   "disambiguation": "",
+   "pop_raw": 0.0059,
+   "pop_pctl_in_graph": 0.0134,
+   "degree": 1,
+   "top_neighbours": [
+    {
+     "name": "\u30ad\u30e3\u30d7\u30c6\u30f3\u30df\u30e9\u30a4",
+     "score": 0.362
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/b6ae98a7-2c25-43f8-aa96-fe70bf2216fd",
+   "youtube_search": "https://www.youtube.com/results?search_query=%E3%81%86%E3%81%A9%E3%82%93%E3%82%B2%E3%83%AB%E3%82%B2",
+   "spotify_search": "https://open.spotify.com/search/%E3%81%86%E3%81%A9%E3%82%93%E3%82%B2%E3%83%AB%E3%82%B2"
+  },
+  {
+   "mbid": "c083984e-95ab-46c6-bc22-0fdcdce460c2",
+   "name": "Sin",
+   "disambiguation": "US rapper Woodley Charlot aka \"Big Sincere\"",
+   "pop_raw": 0.0109,
+   "pop_pctl_in_graph": 0.0219,
+   "degree": 1,
+   "top_neighbours": [
+    {
+     "name": "Fredro Starr",
+     "score": 0.381
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/c083984e-95ab-46c6-bc22-0fdcdce460c2",
+   "youtube_search": "https://www.youtube.com/results?search_query=Sin",
+   "spotify_search": "https://open.spotify.com/search/Sin"
+  },
+  {
+   "mbid": "d3f5f920-0e9f-4f57-be04-617caa54008f",
+   "name": "F.S. Jets",
+   "disambiguation": "Featured on several Curren$y songs.",
+   "pop_raw": 0.0109,
+   "pop_pctl_in_graph": 0.0221,
+   "degree": 1,
+   "top_neighbours": [
+    {
+     "name": "Young Roddy",
+     "score": 0.381
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/d3f5f920-0e9f-4f57-be04-617caa54008f",
+   "youtube_search": "https://www.youtube.com/results?search_query=F.S.+Jets",
+   "spotify_search": "https://open.spotify.com/search/F.S.%20Jets"
+  },
+  {
+   "mbid": "260943b2-91b9-48dd-902d-7e7c1f9b696c",
+   "name": "Claudio Ravinale",
+   "disambiguation": "",
+   "pop_raw": 0.123,
+   "pop_pctl_in_graph": 0.1137,
+   "degree": 3,
+   "top_neighbours": [
+    {
+     "name": "Slowmotion Apocalypse",
+     "score": 0.43
+    },
+    {
+     "name": "Ettore Rigotti",
+     "score": 0.389
+    },
+    {
+     "name": "Tomas Lindberg",
+     "score": 0.372
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/260943b2-91b9-48dd-902d-7e7c1f9b696c",
+   "youtube_search": "https://www.youtube.com/results?search_query=Claudio+Ravinale",
+   "spotify_search": "https://open.spotify.com/search/Claudio%20Ravinale"
+  },
+  {
+   "mbid": "581efda2-c352-47d0-a8dc-464ab91a712f",
+   "name": "The UArts \u201cZ\u201d Big Band",
+   "disambiguation": "",
+   "pop_raw": 0.1504,
+   "pop_pctl_in_graph": 0.1526,
+   "degree": 4,
+   "top_neighbours": [
+    {
+     "name": "Nekofrog",
+     "score": 0.492
+    },
+    {
+     "name": "Joren de Bruin",
+     "score": 0.389
+    },
+    {
+     "name": "zykO",
+     "score": 0.352
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/581efda2-c352-47d0-a8dc-464ab91a712f",
+   "youtube_search": "https://www.youtube.com/results?search_query=The+UArts+%E2%80%9CZ%E2%80%9D+Big+Band",
+   "spotify_search": "https://open.spotify.com/search/The%20UArts%20%E2%80%9CZ%E2%80%9D%20Big%20Band"
+  },
+  {
+   "mbid": "685537f9-e139-416a-a4d9-d044c5177a03",
+   "name": "Third Eye John",
+   "disambiguation": "",
+   "pop_raw": 0.159,
+   "pop_pctl_in_graph": 0.1663,
+   "degree": 5,
+   "top_neighbours": [
+    {
+     "name": "Pantalaim0n",
+     "score": 0.352
+    },
+    {
+     "name": "Knablinz",
+     "score": 0.341
+    },
+    {
+     "name": "Cold",
+     "score": 0.341
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/685537f9-e139-416a-a4d9-d044c5177a03",
+   "youtube_search": "https://www.youtube.com/results?search_query=Third+Eye+John",
+   "spotify_search": "https://open.spotify.com/search/Third%20Eye%20John"
+  },
+  {
+   "mbid": "b5df9cc9-fae3-4352-9894-ace9b5c27edf",
+   "name": "Benjamin Mahua",
+   "disambiguation": "",
+   "pop_raw": 0.1189,
+   "pop_pctl_in_graph": 0.1073,
+   "degree": 3,
+   "top_neighbours": [
+    {
+     "name": "Gina Sal\u00e1",
+     "score": 0.381
+    },
+    {
+     "name": "Krishna Das",
+     "score": 0.381
+    },
+    {
+     "name": "Sita Jamieson Caddle",
+     "score": 0.381
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/b5df9cc9-fae3-4352-9894-ace9b5c27edf",
+   "youtube_search": "https://www.youtube.com/results?search_query=Benjamin+Mahua",
+   "spotify_search": "https://open.spotify.com/search/Benjamin%20Mahua"
+  },
+  {
+   "mbid": "25f66b91-6d8b-4b14-9e06-bb135acf081d",
+   "name": "Yari",
+   "disambiguation": "featured on Egotronic songs",
+   "pop_raw": 0.1647,
+   "pop_pctl_in_graph": 0.1748,
+   "degree": 4,
+   "top_neighbours": [
+    {
+     "name": "Egotronic",
+     "score": 0.603
+    },
+    {
+     "name": "Danja Atari",
+     "score": 0.424
+    },
+    {
+     "name": "Saalschutz",
+     "score": 0.411
+    }
+   ],
+   "clip": {
+    "resolves": true,
+    "source": "deezer",
+    "track": "Yemma"
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/25f66b91-6d8b-4b14-9e06-bb135acf081d",
+   "youtube_search": "https://www.youtube.com/results?search_query=Yari",
+   "spotify_search": "https://open.spotify.com/search/Yari"
+  },
+  {
+   "mbid": "2fc2768f-a7ab-4dca-b64f-556df8447e35",
+   "name": "Natalie Craig",
+   "disambiguation": "Jonny Craig's sister",
+   "pop_raw": 0.2048,
+   "pop_pctl_in_graph": 0.2552,
+   "degree": 3,
+   "top_neighbours": [
+    {
+     "name": "Rain City Drive",
+     "score": 0.65
+    },
+    {
+     "name": "Tyler Carter",
+     "score": 0.579
+    },
+    {
+     "name": "Kyle Lucas",
+     "score": 0.562
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/2fc2768f-a7ab-4dca-b64f-556df8447e35",
+   "youtube_search": "https://www.youtube.com/results?search_query=Natalie+Craig",
+   "spotify_search": "https://open.spotify.com/search/Natalie%20Craig"
+  },
+  {
+   "mbid": "b2e932cc-da56-49f8-bd73-0231ea1a2773",
+   "name": "Reagan Gomez-Preston",
+   "disambiguation": "",
+   "pop_raw": 0.1684,
+   "pop_pctl_in_graph": 0.1822,
+   "degree": 3,
+   "top_neighbours": [
+    {
+     "name": "Zach Callison",
+     "score": 0.411
+    },
+    {
+     "name": "Grace Rolek",
+     "score": 0.352
+    },
+    {
+     "name": "Jennifer Paz",
+     "score": 0.341
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/b2e932cc-da56-49f8-bd73-0231ea1a2773",
+   "youtube_search": "https://www.youtube.com/results?search_query=Reagan+Gomez-Preston",
+   "spotify_search": "https://open.spotify.com/search/Reagan%20Gomez-Preston"
+  },
+  {
+   "mbid": "c032e923-9423-4e52-848a-fc7aac8d2a6f",
+   "name": "Andrea Cormier",
+   "disambiguation": "",
+   "pop_raw": 0.1972,
+   "pop_pctl_in_graph": 0.2383,
+   "degree": 3,
+   "top_neighbours": [
+    {
+     "name": "Pomo",
+     "score": 0.66
+    },
+    {
+     "name": "Plage 84",
+     "score": 0.397
+    },
+    {
+     "name": "Kianu",
+     "score": 0.372
+    }
+   ],
+   "clip": {
+    "resolves": true,
+    "source": "itunes",
+    "track": "Teardrop"
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/c032e923-9423-4e52-848a-fc7aac8d2a6f",
+   "youtube_search": "https://www.youtube.com/results?search_query=Andrea+Cormier",
+   "spotify_search": "https://open.spotify.com/search/Andrea%20Cormier"
+  },
+  {
+   "mbid": "4a5a7f67-1641-4e58-bd35-b3b7fd5964bb",
+   "name": "Young Devi D",
+   "disambiguation": "",
+   "pop_raw": 0.2356,
+   "pop_pctl_in_graph": 0.3271,
+   "degree": 6,
+   "top_neighbours": [
+    {
+     "name": "Kate Rose",
+     "score": 0.499
+    },
+    {
+     "name": "Adrian Truth",
+     "score": 0.496
+    },
+    {
+     "name": "JL",
+     "score": 0.48
+    }
+   ],
+   "clip": {
+    "resolves": true,
+    "source": "deezer",
+    "track": "Don't Judge Me (feat. Brandoshis)"
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/4a5a7f67-1641-4e58-bd35-b3b7fd5964bb",
+   "youtube_search": "https://www.youtube.com/results?search_query=Young+Devi+D",
+   "spotify_search": "https://open.spotify.com/search/Young%20Devi%20D"
+  },
+  {
+   "mbid": "6a3028a5-5ac8-47c8-b924-a3d59f1b8c51",
+   "name": "Nuno Endo",
+   "disambiguation": "",
+   "pop_raw": 0.2725,
+   "pop_pctl_in_graph": 0.4218,
+   "degree": 3,
+   "top_neighbours": [
+    {
+     "name": "GoodLuck",
+     "score": 0.404
+    },
+    {
+     "name": "Emsy Prank",
+     "score": 0.341
+    },
+    {
+     "name": "ALIX",
+     "score": 0.341
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/6a3028a5-5ac8-47c8-b924-a3d59f1b8c51",
+   "youtube_search": "https://www.youtube.com/results?search_query=Nuno+Endo",
+   "spotify_search": "https://open.spotify.com/search/Nuno%20Endo"
+  },
+  {
+   "mbid": "752ba833-d930-410a-ab7c-9ef1ca63df0a",
+   "name": "Moonraider",
+   "disambiguation": "",
+   "pop_raw": 0.2644,
+   "pop_pctl_in_graph": 0.4004,
+   "degree": 13,
+   "top_neighbours": [
+    {
+     "name": "anosou",
+     "score": 0.43
+    },
+    {
+     "name": "Force of Habit",
+     "score": 0.411
+    },
+    {
+     "name": "Spydabee",
+     "score": 0.411
+    }
+   ],
+   "clip": {
+    "resolves": true,
+    "source": "itunes",
+    "track": "Who Run the World"
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/752ba833-d930-410a-ab7c-9ef1ca63df0a",
+   "youtube_search": "https://www.youtube.com/results?search_query=Moonraider",
+   "spotify_search": "https://open.spotify.com/search/Moonraider"
+  },
+  {
+   "mbid": "e7bb8361-528d-4530-b744-675dfda9b617",
+   "name": "DZK",
+   "disambiguation": "YTMND artist",
+   "pop_raw": 0.2461,
+   "pop_pctl_in_graph": 0.3521,
+   "degree": 8,
+   "top_neighbours": [
+    {
+     "name": "Dasyati",
+     "score": 0.453
+    },
+    {
+     "name": "Hard 'n Phirm",
+     "score": 0.404
+    },
+    {
+     "name": "Japan Break Industries",
+     "score": 0.389
+    }
+   ],
+   "clip": {
+    "resolves": true,
+    "source": "deezer",
+    "track": "DIS-MOI"
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/e7bb8361-528d-4530-b744-675dfda9b617",
+   "youtube_search": "https://www.youtube.com/results?search_query=DZK",
+   "spotify_search": "https://open.spotify.com/search/DZK"
+  },
+  {
+   "mbid": "094d6e7f-e866-4d91-8dc7-a6b0282f2ad9",
+   "name": "SoulAvenue",
+   "disambiguation": "",
+   "pop_raw": 0.2915,
+   "pop_pctl_in_graph": 0.4722,
+   "degree": 12,
+   "top_neighbours": [
+    {
+     "name": "Ambray",
+     "score": 0.453
+    },
+    {
+     "name": "Jacob Gurevitsch",
+     "score": 0.436
+    },
+    {
+     "name": "Troels Hammer",
+     "score": 0.418
+    }
+   ],
+   "clip": {
+    "resolves": true,
+    "source": "deezer",
+    "track": "One by One (feat. Shaheen Sheik) [Original Mix]"
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/094d6e7f-e866-4d91-8dc7-a6b0282f2ad9",
+   "youtube_search": "https://www.youtube.com/results?search_query=SoulAvenue",
+   "spotify_search": "https://open.spotify.com/search/SoulAvenue"
+  },
+  {
+   "mbid": "1a4eb986-584f-491b-ac64-20c39b4039d3",
+   "name": "\u4f73\u7e54\u307f\u3061\u308b",
+   "disambiguation": "",
+   "pop_raw": 0.2881,
+   "pop_pctl_in_graph": 0.4633,
+   "degree": 11,
+   "top_neighbours": [
+    {
+     "name": "REDALiCE",
+     "score": 0.616
+    },
+    {
+     "name": "\u91ce\u5bae\u3042\u3086\u307f",
+     "score": 0.579
+    },
+    {
+     "name": "\u4e09\u6fa4\u79cb",
+     "score": 0.542
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/1a4eb986-584f-491b-ac64-20c39b4039d3",
+   "youtube_search": "https://www.youtube.com/results?search_query=%E4%BD%B3%E7%B9%94%E3%81%BF%E3%81%A1%E3%82%8B",
+   "spotify_search": "https://open.spotify.com/search/%E4%BD%B3%E7%B9%94%E3%81%BF%E3%81%A1%E3%82%8B"
+  },
+  {
+   "mbid": "e7a8528c-0b23-4361-a8e4-69bbf749a805",
+   "name": "mi-mi",
+   "disambiguation": "EXIT TRANCE",
+   "pop_raw": 0.3569,
+   "pop_pctl_in_graph": 0.6411,
+   "degree": 30,
+   "top_neighbours": [
+    {
+     "name": "MAKI",
+     "score": 0.598
+    },
+    {
+     "name": "R.Cena",
+     "score": 0.545
+    },
+    {
+     "name": "Ma15",
+     "score": 0.523
+    }
+   ],
+   "clip": {
+    "resolves": false,
+    "source": null,
+    "errors": []
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/e7a8528c-0b23-4361-a8e4-69bbf749a805",
+   "youtube_search": "https://www.youtube.com/results?search_query=mi-mi",
+   "spotify_search": "https://open.spotify.com/search/mi-mi"
+  },
+  {
+   "mbid": "fff07e02-225a-4d78-b74b-05c2d2988c26",
+   "name": "Romu Agull\u00f3",
+   "disambiguation": "",
+   "pop_raw": 0.3985,
+   "pop_pctl_in_graph": 0.7375,
+   "degree": 36,
+   "top_neighbours": [
+    {
+     "name": "Cl\u00e9lia Felix",
+     "score": 0.567
+    },
+    {
+     "name": "Elmara",
+     "score": 0.553
+    },
+    {
+     "name": "Sol El\u00e9ctrico",
+     "score": 0.55
+    }
+   ],
+   "clip": {
+    "resolves": true,
+    "source": "deezer",
+    "track": "Sue\u00f1os"
+   },
+   "musicbrainz": "https://musicbrainz.org/artist/fff07e02-225a-4d78-b74b-05c2d2988c26",
+   "youtube_search": "https://www.youtube.com/results?search_query=Romu+Agull%C3%B3",
+   "spotify_search": "https://open.spotify.com/search/Romu%20Agull%C3%B3"
+  }
+ ]
+}

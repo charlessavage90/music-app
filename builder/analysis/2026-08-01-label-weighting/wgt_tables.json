@@ -1,0 +1,250 @@
+{
+ "note": "WGT-5, descriptive, no bars.",
+ "graph_artists": 74193,
+ "frames": {
+  "W0": {
+   "distinct_labels": 2015,
+   "carriers_median": 5,
+   "singletons": 514,
+   "rarity_weight_quartiles": [
+    7.956,
+    9.605,
+    11.214
+   ]
+  },
+  "W1": {
+   "distinct_labels": 2166,
+   "carriers_median": 8.0,
+   "singletons": 500,
+   "rarity_weight_quartiles": [
+    7.343,
+    9.135,
+    10.521
+   ]
+  },
+  "W4": {
+   "distinct_labels": 2171,
+   "carriers_median": 8,
+   "singletons": 500,
+   "rarity_weight_quartiles": [
+    7.343,
+    9.135,
+    10.521
+   ]
+  },
+  "W5": {
+   "distinct_labels": 2374,
+   "carriers_median": 12.0,
+   "singletons": 487,
+   "rarity_weight_quartiles": [
+    6.832,
+    8.73,
+    10.521
+   ]
+  },
+  "W6": {
+   "distinct_labels": 2379,
+   "carriers_median": 12,
+   "singletons": 487,
+   "rarity_weight_quartiles": [
+    6.82,
+    8.73,
+    10.521
+   ]
+  }
+ },
+ "sources": {
+  "F0_artist_page": {
+   "distinct_labels": 2015,
+   "artists_reached": 40437,
+   "singletons": 514,
+   "rarity_weight_median": 9.605,
+   "top10": [
+    [
+     "pop",
+     5205
+    ],
+    [
+     "hip hop",
+     4767
+    ],
+    [
+     "rock",
+     4169
+    ],
+    [
+     "electronic",
+     4135
+    ],
+    [
+     "alternative rock",
+     2771
+    ],
+    [
+     "jazz",
+     2562
+    ],
+    [
+     "indie rock",
+     2350
+    ],
+    [
+     "pop rock",
+     1747
+    ],
+    [
+     "folk",
+     1529
+    ],
+    [
+     "indie pop",
+     1318
+    ]
+   ]
+  },
+  "F1_mb_release_groups": {
+   "distinct_labels": 1331,
+   "artists_reached": 49629,
+   "singletons": 160,
+   "rarity_weight_median": 8.442,
+   "top10": [
+    [
+     "electronic",
+     23542
+    ],
+    [
+     "rock",
+     19756
+    ],
+    [
+     "pop",
+     14261
+    ],
+    [
+     "hip hop",
+     7383
+    ],
+    [
+     "experimental",
+     6489
+    ],
+    [
+     "ambient",
+     5719
+    ],
+    [
+     "jazz",
+     5463
+    ],
+    [
+     "indie rock",
+     5457
+    ],
+    [
+     "pop rock",
+     5377
+    ],
+    [
+     "alternative rock",
+     5308
+    ]
+   ]
+  },
+  "F4_discogs_genre": {
+   "distinct_labels": 16,
+   "artists_reached": 55831,
+   "singletons": 0,
+   "rarity_weight_median": 2.678,
+   "top10": [
+    [
+     "electronic",
+     32606
+    ],
+    [
+     "rock",
+     26672
+    ],
+    [
+     "pop",
+     22815
+    ],
+    [
+     "folk, world, & country",
+     12747
+    ],
+    [
+     "hip hop",
+     12218
+    ],
+    [
+     "funk / soul",
+     11137
+    ],
+    [
+     "jazz",
+     9375
+    ],
+    [
+     "stage & screen",
+     7640
+    ],
+    [
+     "non",
+     5097
+    ],
+    [
+     "blues",
+     4952
+    ]
+   ]
+  },
+  "F5_discogs_style": {
+   "distinct_labels": 737,
+   "artists_reached": 54321,
+   "singletons": 23,
+   "rarity_weight_median": 6.444,
+   "top10": [
+    [
+     "house",
+     10266
+    ],
+    [
+     "electro",
+     9743
+    ],
+    [
+     "experimental",
+     9687
+    ],
+    [
+     "alternative rock",
+     9105
+    ],
+    [
+     "downtempo",
+     8908
+    ],
+    [
+     "pop rock",
+     8289
+    ],
+    [
+     "indie rock",
+     8073
+    ],
+    [
+     "ambient",
+     7981
+    ],
+    [
+     "synth pop",
+     7023
+    ],
+    [
+     "techno",
+     6508
+    ]
+   ]
+  }
+ }
+}

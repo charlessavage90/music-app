@@ -1,6 +1,10 @@
 # Handoff — `TAS-R1`–`TAS-R4`, the routing side of the tag probe, 2026-08-01
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-01 on next actions by
+[`2026-08-01-HANDOFF-label-weighting.md`](2026-08-01-HANDOFF-label-weighting.md)** (the
+`WGT-` probe, a successor investigation). This document **remains authoritative for the
+`TAS-` track's internals**, and `TAS-` Task 8 remains owed and unwritten — the successor
+did not write it. *(Original role line:)* Supersedes
 [`2026-07-31-HANDOFF-tas-am3-am4.md`](2026-07-31-HANDOFF-tas-am3-am4.md) on next actions. It
 does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

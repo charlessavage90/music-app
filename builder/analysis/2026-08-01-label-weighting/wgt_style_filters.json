@@ -1,0 +1,106 @@
+{
+ "note": "Diagnostic, no bars, owner-directed. Plain Jaccard only; the committed WGT- verdicts stand on their own substrate. The folded variants change the NORMALISER, not the vocabulary choice, and nothing here amends TAS- section 1.",
+ "capture_sha256": "893609e97fb31f2a679a5e8005f7488d771414658d671a9eee979a757b550d90",
+ "committed_reference": {
+  "unfolded_styles_onto_W1_from_grid": {
+   "spread_delta": -0.0197,
+   "redundancy_delta": 0.0291
+  }
+ },
+ "fold": {
+  "style_labels_unfolded": 737,
+  "style_keys_folded": 736,
+  "w0_vocab_unfolded": 2015,
+  "w0_keys_folded": 2001,
+  "discogs_only_styles_becoming_mb_matched": 17,
+  "examples": [
+   "antifolk",
+   "avantgarde",
+   "bossanova",
+   "darkwave",
+   "drum n bass",
+   "freetekno",
+   "future pop",
+   "italodance",
+   "neo classical",
+   "power violence",
+   "prog rock",
+   "psy trance",
+   "ragga hiphop",
+   "rhythm & blues",
+   "rnb/swing"
+  ]
+ },
+ "variants": {
+  "floor400_onto_W1": {
+   "baseline": {
+    "median_iqr": 0.16,
+    "spearman_vs_similarity": 0.2048,
+    "lists": 38782
+   },
+   "with_styles": {
+    "median_iqr": 0.1439,
+    "spearman_vs_similarity": 0.2369,
+    "lists": 38782
+   },
+   "spread_delta": -0.0161,
+   "redundancy_delta": 0.0321
+  },
+  "floor200_onto_W1": {
+   "baseline": {
+    "median_iqr": 0.16,
+    "spearman_vs_similarity": 0.2048,
+    "lists": 38782
+   },
+   "with_styles": {
+    "median_iqr": 0.1425,
+    "spearman_vs_similarity": 0.2347,
+    "lists": 38782
+   },
+   "spread_delta": -0.0175,
+   "redundancy_delta": 0.0299
+  },
+  "mbx_onto_W1": {
+   "baseline": {
+    "median_iqr": 0.16,
+    "spearman_vs_similarity": 0.2048,
+    "lists": 38782
+   },
+   "with_styles": {
+    "median_iqr": 0.145,
+    "spearman_vs_similarity": 0.2318,
+    "lists": 38782
+   },
+   "spread_delta": -0.015,
+   "redundancy_delta": 0.027
+  },
+  "folded_onto_W1f": {
+   "baseline": {
+    "median_iqr": 0.1604,
+    "spearman_vs_similarity": 0.2048,
+    "lists": 38782
+   },
+   "with_styles": {
+    "median_iqr": 0.1408,
+    "spearman_vs_similarity": 0.2357,
+    "lists": 38782
+   },
+   "spread_delta": -0.0196,
+   "redundancy_delta": 0.0309
+  },
+  "folded_onto_W4f": {
+   "baseline": {
+    "median_iqr": 0.1579,
+    "spearman_vs_similarity": 0.1963,
+    "lists": 38782
+   },
+   "with_styles": {
+    "median_iqr": 0.1426,
+    "spearman_vs_similarity": 0.2208,
+    "lists": 38782
+   },
+   "spread_delta": -0.0153,
+   "redundancy_delta": 0.0245
+  }
+ }
+}
