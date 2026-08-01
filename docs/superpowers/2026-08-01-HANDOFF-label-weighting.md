@@ -46,9 +46,12 @@ Probes: `builder/analysis/2026-08-01-label-weighting/`.
 
 ## Status of `TAS-` — unchanged by this work
 
-**`TAS-` Task 8 (its findings document) is still owed and still unwritten.** This probe
-is a successor investigation, not that document. The `TAS-` handoff below remains
-authoritative for its track's internals.
+**⚠ CORRECTED 2026-08-01 (latest): `TAS-` Task 8 has since been WRITTEN.** The findings are
+[`findings/2026-07-30-tag-discrimination.md`](findings/2026-07-30-tag-discrimination.md), the
+owner-facing read is execution log §17, and the `TAS-` probe is complete through all eight
+tasks. *(As written at this handoff's seam, and true then:)* **`TAS-` Task 8 (its findings
+document) is still owed and still unwritten.** This probe is a successor investigation, not
+that document. The `TAS-` handoff below remains authoritative for its track's internals.
 
 ## The open decision, and what I would do
 
