@@ -149,4 +149,10 @@ Grid ~35 min; release pass 48.7 min at 117 MB/s with a versioned-schema checkpoi
 Snyk over the new scripts: **4 Low findings, all the accepted CLI-path class** —
 recorded for the standing `NEXT.md` row, not fixed, extending the acceptance is the
 owner's. The no-release tail sample (20 artists, 7 clips resolve) is outside this probe
-by its §8 and awaits the owner's manual read.
+by its §8. **The owner's manual read is complete and recorded in `TAIL-SAMPLE.md`
+beside the draw: 18 of 20 judged not journey-worthy** — contributors, one-track
+features and soundtrack credits living on in similarity data — **and the two real
+artists found are real precisely where MusicBrainz is blind** (Spotify-only
+catalogues, no MB releases), with thin neighbours and no tag data to route them
+coherently. Any filter built on "has a release" would cut both. The product
+decision this opens is the owner's and is not proposed here.

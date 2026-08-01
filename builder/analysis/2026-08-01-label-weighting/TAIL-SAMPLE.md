@@ -28,3 +28,30 @@ Population: **7,686** of 74,193 graph artists have no MusicBrainz release group 
 | 20 | **Romu Agulló** | — | 74% | 36 | ✅ deezer | Clélia Felix, Elmara, Sol Eléctrico | [MB](https://musicbrainz.org/artist/fff07e02-225a-4d78-b74b-05c2d2988c26) · [YT](https://www.youtube.com/results?search_query=Romu+Agull%C3%B3) · [Sp](https://open.spotify.com/search/Romu%20Agull%C3%B3) |
 
 Notes worth capturing per artist: real act vs data ghost; active vs defunct; would *you* want to land on them mid-journey; does anything play anywhere.
+
+Owner review notes:
+For shorthand, I've used these conventions:
+- Journey: [Y/N] answers the question "is the artist something that should appear mid-journey"
+
+#1: contributor to a single release - video game soundtrack. Journey: N
+#2: japanese vocaloid artist that contributed to multiple compilations and soundtracks, but not since 2020. Results on Apple Music. Still, Journey: N
+#3: contributed to albums and mixtapes, mostly in early 2000s. Died in 2016. Journey: N
+#4: appeared on one Curren$y album in 2008. MB has no other data, references, external links. Journey: N
+#5: member of a metal band, who appeared as a guest individually on other metal artists' albums. Journey: N
+#6: Co-collaborator on a single track of "Donkey Kong Country 2: Diddy’s Kong Quest – Serious Monkey Business" in 2010. Journey: N
+#7: Has "pages" on both spotify and apple music, but no tracks or playable content. Contributed one track to one album in 2017. No other music found. Journey: N
+#8: Featured on one track in one album in 2002. Journey: N
+#9: Featured on one track in one album in 2015. Deezer likely a false positive or mismatch - MB has no external relationships. Journey: N
+#10: Guest Vocals on one track in one album in 2002. Journey: N
+#11: Featured on one track in one album (Steven Universe soundtrack) in 2019. Journey: N
+#12: Actual artist with one album, one EP, and a few singles on spotify that apparently aren't documented on MB. 24 monthly listeners. Note: 3 listed neighbors don't sound very similar, also no MB genre tags. Journey: Y
+#13: actual artist with two albums on spotify that don't appear on MB. No MB genre data or tags. Only one listed neighbor sounds similar. Journey: Y
+#14: Appearances on multiple compilations. Has an EP on MB. No music on apple music or spotify, but has a soundcloud, though last update 8 years go. Journey: N
+#15: Links to soundcloud, youtube, website, twitter all dead. Journey: N
+#16: Only contributed to internet-based soundtracks (mainly YTMND). Journey: N
+#17: Contributor to many "chillwave" type collaborations. Journey: N
+#18: Japanese vocalist, contributor on many albums and soundtracks. 2000 twitter followers. Japanese wiki translation says "mainly active in theme songs and commercial game vocals". Journey: N
+#19: Contributor on many "EXIT TRANCE PRESENTS" albums from 2009-2015. Research on this series says "a popular Japanese compilation album series" that "features high-energy, fast-paced electronic dance and trance remix covers of well-known anime theme songs, video game soundtracks, and pop culture hits." Journey: N
+#20: Contributor to two "chillout / ambient music" compilations published by a famous bar in Ibiza. Journey: N
+
+Some additional notes on the Journey: Y artists. In both cases, while these seem like appropriate artists to serve in a path, the data looks like we can't serve them in a coherent path - their neighbors don't sound similar, and they have no tag data to direct us.
