@@ -1,0 +1,107 @@
+{
+ "substrate": "pre-cap capture of the ALG-E archive; reconstructs ALG-E-mutual_knn-k50 (TAS-AM1/TAS-AM2). NOT the adopted artifact -- never compare these figures with TAS-1 or TAS-5.",
+ "capture_nodes": 74957,
+ "directed_candidates": 3989754,
+ "nodes_in_capture_absent_from_fame_frame": 797,
+ "labelled_nodes": 40436,
+ "labelled_node_share": 0.5395,
+ "slots_where_the_rule_acts_share": 0.658,
+ "baseline_edges": 448828,
+ "baseline_edges_by_class": {
+  "ff": 5478,
+  "oo": 44953,
+  "fo": 398379,
+  "unframed": 18
+ },
+ "binding_artists": 37006,
+ "binding_share": 0.4937,
+ "edges_incident_on_binding_node_share": 0.80316,
+ "kill_threshold_turnover": 0.01,
+ "per_lambda": {
+  "0.25": {
+   "deleted": 24238,
+   "created": 49498,
+   "turnover_share": 0.16429,
+   "edges_after": 474088,
+   "deleted_by_class": {
+    "ff": 816,
+    "oo": 300,
+    "fo": 23122,
+    "unframed": 0
+   },
+   "created_by_class": {
+    "ff": 1060,
+    "oo": 414,
+    "fo": 48016,
+    "unframed": 8
+   },
+   "mean_swaps_binding": 3.1018,
+   "mean_swaps_all_nodes": 1.5313,
+   "median_swaps_binding_RETIRED_STATISTIC": 3.0
+  },
+  "0.5": {
+   "deleted": 37981,
+   "created": 76302,
+   "turnover_share": 0.25463,
+   "edges_after": 487149,
+   "deleted_by_class": {
+    "ff": 1206,
+    "oo": 426,
+    "fo": 36349,
+    "unframed": 0
+   },
+   "created_by_class": {
+    "ff": 1678,
+    "oo": 574,
+    "fo": 74034,
+    "unframed": 16
+   },
+   "mean_swaps_binding": 4.9779,
+   "mean_swaps_all_nodes": 2.4576,
+   "median_swaps_binding_RETIRED_STATISTIC": 5.0
+  },
+  "1.0": {
+   "deleted": 52409,
+   "created": 100212,
+   "turnover_share": 0.34004,
+   "edges_after": 496631,
+   "deleted_by_class": {
+    "ff": 1581,
+    "oo": 581,
+    "fo": 50247,
+    "unframed": 0
+   },
+   "created_by_class": {
+    "ff": 2143,
+    "oo": 729,
+    "fo": 97312,
+    "unframed": 28
+   },
+   "mean_swaps_binding": 7.0342,
+   "mean_swaps_all_nodes": 3.4727,
+   "median_swaps_binding_RETIRED_STATISTIC": 7.0
+  },
+  "2.0": {
+   "deleted": 64277,
+   "created": 116957,
+   "turnover_share": 0.40379,
+   "edges_after": 501508,
+   "deleted_by_class": {
+    "ff": 1878,
+    "oo": 752,
+    "fo": 61647,
+    "unframed": 0
+   },
+   "created_by_class": {
+    "ff": 2397,
+    "oo": 844,
+    "fo": 113669,
+    "unframed": 47
+   },
+   "mean_swaps_binding": 8.7887,
+   "mean_swaps_all_nodes": 4.339,
+   "median_swaps_binding_RETIRED_STATISTIC": 10.0
+  }
+ },
+ "tas4_kills": false
+}

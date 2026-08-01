@@ -1,6 +1,12 @@
 # Handoff — coherence tag probe, 2026-07-30
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-07-30 on next actions by
+[`2026-07-30-HANDOFF-tag-discrimination.md`](2026-07-30-HANDOFF-tag-discrimination.md)** —
+the owner picked up the third coherence strand (tag-aware selection) that this handoff
+parked, and that probe is now the live work. **Everything below about the coherence tag
+probe itself remains accurate and is not superseded**: the kill gate fired, `COH-2` and
+`COH-3` must still be quoted together, and `ct_retrodict.py` is still committed and unrun.
+Supersedes
 [`2026-07-30-HANDOFF-fame-proxy-coverage.md`](2026-07-30-HANDOFF-fame-proxy-coverage.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.

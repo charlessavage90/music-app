@@ -1,0 +1,1514 @@
+{
+  "substrate": {
+    "file": "ALG-E-mutual_knn-k50.bin",
+    "sha256": "73feffa03856f55dda134b84aa5ee40073495ae16f27e8116a4d961b65a69faa",
+    "artists": 74157,
+    "undirected_edges": 448810
+  },
+  "adopted_for_context": {
+    "file": "graph-t15-tiebreakfix.bin",
+    "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+    "artists": 74193,
+    "undirected_edges": 449003,
+    "artists_delta_vs_substrate": 36,
+    "edges_delta_vs_substrate": 193
+  },
+  "green_check_selection_reproduces_substrate": true,
+  "pair_seed": "20260730-tdcal",
+  "pair_seed_note": "not the pre-registered TAS-5 seed 20260730-tas",
+  "routing": {
+    "pairs": 900,
+    "per_class": {
+      "ff": 300,
+      "fo": 300,
+      "oo": 300
+    },
+    "stop_rules_find_journey": {
+      "natural": 895,
+      "forced": 5
+    },
+    "mean_hops": 9.294,
+    "mean_hops_by_class": {
+      "ff": 5.877,
+      "fo": 9.72,
+      "oo": 12.287
+    },
+    "seconds": 609.5
+  },
+  "routed_edges": {
+    "unique_find_journey": 4409,
+    "traversals_find_journey": 8365,
+    "unique_find_path": 4404,
+    "unique_by_class": {
+      "ff": 912,
+      "fo": 1944,
+      "oo": 2623
+    }
+  },
+  "rank_position_profile": {
+    "all_edges": {
+      "edges": 448828,
+      "median_worse_position": 26.0,
+      "mean_worse_position": 25.97,
+      "share_worse_pos_ge_45": 0.1078,
+      "share_worse_pos_lt_10": 0.1538
+    },
+    "routed_edges": {
+      "edges": 4409,
+      "median_worse_position": 28.0,
+      "mean_worse_position": 26.78,
+      "share_worse_pos_ge_45": 0.1288,
+      "share_worse_pos_lt_10": 0.1492
+    },
+    "routed_edges_by_class": {
+      "ff": {
+        "edges": 912,
+        "median_worse_position": 30.0,
+        "mean_worse_position": 28.56,
+        "share_worse_pos_ge_45": 0.136,
+        "share_worse_pos_lt_10": 0.0899
+      },
+      "fo": {
+        "edges": 1944,
+        "median_worse_position": 27.0,
+        "mean_worse_position": 26.48,
+        "share_worse_pos_ge_45": 0.1224,
+        "share_worse_pos_lt_10": 0.1538
+      },
+      "oo": {
+        "edges": 2623,
+        "median_worse_position": 27.0,
+        "mean_worse_position": 26.18,
+        "share_worse_pos_ge_45": 0.1262,
+        "share_worse_pos_lt_10": 0.1666
+      }
+    }
+  },
+  "arms": [
+    {
+      "arm": "BND-1",
+      "population_deletion_rate": 0.02149,
+      "population_creation_rate": 0.0204,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.02336,
+      "safety_ratio": 1.087,
+      "traversal_weighted_deletion_rate": 0.01733,
+      "traversal_weighted_safety_ratio": 0.807,
+      "find_path_safety_ratio": 1.088,
+      "safety_ratio_half_a": 1.095,
+      "safety_ratio_half_b": 0.996,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.02412,
+          "safety_ratio": 1.123,
+          "safety_ratio_half_a": 0.969,
+          "safety_ratio_half_b": 1.048
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.02058,
+          "safety_ratio": 0.958,
+          "safety_ratio_half_a": 0.969,
+          "safety_ratio_half_b": 0.81
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.02287,
+          "safety_ratio": 1.064,
+          "safety_ratio_half_a": 1.047,
+          "safety_ratio_half_b": 0.987
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 30,
+          "of": 300,
+          "share": 0.1
+        },
+        "fo": {
+          "n": 41,
+          "of": 300,
+          "share": 0.1367
+        },
+        "oo": {
+          "n": 61,
+          "of": 300,
+          "share": 0.2033
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.1467,
+      "created_incident_on_a_routed_node": 0.15485,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.112
+    },
+    {
+      "arm": "BND-2",
+      "population_deletion_rate": 0.04276,
+      "population_creation_rate": 0.04019,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.05035,
+      "safety_ratio": 1.178,
+      "traversal_weighted_deletion_rate": 0.04459,
+      "traversal_weighted_safety_ratio": 1.043,
+      "find_path_safety_ratio": 1.174,
+      "safety_ratio_half_a": 1.171,
+      "safety_ratio_half_b": 1.127,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.05482,
+          "safety_ratio": 1.282,
+          "safety_ratio_half_a": 1.137,
+          "safety_ratio_half_b": 1.419
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.04733,
+          "safety_ratio": 1.107,
+          "safety_ratio_half_a": 1.101,
+          "safety_ratio_half_b": 1.028
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.04689,
+          "safety_ratio": 1.097,
+          "safety_ratio_half_a": 1.084,
+          "safety_ratio_half_b": 1.041
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 86,
+          "of": 300,
+          "share": 0.2867
+        },
+        "fo": {
+          "n": 103,
+          "of": 300,
+          "share": 0.3433
+        },
+        "oo": {
+          "n": 116,
+          "of": 300,
+          "share": 0.3867
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.3389,
+      "created_incident_on_a_routed_node": 0.15252,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.096
+    },
+    {
+      "arm": "BND-3",
+      "population_deletion_rate": 0.06376,
+      "population_creation_rate": 0.05974,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.07802,
+      "safety_ratio": 1.224,
+      "traversal_weighted_deletion_rate": 0.07017,
+      "traversal_weighted_safety_ratio": 1.101,
+      "find_path_safety_ratio": 1.221,
+      "safety_ratio_half_a": 1.202,
+      "safety_ratio_half_b": 1.181,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.08114,
+          "safety_ratio": 1.273,
+          "safety_ratio_half_a": 1.144,
+          "safety_ratio_half_b": 1.359
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.07202,
+          "safety_ratio": 1.129,
+          "safety_ratio_half_a": 1.15,
+          "safety_ratio_half_b": 1.063
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.07625,
+          "safety_ratio": 1.196,
+          "safety_ratio_half_a": 1.144,
+          "safety_ratio_half_b": 1.149
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 128,
+          "of": 300,
+          "share": 0.4267
+        },
+        "fo": {
+          "n": 147,
+          "of": 300,
+          "share": 0.49
+        },
+        "oo": {
+          "n": 164,
+          "of": 300,
+          "share": 0.5467
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.4878,
+      "created_incident_on_a_routed_node": 0.15212,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.093
+    },
+    {
+      "arm": "BND-5",
+      "population_deletion_rate": 0.10473,
+      "population_creation_rate": 0.09732,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.12633,
+      "safety_ratio": 1.206,
+      "traversal_weighted_deletion_rate": 0.12803,
+      "traversal_weighted_safety_ratio": 1.223,
+      "find_path_safety_ratio": 1.205,
+      "safety_ratio_half_a": 1.156,
+      "safety_ratio_half_b": 1.219,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.13596,
+          "safety_ratio": 1.298,
+          "safety_ratio_half_a": 1.276,
+          "safety_ratio_half_b": 1.357
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.1214,
+          "safety_ratio": 1.159,
+          "safety_ratio_half_a": 1.158,
+          "safety_ratio_half_b": 1.18
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.12276,
+          "safety_ratio": 1.172,
+          "safety_ratio_half_a": 1.074,
+          "safety_ratio_half_b": 1.209
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 186,
+          "of": 300,
+          "share": 0.62
+        },
+        "fo": {
+          "n": 211,
+          "of": 300,
+          "share": 0.7033
+        },
+        "oo": {
+          "n": 222,
+          "of": 300,
+          "share": 0.74
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.6878,
+      "created_incident_on_a_routed_node": 0.15376,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.104
+    },
+    {
+      "arm": "BND-10",
+      "population_deletion_rate": 0.203,
+      "population_creation_rate": 0.18058,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.23611,
+      "safety_ratio": 1.163,
+      "traversal_weighted_deletion_rate": 0.2422,
+      "traversal_weighted_safety_ratio": 1.193,
+      "find_path_safety_ratio": 1.163,
+      "safety_ratio_half_a": 1.159,
+      "safety_ratio_half_b": 1.158,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.26425,
+          "safety_ratio": 1.302,
+          "safety_ratio_half_a": 1.343,
+          "safety_ratio_half_b": 1.306
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.22942,
+          "safety_ratio": 1.13,
+          "safety_ratio_half_a": 1.146,
+          "safety_ratio_half_b": 1.141
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.22493,
+          "safety_ratio": 1.108,
+          "safety_ratio_half_a": 1.075,
+          "safety_ratio_half_b": 1.103
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 253,
+          "of": 300,
+          "share": 0.8433
+        },
+        "fo": {
+          "n": 269,
+          "of": 300,
+          "share": 0.8967
+        },
+        "oo": {
+          "n": 281,
+          "of": 300,
+          "share": 0.9367
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.8922,
+      "created_incident_on_a_routed_node": 0.15643,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.124
+    },
+    {
+      "arm": "W10-IND-1",
+      "population_deletion_rate": 0.0222,
+      "population_creation_rate": 0.01987,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.02722,
+      "safety_ratio": 1.226,
+      "traversal_weighted_deletion_rate": 0.02319,
+      "traversal_weighted_safety_ratio": 1.045,
+      "find_path_safety_ratio": 1.227,
+      "safety_ratio_half_a": 1.213,
+      "safety_ratio_half_b": 1.205,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.02741,
+          "safety_ratio": 1.235,
+          "safety_ratio_half_a": 1.251,
+          "safety_ratio_half_b": 1.249
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.02212,
+          "safety_ratio": 0.996,
+          "safety_ratio_half_a": 1.06,
+          "safety_ratio_half_b": 0.866
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.02974,
+          "safety_ratio": 1.339,
+          "safety_ratio_half_a": 1.29,
+          "safety_ratio_half_b": 1.418
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 38,
+          "of": 300,
+          "share": 0.1267
+        },
+        "fo": {
+          "n": 51,
+          "of": 300,
+          "share": 0.17
+        },
+        "oo": {
+          "n": 83,
+          "of": 300,
+          "share": 0.2767
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.1911,
+      "created_incident_on_a_routed_node": 0.15433,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.109
+    },
+    {
+      "arm": "W10-SYM-1",
+      "population_deletion_rate": 0.02151,
+      "population_creation_rate": 0.02069,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.02699,
+      "safety_ratio": 1.255,
+      "traversal_weighted_deletion_rate": 0.02499,
+      "traversal_weighted_safety_ratio": 1.161,
+      "find_path_safety_ratio": 1.256,
+      "safety_ratio_half_a": 1.358,
+      "safety_ratio_half_b": 1.208,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.0318,
+          "safety_ratio": 1.478,
+          "safety_ratio_half_a": 1.453,
+          "safety_ratio_half_b": 1.369
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.02418,
+          "safety_ratio": 1.124,
+          "safety_ratio_half_a": 1.22,
+          "safety_ratio_half_b": 1.022
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.02859,
+          "safety_ratio": 1.329,
+          "safety_ratio_half_a": 1.362,
+          "safety_ratio_half_b": 1.368
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 44,
+          "of": 300,
+          "share": 0.1467
+        },
+        "fo": {
+          "n": 62,
+          "of": 300,
+          "share": 0.2067
+        },
+        "oo": {
+          "n": 84,
+          "of": 300,
+          "share": 0.28
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.2111,
+      "created_incident_on_a_routed_node": 0.1553,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.116
+    },
+    {
+      "arm": "UNI-IND-1",
+      "population_deletion_rate": 0.02729,
+      "population_creation_rate": 0.01792,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.0313,
+      "safety_ratio": 1.147,
+      "traversal_weighted_deletion_rate": 0.02762,
+      "traversal_weighted_safety_ratio": 1.012,
+      "find_path_safety_ratio": 1.148,
+      "safety_ratio_half_a": 1.14,
+      "safety_ratio_half_b": 1.177,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.02961,
+          "safety_ratio": 1.085,
+          "safety_ratio_half_a": 1.018,
+          "safety_ratio_half_b": 1.016
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.02984,
+          "safety_ratio": 1.093,
+          "safety_ratio_half_a": 0.962,
+          "safety_ratio_half_b": 1.107
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.03393,
+          "safety_ratio": 1.243,
+          "safety_ratio_half_a": 1.199,
+          "safety_ratio_half_b": 1.279
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 37,
+          "of": 300,
+          "share": 0.1233
+        },
+        "fo": {
+          "n": 64,
+          "of": 300,
+          "share": 0.2133
+        },
+        "oo": {
+          "n": 99,
+          "of": 300,
+          "share": 0.33
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.2222,
+      "created_incident_on_a_routed_node": 0.15774,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.133
+    },
+    {
+      "arm": "UNI-SYM-1",
+      "population_deletion_rate": 0.02161,
+      "population_creation_rate": 0.02044,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.02404,
+      "safety_ratio": 1.113,
+      "traversal_weighted_deletion_rate": 0.02152,
+      "traversal_weighted_safety_ratio": 0.996,
+      "find_path_safety_ratio": 1.114,
+      "safety_ratio_half_a": 1.194,
+      "safety_ratio_half_b": 1.097,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.01974,
+          "safety_ratio": 0.914,
+          "safety_ratio_half_a": 0.964,
+          "safety_ratio_half_b": 0.722
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.02572,
+          "safety_ratio": 1.19,
+          "safety_ratio_half_a": 1.257,
+          "safety_ratio_half_b": 1.102
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.02516,
+          "safety_ratio": 1.165,
+          "safety_ratio_half_a": 1.136,
+          "safety_ratio_half_b": 1.204
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 25,
+          "of": 300,
+          "share": 0.0833
+        },
+        "fo": {
+          "n": 59,
+          "of": 300,
+          "share": 0.1967
+        },
+        "oo": {
+          "n": 80,
+          "of": 300,
+          "share": 0.2667
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.1822,
+      "created_incident_on_a_routed_node": 0.15371,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.104
+    },
+    {
+      "arm": "W10-IND-2",
+      "population_deletion_rate": 0.04398,
+      "population_creation_rate": 0.03948,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.0533,
+      "safety_ratio": 1.212,
+      "traversal_weighted_deletion_rate": 0.04806,
+      "traversal_weighted_safety_ratio": 1.093,
+      "find_path_safety_ratio": 1.213,
+      "safety_ratio_half_a": 1.268,
+      "safety_ratio_half_b": 1.104,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.05592,
+          "safety_ratio": 1.272,
+          "safety_ratio_half_a": 1.224,
+          "safety_ratio_half_b": 1.261
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.04372,
+          "safety_ratio": 0.994,
+          "safety_ratio_half_a": 1.152,
+          "safety_ratio_half_b": 0.833
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.05604,
+          "safety_ratio": 1.274,
+          "safety_ratio_half_a": 1.302,
+          "safety_ratio_half_b": 1.245
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 85,
+          "of": 300,
+          "share": 0.2833
+        },
+        "fo": {
+          "n": 99,
+          "of": 300,
+          "share": 0.33
+        },
+        "oo": {
+          "n": 134,
+          "of": 300,
+          "share": 0.4467
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.3533,
+      "created_incident_on_a_routed_node": 0.15414,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.107
+    },
+    {
+      "arm": "W10-SYM-2",
+      "population_deletion_rate": 0.04236,
+      "population_creation_rate": 0.04155,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.04899,
+      "safety_ratio": 1.156,
+      "traversal_weighted_deletion_rate": 0.04495,
+      "traversal_weighted_safety_ratio": 1.061,
+      "find_path_safety_ratio": 1.152,
+      "safety_ratio_half_a": 1.227,
+      "safety_ratio_half_b": 1.119,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.05702,
+          "safety_ratio": 1.346,
+          "safety_ratio_half_a": 1.393,
+          "safety_ratio_half_b": 1.268
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.04115,
+          "safety_ratio": 0.971,
+          "safety_ratio_half_a": 1.047,
+          "safety_ratio_half_b": 0.93
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.05071,
+          "safety_ratio": 1.197,
+          "safety_ratio_half_a": 1.223,
+          "safety_ratio_half_b": 1.179
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 79,
+          "of": 300,
+          "share": 0.2633
+        },
+        "fo": {
+          "n": 96,
+          "of": 300,
+          "share": 0.32
+        },
+        "oo": {
+          "n": 129,
+          "of": 300,
+          "share": 0.43
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.3378,
+      "created_incident_on_a_routed_node": 0.15282,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.098
+    },
+    {
+      "arm": "UNI-IND-2",
+      "population_deletion_rate": 0.05385,
+      "population_creation_rate": 0.03526,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.06305,
+      "safety_ratio": 1.171,
+      "traversal_weighted_deletion_rate": 0.05834,
+      "traversal_weighted_safety_ratio": 1.083,
+      "find_path_safety_ratio": 1.168,
+      "safety_ratio_half_a": 1.205,
+      "safety_ratio_half_b": 1.228,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.06798,
+          "safety_ratio": 1.262,
+          "safety_ratio_half_a": 1.161,
+          "safety_ratio_half_b": 1.287
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.0643,
+          "safety_ratio": 1.194,
+          "safety_ratio_half_a": 1.143,
+          "safety_ratio_half_b": 1.19
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.06291,
+          "safety_ratio": 1.168,
+          "safety_ratio_half_a": 1.139,
+          "safety_ratio_half_b": 1.182
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 80,
+          "of": 300,
+          "share": 0.2667
+        },
+        "fo": {
+          "n": 128,
+          "of": 300,
+          "share": 0.4267
+        },
+        "oo": {
+          "n": 156,
+          "of": 300,
+          "share": 0.52
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.4044,
+      "created_incident_on_a_routed_node": 0.15695,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.127
+    },
+    {
+      "arm": "UNI-SYM-2",
+      "population_deletion_rate": 0.04035,
+      "population_creation_rate": 0.04162,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.04672,
+      "safety_ratio": 1.158,
+      "traversal_weighted_deletion_rate": 0.04411,
+      "traversal_weighted_safety_ratio": 1.093,
+      "find_path_safety_ratio": 1.159,
+      "safety_ratio_half_a": 1.316,
+      "safety_ratio_half_b": 1.099,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.05154,
+          "safety_ratio": 1.277,
+          "safety_ratio_half_a": 1.291,
+          "safety_ratio_half_b": 1.16
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.05144,
+          "safety_ratio": 1.275,
+          "safety_ratio_half_a": 1.413,
+          "safety_ratio_half_b": 1.112
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.04575,
+          "safety_ratio": 1.134,
+          "safety_ratio_half_a": 1.216,
+          "safety_ratio_half_b": 1.052
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 70,
+          "of": 300,
+          "share": 0.2333
+        },
+        "fo": {
+          "n": 109,
+          "of": 300,
+          "share": 0.3633
+        },
+        "oo": {
+          "n": 125,
+          "of": 300,
+          "share": 0.4167
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.3378,
+      "created_incident_on_a_routed_node": 0.15526,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.115
+    },
+    {
+      "arm": "W10-IND-3",
+      "population_deletion_rate": 0.06532,
+      "population_creation_rate": 0.05851,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.08029,
+      "safety_ratio": 1.229,
+      "traversal_weighted_deletion_rate": 0.07711,
+      "traversal_weighted_safety_ratio": 1.18,
+      "find_path_safety_ratio": 1.227,
+      "safety_ratio_half_a": 1.26,
+      "safety_ratio_half_b": 1.159,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.08333,
+          "safety_ratio": 1.276,
+          "safety_ratio_half_a": 1.302,
+          "safety_ratio_half_b": 1.247
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.07099,
+          "safety_ratio": 1.087,
+          "safety_ratio_half_a": 1.164,
+          "safety_ratio_half_b": 0.981
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.08159,
+          "safety_ratio": 1.249,
+          "safety_ratio_half_a": 1.231,
+          "safety_ratio_half_b": 1.257
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 130,
+          "of": 300,
+          "share": 0.4333
+        },
+        "fo": {
+          "n": 145,
+          "of": 300,
+          "share": 0.4833
+        },
+        "oo": {
+          "n": 181,
+          "of": 300,
+          "share": 0.6033
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.5067,
+      "created_incident_on_a_routed_node": 0.15353,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.103
+    },
+    {
+      "arm": "W10-SYM-3",
+      "population_deletion_rate": 0.06324,
+      "population_creation_rate": 0.06263,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.07326,
+      "safety_ratio": 1.158,
+      "traversal_weighted_deletion_rate": 0.07053,
+      "traversal_weighted_safety_ratio": 1.115,
+      "find_path_safety_ratio": 1.156,
+      "safety_ratio_half_a": 1.17,
+      "safety_ratio_half_b": 1.148,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.08114,
+          "safety_ratio": 1.283,
+          "safety_ratio_half_a": 1.4,
+          "safety_ratio_half_b": 1.206
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.06379,
+          "safety_ratio": 1.009,
+          "safety_ratio_half_a": 1.002,
+          "safety_ratio_half_b": 1.028
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.07434,
+          "safety_ratio": 1.175,
+          "safety_ratio_half_a": 1.121,
+          "safety_ratio_half_b": 1.201
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 121,
+          "of": 300,
+          "share": 0.4033
+        },
+        "fo": {
+          "n": 133,
+          "of": 300,
+          "share": 0.4433
+        },
+        "oo": {
+          "n": 177,
+          "of": 300,
+          "share": 0.59
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.4789,
+      "created_incident_on_a_routed_node": 0.15225,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.094
+    },
+    {
+      "arm": "UNI-IND-3",
+      "population_deletion_rate": 0.07927,
+      "population_creation_rate": 0.05223,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.09367,
+      "safety_ratio": 1.182,
+      "traversal_weighted_deletion_rate": 0.09277,
+      "traversal_weighted_safety_ratio": 1.17,
+      "find_path_safety_ratio": 1.174,
+      "safety_ratio_half_a": 1.22,
+      "safety_ratio_half_b": 1.22,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.10636,
+          "safety_ratio": 1.342,
+          "safety_ratio_half_a": 1.205,
+          "safety_ratio_half_b": 1.312
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.09928,
+          "safety_ratio": 1.252,
+          "safety_ratio_half_a": 1.176,
+          "safety_ratio_half_b": 1.305
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.09226,
+          "safety_ratio": 1.164,
+          "safety_ratio_half_a": 1.178,
+          "safety_ratio_half_b": 1.174
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 121,
+          "of": 300,
+          "share": 0.4033
+        },
+        "fo": {
+          "n": 171,
+          "of": 300,
+          "share": 0.57
+        },
+        "oo": {
+          "n": 209,
+          "of": 300,
+          "share": 0.6967
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.5567,
+      "created_incident_on_a_routed_node": 0.15413,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.107
+    },
+    {
+      "arm": "UNI-SYM-3",
+      "population_deletion_rate": 0.05791,
+      "population_creation_rate": 0.06296,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.06555,
+      "safety_ratio": 1.132,
+      "traversal_weighted_deletion_rate": 0.06623,
+      "traversal_weighted_safety_ratio": 1.144,
+      "find_path_safety_ratio": 1.137,
+      "safety_ratio_half_a": 1.297,
+      "safety_ratio_half_b": 1.063,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.07237,
+          "safety_ratio": 1.25,
+          "safety_ratio_half_a": 1.289,
+          "safety_ratio_half_b": 1.077
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.06893,
+          "safety_ratio": 1.19,
+          "safety_ratio_half_a": 1.313,
+          "safety_ratio_half_b": 1.012
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.06557,
+          "safety_ratio": 1.132,
+          "safety_ratio_half_a": 1.271,
+          "safety_ratio_half_b": 1.04
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 91,
+          "of": 300,
+          "share": 0.3033
+        },
+        "fo": {
+          "n": 152,
+          "of": 300,
+          "share": 0.5067
+        },
+        "oo": {
+          "n": 178,
+          "of": 300,
+          "share": 0.5933
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.4678,
+      "created_incident_on_a_routed_node": 0.15518,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.115
+    },
+    {
+      "arm": "W10-IND-5",
+      "population_deletion_rate": 0.10686,
+      "population_creation_rate": 0.09548,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.12429,
+      "safety_ratio": 1.163,
+      "traversal_weighted_deletion_rate": 0.11799,
+      "traversal_weighted_safety_ratio": 1.104,
+      "find_path_safety_ratio": 1.162,
+      "safety_ratio_half_a": 1.189,
+      "safety_ratio_half_b": 1.112,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.13706,
+          "safety_ratio": 1.283,
+          "safety_ratio_half_a": 1.397,
+          "safety_ratio_half_b": 1.2
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.11214,
+          "safety_ratio": 1.049,
+          "safety_ratio_half_a": 1.084,
+          "safety_ratio_half_b": 1.011
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.122,
+          "safety_ratio": 1.142,
+          "safety_ratio_half_a": 1.11,
+          "safety_ratio_half_b": 1.127
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 182,
+          "of": 300,
+          "share": 0.6067
+        },
+        "fo": {
+          "n": 196,
+          "of": 300,
+          "share": 0.6533
+        },
+        "oo": {
+          "n": 227,
+          "of": 300,
+          "share": 0.7567
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.6722,
+      "created_incident_on_a_routed_node": 0.15435,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.109
+    },
+    {
+      "arm": "W10-SYM-5",
+      "population_deletion_rate": 0.10465,
+      "population_creation_rate": 0.10183,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.11703,
+      "safety_ratio": 1.118,
+      "traversal_weighted_deletion_rate": 0.11058,
+      "traversal_weighted_safety_ratio": 1.057,
+      "find_path_safety_ratio": 1.117,
+      "safety_ratio_half_a": 1.124,
+      "safety_ratio_half_b": 1.1,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.13816,
+          "safety_ratio": 1.32,
+          "safety_ratio_half_a": 1.327,
+          "safety_ratio_half_b": 1.308
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.10597,
+          "safety_ratio": 1.013,
+          "safety_ratio_half_a": 1.02,
+          "safety_ratio_half_b": 1.015
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.1117,
+          "safety_ratio": 1.067,
+          "safety_ratio_half_a": 1.049,
+          "safety_ratio_half_b": 1.047
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 174,
+          "of": 300,
+          "share": 0.58
+        },
+        "fo": {
+          "n": 184,
+          "of": 300,
+          "share": 0.6133
+        },
+        "oo": {
+          "n": 226,
+          "of": 300,
+          "share": 0.7533
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.6489,
+      "created_incident_on_a_routed_node": 0.15295,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.099
+    },
+    {
+      "arm": "UNI-IND-5",
+      "population_deletion_rate": 0.12897,
+      "population_creation_rate": 0.08574,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.15718,
+      "safety_ratio": 1.219,
+      "traversal_weighted_deletion_rate": 0.15194,
+      "traversal_weighted_safety_ratio": 1.178,
+      "find_path_safety_ratio": 1.218,
+      "safety_ratio_half_a": 1.309,
+      "safety_ratio_half_b": 1.186,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.17544,
+          "safety_ratio": 1.36,
+          "safety_ratio_half_a": 1.306,
+          "safety_ratio_half_b": 1.344
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.16512,
+          "safety_ratio": 1.28,
+          "safety_ratio_half_a": 1.361,
+          "safety_ratio_half_b": 1.15
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.15517,
+          "safety_ratio": 1.203,
+          "safety_ratio_half_a": 1.247,
+          "safety_ratio_half_b": 1.184
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 177,
+          "of": 300,
+          "share": 0.59
+        },
+        "fo": {
+          "n": 238,
+          "of": 300,
+          "share": 0.7933
+        },
+        "oo": {
+          "n": 252,
+          "of": 300,
+          "share": 0.84
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.7411,
+      "created_incident_on_a_routed_node": 0.15347,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.102
+    },
+    {
+      "arm": "UNI-SYM-5",
+      "population_deletion_rate": 0.09204,
+      "population_creation_rate": 0.10602,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.10841,
+      "safety_ratio": 1.178,
+      "traversal_weighted_deletion_rate": 0.11333,
+      "traversal_weighted_safety_ratio": 1.231,
+      "find_path_safety_ratio": 1.182,
+      "safety_ratio_half_a": 1.373,
+      "safety_ratio_half_b": 1.059,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.11842,
+          "safety_ratio": 1.287,
+          "safety_ratio_half_a": 1.32,
+          "safety_ratio_half_b": 1.168
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.10751,
+          "safety_ratio": 1.168,
+          "safety_ratio_half_a": 1.347,
+          "safety_ratio_half_b": 0.995
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.11056,
+          "safety_ratio": 1.201,
+          "safety_ratio_half_a": 1.37,
+          "safety_ratio_half_b": 1.086
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 142,
+          "of": 300,
+          "share": 0.4733
+        },
+        "fo": {
+          "n": 203,
+          "of": 300,
+          "share": 0.6767
+        },
+        "oo": {
+          "n": 237,
+          "of": 300,
+          "share": 0.79
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.6467,
+      "created_incident_on_a_routed_node": 0.15677,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.126
+    },
+    {
+      "arm": "W10-IND-10",
+      "population_deletion_rate": 0.20324,
+      "population_creation_rate": 0.18056,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.23565,
+      "safety_ratio": 1.159,
+      "traversal_weighted_deletion_rate": 0.24196,
+      "traversal_weighted_safety_ratio": 1.191,
+      "find_path_safety_ratio": 1.16,
+      "safety_ratio_half_a": 1.161,
+      "safety_ratio_half_b": 1.149,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.26425,
+          "safety_ratio": 1.3,
+          "safety_ratio_half_a": 1.341,
+          "safety_ratio_half_b": 1.305
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.22942,
+          "safety_ratio": 1.129,
+          "safety_ratio_half_a": 1.144,
+          "safety_ratio_half_b": 1.14
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.22417,
+          "safety_ratio": 1.103,
+          "safety_ratio_half_a": 1.08,
+          "safety_ratio_half_b": 1.088
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 253,
+          "of": 300,
+          "share": 0.8433
+        },
+        "fo": {
+          "n": 269,
+          "of": 300,
+          "share": 0.8967
+        },
+        "oo": {
+          "n": 280,
+          "of": 300,
+          "share": 0.9333
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.8911,
+      "created_incident_on_a_routed_node": 0.15648,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.124
+    },
+    {
+      "arm": "W10-SYM-10",
+      "population_deletion_rate": 0.2032,
+      "population_creation_rate": 0.18052,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.23611,
+      "safety_ratio": 1.162,
+      "traversal_weighted_deletion_rate": 0.2422,
+      "traversal_weighted_safety_ratio": 1.192,
+      "find_path_safety_ratio": 1.162,
+      "safety_ratio_half_a": 1.163,
+      "safety_ratio_half_b": 1.151,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.26425,
+          "safety_ratio": 1.3,
+          "safety_ratio_half_a": 1.341,
+          "safety_ratio_half_b": 1.305
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.22994,
+          "safety_ratio": 1.132,
+          "safety_ratio_half_a": 1.149,
+          "safety_ratio_half_b": 1.14
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.22455,
+          "safety_ratio": 1.105,
+          "safety_ratio_half_a": 1.08,
+          "safety_ratio_half_b": 1.091
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 253,
+          "of": 300,
+          "share": 0.8433
+        },
+        "fo": {
+          "n": 269,
+          "of": 300,
+          "share": 0.8967
+        },
+        "oo": {
+          "n": 280,
+          "of": 300,
+          "share": 0.9333
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.8911,
+      "created_incident_on_a_routed_node": 0.15651,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.124
+    },
+    {
+      "arm": "UNI-IND-10",
+      "population_deletion_rate": 0.24333,
+      "population_creation_rate": 0.16291,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.29939,
+      "safety_ratio": 1.23,
+      "traversal_weighted_deletion_rate": 0.30556,
+      "traversal_weighted_safety_ratio": 1.256,
+      "find_path_safety_ratio": 1.232,
+      "safety_ratio_half_a": 1.275,
+      "safety_ratio_half_b": 1.233,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.33991,
+          "safety_ratio": 1.397,
+          "safety_ratio_half_a": 1.391,
+          "safety_ratio_half_b": 1.36
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.29887,
+          "safety_ratio": 1.228,
+          "safety_ratio_half_a": 1.261,
+          "safety_ratio_half_b": 1.189
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.30118,
+          "safety_ratio": 1.238,
+          "safety_ratio_half_a": 1.277,
+          "safety_ratio_half_b": 1.229
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 267,
+          "of": 300,
+          "share": 0.89
+        },
+        "fo": {
+          "n": 294,
+          "of": 300,
+          "share": 0.98
+        },
+        "oo": {
+          "n": 292,
+          "of": 300,
+          "share": 0.9733
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.9478,
+      "created_incident_on_a_routed_node": 0.15199,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.092
+    },
+    {
+      "arm": "UNI-SYM-10",
+      "population_deletion_rate": 0.17242,
+      "population_creation_rate": 0.21226,
+      "routed_unique_edges": 4409,
+      "routed_deletion_rate": 0.20776,
+      "safety_ratio": 1.205,
+      "traversal_weighted_deletion_rate": 0.22212,
+      "traversal_weighted_safety_ratio": 1.288,
+      "find_path_safety_ratio": 1.208,
+      "safety_ratio_half_a": 1.325,
+      "safety_ratio_half_b": 1.129,
+      "by_class": {
+        "ff": {
+          "unique_edges": 912,
+          "deletion_rate": 0.23575,
+          "safety_ratio": 1.367,
+          "safety_ratio_half_a": 1.41,
+          "safety_ratio_half_b": 1.287
+        },
+        "fo": {
+          "unique_edges": 1944,
+          "deletion_rate": 0.20165,
+          "safety_ratio": 1.17,
+          "safety_ratio_half_a": 1.333,
+          "safety_ratio_half_b": 1.036
+        },
+        "oo": {
+          "unique_edges": 2623,
+          "deletion_rate": 0.21197,
+          "safety_ratio": 1.229,
+          "safety_ratio_half_a": 1.328,
+          "safety_ratio_half_b": 1.159
+        }
+      },
+      "journeys_touching_a_deleted_edge": {
+        "ff": {
+          "n": 230,
+          "of": 300,
+          "share": 0.7667
+        },
+        "fo": {
+          "n": 269,
+          "of": 300,
+          "share": 0.8967
+        },
+        "oo": {
+          "n": 287,
+          "of": 300,
+          "share": 0.9567
+        }
+      },
+      "journeys_touching_a_deleted_edge_pooled": 0.8733,
+      "created_incident_on_a_routed_node": 0.15794,
+      "existing_incident_on_a_routed_node_null": 0.13921,
+      "creation_enrichment_near_routes": 1.134
+    }
+  ]
+}

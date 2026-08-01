@@ -1,0 +1,117 @@
+{
+ "substrate": "pre-cap capture of the ALG-E archive (TAS-AM2, selection side). Routing halves of TAS-6 and the red check remain Task 7's. Never compare these figures with TAS-1 or TAS-5.",
+ "tas6_selection_half": {
+  "definition": "one end in the top 1% by fame percentile, the other in the lower half, over the FIXED adopted frame",
+  "adverse_threshold": 0.1,
+  "baseline": {
+   "edges": 448828,
+   "famous_to_obscure": 93,
+   "touching_sub_decile": 10017
+  },
+  "per_lambda": {
+   "0.25": {
+    "edges": 474088,
+    "turnover_share": 0.16429,
+    "famous_to_obscure": 87,
+    "famous_to_obscure_change": -0.06452,
+    "adverse": false,
+    "touching_sub_decile": 9790
+   },
+   "0.5": {
+    "edges": 487149,
+    "turnover_share": 0.25463,
+    "famous_to_obscure": 85,
+    "famous_to_obscure_change": -0.08602,
+    "adverse": false,
+    "touching_sub_decile": 9742
+   },
+   "1.0": {
+    "edges": 496631,
+    "turnover_share": 0.34004,
+    "famous_to_obscure": 83,
+    "famous_to_obscure_change": -0.10753,
+    "adverse": true,
+    "touching_sub_decile": 9683
+   },
+   "2.0": {
+    "edges": 501508,
+    "turnover_share": 0.40379,
+    "famous_to_obscure": 79,
+    "famous_to_obscure_change": -0.15054,
+    "adverse": true,
+    "touching_sub_decile": 9658
+   }
+  },
+  "adverse_at_any_lambda": true
+ },
+ "tas_am3a_liveness_and_equivalence": {
+  "reference": "td_turnover.json MULT-SYM arms (synthetic symmetric field, seed 303)",
+  "per_lambda": {
+   "0.25": {
+    "mask_bit_identical": true,
+    "turnover": 0.35565,
+    "td2_committed_turnover": 0.35565,
+    "reproduces": true
+   },
+   "0.5": {
+    "mask_bit_identical": true,
+    "turnover": 0.52423,
+    "td2_committed_turnover": 0.52423,
+    "reproduces": true
+   },
+   "1.0": {
+    "mask_bit_identical": true,
+    "turnover": 0.64455,
+    "td2_committed_turnover": 0.64455,
+    "reproduces": true
+   },
+   "2.0": {
+    "mask_bit_identical": true,
+    "turnover": 0.71029,
+    "td2_committed_turnover": 0.71029,
+    "reproduces": true
+   }
+  },
+  "passes": true
+ },
+ "tas_am3b_null_control": {
+  "seed": 20260730,
+  "labelled_artists_whose_labels_moved": 40266,
+  "per_lambda_turnover": {
+   "0.25": 0.03858,
+   "0.5": 0.06188,
+   "1.0": 0.08443,
+   "2.0": 0.09727
+  },
+  "real_per_lambda_turnover": {
+   "0.25": 0.16429,
+   "0.5": 0.25463,
+   "1.0": 0.34004,
+   "2.0": 0.40379
+  },
+  "null_over_real": {
+   "0.25": 0.2348,
+   "0.5": 0.243,
+   "1.0": 0.2483,
+   "2.0": 0.2409
+  },
+  "attribution_unsafe_threshold": 0.5,
+  "attribution_unsafe": false,
+  "note": "A SMALL null is the CORRECT result, not a failure (TAS-AM3b). Below the threshold, report the ratio and nothing more -- no claim about tags is licensed by this control."
+ },
+ "withdrawn_naive_shuffle": {
+  "status": "WITHDRAWN by TAS-AM3; re-run for the record only, never a check",
+  "seed": 20260730,
+  "artists_whose_labels_moved": 58760,
+  "liveness_threshold_turnover": 0.05,
+  "liveness_threshold_is_pre_registered": false,
+  "per_lambda_turnover": {
+   "0.25": 0.01651,
+   "0.5": 0.0266,
+   "1.0": 0.03624,
+   "2.0": 0.04174
+  },
+  "fired": false,
+  "why_withdrawn": "Shuffling labels destroys genre overlap rather than randomising it, so no randomised frame can produce large turnover for a Jaccard device. It also moves two knobs: it changes WHICH artists are labelled."
+ }
+}

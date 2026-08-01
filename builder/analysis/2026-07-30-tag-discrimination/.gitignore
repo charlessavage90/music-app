@@ -1,0 +1,7 @@
+# Large raw collector output: regenerable from the command in README.md.
+# Derived summaries are committed, per the COH-/FPC- template.
+tas_tags_raw.json
+*_raw.json
+# Run logs stay untracked, per the FPC template convention.
+*.log
+__pycache__/

@@ -1,0 +1,108 @@
+{
+ "coverage": {
+  "top 0.1%": {
+   "n": 75,
+   "F0": {
+    "count": 75,
+    "share": 1.0
+   },
+   "F1": {
+    "count": 75,
+    "share": 1.0
+   },
+   "F2": {
+    "count": 75,
+    "share": 1.0
+   },
+   "F3": {
+    "count": 75,
+    "share": 1.0
+   }
+  },
+  "top 1%": {
+   "n": 667,
+   "F0": {
+    "count": 666,
+    "share": 0.9985
+   },
+   "F1": {
+    "count": 667,
+    "share": 1.0
+   },
+   "F2": {
+    "count": 667,
+    "share": 1.0
+   },
+   "F3": {
+    "count": 667,
+    "share": 1.0
+   }
+  },
+  "top 10%": {
+   "n": 6678,
+   "F0": {
+    "count": 6214,
+    "share": 0.9305
+   },
+   "F1": {
+    "count": 6590,
+    "share": 0.9868
+   },
+   "F2": {
+    "count": 6591,
+    "share": 0.987
+   },
+   "F3": {
+    "count": 6627,
+    "share": 0.9924
+   }
+  },
+  "upper half": {
+   "n": 29677,
+   "F0": {
+    "count": 20345,
+    "share": 0.6855
+   },
+   "F1": {
+    "count": 26002,
+    "share": 0.8762
+   },
+   "F2": {
+    "count": 26092,
+    "share": 0.8792
+   },
+   "F3": {
+    "count": 26932,
+    "share": 0.9075
+   }
+  },
+  "lower half": {
+   "n": 37096,
+   "F0": {
+    "count": 13137,
+    "share": 0.3541
+   },
+   "F1": {
+    "count": 21797,
+    "share": 0.5876
+   },
+   "F2": {
+    "count": 21969,
+    "share": 0.5922
+   },
+   "F3": {
+    "count": 24079,
+    "share": 0.6491
+   }
+  }
+ },
+ "rel_6_gain_points": {
+  "top 0.1%": 0.0,
+  "top 1%": 0.0015,
+  "top 10%": 0.0563,
+  "upper half": 0.1907,
+  "lower half": 0.2335
+ },
+ "artists_with_any_rg": 64298,
+ "artists_with_attributable_rg": 59718
+}
