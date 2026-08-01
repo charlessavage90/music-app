@@ -109,7 +109,7 @@ check as unachievable** and replaces it; `TAS-AM4` authorises evaluating a candi
 | `tas_guard.py` | `TAS-6` obscurity guard **(selection half only — the routing half is still owed)**, plus `TAS-AM3a` (liveness and equivalence) and `TAS-AM3b` (null control). **The randomised-label red check it originally carried is WITHDRAWN by `TAS-AM3`**; `randomised_labels` is retained and runnable only because `TAS-AM3` cites its figure. |
 | `tas_frame_eval.py` | `TAS-AM4` — evaluates the `REL-` enriched frames as **candidates** beside the committed one. Changes no vocabulary. |
 | `tas_frame_split.py` | **Diagnostic, not a criterion.** Decomposes `TAS-AM4`'s `W6` into its two Discogs columns (`W4` = closed 15-value genre, `W5` = ~600-value style), isolating each twice. Reproduces `TAS-AM4`'s committed figures and aborts if it cannot. Figures: `tas_frame_split.json`; reasoning: execution log §15. |
-| ⚠ `tas_pairs.py` | **NOT YET BUILT** — Task 5. The §3 pair draw, own seed, classes carried end to end. |
+| `tas_pairs.py` | The §3 pair draw — pre-registered seed `20260730-tas`, classes carried end to end, 40 per class. Verified deterministic **across processes**, not just within one. Output: `tas_pairs.json`. |
 | ⚠ `tas_route.py` | **NOT YET BUILT** — Task 6. `TAS-5` — routing under a harness-local coherence term. |
 
 ## The neutral rule is the one dormant term
