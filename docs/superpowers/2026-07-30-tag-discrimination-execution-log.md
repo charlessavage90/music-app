@@ -995,9 +995,31 @@ hard-coded early return, not a measurement. **Confirmed; the handoff's claim is 
 - **`W4` is named as dominating `W6`** in the findings' own vocabulary table, so a future
   amendment cannot pick up `W6` from this record.
 
-### §17.4 The three owner-facing checks, run rather than claimed
+### §17.4 A defect in this task's own first draft — two reach deltas in different currencies
 
-Run over §17.5's summary before it was written into this log.
+**Caught by re-deriving every transcribed figure from the JSON rather than trusting the
+transcription.** The first draft of the findings reported the `TAS-AM4` reach gain as "+27.7
+points for `W1`, +36.3 for `W6`". Those are `tas_frame_eval.json`'s
+`acting_slot_change_vs_W0`, which is a **relative** change (0.1824 / 0.658 = 0.2772). In
+points the gain is **+18.2** and **+23.9**.
+
+**What makes it worth a section rather than a silent fix: the same document holds a second
+reach delta in the *other* currency.** `tas_frame_split.json`'s `reach_change_pts` is
+genuinely percentage points, and it feeds the isolation table two paragraphs below the
+error. So the draft had two adjacent reach figures in different units with nothing marking
+the difference — the exact shape of the confusion `CLAUDE.md`'s orient table opens with, in
+a quantity nobody had thought to name a currency for.
+
+**Fixed by stating both units explicitly** rather than by converting one to the other, since
+both JSON fields keep their own units and a future reader will meet them directly. The
+findings carry a currency note at that table.
+
+**No other figure moved.** Every number in the findings was re-derived from its JSON; this
+was the only disagreement.
+
+### §17.5 The three owner-facing checks, run rather than claimed
+
+Run over §17.6's summary before it was written into this log.
 
 - **(a) Bare letter-number tokens.** Scanned; the summary below contains **none**. Every
   criterion is named by what it asks, not by its identifier.
@@ -1011,7 +1033,7 @@ Run over §17.5's summary before it was written into this log.
   whether "not about genre" is the right reading of a control that permutes labels rather than
   removing them.
 
-### §17.5 The owner-facing summary (four parts, in order)
+### §17.6 The owner-facing summary (four parts, in order)
 
 **Queued to `TEST-QUEUE.md` at closeout; reproduced here because this log is the durable
 record and the queue is rewritten.**
@@ -1107,7 +1129,7 @@ spends your time or your ear rather than being methodology.**
 All four are barred by the document this probe was run under, and none of the evidence here is
 the kind that could license one.
 
-### §17.6 Deferrals — one closed, none opened
+### §17.7 Deferrals — one closed, none opened
 
 **Closed by this task:** *"Task 8 — the `TAS-` findings document is unwritten"*, whose condition
 was **before the probe is retired**. Both of its clauses are honoured and checkable on the page:

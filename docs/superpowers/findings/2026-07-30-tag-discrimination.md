@@ -370,8 +370,15 @@ acts.
    longer candidate list is less likely to be coincidentally in agreement order, so it is at
    least partly a list-length artifact. The rank correlation is the cleaner reading and it moves
    the other way.
-4. **Reach rises substantially** (+27.7 points for `W1`, +36.3 for `W6`). This is the quantity
-   that would drive any `TAS-6` improvement.
+4. **Reach rises substantially** — 65.8% → 84.0% for `W1` (**+18.2 points**) and → 89.7% for
+   `W6` (**+23.9 points**). This is the quantity that would drive any `TAS-6` improvement.
+
+   ⚠ **Currency note, because this record holds two reach deltas in different units.** The
+   figures above are **percentage points**. `tas_frame_eval.json`'s `acting_slot_change_vs_W0`
+   (0.2772, 0.3631) is a **relative** change against `W0` and must not be read as points; the
+   isolation table below uses `tas_frame_split.json`'s `reach_change_pts`, which genuinely is
+   points. Named rather than silently reconciled — reading one of these as the other is the
+   error class `CLAUDE.md` opens with.
 
 **The comparison was confounded and the control did not rescue it.** Enrichment makes far more
 artists scorable, so the first pass moved the frame and the population together — and the newly
