@@ -1,0 +1,737 @@
+{
+ "scope": "DIAGNOSTIC ONLY -- not pre-registered, no bar, licenses nothing, adopts nothing.",
+ "substrate": {
+  "file": "graph-t15-tiebreakfix.bin",
+  "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "note": "ADOPTED artifact, map side per TAS-AM2."
+ },
+ "seeds": [
+  "20260801-tail-exposure",
+  "20260801-tail-famous"
+ ],
+ "per_class_pairs_per_seed": 400,
+ "structure": {
+  "artists": 74193,
+  "no_release": 7686,
+  "no_release_share": 0.1036,
+  "degree_1_cannot_be_interior": 1323,
+  "interior_capable": 6363,
+  "edge_endpoint_share": 0.06,
+  "fame_bands": {
+   "50-90%": 1049,
+   "10-50%": 4750,
+   "bottom 10%": 1872,
+   "top 10%": 15
+  },
+  "nameless_in_adopted_artifact": 33,
+  "nameless_interior_capable": 27
+ },
+ "per_class_by_seed": {
+  "20260801-tail-exposure": {
+   "ff": {
+    "journeys": 400,
+    "interiors": 1776,
+    "no_release_interiors": 0,
+    "interior_share": 0.0,
+    "journeys_touched": 0,
+    "journey_share": 0.0,
+    "zero_event_95pct_journey_ceiling": 0.0075
+   },
+   "fo": {
+    "journeys": 400,
+    "interiors": 4335,
+    "no_release_interiors": 23,
+    "interior_share": 0.00531,
+    "journeys_touched": 22,
+    "journey_share": 0.055,
+    "zero_event_95pct_journey_ceiling": null
+   },
+   "oo": {
+    "journeys": 400,
+    "interiors": 4561,
+    "no_release_interiors": 30,
+    "interior_share": 0.00658,
+    "journeys_touched": 27,
+    "journey_share": 0.0675,
+    "zero_event_95pct_journey_ceiling": null
+   }
+  },
+  "20260801-tail-famous": {
+   "ff": {
+    "journeys": 400,
+    "interiors": 1807,
+    "no_release_interiors": 0,
+    "interior_share": 0.0,
+    "journeys_touched": 0,
+    "journey_share": 0.0,
+    "zero_event_95pct_journey_ceiling": 0.0075
+   },
+   "fo": {
+    "journeys": 400,
+    "interiors": 4291,
+    "no_release_interiors": 14,
+    "interior_share": 0.00326,
+    "journeys_touched": 12,
+    "journey_share": 0.03,
+    "zero_event_95pct_journey_ceiling": null
+   },
+   "oo": {
+    "journeys": 400,
+    "interiors": 4612,
+    "no_release_interiors": 36,
+    "interior_share": 0.00781,
+    "journeys_touched": 34,
+    "journey_share": 0.085,
+    "zero_event_95pct_journey_ceiling": null
+   }
+  }
+ },
+ "per_class_pooled": {
+  "ff": {
+   "journeys": 800,
+   "journeys_touched": 0,
+   "interiors": 3583,
+   "no_release_interiors": 0,
+   "journey_share": 0.0,
+   "interior_share": 0.0,
+   "zero_event_95pct_journey_ceiling": 0.00375
+  },
+  "fo": {
+   "journeys": 800,
+   "journeys_touched": 34,
+   "interiors": 8626,
+   "no_release_interiors": 37,
+   "journey_share": 0.0425,
+   "interior_share": 0.00429,
+   "zero_event_95pct_journey_ceiling": null
+  },
+  "oo": {
+   "journeys": 800,
+   "journeys_touched": 61,
+   "interiors": 9173,
+   "no_release_interiors": 66,
+   "journey_share": 0.0762,
+   "interior_share": 0.0072,
+   "zero_event_95pct_journey_ceiling": null
+  }
+ },
+ "delivered_artists": [
+  {
+   "mbid": "34e4ac8b-ee10-43ba-a58b-819f7c3c3d5a",
+   "name": "Marcy Nabors",
+   "disambiguation": "SiIvaGunner contributor",
+   "pctl": 0.6604,
+   "degree": 35,
+   "times_delivered": 5
+  },
+  {
+   "mbid": "c7dbb9e3-94a0-4434-9407-8dda39da8667",
+   "name": "Tansunn",
+   "disambiguation": "",
+   "pctl": 0.7058,
+   "degree": 40,
+   "times_delivered": 4
+  },
+  {
+   "mbid": "c17bd49c-b84d-4f46-9638-0b1c110dbec7",
+   "name": "sumijun",
+   "disambiguation": "",
+   "pctl": 0.7534,
+   "degree": 37,
+   "times_delivered": 4
+  },
+  {
+   "mbid": "56943d3f-365d-434e-ac6b-77705061ada4",
+   "name": "Ernie Fresh",
+   "disambiguation": "",
+   "pctl": 0.372,
+   "degree": 4,
+   "times_delivered": 4
+  },
+  {
+   "mbid": "3039ff68-622d-404b-96b4-c67435eca94a",
+   "name": "David Dycus",
+   "disambiguation": "",
+   "pctl": 0.6583,
+   "degree": 38,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "c39bb3fc-1ef2-4dbe-a713-89e884a9b68f",
+   "name": "shadow",
+   "disambiguation": "video game arrangement",
+   "pctl": 0.6408,
+   "degree": 31,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "199c15ec-f781-449d-beab-21fd16b2e0c0",
+   "name": "L.E.D.-G",
+   "disambiguation": "",
+   "pctl": 0.9181,
+   "degree": 41,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "d1554584-6ba5-4d2f-bf60-50ee52ae8025",
+   "name": "Kashmir Boots",
+   "disambiguation": "",
+   "pctl": 0.5759,
+   "degree": 21,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "6f26a8e3-4f71-41a1-94dd-d9859b6b888f",
+   "name": "Jason Evigan",
+   "disambiguation": "",
+   "pctl": 0.4356,
+   "degree": 9,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "add5753a-a12d-48d4-bc1d-75a33d29925a",
+   "name": "Benet Walsh",
+   "disambiguation": "",
+   "pctl": 0.7878,
+   "degree": 11,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "76642943-2e95-421f-9edc-da3ce27b0811",
+   "name": "Carlos",
+   "disambiguation": "BR(?) baile funk artist",
+   "pctl": 0.2202,
+   "degree": 5,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "62bab63f-50e1-430f-8727-02a09396af61",
+   "name": "Yuliet Topaz",
+   "disambiguation": "",
+   "pctl": 0.9168,
+   "degree": 34,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "918b673a-58bf-4c2f-9431-3d094d6d782b",
+   "name": "Ben Del Maestro",
+   "disambiguation": "",
+   "pctl": 0.7125,
+   "degree": 24,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "863b93e2-495e-4b79-a17a-c686a9c2c2dd",
+   "name": "MAKI",
+   "disambiguation": "EXIT TRANCE character",
+   "pctl": 0.7962,
+   "degree": 40,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "ad0fc777-9774-46ba-be5b-5d1b25a4ee97",
+   "name": "Kin$oul",
+   "disambiguation": "US rapper",
+   "pctl": 0.7946,
+   "degree": 12,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "f08160a8-edef-4d80-903d-3326b50dbcce",
+   "name": "Stalker",
+   "disambiguation": "chiptune",
+   "pctl": 0.5356,
+   "degree": 11,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "7b75758c-18ac-4428-996d-2cdf2574c934",
+   "name": "Orko",
+   "disambiguation": "probably not The Sycotik Alien",
+   "pctl": 0.425,
+   "degree": 11,
+   "times_delivered": 2
+  },
+  {
+   "mbid": "56e539d5-0455-41f9-8551-8026c1db5570",
+   "name": "richter",
+   "disambiguation": "video game arranger Matt Hackett",
+   "pctl": 0.7939,
+   "degree": 46,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "739fa240-452a-47b1-8fbb-2e3a48e305e4",
+   "name": "NYO",
+   "disambiguation": "Silver Forest",
+   "pctl": 0.7395,
+   "degree": 17,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "4ace17b8-de3c-4eaa-9c6b-48f485d300f6",
+   "name": "Valentina",
+   "disambiguation": "Los Angeles singer",
+   "pctl": 0.1585,
+   "degree": 4,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "ba9040bc-bf25-4e7c-941b-472212ebfc84",
+   "name": "Mel",
+   "disambiguation": "female hip-hop vocalist, Black Milk associate",
+   "pctl": 0.2021,
+   "degree": 4,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "a5b1390e-282b-4f46-b20e-0d120497faf2",
+   "name": "KiLaMDaPro",
+   "disambiguation": "",
+   "pctl": 0.738,
+   "degree": 37,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "a0826f61-a120-4067-a694-3cc6c552d250",
+   "name": "Charles Jones",
+   "disambiguation": "soul singer",
+   "pctl": 0.7096,
+   "degree": 23,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "c88d3ad9-a395-43ae-9172-3236f564b5c5",
+   "name": "T.V. Carpio",
+   "disambiguation": "",
+   "pctl": 0.5888,
+   "degree": 11,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "8e1d2421-a8b5-4674-ac3c-d80d17816644",
+   "name": "cybermiso",
+   "disambiguation": "",
+   "pctl": 0.723,
+   "degree": 23,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "8e245b0f-e957-471f-a886-4c1d91945d35",
+   "name": "Yadi",
+   "disambiguation": "",
+   "pctl": 0.4139,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "6e0ffd05-7e59-4adf-ab5a-1e418fc0bb17",
+   "name": "Geographic North House Band",
+   "disambiguation": "",
+   "pctl": 0.3952,
+   "degree": 12,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "db973dec-f7de-4ea9-835b-282673d95ff9",
+   "name": "Stunna Bam",
+   "disambiguation": "",
+   "pctl": 0.1498,
+   "degree": 3,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "68895ea5-89c4-4530-9499-65a750f3b3a7",
+   "name": "Yunnan",
+   "disambiguation": "",
+   "pctl": 0.7174,
+   "degree": 37,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "256c3a9c-e429-4fab-8fe4-740bf2948888",
+   "name": "Hassani Kwess",
+   "disambiguation": "",
+   "pctl": 0.3988,
+   "degree": 10,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "b4df3e3f-701f-403f-9fd4-17e6701d10c6",
+   "name": "Ra Khahn",
+   "disambiguation": "",
+   "pctl": 0.3133,
+   "degree": 8,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "d1c91897-d518-4de9-806c-569f511fe34c",
+   "name": "DJ NAGAI",
+   "disambiguation": "",
+   "pctl": 0.6681,
+   "degree": 27,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "21401cec-fe43-4cc0-a0a0-eccdacab2eb7",
+   "name": "DJ Nanashi",
+   "disambiguation": "",
+   "pctl": 0.4856,
+   "degree": 12,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "4f138101-4e99-4618-bba1-4a35813f72ca",
+   "name": "Jelly Roll",
+   "disambiguation": "West Coast hip hop producer",
+   "pctl": 0.4465,
+   "degree": 8,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "7b36bd95-064e-4501-8027-5bcdb9f4c0d3",
+   "name": "Gabriela Robin",
+   "disambiguation": "",
+   "pctl": 0.887,
+   "degree": 27,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "c34cd490-a14d-4719-a9ca-1d84cf8f5e3e",
+   "name": "Roxani Arias",
+   "disambiguation": "",
+   "pctl": 0.6118,
+   "degree": 10,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "d35b0990-3207-4657-8361-de0777f802a3",
+   "name": "Sara Quin",
+   "disambiguation": "",
+   "pctl": 0.3555,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "a24cfb78-3622-4f19-a227-bbe60dcd8442",
+   "name": "Michael Ozone",
+   "disambiguation": "",
+   "pctl": 0.6899,
+   "degree": 31,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "e2dd0d5f-8682-46d7-96ba-d8815297540f",
+   "name": "石坂健太郎",
+   "disambiguation": "",
+   "pctl": 0.7588,
+   "degree": 40,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "d87c9bd9-5f89-4b69-a3b2-5d5d7c2ccd2b",
+   "name": "VDM",
+   "disambiguation": "trance, aka Vincent de Moor",
+   "pctl": 0.7574,
+   "degree": 41,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "d0dd9ff5-001d-450f-a21d-5454cd6d3534",
+   "name": "Rich Brilli",
+   "disambiguation": "",
+   "pctl": 0.7166,
+   "degree": 39,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "2763d731-92c3-4058-9491-3237965ff8a3",
+   "name": "Crunch",
+   "disambiguation": "UK grime MC",
+   "pctl": 0.1131,
+   "degree": 3,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "a6122cfb-9bff-4cc3-a724-190fc436cef3",
+   "name": "Monobrow",
+   "disambiguation": "video game arrangement",
+   "pctl": 0.5618,
+   "degree": 20,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "93be3017-a6b3-4aad-b6ba-31b5c5ccf4d6",
+   "name": "Asociación Juvenil Puno",
+   "disambiguation": "",
+   "pctl": 0.3472,
+   "degree": 8,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "dda140ce-26f4-4c4e-a518-31e1c6414fd4",
+   "name": "Mugenjou Project",
+   "disambiguation": "",
+   "pctl": 0.3561,
+   "degree": 9,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "72178bae-e167-431e-85a6-7d1672675db7",
+   "name": "Facer",
+   "disambiguation": "",
+   "pctl": 0.3112,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "5dbe908f-d20a-4634-96ca-071a5f868f58",
+   "name": "Gonage",
+   "disambiguation": "",
+   "pctl": 0.2945,
+   "degree": 5,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "de250d68-9b30-4cfd-8c48-5cf288733bee",
+   "name": "Danielle Haim",
+   "disambiguation": "",
+   "pctl": 0.3934,
+   "degree": 6,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "a447fbe7-2bb8-41f0-8b3f-3675d85a3e05",
+   "name": "Clockwork Voodoo Freaks",
+   "disambiguation": "",
+   "pctl": 0.5987,
+   "degree": 19,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "4d81d3a6-b6f2-42ba-b93c-348b73097080",
+   "name": "John Stanier",
+   "disambiguation": "",
+   "pctl": 0.3957,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "29edc147-a01f-4a0e-b64f-69bc7126a218",
+   "name": "Jhama",
+   "disambiguation": "",
+   "pctl": 0.4999,
+   "degree": 9,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "572b069e-9d73-465f-972f-2c33f5ebf7e5",
+   "name": "Cromkayer",
+   "disambiguation": "Josh Kirkland",
+   "pctl": 0.6623,
+   "degree": 34,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "076fc2ab-02be-4f6e-8507-ae7ef4ee3971",
+   "name": "Booboo Stewart",
+   "disambiguation": "",
+   "pctl": 0.5243,
+   "degree": 15,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "ecfb835c-299f-43e7-ad44-f04636fa53c0",
+   "name": "森田柊山",
+   "disambiguation": "",
+   "pctl": 0.733,
+   "degree": 34,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "664b4eee-a6b9-442c-9b61-732349253302",
+   "name": "",
+   "disambiguation": "",
+   "pctl": 0.5425,
+   "degree": 15,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "bd8457e4-c804-447e-b5c5-1428536292ff",
+   "name": "Pok Dog",
+   "disambiguation": "",
+   "pctl": 0.6402,
+   "degree": 17,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "a6f118e1-d49c-498f-a379-3f644322074a",
+   "name": "Nick Nolan",
+   "disambiguation": "",
+   "pctl": 0.7527,
+   "degree": 26,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "fecb0208-f829-4835-a6f8-c3d5217c6e3f",
+   "name": "DragonAvenger",
+   "disambiguation": "OverClocked ReMixer",
+   "pctl": 0.6315,
+   "degree": 24,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "019fb493-57f0-4e1b-aee5-8d04769fafe6",
+   "name": "panda llama",
+   "disambiguation": "",
+   "pctl": 0.6762,
+   "degree": 38,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "d77c28fd-8b60-4e9b-8a50-7c0a81e8e736",
+   "name": "Nonku",
+   "disambiguation": "",
+   "pctl": 0.3063,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "af7ee036-d4f0-4bbe-9fe9-102a57dd1943",
+   "name": "Drama",
+   "disambiguation": "Chicago-based duo",
+   "pctl": 0.6775,
+   "degree": 18,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "f420af95-837c-42a0-a2c7-9d96516ad903",
+   "name": "jillmax",
+   "disambiguation": "",
+   "pctl": 0.6456,
+   "degree": 23,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "4c829576-6fc1-4a1d-ac27-7ff2b362c713",
+   "name": "Mike Kerr",
+   "disambiguation": "",
+   "pctl": 0.5899,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "02329243-73f4-4c9e-a4e2-d86100695b86",
+   "name": "CAMRY",
+   "disambiguation": "EXIT TRANCE character/vocals",
+   "pctl": 0.7039,
+   "degree": 29,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "59a0c216-6fad-40a7-bf1d-20d4ce4a19ed",
+   "name": "Cillian Murphy",
+   "disambiguation": "Irish actor and rock musician",
+   "pctl": 0.6199,
+   "degree": 21,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "4658a1f5-a486-4aa3-89a7-1eac7275623d",
+   "name": "Arama Mara",
+   "disambiguation": "",
+   "pctl": 0.3789,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "aa516945-8e70-420f-9ff8-9e1e8b0a97a7",
+   "name": "Reed Mullin",
+   "disambiguation": "",
+   "pctl": 0.4992,
+   "degree": 14,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "b03c1dba-6d12-44c1-8435-20550d754aa1",
+   "name": "Trash Generation",
+   "disambiguation": "Fake group name present in Cyberpunk 2077's in-game radio",
+   "pctl": 0.4262,
+   "degree": 13,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "753669bc-5fcc-405b-8e69-ce98c023a3af",
+   "name": "PILLARS",
+   "disambiguation": "London-based musician",
+   "pctl": 0.3671,
+   "degree": 9,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "a596c592-67aa-4da8-8b6e-b35710d68f1e",
+   "name": "DJ Olive Oil",
+   "disambiguation": "",
+   "pctl": 0.4149,
+   "degree": 13,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "bb6978f2-7976-47d2-a755-bde56b280f19",
+   "name": "Minxx",
+   "disambiguation": "",
+   "pctl": 0.4102,
+   "degree": 7,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "fb4156c0-1906-4b3c-bdd4-e65b702ac403",
+   "name": "JaVonté",
+   "disambiguation": "",
+   "pctl": 0.6586,
+   "degree": 23,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "85070dfd-36c7-4c96-b6c8-a5cbfbceffd3",
+   "name": "Slicky Boy",
+   "disambiguation": "Hip-hop artist worked with Wiki",
+   "pctl": 0.275,
+   "degree": 6,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "27aec350-6d71-4be4-bd60-e6e83e92678f",
+   "name": "Ester Nannmark",
+   "disambiguation": "",
+   "pctl": 0.1459,
+   "degree": 2,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "37b52172-99a6-4c3e-be03-3e9801cb7240",
+   "name": "prophetik music",
+   "disambiguation": "video game arrangement",
+   "pctl": 0.8674,
+   "degree": 48,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "fbf641b9-a5e0-4231-8203-8319056ffa39",
+   "name": "Mr. Fantastik",
+   "disambiguation": "",
+   "pctl": 0.9442,
+   "degree": 20,
+   "times_delivered": 1
+  },
+  {
+   "mbid": "1c277e9b-6493-4258-bffd-cb1960da162c",
+   "name": "Sassot",
+   "disambiguation": "",
+   "pctl": 0.5459,
+   "degree": 17,
+   "times_delivered": 1
+  }
+ ],
+ "composition_warning": "The 18-of-20 verdict in TAIL-SAMPLE.md was measured on a POPULATION-stratified sample. COH-3 is the standing precedent that a delivered subset can differ sharply from its population. These delivered artists are NOT that sample and carry no verdict."
+}
