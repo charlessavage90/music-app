@@ -85,6 +85,44 @@ not an artifact of one-artist labels.
 **`WGT-5`** delivered `STYLE-VOCABULARY.md` — 737 styles (not "~600"), with carrier
 counts and rarity weights — and per-source rarity distributions in `wgt_tables.json`.
 
+## §3a Five quality filters later — the style column's cost survives them all
+
+**Owner-directed follow-up, same day, diagnostic, no bars** (`wgt_style_filters.py` /
+`wgt_style_filters.json`; plain Jaccard, committed baselines reproduced before reading).
+Two rival mechanisms for §3's style verdict were put to measurement: the owner's
+vocabulary-quality gradient (recorded in `STYLE-VOCABULARY.md`), and **cross-source
+orthographic fragmentation** — MB and Discogs spelling the same genre differently
+(`drum n bass`, `rhythm & blues`, three spellings of hip-hop), raised in discussion after
+the grid closed.
+
+| Style column variant | spread Δ | redundancy Δ |
+|---|---|---|
+| committed full column (reference) | −0.0197 | +0.0291 |
+| carrier floor ≥ 400 (the owner's "true sub-genres" band) | −0.0161 | **+0.0321** |
+| carrier floor ≥ 200 | −0.0175 | +0.0299 |
+| MB-vocabulary intersection | −0.0150 | +0.0270 |
+| fold-normalised, onto `W1f` | −0.0196 | +0.0309 |
+| fold-normalised, onto `W4f` (second isolation) | −0.0153 | +0.0245 |
+
+- **Fragmentation is refuted as the mechanism, and the hypothesis was this session's.**
+  The fold merges only 17 Discogs-only styles into MB matches (737 → 736 keys; `W0`
+  2015 → 2001) and the deltas barely move (−0.0196 vs the committed −0.0197). The
+  spelling variants are real — `drum n bass` alone carries 4,338 artists — but far too
+  few to explain anything. Mechanistic predictions about these label sources are now
+  0-for-3 in this record.
+- **Filtering to the owner's best band does not rescue styles either — it makes the
+  redundancy *worse* (+0.0321, the highest measured).** The recognizable sub-genres are
+  precisely what similar artists already share, so the similarity score already carries
+  them. *Plain: the style labels a person would actually use are the ones the app's
+  similarity data already knows; the labels that would add new information are the ones
+  the owner's read flagged as unusable. No filter or weighting sits between those two
+  facts.*
+- **The styles question is closed with a mechanism**: measured under the committed
+  vocabulary, two weighting schemes, two carrier floors, a curated-vocabulary
+  intersection, and a fold-normalised variant on two isolations — every one keeps both
+  adverse directions. Nothing here amends `TAS-` §1; the fold's 17 merges are recorded
+  for any future frame amendment, where the normaliser fix rides along for free.
+
 ## §4 The release-level question (`WGT-4`) — Branch 3, EXCLUDED
 
 One full pass over the 345 GB (decimal) release dump — 48.7 min, 60,422 graph artists,
