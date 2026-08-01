@@ -26,6 +26,54 @@ THE COMPOSITION WARNING THIS PROBE EXISTS TO RAISE (COH-2/COH-3 again)
   different population. This probe reports the delivered set by name so the
   question can be put to the owner on the right sample.
 
+  ^^ THAT WARNING STANDS. THE CONCLUSION THIS SESSION DREW FROM IT DOES NOT.
+  ⚠ REFUTED BY THE OWNER, 2026-08-01, and recorded here because the delivered
+  list below will tempt the next reader into the same error.
+
+  This session read names like Sara Quin, Reed Mullin, Mike Kerr, Jason Evigan
+  and Gabriela Robin in the delivered set, verified they are real musicians,
+  and concluded that a "has a release" filter would cut real artists and was
+  therefore the wrong instrument. **That inference was wrong.**
+
+  The owner's argument: the product recommends things to LISTEN TO, so the unit
+  is a body of work, not a person. Sara Quin as an entity has ~1 solo track;
+  the catalogue is Tegan and Sara's. A user sent to the Sara Quin card gets
+  nothing to explore, so cutting her is CORRECT, not a false positive. Every
+  name on this session's counter-example list is the same shape -- a performer
+  catalogued apart from the band that holds the releases -- so the whole
+  counter-example class collapses.
+
+  The real false-positive class is much narrower, and the owner's own verdicts
+  identify it exactly: artists with genuine releases that MusicBrainz and
+  Discogs simply do not document (his two "journey-worthy" picks, both
+  Spotify-catalogued). That is a SOURCE COVERAGE question, not evidence that
+  the release signal is the wrong signal.
+
+THE CLIP CROSS-REFERENCE -- unread until 2026-08-01, and it is his own data
+  `tail_sample.json` ran the app's OWN clip resolver (Deezer then iTunes) over
+  the same 20 artists, for a different purpose. Crossed against his verdicts in
+  `TAIL-SAMPLE.md` -- 20 rows, checkable by hand, no script:
+
+      no release AND no clip resolves  -> 13 artists, ALL judged not
+                                          journey-worthy (0 false positives)
+      no release BUT a clip resolves   ->  7 artists, of which BOTH of his two
+                                          journey-worthy picks (#12 iTunes,
+                                          #13 Deezer) and 5 he still rejected
+
+  So on his sample the clip signal is NECESSARY but not SUFFICIENT: it caught
+  both artists MusicBrainz was blind to, and let 5 unwanted ones through. As a
+  GUARD on a release filter -- cut only where there is no release AND nothing
+  plays -- it would have cut 13 of 20 with zero false positives, against the
+  bare release filter's 20 of 20 with two.
+
+  THE HAZARD, NAMED: the resolver matches by NAME, not identity -- the
+  population-mismatch trap that killed every external popularity source here.
+  The owner flagged #9's Deezer hit as "likely a false positive or mismatch".
+  That noise is in the PERMISSIVE direction (it keeps artists rather than
+  cutting them), which is the safe direction for a guard, but it is why this is
+  a candidate and not a rule. n = 20, with 2 positives. Nothing here is a bar,
+  and anything gating on it needs its own pre-registration designed cold.
+
 IMPORTED, NOT REIMPLEMENTED
   population predicate  -- tail_sample.py's exact expression (rel_rg_raw plus a
                            Discogs bucket through rel_artist_index_raw)
