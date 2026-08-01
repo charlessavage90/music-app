@@ -29,6 +29,16 @@ attributability shape as `rel_rg_dump`'s strict frame. Untagged releases still
 count toward `rgs` (releases per release group), because `WGT-4c`'s reissue
 confound needs pressing counts regardless of tagging.
 
+DESCRIPTIVE SIDE-COLLECTION, outside the pre-registration's readings on the
+same footing its §8 gives the tail spot-check: the same records carry label
+credits (`label-info`), release countries and dates, and collecting them in
+this pass is nearly free while a later collection costs a second full stream.
+Per artist: record-label counts (id -> {name, n}), a country counter, and the
+first/last release year. NO `WGT-` reading consumes any of it; it exists so
+the owner's parked label-affinity / junk-label-clustering ideas start from
+data instead of a fresh 322 GB pass. Added before the pass produced output;
+the checkpoint schema is versioned so a pre-patch checkpoint cannot resume.
+
 Run from `builder/`:
     UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
         analysis/2026-08-01-label-weighting/wgt_evidence.py --artist-pass
@@ -110,14 +120,22 @@ def artist_pass() -> None:
           f"{len(found)} artists -> {OUT_VOTES.name}", flush=True)
 
 
+CKPT_SCHEMA = 2  # bumped when the collected shape changes; v1 checkpoints are void
+
+
 def release_pass() -> None:
     wanted = set(graph_mbids())
     data: dict[str, dict] = {}
     offset = 0
     if CKPT.exists():
         ck = json.loads(CKPT.read_text(encoding="utf-8"))
-        offset, data = ck["offset"], ck["data"]
-        print(f"resuming at byte {offset:,} with {len(data)} artists held", flush=True)
+        if ck.get("schema") != CKPT_SCHEMA:
+            print("checkpoint predates the current schema -- restarting from zero",
+                  flush=True)
+        else:
+            offset, data = ck["offset"], ck["data"]
+            print(f"resuming at byte {offset:,} with {len(data)} artists held",
+                  flush=True)
 
     total = MB_RELEASE.stat().st_size
     began, since_ckpt = time.time(), 0
@@ -134,13 +152,35 @@ def release_pass() -> None:
                 if artist in wanted:
                     kept += 1
                     rg = (record.get("release-group") or {}).get("id") or ""
-                    bucket = data.setdefault(artist, {"labels": {}, "rgs": {}})
+                    bucket = data.setdefault(
+                        artist, {"labels": {}, "rgs": {},
+                                 "record_labels": {}, "countries": {},
+                                 "years": [None, None]})
                     bucket["rgs"][rg] = bucket["rgs"].get(rg, 0) + 1
                     for lab in merged_votes(record):
                         bucket["labels"][lab] = bucket["labels"].get(lab, 0) + 1
+                    # -- descriptive side-collection, no WGT- reading consumes it
+                    for li in record.get("label-info") or []:
+                        info = li.get("label") or {}
+                        lid = info.get("id")
+                        if lid:
+                            row = bucket["record_labels"].setdefault(
+                                lid, {"name": info.get("name") or "", "n": 0})
+                            row["n"] += 1
+                    country = record.get("country")
+                    if country:
+                        bucket["countries"][country] = \
+                            bucket["countries"].get(country, 0) + 1
+                    date = record.get("date") or ""
+                    if len(date) >= 4 and date[:4].isdigit():
+                        y = int(date[:4])
+                        lo_y, hi_y = bucket["years"]
+                        bucket["years"] = [y if lo_y is None else min(lo_y, y),
+                                           y if hi_y is None else max(hi_y, y)]
             if since_ckpt >= CKPT_EVERY_BYTES:
                 since_ckpt = 0
-                CKPT.write_text(json.dumps({"offset": offset, "data": data}),
+                CKPT.write_text(json.dumps({"schema": CKPT_SCHEMA,
+                                            "offset": offset, "data": data}),
                                 encoding="utf-8")
                 mins = (time.time() - began) / 60
                 rate = offset / max(time.time() - began, 1e-9) / 1e6
