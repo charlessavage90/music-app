@@ -356,5 +356,15 @@ here) → the `EV-R` decision → `evidence⁺` re-runs if admitted → `WGT-2`/
 
 ## §10 Amendments
 
-None. Standing rule, inherited from the `TAS-AM3` precedent: any amendment appended here
-states at its head whether it was written before or after the results it touches existed.
+Standing rule, inherited from the `TAS-AM3` precedent: any amendment appended here states at
+its head whether it was written before or after the results it touches existed.
+
+### `WGT-AM1` — the rarity denominator gloss (written BEFORE any `WGT-` figure existed; no probe script had been written when this was appended)
+
+§2's gloss of the rarity formula — "`N_F` the count carrying ≥ 1 label" — contradicts the
+committed definition the same sentence pins to: `tas_weighting.idf_table` computes
+`log(N / carriers)` with **N = all capture nodes, labelled or not**. The pin governs, as §2
+already states, so the gloss is corrected: `N_F` is the full node count. Found by reading the
+committed code before building the harness; `WGT-0b` would have caught it later as a failed
+reproduction, which is the check working, but catching it at the design layer is cheaper and
+leaves no window where the document and the code disagree.
