@@ -1,0 +1,90 @@
+{
+ "note": "DIAGNOSTIC ONLY. Not a TAS- criterion, not pre-registered, licenses nothing. TAS-AM4's committed W0/W1/W6 figures are reproduced, not replaced; tas_frame_eval.json stays their record.",
+ "substrate": "pre-cap ALG-E capture (TAS-AM2). Never compare these against an artifact-side figure.",
+ "capture": "C:/Users/charl/AppData/Local/Temp/claude/C--dev-music-app/543dbdc4-93e2-48e1-94e3-4a386f79cd4e/scratchpad/alge_capture.npz",
+ "fixed_population_lists": 38782,
+ "reproduction_check": {
+  "committed": {
+   "W0": 0.1726,
+   "W1": 0.16,
+   "W6": 0.1418
+  },
+  "measured": {
+   "W0": 0.1726,
+   "W1": 0.16,
+   "W6": 0.1418
+  },
+  "all_match": true
+ },
+ "frames": {
+  "W0": {
+   "median_iqr": 0.1726,
+   "spearman_vs_similarity": 0.1857,
+   "identical_order_share": 0.0307,
+   "labelled_nodes": 40437,
+   "acting_slot_share": 0.658,
+   "lists_considered": 38782,
+   "spread_change_vs_W0": 0.0
+  },
+  "W1": {
+   "median_iqr": 0.16,
+   "spearman_vs_similarity": 0.2049,
+   "identical_order_share": 0.0084,
+   "labelled_nodes": 55131,
+   "acting_slot_share": 0.8404,
+   "lists_considered": 38782,
+   "spread_change_vs_W0": -0.073
+  },
+  "W4": {
+   "median_iqr": 0.1565,
+   "spearman_vs_similarity": 0.1942,
+   "identical_order_share": 0.0032,
+   "labelled_nodes": 61306,
+   "acting_slot_share": 0.8969,
+   "lists_considered": 38782,
+   "spread_change_vs_W0": -0.0933
+  },
+  "W5": {
+   "median_iqr": 0.1403,
+   "spearman_vs_similarity": 0.234,
+   "identical_order_share": 0.0037,
+   "labelled_nodes": 60729,
+   "acting_slot_share": 0.8917,
+   "lists_considered": 38782,
+   "spread_change_vs_W0": -0.1871
+  },
+  "W6": {
+   "median_iqr": 0.1418,
+   "spearman_vs_similarity": 0.2179,
+   "identical_order_share": 0.0028,
+   "labelled_nodes": 61306,
+   "acting_slot_share": 0.8969,
+   "lists_considered": 38782,
+   "spread_change_vs_W0": -0.1784
+  }
+ },
+ "isolations_of_F4_the_closed_15_value_genre_list": {
+  "W1_to_W4": {
+   "spread_change": -0.0219,
+   "reach_change_pts": 0.0565,
+   "redundancy_change": -0.0107
+  },
+  "W5_to_W6": {
+   "spread_change": 0.0107,
+   "reach_change_pts": 0.0052,
+   "redundancy_change": -0.0161
+  }
+ },
+ "isolations_of_F5_the_600_value_style_list": {
+  "W1_to_W5": {
+   "spread_change": -0.1231,
+   "reach_change_pts": 0.0513,
+   "redundancy_change": 0.0291
+  },
+  "W4_to_W6": {
+   "spread_change": -0.0939,
+   "reach_change_pts": 0.0,
+   "redundancy_change": 0.0237
+  }
+ }
+}
