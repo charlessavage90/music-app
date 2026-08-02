@@ -265,3 +265,70 @@ listeners). Whether to add a tail-ordering criterion (≈15 fresh owner hand rea
 `fame_lb_pctl < 0.25`, blind to ruler values, as `FAM-6` via a further amendment) or to
 record tail ordering as **assumed, not validated** with its falsifier named, is the
 owner's decision — it spends his time — and is put to him in the conversation of record.
+*(Resolved by the owner the same day: the hand reads. `FAM-AM3` below is the criterion.)*
+
+### `FAM-AM2` — population re-scope and two result-state rulings, appended 2026-08-02 AFTER results existed for `FAM-1`, `FAM-2` and `FAM-5`
+
+**This amendment is post-result and says so at its head** (the `TAS-AM3` precedent: the
+disclosure is what makes it usable). The union fetch figures existed and had been read
+when it was written; the owner made the ruling below with both coverage numbers — 95.580%
+as committed, 99.329% re-scoped — in front of him, in the conversation of record.
+
+1. **`FAM-1`'s population is re-scoped to the DELIVERABLE union** (owner ruling, option 1
+   of the two escalated): the 93,067-MBID union minus the two frozen sha-pinned drop
+   lists — 80,642 artists. Rationale on the record: §1's own stated purpose for the union
+   was that the cap re-evaluation "cannot trip a coverage condition mid-experiment", and
+   an artist on a frozen drop list structurally cannot be delivered by any build, so it
+   cannot trip anything. **Re-read under this amendment: 99.329% ≥ 99.0% — PASS.** The
+   as-committed failure (95.580%, 86.8% of nulls on the drop lists) stays on the record
+   beside it. Dependency named: this re-scope inherits the drop lists as frozen; a future
+   re-census changes the deliverable set and re-opens the read.
+2. **`FAM-2`'s remainder denominator is ruled, with both readings disclosed as known:**
+   the **binding** reading is the mapped-percentile quantisation step — the currency the
+   gradient consumes — which passes (max consecutive mapped-`pctl` gap 0.0020 ≤ 0.005).
+   The own-population clumping is recorded as a **named limitation, not a pass**: 133
+   deliverable candidate-only artists tie at exactly 1 listener (largest deliverable atom
+   1.03% of the remainder; top-5 lower-half atoms 4.83%), so **the ruler cannot order
+   candidate-only artists within the 1–5-listener clump, and the cap re-evaluation must
+   not write any read that consumes within-remainder ordering.** Carried beside the
+   population-vs-descent confound in `FAM-AM1.7` as a factor-table obligation.
+3. **`FAM-5` is marked PASSED-POWERLESS** — the `TAS-6`-vacuous convention. Both bars
+   pass trivially because the endpoint served the byte-identical batch table on both
+   dates (executor-verified by live re-fetch against both files). Zero table versions
+   elapsed, so the criterion cannot separate "stable" from "same table twice" and **must
+   never be cited as evidence of instrument stability**. What it does establish: fetch
+   determinism, and that the instrument is frozen upstream between table regenerations —
+   which strengthens `FAM-AM1.7`'s rule that any re-fetch is a new instrument.
+
+### `FAM-AM3` — `FAM-6`, tail-ordering concordance, appended 2026-08-02 BEFORE any hand read and BEFORE the sample is drawn
+
+The owner ruled to spend the hand reads. Everything below is fixed before his first
+Spotify lookup and before any sampled artist's ruler value is surfaced to anyone.
+
+- **`FAM-6` — tail-ordering concordance (WGLL instrument, all three bounds honoured).**
+  Population: the deliverable union restricted to `fame_lb_pctl < 0.25`. Sample: **15
+  artists + 10 ordered alternates**, five per stratum over the percentile bands
+  (0, 1/12], (1/12, 1/6], (1/6, 1/4], drawn deterministically (MBID-sorted population,
+  seeded RNG, seed **20260802**, procedure committed as `fi_tail_sample.py` before any
+  draw is looked at).
+- **Identity first, the `FAM-AM1.4a` discipline:** each sampled artist is resolved to a
+  specific Spotify artist page using the artifact's name + MusicBrainz disambiguation
+  (and recorded Deezer id where one exists) BEFORE any listener figure is read. An
+  unconfirmable row is recorded and replaced by the next alternate in its stratum.
+- **Blindness:** the owner's checklist carries **no ruler value**. His hand reads are
+  recorded in full before any comparison is computed (WGLL bound three), and the
+  comparison is computed by script, not by eye.
+- **Outcome rule:** "no Spotify page" / "cannot confirm identity" rows are recorded,
+  excluded, and replaced from alternates. **If fewer than 12 confirmed rows exist after
+  the alternates are exhausted, `FAM-6` is UNREADABLE and adoption is blocked** —
+  unreadable is not a pass.
+- **Bar, fixed now: Spearman ≥ 0.70 between hand-read monthly listeners and
+  `fame_lb_raw` over the confirmed rows (n ≥ 12).** Rationale for the number, so it is
+  not arbitrary: the n = 15 critical value at p < 0.01 is ≈ 0.60, and `FAM-4`'s bar over
+  the famous-heavy set is 0.80; 0.70 is fixed midway, demanding more than bare
+  significance and less than the famous set, where hand reads are less noisy. Direction
+  agreement on ≥10× pairs is reported as a **descriptive companion with no bar** — the
+  critique's A4 finding (pair non-independence) is why it does not gate.
+- *Plain: in the obscure quarter itself — the region this whole adoption exists for —
+  when the owner looks fifteen artists up by hand, the ruler's ordering must broadly
+  match what Spotify shows.*
