@@ -151,3 +151,117 @@ now. Owner-facing text quotes identifier **and** sentence together.
   The ~3–4 h Wikipedia pageview build (`fp_fame_mbid --build`) is **not** triggered — its
   deferral condition ("if a currency decision adopts the MBID-keyed proxy") did not fire,
   and this document records that so nobody runs it by momentum.
+
+---
+
+## §8 Amendments
+
+### `FAM-AM1` — design-critique corrections, appended 2026-08-02, before the union fetch
+
+**Provenance and disclosure, first.** The `ml-graph-analyst` critiqued the committed
+design before any run (its named trigger; critique and probes retained at
+`builder/analysis/2026-08-02-fame-instrument/`). During that critique, **`FAM-2`'s
+statistics were computed on the retained 2026-07-30 adopted-frame snapshot at the
+controller's direction** (largest tie atom 109 artists = 0.147% of the frame, 0.294% of
+the lower half; 1,334 distinct lower-half values — both pass the committed bars). No
+named-artist value was read, so `FAM-3` and `FAM-4` remain blind; `FAM-1` and `FAM-5`
+require the union fetch and remain unknown. **Every re-specification below is made with
+`FAM-2`'s adopted-frame values known and says so.** The union fetch had not run when this
+amendment was committed; the git timestamp is the evidence.
+
+1. **`FAM-5` re-specified (critique A1 — the committed bar sat in a dead zone).**
+   Simulated against the retained snapshot: a single overlap-wide Spearman ≥ 0.99 is
+   satisfied even when every value ≤ 100 listeners is re-drawn as uniform noise (0.9991) —
+   the tail, which is what the ruler is being adopted for, could be destroyed and the bar
+   would pass. Replaced by: **Spearman ≥ 0.99 within each of the five `cb_metrics.BANDS`
+   separately, AND 99th percentile of |Δ`fame_lb_pctl`| ≤ 0.01** on overlapping non-null
+   MBIDs. *Plain: two readings days apart must nearly agree everywhere — including among
+   obscure artists — and almost no artist may move more than one percentile point.*
+
+2. **`FAM-2` re-specified (critique B1/B3 — the distinct-value bar tested the frame's
+   median, not resolution, and its direction was perverse: a graph reaching obscurer
+   artists would score worse on it with an unchanged ruler).** Replaced by:
+   (a) largest `fame_lb_pctl` quantisation step (largest tie atom / non-null count)
+   **≤ 0.005 overall and ≤ 0.005 within the bottom decile**; (b) top-5 tie atoms combined
+   **≤ 2% of the lower half**; (c) the same statistics computed **on the `ALG-B`-only
+   remainder** (critique C4) — the genuinely unknown 18,874 artists, measurable only after
+   the union fetch. Adopted-frame values were known at re-specification (bottom-decile
+   step 0.00147): the bars carry ~3.4× headroom and this is disclosed rather than hidden.
+   *Plain: the ruler must not lump obscure artists into blocks — anywhere, including on
+   the candidate data set's own artists.*
+
+3. **`FAM-2`'s effect size (critique B2), resolved without breaking §0.3's sequencing:**
+   the measured quantisation step (**0.0015**) is carried forward as a binding floor —
+   **the cap re-evaluation's pre-registration must require any claimed gradient to exceed
+   10× the ruler's measured quantisation step.** Recorded here so it cannot be quietly
+   dropped there.
+
+4. **`FAM-4` procedure and bars (critique A3/A4/A5), and WGLL bound-2 compliance.**
+   (a) **Identity confirmation first:** before any ruler value for these artists is read,
+   every hand-read artist is resolved to an MBID via the MusicBrainz disambiguation
+   procedure (the `BYP-13` guard — the hand reads were Spotify *name* lookups, and the
+   record holds a name-search for "Love" returning Sean Combs); unconfirmable rows are
+   dropped and disclosed. This is the falsification test WGLL's second bound requires of
+   a hand-read instrument inside a pre-registered criterion.
+   (b) **Readability floor:** if fewer than 10 qualifying ≥10× pairs remain after
+   confirmation, `FAM-4` is **UNREADABLE and adoption is blocked** — below 10 pairs the
+   90% bar is arithmetically a 100% bar and cannot be read.
+   (c) **Per-artist trace (A4 — 34 pairs from 15 artists is ~15 effective units, not 34):**
+   failures are reported per artist beside the pair rate. One pre-committed exception: if
+   all failing pairs share a single artist, that artist's hand read is re-verified; if its
+   identity cannot be confirmed it is excluded with disclosure, and the remaining set must
+   still pass both the 90% bar and the 10-pair floor.
+   (d) **Resolution read added (A3 — the ≥10× gate cannot see sub-decade error: a ruler
+   wrong by 3.2× on the typical artist passes it 92% of the time, by simulation):**
+   **Spearman ≥ 0.8 over all confirmed hand-read artists**, using exactly the pairs the
+   ≥10× filter discards — the only ones carrying resolution information. *Plain: beyond
+   agreeing on the obvious gaps, the ruler must also broadly rank the full hand-read set
+   the way the hand reads do.*
+
+5. **`FAM-3` pass rule (critique B4/B5).** The nine-name list is unchanged (forward-only).
+   Pass is now **≥ 8 of 9** at `fame_lb_pctl ≥ 0.99`, any miss reported with its value.
+   Disclosed reason: three of the nine (R.E.M., Pixies, PJ Harvey) entered the record as
+   reciprocity-collapse tracers — artists whose ListenBrainz candidate data is thin on the
+   same corpus this ruler reads — so a single-miss auto-fail would block adoption on
+   exactly the artists likeliest to be under-ranked for corpus reasons rather than fame
+   reasons. `FAM-3` is also relabelled a **smoke test**: nine Anglophone rock acts are the
+   population ListenBrainz over-represents, so no pass of `FAM-3` may ever be cited as
+   evidence against the shared-population hazard in §2.
+
+6. **The percentile definition, fixed exactly (critique C1/C2/C3):**
+   `fame_lb_pctl(v) = (|{f < v}| + (|{f = v}| + 1)/2) / N_nonnull` — the denominator is
+   the **non-null ranked population** (74,151 on the current frame), not the frame size.
+   For `v` above the frame maximum, `pctl(v) = pctl(max)`. **"Lower half" means
+   `{fame_lb_pctl < 0.5}`**, never a sorted-index split — 14 artists tie at the boundary
+   value and membership must not depend on sort stability.
+
+7. **Hazards added to §2, carried not fixed (critique D1/D2/D3/C5):**
+   - **Vintage bias**: `total_user_count` is cumulative-lifetime, so at equal current
+     popularity an older artist outscores a newer one — a gradient read cannot distinguish
+     *less famous* from *newer*. No criterion here touches it.
+   - **The ruler IS this snapshot**: the adopted object is the union fetch's dated file
+     plus its sha256. Any re-fetch is a new instrument owing its own `FAM-5` and its own
+     re-read decision under §0.2's rule.
+   - **Scale sensitivity is non-uniform** — a 10× fame drop moves the percentile roughly
+     3× more at the frame median than near the top. A **descriptive companion read** (no
+     bar, labelled descriptive) is added: `fame_lb_pctl` by bypass depth over the retained
+     Track 2 routed paths, to calibrate where production routing sits on this scale.
+   - **The frame choice leaves a population-vs-descent confound to the cap
+     re-evaluation's factor table**: an `ALG-B` arm's interior percentiles differ partly
+     because the populations differ (measured on the adopted side alone: median
+     `fame_lb_raw` 2,501 for adopted artists also in `ALG-B` vs 409 for adopted-only —
+     6.1×). Named here so that factor table cannot omit it.
+
+8. **Null rule for aggregate reads (critique D5), fixed here rather than downstream:**
+   every aggregate in this currency is reported **all-interiors AND matched-only** (the
+   `REQ-Q1` shape) with the **null count per depth**. A null is a hole in the denominator,
+   not a floor value — and `FAM-1`'s bar permits up to ~931 union nulls, so without this
+   rule an arm reaching null-rich territory would be *flattered* by a shrinking
+   denominator. The dual report is what makes that visible.
+
+**Not resolved by this amendment, deliberately:** critique A2 — no criterion validates
+*ordering* in the obscure region itself (`FAM-4`'s hand reads all sit above 168k monthly
+listeners). Whether to add a tail-ordering criterion (≈15 fresh owner hand reads from
+`fame_lb_pctl < 0.25`, blind to ruler values, as `FAM-6` via a further amendment) or to
+record tail ordering as **assumed, not validated** with its falsifier named, is the
+owner's decision — it spends his time — and is put to him in the conversation of record.
