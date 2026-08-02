@@ -95,6 +95,36 @@ def test_track_endpoint_returns_clip():
     assert r.json()["preview_url"] == "clip.mp3"
 
 
+def test_track_endpoint_looks_up_the_requested_artists_own_deezer_id():
+    """The wiring, which is where an off-by-one would live (`BYP-13`).
+
+    The resolver is well covered on its own, but nothing pinned that the
+    endpoint hands it the id of the artist actually being asked for. Passing a
+    fixed or neighbouring node's id would give one artist's card another
+    artist's clip — this feature's own failure mode, arriving by a different
+    route — and every other test in the suite still passed with that mutation.
+    """
+    store = make_store(
+        names=["Radiohead", "Muse", "Coldplay"],
+        pop_raw=[0.9, 0.7, 0.8],
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (0, 2, 0.3)],
+    )
+    store.deezer_ids = ["111", "222", "333"]
+    urls: list[str] = []
+
+    async def fetch_json(url, params):
+        urls.append(url)
+        return {"data": [{"id": 7, "preview": "clip.mp3", "title": "Song",
+                          "artist": {"name": "Muse", "picture_medium": "c.jpg"}}]}
+
+    resolver = ClipResolver(CFG, InMemoryClipCache(), fetch_json)
+    client = TestClient(create_app(store, ArtistSearch(store, CFG), resolver, CFG))
+
+    assert client.get(f"/api/artists/{store.mbids[1]}/track").status_code == 200
+    assert any("/artist/222/top" in u for u in urls)
+    assert not any("/artist/111/top" in u or "/artist/333/top" in u for u in urls)
+
+
 def test_track_endpoint_serves_no_clip_rather_than_the_wrong_artist():
     """C1, end to end: a title collision must not reach the card."""
     client, store = _client({"any": {"data": [

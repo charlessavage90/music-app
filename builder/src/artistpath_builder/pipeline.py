@@ -33,6 +33,7 @@ from artistpath_builder.graph import (
     symmetrise,
 )
 from artistpath_builder.models import ArtistStats
+from artistpath_builder.deezer_ids import load_deezer_ids
 from artistpath_builder.no_release_drop import load_drop_mbids
 from artistpath_builder.sources.base import SimilaritySource
 from artistpath_builder.sources.listenbrainz import harvest_identities
@@ -313,4 +314,12 @@ def build_from_archive(
         for mbid in keep
     ]
 
-    return build_graph(pruned, stats, source.edge_type)
+    # Deezer artist ids ride along in the metadata blob so the api can resolve a
+    # clip by artist identity rather than by name (`BYP-13` — a card playing a
+    # clip by a different artist of the SAME NAME). Applied unconditionally and
+    # with no config knob: it changes no edge, no score and no node, so there is
+    # nothing for a factor table to hold constant. A frozen snapshot, never a
+    # build-time lookup — deezer_ids.py explains why that is mandatory.
+    return build_graph(
+        pruned, stats, source.edge_type, deezer_ids=load_deezer_ids()
+    )

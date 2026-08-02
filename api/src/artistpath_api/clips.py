@@ -234,7 +234,9 @@ class ClipResolver:
         self._breaker.record_success(source)
         return body
 
-    async def resolve(self, mbid: str, artist_name: str) -> Clip | None:
+    async def resolve(
+        self, mbid: str, artist_name: str, deezer_artist_id: str = ""
+    ) -> Clip | None:
         """Resolve a playable clip, re-signing the URL on every request (C2).
 
         A cached identity costs one lookup. A cold artist costs one search,
@@ -264,7 +266,7 @@ class ClipResolver:
             # The track has left the catalogue. Identity is stable, not
             # permanent, so fall through and find the artist another one.
 
-        found = await self._search(artist_name)
+        found = await self._search(artist_name, deezer_artist_id)
         if found is None:
             return None
         identity, url = found
@@ -292,23 +294,73 @@ class ClipResolver:
                 return row["previewUrl"]
         return None
 
-    async def _search(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
+    async def _search(
+        self, artist_name: str, deezer_artist_id: str = ""
+    ) -> tuple[TrackIdentity, str] | None:
         """Try each catalogue once, skipping any that is refusing us.
 
         Falling through to a DIFFERENT service is not amplification — it is the
         fallback doing its job. Only repeat calls to the service already saying
         no are the defect (G3-A4).
+
+        Identity before name. When MusicBrainz records a Deezer artist id we ask
+        that artist directly, which involves no name matching and so cannot
+        return a different artist of the same name (`BYP-13`). Everything after
+        it is the pre-existing name path, unchanged — an artist with no id, or
+        one whose id yields nothing playable, gets exactly the old behaviour.
         """
-        try:
-            found = await self._from_deezer(artist_name)
-        except CatalogueUnavailable:
-            found = None
-        if found is not None:
-            return found
+        deezer_refused = False
+        if deezer_artist_id:
+            try:
+                found = await self._from_deezer_artist(deezer_artist_id)
+                if found is not None:
+                    return found
+            except CatalogueUnavailable:
+                # Deezer is refusing us. Searching it by name now would be the
+                # same service, twice, for the same artist — G3-A4's defect
+                # rather than its fallback. Skip to iTunes.
+                deezer_refused = True
+
+        if not deezer_refused:
+            try:
+                found = await self._from_deezer(artist_name)
+            except CatalogueUnavailable:
+                found = None
+            if found is not None:
+                return found
         try:
             return await self._from_itunes(artist_name)
         except CatalogueUnavailable:
             return None
+
+    async def _from_deezer_artist(
+        self, deezer_artist_id: str
+    ) -> tuple[TrackIdentity, str] | None:
+        """Top track for a SPECIFIC Deezer artist. No name matching anywhere.
+
+        `same_artist` is deliberately not called: the id already names the
+        artist, and there is nothing to compare a name against that would not
+        re-introduce the defect this exists to remove.
+        """
+        body = await self._get_from(
+            "deezer",
+            f"{self._cfg.deezer_artist_url}/{deezer_artist_id}/top",
+            {"limit": self._cfg.clip_search_limit},
+        )
+        for row in body.get("data", []):
+            preview, track_id = row.get("preview"), row.get("id")
+            if preview and track_id:
+                artist = row.get("artist") or {}
+                return (
+                    TrackIdentity(
+                        source="deezer",
+                        track_id=str(track_id),
+                        title=str(row.get("title") or ""),
+                        cover_url=str(artist.get("picture_medium") or ""),
+                    ),
+                    preview,
+                )
+        return None
 
     async def _from_deezer(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
         body = await self._get_from(

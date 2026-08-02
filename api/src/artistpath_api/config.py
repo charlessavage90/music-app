@@ -104,6 +104,10 @@ class ApiConfig:
     # these on every request, because the URL Deezer signs expires in under
     # an hour while the track it points at does not (C2).
     deezer_track_url: str = "https://api.deezer.com/track"
+    # Top tracks for a SPECIFIC Deezer artist id, used when MusicBrainz records
+    # one. No name matching, so it cannot return a different artist of the same
+    # name (`BYP-13`). Proven by builder/analysis/.../tail_clips.py `id_path`.
+    deezer_artist_url: str = "https://api.deezer.com/artist"
     itunes_lookup_url: str = "https://itunes.apple.com/lookup"
     # "memory" (local dev, default) or "dynamo" (production). Memory means the
     # server boots and serves paths without any AWS configuration.
