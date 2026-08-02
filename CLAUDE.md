@@ -177,7 +177,8 @@ come from user exclusions, never from missing graph structure.
 ### APG1 artifact
 One little-endian binary file: header (`APG1` magic, version, N, E, metadata length) +
 CSR arrays (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob
-(mbids, names, disambiguations, popularity). Loaded once into numpy typed arrays at API
+(mbids, names, disambiguations, popularity, `deezer_ids` — the last may be absent).
+Loaded once into numpy typed arrays at API
 boot; path queries touch no database and no network. `edge_types` is written but unused
 in alpha (all edges behavioural). Versioned in S3 in production — **never a database**.
 
@@ -202,7 +203,7 @@ The **two-signal bypass** shapes the reroll differently per signal:
 
 Hard exclusions skip nodes entirely (but never the two endpoints). The API returns
 artists only; **clips are resolved separately per card** (`GET /api/artists/{mbid}/track`,
-Deezer → iTunes fallback, cached) so the path renders immediately.
+Deezer by recorded artist id → by name → iTunes, cached) so the path renders immediately.
 
 ### Configuration is env-driven, all tunables centralized
 `ApiConfig` / `BuilderConfig` are the *only* place magic numbers live. Key API env vars:

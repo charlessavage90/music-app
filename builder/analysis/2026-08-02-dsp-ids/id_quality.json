@@ -1,0 +1,33 @@
+{
+ "status": "DIAGNOSTIC. Not pre-registered, no bar, licenses nothing, adopts nothing. Recorded output of the one run of id_quality.py, 2026-08-02.",
+ "question": "The id path removes name matching but substitutes MusicBrainz's link accuracy. How good are those links on the artists the app actually delivers?",
+ "why_the_result_is_transcribed_rather_than_written_by_the_script": "id_quality.py printed its result and did not serialise it. The figures are cited in NEXT.md and in PR #65, so they needed a committed home; this file is that home. Re-running is possible but not free: it needs a post-drop verification build (graph-deezerid-verify.bin, gitignored and since deleted, ~7 min to rebuild) and 120 live Deezer calls. The sample seed is fixed (20260802), so a rerun draws the SAME 60 artists.",
+ "population": "interior artists delivered by routing the 120 committed TAS- pairs with production weights, restricted to those carrying a Deezer id",
+ "delivered_interiors_with_an_id": 659,
+ "sampled": 60,
+ "results": {
+  "live_id_serves_a_track_and_replaces_name_search": 59,
+  "dead_no_track_falls_back_to_name_search": 1,
+  "errors": 0
+ },
+ "thin_pages_among_the_live": {
+  "count": 6,
+  "threshold": "fewer than 1000 Deezer followers",
+  "reading": "MOST of these are genuinely obscure artists, for whom a low follower count is expected and says nothing about link quality. The signal does NOT separate 'duplicate page' from 'small artist' on its own -- it needs follower count read against how famous we independently believe the artist to be.",
+  "observed": [
+   {"name": "greyl", "deezer_id": "12422470", "followers": 223, "verdict": "plausibly correct -- genuinely obscure"},
+   {"name": "Bill Charlap", "deezer_id": "242703", "followers": 844, "verdict": "plausibly correct -- genuinely obscure"},
+   {"name": "Boy vs. Bacteria", "deezer_id": "444413", "followers": 367, "verdict": "plausibly correct -- genuinely obscure"},
+   {"name": "Jega", "deezer_id": "309283", "followers": 559, "verdict": "plausibly correct -- genuinely obscure"},
+   {"name": "Of Water", "deezer_id": "60225412", "followers": 28, "verdict": "plausibly correct -- genuinely obscure"},
+   {"name": "Orbital", "deezer_id": "246417562", "followers": 20, "verdict": "DUPLICATE. Orbital is a well-known electronic act; a page with 20 followers is not the real one, and it DOES serve tracks, so here the id path replaces a correct name-search result with a worse one."}
+  ]
+ },
+ "hand_checked_separately": [
+  {"name": "Radiohead", "deezer_id": "323887691", "followers": 473, "albums": 0, "verdict": "DUPLICATE, but FAILS SAFE -- zero albums means no top track, so the resolver falls back to name search."},
+  {"name": "Nirvana", "deezer_id": "415", "followers": 10039782, "albums": 26, "verdict": "correct"},
+  {"name": "The Beatles", "deezer_id": "1", "followers": 8091469, "albums": 46, "verdict": "correct"}
+ ],
+ "conclusion": "The net is clearly positive against the 9.4% / 6.1% wrong-artist rate the id path removes, but it is NOT 'strictly better by construction' -- a claim made on 2026-08-02 before this was measured and withdrawn on the strength of it. The direction of any individual case is not guaranteed.",
+ "targeted_mitigation_if_ever_wanted": "Validate links for the top popularity decile only (~7,400 lookups), where a duplicate is both most detectable (expected follower count is high) and most damaging (those artists are delivered most often). Not done; recorded as a deferral in NEXT.md."
+}

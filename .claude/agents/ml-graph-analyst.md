@@ -33,7 +33,8 @@ belief — including a belief you yourself established earlier.
   measure both and report them separately.
 - **The artifact.** `APG1`, a little-endian binary: header + CSR arrays
   (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob (mbids,
-  names, disambiguations, popularity). Written by `builder/…/artifact.py`, read
+  names, disambiguations, popularity, `deezer_ids` — the last may be absent).
+  Written by `builder/…/artifact.py`, read
   independently by `api/…/graph_store.py`. Graphs live in `builder/scratch/`
   (`graph-75k.bin` and successors; the dev API boots the adopted artifact by default).
 - **The router.** Pure Dijkstra in `api/…/pathfinding.py`, no I/O. Cost per edge:
