@@ -100,3 +100,36 @@ of five criteria did not read clean:**
   regenerations the instrument is frozen upstream; across them, a re-fetch is a new
   instrument.
 - `FAM-3` / `FAM-4` remain unread, pending the identity-confirmation step (`FAM-AM1.4a`).
+
+## §4 — Identity resolution, the FAM-6 draw, and the FAM-3/FAM-4 reads (2026-08-02)
+
+Second Opus task delivered the `FAM-6` sample (15 + 10 alternates, seed 20260802,
+byte-identical across two runs), the owner checklist (audited: no ruler value anywhere;
+strata replaced by opaque group letters so the sheet cannot rank itself — a strengthening
+of the blindness rule), and both identity tables with **zero CANNOT_CONFIRM rows**. The
+"Love" collision resolved three ways, decisively: the resolved MBID appears in run 2's own
+dislike list — it is the node the app itself served. FERG carried forward as excluded per
+the prereg. Snyk over the directory: 0 issues.
+
+**Controller reads (`fi_read34.py`, first place these ruler values were read):**
+
+- **`FAM-3` PASSES 9 of 9** — every common-knowledge famous artist at `fame_lb_pctl`
+  ≥ 0.997. Smoke test only, per `FAM-AM1.5`; licenses nothing about the blind spot.
+- **`FAM-4` FAILS BOTH BARS**: direction agreement 82.35% (28/34) against ≥ 90%, and
+  Spearman 0.4915 against ≥ 0.80. Readability was fine (34 pairs ≥ 10 floor). The
+  single-artist exception does not fire — six failing pairs spread over six artists
+  (Blood Red Shoes in 4, The Human League 2, Porcupine Tree 2, 10cc 2, Quantic 1,
+  Nightmares on Wax 1).
+- **The failure is systematic, not noise, and it is the construct divergence the
+  criterion existed to catch**: every failing pair puts an enthusiast-population act
+  (Porcupine Tree, Blood Red Shoes — modest Spotify numbers, heavily scrobbled) above a
+  casual-mainstream act (10cc, The Human League, Quantic — millions of casual Spotify
+  streamers who do not scrobble). ListenBrainz measures listening among enthusiasts;
+  Spotify monthly listeners measures current mainstream reach; in the famous-to-mid band
+  they genuinely disagree. Consistent with `FPC-6`'s weak LB↔Wikipedia agreement
+  (0.4365 pooled) — three instruments, three orderings, and the hand instrument now
+  measured against LB directly at 0.4915.
+- **Read state under §4's rules: adoption is BLOCKED as of this read.** No amendment was
+  written to soften it. The full verdict awaits `FAM-6` (the owner's tail hand reads,
+  checklist delivered), and the decision about what a failed `FAM-4` means for the
+  currency is the owner's, presented with options in the conversation of record.

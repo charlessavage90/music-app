@@ -1,0 +1,326 @@
+{
+ "governing_document": "docs/superpowers/specs/2026-08-02-fame-instrument-adoption-preregistration.md",
+ "step": "FAM-AM1.4(a) identity confirmation -- runs BEFORE any ruler value for these artists is read",
+ "carries_no_ruler_value": "No fame_lb_raw and no fame_lb_pctl appears here for any artist; this script never opens the snapshot.",
+ "substrate": {
+  "file": "graph-t15-tiebreakfix.bin",
+  "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8"
+ },
+ "musicbrainz_lookups": {
+  "count": 17,
+  "note": "total across BOTH output files -- one shared rate-limited pass at 1 request/second; per-row, `musicbrainz_lookup_fired` says whether this row spent one"
+ },
+ "criterion": "FAM-3 -- top-end sanity (smoke test, FAM-AM1.5)",
+ "hand_read_source": "none -- FAM-3's list is fixed in §3 of the pre-registration and carries no hand-read value",
+ "rows": [
+  {
+   "hand_read_name": "Radiohead",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+   "evidence": "unique exact name match in the adopted artifact. [a74b1b7f-71a5-4011-9441-d0b5e4122711] artifact name 'Radiohead', disambiguation none recorded; strongest similarity neighbours: Queen, Daft Punk, Green Day, Massive Attack, The White Stripes, Beck; MusicBrainz: {'name': 'Radiohead', 'disambiguation': None, 'type': 'Group', 'country': 'GB', 'begin': '1991', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+      "artifact_name": "Radiohead",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Queen",
+       "Daft Punk",
+       "Green Day",
+       "Massive Attack",
+       "The White Stripes",
+       "Beck"
+      ],
+      "musicbrainz": {
+       "name": "Radiohead",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "GB",
+       "begin": "1991",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "The Beatles",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+   "evidence": "unique exact name match in the adopted artifact. [b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d] artifact name 'The Beatles', disambiguation UK rock band, “The Fab Four”; strongest similarity neighbours: Elvis Presley, Queen, Cream, Daft Punk, Jimi Hendrix, Green Day",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+      "artifact_name": "The Beatles",
+      "artifact_disambiguation": "UK rock band, “The Fab Four”",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Elvis Presley",
+       "Queen",
+       "Cream",
+       "Daft Punk",
+       "Jimi Hendrix",
+       "Green Day"
+      ]
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "Metallica",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab",
+   "evidence": "unique exact name match in the adopted artifact. [65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab] artifact name 'Metallica', disambiguation none recorded; strongest similarity neighbours: Queen, Green Day, The White Stripes, Soundgarden, The Offspring, Rage Against the Machine; MusicBrainz: {'name': 'Metallica', 'disambiguation': None, 'type': 'Group', 'country': 'US', 'begin': '1981-10-28', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab",
+      "artifact_name": "Metallica",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Queen",
+       "Green Day",
+       "The White Stripes",
+       "Soundgarden",
+       "The Offspring",
+       "Rage Against the Machine"
+      ],
+      "musicbrainz": {
+       "name": "Metallica",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "US",
+       "begin": "1981-10-28",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Coldplay",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+   "evidence": "unique exact name match in the adopted artifact. [cc197bad-dc9c-440d-a5b5-d52ba2e14234] artifact name 'Coldplay', disambiguation none recorded; strongest similarity neighbours: Death Cab for Cutie, Imagine Dragons, Queen, Daft Punk, Green Day, Maroon 5; MusicBrainz: {'name': 'Coldplay', 'disambiguation': None, 'type': 'Group', 'country': 'GB', 'begin': '1996-09', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+      "artifact_name": "Coldplay",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Death Cab for Cutie",
+       "Imagine Dragons",
+       "Queen",
+       "Daft Punk",
+       "Green Day",
+       "Maroon 5"
+      ],
+      "musicbrainz": {
+       "name": "Coldplay",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "GB",
+       "begin": "1996-09",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Muse",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+   "evidence": "unique exact name match in the adopted artifact. [9c9f1380-2516-4fc9-a3e6-f9f61941d090] artifact name 'Muse', disambiguation UK rock band; strongest similarity neighbours: Imagine Dragons, Queen, Daft Punk, blink‐182, Green Day, The White Stripes",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+      "artifact_name": "Muse",
+      "artifact_disambiguation": "UK rock band",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Imagine Dragons",
+       "Queen",
+       "Daft Punk",
+       "blink‐182",
+       "Green Day",
+       "The White Stripes"
+      ]
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "R.E.M.",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+   "evidence": "unique exact name match in the adopted artifact. [ea4dfa26-f633-4da6-a52a-f49ea4897b58] artifact name 'R.E.M.', disambiguation American rock band; strongest similarity neighbours: Queen, Green Day, The White Stripes, Soundgarden, The Offspring, Beck",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+      "artifact_name": "R.E.M.",
+      "artifact_disambiguation": "American rock band",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Queen",
+       "Green Day",
+       "The White Stripes",
+       "Soundgarden",
+       "The Offspring",
+       "Beck"
+      ]
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "Pixies",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+   "evidence": "unique exact name match in the adopted artifact. [b6b2bb8d-54a9-491f-9607-7b546023b433] artifact name 'Pixies', disambiguation none recorded; strongest similarity neighbours: The White Stripes, The Flaming Lips, Beck, Pavement, Oasis, The Smiths; MusicBrainz: {'name': 'Pixies', 'disambiguation': None, 'type': 'Group', 'country': 'US', 'begin': '1986', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+      "artifact_name": "Pixies",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "The White Stripes",
+       "The Flaming Lips",
+       "Beck",
+       "Pavement",
+       "Oasis",
+       "The Smiths"
+      ],
+      "musicbrainz": {
+       "name": "Pixies",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "US",
+       "begin": "1986",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "PJ Harvey",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "e795e03d-b5d5-4a5f-834d-162cfb308a2c",
+   "evidence": "unique exact name match in the adopted artifact. [e795e03d-b5d5-4a5f-834d-162cfb308a2c] artifact name 'PJ Harvey', disambiguation none recorded; strongest similarity neighbours: Elliott Smith, Cat Power, EELS, Nick Cave & the Bad Seeds, Pavement, Kate Bush; MusicBrainz: {'name': 'PJ Harvey', 'disambiguation': None, 'type': 'Person', 'country': 'GB', 'begin': '1969-10-09', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "e795e03d-b5d5-4a5f-834d-162cfb308a2c",
+      "artifact_name": "PJ Harvey",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Elliott Smith",
+       "Cat Power",
+       "EELS",
+       "Nick Cave & the Bad Seeds",
+       "Pavement",
+       "Kate Bush"
+      ],
+      "musicbrainz": {
+       "name": "PJ Harvey",
+       "disambiguation": null,
+       "type": "Person",
+       "country": "GB",
+       "begin": "1969-10-09",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Pink Floyd",
+   "hand_read_value_as_recorded": null,
+   "flagged_suspect_by_findings_doc": false,
+   "resolved_mbid": "83d91898-7763-47d7-b03b-b92132375c47",
+   "evidence": "unique exact name match in the adopted artifact. [83d91898-7763-47d7-b03b-b92132375c47] artifact name 'Pink Floyd', disambiguation none recorded; strongest similarity neighbours: Queen, Cream, Daft Punk, Jimi Hendrix, Green Day, Creedence Clearwater Revival; MusicBrainz: {'name': 'Pink Floyd', 'disambiguation': None, 'type': 'Group', 'country': 'GB', 'begin': '1965', 'end': '2014'}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "83d91898-7763-47d7-b03b-b92132375c47",
+      "artifact_name": "Pink Floyd",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Queen",
+       "Cream",
+       "Daft Punk",
+       "Jimi Hendrix",
+       "Green Day",
+       "Creedence Clearwater Revival"
+      ],
+      "musicbrainz": {
+       "name": "Pink Floyd",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "GB",
+       "begin": "1965",
+       "end": "2014"
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  }
+ ]
+}

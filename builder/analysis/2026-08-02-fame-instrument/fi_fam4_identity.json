@@ -1,0 +1,696 @@
+{
+ "governing_document": "docs/superpowers/specs/2026-08-02-fame-instrument-adoption-preregistration.md",
+ "step": "FAM-AM1.4(a) identity confirmation -- runs BEFORE any ruler value for these artists is read",
+ "carries_no_ruler_value": "No fame_lb_raw and no fame_lb_pctl appears here for any artist; this script never opens the snapshot.",
+ "substrate": {
+  "file": "graph-t15-tiebreakfix.bin",
+  "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8"
+ },
+ "musicbrainz_lookups": {
+  "count": 17,
+  "note": "total across BOTH output files -- one shared rate-limited pass at 1 request/second; per-row, `musicbrainz_lookup_fired` says whether this row spent one"
+ },
+ "criterion": "FAM-4 -- hand-read concordance (load-bearing)",
+ "hand_read_source": "docs/superpowers/findings/2026-07-25-bypass-depth-use-run.md §2 (BYP-1, run 1) and §3 (BYP-10, run 2); values transcribed as the strings that document records",
+ "exclusion_list_source": "§10 reproducible-state URLs, parsed from the document rather than retyped; a key is netloc:param:count",
+ "rows": [
+  {
+   "hand_read_name": "Lykke Li",
+   "hand_read_value_as_recorded": "15M",
+   "source_run": 1,
+   "source_press": 29,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "cc7d4686-ea02-45fd-956e-94c1a322558c",
+   "evidence": "unique exact name match in the adopted artifact. [cc7d4686-ea02-45fd-956e-94c1a322558c] artifact name 'Lykke Li', disambiguation none recorded; strongest similarity neighbours: Bat for Lashes, St. Vincent, Florence + the Machine, M.I.A., Grimes, Santigold; not present in any run exclusion list; MusicBrainz: {'name': 'Lykke Li', 'disambiguation': None, 'type': 'Person', 'country': 'SE', 'begin': '1986-03-18', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "cc7d4686-ea02-45fd-956e-94c1a322558c",
+      "artifact_name": "Lykke Li",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Bat for Lashes",
+       "St. Vincent",
+       "Florence + the Machine",
+       "M.I.A.",
+       "Grimes",
+       "Santigold"
+      ],
+      "in_bypass_exclusion_lists": [],
+      "musicbrainz": {
+       "name": "Lykke Li",
+       "disambiguation": null,
+       "type": "Person",
+       "country": "SE",
+       "begin": "1986-03-18",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "The Human League",
+   "hand_read_value_as_recorded": "6M",
+   "source_run": 1,
+   "source_press": 35,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "7adaabfb-acfb-47bc-8c7c-59471c2f0db8",
+   "evidence": "unique exact name match in the adopted artifact. [7adaabfb-acfb-47bc-8c7c-59471c2f0db8] artifact name 'The Human League', disambiguation none recorded; strongest similarity neighbours: Duran Duran, Men at Work, Yazoo, Erasure, Gary Numan, Orchestral Manoeuvres in the Dark; not present in any run exclusion list; MusicBrainz: {'name': 'The Human League', 'disambiguation': None, 'type': 'Group', 'country': 'GB', 'begin': '1977', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "7adaabfb-acfb-47bc-8c7c-59471c2f0db8",
+      "artifact_name": "The Human League",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Duran Duran",
+       "Men at Work",
+       "Yazoo",
+       "Erasure",
+       "Gary Numan",
+       "Orchestral Manoeuvres in the Dark"
+      ],
+      "in_bypass_exclusion_lists": [],
+      "musicbrainz": {
+       "name": "The Human League",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "GB",
+       "begin": "1977",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "NOFX",
+   "hand_read_value_as_recorded": "1M",
+   "source_run": 1,
+   "source_press": 37,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": "also unfamiliar in run 2 at press 60; the document records the same 1M figure in both tables, one artist, one read",
+   "resolved_mbid": "dcaa4f81-bfb7-44eb-8594-4e74f004b6e4",
+   "evidence": "unique exact name match in the adopted artifact. [dcaa4f81-bfb7-44eb-8594-4e74f004b6e4] artifact name 'NOFX', disambiguation none recorded; strongest similarity neighbours: Bad Religion, AFI, Rancid, The Bouncing Souls, Pennywise, Rise Against; appears in the run exclusion lists at localhost:5174:dislike:100#69, localhost:5173:dislike:6#5, localhost:5173:dislike:26#5; MusicBrainz: {'name': 'NOFX', 'disambiguation': None, 'type': 'Group', 'country': 'US', 'begin': '1983', 'end': '2024'}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "dcaa4f81-bfb7-44eb-8594-4e74f004b6e4",
+      "artifact_name": "NOFX",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Bad Religion",
+       "AFI",
+       "Rancid",
+       "The Bouncing Souls",
+       "Pennywise",
+       "Rise Against"
+      ],
+      "in_bypass_exclusion_lists": [
+       "localhost:5174:dislike:100#69",
+       "localhost:5173:dislike:6#5",
+       "localhost:5173:dislike:26#5"
+      ],
+      "musicbrainz": {
+       "name": "NOFX",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "US",
+       "begin": "1983",
+       "end": "2024"
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Porcupine Tree",
+   "hand_read_value_as_recorded": "500k",
+   "source_run": 1,
+   "source_press": 59,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "169c4c28-858e-497b-81a4-8bc15e0026ea",
+   "evidence": "unique exact name match in the adopted artifact. [169c4c28-858e-497b-81a4-8bc15e0026ea] artifact name 'Porcupine Tree', disambiguation none recorded; strongest similarity neighbours: A Perfect Circle, Anathema, Dream Theater, Steven Wilson, Tool, Blackfield; appears in the run exclusion lists at localhost:5174:dislike:100#99, localhost:5173:dislike:26#9; MusicBrainz: {'name': 'Porcupine Tree', 'disambiguation': None, 'type': 'Group', 'country': 'GB', 'begin': '1987', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "169c4c28-858e-497b-81a4-8bc15e0026ea",
+      "artifact_name": "Porcupine Tree",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "A Perfect Circle",
+       "Anathema",
+       "Dream Theater",
+       "Steven Wilson",
+       "Tool",
+       "Blackfield"
+      ],
+      "in_bypass_exclusion_lists": [
+       "localhost:5174:dislike:100#99",
+       "localhost:5173:dislike:26#9"
+      ],
+      "musicbrainz": {
+       "name": "Porcupine Tree",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "GB",
+       "begin": "1987",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Television",
+   "hand_read_value_as_recorded": "372k",
+   "source_run": 1,
+   "source_press": 83,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": "run 1's floor figure (BYP-3)",
+   "resolved_mbid": "490bde43-5edb-4a93-b3b3-7a0465fd8909",
+   "evidence": "unique exact name match in the adopted artifact. [490bde43-5edb-4a93-b3b3-7a0465fd8909] artifact name 'Television', disambiguation none recorded; strongest similarity neighbours: Wire, Gang of Four, The Stooges, The Modern Lovers, DEVO, The Fall; not present in any run exclusion list; MusicBrainz: {'name': 'Television', 'disambiguation': None, 'type': 'Group', 'country': 'US', 'begin': '1973', 'end': '2023'}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "490bde43-5edb-4a93-b3b3-7a0465fd8909",
+      "artifact_name": "Television",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Wire",
+       "Gang of Four",
+       "The Stooges",
+       "The Modern Lovers",
+       "DEVO",
+       "The Fall"
+      ],
+      "in_bypass_exclusion_lists": [],
+      "musicbrainz": {
+       "name": "Television",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "US",
+       "begin": "1973",
+       "end": "2023"
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Boards of Canada",
+   "hand_read_value_as_recorded": "1M",
+   "source_run": 1,
+   "source_press": 84,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "69158f97-4c07-4c4e-baf8-4e4ab1ed666e",
+   "evidence": "unique exact name match in the adopted artifact. [69158f97-4c07-4c4e-baf8-4e4ab1ed666e] artifact name 'Boards of Canada', disambiguation Scottish electronic duo; strongest similarity neighbours: Jon Hopkins, Massive Attack, The Chemical Brothers, RJD2, Röyksopp, Ulrich Schnauss; appears in the run exclusion lists at localhost:5173:dislike:26#19",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "69158f97-4c07-4c4e-baf8-4e4ab1ed666e",
+      "artifact_name": "Boards of Canada",
+      "artifact_disambiguation": "Scottish electronic duo",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Jon Hopkins",
+       "Massive Attack",
+       "The Chemical Brothers",
+       "RJD2",
+       "Röyksopp",
+       "Ulrich Schnauss"
+      ],
+      "in_bypass_exclusion_lists": [
+       "localhost:5173:dislike:26#19"
+      ]
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "Beach House",
+   "hand_read_value_as_recorded": "14.8M",
+   "source_run": 1,
+   "source_press": 98,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "d5cc67b8-1cc4-453b-96e8-44487acdebea",
+   "evidence": "unique exact name match in the adopted artifact. [d5cc67b8-1cc4-453b-96e8-44487acdebea] artifact name 'Beach House', disambiguation none recorded; strongest similarity neighbours: Cocteau Twins, Sufjan Stevens, Beirut, Animal Collective, Local Natives, LCD Soundsystem; appears in the run exclusion lists at localhost:5173:dislike:26#25; MusicBrainz: {'name': 'Beach House', 'disambiguation': None, 'type': 'Group', 'country': 'US', 'begin': '2004', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "d5cc67b8-1cc4-453b-96e8-44487acdebea",
+      "artifact_name": "Beach House",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Cocteau Twins",
+       "Sufjan Stevens",
+       "Beirut",
+       "Animal Collective",
+       "Local Natives",
+       "LCD Soundsystem"
+      ],
+      "in_bypass_exclusion_lists": [
+       "localhost:5173:dislike:26#25"
+      ],
+      "musicbrainz": {
+       "name": "Beach House",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "US",
+       "begin": "2004",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "New Order",
+   "hand_read_value_as_recorded": "8.8M",
+   "source_run": 2,
+   "source_press": 41,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "f1106b17-dcbb-45f6-b938-199ccfab50cc",
+   "evidence": "unique exact name match in the adopted artifact. [f1106b17-dcbb-45f6-b938-199ccfab50cc] artifact name 'New Order', disambiguation UK synth pop band; strongest similarity neighbours: Cocteau Twins, Morrissey, Duran Duran, The Smiths, INXS, David Bowie; appears in the run exclusion lists at localhost:5174:dislike:100#41",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "f1106b17-dcbb-45f6-b938-199ccfab50cc",
+      "artifact_name": "New Order",
+      "artifact_disambiguation": "UK synth pop band",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Cocteau Twins",
+       "Morrissey",
+       "Duran Duran",
+       "The Smiths",
+       "INXS",
+       "David Bowie"
+      ],
+      "in_bypass_exclusion_lists": [
+       "localhost:5174:dislike:100#41"
+      ]
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "Love",
+   "hand_read_value_as_recorded": "571k",
+   "source_run": 2,
+   "source_press": 65,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": "no clip resolved (BYP-12); a generic name, and the record holds a name-search for \"Love\" returning Sean Combs (FAM-AM1.4a)",
+   "resolved_mbid": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47",
+   "evidence": "unique exact name match in the adopted artifact. [34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47] artifact name 'Love', disambiguation folk-rock/psychedelic band; strongest similarity neighbours: The Byrds, The Zombies, 13th Floor Elevators, Donovan, The Yardbirds, Captain Beefheart & His Magic Band; appears in the run exclusion lists at localhost:5174:dislike:100#96; MusicBrainz: {'name': 'Love', 'disambiguation': 'folk-rock/psychedelic band', 'type': 'Group', 'country': 'US', 'begin': '1965', 'end': '2005'} near-name collisions under normalisation, recorded and NOT resolved to: '=LOVE' (Japanese idol group)",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 2,
+    "candidates": [
+     {
+      "mbid": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47",
+      "artifact_name": "Love",
+      "artifact_disambiguation": "folk-rock/psychedelic band",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "The Byrds",
+       "The Zombies",
+       "13th Floor Elevators",
+       "Donovan",
+       "The Yardbirds",
+       "Captain Beefheart & His Magic Band"
+      ],
+      "in_bypass_exclusion_lists": [
+       "localhost:5174:dislike:100#96"
+      ],
+      "musicbrainz": {
+       "name": "Love",
+       "disambiguation": "folk-rock/psychedelic band",
+       "type": "Group",
+       "country": "US",
+       "begin": "1965",
+       "end": "2005"
+      }
+     },
+     {
+      "mbid": "28abfefb-cceb-4605-8330-a53b6d161403",
+      "artifact_name": "=LOVE",
+      "artifact_disambiguation": "Japanese idol group",
+      "exact_name_match": false,
+      "top_neighbours": [
+       "櫻坂46",
+       "HKT48",
+       "STU48",
+       "NMB48",
+       "日向坂46",
+       "SKE48"
+      ],
+      "in_bypass_exclusion_lists": [],
+      "musicbrainz": {
+       "name": "=LOVE",
+       "disambiguation": "Japanese idol group",
+       "type": "Group",
+       "country": "JP",
+       "begin": "2017-04-29",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Captain Beefheart & His Magic Band",
+   "hand_read_value_as_recorded": "235k",
+   "source_run": 2,
+   "source_press": 65,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "8dcd04e4-7695-4d80-bae9-1d7d680a38ef",
+   "evidence": "unique exact name match in the adopted artifact. [8dcd04e4-7695-4d80-bae9-1d7d680a38ef] artifact name 'Captain Beefheart & His Magic Band', disambiguation none recorded; strongest similarity neighbours: Frank Zappa, Can, Love, 13th Floor Elevators, The Fall, John Cale; not present in any run exclusion list; MusicBrainz: {'name': 'Captain Beefheart & His Magic Band', 'disambiguation': None, 'type': 'Group', 'country': 'US', 'begin': '1965-01-15', 'end': '1982-12-17'}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "8dcd04e4-7695-4d80-bae9-1d7d680a38ef",
+      "artifact_name": "Captain Beefheart & His Magic Band",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Frank Zappa",
+       "Can",
+       "Love",
+       "13th Floor Elevators",
+       "The Fall",
+       "John Cale"
+      ],
+      "in_bypass_exclusion_lists": [],
+      "musicbrainz": {
+       "name": "Captain Beefheart & His Magic Band",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "US",
+       "begin": "1965-01-15",
+       "end": "1982-12-17"
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "FERG",
+   "hand_read_value_as_recorded": "23",
+   "source_run": 2,
+   "source_press": 89,
+   "flagged_suspect_by_findings_doc": true,
+   "flag_reason": "BYP-13: the document marks this row NOT a discovery. The graph node is A$AP Ferg; the hand read is an unrelated Spotify artist of the same name. FAM-4 excludes the FERG/A$AP Ferg class by name (§3).",
+   "excluded_from_FAM_4_by_prereg": true,
+   "note": null,
+   "resolved_mbid": "8ab5d936-49d1-415e-92c8-151e0e7dd912",
+   "evidence": "unique exact name match in the adopted artifact. [8ab5d936-49d1-415e-92c8-151e0e7dd912] artifact name 'FERG', disambiguation fka A$AP Ferg; strongest similarity neighbours: A$AP Rocky, Future, Childish Gambino, J. Cole, Lil Uzi Vert, Big Sean; not present in any run exclusion list",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "8ab5d936-49d1-415e-92c8-151e0e7dd912",
+      "artifact_name": "FERG",
+      "artifact_disambiguation": "fka A$AP Ferg",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "A$AP Rocky",
+       "Future",
+       "Childish Gambino",
+       "J. Cole",
+       "Lil Uzi Vert",
+       "Big Sean"
+      ],
+      "in_bypass_exclusion_lists": []
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "10cc",
+   "hand_read_value_as_recorded": "6.7M",
+   "source_run": 2,
+   "source_press": 91,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "f37c537b-3557-4031-bfd6-ab63ced32854",
+   "evidence": "unique exact name match in the adopted artifact. [f37c537b-3557-4031-bfd6-ab63ced32854] artifact name '10cc', disambiguation none recorded; strongest similarity neighbours: The Jacksons, Elvin Bishop, Norman Greenbaum, Blue Swede, The Runaways, Raspberries; not present in any run exclusion list; MusicBrainz: {'name': '10cc', 'disambiguation': None, 'type': 'Group', 'country': 'GB', 'begin': '1972', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "f37c537b-3557-4031-bfd6-ab63ced32854",
+      "artifact_name": "10cc",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "The Jacksons",
+       "Elvin Bishop",
+       "Norman Greenbaum",
+       "Blue Swede",
+       "The Runaways",
+       "Raspberries"
+      ],
+      "in_bypass_exclusion_lists": [],
+      "musicbrainz": {
+       "name": "10cc",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "GB",
+       "begin": "1972",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  },
+  {
+   "hand_read_name": "Blood Red Shoes",
+   "hand_read_value_as_recorded": "168k",
+   "source_run": 2,
+   "source_press": 93,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": "run 2's floor figure (BYP-3, BYP-10)",
+   "resolved_mbid": "cd830a8f-89d2-4e96-96cb-7a497e51d437",
+   "evidence": "unique exact name match in the adopted artifact. [cd830a8f-89d2-4e96-96cb-7a497e51d437] artifact name 'Blood Red Shoes', disambiguation English alternative rock duo; strongest similarity neighbours: Sex Bob‐Omb, Black Lips, Plumtree, Crash and the Boys, Band of Skulls, Frank Black; not present in any run exclusion list",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "cd830a8f-89d2-4e96-96cb-7a497e51d437",
+      "artifact_name": "Blood Red Shoes",
+      "artifact_disambiguation": "English alternative rock duo",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Sex Bob‐Omb",
+       "Black Lips",
+       "Plumtree",
+       "Crash and the Boys",
+       "Band of Skulls",
+       "Frank Black"
+      ],
+      "in_bypass_exclusion_lists": []
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "Black Rebel Motorcycle Club",
+   "hand_read_value_as_recorded": "716k",
+   "source_run": 2,
+   "source_press": 93,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "32b90c92-9978-4a07-90eb-caa4b22f4907",
+   "evidence": "unique exact name match in the adopted artifact. [32b90c92-9978-4a07-90eb-caa4b22f4907] artifact name 'Black Rebel Motorcycle Club', disambiguation US rock band from San Francisco; strongest similarity neighbours: The Kills, The Hives, The Dandy Warhols, The Raconteurs, Wolfmother, The Vines; not present in any run exclusion list",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "32b90c92-9978-4a07-90eb-caa4b22f4907",
+      "artifact_name": "Black Rebel Motorcycle Club",
+      "artifact_disambiguation": "US rock band from San Francisco",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "The Kills",
+       "The Hives",
+       "The Dandy Warhols",
+       "The Raconteurs",
+       "Wolfmother",
+       "The Vines"
+      ],
+      "in_bypass_exclusion_lists": []
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "Quantic",
+   "hand_read_value_as_recorded": "2.3M",
+   "source_run": 2,
+   "source_press": 100,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "f1560407-8826-4ec9-b78f-e0c3fa3ea4f5",
+   "evidence": "unique exact name match in the adopted artifact. [f1560407-8826-4ec9-b78f-e0c3fa3ea4f5] artifact name 'Quantic', disambiguation William Holland; strongest similarity neighbours: Mr. Scruff, Bonobo, Thievery Corporation, Nightmares on Wax, Zero 7, Emancipator; not present in any run exclusion list",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "f1560407-8826-4ec9-b78f-e0c3fa3ea4f5",
+      "artifact_name": "Quantic",
+      "artifact_disambiguation": "William Holland",
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Mr. Scruff",
+       "Bonobo",
+       "Thievery Corporation",
+       "Nightmares on Wax",
+       "Zero 7",
+       "Emancipator"
+      ],
+      "in_bypass_exclusion_lists": []
+     }
+    ],
+    "musicbrainz_lookup_fired": false,
+    "musicbrainz_lookup_rule": "not fired: exactly one artifact artist, and it carries a disambiguation string"
+   }
+  },
+  {
+   "hand_read_name": "Nightmares on Wax",
+   "hand_read_value_as_recorded": "1.7M",
+   "source_run": 2,
+   "source_press": 100,
+   "flagged_suspect_by_findings_doc": false,
+   "flag_reason": null,
+   "excluded_from_FAM_4_by_prereg": false,
+   "note": null,
+   "resolved_mbid": "b8c5cc4f-239f-4e02-b46f-b040b77c2030",
+   "evidence": "unique exact name match in the adopted artifact. [b8c5cc4f-239f-4e02-b46f-b040b77c2030] artifact name 'Nightmares on Wax', disambiguation none recorded; strongest similarity neighbours: Morcheeba, Lamb, Massive Attack, RJD2, Röyksopp, Mr. Scruff; not present in any run exclusion list; MusicBrainz: {'name': 'Nightmares on Wax', 'disambiguation': None, 'type': 'Group', 'country': 'GB', 'begin': '1988', 'end': None}",
+   "detail": {
+    "artifact_exact_name_matches": 1,
+    "artifact_normalised_name_matches": 1,
+    "candidates": [
+     {
+      "mbid": "b8c5cc4f-239f-4e02-b46f-b040b77c2030",
+      "artifact_name": "Nightmares on Wax",
+      "artifact_disambiguation": null,
+      "exact_name_match": true,
+      "top_neighbours": [
+       "Morcheeba",
+       "Lamb",
+       "Massive Attack",
+       "RJD2",
+       "Röyksopp",
+       "Mr. Scruff"
+      ],
+      "in_bypass_exclusion_lists": [],
+      "musicbrainz": {
+       "name": "Nightmares on Wax",
+       "disambiguation": null,
+       "type": "Group",
+       "country": "GB",
+       "begin": "1988",
+       "end": null
+      }
+     }
+    ],
+    "musicbrainz_lookup_fired": true,
+    "musicbrainz_lookup_rule": "fired: no disambiguation recorded in the artifact, or >1 artifact artist shares the normalised name"
+   }
+  }
+ ]
+}
