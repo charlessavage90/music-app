@@ -59,3 +59,44 @@ is the pattern `TAS-AM3` had to carry a permanent disclosure for.
 **Snyk:** owed for the new `fi_*` scripts when they land; the two probes take no CLI
 argument, the class every prior no-CLI analysis module contributed zero findings in.
 Scan result to be recorded here when run.
+
+## §3 — Union fetch and mechanical criteria (2026-08-02, Opus subagent + controller reads)
+
+Task report honoured its brief in full: both source artifacts sha-verified before the
+first request, union exactly 93,067, 94 requests with no retries, blindness rule held
+(no named artist's value surfaced anywhere; `FAM-3`/`FAM-4` untouched). Snapshot
+`fi_union_snapshot.json` sha256 `d9d6d5d3…`, manifest sidecar committed. **Snyk scan over
+the new scripts: 0 issues** (run by the subagent; discharges the §2 note). Figures live
+in `fi_validation.json` — cited here, never restated, except where a read requires the
+number on the page.
+
+**Controller reads against the committed bars — the reads are the controller's, and two
+of five criteria did not read clean:**
+
+- **`FAM-1` FAILS as written**: union coverage 95.580% against the ≥ 99.0% bar. The
+  exposure map (computed before escalating, from three on-disk files): **86.8% of the
+  4,114 nulls sit on the two frozen drop lists** — artists no build can deliver. On the
+  deliverable union (minus both lists, 80,642 artists) coverage is **99.329%**, above the
+  bar. The choice between standing on the committed bar and re-scoping the population by
+  amendment is **the owner's** — a post-result bar change is the one move a session never
+  makes alone. Escalated with both numbers and a labelled recommendation.
+- **`FAM-2`: adopted frame passes with ~3.4× margin** (step 0.00147 vs ≤ 0.005; top-5
+  lower-half atoms 1.35% vs ≤ 2%). **The `ALG-B`-only remainder splits by denominator**,
+  an ambiguity the executor flagged rather than resolved: mapped-percentile steps pass
+  (max gap 0.0020), but own-population atom shares exceed the bars (largest atom 1.56%
+  as fetched / 1.03% deliverable; top-5 lower-half 6.74% / 4.83%). Substantive meaning:
+  candidate-only artists clump at 1–5 listeners, so *within-remainder* ordering at the
+  dead end is coarse. The gradient is read in adopted-frame percentiles and does not
+  consume within-remainder ordering — but the reading choice is disclosed, not silently
+  taken, and the limitation is named in the escalation.
+- **`FAM-5`: bars pass and the result is POWERLESS — recorded the `TAS-6`-vacuous way,
+  never citable as stability evidence.** Every overlapping value is byte-identical across
+  the two fetch dates; the executor treated that as a probable bug in its own work and
+  refuted that with a live 12-MBID re-fetch reproducing both files. The endpoint served
+  the same aggregate table on 2026-07-30 and 2026-08-02 (a batch-regenerated upstream
+  table), so the criterion measured zero elapsed table versions and cannot separate
+  "stable" from "same table twice". It *does* rule out fetch nondeterminism. The upstream
+  batch-table property strengthens `FAM-AM1.7`'s snapshot-identity rule: between
+  regenerations the instrument is frozen upstream; across them, a re-fetch is a new
+  instrument.
+- `FAM-3` / `FAM-4` remain unread, pending the identity-confirmation step (`FAM-AM1.4a`).
