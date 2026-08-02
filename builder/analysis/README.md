@@ -26,6 +26,45 @@ would duplicate figures, which is the one rule `docs/README.md` puts above the o
 Its F2/F3/F8/F9 fixes landed in the harness next door; F1 and F4–F11 are recorded as
 amendments **A17–A19**.
 
+## The second drift: the pipeline gained a stage (2026-08-02)
+
+The rename below is one way frozen scripts and shipped code can come to mean
+different things. Here is the other, and it is quieter, because **nothing
+breaks**: `build_from_archive` gained the no-release-tail drop (owner decision
+2026-08-01, wired 2026-08-02), and the scripts here did not.
+
+**Two classes are affected, and they need opposite treatment.**
+
+*Mirrors* — these restate the pipeline's stage order so they can inject a
+different step:
+
+- `2026-07-30-track-b-cap-selection/cb_build_variants.py` (Track B's whole grid)
+- `2026-07-22-cap-ranking-replay/replay.py`
+- `2026-07-25-mutual-knn-stranding/reciprocity.py`
+
+**They were deliberately NOT updated.** A mirror's value is that it reproduces
+its committed cells byte for byte; adding the drop would destroy exactly that.
+**Read every graph they built as pre-drop.** A post-drop comparison needs a new
+harness, never an edit to one of these.
+
+*Callers* — these invoke `build_from_archive` directly, so a changed default
+silently changes what they build:
+
+- `2026-07-29-algb-trial-build/grt_score.py`
+- `2026-07-29-trial-crawl-calibration/calibrate.py`
+
+Both are now **era-pinned** with `drop_no_release_tail=False`, so a re-run still
+reproduces the figures they committed. That pin is why the drop is a config flag
+rather than an unconditional step.
+
+**Track B's own identity gate cannot catch this class**, and did not. It pins
+`_assemble` against the shas it produced in July — faithful *reproduction*,
+which is not the same as *fidelity* to a live build. The guard that would catch
+it is `builder/tests/test_pipeline_mirrors.py`, which fails when `BuilderConfig`
+gains a field and names every script above. It catches a build rule arriving as
+a config knob, which is the usual shape; a stage added with no knob still needs
+a human.
+
 ## Why this file exists
 
 On 2026-07-23 the shipped quantities were renamed so that **every popularity-
