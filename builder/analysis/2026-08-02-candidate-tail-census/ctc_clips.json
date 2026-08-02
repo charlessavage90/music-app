@@ -1,0 +1,7499 @@
+{
+ "status": "DIAGNOSTIC plus a list. Applies the rule frozen 2026-08-01 to the candidate population. Adopts nothing.",
+ "snapshot": "2026-08-02. Never re-resolve at build time (spec \u00a79).",
+ "scope": {
+  "candidate_tail": 9987,
+  "already_decided_by_the_2026_08_01_list": 3003,
+  "new": 6984,
+  "dsp_linked_and_checked": 491,
+  "cut_without_a_lookup": 6493
+ },
+ "clips": {
+  "resolved": 195,
+  "did_not_resolve": 296,
+  "refused_service_declined_not_a_miss": 0
+ },
+ "byp13_wrong_artist_rate": 0.0612,
+ "byp13_denominator": 49,
+ "verdict_new_artists_only": {
+  "drop": 6789,
+  "keep": 195
+ },
+ "platforms": {
+  "spotify": 408,
+  "tidal": 200,
+  "deezer": 103,
+  "apple": 100
+ },
+ "per_artist": {
+  "00a1ef75-9b4e-4123-8fff-d24022f906e0": {
+   "name": "Simon Delaney",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "01373b0b-59aa-4fe2-89dc-c3e82958946a": {
+   "name": "\u65b0\u4e95\u548c\u8f1d",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "014a9dc6-3937-42f5-924e-54b2ab4c02c9": {
+   "name": "Ronnie Zito",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "01a79248-e814-4ab5-bf35-53c518d28a6b": {
+   "name": "Calladine",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Clear Blue Sky (Blank & Jones Remix)"
+   },
+   "mb_deezer_id": "6149050"
+  },
+  "01d3102e-7594-477c-b94c-c05544bc8051": {
+   "name": "Jason \u201cJT\u201d Thomas",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0215cd8f-e064-46eb-a495-860bc61d4cb8": {
+   "name": "Thor",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Keep the Dogs Away"
+   },
+   "mb_deezer_id": "60299"
+  },
+  "031dd739-83a3-49a7-beb9-638e6b9ac7f6": {
+   "name": "LaRue",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "031e4d2b-2544-4b50-a5dd-1eb0ac08ddc6": {
+   "name": "Big Lean",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1393679",
+    "matched_artist_name": "Big lean",
+    "refused": [],
+    "track": "Never Saw Me"
+   }
+  },
+  "035bc391-d7dd-4a68-8321-fa1e02697fc8": {
+   "name": "Rick Nowels",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0365d54d-b34c-479c-b83d-119531c7e74e": {
+   "name": "Lola Fair",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Lola Fair",
+    "refused": [],
+    "track": "Human Inside (Human Inside)"
+   }
+  },
+  "037ed0db-021b-4bab-a7c0-ad0c8eabb52f": {
+   "name": "Bxentric",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1515766",
+    "matched_artist_name": "Bxentric",
+    "refused": [],
+    "track": "Foolishness (Vocodub Mix)"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "1515766"
+  },
+  "041d9ec8-ceaf-4602-9337-ecc61b534d25": {
+   "name": "Dalschaert",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "54637",
+    "matched_artist_name": "Dalschaert",
+    "refused": [],
+    "track": "Surface Lisse"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "54637"
+  },
+  "04725e2b-d010-4f18-9edb-b54f2d073c99": {
+   "name": "Richard Sjunnesson",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "053aa8e7-551f-497a-8fb2-adec36ac4aa5": {
+   "name": "Noa Gruman",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "05a7a7f0-8d92-4c2c-8305-c010e2a164d2": {
+   "name": "Adrien Grousset",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "05cdb69d-b42b-46f0-b4c7-cb28a34ca637": {
+   "name": "\u7dbf\u98f4",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "118022512",
+    "matched_artist_name": "\u7dbf\u98f4",
+    "refused": [],
+    "track": "\u30da\u30a4\u30f3\u30fb\u30b3\u30f3\u30c8\u30ed\u30fc\u30eb feat.IA"
+   }
+  },
+  "064fc21c-69c5-48f0-8c0e-cb4bedec6fce": {
+   "name": "Xixi",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4720719",
+    "matched_artist_name": "XIXI",
+    "refused": [],
+    "track": "Lost Thoughts"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Silent Symphony"
+   },
+   "mb_deezer_id": "4720719"
+  },
+  "06665d74-6477-4edc-9610-106af7f3a975": {
+   "name": "Zack Mykula",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "9847474"
+  },
+  "06bdb5e7-03f8-4e8e-9a77-2a2c94adaa1f": {
+   "name": "May Claire La Plante",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "07589fb1-c5d9-46b4-b98a-8dfdc27ef878": {
+   "name": "Bob Power",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "08e1c0a6-fbba-45c3-9ed1-4e1de942f57c": {
+   "name": "\u00c9ric Poncet",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "10842890"
+  },
+  "090c19bf-d814-4736-a232-1b1de1eb50ab": {
+   "name": "Clay",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "82066",
+    "matched_artist_name": "Clay",
+    "refused": [],
+    "track": "WTSGD"
+   }
+  },
+  "0b12f17b-b8b5-4c94-abdf-c1a74016835c": {
+   "name": "Angelique Bergere",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "5131886"
+  },
+  "0b66fdd8-8548-48c6-a556-c8f93642e5fe": {
+   "name": "Sigrid Hausen",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "7657838",
+    "matched_artist_name": "Sigrid Hausen",
+    "refused": [],
+    "track": "Nu alrest leb ich mir werde, \"Palastinalied\""
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Nu alrest leb ich mir werde, \"Palastinalied\""
+   },
+   "mb_deezer_id": "7657838"
+  },
+  "0bc7de43-c73e-4310-8111-1ce60ae1aad3": {
+   "name": "\uae40\uc900\uc131",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0c7ba06d-8af0-4b97-845d-80889b8f54be": {
+   "name": "Charlotte Colley",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0cb722bd-012c-4fd5-bd5c-ee2093cd941c": {
+   "name": "Lukas Magyar",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0ccf6e3f-f482-4b33-9a98-cb920f3899b6": {
+   "name": "Dmitry V. Silantyev",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "146565352",
+    "matched_artist_name": "Dmitry V. Silantyev",
+    "refused": [],
+    "track": "Wrath of the Righteous Main Theme"
+   }
+  },
+  "0d1585f9-465b-4681-acbd-968a47d0f6ed": {
+   "name": "Linh Le",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Linh Le",
+    "refused": [],
+    "track": "B\u01b0\u1edbc Th\u00eam L\u00e0 Kh\u00f4ng Th\u1ec3 (Beat)"
+   }
+  },
+  "0d61f353-239f-4605-b2e6-edeca44b3195": {
+   "name": "Samantha Bynes",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0e115e0b-8ba9-4a10-9202-ce53e7cda84e": {
+   "name": "Anna Karney",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Anna Karney",
+    "refused": [],
+    "track": "Urban Underground"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Urban Underground"
+   },
+   "mb_deezer_id": "1571448"
+  },
+  "0e1b5d00-3fb0-4fe4-8271-13af7a2080e4": {
+   "name": "Elon Battle",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0e48d6a9-7a38-42ae-9356-65ad8b6e977d": {
+   "name": "Samuel Fogarino",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0e8b267a-e02e-43e7-8fa8-08ed47c8e9ce": {
+   "name": "Nannue Tipitier",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Nannue Tipitier",
+    "refused": [],
+    "track": "The Question"
+   }
+  },
+  "0ebc1221-9142-4b06-ac62-30f52f75a351": {
+   "name": "Corinne Drewery",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0eeb0d17-14d1-4f34-8ad8-2492c9001136": {
+   "name": "Tonmi Lillman",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "0eeb6e68-db64-48ae-88ec-89b86cf710bf": {
+   "name": "Naala",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "12643325",
+    "matched_artist_name": "Naala",
+    "refused": [],
+    "track": "On met le feu"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "12643325"
+  },
+  "10073dc1-4067-4777-aaba-e1c8ec83ed45": {
+   "name": "Trevor Lawrence",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "101ecb49-a158-479d-93f4-2b331cb0ca96": {
+   "name": "Becca Starr",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "10a26db5-7034-4062-bca0-fda46a01ffcf": {
+   "name": "Kimmy Gatewood",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "11e20900-8447-41af-b3e6-6aef552794cd": {
+   "name": "Sivik",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "7775574",
+    "matched_artist_name": "Sivik",
+    "refused": [],
+    "track": "High"
+   }
+  },
+  "12a5bf4f-006d-4d19-828d-95da4014051c": {
+   "name": "Demon of Waves",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "103958602",
+    "matched_artist_name": "Demon Of Waves",
+    "refused": [],
+    "track": "Tranced-out"
+   }
+  },
+  "141f5d9f-b15f-4dd0-b056-a0d7e9b0caaa": {
+   "name": "Susan Stevens Logan",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "There's Only One Ariel"
+   },
+   "mb_deezer_id": "2246491"
+  },
+  "1429c6ab-801e-4bd0-9c53-7b49ec74e50c": {
+   "name": "Laurence Fishburne",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "206232",
+    "matched_artist_name": "Laurence Fishburne",
+    "refused": [],
+    "track": "The Beyonder"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Gotta Give a Girl Space"
+   },
+   "mb_deezer_id": "206232"
+  },
+  "14bba8e0-97db-4e5c-84f1-067add979cf3": {
+   "name": "Sam Acchione",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "15be9381-2c91-4e92-b06a-11d73d1e6fd7": {
+   "name": "Jay Paul Bicknell",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1647ed31-a1dc-40e3-b1f4-2bc98ba3d179": {
+   "name": "Cinzia Rizzo",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "172f7244-40ef-41a8-a14d-dbddb7d681e4": {
+   "name": "Dia",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "185f04d9-44c9-471f-a55f-d54aac4d9fad": {
+   "name": "Kriz",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "436254",
+    "matched_artist_name": "Kriz",
+    "refused": [],
+    "track": "CRYSTAL"
+   }
+  },
+  "18fc2dc6-1ece-45bf-bac6-a40f61b40c8e": {
+   "name": "Jarly",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1970f711-e27f-4012-8632-7bcee746d549": {
+   "name": "GIAN",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1a2ebdb6-7334-4f32-a887-1063694dcf9f": {
+   "name": "Jon Fridmann",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1a779803-8c67-45cc-89e9-f864cbf04e33": {
+   "name": "4WD",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1aa004fc-1d3e-4a40-b1b3-351ff34d6a0b": {
+   "name": "London Recording Orchestra",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "J\u00f3hannsson: By the Roes, and by the Hinds of the Field"
+   },
+   "mb_deezer_id": "14492237"
+  },
+  "1b90728d-a656-41eb-bc98-144336ecf68b": {
+   "name": "LaMarquis Jefferson",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1b9b9e6f-3ed4-47b3-8058-cc8bb1c341f5": {
+   "name": "Space Gang",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "335737",
+    "matched_artist_name": "Space Gang",
+    "refused": [],
+    "track": "Take Me"
+   }
+  },
+  "1d03ca3b-ea6f-4faa-ac98-5853f3d50bf8": {
+   "name": "Wyann Vaughn",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1d0ccad9-f328-4a5c-abc2-e93859eb1a6b": {
+   "name": "Graham Walsh",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Graham Walsh",
+    "refused": [],
+    "track": "Jury Selection"
+   }
+  },
+  "1ea4f4d4-ee6e-422d-85a5-2be81ff4397d": {
+   "name": "Detached",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "1eb34727-88e6-419f-a854-c945b2d7607b": {
+   "name": "Andreas Ort",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "6066564"
+  },
+  "1fb2b1ea-099b-435f-bf51-2b003b7c1e18": {
+   "name": "Stevie Blacke",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "5190200"
+  },
+  "20201c05-1699-4dea-a5cf-c813bcc488da": {
+   "name": "nohone",
+   "dsp": [
+    "apple",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "14773529",
+    "matched_artist_name": "Nohone",
+    "refused": [],
+    "track": "Borealis"
+   }
+  },
+  "204eefb8-0ce1-415d-8530-44bcb446cf8b": {
+   "name": "Johnny Kalsi",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4675406"
+  },
+  "20a42943-37e3-48b2-8476-06b05b687f7b": {
+   "name": "Archpriest Rev. Wanika K. Stephens",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "20ea0bce-a07b-4bbd-b18b-b7635584e164": {
+   "name": "Infamous Boiz",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Infamous Boiz",
+    "refused": [],
+    "track": "After Midnight"
+   }
+  },
+  "21704ac0-135b-4c07-9ddc-bad03bd4d064": {
+   "name": "Paul Mac Innes",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Paul Mac Innes",
+    "refused": [],
+    "track": "My Future (feat. David Levinsson)"
+   }
+  },
+  "21ee6d7f-b96a-4455-ad1b-f620926cd787": {
+   "name": "Brad Wood",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Brad Wood",
+    "refused": [],
+    "track": "Power (Mixed)"
+   }
+  },
+  "22348930-81bb-488d-8411-0c563c5bce18": {
+   "name": "Fuman Freak",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4109437",
+    "matched_artist_name": "Fuman Freak",
+    "refused": [],
+    "track": "Minor 9"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4109437"
+  },
+  "2366a9b6-c8ab-46e4-a7e3-310d7ccdba91": {
+   "name": "Nicky Ryan",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "5069186"
+  },
+  "238cfc1c-77e9-441b-a521-bfcc21ec12a9": {
+   "name": "Thacher Schmid",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "24263c22-3279-4492-bfb1-f0fa0bb16f27": {
+   "name": "Kemi Ominiyi",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "24b14395-10bc-48bc-97e4-f90dd0c9234f": {
+   "name": "Bloom",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "25e21b4e-5373-4cbd-ac7e-8f8847a7670d": {
+   "name": "Anna Odobescu",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "58408582",
+    "matched_artist_name": "Anna Odobescu",
+    "refused": [],
+    "track": "Stay"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Stay"
+   },
+   "mb_deezer_id": "58408582"
+  },
+  "266e5b08-3a60-48f4-a654-f2c8cc93fc1b": {
+   "name": "Melina Duterte",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "26b9642f-36ba-451d-988a-acf81e29472f": {
+   "name": "DqFrmDaO",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "134208152",
+    "matched_artist_name": "DqFrmDaO",
+    "refused": [],
+    "track": "BODY PARTS"
+   }
+  },
+  "26be1d38-60f8-4bb4-9f6a-8c8ec649d5c5": {
+   "name": "Carmen Sarah\u00ed",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4654406",
+    "matched_artist_name": "Carmen Sarah\u00ed",
+    "refused": [],
+    "track": "Libre Soy"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Desde el Coraz\u00f3n"
+   },
+   "mb_deezer_id": "4654406"
+  },
+  "26c1a417-0f13-4aae-a2f8-a5bc801eca5c": {
+   "name": "A.A. Nemtheanga",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "26e7274f-5c5f-4758-9512-8af620366669": {
+   "name": "Olga Yagolnikov",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "134309042",
+    "matched_artist_name": "Olga Yagolnikov",
+    "refused": [],
+    "track": "a fantasy"
+   }
+  },
+  "2980a101-6ba3-4f11-967d-a38b16f70b28": {
+   "name": "Craig Ross",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "2a5053c3-c34e-4524-9c82-3e58171c6fd5": {
+   "name": "\u4e2d\u91ce\u4e94\u6708",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Tokubetsu na Hito ~ Lesson Five ~"
+   },
+   "mb_deezer_id": "60481642"
+  },
+  "2b031893-46cf-4056-9e39-94d0c46f1986": {
+   "name": "Rahsaan",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "2caaca23-f58a-4cae-b178-2d755cbf391e": {
+   "name": "Steve Pycroft",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "55787192",
+    "matched_artist_name": "Steve Pycroft",
+    "refused": [],
+    "track": "Ankaa"
+   }
+  },
+  "2cffc628-63df-4e04-81ad-b1b0bee6d79c": {
+   "name": "Ms. Jaylin Brown",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "14400097",
+    "matched_artist_name": "Ms. Jaylin Brown",
+    "refused": [],
+    "track": "Pretty Please"
+   }
+  },
+  "2d2dac05-d989-418d-8afe-e598591f27ea": {
+   "name": "Audrey Sylvain",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "8434402"
+  },
+  "2f270e96-6234-43b9-8133-cd25607bf2b6": {
+   "name": "R E L",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "9547672",
+    "matched_artist_name": "r e l",
+    "refused": [],
+    "track": "Night City"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Night City"
+   },
+   "mb_deezer_id": "9547672"
+  },
+  "2f681c0d-4599-4b3b-a44c-8743e1e22834": {
+   "name": "Alacran",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "156976",
+    "matched_artist_name": "Alacran",
+    "refused": [],
+    "track": "Reflejo de Luna"
+   }
+  },
+  "2f7584c0-64e5-426a-bf21-39860422542d": {
+   "name": "Trey Spruance",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "2fda3d61-c73d-46cf-917f-7fc135d03846": {
+   "name": "Sam Britton",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4602085",
+    "matched_artist_name": "Sam Britton",
+    "refused": [],
+    "track": "Grave Flowers"
+   }
+  },
+  "2fe0f63f-4bbc-4e31-b8ef-7e849f83937f": {
+   "name": "Chris Carmichael",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4481142",
+    "matched_artist_name": "Chris Carmichael",
+    "refused": [],
+    "track": "Pop Song"
+   }
+  },
+  "3050e250-d8b4-4f5b-8654-31659aabd146": {
+   "name": "Vic-20",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "30731376-e7a0-4f22-9cf2-7c476eb878d0": {
+   "name": "Cady Huffman",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4913946",
+    "matched_artist_name": "Cady Huffman",
+    "refused": [],
+    "track": "When You Got It, Flaunt It"
+   }
+  },
+  "30da6a8a-7be2-48d2-8894-8ec8227600d6": {
+   "name": "Christine Baranski",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4464617",
+    "matched_artist_name": "Christine Baranski",
+    "refused": [],
+    "track": "Angel Eyes"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Dancing Queen (From 'Mamma Mia!' Original Motion Picture Soundtrack)"
+   },
+   "mb_deezer_id": "4464617"
+  },
+  "31249feb-6cfc-49e4-95f5-84b879128495": {
+   "name": "Money Marley",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "323ea008-ae98-40de-9af5-02c50ae5fc5e": {
+   "name": "Jonas Jeberg",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "326d193e-7e82-4c33-a0a7-086c9c84a846": {
+   "name": "Cory Brandan",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "32ad7683-0eb5-4428-acc2-4b2127601161": {
+   "name": "Brendan O\u2019Brien",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "33f63c94-3c12-45bc-9855-b736da8298fe": {
+   "name": "Mikey Rowe",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Mikey Rowe",
+    "refused": [],
+    "track": "Undercurrent"
+   }
+  },
+  "36a62f61-8412-4f65-b541-a036870ee65f": {
+   "name": "Cary Barlowe",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Cary Barlowe",
+    "refused": [],
+    "track": "Baptized"
+   }
+  },
+  "372a8a6c-7e9c-404d-b8dd-1338e72492e9": {
+   "name": "Philippe Paradis",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Philippe Paradis",
+    "refused": [],
+    "track": "Surfing Vibes Together"
+   }
+  },
+  "37c66447-14b5-4319-87a6-f932d9148b7a": {
+   "name": "Euphorion",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4894806"
+  },
+  "384c4072-28fd-4e0c-8842-04383b9b9a13": {
+   "name": "\u798f\u7530\u6709\u7406",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "394a157e-50e7-4937-b12c-68c1e1b38374": {
+   "name": "Parris Bowens",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1106234",
+    "matched_artist_name": "Parris Bowens",
+    "refused": [],
+    "track": "Mitch's Moves"
+   }
+  },
+  "39787cc4-b614-485b-86f2-91c99ddf2f93": {
+   "name": "Ronnie Van Zant",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "3c6ca3fd-92e8-400e-bac2-447a9947daef": {
+   "name": "Maya Rudolph",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Maya Rudolph",
+    "refused": [],
+    "track": "What a Mother Does"
+   }
+  },
+  "3e7eb1f0-ef5f-4897-83e1-631c722a1a0a": {
+   "name": "Aleister Einstein",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4130831",
+    "matched_artist_name": "Aleister Einstein",
+    "refused": [],
+    "track": "Butterfly Wings"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Creep"
+   },
+   "mb_deezer_id": "4130831"
+  },
+  "3e9e2298-a143-4751-afe4-4708ca379bad": {
+   "name": "Vula Malinga",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Vula Malinga",
+    "refused": [],
+    "track": "Want Ur Love"
+   }
+  },
+  "3eb64be2-05b5-4082-be4d-8d513fac43fe": {
+   "name": "\u7cde\u7530\u820eP",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "118021602",
+    "matched_artist_name": "\u7cde\u7530\u820eP",
+    "refused": [],
+    "track": "\u30cb\u30bb\u30e2\u30ce\u30c8\u30ec\u30b8\u30e3\u30fc(instrumental)"
+   }
+  },
+  "3ec8a0dd-e8b6-4ec6-8505-aa674da08b7b": {
+   "name": "Mark Watson",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "293108",
+    "matched_artist_name": "Mark Watson",
+    "refused": [],
+    "track": "Long Flight Home"
+   }
+  },
+  "3eecaa2c-650c-4dad-9b3a-769102157aa0": {
+   "name": "Blair MacKichan",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4006fbbb-9dc6-4d22-bca1-be2d76ed7196": {
+   "name": "Fernando Ponce de Le\u00f3n",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "402a60a2-65cb-4f79-870f-7f9ffdf3bb20": {
+   "name": "Jim Eno",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "40c4770e-f838-4e36-9b2f-06aa26a19b14": {
+   "name": "Michael Blair",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "410862de-9702-490e-bc9f-91fb8fccd692": {
+   "name": "Jimmie Lee Sloas",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "41480ab2-e15b-414e-b945-20cfcae417d6": {
+   "name": "Magnus Birgersson",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4253fc11-5f5a-400b-ba2e-ae2006d5d850": {
+   "name": "Sebastian Lanser",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "42cc75b5-12e7-42d2-b447-290d0be18319": {
+   "name": "\u4e2d\u7530\u7d62\u5343",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "447e93a1-7eed-473d-bb7e-1fb8b08953df": {
+   "name": "Michael Travis",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Michael Travis",
+    "refused": [],
+    "track": "The Man Song"
+   }
+  },
+  "452b1e7d-9a64-408b-8c13-f29d25534662": {
+   "name": "Jack Patterson",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "463629d1-98e6-4ddc-9bcf-a3ef0e0ef661": {
+   "name": "\ubc15\uc544\uc140",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "14490937"
+  },
+  "4761d867-97ea-4924-9c5d-8e31ffc902a2": {
+   "name": "Cyann",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5946584",
+    "matched_artist_name": "Cyann",
+    "refused": [],
+    "track": "Words (Radio edit)"
+   }
+  },
+  "481fdbfd-ebb7-4a5b-8768-25b1321d2650": {
+   "name": "Brian Macdonald",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "119592",
+    "matched_artist_name": "Brian Macdonald",
+    "refused": [],
+    "track": "tanisi"
+   }
+  },
+  "48230b7e-24d1-4b5c-a4b6-df598318c268": {
+   "name": "Sindri Eldon",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "14206955",
+    "matched_artist_name": "Sindri Eldon",
+    "refused": [],
+    "track": "Honeydew"
+   }
+  },
+  "483b8b82-f647-4716-98ba-d4a9eabbc6b7": {
+   "name": "\u3080\u3081\u3093\u304d\u3087\u304f\u3093",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "48813347-71e1-4602-b013-a59415942e8e": {
+   "name": "Qaadir Howard",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "806850",
+    "matched_artist_name": "Qaadir Howard",
+    "refused": [],
+    "track": "Bloodied and a Mess"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Bloodied and a Mess"
+   },
+   "mb_deezer_id": "806850"
+  },
+  "488bd766-2b28-46ab-9c5e-7c80228e1797": {
+   "name": "Anthony Lowry",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Anthony Lowry",
+    "refused": [],
+    "track": "Screw on the Loose"
+   }
+  },
+  "48adc22f-1383-488d-8a2d-e6d7ed7f717b": {
+   "name": "Uc-64",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1575803",
+    "matched_artist_name": "UC-64",
+    "refused": [],
+    "track": "In The Mood (Radio Mix)"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "In the Mood"
+   },
+   "mb_deezer_id": "4051381"
+  },
+  "49156862-d843-46f7-84f6-e7d4bf150019": {
+   "name": "The Disney Afternoon Studio Chorus",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5289988",
+    "matched_artist_name": "The Disney Afternoon Studio Chorus",
+    "refused": [],
+    "track": "Duck Tales Theme (From \u201cDuck Tales\u201c)"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Tale Spin Theme"
+   },
+   "mb_deezer_id": "5289988"
+  },
+  "49194067-bebd-4112-b8a9-ad53b86c1036": {
+   "name": "\u5433\u601d\u4f73",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "49880e5c-2092-4407-bfea-13e365fd67a7": {
+   "name": "Eskil Simonsson",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4762797",
+    "matched_artist_name": "Eskil Simonsson",
+    "refused": [],
+    "track": "Pur(g)e"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4762797"
+  },
+  "4a5826b0-eac4-4c88-9e50-d93fd9937647": {
+   "name": "Ta\u2019he",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4b1b579b-2320-40fb-9407-d6405885f3b6": {
+   "name": "DJ Shortfuse",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1330156",
+    "matched_artist_name": "DJ Shortfuse",
+    "refused": [],
+    "track": "Rotdj Radio"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "1330156"
+  },
+  "4b2f0070-2b73-4e81-b97c-a3e160d48e9e": {
+   "name": "Kelly Hayes",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4b31a611-659b-4184-9815-7e5817c003d8": {
+   "name": "Mr. Reece",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Mr. Reece",
+    "refused": [],
+    "track": "Beast Mode"
+   }
+  },
+  "4b9427f5-e2eb-40a9-a832-204901845f16": {
+   "name": "Michael Park",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4379856",
+    "matched_artist_name": "Michael Park",
+    "refused": [],
+    "track": "To Break In a Glove"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Requiem"
+   },
+   "mb_deezer_id": "4379856"
+  },
+  "4c573ae1-ba05-4a38-bcf5-5ffa2abdacb4": {
+   "name": "Francis Starlite",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4cfe6693-b382-45e7-81ed-31f333a1fdcf": {
+   "name": "Nina Moffitt",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4d5e2578-4a15-479e-90d7-b12baf2709b6": {
+   "name": "Joxemi",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4d6c68a0-efe2-43ac-99a7-d0032914ff3d": {
+   "name": "O\u2019neill Hudson",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4e0b035f-1d76-4f8d-b249-e4d212245c6a": {
+   "name": "Chiky Bombom La Pantera",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "12987709",
+    "matched_artist_name": "Chiky Bombom La Pantera",
+    "refused": [],
+    "track": "Pelo Peluca Pelucazo"
+   }
+  },
+  "4e30c090-46d4-4e09-8a6e-ebeb495a8937": {
+   "name": "Jenny & The Scallywags",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "9612822",
+    "matched_artist_name": "Jenny & the Scallywags",
+    "refused": [],
+    "track": "The Beast"
+   }
+  },
+  "4e6b78a7-c394-4c8e-87bf-fe83486f7160": {
+   "name": "Orquesta del Plata",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Orquesta del Plata",
+    "refused": [],
+    "track": "Montserrat"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Montserrat (Album Version)"
+   },
+   "mb_deezer_id": "199868"
+  },
+  "4f5a03fa-4b4e-4221-890d-20d4ccf69d28": {
+   "name": "Mo'jardo",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4801119",
+    "matched_artist_name": "Mo'jardo",
+    "refused": [],
+    "track": "Love in Stereo"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Berlin Sky"
+   },
+   "mb_deezer_id": "4801119"
+  },
+  "4fa611d7-3635-4741-8b2d-b5179f3608d7": {
+   "name": "Pablo Bowman",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "4fb09d0e-a193-4a83-9b69-7e921be86cdc": {
+   "name": "Rob Curly",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5309037",
+    "matched_artist_name": "Rob Curly",
+    "refused": [],
+    "track": "Eleven"
+   }
+  },
+  "50e0c737-def5-43a1-8d7f-a854f36419f7": {
+   "name": "Joseph Maize",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "514d919d-e2a6-4ceb-a426-e9d9fe7d5b34": {
+   "name": "Kent Jolly",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Kent Jolly",
+    "refused": [],
+    "track": "Zone System"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Window Washers Dream"
+   },
+   "mb_deezer_id": "1401161"
+  },
+  "53436011-61db-4991-b12f-a8894acad5b3": {
+   "name": "Marisa Kuney",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "53ba7b2d-06c4-432a-81cc-ca7525adfec1": {
+   "name": "Ariel Rechtshaid",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Ariel Rechtshaid",
+    "refused": [],
+    "track": "The Can Can"
+   }
+  },
+  "54c1f74e-2cd7-481d-9d31-7808fc2dbf05": {
+   "name": "Manny Marroquin",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "54cc12da-e553-4516-9500-e9a1074253ce": {
+   "name": "Kombo",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "377985",
+    "matched_artist_name": "Kombo",
+    "refused": [],
+    "track": "Talk The Talk"
+   }
+  },
+  "54f2c742-a2a7-4288-a4ab-0c68098d4621": {
+   "name": "A.B. Money",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "56f4fc3b-c3b9-487d-a3c1-886eebc845ac": {
+   "name": "Joe Charman",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5708b562-3880-4be8-9dab-f2bb2834fbf8": {
+   "name": "Patrick Wimberly",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5778f668-1a4c-482f-beb9-08b15b0f861c": {
+   "name": "Ogre",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4131546"
+  },
+  "581fddbe-e1b1-49bf-9bf9-befb16887780": {
+   "name": "Paul Soles",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "594543d1-86f9-4473-8088-0a85089df9ca": {
+   "name": "Tahli Elsner",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "59f25f60-0ed8-4733-940f-b0365ad7ea68": {
+   "name": "Solanos",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "176243",
+    "matched_artist_name": "Solanos",
+    "refused": [],
+    "track": "Estranha"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Estranha"
+   },
+   "mb_deezer_id": "176243"
+  },
+  "5a2c9410-011c-49a6-b517-e2b8d1907374": {
+   "name": "Kinny Landrum",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Kinny Landrum",
+    "refused": [],
+    "track": "Trouble Flies"
+   }
+  },
+  "5a505275-845c-4604-b800-ba14ce8593d5": {
+   "name": "Beth Andrien",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Beth Andrien",
+    "refused": [],
+    "track": "Jump Rope Jive"
+   }
+  },
+  "5afee41f-2a73-4a60-a060-ca68c70ad464": {
+   "name": "Claytoven Richardson",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4464639"
+  },
+  "5b31b7b0-6750-4b48-b329-ec90d2cbd01f": {
+   "name": "Curt Schneider",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5be9cd0b-fbe5-43a5-a9b1-2b3b410ecc85": {
+   "name": "BTMC",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5c154bf5-45df-4d2b-acd2-7f8ea367a3e5": {
+   "name": "Ray Rizzo",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5c913d38-8676-46ae-91f2-b315fbd27d08": {
+   "name": "\u5f26\u4e00\u5fb9\u30b9\u30c8\u30ea\u30f3\u30b0\u30b9",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5ca80b1a-f645-432a-a457-e78e0a4b44b1": {
+   "name": "Tetsuya Fukagawa",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5d7949ce-0248-4d8b-bec6-cd6edf5e3e0d": {
+   "name": "Luc Lemay",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5d993ae8-015b-413a-88c8-bb46b8440991": {
+   "name": "Max Clilverd",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "8071451",
+    "matched_artist_name": "Max Clilverd",
+    "refused": [],
+    "track": "Violet"
+   }
+  },
+  "5de2537a-bc3e-4eb1-a21f-58373c6b34f9": {
+   "name": "Fortune 5",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "5e768459-638a-4f26-8a56-32af9e82ba42": {
+   "name": "Lil Playy",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1677203",
+    "matched_artist_name": "Lil Playy",
+    "refused": [],
+    "track": "Birthday Dress (Explicit Version)"
+   }
+  },
+  "5f7ba324-6ea5-4089-a22d-2753d6cc28bb": {
+   "name": "Luanne Homzy",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "60c25a72-781c-4366-8d44-5ab9f6d67a33": {
+   "name": "siopaolo",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "113382832",
+    "matched_artist_name": "siopaolo",
+    "refused": [],
+    "track": "better for you"
+   }
+  },
+  "61421ca3-727a-4974-bdd5-a21a080be43b": {
+   "name": "Air Lyndhurst String Orchestra",
+   "dsp": [
+    "deezer",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "J\u00f3hannsson: By the Roes, and by the Hinds of the Field"
+   },
+   "mb_deezer_id": "10881348"
+  },
+  "61e1e10f-8fd6-48d4-b669-1f01ec0d4061": {
+   "name": "Constance Rudert",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1698248",
+    "matched_artist_name": "Constance Rudert",
+    "refused": [],
+    "track": "The Harbour Song"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "1698248"
+  },
+  "6273765f-4ac5-498a-97d0-f3d4ef0dcf6a": {
+   "name": "Sam King",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "636e1cbe-cac5-4512-81a8-909f356e03e2": {
+   "name": "Nick Vall",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Het Spijt Me Niet"
+   },
+   "mb_deezer_id": "13446227"
+  },
+  "636f9cb2-fa0f-448c-aa78-5a46f32a72cc": {
+   "name": "Rin",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "492716",
+    "matched_artist_name": "RiN",
+    "refused": [],
+    "track": "Redrising"
+   }
+  },
+  "6429e2f4-b8ca-4ed7-8b96-f09d59c92789": {
+   "name": "Christopher Guardino",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "64654efe-d4c4-40c2-a375-e4ddeffcbe29": {
+   "name": "Odeliya Iluz",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "64cfdd77-a48c-4e12-8de3-182db2e8b090": {
+   "name": "Annette Price",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "65048860-1985-4108-ade2-dcbe335bbfde": {
+   "name": "Nadia Nid-El-Mourid",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "652b5692-fc49-459c-8660-140b6b748eef": {
+   "name": "The Old Bethpage Brass Band",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "265714",
+    "matched_artist_name": "The Old Bethpage Brass Band",
+    "refused": [],
+    "track": "When Johnny Comes Marching Home"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "265714"
+  },
+  "653bfe26-8485-4201-bde8-2fb3d065bbcc": {
+   "name": "nana hatori",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "65605493-a212-45c0-b6c1-1d071a4fdddc": {
+   "name": "Licon",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "10625341",
+    "matched_artist_name": "Licon",
+    "refused": [],
+    "track": "Len\u00e7ol De Seda"
+   }
+  },
+  "6602cab2-65b5-4341-99c5-b05fa897f256": {
+   "name": "Big Taste",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "660f0196-6982-45fe-909b-a6f9015bcee8": {
+   "name": "Bruce White",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "678f2dbc-cb12-49b5-ad13-583e1f7d46f0": {
+   "name": "Sal",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "67e78f9d-794d-4dcc-ae68-5e255b73421b": {
+   "name": "Lara Goodridge",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "68a5eecf-2ffe-48b1-a3fa-9c61b17ebc77": {
+   "name": "C-One",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "68b810c2-4702-4ef9-8feb-3dbf97e73d37": {
+   "name": "Chris Kimsey",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "6a933475-c7c4-4b9f-9b9e-9e53854de6fa": {
+   "name": "The Jud Conlon Chorus",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1485717",
+    "matched_artist_name": "The Jud Conlon Chorus",
+    "refused": [],
+    "track": "Captain Hook Never Breaks a Promise / The Elegant Captain Hook / A Little Surprise / Oh Tink / The Pen or the Plank"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Before the Break"
+   },
+   "mb_deezer_id": "1485717"
+  },
+  "6b24611e-ebae-4c0b-811e-97fde366e697": {
+   "name": "Peter T\u00e4gtgren",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "6b379f49-17b6-4868-9962-2999db5ce53a": {
+   "name": "Annette Berg",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "6b439a61-3243-4dba-a5f4-1933270a486f": {
+   "name": "Ryan Zoidis",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "6c61b24f-aa32-458d-83fe-b8619dd7def7": {
+   "name": "Mike Elizondo",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "6d14a587-e699-41df-9aaf-27f15cf5215f": {
+   "name": "Eyes That Lie",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "6d4eb517-71a5-4026-bd39-78ef86290842": {
+   "name": "Melchior Sarreal",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "8254608"
+  },
+  "6d6e510b-ffcf-491e-a977-2f09341fe96e": {
+   "name": "Jan Kincaid",
+   "dsp": [
+    "apple",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "6dc83617-7f1d-4cfa-bc69-6749fb1be8a5": {
+   "name": "John McFee",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4559157"
+  },
+  "70ad61a2-157a-416f-ae87-1a461d681700": {
+   "name": "Watch",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "70edc352-0142-428e-9bcd-d1b753f4a618": {
+   "name": "Hongry",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "No Squares"
+   },
+   "mb_deezer_id": "4318183"
+  },
+  "7144d480-afb6-42e3-9bd8-2e896df9f4de": {
+   "name": "Charlie Pollock",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "11241844",
+    "matched_artist_name": "Charlie Pollock",
+    "refused": [],
+    "track": "The Man Who Sold the World"
+   }
+  },
+  "71b13179-44df-4543-847a-6d5249e1890c": {
+   "name": "juliet Heberle",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "72e86585-221f-45d3-a4cd-cfca7d48c1c6": {
+   "name": "458 Keez",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "72fd5e39-1060-42f9-92e2-fa409efb1bd5": {
+   "name": "Vachagan Avakian",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "73195e87-f9f7-48c5-925a-28d55f4ce1f4": {
+   "name": "Lo\u00efc Rossetti",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7321c1f0-20ef-4eb9-b271-c13dcb5712a5": {
+   "name": "Sam the Eagle",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Chairman of The Board"
+   },
+   "mb_deezer_id": "1504012"
+  },
+  "735a53fc-a6c0-4409-a9d2-0c23543be534": {
+   "name": "Rob Baker",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "73ae37c3-7c08-4bc5-81d2-4033ea438fa3": {
+   "name": "Sasha Sirota",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7426ecd7-2ff2-4af5-926c-c1c6e064da6d": {
+   "name": "The Onion AV Club Choir",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "748dcbd8-d1e2-41c0-a4eb-21ce0841558d": {
+   "name": "Cult Days",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Cult Days",
+    "refused": [],
+    "track": "Time Away"
+   }
+  },
+  "74e7a8f7-9769-4c64-8ad2-01905a43319c": {
+   "name": "Massambou Wele Diallo",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "751d77c5-635d-4f8c-a0b0-88546fcd8772": {
+   "name": "Johanna Beijbom",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "9987356",
+    "matched_artist_name": "Johanna Beijbom",
+    "refused": [],
+    "track": "A.S.A.P."
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "9987356"
+  },
+  "753124ec-1da2-4dd6-afd8-f1aa26053a3d": {
+   "name": "Jordan Smart",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "10205028",
+    "matched_artist_name": "Jordan Smart",
+    "refused": [],
+    "track": "Who Would Jesus Bomb?"
+   }
+  },
+  "7593a11b-e2bd-40f9-aaf0-6cbe4740d87c": {
+   "name": "Ben Weinman",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "76624297-8234-4d09-8cac-e273bc1ad40d": {
+   "name": "Joe Berry",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "781de1bc-456f-4c65-ab93-2e7f85232dce": {
+   "name": "\u05e9\u05dc\u05d5\u05de\u05d9 \u05d0\u05dc\u05d5\u05df",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "781f101c-9290-4568-8af3-1b9544a20472": {
+   "name": "Kent Osborne",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4608735",
+    "matched_artist_name": "Kent Osborne",
+    "refused": [],
+    "track": "Eternal Eclipse"
+   }
+  },
+  "78324487-c24d-4227-a3f2-0aee2213e9fc": {
+   "name": "Luke Boyd",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "79a113be-0a38-41be-a3ff-452972a9715d": {
+   "name": "Duke B",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1030406",
+    "matched_artist_name": "Duke B",
+    "refused": [],
+    "track": "The Truth"
+   }
+  },
+  "7a27e44a-dfc1-44c0-a615-8efaf1dccf42": {
+   "name": "DTX",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1210481",
+    "matched_artist_name": "DTX",
+    "refused": [],
+    "track": "SSF"
+   }
+  },
+  "7a677b95-c736-49ef-9b5a-2c0f368ae61e": {
+   "name": "Karlyton \u201cK.K.\u201d Clanton",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7af89438-f068-444c-8f45-3864177b1d64": {
+   "name": "DJ Pumkin",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7b16d29b-41a9-4629-9894-7b07b8c13dab": {
+   "name": "Wallo267",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7b390c88-1238-4681-ba44-93917873acd5": {
+   "name": "Vanessa Freebairn\u2010Smith",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7b3f744f-316e-4604-942b-2b760143c73f": {
+   "name": "Kayla Jasmine",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7c55d434-d0d9-45ea-8a9d-00b5e212c351": {
+   "name": "KIELY",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7d74d1f9-64f2-4aa7-90f7-ccd72556cf03": {
+   "name": "Stephanie McCourt",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Stephanie McCourt",
+    "refused": [],
+    "track": "Keep Me at Bay"
+   }
+  },
+  "7eccbbe9-d8ad-4af6-b263-28dd9036a3e4": {
+   "name": "Julian McClanahan",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "7f8a1d89-02d3-411c-a967-05aad85f1e12": {
+   "name": "Geoff Warburton",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "8010757a-6ec4-4a64-b54a-1a16ac0040d9": {
+   "name": "Michael Kang",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "806b8e6f-343f-46db-849d-ac551a384f60": {
+   "name": "Dennis Hopper",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "80c9dd40-4315-4ceb-a916-3f82d5117457": {
+   "name": "William Brousserd",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "8122941f-595b-4449-9edc-bb7cb680bd92": {
+   "name": "Thomas Winkler",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "81bc8876-83f1-475e-bdf7-0b4b6c511441": {
+   "name": "Marcus Zelonka",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1659999",
+    "matched_artist_name": "Marcus Zelonka",
+    "refused": [],
+    "track": "Into the Brain"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "297736"
+  },
+  "81c083a1-102b-46b5-85b4-b14351a57df5": {
+   "name": "Keegan\u2010Michael Key",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "81fef663-28bf-4367-becf-1745235387a9": {
+   "name": "Lil Capp",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Lil Capp",
+    "refused": [],
+    "track": "Ray Ray (feat. Wacka Flocka Flame)"
+   }
+  },
+  "82054776-0062-4b15-823f-899f5555d104": {
+   "name": "Nick Garcia",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1363512",
+    "matched_artist_name": "Nick Garcia",
+    "refused": [],
+    "track": "Take it easy (Remix)"
+   }
+  },
+  "8279166f-a660-4c3c-b94c-b3fe546e7353": {
+   "name": "Ben Wittman",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "82dd53ad-b7ca-48ca-a8fd-595c896dd851": {
+   "name": "Peter Abdul",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "11106482",
+    "matched_artist_name": "Peter Abdul",
+    "refused": [],
+    "track": "Don't You Know?"
+   }
+  },
+  "82f8f341-c6fe-4b20-8405-a658b1957ed7": {
+   "name": "Fred Eltringham",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "842971af-03c2-445b-81d2-e16b5f3c075a": {
+   "name": "Thad Stevens",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Thad Stevens",
+    "refused": [],
+    "track": "Apathetic Existence (Eternal Hopeless Consciousness)"
+   }
+  },
+  "8526b5b7-fbb1-4480-86c9-c2cf21b2ac09": {
+   "name": "Chayse",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Chayse",
+    "refused": [],
+    "track": "Another Place"
+   }
+  },
+  "85612f22-0b77-4c9c-8394-d69c5424b367": {
+   "name": "Papito Gringo",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "85728c97-e128-49c8-99b7-df188431b539": {
+   "name": "Tony Chang",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "86026d84-8886-45f9-9e16-f39d31e9e478": {
+   "name": "Andrea",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "865c0bc2-43b5-4d1e-ac0b-fe02af431841": {
+   "name": "Tiny Tunes",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "12521",
+    "matched_artist_name": "Tiny Tunes",
+    "refused": [],
+    "track": "Will You Catch Me?"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Icky Sticky Bubblegum"
+   },
+   "mb_deezer_id": "12521"
+  },
+  "86675adb-d685-4f9f-b48b-af4ba33ced3c": {
+   "name": "Cheeto Gambine",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1440264",
+    "matched_artist_name": "Cheeto Gambine",
+    "refused": [],
+    "track": "Jazzebelle"
+   }
+  },
+  "86aee691-7f5b-4aae-9f8d-6385eaded037": {
+   "name": "Ensemble FOVE",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "87bade3a-be2d-4e3b-8916-797ffac70309": {
+   "name": "Stephen Brooker",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "8833ff35-9138-4bde-bb21-8a5264102f17": {
+   "name": "Jochem van der Saag",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4703287",
+    "matched_artist_name": "Jochem van der Saag",
+    "refused": [],
+    "track": "Get Up, Stand Up"
+   }
+  },
+  "8842b214-4a0c-42bd-b5b4-3913cd6c69c0": {
+   "name": "Adam Simmons",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Adam Simmons",
+    "refused": [],
+    "track": "A Child's Kite (feat. Wang Zheng-Ting & Adam Simmons Creative Music Ensemble)"
+   }
+  },
+  "887cc30e-2674-4476-94c1-d582de369691": {
+   "name": "Sunni Patterson",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Sunni Patterson",
+    "refused": [],
+    "track": "Ancestors"
+   }
+  },
+  "892acdfe-832b-4652-bba5-631c7c6a1367": {
+   "name": "Keith Sorrells",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "896e8e5a-3e63-4c34-8216-90d95bfd459f": {
+   "name": "Al Barr",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "89729b97-90a3-4f84-9e88-e16f96cab350": {
+   "name": "Ron Aniello",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "89f86434-b1d7-454a-a75c-984c01d6829b": {
+   "name": "The Entelechia Society",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4772807",
+    "matched_artist_name": "The Entelechia Society",
+    "refused": [],
+    "track": "Break the Ice"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4772807"
+  },
+  "8a3583d6-e71d-4885-8e30-6ca9255150c1": {
+   "name": "Liam Hathaway",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Audio"
+   },
+   "mb_deezer_id": "14762837"
+  },
+  "8a3b1cd9-6030-40c5-a6f5-f3b92ec73c8a": {
+   "name": "Vidal Davis",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "8b1e4786-f199-40cb-b587-8273c7b3bbb4": {
+   "name": "Teamheadkick",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1930171",
+    "matched_artist_name": "TEAMHEADKICK",
+    "refused": [],
+    "track": "Deadpool Rap"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Deadpool Rap"
+   },
+   "mb_deezer_id": "1930171"
+  },
+  "8b20aa79-51fe-4fe0-bb53-977ec207bf63": {
+   "name": "Tape LaFlare",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "8bc52230-0c52-4714-b70b-11bc7c18e424": {
+   "name": "Bonjour Afrique!",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "8da38a81-25f3-42c8-aa6b-e23175be89a6": {
+   "name": "Jim Eliot",
+   "dsp": [
+    "deezer"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4407944"
+  },
+  "8ea7a798-7d9f-493e-8d0d-5f2ad67f89ad": {
+   "name": "Ugo Platana",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1684885",
+    "matched_artist_name": "Ugo Platana",
+    "refused": [],
+    "track": "Feel The Night (Koncept Remix)"
+   }
+  },
+  "8f40df9f-2186-4493-919c-b9a6bf6d2e7c": {
+   "name": "Josefin Glenmark",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1243716",
+    "matched_artist_name": "Josefin Glenmark",
+    "refused": [],
+    "track": "Du Din J\u00e4vel (Radio Edit)"
+   }
+  },
+  "9242e855-9c46-4611-bd56-35f52a82c747": {
+   "name": "Ciasco",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "ciasco",
+    "refused": [],
+    "track": "spring water"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "15311915"
+  },
+  "9262a67f-ba9f-48ae-b304-fbff236810c5": {
+   "name": "James Graham",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "801870",
+    "matched_artist_name": "James Graham",
+    "refused": [],
+    "track": "A Song For You (The Four Performance)"
+   }
+  },
+  "9391d4bc-6b19-4e79-9d34-e2cacb3a0216": {
+   "name": "Tubby Love",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "3875201",
+    "matched_artist_name": "Tubby Love",
+    "refused": [],
+    "track": "All Ways Love"
+   }
+  },
+  "93f82db3-48da-436e-9f06-b85fd57693d4": {
+   "name": "Robi Kauker",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1571447",
+    "matched_artist_name": "Robi Kauker",
+    "refused": [],
+    "track": "Window Washers Dream"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Window Washers Dream"
+   },
+   "mb_deezer_id": "1571447"
+  },
+  "9433f0b5-de0e-4d38-81b6-0548b263d311": {
+   "name": "Geoff Dugmore",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "945f0244-5469-4dce-9626-82fb38c3c648": {
+   "name": "nine.two",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "94dcc7f3-57ed-4134-bb6b-564ce6becf93": {
+   "name": "Emily Harkness",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Breathe Deep"
+   },
+   "mb_deezer_id": "8918760"
+  },
+  "95808b9d-a6c1-4ecc-810b-2c95fd7d3775": {
+   "name": "F*U*G*Z",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "96443734-eea0-4b0d-92a1-52e7db0a9c4a": {
+   "name": "Anita Sarkeesian",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "964afb20-e154-4ae2-99f7-01ed8ccb95c5": {
+   "name": "\u6681\u5c71\u745e\u5e0c",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "964e4fa1-a1f3-432d-ae78-f73b633492c0": {
+   "name": "Eban Thomas",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9712281b-e6e5-4ca4-be67-7e9b1e7d6871": {
+   "name": "June Cole",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9733c147-131f-428c-a477-396b9b03834c": {
+   "name": "Leah Katz",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "985043fa-339f-4624-aa2e-2affa944c2a3": {
+   "name": "Big Ben",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "171657",
+    "matched_artist_name": "Big Ben",
+    "refused": [],
+    "track": "C'est qui ?"
+   }
+  },
+  "99402900-8698-4eca-9867-c3e8512a765c": {
+   "name": "Rick Koster",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9a5ec695-2b9c-4e2c-b13d-a501d9a189d8": {
+   "name": "William Youmans",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4512844",
+    "matched_artist_name": "William Youmans",
+    "refused": [],
+    "track": "Something Bad"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Something Bad"
+   },
+   "mb_deezer_id": "4512844"
+  },
+  "9aaf264f-e18a-4408-8865-afac6fd6f08a": {
+   "name": "Zack Whedon",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Zack Whedon",
+    "refused": [],
+    "track": "The Rap"
+   }
+  },
+  "9c13a890-c467-439e-acac-ad56356bd5fa": {
+   "name": "Monica Birkenes",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9c277864-c313-4024-b9e0-72d3eb97b861": {
+   "name": "Zoey Deutch",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9c5d25c0-4078-4d04-8104-29075eb820fe": {
+   "name": "Kitty Karlyle",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Kitty Karlyle",
+    "refused": [],
+    "track": "In Between Days"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "1266225"
+  },
+  "9c6517cb-3dec-4cf1-8070-0bf9f4424dcb": {
+   "name": "Steve Robson",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Steve Robson",
+    "refused": [],
+    "track": "Chek It Out (Club Mix)"
+   }
+  },
+  "9ccb9b08-e3e2-427d-9f52-1d7f4e3c8350": {
+   "name": "Edgar Fletcher",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "7541062",
+    "matched_artist_name": "Edgar Fletcher",
+    "refused": [],
+    "track": "Craig Plainscape"
+   }
+  },
+  "9d044f3c-b9d5-45c2-aa32-6cd5c1bb741c": {
+   "name": "Carousel",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9dc08a38-6956-4259-9ed8-ff3dfad78f87": {
+   "name": "Blake Michael",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9dc4078f-339a-4167-ae68-f253f9e6d276": {
+   "name": "Io Vita",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9de9ef9f-27d0-44c5-b754-4aca52133eca": {
+   "name": "Brian Sperber",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9e3d1d5d-9b54-4430-aa66-bf99f64aae79": {
+   "name": "Lightskinmac11",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9e5110a7-be87-4dcb-ac12-cc190bb21c53": {
+   "name": "Karla Sabah",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "244785",
+    "matched_artist_name": "Karla Sabah",
+    "refused": [],
+    "track": "Fato Consumado"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "A Kind of Magic"
+   },
+   "mb_deezer_id": "244785"
+  },
+  "9e8f704d-0f75-485b-8795-8cc36492143a": {
+   "name": "Kortney Leveringston",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "9fbc86b3-0dc5-4047-b4f8-4f7a277a8281": {
+   "name": "Willy Roy",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Willy Roy",
+    "refused": [],
+    "track": "Don't Give Up"
+   }
+  },
+  "a1314068-b976-4be1-a200-4ab06e36a42e": {
+   "name": "soFLY & Nius",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a1725629-b6e9-4b1f-a1fe-170425fab102": {
+   "name": "Saturn, Alexander",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a28ed038-aefc-48dd-ac48-e873eefcac6f": {
+   "name": "Maesu",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a2d0fca9-7018-42f9-8a71-9e6940f18978": {
+   "name": "Dante Cimadamore",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a3a738cb-f018-494a-9853-52208caa5d6e": {
+   "name": "Stephen Kozmeniuk",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a4db8e7b-3dd4-4104-9af4-64efda766028": {
+   "name": "Richard Dodd",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a521edc5-d786-44c1-a76d-ae4521274478": {
+   "name": "Carl Bagge Trio",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "80636882",
+    "matched_artist_name": "Carl Bagge Trio",
+    "refused": [],
+    "track": "Fotografia"
+   }
+  },
+  "a5246b01-e29e-4287-a6b3-8c9f3851cf51": {
+   "name": "Bankulli",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "9487986",
+    "matched_artist_name": "Bankulli",
+    "refused": [],
+    "track": "Foreign"
+   }
+  },
+  "a541950b-e820-44a4-8aa2-e9b153293329": {
+   "name": "Leddie Garcia",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a552e756-9ecd-4d91-a762-be748086e09c": {
+   "name": "Devesh Dayal",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "57940982",
+    "matched_artist_name": "Devesh Dayal",
+    "refused": [],
+    "track": "Rush It Down (Intro To \"Guilty Gear Strive\")"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Rush It Down (Intro To \"Guilty Gear Strive\")"
+   },
+   "mb_deezer_id": "57940982"
+  },
+  "a5f2b379-764b-4b80-9845-8e26ff3df23b": {
+   "name": "Ron Burgundy",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Ron Burgundy",
+    "refused": [],
+    "track": "Another Message From Ron Burgundy"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "5393240"
+  },
+  "a60df7cd-1a76-417d-adcf-181c48915c69": {
+   "name": "LILY",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "330048331"
+  },
+  "a7b278ac-6e87-4dc4-a653-3845fa03b439": {
+   "name": "mingi pak",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "mingi pak",
+    "refused": [],
+    "track": "clouds"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "13601139"
+  },
+  "a7b5f6e8-f5e7-4b10-acfa-9a8dfeae884b": {
+   "name": "Scottie Haskell",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "866020",
+    "matched_artist_name": "Scottie Haskell",
+    "refused": [],
+    "track": "Wonder of It All (Album Version)"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "866020"
+  },
+  "a8b40d6a-d725-4a78-acd6-2628e78bd6a9": {
+   "name": "Sekou Kant\u00e9",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a8ce77ef-0443-469c-9ac0-83a0028f54e6": {
+   "name": "Guy Wood",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "a954b8c8-d867-4cf3-a344-7f9b35aa7ef1": {
+   "name": "Carmine",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "406312372",
+    "matched_artist_name": "Carmine",
+    "refused": [],
+    "track": "POPPYPLAYTIME (Joue avec moi ou tu mourras)"
+   }
+  },
+  "a96f2492-70b2-4621-80a6-f26571a456f8": {
+   "name": "Simon G",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Endless Beach Sunset (Original Chillout Mix)"
+   },
+   "mb_deezer_id": "383052"
+  },
+  "aa2047f7-a3dc-4792-8b31-a459654e6560": {
+   "name": "Niclas Engelin",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "aa831c0c-f461-4135-a042-4664a0d47e31": {
+   "name": "Trashique",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "aa9fa8a7-df33-4856-b95e-d3155e458602": {
+   "name": "WVLFPAKT",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "abb7a98d-d532-47a2-b0e6-dba6cb7e7251": {
+   "name": "Ben Edgar",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Ben Edgar",
+    "refused": [],
+    "track": "All We've Got"
+   }
+  },
+  "acfdc017-9351-4853-b95a-fa59ba2d7b2d": {
+   "name": "The Silencers",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "15018",
+    "matched_artist_name": "The Silencers",
+    "refused": [],
+    "track": "Bulletproof Heart"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Wild Mountain Thyme"
+   },
+   "mb_deezer_id": "15018"
+  },
+  "ad3f6c30-9f5c-444a-b73b-6a95753536b8": {
+   "name": "Udokotela Shange Namajaha",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1221414",
+    "matched_artist_name": "Udokotela Shange Namajaha",
+    "refused": [],
+    "track": "Awungilobolele"
+   }
+  },
+  "adf77387-20bd-4e9a-939e-e2561bcf026a": {
+   "name": "Michael Lovett",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ae4ef436-0b38-47fb-8434-bd33ce39ebd5": {
+   "name": "Sean Long",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ae6f8556-9e82-403c-90d8-4517164feea5": {
+   "name": "Lucy",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Happy Sad (feat. LU\u0308CY)"
+   },
+   "mb_deezer_id": "10545897"
+  },
+  "ae9ee993-1582-47d4-bf0c-a7f16a92a4cb": {
+   "name": "OsCaR",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b0a42b4a-50fd-4efd-a0a1-c90df69019f5": {
+   "name": "Pascal Reinhardt",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b19cc39e-a0bd-41e6-9071-84931a093c79": {
+   "name": "Michael Rodenberg",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b2c1e1aa-75a3-4d23-b23e-921019f377fd": {
+   "name": "Jskee",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Jskee",
+    "refused": [],
+    "track": "I Am Pharaoh"
+   }
+  },
+  "b2d7715d-899f-4b52-9f60-05cb11bae008": {
+   "name": "Ronan Harris",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b327d96e-c0e1-455b-880c-f6440d48362b": {
+   "name": "Maria Franz",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Macha"
+   },
+   "mb_deezer_id": "9056748"
+  },
+  "b45b10ed-0d12-43cd-9a55-f89a425d1a00": {
+   "name": "Brother Groove",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "245773",
+    "matched_artist_name": "Brother Groove",
+    "refused": [],
+    "track": "Cantaloupe Island"
+   }
+  },
+  "b45f8941-7900-4a08-a634-1437ae5ead1b": {
+   "name": "Kornelia Gr\u0105dzka",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "130808432"
+  },
+  "b4d33869-2186-4188-92c9-cc7c54fce01e": {
+   "name": "Anders Nystr\u00f6m",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4494989",
+    "matched_artist_name": "Anders Nystr\u00f6m",
+    "refused": [],
+    "track": "Trollvisan"
+   }
+  },
+  "b59ff360-ffc9-4819-988d-61b55087b441": {
+   "name": "Becky Hanson",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b689e88c-afc0-4dcb-9cf5-22e22723be24": {
+   "name": "Rob Hajacos",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b750fb51-460a-4322-ae2a-8ef21cf33df9": {
+   "name": "Gaby Koss",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b7cc343c-ae39-4bc3-bd78-22fabdedfbfc": {
+   "name": "Andy Lopez",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "9538",
+    "matched_artist_name": "Andy Lopez",
+    "refused": [],
+    "track": "Noche Del Amor (Tune Up! Radio Edit)"
+   }
+  },
+  "b8e9808d-6594-40a1-955f-fdde01939031": {
+   "name": "Zefor",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b95f2845-5dbf-4b8e-bc60-a1bce72420b5": {
+   "name": "Yiannis Papadopoulos",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "b9b26d21-a215-45bf-9780-328c1c0d8284": {
+   "name": "DZonY Beatz",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "bb340bee-12f3-45fe-9bfe-15fe6e367acb": {
+   "name": "CJ Baran",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "bb9f9990-a7fa-4bc2-ad2d-431834a22bb9": {
+   "name": "Anneliese van der Pol",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "452732",
+    "matched_artist_name": "Anneliese van der Pol",
+    "refused": [],
+    "track": "Cute Boys with Short Haircuts"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Over It"
+   },
+   "mb_deezer_id": "452732"
+  },
+  "bbd0c83d-4e92-4aed-bbc9-69fbcfc8dd2e": {
+   "name": "Trond-Viggo Melssen",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "bc092e18-29bc-49c1-800f-9c5e74705661": {
+   "name": "Critter Fuqua",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "bc4769d1-5584-4a93-bb04-bfb25ae6debd": {
+   "name": "Martin Johnson",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "818296",
+    "matched_artist_name": "Martin Johnson",
+    "refused": [],
+    "track": "\u00c9l\u00e9gie, Op. 24 (Version for Cello & Orchestra)"
+   }
+  },
+  "bc562e9d-d340-4bcf-909a-4e81c0bed24c": {
+   "name": "Yung Joey",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "bc8631fc-fa4d-4dcb-8e78-0d97b1573739": {
+   "name": "Jay Lane",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "bd120416-7c92-4f76-bb59-a8f1fc798b55": {
+   "name": "mommy",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "7559004",
+    "matched_artist_name": "Mommy",
+    "refused": [],
+    "track": "thinking of you"
+   }
+  },
+  "bd1acfbe-6acc-4d4d-b0a3-4c120765f64a": {
+   "name": "Juan Blas",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Juan Blas",
+    "refused": [],
+    "track": "\u00c9xodo II"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Exodo II (Album Version)"
+   },
+   "mb_deezer_id": "317152"
+  },
+  "bd4dc694-680c-4dd3-be51-10c0bd19fe0a": {
+   "name": "Taura Stinson",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4407752",
+    "matched_artist_name": "Taura Stinson",
+    "refused": [],
+    "track": "Moon Girl Magic (70s Retro Version)"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Moon Girl Magic/Moon Girl Magic (70s Retro Version) Mashup"
+   },
+   "mb_deezer_id": "4407752"
+  },
+  "bd9cf25d-4299-4063-8d01-65336d0194b3": {
+   "name": "Ben Ellman",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "bde1d87c-a898-4273-9667-036bf0ac5e84": {
+   "name": "Tobias Sammet",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "be3c0d7a-4e36-4fc3-8715-7daaeef60bae": {
+   "name": "John Willis",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "John Willis",
+    "refused": [],
+    "track": "King of the Cocktail Party"
+   }
+  },
+  "bef6db67-06fd-464c-a221-7b7dd3587f12": {
+   "name": "XX92",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "XX92",
+    "refused": [],
+    "track": "Trap House Lonely"
+   }
+  },
+  "bef6e0ce-a968-47ae-b0ed-89cd50936dca": {
+   "name": "tzelun",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "52844612",
+    "matched_artist_name": "tzelun",
+    "refused": [],
+    "track": "See U Soon (Song For Dad)"
+   }
+  },
+  "bf07db1c-5abd-4fcc-b4b7-2716d94f7bea": {
+   "name": "Greg Hopkins",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Greg Hopkins",
+    "refused": [],
+    "track": "Stretchin'"
+   }
+  },
+  "bf28991e-edd4-4f1b-9f2f-563a8b9d72b1": {
+   "name": "Ron Grant",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Ron Grant",
+    "refused": [],
+    "track": "When I Need You"
+   }
+  },
+  "bf433f8b-5832-49d2-931d-90cff78e63fe": {
+   "name": "DIIMOND MEEKS",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "14812023",
+    "matched_artist_name": "Diimond Meeks",
+    "refused": [],
+    "track": "Loose Me (feat. CeeLo Green)"
+   }
+  },
+  "bf6c4678-1f01-4ccc-be3d-1301412cfd88": {
+   "name": "Sitzka",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c0cf8e46-34a7-4a52-8ef6-0d800cb53f1b": {
+   "name": "Victor Indrizzo",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c0dbfcbc-e75e-4bc2-a99e-81b026d21bbf": {
+   "name": "Victoria Beaumont",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5317062",
+    "matched_artist_name": "Victoria Beaumont",
+    "refused": [],
+    "track": "Look At Me Now"
+   }
+  },
+  "c1900fad-a760-4162-94d1-f84b6245f566": {
+   "name": "Villa Black",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Villa Black",
+    "refused": [],
+    "track": "Broken Wings (Pompougnac & Schillings Remix) [feat. Juanita Grande]"
+   }
+  },
+  "c3491194-e6b0-48e4-8856-4380f00c2bea": {
+   "name": "Tommy Luske",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c436abb5-8399-4009-9c19-154e2614babb": {
+   "name": "\u30e4\u30de\u30de\u30c1\u30df\u30ad",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c43fa505-eaa8-4c2a-920f-5dd3556d8d88": {
+   "name": "Neil Stubenhaus",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c44d1c31-7744-4134-baa7-04571df449f4": {
+   "name": "Elspongie",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c4826995-fb1f-4545-8498-a7abbc3b619f": {
+   "name": "Mike Davis",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "3489251",
+    "matched_artist_name": "Mike Davis",
+    "refused": [],
+    "track": "Put Your Hands Up (Club Mix)"
+   }
+  },
+  "c549af8e-6c69-45d5-a121-860e9716ccb9": {
+   "name": "C.J.",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "666858",
+    "matched_artist_name": "C.J.",
+    "refused": [],
+    "track": "Favorite Boy"
+   }
+  },
+  "c55207b0-f0b8-4259-a478-5e1b17455694": {
+   "name": "Didi Gutman",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Didi Gutman",
+    "refused": [],
+    "track": "Vac\u00edo"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Tu Piel"
+   },
+   "mb_deezer_id": "866719"
+  },
+  "c58441be-8645-4bc1-9096-41c141b353f1": {
+   "name": "Simon Oscroft",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4753389",
+    "matched_artist_name": "Simon Oscroft",
+    "refused": [],
+    "track": "Touch the Sky"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4753389"
+  },
+  "c594be96-0e37-41d6-93e5-f9fe0dcd4809": {
+   "name": "Jessica DiCicco",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c59cb57a-b54c-41f4-ba31-ff0c2d603b46": {
+   "name": "Lady Katee",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c6e24335-2ba8-454f-babe-7b1332c6254d": {
+   "name": "Darrell Crooks",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4446216"
+  },
+  "c797247b-d0d3-4f82-a650-a52428f9e390": {
+   "name": "Josh Carter",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c851cad0-b549-449c-9a8d-ce65e90e6d16": {
+   "name": "Vivi",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "164354",
+    "matched_artist_name": "ViVi",
+    "refused": [],
+    "track": "PLAYGROUND"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Just for Me (Extended Version)"
+   },
+   "mb_deezer_id": "208453297"
+  },
+  "c8d22dba-5577-40db-9be3-7e2cacb23009": {
+   "name": "Christopher Ahn",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "c928568a-a888-497f-92ef-2fbb01003551": {
+   "name": "Al Doyle",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4420486"
+  },
+  "c93d8aba-c0ea-43e4-bebc-138601ac0719": {
+   "name": "Christian Langdon",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Christian Langdon",
+    "refused": [],
+    "track": "Hurt"
+   }
+  },
+  "c956a6b7-59bd-4155-9fbd-3f3278d0c276": {
+   "name": "Oscar Holter",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4437829"
+  },
+  "c9bf50f1-2d35-4158-9908-a9b7aff3e825": {
+   "name": "Jamie Odell",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ca394f50-3909-4710-8887-b5b25e02aa5f": {
+   "name": "Anesha",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ca503887-d2bc-48e3-8316-bc91987105d9": {
+   "name": "Jason Lader",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "cad530e4-0781-4d79-96de-35919a09189d": {
+   "name": "Nelson Carter",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "316549",
+    "matched_artist_name": "Nelson Carter",
+    "refused": [],
+    "track": "Ye Jacobytes"
+   }
+  },
+  "cae8ad06-1902-4c54-bb28-70264464ab6a": {
+   "name": "William Wiik Larsen",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "cb3d9d6d-8076-4294-a102-c42a01e50387": {
+   "name": "Kate Rockwell",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "14772315",
+    "matched_artist_name": "Kate Rockwell",
+    "refused": [],
+    "track": "Sexy"
+   }
+  },
+  "cbdab78f-9cbf-4bd6-b31c-28ce1c53c6fb": {
+   "name": "Henrik J\u00e4derberg",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "cbef12cc-ef79-422c-9a23-b4c19224a1e7": {
+   "name": "\u767d\u77f3\u674f",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "cc04b0b7-f297-4867-97a1-99e51dab9d74": {
+   "name": "DJ Mabheko",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "cc0d5db5-1dec-4660-a4b3-666931ea85b3": {
+   "name": "Paul Roebling",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Paul Roebling",
+    "refused": [],
+    "track": "Oliver Wendell Holmes"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "265715"
+  },
+  "ccddee91-342c-4bcf-afd3-d71d10780785": {
+   "name": "Ray Suen",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "6781021",
+    "matched_artist_name": "Ray Suen",
+    "refused": [],
+    "track": "Fantasie in F Minor, D. 940 (feat. Thomas Nickell)"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "6781021"
+  },
+  "ce28c95a-ad15-49fe-9557-e0d7eb61c6b5": {
+   "name": "Pasi Rantanen",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ce3ab14e-cb18-44e2-8a43-1be9883fb35e": {
+   "name": "Kim Circle",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Kim Circle",
+    "refused": [],
+    "track": "I Put a Spell on You (from True Romance)"
+   }
+  },
+  "cfc005c7-8896-4c26-b252-c61c7a73a252": {
+   "name": "Sophia Anne Caruso",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5410217",
+    "matched_artist_name": "Sophia Anne Caruso",
+    "refused": [],
+    "track": "Dead Mom"
+   }
+  },
+  "cfc059b6-20c4-41dd-a963-5dc6a1e1c56b": {
+   "name": "\u4e2d\u91ce\u4e09\u7396",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Kimi ga Suki ~ Three Feelings ~"
+   },
+   "mb_deezer_id": "60481622"
+  },
+  "d0135fd6-a79a-4ec2-a379-52b2e4a628f1": {
+   "name": "Bob Ezrin",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "d082a1a6-7a9e-43ae-898e-ec9b24ee8308": {
+   "name": "Hyd Lunch",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Hyd Lunch",
+    "refused": [],
+    "track": "Yagami Tantei Jimusho"
+   }
+  },
+  "d0870801-4b91-4e28-9332-0c51cd7c5147": {
+   "name": "Pleasure",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "95857742"
+  },
+  "d0fad952-49d1-41da-a5b4-e36f5a853349": {
+   "name": "Money Posse Tyler",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "12752519",
+    "matched_artist_name": "MONEY POSSE TYLER",
+    "refused": [],
+    "track": "10 Toes Down"
+   }
+  },
+  "d1ecf86c-3d89-420e-b8c1-bceb6b101c61": {
+   "name": "Taylor Momsen",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4446249"
+  },
+  "d207a9a6-9a10-489c-9043-79ec221b3ffd": {
+   "name": "Hayko",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4367300",
+    "matched_artist_name": "Hayko",
+    "refused": [],
+    "track": "Sude Sude"
+   }
+  },
+  "d288a227-30c0-4bed-95c3-8c9614646633": {
+   "name": "Jacob Kasher",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "d28ccf6a-e54b-464d-83f5-f0424e4ae27e": {
+   "name": "DJShimamura",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Trust In The Rockets"
+   },
+   "mb_deezer_id": "78903502"
+  },
+  "d29c1c3e-0f6f-41a6-bebe-b18c1bd84623": {
+   "name": "Orobiyi Adunni",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "d38d86cd-eb8d-4e8b-ab83-dc381c05d8ac": {
+   "name": "Sue Ennis",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "d459e60b-240b-42d3-ad07-a5a1facfa6b4": {
+   "name": "Ziv Zaifman",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "13651521",
+    "matched_artist_name": "Ziv Zaifman",
+    "refused": [],
+    "track": "A Million Dreams"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "13651521"
+  },
+  "d4712f74-d940-499b-8f88-9d9c22601443": {
+   "name": "C\u00e9cile Bredie",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "206566",
+    "matched_artist_name": "Cecile Bredie",
+    "refused": [],
+    "track": "The Autumn Leaves"
+   }
+  },
+  "d486f00b-462f-4be0-83d8-af80d94f0d2e": {
+   "name": "Marco Marin",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5291601",
+    "matched_artist_name": "Marco Marin",
+    "refused": [],
+    "track": "Buleria"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Buleria"
+   },
+   "mb_deezer_id": "5291601"
+  },
+  "d49145d6-a48e-46a5-ba16-4b43f86fca20": {
+   "name": "Space One",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "1427436",
+    "matched_artist_name": "SPACE ONE",
+    "refused": [],
+    "track": "Aiutami a distruggerti"
+   }
+  },
+  "d566b815-6f13-4eea-b96e-c28c360aa3ac": {
+   "name": "Bevan Smith",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Bevan Smith",
+    "refused": [],
+    "track": "Blue Yellow"
+   }
+  },
+  "d5d33932-8f17-4e97-a1c5-490eba4b3f29": {
+   "name": "scarlet",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "75886322",
+    "matched_artist_name": "Scarlet",
+    "refused": [],
+    "track": "Independent Love Song"
+   }
+  },
+  "d78a214c-7582-449b-8714-f89784324bcc": {
+   "name": "\u6850\u8c37\u9065",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "d795e00a-4d27-4b02-9e93-e52691e93d43": {
+   "name": "\u9ad8\u91ce\u52f2",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "d79976d7-d895-480e-83c2-877f4cdd7073": {
+   "name": "Jimmy Jam",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4404624",
+    "matched_artist_name": "Jimmy Jam",
+    "refused": [],
+    "track": "Half of Me"
+   }
+  },
+  "d863e16e-8811-4182-a168-4d85da239d79": {
+   "name": "Cory Rooney",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "d8a60f99-100f-4c91-9ca3-cb8b247aed03": {
+   "name": "Siff",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5092928",
+    "matched_artist_name": "Siff",
+    "refused": [],
+    "track": "Mit hjerte der griner"
+   }
+  },
+  "d8c9515b-1c36-434d-b69b-e081cfc31155": {
+   "name": "Killrina",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Killrina",
+    "refused": [],
+    "track": "Perspective"
+   }
+  },
+  "da0dad52-226d-4099-8556-33e8535a417a": {
+   "name": "Zak Najor",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Zak Najor",
+    "refused": [],
+    "track": "Love Comes Around"
+   }
+  },
+  "dab626f0-8589-4c71-93b4-2dc38afe69c7": {
+   "name": "Jabari Manwa",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "dacbcb19-934a-4dca-91fa-f00f7e2b207d": {
+   "name": "Vibraphile",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "92998",
+    "matched_artist_name": "Vibraphile",
+    "refused": [],
+    "track": "Canyon"
+   }
+  },
+  "dadca2bf-018c-4931-b978-c8837695e616": {
+   "name": "Devrim Karao\u011flu",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4455393",
+    "matched_artist_name": "Devrim Karaoglu",
+    "refused": [],
+    "track": "Club Scene 2\u00a0"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "4455393"
+  },
+  "db38cb96-8632-47b5-b5cd-57e0375bd2f9": {
+   "name": "Bitter Stephens",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "db42e0e4-09fd-4184-83ed-3ffe045786a3": {
+   "name": "Eli Heisler",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "dbcbc687-112c-4f19-b44c-0f12e1a3955b": {
+   "name": "Stint",
+   "dsp": [
+    "apple",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "dbce9ed6-fc0c-42b8-b5e6-b4df335dd1b8": {
+   "name": "No Vacancy",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Fight"
+   },
+   "mb_deezer_id": "10818"
+  },
+  "dbf55f98-bd0c-40ae-b4e2-cd599c3abc91": {
+   "name": "Dana Perkins",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "dc65b4d2-a11d-418d-ad71-4e7ad8c29546": {
+   "name": "Keith Fontano",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "13995015"
+  },
+  "dc963b94-1b5b-4df3-9d34-fb3063df9f42": {
+   "name": "Cidro Onetoo",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "dcdac6c7-1933-4bb4-9e94-4a84ddefc695": {
+   "name": "The Philsta",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "dd2458f0-3422-4843-89b7-ca446303ee84": {
+   "name": "Gabriela Berlingeri",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Another Love"
+   },
+   "mb_deezer_id": "263637"
+  },
+  "dd24590d-caf8-47f2-94b7-0012ab25e0d4": {
+   "name": "Fulton Burley",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Hawaiian War Chant"
+   },
+   "mb_deezer_id": "4596072"
+  },
+  "dd4c3a4f-79e5-41da-96ed-32e491fa166e": {
+   "name": "\u201cEvil\u201d Jared Hasselhoff",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ddcecd92-b255-4c14-b158-05a2bdf0a0e2": {
+   "name": "Gabe Simon",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "de60b516-4c29-41da-b6a5-48f5727ce912": {
+   "name": "Jeremy Stacey",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "de9aff01-4540-4602-b2ae-9cadded8e471": {
+   "name": "Half Metal Kaiba",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "de9bc8c0-716c-4071-88b2-4424034d1434": {
+   "name": "Alexander Bard",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "dfb0da24-e432-4e63-8949-4607e0c97bb7": {
+   "name": "Samahra Eames",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e006e94c-f5d2-407c-806a-e962213ebe4e": {
+   "name": "The New American Brass Band",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "265719",
+    "matched_artist_name": "The New American Brass Band",
+    "refused": [],
+    "track": "Dixie / Bonnie Blue Flag"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Dixie / Bonnie Blue Flag"
+   },
+   "mb_deezer_id": "265719"
+  },
+  "e0214160-edff-46e6-a108-39dab5f19c72": {
+   "name": "Parker Ighile",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4433734",
+    "matched_artist_name": "Parker Ighile",
+    "refused": [],
+    "track": "So Beautiful"
+   }
+  },
+  "e160725c-5892-434b-b51d-f76611e51d68": {
+   "name": "Roc\u00edo Garcel",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e1caa95d-4a7d-401e-83f9-06284dd0bfb8": {
+   "name": "Timothy Loo",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Timothy Loo",
+    "refused": [],
+    "track": "Suite for Cello"
+   }
+  },
+  "e3aa76a5-315e-4529-be6f-e1a18676c657": {
+   "name": "\u671b\u6708\u7a42\u6ce2",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e3ac9ae2-2d85-4259-988c-5023a44b16d6": {
+   "name": "Bee Born",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e3acac3a-c7ac-42b9-9fac-0e36e8971acf": {
+   "name": "Cuthbert Hely",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e3c223d8-68f6-4e25-8f8a-92ee1b0edd56": {
+   "name": "Donna Lynch",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Donna Lynch",
+    "refused": [],
+    "track": "Baby, I Miss You So (feat. Chelle)"
+   }
+  },
+  "e3d0ef64-655f-4198-a8bf-b23e7a1a07b8": {
+   "name": "\u65e5\u672c\u5408\u5531\u5354\u4f1a",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e3fead3e-720a-4695-b332-3bf44be4c8f1": {
+   "name": "Anthony Parnther",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "56153742",
+    "matched_artist_name": "Anthony Parnther",
+    "refused": [],
+    "track": "Santa Never Sleeps"
+   }
+  },
+  "e438ac1c-d3cc-41f0-aff2-88ab6a87a8d8": {
+   "name": "Roy Ayres",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e439dd1c-20a5-4598-9447-727aedb7734a": {
+   "name": "Tablation",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e458eba7-ccb7-47bb-8057-473330c61040": {
+   "name": "Terry Lewis",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e4ef5753-5ee6-4b8d-ac6c-491496ed1076": {
+   "name": "Guy Whittaker",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e515199a-9f42-4c16-8009-ed4015019092": {
+   "name": "Nick Long",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Nick Long",
+    "refused": [],
+    "track": "Let It Go"
+   }
+  },
+  "e5c6537f-d946-46a9-ae81-6b50dc4887b5": {
+   "name": "Sherrod Barnes",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "e7579a6e-645f-443b-a0ac-d5f379a4fce9": {
+   "name": "Mimi Imfurst",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "5115542",
+    "matched_artist_name": "Mimi Imfurst",
+    "refused": [],
+    "track": "Wicked Little Town"
+   }
+  },
+  "e8ffccc1-4c83-42ef-ad6a-e91a6303bb16": {
+   "name": "Stinc Team",
+   "dsp": [
+    "apple",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "14521067",
+    "matched_artist_name": "Stinc Team",
+    "refused": [],
+    "track": "Cyber Bullies (feat. Drakeo The Ruler, All Black & Bino Rideaux)"
+   }
+  },
+  "e905c0f3-09af-4de8-a4e2-cc0755595aff": {
+   "name": "Stanley Wayne Mathis",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "310367",
+    "matched_artist_name": "Stanley Wayne Mathis",
+    "refused": [],
+    "track": "I Feel My Luck Comin' Down"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Chow Down"
+   },
+   "mb_deezer_id": "310367"
+  },
+  "e95389e3-4b3c-4a77-a956-63f7e7790eae": {
+   "name": "Vai Mahina",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "11389668"
+  },
+  "eaa40560-71b4-4f0b-9963-5cb4070220a8": {
+   "name": "Liam Phelan",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "13525879",
+    "matched_artist_name": "Liam Phelan",
+    "refused": [],
+    "track": "I Only Love Cake and Chocolate"
+   }
+  },
+  "ead09a99-1b48-408a-ad9a-5ff9ec1efd0d": {
+   "name": "Andrea \u00c5dland",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "eb811bf7-4c99-4781-84c0-10ba6b8e33b3": {
+   "name": "Carl Falk",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "eb9d5c9a-c508-488d-9986-7b3bd9ac5b5c": {
+   "name": "yuzen",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ec816359-4cf0-421f-9ebf-b335c4357225": {
+   "name": "Okko Solanter\u00e4",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "edee2b0f-f0cd-4aed-97f9-2d9547b08223": {
+   "name": "Karl Brazil",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ee3d8c89-13d9-430b-beb9-50559c0cbbba": {
+   "name": "Erik Rutan",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "eeeb4198-d0e9-4e60-b054-ea26e35e6d7a": {
+   "name": "Nolfo",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "ef866fd0-1598-4316-b770-5d771b28d525": {
+   "name": "S\u00f3lveig Vaka Ey\u00fe\u00f3rsd\u00f3ttir",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "10644001",
+    "matched_artist_name": "S\u00f3lveig Vaka Ey\u00fe\u00f3rsd\u00f3ttir",
+    "refused": [],
+    "track": "Circulation"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Circulation"
+   },
+   "mb_deezer_id": "10644001"
+  },
+  "efbc977f-c205-480e-8434-7f8c5035610b": {
+   "name": "Nicky Garratt",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "f0a04a5d-ef92-4a00-be69-9bda8a22bbd2": {
+   "name": "Alex Hedley",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Alex Hedley",
+    "refused": [],
+    "track": "One Day"
+   }
+  },
+  "f0c7b1de-b54b-476d-a5ff-420c46ce03a4": {
+   "name": "Jennifer Kreisberg",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "7973202",
+    "matched_artist_name": "Jennifer Kreisberg",
+    "refused": [],
+    "track": "Grief"
+   }
+  },
+  "f19441d7-c124-4a3e-a86b-f9c760680d09": {
+   "name": "Lara Meyerratken",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "f24241fb-4d89-4bf2-8336-3f2a7d2c0025": {
+   "name": "KOHD",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "KOHD",
+    "refused": [],
+    "track": "My Person"
+   }
+  },
+  "f255b991-a9f1-4d29-b956-f870de1ee18b": {
+   "name": "The Lonely Schizo",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "801691",
+    "matched_artist_name": "The Lonely Schizo",
+    "refused": [],
+    "track": "Strom"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "801691"
+  },
+  "f3faa60f-b512-45a3-bd79-e6c9a0be51fc": {
+   "name": "Sing Street",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Sing Street",
+    "refused": [],
+    "track": "Up"
+   }
+  },
+  "f51d2982-29dd-43cd-8fa1-bc38dd6c1467": {
+   "name": "Broda Shaggi",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "49426082",
+    "matched_artist_name": "Broda Shaggi",
+    "refused": [],
+    "track": "IJO LOKA"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Cross My Lane"
+   },
+   "mb_deezer_id": "49426082"
+  },
+  "f5c282ea-199c-4a3c-ac14-670e95399038": {
+   "name": "Jeremy Irvine",
+   "dsp": [
+    "deezer",
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "15333113",
+    "matched_artist_name": "Jeremy Irvine",
+    "refused": [],
+    "track": "Knowing Me, Knowing You"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Super Trouper"
+   },
+   "mb_deezer_id": "15333113"
+  },
+  "f62523ac-8483-401b-9df0-7e9a336ba17c": {
+   "name": "Bill Priddle",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "f73b5237-3a77-4df0-ad1d-b69c6d42b897": {
+   "name": "Steve Little",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "f77262ce-b391-4200-b5a5-f15ed170b81d": {
+   "name": "Iain Cook",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "f7fc5a30-008d-48ab-861d-f328120e6702": {
+   "name": "Randy Castillo",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4171384",
+    "matched_artist_name": "Randy Castillo",
+    "refused": [],
+    "track": "Welcome To My Nightmare"
+   }
+  },
+  "f894dd01-2d23-4128-a103-6ad5f2ead74c": {
+   "name": "Milkyway",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "f899816a-fd4e-4a95-ab5b-a9643c376710": {
+   "name": "Phil Palmer",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "f8b77f00-05b2-4094-85ef-2ad031f9750c": {
+   "name": "Rafael Bittencourt",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4634781",
+    "matched_artist_name": "Rafael Bittencourt",
+    "refused": [],
+    "track": "Wasted Years (Ac\u00fastico)"
+   }
+  },
+  "f8bb7417-8e82-4a39-82dc-9205f3362325": {
+   "name": "Jordan Palmer",
+   "dsp": [
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Jordan Palmer",
+    "refused": [],
+    "track": "One Minute"
+   }
+  },
+  "f9095e9b-ec16-41cc-ae2a-e56e8441ec5c": {
+   "name": "AKI",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "296020131",
+    "matched_artist_name": "Aki",
+    "refused": [],
+    "track": "slowly (feat. kwokahs)"
+   }
+  },
+  "fa39b977-27b5-4dac-9d4d-5a967ce13a6e": {
+   "name": "Freddie Shuman",
+   "dsp": [
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "7969722",
+    "matched_artist_name": "Freddie Shuman",
+    "refused": [],
+    "track": "Fricska"
+   },
+   "id_path": {
+    "resolves": false,
+    "refused": null
+   },
+   "mb_deezer_id": "7969722"
+  },
+  "fb3dad3d-2cf2-4673-92e4-4c5e3e8ed537": {
+   "name": "Thea Gajic",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "fb8c57df-bce5-4eeb-b49c-e225f3e1aff0": {
+   "name": "Julian M. Conroy",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "fc0b8b6e-d576-43f2-855e-caf00f22d854": {
+   "name": "Ben Butler",
+   "dsp": [
+    "apple"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Ben Butler",
+    "refused": [],
+    "track": "Bach Cello Suite"
+   }
+  },
+  "fc2ab5cf-9db5-4cb9-97a5-baac30f8ed1b": {
+   "name": "Tomato Jack",
+   "dsp": [
+    "apple",
+    "deezer",
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Tomato Jack",
+    "refused": [],
+    "track": "Bei Mir Bist du Schoen"
+   },
+   "id_path": {
+    "resolves": true,
+    "refused": null,
+    "track": "Bei Mir Bist du Schoen"
+   },
+   "mb_deezer_id": "4051383"
+  },
+  "fcc4ea68-fab7-475e-9d3c-de0bc2ab798b": {
+   "name": "Molly Hager",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Molly Hager",
+    "refused": [],
+    "track": "Broadway, Here I Come!"
+   }
+  },
+  "fcda6520-1956-464e-9730-d1427e9ac0e7": {
+   "name": "Brandon Jenner",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "8082509",
+    "matched_artist_name": "Brandon Jenner",
+    "refused": [],
+    "track": "Burning Ground"
+   }
+  },
+  "fdc7514e-1ab3-4cd8-a022-0aa3bcc2c8ae": {
+   "name": "Pete Robertson",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "itunes",
+    "matched_artist_id": null,
+    "matched_artist_name": "Pete Robertson",
+    "refused": [],
+    "track": "Pickle Shot"
+   }
+  },
+  "fe931748-3343-4d47-9519-50eb946bb8a2": {
+   "name": "\u5f8c\u308d\u304b\u3089\u9019\u3044\u3088\u308a\u968aB",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "257428812",
+    "matched_artist_name": "\u5f8c\u308d\u304b\u3089\u9019\u3044\u3088\u308a\u968aB",
+    "refused": [],
+    "track": "\u9ed2\u92fc\u306e\u30b9\u30c8\u30e9\u30a4\u30d0\u30fc"
+   }
+  },
+  "ff9c39c0-2d01-48ec-8802-44940d8bd68b": {
+   "name": "P. Killer Trackz",
+   "dsp": [
+    "spotify"
+   ],
+   "name_path": {
+    "resolves": false,
+    "source": null,
+    "matched_artist_id": null,
+    "matched_artist_name": null,
+    "refused": []
+   }
+  },
+  "fff0b61a-7e14-4803-a281-037faf148e82": {
+   "name": "Sharon Vaughn",
+   "dsp": [
+    "spotify",
+    "tidal"
+   ],
+   "name_path": {
+    "resolves": true,
+    "source": "deezer",
+    "matched_artist_id": "4423636",
+    "matched_artist_name": "Sharon Vaughn",
+    "refused": [],
+    "track": "Didn't You Want To Know"
+   }
+  }
+ }
+}
