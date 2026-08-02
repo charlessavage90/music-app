@@ -184,5 +184,13 @@ spec §9 requires byte-identical builds.
   exactly how a weak break produces false confidence. `test_pipeline_mirrors.py` was
   likewise shown red by adding a config field.
 - **Snyk:** clean over `builder/src`. Over all of `builder/`, 31 findings, all
-  pre-existing and none in any file this work touched. **One is unrecorded** — see
-  `NEXT.md`.
+  pre-existing and none in any file this work touched. **One was covered by no deferral
+  row** — a Medium in `rel_discogs.py`, found by reconciling the scan count against the
+  table rather than by reading the findings. It now has a row in `NEXT.md`.
+- **Doc audit (B1):** one HIGH and one MEDIUM. **The HIGH was false and stale on arrival** —
+  it reported the two new documents missing from `docs/README.md` while its own closing
+  notes described the rows it said were absent; it had read the branch before that commit
+  landed. Verified against the file rather than accepted or dismissed wholesale, which is
+  the standing instruction for this agent's reports. **The MEDIUM was valid and was this
+  session's defect**: this section pointed at a `NEXT.md` row that did not exist. Writing
+  the row is what made the pointer true.
