@@ -18,12 +18,17 @@ PRODUCTION_ALGORITHM = (  # ALG-E — the adopted 75k archive's algorithm
     "session_based_days_7500_session_300_contribution_5"
     "_threshold_10_limit_100_filter_True_skip_30"
 )
+# ALG-B — the named re-crawl candidate (AS log §7); differs from production by
+# contribution_3. Named rather than reached by index because it is now a
+# selector: it is the second population with a censused no-release drop list
+# (no_release_drop.py), and `PERMITTED_ALGORITHMS[1]` cannot say that.
+CANDIDATE_ALGORITHM = (
+    "session_based_days_7500_session_300_contribution_3"
+    "_threshold_10_limit_100_filter_True_skip_30"
+)
 PERMITTED_ALGORITHMS = (
     PRODUCTION_ALGORITHM,
-    # ALG-B — the named re-crawl candidate (AS log §7); differs from
-    # production by contribution_3.
-    "session_based_days_7500_session_300_contribution_3"
-    "_threshold_10_limit_100_filter_True_skip_30",
+    CANDIDATE_ALGORITHM,
     # ALG-A
     "session_based_days_1825_session_300_contribution_3"
     "_threshold_10_limit_100_filter_True_skip_30",

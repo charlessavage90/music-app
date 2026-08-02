@@ -12,11 +12,47 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-01 (latest), when `TAS-` Task 8 landed. The label weighting probe is COMPLETE and the `TAS-` probe is now COMPLETE THROUGH TASK 8 — its findings document exists and nothing is owed on it. The next action is the OWNER'S.**
+**Last updated: 2026-08-02, when the drop rule was WIRED, the pipeline/mirror divergence it opened was CLOSED, and the candidate (`ALG-B`) population was CENSUSED with its own drop list frozen. The next substantial step is the cap re-evaluation pre-registration, and it needs the owner's half before it can be written.**
 
 ---
 
 ## Next
+
+> ## ✅ THE DROP RULE IS WIRED, AND BOTH POPULATIONS NOW HAVE A DROP LIST, 2026-08-02.
+>
+> Entry point is the current handoff:
+> [`2026-08-02-HANDOFF-tail-drop-and-candidate-census.md`](2026-08-02-HANDOFF-tail-drop-and-candidate-census.md).
+> Reasoning: [`2026-08-02-tail-drop-wiring-execution-log.md`](2026-08-02-tail-drop-wiring-execution-log.md).
+> Figures live in the probe JSON and are **cited, never restated**:
+> `builder/analysis/2026-08-02-candidate-tail-census/ctc_census.json`, `ctc_clips.json`,
+> `ctc_droplist.json`.
+>
+> **Three things landed.** The adopted rule is applied in `pipeline.py` before the mass
+> computation (PR #62). The divergence that opened between `build_from_archive` and the
+> probe harnesses mirroring it is closed, with a guard test that fires when `BuilderConfig`
+> gains a field (PR #63). And the candidate population is censused, so **the cleanup can now
+> be held genuinely constant across a comparison of the two data sets** — which was the
+> uncontrolled variable that motivated all of it.
+>
+> **✅ THE BLOCKING ITEM IS CLOSED, 2026-08-02 (latest).** The builder no longer applies one
+> drop list to whichever archive it is handed: the list is selected by `config.algorithm` —
+> the same value that already chooses the archive sub-tree — and an **uncensused population
+> refuses to build rather than borrowing another's list**. Both censused lists ship as
+> package data, sha-pinned. Nothing now blocks a build from `ALG-B`. See the deferral table.
+>
+> **The next substantial step is the CAP RE-EVALUATION PRE-REGISTRATION**, written cold by a
+> fresh session. Every input now exists — Track B as measured input, the `WGT-` device
+> recommendation, and both drop lists. **What it needs from the owner first, because it is
+> his column:** how much better a connection rule must be to justify a rebuild, and whether
+> the data-set switch is inside its scope or a separate question.
+>
+> **Two rulings from 2026-08-02 that must not be re-opened:** the drop rule is **not**
+> re-validated on the candidate population (execution log §5 — the decisive point is that no
+> second refinement mechanism exists, so a measured rate would change nothing), and the
+> wiring **deliberately contradicted** the 2026-08-01 handoff's closing instruction, with
+> reasoning in execution log §1.
+>
+> ---
 
 > ## The LABEL WEIGHTING AND EVIDENCE PROBE (`WGT-`) is COMPLETE, 2026-08-01. **Nothing adopted; the next action is the OWNER'S.**
 >
@@ -44,20 +80,20 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > no-release-tail question is CLOSED and a drop rule is ADOPTED** — keep a
 > release-less artist only where a commercial-DSP link exists **and** a clip
 > resolves; **7,035 of 7,686 dropped**, list frozen at
-> `builder/analysis/2026-08-01-label-weighting/tail_droplist.json`. It is **not yet
-> wired into the builder** — see the deferral table, where the rule must not be
-> re-litigated, only applied. Evidence: `tail_signals.json` (the population census
+> `builder/analysis/2026-08-01-label-weighting/tail_droplist.json`. **✅ WIRED into the
+> builder 2026-08-02 (PR #62)** — the rule must not be re-litigated, only applied; a
+> second list now exists for the candidate population, see the top section.
+> Evidence: `tail_signals.json` (the population census
 > and the artist-**type** split — the tail is 7.2% Group against 37.9% for the rest
 > of the graph), `tail_clips.json` (what plays, plus a **measured 9.4% `BYP-13`
 > wrong-artist rate** in the app's own name-based clip resolver, which is a live
 > user-facing defect independent of this decision), `tail_exposure.json` (delivery
 > rates). The remaining candidate track is below.
 >
-> **The candidate next tracks, both his call:** the cap re-evaluation pre-registration
-> (mutual-k-NN re-question; its device input now exists, Track B its measured input), and/or
-> the no-release-tail product decision (his 20 verdicts are its evidence; note any
-> "has a release" filter would cut both real artists his sample found). **`TAS-` Task 8 has
-> since LANDED** (2026-08-01, latest) — see the `TAS-` section below; nothing is owed on it.
+> **Both candidate tracks have since moved on.** The no-release-tail decision is CLOSED,
+> adopted and now wired; the cap re-evaluation pre-registration is the live next step and
+> is described in the top section, which supersedes this paragraph. **`TAS-` Task 8
+> LANDED** (2026-08-01) — see the `TAS-` section below; nothing is owed on it.
 >
 > ---
 >
@@ -381,7 +417,9 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **Discogs alias expansion** | **If a frame amendment is ever triggered.** Discogs attribution goes through one MB-sourced ID; alias releases are invisible, so every Discogs figure is a lower bound (identical in every cell — no comparison threatened). `discogs_20260701_artists.xml` is already on disk; expansion is an exact ID join, no download, no name matching. |
 | **The Discogs `masters` export** | **Iff Discogs support-counting is ever wanted.** Irrelevant to every presence-based use (unions are reissue-proof by construction) and would *lose* tail coverage (single-version releases often have no master); but it is the album-grain collapse that avoids the pressing confound (`WGT-4c`) if Discogs evidence counts are ever proposed. **Owner spot check 2026-08-01 (DSotM, 1000+ releases):** individual pressings accrete stray labels beyond the master's (`art rock`, `classic rock`, `pop rock` beside the master's two) — so the release-built frames carry mild curatorial noise a master build would not, the flip side of the coverage loss. Recorded; changes no measured verdict. |
 | ✅ **The no-release-tail product decision** | **DECIDED BY THE OWNER 2026-08-01 — a drop rule is ADOPTED and the list is frozen.** Keep a release-less artist only where a commercial-DSP link exists **and** a clip resolves; **7,035 of 7,686 dropped, 651 kept** (`builder/analysis/2026-08-01-label-weighting/tail_droplist.json`, drop-list sha256 `d876c7ba…`). Struck as an open question; the wiring row below is what remains. |
-| ⚠ **The drop list is NOT wired into the builder** | **At the next build, and it is an ADOPTED decision rather than an open question — do not re-litigate the rule, only apply it.** Add the frozen `drop_mbids` to `pipeline.py`'s `excluded` set beside the nameless drop (the exact precedent, same place, before the mass computation). Owes tests. **Three things the implementer must carry:** (a) the list is a **2026-08-01 snapshot** — clips come and go, and it must not be silently re-resolved at build time, because `build_from_archive` is offline by a hard rule and spec §9 requires byte-identical builds; (b) dropping before the mass computation moves **every surviving artist's popularity marginal**, so this is a different graph, not the old one minus rows; (c) removing the 7,035 additionally strands **127** on the built graph — a lower bound, since a real build re-selects. |
+| ✅ **The drop list is wired into the builder** | **DONE 2026-08-02, PR #62.** `drop_no_release_tail` (default on) applies the frozen list in `pipeline.py` beside the nameless drop, before the mass computation; the list ships as package data pinned by sha256. All three carried constraints are commented at their definitions. **The flag is an experimental control, never a shipping option** — it exists so a build-side experiment can hold the drop constant in a factor table, and so frozen probes can be era-pinned. Struck, kept for the record. |
+| ✅ **One list, applied to any archive** | **DISCHARGED 2026-08-02 (latest) — both halves, the per-archive list and the refusal.** The list is selected by `config.algorithm`, which already decides which archive sub-tree a build reads, so a build's algorithm *is* its archive identity and no new `BuilderConfig` field was needed (the mirrors guard stays quiet, and `PERMITTED_ALGORITHMS[1]` still resolves for every frozen probe). Both censused populations ship as sha-pinned package data — `ALG-E` 7,035, `ALG-B` 9,501. The four **uncensused** algorithms raise `NoDropListForAlgorithm` rather than borrowing a list; the refusal is conditional on `drop_no_release_tail` being on, so the era-pinned probes that build uncensused populations with it off are untouched. **The magnitude of the averted defect, since the row understated it:** the two lists share only **2,712** MBIDs, so applying today's to an `ALG-B` build would have dropped **4,323** artists that rule keeps *and* missed **6,789** it drops. Mutation-tested — reinstating the old one-list behaviour turns five tests red. Struck, kept for the record. |
+| ✅ **Whether the drop rule needs re-validating on the candidate population** | **RULED BY THE OWNER 2026-08-02: NO, and the reasoning is durable rather than circumstantial.** The rule does not rest on which artists are in the graph. It rests on three claims that hold for any population: release-less artists are generally poor recommendations to surface; the reason not to drop *all* of them is that MusicBrainz is incomplete, not that they are good (**both keepers in his 20 were real artists MB had simply failed to document**); and the DSP-link-plus-clip check is the best false-positive catcher available. **The decisive point is the one that closes it:** a measured false-positive rate on the candidate would change nothing, because no second refinement mechanism exists — so the follow-up question ("and then what?") has no answer, and dropping a large number of bad recommendations is a strong trade even carrying some false positives. **A future session must not propose a second hand sample on transferability grounds.** Distinct from the *magnitude* question — if a candidate tail were a far larger share of its population, that is a different-sized intervention, and `analysis/2026-08-02-candidate-tail-census/` measures it. |
 | **Whether the post-drop graph owes a blind listen before adoption** (`REQ-38`) | **The owner's call, raised 2026-08-01 and not answered.** The *rule* was decided on listener judgment (his 20 verdicts), so no offline metric overrode him — but the drop changes routing for every pair, and nothing has heard the result. Distinct from the rule's own acceptance, which is closed. |
 | **The label-affinity / clustering data asset** | **The owner's trigger.** `wgt_release_raw.json` side-collected record-label credits, countries and years per graph artist; nothing consumes it. His style-vocabulary read adds: for the curated Discogs styles, carrier count alone tracks usability — the clustering idea keeps its value for the open MB tag space, where frequency separates nothing. |
 | **Tag clustering as a junk-label filter, owner-raised 2026-08-01** | **Unmeasured; the owner's trigger.** The current whitelist keeps a tag only if MusicBrainz classifies it as a genre — an ontology decision, which is why `british invasion` is discarded despite binding coherent artists. The owner's proposal: a real label's carriers cluster in the map, a junk label's scatter. Frequency alone cannot separate them, since `seen live` and a genuine niche genre are both rare. |
@@ -395,6 +433,7 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **`REL-3`'s ratio bar is degenerate and must not be reused as written** | **Before any successor pre-registration expresses a bar as a multiple of a null.** The null median was exactly zero, so "≥ 3× the null" was satisfied by a division by zero. A ratio bar needs a stated floor on the denominator, or a difference bar instead. |
 | **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
 | **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**; reopen if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |
+| ⚠ **One Snyk MEDIUM that no row covered until now** — `rel_discogs.py:87`, insecure XML parser (CWE-611) on `xml.etree.ElementTree.iterparse` over the local Discogs dump | **Recorded 2026-08-02; extending the acceptance is the owner's, as with every row above.** Surfaced by reconciling a full `builder/` scan against this table: the rows account for 30 findings and the scan returns **31**. It escaped because the accepted set is all **Lows** and this is a Medium, so it fell between two rows rather than being weighed. **Check applicability before spending any effort:** the rule is titled *"Python < 3.11"* and this project requires **>= 3.12** (`builder/pyproject.toml`), so it may not apply at all. If it does: the input is a local third-party dump read by a frozen, offline probe, which is the same low-exposure argument the Lows were accepted on. |
 | **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. Track B's harness complied throughout (`ReadOnlyArchive`). **Condition fired again 2026-07-30** — the `TAS-`/`TD-` capture reads the archive through the same Track B helper and therefore through `ReadOnlyArchive`; complied, verified at closeout. **Stays open**: it is a standing condition on future harnesses, not a one-off to discharge. |
 | **`ALG-B` edge quality / blind listen** | **If the owner picks up the re-crawl** (`REQ-38`). |
 | **`TB-P5H-7`** | **If any successor bypass-device or router-pricing pre-registration is written.** |

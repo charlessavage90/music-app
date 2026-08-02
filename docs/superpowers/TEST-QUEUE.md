@@ -23,6 +23,50 @@ the point.**
 
 ---
 
+## N/A — 2026-08-02 — the cleanup you decided on is now built in; still nothing changes until a rebuild
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are empty;
+no server was started and none was left behind. No routing, no graph, no weighting, no cost
+function, and not one line of the app or the website changed. **A journey you build now is
+identical to one from yesterday.**
+
+**What happened, in plain terms.** Yesterday you decided to remove the roughly seven
+thousand "ghost" artists — the ones with no records to their name that a music service
+can't play either. That decision was written down but not yet built into anything. Today it
+was.
+
+- **The map-builder now applies your rule automatically.** The next time a map is built,
+  those artists are gone. **No map has been rebuilt, so you would still see no difference
+  today.**
+- **We worked out the same list for the alternative data set** — the one that would come
+  from changing the collection setting. It turned out that data has slightly *more* ghost
+  artists than today's, and they are slightly deader: fewer of them have a page on any
+  music service, and fewer of those have anything that actually plays. That supports the
+  rule rather than undermining it, and it means both versions of the map can now be cleaned
+  to the same standard, which is what makes any future comparison between them fair.
+- **We also fixed an internal bookkeeping problem we created ourselves.** Adding the
+  cleanup meant some of our own measurement tools quietly stopped matching the real
+  map-builder. Nothing was wrong with any past result, but a future one could have been.
+  There is now a check that fails loudly if it happens again.
+
+**One thing worth thirty seconds, because it is about what you hear today.** The fault
+where a card plays a clip by a different artist of the same name showed up again in this
+data — about one in sixteen of the cases we could check, against about one in eleven last
+time. Those two numbers are close enough to be the same number measured twice; what they
+tell us is that the fault is real and roughly this common. It is unrelated to everything
+above and still unfixed.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes — realistically, when a map is actually rebuilt.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+Detail, if you want it: `docs/superpowers/2026-08-02-tail-drop-wiring-execution-log.md`.
+
+---
+
 ## N/A — 2026-08-01 (evening) — you decided to clean about one artist in ten off the map; nothing changes until a rebuild
 <!-- No "(latest)": that marker stays on the live QUEUED redesign entry further down, which
      is still owed. This is N/A — there is nothing here to run. -->
