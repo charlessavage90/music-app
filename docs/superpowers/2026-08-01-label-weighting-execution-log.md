@@ -134,3 +134,143 @@ CLI-path class).
 - **D3**: every conclusion in the findings names its substrate; the capture sha and the
   adopted artifact sha are recorded in `wgt_grid.json` / `tail_sample.json` respectively,
   each verified in-run against the recorded values.
+
+---
+
+## §8 The no-release tail, from open question to adopted drop rule
+
+**A later session the same day, 2026-08-01, owner-directed.** It began as the `NEXT.md`
+question this probe's `tail_sample.py` had opened and **ended in an adopted decision**.
+Appended here rather than in a new document because the tail sample is this directory's,
+outside the `WGT-` pre-registration by its §8, and the thread is continuous.
+
+**Nothing in the `WGT-` record moved.** No `WGT-` criterion, bar, weighting scheme, frame
+or figure changed; `wgt_grid.json` and the `WGT-` findings are untouched.
+
+### §8.1 The scope check fired, and it reframed the question
+
+The owner's 20 verdicts were a **population** fact — 18 of 20 not journey-worthy — and
+nobody had asked whether the app ever *delivers* such an artist. That question was
+answerable in minutes from data already on disk, and it decides what kind of problem this
+is: a live defect, or a prerequisite for the obscurity push. `tail_exposure.py` answered
+it. Figures in `tail_exposure.json`; the finding is that delivery is real but rare and
+rises steeply with endpoint obscurity, and **zero across 800 famous-to-famous journeys**
+(reported as a rule-of-three bound, never as "never").
+
+### §8.2 This session drew a wrong conclusion, and the owner refuted it
+
+**Recorded prominently because the refutation is the most valuable thing in this section.**
+
+The session found real musicians among the delivered artists — Sara Quin, Reed Mullin,
+Mike Kerr, Jason Evigan, Gabriela Robin — verified them against their graph neighbourhoods,
+and concluded a "has a release" filter would cut real artists and was **the wrong
+instrument**.
+
+**The owner refuted it on the product's own terms:** the app recommends things to *listen
+to*, so the unit is a body of work, not a person. Sara Quin as an entity has ~1 solo track;
+the catalogue belongs to Tegan and Sara. Cutting her is correct. **Every name on the
+counter-example list was the same shape** — a performer catalogued apart from the band that
+holds the releases — so the class collapsed entirely rather than shrinking.
+
+The residual false-positive class is much narrower and his own verdicts had already named
+it: artists with genuine releases that MusicBrainz does not document. That is **source
+coverage**, not a flaw in the signal. Recorded in `tail_exposure.py`'s docstring beside the
+delivered-artist list, because that list is committed and will tempt the next reader into
+the same error.
+
+### §8.3 What the counts changed, including one nobody asked for
+
+`tail_signals.py`, one pass over the 17.2 GiB MB artist dump. Every count reported for the
+tail **and** the rest of the graph, because a bare tail figure is uninterpretable — the
+tail is thinner on every field by construction, since an artist nobody curated has thin
+everything.
+
+**The sharpest discriminator was not a link count but MusicBrainz artist *type*:** the tail
+is overwhelmingly individual people and untyped entries rather than bands. That is the
+owner's credits-not-acts thesis holding across all 7,686 instead of across 20, arrived at
+independently of the release signal. Figures in `tail_signals.json`.
+
+### §8.4 The instrument check found a live product defect
+
+`tail_clips.py` ran two paths per artist: the app's own name-based resolver, and — where
+MusicBrainz supplies a Deezer artist ID — a direct lookup with no name matching. Their
+disagreement is a **measured `BYP-13` rate**: the app's resolver lands on a different
+artist of the same name at a material rate. `BYP-13` was a known live exception; it is now
+measured rather than suspected, and it is **independent of the tail decision entirely**.
+
+The rate carries error in both directions and `tail_clips.json` says so rather than picking
+the flattering one: some mismatches are Deezer *duplicates* of one artist (inflating it),
+while the comparable subset is artists MusicBrainz curated well enough to carry a link
+(deflating it relative to the uncurated tail). Two further findings cut against the DSP
+link alone — about half of MB-linked Deezer artists have no playable top track at all, and
+the app's name path *misses* artists whose exact page does have audio.
+
+**Refusals were bucketed separately and excluded from every denominator** (`G3-A4`: a 429
+means "we do not know", never "nothing plays"). The run completed with zero refusals, so no
+figure is depressed by throttling.
+
+### §8.5 The decision, and the constraint that shapes its implementation
+
+**The owner adopted the rule and the population: 7,035 of 7,686 dropped, 651 kept.**
+Frozen at `tail_droplist.json` with a sha over the sorted MBIDs.
+
+**The list must be frozen rather than recomputed per build, and that is a constraint rather
+than a preference.** Spec §9 requires byte-identical output for identical input, and
+`build_from_archive` is offline by a hard rule with a replay test that injects a raising
+fetcher to prove it. A drop rule calling Deezer during a build would make two builds of one
+archive disagree. So the network half is resolved once and committed — which makes the list
+a **snapshot**, and a rebuild later applies this date's answer.
+
+Two consequences measured rather than assumed: the drop additionally strands **127**
+artists on the built graph (a lower bound — a real build re-selects), and because the drop
+lands *before* the mass computation in `pipeline.py`, every surviving artist's popularity
+marginal moves. **The rebuild is a different graph, not the old one minus rows.**
+
+**The builder was deliberately not modified.** No build is pending, wiring owes tests, and
+the cap re-evaluation track may reshape the build. The condition lives in `NEXT.md` marked
+as adopted-not-open, so a successor applies the rule rather than re-litigating it.
+
+### §8.6 A requirements clarification, and the drift it corrects
+
+The owner clarified that **obscurity is a proxy for novelty-to-the-user and the requirement
+is a gradient with bypass depth, not an absolute floor** — "deliver the bottom 10% of the
+graph" was never it. Recorded as `REQ-42`.
+
+**Checking before writing it changed what was written.** `PRODUCT-REQUIREMENTS.md` already
+said this: `REQ-13` is a **Must** that bypasses increase delivered novelty, `REQ-35` and
+`REQ-37` are trend statements, and the Definitions section already separates novelty from
+obscurity-as-proxy. **The requirements were right; the operationalisation drifted** — the
+`DD-F1` structural-conflict note makes the problem concrete as "zero edges below the top
+popularity decile", and that decile hardened into the goal itself downstream. `REQ-42`
+exists to be citable against that, and the note is annotated in place.
+
+It names two affected instances, one of them **this session's own Task 8 wording**, which
+called the `TAS-` routing guard's zero bottom-decile result the sharpest corroboration of
+the defect. Under `REQ-42` that overstates it. The `DD-F1` defect ruling is unaffected and
+the annotation says so: a gradient of zero fails `REQ-13` without reference to any band.
+
+### §8.7 Closeout outcomes
+
+- **A4 default-flip: inapplicable, and said rather than skipped.** No config knob was
+  added. `ApiConfig` and `BuilderConfig` are untouched; the drop list is data, and wiring it
+  is future work with its own condition.
+- **A5:** no listener on 8000/5173/4173/3000. This session started no server and left none
+  running; the queued item needs none.
+- **B2:** all four new modules have zero inbound imports and are **not orphans** — each is a
+  command-line entry point with `main()` and a `__main__` guard, the shape of `tas_signal`,
+  `tail_sample` and `wgt_grid`. Asked rather than assumed.
+- **B3:** the directory has no pytest tests by design; its instrument checks are the tests.
+  **Their red capacity was demonstrated, not asserted:** a wrong artifact sha and a
+  population disagreeing with `TAIL-SAMPLE.md`'s committed 7,686 were each injected and
+  each aborted the run.
+- **D3:** adopted artifact `4cb84ef9…`, verified in-run by every script. Drop-list sha256
+  over sorted MBIDs `d876c7ba…`. No artifact was built, adopted or modified.
+- **D4:** builder 129, api 217, frontend 107 across 18 files, analysis 106. All pass.
+- **D6:** unconditional **44,183 characters**, conditional **2,154 lines** — **delta zero on
+  both, verified from the diff**: `git diff main..HEAD -- CLAUDE.md .claude/` is empty and
+  every `memory/*.md` predates this session. `REQ-42`, four probe modules and two log
+  sections all live in conditional `docs/` and `builder/analysis/`.
+- **Snyk:** 6 Low findings in this directory, all the accepted CLI-path class and all
+  pre-existing. **The four new modules contribute none** — none takes a command-line
+  argument, so no input reaches a path. The `NEXT.md` count is unchanged at 6, itself
+  corrected from a stale 4 earlier in this session.

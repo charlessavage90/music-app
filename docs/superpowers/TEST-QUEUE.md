@@ -23,6 +23,52 @@ the point.**
 
 ---
 
+## N/A — 2026-08-01 (evening) — you decided to clean about one artist in ten off the map; nothing changes until a rebuild
+<!-- No "(latest)": that marker stays on the live QUEUED redesign entry further down, which
+     is still owed. This is N/A — there is nothing here to run. -->
+
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are empty;
+no server was started and none was left behind. No routing, no graph, no weighting, no cost
+function, and not one line of the app or the website changed. **A journey you build now is
+identical to one from this morning.**
+
+**What happened, in plain terms.** Two things finished today.
+
+- **The genre investigation is written up and closed.** It ran for three days across several
+  sessions and the answer is that neither way of using genre labels is worth adopting. That
+  is now a proper document rather than scattered notes, so nobody re-opens it by accident.
+- **You made a decision about the "ghost" artists** — the ones that show up in the map with
+  no records to their name. About **7,035 of them, roughly one artist in ten, will be
+  removed the next time the map is rebuilt.** The rule you settled on keeps an artist with
+  no records only if a music service has a real page for them *and* something actually
+  plays. Your twenty hand reviews are what decided it.
+
+**Nothing about this is live yet, and that is deliberate.** The list of artists to remove is
+written down and frozen, but the map has not been rebuilt, so **you would not see any
+difference today**. Removing them also nudges everything else slightly — it is a genuinely
+new map rather than the old one with rows deleted — which is why it waits for a proper
+rebuild rather than being slipped in.
+
+**One thing we found by accident, and it is about the app you use today.** When a card plays
+a clip, the app finds the music by searching the artist's *name*. We were able to check that
+against the exact artist in about a hundred and sixty cases, and **roughly one in eleven
+played a different artist who happens to share the name.** You had already spotted this
+happening once; it is now measured rather than suspected. It is a real fault in what you
+hear today, it has nothing to do with the decision above, and there is a more reliable way
+to look those clips up if you want it prioritised.
+
+**Nothing is proposed for you to test.** The next real entry here comes when something about
+the app itself changes.
+
+**⚠ The redesign entry below is still the live one to run** — the app on
+`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
+supersedes a word of it, and **none of it has been discharged.**
+
+Detail, if you want it: `docs/superpowers/2026-08-01-label-weighting-execution-log.md` §8.
+
+---
+
 ## N/A — 2026-08-01 (later) — we tested whether counting labels unequally helps; the answer closes some doors and opens one
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are empty;

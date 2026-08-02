@@ -22,6 +22,18 @@ reused — including when a statement later changes category. WGLL's value numbe
 document's identifiers and are cited here as "value N". Open questions carry `REQ-Q`
 identifiers so they cannot be mistaken for requirements.
 
+> **Numeric order is a property of the original draft, not a live invariant.** A requirement
+> added later takes the **next free number** and sits where it belongs **topically**.
+> `REQ-42`, in §8, is the first such addition and the only identifier out of sequence.
+> Restoring the run would put a famous-artists clarification under "Testing and evaluation",
+> away from the `REQ-35`/`REQ-37` statements it clarifies and the `DD-F1` note it annotates —
+> and renumbering to avoid *that* is exactly what "never renumbered" forbids.
+> *Added 2026-08-01 after a documentation audit read the rule the other way and called the
+> placement a defect. The rule's own category-change clause already rules that reading out:
+> a statement that changes category moves while keeping its number, which breaks the run by
+> design. The ambiguity was real enough to mislead a careful cold reader, so it is closed
+> here rather than left to recur.*
+
 ---
 
 ## How to read Must / Should / Expect

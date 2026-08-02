@@ -1,6 +1,10 @@
 # Handoff — the label weighting and evidence probe (`WGT-`), 2026-08-01
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-01 (latest) on NEXT ACTIONS by
+[`2026-08-01-HANDOFF-no-release-tail.md`](2026-08-01-HANDOFF-no-release-tail.md)**, which
+continues this thread — the tail sample this probe side-collected became an adopted drop
+rule. This document **remains authoritative for the `WGT-` probe's own internals**.
+*(Original role line:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-01-HANDOFF-tas5-routing.md`](2026-08-01-HANDOFF-tas5-routing.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
