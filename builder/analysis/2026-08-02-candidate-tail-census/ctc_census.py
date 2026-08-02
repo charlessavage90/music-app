@@ -231,11 +231,10 @@ def main() -> None:
         m for m in population
         if not has_release_group(m) and not has_discogs_release(m)
     )
-    with_dsp = [
-        m for m in tail
-        if (artists.get(m) or {}).get("dsp")
-        or (m in censused and False)  # DSP unknown for censused artists here
-    ]
+    # Only the freshly-censused artists have DSP links read in this run, so this
+    # count is over that subset alone and its key says so. The already-censused
+    # ones carry a verdict from the 2026-08-01 list and need no lookup.
+    with_dsp = [m for m in tail if (artists.get(m) or {}).get("dsp")]
 
     payload = {
         "status": "DIAGNOSTIC. Sizes the candidate-side census. Adopts nothing.",
