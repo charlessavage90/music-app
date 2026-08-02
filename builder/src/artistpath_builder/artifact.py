@@ -34,17 +34,31 @@ _HEADER = struct.Struct("<4sIIIQ")
 
 
 def serialise(graph: Graph) -> bytes:
+    meta: dict[str, object] = {
+        "mbids": graph.mbids,
+        "names": graph.names,
+        "disambiguations": graph.disambiguations,
+        # "popularity" is the APG1 wire key. It CANNOT be renamed without
+        # invalidating every existing artifact and breaking the api-side
+        # parser in lockstep — the format is the contract. Only the
+        # in-memory identifier carries the currency (`pop_raw`).
+        "popularity": graph.pop_raw,
+    }
+    # OMITTED WHEN EMPTY, and the omission is the design rather than laziness.
+    # FORMAT_VERSION is not bumped, because both parsers check it for strict
+    # equality: bumping it would stop every existing artifact loading, starting
+    # with the one the app serves today. So the key is additive — a reader
+    # without it ignores it, and a reader with it must tolerate its absence.
+    #
+    # Writing it unconditionally would also change the bytes of every artifact
+    # built by the frozen probe mirrors, whose shas Track B's identity gate
+    # pins. That is the divergence class PR #63 closed, and this is the same
+    # hazard arriving from the other direction.
+    if graph.deezer_ids:
+        meta["deezer_ids"] = graph.deezer_ids
+
     metadata = json.dumps(
-        {
-            "mbids": graph.mbids,
-            "names": graph.names,
-            "disambiguations": graph.disambiguations,
-            # "popularity" is the APG1 wire key. It CANNOT be renamed without
-            # invalidating every existing artifact and breaking the api-side
-            # parser in lockstep — the format is the contract. Only the
-            # in-memory identifier carries the currency (`pop_raw`).
-            "popularity": graph.pop_raw,
-        },
+        meta,
         sort_keys=True,
         separators=(",", ":"),
         ensure_ascii=False,
@@ -111,4 +125,8 @@ def deserialise(payload: bytes) -> Graph:
         neighbours=neighbours,
         scores=scores,
         edge_types=edge_types,
+        # .get, not [...]: every artifact built before 2026-08-02 lacks the key,
+        # including the one the app serves. Absence means "resolve by name",
+        # which is what the app did before this existed.
+        deezer_ids=metadata.get("deezer_ids", []),
     )

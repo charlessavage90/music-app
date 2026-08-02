@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import math
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 
@@ -29,6 +29,14 @@ class Graph:
     neighbours: np.ndarray  # int32
     scores: np.ndarray  # float32
     edge_types: np.ndarray  # uint8
+    # MusicBrainz-recorded Deezer artist ids, indexed by node id like every
+    # other metadata list, "" where none is known. Lets the api resolve a clip
+    # by artist identity rather than by name (`BYP-13`); see deezer_ids.py.
+    #
+    # DEFAULTED, and that is load-bearing twice over: `build_graph` is called
+    # with three positional arguments by two FROZEN probes, and an empty list
+    # makes `serialise` omit the key so their artifacts stay byte-identical.
+    deezer_ids: list[str] = field(default_factory=list)
 
     @property
     def popularity(self) -> list[float]:
@@ -167,8 +175,15 @@ def build_graph(
     adjacency: Adjacency,
     stats: list[ArtistStats],
     edge_type: EdgeType,
+    deezer_ids: dict[str, str] | None = None,
 ) -> Graph:
-    """Assemble CSR arrays. IDs are assigned in sorted-MBID order."""
+    """Assemble CSR arrays. IDs are assigned in sorted-MBID order.
+
+    `deezer_ids` is KEYWORD-OPTIONAL on purpose: `cb_build_variants.py:479` and
+    `measure_headroom.py:151` are frozen and call this with three positional
+    arguments. Omitting it yields an empty list, which `serialise` then omits
+    from the metadata blob, so those probes' artifacts stay byte-identical.
+    """
     stats_by_mbid = {record.mbid: record for record in stats}
     mbids = sorted(set(adjacency) & set(stats_by_mbid))
     index = {mbid: i for i, mbid in enumerate(mbids)}
@@ -206,4 +221,6 @@ def build_graph(
         neighbours=np.asarray(neighbours, dtype=np.int32),
         scores=np.asarray(scores, dtype=np.float32),
         edge_types=np.full(len(neighbours), int(edge_type), dtype=np.uint8),
+        # Indexed by node id, like every other metadata list above.
+        deezer_ids=[deezer_ids.get(m, "") for m in mbids] if deezer_ids else [],
     )

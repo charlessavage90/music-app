@@ -1,0 +1,28 @@
+{
+ "substrate": "C:\\dev\\music-app\\builder\\scratch\\graph-t15-tiebreakfix.bin",
+ "pairs_routed": 120,
+ "note": "Interiors only. Endpoints excluded -- they are the user's own picks.",
+ "by_class": {
+  "ff": {
+   "unique_interior": 147,
+   "unique_with_any_id": 147,
+   "traversals": 208,
+   "traversals_with_any_id": 208,
+   "traversals_with_deezer_id": 208
+  },
+  "fo": {
+   "unique_interior": 349,
+   "unique_with_any_id": 322,
+   "traversals": 423,
+   "traversals_with_any_id": 396,
+   "traversals_with_deezer_id": 392
+  },
+  "oo": {
+   "unique_interior": 386,
+   "unique_with_any_id": 348,
+   "traversals": 478,
+   "traversals_with_any_id": 440,
+   "traversals_with_deezer_id": 430
+  }
+ }
+}

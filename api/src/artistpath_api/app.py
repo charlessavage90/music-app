@@ -192,7 +192,9 @@ def create_app(
         if node is None:
             raise HTTPException(404, "unknown artist")
         started = time.perf_counter()
-        clip = await resolver.resolve(mbid, store.names[node])
+        clip = await resolver.resolve(
+            mbid, store.names[node], store.deezer_id_of(node)
+        )
         duration_ms = (time.perf_counter() - started) * 1000.0
 
         emit(

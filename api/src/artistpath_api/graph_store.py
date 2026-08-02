@@ -32,6 +32,13 @@ class GraphStore:
     neighbours: np.ndarray  # int32, length E
     scores: np.ndarray      # float32, length E
     id_by_mbid: dict[str, int] = field(default_factory=dict)
+    # MusicBrainz-recorded Deezer artist ids, indexed by node id, "" where none
+    # is known. Lets a clip be resolved by artist identity rather than by name,
+    # so a card cannot play a different artist of the SAME NAME (`BYP-13`).
+    # Empty for every artifact built before 2026-08-02 — including the one the
+    # app serves — and for stores built in tests. Read it through
+    # `deezer_id_of`, never by indexing, since it may be shorter than N.
+    deezer_ids: list[str] = field(default_factory=list)
     # Derived from DEGREE, not from popularity and not from fame (log §2.6).
     degree_hub_penalty: np.ndarray | None = None  # float32 0-1, computed if not given
     # sha256 of the bytes this store was parsed from, when known. Empty for a
@@ -39,6 +46,18 @@ class GraphStore:
     # answerable over HTTP — eighteen artifacts sit in builder/scratch/ and are
     # not interchangeable.
     source_sha256: str = ""
+
+    def deezer_id_of(self, node: int) -> str:
+        """The artist's Deezer id, or "" when none is known.
+
+        Bounds-checked rather than indexed: the list is absent on every
+        pre-2026-08-02 artifact and could in principle be short. Returning a
+        neighbour's id for an out-of-range node would hand one artist's card
+        another artist's clip — the very defect this exists to remove.
+        """
+        if node < len(self.deezer_ids):
+            return self.deezer_ids[node]
+        return ""
 
     def __post_init__(self) -> None:
         if not self.id_by_mbid:
@@ -171,4 +190,9 @@ class GraphStore:
             offsets=offsets,
             neighbours=neighbours,
             scores=scores,
+            # .get, not [...]: the key is additive and FORMAT_VERSION is not
+            # bumped, so every artifact built before 2026-08-02 lacks it —
+            # including the one the app serves. Absence means "resolve by
+            # name", which is what the app did before this existed.
+            deezer_ids=meta.get("deezer_ids", []),
         )

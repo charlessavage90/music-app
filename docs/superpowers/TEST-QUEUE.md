@@ -23,6 +23,63 @@ the point.**
 
 ---
 
+## ✅ DONE (latest) — 2026-08-02 (evening) — the wrong-artist clip fault now has a fix built, and the website got a tidy-up you can check in ten seconds
+
+> ### ✅ CHECKED BY THE OWNER 2026-08-02 — nothing found.
+>
+> The live site is functional after the `--prune` pass: **journeys build and clips play.**
+> The two deleted files were genuinely orphaned, as the pre-flight predicted. **Nothing is
+> owed on this entry.**
+>
+> The rest of this entry is unchanged and still describes work that is **dormant until a
+> graph is rebuilt** — the clip fix ships when a map carrying the artist links does.
+
+**Nothing is running.** All four ports were checked and are empty; no server was started and
+none was left behind. **A journey you build now is identical to one from this morning** — no
+routing, no graph, no weighting, no cost function changed.
+
+**One thing did change on the live website, and it is the only thing here worth your time.**
+Two leftover files from the old design were still sitting on the server, unused since the
+redesign went live. They are now deleted. **This should be invisible** — but it is the one
+change today that touched the thing you actually use, so:
+
+> **Open `https://musicapp.cmiller.io` in a browser that has never seen it** (a private
+> window is enough), build one journey, and play a clip. If the page loads, looks right and
+> plays, it is fine. **If you get a blank page or a missing-file error, tell me immediately**
+> — that would mean the wrong files were deleted, and it is a one-command fix.
+
+Everything else below is built but **dormant until a map is rebuilt**.
+
+**The fault where a card plays a clip by a different artist of the same name.** You have seen
+this. It was measured at roughly one card in eleven, of the ones we could check. The app finds
+music by searching the artist's *name*, so when two artists share a name it can pick the wrong
+one — and it cannot tell, because the name matches perfectly.
+
+**MusicBrainz records, for many artists, a direct link to their page on the music service.**
+The app now uses that link first and only falls back to searching by name when there isn't
+one. A direct link cannot land on the wrong artist, because it doesn't search at all.
+
+- **On the artists you actually get shown, about nine in ten have such a link.** That is much
+  better than it sounds from the raw numbers, because the app tends to show well-known artists
+  and they are the ones with links.
+- **It is not a complete fix, and one thing surprised us.** MusicBrainz occasionally links to a
+  *duplicate* page rather than the real one — we found a "Radiohead" page with 473 followers
+  and nothing on it, and an "Orbital" page with 20 followers that *does* have tracks. The first
+  harmlessly falls back to searching by name. The second would play something worse than the
+  search would have found. **On balance it is clearly a gain, but it is not a guarantee**, and
+  I had told you earlier it was — that was wrong and I have corrected it.
+- **You will not hear any of this until a map is rebuilt.** The links travel inside the map
+  file, and the one being served does not have them yet.
+
+**Nothing else is proposed for you to test.** The next real entry comes when a map is actually
+rebuilt — which is when all of this, and the artist cleanup from yesterday, become audible at
+the same time.
+
+Detail, if you want it:
+`docs/superpowers/2026-08-02-deezer-id-clip-resolution-execution-log.md`.
+
+---
+
 ## N/A — 2026-08-02 — the cleanup you decided on is now built in; still nothing changes until a rebuild
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are empty;
@@ -59,9 +116,13 @@ above and still unfixed.
 **Nothing is proposed for you to test.** The next real entry here comes when something about
 the app itself changes — realistically, when a map is actually rebuilt.
 
-**⚠ The redesign entry below is still the live one to run** — the app on
-`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
-supersedes a word of it, and **none of it has been discharged.**
+**✅ THE REDESIGN ENTRY IS NOW DONE, 2026-08-02** — run by the owner the same day, everything
+passed, and the iPhone script came back clean and killed `G3-F2`, a HIGH "blocking if
+confirmed" finding in the Gate 2 → 3 review. That entry owns the result. **Nothing was queued
+at the time this was written; the evening entry above has since added a ten-second check.**
+
+*(This entry originally said the redesign was still the live one to run, and it was for the
+five days before it was discharged.)*
 
 Detail, if you want it: `docs/superpowers/2026-08-02-tail-drop-wiring-execution-log.md`.
 
@@ -724,7 +785,34 @@ here supersedes a word of it.
 
 *Detail: `docs/superpowers/2026-07-28-asc5-path-ascent-execution-log.md`.*
 
-## QUEUED (latest) — 2026-07-28 (night) — the redesign is finished, and it is LIVE
+## ✅ DONE 2026-08-02 — 2026-07-28 (night) — the redesign is finished, and it is LIVE
+
+> ### ✅ RUN BY THE OWNER 2026-08-02. Everything passed, and the iPhone half settled a Gate 3 blocker.
+>
+> **All six desktop checks passed**, on desktop and phone including narrow window widths.
+> Journeys he knows well were **unchanged**, which was the most valuable thing to confirm.
+> Both bypass messages appear and differ per button; the explainer collapses, persists and
+> re-expands; shared links land on the right journey mid-path. The loading screen works but
+> **is often too fast to see** — worth knowing before anyone measures or redesigns it.
+>
+> **⚠ The iPhone script is DISCHARGED, and it falsified `G3-F2`.** That finding is HIGH and
+> **"blocking if confirmed"** in the Gate 2 → 3 review
+> ([`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md)),
+> and the review named exactly this test to settle it: *"one tap on a real device confirms or
+> kills it."* All three questions came back clean — **clips play**, the bottom bar clears the
+> home indicator, and the keyboard leaves artist names alone.
+>
+> **What that does and does not mean.** The worst reading — *no clip ever plays on iPhone and
+> the app never says why* — is **dead**. But the code was not changed to achieve it:
+> `usePlayer.ts:49` still awaits the URL before `player.play(url)` at line 60, which is the
+> pattern the review flagged. So the finding's *description* was accurate and only its
+> *consequence* is removed, and this rests on iOS's current tolerance rather than on the code
+> being correct by construction. It is evidence, not a guarantee, and a future iOS could
+> tighten it.
+>
+> **One item from this entry was NOT covered and is still the owner's call:** the cosmetic
+> overlap where "Steering around that sound" lands on top of the open explainer on a first
+> visit. He reported both working and did not mention it. Still a one-line change if wanted.
 
 <!-- Updated after the deploy: this entry was written while the redesign was local-only and
      carried two PIDs. It is now published, so the local servers are stopped and every check
@@ -856,16 +944,20 @@ and still waiting, immediately below.
 
 *Detail: `docs/superpowers/2026-07-28-frontend-mockup-adoption-execution-log.md`.*
 
-## QUEUED — 2026-07-28 — the password is gone, and there is one thing only an iPhone can answer
+## ✅ DONE (section 2) 2026-08-02 — 2026-07-28 — the password is gone, and there is one thing only an iPhone can answer
 <!-- "(latest)" stripped 2026-07-28 evening: only the newest entry carries it, per the
-     convention below. This entry is STILL LIVE and still owed — section 2, the iPhone
-     script, has never been run. -->
+     convention below. Section 2 — the iPhone script — was DISCHARGED 2026-08-02; see the
+     note below and the newer entry, which owns the result. -->
 
-> **⚠ STILL OUTSTANDING as of 2026-07-28 night, and NOTHING here has been discharged.**
-> **Section 2 below — the iPhone script — remains the single most valuable unrun test on this
-> project.** It has been **carried forward into the newest QUEUED entry at the top of this
-> file**; run it there, against the live site. This entry is left intact because sections 1 and
-> 3 are about the live site as it stands today and are still runnable as written.
+> **✅ SECTION 2 IS DISCHARGED, 2026-08-02 — the iPhone script was run and all three questions
+> came back clean.** It was carried forward into the newer entry at the top of this file and
+> run there; that entry owns the result and what it settled (`G3-F2`). Sections 1 and 3 were
+> not run as written, but section 1's substance — familiar journeys unchanged, shared links
+> landing correctly — was covered by the newer entry's checks 2 and 6. Section 3 is
+> informational rather than a test.
+>
+> *(Original note, retained: "STILL OUTSTANDING as of 2026-07-28 night… the single most
+> valuable unrun test on this project." It was, for five days.)*
 
 **The address is `https://musicapp.cmiller.io` and there is nothing to type.** No username, no
 password, no dialog. Send it to someone and they just open it.
