@@ -942,3 +942,205 @@ unless it reads them.
   already accepted under `builder/analysis/`; it cannot be meaningfully sanitised, because
   captures deliberately live outside the repo. **Recorded in `NEXT.md`'s deferral table rather
   than absorbed** — widening an accepted-risk set is the owner's call.
+
+---
+
+## §17 Task 8 — the findings and the owner-facing read
+
+**2026-08-01 (later), a fresh session at the seam the `TAS-R1`–`TAS-R4` handoff named.** No
+measurement was run and no probe was re-executed: §5 licenses the outcome read now that the
+full grid and both instrument checks are in hand, and Task 8 is that read. **Nothing is
+adopted, no criterion, bar, weight, default, currency, vocabulary or substrate changes, and
+no blind listen is spent.** Findings:
+[`findings/2026-07-30-tag-discrimination.md`](findings/2026-07-30-tag-discrimination.md),
+which now **owns the `TAS-` figures**; this log continues to own none.
+
+### §17.1 The read applied, and why two bullets fire rather than one
+
+**Not invented — located.** §5's `TAS-4`/`TAS-5` kill bars are both cleared, so the **"Both
+survive"** bullet fires; `TAS-6`'s selection half is adverse, so the **"`TAS-6` adverse,
+anything else positive"** bullet fires simultaneously. They are not in conflict, because they
+read different things: one the kill bars, one the guard.
+
+**What is inference, and it is labelled as such in the findings rather than presented as a §5
+read:** the "Both survive" bullet anticipates *"a real decision with numbers on both sides"*,
+and after the two null controls neither side supplies them. The build-time side is barred by
+its own guard. The router side clears its bar on a change `TAS-AM5c` says is not attributable
+to genre. **So the architecture question is closed rather than open.** The distinction between
+the located read and the inference drawn from it is kept visible on the page, because a session
+concluding that a pre-registered "this is now the owner's live choice" is in fact moot is
+exactly the move that should be checkable.
+
+### §17.2 One verification before building on the handoff
+
+Per `session-start`'s third check, one load-bearing claim was checked against source rather
+than accepted from the handoff's prose: that `TAS-6`'s routing half is **vacuous by
+construction**. `tas_guard.py:111` returns `False` outright when the baseline is zero, before
+any arithmetic — so every `adverse: false` in `tas_route_guard.json`'s routing table is a
+hard-coded early return, not a measurement. **Confirmed; the handoff's claim is exact.**
+
+### §17.3 What the findings carry that no earlier document did
+
+- **The two `TAS-6` halves are put side by side with their asymmetry stated** — one adverse on
+  a 93-edge denominator, one unmeasurable on a zero baseline — where previously each lived in
+  its own session's section.
+- **The broader sub-decile-touching count is reported beside `TAS-6`'s narrow one** (10,017 →
+  9,658, a 3.6% fall against the narrow measure's 15.05%), explicitly *reported rather than
+  substituted for it*. The pre-registered quantity governs; the reader gets to see the other.
+- **The two sub-decile interiors the routing guard found at the top two weights are surfaced as
+  an unscored observation** rather than dropped. No criterion scores them, n = 2 of 120, and
+  the null grid returns zero everywhere — so it is the one place the real frame differs from a
+  permuted one. **It licenses nothing**, and saying so is the point: it is the most
+  encouraging-looking number in the routing record and it is the one with the least behind it.
+- **`W4` is named as dominating `W6`** in the findings' own vocabulary table, so a future
+  amendment cannot pick up `W6` from this record.
+
+### §17.4 A defect in this task's own first draft — two reach deltas in different currencies
+
+**Caught by re-deriving every transcribed figure from the JSON rather than trusting the
+transcription.** The first draft of the findings reported the `TAS-AM4` reach gain as "+27.7
+points for `W1`, +36.3 for `W6`". Those are `tas_frame_eval.json`'s
+`acting_slot_change_vs_W0`, which is a **relative** change (0.1824 / 0.658 = 0.2772). In
+points the gain is **+18.2** and **+23.9**.
+
+**What makes it worth a section rather than a silent fix: the same document holds a second
+reach delta in the *other* currency.** `tas_frame_split.json`'s `reach_change_pts` is
+genuinely percentage points, and it feeds the isolation table two paragraphs below the
+error. So the draft had two adjacent reach figures in different units with nothing marking
+the difference — the exact shape of the confusion `CLAUDE.md`'s orient table opens with, in
+a quantity nobody had thought to name a currency for.
+
+**Fixed by stating both units explicitly** rather than by converting one to the other, since
+both JSON fields keep their own units and a future reader will meet them directly. The
+findings carry a currency note at that table.
+
+**No other figure moved.** Every number in the findings was re-derived from its JSON; this
+was the only disagreement.
+
+### §17.5 The three owner-facing checks, run rather than claimed
+
+Run over §17.6's summary before it was written into this log.
+
+- **(a) Bare letter-number tokens.** Scanned; the summary below contains **none**. Every
+  criterion is named by what it asks, not by its identifier.
+- **(b) Substitution re-read.** Each identifier's plain sentence was substituted and the claim
+  re-read for drift. One caught and fixed: a draft sentence read *"the safety check could not
+  fire"*, which is broader than the criterion — the guard **did** run and returned a value; what
+  could not happen is a *measurable reduction*, because the baseline was zero. Corrected to say
+  so.
+- **(c) Could the owner disagree?** Yes, and the two places he most plausibly would are named
+  in the summary: whether 93 connections is enough to call a guard's verdict material, and
+  whether "not about genre" is the right reading of a control that permutes labels rather than
+  removing them.
+
+### §17.6 The owner-facing summary (four parts, in order)
+
+**Queued to `TEST-QUEUE.md` at closeout; reproduced here because this log is the durable
+record and the queue is rewritten.**
+
+#### Measured
+
+- Genre labels are present at both ends of **99.96%** of connections between two well-known
+  artists, **55.03%** where one is obscure, **17.12%** where both are.
+- Among the artists similar to a given artist, genre overlap varies: median spread **0.1726**
+  against a **0.02** floor below which the idea was to be abandoned.
+- Genre overlap and the similarity score agree weakly — rank correlation **0.1857**; the two
+  orderings coincide on **3.07%** of candidate lists.
+- Using genre to pick connections when the map is built changes **16.4%** of all connections at
+  the gentlest setting and **40.4%** at the strongest, against a **1%** line for "changes
+  nothing worth caring about". Connections created outnumber those deleted at every setting; the
+  map ends **11.7%** larger at the strongest.
+- Direct connections from a well-known artist to an obscure one fall from **93** to **87 / 85 /
+  83 / 79** across the four settings — past the pre-set 10% line at the top two.
+- Using genre to price each step as a journey is built changes **90–100%** of journeys at every
+  setting.
+- Scrambling which artist owns which labels reproduces **98.2–99.1%** of that journey change.
+- Across all 120 test journeys, the app currently delivers **zero** artists from the
+  least-famous tenth in the middle of a journey.
+- Every measuring-instrument check passed: the experiment's copy of the route-builder returns
+  the app's own answer on all 120 journeys with the genre setting off, and goes exactly where
+  genre alone dictates when genre is turned up to dominate.
+
+#### What I infer from it — labelled as inference
+
+**The idea was sound and it still does not work, and those are two different findings.**
+
+Genre labels genuinely tell an artist's similar artists apart, and they are not just repeating
+what the similarity data already knows. That was the assumption everything rested on and it
+held. Had it failed, the whole thread would have died cheaply and correctly.
+
+**Building the map with genre would make the app worse at the thing you called a defect.**
+Direct connections from a famous artist down to an obscure one drop at every setting and cross
+the line you set at the top two. The reason is mechanical: artists with no genre label are
+disproportionately the obscure ones, and while the rule is careful not to punish them, it
+cannot stop them being edged out when labelled artists get promoted past them. **A rule written
+before any of this ran says an adverse result here blocks a recommendation whatever else looks
+good, and I am applying it rather than arguing around it.**
+
+**The journey-pricing side looked like a success and the control took it away.** Turning genre
+on changed almost every journey. Then we scrambled which artist owns which labels — keeping
+exactly the same artists labelled — and almost exactly the same journeys changed. **So what we
+measured was not genre. It is what happens when you add any new per-step cost to a long
+journey**, where one substitution anywhere makes the whole thing count as changed. This is the
+fourth attempt to change routing by changing prices that has come back empty, and the first
+that looked like it worked until the control ran.
+
+**One thing found by accident is worth more than the experiment's own result.** On all 120
+journeys tested, the app puts **nobody** from the least-famous tenth in the middle of a journey.
+Not few — none. That is your defect measured more sharply than anything else we have, and it
+also meant the safety check written for this experiment had nothing it could measure: you cannot
+measure a fall from zero.
+
+#### Weakest link
+
+**The treatment of artists with no genre label is doing the most work, and it is the thing to
+attack.** Where an artist has no labels we score it at that artist's own typical agreement
+rather than at zero — deliberately, because zero would be a claim that they are *dissimilar*,
+and that would push obscure artists down exactly where the app needs them up. It was fixed in
+writing before anything ran and never adjusted. But it is inert until the feature is switched
+on, so the baseline run cannot reveal a bad choice of it, and **a different rule here could
+move the obscurity result in either direction.**
+
+**Two places you could reasonably disagree with me.** First, the guard's verdict rests on
+**93** connections out of nearly half a million — a thin denominator, which cuts both ways: it
+is also a statement about how few famous-to-obscure connections this map has at all. The bar
+fired as written and no bar may move now, but you may judge the absolute effect small. Second,
+you may think permuting labels is too harsh a control — it keeps the same artists labelled but
+gives them each other's genres, and one could argue that destroys something real rather than
+isolating it.
+
+#### Options and their consequences
+
+**None of these is a recommendation dressed as a finding, and the choice is yours because each
+spends your time or your ear rather than being methodology.**
+
+1. **Retire the thread here.** The question the probe was commissioned to answer — which of the
+   two architectures — has an answer: neither, on this evidence. Costs nothing; leaves the
+   coherence idea's structural half parked and the 11 blind listening verdicts unspent.
+2. **Re-ask it after a richer set of labels.** The parallel investigation more than doubled how
+   many obscure artists we know a genre for, which attacks the exact cause of the adverse
+   result. **Nothing measured says it would flip** — that needs a rebuilt map, and the rebuild
+   is the expensive part.
+3. **Take the accidental finding instead.** The zero obscure artists mid-journey is the sharpest
+   measurement of your defect on record, and it points at the map-building re-question rather
+   than at genre.
+
+**What I am not offering:** any adoption, any weight change, any rebuild, or a listening test.
+All four are barred by the document this probe was run under, and none of the evidence here is
+the kind that could license one.
+
+### §17.7 Deferrals — one closed, none opened
+
+**Closed by this task:** *"Task 8 — the `TAS-` findings document is unwritten"*, whose condition
+was **before the probe is retired**. Both of its clauses are honoured and checkable on the page:
+`TAS-AM5c`'s caveat is carried on `TAS-5`'s section head and repeated at its figures, and
+`TAS-6`'s routing half is marked **VACUOUS** with its mechanism (`tas_guard.py:111`) rather than
+read as a pass.
+
+**No new deferral is opened.** Every other `TAS-` row in `NEXT.md`'s table stands unchanged,
+including the two that a findings document might have looked like it discharged: the
+**edge-count growth** row still binds any rebuild pre-registration, and the **`TAS-6` routing
+half is unmeasurable** row still fires only if an obscure-endpoint draw is ever made for routing.
+**The `testpaths` row's condition is now due** — it fires "at the closeout that retires the
+`TAS-` probe", and this is that closeout — and it is the owner's deferral to resolve, not a
+session's; it is flagged, not actioned.

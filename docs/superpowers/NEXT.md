@@ -12,7 +12,7 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-01 (later), at the `WGT-` closeout. The label weighting probe is COMPLETE; `TAS-` Task 8 (its findings document) is STILL OWED; the next action is the OWNER'S.**
+**Last updated: 2026-08-01 (latest), when `TAS-` Task 8 landed. The label weighting probe is COMPLETE and the `TAS-` probe is now COMPLETE THROUGH TASK 8 — its findings document exists and nothing is owed on it. The next action is the OWNER'S.**
 
 ---
 
@@ -40,11 +40,24 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > population evidence yet that the tail is substantially credits-not-acts), and his
 > style-vocabulary calibration read (`STYLE-VOCABULARY.md`).
 >
+> **✅ ONE OF THE TWO CANDIDATE TRACKS IS NOW DECIDED, 2026-08-01 (latest): the
+> no-release-tail question is CLOSED and a drop rule is ADOPTED** — keep a
+> release-less artist only where a commercial-DSP link exists **and** a clip
+> resolves; **7,035 of 7,686 dropped**, list frozen at
+> `builder/analysis/2026-08-01-label-weighting/tail_droplist.json`. It is **not yet
+> wired into the builder** — see the deferral table, where the rule must not be
+> re-litigated, only applied. Evidence: `tail_signals.json` (the population census
+> and the artist-**type** split — the tail is 7.2% Group against 37.9% for the rest
+> of the graph), `tail_clips.json` (what plays, plus a **measured 9.4% `BYP-13`
+> wrong-artist rate** in the app's own name-based clip resolver, which is a live
+> user-facing defect independent of this decision), `tail_exposure.json` (delivery
+> rates). The remaining candidate track is below.
+>
 > **The candidate next tracks, both his call:** the cap re-evaluation pre-registration
 > (mutual-k-NN re-question; its device input now exists, Track B its measured input), and/or
 > the no-release-tail product decision (his 20 verdicts are its evidence; note any
-> "has a release" filter would cut both real artists his sample found). `TAS-` **Task 8
-> remains owed** before the `TAS-` probe is retired.
+> "has a release" filter would cut both real artists his sample found). **`TAS-` Task 8 has
+> since LANDED** (2026-08-01, latest) — see the `TAS-` section below; nothing is owed on it.
 >
 > ---
 >
@@ -83,7 +96,15 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 >
 > ---
 >
-> ## The TAG DISCRIMINATION PROBE (`TAS-`) — Tasks 1–7 COMPLETE, 2026-08-01. **NEITHER ARCHITECTURE HAS AN ADOPTION CASE.** Only Task 8 (the findings document) is owed, and the next action is the OWNER'S.
+> ## The TAG DISCRIMINATION PROBE (`TAS-`) is COMPLETE, 2026-08-01 — all eight tasks. **NEITHER ARCHITECTURE HAS AN ADOPTION CASE.** Nothing is owed; the next action is the OWNER'S.
+>
+> **Findings of record, and the entry point for anything `TAS-`:**
+> [`findings/2026-07-30-tag-discrimination.md`](findings/2026-07-30-tag-discrimination.md)
+> (Task 8, written 2026-08-01 latest). **It owns the `TAS-` figures** — cite it by section and
+> never restate a number from it. **Its §0 must be quoted whole:** both kill bars were cleared
+> **and** neither architecture has an adoption case, decided by different pre-registered
+> clauses. The premise the thread rested on is **confirmed** — genre agreement discriminates,
+> and is not redundant with similarity — so neither null is "the graph already knew".
 >
 > **⚠ Execute the routing side ONLY from
 > [`plans/2026-07-31-tas5-routing-execution-plan.md`](plans/2026-07-31-tas5-routing-execution-plan.md).**
@@ -165,7 +186,9 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > **`TAS-AM3` is the first amendment appended AFTER results existed** — it says so at its
 > head and names the hazard. Read that disclosure before relying on it.
 >
-> **Tasks 5–7 are DONE (execution log §16); only Task 8, the findings document, is unrun.**
+> **Tasks 5–7 are DONE (execution log §16), and Task 8 landed 2026-08-01 (latest) — the
+> findings document is `findings/2026-07-30-tag-discrimination.md`, its owner-facing read is
+> execution log §17, and no probe task remains unrun.**
 >
 > The coherence tag probe, Track B and the fame-proxy probes are **COMPLETE and their
 > records are untouched and remain accurate**; the coherence-tag-probe handoff is superseded
@@ -347,20 +370,22 @@ read measured where it can and cannot be moved; the results note owns that readi
 | **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **When, and only when, a currency decision is made.** Its current sentence ("blind in the modern-obscure tail") is *true*, so adding `FPC-3`/`FPC-9`'s extent is growth in the owner's own requirements layer, not a correction. Raised by the doc-auditor 2026-07-30 and deliberately not actioned. |
 | **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **If a currency decision adopts the MBID-keyed proxy.** ~33k pageview requests, ~3–4 h, resumable. The `--validate` path already answered the decision-relevant question; the build is only needed once something scores against it. |
 | ✅ **MusicBrainz tag/genre coverage as a coherence instrument** | **DISCHARGED 2026-07-30** — the coherence tag probe ran exactly this check and its kill gate fired (`COH-2`, vocabulary-robust per `COH-6`); the retrodiction stayed unrun. Struck, kept for the record. |
-| **Adding `analysis` to builder's `testpaths`** | **Deferred by the owner 2026-07-30.** Every analysis test passes, so it would work cleanly, but it changes what every builder `pytest` run collects. **Revisit if any `TAS-` test needs to gate a merge, or at the closeout that retires the `TAS-` probe.** Until then `TAS-` tests run only when invoked explicitly. *(This row carried a count of "34" until 2026-07-30; it was stale, and the count is not this document's to own — read it off `pytest analysis/ -q`.)* |
+| ✅ **Adding `analysis` to builder's `testpaths`** | **DECLINED BY THE OWNER 2026-08-01 — closed, not deferred again.** Its condition fired at the closeout retiring the `TAS-` probe, and he ruled: **frozen code should not be tested by default.** `testpaths` stays `["tests"]` (`builder/pyproject.toml:25`); probe tests run only when a directory is named explicitly. The reasoning is durable rather than circumstantial — probe tests guard research code nothing ships and nobody will edit again, so collecting them would gate unrelated builder merges on a frozen artifact's committed JSON or a vanished scratch capture. **A future probe does not reopen this**; it inherits the same answer. Struck, kept for the record. *(This row carried a count of "34" until 2026-07-30; it was stale, and the count was never this document's to own — read it off `pytest analysis/ -q`.)* |
 | **Replacing mutual k-NN with a tag-based degree limiter** | **Owner-raised 2026-07-30, ruled SEPARATE and explicitly NOT ruled out.** Needs its own pre-registration designed cold; mixing it with `TAS-` would make every attribution ambiguous. Track B's `R1a` corroborates the premise — reciprocity in isolation at k = 100 was null on both archives. **Condition: if the owner triggers it**, as with every other cap-adjacent decision. |
 | ✅ **`TAS-4` is not believable until the red instrument check runs** | **DISCHARGED 2026-07-31 for the SELECTION side** — the original check was withdrawn as unachievable (`TAS-AM3`) and its replacement `TAS-AM3a` passed at every λ. Struck, kept for the record. |
 | ✅ **`TAS-5` is not believable until the ROUTING-side red check runs** | **DISCHARGED 2026-08-01.** `TAS-AM3`'s scope clause could not supply it — its pass conditions live on the pre-cap capture while `TAS-AM2` puts `TAS-5` on the artifact — so `TAS-AM5` constructed one, written **before any routing figure existed**. `TAS-AM5a` (equivalence) and `TAS-AM5b` (liveness) both passed on the full draw. Struck, kept for the record. |
-| **Task 8 — the `TAS-` findings document is unwritten** | **Before the probe is retired.** Tasks 1–7 are complete and §5's condition for an outcome read is met (full grid, both instrument checks in hand). The findings must carry `TAS-AM5c`'s caveat on every `TAS-5` figure, and must not read `TAS-6`'s routing half as a pass. |
+| ✅ **Task 8 — the `TAS-` findings document is unwritten** | **DISCHARGED 2026-08-01 (latest)** — `findings/2026-07-30-tag-discrimination.md`, with the owner-facing read in execution log §17. Both conditions honoured on the page: `TAS-AM5c`'s caveat is carried at `TAS-5`'s section head and repeated at its figures, and `TAS-6`'s routing half is marked **VACUOUS** with its mechanism (`tas_guard.py:111`) rather than read as a pass. Struck, kept for the record. |
 | **`TAS-6`'s routing half is unmeasurable on the committed draw** | **If, and only if, an obscure-endpoint draw is ever made for routing.** Its baseline is zero sub-decile interior artists, so no reduction can be measured and "not adverse" is a division-by-zero artifact. Not a defect of the run — a property of what production routing delivers, and a corroboration of `DD-F1`. |
 | ✅ **Rarity-weighted agreement is a measured candidate device** | **MEASURED IN FULL 2026-08-01 by the `WGT-` probe** — the single-frame diagnostic became a 15-cell grid; the `WGT-` findings own the result and the device recommendation (rarity over `W4`, input-only). The trigger half stands: adopting any weighted device changes §1, an §8 amendment, the owner's call. Struck as a deferral, kept for the record. |
 | **`W4` was never evaluated as a `TAS-` candidate frame** | **If the owner triggers a vocabulary change.** Now further supported: the `WGT-` grid evaluated `W4` under two weighting schemes and it remains the dominant frame; the style column is closed with a mechanism (`WGT-` findings §3a). A `W4` adoption would still be a new §8 amendment designed cold. |
 | **Discogs alias expansion** | **If a frame amendment is ever triggered.** Discogs attribution goes through one MB-sourced ID; alias releases are invisible, so every Discogs figure is a lower bound (identical in every cell — no comparison threatened). `discogs_20260701_artists.xml` is already on disk; expansion is an exact ID join, no download, no name matching. |
 | **The Discogs `masters` export** | **Iff Discogs support-counting is ever wanted.** Irrelevant to every presence-based use (unions are reissue-proof by construction) and would *lose* tail coverage (single-version releases often have no master); but it is the album-grain collapse that avoids the pressing confound (`WGT-4c`) if Discogs evidence counts are ever proposed. **Owner spot check 2026-08-01 (DSotM, 1000+ releases):** individual pressings accrete stray labels beyond the master's (`art rock`, `classic rock`, `pop rock` beside the master's two) — so the release-built frames carry mild curatorial noise a master build would not, the flip side of the coverage loss. Recorded; changes no measured verdict. |
-| **The no-release-tail product decision** | **The owner's trigger; his 20 verdicts (`TAIL-SAMPLE.md`) are the evidence.** 18/20 are credits-not-acts; the 2 real artists are MB-blind (Spotify-only catalogues) and would be cut by any "has a release" filter. The ghost signature ("appears only on others' releases") is computable from data on disk if he wants it at population scale. |
+| ✅ **The no-release-tail product decision** | **DECIDED BY THE OWNER 2026-08-01 — a drop rule is ADOPTED and the list is frozen.** Keep a release-less artist only where a commercial-DSP link exists **and** a clip resolves; **7,035 of 7,686 dropped, 651 kept** (`builder/analysis/2026-08-01-label-weighting/tail_droplist.json`, drop-list sha256 `d876c7ba…`). Struck as an open question; the wiring row below is what remains. |
+| ⚠ **The drop list is NOT wired into the builder** | **At the next build, and it is an ADOPTED decision rather than an open question — do not re-litigate the rule, only apply it.** Add the frozen `drop_mbids` to `pipeline.py`'s `excluded` set beside the nameless drop (the exact precedent, same place, before the mass computation). Owes tests. **Three things the implementer must carry:** (a) the list is a **2026-08-01 snapshot** — clips come and go, and it must not be silently re-resolved at build time, because `build_from_archive` is offline by a hard rule and spec §9 requires byte-identical builds; (b) dropping before the mass computation moves **every surviving artist's popularity marginal**, so this is a different graph, not the old one minus rows; (c) removing the 7,035 additionally strands **127** on the built graph — a lower bound, since a real build re-selects. |
+| **Whether the post-drop graph owes a blind listen before adoption** (`REQ-38`) | **The owner's call, raised 2026-08-01 and not answered.** The *rule* was decided on listener judgment (his 20 verdicts), so no offline metric overrode him — but the drop changes routing for every pair, and nothing has heard the result. Distinct from the rule's own acceptance, which is closed. |
 | **The label-affinity / clustering data asset** | **The owner's trigger.** `wgt_release_raw.json` side-collected record-label credits, countries and years per graph artist; nothing consumes it. His style-vocabulary read adds: for the curated Discogs styles, carrier count alone tracks usability — the clustering idea keeps its value for the open MB tag space, where frequency separates nothing. |
 | **Tag clustering as a junk-label filter, owner-raised 2026-08-01** | **Unmeasured; the owner's trigger.** The current whitelist keeps a tag only if MusicBrainz classifies it as a genre — an ontology decision, which is why `british invasion` is discarded despite binding coherent artists. The owner's proposal: a real label's carriers cluster in the map, a junk label's scatter. Frequency alone cannot separate them, since `seen live` and a genuine niche genre are both rare. |
-| **One new Snyk Low finding per module added under `builder/analysis/`** | **Recorded, not fixed; extending the acceptance is the owner's.** A CLI `--out` path flows into `pathlib.Path` — the same class as the 13 already accepted here, **now 11 in the `TAS-` directory plus 4 in the `WGT-` directory** (`wgt_grid.py` ×2 and `wgt_release_read.py` ×2 added 2026-08-01). It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path breaks intended usage. |
+| **One new Snyk Low finding per module added under `builder/analysis/`** | **Recorded, not fixed; extending the acceptance is the owner's.** A CLI `--out` path flows into `pathlib.Path` — the same class as the 13 already accepted here, **now 11 in the `TAS-` directory plus 6 in the `WGT-` directory** (`wgt_grid.py` ×2, `wgt_release_read.py` ×2, `wgt_style_filters.py` ×2). *(Corrected 2026-08-01 latest: this row said **4** and omitted `wgt_style_filters.py`'s two, which a re-scan surfaced. `tail_exposure.py` added the same day contributes **none** — it takes no CLI argument, so no input reaches a path.)* It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path breaks intended usage. |
 | **Tag-aware selection increases the map's total edge count** | **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. `w_degree_hub` is dormant *because of the current graph's top-degree set*, and the pre-registration's held-constant row saying so is **scoped to this probe, which rebuilds nothing — it does not transfer to a rebuild.** Execution log §9.4/§9.5. |
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |

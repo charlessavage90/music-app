@@ -3,8 +3,11 @@
 **Role: ⚠ SUPERSEDED 2026-08-01 on next actions by
 [`2026-08-01-HANDOFF-label-weighting.md`](2026-08-01-HANDOFF-label-weighting.md)** (the
 `WGT-` probe, a successor investigation). This document **remains authoritative for the
-`TAS-` track's internals**, and `TAS-` Task 8 remains owed and unwritten — the successor
-did not write it. *(Original role line:)* Supersedes
+`TAS-` track's internals**. **⚠ `TAS-` Task 8 has since been WRITTEN** (2026-08-01, latest):
+the findings are [`findings/2026-07-30-tag-discrimination.md`](findings/2026-07-30-tag-discrimination.md)
+and the owner-facing read is execution log §17, so **every "Task 8 is owed" claim below is
+spent** — including the open decision in "The open decision, and what I would do", which was
+taken as that section recommended. *(Original role line:)* Supersedes
 [`2026-07-31-HANDOFF-tas-am3-am4.md`](2026-07-31-HANDOFF-tas-am3-am4.md) on next actions. It
 does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

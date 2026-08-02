@@ -22,6 +22,18 @@ reused — including when a statement later changes category. WGLL's value numbe
 document's identifiers and are cited here as "value N". Open questions carry `REQ-Q`
 identifiers so they cannot be mistaken for requirements.
 
+> **Numeric order is a property of the original draft, not a live invariant.** A requirement
+> added later takes the **next free number** and sits where it belongs **topically**.
+> `REQ-42`, in §8, is the first such addition and the only identifier out of sequence.
+> Restoring the run would put a famous-artists clarification under "Testing and evaluation",
+> away from the `REQ-35`/`REQ-37` statements it clarifies and the `DD-F1` note it annotates —
+> and renumbering to avoid *that* is exactly what "never renumbered" forbids.
+> *Added 2026-08-01 after a documentation audit read the rule the other way and called the
+> placement a defect. The rule's own category-change clause already rules that reading out:
+> a statement that changes category moves while keeping its number, which breaks the run by
+> design. The ambiguity was real enough to mislead a careful cold reader, so it is closed
+> here rather than left to recur.*
+
 ---
 
 ## How to read Must / Should / Expect
@@ -245,10 +257,39 @@ currency gap is accepted and remains unmeasured (DD-D6).
 - **REQ-37** — Repeated bypasses produce progressively more obscure paths **while
   staying coherent**, for any artist pair.
 
+### Should
+- **REQ-42** — **The obscurity requirement is a GRADIENT and sets no absolute floor.**
+  Owner clarification, 2026-08-01. The goal is artists that are **novel to the user**;
+  novelty is not measurable per-user (see Definitions), so obscurity is the **best
+  available proxy** — and a proxy for *whether the user is likely to know them*, not a
+  target depth. **"We need to deliver the bottom 10% of the graph" is not the
+  requirement and never was.** What is required is that **obscurity increases as the
+  bypass count increases, and that generally any two starting endpoints can achieve
+  that.** Consistent with REQ-13, REQ-35 and REQ-37, all of which are trend statements;
+  this entry exists because the trend was repeatedly operationalised as a floor
+  downstream, and a citable statement is what stops that recurring.
+
+  **Consequence, not resolved here:** any read that scored obscurity by *reaching a
+  fixed band* — rather than by movement with bypass depth — is affected, whatever its
+  own bars said. Two live instances at the time of writing: the `DD-F1` framing
+  annotated immediately below, and the `TAS-` probe's routing guard, whose "zero
+  bottom-decile artists mid-journey" was written up on 2026-08-01 as the sharpest
+  corroboration of the defect. Under this entry that reading **overstates it** — the
+  absence of a band is not itself a failure if the trend holds. Re-reading either is
+  the owner's call, not automatic.
+
 ⚠ **Known structural conflict, recorded 2026-07-29:** on the current artifact,
 superstar endpoints have zero edges below the top popularity decile
 (`2026-07-28-track3-depth-descent-execution-log.md` `DD-F1` — figures owned there), so
 REQ-37 is currently **unachievable on famous-to-famous pairs at any router setting**.
+
+> **⚠ Read the decile in that sentence as an OPERATIONALISATION, not the requirement
+> (REQ-42, 2026-08-01).** The requirement is the trend; "below the top popularity decile"
+> is one way a session made it measurable, and it hardened into the goal itself in
+> documents downstream. **The defect ruling below is unaffected and stands** — what a
+> famous-to-famous pair cannot do is move *at all*, and a gradient of zero fails REQ-13
+> and REQ-37 without any reference to a band. The decile is how the zero was found, not
+> what makes it a defect.
 Resolving that is a graph-construction question and an owner decision; this document
 states the requirement, not the remedy.
 **Ruled 2026-07-29: this is a defect, not an accepted limitation.** Most user-entered

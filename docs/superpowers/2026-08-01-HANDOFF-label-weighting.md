@@ -1,6 +1,10 @@
 # Handoff — the label weighting and evidence probe (`WGT-`), 2026-08-01
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-01 (latest) on NEXT ACTIONS by
+[`2026-08-01-HANDOFF-no-release-tail.md`](2026-08-01-HANDOFF-no-release-tail.md)**, which
+continues this thread — the tail sample this probe side-collected became an adopted drop
+rule. This document **remains authoritative for the `WGT-` probe's own internals**.
+*(Original role line:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-01-HANDOFF-tas5-routing.md`](2026-08-01-HANDOFF-tas5-routing.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
@@ -46,9 +50,12 @@ Probes: `builder/analysis/2026-08-01-label-weighting/`.
 
 ## Status of `TAS-` — unchanged by this work
 
-**`TAS-` Task 8 (its findings document) is still owed and still unwritten.** This probe
-is a successor investigation, not that document. The `TAS-` handoff below remains
-authoritative for its track's internals.
+**⚠ CORRECTED 2026-08-01 (latest): `TAS-` Task 8 has since been WRITTEN.** The findings are
+[`findings/2026-07-30-tag-discrimination.md`](findings/2026-07-30-tag-discrimination.md), the
+owner-facing read is execution log §17, and the `TAS-` probe is complete through all eight
+tasks. *(As written at this handoff's seam, and true then:)* **`TAS-` Task 8 (its findings
+document) is still owed and still unwritten.** This probe is a successor investigation, not
+that document. The `TAS-` handoff below remains authoritative for its track's internals.
 
 ## The open decision, and what I would do
 

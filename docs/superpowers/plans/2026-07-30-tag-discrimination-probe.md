@@ -1,7 +1,14 @@
 # Tag Discrimination Probe (TAS-) Implementation Plan
 
-**Role: ACTIVE — Tasks 1–4 executed 2026-07-30 and their checkboxes are annotated in
-place; Tasks 5–8 are unrun.** Governing document is the pre-registration beside it
+**Role: ⚠ FULLY DISCHARGED — every task has now run.** Tasks 1–4 executed 2026-07-30 and
+their checkboxes are annotated in place; Task 7's **selection** halves ran 2026-07-30;
+**Tasks 5, 6 and Task 7's ROUTING halves are SUPERSEDED** by
+[`2026-07-31-tas5-routing-execution-plan.md`](2026-07-31-tas5-routing-execution-plan.md)
+(which ran them as `TAS-R1`–`TAS-R4`) and **must not be executed from this document — Task 7
+Step 5 contains a trap**: it instructs the executor to make the randomised-label red check
+fire, which `TAS-AM3` withdrew as unachievable. **Task 8 executed 2026-08-01 (latest)** —
+outputs are `findings/2026-07-30-tag-discrimination.md` and execution log §17. Governing
+document is the pre-registration beside it
 (`specs/2026-07-30-tag-discrimination-probe-preregistration.md`), which **wins wherever
 this plan disagrees** — its §8 amendments have already overtaken this plan's Task 4 once.
 Status and next action are `NEXT.md`'s, not this document's.
@@ -1278,32 +1285,48 @@ git commit -m "TAS-6: obscurity guard, plus the randomised-label red check" -- b
 
 ---
 
-### Task 8: Findings, and the owner-facing read
+### Task 8: Findings, and the owner-facing read — ✅ EXECUTED 2026-08-01 (latest)
+
+> **Two deviations from this task as written, both recorded rather than silent.**
+>
+> 1. **The execution log was not created — it already existed** and has been appended to
+>    (`§17`) instead. This task was authored assuming Task 8 followed Tasks 1–7 in one
+>    session; in fact five sessions wrote §1–§16 along the way. Only the findings document
+>    was new, so `docs/README.md` gained **one** row, not two.
+> 2. **Step 2 located two §5 bullets, not one.** "Both survive" fires on the kill bars and
+>    "`TAS-6` adverse" fires on the guard, simultaneously and without conflict. The
+>    conclusion drawn from their conjunction — that the architecture question is closed
+>    rather than the live owner's choice the first bullet anticipates — is **labelled as
+>    inference on the page**, per this step's "do not invent a read".
 
 **Files:**
-- Create: `docs/superpowers/findings/2026-07-30-tag-discrimination.md`
-- Create: `docs/superpowers/2026-07-30-tag-discrimination-execution-log.md`
-- Modify: `docs/README.md` (classify both new documents)
+- Create: `docs/superpowers/findings/2026-07-30-tag-discrimination.md` ✅
+- ~~Create: `docs/superpowers/2026-07-30-tag-discrimination-execution-log.md`~~ — already existed; appended `§17` ✅
+- Modify: `docs/README.md` (classify both new documents) ✅ *(one row — see deviation 1)*
 
-- [ ] **Step 1: Write the findings document**
+- [x] **Step 1: Write the findings document**
 
 One section per `TAS-1`…`TAS-6`, each opening with its **plain-language sentence quoted verbatim from the spec** — fixed before results existed, so drift is as visible as a moved number. Include a Weakest link section naming what you would defend cheaply and what you would abandon on one contrary measurement, and a "What this cannot conclude" section copied from spec §6.
 
-- [ ] **Step 2: Apply the spec §5 read that matches the outcome**
+- [x] **Step 2: Apply the spec §5 read that matches the outcome**
 
 Do not invent a read. Find the bullet in §5 that matches what happened and follow it. If the grid did not complete, name every unrun arm — "not run" must never be readable as "returned nothing".
 
-- [ ] **Step 3: Write the owner-facing summary into the execution log**
+- [x] **Step 3: Write the owner-facing summary into the execution log**
 
 Four parts, in order: **Measured** (numbers, no adjectives), **What I infer** (plain language — a person who does not know what Jaccard means must be able to disagree with it), **Weakest link**, **Options and their consequences**. Then run the three checks: scan for bare letter-number tokens and give each its sentence; substitute sentences for identifiers and re-read for drift; and ask whether the owner could actually disagree with each claim.
 
 **The summary must name whatever cuts against it.** If `TAS-3` says the signal is redundant with similarity, that belongs in the summary, not a footnote.
 
-- [ ] **Step 4: Classify both documents in `docs/README.md`**
+- [x] **Step 4: Classify both documents in `docs/README.md`**
 
 Add rows with roles. A findings document that the map does not classify is the defect the doc-auditor has caught three times.
 
-- [ ] **Step 5: Commit and open the PR**
+- [x] **Step 5: Commit and open the PR**
+
+> **Branch deviation:** the command below names `tag-discrimination-probe`, which was merged
+> (PR #55) long before Task 8 ran. Executed on a fresh branch off `main`,
+> **`tas-task8-findings`**, per `CLAUDE.md`'s branch-per-piece-of-work rule.
 
 ```bash
 git add docs/
