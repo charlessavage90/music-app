@@ -340,10 +340,10 @@ read measured where it can and cannot be moved; the results note owns that readi
 **Nothing is owed by the owner as an action.** What remains for him is decisions only —
 merging the open PR, and the triggers named in the parked list and the deferral table.
 
-**One ten-second check is queued** in [`TEST-QUEUE.md`](TEST-QUEUE.md)'s **N/A (latest)**
-entry: the `--prune` pass deleted two files from the live website, so open the site in a
-private window once and confirm it still loads and plays. Everything else there is dormant
-until a graph is rebuilt.
+**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry was checked by
+the owner on 2026-08-02 and came back clean — the live site builds journeys and plays clips
+after the `--prune` pass, confirming the two deleted files were genuinely orphaned.
+Everything else there is dormant until a graph is rebuilt.
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
 

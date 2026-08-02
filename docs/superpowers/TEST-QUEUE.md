@@ -23,7 +23,16 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-02 (evening) — the wrong-artist clip fault now has a fix built, and the website got a tidy-up you can check in ten seconds
+## ✅ DONE (latest) — 2026-08-02 (evening) — the wrong-artist clip fault now has a fix built, and the website got a tidy-up you can check in ten seconds
+
+> ### ✅ CHECKED BY THE OWNER 2026-08-02 — nothing found.
+>
+> The live site is functional after the `--prune` pass: **journeys build and clips play.**
+> The two deleted files were genuinely orphaned, as the pre-flight predicted. **Nothing is
+> owed on this entry.**
+>
+> The rest of this entry is unchanged and still describes work that is **dormant until a
+> graph is rebuilt** — the clip fix ships when a map carrying the artist links does.
 
 **Nothing is running.** All four ports were checked and are empty; no server was started and
 none was left behind. **A journey you build now is identical to one from this morning** — no
