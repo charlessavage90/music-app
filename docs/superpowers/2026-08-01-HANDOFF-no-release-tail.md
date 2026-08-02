@@ -1,6 +1,15 @@
 # Handoff — `TAS-` Task 8 and the adopted no-release drop rule, 2026-08-01
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions by
+[`2026-08-02-HANDOFF-tail-drop-and-candidate-census.md`](2026-08-02-HANDOFF-tail-drop-and-candidate-census.md)**,
+which is the CURRENT handoff. This document stays authoritative for its own two threads'
+internals (`TAS-` Task 8 and the adopted drop rule). **⚠ Its closing recommendation — do
+not wire the drop list before the cap track resolves — was deliberately NOT followed**;
+the reasoning was examined and the owner ruled the other way on 2026-08-02. See the
+successor's claim 1 and the execution log §1 before acting on that paragraph.
+
+*(Original role line, as written:)* **Role: ACTIVE — this is the CURRENT handoff.** Nothing
+supersedes it. Supersedes
 [`2026-08-01-HANDOFF-label-weighting.md`](2026-08-01-HANDOFF-label-weighting.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.

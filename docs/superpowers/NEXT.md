@@ -12,11 +12,46 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-01 (latest), when `TAS-` Task 8 landed. The label weighting probe is COMPLETE and the `TAS-` probe is now COMPLETE THROUGH TASK 8 — its findings document exists and nothing is owed on it. The next action is the OWNER'S.**
+**Last updated: 2026-08-02, when the drop rule was WIRED, the pipeline/mirror divergence it opened was CLOSED, and the candidate (`ALG-B`) population was CENSUSED with its own drop list frozen. The next substantial step is the cap re-evaluation pre-registration, and it needs the owner's half before it can be written.**
 
 ---
 
 ## Next
+
+> ## ✅ THE DROP RULE IS WIRED, AND BOTH POPULATIONS NOW HAVE A DROP LIST, 2026-08-02.
+>
+> Entry point is the current handoff:
+> [`2026-08-02-HANDOFF-tail-drop-and-candidate-census.md`](2026-08-02-HANDOFF-tail-drop-and-candidate-census.md).
+> Reasoning: [`2026-08-02-tail-drop-wiring-execution-log.md`](2026-08-02-tail-drop-wiring-execution-log.md).
+> Figures live in the probe JSON and are **cited, never restated**:
+> `builder/analysis/2026-08-02-candidate-tail-census/ctc_census.json`, `ctc_clips.json`,
+> `ctc_droplist.json`.
+>
+> **Three things landed.** The adopted rule is applied in `pipeline.py` before the mass
+> computation (PR #62). The divergence that opened between `build_from_archive` and the
+> probe harnesses mirroring it is closed, with a guard test that fires when `BuilderConfig`
+> gains a field (PR #63). And the candidate population is censused, so **the cleanup can now
+> be held genuinely constant across a comparison of the two data sets** — which was the
+> uncontrolled variable that motivated all of it.
+>
+> **⚠ ONE BLOCKING ITEM, and it is small:** the builder applies **one drop list to whichever
+> archive it is handed**. With two lists in existence a candidate build would half-apply
+> today's, silently. See the deferral table. **This must land before anything is built from
+> `ALG-B`.**
+>
+> **The next substantial step is the CAP RE-EVALUATION PRE-REGISTRATION**, written cold by a
+> fresh session. Every input now exists — Track B as measured input, the `WGT-` device
+> recommendation, and both drop lists. **What it needs from the owner first, because it is
+> his column:** how much better a connection rule must be to justify a rebuild, and whether
+> the data-set switch is inside its scope or a separate question.
+>
+> **Two rulings from 2026-08-02 that must not be re-opened:** the drop rule is **not**
+> re-validated on the candidate population (execution log §5 — the decisive point is that no
+> second refinement mechanism exists, so a measured rate would change nothing), and the
+> wiring **deliberately contradicted** the 2026-08-01 handoff's closing instruction, with
+> reasoning in execution log §1.
+>
+> ---
 
 > ## The LABEL WEIGHTING AND EVIDENCE PROBE (`WGT-`) is COMPLETE, 2026-08-01. **Nothing adopted; the next action is the OWNER'S.**
 >
@@ -44,20 +79,20 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > no-release-tail question is CLOSED and a drop rule is ADOPTED** — keep a
 > release-less artist only where a commercial-DSP link exists **and** a clip
 > resolves; **7,035 of 7,686 dropped**, list frozen at
-> `builder/analysis/2026-08-01-label-weighting/tail_droplist.json`. It is **not yet
-> wired into the builder** — see the deferral table, where the rule must not be
-> re-litigated, only applied. Evidence: `tail_signals.json` (the population census
+> `builder/analysis/2026-08-01-label-weighting/tail_droplist.json`. **✅ WIRED into the
+> builder 2026-08-02 (PR #62)** — the rule must not be re-litigated, only applied; a
+> second list now exists for the candidate population, see the top section.
+> Evidence: `tail_signals.json` (the population census
 > and the artist-**type** split — the tail is 7.2% Group against 37.9% for the rest
 > of the graph), `tail_clips.json` (what plays, plus a **measured 9.4% `BYP-13`
 > wrong-artist rate** in the app's own name-based clip resolver, which is a live
 > user-facing defect independent of this decision), `tail_exposure.json` (delivery
 > rates). The remaining candidate track is below.
 >
-> **The candidate next tracks, both his call:** the cap re-evaluation pre-registration
-> (mutual-k-NN re-question; its device input now exists, Track B its measured input), and/or
-> the no-release-tail product decision (his 20 verdicts are its evidence; note any
-> "has a release" filter would cut both real artists his sample found). **`TAS-` Task 8 has
-> since LANDED** (2026-08-01, latest) — see the `TAS-` section below; nothing is owed on it.
+> **Both candidate tracks have since moved on.** The no-release-tail decision is CLOSED,
+> adopted and now wired; the cap re-evaluation pre-registration is the live next step and
+> is described in the top section, which supersedes this paragraph. **`TAS-` Task 8
+> LANDED** (2026-08-01) — see the `TAS-` section below; nothing is owed on it.
 >
 > ---
 >
