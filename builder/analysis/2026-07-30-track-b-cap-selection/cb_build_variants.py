@@ -16,9 +16,20 @@ WHAT IS IMPORTED RATHER THAN REIMPLEMENTED
   mutual_knn_cap, symmetrise, largest_component, build_graph  (graph)
   serialise  (artifact)
 Only the STAGE ORDER is restated here, because build_from_archive has no seam
-to inject a different cap step into. `_assemble` mirrors it exactly; the
-identity gate below is what proves the mirror is faithful rather than merely
-believed.
+to inject a different cap step into.
+
+⚠ DIVERGED 2026-08-02, deliberately. `_assemble` mirrored build_from_archive
+as it stood on 2026-07-30. The builder has since gained the no-release-tail
+drop (adopted 2026-08-01), which `_assemble` does NOT apply — and must not:
+this harness's whole value is that it reproduces the committed cells byte for
+byte, and a cleaned build would not. Read every cell here as pre-drop. A
+post-drop comparison needs a NEW harness, not an edit to this one.
+
+Note what the identity gate below does and does not prove. It pins `_assemble`
+against the shas of the cells it built on 2026-07-30, so it proves faithful
+REPRODUCTION. It does not compare against a live build_from_archive, so it
+cannot detect a divergence of this kind and did not — the guard that would is
+`builder/tests/test_pipeline_mirrors.py`.
 
 Run from `builder/`:
     UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
@@ -337,7 +348,11 @@ SELECTABLE = ("mutual_knn", "trimmed_union", "proximity_select")
 
 def _assemble(config: BuilderConfig, archive: RawArchive, source,
               cap_step) -> tuple[Graph, dict]:
-    """build_from_archive with the cap step injected. Stage order is identical."""
+    """build_from_archive AS OF 2026-07-30, with the cap step injected.
+
+    Stage order was identical then. It no longer is — see the module docstring:
+    the shipped pipeline now also drops the no-release tail, and this does not.
+    """
     if config.algorithm == PRODUCTION_ALGORITHM:
         prefix = f"similar/{source.name}/"
     else:

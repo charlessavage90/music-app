@@ -224,7 +224,11 @@ def _band_of(pctl: float) -> str | None:
 
 
 def main() -> int:
-    config = BuilderConfig()
+    # Era-pinned. This probe predates the no-release drop adopted 2026-08-01,
+    # and every figure it committed was produced without it. Left at the
+    # default, a re-run would silently build a cleaned graph and disagree with
+    # its own record. See builder/analysis/README.md.
+    config = BuilderConfig(drop_no_release_tail=False)
     archive = LocalArchive(ARCHIVE_DIR)
     source = ListenBrainzSource(config)
     prefix = f"similar/{source.name}/"
