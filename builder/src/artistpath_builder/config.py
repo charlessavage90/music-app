@@ -138,6 +138,21 @@ class BuilderConfig:
     # approximately nothing on hub metrics — see the Phase 2 spec §1.5.
     filter_special_purpose: bool = True
 
+    # Apply the adopted no-release-tail drop rule: keep a release-less artist
+    # only where a commercial-DSP link exists AND a clip resolves. 7,035 of the
+    # 7,686-artist tail are dropped, from a frozen 2026-08-01 snapshot — see
+    # no_release_drop.py for why the list is data rather than a build-time
+    # lookup. Owner decision 2026-08-01 (NEXT.md); the rule is ADOPTED and the
+    # default is on.
+    #
+    # It is a flag rather than an unconditional drop for one reason: the drop
+    # moves every surviving artist's popularity marginal, so a build-side
+    # experiment that needs to isolate its effect can hold it explicitly on or
+    # off in a factor table instead of comparing across a silent substrate
+    # change. Turning it off is an experimental control, never a shipping
+    # configuration.
+    drop_no_release_tail: bool = True
+
     # --- output ---------------------------------------------------------
     graph_version: str = "v1"
 
