@@ -323,13 +323,21 @@ read measured where it can and cannot be moved; the results note owns that readi
   `UC` reference rows now give it measured baselines; his trigger; owes its own blind
   listen.
 
-**Still owed by the owner, unchanged:**
+**Still owed by the owner:**
 
-1. **The use-the-app test** — [`TEST-QUEUE.md`](TEST-QUEUE.md), the **QUEUED (latest)**
-   entry (the redesign, against `https://musicapp.cmiller.io`), including the phone half.
-2. **The iPhone script** — carried inside that entry; still the single most valuable unrun
-   test on the project.
-3. **The `--prune` publish pass** — ripe since 2026-07-29; see the deferral table.
+1. ✅ **The use-the-app test — DONE 2026-08-02.** The redesign entry was run in full against
+   `https://musicapp.cmiller.io`, desktop and phone. Everything passed; journeys he knows well
+   were **unchanged**, which was the check that mattered. One incidental finding worth
+   carrying: **the loading screen is often too fast to see**, so nothing should be measured or
+   redesigned on the assumption a user experiences it.
+2. ✅ **The iPhone script — DONE 2026-08-02, and it settled a Gate 3 blocker.** All three
+   questions clean: clips play, the bottom bar clears the home indicator, artist-name typing is
+   unaffected. **`G3-F2` is FALSIFIED** — see the gate table below.
+3. **The `--prune` publish pass** — ripe since 2026-07-29; see the deferral table. **Now the
+   only owner-owed item that is an action rather than a decision.**
+
+**Nothing is queued in `TEST-QUEUE.md`.** The next entry comes when something about the app
+itself changes — realistically, when a graph is rebuilt.
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
 
@@ -339,7 +347,7 @@ read measured where it can and cannot be moved; the results note owns that readi
 |---|---|
 | **Gate 1 — personal use** | **DONE and discharged.** One live exception (`BYP-13`). |
 | **Gate 2 — friends & family** | **DONE, and the password that defined it is now off.** |
-| **Gate 3 — public** | **NOT OPEN.** The Gate 2→3 review's blocking set still gates it: [`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md). |
+| **Gate 3 — public** | **NOT OPEN.** The Gate 2→3 review's blocking set still gates it: [`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md). **One blocker removed 2026-08-02: `G3-F2` is FALSIFIED** — HIGH, "blocking if confirmed", and the review named the deciding test (*"one tap on a real device confirms or kills it"*). Clips play on a real iPhone. ⚠ **Read what that does not mean:** the code was NOT changed to achieve it — `usePlayer.ts:49` still awaits the URL before `player.play(url)` at line 60, which is exactly the pattern the review flagged. The finding's *description* was accurate; only its *consequence* is removed, and it rests on iOS's current tolerance rather than on the code being correct by construction. **Do not cite this as "the iOS play path is correct."** The rest of the blocking set (`G3-A1`–`G3-A4`, `G3-S1`–`G3-S3`, `G3-Q1`, `G3-Q2`, `G3-F1`) is untouched. |
 
 ## Closed — do not re-plan or re-investigate
 

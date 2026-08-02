@@ -59,9 +59,13 @@ above and still unfixed.
 **Nothing is proposed for you to test.** The next real entry here comes when something about
 the app itself changes — realistically, when a map is actually rebuilt.
 
-**⚠ The redesign entry below is still the live one to run** — the app on
-`https://musicapp.cmiller.io`, including the phone half and the iPhone script. Nothing here
-supersedes a word of it, and **none of it has been discharged.**
+**✅ THE REDESIGN ENTRY IS NOW DONE, 2026-08-02** — run by the owner the same day, everything
+passed, and the iPhone script came back clean and killed `G3-F2`, a HIGH "blocking if
+confirmed" finding in the Gate 2 → 3 review. That entry owns the result. **Nothing is queued
+for the owner as of this date.**
+
+*(This entry originally said the redesign was still the live one to run, and it was for the
+five days before it was discharged.)*
 
 Detail, if you want it: `docs/superpowers/2026-08-02-tail-drop-wiring-execution-log.md`.
 
@@ -724,7 +728,34 @@ here supersedes a word of it.
 
 *Detail: `docs/superpowers/2026-07-28-asc5-path-ascent-execution-log.md`.*
 
-## QUEUED (latest) — 2026-07-28 (night) — the redesign is finished, and it is LIVE
+## ✅ DONE 2026-08-02 — 2026-07-28 (night) — the redesign is finished, and it is LIVE
+
+> ### ✅ RUN BY THE OWNER 2026-08-02. Everything passed, and the iPhone half settled a Gate 3 blocker.
+>
+> **All six desktop checks passed**, on desktop and phone including narrow window widths.
+> Journeys he knows well were **unchanged**, which was the most valuable thing to confirm.
+> Both bypass messages appear and differ per button; the explainer collapses, persists and
+> re-expands; shared links land on the right journey mid-path. The loading screen works but
+> **is often too fast to see** — worth knowing before anyone measures or redesigns it.
+>
+> **⚠ The iPhone script is DISCHARGED, and it falsified `G3-F2`.** That finding is HIGH and
+> **"blocking if confirmed"** in the Gate 2 → 3 review
+> ([`findings/2026-07-27-gate2-gate3-team-review.md`](findings/2026-07-27-gate2-gate3-team-review.md)),
+> and the review named exactly this test to settle it: *"one tap on a real device confirms or
+> kills it."* All three questions came back clean — **clips play**, the bottom bar clears the
+> home indicator, and the keyboard leaves artist names alone.
+>
+> **What that does and does not mean.** The worst reading — *no clip ever plays on iPhone and
+> the app never says why* — is **dead**. But the code was not changed to achieve it:
+> `usePlayer.ts:49` still awaits the URL before `player.play(url)` at line 60, which is the
+> pattern the review flagged. So the finding's *description* was accurate and only its
+> *consequence* is removed, and this rests on iOS's current tolerance rather than on the code
+> being correct by construction. It is evidence, not a guarantee, and a future iOS could
+> tighten it.
+>
+> **One item from this entry was NOT covered and is still the owner's call:** the cosmetic
+> overlap where "Steering around that sound" lands on top of the open explainer on a first
+> visit. He reported both working and did not mention it. Still a one-line change if wanted.
 
 <!-- Updated after the deploy: this entry was written while the redesign was local-only and
      carried two PIDs. It is now published, so the local servers are stopped and every check
@@ -856,16 +887,20 @@ and still waiting, immediately below.
 
 *Detail: `docs/superpowers/2026-07-28-frontend-mockup-adoption-execution-log.md`.*
 
-## QUEUED — 2026-07-28 — the password is gone, and there is one thing only an iPhone can answer
+## ✅ DONE (section 2) 2026-08-02 — 2026-07-28 — the password is gone, and there is one thing only an iPhone can answer
 <!-- "(latest)" stripped 2026-07-28 evening: only the newest entry carries it, per the
-     convention below. This entry is STILL LIVE and still owed — section 2, the iPhone
-     script, has never been run. -->
+     convention below. Section 2 — the iPhone script — was DISCHARGED 2026-08-02; see the
+     note below and the newer entry, which owns the result. -->
 
-> **⚠ STILL OUTSTANDING as of 2026-07-28 night, and NOTHING here has been discharged.**
-> **Section 2 below — the iPhone script — remains the single most valuable unrun test on this
-> project.** It has been **carried forward into the newest QUEUED entry at the top of this
-> file**; run it there, against the live site. This entry is left intact because sections 1 and
-> 3 are about the live site as it stands today and are still runnable as written.
+> **✅ SECTION 2 IS DISCHARGED, 2026-08-02 — the iPhone script was run and all three questions
+> came back clean.** It was carried forward into the newer entry at the top of this file and
+> run there; that entry owns the result and what it settled (`G3-F2`). Sections 1 and 3 were
+> not run as written, but section 1's substance — familiar journeys unchanged, shared links
+> landing correctly — was covered by the newer entry's checks 2 and 6. Section 3 is
+> informational rather than a test.
+>
+> *(Original note, retained: "STILL OUTSTANDING as of 2026-07-28 night… the single most
+> valuable unrun test on this project." It was, for five days.)*
 
 **The address is `https://musicapp.cmiller.io` and there is nothing to type.** No username, no
 password, no dialog. Send it to someone and they just open it.
