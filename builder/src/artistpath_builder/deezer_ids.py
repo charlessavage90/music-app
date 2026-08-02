@@ -42,7 +42,7 @@ from pathlib import Path
 
 # sha256 of json.dumps(sorted(deezer_ids.items()), sort_keys=True), as recorded
 # in NEXT.md and reproduced by builder/analysis/2026-08-02-dsp-ids/dsp_ids.py.
-DEEZER_IDS_SHA256 = "efc4a26305add0a23b3af2e5f9fcd721f44903ba7bb66fdbd03dba0f35b936c5"
+DEEZER_IDS_SHA256 = "7d204111284c7e50450d20af704168d26846a2607f761ef5103eef0514b52fb6"
 
 DEEZER_IDS_PATH = Path(__file__).parent / "data" / "deezer_artist_ids_20260802.json"
 

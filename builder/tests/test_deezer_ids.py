@@ -34,8 +34,8 @@ from artistpath_builder.models import ArtistStats, EdgeType
 
 # Recorded in NEXT.md and reproduced from the frozen probe output:
 # sha256 of json.dumps(sorted(deezer_ids.items()), sort_keys=True).
-RECORDED_SHA256 = "efc4a26305add0a23b3af2e5f9fcd721f44903ba7bb66fdbd03dba0f35b936c5"
-RECORDED_COUNT = 34988
+RECORDED_SHA256 = "7d204111284c7e50450d20af704168d26846a2607f761ef5103eef0514b52fb6"
+RECORDED_COUNT = 39465
 
 A, B = ("a" * 36, "b" * 36)
 

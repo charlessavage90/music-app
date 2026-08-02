@@ -34,9 +34,16 @@ ONE MAP FOR ANY ARCHIVE -- AND THAT IS NOT THE DROP-LIST MISTAKE
   drop list silently removes the wrong artists. This fails safe; that failed
   silent.
 
-  The map is extracted over the ADOPTED graph's population. An artist outside it
-  gets no id and falls back to name search -- a coverage gap, never a wrong
-  answer. See the deferral recorded in NEXT.md before serving an ALG-B artifact.
+  The map covers the UNION of the adopted graph and the ALG-B candidate graph,
+  so a build from either archive is covered and the cap re-evaluation cannot
+  trip a coverage condition mid-experiment. The ALG-B graph is the 2026-07-30
+  full build, which predates the no-release drop and the nameless fix, so its
+  population is a SUPERSET of anything a final ALG-B build produces. A superset
+  is safe by construction: an MBID absent from a given build is a no-op. That is
+  the same reasoning the candidate tail census used for its own population.
+
+  An artist outside the union still gets no id and falls back to name search --
+  a coverage gap, never a wrong answer.
 
 A DATED SNAPSHOT, like the drop list
   The dump is a 2026-07-28 MusicBrainz export. The build must never re-resolve
@@ -66,6 +73,12 @@ from artistpath_api.graph_store import GraphStore  # noqa: E402
 from ct_common import ADOPTED, ADOPTED_SHA  # noqa: E402
 
 DUMP = ROOT / "builder/scratch/mb-json-dumps/artist/mbdump/artist"
+
+# The ALG-B candidate graph, 2026-07-30 full build. Pinned by sha because
+# several graphs sit in builder/scratch/ and they are NOT interchangeable --
+# the sidecar manifest is the only way to know which one is on disk.
+CANDIDATE = ROOT / "builder/scratch/graph-algb-full.bin"
+CANDIDATE_SHA = "d008a2b5e0c23cf31b3f12357fa1fccff55d209ec18f54c872cdae9bf4a0757f"
 
 # Host table verbatim from tail_signals.py, which is the reference
 # implementation. The `www.` strip in host_of is LOAD-BEARING: without it every
@@ -101,13 +114,20 @@ def band_of(pctl: float) -> str:
 
 def main() -> None:
     if sha256(ADOPTED.read_bytes()).hexdigest() != ADOPTED_SHA:
-        raise SystemExit("artifact mismatch -- refusing to extract")
+        raise SystemExit("adopted artifact mismatch -- refusing to extract")
+    if sha256(CANDIDATE.read_bytes()).hexdigest() != CANDIDATE_SHA:
+        raise SystemExit("candidate artifact mismatch -- refusing to extract")
     if not DUMP.exists():
         raise SystemExit(f"artist dump not found at {DUMP}")
 
     store = GraphStore.load(ADOPTED)
-    graph = set(store.mbids)
-    print(f"graph artists: {len(graph):,}", flush=True)
+    candidate = GraphStore.load(CANDIDATE)
+    adopted_set = set(store.mbids)
+    candidate_set = set(candidate.mbids)
+    graph = adopted_set | candidate_set
+    print(f"adopted {len(adopted_set):,}  candidate {len(candidate_set):,}  "
+          f"union {len(graph):,}  candidate-only {len(candidate_set - adopted_set):,}",
+          flush=True)
 
     # Popularity PERCENTILE, computed here. pop_raw is a value, never a rank.
     pop = np.asarray(store.pop_raw, dtype=np.float64)
@@ -185,8 +205,21 @@ def main() -> None:
               f"{(d_band[b] / t * 100 if t else 0):>9.1f}%")
     t = sum(total.values())
     print("-" * len(hdr))
-    print(f"{'ALL':<12}{t:>9,}{len(deezer):>9,}{len(apple):>9,}"
-          f"{sum(e_band.values()):>9,}{len(deezer) / t * 100:>9.1f}%")
+    print(f"{'adopted':<12}{t:>9,}{sum(d_band.values()):>9,}{sum(a_band.values()):>9,}"
+          f"{sum(e_band.values()):>9,}{sum(d_band.values()) / t * 100:>9.1f}%")
+
+    # Candidate-only artists carry no popularity in the adopted graph, so they
+    # cannot be banded against it. Reported as their own line rather than
+    # silently folded into a band they are not in.
+    cand_only = candidate_set - adopted_set
+    cand_only_d = sum(1 for m in cand_only if m in deezer)
+    print(f"{'ALG-B only':<12}{len(cand_only):>9,}{cand_only_d:>9,}"
+          f"{sum(1 for m in cand_only if m in apple):>9,}"
+          f"{sum(1 for m in cand_only if m in deezer or m in apple):>9,}"
+          f"{cand_only_d / len(cand_only) * 100:>9.1f}%")
+    print("-" * len(hdr))
+    print(f"{'UNION':<12}{len(graph):>9,}{len(deezer):>9,}{len(apple):>9,}"
+          f"{'':>9}{len(deezer) / len(graph) * 100:>9.1f}%")
 
     payload = {
         "status": "Frozen 2026-08-02 snapshot of MusicBrainz artist->Deezer "
@@ -196,10 +229,13 @@ def main() -> None:
                    "card cannot play a different artist of the same name "
                    "(BYP-13).",
         "dump": "MusicBrainz JSON artist dump, 2026-07-28",
-        "population": "the adopted artifact's graph",
+        "population": "union of the adopted graph and the ALG-B candidate graph (2026-07-30 full build, pre-drop, so a superset of any final ALG-B build)",
+        "substrate_candidate": {"file": CANDIDATE.name, "sha256": CANDIDATE_SHA},
         "substrate": {"file": ADOPTED.name, "sha256": ADOPTED_SHA},
         "counts": {
-            "graph_artists": len(graph),
+            "union_artists": len(graph),
+            "adopted_artists": len(adopted_set),
+            "candidate_artists": len(candidate_set),
             "matched_in_dump": len(seen_in_dump),
             "deezer_ids": len(deezer),
             "apple_ids_measured_not_shipped": len(apple),
