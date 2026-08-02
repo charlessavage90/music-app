@@ -33,6 +33,7 @@ from artistpath_builder.graph import (
     symmetrise,
 )
 from artistpath_builder.models import ArtistStats
+from artistpath_builder.no_release_drop import load_drop_mbids
 from artistpath_builder.sources.base import SimilaritySource
 from artistpath_builder.sources.listenbrainz import harvest_identities
 
@@ -186,6 +187,26 @@ def build_from_archive(
         logger.info("dropped %d nameless artists", len(nameless & known))
     excluded |= nameless
     known -= nameless
+
+    # The no-release tail is dropped by the same mechanism and in the same
+    # place, and for the same reason: before the mass computation, so a dropped
+    # artist contributes to no marginal. Owner decision 2026-08-01 (NEXT.md) —
+    # keep a release-less artist only where a commercial-DSP link exists and a
+    # clip resolves. The rule is ADOPTED; this applies it and never re-derives
+    # it, and the list is a frozen snapshot rather than a build-time lookup
+    # (no_release_drop.py explains why that is mandatory, not merely tidy).
+    #
+    # This is not the old graph minus rows: every surviving artist's mass, and
+    # so every score and every cap decision, is computed with these artists
+    # absent. Removing them additionally strands ~127 artists at the
+    # largest-component prune on the adopted graph — a lower bound, since a
+    # real build re-selects neighbours.
+    if config.drop_no_release_tail:
+        no_release = load_drop_mbids() & known
+        if no_release:
+            logger.info("dropped %d no-release-tail artists", len(no_release))
+        excluded |= no_release
+        known -= no_release
 
     # --- Pass 1: raw neighbour lists and per-artist co-occurrence mass -----
     # The mass (sum of an artist's raw scores) is the marginal used to correct
