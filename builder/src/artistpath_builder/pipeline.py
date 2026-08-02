@@ -201,8 +201,12 @@ def build_from_archive(
     # absent. Removing them additionally strands ~127 artists at the
     # largest-component prune on the adopted graph — a lower bound, since a
     # real build re-selects neighbours.
+    #
+    # The list is selected by `config.algorithm` — the same value that chose
+    # the archive sub-tree above, so a build applies its own population's list
+    # or refuses. It never borrows another's; see no_release_drop.py.
     if config.drop_no_release_tail:
-        no_release = load_drop_mbids() & known
+        no_release = load_drop_mbids(config.algorithm) & known
         if no_release:
             logger.info("dropped %d no-release-tail artists", len(no_release))
         excluded |= no_release
