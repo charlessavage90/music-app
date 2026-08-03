@@ -133,3 +133,41 @@ the prereg. Snyk over the directory: 0 issues.
   written to soften it. The full verdict awaits `FAM-6` (the owner's tail hand reads,
   checklist delivered), and the decision about what a failed `FAM-4` means for the
   currency is the owner's, presented with options in the conversation of record.
+
+## §5 — FAM-6 and the final verdict: NO ADOPTION (2026-08-02)
+
+The owner ran the checklist the same day. His reads were **committed verbatim before any
+comparison was computed** (`d318089`, WGLL bound three). Fifteen confirmed rows after the
+replacement chain — every replacement consumed in same-group order per `FAM-AM3`,
+including one could-not-confirm alternate. Five sampled deliverable-tail artists had **no
+Spotify page at all**, and three confirmed pages read **zero monthly listeners** (zeros
+enter the Spearman, excluded from ratio pairs only).
+
+**`FAM-6` FAILS: Spearman 0.4552 against the ≥ 0.70 bar** (n = 15, floor cleared;
+descriptive pair companion 65%). Figures: `fi_read6.json`. The failure fingerprint is
+`FAM-4`'s again, now in the tail: the failing pairs put enthusiast-scrobbled acts
+(Kitchen Cynics, 232 Spotify listeners, in six failing pairs) above regional-mainstream
+acts (Muelas de Gallo, 556k, in six; Eneda Tarifa; and December Avenue at **6.8M** Spotify
+listeners sits in our obscure quarter). The §2 shared-population hazard is no longer a
+carried caveat — it is measured, twice, in both regions, along the same axis.
+
+**Verdict under §4, no judgment involved: `FAM-4` and `FAM-6` both failed → NO ADOPTION,
+no silent fallback.** ListenBrainz listener counts measure enthusiast attention, and both
+hand-read sets show that ordering diverging from worldly fame — the construct
+`PRODUCT-REQUIREMENTS.md` defines — in the famous band and the obscure tail alike. The
+currency decision returns to the owner. **One durable asset came out of the failure: a
+30-artist hand-read validation corpus** (15 famous-band from 2026-07-25, identity-confirmed;
+15 tail from today, identity-confirmed at draw time), committed, reusable by any future
+ruler candidate's pre-registration.
+
+**Owner observation during the hand reads, recorded as a candidate refinement (his
+trigger, never a session's):** several sampled tail artists are *featured-credit* artists
+— e.g. 田島賢 (`7e4f57b3`), whose discography is video-game-soundtrack contributions.
+**Checked against the record: he was never in the no-release tail population** (absent
+from `tail_signals.json` and both drop lists) — the adopted rule only evaluates artists
+with *zero* MB release groups and no Discogs release, so an artist credited on any
+release passes without ever being considered. Not a wiring defect; a scope boundary the
+rule was never designed to cover. Extending it (e.g. requiring a primary-artist release)
+is a **new product decision, designed cold** — same standing as the tag-based-limiter
+row. His FAM-6 experience is the first measurement of the class: 5 of 20 examined
+deliverable-tail rows had no Spotify artist page.
