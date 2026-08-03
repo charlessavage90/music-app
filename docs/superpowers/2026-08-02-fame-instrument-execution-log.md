@@ -247,3 +247,27 @@ in the known-helpful direction across the readability floor. Whether to widen by
 amendment (`RCS-AM1`, post-result, permanently disclosed) is a change to a committed
 acceptance rule after results are visible — **the `FAM-AM2` class, the owner's call**.
 Raw MB payloads for the five rows are retained in `rcs_deezer_raw.json` for that path.
+
+## §7 — `RCS-AM1` executed: the tail stays unreadable, and that is final (2026-08-02)
+
+The owner ruled to widen; `RCS-AM1` was committed before any match was computed, then
+executed (`rcs_am1.py`, resolutions and re-read in `rcs_am1.json`). Outcome of the
+five closed rows: **one acceptance** — Muelas de Gallo, recording-title match, `nb_fan`
+2,987 — and **four final nulls** (Jess Okoro, Acer, DTX, Dorona Alberti: no normalised
+recording-title overlap between their MusicBrainz recordings and any exact-name Deezer
+candidate's tracks). Per the amendment's own text there is no third widening.
+
+**AM1 tail re-read: 11/15 non-null — still UNREADABLE, one row short of the ≥ 12
+floor.** Descriptive figures on the readable 11, reported because they inform the next
+decision and bar nothing: Spearman 0.5923 (bar would have been 0.70), pair agreement
+83.3% — better than LB's tail (0.4552 / 65%) and below every committed standard.
+
+**Final state of the shootout, all three instruments now measured on the same corpus:**
+LB failed both regions (the `FAM-` verdict); Wikipedia is dead (famous 0.3542, below
+even LB; tail effectively nonexistent); Deezer is **the best measured instrument in
+every cell and passes none** — famous 0.7560 vs 0.80, tail unreadable at 11/15 with
+0.5923 on what can be read. **Rule 4's pre-committed sentence now stands definitively:
+"no measured candidate orders the tail."** The instrument question returns whole to the
+owner; per rule 4 the two-currency design becomes a live option only by his choice.
+This is a seam: the fame-instrument track has reached a complete, fully-recorded
+conclusion set, and what follows is a design decision, not a measurement.
