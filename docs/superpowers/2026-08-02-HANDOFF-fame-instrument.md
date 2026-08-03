@@ -1,6 +1,10 @@
 # Handoff — the fame-instrument track, 2026-08-02
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-03 on next actions by
+[`2026-08-03-HANDOFF-featured-credit-filter.md`](2026-08-03-HANDOFF-featured-credit-filter.md)**
+— the featured-credit filter track it named as first has run to completion. Everything it
+records about the fame-instrument track's internals remains accurate and authoritative.
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-02-HANDOFF-tail-drop-and-candidate-census.md`](2026-08-02-HANDOFF-tail-drop-and-candidate-census.md)
 on next actions. It does **not** state project status: for that read
 [`NEXT.md`](NEXT.md), which owns it.

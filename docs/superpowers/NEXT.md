@@ -12,11 +12,55 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-02 (night), when the FAME INSTRUMENT WAS FIXED FIRST, per the owner's sequencing ruling: obscurity was REDEFINED as novelty-likelihood (user-relative), `fame_lb_pctl` was ADOPTED as its proxy under a passed validation, and the worldly-fame construct was RETIRED. The owner then ruled a SECOND ordering (2026-08-02, night): the FEATURED-CREDIT FILTER TRACK precedes the cap re-evaluation — the next session's work. The cap re-evaluation pre-registration follows it, written cold by a fresh session, with every owner input already recorded.**
+**Last updated: 2026-08-03, when the FEATURED-CREDIT FILTER TRACK COMPLETED and the owner
+RULED ADOPTION — without the calibration hand-review — enacted by merging PR #67. The cap
+re-evaluation pre-registration is next, written cold by a fresh session, with every owner
+input already recorded and the cleanup now holdable-constant across both populations.**
 
 ---
 
 ## Next
+
+> ## ✅ THE FEATURED-CREDIT FILTER TRACK IS COMPLETE, 2026-08-03. ADOPTION IS RULED; **the owner's one action is merging PR #67**, which enacts it.
+>
+> Entry point is the current handoff:
+> [`2026-08-03-HANDOFF-featured-credit-filter.md`](2026-08-03-HANDOFF-featured-credit-filter.md).
+> Reasoning: [`2026-08-03-featured-credit-filter-execution-log.md`](2026-08-03-featured-credit-filter-execution-log.md)
+> (§1–§8). Governing document:
+> [`specs/2026-08-03-featured-credit-filter-rule.md`](specs/2026-08-03-featured-credit-filter-rule.md)
+> (`FCF-`, amended once by `FCF-AM1` — owner-ruled, post-result disclosure on the page).
+> Figures live in the committed probe JSONs under
+> `builder/analysis/2026-08-03-featured-credit-filter/` — cited, never restated.
+>
+> **What stands, in one paragraph.** The class the fame-instrument track discovered —
+> artists in the graph only through shared release-group credits, never a sole credit,
+> no sole-credit Discogs release — is detected offline, keep-checked with the adopted
+> rule's own instrument (MB DSP link AND a clip resolves, resolver imported never
+> restated), frozen per censused population as sha-pinned package data, and wired behind
+> `drop_featured_credit` (default on, factor-table control like its sibling flag). Both
+> worked instances drop as fixed in advance — **TJ Brown as a named false positive of
+> the DSP-link clause**, which is the residual the owner accepted at adoption. The
+> owner's spot checks mid-track exposed the Discogs exemption's shared-credit gap;
+> the split measurement vindicated them and `FCF-AM1` closed it. **Declined at
+> adoption: the calibration hand-review** — the drop-side false-positive rate is
+> accepted as unmeasured; do not re-propose absent new grounds.
+>
+> **After the merge: the CAP RE-EVALUATION PRE-REGISTRATION, written cold by a fresh
+> session, in the adopted currency.** **Its single design-input address is
+> [`2026-08-02-cap-reeval-design-inputs.md`](2026-08-02-cap-reeval-design-inputs.md).**
+> One input this track adds, recorded in the handoff: **the cleanup is now two flags**
+> (`drop_no_release_tail`, `drop_featured_credit`), and holding cleanup constant across
+> cells means holding both — the factor table carries them deliberately, never by
+> omission. Summary of the standing rulings (fame-instrument execution log §1):
+> candidate families (a)–(d) including the owner-triggered tag-based degree limiter and
+> staged router-priced unbounded; coverage as guard-only at ~10,000;
+> hubness-rising-with-depth as the per-arm kill; LB similarity the sole source of edge
+> existence, tags only re-order/re-weight/remove; router pricing in scope (any pricing
+> arm consumes `TB-P5H-7`); gradient claims must exceed 10× the ruler's measured
+> quantisation step (`FAM-AM1.3`); the population-vs-descent confound goes in its factor
+> table (`FAM-AM1.7`); famous-band interiors are ~73% novel to the owner (log §8).
+>
+> ---
 
 > ## ✅ THE FAME-INSTRUMENT TRACK IS COMPLETE, 2026-08-02 (evening). The cap re-evaluation is UNBLOCKED.
 >
@@ -44,8 +88,10 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > construct; worldly-fame claims are barred from future criteria until an instrument
 > exists.**
 >
-> **⚠ ORDERING RULED BY THE OWNER, 2026-08-02 (night): the FEATURED-CREDIT FILTER TRACK
-> runs FIRST — the next session's work — and the cap re-evaluation follows it.** Three
+> **~~⚠ ORDERING RULED BY THE OWNER, 2026-08-02 (night): the FEATURED-CREDIT FILTER TRACK
+> runs FIRST — the next session's work — and the cap re-evaluation follows it.~~
+> DISCHARGED 2026-08-03 — the track ran and completed; see the top block, which owns
+> current state. Retained below as the ruling of record.** Three
 > recorded reasons (design-inputs doc, and the conversation of record): the class is a
 > dormant term that activates only in arms that succeed at pushing obscure; the adopted
 > gradient currency scores a delivered ghost as a success (obscure-and-novel) while it is
@@ -400,15 +446,15 @@ read measured where it can and cannot be moved; the results note owns that readi
    pre-redesign build deleted; live site verified afterwards. See the deferral table for the
    pre-flight a successor should repeat.
 
-**Nothing is owed by the owner as an action.** What remains for him is decisions only —
-merging PR #66 (the fame-instrument branch), and the triggers named in the parked list
-and the deferral table.
+**One action is owed by the owner: merging PR #67**, which enacts the featured-credit
+filter adoption he ruled 2026-08-03. Everything else remaining for him is decisions only —
+the triggers named in the parked list and the deferral table. *(PR #66 was merged
+2026-08-03, `f9f42ce`.)*
 
-**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry (2026-08-02
-evening, the fame-instrument track) is N/A — nothing app-facing changed and nothing is
-running. The prior entry was checked by the owner on 2026-08-02 and came back clean — the
-live site builds journeys and plays clips after the `--prune` pass. Everything else there
-is dormant until a graph is rebuilt.
+**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry (2026-08-03,
+the featured-credit filter track) is N/A — nothing app-facing changed and nothing is
+running; the filter is inert until a rebuild. The prior real check (2026-08-02, post-prune)
+came back clean. Everything else there is dormant until a graph is rebuilt.
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
 
@@ -507,7 +553,7 @@ is dormant until a graph is rebuilt.
 | ⚠ **The Deezer id path inherits MusicBrainz's link accuracy — it is not "strictly better"** | **Before `BYP-13` is described as closed, and before any figure is put on the improvement.** MusicBrainz sometimes links an artist to a *duplicate* Deezer page rather than the real one. Two observed by hand: Radiohead's recorded link has 473 followers and **0 albums** (so it serves nothing and falls back to name search — fails safe), and Orbital's has **20 followers and does serve tracks** — where the id path would replace a correct name-search result with a worse one. Sampled over 60 delivered artists carrying an id: **59 of 60 serve a track from the id**, and 6 of those are thin pages, of which most are *genuinely* obscure artists rather than duplicates. So the new failure mode is real but small against the 9.4% / 6.1% it removes; **the net is clearly positive and the direction of every individual case is not guaranteed.** A session must not restate this as "strictly better by construction" — that claim was made on 2026-08-02 before this was measured, and is withdrawn. Cheap targeted mitigation if wanted: validate links for the top popularity decile only (~7,400 lookups), where a duplicate is both most detectable (expected follower count is high) and most damaging (those artists are delivered most often). |
 | ✅ **The Deezer id map covers only the adopted population** | **DISCHARGED 2026-08-02 — the map now covers the UNION of both populations**, so the cap re-evaluation cannot trip a coverage condition mid-experiment. 93,067 artists (adopted 74,193 + `ALG-B` 68,467, overlapping), **39,465 ids**. The `ALG-B` graph used is the 2026-07-30 full build (sha `d008a2b5…`, manifest-verified), which predates the drop rule and the nameless fix and is therefore a **superset** of any final `ALG-B` build — safe by construction, since an MBID absent from a build is a no-op, and the same reasoning the candidate tail census used. Adopted-population coverage is unchanged at 34,988 / 47.2%, which is the consistency check that the union did not perturb it; `ALG-B`-only artists cover 4,477 of 18,874 (**23.7%**), consistent with that population being deader. An artist outside the union still falls back to name search. Struck, kept for the record. |
 | **The Deezer id map is a dated snapshot and will age** | **Whenever it is next questioned; no automatic trigger exists.** Frozen 2026-08-02 because `build_from_archive` is offline by a hard rule and spec §9 requires byte-identical builds. A link that goes stale 404s, which `_get` treats as a miss rather than a refusal, so the card degrades to name search rather than going silent (pinned by `test_a_stale_id_falls_back_to_name_search_rather_than_giving_up`). Refreshing is a deliberate act with its own decision. |
-| **The featured-credit residual class in the release filter** — artists kept because credits count as release groups, while having no primary-artist existence (two worked instances: 田島賢, TJ Brown; mechanism closed via `LBS-1`'s 0.25 featured weight) | **✅ TRIGGERED BY THE OWNER 2026-08-02 (night) and ORDERED FIRST — it precedes the cap re-evaluation; see the top block.** Designed cold as a new product decision extending the adopted rule, never re-litigating it. Detector is cheap and offline: the primary-vs-appears-on split from the MB release dump on disk. Evidence: execution log §5/§5a. |
+| ✅ **The featured-credit residual class in the release filter** — artists kept because credits count as release groups, while having no primary-artist existence (two worked instances: 田島賢, TJ Brown; mechanism closed via `LBS-1`'s 0.25 featured weight) | **EXECUTED AND ADOPTION-RULED 2026-08-03 — the `FCF-` rule; see the top block.** The detector ran on the release-**group** dump (cheaper than the release dump the original row guessed at), the keep-check ran with zero refusals, `FCF-AM1` closed the shared-credit exemption gap the owner's spot checks found, and the lists ship as package data behind `drop_featured_credit`. The calibration hand-review was **declined at adoption**. Struck, kept for the record. |
 | **Known-press telemetry as the novelty proxy's long-run validator** | **When enough `known` presses exist to read.** Named in the Definitions entry and `NOV-` §3; nothing to build now. |
 | **A worldly-fame instrument does not exist** | **Accepted; claims in that currency are barred until one does** (Definitions ruling). Reopen only if a product need for worldly fame appears — the `RCS-` corpus and its committed hand values are the reusable starting point. |
 | **The TJ Brown late hand read** (8,274 monthly listeners, ruler 218) | **Usable by a future corpus at design time only** — never a post-hoc addition to a read set (log §5a). |
@@ -526,7 +572,7 @@ is dormant until a graph is rebuilt.
 | **`REL-3`'s ratio bar is degenerate and must not be reused as written** | **Before any successor pre-registration expresses a bar as a multiple of a null.** The null median was exactly zero, so "≥ 3× the null" was satisfied by a division by zero. A ratio bar needs a stated floor on the denominator, or a difference bar instead. |
 | **The `LBS` `filter` token's meaning** | **Accepted, won't chase**; reopen only if a permitted value differing in `filter` ever needs one-knob attribution. |
 | **13 pre-existing Snyk findings under `builder/analysis/`** | **Accepted, won't fix**; reopen if a frozen probe is un-frozen and edited, or `listen.html` is ever served. |
-| **Two Snyk MEDIUMs, same rule** — `rel_discogs.py:87` **and `ctc_census.py:173`**, insecure XML parser (CWE-611) on `xml.etree.ElementTree.iterparse` over local dumps. *(This row named only the first until 2026-08-02; a full `builder/` scan at closeout found the second, and the analysis below applies identically to both.)* | **INVESTIGATED 2026-08-02, and it splits in two. Accepting the residual is the owner's, as with every row above.** Snyk reports one finding but its message names two hazards ("vulnerable to XXE and DDOS"), and they do not have the same answer here. **Tested empirically on this interpreter (3.12.13) rather than argued from the rule's title:** ① **XXE — NOT APPLICABLE.** An external entity pointing at a local file is *refused outright*: `ParseError: undefined entity`. Nothing leaks. **The cited CWE-611 is not reachable**, which also matches the rule's own scope (*"Python < 3.11"*) against this project's `>= 3.12`. ② **Entity expansion — REACHABLE.** An 11-level billion-laughs shape expanded to 8,192 characters, so the DoS half is real in principle. **Exposure for ② is the argument, and it is the same one the 13 Lows were accepted on:** the input is a 57 GB third-party dump sitting on local disk, read by a frozen offline probe; making it hostile requires local write access, which is a larger problem than a research script consuming memory, and no service parses it. **Deliberately NOT fixed:** the remedy is `defusedxml`, a new dependency, and editing a frozen probe would fire the "13 pre-existing findings" row's own reopen condition. The probe stays frozen. Probe script retained at `builder/analysis/2026-08-02-dsp-ids/` is unrelated; the XXE test itself was throwaway and its result is recorded here rather than kept as code. |
+| **Three Snyk MEDIUMs, same rule** — `rel_discogs.py:87`, `ctc_census.py:173` **and `fcf_discogs_split.py:63`**, insecure XML parser (CWE-611) on `xml.etree.ElementTree.iterparse` over local dumps. *(This row named only the first until 2026-08-02, when a full `builder/` scan found the second; the third was found at the 2026-08-03 closeout scan and the analysis below applies identically to all three — fixing one alone would make the instances inconsistent for no exposure change.)* | **INVESTIGATED 2026-08-02, and it splits in two. Accepting the residual is the owner's, as with every row above.** Snyk reports one finding but its message names two hazards ("vulnerable to XXE and DDOS"), and they do not have the same answer here. **Tested empirically on this interpreter (3.12.13) rather than argued from the rule's title:** ① **XXE — NOT APPLICABLE.** An external entity pointing at a local file is *refused outright*: `ParseError: undefined entity`. Nothing leaks. **The cited CWE-611 is not reachable**, which also matches the rule's own scope (*"Python < 3.11"*) against this project's `>= 3.12`. ② **Entity expansion — REACHABLE.** An 11-level billion-laughs shape expanded to 8,192 characters, so the DoS half is real in principle. **Exposure for ② is the argument, and it is the same one the 13 Lows were accepted on:** the input is a 57 GB third-party dump sitting on local disk, read by a frozen offline probe; making it hostile requires local write access, which is a larger problem than a research script consuming memory, and no service parses it. **Deliberately NOT fixed:** the remedy is `defusedxml`, a new dependency, and editing a frozen probe would fire the "13 pre-existing findings" row's own reopen condition. The probe stays frozen. Probe script retained at `builder/analysis/2026-08-02-dsp-ids/` is unrelated; the XXE test itself was throwaway and its result is recorded here rather than kept as code. |
 | **The production archive is not closed under one-hop neighbours** (`GRT-A1`) | **Before any future harness points a crawler at `builder/scratch/graph-archive/`** — wrap it read-only. Track B's harness complied throughout (`ReadOnlyArchive`). **Condition fired again 2026-07-30** — the `TAS-`/`TD-` capture reads the archive through the same Track B helper and therefore through `ReadOnlyArchive`; complied, verified at closeout. **Stays open**: it is a standing condition on future harnesses, not a one-off to discharge. |
 | **`ALG-B` edge quality / blind listen** | **If the owner picks up the re-crawl** (`REQ-38`). |
 | **`TB-P5H-7`** | **If any successor bypass-device or router-pricing pre-registration is written.** |

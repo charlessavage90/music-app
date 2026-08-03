@@ -224,11 +224,12 @@ def _band_of(pctl: float) -> str | None:
 
 
 def main() -> int:
-    # Era-pinned. This probe predates the no-release drop adopted 2026-08-01,
-    # and every figure it committed was produced without it. Left at the
-    # default, a re-run would silently build a cleaned graph and disagree with
-    # its own record. See builder/analysis/README.md.
-    config = BuilderConfig(drop_no_release_tail=False)
+    # Era-pinned. This probe predates the no-release drop adopted 2026-08-01
+    # and the featured-credit filter (2026-08-03), and every figure it
+    # committed was produced without them. Left at the defaults, a re-run
+    # would silently build a cleaned graph and disagree with its own record.
+    # See builder/analysis/README.md.
+    config = BuilderConfig(drop_no_release_tail=False, drop_featured_credit=False)
     archive = LocalArchive(ARCHIVE_DIR)
     source = ListenBrainzSource(config)
     prefix = f"similar/{source.name}/"

@@ -213,9 +213,16 @@ def test_an_uncensused_archive_refuses_to_build(tmp_path):
 def test_an_uncensused_archive_builds_with_the_drop_off(tmp_path):
     # The refusal is conditional on the drop being on. Era-pinned probes
     # (grt_score.py, calibrate.py) build uncensused populations with the flag
-    # off deliberately, and must keep working.
+    # off deliberately, and must keep working. Since 2026-08-03 that means
+    # BOTH drops off — the featured-credit filter refuses on uncensused
+    # populations by the same rule, and the era-pinned probes pin both flags.
     archive = _scoped_archive(tmp_path, CROSS, UNCENSUSED, "uncensused")
-    built = _build(archive, algorithm=UNCENSUSED, drop_no_release_tail=False).mbids
+    built = _build(
+        archive,
+        algorithm=UNCENSUSED,
+        drop_no_release_tail=False,
+        drop_featured_credit=False,
+    ).mbids
     assert PROD_ONLY in built
     assert CANDIDATE_ONLY in built
 

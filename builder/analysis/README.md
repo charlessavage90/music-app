@@ -57,6 +57,13 @@ Both are now **era-pinned** with `drop_no_release_tail=False`, so a re-run still
 reproduces the figures they committed. That pin is why the drop is a config flag
 rather than an unconditional step.
 
+**The same drift happened again on 2026-08-03** when `build_from_archive` gained
+the featured-credit filter (`drop_featured_credit`, the FCF- rule). The
+treatment is identical and was applied at wiring time rather than discovered
+later: the three mirrors above stay frozen — read every graph they built as
+predating *both* drops — and both callers carry `drop_featured_credit=False`
+beside the earlier pin.
+
 **Track B's own identity gate cannot catch this class**, and did not. It pins
 `_assemble` against the shas it produced in July — faithful *reproduction*,
 which is not the same as *fidelity* to a live build. The guard that would catch

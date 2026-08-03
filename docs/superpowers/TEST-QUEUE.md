@@ -23,7 +23,38 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-02 (night) — we changed how we measure "obscure", with your rulings and your hand checks; the app is untouched
+## N/A (latest) — 2026-08-03 — the ghost-contributor cleanup you adopted is built in; nothing changes until a rebuild
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from yesterday.**
+
+**What happened, in plain terms — and you steered it twice.** You had spotted a second
+kind of ghost artist: people who are on the map only because they're *credited on other
+artists' records* — session players, one-song features — who mostly can't play you the
+right person's music. Today that got its own cleanup rule, built the same way as the one
+you adopted earlier: an artist in that class is kept only if a music service has a real
+page for them and something actually plays. Your two spot-check discoveries shaped it —
+the artist with a real Spotify page that MusicBrainz never recorded is written into the
+rule as a known, accepted imperfection rather than papered over, and your catch about
+"credited on a collaboration album" turned out to describe **half** of the artists the
+first version would have waved past, so the rule was amended to check them too. About
+2,200 artists come off the next map build; you chose to adopt without a manual review
+of the borderline cases, and that choice is recorded.
+
+**Nothing is proposed for you to test.** Nothing changes in the app until a map is
+rebuilt — which is now the next piece of work (the map-rebuild experiment this cleanup
+was ordered ahead of). Merging the pull request is the switch; you said you'd do that
+after this write-up.
+
+Detail, if you want it: `docs/superpowers/2026-08-03-featured-credit-filter-execution-log.md`.
+
+---
+
+## N/A — 2026-08-02 (night) — we changed how we measure "obscure", with your rulings and your hand checks; the app is untouched
+<!-- "(latest)" stripped 2026-08-03: only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no
