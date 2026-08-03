@@ -60,11 +60,33 @@ statement in this document is written in exactly one of them, by name.
 - **Novelty** — unknown *to the listener*. Per-user and taste-relative, so not directly
   measurable: the only per-user ground truth the app ever receives is a `known` press,
   which is evidence of *non*-novelty for that user.
-- **Obscurity / fame** — how widely known an artist is in the world. The adopted proxy
-  is English-Wikipedia pageviews, with no-article artists scored at the fame floor
-  (`specs/2026-07-23-track2-preregistration.md` §5 and A11). The proxy is blind in the
-  modern-obscure tail; the bounded hand-read second opinion (Spotify monthly listeners)
-  and its three usage bounds live in WGLL's "How to run the test".
+- **Obscurity / novelty-likelihood (redefined 2026-08-02, owner ruling)** — how
+  *unlikely* a typical user of this app is to already know the artist. **Audience-pinned:**
+  "typical user" means the current audience — Western friends-and-family streaming
+  listeners — and **a material broadening of that audience is a revisit trigger for this
+  definition**, because user-relative obscurity changes with the users. Gate 3 itself is
+  **not** expected to be that broadening: it means "ready to post on Reddit about", and
+  the average user stays Western with roughly similar music exposure (owner, 2026-08-02).
+  Worked example of why the pin matters: December Avenue — 6.8M Spotify monthly
+  listeners, near-certainly novel to the current audience, not novel to a Filipino user.
+  The adopted proxy is **`fame_lb_pctl`** — ListenBrainz listener-count percentile over
+  the frozen 2026-08-02 union snapshot (sha-pinned; coverage and machinery per the
+  `FAM-` record) — **pending one validation**: the owner's known/unknown marks on the
+  committed 30-artist corpus, bar fixed before his marks are read. No criterion is
+  written against the proxy until that passes. The proxy's skew toward enthusiast
+  listening is *conservative* in the direction that matters: artists it calls obscure
+  are near-certainly novel to current users; artists it calls famous may still be novel
+  to a given user (the enthusiast-darling class), and no requirement counts on seeing
+  those.
+  **The prior construct — "how widely known an artist is in the world," proxied by
+  English-Wikipedia pageviews (`specs/2026-07-23-track2-preregistration.md` §5 and A11)
+  — is RETIRED.** Its proxy was blind on 55.0% of the graph and 38.7% of the most
+  obscure route the graph admits (`FPC-3`/`FPC-9` — discharging the long-deferred
+  quantification), and the 2026-08-02 shootout (`RCS-`) measured every candidate
+  instrument failing to order it. Records scored in it stand in their own currency, are
+  never re-read (owner ruling, 2026-08-02), and cross-currency comparisons are barred.
+  **Claims about worldly fame are barred from all future criteria until an instrument
+  for it exists.**
 - **Popularity (in-graph)** — `pop_raw`: score-weighted in-degree from the archive,
   log-scaled. **Not fame at the top of the distribution** (Phase 1 log §2.11 — a lo-fi
   producer and a Beatle score alike), and never a percentile (`pop_pctl` is reserved for
@@ -78,8 +100,8 @@ statement in this document is written in exactly one of them, by name.
   not from a metric. The two offline metrics built to guard coherence were the worst
   predictors of his verdicts (§3.8); do not proxy coherence with one.
 
-**The operational chain (owner-stated, 2026-07-29): novelty is reached through
-obscurity.** The app cannot know which artists are novel to a specific user — the only
+**The operational chain (owner-stated, 2026-07-29; restated 2026-08-02): novelty is
+reached through population-relative obscurity.** The app cannot know which artists are novel to a specific user — the only
 per-user signal is the `known` press — so every requirement on novelty below is carried,
 operationally, in the **fame currency**: deliver obscure artists, because obscure implies
 probably-novel. The chain is one-way: famous does *not* imply known-to-this-listener, so
@@ -87,7 +109,11 @@ a famous interior artist can still be a novelty win for a given user — the pro
 cannot see it, and no requirement counts on it. The coherence Musts are what stop
 obscurity being bought by incoherence, the failure mode the owner's own use run measured
 (`findings/2026-07-25-bypass-depth-use-run.md` `BYP-11`: genre departure preceding
-obscurity).
+obscurity). The Spotify monthly-listeners hand read remains an instrument for
+**worldly-fame facts only**; the 2026-08-02 record measured it arbitrating a different
+construct from this one, so it must not arbitrate user-novelty claims — those are
+arbitrated by the owner's known/unknown marks and, once available, `known`-press
+telemetry.
 
 ✅ **REQ-Q1 (RESOLVED 2026-07-29, owner ruling): discovery payload is scored in
 fame.** Value 1's degree-based count (non-hub interiors) is retained as a **secondary
@@ -100,7 +126,9 @@ frozen snapshots only. **Offline scoring and live telemetry deliberately use dif
 currencies:** telemetry stays in artifact currencies (popularity/degree), because the
 pageview proxy is too weak at the obscure end to commit production monitoring to —
 revisit only if a fame source with genuine per-mbid coverage appears. The offline↔live
-currency gap is accepted and remains unmeasured (DD-D6).
+currency gap is accepted and remains unmeasured (DD-D6). *That revisit condition FIRED
+2026-08-02 (`fame_lb`, 99.9% MBID-keyed coverage); whether live telemetry converges on
+the offline currency is a separate decision, flagged and not taken.*
 
 ---
 
@@ -338,3 +366,7 @@ provenance, worked cases, and protocol.
 2. **Value 5 is promoted from calibration bound to requirement** (REQ-27) — owner
    confirmed 2026-07-29. The famous-for-famous defect reading is unchanged; what
    changes is its force: it may now back criteria and gates.
+3. **WGLL's framing of the Spotify hand read as the fame proxy's complementary second
+   opinion is superseded in part** (2026-08-02): under the redefined obscurity construct
+   it is an instrument for a *different, retired* construct (worldly fame). Its three
+   usage bounds stand unchanged. WGLL remains governing for protocol.
