@@ -158,3 +158,32 @@ on `src/artistpath_builder`, `tests/`, and the probe directory.
 
 **Standing decision preserved:** nothing here is adopted. The branch merging is the
 adoption act, and the presentation to the owner names it.
+
+## §6 — Owner spot checks challenge the Discogs exemption; the split is measured (2026-08-03)
+
+At the presentation the owner asked how Discogs releases were checked, because his spot
+checks found exempted-looking artists whose Discogs record is "credited on" / "one song
+on a collaboration album." The precise answer, from the code rather than the intent:
+presence in a release-level `<artists>` block — which does exclude track-level credits
+and the extra-credits block, but carries **no sole-credit requirement**, an asymmetry
+with the MB half of the class predicate (sole release-group credit). A collaboration
+album crediting several artists at album level exempts all of them. Error direction is
+exemption-only (a ghost escapes; nothing is extra-dropped), but its **size was never
+measured**, and under-cleaning bears directly on this track's purpose.
+
+`fcf_discogs_split.py` (owner-prompted, run immediately): one more Discogs pass
+splitting every exempted member into *sole-credit* (≥ 1 release credited to them alone,
+not Various) vs *shared-credit-only*. **If the predicate is amended on this evidence,
+that is an explicit `FCF-` amendment with post-result disclosure, never a quiet edit** —
+the amendment would rest on the owner's spot checks and this split, not on the
+keep-check results the freeze protects against.
+
+**Result (figures: `fcf_discogs_split.json` — cited, never restated): the owner's spot
+checks were representative, not unlucky draws.** A majority of the exemptions are
+shared-credit-only, at nearly the same share in both populations. The frozen lists
+therefore **under-clean**: an artist whose whole Discogs main-credit existence is joint
+albums is currently exempted without ever reaching the keep-check. The amendment
+decision — whether the Discogs clause requires a sole credit, restoring symmetry with
+the MB half of the predicate — is **the owner's**, because it moves ~2,000 artists from
+"exempt" into exposure to the keep-check's known false-drop residual (§3a). Presented
+with options; nothing amended yet, PR #67 stands as-committed while he decides.
