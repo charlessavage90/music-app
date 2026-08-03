@@ -28,7 +28,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Spotify search:** https://open.spotify.com/search/Muelas%20de%20Gallo/artists
 - **Group:** P
 
-**monthly listeners:** ______________________
+**monthly listeners:** 555,857
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -41,7 +41,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Deezer page** (same artist, recorded in MusicBrainz — useful if the Spotify search is ambiguous): https://www.deezer.com/artist/2007671
 - **Group:** Q
 
-**monthly listeners:** ______________________
+**monthly listeners:** 6,799,036
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -56,7 +56,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 **monthly listeners:** ______________________
 
 - [ ] could not confirm identity
-- [ ] no Spotify page
+- [X] no Spotify page
 
 ### 4. Nameless
 
@@ -68,7 +68,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 **monthly listeners:** ______________________
 
 - [ ] could not confirm identity
-- [ ] no Spotify page
+- [X] no Spotify page
 
 ### 5. MISSIN
 
@@ -78,7 +78,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Deezer page** (same artist, recorded in MusicBrainz — useful if the Spotify search is ambiguous): https://www.deezer.com/artist/53861472
 - **Group:** P
 
-**monthly listeners:** ______________________
+**monthly listeners:** 505
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -90,7 +90,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Spotify search:** https://open.spotify.com/search/Jess%20Okoro/artists
 - **Group:** R
 
-**monthly listeners:** ______________________
+**monthly listeners:** 0 
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -102,7 +102,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Spotify search:** https://open.spotify.com/search/DJ%20Warlord/artists
 - **Group:** P
 
-**monthly listeners:** ______________________
+**monthly listeners:** 1922
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -114,7 +114,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Spotify search:** https://open.spotify.com/search/Kitchen%20Cynics/artists
 - **Group:** Q
 
-**monthly listeners:** ______________________
+**monthly listeners:** 232
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -126,7 +126,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Spotify search:** https://open.spotify.com/search/Acer/artists
 - **Group:** P
 
-**monthly listeners:** ______________________
+**monthly listeners:** 0
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -139,7 +139,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Deezer page** (same artist, recorded in MusicBrainz — useful if the Spotify search is ambiguous): https://www.deezer.com/artist/8787666
 - **Group:** P
 
-**monthly listeners:** ______________________
+**monthly listeners:** 1017
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -154,7 +154,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 **monthly listeners:** ______________________
 
 - [ ] could not confirm identity
-- [ ] no Spotify page
+- [X] no Spotify page
 
 ### 12. Spectre Meets Torture on the Other Side
 
@@ -166,7 +166,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 **monthly listeners:** ______________________
 
 - [ ] could not confirm identity
-- [ ] no Spotify page
+- [X] no Spotify page
 
 ### 13. Eneda Tarifa
 
@@ -176,7 +176,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Deezer page** (same artist, recorded in MusicBrainz — useful if the Spotify search is ambiguous): https://www.deezer.com/artist/7573862
 - **Group:** R
 
-**monthly listeners:** ______________________
+**monthly listeners:** 6504
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -191,7 +191,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 **monthly listeners:** ______________________
 
 - [ ] could not confirm identity
-- [ ] no Spotify page
+- [X] no Spotify page
 
 ### 15. INFIDELIX
 
@@ -200,7 +200,7 @@ The group letters **P**, **Q** and **R** are arbitrary labels. They exist only s
 - **Spotify search:** https://open.spotify.com/search/INFIDELIX/artists
 - **Group:** Q
 
-**monthly listeners:** ______________________
+**monthly listeners:** 19870
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -218,7 +218,8 @@ Use these **in the order listed**, matching the group letter of the row you are 
 - **Spotify search:** https://open.spotify.com/search/DTX/artists
 - **Group:** R
 
-**monthly listeners:** ______________________
+**monthly listeners:** 0
+Replacing #4
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -242,7 +243,8 @@ Use these **in the order listed**, matching the group letter of the row you are 
 - **Spotify search:** https://open.spotify.com/search/Kira%20Puru/artists
 - **Group:** Q
 
-**monthly listeners:** ______________________
+**monthly listeners:** 11,613 
+Replacing #3
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -254,7 +256,8 @@ Use these **in the order listed**, matching the group letter of the row you are 
 - **Spotify search:** https://open.spotify.com/search/Statue/artists
 - **Group:** R
 
-**monthly listeners:** ______________________
+**monthly listeners:** 422
+Replacing #11
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -279,8 +282,9 @@ Use these **in the order listed**, matching the group letter of the row you are 
 - **Group:** Q
 
 **monthly listeners:** ______________________
+Replacing #14
 
-- [ ] could not confirm identity
+- [X] could not confirm identity
 - [ ] no Spotify page
 
 ### R7. Dorona Alberti
@@ -290,7 +294,8 @@ Use these **in the order listed**, matching the group letter of the row you are 
 - **Spotify search:** https://open.spotify.com/search/Dorona%20Alberti/artists
 - **Group:** R
 
-**monthly listeners:** ______________________
+**monthly listeners:** 4,356
+Replacing #12
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
@@ -314,7 +319,8 @@ Use these **in the order listed**, matching the group letter of the row you are 
 - **Spotify search:** https://open.spotify.com/search/Swan%20Meat/artists
 - **Group:** Q
 
-**monthly listeners:** ______________________
+**monthly listeners:** 20,110 
+Replacing #14
 
 - [ ] could not confirm identity
 - [ ] no Spotify page
