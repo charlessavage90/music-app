@@ -10,33 +10,33 @@ this sheet. (Order is a seeded shuffle, seed 20260802, fixed before anything was
 
 | # | Artist | KNOWN | UNKNOWN |
 |---|---|---|---|
-| 1 | Black Rebel Motorcycle Club | [ ] | [ ] |
-| 2 | Blood Red Shoes | [ ] | [ ] |
-| 3 | Swan Meat | [ ] | [ ] |
-| 4 | Jess Okoro | [ ] | [ ] |
-| 5 | INFIDELIX | [ ] | [ ] |
-| 6 | December Avenue | [ ] | [ ] |
-| 7 | Eneda Tarifa | [ ] | [ ] |
-| 8 | NOFX | [ ] | [ ] |
-| 9 | Television | [ ] | [ ] |
-| 10 | Ancestral Voices | [ ] | [ ] |
-| 11 | Statue | [ ] | [ ] |
-| 12 | Kitchen Cynics | [ ] | [ ] |
-| 13 | Muelas de Gallo | [ ] | [ ] |
-| 14 | Lykke Li | [ ] | [ ] |
-| 15 | Acer | [ ] | [ ] |
-| 16 | Dorona Alberti | [ ] | [ ] |
-| 17 | Porcupine Tree | [ ] | [ ] |
-| 18 | New Order | [ ] | [ ] |
-| 19 | Beach House | [ ] | [ ] |
-| 20 | Nightmares on Wax | [ ] | [ ] |
-| 21 | DJ Warlord | [ ] | [ ] |
-| 22 | Kira Puru | [ ] | [ ] |
-| 23 | MISSIN | [ ] | [ ] |
-| 24 | DTX | [ ] | [ ] |
-| 25 | The Human League | [ ] | [ ] |
-| 26 | Boards of Canada | [ ] | [ ] |
-| 27 | 10cc | [ ] | [ ] |
-| 28 | Love | [ ] | [ ] |
-| 29 | Captain Beefheart & His Magic Band | [ ] | [ ] |
-| 30 | Quantic | [ ] | [ ] |
+| 1 | Black Rebel Motorcycle Club | [ ] | [ X] |
+| 2 | Blood Red Shoes | [ ] | [X ] |
+| 3 | Swan Meat | [ ] | [X ] |
+| 4 | Jess Okoro | [ ] | [X ] |
+| 5 | INFIDELIX | [ ] | [X ] |
+| 6 | December Avenue | [ ] | [X ] |
+| 7 | Eneda Tarifa | [ ] | [ X] |
+| 8 | NOFX | [X ] | [ ] |
+| 9 | Television | [X ] | [ ] |
+| 10 | Ancestral Voices | [ ] | [X ] |
+| 11 | Statue | [ ] | [X ] |
+| 12 | Kitchen Cynics | [ ] | [X ] |
+| 13 | Muelas de Gallo | [ ] | [X ] |
+| 14 | Lykke Li | [ ] | [X ] |
+| 15 | Acer | [ ] | [X ] |
+| 16 | Dorona Alberti | [ ] | [X ] |
+| 17 | Porcupine Tree | [ ] | [X ] |
+| 18 | New Order | [ ] | [X ] |
+| 19 | Beach House | [X ] | [ ] |
+| 20 | Nightmares on Wax | [ ] | [X ] |
+| 21 | DJ Warlord | [ ] | [ X] |
+| 22 | Kira Puru | [ ] | [X ] |
+| 23 | MISSIN | [ ] | [X ] |
+| 24 | DTX | [ ] | [X ] |
+| 25 | The Human League | [ ] | [ X] |
+| 26 | Boards of Canada | [ ] | [X ] |
+| 27 | 10cc | [ ] | [X ] |
+| 28 | Love | [ X] | [ ] |
+| 29 | Captain Beefheart & His Magic Band | [ ] | [X ] |
+| 30 | Quantic | [ ] | [ X] |
