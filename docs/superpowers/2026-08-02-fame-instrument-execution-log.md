@@ -303,3 +303,15 @@ with the one-way criterion the Definitions actually state), carrying the maximal
 disclosure — the amended criterion's result is foreknown to pass — and the reasoning
 that saves it: the direction mismatch is derivable from the committed documents alone,
 and the clause it corrects toward predates the marks.
+
+## §9 — Adoption (2026-08-02): `fame_lb_pctl` is the novelty-likelihood proxy
+
+**The owner adopted the recommendation.** `NOV-AM1` is committed with its
+maximum-strength disclosure; `NOV-1` stands unreadable and retired as mis-designed;
+**`NOV-2` reads 15/15 — PASS** — and per the pre-registration's §3, **`fame_lb_pctl` is
+ADOPTED** for offline evaluation. The Definitions "pending" clause is struck, citing the
+amendment. The fame-instrument track is COMPLETE: construct redefined (owner ruling),
+proxy adopted under a passed validation in that construct, worldly fame retired with
+claims barred, and the cap re-evaluation unblocked in the adopted currency. What follows
+is closeout and the PR; the cap re-evaluation pre-registration is a fresh session's
+work, per the standing instruction in `NEXT.md`.

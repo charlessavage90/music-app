@@ -56,3 +56,33 @@ the owner. Nothing else is licensed.
   extension is a new amendment designed cold.
 - A pass licenses **nothing about coherence** and nothing about worldly fame (barred by
   the Definitions ruling until an instrument exists).
+
+## §4 Amendments
+
+### `NOV-AM1` — the one-way criterion the Definitions actually state, appended 2026-08-02 AFTER the marks were read
+
+**Post-result, and the disclosure is at maximum strength: the amended criterion's result
+was foreknown to pass (15/15) when the owner ruled to adopt this amendment.** What saves
+it from being a bar shaped to fit data, stated for the record: `NOV-1`'s defect is
+derivable from the committed documents alone — a two-way AUC counts on the direction the
+governing Definitions entry explicitly disclaims (*"artists it calls famous may still be
+novel to a given user... and no requirement counts on seeing those"*), and that clause
+is the owner's, ratified before his marks existed. The criterion contradicted its own
+governing document at authoring time; the marks exposed rather than caused the defect.
+All 44 inversions under `NOV-1` lie in the disclaimed direction.
+
+- **`NOV-1` stands UNREADABLE on the record** (4 KNOWN against the 5-per-class floor);
+  it is not re-read and its two-way form is retired as mis-designed.
+- **`NOV-2` — the one-way criterion:** among corpus rows with `fame_lb_pctl < 0.25`,
+  the share the owner marked UNKNOWN is **≥ 90%**; readability floor **≥ 12 rows below
+  the line**. *Plain: essentially every artist the ruler calls obscure must be one the
+  owner genuinely didn't know — which is the only promise the redefined construct asks
+  the ruler to keep.* A one-way criterion has no known-class floor, so a low known-count
+  — a genuine fact about the owner, not a defect — cannot make it unreadable.
+- **`NOV-2` read (computed on the committed marks): 15 rows below the line, 15 marked
+  UNKNOWN — 100%, PASS.**
+- **Consequence per §3, now in force: `fame_lb_pctl` is ADOPTED as the
+  novelty-likelihood proxy for offline evaluation.** The Definitions entry's "pending"
+  clause is struck (same-day edit, cited to this amendment); the cap re-evaluation
+  pre-registration is unblocked in this currency; the known-press telemetry check
+  remains the long-run validator.

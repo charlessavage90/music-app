@@ -71,9 +71,10 @@ statement in this document is written in exactly one of them, by name.
   listeners, near-certainly novel to the current audience, not novel to a Filipino user.
   The adopted proxy is **`fame_lb_pctl`** — ListenBrainz listener-count percentile over
   the frozen 2026-08-02 union snapshot (sha-pinned; coverage and machinery per the
-  `FAM-` record) — **pending one validation**: the owner's known/unknown marks on the
-  committed 30-artist corpus, bar fixed before his marks are read. No criterion is
-  written against the proxy until that passes. The proxy's skew toward enthusiast
+  `FAM-` record). **ADOPTED 2026-08-02**: the one-way validation passed on the owner's
+  known/unknown marks — 15 of 15 corpus artists the proxy calls obscure were novel to
+  him (`NOV-2`, via `NOV-AM1`, whose post-result disclosure is part of the record). The
+  long-run validator is `known`-press telemetry. The proxy's skew toward enthusiast
   listening is *conservative* in the direction that matters: artists it calls obscure
   are near-certainly novel to current users; artists it calls famous may still be novel
   to a given user (the enthusiast-darling class), and no requirement counts on seeing
