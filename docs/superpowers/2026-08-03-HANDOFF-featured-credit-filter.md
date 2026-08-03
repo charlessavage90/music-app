@@ -1,6 +1,11 @@
 # Handoff — the featured-credit filter track, 2026-08-03
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-03 (later) on next actions by
+[`2026-08-03-HANDOFF-cap-reeval-prereg.md`](2026-08-03-HANDOFF-cap-reeval-prereg.md)** —
+the cap re-evaluation pre-registration it named as next has been written, reviewed,
+frozen and amended once. Remains authoritative for the featured-credit filter track's
+internals. *(Original role:)* **ACTIVE — the CURRENT handoff.** Nothing supersedes it.
+Supersedes
 [`2026-08-02-HANDOFF-fame-instrument.md`](2026-08-02-HANDOFF-fame-instrument.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
