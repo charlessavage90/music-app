@@ -37,6 +37,9 @@ subagent is running, no port is listening, the tree is clean and pushed. Reasoni
    the tag constraints with the growth hazard dissolved by construction, the owner's
    labelled hypothesis and its cheap first read, and the criteria re-weightings. The
    prereg author starts there; the log §1 is the rulings summary it expands.
+   **Ordering ruled after this handoff was first written (2026-08-02, night): the
+   featured-credit filter track runs FIRST — the next session's work — and the cap
+   re-evaluation follows.** `NEXT.md`'s top block owns the reasoning and state.
 
 ## Already updated — do not re-edit
 

@@ -158,6 +158,14 @@ anything is built on it. Belongs early in the prereg as a labelled descriptive r
 
 ## 8. Process rulings
 
+**Ordering, ruled by the owner 2026-08-02 (night): the featured-credit filter track runs
+BEFORE this pre-registration is written.** Its frozen per-population lists join the
+held-constant section of this document's factor table exactly as the no-release drop
+lists do — the comparison's cleanup must be identical in every cell, and the class would
+otherwise activate only in arms that succeed at pushing obscure (the dormant-term shape)
+while the adopted currency scores its delivery as success. `NEXT.md`'s top block owns the
+current state of that track.
+
 Staging: **a structural screen cuts arms that provably cannot move the gradient before
 any depth sweep runs** — depth sweeps are the cost that scales, and (d) enters only as
 staged comparison data. Track B's committed cells are **reused, never re-run**

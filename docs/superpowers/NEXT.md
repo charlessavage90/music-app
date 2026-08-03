@@ -12,7 +12,7 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-02 (evening), when the FAME INSTRUMENT WAS FIXED FIRST, per the owner's sequencing ruling: obscurity was REDEFINED as novelty-likelihood (user-relative), `fame_lb_pctl` was ADOPTED as its proxy under a passed validation, and the worldly-fame construct was RETIRED. The next substantial step is the cap re-evaluation pre-registration, written cold by a fresh session — and every owner input it needed now exists.**
+**Last updated: 2026-08-02 (night), when the FAME INSTRUMENT WAS FIXED FIRST, per the owner's sequencing ruling: obscurity was REDEFINED as novelty-likelihood (user-relative), `fame_lb_pctl` was ADOPTED as its proxy under a passed validation, and the worldly-fame construct was RETIRED. The owner then ruled a SECOND ordering (2026-08-02, night): the FEATURED-CREDIT FILTER TRACK precedes the cap re-evaluation — the next session's work. The cap re-evaluation pre-registration follows it, written cold by a fresh session, with every owner input already recorded.**
 
 ---
 
@@ -44,7 +44,24 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > construct; worldly-fame claims are barred from future criteria until an instrument
 > exists.**
 >
-> **The next substantial step is the CAP RE-EVALUATION PRE-REGISTRATION, written cold by
+> **⚠ ORDERING RULED BY THE OWNER, 2026-08-02 (night): the FEATURED-CREDIT FILTER TRACK
+> runs FIRST — the next session's work — and the cap re-evaluation follows it.** Three
+> recorded reasons (design-inputs doc, and the conversation of record): the class is a
+> dormant term that activates only in arms that succeed at pushing obscure; the adopted
+> gradient currency scores a delivered ghost as a success (obscure-and-novel) while it is
+> exactly the bad recommendation the release filter exists to prevent; and the cleanup
+> must be held constant across every cell of the comparison — the same held-constant
+> principle that censused both drop lists, and the same clean-first-then-compare ordering
+> the owner ruled for the drop-rule wiring. Shape: the adopted rule's shape, not a purge
+> — a keep-check (commercial-DSP presence + something plays) keeps featured-credit
+> artists who are also small real acts (TJ Brown, 8,274 Spotify monthly listeners, is
+> the worked keeper case). The detector is offline (primary-artist vs appears-on split
+> from the MB release dump on disk); the wiring machinery all exists from the drop rule.
+> Rule designed cold; **whether it gets its own small calibration hand-review is the
+> owner's spend, flagged not decided.** Evidence: execution log §5/§5a; two worked
+> instances (田島賢, TJ Brown) plus the FAM-6 no-page rows.
+>
+> **After it: the CAP RE-EVALUATION PRE-REGISTRATION, written cold by
 > a fresh session, in the adopted currency.** **Its single design-input address is
 > [`2026-08-02-cap-reeval-design-inputs.md`](2026-08-02-cap-reeval-design-inputs.md)** —
 > the owner's rulings, the candidate families spelled out, the supply×pricing synthesis,
@@ -490,7 +507,7 @@ is dormant until a graph is rebuilt.
 | ⚠ **The Deezer id path inherits MusicBrainz's link accuracy — it is not "strictly better"** | **Before `BYP-13` is described as closed, and before any figure is put on the improvement.** MusicBrainz sometimes links an artist to a *duplicate* Deezer page rather than the real one. Two observed by hand: Radiohead's recorded link has 473 followers and **0 albums** (so it serves nothing and falls back to name search — fails safe), and Orbital's has **20 followers and does serve tracks** — where the id path would replace a correct name-search result with a worse one. Sampled over 60 delivered artists carrying an id: **59 of 60 serve a track from the id**, and 6 of those are thin pages, of which most are *genuinely* obscure artists rather than duplicates. So the new failure mode is real but small against the 9.4% / 6.1% it removes; **the net is clearly positive and the direction of every individual case is not guaranteed.** A session must not restate this as "strictly better by construction" — that claim was made on 2026-08-02 before this was measured, and is withdrawn. Cheap targeted mitigation if wanted: validate links for the top popularity decile only (~7,400 lookups), where a duplicate is both most detectable (expected follower count is high) and most damaging (those artists are delivered most often). |
 | ✅ **The Deezer id map covers only the adopted population** | **DISCHARGED 2026-08-02 — the map now covers the UNION of both populations**, so the cap re-evaluation cannot trip a coverage condition mid-experiment. 93,067 artists (adopted 74,193 + `ALG-B` 68,467, overlapping), **39,465 ids**. The `ALG-B` graph used is the 2026-07-30 full build (sha `d008a2b5…`, manifest-verified), which predates the drop rule and the nameless fix and is therefore a **superset** of any final `ALG-B` build — safe by construction, since an MBID absent from a build is a no-op, and the same reasoning the candidate tail census used. Adopted-population coverage is unchanged at 34,988 / 47.2%, which is the consistency check that the union did not perturb it; `ALG-B`-only artists cover 4,477 of 18,874 (**23.7%**), consistent with that population being deader. An artist outside the union still falls back to name search. Struck, kept for the record. |
 | **The Deezer id map is a dated snapshot and will age** | **Whenever it is next questioned; no automatic trigger exists.** Frozen 2026-08-02 because `build_from_archive` is offline by a hard rule and spec §9 requires byte-identical builds. A link that goes stale 404s, which `_get` treats as a miss rather than a refusal, so the card degrades to name search rather than going silent (pinned by `test_a_stale_id_falls_back_to_name_search_rather_than_giving_up`). Refreshing is a deliberate act with its own decision. |
-| **The featured-credit residual class in the release filter** — artists kept because credits count as release groups, while having no primary-artist existence (two worked instances: 田島賢, TJ Brown; mechanism closed via `LBS-1`'s 0.25 featured weight) | **Owner-raised 2026-08-02, his trigger, designed cold** — a new product decision extending the adopted rule, never re-litigating it. Detector is cheap and offline: the primary-vs-appears-on split from the MB release dump on disk. Evidence: execution log §5/§5a. |
+| **The featured-credit residual class in the release filter** — artists kept because credits count as release groups, while having no primary-artist existence (two worked instances: 田島賢, TJ Brown; mechanism closed via `LBS-1`'s 0.25 featured weight) | **✅ TRIGGERED BY THE OWNER 2026-08-02 (night) and ORDERED FIRST — it precedes the cap re-evaluation; see the top block.** Designed cold as a new product decision extending the adopted rule, never re-litigating it. Detector is cheap and offline: the primary-vs-appears-on split from the MB release dump on disk. Evidence: execution log §5/§5a. |
 | **Known-press telemetry as the novelty proxy's long-run validator** | **When enough `known` presses exist to read.** Named in the Definitions entry and `NOV-` §3; nothing to build now. |
 | **A worldly-fame instrument does not exist** | **Accepted; claims in that currency are barred until one does** (Definitions ruling). Reopen only if a product need for worldly fame appears — the `RCS-` corpus and its committed hand values are the reusable starting point. |
 | **The TJ Brown late hand read** (8,274 monthly listeners, ruler 218) | **Usable by a future corpus at design time only** — never a post-hoc addition to a read set (log §5a). |
