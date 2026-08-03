@@ -1,0 +1,699 @@
+{
+  "governing_document": "docs/superpowers/specs/2026-08-02-ruler-candidate-shootout-preregistration.md",
+  "section": "RCS §4 -- figures. The bars live in the pre-registration; this file contains no read of them.",
+  "corpus": {
+    "file": "fi_corpus.json",
+    "famous_rows": 15,
+    "tail_rows": 15,
+    "distinct_mbids": 30,
+    "famous_values_match_fi_read34": true,
+    "tail_rows_match_fi_read6": true,
+    "zero_hand_rows": [
+      "Acer",
+      "DTX",
+      "Jess Okoro"
+    ]
+  },
+  "candidates": {
+    "W": {
+      "description": "W -- MBID-keyed EN Wikipedia pageviews (Wikidata P434 -> EN sitelink -> pageviews over fp_fame_mbid's window). Values are raw pageview counts; log10 is monotone so it cannot move a rank correlation.",
+      "famous": {
+        "rows_in_region": 15,
+        "non_null_rows": 14,
+        "null_rows": 1,
+        "readability_floor_rows": 12,
+        "nulls": [
+          {
+            "name": "Captain Beefheart & His Magic Band",
+            "reason": "no_wikidata_item_with_P434"
+          }
+        ],
+        "spearman_vs_hand": 0.3542,
+        "spearman_n": 14,
+        "descriptive_pair_companion_no_bar": {
+          "qualifying_pairs": 29,
+          "agreement": 0.7241,
+          "failing_pairs": [
+            {
+              "higher_hand": "Lykke Li",
+              "lower_hand": "NOFX",
+              "agrees": false
+            },
+            {
+              "higher_hand": "Lykke Li",
+              "lower_hand": "Porcupine Tree",
+              "agrees": false
+            },
+            {
+              "higher_hand": "Lykke Li",
+              "lower_hand": "Television",
+              "agrees": false
+            },
+            {
+              "higher_hand": "Lykke Li",
+              "lower_hand": "Boards of Canada",
+              "agrees": false
+            },
+            {
+              "higher_hand": "Beach House",
+              "lower_hand": "NOFX",
+              "agrees": false
+            },
+            {
+              "higher_hand": "Beach House",
+              "lower_hand": "Porcupine Tree",
+              "agrees": false
+            },
+            {
+              "higher_hand": "Beach House",
+              "lower_hand": "Boards of Canada",
+              "agrees": false
+            },
+            {
+              "higher_hand": "Quantic",
+              "lower_hand": "Blood Red Shoes",
+              "agrees": false
+            }
+          ],
+          "zero_hand_rows_excluded_from_pairs_only": []
+        },
+        "scored_rows": [
+          {
+            "name": "Lykke Li",
+            "hand": 15000000,
+            "candidate": 184817
+          },
+          {
+            "name": "Beach House",
+            "hand": 14800000,
+            "candidate": 204874
+          },
+          {
+            "name": "New Order",
+            "hand": 8800000,
+            "candidate": 822645
+          },
+          {
+            "name": "10cc",
+            "hand": 6700000,
+            "candidate": 481875
+          },
+          {
+            "name": "The Human League",
+            "hand": 6000000,
+            "candidate": 437069
+          },
+          {
+            "name": "Quantic",
+            "hand": 2300000,
+            "candidate": 5635
+          },
+          {
+            "name": "Nightmares on Wax",
+            "hand": 1700000,
+            "candidate": 64327
+          },
+          {
+            "name": "NOFX",
+            "hand": 1000000,
+            "candidate": 265521
+          },
+          {
+            "name": "Boards of Canada",
+            "hand": 1000000,
+            "candidate": 451532
+          },
+          {
+            "name": "Black Rebel Motorcycle Club",
+            "hand": 716000,
+            "candidate": 119996
+          },
+          {
+            "name": "Love",
+            "hand": 571000,
+            "candidate": 140747
+          },
+          {
+            "name": "Porcupine Tree",
+            "hand": 500000,
+            "candidate": 243961
+          },
+          {
+            "name": "Television",
+            "hand": 372000,
+            "candidate": 195230
+          },
+          {
+            "name": "Blood Red Shoes",
+            "hand": 168000,
+            "candidate": 17737
+          }
+        ]
+      },
+      "tail": {
+        "rows_in_region": 15,
+        "non_null_rows": 4,
+        "null_rows": 11,
+        "readability_floor_rows": 12,
+        "nulls": [
+          {
+            "name": "Muelas de Gallo",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "MISSIN",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "Jess Okoro",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "DJ Warlord",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "Kitchen Cynics",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "Acer",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "Ancestral Voices",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "INFIDELIX",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "DTX",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "Statue",
+            "reason": "no_wikidata_item_with_P434"
+          },
+          {
+            "name": "Swan Meat",
+            "reason": "no_wikidata_item_with_P434"
+          }
+        ],
+        "spearman_vs_hand": 0.2,
+        "spearman_n": 4,
+        "descriptive_pair_companion_no_bar": {
+          "qualifying_pairs": 3,
+          "agreement": 1.0,
+          "failing_pairs": [],
+          "zero_hand_rows_excluded_from_pairs_only": []
+        },
+        "scored_rows": [
+          {
+            "name": "December Avenue",
+            "hand": 6799036,
+            "candidate": 29728
+          },
+          {
+            "name": "Kira Puru",
+            "hand": 11613,
+            "candidate": 2270
+          },
+          {
+            "name": "Eneda Tarifa",
+            "hand": 6504,
+            "candidate": 4190
+          },
+          {
+            "name": "Dorona Alberti",
+            "hand": 4356,
+            "candidate": 19457
+          }
+        ]
+      }
+    },
+    "D": {
+      "description": "D -- Deezer nb_fan. Tier 1 = id recorded in MusicBrainz; tier 2 = name-resolved and corroborated by a shared release title.",
+      "famous": {
+        "pooled": {
+          "rows_in_region": 15,
+          "non_null_rows": 15,
+          "null_rows": 0,
+          "readability_floor_rows": 12,
+          "nulls": [],
+          "spearman_vs_hand": 0.756,
+          "spearman_n": 15,
+          "descriptive_pair_companion_no_bar": {
+            "qualifying_pairs": 34,
+            "agreement": 0.9706,
+            "failing_pairs": [
+              {
+                "higher_hand": "10cc",
+                "lower_hand": "Porcupine Tree",
+                "agrees": false
+              }
+            ],
+            "zero_hand_rows_excluded_from_pairs_only": []
+          },
+          "scored_rows": [
+            {
+              "name": "Lykke Li",
+              "hand": 15000000,
+              "candidate": 676759,
+              "tier": 1
+            },
+            {
+              "name": "Beach House",
+              "hand": 14800000,
+              "candidate": 293285,
+              "tier": 1
+            },
+            {
+              "name": "New Order",
+              "hand": 8800000,
+              "candidate": 943525,
+              "tier": 1
+            },
+            {
+              "name": "10cc",
+              "hand": 6700000,
+              "candidate": 43325,
+              "tier": 1
+            },
+            {
+              "name": "The Human League",
+              "hand": 6000000,
+              "candidate": 204221,
+              "tier": 1
+            },
+            {
+              "name": "Quantic",
+              "hand": 2300000,
+              "candidate": 95245,
+              "tier": 1
+            },
+            {
+              "name": "Nightmares on Wax",
+              "hand": 1700000,
+              "candidate": 53771,
+              "tier": 1
+            },
+            {
+              "name": "NOFX",
+              "hand": 1000000,
+              "candidate": 231604,
+              "tier": 1
+            },
+            {
+              "name": "Boards of Canada",
+              "hand": 1000000,
+              "candidate": 273999,
+              "tier": 1
+            },
+            {
+              "name": "Black Rebel Motorcycle Club",
+              "hand": 716000,
+              "candidate": 94664,
+              "tier": 1
+            },
+            {
+              "name": "Love",
+              "hand": 571000,
+              "candidate": 35118,
+              "tier": 1
+            },
+            {
+              "name": "Porcupine Tree",
+              "hand": 500000,
+              "candidate": 142840,
+              "tier": 1
+            },
+            {
+              "name": "Television",
+              "hand": 372000,
+              "candidate": 19531,
+              "tier": 1
+            },
+            {
+              "name": "Captain Beefheart & His Magic Band",
+              "hand": 235000,
+              "candidate": 20802,
+              "tier": 1
+            },
+            {
+              "name": "Blood Red Shoes",
+              "hand": 168000,
+              "candidate": 33183,
+              "tier": 1
+            }
+          ]
+        },
+        "tier_1_only": {
+          "rows_in_region": 15,
+          "non_null_rows": 15,
+          "null_rows": 0,
+          "readability_floor_rows": 12,
+          "nulls": [],
+          "spearman_vs_hand": 0.756,
+          "spearman_n": 15,
+          "descriptive_pair_companion_no_bar": {
+            "qualifying_pairs": 34,
+            "agreement": 0.9706,
+            "failing_pairs": [
+              {
+                "higher_hand": "10cc",
+                "lower_hand": "Porcupine Tree",
+                "agrees": false
+              }
+            ],
+            "zero_hand_rows_excluded_from_pairs_only": []
+          },
+          "scored_rows": [
+            {
+              "name": "Lykke Li",
+              "hand": 15000000,
+              "candidate": 676759,
+              "tier": 1
+            },
+            {
+              "name": "Beach House",
+              "hand": 14800000,
+              "candidate": 293285,
+              "tier": 1
+            },
+            {
+              "name": "New Order",
+              "hand": 8800000,
+              "candidate": 943525,
+              "tier": 1
+            },
+            {
+              "name": "10cc",
+              "hand": 6700000,
+              "candidate": 43325,
+              "tier": 1
+            },
+            {
+              "name": "The Human League",
+              "hand": 6000000,
+              "candidate": 204221,
+              "tier": 1
+            },
+            {
+              "name": "Quantic",
+              "hand": 2300000,
+              "candidate": 95245,
+              "tier": 1
+            },
+            {
+              "name": "Nightmares on Wax",
+              "hand": 1700000,
+              "candidate": 53771,
+              "tier": 1
+            },
+            {
+              "name": "NOFX",
+              "hand": 1000000,
+              "candidate": 231604,
+              "tier": 1
+            },
+            {
+              "name": "Boards of Canada",
+              "hand": 1000000,
+              "candidate": 273999,
+              "tier": 1
+            },
+            {
+              "name": "Black Rebel Motorcycle Club",
+              "hand": 716000,
+              "candidate": 94664,
+              "tier": 1
+            },
+            {
+              "name": "Love",
+              "hand": 571000,
+              "candidate": 35118,
+              "tier": 1
+            },
+            {
+              "name": "Porcupine Tree",
+              "hand": 500000,
+              "candidate": 142840,
+              "tier": 1
+            },
+            {
+              "name": "Television",
+              "hand": 372000,
+              "candidate": 19531,
+              "tier": 1
+            },
+            {
+              "name": "Captain Beefheart & His Magic Band",
+              "hand": 235000,
+              "candidate": 20802,
+              "tier": 1
+            },
+            {
+              "name": "Blood Red Shoes",
+              "hand": 168000,
+              "candidate": 33183,
+              "tier": 1
+            }
+          ]
+        },
+        "tier_counts": {
+          "tier_1_rows": 15,
+          "tier_2_rows": 0,
+          "tier_2_accepted": 0
+        },
+        "tier_2_acceptances": []
+      },
+      "tail": {
+        "pooled": {
+          "rows_in_region": 15,
+          "non_null_rows": 10,
+          "null_rows": 5,
+          "readability_floor_rows": 12,
+          "nulls": [
+            {
+              "name": "Muelas de Gallo",
+              "reason": "no_musicbrainz_release_titles_to_corroborate_against"
+            },
+            {
+              "name": "Jess Okoro",
+              "reason": "no_musicbrainz_release_titles_to_corroborate_against"
+            },
+            {
+              "name": "Acer",
+              "reason": "no_musicbrainz_release_titles_to_corroborate_against"
+            },
+            {
+              "name": "DTX",
+              "reason": "no_musicbrainz_release_titles_to_corroborate_against"
+            },
+            {
+              "name": "Dorona Alberti",
+              "reason": "no_musicbrainz_release_titles_to_corroborate_against"
+            }
+          ],
+          "spearman_vs_hand": 0.4802,
+          "spearman_n": 10,
+          "descriptive_pair_companion_no_bar": {
+            "qualifying_pairs": 26,
+            "agreement": 0.8077,
+            "failing_pairs": [
+              {
+                "higher_hand": "Kira Puru",
+                "lower_hand": "Ancestral Voices",
+                "agrees": false
+              },
+              {
+                "higher_hand": "Swan Meat",
+                "lower_hand": "Ancestral Voices",
+                "agrees": false
+              },
+              {
+                "higher_hand": "Eneda Tarifa",
+                "lower_hand": "Statue",
+                "agrees": false
+              },
+              {
+                "higher_hand": "Kira Puru",
+                "lower_hand": "Statue",
+                "agrees": false
+              },
+              {
+                "higher_hand": "Swan Meat",
+                "lower_hand": "Statue",
+                "agrees": false
+              }
+            ],
+            "zero_hand_rows_excluded_from_pairs_only": []
+          },
+          "scored_rows": [
+            {
+              "name": "December Avenue",
+              "hand": 6799036,
+              "candidate": 51531,
+              "tier": 1
+            },
+            {
+              "name": "Swan Meat",
+              "hand": 20110,
+              "candidate": 219,
+              "tier": 2
+            },
+            {
+              "name": "INFIDELIX",
+              "hand": 19870,
+              "candidate": 3390,
+              "tier": 2
+            },
+            {
+              "name": "Kira Puru",
+              "hand": 11613,
+              "candidate": 135,
+              "tier": 2
+            },
+            {
+              "name": "Eneda Tarifa",
+              "hand": 6504,
+              "candidate": 526,
+              "tier": 1
+            },
+            {
+              "name": "DJ Warlord",
+              "hand": 1922,
+              "candidate": 30,
+              "tier": 2
+            },
+            {
+              "name": "Ancestral Voices",
+              "hand": 1017,
+              "candidate": 286,
+              "tier": 1
+            },
+            {
+              "name": "MISSIN",
+              "hand": 505,
+              "candidate": 31,
+              "tier": 1
+            },
+            {
+              "name": "Statue",
+              "hand": 422,
+              "candidate": 1083,
+              "tier": 2
+            },
+            {
+              "name": "Kitchen Cynics",
+              "hand": 232,
+              "candidate": 31,
+              "tier": 2
+            }
+          ]
+        },
+        "tier_1_only": {
+          "rows_in_region": 4,
+          "non_null_rows": 4,
+          "null_rows": 0,
+          "readability_floor_rows": 12,
+          "nulls": [],
+          "spearman_vs_hand": 1.0,
+          "spearman_n": 4,
+          "descriptive_pair_companion_no_bar": {
+            "qualifying_pairs": 4,
+            "agreement": 1.0,
+            "failing_pairs": [],
+            "zero_hand_rows_excluded_from_pairs_only": []
+          },
+          "scored_rows": [
+            {
+              "name": "December Avenue",
+              "hand": 6799036,
+              "candidate": 51531,
+              "tier": 1
+            },
+            {
+              "name": "Eneda Tarifa",
+              "hand": 6504,
+              "candidate": 526,
+              "tier": 1
+            },
+            {
+              "name": "Ancestral Voices",
+              "hand": 1017,
+              "candidate": 286,
+              "tier": 1
+            },
+            {
+              "name": "MISSIN",
+              "hand": 505,
+              "candidate": 31,
+              "tier": 1
+            }
+          ]
+        },
+        "tier_counts": {
+          "tier_1_rows": 4,
+          "tier_2_rows": 11,
+          "tier_2_accepted": 6
+        },
+        "tier_2_acceptances": [
+          {
+            "name": "DJ Warlord",
+            "deezer_id": 12741441,
+            "candidate": 30,
+            "evidence": "Deezer id 12741441 \"DJ Warlord\" (search rank 1 of 2) shares 1 release title(s) with MusicBrainz 73469fec-1067-467d-a34f-4daf738cae51: Mystery Leopard Spins Tracks At Local Nightclub | Deezer catalogue 2 albums"
+          },
+          {
+            "name": "Kitchen Cynics",
+            "deezer_id": 1246733,
+            "candidate": 31,
+            "evidence": "Deezer id 1246733 \"Kitchen Cynics\" (search rank 1 of 3) shares 1 release title(s) with MusicBrainz 3b1ed80d-398e-4198-9727-a4292f5ff9c2: Beads Upon an Abacus | Deezer catalogue 1 albums"
+          },
+          {
+            "name": "INFIDELIX",
+            "deezer_id": 4484762,
+            "candidate": 3390,
+            "evidence": "Deezer id 4484762 \"INFIDELIX\" (search rank 1 of 5) shares 7 release title(s) with MusicBrainz 8455affb-6a3f-4d86-a035-3f42227cdcd9: Anthem of the Lost (Live @ Red Raven Studios); Busk Life; Human vs Human; Megaman | MB context: DE / 1985 | Deezer catalogue 33 albums"
+          },
+          {
+            "name": "Kira Puru",
+            "deezer_id": 890732,
+            "candidate": 135,
+            "evidence": "Deezer id 890732 \"Kira Puru\" (search rank 1 of 5) shares 1 release title(s) with MusicBrainz f208db01-d4c8-4e77-85af-449a38631b04: Everything Is Better Without You | MB context: AU | Deezer catalogue 11 albums"
+          },
+          {
+            "name": "Statue",
+            "deezer_id": 1305886,
+            "candidate": 1083,
+            "evidence": "Deezer id 1305886 \"Statue\" (search rank 1 of 5) shares 2 release title(s) with MusicBrainz f86df97f-4bbc-4e5b-93b6-f921cdd7e2eb: Monument; Natural States / Base | MB context: AU / 2014 | Deezer catalogue 13 albums"
+          },
+          {
+            "name": "Swan Meat",
+            "deezer_id": 11512353,
+            "candidate": 219,
+            "evidence": "Deezer id 11512353 \"Swan Meat\" (search rank 1 of 5) shares 6 release title(s) with MusicBrainz 211771d0-7ca4-4ffe-ac45-3d99985681d8: BLOOD SUPERNOVA; FLESHWORLD; Knife Splits Ice; PSYCHOPāTH | MB context: DE | Deezer catalogue 30 albums"
+          }
+        ]
+      }
+    }
+  },
+  "listenbrainz_reference": {
+    "_note": "REFERENCE ONLY -- the ruler that failed FAM. Cited from its own output files, never recomputed here.",
+    "famous": {
+      "spearman_vs_hand": 0.4915,
+      "descriptive_pair_agreement": 0.8235,
+      "qualifying_pairs": 34,
+      "source": "builder/analysis/2026-08-02-fame-instrument/fi_read34.json (FAM_4)"
+    },
+    "tail": {
+      "spearman_vs_hand": 0.4552,
+      "descriptive_pair_agreement": 0.65,
+      "qualifying_pairs": 40,
+      "source": "builder/analysis/2026-08-02-fame-instrument/fi_read6.json"
+    }
+  }
+}

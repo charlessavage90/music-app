@@ -1,0 +1,728 @@
+{
+ "wdqs_endpoint": "https://query.wikidata.org/sparql",
+ "wdqs_query": "SELECT ?mbid ?item (COUNT(DISTINCT ?sl) AS ?wikis) (SAMPLE(?en) AS ?enwiki)\nWHERE {\n  VALUES ?mbid { %s }\n  ?item wdt:P434 ?mbid .\n  OPTIONAL { ?sl schema:about ?item ; schema:isPartOf/wikibase:wikiGroup \"wikipedia\" . }\n  OPTIONAL { ?en schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> . }\n}\nGROUP BY ?mbid ?item",
+ "wdqs_raw_bindings": [
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "32b90c92-9978-4a07-90eb-caa4b22f4907"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q166120"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "24"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Black_Rebel_Motorcycle_Club"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "f37c537b-3557-4031-bfd6-ab63ced32854"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q169145"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "33"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/10cc"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "169c4c28-858e-497b-81a4-8bc15e0026ea"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q213923"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "39"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Porcupine_Tree"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "cc7d4686-ea02-45fd-956e-94c1a322558c"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q270724"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "39"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Lykke_Li"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "f1560407-8826-4ec9-b78f-e0c3fa3ea4f5"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q508921"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "8"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Quantic_(musician)"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q664248"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "27"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Love_(band)"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "cd830a8f-89d2-4e96-96cb-7a497e51d437"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q672354"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "25"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Blood_Red_Shoes"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "69158f97-4c07-4c4e-baf8-4e4ab1ed666e"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q722778"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "29"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Boards_of_Canada"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "f1106b17-dcbb-45f6-b938-199ccfab50cc"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q214990"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "48"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/New_Order_(band)"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "dcaa4f81-bfb7-44eb-8594-4e74f004b6e4"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q265222"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "42"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/NOFX"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "7adaabfb-acfb-47bc-8c7c-59471c2f0db8"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q730158"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "38"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/The_Human_League"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "d5cc67b8-1cc4-453b-96e8-44487acdebea"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q812842"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "27"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Beach_House"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "b8c5cc4f-239f-4e02-b46f-b040b77c2030"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q928905"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "10"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Nightmares_on_Wax"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "490bde43-5edb-4a93-b3b3-7a0465fd8909"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q1160206"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "30"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Television_(band)"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "0a0fffcb-c849-4405-8c6e-3f80bce15155"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q4982056"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "29"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Eneda_Tarifa"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "c13d9133-5b32-4c9a-bf42-caa6f190fc32"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q5298195"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "2"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Dorona_Alberti"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "0ea2b444-9293-47cb-9c94-6e7460b06731"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q60742427"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "1"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/December_Avenue_(band)"
+   }
+  },
+  {
+   "mbid": {
+    "type": "literal",
+    "value": "f208db01-d4c8-4e77-85af-449a38631b04"
+   },
+   "item": {
+    "type": "uri",
+    "value": "http://www.wikidata.org/entity/Q61038840"
+   },
+   "wikis": {
+    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+    "type": "literal",
+    "value": "1"
+   },
+   "enwiki": {
+    "type": "uri",
+    "value": "https://en.wikipedia.org/wiki/Kira_Puru"
+   }
+  }
+ ],
+ "pageviews_endpoint_template": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/{title}/monthly/{start}/{end}",
+ "pageviews_window": [
+  "2025070100",
+  "2026063000"
+ ],
+ "pageviews_note": "totals fetched by fp_fame_mbid.fetch_views (imported, not reimplemented); the request URL is recorded so any total is re-checkable against the same window",
+ "per_artist": {
+  "cc7d4686-ea02-45fd-956e-94c1a322558c": {
+   "name": "Lykke Li",
+   "wikidata_record": {
+    "qid": "Q270724",
+    "wikis": 39,
+    "enwiki": "https://en.wikipedia.org/wiki/Lykke_Li"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Lykke_Li/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 184817
+  },
+  "7adaabfb-acfb-47bc-8c7c-59471c2f0db8": {
+   "name": "The Human League",
+   "wikidata_record": {
+    "qid": "Q730158",
+    "wikis": 38,
+    "enwiki": "https://en.wikipedia.org/wiki/The_Human_League"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/The_Human_League/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 437069
+  },
+  "dcaa4f81-bfb7-44eb-8594-4e74f004b6e4": {
+   "name": "NOFX",
+   "wikidata_record": {
+    "qid": "Q265222",
+    "wikis": 42,
+    "enwiki": "https://en.wikipedia.org/wiki/NOFX"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/NOFX/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 265521
+  },
+  "169c4c28-858e-497b-81a4-8bc15e0026ea": {
+   "name": "Porcupine Tree",
+   "wikidata_record": {
+    "qid": "Q213923",
+    "wikis": 39,
+    "enwiki": "https://en.wikipedia.org/wiki/Porcupine_Tree"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Porcupine_Tree/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 243961
+  },
+  "490bde43-5edb-4a93-b3b3-7a0465fd8909": {
+   "name": "Television",
+   "wikidata_record": {
+    "qid": "Q1160206",
+    "wikis": 30,
+    "enwiki": "https://en.wikipedia.org/wiki/Television_(band)"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Television_%28band%29/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 195230
+  },
+  "69158f97-4c07-4c4e-baf8-4e4ab1ed666e": {
+   "name": "Boards of Canada",
+   "wikidata_record": {
+    "qid": "Q722778",
+    "wikis": 29,
+    "enwiki": "https://en.wikipedia.org/wiki/Boards_of_Canada"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Boards_of_Canada/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 451532
+  },
+  "d5cc67b8-1cc4-453b-96e8-44487acdebea": {
+   "name": "Beach House",
+   "wikidata_record": {
+    "qid": "Q812842",
+    "wikis": 27,
+    "enwiki": "https://en.wikipedia.org/wiki/Beach_House"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Beach_House/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 204874
+  },
+  "f1106b17-dcbb-45f6-b938-199ccfab50cc": {
+   "name": "New Order",
+   "wikidata_record": {
+    "qid": "Q214990",
+    "wikis": 48,
+    "enwiki": "https://en.wikipedia.org/wiki/New_Order_(band)"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/New_Order_%28band%29/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 822645
+  },
+  "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47": {
+   "name": "Love",
+   "wikidata_record": {
+    "qid": "Q664248",
+    "wikis": 27,
+    "enwiki": "https://en.wikipedia.org/wiki/Love_(band)"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Love_%28band%29/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 140747
+  },
+  "8dcd04e4-7695-4d80-bae9-1d7d680a38ef": {
+   "name": "Captain Beefheart & His Magic Band",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "f37c537b-3557-4031-bfd6-ab63ced32854": {
+   "name": "10cc",
+   "wikidata_record": {
+    "qid": "Q169145",
+    "wikis": 33,
+    "enwiki": "https://en.wikipedia.org/wiki/10cc"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/10cc/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 481875
+  },
+  "cd830a8f-89d2-4e96-96cb-7a497e51d437": {
+   "name": "Blood Red Shoes",
+   "wikidata_record": {
+    "qid": "Q672354",
+    "wikis": 25,
+    "enwiki": "https://en.wikipedia.org/wiki/Blood_Red_Shoes"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Blood_Red_Shoes/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 17737
+  },
+  "32b90c92-9978-4a07-90eb-caa4b22f4907": {
+   "name": "Black Rebel Motorcycle Club",
+   "wikidata_record": {
+    "qid": "Q166120",
+    "wikis": 24,
+    "enwiki": "https://en.wikipedia.org/wiki/Black_Rebel_Motorcycle_Club"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Black_Rebel_Motorcycle_Club/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 119996
+  },
+  "f1560407-8826-4ec9-b78f-e0c3fa3ea4f5": {
+   "name": "Quantic",
+   "wikidata_record": {
+    "qid": "Q508921",
+    "wikis": 8,
+    "enwiki": "https://en.wikipedia.org/wiki/Quantic_(musician)"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Quantic_%28musician%29/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 5635
+  },
+  "b8c5cc4f-239f-4e02-b46f-b040b77c2030": {
+   "name": "Nightmares on Wax",
+   "wikidata_record": {
+    "qid": "Q928905",
+    "wikis": 10,
+    "enwiki": "https://en.wikipedia.org/wiki/Nightmares_on_Wax"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Nightmares_on_Wax/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 64327
+  },
+  "670c165b-96e6-4265-acb8-e1b9a5429aa4": {
+   "name": "Muelas de Gallo",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "0ea2b444-9293-47cb-9c94-6e7460b06731": {
+   "name": "December Avenue",
+   "wikidata_record": {
+    "qid": "Q60742427",
+    "wikis": 1,
+    "enwiki": "https://en.wikipedia.org/wiki/December_Avenue_(band)"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/December_Avenue_%28band%29/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 29728
+  },
+  "21da7c32-2416-4bce-ae28-f9c031fc40e0": {
+   "name": "MISSIN",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "d950c846-4b88-4ecc-927b-051bf886e530": {
+   "name": "Jess Okoro",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "73469fec-1067-467d-a34f-4daf738cae51": {
+   "name": "DJ Warlord",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "3b1ed80d-398e-4198-9727-a4292f5ff9c2": {
+   "name": "Kitchen Cynics",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "61fb37b5-051d-4685-af8a-f8ca81a88e32": {
+   "name": "Acer",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "3ce1e01a-df79-44f1-904d-16a984465e7a": {
+   "name": "Ancestral Voices",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "0a0fffcb-c849-4405-8c6e-3f80bce15155": {
+   "name": "Eneda Tarifa",
+   "wikidata_record": {
+    "qid": "Q4982056",
+    "wikis": 29,
+    "enwiki": "https://en.wikipedia.org/wiki/Eneda_Tarifa"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Eneda_Tarifa/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 4190
+  },
+  "8455affb-6a3f-4d86-a035-3f42227cdcd9": {
+   "name": "INFIDELIX",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "7a27e44a-dfc1-44c0-a615-8efaf1dccf42": {
+   "name": "DTX",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "f208db01-d4c8-4e77-85af-449a38631b04": {
+   "name": "Kira Puru",
+   "wikidata_record": {
+    "qid": "Q61038840",
+    "wikis": 1,
+    "enwiki": "https://en.wikipedia.org/wiki/Kira_Puru"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Kira_Puru/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 2270
+  },
+  "f86df97f-4bbc-4e5b-93b6-f921cdd7e2eb": {
+   "name": "Statue",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  },
+  "c13d9133-5b32-4c9a-bf42-caa6f190fc32": {
+   "name": "Dorona Alberti",
+   "wikidata_record": {
+    "qid": "Q5298195",
+    "wikis": 2,
+    "enwiki": "https://en.wikipedia.org/wiki/Dorona_Alberti"
+   },
+   "pageviews_request": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Dorona_Alberti/monthly/2025070100/2026063000",
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": 19457
+  },
+  "211771d0-7ca4-4ffe-ac45-3d99985681d8": {
+   "name": "Swan Meat",
+   "wikidata_record": null,
+   "pageviews_request": null,
+   "pageviews_window": [
+    "2025070100",
+    "2026063000"
+   ],
+   "pageviews_total": null
+  }
+ }
+}

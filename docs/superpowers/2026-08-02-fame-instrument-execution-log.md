@@ -211,3 +211,39 @@ two-sided:** the primary-vs-appears-on release split is computable offline graph
 from the MB release dump already on disk (322 GB, `builder/scratch/mb-json-dumps/release/`),
 and the same split exists on the LB side (track count / primary share). Nothing is built
 today; this paragraph is the design input.
+
+## §6 — The ruler-candidate shootout: figures and controller reads (2026-08-02)
+
+Executor delivered all four `RCS-` tasks; figures in `rcs_results.json` (verdict-free by
+design), raw responses committed, Snyk 0 issues. Two clean instrument cross-checks: WDQS
+resolution agreed with the committed `fp_wikidata.json` on all 26 overlapping MBIDs, and
+`D`'s famous pair set is identical to the LB read's 34 pairs. Six tier-2 Deezer
+acceptances, each with a release-title match on the record.
+
+**Controller reads against the committed §4 bars:**
+
+- **`W` (MBID-keyed Wikipedia) is DEAD under rule 3.** Famous region readable (14/15) and
+  **FAILED at Spearman 0.3542** vs ≥ 0.80 — *below the LB ruler it was meant to replace*
+  (0.4915 on the same artists). Tail **UNREADABLE** (4/15 non-null; 11 corpus tail
+  artists have no Wikidata item carrying their MBID at all). One famous null is the
+  known one-directional-link class: Captain Beefheart's Wikidata item points its `P434`
+  at MusicBrainz's separate "The Magic Band" artist — verified against both APIs,
+  invisible to Wikidata-side coverage checks.
+- **`D` (Deezer `nb_fan`): famous region readable and FAILED NARROWLY — Spearman 0.7560
+  vs ≥ 0.80** (pair agreement 0.9706 vs LB's 0.8235; markedly better than LB on both
+  measures, and still below the bar). **Tail UNREADABLE as committed** (pooled 10/15;
+  tier-1-only is n = 4 and carries no information at that size).
+- **Rule 4's pre-committed sentence therefore currently stands: "no measured candidate
+  orders the tail."**
+
+**The escalation, and why it is the owner's:** the five `D` tail nulls are not Deezer
+failures — every one has a plausible exact-name Deezer page. The pre-committed tier-2
+corroboration requires a MusicBrainz *release*-title match, and those five artists have
+**zero releases** (3–13 standalone recordings each; re-verified against MB) — the truth
+side of the check is structurally empty, so the procedure cannot run. The executor
+correctly **refused** to widen corroboration to recording titles mid-run, because
+candidate `nb_fan` values were already visible and the widening moves `D`'s tail count
+in the known-helpful direction across the readability floor. Whether to widen by
+amendment (`RCS-AM1`, post-result, permanently disclosed) is a change to a committed
+acceptance rule after results are visible — **the `FAM-AM2` class, the owner's call**.
+Raw MB payloads for the five rows are retained in `rcs_deezer_raw.json` for that path.
