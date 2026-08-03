@@ -315,3 +315,24 @@ proxy adopted under a passed validation in that construct, worldly fame retired 
 claims barred, and the cap re-evaluation unblocked in the adopted currency. What follows
 is closeout and the PR; the cap re-evaluation pre-registration is a fresh session's
 work, per the standing instruction in `NEXT.md`.
+
+## §10 — Closeout outcomes (2026-08-02, night)
+
+| Check | Outcome |
+|---|---|
+| A1 log distilled | This document, written per task throughout — no end-of-session reconstruction was needed. |
+| A2 handoff | `2026-08-02-HANDOFF-fame-instrument.md`; predecessor's role line edited to name it. |
+| A3 deferrals | Two prior rows discharged and struck in place (Definitions quantification — fired and landed; `fp_fame_mbid` build — path known-unreachable, killed under the kill-when-closed rule). Five new rows added, each with a condition. |
+| A4 default-flip | **N/A and stated rather than skipped**: zero shipped-code changes this session — no knob exists to flip. The adoption is an evaluation-layer change. |
+| A5 ports | No listener on 8000/5173/8138/8139; nothing started, nothing owned, nothing left behind. |
+| B1 lint | Hard checks passed. Candidates all short-decimal coincidences, handed to the auditor as input. Auditor dispatched scoped to the diff; outcome recorded below when returned. |
+| B2 reachability | New modules are frozen probes under `builder/analysis/2026-08-02-fame-instrument/`; internal imports flow through `fi_stats` (and `fp_common`/`cb_metrics` cross-directory reuse, recorded in the scripts). Nothing in shipped code imports them **by design** (`testpaths` ruling, 2026-08-01). No shipped-code module was created. |
+| B3 vacuous tests | No new tests exist to break (frozen-probe convention). The read scripts were instead cross-checked against independent implementations: `fi_stats` reproduced the critique probes' figures exactly, and the executor's pair machinery reproduced the LB read's 34 pairs. |
+| B4 prose-vs-code | Docstrings of the six new read/fetch scripts checked against behaviour; the one prose-structure defect this session produced (two log sections inserted mid-section) was caught and fixed in-session, and the auditor was told to re-verify §1–§9 ordering. |
+| B5 stale descriptions | `.claude/` and `memory/` swept for fame/Wikipedia claims: clean — the consultant's currency-distinction lines are hazard warnings, true under both constructs. One growth candidate flagged to the owner (a redefinition pointer in `CLAUDE.md`'s orient table), not landed. |
+| C1 | N/A entry queued in `TEST-QUEUE.md` (nothing app-facing changed); "(latest)" marker moved per convention. |
+| D1 | Tree clean at closeout commit; every artifact either committed or gitignored-with-manifest. |
+| D2 | N/A — the graph did not change; fixtures untouched. |
+| D3 | Snapshot sha256 `d9d6d5d3…` in the committed manifest; both source artifacts sha-verified before every use (executor reports + `fi_stats`). |
+| D4 | **builder 151 passed; api 230 passed; frontend 107 passed** — pasted from runs, not asserted. |
+| D6 | Unconditional layer **44,245 chars**, conditional **2,155 lines**. **Both deltas zero**: no `CLAUDE.md`/`.claude/` change on the branch, `memory/` untouched. |
