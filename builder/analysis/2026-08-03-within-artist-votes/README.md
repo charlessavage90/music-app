@@ -1,6 +1,26 @@
 # `WAV-` — the within-artist vote read (2026-08-03)
 
-**Role: ACTIVE until the read lands, then COMPLETE.** Ordered by the owner
+> ## ✅ RUN AND CLOSED, 2026-08-03 — **FAIL on the pre-registered conjunction; rarity stands and `CRE-S2` is unchanged.**
+>
+> `wav_read.json` is the record; every instrument check passed first (WAV-0a–0e,
+> including bit-exact reproduction of the committed `W4` cells and the all-ones
+> degeneracy check). Verdicts as fixed below: **WAV-1 PASS** (turnover vs rarity at
+> λ = 1 was 0.1126 against the 0.01 bar — the knob is real), **WAV-2 PASS**
+> (redundancy vs similarity −0.0072, i.e. *less* redundant than rarity, against a
+> ≤ +0.010 bar), **WAV-3 FAIL** (per-artist mean weight vs `fame_lb_raw`:
+> ρ = **−0.5221**, against |ρ| < 0.50; the absolute scheme's was +0.4112).
+>
+> **Honest note on the failing read, recorded not relitigated:** the bar failed in
+> the **opposite direction** from the hazard its plain sentence names — the
+> weighting pattern leans strongly *away* from famous artists, not toward them,
+> and a large part of that is mechanical (artists with no voted labels take
+> `e_rel ≡ 1.0` by the degrade-to-rarity rule, so the obscure end sits at exactly
+> 1.0 while famous artists' drive-by tags are discounted). The formal bar was
+> |ρ| < 0.50 with no direction clause; it is read as written, per this README's
+> own one-shot rule. **The consequence mapping fires as committed: no `CRE-`
+> amendment, the read is closed.** Any revisit is a new read designed cold with a
+> direction-aware contamination criterion — new grounds, the owner's trigger,
+> never a re-read of this one. Ordered by the owner
 2026-08-03, before `CRE-S2` is built: *where one artist has many tags, treat that
 artist's higher-voted tags as more relevant than its drive-by tags — relative to the
 artist's own vote distribution, so that obscure artists' fewer votes are not
