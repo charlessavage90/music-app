@@ -23,7 +23,41 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-03 — the ghost-contributor cleanup you adopted is built in; nothing changes until a rebuild
+## N/A (latest) — 2026-08-03 (later) — the map-rebuild experiment is designed, reviewed and locked; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from this morning.**
+
+**What happened, in plain terms — and you steered it three times.** The big experiment
+that re-questions how the map gets built is now fully designed and locked in writing
+before anything runs: what gets measured (does pressing "I know them" actually dig
+toward less famous artists), on both data sets, with every pass/fail line fixed in
+advance. You ordered two independent reviews of that design and they earned their keep —
+between them they caught a build rule specified in an order known to break, two knob
+settings strong enough to wreck journey coherence, and several pass/fail lines that
+sat inside measurement noise; all fixed before anything ran. You then asked whether tag
+votes were being used — they weren't, in the form you meant, and the quick measurement
+you ordered showed your version is a real knob that doesn't just repeat what the
+similarity data knows. It failed one written-in-advance check, in a direction you
+judged acceptable, and on your ruling it is now part of the design with an honesty
+check attached: before any conclusion credits the votes, the same experiment runs with
+each artist's votes shuffled among its own tags, and the real version has to beat the
+shuffled one.
+
+**Nothing is proposed for you to test.** Your one action is merging the pull request
+(#68) that locks all of this in; the next session writes the step-by-step plan and the
+experiment itself follows. The next real entry here comes when a map is actually
+rebuilt.
+
+Detail, if you want it: `docs/superpowers/2026-08-03-cap-reeval-prereg-execution-log.md`.
+
+---
+
+## N/A — 2026-08-03 — the ghost-contributor cleanup you adopted is built in; nothing changes until a rebuild
+<!-- "(latest)" stripped 2026-08-03 (later): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no

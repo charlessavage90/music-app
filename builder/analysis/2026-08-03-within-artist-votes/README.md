@@ -1,0 +1,146 @@
+# `WAV-` — the within-artist vote read (2026-08-03)
+
+> ## ✅ RUN AND CLOSED, 2026-08-03 — **FAIL on the pre-registered conjunction; rarity stands and `CRE-S2` is unchanged.**
+>
+> `wav_read.json` is the record; every instrument check passed first (WAV-0a–0e,
+> including bit-exact reproduction of the committed `W4` cells and the all-ones
+> degeneracy check). Verdicts as fixed below: **WAV-1 PASS** (turnover vs rarity at
+> λ = 1 was 0.1126 against the 0.01 bar — the knob is real), **WAV-2 PASS**
+> (redundancy vs similarity −0.0072, i.e. *less* redundant than rarity, against a
+> ≤ +0.010 bar), **WAV-3 FAIL** (per-artist mean weight vs `fame_lb_raw`:
+> ρ = **−0.5221**, against |ρ| < 0.50; the absolute scheme's was +0.4112).
+>
+> **Honest note on the failing read, recorded not relitigated:** the bar failed in
+> the **opposite direction** from the hazard its plain sentence names — the
+> weighting pattern leans strongly *away* from famous artists, not toward them,
+> and a large part of that is mechanical (artists with no voted labels take
+> `e_rel ≡ 1.0` by the degrade-to-rarity rule, so the obscure end sits at exactly
+> 1.0 while famous artists' drive-by tags are discounted). The formal bar was
+> |ρ| < 0.50 with no direction clause; it is read as written, per this README's
+> own one-shot rule. **The consequence mapping fires as committed: no `CRE-`
+> amendment, the read is closed.** Any revisit is a new read designed cold with a
+> direction-aware contamination criterion — new grounds, the owner's trigger,
+> never a re-read of this one.
+>
+> **2026-08-03, later: the owner's trigger FIRED.** He ruled the direction question
+> (his column — the anti-fame lean is acceptable; the hazard `WAV-3` named is the
+> direction that did not occur) and ruled the scheme pursued. **`CRE-AM1`** in the
+> cap re-evaluation pre-registration records the ruling, adopts the scheme into
+> `CRE-S2`'s ceiling ranking, and moves the one open question (vote attribution) to
+> a pre-registered sweep-level gate. **This read's record, figures and closure are
+> unchanged** — the amendment supersedes the consequence mapping's product effect on
+> the owner's authority, not the read. Ordered by the owner
+2026-08-03, before `CRE-S2` is built: *where one artist has many tags, treat that
+artist's higher-voted tags as more relevant than its drive-by tags — relative to the
+artist's own vote distribution, so that obscure artists' fewer votes are not
+penalised.* This is the one variant of vote weighting the `WGT-` probe did not
+measure: its "evidence" scheme weighted votes on an **absolute** scale (log-damped,
+capped at `S_CAP = 8`) and was declined because vote mass tracks how well-documented
+an artist is — redundancy with similarity rose in four of five frames (`W4` rarity
+0.2029 → evidence 0.2247) while the fame-leak gate passed only narrowly
+(`EV-G_rg_count` 0.4983 against a 0.50 bar; `EV-A_votes` 0.4345). The within-artist
+form renormalises strength against the artist's own maximum, which removes the
+cross-artist scale those objections live on. Whether it *also* keeps the
+discrimination is what this read measures.
+
+**These criteria are fixed and committed before the read runs.** The consequence
+mapping is fixed with them: **all three pass → measured grounds for a `CRE-`
+amendment (`CRE-AM`-series, appended per its §8) replacing `CRE-S2`'s ceiling
+ranking with rarity × within-artist vote weight — drafted for the record, adoption
+of the amendment being part of the frozen prereg's own process. Any fail → rarity
+stands, the result is committed, and the read is closed** — no re-runs, no second
+scheme, no threshold adjustment after a number exists. Per the `WGT-` findings'
+clause: "simpler wins until something measured says otherwise"; this read is the
+something-measured, one shot.
+
+## The scheme under test
+
+`e_rel(a, l) = log1p(s(a, l)) / log1p(s_max(a))`, capped at 1.0 — where `s(a, l)`
+is **exactly the committed combined strength** from `wgt_grid.evidence_weights`
+(artist-page net votes clamped at 0, Wikidata presence, release-group support
+counts, Discogs presence; no release-level evidence — `EV-R` stays excluded per
+`WGT-4` Branch 3), and `s_max(a)` is the maximum strength over the artist's own
+labels. No absolute cap: an artist's 100-vote tag outranks its 8-vote tag, which
+`S_CAP` flattened. An artist with no strength ordering at all (`s_max ≤ 1` — no
+voted labels anywhere) gets `e_rel ≡ 1.0`, i.e. **degrades to rarity exactly** —
+the dark-tail behaviour the owner's caveat asks for. Frame labels no source
+explains take the within-artist analogue of the committed floor
+(`log1p(1)/log1p(s_max)`). The agreement measure is the committed evidence shape
+with `e_rel` in place of `e`: `Σ idf·min(e_rel) over ∩ ÷ Σ idf·max(e_rel) over ∪`
+— so with `e_rel ≡ 1` it reduces to rarity **by construction**, which is the
+degeneracy check below.
+
+Frame: **`W4` only** (the `CRE-S2` device's frame). Substrate: the pre-cap `ALG-E`
+capture (`TAS-AM2` selection side), regenerated by `td_capture.py` into a session
+scratchpad and sha-verified against the recorded `893609e9…` before anything reads
+it — the capture is deliberately uncommitted and byte-deterministic from the
+archive.
+
+## Instrument checks — all must pass before any reading is taken (`WGT-0` shape)
+
+- **WAV-0a** — capture sha equals the recorded value (the `WGT-0d` check, same
+  constant, imported not restated).
+- **WAV-0b** — the copied pass reproduces the committed `W4` cells from
+  `wgt_grid.json` — `plain`/`rarity`/`evidence` `median_iqr` and
+  `spearman_vs_similarity` to 5e-5, and `evidence`'s selection turnover vs plain at
+  every λ to 5e-5 — plus the committed `W0` plain `median_iqr` (the scorable-list
+  population is `W0`-derived, as committed).
+- **WAV-0c** — λ = 0 selection turnover is exactly 0 for `evidence_rel`.
+- **WAV-0d** — degeneracy (the red check): the `evidence_rel` code path run with
+  weights forced ≡ 1 must equal the `rarity` field **elementwise**. This proves the
+  new code can fail — if it diverges under all-ones weights, the wire is miswired.
+- **WAV-0e** — the marked copy of the mass assembly reproduces
+  `wgt_grid.evidence_weights`' committed `e(a, l)` table exactly, and its
+  recomputed leak values match the committed gate (0.4345 / 0.4983) with nothing
+  degraded. This pins the copy to the frozen original.
+
+A failure stops the read; results produced before a fix are void.
+
+## The three criteria — effect sizes fixed in advance
+
+- **WAV-1 — movement.** *Plain: does ranking an artist's own tags by their votes
+  actually change which connections get picked, compared to rarity alone?*
+  Selection turnover between the `rarity` selection and the `evidence_rel`
+  selection on `W4` at λ = 1.0 (full λ grid reported). **Bar: ≥ 0.01** — the
+  owner's 1% materiality line. Below it the scheme is rarity in disguise and there
+  is nothing to adopt.
+- **WAV-2 — redundancy.** *Plain: does the improvement just re-state what the
+  similarity data already knows, the failure that killed absolute vote weighting?*
+  `spearman_vs_similarity(evidence_rel) − spearman_vs_similarity(rarity)` on `W4`.
+  **Bar: ≤ +0.010** — under a third of the absolute scheme's measured rise
+  (+0.0218, from 0.2029 to 0.2247).
+- **WAV-3 — fame shape.** *Plain: does the weighting pattern itself lean toward
+  famous artists, the other failure of absolute votes?* Per-artist mean weight over
+  its `W4` labels, Spearman against `fame_lb_raw` (the adopted currency; Spearman
+  is invariant to the raw→percentile map, so raw values serve; ruler-null artists
+  drop). **Bars, both required: |ρ(evidence_rel)| < 0.50, and
+  |ρ(evidence_rel)| < |ρ(evidence_abs)|** computed on the same artists with the
+  same statistic. The retired-currency `fame_frame()` reading is reported beside it
+  for continuity with the committed `WGT-1` gate, descriptive only — no criterion
+  here consumes the retired construct.
+
+**Reading rule:** the three criteria are a conjunction; there is no partial credit
+and no reweighing after the numbers exist. Every reported sentence about this read
+carries the criterion's plain sentence beside its identifier.
+
+## Files
+
+- `wav_read.py` — the read. Marked copies of `wgt_grid.evidence_weights`' mass
+  assembly (extended to return raw strengths, which the committed function
+  discards after damping) and of `wgt_grid.frame_pass` (extended with the
+  `evidence_rel` measure and parameterised measures) — both equivalence-checked
+  against the originals at run time (WAV-0b/0e). Everything else imported from the
+  committed modules.
+- `wav_read.json` — the committed output (present only after the run).
+
+## Running
+
+```bash
+# from builder/ — regenerate the capture, then the read:
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
+    analysis/2026-07-30-tag-discrimination/td_capture.py --archive ALG-E \
+    --out <scratchpad>/alge_capture.npz
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
+    analysis/2026-08-03-within-artist-votes/wav_read.py \
+    --capture <scratchpad>/alge_capture.npz
+```

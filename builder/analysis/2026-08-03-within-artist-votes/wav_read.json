@@ -1,0 +1,77 @@
+{
+ "capture_sha256": "893609e97fb31f2a679a5e8005f7488d771414658d671a9eee979a757b550d90",
+ "population_lists": 38782,
+ "cells_W4": {
+  "plain": {
+   "median_iqr": 0.1565,
+   "spearman_vs_similarity": 0.1942
+  },
+  "rarity": {
+   "median_iqr": 0.136,
+   "spearman_vs_similarity": 0.2029
+  },
+  "evidence": {
+   "median_iqr": 0.1354,
+   "spearman_vs_similarity": 0.2247
+  },
+  "evidence_rel": {
+   "median_iqr": 0.1432,
+   "spearman_vs_similarity": 0.1957
+  }
+ },
+ "evidence_rel_turnover_vs_plain": {
+  "0.0": 0.0,
+  "0.25": 0.07883791435944977,
+  "0.5": 0.12101946461324521,
+  "1.0": 0.1555274358679397,
+  "2.0": 0.17621970306770415
+ },
+ "evidence_rel_turnover_vs_rarity": {
+  "0.0": 0.0,
+  "0.25": 0.058436193280236214,
+  "0.5": 0.08765890630189932,
+  "1.0": 0.11261577498892776,
+  "2.0": 0.1273715946213155
+ },
+ "mean_weight_fame_leaks": {
+  "binding_fame_lb_raw": {
+   "n_artists": 61302,
+   "evidence_abs": 0.4112,
+   "evidence_rel": -0.5221
+  },
+  "descriptive_retired_frame": {
+   "n_artists": 61305,
+   "evidence_abs": 0.3783,
+   "evidence_rel": -0.4795,
+   "note": "continuity with the committed WGT-1 gate only; no criterion consumes the retired construct"
+  }
+ },
+ "committed_leak_reproduction": {
+  "EV-A_votes": 0.4345,
+  "EV-G_rg_count": 0.4983
+ },
+ "verdicts": {
+  "WAV-1_movement": {
+   "turnover_rarity_to_rel_lambda1": 0.11261577498892776,
+   "bar": ">= 0.01",
+   "pass": true
+  },
+  "WAV-2_redundancy": {
+   "rho_sim_rel_minus_rarity": -0.0072,
+   "bar": "<= +0.010",
+   "pass": true
+  },
+  "WAV-3_fame_shape": {
+   "binding": {
+    "n_artists": 61302,
+    "evidence_abs": 0.4112,
+    "evidence_rel": -0.5221
+   },
+   "bar": "|rel| < 0.50 and |rel| < |abs|",
+   "pass": false
+  }
+ },
+ "decision": "FAIL: rarity stands; the read is closed (README consequence mapping)",
+ "note": "Criteria fixed in README.md and committed before this ran. DIAGNOSTIC for the CRE-S2 ranking device only; nothing else consumes these figures.",
+ "runtime_min": 2.2
+}
