@@ -160,6 +160,33 @@ currency decision returns to the owner. **One durable asset came out of the fail
 15 tail from today, identity-confirmed at draw time), committed, reusable by any future
 ruler candidate's pre-registration.
 
+### §5a — A late hand read, recorded per WGLL bound three (2026-08-02, after the verdict)
+
+The owner kept digging on **TJ Brown** — the alternate he had marked *could not confirm
+identity* — and found the Spotify page via a YouTube stream → Twitter → website → Spotify
+chain, with identity corroborated by the MusicBrainz feature credits (QTCinderella,
+Lilypichu): **8,274 monthly listeners.** Ruler value 218.
+
+Three consequences, none of them a verdict change:
+
+1. **The `FAM-6` confirmed set is NOT revised.** The replacement procedure was followed
+   correctly with the information available at read time, and re-opening a confirmed set
+   after the verdict is known is the post-hoc move this discipline exists to bar.
+   **Labelled sensitivity check, not a re-read: with TJ Brown added (n = 16) the Spearman
+   is 0.4985** against the same 0.70 bar — the verdict is insensitive to the late row.
+   The read is recorded here as an addendum row; a future corpus may include it **by
+   amendment at design time only**. The running `RCS-` shootout's corpus stays exactly as
+   its §1 committed it.
+2. **"No Spotify page" outcomes carry detection-effort dependence.** A page can exist and
+   be unfindable by reasonable search — TJ Brown took a four-link chain outside Spotify
+   to locate. So the five no-page exclusions are "not findable at ordinary effort", not
+   "does not exist", and any future read consuming those outcomes inherits that caveat.
+3. **The featured-credit class gains a second worked instance.** TJ Brown's MB
+   discography is contributions to and features on other artists' work (streamer-adjacent
+   releases), the same shape as 田島賢 — in the deliverable population because credits
+   count as release groups, invisible on DSPs as a primary act. The candidate-refinement
+   row below accumulates.
+
 **Owner observation during the hand reads, recorded as a candidate refinement (his
 trigger, never a session's):** several sampled tail artists are *featured-credit* artists
 — e.g. 田島賢 (`7e4f57b3`), whose discography is video-game-soundtrack contributions.
