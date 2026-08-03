@@ -198,3 +198,16 @@ rule was never designed to cover. Extending it (e.g. requiring a primary-artist 
 is a **new product decision, designed cold** — same standing as the tag-based-limiter
 row. His FAM-6 experience is the first measurement of the class: 5 of 20 examined
 deliverable-tail rows had no Spotify artist page.
+
+**The mechanism, closed by the owner (2026-08-02) and corroborated by `LBS-1` from
+source:** TJ Brown's ListenBrainz profile shows **five tracks, none as primary artist** —
+and `LBS-1` records that featured credits enter the similarity computation at **0.25
+weight** (`FEATURED_ARTIST_WEIGHT`). So the class is structural, end to end: a
+MusicBrainz *credit* creates the node, quarter-weight co-listens on *other artists'*
+tracks create its similarity edges, and the release filter keeps it because credits count
+as release groups. These artists are in the graph without ever having been listened to
+*as artists*. **When the owner triggers the filter extension, the detector is cheap and
+two-sided:** the primary-vs-appears-on release split is computable offline graph-wide
+from the MB release dump already on disk (322 GB, `builder/scratch/mb-json-dumps/release/`),
+and the same split exists on the LB side (track count / primary share). Nothing is built
+today; this paragraph is the design input.
