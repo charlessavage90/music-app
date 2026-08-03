@@ -125,27 +125,54 @@ The prereg deliberately left these at the device level. Each is fixed here, pre-
 with its precedent — they are operational pins, not new criteria.
 
 1. **The `S2` deletion key** (§3.2 "LB similarity re-weighted by … agreement", `CRE-AM1`
-   form). At an over-budget node `u`, edges are deleted ascending by
-   `strength(u,v) × a_eff(u,v)` where `strength` is `cap_trimmed_union`'s symmetric
-   unclipped pair strength, `a(u,v)` is the `evidence_rel` rarity-weighted `W4`
-   agreement (`wav_read`'s exact measure), and `a_eff` = `a(u,v)` where both endpoints
-   carry `W4` labels, else **the median of `u`'s measured `a` values (≥ 2 of them, else
-   `GLOBAL_NEUTRAL_FALLBACK`)**. Ties break on highest neighbour MBID
-   (`cap_trimmed_union`'s `_desc` rule). *Why:* the neutral-median rule is the committed
-   missing-label rule (`frame_pass` / `tas_select`), and it realises §3.2's sentence
-   exactly — unlabelled-endpoint edges rank by LB similarity alone among themselves,
-   at a neutral level in the same pool, and tags never veto by absence.
-2. **Device pricing of ruler-null nodes.** The fame-ramp term prices a ruler-null node
-   at `frame.pctl(0)` — the percentile a zero listener count would occupy, below every
-   measured value (≈ 6.7e-6). *Why:* an LB null is an absence of recorded listeners,
-   i.e. below the measurement floor; under the novelty-likelihood construct that is
-   maximal obscurity, and any higher price would suppress exactly the `ALG-B` dark-tail
-   behaviour §0.4's censoring row pre-registers the reporting for. This is a **device**
-   input only — scoring never treats a null as a value (`FAM-AM1.8`), and every sweep
-   JSON reports per-depth priced-null counts so the choice is visible in the record.
+   form). At an over-budget node `u`, edges are deleted ascending by the tuple
+   **`(strength(u,v) × a_eff(u,v), strength(u,v), _desc(v))`** where `strength` is
+   `cap_trimmed_union`'s symmetric unclipped pair strength, `a(u,v)` is the
+   `evidence_rel` rarity-weighted `W4` agreement (`wav_read`'s exact measure), and
+   `a_eff` = `a(u,v)` where both endpoints carry `W4` labels, else **the median of
+   `u`'s measured `a` values (≥ 2 of them, else `GLOBAL_NEUTRAL_FALLBACK`)**. *Why the
+   neutral-median:* it is the committed missing-label rule (`frame_pass` /
+   `tas_select`), and it realises §3.2's sentence exactly — unlabelled-endpoint edges
+   rank by LB similarity alone among themselves, at a neutral level in the same pool,
+   and tags never veto by absence. *Why the middle tuple element (analyst M4):*
+   agreement is exactly 0 on 3.85 % of the adopted graph's measured edges, and a bare
+   product key collapses that whole block onto the MBID tie-break — similarity playing
+   no part, which strains §3.2's "tags only re-order" constraint. The `strength`
+   element restores LB-similarity order inside the zero block and inside any product
+   tie, and it makes the degeneracy gate's byte-identity **exact by construction**
+   rather than empirically true (a constant multiplier is only monotone
+   *non-decreasing* in IEEE doubles — distinct strengths can collapse to equal
+   products; measured at 0 collapses on today's 1,445 distinct edge scores, but the
+   gate must not rest on that).
+2. **Device pricing of ruler-null nodes — two classes, priced separately (analyst
+   M2).** The union snapshot's key set is exactly (adopted node set) ∪ (`ALG-B`-MK50
+   node set), so a node a union/uncapped cell keeps that the snapshot lacks was
+   **never in the fetch population** — a population artifact, not a listener count.
+   Accordingly: a **present-but-null** node (fetched; LB recorded no listeners) is
+   priced at `frame.pctl(0)` ≈ 6.7e-6 — below the measurement floor, which for that
+   class genuinely is maximal obscurity under the novelty-likelihood construct; an
+   **absent-from-snapshot** node is priced at **0.5**, the no-information neutral
+   prior (the committed neutral-rule shape), so the device neither seeks nor avoids
+   artists whose obscurity is simply unknown. The analyst measured the *value* choice
+   within the null class as operationally inert (alternatives differ by < 0.25 % of
+   one hop), but the *class* choice as worth 1–2.5 whole hops against measured
+   p5–p10 artists at r₂ and depth — pricing never-fetched nodes as maximally obscure
+   would steer the device into exactly the class its own score cannot read. This is a
+   **device** input only — scoring never treats either class as a value (`FAM-AM1.8`)
+   — and every sweep JSON reports `interiors_null_in_snapshot` and
+   `interiors_absent_from_snapshot` **separately, per depth**, with §0.4's d0→d20
+   trend reported for both.
 3. **The victim rule's tie order, implemented:** victims sort by measured
-   `fame_lb_pctl` descending with ruler-null interiors after every measured one, ties by
-   `pop_raw` descending then lowest MBID — the §0.3 sentence, made a total order.
+   `fame_lb_pctl` descending with ruler-null interiors after every measured one, ties
+   by `pop_raw` descending then lowest MBID — the §0.3 sentence, made a total order.
+   **Named consequence (analyst M5):** under this order a ruler-null interior is never
+   bypassed while any measured interior exists, so the victim rule itself pushes the
+   null share of interiors upward with depth, independent of any descent — §0.4's
+   "descent partly unmeasurable" trigger can fire mechanically. The mirror pin (nulls
+   first) would instead purge unmeasurable artists immediately and never deliver them
+   at depth; neither is neutral, this one is chosen, and to keep the mechanical
+   component separable every sweep JSON also reports, per depth, the count of
+   null interiors present-and-unbypassable (`null_interior_unbypassable`).
 4. **`CRE-C1`'s two reporting populations, implemented:** *all-interiors* = medians over
    every measured interior value in the band (nulls are holes, counted per depth);
    *matched-only* = the same statistic over the pairs whose d0 **and** d10–20 interiors
@@ -161,6 +188,27 @@ with its precedent — they are operational pins, not new criteria.
 7. **Bootstrap procedure** for `CRE-C1`(ii), `CRE-C5` and `CRE-R4`(ii): pair-level
    resampling with replacement, B = 10,000, seed `20260803`, percentile method. Fixed
    here so no result can pick a procedure.
+8. **The guard is realised by `journey()`, and the mirror's flag stays off (analyst
+   M7).** §0.3 holds `guard_min_intermediary` constant *as a mechanism*; the ladder's
+   `journey()` performs the same masked re-run the guard performs, **plus** the
+   `adjacent_only` fallback the guard lacks — with the mirror's flag also on, a
+   two-node path whose detour does not exist would return `None` instead of the
+   two-card journey, and the uniform-drop rule would then delete that pair from every
+   compared cell: precisely the vanishing-adjacent-pair failure §0.3's
+   journey-semantics row exists to prevent. So `cfg.guard_min_intermediary` is `False`
+   in every ladder run, `journey()` asserts it, and the §0.3 row is honoured through
+   the journey semantics that subsume it. Measured d0 exposure today: zero pairs
+   (`crp_kinds.py`); the at-depth exposure is why the assert exists.
+9. **Uniform-drop comparison groups, pinned (analyst M3).** One **canonical group per
+   data set** = that data set's non-staged cells plus their named isolating baselines;
+   every reported per-arm `CRE-C1` comes from its data set's canonical group. Each
+   staged `S3` cell is compared **only in its own two-cell group** against its §0.2
+   baseline — a cell barred from candidacy must not delete (pair, depth) cells from
+   the candidates' record (the `walk_journey` break-and-pad shape makes one early UC
+   termination contagious otherwise, and UC is where d0 adjacency concentrates:
+   6 of 22 pairs, all in `ff-top01pct`). Scramble companions are dropped within their
+   tag cell's canonical group. All group memberships and all dropped sets are
+   committed in `cre_scores.json`, and every reported figure names its group.
 
 ---
 
@@ -200,6 +248,8 @@ sidecars; the manifests' shas are quoted in every downstream JSON.
 - Produces: `use_frozen(*names)` (sys.path helper), `ADOPTED`, `ADOPTED_SHA`,
   `load_adopted() -> GraphStore` (sha-asserted), `Ruler` with
   `.pctl_of(mbid) -> float | None`, `.device_pctl_of(mbid) -> float`,
+  `.status_of(mbid) -> str` (`"measured"` / `"null"` / `"absent"` — pin 2's two
+  unmeasured classes, kept separable end to end),
   `.arrays(store) -> tuple[np.ndarray, np.ndarray]` (measured-with-nan, device),
   `.frame_n`, `famous_pairs() -> list[tuple[str, str, str]]` (22 `(class, a, b)`
   triples), constants `RAMPS = {"P1a": 0.01, "P1b": 0.03}`, `EXTREME_RAMP = 1.0`,
@@ -215,7 +265,45 @@ git checkout -b cap-reeval-run main && git push -u origin cap-reeval-run
 Create the retained execution log (dated the day this runs) with a role header naming
 the prereg as governing and this plan as operational, and a §1 recording T1's start.
 
-- [ ] **Step 2: Write the failing tests**
+- [ ] **Step 2: Append `CRE-AM2` to the prereg's §8 and commit it before anything else runs**
+
+The analyst review (M6) found a contradiction the plan must not mechanise through:
+§0.2 names **E-S0-P0's** isolating baseline as "—" and **B-S0-P0's** as **E-S0-P0**,
+while `CRE-C4`'s binding form divides by the isolating baseline's `C4` — undefined for
+the first, and a **cross-data-set ratio §0.4 bars** for the second. The fix changes how
+a frozen criterion is computed for two cells, so it is a §8 amendment, written now,
+**before any stage has run and before any result exists** (the `TAS-AM5` timing
+pattern — the git timestamp is the evidence). Append verbatim:
+
+```markdown
+### `CRE-AM2` — `C4`'s binding form is undefined at the two anchors; appended before any stage ran
+
+**No `CRE` stage has run and no result exists at this commit** — this resolves a
+mechanisation contradiction found in pre-run review of the execution plan (analyst
+critique M6, `builder/analysis/2026-08-03-cre-plan-critique/`), and moves no bar.
+
+§5's `CRE-C4` binding form — arm `C4` ÷ its isolating baseline's `C4` ≥ 0.70 — cannot
+be computed for **E-S0-P0** (its §0.2 baseline is "—") and must not be computed for
+**B-S0-P0** (its §0.2 baseline is E-S0-P0, a different data set; §0.4 bars the ratio,
+and §9's rationale for the relative form — "self-normalises on each substrate" —
+presupposes a within-substrate denominator).
+
+**Resolution: the two anchor cells (E-S0-P0, B-S0-P0) carry no binding `C4`.** Their
+`C4` is reported **absolute** against the 0.75 reference line, marked "no binding
+form (anchor)". Every other cell's binding `C4` uses its §0.2 isolating baseline,
+which is within-data-set everywhere else. B-S0-P0's §0.2 baseline row is untouched
+for its own purpose — the data-set-isolated comparison under §0.4's rules; only its
+role in `C4`'s binding denominator is removed. No other criterion, bar, cell or read
+changes.
+```
+
+```bash
+git commit -m "CRE-AM2: C4's binding form is undefined at the two anchors; appended before any stage ran" -- docs/superpowers/specs/2026-08-03-cap-reevaluation-preregistration.md
+```
+
+**Do not proceed until this commit exists.**
+
+- [ ] **Step 3: Write the failing tests**
 
 ```python
 # test_cre_common.py
@@ -250,10 +338,18 @@ def test_midrank_formula_on_a_toy_frame():
     assert got[4] == got[2]
 
 
-def test_device_pctl_prices_nulls_below_every_measured_value(ruler):
-    # Plan pin 2: a ruler-null node is priced at frame.pctl(0), below the
-    # smallest measured percentile. Scoring never consumes this value.
-    assert ruler.device_null_pctl < 0.001
+def test_null_price_sits_below_every_measured_value(ruler):
+    # Plan pin 2, present-but-null class: priced at frame.pctl(0). Asserted
+    # against the frame minimum DIRECTLY (analyst m10: a loose absolute bound
+    # let the name claim more than the assertion checked).
+    assert ruler.device_null_pctl < ruler.min_measured_pctl
+
+
+def test_absent_class_is_priced_at_the_neutral_prior(ruler):
+    # Plan pin 2, absent-from-snapshot class: never fetched, obscurity unknown,
+    # priced at 0.5 so the device neither seeks nor avoids it.
+    assert ruler.device_absent_pctl == 0.5
+    assert ruler.status_of("00000000-0000-0000-0000-000000000000") == "absent"
 
 
 def test_famous_pairs_are_the_22_committed_ones():
@@ -266,12 +362,12 @@ def test_famous_pairs_are_the_22_committed_ones():
 (`ruler` is a module-scoped fixture constructing `Ruler()` once — it loads the snapshot
 and the adopted artifact, several seconds.)
 
-- [ ] **Step 3: Run tests to verify they fail**
+- [ ] **Step 4: Run tests to verify they fail**
 
 Run: `cd builder && UV_LINK_MODE=copy uv run python -m pytest analysis/2026-08-03-cap-reevaluation/test_cre_common.py -v`
 Expected: FAIL — `ModuleNotFoundError: No module named 'cre_common'`
 
-- [ ] **Step 4: Implement `cre_common.py`**
+- [ ] **Step 5: Implement `cre_common.py`**
 
 Module docstring states: governing document, the ruler row restated by citation, the
 retired-currency bar, and plan pin 2 (null device pricing) with its reason. Core:
@@ -371,27 +467,44 @@ class Ruler:
             raise SystemExit(
                 f"CRE-G1c FAILED: ruler frame N {self.frame_n} != {FRAME_N}"
             )
+        # Pin 2's two unmeasured classes, priced separately. A key PRESENT with
+        # value null was fetched and LB recorded no listeners: below the
+        # measurement floor, frame.pctl(0). A key ABSENT was never in the fetch
+        # population (the snapshot is exactly adopted UNION ALG-B-MK50 -- a
+        # population artifact, not a listener count): neutral prior 0.5.
         self.device_null_pctl = float(self._frame.pctl(np.array([0]))[0])
+        self.device_absent_pctl = 0.5
+        self._null_keys = {m for m, v in raw.items() if v is None}
 
         keys = [m for m in raw if raw[m] is not None]
         pctls = self._frame.pctl(np.array([raw[m] for m in keys], dtype=np.int64))
         self._pctl = dict(zip(keys, (float(p) for p in pctls)))
+        self.min_measured_pctl = float(min(self._pctl.values()))
 
     def pctl_of(self, mbid: str) -> float | None:
         return self._pctl.get(mbid)
 
+    def status_of(self, mbid: str) -> str:
+        if mbid in self._pctl:
+            return "measured"
+        return "null" if mbid in self._null_keys else "absent"
+
     def device_pctl_of(self, mbid: str) -> float:
-        return self._pctl.get(mbid, self.device_null_pctl)
+        p = self._pctl.get(mbid)
+        if p is not None:
+            return p
+        return (self.device_null_pctl if mbid in self._null_keys
+                else self.device_absent_pctl)
 
     def arrays(self, store) -> tuple[np.ndarray, np.ndarray]:
         """(measured-with-nan, device) fame arrays aligned to node ids."""
         measured = np.full(len(store.mbids), np.nan)
-        device = np.full(len(store.mbids), self.device_null_pctl)
+        device = np.empty(len(store.mbids))
         for i, m in enumerate(store.mbids):
             p = self._pctl.get(m)
             if p is not None:
                 measured[i] = p
-                device[i] = p
+            device[i] = self.device_pctl_of(m)
         return measured, device
 
 
@@ -403,12 +516,12 @@ def famous_pairs() -> list[tuple[str, str, str]]:
     return pairs
 ```
 
-- [ ] **Step 5: Run tests to verify they pass**
+- [ ] **Step 6: Run tests to verify they pass**
 
 Run: `cd builder && UV_LINK_MODE=copy uv run python -m pytest analysis/2026-08-03-cap-reevaluation/test_cre_common.py -v`
-Expected: PASS (4 tests). The frame-N test passing **is** `CRE-G1c`'s machinery working.
+Expected: PASS (5 tests). The frame-N test passing **is** `CRE-G1c`'s machinery working.
 
-- [ ] **Step 6: Append to the run log; commit**
+- [ ] **Step 7: Append to the run log; commit**
 
 ```bash
 git commit -m "CRE-T1: the fame ruler and shared constants, frame N asserted" -- builder/analysis/2026-08-03-cap-reevaluation/ docs/superpowers/
@@ -433,9 +546,10 @@ git commit -m "CRE-T1: the fame ruler and shared constants, frame N asserted" --
   ctx, stats) -> tuple[list[int] | None, str]` (kinds `natural`/`forced`/`adjacent_only`/`none`),
   `cre_ladder.walk_journey(store, s, t, cfg, ctx, fame_measured, pop, mbids, stats)
   -> list[tuple[list[int] | None, str]]` (length `MAX_DEPTH + 1`),
-  `cre_ladder.victim_key(fame_measured, pop, mbids)`, `cre_ladder.assert_toll_arithmetic(...)`.
+  `cre_ladder.victim_key(fame_measured, pop, mbids)`,
+  `cre_ladder.assert_cost_decomposition(store, ctx, cfg, excludes, path, masked_edge=None)`.
 
-- [ ] **Step 1: Copy the frozen mirror verbatim, then apply exactly four deltas**
+- [ ] **Step 1: Copy the frozen mirror verbatim, then apply exactly five deltas**
 
 Copy `builder/analysis/2026-07-23-track2-sweep/mirror.py` → `cre_mirror.py` unchanged,
 then:
@@ -470,6 +584,18 @@ then:
                 cost += ramp_fame * float(ctx.fame_pctl[v])
 ```
 
+5. **`_dijkstra` records the search's own accumulated cost** — immediately before the
+   `if target not in prev` return block:
+
+```python
+    # CRE-G2(b)'s independent reference: the cost the SEARCH accumulated, so a
+    # post-hoc decomposition is checked against the instrument rather than
+    # against its own formula (analyst B1 -- the first draft compared a closed
+    # form to itself and could not fail).
+    if stats is not None:
+        stats["path_cost"] = dist.get(target)
+```
+
 Then add `term_breakdown` at module bottom (new code, dependency (5)):
 
 ```python
@@ -480,7 +606,17 @@ def term_breakdown(store, ctx, cfg, excludes, path) -> list[dict]:
     share is exact, not sampled. The mirror's stats counters are search-wide
     tallies; this is per chosen edge, which is what §0.3's w_floor attribution
     rule needs.
+
+    THE FIVE TERMS CARRIED ARE EXHAUSTIVE ONLY UNDER THE ENTRY ASSERTIONS
+    BELOW (analyst m14). assert_cost_decomposition compares this breakdown's
+    total against the search's own accumulated cost, so any live term omitted
+    here would fire that check spuriously -- the assertions make the omission
+    impossible rather than argued.
     """
+    assert all(e.reason == KNOWN for e in excludes), "ladder is all-known"
+    assert cfg.toll_s is None and cfg.toll_hops is None
+    assert cfg.w_known_thresh_pctl == 0.0 and cfg.w_known_ramp_pctl == 0.0
+    assert cfg.w_degree_hub == 0.0, "held at 0.0 in every cell (prereg s0.3)"
     n_known = sum(1 for e in excludes if e.reason == KNOWN)
     base = min(float(store.pop_raw[path[0]]), float(store.pop_raw[path[-1]]))
     floor_val = _relaxed_floor(base, excludes, cfg.floor_relax_known,
@@ -509,7 +645,7 @@ omitted. Both facts are stated in the docstring.)
 - [ ] **Step 2: Diff the copy against the frozen original**
 
 Run: `git diff --no-index builder/analysis/2026-07-23-track2-sweep/mirror.py builder/analysis/2026-08-03-cap-reevaluation/cre_mirror.py`
-Expected: exactly the four deltas plus `term_breakdown`. Anything else is drift — remove it.
+Expected: exactly the five deltas plus `term_breakdown`. Anything else is drift — remove it.
 
 - [ ] **Step 3: Write `cre_ladder.py`**
 
@@ -533,18 +669,25 @@ from cre_common import MAX_DEPTH, use_frozen
 from cre_mirror import _avoidance_map, _dijkstra, find_path_mirror
 
 use_frozen("api_src")
-from artistpath_api.pathfinding import KNOWN, Exclusion  # noqa: E402
+from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion  # noqa: E402
 
 
 def journey(store, s, t, excludes, cfg, ctx, stats=None):
+    # Pin 8: journey() IS the guard (same masked re-run) plus the
+    # adjacent_only fallback the guard lacks; both live at once would turn
+    # adjacent-only pairs into None and cascade through the uniform drop.
+    assert cfg.guard_min_intermediary is False
     path = find_path_mirror(store, s, t, excludes, cfg, ctx, stats)
     if path is None:
         return None, "none"
     if len(path) != 2:
         return path, "natural"
     hard = {e.node for e in excludes} - {s, t}
+    # Production's own predicate (pathfinding.py), not its complement: this is
+    # a byte-identity harness, and the two differ the moment a third exclusion
+    # reason exists (analyst m16). Identically empty on the all-known ladder.
     avoid = _avoidance_map(store, [e.node for e in excludes
-                                   if e.reason != KNOWN], cfg)
+                                   if e.reason == DISLIKE], cfg)
     detour = _dijkstra(store, s, t, hard, avoid, cfg, ctx, excludes,
                        (s, t), stats)
     return (path, "adjacent_only") if detour is None else (detour, "forced")
@@ -582,21 +725,46 @@ def walk_journey(store, s, t, cfg, ctx, fame_measured, pop, mbids, stats=None):
     return out
 
 
-def assert_toll_arithmetic(store, ctx, cfg, excludes, path, tol=1e-9):
-    """CRE-G2(b): the realised device toll equals r * k * sum(fame_pctl) over
-    the returned interiors. Recompute the full path cost with the device on
-    and with it off; the difference must equal the formula. Catches the
-    k-indexing bug that passes G1 and G2(a) both."""
+def assert_cost_decomposition(store, ctx, cfg, excludes, path,
+                              masked_edge=None, tol=1e-9):
+    """CRE-G2(b), the independent form (analyst B1 replaced the first draft,
+    which compared the toll formula to itself and could not fail).
+
+    Two clauses, both against references the decomposition does not share:
+    (1) the breakdown's TOTAL equals the SEARCH's own accumulated cost for
+        this exact path (a fresh deterministic _dijkstra call records
+        stats["path_cost"]) -- a wrong k inside the search, a term added or
+        omitted inside the search, or a mis-plumbed array all fire here;
+    (2) the breakdown's ramp component equals r * k * sum(fame_pctl) over the
+        returned interiors -- the prereg's stated formula, now anchored to a
+        total that clause (1) has tied to the instrument.
+    `masked_edge` replays a forced-detour journey's second search exactly.
+    """
     from cre_mirror import term_breakdown
 
+    hard = {e.node for e in excludes} - {path[0], path[-1]}
+    avoid = _avoidance_map(store, [e.node for e in excludes
+                                   if e.reason == DISLIKE], cfg)
+    stats: dict = {"examined": 0, "floor_active": 0}
+    replay = _dijkstra(store, path[0], path[-1], hard, avoid, cfg, ctx,
+                       excludes, masked_edge, stats)
+    if replay != path:
+        raise SystemExit("CRE-G2(b) FAILED: replay returned a different path")
+
+    rows = term_breakdown(store, ctx, cfg, excludes, path)
+    total = sum(sum(r.values()) for r in rows)
+    if abs(total - stats["path_cost"]) > tol:
+        raise SystemExit(
+            f"CRE-G2(b) FAILED: decomposition {total} != search cost "
+            f"{stats['path_cost']}"
+        )
     n_known = sum(1 for e in excludes if e.reason == KNOWN)
-    rows_on = term_breakdown(store, ctx, cfg, excludes, path)
     expected = (cfg.w_known_ramp_fame_pctl * n_known
                 * sum(float(ctx.fame_pctl[v]) for v in path[1:-1]))
-    got = sum(r["ramp_fame"] for r in rows_on)
+    got = sum(r["ramp_fame"] for r in rows)
     if abs(got - expected) > tol:
         raise SystemExit(
-            f"CRE-G2(b) FAILED: realised toll {got} != r*k*sum(fame) {expected}"
+            f"CRE-G2(b) FAILED: ramp component {got} != r*k*sum(fame) {expected}"
         )
 ```
 
@@ -685,9 +853,11 @@ def test_walk_always_returns_max_depth_plus_one_entries():
 ```
 
 `test_cre_mirror.py` additionally pins: `w_known_ramp_fame_pctl=0.0` produces a path
-identical to `SweepConfig.production()`'s on the fake store (the G1(b) property), and
-`term_breakdown`'s rows sum to the path-cost difference when the ramp toggles (the
-G2(b) property, via `assert_toll_arithmetic` not raising).
+identical to `SweepConfig.production()`'s on the fake store (the G1(b) property);
+`assert_cost_decomposition` passes on a correct configuration; and — the red half —
+it **fails** on a deliberately broken one (monkeypatch `term_breakdown` to drop the
+`hop` term and assert `SystemExit`), so the check is shown able to go red before any
+run leans on its green.
 
 Run: `cd builder && UV_LINK_MODE=copy uv run python -m pytest analysis/2026-08-03-cap-reevaluation/test_cre_mirror.py analysis/2026-08-03-cap-reevaluation/test_cre_ladder.py -v`
 Expected: FAIL first (`ModuleNotFoundError`), then PASS after implementation.
@@ -706,8 +876,8 @@ git commit -m "CRE-T2: mirror copy with the fame-currency ramp, journey ladder, 
 - Create: `analysis/…/cre_d3.py`
 
 **Interfaces:**
-- Consumes: `cre_common.{load_adopted, Ruler, famous_pairs, RAMPS, C1_BAND, QUANT_FLOOR, MATERIAL, in_dir}`;
-  `cre_mirror.{SweepConfig, MirrorContext}`; `cre_ladder.{walk_journey, assert_toll_arithmetic}`.
+- Consumes: `cre_common.{load_adopted, Ruler, famous_pairs, RAMPS, EXTREME_RAMP, C1_BAND, QUANT_FLOOR, MATERIAL, in_dir}`;
+  `cre_mirror.{SweepConfig, MirrorContext}`; `cre_ladder.{walk_journey, assert_cost_decomposition}`.
 - Produces: `cre_d3.json` — the committed Stage-0 prior.
 
 - [ ] **Step 1: Implement**
@@ -719,8 +889,16 @@ from it). Then:
 
 - **d0 identity assertion** (G1(b) shape): every arm's d0 journey identical to `P0`'s,
   every pair. Any divergence = the device fires at k = 0; abort.
-- **Toll arithmetic** (G2(b) shape): `assert_toll_arithmetic` at k = 1 and k = 10 on
-  every ramp arm's returned journeys at those depths.
+- **Device liveness at the instrument extreme** (G2(a) form, run HERE because `CRE-D3`
+  is otherwise the one device run with no live check between "inert" and "not
+  connected" — analyst B1): at r = `EXTREME_RAMP` = 1.0, never a candidate, ≥ half of
+  the 22 famous-pair journeys change at d1 vs `P0`'s d1. Below half → dead wire; the
+  prior is unreadable and execution stops. Seconds of cost (22 pairs × 2 depths).
+  Recorded in `cre_d3.json` beside the prior, so the null and its liveness proof
+  travel together.
+- **Cost decomposition** (G2(b) shape): `assert_cost_decomposition` at k = 1 and
+  k = 10 on every ramp arm's returned journeys at those depths (`masked_edge` set for
+  forced-detour journeys).
 - **`C1` statistic per ramp arm**, per the prereg: per pair, median interior
   `fame_lb_pctl` pooled over depths 10–20 minus the same at d0; arm statistic = median
   of per-pair deltas; all-interiors and matched-only per plan pin 4; per-depth null
@@ -740,9 +918,11 @@ Track 3 closed verdict nor the parked DD-A2 decision.*
 - [ ] **Step 2: Run it**
 
 Run: `cd builder && UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-08-03-cap-reevaluation/cre_d3.py`
-Expected: d0-identity PASS, toll-arithmetic PASS, then per-arm `C1` figures and the
-consequence field. Expected branch per §9: no measured movement at both settings.
-Roughly 15–25 minutes (3 arms × 22 pairs × 21 depths on the 74k graph).
+Expected: d0-identity PASS, extreme-ramp liveness PASS (share ≥ 0.5 reported),
+cost-decomposition PASS, then per-arm `C1` figures and the consequence field. Expected
+branch per §9: no measured movement at both settings. A few minutes of compute — the
+analyst measured production-weight journeys at ~5 ms each on the adopted-shape graph
+(critique V1), so the 3 × 22 × 21 ladder is dominated by load time, not routing.
 
 - [ ] **Step 3: Append to the run log (the figures and the branch taken); commit**
 
@@ -857,8 +1037,11 @@ diagnostics), cap steps: `MK50`/`MK100` = shipped `mutual_knn_cap` at k; `TU` =
 `cap_trimmed_union(j=50, d=50, trim="weakest_first")` (the committed `TUw-50-50` shape,
 imported); `UC` = `cap_uncapped` (staged reference, barred from candidacy — say so in
 the manifest). Per data set: `S0` (MK50), `S0b` (MK100), `S1` (TU), `S3` (UC) — eight
-builds, `builder/scratch/cre-cells/`, manifest sidecars committed to git (the bins are
-gitignored).
+builds into `builder/scratch/cre-cells/` with sidecars beside the bins, **and every
+manifest mirrored into a committed `analysis/…/cre_builds.json`** — `.gitignore`
+ignores `builder/scratch/` wholesale, so a sidecar there can never reach git and the
+artifact-identity rule would silently lose its record (analyst m11; the Track B
+precedent).
 
 Run: `cd builder && UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-08-03-cap-reevaluation/cre_build.py --all-nontag`
 Expected: eight manifests, ~30–90 s each.
@@ -921,24 +1104,34 @@ ceiling by whole-edge deletion at over-budget nodes, node order `(-degree, mbid)
 def cap_tag_limited(adjacency, ranking, pop, *, j, d, agree):
     """CRE-S2 (prereg §3.2 + CRE-AM1). ONE knob differs from cap_trimmed_union:
     the ranking that decides which edges an over-budget node loses.
-    Deletion key ascending: strength(u,v) * a_eff(u,v);
+    Deletion key ascending: (strength(u,v) * a_eff(u,v), strength(u,v), _desc(v));
       a_eff = agree.a(u,v) where measured, else the median of u's measured
       values (>= 2, else GLOBAL_NEUTRAL_FALLBACK) -- the committed neutral rule,
       so unlabelled edges rank by LB similarity alone at a neutral level in the
       same pool. Tags re-order the deletion ranking; they never create an edge
-      or veto by absence. Ties: highest neighbour MBID first (_desc)."""
+      or veto by absence.
+    THE MIDDLE KEY ELEMENT IS LOAD-BEARING (analyst M4): agreement is exactly 0
+    on ~3.9% of measured edges, and a bare product would order that whole block
+    by MBID with similarity playing no part. The strength element keeps
+    LB-similarity order inside the zero block and every product tie, and makes
+    the degeneracy gate's byte-identity exact by construction."""
 ```
 
 Body: copy `cap_trimmed_union`'s union/symmetrise/ceiling loop; in the over-budget
 branch compute `a_eff` per neighbour and
-`doomed = sorted(result[node], key=lambda v: (strength(node, v) * a_eff[v], _desc(v)))[:excess]`.
+`doomed = sorted(result[node], key=lambda v: (strength(node, v) * a_eff[v], strength(node, v), _desc(v)))[:excess]`.
 
 - [ ] **Step 3: The degeneracy and liveness gates (the `WAV-0d` pattern)**
 
 In `test_cre_tags.py`, on a small synthetic adjacency: (a) **degeneracy** — with an
 `agree` whose `.a` returns `None` everywhere, `cap_tag_limited` output equals
-`cap_trimmed_union(trim="weakest_first")` output exactly (every `a_eff` collapses to
-one constant; a constant multiplier preserves the order and the tie rule); (b)
+`cap_trimmed_union(trim="weakest_first")` output exactly. This holds **by
+construction** under the tuple key: every `a_eff` collapses to one constant, so the
+first element ties wherever strengths tie or products collapse, and the second
+element is the strength order itself. (Do not restate the earlier "a constant
+multiplier preserves the order" argument — in IEEE doubles it is only monotone
+non-decreasing, and distinct strengths can collapse to equal products; the tuple is
+what makes the identity exact rather than empirically true — analyst M4a.) (b)
 **liveness** — with an `agree` that ranks one specific strong-similarity edge at
 agreement 0, that edge is deleted first at an over-budget node. Plus: the vote-scramble
 table preserves each artist's multiset of strengths, and the label-scramble table
@@ -952,8 +1145,14 @@ broken; stop.
 - [ ] **Step 4: Build the tag cells and companions**
 
 E-S2 (real), E-S2-labelscramble, E-S2-votescramble. If `cre_d1.json` fired
-`supported`: also B-S2 (real + both companions). Manifests as in T5, each naming its
-`agree` kind and seed.
+`supported`: also B-S2 (real + both companions). Manifests as in T5 (mirrored into
+`cre_builds.json`), each naming its `agree` kind and seed — **and, per analyst M8,
+each `S2` manifest records the cell's labelled-node share and its share of nodes with
+≥ 2 measured agreements** (below that a node's whole pool collapses to one constant
+and the device is structurally inert there — ~35–39 % of `ALG-B` nodes on the
+pre-drop measurement, vs 18 % on `ALG-E`). T11 stores these shares beside any `CRE-C5`
+attribution field for a `B-S2` cell, as a licensing constraint the findings note must
+quote.
 
 Run: `cd builder && UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-08-03-cap-reevaluation/cre_build.py --tag-cells`
 Expected: 3 builds (or 6 on the supported branch), manifests committed.
@@ -997,7 +1196,15 @@ git commit -m "CRE-T6: tag-limited ceiling (degeneracy-gated), scramble companio
   arithmetically impossible — more than half the readable pairs (≥ 12 of 22 at the
   full draw, recomputed under `CRE-G3` drops).** A screened cell that is a named
   isolating baseline still sweeps (baseline is instrument, not candidate) — encode
-  §0.2's baseline column so this is mechanical.
+  §0.2's baseline column so this is mechanical. Three pins from analyst m12:
+  **(a)** "readable pairs" in the screen denominator = the pairs surviving `CRE-G3`'s
+  **endpoint-survival** device (the per-comparison ≥ 8 floor is a different device
+  and plays no part here); **(b)** the frontier's `absent` and `null` artist counts
+  (pin 2's classes) are reported beside the measured-only supply count, since the
+  device can route into them while the count cannot see them; **(c)** a pair whose d0
+  journey has no measured interior has no median and its `C6` is recorded
+  `c6_undefined` — excluded from the screen denominator, reported, never silently
+  zero.
 - **Affine report:** the `(pop_log_low, pop_log_high)` pairs from every manifest, and
   the affine map between each arm and its isolating baseline (§0.3's instrumentation
   row — two floats per cell, reported not gated).
@@ -1067,8 +1274,10 @@ git commit -m "CRE-T8: Stage 2 instrument gates (G1a/G1c/G2a) committed" -- buil
 - Produces: `cre_sweep_<cell>.json` per §0.2 cell (and per companion), each carrying:
   `artifact_sha256`, cell id, supply/pricing coordinates, per-pair per-depth journeys
   **with stop kinds**, per-depth `CRE-D2` term shares (from `term_breakdown`),
-  per-depth ruler-null interior counts and priced-null counts, the in-run `G1`(b) and
-  `G2`(b) assertion results, `pop_log_low/high`, and the cell's own infeasible set.
+  per-depth `interiors_null_in_snapshot` and `interiors_absent_from_snapshot`
+  (pin 2's two classes, separately) and `null_interior_unbypassable` (pin 3's
+  mechanical component), the in-run `G1`(b) and `G2`(b) assertion results,
+  `pop_log_low/high`, and the cell's own infeasible set.
 
 - [ ] **Step 1: Implement `cre_sweep.py --cell <id>`**
 
@@ -1078,11 +1287,15 @@ manifest), build `MirrorContext` with the ruler's device array, run `walk_journe
 over the readable pairs at the cell's pricing (`P0` = production config; `P1a`/`P1b` =
 `w_known_ramp_fame_pctl` at 0.01/0.03). In-run assertions, hard failures:
 
-- **`G1`(b):** a `P1` cell's d0 journey bit-identical to its `P0` isolating baseline's
-  d0 journey (read from the baseline's committed JSON; the baseline therefore sweeps
-  first — order cells baseline-before-dependent, which §0.2's baseline column gives you
-  mechanically).
-- **`G2`(b):** `assert_toll_arithmetic` at k = 1 and k = 10 on every `P1` pair.
+- **`G1`(b):** a `P1` cell's d0 journey bit-identical to its **supply-matched `P0`
+  cell's** d0 journey (read from that cell's committed JSON; it always sweeps first —
+  §0.2's baseline column plus this rule gives the order mechanically). The
+  supply-matched form is pinned deliberately (analyst m9): a `P1b` cell's §0.2
+  isolating baseline is its `P1a` sibling, and identity against a device-off cell is
+  what makes this a device test rather than a ramp-size test — the two are equivalent
+  at d0 only if `P1a` itself passed, so assert against the device-off cell directly.
+- **`G2`(b):** `assert_cost_decomposition` at k = 1 and k = 10 on every `P1` pair
+  (`masked_edge` set for forced-detour journeys).
 
 `CRE-D2` per depth: `term_breakdown` over the returned journey; store per-term shares
 of total path cost — the accounting §0.3's `w_floor` rule and any supply-attribution
@@ -1101,9 +1314,13 @@ cd builder && UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
 git commit -m "CRE-T9: sweep JSON for E-S1-P1a" -- builder/analysis/2026-08-03-cap-reevaluation/
 ```
 
-Rough cost: ~8–15 min per capped cell (22 pairs × 21 depths); **the UC cell is
-markedly slower** (unbounded degree — hubs at 10⁴ neighbours); run it last,
-`run_in_background`, never through `tail`.
+Cost, now measured rather than guessed (analyst V1, on the pre-drop Track B cells):
+production-weight journeys run ~5 ms on a capped cell and ~0.4–0.6 s on UC, so a full
+22 × 21 ladder projects to **seconds on a capped cell and ~4–5 minutes on UC** —
+the plan's earlier "~8–15 min per capped cell" was conservative by two orders of
+magnitude and must not be used for scheduling. UC still runs last and never through
+`tail`; the discipline costs nothing and the cleaned rebuilds could shift the
+constants.
 
 - [ ] **Step 3: SEAM 2.** All `ALG-E` sweep JSONs committed; append the run log. A
 session retiring here hands off cleanly; the next starts at T10 cold.
@@ -1140,9 +1357,15 @@ git commit -m "CRE-T10: sweep JSON for <cell>" -- builder/analysis/2026-08-03-ca
 
 - [ ] **Step 1: Implement, one function per criterion, unit-tested on synthetic ladders**
 
-- **Uniform drop, per comparison:** `drop_infeasible_uniformly`'s rule (a (pair, depth)
-  cell infeasible in any compared cell is dropped from every compared cell), computed
-  over each comparison group, dropped sets committed in the output (§0.3).
+- **Uniform drop, over pin 9's committed partition:** `drop_infeasible_uniformly`'s
+  rule (a (pair, depth) cell infeasible in any compared cell is dropped from every
+  compared cell), computed over the **canonical group per data set** (non-staged cells
+  + named isolating baselines), each `S3` cell only in its own two-cell group against
+  its §0.2 baseline, companions inside their tag cell's group. Group memberships and
+  dropped sets committed; every reported figure names its group. (Analyst M3: an
+  undefined partition leaves the headline `C1` unpinned, and a staged UC cell inside
+  the candidates' group would delete (pair, depth) cells from every candidate — UC is
+  where d0 adjacency concentrates, 6 of 22 pairs pre-drop.)
 - **`CRE-C1` per non-staged cell:** per-pair delta (pooled d10–20 interior median −
   d0 interior median, measured values only), arm median; all-interiors AND matched-only
   (plan pin 4); per-depth null counts and the d0 → d10–20 null-share trend, with the
@@ -1151,22 +1374,41 @@ git commit -m "CRE-T10: sweep JSON for <cell>" -- builder/analysis/2026-08-03-ca
   (i) median ≤ −0.05; (ii) bootstrap 95% upper bound ≤ −0.015 (plan pin 7); (iii) the
   knife-edge trio — count of pairs ≤ −0.05, count |Δ| < 0.015, leave-one-out range.
   Also the d3–5 band, descriptive, marked `"never_a_bar": true`. Also `C1` as a
-  fraction of the cell's own `C6` 1-hop headroom (§0.4's descriptive companion).
+  fraction of the cell's own `C6` 1-hop headroom (§0.4's descriptive companion) —
+  **always stored with its denominator and the cell's mean frontier size beside it**
+  (analyst m13: frontier size is set by the supply knob, ~130 nodes on MK50 vs ~8,850
+  on UC pre-drop, so this companion is readable across *data sets* — its §0.4
+  purpose — and never across supply arms; the findings note quotes the denominator or
+  does not quote the ratio).
 - **`CRE-C2`:** interior share in the top-1%-by-degree set per depth band (d0–2 vs
   d10–20 pooled), **primary = the adopted artifact's set by MBID (plan pin 6),
   own-graph share reported beside it**; kill fields for the two clauses (Δ ≥ +0.10, or
   d10–20 level > 0.50); the measured base rates quoted so a null is not read as
   reassurance.
 - **`CRE-C4`:** per pair, mean interior count over d10–20 ÷ d0 interior count; arm
-  median; **binding = ratio to the isolating baseline's `C4` ≥ 0.70**; the absolute
-  median reported against the 0.75 reference line. Stored jointly with `C1` per cell
-  (the `CRE-R3` shape is computed here as a flag, not a sentence).
+  median; **binding = ratio to the isolating baseline's `C4` ≥ 0.70, except the two
+  anchors (E-S0-P0, B-S0-P0), which carry no binding form per `CRE-AM2`** (T1 Step 2
+  — E-S0-P0 has no baseline and B-S0-P0's is cross-data-set, which §0.4 bars) and are
+  reported absolute against the 0.75 reference line, marked `"no_binding_form":
+  "anchor"`. The absolute median is reported for every cell. Stored jointly with `C1`
+  per cell (the `CRE-R3` shape is computed here as a flag, not a sentence). Per-pair
+  d0 denominators are stored too — d0 adjacency is arm-correlated (1/22 on MK50/TU
+  vs 6/22 on UC pre-drop), so the smallest denominators sit on the arms that add
+  connections, and the findings note needs that visible.
+- **Empty-interior depths, pinned (analyst m15):** an `adjacent_only` depth records
+  its two-node path — it is feasible, so the uniform drop does not touch it; it
+  contributes an interior count of **0** to `C4` and no slots to `C1`'s pools. The
+  `run_arms.py` precedent, stated here because union arms create adjacency far more
+  often than the committed tracks did.
 - **`CRE-C5`, per tag cell and per companion kind:** Δgain = cell `C1` − isolating
   baseline `C1`; entry condition real Δgain ≤ −0.05; paired-difference bootstrap CI
   (real − companion, per pair, plan pin 7) excluding zero. **Two companions, two
   licences (`CRE-AM1`):** label-scramble → "tags did this"; vote-scramble → "votes did
   this"; both stored as booleans with their CIs. A cell beating neither keeps its
-  outcome and gets `"attribution_licensed": false`.
+  outcome and gets `"attribution_licensed": false`. For any `B-S2` cell, the T6
+  manifest's labelled-node and ≥ 2-measured-agreement shares are stored beside the
+  attribution fields (analyst M8: the device is structurally inert on ~a third of
+  `ALG-B` nodes for a population reason, and no attribution sentence may omit that).
 - **The `w_floor` attribution guard (§0.3):** per supply-knob comparison, the `D2`
   floor-term shares of both cells, and a boolean
   `"supply_attribution_carried_by_floor_term"` — the findings note may not attribute
@@ -1217,6 +1459,51 @@ cheap everywhere in T9/T10. A material mid-flight amendment is also a seam. If t
 degradation tell fires (asked for a figure already computed; an item dropping from a
 tracking file; a firm claim revised under mild questioning with no new information),
 that is a mid-flight closeout per the standing rule — retire at the next cell boundary.
+
+## Revision record (2026-08-03, after the analyst review, before any run)
+
+The plan as first committed (`e69efa0`, PR #69) was reviewed by the `ml-graph-analyst`
+at the owner's instruction, **before any task ran** — the committed record, probe
+scripts included, is `builder/analysis/2026-08-03-cre-plan-critique/`. This revision
+folded every surviving finding in; the git diff against `e69efa0` is the exact delta.
+These are pre-run corrections to an unfrozen operational plan, so they are revisions;
+the prereg itself is touched only by `CRE-AM2`, which T1 Step 2 has the executor
+append pre-run with the §8 disclosure rules.
+
+Folded, each traceable: `assert_toll_arithmetic` was a tautology and `CRE-D3` had no
+live device check — replaced by `assert_cost_decomposition` against the search's own
+accumulated cost, plus the extreme-ramp liveness run inside `cre_d3.py` (B1); pin 2
+split into two priced classes after the analyst proved the snapshot's key set is
+exactly the two MK50 node sets, with separate per-depth counters (M2); the uniform-drop
+partition pinned as pin 9, staged `S3` cells quarantined in their own groups (M3);
+the `S2` deletion key gained its middle tuple element and the degeneracy gate became
+exact by construction (M4); pin 3's mechanical null-share inflation named, with the
+`null_interior_unbypassable` counter (M5); `C4`'s two anchor cells resolved by
+`CRE-AM2` (M6); the guard/journey resolution promoted to pin 8 with an assert (M7);
+`S2` coverage shares recorded and made a `C5` licensing constraint (M8); the `G1`(b)
+comparator pinned supply-matched-`P0` (m9); the null-price test asserts against the
+frame minimum (m10); manifests mirrored into a committed `cre_builds.json` (m11);
+`C6`'s denominator, frontier-class reporting and undefined-median case pinned (m12);
+the headroom companion carries its denominator (m13); `term_breakdown` gained entry
+assertions making its five terms exhaustive (m14); empty-interior depths pinned to
+the `run_arms.py` treatment (m15); `journey()` uses production's `DISLIKE` predicate
+(m16); runtime estimates replaced with the analyst's measurements (V1).
+
+**Divergences from the analyst's exact proposals, both deliberate:** M2's fix 2 left
+the never-fetched device price an open choice between maximal obscurity and the frame
+median — this revision pins the **neutral 0.5**, because the committed neutral-rule
+precedent prices missing information at a neutral level, and steering the device into
+a class the score cannot read would manufacture §0.4's disclosure condition. M6's fix
+said "stop before it" — this revision resolves it instead with a pre-run §8 amendment
+(`CRE-AM2`, the `TAS-AM5` timing pattern), because the contradiction is knowable now
+and a mid-run stop would spend a seam on it.
+
+**Known and accepted:** the analyst's cell-level figures were measured on pre-drop
+Track B builds (its stated weakest link); every count quoted above is labelled with
+that provenance where it appears. Its "inherited, named once" note — the `C6` screen's
+"arithmetically impossible" is a d0-frontier heuristic, not an identity over a
+20-press ladder — is frozen prereg wording, faithfully copied, and belongs to the
+findings note's weakest-link section, not to this plan.
 
 ## Self-review (run by the author, 2026-08-03)
 
