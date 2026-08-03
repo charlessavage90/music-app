@@ -235,8 +235,17 @@ gate failed; none was worked around.
 - **A5 (processes):** all four ports checked, no listeners; every background task this
   session started ran to completion. Nothing left running.
 - **B1:** lint run — 2 hard failures, both the new documents unclassified in
-  `docs/README.md`, fixed at this closeout; `doc-auditor` dispatched scoped to the
-  diff, outcome recorded below when it reported.
+  `docs/README.md`, fixed at this closeout. `doc-auditor` (diff-scoped) reported two
+  HIGHs. **One real and fixed:** the fame-instrument handoff's `docs/README.md` row
+  still claimed CURRENT after its own role line was updated — the exact defect class
+  this map's history warns about, caught by the audit as designed. **One adjudicated
+  FALSE with evidence:** "田島賢 missing from both droplists violating FCF-5" — the
+  audit checked the *adopted*-population files for an artist the census records as
+  **candidate-population-only** (`in_adopted=false`, `fcf_census.json` worked-instance
+  block); verified at adjudication that he is in `drop_mbids` of both candidate lists
+  including the shipped package file, and in neither adopted list, which is exactly
+  what FCF-5 plus the per-population freeze require. The audit's cold-start navigation
+  test passed all six questions; identifier census clean, no `FCF-` collisions.
 - **B2 (reachability):** `featured_credit_drop.py` is imported by `pipeline.py` and the
   test file; every probe script is reachable from the probe README. No orphans.
 - **B3 (vacuous tests):** discharged by the two mutation runs above, which are exactly
