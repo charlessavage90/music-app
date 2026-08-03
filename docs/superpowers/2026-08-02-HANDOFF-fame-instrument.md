@@ -29,13 +29,14 @@ subagent is running, no port is listening, the tree is clean and pushed. Reasoni
 4. **Deezer and Wikipedia are dead as fame candidates under the `RCS-` rules** —
    re-proposal needs new grounds, never a re-run. `RCS-AM1`'s five-row list is closed;
    no third widening of its corroboration exists.
-5. **The cap re-evaluation's owner inputs are now complete** — scope (both data sets),
-   primary outcome (the bypass novelty gradient, `REQ-42` shape), coverage as guard-only
-   at ~10,000, hubness-rising-with-depth as the per-arm kill, candidate families (a)–(d)
-   including the tag-based limiter and staged unbounded, tags refine-never-create, router
-   pricing in scope. All recorded in the execution log §1. **It is written by a fresh
-   session, in the adopted currency, consuming `TB-P5H-7` for any pricing arm and the
-   `FAM-AM1.3` quantisation floor (gradient claims ≥ 10× the ruler's measured step).**
+5. **The cap re-evaluation's owner inputs are now complete, and their single address is
+   [`2026-08-02-cap-reeval-design-inputs.md`](2026-08-02-cap-reeval-design-inputs.md)**
+   — written at the owner's prompt when the closeout enumeration found the conversation
+   carried nuance the summaries did not: the candidate families spelled out, the
+   supply×pricing synthesis, the LB-cap structural picture, the blind-listen lineage,
+   the tag constraints with the growth hazard dissolved by construction, the owner's
+   labelled hypothesis and its cheap first read, and the criteria re-weightings. The
+   prereg author starts there; the log §1 is the rulings summary it expands.
 
 ## Already updated — do not re-edit
 

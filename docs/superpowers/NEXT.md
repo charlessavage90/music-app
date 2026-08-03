@@ -45,8 +45,11 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > exists.**
 >
 > **The next substantial step is the CAP RE-EVALUATION PRE-REGISTRATION, written cold by
-> a fresh session, in the adopted currency.** Its owner inputs are complete and recorded
-> (execution log §1): candidate families (a)–(d) including the owner-triggered tag-based
+> a fresh session, in the adopted currency.** **Its single design-input address is
+> [`2026-08-02-cap-reeval-design-inputs.md`](2026-08-02-cap-reeval-design-inputs.md)** —
+> the owner's rulings, the candidate families spelled out, the supply×pricing synthesis,
+> the blind-listen lineage, the tag constraints, and the labelled hypothesis with its
+> cheap first read. Summary of the rulings (execution log §1): candidate families (a)–(d) including the owner-triggered tag-based
 > degree limiter and staged router-priced unbounded; coverage as guard-only at ~10,000;
 > hubness-rising-with-depth as the per-arm kill; LB similarity the sole source of edge
 > existence, tags only re-order/re-weight/remove; router pricing in scope (any pricing
