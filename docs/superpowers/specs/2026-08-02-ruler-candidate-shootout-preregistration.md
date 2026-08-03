@@ -96,3 +96,36 @@ unauthenticated and rate-limited: be gentle (≤ 1 req/s), and it serves `nb_fan
 artist object. WDQS: batch query, standard user agent. Environment traps as ever:
 `UV_LINK_MODE=copy`, `PYTHONIOENCODING=utf-8`, `python -u`. The controller reads results
 against the bars; the executor reports figures without verdicts.
+
+## §6 Amendments
+
+### `RCS-AM1` — recording-title corroboration for the five blocked rows, appended 2026-08-02 AFTER results existed
+
+**Post-result, and the hazard is stated plainly and permanently:** when this amendment
+was decided, `D`'s figures were known (famous 0.7560 failed; tail unreadable at 10/15),
+the five rows' candidate `nb_fan` values were visible in the retained search responses,
+and widening moves `D`'s tail count across the readability floor in the known-helpful
+direction. The executor refused to widen mid-run for exactly this reason; **the owner
+ruled to widen** (conversation of record), the `FAM-AM2` class of decision.
+
+**Why the widening is principled rather than convenient:** §2's tier-2 corroboration
+required a MusicBrainz *release*-title match, and the five rows (Muelas de Gallo, Jess
+Okoro, Acer, DTX, Dorona Alberti — this list is closed) have **zero releases**; each is a
+recordings-only artist, so the committed check's truth side is structurally empty. The
+check failed for a reason unrelated to what it exists to test. Recording titles are the
+same evidence class — works the artist is actually credited on.
+
+**Procedure, fixed before any match is computed:** for each of the five, browse the
+artist's MusicBrainz **recordings** (the truth side that exists); Deezer candidates are
+the **exact-normalised-name** matches already present in the retained search responses
+(no new search); fetch each candidate's track titles (top tracks and album tracks);
+normalise (casefold, strip punctuation and whitespace); **accept iff ≥ 1 exact
+normalised recording-title match**. Multiple matching candidates → the one with the most
+matches; a tie → reject as ambiguous. No match anywhere → the row stays null, reason
+recorded, final — there is no third widening. Every acceptance carries its matched
+titles as evidence.
+
+**Re-read:** `RCS-2`'s bar and floor are unchanged (Spearman ≥ 0.70, ≥ 12 non-null). The
+AM1 tail read is reported **beside** the as-committed one, both permanent; the
+as-committed unreadable result is not erased. The famous-region result is untouched by
+this amendment and its FAIL at 0.7560 stands.
