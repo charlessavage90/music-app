@@ -23,7 +23,37 @@ the point.**
 
 ---
 
-## ✅ DONE (latest) — 2026-08-02 (evening) — the wrong-artist clip fault now has a fix built, and the website got a tidy-up you can check in ten seconds
+## N/A (latest) — 2026-08-02 (night) — we changed how we measure "obscure", with your rulings and your hand checks; the app is untouched
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from this afternoon.**
+
+**What happened, in plain terms — and you were part of every step of it.** The yardstick
+we use behind the scenes to judge how obscure an artist is turned out to order artists
+poorly — your own Spotify spot-checks are what proved it, twice, against two different
+data sources. You then redefined what "obscure" should mean for this app: not "unknown to
+the world" but **"probably new to the people who actually use this app."** Under that
+definition, the listening-based yardstick was re-tested against your known/unknown marks
+and passed cleanly — every artist it called obscure was genuinely new to you — and it is
+now the adopted measure for future experiments. Two side-discoveries worth keeping: the
+map's most-connected artists were mostly new to you too (the app has far more room to
+delight than we assumed), and you found a class of "ghost" contributors that slip past
+the artist cleanup rule — written down with a cheap way to detect them, parked for your
+go-ahead.
+
+**Nothing is proposed for you to test.** The next real entry comes when something about
+the app itself changes — realistically, when the map-rebuild experiment this unblocked
+produces one.
+
+Detail, if you want it: `docs/superpowers/2026-08-02-fame-instrument-execution-log.md`.
+
+---
+
+## ✅ DONE — 2026-08-02 (evening) — the wrong-artist clip fault now has a fix built, and the website got a tidy-up you can check in ten seconds
+<!-- "(latest)" stripped 2026-08-02 (night): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 > ### ✅ CHECKED BY THE OWNER 2026-08-02 — nothing found.
 >
