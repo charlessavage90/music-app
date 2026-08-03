@@ -1,0 +1,29 @@
+{
+ "ALG-E-TU_absent_profile": {
+  "absent_max_degree": 50,
+  "absent_median_degree": 7.0,
+  "absent_median_pop_raw": 0.49124234914779663,
+  "absent_share_of_edge_endpoints": 0.002974811591191086,
+  "n_absent": 527,
+  "n_nodes": 74956,
+  "present_median_degree": 17.0,
+  "present_median_pop_raw": 0.556587278842926
+ },
+ "adopted_nodes": 74193,
+ "adopted_union_algb": 93067,
+ "algb_mk50_nodes": 68467,
+ "in_snapshot_not_in_union": 0,
+ "in_union_not_in_snapshot": 0,
+ "multiplicative_key_fp": {
+  "adjacent_double_collapse_rate": 0.13357,
+  "adjacent_double_pairs_tested": 200000,
+  "adjacent_double_pairs_that_collapse_at_c": 26714,
+  "collapses_among_distinct_artifact_scores": 0,
+  "constant": 0.15,
+  "distinct_artifact_scores": 1445,
+  "note": "x -> fl(x*c) is monotone non-decreasing for c > 0, so an inversion is impossible; a COLLAPSE of two distinct values is possible and its rate is measured on adjacent doubles.",
+  "order_inversions": 0
+ },
+ "snapshot_equals_adopted_union_algb_mk50": true,
+ "snapshot_keys": 93067
+}

@@ -1,0 +1,110 @@
+{
+ "ALG-B-MK100": {
+  "adjacent_at_d0_by_class": {},
+  "d0_stop_kinds": {
+   "natural": 22
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74654,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "ALG-B-MK50": {
+  "adjacent_at_d0_by_class": {},
+  "d0_stop_kinds": {
+   "natural": 22
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 68467,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "ALG-B-TUw-50-50": {
+  "adjacent_at_d0_by_class": {},
+  "d0_stop_kinds": {
+   "natural": 22
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74428,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "ALG-B-UC": {
+  "adjacent_at_d0_by_class": {
+   "ff-top01pct": 2
+  },
+  "d0_stop_kinds": {
+   "forced": 2,
+   "natural": 20
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74960,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "ALG-E-MK100": {
+  "adjacent_at_d0_by_class": {
+   "ff-top01pct": 4
+  },
+  "d0_stop_kinds": {
+   "forced": 4,
+   "natural": 18
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74732,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "ALG-E-MK50": {
+  "adjacent_at_d0_by_class": {
+   "ff-top01pct": 1
+  },
+  "d0_stop_kinds": {
+   "forced": 1,
+   "natural": 21
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74157,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "ALG-E-TUw-50-50": {
+  "adjacent_at_d0_by_class": {
+   "ff-top01pct": 1
+  },
+  "d0_stop_kinds": {
+   "forced": 1,
+   "natural": 21
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74956,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "ALG-E-UC": {
+  "adjacent_at_d0_by_class": {
+   "ff-top01pct": 6
+  },
+  "d0_stop_kinds": {
+   "forced": 6,
+   "natural": 16
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74956,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ },
+ "adopted": {
+  "adjacent_at_d0_by_class": {
+   "ff-top01pct": 1
+  },
+  "d0_stop_kinds": {
+   "forced": 1,
+   "natural": 21
+  },
+  "endpoints_missing_pairs": 0,
+  "nodes": 74193,
+  "pairs_lost_under_mirror_guard_true": 0,
+  "pairs_present": 22
+ }
+}

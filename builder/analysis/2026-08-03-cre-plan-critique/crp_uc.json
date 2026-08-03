@@ -1,0 +1,49 @@
+{
+ "ALG-B-UC": {
+  "d0_journeys_seconds_total": 12.49,
+  "d0_path_len_mean": 4.363636363636363,
+  "max_degree": 17883,
+  "mean_degree": 84.4681696905016,
+  "nodes": 74960,
+  "one_hop_frontier_max": 16008,
+  "one_hop_frontier_mean": 6951.590909090909,
+  "pairs_routable": 22,
+  "projected_ladder_seconds_22x21": 262.4,
+  "seconds_per_journey": 0.568,
+  "undirected_edges": 3165867
+ },
+ "ALG-E-MK50": {
+  "d0_journeys_seconds_total": 0.12,
+  "d0_path_len_mean": 5.136363636363637,
+  "max_degree": 50,
+  "mean_degree": 12.104319214639212,
+  "nodes": 74157,
+  "one_hop_frontier_max": 242,
+  "one_hop_frontier_mean": 129.5909090909091,
+  "pairs_routable": 22,
+  "projected_ladder_seconds_22x21": 2.5,
+  "seconds_per_journey": 0.005,
+  "undirected_edges": 448810
+ },
+ "ALG-E-UC": {
+  "d0_journeys_seconds_total": 9.6,
+  "d0_path_len_mean": 3.9545454545454546,
+  "max_degree": 15631,
+  "mean_degree": 83.21767436896313,
+  "nodes": 74956,
+  "one_hop_frontier_max": 22350,
+  "one_hop_frontier_mean": 8853.454545454546,
+  "pairs_routable": 22,
+  "projected_ladder_seconds_22x21": 201.6,
+  "seconds_per_journey": 0.436,
+  "undirected_edges": 3118832
+ },
+ "n_pairs": 22,
+ "over_budget_zero_block_UC_pool": {
+  "median_excess": 52.0,
+  "median_zero_agreement_edges": 1.0,
+  "nodes_over_50": 37056,
+  "note": "where the zero block is at least as large as the excess, EVERY deletion at that node is decided by the MBID tie-break under a `strength * agreement` key, because all those keys are exactly 0.0. UC's pool is a superset of TU's top-50-union pool, so this is indicative, not exact.",
+  "share_nodes_where_zero_block_ge_excess": 0.02080634715025907
+ }
+}
