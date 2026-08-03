@@ -88,3 +88,42 @@ Also recorded for the rule document: the class is overwhelmingly `Person` (77%),
 share the adopted-population tail never approached; ~28% are first-listed on at least
 one multi-artist credit; the clip stage prices at ~1.5 h for 2,711 DSP-linked members
 across the union.
+
+## §3a — Owner observation, recorded as design input (2026-08-03)
+
+From his manual fame hand-checks the night before: **MusicBrainz data for less-popular
+artists is often missing and sometimes incorrect — including wrong DSP links (a wrong
+Spotify link observed by hand).** Bearing on the keep-check's error model, worked out
+with him in conversation:
+
+- **Missing links under-fire the DSP-presence clause → false drops.** TJ Brown is the
+  measured instance (§3 finding 1). This is the check's real exposure in this class,
+  and the concrete case for the calibration hand-review he has flagged as his spend.
+- **Wrong links over-fire the DSP-presence clause → false keeps, partially caught.**
+  The clip clause resolves by name search plus the app's `same_artist` rule, never by
+  following the recorded link, so a wrong link produces a keep only when a same-named
+  artist also has playable clips — the BYP-13 collision shape, the same inherited-link-
+  accuracy property the Deezer id path's deferral row records.
+- **Deliberately not changed in response:** the check is not widened to search-only
+  evidence, because name-search-only keeps are exactly where wrong-artist collisions
+  live — the reason the adopted rule kept the DSP clause.
+
+## §4 — The Discogs resolution fixes the predicate (2026-08-03)
+
+Figures: `fcf_discogs.json` — cited, never restated. The 57 GB pass resolved every
+class-member Discogs id the REL- census had never seen, and it was decisive both ways:
+
+- A substantial majority of the class carries a Discogs main-artist release — exempting
+  them roughly **thirds** the class — so the clause is load-bearing, not decorative.
+- **Both worked instances have no Discogs release**, so both remain in the class under
+  the exemption. The drop-shaped instance is not exempted by the clause that shrinks the
+  class, which is the outcome that had to hold for the predicate to be usable.
+
+**Predicate fixed accordingly** (the faithful mirror of the adopted rule's dual-source
+release signal): in the class iff ≥ 1 MB release-group credit, none sole, and no Discogs
+main-artist release. Rationale, plain-language sentences, mechanics, refusal handling,
+and the pre-fixed worked-instance outcomes — including TJ Brown as a **named-in-advance
+false positive** — are owned by the rule document, committed before any clip lookup:
+[`specs/2026-08-03-featured-credit-filter-rule.md`](specs/2026-08-03-featured-credit-filter-rule.md)
+(`FCF-`). Snyk on the probe directory: clean (0 findings; no CLI path args, the
+predicted shape).
