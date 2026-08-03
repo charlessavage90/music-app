@@ -401,8 +401,8 @@ read measured where it can and cannot be moved; the results note owns that readi
    pre-flight a successor should repeat.
 
 **Nothing is owed by the owner as an action.** What remains for him is decisions only —
-merging PR #66 (the fame-instrument branch), and the triggers named in the parked list
-and the deferral table.
+the triggers named in the parked list and the deferral table. *(PR #66 was merged
+2026-08-03, `f9f42ce` — the one decision this line listed is discharged.)*
 
 **Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry (2026-08-02
 evening, the fame-instrument track) is N/A — nothing app-facing changed and nothing is
