@@ -1,0 +1,339 @@
+{
+  "class_counts": {
+    "known": 4,
+    "unknown": 26
+  },
+  "readability_floor_5_per_class": "UNREADABLE",
+  "committed_read": "UNREADABLE",
+  "descriptive_auc_no_verdict": 0.7308,
+  "one_way_splits_descriptive": {
+    "tail_rows_novel": "15/15",
+    "famous_rows_known": "4/15"
+  },
+  "inversions": [
+    {
+      "known_below": "NOFX",
+      "unknown_above": "Black Rebel Motorcycle Club"
+    },
+    {
+      "known_below": "NOFX",
+      "unknown_above": "Lykke Li"
+    },
+    {
+      "known_below": "NOFX",
+      "unknown_above": "Porcupine Tree"
+    },
+    {
+      "known_below": "NOFX",
+      "unknown_above": "New Order"
+    },
+    {
+      "known_below": "NOFX",
+      "unknown_above": "Boards of Canada"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Black Rebel Motorcycle Club"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Blood Red Shoes"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Lykke Li"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Porcupine Tree"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "New Order"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Nightmares on Wax"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "The Human League"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Boards of Canada"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "10cc"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Captain Beefheart & His Magic Band"
+    },
+    {
+      "known_below": "Television",
+      "unknown_above": "Quantic"
+    },
+    {
+      "known_below": "Beach House",
+      "unknown_above": "Lykke Li"
+    },
+    {
+      "known_below": "Beach House",
+      "unknown_above": "New Order"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "Black Rebel Motorcycle Club"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "Blood Red Shoes"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "Lykke Li"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "Porcupine Tree"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "New Order"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "Nightmares on Wax"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "The Human League"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "Boards of Canada"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "10cc"
+    },
+    {
+      "known_below": "Love",
+      "unknown_above": "Captain Beefheart & His Magic Band"
+    }
+  ],
+  "rows": [
+    {
+      "name": "Black Rebel Motorcycle Club",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 175649,
+      "fame_lb_pctl": 0.995671
+    },
+    {
+      "name": "Blood Red Shoes",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 106601,
+      "fame_lb_pctl": 0.98882
+    },
+    {
+      "name": "Swan Meat",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 270,
+      "fame_lb_pctl": 0.202034
+    },
+    {
+      "name": "Jess Okoro",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 29,
+      "fame_lb_pctl": 0.027039
+    },
+    {
+      "name": "INFIDELIX",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 232,
+      "fame_lb_pctl": 0.181865
+    },
+    {
+      "name": "December Avenue",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 343,
+      "fame_lb_pctl": 0.238493
+    },
+    {
+      "name": "Eneda Tarifa",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 81,
+      "fame_lb_pctl": 0.07834
+    },
+    {
+      "name": "NOFX",
+      "region": "famous",
+      "known": true,
+      "fame_lb_raw": 128863,
+      "fame_lb_pctl": 0.991854
+    },
+    {
+      "name": "Television",
+      "region": "famous",
+      "known": true,
+      "fame_lb_raw": 75209,
+      "fame_lb_pctl": 0.981187
+    },
+    {
+      "name": "Ancestral Voices",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 145,
+      "fame_lb_pctl": 0.127328
+    },
+    {
+      "name": "Statue",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 83,
+      "fame_lb_pctl": 0.080012
+    },
+    {
+      "name": "Kitchen Cynics",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 277,
+      "fame_lb_pctl": 0.205675
+    },
+    {
+      "name": "Muelas de Gallo",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 130,
+      "fame_lb_pctl": 0.116404
+    },
+    {
+      "name": "Lykke Li",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 244486,
+      "fame_lb_pctl": 0.998287
+    },
+    {
+      "name": "Acer",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 156,
+      "fame_lb_pctl": 0.13484
+    },
+    {
+      "name": "Dorona Alberti",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 12,
+      "fame_lb_pctl": 0.006743
+    },
+    {
+      "name": "Porcupine Tree",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 130989,
+      "fame_lb_pctl": 0.992232
+    },
+    {
+      "name": "New Order",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 238801,
+      "fame_lb_pctl": 0.998152
+    },
+    {
+      "name": "Beach House",
+      "region": "famous",
+      "known": true,
+      "fame_lb_raw": 204547,
+      "fame_lb_pctl": 0.996925
+    },
+    {
+      "name": "Nightmares on Wax",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 102827,
+      "fame_lb_pctl": 0.988146
+    },
+    {
+      "name": "DJ Warlord",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 158,
+      "fame_lb_pctl": 0.13637
+    },
+    {
+      "name": "Kira Puru",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 223,
+      "fame_lb_pctl": 0.176221
+    },
+    {
+      "name": "MISSIN",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 101,
+      "fame_lb_pctl": 0.09507
+    },
+    {
+      "name": "DTX",
+      "region": "tail",
+      "known": false,
+      "fame_lb_raw": 70,
+      "fame_lb_pctl": 0.069163
+    },
+    {
+      "name": "The Human League",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 105157,
+      "fame_lb_pctl": 0.988631
+    },
+    {
+      "name": "Boards of Canada",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 180026,
+      "fame_lb_pctl": 0.99586
+    },
+    {
+      "name": "10cc",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 85388,
+      "fame_lb_pctl": 0.984316
+    },
+    {
+      "name": "Love",
+      "region": "famous",
+      "known": true,
+      "fame_lb_raw": 79592,
+      "fame_lb_pctl": 0.982644
+    },
+    {
+      "name": "Captain Beefheart & His Magic Band",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 79923,
+      "fame_lb_pctl": 0.982859
+    },
+    {
+      "name": "Quantic",
+      "region": "famous",
+      "known": false,
+      "fame_lb_raw": 77925,
+      "fame_lb_pctl": 0.982118
+    }
+  ]
+}

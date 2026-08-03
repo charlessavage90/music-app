@@ -271,3 +271,35 @@ every cell and passes none** — famous 0.7560 vs 0.80, tail unreadable at 11/15
 owner; per rule 4 the two-currency design becomes a live option only by his choice.
 This is a seam: the fame-instrument track has reached a complete, fully-recorded
 conclusion set, and what follows is a design decision, not a measurement.
+
+*(Between §7 and §8 the owner took the design decision: the Definitions ruling —
+obscurity redefined as novelty-likelihood, `f59bc2a` — and the `NOV-` validation was
+pre-registered against it.)*
+
+## §8 — The NOV-1 read: UNREADABLE, and the criterion was mis-designed (2026-08-02)
+
+The owner's marks (committed verbatim, `c87c4fb`): **4 KNOWN, 26 UNKNOWN** — below the
+5-per-class floor, so **`NOV-1` is UNREADABLE as committed.** Figures: `nov_read.json`.
+
+**The controller's design defect, stated plainly:** `NOV-1`'s two-way AUC counts on the
+direction the governing Definitions entry explicitly disclaims — *"artists it calls
+famous may still be novel to a given user... and no requirement counts on seeing
+those."* A criterion that contradicts the governing document is wrong by this project's
+own rule, and it was authored the same day as the clause it contradicts. The marks
+expose it exactly: **every one of the 44 inversions is a famous-band artist the owner
+did not know** (the disclaimed direction), and **the direction the construct actually
+requires measured perfect — 15/15 artists the proxy calls obscure were novel to him.**
+Descriptive AUC 0.7308, reported with no verdict attached.
+
+**A product finding rides along, and it is the largest single fact of the day:** the
+owner knew only 4 of 15 artists from the LB-famous band (top ~3% of the frame). `REQ-41`
+("results vary with listener familiarity") is now quantified for the app's primary user:
+even the famous end of this graph is ~73% novel to him. The app's novelty headroom is
+enormous, and famous-band interiors are not the novelty dead zone the worldly-fame frame
+assumed.
+
+Escalated to the owner with the amendment option (`NOV-AM1`: replace the two-way AUC
+with the one-way criterion the Definitions actually state), carrying the maximal
+disclosure — the amended criterion's result is foreknown to pass — and the reasoning
+that saves it: the direction mismatch is derivable from the committed documents alone,
+and the clause it corrects toward predates the marks.
