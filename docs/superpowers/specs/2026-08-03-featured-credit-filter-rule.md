@@ -99,6 +99,43 @@ a hard rule and spec §9 requires byte-identical builds.
   not be presented as a surprise, and must not be quietly repaired** (no post-hoc
   keep-list; the adopted rule's closure argument bars inventing a second mechanism here).
 
+## FCF-AM1 — The Discogs clause requires a sole credit (2026-08-03, owner-ruled)
+
+**Post-result disclosure, maximal, per this project's amendment discipline.** This
+amendment was written **after** the first keep-check capture and both frozen lists
+existed. Its evidence base is **not** those results: it is the owner's spot checks at
+the presentation — exempted artists whose Discogs record is "credited on" / "one song
+on a collaboration album" — and the split measurement they prompted
+(`fcf_discogs_split.json`): a majority of exemptions in both populations rest on
+shared album-level credits alone. No clip result influenced it, and no artist dropped
+under the original predicate changes status under this one — the amended class is a
+strict superset, so the amendment can only *add* drops and keeps, never reverse one.
+The owner ruled "amend" with the affected counts and the false-drop trade in front of
+him.
+
+**The amended clause: a Discogs exemption requires at least one release credited to
+the artist alone** (sole entry in the release-level `<artists>` block, not Various
+Artists) — restoring symmetry with the MB half of FCF-1, which always required a sole
+credit. Plain sentence: **being one of several named artists on someone's album no
+longer counts as having your own releases.**
+
+Everything else stands unchanged: the keep-check (FCF-2) is the instrument that
+separates the real collaboration acts this moves into the class from the ghosts, the
+refusal rule (FCF-3) applies to the incremental capture, and the FCF-5 worked-instance
+outcomes are unaffected (neither instance was exempt under either predicate). The
+known cost, named rather than dismissed: the newly evaluated artists with no MB DSP
+link are mechanically dropped without a lookup, and that set will contain genuine
+duos MusicBrainz under-documents — the §3a false-drop residual applied to a
+population on average more real than the original class. The calibration hand-review
+(FCF-6) remains the owner's instrument for pricing exactly that, and its case is
+strengthened, not weakened, by this amendment.
+
+Mechanics of the incremental run: the amendment adds the shared-credit-only members
+(`fcf_discogs_split.json`'s list) to the evaluated class; their keep-check runs as a
+separate capture (`fcf_clips_am1.json`) under the same imported resolver; the frozen
+lists are re-frozen whole, under new dated filenames and new pinned shas, and the
+originals remain in the record as the pre-amendment freeze.
+
 ## FCF-6 — Not decided here, and by whom
 
 - **Adoption** — the owner's, on the presented result (four-part format, the TJ Brown
