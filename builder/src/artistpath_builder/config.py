@@ -158,6 +158,22 @@ class BuilderConfig:
     # configuration.
     drop_no_release_tail: bool = True
 
+    # Apply the featured-credit filter: drop an artist who is credited on
+    # release groups but never as the sole artist, has no Discogs main-artist
+    # release, and fails the same keep-check as the no-release rule (a
+    # commercial-DSP link AND a clip resolves). These artists exist in the
+    # graph only through shared credits — quarter-weight co-listens on other
+    # artists' tracks (LBS-1) — and the no-release rule never evaluates them
+    # because credits count as release groups. Rule document:
+    # docs/superpowers/specs/2026-08-03-featured-credit-filter-rule.md (FCF-);
+    # the lists are frozen 2026-08-03 snapshots (featured_credit_drop.py).
+    #
+    # A flag for the same one reason as drop_no_release_tail: the drop moves
+    # every surviving artist's popularity marginal, so a build-side experiment
+    # holds it explicitly on or off in a factor table. Turning it off is an
+    # experimental control, never a shipping configuration.
+    drop_featured_credit: bool = True
+
     # --- output ---------------------------------------------------------
     graph_version: str = "v1"
 

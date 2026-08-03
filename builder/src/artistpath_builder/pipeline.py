@@ -34,6 +34,7 @@ from artistpath_builder.graph import (
 )
 from artistpath_builder.models import ArtistStats
 from artistpath_builder.deezer_ids import load_deezer_ids
+from artistpath_builder.featured_credit_drop import load_featured_credit_drop_mbids
 from artistpath_builder.no_release_drop import load_drop_mbids
 from artistpath_builder.sources.base import SimilaritySource
 from artistpath_builder.sources.listenbrainz import harvest_identities
@@ -212,6 +213,25 @@ def build_from_archive(
             logger.info("dropped %d no-release-tail artists", len(no_release))
         excluded |= no_release
         known -= no_release
+
+    # The featured-credit filter drops by the same mechanism, in the same
+    # place, for the same reason: before the mass computation, so a dropped
+    # artist contributes to no marginal. It covers the class the no-release
+    # rule structurally cannot see — artists whose credits count as release
+    # groups while they have no primary-artist existence (rule document:
+    # specs/2026-08-03-featured-credit-filter-rule.md, FCF-). Same per-
+    # population list selection, same refusal for an uncensused algorithm,
+    # same frozen-snapshot mandate; featured_credit_drop.py carries the why.
+    # The two drops are disjoint by construction (this class requires >= 1
+    # release-group credit; the no-release tail requires zero), so their
+    # application order cannot matter — but both run before Pass 1, which is
+    # the invariant the ordering tests pin.
+    if config.drop_featured_credit:
+        featured = load_featured_credit_drop_mbids(config.algorithm) & known
+        if featured:
+            logger.info("dropped %d featured-credit artists", len(featured))
+        excluded |= featured
+        known -= featured
 
     # --- Pass 1: raw neighbour lists and per-artist co-occurrence mass -----
     # The mass (sum of an artist's raw scores) is the marginal used to correct

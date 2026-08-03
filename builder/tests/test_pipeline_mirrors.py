@@ -54,6 +54,12 @@ RECORDED_FIELDS = frozenset(
         "similarity_rescale",
         "filter_special_purpose",
         "drop_no_release_tail",
+        # Added 2026-08-03 (featured-credit filter). Per-mirror decision at
+        # that date: all three mirrors stay deliberately frozen — the same
+        # recorded decision as for drop_no_release_tail, since each reproduces
+        # committed pre-drop output — and both era-pinned callers now pin
+        # drop_featured_credit=False beside the earlier pin.
+        "drop_featured_credit",
         "graph_version",
     }
 )

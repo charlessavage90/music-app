@@ -127,3 +127,34 @@ false positive** — are owned by the rule document, committed before any clip l
 [`specs/2026-08-03-featured-credit-filter-rule.md`](specs/2026-08-03-featured-credit-filter-rule.md)
 (`FCF-`). Snyk on the probe directory: clean (0 findings; no CLI path args, the
 predicted shape).
+
+## §5 — Keep-check run, freeze, and wiring (2026-08-03)
+
+Figures: `fcf_clips.json`, `fcf_droplist.json`, `fcf_droplist_algb.json` — cited, never
+restated. The keep-check ran to completion with **zero refusals** (FCF-3 satisfied on the
+first pass), and `fcf_droplist.py` applied the committed rule with **both FCF-5
+worked-instance checks passing** — 田島賢 and TJ Brown drop exactly as the rule document
+fixed in advance, the latter as the named false positive.
+
+**One instrument read worth carrying: the BYP-13 wrong-artist rate inside this class is
+the highest yet measured** (`fcf_clips.json` `byp13_wrong_artist`; the two prior
+measurements are in the 2026-08-01 and 2026-08-02 captures). Consistent with what the
+class *is* — people named like other people, discoverable mainly by name collision. It
+strengthens the drop rule's premise and is recorded here as corroboration, not acted on.
+
+**Wiring, mirroring `no_release_drop.py` end to end:** `featured_credit_drop.py`
+(per-population sha-pinned package data, refusal for uncensused algorithms),
+`drop_featured_credit: bool = True` beside the earlier flag with the same factor-table
+rationale, the pipeline block **before the mass computation**, era-pins extended in
+`grt_score.py` / `calibrate.py` (both flags now pinned off), `RECORDED_FIELDS` updated
+with the per-mirror decision recorded in place, and the analysis README's era section
+extended. The old suite's uncensused-builds test needed both flags off — updated with a
+comment saying why; that interaction was the only cross-suite change.
+
+**Verification: 164 builder tests pass; mutation-tested rather than merely green.**
+Deleting the pipeline stage turns **6** tests red; reinstating one-list behaviour turns
+**5** red including both leak canaries. No mutation residue (grep-checked). Snyk: clean
+on `src/artistpath_builder`, `tests/`, and the probe directory.
+
+**Standing decision preserved:** nothing here is adopted. The branch merging is the
+adoption act, and the presentation to the owner names it.
