@@ -31,4 +31,60 @@ small calibration hand-review is **the owner's spend, flagged not decided**.
 
 ## §2 — Census design decisions (2026-08-03, before the run)
 
-*(to be appended as taken)*
+`fcf_census.py`, no CLI path args (the Snyk-clean shape), run before the rule document
+exists — the census is detector design input; the freeze point is before any **clip**
+result exists, mirroring how the adopted rule's census preceded its decision.
+
+1. **The sole-credit split is re-derived clean, not read off `rel_rg_raw.json`.** That
+   file's `"a"` flag folds in the REL- type exclusions (compilation, live, broadcast…),
+   so an artist whose only sole credits are live albums would read as featured-credit
+   while being a real act. Sole here is `rg_artist_id(record) == mbid` alone.
+2. **Three counters per artist — `total`, `sole`, `first`** (first-listed on a
+   multi-artist credit: "A feat. B" puts A first). `first` exists so the rule document
+   can decide whether first-listed-only artists belong in the class with the data
+   visible, rather than re-running the pass.
+3. **Class candidates = ≥ 1 credit, zero sole**, computed over the **union** of both
+   censused populations (adopted artifact sha-verified via `cb_metrics`; ALG-B union via
+   `ctc_census.candidate_population`, manifest-verified), so one artist-dump pass covers
+   both — the same union reasoning as the Deezer id map.
+4. **Disjointness instrument check**: the class must not intersect either shipped
+   no-release drop list (those artists have *zero* RG credits). Non-empty intersection
+   aborts the run.
+5. **Discogs is a recorded column, not yet a predicate input**: members' discogs ids are
+   joined against `rel_discogs_raw.json`; ids that file has never censused are counted
+   separately so the cost of resolving them (the 57 GB XML pass, ~21 min) is priced
+   before deciding whether Discogs presence counts as primary existence.
+6. **Worked-instance check is part of the run**: 田島賢 (`7e4f57b3…`) and TJ Brown
+   (`f62c24cd…`) must come out in-class, with their full counter rows printed. A detector
+   that misses either is wrong regardless of what else it finds.
+
+## §3 — Census results, and two findings that shape the rule (2026-08-03)
+
+Figures: `builder/analysis/2026-08-03-featured-credit-filter/fcf_census.json` — cited,
+never restated. Run took 4.3 min; the disjointness check against both shipped drop lists
+came back clean, and **both worked instances are detected in-class** (both all-shared
+credits, neither ever first-listed).
+
+**Finding 1 — the worked keeper case fails the mechanical keep-check.** TJ Brown carries
+**no DSP link in MusicBrainz** (`dsp=[]`): his Spotify page exists (8,274 monthly
+listeners, §5a) but MB never recorded it — he took a four-link chain to find, which is
+§5a's detection-effort caveat measured again, now inside the keep-check's first clause.
+So the adopted rule's check, applied verbatim, drops the artist `NEXT.md` names as the
+worked keeper. This does not change the rule shape (the owner accepted exactly this
+false-positive class for the adopted rule: DSP-link-plus-clip is "the best
+false-positive catcher available", and no second refinement mechanism exists) — but it
+is the concrete case for the **calibration hand-review he flagged as his spend**, and it
+goes to him named, not buried.
+
+**Finding 2 — Discogs presence is the predicate-deciding column.** 2,558 of the adopted
+class's 3,961 members have a *known* Discogs release-level artist credit; treating that
+as primary existence (the faithful mirror of the adopted rule's dual-source release
+signal) roughly halves the class. 2,167 ids across the union are uncensused by the REL-
+raw — **including both worked instances** — so `fcf_discogs.py` (57 GB XML pass, ~21 min)
+resolves them before the rule document freezes the predicate. Error direction of the
+Discogs signal: exemption, never an extra drop.
+
+Also recorded for the rule document: the class is overwhelmingly `Person` (77%), the
+share the adopted-population tail never approached; ~28% are first-listed on at least
+one multi-artist credit; the clip stage prices at ~1.5 h for 2,711 DSP-linked members
+across the union.

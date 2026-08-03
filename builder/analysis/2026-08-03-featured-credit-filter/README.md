@@ -1,0 +1,24 @@
+# Featured-credit filter census (2026-08-03)
+
+The detector census for the featured-credit filter track — the owner-triggered
+extension of the adopted no-release drop rule to artists that exist in the graph only
+through shared release-group credits (fame-instrument execution log §5a).
+
+**Figures live in the committed JSONs here and are cited, never restated.** Reasoning:
+`docs/superpowers/2026-08-03-featured-credit-filter-execution-log.md`. The rule
+document (written cold, before any clip result) governs what is adopted; nothing in
+this directory adopts anything.
+
+Scripts, in run order (from `builder/`, `UV_LINK_MODE=copy PYTHONIOENCODING=utf-8
+uv run python -u …`; no CLI arguments by design):
+
+- `fcf_census.py` — the credit split (total / sole / first-listed) over the MB
+  release-group dump for the union of both censused populations; class membership;
+  DSP-link and Discogs-id columns; worked-instance checks. → `fcf_census.json`
+- `fcf_discogs.py` — resolves the class members' Discogs ids the REL- census never
+  saw (57 GB XML pass), so the rule document can fix whether Discogs presence exempts
+  from the class. → `fcf_discogs.json`
+
+Reuse is by import, never restatement: populations and dump passes come from
+`ctc_census` (2026-08-02-candidate-tail-census), the adopted artifact identity from
+`cb_metrics` (2026-07-30-track-b-cap-selection).
