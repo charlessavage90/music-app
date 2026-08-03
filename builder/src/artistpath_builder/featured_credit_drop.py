@@ -39,14 +39,17 @@ _DATA = Path(__file__).parent / "data"
 # sha256 of json.dumps(sorted(drop_mbids), sort_keys=True), as recorded in
 # the execution log and the probe output's own sha256_over_sorted_mbids key.
 FEATURED_DROP_LIST_SHA256 = (
-    "d1f50062bfdb7658455b03cd65050b9578cbf0ef7f75ca8db93eeb9986dcd0fa"
+    "0f337de2b5c1fcfab64b4efd690826e269206a5db3b8142bb5776af4d9b3655c"
 )
 CANDIDATE_FEATURED_DROP_LIST_SHA256 = (
-    "dea9c7e56ebfad61914f4c72f82eda58870d931f9d9cce0f97dcdcf8df1ce58e"
+    "b8d230e6ffc7d0f5789b5dbc05fefb0b564bbddfc2590f478aa21e218fbed6f0"
 )
 
-FEATURED_DROP_LIST_PATH = _DATA / "featured_credit_drop_20260803.json"
-CANDIDATE_FEATURED_DROP_LIST_PATH = _DATA / "featured_credit_drop_algb_20260803.json"
+# The _am1 suffix is FCF-AM1 (owner-ruled 2026-08-03): a Discogs exemption
+# requires a SOLE-credit release, so shared album-level credits no longer
+# exempt. The pre-amendment freeze remains in the probe directory.
+FEATURED_DROP_LIST_PATH = _DATA / "featured_credit_drop_20260803_am1.json"
+CANDIDATE_FEATURED_DROP_LIST_PATH = _DATA / "featured_credit_drop_algb_20260803_am1.json"
 
 # Censused populations only. An algorithm absent here has no list, and that is
 # a refusal rather than a fallback — see no_release_drop.py's docstring.

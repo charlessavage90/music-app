@@ -37,13 +37,14 @@ from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 
 # Reproduced from the frozen probe output (fcf_droplist.json):
 # sha256 of json.dumps(sorted(drop_mbids), sort_keys=True).
-RECORDED_SHA256 = "d1f50062bfdb7658455b03cd65050b9578cbf0ef7f75ca8db93eeb9986dcd0fa"
-RECORDED_COUNT = 1097
+RECORDED_SHA256 = "0f337de2b5c1fcfab64b4efd690826e269206a5db3b8142bb5776af4d9b3655c"
+RECORDED_COUNT = 2194
 
 # The candidate (ALG-B) list — same committed rule, different population
-# (fcf_droplist_algb.json). The lists share 455 MBIDs.
-CANDIDATE_SHA256 = "dea9c7e56ebfad61914f4c72f82eda58870d931f9d9cce0f97dcdcf8df1ce58e"
-CANDIDATE_COUNT = 922
+# (fcf_droplist_algb_am1.json). The lists share 945 MBIDs. Both lists are
+# the FCF-AM1 re-freeze, a strict superset of the pre-amendment lists.
+CANDIDATE_SHA256 = "b8d230e6ffc7d0f5789b5dbc05fefb0b564bbddfc2590f478aa21e218fbed6f0"
+CANDIDATE_COUNT = 1940
 
 A, B, C = ("a" * 36, "b" * 36, "c" * 36)
 # Real MBIDs from the frozen lists: one the rule drops, one it keeps.
@@ -138,7 +139,7 @@ def test_shipped_list_matches_the_frozen_snapshot():
 
 # In the production list, absent from the candidate list: must SURVIVE an
 # ALG-B build. The half-apply canary.
-PROD_ONLY_FCF = "001ce27b-66c2-470c-86dd-f2e3650a2863"
+PROD_ONLY_FCF = "0007d97f-a943-475c-bb2d-f672d44ab24b"
 # In the candidate list, absent from the production list.
 CANDIDATE_ONLY_FCF = "00f7467f-462e-408c-8d57-ac10f33d8139"
 

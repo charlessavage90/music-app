@@ -187,3 +187,30 @@ decision — whether the Discogs clause requires a sole credit, restoring symmet
 the MB half of the predicate — is **the owner's**, because it moves ~2,000 artists from
 "exempt" into exposure to the keep-check's known false-drop residual (§3a). Presented
 with options; nothing amended yet, PR #67 stands as-committed while he decides.
+
+## §7 — FCF-AM1 executed end to end (2026-08-03)
+
+**The owner ruled "amend."** Sequence, with the freeze discipline preserved: the
+amendment text (`FCF-AM1`, full post-result disclosure) was committed **before** the
+incremental keep-check ran; the increment resolved with **zero refusals**;
+`fcf_droplist_am1.py` re-applied the amended rule whole, **asserting the superset
+claim** — no pre-amendment drop or keep flipped — and both FCF-5 worked-instance checks
+passed again. Figures: `fcf_clips_am1.json`, `fcf_droplist_am1.json`,
+`fcf_droplist_algb_am1.json`.
+
+The package data now carries the `_am1` lists under new dated filenames with new pinned
+shas (adopted `0f337de2…`, candidate `b8d230e6…`, 945 MBIDs shared); the pre-amendment
+freezes remain in the probe directory as the record. Test constants and the
+production-only leak canary were re-derived (the old canary had entered the amended
+candidate list, which is the superset property working as designed). **164 builder
+tests pass** against the amended lists.
+
+**Snyk on the probe directory: one Medium, and it is the third instance of an already
+owner-accepted finding** — the insecure-XML-parser rule (CWE-611) on
+`fcf_discogs_split.py`'s `iterparse`, identical to `rel_discogs.py:87` and
+`ctc_census.py:173`, both investigated empirically 2026-08-02 (XXE not reachable on
+this interpreter; entity-expansion reachable in principle but the input is a local
+57 GB dump read by an offline probe). The fix (`defusedxml`) was deliberately declined
+there; adding it here alone would make the three instances inconsistent for no
+exposure change. Recorded for the NEXT.md deferral row at closeout rather than fixed.
+`src/` and `tests/` remain clean.

@@ -27,8 +27,20 @@ uv run python -u …`; no CLI arguments by design):
   → `fcf_droplist.json` (adopted), `fcf_droplist_algb.json` (candidate) — the files
   the builder wiring copies verbatim into package data.
 
+- `fcf_discogs_split.py` — owner-prompted: splits the Discogs exemptions into
+  sole-credit vs shared-credit-only, after his spot checks found the shared-credit
+  shape. → `fcf_discogs_split.json`. Its result is what prompted `FCF-AM1`.
+- `fcf_clips_am1.py` — the amendment's incremental keep-check over the
+  shared-credit-only members, run only after `FCF-AM1` was committed.
+  → `fcf_clips_am1.json`
+- `fcf_droplist_am1.py` — re-applies the amended rule whole, asserts no
+  pre-amendment verdict flips, and freezes the superseding lists.
+  → `fcf_droplist_am1.json`, `fcf_droplist_algb_am1.json` — what the package data
+  now carries. The pre-amendment freezes stay here as the record.
+
 The rule document governing all of it:
-`docs/superpowers/specs/2026-08-03-featured-credit-filter-rule.md` (`FCF-`).
+`docs/superpowers/specs/2026-08-03-featured-credit-filter-rule.md` (`FCF-`,
+amended by `FCF-AM1` with post-result disclosure).
 
 Reuse is by import, never restatement: populations and dump passes come from
 `ctc_census` (2026-08-02-candidate-tail-census), the adopted artifact identity from
