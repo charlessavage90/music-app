@@ -1,0 +1,171 @@
+{
+  "amendment": "RCS-AM1",
+  "resolutions": [
+    {
+      "name": "Muelas de Gallo",
+      "mbid": "670c165b-96e6-4265-acb8-e1b9a5429aa4",
+      "mb_recording_count": 13,
+      "candidates": [
+        {
+          "deezer_id": 6661698,
+          "nb_fan_from_search": 2987,
+          "matches": [
+            "Jokic",
+            "Te Vas",
+            "niño,"
+          ],
+          "n_tracks_checked": 85
+        },
+        {
+          "deezer_id": 235878891,
+          "nb_fan_from_search": 1,
+          "matches": [
+            "HIstorial Crediticio"
+          ],
+          "n_tracks_checked": 3
+        }
+      ],
+      "accepted": true,
+      "accepted_deezer_id": 6661698,
+      "nb_fan": 2987,
+      "evidence_matched_titles": [
+        "Jokic",
+        "Te Vas",
+        "niño,"
+      ]
+    },
+    {
+      "name": "Jess Okoro",
+      "mbid": "d950c846-4b88-4ecc-927b-051bf886e530",
+      "mb_recording_count": 2,
+      "candidates": [
+        {
+          "deezer_id": 11717287,
+          "nb_fan_from_search": 0,
+          "matches": [],
+          "n_tracks_checked": 0
+        }
+      ],
+      "accepted": false,
+      "null_reason": "no_recording_title_match"
+    },
+    {
+      "name": "Acer",
+      "mbid": "61fb37b5-051d-4685-af8a-f8ca81a88e32",
+      "mb_recording_count": 8,
+      "candidates": [
+        {
+          "deezer_id": 1332045,
+          "nb_fan_from_search": 269,
+          "matches": [],
+          "n_tracks_checked": 13
+        }
+      ],
+      "accepted": false,
+      "null_reason": "no_recording_title_match"
+    },
+    {
+      "name": "DTX",
+      "mbid": "7a27e44a-dfc1-44c0-a615-8efaf1dccf42",
+      "mb_recording_count": 6,
+      "candidates": [
+        {
+          "deezer_id": 1210481,
+          "nb_fan_from_search": 60,
+          "matches": [],
+          "n_tracks_checked": 75
+        }
+      ],
+      "accepted": false,
+      "null_reason": "no_recording_title_match"
+    },
+    {
+      "name": "Dorona Alberti",
+      "mbid": "c13d9133-5b32-4c9a-bf42-caa6f190fc32",
+      "mb_recording_count": 3,
+      "candidates": [
+        {
+          "deezer_id": 8124801,
+          "nb_fan_from_search": 47,
+          "matches": [],
+          "n_tracks_checked": 2
+        }
+      ],
+      "accepted": false,
+      "null_reason": "no_recording_title_match"
+    }
+  ],
+  "am1_tail_read": {
+    "non_null": 11,
+    "of": 15,
+    "readability_floor_12": "UNREADABLE",
+    "spearman": 0.5923,
+    "bar": ">= 0.70",
+    "read": "UNREADABLE",
+    "pair_companion_no_bar": {
+      "pairs": 36,
+      "agreement": 0.8333
+    },
+    "rows": [
+      {
+        "name": "Muelas de Gallo",
+        "hand": 555857,
+        "nb_fan": 2987
+      },
+      {
+        "name": "December Avenue",
+        "hand": 6799036,
+        "nb_fan": 51531
+      },
+      {
+        "name": "MISSIN",
+        "hand": 505,
+        "nb_fan": 31
+      },
+      {
+        "name": "DJ Warlord",
+        "hand": 1922,
+        "nb_fan": 30
+      },
+      {
+        "name": "Kitchen Cynics",
+        "hand": 232,
+        "nb_fan": 31
+      },
+      {
+        "name": "Ancestral Voices",
+        "hand": 1017,
+        "nb_fan": 286
+      },
+      {
+        "name": "Eneda Tarifa",
+        "hand": 6504,
+        "nb_fan": 526
+      },
+      {
+        "name": "INFIDELIX",
+        "hand": 19870,
+        "nb_fan": 3390
+      },
+      {
+        "name": "Kira Puru",
+        "hand": 11613,
+        "nb_fan": 135
+      },
+      {
+        "name": "Statue",
+        "hand": 422,
+        "nb_fan": 1083
+      },
+      {
+        "name": "Swan Meat",
+        "hand": 20110,
+        "nb_fan": 219
+      }
+    ]
+  },
+  "as_committed_tail_read_unchanged": {
+    "non_null": 10,
+    "status": "UNREADABLE"
+  }
+}

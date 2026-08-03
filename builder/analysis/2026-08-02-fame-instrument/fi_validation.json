@@ -1,0 +1,224 @@
+{
+ "FAM-1": {
+  "adopted_population": {
+   "absent_key": 0,
+   "non_null": 74151,
+   "non_null_share": 0.9994339088593264,
+   "null": 42,
+   "population": 74193
+  },
+  "alg_b_only_remainder": {
+   "absent_key": 0,
+   "non_null": 14802,
+   "non_null_share": 0.7842534703825368,
+   "null": 4072,
+   "population": 18874
+  },
+  "expected_remainder_population": 18874,
+  "union": {
+   "absent_key": 0,
+   "non_null": 88953,
+   "non_null_share": 0.9557952872661631,
+   "null": 4114,
+   "population": 93067
+  }
+ },
+ "FAM-2": {
+  "adopted_frame": {
+   "bottom_decile_pctl_lt_0.10": {
+    "distinct_values": 106,
+    "largest_tie_atom_artists": 109,
+    "largest_tie_atom_share_of_adopted_nonnull": 0.001469973432590255,
+    "largest_tie_atom_share_of_own_population": 0.014757649607365286,
+    "largest_tie_atom_value": 29,
+    "population": 7386,
+    "top5_share_of_adopted_nonnull": 0.006742997397203005,
+    "top5_share_of_own_population": 0.06769564040075819,
+    "top5_tie_atom_artists": 500,
+    "top5_tie_atom_values": [
+     29,
+     21,
+     27,
+     15,
+     28
+    ]
+   },
+   "label": "adopted frame",
+   "lower_half_pctl_lt_0.50": {
+    "distinct_values": 1334,
+    "largest_tie_atom_artists": 109,
+    "largest_tie_atom_share_of_adopted_nonnull": 0.001469973432590255,
+    "largest_tie_atom_share_of_own_population": 0.002939986513823331,
+    "largest_tie_atom_value": 29,
+    "population": 37075,
+    "top5_share_of_adopted_nonnull": 0.006742997397203005,
+    "top5_share_of_own_population": 0.013486176668914362,
+    "top5_tie_atom_artists": 500,
+    "top5_tie_atom_values": [
+     29,
+     21,
+     27,
+     15,
+     28
+    ]
+   },
+   "max_consecutive_mapped_pctl_gap": 0.0013823144664266152,
+   "max_consecutive_mapped_pctl_gap_bottom_decile": 0.0013823144664266152,
+   "overall": {
+    "distinct_values": 18402,
+    "largest_tie_atom_artists": 109,
+    "largest_tie_atom_share_of_adopted_nonnull": 0.001469973432590255,
+    "largest_tie_atom_share_of_own_population": 0.001469973432590255,
+    "largest_tie_atom_value": 29,
+    "population": 74151,
+    "top5_share_of_adopted_nonnull": 0.006742997397203005,
+    "top5_share_of_own_population": 0.006742997397203005,
+    "top5_tie_atom_artists": 500,
+    "top5_tie_atom_values": [
+     29,
+     21,
+     27,
+     15,
+     28
+    ]
+   },
+   "population_non_null": 74151
+  },
+  "alg_b_only_remainder": {
+   "bottom_decile_pctl_lt_0.10": {
+    "distinct_values": 106,
+    "largest_tie_atom_artists": 231,
+    "largest_tie_atom_share_of_adopted_nonnull": 0.003115264797507788,
+    "largest_tie_atom_share_of_own_population": 0.07268722466960352,
+    "largest_tie_atom_value": 1,
+    "population": 3178,
+    "top5_share_of_adopted_nonnull": 0.008968186538279996,
+    "top5_share_of_own_population": 0.2092511013215859,
+    "top5_tie_atom_artists": 665,
+    "top5_tie_atom_values": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "label": "ALG-B-only remainder",
+   "lower_half_pctl_lt_0.50": {
+    "distinct_values": 1282,
+    "largest_tie_atom_artists": 231,
+    "largest_tie_atom_share_of_adopted_nonnull": 0.003115264797507788,
+    "largest_tie_atom_share_of_own_population": 0.023401884307567622,
+    "largest_tie_atom_value": 1,
+    "population": 9871,
+    "top5_share_of_adopted_nonnull": 0.008968186538279996,
+    "top5_share_of_own_population": 0.06736906088542194,
+    "top5_tie_atom_artists": 665,
+    "top5_tie_atom_values": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "max_consecutive_mapped_pctl_gap": 0.002009413224366541,
+   "max_consecutive_mapped_pctl_gap_bottom_decile": 0.0013823144664266152,
+   "overall": {
+    "distinct_values": 4773,
+    "largest_tie_atom_artists": 231,
+    "largest_tie_atom_share_of_adopted_nonnull": 0.003115264797507788,
+    "largest_tie_atom_share_of_own_population": 0.015605999189298744,
+    "largest_tie_atom_value": 1,
+    "population": 14802,
+    "top5_share_of_adopted_nonnull": 0.008968186538279996,
+    "top5_share_of_own_population": 0.04492636130252668,
+    "top5_tie_atom_artists": 665,
+    "top5_tie_atom_values": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "population_non_null": 14802
+  },
+  "frame_n_nonnull": 74151,
+  "note": "largest_tie_atom_share_of_adopted_nonnull is the prereg's quantisation step (largest tie atom / N_nonnull); on the remainder the same atom is also reported over the remainder's own population."
+ },
+ "FAM-5": {
+  "abs_delta_fame_lb_pctl": {
+   "max": 0.0,
+   "p50": 0.0,
+   "p95": 0.0,
+   "p99": 0.0,
+   "share_exceeding_0.01": 0.0
+  },
+  "band_definition": "cb_metrics.BANDS over the adopted artifact's pop_raw percentile (in-graph popularity), not fame",
+  "by_band": {
+   "lower half": {
+    "max_abs_delta_fame_lb_pctl": 0.0,
+    "n": 37060,
+    "p99_abs_delta_fame_lb_pctl": 0.0,
+    "spearman_old_vs_new": 1.0
+   },
+   "top 0.1%": {
+    "max_abs_delta_fame_lb_pctl": 0.0,
+    "n": 75,
+    "p99_abs_delta_fame_lb_pctl": 0.0,
+    "spearman_old_vs_new": 1.0
+   },
+   "top 1%": {
+    "max_abs_delta_fame_lb_pctl": 0.0,
+    "n": 667,
+    "p99_abs_delta_fame_lb_pctl": 0.0,
+    "spearman_old_vs_new": 1.0
+   },
+   "top 10%": {
+    "max_abs_delta_fame_lb_pctl": 0.0,
+    "n": 6678,
+    "p99_abs_delta_fame_lb_pctl": 0.0,
+    "spearman_old_vs_new": 1.0
+   },
+   "upper half": {
+    "max_abs_delta_fame_lb_pctl": 0.0,
+    "n": 29671,
+    "p99_abs_delta_fame_lb_pctl": 0.0,
+    "spearman_old_vs_new": 1.0
+   }
+  },
+  "old_snapshot": {
+   "file": "fp_listenbrainz.json",
+   "keys": 74193,
+   "non_null": 74151,
+   "sha256": "c47fbd2260eaf76473a24348785c42ba87d457ced216b6999e036971cebe6fbf"
+  },
+  "overlap_non_null_mbids": 74151,
+  "spearman_overall_descriptive": 1.0,
+  "value_movement_descriptive": {
+   "decreased_raw": 0,
+   "increased_raw": 0,
+   "unchanged_raw": 74151
+  }
+ },
+ "computed": "FAM-1, FAM-2 (per FAM-AM1.2), FAM-5 (per FAM-AM1.1). FAM-3 and FAM-4 are NOT computed here: they read named artists and are gated behind FAM-AM1.4's identity confirmation.",
+ "governing_document": "docs/superpowers/specs/2026-08-02-fame-instrument-adoption-preregistration.md",
+ "percentile_definition": "(|{f<v}| + (|{f=v}|+1)/2) / N_nonnull over the adopted frame's non-null fame_lb_raw; pctl(v>max) = pctl(max); lower half is {fame_lb_pctl < 0.5} (FAM-AM1.6)",
+ "snapshot": {
+  "file": "fi_union_snapshot.json",
+  "keys": 93067,
+  "sha256": "d9d6d5d340a81875dd795067d6332a40d813ebfb5b8258048290c27f34662ae8"
+ },
+ "substrate": {
+  "adopted": {
+   "file": "graph-t15-tiebreakfix.bin",
+   "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8"
+  },
+  "candidate_alg_b": {
+   "file": "graph-algb-full.bin",
+   "sha256": "d008a2b5e0c23cf31b3f12357fa1fccff55d209ec18f54c872cdae9bf4a0757f"
+  }
+ },
+ "verdicts": null
+}

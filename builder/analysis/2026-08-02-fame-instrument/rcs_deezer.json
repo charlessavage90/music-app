@@ -1,0 +1,387 @@
+{
+  "candidate": "D -- Deezer nb_fan",
+  "governing_document": "docs/superpowers/specs/2026-08-02-ruler-candidate-shootout-preregistration.md",
+  "tier_1": "artist id recorded in MusicBrainz (dsp_ids.json); identity by the id path",
+  "tier_2": "Deezer search by name, accepted only on a shared normalised release title with the MusicBrainz artist; era/country recorded as context",
+  "null_rule": "no page or unresolvable identity -> null; nb_fan 0 on a resolved page is a value",
+  "non_null": {
+    "famous": 15,
+    "tail": 10
+  },
+  "tier2_acceptances": [
+    {
+      "name": "DJ Warlord",
+      "region": "tail",
+      "deezer_id": 12741441,
+      "D": 30,
+      "evidence": "Deezer id 12741441 \"DJ Warlord\" (search rank 1 of 2) shares 1 release title(s) with MusicBrainz 73469fec-1067-467d-a34f-4daf738cae51: Mystery Leopard Spins Tracks At Local Nightclub | Deezer catalogue 2 albums"
+    },
+    {
+      "name": "Kitchen Cynics",
+      "region": "tail",
+      "deezer_id": 1246733,
+      "D": 31,
+      "evidence": "Deezer id 1246733 \"Kitchen Cynics\" (search rank 1 of 3) shares 1 release title(s) with MusicBrainz 3b1ed80d-398e-4198-9727-a4292f5ff9c2: Beads Upon an Abacus | Deezer catalogue 1 albums"
+    },
+    {
+      "name": "INFIDELIX",
+      "region": "tail",
+      "deezer_id": 4484762,
+      "D": 3390,
+      "evidence": "Deezer id 4484762 \"INFIDELIX\" (search rank 1 of 5) shares 7 release title(s) with MusicBrainz 8455affb-6a3f-4d86-a035-3f42227cdcd9: Anthem of the Lost (Live @ Red Raven Studios); Busk Life; Human vs Human; Megaman | MB context: DE / 1985 | Deezer catalogue 33 albums"
+    },
+    {
+      "name": "Kira Puru",
+      "region": "tail",
+      "deezer_id": 890732,
+      "D": 135,
+      "evidence": "Deezer id 890732 \"Kira Puru\" (search rank 1 of 5) shares 1 release title(s) with MusicBrainz f208db01-d4c8-4e77-85af-449a38631b04: Everything Is Better Without You | MB context: AU | Deezer catalogue 11 albums"
+    },
+    {
+      "name": "Statue",
+      "region": "tail",
+      "deezer_id": 1305886,
+      "D": 1083,
+      "evidence": "Deezer id 1305886 \"Statue\" (search rank 1 of 5) shares 2 release title(s) with MusicBrainz f86df97f-4bbc-4e5b-93b6-f921cdd7e2eb: Monument; Natural States / Base | MB context: AU / 2014 | Deezer catalogue 13 albums"
+    },
+    {
+      "name": "Swan Meat",
+      "region": "tail",
+      "deezer_id": 11512353,
+      "D": 219,
+      "evidence": "Deezer id 11512353 \"Swan Meat\" (search rank 1 of 5) shares 6 release title(s) with MusicBrainz 211771d0-7ca4-4ffe-ac45-3d99985681d8: BLOOD SUPERNOVA; FLESHWORLD; Knife Splits Ice; PSYCHOPāTH | MB context: DE | Deezer catalogue 30 albums"
+    }
+  ],
+  "rows": [
+    {
+      "mbid": "cc7d4686-ea02-45fd-956e-94c1a322558c",
+      "name": "Lykke Li",
+      "region": "famous",
+      "hand_value": 15000000,
+      "tier": 1,
+      "deezer_id": "72503",
+      "D": 676759,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "7adaabfb-acfb-47bc-8c7c-59471c2f0db8",
+      "name": "The Human League",
+      "region": "famous",
+      "hand_value": 6000000,
+      "tier": 1,
+      "deezer_id": "172",
+      "D": 204221,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "dcaa4f81-bfb7-44eb-8594-4e74f004b6e4",
+      "name": "NOFX",
+      "region": "famous",
+      "hand_value": 1000000,
+      "tier": 1,
+      "deezer_id": "941",
+      "D": 231604,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "169c4c28-858e-497b-81a4-8bc15e0026ea",
+      "name": "Porcupine Tree",
+      "region": "famous",
+      "hand_value": 500000,
+      "tier": 1,
+      "deezer_id": "4069",
+      "D": 142840,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "490bde43-5edb-4a93-b3b3-7a0465fd8909",
+      "name": "Television",
+      "region": "famous",
+      "hand_value": 372000,
+      "tier": 1,
+      "deezer_id": "8213",
+      "D": 19531,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "69158f97-4c07-4c4e-baf8-4e4ab1ed666e",
+      "name": "Boards of Canada",
+      "region": "famous",
+      "hand_value": 1000000,
+      "tier": 1,
+      "deezer_id": "1098",
+      "D": 273999,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "d5cc67b8-1cc4-453b-96e8-44487acdebea",
+      "name": "Beach House",
+      "region": "famous",
+      "hand_value": 14800000,
+      "tier": 1,
+      "deezer_id": "75055",
+      "D": 293285,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "f1106b17-dcbb-45f6-b938-199ccfab50cc",
+      "name": "New Order",
+      "region": "famous",
+      "hand_value": 8800000,
+      "tier": 1,
+      "deezer_id": "2016",
+      "D": 943525,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47",
+      "name": "Love",
+      "region": "famous",
+      "hand_value": 571000,
+      "tier": 1,
+      "deezer_id": "4715",
+      "D": 35118,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "8dcd04e4-7695-4d80-bae9-1d7d680a38ef",
+      "name": "Captain Beefheart & His Magic Band",
+      "region": "famous",
+      "hand_value": 235000,
+      "tier": 1,
+      "deezer_id": "2343",
+      "D": 20802,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "f37c537b-3557-4031-bfd6-ab63ced32854",
+      "name": "10cc",
+      "region": "famous",
+      "hand_value": 6700000,
+      "tier": 1,
+      "deezer_id": "6111",
+      "D": 43325,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "cd830a8f-89d2-4e96-96cb-7a497e51d437",
+      "name": "Blood Red Shoes",
+      "region": "famous",
+      "hand_value": 168000,
+      "tier": 1,
+      "deezer_id": "75312",
+      "D": 33183,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "32b90c92-9978-4a07-90eb-caa4b22f4907",
+      "name": "Black Rebel Motorcycle Club",
+      "region": "famous",
+      "hand_value": 716000,
+      "tier": 1,
+      "deezer_id": "1315",
+      "D": 94664,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "f1560407-8826-4ec9-b78f-e0c3fa3ea4f5",
+      "name": "Quantic",
+      "region": "famous",
+      "hand_value": 2300000,
+      "tier": 1,
+      "deezer_id": "8098",
+      "D": 95245,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "b8c5cc4f-239f-4e02-b46f-b040b77c2030",
+      "name": "Nightmares on Wax",
+      "region": "famous",
+      "hand_value": 1700000,
+      "tier": 1,
+      "deezer_id": "8026",
+      "D": 53771,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "670c165b-96e6-4265-acb8-e1b9a5429aa4",
+      "name": "Muelas de Gallo",
+      "region": "tail",
+      "hand_value": 555857,
+      "tier": 2,
+      "deezer_id": null,
+      "D": null,
+      "tier2_evidence": null,
+      "null_reason": "no_musicbrainz_release_titles_to_corroborate_against"
+    },
+    {
+      "mbid": "0ea2b444-9293-47cb-9c94-6e7460b06731",
+      "name": "December Avenue",
+      "region": "tail",
+      "hand_value": 6799036,
+      "tier": 1,
+      "deezer_id": "2007671",
+      "D": 51531,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "21da7c32-2416-4bce-ae28-f9c031fc40e0",
+      "name": "MISSIN",
+      "region": "tail",
+      "hand_value": 505,
+      "tier": 1,
+      "deezer_id": "53861472",
+      "D": 31,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "d950c846-4b88-4ecc-927b-051bf886e530",
+      "name": "Jess Okoro",
+      "region": "tail",
+      "hand_value": 0,
+      "tier": 2,
+      "deezer_id": null,
+      "D": null,
+      "tier2_evidence": null,
+      "null_reason": "no_musicbrainz_release_titles_to_corroborate_against"
+    },
+    {
+      "mbid": "73469fec-1067-467d-a34f-4daf738cae51",
+      "name": "DJ Warlord",
+      "region": "tail",
+      "hand_value": 1922,
+      "tier": 2,
+      "deezer_id": 12741441,
+      "D": 30,
+      "tier2_evidence": "Deezer id 12741441 \"DJ Warlord\" (search rank 1 of 2) shares 1 release title(s) with MusicBrainz 73469fec-1067-467d-a34f-4daf738cae51: Mystery Leopard Spins Tracks At Local Nightclub | Deezer catalogue 2 albums",
+      "null_reason": null
+    },
+    {
+      "mbid": "3b1ed80d-398e-4198-9727-a4292f5ff9c2",
+      "name": "Kitchen Cynics",
+      "region": "tail",
+      "hand_value": 232,
+      "tier": 2,
+      "deezer_id": 1246733,
+      "D": 31,
+      "tier2_evidence": "Deezer id 1246733 \"Kitchen Cynics\" (search rank 1 of 3) shares 1 release title(s) with MusicBrainz 3b1ed80d-398e-4198-9727-a4292f5ff9c2: Beads Upon an Abacus | Deezer catalogue 1 albums",
+      "null_reason": null
+    },
+    {
+      "mbid": "61fb37b5-051d-4685-af8a-f8ca81a88e32",
+      "name": "Acer",
+      "region": "tail",
+      "hand_value": 0,
+      "tier": 2,
+      "deezer_id": null,
+      "D": null,
+      "tier2_evidence": null,
+      "null_reason": "no_musicbrainz_release_titles_to_corroborate_against"
+    },
+    {
+      "mbid": "3ce1e01a-df79-44f1-904d-16a984465e7a",
+      "name": "Ancestral Voices",
+      "region": "tail",
+      "hand_value": 1017,
+      "tier": 1,
+      "deezer_id": "8787666",
+      "D": 286,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "0a0fffcb-c849-4405-8c6e-3f80bce15155",
+      "name": "Eneda Tarifa",
+      "region": "tail",
+      "hand_value": 6504,
+      "tier": 1,
+      "deezer_id": "7573862",
+      "D": 526,
+      "tier2_evidence": null,
+      "null_reason": null
+    },
+    {
+      "mbid": "8455affb-6a3f-4d86-a035-3f42227cdcd9",
+      "name": "INFIDELIX",
+      "region": "tail",
+      "hand_value": 19870,
+      "tier": 2,
+      "deezer_id": 4484762,
+      "D": 3390,
+      "tier2_evidence": "Deezer id 4484762 \"INFIDELIX\" (search rank 1 of 5) shares 7 release title(s) with MusicBrainz 8455affb-6a3f-4d86-a035-3f42227cdcd9: Anthem of the Lost (Live @ Red Raven Studios); Busk Life; Human vs Human; Megaman | MB context: DE / 1985 | Deezer catalogue 33 albums",
+      "null_reason": null
+    },
+    {
+      "mbid": "7a27e44a-dfc1-44c0-a615-8efaf1dccf42",
+      "name": "DTX",
+      "region": "tail",
+      "hand_value": 0,
+      "tier": 2,
+      "deezer_id": null,
+      "D": null,
+      "tier2_evidence": null,
+      "null_reason": "no_musicbrainz_release_titles_to_corroborate_against"
+    },
+    {
+      "mbid": "f208db01-d4c8-4e77-85af-449a38631b04",
+      "name": "Kira Puru",
+      "region": "tail",
+      "hand_value": 11613,
+      "tier": 2,
+      "deezer_id": 890732,
+      "D": 135,
+      "tier2_evidence": "Deezer id 890732 \"Kira Puru\" (search rank 1 of 5) shares 1 release title(s) with MusicBrainz f208db01-d4c8-4e77-85af-449a38631b04: Everything Is Better Without You | MB context: AU | Deezer catalogue 11 albums",
+      "null_reason": null
+    },
+    {
+      "mbid": "f86df97f-4bbc-4e5b-93b6-f921cdd7e2eb",
+      "name": "Statue",
+      "region": "tail",
+      "hand_value": 422,
+      "tier": 2,
+      "deezer_id": 1305886,
+      "D": 1083,
+      "tier2_evidence": "Deezer id 1305886 \"Statue\" (search rank 1 of 5) shares 2 release title(s) with MusicBrainz f86df97f-4bbc-4e5b-93b6-f921cdd7e2eb: Monument; Natural States / Base | MB context: AU / 2014 | Deezer catalogue 13 albums",
+      "null_reason": null
+    },
+    {
+      "mbid": "c13d9133-5b32-4c9a-bf42-caa6f190fc32",
+      "name": "Dorona Alberti",
+      "region": "tail",
+      "hand_value": 4356,
+      "tier": 2,
+      "deezer_id": null,
+      "D": null,
+      "tier2_evidence": null,
+      "null_reason": "no_musicbrainz_release_titles_to_corroborate_against"
+    },
+    {
+      "mbid": "211771d0-7ca4-4ffe-ac45-3d99985681d8",
+      "name": "Swan Meat",
+      "region": "tail",
+      "hand_value": 20110,
+      "tier": 2,
+      "deezer_id": 11512353,
+      "D": 219,
+      "tier2_evidence": "Deezer id 11512353 \"Swan Meat\" (search rank 1 of 5) shares 6 release title(s) with MusicBrainz 211771d0-7ca4-4ffe-ac45-3d99985681d8: BLOOD SUPERNOVA; FLESHWORLD; Knife Splits Ice; PSYCHOPāTH | MB context: DE | Deezer catalogue 30 albums",
+      "null_reason": null
+    }
+  ]
+}

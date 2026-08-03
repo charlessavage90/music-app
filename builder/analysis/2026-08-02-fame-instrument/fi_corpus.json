@@ -1,0 +1,265 @@
+{
+  "governing_document": "docs/superpowers/specs/2026-08-02-ruler-candidate-shootout-preregistration.md",
+  "section": "RCS §1 -- the corpus (truth side)",
+  "carries_no_candidate_value": "No W or D value appears here. This file is the arbiter side only.",
+  "derivation": {
+    "famous": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)",
+    "tail": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)",
+    "mbid_join_for_tail": "fi_tail_sample.json, by name, as fi_read6.py joins it"
+  },
+  "hand_read_currency": "Spotify monthly listeners",
+  "checks": {
+    "famous_rows": 15,
+    "tail_rows": 15,
+    "distinct_mbids": 30,
+    "famous_values_match_fi_read34": true,
+    "tail_rows_match_fi_read6": true,
+    "zero_hand_rows": [
+      "Acer",
+      "DTX",
+      "Jess Okoro"
+    ]
+  },
+  "rows": [
+    {
+      "mbid": "cc7d4686-ea02-45fd-956e-94c1a322558c",
+      "name": "Lykke Li",
+      "region": "famous",
+      "hand_value": 15000000,
+      "hand_value_as_recorded": "15M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "7adaabfb-acfb-47bc-8c7c-59471c2f0db8",
+      "name": "The Human League",
+      "region": "famous",
+      "hand_value": 6000000,
+      "hand_value_as_recorded": "6M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "dcaa4f81-bfb7-44eb-8594-4e74f004b6e4",
+      "name": "NOFX",
+      "region": "famous",
+      "hand_value": 1000000,
+      "hand_value_as_recorded": "1M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "169c4c28-858e-497b-81a4-8bc15e0026ea",
+      "name": "Porcupine Tree",
+      "region": "famous",
+      "hand_value": 500000,
+      "hand_value_as_recorded": "500k",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "490bde43-5edb-4a93-b3b3-7a0465fd8909",
+      "name": "Television",
+      "region": "famous",
+      "hand_value": 372000,
+      "hand_value_as_recorded": "372k",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "69158f97-4c07-4c4e-baf8-4e4ab1ed666e",
+      "name": "Boards of Canada",
+      "region": "famous",
+      "hand_value": 1000000,
+      "hand_value_as_recorded": "1M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "d5cc67b8-1cc4-453b-96e8-44487acdebea",
+      "name": "Beach House",
+      "region": "famous",
+      "hand_value": 14800000,
+      "hand_value_as_recorded": "14.8M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "f1106b17-dcbb-45f6-b938-199ccfab50cc",
+      "name": "New Order",
+      "region": "famous",
+      "hand_value": 8800000,
+      "hand_value_as_recorded": "8.8M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47",
+      "name": "Love",
+      "region": "famous",
+      "hand_value": 571000,
+      "hand_value_as_recorded": "571k",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "8dcd04e4-7695-4d80-bae9-1d7d680a38ef",
+      "name": "Captain Beefheart & His Magic Band",
+      "region": "famous",
+      "hand_value": 235000,
+      "hand_value_as_recorded": "235k",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "f37c537b-3557-4031-bfd6-ab63ced32854",
+      "name": "10cc",
+      "region": "famous",
+      "hand_value": 6700000,
+      "hand_value_as_recorded": "6.7M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "cd830a8f-89d2-4e96-96cb-7a497e51d437",
+      "name": "Blood Red Shoes",
+      "region": "famous",
+      "hand_value": 168000,
+      "hand_value_as_recorded": "168k",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "32b90c92-9978-4a07-90eb-caa4b22f4907",
+      "name": "Black Rebel Motorcycle Club",
+      "region": "famous",
+      "hand_value": 716000,
+      "hand_value_as_recorded": "716k",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "f1560407-8826-4ec9-b78f-e0c3fa3ea4f5",
+      "name": "Quantic",
+      "region": "famous",
+      "hand_value": 2300000,
+      "hand_value_as_recorded": "2.3M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "b8c5cc4f-239f-4e02-b46f-b040b77c2030",
+      "name": "Nightmares on Wax",
+      "region": "famous",
+      "hand_value": 1700000,
+      "hand_value_as_recorded": "1.7M",
+      "hand_source": "fi_fam4_identity.json (2026-07-25 bypass-run hand reads, identity-confirmed under FAM-AM1.4a)"
+    },
+    {
+      "mbid": "670c165b-96e6-4265-acb8-e1b9a5429aa4",
+      "name": "Muelas de Gallo",
+      "region": "tail",
+      "hand_value": 555857,
+      "hand_value_as_recorded": "555857",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "0ea2b444-9293-47cb-9c94-6e7460b06731",
+      "name": "December Avenue",
+      "region": "tail",
+      "hand_value": 6799036,
+      "hand_value_as_recorded": "6799036",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "21da7c32-2416-4bce-ae28-f9c031fc40e0",
+      "name": "MISSIN",
+      "region": "tail",
+      "hand_value": 505,
+      "hand_value_as_recorded": "505",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "d950c846-4b88-4ecc-927b-051bf886e530",
+      "name": "Jess Okoro",
+      "region": "tail",
+      "hand_value": 0,
+      "hand_value_as_recorded": "0",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "73469fec-1067-467d-a34f-4daf738cae51",
+      "name": "DJ Warlord",
+      "region": "tail",
+      "hand_value": 1922,
+      "hand_value_as_recorded": "1922",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "3b1ed80d-398e-4198-9727-a4292f5ff9c2",
+      "name": "Kitchen Cynics",
+      "region": "tail",
+      "hand_value": 232,
+      "hand_value_as_recorded": "232",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "61fb37b5-051d-4685-af8a-f8ca81a88e32",
+      "name": "Acer",
+      "region": "tail",
+      "hand_value": 0,
+      "hand_value_as_recorded": "0",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "3ce1e01a-df79-44f1-904d-16a984465e7a",
+      "name": "Ancestral Voices",
+      "region": "tail",
+      "hand_value": 1017,
+      "hand_value_as_recorded": "1017",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "0a0fffcb-c849-4405-8c6e-3f80bce15155",
+      "name": "Eneda Tarifa",
+      "region": "tail",
+      "hand_value": 6504,
+      "hand_value_as_recorded": "6504",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "8455affb-6a3f-4d86-a035-3f42227cdcd9",
+      "name": "INFIDELIX",
+      "region": "tail",
+      "hand_value": 19870,
+      "hand_value_as_recorded": "19870",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "7a27e44a-dfc1-44c0-a615-8efaf1dccf42",
+      "name": "DTX",
+      "region": "tail",
+      "hand_value": 0,
+      "hand_value_as_recorded": "0",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "f208db01-d4c8-4e77-85af-449a38631b04",
+      "name": "Kira Puru",
+      "region": "tail",
+      "hand_value": 11613,
+      "hand_value_as_recorded": "11613",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "f86df97f-4bbc-4e5b-93b6-f921cdd7e2eb",
+      "name": "Statue",
+      "region": "tail",
+      "hand_value": 422,
+      "hand_value_as_recorded": "422",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "c13d9133-5b32-4c9a-bf42-caa6f190fc32",
+      "name": "Dorona Alberti",
+      "region": "tail",
+      "hand_value": 4356,
+      "hand_value_as_recorded": "4356",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    },
+    {
+      "mbid": "211771d0-7ca4-4ffe-ac45-3d99985681d8",
+      "name": "Swan Meat",
+      "region": "tail",
+      "hand_value": 20110,
+      "hand_value_as_recorded": "20110",
+      "hand_source": "fi_read6.json (owner's 2026-08-02 tail checklist reads, committed d318089)"
+    }
+  ]
+}

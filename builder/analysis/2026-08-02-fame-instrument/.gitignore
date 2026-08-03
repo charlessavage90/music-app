@@ -1,0 +1,6 @@
+# The union fame snapshot is a large capture, gitignored like every other
+# probe output here. Its identity travels in the COMMITTED sidecar
+# fi_union_snapshot.manifest.json (sha256 + date + counts), which is why the
+# manifest must not be ignored.
+fi_union_snapshot.json
+fi_union_snapshot.json.tmp

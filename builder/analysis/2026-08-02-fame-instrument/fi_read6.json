@@ -1,0 +1,207 @@
+{
+  "confirmed_rows": 15,
+  "readability_floor_12": "READABLE",
+  "spearman": 0.4552,
+  "bar": ">= 0.70",
+  "read": "FAIL",
+  "descriptive_pair_companion_no_bar": {
+    "qualifying_pairs": 40,
+    "agreement": 0.65,
+    "failing_pairs": [
+      {
+        "higher_hand": "Muelas de Gallo",
+        "lower_hand": "DJ Warlord",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Muelas de Gallo",
+        "lower_hand": "Kitchen Cynics",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Muelas de Gallo",
+        "lower_hand": "Ancestral Voices",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Muelas de Gallo",
+        "lower_hand": "INFIDELIX",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Muelas de Gallo",
+        "lower_hand": "Kira Puru",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Muelas de Gallo",
+        "lower_hand": "Swan Meat",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Eneda Tarifa",
+        "lower_hand": "MISSIN",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Eneda Tarifa",
+        "lower_hand": "Kitchen Cynics",
+        "agrees": false
+      },
+      {
+        "higher_hand": "INFIDELIX",
+        "lower_hand": "Kitchen Cynics",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Kira Puru",
+        "lower_hand": "Kitchen Cynics",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Dorona Alberti",
+        "lower_hand": "Kitchen Cynics",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Swan Meat",
+        "lower_hand": "Kitchen Cynics",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Eneda Tarifa",
+        "lower_hand": "Statue",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Dorona Alberti",
+        "lower_hand": "Statue",
+        "agrees": false
+      }
+    ],
+    "zero_hand_rows_excluded_from_pairs_only": [
+      "Jess Okoro",
+      "Acer",
+      "DTX"
+    ]
+  },
+  "excluded_rows": [
+    {
+      "name": "Stéphane Kerecki Quartet",
+      "reason": "no_spotify_page"
+    },
+    {
+      "name": "Nameless",
+      "reason": "no_spotify_page"
+    },
+    {
+      "name": "Joe Franco",
+      "reason": "no_spotify_page"
+    },
+    {
+      "name": "Spectre Meets Torture on the Other Side",
+      "reason": "no_spotify_page"
+    },
+    {
+      "name": "田島賢",
+      "reason": "no_spotify_page"
+    },
+    {
+      "name": "Éric Cantona",
+      "reason": "left_blank"
+    },
+    {
+      "name": "Sharp Veins",
+      "reason": "left_blank"
+    },
+    {
+      "name": "TJ Brown",
+      "reason": "could_not_confirm_identity"
+    },
+    {
+      "name": "M. Baptista Benedict",
+      "reason": "left_blank"
+    },
+    {
+      "name": "eleline△",
+      "reason": "left_blank"
+    }
+  ],
+  "rows": [
+    {
+      "name": "Muelas de Gallo",
+      "hand": 555857,
+      "ruler": 130
+    },
+    {
+      "name": "December Avenue",
+      "hand": 6799036,
+      "ruler": 343
+    },
+    {
+      "name": "MISSIN",
+      "hand": 505,
+      "ruler": 101
+    },
+    {
+      "name": "Jess Okoro",
+      "hand": 0,
+      "ruler": 29
+    },
+    {
+      "name": "DJ Warlord",
+      "hand": 1922,
+      "ruler": 158
+    },
+    {
+      "name": "Kitchen Cynics",
+      "hand": 232,
+      "ruler": 277
+    },
+    {
+      "name": "Acer",
+      "hand": 0,
+      "ruler": 156
+    },
+    {
+      "name": "Ancestral Voices",
+      "hand": 1017,
+      "ruler": 145
+    },
+    {
+      "name": "Eneda Tarifa",
+      "hand": 6504,
+      "ruler": 81
+    },
+    {
+      "name": "INFIDELIX",
+      "hand": 19870,
+      "ruler": 232
+    },
+    {
+      "name": "DTX",
+      "hand": 0,
+      "ruler": 70
+    },
+    {
+      "name": "Kira Puru",
+      "hand": 11613,
+      "ruler": 223
+    },
+    {
+      "name": "Statue",
+      "hand": 422,
+      "ruler": 83
+    },
+    {
+      "name": "Dorona Alberti",
+      "hand": 4356,
+      "ruler": 12
+    },
+    {
+      "name": "Swan Meat",
+      "hand": 20110,
+      "ruler": 270
+    }
+  ]
+}

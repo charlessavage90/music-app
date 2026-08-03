@@ -1,0 +1,26 @@
+{
+ "instrument": "ListenBrainz POST /1/popularity/artist -> total_user_count",
+ "quantity": "fame_lb_raw",
+ "governing_document": "docs/superpowers/specs/2026-08-02-fame-instrument-adoption-preregistration.md",
+ "file": "fi_union_snapshot.json",
+ "sha256": "d9d6d5d340a81875dd795067d6332a40d813ebfb5b8258048290c27f34662ae8",
+ "fetch_date": "2026-08-02",
+ "mbid_count": 93067,
+ "null_count": 4114,
+ "non_null_count": 88953,
+ "population": "union of the adopted artifact and the ALG-B 2026-07-30 full build",
+ "source_artifacts": {
+  "adopted": {
+   "file": "graph-t15-tiebreakfix.bin",
+   "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+   "artists": 74193
+  },
+  "candidate_alg_b": {
+   "file": "graph-algb-full.bin",
+   "sha256": "d008a2b5e0c23cf31b3f12357fa1fccff55d209ec18f54c872cdae9bf4a0757f",
+   "artists": 68467
+  }
+ },
+ "alg_b_only_artists": 18874,
+ "nulls": "measured absences, preserved as JSON null; never a floor value (FAM- section 1, FAM-AM1.8)"
+}

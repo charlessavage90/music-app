@@ -1,0 +1,191 @@
+{
+  "FAM_3": {
+    "rows": [
+      {
+        "name": "Radiohead",
+        "fame_lb_raw": 455551,
+        "fame_lb_pctl": 1.0,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "The Beatles",
+        "fame_lb_raw": 418279,
+        "fame_lb_pctl": 0.999933,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "Metallica",
+        "fame_lb_raw": 337832,
+        "fame_lb_pctl": 0.999676,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "Coldplay",
+        "fame_lb_raw": 447534,
+        "fame_lb_pctl": 0.999987,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "Muse",
+        "fame_lb_raw": 423418,
+        "fame_lb_pctl": 0.999946,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "R.E.M.",
+        "fame_lb_raw": 325464,
+        "fame_lb_pctl": 0.999582,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "Pixies",
+        "fame_lb_raw": 293074,
+        "fame_lb_pctl": 0.999177,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "PJ Harvey",
+        "fame_lb_raw": 207062,
+        "fame_lb_pctl": 0.997074,
+        "at_or_above_0_99": true
+      },
+      {
+        "name": "Pink Floyd",
+        "fame_lb_raw": 362742,
+        "fame_lb_pctl": 0.999811,
+        "at_or_above_0_99": true
+      }
+    ],
+    "passes_at_0_99": 9,
+    "bar": ">= 8 of 9",
+    "read": "PASS"
+  },
+  "FAM_4": {
+    "confirmed_artists": 15,
+    "qualifying_pairs": 34,
+    "readability_floor_10_pairs": "READABLE",
+    "agreement": 0.8235,
+    "bar_pairs": ">= 0.90 direction agreement",
+    "read_pairs": "FAIL",
+    "failing_pairs": [
+      {
+        "higher_hand": "The Human League",
+        "lower_hand": "Porcupine Tree",
+        "agrees": false
+      },
+      {
+        "higher_hand": "The Human League",
+        "lower_hand": "Blood Red Shoes",
+        "agrees": false
+      },
+      {
+        "higher_hand": "10cc",
+        "lower_hand": "Porcupine Tree",
+        "agrees": false
+      },
+      {
+        "higher_hand": "10cc",
+        "lower_hand": "Blood Red Shoes",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Quantic",
+        "lower_hand": "Blood Red Shoes",
+        "agrees": false
+      },
+      {
+        "higher_hand": "Nightmares on Wax",
+        "lower_hand": "Blood Red Shoes",
+        "agrees": false
+      }
+    ],
+    "per_artist_failures": {
+      "The Human League": 2,
+      "Porcupine Tree": 2,
+      "Blood Red Shoes": 4,
+      "10cc": 2,
+      "Quantic": 1,
+      "Nightmares on Wax": 1
+    },
+    "spearman_all_confirmed": 0.4915,
+    "bar_spearman": ">= 0.80",
+    "read_spearman": "FAIL",
+    "artists": [
+      {
+        "name": "Lykke Li",
+        "hand": 15000000,
+        "ruler": 244486
+      },
+      {
+        "name": "The Human League",
+        "hand": 6000000,
+        "ruler": 105157
+      },
+      {
+        "name": "NOFX",
+        "hand": 1000000,
+        "ruler": 128863
+      },
+      {
+        "name": "Porcupine Tree",
+        "hand": 500000,
+        "ruler": 130989
+      },
+      {
+        "name": "Television",
+        "hand": 372000,
+        "ruler": 75209
+      },
+      {
+        "name": "Boards of Canada",
+        "hand": 1000000,
+        "ruler": 180026
+      },
+      {
+        "name": "Beach House",
+        "hand": 14800000,
+        "ruler": 204547
+      },
+      {
+        "name": "New Order",
+        "hand": 8800000,
+        "ruler": 238801
+      },
+      {
+        "name": "Love",
+        "hand": 571000,
+        "ruler": 79592
+      },
+      {
+        "name": "Captain Beefheart & His Magic Band",
+        "hand": 235000,
+        "ruler": 79923
+      },
+      {
+        "name": "10cc",
+        "hand": 6700000,
+        "ruler": 85388
+      },
+      {
+        "name": "Blood Red Shoes",
+        "hand": 168000,
+        "ruler": 106601
+      },
+      {
+        "name": "Black Rebel Motorcycle Club",
+        "hand": 716000,
+        "ruler": 175649
+      },
+      {
+        "name": "Quantic",
+        "hand": 2300000,
+        "ruler": 77925
+      },
+      {
+        "name": "Nightmares on Wax",
+        "hand": 1700000,
+        "ruler": 102827
+      }
+    ]
+  }
+}

@@ -1,6 +1,10 @@
 # Handoff — drop-list wiring, harness repair and the candidate census, 2026-08-02
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions by
+[`2026-08-02-HANDOFF-fame-instrument.md`](2026-08-02-HANDOFF-fame-instrument.md)
+(2026-08-02, evening); authoritative for its own track's internals.** Its "open
+decision" section is discharged: the cap re-evaluation's owner inputs now exist and the
+fame instrument was fixed first. Supersedes
 [`2026-08-01-HANDOFF-no-release-tail.md`](2026-08-01-HANDOFF-no-release-tail.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.

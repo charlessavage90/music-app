@@ -12,11 +12,76 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-02, when the drop rule was WIRED, the pipeline/mirror divergence it opened was CLOSED, and the candidate (`ALG-B`) population was CENSUSED with its own drop list frozen. The next substantial step is the cap re-evaluation pre-registration, and it needs the owner's half before it can be written.**
+**Last updated: 2026-08-02 (night), when the FAME INSTRUMENT WAS FIXED FIRST, per the owner's sequencing ruling: obscurity was REDEFINED as novelty-likelihood (user-relative), `fame_lb_pctl` was ADOPTED as its proxy under a passed validation, and the worldly-fame construct was RETIRED. The owner then ruled a SECOND ordering (2026-08-02, night): the FEATURED-CREDIT FILTER TRACK precedes the cap re-evaluation — the next session's work. The cap re-evaluation pre-registration follows it, written cold by a fresh session, with every owner input already recorded.**
 
 ---
 
 ## Next
+
+> ## ✅ THE FAME-INSTRUMENT TRACK IS COMPLETE, 2026-08-02 (evening). The cap re-evaluation is UNBLOCKED.
+>
+> Entry point is the current handoff:
+> [`2026-08-02-HANDOFF-fame-instrument.md`](2026-08-02-HANDOFF-fame-instrument.md).
+> Reasoning: [`2026-08-02-fame-instrument-execution-log.md`](2026-08-02-fame-instrument-execution-log.md)
+> (§1–§9). Governing documents, each with amendments that are part of the record:
+> [`specs/2026-08-02-fame-instrument-adoption-preregistration.md`](specs/2026-08-02-fame-instrument-adoption-preregistration.md) (`FAM-`),
+> [`specs/2026-08-02-ruler-candidate-shootout-preregistration.md`](specs/2026-08-02-ruler-candidate-shootout-preregistration.md) (`RCS-`),
+> [`specs/2026-08-02-novelty-proxy-validation-preregistration.md`](specs/2026-08-02-novelty-proxy-validation-preregistration.md) (`NOV-`).
+> Figures live in the committed probe JSONs under
+> `builder/analysis/2026-08-02-fame-instrument/` — cited, never restated.
+>
+> **What stands, in one paragraph.** The owner ruled (2026-08-02): the cap
+> re-evaluation's scope includes the data-set switch; its primary outcome is the bypass
+> novelty gradient (`REQ-42` shape); and the instrument is fixed first. Under that
+> sequencing: ListenBrainz listener counts were validated against *worldly fame* and
+> **failed** (`FAM-`, NO ADOPTION); a shootout measured Wikipedia and Deezer also failing
+> to order worldly fame (`RCS-`, "no measured candidate orders the tail");
+> the owner then **redefined the construct** — obscurity = novelty-likelihood,
+> user-relative, audience-pinned (`PRODUCT-REQUIREMENTS.md` Definitions, ratified edit) —
+> and the proxy was **adopted under the redefined construct's own one-way validation**
+> (`NOV-2`: 15/15 obscure-called artists were novel to him; `NOV-AM1` carries the
+> post-result disclosure). **"Fame" in pre-2026-08-02 documents means the retired
+> construct; worldly-fame claims are barred from future criteria until an instrument
+> exists.**
+>
+> **⚠ ORDERING RULED BY THE OWNER, 2026-08-02 (night): the FEATURED-CREDIT FILTER TRACK
+> runs FIRST — the next session's work — and the cap re-evaluation follows it.** Three
+> recorded reasons (design-inputs doc, and the conversation of record): the class is a
+> dormant term that activates only in arms that succeed at pushing obscure; the adopted
+> gradient currency scores a delivered ghost as a success (obscure-and-novel) while it is
+> exactly the bad recommendation the release filter exists to prevent; and the cleanup
+> must be held constant across every cell of the comparison — the same held-constant
+> principle that censused both drop lists, and the same clean-first-then-compare ordering
+> the owner ruled for the drop-rule wiring. Shape: the adopted rule's shape, not a purge
+> — a keep-check (commercial-DSP presence + something plays) keeps featured-credit
+> artists who are also small real acts (TJ Brown, 8,274 Spotify monthly listeners, is
+> the worked keeper case). The detector is offline (primary-artist vs appears-on split
+> from the MB release dump on disk); the wiring machinery all exists from the drop rule.
+> Rule designed cold; **whether it gets its own small calibration hand-review is the
+> owner's spend, flagged not decided.** Evidence: execution log §5/§5a; two worked
+> instances (田島賢, TJ Brown) plus the FAM-6 no-page rows.
+>
+> **After it: the CAP RE-EVALUATION PRE-REGISTRATION, written cold by
+> a fresh session, in the adopted currency.** **Its single design-input address is
+> [`2026-08-02-cap-reeval-design-inputs.md`](2026-08-02-cap-reeval-design-inputs.md)** —
+> the owner's rulings, the candidate families spelled out, the supply×pricing synthesis,
+> the blind-listen lineage, the tag constraints, and the labelled hypothesis with its
+> cheap first read. Summary of the rulings (execution log §1): candidate families (a)–(d) including the owner-triggered tag-based
+> degree limiter and staged router-priced unbounded; coverage as guard-only at ~10,000;
+> hubness-rising-with-depth as the per-arm kill; LB similarity the sole source of edge
+> existence, tags only re-order/re-weight/remove; router pricing in scope (any pricing
+> arm consumes `TB-P5H-7`); gradient claims must exceed 10× the ruler's measured
+> quantisation step (`FAM-AM1.3`); the population-vs-descent confound goes in its factor
+> table (`FAM-AM1.7`). Design note from the marks: famous-band interiors are ~73% novel
+> to the owner (log §8) — the famous band is not a novelty dead zone.
+>
+> **Owner rulings from this track that must not be re-opened:** no re-read of prior
+> fame-scored results; the drop-list population re-scope (`FAM-AM2`); the `RCS-AM1`
+> widening (closed five-row list, no third widening); the `NOV-AM1` adoption. Dead
+> unless new grounds: Deezer and Wikipedia as fame instruments. Retired, not to be
+> re-run: `NOV-1` (mis-designed against its own governing document — log §8).
+>
+> ---
 
 > ## ✅ THE DROP RULE IS WIRED, AND BOTH POPULATIONS NOW HAVE A DROP LIST, 2026-08-02.
 >
@@ -42,9 +107,10 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 >
 > **The next substantial step is the CAP RE-EVALUATION PRE-REGISTRATION**, written cold by a
 > fresh session. Every input now exists — Track B as measured input, the `WGT-` device
-> recommendation, and both drop lists. **What it needs from the owner first, because it is
+> recommendation, and both drop lists. ~~**What it needs from the owner first, because it is
 > his column:** how much better a connection rule must be to justify a rebuild, and whether
-> the data-set switch is inside its scope or a separate question.
+> the data-set switch is inside its scope or a separate question.~~ *(DISCHARGED 2026-08-02
+> evening — both answered, plus the instrument-first sequencing; see the top section.)*
 >
 > **Two rulings from 2026-08-02 that must not be re-opened:** the drop rule is **not**
 > re-validated on the candidate population (execution log §5 — the decisive point is that no
@@ -265,15 +331,12 @@ read measured where it can and cannot be moved; the results note owns that readi
 
 ## PARKED — owner's explicit decision; his trigger, never a session's
 
-- **Whether the fame instrument is fixed BEFORE or AFTER the graph work** — the sequencing
-  question `FPC-9` raised. The ruler is adequate for what the router does today (`FPC-2`)
-  and blind on 38.7% of what it would deliver on the most obscure route the graph admits
-  (`FPC-9`), so **the criteria that would judge a successful obscurity push are the ones
-  that go blind during it.** The retiring session's position, argued in the handoff: do it
-  first. **`FPC-2` and `FPC-9` must be quoted together; either alone gives the wrong
-  answer.**
-- **Whether a currency change re-reads prior fame-scored results** — must be fixed *before*
-  any recompute, never after seeing one. `FPC-1`/`FPC-2` say nothing currently needs it.
+- ~~**Whether the fame instrument is fixed BEFORE or AFTER the graph work**~~ — **RULED
+  AND DONE 2026-08-02: before, and it was.** The `FPC-2`/`FPC-9` pairing rule stays for
+  reading that record. Struck, kept for the record.
+- ~~**Whether a currency change re-reads prior fame-scored results**~~ — **RULED
+  2026-08-02: NO re-read.** Prior results stand in their measured currency;
+  cross-currency comparisons barred. Struck, kept for the record.
 - **The coherence thread** — execution log
   [`2026-07-30-fame-proxy-coverage-execution-log.md`](2026-07-30-fame-proxy-coverage-execution-log.md)
   §7. **Its instrument half was probed 2026-07-30 and the kill gate fired** (`COH-`,
@@ -338,12 +401,14 @@ read measured where it can and cannot be moved; the results note owns that readi
    pre-flight a successor should repeat.
 
 **Nothing is owed by the owner as an action.** What remains for him is decisions only —
-merging the open PR, and the triggers named in the parked list and the deferral table.
+merging PR #66 (the fame-instrument branch), and the triggers named in the parked list
+and the deferral table.
 
-**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry was checked by
-the owner on 2026-08-02 and came back clean — the live site builds journeys and plays clips
-after the `--prune` pass, confirming the two deleted files were genuinely orphaned.
-Everything else there is dormant until a graph is rebuilt.
+**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry (2026-08-02
+evening, the fame-instrument track) is N/A — nothing app-facing changed and nothing is
+running. The prior entry was checked by the owner on 2026-08-02 and came back clean — the
+live site builds journeys and plays clips after the `--prune` pass. Everything else there
+is dormant until a graph is rebuilt.
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
 
@@ -422,8 +487,8 @@ Everything else there is dormant until a graph is rebuilt.
 | ✅ **Track B runs and reads** (`CB-5`/`CB-6`) | **DISCHARGED 2026-07-30** — run to completion; results note is the record. Struck, kept for the record. |
 | ✅ **`CRS-A5` endpoint re-verification** | **DISCHARGED 2026-07-30** — one request at scoring time, 200, companion delivered descriptive-only. Struck. |
 | **`FPC-9`'s falsifier — an obscure-endpoint pair set for floor reach** | **If any realistic candidate device reaches materially more obscurity than production.** `FPC-9` used Track 3's `LIMIT` arm, a ceiling rather than a shippable route, and rests on 62 interiors from one arm on twelve pairs. Falsified by a device that reaches more obscurity *without* approaching `LIMIT`'s interior percentiles. |
-| **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **When, and only when, a currency decision is made.** Its current sentence ("blind in the modern-obscure tail") is *true*, so adding `FPC-3`/`FPC-9`'s extent is growth in the owner's own requirements layer, not a correction. Raised by the doc-auditor 2026-07-30 and deliberately not actioned. |
-| **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **If a currency decision adopts the MBID-keyed proxy.** ~33k pageview requests, ~3–4 h, resumable. The `--validate` path already answered the decision-relevant question; the build is only needed once something scores against it. |
+| ✅ **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **DISCHARGED 2026-08-02 — the condition fired and the edit landed.** The currency decision was made; the Definitions entry now carries `FPC-3`/`FPC-9`'s extent inside the retirement paragraph of the worldly-fame construct (owner-ratified edit). Struck, kept for the record. |
+| ✅ **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **CLOSED 2026-08-02 — the path is known-unreachable, not deferred again.** The currency decision adopted the LB proxy and **retired the worldly-fame construct**, so the condition ("adopts the MBID-keyed proxy") can never fire. Reopening requires a worldly-fame instrument to exist at all, which `RCS-` measured as currently unachievable. Struck, kept for the record. |
 | ✅ **MusicBrainz tag/genre coverage as a coherence instrument** | **DISCHARGED 2026-07-30** — the coherence tag probe ran exactly this check and its kill gate fired (`COH-2`, vocabulary-robust per `COH-6`); the retrodiction stayed unrun. Struck, kept for the record. |
 | ✅ **Adding `analysis` to builder's `testpaths`** | **DECLINED BY THE OWNER 2026-08-01 — closed, not deferred again.** Its condition fired at the closeout retiring the `TAS-` probe, and he ruled: **frozen code should not be tested by default.** `testpaths` stays `["tests"]` (`builder/pyproject.toml:25`); probe tests run only when a directory is named explicitly. The reasoning is durable rather than circumstantial — probe tests guard research code nothing ships and nobody will edit again, so collecting them would gate unrelated builder merges on a frozen artifact's committed JSON or a vanished scratch capture. **A future probe does not reopen this**; it inherits the same answer. Struck, kept for the record. *(This row carried a count of "34" until 2026-07-30; it was stale, and the count was never this document's to own — read it off `pytest analysis/ -q`.)* |
 | **Replacing mutual k-NN with a tag-based degree limiter** | **Owner-raised 2026-07-30, ruled SEPARATE and explicitly NOT ruled out.** Needs its own pre-registration designed cold; mixing it with `TAS-` would make every attribution ambiguous. Track B's `R1a` corroborates the premise — reciprocity in isolation at k = 100 was null on both archives. **Condition: if the owner triggers it**, as with every other cap-adjacent decision. |
@@ -442,6 +507,11 @@ Everything else there is dormant until a graph is rebuilt.
 | ⚠ **The Deezer id path inherits MusicBrainz's link accuracy — it is not "strictly better"** | **Before `BYP-13` is described as closed, and before any figure is put on the improvement.** MusicBrainz sometimes links an artist to a *duplicate* Deezer page rather than the real one. Two observed by hand: Radiohead's recorded link has 473 followers and **0 albums** (so it serves nothing and falls back to name search — fails safe), and Orbital's has **20 followers and does serve tracks** — where the id path would replace a correct name-search result with a worse one. Sampled over 60 delivered artists carrying an id: **59 of 60 serve a track from the id**, and 6 of those are thin pages, of which most are *genuinely* obscure artists rather than duplicates. So the new failure mode is real but small against the 9.4% / 6.1% it removes; **the net is clearly positive and the direction of every individual case is not guaranteed.** A session must not restate this as "strictly better by construction" — that claim was made on 2026-08-02 before this was measured, and is withdrawn. Cheap targeted mitigation if wanted: validate links for the top popularity decile only (~7,400 lookups), where a duplicate is both most detectable (expected follower count is high) and most damaging (those artists are delivered most often). |
 | ✅ **The Deezer id map covers only the adopted population** | **DISCHARGED 2026-08-02 — the map now covers the UNION of both populations**, so the cap re-evaluation cannot trip a coverage condition mid-experiment. 93,067 artists (adopted 74,193 + `ALG-B` 68,467, overlapping), **39,465 ids**. The `ALG-B` graph used is the 2026-07-30 full build (sha `d008a2b5…`, manifest-verified), which predates the drop rule and the nameless fix and is therefore a **superset** of any final `ALG-B` build — safe by construction, since an MBID absent from a build is a no-op, and the same reasoning the candidate tail census used. Adopted-population coverage is unchanged at 34,988 / 47.2%, which is the consistency check that the union did not perturb it; `ALG-B`-only artists cover 4,477 of 18,874 (**23.7%**), consistent with that population being deader. An artist outside the union still falls back to name search. Struck, kept for the record. |
 | **The Deezer id map is a dated snapshot and will age** | **Whenever it is next questioned; no automatic trigger exists.** Frozen 2026-08-02 because `build_from_archive` is offline by a hard rule and spec §9 requires byte-identical builds. A link that goes stale 404s, which `_get` treats as a miss rather than a refusal, so the card degrades to name search rather than going silent (pinned by `test_a_stale_id_falls_back_to_name_search_rather_than_giving_up`). Refreshing is a deliberate act with its own decision. |
+| **The featured-credit residual class in the release filter** — artists kept because credits count as release groups, while having no primary-artist existence (two worked instances: 田島賢, TJ Brown; mechanism closed via `LBS-1`'s 0.25 featured weight) | **✅ TRIGGERED BY THE OWNER 2026-08-02 (night) and ORDERED FIRST — it precedes the cap re-evaluation; see the top block.** Designed cold as a new product decision extending the adopted rule, never re-litigating it. Detector is cheap and offline: the primary-vs-appears-on split from the MB release dump on disk. Evidence: execution log §5/§5a. |
+| **Known-press telemetry as the novelty proxy's long-run validator** | **When enough `known` presses exist to read.** Named in the Definitions entry and `NOV-` §3; nothing to build now. |
+| **A worldly-fame instrument does not exist** | **Accepted; claims in that currency are barred until one does** (Definitions ruling). Reopen only if a product need for worldly fame appears — the `RCS-` corpus and its committed hand values are the reusable starting point. |
+| **The TJ Brown late hand read** (8,274 monthly listeners, ruler 218) | **Usable by a future corpus at design time only** — never a post-hoc addition to a read set (log §5a). |
+| **`REQ-Q1`'s telemetry revisit condition FIRED and was not taken** | **The owner's call, separately from anything here** — whether live telemetry converges on the offline currency now that a per-mbid source exists. Flagged in the requirements text itself. |
 | **Apple/iTunes ids are measured but not shipped** | **If the residual `BYP-13` rate after the Deezer path is judged too high.** Adding them takes delivered-artist coverage from **92.9% to 94.1%** of card impressions — 1.2 points — and the Apple-id-to-iTunes-lookup path has never been run here, unlike the Deezer one (`tail_clips.py:137`). Figures: `builder/analysis/2026-08-02-dsp-ids/dsp_ids.json`. |
 | **A blind listen isolating the post-drop graph** (`REQ-38`) | **ANSWERED BY THE OWNER 2026-08-02: not now, and this is a deferral with a condition rather than an open question.** ⚠ **The previous wording — "whether the post-drop graph *owes* a blind listen" — misread `REQ-38`, and a session must not restore that framing.** Read from source, `REQ-38` says blind listening is the **primary evaluation method** and offline metrics must not override listener judgment: a rule about **how a judgment is made when one is being made**, not a debt every graph change incurs. No isolated adoption decision about the post-drop graph is pending, so nothing triggers it. **The owner's decisive argument, and it stands on its own:** every outcome leads to the same place — a pass adopts, and a failure still would not revert to delivering release-less artists, only change the exclusion mechanism. A test whose branches share a direction is not informing a decision. **Corroborating evidence he did not cite:** `TAS-` measured **zero** bottom-decile interior artists across 120 journeys, and the release-less tail sits overwhelmingly in that region — so the dropped artists were largely never delivered, and the drop's audible effect is second-order (shifted marginals, ~109 stranded of 74,193). **The one real cost, named rather than dismissed:** if the cap re-evaluation yields a rebuild, the drop is permanently confounded with the cap change and only the combined result is ever heard. That is why the option is preserved rather than closed. **Condition to spend it:** if the post-drop graph is ever proposed for adoption **as the only change** (the cap re-evaluation returns no rebuild), **or** if a combined rebuild sounds worse and the cause needs decomposing. **The instrument is already preserved** — `drop_no_release_tail` exists as an experimental control so a build can hold the drop constant in a factor table, so deferring costs no future capability. Distinct from the rule's own acceptance, which is closed. |
 | **The label-affinity / clustering data asset** | **The owner's trigger.** `wgt_release_raw.json` side-collected record-label credits, countries and years per graph artist; nothing consumes it. His style-vocabulary read adds: for the curated Discogs styles, carrier count alone tracks usability — the clustering idea keeps its value for the open MB tag space, where frequency separates nothing. |
