@@ -603,11 +603,74 @@ cells, bars, read order — is the author's column and is fixed here.
 
 ## §8 — Amendments
 
-None at freeze. Rules: amendments are appended, never edited in place; an amendment
-written after any result exists says so at its head and names the hazard (the
+Rules: amendments are appended, never edited in place; an amendment written after
+any result exists says so at its head and names the hazard (the
 `TAS-AM3`/`NOV-AM1`/`FCF-AM1` disclosure precedent); a router-side tag arm, if
 `CRE-D1` licenses one, is defined by amendment **before** it is built, with its
 scrambled-labels control named in the same amendment.
+
+### `CRE-AM1` — `S2`'s ceiling ranking gains within-artist vote weighting; appended 2026-08-03, AFTER the `WAV-` results existed and BEFORE any `CRE` stage ran
+
+**Disclosure first, per this section's own rule.** This amendment is written with
+the `WAV-` read's figures on the table
+(`builder/analysis/2026-08-03-within-artist-votes/`, run earlier today): movement
+0.1126 turnover vs rarity at λ = 1, redundancy −0.0072 vs rarity, mean-weight fame
+correlation −0.5221. The hazard of amending post-result is fitting the design to a
+known number; what bounds it here is that **the change adopts a scheme whose own
+one-shot read FAILED its pre-registered conjunction**, on an owner ruling that
+supersedes the failed bar's *consequence*, not its *figures* — nothing below
+re-reads, re-runs, or re-scores anything in the closed `WAV-` record.
+
+**The owner's ruling, 2026-08-03, verbatim in substance:** within-artist vote
+weighting — an artist's higher-voted tags treated as more relevant than its
+drive-by tags, relative to that artist's own vote distribution — is an obviously
+sound way to discriminate between tags in this format, and is to be pursued.
+Recorded context for the ruling: he had understood vote weighting to be part of
+the previously assessed (`WGT-`) mechanism; it was not — `WGT-` assessed only the
+absolute-scale scheme, so its "no evidence strength" recommendation was never a
+verdict on this formulation. The direction question — the weighting pattern leans
+*away* from famous artists (ρ = −0.52), which is what tripped `WAV-3`'s
+undirected bar — **is ruled acceptable by the owner**: what counts as better is
+his column, and the hazard `WAV-3`'s plain sentence named (leaning *toward* fame)
+is the direction that did not occur. The `WAV-` README's closure stands as
+written; a one-line pointer there marks this ruling.
+
+**The change.** §3.2's single differing knob — the ranking that decides which
+edges an over-budget node loses — becomes: **LB similarity re-weighted by the
+`evidence_rel` agreement measure** (rarity-weighted `W4` agreement with
+within-artist vote strength: `Σ idf·min(e_rel) over ∩ ÷ Σ idf·max(e_rel) over ∪`,
+with `e_rel(a,l) = log1p(s)/log1p(s_max(a))` capped at 1, exactly as committed
+and instrument-verified in `wav_read.py` — `WAV-0d`'s degeneracy check is the
+proof that this measure reduces to rarity wherever votes are absent, which keeps
+the dark-tail rule intact by construction). Everything else in §3.2 — union
+source, post-symmetrise whole-edge ceiling, budget, largest-component prune,
+unlabelled edges competing on LB similarity alone — is unchanged, so the
+one-column isolation of every `S2` row survives: the knob is still "the ceiling's
+ranking function", now with votes inside it.
+
+**The empirically open question, gated rather than assumed.** `WAV-1`/`WAV-2`
+establish the scheme moves selections materially without restating similarity.
+What no read has measured is **attribution**: whether the movement comes from
+*which tags the votes sit on*, or whether any within-artist weight spread of the
+same shape would move selections the same way. That is `TAS-AM5c`'s any-cost
+lesson at the vote layer, and it is gated at the sweep with `CRE-C5`'s existing
+machinery: **every `S2` cell now carries a second companion — the within-artist
+vote scramble** (each artist's label strengths permuted among its own labels
+before `e_rel` is built, preserving the artist's vote-distribution shape and
+therefore the mean-weight fame profile, destroying only which tag each vote
+attaches to). `CRE-C5` applies to it verbatim — same entry condition (real
+Δgain ≤ −0.05), same paired-difference CI test. Sentence licensing: **"tags did
+this" requires beating the label-scrambled companion; "votes did this" requires
+beating the vote-scrambled companion**; a cell that beats neither has its outcome
+reported with no attribution sentence at all. `CRE-D1` is untouched — it tests
+the owner's banding hypothesis, not this device — and the probe cell E-S2-P0
+remains branch-proof and part of the specified run.
+
+*Plain, for the record: the map-builder will now let a very-connected artist keep
+the connections its own listeners' votes say are most representative of it —
+and before any conclusion credits the votes for an improvement, we check that
+shuffling each artist's votes among its own tags would not have produced the
+same improvement.*
 
 ## §9 — Revision record (2026-08-03, before freeze, before any run)
 

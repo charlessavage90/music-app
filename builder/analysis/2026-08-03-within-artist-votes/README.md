@@ -20,7 +20,16 @@
 > own one-shot rule. **The consequence mapping fires as committed: no `CRE-`
 > amendment, the read is closed.** Any revisit is a new read designed cold with a
 > direction-aware contamination criterion — new grounds, the owner's trigger,
-> never a re-read of this one. Ordered by the owner
+> never a re-read of this one.
+>
+> **2026-08-03, later: the owner's trigger FIRED.** He ruled the direction question
+> (his column — the anti-fame lean is acceptable; the hazard `WAV-3` named is the
+> direction that did not occur) and ruled the scheme pursued. **`CRE-AM1`** in the
+> cap re-evaluation pre-registration records the ruling, adopts the scheme into
+> `CRE-S2`'s ceiling ranking, and moves the one open question (vote attribution) to
+> a pre-registered sweep-level gate. **This read's record, figures and closure are
+> unchanged** — the amendment supersedes the consequence mapping's product effect on
+> the owner's authority, not the read. Ordered by the owner
 2026-08-03, before `CRE-S2` is built: *where one artist has many tags, treat that
 artist's higher-voted tags as more relevant than its drive-by tags — relative to the
 artist's own vote distribution, so that obscure artists' fewer votes are not
