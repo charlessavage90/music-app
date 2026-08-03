@@ -214,3 +214,52 @@ this interpreter; entity-expansion reachable in principle but the input is a loc
 there; adding it here alone would make the three instances inconsistent for no
 exposure change. Recorded for the NEXT.md deferral row at closeout rather than fixed.
 `src/` and `tests/` remain clean.
+
+## §8 — Closeout (2026-08-03)
+
+**The owner ruled ADOPTION, 2026-08-03, without the calibration hand-review** — the
+flagged decision is discharged as DECLINED, with the amendment's enlarged no-lookup drop
+population in front of him. Merging PR #67 is the enactment. He also ruled closeout runs
+*before* the merge so its documentation updates ride the PR — which is this section.
+
+**Gate outcomes, complete:** FCF-3 zero refusals, both captures, first pass each. FCF-5
+passed twice (first freeze and re-freeze). The `FCF-AM1` superset assertion passed on
+both populations. Mutation checks: stage deletion 6 red, one-list behaviour 5 red. No
+gate failed; none was worked around.
+
+**Closeout check outcomes:**
+- **A4 (default-flip):** `drop_featured_credit` defaults **on** — the new behaviour
+  ships with the merge; no knob left at old behaviour. The filter is inert until a
+  rebuild, which is the track's designed relationship to the cap re-evaluation, not
+  unshipped work.
+- **A5 (processes):** all four ports checked, no listeners; every background task this
+  session started ran to completion. Nothing left running.
+- **B1:** lint run — 2 hard failures, both the new documents unclassified in
+  `docs/README.md`, fixed at this closeout; `doc-auditor` dispatched scoped to the
+  diff, outcome recorded below when it reported.
+- **B2 (reachability):** `featured_credit_drop.py` is imported by `pipeline.py` and the
+  test file; every probe script is reachable from the probe README. No orphans.
+- **B3 (vacuous tests):** discharged by the two mutation runs above, which are exactly
+  this check performed deliberately.
+- **B5:** `.claude/` greps clean — nothing there describes the pipeline's drop stages
+  or restates a figure this work moved. `docs/` references to the class all live in
+  documents this track owns or in `NEXT.md`, rewritten at this closeout.
+- **D2 (fixtures):** not applicable — no graph artifact changed; the committed 500-node
+  test fixtures are inputs, not outputs, of this work.
+- **D3 (provenance):** the frozen lists are committed as package data with shas pinned
+  three ways (module constants, in-file keys, tests); no uncommittable artifact was
+  produced.
+- **Kill check:** nothing killed; the one closed path is the hand-review, closed by
+  owner ruling rather than unreachability.
+
+**Operational measurements with no other home:** release-group dump pass 2.2 min at
+~130 MB/s; Discogs XML pass 20.6 min (presence) and 19.5 min (split); the clip-stage
+pricing figure (~45 min / 1,400) held within minutes across both captures.
+
+**D6 standing-layer measurement:** unconditional **44,494 chars**, conditional **2,155
+lines** — both deltas exactly **zero** against the fame-instrument closeout's recorded
+figures (its §10 table, including the owner-approved +249 orient-table pointer). This
+track changed neither `CLAUDE.md`, nor `.claude/`, nor `memory/`.
+
+**D4 suite outcomes, run at this closeout:** builder 164 passed, api 230 passed,
+frontend 107 passed (18 files).

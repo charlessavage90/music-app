@@ -139,10 +139,13 @@ originals remain in the record as the pre-amendment freeze.
 ## FCF-6 — Not decided here, and by whom
 
 - **Adoption** — the owner's, on the presented result (four-part format, the TJ Brown
-  residual named).
+  residual named). **✅ RULED 2026-08-03: ADOPT, enacted by merging PR #67.**
 - **The calibration hand-review** — the owner's spend, flagged not decided
   (`NEXT.md`). The census gives it a concrete shape if he wants it: a small hand sample
   of the mechanical drop side, measuring how often "no MB DSP link" means "no page"
-  versus "page MB never recorded".
+  versus "page MB never recorded". **✅ RULED 2026-08-03: DECLINED — adopted without
+  it, with the amendment's enlarged no-lookup drop population in front of him. The
+  drop-side false-positive rate is accepted as unmeasured; do not re-propose absent new
+  grounds.**
 - **Snapshot refresh** — as with every frozen list, a deliberate future act, no
   automatic trigger.
