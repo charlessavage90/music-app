@@ -336,4 +336,4 @@ work, per the standing instruction in `NEXT.md`.
 | D2 | N/A — the graph did not change; fixtures untouched. |
 | D3 | Snapshot sha256 `d9d6d5d3…` in the committed manifest; both source artifacts sha-verified before every use (executor reports + `fi_stats`). |
 | D4 | **builder 151 passed; api 230 passed; frontend 107 passed** — pasted from runs, not asserted. |
-| D6 | Unconditional layer **44,245 chars**, conditional **2,155 lines**. **Both deltas zero**: no `CLAUDE.md`/`.claude/` change on the branch, `memory/` untouched. |
+| D6 | Unconditional layer **44,245 chars**, conditional **2,155 lines**. Both deltas zero at closeout: no `CLAUDE.md`/`.claude/` change on the branch, `memory/` untouched. **Post-closeout, owner-approved growth: +249 chars → 44,494** — the orient-table pointer that "fame" changed meaning 2026-08-02 (case stated in commit `cfe367a`; its message says +254 from a pre-measurement estimate — the log's figure is the measured one). Conditional unchanged. |
