@@ -22,7 +22,7 @@ before Seam 3. The owner's one action is merging draft PR #71; execution then re
 
 ## Next
 
-> ## ▶ STAGE 2 GATES AND ALL SIXTEEN SWEEPS ARE COMPLETE, 2026-08-03 (mid-flight — Seam 3 NOT reached). **The owner's one action is merging draft PR #71**; the next work is `CRE-T11` on branch `cap-reeval-stage2`.
+> ## ▶ STAGE 2 GATES AND ALL SIXTEEN SWEEPS ARE COMPLETE, 2026-08-03 (mid-flight — Seam 3 NOT reached). **The owner's one action is merging draft PR #71**; the next work is `CRE-T11` — **branching off `main` if #71 has merged, continuing on `cap-reeval-stage2` if it has not. Check, do not assume**: a handoff cannot know when merge is pressed, and the Seam 1 handoff named a branch its own PR merged out from under it.
 >
 > Entry point is the current handoff:
 > [`2026-08-03-HANDOFF-cre-run-stage2-midflight.md`](2026-08-03-HANDOFF-cre-run-stage2-midflight.md).

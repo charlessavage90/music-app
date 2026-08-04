@@ -15,6 +15,12 @@ Branch `cap-reeval-stage2`, draft **PR #71**. Tree clean and pushed; **nothing i
 flight** — no background job, no dispatched subagent, no partial directory, no listener on
 any port.
 
+**Which branch to work on — check, do not assume.** If **PR #71 has merged**, branch fresh
+off `main`. If it has not, continue on `cap-reeval-stage2`. `git log --oneline -1 main`
+settles it in one command. This is written conditionally on purpose: the Seam 1 handoff
+named a branch that its own PR merged out from under it, and the successor had to work that
+out cold. A handoff cannot know when the owner will press merge, so it must not pretend to.
+
 ## The next session's work: `CRE-T11`
 
 Continue
