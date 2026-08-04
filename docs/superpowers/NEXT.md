@@ -22,7 +22,7 @@ UNTAKEN and untouched by any listen outcome.**
 
 ## Next
 
-> ## ▶ THE GENTLE-ARM BLIND LISTEN (`GBL-`) IS SPECIFIED AND PLANNED, 2026-08-04 (evening). **The owner's one action is STARTING A FRESH SESSION ON OPUS** to execute the plan inline (executing-plans) on branch `gentle-arm-blind-listen`.
+> ## ▶ THE GENTLE-ARM BLIND LISTEN (`GBL-`) IS SPECIFIED AND PLANNED, 2026-08-04 (evening). **The owner's one action is STARTING A FRESH SESSION ON OPUS** to execute the plan inline (executing-plans) on branch `gentle-arm-blind-listen` (draft PR #77 — it stays open through execution; merge is a later decision).
 >
 > Entry point is the current handoff:
 > [`2026-08-04-HANDOFF-gbl-plan.md`](2026-08-04-HANDOFF-gbl-plan.md).

@@ -6,8 +6,8 @@ actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md
 owns it.
 
 **This is a SEAM handoff.** The planning chunk is complete: spec committed and
-owner-reviewed twice, plan committed, branch `gentle-arm-blind-listen` pushed, draft PR
-open (number in `NEXT.md`). Nothing is in flight — no background job, no subagent, no
+owner-reviewed twice, plan committed, branch `gentle-arm-blind-listen` pushed, draft
+**PR #77** open. Nothing is in flight — no background job, no subagent, no
 listener on any port (8000/5173/8138/8139/8765 all checked empty).
 
 ## The next work, and who does it
