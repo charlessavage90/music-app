@@ -148,3 +148,40 @@ production's path — the half a `+ 0.0` implementation would pass and a wrong-`
 fails.
 
 14 tests pass across the three modules.
+
+---
+
+## §3 — `CRE-T3`: `CRE-D3`, the pricing prior
+
+**Figures: `builder/analysis/2026-08-03-cap-reevaluation/cre_d3.json`.** Cited by key,
+never restated here.
+
+Ran on the adopted artifact with no build, per §3.3's carve-out — 22 famous pairs, arms
+`P0` / `P1a` / `P1b` plus the instrument-only extreme at r = 1.0. 53 seconds, consistent
+with the critique's measured V1 runtime rather than the first draft's estimates.
+
+**All three gates passed:** d0 identity against `P0` on every arm and every pair; device
+liveness at the extreme (19 of 22 d1 journeys change — `gates.device_liveness_at_extreme`,
+bar 0.5); and `CRE-G2(b)` cost decomposition on 132 journeys at k = 1 and k = 10.
+
+**Branch: `inert_as_expected`** — the pre-registered expected outcome. Both candidate
+settings sit inside the 0.015 instrument floor, so the stored `consequence` field carries
+§4's wording verbatim, and that is what a later `CRE-R0` is bound to. **No pause is
+triggered**; the contradiction branch (Δ ≤ −0.05) was not reached.
+
+**The extreme arm is the part worth reading, and it is a stronger prior than the
+candidate arms alone.** At r = 1.0 — a price no candidate carries — the device
+demonstrably *works*: it reroutes 19 of 22 first-press journeys. And it still moves the
+`C1` gradient by two orders of magnitude less than the floor. So the null here is not
+"the knob is not connected", which is exactly the ambiguity the liveness check was added
+(analyst B1) to remove. **The device is live and the gradient does not move**, which is
+the supply reading, not a pricing-strength reading.
+
+**One thing this run does NOT establish, and it matters for T9/T10.** Every interior
+slot at every depth on every arm was ruler-**measured**: `interiors_null_in_snapshot`,
+`interiors_absent_from_snapshot` and `null_interior_unbypassable` are zero throughout,
+which is what the plan expected on `ALG-E`. So pins 2 and 3's reporting machinery ran but
+had nothing to count — **a green from those counters here is not evidence they work.**
+Their first real exercise is the `ALG-B` and union/uncapped cells, where the absent class
+exists by construction. A liveness check on those counters is owed at the sweeps rather
+than assumed.

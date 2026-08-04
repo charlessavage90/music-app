@@ -1,0 +1,1754 @@
+{
+  "read": "CRE-D3",
+  "role": "Stage-0 instrument prior on the adopted artifact. Barred from candidacy and from every CRE-R winner clause (\u00a73.3 carve-out). Re-opens neither Track 3's closed verdict nor the parked DD-A2 decision.",
+  "substrate": "adopted artifact, no build",
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "ruler_frame_n": 74151,
+  "quantisation_floor": 0.015,
+  "material_bar": 0.05,
+  "n_pairs": 22,
+  "gates": {
+    "d0_identity": "PASS",
+    "device_liveness_at_extreme": {
+      "ramp": 1.0,
+      "never_a_candidate": true,
+      "d1_journeys_changed": 19,
+      "share": 0.8636363636363636,
+      "bar": 0.5,
+      "result": "PASS"
+    },
+    "cost_decomposition": {
+      "journeys_checked": 132,
+      "result": "PASS"
+    }
+  },
+  "arms": {
+    "P0": {
+      "ramp": 0.0,
+      "is_candidate": false,
+      "c1_median_all_interiors": -0.0004551523243111477,
+      "c1_median_matched_only": -0.0004551523243111477,
+      "n_readable_pairs": 22,
+      "n_matched_pairs": 22,
+      "bootstrap_2p5": -0.0007484727110895761,
+      "bootstrap_97p5": 0.0002966918854769851,
+      "n_pairs_at_or_below_material": 0,
+      "n_pairs_below_quant_floor": 21,
+      "leave_one_out_median_range": [
+        -0.0004787528152013776,
+        -0.00043155183342091785
+      ],
+      "per_depth_unmeasured": [
+        {
+          "depth": 0,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 1,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 2,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 3,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 4,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 5,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 6,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 7,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 8,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 9,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 10,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 11,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 12,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 13,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 14,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 15,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 16,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 17,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 18,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 19,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 20,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        }
+      ],
+      "per_pair": [
+        {
+          "class": "ff-top1pct",
+          "a": "48262e82-db9f-4a92-b650-dfef979b73ec",
+          "b": "d8661c02-f423-4d72-8044-40ff05daf7a1",
+          "readable": true,
+          "delta": -0.002339820096829426,
+          "matched": true,
+          "d0_interior_slots": 8,
+          "band_interior_slots": 93,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "20244d07-534f-4eff-b4d4-930878889970",
+          "readable": true,
+          "delta": -0.0009305336408140796,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 42,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "cf82a38f-9413-4333-bacb-ca5b6db95794",
+          "b": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+          "readable": true,
+          "delta": 0.0058057207589917725,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 77,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a21b2652-62ed-4767-a3d2-0aa802abf080",
+          "b": "b29020d6-5dbf-4c99-b16f-c009f8a712ff",
+          "readable": true,
+          "delta": -0.020067160254076177,
+          "matched": true,
+          "d0_interior_slots": 5,
+          "band_interior_slots": 68,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "410c9baf-5469-44f6-9852-826524b80c61",
+          "b": "69b39eab-6577-46a4-a9f5-817839092033",
+          "readable": true,
+          "delta": 0.0003438928672573338,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 58,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "54799c0e-eb45-4eea-996d-c4d71a63c499",
+          "b": "b2dbfc09-b332-408b-a235-1850e41971c5",
+          "readable": true,
+          "delta": -0.0012002535367021672,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 82,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "be540c02-7898-4b79-9acc-c8122c7d9e83",
+          "b": "f7625f34-1799-42a4-a1c6-22b5377c767b",
+          "readable": true,
+          "delta": 0.00456500923790637,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 107,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f",
+          "b": "cc0b7089-c08d-4c10-b6b0-873582c17fd6",
+          "readable": true,
+          "delta": 0.0007687017032811383,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ac7e838c-3d95-47c2-92a9-81767ad7c217",
+          "b": "5334edc0-5faf-4ca5-b1df-000de3e1f752",
+          "readable": true,
+          "delta": -0.0005933837709538592,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 33,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "faabb55d-3c9e-4c23-8779-732ac2ee2c0d",
+          "b": "78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2",
+          "readable": true,
+          "delta": -0.00043155183342091785,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 70,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "f41490ce-fe39-435d-86c0-ab5ce098b423",
+          "b": "f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62",
+          "readable": true,
+          "delta": -0.0009979636147859905,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 74,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "8b22acd6-20e6-4463-a75c-c14b5cfdb666",
+          "readable": true,
+          "delta": 0.0014430014430013571,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 54,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387",
+          "readable": true,
+          "delta": -0.0004787528152013776,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 46,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+          "b": "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6",
+          "readable": true,
+          "delta": 0.0027713719302504547,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 46,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+          "b": "eeb1195b-f213-4ce1-b28c-8565211f8e43",
+          "readable": true,
+          "delta": -0.00026971989588808754,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 28,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+          "b": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "readable": true,
+          "delta": -0.0003438928672573338,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 24,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86",
+          "b": "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6",
+          "readable": true,
+          "delta": -0.0007349867162951274,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+          "b": "8970d868-0723-483b-a75b-51088913d3d4",
+          "readable": true,
+          "delta": -0.0005933837709538592,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 38,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+          "readable": true,
+          "delta": -0.00017531793232716808,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 20,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "e795e03d-b5d5-4a5f-834d-162cfb308a2c",
+          "b": "9a709693-b4f8-4da9-8cc1-038c911a61be",
+          "readable": true,
+          "delta": -0.0017936373076560264,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 72,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "f82bcf78-5b69-4622-a5ef-73800768d9ac",
+          "b": "c8b03190-306c-4120-bb0b-6f2ebfc06ea9",
+          "readable": true,
+          "delta": 0.005003304068724623,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 46,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "b": "d6ed7887-a401-47a8-893c-34b967444d26",
+          "readable": true,
+          "delta": -0.0007484727110895761,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 50,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        }
+      ]
+    },
+    "P1a": {
+      "ramp": 0.01,
+      "is_candidate": true,
+      "c1_median_all_interiors": -0.0005765262774609092,
+      "c1_median_matched_only": -0.0005765262774609092,
+      "n_readable_pairs": 22,
+      "n_matched_pairs": 22,
+      "bootstrap_2p5": -0.0009979636147859905,
+      "bootstrap_97p5": -0.00021577591671040341,
+      "n_pairs_at_or_below_material": 0,
+      "n_pairs_below_quant_floor": 21,
+      "leave_one_out_median_range": [
+        -0.000606869765748308,
+        -0.0005461827891735105
+      ],
+      "per_depth_unmeasured": [
+        {
+          "depth": 0,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 1,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 2,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 3,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 4,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 5,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 6,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 7,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 8,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 9,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 10,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 11,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 12,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 13,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 14,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 15,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 16,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 17,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 18,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 19,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 20,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        }
+      ],
+      "per_pair": [
+        {
+          "class": "ff-top1pct",
+          "a": "48262e82-db9f-4a92-b650-dfef979b73ec",
+          "b": "d8661c02-f423-4d72-8044-40ff05daf7a1",
+          "readable": true,
+          "delta": -0.0026499979771007487,
+          "matched": true,
+          "d0_interior_slots": 8,
+          "band_interior_slots": 61,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "20244d07-534f-4eff-b4d4-930878889970",
+          "readable": true,
+          "delta": -0.000606869765748308,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 31,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "cf82a38f-9413-4333-bacb-ca5b6db95794",
+          "b": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+          "readable": true,
+          "delta": 0.0051449070140658915,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 59,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a21b2652-62ed-4767-a3d2-0aa802abf080",
+          "b": "b29020d6-5dbf-4c99-b16f-c009f8a712ff",
+          "readable": true,
+          "delta": -0.04018826448732993,
+          "matched": true,
+          "d0_interior_slots": 5,
+          "band_interior_slots": 40,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "410c9baf-5469-44f6-9852-826524b80c61",
+          "b": "69b39eab-6577-46a4-a9f5-817839092033",
+          "readable": true,
+          "delta": 0.0037356205580504342,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 45,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "54799c0e-eb45-4eea-996d-c4d71a63c499",
+          "b": "b2dbfc09-b332-408b-a235-1850e41971c5",
+          "readable": true,
+          "delta": -0.000937276638211304,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 61,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "be540c02-7898-4b79-9acc-c8122c7d9e83",
+          "b": "f7625f34-1799-42a4-a1c6-22b5377c767b",
+          "readable": true,
+          "delta": 0.003958139472158173,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 57,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f",
+          "b": "cc0b7089-c08d-4c10-b6b0-873582c17fd6",
+          "readable": true,
+          "delta": 9.440196356080843e-05,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 43,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ac7e838c-3d95-47c2-92a9-81767ad7c217",
+          "b": "5334edc0-5faf-4ca5-b1df-000de3e1f752",
+          "readable": true,
+          "delta": -0.0021240441801189114,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 30,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "faabb55d-3c9e-4c23-8779-732ac2ee2c0d",
+          "b": "78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2",
+          "readable": true,
+          "delta": -0.0007012717293091164,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 52,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "f41490ce-fe39-435d-86c0-ab5ce098b423",
+          "b": "f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62",
+          "readable": true,
+          "delta": -0.0009979636147859905,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 60,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "8b22acd6-20e6-4463-a75c-c14b5cfdb666",
+          "readable": true,
+          "delta": -0.0019689552399833055,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 39,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387",
+          "readable": true,
+          "delta": -0.0005461827891735105,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 36,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+          "b": "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6",
+          "readable": true,
+          "delta": -0.011341721622095458,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 27,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+          "b": "eeb1195b-f213-4ce1-b28c-8565211f8e43",
+          "readable": true,
+          "delta": 0.0001753179323272791,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 19,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+          "b": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "readable": true,
+          "delta": -0.00026971989588819856,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 23,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86",
+          "b": "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6",
+          "readable": true,
+          "delta": -0.0005192107995847239,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 46,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+          "b": "8970d868-0723-483b-a75b-51088913d3d4",
+          "readable": true,
+          "delta": -0.0004315518334210289,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 29,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+          "readable": true,
+          "delta": -0.00021577591671040341,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 13,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "e795e03d-b5d5-4a5f-834d-162cfb308a2c",
+          "b": "9a709693-b4f8-4da9-8cc1-038c911a61be",
+          "readable": true,
+          "delta": -0.0018475812868335995,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 43,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "f82bcf78-5b69-4622-a5ef-73800768d9ac",
+          "b": "c8b03190-306c-4120-bb0b-6f2ebfc06ea9",
+          "readable": true,
+          "delta": 0.0024005070734042233,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 20,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "b": "d6ed7887-a401-47a8-893c-34b967444d26",
+          "readable": true,
+          "delta": -0.0008428746746503846,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 39,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        }
+      ]
+    },
+    "P1b": {
+      "ramp": 0.03,
+      "is_candidate": true,
+      "c1_median_all_interiors": -0.0008293886798559913,
+      "c1_median_matched_only": -0.0008293886798559913,
+      "n_readable_pairs": 22,
+      "n_matched_pairs": 22,
+      "bootstrap_2p5": -0.0019689552399833055,
+      "bootstrap_97p5": -6.742997397202188e-05,
+      "n_pairs_at_or_below_material": 1,
+      "n_pairs_below_quant_floor": 20,
+      "leave_one_out_median_range": [
+        -0.0010519075939636746,
+        -0.000606869765748308
+      ],
+      "per_depth_unmeasured": [
+        {
+          "depth": 0,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 1,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 2,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 3,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 4,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 5,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 6,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 7,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 8,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 9,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 10,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 11,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 12,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 13,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 14,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 15,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 16,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 17,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 18,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 19,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 20,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        }
+      ],
+      "per_pair": [
+        {
+          "class": "ff-top1pct",
+          "a": "48262e82-db9f-4a92-b650-dfef979b73ec",
+          "b": "d8661c02-f423-4d72-8044-40ff05daf7a1",
+          "readable": true,
+          "delta": -0.0049021591077665905,
+          "matched": true,
+          "d0_interior_slots": 8,
+          "band_interior_slots": 54,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "20244d07-534f-4eff-b4d4-930878889970",
+          "readable": true,
+          "delta": -0.000606869765748308,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 31,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "cf82a38f-9413-4333-bacb-ca5b6db95794",
+          "b": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+          "readable": true,
+          "delta": 0.004834729133794569,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a21b2652-62ed-4767-a3d2-0aa802abf080",
+          "b": "b29020d6-5dbf-4c99-b16f-c009f8a712ff",
+          "readable": true,
+          "delta": -0.13264824479777748,
+          "matched": true,
+          "d0_interior_slots": 5,
+          "band_interior_slots": 33,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "410c9baf-5469-44f6-9852-826524b80c61",
+          "b": "69b39eab-6577-46a4-a9f5-817839092033",
+          "readable": true,
+          "delta": 0.0038232795242141293,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 44,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "54799c0e-eb45-4eea-996d-c4d71a63c499",
+          "b": "b2dbfc09-b332-408b-a235-1850e41971c5",
+          "readable": true,
+          "delta": 0.000815902685061487,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "be540c02-7898-4b79-9acc-c8122c7d9e83",
+          "b": "f7625f34-1799-42a4-a1c6-22b5377c767b",
+          "readable": true,
+          "delta": -0.00427506034982672,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 51,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f",
+          "b": "cc0b7089-c08d-4c10-b6b0-873582c17fd6",
+          "readable": true,
+          "delta": 0.0007012717293091164,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 42,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ac7e838c-3d95-47c2-92a9-81767ad7c217",
+          "b": "5334edc0-5faf-4ca5-b1df-000de3e1f752",
+          "readable": true,
+          "delta": -0.0013081414950574244,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 32,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "faabb55d-3c9e-4c23-8779-732ac2ee2c0d",
+          "b": "78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2",
+          "readable": true,
+          "delta": -0.0010519075939636746,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 51,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "f41490ce-fe39-435d-86c0-ab5ce098b423",
+          "b": "f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62",
+          "readable": true,
+          "delta": -0.0023870210786098855,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 50,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "8b22acd6-20e6-4463-a75c-c14b5cfdb666",
+          "readable": true,
+          "delta": -0.0019689552399833055,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 42,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387",
+          "readable": true,
+          "delta": -6.742997397202188e-05,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 32,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+          "b": "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6",
+          "readable": true,
+          "delta": -0.032743995360817846,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 25,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+          "b": "eeb1195b-f213-4ce1-b28c-8565211f8e43",
+          "readable": true,
+          "delta": 0.00015508894013571695,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 18,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+          "b": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "readable": true,
+          "delta": -0.00026971989588819856,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 22,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86",
+          "b": "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6",
+          "readable": true,
+          "delta": -0.0012002535367021672,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 42,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+          "b": "8970d868-0723-483b-a75b-51088913d3d4",
+          "readable": true,
+          "delta": -0.00037760785424334475,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 30,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+          "readable": true,
+          "delta": -0.00021577591671040341,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 11,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "e795e03d-b5d5-4a5f-834d-162cfb308a2c",
+          "b": "9a709693-b4f8-4da9-8cc1-038c911a61be",
+          "readable": true,
+          "delta": -0.0017599223206700154,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 38,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "f82bcf78-5b69-4622-a5ef-73800768d9ac",
+          "b": "c8b03190-306c-4120-bb0b-6f2ebfc06ea9",
+          "readable": true,
+          "delta": 0.003398470688190325,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 20,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "b": "d6ed7887-a401-47a8-893c-34b967444d26",
+          "readable": true,
+          "delta": -0.002636511982306411,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 35,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        }
+      ]
+    },
+    "EXTREME": {
+      "ramp": 1.0,
+      "is_candidate": false,
+      "c1_median_all_interiors": -0.0012103680327979482,
+      "c1_median_matched_only": -0.0012103680327979482,
+      "n_readable_pairs": 22,
+      "n_matched_pairs": 22,
+      "bootstrap_2p5": -0.0031287507923022373,
+      "bootstrap_97p5": -0.0005252794972421802,
+      "n_pairs_at_or_below_material": 1,
+      "n_pairs_below_quant_floor": 21,
+      "leave_one_out_median_range": [
+        -0.0014092864560154572,
+        -0.0010114496095804393
+      ],
+      "per_depth_unmeasured": [
+        {
+          "depth": 0,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 1,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 2,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 3,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 4,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 5,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 6,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 7,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 8,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 9,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 10,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 11,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 12,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 13,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 14,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 15,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 16,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 17,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 18,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 19,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        },
+        {
+          "depth": 20,
+          "interiors_null_in_snapshot": 0,
+          "interiors_absent_from_snapshot": 0,
+          "interiors_unmeasured_total": 0,
+          "null_interior_unbypassable": 0
+        }
+      ],
+      "per_pair": [
+        {
+          "class": "ff-top1pct",
+          "a": "48262e82-db9f-4a92-b650-dfef979b73ec",
+          "b": "d8661c02-f423-4d72-8044-40ff05daf7a1",
+          "readable": true,
+          "delta": -0.003540073633531593,
+          "matched": true,
+          "d0_interior_slots": 8,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "20244d07-534f-4eff-b4d4-930878889970",
+          "readable": true,
+          "delta": -0.0009305336408140796,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 33,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "cf82a38f-9413-4333-bacb-ca5b6db95794",
+          "b": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+          "readable": true,
+          "delta": 0.004834729133794569,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 56,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "a21b2652-62ed-4767-a3d2-0aa802abf080",
+          "b": "b29020d6-5dbf-4c99-b16f-c009f8a712ff",
+          "readable": true,
+          "delta": -0.13027470971396204,
+          "matched": true,
+          "d0_interior_slots": 5,
+          "band_interior_slots": 37,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "410c9baf-5469-44f6-9852-826524b80c61",
+          "b": "69b39eab-6577-46a4-a9f5-817839092033",
+          "readable": true,
+          "delta": 0.003398470688190325,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 44,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "54799c0e-eb45-4eea-996d-c4d71a63c499",
+          "b": "b2dbfc09-b332-408b-a235-1850e41971c5",
+          "readable": true,
+          "delta": 0.0006540707475286567,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "be540c02-7898-4b79-9acc-c8122c7d9e83",
+          "b": "f7625f34-1799-42a4-a1c6-22b5377c767b",
+          "readable": true,
+          "delta": -0.00776119000418074,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 54,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f",
+          "b": "cc0b7089-c08d-4c10-b6b0-873582c17fd6",
+          "readable": true,
+          "delta": -0.0068643713503526715,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 44,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "ac7e838c-3d95-47c2-92a9-81767ad7c217",
+          "b": "5334edc0-5faf-4ca5-b1df-000de3e1f752",
+          "readable": true,
+          "delta": -0.0031287507923021263,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 33,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "faabb55d-3c9e-4c23-8779-732ac2ee2c0d",
+          "b": "78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2",
+          "readable": true,
+          "delta": -0.0010114496095804393,
+          "matched": true,
+          "d0_interior_slots": 6,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "f41490ce-fe39-435d-86c0-ab5ce098b423",
+          "b": "f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62",
+          "readable": true,
+          "delta": -0.0037895645372281184,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 55,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top1pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "8b22acd6-20e6-4463-a75c-c14b5cfdb666",
+          "readable": true,
+          "delta": -0.001598090383137185,
+          "matched": true,
+          "d0_interior_slots": 4,
+          "band_interior_slots": 42,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+          "b": "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387",
+          "readable": true,
+          "delta": -0.0008631036668419467,
+          "matched": true,
+          "d0_interior_slots": 3,
+          "band_interior_slots": 32,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+          "b": "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6",
+          "readable": true,
+          "delta": -0.0031287507923022373,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 27,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+          "b": "eeb1195b-f213-4ce1-b28c-8565211f8e43",
+          "readable": true,
+          "delta": -4.045798438312431e-05,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 18,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+          "b": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "readable": true,
+          "delta": -0.00026971989588819856,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 22,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86",
+          "b": "b8a7c51f-362c-4dcb-a259-bc6e0095f0a6",
+          "readable": true,
+          "delta": -0.0014092864560154572,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 44,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "b6b2bb8d-54a9-491f-9607-7b546023b433",
+          "b": "8970d868-0723-483b-a75b-51088913d3d4",
+          "readable": true,
+          "delta": -0.0007821876980755871,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 31,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+          "b": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+          "readable": true,
+          "delta": -0.00021577591671040341,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 11,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "e795e03d-b5d5-4a5f-834d-162cfb308a2c",
+          "b": "9a709693-b4f8-4da9-8cc1-038c911a61be",
+          "readable": true,
+          "delta": -0.0020701002009413383,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 38,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "f82bcf78-5b69-4622-a5ef-73800768d9ac",
+          "b": "c8b03190-306c-4120-bb0b-6f2ebfc06ea9",
+          "readable": true,
+          "delta": 0.0033580127038070895,
+          "matched": true,
+          "d0_interior_slots": 1,
+          "band_interior_slots": 21,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        },
+        {
+          "class": "ff-top01pct",
+          "a": "ca891d65-d9b0-4258-89f7-e6ba29d83767",
+          "b": "d6ed7887-a401-47a8-893c-34b967444d26",
+          "readable": true,
+          "delta": -0.003351269706409865,
+          "matched": true,
+          "d0_interior_slots": 2,
+          "band_interior_slots": 36,
+          "d0_unmeasured": 0,
+          "band_unmeasured": 0
+        }
+      ]
+    }
+  },
+  "branch": "inert_as_expected",
+  "consequence": "the pricing device is inert on famous pairs at incumbent supply, as Track 3 found; the open question was and is supply",
+  "seconds": 53.0
+}
