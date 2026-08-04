@@ -14,14 +14,16 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 
 **Last updated: 2026-08-04 (STAGE 3), when the CAP RE-EVALUATION EXPERIMENT COMPLETED. All
 four stages have run, every criterion is computed, every read is determined, and the results
-document exists. NOTHING IS OWED BY ANY SESSION. The owner's one action is merging draft
-PR #75; after that, THE NEXT ACTION IS HIS — and it is a decision, not a piece of work.**
+document exists. NOTHING IS OWED BY ANY SESSION, and PR #75 is MERGED (`fbecfac`), so
+NOTHING IS WAITING ON THE OWNER EITHER. THE NEXT ACTION IS HIS — and it is a DECISION, not a
+piece of work: which passing arm (if either) is worth a blind listen, and whether the
+candidate data set's advantage justifies the re-crawl.**
 
 ---
 
 ## Next
 
-> ## ▶ THE `CRE-` EXPERIMENT IS COMPLETE, 2026-08-04. **The owner's one action is merging draft PR #75** — and then **the next action is his: a DECISION, not work.** No session owes anything.
+> ## ▶ THE `CRE-` EXPERIMENT IS COMPLETE, 2026-08-04. ~~**The owner's one action is merging draft PR #75**~~ *(MERGED, `fbecfac`; branch deleted)* — **nothing is waiting on the owner, and no session owes anything.** **The next action is his: a DECISION, not work.**
 >
 > Entry point is the current handoff:
 > [`2026-08-04-HANDOFF-cre-stage3-findings.md`](2026-08-04-HANDOFF-cre-stage3-findings.md).
