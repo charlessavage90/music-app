@@ -276,6 +276,34 @@ terms. **This changes nothing** — clause (i) is not satisfiable by either arm,
 censoring, headroom); adoption retires every existing path-quality figure and owes a blind
 listen; switching data set is the `BuilderConfig.algorithm` re-crawl decision.
 
+### 1.6 One ambiguity in `CRE-R4`, resolved here and recorded rather than resolved silently
+
+**`CRE-R4`'s clause (i) turns on what counts as "an arm", and the pre-registration uses that
+word two ways.** Everywhere it is *measured* — `CRE-C1`'s "arm statistic", `CRE-C2`'s
+"per-arm kill", `CRE-C4`'s "arm `C4` ÷ its isolating baseline's `C4`" — an arm is a **cell**,
+one row of §0.2. But `CRE-R4`'s own clause (iii), "explored on no fewer ramp settings than
+any arm it beats", presupposes that an arm can *carry* several ramp settings, which a cell
+cannot.
+
+**Resolved as arm = cell**, on three grounds: every criterion that produces a number is
+computed per cell; §0.2 gives each cell its own isolating baseline, which is what clause (i)
+compares against; and the alternative reading is not merely different but incoherent — under
+"arm = supply configuration", `B-S1` would have to both pass and fail, since `B-S1-P1a` and
+`B-S1-P1b` clear the bars while `B-S1-P0` does not. Clause (iii) is then read as comparing
+the ramp exploration of the *supply configurations behind* two competing cells, which is what
+its stated purpose ("no clear-winner call from an asymmetrically explored pricing axis")
+requires.
+
+**It is recorded because the stakes are not zero and the resolution is not self-evident.**
+Under arm = cell, clause (i)'s second disjunct fails for each passing arm because the other
+one is its counterexample — which is the whole reason there is no clear winner. A reader who
+took the other reading would find that disjunct satisfied and could arrive at a clear-winner
+call. That reading does not survive contact with the rest of the document, but nothing stops
+someone reaching for it, so the argument is written down here rather than left to be
+re-derived. **No bar was moved and no criterion was reinterpreted to reach a result** — this
+was settled from §0.2 and §5's own wording, and it is the reading under which the experiment
+was already scored.
+
 ---
 
 ## §2 — What I infer from it, in plain language

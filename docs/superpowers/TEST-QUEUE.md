@@ -23,7 +23,57 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-04 — the experiment's results are calculated; nothing you can press changed
+## N/A (latest) — 2026-08-04 — the map experiment is finished and written up; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from yesterday.**
+
+**What happened, in plain terms.** Yesterday's entry said the numbers existed and nobody
+had read them. Today a fresh session read them and wrote up what they mean — deliberately
+a session that had not run the experiment, so it could not talk itself into liking its own
+results. **There is now a written answer, and there is a decision waiting for you.**
+
+**The answer, in one line: the "I know them" button can be made to dig — but only on the
+map built from the other data source.** On today's data, nothing we tried moved it at all.
+Not pooling both artists' suggestion lists, not doubling the connection budget, not using
+style labels, and not the new "each press digs harder" rule. On the other data source, that
+last rule works: twenty presses land you on noticeably less well-known artists.
+
+**Three things that cut against it, and I would rather you heard them from me.**
+
+- **The deeper it digs, the less we can see.** These journeys start delivering artists our
+  obscurity yardstick has no reading for — none at the start, about one in nine by press ten
+  on the gentle setting. Those artists silently drop out of the score, so the improvement is
+  measured on the ones we could still see.
+- **On the journeys where nothing dropped out, the gentle setting misses the bar** it passed
+  overall. It is close, but it is on the wrong side of a line we drew before looking.
+- **No number here says any of it sounds good.** Everything measured is *how famous* the
+  artists in the middle are. Nothing measures whether they belong next to each other. Only
+  your ears can, and none of your listening time has been spent.
+
+**What is waiting on you, and it is a decision rather than a test.** Whether to spend a
+blind listen on the gentle setting, on both settings, or on neither — and whether the other
+data source's advantage is worth rebuilding the whole map for. The write-up lays out those
+options with their consequences and deliberately does not pick one, because adoption and
+your ear are yours.
+
+**One housekeeping thing I noticed while checking this file.** Eight entries further down,
+from 22–27 July, are still marked as waiting for you and were never ticked off — the capfix
+adoption, the tie-break change, four clip and playback checks, and the search box. Several
+were probably covered by the run you did on 2 August, but nothing here says so, and I would
+rather flag it than guess on your behalf.
+
+Detail, if you want it: `docs/superpowers/2026-08-03-cre-run-execution-log.md` §15–§16, and
+the write-up itself at
+`docs/superpowers/findings/2026-08-04-cap-reevaluation-results.md`.
+
+---
+
+## N/A — 2026-08-04 (earlier) — the experiment's results are calculated; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04 (later): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no
