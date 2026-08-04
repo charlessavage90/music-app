@@ -21,6 +21,47 @@ from gbl_common import ROOT, in_dir, use_cre
 PLAY_MS = 30_000          # below this a row is a skip, not a listen
 PROPOSED_PAIRS = 12       # owner trims/edits to the spec's 8
 
+# The only two files this script may read out of the export, as constants. The
+# export directory is an operator-supplied path (the raw export must never enter
+# the repo), so it is resolved and directory-checked before use and the leaf
+# names are never derived from input -- the same shape as cre_common.in_dir's
+# bare-filename rule, applied to the other half of the join.
+HISTORY_FILE = "StreamingHistory_music_0.json"
+LIBRARY_FILE = "YourLibrary.json"
+
+
+def _export_dir(arg: str) -> Path:
+    d = Path(arg).resolve()
+    if not d.is_dir():
+        raise SystemExit(f"--export must be an existing directory, got {arg!r}")
+    return d
+
+
+def _read_export(export: Path, name: str) -> str:
+    """Read one named file out of the operator's export directory.
+
+    ACCEPTED Snyk LOW (`python/PT`, CWE-23), 2026-08-04. Snyk traces `--export`
+    into this read and will keep doing so: reading a directory the operator
+    names IS this script's function, and spec §3 requires that directory to sit
+    outside the repo, so there is no safe root to confine it to. What is here is
+    genuine defence-in-depth rather than a silencer -- the path is resolved and
+    directory-checked, the leaf names are module constants that input cannot
+    reach, and the join is checked to stay inside the resolved directory.
+
+    REVIVAL CONDITION: if this file is ever run with a path that is not typed by
+    the operator at the command line -- read from a config file, a web request,
+    an environment variable, or another program's output -- the finding is live
+    again and must be fixed rather than re-accepted.
+    """
+    if name not in (HISTORY_FILE, LIBRARY_FILE):
+        raise ValueError(f"not an export file this script reads: {name!r}")
+    target = (export / name).resolve()
+    if target.parent != export:
+        raise SystemExit(f"refusing to read outside the export directory: {name!r}")
+    if not target.is_file():
+        raise SystemExit(f"{name} is not in {export} -- is this the right export?")
+    return target.read_text(encoding="utf-8")
+
 
 def rank_familiarity(history: list[dict], library: dict) -> list[dict]:
     agg: dict[str, dict] = {}
@@ -62,11 +103,10 @@ def main() -> int:
                     help='path to the "Spotify Account Data" directory (stays outside the repo)')
     ap.add_argument("--top", type=int, default=150)
     args = ap.parse_args()
-    export = Path(args.export)
+    export = _export_dir(args.export)
 
-    history = json.loads(
-        (export / "StreamingHistory_music_0.json").read_text(encoding="utf-8"))
-    library = json.loads((export / "YourLibrary.json").read_text(encoding="utf-8"))
+    history = json.loads(_read_export(export, HISTORY_FILE))
+    library = json.loads(_read_export(export, LIBRARY_FILE))
     ranked = rank_familiarity(history, library)[: args.top]
 
     use_cre()
