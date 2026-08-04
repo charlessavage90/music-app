@@ -59,6 +59,30 @@ G2A_BAR = 0.5
 RED_W_HOP = 0.05           # off production's 0.02; the red half's only change
 
 
+def journeys_identical(mirror: tuple, production) -> bool:
+    """`CRE-G1`(a)'s bar, in one place: node sequence AND stop kind.
+
+    Exported so `test_cre_gates` guards THIS expression rather than a copy of it
+    (the closeout B3 defect: a test that restates the rule it checks stays green
+    while the rule drifts). Production spells "no path" as `None` where the mirror
+    spells it `(None, "none")`; the two are the same outcome, and normalising here
+    keeps that judgement in one place too.
+    """
+    m_path, m_kind = mirror
+    p_path, p_kind = (None, "none") if production is None else production
+    return m_path == p_path and m_kind == p_kind
+
+
+def g2a_passes(changed: int, denominator: int) -> bool:
+    """`CRE-G2`(a)'s bar: >= half of readable journeys change at d1.
+
+    `>=` because the prereg's effect size is "at least half". A denominator of
+    zero is a dead wire, not a pass -- with no readable pair there is no evidence
+    the device fires, and defaulting that to True is how a vacuous gate is built.
+    """
+    return denominator > 0 and changed >= G2A_BAR * denominator
+
+
 def load_cell(name: str) -> tuple[dict, GraphStore]:
     """Load a built cell, sha-asserted against its own manifest row."""
     cells = json.loads(in_dir("cre_builds.json").read_text(encoding="utf-8"))["cells"]
@@ -89,10 +113,8 @@ def g1a(store, ctx, pairs, cfg, api_cfg) -> dict:
         s, t = store.id_by_mbid[a], store.id_by_mbid[b]
         m_path, m_kind = journey(store, s, t, [], cfg, ctx)
         prod = find_journey(store, s, t, [], api_cfg)
-        # Production returns None where the mirror returns (None, "none"); the
-        # two spellings of "no path" are the same outcome.
         p_path, p_kind = (None, "none") if prod is None else prod
-        same = m_path == p_path and m_kind == p_kind
+        same = journeys_identical((m_path, m_kind), prod)
         key = f"{a}|{b}"
         rows[key] = {
             "class": cls,
@@ -161,8 +183,7 @@ def g2a(store, ctx, measured, pairs, cfg) -> dict:
         "readable_pairs": denom,
         "changed_at_d1": changed,
         "fraction_changed": frac,
-        # No readable pair is a dead wire by default, not a pass.
-        "result": "PASS" if denom and frac >= G2A_BAR else "FAIL",
+        "result": "PASS" if g2a_passes(changed, denom) else "FAIL",
         "unreadable_pairs": unreadable,
         "per_pair": rows,
     }

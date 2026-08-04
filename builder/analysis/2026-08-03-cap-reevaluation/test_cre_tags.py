@@ -185,6 +185,60 @@ def test_vote_scramble_preserves_each_artists_multiset_of_strengths():
     assert any(real[m] != scram[m] for m in per)
 
 
+def _stub_tag_sources(monkeypatch):
+    """Replace only the expensive inputs (`five_frames`, `masses`, and the vote
+    normalisation) so `agreement_table`'s own caching rule can be exercised in
+    milliseconds. `idf_table` is deliberately left REAL: it is the function whose
+    output depends on `n_artists`, so stubbing it would test a restatement of the
+    rule instead of the rule."""
+    import cre_tags
+
+    w4 = {"a": {"rock"}, "b": {"rock", "pop"}, "c": {"pop", "jazz"}}
+    monkeypatch.setattr(cre_tags, "five_frames", lambda: {"W4": w4})
+    monkeypatch.setattr(cre_tags, "masses", lambda: {m: {} for m in w4})
+    monkeypatch.setattr(cre_tags, "rel_table", lambda per: ({}, {}))
+    monkeypatch.setattr(cre_tags, "rel_for",
+                        lambda rel, smax, m, labs: {x: 1.0 for x in labs})
+    monkeypatch.setattr(cre_tags, "_CACHE", {})
+    return cre_tags
+
+
+def test_agreement_table_cache_is_keyed_on_n_artists_not_kind_alone(monkeypatch):
+    """The cache must not hand a table built at one `n_artists` to a caller that
+    asked for another.
+
+    Keyed on `kind` alone the hit returns before `n_artists` is consulted, so the
+    second call here would receive the first call's table and every agreement it
+    reports would be computed at the wrong idf. No caller varies `n_artists`
+    today, which is what makes this silent rather than loud: the sweeps would have
+    produced a wrong number, not an error.
+    """
+    cre_tags = _stub_tag_sources(monkeypatch)
+
+    small = cre_tags.agreement_table("real", n_artists=10)
+    large = cre_tags.agreement_table("real", n_artists=10_000)
+
+    assert small is not large, "the second n_artists got the first one's table"
+    assert small._idf != large._idf, (
+        "fixture: idf must genuinely differ across these two n_artists, or the "
+        "assertion above proves nothing")
+
+
+def test_agreement_table_still_caches_within_one_n_artists(monkeypatch):
+    """The red half of the test above: a key that never hits would also pass it.
+
+    Building the real tables costs minutes (`masses()` dominates the S2 cells),
+    so a cache that stopped caching would be a real regression -- and it is
+    invisible to a correctness assertion.
+    """
+    cre_tags = _stub_tag_sources(monkeypatch)
+
+    first = cre_tags.agreement_table("real", n_artists=10)
+    again = cre_tags.agreement_table("real", n_artists=10)
+
+    assert again is first, "the cache stopped caching"
+
+
 def test_label_scramble_preserves_exactly_which_artists_are_labelled():
     from tas_guard import permuted_labels_among_labelled
 
