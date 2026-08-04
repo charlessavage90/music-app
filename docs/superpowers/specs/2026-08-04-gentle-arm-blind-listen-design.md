@@ -101,21 +101,27 @@ A side-by-side page per pair, C3 format:
   `BYP-13` (wrong-artist clips) is live in both arms and shared machinery: **ignore clip
   failures unless they differ by arm** (C3 §8 rule).
 - Per depth row: pick **left / right / no preference**, plus two fixed plain-language
-  claims answered per pair at the end, wording frozen now:
-  - `GBL-Q1`: *"Do the later journeys deliver artists new to you that feel like they
-    belong in the journey?"* (which side, if either)
-  - `GBL-Q2`: *"Does either side stop feeling like a journey — a random walk into
-    obscurity rather than a path?"* (the strong-arm failure mode; asked of the gentle arm
-    deliberately)
+  claims answered per pair at the end — **one per assessment axis, deliberately
+  separated** so a side that wins one axis and loses the other can be recorded honestly
+  (owner's review note, 2026-08-04). Wording frozen now:
+  - `GBL-Q1` — **novelty**: *"As the presses accumulate, which side, if either, delivers
+    more artists new to you?"*
+  - `GBL-Q2` — **coherence**: *"Which side, if either, holds together better as a
+    journey — each step a sensible next listen? Did either side collapse into a random
+    walk into obscurity?"* (the collapse clause is the failure mode the strong arm made
+    plausible; asked of the gentle arm deliberately)
 - Free-text notes per row — the §3.9 corpus is the most operationally useful artifact the
   last listen produced; this one should add to it.
 
 ## 5. Reads — fixed in advance, with the branch's effect size
 
-**Primary read: the 10 deep rows** (5 pairs × d10, d20), clear picks only; "no
-preference" rows count for neither side. Margin ≥ 3 clear picks is the branch trigger —
-below 3, across 10 rows, this instrument cannot tell preference from noise, and the read
-is the null.
+**Primary read: the 10 deep rows** (5 pairs × d10, d20). **A "clear pick" is a
+left/right choice on a single deep row** — each pair contributes two rows to the tally,
+and a "no preference" row counts for neither side. The d0 rows never enter the tally
+(they are the §5 anchor, reported separately). Margin ≥ 3 clear picks — (winning side's
+rows) − (other side's rows) ≥ 3, so 5–2 with three no-preferences fires and 6–4 does
+not — is the branch trigger. Below 3, across 10 rows, this instrument cannot tell
+preference from noise, and the read is the null.
 
 | Verdict | Plain sentence | Action |
 |---|---|---|
