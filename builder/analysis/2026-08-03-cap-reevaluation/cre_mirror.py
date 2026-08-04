@@ -1,0 +1,447 @@
+"""The `CRE-` MARKED COPY of the Track 2 sweep mirror, plus the fame-currency ramp.
+
+**The frozen original is `builder/analysis/2026-07-23-track2-sweep/mirror.py` and is
+untouched.** It still owns every committed Track 2, 2F, 3 and 3b reproduction; nothing
+here is a correction to it, and no committed figure is re-derived from this file. This
+copy exists because frozen analysis files are never edited (plan Global Constraints) and
+the `CRE-` experiment needs one functional addition to the cost function.
+
+**The single functional addition is the fame-currency ramp** (prereg §2 dependency (2)):
+`w_known_ramp_fame_pctl`, the same shape as the frozen `w_known_ramp_pctl` above it but
+in the **adopted** currency — `fame_lb_pctl`, not the pop-percentile the frozen term
+reads. The currency is in the name, per the standing convention.
+
+**`CRE-G1`(a) is what proves `production()` behaviour survived the copy** — byte-identity
+against shipped `find_path` on the adopted artifact. Nothing in this file is trusted on
+the grounds that it was copied carefully.
+
+Everything below this paragraph is the frozen original's own documentation, and the three
+byte-identity disciplines it names are why the new term is added **only when live** rather
+than as `+ 0.0`:
+
+A parameterised mirror of production `find_path`, for the Track 2 Stage A sweep.
+
+**No shipped code is edited before adoption** (pre-registration §1.2), so the sweep's
+knobs live here. `SweepConfig.production()` must reproduce `api.pathfinding.find_path`
+**byte-identically** — that is the gate in `verify_mirror.py`, and log §3.10 says a
+non-identical path means stop, the harness is wrong.
+
+Byte-identity is a stronger requirement than "same algorithm", so three things are
+deliberate rather than incidental:
+
+1. **The cost terms are summed in production's order.** Floating-point addition is not
+   associative; reordering these six terms can change the last bit of a cost and so
+   change which of two near-equal paths wins.
+2. **Optional terms are added only when active**, never as `+ 0.0`, so the production
+   configuration executes the identical expression.
+3. **The heap entries are `(cost, node)` exactly as production**, so ties break on node
+   id the same way, and neighbours are visited in CSR order.
+
+Knobs implemented, per pre-registration §1.3–§1.4 as amended:
+  J-cur  `jump_currency`  raw | pctl (mean-matched by default — amendment A3)
+  J-mag  `w_jump`
+  S-mag  `w_sim`
+  F      `floor_mode`     raw | pctl | off, with the pctl relax constant from A2
+  toll   `toll_s`         additive toll on score-1.0 edges (amendment A1)
+         `toll_hops`      the same toll in multiples of `w_hop` (Track 2F)
+  guard  `guard_min_intermediary`  guard G (§4); OFF for the verification step
+"""
+
+from __future__ import annotations
+
+import heapq
+from dataclasses import dataclass, replace
+
+import numpy as np
+
+# Plumbing delta (no behaviour): the frozen original relies on its RUNNER to put
+# api/src on sys.path, so importing it before that is done raises. This copy is
+# imported by cre_ladder and by every CRE task script, so it makes its own
+# dependency explicit rather than leaving an import-order trap across ten tasks.
+from cre_common import use_frozen
+
+use_frozen("api_src")
+
+from artistpath_api.graph_store import GraphStore  # noqa: E402
+from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion  # noqa: E402
+
+RAW = "raw"
+PCTL = "pctl"
+OFF = "off"
+# Track 3b: the knee is fixed by pre-registration (§0 — not an axis in that track).
+KNOWN_THRESH_PCTL_KNEE = 0.90
+
+
+@dataclass(frozen=True, slots=True)
+class SweepConfig:
+    # --- production cost weights (ApiConfig defaults; cited, not re-derived) ---
+    w_sim: float = 3.0
+    w_jump: float = 1.0
+    w_floor: float = 1.0
+    w_hop: float = 0.02
+    w_avoid: float = 1.0
+    w_degree_hub: float = 0.0
+
+    # --- production bypass shaping, RAW currency ---
+    floor_relax_known: float = 0.15
+    floor_relax_dislike: float = 0.08
+    avoid_penalty: float = 0.5
+    avoid_decay: float = 0.5
+    avoid_radius: int = 2
+
+    # --- sweep knobs ---
+    jump_currency: str = RAW
+    # Amendment A3: the pctl level is mean-matched by definition, so J-cur is a genuine
+    # one-column contrast. Arm A1u sets this False to expose the scale component.
+    jump_mean_match: bool = True
+
+    floor_mode: str = RAW
+    # Amendment A2: pre-registered HERE, deliberately not read from ApiConfig — reusing
+    # the shipped 0.15 is exactly what left the FL arms inert at every scored depth.
+    floor_relax_known_pctl: float = 0.05
+    # NOT pre-registered: Stage A is all-`known`, so this is only reachable by the §1.5
+    # F4 dislike walk. Chosen to preserve production's dislike:known relax ratio.
+    floor_relax_dislike_pctl: float = 0.05 * (0.08 / 0.15)
+
+    # Amendment A1: additive toll on ceiling-saturated edges. None = off.
+    # Active toll magnitude is w_sim * (1 - toll_s).
+    toll_s: float | None = None
+    # Track 2F: the SAME knob, specified in the currency §1.4 pre-registered it in.
+    # `toll_s` is w_sim-dependent, so one value means two different tolls under two
+    # different W -- which is exactly what A17(b) caught after the fact, §1.4's
+    # 7.5x/30x figures having been quoted for an S-mag of 3.0 while W carried 1.5.
+    # This names its own basis and is w_sim-independent: toll = toll_hops * w_hop.
+    # Mutually exclusive with toll_s; None = off, so production is untouched.
+    #
+    # NB for reproduction arms: the two specifications are NOT bit-identical at the
+    # same nominal magnitude (1.5*(1-0.80) = 0.29999999999999993 against
+    # 15*0.02 = 0.30000000000000004), so an arm reproducing a committed toll_s run
+    # must keep toll_s. Track 2F pre-registration §4, run order step 3.
+    toll_hops: float | None = None
+
+    # Track 3 (DD-P4): the depth-descent device. A node toll in PERCENTILE currency,
+    # growing linearly with the number of `known` bypasses:
+    #
+    #     cost(u->v) += w_known_ramp_pctl * k * pctl(v)   for every relaxed node v
+    #                                                     except the target endpoint
+    #
+    # 0.0 = off, so every committed Track 2 and 2F figure reproduces from this file
+    # unchanged, and `production()` is untouched. At k = 0 the term is exactly zero
+    # AND is not added at all (see `_dijkstra`), which is what makes DD-G2 -- every
+    # arm's first path byte-identical to production's -- hold by construction rather
+    # than by floating-point luck.
+    #
+    # DD-D7: applied to the edge-relaxation TARGET, not on node settle. A node-settled
+    # implementation would price nodes that never appear on the returned path.
+    w_known_ramp_pctl: float = 0.0
+
+    # Track 3b (TB-P4): the THRESHOLDED toll. Prices only above-knee interiors, so a
+    # sub-decile interior is toll-free at any strength — length-neutral where Track 3's
+    # DD-D5 confound lives (Track 3b prereg §1):
+    #
+    #     cost(u->v) += w_known_thresh_pctl * k * max(0, pctl(v) - KNOWN_THRESH_PCTL_KNEE)
+    #
+    # 0.0 = off. Same rules as the ramp term above: relaxation target only (DD-D7),
+    # target endpoint exempt, added only when live — never as `+ 0.0` — so TB-G2 holds
+    # by construction and every committed Track 2/2F/3 figure reproduces from this file
+    # unchanged.
+    w_known_thresh_pctl: float = 0.0
+
+    # CRE- (prereg §3.3): the SAME shape as w_known_ramp_pctl above, in the
+    # ADOPTED currency -- fame_lb_pctl, not pop-percentile. Currency is in the
+    # name. 0.0 = off; at k = 0 the term is exactly zero AND not added at all,
+    # so CRE-G1(b) holds by construction. Ruler-null nodes are priced at
+    # frame.pctl(0) (plan pin 2; disclosed per sweep JSON).
+    w_known_ramp_fame_pctl: float = 0.0
+
+    def __post_init__(self) -> None:
+        if self.toll_s is not None and self.toll_hops is not None:
+            raise ValueError(
+                "toll_s and toll_hops are two specifications of one knob; set one. "
+                f"got toll_s={self.toll_s}, toll_hops={self.toll_hops}"
+            )
+
+    # Guard G (§4). OFF for mirror verification, then enabled uniformly (G5a).
+    guard_min_intermediary: bool = False
+
+    @classmethod
+    def production(cls) -> "SweepConfig":
+        """The configuration that must reproduce shipped `find_path` exactly."""
+        return cls()
+
+    def with_(self, **kw) -> "SweepConfig":
+        return replace(self, **kw)
+
+
+@dataclass(frozen=True, slots=True)
+class MirrorContext:
+    """Artifact-derived quantities, computed once per run."""
+
+    pctl: np.ndarray          # float64, average-rank percentile (P6)
+    jump_scale_pctl: float    # mean|dpop_raw| / mean|dpctl| over all directed edges
+    # CRE-: the DEVICE fame array from Ruler.arrays -- fame_lb_pctl with plan
+    # pin 2's two unmeasured classes already priced (null -> frame.pctl(0),
+    # absent -> 0.5). A device input only; scoring never reads it (FAM-AM1.8).
+    fame_pctl: np.ndarray
+
+    @classmethod
+    def build(cls, store: GraphStore, fame_device: np.ndarray) -> "MirrorContext":
+        n = len(store.mbids)
+        pop = np.asarray(store.pop_raw, dtype=np.float64)
+
+        # P6: average rank over N, ties averaged. Deterministic; np.argsort alone
+        # is order-dependent among ties.
+        order = np.argsort(pop, kind="stable")
+        ranks = np.empty(n, dtype=np.float64)
+        srt = pop[order]
+        i = 0
+        while i < n:
+            j = i
+            while j + 1 < n and srt[j + 1] == srt[i]:
+                j += 1
+            ranks[order[i : j + 1]] = (i + j) / 2.0
+            i = j + 1
+        pctl = ranks / (n - 1)
+
+        src = np.repeat(np.arange(n, dtype=np.int64), np.diff(store.offsets))
+        dst = np.asarray(store.neighbours, dtype=np.int64)
+        mean_raw = float(np.abs(pop[src] - pop[dst]).mean())
+        mean_pctl = float(np.abs(pctl[src] - pctl[dst]).mean())
+        return cls(pctl=pctl, jump_scale_pctl=mean_raw / mean_pctl,
+                   fame_pctl=np.asarray(fame_device, dtype=np.float64))
+
+
+def _relaxed_floor(base: float, excludes: list[Exclusion], relax_known: float,
+                   relax_dislike: float) -> float:
+    n_known = sum(1 for e in excludes if e.reason == KNOWN)
+    n_dislike = sum(1 for e in excludes if e.reason == DISLIKE)
+    return max(0.0, base - relax_known * n_known - relax_dislike * n_dislike)
+
+
+def _avoidance_map(store: GraphStore, disliked: list[int], cfg: SweepConfig) -> dict[int, float]:
+    penalties: dict[int, float] = {}
+    for start in disliked:
+        seen = {start}
+        frontier = {start}
+        for hop in range(1, cfg.avoid_radius + 1):
+            nxt: set[int] = set()
+            penalty = cfg.avoid_penalty * (cfg.avoid_decay ** (hop - 1))
+            for u in frontier:
+                for v, _ in store.neighbours_of(u):
+                    if v not in seen:
+                        seen.add(v)
+                        nxt.add(v)
+                        penalties[v] = max(penalties.get(v, 0.0), penalty)
+            frontier = nxt
+    return penalties
+
+
+def _dijkstra(
+    store: GraphStore,
+    source: int,
+    target: int,
+    hard: set[int],
+    avoid: dict[int, float],
+    cfg: SweepConfig,
+    ctx: MirrorContext,
+    excludes: list[Exclusion],
+    masked_edge: tuple[int, int] | None,
+    stats: dict[str, int] | None = None,
+) -> list[int] | None:
+    use_pctl_jump = cfg.jump_currency == PCTL
+    w_jump_eff = cfg.w_jump
+    if use_pctl_jump and cfg.jump_mean_match:
+        w_jump_eff = cfg.w_jump * ctx.jump_scale_pctl
+
+    floor_val = 0.0
+    floor_on = cfg.floor_mode != OFF
+    if floor_on:
+        if cfg.floor_mode == PCTL:
+            base = min(float(ctx.pctl[source]), float(ctx.pctl[target]))
+            floor_val = _relaxed_floor(base, excludes, cfg.floor_relax_known_pctl,
+                                       cfg.floor_relax_dislike_pctl)
+        else:
+            base = min(float(store.pop_raw[source]), float(store.pop_raw[target]))
+            floor_val = _relaxed_floor(base, excludes, cfg.floor_relax_known,
+                                       cfg.floor_relax_dislike)
+
+    # Track 3: k is the number of `known` bypasses so far, fixed for the whole request,
+    # so the ramp is a constant multiplier here rather than part of the search state.
+    n_known = sum(1 for e in excludes if e.reason == KNOWN)
+    ramp = cfg.w_known_ramp_pctl * n_known
+    ramp_on = ramp != 0.0
+    # Track 3b (TB-P4): same constant-per-request shape as the ramp.
+    thresh = cfg.w_known_thresh_pctl * n_known
+    thresh_on = thresh != 0.0
+    # CRE-: the fame-currency ramp, same constant-per-request shape as the two above.
+    ramp_fame = cfg.w_known_ramp_fame_pctl * n_known
+    ramp_fame_on = ramp_fame != 0.0
+
+    toll_on = cfg.toll_s is not None or cfg.toll_hops is not None
+    if cfg.toll_hops is not None:
+        toll = cfg.toll_hops * cfg.w_hop
+    elif cfg.toll_s is not None:
+        toll = cfg.w_sim * (1.0 - cfg.toll_s)
+    else:
+        toll = 0.0
+
+    dist = {source: 0.0}
+    prev: dict[int, int] = {}
+    pq: list[tuple[float, int]] = [(0.0, source)]
+
+    while pq:
+        d, u = heapq.heappop(pq)
+        if u == target:
+            break
+        if d > dist.get(u, float("inf")):
+            continue
+        pop_raw_u = float(store.pop_raw[u])
+        pctl_u = float(ctx.pctl[u])
+        for v, sim in store.neighbours_of(u):
+            if v in hard:
+                continue
+            if masked_edge is not None and u == masked_edge[0] and v == masked_edge[1]:
+                continue
+            pop_raw_v = float(store.pop_raw[v])
+            pctl_v = float(ctx.pctl[v])
+
+            jump = abs(pctl_u - pctl_v) if use_pctl_jump else abs(pop_raw_u - pop_raw_v)
+            if not floor_on:
+                floor_pen = 0.0
+            elif cfg.floor_mode == PCTL:
+                floor_pen = max(0.0, floor_val - pctl_v)
+            else:
+                floor_pen = max(0.0, floor_val - pop_raw_v)
+
+            if stats is not None:
+                stats["examined"] += 1
+                if floor_pen > 0.0:
+                    stats["floor_active"] += 1
+
+            # Production's term order, preserved exactly — see module docstring.
+            cost = (
+                cfg.w_sim * (1.0 - float(sim))
+                + w_jump_eff * jump
+                + cfg.w_floor * floor_pen
+                + cfg.w_avoid * avoid.get(v, 0.0)
+                + cfg.w_degree_hub * float(store.degree_hub_penalty[v])
+                + cfg.w_hop
+            )
+            if toll_on and float(sim) >= 1.0:
+                cost += toll
+            # Track 3 (DD-P4). Target exempt: the final hop into B is on every complete
+            # path exactly once, so tolling it adds a constant to all alternatives and
+            # distorts nothing. Added only when live, never as `+ 0.0`, per the module
+            # docstring's byte-identity rule -- this is what discharges DD-G2 at k = 0.
+            if ramp_on and v != target:
+                cost += ramp * pctl_v
+            # Track 3b (TB-P4): thresholded — zero on sub-decile targets at any w.
+            if thresh_on and v != target:
+                cost += thresh * max(0.0, pctl_v - KNOWN_THRESH_PCTL_KNEE)
+            # CRE-: fame-currency ramp. Same rules as the two terms above:
+            # relaxation target only (DD-D7), target endpoint exempt, added
+            # only when live -- never as `+ 0.0`.
+            if ramp_fame_on and v != target:
+                cost += ramp_fame * float(ctx.fame_pctl[v])
+
+            nd = d + cost
+            if nd < dist.get(v, float("inf")):
+                dist[v] = nd
+                prev[v] = u
+                heapq.heappush(pq, (nd, v))
+
+    # CRE-G2(b)'s independent reference: the cost the SEARCH accumulated, so a
+    # post-hoc decomposition is checked against the instrument rather than
+    # against its own formula (analyst B1 -- the first draft compared a closed
+    # form to itself and could not fail).
+    if stats is not None:
+        stats["path_cost"] = dist.get(target)
+
+    if target not in prev:
+        return None
+    path = [target]
+    while path[-1] != source:
+        path.append(prev[path[-1]])
+    return path[::-1]
+
+
+def find_path_mirror(
+    store: GraphStore,
+    source: int,
+    target: int,
+    excludes: list[Exclusion],
+    cfg: SweepConfig,
+    ctx: MirrorContext,
+    stats: dict[str, int] | None = None,
+) -> list[int] | None:
+    """Least-cost path under `cfg`. With `SweepConfig.production()`, byte-identical
+    to `api.pathfinding.find_path`."""
+    if source == target:
+        return [source]
+
+    hard = {e.node for e in excludes} - {source, target}
+    avoid = _avoidance_map(store, [e.node for e in excludes if e.reason == DISLIKE], cfg)
+
+    path = _dijkstra(store, source, target, hard, avoid, cfg, ctx, excludes, None, stats)
+
+    # Guard G (§4): a journey has at least one stop. Exclusions are node-based and
+    # cannot forbid an edge, so mask the direct edge and re-run. Only the
+    # source->target direction is masked: a shortest path to `target` cannot use the
+    # reverse direction, since the search stops when `target` is popped.
+    if cfg.guard_min_intermediary and path is not None and len(path) == 2:
+        # DD-P3 finding 10: guard G is constant as a *setting* but not in its
+        # *activation*. The Track 3 device exempts the target, so the 2-node direct
+        # path is the unique zero-toll path at every k while every alternative grows
+        # linearly -- guard G can therefore fire in an arm where it does not fire in P.
+        # Counted so that is visible rather than inferred.
+        if stats is not None:
+            stats["guard_fired"] = stats.get("guard_fired", 0) + 1
+        path = _dijkstra(store, source, target, hard, avoid, cfg, ctx, excludes,
+                         (source, target), stats)
+
+    return path
+
+
+def term_breakdown(store, ctx, cfg, excludes, path) -> list[dict]:
+    """Per-edge cost decomposition along a RETURNED path (CRE-D2).
+
+    Recomputed post-hoc from the same expressions _dijkstra uses, so a term's
+    share is exact, not sampled. The mirror's stats counters are search-wide
+    tallies; this is per chosen edge, which is what §0.3's w_floor attribution
+    rule needs.
+
+    THE FIVE TERMS CARRIED ARE EXHAUSTIVE ONLY UNDER THE ENTRY ASSERTIONS
+    BELOW (analyst m14). assert_cost_decomposition compares this breakdown's
+    total against the search's own accumulated cost, so any live term omitted
+    here would fire that check spuriously -- the assertions make the omission
+    impossible rather than argued.
+
+    Two production terms are deliberately absent, and the assertions are what
+    make their absence safe rather than assumed: the AVOID term is identically
+    zero because the ladder is all-`known` (no DISLIKE exclusion exists, so
+    _avoidance_map returns {}), and the DEGREE-HUB term is identically zero
+    because w_degree_hub is held at 0.0 in every cell (prereg §0.3).
+    """
+    assert all(e.reason == KNOWN for e in excludes), "ladder is all-known"
+    assert cfg.toll_s is None and cfg.toll_hops is None
+    assert cfg.w_known_thresh_pctl == 0.0 and cfg.w_known_ramp_pctl == 0.0
+    assert cfg.w_degree_hub == 0.0, "held at 0.0 in every cell (prereg s0.3)"
+    n_known = sum(1 for e in excludes if e.reason == KNOWN)
+    base = min(float(store.pop_raw[path[0]]), float(store.pop_raw[path[-1]]))
+    floor_val = _relaxed_floor(base, excludes, cfg.floor_relax_known,
+                               cfg.floor_relax_dislike)
+    ramp_fame = cfg.w_known_ramp_fame_pctl * n_known
+    out = []
+    for u, v in zip(path, path[1:]):
+        sim = dict(store.neighbours_of(u))[v]
+        pop_u, pop_v = float(store.pop_raw[u]), float(store.pop_raw[v])
+        row = {
+            "sim": cfg.w_sim * (1.0 - float(sim)),
+            "jump_raw": cfg.w_jump * abs(pop_u - pop_v),
+            "floor_raw": cfg.w_floor * max(0.0, floor_val - pop_v),
+            "hop": cfg.w_hop,
+            "ramp_fame": (ramp_fame * float(ctx.fame_pctl[v])
+                          if ramp_fame != 0.0 and v != path[-1] else 0.0),
+        }
+        out.append(row)
+    return out

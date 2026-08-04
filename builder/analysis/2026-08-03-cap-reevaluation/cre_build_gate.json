@@ -1,0 +1,42 @@
+{
+  "greens": {
+    "ALG-E": {
+      "mirror_sha256": "44003fcceeadaac35303eab6810a1b2bee43c1fd8fd84dff29d3552d949fcc59",
+      "pipeline_sha256": "44003fcceeadaac35303eab6810a1b2bee43c1fd8fd84dff29d3552d949fcc59",
+      "identical": true,
+      "result": "PASS",
+      "diagnostics": {
+        "nodes_entering_cap": 65761,
+        "pre_cap_edges": 3753193,
+        "dropped_no_release_tail": 7002,
+        "dropped_featured_credit": 2194,
+        "nodes_after_prune": 64724,
+        "pop_log_low": 0.29227728746734544,
+        "pop_log_high": 9.05368670251814
+      },
+      "seconds": 118.2
+    },
+    "ALG-B": {
+      "mirror_sha256": "a8507c6e1e044a8c1a6fc3b6d5eea47380a5b1b7f3cd70e2f0d3118b25fe53f6",
+      "pipeline_sha256": "a8507c6e1e044a8c1a6fc3b6d5eea47380a5b1b7f3cd70e2f0d3118b25fe53f6",
+      "identical": true,
+      "result": "PASS",
+      "diagnostics": {
+        "nodes_entering_cap": 63525,
+        "pre_cap_edges": 3332550,
+        "dropped_no_release_tail": 9501,
+        "dropped_featured_credit": 1940,
+        "nodes_after_prune": 58851,
+        "pop_log_low": 0.31307949160987886,
+        "pop_log_high": 9.118969278988496
+      },
+      "seconds": 209.6
+    }
+  },
+  "red": {
+    "k": 49,
+    "sha256": "65d4afdcd5f35c377577014be3d4b3d2286d43a1f7e3f8c74a44f39d75b98e41",
+    "differs": true,
+    "result": "PASS"
+  }
+}
