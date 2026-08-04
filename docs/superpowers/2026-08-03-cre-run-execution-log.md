@@ -323,3 +323,64 @@ record. That cost four minutes and bought a check worth more than it: **all eigh
 came back byte-identical to the first run**, artists, edges and sha256 alike, across two
 independent invocations. Determinism (spec §9) is now measured on this harness rather
 than inherited from the pipeline's own test.
+
+---
+
+## §6 — `CRE-T6`: the `S2` device, its companions, and the tag cells
+
+**Figures: `cre_s2_degeneracy_gate.json` and the `S2` rows of `cre_builds.json`.**
+
+### The branch was read from the record, not from memory
+
+`--tag-cells` reads `cre_d1.json`'s `branch` field at run time and derives its data-set
+list from it. It printed `not_supported → tag cells on ('ALG-E',)`, so **`B-S2` and its
+two companions were never built**, exactly as `CRE-D1`'s consequence requires. Wiring it
+this way rather than hard-coding `ALG-E` means the branch cannot drift from the committed
+outcome.
+
+### The degeneracy gate, which is the whole argument that `S2` is one knob from `S1`
+
+**On the real build: byte-identical to the committed `E-S1` sha.** With an agreement
+table that is undefined everywhere, `cap_tag_limited` reproduces
+`cap_trimmed_union(trim="weakest_first")` exactly — so §0.2's naming of `S1` as `S2`'s
+isolating baseline is now a measured fact rather than a design intention, and the factor
+table's row really does differ by one column.
+
+**On the synthetic fixture, the tuple key's middle element was tested where it actually
+bites — and the plan's own worked case turned out not to be constructible.** The plan
+motivates that element with an IEEE product collapse (two distinct strengths whose
+products with the neutral constant are equal). A search over 2,000,000 adjacent doubles
+found **no such pair** at the 0.15 constant, which is consistent with the plan's own note
+that collapses measure at zero on today's edge scores. Rather than assert a case that
+does not exist, the test uses the degeneracy that **does**: agreement measured at exactly
+0 on every edge — the block analyst M4 found on ~3.9 % of real edges, here made total. The
+first key element then ties on *every* edge, which exercises the middle element harder
+than a rare pair would. **And the red half is included**: a bare product key is shown to
+produce a genuinely different surviving set on the same fixture, so the degeneracy test
+is not passing vacuously.
+
+Liveness is pinned too: an edge ranked at agreement 0 is deleted first at an over-budget
+node even though it is the strongest edge there — the device re-orders deletions rather
+than merely being wired in.
+
+Both companions are pinned by property: the vote-scramble preserves each artist's
+multiset of strengths and its label set exactly while changing the assignment (so it is
+`CRE-AM1`'s control and not a different device), and the label-scramble preserves exactly
+which artists are labelled (`TAS-AM3b`'s stronger form).
+
+### An omission of mine, caught against the plan and repaired
+
+The first tag-cell run recorded only the labelled-node share. **The plan (analyst M8)
+requires each `S2` manifest to record the share of nodes with ≥ 2 *measured* agreements
+as well**, because a node with fewer than that has its whole neighbour pool collapse to
+one constant and **the device is structurally inert there** — so the labelled share alone
+overstates where `S2` can act. Added, and computed from the built artifacts rather than by
+rebuilding: the cells are byte-deterministic, so the values are identical to what the
+build would have written, and the code path is now in `build_tag_cell` for any later run.
+
+On `ALG-E` the inert share is small, and comfortably better than the pre-drop `ALG-B`
+figure the plan warned about — but that warning was aimed at `B-S2`, which does not exist
+on this branch. **T11 must still store both shares beside any `CRE-C5` attribution field**;
+that obligation is unchanged.
+
+7 unit tests pass; 26 across the suite.

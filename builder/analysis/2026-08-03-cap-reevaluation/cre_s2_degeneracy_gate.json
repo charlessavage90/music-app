@@ -1,0 +1,6 @@
+{
+  "gate": "S2 degeneracy",
+  "sha256": "a27610be6cefab33ab0519f159824638233386c7af53f1eedffa16d42e1a72fd",
+  "expected_E-S1": "a27610be6cefab33ab0519f159824638233386c7af53f1eedffa16d42e1a72fd",
+  "result": "PASS"
+}

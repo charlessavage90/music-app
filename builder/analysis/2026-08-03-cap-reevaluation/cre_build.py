@@ -36,6 +36,7 @@ import hashlib
 import json
 import logging
 import math
+import statistics
 import sys
 import time
 from collections import defaultdict
@@ -43,7 +44,7 @@ from pathlib import Path
 
 from cre_common import in_dir, use_frozen
 
-use_frozen("track_b")
+use_frozen("track_b", "tag_disc", "rel", "wgt", "wav")
 
 from artistpath_builder.artifact import serialise  # noqa: E402
 from artistpath_builder.config import BuilderConfig  # noqa: E402
@@ -72,9 +73,12 @@ from cb_build_variants import (  # noqa: E402
     ALGORITHMS,
     ARCHIVES,
     ReadOnlyArchive,
+    _desc,
+    _top_j,
     cap_trimmed_union,
     cap_uncapped,
 )
+from tas_common import GLOBAL_NEUTRAL_FALLBACK  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
@@ -93,6 +97,10 @@ SUPPLY = {
     "S3": ("UC", lambda a, r, p: cap_uncapped(a, r, p)),
 }
 STAGED_BARRED = {"S3"}
+
+# S2 shares S1's shape (TUw-50-50) and differs at exactly one knob: the
+# deletion ranking. That is what makes S1 its isolating baseline in §0.2.
+TAG_KINDS = ("real", "label_scramble", "vote_scramble")
 
 
 def _drop_lists(config: BuilderConfig, known: set[str]) -> tuple[set[str], set[str]]:
@@ -266,6 +274,102 @@ def assemble_cleaned(config: BuilderConfig, archive, source, cap_step):
     return graph, diagnostics
 
 
+def cap_tag_limited(adjacency, ranking, pop, *, j, d, agree):
+    """CRE-S2 (prereg §3.2 + CRE-AM1). ONE knob differs from cap_trimmed_union:
+    the ranking that decides which edges an over-budget node loses.
+
+    Deletion key ascending: (strength(u,v) * a_eff(u,v), strength(u,v), _desc(v));
+      a_eff = agree.a(u,v) where measured, else the median of u's measured
+      values (>= 2, else GLOBAL_NEUTRAL_FALLBACK) -- the committed neutral rule,
+      so unlabelled edges rank by LB similarity alone at a neutral level in the
+      same pool. Tags re-order the deletion ranking; they never create an edge
+      or veto by absence.
+
+    THE MIDDLE KEY ELEMENT IS LOAD-BEARING (analyst M4): agreement is exactly 0
+    on ~3.9% of measured edges, and a bare product would order that whole block
+    by MBID with similarity playing no part. The strength element keeps
+    LB-similarity order inside the zero block and every product tie, and makes
+    the degeneracy gate's byte-identity exact by construction.
+
+    Structure, order and determinism are cap_trimmed_union's, unchanged: top-j
+    union, symmetrise keep-stronger, then a ceiling of d applied by WHOLE-EDGE
+    deletion at over-budget nodes in (-degree, mbid) order.
+    """
+    keep = _top_j(ranking, adjacency, j, lambda u, v: (-ranking[u][v], v))
+
+    unioned = {node: {} for node in adjacency}
+    for node, edges in adjacency.items():
+        for dst, score in edges.items():
+            if dst in keep[node] or node in keep.get(dst, set()):
+                unioned[node][dst] = score
+    result = symmetrise(unioned)
+
+    def strength(u: str, v: str) -> float:
+        return max(ranking.get(u, {}).get(v, float("-inf")),
+                   ranking.get(v, {}).get(u, float("-inf")))
+
+    for node in sorted(result, key=lambda n: (-len(result[n]), n)):
+        excess = len(result[node]) - d
+        if excess <= 0:
+            continue
+        neighbours = list(result[node])
+        measured = {}
+        for v in neighbours:
+            got = agree.a(node, v)
+            if got is not None:
+                measured[v] = got
+        # The committed neutral rule (frame_pass / tas_select): the median of
+        # this node's OWN measured values where there are at least two, else the
+        # global fallback. Applied per node, so an unlabelled edge sits at a
+        # neutral level inside the same pool it is ranked against.
+        neutral = (statistics.median(measured.values()) if len(measured) >= 2
+                   else GLOBAL_NEUTRAL_FALLBACK)
+        a_eff = {v: measured.get(v, neutral) for v in neighbours}
+        doomed = sorted(
+            neighbours,
+            key=lambda v: (strength(node, v) * a_eff[v],
+                           strength(node, v),
+                           _desc(v)),
+        )[:excess]
+        for victim in doomed:
+            result[node].pop(victim, None)
+            result[victim].pop(node, None)
+    return result
+
+
+def s2_shares(store, agree) -> dict:
+    """Analyst M8: the device is structurally INERT at a node whose neighbour
+    pool has fewer than 2 measured agreements -- the per-node neutral median is
+    then the global fallback for every neighbour, `a_eff` collapses to one
+    constant across the whole pool, and the deletion order reduces to strength.
+
+    So the labelled-node share alone overstates where the device can act. Both
+    shares are recorded per cell, and T11 stores them beside any CRE-C5
+    attribution field as a licensing constraint the findings note must quote.
+    """
+    mbids = store.mbids
+    labelled = 0
+    ge2 = 0
+    for u in range(len(mbids)):
+        mu = mbids[u]
+        if agree.labelled(mu):
+            labelled += 1
+        measured = 0
+        for v, _sim in store.neighbours_of(u):
+            if agree.a(mu, mbids[v]) is not None:
+                measured += 1
+                if measured >= 2:
+                    break
+        if measured >= 2:
+            ge2 += 1
+    n = len(mbids)
+    return {
+        "labelled_node_share": labelled / n,
+        "nodes_with_ge2_measured_agreements_share": ge2 / n,
+        "device_structurally_inert_node_share": 1.0 - ge2 / n,
+    }
+
+
 def _archive(data_set: str):
     # Every archive open goes through ReadOnlyArchive (GRT-A1, standing): this
     # harness only ever reads, so a put() firing is a bug here, not a finding.
@@ -356,10 +460,91 @@ def build_cell(data_set: str, supply: str) -> dict:
     return manifest
 
 
+def build_tag_cell(data_set: str, kind: str) -> dict:
+    """S2 = S1's shape with the deletion ranking replaced. Same j, d and trim
+    structure, so S1 is its isolating baseline and exactly one column moves."""
+    from cre_tags import agreement_table
+
+    cfg = _config(data_set)
+    agree = agreement_table(kind, n_artists=None)
+    suffix = {"real": "", "label_scramble": "-labelscramble",
+              "vote_scramble": "-votescramble"}[kind]
+    cell = f"{data_set[-1]}-S2{suffix}"
+    CELLS.mkdir(parents=True, exist_ok=True)
+    t0 = time.time()
+    graph, diag = assemble_cleaned(
+        cfg, _archive(data_set), _source(cfg),
+        lambda a, r, p: cap_tag_limited(a, r, p, j=50, d=50, agree=agree))
+    payload = serialise(graph)
+    (CELLS / f"{cell}.bin").write_bytes(payload)
+
+    # Analyst M8: the device is structurally inert at a node whose whole
+    # neighbour pool collapses to one constant, i.e. a node with fewer than 2
+    # MEASURED agreements. Recorded per cell as a licensing constraint T11
+    # stores beside any CRE-C5 attribution field.
+    use_frozen("api_src")
+    from artistpath_api.graph_store import GraphStore
+    shares = s2_shares(GraphStore.from_bytes(payload), agree)
+    manifest = {
+        "cell": cell, "data_set": data_set, "supply": "S2",
+        "cap_rule": "tag-limited TUw-50-50", "agreement_kind": kind,
+        "agreement_seed": 20260803,
+        "isolating_baseline": f"{data_set[-1]}-S1",
+        "staged_reference_barred_from_candidacy": False,
+        "sha256": hashlib.sha256(payload).hexdigest(),
+        "artists": graph.artist_count, "edges": graph.edge_count,
+        "path": str(CELLS / f"{cell}.bin"),
+        "drop_flags": {"drop_no_release_tail": True, "drop_featured_credit": True},
+        **shares,
+        "diagnostics": diag,
+        "seconds": round(time.time() - t0, 1),
+    }
+    (CELLS / f"{cell}.bin.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8")
+    print(f"  {cell:22s} {kind:15s} artists={manifest['artists']:6d} "
+          f"edges={manifest['edges']:8d} "
+          f"labelled={manifest['labelled_node_share']:.4f} "
+          f"ge2={manifest['nodes_with_ge2_measured_agreements_share']:.4f} "
+          f"sha={manifest['sha256'][:12]} ({manifest['seconds']}s)", flush=True)
+    return manifest
+
+
+def degeneracy_gate() -> dict:
+    """WAV-0d's pattern on the real build: with an agreement table that is
+    undefined everywhere, every a_eff collapses to one constant, so
+    cap_tag_limited must reproduce cap_trimmed_union EXACTLY -- byte-identical
+    to the committed E-S1 cell. A mismatch means S2 is not one knob away from
+    S1 and the §0.2 isolation is broken; stop."""
+    from cre_tags import AllNone
+
+    cfg = _config("ALG-E")
+    graph, _ = assemble_cleaned(
+        cfg, _archive("ALG-E"), _source(cfg),
+        lambda a, r, p: cap_tag_limited(a, r, p, j=50, d=50, agree=AllNone()))
+    got = hashlib.sha256(serialise(graph)).hexdigest()
+    committed = {c["cell"]: c for c in json.loads(
+        in_dir("cre_builds.json").read_text(encoding="utf-8"))["cells"]}
+    want = committed["E-S1"]["sha256"]
+    ok = got == want
+    print(f"DEGENERACY GATE: {'PASS' if ok else 'FAIL'}  "
+          f"got={got[:12]} want(E-S1)={want[:12]}", flush=True)
+    if not ok:
+        raise SystemExit(
+            "DEGENERACY GATE FAILED: cap_tag_limited with an all-None table is "
+            "NOT byte-identical to E-S1. S2 is not one knob away from S1 -- the "
+            "§0.2 isolation is broken. Stop."
+        )
+    return {"gate": "S2 degeneracy", "sha256": got, "expected_E-S1": want,
+            "result": "PASS"}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--gate", action="store_true")
     ap.add_argument("--all-nontag", action="store_true")
+    ap.add_argument("--degeneracy-gate", action="store_true")
+    ap.add_argument("--tag-cells", action="store_true")
+    ap.add_argument("--s2-shares", action="store_true")
     args = ap.parse_args()
 
     if args.gate:
@@ -375,6 +560,50 @@ def main() -> int:
         in_dir("cre_builds.json").write_text(
             json.dumps({"cells": manifests}, indent=2), encoding="utf-8")
         print(f"wrote cre_builds.json ({len(manifests)} cells)")
+    if args.degeneracy_gate:
+        doc = degeneracy_gate()
+        in_dir("cre_s2_degeneracy_gate.json").write_text(
+            json.dumps(doc, indent=2), encoding="utf-8")
+        print("wrote cre_s2_degeneracy_gate.json")
+    if args.s2_shares:
+        from cre_tags import agreement_table
+        use_frozen("api_src")
+        from artistpath_api.graph_store import GraphStore
+
+        cells = json.loads(
+            in_dir("cre_builds.json").read_text(encoding="utf-8"))["cells"]
+        for c in cells:
+            if c["supply"] != "S2" or "nodes_with_ge2_measured_agreements_share" in c:
+                continue
+            agree = agreement_table(c["agreement_kind"], n_artists=None)
+            store = GraphStore.from_bytes(Path(c["path"]).read_bytes())
+            c.update(s2_shares(store, agree))
+            Path(c["path"] + ".json").write_text(
+                json.dumps(c, indent=2), encoding="utf-8")
+            print(f"  {c['cell']:22s} labelled="
+                  f"{c['labelled_node_share']:.4f} ge2="
+                  f"{c['nodes_with_ge2_measured_agreements_share']:.4f} "
+                  f"inert={c['device_structurally_inert_node_share']:.4f}",
+                  flush=True)
+        in_dir("cre_builds.json").write_text(
+            json.dumps({"cells": cells}, indent=2), encoding="utf-8")
+        print("updated cre_builds.json with the M8 shares")
+    if args.tag_cells:
+        # CRE-D1 fired not_supported, so the (D1-branch) cells -- B-S2 and its
+        # companions -- DO NOT EXIST. Read from the committed JSON rather than
+        # remembered, so the branch cannot drift.
+        d1 = json.loads(in_dir("cre_d1.json").read_text(encoding="utf-8"))
+        data_sets = ("ALG-E", "ALG-B") if d1["branch"] == "supported" else ("ALG-E",)
+        print(f"CRE-D1 branch = {d1['branch']}  ->  tag cells on {data_sets}")
+        existing = json.loads(
+            in_dir("cre_builds.json").read_text(encoding="utf-8"))["cells"]
+        existing = [c for c in existing if c["supply"] != "S2"]
+        for data_set in data_sets:
+            for kind in TAG_KINDS:
+                existing.append(build_tag_cell(data_set, kind))
+        in_dir("cre_builds.json").write_text(
+            json.dumps({"cells": existing}, indent=2), encoding="utf-8")
+        print(f"wrote cre_builds.json ({len(existing)} cells)")
     return 0
 
 

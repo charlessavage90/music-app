@@ -199,6 +199,99 @@
         "pop_log_high": 9.118969278988496
       },
       "seconds": 28.2
+    },
+    {
+      "cell": "E-S2",
+      "data_set": "ALG-E",
+      "supply": "S2",
+      "cap_rule": "tag-limited TUw-50-50",
+      "agreement_kind": "real",
+      "agreement_seed": 20260803,
+      "isolating_baseline": "E-S1",
+      "staged_reference_barred_from_candidacy": false,
+      "sha256": "afe89a24f688972323c9f9fff3f128f65511352714cdd7cbbe337f0c4f2ff8ac",
+      "artists": 65596,
+      "edges": 1554986,
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\E-S2.bin",
+      "drop_flags": {
+        "drop_no_release_tail": true,
+        "drop_featured_credit": true
+      },
+      "labelled_node_share": 0.9215043600219526,
+      "diagnostics": {
+        "nodes_entering_cap": 65761,
+        "pre_cap_edges": 3753193,
+        "dropped_no_release_tail": 7002,
+        "dropped_featured_credit": 2194,
+        "nodes_after_prune": 65596,
+        "pop_log_low": 0.0,
+        "pop_log_high": 9.05368670251814
+      },
+      "seconds": 261.2,
+      "nodes_with_ge2_measured_agreements_share": 0.8935148484663699,
+      "device_structurally_inert_node_share": 0.10648515153363014
+    },
+    {
+      "cell": "E-S2-labelscramble",
+      "data_set": "ALG-E",
+      "supply": "S2",
+      "cap_rule": "tag-limited TUw-50-50",
+      "agreement_kind": "label_scramble",
+      "agreement_seed": 20260803,
+      "isolating_baseline": "E-S1",
+      "staged_reference_barred_from_candidacy": false,
+      "sha256": "94df13d30aebae50128b846a95f4aeb01476fbde19f89e8feda172bcf3ec584b",
+      "artists": 65646,
+      "edges": 1599054,
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\E-S2-labelscramble.bin",
+      "drop_flags": {
+        "drop_no_release_tail": true,
+        "drop_featured_credit": true
+      },
+      "labelled_node_share": 0.9215641470919782,
+      "diagnostics": {
+        "nodes_entering_cap": 65761,
+        "pre_cap_edges": 3753193,
+        "dropped_no_release_tail": 7002,
+        "dropped_featured_credit": 2194,
+        "nodes_after_prune": 65646,
+        "pop_log_low": 0.0,
+        "pop_log_high": 9.05368670251814
+      },
+      "seconds": 449.7,
+      "nodes_with_ge2_measured_agreements_share": 0.8961246686774518,
+      "device_structurally_inert_node_share": 0.10387533132254823
+    },
+    {
+      "cell": "E-S2-votescramble",
+      "data_set": "ALG-E",
+      "supply": "S2",
+      "cap_rule": "tag-limited TUw-50-50",
+      "agreement_kind": "vote_scramble",
+      "agreement_seed": 20260803,
+      "isolating_baseline": "E-S1",
+      "staged_reference_barred_from_candidacy": false,
+      "sha256": "cd2a4161d1947bef1f075d4da146489212a85a3fa7e8bddb4e0f7a761460986c",
+      "artists": 65601,
+      "edges": 1562750,
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\E-S2-votescramble.bin",
+      "drop_flags": {
+        "drop_no_release_tail": true,
+        "drop_featured_credit": true
+      },
+      "labelled_node_share": 0.9215255865002058,
+      "diagnostics": {
+        "nodes_entering_cap": 65761,
+        "pre_cap_edges": 3753193,
+        "dropped_no_release_tail": 7002,
+        "dropped_featured_credit": 2194,
+        "nodes_after_prune": 65601,
+        "pop_log_low": 0.0,
+        "pop_log_high": 9.05368670251814
+      },
+      "seconds": 470.2,
+      "nodes_with_ge2_measured_agreements_share": 0.8936144266093504,
+      "device_structurally_inert_node_share": 0.10638557339064958
     }
   ]
 }
