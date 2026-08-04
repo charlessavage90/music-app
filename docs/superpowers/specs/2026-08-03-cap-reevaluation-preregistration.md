@@ -727,3 +727,23 @@ instrumentation row added (critique F12b); §3.3 gained the `REQ-27` sentence
 (repo-check #9) and the `D3` carve-out; E-S2-P0 unmarked as branch-conditional
 (repo-check #6); plus the smaller wording corrections in repo-check #4, #5, #7,
 #8 and #10.
+
+### `CRE-AM2` — `C4`'s binding form is undefined at the two anchors; appended before any stage ran
+
+**No `CRE` stage has run and no result exists at this commit** — this resolves a
+mechanisation contradiction found in pre-run review of the execution plan (analyst
+critique M6, `builder/analysis/2026-08-03-cre-plan-critique/`), and moves no bar.
+
+§5's `CRE-C4` binding form — arm `C4` ÷ its isolating baseline's `C4` ≥ 0.70 — cannot
+be computed for **E-S0-P0** (its §0.2 baseline is "—") and must not be computed for
+**B-S0-P0** (its §0.2 baseline is E-S0-P0, a different data set; §0.4 bars the ratio,
+and §9's rationale for the relative form — "self-normalises on each substrate" —
+presupposes a within-substrate denominator).
+
+**Resolution: the two anchor cells (E-S0-P0, B-S0-P0) carry no binding `C4`.** Their
+`C4` is reported **absolute** against the 0.75 reference line, marked "no binding
+form (anchor)". Every other cell's binding `C4` uses its §0.2 isolating baseline,
+which is within-data-set everywhere else. B-S0-P0's §0.2 baseline row is untouched
+for its own purpose — the data-set-isolated comparison under §0.4's rules; only its
+role in `C4`'s binding denominator is removed. No other criterion, bar, cell or read
+changes.
