@@ -23,7 +23,47 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-03 (later) — the experiment finished its measuring; nothing you can press changed
+## N/A (latest) — 2026-08-04 — the experiment's results are calculated; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from yesterday.**
+
+**What happened, in plain terms.** The map-rebuild experiment had already done the
+expensive part — building journeys on all sixteen versions of the map and pressing "I know
+them" twenty times on each of twenty-two pairs of artists. Yesterday that was raw
+recordings. Today it is arithmetic: for every version of the map we now have the four
+numbers the experiment agreed in advance to judge it on. **Those numbers exist and nobody
+has read them yet, deliberately.**
+
+**Why nobody has read them.** The rules for this experiment say the person who writes up
+what it means must be a fresh session that did not run it — the same reason you would not
+let someone mark their own exam. So this session calculated and stopped. **I have not
+looked at which version of the map won, and I have not told you.** The write-up is the
+next piece of work.
+
+**Two things I found wrong in the notes I inherited, and both are now corrected.** The
+previous session left instructions saying the calculation would not need the map files
+themselves. It did — one of the four measurements compares journeys against the
+most-connected artists on the real map, and that cannot be done from notes. And it had
+concluded that a certain internal counter could never possibly fire; checking properly
+showed it *can* fire, it simply never did. **The reassuring part of that second one:** it
+means no artist you would have been shown was ever scored on a guess. Where we had no
+information about how obscure someone was, that person never actually turned up in a
+journey.
+
+**Nothing is proposed for you to test, and there is no decision waiting on you** beyond
+merging the pull request. The next real entry here comes when a map is actually adopted,
+which is still behind a listening test.
+
+Detail, if you want it: `docs/superpowers/2026-08-03-cre-run-execution-log.md` §13–§14.
+
+---
+
+## N/A — 2026-08-03 (later) — the experiment finished its measuring; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04: only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no

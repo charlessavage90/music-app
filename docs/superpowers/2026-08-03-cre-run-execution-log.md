@@ -742,3 +742,157 @@ licensed, none is made, nothing is adopted, `REQ-38` is unspent.**
 - **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
   characters, conditional **2,155** lines, both equal to the Seam 1 figures. This session
   touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.
+
+---
+
+## §13 — `CRE-T11`: criteria figures, the run-state map, and SEAM 3
+
+`cre_score.py` + `test_cre_score.py` (33 tests) → `cre_scores.json`. **FIGURES ONLY, NO
+VERDICTS**, the `fi_stats` precedent: no `CRE-R` read is evaluated, none is made, nothing
+is adopted, `REQ-38` is unspent. Figures live in the committed JSON and are **cited, never
+restated** — including in this section.
+
+**Two corrections to the mid-flight handoff, both found by reading source rather than by
+trusting its summary.** They are recorded here because a successor otherwise inherits both
+as settled.
+
+1. **"`CRE-T11` needs no graph artifact" is false for `CRE-C2`.** It holds for `CRE-C1`, `CRE-C4`
+   and `CRE-C5`. It fails for `CRE-C2`, whose primary reference the prereg §5 fixes as *the
+   production artifact's* top-1%-by-degree set, with the own-graph share reported beside
+   it — and **no degree set is committed in any Stage-0/1/2 output** (checked: the string
+   `top1pct` in `cre_screen.json` and `cre_gates.json` is the pair-*class* name, not a
+   degree set). The plan is internally inconsistent here: its T11 `Interfaces` block lists
+   JSON inputs only, while its own `C2` bullet demands both degree references. **The prereg
+   governs** (plan §Global Constraints), so `cre_score.py` loads the adopted artifact and
+   the eleven cells through the existing sha-asserting loaders (`load_adopted`,
+   `load_cell`). Cost: about two seconds. The figures-only *output* discipline is untouched
+   — what the handoff was protecting was the seam, and the seam is intact.
+2. **Owed item 1's remaining half is discharged, and against the handoff's position.**
+   Its proof premise — the snapshot's key set bounds every cell, so
+   `interiors_absent_from_snapshot` is structurally unexercisable — **does not hold.** The
+   snapshot's key set is (adopted node set) ∪ (`ALG-B`-MK50 node set): two **pruned**
+   populations. `S0b`, `S1` and `S3` all prune *less* than MK50, so a looser arm keeps
+   artists MK50 stranded and the snapshot therefore never covered. The premise bounded the
+   *crawl*, which is true and not the relevant bound. Measured by set-difference over all
+   eleven cells (figures in `cre_scores.json` → `run_state_map.unmeasured_class_counters`):
+   **every cell carries such nodes**, rising monotonically with how loosely the arm prunes,
+   and far higher on `ALG-B` than `ALG-E` — which is what the two-population key set
+   predicts. **Verdict: the counter is `live_but_unfired`, not unexercisable.** Its zero is
+   a true zero about *delivery*, not about existence: the counter only ever inspects
+   journey interiors, so it is silent on nodes that exist and are never routed through.
+   **Consequence worth carrying forward:** no artist delivered mid-journey in any cell was
+   scored on the absent class's 0.5 neutral prior, so plan pin 2's class choice — measured
+   by the analyst as worth 1–2.5 whole hops — never moved a delivered path. **A residual
+   remains and is named rather than closed:** *why* none was delivered is not measured. The
+   plausible mechanism is that these nodes are exactly the weakly-connected ones a tighter
+   prune stranded, and weakly-connected nodes are unlikely to sit on a least-cost path;
+   that is inference, not a result.
+
+**One defect in this session's own output, caught after the first run.** The run-state map
+read a `cre_d1.json` / `cre_d3.json` key named `outcome`. **That key does not exist** — the
+committed records name their result `branch`. `dict.get` returned `None` silently, and the
+map reported `cre_r_readable: false` on a **complete** run, which is not a safe failure but
+a wrong answer: it would have told the Stage-3 session that no read was licensed. Fixed,
+and `test_run_state_reads_the_committed_stage0_key_not_a_remembered_one` now asserts the
+committed key exists and that `outcome` does not. **This is the plan's own warning
+discharging as written** ("expect the plan's code snippets to be broken, and find out by
+running them"; a name-resolution check tests neither arity nor attributes) — here the name
+was mine rather than the plan's, and only running it surfaced the defect.
+
+**What was implemented, against which pin.** The uniform drop over **pin 9's** partition —
+four groups (`canonical-E` 8 members, `canonical-B` 6, and the two staged `S3` cells each
+alone with their §0.2 baseline), computed from each sweep's committed `infeasible_cells`
+and **never re-derived from the padded ladder** (handoff claim 4). **All four dropped sets
+are committed** at `cre_scores.json` → `uniform_drop_partition`, one per group, and are to
+be read there — recorded as computed because a drop set that was never computed and one
+that was computed and came back empty are indistinguishable in the output otherwise.
+`C1` with plan pin 4's two reporting populations, the §0.4 null-share trend and its
+`descent_partly_unmeasurable` trigger, the d3–5 descriptive band marked `never_a_bar`, and
+the `C6` headroom companion stored only with its denominator and mean frontier size
+(analyst m13). `C2` on plan pin 6's deterministic `(degree desc, mbid asc)` ranking, gated
+on the primary reference only. `C4` baseline-relative per `CRE-AM2`, with the two anchors
+marked `no_binding_form` and the `CRE-R3` shape stored **as a flag, never a sentence**.
+`C5` on the two companions with their two separate licences (`CRE-AM1`).
+
+**Two things stated rather than omitted.** `CRE-C5`'s analyst-M8 obligation (the
+labelled-node and ≥ 2-measured-agreement shares beside any `B-S2` attribution) **has no
+cell to attach to**: `CRE-D1` fired `not_supported`, so no `B-S2` cell exists. And the §0.3
+`w_floor` guard fixes **no threshold**, so its boolean is deliberately the *conservative*
+rule — any non-zero differential firing sets it — with both magnitudes stored beside it, so
+the findings note reads the size and not the flag. Inventing a threshold there would have
+been a criterion wearing bookkeeping's clothes, which is not the executor's column.
+
+**Tests: 33, and the green was shown to go red** before it was believed (`working-style`
+memory: a new instrument is not evidence until it has been). Two tampers, both caught:
+re-deriving the uniform drop from the padded ladder (2 tests red), and pricing a ruler-null
+interior at 0.0 instead of skipping it (1 test red — the `FAM-AM1.8` violation). One test
+of mine was wrong on first run and the code was right: an all-tie ceiling fixture at N=101
+takes two slots, not one.
+
+**`cre_r_readable` is `true`**, with no unrun specified cell and both Stage-0 branches
+committed. That is the §6 *run-state precondition* only — it says a read is not barred by
+an unrun cell. **It evaluates no `CRE-R` and this session has read none.**
+
+---
+
+# SEAM 3 — the criteria figures are computed and committed
+
+**The Stage-3 findings note is the next session's work, and it must be a session that did
+not run the sweeps** (plan §"What is NOT in this plan"). It is written from
+`cre_scores.json` + the prereg, never from any session's memory — the four-part shape,
+every identifier carrying the plain sentence fixed for it in §5 before any result existed,
+the summary naming whatever cuts against it, and `CRE-R` reads under §6's wording
+constraints.
+
+## §14 — Closeout outcomes (Seam 3)
+
+- **A1**: this log, appended per task; §13 is `CRE-T11`.
+- **A2**: handoff `2026-08-04-HANDOFF-cre-t11-seam3.md`, from the template header. The
+  mid-flight handoff's role line now names it as successor **on next actions**.
+- **A3**: owed item 1 **struck in place, discharged** with what settled it. Items 2–4
+  re-tested against reality rather than re-listed: item 2 (the affine `pop_raw` map) is
+  **not yet due** — no cross-cell `pop_raw` sentence exists to carry it, and
+  `cre_scores.json` contains none; item 3 (`S2` share quoting) is **discharged by the
+  no-cell branch** above and recorded as such; item 4 (the barred cross-read) stands. Two
+  new deferrals, each with a condition: the `--out`-argument row the plan named, and the
+  pre-existing Snyk LOW.
+- **A4**: **inapplicable, said rather than skipped.** Analysis-only track; it adds no config
+  knob and moves no default. `BuilderConfig` and `ApiConfig` are untouched.
+- **A5**: all four ports (8000, 5173, 8138, 8139) swept and **empty**. No server was started
+  at any point this session and none was left behind; C1 is N/A, so none was relaunched.
+- **B1**: `docs-lint.sh` **hard checks passed**. Its check-4 candidate was a **real finding
+  and is fixed**: the execution plan still declared itself `ACTIVE` after its last task
+  completed. Check-5's bare-identifier candidates are the known committed `A`-series
+  collisions — **never renamed**, per the forward-only rule. The `doc-auditor` then ran the
+  semantic half and returned **four findings, all real and all fixed**, having checked the
+  six claims it was asked to disbelieve. **The HIGH is the one worth carrying:** the doc
+  map's row for the *Seam-1* handoff still asserted owed item 1 was **half** discharged —
+  true when written, false since §13, and invisible to every check that looks at the
+  documents this work *changed*, because that row was not one of them. The propagating half
+  of a struck deferral is the defect class, and it is why B1 is not made conditional on a
+  document having changed. Also fixed: a stale section header over the two struck items in
+  the mid-flight handoff (the same failure one level up); "all four groups dropped zero
+  cells" **restated in three documents** in violation of the one-document rule, now cited to
+  `cre_scores.json` in all three; and bare `C`-series tokens qualified to `CRE-`. **Its one
+  escalation was upheld against this session's own output**: the handoff's §6 paraphrase
+  enumerated **four of the five** standing bars, silently narrowing a constraint the
+  Stage-3 author is told to rely on. Replaced with a citation to §6 and a note saying why —
+  the fix for a lossy enumeration is never a better enumeration.
+- **B2**: `cre_score.py` is imported by `test_cre_score.py` and is an entry-point script
+  like `cre_screen.py` / `cre_sweep.py`. No orphan; `cre_gates` keeps its inbound import.
+- **B3**: the two tampers above, on the invariants whose failure would matter.
+- **B4**: the module docstring's central claim — that the prereg forces the artifact load —
+  was checked against `cre_common.py`, `cre_screen.json` and `cre_gates.json` before it was
+  written, which is how correction 1 was found.
+- **B5**: `.claude/` carries **no `CRE-` description**, so nothing there can have gone
+  stale. No figure is restated in the diff; §13 cites `cre_scores.json` and quotes no
+  number from it.
+- **C1**: N/A entry queued. Nothing changed that the owner can press.
+- **D1**: tree clean, nothing untracked.
+- **D3**: the sixteen sweep JSONs carry their cells' `artifact_sha256`; the eleven cell
+  checksums and the adopted artifact's were re-verified by the loaders on this run.
+- **D4**: builder **164 passed**, api **230 passed**, frontend **107 passed** (18 files),
+  `CRE-` analysis **33 passed** for this task.
+- **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
+  characters, conditional **2,155** lines, both equal to the mid-flight figures. This
+  session touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.
