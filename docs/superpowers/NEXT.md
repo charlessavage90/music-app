@@ -15,14 +15,15 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 **Last updated: 2026-08-03 (Stage 2, mid-flight), when the CAP RE-EVALUATION EXPERIMENT
 completed its Stage-2 instrument gates and all sixteen depth sweeps across both data
 sets. `CRE-T11` — the criteria figures and the run-state map — is the only task left
-before Seam 3. The owner's one action is merging draft PR #71; execution then resumes at
-`CRE-T11` in a fresh session, which needs no graph artifact.**
+before Seam 3. PR #71 is MERGED (`4f0687d`), so nothing is waiting on the owner; execution
+resumes at `CRE-T11` in a fresh session, branching off `main`, and it needs no graph
+artifact.**
 
 ---
 
 ## Next
 
-> ## ▶ STAGE 2 GATES AND ALL SIXTEEN SWEEPS ARE COMPLETE, 2026-08-03 (mid-flight — Seam 3 NOT reached). **The owner's one action is merging draft PR #71**; the next work is `CRE-T11` — **branching off `main` if #71 has merged, continuing on `cap-reeval-stage2` if it has not. Check, do not assume**: a handoff cannot know when merge is pressed, and the Seam 1 handoff named a branch its own PR merged out from under it.
+> ## ▶ STAGE 2 GATES AND ALL SIXTEEN SWEEPS ARE COMPLETE, 2026-08-03 (mid-flight — Seam 3 NOT reached). ~~**The owner's one action is merging draft PR #71**~~ *(MERGED, `4f0687d`)*; **nothing is waiting on the owner.** The next work is `CRE-T11`, **branching off `main`**.
 >
 > Entry point is the current handoff:
 > [`2026-08-03-HANDOFF-cre-run-stage2-midflight.md`](2026-08-03-HANDOFF-cre-run-stage2-midflight.md).
