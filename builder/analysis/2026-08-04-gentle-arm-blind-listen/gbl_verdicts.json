@@ -1,0 +1,94 @@
+{
+  "rows": {
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47": {
+      "0": "R",
+      "10": "none",
+      "20": "R"
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6": {
+      "0": "none",
+      "20": "none",
+      "10": "R"
+    },
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+      "0": "L",
+      "10": "none",
+      "20": "none"
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8": {
+      "0": "L",
+      "10": "L",
+      "20": "L"
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135": {
+      "0": "L",
+      "10": "L",
+      "20": "none"
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7": {
+      "10": "none",
+      "20": "R",
+      "0": "R"
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114": {
+      "0": "R",
+      "10": "L",
+      "20": "L"
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1": {
+      "0": "none",
+      "10": "L",
+      "20": "none"
+    }
+  },
+  "claims": {
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47": {
+      "q1": "R",
+      "q2": "none",
+      "q2_collapse": "",
+      "notes": "0 presses - slight difficulty in determining\n10 - Strongly suspect a clip error on Rick Davies. I don't know Rick Davies, but the clip that played was spanish language. If this is the correct clip, this is very incoherent. Choosing no pref because of this.\n20 - I think R is the more coherent journey, plus I'm not familiar with Andy Ward. \n\nBiggest \"downside\" of this pair is that R only produced 4 artist paths. Overall that consistency in short paths makes it harder to judge coherence, especially with the one jarringly wrong clip (assumed). Chose no preference because that one clip is really out of place. L is generally coherent, at least, the steps are understandable. On the 20 presses, each individual step on L is mostly coherent (Nirvana -> Pink Floyd is a little questionable), but the journey takes a strange path to get to the destination, going through Ozzy Osbourne and Marilyn Manson. R on the other hand stays closer to the same genre / family of music.\n\n R did genuinely produce artists that I don't know and that seemed to fit well in between the endpoints - Tony Banks I'm unfamiliar with but sounded like a good recommendation next to Wishbone Ash"
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6": {
+      "q1": "R",
+      "q2": "none",
+      "q2_collapse": "",
+      "notes": "0 presses - tough one. For 0 presses, coherence is the expectation. Side R is more coherent overall, but based on the clip, I don't think Charlie Hall fits. Listening to L again, I think Kelly Finnigan doesn't fit next to YGSF either, so choosing no pref.\n\n10 presses - Right side is definitely more coherent, aside from Charlie Hall still being there. Left side passes through Kendrick Lamar which is really strange considering the endpoints. R seems to have slightly more novel artists for me, though I think I've heard many of them before at least once. Notable on this one, neither path seems *that* different from 0 presses.\n\n20 presses: \nRight side: challenging - the Rick Davies clip is back. The Keith Scott clip plays instrumental piano. If that's the correct artist, I don't think that's coherent to the journey. Difficult to say because I'm unfamiliar with Pino Palladino, Keith Scott, Lenny Castro, and Rick Davies, and judging coherence on just the single clip is tough, especially when at least one is almost definitely a wrong lookup. L is fairly coherent for this one, but I can't tell how coherent R is.\n\nOverall, R is clear winner for novelty. Hard to say which side is more coherent."
+    },
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+      "q1": "L",
+      "q2": "none",
+      "q2_collapse": "",
+      "notes": "This was probably a bad pair choice - two famous artists sitting close together.\n0 presses - Blur fits better than smashing pumpkins (slightly)\n10 presses - both seem reasonably coherent. I don't think I'm familiar with Black Francis\n20 presses - I could argue for both as coherent\n\n"
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8": {
+      "q1": "L",
+      "q2": "L",
+      "q2_collapse": "",
+      "notes": "0 - L slightly more coherent\n10 - L strongly more coherent. I don't think I know Real Estate\n20 - Tougher to say. I'm not familiar with Four Tet. The single clip makes it hard to say for sure if it actually fits. Grimes is a weird one on the R side, so overall I'd lean to L on coherence.\n\nL definitely wins novelty, mostly wins coherence"
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135": {
+      "q1": "L",
+      "q2": "L",
+      "q2_collapse": "",
+      "notes": "0 - Matt Sharp clip sounds like a song intro. Makes it tough, but Taylor Swift in the middle of these two artists doesn't make a ton of sense, so L wins\n10 - Roger Joseph Manning Jr. is unfamiliar. Both of these seem generally coherent from track to track, but zooming out and looking at the whole path, R takes a bigger \"detour\". L wins. Note: in R, blink-182 says no clip found, which is surprising\n20 - forced to choose no preference as L has Albert Hammond, Jr. (no clip, and I'm unfamiliar), Matt Sharp (unfamiliar, and the clip seems to be the intro to the song, so I can't tell what style of music it is). Blink-182 I'm familiar with, but again shows no clip.\n\nBecause of the challenges in this one, overall coherence is hard, but I think there's a slight edge to L. L is clearly better on novelty"
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7": {
+      "q1": "R",
+      "q2": "R",
+      "q2_collapse": "",
+      "notes": "0 - The All‐American Rejects show no clip, but doesn't affect scoring since I'm familiar. Tame Impala -> twenty one pilots feels like a big jump. Taylor swift in L feels out of place considering the endpoints, but the chain is logical enough I choose L for coherence.\n10 - tough to score R on coherence, as all of the interiors are unfamiliar to me, and 2 were missing clips (Max Martin, Brad Delson). From the clip played of Nathan East, I can't tell if it's a coherent link to Tame Impala. Choosing no pref, though if I could hear the two missing clips, that would make it easier to choose.\n20 - R wins on coherence, but has less novel artists than it did in step 10"
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1": {
+      "q1": "R",
+      "q2": "none",
+      "q2_collapse": "",
+      "notes": "0 - both seem like coherent paths\n10 - Billie Joe Armstrong next to Led Zeppelin might be stretch. Other than that, these are close on coherence.\n20 - Ed O Brien no clip. Audrey Riley clip is a song intro or similar, can't tell the style of music."
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114": {
+      "q1": "R",
+      "q2": "L",
+      "q2_collapse": "",
+      "notes": "10 - Missing clips for Ed O'Brien and John McVie. Not sure if Dallas Taylor fits based off of the clip. \n20 - Brad Delson no clip. Joey Kramer clip sounds like polka, not sure if that's right? Keith Scott instrumental piano. Dallas Taylor sounds kind of like metal? Assuming these are the right clips, I have to choose L on coherence.\n\n"
+    }
+  }
+}
