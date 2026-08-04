@@ -242,3 +242,63 @@ the same coverage thinning `COH-2` measured, in the same place. It does not thre
 branch (the sign is wrong for the hypothesis by a wide margin, and label coverage is
 *higher* in the band the hypothesis said should be thinner), but a future reading that
 wanted to interpret the *magnitude* would have to deal with it.
+
+---
+
+## §5 — `CRE-T5`: the cleaned-substrate build harness and the eight non-tag cells
+
+**Figures and shas: `cre_build_gate.json` and `cre_builds.json`** (both committed —
+`.gitignore` swallows `builder/scratch/` wholesale, so the sidecars beside the `.bin`
+files can never reach git and the committed mirror is the only durable identity record;
+analyst m11).
+
+### The gate
+
+`assemble_cleaned` is `pipeline.build_from_archive`'s body with exactly one seam at the
+cap. **Both greens passed byte-identically** — the mirror at `mutual_knn_cap` k = 50
+serialises to the same sha as a direct `build_from_archive` run, on `ALG-E` *and*
+`ALG-B` — and **the red at k = 49 fired.** So the copy is the live pipeline, drops
+included, and the gate is shown able to detect a changed cap rather than assumed to be.
+
+**Two defects in the plan's own code, found by running it rather than by reading it.**
+`ListenBrainzSource` is config-bound (`cli.py:120`), not default-constructed; and `Graph`
+carries `artist_count`/`edge_count` accessors, not the `stats`/`adjacency` attributes the
+plan's manifest snippet indexes. Both fixed at the call site; neither touches the
+assembly body, which is what the gate protects. The source is now constructed from the
+**same** config the assembly uses, so it can never carry a different algorithm than the
+archive sub-tree it reads.
+
+### Two checks the build produced for free, and both are load-bearing
+
+1. **`E-S0` and `B-S0` reproduce the gate's greens exactly.** They are the same cell
+   built twice through different entry points, so the match is independent evidence that
+   `build_cell`'s path and `gate()`'s path do not diverge.
+2. **`nodes_entering_cap` is identical across all four supply rules within each data
+   set** (and the two drop counts are identical too). That is the held-constant claim
+   made mechanical: the cleanup and the cap-invariant popularity really are computed
+   upstream of the cap, so the four supply cells differ **only** at the seam. A factor
+   table can now read across the row and count one difference.
+
+### One diagnostic that is a genuine caveat, not a curiosity
+
+**`pop_log_low` is not constant across cells within a data set.** It sits near 0.29–0.31
+for `MK50`/`MK100` and at exactly 0.0 for `TU` and `UC`, because the affine map's anchors
+are taken over the **kept** node set and the looser rules keep artists with zero
+score-weighted in-degree that `MK50` prunes away. `pop_log_high` is stable.
+
+**Consequence: `pop_raw` is not comparable across supply cells** — the same artist can
+carry a different `pop_raw` in two cells purely because the low anchor moved. This is
+exactly what §0.3's instrumentation row exists to expose, it is why every manifest
+carries both anchors, and it is owed an explicit treatment in the `CRE-T7` affine
+`pop_raw` report rather than being noticed later. **Nothing in the ladder is affected**
+— the cost function's jump and floor terms are computed within a single cell — but any
+cross-cell sentence about `pop_raw` is barred until that report is written.
+
+`ALG-B` drops materially more no-release tail than `ALG-E` (both figures in
+`cre_builds.json`), which is the direction the tail-drop census already recorded.
+
+Five unit tests pin the invariants: the cleanup assertion fires when either flag is off,
+both flags default on, `UC` is marked staged-and-barred in its manifest, the supply axis
+is the four pre-registered rules, and the diagnostics contract holds on the committed
+gate output — including that both drop lists actually bit, so a silently inert drop
+cannot pass as "held constant".
