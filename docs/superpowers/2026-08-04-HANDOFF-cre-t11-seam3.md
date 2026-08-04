@@ -7,11 +7,11 @@ which owns it.
 
 **This is a SEAM handoff, not mid-flight.** `CRE-T11` was the execution plan's last task
 and Seam 3 is reached. The plan is fully executed and now declares itself so. Branch
-`cre-t11-scoring`, draft **PR #72**. Tree clean and pushed; **nothing is in flight** — no
+`cre-t11-scoring`, draft **PR #73**. Tree clean and pushed; **nothing is in flight** — no
 background job, no dispatched subagent, no partial directory, no listener on any of the
 four ports.
 
-**Which branch to work on — check, do not assume.** If **PR #72 has merged**, branch fresh
+**Which branch to work on — check, do not assume.** If **PR #73 has merged**, branch fresh
 off `main`. If it has not, branch off `cre-t11-scoring`. `git log --oneline -1 main`
 settles it in one command. Written conditionally on purpose: a handoff cannot know when
 the owner presses merge, and the Seam 1 handoff named a branch its own PR merged out from
@@ -112,4 +112,4 @@ the Stage-3 session is figures-only by design and structurally cannot run it).
 The retained log (§13, §14), this handoff, the previous handoff's role line (marked
 superseded on next actions), `NEXT.md`, `TEST-QUEUE.md` (new N/A entry), `docs/README.md`
 (row for this handoff; the plan's role changed to COMPLETE; the Seam-2 handoff's row
-marked superseded), the execution plan's own role line, and draft PR #72's body.
+marked superseded), the execution plan's own role line, and draft PR #73's body.
