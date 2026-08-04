@@ -23,7 +23,40 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-03 (later) — the map-rebuild experiment is designed, reviewed and locked; nothing you can press changed
+## N/A (latest) — 2026-08-03 (night) — the experiment's step-by-step run plan is written and independently checked; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from this afternoon.**
+
+**What happened, in plain terms — and you steered it twice.** The locked experiment
+design from earlier today now has its operating manual: a step-by-step plan for actually
+running it, written by a fresh session reading the locked design cold, with every
+computer check and every stopping point written down before anything runs. You then
+asked for the independent numbers check, and it earned its keep three times over: it
+caught a self-test that **could never fail** (it compared a formula against itself — so
+a broken measuring device would have looked healthy), a group of artists the experiment
+would have mislabelled as maximally unknown when really we simply never looked them up,
+and one place where the locked design's own tables contradict each other. All three are
+fixed in the plan; the contradiction gets a small, no-results-yet correction added to
+the locked design as the very first act of the run. As a bonus, the checker measured the
+real cost of the experiment: far cheaper than estimated — the expensive part is minutes,
+not hours.
+
+**Nothing is proposed for you to test.** Your one action is merging the pull request
+(#69) that locks the run plan in; you also chose which engine runs it (a fresh session
+on Opus). The next real entry here comes when the experiment actually runs.
+
+Detail, if you want it: `docs/superpowers/2026-08-03-cap-reeval-exec-plan-execution-log.md`.
+
+---
+
+## N/A — 2026-08-03 (later) — the map-rebuild experiment is designed, reviewed and locked; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-03 (night): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate, except its
+     "next session writes the step-by-step plan" — that has now happened; see above. -->
+
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no

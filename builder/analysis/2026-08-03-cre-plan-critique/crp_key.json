@@ -1,0 +1,57 @@
+{
+ "GLOBAL_NEUTRAL_FALLBACK": 0.15,
+ "W4_coverage": 0.8263043683366356,
+ "W4_labelled_nodes": 61306,
+ "cells_tag_frame_coverage": {
+  "ALG-B-MK50": {
+   "no_W4_label": 24097,
+   "no_W4_label_share": 0.3519505747294317,
+   "nodes": 68467,
+   "outside_adopted_mbid_set": 18874,
+   "outside_share": 0.2756656491448435
+  },
+  "ALG-B-TUw-50-50": {
+   "no_W4_label": 28899,
+   "no_W4_label_share": 0.38828129198688666,
+   "nodes": 74428,
+   "outside_adopted_mbid_set": 23420,
+   "outside_share": 0.31466652335142686
+  },
+  "ALG-E-TUw-50-50": {
+   "no_W4_label": 13651,
+   "no_W4_label_share": 0.18212017717060675,
+   "nodes": 74956,
+   "outside_adopted_mbid_set": 797,
+   "outside_share": 0.010632904637387267
+  }
+ },
+ "edges_agreement_exactly_zero": 14426,
+ "edges_measured": 374332,
+ "edges_unlabelled_endpoint": 74671,
+ "edges_unlabelled_share": 0.16630401133177283,
+ "node_neutral_median": {
+  "max": 1.0,
+  "median_at_fame_pctl_ge_0.75": 0.2161012034422346,
+  "median_at_fame_pctl_le_0.50": 0.15003559239467296,
+  "min": 0.0,
+  "n_nodes_with_a_median": 56152,
+  "p10": 0.050155122747883,
+  "p50": 0.18022669786825013,
+  "p90": 0.3811345705299014,
+  "pearson_vs_fame_lb_pctl": 0.09443720261525129
+ },
+ "nodes": 74193,
+ "nodes_degree_ge_40": 1901,
+ "nodes_with_fewer_than_2_measured_agreements": 18041,
+ "share_nodes_falling_back_to_GLOBAL_NEUTRAL": 0.24316310164031646,
+ "share_of_all_edges_with_key_exactly_zero": 0.032128961276427996,
+ "share_of_degree_ge_40_nodes_falling_back": 0.052603892688058915,
+ "share_of_measured_edges_exactly_zero": 0.03853798232584978,
+ "undirected_edges": 449003,
+ "unlabelled_edge_endpoint_key_multiplier_gap": {
+  "n_edges": 74671,
+  "p50_abs_gap": 0.05027444929289156,
+  "p90_abs_gap": 0.15,
+  "share_gap_gt_0.10": 0.26415877649957814
+ }
+}

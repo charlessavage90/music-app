@@ -1,0 +1,136 @@
+{
+ "cell_snapshot_coverage": {
+  "ALG-B-MK50 (TrackB, pre-drop)": {
+   "absent_from_snapshot": 0,
+   "absent_share": 0.0,
+   "measured": 64387,
+   "nodes": 68467,
+   "null_share_present": 0.059590751749017776,
+   "present_but_null": 4080,
+   "ruler_null_total": 4080,
+   "ruler_null_total_share": 0.059590751749017776
+  },
+  "ALG-B-TUw-50-50 (TrackB, pre-drop)": {
+   "absent_from_snapshot": 4546,
+   "absent_share": 0.06107916375557586,
+   "measured": 65801,
+   "nodes": 74428,
+   "null_share_present": 0.05483151502122857,
+   "present_but_null": 4081,
+   "ruler_null_total": 8627,
+   "ruler_null_total_share": 0.11591067877680443
+  },
+  "ALG-B-UC (TrackB, pre-drop)": {
+   "absent_from_snapshot": 4971,
+   "absent_share": 0.0663153681963714,
+   "measured": 65908,
+   "nodes": 74960,
+   "null_share_present": 0.05444236926360726,
+   "present_but_null": 4081,
+   "ruler_null_total": 9052,
+   "ruler_null_total_share": 0.12075773745997866
+  },
+  "ALG-E-MK100 (TrackB, pre-drop)": {
+   "absent_from_snapshot": 315,
+   "absent_share": 0.004215061820906706,
+   "measured": 74384,
+   "nodes": 74732,
+   "null_share_present": 0.00044157790504736926,
+   "present_but_null": 33,
+   "ruler_null_total": 348,
+   "ruler_null_total_share": 0.004656639725954076
+  },
+  "ALG-E-MK50 (TrackB, pre-drop)": {
+   "absent_from_snapshot": 0,
+   "absent_share": 0.0,
+   "measured": 74124,
+   "nodes": 74157,
+   "null_share_present": 0.0004450018204619928,
+   "present_but_null": 33,
+   "ruler_null_total": 33,
+   "ruler_null_total_share": 0.0004450018204619928
+  },
+  "ALG-E-TUw-50-50 (TrackB, pre-drop)": {
+   "absent_from_snapshot": 527,
+   "absent_share": 0.007030791397619937,
+   "measured": 74396,
+   "nodes": 74956,
+   "null_share_present": 0.0004402582848604515,
+   "present_but_null": 33,
+   "ruler_null_total": 560,
+   "ruler_null_total_share": 0.007471049682480389
+  },
+  "ALG-E-UC (TrackB, pre-drop)": {
+   "absent_from_snapshot": 527,
+   "absent_share": 0.007030791397619937,
+   "measured": 74396,
+   "nodes": 74956,
+   "null_share_present": 0.0004402582848604515,
+   "present_but_null": 33,
+   "ruler_null_total": 560,
+   "ruler_null_total_share": 0.007471049682480389
+  },
+  "adopted (graph-t15-tiebreakfix)": {
+   "absent_from_snapshot": 0,
+   "absent_share": 0.0,
+   "measured": 74151,
+   "nodes": 74193,
+   "null_share_present": 0.0005660911406736484,
+   "present_but_null": 42,
+   "ruler_null_total": 42,
+   "ruler_null_total_share": 0.0005660911406736484
+  }
+ },
+ "cost_scale_anchors": {
+  "median_chosen_edge_w_sim_term_probe7_of_critique": 0.0038,
+  "quantisation_floor_in_pctl_units": 0.015,
+  "w_hop": 0.02
+ },
+ "device_null_pctl_frame_pctl_0": 6.742997397203004e-06,
+ "frame_largest_tie_atom_over_n": 0.001469973432590255,
+ "frame_min_measured_pctl": 8.091596876643606e-05,
+ "frame_min_raw_value": 1,
+ "frame_n": 74151,
+ "snapshot_nonnull_mapped_pctl_quantiles": {
+  "p0.1": 8.091596876643606e-05,
+  "p0.5": 0.00026971989588812017,
+  "p1": 0.0024207360655958787,
+  "p10": 0.08176558643848364,
+  "p2": 0.009945921160874432,
+  "p25": 0.2241642054726167,
+  "p5": 0.03618292403339132,
+  "p50": 0.4715108359968173
+ },
+ "toll_advantage_of_a_null_node": {
+  "r1_k1": {
+   "advantage_over_median_measured": 0.004715040929994201,
+   "advantage_over_obscurest_measured": 7.417297136923306e-07,
+   "advantage_over_p1_measured": 2.4139930681986756e-05
+  },
+  "r1_k10": {
+   "advantage_over_median_measured": 0.04715040929994201,
+   "advantage_over_obscurest_measured": 7.417297136923306e-06,
+   "advantage_over_p1_measured": 0.00024139930681986758
+  },
+  "r1_k20": {
+   "advantage_over_median_measured": 0.09430081859988403,
+   "advantage_over_obscurest_measured": 1.4834594273846611e-05,
+   "advantage_over_p1_measured": 0.00048279861363973516
+  },
+  "r2_k1": {
+   "advantage_over_median_measured": 0.014145122789982601,
+   "advantage_over_obscurest_measured": 2.2251891410769913e-06,
+   "advantage_over_p1_measured": 7.241979204596027e-05
+  },
+  "r2_k10": {
+   "advantage_over_median_measured": 0.14145122789982603,
+   "advantage_over_obscurest_measured": 2.2251891410769913e-05,
+   "advantage_over_p1_measured": 0.0007241979204596026
+  },
+  "r2_k20": {
+   "advantage_over_median_measured": 0.28290245579965206,
+   "advantage_over_obscurest_measured": 4.450378282153983e-05,
+   "advantage_over_p1_measured": 0.0014483958409192053
+  }
+ }
+}
