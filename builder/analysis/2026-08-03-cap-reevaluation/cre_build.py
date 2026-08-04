@@ -78,7 +78,10 @@ from cb_build_variants import (  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
-SCRATCH = Path(__file__).resolve().parents[2] / "builder/scratch"
+# parents[2] of the FILE is builder/, not the repo root -- taking it from the
+# directory (as cre_common.ROOT does) is what keeps this under the gitignored
+# builder/scratch/ tree rather than a stray builder/builder/.
+SCRATCH = Path(__file__).resolve().parent.parents[2] / "builder/scratch"
 CELLS = SCRATCH / "cre-cells"
 
 # The prereg's supply axis. UC is a STAGED REFERENCE, barred from candidacy.

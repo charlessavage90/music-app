@@ -9,7 +9,7 @@
       "sha256": "44003fcceeadaac35303eab6810a1b2bee43c1fd8fd84dff29d3552d949fcc59",
       "artists": 64724,
       "edges": 802364,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\E-S0.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\E-S0.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true
@@ -23,7 +23,7 @@
         "pop_log_low": 0.29227728746734544,
         "pop_log_high": 9.05368670251814
       },
-      "seconds": 27.4
+      "seconds": 27.7
     },
     {
       "cell": "E-S0b",
@@ -34,7 +34,7 @@
       "sha256": "a8a657335de3ad95836bb8431364f8f09afd7c4c19edf67e2ebe1350b2f8d974",
       "artists": 65416,
       "edges": 1593502,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\E-S0b.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\E-S0b.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true
@@ -59,7 +59,7 @@
       "sha256": "a27610be6cefab33ab0519f159824638233386c7af53f1eedffa16d42e1a72fd",
       "artists": 65679,
       "edges": 1513744,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\E-S1.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\E-S1.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true
@@ -73,7 +73,7 @@
         "pop_log_low": 0.0,
         "pop_log_high": 9.05368670251814
       },
-      "seconds": 33.2
+      "seconds": 33.0
     },
     {
       "cell": "E-S3",
@@ -84,7 +84,7 @@
       "sha256": "5101c574dfc0a39db0e7cbf5378e78fdbee593572428193303005348fb8870f9",
       "artists": 65719,
       "edges": 5912818,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\E-S3.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\E-S3.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true
@@ -98,7 +98,7 @@
         "pop_log_low": 0.0,
         "pop_log_high": 9.05368670251814
       },
-      "seconds": 29.8
+      "seconds": 29.7
     },
     {
       "cell": "B-S0",
@@ -109,7 +109,7 @@
       "sha256": "a8507c6e1e044a8c1a6fc3b6d5eea47380a5b1b7f3cd70e2f0d3118b25fe53f6",
       "artists": 58851,
       "edges": 732832,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\B-S0.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\B-S0.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true
@@ -123,7 +123,7 @@
         "pop_log_low": 0.31307949160987886,
         "pop_log_high": 9.118969278988496
       },
-      "seconds": 27.4
+      "seconds": 26.4
     },
     {
       "cell": "B-S0b",
@@ -134,7 +134,7 @@
       "sha256": "a1c5e359a40e43b8162e25daf3a175c2d8f288c60a4677609b36259af45f979a",
       "artists": 63041,
       "edges": 1451092,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\B-S0b.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\B-S0b.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true
@@ -148,7 +148,7 @@
         "pop_log_low": 0.31307949160987886,
         "pop_log_high": 9.118969278988496
       },
-      "seconds": 27.6
+      "seconds": 27.9
     },
     {
       "cell": "B-S1",
@@ -159,7 +159,7 @@
       "sha256": "9da396211c5c737add7dba9abeb9f2a4318af957c29e26546bdb9cbae2992e04",
       "artists": 63056,
       "edges": 1379944,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\B-S1.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\B-S1.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true
@@ -173,7 +173,7 @@
         "pop_log_low": 0.0,
         "pop_log_high": 9.118969278988496
       },
-      "seconds": 30.7
+      "seconds": 32.0
     },
     {
       "cell": "B-S3",
@@ -184,7 +184,7 @@
       "sha256": "0bd2fabaea90dac13834585c6d0aac6f9e0ba6c0284fd4167556aa891be94cf0",
       "artists": 63472,
       "edges": 5213952,
-      "path": "C:\\dev\\music-app\\builder\\builder\\scratch\\cre-cells\\B-S3.bin",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\cre-cells\\B-S3.bin",
       "drop_flags": {
         "drop_no_release_tail": true,
         "drop_featured_credit": true

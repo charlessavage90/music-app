@@ -302,3 +302,24 @@ both flags default on, `UC` is marked staged-and-barred in its manifest, the sup
 is the four pre-registered rules, and the diagnostics contract holds on the committed
 gate output — including that both drop lists actually bit, so a silently inert drop
 cannot pass as "held constant".
+
+### A path defect of mine, and the determinism check it paid for
+
+The first cell run wrote into **`builder/builder/scratch/`**: my `SCRATCH` took
+`parents[2]` from the *file* rather than from its directory, and `parents[2]` of the file
+is `builder/`, not the repo root. Caught at `git status` — the stray tree showed as
+untracked.
+
+**It matters for one specific reason, and it is the same hazard analyst m11 named arriving
+by a different route.** `.gitignore` ignores `builder/scratch/` **wholesale**, but the
+stray path only matched the `*.bin` rule — so the `.bin.json` **sidecars there were not
+ignored** and were a `git add -A` away from being committed as if they were the record.
+The pathspec commit rule is what kept them out; nothing about the rule was aimed at this
+case, which is the argument for keeping it.
+
+Fixed at the constant, and the cells were **rebuilt rather than moved** — the manifests
+carry absolute paths, and a rebuild regenerates them honestly instead of hand-editing a
+record. That cost four minutes and bought a check worth more than it: **all eight cells
+came back byte-identical to the first run**, artists, edges and sha256 alike, across two
+independent invocations. Determinism (spec §9) is now measured on this harness rather
+than inherited from the pipeline's own test.
