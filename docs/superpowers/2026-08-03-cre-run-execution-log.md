@@ -99,3 +99,52 @@ reconciles two ways:
 is not yet an assertion: `CRE-G1c` fires on a frame N off by one; the artifact gate
 fires on a wrong sha; the snapshot-manifest gate fires on a mismatched digest. All three
 fired. No file was left behind by the red-check.
+
+---
+
+## §2 — `CRE-T2`: the mirror copy, the fame-currency ramp, and the ladder
+
+### The copy, and a sixth delta the plan did not anticipate
+
+`cre_mirror.py` is a verbatim copy of the frozen
+`builder/analysis/2026-07-23-track2-sweep/mirror.py` with the plan's five deltas plus
+`term_breakdown`. The frozen original is untouched. Step 2's diff shows **ten hunks and
+exactly five deleted lines** — the docstring's first line, the two `artistpath_api`
+imports, the `MirrorContext.build` signature, and its `return cls(...)`. **No line of the
+cost function or its term order was touched**, which is the property byte-identity rests
+on.
+
+**The sixth delta is plumbing, and it corrects a defect in the plan's own code.** The
+frozen mirror relies on its *runner* to put `api/src` on `sys.path` (`run_a0.py:29`,
+`verify_mirror.py:29`) — it has no path setup of its own. But the plan's `cre_ladder.py`
+text imports `cre_mirror` **before** calling `use_frozen("api_src")`, so as written it
+raises `ModuleNotFoundError` on import. Verified: `artistpath_api` does not import in the
+builder venv without the insert.
+
+Two fixes were available. Reordering `cre_ladder`'s imports would keep the mirror at
+exactly five deltas, but leaves the trap armed for every later module that imports
+`cre_mirror` first — nine tasks' worth. **Chosen: `cre_mirror` calls `use_frozen("api_src")`
+itself**, one line, no behaviour, and every downstream import becomes order-independent.
+Recorded here so Step 2's diff is read against six known deltas rather than five.
+
+### `CRE-G2(b)` shown able to go red on each clause separately
+
+The decomposition check has two clauses against references it does not share, and a red
+raised by the wrong clause would not demonstrate what the test claims. Both were driven
+red deliberately and each fired on its own clause:
+
+- **dropping the `hop` term** trips clause (1) — the breakdown's total against the
+  *search's own* accumulated cost — off by exactly 2 × `w_hop`;
+- **moving the ramp's mass into `sim`** leaves the total unchanged, so clause (1) cannot
+  see it and only clause (2), the `r · k · Σ fame` form, fires.
+
+The two red tests were then pinned to their clause's own message rather than to a shared
+`CRE-G2(b) FAILED` prefix, so neither can pass for the wrong reason later.
+
+Also pinned as tests, because both are `CRE-G1(b)` properties in miniature: the ramp at
+`0.0` returns the frozen path even when the fame array would dominate if live (the term
+is never *added*, not merely zero), and a **dominating** ramp at k = 0 still returns
+production's path — the half a `+ 0.0` implementation would pass and a wrong-`k` one
+fails.
+
+14 tests pass across the three modules.
