@@ -12,16 +12,46 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-03 (later), when the CAP RE-EVALUATION PRE-REGISTRATION was
-authored cold, reviewed twice pre-run, FROZEN (`3d7b7d6`) and amended once (`CRE-AM1`,
-the owner's within-artist vote ruling). The execution plan is next, written by a fresh
-session reading the prereg cold; the owner's one action is merging draft PR #68.**
+**Last updated: 2026-08-03 (night), when the CAP RE-EVALUATION EXECUTION PLAN was
+written cold from the frozen prereg, quantitatively reviewed by the `ml-graph-analyst`
+at the owner's instruction, and revised pre-run with every surviving finding folded in.
+The owner's one action is merging draft PR #69; execution then starts in a fresh
+session on Opus (his model ruling), inline, retiring at the plan's seams.**
 
 ---
 
 ## Next
 
-> ## ✅ THE CAP RE-EVALUATION PRE-REGISTRATION IS COMPLETE AND FROZEN, 2026-08-03 (later). **The owner's one action is merging PR #68**; the next work is the EXECUTION PLAN, written by a fresh session.
+> ## ✅ THE CAP RE-EVALUATION EXECUTION PLAN IS COMPLETE, REVIEWED AND REVISED, 2026-08-03 (night). **The owner's one action is merging draft PR #69**; the next work is EXECUTION — a fresh session on Opus (owner's model ruling), running the plan INLINE and retiring at its seams.
+>
+> Entry point is the current handoff:
+> [`2026-08-03-HANDOFF-cap-reeval-exec-plan.md`](2026-08-03-HANDOFF-cap-reeval-exec-plan.md).
+> Reasoning: [`2026-08-03-cap-reeval-exec-plan-execution-log.md`](2026-08-03-cap-reeval-exec-plan-execution-log.md).
+> Operational document:
+> [`plans/2026-08-03-cap-reeval-execution-plan.md`](plans/2026-08-03-cap-reeval-execution-plan.md)
+> (tasks `CRE-T1`–`CRE-T11`; **the prereg governs wherever the plan disagrees**; its
+> Revision record maps the review's findings to their changes). Review record:
+> `builder/analysis/2026-08-03-cre-plan-critique/` — 1 BLOCKING, 7 MATERIAL, 8 minor,
+> 9 verified-clean, **all folded in pre-run** (`da9e49e`); its cell-level figures were
+> measured on pre-drop Track B builds and carry that provenance.
+>
+> **What stands, in one paragraph.** The prereg was verified accurate — every file,
+> function, config value and commit it names resolves (plan §Verification record). The
+> plan fixes nine executor-column pins pre-run (S2 deletion key with the tuple that
+> keeps similarity ordering inside zero-agreement blocks; two separately-priced classes
+> of unmeasured artist; the victim-rule total order with its named mechanical
+> consequence; the uniform-drop partition that quarantines the staged `UC` cells; the
+> guard realised through journey semantics; and the rest in the plan's own section).
+> **`CRE-AM2` is specified in the plan but NOT yet appended to the prereg** — the
+> executor commits it at T1 Step 2, on the run branch, before any stage runs; it
+> resolves `C4`'s binding form at the two anchor cells and moves no bar. Stage order is
+> unchanged: `CRE-D3` and `CRE-D1` before any build, screens before any sweep, one
+> committed JSON per sweep cell, figures-only scorer, and the Stage-3 findings note
+> written by a session that did not run the sweeps.
+>
+> ---
+
+> ## ✅ THE CAP RE-EVALUATION PRE-REGISTRATION IS COMPLETE AND FROZEN, 2026-08-03 (later). ~~**The owner's one action is merging PR #68**~~ *(MERGED, `cdf0033` — discharged before the exec-plan session started)*; ~~the next work is the EXECUTION PLAN, written by a fresh session~~ *(WRITTEN — see the top block, which owns current state)*.
 >
 > Entry point is the current handoff:
 > [`2026-08-03-HANDOFF-cap-reeval-prereg.md`](2026-08-03-HANDOFF-cap-reeval-prereg.md).
@@ -477,16 +507,17 @@ read measured where it can and cannot be moved; the results note owns that readi
    pre-redesign build deleted; live site verified afterwards. See the deferral table for the
    pre-flight a successor should repeat.
 
-**One action is owed by the owner: merging draft PR #68**, which lands the frozen `CRE-`
-pre-registration, its review record, and the `WAV-` read on `main` — the execution-plan
-session consumes a frozen document, and the freeze is durable only there. Everything else
-remaining for him is decisions only — the triggers named in the parked list and the
-deferral table. *(PR #67 was merged 2026-08-03, `eecc361`; PR #66 on 2026-08-03,
-`f9f42ce`.)*
+**One action is owed by the owner: merging draft PR #69**, which lands the execution
+plan and its review record on `main` — the executing session consumes both, and
+durability requires the merge. After that, opening the executing session is his too
+(fresh session, `/model opus` — Fable is his saved default — then `/session-start` and
+"execute the plan"). Everything else remaining for him is decisions only — the triggers
+named in the parked list and the deferral table. *(PR #68 was merged 2026-08-03,
+`cdf0033`; #67 `eecc361`; #66 `f9f42ce`.)*
 
 **Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry (2026-08-03
-later, the cap re-evaluation prereg track) is N/A — nothing app-facing changed and nothing
-is running. The prior real check (2026-08-02, post-prune) came back clean. Everything else
+night, the execution-plan track) is N/A — nothing app-facing changed and nothing is
+running. The prior real check (2026-08-02, post-prune) came back clean. Everything else
 there is dormant until a graph is rebuilt.
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.

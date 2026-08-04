@@ -1,6 +1,11 @@
 # Handoff — the cap re-evaluation pre-registration, 2026-08-03
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-03 (night) on next actions by
+[`2026-08-03-HANDOFF-cap-reeval-exec-plan.md`](2026-08-03-HANDOFF-cap-reeval-exec-plan.md)**
+— the execution plan it named as the next work has been written, reviewed and revised
+(PR #69), and PR #68 has since MERGED (`cdf0033`), so its "merging PR #68 is the owner's
+action" is discharged. Remains authoritative for the prereg track's internals and its
+claims-not-to-revert. *(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-03-HANDOFF-featured-credit-filter.md`](2026-08-03-HANDOFF-featured-credit-filter.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
