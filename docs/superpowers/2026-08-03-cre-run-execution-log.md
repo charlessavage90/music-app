@@ -643,11 +643,13 @@ test, and two load-bearing objects do not share an identifier here.
 
 ### What is measured, and what is not licensed
 
-Median interior `fame_lb_pctl` sits at **0.995–0.999 at every depth in every cell**, and
-mean interior counts run 2.05–4.82 at d0 against 2.95–7.64 at d20. **No `CRE-R` read is
-licensed by any of it and none is made here** — no criterion is evaluated, no cell is
-compared to another, the three non-`pop_raw`-comparable comparisons have had no map
-applied, and `C1`'s two reporting populations are T11's work. The figures are recorded so
-T11 can compute; they are not a result.
+Per-pair per-depth journeys, interior fame values, term shares and the unmeasured-class
+counts are in the nine committed `cre_sweep_E-*.json` files — **cited here, never restated,
+including in aggregate**: a median quoted in this log would be a second home for a figure
+`cre_score.json` is about to own, which is how the drift this project has already paid for
+begins. **No `CRE-R` read is licensed by any of it and none is made here** — no criterion is
+evaluated, no cell is compared to another, the three non-`pop_raw`-comparable comparisons
+have had no map applied, and `CRE-C1`'s two reporting populations are T11's work. The
+figures are recorded so T11 can compute; they are not a result.
 
 **SEAM 2.** All `ALG-E` sweep JSONs committed. `T10` starts cold from here.
