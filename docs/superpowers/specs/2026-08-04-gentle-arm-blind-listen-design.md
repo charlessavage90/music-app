@@ -66,7 +66,8 @@ record, not here.)
 
 ## 3. Workload
 
-**Five pairs.** Endpoints drawn from the owner's familiarity — his Spotify export
+**Eight pairs** (raised from five at the owner's pre-run review, 2026-08-04, accepting
+the larger listening spend). Endpoints drawn from the owner's familiarity — his Spotify export
 (streaming history play counts, `YourLibrary.json`, `Follow.json`) proposes candidates;
 he approves or amends. Constraints:
 
@@ -87,8 +88,9 @@ the numbers describe.
 **Depths: d0, d10, d20** per pair per arm. The measured effect lives at depth ≥ 10
 (`CRE-C1`'s territory); d0 is an **anchor row** — first paths are expected to be broadly
 similar in character, and a large d0 difference is itself informative (it is the cost of
-the graph swap alone, before the ramp does anything). Fewer rows than C3's four keep five
-pairs inside the owner's stated budget (~3 hours).
+the graph swap alone, before the ramp does anything). Three depths rather than C3's four
+keep eight pairs to roughly five hours, splittable across sittings; a partial sitting is
+fine, but no read exists until all eight pairs are done (§5's run state).
 
 ## 4. What the listener sees
 
@@ -115,13 +117,16 @@ A side-by-side page per pair, C3 format:
 
 ## 5. Reads — fixed in advance, with the branch's effect size
 
-**Primary read: the 10 deep rows** (5 pairs × d10, d20). **A "clear pick" is a
+**Primary read: the 16 deep rows** (8 pairs × d10, d20). **A "clear pick" is a
 left/right choice on a single deep row** — each pair contributes two rows to the tally,
 and a "no preference" row counts for neither side. The d0 rows never enter the tally
-(they are the §5 anchor, reported separately). Margin ≥ 3 clear picks — (winning side's
-rows) − (other side's rows) ≥ 3, so 5–2 with three no-preferences fires and 6–4 does
-not — is the branch trigger. Below 3, across 10 rows, this instrument cannot tell
-preference from noise, and the read is the null.
+(they are the §5 anchor, reported separately). Margin ≥ 5 clear picks — (winning side's
+rows) − (other side's rows) ≥ 5, so 9–4 with three no-preferences fires and 10–6 does
+not — is the branch trigger. Below 5, across 16 rows, this instrument cannot tell
+preference from noise, and the read is the null. (The margin scales the approved 3-of-10
+bar proportionally to the larger workload — 16 × 0.3 = 4.8, rounded **up**, so the
+enlarged listen cannot fire on a proportionally weaker signal. Fixed at the owner's
+pre-run review, 2026-08-04; no journey existed at the time.)
 
 | Verdict | Plain sentence | Action |
 |---|---|---|
@@ -129,7 +134,7 @@ preference from noise, and the read is the null.
 | **V0 better by ≥ 3** | "Today's app sounds better despite not digging." | **Option A closes.** The arm's offline pass stands in the record, unacted on (REQ-38: the ear is primary). |
 | **margin < 3** | "My ear cannot tell them apart where the numbers could." | **The pre-registered null: production stands; Option A closes without adoption.** |
 
-**Run state every read presupposes:** all 5 pairs × 3 depths × both arms generated,
+**Run state every read presupposes:** all 8 pairs × 3 depths × both arms generated,
 presented, and verdict rows recorded. A partial run licenses **no read**; what is owed is
 named and the listen resumes or is abandoned by the owner, not summarized.
 
