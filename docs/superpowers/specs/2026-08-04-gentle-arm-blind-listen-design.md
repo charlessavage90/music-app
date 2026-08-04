@@ -136,9 +136,19 @@ pre-run review, 2026-08-04; no journey existed at the time.)
 
 | Verdict | Plain sentence | Action |
 |---|---|---|
-| **G better by ≥ 3** | "The rebuilt app digs, and the journeys still sound like journeys." | The package survives its listen. What remains is the owner's adoption + re-crawl decision, taken outside this document. Nothing is adopted by this row. |
-| **V0 better by ≥ 3** | "Today's app sounds better despite not digging." | **Option A closes.** The arm's offline pass stands in the record, unacted on (REQ-38: the ear is primary). |
-| **margin < 3** | "My ear cannot tell them apart where the numbers could." | **The pre-registered null: production stands; Option A closes without adoption.** |
+| **G better by ≥ 5** | "The rebuilt app digs, and the journeys still sound like journeys." | The package survives its listen. What remains is the owner's adoption + re-crawl decision, taken outside this document. Nothing is adopted by this row. |
+| **V0 better by ≥ 5** | "Today's app sounds better despite not digging." | **Option A closes.** The arm's offline pass stands in the record, unacted on (REQ-38: the ear is primary). |
+| **margin < 5** | "My ear cannot tell them apart where the numbers could." | **The pre-registered null: production stands; Option A closes without adoption.** |
+
+> **`GBL-CORR1`, 2026-08-04 (later) — transcription correction, no design change.** The
+> three cells above read `≥ 3` / `≥ 3` / `< 3` until now: the pre-scaling bar, left behind
+> when the workload grew to eight pairs and the margin was scaled to 5 at the owner's
+> pre-run review. **The paragraph above this table, its worked examples (9–4 fires, 10–6
+> does not) and the arithmetic (16 × 0.3 = 4.8, rounded up) are the original and were
+> always 5**; only the table lagged. Corrected on the owner's instruction before any
+> journey existed and before any listen ran, so no result could have shaped it. Recorded
+> here and in §8. **This is a correction, not an amendment** — it changes no bar, and
+> `GBL-CORR` is a separate series from `GBL-AM` deliberately.
 
 **Run state every read presupposes:** all 8 pairs × 3 depths × both arms generated,
 presented, and verdict rows recorded. A partial run licenses **no read**; what is owed is
@@ -190,6 +200,15 @@ novelty-likelihood proxy); no worldly-fame sentence, no `pop_raw` cross-cell sen
 
 *(none yet — `GBL-AM1`, the approved pair list with MBIDs, lands here before any journey
 is generated.)*
+
+### Corrections (`GBL-CORR`) — a separate series; these move no bar
+
+- **`GBL-CORR1`, 2026-08-04 (later).** §5's branch table carried the pre-scaling `≥ 3` /
+  `≥ 3` / `< 3` bar while §5's own prose, worked examples and arithmetic all carried the
+  scaled `≥ 5`. The table is now `≥ 5` / `≥ 5` / `< 5`, matching the rest of the document
+  and the operational plan's `MARGIN = 5`. Made on the owner's instruction at the start of
+  execution — before any journey existed, before any listen, and with no result in
+  existence that could have shaped it. Full note at the table itself.
 
 ## 9. Non-goals / guardrails
 
