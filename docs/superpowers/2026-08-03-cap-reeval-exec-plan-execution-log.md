@@ -107,8 +107,10 @@ the sweeps. Sequence: owner merges PR #69, then a fresh Opus session branches
 
 ## §9 — Closeout outcomes (SS16)
 
-- **A3**: every deferral this track created has an address inside the plan (CRE-AM2 at
-  T1 Step 2; the findings note at Seam 3; the C6-heuristic caveat assigned to the
+- **A3**: every deferral this track created has an address inside the plan (~~CRE-AM2 at
+  T1 Step 2~~ — **DISCHARGED 2026-08-03 (Seam 1)**: appended to the prereg's §8 and
+  committed at `5656602` on branch `cap-reeval-run`, before any stage ran, exactly as
+  specified; the findings note at Seam 3; the C6-heuristic caveat assigned to the
   findings note's weakest-link section). One prior condition found due: `NEXT.md`'s
   PR #68 action — discharged, struck at this closeout (§7).
 - **A4**: no config knob added — not applicable, stated rather than skipped.

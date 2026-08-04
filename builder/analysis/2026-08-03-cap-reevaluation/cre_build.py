@@ -1,4 +1,9 @@
-"""`CRE-T5` -- the cleaned-substrate build harness, and the non-tag cells.
+"""The cleaned-substrate build harness and every cell it builds.
+
+`CRE-T5` created this module for the eight non-tag cells; **`CRE-T6` added
+`cap_tag_limited`, `build_tag_cell`, `degeneracy_gate` and `s2_shares`** for the
+`S2` cells. Both tasks' work lives here because they share one assembly body and
+one gate; the header said `CRE-T5` alone until closeout B4 caught it.
 
 **Why a new assembly mirror exists at all.** `cb_build_variants._assemble` is
 deliberately frozen **pre-drop** -- its own docstring says *"A post-drop comparison

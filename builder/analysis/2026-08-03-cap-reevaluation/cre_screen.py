@@ -51,6 +51,20 @@ C3_DISQUALIFY_AT = 10_000
 C6_SUPPLY_GAP = 0.15          # 10x the 0.015 instrument floor, deliberately
 READABLE_FLOOR = 8            # the per-comparison floor (NOT the C6 denominator)
 
+
+def screens_out(zero_supply: int, denominator: int) -> bool:
+    """`CRE-C6`'s screen predicate, in one place.
+
+    A cell is screened out iff a `CRE-C1` MEDIAN pass is arithmetically
+    impossible -- strictly more than half the readable pairs have no supply.
+    `>` not `>=`: at exactly half, the median can still land on the bar.
+
+    Exported so `test_cre_screen` guards THIS expression rather than a copy of
+    it. The copy was found by the closeout B3 tamper check, which it survived.
+    """
+    return denominator > 0 and zero_supply * 2 > denominator
+
+
 # §0.2's isolating-baseline column, at graph-cell granularity. A cell named here
 # is a baseline for at least one surviving sweep cell, so it sweeps even if
 # CRE-C6 screens it out. The (D1-branch) cells are absent because CRE-D1 fired
@@ -166,7 +180,7 @@ def main() -> int:
         denominator = len(defined)
         # Arithmetically impossible for a C1 MEDIAN to pass iff more than half
         # the readable pairs have no supply at all.
-        screened_out = denominator > 0 and zero_supply * 2 > denominator
+        screened_out = screens_out(zero_supply, denominator)
         is_baseline = name.rsplit("-", 1)[0] in BASELINE_CELLS or name in BASELINE_CELLS
         per_cell[name] = {
             "cell": name,

@@ -23,7 +23,44 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-03 (night) — the experiment's step-by-step run plan is written and independently checked; nothing you can press changed
+## N/A (latest) — 2026-08-03 (Seam 1) — the big map experiment started running; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from this afternoon.**
+
+**What happened, in plain terms.** The map-rebuild experiment locked in earlier today has
+now actually started running, and it got through the first two of its four stages. Eleven
+different versions of the map were built — same artists, different rules for deciding who
+gets connected to whom — and all of them passed the safety checks. **None of them is in
+the app and none will be without your say-so and a listening test.**
+
+**Two questions got answered, and both came out the way we wrote down in advance.**
+
+- **The "dig deeper" knob still does nothing on journeys between two famous artists.**
+  We already suspected this. What is new is *why* we can now be sure. We turned that knob
+  up to a setting far past anything sane — and it visibly worked, rerouting nineteen of
+  twenty-two journeys. And the artists in the middle were **still just as famous**. So it
+  is not that the knob is broken or too gentle. There is genuinely nowhere for it to send
+  you. That points the whole experiment at the map rather than at the settings, which is
+  what it was built to test.
+- **Your hunch about genre evidence went the other way.** The idea was that well-known
+  artists get connected on *thinner* shared-genre evidence than obscure ones. Measured, it
+  is the opposite — and by enough that it is not a close call. That was the expected
+  answer (it had been measured once before, in advance, and written down), so nothing is
+  lost; it just closes off one branch of the experiment.
+
+**Nothing is proposed for you to test, and there is no decision waiting on you.** The
+remaining two stages are the expensive ones — actually pressing the buttons thousands of
+times on each version of the map and scoring what comes out. The next real entry here
+comes when a map is actually adopted, which is still behind a listening test.
+
+Detail, if you want it: `docs/superpowers/2026-08-03-cre-run-execution-log.md`.
+
+---
+
+## N/A — 2026-08-03 (night) — the experiment's step-by-step run plan is written and independently checked; nothing you can press changed
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no

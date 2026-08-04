@@ -470,3 +470,55 @@ does; `E-S2-P0` is branch-proof and runs.**
 3. **`CRE-C5` attribution on any `S2` cell must quote both `S2` shares** (labelled-node,
    and ≥ 2 measured agreements) as analyst M8's licensing constraint.
 4. **The `C6`/`D3` cross-read stays barred** until it can be made within one substrate.
+
+---
+
+## §8 — Closeout outcomes (Seam 1)
+
+- **A1**: this log is the retained record, written **per task** rather than at closeout,
+  which is what makes the seam cheap.
+- **A2**: handoff [`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md)
+  written from the template header; the exec-plan handoff's role line edited to name it as
+  successor **and** to record that its claim 3 (`CRE-AM2` not yet appended) is now
+  discharged rather than wrong.
+- **A3**: the four Stage-2 items each carry a success condition (handoff §"Owed at Stage
+  2"). **One prior condition found due and struck in place**: `CRE-AM2`'s "specified but
+  not yet appended", discharged at `5656602` — struck in the exec-plan log's §9 with the
+  date and what satisfied it, not deleted.
+- **A4**: **no config knob added — not applicable**, stated rather than skipped. The
+  prereg forbids shipped-code change; `ApiConfig` and `BuilderConfig` defaults are
+  untouched and the harness *asserts* the drop flags rather than setting them.
+- **A5**: all four ports empty, verified. No server was started at any point in this
+  session; every background job (three cell builds, one screen run) has exited. **Nothing
+  is left running and nothing is owed a server** — the queued C1 entry is N/A.
+- **B1**: `docs-lint.sh` reported **one hard failure — mine**: this log was missing from
+  `docs/README.md`. Fixed, along with a new row for the handoff. The `doc-auditor` then
+  ran on the semantic half and returned **no findings at any severity**, having
+  specifically checked the six things it was asked to disbelieve me about.
+- **B2**: every module has inbound imports except `cre_d1.py`, `cre_d3.py` and
+  `cre_screen.py`, which are **entry-point runners** invoked by path — the same shape as
+  every other probe under `builder/analysis/`. Asked and answered; not orphans.
+- **B3**: **this found a real defect in my own tests.** Tampering `cap_tag_limited`'s
+  tuple key (dropping the middle element) correctly turned the `S2` degeneracy test red.
+  But `test_cre_screen.py` had **re-implemented** `CRE-C6`'s screen predicate locally
+  instead of importing it, so it guarded a copy: flipping the module's `>` to `>=` left
+  the suite green. The predicate is now exported from `cre_screen.py` and imported by the
+  test — re-tampered to confirm, and three tests now fail as they should. **A test that
+  restates the logic it is checking is vacuous in exactly the way a test that asserts
+  nothing is**, and it is invisible to a passing suite.
+- **B4**: `cre_build.py`'s header claimed to be `CRE-T5` alone after `CRE-T6` had added
+  four functions to it. Corrected. No other prose-vs-code drift found.
+- **B5**: nothing under `.claude/` or `memory/` mentions this work at all, so there is
+  nothing there to have gone stale. This log restates no figure — every number is cited
+  from a committed JSON by file and key.
+- **C1**: N/A entry queued. Nothing changed that the owner can press.
+- **D1**: tree clean. **D2**: no committed fixture is affected — the shipped artifact did
+  not change and no shipped code did. **D3**: provenance for all eleven gitignored cells
+  lives in the committed `cre_builds.json` (sha256, artists, edges, diagnostics), plus the
+  two gate JSONs.
+- **D4**: builder **164 passed**, api **230 passed**, frontend **107 passed**, and the
+  `CRE-` analysis suite **38 passed** (excluded from the builder default run by the
+  owner's 2026-08-01 `testpaths` ruling).
+- **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
+  characters, conditional **2,155** lines, both equal to the figures at the previous
+  closeout. This session touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.

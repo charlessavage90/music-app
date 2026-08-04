@@ -12,17 +12,47 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-03 (night), when the CAP RE-EVALUATION EXECUTION PLAN was
-written cold from the frozen prereg, quantitatively reviewed by the `ml-graph-analyst`
-at the owner's instruction, and revised pre-run with every surviving finding folded in.
-The owner's one action is merging draft PR #69; execution then starts in a fresh
-session on Opus (his model ruling), inline, retiring at the plan's seams.**
+**Last updated: 2026-08-03 (Seam 1), when the CAP RE-EVALUATION EXPERIMENT began
+executing and reached the plan's first designed seam. Stage 0 and Stage 1 are complete
+and committed; both Stage-0 reads landed on their pre-registered expected branches.
+The owner's one action is merging draft PR #70; execution then resumes at `CRE-T8` in a
+fresh session on Opus (his model ruling), inline, retiring at the plan's remaining
+seams.**
 
 ---
 
 ## Next
 
-> ## ✅ THE CAP RE-EVALUATION EXECUTION PLAN IS COMPLETE, REVIEWED AND REVISED, 2026-08-03 (night). **The owner's one action is merging draft PR #69**; the next work is EXECUTION — a fresh session on Opus (owner's model ruling), running the plan INLINE and retiring at its seams.
+> ## ▶ THE CAP RE-EVALUATION EXPERIMENT IS RUNNING — STAGE 0 AND STAGE 1 COMPLETE at SEAM 1, 2026-08-03. **The owner's one action is merging draft PR #70**; the next work is `CRE-T8` — a fresh session on Opus, continuing the plan INLINE on the existing `cap-reeval-run` branch.
+>
+> Entry point is the current handoff:
+> [`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md).
+> Reasoning: [`2026-08-03-cre-run-execution-log.md`](2026-08-03-cre-run-execution-log.md)
+> (§1–§7). Operational document is unchanged —
+> [`plans/2026-08-03-cap-reeval-execution-plan.md`](plans/2026-08-03-cap-reeval-execution-plan.md),
+> **the prereg governing wherever it disagrees**. Figures live in the committed JSONs
+> under `builder/analysis/2026-08-03-cap-reevaluation/` — cited, never restated.
+>
+> **What stands, in one paragraph.** `CRE-AM2` was appended to the prereg's §8 and
+> committed (`5656602`) **before any stage ran** — the discharged deferral from the
+> previous track. Both Stage-0 reads then landed on their pre-registered **expected**
+> branches: **`CRE-D3` = `inert_as_expected`** (and its liveness check at the
+> instrument-only extreme makes that a *supply* reading, not a dead wire — the device
+> demonstrably reroutes journeys and still cannot move the gradient), and **`CRE-D1` =
+> `not_supported`**, measured in the **opposite** direction to the hypothesis. **That
+> branch is binding: the three `(D1-branch)` cells do not exist and no router-side tag
+> arm does; `E-S2-P0` is branch-proof and runs.** Eleven graph cells are built, gated and
+> screened — the build mirror is byte-identical to a real `build_from_archive` run on both
+> data sets, `S2` is byte-identical to `S1` under a degenerate table (so it is one knob
+> away), and all eight non-tag cells reproduce byte-identically across two independent
+> runs. **`CRE-G3` 22/22 pairs survive, `CRE-C3` disqualifies nothing, `CRE-C6` screens
+> nothing out — every cell proceeds to Stage 2.** **No `CRE-R` read is licensed and none
+> has been made; nothing is adopted; the blind listen (`REQ-38`) is unspent.** Four items
+> are owed at Stage 2, each with a success condition, in the handoff.
+>
+> ---
+
+> ## ✅ THE CAP RE-EVALUATION EXECUTION PLAN IS COMPLETE, REVIEWED AND REVISED, 2026-08-03 (night). ~~**The owner's one action is merging draft PR #69**~~ *(MERGED, `2e3b017`)*; ~~the next work is EXECUTION~~ *(STARTED — see the top block, which owns current state)*.
 >
 > Entry point is the current handoff:
 > [`2026-08-03-HANDOFF-cap-reeval-exec-plan.md`](2026-08-03-HANDOFF-cap-reeval-exec-plan.md).

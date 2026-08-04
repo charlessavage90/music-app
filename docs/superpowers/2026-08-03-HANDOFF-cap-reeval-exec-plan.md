@@ -1,6 +1,15 @@
 # Handoff — the cap re-evaluation execution plan, 2026-08-03 (night)
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ SUPERSEDED 2026-08-03 (Seam 1) on next actions by
+[`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md)** — the
+execution it named as next has begun and reached the plan's Seam 1, and **PR #69 has since
+MERGED** (`2e3b017`), discharging the owner-action below. This document remains
+authoritative for the execution-plan track's own internals and its claims-not-to-revert,
+**all five of which still stand** — `CRE-AM2` is no longer "not yet appended" (claim 3): it
+was committed at `5656602` on the run branch before any stage ran, exactly as specified.
+
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it.
+Supersedes
 [`2026-08-03-HANDOFF-cap-reeval-prereg.md`](2026-08-03-HANDOFF-cap-reeval-prereg.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.

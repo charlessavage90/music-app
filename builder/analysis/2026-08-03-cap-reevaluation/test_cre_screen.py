@@ -12,12 +12,9 @@ import json
 import pytest
 
 from cre_common import in_dir
-from cre_screen import BASELINE_CELLS, STAGED_BARRED
-
-
-def screens_out(zero_supply: int, denominator: int) -> bool:
-    """The predicate as `cre_screen` computes it."""
-    return denominator > 0 and zero_supply * 2 > denominator
+# Imported, never re-implemented: a local copy passes while the module
+# diverges, which is exactly what the closeout B3 tamper check caught here.
+from cre_screen import BASELINE_CELLS, STAGED_BARRED, screens_out
 
 
 @pytest.mark.parametrize("zero,denom,expected", [
