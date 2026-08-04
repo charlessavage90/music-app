@@ -23,7 +23,55 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-04 (evening) — you decided to run the listening test, and its rulebook is written; nothing you can press changed
+## N/A (latest) — 2026-08-04 (later) — the listening test is built and ready to run; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All five ports were checked and are empty;
+no server was started and none was left behind. Not one line of the app or the website
+changed. **A journey you build now is identical to one from this morning.**
+
+**What happened, in plain terms — and you steered it twice.** The listening test you
+ordered now exists as a working thing rather than a plan. You picked the eight pairs of
+artists (five from the shortlist, three you recombined yourself to put more distance
+between the two ends), and those are locked down in writing with a timestamp proving they
+were chosen before a single journey existed. That ordering is the whole point: pairs picked
+after seeing the journeys would not be evidence of anything.
+
+**Nothing is proposed for you to test here, and the listening test is not this entry.** It
+arrives through its own page, run by a fresh session that knows nothing about what the
+numbers predicted. **Your one action is starting that session** and pointing it at
+`builder/analysis/2026-08-04-gentle-arm-blind-listen/RUNNER-BRIEF.md` — it needs nothing
+else, and it must not be told anything else.
+
+**One thing I would rather you heard from me before you sit down to listen.** The program
+that builds the journeys has never actually been run. That is deliberate — I was barred
+from running it, because a session that has seen the new map's journeys cannot then build
+an honest way of judging them blind. The consequence is that its safety checks fire for the
+first time in front of you. If one of them stops the run with a clear message, that is the
+experiment working and you should be told exactly what it said. If it crashes instead, that
+is a broken tool rather than a result, and the session running it is under instructions to
+hand it back rather than poke at it — because poking at it means looking at the journeys,
+and then we have no blind runner left.
+
+**A related honest caveat about your three recombined pairs.** Nobody has checked that any
+pair produces a journey long enough to be worth judging after twenty presses, because
+checking means building the journeys, which was the thing I could not do. If a pair falls
+short, the program refuses to run and names it, so you would find out before listening
+rather than halfway through.
+
+**Two things still parked, neither of them about this:** your ruling that making money is
+not a goal is written in my notes but **not yet anywhere in the project's own records** —
+worth landing properly. And the eight entries from 22–27 July are still queued and
+unruled-on.
+
+Detail, if you want it: `docs/superpowers/2026-08-04-gbl-harness-execution-log.md`.
+
+---
+
+## N/A — 2026-08-04 (evening) — you decided to run the listening test, and its rulebook is written; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04 (later): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate, except its
+     "your one action is starting that fresh session" — that has now happened and the
+     harness is built; see above. -->
 
 **Nothing to exercise, and nothing is running.** All five ports were checked and are empty
 (including the new one the listening page will eventually use); no server was started and

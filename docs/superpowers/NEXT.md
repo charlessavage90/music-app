@@ -12,17 +12,51 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-04 (evening), when the OWNER DECIDED findings §4 OPTION A — a blind
-listen on the gentle arm `B-S1-P1a` — and the `GBL-` LISTEN WAS SPECIFIED AND PLANNED. The
-next action is the owner's and it is mechanical: START A FRESH SESSION ON OPUS to execute
-the committed plan (his model ruling). The re-crawl half of the 2026-08-04 decision is
-UNTAKEN and untouched by any listen outcome.**
+**Last updated: 2026-08-04 (later), when the `GBL-` HARNESS WAS BUILT — the plan executed
+to its last task, the owner's eight pairs approved and committed as `GBL-AM1`. The next
+action is the owner's and it is mechanical: START A FRESH RUNNER SESSION to run the listen
+from `RUNNER-BRIEF.md`. The listen has NOT been run; no journey exists on either arm. The
+re-crawl half of the 2026-08-04 decision is UNTAKEN and untouched by any listen outcome.**
 
 ---
 
 ## Next
 
-> ## ▶ THE GENTLE-ARM BLIND LISTEN (`GBL-`) IS SPECIFIED AND PLANNED, 2026-08-04 (evening). **The owner's one action is STARTING A FRESH SESSION ON OPUS** to execute the plan inline (executing-plans) on branch `gentle-arm-blind-listen` (draft PR #77 — it stays open through execution; merge is a later decision).
+> ## ▶ THE `GBL-` HARNESS IS BUILT AND THE LISTEN IS READY TO RUN, 2026-08-04 (later). **The owner's one action is STARTING A FRESH, MECHANICS-ONLY RUNNER SESSION** pointed at `builder/analysis/2026-08-04-gentle-arm-blind-listen/RUNNER-BRIEF.md` — that brief is self-contained and the runner must read nothing else. Branch `gentle-arm-blind-listen`, draft PR #77 (it stays open; merge is a later decision).
+>
+> Entry point is the current handoff:
+> [`2026-08-04-HANDOFF-gbl-harness.md`](2026-08-04-HANDOFF-gbl-harness.md).
+> Governing document unchanged:
+> [`specs/2026-08-04-gentle-arm-blind-listen-design.md`](specs/2026-08-04-gentle-arm-blind-listen-design.md)
+> (`GBL-`; its §8 now carries **`GBL-AM1`**, the eight approved pairs, and a **`GBL-CORR`**
+> corrections series). The plan
+> ([`plans/2026-08-04-gentle-arm-blind-listen.md`](plans/2026-08-04-gentle-arm-blind-listen.md))
+> is **COMPLETE, not live**. Reasoning:
+> [`2026-08-04-gbl-harness-execution-log.md`](2026-08-04-gbl-harness-execution-log.md) —
+> **its §5 must be read before anything is built on this**.
+>
+> **What stands, in one paragraph.** The harness is complete and committed: pair
+> derivation, both-arm generation behind five hard gates, arm-symmetric clip resolution,
+> the side-by-side page with verdicts written to disk, and the run-state-gated tally. **No
+> shipped code was touched** — nothing under `api/`, `frontend/` or `builder/src/`. The
+> owner approved eight pairs (five from the familiarity proposal, three his own
+> recombinations) and they are committed as **`GBL-AM1` with the file's sha256, before
+> `gbl_generate.py` had ever run**. **`GBL-CORR1`** corrected §5's branch table, which
+> carried the pre-scaling `≥ 3` bar while the same section's prose and worked examples
+> carried the scaled `≥ 5`; a test now pins the two together. Six defects in the plan's own
+> code were found and fixed, four of them tests that would have passed while testing
+> nothing. **⚠ `gbl_generate.py` has never run against the real artifacts** — the seam bars
+> it — so its five gates fire for the first time in the runner session; the brief tells the
+> runner to distinguish a `SystemExit` (respect it) from a traceback (a harness fault, do
+> not debug). **Nothing is adopted, no default changed, and the listen is unspent.**
+>
+> **Two items open and NOT `GBL-`:** the owner's 2026-08-04 no-commercialization ruling is
+> in memory but **not yet in the repo record** (it belongs in `PRODUCT-REQUIREMENTS.md`);
+> and the **eight 2026-07-22→27 `TEST-QUEUE.md` entries** remain `QUEUED` and unruled-on.
+>
+> ---
+
+> ## ✅ THE GENTLE-ARM BLIND LISTEN (`GBL-`) WAS SPECIFIED AND PLANNED, 2026-08-04 (evening). ~~**The owner's one action is STARTING A FRESH SESSION ON OPUS**~~ *(DONE — the plan is executed; see the top block, which owns current state.)* to execute the plan inline (executing-plans) on branch `gentle-arm-blind-listen` (draft PR #77 — it stays open through execution; merge is a later decision).
 >
 > Entry point is the current handoff:
 > [`2026-08-04-HANDOFF-gbl-plan.md`](2026-08-04-HANDOFF-gbl-plan.md).

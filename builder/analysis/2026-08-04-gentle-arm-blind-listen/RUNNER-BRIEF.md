@@ -15,9 +15,15 @@ All commands from `builder/`, every uv command prefixed `UV_LINK_MODE=copy`, and
    passes.
 2. **Generate:**
    `UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run --extra dev python -u analysis/2026-08-04-gentle-arm-blind-listen/gbl_generate.py`
-   - It self-checks artifact hashes, mirror fidelity, the ramp decomposition,
-     and that the two sides genuinely differ. Any `SystemExit`: STOP, report the
+   - It self-checks **five** things: artifact hashes, mirror fidelity, the ramp
+     decomposition, that the two sides genuinely differ, and that **every pair
+     reaches all three depths on both sides**. Any `SystemExit`: STOP, report the
      message to the owner verbatim, do not work around it.
+   - **The fifth is the one most likely to fire.** Three of the eight pairs were
+     recombined by the owner and nobody has checked they produce journeys with
+     room to judge at depth 20 — checking meant generating, which the design
+     forbade. If it fires it names the pair and says to swap it. That is a normal
+     outcome, not a fault: report it and wait for his replacement pair.
    - **A Python traceback is not a gate.** This script has never been run against
      the real artifacts — the session that wrote it was barred from doing so, on
      purpose. A `SystemExit` with one of its own messages is the experiment

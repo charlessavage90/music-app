@@ -1,9 +1,14 @@
 # Handoff — the `GBL-` blind listen specified and planned, 2026-08-04 (evening)
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-08-04-HANDOFF-cre-stage3-findings.md`](2026-08-04-HANDOFF-cre-stage3-findings.md) on next
-actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
-owns it.
+**Role: SUPERSEDED on next actions** by
+[`2026-08-04-HANDOFF-gbl-harness.md`](2026-08-04-HANDOFF-gbl-harness.md), which is the
+CURRENT handoff — the plan it hands over has since been executed to its last task. This
+document **remains authoritative for the planning chunk's own internals**: why the listen
+is shaped as it is, and the six claims-not-to-revert, all of which still stand. It
+supersedes
+[`2026-08-04-HANDOFF-cre-stage3-findings.md`](2026-08-04-HANDOFF-cre-stage3-findings.md) on
+next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
+which owns it.
 
 **This is a SEAM handoff.** The planning chunk is complete: spec committed and
 owner-reviewed twice, plan committed, branch `gentle-arm-blind-listen` pushed, draft

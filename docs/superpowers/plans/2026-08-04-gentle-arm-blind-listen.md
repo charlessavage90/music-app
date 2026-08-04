@@ -1,6 +1,14 @@
 # Gentle-Arm Blind Listen (`GBL-`) Implementation Plan
 
-**Role: ACTIVE — the operational plan for the `GBL-` blind listen.** The spec
+**Role: COMPLETE 2026-08-04 (later) — executed to its last task; NOT live.** Accurate as
+the record of what was built and why it was sequenced this way. **Do not execute it again,
+and do not read its inline code as the code that shipped:** six pieces of it were wrong and
+were corrected during execution — see
+[`../2026-08-04-gbl-harness-execution-log.md`](../2026-08-04-gbl-harness-execution-log.md)
+§2.2. **The repo is the source of truth for the harness**
+(`builder/analysis/2026-08-04-gentle-arm-blind-listen/`); these listings are not.
+
+*(Original role:)* **ACTIVE — the operational plan for the `GBL-` blind listen.** The spec
 (`../specs/2026-08-04-gentle-arm-blind-listen-design.md`) governs wherever this plan
 disagrees.
 
