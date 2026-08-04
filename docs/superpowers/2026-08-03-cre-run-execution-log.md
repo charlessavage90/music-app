@@ -896,3 +896,179 @@ constraints.
 - **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
   characters, conditional **2,155** lines, both equal to the mid-flight figures. This
   session touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.
+
+---
+
+## §15 — Stage 3: the findings note, written by a session that did not run the sweeps
+
+**Session boundary is the point.** This section is written by a different session from
+§1–§14. It read `NEXT.md`, the Seam-3 handoff and the pre-registration, then opened
+`cre_scores.json` **before** reading §13–§14 of this log — the seam's whole purpose being
+that the reader of results is not the runner of them, and a prose summary read first would
+frame the JSON rather than the other way round.
+
+**Deliverable:** `findings/2026-08-04-cap-reevaluation-results.md`, AUTHORITATIVE for the
+`CRE-` results. Four-part shape; every identifier carries the plain sentence §5 fixed for it
+before any result existed, quoted rather than re-worded.
+
+### The read determinations, and why each is what it is
+
+All mechanical against bars fixed before any result. Figures are cited to
+`cre_scores.json`, never restated here.
+
+- **`CRE-R0` does not fire.** Its condition is that *no* non-staged arm passes `CRE-C1` on
+  any readable class on either data set. Two do.
+- **`CRE-R1` does not fire.** No `ALG-E` arm clears either `CRE-C1` clause.
+- **`CRE-R2` fires, for `B-S1-P1a` and `B-S1-P1b`.** Both clear `CRE-C1`'s conjunction,
+  are not killed by `CRE-C2`, are not disqualified by `CRE-C3`, and meet `CRE-C4`'s binding
+  floor.
+- **`CRE-R3` does not fire anywhere.** It requires a `CRE-C1` pass alongside a `CRE-C4`
+  fail. The one `CRE-C4` failure in the grid is `E-S1-P1a`, which fails `CRE-C1`.
+- **`CRE-R4` finds no clear winner.** Its clause (i) fails for **both** passing arms:
+  neither meets the bars on both data sets, and neither satisfies the "no other non-staged
+  arm meets them anywhere" disjunct, because each is the other's counterexample. Clause (i)
+  failing is sufficient; (ii) and (iii) were not needed.
+
+### One statistic computed here rather than read
+
+`CRE-R4` clause (ii)'s paired lead **is not in `cre_scores.json`** — the scorer is
+figures-only and clause (ii) is a read-level device. It was computed in the findings note
+from the committed per-pair deltas using clause (ii)'s pre-registered form (paired
+difference on the common pair set, 95 % percentile bootstrap), and is **labelled at the
+point of use as computed at Stage 3 and absent from the raw record**. It changes nothing:
+clause (i) already bars the call. Recorded here so a future reader does not go looking for
+it in the JSON.
+
+### The §0.4 obligation is the load-bearing part of the whole read
+
+Both passing arms trip the differential-censoring trigger. §0.4's wording is a **reporting
+constraint, not a firing condition** — it does not bar `CRE-R2`, it forbids the outcome
+being called a clean pass — so the note fires `CRE-R2` *and* carries "descent partly
+unmeasurable" on every sentence about either arm. Reading it as a bar would have been
+wrong in the permissive direction; reading it as absent would have been wrong in the
+flattering one.
+
+The matched-only companion is what makes this concrete rather than procedural, and it is
+the single most important thing in the note that cuts against its own headline: on the
+pairs where nothing drops out of measurement, the gentle arm falls below the bar it passed
+on the full set, and the strong arm's matched set falls below the readable-pair floor
+entirely, so that comparison is **unreadable rather than favourable** — a distinction the
+note states explicitly because collapsing it would read as a second pass.
+
+### Attribution: what the guards licensed and what they refused
+
+- **The pricing knob is attributable.** Each passing arm's isolating baseline differs from
+  it in the pricing column alone, and §0.3 exempts that knob by construction (the ramp is
+  identically zero at d0; the floor term's share is identically zero at d10–20 in every
+  cell, which this session verified across all nine guard rows rather than taking from
+  §0.3's prediction).
+- **The supply knob is not.** The guard is deliberately conservative — any non-zero
+  differential firing sets the flag — and all nine comparisons are flagged. The note
+  therefore reports the supply contribution as figures and refuses the sentence.
+- **Tags and votes are credited with nothing**, and by the cheaper of the two available
+  routes: `CRE-C5`'s **entry condition was never met**, so the attribution question was not
+  merely unanswered but not worth asking. Both companions' paired CIs including zero is
+  reported beside it, not instead of it.
+
+### Two defects found in this session's own draft, both by checking prose against source
+
+Recorded because the class matters more than the instances — both were confident sentences
+about correctly-computed data, which is this project's characteristic failure.
+
+1. **The gate table quoted the wrong liveness figure.** The draft's `CRE-G2`(a) row carried
+   19/22, which is `cre_d3.json`'s own liveness check on the adopted artifact, not
+   `CRE-G2`(a). `CRE-G2`(a) lives in `cre_gates.json` and is per graph cell. Caught by
+   opening `cre_gates.json` to verify a row that had been written from the wrong file.
+2. **An interior-slot total was rounded up rather than counted**, and the count also had to
+   exclude the two cells that appear in two groups each. Both corrected against a summation
+   over the committed per-depth records.
+
+### One thing surfaced that no previous section names
+
+**`E-S1-P1a` is the only cell in the grid failing `CRE-C4`'s binding floor.** It spends
+about a third of its payload against its own baseline and buys a gradient move inside the
+instrument floor. Nothing in the design required this to be reported separately — it fires
+no read, because `CRE-R3` needs a `CRE-C1` pass alongside — but it is the concrete answer
+to "could we ship the ramp on the production data anyway, since it cannot hurt", and it is
+now in the findings note's plain-language section in those terms.
+
+### A defect found in the PRE-REGISTRATION itself, not in the code or the plan
+
+**`CRE-R4` uses "arm" in two incompatible senses, and clause (i) turns on which.** Every
+criterion that produces a number treats an arm as a **cell** (§5's "arm statistic",
+"per-arm kill", "arm `C4` ÷ its isolating baseline's `C4`" — all per-cell quantities over
+§0.2 rows). But `CRE-R4`'s own clause (iii) — "explored on no fewer ramp settings than any
+arm it beats" — presupposes an arm that carries several ramp settings, which a cell cannot.
+
+**Resolved as arm = cell**, and the reasoning is in the findings note §1.6 rather than only
+here, because a future reader hits the ambiguity in that document and not in this one.
+Three grounds: every scoring criterion is per cell; §0.2 gives each cell the isolating
+baseline clause (i) compares against; and the alternative is incoherent rather than merely
+different, since "arm = supply configuration" would require `B-S1` to pass and fail at once
+(`B-S1-P1a` and `B-S1-P1b` clear the bars, `B-S1-P0` does not). Clause (iii) then reads as
+comparing the ramp exploration of the supply configurations *behind* two competing cells,
+which is what its stated purpose requires.
+
+**Why it is worth a section.** Under arm = cell, clause (i)'s second disjunct fails for each
+passing arm because the other is its counterexample — that is the entire mechanism producing
+"no clear winner". A reader taking the other sense would find the disjunct satisfied and
+could reach a clear-winner call. **No bar was moved and no criterion reinterpreted**: this is
+the sense the experiment was already scored in, and it was settled from §0.2 and §5's wording
+before the determination was written.
+
+**How it was caught, which is the transferable part.** The `doc-auditor` dispatched at B1
+returned the diff clean and listed this item as verified. Its own coverage statement showed
+what it had actually done: checked the findings note against the handoff, which asserts the
+same reading — circular on the one claim in the diff with the power to invert the result. The
+check that found the ambiguity was re-deriving clause (i) from §6's text directly. **A clean
+audit report is evidence about the documents' consistency with each other, not about their
+consistency with the governing document**, and on a diff whose whole content is a read of a
+pre-registration those are different questions.
+
+### Deferral discharged
+
+**The affine `pop_raw` map** (inherited at Seam 3). Condition was: no cross-cell `pop_raw`
+sentence for the three non-comparable comparisons without applying the map, **or no
+sentence**. The findings note makes **no cross-cell `pop_raw` sentence at all** — every
+gradient figure in it is in `fame_lb_pctl`. **Discharged by the second branch**, and struck
+in place in the Seam-3 handoff.
+
+---
+
+## §16 — Closeout outcomes (Stage 3)
+
+- **A3**: the affine `pop_raw` deferral discharged (above), struck in place. The Snyk LOW in
+  `cre_sweep.py` is **unchanged and still open**, condition unchanged — fix if `cre_sweep.py`
+  is ever re-run for new results, or close as accepted when the `CRE-` track completes. Both
+  previously-discharged items re-checked and still discharged.
+- **A4**: **inapplicable, stated rather than skipped.** This session added no config knob and
+  changed no default; it is a documentation deliverable over committed data.
+- **A5**: all four ports swept and empty before and after. No server started, none left
+  behind, nothing in flight.
+- **B1**: `scripts/docs-lint.sh` returned **one hard failure** — the new findings note
+  unclassified in `docs/README.md` — which is the expected shape for a new document and was
+  fixed; re-run clean afterwards. Its figure candidates and bare-identifier collisions are
+  pre-existing and unchanged by this diff. **`doc-auditor` was dispatched on the diff scope
+  and returned no defects.** That report was **not accepted at face value on the one item
+  with the power to invert the result**: its coverage statement showed it had checked the
+  findings note's `CRE-R4` reading against the handoff, which asserts the same reading. Re-
+  deriving clause (i) from §6's text directly found the "arm" ambiguity recorded in §15 —
+  which the audit had listed as verified.
+- **B2**: **no module created**, so nothing to sweep. The only new file is markdown.
+- **B3**: **no test written**, so nothing to tamper. Stated rather than skipped.
+- **B4**: this is the item that earned its place here — the deliverable *is* prose about
+  committed data, and checking every assertion against its source found the two defects in
+  §15.
+- **B5**: no figure is restated out of its owning document; the findings note becomes the
+  owner of the `CRE-` read and cites `cre_scores.json` for the raw record, following the
+  Track B results precedent. `.claude/` carries **no `CRE-` description**, so nothing there
+  can have gone stale.
+- **C1**: N/A entry queued. Nothing changed that the owner can press.
+- **D1**: tree clean.
+- **D2**: **inapplicable** — no artifact changed, so no fixture is stale.
+- **D3**: no artifact adopted or built. The findings note cites cell checksums via
+  `cre_scores.json`'s per-cell `artifact_sha256`.
+- **D4**: builder **164 passed**, api **230 passed**, frontend **107 passed** (18 files).
+- **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
+  characters, conditional **2,155** lines, both unchanged from §14's figures. This session
+  touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.

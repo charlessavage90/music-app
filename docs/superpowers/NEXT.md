@@ -12,20 +12,58 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-04 (SEAM 3), when the CAP RE-EVALUATION EXPERIMENT finished
-measuring: the criteria figures and the run-state map are computed and committed, and the
-execution plan is fully executed. PR #73 is MERGED (`eccc73f`), so nothing is waiting on the
-owner. The next work is the STAGE-3 FINDINGS NOTE, which must be written by a session that
-did not run the sweeps.**
+**Last updated: 2026-08-04 (STAGE 3), when the CAP RE-EVALUATION EXPERIMENT COMPLETED. All
+four stages have run, every criterion is computed, every read is determined, and the results
+document exists. NOTHING IS OWED BY ANY SESSION. The owner's one action is merging draft
+PR #75; after that, THE NEXT ACTION IS HIS — and it is a decision, not a piece of work.**
 
 ---
 
 ## Next
 
-> ## ▶ SEAM 3 REACHED, 2026-08-04 — THE CRITERIA FIGURES ARE COMPUTED AND COMMITTED. ~~**The owner's one action is merging draft PR #73**~~ *(MERGED, `eccc73f`; branch deleted)* — **nothing is waiting on the owner.** The next work is the **Stage-3 findings note**, branching off `main`.
+> ## ▶ THE `CRE-` EXPERIMENT IS COMPLETE, 2026-08-04. **The owner's one action is merging draft PR #75** — and then **the next action is his: a DECISION, not work.** No session owes anything.
 >
 > Entry point is the current handoff:
-> [`2026-08-04-HANDOFF-cre-t11-seam3.md`](2026-08-04-HANDOFF-cre-t11-seam3.md).
+> [`2026-08-04-HANDOFF-cre-stage3-findings.md`](2026-08-04-HANDOFF-cre-stage3-findings.md).
+> **Results of record, and the entry point for anything `CRE-`:**
+> [`findings/2026-08-04-cap-reevaluation-results.md`](findings/2026-08-04-cap-reevaluation-results.md)
+> — **it owns the `CRE-` read**; its §4 is the options list. Raw figures live in
+> `builder/analysis/2026-08-03-cap-reevaluation/cre_scores.json` — **cited, never
+> restated.** Reasoning: [`2026-08-03-cre-run-execution-log.md`](2026-08-03-cre-run-execution-log.md)
+> (§15–§16). Governing document is still the prereg,
+> [`specs/2026-08-03-cap-reevaluation-preregistration.md`](specs/2026-08-03-cap-reevaluation-preregistration.md).
+>
+> **What stands, in one paragraph.** Two arms passed the primary bar, both on the candidate
+> data set: `B-S1-P1a` and `B-S1-P1b` (trimmed union supply, `known` ramp at r₁ and r₂).
+> **`CRE-R2` fires for both; `CRE-R0`, `CRE-R1` and `CRE-R3` do not fire; `CRE-R4` finds no
+> clear winner**, because its clause (i) fails for both — each arm is the other's
+> counterexample — so the findings note presents **options, not a recommendation.** No
+> `ALG-E` arm moved the gradient at all. **Four qualifiers travel with every `CRE-R2`
+> sentence and must not be dropped:** both passing arms trip §0.4's censoring trigger, so
+> their `CRE-C1` is reported **"descent partly unmeasurable" and never as a clean pass**; on
+> fully-measured pairs the gentle arm falls below the bar it passed on the full set and the
+> strong arm's matched set falls below the readable floor, making it **unreadable rather than
+> favourable**; the `w_floor` guard flags all nine supply comparisons, so **no sentence
+> credits the connection rule alone**; and `CRE-C5`'s entry condition was never met, so **no
+> "tags did this" or "votes did this" sentence is licensed.** **Nothing is adopted, no default
+> changed, no shipped code touched, and the blind listen (`REQ-38`) is UNSPENT.**
+>
+> **The decision waiting on the owner** is which passing arm (if either) is worth a blind
+> listen, and whether the candidate data set's advantage justifies the re-crawl it implies.
+> Both are his column — adoption, his ear, his risk acceptance. **"The family space is
+> exhausted" is a barred read**; the unrun remainder is named in the findings note's §5.3.
+>
+> **Flagged, and not a `CRE-` item: eight `TEST-QUEUE.md` entries dated 2026-07-22 to
+> 2026-07-27 are still marked `QUEUED` and were never discharged.** Some are plausibly
+> overtaken by the 2026-08-02 discharge; the queue records nothing to that effect.
+>
+> ---
+
+> ## ✅ SEAM 3 REACHED, 2026-08-04 — THE CRITERIA FIGURES ARE COMPUTED AND COMMITTED. ~~**The owner's one action is merging draft PR #73**~~ *(MERGED, `eccc73f`; branch deleted)*. ~~The next work is the **Stage-3 findings note**~~ *(WRITTEN — see the top block, which owns current state)*.
+>
+> Entry point is the superseded handoff:
+> [`2026-08-04-HANDOFF-cre-t11-seam3.md`](2026-08-04-HANDOFF-cre-t11-seam3.md), which
+> **remains authoritative for Seam 3's own internals**.
 > Reasoning: [`2026-08-03-cre-run-execution-log.md`](2026-08-03-cre-run-execution-log.md)
 > (§13–§14). Governing document is the prereg,
 > [`specs/2026-08-03-cap-reevaluation-preregistration.md`](specs/2026-08-03-cap-reevaluation-preregistration.md);

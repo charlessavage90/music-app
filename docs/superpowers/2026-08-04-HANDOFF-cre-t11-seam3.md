@@ -1,6 +1,14 @@
 # Handoff — the `CRE-` run, Seam 3: criteria figures computed, 2026-08-04
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ SUPERSEDED 2026-08-04 on next actions by
+[`2026-08-04-HANDOFF-cre-stage3-findings.md`](2026-08-04-HANDOFF-cre-stage3-findings.md)** —
+the Stage-3 findings note it names as the next work has been written, and the `CRE-`
+experiment is complete. **Remains authoritative for Seam 3's own internals** (the criteria
+figures, the run-state map, and the seven claims-not-to-revert, all of which still stand).
+Its **owed item 2 is struck in place below: discharged.**
+
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it.
+Supersedes
 [`2026-08-03-HANDOFF-cre-run-stage2-midflight.md`](2026-08-03-HANDOFF-cre-run-stage2-midflight.md)
 on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.
@@ -77,12 +85,16 @@ summary the successor reads before opening the JSON.** That is the whole point o
 1. ~~**Liveness on the unmeasured-class counters.**~~ **FULLY DISCHARGED 2026-08-04.** The
    null half was discharged at Seam 2; the absent half is settled here by set-difference
    over all eleven cells. Figures in `cre_scores.json`. Nothing further owed.
-2. **The affine `pop_raw` map applied.** **Not yet due, re-tested rather than re-listed.**
-   Three comparisons are not `pop_raw`-comparable (`E-S1` vs `E-S0`, `B-S0` vs `E-S0`,
-   `B-S1` vs `B-S0`); maps are in `cre_screen.json`'s `affine_pop_raw_report`.
-   `cre_scores.json` makes **no cross-cell `pop_raw` sentence**, so nothing has yet needed
-   the map. *Condition, unchanged and now inherited by the findings note:* no cross-cell
-   `pop_raw` sentence for those three without the map, or no sentence.
+2. ~~**The affine `pop_raw` map applied.**~~ **DISCHARGED 2026-08-04 at Stage 3, by the
+   condition's second branch.** The findings note
+   (`findings/2026-08-04-cap-reevaluation-results.md` §5.1) makes **no cross-cell `pop_raw`
+   sentence at all** — every gradient figure in it is in `fame_lb_pctl` — so the map was
+   never needed. Nothing further owed. *(Original entry:* Three comparisons are not
+   `pop_raw`-comparable (`E-S1` vs `E-S0`, `B-S0` vs `E-S0`, `B-S1` vs `B-S0`); maps are in
+   `cre_screen.json`'s `affine_pop_raw_report`. `cre_scores.json` makes **no cross-cell
+   `pop_raw` sentence**, so nothing has yet needed the map. *Condition, unchanged and now
+   inherited by the findings note:* no cross-cell `pop_raw` sentence for those three without
+   the map, or no sentence.*)*
 3. ~~**`S2` share quoting.**~~ **DISCHARGED by branch, 2026-08-04.** The obligation attached
    to a `B-S2` cell; `CRE-D1` fired `not_supported`, so no such cell exists. Recorded in
    `cre_scores.json` as an explicit note rather than by omission.
