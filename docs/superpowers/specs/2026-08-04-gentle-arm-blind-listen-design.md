@@ -69,7 +69,9 @@ record, not here.)
 **Eight pairs** (raised from five at the owner's pre-run review, 2026-08-04, accepting
 the larger listening spend). Endpoints drawn from the owner's familiarity — his Spotify export
 (streaming history play counts, `YourLibrary.json`, `Follow.json`) proposes candidates;
-he approves or amends. Constraints:
+he approves or amends. (Correction at plan time, 2026-08-04: the export's
+`Follow.json` holds followed *users*, not artists, and contributes nothing — the
+familiarity sources are the streaming history and `YourLibrary.json`.) Constraints:
 
 - Every endpoint must resolve in **both** graphs (the candidate map lacks roughly a third
   of production artists); feasibility is checked before the list is fixed.
