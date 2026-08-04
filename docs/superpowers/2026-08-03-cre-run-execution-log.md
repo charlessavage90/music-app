@@ -578,3 +578,76 @@ directory: 0 issues.** No shipped code, no config default and no artifact change
 `CRE-R` read is licensed by this task and none has been made**; nothing is adopted and the
 blind listen (`REQ-38`) is unspent. The four items owed at Stage 2 are untouched and all
 four remain owed.
+
+---
+
+## §10 — `CRE-T9`: the `ALG-E` sweeps, and SEAM 2
+
+**Figures: `cre_sweep_E-*.json`, nine committed files, one per cell.** All nine `ALG-E`
+cells swept: E-S0-P0, E-S0b-P0, E-S1-P0, E-S1-P1a, E-S1-P1b, E-S2-P0, its two companions,
+and the staged E-S3-P0.
+
+### Outcomes
+
+- **`CRE-G1`(b): PASS on both `P1` cells.** E-S1-P1a and E-S1-P1b are bit-identical to
+  E-S1-P0 at d0 on all 22 pairs, so the device fires at depth and not before.
+- **`CRE-G2`(b): 44 assertions per `P1` cell, all passing** (22 pairs × k ∈ {1, 10}).
+- **Every pair completes the full ladder in every cell**: 22/22 walked all 21 depths, no
+  infeasible `(pair, depth)` cell anywhere, and no `adjacent_only` termination. The
+  padding-vs-infeasibility machinery is therefore built, tested and **unexercised** on
+  `ALG-E` — which is a fact about this data set, not evidence the distinction is idle.
+- **Cost, measured:** ~7–26 s per capped cell, **292 s for the staged E-S3** — squarely
+  inside analyst V1's "~4–5 minutes on UC" and two orders off the plan's superseded
+  "~8–15 min per capped cell", exactly as V1 predicted.
+
+### The counter-liveness item is NOT discharged, and `ALG-E` cannot discharge it
+
+Owed item 1 from the Seam 1 handoff asked for a non-zero reading on the two unmeasured
+classes. **Across all nine cells the totals are zero: no ruler-null interior, no
+absent-from-snapshot interior, and therefore a zero mechanical `null_interior_unbypassable`
+count.** That is the *same* green the Stage-0 run produced and it carries the *same* weight
+— none — because every `ALG-E` interior is ruler-measured, so a dead counter and a true
+zero are indistinguishable here. **The condition passes to T10**, where the plan expects
+~6% of `ALG-B` nodes to be ruler-null and the counters can go non-zero. Recorded here so
+the item cannot be quietly marked green by a second zero.
+
+### One thing checked rather than assumed, because it looked wrong
+
+The `CRE-D2` term shares came back with **`sim` contributing exactly 0.0%** of path cost on
+the first cell — the largest weight in the cost function contributing nothing. Probed
+before running the remaining eight: the d0 paths ride entirely on edges at similarity
+**exactly 1.0**, of which the artifact carries 2.09%, so `w_sim · (1 − sim)` is genuinely
+zero along them and path cost is `jump_raw` + `hop` alone. Not an instrument fault, and
+consistent with the ceiling-saturation this project already prices elsewhere
+(`toll_s`'s "ceiling-saturated edges").
+
+**It did expose a real gap, and it is now closed.** `assert_cost_decomposition` was pinned
+to `P1` cells only, so the term shares on every `P0` **baseline** — the cells each candidate
+is measured *against* — would have gone into T11 unverified. The same assertion now runs on
+`P0` cells too, 44 per cell, recorded under its own key as a plain instrument check and
+**deliberately not called `CRE-G2`(b)**: that identifier is pre-registered for the device
+test, and two load-bearing objects do not share an identifier here.
+
+### Two defects fixed before the sweeps, both from the retired session's notes
+
+1. **`cre_tags.agreement_table` cached on `kind` alone**, and the cache hit returned before
+   `n_artists` was consulted. Every caller passes the same value today, so it could not
+   misfire — it would have surfaced as a **wrong figure, not an error**. Keyed on
+   `(kind, n_artists)` now, with a regression test **tamper-checked red** against the old
+   key.
+2. **`cre_gates` carried both its decision rules inline**, which is the shape closeout B3
+   found in `test_cre_screen`. `journeys_identical` and `g2a_passes` are extracted and the
+   new `test_cre_gates` imports them. `g2a_passes` guards its denominator: **an empty
+   readable set is a dead wire, not a pass** — `0 >= 0.5 × 0` is true, and that is how a
+   vacuous gate gets built.
+
+### What is measured, and what is not licensed
+
+Median interior `fame_lb_pctl` sits at **0.995–0.999 at every depth in every cell**, and
+mean interior counts run 2.05–4.82 at d0 against 2.95–7.64 at d20. **No `CRE-R` read is
+licensed by any of it and none is made here** — no criterion is evaluated, no cell is
+compared to another, the three non-`pop_raw`-comparable comparisons have had no map
+applied, and `C1`'s two reporting populations are T11's work. The figures are recorded so
+T11 can compute; they are not a result.
+
+**SEAM 2.** All `ALG-E` sweep JSONs committed. `T10` starts cold from here.
