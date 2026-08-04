@@ -12,17 +12,66 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-04 (later), when the `GBL-` HARNESS WAS BUILT — the plan executed
-to its last task, the owner's eight pairs approved and committed as `GBL-AM1`. The next
-action is the owner's and it is mechanical: START A FRESH RUNNER SESSION to run the listen
-from `RUNNER-BRIEF.md`. The listen has NOT been run; no journey exists on either arm. The
-re-crawl half of the 2026-08-04 decision is UNTAKEN and untouched by any listen outcome.**
+**Last updated: 2026-08-04 (night), when THE LISTEN WAS RUN AND WRITTEN UP. The listen is
+SPENT and it returned the pre-registered NULL — margin 3 against a bar of 5. Option A
+closes without adoption; production stands; nothing is adopted and no default changed. The
+re-crawl half of the 2026-08-04 decision is STILL UNTAKEN and untouched by the null. The
+next action is the OWNER'S and it is a decision, not work.**
 
 ---
 
 ## Next
 
-> ## ▶ THE `GBL-` HARNESS IS BUILT AND THE LISTEN IS READY TO RUN, 2026-08-04 (later). **The owner's one action is STARTING A FRESH, MECHANICS-ONLY RUNNER SESSION** pointed at `builder/analysis/2026-08-04-gentle-arm-blind-listen/RUNNER-BRIEF.md` — that brief is self-contained and the runner must read nothing else. Branch `gentle-arm-blind-listen`, draft PR #77 (it stays open; merge is a later decision).
+> ## ▶ THE GENTLE-ARM BLIND LISTEN IS RUN, UNBLINDED AND WRITTEN UP, 2026-08-04 (night). **The listen returned the pre-registered NULL. Option A CLOSES without adoption.** The owner's actions are a DECISION (below) and merging draft PR #77.
+>
+> **Results of record, and the entry point for anything `GBL-`:**
+> [`findings/2026-08-04-gentle-arm-blind-listen-results.md`](findings/2026-08-04-gentle-arm-blind-listen-results.md)
+> — **it owns the `GBL-` figures**; its §4 is the options list and its §5 is the barred
+> reads. Raw data: `builder/analysis/2026-08-04-gentle-arm-blind-listen/gbl_verdicts.json`,
+> `gbl_result.json`, `gbl_owner_notes.md` — **cited, never restated.** The blind runner's
+> record: [`2026-08-04-gbl-run-execution-log.md`](2026-08-04-gbl-run-execution-log.md) —
+> **its §5, on what the runner saw and on the blind failing, must be read before anything is
+> built on the result.** Reasoning for the write-up:
+> [`2026-08-04-gbl-writeup-execution-log.md`](2026-08-04-gbl-writeup-execution-log.md).
+> Governing document unchanged:
+> [`specs/2026-08-04-gentle-arm-blind-listen-design.md`](specs/2026-08-04-gentle-arm-blind-listen-design.md)
+> (`GBL-`) — its §5 fixed the read before any journey existed and it was applied, not
+> reinterpreted.
+>
+> **What stands, in one paragraph.** All 8 pairs × 3 depths × both arms were generated,
+> presented and judged; the run state §5 requires was met (32 of 32 slots). **On the 16 deep
+> rows the margin was 3 against a bar of 5, so the branch is `no_detectable_difference` —
+> "my ear cannot tell them apart where the numbers could" — and per §5 that means production
+> stands and Option A closes without adoption.** Four things travel with that sentence and
+> must never be dropped from it: **the novelty question went 8–0 to the rebuilt package**
+> (`GBL-Q1`, unanimous, no no-preferences — but §5 fixed **no threshold for it**, so it is
+> data with no pre-registered read and no bar may be chosen now); **five of the seven
+> undecided deep rows were undecided because of clip defects**, not because the journeys were
+> alike, so the instrument lost resolution rather than finding equivalence; **the blind did
+> not hold** — the owner reports it was "almost always really easy to tell which side was the
+> new graph", volunteered before he read the result; and **at zero presses he preferred the
+> rebuilt app 6–0**, which §5 excludes from the tally and which therefore rescues nothing.
+> **Neither arm collapsed into a random walk** (`GBL-Q2`'s collapse clause, empty on all
+> eight pairs). **None of the four hidden offline metrics predicted his picks** — fame at 5
+> of 9 is a coin flip. **Nothing is adopted, no default changed, no shipped code touched.**
+>
+> **The decision waiting on the owner, and it is his because it is adoption-adjacent and
+> spends his time:** which of the findings note's §4 options to take — accept the null and
+> stop, open the clip defect as its own track, or open the whole-path "weird detours"
+> observation as a new pre-registered question. **§4's option D (adopt on the novelty sweep)
+> I do not think is available**, and the reasoning is in the note.
+>
+> **⚠ `GBL-` §5's run-once rule now binds: this verdict may not be re-listened.** New
+> candidates on new findings still may.
+>
+> **Two items open and NOT `GBL-`:** the owner's 2026-08-04 no-commercialization ruling is
+> in memory but **still not in the repo record** (it belongs in `PRODUCT-REQUIREMENTS.md`);
+> and the **eight 2026-07-22→27 `TEST-QUEUE.md` entries** remain `QUEUED` and unruled-on —
+> flagged at four consecutive closeouts now.
+>
+> ---
+
+> ## ✅ THE `GBL-` HARNESS IS BUILT AND THE LISTEN IS READY TO RUN, 2026-08-04 (later). ~~**The owner's one action is STARTING A FRESH, MECHANICS-ONLY RUNNER SESSION**~~ *(DONE — the listen ran, unblinded and was written up; see the top block, which owns current state.)* pointed at `builder/analysis/2026-08-04-gentle-arm-blind-listen/RUNNER-BRIEF.md` — that brief is self-contained and the runner must read nothing else. Branch `gentle-arm-blind-listen`, draft PR #77 (it stays open; merge is a later decision).
 >
 > Entry point is the current handoff:
 > [`2026-08-04-HANDOFF-gbl-harness.md`](2026-08-04-HANDOFF-gbl-harness.md).
@@ -48,7 +97,10 @@ re-crawl half of the 2026-08-04 decision is UNTAKEN and untouched by any listen 
 > nothing. **⚠ `gbl_generate.py` has never run against the real artifacts** — the seam bars
 > it — so its five gates fire for the first time in the runner session; the brief tells the
 > runner to distinguish a `SystemExit` (respect it) from a traceback (a harness fault, do
-> not debug). **Nothing is adopted, no default changed, and the listen is unspent.**
+> not debug). ~~**Nothing is adopted, no default changed, and the listen is unspent.**~~
+> *(Superseded 2026-08-04 (night): nothing is adopted and no default changed — both still
+> true — but **the listen is now SPENT**. All five gates passed on first firing and no pair
+> swap was needed. See the top block.)*
 >
 > **Two items open and NOT `GBL-`:** the owner's 2026-08-04 no-commercialization ruling is
 > in memory but **not yet in the repo record** (it belongs in `PRODUCT-REQUIREMENTS.md`);

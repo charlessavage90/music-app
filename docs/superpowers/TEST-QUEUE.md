@@ -23,7 +23,60 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-04 (later) — the listening test is built and ready to run; nothing you can press changed
+## N/A (latest) — 2026-08-04 (night) — you ran the listening test; the answer is "can't tell", and the reason is worth your attention
+
+**Nothing to exercise, and nothing is running.** The listening page's server was stopped by
+the session that ran it; all five ports were checked and are empty. **Not one line of the app
+or the website changed, and nothing was adopted.** A journey you build now is identical to
+one from this morning.
+
+**What happened, in plain terms.** You listened to eight pairs of artists, three depths each,
+two versions side by side, and saved thirty-two verdicts. The rules written down before any
+of it existed said: for a result to count, one side has to win by at least five of the sixteen
+"after presses" rows. **The new version won by three.** So the written-down answer is "my ear
+cannot tell them apart where the numbers could" — and by those same rules, **the rebuilt map
+does not get adopted and that idea closes.**
+
+**Three things sit alongside that, and I would rather you heard them from me.**
+
+- **On "did it find me new artists", you picked the new version on all eight pairs out of
+  eight.** Not one tie, not one for the old version. That is the single cleanest signal in the
+  whole test. It does not overturn the result, because nobody wrote down in advance how big a
+  win on that question would count as passing — and picking a bar now, knowing the answer, is
+  exactly the thing this project refuses to do.
+- **Five of the seven rows where you couldn't decide, you couldn't decide because of clips.**
+  Missing clips, clips that were just a song intro, and at least one that was almost certainly
+  the wrong artist. You said so in your own notes at the time. So the test did not find the two
+  versions similar — **it went partly deaf.** A sixteen-row test that loses five rows to broken
+  audio cannot clear a five-row bar.
+- **Before you pressed anything, you preferred the new version six to nothing.** The rules
+  deliberately keep those rows out of the scoring, and I am not sneaking them back in. But it
+  is the biggest number the test produced, and your reason for it was not about obscure
+  artists at all — it was that today's app "takes weird detours" when you look at the whole
+  path rather than step to step.
+
+**Nothing is proposed for you to test.** What is waiting is a decision, and the write-up lays
+out the choices without picking one: accept the answer and stop; treat the clip problem as its
+own piece of work before any future listening test is spent; or open the "weird detours"
+observation as a fresh question. **The rules also mean this particular test cannot be run
+again** — an unwelcome answer stands.
+
+**Still parked, unchanged:** the eight entries from 22–27 July remain queued and unruled-on,
+and your ruling that making money is not a goal is still not written into the project's own
+records.
+
+Detail, if you want it:
+`docs/superpowers/findings/2026-08-04-gentle-arm-blind-listen-results.md`, and the runner's
+own record at `docs/superpowers/2026-08-04-gbl-run-execution-log.md`.
+
+---
+
+## N/A — 2026-08-04 (later) — the listening test is built and ready to run; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04 (night): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate, except its
+     "your one action is starting that runner session" — that has now happened, the listen
+     ran, and all five safety checks passed on first firing; see above. -->
+
 
 **Nothing to exercise, and nothing is running.** All five ports were checked and are empty;
 no server was started and none was left behind. Not one line of the app or the website
