@@ -653,3 +653,50 @@ have had no map applied, and `CRE-C1`'s two reporting populations are T11's work
 figures are recorded so T11 can compute; they are not a result.
 
 **SEAM 2.** All `ALG-E` sweep JSONs committed. `T10` starts cold from here.
+
+---
+
+## §11 — `CRE-T10`: the `ALG-B` sweeps
+
+**Figures: `cre_sweep_B-*.json`, seven committed files, one per cell.** B-S0-P0, B-S0b-P0,
+B-S1-P0, B-S0-P1a, B-S1-P1a, B-S1-P1b, and the staged B-S3-P0. Same harness, unchanged —
+no code was touched between the two data sets, which is what makes them comparable at T11.
+
+### Outcomes
+
+- **`CRE-G1`(b): PASS on all three `P1` cells** (B-S0-P1a, B-S1-P1a, B-S1-P1b), each
+  bit-identical at d0 to its supply-matched `P0`.
+- **`CRE-G2`(b): 44 assertions per cell, all passing.**
+- **Every pair completes the full ladder in every cell**; no infeasible `(pair, depth)`
+  cell and no `adjacent_only` termination on `ALG-B` either. The §0.4 censoring row's
+  expectation of material per-depth null counts is met (below), but not by way of
+  infeasibility.
+- **Cost:** 12–22 s per capped cell, **307 s for the staged B-S3**.
+
+### Owed item 1 is DISCHARGED — for one of its two classes, not both
+
+The Seam 1 condition was a non-zero reading, or a demonstration that zero is the true
+value. **`interiors_null_in_snapshot` is non-zero in all seven cells** and
+`null_interior_unbypassable` tracks it almost exactly, which is pin 3's mechanical
+prediction behaving as specified: a ruler-null interior is not pressed while any measured
+interior remains. **The counter is live and the Stage-0 zero was a true zero, not a dead
+wire.**
+
+**`interiors_absent_from_snapshot` is still zero in every cell of both data sets, and that
+half of the item stays owed.** It counts nodes a cell keeps that were never in the fetch
+population, so it can only fire where a supply rule admits nodes outside
+(adopted ∪ `ALG-B`-MK50) — and the staged B-S3 union cell, the likeliest place, reports
+zero too. **Do not read the discharge of the null counter as covering the absent counter:
+they are two counters, and only one has been shown to move.** The remaining honest routes
+are to show the zero is structurally true (the snapshot's key set may simply cover every
+node any built cell can keep, which would close it by proof rather than by observation) or
+to leave it flagged as unexercised in the findings note.
+
+### What is measured and not read
+
+The null counts rise steeply with the device (`P1b` > `P1a` > `P0` in both supply
+families), and rise with depth. **That pattern is exactly what §0.4's "descent partly
+unmeasurable" trigger was written to detect, and reading it is `CRE-T11`'s work under
+`CRE-C1`'s two reporting populations — not this task's.** It is recorded here as a
+measurement and cited to the committed JSONs, never restated. **No `CRE-R` read is
+licensed, none is made, nothing is adopted, `REQ-38` is unspent.**
