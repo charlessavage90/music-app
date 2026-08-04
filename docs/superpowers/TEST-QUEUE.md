@@ -23,7 +23,45 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-04 — the map experiment is finished and written up; nothing you can press changed
+## N/A (latest) — 2026-08-04 (evening) — you decided to run the listening test, and its rulebook is written; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All five ports were checked and are empty
+(including the new one the listening page will eventually use); no server was started and
+none was left behind. Not one line of the app or the website changed. **A journey you build
+now is identical to one from this morning.**
+
+**What happened, in plain terms — and you steered it four times.** You picked which version
+of the experiment's winners gets your ears: the gentle setting only. The rulebook for that
+listening test is now written and locked before anything runs: what you'll see (the same
+side-by-side comparison page you preferred last time, with your picks saved automatically
+instead of copy-pasted), which artist pairs (drawn from your own Spotify listening history —
+you'll approve the final eight before anything is generated), and what each possible outcome
+means — all fixed in advance so no result can bend the rules. Your other three steers: eight
+pairs instead of five (with the pass bar raised to match, so the bigger test can't pass on a
+weaker signal), the two verdict questions split so "did it dig up new artists" and "did it
+still flow" are answered separately, and the next session runs on the other engine.
+
+**Nothing is proposed for you to test here.** The listening test itself is NOT this entry —
+it arrives through its own page with its own instructions, run by a session that knows
+nothing about what the numbers predicted. Your one action now is starting that fresh
+session; the exact line to give it is in
+[`2026-08-04-HANDOFF-gbl-plan.md`](2026-08-04-HANDOFF-gbl-plan.md).
+
+**Still parked, unchanged:** the eight entries from 22–27 July remain queued and unruled-on,
+and the map-rebuild decision (whether the other data source is worth re-collecting
+everything) is untouched by any of this.
+
+Detail, if you want it: `docs/superpowers/2026-08-04-gbl-planning-execution-log.md`, and
+the rulebook itself at `docs/superpowers/specs/2026-08-04-gentle-arm-blind-listen-design.md`.
+
+---
+
+## N/A — 2026-08-04 — the map experiment is finished and written up; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04 (evening): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate, except its
+     "decision waiting for you" — the listen half of that decision has now been taken;
+     see above. -->
+
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no

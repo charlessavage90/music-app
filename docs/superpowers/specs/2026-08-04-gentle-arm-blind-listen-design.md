@@ -27,8 +27,10 @@ cited, never restated.
 
 The owner chose findings §4 **Option A**: spend a blind listen on `B-S1-P1a` — the
 candidate data set (`ALG-B`), pooled-and-trimmed connection supply (`S1`, trimmed union
-`TUw-50-50`), and the gentle `known` ramp (`P1a`, r₁ = 0.01) — the arm with a real pass
-and the smaller measurement hole.
+`TUw-50-50`), and the gentle `known` ramp (`P1a`, r₁ = 0.01 — the value is owned by the
+`CRE-` prereg §3.3 and the frozen `cre_common.RAMPS`; quoted here to identify the arm,
+never to be edited independently) — the arm with a real pass and the smaller measurement
+hole.
 
 Plain sentence, fixed now: **"Does the app, rebuilt this way, deliver journeys that dig
 toward artists new to me as I press 'I know them', while still sounding like journeys?"**
@@ -40,8 +42,10 @@ shipped code.
 
 **One qualifier travels with the arm into every sentence of this document** (findings
 §0.4 discipline): its offline pass is **"descent partly unmeasurable," never a clean
-pass** — on fully-measured journeys it scored −0.0405, below the bar it passed on the
-full set. The listen is being spent on that honest basis, not on a clean-pass reading.
+pass** — on fully-measured journeys it scored −0.0405 (owned by the findings note's §0
+and its §1.4 table; quoted as a hazard warning, re-check against that section on any
+sweep), below the bar it passed on the full set. The listen is being spent on that honest
+basis, not on a clean-pass reading.
 
 ## 2. Arms
 

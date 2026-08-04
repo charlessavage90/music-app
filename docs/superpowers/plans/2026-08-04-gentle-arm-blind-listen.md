@@ -1,5 +1,9 @@
 # Gentle-Arm Blind Listen (`GBL-`) Implementation Plan
 
+**Role: ACTIVE — the operational plan for the `GBL-` blind listen.** The spec
+(`../specs/2026-08-04-gentle-arm-blind-listen-design.md`) governs wherever this plan
+disagrees.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build the throwaway harness that runs the pre-registered blind listen of
