@@ -122,14 +122,21 @@ class EdgeAgreement:
         return inn / un
 
 
-_CACHE: dict[str, EdgeAgreement] = {}
+# Keyed on (kind, n_artists), NOT on kind alone. `idf` below is computed AT
+# n_artists, so a table built at one value is the wrong table at another -- and a
+# kind-only key returns before n_artists is ever consulted, so a second caller
+# passing a different value would silently receive the first caller's table. Every
+# caller today passes the same value, which is precisely why the defect would have
+# surfaced as a wrong figure rather than as an error.
+_CACHE: dict[tuple[str, int | None], EdgeAgreement] = {}
 
 
 def agreement_table(kind: str, n_artists: int | None = None) -> EdgeAgreement:
     if kind not in KINDS:
         raise ValueError(f"unknown agreement kind {kind!r}; expected {KINDS}")
-    if kind in _CACHE:
-        return _CACHE[kind]
+    key = (kind, n_artists)
+    if key in _CACHE:
+        return _CACHE[key]
 
     w4 = five_frames()["W4"]
     if n_artists is None:
@@ -151,7 +158,7 @@ def agreement_table(kind: str, n_artists: int | None = None) -> EdgeAgreement:
     # move a second knob.
     idf, _df = idf_table(w4, n_artists=n_artists)
     table = EdgeAgreement(kind, labels, idf, rel, smax)
-    _CACHE[kind] = table
+    _CACHE[key] = table
     return table
 
 

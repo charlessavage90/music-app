@@ -1,0 +1,979 @@
+{
+  "stage": "2 (entry gates)",
+  "CRE_G1c": {
+    "ruler_frame_n": 74151,
+    "result": "PASS"
+  },
+  "CRE_G1a": {
+    "pairs_compared": 22,
+    "identical": 22,
+    "diverged": [],
+    "result": "PASS",
+    "per_pair": {
+      "48262e82-db9f-4a92-b650-dfef979b73ec|d8661c02-f423-4d72-8044-40ff05daf7a1": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 8
+      },
+      "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|20244d07-534f-4eff-b4d4-930878889970": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "cf82a38f-9413-4333-bacb-ca5b6db95794|b267ca80-034e-4dc1-9ed4-ec45f1fed41d": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "a21b2652-62ed-4767-a3d2-0aa802abf080|b29020d6-5dbf-4c99-b16f-c009f8a712ff": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 5
+      },
+      "410c9baf-5469-44f6-9852-826524b80c61|69b39eab-6577-46a4-a9f5-817839092033": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "54799c0e-eb45-4eea-996d-c4d71a63c499|b2dbfc09-b332-408b-a235-1850e41971c5": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 6
+      },
+      "be540c02-7898-4b79-9acc-c8122c7d9e83|f7625f34-1799-42a4-a1c6-22b5377c767b": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f|cc0b7089-c08d-4c10-b6b0-873582c17fd6": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "ac7e838c-3d95-47c2-92a9-81767ad7c217|5334edc0-5faf-4ca5-b1df-000de3e1f752": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "faabb55d-3c9e-4c23-8779-732ac2ee2c0d|78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 6
+      },
+      "f41490ce-fe39-435d-86c0-ab5ce098b423|f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04|8b22acd6-20e6-4463-a75c-c14b5cfdb666": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04|f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493|f6beac20-5dfe-4d1f-ae02-0b0a740aafd6": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 2
+      },
+      "95e1ead9-4d31-4808-a7ac-32c3614c116b|eeb1195b-f213-4ce1-b28c-8565211f8e43": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "a74b1b7f-71a5-4011-9441-d0b5e4122711|ca891d65-d9b0-4258-89f7-e6ba29d83767": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86|b8a7c51f-362c-4dcb-a259-bc6e0095f0a6": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 2
+      },
+      "b6b2bb8d-54a9-491f-9607-7b546023b433|8970d868-0723-483b-a75b-51088913d3d4": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|bd13909f-1c29-4c27-a874-d4aaf27c5b1a": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "forced",
+        "production_kind": "forced",
+        "interior_len": 1
+      },
+      "e795e03d-b5d5-4a5f-834d-162cfb308a2c|9a709693-b4f8-4da9-8cc1-038c911a61be": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "f82bcf78-5b69-4622-a5ef-73800768d9ac|c8b03190-306c-4120-bb0b-6f2ebfc06ea9": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "ca891d65-d9b0-4258-89f7-e6ba29d83767|d6ed7887-a401-47a8-893c-34b967444d26": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 2
+      }
+    },
+    "cell": "E-S0",
+    "sha256": "44003fcceeadaac35303eab6810a1b2bee43c1fd8fd84dff29d3552d949fcc59"
+  },
+  "CRE_G1a_red_control": {
+    "what": "the same comparison with the mirror's w_hop moved off production's",
+    "w_hop": 0.05,
+    "pairs_diverging": 3,
+    "result": "PASS"
+  },
+  "CRE_G1a_qa": {
+    "pairs_compared": 22,
+    "identical": 22,
+    "diverged": [],
+    "result": "PASS",
+    "per_pair": {
+      "48262e82-db9f-4a92-b650-dfef979b73ec|d8661c02-f423-4d72-8044-40ff05daf7a1": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 9
+      },
+      "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|20244d07-534f-4eff-b4d4-930878889970": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 2
+      },
+      "cf82a38f-9413-4333-bacb-ca5b6db95794|b267ca80-034e-4dc1-9ed4-ec45f1fed41d": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 6
+      },
+      "a21b2652-62ed-4767-a3d2-0aa802abf080|b29020d6-5dbf-4c99-b16f-c009f8a712ff": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "410c9baf-5469-44f6-9852-826524b80c61|69b39eab-6577-46a4-a9f5-817839092033": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "54799c0e-eb45-4eea-996d-c4d71a63c499|b2dbfc09-b332-408b-a235-1850e41971c5": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 8
+      },
+      "be540c02-7898-4b79-9acc-c8122c7d9e83|f7625f34-1799-42a4-a1c6-22b5377c767b": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f|cc0b7089-c08d-4c10-b6b0-873582c17fd6": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "ac7e838c-3d95-47c2-92a9-81767ad7c217|5334edc0-5faf-4ca5-b1df-000de3e1f752": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 2
+      },
+      "faabb55d-3c9e-4c23-8779-732ac2ee2c0d|78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 7
+      },
+      "f41490ce-fe39-435d-86c0-ab5ce098b423|f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 5
+      },
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04|8b22acd6-20e6-4463-a75c-c14b5cfdb666": {
+        "class": "ff-top1pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "6fe07aa5-fec0-4eca-a456-f29bff451b04|f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493|f6beac20-5dfe-4d1f-ae02-0b0a740aafd6": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 3
+      },
+      "95e1ead9-4d31-4808-a7ac-32c3614c116b|eeb1195b-f213-4ce1-b28c-8565211f8e43": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 2
+      },
+      "a74b1b7f-71a5-4011-9441-d0b5e4122711|ca891d65-d9b0-4258-89f7-e6ba29d83767": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86|b8a7c51f-362c-4dcb-a259-bc6e0095f0a6": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 4
+      },
+      "b6b2bb8d-54a9-491f-9607-7b546023b433|8970d868-0723-483b-a75b-51088913d3d4": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 5
+      },
+      "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|bd13909f-1c29-4c27-a874-d4aaf27c5b1a": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "e795e03d-b5d5-4a5f-834d-162cfb308a2c|9a709693-b4f8-4da9-8cc1-038c911a61be": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 2
+      },
+      "f82bcf78-5b69-4622-a5ef-73800768d9ac|c8b03190-306c-4120-bb0b-6f2ebfc06ea9": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 1
+      },
+      "ca891d65-d9b0-4258-89f7-e6ba29d83767|d6ed7887-a401-47a8-893c-34b967444d26": {
+        "class": "ff-top01pct",
+        "identical": true,
+        "mirror_kind": "natural",
+        "production_kind": "natural",
+        "interior_len": 5
+      }
+    },
+    "cell": "B-S0",
+    "sha256": "a8507c6e1e044a8c1a6fc3b6d5eea47380a5b1b7f3cd70e2f0d3118b25fe53f6",
+    "gated": false,
+    "note": "The prereg gates E only; this run is reported QA, not a bar."
+  },
+  "CRE_G2a": {
+    "E-S1": {
+      "extreme_ramp": 1.0,
+      "bar": 0.5,
+      "readable_pairs": 22,
+      "changed_at_d1": 17,
+      "fraction_changed": 0.7727272727272727,
+      "result": "PASS",
+      "unreadable_pairs": {},
+      "per_pair": {
+        "48262e82-db9f-4a92-b650-dfef979b73ec|d8661c02-f423-4d72-8044-40ff05daf7a1": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 8,
+          "d1_extreme_len": 6
+        },
+        "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|20244d07-534f-4eff-b4d4-930878889970": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 3
+        },
+        "cf82a38f-9413-4333-bacb-ca5b6db95794|b267ca80-034e-4dc1-9ed4-ec45f1fed41d": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 6
+        },
+        "a21b2652-62ed-4767-a3d2-0aa802abf080|b29020d6-5dbf-4c99-b16f-c009f8a712ff": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 4
+        },
+        "410c9baf-5469-44f6-9852-826524b80c61|69b39eab-6577-46a4-a9f5-817839092033": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 5
+        },
+        "54799c0e-eb45-4eea-996d-c4d71a63c499|b2dbfc09-b332-408b-a235-1850e41971c5": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 8,
+          "d1_extreme_len": 5
+        },
+        "be540c02-7898-4b79-9acc-c8122c7d9e83|f7625f34-1799-42a4-a1c6-22b5377c767b": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 5
+        },
+        "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f|cc0b7089-c08d-4c10-b6b0-873582c17fd6": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 4
+        },
+        "ac7e838c-3d95-47c2-92a9-81767ad7c217|5334edc0-5faf-4ca5-b1df-000de3e1f752": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 3
+        },
+        "faabb55d-3c9e-4c23-8779-732ac2ee2c0d|78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 5
+        },
+        "f41490ce-fe39-435d-86c0-ab5ce098b423|f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 4
+        },
+        "6fe07aa5-fec0-4eca-a456-f29bff451b04|8b22acd6-20e6-4463-a75c-c14b5cfdb666": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 4
+        },
+        "6fe07aa5-fec0-4eca-a456-f29bff451b04|f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 4
+        },
+        "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493|f6beac20-5dfe-4d1f-ae02-0b0a740aafd6": {
+          "class": "ff-top01pct",
+          "changed": false,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 3,
+          "d1_extreme_len": 3
+        },
+        "95e1ead9-4d31-4808-a7ac-32c3614c116b|eeb1195b-f213-4ce1-b28c-8565211f8e43": {
+          "class": "ff-top01pct",
+          "changed": false,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 3,
+          "d1_extreme_len": 3
+        },
+        "a74b1b7f-71a5-4011-9441-d0b5e4122711|ca891d65-d9b0-4258-89f7-e6ba29d83767": {
+          "class": "ff-top01pct",
+          "changed": false,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 3,
+          "d1_extreme_len": 3
+        },
+        "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86|b8a7c51f-362c-4dcb-a259-bc6e0095f0a6": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 4
+        },
+        "b6b2bb8d-54a9-491f-9607-7b546023b433|8970d868-0723-483b-a75b-51088913d3d4": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 3
+        },
+        "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|bd13909f-1c29-4c27-a874-d4aaf27c5b1a": {
+          "class": "ff-top01pct",
+          "changed": false,
+          "d0_kind": "forced",
+          "d1_p0_kind": "forced",
+          "d1_extreme_kind": "forced",
+          "d1_p0_len": 3,
+          "d1_extreme_len": 3
+        },
+        "e795e03d-b5d5-4a5f-834d-162cfb308a2c|9a709693-b4f8-4da9-8cc1-038c911a61be": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 3
+        },
+        "f82bcf78-5b69-4622-a5ef-73800768d9ac|c8b03190-306c-4120-bb0b-6f2ebfc06ea9": {
+          "class": "ff-top01pct",
+          "changed": false,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 3,
+          "d1_extreme_len": 3
+        },
+        "ca891d65-d9b0-4258-89f7-e6ba29d83767|d6ed7887-a401-47a8-893c-34b967444d26": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 3
+        }
+      },
+      "cell": "E-S1",
+      "sha256": "a27610be6cefab33ab0519f159824638233386c7af53f1eedffa16d42e1a72fd"
+    },
+    "B-S0": {
+      "extreme_ramp": 1.0,
+      "bar": 0.5,
+      "readable_pairs": 22,
+      "changed_at_d1": 21,
+      "fraction_changed": 0.9545454545454546,
+      "result": "PASS",
+      "unreadable_pairs": {},
+      "per_pair": {
+        "48262e82-db9f-4a92-b650-dfef979b73ec|d8661c02-f423-4d72-8044-40ff05daf7a1": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 9,
+          "d1_extreme_len": 11
+        },
+        "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|20244d07-534f-4eff-b4d4-930878889970": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 4
+        },
+        "cf82a38f-9413-4333-bacb-ca5b6db95794|b267ca80-034e-4dc1-9ed4-ec45f1fed41d": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 8
+        },
+        "a21b2652-62ed-4767-a3d2-0aa802abf080|b29020d6-5dbf-4c99-b16f-c009f8a712ff": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 4
+        },
+        "410c9baf-5469-44f6-9852-826524b80c61|69b39eab-6577-46a4-a9f5-817839092033": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 5
+        },
+        "54799c0e-eb45-4eea-996d-c4d71a63c499|b2dbfc09-b332-408b-a235-1850e41971c5": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 11,
+          "d1_extreme_len": 9
+        },
+        "be540c02-7898-4b79-9acc-c8122c7d9e83|f7625f34-1799-42a4-a1c6-22b5377c767b": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 6
+        },
+        "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f|cc0b7089-c08d-4c10-b6b0-873582c17fd6": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 5
+        },
+        "ac7e838c-3d95-47c2-92a9-81767ad7c217|5334edc0-5faf-4ca5-b1df-000de3e1f752": {
+          "class": "ff-top1pct",
+          "changed": false,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 4
+        },
+        "faabb55d-3c9e-4c23-8779-732ac2ee2c0d|78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 9,
+          "d1_extreme_len": 6
+        },
+        "f41490ce-fe39-435d-86c0-ab5ce098b423|f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 8
+        },
+        "6fe07aa5-fec0-4eca-a456-f29bff451b04|8b22acd6-20e6-4463-a75c-c14b5cfdb666": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 6
+        },
+        "6fe07aa5-fec0-4eca-a456-f29bff451b04|f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 5
+        },
+        "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493|f6beac20-5dfe-4d1f-ae02-0b0a740aafd6": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 6
+        },
+        "95e1ead9-4d31-4808-a7ac-32c3614c116b|eeb1195b-f213-4ce1-b28c-8565211f8e43": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 4
+        },
+        "a74b1b7f-71a5-4011-9441-d0b5e4122711|ca891d65-d9b0-4258-89f7-e6ba29d83767": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 5
+        },
+        "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86|b8a7c51f-362c-4dcb-a259-bc6e0095f0a6": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 7
+        },
+        "b6b2bb8d-54a9-491f-9607-7b546023b433|8970d868-0723-483b-a75b-51088913d3d4": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 7
+        },
+        "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|bd13909f-1c29-4c27-a874-d4aaf27c5b1a": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 4
+        },
+        "e795e03d-b5d5-4a5f-834d-162cfb308a2c|9a709693-b4f8-4da9-8cc1-038c911a61be": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 4
+        },
+        "f82bcf78-5b69-4622-a5ef-73800768d9ac|c8b03190-306c-4120-bb0b-6f2ebfc06ea9": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 3,
+          "d1_extreme_len": 4
+        },
+        "ca891d65-d9b0-4258-89f7-e6ba29d83767|d6ed7887-a401-47a8-893c-34b967444d26": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 5
+        }
+      },
+      "cell": "B-S0",
+      "sha256": "a8507c6e1e044a8c1a6fc3b6d5eea47380a5b1b7f3cd70e2f0d3118b25fe53f6"
+    },
+    "B-S1": {
+      "extreme_ramp": 1.0,
+      "bar": 0.5,
+      "readable_pairs": 22,
+      "changed_at_d1": 22,
+      "fraction_changed": 1.0,
+      "result": "PASS",
+      "unreadable_pairs": {},
+      "per_pair": {
+        "48262e82-db9f-4a92-b650-dfef979b73ec|d8661c02-f423-4d72-8044-40ff05daf7a1": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 9,
+          "d1_extreme_len": 11
+        },
+        "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|20244d07-534f-4eff-b4d4-930878889970": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 4
+        },
+        "cf82a38f-9413-4333-bacb-ca5b6db95794|b267ca80-034e-4dc1-9ed4-ec45f1fed41d": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 8
+        },
+        "a21b2652-62ed-4767-a3d2-0aa802abf080|b29020d6-5dbf-4c99-b16f-c009f8a712ff": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 4
+        },
+        "410c9baf-5469-44f6-9852-826524b80c61|69b39eab-6577-46a4-a9f5-817839092033": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 11
+        },
+        "54799c0e-eb45-4eea-996d-c4d71a63c499|b2dbfc09-b332-408b-a235-1850e41971c5": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 10,
+          "d1_extreme_len": 7
+        },
+        "be540c02-7898-4b79-9acc-c8122c7d9e83|f7625f34-1799-42a4-a1c6-22b5377c767b": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 8
+        },
+        "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f|cc0b7089-c08d-4c10-b6b0-873582c17fd6": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 5
+        },
+        "ac7e838c-3d95-47c2-92a9-81767ad7c217|5334edc0-5faf-4ca5-b1df-000de3e1f752": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 3
+        },
+        "faabb55d-3c9e-4c23-8779-732ac2ee2c0d|78ea5ea1-3c4d-4b7e-ac5d-68900319ebe2": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 7
+        },
+        "f41490ce-fe39-435d-86c0-ab5ce098b423|f7ba7fbe-c6bd-4ac0-bee9-c25c558d7d62": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 8
+        },
+        "6fe07aa5-fec0-4eca-a456-f29bff451b04|8b22acd6-20e6-4463-a75c-c14b5cfdb666": {
+          "class": "ff-top1pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 6
+        },
+        "6fe07aa5-fec0-4eca-a456-f29bff451b04|f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 5
+        },
+        "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493|f6beac20-5dfe-4d1f-ae02-0b0a740aafd6": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 4
+        },
+        "95e1ead9-4d31-4808-a7ac-32c3614c116b|eeb1195b-f213-4ce1-b28c-8565211f8e43": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 4
+        },
+        "a74b1b7f-71a5-4011-9441-d0b5e4122711|ca891d65-d9b0-4258-89f7-e6ba29d83767": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 5
+        },
+        "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86|b8a7c51f-362c-4dcb-a259-bc6e0095f0a6": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 6,
+          "d1_extreme_len": 8
+        },
+        "b6b2bb8d-54a9-491f-9607-7b546023b433|8970d868-0723-483b-a75b-51088913d3d4": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 6
+        },
+        "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|bd13909f-1c29-4c27-a874-d4aaf27c5b1a": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 4,
+          "d1_extreme_len": 4
+        },
+        "e795e03d-b5d5-4a5f-834d-162cfb308a2c|9a709693-b4f8-4da9-8cc1-038c911a61be": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 5,
+          "d1_extreme_len": 3
+        },
+        "f82bcf78-5b69-4622-a5ef-73800768d9ac|c8b03190-306c-4120-bb0b-6f2ebfc06ea9": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 3,
+          "d1_extreme_len": 4
+        },
+        "ca891d65-d9b0-4258-89f7-e6ba29d83767|d6ed7887-a401-47a8-893c-34b967444d26": {
+          "class": "ff-top01pct",
+          "changed": true,
+          "d0_kind": "natural",
+          "d1_p0_kind": "natural",
+          "d1_extreme_kind": "natural",
+          "d1_p0_len": 7,
+          "d1_extreme_len": 5
+        }
+      },
+      "cell": "B-S1",
+      "sha256": "9da396211c5c737add7dba9abeb9f2a4318af957c29e26546bdb9cbae2992e04"
+    }
+  },
+  "seconds": 5.0
+}

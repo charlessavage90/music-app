@@ -23,7 +23,45 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-03 (Seam 1) — the big map experiment started running; nothing you can press changed
+## N/A (latest) — 2026-08-03 (later) — the experiment finished its measuring; nothing you can press changed
+
+**Nothing to exercise, and nothing is running.** All four ports were checked and are
+empty; no server was started and none was left behind. No routing, no graph, no
+weighting, no cost function, and not one line of the app or the website changed. **A
+journey you build now is identical to one from earlier today.**
+
+**What happened, in plain terms.** The map-rebuild experiment did the expensive part: it
+built journeys on all sixteen versions of the map, pressed "I know them" twenty times on
+each of twenty-two pairs of artists, and wrote down what came out. That is roughly seven
+thousand journeys per version. **None of it has been scored yet** — turning those into an
+answer is the last remaining step, and it is deliberately done by a fresh session that did
+not run the journeys.
+
+**Two checks came back the way you want before any of that ran.** Our measuring copy of
+the journey-builder was shown to return **exactly** what the real app returns, artist for
+artist, on every pair — so anything we conclude is about the maps and not about our tools.
+And the new "dig deeper" knob was shown to actually move journeys when turned up hard, in
+every version where it exists — so if it later turns out to do nothing useful at a sane
+setting, that will be a real finding rather than a broken wire.
+
+**One loose end, and it is honest rather than alarming.** We keep two counters for artists
+we cannot measure obscurity for: ones we looked up and found nothing, and ones we never
+looked up at all. The first counter now demonstrably works. **The second has read zero
+everywhere, on every version of the map, so we still cannot tell whether it works or
+whether that zero is simply the truth.** There is a cheap check that settles it, written
+down for the next session.
+
+**Nothing is proposed for you to test, and there is no decision waiting on you.** The next
+real entry here comes when a map is actually adopted, which is still behind a listening
+test.
+
+Detail, if you want it: `docs/superpowers/2026-08-03-cre-run-execution-log.md` §9–§11.
+
+---
+
+## N/A — 2026-08-03 (Seam 1) — the big map experiment started running; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-03 (later): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate. -->
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no

@@ -522,3 +522,223 @@ does; `E-S2-P0` is branch-proof and runs.**
 - **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
   characters, conditional **2,155** lines, both equal to the figures at the previous
   closeout. This session touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.
+
+---
+
+## §9 — `CRE-T8`: Stage 2 entry gates
+
+**Figures: `cre_gates.json`.** New session, cold from the Seam 1 handoff. Branched
+`cap-reeval-stage2` off `main` rather than continuing on `cap-reeval-run`: the handoff's
+"inline on the existing branch" instruction predates the merge of PR #70, and that branch
+is now in `main`. Nothing else about the instruction changed — execution continues inline
+on Opus, retiring at the plan's remaining seams.
+
+### Outcomes — all three gates pass
+
+- **`CRE-G1`(c)**: ruler frame **N = 74,151**, asserted inside the `Ruler` constructor.
+- **`CRE-G1`(a)** on **E-S0**: **22/22 pairs identical**, node sequence *and* stop kind,
+  mirror against production `find_journey` on the same cleaned substrate. No divergence,
+  so no harness fix is owed and the bar was never approached, let alone widened.
+- **`CRE-G1`(a)** on **B-S0**, reported QA and **not gated** (the prereg gates E only):
+  **22/22 identical**. Worth recording because it is the substrate T10 sweeps.
+- **`CRE-G2`(a)**, at the instrument-only extreme r = 1.0, against a bar of ≥ 0.5:
+  **E-S1 17/22 (0.773)**, **B-S0 21/22 (0.955)**, **B-S1 22/22 (1.000)**. **No cell is a
+  dead wire**, so a `P1` null in any of the three will be readable when T9/T10 produce one.
+  All 22 pairs were readable in every cell — no pair lost its d1 to an absent journey or
+  an empty d0 interior, so the exclusion path exists but was never taken.
+
+### Three decisions taken here, with their reasoning
+
+**1. `CRE-G1`(a) got a red half the plan did not ask for.** An identity gate is precisely
+the shape that passes vacuously: a comparison wired to itself, or a loop body that never
+runs, reports a clean 22/22 either way. This plan has already produced that exact defect
+twice — `CRE-G2`(b)'s first draft compared the toll formula against itself, and the Seam 1
+closeout's B3 check found `test_cre_screen` guarding a *copy* of the predicate it was
+meant to check. So the green run is followed by the same comparison with the mirror's
+`w_hop` moved off production's value, which **must** diverge. **It does, on 3 of 22
+pairs.** That count is small and is reported as measured: `w_hop` is the lowest-magnitude
+weight in the cost function, so this is the gentlest available perturbation, and the gate
+it discharges is *can this comparison go red at all* — for which three is as decisive as
+twenty-two. A red half is not evidence of sensitivity and is not offered as any.
+
+**2. `CRE-G2`(a) deliberately has no red half.** Its failure direction is "nothing
+changed", so a dead comparison reports zero changes and **fails**. It cannot pass
+vacuously. That asymmetry — not effort or symmetry with `G1` — is what decides where a
+control earns its cost.
+
+**3. One d0 per pair is computed and shared by both `G2`(a) arms.** Legitimate because the
+fame ramp at k = 0 is not merely zero but *not added at all* in `_dijkstra`, so the arms
+share d0 by construction and therefore share the victim the ladder presses. That is
+`CRE-G1`(b)'s claim; it is asserted per sweep run in T9 rather than assumed there.
+
+### State
+
+`cre_gates.py` is new first-party code; **Snyk `snyk_code_scan` over the analysis
+directory: 0 issues.** No shipped code, no config default and no artifact changed. **No
+`CRE-R` read is licensed by this task and none has been made**; nothing is adopted and the
+blind listen (`REQ-38`) is unspent. The four items owed at Stage 2 are untouched and all
+four remain owed.
+
+---
+
+## §10 — `CRE-T9`: the `ALG-E` sweeps, and SEAM 2
+
+**Figures: `cre_sweep_E-*.json`, nine committed files, one per cell.** All nine `ALG-E`
+cells swept: E-S0-P0, E-S0b-P0, E-S1-P0, E-S1-P1a, E-S1-P1b, E-S2-P0, its two companions,
+and the staged E-S3-P0.
+
+### Outcomes
+
+- **`CRE-G1`(b): PASS on both `P1` cells.** E-S1-P1a and E-S1-P1b are bit-identical to
+  E-S1-P0 at d0 on all 22 pairs, so the device fires at depth and not before.
+- **`CRE-G2`(b): 44 assertions per `P1` cell, all passing** (22 pairs × k ∈ {1, 10}).
+- **Every pair completes the full ladder in every cell**: 22/22 walked all 21 depths, no
+  infeasible `(pair, depth)` cell anywhere, and no `adjacent_only` termination. The
+  padding-vs-infeasibility machinery is therefore built, tested and **unexercised** on
+  `ALG-E` — which is a fact about this data set, not evidence the distinction is idle.
+- **Cost, measured:** ~7–26 s per capped cell, **292 s for the staged E-S3** — squarely
+  inside analyst V1's "~4–5 minutes on UC" and two orders off the plan's superseded
+  "~8–15 min per capped cell", exactly as V1 predicted.
+
+### The counter-liveness item is NOT discharged, and `ALG-E` cannot discharge it
+
+Owed item 1 from the Seam 1 handoff asked for a non-zero reading on the two unmeasured
+classes. **Across all nine cells the totals are zero: no ruler-null interior, no
+absent-from-snapshot interior, and therefore a zero mechanical `null_interior_unbypassable`
+count.** That is the *same* green the Stage-0 run produced and it carries the *same* weight
+— none — because every `ALG-E` interior is ruler-measured, so a dead counter and a true
+zero are indistinguishable here. **The condition passes to T10**, where the plan expects
+~6% of `ALG-B` nodes to be ruler-null and the counters can go non-zero. Recorded here so
+the item cannot be quietly marked green by a second zero.
+
+### One thing checked rather than assumed, because it looked wrong
+
+The `CRE-D2` term shares came back with **`sim` contributing exactly 0.0%** of path cost on
+the first cell — the largest weight in the cost function contributing nothing. Probed
+before running the remaining eight: the d0 paths ride entirely on edges at similarity
+**exactly 1.0**, of which the artifact carries 2.09%, so `w_sim · (1 − sim)` is genuinely
+zero along them and path cost is `jump_raw` + `hop` alone. Not an instrument fault, and
+consistent with the ceiling-saturation this project already prices elsewhere
+(`toll_s`'s "ceiling-saturated edges").
+
+**It did expose a real gap, and it is now closed.** `assert_cost_decomposition` was pinned
+to `P1` cells only, so the term shares on every `P0` **baseline** — the cells each candidate
+is measured *against* — would have gone into T11 unverified. The same assertion now runs on
+`P0` cells too, 44 per cell, recorded under its own key as a plain instrument check and
+**deliberately not called `CRE-G2`(b)**: that identifier is pre-registered for the device
+test, and two load-bearing objects do not share an identifier here.
+
+### Two defects fixed before the sweeps, both from the retired session's notes
+
+1. **`cre_tags.agreement_table` cached on `kind` alone**, and the cache hit returned before
+   `n_artists` was consulted. Every caller passes the same value today, so it could not
+   misfire — it would have surfaced as a **wrong figure, not an error**. Keyed on
+   `(kind, n_artists)` now, with a regression test **tamper-checked red** against the old
+   key.
+2. **`cre_gates` carried both its decision rules inline**, which is the shape closeout B3
+   found in `test_cre_screen`. `journeys_identical` and `g2a_passes` are extracted and the
+   new `test_cre_gates` imports them. `g2a_passes` guards its denominator: **an empty
+   readable set is a dead wire, not a pass** — `0 >= 0.5 × 0` is true, and that is how a
+   vacuous gate gets built.
+
+### What is measured, and what is not licensed
+
+Per-pair per-depth journeys, interior fame values, term shares and the unmeasured-class
+counts are in the nine committed `cre_sweep_E-*.json` files — **cited here, never restated,
+including in aggregate**: a median quoted in this log would be a second home for a figure
+`cre_score.json` is about to own, which is how the drift this project has already paid for
+begins. **No `CRE-R` read is licensed by any of it and none is made here** — no criterion is
+evaluated, no cell is compared to another, the three non-`pop_raw`-comparable comparisons
+have had no map applied, and `CRE-C1`'s two reporting populations are T11's work. The
+figures are recorded so T11 can compute; they are not a result.
+
+**SEAM 2.** All `ALG-E` sweep JSONs committed. `T10` starts cold from here.
+
+---
+
+## §11 — `CRE-T10`: the `ALG-B` sweeps
+
+**Figures: `cre_sweep_B-*.json`, seven committed files, one per cell.** B-S0-P0, B-S0b-P0,
+B-S1-P0, B-S0-P1a, B-S1-P1a, B-S1-P1b, and the staged B-S3-P0. Same harness, unchanged —
+no code was touched between the two data sets, which is what makes them comparable at T11.
+
+### Outcomes
+
+- **`CRE-G1`(b): PASS on all three `P1` cells** (B-S0-P1a, B-S1-P1a, B-S1-P1b), each
+  bit-identical at d0 to its supply-matched `P0`.
+- **`CRE-G2`(b): 44 assertions per cell, all passing.**
+- **Every pair completes the full ladder in every cell**; no infeasible `(pair, depth)`
+  cell and no `adjacent_only` termination on `ALG-B` either. The §0.4 censoring row's
+  expectation of material per-depth null counts is met (below), but not by way of
+  infeasibility.
+- **Cost:** 12–22 s per capped cell, **307 s for the staged B-S3**.
+
+### Owed item 1 is DISCHARGED — for one of its two classes, not both
+
+The Seam 1 condition was a non-zero reading, or a demonstration that zero is the true
+value. **`interiors_null_in_snapshot` is non-zero in all seven cells** and
+`null_interior_unbypassable` tracks it almost exactly, which is pin 3's mechanical
+prediction behaving as specified: a ruler-null interior is not pressed while any measured
+interior remains. **The counter is live and the Stage-0 zero was a true zero, not a dead
+wire.**
+
+**`interiors_absent_from_snapshot` is still zero in every cell of both data sets, and that
+half of the item stays owed.** It counts nodes a cell keeps that were never in the fetch
+population, so it can only fire where a supply rule admits nodes outside
+(adopted ∪ `ALG-B`-MK50) — and the staged B-S3 union cell, the likeliest place, reports
+zero too. **Do not read the discharge of the null counter as covering the absent counter:
+they are two counters, and only one has been shown to move.** The remaining honest routes
+are to show the zero is structurally true (the snapshot's key set may simply cover every
+node any built cell can keep, which would close it by proof rather than by observation) or
+to leave it flagged as unexercised in the findings note.
+
+### What is measured and not read
+
+The null counts rise steeply with the device (`P1b` > `P1a` > `P0` in both supply
+families), and rise with depth. **That pattern is exactly what §0.4's "descent partly
+unmeasurable" trigger was written to detect, and reading it is `CRE-T11`'s work under
+`CRE-C1`'s two reporting populations — not this task's.** It is recorded here as a
+measurement and cited to the committed JSONs, never restated. **No `CRE-R` read is
+licensed, none is made, nothing is adopted, `REQ-38` is unspent.**
+
+---
+
+## §12 — Closeout outcomes (mid-flight, between `CRE-T10` and Seam 3)
+
+- **A1**: this log is the retained record, appended per task (§9–§11), not at the end.
+- **A2-mid**: handoff `2026-08-03-HANDOFF-cre-run-stage2-midflight.md` written from the
+  template header, with the **enumerations rather than a self-assessment** — the one set of
+  numbers computed and not written down, six decisions taken against, the owner
+  conversation not yet in a file, and the open decision **with a position taken**. The Seam
+  1 handoff's role line now names it as successor on next actions.
+- **A3**: owed item 1 **struck in place** in the Seam 1 handoff as HALF discharged, with
+  the date and what satisfied it. The other three conditions were re-tested against reality
+  and none has come due.
+- **A4**: **not applicable, stated rather than skipped** — no config knob was added, and
+  the prereg forbids shipped-code change.
+- **A5**: all four ports empty, verified by listener sweep rather than task list. No server
+  was started at any point this session and none was left behind; C1 is N/A, so none was
+  relaunched.
+- **B1**: `docs-lint.sh` **hard checks passed** (its `CAND` lines are cost-function weight
+  values, not adjudication figures). The `doc-auditor` then ran on the semantic half and
+  returned **no findings at any severity**, having checked the six claims it was asked to
+  disbelieve — including that owed item 1 reads as *half* discharged in all four places it
+  appears, and that `CRE-G2`(b) never names the `P0` check.
+- **B5**: `.claude/` carries **no `CRE-` description at all**, so there is nothing there to
+  have gone stale. The plan's task checkboxes are unticked by convention (T1–T7 likewise);
+  this log owns completion state. No figure is restated anywhere in the diff.
+- **B2, B3, B4**: **deliberately travel to the successor** per mid-flight scaling — they
+  want a finished artifact, and `CRE-T11` is unbuilt.
+- **C1**: N/A entry queued. Nothing changed that the owner can press.
+- **D1-mid**: tree clean and pushed; **nothing untracked**. One real catch: `cre_gates.json`
+  had never been committed at T8, because that commit used a pathspec and pathspecs do not
+  pick up untracked files. Fixed at `7f458e3`.
+- **D3**: all sixteen sweep JSONs carry their cell's `artifact_sha256`; the eleven cell
+  checksums were verified against `cre_builds.json` at session start.
+- **D4**: builder **164 passed**, `CRE-` analysis **66 passed** (38 at Seam 1, plus the 28
+  added here), api **230 passed**, frontend **107 passed**.
+- **D5**: draft PR #71, its body carrying gate outcomes, the four deferrals with their
+  conditions, provenance, and what must not be re-litigated.
+- **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
+  characters, conditional **2,155** lines, both equal to the Seam 1 figures. This session
+  touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.

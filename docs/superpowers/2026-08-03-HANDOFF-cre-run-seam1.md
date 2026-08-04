@@ -1,6 +1,10 @@
 # Handoff — the `CRE-` run, Stage 0 and Stage 1 complete (Seam 1), 2026-08-03
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions** by
+[`2026-08-03-HANDOFF-cre-run-stage2-midflight.md`](2026-08-03-HANDOFF-cre-run-stage2-midflight.md)
+(2026-08-03), which is the CURRENT handoff. **This document remains authoritative for
+Stage 0 and Stage 1's own internals** — its claims 1–7 all still stand and its successor
+does not restate them. Supersedes
 [`2026-08-03-HANDOFF-cap-reeval-exec-plan.md`](2026-08-03-HANDOFF-cap-reeval-exec-plan.md)
 on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.
@@ -62,7 +66,12 @@ them and the shas must match (determinism is measured, §5).
 
 ## Owed at Stage 2 — four items, each with its address
 
-1. **Liveness check on the unmeasured-class counters.** Plan pins 2 and 3's counters
+1. ~~**Liveness check on the unmeasured-class counters.**~~ **HALF DISCHARGED 2026-08-03
+   at `CRE-T10`** — `interiors_null_in_snapshot` is non-zero in all seven `ALG-B` cells and
+   `null_interior_unbypassable` tracks it, so that counter is live and the Stage-0 zero was
+   a true zero. **`interiors_absent_from_snapshot` is still zero in every cell of both data
+   sets and that half remains owed**; see the current handoff. Original text follows.
+   Plan pins 2 and 3's counters
    (`interiors_null_in_snapshot`, `interiors_absent_from_snapshot`,
    `null_interior_unbypassable`) ran at Stage 0 and counted **zero everywhere**, because
    every `ALG-E` interior was ruler-measured. **Their green is not evidence they work.**
