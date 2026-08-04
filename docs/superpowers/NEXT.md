@@ -14,15 +14,15 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 
 **Last updated: 2026-08-04 (SEAM 3), when the CAP RE-EVALUATION EXPERIMENT finished
 measuring: the criteria figures and the run-state map are computed and committed, and the
-execution plan is fully executed. The owner's one action is merging draft PR #73; the next
-work is the STAGE-3 FINDINGS NOTE, which must be written by a session that did not run the
-sweeps.**
+execution plan is fully executed. PR #73 is MERGED (`eccc73f`), so nothing is waiting on the
+owner. The next work is the STAGE-3 FINDINGS NOTE, which must be written by a session that
+did not run the sweeps.**
 
 ---
 
 ## Next
 
-> ## ▶ SEAM 3 REACHED, 2026-08-04 — THE CRITERIA FIGURES ARE COMPUTED AND COMMITTED. **The owner's one action is merging draft PR #73**; the next work is the **Stage-3 findings note** — **branching off `main` if #73 has merged, off `cre-t11-scoring` if it has not. Check, do not assume**: a handoff cannot know when merge is pressed, and the Seam 1 handoff named a branch its own PR merged out from under it.
+> ## ▶ SEAM 3 REACHED, 2026-08-04 — THE CRITERIA FIGURES ARE COMPUTED AND COMMITTED. ~~**The owner's one action is merging draft PR #73**~~ *(MERGED, `eccc73f`; branch deleted)* — **nothing is waiting on the owner.** The next work is the **Stage-3 findings note**, branching off `main`.
 >
 > Entry point is the current handoff:
 > [`2026-08-04-HANDOFF-cre-t11-seam3.md`](2026-08-04-HANDOFF-cre-t11-seam3.md).
