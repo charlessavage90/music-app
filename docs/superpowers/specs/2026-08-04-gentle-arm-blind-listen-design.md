@@ -198,8 +198,33 @@ novelty-likelihood proxy); no worldly-fame sentence, no `pop_raw` cross-cell sen
 
 ## 8. Amendments
 
-*(none yet — `GBL-AM1`, the approved pair list with MBIDs, lands here before any journey
-is generated.)*
+### `GBL-AM1` — the approved eight pairs, 2026-08-04 (later)
+
+**Approved by the owner on 2026-08-04; no journey existed at the time.** Committed
+before `gbl_generate.py` had ever been run, which is what this amendment's timestamp is
+evidence of.
+
+| # | A | MBID | B | MBID |
+|---|---|---|---|---|
+| 1 | Wishbone Ash | `406f1b42-0c9e-4427-aeb7-02f78e188ec4` | Pink Floyd | `83d91898-7763-47d7-b03b-b92132375c47` |
+| 2 | Young Gun Silver Fox | `2e111d6d-fce9-46ff-b33a-7eed7300f9d4` | Eloy | `bc154a90-890b-409e-b850-53ca299ab0d6` |
+| 3 | The Killers | `95e1ead9-4d31-4808-a7ac-32c3614c116b` | The Beatles | `b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d` |
+| 4 | The War On Drugs | `87b9b3b8-ab93-426c-a200-4012d667a626` | Sigur Rós | `f6f2326f-6b25-4170-b89d-e235b25508e8` |
+| 5 | The Decemberists | `97b1142f-c71e-4971-8736-4a8ceaf6b4c3` | Yellowcard | `3630fff3-52fc-4e97-ab01-d68fd88e4135` |
+| 6 | Tame Impala | `63aa26c3-d59b-4da4-84ac-716b54f1ef4d` | Fountains Of Wayne | `0f82d6b5-12fb-4569-b047-a00194f572a7` |
+| 7 | Arcade Fire | `52074ba6-e495-4ef3-9bb4-0703888a9f68` | America | `34cf95c7-4be9-4efd-a48a-c2ea4a0bb114` |
+| 8 | Led Zeppelin | `678d88b2-87b0-403b-b63d-5da7465aecc3` | Guster | `6cbe1e63-5895-4168-ac7e-f0d2836ba0c1` |
+
+**Binding artifact:** `builder/analysis/2026-08-04-gentle-arm-blind-listen/gbl_pairs_approved.json`,
+sha256 `9831f77f8263894855726ac010908fb7b87e25aabfe83d54d3c39687f3ab623c`. Every MBID was
+copied programmatically from `gbl_pair_candidates.json`, never transcribed; each resolves
+to exactly one node in **both** arms' artifacts, and to the same MBID in each.
+
+**Provenance.** Five pairs (1, 2, 5, 8, 9 of the twelve drafted) were taken from the
+familiarity-ranked proposal; three — Tame Impala/Fountains Of Wayne, Arcade Fire/America,
+Led Zeppelin/Guster — are the owner's own recombinations of names from the same usable
+list, chosen to widen the musical distance the draft's pair-by-adjacent-minutes rule was
+blind to. All eight endpoints are drawn from his top-150 by listening time.
 
 ### Corrections (`GBL-CORR`) — a separate series; these move no bar
 

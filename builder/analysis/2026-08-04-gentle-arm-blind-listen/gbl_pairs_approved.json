@@ -1,0 +1,84 @@
+{
+  "pairs": [
+    {
+      "a": {
+        "name": "Wishbone Ash",
+        "mbid": "406f1b42-0c9e-4427-aeb7-02f78e188ec4"
+      },
+      "b": {
+        "name": "Pink Floyd",
+        "mbid": "83d91898-7763-47d7-b03b-b92132375c47"
+      }
+    },
+    {
+      "a": {
+        "name": "Young Gun Silver Fox",
+        "mbid": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4"
+      },
+      "b": {
+        "name": "Eloy",
+        "mbid": "bc154a90-890b-409e-b850-53ca299ab0d6"
+      }
+    },
+    {
+      "a": {
+        "name": "The Killers",
+        "mbid": "95e1ead9-4d31-4808-a7ac-32c3614c116b"
+      },
+      "b": {
+        "name": "The Beatles",
+        "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d"
+      }
+    },
+    {
+      "a": {
+        "name": "The War On Drugs",
+        "mbid": "87b9b3b8-ab93-426c-a200-4012d667a626"
+      },
+      "b": {
+        "name": "Sigur Rós",
+        "mbid": "f6f2326f-6b25-4170-b89d-e235b25508e8"
+      }
+    },
+    {
+      "a": {
+        "name": "The Decemberists",
+        "mbid": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3"
+      },
+      "b": {
+        "name": "Yellowcard",
+        "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135"
+      }
+    },
+    {
+      "a": {
+        "name": "Tame Impala",
+        "mbid": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d"
+      },
+      "b": {
+        "name": "Fountains Of Wayne",
+        "mbid": "0f82d6b5-12fb-4569-b047-a00194f572a7"
+      }
+    },
+    {
+      "a": {
+        "name": "Arcade Fire",
+        "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68"
+      },
+      "b": {
+        "name": "America",
+        "mbid": "34cf95c7-4be9-4efd-a48a-c2ea4a0bb114"
+      }
+    },
+    {
+      "a": {
+        "name": "Led Zeppelin",
+        "mbid": "678d88b2-87b0-403b-b63d-5da7465aecc3"
+      },
+      "b": {
+        "name": "Guster",
+        "mbid": "6cbe1e63-5895-4168-ac7e-f0d2836ba0c1"
+      }
+    }
+  ]
+}
