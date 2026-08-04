@@ -1,0 +1,5256 @@
+{
+  "read": "CRE-D1",
+  "role": "Stage-0 confirmatory banding read; expected branch 'not_supported'.",
+  "disclosure": "Confirmatory, not exploratory: the pre-run critique measured +0.08 on this substrate (prereg \u00a79 disclosure) and the expected branch is 'not supported'. Note the probe's +0.08 is a POOLED MEDIAN difference; the prereg's words specify a size-matched mean-of-means, which is what 'difference' is here.",
+  "measure": "rarity-weighted W4 agreement (sum idf over intersection / sum idf over union); NO within-artist vote weighting -- CRE-AM1 leaves CRE-D1 untouched",
+  "substrate": "adopted artifact, undirected surviving edge set (u < v)",
+  "artifact_sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+  "ruler_frame_n": 74151,
+  "n_artists_for_idf": 74193,
+  "aggregation": {
+    "form": "prereg \u00a74 words: size-matched (min,max) label-set-size cells, >= 30 edges in EACH band, per-cell difference = popular mean - obscure mean, overall = edge-weighted mean of per-cell differences",
+    "cell_weight": "popular_n + obscure_n (device pin; per-cell table committed so any other weighting is recomputable)",
+    "divergence_from_cre_probe3b": "The probe pools each band and takes a MEDIAN difference, with no size-matching. The prereg's words govern (plan pin 5), so the headline 'difference' here is a size-matched mean-of-means and is NOT directly comparable to the probe's +0.08. The probe's pooled form is recomputed as probe_form_pooled_median_difference."
+  },
+  "bands": {
+    "popular": {
+      "edges_in_band": 114725,
+      "labelled_edges": 113353,
+      "labelled_edge_share": 0.9880409675310525,
+      "readable": true
+    },
+    "obscure": {
+      "edges_in_band": 109779,
+      "labelled_edges": 68940,
+      "labelled_edge_share": 0.627988959637089,
+      "readable": true
+    }
+  },
+  "readable": true,
+  "readability_bar_labelled_edges_per_band": 500,
+  "cells_total": 521,
+  "cells_contributing": 155,
+  "cell_min_edges_per_band": 30,
+  "difference": 0.05200855403281763,
+  "supported_at_or_below": -0.05,
+  "branch": "not_supported",
+  "consequence": "The D1-branch cells of \u00a70.2 DO NOT EXIST and no router-side tag arm does. E-S2-P0 is branch-proof and runs regardless.",
+  "probe_form_pooled_median_difference": 0.07546609677051852,
+  "undefined_agreement_edges": {
+    "popular": 0,
+    "obscure": 0
+  },
+  "cells": [
+    {
+      "size_min": 1,
+      "size_max": 1,
+      "popular_n": 121,
+      "obscure_n": 2380,
+      "popular_mean": 0.8347107438016529,
+      "obscure_mean": 0.7630252100840336,
+      "difference": 0.07168553371761932,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 2,
+      "popular_n": 216,
+      "obscure_n": 3301,
+      "popular_mean": 0.2552381603144872,
+      "obscure_mean": 0.2678593903148037,
+      "difference": -0.012621230000316508,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 3,
+      "popular_n": 262,
+      "obscure_n": 2846,
+      "popular_mean": 0.17652454539978082,
+      "obscure_mean": 0.16624194975594475,
+      "difference": 0.010282595643836073,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 4,
+      "popular_n": 226,
+      "obscure_n": 2153,
+      "popular_mean": 0.12228679650528304,
+      "obscure_mean": 0.12095278826225397,
+      "difference": 0.0013340082430290667,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 5,
+      "popular_n": 232,
+      "obscure_n": 1603,
+      "popular_mean": 0.09316849147955789,
+      "obscure_mean": 0.09222139456811,
+      "difference": 0.0009470969114478839,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 6,
+      "popular_n": 189,
+      "obscure_n": 1103,
+      "popular_mean": 0.07674361603805724,
+      "obscure_mean": 0.07637436431051553,
+      "difference": 0.00036925172754170843,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 7,
+      "popular_n": 163,
+      "obscure_n": 762,
+      "popular_mean": 0.07198746964118156,
+      "obscure_mean": 0.06003791798529123,
+      "difference": 0.011949551655890338,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 8,
+      "popular_n": 126,
+      "obscure_n": 672,
+      "popular_mean": 0.051886672363996605,
+      "obscure_mean": 0.04612029464997569,
+      "difference": 0.005766377714020915,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 9,
+      "popular_n": 121,
+      "obscure_n": 372,
+      "popular_mean": 0.06157890884035979,
+      "obscure_mean": 0.04229672975293166,
+      "difference": 0.01928217908742813,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 10,
+      "popular_n": 108,
+      "obscure_n": 328,
+      "popular_mean": 0.03986087941658898,
+      "obscure_mean": 0.040108217547924783,
+      "difference": -0.00024733813133580307,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 11,
+      "popular_n": 76,
+      "obscure_n": 239,
+      "popular_mean": 0.03837542196475432,
+      "obscure_mean": 0.03234741159194204,
+      "difference": 0.006028010372812281,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 12,
+      "popular_n": 67,
+      "obscure_n": 139,
+      "popular_mean": 0.03968965352929972,
+      "obscure_mean": 0.029440175305801695,
+      "difference": 0.010249478223498025,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 13,
+      "popular_n": 36,
+      "obscure_n": 106,
+      "popular_mean": 0.026928786173971122,
+      "obscure_mean": 0.02402508782136945,
+      "difference": 0.0029036983526016732,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 14,
+      "popular_n": 53,
+      "obscure_n": 95,
+      "popular_mean": 0.03569438365213095,
+      "obscure_mean": 0.020986310634089414,
+      "difference": 0.014708073018041536,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 15,
+      "popular_n": 39,
+      "obscure_n": 81,
+      "popular_mean": 0.028365122097367718,
+      "obscure_mean": 0.02236007388659745,
+      "difference": 0.006005048210770268,
+      "contributes": true
+    },
+    {
+      "size_min": 1,
+      "size_max": 16,
+      "popular_n": 24,
+      "obscure_n": 42,
+      "popular_mean": 0.0323202502109441,
+      "obscure_mean": 0.0206923039860186,
+      "difference": 0.011627946224925498,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 17,
+      "popular_n": 22,
+      "obscure_n": 53,
+      "popular_mean": 0.019796808562184503,
+      "obscure_mean": 0.020502281673398015,
+      "difference": -0.0007054731112135122,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 18,
+      "popular_n": 7,
+      "obscure_n": 34,
+      "popular_mean": 0.020379686806529716,
+      "obscure_mean": 0.025408114707831955,
+      "difference": -0.00502842790130224,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 19,
+      "popular_n": 21,
+      "obscure_n": 20,
+      "popular_mean": 0.02587993005819908,
+      "obscure_mean": 0.01255054335045094,
+      "difference": 0.01332938670774814,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 20,
+      "popular_n": 10,
+      "obscure_n": 25,
+      "popular_mean": 0.027089063637545308,
+      "obscure_mean": 0.02139613724696062,
+      "difference": 0.005692926390584687,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 21,
+      "popular_n": 10,
+      "obscure_n": 16,
+      "popular_mean": 0.015745074016657812,
+      "obscure_mean": 0.01865028843900732,
+      "difference": -0.0029052144223495092,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 22,
+      "popular_n": 14,
+      "obscure_n": 17,
+      "popular_mean": 0.018985817483379575,
+      "obscure_mean": 0.02208014145425991,
+      "difference": -0.003094323970880334,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 23,
+      "popular_n": 16,
+      "obscure_n": 9,
+      "popular_mean": 0.017334414475378923,
+      "obscure_mean": 0.015197334544629888,
+      "difference": 0.002137079930749035,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 24,
+      "popular_n": 5,
+      "obscure_n": 1,
+      "popular_mean": 0.015267100648898812,
+      "obscure_mean": 0.0,
+      "difference": 0.015267100648898812,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 25,
+      "popular_n": 13,
+      "obscure_n": 7,
+      "popular_mean": 0.020503275675827715,
+      "obscure_mean": 0.007322250602990335,
+      "difference": 0.01318102507283738,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 26,
+      "popular_n": 8,
+      "obscure_n": 2,
+      "popular_mean": 0.017392914496725274,
+      "obscure_mean": 0.007463330380679981,
+      "difference": 0.009929584116045293,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 27,
+      "popular_n": 2,
+      "obscure_n": 1,
+      "popular_mean": 0.01642711817522533,
+      "obscure_mean": 0.01775806852219092,
+      "difference": -0.0013309503469655926,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 28,
+      "popular_n": 3,
+      "obscure_n": 2,
+      "popular_mean": 0.021279775422341066,
+      "obscure_mean": 0.0062014795610447915,
+      "difference": 0.015078295861296274,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 29,
+      "popular_n": 5,
+      "obscure_n": 1,
+      "popular_mean": 0.012151379688984025,
+      "obscure_mean": 0.00602129995718024,
+      "difference": 0.006130079731803784,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 30,
+      "popular_n": 1,
+      "obscure_n": 3,
+      "popular_mean": 0.006530854920673838,
+      "obscure_mean": 0.029245532541128588,
+      "difference": -0.02271467762045475,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 31,
+      "popular_n": 2,
+      "obscure_n": 2,
+      "popular_mean": 0.01733062321617099,
+      "obscure_mean": 0.005498541784212524,
+      "difference": 0.011832081431958467,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 32,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.02890460386250881,
+      "obscure_mean": 0.005997977460827457,
+      "difference": 0.02290662640168135,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 35,
+      "popular_n": 3,
+      "obscure_n": 7,
+      "popular_mean": 0.018034547309421032,
+      "obscure_mean": 0.004637462835612367,
+      "difference": 0.013397084473808666,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 36,
+      "popular_n": 1,
+      "obscure_n": 2,
+      "popular_mean": 0.018586110399752255,
+      "obscure_mean": 0.010716583526204533,
+      "difference": 0.007869526873547722,
+      "contributes": false
+    },
+    {
+      "size_min": 1,
+      "size_max": 46,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.007383268906089557,
+      "obscure_mean": 0.0034556725045720507,
+      "difference": 0.003927596401517506,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 2,
+      "popular_n": 156,
+      "obscure_n": 1674,
+      "popular_mean": 0.5532535866464585,
+      "obscure_mean": 0.44797535023787893,
+      "difference": 0.10527823640857958,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 3,
+      "popular_n": 422,
+      "obscure_n": 2880,
+      "popular_mean": 0.3796940608187336,
+      "obscure_mean": 0.29063991389817645,
+      "difference": 0.08905414692055713,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 4,
+      "popular_n": 381,
+      "obscure_n": 2202,
+      "popular_mean": 0.27168792507299744,
+      "obscure_mean": 0.23431991944868716,
+      "difference": 0.03736800562431028,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 5,
+      "popular_n": 423,
+      "obscure_n": 1682,
+      "popular_mean": 0.24362241183593344,
+      "obscure_mean": 0.17610979479745975,
+      "difference": 0.0675126170384737,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 6,
+      "popular_n": 349,
+      "obscure_n": 1233,
+      "popular_mean": 0.18173669656188382,
+      "obscure_mean": 0.14568232876728487,
+      "difference": 0.036054367794598946,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 7,
+      "popular_n": 277,
+      "obscure_n": 829,
+      "popular_mean": 0.16470864647870304,
+      "obscure_mean": 0.12129265284428012,
+      "difference": 0.04341599363442292,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 8,
+      "popular_n": 209,
+      "obscure_n": 670,
+      "popular_mean": 0.14176398170577018,
+      "obscure_mean": 0.10640140438040814,
+      "difference": 0.035362577325362035,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 9,
+      "popular_n": 174,
+      "obscure_n": 427,
+      "popular_mean": 0.12473102895167724,
+      "obscure_mean": 0.09345563023132084,
+      "difference": 0.03127539872035641,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 10,
+      "popular_n": 167,
+      "obscure_n": 324,
+      "popular_mean": 0.10631934269301205,
+      "obscure_mean": 0.09054303066938588,
+      "difference": 0.01577631202362617,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 11,
+      "popular_n": 125,
+      "obscure_n": 243,
+      "popular_mean": 0.08560974158229723,
+      "obscure_mean": 0.0761541620410109,
+      "difference": 0.009455579541286327,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 12,
+      "popular_n": 104,
+      "obscure_n": 162,
+      "popular_mean": 0.08899280813386527,
+      "obscure_mean": 0.07355112338996668,
+      "difference": 0.015441684743898593,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 13,
+      "popular_n": 72,
+      "obscure_n": 113,
+      "popular_mean": 0.08915693549202278,
+      "obscure_mean": 0.06586328268100727,
+      "difference": 0.023293652811015503,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 14,
+      "popular_n": 67,
+      "obscure_n": 102,
+      "popular_mean": 0.07145880622322076,
+      "obscure_mean": 0.05115989634449941,
+      "difference": 0.02029890987872135,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 15,
+      "popular_n": 72,
+      "obscure_n": 74,
+      "popular_mean": 0.06223913890677443,
+      "obscure_mean": 0.0568240013965519,
+      "difference": 0.005415137510222531,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 16,
+      "popular_n": 40,
+      "obscure_n": 46,
+      "popular_mean": 0.06891624084250039,
+      "obscure_mean": 0.05946215862711303,
+      "difference": 0.009454082215387363,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 17,
+      "popular_n": 30,
+      "obscure_n": 58,
+      "popular_mean": 0.057023514572726614,
+      "obscure_mean": 0.054606065050091405,
+      "difference": 0.002417449522635208,
+      "contributes": true
+    },
+    {
+      "size_min": 2,
+      "size_max": 18,
+      "popular_n": 20,
+      "obscure_n": 33,
+      "popular_mean": 0.0535463582925242,
+      "obscure_mean": 0.032891396135705096,
+      "difference": 0.020654962156819105,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 19,
+      "popular_n": 33,
+      "obscure_n": 22,
+      "popular_mean": 0.050381614449048207,
+      "obscure_mean": 0.03895992515789399,
+      "difference": 0.011421689291154218,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 20,
+      "popular_n": 17,
+      "obscure_n": 19,
+      "popular_mean": 0.05437124507976393,
+      "obscure_mean": 0.027953787233169634,
+      "difference": 0.026417457846594296,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 21,
+      "popular_n": 18,
+      "obscure_n": 17,
+      "popular_mean": 0.031140708826863914,
+      "obscure_mean": 0.052865667055078745,
+      "difference": -0.02172495822821483,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 22,
+      "popular_n": 20,
+      "obscure_n": 21,
+      "popular_mean": 0.049662442204787556,
+      "obscure_mean": 0.03928786307542976,
+      "difference": 0.010374579129357797,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 23,
+      "popular_n": 9,
+      "obscure_n": 11,
+      "popular_mean": 0.037142175375802396,
+      "obscure_mean": 0.03385660436611072,
+      "difference": 0.003285571009691679,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 24,
+      "popular_n": 12,
+      "obscure_n": 3,
+      "popular_mean": 0.0356425120044126,
+      "obscure_mean": 0.031184037094631533,
+      "difference": 0.00445847490978107,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 25,
+      "popular_n": 8,
+      "obscure_n": 4,
+      "popular_mean": 0.038988856228203236,
+      "obscure_mean": 0.022877904472493476,
+      "difference": 0.01611095175570976,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 26,
+      "popular_n": 6,
+      "obscure_n": 3,
+      "popular_mean": 0.02857762690390819,
+      "obscure_mean": 0.031592563897773644,
+      "difference": -0.0030149369938654545,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 27,
+      "popular_n": 2,
+      "obscure_n": 4,
+      "popular_mean": 0.012064054939469469,
+      "obscure_mean": 0.0361366380992338,
+      "difference": -0.024072583159764332,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 29,
+      "popular_n": 2,
+      "obscure_n": 2,
+      "popular_mean": 0.013673242672338978,
+      "obscure_mean": 0.024990150599004723,
+      "difference": -0.011316907926665745,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 30,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.013711791511357692,
+      "obscure_mean": 0.014202540776358769,
+      "difference": -0.000490749265001077,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 32,
+      "popular_n": 2,
+      "obscure_n": 3,
+      "popular_mean": 0.026483962304817348,
+      "obscure_mean": 0.04539264033098786,
+      "difference": -0.018908678026170512,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 35,
+      "popular_n": 1,
+      "obscure_n": 7,
+      "popular_mean": 0.026799501664270472,
+      "obscure_mean": 0.018156281932998862,
+      "difference": 0.00864321973127161,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 36,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.010363479549759146,
+      "obscure_mean": 0.02108366735524725,
+      "difference": -0.010720187805488102,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 37,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.030084812560194768,
+      "obscure_mean": 0.027515713642073867,
+      "difference": 0.002569098918120901,
+      "contributes": false
+    },
+    {
+      "size_min": 2,
+      "size_max": 40,
+      "popular_n": 1,
+      "obscure_n": 3,
+      "popular_mean": 0.04104537343089424,
+      "obscure_mean": 0.010782923645576805,
+      "difference": 0.030262449785317433,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 3,
+      "popular_n": 367,
+      "obscure_n": 1523,
+      "popular_mean": 0.4713964324317758,
+      "obscure_mean": 0.3336384246719721,
+      "difference": 0.13775800775980374,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 4,
+      "popular_n": 721,
+      "obscure_n": 2456,
+      "popular_mean": 0.38329476914759164,
+      "obscure_mean": 0.2886691040687887,
+      "difference": 0.09462566507880293,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 5,
+      "popular_n": 846,
+      "obscure_n": 1978,
+      "popular_mean": 0.33826757902421745,
+      "obscure_mean": 0.23466827808002177,
+      "difference": 0.10359930094419567,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 6,
+      "popular_n": 764,
+      "obscure_n": 1439,
+      "popular_mean": 0.2742948813166329,
+      "obscure_mean": 0.20178279481671854,
+      "difference": 0.07251208649991434,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 7,
+      "popular_n": 613,
+      "obscure_n": 945,
+      "popular_mean": 0.2489969165128348,
+      "obscure_mean": 0.1711171073322656,
+      "difference": 0.07787980918056919,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 8,
+      "popular_n": 560,
+      "obscure_n": 784,
+      "popular_mean": 0.2179954971852271,
+      "obscure_mean": 0.15030469270279304,
+      "difference": 0.06769080448243406,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 9,
+      "popular_n": 469,
+      "obscure_n": 530,
+      "popular_mean": 0.19250442234714316,
+      "obscure_mean": 0.14004500982328646,
+      "difference": 0.05245941252385669,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 10,
+      "popular_n": 356,
+      "obscure_n": 419,
+      "popular_mean": 0.16278933955183253,
+      "obscure_mean": 0.12404810156251414,
+      "difference": 0.03874123798931839,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 11,
+      "popular_n": 267,
+      "obscure_n": 272,
+      "popular_mean": 0.14426674704555123,
+      "obscure_mean": 0.11181299131202817,
+      "difference": 0.03245375573352306,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 12,
+      "popular_n": 266,
+      "obscure_n": 172,
+      "popular_mean": 0.1346853404060922,
+      "obscure_mean": 0.09987192838234477,
+      "difference": 0.034813412023747436,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 13,
+      "popular_n": 176,
+      "obscure_n": 118,
+      "popular_mean": 0.13947375239155632,
+      "obscure_mean": 0.08566914864283022,
+      "difference": 0.0538046037487261,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 14,
+      "popular_n": 177,
+      "obscure_n": 124,
+      "popular_mean": 0.1288585278542884,
+      "obscure_mean": 0.08046954227386621,
+      "difference": 0.04838898558042218,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 15,
+      "popular_n": 137,
+      "obscure_n": 84,
+      "popular_mean": 0.11188717622025414,
+      "obscure_mean": 0.08659878743452025,
+      "difference": 0.02528838878573389,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 16,
+      "popular_n": 104,
+      "obscure_n": 67,
+      "popular_mean": 0.10099822580674098,
+      "obscure_mean": 0.07141559666054509,
+      "difference": 0.029582629146195888,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 17,
+      "popular_n": 74,
+      "obscure_n": 47,
+      "popular_mean": 0.10009294536741252,
+      "obscure_mean": 0.07512035832583883,
+      "difference": 0.024972587041573693,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 18,
+      "popular_n": 41,
+      "obscure_n": 34,
+      "popular_mean": 0.10354533548595007,
+      "obscure_mean": 0.04958112390045021,
+      "difference": 0.05396421158549986,
+      "contributes": true
+    },
+    {
+      "size_min": 3,
+      "size_max": 19,
+      "popular_n": 55,
+      "obscure_n": 28,
+      "popular_mean": 0.08214107566659522,
+      "obscure_mean": 0.060863775270398636,
+      "difference": 0.02127730039619658,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 20,
+      "popular_n": 42,
+      "obscure_n": 21,
+      "popular_mean": 0.0742085381678363,
+      "obscure_mean": 0.05948708730532716,
+      "difference": 0.014721450862509144,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 21,
+      "popular_n": 28,
+      "obscure_n": 18,
+      "popular_mean": 0.0809321493823952,
+      "obscure_mean": 0.07061346170238379,
+      "difference": 0.010318687680011401,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 22,
+      "popular_n": 32,
+      "obscure_n": 23,
+      "popular_mean": 0.07994687329773574,
+      "obscure_mean": 0.042135611895270056,
+      "difference": 0.037811261402465685,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 23,
+      "popular_n": 23,
+      "obscure_n": 12,
+      "popular_mean": 0.05297285631797557,
+      "obscure_mean": 0.055221162360225236,
+      "difference": -0.0022483060422496676,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 24,
+      "popular_n": 23,
+      "obscure_n": 7,
+      "popular_mean": 0.05732564058738512,
+      "obscure_mean": 0.04684910485940454,
+      "difference": 0.010476535727980574,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 25,
+      "popular_n": 17,
+      "obscure_n": 7,
+      "popular_mean": 0.05968231801716783,
+      "obscure_mean": 0.04139159927818492,
+      "difference": 0.018290718738982907,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 26,
+      "popular_n": 8,
+      "obscure_n": 4,
+      "popular_mean": 0.03847018519725327,
+      "obscure_mean": 0.08347655550473372,
+      "difference": -0.04500637030748045,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 27,
+      "popular_n": 6,
+      "obscure_n": 3,
+      "popular_mean": 0.06477751880460426,
+      "obscure_mean": 0.03405578172652114,
+      "difference": 0.030721737078083122,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 28,
+      "popular_n": 7,
+      "obscure_n": 6,
+      "popular_mean": 0.062209167029940136,
+      "obscure_mean": 0.05915486292533109,
+      "difference": 0.0030543041046090444,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 29,
+      "popular_n": 3,
+      "obscure_n": 1,
+      "popular_mean": 0.06557916403900921,
+      "obscure_mean": 0.03424948706686194,
+      "difference": 0.031329676972147266,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 30,
+      "popular_n": 3,
+      "obscure_n": 3,
+      "popular_mean": 0.028809029878256048,
+      "obscure_mean": 0.060030619525909545,
+      "difference": -0.031221589647653498,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 31,
+      "popular_n": 4,
+      "obscure_n": 2,
+      "popular_mean": 0.05067979867775396,
+      "obscure_mean": 0.029804643521615205,
+      "difference": 0.020875155156138758,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 32,
+      "popular_n": 5,
+      "obscure_n": 5,
+      "popular_mean": 0.05378444134612935,
+      "obscure_mean": 0.06977108144508617,
+      "difference": -0.015986640098956825,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 35,
+      "popular_n": 3,
+      "obscure_n": 3,
+      "popular_mean": 0.05716081019001774,
+      "obscure_mean": 0.018902786576977377,
+      "difference": 0.03825802361304036,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 36,
+      "popular_n": 2,
+      "obscure_n": 2,
+      "popular_mean": 0.06425076395606584,
+      "obscure_mean": 0.03384819883607325,
+      "difference": 0.03040256511999259,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 40,
+      "popular_n": 2,
+      "obscure_n": 3,
+      "popular_mean": 0.016715010841169983,
+      "obscure_mean": 0.03555929925222958,
+      "difference": -0.018844288411059597,
+      "contributes": false
+    },
+    {
+      "size_min": 3,
+      "size_max": 44,
+      "popular_n": 1,
+      "obscure_n": 2,
+      "popular_mean": 0.008322926611769303,
+      "obscure_mean": 0.02541447253816897,
+      "difference": -0.01709154592639967,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 4,
+      "popular_n": 439,
+      "obscure_n": 1086,
+      "popular_mean": 0.38651037682843337,
+      "obscure_mean": 0.2951095895950225,
+      "difference": 0.09140078723341089,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 5,
+      "popular_n": 1208,
+      "obscure_n": 1877,
+      "popular_mean": 0.3736312106357672,
+      "obscure_mean": 0.2770384118143022,
+      "difference": 0.09659279882146499,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 6,
+      "popular_n": 1066,
+      "obscure_n": 1505,
+      "popular_mean": 0.3259872111819331,
+      "obscure_mean": 0.25238067958596605,
+      "difference": 0.07360653159596703,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 7,
+      "popular_n": 931,
+      "obscure_n": 1041,
+      "popular_mean": 0.29858012267745265,
+      "obscure_mean": 0.21692595397716566,
+      "difference": 0.081654168700287,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 8,
+      "popular_n": 757,
+      "obscure_n": 791,
+      "popular_mean": 0.263324127301138,
+      "obscure_mean": 0.1999561891192181,
+      "difference": 0.06336793818191994,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 9,
+      "popular_n": 720,
+      "obscure_n": 525,
+      "popular_mean": 0.2501064128529708,
+      "obscure_mean": 0.1806095069465945,
+      "difference": 0.0694969059063763,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 10,
+      "popular_n": 549,
+      "obscure_n": 442,
+      "popular_mean": 0.2118235983974415,
+      "obscure_mean": 0.15604919467021985,
+      "difference": 0.055774403727221644,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 11,
+      "popular_n": 403,
+      "obscure_n": 323,
+      "popular_mean": 0.18821905815461482,
+      "obscure_mean": 0.1498481184409147,
+      "difference": 0.03837093971370012,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 12,
+      "popular_n": 383,
+      "obscure_n": 204,
+      "popular_mean": 0.18080186256503195,
+      "obscure_mean": 0.14562679360440278,
+      "difference": 0.03517506896062916,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 13,
+      "popular_n": 283,
+      "obscure_n": 136,
+      "popular_mean": 0.15786450719476317,
+      "obscure_mean": 0.11465535785050192,
+      "difference": 0.04320914934426125,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 14,
+      "popular_n": 207,
+      "obscure_n": 123,
+      "popular_mean": 0.17218734201757904,
+      "obscure_mean": 0.10575403728882131,
+      "difference": 0.06643330472875773,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 15,
+      "popular_n": 181,
+      "obscure_n": 112,
+      "popular_mean": 0.1484097499467881,
+      "obscure_mean": 0.11915473865009556,
+      "difference": 0.029255011296692543,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 16,
+      "popular_n": 131,
+      "obscure_n": 65,
+      "popular_mean": 0.1300628032451995,
+      "obscure_mean": 0.10410042163382591,
+      "difference": 0.025962381611373597,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 17,
+      "popular_n": 96,
+      "obscure_n": 57,
+      "popular_mean": 0.11207827184594517,
+      "obscure_mean": 0.08926925559060646,
+      "difference": 0.02280901625533871,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 18,
+      "popular_n": 75,
+      "obscure_n": 41,
+      "popular_mean": 0.1242375827272581,
+      "obscure_mean": 0.1025602585558555,
+      "difference": 0.021677324171402598,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 19,
+      "popular_n": 81,
+      "obscure_n": 27,
+      "popular_mean": 0.09942457456749658,
+      "obscure_mean": 0.09119389607261119,
+      "difference": 0.008230678494885388,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 20,
+      "popular_n": 56,
+      "obscure_n": 30,
+      "popular_mean": 0.09121636450685125,
+      "obscure_mean": 0.07859830179366284,
+      "difference": 0.01261806271318841,
+      "contributes": true
+    },
+    {
+      "size_min": 4,
+      "size_max": 21,
+      "popular_n": 36,
+      "obscure_n": 16,
+      "popular_mean": 0.09519788975297538,
+      "obscure_mean": 0.1009246385563898,
+      "difference": -0.005726748803414422,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 22,
+      "popular_n": 35,
+      "obscure_n": 26,
+      "popular_mean": 0.09923099907653436,
+      "obscure_mean": 0.10504225529287634,
+      "difference": -0.005811256216341973,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 23,
+      "popular_n": 30,
+      "obscure_n": 15,
+      "popular_mean": 0.09590765200459894,
+      "obscure_mean": 0.07005187811036974,
+      "difference": 0.025855773894229203,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 24,
+      "popular_n": 33,
+      "obscure_n": 5,
+      "popular_mean": 0.06852356716653468,
+      "obscure_mean": 0.10136488851469967,
+      "difference": -0.03284132134816499,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 25,
+      "popular_n": 19,
+      "obscure_n": 12,
+      "popular_mean": 0.09438210494538024,
+      "obscure_mean": 0.0494914232969634,
+      "difference": 0.04489068164841684,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 26,
+      "popular_n": 10,
+      "obscure_n": 4,
+      "popular_mean": 0.08891134379661615,
+      "obscure_mean": 0.0722372608852648,
+      "difference": 0.01667408291135135,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 27,
+      "popular_n": 12,
+      "obscure_n": 6,
+      "popular_mean": 0.07329990672359382,
+      "obscure_mean": 0.08255484208051588,
+      "difference": -0.009254935356922053,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 28,
+      "popular_n": 9,
+      "obscure_n": 5,
+      "popular_mean": 0.07499765972530727,
+      "obscure_mean": 0.09658990320887459,
+      "difference": -0.021592243483567322,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 29,
+      "popular_n": 3,
+      "obscure_n": 3,
+      "popular_mean": 0.05648744271618152,
+      "obscure_mean": 0.0849590814943461,
+      "difference": -0.028471638778164575,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 30,
+      "popular_n": 3,
+      "obscure_n": 7,
+      "popular_mean": 0.03498810841013463,
+      "obscure_mean": 0.08761781147510324,
+      "difference": -0.05262970306496861,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 31,
+      "popular_n": 4,
+      "obscure_n": 2,
+      "popular_mean": 0.028501163398010922,
+      "obscure_mean": 0.04955489435795987,
+      "difference": -0.02105373095994895,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 32,
+      "popular_n": 1,
+      "obscure_n": 2,
+      "popular_mean": 0.05953964030623459,
+      "obscure_mean": 0.0650684072758318,
+      "difference": -0.0055287669695972055,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 33,
+      "popular_n": 3,
+      "obscure_n": 1,
+      "popular_mean": 0.02657527742865741,
+      "obscure_mean": 0.09201208880727772,
+      "difference": -0.06543681137862031,
+      "contributes": false
+    },
+    {
+      "size_min": 4,
+      "size_max": 39,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.016801854199047755,
+      "obscure_mean": 0.06327915628722663,
+      "difference": -0.04647730208817888,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 5,
+      "popular_n": 813,
+      "obscure_n": 776,
+      "popular_mean": 0.39131394503451444,
+      "obscure_mean": 0.2660185163307767,
+      "difference": 0.12529542870373772,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 6,
+      "popular_n": 1525,
+      "obscure_n": 1380,
+      "popular_mean": 0.3627651456369545,
+      "obscure_mean": 0.26490438347998146,
+      "difference": 0.09786076215697304,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 7,
+      "popular_n": 1330,
+      "obscure_n": 989,
+      "popular_mean": 0.33433103051781804,
+      "obscure_mean": 0.24419543740844643,
+      "difference": 0.09013559310937161,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 8,
+      "popular_n": 1178,
+      "obscure_n": 841,
+      "popular_mean": 0.29736679519604364,
+      "obscure_mean": 0.22847014939646984,
+      "difference": 0.0688966457995738,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 9,
+      "popular_n": 1095,
+      "obscure_n": 590,
+      "popular_mean": 0.2818737910219634,
+      "obscure_mean": 0.21396020799209128,
+      "difference": 0.06791358302987213,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 10,
+      "popular_n": 837,
+      "obscure_n": 398,
+      "popular_mean": 0.24460383476128822,
+      "obscure_mean": 0.18809709774296934,
+      "difference": 0.056506737018318876,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 11,
+      "popular_n": 662,
+      "obscure_n": 293,
+      "popular_mean": 0.229203926510029,
+      "obscure_mean": 0.1684516491628828,
+      "difference": 0.060752277347146194,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 12,
+      "popular_n": 571,
+      "obscure_n": 261,
+      "popular_mean": 0.2111668429619284,
+      "obscure_mean": 0.1671437375893888,
+      "difference": 0.04402310537253959,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 13,
+      "popular_n": 491,
+      "obscure_n": 169,
+      "popular_mean": 0.20476295738273545,
+      "obscure_mean": 0.1524212584749661,
+      "difference": 0.05234169890776935,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 14,
+      "popular_n": 366,
+      "obscure_n": 128,
+      "popular_mean": 0.1896272568579992,
+      "obscure_mean": 0.12200219576734528,
+      "difference": 0.06762506109065392,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 15,
+      "popular_n": 276,
+      "obscure_n": 91,
+      "popular_mean": 0.16060124882598786,
+      "obscure_mean": 0.1450388303396913,
+      "difference": 0.015562418486296553,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 16,
+      "popular_n": 200,
+      "obscure_n": 75,
+      "popular_mean": 0.15598237976568197,
+      "obscure_mean": 0.12814870838528744,
+      "difference": 0.027833671380394526,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 17,
+      "popular_n": 182,
+      "obscure_n": 45,
+      "popular_mean": 0.15356836751205644,
+      "obscure_mean": 0.11637249366212866,
+      "difference": 0.03719587384992777,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 18,
+      "popular_n": 126,
+      "obscure_n": 49,
+      "popular_mean": 0.14067988616809898,
+      "obscure_mean": 0.1212324290119234,
+      "difference": 0.019447457156175588,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 19,
+      "popular_n": 132,
+      "obscure_n": 39,
+      "popular_mean": 0.13234722235335353,
+      "obscure_mean": 0.10043944700743995,
+      "difference": 0.031907775345913575,
+      "contributes": true
+    },
+    {
+      "size_min": 5,
+      "size_max": 20,
+      "popular_n": 99,
+      "obscure_n": 15,
+      "popular_mean": 0.12360102802221867,
+      "obscure_mean": 0.08737677936547104,
+      "difference": 0.03622424865674763,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 21,
+      "popular_n": 62,
+      "obscure_n": 29,
+      "popular_mean": 0.1182588023035166,
+      "obscure_mean": 0.09729833702641445,
+      "difference": 0.020960465277102144,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 22,
+      "popular_n": 54,
+      "obscure_n": 22,
+      "popular_mean": 0.11536716529072304,
+      "obscure_mean": 0.11245764640560366,
+      "difference": 0.0029095188851193804,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 23,
+      "popular_n": 57,
+      "obscure_n": 17,
+      "popular_mean": 0.10680488681266428,
+      "obscure_mean": 0.09381429748582053,
+      "difference": 0.012990589326843757,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 24,
+      "popular_n": 47,
+      "obscure_n": 8,
+      "popular_mean": 0.10291026812238677,
+      "obscure_mean": 0.08501639372729254,
+      "difference": 0.017893874395094225,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 25,
+      "popular_n": 40,
+      "obscure_n": 5,
+      "popular_mean": 0.1053584600611103,
+      "obscure_mean": 0.09244667916025404,
+      "difference": 0.012911780900856262,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 26,
+      "popular_n": 17,
+      "obscure_n": 5,
+      "popular_mean": 0.08400924889751182,
+      "obscure_mean": 0.07591384550733672,
+      "difference": 0.008095403390175102,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 27,
+      "popular_n": 23,
+      "obscure_n": 6,
+      "popular_mean": 0.10315129066049854,
+      "obscure_mean": 0.11010816584736464,
+      "difference": -0.006956875186866107,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 28,
+      "popular_n": 18,
+      "obscure_n": 6,
+      "popular_mean": 0.09757350043381624,
+      "obscure_mean": 0.07786821968931373,
+      "difference": 0.019705280744502507,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 30,
+      "popular_n": 11,
+      "obscure_n": 3,
+      "popular_mean": 0.06657713242184865,
+      "obscure_mean": 0.09858278588321621,
+      "difference": -0.032005653461367564,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 32,
+      "popular_n": 4,
+      "obscure_n": 5,
+      "popular_mean": 0.07242575575506743,
+      "obscure_mean": 0.14050130149875395,
+      "difference": -0.06807554574368652,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 35,
+      "popular_n": 6,
+      "obscure_n": 4,
+      "popular_mean": 0.051283909326444575,
+      "obscure_mean": 0.04493499140806376,
+      "difference": 0.006348917918380818,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 36,
+      "popular_n": 6,
+      "obscure_n": 1,
+      "popular_mean": 0.05107105952324754,
+      "obscure_mean": 0.049255919667167684,
+      "difference": 0.0018151398560798532,
+      "contributes": false
+    },
+    {
+      "size_min": 5,
+      "size_max": 39,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.0863111887383582,
+      "obscure_mean": 0.11163581455591445,
+      "difference": -0.02532462581755625,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 6,
+      "popular_n": 851,
+      "obscure_n": 538,
+      "popular_mean": 0.36873675359279945,
+      "obscure_mean": 0.2702215082136553,
+      "difference": 0.09851524537914413,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 7,
+      "popular_n": 1517,
+      "obscure_n": 891,
+      "popular_mean": 0.34180335739997614,
+      "obscure_mean": 0.2519849202376627,
+      "difference": 0.08981843716231341,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 8,
+      "popular_n": 1389,
+      "obscure_n": 693,
+      "popular_mean": 0.32202173550400737,
+      "obscure_mean": 0.2395715464626592,
+      "difference": 0.08245018904134815,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 9,
+      "popular_n": 1264,
+      "obscure_n": 536,
+      "popular_mean": 0.3105638604793842,
+      "obscure_mean": 0.2359951654412003,
+      "difference": 0.07456869503818392,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 10,
+      "popular_n": 1113,
+      "obscure_n": 426,
+      "popular_mean": 0.276195623198338,
+      "obscure_mean": 0.21613618460525266,
+      "difference": 0.06005943859308535,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 11,
+      "popular_n": 876,
+      "obscure_n": 298,
+      "popular_mean": 0.26480826443776795,
+      "obscure_mean": 0.20756390870391409,
+      "difference": 0.05724435573385386,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 12,
+      "popular_n": 756,
+      "obscure_n": 208,
+      "popular_mean": 0.245603976753461,
+      "obscure_mean": 0.19951541531478717,
+      "difference": 0.04608856143867382,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 13,
+      "popular_n": 614,
+      "obscure_n": 158,
+      "popular_mean": 0.22834569561430798,
+      "obscure_mean": 0.20025913213990598,
+      "difference": 0.028086563474402,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 14,
+      "popular_n": 428,
+      "obscure_n": 133,
+      "popular_mean": 0.21454386109083118,
+      "obscure_mean": 0.14256843955265971,
+      "difference": 0.07197542153817146,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 15,
+      "popular_n": 385,
+      "obscure_n": 88,
+      "popular_mean": 0.20622147860113837,
+      "obscure_mean": 0.16645417000265733,
+      "difference": 0.039767308598481044,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 16,
+      "popular_n": 283,
+      "obscure_n": 74,
+      "popular_mean": 0.18628735326809012,
+      "obscure_mean": 0.16553095738576284,
+      "difference": 0.020756395882327278,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 17,
+      "popular_n": 254,
+      "obscure_n": 59,
+      "popular_mean": 0.17348971675317656,
+      "obscure_mean": 0.12648602794514788,
+      "difference": 0.04700368880802869,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 18,
+      "popular_n": 190,
+      "obscure_n": 58,
+      "popular_mean": 0.16596830537640136,
+      "obscure_mean": 0.14684365063940355,
+      "difference": 0.019124654736997815,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 19,
+      "popular_n": 183,
+      "obscure_n": 39,
+      "popular_mean": 0.1614609950595322,
+      "obscure_mean": 0.12514328991758045,
+      "difference": 0.03631770514195176,
+      "contributes": true
+    },
+    {
+      "size_min": 6,
+      "size_max": 20,
+      "popular_n": 153,
+      "obscure_n": 24,
+      "popular_mean": 0.14178011640745566,
+      "obscure_mean": 0.12812923406354496,
+      "difference": 0.013650882343910709,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 21,
+      "popular_n": 71,
+      "obscure_n": 20,
+      "popular_mean": 0.145523454667469,
+      "obscure_mean": 0.11909630124466833,
+      "difference": 0.026427153422800664,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 22,
+      "popular_n": 81,
+      "obscure_n": 17,
+      "popular_mean": 0.13740503593168565,
+      "obscure_mean": 0.17161497981972398,
+      "difference": -0.03420994388803833,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 23,
+      "popular_n": 59,
+      "obscure_n": 11,
+      "popular_mean": 0.1258464336373516,
+      "obscure_mean": 0.12244357006833807,
+      "difference": 0.003402863569013523,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 24,
+      "popular_n": 52,
+      "obscure_n": 2,
+      "popular_mean": 0.12855871197297405,
+      "obscure_mean": 0.1030324279824733,
+      "difference": 0.025526283990500748,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 25,
+      "popular_n": 55,
+      "obscure_n": 10,
+      "popular_mean": 0.13474062060524347,
+      "obscure_mean": 0.10288318658375814,
+      "difference": 0.03185743402148533,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 26,
+      "popular_n": 29,
+      "obscure_n": 3,
+      "popular_mean": 0.12100748610040943,
+      "obscure_mean": 0.11419369471326841,
+      "difference": 0.006813791387141013,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 27,
+      "popular_n": 29,
+      "obscure_n": 6,
+      "popular_mean": 0.11925092940366883,
+      "obscure_mean": 0.08037723641828481,
+      "difference": 0.03887369298538401,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 28,
+      "popular_n": 37,
+      "obscure_n": 10,
+      "popular_mean": 0.10886233621638189,
+      "obscure_mean": 0.10407477320877237,
+      "difference": 0.004787563007609519,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 29,
+      "popular_n": 11,
+      "obscure_n": 4,
+      "popular_mean": 0.13107257425746308,
+      "obscure_mean": 0.07115630728256303,
+      "difference": 0.059916266974900045,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 30,
+      "popular_n": 9,
+      "obscure_n": 8,
+      "popular_mean": 0.09231299103295604,
+      "obscure_mean": 0.07657278274788742,
+      "difference": 0.015740208285068613,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 31,
+      "popular_n": 19,
+      "obscure_n": 2,
+      "popular_mean": 0.09281810198959319,
+      "obscure_mean": 0.05655866296954753,
+      "difference": 0.03625943902004566,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 32,
+      "popular_n": 15,
+      "obscure_n": 3,
+      "popular_mean": 0.11122649926559505,
+      "obscure_mean": 0.09202031555194573,
+      "difference": 0.019206183713649322,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 33,
+      "popular_n": 7,
+      "obscure_n": 2,
+      "popular_mean": 0.07175386628345683,
+      "obscure_mean": 0.1013604696603218,
+      "difference": -0.02960660337686498,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 35,
+      "popular_n": 4,
+      "obscure_n": 3,
+      "popular_mean": 0.08798807134110702,
+      "obscure_mean": 0.10985752538454979,
+      "difference": -0.021869454043442774,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 37,
+      "popular_n": 2,
+      "obscure_n": 1,
+      "popular_mean": 0.0936998488246114,
+      "obscure_mean": 0.08172626822104123,
+      "difference": 0.011973580603570164,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 40,
+      "popular_n": 5,
+      "obscure_n": 1,
+      "popular_mean": 0.0820386698783519,
+      "obscure_mean": 0.059868996307101914,
+      "difference": 0.022169673571249986,
+      "contributes": false
+    },
+    {
+      "size_min": 6,
+      "size_max": 44,
+      "popular_n": 1,
+      "obscure_n": 1,
+      "popular_mean": 0.08139862580659644,
+      "obscure_mean": 0.0028047131695440254,
+      "difference": 0.07859391263705241,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 7,
+      "popular_n": 714,
+      "obscure_n": 332,
+      "popular_mean": 0.3343023229821593,
+      "obscure_mean": 0.2509378481163693,
+      "difference": 0.08336447486578996,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 8,
+      "popular_n": 1417,
+      "obscure_n": 630,
+      "popular_mean": 0.3262640886749703,
+      "obscure_mean": 0.24730899073772433,
+      "difference": 0.07895509793724598,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 9,
+      "popular_n": 1432,
+      "obscure_n": 447,
+      "popular_mean": 0.3104349884840993,
+      "obscure_mean": 0.2471828608422022,
+      "difference": 0.06325212764189708,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 10,
+      "popular_n": 1133,
+      "obscure_n": 332,
+      "popular_mean": 0.28681954183243485,
+      "obscure_mean": 0.23208974122261355,
+      "difference": 0.0547298006098213,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 11,
+      "popular_n": 883,
+      "obscure_n": 280,
+      "popular_mean": 0.2791446275551803,
+      "obscure_mean": 0.20664435470510664,
+      "difference": 0.07250027285007368,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 12,
+      "popular_n": 830,
+      "obscure_n": 204,
+      "popular_mean": 0.26715019929341516,
+      "obscure_mean": 0.2394031760661667,
+      "difference": 0.027747023227248452,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 13,
+      "popular_n": 659,
+      "obscure_n": 157,
+      "popular_mean": 0.23207569235544565,
+      "obscure_mean": 0.19418713269088655,
+      "difference": 0.03788855966455909,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 14,
+      "popular_n": 509,
+      "obscure_n": 118,
+      "popular_mean": 0.24382371597141678,
+      "obscure_mean": 0.17196846884036807,
+      "difference": 0.07185524713104871,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 15,
+      "popular_n": 447,
+      "obscure_n": 89,
+      "popular_mean": 0.21611227028407495,
+      "obscure_mean": 0.19010101947360333,
+      "difference": 0.02601125081047162,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 16,
+      "popular_n": 318,
+      "obscure_n": 66,
+      "popular_mean": 0.20333381689584587,
+      "obscure_mean": 0.1890892098042226,
+      "difference": 0.014244607091623257,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 17,
+      "popular_n": 277,
+      "obscure_n": 52,
+      "popular_mean": 0.18454907290389896,
+      "obscure_mean": 0.14836427519952616,
+      "difference": 0.0361847977043728,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 18,
+      "popular_n": 196,
+      "obscure_n": 52,
+      "popular_mean": 0.1790556165985991,
+      "obscure_mean": 0.18849609723983257,
+      "difference": -0.009440480641233484,
+      "contributes": true
+    },
+    {
+      "size_min": 7,
+      "size_max": 19,
+      "popular_n": 191,
+      "obscure_n": 16,
+      "popular_mean": 0.1692597302858366,
+      "obscure_mean": 0.16754061888033117,
+      "difference": 0.0017191114055054302,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 20,
+      "popular_n": 172,
+      "obscure_n": 22,
+      "popular_mean": 0.16465747138281103,
+      "obscure_mean": 0.14381850075469818,
+      "difference": 0.02083897062811285,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 21,
+      "popular_n": 101,
+      "obscure_n": 19,
+      "popular_mean": 0.16672480227308542,
+      "obscure_mean": 0.17666476955747215,
+      "difference": -0.00993996728438673,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 22,
+      "popular_n": 89,
+      "obscure_n": 17,
+      "popular_mean": 0.15727909680840582,
+      "obscure_mean": 0.15564439956606532,
+      "difference": 0.0016346972423404993,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 23,
+      "popular_n": 83,
+      "obscure_n": 9,
+      "popular_mean": 0.15245085132708366,
+      "obscure_mean": 0.14651530273158586,
+      "difference": 0.005935548595497803,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 24,
+      "popular_n": 52,
+      "obscure_n": 2,
+      "popular_mean": 0.13308961668680716,
+      "obscure_mean": 0.1850808105169336,
+      "difference": -0.05199119383012643,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 25,
+      "popular_n": 49,
+      "obscure_n": 10,
+      "popular_mean": 0.13336261457163062,
+      "obscure_mean": 0.11595861497933595,
+      "difference": 0.017403999592294675,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 26,
+      "popular_n": 41,
+      "obscure_n": 3,
+      "popular_mean": 0.1277160085248282,
+      "obscure_mean": 0.09146663568127057,
+      "difference": 0.03624937284355763,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 27,
+      "popular_n": 40,
+      "obscure_n": 5,
+      "popular_mean": 0.1372640850907918,
+      "obscure_mean": 0.10706648108074308,
+      "difference": 0.030197604010048715,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 28,
+      "popular_n": 27,
+      "obscure_n": 5,
+      "popular_mean": 0.11532098899893548,
+      "obscure_mean": 0.09491397496952644,
+      "difference": 0.020407014029409032,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 29,
+      "popular_n": 13,
+      "obscure_n": 3,
+      "popular_mean": 0.11115833533593235,
+      "obscure_mean": 0.1296843405632001,
+      "difference": -0.01852600522726776,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 30,
+      "popular_n": 24,
+      "obscure_n": 9,
+      "popular_mean": 0.0943290222797714,
+      "obscure_mean": 0.12219411454335218,
+      "difference": -0.027865092263580776,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 31,
+      "popular_n": 27,
+      "obscure_n": 3,
+      "popular_mean": 0.09241467146632126,
+      "obscure_mean": 0.08077304688347026,
+      "difference": 0.011641624582851007,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 32,
+      "popular_n": 10,
+      "obscure_n": 2,
+      "popular_mean": 0.10098241581368475,
+      "obscure_mean": 0.11285544192488202,
+      "difference": -0.011873026111197268,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 33,
+      "popular_n": 14,
+      "obscure_n": 1,
+      "popular_mean": 0.10111864370524962,
+      "obscure_mean": 0.15123557756249092,
+      "difference": -0.05011693385724131,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 35,
+      "popular_n": 16,
+      "obscure_n": 5,
+      "popular_mean": 0.11152053946668064,
+      "obscure_mean": 0.07001993267242772,
+      "difference": 0.04150060679425292,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 40,
+      "popular_n": 2,
+      "obscure_n": 3,
+      "popular_mean": 0.10040233243296223,
+      "obscure_mean": 0.10839786227132377,
+      "difference": -0.007995529838361534,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 44,
+      "popular_n": 6,
+      "obscure_n": 1,
+      "popular_mean": 0.0779309410431347,
+      "obscure_mean": 0.08297819358358331,
+      "difference": -0.0050472525404486185,
+      "contributes": false
+    },
+    {
+      "size_min": 7,
+      "size_max": 57,
+      "popular_n": 4,
+      "obscure_n": 3,
+      "popular_mean": 0.04912533182251365,
+      "obscure_mean": 0.057864502687921836,
+      "difference": -0.008739170865408187,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 8,
+      "popular_n": 697,
+      "obscure_n": 286,
+      "popular_mean": 0.33824164131218687,
+      "obscure_mean": 0.31018877250272764,
+      "difference": 0.02805286880945923,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 9,
+      "popular_n": 1430,
+      "obscure_n": 427,
+      "popular_mean": 0.32656433520963496,
+      "obscure_mean": 0.2876185010012999,
+      "difference": 0.038945834208335084,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 10,
+      "popular_n": 1245,
+      "obscure_n": 354,
+      "popular_mean": 0.3073781063683492,
+      "obscure_mean": 0.2986470275428109,
+      "difference": 0.008731078825538308,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 11,
+      "popular_n": 1016,
+      "obscure_n": 256,
+      "popular_mean": 0.29455574463749895,
+      "obscure_mean": 0.2662095096939309,
+      "difference": 0.028346234943568027,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 12,
+      "popular_n": 922,
+      "obscure_n": 208,
+      "popular_mean": 0.2912721213230339,
+      "obscure_mean": 0.25016141725400093,
+      "difference": 0.041110704069032944,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 13,
+      "popular_n": 741,
+      "obscure_n": 138,
+      "popular_mean": 0.2619315055553373,
+      "obscure_mean": 0.21978053423699714,
+      "difference": 0.04215097131834014,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 14,
+      "popular_n": 683,
+      "obscure_n": 107,
+      "popular_mean": 0.25702059836121577,
+      "obscure_mean": 0.17732625139020558,
+      "difference": 0.07969434697101019,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 15,
+      "popular_n": 487,
+      "obscure_n": 117,
+      "popular_mean": 0.24353226505937015,
+      "obscure_mean": 0.23471694488085892,
+      "difference": 0.008815320178511221,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 16,
+      "popular_n": 383,
+      "obscure_n": 67,
+      "popular_mean": 0.2251683838192054,
+      "obscure_mean": 0.20224196062413524,
+      "difference": 0.022926423195070156,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 17,
+      "popular_n": 344,
+      "obscure_n": 48,
+      "popular_mean": 0.21672494808369538,
+      "obscure_mean": 0.1682804163845494,
+      "difference": 0.048444531699145976,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 18,
+      "popular_n": 233,
+      "obscure_n": 49,
+      "popular_mean": 0.2115455081246741,
+      "obscure_mean": 0.1800872279190601,
+      "difference": 0.031458280205614,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 19,
+      "popular_n": 219,
+      "obscure_n": 32,
+      "popular_mean": 0.2077675295885192,
+      "obscure_mean": 0.1836183497458605,
+      "difference": 0.024149179842658713,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 20,
+      "popular_n": 211,
+      "obscure_n": 25,
+      "popular_mean": 0.1901781290092398,
+      "obscure_mean": 0.17761638781265096,
+      "difference": 0.012561741196588844,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 21,
+      "popular_n": 125,
+      "obscure_n": 20,
+      "popular_mean": 0.20236892130795278,
+      "obscure_mean": 0.16210246820334867,
+      "difference": 0.04026645310460411,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 22,
+      "popular_n": 106,
+      "obscure_n": 32,
+      "popular_mean": 0.17433418202658932,
+      "obscure_mean": 0.2035391287533544,
+      "difference": -0.029204946726765074,
+      "contributes": true
+    },
+    {
+      "size_min": 8,
+      "size_max": 23,
+      "popular_n": 114,
+      "obscure_n": 9,
+      "popular_mean": 0.1771628217765259,
+      "obscure_mean": 0.1697390660609983,
+      "difference": 0.007423755715527586,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 24,
+      "popular_n": 87,
+      "obscure_n": 4,
+      "popular_mean": 0.15763832079306156,
+      "obscure_mean": 0.14251911135035503,
+      "difference": 0.015119209442706533,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 25,
+      "popular_n": 67,
+      "obscure_n": 9,
+      "popular_mean": 0.17268829497955018,
+      "obscure_mean": 0.16886220050785472,
+      "difference": 0.0038260944716954626,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 26,
+      "popular_n": 36,
+      "obscure_n": 2,
+      "popular_mean": 0.15086258868204575,
+      "obscure_mean": 0.16625774688103076,
+      "difference": -0.015395158198985015,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 27,
+      "popular_n": 45,
+      "obscure_n": 6,
+      "popular_mean": 0.15455930914649768,
+      "obscure_mean": 0.11723425035546399,
+      "difference": 0.03732505879103369,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 28,
+      "popular_n": 44,
+      "obscure_n": 8,
+      "popular_mean": 0.14362890931140432,
+      "obscure_mean": 0.11422948973728725,
+      "difference": 0.02939941957411707,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 29,
+      "popular_n": 16,
+      "obscure_n": 2,
+      "popular_mean": 0.14232742299659426,
+      "obscure_mean": 0.11930840498228223,
+      "difference": 0.023019018014312026,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 30,
+      "popular_n": 10,
+      "obscure_n": 7,
+      "popular_mean": 0.07924665882421375,
+      "obscure_mean": 0.11528267427068609,
+      "difference": -0.036036015446472336,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 31,
+      "popular_n": 29,
+      "obscure_n": 4,
+      "popular_mean": 0.12472661493590655,
+      "obscure_mean": 0.09079382219630029,
+      "difference": 0.033932792739606255,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 32,
+      "popular_n": 12,
+      "obscure_n": 2,
+      "popular_mean": 0.1337592676852631,
+      "obscure_mean": 0.10649617881503559,
+      "difference": 0.02726308887022752,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 33,
+      "popular_n": 12,
+      "obscure_n": 1,
+      "popular_mean": 0.0989398294611626,
+      "obscure_mean": 0.09965590745315085,
+      "difference": -0.000716077991988251,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 35,
+      "popular_n": 13,
+      "obscure_n": 4,
+      "popular_mean": 0.11204782050400215,
+      "obscure_mean": 0.1129726100280079,
+      "difference": -0.0009247895240057508,
+      "contributes": false
+    },
+    {
+      "size_min": 8,
+      "size_max": 36,
+      "popular_n": 4,
+      "obscure_n": 1,
+      "popular_mean": 0.09777119444262974,
+      "obscure_mean": 0.06710142488183683,
+      "difference": 0.03066976956079291,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 9,
+      "popular_n": 738,
+      "obscure_n": 164,
+      "popular_mean": 0.3168899900529561,
+      "obscure_mean": 0.2899535844406189,
+      "difference": 0.026936405612337178,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 10,
+      "popular_n": 1219,
+      "obscure_n": 245,
+      "popular_mean": 0.31243782949128895,
+      "obscure_mean": 0.28385998676467245,
+      "difference": 0.02857784272661651,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 11,
+      "popular_n": 1071,
+      "obscure_n": 199,
+      "popular_mean": 0.30313511483530453,
+      "obscure_mean": 0.2627553540789012,
+      "difference": 0.040379760756403316,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 12,
+      "popular_n": 973,
+      "obscure_n": 148,
+      "popular_mean": 0.29538374689031344,
+      "obscure_mean": 0.26923985602529765,
+      "difference": 0.026143890865015784,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 13,
+      "popular_n": 836,
+      "obscure_n": 127,
+      "popular_mean": 0.2777142008947467,
+      "obscure_mean": 0.23629123028742577,
+      "difference": 0.04142297060732092,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 14,
+      "popular_n": 663,
+      "obscure_n": 79,
+      "popular_mean": 0.2803165121105693,
+      "obscure_mean": 0.17900505305936154,
+      "difference": 0.10131145905120775,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 15,
+      "popular_n": 590,
+      "obscure_n": 73,
+      "popular_mean": 0.2619648788093448,
+      "obscure_mean": 0.24470776430799568,
+      "difference": 0.017257114501349147,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 16,
+      "popular_n": 458,
+      "obscure_n": 68,
+      "popular_mean": 0.23897765529739734,
+      "obscure_mean": 0.22128332440919132,
+      "difference": 0.017694330888206017,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 17,
+      "popular_n": 419,
+      "obscure_n": 30,
+      "popular_mean": 0.2320550478708757,
+      "obscure_mean": 0.19300849628551664,
+      "difference": 0.03904655158535905,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 18,
+      "popular_n": 302,
+      "obscure_n": 43,
+      "popular_mean": 0.22733750865881455,
+      "obscure_mean": 0.19730054993238355,
+      "difference": 0.030036958726431,
+      "contributes": true
+    },
+    {
+      "size_min": 9,
+      "size_max": 19,
+      "popular_n": 297,
+      "obscure_n": 23,
+      "popular_mean": 0.2187675852055323,
+      "obscure_mean": 0.20430028467817832,
+      "difference": 0.014467300527353982,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 20,
+      "popular_n": 254,
+      "obscure_n": 14,
+      "popular_mean": 0.203756287911451,
+      "obscure_mean": 0.22391363345085802,
+      "difference": -0.020157345539407012,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 21,
+      "popular_n": 168,
+      "obscure_n": 13,
+      "popular_mean": 0.2090438812296519,
+      "obscure_mean": 0.21245412418604348,
+      "difference": -0.003410242956391585,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 22,
+      "popular_n": 147,
+      "obscure_n": 19,
+      "popular_mean": 0.19476101782457683,
+      "obscure_mean": 0.1908479639775352,
+      "difference": 0.003913053847041631,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 23,
+      "popular_n": 132,
+      "obscure_n": 11,
+      "popular_mean": 0.18137397062860336,
+      "obscure_mean": 0.2102664207164332,
+      "difference": -0.02889245008782984,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 24,
+      "popular_n": 97,
+      "obscure_n": 4,
+      "popular_mean": 0.1710061049632599,
+      "obscure_mean": 0.1799920141179098,
+      "difference": -0.00898590915464989,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 25,
+      "popular_n": 99,
+      "obscure_n": 5,
+      "popular_mean": 0.16716004646920404,
+      "obscure_mean": 0.12341009570440384,
+      "difference": 0.043749950764800205,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 26,
+      "popular_n": 57,
+      "obscure_n": 5,
+      "popular_mean": 0.1666183744063928,
+      "obscure_mean": 0.19298579907370808,
+      "difference": -0.026367424667315287,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 27,
+      "popular_n": 60,
+      "obscure_n": 3,
+      "popular_mean": 0.14721805136024546,
+      "obscure_mean": 0.11402168716695009,
+      "difference": 0.03319636419329537,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 28,
+      "popular_n": 41,
+      "obscure_n": 6,
+      "popular_mean": 0.16091919609227323,
+      "obscure_mean": 0.12192066271299601,
+      "difference": 0.03899853337927722,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 29,
+      "popular_n": 34,
+      "obscure_n": 3,
+      "popular_mean": 0.13644372444735298,
+      "obscure_mean": 0.0710746935143779,
+      "difference": 0.06536903093297508,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 30,
+      "popular_n": 16,
+      "obscure_n": 8,
+      "popular_mean": 0.1186673298099922,
+      "obscure_mean": 0.1272759637630151,
+      "difference": -0.008608633953022887,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 31,
+      "popular_n": 37,
+      "obscure_n": 2,
+      "popular_mean": 0.14162005762564636,
+      "obscure_mean": 0.08433569394472727,
+      "difference": 0.05728436368091909,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 33,
+      "popular_n": 17,
+      "obscure_n": 2,
+      "popular_mean": 0.10678068362267529,
+      "obscure_mean": 0.09471976163888059,
+      "difference": 0.0120609219837947,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 35,
+      "popular_n": 18,
+      "obscure_n": 3,
+      "popular_mean": 0.13249680686019785,
+      "obscure_mean": 0.09830510318852924,
+      "difference": 0.03419170367166861,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 37,
+      "popular_n": 2,
+      "obscure_n": 2,
+      "popular_mean": 0.026922278883803153,
+      "obscure_mean": 0.1486594854141028,
+      "difference": -0.12173720653029964,
+      "contributes": false
+    },
+    {
+      "size_min": 9,
+      "size_max": 40,
+      "popular_n": 2,
+      "obscure_n": 4,
+      "popular_mean": 0.1278088076250855,
+      "obscure_mean": 0.15193618193653657,
+      "difference": -0.024127374311451066,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 10,
+      "popular_n": 537,
+      "obscure_n": 103,
+      "popular_mean": 0.308131714427362,
+      "obscure_mean": 0.27579792136813597,
+      "difference": 0.03233379305922601,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 11,
+      "popular_n": 937,
+      "obscure_n": 165,
+      "popular_mean": 0.3088828389945269,
+      "obscure_mean": 0.29396893280975556,
+      "difference": 0.014913906184771342,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 12,
+      "popular_n": 916,
+      "obscure_n": 143,
+      "popular_mean": 0.2918631043363186,
+      "obscure_mean": 0.29026505569250016,
+      "difference": 0.0015980486438184616,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 13,
+      "popular_n": 762,
+      "obscure_n": 112,
+      "popular_mean": 0.28586658061506165,
+      "obscure_mean": 0.257464836888363,
+      "difference": 0.028401743726698625,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 14,
+      "popular_n": 690,
+      "obscure_n": 82,
+      "popular_mean": 0.2783190043439012,
+      "obscure_mean": 0.2271179380663138,
+      "difference": 0.051201066277587415,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 15,
+      "popular_n": 577,
+      "obscure_n": 80,
+      "popular_mean": 0.2799201508543589,
+      "obscure_mean": 0.2639028965271017,
+      "difference": 0.016017254327257202,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 16,
+      "popular_n": 404,
+      "obscure_n": 62,
+      "popular_mean": 0.25586670325740235,
+      "obscure_mean": 0.2602649390414856,
+      "difference": -0.004398235784083271,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 17,
+      "popular_n": 422,
+      "obscure_n": 35,
+      "popular_mean": 0.23588490530489398,
+      "obscure_mean": 0.21078709689851094,
+      "difference": 0.025097808406383038,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 18,
+      "popular_n": 297,
+      "obscure_n": 44,
+      "popular_mean": 0.23365712101403616,
+      "obscure_mean": 0.2654398478703185,
+      "difference": -0.031782726856282334,
+      "contributes": true
+    },
+    {
+      "size_min": 10,
+      "size_max": 19,
+      "popular_n": 242,
+      "obscure_n": 22,
+      "popular_mean": 0.236774031102576,
+      "obscure_mean": 0.1778459211481546,
+      "difference": 0.05892810995442141,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 20,
+      "popular_n": 214,
+      "obscure_n": 25,
+      "popular_mean": 0.21095487557668416,
+      "obscure_mean": 0.21393916704906502,
+      "difference": -0.0029842914723808567,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 21,
+      "popular_n": 162,
+      "obscure_n": 15,
+      "popular_mean": 0.20642264201778354,
+      "obscure_mean": 0.22397911684510627,
+      "difference": -0.017556474827322727,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 22,
+      "popular_n": 139,
+      "obscure_n": 22,
+      "popular_mean": 0.20631245462423717,
+      "obscure_mean": 0.25042545812530353,
+      "difference": -0.04411300350106637,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 23,
+      "popular_n": 170,
+      "obscure_n": 8,
+      "popular_mean": 0.20867111859975446,
+      "obscure_mean": 0.1784960074735092,
+      "difference": 0.03017511112624527,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 24,
+      "popular_n": 86,
+      "obscure_n": 3,
+      "popular_mean": 0.19874142134356404,
+      "obscure_mean": 0.16723129715751497,
+      "difference": 0.031510124186049066,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 25,
+      "popular_n": 86,
+      "obscure_n": 2,
+      "popular_mean": 0.17225049158343586,
+      "obscure_mean": 0.21779854924387743,
+      "difference": -0.045548057660441565,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 26,
+      "popular_n": 55,
+      "obscure_n": 4,
+      "popular_mean": 0.18593088419445938,
+      "obscure_mean": 0.30275880426798424,
+      "difference": -0.11682792007352485,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 27,
+      "popular_n": 55,
+      "obscure_n": 1,
+      "popular_mean": 0.1603641256538527,
+      "obscure_mean": 0.2197106543968956,
+      "difference": -0.059346528743042914,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 28,
+      "popular_n": 31,
+      "obscure_n": 4,
+      "popular_mean": 0.1607239793172603,
+      "obscure_mean": 0.15441315052638405,
+      "difference": 0.006310828790876244,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 29,
+      "popular_n": 34,
+      "obscure_n": 4,
+      "popular_mean": 0.13855894413336284,
+      "obscure_mean": 0.10458725278310116,
+      "difference": 0.03397169135026168,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 30,
+      "popular_n": 34,
+      "obscure_n": 7,
+      "popular_mean": 0.16343839228349322,
+      "obscure_mean": 0.13770407974192853,
+      "difference": 0.02573431254156469,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 31,
+      "popular_n": 39,
+      "obscure_n": 3,
+      "popular_mean": 0.14514291402471974,
+      "obscure_mean": 0.08652750001212911,
+      "difference": 0.05861541401259063,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 32,
+      "popular_n": 21,
+      "obscure_n": 1,
+      "popular_mean": 0.13141745267906116,
+      "obscure_mean": 0.18849873025677422,
+      "difference": -0.05708127757771306,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 33,
+      "popular_n": 15,
+      "obscure_n": 3,
+      "popular_mean": 0.14025944465151519,
+      "obscure_mean": 0.15098457407948096,
+      "difference": -0.010725129427965774,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 35,
+      "popular_n": 17,
+      "obscure_n": 3,
+      "popular_mean": 0.1613496759397921,
+      "obscure_mean": 0.14164725817259574,
+      "difference": 0.019702417767196362,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 40,
+      "popular_n": 3,
+      "obscure_n": 5,
+      "popular_mean": 0.1415494004049874,
+      "obscure_mean": 0.2075982029432793,
+      "difference": -0.0660488025382919,
+      "contributes": false
+    },
+    {
+      "size_min": 10,
+      "size_max": 46,
+      "popular_n": 4,
+      "obscure_n": 1,
+      "popular_mean": 0.05383164340808869,
+      "obscure_mean": 0.15074726426753604,
+      "difference": -0.09691562085944735,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 11,
+      "popular_n": 437,
+      "obscure_n": 72,
+      "popular_mean": 0.29553162220434437,
+      "obscure_mean": 0.31009431439393403,
+      "difference": -0.014562692189589665,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 12,
+      "popular_n": 842,
+      "obscure_n": 106,
+      "popular_mean": 0.295625306950702,
+      "obscure_mean": 0.2822181407759204,
+      "difference": 0.013407166174781604,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 13,
+      "popular_n": 706,
+      "obscure_n": 108,
+      "popular_mean": 0.28387212046325777,
+      "obscure_mean": 0.23946327261649006,
+      "difference": 0.04440884784676771,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 14,
+      "popular_n": 652,
+      "obscure_n": 73,
+      "popular_mean": 0.2870420795888822,
+      "obscure_mean": 0.19649739840154423,
+      "difference": 0.090544681187338,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 15,
+      "popular_n": 565,
+      "obscure_n": 61,
+      "popular_mean": 0.2652485070916268,
+      "obscure_mean": 0.22860328456605516,
+      "difference": 0.03664522252557162,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 16,
+      "popular_n": 470,
+      "obscure_n": 55,
+      "popular_mean": 0.24415003076882316,
+      "obscure_mean": 0.2563087676530547,
+      "difference": -0.012158736884231552,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 17,
+      "popular_n": 428,
+      "obscure_n": 39,
+      "popular_mean": 0.25680194669095974,
+      "obscure_mean": 0.20404759698634597,
+      "difference": 0.05275434970461376,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 18,
+      "popular_n": 306,
+      "obscure_n": 35,
+      "popular_mean": 0.24091569245606925,
+      "obscure_mean": 0.22953963847269726,
+      "difference": 0.011376053983371992,
+      "contributes": true
+    },
+    {
+      "size_min": 11,
+      "size_max": 19,
+      "popular_n": 269,
+      "obscure_n": 27,
+      "popular_mean": 0.2362092978176748,
+      "obscure_mean": 0.20589088174115708,
+      "difference": 0.030318416076517724,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 20,
+      "popular_n": 230,
+      "obscure_n": 24,
+      "popular_mean": 0.2219836942392481,
+      "obscure_mean": 0.2093217825727908,
+      "difference": 0.012661911666457304,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 21,
+      "popular_n": 181,
+      "obscure_n": 23,
+      "popular_mean": 0.2241878537872869,
+      "obscure_mean": 0.1976429895834329,
+      "difference": 0.02654486420385399,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 22,
+      "popular_n": 136,
+      "obscure_n": 26,
+      "popular_mean": 0.21086946879784962,
+      "obscure_mean": 0.22619381528582744,
+      "difference": -0.015324346487977814,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 23,
+      "popular_n": 121,
+      "obscure_n": 6,
+      "popular_mean": 0.1858610397877176,
+      "obscure_mean": 0.21654186254368935,
+      "difference": -0.030680822755971754,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 24,
+      "popular_n": 80,
+      "obscure_n": 2,
+      "popular_mean": 0.19613514159022408,
+      "obscure_mean": 0.14981725129692952,
+      "difference": 0.046317890293294556,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 25,
+      "popular_n": 103,
+      "obscure_n": 5,
+      "popular_mean": 0.18365810498464769,
+      "obscure_mean": 0.15142311548844323,
+      "difference": 0.03223498949620446,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 26,
+      "popular_n": 65,
+      "obscure_n": 1,
+      "popular_mean": 0.1956809465198396,
+      "obscure_mean": 0.4614933885981688,
+      "difference": -0.2658124420783292,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 27,
+      "popular_n": 75,
+      "obscure_n": 2,
+      "popular_mean": 0.16538931940650273,
+      "obscure_mean": 0.10330310500598021,
+      "difference": 0.06208621440052252,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 28,
+      "popular_n": 51,
+      "obscure_n": 3,
+      "popular_mean": 0.1791719354965299,
+      "obscure_mean": 0.18063931312031892,
+      "difference": -0.0014673776237890124,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 29,
+      "popular_n": 31,
+      "obscure_n": 2,
+      "popular_mean": 0.16796736015732955,
+      "obscure_mean": 0.06501108947616402,
+      "difference": 0.10295627068116553,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 30,
+      "popular_n": 26,
+      "obscure_n": 8,
+      "popular_mean": 0.14919550879195564,
+      "obscure_mean": 0.13597958744678512,
+      "difference": 0.013215921345170523,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 31,
+      "popular_n": 55,
+      "obscure_n": 2,
+      "popular_mean": 0.1703041691562915,
+      "obscure_mean": 0.15734384766037163,
+      "difference": 0.012960321495919885,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 32,
+      "popular_n": 12,
+      "obscure_n": 1,
+      "popular_mean": 0.17829913381067444,
+      "obscure_mean": 0.13179882439283844,
+      "difference": 0.046500309417836005,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 33,
+      "popular_n": 15,
+      "obscure_n": 3,
+      "popular_mean": 0.1303030743776515,
+      "obscure_mean": 0.17813271103226702,
+      "difference": -0.04782963665461551,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 35,
+      "popular_n": 17,
+      "obscure_n": 5,
+      "popular_mean": 0.14361674631348487,
+      "obscure_mean": 0.16156344102780915,
+      "difference": -0.01794669471432428,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 36,
+      "popular_n": 8,
+      "obscure_n": 1,
+      "popular_mean": 0.10916955275104853,
+      "obscure_mean": 0.12708442367805678,
+      "difference": -0.017914870927008247,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 37,
+      "popular_n": 3,
+      "obscure_n": 1,
+      "popular_mean": 0.11740045364035451,
+      "obscure_mean": 0.21061772938141324,
+      "difference": -0.09321727574105873,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 40,
+      "popular_n": 5,
+      "obscure_n": 2,
+      "popular_mean": 0.0716326681718548,
+      "obscure_mean": 0.23182994489350198,
+      "difference": -0.16019727672164719,
+      "contributes": false
+    },
+    {
+      "size_min": 11,
+      "size_max": 57,
+      "popular_n": 2,
+      "obscure_n": 1,
+      "popular_mean": 0.04110381595253218,
+      "obscure_mean": 0.06085039641259123,
+      "difference": -0.019746580460059053,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 12,
+      "popular_n": 407,
+      "obscure_n": 44,
+      "popular_mean": 0.28221536270341163,
+      "obscure_mean": 0.2875834160328989,
+      "difference": -0.0053680533294872546,
+      "contributes": true
+    },
+    {
+      "size_min": 12,
+      "size_max": 13,
+      "popular_n": 704,
+      "obscure_n": 91,
+      "popular_mean": 0.2967785076480132,
+      "obscure_mean": 0.2767938868932691,
+      "difference": 0.01998462075474411,
+      "contributes": true
+    },
+    {
+      "size_min": 12,
+      "size_max": 14,
+      "popular_n": 626,
+      "obscure_n": 48,
+      "popular_mean": 0.2914744485482288,
+      "obscure_mean": 0.21930733100125432,
+      "difference": 0.07216711754697447,
+      "contributes": true
+    },
+    {
+      "size_min": 12,
+      "size_max": 15,
+      "popular_n": 536,
+      "obscure_n": 50,
+      "popular_mean": 0.2755684485654416,
+      "obscure_mean": 0.2980033025854254,
+      "difference": -0.022434854019983796,
+      "contributes": true
+    },
+    {
+      "size_min": 12,
+      "size_max": 16,
+      "popular_n": 477,
+      "obscure_n": 32,
+      "popular_mean": 0.26179446337092166,
+      "obscure_mean": 0.29468748013036594,
+      "difference": -0.03289301675944428,
+      "contributes": true
+    },
+    {
+      "size_min": 12,
+      "size_max": 17,
+      "popular_n": 430,
+      "obscure_n": 19,
+      "popular_mean": 0.25321468913145845,
+      "obscure_mean": 0.23889095590660933,
+      "difference": 0.014323733224849117,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 18,
+      "popular_n": 335,
+      "obscure_n": 30,
+      "popular_mean": 0.2600576343348805,
+      "obscure_mean": 0.25367116449777943,
+      "difference": 0.006386469837101061,
+      "contributes": true
+    },
+    {
+      "size_min": 12,
+      "size_max": 19,
+      "popular_n": 299,
+      "obscure_n": 8,
+      "popular_mean": 0.2556025145969074,
+      "obscure_mean": 0.26738556682292713,
+      "difference": -0.011783052226019719,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 20,
+      "popular_n": 242,
+      "obscure_n": 15,
+      "popular_mean": 0.2307464316238512,
+      "obscure_mean": 0.2257496018378965,
+      "difference": 0.004996829785954698,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 21,
+      "popular_n": 171,
+      "obscure_n": 16,
+      "popular_mean": 0.23930148659193815,
+      "obscure_mean": 0.27047449334734613,
+      "difference": -0.03117300675540799,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 22,
+      "popular_n": 178,
+      "obscure_n": 16,
+      "popular_mean": 0.22949655937058266,
+      "obscure_mean": 0.25995260604371156,
+      "difference": -0.0304560466731289,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 23,
+      "popular_n": 167,
+      "obscure_n": 2,
+      "popular_mean": 0.2162681301644325,
+      "obscure_mean": 0.22025246758544909,
+      "difference": -0.003984337421016587,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 24,
+      "popular_n": 99,
+      "obscure_n": 3,
+      "popular_mean": 0.20255428555908753,
+      "obscure_mean": 0.2378414071556871,
+      "difference": -0.03528712159659958,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 25,
+      "popular_n": 108,
+      "obscure_n": 2,
+      "popular_mean": 0.19897733232203763,
+      "obscure_mean": 0.07772800540780578,
+      "difference": 0.12124932691423185,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 26,
+      "popular_n": 63,
+      "obscure_n": 3,
+      "popular_mean": 0.22213741064300793,
+      "obscure_mean": 0.22298130264451702,
+      "difference": -0.0008438920015090834,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 27,
+      "popular_n": 78,
+      "obscure_n": 3,
+      "popular_mean": 0.17637385431013008,
+      "obscure_mean": 0.16684288947228398,
+      "difference": 0.009530964837846101,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 28,
+      "popular_n": 48,
+      "obscure_n": 2,
+      "popular_mean": 0.20320533730242554,
+      "obscure_mean": 0.22402745767720086,
+      "difference": -0.02082212037477532,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 29,
+      "popular_n": 57,
+      "obscure_n": 3,
+      "popular_mean": 0.17600444046339275,
+      "obscure_mean": 0.17422479064664143,
+      "difference": 0.0017796498167513275,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 30,
+      "popular_n": 37,
+      "obscure_n": 2,
+      "popular_mean": 0.16261665784803747,
+      "obscure_mean": 0.197985753638619,
+      "difference": -0.035369095790581534,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 31,
+      "popular_n": 45,
+      "obscure_n": 1,
+      "popular_mean": 0.16565583928004074,
+      "obscure_mean": 0.19303092830040414,
+      "difference": -0.027375089020363397,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 32,
+      "popular_n": 24,
+      "obscure_n": 1,
+      "popular_mean": 0.15744704858475472,
+      "obscure_mean": 0.18505945793001682,
+      "difference": -0.0276124093452621,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 35,
+      "popular_n": 25,
+      "obscure_n": 2,
+      "popular_mean": 0.14878896546848203,
+      "obscure_mean": 0.11370031924054759,
+      "difference": 0.035088646227934436,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 36,
+      "popular_n": 15,
+      "obscure_n": 1,
+      "popular_mean": 0.14028102450350285,
+      "obscure_mean": 0.1188166479390591,
+      "difference": 0.02146437656444375,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 40,
+      "popular_n": 9,
+      "obscure_n": 2,
+      "popular_mean": 0.13706595394277313,
+      "obscure_mean": 0.262210236331211,
+      "difference": -0.12514428238843786,
+      "contributes": false
+    },
+    {
+      "size_min": 12,
+      "size_max": 46,
+      "popular_n": 4,
+      "obscure_n": 1,
+      "popular_mean": 0.07298600908475303,
+      "obscure_mean": 0.0645439252046983,
+      "difference": 0.008442083880054727,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 13,
+      "popular_n": 274,
+      "obscure_n": 36,
+      "popular_mean": 0.28225814921359305,
+      "obscure_mean": 0.2620363930631764,
+      "difference": 0.02022175615041666,
+      "contributes": true
+    },
+    {
+      "size_min": 13,
+      "size_max": 14,
+      "popular_n": 543,
+      "obscure_n": 54,
+      "popular_mean": 0.2912818812147934,
+      "obscure_mean": 0.21427259614771302,
+      "difference": 0.07700928506708041,
+      "contributes": true
+    },
+    {
+      "size_min": 13,
+      "size_max": 15,
+      "popular_n": 519,
+      "obscure_n": 46,
+      "popular_mean": 0.2856896277118894,
+      "obscure_mean": 0.2745712139452504,
+      "difference": 0.011118413766638968,
+      "contributes": true
+    },
+    {
+      "size_min": 13,
+      "size_max": 16,
+      "popular_n": 415,
+      "obscure_n": 36,
+      "popular_mean": 0.2592567853854836,
+      "obscure_mean": 0.2830784293238758,
+      "difference": -0.0238216439383922,
+      "contributes": true
+    },
+    {
+      "size_min": 13,
+      "size_max": 17,
+      "popular_n": 429,
+      "obscure_n": 12,
+      "popular_mean": 0.25888693439789934,
+      "obscure_mean": 0.2436561518659832,
+      "difference": 0.015230782531916148,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 18,
+      "popular_n": 306,
+      "obscure_n": 28,
+      "popular_mean": 0.2575876963396399,
+      "obscure_mean": 0.31388489007473075,
+      "difference": -0.056297193735090845,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 19,
+      "popular_n": 255,
+      "obscure_n": 18,
+      "popular_mean": 0.25025327740596126,
+      "obscure_mean": 0.2522694774287975,
+      "difference": -0.0020162000228362564,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 20,
+      "popular_n": 263,
+      "obscure_n": 16,
+      "popular_mean": 0.24481687337016356,
+      "obscure_mean": 0.2517934241871971,
+      "difference": -0.006976550817033522,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 21,
+      "popular_n": 192,
+      "obscure_n": 7,
+      "popular_mean": 0.24464650540026564,
+      "obscure_mean": 0.23781112784455433,
+      "difference": 0.006835377555711314,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 22,
+      "popular_n": 183,
+      "obscure_n": 14,
+      "popular_mean": 0.24271586254363156,
+      "obscure_mean": 0.2461647432059729,
+      "difference": -0.003448880662341336,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 23,
+      "popular_n": 161,
+      "obscure_n": 8,
+      "popular_mean": 0.2223783937628737,
+      "obscure_mean": 0.21220118963811843,
+      "difference": 0.010177204124755257,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 25,
+      "popular_n": 108,
+      "obscure_n": 4,
+      "popular_mean": 0.21048058922012391,
+      "obscure_mean": 0.22914784922672174,
+      "difference": -0.018667260006597824,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 26,
+      "popular_n": 73,
+      "obscure_n": 2,
+      "popular_mean": 0.21718644286455893,
+      "obscure_mean": 0.2513636968398269,
+      "difference": -0.03417725397526797,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 27,
+      "popular_n": 78,
+      "obscure_n": 2,
+      "popular_mean": 0.1967590054929413,
+      "obscure_mean": 0.16545184839085758,
+      "difference": 0.03130715710208373,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 28,
+      "popular_n": 57,
+      "obscure_n": 1,
+      "popular_mean": 0.2010632728035117,
+      "obscure_mean": 0.12475801897998155,
+      "difference": 0.07630525382353014,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 29,
+      "popular_n": 50,
+      "obscure_n": 3,
+      "popular_mean": 0.1996124237166807,
+      "obscure_mean": 0.11015894637334689,
+      "difference": 0.08945347734333381,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 30,
+      "popular_n": 41,
+      "obscure_n": 5,
+      "popular_mean": 0.19179920352647048,
+      "obscure_mean": 0.1602643501161795,
+      "difference": 0.03153485341029097,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 31,
+      "popular_n": 56,
+      "obscure_n": 1,
+      "popular_mean": 0.16265277211541343,
+      "obscure_mean": 0.06248372482281237,
+      "difference": 0.10016904729260107,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 32,
+      "popular_n": 15,
+      "obscure_n": 1,
+      "popular_mean": 0.18140402352500598,
+      "obscure_mean": 0.17351274748457743,
+      "difference": 0.007891276040428552,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 33,
+      "popular_n": 18,
+      "obscure_n": 1,
+      "popular_mean": 0.15521496525714323,
+      "obscure_mean": 0.3110531249356687,
+      "difference": -0.1558381596785255,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 35,
+      "popular_n": 23,
+      "obscure_n": 4,
+      "popular_mean": 0.15482878231129182,
+      "obscure_mean": 0.16895588576997878,
+      "difference": -0.014127103458686951,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 40,
+      "popular_n": 4,
+      "obscure_n": 1,
+      "popular_mean": 0.1639786872186761,
+      "obscure_mean": 0.20338726117896314,
+      "difference": -0.03940857396028705,
+      "contributes": false
+    },
+    {
+      "size_min": 13,
+      "size_max": 46,
+      "popular_n": 2,
+      "obscure_n": 1,
+      "popular_mean": 0.0692155083202649,
+      "obscure_mean": 0.09888417518860523,
+      "difference": -0.029668666868340327,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 14,
+      "popular_n": 259,
+      "obscure_n": 22,
+      "popular_mean": 0.29933278206353836,
+      "obscure_mean": 0.2278702567447852,
+      "difference": 0.07146252531875316,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 15,
+      "popular_n": 488,
+      "obscure_n": 32,
+      "popular_mean": 0.2853095455905386,
+      "obscure_mean": 0.20575073127942187,
+      "difference": 0.07955881431111675,
+      "contributes": true
+    },
+    {
+      "size_min": 14,
+      "size_max": 16,
+      "popular_n": 351,
+      "obscure_n": 28,
+      "popular_mean": 0.2844243899828412,
+      "obscure_mean": 0.2623323067694638,
+      "difference": 0.02209208321337741,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 17,
+      "popular_n": 325,
+      "obscure_n": 24,
+      "popular_mean": 0.27016603923691596,
+      "obscure_mean": 0.24864108047754097,
+      "difference": 0.02152495875937499,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 18,
+      "popular_n": 302,
+      "obscure_n": 17,
+      "popular_mean": 0.27383527632021587,
+      "obscure_mean": 0.2101778720011722,
+      "difference": 0.06365740431904368,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 19,
+      "popular_n": 231,
+      "obscure_n": 13,
+      "popular_mean": 0.2683552797732205,
+      "obscure_mean": 0.2624450369210153,
+      "difference": 0.005910242852205205,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 20,
+      "popular_n": 220,
+      "obscure_n": 9,
+      "popular_mean": 0.24462261615688657,
+      "obscure_mean": 0.19509044719139085,
+      "difference": 0.049532168965495726,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 21,
+      "popular_n": 195,
+      "obscure_n": 7,
+      "popular_mean": 0.2872470385996654,
+      "obscure_mean": 0.1636995184083061,
+      "difference": 0.12354752019135928,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 22,
+      "popular_n": 131,
+      "obscure_n": 9,
+      "popular_mean": 0.2624124800955649,
+      "obscure_mean": 0.1898874774338147,
+      "difference": 0.07252500266175019,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 23,
+      "popular_n": 145,
+      "obscure_n": 7,
+      "popular_mean": 0.23297320805172084,
+      "obscure_mean": 0.17384339648786504,
+      "difference": 0.0591298115638558,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 24,
+      "popular_n": 94,
+      "obscure_n": 1,
+      "popular_mean": 0.22451962928474573,
+      "obscure_mean": 0.39721509264954613,
+      "difference": -0.1726954633648004,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 25,
+      "popular_n": 112,
+      "obscure_n": 2,
+      "popular_mean": 0.2236357570339334,
+      "obscure_mean": 0.3034271119467651,
+      "difference": -0.07979135491283168,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 26,
+      "popular_n": 80,
+      "obscure_n": 3,
+      "popular_mean": 0.22865401010992564,
+      "obscure_mean": 0.21921360782447355,
+      "difference": 0.009440402285452093,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 27,
+      "popular_n": 74,
+      "obscure_n": 6,
+      "popular_mean": 0.21647064184402812,
+      "obscure_mean": 0.13039630348528136,
+      "difference": 0.08607433835874675,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 28,
+      "popular_n": 62,
+      "obscure_n": 3,
+      "popular_mean": 0.22910719769922816,
+      "obscure_mean": 0.2898091571369407,
+      "difference": -0.06070195943771256,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 30,
+      "popular_n": 38,
+      "obscure_n": 5,
+      "popular_mean": 0.2053219608681998,
+      "obscure_mean": 0.21078987631384213,
+      "difference": -0.005467915445642346,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 32,
+      "popular_n": 27,
+      "obscure_n": 3,
+      "popular_mean": 0.18972385539937348,
+      "obscure_mean": 0.18350709277714325,
+      "difference": 0.006216762622230226,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 35,
+      "popular_n": 18,
+      "obscure_n": 1,
+      "popular_mean": 0.18960552773821018,
+      "obscure_mean": 0.2533955992772279,
+      "difference": -0.0637900715390177,
+      "contributes": false
+    },
+    {
+      "size_min": 14,
+      "size_max": 40,
+      "popular_n": 6,
+      "obscure_n": 1,
+      "popular_mean": 0.18140984871874363,
+      "obscure_mean": 0.28810661711549773,
+      "difference": -0.1066967683967541,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 15,
+      "popular_n": 202,
+      "obscure_n": 10,
+      "popular_mean": 0.2963048404012417,
+      "obscure_mean": 0.2502389459371281,
+      "difference": 0.04606589446411363,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 16,
+      "popular_n": 356,
+      "obscure_n": 26,
+      "popular_mean": 0.26694904318381946,
+      "obscure_mean": 0.2570136740072541,
+      "difference": 0.009935369176565345,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 17,
+      "popular_n": 338,
+      "obscure_n": 12,
+      "popular_mean": 0.27345032842258993,
+      "obscure_mean": 0.2562477364848172,
+      "difference": 0.017202591937772738,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 18,
+      "popular_n": 266,
+      "obscure_n": 14,
+      "popular_mean": 0.27267781123939966,
+      "obscure_mean": 0.2649504761561222,
+      "difference": 0.007727335083277442,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 19,
+      "popular_n": 241,
+      "obscure_n": 12,
+      "popular_mean": 0.26945776245748543,
+      "obscure_mean": 0.24995370456162305,
+      "difference": 0.019504057895862376,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 20,
+      "popular_n": 217,
+      "obscure_n": 15,
+      "popular_mean": 0.25347645153809584,
+      "obscure_mean": 0.2385001617637401,
+      "difference": 0.01497628977435575,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 21,
+      "popular_n": 197,
+      "obscure_n": 11,
+      "popular_mean": 0.28615820767154115,
+      "obscure_mean": 0.31303265276030695,
+      "difference": -0.026874445088765797,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 22,
+      "popular_n": 134,
+      "obscure_n": 13,
+      "popular_mean": 0.25102948873842224,
+      "obscure_mean": 0.25327595490155197,
+      "difference": -0.0022464661631297345,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 23,
+      "popular_n": 175,
+      "obscure_n": 2,
+      "popular_mean": 0.22874237941532116,
+      "obscure_mean": 0.17874597328092867,
+      "difference": 0.04999640613439249,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 25,
+      "popular_n": 126,
+      "obscure_n": 3,
+      "popular_mean": 0.2537239658845433,
+      "obscure_mean": 0.17368132960829344,
+      "difference": 0.08004263627624988,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 26,
+      "popular_n": 63,
+      "obscure_n": 4,
+      "popular_mean": 0.24703742415424088,
+      "obscure_mean": 0.3727306492964738,
+      "difference": -0.12569322514223294,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 27,
+      "popular_n": 80,
+      "obscure_n": 1,
+      "popular_mean": 0.2196030760694499,
+      "obscure_mean": 0.1790556299882827,
+      "difference": 0.0405474460811672,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 28,
+      "popular_n": 54,
+      "obscure_n": 7,
+      "popular_mean": 0.22606861241976287,
+      "obscure_mean": 0.18437933298188722,
+      "difference": 0.04168927943787565,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 29,
+      "popular_n": 36,
+      "obscure_n": 1,
+      "popular_mean": 0.1927790101218043,
+      "obscure_mean": 0.06498530543957533,
+      "difference": 0.12779370468222895,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 30,
+      "popular_n": 47,
+      "obscure_n": 2,
+      "popular_mean": 0.20652219141385303,
+      "obscure_mean": 0.10467804641837898,
+      "difference": 0.10184414499547405,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 31,
+      "popular_n": 54,
+      "obscure_n": 2,
+      "popular_mean": 0.17209503975948068,
+      "obscure_mean": 0.10900264021221975,
+      "difference": 0.06309239954726092,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 32,
+      "popular_n": 26,
+      "obscure_n": 2,
+      "popular_mean": 0.21706821880010388,
+      "obscure_mean": 0.12541501089229928,
+      "difference": 0.0916532079078046,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 35,
+      "popular_n": 17,
+      "obscure_n": 1,
+      "popular_mean": 0.17849360275846676,
+      "obscure_mean": 0.1311020211177865,
+      "difference": 0.047391581640680275,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 40,
+      "popular_n": 6,
+      "obscure_n": 3,
+      "popular_mean": 0.1799538912071342,
+      "obscure_mean": 0.26675188022845037,
+      "difference": -0.08679798902131616,
+      "contributes": false
+    },
+    {
+      "size_min": 15,
+      "size_max": 44,
+      "popular_n": 8,
+      "obscure_n": 1,
+      "popular_mean": 0.1908660200680803,
+      "obscure_mean": 0.16152754031179556,
+      "difference": 0.02933847975628473,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 16,
+      "popular_n": 151,
+      "obscure_n": 13,
+      "popular_mean": 0.25906995753253276,
+      "obscure_mean": 0.26435685829318767,
+      "difference": -0.005286900760654911,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 17,
+      "popular_n": 295,
+      "obscure_n": 16,
+      "popular_mean": 0.2688253547637638,
+      "obscure_mean": 0.23658929904922835,
+      "difference": 0.032236055714535444,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 18,
+      "popular_n": 219,
+      "obscure_n": 9,
+      "popular_mean": 0.25265030390557464,
+      "obscure_mean": 0.25561979280942737,
+      "difference": -0.002969488903852735,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 19,
+      "popular_n": 219,
+      "obscure_n": 17,
+      "popular_mean": 0.27503400975144354,
+      "obscure_mean": 0.2603181082936551,
+      "difference": 0.01471590145778845,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 20,
+      "popular_n": 214,
+      "obscure_n": 7,
+      "popular_mean": 0.25156268892777534,
+      "obscure_mean": 0.17607415636514476,
+      "difference": 0.07548853256263058,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 21,
+      "popular_n": 157,
+      "obscure_n": 7,
+      "popular_mean": 0.25749341589268804,
+      "obscure_mean": 0.2328136976107474,
+      "difference": 0.024679718281940627,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 22,
+      "popular_n": 153,
+      "obscure_n": 10,
+      "popular_mean": 0.2499638390820463,
+      "obscure_mean": 0.2991128211844105,
+      "difference": -0.04914898210236421,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 23,
+      "popular_n": 138,
+      "obscure_n": 3,
+      "popular_mean": 0.22691375291677982,
+      "obscure_mean": 0.2187659777832245,
+      "difference": 0.008147775133555302,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 24,
+      "popular_n": 117,
+      "obscure_n": 2,
+      "popular_mean": 0.2337290209742338,
+      "obscure_mean": 0.2728885141715336,
+      "difference": -0.039159493197299805,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 26,
+      "popular_n": 70,
+      "obscure_n": 1,
+      "popular_mean": 0.2286494035498023,
+      "obscure_mean": 0.24854661692750976,
+      "difference": -0.019897213377707473,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 27,
+      "popular_n": 69,
+      "obscure_n": 7,
+      "popular_mean": 0.2325209675172884,
+      "obscure_mean": 0.1721828855913144,
+      "difference": 0.06033808192597401,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 28,
+      "popular_n": 60,
+      "obscure_n": 2,
+      "popular_mean": 0.24804272067064362,
+      "obscure_mean": 0.1092609822146671,
+      "difference": 0.13878173845597652,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 30,
+      "popular_n": 52,
+      "obscure_n": 7,
+      "popular_mean": 0.17629919769177554,
+      "obscure_mean": 0.2584430947319773,
+      "difference": -0.08214389704020175,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 33,
+      "popular_n": 21,
+      "obscure_n": 3,
+      "popular_mean": 0.16553318695317362,
+      "obscure_mean": 0.18727120394931393,
+      "difference": -0.021738016996140308,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 35,
+      "popular_n": 25,
+      "obscure_n": 1,
+      "popular_mean": 0.19156859141175014,
+      "obscure_mean": 0.11304430331721059,
+      "difference": 0.07852428809453955,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 37,
+      "popular_n": 7,
+      "obscure_n": 1,
+      "popular_mean": 0.1761915717824038,
+      "obscure_mean": 0.3087526190463966,
+      "difference": -0.13256104726399282,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 40,
+      "popular_n": 7,
+      "obscure_n": 2,
+      "popular_mean": 0.13319787833490468,
+      "obscure_mean": 0.1761133515024046,
+      "difference": -0.04291547316749991,
+      "contributes": false
+    },
+    {
+      "size_min": 16,
+      "size_max": 57,
+      "popular_n": 7,
+      "obscure_n": 1,
+      "popular_mean": 0.11354938325469303,
+      "obscure_mean": 0.06278872830757973,
+      "difference": 0.05076065494711331,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 17,
+      "popular_n": 128,
+      "obscure_n": 4,
+      "popular_mean": 0.251583053737354,
+      "obscure_mean": 0.20040913479662445,
+      "difference": 0.05117391894072956,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 18,
+      "popular_n": 250,
+      "obscure_n": 9,
+      "popular_mean": 0.2757530592487757,
+      "obscure_mean": 0.20086779876305688,
+      "difference": 0.07488526048571881,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 19,
+      "popular_n": 203,
+      "obscure_n": 7,
+      "popular_mean": 0.27370513979504235,
+      "obscure_mean": 0.3072302981424663,
+      "difference": -0.03352515834742392,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 20,
+      "popular_n": 190,
+      "obscure_n": 3,
+      "popular_mean": 0.2630808536714252,
+      "obscure_mean": 0.23814389466486896,
+      "difference": 0.024936959006556236,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 21,
+      "popular_n": 163,
+      "obscure_n": 6,
+      "popular_mean": 0.26614334915967386,
+      "obscure_mean": 0.2648304229260974,
+      "difference": 0.0013129262335764835,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 22,
+      "popular_n": 129,
+      "obscure_n": 4,
+      "popular_mean": 0.2617721786467277,
+      "obscure_mean": 0.32453904456323673,
+      "difference": -0.06276686591650904,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 23,
+      "popular_n": 166,
+      "obscure_n": 1,
+      "popular_mean": 0.2643542220525103,
+      "obscure_mean": 0.12731798766709013,
+      "difference": 0.13703623438542017,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 24,
+      "popular_n": 98,
+      "obscure_n": 1,
+      "popular_mean": 0.24346883924709756,
+      "obscure_mean": 0.26435526711790164,
+      "difference": -0.02088642787080408,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 25,
+      "popular_n": 103,
+      "obscure_n": 3,
+      "popular_mean": 0.24664992012700906,
+      "obscure_mean": 0.2677080776296114,
+      "difference": -0.021058157502602343,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 26,
+      "popular_n": 66,
+      "obscure_n": 2,
+      "popular_mean": 0.25394648731881214,
+      "obscure_mean": 0.3431427011832123,
+      "difference": -0.08919621386440013,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 27,
+      "popular_n": 67,
+      "obscure_n": 1,
+      "popular_mean": 0.21226316842665172,
+      "obscure_mean": 0.20897282133399245,
+      "difference": 0.003290347092659268,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 28,
+      "popular_n": 59,
+      "obscure_n": 1,
+      "popular_mean": 0.22974301936916136,
+      "obscure_mean": 0.26890627889874025,
+      "difference": -0.03916325952957889,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 30,
+      "popular_n": 45,
+      "obscure_n": 2,
+      "popular_mean": 0.22350079327382724,
+      "obscure_mean": 0.1956580734983435,
+      "difference": 0.02784271977548375,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 36,
+      "popular_n": 19,
+      "obscure_n": 1,
+      "popular_mean": 0.14783316999243712,
+      "obscure_mean": 0.1340410861805652,
+      "difference": 0.013792083811871914,
+      "contributes": false
+    },
+    {
+      "size_min": 17,
+      "size_max": 40,
+      "popular_n": 11,
+      "obscure_n": 1,
+      "popular_mean": 0.0999949591815304,
+      "obscure_mean": 0.40545186026883223,
+      "difference": -0.30545690108730184,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 18,
+      "popular_n": 98,
+      "obscure_n": 2,
+      "popular_mean": 0.2622298733914725,
+      "obscure_mean": 0.27025631377252307,
+      "difference": -0.008026440381050548,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 19,
+      "popular_n": 172,
+      "obscure_n": 5,
+      "popular_mean": 0.29049402140705977,
+      "obscure_mean": 0.23244202897840496,
+      "difference": 0.0580519924286548,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 20,
+      "popular_n": 171,
+      "obscure_n": 7,
+      "popular_mean": 0.2706148095386455,
+      "obscure_mean": 0.35144802672855363,
+      "difference": -0.08083321718990816,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 21,
+      "popular_n": 136,
+      "obscure_n": 4,
+      "popular_mean": 0.27752518426044887,
+      "obscure_mean": 0.3160007338186446,
+      "difference": -0.03847554955819571,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 22,
+      "popular_n": 112,
+      "obscure_n": 5,
+      "popular_mean": 0.2772537007248301,
+      "obscure_mean": 0.260099412607414,
+      "difference": 0.017154288117416094,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 26,
+      "popular_n": 56,
+      "obscure_n": 1,
+      "popular_mean": 0.25872999497264326,
+      "obscure_mean": 0.3747738686197327,
+      "difference": -0.11604387364708946,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 28,
+      "popular_n": 64,
+      "obscure_n": 1,
+      "popular_mean": 0.2640730455006992,
+      "obscure_mean": 0.25642552580997463,
+      "difference": 0.00764751969072458,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 30,
+      "popular_n": 44,
+      "obscure_n": 1,
+      "popular_mean": 0.2415984657930631,
+      "obscure_mean": 0.1544213551284977,
+      "difference": 0.0871771106645654,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 32,
+      "popular_n": 17,
+      "obscure_n": 1,
+      "popular_mean": 0.2373784666613784,
+      "obscure_mean": 0.28188585857144755,
+      "difference": -0.04450739191006914,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 35,
+      "popular_n": 23,
+      "obscure_n": 1,
+      "popular_mean": 0.16934325184341137,
+      "obscure_mean": 0.08736858763031696,
+      "difference": 0.0819746642130944,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 40,
+      "popular_n": 14,
+      "obscure_n": 1,
+      "popular_mean": 0.1962069554948632,
+      "obscure_mean": 0.2647109118114102,
+      "difference": -0.06850395631654702,
+      "contributes": false
+    },
+    {
+      "size_min": 18,
+      "size_max": 57,
+      "popular_n": 5,
+      "obscure_n": 1,
+      "popular_mean": 0.11610500787935818,
+      "obscure_mean": 0.1064340086612441,
+      "difference": 0.009670999218114082,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 19,
+      "popular_n": 83,
+      "obscure_n": 4,
+      "popular_mean": 0.28031431216969316,
+      "obscure_mean": 0.1746797754037495,
+      "difference": 0.10563453676594367,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 20,
+      "popular_n": 172,
+      "obscure_n": 5,
+      "popular_mean": 0.26739213174795967,
+      "obscure_mean": 0.22318525202251333,
+      "difference": 0.044206879725446346,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 21,
+      "popular_n": 118,
+      "obscure_n": 6,
+      "popular_mean": 0.29631757458534463,
+      "obscure_mean": 0.29382562247865845,
+      "difference": 0.0024919521066861794,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 22,
+      "popular_n": 119,
+      "obscure_n": 3,
+      "popular_mean": 0.267752850922713,
+      "obscure_mean": 0.26137728404371025,
+      "difference": 0.006375566879002759,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 23,
+      "popular_n": 122,
+      "obscure_n": 2,
+      "popular_mean": 0.25614110264050227,
+      "obscure_mean": 0.32196976764298396,
+      "difference": -0.06582866500248169,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 24,
+      "popular_n": 72,
+      "obscure_n": 1,
+      "popular_mean": 0.25537240925492255,
+      "obscure_mean": 0.265788373590984,
+      "difference": -0.010415964336061456,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 26,
+      "popular_n": 62,
+      "obscure_n": 2,
+      "popular_mean": 0.27515736034653443,
+      "obscure_mean": 0.27807179285585504,
+      "difference": -0.002914432509320608,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 27,
+      "popular_n": 63,
+      "obscure_n": 2,
+      "popular_mean": 0.2284353156443737,
+      "obscure_mean": 0.2741253222902661,
+      "difference": -0.0456900066458924,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 29,
+      "popular_n": 43,
+      "obscure_n": 1,
+      "popular_mean": 0.23433134001188197,
+      "obscure_mean": 0.0694869109171503,
+      "difference": 0.16484442909473168,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 30,
+      "popular_n": 49,
+      "obscure_n": 5,
+      "popular_mean": 0.25213020058163854,
+      "obscure_mean": 0.16698838307104816,
+      "difference": 0.08514181751059038,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 32,
+      "popular_n": 19,
+      "obscure_n": 1,
+      "popular_mean": 0.18448142437724827,
+      "obscure_mean": 0.19030279841189346,
+      "difference": -0.005821374034645194,
+      "contributes": false
+    },
+    {
+      "size_min": 19,
+      "size_max": 33,
+      "popular_n": 21,
+      "obscure_n": 2,
+      "popular_mean": 0.20767999702480827,
+      "obscure_mean": 0.139777520454807,
+      "difference": 0.06790247657000126,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 20,
+      "popular_n": 99,
+      "obscure_n": 1,
+      "popular_mean": 0.29946849724031055,
+      "obscure_mean": 0.3221083888487513,
+      "difference": -0.022639891608440765,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 21,
+      "popular_n": 125,
+      "obscure_n": 4,
+      "popular_mean": 0.28946369962791335,
+      "obscure_mean": 0.1900794379984418,
+      "difference": 0.09938426162947156,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 22,
+      "popular_n": 143,
+      "obscure_n": 8,
+      "popular_mean": 0.2870239952626842,
+      "obscure_mean": 0.251787570711521,
+      "difference": 0.03523642455116316,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 23,
+      "popular_n": 121,
+      "obscure_n": 1,
+      "popular_mean": 0.2762415274596233,
+      "obscure_mean": 0.07858715816201342,
+      "difference": 0.1976543692976099,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 25,
+      "popular_n": 106,
+      "obscure_n": 1,
+      "popular_mean": 0.26436430108322695,
+      "obscure_mean": 0.034303380707675274,
+      "difference": 0.23006092037555168,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 30,
+      "popular_n": 59,
+      "obscure_n": 2,
+      "popular_mean": 0.26138960346953993,
+      "obscure_mean": 0.23497379266198884,
+      "difference": 0.026415810807551093,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 33,
+      "popular_n": 22,
+      "obscure_n": 1,
+      "popular_mean": 0.2217181829245377,
+      "obscure_mean": 0.21127518710297363,
+      "difference": 0.010442995821564077,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 35,
+      "popular_n": 14,
+      "obscure_n": 1,
+      "popular_mean": 0.21325369783678477,
+      "obscure_mean": 0.11723168561990187,
+      "difference": 0.0960220122168829,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 40,
+      "popular_n": 18,
+      "obscure_n": 1,
+      "popular_mean": 0.17953395503317884,
+      "obscure_mean": 0.2754621055752223,
+      "difference": -0.09592815054204348,
+      "contributes": false
+    },
+    {
+      "size_min": 20,
+      "size_max": 46,
+      "popular_n": 9,
+      "obscure_n": 1,
+      "popular_mean": 0.15592061454037573,
+      "obscure_mean": 0.20053282468301292,
+      "difference": -0.04461221014263719,
+      "contributes": false
+    },
+    {
+      "size_min": 21,
+      "size_max": 21,
+      "popular_n": 54,
+      "obscure_n": 2,
+      "popular_mean": 0.2781378317320905,
+      "obscure_mean": 0.3324122946528851,
+      "difference": -0.054274462920794575,
+      "contributes": false
+    },
+    {
+      "size_min": 21,
+      "size_max": 22,
+      "popular_n": 77,
+      "obscure_n": 6,
+      "popular_mean": 0.28152834717523495,
+      "obscure_mean": 0.3019238537399434,
+      "difference": -0.020395506564708454,
+      "contributes": false
+    },
+    {
+      "size_min": 21,
+      "size_max": 26,
+      "popular_n": 61,
+      "obscure_n": 1,
+      "popular_mean": 0.25700980788974354,
+      "obscure_mean": 0.2882013656365001,
+      "difference": -0.031191557746756582,
+      "contributes": false
+    },
+    {
+      "size_min": 21,
+      "size_max": 28,
+      "popular_n": 41,
+      "obscure_n": 1,
+      "popular_mean": 0.25485645329723117,
+      "obscure_mean": 0.14564306345416111,
+      "difference": 0.10921338984307005,
+      "contributes": false
+    },
+    {
+      "size_min": 21,
+      "size_max": 29,
+      "popular_n": 29,
+      "obscure_n": 1,
+      "popular_mean": 0.24950788357892859,
+      "obscure_mean": 0.17838646518350323,
+      "difference": 0.07112141839542535,
+      "contributes": false
+    },
+    {
+      "size_min": 21,
+      "size_max": 57,
+      "popular_n": 6,
+      "obscure_n": 1,
+      "popular_mean": 0.15209412443948742,
+      "obscure_mean": 0.14931132485138743,
+      "difference": 0.002782799588099988,
+      "contributes": false
+    },
+    {
+      "size_min": 22,
+      "size_max": 22,
+      "popular_n": 49,
+      "obscure_n": 2,
+      "popular_mean": 0.27795475838172956,
+      "obscure_mean": 0.18497870720716472,
+      "difference": 0.09297605117456484,
+      "contributes": false
+    },
+    {
+      "size_min": 22,
+      "size_max": 23,
+      "popular_n": 104,
+      "obscure_n": 3,
+      "popular_mean": 0.27291975761325626,
+      "obscure_mean": 0.28577890563985964,
+      "difference": -0.012859148026603373,
+      "contributes": false
+    },
+    {
+      "size_min": 22,
+      "size_max": 30,
+      "popular_n": 51,
+      "obscure_n": 2,
+      "popular_mean": 0.2572813749701068,
+      "obscure_mean": 0.2369047171602069,
+      "difference": 0.02037665780989989,
+      "contributes": false
+    },
+    {
+      "size_min": 22,
+      "size_max": 40,
+      "popular_n": 13,
+      "obscure_n": 1,
+      "popular_mean": 0.20060202757574044,
+      "obscure_mean": 0.15538010319126763,
+      "difference": 0.04522192438447281,
+      "contributes": false
+    },
+    {
+      "size_min": 23,
+      "size_max": 28,
+      "popular_n": 64,
+      "obscure_n": 1,
+      "popular_mean": 0.25459990601623206,
+      "obscure_mean": 0.10645058531570613,
+      "difference": 0.14814932070052594,
+      "contributes": false
+    },
+    {
+      "size_min": 23,
+      "size_max": 29,
+      "popular_n": 27,
+      "obscure_n": 1,
+      "popular_mean": 0.23204447197252295,
+      "obscure_mean": 0.20446853389755873,
+      "difference": 0.027575938074964224,
+      "contributes": false
+    },
+    {
+      "size_min": 23,
+      "size_max": 30,
+      "popular_n": 62,
+      "obscure_n": 2,
+      "popular_mean": 0.24442660353679274,
+      "obscure_mean": 0.2427048001946399,
+      "difference": 0.0017218033421528278,
+      "contributes": false
+    },
+    {
+      "size_min": 23,
+      "size_max": 37,
+      "popular_n": 16,
+      "obscure_n": 1,
+      "popular_mean": 0.22786344688190416,
+      "obscure_mean": 0.3328703583772637,
+      "difference": -0.10500691149535954,
+      "contributes": false
+    },
+    {
+      "size_min": 23,
+      "size_max": 39,
+      "popular_n": 10,
+      "obscure_n": 1,
+      "popular_mean": 0.21441464536671617,
+      "obscure_mean": 0.3022391010704879,
+      "difference": -0.08782445570377173,
+      "contributes": false
+    },
+    {
+      "size_min": 23,
+      "size_max": 44,
+      "popular_n": 12,
+      "obscure_n": 1,
+      "popular_mean": 0.16851642138323486,
+      "obscure_mean": 0.21365331693361714,
+      "difference": -0.04513689555038228,
+      "contributes": false
+    },
+    {
+      "size_min": 24,
+      "size_max": 29,
+      "popular_n": 32,
+      "obscure_n": 1,
+      "popular_mean": 0.23326220548266194,
+      "obscure_mean": 0.11058192843442699,
+      "difference": 0.12268027704823495,
+      "contributes": false
+    },
+    {
+      "size_min": 24,
+      "size_max": 40,
+      "popular_n": 14,
+      "obscure_n": 1,
+      "popular_mean": 0.21327545967243994,
+      "obscure_mean": 0.1353845373184345,
+      "difference": 0.07789092235400544,
+      "contributes": false
+    },
+    {
+      "size_min": 25,
+      "size_max": 32,
+      "popular_n": 28,
+      "obscure_n": 1,
+      "popular_mean": 0.2557668281729073,
+      "obscure_mean": 0.1442974316135565,
+      "difference": 0.11146939655935081,
+      "contributes": false
+    },
+    {
+      "size_min": 26,
+      "size_max": 27,
+      "popular_n": 45,
+      "obscure_n": 1,
+      "popular_mean": 0.25977527386528526,
+      "obscure_mean": 0.15812568416894632,
+      "difference": 0.10164958969633894,
+      "contributes": false
+    },
+    {
+      "size_min": 26,
+      "size_max": 40,
+      "popular_n": 18,
+      "obscure_n": 1,
+      "popular_mean": 0.224307475565651,
+      "obscure_mean": 0.3259317155972921,
+      "difference": -0.10162424003164111,
+      "contributes": false
+    },
+    {
+      "size_min": 27,
+      "size_max": 30,
+      "popular_n": 53,
+      "obscure_n": 1,
+      "popular_mean": 0.23987092368170412,
+      "obscure_mean": 0.2460478982204922,
+      "difference": -0.0061769745387880715,
+      "contributes": false
+    },
+    {
+      "size_min": 27,
+      "size_max": 32,
+      "popular_n": 21,
+      "obscure_n": 1,
+      "popular_mean": 0.23136571045741855,
+      "obscure_mean": 0.1450048835107545,
+      "difference": 0.08636082694666405,
+      "contributes": false
+    },
+    {
+      "size_min": 27,
+      "size_max": 33,
+      "popular_n": 14,
+      "obscure_n": 1,
+      "popular_mean": 0.25947413153350884,
+      "obscure_mean": 0.10025474603681335,
+      "difference": 0.1592193854966955,
+      "contributes": false
+    },
+    {
+      "size_min": 28,
+      "size_max": 30,
+      "popular_n": 27,
+      "obscure_n": 1,
+      "popular_mean": 0.2391311123099241,
+      "obscure_mean": 0.31025766962752926,
+      "difference": -0.07112655731760517,
+      "contributes": false
+    },
+    {
+      "size_min": 28,
+      "size_max": 35,
+      "popular_n": 15,
+      "obscure_n": 1,
+      "popular_mean": 0.256175949684363,
+      "obscure_mean": 0.14822792603046864,
+      "difference": 0.10794802365389439,
+      "contributes": false
+    },
+    {
+      "size_min": 29,
+      "size_max": 29,
+      "popular_n": 6,
+      "obscure_n": 1,
+      "popular_mean": 0.3198922834853296,
+      "obscure_mean": 0.18747951003554347,
+      "difference": 0.13241277344978614,
+      "contributes": false
+    },
+    {
+      "size_min": 29,
+      "size_max": 31,
+      "popular_n": 20,
+      "obscure_n": 1,
+      "popular_mean": 0.26126011972837404,
+      "obscure_mean": 0.11509704309288117,
+      "difference": 0.14616307663549288,
+      "contributes": false
+    },
+    {
+      "size_min": 30,
+      "size_max": 33,
+      "popular_n": 19,
+      "obscure_n": 1,
+      "popular_mean": 0.2217198312098182,
+      "obscure_mean": 0.19997557368502264,
+      "difference": 0.021744257524795557,
+      "contributes": false
+    },
+    {
+      "size_min": 30,
+      "size_max": 35,
+      "popular_n": 25,
+      "obscure_n": 1,
+      "popular_mean": 0.21653962825681672,
+      "obscure_mean": 0.08830129710185317,
+      "difference": 0.12823833115496355,
+      "contributes": false
+    },
+    {
+      "size_min": 33,
+      "size_max": 40,
+      "popular_n": 7,
+      "obscure_n": 1,
+      "popular_mean": 0.2507598146565927,
+      "obscure_mean": 0.11913692449856036,
+      "difference": 0.13162289015803233,
+      "contributes": false
+    },
+    {
+      "size_min": 35,
+      "size_max": 57,
+      "popular_n": 3,
+      "obscure_n": 1,
+      "popular_mean": 0.14118943346991877,
+      "obscure_mean": 0.16099668251009536,
+      "difference": -0.019807249040176583,
+      "contributes": false
+    }
+  ],
+  "seconds": 4.5
+}

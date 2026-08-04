@@ -185,3 +185,60 @@ had nothing to count — **a green from those counters here is not evidence they
 Their first real exercise is the `ALG-B` and union/uncapped cells, where the absent class
 exists by construction. A liveness check on those counters is owed at the sweeps rather
 than assumed.
+
+---
+
+## §4 — `CRE-T4`: `CRE-D1`, the banding read
+
+**Figures: `builder/analysis/2026-08-03-cap-reevaluation/cre_d1.json`.** Cited by key.
+
+### The pin-5 divergence, resolved as the pin instructs
+
+`cre_probe3b.py` was read before implementing. It and the prereg's §4 words **disagree
+on aggregation**: the probe pools every labelled edge in a band and takes a **median**
+difference with no size-matching, while §4 requires `(min, max)` label-set-size cells,
+**≥ 30 edges in each band** per cell, per-cell **means**, and an edge-weighted mean of
+per-cell differences. **The words govern** (plan pin 5), so the size-matched
+mean-of-means is the headline and the divergence is recorded in `cre_d1.json`'s
+`aggregation` block as well as here.
+
+**One idf divergence was suspected and does not exist.** Pin 5 fixes `n_artists` at the
+adopted node count while directing the idf table at `frames["W4"]`, which raised the
+possibility of a label whose document frequency exceeds `n_artists` and so earns a
+*negative* rarity weight. Checked before implementing: `five_frames()` returns `W4` keyed
+on **exactly** the artifact's 74,193 nodes, so the plan's form and the probe's inline
+count are the same population and no label goes negative under either. No divergence to
+record.
+
+**One genuine ambiguity in §4, pinned and made reversible rather than argued.** "The
+cell's contributing edge count" does not say whether that is the popular count, the
+obscure count, or their sum. Sum is used, and the **full per-cell table is committed with
+both counts**, so any other weighting is recomputable from the output without re-running.
+
+### Branch: `not_supported` — the expected one, and robust to the divergence
+
+Both bands clear the 500-labelled-edge readability floor comfortably. **The measured
+difference is positive**, where the hypothesis needed ≤ −0.05: this is not a weak
+non-result but a result in the *opposite* direction to the one `CRE-D1` was written to
+detect.
+
+**The aggregation divergence does not change the branch, which is the thing that
+mattered.** Size-matching moves the figure but not its sign, and the probe's pooled form
+— recomputed here as `probe_form_pooled_median_difference` — reproduces §9's disclosed
++0.08 to within rounding. That agreement is worth more than the headline: it is
+independent evidence that this run's frame construction, fame join, band masks and edge
+extraction match the probe's, since the two were written separately.
+
+**Consequence, applied from here on:** the `(D1-branch)` cells of §0.2 — `B-S2-P0`,
+`E-S2-P1a`, `B-S2-P1a` — **do not exist**, and no router-side tag pricing arm does.
+**`E-S2-P0` is branch-proof and runs regardless.** No amendment is owed and no pause is
+triggered.
+
+**Weakest link, recorded because every `D1` sentence must carry the labelled-edge share.**
+The two bands are not equally observed: the popular band's edges are almost entirely
+labelled, the obscure band's are around two-thirds. So the obscure-band mean is taken
+over the labelled *majority* of a population whose unlabelled remainder is much larger —
+the same coverage thinning `COH-2` measured, in the same place. It does not threaten this
+branch (the sign is wrong for the hypothesis by a wide margin, and label coverage is
+*higher* in the band the hypothesis said should be thinner), but a future reading that
+wanted to interpret the *magnitude* would have to deal with it.
