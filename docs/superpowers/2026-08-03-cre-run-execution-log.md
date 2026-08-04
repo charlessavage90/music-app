@@ -700,3 +700,45 @@ unmeasurable" trigger was written to detect, and reading it is `CRE-T11`'s work 
 `CRE-C1`'s two reporting populations — not this task's.** It is recorded here as a
 measurement and cited to the committed JSONs, never restated. **No `CRE-R` read is
 licensed, none is made, nothing is adopted, `REQ-38` is unspent.**
+
+---
+
+## §12 — Closeout outcomes (mid-flight, between `CRE-T10` and Seam 3)
+
+- **A1**: this log is the retained record, appended per task (§9–§11), not at the end.
+- **A2-mid**: handoff `2026-08-03-HANDOFF-cre-run-stage2-midflight.md` written from the
+  template header, with the **enumerations rather than a self-assessment** — the one set of
+  numbers computed and not written down, six decisions taken against, the owner
+  conversation not yet in a file, and the open decision **with a position taken**. The Seam
+  1 handoff's role line now names it as successor on next actions.
+- **A3**: owed item 1 **struck in place** in the Seam 1 handoff as HALF discharged, with
+  the date and what satisfied it. The other three conditions were re-tested against reality
+  and none has come due.
+- **A4**: **not applicable, stated rather than skipped** — no config knob was added, and
+  the prereg forbids shipped-code change.
+- **A5**: all four ports empty, verified by listener sweep rather than task list. No server
+  was started at any point this session and none was left behind; C1 is N/A, so none was
+  relaunched.
+- **B1**: `docs-lint.sh` **hard checks passed** (its `CAND` lines are cost-function weight
+  values, not adjudication figures). The `doc-auditor` then ran on the semantic half and
+  returned **no findings at any severity**, having checked the six claims it was asked to
+  disbelieve — including that owed item 1 reads as *half* discharged in all four places it
+  appears, and that `CRE-G2`(b) never names the `P0` check.
+- **B5**: `.claude/` carries **no `CRE-` description at all**, so there is nothing there to
+  have gone stale. The plan's task checkboxes are unticked by convention (T1–T7 likewise);
+  this log owns completion state. No figure is restated anywhere in the diff.
+- **B2, B3, B4**: **deliberately travel to the successor** per mid-flight scaling — they
+  want a finished artifact, and `CRE-T11` is unbuilt.
+- **C1**: N/A entry queued. Nothing changed that the owner can press.
+- **D1-mid**: tree clean and pushed; **nothing untracked**. One real catch: `cre_gates.json`
+  had never been committed at T8, because that commit used a pathspec and pathspecs do not
+  pick up untracked files. Fixed at `7f458e3`.
+- **D3**: all sixteen sweep JSONs carry their cell's `artifact_sha256`; the eleven cell
+  checksums were verified against `cre_builds.json` at session start.
+- **D4**: builder **164 passed**, `CRE-` analysis **66 passed** (38 at Seam 1, plus the 28
+  added here), api **230 passed**, frontend **107 passed**.
+- **D5**: draft PR #71, its body carrying gate outcomes, the four deferrals with their
+  conditions, provenance, and what must not be re-litigated.
+- **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
+  characters, conditional **2,155** lines, both equal to the Seam 1 figures. This session
+  touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.
