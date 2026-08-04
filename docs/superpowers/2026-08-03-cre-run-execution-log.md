@@ -522,3 +522,59 @@ does; `E-S2-P0` is branch-proof and runs.**
 - **D6**: standing layer delta **exactly 0 on both units** — unconditional **44,494**
   characters, conditional **2,155** lines, both equal to the figures at the previous
   closeout. This session touched neither `CLAUDE.md`, `.claude/`, nor `memory/`.
+
+---
+
+## §9 — `CRE-T8`: Stage 2 entry gates
+
+**Figures: `cre_gates.json`.** New session, cold from the Seam 1 handoff. Branched
+`cap-reeval-stage2` off `main` rather than continuing on `cap-reeval-run`: the handoff's
+"inline on the existing branch" instruction predates the merge of PR #70, and that branch
+is now in `main`. Nothing else about the instruction changed — execution continues inline
+on Opus, retiring at the plan's remaining seams.
+
+### Outcomes — all three gates pass
+
+- **`CRE-G1`(c)**: ruler frame **N = 74,151**, asserted inside the `Ruler` constructor.
+- **`CRE-G1`(a)** on **E-S0**: **22/22 pairs identical**, node sequence *and* stop kind,
+  mirror against production `find_journey` on the same cleaned substrate. No divergence,
+  so no harness fix is owed and the bar was never approached, let alone widened.
+- **`CRE-G1`(a)** on **B-S0**, reported QA and **not gated** (the prereg gates E only):
+  **22/22 identical**. Worth recording because it is the substrate T10 sweeps.
+- **`CRE-G2`(a)**, at the instrument-only extreme r = 1.0, against a bar of ≥ 0.5:
+  **E-S1 17/22 (0.773)**, **B-S0 21/22 (0.955)**, **B-S1 22/22 (1.000)**. **No cell is a
+  dead wire**, so a `P1` null in any of the three will be readable when T9/T10 produce one.
+  All 22 pairs were readable in every cell — no pair lost its d1 to an absent journey or
+  an empty d0 interior, so the exclusion path exists but was never taken.
+
+### Three decisions taken here, with their reasoning
+
+**1. `CRE-G1`(a) got a red half the plan did not ask for.** An identity gate is precisely
+the shape that passes vacuously: a comparison wired to itself, or a loop body that never
+runs, reports a clean 22/22 either way. This plan has already produced that exact defect
+twice — `CRE-G2`(b)'s first draft compared the toll formula against itself, and the Seam 1
+closeout's B3 check found `test_cre_screen` guarding a *copy* of the predicate it was
+meant to check. So the green run is followed by the same comparison with the mirror's
+`w_hop` moved off production's value, which **must** diverge. **It does, on 3 of 22
+pairs.** That count is small and is reported as measured: `w_hop` is the lowest-magnitude
+weight in the cost function, so this is the gentlest available perturbation, and the gate
+it discharges is *can this comparison go red at all* — for which three is as decisive as
+twenty-two. A red half is not evidence of sensitivity and is not offered as any.
+
+**2. `CRE-G2`(a) deliberately has no red half.** Its failure direction is "nothing
+changed", so a dead comparison reports zero changes and **fails**. It cannot pass
+vacuously. That asymmetry — not effort or symmetry with `G1` — is what decides where a
+control earns its cost.
+
+**3. One d0 per pair is computed and shared by both `G2`(a) arms.** Legitimate because the
+fame ramp at k = 0 is not merely zero but *not added at all* in `_dijkstra`, so the arms
+share d0 by construction and therefore share the victim the ladder presses. That is
+`CRE-G1`(b)'s claim; it is asserted per sweep run in T9 rather than assumed there.
+
+### State
+
+`cre_gates.py` is new first-party code; **Snyk `snyk_code_scan` over the analysis
+directory: 0 issues.** No shipped code, no config default and no artifact changed. **No
+`CRE-R` read is licensed by this task and none has been made**; nothing is adopted and the
+blind listen (`REQ-38`) is unspent. The four items owed at Stage 2 are untouched and all
+four remain owed.
