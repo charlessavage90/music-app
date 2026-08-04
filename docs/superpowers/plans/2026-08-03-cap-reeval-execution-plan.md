@@ -2,7 +2,18 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Role: ACTIVE — the operational plan for executing the frozen `CRE-` pre-registration.**
+**Role: COMPLETE — fully executed, 2026-08-04.** All eleven tasks ran; `CRE-T11` was the
+last and Seam 3 is reached. Accurate as the record of how the run was operated; **it is no
+longer a live instruction**, and the one task it leaves outside itself — the Stage-3
+findings note — belongs to a session that did not run the sweeps. **Two of its own
+statements were found wrong in execution and are corrected in the execution log, not
+here** (a frozen document's value is that it is frozen): its `CRE-T11` `Interfaces` block
+contradicts its own `CRE-C2` bullet about whether a graph artifact is needed, and the
+prereg governs. See
+[`../2026-08-03-cre-run-execution-log.md`](../2026-08-03-cre-run-execution-log.md) §13.
+
+*Its role while live, retained:* **the operational plan for executing the frozen `CRE-`
+pre-registration.**
 The governing *experimental* document is
 [`../specs/2026-08-03-cap-reevaluation-preregistration.md`](../specs/2026-08-03-cap-reevaluation-preregistration.md)
 (frozen `3d7b7d6`, amended once by `CRE-AM1`, `eec67a8`), which **wins wherever this plan

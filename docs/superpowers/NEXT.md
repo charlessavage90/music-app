@@ -12,17 +12,47 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-03 (Stage 2, mid-flight), when the CAP RE-EVALUATION EXPERIMENT
-completed its Stage-2 instrument gates and all sixteen depth sweeps across both data
-sets. `CRE-T11` — the criteria figures and the run-state map — is the only task left
-before Seam 3. The owner's one action is merging draft PR #71; execution then resumes at
-`CRE-T11` in a fresh session, which needs no graph artifact.**
+**Last updated: 2026-08-04 (SEAM 3), when the CAP RE-EVALUATION EXPERIMENT finished
+measuring: the criteria figures and the run-state map are computed and committed, and the
+execution plan is fully executed. The owner's one action is merging draft PR #73; the next
+work is the STAGE-3 FINDINGS NOTE, which must be written by a session that did not run the
+sweeps.**
 
 ---
 
 ## Next
 
-> ## ▶ STAGE 2 GATES AND ALL SIXTEEN SWEEPS ARE COMPLETE, 2026-08-03 (mid-flight — Seam 3 NOT reached). **The owner's one action is merging draft PR #71**; the next work is `CRE-T11` — **branching off `main` if #71 has merged, continuing on `cap-reeval-stage2` if it has not. Check, do not assume**: a handoff cannot know when merge is pressed, and the Seam 1 handoff named a branch its own PR merged out from under it.
+> ## ▶ SEAM 3 REACHED, 2026-08-04 — THE CRITERIA FIGURES ARE COMPUTED AND COMMITTED. **The owner's one action is merging draft PR #73**; the next work is the **Stage-3 findings note** — **branching off `main` if #73 has merged, off `cre-t11-scoring` if it has not. Check, do not assume**: a handoff cannot know when merge is pressed, and the Seam 1 handoff named a branch its own PR merged out from under it.
+>
+> Entry point is the current handoff:
+> [`2026-08-04-HANDOFF-cre-t11-seam3.md`](2026-08-04-HANDOFF-cre-t11-seam3.md).
+> Reasoning: [`2026-08-03-cre-run-execution-log.md`](2026-08-03-cre-run-execution-log.md)
+> (§13–§14). Governing document is the prereg,
+> [`specs/2026-08-03-cap-reevaluation-preregistration.md`](specs/2026-08-03-cap-reevaluation-preregistration.md);
+> the execution plan is now **COMPLETE**, not live. Figures live in
+> `builder/analysis/2026-08-03-cap-reevaluation/cre_scores.json` — **cited, never
+> restated.**
+>
+> **What stands, in one paragraph.** All four criteria are computed per cell over pin 9's
+> committed partition, four groups, each with its dropped set committed beside it (read the
+> counts from `cre_scores.json`; this document owns no figures). The run-state precondition is met: no specified
+> cell is unrun, both Stage-0 branches are committed, and the three `(D1-branch)` cells are
+> marked **branch-excluded rather than unrun**. **`cre_r_readable` is `true` — which says
+> only that no unrun cell bars a read. No `CRE-R` read is evaluated anywhere in the
+> committed output, none has been made, nothing is adopted, and the blind listen (`REQ-38`)
+> is unspent.** Two Seam-2 claims were overturned in execution and **must not be reverted**:
+> `CRE-C2` genuinely does need graph artifacts (the plan contradicts itself; the prereg
+> governs), and the absent-class counter is **live but unfired**, not structurally
+> unexercisable — its proof premise bounded the crawl rather than the pruned snapshot
+> population.
+>
+> **The next session must not read a prose summary of the result before opening the JSON.**
+> That is what the seam is for: the reader of results must be a session that did not run
+> them.
+>
+> ---
+
+> ## ✅ STAGE 2 GATES AND ALL SIXTEEN SWEEPS ARE COMPLETE, 2026-08-03 (mid-flight — Seam 3 NOT reached). ~~**The owner's one action is merging draft PR #71**~~ *(MERGED, `4f0687d`)*; ~~the next work is `CRE-T11`~~ *(DONE — see the top block, which owns current state)*.
 >
 > Entry point is the current handoff:
 > [`2026-08-03-HANDOFF-cre-run-stage2-midflight.md`](2026-08-03-HANDOFF-cre-run-stage2-midflight.md).

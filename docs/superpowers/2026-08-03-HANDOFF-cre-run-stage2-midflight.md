@@ -1,9 +1,16 @@
 # Handoff — the `CRE-` run, Stage 2 gates and all sixteen sweeps, 2026-08-03
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md) on next
-actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
-owns it.
+**Role: SUPERSEDED on next actions** by
+[`2026-08-04-HANDOFF-cre-t11-seam3.md`](2026-08-04-HANDOFF-cre-t11-seam3.md), which is the
+CURRENT handoff. **This document remains authoritative for Stage 2's own internals** — the
+gates, the sixteen sweeps, and what they consumed. **Two of its claims were overturned at
+`CRE-T11` and must not be reverted**: "T11 needs no graph artifact" is false for `CRE-C2`,
+and the open decision below was resolved *against* the position it takes (the absent-class
+counter is live but unfired, not structurally unexercisable) — see
+[`2026-08-03-cre-run-execution-log.md`](2026-08-03-cre-run-execution-log.md) §13.
+Supersedes [`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md) on
+next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
+which owns it.
 
 **This is a MID-FLIGHT handoff.** `CRE-T10` is complete but Seam 3 is not reached —
 `CRE-T11` remains. The retirement was triggered by **context budget**, on the owner's
@@ -60,7 +67,13 @@ figures-only scorer stays figures-only.
 7. **No `CRE-R` read is licensed and none has been made.** Nothing is adopted, no
    criterion is evaluated, the blind listen (`REQ-38`) is unspent.
 
-## Owed — three items, plus one now half-discharged
+## Owed — one open, two discharged, one standing
+
+<!-- Header updated 2026-08-04 at Seam 3: it read "three items, plus one now
+     half-discharged", which was true when written and stopped being true when items 1 and
+     3 were struck below. A stale header over corrected items is the half-struck-deferral
+     failure this project has shipped before. -->
+
 
 1. ~~**Liveness on the unmeasured-class counters.**~~ **HALF DISCHARGED 2026-08-03.**
    `interiors_null_in_snapshot` is non-zero in all seven `ALG-B` cells and
@@ -69,6 +82,10 @@ figures-only scorer stays figures-only.
    sets — that half remains owed.** *Condition:* discharged when the zero is shown
    structural, or when the findings note states the counter as unexercised. **Do not read
    the null half's discharge as covering it.**
+   > ~~**Owed.**~~ **FULLY DISCHARGED at `CRE-T11`, 2026-08-04**, by set-difference over all
+   > eleven cells — and **against the position taken below**. The zero is *not* structural:
+   > every cell contains nodes the snapshot lacks, so the counter is **live but unfired**.
+   > Figures in `cre_scores.json`; reasoning in execution log §13, correction 2.
 2. **The affine `pop_raw` map applied.** Unchanged, untouched. Three comparisons are not
    `pop_raw`-comparable: `E-S1` vs `E-S0`, `B-S0` vs `E-S0`, `B-S1` vs `B-S0`; maps are in
    `cre_screen.json`'s `affine_pop_raw_report`. *Condition:* no cross-cell `pop_raw`
@@ -76,6 +93,9 @@ figures-only scorer stays figures-only.
 3. **`S2` share quoting.** Unchanged. Any `CRE-C5` attribution on an `S2` cell quotes both
    the labelled-node share and the ≥ 2-measured-agreements share. *Condition:* discharged
    at T11 when stored beside the attribution, or when no such attribution is made.
+   > ~~**Owed.**~~ **DISCHARGED BY BRANCH at `CRE-T11`, 2026-08-04.** The obligation
+   > attached to a `B-S2` cell, and `CRE-D1`'s `not_supported` branch means no such cell
+   > exists. Recorded in `cre_scores.json` as an explicit note, not by omission.
 4. **The barred cross-read.** Unchanged, still barred.
 
 ## Every number computed that is not written down
