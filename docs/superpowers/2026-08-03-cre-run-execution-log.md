@@ -384,3 +384,89 @@ on this branch. **T11 must still store both shares beside any `CRE-C5` attributi
 that obligation is unchanged.
 
 7 unit tests pass; 26 across the suite.
+
+---
+
+## §7 — `CRE-T7`: Stage 1 screens, and SEAM 1
+
+**Figures: `cre_screen.json`.** Eleven graph cells screened: the eight non-tag cells and
+the three `ALG-E` `S2` cells.
+
+### Outcomes
+
+- **`CRE-G3`: all 22 famous pairs survive in every cell.** No pair is dropped, so every
+  Stage-2 comparison runs on the full draw and the per-comparison ≥ 8 readable floor is
+  met with room. The floor is still recomputed per comparison in Stage 2 — it is a
+  different device from the endpoint-survival one, and per analyst m12 pin (a) it plays
+  no part in the `C6` denominator.
+- **`CRE-C3`: no cell is disqualified.** Every cell's loss against its own cleaned
+  pre-cap population is well below the owner-fixed 10,000 line. The held-constant claim
+  is asserted in-run and re-checked on the committed output: one cleaned pre-cap
+  population per data set, identical across all its cells.
+- **`CRE-C6`: no cell is screened out** — **zero** zero-supply pairs in every cell. The
+  baseline carve-out was therefore never exercised, but it is encoded and tested rather
+  than left to be remembered.
+
+**Every cell proceeds to Stage 2.** Nothing was eliminated at Stage 1.
+
+### Two cautions this result needs, and neither is visible from the headline
+
+**1. "Not screened" is a floor, not a quality bar.** The screen asks only whether a
+`CRE-C1` median pass is *arithmetically impossible*. Supply is enormous for a typical
+pair-cell and as low as a **single qualifying edge** at the thinnest. A cell can pass this
+screen and still have almost nowhere to go for particular pairs, and `C6`'s per-pair rows
+are committed so that is visible rather than averaged away.
+
+**2. The tempting cross-read is NOT licensed yet, and I am recording that it is
+tempting.** It is very natural to put `CRE-C6` beside `CRE-D3` and conclude *"somewhere
+obscurer is reachable within one step, and the pricing device still will not go there —
+so the blocker is the router, not supply."* **That conclusion is barred here**, because
+the two were measured on **different substrates**: `CRE-D3` ran on the adopted artifact
+per §3.3's carve-out (no build, no cleanup), while `C6` is measured on the cleaned cells.
+The comparison a sweep licenses is `C6` beside the *sweep's own* cells, which is Stage 2's
+work. Written down now, before any sweep figure exists, so it cannot be assembled later
+as though it had always been the plan.
+
+### The affine `pop_raw` report — the T5 caveat, now measured
+
+§0.3's instrumentation row is computed for every cell against its §0.2 isolating baseline,
+and it confirms what T5 flagged: **three comparisons do not share a `pop_raw` scale** —
+`E-S1` vs `E-S0`, `B-S0` vs `E-S0`, and `B-S1` vs `B-S0`. Their affine maps are recorded
+as two floats each. The remaining seven are exactly comparable.
+
+**Consequence for Stage 2: no cross-cell sentence about `pop_raw` may be written for those
+three pairs without applying the recorded map** — and one of them, `B-S0` vs `E-S0`, is
+the data-set-isolated cell that already carries §0.4's confound rows. Nothing in the
+ladder is affected, since the cost function's jump and floor terms are computed within a
+single cell.
+
+38 tests pass across the suite.
+
+---
+
+# SEAM 1 — Stage 0 and Stage 1 are complete and committed
+
+**Everything a successor needs is a committed artifact.** Nothing is in flight, no port is
+listening, no background job survives this session.
+
+**Run state.** `CRE-D3` and `CRE-D1` have committed outcomes, both on their pre-registered
+expected branches. Eleven graph cells are built, gated and screened. **No `CRE-R` read is
+licensed and none has been made.** No criterion has been evaluated, nothing is adopted,
+and no blind listen has been spent.
+
+**The next session starts at `CRE-T8`**, reading `cre_d3.json`, `cre_d1.json`,
+`cre_screen.json`, `cre_builds.json`, `cre_build_gate.json` and
+`cre_s2_degeneracy_gate.json` cold. The branch consequence it must carry: **`CRE-D1` fired
+`not_supported`, so the three `(D1-branch)` cells do not exist and no router-side tag arm
+does; `E-S2-P0` is branch-proof and runs.**
+
+**Owed at Stage 2, from this session's findings:**
+
+1. **A liveness check on the unmeasured-class counters** (§3). Every interior was
+   ruler-measured on `ALG-E` at Stage 0, so pins 2 and 3's machinery has never actually
+   counted anything. Its first real exercise is the `ALG-B` and `UC` cells.
+2. **The affine map applied** to the three non-comparable `pop_raw` comparisons above,
+   or no cross-cell `pop_raw` sentence written for them.
+3. **`CRE-C5` attribution on any `S2` cell must quote both `S2` shares** (labelled-node,
+   and ≥ 2 measured agreements) as analyst M8's licensing constraint.
+4. **The `C6`/`D3` cross-read stays barred** until it can be made within one substrate.
