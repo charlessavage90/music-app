@@ -12,21 +12,45 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-03 (Seam 1), when the CAP RE-EVALUATION EXPERIMENT began
-executing and reached the plan's first designed seam. Stage 0 and Stage 1 are complete
-and committed; both Stage-0 reads landed on their pre-registered expected branches.
-The owner's one action is merging draft PR #70; execution then resumes at `CRE-T8` in a
-fresh session on Opus (his model ruling), inline, retiring at the plan's remaining
-seams.**
+**Last updated: 2026-08-03 (Stage 2, mid-flight), when the CAP RE-EVALUATION EXPERIMENT
+completed its Stage-2 instrument gates and all sixteen depth sweeps across both data
+sets. `CRE-T11` — the criteria figures and the run-state map — is the only task left
+before Seam 3. The owner's one action is merging draft PR #71; execution then resumes at
+`CRE-T11` in a fresh session, which needs no graph artifact.**
 
 ---
 
 ## Next
 
-> ## ▶ THE CAP RE-EVALUATION EXPERIMENT IS RUNNING — STAGE 0 AND STAGE 1 COMPLETE at SEAM 1, 2026-08-03. **The owner's one action is merging draft PR #70**; the next work is `CRE-T8` — a fresh session on Opus, continuing the plan INLINE on the existing `cap-reeval-run` branch.
+> ## ▶ STAGE 2 GATES AND ALL SIXTEEN SWEEPS ARE COMPLETE, 2026-08-03 (mid-flight — Seam 3 NOT reached). **The owner's one action is merging draft PR #71**; the next work is `CRE-T11` on branch `cap-reeval-stage2`.
 >
 > Entry point is the current handoff:
-> [`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md).
+> [`2026-08-03-HANDOFF-cre-run-stage2-midflight.md`](2026-08-03-HANDOFF-cre-run-stage2-midflight.md).
+> Reasoning: [`2026-08-03-cre-run-execution-log.md`](2026-08-03-cre-run-execution-log.md)
+> (§9–§11). Operational document unchanged —
+> [`plans/2026-08-03-cap-reeval-execution-plan.md`](plans/2026-08-03-cap-reeval-execution-plan.md),
+> **the prereg governing wherever it disagrees**. Figures live in the seventeen committed
+> JSONs under `builder/analysis/2026-08-03-cap-reevaluation/` — cited, never restated.
+>
+> **What stands, in one paragraph.** The instrument is verified and the device is live:
+> **`CRE-G1`(a)** reproduces the production router exactly on all 22 pairs on the E-S0
+> substrate, with a **red control** proving that comparison can fail; **`CRE-G1`(c)**
+> asserts the ruler frame; **`CRE-G2`(a)** clears its bar in all three `P1`-carrying
+> cells; and **`CRE-G1`(b)** and **`CRE-G2`(b)** pass in every swept `P1` cell. **All
+> sixteen cells are swept and committed**, nine `ALG-E` and seven `ALG-B`, every pair
+> completing the full ladder with no infeasible cell in either data set. **Owed item 1 has
+> split**: the null-class counter is live on `ALG-B`, so the Stage-0 zero was a true zero;
+> the **absent-class counter is still zero everywhere and that half remains owed**, with a
+> position taken but not run (the handoff's open decision). **No `CRE-R` read is licensed
+> and none has been made; nothing is adopted; the blind listen (`REQ-38`) is unspent.**
+>
+> ---
+
+> ## ✅ STAGE 0 AND STAGE 1 COMPLETE at SEAM 1, 2026-08-03. ~~**The owner's one action is merging draft PR #70**~~ *(MERGED, `f3eaec2`)*; ~~the next work is `CRE-T8`~~ *(DONE — see the top block, which owns current state)*.
+>
+> Entry point is the superseded handoff:
+> [`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md), which
+> **remains authoritative for Stage 0 and Stage 1's own internals**.
 > Reasoning: [`2026-08-03-cre-run-execution-log.md`](2026-08-03-cre-run-execution-log.md)
 > (§1–§7). Operational document is unchanged —
 > [`plans/2026-08-03-cap-reeval-execution-plan.md`](plans/2026-08-03-cap-reeval-execution-plan.md),
