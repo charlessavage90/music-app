@@ -298,9 +298,15 @@ the subordinate clause did not survive. The owner asking what stage 2 was is wha
 and those four arms produced the only signal in fifteen.
 
 > **No two load-bearing objects share an identifier, and new identifier series are
-> namespaced.** Prefix them (`T3-C1`) or pick disjoint letters, and check against every
-> document you cite. **Forward-only — never rename anything committed**; a frozen document's
-> value is that it is frozen.
+> namespaced.** Prefix them (`T3-C1`) or pick disjoint letters. **Collision-check by sweeping
+> every ref — never the working directory**, which walks `builder/scratch/`'s multi-GB dumps
+> and takes minutes, and never your own HEAD, where a concurrent session's series is invisible
+> (2026-08-05: `ULC-` read free from a branch cut hours before the one using it):
+> ```bash
+> git grep -lE '\bULC-' $(git for-each-ref --format='%(refname)' refs/remotes refs/heads) -- '*.md'
+> ```
+> Silence means free; ~0.2 s. **Forward-only — never rename anything committed**; a frozen
+> document's value is that it is frozen.
 
 Track 2's pre-registration accumulated eleven collisions: `A1`–`A7` are simultaneously
 factorial arms and amendment IDs, `C1`–`C3` simultaneously success criteria and Phase 1
