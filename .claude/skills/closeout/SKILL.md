@@ -460,9 +460,29 @@ tests mock HTTP and a URL that dies is indistinguishable from one that does not.
 expert reviewers, all reading carefully, missed an entire defect class that twenty
 minutes of use surfaced immediately.
 
-**This is asynchronous and does not block closeout.** The owner will not always have
-twenty minutes when a session ends. Write a short **test queue** instead: what changed,
-what to exercise, and what "wrong" would look like. Mark the item *queued*, and finish.
+> **⛔ THE TRIGGER IS A CHANGE HE CAN PRESS, NOT A CLOSEOUT. If this session changed nothing
+> the owner can exercise, write NOTHING in `TEST-QUEUE.md`** — no entry, no note, no "nothing
+> to test this time". Silence already means nothing is queued, because that file contains only
+> things to do. **Not writing is the correct discharge of C1**, and it gets one line in the
+> closeout report saying so.
+>
+> **The "did my app move?" answer still gets written — in the closeout report to him and the
+> PR body, not in that file.** He reads both at the time. It is a fact about one session, not
+> a durable record.
+>
+> *Changed 2026-08-05. The old rule was "one entry per closeout", and it produced **42 of 69
+> entries, 1,630 lines, 57% of the file** saying nothing was testable — at 39 lines each,
+> about three-quarters the length of a real test instruction. The chain is worth knowing
+> because each link was individually reasonable: an obligation with nothing to discharge it
+> produced a justification; the write-for-someone-holding-a-mouse rule below then filled the
+> vacuum with session narrative, because an entry with no test in it has no other content
+> available. **The rule below is right and is not what broke — applying it to a non-entry is.**
+> Those forty are archived at `docs/superpowers/archive/TEST-QUEUE-nil-entries.md`.*
+
+**When there IS something to press, this is asynchronous and does not block closeout.** The
+owner will not always have twenty minutes when a session ends. Write a short **test queue**
+entry instead: what changed, what to exercise, and what "wrong" would look like. Mark the item
+*queued*, and finish.
 
 **Write the entry for someone holding a mouse, not for the session that wrote the code.**
 Every step is a thing to *do* and a thing to *look at*. This is where an entry goes wrong:
@@ -801,10 +821,13 @@ expects a zero delta and records it. This is the session type most likely to hav
 `CLAUDE.md`, `MEMORY.md` or a skill or agent `description:` — so its delta is the one least
 likely to be zero, and the owner's decision on it is the one most likely to be owed.
 
-**C1 is almost always an N/A entry, and writing it is not optional.** "Nothing to exercise,
-nothing is running, a journey you build now is identical to yesterday's" — plus, in plain
-language, what did change and why it does not reach the app. He reads that file to find out
-whether his app moved; an absent entry and an N/A entry answer that question very differently.
+**C1 almost always means writing NOTHING in `TEST-QUEUE.md`** — a maintenance session rarely
+changes anything the owner can press. Do not write an entry saying so. **What he does need —
+did my app move, and is anything still running — goes in the closeout report and the PR body**,
+where he reads it at the time. *(This row said the opposite for one day, 2026-08-05: "almost
+always an N/A entry, and writing it is not optional." That was this exact defect being
+reinforced by the session that later measured it — kept visible rather than quietly replaced,
+because the instinct that wrote it is the one the rule has to overcome.)*
 
 **Mid-flight retirement**, when a session is being handed over before its work reaches a
 natural seam — A1, **A2-mid**, A3, **A5**, B1, B5, **D1-mid**, D3, **D6**, **D7**. A5 matters most

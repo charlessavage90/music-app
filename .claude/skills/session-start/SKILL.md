@@ -125,9 +125,14 @@ git status --short && git log --oneline -3 && git branch -vv
   there is a second reason beyond hygiene: a shared tree lets it read the other session's
   half-finished reasoning, and a second opinion that has absorbed the first one's working
   notes is not independent evidence.
-- **Check the test queue** left by the last closeout. Anything sitting untested gets
-  flagged to the owner now. That flag is the only forcing function on the async
-  use-the-app check, which is the one item that catches defects tests structurally cannot.
+- **Check the test queue.** Anything sitting untested gets flagged to the owner now. That
+  flag is the only forcing function on the async use-the-app check, which is the one item
+  that catches defects tests structurally cannot. **Read only the topmost heading of each
+  entry** — a discharged item keeps its old `## QUEUED` heading beneath its `## DONE` one, and
+  greping for the former is what made six consecutive closeouts report a backlog that did not
+  exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
+  only when there is something to press, so **absence of entries means nothing is owed — it is
+  never evidence that a session forgot.**
   **If the entry records a detached dev server, check it is still alive and started after
   HEAD** — closeout leaves one running deliberately, owned by nobody, and a stale one fails
   the queued test for a reason that has nothing to do with the work.
