@@ -109,9 +109,19 @@ git status --short && git log --oneline -3 && git branch -vv
   **The OneDrive reason for this path has expired** — the tree moved to `C:\dev` on
   2026-07-27, so a sibling of the main tree is no longer synced and any location works. The
   path above is kept because it is what the commands say. Note that **gitignored files do not come
-  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`. So the
-  worktree goes to whichever session does not need the graph — normally the advisory one,
-  which needs no setup at all if it is only reading documents. For a consulting session
+  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`.
+
+  **"Needs the graph" is NOT a reason to keep a session out of a worktree, and this rule used
+  to say it was.** The artifact is read once at boot and never written (`Path(path).read_bytes()`
+  in `graph_store.py`), and `ARTISTPATH_GRAPH` takes any absolute path (`ApiConfig`), so a
+  worktree session points at the main tree's artifact and two sessions read it concurrently
+  without interfering. What actually bars a worktree is **needing to WRITE gitignored state** —
+  a crawl filling `builder/scratch/`, or a build emitting a new artifact — plus the `uv sync`
+  each package's `.venv` costs. **So the worktree goes to whichever session does not write
+  gitignored state** — normally the advisory one, which needs no setup at all if it is only
+  reading documents. *(Corrected 2026-08-05: the old wording contradicted the second-arriver
+  rule directly above it whenever the second arriver was the one needing the graph, and a
+  cold reader hit that contradiction and had no way to resolve it.)* For a consulting session
   there is a second reason beyond hygiene: a shared tree lets it read the other session's
   half-finished reasoning, and a second opinion that has absorbed the first one's working
   notes is not independent evidence.
@@ -200,6 +210,14 @@ was never scheduled at all.
 
 The instinct to resist is the one that feels responsible — building an apparatus that
 could answer the question rigorously. Ask instead what the crudest decisive test is.
+
+**It fires on a plan you inherited too — harder, not less.** The header says "before any
+planning", and the incident it records *is a plan that already existed*; inheriting the
+apparatus does not change the question, it only adds the sunk cost that suppresses the check.
+This is safe to run at the start of an execution session because **the output is a proposal,
+not a reorder** — you name the cheaper test and hand the owner the choice. Spending the plan
+anyway is his call, and often the right one. *(Resolved 2026-08-05; the header and the body
+had been readable in opposite directions.)*
 
 ### Verify one claim before building on a report
 
@@ -305,6 +323,11 @@ A one-paragraph strike reconciles in either merge order; a wholesale rewrite doe
 
 **Which track first, then how much of it.** The old two tiers scaled on *size* only, which
 had no answer for a session doing a different kind of work rather than a smaller amount of it.
+
+**The three checks unique to session start run on every tier unless a tier says otherwise.**
+Only the maintenance track says otherwise, and it adjudicates all three explicitly in §MT.
+They are not part of the A–E lettering, so a tier that names only letters does not thereby
+exclude them.
 
 **Maintenance track — §MT, C, E** when the session changes the project's apparatus rather than
 the app: documentation, skills, agents, the map, `NEXT.md`, memory, bookkeeping. §B and §D are

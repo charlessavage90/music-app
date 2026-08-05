@@ -177,6 +177,12 @@ detached server behind only if C1 queued something that requires one.** The defa
 listener with no queued test behind it is **off** — a running server is not free, it is a
 stale artifact waiting to be tested against.
 
+> **A5 and C1 are decided together, and C1 is two Parts further down.** If there is any chance
+> you will leave a server behind, **draft C1's entry before finishing A5** — A5's whole
+> condition is a fact about C1 that does not exist yet in document order. Running A5 first and
+> C1 later is how a listener gets left up with nothing queued behind it, which is the state
+> this check exists to prevent.
+
 A session that starts a dev server in a background shell stays *subscribed* to it: retiring
 the session does not end the subscription, and only closing its terminal does. The terminal
 is deliberately kept open across a handover so the outgoing session can still be asked what
@@ -587,10 +593,14 @@ The PR body is where a reviewer picks up the context, so it carries:
 **Report two numbers, never one. They are not the same layer and they do not cost the same.**
 
 ```bash
-# The slug is derived from the project path. Corrected 2026-07-28: this named the
-# pre-migration OneDrive slug, whose directory still EXISTS, so both numbers below were
-# silently computed against a frozen copy and could never move. Check it resolves.
-M=~/.claude/projects/C--dev-music-app/memory
+# DO NOT COPY A PATH OUT OF THIS FILE. The slug is derived from the project path, so a
+# literal here is wrong for any session whose path differs — and the wrong directory EXISTS,
+# so it resolves, and both numbers below are then silently computed against another tree's
+# memory and can never move. That already happened once (2026-07-28, the pre-migration
+# OneDrive slug), and a session working from a git worktree reproduces it exactly.
+#
+# Use the memory directory named in YOUR OWN context, and state which one you measured.
+M="<the memory directory your own context names>"
 
 # 1. UNCONDITIONAL — loads in every session before it reads anything. Characters.
 #    `tr -d '\r' | wc -m`, never `wc -c`: this tree is core.autocrlf=true so every line
