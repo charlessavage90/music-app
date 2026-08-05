@@ -267,8 +267,8 @@ d20:
 |---|---|---|---|
 | **`ULC-A1`** | `P1` | none | — |
 | **`ULC-A2`** | `P2` | none | `A1` — archive alone |
-| **`ULC-A3`** | `P3` | gentle (r₁ = 0.01) | — |
-| **`ULC-A4`** | `P4` | gentle (r₁ = 0.01) | `A3` — archive alone |
+| **`ULC-A3`** | `P3` | gentle — `RAMPS["P1a"]`, cited never restated | — |
+| **`ULC-A4`** | `P4` | gentle — `RAMPS["P1a"]`, cited never restated | `A3` — archive alone |
 
 `ULC-C2` is the **share of interior cards falling in `ULC-D0`**, per arm per depth,
 paired by pair. Endpoints are excluded — the owner picks those.

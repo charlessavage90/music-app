@@ -1,6 +1,11 @@
 # Handoff — the `CAU-` coherence audit is scored and written up, 2026-08-05
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-05 on next actions by
+[`2026-08-05-HANDOFF-ulc.md`](2026-08-05-HANDOFF-ulc.md).** It remains authoritative for the
+`CAU-` scoring chunk's own internals. **One correction against it:** the results note's §6 figure
+of "22 of 23 never evaluated" counts the audit's 12 planted controls in its denominator; the real
+figure is 10 of 11, and §6's conclusion is unaffected — see `ULC-AM0`. *(Original role:)*
+**ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-05-HANDOFF-cau-audit-run.md`](2026-08-05-HANDOFF-cau-audit-run.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
