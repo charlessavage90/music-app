@@ -372,6 +372,55 @@ Amendments are `ULC-AM1`, `ULC-AM2`, … appended here, each committed **before*
 affects runs, with the reason and what it does not change. **Forward-only: nothing above is
 renamed or renumbered.**
 
+### `ULC-AM3` — `ULC-OG3` is ruled: substance is counted in tracks, and `ULC-D2` supersedes `ULC-D0` as primary
+
+**Committed before any stage runs.** The owner ruled on `ULC-OG3`, 2026-08-05: **count songs, not
+releases.**
+
+> **`ULC-D2`** — an artist is in the candidate class when they are the sole credited artist on
+> **no** release group that is **both** (a) `primary-type` ∈ {Album, EP, Single} with no secondary
+> types, **and** (b) carries at least one release whose total track count across all media is
+> **≥ 2**.
+>
+> **Plain-language sentence, fixed here:** *`ULC-D2` — this artist has never put out anything of
+> their own that is more than a single track.*
+
+**`ULC-G1` now evaluates `ULC-D2`.** `ULC-D0` is **not renamed and not deleted** — it is retained
+as a reported rung of the sensitivity ladder (§2.1), which now reads: `ULC-D2` (primary),
+`ULC-D0`, `rg_sole_primary ≤ 1`, `≤ 2`. **`ULC-B8` applies to all four**: reported, never selected
+from after the fact. Everything else in §2.2 — the 5-of-7 and 20 % triggers, the three branches —
+is **unchanged and still binding.**
+
+**Why this and not the other two options**, in his own reasoning: what changed his assessment of
+Keith Scott was learning the release was a single track, not learning it was a single release.
+Counting releases would either spare both worked artists or sweep in every one-album act;
+counting tracks separates a one-episode TV theme from a real record, which is the distinction the
+definition is about.
+
+**Verified buildable before the question was put:** the release dump carries
+`media[].track-count` and a `release-group` reference, so the join is available offline. Cost is
+one extra dump pass.
+
+#### Two executor-column decisions this forces, fixed here rather than at run time
+
+1. **A release group's track count is the MAXIMUM total across its releases.** A one-track promo
+   sitting in the same release group as a twelve-track album does not make the album
+   insubstantial. This is a data-completeness reading, not a leniency judgement.
+2. **A release group with no release in the dump has an UNKNOWN track count, and unknown is
+   treated as NOT substantial** — i.e. it does not rescue an artist from `ULC-D2`.
+
+   > **This is where two of the owner's own statements pull in opposite directions, and it is
+   > named rather than silently resolved.** His asymmetry ruling (`ULC-AM2`(d)) says a false
+   > negative costs more than a false positive, which argues for treating unknown as
+   > insubstantial. His first correction (`ULC-AM2`(b1)) says MusicBrainz incompleteness is common
+   > and must not be read as absence, which argues the opposite.
+   >
+   > **Resolved by measuring the ambiguity rather than by adjudicating it:** the primary reading
+   > follows the explicit asymmetry ruling, the opposite reading is reported alongside, and
+   > **the count of affected artists is reported in both.** If that count is small the question is
+   > moot and no adjudication was ever needed; if it is large, the owner has the figure and the
+   > decision is his, with `ULC-B8` barring me from picking the flattering one.
+
 ### `ULC-AM2` — `ULC-OG1` is ruled, and the worked example is no longer a clean counterexample
 
 **Committed before any stage runs.** The owner ruled on `ULC-OG1` on 2026-08-05 and supplied four
