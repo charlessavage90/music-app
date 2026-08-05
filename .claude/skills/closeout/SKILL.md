@@ -470,9 +470,9 @@ minutes of use surfaced immediately.
 > PR body, not in that file.** He reads both at the time. It is a fact about one session, not
 > a durable record.
 >
-> *Changed 2026-08-05. The old rule was "one entry per closeout", and it produced **42 of 69
-> entries, 1,630 lines, 57% of the file** saying nothing was testable — at 39 lines each,
-> about three-quarters the length of a real test instruction. The chain is worth knowing
+> *Changed 2026-08-05. The old rule was "one entry per closeout", and it produced a majority
+> of that file saying nothing was testable — **the measurement is owned by `TEST-QUEUE.md`'s
+> header and is deliberately not restated here.** The chain is worth knowing
 > because each link was individually reasonable: an obligation with nothing to discharge it
 > produced a justification; the write-for-someone-holding-a-mouse rule below then filled the
 > vacuum with session narrative, because an entry with no test in it has no other content

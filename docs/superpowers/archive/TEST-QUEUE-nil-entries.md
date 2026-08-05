@@ -12,8 +12,9 @@ anything, and none records anything he exercised.**
 closeout. A session with nothing to queue still had to write; having written, it justified;
 and the rule to write for someone holding a mouse then filled the vacuum with session
 narrative, because an entry with no test in it has no other content. By 2026-08-05 this class
-was **42 of 69 entries and 1,630 lines — 57% of the file.** The rule now triggers on a change
-the owner can press, and silence means nothing is queued.
+was a majority of the file — **the measurement is owned by `../TEST-QUEUE.md`'s header and is
+not restated here.** The rule now triggers on a change the owner can press, and silence means
+nothing is queued.
 
 **Two "nothing to test" entries were deliberately NOT moved here** and remain live: each
 carries a `✅` discharge or an owner check of *another* entry, which is queue bookkeeping
