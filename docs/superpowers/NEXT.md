@@ -30,13 +30,18 @@ stands and is untouched. The re-crawl decision is STILL UNTAKEN.**
 > (committed `cb11b38`, before anything was scored) — **cited, never restated.** Operational
 > brief: `builder/analysis/2026-08-04-coherence-audit/CAU-RUN-BRIEF.md`.
 >
-> **⚠ Reading order is fixed and the handoff owns it: prereg → `cau_judgements.json` →
-> `cau_owner_notes.md` → `cau_result.json`.** The owner wrote his own summary after judging
-> and **before anything was scored** (committed **unread** at `4009707`, when no criterion had
-> been computed and `cau_result.json` did not exist — the commit timestamp is the evidence,
-> not the file's mtime). **His note is read BEFORE the result, deliberately**: read after the
-> numbers it becomes confirmation of whatever they said, and that cannot be unseen. It is the
-> `GBL-` ordering, for the `GBL-` reason.
+> **⛔ `cau_owner_notes_SEALED.md` IS SEALED UNTIL THE ANALYSIS IS WRITTEN AND COMMITTED.**
+> Reading order, and the handoff owns it: prereg → `cau_judgements.json` → `cau_result.json`
+> → **write and COMMIT your own read** → only then open the sealed note, and respond to it in
+> a separately headed section. **This is NOT the `GBL-` ordering and the difference is
+> deliberate.** `gbl_owner_notes.md` held impressions of what he heard — evidence, read before
+> the tally. **This note carries his strong opinions about where the project should go**; he
+> said so and asked for this ordering himself. Read first it would steer the write-up rather
+> than inform it, and hand him his own view back as though it came from the data. **The commit
+> boundary is the evidence the analysis was not shaped by his direction.** Provenance is
+> intact: written after judging, **before anything was scored**, committed **unread** at
+> `4009707` when no criterion had been computed — the commit timestamp is the evidence, not
+> the file's mtime.
 >
 > **What stands, in one paragraph.** The owner identified a confound in the `GBL-` listen's
 > instrument — a 30-second clip of one arbitrary track cannot support a coherence judgement

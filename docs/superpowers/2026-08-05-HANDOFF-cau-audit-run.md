@@ -26,21 +26,40 @@ Then, **before writing anything, read in this order and do not skip ahead:**
 1. `specs/2026-08-04-coherence-audit-preregistration.md` — governing; four amendments and
    one correction, all committed before any judgement existed.
 2. `cau_judgements.json` — the raw verdicts and the owner's per-slot notes.
-3. **`cau_owner_notes.md` — the owner's own summary, written after he finished judging and
-   **before** anything was scored (committed unread at `4009707`; `cau_result.json` did not
-   exist and no criterion was computed at that commit — the commit timestamp is the
-   evidence, not the file's mtime).
-4. `cau_result.json` — what the scorer wrote.
+3. `cau_result.json` — what the scorer wrote.
+4. **Write the analysis, and COMMIT it.** Four parts, per `CLAUDE.md`: measured / what you
+   infer in plain language / weakest link / options and consequences.
 
-**Item 3 comes before item 4 deliberately, and this is the `GBL-` ordering.** His
-impressions are evidence in their own right; read after the numbers they become
-confirmation of whatever the numbers said, and that cannot be unseen. **Do not open
-`cau_result.json` until you have read his note.**
+## ⛔ `cau_owner_notes_SEALED.md` — do not open until step 4 is committed
 
-His note is also the only place a whole-path impression can legitimately land: §1 bars any
-scored whole-path claim, and §7's per-journey free-text boxes are explicitly unscored. If
-his summary makes a claim no criterion measures, **report it as his statement and do not
-convert it into a finding.**
+**This is not the same kind of artifact as `gbl_owner_notes.md`, and the difference is the
+whole point.** That file held the owner's *impressions of what he heard*, which are evidence
+and were deliberately read **before** the `GBL-` tally. **This one carries his strong
+opinions about where the project should go** — he said so explicitly, and asked for this
+ordering himself.
+
+Read before the analysis, it does not inform the write-up, it **steers** it: which figure
+leads, which sentence opens, which option is framed as natural. The owner would then be
+handed his own view back as though it had been derived from the data, which is worse than
+useless to him — it is the failure `CLAUDE.md`'s "conclude explicitly, label it, and still
+decline to decide" exists to prevent, arriving in the one disguise he cannot detect.
+
+**So: write and commit your own read first. The commit is the evidence it was not shaped by
+his.** Then open the sealed note, and append a **separately headed section** responding to
+it — what it changes, what it does not, and where your independent read disagrees. Do not
+silently revise the analysis above it; a diff that quietly re-frames the conclusion after
+reading his direction destroys exactly the property the commit boundary buys.
+
+**Provenance, and it is intact.** He wrote it after finishing all 77 judgements and **before
+anything was scored**. Committed **unread** at `4009707`, when `cau_result.json` did not
+exist and no criterion had been computed; renamed later, which does not disturb that
+commit. The git timestamp is the evidence — not the file's mtime, which would not have
+survived the copy out of `Downloads`.
+
+**And a bar that still applies to it.** §1 bars any *scored* whole-path claim and §7's
+per-journey boxes are explicitly unscored. If his note makes a claim no criterion measures —
+including a directional one — **report it as his statement. Never convert it into a
+finding, and never invent a criterion to accommodate it.**
 
 **After scoring:** remove the `cau_page_data.json` line from `.gitignore` and commit that
 file. It is the stimulus as presented and the judgements cannot be interpreted without it.

@@ -86,7 +86,15 @@ reader of results should not be the session that ran them.
 uv run --extra dev python -u analysis/2026-08-04-coherence-audit/cau_score.py
 ```
 
-`CAU-G1` is evaluated first and alone; if it fails, nothing else is computed. Afterwards,
+`CAU-G1` is evaluated first and alone; if it fails, nothing else is computed.
+
+**⛔ `cau_owner_notes_SEALED.md` is sealed until your analysis is written AND committed.** It
+holds the owner's strong opinions about where this should go — not impressions of what he
+heard — and he asked for this ordering himself. Write your own read, commit it, *then* open
+the note and respond to it in a separately headed section. Do not silently revise the
+analysis above it. Full reasoning in the handoff.
+
+Afterwards,
 **remove the `cau_page_data.json` line from `.gitignore` and commit that file** — it is the
 stimulus as presented and the judgements cannot be interpreted without it. It is held back
 only until the run is over, because diffing it against `gbl_page_data.json` would reveal the
