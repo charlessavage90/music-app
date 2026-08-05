@@ -12,6 +12,12 @@ consumes something a previous closeout produced, which is what keeps both cheap.
 — `CLAUDE.md` already covers architecture, and re-deriving it is what makes fresh sessions
 expensive. Five minutes, then work.
 
+> **Pick a track first. §A–§E are written for a session that changes the app.** If this
+> session changes the project's own **apparatus** instead — documentation, skills, agents,
+> the map, `NEXT.md`, memory, bookkeeping — **run §MT, then §C and §E, and skip §A, §B and
+> §D.** Roughly half of A–E is inert for that work, and the four checks that catch its
+> characteristic damage are not in A–E at all.
+
 ---
 
 ## A. What governs this work?
@@ -211,6 +217,77 @@ dependency — or stale.
 
 ---
 
+## MT. The maintenance track — the apparatus, not the app
+
+**Replaces §A, §B and §D** when the work is documentation, skills, agents, `docs/README.md`,
+`NEXT.md`, memory or project bookkeeping. **§C and §E still apply unchanged** — repo state
+and the `/rename` line are the two checks no session type is exempt from. So: **MT1–MT4, then
+C, then E.**
+
+**Of the three checks unique to session start:** the cold-read applies if you are picking up
+a mid-flight handoff, the cheapest-experiment scope check does not (no maintenance task ends
+in a number), and verify-one-claim is folded into **MT2** in the form this work actually meets
+it — a forwarded flag rather than a task report.
+
+*Added 2026-08-05 from a live baseline. A maintenance session ran the full ritual and
+reported the supersession chain and the closed-decisions list to the owner, who needed
+neither. Meanwhile it had to derive MT1, MT2 and MT3 for itself, and got MT2 right only because
+the outstanding item happened to sit in `NEXT.md`'s top block.*
+
+### MT1. What am I forbidden to edit?
+
+**§A asks what governs so you can obey it. Ask the opposite question — what is frozen.** Same
+source, `docs/README.md`'s role column; different purpose.
+
+- **COMPLETE and HISTORICAL documents are never edited**, however wrong they have become. A
+  frozen document's value is that it is frozen.
+- **A correction goes forward** into the governing document, and `docs/README.md`'s row for
+  the frozen one points at it. **Change that row even when the frozen document contains no
+  stale identifier to grep for** — the defect is usually that the row fails to *warn*, and no
+  grep finds an absence.
+- **Figures live in exactly one document.** Restating one is a defect even when it is right.
+
+### MT2. What is outstanding — and is the flag true?
+
+Maintenance work does not arrive in a plan. It accumulates in four places and **nothing
+collects them**:
+
+- `NEXT.md`'s **current top block** — older blocks are history, never act on them
+- the current handoff's **"Owed, and by whom"**
+- `TEST-QUEUE.md` — **an item is live only if its topmost heading says so**
+- deferred findings whose **success condition has now come due**
+
+**Then verify one flag against source before acting on it.** A flag forwarded through several
+closeouts is a claim about the repo that nobody has re-checked, and the forwarding is exactly
+what makes it feel settled. Both flags carried into 2026-08-05 were wrong: one said a rule-out
+was in no citable document when it was in two, and one had mis-counted a queue for six
+consecutive closeouts.
+
+### MT3. Am I about to touch the standing context layer?
+
+**`CLAUDE.md`, `memory/MEMORY.md`, and the `description:` of any skill or agent load into
+every future session whether or not it needs them.** Growing that layer is the owner's call,
+never a session's.
+
+**Check before writing, not after.** `closeout` D6 measures the delta — but by then the text
+exists and he is reviewing a finished thing instead of deciding whether to buy it. If the work
+touches any of those four, say so up front and report the cost from the diff, **lines *and*
+characters**: these files are written in long single lines that `wc -l` cannot see change in.
+
+**Bodies are free, descriptions are not.** A `SKILL.md` body, an agent definition body and a
+memory file's body all load on invocation or recall only. Put the detail there.
+
+### MT4. Which documents will collide?
+
+§C tells you whether another session is live. This asks the sharper question: **which files
+will you both write?** `NEXT.md`, `docs/README.md` and `CLAUDE.md` are touched by nearly every
+session, and are where concurrent work actually conflicts — not in the code.
+
+Name them to the owner with your sequencing, and keep each edit as small as the change allows.
+A one-paragraph strike reconciles in either merge order; a wholesale rewrite does not.
+
+---
+
 ## What to skip
 
 - **"Read the docs."** That is the failure mode, not the fix. The orient table exists so
@@ -222,11 +299,17 @@ dependency — or stale.
 
 ## Scaling
 
-**Full ritual** when executing a plan you did not write, resuming a phase, or acting on
+**Which track first, then how much of it.** The old two tiers scaled on *size* only, which
+had no answer for a session doing a different kind of work rather than a smaller amount of it.
+
+**Maintenance track — §MT, C, E** when the session changes the project's apparatus rather than
+the app: documentation, skills, agents, the map, `NEXT.md`, memory, bookkeeping. §B and §D are
+inert there.
+
+**Full ritual — A–E** when executing a plan you did not write, resuming a phase, or acting on
 another session's conclusions.
 
-**Minimum** for a small, self-contained task in familiar territory: **A** (what governs),
-**C** (repo state), and **E** (the `/rename` line — it costs one line and is worth more on
-a short session, not less). Two minutes, and A and C catch the two failures that are
-expensive to unwind — working from a superseded document, and colliding with a live
-session.
+**Minimum — A, C, E** for a small, self-contained builder task in familiar territory (the
+`/rename` line costs one line and is worth more on a short session, not less). Two minutes,
+and A and C catch the two failures that are expensive to unwind — working from a superseded
+document, and colliding with a live session.
