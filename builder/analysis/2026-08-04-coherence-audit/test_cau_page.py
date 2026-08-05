@@ -39,13 +39,13 @@ def post(port, path, body):
         return e.code
 
 
-def test_status_lists_missing_slots_and_the_journey_note(tmp_path):
+def test_status_lists_missing_slots_only(tmp_path):
     srv, _ = serve(tmp_path, 8791)
     try:
         _, body = get(8791, "/status")
         d = json.loads(body)
         assert d["complete"] is False
-        assert set(d["missing"]) == {"J#1", "J#2", "J:note"}
+        assert set(d["missing"]) == {"J#1", "J#2"},             "journey notes are optional and must never appear as missing"
     finally:
         srv.shutdown()
 
@@ -81,21 +81,25 @@ def test_judgements_survive_a_server_restart(tmp_path):
     srv2, _ = serve(tmp_path, 8795)
     try:
         _, body = get(8795, "/status")
-        assert set(json.loads(body)["missing"]) == {"J#2", "J:note"}
+        assert set(json.loads(body)["missing"]) == {"J#2"}
         saved = json.loads(f.read_text("utf-8"))["slots"]["J#1"]
         assert saved == {"verdict": "doesnt_fit", "looked_up": True, "note": "why"}
     finally:
         srv2.shutdown()
 
 
-def test_complete_only_when_every_slot_and_every_note_is_in(tmp_path):
+def test_complete_needs_every_slot_and_no_journey_note(tmp_path):
+    """A note left blank never fires the textarea's save event. Requiring one made
+    'complete' unreachable for an honest listener -- and spec section 5's run state
+    is the judgements alone."""
     srv, _ = serve(tmp_path, 8796)
     try:
         post(8796, "/judge", {"slot": "J#1", "verdict": "fits"})
-        post(8796, "/judge", {"slot": "J#2", "verdict": "fits"})
         assert json.loads(get(8796, "/status")[1])["complete"] is False
-        post(8796, "/journey_note", {"journey": "J", "note": ""})
-        assert json.loads(get(8796, "/status")[1])["complete"] is True
+        post(8796, "/judge", {"slot": "J#2", "verdict": "fits"})
+        d = json.loads(get(8796, "/status")[1])
+        assert d["complete"] is True, "notes must not block completeness"
+        assert d["journey_notes_written"] == 0
     finally:
         srv.shutdown()
 

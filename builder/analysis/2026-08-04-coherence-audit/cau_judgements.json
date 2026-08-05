@@ -1,0 +1,393 @@
+{
+  "slots": {
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d10#1": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20#1": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "I'm familiar with Depeche Mode, but needed to look them up to hear some song examples"
+    },
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20#3": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": "Definitely doesn't belong next to the Beatles. Jarring transition"
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20#1": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": "This is a good example because the first song I listened to, I  could almost convince myself fit the journey, but listening to two other top songs immediately told me they didn't fit"
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "If this showed up as a recommendation for fans of the war on drugs, I'd believe it."
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20#3": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "I looked them up, but recognized some of their songs when listening. I could definitely tell someone why this was the midpoint of a journey between The War on Drugs and Sigur Ros"
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20#5": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "I'm giving this a \"can't tell\" because I did look up the artist on MB and read the bio. I wasn't sure I had the right artist when I listened to it at first. After reading the bio, I can understand why it would appear on the journey. \"Listening-wise\" it doesn't sound very similar to sigur ros, but the description of the artist explains why users might have them on the same playlist. I think I've compromised the experiment on this one, so I chose \"can't tell\" instead of picking either option"
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20#4": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20#2": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20#1": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "Almost got caught by this one - there's another artist on spotify with the same name. The Andy Ward here was hard to find his actual music to listen to, but he definitely fits."
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20#3": {
+      "verdict": "doesnt_fit",
+      "looked_up": false,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#1": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "another near \"trap\" - the first Charlie Hall on Spotify was not this one. This is awesome. Great recommendation, and very novel / obscure"
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#2": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#3": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#4": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#5": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": "This is another one that sonically seems strange, but it turns out he's only released a few solo albums. His main body of work is as a contributor to a large set of bands that probably fit exactly in this space. Regardless, going off of the sound, it doesn't fit"
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#6": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "Definitely fits. Very obscure. Could only find on Youtube"
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#7": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "I was almost tricked by the first two songs I listened to, which made no sense to me, but after listening to a few more, the connection is clear. It's actually a good fit. Unusual, but interesting. This is the kind of weird stuff I would hope to see after many bypasses. "
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#8": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "I could not find his solo work anywhere I could listen. According to MB, he doesn't have a solo release album. "
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20#9": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20#1": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": "I went back and forth. Ultimately the answer is \"it fits\", but it does feel like a jump from Tame Impala, like there should be one artist in between"
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20#3": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": ""
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20#1": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20#5": {
+      "verdict": "doesnt_fit",
+      "looked_up": false,
+      "note": "doesn't make any sense"
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20#4": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "This is awesome. Added some songs to my library to listen to later. Great fit"
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20#3": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "Haven't heard of his solo work (obviously know Weezer). Not a huge fan of the few songs I listened to, but the connection to the journey and the fit in between his neighbors is clear."
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d10#1": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d10#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "Immediately knew it was fit. Added to my playlist. I had to look them up, but I have heard some of their tracks before, just didn't know"
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d10#3": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d10#4": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10#1": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": "Interesting music, but I don't see the connection"
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10#2": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10#3": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10#4": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#1": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": ""
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#2": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": "instrumental jazz I think. "
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#3": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "The only \"solo work\" I could find from Max Martin is popular musical \"& Juliet\". Other than that, he's written and produced a ton of pop music. I'm not sure how to rate based on this."
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#5": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#6": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#4": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "I can't rate this one - he only has one release with one song on MB, and I can't find it anywhere."
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#1": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#2": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#3": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "Similar comment to above about this artist - not sure what I can listen to to judge it"
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#4": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": "I don't see any releases at all on MB, but there were some songs to listen to on spotify"
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#5": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "Aerosmith drummer, but I can't find any solo work for him. Can't judge"
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#6": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#7": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#8": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#9": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "I don't see any releases for this artist. I'm surprised they weren't dropped by one of our filters. Disambiguation is clear \"drummer for Crosby, Stills, Nash & Young\" - that's clearly a fit logically, but there's no solo works that I can find from him."
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10#1": {
+      "verdict": "doesnt_fit",
+      "looked_up": false,
+      "note": ""
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10#3": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10#4": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d10#1": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d10#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d10#3": {
+      "verdict": "cant_tell",
+      "looked_up": false,
+      "note": "No solo releases"
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d10#4": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d10#5": {
+      "verdict": "cant_tell",
+      "looked_up": true,
+      "note": "Same comment as above: I don't see any releases for this artist. I'm surprised they weren't dropped by one of our filters. Disambiguation is clear \"drummer for Crosby, Stills, Nash & Young\" - that's clearly a fit logically, but there's no solo works that I can find from him."
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20#1": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20#2": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": "instrumental / cello. Not sure why it's here"
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20#5": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": ""
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20#4": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20#3": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#1": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#3": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#4": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#5": {
+      "verdict": "fits",
+      "looked_up": false,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#6": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#7": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#8": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": ""
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10#1": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": ""
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10#2": {
+      "verdict": "fits",
+      "looked_up": true,
+      "note": ""
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10#3": {
+      "verdict": "doesnt_fit",
+      "looked_up": true,
+      "note": "I could not find his solo work anywhere I could listen. According to MB, he doesn't have a solo release album. "
+    }
+  },
+  "journey_notes": {
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d10": "",
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10": "Nathan East, Max Martin, and Brad Delson are all artists that seem to be mostly collaborators on other works. Really, really obscure journey"
+  }
+}

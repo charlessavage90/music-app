@@ -35,10 +35,15 @@ def build_server(page_data: dict, verdict_file, port: int = PORT):
         tmp.replace(verdict_file)
 
     def missing():
-        out = [s for s in slots if state["slots"].get(s) is None]
-        out += [f"{j['id']}:note" for j in page_data["journeys"]
-                if j["id"] not in state["journey_notes"]]
-        return out
+        """Spec §5's run state is the 77 judgements and nothing else.
+
+        Journey notes are explicitly optional and unscored (CAU-AM1), so they must
+        NOT block completeness -- and a note deliberately left blank never fires the
+        textarea's save event, which made 'complete' unreachable for an honest
+        listener. This function was stricter than the governing document; that was a
+        harness bug, and the scorer never had it.
+        """
+        return [s for s in slots if state["slots"].get(s) is None]
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *a):
@@ -62,9 +67,13 @@ def build_server(page_data: dict, verdict_file, port: int = PORT):
                 self._send(200, html, "text/html")
             elif self.path == "/status":
                 m = missing()
-                self._send(200, json.dumps({"complete": not m,
-                                            "missing_count": len(m),
-                                            "missing": m}))
+                self._send(200, json.dumps({
+                    "complete": not m,
+                    "missing_count": len(m),
+                    "missing": m,
+                    # Informational only -- optional and never blocking.
+                    "journey_notes_written": len(state["journey_notes"]),
+                    "journeys": len(page_data["journeys"])}))
             else:
                 self._send(404, "{}")
 
