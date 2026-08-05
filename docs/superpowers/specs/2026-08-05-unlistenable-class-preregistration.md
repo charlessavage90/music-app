@@ -355,6 +355,71 @@ Amendments are `ULC-AM1`, `ULC-AM2`, … appended here, each committed **before*
 affects runs, with the reason and what it does not change. **Forward-only: nothing above is
 renamed or renumbered.**
 
+### `ULC-AM1` — the Keith Scott pre-run check, and a precision companion `ULC-D1`
+
+**Committed before any stage runs.** Prompted by the owner on 2026-08-05: he clarified that he
+cited YouTube for Keith Scott because the music is not on Spotify or other major streaming
+services, **not** because there is no release — and asked for the filter criteria to be checked
+against that case.
+
+#### (a) Pre-run disclosure — `ULC-D0` was tested against one artist before the run
+
+Looked up in the local MusicBrainz dumps (offline, read-only), artist
+`bc4db91e-3fbf-460d-99dc-4eaca2872b44`:
+
+| field | value |
+|---|---|
+| `rg_total` | 1 |
+| `rg_sole` | 1 |
+| `rg_sole_primary` | **1** — *Gallery of Dreams*, Single, 1993-10-04 |
+
+**`ULC-D0` does not flag him.** The owner's understanding of the criteria is correct, and the
+worked counterexample behaves as §1.1 requires: a predicate built on *streaming presence* would
+have gone against him (his only DSP-ish link is Discogs), and one built on *credit shape* clears
+him.
+
+> **This is a disclosure, not a result.** `ULC-B3` says this track does not measure the
+> false-positive side. It now has **exactly one** pre-run data point on it, and one artist is not
+> a rate. **It may not be reported as evidence that `ULC-D0` is precise.** Recorded because it was
+> seen before the run and would otherwise be invisible leakage.
+
+**Noted and deliberately not acted on:** his one sole primary release is a single from 1993, which
+is a thin body of work. `ULC-D0` spares him anyway, and the owner judged him FITS twice — so the
+predicate agrees with the person it exists to serve. **No threshold is added to chase this.**
+
+#### (b) `ULC-D1` — a precision companion, secondary and declared
+
+> **Plain-language sentence, fixed here:** *`ULC-D1` — of the artists we flagged as having
+> nothing of their own, which ones also show a heavy footprint as somebody else's sideman?*
+
+The artist dump carries relationship data at usable scale — Keith Scott's record shows
+`instrument` × 234, `vocal` × 21, `performer` × 9, `member of band` × 3.
+
+> **`ULC-D1`** = `ULC-D0` **AND** at least one relation of type `member of band`,
+> `instrumental supporting musician`, `instrument`, `vocal` or `performer`.
+
+**`ULC-D1` is a strict subset of `ULC-D0` by construction**, so it competes with nothing: it
+cannot change `ULC-G1`'s branch, and the gate is evaluated on `ULC-D0` alone exactly as §2.2
+already fixes. It is reported as *"of those `ULC-D0` flags, how many also look like a sideman."*
+
+**Why it is worth carrying.** It addresses the owner's stated residual risk — poor MusicBrainz
+coverage flagging artists who should stay — by identifying the class **positively** instead of
+inferring it from absence. An under-documented solo artist has few sole releases *and* few
+supporting credits, so `ULC-D1` spares them; a session player has few sole releases *and* a heavy
+supporting footprint, so `ULC-D1` keeps them flagged. That is precisely the distinction absence
+alone cannot draw.
+
+> **Leakage disclosed, and it is the reason `ULC-D1` is secondary rather than primary.** This
+> predicate was designed **after** seeing the validation-set names, most of whom are visibly band
+> members or session players, and after seeing Keith Scott's relation counts. `ULC-D0` was fixed
+> with materially less knowledge. **`ULC-D0` therefore remains primary and owns the gate**, and
+> `ULC-B8`'s bar on choosing the better-performing cut after the fact **applies to `ULC-D1` in
+> full.**
+
+**A known weakness, named now rather than discovered later:** MusicBrainz relationship coverage is
+itself patchy, so `ULC-D1` may simply inherit the coverage problem it was designed to mitigate.
+Its own miss rate is unmeasured, and this track will not measure it.
+
 ### `ULC-AM0` — a correction owed to `findings/2026-08-05-coherence-audit-results.md` §6
 
 **Not an amendment to this document** — it is numbered `AM0` because it predates this track's
