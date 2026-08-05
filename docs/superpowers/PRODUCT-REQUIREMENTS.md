@@ -371,3 +371,52 @@ provenance, worked cases, and protocol.
    opinion is superseded in part** (2026-08-02): under the redefined obscurity construct
    it is an instrument for a *different, retired* construct (worldly fame). Its three
    usage bounds stand unchanged. WGLL remains governing for protocol.
+
+## 11. Commercial posture
+
+**Placed after §10 rather than inside §1–§9** because it constrains what the project *is*,
+not how a path behaves — and §10 keeps its number, which is cited from `CLAUDE.md` and
+`docs/README.md`. Recorded 2026-08-05, six closeouts after the ruling it records: it had
+lived in session memory and nowhere in the repo.
+
+### Must
+
+- **REQ-43** — **artistpath is not commercialized.** Owner ruling, 2026-08-04: he sees no
+  realistic monetization path and does not want one. The revenue setting is **none, or
+  donations only — no advertising, no paid features, ever.** Cost-offset is the most any
+  future income may aim at.
+- **REQ-44** — **Nothing is built on REQ-43's consequences without confirming with the
+  owner first.** REQ-43 lifts a constraint as well as imposing one, and a lifted constraint
+  reads as an invitation to go and use whatever it was blocking. It is not one: a recorded
+  intention is not a standing permission, and the facts a future decision would rest on are
+  **not settled here** — three of them are named below and two are unverified. **Any work
+  that proceeds *because* the app is non-commercial is flagged to the owner and confirmed
+  before it starts.** His instruction 2026-08-05, and the condition on which REQ-43 was
+  recorded at all.
+
+**What REQ-43 supersedes, and it is citable.** The alpha design
+(`specs/2026-07-19-artist-path-alpha-design.md` §1) bars Last.fm from ever becoming
+load-bearing, and `plans/2026-07-19-graph-builder.md` restates it as a build constraint.
+The reason stated in both is that **"the roadmap includes paid subscribers"** — a structural
+Last.fm dependency would create a licensing obligation exactly when the product began
+earning. **REQ-43 removes that reason**, and the current roadmap
+(`plans/2026-07-21-alpha-rollout-roadmap.md`) contains no monetization content of any kind.
+Both source documents are **COMPLETE-role and are not edited**; this section is where the
+supersession lives, and `docs/README.md`'s rows for them point here.
+
+**Three things the reason's removal does not settle — all of them REQ-44's business.**
+
+1. **Last.fm's terms are free-for-non-commercial by their own account** (the alpha design
+   links `last.fm/api/tos`), and donations-only plausibly sits inside that — **plausibly,
+   not verified.** Nobody has read those terms against source since 2026-07-19.
+2. **Whether the commercial worry was the constraint's whole load.** The same section also
+   lists Last.fm under sources *evaluated and rejected*, and a source rejection can outlive
+   the reason recorded beside it.
+3. **setlist.fm has no recorded rule-out anywhere in this repo**, so there is nothing to
+   reopen for it — only a fresh decision to take, under REQ-44 like any other.
+
+**The standing guards are untouched by any of this.** A new fame or novelty candidate
+arriving through a reopened source still goes through an adoption rule fixed *before* it
+runs — beat the incumbent on the primary and fire no falsifier, the anti-proxy-shopping
+guard in `2026-07-23-repair-and-retune-execution-log.md` — and still validates under the
+novelty-likelihood construct in this document's Definitions. Cited, not restated.

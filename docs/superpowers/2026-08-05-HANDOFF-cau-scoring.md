@@ -79,7 +79,19 @@ dropped without being logged in the scoring log §2.
 
 Nothing is owed by this session. Two items remain open and **neither is `CAU-`**:
 
-- The owner's 2026-08-04 **no-commercialization ruling** is in memory but still not in the
-  repo record (it belongs in `PRODUCT-REQUIREMENTS.md`). Flagged at six consecutive closeouts.
-- The eight **2026-07-22→27 `TEST-QUEUE.md` entries** remain `QUEUED` and unruled-on. Also six
-  consecutive closeouts. **These need an owner ruling, not more work** — discharge or delete.
+- ~~The owner's 2026-08-04 **no-commercialization ruling** is in memory but still not in the
+  repo record (it belongs in `PRODUCT-REQUIREMENTS.md`). Flagged at six consecutive closeouts.~~
+  **✅ DISCHARGED 2026-08-05 (later) — landed as `PRODUCT-REQUIREMENTS.md` §11, `REQ-43` with
+  its confirmation gate `REQ-44`.** Two things that landing found, which this handoff's framing
+  did not anticipate: the ruling **supersedes a citable constraint**, not just an uncited
+  recollection — the alpha design §1 and the graph-builder plan both bar Last.fm from becoming
+  load-bearing *because* "the roadmap includes paid subscribers" — and **setlist.fm was never
+  ruled out anywhere**, so there was nothing to reopen for it.
+- ~~The eight **2026-07-22→27 `TEST-QUEUE.md` entries** remain `QUEUED` and unruled-on. Also six
+  consecutive closeouts. **These need an owner ruling, not more work** — discharge or delete.~~
+  **✅ FALSE ALARM, closed 2026-08-05 — zero items were ever outstanding.** This bullet was
+  already contradicted by `NEXT.md` and `TEST-QUEUE.md` on the day it was written: discharging
+  an entry prepends a `## DONE` heading and keeps the `## QUEUED` one, so the grep over-reports.
+  All ten such headings (the count itself had gone stale at eight) sit directly beneath a `DONE`
+  of the same title. Struck 2026-08-05 (later); the counting rule now lives at the top of
+  `TEST-QUEUE.md`.
