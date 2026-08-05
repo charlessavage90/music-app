@@ -1,0 +1,154 @@
+<meta charset="utf-8">
+<title>Coherence audit</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 900px; }
+  h2 { border-top: 3px solid #444; padding-top: 1rem; margin-top: 2.5rem; }
+  .card { border: 1px solid #ccc; border-radius: 6px; padding: .6rem .8rem;
+          margin: .5rem 0; }
+  .endpoint { background: #f0f0f0; font-weight: 600; }
+  .name { font-size: 1.05rem; }
+  .disamb { color: #666; font-weight: 400; font-size: .9rem; }
+  .ident { font-size: .78rem; color: #777; margin-top: .15rem; }
+  .ident a { color: #46c; }
+  .controls { margin-top: .4rem; font-size: .9rem; }
+  label { margin-right: .9rem; white-space: nowrap; }
+  .lookup { margin-left: .6rem; color: #555; }
+  input[type=text] { width: 100%; margin-top: .35rem; padding: .3rem; }
+  textarea { width: 100%; height: 3.5rem; margin-top: .4rem; padding: .3rem; }
+  .done { color: #0a0; font-weight: 600; }
+  .arrow { color: #888; text-align: center; margin: -.2rem 0; }
+  #bar { position: sticky; top: 0; background: #fff; border-bottom: 2px solid #444;
+         padding: .5rem 0; margin-bottom: 1rem; }
+</style>
+<div id="bar"><b>Coherence audit</b> &mdash; <span id="count"></span></div>
+<div id="root"></div>
+<script>
+const DATA = /*DATA*/;
+const SAVED = /*SAVED*/;
+
+function el(tag, text) {
+  const e = document.createElement(tag);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+async function post(path, body) {
+  const r = await fetch(path, { method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body) });
+  if (!r.ok) alert("save failed: " + await r.text());
+  return r.ok;
+}
+
+let total = 0, done = 0;
+function bump(delta) {
+  done += delta;
+  document.getElementById("count").textContent =
+    done + " of " + total + " artists judged";
+}
+
+const root = document.getElementById("root");
+
+DATA.journeys.forEach((j, n) => {
+  root.appendChild(el("h2", "Journey " + (n + 1) + " of " + DATA.journeys.length));
+
+  j.artists.forEach((a, i) => {
+    if (i > 0) root.appendChild(el("div", "↓")).className = "arrow";
+
+    const card = el("div");
+    card.className = "card" + (a.role === "endpoint" ? " endpoint" : "");
+    const nm = el("div", a.name);
+    nm.className = "name";
+    if (a.disambiguation) {
+      const d = el("span", " — " + a.disambiguation);
+      d.className = "disamb";
+      nm.appendChild(d);
+    }
+    card.appendChild(nm);
+
+    // CAU-AM4: identify the RIGHT artist. Names are not unique and the app's own
+    // name-based lookup picks the wrong same-named artist ~1 card in 11 (BYP-13).
+    const idline = el("div");
+    idline.className = "ident";
+    const link = document.createElement("a");
+    link.href = "https://musicbrainz.org/artist/" + a.mbid;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = a.mbid;
+    idline.appendChild(document.createTextNode("MusicBrainz: "));
+    idline.appendChild(link);
+    card.appendChild(idline);
+
+    if (a.role === "endpoint") {
+      card.appendChild(el("div", "(one of the two artists you picked)"))
+          .style.fontSize = ".85rem";
+      root.appendChild(card);
+      return;
+    }
+
+    total++;
+    const slot = j.id + "#" + i;
+    const prev = SAVED.slots ? SAVED.slots[slot] : null;
+    if (prev) done++;
+
+    const c = el("div");
+    c.className = "controls";
+    c.appendChild(el("span", "Does this artist belong on this journey? "));
+
+    const saved = el("span");
+    [["fits", "fits"], ["doesnt_fit", "doesn't fit"],
+     ["cant_tell", "can't tell"]].forEach(([val, text]) => {
+      const lab = el("label");
+      const r = document.createElement("input");
+      r.type = "radio"; r.name = slot; r.value = val;
+      if (prev && prev.verdict === val) r.checked = true;
+      lab.appendChild(r);
+      lab.appendChild(document.createTextNode(" " + text));
+      c.appendChild(lab);
+    });
+
+    const lu = el("label");
+    lu.className = "lookup";
+    const lub = document.createElement("input");
+    lub.type = "checkbox";
+    if (prev && prev.looked_up) lub.checked = true;
+    lu.appendChild(lub);
+    lu.appendChild(document.createTextNode(" I had to look them up"));
+    c.appendChild(lu);
+
+    const note = document.createElement("input");
+    note.type = "text";
+    note.placeholder = "why (optional)";
+    if (prev) note.value = prev.note || "";
+
+    c.appendChild(saved);
+    card.appendChild(c);
+    card.appendChild(note);
+    root.appendChild(card);
+
+    async function send() {
+      const sel = card.querySelector('input[type=radio]:checked');
+      if (!sel) return;
+      const first = !saved.textContent;
+      if (await post("/judge", { slot: slot, verdict: sel.value,
+                                 looked_up: lub.checked, note: note.value })) {
+        saved.textContent = " saved ✓";
+        saved.className = "done";
+        if (first && !prev) bump(1);
+      }
+    }
+    card.querySelectorAll('input[type=radio]').forEach(r => r.onchange = send);
+    lub.onchange = send;
+    note.onblur = send;
+  });
+
+  const nt = document.createElement("textarea");
+  nt.placeholder = "Anything about this journey as a whole (optional, not scored)";
+  if (SAVED.journey_notes && SAVED.journey_notes[j.id])
+    nt.value = SAVED.journey_notes[j.id];
+  nt.onblur = () => post("/journey_note", { journey: j.id, note: nt.value });
+  root.appendChild(nt);
+});
+
+bump(0);
+</script>

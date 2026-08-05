@@ -1,6 +1,11 @@
 # Handoff — the `CRE-` Stage-3 findings note, 2026-08-04
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-04 (evening) on next actions by
+[`2026-08-04-HANDOFF-gbl-plan.md`](2026-08-04-HANDOFF-gbl-plan.md)** — the owner took the
+decision this handoff said was his (findings §4 **Option A**: a blind listen on the gentle
+arm), and the `GBL-` spec and plan now exist. Remains authoritative for the `CRE-`
+experiment's internals and its claims-not-to-revert. *(Original role:)* **ACTIVE — this is
+the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-04-HANDOFF-cre-t11-seam3.md`](2026-08-04-HANDOFF-cre-t11-seam3.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
@@ -73,12 +78,17 @@ Governing document remains the prereg,
    branch: the findings note makes **no cross-cell `pop_raw` sentence at all**, every
    gradient figure in it being in `fame_lb_pctl`. Struck in place in the Seam-3 handoff.
    Nothing further owed.
-2. **A pre-existing Snyk LOW path-traversal in `cre_sweep.py`** (`argparse` value flowing
+2. ~~**A pre-existing Snyk LOW path-traversal in `cre_sweep.py`** (`argparse` value flowing
    into `load_cell`), present since T9 and untouched by Stage 3. *Condition, unchanged:*
    fix if `cre_sweep.py` is ever re-run for new results, or close as accepted when the
    `CRE-` track completes. **That second branch is now arguably due** — the track has
    completed — so the next closeout that touches this should either close it or say why
-   not.
+   not.~~ **CLOSED AS ACCEPTED 2026-08-04 (evening), by the condition's second branch: the
+   `CRE-` track is complete.** The first branch is not triggered by the `GBL-` blind-listen
+   harness: it imports pure functions from `cre_sweep.py` (`config_for`, `ladder_excludes`)
+   and never re-runs its CLI, and every `load_cell` argument in `GBL-` code is the literal
+   `"B-S1"`, never user input. Revival condition: any future re-run of `cre_sweep.py
+   --cell` for new results re-opens the fix branch.
 
 ## Anything the owner said that is not yet in a file
 

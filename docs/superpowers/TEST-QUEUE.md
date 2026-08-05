@@ -9,6 +9,23 @@ cannot.
 found, or DONE — nothing found. Do not delete entries; the record of what was exercised is
 the point.**
 
+> **⚠ HOW TO COUNT WHAT IS ACTUALLY OUTSTANDING — read this before reporting a number.**
+> Discharging an entry **prepends a new `## DONE` heading above it** and keeps the original
+> `## QUEUED` heading in place, under the line *"Original queued text follows."* The original
+> heading is preserved deliberately — it is the record of what was asked — **but it means a
+> grep for `## QUEUED` returns discharged entries and over-reports.**
+>
+> **An item is live only if its topmost heading says so.** As of 2026-08-05 that is **zero
+> items**: all ten `## QUEUED` headings dated 2026-07-22 to 2026-07-27 sit directly beneath a
+> `## DONE` heading of the same title, and every one is discharged.
+>
+> **This cost six consecutive closeouts.** Each flagged "eight entries still QUEUED and
+> unruled-on" to the owner, the count itself having gone stale (it was ten), and each carried
+> the claim forward into a handoff and into `NEXT.md` without re-reading the file. The check
+> that would have caught it — open one and look at what is above it — takes about a minute.
+> **This is the "satisfied condition that nobody read" failure from `closeout` A3**, in the one
+> document whose entire purpose is to be read by the next session.
+
 > **✅ EXPIRED 2026-07-27 — the constraint below no longer applies, and its trigger is the
 > reason.** The Gate 2 cutover has happened: there is a hosted URL and a phone can reach it.
 > **Entries may now ask for a phone.** The deferred mobile section further down this file is
@@ -23,7 +40,174 @@ the point.**
 
 ---
 
-## N/A (latest) — 2026-08-04 — the map experiment is finished and written up; nothing you can press changed
+## N/A (latest) — 2026-08-05 — your coherence audit is scored; nothing to press
+
+**Nothing to exercise, and nothing is running.** No dev server was started and all four ports
+were checked empty. **Not one line of the app or the website changed** — this session read
+your 77 judgements, ran a scoring script over them, and wrote the result up. A journey you
+build now is identical to one from yesterday.
+
+**What happened, in plain terms.** The audit could tell a planted bad recommendation from a
+real one every single time — twelve out of twelve — so the rest of it counts. Of the 53 cards
+scored, you said 40 belonged, 4 did not, and 9 you could not say. That is just over the
+three-quarters mark you set, **and it clears it by one card.**
+
+The nine you could not judge nearly all say the same thing: there was nothing to listen to.
+Session drummers, a bassist, a producer — real people on real records who have no music of
+their own you can put on. You spotted that yourself in your notes, and the analysis reached it
+separately before your note was opened.
+
+**One thing I checked afterwards, because you asked why the filters missed them.** An artist
+with genuinely no releases *is* dropped. But one filter only fires at zero credits and the
+other only when none of an artist's credits are solo — so **a single solo credit slips past
+both**. Twenty-two of the twenty-three artists behind a bad or unjudgeable verdict were never
+looked at by either filter. That is not something you can see in the app; it is a counting job
+against the archive, and it is written up as an option rather than done.
+
+**Nothing is queued for you to press.** The decision waiting is the one in the results note.
+
+---
+
+## N/A — 2026-08-04 (night) — you ran the listening test; the answer is "can't tell", and the reason is worth your attention
+
+**Nothing to exercise, and nothing is running.** The listening page's server was stopped by
+the session that ran it; all five ports were checked and are empty. **Not one line of the app
+or the website changed, and nothing was adopted.** A journey you build now is identical to
+one from this morning.
+
+**What happened, in plain terms.** You listened to eight pairs of artists, three depths each,
+two versions side by side, and saved thirty-two verdicts. The rules written down before any
+of it existed said: for a result to count, one side has to win by at least five of the sixteen
+"after presses" rows. **The new version won by three.** So the written-down answer is "my ear
+cannot tell them apart where the numbers could" — and by those same rules, **the rebuilt map
+does not get adopted and that idea closes.**
+
+**Three things sit alongside that, and I would rather you heard them from me.**
+
+- **On "did it find me new artists", you picked the new version on all eight pairs out of
+  eight.** Not one tie, not one for the old version. That is the single cleanest signal in the
+  whole test. It does not overturn the result, because nobody wrote down in advance how big a
+  win on that question would count as passing — and picking a bar now, knowing the answer, is
+  exactly the thing this project refuses to do.
+- **Five of the seven rows where you couldn't decide, you couldn't decide because of clips.**
+  Missing clips, clips that were just a song intro, and at least one that was almost certainly
+  the wrong artist. You said so in your own notes at the time. So the test did not find the two
+  versions similar — **it went partly deaf.** A sixteen-row test that loses five rows to broken
+  audio cannot clear a five-row bar.
+- **Before you pressed anything, you preferred the new version six to nothing.** The rules
+  deliberately keep those rows out of the scoring, and I am not sneaking them back in. But it
+  is the biggest number the test produced, and your reason for it was not about obscure
+  artists at all — it was that today's app "takes weird detours" when you look at the whole
+  path rather than step to step.
+
+**Nothing is proposed for you to test.** What is waiting is a decision, and the write-up lays
+out the choices without picking one: accept the answer and stop; treat the clip problem as its
+own piece of work before any future listening test is spent; or open the "weird detours"
+observation as a fresh question. **The rules also mean this particular test cannot be run
+again** — an unwelcome answer stands.
+
+**Still parked, unchanged:** the eight entries from 22–27 July remain queued and unruled-on,
+and your ruling that making money is not a goal is still not written into the project's own
+records.
+
+Detail, if you want it:
+`docs/superpowers/findings/2026-08-04-gentle-arm-blind-listen-results.md`, and the runner's
+own record at `docs/superpowers/2026-08-04-gbl-run-execution-log.md`.
+
+---
+
+## N/A — 2026-08-04 (later) — the listening test is built and ready to run; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04 (night): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate, except its
+     "your one action is starting that runner session" — that has now happened, the listen
+     ran, and all five safety checks passed on first firing; see above. -->
+
+
+**Nothing to exercise, and nothing is running.** All five ports were checked and are empty;
+no server was started and none was left behind. Not one line of the app or the website
+changed. **A journey you build now is identical to one from this morning.**
+
+**What happened, in plain terms — and you steered it twice.** The listening test you
+ordered now exists as a working thing rather than a plan. You picked the eight pairs of
+artists (five from the shortlist, three you recombined yourself to put more distance
+between the two ends), and those are locked down in writing with a timestamp proving they
+were chosen before a single journey existed. That ordering is the whole point: pairs picked
+after seeing the journeys would not be evidence of anything.
+
+**Nothing is proposed for you to test here, and the listening test is not this entry.** It
+arrives through its own page, run by a fresh session that knows nothing about what the
+numbers predicted. **Your one action is starting that session** and pointing it at
+`builder/analysis/2026-08-04-gentle-arm-blind-listen/RUNNER-BRIEF.md` — it needs nothing
+else, and it must not be told anything else.
+
+**One thing I would rather you heard from me before you sit down to listen.** The program
+that builds the journeys has never actually been run. That is deliberate — I was barred
+from running it, because a session that has seen the new map's journeys cannot then build
+an honest way of judging them blind. The consequence is that its safety checks fire for the
+first time in front of you. If one of them stops the run with a clear message, that is the
+experiment working and you should be told exactly what it said. If it crashes instead, that
+is a broken tool rather than a result, and the session running it is under instructions to
+hand it back rather than poke at it — because poking at it means looking at the journeys,
+and then we have no blind runner left.
+
+**A related honest caveat about your three recombined pairs.** Nobody has checked that any
+pair produces a journey long enough to be worth judging after twenty presses, because
+checking means building the journeys, which was the thing I could not do. If a pair falls
+short, the program refuses to run and names it, so you would find out before listening
+rather than halfway through.
+
+**Two things still parked, neither of them about this:** your ruling that making money is
+not a goal is written in my notes but **not yet anywhere in the project's own records** —
+worth landing properly. And the eight entries from 22–27 July are still queued and
+unruled-on.
+
+Detail, if you want it: `docs/superpowers/2026-08-04-gbl-harness-execution-log.md`.
+
+---
+
+## N/A — 2026-08-04 (evening) — you decided to run the listening test, and its rulebook is written; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04 (later): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate, except its
+     "your one action is starting that fresh session" — that has now happened and the
+     harness is built; see above. -->
+
+**Nothing to exercise, and nothing is running.** All five ports were checked and are empty
+(including the new one the listening page will eventually use); no server was started and
+none was left behind. Not one line of the app or the website changed. **A journey you build
+now is identical to one from this morning.**
+
+**What happened, in plain terms — and you steered it four times.** You picked which version
+of the experiment's winners gets your ears: the gentle setting only. The rulebook for that
+listening test is now written and locked before anything runs: what you'll see (the same
+side-by-side comparison page you preferred last time, with your picks saved automatically
+instead of copy-pasted), which artist pairs (drawn from your own Spotify listening history —
+you'll approve the final eight before anything is generated), and what each possible outcome
+means — all fixed in advance so no result can bend the rules. Your other three steers: eight
+pairs instead of five (with the pass bar raised to match, so the bigger test can't pass on a
+weaker signal), the two verdict questions split so "did it dig up new artists" and "did it
+still flow" are answered separately, and the next session runs on the other engine.
+
+**Nothing is proposed for you to test here.** The listening test itself is NOT this entry —
+it arrives through its own page with its own instructions, run by a session that knows
+nothing about what the numbers predicted. Your one action now is starting that fresh
+session; the exact line to give it is in
+[`2026-08-04-HANDOFF-gbl-plan.md`](2026-08-04-HANDOFF-gbl-plan.md).
+
+**Still parked, unchanged:** the eight entries from 22–27 July remain queued and unruled-on,
+and the map-rebuild decision (whether the other data source is worth re-collecting
+everything) is untouched by any of this.
+
+Detail, if you want it: `docs/superpowers/2026-08-04-gbl-planning-execution-log.md`, and
+the rulebook itself at `docs/superpowers/specs/2026-08-04-gentle-arm-blind-listen-design.md`.
+
+---
+
+## N/A — 2026-08-04 — the map experiment is finished and written up; nothing you can press changed
+<!-- "(latest)" stripped 2026-08-04 (evening): only the newest entry carries it, per the
+     convention below. This entry's content is unchanged and still accurate, except its
+     "decision waiting for you" — the listen half of that decision has now been taken;
+     see above. -->
+
 
 **Nothing to exercise, and nothing is running.** All four ports were checked and are
 empty; no server was started and none was left behind. No routing, no graph, no

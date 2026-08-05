@@ -12,18 +12,281 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-04 (STAGE 3), when the CAP RE-EVALUATION EXPERIMENT COMPLETED. All
-four stages have run, every criterion is computed, every read is determined, and the results
-document exists. NOTHING IS OWED BY ANY SESSION, and PR #75 is MERGED (`fbecfac`), so
-NOTHING IS WAITING ON THE OWNER EITHER. THE NEXT ACTION IS HIS — and it is a DECISION, not a
-piece of work: which passing arm (if either) is worth a blind listen, and whether the
-candidate data set's advantage justifies the re-crawl.**
+**Last updated: 2026-08-05 (later), when THE `CAU-` COHERENCE AUDIT WAS SCORED AND WRITTEN UP.
+`CAU-` is COMPLETE and no session owes anything. The next action is the OWNER'S and it is a
+DECISION, not work — the findings note's §4 options. The `GBL-` null below still stands and is
+untouched. The re-crawl decision is STILL UNTAKEN.**
+
+---
+
+> ## ✅ THE `CAU-` COHERENCE AUDIT IS SCORED AND WRITTEN UP, 2026-08-05 (later). **`CAU-` is COMPLETE.** The owner's actions are a DECISION (below) and merging draft PR #77.
+>
+> **Results of record, and the entry point for anything `CAU-`:**
+> [`findings/2026-08-05-coherence-audit-results.md`](findings/2026-08-05-coherence-audit-results.md)
+> — **it owns the `CAU-` figures**; its §4 is the options list, §5 the response to the owner's
+> sealed note, §6 an addendum on the drop filters. Raw data:
+> `builder/analysis/2026-08-04-coherence-audit/cau_judgements.json`, `cau_result.json`,
+> `cau_page_data.json` — **cited, never restated.** Current handoff:
+> [`2026-08-05-HANDOFF-cau-scoring.md`](2026-08-05-HANDOFF-cau-scoring.md). Reasoning, **two
+> logs covering the two chunks**:
+> [`2026-08-05-cau-audit-build-and-run-execution-log.md`](2026-08-05-cau-audit-build-and-run-execution-log.md)
+> (the build and the run, written by that session while it was still live and **before it read
+> any result** — its §5 is the design rationale nothing else states, and its §6 records a gate
+> that was **never reached**) and
+> [`2026-08-05-cau-scoring-execution-log.md`](2026-08-05-cau-scoring-execution-log.md) (the
+> scoring and write-up).
+>
+> **What stands, in one paragraph.** All 77 judgements were scored by a session that did not
+> build or run the audit. **`CAU-G1` passed 12 of 12, so nothing below it is void.** `CAU-C1`
+> landed on `meets_bar` — **by one card**, and that margin travels with every citation.
+> `CAU-C2` did not fire. **`CAU-C3` FIRED**, and the findings note both reports its
+> pre-registered reading ("unfamiliarity was the barrier; the audit's own premise is wrong")
+> **and argues against it**: eight of the nine can't-tells record that there was **nothing to
+> listen to** — session musicians, band members and producers with no solo output — which is a
+> third cause the pre-registration's binary did not anticipate. **Both halves are on the record
+> deliberately and neither may be deleted to resolve the tension.** The owner's sealed note,
+> opened only after the analysis was committed, **reached the same mechanism independently and
+> named the same worked artist.** **Nothing is adopted, no default changed, no shipped code
+> touched, and the `GBL-` null is untouched.**
+>
+> **The decision waiting on the owner, and it is his because it is adoption-adjacent and spends
+> his time:** which of the findings note's §4 options to take — adopt and live with it (Gate 1
+> is personal use, so the blast radius is himself), count the un-listenable class offline
+> first, or both. **§4 frames these as sequential and §5 corrects that: they are not.**
+>
+> **A finding that is not `CAU-` and is the most actionable thing the track produced
+> (findings §6):** the class the audit found slipped past **both** drop filters, because
+> `drop_no_release_tail` fires only at zero release-group credits and `drop_featured_credit`
+> only when none are sole — so **a single sole credit exempts an artist from both.** Verified
+> against both committed `ALG-B` lists: 22 of the 23 artists behind a bad or unjudgeable
+> verdict were **never evaluated by either rule.** Separately, the featured-credit keep-check
+> resolves clips **by name** and about half its keeps had no recorded id to verify against — a
+> `BYP-13` exposure its own census disclosed and never acted on.
+>
+> ### 🅿 Parked by the owner, 2026-08-05 — the novelty/coherence frontier
+>
+> **Not a next action, not scheduled, and explicitly not confirmed.** Raised in conversation
+> after the `CAU-` scoring and parked at his instruction so it survives the session.
+>
+> The stated goal has always been that **novelty-likelihood rises as bypass count rises**. Its
+> unstated companion is that **coherence probably falls** as it rises — so for any given pair
+> there is a press count beyond which the journey stops being worth showing, and the two curves
+> cross somewhere. Nothing has measured either curve; this is a shape, not a finding. **He is
+> explicitly not claiming the rebuilt graph has the gradient, not guessing where any crossing
+> point is, and not proposing this as a priority.**
+>
+> **The design consequence that is already live, and is the reachable half:** the `GBL-` depths
+> (0, 10, 20) were chosen against the production graph. If a graph reaches novelty faster, the
+> same press count sits at a **different position on each graph's own curve**, so a fixed depth
+> is not a matched comparison between two graphs — it is an uncontrolled variable that no
+> factor table has carried, because until there was a graph that moved quickly it could not
+> bite. **This changes nothing about `GBL-`**, whose null was pre-registered and run-once and
+> stands; it is a constraint on any *future* comparison.
+>
+> ### ✅ The `TEST-QUEUE.md` backlog was a false alarm, and it is closed
+>
+> **Six consecutive closeouts flagged "eight 2026-07-22→27 entries still `QUEUED` and
+> unruled-on". There is no such backlog and there never was.** Discharging an entry in that
+> file prepends a `## DONE` heading and **keeps the original `## QUEUED` heading** beneath it,
+> so a grep for `## QUEUED` returns discharged entries. All ten such headings (the count itself
+> had gone stale at eight) sit directly beneath a `DONE` of the same title. **Zero items are
+> outstanding.** The counting rule is now written at the top of `TEST-QUEUE.md` so the next
+> closeout does not re-report it.
+>
+> **Still open, and genuinely so:** the owner's 2026-08-04 **no-commercialization ruling** is in
+> memory but not yet in the repo record — it belongs in `PRODUCT-REQUIREMENTS.md`.
+>
+> ---
+
+> ## ✅ THE `CAU-` COHERENCE AUDIT WAS JUDGED, 2026-08-05. ~~**The next action is a FRESH SESSION** — it scores `cau_score.py` and writes up the result.~~ *(DONE — scored and written up; see the top block, which owns current state.)*
+>
+> Entry point is the superseded handoff:
+> [`2026-08-05-HANDOFF-cau-audit-run.md`](2026-08-05-HANDOFF-cau-audit-run.md) — **remains
+> authoritative for the build-and-run chunk's internals, and unusually load-bearing because
+> that chunk left no execution log.** Governing document:
+> [`specs/2026-08-04-coherence-audit-preregistration.md`](specs/2026-08-04-coherence-audit-preregistration.md)
+> (`CAU-`; four amendments and one correction, **all committed before any judgement
+> existed**). Raw record: `builder/analysis/2026-08-04-coherence-audit/cau_judgements.json`
+> (committed `cb11b38`, before anything was scored) — **cited, never restated.** Operational
+> brief: `builder/analysis/2026-08-04-coherence-audit/CAU-RUN-BRIEF.md`.
+>
+> ~~**⛔ `cau_owner_notes_SEALED.md` IS SEALED UNTIL THE ANALYSIS IS WRITTEN AND COMMITTED.**~~
+> **✅ DISCHARGED 2026-08-05 (later) — the seal held and was opened in the right order.** The
+> analysis was committed at `184b3ac`, the note opened afterwards, and the response appended as
+> findings §5 at `4bdc583` with nothing above it revised. **The ordering worked and is worth
+> reusing:** the independent read reached the owner's mechanism and named the same worked
+> artist without having seen his note. *(Original instruction retained below as the record.)*
+>
+> Reading order, and the handoff owns it: prereg → `cau_judgements.json` → `cau_result.json`
+> → **write and COMMIT your own read** → only then open the sealed note, and respond to it in
+> a separately headed section. **This is NOT the `GBL-` ordering and the difference is
+> deliberate.** `gbl_owner_notes.md` held impressions of what he heard — evidence, read before
+> the tally. **This note carries his strong opinions about where the project should go**; he
+> said so and asked for this ordering himself. Read first it would steer the write-up rather
+> than inform it, and hand him his own view back as though it came from the data. **The commit
+> boundary is the evidence the analysis was not shaped by his direction.** Provenance is
+> intact: written after judging, **before anything was scored**, committed **unread** at
+> `4009707` when no criterion had been computed — the commit timestamp is the evidence, not
+> the file's mtime.
+>
+> **What stands, in one paragraph.** The owner identified a confound in the `GBL-` listen's
+> instrument — a 30-second clip of one arbitrary track cannot support a coherence judgement
+> about an unfamiliar artist, and that failure activates **only in the arm that succeeds at
+> delivering unfamiliar artists**. `CAU-` is the one-arm follow-up it earned: the gentle
+> arm's 16 deep journeys, shown whole, every interior card judged *"does this artist belong
+> on this journey?"* with **proper listening** for any artist he could not place. **All 77
+> judgements are in and committed; `CAU-G1`, `CAU-C1`, `CAU-C2` and `CAU-C3` are all
+> uncomputed.** Three things the scoring session must carry: **`CAU-G1` is evaluated first
+> and alone** — below 10 of 12 planted artists rejected, the audit is **VOID**, never a weak
+> pass; **`D_all` is 53**, not 65 or 77, because the 12 cards sitting beside a planted artist
+> were judged next to a fake and are excluded (`CAU-AM3`); and **`CAU-C1`'s middle band is
+> deliberately neither pass nor fail** — the audit names no default there and none may be
+> supplied. **Nothing is adopted, no default changed, no shipped code touched.**
+>
+> **⚠ The `GBL-` null is untouched by anything this audit finds.** `GBL-` §5's run-once rule
+> still binds that verdict. `CAU-` measures a different thing — per-artist fit on one arm,
+> not a journey-level preference between two — and **may not be used to smuggle a comparison
+> back in.** §6's barred reads travel with every sentence.
+>
+> ~~**After scoring:** remove the `cau_page_data.json` line from `.gitignore` and commit it~~
+> *(DONE, `551ed0e`.)* ~~**No closeout has been run for this chunk.**~~ *(RUN 2026-08-05
+> (later), covering this chunk and the scoring one.)* **The top block owns current state.**
+>
+> ---
+
+> ## ✅ THE GENTLE-ARM BLIND LISTEN IS RUN, UNBLINDED AND WRITTEN UP, 2026-08-04 (night).
+
+*(Superseded on next actions by the `CAU-` block above; still authoritative for the `GBL-`
+result itself, which stands.)*
+
+**Original header and content follow. Last updated: 2026-08-04 (night), when THE LISTEN WAS RUN AND WRITTEN UP. The listen is
+SPENT and it returned the pre-registered NULL — margin 3 against a bar of 5. Option A
+closes without adoption; production stands; nothing is adopted and no default changed. The
+re-crawl half of the 2026-08-04 decision is STILL UNTAKEN and untouched by the null. The
+next action is the OWNER'S and it is a decision, not work.**
 
 ---
 
 ## Next
 
-> ## ▶ THE `CRE-` EXPERIMENT IS COMPLETE, 2026-08-04. ~~**The owner's one action is merging draft PR #75**~~ *(MERGED, `fbecfac`; branch deleted)* — **nothing is waiting on the owner, and no session owes anything.** **The next action is his: a DECISION, not work.**
+> ## ▶ THE GENTLE-ARM BLIND LISTEN IS RUN, UNBLINDED AND WRITTEN UP, 2026-08-04 (night). **The listen returned the pre-registered NULL. Option A CLOSES without adoption.** The owner's actions are a DECISION (below) and merging draft PR #77.
+>
+> **Results of record, and the entry point for anything `GBL-`:**
+> [`findings/2026-08-04-gentle-arm-blind-listen-results.md`](findings/2026-08-04-gentle-arm-blind-listen-results.md)
+> — **it owns the `GBL-` figures**; its §4 is the options list and its §5 is the barred
+> reads. Raw data: `builder/analysis/2026-08-04-gentle-arm-blind-listen/gbl_verdicts.json`,
+> `gbl_result.json`, `gbl_owner_notes.md` — **cited, never restated.** The blind runner's
+> record: [`2026-08-04-gbl-run-execution-log.md`](2026-08-04-gbl-run-execution-log.md) —
+> **its §5, on what the runner saw and on the blind failing, must be read before anything is
+> built on the result.** Reasoning for the write-up:
+> [`2026-08-04-gbl-writeup-execution-log.md`](2026-08-04-gbl-writeup-execution-log.md).
+> Governing document unchanged:
+> [`specs/2026-08-04-gentle-arm-blind-listen-design.md`](specs/2026-08-04-gentle-arm-blind-listen-design.md)
+> (`GBL-`) — its §5 fixed the read before any journey existed and it was applied, not
+> reinterpreted.
+>
+> **What stands, in one paragraph.** All 8 pairs × 3 depths × both arms were generated,
+> presented and judged; the run state §5 requires was met (32 of 32 slots). **On the 16 deep
+> rows the margin was 3 against a bar of 5, so the branch is `no_detectable_difference` —
+> "my ear cannot tell them apart where the numbers could" — and per §5 that means production
+> stands and Option A closes without adoption.** Four things travel with that sentence and
+> must never be dropped from it: **the novelty question went 8–0 to the rebuilt package**
+> (`GBL-Q1`, unanimous, no no-preferences — but §5 fixed **no threshold for it**, so it is
+> data with no pre-registered read and no bar may be chosen now); **five of the seven
+> undecided deep rows were undecided because of clip defects**, not because the journeys were
+> alike, so the instrument lost resolution rather than finding equivalence; **the blind did
+> not hold** — the owner reports it was "almost always really easy to tell which side was the
+> new graph", volunteered before he read the result; and **at zero presses he preferred the
+> rebuilt app 6–0**, which §5 excludes from the tally and which therefore rescues nothing.
+> **Neither arm collapsed into a random walk** (`GBL-Q2`'s collapse clause, empty on all
+> eight pairs). **None of the four hidden offline metrics predicted his picks** — fame at 5
+> of 9 is a coin flip. **Nothing is adopted, no default changed, no shipped code touched.**
+>
+> **The decision waiting on the owner, and it is his because it is adoption-adjacent and
+> spends his time:** which of the findings note's §4 options to take — accept the null and
+> stop, open the clip defect as its own track, or open the whole-path "weird detours"
+> observation as a new pre-registered question. **§4's option D (adopt on the novelty sweep)
+> I do not think is available**, and the reasoning is in the note.
+>
+> **⚠ `GBL-` §5's run-once rule now binds: this verdict may not be re-listened.** New
+> candidates on new findings still may.
+>
+> **Two items open and NOT `GBL-`:** the owner's 2026-08-04 no-commercialization ruling is
+> in memory but **still not in the repo record** (it belongs in `PRODUCT-REQUIREMENTS.md`);
+> and the **eight 2026-07-22→27 `TEST-QUEUE.md` entries** remain `QUEUED` and unruled-on —
+> flagged at four consecutive closeouts now.
+>
+> ---
+
+> ## ✅ THE `GBL-` HARNESS IS BUILT AND THE LISTEN IS READY TO RUN, 2026-08-04 (later). ~~**The owner's one action is STARTING A FRESH, MECHANICS-ONLY RUNNER SESSION**~~ *(DONE — the listen ran, unblinded and was written up; see the top block, which owns current state.)* pointed at `builder/analysis/2026-08-04-gentle-arm-blind-listen/RUNNER-BRIEF.md` — that brief is self-contained and the runner must read nothing else. Branch `gentle-arm-blind-listen`, draft PR #77 (it stays open; merge is a later decision).
+>
+> Entry point is the current handoff:
+> [`2026-08-04-HANDOFF-gbl-harness.md`](2026-08-04-HANDOFF-gbl-harness.md).
+> Governing document unchanged:
+> [`specs/2026-08-04-gentle-arm-blind-listen-design.md`](specs/2026-08-04-gentle-arm-blind-listen-design.md)
+> (`GBL-`; its §8 now carries **`GBL-AM1`**, the eight approved pairs, and a **`GBL-CORR`**
+> corrections series). The plan
+> ([`plans/2026-08-04-gentle-arm-blind-listen.md`](plans/2026-08-04-gentle-arm-blind-listen.md))
+> is **COMPLETE, not live**. Reasoning:
+> [`2026-08-04-gbl-harness-execution-log.md`](2026-08-04-gbl-harness-execution-log.md) —
+> **its §5 must be read before anything is built on this**.
+>
+> **What stands, in one paragraph.** The harness is complete and committed: pair
+> derivation, both-arm generation behind five hard gates, arm-symmetric clip resolution,
+> the side-by-side page with verdicts written to disk, and the run-state-gated tally. **No
+> shipped code was touched** — nothing under `api/`, `frontend/` or `builder/src/`. The
+> owner approved eight pairs (five from the familiarity proposal, three his own
+> recombinations) and they are committed as **`GBL-AM1` with the file's sha256, before
+> `gbl_generate.py` had ever run**. **`GBL-CORR1`** corrected §5's branch table, which
+> carried the pre-scaling `≥ 3` bar while the same section's prose and worked examples
+> carried the scaled `≥ 5`; a test now pins the two together. Six defects in the plan's own
+> code were found and fixed, four of them tests that would have passed while testing
+> nothing. **⚠ `gbl_generate.py` has never run against the real artifacts** — the seam bars
+> it — so its five gates fire for the first time in the runner session; the brief tells the
+> runner to distinguish a `SystemExit` (respect it) from a traceback (a harness fault, do
+> not debug). ~~**Nothing is adopted, no default changed, and the listen is unspent.**~~
+> *(Superseded 2026-08-04 (night): nothing is adopted and no default changed — both still
+> true — but **the listen is now SPENT**. All five gates passed on first firing and no pair
+> swap was needed. See the top block.)*
+>
+> **Two items open and NOT `GBL-`:** the owner's 2026-08-04 no-commercialization ruling is
+> in memory but **not yet in the repo record** (it belongs in `PRODUCT-REQUIREMENTS.md`);
+> and the **eight 2026-07-22→27 `TEST-QUEUE.md` entries** remain `QUEUED` and unruled-on.
+>
+> ---
+
+> ## ✅ THE GENTLE-ARM BLIND LISTEN (`GBL-`) WAS SPECIFIED AND PLANNED, 2026-08-04 (evening). ~~**The owner's one action is STARTING A FRESH SESSION ON OPUS**~~ *(DONE — the plan is executed; see the top block, which owns current state.)* to execute the plan inline (executing-plans) on branch `gentle-arm-blind-listen` (draft PR #77 — it stays open through execution; merge is a later decision).
+>
+> Entry point is the current handoff:
+> [`2026-08-04-HANDOFF-gbl-plan.md`](2026-08-04-HANDOFF-gbl-plan.md).
+> Governing document:
+> [`specs/2026-08-04-gentle-arm-blind-listen-design.md`](specs/2026-08-04-gentle-arm-blind-listen-design.md)
+> (`GBL-`; committed before any journey exists, and it **wins wherever the plan
+> disagrees**). Operational document:
+> [`plans/2026-08-04-gentle-arm-blind-listen.md`](plans/2026-08-04-gentle-arm-blind-listen.md)
+> (8 tasks). Reasoning:
+> [`2026-08-04-gbl-planning-execution-log.md`](2026-08-04-gbl-planning-execution-log.md).
+>
+> **What stands, in one paragraph.** The owner chose §4 **Option A** (gentle arm only;
+> the strong arm is out of scope, a new amendment if ever wanted) and ruled the executor
+> model (Opus, fresh session, inline). The listen is the C3 side-by-side format — his
+> recorded preference — with journeys generated by the `CRE-G1`(a)-verified mirror, so
+> **no shipped code changes before any adoption**. Eight owner-raised pairs from his
+> Spotify familiarity (approval is **Task 3, an OWNER GATE**, committed as `GBL-AM1`
+> before any journey exists); depths d0/d10/d20; reads fixed pre-run with **margin ≥ 5 of
+> 16 deep rows**; run-once. **V0 is the adopted production artifact, deliberately NOT the
+> CRE `E-S0` cell** (the drop flags differ — log §2.3). After Task 8 the listen runs in a
+> **mechanics-only runner session** (`RUNNER-BRIEF.md`), and the write-up belongs to a
+> further fresh session. **Package comparison only — no attribution sentences; nothing
+> adopts on any verdict; the four `CRE-R2` qualifiers travel; `REQ-38` is now SCHEDULED
+> but still unspent; the re-crawl decision is untouched.**
+>
+> **Flagged and still standing: the eight 2026-07-22→27 `TEST-QUEUE.md` entries remain
+> `QUEUED` and undischarged** (raised 2026-08-04, not yet ruled on).
+>
+> ---
+
+> ## ✅ THE `CRE-` EXPERIMENT IS COMPLETE, 2026-08-04. ~~**The owner's one action is merging draft PR #75**~~ *(MERGED, `fbecfac`; branch deleted)* — **nothing is waiting on the owner, and no session owes anything.** ~~**The next action is his: a DECISION, not work.**~~ *(DECIDED 2026-08-04 evening — §4 Option A, the gentle arm's blind listen; see the top block, which owns current state.)*
 >
 > Entry point is the current handoff:
 > [`2026-08-04-HANDOFF-cre-stage3-findings.md`](2026-08-04-HANDOFF-cre-stage3-findings.md).
@@ -50,8 +313,10 @@ candidate data set's advantage justifies the re-crawl.**
 > "tags did this" or "votes did this" sentence is licensed.** **Nothing is adopted, no default
 > changed, no shipped code touched, and the blind listen (`REQ-38`) is UNSPENT.**
 >
-> **The decision waiting on the owner** is which passing arm (if either) is worth a blind
-> listen, and whether the candidate data set's advantage justifies the re-crawl it implies.
+> ~~**The decision waiting on the owner** is which passing arm (if either) is worth a blind
+> listen, and whether the candidate data set's advantage justifies the re-crawl it implies.~~
+> *(HALF-DISCHARGED 2026-08-04 evening: the listen half is decided — Option A, gentle arm
+> only. The re-crawl half is UNTAKEN; see the top block.)*
 > Both are his column — adoption, his ear, his risk acceptance. **"The family space is
 > exhausted" is a barred read**; the unrun remainder is named in the findings note's §5.3.
 >

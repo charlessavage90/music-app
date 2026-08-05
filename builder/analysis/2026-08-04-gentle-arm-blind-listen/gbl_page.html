@@ -1,0 +1,180 @@
+<!-- gbl_page.html - the GBL blind listen page. Throwaway; vanilla, no assets.
+     Artist names are set with textContent, never innerHTML: they come from
+     MusicBrainz and contain quotes, ampersands and angle brackets. -->
+<!doctype html>
+<meta charset="utf-8">
+<title>GBL blind listen</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 1100px; }
+  .banner { background: #fff3cd; border: 1px solid #ccc; padding: .6rem 1rem; }
+  .pair { border-top: 3px solid #444; margin-top: 2rem; padding-top: 1rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .side { border: 1px solid #ccc; padding: .6rem; }
+  .card { display: flex; gap: .5rem; align-items: center; margin: .25rem 0; }
+  .endpoint { font-weight: 600; }
+  audio { height: 28px; }
+  textarea { width: 100%; }
+  .done { color: #060; }
+  label { margin-right: .75rem; }
+</style>
+<div class="banner"><b>Blind listen in progress.</b> Judge the artist sequences;
+ignore clip failures unless they differ by side. <b>No Spotify or
+monthly-listener lookups until every verdict is saved.</b> Depth rows are the
+same pair after 0, 10 and 20 presses of &ldquo;I know them&rdquo;; listen to each
+side&rsquo;s depths in order. The first and last artist in every list are the two
+you chose &mdash; they are the same on both sides, by construction. Sittings can be
+split: saved rows persist.</div>
+<div id="app"></div>
+<script>
+const DATA = __GBL_DATA__;
+const PICKS = ["L", "R", "none"];
+const app = document.getElementById("app");
+
+function el(tag, text) {
+  const n = document.createElement(tag);
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+
+function radios(name) {
+  const wrap = el("span");
+  for (const p of PICKS) {
+    const label = el("label");
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = name;
+    input.value = p;
+    label.appendChild(input);
+    label.appendChild(el("span", " " + (p === "none" ? "no preference" : p)));
+    wrap.appendChild(label);
+  }
+  return wrap;
+}
+
+function cards(artists) {
+  const box = el("div");
+  artists.forEach((a, i) => {
+    const card = el("div");
+    card.className = "card";
+    const name = el("span", a.name);
+    if (i === 0 || i === artists.length - 1) name.className = "endpoint";
+    card.appendChild(name);
+    const c = DATA.clips[a.mbid];
+    if (c && c.preview_url) {
+      const audio = document.createElement("audio");
+      audio.controls = true;
+      audio.preload = "none";
+      audio.src = c.preview_url;
+      card.appendChild(audio);
+    } else {
+      card.appendChild(el("em", "(no clip)"));
+    }
+    box.appendChild(card);
+  });
+  return box;
+}
+
+async function post(path, body) {
+  const r = await fetch(path, { method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body) });
+  if (!r.ok) alert("save failed: " + await r.text());
+  return r.ok;
+}
+
+for (const pair of DATA.pairs) {
+  const div = el("div");
+  div.className = "pair";
+  div.appendChild(el("h2", pair.a + " → " + pair.b));
+
+  for (const row of pair.rows) {
+    const r = el("div");
+    r.appendChild(el("h3", row.depth === 0
+      ? "before any presses"
+      : "after " + row.depth + " presses"));
+    const grid = el("div");
+    grid.className = "row";
+    for (const side of ["L", "R"]) {
+      const s = el("div");
+      s.className = "side";
+      s.appendChild(el("h4", side));
+      s.appendChild(cards(row[side].artists));
+      grid.appendChild(s);
+    }
+    r.appendChild(grid);
+
+    const picks = el("div");
+    const name = "pick-" + pair.key + "-" + row.depth;
+    picks.appendChild(radios(name));
+    const btn = el("button", "save row");
+    const saved = el("span");
+    picks.appendChild(btn);
+    picks.appendChild(saved);
+    btn.onclick = async () => {
+      const sel = picks.querySelector("input:checked");
+      if (!sel) return alert("pick a side or no preference first");
+      if (await post("/verdict", { pair: pair.key, depth: String(row.depth),
+                                   pick: sel.value })) {
+        saved.textContent = " saved ✓";
+        saved.className = "done";
+      }
+    };
+    r.appendChild(picks);
+    div.appendChild(r);
+  }
+
+  const claims = el("div");
+  claims.appendChild(el("h3", "pair verdict"));
+
+  // GBL-Q1 and GBL-Q2, frozen by spec §4 and owner-reviewed. Each is ONE
+  // unbroken literal on purpose: split across a `+` the sentence no longer
+  // appears verbatim in the served page, and test_gbl_page's frozen-wording
+  // check -- the thing that catches drift before a run rather than after --
+  // silently stops testing anything.
+  const q1 = el("p");
+  q1.appendChild(el("b", "Q1 (novelty): "));
+  q1.appendChild(el("span", "As the presses accumulate, which side, if either, delivers more artists new to you? "));
+  q1.appendChild(radios("q1-" + pair.key));
+  claims.appendChild(q1);
+
+  const q2 = el("p");
+  q2.appendChild(el("b", "Q2 (coherence): "));
+  q2.appendChild(el("span", "Which side, if either, holds together better as a journey — each step a sensible next listen? Did either side collapse into a random walk into obscurity? "));
+  q2.appendChild(radios("q2-" + pair.key));
+  claims.appendChild(q2);
+
+  const collapseP = el("p");
+  collapseP.appendChild(el("span", "If a side did collapse, which and where? "));
+  const collapse = document.createElement("input");
+  collapse.size = 60;
+  collapse.className = "collapse";
+  collapseP.appendChild(collapse);
+  claims.appendChild(collapseP);
+
+  const notesP = el("p");
+  notesP.appendChild(el("span",
+    "Notes (what read as smooth vs jarring — these become the record):"));
+  notesP.appendChild(document.createElement("br"));
+  const notes = document.createElement("textarea");
+  notes.rows = 4;
+  notesP.appendChild(notes);
+  claims.appendChild(notesP);
+
+  const cbtn = el("button", "save pair verdict");
+  const csaved = el("span");
+  claims.appendChild(cbtn);
+  claims.appendChild(csaved);
+  cbtn.onclick = async () => {
+    const a1 = claims.querySelector('input[name="q1-' + pair.key + '"]:checked');
+    const a2 = claims.querySelector('input[name="q2-' + pair.key + '"]:checked');
+    if (!a1 || !a2) return alert("answer Q1 and Q2 first");
+    if (await post("/claims", { pair: pair.key, q1: a1.value, q2: a2.value,
+        q2_collapse: collapse.value, notes: notes.value })) {
+      csaved.textContent = " saved ✓";
+      csaved.className = "done";
+    }
+  };
+  div.appendChild(claims);
+  app.appendChild(div);
+}
+</script>

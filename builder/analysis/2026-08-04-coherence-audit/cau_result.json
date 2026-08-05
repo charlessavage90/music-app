@@ -1,0 +1,225 @@
+{
+  "CAU_G1": {
+    "controls": 12,
+    "rejected": 12,
+    "bar": 10,
+    "pass": true,
+    "sentence": "the audit can tell a bad recommendation from a good one"
+  },
+  "readings": {
+    "CAU_C1": {
+      "D_all": {
+        "n": 53,
+        "fits": 40,
+        "doesnt_fit": 4,
+        "cant_tell": 9,
+        "fits_frac": 0.7547169811320755,
+        "excluded_control_adjacent": 12
+      },
+      "D_lookup": {
+        "n": 37,
+        "fits": 26,
+        "doesnt_fit": 3,
+        "cant_tell": 8,
+        "fits_frac": 0.7027027027027027
+      },
+      "bar_pass": 0.75,
+      "bar_fail": 0.5,
+      "branch": "meets_bar",
+      "sentence": "The new artists it digs up genuinely belong in the journey."
+    },
+    "CAU_C2": {
+      "worst_journey_doesnt_fit": 1,
+      "trigger": 3,
+      "fires": false,
+      "per_journey": {
+        "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20": 1,
+        "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10": 1,
+        "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20": 1,
+        "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10": 1
+      },
+      "sentence": "the ones that do not belong are spread thin"
+    },
+    "CAU_C3": {
+      "cant_tell_frac": 0.16981132075471697,
+      "trigger": 0.15,
+      "fires": true,
+      "sentence": "proper listening still left a large share unjudgeable, which falsifies this audit's own premise"
+    }
+  },
+  "VOID": false,
+  "journey_notes": {
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d10": "",
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10": "Nathan East, Max Martin, and Brad Delson are all artists that seem to be mostly collaborators on other works. Really, really obscure journey"
+  },
+  "unsealed_injections": {
+    "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20": {
+      "journey": "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20",
+      "insert_at": 1,
+      "between": [
+        "The War on Drugs",
+        "Youth Lagoon"
+      ],
+      "injected_mbid": "22f6ed4d-c1ce-4f7b-8e69-a5761a9de9aa",
+      "injected_name": "Villagers",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20#1",
+      "excluded_slot": "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20#2"
+    },
+    "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10": {
+      "journey": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10",
+      "insert_at": 8,
+      "between": [
+        "Camel",
+        "Eloy"
+      ],
+      "injected_mbid": "480dbe19-5198-4f26-b240-f8f2c89e6ca8",
+      "injected_name": "40 Winks",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#8",
+      "excluded_slot": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10#7"
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10": {
+      "journey": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10",
+      "insert_at": 1,
+      "between": [
+        "Tame Impala",
+        "Nathan East"
+      ],
+      "injected_mbid": "0d5ce456-581b-403b-81bc-8461cfb750f2",
+      "injected_name": "クワガタP",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#1",
+      "excluded_slot": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10#2"
+    },
+    "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20": {
+      "journey": "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20",
+      "insert_at": 1,
+      "between": [
+        "Arcade Fire",
+        "Franz Ferdinand"
+      ],
+      "injected_mbid": "7e13cd1c-0300-4d03-bd8e-5f86dd99d74f",
+      "injected_name": "At the Drive‐In",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#1",
+      "excluded_slot": "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20#2"
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20": {
+      "journey": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20",
+      "insert_at": 5,
+      "between": [
+        "blink‐182",
+        "Yellowcard"
+      ],
+      "injected_mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c",
+      "injected_name": "Sufjan Stevens",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20#5",
+      "excluded_slot": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20#4"
+    },
+    "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20": {
+      "journey": "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20",
+      "insert_at": 3,
+      "between": [
+        "Depeche Mode",
+        "The Beatles"
+      ],
+      "injected_mbid": "f96de591-5dae-41da-855b-eb387d88d7d4",
+      "injected_name": "Fu Manchu",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20#3",
+      "excluded_slot": "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20#2"
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10": {
+      "journey": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10",
+      "insert_at": 1,
+      "between": [
+        "Wishbone Ash",
+        "Tony Banks"
+      ],
+      "injected_mbid": "8670a056-a1a1-4434-806d-c4bce6c473d4",
+      "injected_name": "Roberto Vecchioni",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10#1",
+      "excluded_slot": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10#2"
+    },
+    "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20": {
+      "journey": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20",
+      "insert_at": 3,
+      "between": [
+        "King Crimson",
+        "Pink Floyd"
+      ],
+      "injected_mbid": "38c5cdab-5d6d-43d1-85b0-dac41bde186e",
+      "injected_name": "Blind Melon",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20#3",
+      "excluded_slot": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20#2"
+    },
+    "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10": {
+      "journey": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10",
+      "insert_at": 1,
+      "between": [
+        "The Decemberists",
+        "Spoon"
+      ],
+      "injected_mbid": "c147b96e-3428-4604-9b6c-d931f980f684",
+      "injected_name": "Oceansize",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10#1",
+      "excluded_slot": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10#2"
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10": {
+      "journey": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10",
+      "insert_at": 4,
+      "between": [
+        "Ben Folds",
+        "Guster"
+      ],
+      "injected_mbid": "cbcbb22c-3a8d-46af-b4ba-09c98f0d7931",
+      "injected_name": "J Dilla",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10#4",
+      "excluded_slot": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10#3"
+    },
+    "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20": {
+      "journey": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20",
+      "insert_at": 5,
+      "between": [
+        "Nada Surf",
+        "Guster"
+      ],
+      "injected_mbid": "56c4b861-0922-4c3a-a9b9-3bfcb00f8274",
+      "injected_name": "Zedd",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20#5",
+      "excluded_slot": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20#4"
+    },
+    "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20": {
+      "journey": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20",
+      "insert_at": 3,
+      "between": [
+        "EELS",
+        "Fountains of Wayne"
+      ],
+      "injected_mbid": "5f821136-9935-403c-abb5-e78ddda35e9f",
+      "injected_name": "Bayside",
+      "band_widenings": 0,
+      "min_distance_from_neighbours": 3,
+      "slot": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20#3",
+      "excluded_slot": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20#2"
+    }
+  }
+}
