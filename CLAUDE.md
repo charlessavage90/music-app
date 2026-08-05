@@ -14,7 +14,7 @@ here. It owns **no figures and no status**; both are pointed at below, never res
 | **What is the next action?** | Exactly one file: [`docs/superpowers/NEXT.md`](docs/superpowers/NEXT.md). **Read it before starting anything; never restate it here or anywhere else.** It owns gate state, what is closed and must not be re-planned, what is waiting on the owner, and the path-quality pause — and it is rewritten at every `closeout`, which is why it is a pointer and not a summary: this row went three tracks stale as a summary. **Two standing facts it cannot go stale on:** the next action is the **owner's call**, and pausing or resuming a track is **his trigger, never a session's** (path-quality: paused 2026-07-25, unpaused 2026-07-28; current state lives in `NEXT.md`, never here). |
 | **Are the hub / payload figures safe to use?** | **No, and neither is "popularity" as a proxy for fame.** Three quantities that get used interchangeably and are not: **degree ≠ fame** (§2.6 — `top1pct_degree_frac`, "payload", `degree_hub_penalty`, `w_degree_hub` are all top-1%-by-*degree*; they were named `hubfrac` / `hub_penalty` / `w_hub` until 2026-07-23, and older documents and every script under `builder/analysis/` still say so — mapping in `builder/analysis/README.md`); **popularity ≠ fame** at the top, where a lo-fi producer and a Beatle score alike (§2.11); and **raw popularity ≠ percentile** — `pop_raw` is a value, never a rank; see §2.12 for the extent of the gap. Each has already caused a wrong conclusion here. **Check which currency a claim is in before acting on it.** And **"fame" changed meaning 2026-08-02**: in older documents it is the retired worldly construct; the current construct (novelty-likelihood) and its adopted proxy are owned by `PRODUCT-REQUIREMENTS.md`'s Definitions — never "fix" either direction. |
 | **What's the overall plan?** | `docs/superpowers/plans/2026-07-21-alpha-rollout-roadmap.md` — three gates: personal use → friends & family → public. |
-| **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends to it; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
+| **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends **only when there is something he can press** — an empty file is a valid state, never a lapse; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
 | **What does the owner mean by "better"?** | Two documents since 2026-07-29: `docs/superpowers/PRODUCT-REQUIREMENTS.md` (`REQ-`) is his Must/Should/Expect requirements layer and **governs where the two disagree** (its §10 lists the disagreements); `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` remains the calibration record for the blind listening test, this project's strongest evidence class. Read both before running one, interpreting a verdict, **or designing anything that scores a path**. WGLL records **preference, not evidence**: never read a threshold off it, but a criterion that contradicts either document is wrong. Worked example — the Track 2 pre-registration's C4 existed because value 2 ruled out fewer-but-obscurer; that clause is among the superseded (§10 there), which is exactly why the governing document matters. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--dev-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
 | **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. Also `doc-auditor.md`, project-local and shadowing the global one; `closeout` B1 dispatches it, and `docs/README.md` says what it checks. And `consultant.md` — **not a subagent**: it is launched as its own session (`claude --agent consultant`), reads only the committed record, and gives one reasoned recommendation on one named decision. Its whole value is that its inputs are the owner's, not another session's paraphrase, so a working session must never dispatch it. |
@@ -298,9 +298,15 @@ the subordinate clause did not survive. The owner asking what stage 2 was is wha
 and those four arms produced the only signal in fifteen.
 
 > **No two load-bearing objects share an identifier, and new identifier series are
-> namespaced.** Prefix them (`T3-C1`) or pick disjoint letters, and check against every
-> document you cite. **Forward-only — never rename anything committed**; a frozen document's
-> value is that it is frozen.
+> namespaced.** Prefix them (`T3-C1`) or pick disjoint letters. **Collision-check by sweeping
+> every ref — never the working directory**, which walks `builder/scratch/`'s multi-GB dumps
+> and takes minutes, and never your own HEAD, where a concurrent session's series is invisible
+> (2026-08-05: `ULC-` read free from a branch cut hours before the one using it):
+> ```bash
+> git grep -lE '\bULC-' $(git for-each-ref --format='%(refname)' refs/remotes refs/heads) -- '*.md'
+> ```
+> Silence means free; ~0.2 s. **Forward-only — never rename anything committed**; a frozen
+> document's value is that it is frozen.
 
 Track 2's pre-registration accumulated eleven collisions: `A1`–`A7` are simultaneously
 factorial arms and amendment IDs, `C1`–`C3` simultaneously success criteria and Phase 1

@@ -1,6 +1,6 @@
 ---
 name: session-start
-description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. It is owed by any session that will act on repository state — edit, commit, run a job — not only by builders; but many sessions here only read and advise, and the owner starts the ones that act with it instinctively. A session that owes it and was not given it says so once and proceeds — a fact about itself, never a recommendation to run it. This is mechanical orientation, not exploration — about five minutes: four questions, then a name for the session.
+description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. It is owed by any session that will act on repository state — edit, commit, run a job — not only by builders; but many sessions here only read and advise, and the owner starts the ones that act with it instinctively. A session that owes it and was not given it says so once and proceeds — a fact about itself, never a recommendation to run it. This is mechanical orientation, not exploration — about five minutes, with separate tracks for changing the app and changing the project's own apparatus.
 ---
 
 # Session start
@@ -11,6 +11,12 @@ consumes something a previous closeout produced, which is what keeps both cheap.
 **Answer four questions, name the session, then start.** This is not codebase exploration
 — `CLAUDE.md` already covers architecture, and re-deriving it is what makes fresh sessions
 expensive. Five minutes, then work.
+
+> **Pick a track first. §A–§E are written for a session that changes the app.** If this
+> session changes the project's own **apparatus** instead — documentation, skills, agents,
+> the map, `NEXT.md`, memory, bookkeeping — **run §MT, then §C and §E, and skip §A, §B and
+> §D.** Roughly half of A–E is inert for that work, and the four checks that catch its
+> characteristic damage are not in A–E at all.
 
 ---
 
@@ -103,15 +109,30 @@ git status --short && git log --oneline -3 && git branch -vv
   **The OneDrive reason for this path has expired** — the tree moved to `C:\dev` on
   2026-07-27, so a sibling of the main tree is no longer synced and any location works. The
   path above is kept because it is what the commands say. Note that **gitignored files do not come
-  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`. So the
-  worktree goes to whichever session does not need the graph — normally the advisory one,
-  which needs no setup at all if it is only reading documents. For a consulting session
+  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`.
+
+  **"Needs the graph" is NOT a reason to keep a session out of a worktree, and this rule used
+  to say it was.** The artifact is read once at boot and never written (`Path(path).read_bytes()`
+  in `graph_store.py`), and `ARTISTPATH_GRAPH` takes any absolute path (`ApiConfig`), so a
+  worktree session points at the main tree's artifact and two sessions read it concurrently
+  without interfering. What actually bars a worktree is **needing to WRITE gitignored state** —
+  a crawl filling `builder/scratch/`, or a build emitting a new artifact — plus the `uv sync`
+  each package's `.venv` costs. **So the worktree goes to whichever session does not write
+  gitignored state** — normally the advisory one, which needs no setup at all if it is only
+  reading documents. *(Corrected 2026-08-05: the old wording contradicted the second-arriver
+  rule directly above it whenever the second arriver was the one needing the graph, and a
+  cold reader hit that contradiction and had no way to resolve it.)* For a consulting session
   there is a second reason beyond hygiene: a shared tree lets it read the other session's
   half-finished reasoning, and a second opinion that has absorbed the first one's working
   notes is not independent evidence.
-- **Check the test queue** left by the last closeout. Anything sitting untested gets
-  flagged to the owner now. That flag is the only forcing function on the async
-  use-the-app check, which is the one item that catches defects tests structurally cannot.
+- **Check the test queue.** Anything sitting untested gets flagged to the owner now. That
+  flag is the only forcing function on the async use-the-app check, which is the one item
+  that catches defects tests structurally cannot. **Read only the topmost heading of each
+  entry** — a discharged item keeps its old `## QUEUED` heading beneath its `## DONE` one, and
+  greping for the former is what made six consecutive closeouts report a backlog that did not
+  exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
+  only when there is something to press, so **absence of entries means nothing is owed — it is
+  never evidence that a session forgot.**
   **If the entry records a detached dev server, check it is still alive and started after
   HEAD** — closeout leaves one running deliberately, owned by nobody, and a stale one fails
   the queued test for a reason that has nothing to do with the work.
@@ -195,6 +216,14 @@ was never scheduled at all.
 The instinct to resist is the one that feels responsible — building an apparatus that
 could answer the question rigorously. Ask instead what the crudest decisive test is.
 
+**It fires on a plan you inherited too — harder, not less.** The header says "before any
+planning", and the incident it records *is a plan that already existed*; inheriting the
+apparatus does not change the question, it only adds the sunk cost that suppresses the check.
+This is safe to run at the start of an execution session because **the output is a proposal,
+not a reorder** — you name the cheaper test and hand the owner the choice. Spending the plan
+anyway is his call, and often the right one. *(Resolved 2026-08-05; the header and the body
+had been readable in opposite directions.)*
+
 ### Verify one claim before building on a report
 
 **If you are picking up from a task report, a summary, or another session's conclusion,
@@ -211,6 +240,81 @@ dependency — or stale.
 
 ---
 
+## MT. The maintenance track — the apparatus, not the app
+
+**Replaces §A, §B and §D** when the work is documentation, skills, agents, `docs/README.md`,
+`NEXT.md`, memory or project bookkeeping. **§C and §E still apply** — repo state and the
+`/rename` line are the two checks no session type is exempt from. Two details, because
+"unchanged" would over-claim: **§C's artifact-identity bullet is inert here** — a
+documentation session draws no conclusion from a graph, so say that rather than performing a
+check that cannot fail — and **§E takes no `-builder` suffix**, because this is not one. So:
+**MT1–MT4, then C, then E.** When this session finishes, its closeout is `closeout`'s
+**maintenance tier**, not the full ritual — the mirror of this one.
+
+**Of the three checks unique to session start:** the cold-read applies if you are picking up
+a mid-flight handoff, the cheapest-experiment scope check does not (no maintenance task ends
+in a number), and verify-one-claim is folded into **MT2** in the form this work actually meets
+it — a forwarded flag rather than a task report.
+
+*Added 2026-08-05 from a live baseline. A maintenance session ran the full ritual and
+reported the supersession chain and the closed-decisions list to the owner, who needed
+neither. Meanwhile it had to derive MT1, MT2 and MT3 for itself, and got MT2 right only because
+the outstanding item happened to sit in `NEXT.md`'s top block.*
+
+### MT1. What am I forbidden to edit?
+
+**§A asks what governs so you can obey it. Ask the opposite question — what is frozen.** Same
+source, `docs/README.md`'s role column; different purpose.
+
+- **COMPLETE and HISTORICAL documents are never edited**, however wrong they have become. A
+  frozen document's value is that it is frozen.
+- **A correction goes forward** into the governing document, and `docs/README.md`'s row for
+  the frozen one points at it. **Change that row even when the frozen document contains no
+  stale identifier to grep for** — the defect is usually that the row fails to *warn*, and no
+  grep finds an absence.
+- **Figures live in exactly one document.** Restating one is a defect even when it is right.
+
+### MT2. What is outstanding — and is the flag true?
+
+Maintenance work does not arrive in a plan. It accumulates in four places and **nothing
+collects them**:
+
+- `NEXT.md`'s **current top block** — older blocks are history, never act on them
+- the current handoff's **"Owed, and by whom"**
+- `TEST-QUEUE.md` — **an item is live only if its topmost heading says so**
+- deferred findings whose **success condition has now come due**
+
+**Then verify one flag against source before acting on it.** A flag forwarded through several
+closeouts is a claim about the repo that nobody has re-checked, and the forwarding is exactly
+what makes it feel settled. Both flags carried into 2026-08-05 were wrong: one said a rule-out
+was in no citable document when it was in two, and one had mis-counted a queue for six
+consecutive closeouts.
+
+### MT3. Am I about to touch the standing context layer?
+
+**`CLAUDE.md`, `memory/MEMORY.md`, and the `description:` of any skill or agent load into
+every future session whether or not it needs them.** Growing that layer is the owner's call,
+never a session's.
+
+**Check before writing, not after.** `closeout` D6 measures the delta — but by then the text
+exists and he is reviewing a finished thing instead of deciding whether to buy it. If the work
+touches any of those four, say so up front and report the cost from the diff, **lines *and*
+characters**: these files are written in long single lines that `wc -l` cannot see change in.
+
+**Bodies are free, descriptions are not.** A `SKILL.md` body, an agent definition body and a
+memory file's body all load on invocation or recall only. Put the detail there.
+
+### MT4. Which documents will collide?
+
+§C tells you whether another session is live. This asks the sharper question: **which files
+will you both write?** `NEXT.md`, `docs/README.md` and `CLAUDE.md` are touched by nearly every
+session, and are where concurrent work actually conflicts — not in the code.
+
+Name them to the owner with your sequencing, and keep each edit as small as the change allows.
+A one-paragraph strike reconciles in either merge order; a wholesale rewrite does not.
+
+---
+
 ## What to skip
 
 - **"Read the docs."** That is the failure mode, not the fix. The orient table exists so
@@ -222,11 +326,22 @@ dependency — or stale.
 
 ## Scaling
 
-**Full ritual** when executing a plan you did not write, resuming a phase, or acting on
+**Which track first, then how much of it.** The old two tiers scaled on *size* only, which
+had no answer for a session doing a different kind of work rather than a smaller amount of it.
+
+**The three checks unique to session start run on every tier unless a tier says otherwise.**
+Only the maintenance track says otherwise, and it adjudicates all three explicitly in §MT.
+They are not part of the A–E lettering, so a tier that names only letters does not thereby
+exclude them.
+
+**Maintenance track — §MT, C, E** when the session changes the project's apparatus rather than
+the app: documentation, skills, agents, the map, `NEXT.md`, memory, bookkeeping. §B and §D are
+inert there.
+
+**Full ritual — A–E** when executing a plan you did not write, resuming a phase, or acting on
 another session's conclusions.
 
-**Minimum** for a small, self-contained task in familiar territory: **A** (what governs),
-**C** (repo state), and **E** (the `/rename` line — it costs one line and is worth more on
-a short session, not less). Two minutes, and A and C catch the two failures that are
-expensive to unwind — working from a superseded document, and colliding with a live
-session.
+**Minimum — A, C, E** for a small, self-contained builder task in familiar territory (the
+`/rename` line costs one line and is worth more on a short session, not less). Two minutes,
+and A and C catch the two failures that are expensive to unwind — working from a superseded
+document, and colliding with a live session.
