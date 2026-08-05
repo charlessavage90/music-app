@@ -62,9 +62,30 @@ stands and is untouched. The re-crawl decision is STILL UNTAKEN.**
 > not a journey-level preference between two — and **may not be used to smuggle a comparison
 > back in.** §6's barred reads travel with every sentence.
 >
-> **After scoring:** remove the `cau_page_data.json` line from `.gitignore` and commit it —
-> held back only until the run ended, because diffing it against `gbl_page_data.json` reveals
-> the planted artists. **No closeout has been run for this chunk.**
+> ### 🅿 Parked by the owner, 2026-08-05 — the novelty/coherence frontier
+>
+> **Not a next action, not scheduled, and explicitly not confirmed.** Raised in conversation
+> after the `CAU-` scoring and parked at his instruction so it survives the session.
+>
+> The stated goal has always been that **novelty-likelihood rises as bypass count rises**. Its
+> unstated companion is that **coherence probably falls** as it rises — so for any given pair
+> there is a press count beyond which the journey stops being worth showing, and the two curves
+> cross somewhere. Nothing has measured either curve; this is a shape, not a finding. **He is
+> explicitly not claiming the rebuilt graph has the gradient, not guessing where any crossing
+> point is, and not proposing this as a priority.**
+>
+> **The design consequence that is already live, and is the reachable half:** the `GBL-` depths
+> (0, 10, 20) were chosen against the production graph. If a graph reaches novelty faster, the
+> same press count sits at a **different position on each graph's own curve**, so a fixed depth
+> is not a matched comparison between two graphs — it is an uncontrolled variable that no
+> factor table has carried, because until there was a graph that moved quickly it could not
+> bite. **This changes nothing about `GBL-`**, whose null was pre-registered and run-once and
+> stands; it is a constraint on any *future* comparison.
+>
+> ~~**After scoring:** remove the `cau_page_data.json` line from `.gitignore` and commit it~~
+> *(DONE, `551ed0e`.)* **The audit is scored and written up:
+> [`findings/2026-08-05-coherence-audit-results.md`](findings/2026-08-05-coherence-audit-results.md)
+> owns the `CAU-` figures.** **No closeout has been run for this chunk.**
 >
 > ---
 

@@ -393,7 +393,88 @@ They are not alternatives, and I framed them as sequential in §4 when they are 
 
 ---
 
-## 6. Owed after this note
+## 6. Addendum — why the existing filters did not catch this class
+
+**Added 2026-08-05 after the owner asked, in conversation, why an artist with no releases was
+not already dropped. It measures nothing about `CAU-C1`, `CAU-C2` or `CAU-C3`, computes nothing
+over the 53 slots, and is not a criterion.** It is a check of the builder's filter coverage,
+prompted by the audit rather than performed by it. Figures are read off the census JSONs named
+below, which own them.
+
+**First, a correction to my own framing in §2.2, recorded here rather than edited in above.** I
+wrote as though the app's unit is "an artist with a clip you press play on". The owner's
+position, and it is his to define, is that the point is finding novel artists that cohere with
+what you already like. That narrows the failing class usefully: the failure is not *"no clip
+resolves"* but *"there is nothing to go and listen to"*. **Keith Scott is the worked
+counterexample from this audit's own data** — the owner found him only on YouTube and judged
+him FITS twice. A test that requires a commercial clip would drop a card he liked.
+
+### What the two rules actually require
+
+- **`drop_no_release_tail`** fires only at **zero** release-group credits (`pipeline.py:226`:
+  *"the no-release tail requires zero"*).
+- **`drop_featured_credit`** fires, per the rule string committed in the drop list itself, only
+  when there is *"≥ 1 MB release-group credit **AND none sole** AND no sole-credit Discogs
+  main-artist release AND NOT (commercial-DSP link AND a clip resolves)"*.
+
+**A single sole credit is therefore enough to exempt an artist from both rules.** Zero credits
+is covered; credits-but-never-sole is covered; **"has one sole credit that is not a body of
+listenable work" is covered by neither.**
+
+### The check
+
+Every artist behind a CAN'T TELL or DOESN'T FIT verdict in this audit, tested against both
+committed `ALG-B` lists (`fcf_droplist_algb_am1.json`, `ctc_droplist.json`):
+
+| Result | Count |
+|---|---|
+| Never in the featured-credit class at all — not dropped, not kept, **never evaluated** | 22 of 23 |
+| In the class and **kept** by the keep-check | 1 (Pino Palladino) |
+| In the no-release drop list | 0 |
+
+**So the class the audit found was not admitted by a filter making a bad call — it was never
+looked at.** Brad Delson is the worked case: one release with one song in MusicBrainz. That one
+sole credit puts him outside the featured-credit class and his non-zero credit count puts him
+outside the no-release tail, so both rules pass him through in silence.
+
+The single exception cuts the other way and is worth keeping: **Pino Palladino was in the class
+and the keep-check kept him**, and the owner judged him DOESN'T FIT — "he's only released a few
+solo albums… going off the sound, it doesn't fit". That is one instance of the keep-check being
+too weak, against 22 of the class never being reached.
+
+### A separate, real defect in the keep-check — which is *not* what admitted these artists
+
+The owner raised the possibility that the wrong-artist clip defect (`BYP-13`) feeds the keep
+decision. **It does, it is measured, and it does not explain this class** — because these
+artists never reached the keep-check.
+
+The keep-check resolves a clip **by name** and can only be verified where MusicBrainz recorded
+a Deezer id. Read off `fcf_clips.json` and `fcf_clips_am1.json`, which own these figures and
+which report the read as *"not part of the criterion"*:
+
+| | pre-`FCF-AM1` | `FCF-AM1` |
+|---|---|---|
+| Name match landed on a **different** artist than MB recorded | 17 of 152 checkable (11.2%) | 8 of 165 (4.9%) |
+| Keeps resting on a name match with **no recorded id to check against** | 211 of 394 | 179 of 367 |
+
+**About half of all keeps could not be verified at all**, and the unverifiable half is the half
+where a collision is most likely — an artist with no recorded DSP identity is exactly the one
+whose name is most likely to resolve to a better-known namesake. The measured rate is therefore
+a floor, on the checkable half. The census disclosed this honestly and did not act on it; the
+keep list is name-path resolutions unfiltered by the wrong-artist check.
+
+### What this makes the census in §4 option B
+
+Sharper and cheaper than I described it. The question is not "does a clip resolve" — that is a
+network snapshot, and it is the test that is already unsound. It is **"how many artists in this
+graph have only a token sole credit, and how often do they land in a journey's interior"**,
+which is countable offline against the archive with no clip resolution, no network and no
+snapshot to freeze. The `BYP-13` exposure in the existing keep list is a second, separable
+question.
+
+---
+
+## 7. Owed after this note
 
 - `cau_page_data.json` is committed and out of `.gitignore` — the stimulus as presented, without
   which the judgements cannot be interpreted.
