@@ -1,0 +1,738 @@
+{
+  "journeys": [
+    {
+      "id": "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d10",
+      "artists": [
+        {
+          "mbid": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+          "name": "The Killers",
+          "disambiguation": "American rock band",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "789f6768-5830-4b08-8b4f-f38566b2eb1d",
+          "name": "Black Francis",
+          "disambiguation": "US singer, songwriter & guitarist",
+          "role": "interior"
+        },
+        {
+          "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+          "name": "The Beatles",
+          "disambiguation": "UK rock band, “The Fab Four”",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d@d20",
+      "artists": [
+        {
+          "mbid": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+          "name": "The Killers",
+          "disambiguation": "American rock band",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "e21857d5-3256-4547-afb3-4b6ded592596",
+          "name": "Gorillaz",
+          "disambiguation": "virtual band",
+          "role": "interior"
+        },
+        {
+          "mbid": "8538e728-ca0b-4321-b7e5-cff6565dd4c0",
+          "name": "Depeche Mode",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "f96de591-5dae-41da-855b-eb387d88d7d4",
+          "name": "Fu Manchu",
+          "disambiguation": "American stoner rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+          "name": "The Beatles",
+          "disambiguation": "UK rock band, “The Fab Four”",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d20",
+      "artists": [
+        {
+          "mbid": "87b9b3b8-ab93-426c-a200-4012d667a626",
+          "name": "The War on Drugs",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "22f6ed4d-c1ce-4f7b-8e69-a5761a9de9aa",
+          "name": "Villagers",
+          "disambiguation": "Irish group fronted by Conor J. O’Brien",
+          "role": "interior"
+        },
+        {
+          "mbid": "4a18722d-5a98-41c8-9e86-814afbffc704",
+          "name": "Youth Lagoon",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "74a30f2a-dae6-4e99-8a75-cb0f93b31aa6",
+          "name": "Washed Out",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "735e3514-a8ae-401f-af3b-6300df1b8d2c",
+          "name": "Caribou",
+          "disambiguation": "electronic act from Dan Snaith",
+          "role": "interior"
+        },
+        {
+          "mbid": "3bcff06f-675a-451f-9075-99e8657047e8",
+          "name": "Four Tet",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "f6f2326f-6b25-4170-b89d-e235b25508e8",
+          "name": "Sigur Rós",
+          "disambiguation": "Icelandic post‐rock band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d20",
+      "artists": [
+        {
+          "mbid": "406f1b42-0c9e-4427-aeb7-02f78e188ec4",
+          "name": "Wishbone Ash",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "ed832760-86aa-4e28-9e1c-a9c947f5fbff",
+          "name": "Andy Ward",
+          "disambiguation": "Chrysanthemums, Camel, The Bevis Frond",
+          "role": "interior"
+        },
+        {
+          "mbid": "b38225b8-8e5f-42aa-bcdc-7bae5b5bdab3",
+          "name": "King Crimson",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "38c5cdab-5d6d-43d1-85b0-dac41bde186e",
+          "name": "Blind Melon",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "83d91898-7763-47d7-b03b-b92132375c47",
+          "name": "Pink Floyd",
+          "disambiguation": "",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d20",
+      "artists": [
+        {
+          "mbid": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4",
+          "name": "Young Gun Silver Fox",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "50f34514-8b9b-4b35-bc31-01685afa2b3d",
+          "name": "Charlie Hall",
+          "disambiguation": "drums",
+          "role": "interior"
+        },
+        {
+          "mbid": "74963434-dcb6-4b14-98cc-99873b06db66",
+          "name": "Future Islands",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+          "name": "LCD Soundsystem",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "1c70a3fc-fa3c-4be1-8b55-c3192db8a884",
+          "name": "Röyksopp",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "0dfd6aab-9056-4764-89b0-80bee7c9f998",
+          "name": "Pino Palladino",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "bc4db91e-3fbf-460d-99dc-4eaca2872b44",
+          "name": "Keith Scott",
+          "disambiguation": "Canadian guitarist",
+          "role": "interior"
+        },
+        {
+          "mbid": "a62f2bf6-2711-4948-a428-e06f626b706a",
+          "name": "Lenny Castro",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "886b3be4-c93b-4085-85b0-b73ce2817246",
+          "name": "Rick Davies",
+          "disambiguation": "UK keyboardist, member of Supertramp",
+          "role": "interior"
+        },
+        {
+          "mbid": "8b96b0d8-9c36-42d1-b525-627db897d82f",
+          "name": "Tony Banks",
+          "disambiguation": "Genesis",
+          "role": "interior"
+        },
+        {
+          "mbid": "bc154a90-890b-409e-b850-53ca299ab0d6",
+          "name": "Eloy",
+          "disambiguation": "German progressive rock band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d20",
+      "artists": [
+        {
+          "mbid": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d",
+          "name": "Tame Impala",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+          "name": "The National",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "14387b0f-765c-4852-852f-135335790466",
+          "name": "EELS",
+          "disambiguation": "American rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "5f821136-9935-403c-abb5-e78ddda35e9f",
+          "name": "Bayside",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "0f82d6b5-12fb-4569-b047-a00194f572a7",
+          "name": "Fountains of Wayne",
+          "disambiguation": "",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d20",
+      "artists": [
+        {
+          "mbid": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3",
+          "name": "The Decemberists",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+          "name": "The National",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "a0498514-c21c-4e85-8dbf-a1b92374a06b",
+          "name": "Albert Hammond, Jr.",
+          "disambiguation": "member of The Strokes",
+          "role": "interior"
+        },
+        {
+          "mbid": "50d0e9b4-0f89-44a0-ab97-a3ba71573346",
+          "name": "Matt Sharp",
+          "disambiguation": "Weezer/The Rentals",
+          "role": "interior"
+        },
+        {
+          "mbid": "0743b15a-3c32-48c8-ad58-cb325350befa",
+          "name": "blink‐182",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c",
+          "name": "Sufjan Stevens",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
+          "name": "Yellowcard",
+          "disambiguation": "US pop punk band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8@d10",
+      "artists": [
+        {
+          "mbid": "87b9b3b8-ab93-426c-a200-4012d667a626",
+          "name": "The War on Drugs",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "e07a111e-4e8a-4651-a849-01ac60551ab2",
+          "name": "Kurt Vile",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "2ff0dfc6-0542-4bbc-a44a-60605c074ba6",
+          "name": "Real Estate",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "5334edc0-5faf-4ca5-b1df-000de3e1f752",
+          "name": "St. Vincent",
+          "disambiguation": "USA guitarist, singer and songwriter Annie Clark",
+          "role": "interior"
+        },
+        {
+          "mbid": "437a0e49-c6ae-42f6-a6c1-84f25ed366bc",
+          "name": "Bon Iver",
+          "disambiguation": "US indie folk band",
+          "role": "interior"
+        },
+        {
+          "mbid": "f6f2326f-6b25-4170-b89d-e235b25508e8",
+          "name": "Sigur Rós",
+          "disambiguation": "Icelandic post‐rock band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135@d10",
+      "artists": [
+        {
+          "mbid": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3",
+          "name": "The Decemberists",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "c147b96e-3428-4604-9b6c-d931f980f684",
+          "name": "Oceansize",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "84eac621-1c5a-49a1-9500-555099c6e184",
+          "name": "Spoon",
+          "disambiguation": "Austin, TX rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "fa7b9055-3703-473a-8a09-adf2fe031a24",
+          "name": "CAKE",
+          "disambiguation": "US alt. rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "968a9b10-cacd-4d80-b3a9-a923c30d256b",
+          "name": "Roger Joseph Manning Jr.",
+          "disambiguation": "American keyboardist and singer/songwriter",
+          "role": "interior"
+        },
+        {
+          "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
+          "name": "Yellowcard",
+          "disambiguation": "US pop punk band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7@d10",
+      "artists": [
+        {
+          "mbid": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d",
+          "name": "Tame Impala",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "0d5ce456-581b-403b-81bc-8461cfb750f2",
+          "name": "クワガタP",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "aa82f6eb-ded9-4c0b-951d-2e638ca25c76",
+          "name": "Nathan East",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "6622a50e-5206-44d0-9ad5-96047a726dcf",
+          "name": "Max Martin",
+          "disambiguation": "Swedish record producer",
+          "role": "interior"
+        },
+        {
+          "mbid": "2d4a1dd1-2cd8-4553-bf0b-74b8c9179633",
+          "name": "Brad Delson",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "1053f66f-7ab3-47ba-823c-81fbca7ca7a3",
+          "name": "Brandon Boyd",
+          "disambiguation": "American singer, leader of Incubus",
+          "role": "interior"
+        },
+        {
+          "mbid": "22b93d72-684d-4e17-a699-0344b13ee558",
+          "name": "Kevin Cadogan",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "0f82d6b5-12fb-4569-b047-a00194f572a7",
+          "name": "Fountains of Wayne",
+          "disambiguation": "",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d20",
+      "artists": [
+        {
+          "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+          "name": "Arcade Fire",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "7e13cd1c-0300-4d03-bd8e-5f86dd99d74f",
+          "name": "At the Drive‐In",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "aa7a2827-f74b-473c-bd79-03d065835cf7",
+          "name": "Franz Ferdinand",
+          "disambiguation": "Scottish rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "2d4a1dd1-2cd8-4553-bf0b-74b8c9179633",
+          "name": "Brad Delson",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "44bb6793-2fa2-40be-9377-0bd0242368da",
+          "name": "Cliff Williams",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "4b289467-0bc9-4e6a-aea6-b42247c89756",
+          "name": "Joey Kramer",
+          "disambiguation": "drummer for Aerosmith",
+          "role": "interior"
+        },
+        {
+          "mbid": "bc4db91e-3fbf-460d-99dc-4eaca2872b44",
+          "name": "Keith Scott",
+          "disambiguation": "Canadian guitarist",
+          "role": "interior"
+        },
+        {
+          "mbid": "a62f2bf6-2711-4948-a428-e06f626b706a",
+          "name": "Lenny Castro",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "c5e47fa7-f995-4ab2-bfc6-aa89c4db4570",
+          "name": "Gerry Beckley",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "6c9a8dad-86ba-4c31-bb52-aca47a484dea",
+          "name": "Dallas Taylor",
+          "disambiguation": "drummer for Crosby, Stills, Nash & Young",
+          "role": "interior"
+        },
+        {
+          "mbid": "34cf95c7-4be9-4efd-a48a-c2ea4a0bb114",
+          "name": "America",
+          "disambiguation": "US folk/soft rock band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d10",
+      "artists": [
+        {
+          "mbid": "678d88b2-87b0-403b-b63d-5da7465aecc3",
+          "name": "Led Zeppelin",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "5d06fe54-485a-4a07-b506-5f6f719448cb",
+          "name": "Billie Joe Armstrong",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "968a9b10-cacd-4d80-b3a9-a923c30d256b",
+          "name": "Roger Joseph Manning Jr.",
+          "disambiguation": "American keyboardist and singer/songwriter",
+          "role": "interior"
+        },
+        {
+          "mbid": "51b7f46f-6c0f-46f2-9496-08c9ec2624d4",
+          "name": "Ben Folds",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "cbcbb22c-3a8d-46af-b4ba-09c98f0d7931",
+          "name": "J Dilla",
+          "disambiguation": "US producer and rapper aka Jay Dee",
+          "role": "interior"
+        },
+        {
+          "mbid": "6cbe1e63-5895-4168-ac7e-f0d2836ba0c1",
+          "name": "Guster",
+          "disambiguation": "",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114@d10",
+      "artists": [
+        {
+          "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+          "name": "Arcade Fire",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "309d9809-cf74-493a-b56b-1378258f20fd",
+          "name": "Ed O’Brien",
+          "disambiguation": "guitarist & songwriter in Radiohead",
+          "role": "interior"
+        },
+        {
+          "mbid": "b553f0ad-4543-46f2-88ea-1dc94a11c91a",
+          "name": "Robby Krieger",
+          "disambiguation": "American guitarist, member of The Doors",
+          "role": "interior"
+        },
+        {
+          "mbid": "c78f0746-ea5d-44c0-92ee-f32745951345",
+          "name": "John McVie",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "a41ac10f-0a56-4672-9161-b83f9b223559",
+          "name": "Van Morrison",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "6c9a8dad-86ba-4c31-bb52-aca47a484dea",
+          "name": "Dallas Taylor",
+          "disambiguation": "drummer for Crosby, Stills, Nash & Young",
+          "role": "interior"
+        },
+        {
+          "mbid": "34cf95c7-4be9-4efd-a48a-c2ea4a0bb114",
+          "name": "America",
+          "disambiguation": "US folk/soft rock band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1@d20",
+      "artists": [
+        {
+          "mbid": "678d88b2-87b0-403b-b63d-5da7465aecc3",
+          "name": "Led Zeppelin",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "309d9809-cf74-493a-b56b-1378258f20fd",
+          "name": "Ed O’Brien",
+          "disambiguation": "guitarist & songwriter in Radiohead",
+          "role": "interior"
+        },
+        {
+          "mbid": "cf58cc10-0145-48f5-9ac6-0f53183138fd",
+          "name": "Audrey Riley",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "fb3b8b9a-ef82-4a89-bbae-6361e2f999f3",
+          "name": "Nina Persson",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "b9a2a9a6-7a40-48a6-bcb1-8eff5b89ad5b",
+          "name": "Nada Surf",
+          "disambiguation": "US alternative rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "56c4b861-0922-4c3a-a9b9-3bfcb00f8274",
+          "name": "Zedd",
+          "disambiguation": "Russian‐German producer",
+          "role": "interior"
+        },
+        {
+          "mbid": "6cbe1e63-5895-4168-ac7e-f0d2836ba0c1",
+          "name": "Guster",
+          "disambiguation": "",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6@d10",
+      "artists": [
+        {
+          "mbid": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4",
+          "name": "Young Gun Silver Fox",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "50f34514-8b9b-4b35-bc31-01685afa2b3d",
+          "name": "Charlie Hall",
+          "disambiguation": "drums",
+          "role": "interior"
+        },
+        {
+          "mbid": "2ff0dfc6-0542-4bbc-a44a-60605c074ba6",
+          "name": "Real Estate",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "4f416ed7-dda2-45de-a6f1-b986e861cf4b",
+          "name": "Deerhunter",
+          "disambiguation": "US indie rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "36bfa85f-737b-41db-a8fc-b8825850ffc3",
+          "name": "Pavement",
+          "disambiguation": "US indie rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "d4659efb-b8eb-4f03-95e9-f69ce35967a9",
+          "name": "David Byrne",
+          "disambiguation": "Talking Heads",
+          "role": "interior"
+        },
+        {
+          "mbid": "898b645e-eed2-490a-8ce2-0e7a4d2d5bc8",
+          "name": "Robert Fripp",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "94b7a39b-f3cc-4796-90dd-b1786a62877e",
+          "name": "Camel",
+          "disambiguation": "UK prog rock band",
+          "role": "interior"
+        },
+        {
+          "mbid": "480dbe19-5198-4f26-b240-f8f2c89e6ca8",
+          "name": "40 Winks",
+          "disambiguation": "Belgian instrumental hip-hop duo",
+          "role": "interior"
+        },
+        {
+          "mbid": "bc154a90-890b-409e-b850-53ca299ab0d6",
+          "name": "Eloy",
+          "disambiguation": "German progressive rock band",
+          "role": "endpoint"
+        }
+      ]
+    },
+    {
+      "id": "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47@d10",
+      "artists": [
+        {
+          "mbid": "406f1b42-0c9e-4427-aeb7-02f78e188ec4",
+          "name": "Wishbone Ash",
+          "disambiguation": "",
+          "role": "endpoint"
+        },
+        {
+          "mbid": "8670a056-a1a1-4434-806d-c4bce6c473d4",
+          "name": "Roberto Vecchioni",
+          "disambiguation": "",
+          "role": "interior"
+        },
+        {
+          "mbid": "8b96b0d8-9c36-42d1-b525-627db897d82f",
+          "name": "Tony Banks",
+          "disambiguation": "Genesis",
+          "role": "interior"
+        },
+        {
+          "mbid": "886b3be4-c93b-4085-85b0-b73ce2817246",
+          "name": "Rick Davies",
+          "disambiguation": "UK keyboardist, member of Supertramp",
+          "role": "interior"
+        },
+        {
+          "mbid": "83d91898-7763-47d7-b03b-b92132375c47",
+          "name": "Pink Floyd",
+          "disambiguation": "",
+          "role": "endpoint"
+        }
+      ]
+    }
+  ]
+}
