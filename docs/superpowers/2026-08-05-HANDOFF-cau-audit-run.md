@@ -1,6 +1,13 @@
 # HANDOFF — the `CAU-` coherence audit is judged and unscored
 
-**Role: ACTIVE — the CURRENT handoff. Nothing supersedes it.** Supersedes
+**⚠ SUPERSEDED 2026-08-05 on next actions by
+[`2026-08-05-HANDOFF-cau-scoring.md`](2026-08-05-HANDOFF-cau-scoring.md)** — the scoring and
+write-up it hands over are done, the sealed note is opened and answered, and closeout is run.
+**Remains authoritative for the build-and-run chunk's own internals** — its "what must not be
+misread" and "defects found" sections are the only durable record of that chunk, which left no
+execution log.
+
+*(Original role:)* **Role: ACTIVE — the CURRENT handoff. Nothing supersedes it.** Supersedes
 `2026-08-04-HANDOFF-gbl-harness.md` on next actions. **A seam handoff**: the audit is run
 to completion, nothing is in flight, tree clean, no server on any port.
 

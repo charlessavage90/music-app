@@ -1,5 +1,10 @@
 # GBL write-up — execution log
 
+**Role: COMPLETE.** *(Marker added 2026-08-05. The document carried a "Session role" line
+describing the session but no document role marker, which `scripts/docs-lint.sh` check 1
+flags. `docs/README.md` already classified it as a retained execution log; nothing else
+changed.)*
+
 **Session role:** the further fresh session that reads `gbl_result.json` and writes it up —
 the `CRE-` Stage-3 rule (the reader of results did not run them), named as a seam in the
 harness log §8 and the runner log §7. **This session did not run the listen and had not seen

@@ -1,5 +1,10 @@
 # GBL run — execution log (the blind runner session)
 
+**Role: COMPLETE.** *(Marker added 2026-08-05. The document carried a "Session role" line
+describing the session but no document role marker, which `scripts/docs-lint.sh` check 1
+flags. `docs/README.md` already classified it as a retained execution log; nothing else
+changed.)*
+
 **Session role:** mechanics-only runner for the gentle-arm blind listen, driven entirely
 by `builder/analysis/2026-08-04-gentle-arm-blind-listen/RUNNER-BRIEF.md`. This session did
 not execute the harness plan and read none of the material the brief barred: no

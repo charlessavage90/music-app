@@ -12,25 +12,107 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-05, when THE `CAU-` COHERENCE AUDIT WAS JUDGED. All 77 judgements
-are committed and NOTHING HAS BEEN SCORED — deliberately. The next action is a FRESH SESSION
-that did not build or run the audit: score it, then write it up. The `GBL-` null below still
-stands and is untouched. The re-crawl decision is STILL UNTAKEN.**
+**Last updated: 2026-08-05 (later), when THE `CAU-` COHERENCE AUDIT WAS SCORED AND WRITTEN UP.
+`CAU-` is COMPLETE and no session owes anything. The next action is the OWNER'S and it is a
+DECISION, not work — the findings note's §4 options. The `GBL-` null below still stands and is
+untouched. The re-crawl decision is STILL UNTAKEN.**
 
 ---
 
-> ## ▶ THE `CAU-` COHERENCE AUDIT IS JUDGED AND UNSCORED, 2026-08-05. **The next action is a FRESH SESSION** — it scores `cau_score.py` and writes up the result. This session built and ran the audit and must not mark its own work.
+> ## ✅ THE `CAU-` COHERENCE AUDIT IS SCORED AND WRITTEN UP, 2026-08-05 (later). **`CAU-` is COMPLETE.** The owner's actions are a DECISION (below) and merging draft PR #77.
 >
-> Entry point is the current handoff:
-> [`2026-08-05-HANDOFF-cau-audit-run.md`](2026-08-05-HANDOFF-cau-audit-run.md) — **read its
-> "what must not be misread" section before scoring.** Governing document:
+> **Results of record, and the entry point for anything `CAU-`:**
+> [`findings/2026-08-05-coherence-audit-results.md`](findings/2026-08-05-coherence-audit-results.md)
+> — **it owns the `CAU-` figures**; its §4 is the options list, §5 the response to the owner's
+> sealed note, §6 an addendum on the drop filters. Raw data:
+> `builder/analysis/2026-08-04-coherence-audit/cau_judgements.json`, `cau_result.json`,
+> `cau_page_data.json` — **cited, never restated.** Current handoff:
+> [`2026-08-05-HANDOFF-cau-scoring.md`](2026-08-05-HANDOFF-cau-scoring.md). Reasoning:
+> [`2026-08-05-cau-scoring-execution-log.md`](2026-08-05-cau-scoring-execution-log.md) — **its
+> §1 records that the build-and-run chunk left NO execution log, and why it is deliberately not
+> backfilled.**
+>
+> **What stands, in one paragraph.** All 77 judgements were scored by a session that did not
+> build or run the audit. **`CAU-G1` passed 12 of 12, so nothing below it is void.** `CAU-C1`
+> landed on `meets_bar` — **by one card**, and that margin travels with every citation.
+> `CAU-C2` did not fire. **`CAU-C3` FIRED**, and the findings note both reports its
+> pre-registered reading ("unfamiliarity was the barrier; the audit's own premise is wrong")
+> **and argues against it**: eight of the nine can't-tells record that there was **nothing to
+> listen to** — session musicians, band members and producers with no solo output — which is a
+> third cause the pre-registration's binary did not anticipate. **Both halves are on the record
+> deliberately and neither may be deleted to resolve the tension.** The owner's sealed note,
+> opened only after the analysis was committed, **reached the same mechanism independently and
+> named the same worked artist.** **Nothing is adopted, no default changed, no shipped code
+> touched, and the `GBL-` null is untouched.**
+>
+> **The decision waiting on the owner, and it is his because it is adoption-adjacent and spends
+> his time:** which of the findings note's §4 options to take — adopt and live with it (Gate 1
+> is personal use, so the blast radius is himself), count the un-listenable class offline
+> first, or both. **§4 frames these as sequential and §5 corrects that: they are not.**
+>
+> **A finding that is not `CAU-` and is the most actionable thing the track produced
+> (findings §6):** the class the audit found slipped past **both** drop filters, because
+> `drop_no_release_tail` fires only at zero release-group credits and `drop_featured_credit`
+> only when none are sole — so **a single sole credit exempts an artist from both.** Verified
+> against both committed `ALG-B` lists: 22 of the 23 artists behind a bad or unjudgeable
+> verdict were **never evaluated by either rule.** Separately, the featured-credit keep-check
+> resolves clips **by name** and about half its keeps had no recorded id to verify against — a
+> `BYP-13` exposure its own census disclosed and never acted on.
+>
+> ### 🅿 Parked by the owner, 2026-08-05 — the novelty/coherence frontier
+>
+> **Not a next action, not scheduled, and explicitly not confirmed.** Raised in conversation
+> after the `CAU-` scoring and parked at his instruction so it survives the session.
+>
+> The stated goal has always been that **novelty-likelihood rises as bypass count rises**. Its
+> unstated companion is that **coherence probably falls** as it rises — so for any given pair
+> there is a press count beyond which the journey stops being worth showing, and the two curves
+> cross somewhere. Nothing has measured either curve; this is a shape, not a finding. **He is
+> explicitly not claiming the rebuilt graph has the gradient, not guessing where any crossing
+> point is, and not proposing this as a priority.**
+>
+> **The design consequence that is already live, and is the reachable half:** the `GBL-` depths
+> (0, 10, 20) were chosen against the production graph. If a graph reaches novelty faster, the
+> same press count sits at a **different position on each graph's own curve**, so a fixed depth
+> is not a matched comparison between two graphs — it is an uncontrolled variable that no
+> factor table has carried, because until there was a graph that moved quickly it could not
+> bite. **This changes nothing about `GBL-`**, whose null was pre-registered and run-once and
+> stands; it is a constraint on any *future* comparison.
+>
+> ### ✅ The `TEST-QUEUE.md` backlog was a false alarm, and it is closed
+>
+> **Six consecutive closeouts flagged "eight 2026-07-22→27 entries still `QUEUED` and
+> unruled-on". There is no such backlog and there never was.** Discharging an entry in that
+> file prepends a `## DONE` heading and **keeps the original `## QUEUED` heading** beneath it,
+> so a grep for `## QUEUED` returns discharged entries. All ten such headings (the count itself
+> had gone stale at eight) sit directly beneath a `DONE` of the same title. **Zero items are
+> outstanding.** The counting rule is now written at the top of `TEST-QUEUE.md` so the next
+> closeout does not re-report it.
+>
+> **Still open, and genuinely so:** the owner's 2026-08-04 **no-commercialization ruling** is in
+> memory but not yet in the repo record — it belongs in `PRODUCT-REQUIREMENTS.md`.
+>
+> ---
+
+> ## ✅ THE `CAU-` COHERENCE AUDIT WAS JUDGED, 2026-08-05. ~~**The next action is a FRESH SESSION** — it scores `cau_score.py` and writes up the result.~~ *(DONE — scored and written up; see the top block, which owns current state.)*
+>
+> Entry point is the superseded handoff:
+> [`2026-08-05-HANDOFF-cau-audit-run.md`](2026-08-05-HANDOFF-cau-audit-run.md) — **remains
+> authoritative for the build-and-run chunk's internals, and unusually load-bearing because
+> that chunk left no execution log.** Governing document:
 > [`specs/2026-08-04-coherence-audit-preregistration.md`](specs/2026-08-04-coherence-audit-preregistration.md)
 > (`CAU-`; four amendments and one correction, **all committed before any judgement
 > existed**). Raw record: `builder/analysis/2026-08-04-coherence-audit/cau_judgements.json`
 > (committed `cb11b38`, before anything was scored) — **cited, never restated.** Operational
 > brief: `builder/analysis/2026-08-04-coherence-audit/CAU-RUN-BRIEF.md`.
 >
-> **⛔ `cau_owner_notes_SEALED.md` IS SEALED UNTIL THE ANALYSIS IS WRITTEN AND COMMITTED.**
+> ~~**⛔ `cau_owner_notes_SEALED.md` IS SEALED UNTIL THE ANALYSIS IS WRITTEN AND COMMITTED.**~~
+> **✅ DISCHARGED 2026-08-05 (later) — the seal held and was opened in the right order.** The
+> analysis was committed at `184b3ac`, the note opened afterwards, and the response appended as
+> findings §5 at `4bdc583` with nothing above it revised. **The ordering worked and is worth
+> reusing:** the independent read reached the owner's mechanism and named the same worked
+> artist without having seen his note. *(Original instruction retained below as the record.)*
+>
 > Reading order, and the handoff owns it: prereg → `cau_judgements.json` → `cau_result.json`
 > → **write and COMMIT your own read** → only then open the sealed note, and respond to it in
 > a separately headed section. **This is NOT the `GBL-` ordering and the difference is
@@ -62,30 +144,9 @@ stands and is untouched. The re-crawl decision is STILL UNTAKEN.**
 > not a journey-level preference between two — and **may not be used to smuggle a comparison
 > back in.** §6's barred reads travel with every sentence.
 >
-> ### 🅿 Parked by the owner, 2026-08-05 — the novelty/coherence frontier
->
-> **Not a next action, not scheduled, and explicitly not confirmed.** Raised in conversation
-> after the `CAU-` scoring and parked at his instruction so it survives the session.
->
-> The stated goal has always been that **novelty-likelihood rises as bypass count rises**. Its
-> unstated companion is that **coherence probably falls** as it rises — so for any given pair
-> there is a press count beyond which the journey stops being worth showing, and the two curves
-> cross somewhere. Nothing has measured either curve; this is a shape, not a finding. **He is
-> explicitly not claiming the rebuilt graph has the gradient, not guessing where any crossing
-> point is, and not proposing this as a priority.**
->
-> **The design consequence that is already live, and is the reachable half:** the `GBL-` depths
-> (0, 10, 20) were chosen against the production graph. If a graph reaches novelty faster, the
-> same press count sits at a **different position on each graph's own curve**, so a fixed depth
-> is not a matched comparison between two graphs — it is an uncontrolled variable that no
-> factor table has carried, because until there was a graph that moved quickly it could not
-> bite. **This changes nothing about `GBL-`**, whose null was pre-registered and run-once and
-> stands; it is a constraint on any *future* comparison.
->
 > ~~**After scoring:** remove the `cau_page_data.json` line from `.gitignore` and commit it~~
-> *(DONE, `551ed0e`.)* **The audit is scored and written up:
-> [`findings/2026-08-05-coherence-audit-results.md`](findings/2026-08-05-coherence-audit-results.md)
-> owns the `CAU-` figures.** **No closeout has been run for this chunk.**
+> *(DONE, `551ed0e`.)* ~~**No closeout has been run for this chunk.**~~ *(RUN 2026-08-05
+> (later), covering this chunk and the scoring one.)* **The top block owns current state.**
 >
 > ---
 
