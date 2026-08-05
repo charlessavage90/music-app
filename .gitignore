@@ -39,3 +39,9 @@ builder/analysis/*/full-build-degrees.json
 api/eval/baseline-results.txt
 api/scratch_server.log
 .playwright-results/
+
+# CAU- coherence audit: the served stimulus. TEMPORARY -- it must not reach git
+# BEFORE the run, because diffing it against gbl_page_data.json reveals the 12
+# inserted red-control artists and destroys CAU-G1. Remove this line and commit
+# the file AFTER the judgements are in (spec CAU-AM3/AM4).
+builder/analysis/2026-08-04-coherence-audit/cau_page_data.json

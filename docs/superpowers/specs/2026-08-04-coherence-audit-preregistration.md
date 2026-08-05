@@ -73,12 +73,15 @@ from the journey it came from, presented in shuffled order, not grouped by journ
 
 ## 3. The instrument
 
-For each step the owner records one of:
+⚠ **`CAU-AM3` (§7) replaced the question below with a journey-level one — "does this artist
+belong on this journey?" — because an inserted control was contaminating its two real
+neighbours. Read it before implementing this section.** For each interior slot the owner
+records one of:
 
-| Verdict | Meaning |
+| Verdict | Meaning *(wording superseded by `CAU-AM3`)* |
 |---|---|
-| **FITS** | This artist belongs between these two |
-| **DOESN'T FIT** | This artist does not belong between these two |
+| **FITS** | This artist belongs ~~between these two~~ **on this journey** |
+| **DOESN'T FIT** | This artist does not belong ~~between these two~~ **on this journey** |
 | **CAN'T TELL** | Still unable to judge after listening |
 
 **The listening rule, and it is the point of the whole exercise.** For any artist he cannot
@@ -97,8 +100,10 @@ operationally useful thing that listen produced.
 Standing project rule: *a green result from a new instrument is not evidence until the
 instrument has been shown to go red.*
 
-**Injected steps.** A pre-registered number of steps have their middle artist **replaced by
-a random artist drawn from the same graph**, sampled from the same obscurity band
+**Injected steps.** ⚠ **`CAU-CORR1` (§7): "replaced by" below is wrong — an injected artist
+is INSERTED between two existing cards, so all 65 real slots survive. Read it before
+implementing this section.** A pre-registered number of steps carry a random artist **drawn
+from the same graph**, sampled from the same obscurity band
 (`fame_lb_pctl`) as the artist it replaces, so it cannot be spotted by fame alone. These
 steps are indistinguishable in presentation from real ones. **`CAU-AM2` adds a hardness
 condition — distance >= 3 from both displayed neighbours — without which `CAU-G1` is not a
@@ -127,8 +132,9 @@ injections.
 **Denominators are declared here so neither can be chosen after the fact.** Both are
 reported, always, side by side:
 
-- **`D_all`** — ⚠ **`CAU-AM1` supersedes this count: 65 interior slots, not 54 artists.**
-  *(Original:)* all 54 real interior artists.
+- **`D_all`** — ⚠ **`CAU-AM3` (§7) is the governing count: 53 SCORED slots.** 65 real slots
+  are presented and judged; the 12 sitting next to a control are excluded. *(`CAU-AM1` said
+  65; the original said all 54 real interior artists.)*
 - **`D_lookup`** — only those the owner had to look up (could not place on sight).
 
 `D_lookup` is the harder population by construction and will score worse; **reporting it
@@ -294,3 +300,122 @@ each control actually was.
 
 **This makes `CAU-G1` a genuine red control** rather than a test of the listener's tolerance
 for unusual-but-plausible neighbours. It moves no bar: 10 of 12 stands.
+
+### `CAU-AM3` — the control contaminated its neighbours; question, placement and denominator all move, 2026-08-04 (night)
+
+**Raised by the owner before any judgement existed.** A build had been generated under the
+defective placement; **it was discarded, along with its sealed map, and nothing generated
+under it survives into the run.** No result of any kind exists at the time of this
+amendment.
+
+**The defect.** `CAU-CORR1` fixed injections to be inserted between two existing cards. But
+an inserted artist then becomes *a neighbour of two real cards*, and §3 asked the owner to
+judge each artist against its neighbours. So up to two real slots per control were being
+judged against a fake — **measured on the discarded build: 20 of the 65 real slots, 31% of
+the audit.** The bias runs **against the graph**: a real artist looks wrong when the thing
+beside it is nonsense. Large enough on its own to move `CAU-C1` across a branch boundary,
+which would have been indistinguishable from a genuine result.
+
+**Three changes, and the first two are methodology.**
+
+**1. The question becomes journey-level.** §3's unit of judgement is no longer "does this
+artist belong *between these two*" but:
+
+> **"Does this artist belong on this journey?"**
+
+The owner already sees the whole path under `CAU-AM1`, and journey-membership is the product
+question — *is this a good card to be shown here*. It is also far less sensitive to one
+perturbed neighbour than a strict local-transition test. The three verdicts (FITS / DOESN'T
+FIT / CAN'T TELL) and the listening rule are unchanged.
+
+**2. Controls are placed endpoint-adjacent only.** An injected artist is inserted either
+between the first endpoint and the first interior, or between the last interior and the
+second endpoint. **Endpoints are never judged**, so each control now touches exactly **one**
+real card rather than two.
+
+**3. The one real card flanking each control is excluded from scoring, and the owner is
+never told which.** He judges it like any other; the scorer discards it. Declared here, in
+advance, so the exclusion cannot be chosen after the fact.
+
+**The denominator moves and this supersedes `CAU-AM1`'s:**
+
+| | |
+|---|---|
+| Real interior slots **presented and judged** | **65** (unchanged) |
+| Real slots **excluded** as control-adjacent | **12** |
+| **`D_all` — real slots SCORED** | **53** |
+| Control slots | 12 |
+| **Total judgements — the owner's workload** | **77** (unchanged) |
+
+`D_lookup` remains the looked-up subset **of the 53**. `CAU-C2`'s concentration count runs
+over scored slots only. A journey whose sole interior is the excluded one contributes
+nothing to `D_all`; that is accepted rather than patched, because moving the control
+elsewhere in such a journey would put it back beside a scored card.
+
+**The owner chose this over the alternative**, which was to move the controls into the eight
+unaudited d0 journeys, keep all 65 slots scored, and pay 28 extra judgements of pure
+camouflage (workload 77 → 105). His call, because it spends his time. Recorded so a later
+reader does not read 53 as a session quietly shrinking the audit.
+
+**Unchanged:** `CAU-G1` (10 of 12), `CAU-C1`'s ratified bars (75% / 50%), `CAU-C2`'s
+trigger, `CAU-C3`'s trigger, `CAU-AM2`'s distance condition, and the whole of §6.
+
+### `CAU-AM4` — each card carries its MBID, disambiguation and a MusicBrainz link, 2026-08-04 (night)
+
+**Raised by the owner before any judgement existed and before the rebuild.** No result
+exists at the time of this amendment.
+
+**The problem.** The listening rule sends the owner to Spotify for any artist he cannot
+place. Artist names are not unique, and this project has *measured* how often that bites:
+the app's own name-based clip resolver plays the wrong same-named artist at roughly one card
+in eleven (`BYP-13`, and it is one of the defects that motivated this audit). A listener who
+looks up the wrong "Orbital" and judges *that* has not made a weak judgement — he has made
+an unrelated one, and nothing downstream can detect it.
+
+**The change.** Every interior and endpoint card now shows, alongside the name:
+
+- the artist's **MBID**;
+- its **MusicBrainz disambiguation** where one exists (38.6% of the artifact's nodes carry
+  one — e.g. "US garage rock band", "Dutch techno producer Ralph Barendse");
+- a **link to its MusicBrainz page**, from which the commercial-service links can be
+  followed.
+
+**Why this leaks nothing.** This is a one-arm audit, so there is no arm identity to protect.
+Injected artists are drawn from the same artifact and carry the same three fields, so the
+metadata cannot distinguish a control from a real card. MBIDs are opaque and carry no fame
+signal, so the WGLL monthly-listeners bound is untouched.
+
+**What it does cost, stated rather than discovered later.** A disambiguation is a genre/era
+label, so the owner may sometimes judge partly on the label rather than on the music. That
+cuts both ways and it makes the **red control somewhat easier to reject** — a random artist
+whose disambiguation reads "Finnish black metal" stands out on a soft-rock journey without
+being played. **So a `CAU-G1` pass is a weaker demonstration of discrimination than it would
+have been without the metadata.** It remains a valid floor — `CAU-G1` exists to prove the
+instrument *can* go red, not to measure how hard that is — and the trade is taken because a
+misidentified artist corrupts a judgement outright while a label merely informs one.
+
+**Unchanged:** every bar, every denominator, `CAU-G1`'s threshold, `CAU-AM3`'s placement and
+exclusion, and the whole of §6.
+
+### Corrections (`CAU-CORR`) — a separate series; these move no bar
+
+> **`CAU-CORR1`, 2026-08-04 (night) — injected artists are INSERTED, not substituted.**
+> §4 said an injected step has "their middle artist **replaced by** a random artist". That
+> contradicts `CAU-AM1`'s own arithmetic in the same document: **"65 real slots + 12 injected
+> = 77 judgements"**, and the denominator `D_all = 65 interior slots`. Replacement would
+> destroy 12 real slots and leave 53, making `D_all` 53 and the workload 65 — neither of
+> which any part of this document states.
+>
+> **The arithmetic is the original and governs: 77 = 65 + 12.** An injected artist is
+> **inserted between two existing cards**, lengthening that journey by one; every real
+> interior slot survives and is judged. `D_all` remains **65**, injected slots remain
+> excluded from it, and the owner's approval of "all, no sampling" was given against 77.
+>
+> Only §4's verb lagged. Corrected before generation, before any artist was sampled and
+> before any judgement existed, so no result could have shaped it. **This is a correction,
+> not an amendment** — it changes no bar, no branch and no denominator, and `CAU-CORR` is a
+> separate series from `CAU-AM` deliberately.
+>
+> Found by the build script's own self-check 5, which asserts the post-injection slot count
+> against the declared denominator. The check existed because the `GBL-` harness log records
+> four tests that passed while testing nothing; this one earned its place immediately.
