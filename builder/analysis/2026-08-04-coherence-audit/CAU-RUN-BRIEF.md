@@ -13,14 +13,22 @@ the draw that has been sealed is the one the readings are defined against.
 
 ## Start it
 
-From `builder/`:
+From `builder/`, in **any** shell — cmd, PowerShell or bash:
 
-```bash
-UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run --extra dev python -u \
-  analysis/2026-08-04-coherence-audit/cau_page.py
+```
+uv run --extra dev python -u analysis/2026-08-04-coherence-audit/cau_page.py
 ```
 
 Then open `http://127.0.0.1:8766/`.
+
+> **No `UV_LINK_MODE=copy` / `PYTHONIOENCODING=utf-8` prefix here, deliberately.**
+> `VAR=value cmd` is bash syntax and fails in cmd.exe with *"'UV_LINK_MODE' is not
+> recognized as an internal or external command"* — which is exactly what happened to the
+> owner when this brief was first written in bash form. Neither variable is needed for these
+> commands: `UV_LINK_MODE` only suppresses a warning (uv copies by itself since the move off
+> OneDrive), and `PYTHONIOENCODING` only matters for scripts that **print artist names**,
+> which the server does not. If you ever do need one: cmd `set VAR=value` on a preceding
+> line, PowerShell `$env:VAR='copy'`.
 
 Nothing else is running and nothing else needs to be. **There is no clip playback here and
 that is deliberate** — a 30-second preview is the instrument this audit exists to replace.
@@ -74,9 +82,8 @@ reader of results should not be the session that ran them.
 
 ## For whoever scores it
 
-```bash
-UV_LINK_MODE=copy uv run --extra dev python -u \
-  analysis/2026-08-04-coherence-audit/cau_score.py
+```
+uv run --extra dev python -u analysis/2026-08-04-coherence-audit/cau_score.py
 ```
 
 `CAU-G1` is evaluated first and alone; if it fails, nothing else is computed. Afterwards,
