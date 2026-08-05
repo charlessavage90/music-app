@@ -13,6 +13,13 @@ that is a review, and reviews belong at decision points, not at every boundary.
 enough to do every time. If an item starts requiring hours of adjudication, the item
 is wrong — fix the item.
 
+> **Pick a tier before running Part A — see `Scaling`.** Parts A–D are written for a session
+> that changed the **app**. If this session changed the project's **apparatus** instead —
+> documentation, skills, agents, the map, `NEXT.md`, memory, bookkeeping — run the
+> **maintenance closeout** tier, whose counterpart is `session-start`'s §MT. Reaching this
+> decision at the end is too late: A1 and A2 are the first things you would do and two of the
+> things that tier skips.
+
 ## Why each of these exists
 
 Every check below earned its place by catching something real on this project. The
@@ -335,6 +342,30 @@ findings is judgement. Dispatch the auditor, fix only what is unambiguous from t
 and hand the remainder to the successor as a **named list** rather than as a task to
 rediscover. A scope-driven handoff carries no such problem.
 
+#### B1-mt — the maintenance session's own diff, before the auditor
+
+**Only on the maintenance tier.** `docs-lint` and `doc-auditor` both read the *corpus*. This
+reads **your diff**, and it exists because the lint's scope stops exactly where this session
+type works.
+
+1. **`docs-lint` does not scan `.claude/`.** Its `DOCS` is `$ROOT/docs`, so a changed skill,
+   agent or command file gets **no** dead-link check, no role check, nothing. **B5 is the only
+   thing covering `.claude/`, and it is a manual sweep.** If the diff touches anything there,
+   say so at B5 explicitly rather than letting it ride on a green lint — that is the
+   false-clean shape the lint's own header warns about.
+2. **Did the diff touch a frozen document?** Check `git diff --name-only` against
+   `docs/README.md`'s COMPLETE and HISTORICAL rows. A frozen document is never edited; if one
+   appears, the correction belongs in the governing document with the map row pointing at it.
+   Mirror of `session-start` MT1 — asked there before writing, here after.
+3. **Every copy of a discharged flag, accounted for deliberately.** An open flag usually sits
+   in three or four places. Strike the live ones, leave the historical ones — **and say which
+   you did to each.** The failure is silent partial discharge, which afterwards is
+   indistinguishable from a document nobody thought about.
+4. **A new identifier series needs both checks; neither substitutes.** `docs-lint` check 5
+   catches **bare bolded tokens inside `docs/`**; `CLAUDE.md`'s ref sweep catches
+   **hyphenated series across every ref**. On 2026-08-05 the sweep caught `M1`–`M4` colliding
+   with Track 2's metrics — invisible to the lint, being neither bolded nor under `docs/`.
+
 ### B2. Reachability sweep
 
 For every module this work created: does anything import it?
@@ -518,6 +549,21 @@ cd ../frontend && npm test
 ```
 
 Run them; do not assert green from memory. Evidence before assertions.
+
+#### D4-mt — when nothing executes
+
+**Only on the maintenance tier.** Markdown runs no suite, and *"no tests to run"* is not a
+discharge of D4 — it is D4 unanswered. **Name what you verified instead, and paste it.**
+
+- **`scripts/docs-lint.sh`** — hard checks must pass before the PR; candidates need a reader.
+  Green is not clean; the script says so itself.
+- **Every command, path and section number the diff introduces, resolved.** A document naming
+  a file or config value that does not exist is one of the two failure classes this whole
+  skill targets, and authoring one is the easiest way to add it.
+- **Any command a document tells a future session to run, extracted from the file and
+  actually run — in both directions where it has one.** A check that has only ever come back
+  green is not evidence yet. On 2026-08-05 the new collision sweep was pulled verbatim out of
+  `CLAUDE.md` and run against both a taken prefix and a free one before the commit landed.
 
 ### D5. Open the PR
 
@@ -719,6 +765,31 @@ format, or the cost function.
 release the shells, reachability, use it, clean tree. Half an hour combined, and they catch
 most of what matters. A5 travels with C1: a queued test that needs a server fails against a
 stale one for the wrong reason.
+
+**Maintenance closeout**, when the session changed the project's *apparatus* rather than the
+app — documentation, skills, agents, the map, `NEXT.md`, memory, bookkeeping. Its
+`session-start` counterpart is that skill's **§MT**. Run **A3, A5, B1, B1-mt, B4, B5, C1, D1,
+D4-mt, D5, D6, D7**.
+
+**Skipped here, and say so rather than skipping silently:** A1 and A2 — there is usually no
+execution log and no seam to hand over, the commit messages carrying the reasoning instead;
+if the work genuinely spanned sessions it was not a maintenance closeout and this is the wrong
+tier. A4 (no config defaults), B2 and B3 (no modules, no tests).
+
+**Part D still runs every time, per the rule below.** D2 and D3 fall away on their own
+conditions rather than being skipped by this tier — no artifact changed, and nothing exists
+that could not be committed. State that; do not omit them silently, because "inapplicable"
+and "forgotten" look identical in a closeout that lists neither.
+
+**D6 matters more here than anywhere, and it inverts the usual expectation.** Every other tier
+expects a zero delta and records it. This is the session type most likely to have edited
+`CLAUDE.md`, `MEMORY.md` or a skill or agent `description:` — so its delta is the one least
+likely to be zero, and the owner's decision on it is the one most likely to be owed.
+
+**C1 is almost always an N/A entry, and writing it is not optional.** "Nothing to exercise,
+nothing is running, a journey you build now is identical to yesterday's" — plus, in plain
+language, what did change and why it does not reach the app. He reads that file to find out
+whether his app moved; an absent entry and an N/A entry answer that question very differently.
 
 **Mid-flight retirement**, when a session is being handed over before its work reaches a
 natural seam — A1, **A2-mid**, A3, **A5**, B1, B5, **D1-mid**, D3, **D6**, **D7**. A5 matters most

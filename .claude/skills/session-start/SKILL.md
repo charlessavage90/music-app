@@ -222,7 +222,8 @@ dependency — or stale.
 **Replaces §A, §B and §D** when the work is documentation, skills, agents, `docs/README.md`,
 `NEXT.md`, memory or project bookkeeping. **§C and §E still apply unchanged** — repo state
 and the `/rename` line are the two checks no session type is exempt from. So: **MT1–MT4, then
-C, then E.**
+C, then E.** When this session finishes, its closeout is `closeout`'s **maintenance tier**,
+not the full ritual — the mirror of this one.
 
 **Of the three checks unique to session start:** the cold-read applies if you are picking up
 a mid-flight handoff, the cheapest-experiment scope check does not (no maintenance task ends
