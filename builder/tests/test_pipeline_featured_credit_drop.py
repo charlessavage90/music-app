@@ -79,6 +79,11 @@ def _archive(tmp_path, similar, subdir="archive"):
 
 
 def _build(archive, **overrides):
+    # drop_unlistenable pinned off unless a test says otherwise: this file
+    # tests the FCF- rule in isolation, and the ULF- filter (which supersedes
+    # it without reversing it) refuses synthetic populations its census never
+    # saw. Its own tests: test_pipeline_unlistenable_drop.py.
+    overrides.setdefault("drop_unlistenable", False)
     config = BuilderConfig(**overrides)
     return build_from_archive(config, archive, ListenBrainzSource(config))
 

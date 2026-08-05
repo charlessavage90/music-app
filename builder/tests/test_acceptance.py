@@ -112,7 +112,9 @@ def _seed(archive: LocalArchive, source: ListenBrainzSource) -> None:
 
 def _build(tmp_path, *, defective: bool) -> Graph:
     """Build the same archive with clipped (defective) or unclipped ranking."""
-    config = BuilderConfig(max_neighbours_per_artist=K)
+    # drop_unlistenable pinned off: acceptance is the subject; the synthetic
+    # archive is covered by no ULF- census (factor-table-control idiom).
+    config = BuilderConfig(max_neighbours_per_artist=K, drop_unlistenable=False)
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
     _seed(archive, source)

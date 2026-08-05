@@ -174,6 +174,23 @@ class BuilderConfig:
     # experimental control, never a shipping configuration.
     drop_featured_credit: bool = True
 
+    # Apply the un-listenable filter (ULF-, 2026-08-05): drop an artist who
+    # has never put out anything of their own that is more than a single
+    # track (ULC-D2), unless a commercial-DSP link exists AND a clip
+    # resolves. Supersedes the two drops above WITHOUT reversing either —
+    # both classes are strict subsets and their frozen verdicts carry — so
+    # with all three flags on, this rule's list is the one doing the work.
+    # The older flags stay functional for era-pinned probes (ULF-3 defers
+    # their retirement with a success condition). Rule document:
+    # docs/superpowers/specs/2026-08-05-unlistenable-filter-rule.md; lists
+    # and the ULC-F1 population manifest in unlistenable_drop.py.
+    #
+    # A flag for the same one reason as its siblings: the drop moves every
+    # surviving artist's popularity marginal, so a build-side experiment
+    # holds it explicitly on or off in a factor table. Turning it off is an
+    # experimental control, never a shipping configuration.
+    drop_unlistenable: bool = True
+
     # --- output ---------------------------------------------------------
     graph_version: str = "v1"
 

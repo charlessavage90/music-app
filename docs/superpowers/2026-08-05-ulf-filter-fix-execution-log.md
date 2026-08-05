@@ -70,3 +70,30 @@ build's algorithm is its archive identity", and `crawl.py:115` does rebuild the 
   no-release list carries 2,712 verdicts from 2026-08-01).
 - **A fresh keep-check design for the new class** — is `ULC-F4` by another name;
   owner-deferred.
+
+## §4 — `ULC-F1` machinery (task: population identity)
+
+Built test-first: `unlistenable_drop.py` (loader with the population identity block and
+two self-consistency refusals), `drop_unlistenable: bool = True` in `BuilderConfig`, the
+pipeline stage after the two sibling drops with the `PopulationNotCensused` refusal
+checked against the **pre-drop archive population** (the censused set was recorded over
+the raw archive, so a drop-shrunken `known` would mask an extension), and 12 tests in
+`test_pipeline_unlistenable_drop.py` — including the two payload-corruption refusals,
+because a payload that cannot vouch for its population must not be trusted for a refusal
+decision.
+
+**The refusal is new semantics, and 36 existing tests met it.** Every pipeline test
+builds synthetic archives with fake MBIDs; the old drops' intersection semantics never
+refuse, the manifest check does. Resolution per file, all mechanical: files testing
+*other* features pin `drop_unlistenable=False` (the factor-table-control idiom, with a
+one-line comment each); `test_cli` — which builds through `main` and has no flag surface,
+deliberately — installs a fixture list censusing its two-artist population via a new
+shared `conftest.py` fixture.
+
+**The mirrors guard fired as designed and its obligations were discharged:** all three
+pipeline mirrors stay deliberately frozen (same recorded reason as both prior drops);
+`grt_score.py` and `calibrate.py` gain `drop_unlistenable=False` beside their earlier
+pins; and **`cre_build.py` was found to be an unlisted era-pinned caller** — it postdates
+the guard's list, builds through defaults, and once ULF- lists exist for its two
+algorithms a re-run would have applied the third drop and silently disagreed with the
+committed cell shas. Pinned, and added to `ERA_PINNED_CALLERS`. Suite: 176 passed.

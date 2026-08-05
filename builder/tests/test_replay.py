@@ -56,7 +56,9 @@ class ExplodingFetcher:
 
 @pytest.fixture
 def config():
-    return BuilderConfig(requests_per_second=1000.0)
+    # drop_unlistenable pinned off: these tests exercise replay mechanics on
+    # synthetic archives no ULF- census covers (factor-table-control idiom).
+    return BuilderConfig(requests_per_second=1000.0, drop_unlistenable=False)
 
 
 def _seed_archive(archive, source, mbids):
@@ -150,7 +152,9 @@ ALG_B = (
 def test_build_reads_only_its_own_algorithms_subtree(tmp_path, config):
     # RC-H3, build side. The flat tree (production) and the ALG-B sub-tree
     # sit in one archive; each build must see only its own.
-    algb_config = BuilderConfig(requests_per_second=1000.0, algorithm=ALG_B)
+    algb_config = BuilderConfig(
+        requests_per_second=1000.0, algorithm=ALG_B, drop_unlistenable=False
+    )
     source = ListenBrainzSource(config)
     archive = LocalArchive(tmp_path / "archive")
     _seed_archive(archive, source, [A, B, C])  # flat: A<->B<->C

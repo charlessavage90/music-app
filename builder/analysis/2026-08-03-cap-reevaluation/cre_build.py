@@ -382,7 +382,11 @@ def _archive(data_set: str):
 
 
 def _config(data_set: str) -> BuilderConfig:
-    return BuilderConfig(algorithm=ALGORITHMS[data_set])
+    # Era pin 2026-08-05 (ULF-): every CRE- cell was built with exactly the
+    # two 2026-08-03-era drops, and this harness reproduces those cells.
+    # Left at the new default, a re-run would additionally apply the
+    # un-listenable filter and silently disagree with the committed shas.
+    return BuilderConfig(algorithm=ALGORITHMS[data_set], drop_unlistenable=False)
 
 
 def _source(config: BuilderConfig):

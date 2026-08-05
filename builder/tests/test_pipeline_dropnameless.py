@@ -52,7 +52,9 @@ def archive(tmp_path):
 
 
 def _build(archive):
-    config = BuilderConfig()
+    # drop_unlistenable pinned off: the nameless drop is the subject; the
+    # synthetic archive is covered by no ULF- census (factor-table idiom).
+    config = BuilderConfig(drop_unlistenable=False)
     return build_from_archive(config, archive, ListenBrainzSource(config))
 
 
