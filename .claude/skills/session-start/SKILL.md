@@ -220,10 +220,13 @@ dependency — or stale.
 ## MT. The maintenance track — the apparatus, not the app
 
 **Replaces §A, §B and §D** when the work is documentation, skills, agents, `docs/README.md`,
-`NEXT.md`, memory or project bookkeeping. **§C and §E still apply unchanged** — repo state
-and the `/rename` line are the two checks no session type is exempt from. So: **MT1–MT4, then
-C, then E.** When this session finishes, its closeout is `closeout`'s **maintenance tier**,
-not the full ritual — the mirror of this one.
+`NEXT.md`, memory or project bookkeeping. **§C and §E still apply** — repo state and the
+`/rename` line are the two checks no session type is exempt from. Two details, because
+"unchanged" would over-claim: **§C's artifact-identity bullet is inert here** — a
+documentation session draws no conclusion from a graph, so say that rather than performing a
+check that cannot fail — and **§E takes no `-builder` suffix**, because this is not one. So:
+**MT1–MT4, then C, then E.** When this session finishes, its closeout is `closeout`'s
+**maintenance tier**, not the full ritual — the mirror of this one.
 
 **Of the three checks unique to session start:** the cold-read applies if you are picking up
 a mid-flight handoff, the cheapest-experiment scope check does not (no maintenance task ends

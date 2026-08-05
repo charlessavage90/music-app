@@ -768,8 +768,13 @@ stale one for the wrong reason.
 
 **Maintenance closeout**, when the session changed the project's *apparatus* rather than the
 app — documentation, skills, agents, the map, `NEXT.md`, memory, bookkeeping. Its
-`session-start` counterpart is that skill's **§MT**. Run **A3, A5, B1, B1-mt, B4, B5, C1, D1,
+`session-start` counterpart is that skill's **§MT**. Run **A3, A5, B1-mt, B1, B4, B5, C1, D1,
 D4-mt, D5, D6, D7**.
+
+**`B1-mt` runs before `B1`, and the order is the point, not alphanumeric drift.** `B1-mt` reads
+your own diff; `B1` lints and audits the whole corpus. Finding your own frozen-document edit
+before dispatching an auditor over 973 files is both cheaper and the only order in which the
+auditor's budget is spent on what you did not already know.
 
 **Skipped here, and say so rather than skipping silently:** A1 and A2 — there is usually no
 execution log and no seam to hand over, the commit messages carrying the reasoning instead;
