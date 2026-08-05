@@ -79,6 +79,16 @@ class AcceptanceCriteria:
 #
 # Pair 8 of the analysis set is the owner's captured bypass pair and is not
 # yet identified (pre-registration P1), so it is not represented here.
+#
+# CROOVE was struck 2026-08-05 by owner decision. It was here under group 2
+# only — pair 8 (Nirvana → CROOVE) of a track closed 2026-07-25 — and the
+# ULF- filter now drops CROOVE from every build: three sole albums, all
+# secondary-type Soundtrack (outside ULC-D2's shape), no MB DSP link, and
+# the app's own resolver plays nothing for them (measured, not assumed —
+# ULF- execution log §7). Leaving the pin would have blocked every
+# production-criteria build to protect a card that is silent today. Group 1,
+# the §2.8 deletion detectors, is untouched: those four names are famous,
+# kept by every filter, and remain the cheap repeat-detector.
 _CANONICAL_NAMES = (
     "Radiohead",
     "The Beatles",
@@ -103,7 +113,6 @@ _CANONICAL_NAMES = (
     "The Rolling Stones",
     "Linkin Park",
     "Nirvana",
-    "CROOVE",
 )
 
 PRODUCTION_ACCEPTANCE = AcceptanceCriteria(

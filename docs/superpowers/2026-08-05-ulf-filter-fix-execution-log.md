@@ -161,3 +161,15 @@ production-criteria build, including the owner's planned candidate map switch.**
 Resolution is the owner's — it edits the acceptance safety contract — and was put to
 him rather than resolved here; a per-artist keep-list is barred by the FCF-5 precedent
 and was not proposed.
+
+**Resolved by owner ruling, 2026-08-05: CROOVE is struck from the canonical list.**
+Presented with three options and their costs; the soundtrack carve-in was declined
+(post-result rule change after seeing whom it rescues) and leaving the conflict
+standing was declined (blocks his own ordered map switch). The strike is recorded at
+the site in `acceptance.py` with the reasoning; the §2.8 deletion detectors (group 1)
+are untouched. The trial build then passed clean: 75,000 archived → 4,126 additionally
+dropped by the ULF- filter → 60,532 artists / 756,122 edges in the largest component,
+acceptance green, and the `ULC-F1` manifest check passed silently against the real
+archive. **Nothing is adopted — the app still serves the prior artifact; the trial
+build is verification, left in `builder/scratch/` as evidence.** Suite 180 passed
+after the edit.
