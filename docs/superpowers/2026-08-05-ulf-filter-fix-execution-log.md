@@ -1,0 +1,72 @@
+# Execution log — the un-listenable filter fix (`ULF-`), 2026-08-05
+
+**Role: RETAINED EXECUTION LOG. Owns no figures and no status** — figures live in the
+census JSONs this track produces and in `findings/2026-08-05-unlistenable-class-results.md`
+(cited by section); status lives in `NEXT.md`. Appended per task, per the handoff-cheapness
+rule.
+
+Session: `filter-work-builder (handoff)`, branch `ulc-filter-fix` off the `ULC-` track's
+tip (draft PR #78 unmerged at branch time; branching off the tip rather than `main` because
+the tip carries the census tooling and `no_release_drop.py` state this work extends, and it
+merges cleanly in either order).
+
+Governing document: `specs/2026-08-05-unlistenable-filter-rule.md` (`ULF-`).
+
+---
+
+## §1 — Orientation and the one claim verified before building (session start)
+
+Seam handoff, clean tree, no concurrent session, zero live test-queue items. Verified
+before building: `ULC-F1`'s citation resolves — `no_release_drop.py:30-33` does argue "a
+build's algorithm is its archive identity", and `crawl.py:115` does rebuild the frontier as
+`discovered − done`. Both accurate.
+
+## §2 — Design decisions, with reasoning (pre-spec)
+
+1. **Design before mechanics, reversing the order proposed at session start.** Reading the
+   code showed the fix's shape determines the `ULC-F1`/`F2` machinery: with a `ULC-D2`
+   entry condition the featured-credit class is a strict subset of the new class, so the
+   fix merges both filters into one, which changes how many lists and manifests exist.
+   Building `F1` first would have built it twice.
+2. **The merge itself** (methodology, mine): one rule, one list per population. Licensed by
+   the subset property plus verdict carry-forward — no adopted verdict reverses, so neither
+   adoption reopens. The alternative — patching each filter's exemption clause separately —
+   leaves two rules whose classes overlap after the patch (a `ULC-D2` artist with a
+   featured credit is in both), which is a coherence debt with no offsetting benefit.
+3. **The Discogs exemption goes entirely** (methodology, mine): results §1.4's Joey Kramer
+   case shows no credit-existence test on Discogs separates listenable from not; the
+   keep-check tests that something *plays*, which is the actual question. Genuine
+   Discogs-only artists are rescued there, not at the detector.
+4. **Keep-check instrument unchanged; id-verification recorded per keep** (methodology,
+   mine): fixing the name-resolution path is `ULC-F4`, owner-deferred to its own track.
+   Recording which keeps are id-verified collects that track's measurement for free without
+   changing any criterion here. The `BYP-13` false-rescue hazard is named in ULF-2 and in
+   the weakest-link presentation to the owner rather than silently accepted.
+5. **Population identity = the archive artist set, not any built graph's** (methodology,
+   mine): the archive is what a crawl extension grows and what `build_from_archive` reads
+   (`pipeline.py`, `known = set(payloads)`). The prior censuses used built-graph
+   populations, which would false-refuse at build time because pre-prune `known` exceeds
+   any post-prune graph population.
+6. **The owner ruled the cut line (his column — it decides which real artists leave the
+   map, and the residual is a risk acceptance): `ULC-D2` as ruled.** Presented with three
+   options and costs (class sizes and clip-stage hours from `ulc_census.json`, cited);
+   stricter bars declined with Nathan East / Billie Joe Armstrong / debut-album artists as
+   the counter-cases. Keith Scott is thereby the named residual false negative, fixed in
+   ULF-6 before any lookup.
+7. **Old config flags stay functional** — era-pinned probes under `builder/analysis/`
+   construct `BuilderConfig` with them (`cre_build.py`, `calibrate.py`, `grt_score.py`).
+   Retirement deferred with a success condition in ULF-3, following the read-only-aliases
+   precedent.
+
+## §3 — Decided against, and why
+
+- **A stricter entry bar to catch Keith Scott** — declined by the owner with the trade in
+  front of him (a debut-album artist has exactly one sole substantial release group, and
+  dropping those on a failed clip lookup removes exactly the artists journeys exist to
+  surface).
+- **Re-running prior keep-checks under the new census** — would reverse adopted verdicts
+  wherever clip availability drifted since the snapshots, reopening both adoptions this
+  track has no license to touch. Mixed snapshots have explicit precedent (the `ALG-B`
+  no-release list carries 2,712 verdicts from 2026-08-01).
+- **A fresh keep-check design for the new class** — is `ULC-F4` by another name;
+  owner-deferred.
