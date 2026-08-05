@@ -372,6 +372,12 @@ Amendments are `ULC-AM1`, `ULC-AM2`, … appended here, each committed **before*
 affects runs, with the reason and what it does not change. **Forward-only: nothing above is
 renamed or renumbered.**
 
+> **Read `ULC-AM1` and `ULC-A1` carefully — they are different objects.** `ULC-AM<n>` is an
+> amendment (this section); `ULC-A<n>` is a Stage-2 arm (§3). They are distinct tokens and so
+> not a collision under `CLAUDE.md`'s rule, but they are visually adjacent, and Track 2's
+> eleven-collision mess was this shape. Flagged rather than renamed: renaming a committed
+> identifier is barred, and the whole value of a frozen document is that it is frozen.
+
 ### `ULC-AM4` — `ULC-V1` is 6, not 7; the trigger's absolute count is held at 5
 
 **Committed before any stage runs**, from the owner's own committed notes.
