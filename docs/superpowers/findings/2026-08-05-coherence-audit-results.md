@@ -395,6 +395,25 @@ They are not alternatives, and I framed them as sequential in §4 when they are 
 
 ## 6. Addendum — why the existing filters did not catch this class
 
+> **⚠ CORRECTED 2026-08-05 (evening) by `ULC-AM0`. Read this before quoting §6's table.**
+> **This section's "22 of 23 never evaluated" counts the audit's own 12 planted controls in the
+> denominator.** They were injected by the harness rather than delivered by routing, so filter
+> coverage over them is not a meaningful question and all 12 are "never evaluated" trivially.
+> **The correct figures are 11 real artists, of whom 10 were never evaluated and 1 (Pino
+> Palladino) was in the class and kept.**
+>
+> **§6's conclusion is unaffected** — the class was never looked at, at 90.9 % rather than
+> 95.7 % — **and no `CAU-` criterion, gate or branch is touched**: `cau_score.py:62-68` excludes
+> controls and control-adjacent slots correctly, and the defect is confined to this section's
+> hand-written check. **The original text is left standing below, unedited**, because it is the
+> record of what was claimed; the correction lives here rather than replacing it.
+>
+> **`ULC-` also found a second exemption mechanism this section does not describe** — four of the
+> six were let through by *non-solo Discogs credits* rather than by the single-sole-credit gap
+> named below. Both are real and they are different.
+> Owning document: [`2026-08-05-unlistenable-class-results.md`](2026-08-05-unlistenable-class-results.md) §1.4, §7.
+
+
 **Added 2026-08-05 after the owner asked, in conversation, why an artist with no releases was
 not already dropped. It measures nothing about `CAU-C1`, `CAU-C2` or `CAU-C3`, computes nothing
 over the 53 slots, and is not a criterion.** It is a check of the builder's filter coverage,

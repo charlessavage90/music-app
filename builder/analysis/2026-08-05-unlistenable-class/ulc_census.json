@@ -1,0 +1,486 @@
+{
+ "status": "diagnostic only -- adopts nothing, fixes no criterion, sets no bar",
+ "governing": "specs/2026-08-05-unlistenable-class-preregistration.md",
+ "provenance": {
+  "ULC-P1": {
+   "path": "builder\\scratch\\cre-cells\\E-S0.bin",
+   "sha256": "44003fcceeadaac35303eab6810a1b2bee43c1fd8fd84dff29d3552d949fcc59",
+   "nodes": 64724
+  },
+  "ULC-P2": {
+   "path": "builder\\scratch\\cre-cells\\B-S0.bin",
+   "sha256": "a8507c6e1e044a8c1a6fc3b6d5eea47380a5b1b7f3cd70e2f0d3118b25fe53f6",
+   "nodes": 58851
+  },
+  "ULC-P3": {
+   "path": "builder\\scratch\\cre-cells\\E-S1.bin",
+   "sha256": "a27610be6cefab33ab0519f159824638233386c7af53f1eedffa16d42e1a72fd",
+   "nodes": 65679
+  },
+  "ULC-P4": {
+   "path": "builder\\scratch\\cre-cells\\B-S1.bin",
+   "sha256": "9da396211c5c737add7dba9abeb9f2a4318af957c29e26546bdb9cbae2992e04",
+   "nodes": 63056
+  },
+  "ULC-P5": {
+   "path": "builder\\scratch\\graph-t15-tiebreakfix.bin",
+   "sha256": "4cb84ef979f2ef3c127ff59066105b334bae8f7b033e2452749728af6b061dc8",
+   "nodes": 74193
+  }
+ },
+ "universe": 90159,
+ "ULC_C1_per_population": {
+  "ULC-P1": {
+   "nodes": 64724,
+   "ULC-D2": {
+    "n": 7204,
+    "rate": 0.11130338050800322
+   },
+   "ULC-D2-alt": {
+    "n": 7195,
+    "rate": 0.11116432853346518
+   },
+   "ULC-D0": {
+    "n": 6062,
+    "rate": 0.09365922996106545
+   },
+   "ladder-le1": {
+    "n": 12362,
+    "rate": 0.19099561213769237
+   },
+   "ladder-le2": {
+    "n": 17252,
+    "rate": 0.26654718497002655
+   },
+   "ULC-D1": {
+    "n": 3743,
+    "rate": 0.057830171188430875
+   },
+   "unknown_track_artists": 346
+  },
+  "ULC-P2": {
+   "nodes": 58851,
+   "ULC-D2": {
+    "n": 6171,
+    "rate": 0.10485803129938319
+   },
+   "ULC-D2-alt": {
+    "n": 6164,
+    "rate": 0.10473908684644272
+   },
+   "ULC-D0": {
+    "n": 5234,
+    "rate": 0.08893646667006508
+   },
+   "ladder-le1": {
+    "n": 10449,
+    "rate": 0.1775500841107203
+   },
+   "ladder-le2": {
+    "n": 14619,
+    "rate": 0.2484069939338329
+   },
+   "ULC-D1": {
+    "n": 3720,
+    "rate": 0.06321048070551052
+   },
+   "unknown_track_artists": 315
+  },
+  "ULC-P3": {
+   "nodes": 65679,
+   "ULC-D2": {
+    "n": 7350,
+    "rate": 0.11190791577216462
+   },
+   "ULC-D2-alt": {
+    "n": 7341,
+    "rate": 0.11177088567121911
+   },
+   "ULC-D0": {
+    "n": 6175,
+    "rate": 0.09401787481539
+   },
+   "ladder-le1": {
+    "n": 12568,
+    "rate": 0.19135492318701564
+   },
+   "ladder-le2": {
+    "n": 17526,
+    "rate": 0.26684328324121864
+   },
+   "ULC-D1": {
+    "n": 3832,
+    "rate": 0.05834437186924283
+   },
+   "unknown_track_artists": 349
+  },
+  "ULC-P4": {
+   "nodes": 63056,
+   "ULC-D2": {
+    "n": 6992,
+    "rate": 0.11088556204009135
+   },
+   "ULC-D2-alt": {
+    "n": 6983,
+    "rate": 0.11074283176858665
+   },
+   "ULC-D0": {
+    "n": 5926,
+    "rate": 0.09397995432631312
+   },
+   "ladder-le1": {
+    "n": 11737,
+    "rate": 0.18613613296117737
+   },
+   "ladder-le2": {
+    "n": 16320,
+    "rate": 0.2588175589951789
+   },
+   "ULC-D1": {
+    "n": 4289,
+    "rate": 0.06801890383151485
+   },
+   "unknown_track_artists": 322
+  },
+  "ULC-P5": {
+   "nodes": 74193,
+   "ULC-D2": {
+    "n": 16496,
+    "rate": 0.22233903467982155
+   },
+   "ULC-D2-alt": {
+    "n": 16487,
+    "rate": 0.22221772943539148
+   },
+   "ULC-D0": {
+    "n": 15345,
+    "rate": 0.20682544175326514
+   },
+   "ladder-le1": {
+    "n": 21708,
+    "rate": 0.29258824956532287
+   },
+   "ladder-le2": {
+    "n": 26625,
+    "rate": 0.35886134810561643
+   },
+   "ULC-D1": {
+    "n": 7381,
+    "rate": 0.0994837787931476
+   },
+   "unknown_track_artists": 346
+  }
+ },
+ "ULC_V1_capture": {
+  "ULC-D2": {
+   "caught": 6,
+   "of": 6
+  },
+  "ULC-D2-alt": {
+   "caught": 6,
+   "of": 6
+  },
+  "ULC-D0": {
+   "caught": 5,
+   "of": 6
+  },
+  "ladder-le1": {
+   "caught": 6,
+   "of": 6
+  },
+  "ladder-le2": {
+   "caught": 6,
+   "of": 6
+  },
+  "ULC-D1": {
+   "caught": 6,
+   "of": 6
+  },
+  "per_artist": {
+   "Rick Davies": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 215,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "John McVie": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 270,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Dallas Taylor": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 96,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Brad Delson": {
+    "in_universe": true,
+    "rg_total": 1,
+    "rg_sole": 1,
+    "rg_sole_primary": 1,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 161,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": false,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Joey Kramer": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 241,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Max Martin": {
+    "in_universe": true,
+    "rg_total": 2,
+    "rg_sole": 2,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 651,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   }
+  }
+ },
+ "ULC_V2_capture": {
+  "ULC-D2": {
+   "caught": 7,
+   "of": 11
+  },
+  "ULC-D2-alt": {
+   "caught": 7,
+   "of": 11
+  },
+  "ULC-D0": {
+   "caught": 6,
+   "of": 11
+  },
+  "ladder-le1": {
+   "caught": 8,
+   "of": 11
+  },
+  "ladder-le2": {
+   "caught": 9,
+   "of": 11
+  },
+  "ULC-D1": {
+   "caught": 7,
+   "of": 11
+  },
+  "per_artist": {
+   "Pino Palladino": {
+    "in_universe": true,
+    "rg_total": 6,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 727,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Rick Davies": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 215,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "John McVie": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 270,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Dallas Taylor": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 96,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Brad Delson": {
+    "in_universe": true,
+    "rg_total": 1,
+    "rg_sole": 1,
+    "rg_sole_primary": 1,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 161,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": false,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Joey Kramer": {
+    "in_universe": true,
+    "rg_total": 0,
+    "rg_sole": 0,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 241,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Nathan East": {
+    "in_universe": true,
+    "rg_total": 9,
+    "rg_sole": 3,
+    "rg_sole_primary": 2,
+    "rg_sole_substantial": 2,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 1275,
+    "ULC-D2": false,
+    "ULC-D2-alt": false,
+    "ULC-D0": false,
+    "ladder-le1": false,
+    "ladder-le2": true,
+    "ULC-D1": false
+   },
+   "Max Martin": {
+    "in_universe": true,
+    "rg_total": 2,
+    "rg_sole": 2,
+    "rg_sole_primary": 0,
+    "rg_sole_substantial": 0,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 651,
+    "ULC-D2": true,
+    "ULC-D2-alt": true,
+    "ULC-D0": true,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": true
+   },
+   "Billie Joe Armstrong": {
+    "in_universe": true,
+    "rg_total": 22,
+    "rg_sole": 10,
+    "rg_sole_primary": 10,
+    "rg_sole_substantial": 2,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 426,
+    "ULC-D2": false,
+    "ULC-D2-alt": false,
+    "ULC-D0": false,
+    "ladder-le1": false,
+    "ladder-le2": false,
+    "ULC-D1": false
+   },
+   "Audrey Riley": {
+    "in_universe": true,
+    "rg_total": 1,
+    "rg_sole": 1,
+    "rg_sole_primary": 1,
+    "rg_sole_substantial": 1,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 159,
+    "ULC-D2": false,
+    "ULC-D2-alt": false,
+    "ULC-D0": false,
+    "ladder-le1": true,
+    "ladder-le2": true,
+    "ULC-D1": false
+   },
+   "Four Tet": {
+    "in_universe": true,
+    "rg_total": 140,
+    "rg_sole": 101,
+    "rg_sole_primary": 57,
+    "rg_sole_substantial": 45,
+    "rg_sole_unknown_tracks": 0,
+    "supporting_relations": 7,
+    "ULC-D2": false,
+    "ULC-D2-alt": false,
+    "ULC-D0": false,
+    "ladder-le1": false,
+    "ladder-le2": false,
+    "ULC-D1": false
+   }
+  }
+ },
+ "elapsed_seconds": 2808.0
+}

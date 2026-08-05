@@ -12,21 +12,70 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-05 (later), when THE `CAU-` COHERENCE AUDIT WAS SCORED AND WRITTEN UP.
-`CAU-` is COMPLETE and no session owes anything. The next action is the OWNER'S and it is a
-DECISION, not work — the findings note's §4 options. The `GBL-` null below still stands and is
-untouched. The re-crawl decision is STILL UNTAKEN.**
+**Last updated: 2026-08-05 (evening), when THE `ULC-` UN-LISTENABLE-CLASS TRACK WAS MEASURED
+AND WRITTEN UP. `ULC-` is COMPLETE and no session owes anything. The OWNER has set the next
+session's remit — THE FILTER WORK — so the next action is WORK, not a decision. The `GBL-` null
+and the `CAU-` result below both stand and are untouched. NO RE-CRAWL IS NEEDED for anything
+planned; the candidate archive and a built graph are already on disk.**
 
 ---
 
-> ## ✅ THE `CAU-` COHERENCE AUDIT IS SCORED AND WRITTEN UP, 2026-08-05 (later). **`CAU-` is COMPLETE.** The owner's actions are a DECISION (below) and merging draft PR #77.
+> ## ✅ THE `ULC-` UN-LISTENABLE-CLASS TRACK IS COMPLETE, 2026-08-05 (evening). **The next action is WORK and its remit is set: THE FILTER FIX.** The owner's one action is merging draft PR #78.
+>
+> **Results of record, and the entry point for anything `ULC-`:**
+> [`findings/2026-08-05-unlistenable-class-results.md`](findings/2026-08-05-unlistenable-class-results.md)
+> — **it owns the `ULC-` figures**; its §4 is the options list, §4.1 pins down what "switch to the
+> new map" actually costs, §5 the follow-on items with conditions, §7 a correction owed to the
+> `CAU-` note. Raw data: `builder/analysis/2026-08-05-unlistenable-class/` — **cited, never
+> restated.** Current handoff: [`2026-08-05-HANDOFF-ulc.md`](2026-08-05-HANDOFF-ulc.md).
+> Reasoning: [`2026-08-05-ulc-execution-log.md`](2026-08-05-ulc-execution-log.md). Governing
+> document:
+> [`specs/2026-08-05-unlistenable-class-preregistration.md`](specs/2026-08-05-unlistenable-class-preregistration.md)
+> (five amendments, each committed before the stage it affects).
+>
+> **What stands, in one paragraph.** Two things were measured and **they answer differently, which
+> is the result** (figures §1.2 and §1.3, cited and never restated here): how many artists have
+> nothing of their own to listen to — a similar share of every cleaned map, slightly *smaller* on
+> the candidate data — and how often you actually meet one: **never** on the production data across
+> every measured journey, **regularly** on the candidate data, on one journey reaching most of the
+> interior. **The class is a routing problem, not a population problem.** The
+> gate `ULC-G1` passed `separable`; **`ULC-R1` did NOT fire** — the run state was 95/96 and, more
+> importantly, its pre-registered statistic could not see this effect, which is recorded as a design
+> defect and **deliberately not patched**. The live site is a separate and worse case — roughly
+> double any cleaned build (§1.2) — for the boring reason that it predates both filters. **Nothing is adopted, no default changed, no
+> shipped code touched.**
+>
+> **The next session's remit, set by the owner: the filter work.** `ULC-F1` (drop-list keys must
+> carry population identity, or a crawl extension silently under-filters), `ULC-F2` (the census must
+> write back what it learns), the filter fix itself — **and note the obvious fix is insufficient**,
+> since requiring a *sole* Discogs credit still would not catch a drum sample library — then
+> re-censusing both drop lists.
+>
+> **Owner decisions already taken that constrain what follows:** the production-data rebuild is
+> **TABLED** (he wants the candidate map live first, accepting that the next deployment carries
+> three changes at once and cannot isolate them); ordering is write-up → filters → map switch; and
+> **"switch to the new map" is not yet pinned down** to data-only or the full listened-to package —
+> results §4.1 sets out both, and **neither has a listening test behind it.**
+>
+> **⚠ Two things `ULC-` does NOT do:** it does not reopen the `GBL-` null (`ULC-B2`), and it takes
+> no position on which package sounds better. A `worse_on_candidate` reading is **not** evidence
+> against the rebuilt graph's listen.
+>
+> ---
+
+---
+
+> ## ✅ THE `CAU-` COHERENCE AUDIT IS SCORED AND WRITTEN UP, 2026-08-05 (later). **`CAU-` is COMPLETE.** ~~The owner's actions are a DECISION (below) and merging draft PR #77.~~ *(BOTH DISCHARGED: PR #77 merged `cf36435`; the §4 decision was taken — **option B**, which became the `ULC-` track in the top block, which owns current state.)*
 >
 > **Results of record, and the entry point for anything `CAU-`:**
 > [`findings/2026-08-05-coherence-audit-results.md`](findings/2026-08-05-coherence-audit-results.md)
 > — **it owns the `CAU-` figures**; its §4 is the options list, §5 the response to the owner's
 > sealed note, §6 an addendum on the drop filters. Raw data:
 > `builder/analysis/2026-08-04-coherence-audit/cau_judgements.json`, `cau_result.json`,
-> `cau_page_data.json` — **cited, never restated.** Current handoff:
+> `cau_page_data.json` — **cited, never restated. ⚠ One correction against §6: its "22 of 23
+> never evaluated" counts the audit's 12 planted controls in the denominator; the real figure is
+> 10 of 11 and §6's conclusion is unaffected — `ULC-AM0`.** Handoff, now superseded on next
+> actions by [`2026-08-05-HANDOFF-ulc.md`](2026-08-05-HANDOFF-ulc.md):
 > [`2026-08-05-HANDOFF-cau-scoring.md`](2026-08-05-HANDOFF-cau-scoring.md). Reasoning, **two
 > logs covering the two chunks**:
 > [`2026-08-05-cau-audit-build-and-run-execution-log.md`](2026-08-05-cau-audit-build-and-run-execution-log.md)

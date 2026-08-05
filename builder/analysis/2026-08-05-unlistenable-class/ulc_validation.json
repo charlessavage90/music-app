@@ -1,0 +1,152 @@
+{
+ "status": "diagnostic only -- adopts nothing, fixes no criterion, sets no bar",
+ "source": {
+  "judgements": "cau_judgements.json",
+  "page_data": "cau_page_data.json",
+  "controls": "sealed injection file (read, never written out)"
+ },
+ "ULC_AM0_recount": {
+  "bad_slots_total": 26,
+  "bad_slots_planted": 12,
+  "bad_slots_real": 14,
+  "distinct_artists_as_section_6_counted": 23,
+  "distinct_artists_planted": 12,
+  "distinct_artists_real": 11,
+  "note": "section 6's '22 of 23' includes the planted controls in the denominator; the real figure is 10 of 11 never evaluated"
+ },
+ "ULC_V1": {
+  "886b3be4-c93b-4085-85b0-b73ce2817246": {
+   "name": "Rick Davies",
+   "disambiguation": "UK keyboardist, member of Supertramp",
+   "verdicts": [
+    "cant_tell"
+   ]
+  },
+  "c78f0746-ea5d-44c0-92ee-f32745951345": {
+   "name": "John McVie",
+   "disambiguation": "",
+   "verdicts": [
+    "cant_tell"
+   ]
+  },
+  "6c9a8dad-86ba-4c31-bb52-aca47a484dea": {
+   "name": "Dallas Taylor",
+   "disambiguation": "drummer for Crosby, Stills, Nash & Young",
+   "verdicts": [
+    "cant_tell",
+    "cant_tell"
+   ]
+  },
+  "2d4a1dd1-2cd8-4553-bf0b-74b8c9179633": {
+   "name": "Brad Delson",
+   "disambiguation": "",
+   "verdicts": [
+    "cant_tell",
+    "cant_tell"
+   ]
+  },
+  "4b289467-0bc9-4e6a-aea6-b42247c89756": {
+   "name": "Joey Kramer",
+   "disambiguation": "drummer for Aerosmith",
+   "verdicts": [
+    "cant_tell"
+   ]
+  },
+  "6622a50e-5206-44d0-9ad5-96047a726dcf": {
+   "name": "Max Martin",
+   "disambiguation": "Swedish record producer",
+   "verdicts": [
+    "cant_tell"
+   ]
+  },
+  "3bcff06f-675a-451f-9075-99e8657047e8": {
+   "name": "Four Tet",
+   "disambiguation": "",
+   "verdicts": [
+    "cant_tell"
+   ]
+  }
+ },
+ "ULC_V2": {
+  "0dfd6aab-9056-4764-89b0-80bee7c9f998": {
+   "name": "Pino Palladino",
+   "disambiguation": "",
+   "verdicts": [
+    "doesnt_fit"
+   ]
+  },
+  "886b3be4-c93b-4085-85b0-b73ce2817246": {
+   "name": "Rick Davies",
+   "disambiguation": "UK keyboardist, member of Supertramp",
+   "verdicts": [
+    "cant_tell",
+    "doesnt_fit"
+   ]
+  },
+  "c78f0746-ea5d-44c0-92ee-f32745951345": {
+   "name": "John McVie",
+   "disambiguation": "",
+   "verdicts": [
+    "cant_tell"
+   ]
+  },
+  "6c9a8dad-86ba-4c31-bb52-aca47a484dea": {
+   "name": "Dallas Taylor",
+   "disambiguation": "drummer for Crosby, Stills, Nash & Young",
+   "verdicts": [
+    "cant_tell",
+    "cant_tell"
+   ]
+  },
+  "2d4a1dd1-2cd8-4553-bf0b-74b8c9179633": {
+   "name": "Brad Delson",
+   "disambiguation": "",
+   "verdicts": [
+    "cant_tell",
+    "cant_tell"
+   ]
+  },
+  "4b289467-0bc9-4e6a-aea6-b42247c89756": {
+   "name": "Joey Kramer",
+   "disambiguation": "drummer for Aerosmith",
+   "verdicts": [
+    "cant_tell"
+   ]
+  },
+  "aa82f6eb-ded9-4c0b-951d-2e638ca25c76": {
+   "name": "Nathan East",
+   "disambiguation": "",
+   "verdicts": [
+    "doesnt_fit"
+   ]
+  },
+  "6622a50e-5206-44d0-9ad5-96047a726dcf": {
+   "name": "Max Martin",
+   "disambiguation": "Swedish record producer",
+   "verdicts": [
+    "cant_tell"
+   ]
+  },
+  "5d06fe54-485a-4a07-b506-5f6f719448cb": {
+   "name": "Billie Joe Armstrong",
+   "disambiguation": "",
+   "verdicts": [
+    "doesnt_fit"
+   ]
+  },
+  "cf58cc10-0145-48f5-9ac6-0f53183138fd": {
+   "name": "Audrey Riley",
+   "disambiguation": "",
+   "verdicts": [
+    "doesnt_fit"
+   ]
+  },
+  "3bcff06f-675a-451f-9075-99e8657047e8": {
+   "name": "Four Tet",
+   "disambiguation": "",
+   "verdicts": [
+    "cant_tell"
+   ]
+  }
+ }
+}

@@ -1,0 +1,322 @@
+{
+ "status": "diagnostic only -- outside the ULC- pre-registration, no criterion",
+ "question": "four of six target artists have zero MB release groups yet none is in the no-release tail; ctc_census.has_discogs_release must be true for them. What Discogs entry is doing that?",
+ "artists": {
+  "c78f0746-ea5d-44c0-92ee-f32745951345": {
+   "name": "John McVie",
+   "discogs_id": "273840",
+   "dsp_links": [
+    "https://open.spotify.com/artist/3IuIXQGupZ89qG162Y5sZ6"
+   ]
+  },
+  "4b289467-0bc9-4e6a-aea6-b42247c89756": {
+   "name": "Joey Kramer",
+   "discogs_id": "289821",
+   "dsp_links": []
+  },
+  "6622a50e-5206-44d0-9ad5-96047a726dcf": {
+   "name": "Max Martin",
+   "discogs_id": "61337",
+   "dsp_links": [
+    "https://open.spotify.com/artist/1rjeVTt9Ra1ldvN7SpeK0G",
+    "https://www.deezer.com/artist/1229306",
+    "https://tidal.com/artist/3994840"
+   ]
+  },
+  "886b3be4-c93b-4085-85b0-b73ce2817246": {
+   "name": "Rick Davies",
+   "discogs_id": "395811",
+   "dsp_links": []
+  },
+  "6c9a8dad-86ba-4c31-bb52-aca47a484dea": {
+   "name": "Dallas Taylor",
+   "discogs_id": "308191",
+   "dsp_links": []
+  },
+  "2d4a1dd1-2cd8-4553-bf0b-74b8c9179633": {
+   "name": "Brad Delson",
+   "discogs_id": "462077",
+   "dsp_links": []
+  }
+ },
+ "masters": {
+  "John McVie": {
+   "discogs_id": "273840",
+   "total": 1,
+   "sole_credited": 0,
+   "examples": [
+    {
+     "title": "Blues Giant",
+     "year": "1970",
+     "n_main_artists": 5,
+     "sole": false,
+     "co_credited": [
+      "John Mayall",
+      "Peter Green (2)",
+      "Mick Taylor",
+      "Keef Hartley"
+     ]
+    }
+   ]
+  },
+  "Joey Kramer": {
+   "discogs_id": "289821",
+   "total": 0,
+   "sole_credited": 0,
+   "examples": []
+  },
+  "Max Martin": {
+   "discogs_id": "61337",
+   "total": 1,
+   "sole_credited": 0,
+   "examples": [
+    {
+     "title": "Du Gamla Du Fria",
+     "year": "2014",
+     "n_main_artists": 4,
+     "sole": false,
+     "co_credited": [
+      "Zlatan Ibrahimović",
+      "Day (9)",
+      "Style Of Eye"
+     ]
+    }
+   ]
+  },
+  "Rick Davies": {
+   "discogs_id": "395811",
+   "total": 0,
+   "sole_credited": 0,
+   "examples": []
+  },
+  "Dallas Taylor": {
+   "discogs_id": "308191",
+   "total": 2,
+   "sole_credited": 0,
+   "examples": [
+    {
+     "title": "Drinkin' TNT 'N' Smokin' Dynamite",
+     "year": "1984",
+     "n_main_artists": 6,
+     "sole": false,
+     "co_credited": [
+      "Buddy Guy",
+      "Junior Wells",
+      "Bill Wyman",
+      "Pinetop Perkins",
+      "Terry Taylor (3)"
+     ]
+    },
+    {
+     "title": "Déjà Vu (Alternates)",
+     "year": "2021",
+     "n_main_artists": 3,
+     "sole": false,
+     "co_credited": [
+      "Crosby, Stills, Nash & Young",
+      "Greg Reeves"
+     ]
+    }
+   ]
+  },
+  "Brad Delson": {
+   "discogs_id": "462077",
+   "total": 0,
+   "sole_credited": 0,
+   "examples": []
+  }
+ },
+ "releases_what_the_census_read": {
+  "John McVie": {
+   "discogs_id": "273840",
+   "total": 3,
+   "sole_credited": 0,
+   "examples": [
+    {
+     "title": "Blues Giant",
+     "year": null,
+     "n_main_artists": 5,
+     "sole": false,
+     "co_credited": [
+      "John Mayall",
+      "Peter Green (2)",
+      "Mick Taylor",
+      "Keef Hartley"
+     ]
+    },
+    {
+     "title": "European Union (Live In The UK & Germany)",
+     "year": null,
+     "n_main_artists": 4,
+     "sole": false,
+     "co_credited": [
+      "John Mayall & The Bluesbreakers",
+      "Eric Clapton",
+      "Mick Taylor"
+     ]
+    },
+    {
+     "title": "Blues Giant",
+     "year": null,
+     "n_main_artists": 6,
+     "sole": false,
+     "co_credited": [
+      "John Mayall",
+      "Peter Green (2)",
+      "Mick Taylor",
+      "Keef Hartley",
+      "Various"
+     ]
+    }
+   ]
+  },
+  "Joey Kramer": {
+   "discogs_id": "289821",
+   "total": 1,
+   "sole_credited": 1,
+   "examples": [
+    {
+     "title": "Drum Loops and Samples",
+     "year": null,
+     "n_main_artists": 1,
+     "sole": true,
+     "co_credited": []
+    }
+   ]
+  },
+  "Max Martin": {
+   "discogs_id": "61337",
+   "total": 4,
+   "sole_credited": 0,
+   "examples": [
+    {
+     "title": "Du Gamla Du Fria",
+     "year": null,
+     "n_main_artists": 4,
+     "sole": false,
+     "co_credited": [
+      "Zlatan Ibrahimović",
+      "Day (9)",
+      "Style Of Eye"
+     ]
+    },
+    {
+     "title": "Du Gamla Du Fria",
+     "year": null,
+     "n_main_artists": 4,
+     "sole": false,
+     "co_credited": [
+      "Zlatan Ibrahimović",
+      "Day (9)",
+      "Style Of Eye"
+     ]
+    },
+    {
+     "title": "Du Gamla Du Fria (Quiz & Larossi Remix)",
+     "year": null,
+     "n_main_artists": 4,
+     "sole": false,
+     "co_credited": [
+      "Zlatan Ibrahimović",
+      "Day (9)",
+      "Style Of Eye"
+     ]
+    },
+    {
+     "title": "Everything I'm Not (Demo)",
+     "year": null,
+     "n_main_artists": 2,
+     "sole": false,
+     "co_credited": [
+      "Dr. Luke"
+     ]
+    }
+   ]
+  },
+  "Rick Davies": {
+   "discogs_id": "395811",
+   "total": 1,
+   "sole_credited": 0,
+   "examples": [
+    {
+     "title": "My Kind Of Lady",
+     "year": null,
+     "n_main_artists": 2,
+     "sole": false,
+     "co_credited": [
+      "Supertramp"
+     ]
+    }
+   ]
+  },
+  "Dallas Taylor": {
+   "discogs_id": "308191",
+   "total": 76,
+   "sole_credited": 0,
+   "examples": [
+    {
+     "title": "Déjà Vu",
+     "year": null,
+     "n_main_artists": 3,
+     "sole": false,
+     "co_credited": [
+      "Crosby, Stills, Nash & Young",
+      "Greg Reeves"
+     ]
+    },
+    {
+     "title": "Déjà Vu",
+     "year": null,
+     "n_main_artists": 3,
+     "sole": false,
+     "co_credited": [
+      "Crosby, Stills, Nash & Young",
+      "Greg Reeves"
+     ]
+    },
+    {
+     "title": "Drinkin' Tnt 'N' Smokin' Dynamite",
+     "year": null,
+     "n_main_artists": 6,
+     "sole": false,
+     "co_credited": [
+      "Buddy Guy",
+      "Junior Wells",
+      "Bill Wyman",
+      "Pinetop Perkins",
+      "Terry Taylor (3)"
+     ]
+    },
+    {
+     "title": "Déjà Vu",
+     "year": null,
+     "n_main_artists": 3,
+     "sole": false,
+     "co_credited": [
+      "Crosby, Stills, Nash & Young",
+      "Greg Reeves"
+     ]
+    },
+    {
+     "title": "Drinkin'  T.N.T  N' Smoking Dynamite",
+     "year": null,
+     "n_main_artists": 6,
+     "sole": false,
+     "co_credited": [
+      "Buddy Guy",
+      "Junior Wells",
+      "Bill Wyman",
+      "Pinetop Perkins",
+      "Terry Taylor (3)"
+     ]
+    }
+   ]
+  },
+  "Brad Delson": {
+   "discogs_id": "462077",
+   "total": 0,
+   "sole_credited": 0,
+   "examples": []
+  }
+ }
+}
