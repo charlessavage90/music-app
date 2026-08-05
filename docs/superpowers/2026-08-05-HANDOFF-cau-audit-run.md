@@ -21,10 +21,26 @@ runs cmd):
 uv run --extra dev python -u analysis/2026-08-04-coherence-audit/cau_score.py
 ```
 
-Then, **before writing anything**, read in this order:
-`specs/2026-08-04-coherence-audit-preregistration.md` (governing, four amendments and one
-correction, all committed before any judgement existed) → `cau_judgements.json` (the raw
-verdicts and the owner's per-slot notes) → `cau_result.json` (what the scorer wrote).
+Then, **before writing anything, read in this order and do not skip ahead:**
+
+1. `specs/2026-08-04-coherence-audit-preregistration.md` — governing; four amendments and
+   one correction, all committed before any judgement existed.
+2. `cau_judgements.json` — the raw verdicts and the owner's per-slot notes.
+3. **`cau_owner_notes.md` — the owner's own summary, written after he finished judging and
+   **before** anything was scored (committed unread at `4009707`; `cau_result.json` did not
+   exist and no criterion was computed at that commit — the commit timestamp is the
+   evidence, not the file's mtime).
+4. `cau_result.json` — what the scorer wrote.
+
+**Item 3 comes before item 4 deliberately, and this is the `GBL-` ordering.** His
+impressions are evidence in their own right; read after the numbers they become
+confirmation of whatever the numbers said, and that cannot be unseen. **Do not open
+`cau_result.json` until you have read his note.**
+
+His note is also the only place a whole-path impression can legitimately land: §1 bars any
+scored whole-path claim, and §7's per-journey free-text boxes are explicitly unscored. If
+his summary makes a claim no criterion measures, **report it as his statement and do not
+convert it into a finding.**
 
 **After scoring:** remove the `cau_page_data.json` line from `.gitignore` and commit that
 file. It is the stimulus as presented and the judgements cannot be interpreted without it.

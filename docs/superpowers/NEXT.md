@@ -30,6 +30,14 @@ stands and is untouched. The re-crawl decision is STILL UNTAKEN.**
 > (committed `cb11b38`, before anything was scored) — **cited, never restated.** Operational
 > brief: `builder/analysis/2026-08-04-coherence-audit/CAU-RUN-BRIEF.md`.
 >
+> **⚠ Reading order is fixed and the handoff owns it: prereg → `cau_judgements.json` →
+> `cau_owner_notes.md` → `cau_result.json`.** The owner wrote his own summary after judging
+> and **before anything was scored** (committed **unread** at `4009707`, when no criterion had
+> been computed and `cau_result.json` did not exist — the commit timestamp is the evidence,
+> not the file's mtime). **His note is read BEFORE the result, deliberately**: read after the
+> numbers it becomes confirmation of whatever they said, and that cannot be unseen. It is the
+> `GBL-` ordering, for the `GBL-` reason.
+>
 > **What stands, in one paragraph.** The owner identified a confound in the `GBL-` listen's
 > instrument — a 30-second clip of one arbitrary track cannot support a coherence judgement
 > about an unfamiliar artist, and that failure activates **only in the arm that succeeds at
