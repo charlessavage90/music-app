@@ -41,12 +41,31 @@ from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 
+from artistpath_builder.config import CANDIDATE_ALGORITHM, PRODUCTION_ALGORITHM
+
 _DATA = Path(__file__).parent / "data"
 
-# Censused populations only — filled when the ULF- census freezes each
-# population's list. An algorithm absent here has no list, and that is a
-# refusal rather than a fallback, exactly as in no_release_drop.py.
-UNLISTENABLE_DROP_LISTS: dict[str, Path] = {}
+# sha256 of json.dumps(sorted(drop_mbids), sort_keys=True), recorded in each
+# payload's own sha256_over_sorted_drop_mbids key and in the ULF- execution
+# log. Frozen 2026-08-05 by analysis/2026-08-05-ulf-census/ulf_droplist.py.
+UNLISTENABLE_DROP_SHA256 = (
+    "19ae2d038c5266e5999f227a4184a22699991df9a4bdffd2a24418ff249c85b1"
+)
+CANDIDATE_UNLISTENABLE_DROP_SHA256 = (
+    "6b25232f637aa2a4841a81a0cfb251840b7352a3d0eaa36cd63fd04c33627ff3"
+)
+
+UNLISTENABLE_DROP_LIST_PATH = _DATA / "unlistenable_drop_20260805.json"
+CANDIDATE_UNLISTENABLE_DROP_LIST_PATH = (
+    _DATA / "unlistenable_drop_algb_20260805.json"
+)
+
+# Censused populations only. An algorithm absent here has no list, and that
+# is a refusal rather than a fallback, exactly as in no_release_drop.py.
+UNLISTENABLE_DROP_LISTS: dict[str, Path] = {
+    PRODUCTION_ALGORITHM: UNLISTENABLE_DROP_LIST_PATH,
+    CANDIDATE_ALGORITHM: CANDIDATE_UNLISTENABLE_DROP_LIST_PATH,
+}
 
 
 class NoUnlistenableListForAlgorithm(ValueError):

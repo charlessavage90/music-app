@@ -128,3 +128,36 @@ that are not obvious from reading them:
 6. **Population identity is the archive artist set** (75,000 production files counted at
    input verification), not any graph's node set — a graph-population identity would
    false-refuse every build on pre-prune artists.
+
+## §6 — The census ran clean, and the figures of record
+
+Offline half 61 min, clip stage 81 min + one refusal settled on re-run (ULF-4 honoured;
+zero refusals at freeze). Figures live in the committed payloads and `ulf_census.json`,
+cited never restated: coverage reuse worked on first use (dump passes for an
+8,137-artist delta out of a 98,296-artist union), the ULF-3 subset property held
+exactly (no adopted verdict reverses, verified not assumed), and both lists froze with
+their population manifests. Wired as package data with pinned shas; snapshot tests
+including a shipped-data check of the prior-drop carry; suite 180 passed. Snyk scan on
+all code this session introduced or modified: **clean** — the scanner's 38 findings are
+all pre-existing, in frozen probe records (including the previously adjudicated
+`cre_sweep.py` LOW), which are not edited per the frozen-record rule.
+
+## §7 — The acceptance gate fired on the trial build, and the collision is real
+
+A real production build with all three filters live was run as verification. It was
+refused: **CROOVE, a canonical artist, is absent from the largest component.** Facts,
+each measured this session: CROOVE is the Black Desert soundtrack composer — three
+**sole** Album release groups, every one secondary-type Soundtrack, which `ULC-D2`
+excludes, so the class contains them (and already did in yesterday's census figures);
+MusicBrainz records no DSP link, no Discogs, no Deezer id, so the drop was mechanical;
+and **the app's own resolver, run once for this finding, cannot play CROOVE at all** —
+no Deezer or iTunes preview resolves by name, a real answer and not a refusal. So the
+drop is correct under the rule's purpose (a CROOVE card is a silent card today), and
+what fires is the acceptance pin — added as a **Track 2 pre-registration endpoint
+guarantee** (pair 8, `Nirvana → CROOVE`, prereg §2.3/A7), a track closed 2026-07-25.
+CROOVE is the **only** canonical name dropped, in both populations, checked
+systematically rather than assumed. **The collision blocks every future
+production-criteria build, including the owner's planned candidate map switch.**
+Resolution is the owner's — it edits the acceptance safety contract — and was put to
+him rather than resolved here; a per-artist keep-list is barred by the FCF-5 precedent
+and was not proposed.

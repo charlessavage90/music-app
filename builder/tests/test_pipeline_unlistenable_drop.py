@@ -222,3 +222,79 @@ def test_a_drop_outside_the_censused_population_refuses_to_load(
     )
     with pytest.raises(ValueError, match="outside"):
         load_unlistenable_list(PRODUCTION_ALGORITHM)
+
+
+# --- the frozen 2026-08-05 snapshots ------------------------------------
+#
+# Counts and shas from the census's own payloads (ulf_droplist.py output),
+# recorded in the ULF- execution log. Same pinning idiom as the sibling
+# rules' snapshot tests.
+
+from artistpath_builder.unlistenable_drop import (  # noqa: E402
+    CANDIDATE_UNLISTENABLE_DROP_SHA256,
+    UNLISTENABLE_DROP_SHA256,
+)
+
+RECORDED_COUNT = 13_355
+RECORDED_POPULATION = 75_000
+CANDIDATE_COUNT = 15_708
+CANDIDATE_POPULATION = 75_000
+
+
+@pytest.fixture
+def real_lists():
+    # The install_list fixture monkeypatches the registry and clears the
+    # cache; these tests want the SHIPPED payloads, so clear both ways.
+    load_unlistenable_list.cache_clear()
+    yield
+    load_unlistenable_list.cache_clear()
+
+
+def test_shipped_list_matches_the_frozen_snapshot(real_lists):
+    from hashlib import sha256
+
+    lst = load_unlistenable_list(PRODUCTION_ALGORITHM)
+    assert len(lst.drop_mbids) == RECORDED_COUNT
+    assert len(lst.censused_mbids) == RECORDED_POPULATION
+    digest = sha256(
+        json.dumps(sorted(lst.drop_mbids), sort_keys=True).encode()
+    ).hexdigest()
+    assert digest == UNLISTENABLE_DROP_SHA256
+
+
+def test_shipped_candidate_list_matches_the_frozen_snapshot(real_lists):
+    from hashlib import sha256
+
+    lst = load_unlistenable_list(CANDIDATE_ALGORITHM)
+    assert len(lst.drop_mbids) == CANDIDATE_COUNT
+    assert len(lst.censused_mbids) == CANDIDATE_POPULATION
+    digest = sha256(
+        json.dumps(sorted(lst.drop_mbids), sort_keys=True).encode()
+    ).hexdigest()
+    assert digest == CANDIDATE_UNLISTENABLE_DROP_SHA256
+
+
+def test_the_two_lists_are_not_interchangeable(real_lists):
+    # If these ever coincided, the per-population selection tests would pass
+    # vacuously — same guard as the sibling rules carry.
+    production = load_unlistenable_list(PRODUCTION_ALGORITHM)
+    candidate = load_unlistenable_list(CANDIDATE_ALGORITHM)
+    assert production.drop_mbids != candidate.drop_mbids
+    assert production.censused_mbids != candidate.censused_mbids
+
+
+def test_the_shipped_lists_carry_the_prior_drops_forward(real_lists):
+    # ULF-3, supersession without reversal, checked on the shipped data:
+    # every artist the two adopted rules drop — where present in the ULF-
+    # censused population — is dropped by the merged list too.
+    from artistpath_builder.featured_credit_drop import (
+        load_featured_credit_drop_mbids,
+    )
+    from artistpath_builder.no_release_drop import load_drop_mbids
+
+    for algorithm in (PRODUCTION_ALGORITHM, CANDIDATE_ALGORITHM):
+        ulf = load_unlistenable_list(algorithm)
+        prior = load_drop_mbids(algorithm) | load_featured_credit_drop_mbids(
+            algorithm
+        )
+        assert (prior & ulf.censused_mbids) <= ulf.drop_mbids
