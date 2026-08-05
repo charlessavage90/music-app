@@ -226,6 +226,23 @@ noise — the rule written after a `Track 2` gate fired on a single cell.**
 `too_broad` are real, valuable outcomes: they say the coherence problem `CAU-` found cannot be
 fixed by a build-time filter of this shape, which redirects effort rather than wasting it.
 
+### 2.2a `predicate_wrong` is anticipated, and this is recorded before the run
+
+**Stated here so that, if it fires, it is visibly not a post-hoc excuse.** Two facts already in
+the record point at it: findings §6 says Brad Delson — a target-class member — has *"one release
+with one song in MusicBrainz"*, and `ULC-AM1` records that Keith Scott — a member of the class we
+must **not** flag — has one sole primary release, a 1993 single.
+
+**If Delson's single release is sole-credited and of primary type, `ULC-D0` misses him and Keith
+Scott is spared by the same rule for the same reason.** The two would then be indistinguishable
+by credit count, and the broader rungs of the sensitivity ladder (`≤ 1`, `≤ 2`) catch both or
+neither. **That is the shape of a `predicate_wrong` result**, and its meaning would be specific
+and useful: what separates these two artists is whether the owner could actually find something
+to play, which is availability rather than credit shape — and no offline credit signal encodes
+it. `ULC-D1` is the one lever that could still separate them, since Delson and Scott differ
+sharply in supporting-credit footprint; **it is secondary and cannot rescue the gate**
+(`ULC-AM1`(b)).
+
 ### 2.3 `ULC-V2` is reported, never used as a trigger
 
 Capture over all 11 is reported alongside. **It fires nothing** — the wider set mixes the target
