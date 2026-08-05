@@ -1,0 +1,971 @@
+{
+ "status": "diagnostic; adopts nothing, changes no default, no shipped code",
+ "governing": "specs/2026-08-05-unlistenable-class-preregistration.md",
+ "ulc_r1_readable": false,
+ "missing_slots": [
+  "ULC-A2@Led Zeppelin|Guster@d20"
+ ],
+ "arms": {
+  "ULC-A1": {
+   "cell": "E-S0",
+   "pricing": "P0",
+   "baseline": null
+  },
+  "ULC-A2": {
+   "cell": "B-S0",
+   "pricing": "P0",
+   "baseline": "ULC-A1"
+  },
+  "ULC-A3": {
+   "cell": "E-S1",
+   "pricing": "P1a",
+   "baseline": null
+  },
+  "ULC-A4": {
+   "cell": "B-S1",
+   "pricing": "P1a",
+   "baseline": "ULC-A3"
+  }
+ },
+ "mean_interior_share_pct": {
+  "ULC-A1": {
+   "d0": 0.0,
+   "deep_d10_d20": 0.0
+  },
+  "ULC-A2": {
+   "d0": 1.25,
+   "deep_d10_d20": 6.51
+  },
+  "ULC-A3": {
+   "d0": 0.0,
+   "deep_d10_d20": 0.0
+  },
+  "ULC-A4": {
+   "d0": 2.5,
+   "deep_d10_d20": 15.36
+  }
+ },
+ "ULC_R1": {
+  "ULC-A2": {
+   "comparison": "ULC-A2 - ULC-A1",
+   "plain": "does switching to the new map put more of these artists in the middle of your journeys?",
+   "primary_deep_d10_d20": {
+    "n_pairs": 15,
+    "median_diff_pp": 0.0,
+    "ci95_pp": [
+     0.0,
+     0.0
+    ],
+    "branch": null,
+    "sentence": "run state unmet -- this is NOT ULC-R1 and no branch is assigned"
+   },
+   "anchor_d0": {
+    "n_pairs": 8,
+    "median_diff_pp": 0.0,
+    "ci95_pp": [
+     0.0,
+     0.0
+    ],
+    "branch": null,
+    "sentence": "anchor only; ULC-AM5 excludes d0 from the primary read"
+   }
+  },
+  "ULC-A4": {
+   "comparison": "ULC-A4 - ULC-A3",
+   "plain": "does switching to the new map put more of these artists in the middle of your journeys?",
+   "primary_deep_d10_d20": {
+    "n_pairs": 16,
+    "median_diff_pp": 0.0,
+    "ci95_pp": [
+     0.0,
+     33.3333
+    ],
+    "branch": null,
+    "sentence": "run state unmet -- this is NOT ULC-R1 and no branch is assigned"
+   },
+   "anchor_d0": {
+    "n_pairs": 8,
+    "median_diff_pp": 0.0,
+    "ci95_pp": [
+     0.0,
+     0.0
+    ],
+    "branch": null,
+    "sentence": "anchor only; ULC-AM5 excludes d0 from the primary read"
+   }
+  }
+ },
+ "per_arm_per_pair": {
+  "ULC-A1": {
+   "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47": {
+    "a": "Wishbone Ash",
+    "b": "Pink Floyd",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 5,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6": {
+    "a": "Young Gun Silver Fox",
+    "b": "Eloy",
+    "depths": {
+     "0": {
+      "interior": 13,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 14,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 14,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+    "a": "The Killers",
+    "b": "The Beatles",
+    "depths": {
+     "0": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8": {
+    "a": "The War On Drugs",
+    "b": "Sigur Rós",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 6,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135": {
+    "a": "The Decemberists",
+    "b": "Yellowcard",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 6,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 6,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7": {
+    "a": "Tame Impala",
+    "b": "Fountains Of Wayne",
+    "depths": {
+     "0": {
+      "interior": 5,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 5,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114": {
+    "a": "Arcade Fire",
+    "b": "America",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1": {
+    "a": "Led Zeppelin",
+    "b": "Guster",
+    "depths": {
+     "0": {
+      "interior": 5,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 7,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 7,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   }
+  },
+  "ULC-A2": {
+   "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47": {
+    "a": "Wishbone Ash",
+    "b": "Pink Floyd",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 6,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6": {
+    "a": "Young Gun Silver Fox",
+    "b": "Eloy",
+    "depths": {
+     "0": {
+      "interior": 10,
+      "in_d2": 1,
+      "in_d1": 1,
+      "share_d2": 0.1,
+      "share_d1": 0.1
+     },
+     "10": {
+      "interior": 14,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 16,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+    "a": "The Killers",
+    "b": "The Beatles",
+    "depths": {
+     "0": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 2,
+      "in_d2": 1,
+      "in_d1": 1,
+      "share_d2": 0.5,
+      "share_d1": 0.5
+     },
+     "20": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8": {
+    "a": "The War On Drugs",
+    "b": "Sigur Rós",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 6,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 5,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135": {
+    "a": "The Decemberists",
+    "b": "Yellowcard",
+    "depths": {
+     "0": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 5,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 7,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7": {
+    "a": "Tame Impala",
+    "b": "Fountains Of Wayne",
+    "depths": {
+     "0": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 6,
+      "in_d2": 2,
+      "in_d1": 2,
+      "share_d2": 0.3333333333333333,
+      "share_d1": 0.3333333333333333
+     },
+     "20": {
+      "interior": 10,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114": {
+    "a": "Arcade Fire",
+    "b": "America",
+    "depths": {
+     "0": {
+      "interior": 5,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 7,
+      "in_d2": 1,
+      "in_d1": 1,
+      "share_d2": 0.14285714285714285,
+      "share_d1": 0.14285714285714285
+     },
+     "20": {
+      "interior": 9,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1": {
+    "a": "Led Zeppelin",
+    "b": "Guster",
+    "depths": {
+     "0": {
+      "interior": 7,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 6,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": null
+    }
+   }
+  },
+  "ULC-A3": {
+   "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47": {
+    "a": "Wishbone Ash",
+    "b": "Pink Floyd",
+    "depths": {
+     "0": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6": {
+    "a": "Young Gun Silver Fox",
+    "b": "Eloy",
+    "depths": {
+     "0": {
+      "interior": 8,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 8,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 7,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+    "a": "The Killers",
+    "b": "The Beatles",
+    "depths": {
+     "0": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8": {
+    "a": "The War On Drugs",
+    "b": "Sigur Rós",
+    "depths": {
+     "0": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135": {
+    "a": "The Decemberists",
+    "b": "Yellowcard",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7": {
+    "a": "Tame Impala",
+    "b": "Fountains Of Wayne",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114": {
+    "a": "Arcade Fire",
+    "b": "America",
+    "depths": {
+     "0": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1": {
+    "a": "Led Zeppelin",
+    "b": "Guster",
+    "depths": {
+     "0": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   }
+  },
+  "ULC-A4": {
+   "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47": {
+    "a": "Wishbone Ash",
+    "b": "Pink Floyd",
+    "depths": {
+     "0": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 2,
+      "in_d2": 1,
+      "in_d1": 1,
+      "share_d2": 0.5,
+      "share_d1": 0.5
+     },
+     "20": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6": {
+    "a": "Young Gun Silver Fox",
+    "b": "Eloy",
+    "depths": {
+     "0": {
+      "interior": 8,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 7,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 9,
+      "in_d2": 3,
+      "in_d1": 3,
+      "share_d2": 0.3333333333333333,
+      "share_d1": 0.3333333333333333
+     }
+    }
+   },
+   "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+    "a": "The Killers",
+    "b": "The Beatles",
+    "depths": {
+     "0": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 1,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8": {
+    "a": "The War On Drugs",
+    "b": "Sigur Rós",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135": {
+    "a": "The Decemberists",
+    "b": "Yellowcard",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7": {
+    "a": "Tame Impala",
+    "b": "Fountains Of Wayne",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 5,
+      "in_d2": 3,
+      "in_d1": 3,
+      "share_d2": 0.6,
+      "share_d1": 0.6
+     },
+     "20": {
+      "interior": 2,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   },
+   "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114": {
+    "a": "Arcade Fire",
+    "b": "America",
+    "depths": {
+     "0": {
+      "interior": 5,
+      "in_d2": 1,
+      "in_d1": 1,
+      "share_d2": 0.2,
+      "share_d1": 0.2
+     },
+     "10": {
+      "interior": 5,
+      "in_d2": 2,
+      "in_d1": 2,
+      "share_d2": 0.4,
+      "share_d1": 0.4
+     },
+     "20": {
+      "interior": 8,
+      "in_d2": 5,
+      "in_d1": 5,
+      "share_d2": 0.625,
+      "share_d1": 0.625
+     }
+    }
+   },
+   "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1": {
+    "a": "Led Zeppelin",
+    "b": "Guster",
+    "depths": {
+     "0": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "10": {
+      "interior": 3,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     },
+     "20": {
+      "interior": 4,
+      "in_d2": 0,
+      "in_d1": 0,
+      "share_d2": 0.0,
+      "share_d1": 0.0
+     }
+    }
+   }
+  }
+ },
+ "effect_size_pp": 2.0,
+ "bootstrap": {
+  "draws": 10000,
+  "seed": 20260805
+ }
+}
