@@ -372,6 +372,42 @@ Amendments are `ULC-AM1`, `ULC-AM2`, … appended here, each committed **before*
 affects runs, with the reason and what it does not change. **Forward-only: nothing above is
 renamed or renumbered.**
 
+### `ULC-AM4` — `ULC-V1` is 6, not 7; the trigger's absolute count is held at 5
+
+**Committed before any stage runs**, from the owner's own committed notes.
+
+§1.5 built `ULC-V1` as "the 7 distinct artists behind a CAN'T TELL verdict", inferring the target
+class from the findings note's statement that **eight of the nine** can't-tells record the
+"nothing to listen to" cause. Reading the notes themselves resolves which one is the ninth:
+
+| artist | the owner's note, verbatim-in-substance | target class? |
+|---|---|---|
+| Rick Davies | *"could not find his solo work anywhere I could listen"* | yes |
+| John McVie | *"No solo releases"* | yes |
+| Joey Kramer | *"Aerosmith drummer, but I can't find any solo work"* | yes |
+| Dallas Taylor ×2 | *"I don't see any releases for this artist. I'm surprised they weren't dropped by one of our filters."* | yes |
+| Brad Delson ×2 | *"one release with one song on MB, and I can't find it anywhere"* | yes |
+| Max Martin | *"the only solo work I could find is the musical & Juliet"* | yes |
+| **Four Tet** | *"I did look up the artist on MB and read the bio. I wasn't sure I had the right one"* | **NO — an identity doubt, not an availability one** |
+
+**`ULC-V1` is therefore the 6 artists above and excludes Four Tet.** He is a working electronic
+producer with a large catalogue; a predicate that flagged him would be wrong. He remains in
+`ULC-V2`, which is reported and triggers nothing (§2.3).
+
+**The trigger stays at ≥ 5 — the absolute count is held, not rescaled.** This amendment removes an
+artist the predicate could never have caught, which strictly helps it, so rescaling the bar to
+keep the *rate* at 5-of-7 (≈ 71 %) would be loosening it under cover of a correction. Holding the
+count makes the bar **5 of 6 ≈ 83 %, stricter than it was**, and that is the intended direction:
+it cannot be read as goalpost-moving in the predicate's favour. §2.2's `too_broad` and
+`predicate_wrong` branches are otherwise unchanged.
+
+**One thing the owner noticed during the audit that the census will now answer.** His Dallas
+Taylor note — *"I don't see any releases for this artist. I'm surprised they weren't dropped by
+one of our filters"* — is the filter gap being spotted live, at the card. If Taylor truly has no
+releases, `drop_no_release_tail` should have caught him; that it did not suggests he carries
+release-**group** credits without releases, which is exactly the distinction `ULC-D2`'s track-count
+join makes visible. **Reported when the census runs; no bar attaches to it.**
+
 ### `ULC-AM3` — `ULC-OG3` is ruled: substance is counted in tracks, and `ULC-D2` supersedes `ULC-D0` as primary
 
 **Committed before any stage runs.** The owner ruled on `ULC-OG3`, 2026-08-05: **count songs, not
