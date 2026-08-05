@@ -184,9 +184,18 @@ Discogs test to require sole credit **still would not catch Joey Kramer**, whose
 Discogs release is a **drum sample library**. It is genuinely his, genuinely sole, and it is not
 something you put on a journey.
 
-**Confirmed on the cheaper instrument too.** Across Discogs *masters* (3.1 GiB against 61.6 GiB
-for releases, and 36 seconds against 19 minutes — the owner's suggestion): **not one of the six
-has a single sole-credited master**, and three have no master at all.
+**Confirmed on the cheaper instrument too — with one qualification that matters more than the
+confirmation.** Across Discogs *masters* (3.1 GiB against 61.6 GiB for releases, 36 seconds
+against 19 minutes — the owner's suggestion): **not one of the six has a single sole-credited
+master**, and three have no master at all.
+
+> **Masters alone would have got Joey Kramer backwards, and he is the load-bearing case.** He has
+> **0 masters and 1 sole-credited release** — so a masters-only check reports no sole Discogs
+> credit, and it is precisely his sole credit, the drum sample library, that shows "require sole
+> credit" to be insufficient. This is the tail-coverage loss `NEXT.md`'s standing masters deferral
+> predicted ("single-version releases often have no master"), landing exactly on the tail this
+> class lives in. **Masters is a cheap screen; releases is what any conclusion resting on an
+> artist having nothing must be checked against.**
 
 ---
 

@@ -23,12 +23,19 @@ remit: the filter work.**
 
 ## Which documents are now wrong, and in which direction
 
-- **`findings/2026-08-05-coherence-audit-results.md` §6 overstates its evidence base.** Its "22 of
-  23 never evaluated" counts the audit's own 12 planted controls in the denominator; the real
-  figure is **10 of 11**. The **conclusion is unaffected** and no `CAU-` criterion is touched. The
-  correction is written up as `ULC-AM0` and in the results note §7 — **it is owed to that note and
-  was deliberately not folded in**, because that note owns the `CAU-` figures and this session did
-  not want to edit another track's record on its own authority. *Landing it is a small, safe job.*
+- **`findings/2026-08-05-coherence-audit-results.md` §6 — CORRECTED, and the correction is now
+  IN that note.** Its "22 of 23 never evaluated" counted the audit's own 12 planted controls in the
+  denominator; the real figure is 10 of 11, its conclusion is unaffected, and no `CAU-` criterion
+  is touched. A callout sits at the head of §6 pointing at `ULC-AM0`; **§6's original text is left
+  standing beneath it, unedited**, because it is the record of what was claimed. **Do not "tidy"
+  that by editing the numbers in place.**
+
+  > *This session first declined to make that edit, on the grounds that the `CAU-` note owns its
+  > own figures. That was the wrong reason — `closeout` B1 is explicit that a finding you have the
+  > facts to fix is yours to fix, and authority is never grounds to escalate. The documentation
+  > audit caught it: a reader standing in the `CAU-` note had no way to know the figure was
+  > disputed. Recorded because the instinct was to be deferential and the effect was to leave a
+  > known-wrong figure reading as settled.*
 - **Nothing else is stale in the direction of overstating.** `NEXT.md` and `docs/README.md` are
   updated.
 
@@ -43,11 +50,11 @@ remit: the filter work.**
 3. **`ULC-V1` is 6, not 7.** Four Tet's can't-tell is an identity doubt, not an availability one
    (`ULC-AM4`). Do not restore him to the target set.
 4. **The gate bar is 5 of 6, not 5 of 7 rescaled.** Holding the absolute count was deliberate.
-5. **The count and the exposure disagree, and both stay.** Roughly 1 in 9 on both maps, but zero
-   exposure on production data and 15.36 % on the candidate. Do not resolve the tension by
+5. **The count and the exposure disagree, and both stay.** A similar share of both maps, but zero
+   exposure on production data and substantial exposure on the candidate (§1.2, §1.3). Do not resolve the tension by
    dropping either — that disagreement *is* the finding.
-6. **`ULC-P5` never appears in a cross-archive sentence** (`ULC-B4`). Its 22.23 % is high because
-   it carries neither drop flag, and for no other reason.
+6. **`ULC-P5` never appears in a cross-archive sentence** (`ULC-B4`). Its rate (§1.2) is high because it carries
+   neither drop flag, and for no other reason.
 7. **Nothing is adopted, no default changed, no shipped code touched.**
 
 ## What has already been updated — do not re-edit

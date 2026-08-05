@@ -34,14 +34,15 @@ planned; the candidate archive and a built graph are already on disk.**
 > (five amendments, each committed before the stage it affects).
 >
 > **What stands, in one paragraph.** Two things were measured and **they answer differently, which
-> is the result**: how many artists have nothing of their own to listen to (about 1 in 9 on every
-> cleaned map, slightly *fewer* on the candidate data), and how often you actually meet one (**never**
-> on the production data across 48 journeys; **regularly** on the candidate data, reaching 5 of 8
-> interior cards on one journey). **The class is a routing problem, not a population problem.** The
+> is the result** (figures §1.2 and §1.3, cited and never restated here): how many artists have
+> nothing of their own to listen to — a similar share of every cleaned map, slightly *smaller* on
+> the candidate data — and how often you actually meet one: **never** on the production data across
+> every measured journey, **regularly** on the candidate data, on one journey reaching most of the
+> interior. **The class is a routing problem, not a population problem.** The
 > gate `ULC-G1` passed `separable`; **`ULC-R1` did NOT fire** — the run state was 95/96 and, more
 > importantly, its pre-registered statistic could not see this effect, which is recorded as a design
-> defect and **deliberately not patched**. The live site is a separate and worse case at 22.23 %,
-> for the boring reason that it predates both filters. **Nothing is adopted, no default changed, no
+> defect and **deliberately not patched**. The live site is a separate and worse case — roughly
+> double any cleaned build (§1.2) — for the boring reason that it predates both filters. **Nothing is adopted, no default changed, no
 > shipped code touched.**
 >
 > **The next session's remit, set by the owner: the filter work.** `ULC-F1` (drop-list keys must

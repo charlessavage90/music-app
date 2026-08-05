@@ -95,7 +95,7 @@ caught it.
 
 | Gate | Outcome |
 |---|---|
-| **`ULC-G1`** | **`separable`** — both clauses met (6 of 6; 11.09 % against a 20 % ceiling) |
+| **`ULC-G1`** | **`separable`** — both clauses met, with margin on each (figures: results §1.2) |
 | **`ULC-R1`** | **NOT TAKEN.** Run state 95/96, and §3's statistic could not have seen the effect. No branch assigned |
 | Census determinism | **PASS** — full re-run, every figure identical |
 | Artifact checksums | **PASS** — all five verified before reading |
@@ -113,8 +113,16 @@ arms were never checked for reachability.
 audit's own 12 planted controls in the denominator.** Correct figures: **10 of 11**. The
 conclusion stands at 90.9 % rather than 95.7 %; the evidence base is half the size it appears. **No
 `CAU-` criterion is affected** — `cau_score.py:62-68` excludes controls correctly, and the defect
-is confined to that one hand-written check. **Owed to that note, not folded in here**, because it
-owns the `CAU-` figures. Reproducible via `ulc_validation.py`.
+is confined to that one hand-written check. Reproducible via `ulc_validation.py`.
+
+**It is now landed in that note**, as a callout at the head of its §6 with the original text left
+standing beneath. **This session first declined to make that edit and was wrong to** — the reason
+given was that the `CAU-` note owns its own figures, which is an *authority* argument, and
+`closeout` B1 says plainly that authority is never grounds to escalate a finding you have the
+facts to fix. The documentation audit caught it, on exactly the right ground: a reader standing in
+the `CAU-` note had no way to know the figure was disputed. **The instinct was deference and the
+effect was leaving a known-wrong figure reading as settled** — worth recording, because deference
+is the disguise that failure wears.
 
 **Two claims of mine, corrected in conversation and recorded so they are not re-derived:**
 
@@ -142,9 +150,21 @@ presence (his broken McVie Spotify link). Different signal, both halves demonstr
 | Stage-2 exposure, 672 journeys over 4 arms | **< 2 min** |
 | New collision sweep (all refs) vs old working-directory grep | **0.25 s** vs minutes |
 
-**The masters/releases ratio is the reusable fact — 20× smaller, 32× faster, and it answered the
-question.** The owner raised it; it should be the default first instrument for any Discogs
-presence check.
+**The masters/releases ratio is the reusable fact — 20× smaller, 32× faster.** The owner raised
+it and it did answer the question asked.
+
+> **But not as a replacement, and my first write-up of this was wrong.** I recorded it as "the
+> default first instrument for any Discogs presence check." **`NEXT.md`'s standing deferral on the
+> masters export already warned that masters *lose* tail coverage — "single-version releases often
+> have no master" — and my own data confirms it on the worst possible case.** Joey Kramer has **0
+> masters and 1 sole-credited release**. A masters-only check reports that he has no sole Discogs
+> credit, which is exactly backwards, and it is *his* sole credit — a drum sample library — that
+> proves "require sole credit" is an insufficient fix.
+>
+> **Correct rule: masters first as a cheap screen, releases before any conclusion that turns on an
+> artist having nothing.** The coverage loss falls precisely on the tail this class lives in, so
+> the instrument is at its weakest exactly where the question is hardest. Recorded because the
+> deferral had predicted this and I had to be shown it by my own output.
 
 **A cost paid for a persistence mistake:** the census first wrote only rates, not membership, so
 Stage 2's inputs required a **full 46-minute re-run**. It bought the determinism check, so it was
