@@ -12,7 +12,55 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-04 (night), when THE LISTEN WAS RUN AND WRITTEN UP. The listen is
+**Last updated: 2026-08-05, when THE `CAU-` COHERENCE AUDIT WAS JUDGED. All 77 judgements
+are committed and NOTHING HAS BEEN SCORED — deliberately. The next action is a FRESH SESSION
+that did not build or run the audit: score it, then write it up. The `GBL-` null below still
+stands and is untouched. The re-crawl decision is STILL UNTAKEN.**
+
+---
+
+> ## ▶ THE `CAU-` COHERENCE AUDIT IS JUDGED AND UNSCORED, 2026-08-05. **The next action is a FRESH SESSION** — it scores `cau_score.py` and writes up the result. This session built and ran the audit and must not mark its own work.
+>
+> Entry point is the current handoff:
+> [`2026-08-05-HANDOFF-cau-audit-run.md`](2026-08-05-HANDOFF-cau-audit-run.md) — **read its
+> "what must not be misread" section before scoring.** Governing document:
+> [`specs/2026-08-04-coherence-audit-preregistration.md`](specs/2026-08-04-coherence-audit-preregistration.md)
+> (`CAU-`; four amendments and one correction, **all committed before any judgement
+> existed**). Raw record: `builder/analysis/2026-08-04-coherence-audit/cau_judgements.json`
+> (committed `cb11b38`, before anything was scored) — **cited, never restated.** Operational
+> brief: `builder/analysis/2026-08-04-coherence-audit/CAU-RUN-BRIEF.md`.
+>
+> **What stands, in one paragraph.** The owner identified a confound in the `GBL-` listen's
+> instrument — a 30-second clip of one arbitrary track cannot support a coherence judgement
+> about an unfamiliar artist, and that failure activates **only in the arm that succeeds at
+> delivering unfamiliar artists**. `CAU-` is the one-arm follow-up it earned: the gentle
+> arm's 16 deep journeys, shown whole, every interior card judged *"does this artist belong
+> on this journey?"* with **proper listening** for any artist he could not place. **All 77
+> judgements are in and committed; `CAU-G1`, `CAU-C1`, `CAU-C2` and `CAU-C3` are all
+> uncomputed.** Three things the scoring session must carry: **`CAU-G1` is evaluated first
+> and alone** — below 10 of 12 planted artists rejected, the audit is **VOID**, never a weak
+> pass; **`D_all` is 53**, not 65 or 77, because the 12 cards sitting beside a planted artist
+> were judged next to a fake and are excluded (`CAU-AM3`); and **`CAU-C1`'s middle band is
+> deliberately neither pass nor fail** — the audit names no default there and none may be
+> supplied. **Nothing is adopted, no default changed, no shipped code touched.**
+>
+> **⚠ The `GBL-` null is untouched by anything this audit finds.** `GBL-` §5's run-once rule
+> still binds that verdict. `CAU-` measures a different thing — per-artist fit on one arm,
+> not a journey-level preference between two — and **may not be used to smuggle a comparison
+> back in.** §6's barred reads travel with every sentence.
+>
+> **After scoring:** remove the `cau_page_data.json` line from `.gitignore` and commit it —
+> held back only until the run ended, because diffing it against `gbl_page_data.json` reveals
+> the planted artists. **No closeout has been run for this chunk.**
+>
+> ---
+
+> ## ✅ THE GENTLE-ARM BLIND LISTEN IS RUN, UNBLINDED AND WRITTEN UP, 2026-08-04 (night).
+
+*(Superseded on next actions by the `CAU-` block above; still authoritative for the `GBL-`
+result itself, which stands.)*
+
+**Original header and content follow. Last updated: 2026-08-04 (night), when THE LISTEN WAS RUN AND WRITTEN UP. The listen is
 SPENT and it returned the pre-registered NULL — margin 3 against a bar of 5. Option A
 closes without adoption; production stands; nothing is adopted and no default changed. The
 re-crawl half of the 2026-08-04 decision is STILL UNTAKEN and untouched by the null. The
