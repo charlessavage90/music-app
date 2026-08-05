@@ -10,8 +10,8 @@ presented). Governing document:
 
 **Written by a session that did not design, build or run the audit**, and committed **before
 `cau_owner_notes_SEALED.md` was opened.** That commit boundary is the evidence this read was
-not shaped by the owner's direction. §9 is the response to his note, added afterwards in a
-separate commit; **nothing above §9 was revised after reading it.**
+not shaped by the owner's direction. §5 is the response to his note, added afterwards in a
+separate commit; **nothing above §5 was revised after reading it.**
 
 ---
 
@@ -306,7 +306,94 @@ is the class in §2.2, and option B addresses that far more cheaply.
 
 ---
 
-## 5. Owed after this note
+## 5. The owner's sealed note — response
+
+**Added after §§0–4 were written and committed (`184b3ac`). Nothing above this line was
+revised.** `cau_owner_notes_SEALED.md` was written after he finished all 77 judgements and
+before anything was scored, and committed unread at `4009707`. It carries his views on where
+the project should go, which is why it was sealed until this point.
+
+### 5.1 Where it converges, and that convergence is worth something
+
+He identified the same mechanism I did, independently and first: that the deep cards are
+**"solo acts of related musicians who are likely featured or credited on coherent songs/albums,
+but they haven't released much solo work"**, that **"pretty much all of the 'can't tell' were
+along these lines"**, and he names **Rick Davies** as the worked case.
+
+My §2.2 was written without access to that sentence and reached the same class, with the same
+artist as its first example. Measured against his claim: **8 of the 9 CAN'T TELL slots** are
+this class, and the ninth (Four Tet) is a listener declining to score rather than being unable
+to. So "pretty much all" is right, and it is the strongest thing this audit found.
+
+**Two independent routes to the same conclusion is why the commit boundary was worth the
+trouble.** Had the note been read first, this would be his hypothesis with my agreement
+attached, which is worth much less.
+
+### 5.2 His claims that no criterion here measures — reported as his statements
+
+Per the handoff, these are recorded as what he said. **None is converted into a finding, and no
+criterion is invented to accommodate any of them.**
+
+- **"Overall I strongly prefer the new graph to the old."** A comparison between arms. §6 bars
+  every such sentence in this document and `GBL-` §5's run-once rule binds that verdict; **the
+  null stands.** It is also not new information: the `GBL-` results note already records that
+  the blind did not hold and that he preferred the rebuilt package 6–0 at zero presses, which
+  §5 excluded from the tally by design. An unblinded preference formed after judging everything
+  cannot reopen a blind, pre-registered, run-once comparison — and I do not read him as asking
+  it to.
+- **"20 presses is too deep on this graph… on the old graph we went to at least 100 and barely
+  moved the needle."** A depth claim and a comparative one. **This audit fixed no depth
+  criterion.** The material is 16 journeys at two depths, and splitting the 53 slots by depth
+  after seeing his note would be exactly the post-hoc denominator the pre-registration forbids.
+  **So I have deliberately not computed it**, and I am not reporting a number I could easily
+  have produced. It is a clean, cheap question for its own pre-registration.
+- **"There were a lot of wrong artists' clips played."** Already in the record as `BYP-13` and
+  as the reason five of the seven undecided deep rows in the `GBL-` listen were undecided. This
+  audit routed around it by sending him to MusicBrainz and Spotify instead, so it measures
+  nothing about clips.
+
+### 5.3 Where my independent read disagrees with his
+
+**He reads the un-listenable class as a benign side effect of reaching novelty faster. I read
+it as a product defect.** He frames it as what you get when the graph is working — deep,
+genuinely obscure, credited musicians on coherent records. That is a fair description of the
+*cause*. But the app's unit is an artist with a clip you press play on, and **a card with
+nothing to play has failed regardless of why it is there.** He half-concedes this himself in
+the next sentence — "clips could be an issue though, especially at depths approaching 20" —
+which is the same class arriving from the product side rather than the data side.
+
+My §2.2 stated both readings before I saw his; his note picks the benign one. **I would defend
+the stricter reading**, and it is the reason my §4 recommends counting this class offline before
+anything else.
+
+### 5.4 On "if I had my choice on my own, I'd adopt this graph to production and test it out"
+
+**That is his decision and this document does not make it.** §6 bars adoption *on this audit's
+outcome*, not adoption as such — he can take it on his own authority, and the only thing that
+matters is that it is not recorded afterwards as something the audit licensed.
+
+**Having said that, I think his instinct is more defensible than my §4 implies, and I want to
+be honest about that rather than defend my own recommendation.** The roadmap's Gate 1 is
+personal use, so the blast radius of adopting and living with it is himself — which makes
+"adopt and try it" a genuinely cheap experiment, not a reckless one. My §4 option B does not
+actually conflict with it: the un-listenable census is offline, runs against the artifact, and
+does not need production to be left alone while it runs.
+
+Two costs to name, and then it is his call:
+
+1. **The blind listen is spent.** After adoption there is no clean instrument left to compare
+   the two packages, and `GBL-` §5's run-once rule means it cannot be re-listened. Adoption
+   makes the rebuilt graph the thing everything is measured *against* from then on.
+2. **Adopting first means meeting the un-listenable cards in use rather than in a count.** He
+   will find them — he already has, nine times in 53 — and the offline census that would size
+   the problem takes one session either way.
+
+**So the version I would put to him: adopt if he wants to, and run the census regardless.**
+They are not alternatives, and I framed them as sequential in §4 when they are not.
+
+---
+
+## 6. Owed after this note
 
 - `cau_page_data.json` is committed and out of `.gitignore` — the stimulus as presented, without
   which the judgements cannot be interpreted.
