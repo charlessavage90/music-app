@@ -100,7 +100,9 @@ instrument has been shown to go red.*
 **Injected steps.** A pre-registered number of steps have their middle artist **replaced by
 a random artist drawn from the same graph**, sampled from the same obscurity band
 (`fame_lb_pctl`) as the artist it replaces, so it cannot be spotted by fame alone. These
-steps are indistinguishable in presentation from real ones.
+steps are indistinguishable in presentation from real ones. **`CAU-AM2` adds a hardness
+condition — distance >= 3 from both displayed neighbours — without which `CAU-G1` is not a
+red control; read it before implementing this section.**
 
 - **Count: 12 injected steps**, fixed now, sealed before the run. *(`CAU-AM1`: placed into
   journeys, at most one per journey. Count and bar unchanged.)*
@@ -145,10 +147,10 @@ Plain sentence: *"how often the rebuilt app's artists actually belong where it p
 | **≤ 50% FITS** | "The new artists it digs up are substantially noise." | Decisive against the arm on coherence. No further listen is owed and Option A stays closed |
 | **50% < FITS < 75%** | "It is a real improvement in what it finds and a real cost in what it gets wrong." | **Genuinely ambiguous, and the audit says so rather than picking a side.** The next move is the owner's and this document names no default |
 
-**The bar is the owner's to ratify before the run**, because "how many wrong cards is too
-many" is a judgement about what the app should be, not a methodological choice. Proposed
-above with reasoning; **it is not fixed until he has signed off, and nothing runs before he
-does.**
+**✅ RATIFIED BY THE OWNER at ≥ 75%, 2026-08-04 (night), before generation — `CAU-AM2`.**
+The bar was his to set, because "how many wrong cards is too many" is a judgement about what
+the app should be, not a methodological choice. *(Original text:)* it is not fixed until he
+has signed off, and nothing runs before he does.
 
 ### `CAU-C2` — concentration
 
@@ -261,3 +263,34 @@ journeys** (the owner approved "all, no sampling" against a quoted 66; the true 
 **Unchanged by this amendment:** every read in §5, every bar, `CAU-G1`'s threshold, and the
 whole of §6. `CAU-C2` (concentration) becomes *easier* to measure, since journeys arrive
 intact by construction.
+
+### `CAU-AM2` — the bar is ratified, and the control gets a hardness condition, 2026-08-04 (night)
+
+**Committed before generation. No journey has been rendered, no artist sampled, and no
+judgement exists.**
+
+**1. `CAU-C1`'s bar is ratified by the owner at ≥ 75% FITS**, with the ≤ 50% and 50–75%
+branches as written in §5. **This is his decision, not a session's** — he was offered the
+choice, initially expressed no preference, and ratified 75% after being shown the argument
+from `REQ-9` ("novelty is delivered **through** coherence, never at its expense. An
+incoherent path is always worse, however novel"). Recorded this way because a later reader
+must be able to tell an owner-set bar from a session-set one, and §5 previously said the bar
+was unfixed.
+
+**2. The injected artists get a hardness condition, and `CAU-G1` is meaningless without
+it.** §4 required only that an injected artist be drawn from the same obscurity band. That
+is not enough: a random artist in the same band could coincidentally *belong* between its
+displayed neighbours, and rejecting the control would then be a harder task than the audit
+itself — a listener could fail `CAU-G1` while judging perfectly well.
+
+> **An injected artist must sit at graph distance ≥ 3 from both of its displayed
+> neighbours** in the artifact the journey came from — no edge, and no shared neighbour.
+
+Plain sentence: *"the fake artists really are unrelated to what sits either side of them, so
+failing to reject one means the audit is not working."* Sampling retries until the condition
+holds; if no candidate in an obscurity band satisfies it, the band is widened and **the
+widening is recorded per injection** in the sealed file, so a later reader can see how hard
+each control actually was.
+
+**This makes `CAU-G1` a genuine red control** rather than a test of the listener's tolerance
+for unusual-but-plausible neighbours. It moves no bar: 10 of 12 stands.
