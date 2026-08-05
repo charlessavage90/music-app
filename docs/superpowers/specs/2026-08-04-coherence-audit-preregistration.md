@@ -39,10 +39,14 @@ of, does that artist actually belong where it was put?"*
 Not asked, and **barred from every sentence of the result** (§6):
 
 - **Which graph is better.** This is a one-arm audit. There is no comparison and no margin.
-- **Whether the journeys hang together end to end.** The unit here is one artist against its
-  immediate neighbours. The owner's "today's app takes weird detours when you look at the
-  whole path" observation is a *global* property this instrument cannot see, and a good
-  local score says nothing about it in either direction.
+- **Whether the journeys hang together end to end.** ⚠ **The reason changed under `CAU-AM1`
+  and the bar did not.** Before the amendment the whole path was genuinely invisible to the
+  instrument; now the owner sees each journey complete, so he *can* form a whole-path
+  impression and §7 captures it as a free-text note. **It remains unscored and unbarred: no
+  criterion measures it, no threshold exists for it, and none may be invented after the
+  run.** The owner's "today's app takes weird detours when you look at the whole path"
+  observation is about the *other* arm and stays out of scope entirely — this audit sees only
+  the rebuilt graph and can compare nothing.
 - **Anything about novelty.** Settled at 8–0 by `GBL-Q1` and not re-opened. Because this
   audit sends the listener to Spotify, where monthly listeners are displayed, the spec §6
   WGLL bound is live: **any novelty observation arising during this run is void by
@@ -60,9 +64,12 @@ identity in `gbl_result.json`.
 (endpoints excluded, deduplicated across the 16 deep journeys). Journey lengths d10/d20 run
 3 to 11 cards, median 6.
 
-**Unit of judgement: a step.** One interior artist shown with its immediate predecessor and
-successor from the journey it came from. Steps are presented in **shuffled order**, not
-grouped by journey, so that no judgement is anchored by the one before it.
+**Unit of judgement: an interior slot.** ⚠ **Superseded by `CAU-AM1` (§7) before any
+judgement existed** — the isolated-triple presentation fixed here could not pose the question
+where several consecutive artists are novel to the listener. **Read §7 for the governing
+form: whole journeys presented, every interior slot judged, 65 slots rather than 54.**
+*(Original text:)* One interior artist shown with its immediate predecessor and successor
+from the journey it came from, presented in shuffled order, not grouped by journey.
 
 ## 3. The instrument
 
@@ -95,7 +102,8 @@ a random artist drawn from the same graph**, sampled from the same obscurity ban
 (`fame_lb_pctl`) as the artist it replaces, so it cannot be spotted by fame alone. These
 steps are indistinguishable in presentation from real ones.
 
-- **Count: 12 injected steps**, fixed now, sealed before the run.
+- **Count: 12 injected steps**, fixed now, sealed before the run. *(`CAU-AM1`: placed into
+  journeys, at most one per journey. Count and bar unchanged.)*
 - The injection map is written to a **gitignored file under `.superpowers/`** before serving
   and read by nobody until every real step is judged (the `BLIND-MAPPING.json` convention).
 - **`CAU-G1` (gate, and the audit's validity condition): at least 10 of the 12 injected
@@ -117,7 +125,8 @@ injections.
 **Denominators are declared here so neither can be chosen after the fact.** Both are
 reported, always, side by side:
 
-- **`D_all`** — all 54 real interior artists.
+- **`D_all`** — ⚠ **`CAU-AM1` supersedes this count: 65 interior slots, not 54 artists.**
+  *(Original:)* all 54 real interior artists.
 - **`D_lookup`** — only those the owner had to look up (could not place on sight).
 
 `D_lookup` is the harder population by construction and will score worse; **reporting it
@@ -165,7 +174,8 @@ wrong. Reported prominently if it fires, because it falsifies this document's ow
 
 ### Run state every read presupposes
 
-**All 54 real steps and all 12 injected steps judged.** A partial run licenses **no read**;
+**All 65 real interior slots and all 12 injected slots judged** (`CAU-AM1`; this read
+"54 real steps" before that amendment). A partial run licenses **no read**;
 what is owed is named and the run resumes or is abandoned by the owner, never summarised.
 `CAU-G1` is evaluated **first**; if it fails, nothing else is computed.
 
@@ -192,4 +202,62 @@ forbidden.**
 
 ## 7. Amendments
 
-*(none yet)*
+### `CAU-AM1` — the unit becomes the journey, not the isolated triple, 2026-08-04 (night)
+
+**Raised by the owner before any judgement existed, before generation, and before `CAU-C1`'s
+bar was ratified.** No result of any kind exists at the time of this amendment.
+
+**The defect.** §2 fixed the unit as an isolated triple — one interior artist with its
+immediate predecessor and successor, shuffled. The owner pointed out that his journeys
+contain **runs of consecutive artists all novel to him**. Under the committed design such a
+run produces overlapping triples sharing members, and each asks him to judge an unknown
+artist against two unknown neighbours. Three consequences, none of them acceptable:
+
+1. **The judgement asked is not the judgement needed.** With A→B→C→D→E and B, C, D all
+   novel, "does C belong between B and D" cannot be answered independently — the real
+   question is whether the run B,C,D is a sensible passage, and no triple asks it.
+2. **The lookup cost was understated.** Context artists need looking up too, so the §5
+   estimate counted targets and ignored neighbours.
+3. **The steps were never independent.** 65 interior slots over 54 distinct artists, 11 of
+   which recur across journeys — presenting them shuffled hid a dependence structure rather
+   than removing it.
+
+**The change.** The unit of *presentation* becomes the **whole journey**; the unit of
+*judgement* stays the **interior slot**.
+
+- Each of the 16 deep journeys is shown complete, endpoints included and marked, with every
+  interior artist carrying its own FITS / DOESN'T FIT / CAN'T TELL control.
+- The owner judges every interior slot of a journey in one pass, with the full path visible.
+  An artist is looked up once, in the context it actually occupies.
+- **Journeys are presented in shuffled order with no pair or depth label.**
+- **A free-text note per journey** is captured. It is **not scored and carries no bar** —
+  added so the whole-path impression has somewhere to go without inviting a post-hoc
+  criterion.
+
+**Denominators change accordingly, and this supersedes §5's:** the same artist in two
+journeys is **two judgements**, because fit is contextual and it may genuinely fit in one
+and not the other.
+
+- **`D_all` = 65 interior slots** (was: 54 distinct artists).
+- **`D_lookup`** = those slots whose artist the owner could not place on sight.
+
+**The red control changes shape, not size.** The 12 injected artists are placed **into
+journeys, at most one per journey** (12 of the 16 journeys carry one). They occupy an
+interior slot and are judged like any other. `CAU-G1`'s bar is unchanged: **at least 10 of
+12 judged DOESN'T FIT, or the audit is void.** Injected slots remain excluded from both
+denominators.
+
+**What this costs, stated plainly.** Shuffling isolated triples was the defence against the
+owner recognising journeys he judged hours earlier and importing his impressions. Whole
+journeys give that defence up. **This is a real loss and it is accepted deliberately:** an
+instrument that cannot pose the question properly is worse than one that poses it properly
+to a listener with a known prior — and that prior is exactly what `CAU-G1` exists to catch,
+since a listener approving indiscriminately will wave the injected artists through.
+
+**Workload after this amendment: 65 real slots + 12 injected = 77 judgements across 16
+journeys** (the owner approved "all, no sampling" against a quoted 66; the true figure is
+77, disclosed here before generation). No sampling, no seed, `CAU-C2` fully measurable.
+
+**Unchanged by this amendment:** every read in §5, every bar, `CAU-G1`'s threshold, and the
+whole of §6. `CAU-C2` (concentration) becomes *easier* to measure, since journeys arrive
+intact by construction.
