@@ -27,10 +27,13 @@ options. No session owes anything.
 
 - **Nothing is stale in the direction of overstating.** `NEXT.md` is rewritten and its
   "after scoring" instruction is struck as discharged.
-- **The `CAU-` build-and-run chunk has no retained execution log** and never will — see the
-  scoring log §1. Its reasoning survives only in the handoff it wrote, the four amendments and
-  the commit messages. **Do not backfill it**; reconstructing another session's reasoning from
-  commits produces something that reads like a record and is a guess.
+- **The `CAU-` build-and-run chunk now HAS a retained execution log** —
+  [`2026-08-05-cau-audit-build-and-run-execution-log.md`](2026-08-05-cau-audit-build-and-run-execution-log.md),
+  `d4f7f85`. It was written by the session that did that chunk, while it was still live, under
+  a bar keeping it from any result. **This reverses what this handoff and the scoring log said
+  at first** — both recorded the gap as permanent, on the reasoning that backfilling from
+  commits is a guess. That reasoning was sound and its premise was false: the session had not
+  gone. **It is a primary source, and three of its items corrected this session's own output.**
 
 ## Claims that must NOT be reverted by a well-meaning editor
 

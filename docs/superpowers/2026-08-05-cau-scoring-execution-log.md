@@ -11,23 +11,34 @@ design, build or run the audit, so scoring it is not marking its own work.
 
 ---
 
-## 1. ⚠ The build-and-run chunk left no retained execution log
+## 1. ✅ The build-and-run chunk's log was written by that session, not backfilled here
 
-**This is a gap in the record, not an omission of this log's.** `GBL-` produced four
-execution logs (planning, harness, run, write-up). `CAU-` produced none: the audit was
-designed, built, gated, served and judged, and the only durable reasoning is the handoff's
-"Defects found during this chunk" section, the four `CAU-AM` amendments, `CAU-CORR1`, and the
-commit messages.
+**Superseded 2026-08-05 (later), and the way it was closed is the reusable part.** This
+section originally recorded the missing log as a permanent gap: `GBL-` produced four execution
+logs and `CAU-` produced none, and backfilling it from another session's commits would have
+produced something that reads like a record and is actually a guess.
 
-**Not backfilled here, deliberately.** Reconstructing another session's reasoning from its
-commits produces something that reads like a record and is actually a guess — the exact
-failure mode `CLAUDE.md` names as "confident prose about correct code". The four amendments
-happen to carry unusually good reasoning inline, which is why the loss is smaller than it
-would normally be, and that is luck rather than design.
+**The owner then pointed out that the session which did the work was still live.** That
+dissolves the problem entirely — `closeout` A1 sits in Part A precisely because the context
+dies with the session, and it had not died. It wrote its own log:
+[`2026-08-05-cau-audit-build-and-run-execution-log.md`](2026-08-05-cau-audit-build-and-run-execution-log.md),
+committed `d4f7f85`. Primary source, not reconstruction.
 
-**What is genuinely unrecoverable:** what was decided *against* while designing the audit,
-and any figure computed and not written down. Both are the categories `closeout` A2-mid
-exists to enumerate, and no mid-flight retirement occurred to trigger it.
+**It was asked under a read bar, and that bar is the transferable bit.** It wrote from its own
+memory and its own commits, having read none of: the findings note, `cau_result.json`, the
+sealed note, this log, the current handoff, `NEXT.md`'s top block, **or any commit message
+after `adafde1`** — the last of those being the real hazard, since `git log` is a session's
+first move and the intervening messages state the outcome outright. Knowing what a design
+choice produced reshapes the recollection of why it was made; the bar is the sealed-note
+problem running in the other direction.
+
+**It returned things nothing else would have.** Eleven defects where the handoff listed five,
+seven owner statements that never reached a file, and a gate that was **never reached** —
+none of which is derivable from the commits. Three of its items corrected documents this
+session had already written; see §6.
+
+**The general lesson, and it cost nothing to learn:** *"the session that did the work is gone"*
+is an assumption worth testing before accepting any gap it implies.
 
 ## 2. Decisions taken
 
@@ -121,8 +132,37 @@ what admitted the artists in 4.2.
 
 - **`NEXT.md`'s "after scoring" instruction is discharged** — `cau_page_data.json` is
   committed and out of `.gitignore` (`551ed0e`). Struck in place, not deleted.
-- **No previously-recorded claim was overturned by this chunk.** The `GBL-` null stands
-  untouched, which is the one thing most at risk of being read otherwise.
+- **The `GBL-` null stands untouched**, which is the one thing most at risk of being read
+  otherwise. Nothing in either chunk overturns it.
+
+**Three corrections came from the build-and-run log (`d4f7f85`) after this session's closeout
+had already run, and all three were this session's errors:**
+
+1. **"Never reached: none" was wrong.** The PR body and the gate table said no gate went
+   unreached. The **browser render check was never reached** — the Chrome extension was not
+   connected, and the build session fell back to `node --check` plus a live endpoint exercise.
+   It is also the clearest instrument lesson in the track: a render check is exactly what would
+   have caught the one-interior journey that reads to a listener as a rendering failure, which
+   the owner instead hit mid-run. Corrected in the PR body.
+2. **"No Snyk scan is owed" was right for this chunk and wrong for the branch.** The build
+   session added first-party code, scanned it, found **one MEDIUM, adjudicated it a false
+   positive** (a dict key literally named `"pass"`), resolved it by renaming the `CAU-C1`
+   branches to `meets_bar` / `ambiguous` / `below_bar`, and **rescanned clean**. So the
+   branch's Snyk obligation is discharged — but by that session, not by nothing. Corrected in
+   the PR body.
+3. **`CAU-G1` carries a third weakening, not two.** This session's weakest-link section named
+   `CAU-AM1` and `CAU-AM4` as interacting to soften the red control. The build log §5 records a
+   third, never written down before: **endpoint-adjacent placement puts each control beside an
+   endpoint the owner chose himself and therefore always knows**, so it can be rejected in
+   fully familiar context without a lookup. **All three weakenings point the same way.**
+   Recorded as findings §7 rather than edited into §3, per that document's revision boundary.
+
+**One correction owed to a document outside this track.** The build log §3.1 records the owner
+confirming in conversation that he scored the `GBL-` rows on coherence — *"whether I meant to
+or not, that's how I ended up scoring the rows."* The `GBL-` findings note carries that as **a
+session's inference from his written notes**; his confirmation upgrades it to a stated fact and
+was nowhere in the record. A dated cross-reference has been added there. **No `GBL-` figure,
+branch or verdict moves** — the null stands and its run-once rule is untouched.
 
 ## 7. Operational notes
 

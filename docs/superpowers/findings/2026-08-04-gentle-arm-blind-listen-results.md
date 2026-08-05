@@ -146,6 +146,15 @@ while novelty was captured only by the once-per-pair question that carries no th
 most consequential thing in this write-up: the outcome the experiment was built to detect was
 measured by the half of the instrument that has no decision rule attached to it.
 
+> **✅ CONFIRMED BY THE OWNER, 2026-08-05 — this is no longer an inference.** He said so
+> directly in conversation during the `CAU-` build: *"whether I meant to or not, that's how I
+> ended up scoring the rows."* Recorded at
+> [`../2026-08-05-cau-audit-build-and-run-execution-log.md`](../2026-08-05-cau-audit-build-and-run-execution-log.md)
+> §3.1, which is where it surfaced — it had reached no file until that log was written.
+> **Nothing else in this document moves:** no figure, no branch, no verdict. The null stands
+> and `GBL-` §5's run-once rule is untouched. What changes is only the standing of the sentence
+> above — the person who made the judgements has confirmed what they were about.
+
 **2.3 The clip defects did not bias the result — they destroyed its resolution.** The spec's
 rule was "ignore clip failures unless they differ by arm", which protects against a *biased*
 comparison. It does not protect against a *blind* one. The clips were broken roughly equally

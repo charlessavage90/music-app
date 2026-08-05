@@ -474,7 +474,42 @@ question.
 
 ---
 
-## 7. Owed after this note
+## 7. Addendum — `CAU-G1` carries a third weakening, and all three point the same way
+
+**Added 2026-08-05 (later), from
+[`../2026-08-05-cau-audit-build-and-run-execution-log.md`](../2026-08-05-cau-audit-build-and-run-execution-log.md)
+§5 — the build session's own log, written after this note was committed and read under a bar
+that kept it from seeing any result.** Recorded here rather than edited into §3, so that
+document's revision boundary holds. **It moves no figure and no branch.**
+
+§3 named two things softening the red control: `CAU-AM1` gave up the shuffled-triple defence,
+and `CAU-AM4`'s disambiguation labels make a wrong-sounding fake easier to reject unheard.
+There is a third, and it was never written down until now:
+
+> **Controls sit endpoint-adjacent, and the endpoints are the owner's own picks** — so every
+> planted artist was judged next to an artist he chose and therefore always knows. A control in
+> fully familiar context can be rejected without a lookup.
+
+`CAU-AM3` gives the contamination argument for that placement, which is sound and was the
+reason it was chosen. This is its unstated cost. **All three weakenings push in the same
+direction: `CAU-G1` was easier to pass than the version of it a reader would imagine.**
+
+**What this does and does not change.** It does not touch the gate's outcome or any reading
+below it — 12 of 12 still means the audit is not void, and **10 of the 12 were looked up
+before being rejected**, which is the measured fact that most limits how far this caveat
+travels. What it changes is how much a *perfect* score is worth as evidence of discrimination:
+less than it looks, for three compounding reasons rather than two. The gate exists to prove the
+instrument **can** go red, not to measure how hard that is — and on that job it still holds.
+
+**Recorded because the pattern matters more than the item.** Each weakening was disclosed in
+advance, in the amendment that introduced it, exactly as the pre-registration discipline
+requires. **None of the three documents noticed that the others existed.** A cost declared
+three times in three places, and never once summed, is the failure mode that survives
+per-amendment honesty.
+
+---
+
+## 8. Owed after this note
 
 - `cau_page_data.json` is committed and out of `.gitignore` — the stimulus as presented, without
   which the judgements cannot be interpreted.

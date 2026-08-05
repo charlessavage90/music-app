@@ -27,10 +27,14 @@ untouched. The re-crawl decision is STILL UNTAKEN.**
 > sealed note, §6 an addendum on the drop filters. Raw data:
 > `builder/analysis/2026-08-04-coherence-audit/cau_judgements.json`, `cau_result.json`,
 > `cau_page_data.json` — **cited, never restated.** Current handoff:
-> [`2026-08-05-HANDOFF-cau-scoring.md`](2026-08-05-HANDOFF-cau-scoring.md). Reasoning:
-> [`2026-08-05-cau-scoring-execution-log.md`](2026-08-05-cau-scoring-execution-log.md) — **its
-> §1 records that the build-and-run chunk left NO execution log, and why it is deliberately not
-> backfilled.**
+> [`2026-08-05-HANDOFF-cau-scoring.md`](2026-08-05-HANDOFF-cau-scoring.md). Reasoning, **two
+> logs covering the two chunks**:
+> [`2026-08-05-cau-audit-build-and-run-execution-log.md`](2026-08-05-cau-audit-build-and-run-execution-log.md)
+> (the build and the run, written by that session while it was still live and **before it read
+> any result** — its §5 is the design rationale nothing else states, and its §6 records a gate
+> that was **never reached**) and
+> [`2026-08-05-cau-scoring-execution-log.md`](2026-08-05-cau-scoring-execution-log.md) (the
+> scoring and write-up).
 >
 > **What stands, in one paragraph.** All 77 judgements were scored by a session that did not
 > build or run the audit. **`CAU-G1` passed 12 of 12, so nothing below it is void.** `CAU-C1`
