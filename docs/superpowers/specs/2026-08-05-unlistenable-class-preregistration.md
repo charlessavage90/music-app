@@ -378,6 +378,34 @@ renamed or renumbered.**
 > eleven-collision mess was this shape. Flagged rather than renamed: renaming a committed
 > identifier is barred, and the whole value of a frozen document is that it is frozen.
 
+### `ULC-AM5` — `ULC-R1` pools the two deep rows; `d0` is an anchor, excluded
+
+**Committed before `ULC-S2` runs.** §3.1 fixes `ULC-R1`'s trigger as a "paired median
+difference" but never says **over which depths** — an underspecification found while building the
+harness, and resolvable only before results exist.
+
+> **`ULC-R1`'s primary read is the pooled deep rows — `d10` and `d20`, 8 pairs × 2 depths = 16
+> paired observations per comparison.** `d0` is reported as an anchor and is **excluded from the
+> primary read.**
+
+**Why this and not the alternatives.** Evaluating all three depths separately would be three
+reads where the design fixed one, and multiplying comparisons after the fact is the thing
+pre-registration exists to stop. Pooling all three would let `d0` — the journey before any button
+is pressed — dominate a question that is about what **bypassing** surfaces. **This is exactly
+`GBL-`'s shape**, whose primary read was its 16 deep rows with `d0` as an excluded anchor, and
+reusing it means the two tracks' numbers sit in the same frame.
+
+**`d0` is still worth reporting and may still be quoted**, with its own figure and no branch
+attached: it is what a user sees on first load, and `ULC-R2`-style sentences about the shipped app
+live there.
+
+**Effect size and branches are unchanged** — ±2 percentage points, CI excluding zero, per §3.1.
+
+**A limitation this makes visible: 16 paired observations is a small sample and the confidence
+interval will be wide.** That is a property of the eight-pair set inherited from `GBL-AM1`, not a
+choice made here, and it is a reason a `no_detectable_difference` result would be weak evidence of
+equivalence rather than strong evidence of sameness. §3.2's depth confound applies on top.
+
 ### `ULC-AM4` — `ULC-V1` is 6, not 7; the trigger's absolute count is held at 5
 
 **Committed before any stage runs**, from the owner's own committed notes.

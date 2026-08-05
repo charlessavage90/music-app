@@ -289,6 +289,30 @@ def main() -> None:
     out.write_text(json.dumps(payload, indent=1, ensure_ascii=False), encoding="utf-8")
     log(f"wrote {out.name} in {payload['elapsed_seconds']}s")
 
+    # ULC-S2 needs the flagged sets themselves, not just the rates. Written as
+    # sorted mbid lists so the file is diffable and order-stable; the aggregate
+    # rates above are the determinism check on any re-run.
+    flags_path = HERE / "ulc_flags.json"
+    flags_path.write_text(
+        json.dumps(
+            {
+                "status": "derived from ulc_census.json's own pass; cite that for rates",
+                "note": ("membership sets for ULC-S2's interior-exposure count. "
+                         "ULC-D1 is a strict subset of ULC-D2 by construction "
+                         "(ULC-AM1(b)) -- if that ever fails, something is wrong."),
+                **{name: sorted(m for m in universe if all_flags[m][name])
+                   for name in names},
+            },
+            indent=1,
+        ),
+        encoding="utf-8",
+    )
+    d2 = {m for m in universe if all_flags[m]["ULC-D2"]}
+    d1 = {m for m in universe if all_flags[m]["ULC-D1"]}
+    if not d1 <= d2:
+        raise SystemExit("ULC-D1 is not a subset of ULC-D2 -- construction violated")
+    log(f"wrote {flags_path.name}: D2={len(d2):,} D1={len(d1):,} over the union")
+
     print("\n--- ULC-V1 capture (target class, 6 artists) ---", flush=True)
     for name in names:
         c = payload["ULC_V1_capture"][name]
