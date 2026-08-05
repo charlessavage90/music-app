@@ -372,6 +372,70 @@ Amendments are `ULC-AM1`, `ULC-AM2`, … appended here, each committed **before*
 affects runs, with the reason and what it does not change. **Forward-only: nothing above is
 renamed or renumbered.**
 
+### `ULC-AM2` — `ULC-OG1` is ruled, and the worked example is no longer a clean counterexample
+
+**Committed before any stage runs.** The owner ruled on `ULC-OG1` on 2026-08-05 and supplied four
+corrections, two of them to his own earlier account.
+
+#### (a) The ruling
+
+**The definition in §1.1 STANDS: *"there is nothing to go and listen to."*** Unchanged, and now
+frozen — a further change is an amendment, not an edit.
+
+#### (b) What he corrected, and what each one does
+
+1. **Missing streaming links in MusicBrainz are common and do not mean the artist is absent from
+   the platform.** His earlier manual exercises were spot checks of *Spotify monthly listeners*,
+   so non-Spotify links were not being attended to. **Consequence: this strengthens §1.1's move
+   away from DSP-link tests** — the signal is not merely wrong for Keith Scott, it is
+   systematically unreliable. No change to `ULC-D0`, which never used it.
+2. **Keith Scott's sole release is one track, and it is a theme from a single episode of a TV
+   show.** He had read it as an album while working quickly. **His revised assessment: Scott is
+   "much closer to *there is nothing to go and listen to*" than he first thought** — and he
+   explicitly declines to rush a rule change on it.
+3. **MusicBrainz carries data at RELEASE level that the release-group level does not.** Scott's
+   release page holds a YouTube link to the track. Precedent from this project's own tag work:
+   releases often carried genre tags where the artist carried none. **Recorded as a candidate
+   instrument (§8), not adopted** — he notes it may be expensive.
+4. **Brad Delson's single MusicBrainz entry is a live cover of a Britney Spears song, performed
+   during a speech at a UCLA graduation**; the owner had previously failed to find it only because
+   he searched the wrong title. ListenBrainz records **one play by one listener**.
+
+#### (c) The consequence, and it supersedes §2.2a's *reasoning* while leaving its branch intact
+
+**§2.2a predicted that `ULC-D0` would miss Delson and spare Scott, and read that as evidence that
+availability rather than credit shape is the discriminator. That reading is now wrong**, and is
+superseded here rather than edited above.
+
+Both artists have `rg_sole_primary` = 1. If the owner's revised view of Scott holds, **both belong
+in the class and `ULC-D0` at `== 0` misses both** — so the failure is not that the two are
+inseparable, it is that **the threshold is one rung out.** `rg_sole_primary ≤ 1` catches both.
+
+**Availability is also refuted as the discriminator, by his own two examples.** Both men have
+something playable on YouTube; neither has a body of work. **The distinction is substance, not
+availability** — one TV-episode theme, one live cover at a graduation ceremony. A YouTube-presence
+test would have separated neither.
+
+**§2.2a's `predicate_wrong` branch is unchanged and still fires on its stated trigger.** Only the
+interpretation attached to it is replaced.
+
+#### (d) The owner's asymmetry ruling, recorded because it governs any future rule
+
+> *"I think keeping Brad is a bigger 'miss' than dropping Keith."*
+
+**Recall over precision, in his own column** — false negatives (leaving an un-listenable artist in
+the graph) cost more than false positives (dropping a marginal one). **Fixed here, before any
+capture rate exists**, so no later result can be read as having discovered it. It governs
+`ULC-OG2` if a rule is ever written, and it is the reason the sensitivity ladder is reported at
+all.
+
+#### (e) What this leaves open — `ULC-OG3`, and it blocks `ULC-G1`
+
+**Does one single, one-off or one-track release count as "something to go and listen to"?** It is
+his because it is the definition's own boundary, it decides Scott and Delson together, and it
+selects which rung of the ladder is `ULC-D0`. **Nothing is run until it is answered**, because
+answering it after the distribution is visible would let selectivity masquerade as definition.
+
 ### `ULC-AM1` — the Keith Scott pre-run check, and a precision companion `ULC-D1`
 
 **Committed before any stage runs.** Prompted by the owner on 2026-08-05: he clarified that he
@@ -477,6 +541,19 @@ applied by a check written in the same document.
   contain unverified name-path resolutions, identically on both archives — so it bounds absolute
   claims and does **not** confound `ULC-R1`.
 - **Recording- or track-level depth** (§1.4) — unverified data source, no read depends on it.
+  **`ULC-AM2` raises its value considerably**: both worked artists are distinguished from a real
+  act by *substance* (one TV theme; one live cover), which is a track-count question. If
+  `ULC-OG3` rules that a one-track release does not count, this stops being optional.
+- **Descending to RELEASE level for links and data absent at release-group level** — the owner's
+  observation (`ULC-AM2`(b3)), with the tag work as precedent. **A candidate instrument, not
+  adopted here.** Note that it would not have separated his two worked cases: both have a
+  YouTube-reachable track. Its value is elsewhere, and it needs its own scoping.
+- **ListenBrainz play counts as a floor test** — *"has anyone ever listened to this at all"*,
+  prompted by Delson's one play by one listener. **Not adopted, and it carries a live
+  constraint:** `FAM-` measured ListenBrainz listener counts against worldly fame and they
+  **failed**, and there is a standing bar on worldly-fame claims entering new criteria. A floor
+  test is a materially weaker claim than the ordering claim that failed, so it is not obviously
+  barred — but establishing that is its own pre-registration, not a footnote here.
 - **Any drop rule, any adoption, any default change** (`ULC-B7`).
 - **The crawl-expansion defects found 2026-08-05** — that resuming with a raised
   `target_artist_count` does nothing (`crawl.py:115`, the frontier is `discovered − done` and both
