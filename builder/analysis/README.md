@@ -14,6 +14,13 @@ amendments A12–A19. Noted here because a `docs/`-first reader would not otherw
 find it, and because it is the one directory this file's "frozen, not a tool"
 framing does not yet describe.
 
+**A second live exception, added 2026-08-05: `census-coverage/`.** It is an **ACTIVE
+data store**, not a frozen record: the `ULC-F2` coverage store that censuses read and
+write back, so a crawl extension pays dump passes only for genuinely new artists.
+`2026-08-05-ulf-census/` (the `ULF-` filter censuses, spec
+`docs/superpowers/specs/2026-08-05-unlistenable-filter-rule.md`) is its first writer and
+follows the frozen-record convention itself once run.
+
 **Its review is frozen, and it is the authority for its own measurements:**
 `2026-07-24-track2-p8b-harness-review/` is the **P8b** `ml-graph-analyst` review of that
 harness — the pre-registration §7 prerequisite that gated the arms. Fourteen findings

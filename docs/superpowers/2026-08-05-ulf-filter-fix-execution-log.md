@@ -97,3 +97,34 @@ pins; and **`cre_build.py` was found to be an unlisted era-pinned caller** — i
 the guard's list, builds through defaults, and once ULF- lists exist for its two
 algorithms a re-run would have applied the third drop and silently disagreed with the
 committed cell shas. Pinned, and added to `ERA_PINNED_CALLERS`. Suite: 176 passed.
+
+## §5 — Census design (tasks: `ULC-F2` + the re-census)
+
+Three scripts in `builder/analysis/2026-08-05-ulf-census/`, and the design decisions
+that are not obvious from reading them:
+
+1. **The `ULC-` census's committed output cannot say who was evaluated and found
+   negative** — `ulc_flags.json` holds class *members* only, and the universe membership
+   was never written. Re-derived here from the same five sha-verified artifacts rather
+   than trusted from a count. That gap is itself an instance of `ULC-F2`, and the
+   coverage store closes it for the future: absence of a field means unknown, never
+   false.
+2. **The artist-dump pass runs over the full archive union, not a delta**, because the
+   prior censuses read that dump and discarded what they learned (`ctc_census.py`'s
+   `artists` dict was never persisted) — there is nothing to reuse. ~2.5 min; the store
+   now keeps it.
+3. **Verdicts carry per ARTIST, not per population.** Clip resolution is an artist-level
+   fact; the 2026-08-02 census already carried 2,712 verdicts across populations this
+   way. The two prior classes are globally disjoint on release-group counts, so a
+   verdict conflict is structurally impossible — asserted anyway, `SystemExit` on
+   violation, because that disjointness is what licenses the merge.
+4. **The ULF-3 subset property is asserted against data before anything freezes**, not
+   assumed from the argument: every prior-verdict artist present in an archive must be
+   in that archive's `ULC-D2` class. Same dumps as every prior census, so containment
+   must be exact; a violation would mean a frozen list reverses an adopted verdict.
+5. **The ALG-B no-release keeps are not in any packaged payload** (the payload records a
+   count, 486, and no list); reconstructed as `tail_mbids − drop_mbids` from the two
+   committed census outputs, which is their defining construction.
+6. **Population identity is the archive artist set** (75,000 production files counted at
+   input verification), not any graph's node set — a graph-population identity would
+   false-refuse every build on pre-prune artists.
