@@ -93,8 +93,22 @@ untouched. The re-crawl decision is STILL UNTAKEN.**
 > outstanding.** The counting rule is now written at the top of `TEST-QUEUE.md` so the next
 > closeout does not re-report it.
 >
-> **Still open, and genuinely so:** the owner's 2026-08-04 **no-commercialization ruling** is in
-> memory but not yet in the repo record — it belongs in `PRODUCT-REQUIREMENTS.md`.
+> ~~**Still open, and genuinely so:** the owner's 2026-08-04 **no-commercialization ruling** is in
+> memory but not yet in the repo record — it belongs in `PRODUCT-REQUIREMENTS.md`.~~
+> **✅ DISCHARGED 2026-08-05 (later), by a documentation session on branch
+> `docs-maintenance-0805`.** Landed as **`PRODUCT-REQUIREMENTS.md` §11**: `REQ-43` (no
+> commercialization — none or donations only, no ads, no paid features, ever) and **`REQ-44`,
+> the owner's condition for recording it — nothing is built on that ruling's consequences
+> without confirming with him first.** §11 owns the detail; do not restate it here.
+>
+> **Two corrections it produced, both against what six closeouts had carried forward.** The
+> ruling **supersedes a citable constraint**: `specs/2026-07-19-artist-path-alpha-design.md` §1
+> and `plans/2026-07-19-graph-builder.md` both bar Last.fm from becoming load-bearing *because*
+> "the roadmap includes paid subscribers", and the current roadmap has no monetization content
+> at all. Memory had recorded that rule-out as uncited. And **setlist.fm was never ruled out
+> anywhere in the repo**, so nothing reopens for it. **Neither document was edited** — they are
+> COMPLETE-role and frozen; the supersession lives in §11 and `docs/README.md`'s rows point at
+> it. **`REQ-44` means none of this permits Last.fm work; it permits asking.**
 >
 > ---
 
