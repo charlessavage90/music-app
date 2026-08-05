@@ -173,3 +173,39 @@ acceptance green, and the `ULC-F1` manifest check passed silently against the re
 archive. **Nothing is adopted — the app still serves the prior artifact; the trial
 build is verification, left in `builder/scratch/` as evidence.** Suite 180 passed
 after the edit.
+
+**Provenance (D3):** `builder/scratch/graph-ulf-trial.bin`, sha256
+`4bedb74a309b64d1a8829fed4fb1bf613d8d2fe1c1e982e4d0af25f743b0549c`, built at commit
+`8de7b04` from the production archive with all three drop flags at default. It is
+gitignored like every artifact; this line is its only durable identity.
+
+## §8 — Closeout outcomes
+
+- **A3:** `ULC-F1`/`ULC-F2` struck in place in results §5 (the F2 strike names the half
+  that fires only at a real crawl extension). New deferral: retiring the two old flags
+  and lists, condition in ULF-3. Killed: nothing.
+- **A4:** `drop_unlistenable` shipped default-on from birth; the superseded flags stay
+  functional deliberately (ULF-3's condition). No knob sits unflipped.
+- **B1:** docs-lint hard checks passed (candidates are the standing frozen-prereg set);
+  `doc-auditor`, scoped to the diff, returned **zero findings** — a first for a closeout
+  here, recorded with appropriate suspicion and the coverage table in the PR thread.
+- **B2:** `unlistenable_drop.py` imported by the pipeline and tests; census scripts are
+  standalone probe code by design. No orphans.
+- **B3:** both load-bearing invariants driven red by deliberate breakage (the manifest
+  refusal skipped → 2 tests fail; the drop application removed → 2 tests fail), then
+  restored green. Not vacuous.
+- **B4/B5:** one prose defect found and fixed — `no_release_drop.py`'s docstring identity
+  claim, superseded by `ULC-F1`, now carries the supersession inline. `.claude/`, memory
+  and `CLAUDE.md` describe nothing this work changed (checked, not assumed).
+- **C1:** nothing queued, correctly — nothing the owner can press changed; the app
+  serves the same artifact as this morning.
+- **D2:** inapplicable on its own condition — no committed fixture derives from anything
+  this work changed, and no shipped artifact changed.
+- **Snyk:** clean on all code introduced or modified this session (§6).
+- **D4:** builder 180 passed, api 230 passed, frontend 107 passed — run, not asserted.
+- **D6 (standing-layer):** unconditional **45,333 characters, delta 0**; conditional
+  **2,417 lines, delta 0** — measured against
+  `C:\Users\charl\.claude\projects\C--dev-music-app\memory\`, the directory this session's
+  own context names; baselines from the `ULC-` log §8. This session edited neither layer.
+- **A5:** ports 8000 and 5173 both empty; this session started no servers and stops
+  nothing. Consistent with C1 queuing nothing.

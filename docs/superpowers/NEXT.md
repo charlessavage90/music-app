@@ -12,15 +12,54 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-05 (evening), when THE `ULC-` UN-LISTENABLE-CLASS TRACK WAS MEASURED
-AND WRITTEN UP. `ULC-` is COMPLETE and no session owes anything. The OWNER has set the next
-session's remit — THE FILTER WORK — so the next action is WORK, not a decision. The `GBL-` null
-and the `CAU-` result below both stand and are untouched. NO RE-CRAWL IS NEEDED for anything
-planned; the candidate archive and a built graph are already on disk.**
+**Last updated: 2026-08-05 (night), when THE `ULF-` FILTER WORK WAS COMPLETED. The merged
+un-listenable filter is built, censused over both populations, wired and tested; `ULC-F1` and
+`ULC-F2` are discharged; CROOVE was struck from the acceptance canonical list by owner ruling.
+NOTHING IS ADOPTED — the app serves the same artifact as this morning. The next action is the
+OWNER'S: a DECISION (which form of the map switch, results §4.1) plus two merges. The `GBL-`
+null and the `CAU-` result both stand and are untouched.**
 
 ---
 
-> ## ✅ THE `ULC-` UN-LISTENABLE-CLASS TRACK IS COMPLETE, 2026-08-05 (evening). **The next action is WORK and its remit is set: THE FILTER FIX.** The owner's one action is merging draft PR #78.
+> ## ✅ THE `ULF-` FILTER WORK IS COMPLETE, 2026-08-05 (night). **The next action is the OWNER'S: merge draft PR #78 then the `ulc-filter-fix` draft PR (in that order — the second builds on the first), and decide which form of the map switch to take** (results §4.1: data-only vs the listened-to package; the filter fix makes either a genuinely new candidate under the run-once rule).
+>
+> **Entry point for anything `ULF-`:** the governing rule document
+> [`specs/2026-08-05-unlistenable-filter-rule.md`](specs/2026-08-05-unlistenable-filter-rule.md)
+> (committed before any census under the rule existed). Reasoning:
+> [`2026-08-05-ulf-filter-fix-execution-log.md`](2026-08-05-ulf-filter-fix-execution-log.md).
+> Current handoff: [`2026-08-05-HANDOFF-ulf-filter-fix.md`](2026-08-05-HANDOFF-ulf-filter-fix.md).
+> Figures live in the frozen payloads (`builder/src/artistpath_builder/data/unlistenable_drop_*.json`,
+> which own their counts and shas) and `builder/analysis/2026-08-05-ulf-census/ulf_census.json` —
+> **cited, never restated.**
+>
+> **What stands, in one paragraph.** One merged filter (`drop_unlistenable`, default on)
+> supersedes both earlier drops **without reversing either** — both adopted classes are strict
+> subsets of `ULC-D2`'s and every frozen verdict carried; the subset property was verified
+> against data, not assumed. The owner ruled the cut line (2026-08-05): **`ULC-D2` as ruled,
+> Keith Scott the named residual false negative**; the Discogs exemption is gone (its absence
+> is the fix — results §1.4). `ULC-F1` is discharged: the payloads carry the archive population
+> and a mismatched population **refuses to build**, exercised against the real archive. `ULC-F2`
+> is discharged: the census coverage store reused 90,159 of 98,296 artists on first run. Each
+> keep records whether its clip was id-verified — the deferred `ULC-F4` track's measurement,
+> collected free, **no read licensed**. A verification build passed acceptance after the owner
+> struck **CROOVE** from the canonical list (a closed track's endpoint pin; the app measurably
+> plays nothing for them — log §7). **Nothing is adopted, no listen spent, the trial artifact
+> is scratch evidence only.**
+>
+> **Owner decisions taken this session, not to be re-litigated:** the cut line (`ULC-D2` as
+> ruled — no soundtrack carve-in, no stricter bar); CROOVE struck (recorded at the site in
+> `acceptance.py`). **Still open and NOT this session's:** `ULC-F3` (crawl resume cannot
+> extend — still blocks any crawl extension), `ULC-F4` (keep-check name-resolution defect, its
+> own track, now with its measurement waiting in the payloads' `keep_clip_provenance`).
+>
+> **⚠ What this does NOT change:** the `GBL-` null stands (a re-listen on the *filtered*
+> candidate package is expressly permitted as a new candidate — that is the owner's §4.1
+> decision, not a session's); the production-data rebuild stays TABLED by his 2026-08-05
+> ruling; no `ULC-` figure moved.
+>
+> ---
+
+> ## ✅ THE `ULC-` UN-LISTENABLE-CLASS TRACK IS COMPLETE, 2026-08-05 (evening). ~~**The next action is WORK and its remit is set: THE FILTER FIX.**~~ *(DONE — the `ULF-` block above owns current state; `ULC-F1`/`F2` are struck in results §5.)* ~~The owner's one action is merging draft PR #78.~~ *(Still open, now sequenced with the filter PR — see above.)*
 >
 > **Results of record, and the entry point for anything `ULC-`:**
 > [`findings/2026-08-05-unlistenable-class-results.md`](findings/2026-08-05-unlistenable-class-results.md)
