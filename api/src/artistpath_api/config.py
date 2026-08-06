@@ -53,6 +53,26 @@ class ApiConfig:
     # hub-traversal is topological. Set from a tuned search.
     w_degree_hub: float = 0.0
 
+    # "Know them already" ramp, priced in FAME percentile (fame_lb_pctl —
+    # ListenBrainz listener rank within the served artifact's own population),
+    # NOT in raw popularity like the two terms above. Each press of "know them
+    # already" adds a toll on widely-listened-to artists, so the tenth press
+    # pushes much harder toward the obscure than the first does.
+    #
+    # 0.0 = off, and off means the term is not applied AT ALL rather than
+    # applied as `+ 0.0`: with the knob at zero, or with zero presses, the cost
+    # arithmetic is the one that shipped before this existed (MSW-G2).
+    #
+    # The adopted value is 0.01 — the `P1a` arm of the CRE- sweep, which is the
+    # configuration the GBL- blind listen heard and the CAU- audit judged.
+    # Flipped from 0.0 at adoption, in one commit, with BuilderConfig's
+    # cap_strategy and require_fame.
+    #
+    # Requires an artifact carrying fame: create_app refuses to boot if this is
+    # non-zero over one that does not (and the router degrades to ignoring the
+    # term rather than raising mid-request, as a second line).
+    w_known_ramp_fame_pctl: float = 0.0
+
     # --- bypass shaping (spec 4.3) --------------------------------------
     floor_relax_known: float = 0.15    # each "known" bypass softens the floor
     floor_relax_dislike: float = 0.08  # each "dislike" bypass softens it less

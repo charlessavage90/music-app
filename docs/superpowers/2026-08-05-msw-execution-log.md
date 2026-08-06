@@ -219,3 +219,78 @@ deviations taken so far.
    gitignored, single-machine, and the cheapest-to-lose dependency in this plan.
 3. **`MSW-V4`** — the `ml-graph-analyst` dispatch on the percentile-frame deviation, at
    Seam 3, derivation only.
+
+## Task 6 — `GraphStore` reads `fame_lb`, builds `fame_lb_pctl` at boot
+
+Fameless artifacts load unchanged (`fame_lb_pctl is None`) — every artifact built before
+today, including the one the app has been serving.
+
+**The frame is the artifact's own non-null values.** Deviation 2, and the reasoning
+belongs here rather than only in the plan: the `CRE-` harness framed against the
+*previously adopted* artifact, which is right for comparing arms built from different
+data — a fixed experimental ruler. A **shipped** ruler pinned to a retired artifact
+would go stale at the next adoption and price today's artists against a population that
+no longer exists.
+
+Three properties that took thought and would be easy to get wrong in the other
+direction:
+
+- **Nulls take percentile 0.0 but are excluded from the frame.** Including them would
+  drag every measured artist's rank upward, so a poorly-covered population would look
+  uniformly famous — the metric would improve as coverage got worse.
+- **Ties take equal ranks** (`searchsorted(side="left")`). Breaking them would invent a
+  distinction the instrument did not measure.
+- **NaN sorts above everything in `searchsorted`**, so null ranks are written back
+  explicitly rather than left with whatever that produced. This is the one that would
+  have shipped silently: nulls would have come out at percentile 1.0 — *maximally
+  famous* — the exact inversion of what they mean.
+
+Length is validated against the header's N, which `deezer_ids` is not: this list is
+indexed by node id inside the Dijkstra loop, so a disagreement is an out-of-bounds read
+or a silently mispriced artist rather than a clean failure. `deezer_ids` escapes the
+check only because it is read through a bounds-checked accessor.
+
+## Task 7 — the ramp term, behind a default-off knob
+
+`ApiConfig.w_known_ramp_fame_pctl`, default `0.0`, flipped to `0.01` (`P1a`) at
+adoption. Semantics copied from `cre_mirror.py` — the implementation the blind listen
+and the coherence audit actually ran on — including the target-endpoint exemption.
+`create_app` refuses to boot when the ramp is live over a fameless artifact, on the same
+philosophy as the graph-sha check: with the ramp on and no fame, every press would
+silently do less than it claims, and a feature that looks *weak* rather than *broken* is
+the kind that reaches production and stays.
+
+**`MSW-G2` was vacuous as first written, and the correction matters more than the gate.**
+The first version measured "no path moves at k = 0" over the 500-node fixture — which
+carries no fame — so the ramp term could not fire whatever the code did. Caught by
+perturbation, the same way Task 1's hollow test was caught. The gate now runs over a
+fame-carrying store and has a **red control** asserting the ramp does move paths on that
+fixture when pressed; without it, a green would mean "this fixture is insensitive",
+not "the ramp is correctly inert".
+
+**And the rule the gate was written from does not survive contact with this file.** The
+mirror states it as "added only when live, never as `+ 0.0`". At k = 0 the multiplier is
+exactly `0.0`, so adding the term is *numerically identical* to skipping it — measured,
+not assumed: a perturbation applying it unconditionally left every test green even with
+fame present. That rule served byte-identity of serialised probe output, which is not
+this file's concern. What `MSW-G2` actually guards is the ramp **firing when it should
+not**, and it discriminates — a stray `max(1, n_known)` turns three tests red. The
+comment at the site says this rather than repeating the inherited phrasing, because a
+rule quoted into a context where it is not true is worse than no rule.
+
+**Snyk:** `snyk_code_scan` over `api/src/artistpath_api` — 0 issues.
+
+---
+
+# SEAM 2 — the API side is complete
+
+254 api tests pass, 220 builder tests pass, Snyk clean on both packages.
+
+**Still nothing adopted.** `cap_strategy` is `mutual_knn`, `require_fame` is `False`,
+`w_known_ramp_fame_pctl` is `0.0`, `graph_path` still points at the adopted 75k
+artifact, and no artifact has been built. The app serves exactly what it served this
+morning.
+
+**Next:** Task 8 (fetch fame over the candidate archive — **back up
+`fi_union_snapshot.json` first**), Task 9 (build), Task 10 (`MSW-V1`–`V4`), then Seam 3,
+which is an owner stop before the adoption flip.
