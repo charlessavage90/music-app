@@ -1,6 +1,10 @@
 # Handoff — the `MSW-` map switch ADOPTED and DEPLOYED, 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions by
+[`2026-08-06-HANDOFF-clip-cover-art.md`](2026-08-06-HANDOFF-clip-cover-art.md) (2026-08-06,
+later). This document remains AUTHORITATIVE for the `MSW-` adoption itself** — what was
+adopted, on whose authority, and the `GBL-`-override record — none of which the successor
+touches. Supersedes
 [`2026-08-06-HANDOFF-msw-seam3.md`](2026-08-06-HANDOFF-msw-seam3.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

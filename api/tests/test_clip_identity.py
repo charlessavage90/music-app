@@ -44,11 +44,21 @@ WRONG_SAME_NAME_ARTIST = {
     ]
 }
 # The id path asks artist 12345 directly, so no other artist can be returned.
+#
+# ⚠ The artist object here has NO picture key, and that is not an omission.
+# Deezer's /artist/{id}/top sends `id`, `name`, `tracklist`, `type` and nothing
+# else -- unlike /search above, which sends a full one. This fixture used to
+# carry `picture_medium`, and that single invented key hid a live defect for
+# four days: the resolver read the card's image from it, every test passed, and
+# production served blank squares. Restoring it re-blinds this file.
+# The image itself is pinned in test_clip_cover_art.py.
 ARTIST_TOP_HIT = {
     "data": [
         {"id": 2, "preview": "https://cdn.deezer/right.mp3",
          "title": "Smells Like Teen Spirit",
-         "artist": {"name": "Nirvana", "picture_medium": "https://cdn/us.jpg"}}
+         "artist": {"id": 12345, "name": "Nirvana", "type": "artist"},
+         "album": {"id": 7, "title": "Nevermind",
+                   "cover_medium": "https://cdn/nevermind.jpg", "type": "album"}}
     ]
 }
 ITUNES_HIT = {

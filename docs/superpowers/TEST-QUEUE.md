@@ -51,7 +51,58 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ▶ QUEUED (latest) — 2026-08-06 — the new map is LIVE on the website
+## ▶ QUEUED (latest) — 2026-08-06 (later) — the missing artwork is fixed, and it changed what the pictures are
+
+**You reported that the artwork on the cards was hit and miss while the music played fine. That
+was a real fault, it is fixed, and the fix is already on the website.** Nothing is running on
+your machine.
+
+**Run this together with the entry below rather than separately.** That one asks you to press
+the new map; this one only changes what you see while you do it. Both are on
+`https://musicapp.cmiller.io`, and doing them in one sitting saves you a second twenty minutes.
+
+### The one thing to know before you look
+
+**The pictures are now album covers instead of photographs of the artist.** That is deliberate
+and it is the fix — the artwork the app could reliably get hold of for every artist was the
+album cover, not the portrait. Some cards always showed album covers, so this also makes them
+consistent with each other for the first time. **If you would rather have portraits, say so** —
+it is a real choice and it can go back, at the cost of the artwork going missing again for
+about half the artists.
+
+### What to exercise — five minutes, alongside the entry below
+
+1. **Build any journey and look at every card, including the middle ones.** Every card should
+   have a picture. A plain grey square where a picture should be is the fault returning.
+2. **Press "know them already" ten or more times** and keep watching the pictures as the middle
+   of the journey gets less familiar. This is where the fault used to show up most, because it
+   is where you meet artists the app had not looked up before.
+3. **Try a few artists you would call obscure.** They were the worst affected.
+
+### What "wrong" looks like
+
+- **A grey square with no picture**, on any card.
+- **A picture that clearly belongs to a different artist.** This would be new and would matter.
+- Anything that stopped playing. Nothing about the music was touched, so a silent card would
+  be unrelated — but tell me anyway.
+
+### What "right" looks like
+
+Every card has artwork, it appears about as fast as it used to, and it keeps up as you press
+your way deeper into the journey.
+
+**Paste the URL for anything you find** — the whole journey is in the address bar.
+
+> **Still open and unchanged:** a card can play the right artist but the wrong impression of
+> them — a guest appearance or someone else's remix instead of their own music. Albert Hammond
+> Jr. and Metric were your two examples. **That is not fixed and is still your call**; note any
+> more you hit.
+>
+> Detail: `docs/superpowers/2026-08-06-clip-cover-art-execution-log.md`.
+
+---
+
+## ▶ QUEUED — 2026-08-06 — the new map is LIVE on the website
 
 **This is the real one.** Everything you tested locally this morning is now what
 `https://musicapp.cmiller.io` serves, to you and to anyone you send it to. Nothing is running
@@ -129,8 +180,13 @@ reproduces exactly what you saw however long afterwards.
 > `docs/superpowers/2026-08-05-msw-execution-log.md`; **whether it is worth fixing is his
 > call**, since the fix trades how often a clip is available against how representative it is.
 >
-> **The two local servers this entry left running are now redundant** — the live site serves
-> the same thing. Nothing owns them and they are still up; they can be stopped whenever.
+> ~~**The two local servers this entry left running are now redundant** — the live site serves
+> the same thing. Nothing owns them and they are still up; they can be stopped whenever.~~
+> **✅ BOTH STOPPED on the owner's instruction at `76d3b82`, and both ports are free.** He is
+> using the live site from here on, because it records what he does and a local server does
+> not. *(Struck rather than deleted: "they are still up" was true when written and is what
+> makes the disposition auditable. Corrected 2026-08-06 (later) — a closeout audit found it
+> still reading in the present tense.)*
 
 *Original queued text follows.*
 
