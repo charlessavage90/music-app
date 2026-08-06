@@ -1124,3 +1124,65 @@ is **not** evidence that none remains. The figure is stored beside the share.
 rather than only counted — Jack Antonoff, James Mercer, Josh Kaufman, Maynard James Keenan,
 Pino Palladino. Producers, session players and front-men of bands: **the same shape `CAU-C3`
 described**, not a new class. No read fires on this; it is a report row for Seam 3.
+
+### `MSW-V2B` — does the frame deviation change what the router CHOOSES? Yes, at depth.
+
+**Not in the plan.** Folded in on the owner's authorisation. This is the measurement `MSW-V4`
+named, declined to run, and carried as its own weakest link: *"cost magnitudes do not predict
+route changes. No path was run and none was decoded."* **Figures owned by
+`builder/analysis/2026-08-05-msw-verification/msw_v2b_journey_diff.json`** — cited here, never
+restated. Script: `msw_v2b_journey_diff.py`. Run with the **shipped router**
+(`artistpath_api.pathfinding.find_journey`), not the mirror.
+
+**One knob: the `fame_lb_pctl` column the ramp reads.** Shipped (the new artifact's own
+population) against `CRE-`'s ruler column (framed on the retired adopted artifact — the frame
+the **listened** arm ran under). Same store, edges, scores, `pop_raw`, `degree_hub_penalty`,
+config, exclusions and pairs; one array swapped with `dataclasses.replace`.
+
+**The press sequence is held constant and derived once from the shipped arm.** Letting each arm
+pick its own victim would have been a second knob — the arms would then differ by route *and*
+by which artist was pressed. Holding it also matches the app, where the **user** picks the card
+they know, so the press sequence is an input to the router rather than an output of it.
+
+**⚠ HYPOTHETICAL UNTIL TASK 11.** The measurement runs at `w_known_ramp_fame_pctl = 0.01`
+(`P1a`). At the shipped default of `0.0` the ramp is **not added at all**, so the two arms are
+identical **by construction** and the measurement would be vacuous. This says nothing about
+what the app does today.
+
+**Both controls behaved, which is what makes the result readable.**
+
+- **GREEN anchor at `k = 0`:** identical on every pair in both sets, as it must be — with no
+  presses the ramp is not added. A divergence there would have meant the harness was comparing
+  something other than the fame column.
+- **RED control:** one arm's column replaced by its own reversal (`1 − p`) makes journeys
+  diverge at every pressed depth. **The comparison can go red**, so the zeros below are
+  evidence rather than a dead wire. This is `CRE-G1(a)`'s lesson applied — a green run from a
+  comparison that has never gone red is not evidence.
+
+**The result, and it splits — both halves travel or neither does.**
+
+- On the **22 `CRE-` famous pairs** (all 22 resolve in the new artifact): **0/22 differ at one
+  press, 4/22 at ten, 10/22 at twenty.** Nearly half the journeys change at depth.
+- On the **eight `GBL-AM1` pairs — the ones actually listened to** — the effect is close to
+  absent: **0/8 at one press, 1/8 at ten, 0/8 at twenty.**
+
+**The second bullet cuts against the first and is stated with it deliberately.** The pairs
+whose verdicts are on the record barely move; the broader famous set moves a lot. Neither set
+is the "right" one — the listened set is small and was chosen for the owner's familiarity, and
+the famous set was never listened to.
+
+**The differences are substantive, not tie-break cosmetics.** Decoded and read: Young Gun
+Silver Fox → Eloy at ten presses routes *Future Islands → Romy → Disclosure → Nathan East*
+under the shipped frame and *Real Estate → Grizzly Bear → Thom Yorke → Muse* under the `CRE-`
+one. Different music, not a reordering.
+
+**This closes the question the handoff named as "the most decision-relevant thing not
+measured".** `MSW-V4` bounded the deviation at ≈1.2 % of a hop and could not say whether that
+flips routes. It does — rarely at one press, often at twenty. **No read fires**: no threshold
+was pre-registered for this and none is supplied. It is a bound for the Seam 3 report.
+
+**Its own weakest link.** The press sequence is derived from the shipped arm under one victim
+rule; a different rule could give a different divergence rate, and nothing here bounds that.
+And "the journeys differ" is not "the journeys are worse" — **this measurement carries no
+quality judgement in either direction**, which is the owner's, and is not evidence for or
+against adoption on its own.
