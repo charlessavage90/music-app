@@ -12,39 +12,54 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06, when `MSW-` TASK 8 COMPLETED — Tasks 1–8 of 12, retired MID-FLIGHT
-two tasks short of Seam 3. Fame coverage over the candidate archive is COMPLETE (75,000 of
-75,000) and the snapshot is backed up off-machine. NOTHING IS ADOPTED — the app serves the same
-artifact it did yesterday, and every new default is off. The next action is WORK: Task 9, the
-artifact build. NOTHING IS WAITING ON THE OWNER; D6 was accepted and is discharged. The `GBL-`
-null and the `CAU-` result both stand; this adoption OVERRIDES the null on the owner's
+**Last updated: 2026-08-06 (later), when `MSW-` TASK 9 COMPLETED AND TASK 10 REACHED 2 OF 4 —
+retired MID-FLIGHT, Seam 3 NOT reached. THE CANDIDATE ARTIFACT NOW EXISTS (sha256 `43dd82bb…`;
+the execution log's Task 9 section owns its identity and counts) and is built deterministically. NOTHING IS ADOPTED — the app serves the same
+artifact it did yesterday, and every new default is off. The next action is WORK: `MSW-V2`,
+then `MSW-V3`, then the Seam 3 report. NOTHING IS WAITING ON THE OWNER until Seam 3. The
+`GBL-` null and the `CAU-` result both stand; this adoption OVERRIDES the null on the owner's
 authority, which is not the same as reopening it.**
 
 ---
 
-> ## ▶ THE `MSW-` MAP SWITCH IS IN FLIGHT, TASK 8 OF 12 DONE, 2026-08-06. **The next action is WORK, not a decision: Task 9 — build the candidate artifact.**
+> ## ▶ THE `MSW-` MAP SWITCH IS IN FLIGHT, TASK 9 DONE AND TASK 10 AT 2 OF 4, 2026-08-06. **The next action is WORK, not a decision: `MSW-V2`, then `MSW-V3`, then report Seam 3.**
 >
-> **⚠ Retired MID-FLIGHT, not at a seam** (seams are 5/7/10/12; this stopped at 8). The
-> successor owes `session-start`'s **cold-read check**: state back what you believe the
-> situation is before acting. **Task 9 builds a gitignored artifact whose only identity is a
-> hand-recorded sha256 — record it in the log and commit in the SAME session as the build.**
-> That is why this stopped here rather than inside Task 9.
+> **⚠ Retired MID-FLIGHT, not at a seam** (seams are 5/7/10/12; Task 10 is half done, so Seam 3
+> is NOT reached). The successor owes `session-start`'s **cold-read check**: state back what you
+> believe the situation is before acting.
 >
-> **Task 8 outcome:** fame coverage 75,000 of 75,000 over the candidate archive; snapshot backed
-> up to S3 and verified by round-trip. **Two defects were found in the plan's own commands** —
-> one would have fetched nothing while exiting 0 — both corrected in place; the log owns the
-> detail. **Tasks 1–7 were verified by exercise at the owner's instruction; nothing wrong found
-> in the previous session's code.**
+> **Why it stopped here, and it is not the degradation tell.** The plan requires that *"the
+> Seam-3 session must not be the session that reads the verification results and decides"* —
+> and the retiring session **built the artifact and recalibrated the acceptance bound that let
+> it through**. It is the wrong session to verify its own work. It said so and recommended
+> handing over.
+>
+> **Task 9 outcome:** the candidate artifact is built, deterministic across two runs, and its
+> identity is committed. **A third defect was found in the plan's own commands** — the build
+> would have produced a **fameless artifact while exiting 0** — fixed per-invocation with a
+> `--require-fame` flag, never by flipping the default. **`MSW-G3` fired red for the first
+> time.** The build was then **REJECTED by acceptance**, which stopped the track and went to
+> the owner; **he took Option A and recalibrated the bounds deliberately** (his decision,
+> recorded as his). **Task 10:** `MSW-V1` **passed** with its stop branch not firing, and
+> `MSW-V4` returned a bound — including a **premise correction** that the deviation is two
+> knobs rather than one.
 >
 > **Entry point:** the current handoff
-> [`2026-08-06-HANDOFF-msw-task8-midflight.md`](2026-08-06-HANDOFF-msw-task8-midflight.md);
-> [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md) remains authoritative
-> for Seam 2's own internals. Operational document:
+> [`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md);
+> [`2026-08-06-HANDOFF-msw-task8-midflight.md`](2026-08-06-HANDOFF-msw-task8-midflight.md)
+> remains authoritative for Task 8's internals and
+> [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md) for Seam 2's.
+> Operational document:
 > [`plans/2026-08-05-msw-package-adoption.md`](plans/2026-08-05-msw-package-adoption.md)
 > (12 tasks, seams at 5/7/10/12). Reasoning:
 > [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
 > authority record and must be read before describing this work.** Branch
 > `msw-package-adoption-plan`, draft PR **#81**.
+>
+> **⚠ One question is OPEN and is the most decision-relevant thing unmeasured:** `MSW-V4`
+> bounds what the router *adds up* and explicitly does not bound what it *chooses*. **No
+> journey has been run on this artifact.** Whether the deviation actually changes any path is
+> unknown; the handoff names the measurement that would settle it and why it was not run.
 >
 > **⚠ THIS ADOPTION IS AN OWNER OVERRIDE OF THE `GBL-` NULL.** The null's pre-registered
 > consequence was *"production stands and Option A closes without adoption"* (margin 3
@@ -61,9 +76,17 @@ authority, which is not the same as reopening it.**
 > drifted from the similarity population, and `fame_lb` as an additive APG1 key. The API reads
 > that key, ranks it against **the served artifact's own population**, and prices a `known`
 > ramp on it, refusing to boot if the ramp is live over a fameless artifact. **`cap_strategy`
-> is still `mutual_knn`, `require_fame` is `False`, `w_known_ramp_fame_pctl` is `0.0`, no
-> artifact has been built and the frontend is untouched.** 220 builder + 254 api tests pass;
-> Snyk clean on both packages.
+> is still `mutual_knn`, `require_fame` is `False`, `w_known_ramp_fame_pctl` is `0.0`, and the
+> frontend is untouched.** 224 builder + 254 api tests pass; Snyk clean on both packages.
+>
+> **What changed 2026-08-06 (later):** the candidate artifact **has now been built** —
+> `builder/scratch/graph-msw-tu50.bin`, gitignored, identity owned by the execution log's
+> Task 9 section. `cmd_build` gained `--cap-strategy` and `--require-fame`, both
+> per-invocation. The **acceptance bounds were recalibrated** on the owner's Option A
+> decision (node and edge only; tolerance unchanged, centre moved), and the frozen
+> calibration probe at `builder/analysis/2026-07-23-acceptance-bounds/check.py` was
+> **era-pinned** so it keeps demonstrating what it was written for. **No default was
+> flipped and nothing is adopted.**
 >
 > **Owner decisions taken, not to be re-litigated:** the full package over data-only
 > (`ULC-A2` has never been listened to or audited; the package is what `GBL-` heard and
@@ -71,8 +94,12 @@ authority, which is not the same as reopening it.**
 >
 > **Still owed and named:** Task 11 Step 0 must era-pin `cap_strategy` **and** `require_fame`
 > in three analysis callers, or they silently change what they build and one refuses outright;
-> `MSW-V4` is an `ml-graph-analyst` dispatch at Seam 3; **Seam 3 is an OWNER STOP** before any
-> default flips. ~~One decision is his and is small: the D6 standing-layer cost, in the
+> ~~`MSW-V4` is an `ml-graph-analyst` dispatch at Seam 3~~ *(RUN 2026-08-06 — figures in
+> `builder/analysis/2026-08-06-msw-v4-frame-deviation/`; it returned a premise correction,
+> two knobs not one)*; **Seam 3 is an OWNER STOP** before any default flips.
+> **Note Task 11 Step 0's era-pin list has a fourth sibling that is already DONE:**
+> `builder/analysis/2026-07-23-acceptance-bounds/check.py` was era-pinned at Task 9 and
+> needs nothing further. ~~One decision is his and is small: the D6 standing-layer cost, in the
 > handoff.~~ *(DISCHARGED 2026-08-05 — the owner ACCEPTED the D6 growth; `CLAUDE.md` stands as
 > committed. **Nothing is now waiting on him until Seam 3.**)*
 >

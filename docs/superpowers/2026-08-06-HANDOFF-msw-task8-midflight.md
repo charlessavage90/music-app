@@ -1,6 +1,9 @@
 # Handoff — the `MSW-` map switch, Task 8 complete (mid-flight), 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions** by
+[`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md)
+(2026-08-06, Task 10 half done). **It remains authoritative for Task 8's own internals** — the
+fame-coverage run, its two command defects, and the Tasks 1–7 verification table. Supersedes
 [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

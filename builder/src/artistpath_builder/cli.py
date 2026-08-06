@@ -167,14 +167,15 @@ def cmd_fame(args) -> int:
                 "instrument's identity (FAM-AM1.7), and an unverified file "
                 "has unknown provenance. Take it from the manifest sidecar."
             )
-        report = seed_fame(
+        # No log line here: `seed_fame` already emits "fame seed: …" itself.
+        # Logging it again at the call site printed the same counts twice per
+        # run. Deferred at Task 8 with the condition "whichever task next
+        # touches cli.py"; Task 9 is that task.
+        seed_fame(
             archive,
             Path(args.seed),
             expected_sha256=args.seed_sha,
             fetched=args.seed_date,
-        )
-        logging.info(
-            "fame seed: %d imported, %d already present", report.seeded, report.skipped
         )
 
     started = time.monotonic()

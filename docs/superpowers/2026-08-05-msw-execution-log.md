@@ -987,3 +987,54 @@ alternatives rather than of near-ties.
 
 **No read fires on any of this.** `MSW-V4` is a bound for the Seam 3 report; whether the
 deviation is acceptable is the owner's Task 11 call.
+
+### Mid-flight closeout at Task 10 (2 of 4) — what the checks found
+
+**Tier: mid-flight retirement** — A1, A2-mid, A3, A5, B1, B5, D1-mid, D3, D6, D7. **B2
+(reachability), B3 (vacuous-test spot check) and B4 (prose-versus-code) were deliberately NOT
+run and travel with the work**: all three want a finished artifact, and Task 10 is half done.
+
+**A3 caught a condition that had come due — and it is the check working exactly as designed.**
+Task 8 deferred the duplicated `fame seed: …` log line with the condition *"whichever task next
+touches `cli.py` — likely Task 9"*. **Task 9 is that task**, and this session had already
+touched `cli.py` twice without noticing. Discharged here: `seed_fame` emits the line itself, so
+the call-site copy in `cmd_fame` was removed and a comment records why. This is precisely the
+A3 failure mode the skill warns about — *"a satisfied condition that nobody read is
+indistinguishable from an open item"* — caught only because the second question was asked
+rather than the first.
+
+**B5 found one stale figure, and it was deliberately NOT fixed in place.**
+`specs/2026-07-29-algb-trial-build-preregistration.md` §3 restates the acceptance node bound as
+"60,000–90,000", which the recalibration above made stale. It is a **pre-registration whose
+value is that it is frozen**, and **its argument is unaffected** — a 3,000-node graph fails the
+new floor as surely as the old — so only the quoted range is out of date. The correction went
+into `docs/README.md`'s row for it, per the frozen-document rule. The sweep covered `.claude/`
+explicitly; nothing there describes the builder CLI, the acceptance criteria or the graph's
+shape in a way this work invalidated.
+
+**A4 — inapplicable, stated rather than skipped.** The two knobs this session added
+(`--cap-strategy`, `--require-fame`) are **per-invocation CLI flags, not config defaults**, and
+that is the point of them: flipping the defaults is Task 11's commit and is the owner's stop.
+Unshipped work is this plan's premise until then.
+
+**A5 — no listeners on 8000 or 5173.** This session started no server and left none. Nothing
+to stop, nothing to relaunch: **C1 queued nothing**, so no queued test needs one.
+
+**C1 — nothing written to `TEST-QUEUE.md`, and that is the correct discharge.** Nothing the
+owner can press changed: no default flipped, no artifact adopted, the app still serves the
+artifact it served yesterday, and no frontend file was touched. The "did my app move?" answer
+goes in the closeout report and the PR body, where he reads it at the time.
+
+**D2 falls away on its own condition.** The committed 500-node fixtures derive from the
+**adopted** artifact, and nothing was adopted — the new artifact is gitignored scratch. No
+fixture is stale.
+
+**D3 — discharged.** The only uncommittable state is the artifact and its sidecar; its sha256
+is recorded above, read from the sidecar and independently recomputed, and committed in the
+same session as the build.
+
+**D6 — zero delta, in both layers.** 45,569 characters unconditional / 2,459 lines conditional,
+**byte-identical to the Task 8 measurement**, which makes this the third independent
+reproduction of those figures. This session touched no standing-layer file: `CLAUDE.md` is
+correct as committed and its "Graph shape" section becomes false only at Task 11, where its
+correction is already listed. **Nothing is owed to the owner on this.**
