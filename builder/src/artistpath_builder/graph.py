@@ -37,6 +37,16 @@ class Graph:
     # with three positional arguments by two FROZEN probes, and an empty list
     # makes `serialise` omit the key so their artifacts stay byte-identical.
     deezer_ids: list[str] = field(default_factory=list)
+    # ListenBrainz total_user_count per node, or None where the instrument
+    # measured no listeners. NOT popularity: `pop_raw` above is score-weighted
+    # in-degree computed from this archive, while this is an external listener
+    # count — log §2.11/§2.12 record what reading one as the other has cost.
+    # A null is a measured absence and is never a floor value (FAM-AM1.8).
+    #
+    # DEFAULTED for the same two reasons as `deezer_ids`: frozen probes call
+    # `build_graph` positionally, and an empty list makes `serialise` omit the
+    # key so their artifacts stay byte-identical.
+    fame_lb_raw: list[int | None] = field(default_factory=list)
 
     @property
     def popularity(self) -> list[float]:
@@ -279,6 +289,7 @@ def build_graph(
     stats: list[ArtistStats],
     edge_type: EdgeType,
     deezer_ids: dict[str, str] | None = None,
+    fame_lb_raw: dict[str, int | None] | None = None,
 ) -> Graph:
     """Assemble CSR arrays. IDs are assigned in sorted-MBID order.
 
@@ -286,6 +297,12 @@ def build_graph(
     `measure_headroom.py:151` are frozen and call this with three positional
     arguments. Omitting it yields an empty list, which `serialise` then omits
     from the metadata blob, so those probes' artifacts stay byte-identical.
+    `fame_lb_raw` is keyword-optional for exactly the same reasons.
+
+    `fame_lb_raw` maps mbid -> listener count or None. It is passed as a dict
+    and indexed here rather than pre-ordered by the caller, because node ids
+    are assigned in this function: a caller building the list itself would be
+    re-deriving `sorted(...)` and could silently disagree with it.
     """
     stats_by_mbid = {record.mbid: record for record in stats}
     mbids = sorted(set(adjacency) & set(stats_by_mbid))
@@ -326,4 +343,10 @@ def build_graph(
         edge_types=np.full(len(neighbours), int(edge_type), dtype=np.uint8),
         # Indexed by node id, like every other metadata list above.
         deezer_ids=[deezer_ids.get(m, "") for m in mbids] if deezer_ids else [],
+        # `is not None` rather than truthiness: a fame dict whose values are
+        # all None is a legitimate measurement (nobody listened to anyone in
+        # this population) and must not be silently discarded as "empty".
+        fame_lb_raw=(
+            [fame_lb_raw.get(m) for m in mbids] if fame_lb_raw is not None else []
+        ),
     )

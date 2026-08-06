@@ -35,6 +35,7 @@ from artistpath_builder.graph import (
 )
 from artistpath_builder.models import ArtistStats
 from artistpath_builder.deezer_ids import load_deezer_ids
+from artistpath_builder.fame import load_fame
 from artistpath_builder.featured_credit_drop import load_featured_credit_drop_mbids
 from artistpath_builder.no_release_drop import load_drop_mbids
 from artistpath_builder.unlistenable_drop import (
@@ -420,6 +421,18 @@ def build_from_archive(
         for mbid in keep
     ]
 
+    # Fame is read from the ARCHIVE, never fetched: `build` is offline (spec
+    # §9), which is what the replay test's raising fetcher proves. `load_fame`
+    # refuses rather than defaulting, so a build whose fetch population has
+    # drifted from its similarity population stops here instead of shipping
+    # artists priced by a made-up listener count (MSW-G3).
+    #
+    # Asked for `keep` — the pruned node set — rather than the whole archive:
+    # those are exactly the artists that reach the artifact, so an artist the
+    # largest-component step discarded cannot block a build by lacking a value
+    # nothing would have read.
+    fame = load_fame(archive, sorted(keep)) if config.require_fame else None
+
     # Deezer artist ids ride along in the metadata blob so the api can resolve a
     # clip by artist identity rather than by name (`BYP-13` — a card playing a
     # clip by a different artist of the SAME NAME). Applied unconditionally and
@@ -427,5 +440,9 @@ def build_from_archive(
     # nothing for a factor table to hold constant. A frozen snapshot, never a
     # build-time lookup — deezer_ids.py explains why that is mandatory.
     return build_graph(
-        pruned, stats, source.edge_type, deezer_ids=load_deezer_ids()
+        pruned,
+        stats,
+        source.edge_type,
+        deezer_ids=load_deezer_ids(),
+        fame_lb_raw=fame,
     )

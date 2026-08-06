@@ -129,3 +129,37 @@ Decisions worth recording:
   stage must enumerate exactly the population `build` will read; a second copy of the
   `RC-H3` algorithm-scoping rule is precisely the divergence class
   `test_pipeline_mirrors.py` exists to catch. `MSW-G1` re-verified after the extraction.
+
+## Task 4 — `build` reads fame offline and refuses an uncovered population
+
+`Graph.fame_lb_raw`, threaded through `build_graph` as a **dict keyed by mbid**, not a
+pre-ordered list: node ids are assigned inside `build_graph`, so a caller building the
+list itself would be re-deriving that `sorted(...)` and could silently disagree with it.
+The alignment is the whole contract — the api indexes this list by node id, and a
+mis-ordered list would price every artist as someone else with nothing downstream able
+to detect it. A test pins the alignment per node rather than only the length.
+
+`load_fame` is asked for `keep` (the pruned node set), not the whole archive, so an
+artist the largest-component step discarded cannot block a build by lacking a value
+nothing would have read.
+
+**Deviation from the plan, taken deliberately: `require_fame` defaults to `False`, not
+`True`.** Until Task 11 the shipped router does not read fame, so a fame-less build is
+genuinely valid and defaulting to `True` would assert a requirement that is not yet
+true — and would break every existing synthetic-archive test for a property that does
+not yet matter. It is treated exactly as `cap_strategy` is in this same plan: added
+inert, flipped in the commit where it becomes true. Two independent guards cover the
+gap in the meantime — Task 9's real build passes `require_fame=True` explicitly, and the
+api refuses at boot if the ramp is live over a fameless artifact.
+
+One detail that would be easy to get wrong: `build_graph` tests `fame_lb_raw is not
+None` rather than truthiness, because a fame dict whose values are **all** None is a
+legitimate measurement (nobody in this population has listeners) and must not be
+discarded as "empty".
+
+**The mirror guard fired a second time and the answer differed from Task 2's.** Both
+Task 2 fields were inert *and stay inert at the flip* for the mirrors themselves; but
+`require_fame=True` makes every era-pinned caller **refuse to build**, because none of
+their archives has ever had the `fame` stage run against it. That is a harder failure
+than a silent output change, and it is recorded in `RECORDED_FIELDS` and folded into
+Task 11 Step 0.

@@ -96,6 +96,22 @@ class BuilderConfig:
     union_top_j: int = 50
     union_degree_ceiling: int = 50
 
+    # Require a fame record for every artist in the built graph, and REFUSE to
+    # build otherwise (MSW-G3). This is the ULC-F1 shape applied to a new
+    # quantity: a lookup that quietly succeeds over a smaller population than
+    # the one being built leaves new artists unevaluated — for a drop list that
+    # means under-filtering, for fame it means an artist priced by a default in
+    # a cost function that routes on the price.
+    #
+    # OFF until adoption, and deliberately so: until the router reads fame
+    # (ApiConfig.w_known_ramp_fame_pctl), a fame-less build is genuinely valid,
+    # and defaulting this on would assert a requirement that is not yet true.
+    # Flipped with cap_strategy and the ramp, in the commit where it becomes
+    # true. The artifact shipped by that adoption is built with it explicitly
+    # on, and the api refuses at boot if the ramp is live over a fameless
+    # artifact — two independent guards, neither relying on this default.
+    require_fame: bool = False
+
     # Popularity correction applied to raw co-occurrence when scoring edges,
     # in log space (see damped_strength in pipeline.py), no centring, no clamp:
     #     score(a,b) = log1p(cooc(a,b)) - similarity_damping * (log(mass(a)) + log(mass(b)))
