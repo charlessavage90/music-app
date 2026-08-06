@@ -121,3 +121,32 @@ def test_fame_records_are_ignored_when_not_required(tmp_path):
     _seed_fame(archive, {m: 7 for m in mbids})
     graph = build_from_archive(config, archive, source)
     assert graph.fame_lb_raw == []
+
+
+def test_fame_survives_the_whole_chain_to_a_deserialised_artifact(tmp_path):
+    """fetch -> archive -> build -> serialise -> deserialise, values intact.
+
+    Each half is unit-tested above and in test_artifact.py; this is the chain.
+    The APG1 format is the contract between two packages that share no code,
+    so the round trip is where a mismatch would actually surface.
+    """
+    from artistpath_builder.artifact import deserialise, serialise
+    from artistpath_builder.fame import fetch_fame
+
+    config, archive, source, mbids = _setup(tmp_path, require_fame=True)
+    wanted = {m: (None if i % 3 == 0 else i * 11) for i, m in enumerate(mbids)}
+    fetch_fame(
+        archive,
+        mbids,
+        lambda batch: {m: wanted[m] for m in batch},
+        batch_size=2,
+        today="2026-08-05",
+    )
+
+    graph = build_from_archive(config, archive, source)
+    restored = deserialise(serialise(graph))
+
+    assert restored.fame_lb_raw == graph.fame_lb_raw
+    for node_id, mbid in enumerate(restored.mbids):
+        assert restored.fame_lb_raw[node_id] == wanted[mbid]
+    assert None in restored.fame_lb_raw, "nulls must survive the whole chain"

@@ -57,6 +57,21 @@ def serialise(graph: Graph) -> bytes:
     if graph.deezer_ids:
         meta["deezer_ids"] = graph.deezer_ids
 
+    # SAME additive-key discipline as deezer_ids above, and for the same two
+    # reasons: FORMAT_VERSION stays 1 because both parsers check it for strict
+    # equality, and the key is omitted when empty so every artifact built
+    # before fame existed — including the frozen probe mirrors whose shas
+    # Track B's identity gate pins — stays byte-identical.
+    #
+    # "fame_lb" is the WIRE key; the in-memory identifier carries the full
+    # currency (`fame_lb_raw`), because a wire key cannot be renamed without
+    # invalidating every artifact carrying it. Values are ListenBrainz
+    # total_user_count, or JSON null where the instrument measured no
+    # listeners — a null is a measured absence, never a floor (FAM-AM1.8), so
+    # it must not be coerced to 0 on the way out.
+    if graph.fame_lb_raw:
+        meta["fame_lb"] = graph.fame_lb_raw
+
     metadata = json.dumps(
         meta,
         sort_keys=True,
@@ -129,4 +144,9 @@ def deserialise(payload: bytes) -> Graph:
         # including the one the app serves. Absence means "resolve by name",
         # which is what the app did before this existed.
         deezer_ids=metadata.get("deezer_ids", []),
+        # .get for the same reason: every artifact built before 2026-08-05
+        # lacks the key. Absence means the artifact cannot support the fame
+        # ramp, which the api turns into a refusal to boot ONLY if the ramp is
+        # actually switched on.
+        fame_lb_raw=metadata.get("fame_lb", []),
     )

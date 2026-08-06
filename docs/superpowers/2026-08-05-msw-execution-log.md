@@ -163,3 +163,59 @@ Task 2 fields were inert *and stay inert at the flip* for the mirrors themselves
 their archives has ever had the `fame` stage run against it. That is a harder failure
 than a silent output change, and it is recorded in `RECORDED_FIELDS` and folded into
 Task 11 Step 0.
+
+## Task 5 — APG1 carries `fame_lb` as an additive key
+
+`deezer_ids`' pattern followed exactly, and the reasons are worth restating because they
+are what make this a safe change to a format two packages parse independently:
+`FORMAT_VERSION` stays 1 (both parsers check it for **strict equality**, so a bump would
+stop every existing artifact loading, starting with the one the app serves today), and
+the key is omitted when empty so the frozen probe mirrors' artifacts stay byte-identical.
+Tests pin both: the version does not move, and an empty fame list serialises to the same
+bytes as a build from before the field existed.
+
+`"fame_lb"` is the **wire** key; the in-memory identifier keeps the full currency
+(`fame_lb_raw`). A wire key cannot be renamed without invalidating every artifact
+carrying it — the same exemption `popularity` already carries, and commented at the site.
+
+**Truthiness is deliberate here and is the opposite choice to `build_graph`'s.**
+`serialise` writes the key when the list is non-empty, so an all-null list IS written: a
+population where nobody has recorded listeners is a legitimate measurement, and dropping
+it would be indistinguishable from never having measured. `build_graph` tests
+`is not None` for the same underlying reason, arrived at from the other direction.
+
+An end-to-end test now covers fetch → archive → build → serialise → deserialise with
+nulls interleaved. The two halves were unit-tested independently; the APG1 format is the
+contract between packages that share no code, so the chain is where a mismatch would
+actually surface.
+
+**Snyk:** `snyk_code_scan` over `builder/src/artistpath_builder` — 0 issues. Run at the
+seam rather than deferred to Task 11 as the plan scheduled, because `fame.py` is new
+network-facing first-party code and leaving it unscanned across a session boundary is
+the wrong side of that trade.
+
+---
+
+# SEAM 1 — the builder side is complete
+
+**State:** Tasks 1–5 done, 220 builder tests pass, `MSW-G1` byte-identical throughout,
+Snyk clean, everything committed and pushed to `msw-package-adoption-plan`.
+
+**Nothing is adopted and nothing the owner can press has changed.** Every new capability
+is inert behind a default: `cap_strategy` is still `mutual_knn`, `require_fame` is still
+`False`, no artifact has been built, and the API has not been touched at all.
+
+**What the next session picks up:** Task 6 (API `GraphStore` reads `fame_lb`, builds
+`fame_lb_pctl` at boot) and Task 7 (the ramp term behind a default-off knob), then Seam 2.
+The plan is the operational document; this log carries the reasoning and the three
+deviations taken so far.
+
+**Owed and carried forward, in one place:**
+
+1. **Task 11 Step 0** — era-pin `cap_strategy="mutual_knn"` and `require_fame=False` in
+   `grt_score.py`, `calibrate.py` and `cre_build.py`. Both halves are needed and the
+   `require_fame` half is the harder failure (outright refusal to build).
+2. **Task 8 Step 1** — back up `fi_union_snapshot.json` before anything else runs. It is
+   gitignored, single-machine, and the cheapest-to-lose dependency in this plan.
+3. **`MSW-V4`** — the `ml-graph-analyst` dispatch on the percentile-frame deviation, at
+   Seam 3, derivation only.
