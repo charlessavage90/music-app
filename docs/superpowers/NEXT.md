@@ -12,19 +12,34 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-05 (late night), when THE `MSW-` MAP SWITCH REACHED SEAM 2 — Tasks 1–7
-of 12. The owner DECIDED the map switch: the full `ULC-A4` package. Both outstanding merges are
-done. NOTHING IS ADOPTED — the app serves the same artifact as this morning, and every new
-default is off. The next action is WORK: Task 8, whose first step is a backup. The `GBL-` null
-and the `CAU-` result both stand; this adoption OVERRIDES the null on the owner's authority,
-which is not the same as reopening it.**
+**Last updated: 2026-08-06, when `MSW-` TASK 8 COMPLETED — Tasks 1–8 of 12, retired MID-FLIGHT
+two tasks short of Seam 3. Fame coverage over the candidate archive is COMPLETE (75,000 of
+75,000) and the snapshot is backed up off-machine. NOTHING IS ADOPTED — the app serves the same
+artifact it did yesterday, and every new default is off. The next action is WORK: Task 9, the
+artifact build. NOTHING IS WAITING ON THE OWNER; D6 was accepted and is discharged. The `GBL-`
+null and the `CAU-` result both stand; this adoption OVERRIDES the null on the owner's
+authority, which is not the same as reopening it.**
 
 ---
 
-> ## ▶ THE `MSW-` MAP SWITCH IS IN FLIGHT AT SEAM 2, 2026-08-05 (late night). **The next action is WORK, not a decision: Task 8.** Its FIRST step is backing up `builder/analysis/2026-08-02-fame-instrument/fi_union_snapshot.json` and its manifest — gitignored, on this machine only, ~93k artists to refetch if lost.
+> ## ▶ THE `MSW-` MAP SWITCH IS IN FLIGHT, TASK 8 OF 12 DONE, 2026-08-06. **The next action is WORK, not a decision: Task 9 — build the candidate artifact.**
+>
+> **⚠ Retired MID-FLIGHT, not at a seam** (seams are 5/7/10/12; this stopped at 8). The
+> successor owes `session-start`'s **cold-read check**: state back what you believe the
+> situation is before acting. **Task 9 builds a gitignored artifact whose only identity is a
+> hand-recorded sha256 — record it in the log and commit in the SAME session as the build.**
+> That is why this stopped here rather than inside Task 9.
+>
+> **Task 8 outcome:** fame coverage 75,000 of 75,000 over the candidate archive; snapshot backed
+> up to S3 and verified by round-trip. **Two defects were found in the plan's own commands** —
+> one would have fetched nothing while exiting 0 — both corrected in place; the log owns the
+> detail. **Tasks 1–7 were verified by exercise at the owner's instruction; nothing wrong found
+> in the previous session's code.**
 >
 > **Entry point:** the current handoff
-> [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md). Operational document:
+> [`2026-08-06-HANDOFF-msw-task8-midflight.md`](2026-08-06-HANDOFF-msw-task8-midflight.md);
+> [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md) remains authoritative
+> for Seam 2's own internals. Operational document:
 > [`plans/2026-08-05-msw-package-adoption.md`](plans/2026-08-05-msw-package-adoption.md)
 > (12 tasks, seams at 5/7/10/12). Reasoning:
 > [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
@@ -57,7 +72,9 @@ which is not the same as reopening it.**
 > **Still owed and named:** Task 11 Step 0 must era-pin `cap_strategy` **and** `require_fame`
 > in three analysis callers, or they silently change what they build and one refuses outright;
 > `MSW-V4` is an `ml-graph-analyst` dispatch at Seam 3; **Seam 3 is an OWNER STOP** before any
-> default flips. One decision is his and is small: the D6 standing-layer cost, in the handoff.
+> default flips. ~~One decision is his and is small: the D6 standing-layer cost, in the
+> handoff.~~ *(DISCHARGED 2026-08-05 — the owner ACCEPTED the D6 growth; `CLAUDE.md` stands as
+> committed. **Nothing is now waiting on him until Seam 3.**)*
 >
 > ---
 

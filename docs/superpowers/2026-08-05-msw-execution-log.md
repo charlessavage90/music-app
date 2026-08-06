@@ -499,10 +499,20 @@ archive for the reason it is supposed to, not by luck:
 The 5,150 nulls decompose as 1,066 from this run's fresh fetches and the remainder from the
 seed — consistent with the fresh tail being the obscurer population, as above.
 
-### D6 — accepted by the owner, 2026-08-05
+### D6 — accepted by the owner, 2026-08-05; and re-measured at Task 8
 
 The ~86 characters of standing-layer growth (the APG1 additive-key clause) are **accepted**.
 `CLAUDE.md` stands as committed; nothing to edit. The Seam 2 D6 row is discharged.
+
+**Absolute figures at `f7c0117`, measured against this machine's own memory directory:**
+
+| Layer | Total | Delta vs `main` | This session |
+|---|---|---|---|
+| Unconditional | **45,569** characters | +236 | **0** |
+| Conditional | **2,459** lines | +42 | **0** |
+
+The +236 / +42 **independently reproduces the Seam 2 session's reported split**, which is a
+corroboration of its arithmetic rather than a new cost. Task 8 touched no standing-layer file.
 
 ### Verification of Tasks 1–7, at the owner's instruction
 
@@ -536,3 +546,37 @@ looking for them.
 **Nothing found wrong in Tasks 1–7.** The two defects this session found are both in the
 **plan's Task 8 text** (the missing `--algorithm`, the missing `--seed-date`), not in the
 previous session's code.
+
+### Mid-flight closeout at Task 8 — what the checks found
+
+**B1 — `docs-lint` hard checks passed; the `doc-auditor` found one MEDIUM, real and fixed.**
+`docs/README.md`'s row for *this log* still described only Tasks 1–7 and had gone silent on the
+Seam 2 closeout and Task 8 — a defect of **omission**, which is the class no grep finds. Fixed
+here rather than escalated: the record had every fact needed. The auditor independently
+reconciled the Task 8 counts, including the null split, and confirmed the citations to
+`ULC-` §4.1 and the snapshot manifest are citations rather than restatements.
+
+**B5 caught one against this session's own work.** The plan's Task 8 Step 3 had been annotated
+with the run's counts inline — a restatement of figures this log owns. Converted to a citation.
+**It was correct, and that is exactly why it is a defect**: a correct restatement is how drift
+starts. `.claude/` was swept explicitly and is untouched by this work.
+
+**A3 — conditions re-tested against reality, not merely confirmed to exist.** `ULC-F3` was the
+one at risk, since this session ran a network fetch: it blocks *crawl extension*, and the `fame`
+stage writes to the `fame/` prefix without extending the artist frontier, so it is untouched and
+correctly still open. `ULC-F4` and `ULF-3` not due — and `ULF-3`'s first half comes due at Task
+12, so the next closeout must **re-test** it rather than copy it forward.
+
+**A5 — no listeners on 8000 or 5173.** This session started none; the API was never booted
+(`GraphStore` was loaded in-process for verification only). **Nothing left running.**
+
+**A4 — inapplicable by design, stated rather than skipped.** Unshipped work is this plan's
+premise until Task 11; no knob this session added, because it added none.
+
+**D2/D3 — D2 falls away** (no artifact changed, fixtures untouched). **D3 applies and is
+discharged**: the only uncommittable state is the archive's `fame/` subtree and the S3 backup,
+both with locations and the seed sha recorded above. **No graph artifact was built**, so there
+is no new checksum to record — which is precisely why this session stopped before Task 9.
+
+**C1 — nothing written to `TEST-QUEUE.md`, and that is the correct discharge.** Nothing the
+owner can press changed: no artifact built, no default flipped, no frontend file touched.

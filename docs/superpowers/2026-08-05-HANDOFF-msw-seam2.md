@@ -1,6 +1,11 @@
 # Handoff — the `MSW-` map switch, builder and API sides complete at Seam 2, 2026-08-05
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions, 2026-08-06, by
+[`2026-08-06-HANDOFF-msw-task8-midflight.md`](2026-08-06-HANDOFF-msw-task8-midflight.md)** —
+which is the CURRENT handoff. **This document remains authoritative for Seam 2's own
+internals** (Tasks 1–7: what was built, the six do-not-revert claims, the two operational
+facts). Four of those six claims have since been verified by exercise rather than assertion;
+the successor names which. Supersedes
 [`2026-08-05-HANDOFF-ulf-filter-fix.md`](2026-08-05-HANDOFF-ulf-filter-fix.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
