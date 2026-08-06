@@ -73,6 +73,19 @@ def _config(args) -> BuilderConfig:
                 "artistpath_builder.config.PERMITTED_ALGORITHMS"
             )
         overrides["algorithm"] = algorithm
+    # Both added for MSW- Task 9. cap_strategy needs no validation here:
+    # BuilderConfig.__post_init__ rejects anything outside
+    # PERMITTED_CAP_STRATEGIES, so a typo raises before a build starts.
+    #
+    # require_fame is store_true rather than a tri-state flag, so it can only
+    # ever turn the guard ON from the CLI. Once config.py's default flips at
+    # adoption, omitting the flag inherits True — a CLI that could silently
+    # switch the guard OFF is the one thing this must not offer.
+    cap_strategy = getattr(args, "cap_strategy", None)
+    if cap_strategy:
+        overrides["cap_strategy"] = cap_strategy
+    if getattr(args, "require_fame", False):
+        overrides["require_fame"] = True
     return BuilderConfig(**overrides)
 
 
@@ -293,6 +306,17 @@ def main(
         "--algorithm",
         default=None,
         help="which algorithm's archive tree to build from; default production's",
+    )
+    p_build.add_argument(
+        "--cap-strategy",
+        default=None,
+        help="connection rule; default config's (mutual_knn until adoption)",
+    )
+    p_build.add_argument(
+        "--require-fame",
+        action="store_true",
+        help="refuse to build unless every kept artist has a fame record "
+        "(MSW-G3); the adopted artifact is built with this explicitly on",
     )
     add_archive_args(p_build)
     p_build.set_defaults(func=cmd_build)

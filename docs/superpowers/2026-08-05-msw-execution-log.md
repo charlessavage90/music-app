@@ -580,3 +580,198 @@ is no new checksum to record — which is precisely why this session stopped bef
 
 **C1 — nothing written to `TEST-QUEUE.md`, and that is the correct discharge.** Nothing the
 owner can press changed: no artifact built, no default flipped, no frontend file touched.
+
+---
+
+## Task 9 — the candidate artifact
+
+### A third defect in the plan's commands, and the pattern behind all three
+
+**The plan's Task 9 build command would have produced a FAMELESS artifact while exiting 0.**
+It passes `--cap-strategy trimmed_union` and nothing else. But `require_fame` defaults to
+`False`, `pipeline.py` calls `load_fame` only `if config.require_fame`, and `artifact.py`
+writes the `fame_lb` key only `if graph.fame_lb_raw` — so the whole fame path is skipped and
+the artifact silently omits the key the adoption exists to ship. Acceptance does not check
+fame. The first thing that would have caught it is the API's boot refusal at Task 10 Step 3,
+**three steps and one adoption decision downstream of the cause.**
+
+The plan's own Step 1 is unrunnable for the same reason: it asks for a build that refuses with
+`MissingFameError`, and with `require_fame=False` that build succeeds.
+
+**The fix is per-invocation, and the obvious fix is the forbidden one.** Flipping the
+`require_fame` default here would break Task 11 Step 0's ordering — `grt_score.py`,
+`calibrate.py` and `cre_build.py` all construct `BuilderConfig` without pinning it, and an
+unpinned flip makes all three **refuse to build** against archives that have never had the
+`fame` stage run. The Seam 2 handoff names this explicitly ("do not 'fix' it to `True` before
+Task 11"), and `config.py`'s own comment reaches it independently ("*the artifact shipped by
+that adoption is built with it explicitly on*"). So: a `--require-fame` **`store_true`** flag.
+It can only ever turn the guard ON from the command line — once the default flips at adoption,
+omitting it inherits `True`, and a CLI able to silently switch the guard *off* is the one thing
+this must not offer.
+
+**Two flags were needed, not the one the plan anticipated.** `p_build` carried only `--out`,
+`--algorithm` and the archive args; `BuilderConfig` has no env-driven loading at all, so
+`require_fame` was unreachable from the CLI by any route. `--cap-strategy` needs no CLI-side
+validation — `__post_init__` already rejects anything outside `PERMITTED_CAP_STRATEGIES`.
+
+**The pattern, which is the finding worth keeping.** All three defects found on this branch —
+Task 8's missing `--algorithm`, Task 8's missing `--seed-date`, Task 9's missing fame flag —
+are **one defect, not three**: the plan's Task 8 and 9 commands were written before Tasks 3
+and 4 built the CLI they invoke, and were never reconciled against it afterwards. That is an
+**unreconciled dependency**, not bad luck, and it is invisible to prose review because each
+command is individually plausible. Two of the three fail *silently* — exit 0 with the wrong
+output — which is what makes the class expensive.
+
+**So the check was done once for the whole remaining plan instead of three more times.** Every
+flag, env var, named symbol and endpoint field in Tasks 10–12, swept against the actual
+parsers and source:
+
+| Checked | Outcome |
+|---|---|
+| `ARTISTPATH_DEPLOY_GRAPH_KEY` / `ARTISTPATH_DEPLOY_SIDECAR` | both real in `infra/app.py`; `infra/README.md:52-53` accurate |
+| `/health` reports sha, artists **and edges** (Task 12 Step 3) | all three present |
+| Era-pin sites `grt_score.py:145,155`, `calibrate.py:232`, `cre_build.py:389` | all four exact |
+| `test_default_graph_path_points_at_an_artifact` (`test_config.py:18`) | exact |
+| `ulc_exposure.py`, `graph-algb-full.bin` + sidecar (Task 10) | all present |
+| `RAMPS["P1a"] = 0.01` (Task 11's ramp value) | confirmed as the cited source |
+
+**The class is structurally exhausted at Task 9**, and that is checkable rather than hopeful:
+all three instances were *builder-CLI invocations*, and Task 9 Step 2 is the plan's last one.
+Tasks 10–12 invoke pytest, npm, git, `aws` and cdk — tools the plan did not author ahead of
+building.
+
+**Two findings from the sweep that are live rather than reassuring:**
+
+1. **`w_known_ramp_fame_pctl` is NOT env-surfaced.** `ApiConfig` reads only `graph_path`,
+   `graph_sha256`, `origin_secret`, the CORS list and the clip-cache pair from the
+   environment. Task 10 Step 3 hedged ("via env if surfaced, else a one-line local override")
+   and **the second branch is the live one**. Known before Task 10 rather than during it.
+2. **Two stale line numbers, both cosmetic** (symbol correct, offset wrong): `cre_build.py`'s
+   `gate()` cited at 410, actually **399**; `drop_unlistenable` cited at `config.py:192`,
+   actually **224**. Consistent with the plan's own header warning that its line numbers have
+   drifted; anchor on symbols.
+
+### Step 1 — `MSW-G3` fired for the first time, and it fired correctly
+
+Radiohead's fame record (`a74b1b7f-…`, 455,551 listeners) was moved out of the candidate
+archive and a real `build` was run — not the condition re-stated inline, which is the vacuous
+shape this branch keeps finding and which the previous session caught itself committing.
+
+The build ran the full pipeline and **refused**:
+
+```
+artistpath_builder.fame.MissingFameError: 1 artists in this build have no fame record:
+a74b1b7f-71a5-4011-9441-d0b5e4122711. The fetch population and the build population have
+diverged — run the `fame` stage against this archive. Refusing to build rather than pricing
+them by default.
+```
+
+Exit 1, **no artifact written**, refusal raised at `pipeline.py:434` before `check_acceptance`.
+
+**One deviation from the plan's wording, recorded rather than corrected:** it asks for a
+refusal "naming the artist", and the message names the **MBID**, not the name. `load_fame`
+works over mbids and never loads the identity map, so a name is not available at the raise
+site. The MBID is the actionable handle — it is what indexes `fame/` — so this is a wording
+inaccuracy in the plan, not a defect in the guard.
+
+**The choice of artist was de-risked rather than assumed:** had Radiohead been pruned out of
+`keep`, `load_fame` would never have asked for it and the build would have *succeeded*, making
+the check inconclusive-looking-like-a-pass. Confirmed present in the old candidate artifact
+(`graph-algb-full.bin`, 68,467 nodes) first.
+
+**The archive was restored and the restoration verified**, not assumed: 98,056 records, the
+file byte-identical to its recorded contents, and no stray red-check artifact left behind.
+
+**Filter and component counts observed during the refused run** (reproduced identically by the
+real build below): 7 special-purpose entities filtered, 27 nameless, 9,501 no-release-tail,
+1,940 featured-credit and 4,248 un-listenable dropped; largest component 58,838 of 59,277.
+
+### Step 2 — the build was REJECTED BY ACCEPTANCE. No artifact exists.
+
+**This stops the plan and goes to the owner, per Task 9 Step 2's own instruction ("a failure
+stops this plan and goes to the owner; do not route around it"). It was not routed around.**
+
+```
+artistpath_builder.acceptance.ArtifactRejected: artifact rejected; not written:
+  - artist count 58838 outside bounds [60000, 90000]
+  - edge count 1315684 outside bounds [700000, 1100000]
+```
+
+**No artifact and no manifest were written** — `cmd_build` calls `check_acceptance` *before*
+`serialise` and `write_bytes`. Verified on disk: neither `graph-msw-tu50.bin` nor its sidecar
+exists. **There is therefore no sha256 to record, and the handoff's "commit the sha in the
+same session as the build" instruction is moot rather than skipped** — the failure mode it
+guards against (an unidentifiable artifact) cannot arise from a build that wrote nothing.
+
+Steps 3–4 (manifest, determinism spot-check) are unreachable and were not attempted.
+
+#### What passed, and this is positive evidence rather than an inference
+
+`check_acceptance` **accumulates every problem into one list and raises once** — it does not
+short-circuit. So a rejection naming only the two global bounds establishes that everything
+else was checked and passed on this graph:
+
+- **zero nameless artists**;
+- **all canonical names present** in the largest component;
+- **top-25-by-popularity median degree ≥ 25.0** — the §2.8 signature detector, the check the
+  module exists for, **green**;
+- **top-25-by-popularity minimum degree ≥ 8** — the "Radiohead one step short of deletion"
+  check, **green**;
+- **median degree inside [5.0, 25.0]**.
+
+The bounds that failed are, in the module's own words, *"a REGRESSION TRIPWIRE, NOT a §2.8
+DETECTOR … deliberately generous"*, catching *"a build that silently loses a large share of
+the graph"*. Their comment also anticipates this situation directly: *"Update them
+deliberately when the crawl target changes; a new crawl is a new artifact identity, not a
+bound to widen quietly."*
+
+#### Property, not bug — reconciled against the listened arm to within 30 nodes
+
+The listened arm is `CRE-` cell **B-S1** (`TUw-50-50` = trimmed union j=50, ceiling 50) — the
+package `GBL-` heard and `CAU-` audited. Its recorded build diagnostics are owned by
+`builder/analysis/2026-08-03-cap-reevaluation/cre_builds.json` and read from it here:
+
+| | B-S0 (mutual k-NN, same archive) | **B-S1 — the listened arm** | **This build** |
+|---|---|---|---|
+| Artists | 58,851 | 63,056 | **58,838** |
+| Edges | 732,832 | 1,379,944 | **1,315,684** |
+| `drop_no_release_tail` / `drop_featured_credit` | on / on | on / on | on / on |
+| `drop_unlistenable` | — did not exist — | — did not exist — | **ON** |
+
+Both breaches are explained by knobs that were chosen deliberately, and the arithmetic closes:
+
+1. **The edge ceiling was never compatible with the trimmed-union rule.** B-S1 recorded
+   **1,379,944** edges — further above the 1,100,000 ceiling than this build is. The listened
+   arm would have been rejected by this same criterion. Mutual k-NN on the *same archive*
+   (B-S0) gives 732,832, comfortably inside. The rule is non-reciprocal by construction, which
+   is the whole point of it; roughly doubling the edge count is its defining property, not a
+   regression. **This breach has nothing to do with the un-listenable filter.**
+2. **The node floor is breached by the un-listenable filter, and only by it.** B-S1 sat at
+   63,056 — *inside* the bound. This build sits at 58,838, a fall of **4,218** against a
+   filter that dropped **4,248** artists; the 30-node gap is the 27 nameless drops plus
+   largest-component boundary effects. The filter is **named deviation 1** and is *the change
+   the owner is adopting for*.
+
+The two shared drop counts are **identical** to B-S1's (9,501 no-release-tail, 1,940
+featured-credit), which is independent corroboration that this build reproduces the listened
+arm on every knob except the one named deviation.
+
+**Conclusion: the build is structurally the thing the owner chose, and the bounds are
+calibrated for the map it replaces.** Nothing here indicates a defective build.
+
+#### `ml-graph-analyst` deliberately NOT dispatched here
+
+Task 10 Step 4 carries a conditional property-or-bug trigger for structural metrics moving
+beyond what B-S1 predicts. **They did not move beyond it — they landed on it, to within 30
+nodes**, from the committed record, with a one-knob explanation for each breach. Dispatching
+to re-derive an answer already established in this section would be escalating settled
+reasoning, which `CLAUDE.md` names as its own failure. **`MSW-V4` remains pre-authorised by
+the owner and unrun**: its inputs include the new artifact, which does not exist, so it is
+blocked rather than declined and runs at Task 10.
+
+#### Whose decision this is
+
+**The owner's, for two independent reasons**: the plan routes acceptance failure to him by
+name, and widening a safety bound so an adoption can proceed is risk acceptance on an
+adoption-adjacent guard. The options and their consequences are in the report to him; this
+log takes no position on which to take, and **no bound was edited.**

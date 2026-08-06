@@ -689,8 +689,18 @@ UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u -m artistpath_builder.
   --archive-dir ./scratch/grt-archive-algb \
   --algorithm session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30 \
   --out ./scratch/graph-msw-tu50.bin \
-  --cap-strategy trimmed_union
+  --cap-strategy trimmed_union \
+  --require-fame
 ```
+
+> **⚠ `--require-fame` was added to this command in execution and is NOT optional.**
+> `require_fame` defaults to `False`; `pipeline.py` calls `load_fame` only when it is true and
+> `artifact.py` omits the `fame_lb` key when the value is falsy — so without the flag this
+> command builds a **FAMELESS artifact while exiting 0**, and the first thing that catches it
+> is the API's boot refusal at Task 10 Step 3. Step 1 below is also unrunnable without it (the
+> build it expects to refuse would succeed). **Do NOT "fix" this by flipping the default** —
+> that breaks Task 11 Step 0's era-pinning and makes three analysis callers refuse to build.
+> Both `--cap-strategy` and `--require-fame` were added to `cmd_build` in this task.
 
 > **⚠ `--algorithm` was added to this command in execution and is NOT optional.** The
 > candidate archive is an ALG-B tree and `similar_prefix` partitions by algorithm; without the

@@ -139,6 +139,61 @@ def test_config_default_algorithm_is_production():
     assert _config(argparse.Namespace()).algorithm == PRODUCTION_ALGORITHM
 
 
+def _build_config_from_argv(monkeypatch, extra_argv):
+    """Parse a real `build` argv and return the BuilderConfig it produces.
+
+    Goes through argparse rather than a hand-built Namespace deliberately: a
+    Namespace test cannot see a missing `add_argument`, nor a flag whose dest
+    does not match what `_config` reads. Both are the actual failure this
+    helper exists to catch — MSW- Task 9 found `--cap-strategy` absent and
+    `require_fame` unreachable, and neither would have shown up here.
+    """
+    from artistpath_builder import cli
+
+    captured = {}
+
+    def fake_cmd_build(args):
+        captured["config"] = cli._config(args)
+        return 0
+
+    monkeypatch.setattr(cli, "cmd_build", fake_cmd_build)
+    assert cli.main(["build", "--out", "unused.bin", *extra_argv]) == 0
+    return captured["config"]
+
+
+def test_build_cap_strategy_flag_reaches_config(monkeypatch):
+    config = _build_config_from_argv(monkeypatch, ["--cap-strategy", "trimmed_union"])
+    assert config.cap_strategy == "trimmed_union"
+
+
+def test_build_require_fame_flag_reaches_config(monkeypatch):
+    # MSW-G3's guard is only reachable from the CLI through this flag:
+    # BuilderConfig has no env-driven loading, so without it a Task 9 build
+    # would silently produce a FAMELESS artifact — load_fame is called only
+    # `if config.require_fame` (pipeline.py) and artifact.py omits the
+    # `fame_lb` key when the value is falsy.
+    config = _build_config_from_argv(monkeypatch, ["--require-fame"])
+    assert config.require_fame is True
+
+
+def test_build_flags_absent_leaves_both_defaults_untouched(monkeypatch):
+    # The red half: proves the two tests above are reading the flags rather
+    # than the defaults. Flipping either default is the adoption commit
+    # (Task 11), never a side effect of adding a flag.
+    from artistpath_builder.config import BuilderConfig
+
+    config = _build_config_from_argv(monkeypatch, [])
+    assert config.cap_strategy == BuilderConfig().cap_strategy
+    assert config.require_fame == BuilderConfig().require_fame
+
+
+def test_build_rejects_an_unknown_cap_strategy(monkeypatch):
+    # __post_init__ owns this validation, not the CLI. Pinned so a future
+    # CLI-side shortcut cannot quietly drop it.
+    with pytest.raises(ValueError, match="cap_strategy"):
+        _build_config_from_argv(monkeypatch, ["--cap-strategy", "pre_symmetrise"])
+
+
 def test_bootstrap_serialisation_round_trips(tmp_path):
     # Regression: BootstrapArtist is a slots=True dataclass and has no
     # __dict__, so serialisation must use dataclasses.asdict. This path is
