@@ -12,14 +12,15 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (later), when A CLIP COVER-ART DEFECT WAS FIXED AND DEPLOYED and a
-serious DEPLOY defect (`DEP-34`) was found and documented. THE NEXT ACTION IS THE OWNER'S:
-merge PR #85 — production runs AHEAD of `main` — and the queued hand test, now worth running.
-Nothing is blocked and no session owes anything.**
+**Last updated: 2026-08-06 (later), when A CLIP COVER-ART DEFECT WAS FIXED, DEPLOYED AND
+MERGED, and a serious DEPLOY defect (`DEP-34`) was found and documented. PR #85 IS MERGED at
+`fee46e2`, so production and `main` now agree. THE NEXT ACTION IS THE OWNER'S AND IT IS USE,
+NOT WORK: the queued hand test. `DEP-34-FIX` is open and is his. Nothing is blocked and no
+session owes anything.**
 
 ---
 
-> ## ✅ THE CLIP COVER-ART DEFECT IS FIXED AND LIVE, 2026-08-06 (later). **The owner's actions are MERGING PR #85 and the queued hand test.**
+> ## ✅ THE CLIP COVER-ART DEFECT IS FIXED, LIVE AND MERGED, 2026-08-06 (later). **The next action is the OWNER'S and it is USE: the queued hand test.** `DEP-34-FIX` is open and is his.
 >
 > **The owner reported album art loading inconsistently on the live site, clips fine. It was a
 > real defect, it is fixed, and `artistpath-api:641ced7` is deployed and verified.**
@@ -58,7 +59,9 @@ Nothing is blocked and no session owes anything.**
 > **Entry point:** the current handoff
 > [`2026-08-06-HANDOFF-clip-cover-art.md`](2026-08-06-HANDOFF-clip-cover-art.md). Reasoning:
 > [`2026-08-06-clip-cover-art-execution-log.md`](2026-08-06-clip-cover-art-execution-log.md).
-> Branch `clip-cover-art-fix`, **PR #85 OPEN — not merged**, commits `641ced7` and `9183893`.
+> Branch `clip-cover-art-fix`, **PR #85 MERGED 2026-08-06** at `fee46e2`, commits `641ced7`,
+> `9183893` and `a3a5217`. **The work is on `main`, so production and the trunk agree.** The
+> branch is spent; new work branches from `main`.
 >
 > **`CLIP-1` is untouched and must not be conflated with this** — that is about *which track*
 > a card plays, this was about *which image*. Still the owner's call.
