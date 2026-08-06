@@ -7,7 +7,8 @@
 **A SEAM handoff, not mid-flight.** The plan is complete — all twelve tasks — and the work is
 at its designed stopping point.
 
-**Branch** `msw-adoption-flip`, **PR #83**, off `main` at `6139f28`. Adoption commit `a06ab58`.
+**Branch** `msw-adoption-flip`, **PR #83 — MERGED 2026-08-06** at `3458594`, off `main` at
+`6139f28`. Adoption commit `a06ab58`. **The branch is spent; new work branches from `main`.**
 Tree clean.
 
 ---

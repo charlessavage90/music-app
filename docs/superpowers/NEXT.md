@@ -52,7 +52,8 @@ blocked and no session owes anything.**
 > **COMPLETE**, and carrying a correction block above Task 12 Step 1. Reasoning:
 > [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
 > authority record and must be read before describing this work.** Branch `msw-adoption-flip`,
-> **PR #83**.
+> **PR #83 MERGED 2026-08-06** at `3458594`. **Tasks 11–12 are on `main`, so the adoption is in
+> the trunk as well as in production.**
 >
 > **What is waiting on him, and neither blocks anything:**
 >
