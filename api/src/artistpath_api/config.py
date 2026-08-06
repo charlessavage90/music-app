@@ -9,16 +9,19 @@ from dataclasses import dataclass, field
 @dataclass(frozen=True, slots=True)
 class ApiConfig:
     # --- graph ----------------------------------------------------------
-    # Default is the ADOPTED 75k artifact, by name — flipped at each adoption
+    # Default is the ADOPTED artifact, by name — flipped at each adoption
     # (spec 2026-07-23 §1 decision 4; closeout checks this default is not
-    # stale). It is gitignored: a fresh clone copies it (or the archive) from
-    # another machine and verifies the sha256 against
-    # docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md.
+    # stale). Adopted 2026-08-06 by MSW-: the trimmed-union build carrying
+    # fame_lb, replacing graph-t15-tiebreakfix.bin. Its identity (sha256, node
+    # and edge counts) is owned by the MSW- execution log's Task 9 section and
+    # by the artifact's own manifest sidecar — cited, never transcribed here.
+    # It is gitignored: a fresh clone copies it (or the archive) from another
+    # machine and verifies the sha256 against the sidecar.
     # The retired 5k dev fixture is NOT a substitute — its snowball shape
     # misrepresents the obscure tail, which is what bypass work exercises.
     # One env var swaps the graph without code changes.
     graph_path: str = os.environ.get(
-        "ARTISTPATH_GRAPH", "../builder/scratch/graph-t15-tiebreakfix.bin"
+        "ARTISTPATH_GRAPH", "../builder/scratch/graph-msw-tu50.bin"
     )
     # Expected sha256 of the artifact. Empty skips verification (local dev);
     # production sets it and the service refuses to boot on a mismatch. The
@@ -63,15 +66,20 @@ class ApiConfig:
     # applied as `+ 0.0`: with the knob at zero, or with zero presses, the cost
     # arithmetic is the one that shipped before this existed (MSW-G2).
     #
-    # The adopted value is 0.01 — the `P1a` arm of the CRE- sweep, which is the
-    # configuration the GBL- blind listen heard and the CAU- audit judged.
-    # Flipped from 0.0 at adoption, in one commit, with BuilderConfig's
-    # cap_strategy and require_fame.
+    # ADOPTED 2026-08-06 (MSW-) at 0.01 — the `P1a` arm of the CRE- sweep,
+    # which is the configuration the GBL- blind listen heard and the CAU-
+    # audit judged. The value's source is cre_common.py's RAMPS; flipped from
+    # 0.0 in one commit with BuilderConfig's cap_strategy and require_fame.
+    #
+    # ⚠ This adoption OVERRIDES the GBL- null on the owner's authority (margin
+    # 3 against a bar of 5; the pre-registered consequence was "production
+    # stands"). Neither GBL- nor CAU- licensed it — see the MSW- execution
+    # log. Never cite this default as evidence-backed adoption.
     #
     # Requires an artifact carrying fame: create_app refuses to boot if this is
     # non-zero over one that does not (and the router degrades to ignoring the
     # term rather than raising mid-request, as a second line).
-    w_known_ramp_fame_pctl: float = 0.0
+    w_known_ramp_fame_pctl: float = 0.01
 
     # --- bypass shaping (spec 4.3) --------------------------------------
     floor_relax_known: float = 0.15    # each "known" bypass softens the floor

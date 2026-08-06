@@ -1347,3 +1347,310 @@ therefore left up (ports 8000 and 5173, PIDs in the handoff and the queue entry)
 after HEAD so they serve the work being tested, and both verified answering before being
 believed. The session-owned background shells they replaced were stopped first, so nothing can
 wake a retired session.
+
+---
+
+## Task 11 — ADOPTION. The three defaults are flipped, 2026-08-06
+
+**The owner gave the go at Seam 3** after pressing the local app himself, and asked for the
+rest of the plan including the production deploy. Seam 3 is discharged.
+
+### The override, recorded in the fixed words Task 11 Step 3 pre-committed
+
+> This adoption overrides the `GBL-` null (margin 3 vs bar 5; pre-registered consequence
+> "production stands"). The owner took it knowingly on 2026-08-05, on `CAU-`'s coherence pass
+> at his bar and the un-listenable filter fix, which make the deployed package a new candidate
+> under the run-once rule. Neither `GBL-` nor `CAU-` licensed it; his authority did.
+
+It is also written at the `w_known_ramp_fame_pctl` definition in `api/…/config.py`, so a
+reader of the knob meets it without reading this log.
+
+### What flipped
+
+| Knob | Was | Now |
+|---|---|---|
+| `ApiConfig.graph_path` | `graph-t15-tiebreakfix.bin` | `graph-msw-tu50.bin` |
+| `ApiConfig.w_known_ramp_fame_pctl` | `0.0` | `0.01` (`P1a`, source `cre_common.py`'s `RAMPS`) |
+| `BuilderConfig.cap_strategy` | `mutual_knn` | `trimmed_union` |
+| `BuilderConfig.require_fame` | `False` | `True` |
+
+Four knobs, not three: `require_fame` was always part of the same commit and the plan's own
+prose says so, but the "three defaults" phrasing in Task 11's title counts the API's two as
+one. Recorded because the count is quoted elsewhere.
+
+### Three defects in the plan's own Task 11, all found by executing it
+
+**1. Step 0's era-pin list was complete for its stated reason and incomplete in fact.** The
+three named callers (`grt_score.py`, `calibrate.py`, `cre_build.py`) are exactly the analysis
+scripts that call `build_from_archive`, which is where both `cap_strategy` (dispatch at
+`pipeline.py:390`) and `require_fame` (`pipeline.py:434`) are read — that much was verified by
+sweep, not assumed. But a **fourth** caller reads the default without going through
+`build_from_archive`: `2026-07-25-ceiling-ordering-headroom/measure_headroom.py:69` asserts
+`config.cap_strategy == "mutual_knn"` on a bare `BuilderConfig()`, having reimplemented the cap
+itself. Left alone the flip makes that assert fire and the frozen probe stops running. Pinned,
+not deleted: the assert stays the guard it was, and the pin is what keeps it true.
+
+**2. Step 1's named test could not have caught what it was named for.** The plan says to
+update `api/tests/test_config.py:18` (`test_default_graph_path_points_at_an_artifact`) by
+"updating the expected name", and Step 2 says "the api default-graph test pins the new name".
+It pinned no name: the whole assertion was `.endswith(".bin")`, which passes for every artifact
+ever built. There was nothing to update and the test could not have failed on a stale default —
+which is precisely what `closeout` relies on it for. Rewritten to pin the name.
+
+**3. The blast radius on the test suites was not anticipated anywhere in the plan, and it was
+97 tests.** 46 builder + 51 api, all failing on the two new guards firing exactly as designed:
+`require_fame=True` refusing archives with no `fame` stage, and `create_app` refusing a live
+ramp over a fameless artifact. **No guard was weakened to make a test pass.** Three shapes of
+fix, and the choice per site was "what is this test's subject?":
+
+- **Pin the unrelated knob off**, following this repo's existing factor-table-control idiom
+  (the `drop_unlistenable` pins already in those files). Used where fame or the cap is not the
+  subject — the drop-rule files, replay, CORS, the origin gate, routes, smoke.
+- **Make the archive meet the shipping requirement.** `test_cli.py` builds through `main`, and
+  `--require-fame` is `store_true` by design, so there is no flag to turn it off — the right
+  fix is a `fame/` stage in the test archive, the same shape as the ULF- fixture list that file
+  already installs. The alternative would have meant weakening a protected claim.
+- **Flip the default-pinning assertions rather than deleting them.** Four tests existed to
+  assert the defaults were still off (`test_the_default_knob_is_off`,
+  `test_default_strategy_is_still_mutual_knn`, `test_fame_is_not_required_by_default`,
+  `test_phase2_adopted_defaults`). Adoption is the commit they were written for. Each now pins
+  the adopted value, so a silent change to a shipped default is still a test failure.
+
+### Two confounds the flip introduced inside the test suites, both silent
+
+Neither would have failed a test. Both would have made a passing test stop testing its subject
+— the `w_floor` shape from `CLAUDE.md`'s dormant-term rule, appearing in test code:
+
+1. **`test_trimmed_union_supplies_more_edges_than_mutual_knn`** built its "mutual" arm as
+   `_build(tmp_path / "m", max_neighbours_per_artist=5)`, inheriting `cap_strategy` from the
+   default. After the flip both arms are `trimmed_union` and the test compares the rule against
+   itself. Now pinned explicitly.
+2. **`test_acceptance.py::_build`** injects its defect by monkeypatching
+   `graph_mod.mutual_knn_cap` — a function the `trimmed_union` path never calls. On the new
+   default the `defective` arm builds a healthy graph, and `test_tiebreak_defect_is_rejected`
+   fails for a reason with nothing to do with acceptance. Now pinned to `mutual_knn`.
+
+Both are the same lesson the plan's Step 0 recorded for shipped code, reproducing one layer
+down in tests nobody listed.
+
+### Step 0b — the agent definition
+
+`.claude/agents/ml-graph-analyst.md:50` said `w_degree_hub` and `w_known_ramp_fame_pctl` "both
+default to 0.0, so both terms are inert unless deliberately set." True until this commit, false
+after it. Corrected in the same commit, per the Seam 3 closeout's `B5` finding. It is auto-loaded
+on dispatch, so leaving it stale would have told a graph analyst the ramp was inert while the
+app routed on it.
+
+### `CLAUDE.md`'s Graph shape section
+
+Corrected in the same commit, as Step 0 requires. It described mutual k-NN as the shipped rule.
+It now names `trimmed_union` as shipped, keeps mutual k-NN as supported, and carries the
+comparison warning — every pre-2026-08-06 figure was built under the other rule, so the rule a
+claim is in has to be checked before two graphs are compared. **D6: +333 characters on the unconditional layer** (45,569 -> 45,902), all of it this
+section.** That growth is the owner's call and is reported to him rather
+than assumed; the correction itself was not optional, only its size.
+
+### `CLIP-1` — logged by the owner during his Seam 3 hand test. NOT addressed, deliberately.
+
+**He raised it while pressing the app and asked for it to be logged for work after this plan.
+Nothing here acts on it.** It is not new to this work and not a regression — the `MSW-` package
+neither caused it nor made it worse. It surfaced now because the new map routes through
+less-famous artists, so the class is met more often, and because the `CAU-` and `ULC-` work
+taught him what to look for.
+
+**`CLIP-1`: a clip can be the right artist and still be the wrong impression of them.** The
+resolver's job is "find a track by this artist", and it succeeds; what it does not do is prefer
+a track that is *theirs*. Two examples he named:
+
+- **Albert Hammond Jr.**, reached as an interior card, resolved to *"Cinnamon (feat. Albert
+  Hammond Jr.)"* — an album track of Damiano David's. Spotify lists both as main artists and it
+  is Hammond Jr.'s top track there, so this is **not** a `BYP-13` wrong-artist collision. The
+  identity is right; the choice is poor.
+- **Metric**, resolved to *"Help I'm Alive (BYNX Rework)"* rather than any Metric original.
+
+**Why it is its own thing and not a duplicate of anything already open.** `BYP-13` is a
+*different artist of the same name* — an identity failure, and the `deezer_ids` work addresses
+it. `ULC-`/`ULF-` cover artists with **nothing of their own to play at all**, and the filter
+removes them. `CLIP-1` is the case where the artist is correct and their catalogue is real, but
+the top-ranked track is a guest appearance or someone else's remix. **No existing filter or
+check can see it**, and the Pino Palladino case in the Seam 3 report is its close cousin from
+the other side: there, "the clip resolves" was not "this artist has music of their own".
+
+**Its condition, so it is not an unranked backlog item:** it becomes actionable when a resolver
+change is next opened, or immediately if the owner reports it on a pair he cares about. It is
+**not scheduled**, and whether it is worth fixing is his call — the fix is a ranking preference
+inside clip resolution (prefer tracks where the artist is the sole or primary credit, fall back
+to what is chosen today), and it trades clip *availability* against clip *representativeness*,
+which is a product judgement rather than a correctness one.
+
+**Not measured.** Two observed instances is not a rate, and no figure is claimed here.
+
+---
+
+## Task 12 — DEPLOYED. The map switch is live, 2026-08-06
+
+**`https://musicapp.cmiller.io` now serves the adopted package.** Everything below was
+verified mechanically rather than by eye.
+
+### The defect in Task 12, and it is the serious one
+
+**The plan's Task 12 has no image-build step.** Its three steps are upload → `cdk deploy` →
+verify, citing `infra/README.md:259-269` for the upload and `:52-53` for the deploy variables.
+It skips **§3, "Build and push the image"**, entirely.
+
+`w_known_ramp_fame_pctl` is a **code default with no environment variable** — it is baked into
+the container. `ARTISTPATH_DEPLOY_GRAPH_KEY` swaps the *artifact* at deploy time and nothing
+else. So executing Task 12 as written would have shipped **the new map running under the old
+code**: `cap_strategy` and the artifact would have changed, and the `known` ramp — the half the
+owner actually pressed and approved — would have stayed at `0.0` in production.
+
+**Every check the plan specifies would have passed.** `/health` reports the graph sha, artist
+count and edge count; it reports nothing about the router. The failure would have presented as
+"the new map is live and the digging feels weaker than it did locally", which is a judgement
+call about taste rather than a visible fault — the shape this project has repeatedly recorded
+as the expensive one.
+
+Caught by asking what the deploy actually replaces, not by any step in the plan. The image was
+built, and then **checked rather than assumed** before being pushed:
+
+```
+docker run --rm --entrypoint python artistpath-api:a06ab58 -c "…"
+ramp   : 0.01
+graph  : ../builder/scratch/graph-msw-tu50.bin
+```
+
+### What was done, in order
+
+1. **Artifact + sidecar uploaded** to `artistpathstack-artifactbucket7410c9ef-b7lbgisct423` as
+   `graph-msw-tu50.bin` / `.json`. Completeness verified per §4: S3 `ContentLength` 17,773,958
+   equals the sidecar's `bytes`. **The previous artifact's keys were left in place**, which is
+   the rollback path — §9 is a redeploy with the old `ARTISTPATH_DEPLOY_GRAPH_KEY`.
+2. **Image built and pushed** as `artistpath-api:a06ab58` (digest `sha256:d8b76267…`), tagged
+   by commit per §3's never-`latest` rule.
+3. **Stack deployed** with `ARTISTPATH_DEPLOY_IMAGE_TAG=a06ab58`,
+   `ARTISTPATH_DEPLOY_GRAPH_KEY=graph-msw-tu50.bin`, `ARTISTPATH_DEPLOY_SIDECAR` pointing at
+   the sidecar. All nine required variables were confirmed resolved **before** the deploy ran,
+   because §1's recorded failure mode is silently-unset variables surfacing as `app.py` naming
+   whichever secret it checks first. Deploy output was written to a file, not the terminal:
+   `cdk` prints the site credential base64-encoded and the output is not safe to paste.
+
+### Verification (§8)
+
+- **`/health` matches the sidecar mechanically** — the runbook's own assertion script, on
+  sha256, artist count and edge count. Not read by eye (`DEP-24`).
+- **`SiteUrl` → 301**, **App Runner's public URL → 403** on `/api/artists/search` (`TR-7`
+  working), **`musicapp.cmiller.io` → 200**.
+- **The running image is `a06ab58`**, read back from the App Runner service description rather
+  than assumed from the push. Service `RUNNING`.
+- **The ramp is provably live, and the boot guard is what proves it.** `create_app` refuses to
+  start when `w_known_ramp_fame_pctl != 0.0` over an artifact with no fame. The service is
+  `RUNNING` on an image whose default is `0.01` — so the served artifact carries fame *and* the
+  ramp is priced. No separate probe was needed; the guard built at Task 6 does the work.
+- **End to end through the public front door:** a Radiohead → Miles Davis journey built, then
+  "know them already" pressed five times. **The interior changed at every press.** Clips
+  resolved on the cards tried.
+- **§5a log retention: already 90 days** on both log groups. It only needs re-running when the
+  service is *recreated*, and this deploy updated it in place.
+- **§6 frontend sync: not required.** No file under `frontend/` was touched by any `MSW-` task,
+  so the deployed SPA is already current. Stated rather than skipped silently.
+
+### One environment note worth keeping
+
+**Cloudflare refuses `urllib`'s default User-Agent with a 403** while `curl` passes. A live
+check driven from Python therefore fails in a way that looks exactly like `TR-7`'s deliberate
+refusal, on the one hostname where `TR-7` is *not* supposed to fire. Set a browser User-Agent.
+Costs a minute to diagnose and looks like a security finding until it is.
+
+### Closeout at adoption — what the checks found
+
+**Full ritual**, since this touched the artifact, the cost function and production.
+
+**`A3` — and its second question fired.** `ULF-3`'s condition is two-part and its **first half
+has now come due**: *a shipped build has routed on a `ULF-` list* is **satisfied** (the deployed
+artifact was built with `drop_unlistenable=True`, read off the sidecar). The second half —
+*the era-pinned probes naming the old flags are retired or re-pinned* — is **not**:
+`grt_score.py`, `calibrate.py` and `cre_build.py` still name `drop_no_release_tail` and
+`drop_featured_credit`. **Re-tested against reality rather than copied forward**, which is what
+the previous handoff explicitly asked for. Stays open, now half-due. `ULC-F3` and `ULC-F4` not
+due. New: `CLIP-1` (condition in its own section) and the fixture deferral below.
+
+**`A4` — the default-flip check is the whole of Task 11**, and all four are flipped, deployed
+and pinned by test.
+
+**`B3` — the highest-yield check, and it was run rather than reasoned about.** All six
+default-pinning assertions were verified to go **red** when the defaults are reverted: the three
+builder pins (`test_adopted_defaults`, `test_default_strategy_is_the_adopted_trimmed_union`,
+`test_fame_is_required_by_default_since_adoption`) and the three api pins
+(`test_default_graph_path_points_at_the_adopted_artifact`,
+`test_the_default_knob_is_the_adopted_value`,
+`test_boot_allows_the_ramp_over_an_artifact_that_carries_fame`). Both config files were restored
+from git afterwards. **This matters more than usual here**, because these six are the only
+mechanical guard against a future silent un-flip.
+
+**`B5` — found a defect `Step 0b` missed, in the same file, for the third time.**
+`.claude/agents/ml-graph-analyst.md:19` still described the graph as filtered by **mutual k-NN**.
+Step 0b corrected line 50 (the ramp) and stopped there; nothing pointed at line 19, because the
+plan's obligation named a line rather than a file. **This is the 2026-07-23 failure shape
+exactly** — that file, a description going stale, invisible to a grep for the identifier that
+changed, since `cap_strategy` never appears in the sentence. Fixed. **The generalisable lesson
+is that an era-pin obligation should name the FILE, never the line.**
+
+**`B1` — lint green on hard checks; `doc-auditor` found three defects, all real.** Two were
+already fixed while it ran (`NEXT.md`'s top block, the seam-3 handoff's own role line). The
+third was **`docs/README.md` still stating "the app now routes on `graph-t15-tiebreakfix.bin`"**
+— a HIGH, and one neither the lint nor `B5`'s greps caught, because the sentence is about the
+*old* artifact and contains no stale identifier. Its map row now carries the supersession and
+points at the log's Task 9 section for the live artifact's identity. The auditor also confirmed
+`CLIP-` collides with nothing.
+
+**`B2`** — no modules created; only `config.py` edits in both packages. **`B4`** — the two claims
+this session restated from the plan were checked against source rather than trusted:
+`cre_build.py`'s `gate()` does compare its `mutual_knn_cap` mirror against a live
+`build_from_archive` (so the pin prevents a false mirror-divergence), and `measure_headroom.py`
+does reimplement the cap directly at line 149.
+
+**`D2` — the committed fixtures now predate the adopted graph, and this is a DEFERRAL rather
+than a skip.** `api/tests/fixtures/*.bin` carry no `fame_lb`, which is why four api modules pin
+the ramp off. **Condition: regenerate when a test needs to exercise fame over real data, or
+before the next artifact adoption, whichever comes first.** Not done here deliberately —
+regenerating changes what every fixture-dependent assertion asserts, and folding that into an
+adoption commit would mix two unrelated sources of test churn.
+
+**`D3`** — the adopted artifact is gitignored, so its sha256 and counts live in the Task 9
+section, the manifest sidecar, and the PR body. The **previous** artifact's S3 keys were left in
+place deliberately as the rollback path.
+
+**`D6` — and a unit correction worth recording.** **Unconditional: 45,569 -> 45,902 characters,
++333**, all of it `CLAUDE.md`'s Graph shape correction. **Conditional: 2,459 -> 2,465 lines,
++6**, all of it `ml-graph-analyst.md`'s body. **An intermediate report of "+909 characters" was
+wrong** — it used `wc -c` on the file, which counts bytes, so every CR under `core.autocrlf` and
+every multi-byte character (the em-dashes and `§` in that section) inflated it. D6 specifies
+`tr -d '\r' | wc -m` for exactly this reason and the corrected figure is less than half. **The
+error direction is the dangerous one**: it over-reports growth, which invites paying for it by
+compressing live prose — the move D6 names as damage with a receipt.
+
+Both edits are **corrections of false statements**, the first row of D6's table: `CLAUDE.md`
+said mutual k-NN was the shipped rule and `ml-graph-analyst.md` said the ramp was inert. Neither
+was optional. But **neither fits in "roughly the same size"** — the true statement has to
+distinguish two rules where the false one named one — so per D6 they are **reported as growth
+and the decision is the owner's**, not booked as a free correction.
+
+**`A5`/`C1`, decided together.** `C1` queued an entry: the live site is the thing to press.
+**The two detached servers from the morning are now redundant** — production serves the same
+configuration and the queued test needs nothing local. A5's table says close them. **They were
+deliberately left running anyway**, because the owner said he was still testing tracks and asked
+to be told before anything is shut down; his instruction outranks the default. Ports, PIDs and
+the one-line disposition are in the closing message, the handoff and the queue entry.
+
+**`A5` closed out properly, after the fact.** The two detached servers were **stopped on the
+owner's instruction** shortly after the closeout report, and both ports verified free. His
+reason is worth recording because it generalises past this session: **he is testing against the
+live app from here on, since production writes telemetry to CloudWatch (`DEP-2`) and a local dev
+server writes it to a terminal nobody reads.** A hand test on the live site therefore leaves a
+durable, queryable trace of what he actually pressed; the same test locally leaves nothing. The
+log groups carry 90-day retention, confirmed at Task 12.
+
+**Consequence for future closeouts, and it sharpens A5's table rather than contradicting it:**
+since the Gate 2 cutover, "relaunch a local server for the queued test" is close to always the
+wrong default — the live site is both more representative *and* the only one of the two that
+records the run.

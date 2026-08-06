@@ -166,13 +166,18 @@ because the defect was the absence. That half cannot be mechanised, which is the
 **for** the `doc-auditor` step in `closeout`, not against it.
 
 ### Graph shape
-Similarity is not mutual, so edges are first filtered by **mutual k-NN** — an edge
-survives only if each endpoint ranks the other in its top-k — then **symmetrised** (keep
-the stronger score), then pruned to the **largest connected component**. Mutual k-NN is
-what actually bounds degree; the legacy alternative capped each artist's own list before
-symmetrising, which bounds nothing afterwards. It was deleted in Phase 2 and now raises. Keeping only that component guarantees a
-path exists between any two artists the UI offers — so a "no path" result can *only*
-come from user exclusions, never from missing graph structure.
+Similarity is not mutual, so edges are first filtered by a **cap rule**, then
+**symmetrised** (keep the stronger score), then pruned to the **largest connected
+component**. **The shipped rule is `trimmed_union` since 2026-08-06 (`MSW-`)**: an edge
+survives if *either* endpoint ranks the other in its top-j, then each node is trimmed to a
+degree ceiling. It replaced **mutual k-NN** (edge survives only if *both* endpoints rank
+the other top-k), which remains supported and is what every pre-2026-08-06 figure was built
+under — so **check which rule a claim is in before comparing two graphs.**
+Both bound degree. The legacy third option capped each artist's own list before
+symmetrising, which bounds nothing afterwards; it was deleted in Phase 2 and now raises.
+Keeping only the largest component guarantees a path exists between any two artists the UI
+offers — so a "no path" result can *only* come from user exclusions, never from missing
+graph structure.
 
 ### APG1 artifact
 One little-endian binary file: header (`APG1` magic, version, N, E, metadata length) +

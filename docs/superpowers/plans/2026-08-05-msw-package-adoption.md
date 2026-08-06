@@ -755,15 +755,15 @@ git commit -m "MSW-V1..V4: nine-artist filter check, post-fix exposure re-measur
 - Modify: `api/src/artistpath_api/config.py` (`graph_path` default; `w_known_ramp_fame_pctl` 0.0 → 0.01), `builder/src/artistpath_builder/config.py` (`cap_strategy` default → `"trimmed_union"`, **and `require_fame` → `True`** — see Step 0)
 - Test: `api/tests/test_config.py:18` (`test_default_graph_path_points_at_an_artifact` — update the expected name)
 
-- [ ] **Step 0 (added during Task 2 execution — do not skip): era-pin the three callers that inherit the `cap_strategy` default.** `grt_score.py:145,155`, `calibrate.py:232`, `cre_build.py:389` all construct `BuilderConfig` without setting `cap_strategy`, so the flip below silently changes what each builds. Add `cap_strategy="mutual_knn"` **and `require_fame=False`** beside each one's existing drop pins, **in this same commit**. The `require_fame` half is the harder failure: none of those archives has ever had the `fame` stage run against it, so an unpinned flip makes all three **refuse to build** outright. `cre_build.py` is the sharp case: its `gate()` (line 410) compares its mirror against a live `build_from_archive` for byte-identity, so an unpinned flip makes that gate compare two different cap rules and report a mirror divergence — the wrong diagnosis for the right symptom. Rationale is recorded at the site in `test_pipeline_mirrors.py`'s `RECORDED_FIELDS`.
+- [x] **Step 0 (added during Task 2 execution — do not skip): era-pin the three callers that inherit the `cap_strategy` default.** `grt_score.py:145,155`, `calibrate.py:232`, `cre_build.py:389` all construct `BuilderConfig` without setting `cap_strategy`, so the flip below silently changes what each builds. Add `cap_strategy="mutual_knn"` **and `require_fame=False`** beside each one's existing drop pins, **in this same commit**. The `require_fame` half is the harder failure: none of those archives has ever had the `fame` stage run against it, so an unpinned flip makes all three **refuse to build** outright. `cre_build.py` is the sharp case: its `gate()` (line 410) compares its mirror against a live `build_from_archive` for byte-identity, so an unpinned flip makes that gate compare two different cap rules and report a mirror divergence — the wrong diagnosis for the right symptom. Rationale is recorded at the site in `test_pipeline_mirrors.py`'s `RECORDED_FIELDS`.
 
-- [ ] **Step 0b (added by the Seam 3 closeout's `B5` sweep, 2026-08-06 — do not skip): correct `.claude/agents/ml-graph-analyst.md:50` in the SAME commit as the flip.** It currently states that `w_degree_hub` and `w_known_ramp_fame_pctl` "both default to 0.0, so both terms are inert unless deliberately set". True today; **false the moment Step 1 lands.** That file is auto-loaded on dispatch, so leaving it stale tells a graph analyst the ramp is inert while the app routes on it. It was **not** on any prior era-pin list, and no grep for a stale identifier could have found it — the sentence is not wrong yet. Same file and same failure shape as the 2026-07-23 incident `CLAUDE.md` records.
+- [x] **Step 0b (added by the Seam 3 closeout's `B5` sweep, 2026-08-06 — do not skip): correct `.claude/agents/ml-graph-analyst.md:50` in the SAME commit as the flip.** It currently states that `w_degree_hub` and `w_known_ramp_fame_pctl` "both default to 0.0, so both terms are inert unless deliberately set". True today; **false the moment Step 1 lands.** That file is auto-loaded on dispatch, so leaving it stale tells a graph analyst the ramp is inert while the app routes on it. It was **not** on any prior era-pin list, and no grep for a stale identifier could have found it — the sentence is not wrong yet. Same file and same failure shape as the 2026-07-23 incident `CLAUDE.md` records.
 
-- [ ] **Step 1: Flip all three in one commit**, each with its comment updated to cite this adoption (the `graph_path` comment's "flipped at each adoption" rule is the pattern; closeout checks defaults were actually flipped). `w_known_ramp_fame_pctl: float = 0.01` cites `P1a` and `cre_common.py`'s `RAMPS` as the adopted value's source.
-- [ ] **Step 2: Run both suites** (`builder/`, `api/`) and `npm test`. The api default-graph test pins the new name.
-- [ ] **Step 3: Record the override.** Execution-log section, three sentences fixed here: *This adoption overrides the `GBL-` null (margin 3 vs bar 5; pre-registered consequence "production stands"). The owner took it knowingly on 2026-08-05, on `CAU-`'s coherence pass at his bar and the un-listenable filter fix, which make the deployed package a new candidate under the run-once rule. Neither `GBL-` nor `CAU-` licensed it; his authority did.* The PR body carries the same paragraph.
-- [ ] **Step 4: Snyk scan** (global instruction): `snyk_code_scan` over the new/modified first-party code (`builder/src`, `api/src`); fix and rescan until clean; record the outcome in the log.
-- [ ] **Step 5: Commit**
+- [x] **Step 1: Flip all three in one commit**, each with its comment updated to cite this adoption (the `graph_path` comment's "flipped at each adoption" rule is the pattern; closeout checks defaults were actually flipped). `w_known_ramp_fame_pctl: float = 0.01` cites `P1a` and `cre_common.py`'s `RAMPS` as the adopted value's source.
+- [x] **Step 2: Run both suites** (`builder/`, `api/`) and `npm test`. The api default-graph test pins the new name.
+- [x] **Step 3: Record the override.** Execution-log section, three sentences fixed here: *This adoption overrides the `GBL-` null (margin 3 vs bar 5; pre-registered consequence "production stands"). The owner took it knowingly on 2026-08-05, on `CAU-`'s coherence pass at his bar and the un-listenable filter fix, which make the deployed package a new candidate under the run-once rule. Neither `GBL-` nor `CAU-` licensed it; his authority did.* The PR body carries the same paragraph.
+- [x] **Step 4: Snyk scan** (global instruction): `snyk_code_scan` over the new/modified first-party code (`builder/src`, `api/src`); fix and rescan until clean; record the outcome in the log.
+- [x] **Step 5: Commit**
 
 ```bash
 git add api/src/artistpath_api/config.py builder/src/artistpath_builder/config.py api/tests/test_config.py docs/superpowers/2026-08-05-msw-execution-log.md
@@ -777,11 +777,22 @@ git commit -m "MSW- ADOPTION: default graph -> graph-msw-tu50.bin, ramp 0.01 (P1
 **Files:**
 - Operational (deploy per `infra/README.md`); Modify: `docs/superpowers/TEST-QUEUE.md` (one QUEUED entry — there is something to press)
 
-- [ ] **Step 1: Upload artifact + sidecar to S3** per `infra/README.md:259-269` (the `aws s3 cp` pair, then the `head-object` size check against the sidecar). Mind the deploy-environment traps (`memory/deploy-environment-traps.md`): Git Bash vs WSL PATHs, MSYS path rewriting.
-- [ ] **Step 2: Deploy** with `ARTISTPATH_DEPLOY_GRAPH_KEY=graph-msw-tu50.bin` and `ARTISTPATH_DEPLOY_SIDECAR=../builder/scratch/graph-msw-tu50.bin.json` (`infra/README.md:52-53`); `app.py` reads the sha from the sidecar (never set it by hand, `infra/README.md:97`). **Not** `-c stage=storage` — the full stage (`deploy_stage.py`'s guard exists because the storage stage deletes the CloudFront distribution).
-- [ ] **Step 3: Verify live** per `infra/README.md:515-533`: `/health` must report the new sha, artist count, and edge count matching the sidecar.
-- [ ] **Step 4: Queue the owner's hand test** in `TEST-QUEUE.md`: the new map is live; press "know them already" repeatedly on a favourite pair and see whether later presses dig deeper than earlier ones; report any dead card (an artist with nothing to play) — that class was filtered and one appearing is a finding.
-- [ ] **Step 5: Run `closeout`** (the full ritual — this is significant work landing). It owns the `NEXT.md` rewrite, the doc-map rows, D6, and PR finalisation. Merge via the PR.
+> **⚠ CORRECTION, found by executing this task 2026-08-06. Step 1 below is NOT the first step.**
+> **`infra/README.md` §3, "Build and push the image", is missing from this task and is
+> required.** `ApiConfig.w_known_ramp_fame_pctl` is a code default with **no environment
+> variable** — it is baked into the container, and `ARTISTPATH_DEPLOY_GRAPH_KEY` swaps only the
+> artifact. Executing Steps 1–3 as originally written would have deployed **the new map under
+> the old code**, leaving the `known` ramp at `0.0` in production while every check in Step 3
+> passed, because `/health` reports the graph and says nothing about the router. Build and push
+> the image, and **verify the built image's defaults before pushing** — `docker run --rm
+> --entrypoint python <image> -c "from artistpath_api.config import ApiConfig;
+> print(ApiConfig().w_known_ramp_fame_pctl)"`. Recorded in the execution log's Task 12 section.
+
+- [x] **Step 1: Upload artifact + sidecar to S3** per `infra/README.md:259-269` (the `aws s3 cp` pair, then the `head-object` size check against the sidecar). Mind the deploy-environment traps (`memory/deploy-environment-traps.md`): Git Bash vs WSL PATHs, MSYS path rewriting.
+- [x] **Step 2: Deploy** with `ARTISTPATH_DEPLOY_GRAPH_KEY=graph-msw-tu50.bin` and `ARTISTPATH_DEPLOY_SIDECAR=../builder/scratch/graph-msw-tu50.bin.json` (`infra/README.md:52-53`); `app.py` reads the sha from the sidecar (never set it by hand, `infra/README.md:97`). **Not** `-c stage=storage` — the full stage (`deploy_stage.py`'s guard exists because the storage stage deletes the CloudFront distribution).
+- [x] **Step 3: Verify live** per `infra/README.md:515-533`: `/health` must report the new sha, artist count, and edge count matching the sidecar.
+- [x] **Step 4: Queue the owner's hand test** in `TEST-QUEUE.md`: the new map is live; press "know them already" repeatedly on a favourite pair and see whether later presses dig deeper than earlier ones; report any dead card (an artist with nothing to play) — that class was filtered and one appearing is a finding.
+- [x] **Step 5: Run `closeout`** (the full ritual — this is significant work landing). It owns the `NEXT.md` rewrite, the doc-map rows, D6, and PR finalisation. Merge via the PR.
 
 ---
 

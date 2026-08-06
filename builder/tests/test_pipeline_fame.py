@@ -7,10 +7,15 @@ means an artist priced by a default in a cost function that routes on the price.
 Neither is acceptable, and the fix is the same — refuse, loudly, naming who is
 missing.
 
-`require_fame` is OFF by default at this point in the plan and is flipped at
-adoption, alongside `cap_strategy` and the API's ramp knob. Until the router
-reads fame, a fame-less build is genuinely valid; the flip belongs in the commit
-where that stops being true.
+`require_fame` was OFF by default until the `MSW-` adoption of 2026-08-06, which
+flipped it ON alongside `cap_strategy` and the API's ramp knob. Until the router
+read fame, a fame-less build was genuinely valid; now that it routes on fame, an
+archive with no `fame` stage run against it refuses to build.
+
+The tests below that exercise the fame-less path therefore pass
+`require_fame=False` EXPLICITLY rather than inheriting it. That is deliberate:
+the path is still supported and still worth testing, it is simply no longer the
+default.
 """
 
 import json
@@ -105,11 +110,24 @@ def test_the_refusal_names_the_count_and_the_remedy(tmp_path):
     assert "Refusing to build" in message
 
 
-def test_fame_is_not_required_by_default(tmp_path):
-    # Until the router reads fame, a fame-less build is valid. Flipped at
-    # adoption, with cap_strategy and the ramp.
+def test_fame_is_required_by_default_since_adoption(tmp_path):
+    # This assertion read `is False` until the MSW- adoption of 2026-08-06.
+    # It is flipped rather than deleted: the default is what routes real
+    # traffic, so a silent change to it must be a test failure.
+    #
+    # The build below is seeded with similarity but NO fame, so the new
+    # default alone is enough to make it refuse — which is the point of the
+    # flip, exercised rather than asserted.
     config, archive, source, _ = _setup(tmp_path)
-    assert config.require_fame is False
+    assert config.require_fame is True
+    with pytest.raises(MissingFameError):
+        build_from_archive(config, archive, source)
+
+
+def test_a_fameless_build_is_still_supported_when_not_required(tmp_path):
+    # The fame-less path did not go away at adoption, it just stopped being
+    # the default. Pinned so the flip cannot quietly delete a supported mode.
+    config, archive, source, _ = _setup(tmp_path, require_fame=False)
     graph = build_from_archive(config, archive, source)
     assert graph.fame_lb_raw == []
 
@@ -117,7 +135,7 @@ def test_fame_is_not_required_by_default(tmp_path):
 def test_fame_records_are_ignored_when_not_required(tmp_path):
     # Present-but-unrequested fame must not leak into the artifact: that would
     # make the byte output depend on whether an unrelated stage had been run.
-    config, archive, source, mbids = _setup(tmp_path)
+    config, archive, source, mbids = _setup(tmp_path, require_fame=False)
     _seed_fame(archive, {m: 7 for m in mbids})
     graph = build_from_archive(config, archive, source)
     assert graph.fame_lb_raw == []

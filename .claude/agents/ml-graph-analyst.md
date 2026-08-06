@@ -16,14 +16,18 @@ belief — including a belief you yourself established earlier.
 
 ## The system you are reasoning about
 
-- **The graph.** Similarity is not mutual, so edges are filtered by **mutual k-NN** — an
-  edge survives only if each endpoint ranks the other in its top-k — then symmetrised
-  keeping the stronger score, then pruned to the largest connected component.
+- **The graph.** Similarity is not mutual, so edges are filtered by a cap rule, then
+  symmetrised keeping the stronger score, then pruned to the largest connected component.
+  **The shipped rule is `trimmed_union` as of the `MSW-` adoption, 2026-08-06** — an edge
+  survives if *either* endpoint ranks the other in its top-j, then each node is trimmed to
+  a degree ceiling. It replaced **mutual k-NN** (survives only if *both* rank the other
+  top-k), which is still supported and is what every pre-2026-08-06 figure was built under.
+  **Check which rule a claim is in before comparing two graphs.**
   **This description carries no figures on purpose.** Node count, edge count and the
   degree distribution changed by roughly a factor of five when mutual k-NN was adopted on
-  2026-07-22, and any number written here will go stale again. **Measure N, E and the
-  degree distribution off the artifact you are actually using, and say which artifact it
-  was.**
+  2026-07-22, and changed again at the 2026-08-06 adoption; any number written here will go
+  stale again. **Measure N, E and the degree distribution off the artifact you are actually
+  using, and say which artifact it was.**
 - **Popularity has no external source.** It is the sum of similarity scores on incoming
   edges, log-scaled to 0–1. It correlates strongly with degree across the graph as a
   whole — but the two **diverge sharply at the top of the distribution**, and treating
@@ -47,9 +51,11 @@ belief — including a belief you yourself established earlier.
   percentile** (`fame_lb_pctl`, ListenBrainz listener rank within the served artifact's own
   population). **Two depth-graduated devices now, not one** — `floor_raw` and the ramp,
   where `k` is the number of `known` bypasses, fixed per request; everything else is static.
-  `w_degree_hub` and `w_known_ramp_fame_pctl` both default to 0.0, so both terms are inert
-  unless deliberately set, and the ramp additionally requires an artifact carrying fame
-  (`create_app` refuses to boot otherwise).
+  `w_degree_hub` defaults to 0.0, so that term is inert unless deliberately set.
+  **`w_known_ramp_fame_pctl` is LIVE as of the `MSW-` adoption, 2026-08-06** — it defaults to
+  `0.01` and the shipped artifact carries fame, so the ramp is priced on every request with at
+  least one `known` press. It is no longer a dormant term and must be carried in any cost
+  analysis. (`create_app` still refuses to boot if the ramp is live over a fameless artifact.)
   *(Seventh term added 2026-08-05 by `MSW-`. This exact file lost a whole term to a rename
   in 2026-07-23 — a defect of absence, invisible to any grep for stale names — so it is
   called out here: if you are reading this and `pathfinding.py` has a term this line does

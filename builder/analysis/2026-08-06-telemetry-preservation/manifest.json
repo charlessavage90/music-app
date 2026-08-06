@@ -1,0 +1,50 @@
+{
+  "log_group": "/aws/apprunner/artistpath-api/40e4a1cf20414bce96a7a46b5e62c3a6/application",
+  "retention_days": 90,
+  "purpose": "preservation of the pre-adoption telemetry corpus; no metric computed",
+  "era_assigned_by": "log stream, never timestamp \u2014 the rolling deploy overlapped",
+  "deploy": {
+    "commit": "a06ab58",
+    "image": "artistpath-api:a06ab58",
+    "old_graph": "graph-t15-tiebreakfix.bin",
+    "new_graph": "graph-msw-tu50.bin",
+    "new_graph_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+  },
+  "streams": {
+    "instance/e88655f1fab04c789203c7a0cb6b0130": {
+      "era": "pre_msw",
+      "events": 6109
+    },
+    "instance/ab304fc6b8c640798c839f271ab840db": {
+      "era": "pre_msw",
+      "events": 10500
+    },
+    "instance/58b2c316ea4344c087a049563f0a1a56": {
+      "era": "pre_msw",
+      "events": 76882
+    },
+    "instance/2e9ff5f0c20344bd9f395a259b218bbe": {
+      "era": "post_msw",
+      "events": 1937
+    }
+  },
+  "counts": {
+    "total_events": 95428,
+    "pre_msw": {
+      "all": 93491,
+      "path": 271,
+      "clip": 699
+    },
+    "post_msw": {
+      "all": 1937,
+      "path": 51,
+      "clip": 84
+    }
+  },
+  "caveats": [
+    "The pre_msw path corpus is heavily synthetic: one journey at each consecutive bypass_depth from 26 to 46, plus clusters at exactly 50 and 100, are a script walking one press at a time rather than use.",
+    "193 of the pre_msw path events fall on 2026-07-28 alone.",
+    "Some post_msw events are a session's own deploy verification (a Radiohead -> Miles Davis journey pressed five times), not owner use.",
+    "The two eras differ in MORE than the graph: the owner's usage pattern changes deliberately after adoption (the queued test asks for ten or more 'known' presses), and the deploy moved several knobs at once. A before/after difference is NOT attributable to any one of them."
+  ]
+}

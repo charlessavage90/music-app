@@ -44,7 +44,11 @@ ROUTE_IDS = [f"{method} {path.split('?')[0]}" for method, path, _, _ in GATED_RO
 
 
 def _app(secret: str):
-    cfg = replace(ApiConfig(), origin_secret=secret)
+    # w_known_ramp_fame_pctl pinned off: the origin gate is the subject, the
+    # synthetic store below carries no fame, and since the MSW- adoption of
+    # 2026-08-06 create_app refuses a live ramp over a fameless artifact
+    # (factor-table-control idiom). Its own tests: test_pathfinding_fame_ramp.py.
+    cfg = replace(ApiConfig(), origin_secret=secret, w_known_ramp_fame_pctl=0.0)
     store = make_store(
         names=["Radiohead", "Muse", "Coldplay"],
         pop_raw=[0.9, 0.7, 0.8],

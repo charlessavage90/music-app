@@ -12,15 +12,81 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (night), when `MSW-` TASK 10 COMPLETED AND SEAM 3 WAS REACHED. THE
-CANDIDATE ARTIFACT EXISTS (sha256 `43dd82bb…`; the execution log's Task 9 section owns its
-identity and counts), is built deterministically, and has now been VERIFIED — it boots, serves,
-presses and plays. NOTHING IS ADOPTED — the app's committed defaults are unchanged and every
-new default is still off. THE NEXT ACTION IS THE OWNER'S AND IT IS A DECISION, NOT WORK: Seam 3
-is his stop before any default flips. The `GBL-` null and the `CAU-` result both stand; this
-adoption OVERRIDES the null on the owner's authority, which is not the same as reopening it.**
+**Last updated: 2026-08-06, when THE `MSW-` MAP SWITCH WAS ADOPTED AND DEPLOYED. All twelve
+tasks are done. THE NEW MAP IS LIVE at `https://musicapp.cmiller.io` — four shipped defaults are
+flipped and the app is routing on the trimmed-union graph with the `known` ramp priced. THE
+ADOPTION IS AN OWNER OVERRIDE of the `GBL-` null, NOT evidence-backed adoption. THE NEXT ACTION
+IS THE OWNER'S AND IT IS USE, NOT WORK: the queued hand test on the live site. Nothing is
+blocked and no session owes anything.**
 
 ---
+
+> ## ✅ THE `MSW-` MAP SWITCH IS ADOPTED AND DEPLOYED, 2026-08-06. **The next action is the OWNER'S and it is USE: press the live site.** Nothing is blocked; no session owes anything.
+>
+> **The new map is LIVE at `https://musicapp.cmiller.io`.** The owner gave the Seam 3 go after
+> pressing the candidate locally, and asked for the rest of the plan including production.
+> Tasks 11 and 12 both ran. **Four defaults flipped in one commit** (`a06ab58`): the default
+> graph, the `known` fame ramp, the builder's cap rule, and the fame requirement. **The knob
+> values and the artifact's identity are owned by the execution log's Task 9 and Task 11
+> sections and by the manifest sidecar — cited, never restated here.**
+>
+> **⚠ THIS IS AN OWNER OVERRIDE OF THE `GBL-` NULL.** The null's pre-registered consequence was
+> *"production stands and Option A closes without adoption"* (margin 3 against a bar of 5). He
+> took the override knowingly on 2026-08-05, on `CAU-`'s coherence pass at his own bar, the
+> compromised instrument behind the null, and the `ULF-` filter fix. **Neither `GBL-` nor
+> `CAU-` licensed it** — `CAU-` §6 bars comparison at any strength and `GBL-` §5's run-once
+> rule still binds. **Never record this as evidence-backed adoption.**
+>
+> **⚠ THE DIRECTION OF STALENESS HAS INVERTED, and it is the thing to carry.** For three months
+> the risk was a document claiming something was adopted when it was not. It is now the
+> reverse: **"nothing is adopted" / "every default is still off" is stale wherever it describes
+> the present.** The identical sentence inside a frozen `GBL-`/`CAU-`/`ULC-` findings row is
+> **correct** — it describes what that track did. **This cannot be fixed by grep; read for
+> tense.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-msw-adoption.md`](2026-08-06-HANDOFF-msw-adoption.md);
+> [`2026-08-06-HANDOFF-msw-seam3.md`](2026-08-06-HANDOFF-msw-seam3.md) remains authoritative
+> for the Task 10 verification internals. Operational document:
+> [`plans/2026-08-05-msw-package-adoption.md`](plans/2026-08-05-msw-package-adoption.md) — now
+> **COMPLETE**, and carrying a correction block above Task 12 Step 1. Reasoning:
+> [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
+> authority record and must be read before describing this work.** Branch `msw-adoption-flip`,
+> **PR #83**.
+>
+> **What is waiting on him, and neither blocks anything:**
+>
+> - **The queued hand test on the LIVE site** (`TEST-QUEUE.md`, topmost entry). This is the
+>   first use of the new map by a person on the real address. **Expect familiar journeys to be
+>   DIFFERENT — that is the release, not a fault.**
+> - **Two local servers from the morning are still running** (ports 5173 and 8000) and are now
+>   redundant. Left up deliberately because he was still testing and asked to be told before
+>   anything is stopped.
+> - **The standing context layer grew: +333 characters unconditional** (`CLAUDE.md`'s Graph
+>   shape correction) **and +6 lines conditional** (`ml-graph-analyst.md`'s body). Neither
+>   correction was optional; the size is his call.
+>
+> **Three defects were found in the plan's own Tasks 11–12 by executing them, and one was
+> serious.** Task 12 had **no image-build step** — executing it as written would have shipped
+> the new map under the old code, leaving the ramp off in production while every check the plan
+> specifies passed. Detail in the execution log's Task 12 section; the plan now carries the
+> correction inline.
+>
+> **New deferral, logged by the owner and NOT acted on: `CLIP-1`.** A clip can be the right
+> artist and still misrepresent them — a guest credit or someone else's remix rather than their
+> own work. **Distinct from `BYP-13`** (wrong artist of the same name) and from the
+> un-listenable class (no catalogue at all). Not new, not caused by this work, not measured.
+> Condition and both named examples in the execution log's `CLIP-1` section. **Whether it is
+> worth fixing is his call.**
+>
+> **`ULF-3` is now HALF-DUE** — a shipped build has routed on a `ULF-` list (satisfied), but the
+> era-pinned probes still name the old flags (not satisfied). It stays open and must be
+> **re-tested** at the next closeout, not copied forward.
+>
+> **Unchanged and not `MSW-`:** `ULC-F3` still blocks any crawl extension; `ULC-F4` is its own
+> track.
+>
+> ---
 
 > ## ▶ SEAM 3 IS REACHED — `MSW-` TASK 10 IS COMPLETE, 2026-08-06 (night). **The next action is the OWNER'S DECISION: go / no-go on Task 11, which flips the three defaults.**
 >
@@ -83,7 +149,9 @@ adoption OVERRIDES the null on the owner's authority, which is not the same as r
 > (12 tasks, seams at 5/7/10/12). Reasoning:
 > [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
 > authority record and must be read before describing this work.** Branch
-> `msw-package-adoption-plan`, draft PR **#81**.
+> `msw-package-adoption-plan`, **PR #81 MERGED 2026-08-06** at `aafcd6e`. **Tasks 1–10 are on
+> `main` and every default is still off** — merging landed the capability, it adopted nothing.
+> **Tasks 11–12 need a NEW branch off `main`**; the old one is spent.
 >
 > ~~**⚠ One question is OPEN and is the most decision-relevant thing unmeasured:** `MSW-V4`
 > bounds what the router *adds up* and explicitly does not bound what it *chooses*. **No

@@ -84,12 +84,17 @@ class BuilderConfig:
     # docs/superpowers/findings/2026-07-22-phase2-sweep-results.md §1, §5
     # and execution log §12, §16 (two blind listening tests).
     #
-    # "trimmed_union" was ADDED 2026-08-05 with the map switch: top-j union,
-    # then a hard degree ceiling (Track B's `TUw-50-50`, cell B-S1). It is
-    # non-reciprocal, which is the whole point — see trimmed_union_cap in
-    # graph.py. Adding it does NOT reopen pre_symmetrise, which remains
-    # deleted on evidence.
-    cap_strategy: str = "mutual_knn"
+    # "trimmed_union" was ADDED 2026-08-05 with the map switch and ADOPTED as
+    # the default 2026-08-06 (MSW-): top-j union, then a hard degree ceiling
+    # (Track B's `TUw-50-50`, cell B-S1). It is non-reciprocal, which is the
+    # whole point — see trimmed_union_cap in graph.py. Adopting it does NOT
+    # reopen pre_symmetrise, which remains deleted on evidence.
+    #
+    # Flipped from "mutual_knn" in one commit with require_fame below and
+    # ApiConfig.w_known_ramp_fame_pctl. Frozen probes under builder/analysis/
+    # that reproduce pre-adoption figures are era-pinned to "mutual_knn" at
+    # their own construction sites; see builder/analysis/README.md.
+    cap_strategy: str = "trimmed_union"
     # Knobs for cap_strategy="trimmed_union"; ignored under mutual_knn, which
     # uses max_neighbours_per_artist above. Defaults are Track B's selected
     # cell (j = 50, ceiling = 50).
@@ -103,14 +108,22 @@ class BuilderConfig:
     # means under-filtering, for fame it means an artist priced by a default in
     # a cost function that routes on the price.
     #
-    # OFF until adoption, and deliberately so: until the router reads fame
-    # (ApiConfig.w_known_ramp_fame_pctl), a fame-less build is genuinely valid,
-    # and defaulting this on would assert a requirement that is not yet true.
-    # Flipped with cap_strategy and the ramp, in the commit where it becomes
-    # true. The artifact shipped by that adoption is built with it explicitly
-    # on, and the api refuses at boot if the ramp is live over a fameless
-    # artifact — two independent guards, neither relying on this default.
-    require_fame: bool = False
+    # ON as of the MSW- adoption, 2026-08-06. It was OFF until then, and
+    # deliberately so: until the router read fame
+    # (ApiConfig.w_known_ramp_fame_pctl), a fame-less build was genuinely
+    # valid and defaulting this on would have asserted a requirement that was
+    # not yet true. That requirement is now true, so this asserts it.
+    #
+    # Flipped with cap_strategy above and the ramp, in one commit. The two
+    # independent guards still stand and neither relies on this default: the
+    # shipped artifact was built with it explicitly on, and the api refuses at
+    # boot if the ramp is live over a fameless artifact.
+    #
+    # ⚠ An archive with no `fame` stage run against it now REFUSES to build.
+    # That is the point, but it means any harness replaying a pre-adoption
+    # archive must pin require_fame=False at its own construction site — the
+    # three under builder/analysis/ that call build_from_archive are pinned.
+    require_fame: bool = True
 
     # Popularity correction applied to raw co-occurrence when scoring edges,
     # in log space (see damped_strength in pipeline.py), no centring, no clamp:

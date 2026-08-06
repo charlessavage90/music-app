@@ -54,10 +54,18 @@ def _seed(archive, source) -> None:
 def _build(tmp_path):
     # drop_unlistenable pinned off: cap ranking is the subject; the synthetic
     # archive is covered by no ULF- census (factor-table-control idiom).
+    #
+    # cap_strategy pinned to mutual_knn since the MSW- adoption of 2026-08-06
+    # moved the default: max_neighbours_per_artist below is a mutual_knn knob
+    # that trimmed_union ignores entirely, so left on the new default this
+    # helper would silently stop testing the thing it names. require_fame
+    # pinned off for the usual reason — no fame stage on this archive.
     config = BuilderConfig(
         requests_per_second=1000.0,
         max_neighbours_per_artist=1,
         drop_unlistenable=False,
+        cap_strategy="mutual_knn",
+        require_fame=False,
     )
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)

@@ -58,7 +58,14 @@ class ExplodingFetcher:
 def config():
     # drop_unlistenable pinned off: these tests exercise replay mechanics on
     # synthetic archives no ULF- census covers (factor-table-control idiom).
-    return BuilderConfig(requests_per_second=1000.0, drop_unlistenable=False)
+    # require_fame pinned off for the same reason since the MSW- adoption
+    # (2026-08-06) turned it on by default: these archives have no fame stage,
+    # fame is not the subject here, and seeding it would change the very bytes
+    # the determinism test compares. The default itself is exercised in
+    # test_pipeline_fame.py.
+    return BuilderConfig(
+        requests_per_second=1000.0, drop_unlistenable=False, require_fame=False
+    )
 
 
 def _seed_archive(archive, source, mbids):
@@ -153,7 +160,10 @@ def test_build_reads_only_its_own_algorithms_subtree(tmp_path, config):
     # RC-H3, build side. The flat tree (production) and the ALG-B sub-tree
     # sit in one archive; each build must see only its own.
     algb_config = BuilderConfig(
-        requests_per_second=1000.0, algorithm=ALG_B, drop_unlistenable=False
+        requests_per_second=1000.0,
+        algorithm=ALG_B,
+        drop_unlistenable=False,
+        require_fame=False,  # same pin as the `config` fixture above
     )
     source = ListenBrainzSource(config)
     archive = LocalArchive(tmp_path / "archive")

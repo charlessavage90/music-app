@@ -15,5 +15,13 @@ def test_known_relaxes_floor_more_than_dislike():
     assert cfg.floor_relax_known > cfg.floor_relax_dislike > 0
 
 
-def test_default_graph_path_points_at_an_artifact():
-    assert ApiConfig().graph_path.endswith(".bin")
+def test_default_graph_path_points_at_the_adopted_artifact():
+    # Pins the NAME, not just the extension. Task 11 of the MSW- plan expected
+    # to "update the expected name" here and there was no name to update —
+    # this asserted only `.endswith(".bin")`, which passes for every artifact
+    # ever built and so could not have caught a stale default. Closeout checks
+    # this default is not stale; that check now has something to fail on.
+    #
+    # Adopted 2026-08-06 (MSW-), replacing graph-t15-tiebreakfix.bin.
+    cfg = ApiConfig()
+    assert cfg.graph_path.endswith("graph-msw-tu50.bin")

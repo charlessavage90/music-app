@@ -46,6 +46,18 @@ def _write_archive(archive_dir):
                 [{"artist_mbid": other, "name": name, "comment": "", "score": 10}]
             ).encode()
         )
+    # A fame stage, because since the MSW- adoption (2026-08-06) `require_fame`
+    # defaults ON and a build over an archive without one REFUSES. These tests
+    # go through `main`, and the CLI has no flag that turns the requirement off
+    # (--require-fame is store_true by design) — so the archive is made to meet
+    # the shipping requirement rather than the requirement being weakened for
+    # the test. Same idiom as the ULF- fixture list noted below.
+    fame = archive_dir / "fame"
+    fame.mkdir(parents=True)
+    for mbid in (A, B):
+        (fame / f"{mbid}.json").write_bytes(
+            json.dumps({"fame_lb_raw": 1000, "fetched": "2026-08-06"}).encode()
+        )
 
 
 # The CLI has no flag for the drop rules (deliberately — turning one off is an

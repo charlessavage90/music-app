@@ -64,7 +64,14 @@ CEILING = 1.0
 
 
 def main() -> int:
-    config = BuilderConfig()
+    # Era pin 2026-08-06 (MSW- adoption): cap_strategy flipped to
+    # "trimmed_union" there. This probe reimplements the cap directly
+    # (mutual_knn_cap below) rather than going through build_from_archive, so
+    # it was NOT on Task 11's era-pin list — but it reads the default in the
+    # assert three lines down, which would fire and stop the probe running.
+    # Pinned rather than deleted: the assert stays as the guard it was, and
+    # this line is what keeps it true.
+    config = BuilderConfig(cap_strategy="mutual_knn")
     assert config.similarity_rescale == "p99_log_clip"
     assert config.cap_strategy == "mutual_knn"
     assert config.max_neighbours_per_artist == 50
