@@ -17,6 +17,34 @@
   "source": "analysis/2026-08-05-unlistenable-class/ulc_exposure.json",
   "provenance": "read from the owning file at run time, never transcribed; the ULC- results note owns this figure in prose",
   "isolating_knob": "drop_unlistenable False -> True",
+  "one_knob_assertion": {
+   "cap_rule": {
+    "comparator": "TUw-50-50",
+    "new": {
+     "cap_strategy": "trimmed_union",
+     "union_top_j": 50,
+     "union_degree_ceiling": 50,
+     "max_neighbours_per_artist": 50
+    },
+    "held": true
+   },
+   "data_set": "ALG-B",
+   "drop_flags": {
+    "comparator": {
+     "drop_no_release_tail": true,
+     "drop_featured_credit": true
+    },
+    "new": {
+     "drop_no_release_tail": true,
+     "drop_featured_credit": true,
+     "drop_unlistenable": true
+    },
+    "differing": [
+     "drop_unlistenable"
+    ]
+   },
+   "one_knob_verified": true
+  },
   "run_state": {
    "ulc_r1_readable": false,
    "missing_slots_in_comparator_run": [

@@ -1238,3 +1238,41 @@ measurement. Recorded so the number cannot be picked up later as though it were 
 
 **Consistent with `MSW-V2B`:** the two configurations produce different journeys at depth and
 identical ones at `k = 0`, which is what a ramp that is not added at `k = 0` must do.
+
+### B2, B3 and B4 — the three checks the handoff deferred, now that the artifact is finished
+
+**Suites and scan first:** **224 builder, 254 api, both green** — the handoff's counts,
+unchanged; no shipped file was touched. Playwright 5/5. **Snyk `snyk_code_scan` over
+`builder/analysis/2026-08-05-msw-verification`: 0 issues.**
+
+**B4 found a real defect, and it was in THIS session's own work.** `msw_v2_exposure.py`'s
+docstring claimed two held-constants were verified at run time — the cap rule "read off the new
+artifact's sidecar and the `B-S1` manifest row" and the archive "asserted below via the
+node-set relationship". **Neither assertion existed in the code.** That is exactly `B4`'s
+documented shape: a docstring asserting a property the code beside it does not have.
+
+**Fixed by making the code true rather than the prose smaller**, because the guard is worth
+having: `assert_one_knob()` now reads both committed records and refuses to run unless the cap
+rule matches (`trimmed_union`, `union_top_j` 50, `union_degree_ceiling` 50,
+`max_neighbours_per_artist` 50), the comparator really is `ALG-B`, and **the drop flags differ
+in exactly `drop_unlistenable` and nothing else**. The factor table's one-knob claim is now
+checked rather than believed. The archive half was **not** mechanically checkable from this
+script, so the docstring was corrected to say so and point at the Task 9 build record instead of
+claiming an assertion that cannot exist. Figures unchanged by the fix.
+
+**B3 — both new guards were deliberately broken and both went red.**
+
+- The one-knob assertion, pointed at `E-S1` instead of `B-S1`, refuses: *"E-S1 is data_set
+  ALG-E, not ALG-B"*. It is not a check that passes on anything handed to it.
+- `MSW-V2B`'s red control was tested from the other direction: an arm compared **against
+  itself** does **not** fire it. Combined with the reversed-column run that does, this shows the
+  control discriminates rather than always firing — which is what makes the real green result
+  evidence rather than an artefact.
+
+**B2 — no orphans, and the question was asked rather than assumed.** `msw_verify.py`,
+`msw_v2_exposure.py` and `msw_v2b_journey_diff.py` have **zero inbound imports**, which matches
+the established `builder/analysis/` pattern (`mv4_frame.py` likewise). They are standalone
+run-once probes whose value is their committed JSON output; they are **finished, not
+abandoned**. The one live inbound import in the sweep is this session's own —
+`msw_v2_exposure` importing `ulc_exposure`, which is the "import rather than copy" the plan
+asked for, confirmed working.

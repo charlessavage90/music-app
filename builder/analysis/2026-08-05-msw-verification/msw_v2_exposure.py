@@ -28,12 +28,16 @@ named per row.
 
 HELD CONSTANT, AND WHY EACH IS GENUINELY CONSTANT UNDER THE INTERVENTION
 ------------------------------------------------------------------------
-- **Archive** — both are the `ALG-B` candidate archive. `ULC-F3` records that
-  crawl resume cannot extend, so no artist entered the archive between the two
-  builds. Asserted below via the node-set relationship, not assumed.
+- **Archive** — both are the `ALG-B` candidate archive. The `B-S1` manifest row's
+  `data_set` field is asserted below; the new artifact's archive provenance is
+  the execution log's Task 9 section, which is a build record and not something
+  this script can re-derive. `ULC-F3` records that crawl resume cannot extend, so
+  no artist entered the archive between the two builds.
 - **Cap rule** — `TUw-50-50` both sides: `union_top_j = 50`,
-  `union_degree_ceiling = 50`, `max_neighbours_per_artist = 50`. Read off the new
-  artifact's sidecar and the `B-S1` manifest row at run time.
+  `union_degree_ceiling = 50`, `max_neighbours_per_artist = 50`. **Asserted at run
+  time** against the new artifact's sidecar and the `B-S1` manifest row.
+- **The drop flags differ in exactly one place** — also asserted at run time, so
+  the factor table's "one knob" claim is checked rather than believed.
 - **`require_fame`** — `False` for `B-S1`, `True` for the new artifact, and this
   is the term the factor table would otherwise miss. It is genuinely constant in
   the only sense that matters here: `pipeline.py:434` reads fame **after** `keep`
@@ -118,6 +122,52 @@ def log(msg: str) -> None:
     print(msg, flush=True)
 
 
+def assert_one_knob() -> dict:
+    """The factor table's claim, CHECKED rather than believed.
+
+    Added after a `B4` prose-versus-code sweep found this module's own docstring
+    asserting held-constants that no code verified — the exact defect shape `B4`
+    exists for. The cap rule and the drop-flag difference are both mechanically
+    checkable from two committed records, so they are checked here.
+    """
+    side = json.loads((NEW.with_suffix(".bin.json")).read_text(encoding="utf-8"))
+    cfg = side["config"]
+    cells = json.loads((CRE_DIR / "cre_builds.json").read_text(encoding="utf-8"))["cells"]
+    base = [c for c in cells if c["cell"] == COMPARATOR_CELL]
+    if len(base) != 1:
+        raise SystemExit(f"expected one {COMPARATOR_CELL} manifest row, got {len(base)}")
+    base = base[0]
+
+    if base["data_set"] != "ALG-B":
+        raise SystemExit(f"{COMPARATOR_CELL} is data_set {base['data_set']}, not ALG-B")
+    # "TUw-50-50" is the manifest's name for top_j 50 / ceiling 50 under the
+    # trimmed union. The new artifact's sidecar spells the same rule out in full.
+    if base["cap_rule"] != "TUw-50-50":
+        raise SystemExit(f"{COMPARATOR_CELL} cap_rule is {base['cap_rule']}, not TUw-50-50")
+    expected = {"cap_strategy": "trimmed_union", "union_top_j": 50,
+                "union_degree_ceiling": 50, "max_neighbours_per_artist": 50}
+    drift = {k: (cfg.get(k), v) for k, v in expected.items() if cfg.get(k) != v}
+    if drift:
+        raise SystemExit(f"cap rule is NOT held constant: {drift}")
+
+    base_flags = base["drop_flags"]
+    new_flags = {k: cfg.get(k, False) for k in
+                 ("drop_no_release_tail", "drop_featured_credit", "drop_unlistenable")}
+    differing = [k for k in new_flags
+                 if bool(base_flags.get(k, False)) != bool(new_flags[k])]
+    if differing != ["drop_unlistenable"]:
+        raise SystemExit(
+            f"the factor table claims ONE knob; the drop flags differ in {differing}"
+        )
+    return {
+        "cap_rule": {"comparator": base["cap_rule"], "new": expected, "held": True},
+        "data_set": base["data_set"],
+        "drop_flags": {"comparator": base_flags, "new": new_flags,
+                       "differing": differing},
+        "one_knob_verified": True,
+    }
+
+
 def load_new() -> GraphStore:
     payload = NEW.read_bytes()
     got = hashlib.sha256(payload).hexdigest()
@@ -151,6 +201,10 @@ def main() -> int:
     pairs = [(p["a"], p["b"]) for p in approved["pairs"]]
     if len(pairs) != 8:
         raise SystemExit(f"expected the 8 GBL-AM1 pairs, got {len(pairs)}")
+
+    one_knob = assert_one_knob()
+    log("factor table verified: cap rule held, drop flags differ in exactly "
+        f"{one_knob['drop_flags']['differing']}\n")
 
     store = load_new()
     nodes = set(store.mbids)
@@ -305,6 +359,7 @@ def main() -> int:
             "provenance": ("read from the owning file at run time, never transcribed; "
                            "the ULC- results note owns this figure in prose"),
             "isolating_knob": "drop_unlistenable False -> True",
+            "one_knob_assertion": one_knob,
             "run_state": comparator_run_state,
         },
         "class_definition": {
