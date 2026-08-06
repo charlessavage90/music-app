@@ -105,7 +105,8 @@ uncorrected.
    clipped-edge and tied-top-neighbour shares to be small (figures owned by
    `builder/analysis/2026-08-06-rescale-fidelity/README.md`, §"Verdict"); the log is
    monotonic, so ordering survives. The related claim that the ramp "nearly cancels a doubling
-   of similarity" is also corrected: it is about two-thirds of one.
+   of similarity" is also corrected: it is a **fraction** of one, and that fraction is owned by
+   the same README's §"Raw → rescaled" — **read it there, do not carry it in prose.**
 
 **Nothing in the prior record authored by other sessions was overturned.** `LBS-1`, `CAU-`,
 `ULF-`, `GBL-` and the `MSW-` adoption are all untouched. The `CAU-` §6 finding that this

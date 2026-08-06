@@ -119,7 +119,8 @@ pre-registrations, the retained execution log. `docs-lint` hard checks pass.
 be argued with rather than re-derived:
 
 - B1 **lowered** B2's value. The router demonstrably still uses the similarity signal (only
-  1.45 % of edges clip; ordering survives), so a rescale change is a real risk to a live,
+  very few edges clip and ordering survives — figures owned by
+  `builder/analysis/2026-08-06-rescale-fidelity/README.md`), so a rescale change is a real risk to a live,
   working mechanism rather than a cheap win.
 - The Laura Lee case is the **one thing two probes could not explain**, and the hypothesis that
   fits it — a same-named artist's listens landing on the wrong MBID — would be `BYP-13`
