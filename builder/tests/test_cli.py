@@ -4,6 +4,7 @@ import pytest
 
 from artistpath_builder.acceptance import AcceptanceCriteria, ArtifactRejected
 from artistpath_builder.cli import main
+from artistpath_builder.config import PRODUCTION_ALGORITHM
 
 A, B = ("a" * 36, "b" * 36)
 
@@ -47,7 +48,11 @@ def _write_archive(archive_dir):
         )
 
 
-def test_build_writes_an_artifact(tmp_path):
+# The CLI has no flag for the drop rules (deliberately — turning one off is an
+# experimental control, never a shipping configuration), so the build tests
+# install a ULF- fixture list censusing their two-artist population instead.
+def test_build_writes_an_artifact(tmp_path, install_ulf_list):
+    install_ulf_list(PRODUCTION_ALGORITHM, {A, B})
     archive_dir = tmp_path / "archive"
     _write_archive(archive_dir)
     out = tmp_path / "graph.bin"
@@ -60,13 +65,16 @@ def test_build_writes_an_artifact(tmp_path):
     assert out.stat().st_size > 0
 
 
-def test_build_refuses_to_write_an_artifact_that_fails_acceptance(tmp_path):
+def test_build_refuses_to_write_an_artifact_that_fails_acceptance(
+    tmp_path, install_ulf_list
+):
     """The guard is wired into the emission point, not merely importable.
 
     The default criteria are the production ones, and a two-artist graph
     cannot satisfy them — so this asserts both that the check runs and that
     nothing is written when it fails.
     """
+    install_ulf_list(PRODUCTION_ALGORITHM, {A, B})
     archive_dir = tmp_path / "archive"
     _write_archive(archive_dir)
     out = tmp_path / "graph.bin"
@@ -76,7 +84,8 @@ def test_build_refuses_to_write_an_artifact_that_fails_acceptance(tmp_path):
     assert not out.exists()
 
 
-def test_fixture_command_round_trips(tmp_path):
+def test_fixture_command_round_trips(tmp_path, install_ulf_list):
+    install_ulf_list(PRODUCTION_ALGORITHM, {A, B})
     archive_dir = tmp_path / "archive"
     _write_archive(archive_dir)
     graph_path = tmp_path / "graph.bin"

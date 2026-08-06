@@ -33,9 +33,13 @@ PIPELINE_MIRRORS = (
 
 # Probes that CALL build_from_archive and are era-pinned to reproduce their
 # own committed figures. A new build-affecting default changes what they build.
+# cre_build.py added 2026-08-05: it postdates this list, builds through
+# defaults, and its cells carry exactly the two 2026-08-03-era drops — the
+# ULF- default would have drifted it silently, which is this guard's case.
 ERA_PINNED_CALLERS = (
     "builder/analysis/2026-07-29-algb-trial-build/grt_score.py",
     "builder/analysis/2026-07-29-trial-crawl-calibration/calibrate.py",
+    "builder/analysis/2026-08-03-cap-reevaluation/cre_build.py",
 )
 
 RECORDED_FIELDS = frozenset(
@@ -60,6 +64,11 @@ RECORDED_FIELDS = frozenset(
         # committed pre-drop output — and both era-pinned callers now pin
         # drop_featured_credit=False beside the earlier pin.
         "drop_featured_credit",
+        # Added 2026-08-05 (un-listenable filter, ULF-). Per-mirror decision:
+        # all three mirrors stay deliberately frozen, same recorded reason;
+        # all three era-pinned callers (cre_build.py newly listed) pin
+        # drop_unlistenable=False beside the earlier pins.
+        "drop_unlistenable",
         "graph_version",
     }
 )

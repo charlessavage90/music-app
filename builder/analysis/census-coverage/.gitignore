@@ -1,0 +1,8 @@
+# The coverage store is large raw collector output, regenerable from the MB
+# dumps plus the committed census scripts (the REL- template). It is ACTIVE
+# machine-local state, not a frozen record — see README.md, and do NOT let a
+# scratchpad clean take it: regenerating costs ~1 h of dump passes, which is
+# exactly the cost ULC-F2 exists to stop re-paying.
+ulf_coverage.json
+*.log
+__pycache__/

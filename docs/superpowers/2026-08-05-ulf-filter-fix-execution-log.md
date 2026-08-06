@@ -1,0 +1,211 @@
+# Execution log — the un-listenable filter fix (`ULF-`), 2026-08-05
+
+**Role: RETAINED EXECUTION LOG. Owns no figures and no status** — figures live in the
+census JSONs this track produces and in `findings/2026-08-05-unlistenable-class-results.md`
+(cited by section); status lives in `NEXT.md`. Appended per task, per the handoff-cheapness
+rule.
+
+Session: `filter-work-builder (handoff)`, branch `ulc-filter-fix` off the `ULC-` track's
+tip (draft PR #78 unmerged at branch time; branching off the tip rather than `main` because
+the tip carries the census tooling and `no_release_drop.py` state this work extends, and it
+merges cleanly in either order).
+
+Governing document: `specs/2026-08-05-unlistenable-filter-rule.md` (`ULF-`).
+
+---
+
+## §1 — Orientation and the one claim verified before building (session start)
+
+Seam handoff, clean tree, no concurrent session, zero live test-queue items. Verified
+before building: `ULC-F1`'s citation resolves — `no_release_drop.py:30-33` does argue "a
+build's algorithm is its archive identity", and `crawl.py:115` does rebuild the frontier as
+`discovered − done`. Both accurate.
+
+## §2 — Design decisions, with reasoning (pre-spec)
+
+1. **Design before mechanics, reversing the order proposed at session start.** Reading the
+   code showed the fix's shape determines the `ULC-F1`/`F2` machinery: with a `ULC-D2`
+   entry condition the featured-credit class is a strict subset of the new class, so the
+   fix merges both filters into one, which changes how many lists and manifests exist.
+   Building `F1` first would have built it twice.
+2. **The merge itself** (methodology, mine): one rule, one list per population. Licensed by
+   the subset property plus verdict carry-forward — no adopted verdict reverses, so neither
+   adoption reopens. The alternative — patching each filter's exemption clause separately —
+   leaves two rules whose classes overlap after the patch (a `ULC-D2` artist with a
+   featured credit is in both), which is a coherence debt with no offsetting benefit.
+3. **The Discogs exemption goes entirely** (methodology, mine): results §1.4's Joey Kramer
+   case shows no credit-existence test on Discogs separates listenable from not; the
+   keep-check tests that something *plays*, which is the actual question. Genuine
+   Discogs-only artists are rescued there, not at the detector.
+4. **Keep-check instrument unchanged; id-verification recorded per keep** (methodology,
+   mine): fixing the name-resolution path is `ULC-F4`, owner-deferred to its own track.
+   Recording which keeps are id-verified collects that track's measurement for free without
+   changing any criterion here. The `BYP-13` false-rescue hazard is named in ULF-2 and in
+   the weakest-link presentation to the owner rather than silently accepted.
+5. **Population identity = the archive artist set, not any built graph's** (methodology,
+   mine): the archive is what a crawl extension grows and what `build_from_archive` reads
+   (`pipeline.py`, `known = set(payloads)`). The prior censuses used built-graph
+   populations, which would false-refuse at build time because pre-prune `known` exceeds
+   any post-prune graph population.
+6. **The owner ruled the cut line (his column — it decides which real artists leave the
+   map, and the residual is a risk acceptance): `ULC-D2` as ruled.** Presented with three
+   options and costs (class sizes and clip-stage hours from `ulc_census.json`, cited);
+   stricter bars declined with Nathan East / Billie Joe Armstrong / debut-album artists as
+   the counter-cases. Keith Scott is thereby the named residual false negative, fixed in
+   ULF-6 before any lookup.
+7. **Old config flags stay functional** — era-pinned probes under `builder/analysis/`
+   construct `BuilderConfig` with them (`cre_build.py`, `calibrate.py`, `grt_score.py`).
+   Retirement deferred with a success condition in ULF-3, following the read-only-aliases
+   precedent.
+
+## §3 — Decided against, and why
+
+- **A stricter entry bar to catch Keith Scott** — declined by the owner with the trade in
+  front of him (a debut-album artist has exactly one sole substantial release group, and
+  dropping those on a failed clip lookup removes exactly the artists journeys exist to
+  surface).
+- **Re-running prior keep-checks under the new census** — would reverse adopted verdicts
+  wherever clip availability drifted since the snapshots, reopening both adoptions this
+  track has no license to touch. Mixed snapshots have explicit precedent (the `ALG-B`
+  no-release list carries 2,712 verdicts from 2026-08-01).
+- **A fresh keep-check design for the new class** — is `ULC-F4` by another name;
+  owner-deferred.
+
+## §4 — `ULC-F1` machinery (task: population identity)
+
+Built test-first: `unlistenable_drop.py` (loader with the population identity block and
+two self-consistency refusals), `drop_unlistenable: bool = True` in `BuilderConfig`, the
+pipeline stage after the two sibling drops with the `PopulationNotCensused` refusal
+checked against the **pre-drop archive population** (the censused set was recorded over
+the raw archive, so a drop-shrunken `known` would mask an extension), and 12 tests in
+`test_pipeline_unlistenable_drop.py` — including the two payload-corruption refusals,
+because a payload that cannot vouch for its population must not be trusted for a refusal
+decision.
+
+**The refusal is new semantics, and 36 existing tests met it.** Every pipeline test
+builds synthetic archives with fake MBIDs; the old drops' intersection semantics never
+refuse, the manifest check does. Resolution per file, all mechanical: files testing
+*other* features pin `drop_unlistenable=False` (the factor-table-control idiom, with a
+one-line comment each); `test_cli` — which builds through `main` and has no flag surface,
+deliberately — installs a fixture list censusing its two-artist population via a new
+shared `conftest.py` fixture.
+
+**The mirrors guard fired as designed and its obligations were discharged:** all three
+pipeline mirrors stay deliberately frozen (same recorded reason as both prior drops);
+`grt_score.py` and `calibrate.py` gain `drop_unlistenable=False` beside their earlier
+pins; and **`cre_build.py` was found to be an unlisted era-pinned caller** — it postdates
+the guard's list, builds through defaults, and once ULF- lists exist for its two
+algorithms a re-run would have applied the third drop and silently disagreed with the
+committed cell shas. Pinned, and added to `ERA_PINNED_CALLERS`. Suite: 176 passed.
+
+## §5 — Census design (tasks: `ULC-F2` + the re-census)
+
+Three scripts in `builder/analysis/2026-08-05-ulf-census/`, and the design decisions
+that are not obvious from reading them:
+
+1. **The `ULC-` census's committed output cannot say who was evaluated and found
+   negative** — `ulc_flags.json` holds class *members* only, and the universe membership
+   was never written. Re-derived here from the same five sha-verified artifacts rather
+   than trusted from a count. That gap is itself an instance of `ULC-F2`, and the
+   coverage store closes it for the future: absence of a field means unknown, never
+   false.
+2. **The artist-dump pass runs over the full archive union, not a delta**, because the
+   prior censuses read that dump and discarded what they learned (`ctc_census.py`'s
+   `artists` dict was never persisted) — there is nothing to reuse. ~2.5 min; the store
+   now keeps it.
+3. **Verdicts carry per ARTIST, not per population.** Clip resolution is an artist-level
+   fact; the 2026-08-02 census already carried 2,712 verdicts across populations this
+   way. The two prior classes are globally disjoint on release-group counts, so a
+   verdict conflict is structurally impossible — asserted anyway, `SystemExit` on
+   violation, because that disjointness is what licenses the merge.
+4. **The ULF-3 subset property is asserted against data before anything freezes**, not
+   assumed from the argument: every prior-verdict artist present in an archive must be
+   in that archive's `ULC-D2` class. Same dumps as every prior census, so containment
+   must be exact; a violation would mean a frozen list reverses an adopted verdict.
+5. **The ALG-B no-release keeps are not in any packaged payload** (the payload records a
+   count, 486, and no list); reconstructed as `tail_mbids − drop_mbids` from the two
+   committed census outputs, which is their defining construction.
+6. **Population identity is the archive artist set** (75,000 production files counted at
+   input verification), not any graph's node set — a graph-population identity would
+   false-refuse every build on pre-prune artists.
+
+## §6 — The census ran clean, and the figures of record
+
+Offline half 61 min, clip stage 81 min + one refusal settled on re-run (ULF-4 honoured;
+zero refusals at freeze). Figures live in the committed payloads and `ulf_census.json`,
+cited never restated: coverage reuse worked on first use (dump passes for an
+8,137-artist delta out of a 98,296-artist union), the ULF-3 subset property held
+exactly (no adopted verdict reverses, verified not assumed), and both lists froze with
+their population manifests. Wired as package data with pinned shas; snapshot tests
+including a shipped-data check of the prior-drop carry; suite 180 passed. Snyk scan on
+all code this session introduced or modified: **clean** — the scanner's 38 findings are
+all pre-existing, in frozen probe records (including the previously adjudicated
+`cre_sweep.py` LOW), which are not edited per the frozen-record rule.
+
+## §7 — The acceptance gate fired on the trial build, and the collision is real
+
+A real production build with all three filters live was run as verification. It was
+refused: **CROOVE, a canonical artist, is absent from the largest component.** Facts,
+each measured this session: CROOVE is the Black Desert soundtrack composer — three
+**sole** Album release groups, every one secondary-type Soundtrack, which `ULC-D2`
+excludes, so the class contains them (and already did in yesterday's census figures);
+MusicBrainz records no DSP link, no Discogs, no Deezer id, so the drop was mechanical;
+and **the app's own resolver, run once for this finding, cannot play CROOVE at all** —
+no Deezer or iTunes preview resolves by name, a real answer and not a refusal. So the
+drop is correct under the rule's purpose (a CROOVE card is a silent card today), and
+what fires is the acceptance pin — added as a **Track 2 pre-registration endpoint
+guarantee** (pair 8, `Nirvana → CROOVE`, prereg §2.3/A7), a track closed 2026-07-25.
+CROOVE is the **only** canonical name dropped, in both populations, checked
+systematically rather than assumed. **The collision blocks every future
+production-criteria build, including the owner's planned candidate map switch.**
+Resolution is the owner's — it edits the acceptance safety contract — and was put to
+him rather than resolved here; a per-artist keep-list is barred by the FCF-5 precedent
+and was not proposed.
+
+**Resolved by owner ruling, 2026-08-05: CROOVE is struck from the canonical list.**
+Presented with three options and their costs; the soundtrack carve-in was declined
+(post-result rule change after seeing whom it rescues) and leaving the conflict
+standing was declined (blocks his own ordered map switch). The strike is recorded at
+the site in `acceptance.py` with the reasoning; the §2.8 deletion detectors (group 1)
+are untouched. The trial build then passed clean: 75,000 archived → 4,126 additionally
+dropped by the ULF- filter → 60,532 artists / 756,122 edges in the largest component,
+acceptance green, and the `ULC-F1` manifest check passed silently against the real
+archive. **Nothing is adopted — the app still serves the prior artifact; the trial
+build is verification, left in `builder/scratch/` as evidence.** Suite 180 passed
+after the edit.
+
+**Provenance (D3):** `builder/scratch/graph-ulf-trial.bin`, sha256
+`4bedb74a309b64d1a8829fed4fb1bf613d8d2fe1c1e982e4d0af25f743b0549c`, built at commit
+`8de7b04` from the production archive with all three drop flags at default. It is
+gitignored like every artifact; this line is its only durable identity.
+
+## §8 — Closeout outcomes
+
+- **A3:** `ULC-F1`/`ULC-F2` struck in place in results §5 (the F2 strike names the half
+  that fires only at a real crawl extension). New deferral: retiring the two old flags
+  and lists, condition in ULF-3. Killed: nothing.
+- **A4:** `drop_unlistenable` shipped default-on from birth; the superseded flags stay
+  functional deliberately (ULF-3's condition). No knob sits unflipped.
+- **B1:** docs-lint hard checks passed (candidates are the standing frozen-prereg set);
+  `doc-auditor`, scoped to the diff, returned **zero findings** — a first for a closeout
+  here, recorded with appropriate suspicion and the coverage table in the PR thread.
+- **B2:** `unlistenable_drop.py` imported by the pipeline and tests; census scripts are
+  standalone probe code by design. No orphans.
+- **B3:** both load-bearing invariants driven red by deliberate breakage (the manifest
+  refusal skipped → 2 tests fail; the drop application removed → 2 tests fail), then
+  restored green. Not vacuous.
+- **B4/B5:** one prose defect found and fixed — `no_release_drop.py`'s docstring identity
+  claim, superseded by `ULC-F1`, now carries the supersession inline. `.claude/`, memory
+  and `CLAUDE.md` describe nothing this work changed (checked, not assumed).
+- **C1:** nothing queued, correctly — nothing the owner can press changed; the app
+  serves the same artifact as this morning.
+- **D2:** inapplicable on its own condition — no committed fixture derives from anything
+  this work changed, and no shipped artifact changed.
+- **Snyk:** clean on all code introduced or modified this session (§6).
+- **D4:** builder 180 passed, api 230 passed, frontend 107 passed — run, not asserted.
+- **D6 (standing-layer):** unconditional **45,333 characters, delta 0**; conditional
+  **2,417 lines, delta 0** — measured against
+  `C:\Users\charl\.claude\projects\C--dev-music-app\memory\`, the directory this session's
+  own context names; baselines from the `ULC-` log §8. This session edited neither layer.
+- **A5:** ports 8000 and 5173 both empty; this session started no servers and stops
+  nothing. Consistent with C1 queuing nothing.

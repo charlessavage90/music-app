@@ -36,6 +36,10 @@ from artistpath_builder.models import ArtistStats
 from artistpath_builder.deezer_ids import load_deezer_ids
 from artistpath_builder.featured_credit_drop import load_featured_credit_drop_mbids
 from artistpath_builder.no_release_drop import load_drop_mbids
+from artistpath_builder.unlistenable_drop import (
+    PopulationNotCensused,
+    load_unlistenable_list,
+)
 from artistpath_builder.sources.base import SimilaritySource
 from artistpath_builder.sources.listenbrainz import harvest_identities
 
@@ -143,6 +147,11 @@ def build_from_archive(
             payloads[mbid] = payload
 
     known = set(payloads)
+    # The archive's full artist set, captured before any drop: this is the
+    # population identity the ULF- census manifest is checked against below.
+    # Checked pre-drop deliberately — the censused set was recorded over the
+    # raw archive, so a drop-shrunken `known` would mask an extension.
+    archive_population = frozenset(known)
 
     # Names and disambiguation live in neighbour rows, not in any per-artist
     # record, so they are harvested across every response.
@@ -232,6 +241,38 @@ def build_from_archive(
             logger.info("dropped %d featured-credit artists", len(featured))
         excluded |= featured
         known -= featured
+
+    # The un-listenable filter (ULF-, 2026-08-05) drops by the same
+    # mechanism, in the same place, for the same reason: before the mass
+    # computation. It supersedes the two drops above without reversing
+    # either — both classes are strict subsets of ULC-D2's and their frozen
+    # verdicts carry — so applying all three is identical to applying this
+    # one; the older flags stay for era-pinned probes (ULF-3).
+    #
+    # NEW against the siblings, and it is ULC-F1: the list carries the
+    # censused population, and an archive containing artists the census
+    # never evaluated REFUSES to build. Algorithm-keyed selection alone is
+    # identity only while one algorithm means one crawl; a crawl extension
+    # breaks that silently, and this is the loud alternative.
+    if config.drop_unlistenable:
+        ulf = load_unlistenable_list(config.algorithm)
+        unevaluated = archive_population - ulf.censused_mbids
+        if unevaluated:
+            sample = ", ".join(sorted(unevaluated)[:3])
+            raise PopulationNotCensused(
+                f"this archive contains {len(unevaluated)} artist(s) the "
+                f"ULF- census for {config.algorithm!r} never evaluated "
+                f"(e.g. {sample}). The population grew — likely a crawl "
+                "extension — so the frozen list would silently under-filter. "
+                "Re-census the population (spec 2026-08-05, ULF-5) or build "
+                "with drop_unlistenable=False, which is an experimental "
+                "control and never a shipping configuration."
+            )
+        unlistenable = ulf.drop_mbids & known
+        if unlistenable:
+            logger.info("dropped %d un-listenable artists", len(unlistenable))
+        excluded |= unlistenable
+        known -= unlistenable
 
     # --- Pass 1: raw neighbour lists and per-artist co-occurrence mass -----
     # The mass (sum of an artist's raw scores) is the marginal used to correct

@@ -52,7 +52,13 @@ def _seed(archive, source) -> None:
 
 
 def _build(tmp_path):
-    config = BuilderConfig(requests_per_second=1000.0, max_neighbours_per_artist=1)
+    # drop_unlistenable pinned off: cap ranking is the subject; the synthetic
+    # archive is covered by no ULF- census (factor-table-control idiom).
+    config = BuilderConfig(
+        requests_per_second=1000.0,
+        max_neighbours_per_artist=1,
+        drop_unlistenable=False,
+    )
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
     _seed(archive, source)

@@ -136,16 +136,18 @@ def _arm_config(arm: str) -> tuple[BuilderConfig, object]:
     """Config plus an archive view holding ONLY this arm's crawled artists."""
     fetched = _fetched_mbids(arm)
     # Era-pinned in both arms. This probe predates the no-release drop adopted
-    # 2026-08-01 AND the featured-credit filter (2026-08-03); its GRT-P4
-    # anchors were produced without either, and Track B reproduces them. Left
-    # at the defaults, a re-run would build cleaned graphs and disagree with
-    # the record. See builder/analysis/README.md.
+    # 2026-08-01 AND the featured-credit filter (2026-08-03) AND the
+    # un-listenable filter (2026-08-05, ULF-); its GRT-P4 anchors were
+    # produced without any of them, and Track B reproduces them. Left at the
+    # defaults, a re-run would build cleaned graphs and disagree with the
+    # record. See builder/analysis/README.md.
     if arm == "AB":
         cfg = BuilderConfig(
             algorithm=ALG_B,
             target_artist_count=TARGET,
             drop_no_release_tail=False,
             drop_featured_credit=False,
+            drop_unlistenable=False,
         )
         base = LocalArchive(SCRATCH / "grt-archive-algb")
         prefix = f"similar/listenbrainz/{ALG_B}/"
@@ -155,6 +157,7 @@ def _arm_config(arm: str) -> tuple[BuilderConfig, object]:
             target_artist_count=TARGET,
             drop_no_release_tail=False,
             drop_featured_credit=False,
+            drop_unlistenable=False,
         )
         base = OverlayReader(
             LocalArchive(PRODUCTION_ARCHIVE), LocalArchive(SCRATCH / "grt-overlay-alge")

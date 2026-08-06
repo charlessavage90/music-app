@@ -31,6 +31,12 @@ The selector is `BuilderConfig.algorithm`, which already decides which archive
 sub-tree a build reads (`build_from_archive`). A build's algorithm *is* its
 archive identity, so no new config field is needed — and adding one would have
 tripped the mirrors guard for a distinction the pipeline already draws.
+**That identity claim holds only while one algorithm means one crawl** — extend
+the crawl and this lookup succeeds against a list censused over a smaller
+population (`ULC-F1`). The gap is closed by `unlistenable_drop.py`, whose
+payloads carry the censused population and whose check refuses the build; this
+module keeps the algorithm-only key deliberately, as a frozen-era rule whose
+lists predate the manifest (retirement condition: ULF-3).
 
 Both lists are **dated snapshots** and are deliberately frozen as data.
 Re-resolving the clip half at build time would break two hard rules at once:

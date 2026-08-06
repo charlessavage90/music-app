@@ -229,7 +229,13 @@ def main() -> int:
     # committed was produced without them. Left at the defaults, a re-run
     # would silently build a cleaned graph and disagree with its own record.
     # See builder/analysis/README.md.
-    config = BuilderConfig(drop_no_release_tail=False, drop_featured_credit=False)
+    config = BuilderConfig(
+        drop_no_release_tail=False,
+        drop_featured_credit=False,
+        # Era pin 2026-08-05 (ULF-): this probe's committed figures predate
+        # the un-listenable filter, same reasoning as the two pins above.
+        drop_unlistenable=False,
+    )
     archive = LocalArchive(ARCHIVE_DIR)
     source = ListenBrainzSource(config)
     prefix = f"similar/{source.name}/"

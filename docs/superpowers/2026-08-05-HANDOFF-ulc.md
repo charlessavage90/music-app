@@ -1,6 +1,11 @@
 # Handoff — the un-listenable class (`ULC-`) is measured and written up, 2026-08-05
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED 2026-08-05 (night) on next actions by
+[`2026-08-05-HANDOFF-ulf-filter-fix.md`](2026-08-05-HANDOFF-ulf-filter-fix.md)** — the filter
+work it names as the next session's remit has been done, and `ULC-F1`/`ULC-F2` in its "Owed"
+list are discharged (struck in results §5). Remains authoritative for the `ULC-` track's
+internals and its claims-not-to-revert, all of which still stand. *(Original role:)*
+**ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-05-HANDOFF-cau-scoring.md`](2026-08-05-HANDOFF-cau-scoring.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

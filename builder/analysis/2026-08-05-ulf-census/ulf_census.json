@@ -1,0 +1,37 @@
+{
+ "status": "ULF- census, offline half. Figures for the record; the frozen lists are assembled by ulf_droplist.py AFTER the clip stage completes.",
+ "governing": "specs/2026-08-05-unlistenable-filter-rule.md",
+ "population_manifest": {
+  "session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30": {
+   "count": 75000,
+   "sha256_over_sorted_mbids": "50c22f93f80b80de5f53b7bf469c05cd23591982b200ae76279011d7eb707300"
+  },
+  "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30": {
+   "count": 75000,
+   "sha256_over_sorted_mbids": "381305a73f7c6a9cba338e207d1a9ae7890709169afa3c4d953944b5fc6477be"
+  }
+ },
+ "class_per_population": {
+  "session_based_days_7500_session_300_contribution_5_threshold_10_limit_100_filter_True_skip_30": {
+   "n": 16600,
+   "rate": 0.22133333333333333
+  },
+  "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30": {
+   "n": 18557,
+   "rate": 0.24742666666666666
+  }
+ },
+ "coverage": {
+  "store_artists": 98296,
+  "d2_seeded_from_ulc": 90159,
+  "delta_dump_passed_here": 8137
+ },
+ "carry": {
+  "carried_verdict_artists_in_class_union": 18620,
+  "fresh_class_members": 9012,
+  "mechanical_no_name": 5,
+  "mechanical_no_dsp": 5228,
+  "clip_worklist": 3779
+ },
+ "elapsed_seconds": 3638.0
+}
