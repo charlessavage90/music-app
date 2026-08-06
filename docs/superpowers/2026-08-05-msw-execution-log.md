@@ -775,3 +775,89 @@ blocked rather than declined and runs at Task 10.
 name, and widening a safety bound so an adoption can proceed is risk acceptance on an
 adoption-adjacent guard. The options and their consequences are in the report to him; this
 log takes no position on which to take, and **no bound was edited.**
+
+### The owner took Option A, 2026-08-06 — recalibrate deliberately, and on the record
+
+**His decision, taken on the report above.** Recorded as his, because moving a safety bound so
+an adoption can proceed is risk acceptance and not a session's call.
+
+**The weakest link named in that report was closed BEFORE acting on it**, not left standing:
+`gbl_generate.py:136` reads `builder/scratch/cre-cells/B-S1.bin` directly (spec §2: *"V0 =
+adopted production graph + production defaults; G = B-S1 + the ramp"*), and that file's sha256
+is **byte-identical** to the `9da39621…` recorded in `cre_builds.json`. So the comparator in
+the reconciliation above is the literal artifact the owner listened to, not a near-neighbour.
+
+**What changed, and the principle.** Only the two bounds that actually failed. `median_degree`
+passed and was left alone; every famous-degree criterion — the module's actual §2.8 detector —
+is untouched.
+
+| Bound | Was (retired 75k map) | Now (candidate map) |
+|---|---|---|
+| `node_count` | 60,000 – 90,000 | **47,000 – 71,000** |
+| `edge_count` | 700,000 – 1,100,000 | **1,050,000 – 1,580,000** |
+
+**The tolerance is unchanged at about ±20 %; only the centre moved.** The old band sat at
+roughly −19 %/+21 % around the retired map's 74,193 artists and −22 %/+22 % around its 898,006
+edges. The new band holds the same fractions around the candidate map. That is what preserves
+the tripwire's sensitivity to its actual quarry — *"a build that silently loses a large share
+of the graph"* — rather than widening it into uselessness, which a union band spanning both
+maps would have done.
+
+**Checked against four known artifacts rather than centred on one**, which is the check that
+makes this a calibration and not an accommodation:
+
+| Artifact | Inside the new band? | Correct? |
+|---|---|---|
+| This build (58,838 / 1,315,684) | yes | yes |
+| **B-S1, the listened arm** (63,056 / 1,379,944) | **yes** | yes — the thing he approved must pass |
+| Retired 75k map (74,193 / 898,006) | no | yes — post-adoption it is the wrong shape |
+| Mutual k-NN on the candidate archive (58,851 / 732,832) | no | yes — wrong connection rule |
+
+### A consequence found before it bit: the frozen calibration probe
+
+`builder/analysis/2026-07-23-acceptance-bounds/check.py` imports `PRODUCTION_ACCEPTANCE` and
+**asserts it ACCEPTS the retired 75k artifact**, failing loudly otherwise. Recalibrating would
+have made that probe report *"ADOPTED was rejected but must be accepted"* — destroying the
+demonstration it exists for, which is the top-25 median-degree **separating statistic**, not
+the global bounds at all.
+
+**Era-pinned rather than followed**, using the same pattern and for the same reason as Task 11
+Step 0's three `BuilderConfig` callers: a `PRE_MSW_ACCEPTANCE = replace(PRODUCTION_ACCEPTANCE,
+node_count=…, edge_count=…)` holding the pre-adoption values. Everything else, **including the
+separating statistic itself, still tracks shipped code** — only the two era-dependent bounds
+are frozen. Its docstring was corrected in the same edit, because it claimed to run
+`PRODUCTION_ACCEPTANCE` and no longer does.
+
+**Noted, not fixed, and pre-existing:** that script's `ROOT` still points at the OneDrive path
+the tree left on 2026-07-27, so it has been non-runnable at its hardcoded location since the
+move. Out of this task's remit, and its own docstring calls it *"a record of what was
+executed, not a maintained tool"*. The era-pin makes it correct; it does not make it runnable.
+
+### Step 2 (second attempt) — the artifact exists
+
+```
+wrote ./scratch/graph-msw-tu50.bin: 58838 artists, 1315684 edges (22.4 per artist), 17.8 MB, 39s
+```
+
+**Identity — this log owns it, and the sidecar is the source (`DEP-24`; never transcribed by
+hand):**
+
+| | |
+|---|---|
+| Artifact | `builder/scratch/graph-msw-tu50.bin` |
+| **sha256** | **`43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8`** |
+| Bytes | 17,773,958 |
+| Built at | 2026-08-06T04:45:10Z, from `git_commit` `3aa61f0` |
+
+The sha was **read from the sidecar and independently recomputed from the file** — the two
+match, as do the byte counts. Recorded and committed in the **same session as the build**, per
+the standing instruction, before any further work.
+
+**Sidecar confirms every intended setting**: `cap_strategy: trimmed_union`, `require_fame:
+true`, all three drop filters `true`, `union_top_j: 50`, `union_degree_ceiling: 50`.
+
+**`fame_lb` landed, verified by loading the artifact** rather than inferred from the flag:
+58,838 entries for 58,838 nodes (full coverage), 58,746 non-null, 92 nulls, and Radiohead's
+value **455,551 — identical to its archive record**, which also confirms the Step 1 restoration
+was faithful. The null count is far below the fetch population's 5,150 because nulls are
+disproportionately the obscure artists the drop filters and largest-component prune remove.
