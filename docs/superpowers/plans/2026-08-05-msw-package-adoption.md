@@ -1,5 +1,10 @@
 # `MSW-` Map Switch: Adopting the Listened Package Implementation Plan
 
+**Role: ACTIVE — the operational document for the `MSW-` map switch.** Reasoning and
+per-task decisions live in
+[`../2026-08-05-msw-execution-log.md`](../2026-08-05-msw-execution-log.md); status lives in
+[`../NEXT.md`](../NEXT.md). This document owns no figures.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Ship `ULC-A4` — candidate data set + trimmed-union connection rule + gentle fame-currency `known` ramp — as the production map and router, with the merged un-listenable filter on.

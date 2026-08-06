@@ -160,6 +160,7 @@ Check each with `ls` or `Glob`. Do not skip any; do not answer from memory.
 - [ ] There is a stated entry point for AI agents (`CLAUDE.md`, `AGENTS.md`, or similar)
 - [ ] Every directory of documents has something explaining what the directory is for
 - [ ] Superseded documents are labelled as such
+- [ ] Documents **qualified but not corrected** by a later finding carry a forward pointer (check G2)
 - [ ] Any single authoritative source of truth is named somewhere findable
 - [ ] Where work is in progress, its current state is written down somewhere
 - [ ] Every document declares its status or role in the first ten lines
@@ -174,6 +175,37 @@ newest layer is often the stalest.
 Then check *how* B is marked: a banner only at the top of a long document is not enough,
 because a reader landing mid-document never sees it. Superseded claims need **inline**
 markers at each claim. Report top-only banners on documents over ~100 lines as a defect.
+
+### G2. Qualified, not corrected — the check every staleness rule misses
+Check G keys on *supersedes or corrects*, and so does every other rule in this file. There
+is a defect class underneath all of them: **a later finding can change how an earlier one
+should be WEIGHED without making one word of it false.**
+
+Nothing is stale, nothing is superseded, no identifier has moved, no claim has been
+overturned — so every check here, and every staleness grep anyone runs, passes it clean.
+Meanwhile a reader who correctly follows a citation to the earlier document gets an
+accurate and **incomplete** answer, with no signal that a successor exists.
+
+For each results or findings document, ask: **has anything published later changed what a
+reader should conclude from this, even though nothing in it has become false?** Typical
+shapes:
+
+- a follow-up that tested a confound the earlier instrument could not see
+- a later measurement that explains *why* an earlier result came out as it did
+- a fix that removes the defect an earlier result was partly measuring
+
+Where one exists, require a **forward pointer** in two places — a banner in the earlier
+document and a sentence on its `docs/README.md` row — and check the wording does not
+overclaim: a qualification is not a reversal, and if the later document carries barred
+reads, the pointer must repeat them rather than inviting the comparison they forbid.
+
+**Worked instance, 2026-08-05.** `findings/2026-08-04-gentle-arm-blind-listen-results.md`
+(a null) was qualified by `findings/2026-08-05-coherence-audit-results.md`, which tested
+the confound behind it. The map row for the null was exhaustive — margin, branch, all four
+qualifiers — and mentioned the follow-up nowhere; the sentence that reframed it sat on the
+`CAU-` **spec's** row, which nobody reading about the listen would open. A session reported
+the null accurately and incompletely, and only saw the rest when the owner named the second
+document. Report this shape as **HIGH**: it is invisible to every other check in this file.
 
 ### H. Structure and size
 Is each document doing one job? Is any too long to navigate? Would a reader know from the

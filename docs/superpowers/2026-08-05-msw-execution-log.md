@@ -2,7 +2,7 @@
 
 **Role: ACTIVE, retained.** Reasoning and decisions per task, appended as the work
 happens rather than reconstructed at closeout. Status lives in
-[`NEXT.md`](superpowers/NEXT.md); this document owns no status and no figures — the
+[`NEXT.md`](NEXT.md); this document owns no status and no figures — the
 artifact's figures live in its manifest sidecar, the `ULC-`/`GBL-`/`CAU-` figures in
 their own findings notes, cited and never restated.
 
