@@ -15,6 +15,8 @@ per-task decisions live in
 
 **Owner authority note (read before executing):** This adoption is an **owner override of the standing `GBL-` null** (margin 3 vs bar 5; pre-registered consequence "production stands"). Taken knowingly by the owner 2026-08-05, informed by `CAU-` (coherence meets his bar; `CAU-` §5.4). It must be recorded as an override in the execution log and PR body — never as something `GBL-` or `CAU-` licensed.
 
+> **Line numbers in this plan have drifted and are being removed rather than maintained.** Every `file:line` was verified at authoring time and this plan's own execution then moved the code — `config.py`'s `cap_strategy` went 81 → 92, `pipeline.py`'s cap seam 352 → 390. Anchor on **symbol names**, which do not move. Found by `doc-auditor` at the Seam 2 closeout; the remaining risk was Task 11, which is unexecuted and named a line that no longer holds.
+
 ## Global Constraints
 
 - Prefix every `uv` command with `UV_LINK_MODE=copy`; run from the owning package directory (`builder/` or `api/`).
@@ -228,8 +230,8 @@ git commit -m "MSW-: port trimmed_union_cap (TUw shape) into shipped builder, pi
 ### Task 2: Wire `cap_strategy="trimmed_union"` through config and pipeline
 
 **Files:**
-- Modify: `builder/src/artistpath_builder/config.py` (the `cap_strategy` field ~line 81 and its `__post_init__` validation ~line 202)
-- Modify: `builder/src/artistpath_builder/pipeline.py:352-354` (the cap seam)
+- Modify: `builder/src/artistpath_builder/config.py` (the `cap_strategy` field and its `__post_init__` validation)
+- Modify: `builder/src/artistpath_builder/pipeline.py` (the cap seam — the `mutual_knn_cap` call)
 - Test: `builder/tests/test_config.py`, `builder/tests/test_pipeline.py` (append)
 
 **Interfaces:**
@@ -295,7 +297,7 @@ and in `__post_init__` replace the `!= "mutual_knn"` check:
             )
 ```
 
-In `pipeline.py:352`, replace the direct call with the strategy dispatch:
+In `pipeline.py`, replace the `mutual_knn_cap` call with the strategy dispatch:
 
 ```python
     if config.cap_strategy == "trimmed_union":
@@ -450,7 +452,7 @@ git commit -m "MSW-: build reads fame from the archive and refuses an uncovered 
 ### Task 5: The artifact carries `fame_lb` as an additive key
 
 **Files:**
-- Modify: `builder/src/artistpath_builder/artifact.py:36-57` (`serialise`; and `deserialise` symmetrically)
+- Modify: `builder/src/artistpath_builder/artifact.py` (`serialise`; and `deserialise` symmetrically)
 - Test: `builder/tests/test_artifact.py` (append)
 
 **Interfaces:**
@@ -718,7 +720,7 @@ git commit -m "MSW-V1..V4: nine-artist filter check, post-fix exposure re-measur
 ### Task 11: Adopt — flip the three defaults, record the override, scan
 
 **Files:**
-- Modify: `api/src/artistpath_api/config.py:20-22` (`graph_path` default), `api/src/artistpath_api/config.py` (`w_known_ramp_fame_pctl` 0.0 → 0.01), `builder/src/artistpath_builder/config.py:81` (`cap_strategy` default → `"trimmed_union"`)
+- Modify: `api/src/artistpath_api/config.py` (`graph_path` default; `w_known_ramp_fame_pctl` 0.0 → 0.01), `builder/src/artistpath_builder/config.py` (`cap_strategy` default → `"trimmed_union"`, **and `require_fame` → `True`** — see Step 0)
 - Test: `api/tests/test_config.py:18` (`test_default_graph_path_points_at_an_artifact` — update the expected name)
 
 - [ ] **Step 0 (added during Task 2 execution — do not skip): era-pin the three callers that inherit the `cap_strategy` default.** `grt_score.py:145,155`, `calibrate.py:232`, `cre_build.py:389` all construct `BuilderConfig` without setting `cap_strategy`, so the flip below silently changes what each builds. Add `cap_strategy="mutual_knn"` **and `require_fame=False`** beside each one's existing drop pins, **in this same commit**. The `require_fame` half is the harder failure: none of those archives has ever had the `fame` stage run against it, so an unpinned flip makes all three **refuse to build** outright. `cre_build.py` is the sharp case: its `gate()` (line 410) compares its mirror against a live `build_from_archive` for byte-identity, so an unpinned flip makes that gate compare two different cap rules and report a mirror divergence — the wrong diagnosis for the right symptom. Rationale is recorded at the site in `test_pipeline_mirrors.py`'s `RECORDED_FIELDS`.
