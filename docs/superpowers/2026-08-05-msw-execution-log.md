@@ -1276,3 +1276,74 @@ run-once probes whose value is their committed JSON output; they are **finished,
 abandoned**. The one live inbound import in the sweep is this session's own —
 `msw_v2_exposure` importing `ulc_exposure`, which is the "import rather than copy" the plan
 asked for, confirmed working.
+
+### Closeout at Seam 3 — what the checks found
+
+**Tier: full ritual** (the work touched the graph and the cost function), at a **seam** rather
+than mid-flight, so `A2` rather than `A2-mid` and `D1` rather than `D1-mid`.
+
+**`A4` — nothing was flipped, and that is the intended state, not an omission.**
+`cap_strategy` is `mutual_knn`, `require_fame` is `False`, `w_known_ramp_fame_pctl` is `0.0`,
+and `graph_path` still names the previously adopted artifact. **Seam 3 is the owner's stop
+before any flip**, so per `A4` this work is explicitly **not closed** — it is parked at its
+designed decision point. The only place the new configuration runs is a scratchpad factory
+override behind a detached local server.
+
+**`A3` — no deferred condition came due, and each was re-tested rather than re-read.**
+`ULC-F3` (crawl resume cannot extend) is untouched — no crawl extension was attempted.
+`ULC-F4` is its own track. **`ULF-3`'s first half is satisfied by Task 12, and Task 12 has not
+run**, so it stays open and must be **re-tested** at the next closeout rather than copied
+forward — which is the failure mode `A3` names.
+
+**One new deferral, with its condition, per the standing rule.** The un-listenable census
+covers 12,456 of the artifact's 58,838 nodes; the rest cannot be assessed by `MSW-V2`.
+**Condition: before Gate 2, or immediately if the owner's hand test finds more than one card of
+the Pino Palladino shape.** It is option D in the Seam 3 report and therefore his to schedule.
+
+**`B1` — `docs-lint` hard checks PASSED; the `doc-auditor` found ONE HIGH, and it was real.**
+32 `CAND` figure-restatement candidates, every one checked against this session's diff and
+**none introduced by it** — the single candidate in a file this session touched (`0.08` in
+`TEST-QUEUE.md`) sits in a 2026-07 entry and predates the diff, verified with
+`git diff HEAD` rather than assumed.
+
+The auditor's finding: **`NEXT.md`'s entry-point pointer still called the superseded mid-flight
+handoff "the current handoff"**, contradicting the same block's own header, the new handoff's
+role line and `docs/README.md`. Fixed, and the redundant second pointer this session had added
+nearby was folded into it. **This is the defect class `B1` exists for**: the session that
+rewrote the block believed it had updated the block, and its own reading confirmed that belief.
+
+**`B5` found a defect of ABSENCE, and it is the more valuable of the two.**
+`.claude/agents/ml-graph-analyst.md:50` states that the degree-hub and ramp weights "both
+default to 0.0, so both terms are inert unless deliberately set." **True today, false the
+moment Task 11's Step 1 lands** — and that file is auto-loaded on dispatch, so a graph analyst
+would be told the ramp is inert while the app routes on it. **It was on no era-pin list**, and
+**no grep could have found it**: the sentence is not wrong yet. Added to the plan as **Task 11
+Step 0b** and to the handoff's owed list. **It was deliberately NOT corrected now**, because it
+is currently accurate. Same file and same failure shape as the 2026-07-23 incident `CLAUDE.md`
+records, which is why the sweep looked there first.
+
+**`D4` — 224 builder, 254 api, 107 frontend across 18 files, Playwright 5/5. All green, all
+run, none asserted from memory.** Snyk `snyk_code_scan` over the new analysis code: **0
+issues.**
+
+**`D2` — inapplicable on its own condition, stated rather than skipped.** This session touched
+**no shipped source and no committed fixture**; the artifact format did not change (`fame_lb`
+was already additive at Task 7). Verified from `git diff 1e5f197..HEAD --name-only`, not
+assumed.
+
+**`D3` — discharged.** The only uncommittable state is the candidate artifact and its sidecar;
+its sha256 is recorded in the Task 9 section and was **independently recomputed** this session
+before any conclusion was drawn from it, and again inside every script that loads it.
+
+**`D6` — zero delta, in both layers. 45,569 characters unconditional / 2,459 lines
+conditional** — **byte-identical to the Task 8 and Task 10 measurements**, making this the
+fourth independent reproduction of those figures. This session touched no standing-layer file.
+**`CLAUDE.md` still needs no correction** and its "Graph shape" section becomes false only at
+Task 11, where its correction is already listed. **Nothing is owed to the owner on this.**
+
+**`A5`/`C1`, decided together.** `C1` queued an entry — there **is** something to press, and
+the owner said he will press it before starting the next session. Two **detached** servers were
+therefore left up (ports 8000 and 5173, PIDs in the handoff and the queue entry), both started
+after HEAD so they serve the work being tested, and both verified answering before being
+believed. The session-owned background shells they replaced were stopped first, so nothing can
+wake a retired session.

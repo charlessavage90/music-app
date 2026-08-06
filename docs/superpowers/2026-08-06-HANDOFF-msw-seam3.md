@@ -133,6 +133,19 @@ the processes returns everything to today's behaviour.
   section **in the same commit**. The fourth sibling,
   `builder/analysis/2026-07-23-acceptance-bounds/check.py`, is already era-pinned and needs
   nothing.
+- **⚠ A FIFTH Task 11 obligation, found by this closeout's `B5` sweep and NOT previously on
+  any list.** `.claude/agents/ml-graph-analyst.md:50` states that *"`w_degree_hub` and
+  `w_known_ramp_fame_pctl` both default to 0.0, so both terms are inert unless deliberately
+  set."* **That is true today and becomes FALSE at Task 11**, when the ramp default goes to
+  `0.01`. It must be corrected **in the same commit as the flip**, alongside `CLAUDE.md`'s
+  Graph shape section. Left alone, a dispatched graph analyst is auto-loaded a definition
+  telling it the ramp is inert while the app is routing on it.
+
+  **Do not correct it now — it is currently accurate**, and this is a scheduled obligation
+  rather than a live defect. Noting it here because it is a **defect of absence**: nothing in
+  Task 11's own step list mentions this file, and no grep for a stale identifier can find a
+  sentence that has not yet become wrong. **This is the same file, and the same failure shape,
+  as the 2026-07-23 incident recorded in `CLAUDE.md`** — which is why the sweep looked at it.
 - **Unchanged and not `MSW-`:** `ULC-F3` (crawl resume cannot extend) still blocks any crawl
   extension; `ULC-F4` (keep-check name resolution) is its own track. **`ULF-3`'s first half is
   satisfied by Task 12, which has not run** — so it stays open and must be **re-tested** at the

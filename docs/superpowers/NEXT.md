@@ -72,9 +72,11 @@ adoption OVERRIDES the null on the owner's authority, which is not the same as r
 > knobs rather than one.
 >
 > **Entry point:** the current handoff
-> [`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md);
+> [`2026-08-06-HANDOFF-msw-seam3.md`](2026-08-06-HANDOFF-msw-seam3.md);
+> [`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md)
+> remains authoritative for Task 9's internals and the Option A recalibration,
 > [`2026-08-06-HANDOFF-msw-task8-midflight.md`](2026-08-06-HANDOFF-msw-task8-midflight.md)
-> remains authoritative for Task 8's internals and
+> for Task 8's, and
 > [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md) for Seam 2's.
 > Operational document:
 > [`plans/2026-08-05-msw-package-adoption.md`](plans/2026-08-05-msw-package-adoption.md)
@@ -121,11 +123,9 @@ adoption OVERRIDES the null on the owner's authority, which is not the same as r
 > (`ULC-A2` has never been listened to or audited; the package is what `GBL-` heard and
 > `CAU-` judged); and adopt-and-live-with-it rather than spending a fresh listen.
 >
-> **Entry point for Task 10's own internals:** the execution log's
-> **"Task 10 continued — the successor session"** section. The previous handoff
-> [`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md)
-> remains authoritative for Task 9's internals and the Option A recalibration, and its
-> "Claims that must NOT be reverted" list **still stands in full**.
+> **Task 10's own reasoning** is the execution log's **"Task 10 continued — the successor
+> session"** section. **Every earlier handoff's "Claims that must NOT be reverted" list still
+> stands in full** — none has been retired by this work.
 >
 > **Still owed and named:** Task 11 Step 0 must era-pin `cap_strategy` **and** `require_fame`
 > in three analysis callers, or they silently change what they build and one refuses outright;
