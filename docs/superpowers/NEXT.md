@@ -12,13 +12,68 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (later), when A CLIP COVER-ART DEFECT WAS FIXED, DEPLOYED AND
-MERGED, and a serious DEPLOY defect (`DEP-34`) was found and documented. PR #85 IS MERGED at
-`fee46e2`, so production and `main` now agree. THE NEXT ACTION IS THE OWNER'S AND IT IS USE,
-NOT WORK: the queued hand test. `DEP-34-FIX` is open and is his. Nothing is blocked and no
-session owes anything.**
+**Last updated: 2026-08-06 (night), when AN INVESTIGATION INTO THE OWNER'S CO-CREDIT
+HYPOTHESIS RETURNED TWO NULLS and was written up. **Nothing was adopted, no default changed,
+and no shipped code was touched.** THE NEXT ACTION IS STILL THE OWNER'S AND IT IS STILL USE,
+NOT WORK: the two queued hand tests, unchanged and still outstanding. `DEP-34-FIX` is open and
+is his. Nothing is blocked. **The investigating session retired mid-flight on the degradation
+tell — read its handoff's enumerations before building on it.****
 
 ---
+
+> ## ✅ THE CO-CREDIT INVESTIGATION IS COMPLETE, 2026-08-06 (night) — TWO NULLS, NOTHING ADOPTED. **The next action is the OWNER'S and it is USE: the two queued hand tests, unchanged.**
+>
+> **The owner observed that novel artists arriving at depth looked disproportionately like solo
+> acts of known bands, and hypothesised that ListenBrainz over-weights similarity between
+> artists who record together.** His worked case: Laura Lee, a Khruangbin member with no solo
+> releases, at rank 2 on Leon Bridges' list. **The mechanism is confirmed at the source**
+> (`LBS-1`: a session pairs listens whose artists *and* credits differ, weight 1 main / 0.25
+> featured) **and is confirmed to operate** — but **two independent probes decline to attribute
+> the class he saw to it.**
+>
+> - **`CCR-` — `null`, and INSTRUMENT-LIMITED.** `inc=artist-rels` carries band membership, not
+>   shared recording credits, so **Laura Lee scores `False` on it**. **Read as: untested at
+>   population scale, and equally unsupported. Both halves travel together** — do not read it
+>   as evidence against the hypothesis.
+> - **`RCC-` — `null`, and the instrument WAS validated** (it finds the Khruangbin/Leon Bridges
+>   collaboration). `RCC-C2` came back `general` with **the sign opposite to the prediction**:
+>   ordinary obscure artists show *more* co-credit at rank 1 than the class does.
+> - **B1 (the `p99_log_clip` rescale) — descriptive, no pre-registration by design.** It
+>   **corrected an overstatement made earlier in the same session**: clipping is minor, ordering
+>   survives, and **a rescale change is NOT a low-risk win.**
+>
+> **Figures are owned by the three `builder/analysis/2026-08-06-*` directories — cited, never
+> restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-cocredit-investigation.md`](2026-08-06-HANDOFF-cocredit-investigation.md).
+> Reasoning: [`2026-08-06-cocredit-investigation-execution-log.md`](2026-08-06-cocredit-investigation-execution-log.md).
+> Governing documents: `specs/2026-08-06-cocredit-relationship-preregistration.md` and
+> `specs/2026-08-06-shared-recording-preregistration.md` (the latter carrying `RCC-AM1`).
+> Branch `cocredit-relationship-probe`, **draft PR #87 — NOT merged.**
+>
+> **⚠ THIS SESSION RETIRED MID-FLIGHT on the degradation tell**, after four file-or-design
+> selection errors — **all four caught and corrected in-session, none reaching a committed
+> document uncorrected.** Its handoff is written in the enumerated form: **read its lists
+> rather than trusting its judgement**, and note it carries figures that exist in **no** other
+> file and will be lost if not re-run.
+>
+> **Open, each with a success condition in the execution log §6:** the **Laura Lee puzzle**
+> (her 214 edge is not a co-credit artefact under the validated definition — a same-name MBID
+> collision is live but weakened; **if it holds it is `BYP-13` reaching the graph's edges
+> rather than a clip**), **B2** (does an alternative rescale change which artists appear —
+> testable without a rebuild, needs a pre-registration), and the **duplicate-artwork detector**
+> for `CLIP-1`.
+>
+> **⚠ CLOSED, and not to be re-litigated: widening the drop rule.** The owner ruled it out
+> 2026-08-06 — **he does not think Andrew VanWyngarden or Zach Condon should have been dropped**
+> — and two nulls now point the same way. `ULF-` already catches the clearest cases.
+>
+> **`ULF-3` was RE-TESTED at this closeout rather than copied forward, per the instruction
+> below: it remains HALF-DUE, unchanged.** Era-pinned probes still name the old flags and all
+> three flags are still live in `BuilderConfig`.
+>
+> ---
 
 > ## ✅ THE CLIP COVER-ART DEFECT IS FIXED, LIVE AND MERGED, 2026-08-06 (later). **The next action is the OWNER'S and it is USE: the queued hand test.** `DEP-34-FIX` is open and is his.
 >
