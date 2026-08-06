@@ -12,27 +12,54 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (later), when `MSW-` TASK 9 COMPLETED AND TASK 10 REACHED 2 OF 4 —
-retired MID-FLIGHT, Seam 3 NOT reached. THE CANDIDATE ARTIFACT NOW EXISTS (sha256 `43dd82bb…`;
-the execution log's Task 9 section owns its identity and counts) and is built deterministically. NOTHING IS ADOPTED — the app serves the same
-artifact it did yesterday, and every new default is off. The next action is WORK: `MSW-V2`,
-then `MSW-V3`, then the Seam 3 report. NOTHING IS WAITING ON THE OWNER until Seam 3. The
-`GBL-` null and the `CAU-` result both stand; this adoption OVERRIDES the null on the owner's
-authority, which is not the same as reopening it.**
+**Last updated: 2026-08-06 (night), when `MSW-` TASK 10 COMPLETED AND SEAM 3 WAS REACHED. THE
+CANDIDATE ARTIFACT EXISTS (sha256 `43dd82bb…`; the execution log's Task 9 section owns its
+identity and counts), is built deterministically, and has now been VERIFIED — it boots, serves,
+presses and plays. NOTHING IS ADOPTED — the app's committed defaults are unchanged and every
+new default is still off. THE NEXT ACTION IS THE OWNER'S AND IT IS A DECISION, NOT WORK: Seam 3
+is his stop before any default flips. The `GBL-` null and the `CAU-` result both stand; this
+adoption OVERRIDES the null on the owner's authority, which is not the same as reopening it.**
 
 ---
 
-> ## ▶ THE `MSW-` MAP SWITCH IS IN FLIGHT, TASK 9 DONE AND TASK 10 AT 2 OF 4, 2026-08-06. **The next action is WORK, not a decision: `MSW-V2`, then `MSW-V3`, then report Seam 3.**
+> ## ▶ SEAM 3 IS REACHED — `MSW-` TASK 10 IS COMPLETE, 2026-08-06 (night). **The next action is the OWNER'S DECISION: go / no-go on Task 11, which flips the three defaults.**
 >
-> **⚠ Retired MID-FLIGHT, not at a seam** (seams are 5/7/10/12; Task 10 is half done, so Seam 3
-> is NOT reached). The successor owes `session-start`'s **cold-read check**: state back what you
-> believe the situation is before acting.
+> **Seam 3 is an OWNER STOP.** No default flips, and Task 11 does not begin, without his go.
 >
-> **Why it stopped here, and it is not the degradation tell.** The plan requires that *"the
-> Seam-3 session must not be the session that reads the verification results and decides"* —
-> and the retiring session **built the artifact and recalibrated the acceptance bound that let
-> it through**. It is the wrong session to verify its own work. It said so and recommended
-> handing over.
+> **A local server is left running for him**, deliberately: `localhost:8000` serving the
+> candidate artifact **with the ramp at `0.01`** — i.e. exactly what Task 11 would ship. It runs
+> off a **scratchpad factory override, not a committed default**; `config.py` is untouched and
+> killing the process returns everything to today's behaviour. `npm run dev` in `frontend/` to
+> press it.
+>
+> **What Task 10 added, and the figures are owned by the execution log's Task 10 section and by
+> `builder/analysis/2026-08-05-msw-verification/` — cited, never restated.**
+>
+> - **`MSW-V1`** (do the artists the coherence audit could not listen to survive?) — **passed**;
+>   the stop branch does not fire.
+> - **`MSW-V2`** (how often does a journey's middle land on someone with nothing of their own to
+>   play?) — measured, **one knob against `ULC-A4`, now machine-asserted**. A **report row, not
+>   a gate**: no threshold was pre-registered and **none was supplied**. ⚠ Its paired median
+>   reads zero while its mean moves by double digits, because the class is **concentrated in a
+>   minority of journeys** — `ULC-R1`'s recorded statistic defect reproducing, deliberately not
+>   patched. **Two journeys got worse** and are named.
+> - **`MSW-V2B`** (do the journeys you see actually differ from the ones that were listened to?)
+>   — **NOT in the plan; folded in on the owner's authorisation**, and it closes the question the
+>   previous handoff called the most decision-relevant thing unmeasured. **They do differ, at
+>   depth**: on the broader famous-pair set nearly half the journeys change at twenty presses —
+>   **but on the eight pairs actually listened to, almost none do.** Both halves travel together.
+>   Green anchor and red control both behaved.
+> - **`MSW-V3`** (does the app work?) — **yes, on both configurations.** `/health` matches the
+>   sidecar, Playwright 5/5, three pairs pressed to ten with the interior changing at every
+>   step, **every card resolved a clip and no card was dead**. ⚠ **Audibility is NOT confirmed
+>   and is not claimed** — the session cannot listen.
+> - **`B2`/`B3`/`B4`** — run, and **`B4` found a real defect in the verifying session's own
+>   work** (a docstring asserting held-constants no code checked). Fixed by making the code true.
+>
+> **⚠ The one thing that survived verification and is the sharpest input to his decision:** an
+> artist in the un-listenable class reached a real card, and **his clip resolved perfectly** — to
+> a charity-ensemble track that is not his own work. **"The clip resolves" is not "this artist
+> has something of their own", and no automated check here can tell them apart.**
 >
 > **Task 9 outcome:** the candidate artifact is built, deterministic across two runs, and its
 > identity is committed. **A third defect was found in the plan's own commands** — the build
@@ -56,10 +83,12 @@ authority, which is not the same as reopening it.**
 > authority record and must be read before describing this work.** Branch
 > `msw-package-adoption-plan`, draft PR **#81**.
 >
-> **⚠ One question is OPEN and is the most decision-relevant thing unmeasured:** `MSW-V4`
+> ~~**⚠ One question is OPEN and is the most decision-relevant thing unmeasured:** `MSW-V4`
 > bounds what the router *adds up* and explicitly does not bound what it *chooses*. **No
-> journey has been run on this artifact.** Whether the deviation actually changes any path is
-> unknown; the handoff names the measurement that would settle it and why it was not run.
+> journey has been run on this artifact.**~~ *(**CLOSED 2026-08-06 (night) by `MSW-V2B`**, run
+> on the owner's authorisation. Journeys have now been run — programmatically and by hand — and
+> the deviation **does** change routes at depth on the broader pair set while barely touching
+> the listened pairs. Figures in the execution log's Task 10 section.)*
 >
 > **⚠ THIS ADOPTION IS AN OWNER OVERRIDE OF THE `GBL-` NULL.** The null's pre-registered
 > consequence was *"production stands and Option A closes without adoption"* (margin 3
@@ -91,6 +120,12 @@ authority, which is not the same as reopening it.**
 > **Owner decisions taken, not to be re-litigated:** the full package over data-only
 > (`ULC-A2` has never been listened to or audited; the package is what `GBL-` heard and
 > `CAU-` judged); and adopt-and-live-with-it rather than spending a fresh listen.
+>
+> **Entry point for Task 10's own internals:** the execution log's
+> **"Task 10 continued — the successor session"** section. The previous handoff
+> [`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md)
+> remains authoritative for Task 9's internals and the Option A recalibration, and its
+> "Claims that must NOT be reverted" list **still stands in full**.
 >
 > **Still owed and named:** Task 11 Step 0 must era-pin `cap_strategy` **and** `require_fame`
 > in three analysis callers, or they silently change what they build and one refuses outright;
