@@ -98,8 +98,10 @@ reproduces exactly what you saw however long afterwards.
 > **Rollback, if something is badly wrong:** the previous map is still in the bucket untouched
 > and redeploying it is one command. Ask and it takes a few minutes.
 >
-> **Two local servers from this morning are still running** (ports 5173 and 8000) and are now
-> redundant. Nothing owns them; say the word and they stop.
+> **Nothing is running on your machine.** The two local servers from the morning were stopped
+> and both ports are free — you asked to use the live app from here on, since **it records what
+> you do to CloudWatch and a local server does not.** So this test leaves a trace that can be
+> looked at afterwards, which the local one never did.
 >
 > Detail: `docs/superpowers/2026-08-05-msw-execution-log.md`, the Task 11 and 12 sections.
 

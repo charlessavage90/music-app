@@ -1641,3 +1641,16 @@ configuration and the queued test needs nothing local. A5's table says close the
 deliberately left running anyway**, because the owner said he was still testing tracks and asked
 to be told before anything is shut down; his instruction outranks the default. Ports, PIDs and
 the one-line disposition are in the closing message, the handoff and the queue entry.
+
+**`A5` closed out properly, after the fact.** The two detached servers were **stopped on the
+owner's instruction** shortly after the closeout report, and both ports verified free. His
+reason is worth recording because it generalises past this session: **he is testing against the
+live app from here on, since production writes telemetry to CloudWatch (`DEP-2`) and a local dev
+server writes it to a terminal nobody reads.** A hand test on the live site therefore leaves a
+durable, queryable trace of what he actually pressed; the same test locally leaves nothing. The
+log groups carry 90-day retention, confirmed at Task 12.
+
+**Consequence for future closeouts, and it sharpens A5's table rather than contradicting it:**
+since the Gate 2 cutover, "relaunch a local server for the queued test" is close to always the
+wrong default — the live site is both more representative *and* the only one of the two that
+records the run.

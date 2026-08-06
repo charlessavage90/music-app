@@ -93,13 +93,13 @@ assumed; the deploy was authorised explicitly after being blocked once.
 
 ## Anything in flight
 
-**Two detached servers from the morning's hand test are still running** — ports 5173 (pid
-199836) and 8000 (pid 249336), both started 08:24. **They are now redundant**: production serves
-the same configuration, and the queued test targets the live site. They were **deliberately not
-stopped** because the owner said he was still testing tracks and asked to be told before
-anything was shut down. **Nothing owns them; stopping the two PIDs is all that is required.**
+**Nothing.** No servers, no background jobs, no half-written directories, no uncommitted files.
 
-**Nothing else.** No background jobs, no half-written directories, no uncommitted files.
+The two detached servers from the morning's hand test (ports 5173 and 8000) were **stopped
+2026-08-06 on the owner's instruction**, and both ports verified free. He is testing against the
+live site from here on — **deliberately, because production writes telemetry to CloudWatch and a
+local server writes it to a terminal nobody reads.** That is a reason to prefer the live app for
+future hand tests generally, not just this one.
 
 ## Owed, and by whom
 
