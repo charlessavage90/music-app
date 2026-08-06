@@ -359,3 +359,180 @@ NOT bumped for them"*), which is **growth and the owner's**. The case is that a 
 session adding a ninth key and bumping `FORMAT_VERSION` breaks every existing artifact
 including the served one, and nothing else in the standing layer says so. Declining it is a
 one-line deletion and the correction stands without it.
+
+---
+
+## Task 8 — fame coverage over the candidate archive
+
+### Step 1: the snapshot is backed up, and the backup was read back
+
+`fi_union_snapshot.json` (~93k artists, gitignored, single-machine) and its manifest are
+copied to:
+
+```
+s3://artistpathstack-artifactbucket7410c9ef-b7lbgisct423/backups/analysis/2026-08-02-fame-instrument/
+```
+
+**Verified by round-trip, not by the upload exiting 0** — both objects were downloaded back
+and `sha256sum`'d. The snapshot returns `d9d6d5d3…62ae8`, identical to the local file **and**
+to the `sha256` its manifest sidecar records, so the backup is confirmed against the
+instrument's own identity rather than against itself.
+
+**Why this bucket, and the risk that had to be excluded.** The plan says "the S3 archive
+bucket (or any second machine)". No archive bucket exists — `--s3-bucket` is a parameter the
+crawler takes, not a provisioned resource — and no second machine is reachable from here. The
+only bucket available is the **live production artifact bucket**, which holds exactly the
+served graph and its sidecar at its root. So the backup goes under a `backups/analysis/`
+prefix that cannot be mistaken for a served artifact, and two properties were checked before
+writing rather than assumed: **versioning is Enabled** (an overwrite is recoverable) and
+**there is no lifecycle configuration** (nothing expires the backup silently). A future
+session must not read this prefix as artifact provenance — nothing here is servable.
+
+### Deviation from the plan's Step 2 invocation: `--seed-date`
+
+The plan's command omits `--seed-date`, which defaults to `"unknown"` and is passed straight
+through as the `fetched` stamp on every seeded record (`cli.py`, `cmd_fame` → `seed_fame`).
+Step 4 of this same task requires the snapshot date as part of the artifact's identity, and
+Task 9 Step 3 puts it in the manifest sidecar — so the command as written defeats its own
+next step, for all ~93k seeded records. Corrected here by passing
+`--seed-date 2026-08-02`, taken from the manifest sidecar's `fetch_date`, never from memory.
+
+**Also recorded because it changes how the run is supervised:** the plan presents Step 2
+(seed) and Step 3 (fetch the remainder) as two commands, but `cmd_fame` seeds and then falls
+straight through into `fetch_fame` in a single invocation. There is no natural pause between
+"the seed landed" and "an hour of network fetching starts". The stage is resumable and
+idempotent, so this costs nothing — but the seed report must be read *from the run's own
+output*, not from a separate step that does not exist.
+
+### ⚠ The plan's Task 8 command omits `--algorithm`, and would have fetched nothing while exiting 0
+
+**This is the defect worth carrying forward from this task.** The candidate archive is an
+**ALG-B** tree, and `similar_prefix` partitions by algorithm: production (ALG-E) keeps the
+flat `similar/listenbrainz/` layout, every other algorithm gets a sub-tree. `--algorithm`
+defaults to `None`, so `_config` leaves `BuilderConfig.algorithm` at `PRODUCTION_ALGORITHM` —
+and `archive_artists` then strips the *production* prefix, finds `/` still in the remainder,
+and skips every key.
+
+Measured directly against the real archive rather than argued:
+
+| `fame` invocation | prefix enumerated | artists found |
+|---|---|---|
+| **as the plan writes it** (no `--algorithm`) | `similar/listenbrainz/` | **0** |
+| with `--algorithm` ALG-B | `similar/listenbrainz/session_…contribution_3…/` | **75,000** |
+
+**The failure is silent, and the plan's own completion check cannot catch it.** `cmd_fame`'s
+guard is `report.total != len(mbids)`; with an empty population that is `0 != 0`, so the
+command **seeds ~93k records, fetches nothing, and returns 0**. Step 3's stated criterion —
+*"`fetched + skipped` must equal the archive population"* — is satisfied **vacuously** by
+`0 == 0`. Task 9's build would eventually have failed on an empty graph, but only after
+Task 8 had reported done, with the cause several steps behind it.
+
+**This is the same class the Seam 2 closeout named** — a green check that cannot go red — and
+it is the third instance on this branch. The transferable form: *a completion criterion
+phrased as an equality between two derived counts passes trivially when both are zero.* Such
+a check needs a non-zero floor, not just equality. Corrected here by passing `--algorithm`
+explicitly; the run's own report is recorded below against the known population of 75,000,
+which is the non-zero floor the plan's check lacked.
+
+### Steps 2–4: the run, 2026-08-05
+
+One invocation, from `builder/`, exit 0:
+
+```bash
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u -m artistpath_builder.cli fame \
+  --archive-dir ./scratch/grt-archive-algb \
+  --algorithm session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30 \
+  --seed ./analysis/2026-08-02-fame-instrument/fi_union_snapshot.json \
+  --seed-sha d9d6d5d340a81875dd795067d6332a40d813ebfb5b8258048290c27f34662ae8 \
+  --seed-date 2026-08-02
+```
+
+| Quantity | Value |
+|---|---|
+| Archive population (ALG-B tree) | **75,000** |
+| Seeded from the snapshot | 93,067 imported, 0 already present |
+| Already recorded when the fetch began | 70,011 |
+| **Fetched fresh** | **4,989**, of which **1,066 null** |
+| Reported total | **75,000** — equals the population |
+| Fetch elapsed | 8 s |
+
+**Fetch date for the fresh records: 2026-08-05. Seeded records carry 2026-08-02**, from the
+snapshot manifest's `fetch_date`. Both belong in the Task 9 manifest sidecar — the fame data
+behind this artifact is **two-dated, not one**, which the plan's single-date phrasing does
+not anticipate.
+
+**The completion criterion is met non-vacuously**: 70,011 + 4,989 = 75,000, against a
+population independently measured at 75,000 before the run.
+
+**The archive now holds more fame records than it has artists — deliberately, and it is
+harmless.** The snapshot spans the union of two *pruned artifact* populations, so 23,056 of
+its records are for artists absent from this archive. `load_fame` reads by mbid for the
+graph's nodes; surplus records are never consulted. Recorded so a future reader does not read
+98,056 records over a 75,000-artist archive as a coverage defect.
+
+**The fresh 4,989 are far more likely to be null than the seeded population** — 1,066 of
+4,989 against the snapshot's own null share (`fi_union_snapshot.manifest.json`, cited not
+restated). Expected direction rather than a surprise: these are exactly the artists *both*
+prior artifacts pruned away, so they are the obscure tail. It matters downstream because
+nulls price at percentile 0.0 — maximal obscurity — so this tail arrives already at the floor
+of the ramp's range. A property Task 10 should expect rather than discover.
+
+**A cosmetic defect found and deliberately not fixed:** `fame seed: …` is logged twice, from
+`seed_fame` and again from `cmd_fame`'s call site. One execution, two lines — the counts
+reconcile exactly, so nothing ran twice. Task 8 is specified *no source changes*, and a
+gratuitous edit to shipped code outside a task's remit is its own defect class; deferred as a
+one-line deletion for whichever task next touches `cli.py`.
+
+### Coverage measured directly, not inferred from the run's report
+
+`load_fame` was called over the full enumerated population and **returned without raising**,
+which is the same call `build` makes — so Task 4's `require_fame` refusal will pass on this
+archive for the reason it is supposed to, not by luck:
+
+| Quantity | Value |
+|---|---|
+| Fame records resolved | **75,000 of 75,000** |
+| Null (measured zero listeners) | **5,150** (6.9 %) |
+| Non-null | 69,850 |
+| Non-null min / median / max listeners | 1 / 1,668 / 455,551 |
+
+The 5,150 nulls decompose as 1,066 from this run's fresh fetches and the remainder from the
+seed — consistent with the fresh tail being the obscurer population, as above.
+
+### D6 — accepted by the owner, 2026-08-05
+
+The ~86 characters of standing-layer growth (the APG1 additive-key clause) are **accepted**.
+`CLAUDE.md` stands as committed; nothing to edit. The Seam 2 D6 row is discharged.
+
+### Verification of Tasks 1–7, at the owner's instruction
+
+He asked that the previous session's work be checked as this one proceeds rather than taken
+on the handoff's word. Everything below was **exercised, not read** — and where a check could
+have passed vacuously, it was perturbed until it went red.
+
+| Claim (handoff) | How it was tested | Result |
+|---|---|---|
+| 220 builder + 254 api tests pass | Both suites run | **Confirmed**, exact counts |
+| Five knobs at their old defaults | Read from `config.py` on both sides | `mutual_knn`, `require_fame=False`, `w_known_ramp_fame_pctl=0.0`, `graph_path` still the adopted artifact |
+| Percentile frame is the artifact's own population; nulls excluded and priced 0.0 | `fame_percentiles` called on crafted inputs, **then perturbed** | **Confirmed and load-bearing** |
+| `trimmed_union` port pinned to the frozen Track B implementation | Ran the pin, **then perturbed the ceiling** | **Confirmed non-vacuous** |
+| Additive key leaves existing artifacts valid | Loaded the **real served artifact** under the new code | **Confirmed** |
+| Boot refuses when the ramp is live over a fameless artifact | Called the real `create_app` both ways | **Confirmed, seen red and green** |
+
+**The two perturbations worth keeping.** (1) With eight nulls beside two measured artists,
+excluding nulls from the frame keeps the lesser-listened artist at 0.0; *counting* them would
+put it at 0.89 — near-famous. The exclusion is not a tidiness choice, it is the difference
+between "obscure" and "famous" for a poorly-covered population. (2) The frozen-cap pin
+compares 258 edges over 60 nodes and diverges to 202 when the ceiling is moved by one, so it
+is a real comparison rather than two empty results agreeing.
+
+**A correction against this session's own work, recorded because the record should show it:**
+the boot-refusal check was first written by re-stating the guard's condition inline instead of
+calling `create_app`. That proves the condition is true, not that the code acts on it — it
+would have passed identically had the `raise` been deleted. Redone against the real factory.
+Same defect class as the vacuous tests this branch keeps finding, committed by the session
+looking for them.
+
+**Nothing found wrong in Tasks 1–7.** The two defects this session found are both in the
+**plan's Task 8 text** (the missing `--algorithm`, the missing `--seed-date`), not in the
+previous session's code.

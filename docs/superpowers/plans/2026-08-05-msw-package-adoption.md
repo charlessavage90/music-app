@@ -635,24 +635,38 @@ git commit -m "MSW-: fame-currency known ramp behind w_known_ramp_fame_pctl (def
 **Files:**
 - No source changes. Operational: run the Task 3 stage against `builder/scratch/grt-archive-algb/` (75,000 responses, verified on disk — `ULC-` results §4.1).
 
-- [ ] **Step 1: Back up the frozen snapshot first.** `fi_union_snapshot.json` is gitignored, single-machine, and this plan's cheapest-to-lose dependency (the `MSW-` weakest link named in planning). Copy it and its manifest to the S3 archive bucket (or any second machine) and record where in the execution log, before anything else runs.
+**✅ TASK 8 EXECUTED 2026-08-05.** Counts, provenance and two corrections to the commands
+below are in the execution log's Task 8 section. The commands here are corrected in place so
+they are runnable as written; the record of what was wrong lives in the log.
 
-- [ ] **Step 2: Seed.** From `builder/`:
+- [x] **Step 1: Back up the frozen snapshot first.** `fi_union_snapshot.json` is gitignored, single-machine, and this plan's cheapest-to-lose dependency (the `MSW-` weakest link named in planning). Copy it and its manifest to the S3 archive bucket (or any second machine) and record where in the execution log, before anything else runs. *(Done: `s3://…artifactbucket…/backups/analysis/2026-08-02-fame-instrument/`, verified by round-trip checksum. No archive bucket exists — see the log for why the artifact bucket under a `backups/` prefix was the choice.)*
+
+- [x] **Step 2: Seed.** From `builder/`:
 
 ```bash
-UV_LINK_MODE=copy uv run python -u -m artistpath_builder.cli fame \
+UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u -m artistpath_builder.cli fame \
   --archive-dir ./scratch/grt-archive-algb \
+  --algorithm session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30 \
   --seed ./analysis/2026-08-02-fame-instrument/fi_union_snapshot.json \
-  --seed-sha d9d6d5d340a81875dd795067d6332a40d813ebfb5b8258048290c27f34662ae8
+  --seed-sha d9d6d5d340a81875dd795067d6332a40d813ebfb5b8258048290c27f34662ae8 \
+  --seed-date 2026-08-02
 ```
 
-(sha from `fi_union_snapshot.manifest.json` — copied from the sidecar, never transcribed from memory; adjust the invocation to the real CLI name from Task 3.)
+(sha from `fi_union_snapshot.manifest.json` — copied from the sidecar, never transcribed from memory.)
 
-- [ ] **Step 3: Fetch the remainder.** Same command; the report says how many were fetched fresh (expected: the archive population minus snapshot overlap — the snapshot covers the union of the two *pruned artifact* populations, so archive artists that were dropped or pruned in the 2026-07-30 build will fetch fresh). Run with `python -u`; expect minutes-to-an-hour at `requests_per_second`. **A stored null is a result** — the report's `fetched + skipped` must equal the archive population at the end.
+> **⚠ Two flags were added in execution and neither is optional.**
+> **`--algorithm`**: the candidate archive is an ALG-B tree and `similar_prefix` partitions by
+> algorithm. Without it the stage enumerates the *production* prefix, finds **0 artists**,
+> fetches nothing, and **exits 0** — and Step 3's own criterion below passes vacuously as
+> `0 = 0`. Measured: 0 artists without the flag, 75,000 with it.
+> **`--seed-date`**: defaults to `"unknown"` and is stamped on every seeded record, which
+> defeats Step 4's requirement that the snapshot date is part of the artifact's identity.
 
-- [ ] **Step 4: Record** counts, date, and elapsed time in the execution log. This snapshot date is part of the artifact's identity — it goes in the manifest sidecar notes in Task 9.
+- [x] **Step 3: Fetch the remainder.** Same command; the report says how many were fetched fresh (expected: the archive population minus snapshot overlap — the snapshot covers the union of the two *pruned artifact* populations, so archive artists that were dropped or pruned in the 2026-07-30 build will fetch fresh). Run with `python -u`; expect minutes-to-an-hour at `requests_per_second`. **A stored null is a result** — the report's `fetched + skipped` must equal the archive population at the end. **⚠ That equality is not sufficient on its own** (see above): check it against a population count established *independently*, before the run. *(Result: 70,011 + 4,989 = 75,000, against 75,000 measured beforehand. 8 s.)*
 
-- [ ] **Step 5: Commit** (execution log only — the archive is gitignored).
+- [x] **Step 4: Record** counts, date, and elapsed time in the execution log. This snapshot date is part of the artifact's identity — it goes in the manifest sidecar notes in Task 9. **⚠ There are TWO dates**, not one: seeded records carry 2026-08-02, freshly fetched records 2026-08-05. Both belong in the sidecar.
+
+- [x] **Step 5: Commit** (execution log only — the archive is gitignored).
 
 ```bash
 git add docs/superpowers/2026-08-05-msw-execution-log.md
@@ -673,9 +687,17 @@ git commit -m "MSW-: fame coverage complete over the candidate archive; counts a
 ```bash
 UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u -m artistpath_builder.cli build \
   --archive-dir ./scratch/grt-archive-algb \
+  --algorithm session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30 \
   --out ./scratch/graph-msw-tu50.bin \
   --cap-strategy trimmed_union
 ```
+
+> **⚠ `--algorithm` was added to this command in execution and is NOT optional.** The
+> candidate archive is an ALG-B tree and `similar_prefix` partitions by algorithm; without the
+> flag the build reads the *production* prefix, finds **0 artists**, and builds an empty graph.
+> Task 8's command had the same omission and would have fetched nothing **while exiting 0** —
+> measured, with the reasoning, in the execution log's Task 8 section. Acceptance would catch
+> an empty graph here, but several steps after the cause.
 
 If the CLI has no `--cap-strategy` flag, add one in this task (mirroring how `cmd_build` already surfaces config fields; one flag, one test asserting it reaches `BuilderConfig`). `drop_unlistenable` is already the default (`config.py:192`). Acceptance checks (`acceptance.py`) run as part of build — a failure stops this plan and goes to the owner; do not route around it.
 
