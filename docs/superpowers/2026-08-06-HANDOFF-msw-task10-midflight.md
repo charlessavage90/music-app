@@ -1,6 +1,10 @@
 # Handoff — the `MSW-` map switch, Task 10 half done (mid-flight), 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions** by
+[`2026-08-06-HANDOFF-msw-seam3.md`](2026-08-06-HANDOFF-msw-seam3.md), which is the CURRENT
+handoff. **This note remains authoritative for Task 9's internals** — the three plan defects,
+the `MSW-G3` firing, the acceptance rejection and the owner's Option A recalibration — **and
+its "Claims that must NOT be reverted" list still stands in full.** Supersedes
 [`2026-08-06-HANDOFF-msw-task8-midflight.md`](2026-08-06-HANDOFF-msw-task8-midflight.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
