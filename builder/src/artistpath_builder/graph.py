@@ -37,6 +37,16 @@ class Graph:
     # with three positional arguments by two FROZEN probes, and an empty list
     # makes `serialise` omit the key so their artifacts stay byte-identical.
     deezer_ids: list[str] = field(default_factory=list)
+    # ListenBrainz total_user_count per node, or None where the instrument
+    # measured no listeners. NOT popularity: `pop_raw` above is score-weighted
+    # in-degree computed from this archive, while this is an external listener
+    # count — log §2.11/§2.12 record what reading one as the other has cost.
+    # A null is a measured absence and is never a floor value (FAM-AM1.8).
+    #
+    # DEFAULTED for the same two reasons as `deezer_ids`: frozen probes call
+    # `build_graph` positionally, and an empty list makes `serialise` omit the
+    # key so their artifacts stay byte-identical.
+    fame_lb_raw: list[int | None] = field(default_factory=list)
 
     @property
     def popularity(self) -> list[float]:
@@ -125,6 +135,109 @@ def mutual_knn_cap(
     return result
 
 
+class _desc:
+    """Sort helper: reverses string order so ties drop the HIGHEST MBID first.
+
+    Deliberately the opposite of every other tie-break in this module. It
+    orders *deletions*, not selections, so dropping the highest MBID first
+    leaves the lowest standing — which is the same artist mutual k-NN's
+    lowest-MBID selection would have kept.
+    """
+
+    __slots__ = ("value",)
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+    def __lt__(self, other: "_desc") -> bool:
+        return self.value > other.value
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, _desc) and self.value == other.value
+
+
+def trimmed_union_cap(
+    adjacency: Adjacency,
+    top_j: int,
+    degree_ceiling: int,
+    *,
+    ranking: Adjacency,
+) -> Adjacency:
+    """Keep edge (u,v) if EITHER endpoint ranks the other top-j, then trim to a
+    hard degree ceiling by deleting the weakest edges.
+
+    ADOPTED 2026-08-05 with the map switch, as Track B's `TUw-50-50` (cell
+    `B-S1`). It is deliberately non-reciprocal where `mutual_knn_cap` is
+    reciprocal: an artist whose own list is crowded with famous neighbours
+    keeps the obscure neighbour that ranks *them* highly, which mutual k-NN
+    discards. That is the supply difference the whole cap re-evaluation was
+    about — see docs/superpowers/findings/2026-07-30-track-b-cap-selection-results.md.
+
+    The union alone bounds NOTHING — a famous artist appears in unboundedly
+    many neighbour lists, which is exactly the defect that killed the legacy
+    pre-symmetrise cap (configured 50, observed max degree 11,243). The
+    ceiling is what bounds it, and it deletes WHOLE EDGES rather than
+    truncating one endpoint's row, because per-node truncation breaks symmetry
+    again.
+
+    BOUND: degree <= degree_ceiling by construction. A single pass suffices —
+    nodes are processed in a fixed order and deletion only ever lowers a
+    degree, so a node brought to the ceiling cannot later rise above it.
+
+    Determinism (design §9): top-j ties break on lowest MBID; nodes are
+    processed by (-degree, mbid); deletions are ordered by symmetric pair
+    strength with ties dropping the highest MBID first. The surviving set is a
+    function of the input alone.
+
+    `ranking` supplies the values used to order both the top-j selection and
+    the trim, for the same reason `mutual_knn_cap` takes one: the p99 clip
+    ties the top ~1% of emitted scores at exactly 1.0, so selecting on them
+    would let the MBID tie-break decide which neighbours a saturated artist
+    kept (Phase 1 log §2.8). Emitted scores still come from `adjacency`.
+
+    Equivalence to the frozen rule that was actually selected is pinned by
+    test_graph.py::test_trimmed_union_cap_matches_the_frozen_track_b_implementation.
+    """
+    if set(ranking) != set(adjacency):
+        raise ValueError(
+            "ranking must cover exactly the nodes of adjacency; top-j "
+            "selection over a different node set is undefined"
+        )
+
+    keep: dict[str, set[str]] = {}
+    for node, edges in adjacency.items():
+        ranked = sorted(edges, key=lambda dst: (-ranking[node][dst], dst))
+        keep[node] = set(ranked[:top_j])
+
+    # Union, then symmetrise on the stronger score, giving an undirected graph.
+    unioned: Adjacency = {node: {} for node in adjacency}
+    for node, edges in adjacency.items():
+        for dst, score in edges.items():
+            if dst in keep[node] or node in keep.get(dst, set()):
+                unioned[node][dst] = score
+    result = symmetrise(unioned)
+
+    # Symmetric strength for the trim order: the pair's stronger unclipped
+    # ranking value, so both endpoints agree on which edge is weakest.
+    def strength(u: str, v: str) -> float:
+        return max(
+            ranking.get(u, {}).get(v, float("-inf")),
+            ranking.get(v, {}).get(u, float("-inf")),
+        )
+
+    for node in sorted(result, key=lambda n: (-len(result[n]), n)):
+        excess = len(result[node]) - degree_ceiling
+        if excess <= 0:
+            continue
+        doomed = sorted(result[node], key=lambda v: (strength(node, v), _desc(v)))[
+            :excess
+        ]
+        for victim in doomed:
+            result[node].pop(victim, None)
+            result[victim].pop(node, None)
+    return result
+
+
 def largest_component(adjacency: Adjacency) -> set[str]:
     """Return the biggest connected component.
 
@@ -176,6 +289,7 @@ def build_graph(
     stats: list[ArtistStats],
     edge_type: EdgeType,
     deezer_ids: dict[str, str] | None = None,
+    fame_lb_raw: dict[str, int | None] | None = None,
 ) -> Graph:
     """Assemble CSR arrays. IDs are assigned in sorted-MBID order.
 
@@ -183,6 +297,12 @@ def build_graph(
     `measure_headroom.py:151` are frozen and call this with three positional
     arguments. Omitting it yields an empty list, which `serialise` then omits
     from the metadata blob, so those probes' artifacts stay byte-identical.
+    `fame_lb_raw` is keyword-optional for exactly the same reasons.
+
+    `fame_lb_raw` maps mbid -> listener count or None. It is passed as a dict
+    and indexed here rather than pre-ordered by the caller, because node ids
+    are assigned in this function: a caller building the list itself would be
+    re-deriving `sorted(...)` and could silently disagree with it.
     """
     stats_by_mbid = {record.mbid: record for record in stats}
     mbids = sorted(set(adjacency) & set(stats_by_mbid))
@@ -223,4 +343,10 @@ def build_graph(
         edge_types=np.full(len(neighbours), int(edge_type), dtype=np.uint8),
         # Indexed by node id, like every other metadata list above.
         deezer_ids=[deezer_ids.get(m, "") for m in mbids] if deezer_ids else [],
+        # `is not None` rather than truthiness: a fame dict whose values are
+        # all None is a legitimate measurement (nobody listened to anyone in
+        # this population) and must not be silently discarded as "empty".
+        fame_lb_raw=(
+            [fame_lb_raw.get(m) for m in mbids] if fame_lb_raw is not None else []
+        ),
     )

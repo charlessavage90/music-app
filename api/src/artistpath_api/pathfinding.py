@@ -106,6 +106,31 @@ def find_path(
         store, [e.node for e in excludes if e.reason == DISLIKE], cfg
     )
 
+    # The fame ramp is a constant multiplier for the whole request: the number
+    # of `known` presses is known before the search starts, so it is not part
+    # of the search state.
+    #
+    # `ramp_fame_on` skips the term entirely when it would be zero. Note what
+    # that IS and IS NOT worth: at k = 0 the multiplier is exactly 0.0, so
+    # `cost += 0.0 * fame` is numerically identical to not adding it, and the
+    # guard buys nothing arithmetically — measured, not assumed (a perturbation
+    # applying the term unconditionally left every test green). The mirror's
+    # "never as + 0.0" rule served byte-identity of serialised probe output,
+    # which is not this file's problem. What the guard does buy here is the
+    # skipped array lookup per edge, and a single place where "is the ramp
+    # live" is decided.
+    #
+    # MSW-G2 — no path moves at k = 0 — is therefore a guard against the ramp
+    # FIRING when it should not (a miscounted k, a stray max(1, ...)), and it
+    # discriminates: that perturbation turns three tests red.
+    #
+    # The store check is a second line behind create_app's boot refusal: a
+    # fameless artifact reaching here routes as it always did rather than
+    # raising mid-request in front of a user.
+    n_known = sum(1 for e in excludes if e.reason == KNOWN)
+    ramp_fame = cfg.w_known_ramp_fame_pctl * n_known
+    ramp_fame_on = ramp_fame != 0.0 and store.fame_lb_pctl is not None
+
     dist = {source: 0.0}
     prev: dict[int, int] = {}
     pq: list[tuple[float, int]] = [(0.0, source)]
@@ -135,6 +160,14 @@ def find_path(
                 + cfg.w_degree_hub * float(store.degree_hub_penalty[v])
                 + cfg.w_hop
             )
+            # Fame-currency `known` ramp, semantics preserved from the CRE-
+            # mirror the blind listen and coherence audit actually ran on:
+            # relaxation targets only, and the TARGET ENDPOINT IS EXEMPT
+            # because the final hop into B is on every complete path exactly
+            # once — tolling it adds the same constant to every alternative and
+            # distorts nothing. Added only when live; see ramp_fame_on above.
+            if ramp_fame_on and v != target:
+                cost += ramp_fame * float(store.fame_lb_pctl[v])
             nd = d + cost
             if nd < dist.get(v, float("inf")):
                 dist[v] = nd

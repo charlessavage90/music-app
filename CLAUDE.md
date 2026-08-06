@@ -177,7 +177,8 @@ come from user exclusions, never from missing graph structure.
 ### APG1 artifact
 One little-endian binary file: header (`APG1` magic, version, N, E, metadata length) +
 CSR arrays (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob
-(mbids, names, disambiguations, popularity, `deezer_ids` — the last may be absent).
+(mbids, names, disambiguations, popularity, `deezer_ids`, `fame_lb` — the last two are
+additive keys, omitted when empty, and the version is NOT bumped for them).
 Loaded once into numpy typed arrays at API
 boot; path queries touch no database and no network. `edge_types` is written but unused
 in alpha (all edges behavioural). Versioned in S3 in production — **never a database**.
@@ -189,9 +190,11 @@ here**; two copies of them went stale once already:
 ```
 w_sim·(1−similarity) + w_jump·|Δpop_raw| + w_floor·max(0, floor_raw−pop_raw_v)
   + w_avoid·avoidance + w_degree_hub·degree_hub_penalty + w_hop
+  + w_known_ramp_fame_pctl·k·fame_lb_pctl_v        [v ≠ target only]
 ```
-Both popularity terms are in **raw** currency, and `floor_raw` is the only
-depth-graduated device in the function — everything else is static per request.
+Both popularity terms are in **raw** currency; the ramp is in **fame percentile**, a third
+currency. **Two depth-graduated devices**, `floor_raw` and the ramp (`k` = `known` presses,
+fixed per request) — everything else is static per request.
 Every path request is a **full regeneration** — no previous path is reused.
 
 The **two-signal bypass** shapes the reroll differently per signal:

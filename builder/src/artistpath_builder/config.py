@@ -43,6 +43,11 @@ PERMITTED_ALGORITHMS = (
     "_threshold_15_limit_50_skip_30",
 )
 
+# How the neighbour cap is applied. Both are implemented in graph.py; the
+# deleted "pre_symmetrise" is deliberately absent rather than listed-and-
+# rejected, so that adding a strategy here can never reinstate it by accident.
+PERMITTED_CAP_STRATEGIES = ("mutual_knn", "trimmed_union")
+
 
 @dataclass(frozen=True, slots=True)
 class BuilderConfig:
@@ -78,7 +83,34 @@ class BuilderConfig:
     # Phase 2 spec §8 risk 4. Evidence:
     # docs/superpowers/findings/2026-07-22-phase2-sweep-results.md §1, §5
     # and execution log §12, §16 (two blind listening tests).
+    #
+    # "trimmed_union" was ADDED 2026-08-05 with the map switch: top-j union,
+    # then a hard degree ceiling (Track B's `TUw-50-50`, cell B-S1). It is
+    # non-reciprocal, which is the whole point — see trimmed_union_cap in
+    # graph.py. Adding it does NOT reopen pre_symmetrise, which remains
+    # deleted on evidence.
     cap_strategy: str = "mutual_knn"
+    # Knobs for cap_strategy="trimmed_union"; ignored under mutual_knn, which
+    # uses max_neighbours_per_artist above. Defaults are Track B's selected
+    # cell (j = 50, ceiling = 50).
+    union_top_j: int = 50
+    union_degree_ceiling: int = 50
+
+    # Require a fame record for every artist in the built graph, and REFUSE to
+    # build otherwise (MSW-G3). This is the ULC-F1 shape applied to a new
+    # quantity: a lookup that quietly succeeds over a smaller population than
+    # the one being built leaves new artists unevaluated — for a drop list that
+    # means under-filtering, for fame it means an artist priced by a default in
+    # a cost function that routes on the price.
+    #
+    # OFF until adoption, and deliberately so: until the router reads fame
+    # (ApiConfig.w_known_ramp_fame_pctl), a fame-less build is genuinely valid,
+    # and defaulting this on would assert a requirement that is not yet true.
+    # Flipped with cap_strategy and the ramp, in the commit where it becomes
+    # true. The artifact shipped by that adoption is built with it explicitly
+    # on, and the api refuses at boot if the ramp is live over a fameless
+    # artifact — two independent guards, neither relying on this default.
+    require_fame: bool = False
 
     # Popularity correction applied to raw co-occurrence when scoring edges,
     # in log space (see damped_strength in pipeline.py), no centring, no clamp:
@@ -199,11 +231,13 @@ class BuilderConfig:
         # permanently supported mode. Named explicitly so a config carried over
         # from a Phase 2 sweep script fails loudly instead of silently
         # selecting a strategy whose code has been removed.
-        if self.cap_strategy != "mutual_knn":
+        if self.cap_strategy not in PERMITTED_CAP_STRATEGIES:
             raise ValueError(
                 f"cap_strategy={self.cap_strategy!r} is not supported. "
-                "'pre_symmetrise' lost Phase 2 and was removed; 'mutual_knn' "
-                "is the only strategy. See execution log §16."
+                f"Permitted: {', '.join(sorted(PERMITTED_CAP_STRATEGIES))}. "
+                "'pre_symmetrise' lost Phase 2 and was removed — it is not "
+                "reinstated by the addition of 'trimmed_union'. See execution "
+                "log §16."
             )
         if self.similarity_rescale != "p99_log_clip":
             raise ValueError(

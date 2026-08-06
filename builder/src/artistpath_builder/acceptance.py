@@ -137,8 +137,40 @@ PRODUCTION_ACCEPTANCE = AcceptanceCriteria(
     # silently loses a large share of the graph — and are deliberately
     # generous. Update them deliberately when the crawl target changes;
     # a new crawl is a new artifact identity, not a bound to widen quietly.
-    node_count=(60_000, 90_000),
-    edge_count=(700_000, 1_100_000),
+    #
+    # RECALIBRATED 2026-08-06 for the `MSW-` map switch, on the owner's
+    # decision after the Task 9 build was refused by the previous values.
+    # This is the "update deliberately" case the paragraph above names, not a
+    # quiet widening: the tolerance is UNCHANGED at about ±20 %, and only the
+    # centre moved, from the retired 75k map (74,193 / 898,006) to the
+    # candidate one. Both previous values were breached for reasons that are
+    # properties of the adopted package, each traced to exactly one knob:
+    #
+    #   - the edge ceiling was never compatible with `trimmed_union`, which
+    #     is non-reciprocal by construction and so roughly doubles E. The
+    #     LISTENED arm (`CRE-` cell B-S1) recorded MORE edges than the build
+    #     this refused — it would have been rejected by the old ceiling too.
+    #     Mutual k-NN on the same archive gives 732,832, inside the old band.
+    #   - the node floor is crossed by `drop_unlistenable` ALONE, which did
+    #     not exist when B-S1 was built and is the change being adopted for.
+    #
+    # Both figures are owned by the MSW- execution log's Task 9 section and
+    # `builder/analysis/2026-08-03-cap-reevaluation/cre_builds.json`.
+    #
+    # Sensitivity is preserved, and the band is checked against four known
+    # artifacts rather than centred on one: the new build and the listened
+    # arm B-S1 both sit INSIDE it, while the retired 75k map and a mutual-kNN
+    # build of the candidate archive both fall OUTSIDE — which is correct
+    # after adoption, and is why the frozen calibration probe at
+    # builder/analysis/2026-07-23-acceptance-bounds/check.py is era-pinned to
+    # the pre-adoption values rather than following this change.
+    #
+    # PREVIOUS (retired 75k map): node_count=(60_000, 90_000),
+    #                             edge_count=(700_000, 1_100_000)
+    node_count=(47_000, 71_000),
+    edge_count=(1_050_000, 1_580_000),
+    # UNCHANGED and deliberately so: median degree PASSED on the candidate
+    # build. Only the two bounds that actually failed were moved.
     median_degree=(5.0, 25.0),
 )
 

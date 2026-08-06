@@ -47,6 +47,20 @@ def create_app(
     resolver: ClipResolver,
     cfg: ApiConfig,
 ) -> FastAPI:
+    # Same philosophy as the graph sha check in build_default_app: a
+    # misconfigured artifact refuses to START rather than serving quietly
+    # wrong journeys. With the ramp switched on and no fame in the artifact,
+    # every "know them already" press would silently do less than it says —
+    # the failure would look like a weak feature, not a broken one, which is
+    # exactly the kind that survives to production.
+    if cfg.w_known_ramp_fame_pctl != 0.0 and store.fame_lb_pctl is None:
+        raise ValueError(
+            "w_known_ramp_fame_pctl is "
+            f"{cfg.w_known_ramp_fame_pctl} but this artifact carries no "
+            "fame data (no `fame_lb` key). Build it with the `fame` stage run "
+            "over its archive, or set the ramp to 0.0."
+        )
+
     app = FastAPI(title="Artist Path API")
 
     app.add_middleware(

@@ -1,0 +1,2086 @@
+{
+ "check": "MSW-V2B",
+ "status": "diagnostic; NOT in the plan — folded in on the owner's authorisation 2026-08-06; adopts nothing, changes no default, touches no shipped code",
+ "no_branch_assigned": true,
+ "why_no_branch": "no threshold was pre-registered for this measurement — it did not exist when the plan was written. It is a bound for the Seam 3 report, not a gate.",
+ "plain_question": "if we ship the new map, do the journeys you actually see differ from the ones the listening test judged?",
+ "artifact": {
+  "name": "graph-msw-tu50.bin",
+  "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+  "nodes": 58838
+ },
+ "knob": {
+  "varied": "the fame_lb_pctl column the known-ramp reads",
+  "shipped": "the new artifact's own population (graph_store.fame_percentiles)",
+  "cre": "cre_common.Ruler device column, framed on the retired adopted artifact",
+  "held": "same store, edges, scores, pop_raw, degree_hub_penalty, ApiConfig, exclusions and pairs; one array swapped via dataclasses.replace"
+ },
+ "ramp": {
+  "w_known_ramp_fame_pctl": 0.01,
+  "shipped_default": 0.0,
+  "hypothetical": "at the shipped default of 0.0 the ramp is not added at all and the two arms are identical BY CONSTRUCTION. This run presupposes Task 11's flip and is not evidence about what the app does today."
+ },
+ "press_sequence": {
+  "derived_from": "the SHIPPED arm only, then handed identically to both",
+  "rule": "highest fame first, ties by pop_raw desc then lowest MBID",
+  "why_held": "letting each arm pick its own victim would be a second knob; holding it also matches the app, where the USER picks"
+ },
+ "controls": {
+  "green_anchor_k0": {
+   "expectation": "identical on every pair — the ramp is not added at k=0",
+   "result": "PASS"
+  },
+  "red_reversed_column": {
+   "what": "one arm's fame column replaced by 1 - p",
+   "differing_by_depth": {
+    "0": 0,
+    "1": 5,
+    "10": 8,
+    "20": 8
+   },
+   "result": "PASS"
+  }
+ },
+ "results": {
+  "GBL-AM1": {
+   "per_depth": {
+    "0": {
+     "compared": 8,
+     "differing": 0,
+     "pairs_differing": [],
+     "fraction_differing": 0.0
+    },
+    "1": {
+     "compared": 8,
+     "differing": 0,
+     "pairs_differing": [],
+     "fraction_differing": 0.0
+    },
+    "10": {
+     "compared": 8,
+     "differing": 1,
+     "pairs_differing": [
+      "Young Gun Silver Fox -> Eloy"
+     ],
+     "fraction_differing": 0.125
+    },
+    "20": {
+     "compared": 8,
+     "differing": 0,
+     "pairs_differing": [],
+     "fraction_differing": 0.0
+    }
+   },
+   "per_pair": {
+    "Wishbone Ash -> Pink Floyd": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Yes",
+       "Robert Fripp"
+      ],
+      "cre_interior": [
+       "Yes",
+       "Robert Fripp"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Jethro Tull",
+       "Genesis"
+      ],
+      "cre_interior": [
+       "Jethro Tull",
+       "Genesis"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Free",
+       "Cream",
+       "Kelly Groucutt"
+      ],
+      "cre_interior": [
+       "Free",
+       "Cream",
+       "Kelly Groucutt"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ten Years After",
+       "Felix Pappalardi",
+       "The Kinks",
+       "Tony Visconti"
+      ],
+      "cre_interior": [
+       "Ten Years After",
+       "Felix Pappalardi",
+       "The Kinks",
+       "Tony Visconti"
+      ]
+     }
+    },
+    "Young Gun Silver Fox -> Eloy": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Charlie Hall",
+       "Real Estate",
+       "Deerhunter",
+       "Pavement",
+       "The Velvet Underground",
+       "David Bowie",
+       "Robert Fripp",
+       "Camel"
+      ],
+      "cre_interior": [
+       "Charlie Hall",
+       "Real Estate",
+       "Deerhunter",
+       "Pavement",
+       "The Velvet Underground",
+       "David Bowie",
+       "Robert Fripp",
+       "Camel"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Charlie Hall",
+       "Real Estate",
+       "Yo La Tengo",
+       "Lou Reed",
+       "Robert Fripp",
+       "Camel"
+      ],
+      "cre_interior": [
+       "Charlie Hall",
+       "Real Estate",
+       "Yo La Tengo",
+       "Lou Reed",
+       "Robert Fripp",
+       "Camel"
+      ]
+     },
+     "10": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Charlie Hall",
+       "Future Islands",
+       "Romy",
+       "Disclosure",
+       "Nathan East",
+       "Genesis",
+       "Yes"
+      ],
+      "cre_interior": [
+       "Charlie Hall",
+       "Real Estate",
+       "Grizzly Bear",
+       "Thom Yorke",
+       "Muse",
+       "Steven Wilson",
+       "Camel"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Charlie Hall",
+       "Future Islands",
+       "Caribou",
+       "Thom Yorke",
+       "Muse",
+       "Steven Wilson",
+       "Camel"
+      ],
+      "cre_interior": [
+       "Charlie Hall",
+       "Future Islands",
+       "Caribou",
+       "Thom Yorke",
+       "Muse",
+       "Steven Wilson",
+       "Camel"
+      ]
+     }
+    },
+    "The Killers -> The Beatles": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "forced",
+      "cre_kind": "forced",
+      "shipped_interior": [
+       "The Cure"
+      ],
+      "cre_interior": [
+       "The Cure"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "forced",
+      "cre_kind": "forced",
+      "shipped_interior": [
+       "Brian May"
+      ],
+      "cre_interior": [
+       "Brian May"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "forced",
+      "cre_kind": "forced",
+      "shipped_interior": [
+       "Black Francis"
+      ],
+      "cre_interior": [
+       "Black Francis"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "forced",
+      "cre_kind": "forced",
+      "shipped_interior": [
+       "Franz Ferdinand",
+       "Johnny Marr"
+      ],
+      "cre_interior": [
+       "Franz Ferdinand",
+       "Johnny Marr"
+      ]
+     }
+    },
+    "The War On Drugs -> Sigur Rós": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Kurt Vile",
+       "Deerhunter",
+       "Grizzly Bear"
+      ],
+      "cre_interior": [
+       "Kurt Vile",
+       "Deerhunter",
+       "Grizzly Bear"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Kurt Vile",
+       "Yo La Tengo"
+      ],
+      "cre_interior": [
+       "Kurt Vile",
+       "Yo La Tengo"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Atlas Sound",
+       "Animal Collective"
+      ],
+      "cre_interior": [
+       "Atlas Sound",
+       "Animal Collective"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Youth Lagoon",
+       "Washed Out",
+       "Caribou",
+       "Four Tet"
+      ],
+      "cre_interior": [
+       "Youth Lagoon",
+       "Washed Out",
+       "Caribou",
+       "Four Tet"
+      ]
+     }
+    },
+    "The Decemberists -> Yellowcard": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Flaming Lips",
+       "Matt Sharp",
+       "The Offspring"
+      ],
+      "cre_interior": [
+       "The Flaming Lips",
+       "Matt Sharp",
+       "The Offspring"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Flaming Lips",
+       "Roger Joseph Manning Jr."
+      ],
+      "cre_interior": [
+       "The Flaming Lips",
+       "Roger Joseph Manning Jr."
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Spoon",
+       "CAKE",
+       "Roger Joseph Manning Jr."
+      ],
+      "cre_interior": [
+       "Spoon",
+       "CAKE",
+       "Roger Joseph Manning Jr."
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Metric",
+       "Beck",
+       "Matt Sharp",
+       "blink‐182"
+      ],
+      "cre_interior": [
+       "Metric",
+       "Beck",
+       "Matt Sharp",
+       "blink‐182"
+      ]
+     }
+    },
+    "Tame Impala -> Fountains Of Wayne": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "twenty one pilots",
+       "Fall Out Boy",
+       "The All‐American Rejects"
+      ],
+      "cre_interior": [
+       "twenty one pilots",
+       "Fall Out Boy",
+       "The All‐American Rejects"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "twenty one pilots",
+       "Panic! at the Disco",
+       "The All‐American Rejects"
+      ],
+      "cre_interior": [
+       "twenty one pilots",
+       "Panic! at the Disco",
+       "The All‐American Rejects"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Flaming Lips",
+       "Roger Joseph Manning Jr."
+      ],
+      "cre_interior": [
+       "The Flaming Lips",
+       "Roger Joseph Manning Jr."
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Damon Albarn",
+       "CAKE",
+       "Smash Mouth"
+      ],
+      "cre_interior": [
+       "Damon Albarn",
+       "CAKE",
+       "Smash Mouth"
+      ]
+     }
+    },
+    "Arcade Fire -> America": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Tame Impala",
+       "Nathan East",
+       "Fleetwood Mac",
+       "Eagles"
+      ],
+      "cre_interior": [
+       "Tame Impala",
+       "Nathan East",
+       "Fleetwood Mac",
+       "Eagles"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Tame Impala",
+       "Nathan East",
+       "Elton John",
+       "Eagles"
+      ],
+      "cre_interior": [
+       "Tame Impala",
+       "Nathan East",
+       "Elton John",
+       "Eagles"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Robby Krieger",
+       "Don Felder",
+       "David Spinozza"
+      ],
+      "cre_interior": [
+       "Ed O’Brien",
+       "Robby Krieger",
+       "Don Felder",
+       "David Spinozza"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Robby Krieger",
+       "Blue Öyster Cult",
+       "Lenny Castro",
+       "Gerry Beckley",
+       "David Spinozza"
+      ],
+      "cre_interior": [
+       "Ed O’Brien",
+       "Robby Krieger",
+       "Blue Öyster Cult",
+       "Lenny Castro",
+       "Gerry Beckley",
+       "David Spinozza"
+      ]
+     }
+    },
+    "Led Zeppelin -> Guster": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Queens of the Stone Age",
+       "Cage the Elephant",
+       "OK Go"
+      ],
+      "cre_interior": [
+       "Queens of the Stone Age",
+       "Cage the Elephant",
+       "OK Go"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Audrey Riley",
+       "Kaiser Chiefs",
+       "OK Go"
+      ],
+      "cre_interior": [
+       "Ed O’Brien",
+       "Audrey Riley",
+       "Kaiser Chiefs",
+       "OK Go"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Beck",
+       "Metric",
+       "Silversun Pickups"
+      ],
+      "cre_interior": [
+       "Ed O’Brien",
+       "Beck",
+       "Metric",
+       "Silversun Pickups"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Joy Division",
+       "Neutral Milk Hotel",
+       "James Mercer"
+      ],
+      "cre_interior": [
+       "Ed O’Brien",
+       "Joy Division",
+       "Neutral Milk Hotel",
+       "James Mercer"
+      ]
+     }
+    }
+   }
+  },
+  "CRE-famous": {
+   "per_depth": {
+    "0": {
+     "compared": 22,
+     "differing": 0,
+     "pairs_differing": [],
+     "fraction_differing": 0.0
+    },
+    "1": {
+     "compared": 22,
+     "differing": 0,
+     "pairs_differing": [],
+     "fraction_differing": 0.0
+    },
+    "10": {
+     "compared": 22,
+     "differing": 4,
+     "pairs_differing": [
+      "ff-top1pct:48262e82|d8661c02",
+      "ff-top1pct:ae65c507|cc0b7089",
+      "ff-top1pct:6fe07aa5|8b22acd6",
+      "ff-top01pct:6fe07aa5|f4fdbb4c"
+     ],
+     "fraction_differing": 0.18181818181818182
+    },
+    "20": {
+     "compared": 22,
+     "differing": 10,
+     "pairs_differing": [
+      "ff-top1pct:48262e82|d8661c02",
+      "ff-top1pct:a3cb23fc|20244d07",
+      "ff-top1pct:cf82a38f|b267ca80",
+      "ff-top1pct:a21b2652|b29020d6",
+      "ff-top1pct:410c9baf|69b39eab",
+      "ff-top1pct:ae65c507|cc0b7089",
+      "ff-top1pct:f41490ce|f7ba7fbe",
+      "ff-top1pct:6fe07aa5|8b22acd6",
+      "ff-top01pct:cc2c9c3c|f6beac20",
+      "ff-top01pct:95e1ead9|eeb1195b"
+     ],
+     "fraction_differing": 0.45454545454545453
+    }
+   },
+   "per_pair": {
+    "ff-top1pct:48262e82|d8661c02": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ye",
+       "Daft Punk",
+       "The Chemical Brothers",
+       "Thom Yorke",
+       "Sonic Youth",
+       "Siouxsie and the Banshees",
+       "Public Image Ltd"
+      ],
+      "cre_interior": [
+       "Ye",
+       "Daft Punk",
+       "The Chemical Brothers",
+       "Thom Yorke",
+       "Sonic Youth",
+       "Siouxsie and the Banshees",
+       "Public Image Ltd"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Lil Uzi Vert",
+       "Kali Uchis",
+       "Damon Albarn",
+       "Thom Yorke",
+       "Sonic Youth",
+       "Siouxsie and the Banshees",
+       "Public Image Ltd"
+      ],
+      "cre_interior": [
+       "Lil Uzi Vert",
+       "Kali Uchis",
+       "Damon Albarn",
+       "Thom Yorke",
+       "Sonic Youth",
+       "Siouxsie and the Banshees",
+       "Public Image Ltd"
+      ]
+     },
+     "10": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nathan East",
+       "Pet Shop Boys",
+       "Kate Bush",
+       "Siouxsie and the Banshees",
+       "Public Image Ltd"
+      ],
+      "cre_interior": [
+       "Jay-Z",
+       "Beastie Boys",
+       "David Byrne",
+       "Siouxsie and the Banshees",
+       "Public Image Ltd"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nathan East",
+       "Bernard Edwards",
+       "Soft Cell",
+       "DEVO",
+       "Public Image Ltd"
+      ],
+      "cre_interior": [
+       "Jay-Z",
+       "Beastie Boys",
+       "David Byrne",
+       "Wire",
+       "Public Image Ltd"
+      ]
+     }
+    },
+    "ff-top1pct:a3cb23fc|20244d07": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Coldplay",
+       "Rihanna"
+      ],
+      "cre_interior": [
+       "Coldplay",
+       "Rihanna"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Billie Joe Armstrong",
+       "Paramore"
+      ],
+      "cre_interior": [
+       "Billie Joe Armstrong",
+       "Paramore"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Sting",
+       "Nathan East",
+       "Bruno Mars"
+      ],
+      "cre_interior": [
+       "Sting",
+       "Nathan East",
+       "Bruno Mars"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Audrey Riley",
+       "Neil Cowley",
+       "Rihanna"
+      ],
+      "cre_interior": [
+       "Audrey Riley",
+       "The Script",
+       "Sam Smith"
+      ]
+     }
+    },
+    "ff-top1pct:cf82a38f|b267ca80": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Beach House",
+       "M83",
+       "CHVRCHES",
+       "Lorde",
+       "Paramore"
+      ],
+      "cre_interior": [
+       "Beach House",
+       "M83",
+       "CHVRCHES",
+       "Lorde",
+       "Paramore"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Deerhunter",
+       "The Flaming Lips",
+       "Roger Joseph Manning Jr."
+      ],
+      "cre_interior": [
+       "Deerhunter",
+       "The Flaming Lips",
+       "Roger Joseph Manning Jr."
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Beach House",
+       "Tame Impala",
+       "Cage the Elephant",
+       "Chris Shiflett",
+       "Billie Joe Armstrong"
+      ],
+      "cre_interior": [
+       "Beach House",
+       "Tame Impala",
+       "Cage the Elephant",
+       "Chris Shiflett",
+       "Billie Joe Armstrong"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Deerhunter",
+       "Sonic Youth",
+       "Billy Corgan",
+       "Mike McCready",
+       "Josh Freese"
+      ],
+      "cre_interior": [
+       "Deerhunter",
+       "Yo La Tengo",
+       "Wilco",
+       "Roger Joseph Manning Jr."
+      ]
+     }
+    },
+    "ff-top1pct:a21b2652|b29020d6": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Flume",
+       "Raekwon",
+       "ScHoolboy Q"
+      ],
+      "cre_interior": [
+       "Flume",
+       "Raekwon",
+       "ScHoolboy Q"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Flume",
+       "MØ",
+       "Charli xcx",
+       "Nicki Minaj",
+       "A$AP Rocky"
+      ],
+      "cre_interior": [
+       "Flume",
+       "MØ",
+       "Charli xcx",
+       "Nicki Minaj",
+       "A$AP Rocky"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Disclosure",
+       "Nathan East",
+       "Damon Albarn",
+       "Kali Uchis"
+      ],
+      "cre_interior": [
+       "Disclosure",
+       "Nathan East",
+       "Damon Albarn",
+       "Kali Uchis"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Romy",
+       "Lana Del Rey",
+       "Playboi Carti",
+       "BROCKHAMPTON"
+      ],
+      "cre_interior": [
+       "alt‐J",
+       "Lana Del Rey",
+       "Playboi Carti",
+       "BROCKHAMPTON"
+      ]
+     }
+    },
+    "ff-top1pct:410c9baf|69b39eab": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Four Tet",
+       "Thom Yorke",
+       "Muse"
+      ],
+      "cre_interior": [
+       "Four Tet",
+       "Thom Yorke",
+       "Muse"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Four Tet",
+       "M83",
+       "Foals"
+      ],
+      "cre_interior": [
+       "Four Tet",
+       "M83",
+       "Foals"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Boards of Canada",
+       "Moby",
+       "Audrey Riley",
+       "Kaiser Chiefs"
+      ],
+      "cre_interior": [
+       "Boards of Canada",
+       "Moby",
+       "Audrey Riley",
+       "Kaiser Chiefs"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Aphex Twin",
+       "Nine Inch Nails",
+       "Ed O’Brien",
+       "Albert Hammond, Jr."
+      ],
+      "cre_interior": [
+       "Björk",
+       "Damon Albarn",
+       "Albert Hammond, Jr."
+      ]
+     }
+    },
+    "ff-top1pct:54799c0e|b2dbfc09": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nina Simone",
+       "Aretha Franklin",
+       "Jefferson Airplane",
+       "Geezer Butler",
+       "Mike McCready",
+       "Josh Freese",
+       "Limp Bizkit"
+      ],
+      "cre_interior": [
+       "Nina Simone",
+       "Aretha Franklin",
+       "Jefferson Airplane",
+       "Geezer Butler",
+       "Mike McCready",
+       "Josh Freese",
+       "Limp Bizkit"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Dean Martin",
+       "Michael Bublé",
+       "Meghan Trainor",
+       "WALK THE MOON",
+       "Fall Out Boy",
+       "Billy Talent"
+      ],
+      "cre_interior": [
+       "Dean Martin",
+       "Michael Bublé",
+       "Meghan Trainor",
+       "WALK THE MOON",
+       "Fall Out Boy",
+       "Billy Talent"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Dean Martin",
+       "Stevie Wonder",
+       "Prince",
+       "Lenny Kravitz",
+       "Smash Mouth"
+      ],
+      "cre_interior": [
+       "Dean Martin",
+       "Stevie Wonder",
+       "Prince",
+       "Lenny Kravitz",
+       "Smash Mouth"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Dean Martin",
+       "The Beach Boys",
+       "The Rolling Stones",
+       "Dee Dee Ramone",
+       "Dropkick Murphys"
+      ],
+      "cre_interior": [
+       "Dean Martin",
+       "The Beach Boys",
+       "The Rolling Stones",
+       "Dee Dee Ramone",
+       "Dropkick Murphys"
+      ]
+     }
+    },
+    "ff-top1pct:be540c02|f7625f34": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Madonna",
+       "Nathan East",
+       "Tame Impala",
+       "Grimes"
+      ],
+      "cre_interior": [
+       "Madonna",
+       "Nathan East",
+       "Tame Impala",
+       "Grimes"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Sting",
+       "Nathan East",
+       "Tame Impala",
+       "Grimes"
+      ],
+      "cre_interior": [
+       "Sting",
+       "Nathan East",
+       "Tame Impala",
+       "Grimes"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nathan East",
+       "Ali Payami",
+       "benny blanco"
+      ],
+      "cre_interior": [
+       "Nathan East",
+       "Ali Payami",
+       "benny blanco"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nathan East",
+       "The Weeknd",
+       "Childish Gambino",
+       "Death Grips"
+      ],
+      "cre_interior": [
+       "Nathan East",
+       "The Weeknd",
+       "Childish Gambino",
+       "Death Grips"
+      ]
+     }
+    },
+    "ff-top1pct:ae65c507|cc0b7089": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Avicii",
+       "twenty one pilots",
+       "My Chemical Romance"
+      ],
+      "cre_interior": [
+       "Avicii",
+       "twenty one pilots",
+       "My Chemical Romance"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Romy",
+       "Two Door Cinema Club",
+       "Albert Hammond, Jr.",
+       "Queens of the Stone Age"
+      ],
+      "cre_interior": [
+       "Romy",
+       "Two Door Cinema Club",
+       "Albert Hammond, Jr.",
+       "Queens of the Stone Age"
+      ]
+     },
+     "10": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Sam Smith",
+       "Pino Palladino",
+       "Josh Freese"
+      ],
+      "cre_interior": [
+       "Calvin Harris",
+       "Jay-Z",
+       "Linkin Park"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nathan East",
+       "Norah Jones",
+       "Audrey Riley",
+       "Chris Shiflett"
+      ],
+      "cre_interior": [
+       "Avicii",
+       "Eminem",
+       "Red Hot Chili Peppers"
+      ]
+     }
+    },
+    "ff-top1pct:ac7e838c|5334edc0": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Foals",
+       "Grizzly Bear"
+      ],
+      "cre_interior": [
+       "Foals",
+       "Grizzly Bear"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Foals",
+       "Bon Iver"
+      ],
+      "cre_interior": [
+       "Foals",
+       "Bon Iver"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Hot Chip",
+       "Grimes"
+      ],
+      "cre_interior": [
+       "Hot Chip",
+       "Grimes"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Neon Indian",
+       "Real Estate"
+      ],
+      "cre_interior": [
+       "Neon Indian",
+       "Real Estate"
+      ]
+     }
+    },
+    "ff-top1pct:faabb55d|78ea5ea1": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Cher",
+       "Cyndi Lauper",
+       "Tears for Fears",
+       "Kate Bush"
+      ],
+      "cre_interior": [
+       "Cher",
+       "Cyndi Lauper",
+       "Tears for Fears",
+       "Kate Bush"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Cher",
+       "Cyndi Lauper",
+       "Deborah Harry"
+      ],
+      "cre_interior": [
+       "Cher",
+       "Cyndi Lauper",
+       "Deborah Harry"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Sheryl Crow",
+       "The Cranberries",
+       "Ed O’Brien",
+       "Joy Division"
+      ],
+      "cre_interior": [
+       "Sheryl Crow",
+       "The Cranberries",
+       "Ed O’Brien",
+       "Joy Division"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Sheryl Crow",
+       "Nina Persson",
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Johnny Marr"
+      ],
+      "cre_interior": [
+       "Sheryl Crow",
+       "Nina Persson",
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Johnny Marr"
+      ]
+     }
+    },
+    "ff-top1pct:f41490ce|f7ba7fbe": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Sting",
+       "Madonna",
+       "Black Eyed Peas",
+       "Kid Cudi"
+      ],
+      "cre_interior": [
+       "Sting",
+       "Madonna",
+       "Black Eyed Peas",
+       "Kid Cudi"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Genesis",
+       "Nathan East",
+       "Bruno Mars",
+       "Wiz Khalifa"
+      ],
+      "cre_interior": [
+       "Genesis",
+       "Nathan East",
+       "Bruno Mars",
+       "Wiz Khalifa"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Depeche Mode",
+       "Gorillaz",
+       "Ye"
+      ],
+      "cre_interior": [
+       "Depeche Mode",
+       "Gorillaz",
+       "Ye"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Lenny Castro",
+       "Bill Wolfer",
+       "Nathan East",
+       "Future",
+       "J. Cole"
+      ],
+      "cre_interior": [
+       "Lenny Castro",
+       "The Cranberries",
+       "Audrey Riley",
+       "Lily Allen",
+       "Timbaland"
+      ]
+     }
+    },
+    "ff-top1pct:6fe07aa5|8b22acd6": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Albert Hammond, Jr.",
+       "Damon Albarn",
+       "Kali Uchis",
+       "Mac Miller"
+      ],
+      "cre_interior": [
+       "Albert Hammond, Jr.",
+       "Damon Albarn",
+       "Kali Uchis",
+       "Mac Miller"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Albert Hammond, Jr.",
+       "Damon Albarn",
+       "Kali Uchis",
+       "Lil Uzi Vert"
+      ],
+      "cre_interior": [
+       "Albert Hammond, Jr.",
+       "Damon Albarn",
+       "Kali Uchis",
+       "Lil Uzi Vert"
+      ]
+     },
+     "10": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Audrey Riley",
+       "Moby",
+       "DJ Shadow",
+       "Run the Jewels"
+      ],
+      "cre_interior": [
+       "Beastie Boys",
+       "Jay-Z",
+       "J. Cole"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Andrew VanWyngarden",
+       "Crystal Castles",
+       "Death Grips"
+      ],
+      "cre_interior": [
+       "Modest Mouse",
+       "Neutral Milk Hotel",
+       "Death Grips"
+      ]
+     }
+    },
+    "ff-top01pct:6fe07aa5|f4fdbb4c": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Cage the Elephant",
+       "twenty one pilots"
+      ],
+      "cre_interior": [
+       "Cage the Elephant",
+       "twenty one pilots"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "My Chemical Romance",
+       "twenty one pilots"
+      ],
+      "cre_interior": [
+       "My Chemical Romance",
+       "twenty one pilots"
+      ]
+     },
+     "10": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Damon Albarn",
+       "Nathan East",
+       "Calvin Harris"
+      ],
+      "cre_interior": [
+       "Vampire Weekend",
+       "alt‐J",
+       "twenty one pilots"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Audrey Riley",
+       "Neil Cowley",
+       "Rihanna"
+      ],
+      "cre_interior": [
+       "Ed O’Brien",
+       "Audrey Riley",
+       "Neil Cowley",
+       "Rihanna"
+      ]
+     }
+    },
+    "ff-top01pct:cc2c9c3c|f6beac20": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Jason Mraz",
+       "Sam Smith",
+       "Alessia Cara",
+       "Post Malone",
+       "Travis Scott"
+      ],
+      "cre_interior": [
+       "Jason Mraz",
+       "Sam Smith",
+       "Alessia Cara",
+       "Post Malone",
+       "Travis Scott"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Alicia Keys",
+       "Beyoncé",
+       "Lil Wayne"
+      ],
+      "cre_interior": [
+       "Alicia Keys",
+       "Beyoncé",
+       "Lil Wayne"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Lily Allen",
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Damon Albarn",
+       "Kali Uchis"
+      ],
+      "cre_interior": [
+       "Lily Allen",
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Damon Albarn",
+       "Kali Uchis"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Amy Winehouse",
+       "Neil Cowley",
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Damon Albarn",
+       "Kali Uchis"
+      ],
+      "cre_interior": [
+       "Dave Guy",
+       "Mark Ronson",
+       "A$AP Rocky"
+      ]
+     }
+    },
+    "ff-top01pct:95e1ead9|eeb1195b": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Brian May"
+      ],
+      "cre_interior": [
+       "Brian May"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "John Dolmayan",
+       "Megadeth"
+      ],
+      "cre_interior": [
+       "John Dolmayan",
+       "Megadeth"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Audrey Riley",
+       "R.E.M.",
+       "Sting"
+      ],
+      "cre_interior": [
+       "Audrey Riley",
+       "R.E.M.",
+       "Sting"
+      ]
+     },
+     "20": {
+      "differs": true,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ed O’Brien",
+       "Robby Krieger",
+       "The Police",
+       "Jonathan Cain"
+      ],
+      "cre_interior": [
+       "Audrey Riley",
+       "Garbage",
+       "Madonna",
+       "Lenny Castro",
+       "Jonathan Cain"
+      ]
+     }
+    },
+    "ff-top01pct:a74b1b7f|ca891d65": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Led Zeppelin"
+      ],
+      "cre_interior": [
+       "Led Zeppelin"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Depeche Mode",
+       "Brian May"
+      ],
+      "cre_interior": [
+       "Depeche Mode",
+       "Brian May"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nirvana",
+       "John Dolmayan"
+      ],
+      "cre_interior": [
+       "Nirvana",
+       "John Dolmayan"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Robby Krieger",
+       "Ian Gillan"
+      ],
+      "cre_interior": [
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Robby Krieger",
+       "Ian Gillan"
+      ]
+     }
+    },
+    "ff-top01pct:d43d12a1|b8a7c51f": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Bob Dylan",
+       "Elton John",
+       "Nathan East",
+       "Bruno Mars"
+      ],
+      "cre_interior": [
+       "Bob Dylan",
+       "Elton John",
+       "Nathan East",
+       "Bruno Mars"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Beach Boys",
+       "Elton John",
+       "Nathan East",
+       "Bruno Mars"
+      ],
+      "cre_interior": [
+       "The Beach Boys",
+       "Elton John",
+       "Nathan East",
+       "Bruno Mars"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Bob Marley & The Wailers",
+       "Jack Johnson",
+       "Mumford & Sons"
+      ],
+      "cre_interior": [
+       "Bob Marley & The Wailers",
+       "Jack Johnson",
+       "Mumford & Sons"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Frank Sinatra",
+       "Norah Jones",
+       "Pino Palladino"
+      ],
+      "cre_interior": [
+       "Frank Sinatra",
+       "Norah Jones",
+       "Pino Palladino"
+      ]
+     }
+    },
+    "ff-top01pct:b6b2bb8d|8970d868": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Breeders",
+       "Sonic Youth",
+       "Placebo"
+      ],
+      "cre_interior": [
+       "The Breeders",
+       "Sonic Youth",
+       "Placebo"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Breeders",
+       "Black Francis",
+       "Beastie Boys"
+      ],
+      "cre_interior": [
+       "The Breeders",
+       "Black Francis",
+       "Beastie Boys"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Nada Surf",
+       "EELS",
+       "Beck"
+      ],
+      "cre_interior": [
+       "Nada Surf",
+       "EELS",
+       "Beck"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Jesus and Mary Chain",
+       "Sonic Youth",
+       "Black Francis",
+       "Ed O’Brien",
+       "Audrey Riley"
+      ],
+      "cre_interior": [
+       "The Jesus and Mary Chain",
+       "Sonic Youth",
+       "Black Francis",
+       "Ed O’Brien",
+       "Audrey Riley"
+      ]
+     }
+    },
+    "ff-top01pct:a3cb23fc|bd13909f": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Rolling Stones"
+      ],
+      "cre_interior": [
+       "The Rolling Stones"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "The Police"
+      ],
+      "cre_interior": [
+       "The Police"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Van Halen",
+       "Lenny Castro"
+      ],
+      "cre_interior": [
+       "Van Halen",
+       "Lenny Castro"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Creedence Clearwater Revival"
+      ],
+      "cre_interior": [
+       "Creedence Clearwater Revival"
+      ]
+     }
+    },
+    "ff-top01pct:e795e03d|9a709693": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Portishead"
+      ],
+      "cre_interior": [
+       "Portishead"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Sonic Youth",
+       "Thom Yorke",
+       "Burial"
+      ],
+      "cre_interior": [
+       "Sonic Youth",
+       "Thom Yorke",
+       "Burial"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Garbage",
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Damon Albarn",
+       "DJ Shadow"
+      ],
+      "cre_interior": [
+       "Garbage",
+       "Audrey Riley",
+       "Ed O’Brien",
+       "Damon Albarn",
+       "DJ Shadow"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Marius de Vries",
+       "Horace Andy"
+      ],
+      "cre_interior": [
+       "Marius de Vries",
+       "Horace Andy"
+      ]
+     }
+    },
+    "ff-top01pct:f82bcf78|c8b03190": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Childish Gambino"
+      ],
+      "cre_interior": [
+       "Childish Gambino"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Frank Ocean"
+      ],
+      "cre_interior": [
+       "Frank Ocean"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Lil Wayne",
+       "PARTYNEXTDOOR"
+      ],
+      "cre_interior": [
+       "Lil Wayne",
+       "PARTYNEXTDOOR"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Ye",
+       "PARTYNEXTDOOR"
+      ],
+      "cre_interior": [
+       "Ye",
+       "PARTYNEXTDOOR"
+      ]
+     }
+    },
+    "ff-top01pct:ca891d65|d6ed7887": {
+     "0": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Led Zeppelin",
+       "The Rolling Stones",
+       "Dee Dee Ramone",
+       "Sex Pistols"
+      ],
+      "cre_interior": [
+       "Led Zeppelin",
+       "The Rolling Stones",
+       "Dee Dee Ramone",
+       "Sex Pistols"
+      ]
+     },
+     "1": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "Zack de la Rocha",
+       "Beastie Boys",
+       "Dee Dee Ramone",
+       "Sex Pistols"
+      ],
+      "cre_interior": [
+       "Zack de la Rocha",
+       "Beastie Boys",
+       "Dee Dee Ramone",
+       "Sex Pistols"
+      ]
+     },
+     "10": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "John Dolmayan",
+       "blink‐182",
+       "Bad Religion"
+      ],
+      "cre_interior": [
+       "John Dolmayan",
+       "blink‐182",
+       "Bad Religion"
+      ]
+     },
+     "20": {
+      "differs": false,
+      "shipped_kind": "natural",
+      "cre_kind": "natural",
+      "shipped_interior": [
+       "ZZ Top",
+       "Fleetwood Mac",
+       "Pretenders"
+      ],
+      "cre_interior": [
+       "ZZ Top",
+       "Fleetwood Mac",
+       "Pretenders"
+      ]
+     }
+    }
+   }
+  }
+ }
+}

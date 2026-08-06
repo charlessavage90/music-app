@@ -30,10 +30,12 @@ from artistpath_builder.graph import (
     build_graph,
     largest_component,
     mutual_knn_cap,
+    trimmed_union_cap,
     symmetrise,
 )
 from artistpath_builder.models import ArtistStats
 from artistpath_builder.deezer_ids import load_deezer_ids
+from artistpath_builder.fame import load_fame
 from artistpath_builder.featured_credit_drop import load_featured_credit_drop_mbids
 from artistpath_builder.no_release_drop import load_drop_mbids
 from artistpath_builder.unlistenable_drop import (
@@ -114,6 +116,44 @@ def rescale_scores(
     )
 
 
+def similar_prefix(config: BuilderConfig, source: SimilaritySource) -> str:
+    """Archive key prefix for this config's similarity responses.
+
+    RC-H3, build side: responses are keyed by algorithm, so a build reads only
+    the tree its own algorithm wrote. Production keeps the flat layout (see
+    Crawler.similar_key); every other algorithm has a sub-tree.
+
+    Extracted so the `fame` stage enumerates exactly the population `build`
+    will read, from one definition rather than two. A second copy of this rule
+    is precisely the divergence class test_pipeline_mirrors.py guards.
+    """
+    if config.algorithm == PRODUCTION_ALGORITHM:
+        return f"similar/{source.name}/"
+    return f"similar/{source.name}/{config.algorithm}/"
+
+
+def archive_artists(
+    archive: RawArchive, config: BuilderConfig, source: SimilaritySource
+) -> set[str]:
+    """Every artist with an archived similarity response for this config.
+
+    A superset of the built graph's nodes — a node also needs to appear as
+    someone's neighbour, and the largest-component step prunes further — which
+    is the property the `fame` stage wants: fetch for everything that could
+    end up in the graph, so `load_fame` cannot come up short.
+    """
+    prefix = similar_prefix(config, source)
+    found: set[str] = set()
+    for key in archive.keys():
+        if not key.startswith(prefix) or not key.endswith(".json"):
+            continue
+        mbid = key[len(prefix) : -len(".json")]
+        if "/" in mbid:
+            continue
+        found.add(mbid)
+    return found
+
+
 def build_from_archive(
     config: BuilderConfig,
     archive: RawArchive,
@@ -126,13 +166,7 @@ def build_from_archive(
     to serve as popularity). Isolated artists cannot be routed and are dropped
     by the largest-component step regardless.
     """
-    # RC-H3, build side: responses are keyed by algorithm, so a build reads
-    # only the tree its own algorithm wrote. Production keeps the flat layout
-    # (see Crawler.similar_key); every other algorithm has a sub-tree.
-    if config.algorithm == PRODUCTION_ALGORITHM:
-        prefix = f"similar/{source.name}/"
-    else:
-        prefix = f"similar/{source.name}/{config.algorithm}/"
+    prefix = similar_prefix(config, source)
     payloads: dict[str, bytes] = {}
     for key in sorted(archive.keys()):
         if not key.startswith(prefix) or not key.endswith(".json"):
@@ -349,9 +383,21 @@ def build_from_archive(
         mbid: {dst: strength for dst, strength in scored}
         for mbid, scored in scored_adjacency.items()
     }
-    adjacency = mutual_knn_cap(
-        adjacency, config.max_neighbours_per_artist, ranking=ranking
-    )
+    # Both strategies rank on the unclipped strengths above and both bound
+    # degree; they differ in reciprocity. mutual_knn keeps an edge only if
+    # BOTH endpoints rank the other top-k; trimmed_union keeps it if EITHER
+    # does, then trims to a ceiling. See BuilderConfig.cap_strategy.
+    if config.cap_strategy == "trimmed_union":
+        adjacency = trimmed_union_cap(
+            adjacency,
+            config.union_top_j,
+            config.union_degree_ceiling,
+            ranking=ranking,
+        )
+    else:
+        adjacency = mutual_knn_cap(
+            adjacency, config.max_neighbours_per_artist, ranking=ranking
+        )
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
     logger.info("largest component: %d of %d artists", len(keep), len(adjacency))
@@ -375,6 +421,18 @@ def build_from_archive(
         for mbid in keep
     ]
 
+    # Fame is read from the ARCHIVE, never fetched: `build` is offline (spec
+    # §9), which is what the replay test's raising fetcher proves. `load_fame`
+    # refuses rather than defaulting, so a build whose fetch population has
+    # drifted from its similarity population stops here instead of shipping
+    # artists priced by a made-up listener count (MSW-G3).
+    #
+    # Asked for `keep` — the pruned node set — rather than the whole archive:
+    # those are exactly the artists that reach the artifact, so an artist the
+    # largest-component step discarded cannot block a build by lacking a value
+    # nothing would have read.
+    fame = load_fame(archive, sorted(keep)) if config.require_fame else None
+
     # Deezer artist ids ride along in the metadata blob so the api can resolve a
     # clip by artist identity rather than by name (`BYP-13` — a card playing a
     # clip by a different artist of the SAME NAME). Applied unconditionally and
@@ -382,5 +440,9 @@ def build_from_archive(
     # nothing for a factor table to hold constant. A frozen snapshot, never a
     # build-time lookup — deezer_ids.py explains why that is mandatory.
     return build_graph(
-        pruned, stats, source.edge_type, deezer_ids=load_deezer_ids()
+        pruned,
+        stats,
+        source.edge_type,
+        deezer_ids=load_deezer_ids(),
+        fame_lb_raw=fame,
     )

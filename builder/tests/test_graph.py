@@ -6,6 +6,7 @@ from artistpath_builder.graph import (
     largest_component,
     mutual_knn_cap,
     symmetrise,
+    trimmed_union_cap,
 )
 from artistpath_builder.models import ArtistStats, EdgeType
 
@@ -268,3 +269,142 @@ def test_graph_exposes_popularity_as_a_read_only_alias_for_pop_raw():
     assert graph.popularity == graph.pop_raw
     with pytest.raises(AttributeError):
         graph.popularity = [0.0, 0.0]
+
+
+# --- trimmed_union_cap (MSW-, the adopted TUw-50-50 supply rule) -----------
+
+
+def _random_adjacency(seed: int, n: int = 60, per_node: int = 12) -> dict:
+    """Synthetic scored adjacency shaped like pipeline output.
+
+    Deliberately asymmetric: each node samples its own neighbour list, so
+    reverse-only edges arise, which is the case the union rule exists for.
+    """
+    import random
+
+    rng = random.Random(seed)
+    mbids = [f"{i:04d}" + "x" * 32 for i in range(n)]
+    adjacency: dict[str, dict[str, float]] = {}
+    for m in mbids:
+        dsts = rng.sample([x for x in mbids if x != m], per_node)
+        adjacency[m] = {d: rng.random() for d in dsts}
+    return adjacency
+
+
+def test_trimmed_union_cap_bounds_degree_and_is_symmetric():
+    adjacency = _random_adjacency(1)
+    result = trimmed_union_cap(adjacency, 5, 5, ranking=adjacency)
+    for node, edges in result.items():
+        assert len(edges) <= 5
+        for dst in edges:
+            assert node in result[dst], "must stay symmetric after trimming"
+
+
+def test_trimmed_union_cap_is_deterministic():
+    adjacency = _random_adjacency(2)
+    a = trimmed_union_cap(adjacency, 5, 5, ranking=adjacency)
+    b = trimmed_union_cap(adjacency, 5, 5, ranking=adjacency)
+    assert a == b
+
+
+def test_trimmed_union_cap_keeps_reverse_only_edges_under_the_ceiling():
+    # C ranks B but B's own top-1 is A. Mutual k-NN would delete C-B; the
+    # union admits it, and the ceiling is high enough to keep it. That
+    # difference is the whole point of this rule.
+    adjacency = {
+        A: {B: 0.9},
+        B: {A: 0.9, C: 0.5},
+        C: {B: 0.5},
+    }
+    result = trimmed_union_cap(adjacency, 1, 5, ranking=adjacency)
+    assert C in result[B]
+    assert B in result[C]
+    # and the mutual rule, on the same input, does delete it
+    assert C not in mutual_knn_cap(adjacency, 1)[B]
+
+
+def test_trimmed_union_cap_matches_the_frozen_track_b_implementation():
+    """The port is equivalent to the frozen Track B cap on random input.
+
+    Imports the frozen module read-only, which is the sanctioned direction
+    (builder/analysis/README.md): never write shipped code against a frozen
+    probe, but pinning a port to one with a test is what keeps the adopted
+    rule the rule that was actually selected.
+    """
+    import sys
+    from pathlib import Path
+
+    frozen_dir = (
+        Path(__file__).resolve().parents[1]
+        / "analysis"
+        / "2026-07-30-track-b-cap-selection"
+    )
+    sys.path.insert(0, str(frozen_dir))
+    try:
+        from cb_build_variants import cap_trimmed_union
+    finally:
+        sys.path.remove(str(frozen_dir))
+
+    for seed in (3, 4, 5):
+        adjacency = _random_adjacency(seed)
+        frozen = cap_trimmed_union(
+            adjacency, adjacency, {}, j=5, d=5, trim="weakest_first"
+        )
+        ported = trimmed_union_cap(adjacency, 5, 5, ranking=adjacency)
+        assert ported == frozen, f"seed {seed}: port diverges from the frozen cap"
+
+
+def test_trimmed_union_cap_deletion_ties_drop_the_highest_mbid():
+    """Deletion order is the OPPOSITE tie-break to selection, and it is load-bearing.
+
+    Four neighbours of the hub at IDENTICAL strength, ceiling 3, so exactly
+    one must be deleted. Dropping the highest MBID leaves the same artist a
+    lowest-MBID *selection* rule would have kept.
+
+    This case is not reachable from random float strengths — every pair is
+    distinct there — so the frozen-equivalence test above passes whatever this
+    tie-break does. Verified by perturbation: flipping `_desc(v)` to `v` leaves
+    that test green and turns this one red.
+    """
+    hub = "h" * 36
+    n1, n2, n3, n4 = ("1" * 36, "2" * 36, "3" * 36, "4" * 36)
+    adjacency = {
+        hub: {n1: 0.5, n2: 0.5, n3: 0.5, n4: 0.5},
+        n1: {hub: 0.5},
+        n2: {hub: 0.5},
+        n3: {hub: 0.5},
+        n4: {hub: 0.5},
+    }
+    result = trimmed_union_cap(adjacency, 50, 3, ranking=adjacency)
+    assert len(result[hub]) == 3
+    assert n4 not in result[hub], "the highest MBID is the one deleted"
+    assert hub not in result[n4], "and the deletion is symmetric"
+    assert {n1, n2, n3} == set(result[hub])
+
+
+def test_trimmed_union_cap_deletion_ties_match_the_frozen_rule():
+    """The tie case above, checked against the frozen Track B implementation."""
+    import sys
+    from pathlib import Path
+
+    frozen_dir = (
+        Path(__file__).resolve().parents[1]
+        / "analysis"
+        / "2026-07-30-track-b-cap-selection"
+    )
+    sys.path.insert(0, str(frozen_dir))
+    try:
+        from cb_build_variants import cap_trimmed_union
+    finally:
+        sys.path.remove(str(frozen_dir))
+
+    hub = "h" * 36
+    neighbours = [str(i) * 36 for i in range(1, 6)]
+    adjacency = {hub: {n: 0.5 for n in neighbours}}
+    for n in neighbours:
+        adjacency[n] = {hub: 0.5}
+
+    frozen = cap_trimmed_union(adjacency, adjacency, {}, j=50, d=3,
+                               trim="weakest_first")
+    ported = trimmed_union_cap(adjacency, 50, 3, ranking=adjacency)
+    assert ported == frozen

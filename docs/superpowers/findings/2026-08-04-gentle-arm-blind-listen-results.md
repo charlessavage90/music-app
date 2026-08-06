@@ -1,5 +1,35 @@
 # `GBL-` — the gentle-arm blind listen: result and read
 
+> ## ⚠ READ WITH `CAU-`. This null is qualified by a later finding — it is NOT superseded.
+>
+> **Every figure in this document stands and nothing here is stale.** The margin of 3
+> against a bar of 5 is the pre-registered read, and it was applied correctly.
+>
+> **What a later document adds.** The confound this instrument could not see — that a
+> 30-second clip of one arbitrary track cannot support a coherence judgement about an
+> unfamiliar artist, **and that this failure activates only in the arm that succeeds at
+> delivering unfamiliar artists** — was identified by the owner and then tested, in
+> [`2026-08-05-coherence-audit-results.md`](2026-08-05-coherence-audit-results.md)
+> (`CAU-`). It found the gentle arm's coherence **meets the owner's own bar**, by one card.
+> This note already records the same thing from the other side, in §0's second and third
+> qualifiers — five of seven undecided deep rows were undecided *because of clip defects*,
+> so the instrument lost resolution rather than finding equivalence.
+>
+> **⛔ `CAU-` MAY NOT BE USED TO REOPEN THIS COMPARISON** — `CAU-` §6 bars comparison with
+> today's app at any strength, and §5's run-once rule still binds this verdict. What
+> changes is **how much weight this null carries as evidence about the rebuilt arm, not
+> the verdict itself**, which stands unaltered.
+>
+> **Why this banner exists rather than a map row alone.** A reader who correctly follows a
+> citation to "what did the blind listen say" lands *here*, and until 2026-08-05 nothing
+> here or on this document's row in `docs/README.md` mentioned that a follow-up existed. A
+> session reported the null accurately and incompletely for exactly that reason. The
+> failure class is **qualified-but-not-corrected**: nothing in this document had become
+> false, so every staleness and supersession check passed it clean. `doc-auditor` now
+> carries that category explicitly.
+>
+> *(Added 2026-08-05 by the `MSW-` adoption session. No finding below is altered.)*
+
 **Role: AUTHORITATIVE for the `GBL-` read.** This document **owns the `GBL-` figures**;
 every other document cites it by section and does not restate its numbers. Raw data:
 `builder/analysis/2026-08-04-gentle-arm-blind-listen/gbl_verdicts.json` (the owner's saved

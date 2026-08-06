@@ -69,6 +69,40 @@ RECORDED_FIELDS = frozenset(
         # all three era-pinned callers (cre_build.py newly listed) pin
         # drop_unlistenable=False beside the earlier pins.
         "drop_unlistenable",
+        # Added 2026-08-05 (MSW-, the trimmed-union supply rule). Per-mirror
+        # decision AT THIS DATE: nothing changes, because both fields are read
+        # only when `cap_strategy == "trimmed_union"` and the DEFAULT is still
+        # mutual_knn. All three mirrors stay frozen; all three era-pinned
+        # callers keep building exactly what they built yesterday.
+        #
+        # ⚠ THE FLIP IS THE BUILD-AFFECTING EVENT, NOT THESE FIELDS. When the
+        # `cap_strategy` default becomes "trimmed_union" at adoption (MSW-
+        # plan Task 11), all three ERA_PINNED_CALLERS silently change what
+        # they build: every one constructs BuilderConfig WITHOUT setting
+        # cap_strategy, so each inherits the default. They must pin
+        # cap_strategy="mutual_knn" beside their existing drop pins in that
+        # same commit.
+        #
+        # cre_build.py is the sharp case and is worth naming: its gate()
+        # compares `assemble_cleaned` against a live `build_from_archive` for
+        # byte-identity (cre_build.py:410). Its mirror takes an explicit
+        # cap_step, so after an unpinned flip that gate would be comparing two
+        # DIFFERENT cap rules — and reporting the difference as a mirror
+        # divergence, which is the wrong diagnosis for the right symptom.
+        "union_top_j",
+        "union_degree_ceiling",
+        # Added 2026-08-05 (MSW-, fame). Per-mirror decision AT THIS DATE: all
+        # three mirrors stay frozen and all three era-pinned callers are
+        # unaffected, because the default is False — a build reads no fame and
+        # emits no fame key, so output is byte-identical to before the field
+        # existed (verified: MSW-G1 unchanged).
+        #
+        # ⚠ Same forward warning as the two fields above, and the SAME commit:
+        # flipping require_fame to True at adoption makes every one of the
+        # ERA_PINNED_CALLERS refuse to build, because none of their archives
+        # has ever had the `fame` stage run against it. They must pin
+        # require_fame=False beside cap_strategy="mutual_knn".
+        "require_fame",
         "graph_version",
     }
 )

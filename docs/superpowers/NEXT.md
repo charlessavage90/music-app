@@ -12,16 +12,135 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-05 (night), when THE `ULF-` FILTER WORK WAS COMPLETED. The merged
-un-listenable filter is built, censused over both populations, wired and tested; `ULC-F1` and
-`ULC-F2` are discharged; CROOVE was struck from the acceptance canonical list by owner ruling.
-NOTHING IS ADOPTED — the app serves the same artifact as this morning. The next action is the
-OWNER'S: a DECISION (which form of the map switch, results §4.1) plus two merges. The `GBL-`
-null and the `CAU-` result both stand and are untouched.**
+**Last updated: 2026-08-06 (night), when `MSW-` TASK 10 COMPLETED AND SEAM 3 WAS REACHED. THE
+CANDIDATE ARTIFACT EXISTS (sha256 `43dd82bb…`; the execution log's Task 9 section owns its
+identity and counts), is built deterministically, and has now been VERIFIED — it boots, serves,
+presses and plays. NOTHING IS ADOPTED — the app's committed defaults are unchanged and every
+new default is still off. THE NEXT ACTION IS THE OWNER'S AND IT IS A DECISION, NOT WORK: Seam 3
+is his stop before any default flips. The `GBL-` null and the `CAU-` result both stand; this
+adoption OVERRIDES the null on the owner's authority, which is not the same as reopening it.**
 
 ---
 
-> ## ✅ THE `ULF-` FILTER WORK IS COMPLETE, 2026-08-05 (night). **The next action is the OWNER'S: merge draft PR #78 then the `ulc-filter-fix` draft PR (in that order — the second builds on the first), and decide which form of the map switch to take** (results §4.1: data-only vs the listened-to package; the filter fix makes either a genuinely new candidate under the run-once rule).
+> ## ▶ SEAM 3 IS REACHED — `MSW-` TASK 10 IS COMPLETE, 2026-08-06 (night). **The next action is the OWNER'S DECISION: go / no-go on Task 11, which flips the three defaults.**
+>
+> **Seam 3 is an OWNER STOP.** No default flips, and Task 11 does not begin, without his go.
+>
+> **A local server is left running for him**, deliberately: `localhost:8000` serving the
+> candidate artifact **with the ramp at `0.01`** — i.e. exactly what Task 11 would ship. It runs
+> off a **scratchpad factory override, not a committed default**; `config.py` is untouched and
+> killing the process returns everything to today's behaviour. `npm run dev` in `frontend/` to
+> press it.
+>
+> **What Task 10 added, and the figures are owned by the execution log's Task 10 section and by
+> `builder/analysis/2026-08-05-msw-verification/` — cited, never restated.**
+>
+> - **`MSW-V1`** (do the artists the coherence audit could not listen to survive?) — **passed**;
+>   the stop branch does not fire.
+> - **`MSW-V2`** (how often does a journey's middle land on someone with nothing of their own to
+>   play?) — measured, **one knob against `ULC-A4`, now machine-asserted**. A **report row, not
+>   a gate**: no threshold was pre-registered and **none was supplied**. ⚠ Its paired median
+>   reads zero while its mean moves by double digits, because the class is **concentrated in a
+>   minority of journeys** — `ULC-R1`'s recorded statistic defect reproducing, deliberately not
+>   patched. **Two journeys got worse** and are named.
+> - **`MSW-V2B`** (do the journeys you see actually differ from the ones that were listened to?)
+>   — **NOT in the plan; folded in on the owner's authorisation**, and it closes the question the
+>   previous handoff called the most decision-relevant thing unmeasured. **They do differ, at
+>   depth**: on the broader famous-pair set nearly half the journeys change at twenty presses —
+>   **but on the eight pairs actually listened to, almost none do.** Both halves travel together.
+>   Green anchor and red control both behaved.
+> - **`MSW-V3`** (does the app work?) — **yes, on both configurations.** `/health` matches the
+>   sidecar, Playwright 5/5, three pairs pressed to ten with the interior changing at every
+>   step, **every card resolved a clip and no card was dead**. ⚠ **Audibility is NOT confirmed
+>   and is not claimed** — the session cannot listen.
+> - **`B2`/`B3`/`B4`** — run, and **`B4` found a real defect in the verifying session's own
+>   work** (a docstring asserting held-constants no code checked). Fixed by making the code true.
+>
+> **⚠ The one thing that survived verification and is the sharpest input to his decision:** an
+> artist in the un-listenable class reached a real card, and **his clip resolved perfectly** — to
+> a charity-ensemble track that is not his own work. **"The clip resolves" is not "this artist
+> has something of their own", and no automated check here can tell them apart.**
+>
+> **Task 9 outcome:** the candidate artifact is built, deterministic across two runs, and its
+> identity is committed. **A third defect was found in the plan's own commands** — the build
+> would have produced a **fameless artifact while exiting 0** — fixed per-invocation with a
+> `--require-fame` flag, never by flipping the default. **`MSW-G3` fired red for the first
+> time.** The build was then **REJECTED by acceptance**, which stopped the track and went to
+> the owner; **he took Option A and recalibrated the bounds deliberately** (his decision,
+> recorded as his). **Task 10:** `MSW-V1` **passed** with its stop branch not firing, and
+> `MSW-V4` returned a bound — including a **premise correction** that the deviation is two
+> knobs rather than one.
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-msw-seam3.md`](2026-08-06-HANDOFF-msw-seam3.md);
+> [`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md)
+> remains authoritative for Task 9's internals and the Option A recalibration,
+> [`2026-08-06-HANDOFF-msw-task8-midflight.md`](2026-08-06-HANDOFF-msw-task8-midflight.md)
+> for Task 8's, and
+> [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md) for Seam 2's.
+> Operational document:
+> [`plans/2026-08-05-msw-package-adoption.md`](plans/2026-08-05-msw-package-adoption.md)
+> (12 tasks, seams at 5/7/10/12). Reasoning:
+> [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
+> authority record and must be read before describing this work.** Branch
+> `msw-package-adoption-plan`, draft PR **#81**.
+>
+> ~~**⚠ One question is OPEN and is the most decision-relevant thing unmeasured:** `MSW-V4`
+> bounds what the router *adds up* and explicitly does not bound what it *chooses*. **No
+> journey has been run on this artifact.**~~ *(**CLOSED 2026-08-06 (night) by `MSW-V2B`**, run
+> on the owner's authorisation. Journeys have now been run — programmatically and by hand — and
+> the deviation **does** change routes at depth on the broader pair set while barely touching
+> the listened pairs. Figures in the execution log's Task 10 section.)*
+>
+> **⚠ THIS ADOPTION IS AN OWNER OVERRIDE OF THE `GBL-` NULL.** The null's pre-registered
+> consequence was *"production stands and Option A closes without adoption"* (margin 3
+> against a bar of 5). The owner took the override knowingly on 2026-08-05, on `CAU-`'s
+> coherence pass at his own bar, the compromised instrument behind the null, and the `ULF-`
+> filter fix. **Neither `GBL-` nor `CAU-` licensed it** — `CAU-` §6 bars comparison at any
+> strength and `GBL-` §5's run-once rule still binds. **Never record this as
+> evidence-backed adoption.**
+>
+> **What stands, in one paragraph.** Tasks 1–7 build the whole capability and switch none of
+> it on. The builder gained the trimmed-union connection rule (ported from the frozen Track B
+> implementation and pinned to it by test), a `fame` fetch stage putting ListenBrainz listener
+> counts in the archive so `build` stays offline, a refusal to build when fame coverage has
+> drifted from the similarity population, and `fame_lb` as an additive APG1 key. The API reads
+> that key, ranks it against **the served artifact's own population**, and prices a `known`
+> ramp on it, refusing to boot if the ramp is live over a fameless artifact. **`cap_strategy`
+> is still `mutual_knn`, `require_fame` is `False`, `w_known_ramp_fame_pctl` is `0.0`, and the
+> frontend is untouched.** 224 builder + 254 api tests pass; Snyk clean on both packages.
+>
+> **What changed 2026-08-06 (later):** the candidate artifact **has now been built** —
+> `builder/scratch/graph-msw-tu50.bin`, gitignored, identity owned by the execution log's
+> Task 9 section. `cmd_build` gained `--cap-strategy` and `--require-fame`, both
+> per-invocation. The **acceptance bounds were recalibrated** on the owner's Option A
+> decision (node and edge only; tolerance unchanged, centre moved), and the frozen
+> calibration probe at `builder/analysis/2026-07-23-acceptance-bounds/check.py` was
+> **era-pinned** so it keeps demonstrating what it was written for. **No default was
+> flipped and nothing is adopted.**
+>
+> **Owner decisions taken, not to be re-litigated:** the full package over data-only
+> (`ULC-A2` has never been listened to or audited; the package is what `GBL-` heard and
+> `CAU-` judged); and adopt-and-live-with-it rather than spending a fresh listen.
+>
+> **Task 10's own reasoning** is the execution log's **"Task 10 continued — the successor
+> session"** section. **Every earlier handoff's "Claims that must NOT be reverted" list still
+> stands in full** — none has been retired by this work.
+>
+> **Still owed and named:** Task 11 Step 0 must era-pin `cap_strategy` **and** `require_fame`
+> in three analysis callers, or they silently change what they build and one refuses outright;
+> ~~`MSW-V4` is an `ml-graph-analyst` dispatch at Seam 3~~ *(RUN 2026-08-06 — figures in
+> `builder/analysis/2026-08-06-msw-v4-frame-deviation/`; it returned a premise correction,
+> two knobs not one)*; **Seam 3 is an OWNER STOP** before any default flips.
+> **Note Task 11 Step 0's era-pin list has a fourth sibling that is already DONE:**
+> `builder/analysis/2026-07-23-acceptance-bounds/check.py` was era-pinned at Task 9 and
+> needs nothing further. ~~One decision is his and is small: the D6 standing-layer cost, in the
+> handoff.~~ *(DISCHARGED 2026-08-05 — the owner ACCEPTED the D6 growth; `CLAUDE.md` stands as
+> committed. **Nothing is now waiting on him until Seam 3.**)*
+>
+> ---
+
+> ## ✅ THE `ULF-` FILTER WORK IS COMPLETE, 2026-08-05 (night). ~~**The next action is the OWNER'S: merge draft PR #78 then the `ulc-filter-fix` draft PR**~~ *(BOTH MERGED: #78 at `7961530`, #80 at `fd6b140`)* ~~**and decide which form of the map switch to take**~~ *(DECIDED 2026-08-05: the full listened-to package. That became the `MSW-` track in the block above, which owns current state.)*
 >
 > **Entry point for anything `ULF-`:** the governing rule document
 > [`specs/2026-08-05-unlistenable-filter-rule.md`](specs/2026-08-05-unlistenable-filter-rule.md)

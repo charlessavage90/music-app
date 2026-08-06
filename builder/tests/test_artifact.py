@@ -73,3 +73,55 @@ def test_bad_magic_is_rejected(graph):
 def test_truncated_payload_is_rejected(graph):
     with pytest.raises(ValueError):
         deserialise(serialise(graph)[:20])
+
+
+# --- fame_lb, the MSW- additive key ----------------------------------------
+
+
+def test_fame_round_trips_including_nulls(graph):
+    # A null is a measured absence (nobody has listened), never a missing
+    # value and never a floor — FAM- §1, FAM-AM1.8. It must survive the wire
+    # as a null, not as 0, which would read as a real listener count.
+    graph.fame_lb_raw = [12, None, 0]
+    assert deserialise(serialise(graph)).fame_lb_raw == [12, None, 0]
+
+
+def test_an_all_null_fame_list_still_round_trips(graph):
+    # Legitimate measurement, not an empty one: the key must be written.
+    graph.fame_lb_raw = [None, None, None]
+    assert deserialise(serialise(graph)).fame_lb_raw == [None, None, None]
+    assert b'"fame_lb"' in serialise(graph)
+
+
+def test_empty_fame_omits_the_key(graph):
+    # Additive-key discipline, exactly as for deezer_ids: FORMAT_VERSION is
+    # checked for strict equality by both parsers, so the key is added without
+    # a version bump and must be absent when there is nothing to say.
+    assert graph.fame_lb_raw == []
+    assert b'"fame_lb"' not in serialise(graph)
+
+
+def test_an_artifact_without_fame_deserialises_to_an_empty_list(graph):
+    # Every artifact built before today lacks the key, including the one the
+    # app serves. Absence means "this artifact cannot support the ramp", which
+    # the api turns into a refusal to boot only if the ramp is actually on.
+    assert deserialise(serialise(graph)).fame_lb_raw == []
+
+
+def test_adding_fame_does_not_bump_the_format_version(graph):
+    import struct
+
+    graph.fame_lb_raw = [1, 2, 3]
+    version = struct.unpack("<I", serialise(graph)[4:8])[0]
+    assert version == 1, (
+        "bumping the version would stop every existing artifact loading, "
+        "starting with the one the app serves today"
+    )
+
+
+def test_fame_absent_and_fame_empty_serialise_identically(graph):
+    # The frozen probe mirrors pin their artifacts' shas. An empty fame list
+    # must produce the same bytes as a build from before the field existed.
+    before = serialise(graph)
+    graph.fame_lb_raw = []
+    assert serialise(graph) == before

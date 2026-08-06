@@ -51,6 +51,64 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
+## ▶ QUEUED (latest) — 2026-08-06 (night) — the new map is running on your machine and waiting for you to press it
+
+**This is the decision, not a check afterwards.** Nothing has been adopted and nothing has been
+deployed. The website is untouched and still serves the old map. What is running is a **local**
+copy of the app on the new map, with the new "dig deeper" behaviour switched on — set up so you
+can decide whether to keep it.
+
+**It is already started. Open `http://localhost:5173` and it should just work.**
+
+If the page does not load, nothing is broken — the two local servers were left running and one
+may have stopped. They can be restarted from the commands in `CLAUDE.md`; ask and it takes a
+minute.
+
+### What to do
+
+1. **Build a journey between two artists you know well.** Anything you like; a pair you have
+   strong feelings about is more useful than an unfamiliar one.
+2. **Play a few of the cards in the middle.** Not just the first — the middle of the journey is
+   where all of this work lands.
+3. **Press "know them already" repeatedly — ten times or more on the same journey.** This is the
+   button that matters. Use it rather than "not for me": it is the one that pushes hardest on
+   what changed, because it is what asks the app to go further from the obvious.
+4. **Watch whether the middle keeps getting less familiar the more you press**, or whether it
+   stalls, or starts wandering somewhere that no longer feels connected to where you started.
+5. **Do it on two or three different journeys**, since the thing being tested varies a lot from
+   one pair to another.
+
+### What "wrong" looks like
+
+- **A card with nothing to play.** The clip is silent, missing, or the card just sits there.
+- **A card that plays something, but not that artist's own music.** This is the important one
+  and it is the reason this test exists rather than a script. We found one during checking: a
+  session bassist whose card played a charity single he appeared on. It plays perfectly, so
+  every automatic check says it is fine — **only a person listening can tell that it is not
+  really that artist's music.** If a card feels like that, note the name.
+- **The middle stops making sense** — artists with no audible relationship to either end.
+- **Pressing the button stops changing anything**, or changes it in a way that feels random
+  rather than further out.
+
+### What "right" looks like
+
+Journeys build quickly, every card plays, and the further you press the less familiar the middle
+gets **without losing the thread** between your two artists.
+
+**Report anything you find by name.** Every journey is in the address bar, so pasting the URL is
+enough to reproduce whatever you saw, however long afterwards.
+
+> **Left running for you** (nothing owns them; they survive this session ending):
+> the app on port **5173**, pid 199836, and the server behind it on port **8000**, pid 249336 —
+> both started 2026-08-06 08:24, after the last commit, so they serve the work being tested.
+> The deeper-digging behaviour is a **local override only**; no committed setting was changed,
+> and stopping those two processes returns everything to today's behaviour.
+>
+> Detail, for whoever wants it: `docs/superpowers/2026-08-05-msw-execution-log.md`, the Task 10
+> sections.
+
+---
+
 ## ✅ DONE — 2026-08-02 (evening) — the wrong-artist clip fault now has a fix built, and the website got a tidy-up you can check in ten seconds
 <!-- "(latest)" stripped 2026-08-02 (night): only the newest entry carries it, per the
      convention below. This entry's content is unchanged and still accurate. -->

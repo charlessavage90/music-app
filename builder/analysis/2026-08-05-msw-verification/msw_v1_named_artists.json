@@ -1,0 +1,88 @@
+{
+  "check": "MSW-V1",
+  "old_artifact": {
+    "name": "graph-algb-full.bin",
+    "sha256": "d008a2b5e0c23cf31b3f12357fa1fccff55d209ec18f54c872cdae9bf4a0757f",
+    "nodes": 68467
+  },
+  "new_artifact": {
+    "name": "graph-msw-tu50.bin",
+    "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+    "nodes": 58838
+  },
+  "core_names_checked": 6,
+  "core_survivors": 0,
+  "stop_branch_fires": false,
+  "rows": [
+    {
+      "name": "Rick Davies",
+      "mbid": "886b3be4-c93b-4085-85b0-b73ce2817246",
+      "core": true,
+      "ambiguous_name": false,
+      "in_old": true,
+      "in_new": false,
+      "verdict": "dropped_by_filter",
+      "audit_reason": "could not find his solo work anywhere he could listen"
+    },
+    {
+      "name": "Max Martin",
+      "mbid": "6622a50e-5206-44d0-9ad5-96047a726dcf",
+      "core": true,
+      "ambiguous_name": false,
+      "in_old": true,
+      "in_new": false,
+      "verdict": "dropped_by_filter",
+      "audit_reason": "only findable \"solo work\" is a musical; otherwise a writer/producer"
+    },
+    {
+      "name": "Brad Delson",
+      "mbid": "2d4a1dd1-2cd8-4553-bf0b-74b8c9179633",
+      "core": true,
+      "ambiguous_name": false,
+      "in_old": true,
+      "in_new": false,
+      "verdict": "dropped_by_filter",
+      "audit_reason": "one release with one song on MB, and it cannot be found anywhere"
+    },
+    {
+      "name": "Joey Kramer",
+      "mbid": "4b289467-0bc9-4e6a-aea6-b42247c89756",
+      "core": true,
+      "ambiguous_name": false,
+      "in_old": true,
+      "in_new": false,
+      "verdict": "dropped_by_filter",
+      "audit_reason": "Aerosmith drummer; no solo work findable"
+    },
+    {
+      "name": "Dallas Taylor",
+      "mbid": "6c9a8dad-86ba-4c31-bb52-aca47a484dea",
+      "core": true,
+      "ambiguous_name": false,
+      "in_old": true,
+      "in_new": false,
+      "verdict": "dropped_by_filter",
+      "audit_reason": "no releases visible at all"
+    },
+    {
+      "name": "John McVie",
+      "mbid": "c78f0746-ea5d-44c0-92ee-f32745951345",
+      "core": true,
+      "ambiguous_name": false,
+      "in_old": true,
+      "in_new": false,
+      "verdict": "dropped_by_filter",
+      "audit_reason": "no solo releases"
+    },
+    {
+      "name": "Four Tet",
+      "mbid": "3bcff06f-675a-451f-9075-99e8657047e8",
+      "core": false,
+      "ambiguous_name": false,
+      "in_old": true,
+      "in_new": true,
+      "verdict": "present_legitimately",
+      "audit_reason": "listened and understood; declined on bio grounds, not on silence"
+    }
+  ]
+}

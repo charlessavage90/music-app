@@ -2,11 +2,17 @@
 
     artistpath-build bootstrap  --out bootstrap.json
     artistpath-build crawl      --bootstrap bootstrap.json --archive-dir ./archive
+    artistpath-build fame       --archive-dir ./archive
     artistpath-build build      --archive-dir ./archive --out graph-v1.bin
     artistpath-build fixture    --graph graph-v1.bin --out fixture.bin --size 500
 
 Popularity is score-weighted in-degree, computed from the similarity archive
 during `build` (findings 6f). There is no separate popularity input.
+
+FAME is different and is NOT popularity: `fame` fetches ListenBrainz listener
+counts into the archive, because `build` may not touch the network (spec §9).
+It runs after `crawl` and before `build`. The two quantities are never read as
+each other — see fame.py and log §2.11/§2.12.
 """
 
 from __future__ import annotations
@@ -30,7 +36,8 @@ from artistpath_builder.config import PERMITTED_ALGORITHMS, BuilderConfig
 from artistpath_builder.crawl import Crawler, http_fetcher
 from artistpath_builder.fixture import extract_fixture
 from artistpath_builder.manifest import build_manifest, write_manifest
-from artistpath_builder.pipeline import build_from_archive
+from artistpath_builder.fame import fetch_fame, lb_fame_fetcher, seed_fame
+from artistpath_builder.pipeline import archive_artists, build_from_archive
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 from artistpath_builder.sources.seeds import (
     BOOTSTRAP_CEILING,
@@ -66,6 +73,19 @@ def _config(args) -> BuilderConfig:
                 "artistpath_builder.config.PERMITTED_ALGORITHMS"
             )
         overrides["algorithm"] = algorithm
+    # Both added for MSW- Task 9. cap_strategy needs no validation here:
+    # BuilderConfig.__post_init__ rejects anything outside
+    # PERMITTED_CAP_STRATEGIES, so a typo raises before a build starts.
+    #
+    # require_fame is store_true rather than a tri-state flag, so it can only
+    # ever turn the guard ON from the CLI. Once config.py's default flips at
+    # adoption, omitting the flag inherits True — a CLI that could silently
+    # switch the guard OFF is the one thing this must not offer.
+    cap_strategy = getattr(args, "cap_strategy", None)
+    if cap_strategy:
+        overrides["cap_strategy"] = cap_strategy
+    if getattr(args, "require_fame", False):
+        overrides["require_fame"] = True
     return BuilderConfig(**overrides)
 
 
@@ -124,6 +144,60 @@ def cmd_crawl(args) -> int:
     crawler.crawl([row["mbid"] for row in bootstrap])
     if crawler.failures:
         logging.warning("%d artists failed permanently", len(crawler.failures))
+    return 0
+
+
+def cmd_fame(args) -> int:
+    """Fetch ListenBrainz listener counts into the archive.
+
+    Separate from `build` because `build` may not touch the network (spec §9).
+    Resumable: re-running costs only what is not already recorded, so an
+    interrupted fetch is picked up rather than restarted.
+    """
+    config = _config(args)
+    archive = _archive(args)
+    source = ListenBrainzSource(config)
+    mbids = archive_artists(archive, config, source)
+    logging.info("fame: %d artists in this archive", len(mbids))
+
+    if args.seed:
+        if not args.seed_sha:
+            raise SystemExit(
+                "--seed requires --seed-sha: the snapshot's sha256 IS the "
+                "instrument's identity (FAM-AM1.7), and an unverified file "
+                "has unknown provenance. Take it from the manifest sidecar."
+            )
+        # No log line here: `seed_fame` already emits "fame seed: …" itself.
+        # Logging it again at the call site printed the same counts twice per
+        # run. Deferred at Task 8 with the condition "whichever task next
+        # touches cli.py"; Task 9 is that task.
+        seed_fame(
+            archive,
+            Path(args.seed),
+            expected_sha256=args.seed_sha,
+            fetched=args.seed_date,
+        )
+
+    started = time.monotonic()
+    report = fetch_fame(
+        archive,
+        mbids,
+        lb_fame_fetcher(config),
+        pause_seconds=config.request_delay_seconds,
+    )
+    logging.info(
+        "fame: %d fetched (%d null), %d already recorded, %d total, %.0fs",
+        report.fetched,
+        report.nulls,
+        report.skipped,
+        report.total,
+        time.monotonic() - started,
+    )
+    if report.total != len(mbids):
+        raise SystemExit(
+            f"fame covered {report.total} artists but the archive has "
+            f"{len(mbids)} — refusing to report success on a partial pass"
+        )
     return 0
 
 
@@ -202,12 +276,48 @@ def main(
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
 
+    p_fame = sub.add_parser("fame")
+    p_fame.add_argument(
+        "--algorithm",
+        default=None,
+        help="which algorithm's archive tree to cover; default production's",
+    )
+    p_fame.add_argument(
+        "--seed",
+        default=None,
+        help="an already-fetched snapshot to import before fetching the rest",
+    )
+    p_fame.add_argument(
+        "--seed-sha",
+        default=None,
+        help="expected sha256 of --seed, from its manifest sidecar (required "
+        "with --seed; never transcribe it by hand)",
+    )
+    p_fame.add_argument(
+        "--seed-date",
+        default="unknown",
+        help="fetch date recorded for seeded records, from the seed's manifest",
+    )
+    add_archive_args(p_fame)
+    p_fame.set_defaults(func=cmd_fame)
+
     p_build = sub.add_parser("build")
     p_build.add_argument("--out", required=True)
     p_build.add_argument(
         "--algorithm",
         default=None,
         help="which algorithm's archive tree to build from; default production's",
+    )
+    p_build.add_argument(
+        "--cap-strategy",
+        default=None,
+        help="connection rule; default config's (mutual_knn until adoption)",
+    )
+    p_build.add_argument(
+        "--require-fame",
+        action="store_true",
+        help="refuse to build unless every kept artist has a fame record "
+        "(MSW-G3); the adopted artifact is built with this explicitly on",
     )
     add_archive_args(p_build)
     p_build.set_defaults(func=cmd_build)
