@@ -922,3 +922,68 @@ weakest-link asked for, on a built artifact rather than on a census.
 
 **What it does not settle:** that no *other* artist of this class survives. Six names is the
 audit's sample, not a census of the map, and `MSW-V1` was never scoped to be one.
+
+### `MSW-V4` — the frame-deviation bound. Derivation only; no read fires.
+
+Dispatched to `ml-graph-analyst` with the plan's verbatim question, pre-authorised by the
+owner. **Figures owned by `builder/analysis/2026-08-06-msw-v4-frame-deviation/`**
+(`mv4_frame.json`, `mv4_gaps.json`, with `README.md` and the two scripts) — cited here, never
+restated as new. Both artifact checksums were verified inside its scripts.
+
+**It returned a PREMISE CORRECTION, and that is the most valuable thing in it.** The plan
+describes deviation 2 as a change of frame *population*. The **estimator differs too**:
+
+- shipped (`graph_store.py::fame_percentiles`): `|{f < v}| / (N_nonnull − 1)`
+- `CRE-` (frozen `fi_stats.Frame`, `FAM-AM1.6`): `(|{f < v}| + (|{f = v}| + 1)/2) / N_nonnull`,
+  with values above the frame maximum capped at `pctl(max)`
+
+**This session verified the shipped half against source rather than accepting the report**:
+`np.searchsorted(frame, values, side="left") / max(1, frame.size - 1)` is exactly the claimed
+form. The analyst did not work around the discrepancy — it decomposed the two knobs with a
+third column and showed the **estimator contributes essentially nothing** (median 5.8e-05)
+while the population knob is the whole effect. Reported as one knob, the attribution would
+have been wrong.
+
+**A second premise it checked and cleared:** raw values did not drift. 56,080 of the non-null
+nodes appear in the `CRE-` snapshot with an **identical integer, zero differing** — so none of
+the measured difference is a value change.
+
+**The three results that matter, in the plan's own terms:**
+
+1. **Nobody swaps places.** Both rulers are monotone in the same raw value across all 18,641
+   distinct values — checked by enumeration, not assumed. The frame swap is a monotone
+   re-mapping and **cannot reorder two artists**. The device's ordering of "who is the obscure
+   option here" is untouched.
+2. **The device is uniformly slightly weaker, not differently aimed.** Shipped percentiles run
+   lower for **99.6 %** of nodes, median shift ≈ 0.09. At the adopted `r = 0.01` and twenty
+   presses that is ≈ 0.018 per hop against a median static hop cost of ≈ 1.49 — about **1.2 %**,
+   just under the cost of one extra hop.
+3. **The "it's just an offset" reading fails at the top of the scale**, and the analyst said so
+   against its own headline: the residual after removing the shift reaches 0.091, because the
+   `CRE-` frame caps 39 distinct raw values at one percentile and shipped does not.
+
+**A finding that is NOT deviation 2, and must not be filed under it.** 21 nodes are null in the
+new artifact *and* absent from the `CRE-` snapshot. Shipped prices them **0.0** (measured zero
+listeners = maximal obscurity); the `CRE-` device would have priced them **0.5**. That 0.5 gap
+is the largest single discrepancy anywhere in the measurement — 0.10 of cost per hop at twenty
+presses, five times `w_hop`.
+
+**This is consistent with the plan and is not a defect.** Deviation 3 says the harness's
+"absent from snapshot → neutral 0.5" class *cannot arise in a shipped artifact*, and it does
+not: shipped semantics are 0.0 by construction. What the measurement adds is that **the
+comparison to the listened arm carries a 0.5 gap for those 21 artists** — true and worth
+knowing, and deviation 3's "same direction as `frame.pctl(0)`" holds for the other 71 nulls
+(difference 6.7e-06) but **not** for these 21. Recorded precisely rather than smoothed into
+deviation 2's bound.
+
+**Its own weakest link, carried forward rather than dropped:** cost magnitudes do not predict
+route changes. **No path was run and none was decoded.** A 1.2 % per-hop shift can still flip a
+route between two near-tied candidates, and nothing here bounds how often. The analyst named
+the measurement that would (paired `find_journey` runs over a fixed pair set under both
+percentile columns, paths decoded), stated it was not what it was asked for, and stopped
+instead of quietly extending scope — the right call. It also volunteered that its co-neighbour
+gap figures are the weakest thing it produced, being degree-weighted samples of *available*
+alternatives rather than of near-ties.
+
+**No read fires on any of this.** `MSW-V4` is a bound for the Seam 3 report; whether the
+deviation is acceptable is the owner's Task 11 call.
