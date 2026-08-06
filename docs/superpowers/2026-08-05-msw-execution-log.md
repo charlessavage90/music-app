@@ -877,3 +877,48 @@ comparison is the record; the second file is not.
 
 **Task 9 is complete.** Steps 1–5 all done: `MSW-G3` exercised red, artifact built and
 identified, manifest written, determinism confirmed, committed.
+
+---
+
+## Task 10 — verification
+
+### `MSW-V1` — PASSED. The stop branch does NOT fire.
+
+**Figures owned by `builder/analysis/2026-08-05-msw-verification/msw_v1_named_artists.json`**,
+written by `msw_verify.py`. Both artifacts are sha-verified inside the script, which exits
+rather than proceeding on a mismatch — several graphs live in `scratch/` and a conclusion drawn
+from the wrong one looks exactly like a correct one.
+
+**All six core names were present in the old candidate artifact and are absent from the new
+one.** No name was ambiguous, so `BYP-13`'s "a name is not an identifier" trap did not arise
+here — recorded because the script checks for it rather than assuming it away.
+
+| Name | in old | in new | verdict |
+|---|---|---|---|
+| Rick Davies | yes | no | dropped by filter |
+| Max Martin | yes | no | dropped by filter |
+| Brad Delson | yes | no | dropped by filter |
+| Joey Kramer | yes | no | dropped by filter |
+| Dallas Taylor | yes | no | dropped by filter |
+| John McVie | yes | no | dropped by filter |
+| *Four Tet (context, cannot fire the branch)* | yes | **yes** | present legitimately |
+
+**The plan says "nine named artists" and lists six; both are right and the discrepancy is
+worth writing down** rather than silently resolving. `CAU-C3`'s table holds **nine SLOTS across
+seven distinct artists** — Brad Delson and Dallas Taylor occupy two each, plus Rick Davies's
+second slot in the DOESN'T FIT column. The seventh artist is Four Tet, who is deliberately not
+a core name: findings §1 records that he *listened and understood*, declining on bio grounds
+rather than on having nothing to play. **His surviving is the correct outcome, not a miss.**
+
+**Red control — the check can fail.** Re-run with the "new" artifact pointed at the *old*
+unfiltered one, **6 of 6 core names SURVIVE and the stop branch fires.** So the pass is a real
+discrimination, not six lookups that would have returned "absent" whatever was loaded. This is
+the same discipline `MSW-G3` got at Task 9 Step 1, and for the same reason.
+
+**What this settles, in plain terms:** the artists the owner could not judge in the coherence
+audit *because there was nothing of theirs to listen to* are gone from the map — and the one he
+could listen to is still there. It is the real-world confirmation `CAU-` §3's second
+weakest-link asked for, on a built artifact rather than on a census.
+
+**What it does not settle:** that no *other* artist of this class survives. Six names is the
+audit's sample, not a census of the map, and `MSW-V1` was never scoped to be one.
