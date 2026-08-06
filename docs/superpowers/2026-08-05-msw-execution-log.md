@@ -294,3 +294,68 @@ morning.
 **Next:** Task 8 (fetch fame over the candidate archive — **back up
 `fi_union_snapshot.json` first**), Task 9 (build), Task 10 (`MSW-V1`–`V4`), then Seam 3,
 which is an owner stop before the adoption flip.
+
+---
+
+## Seam 2 closeout — what the checks found
+
+**B5 caught a repeat of a documented defect, in the same file.**
+`.claude/agents/ml-graph-analyst.md` restates the cost function, and this work added a
+seventh term to it. `CLAUDE.md` already records *that exact file* losing a whole term to
+the 2026-07-23 rename — a defect of **absence**, which no grep for stale identifiers can
+find. It recurred. The fix now carries a note at the site telling a future reader that if
+`pathfinding.py` has a term the line does not, the line is wrong.
+
+That cascaded into `CLAUDE.md`, where one statement had become outright **false**:
+*"`floor_raw` is the only depth-graduated device in the function"* — there are two now.
+Corrected along with the cost formula and the APG1 key list. **D6 row 1** (false about the
+world → the session's call), and the split is recorded below.
+
+**B3 — three further invariants perturbed, all go red:** the `MSW-G3` refusal, the
+null-percentile write-back, and the artifact's omit-when-empty rule. **Five perturbations
+across this branch, two of which found tests that could not fail.** That ratio is the
+transferable finding: on this work, a green test is not evidence until it has gone red.
+
+**B1 — `doc-auditor` found two MEDIUM defects, both real, both mine.** Line references had
+drifted: `config.py`'s `cap_strategy` 81 → 92, `pipeline.py`'s cap seam 352 → 390 — *because
+this plan's own execution added lines above them*. Every reference was correct when written.
+The one that mattered was **Task 11, unexecuted, naming `config.py:81` for the adoption flip**
+— the most consequential edit in the plan, pointing at the wrong line. Line numbers are now
+removed rather than maintained, since the plan edits the files it cites; symbol names do not
+move. The auditor passed the two things this session could not read cold: the `GBL-` banner
+respects `CAU-` §6's barred reads and does not read as the audit rescuing the null, and
+check G2 is correctly scoped.
+
+**A3 — conditions re-tested against reality, not just checked for existence.** `ULC-F3`,
+`ULC-F4` and `ULF-3` all still open, correctly. **`ULF-3`'s condition gets its first half
+satisfied by this track's Task 12** ("a shipped build has routed on a `ULF-` list") — the
+next closeout must re-check it rather than copy it forward, which is the failure mode A3
+exists to catch.
+
+**A4 — five knobs added, every one at its old default, deliberately.** `cap_strategy`,
+`union_top_j`, `union_degree_ceiling`, `require_fame`, `w_known_ramp_fame_pctl`. **The work
+is not closed**; Task 11 owns the flips. **A5** — no listeners on 8000 or 5173; this session
+started none. **B2** — no orphans. **C1** — nothing written to `TEST-QUEUE.md`, which is the
+correct discharge: nothing the owner can press changed. **D2** — the additive key leaves the
+committed fixtures valid, covered by a test on each side. **D3** — no artifact built,
+adopted or compared; the only hash produced is `MSW-G1`'s, above. **D4** — 220 builder + 254
+api + 107 frontend.
+
+### D6 — standing context layer
+
+| Layer | Delta | Unit |
+|---|---|---|
+| **Unconditional** (`CLAUDE.md` + `MEMORY.md` index + every skill/agent `description:`) | **+236** | characters |
+| **Conditional** (skill bodies, agent bodies, memory bodies) | **+42** | lines |
+
+Baseline on `main`: 45,333 characters / 2,417 lines, measured from a worktree so `memory/`
+came from this machine's own directory.
+
+The conditional +42 is `doc-auditor`'s check G2 and `ml-graph-analyst`'s seventh term —
+paid only by sessions that dispatch those agents. The unconditional +236 splits: **~150 is
+strict correction** and taken as the session's call; **~86 is a new clause** on the
+additive-key rule (*"the last two are additive keys, omitted when empty, and the version is
+NOT bumped for them"*), which is **growth and the owner's**. The case is that a future
+session adding a ninth key and bumping `FORMAT_VERSION` breaks every existing artifact
+including the served one, and nothing else in the standing layer says so. Declining it is a
+one-line deletion and the correction stands without it.
