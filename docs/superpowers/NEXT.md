@@ -83,7 +83,9 @@ adoption OVERRIDES the null on the owner's authority, which is not the same as r
 > (12 tasks, seams at 5/7/10/12). Reasoning:
 > [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
 > authority record and must be read before describing this work.** Branch
-> `msw-package-adoption-plan`, draft PR **#81**.
+> `msw-package-adoption-plan`, **PR #81 MERGED 2026-08-06** at `aafcd6e`. **Tasks 1–10 are on
+> `main` and every default is still off** — merging landed the capability, it adopted nothing.
+> **Tasks 11–12 need a NEW branch off `main`**; the old one is spent.
 >
 > ~~**⚠ One question is OPEN and is the most decision-relevant thing unmeasured:** `MSW-V4`
 > bounds what the router *adds up* and explicitly does not bound what it *chooses*. **No

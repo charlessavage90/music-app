@@ -8,7 +8,11 @@ owns it.
 **A SEAM handoff, not mid-flight.** Task 10 is complete, Seam 3 is reached, and the work is at
 its designed stopping point. **The next action is the owner's decision**, not work.
 
-**Branch** `msw-package-adoption-plan`, draft PR **#81**. HEAD at closeout. Tree clean.
+**Branch** `msw-package-adoption-plan`, **PR #81 — MERGED 2026-08-06** at `aafcd6e` on the
+owner's instruction, one seam earlier than the plan intended (it had the merge at Task 12).
+**Tasks 1–10 are therefore on `main` with every default still off: merging landed the
+capability and adopted nothing.** **Tasks 11–12 start from a NEW branch off `main`** — this one
+is spent. Tree clean.
 **Two detached servers are deliberately left running** — see "Anything in flight".
 
 ---
