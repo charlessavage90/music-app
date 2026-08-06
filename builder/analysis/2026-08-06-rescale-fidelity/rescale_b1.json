@@ -1,0 +1,29 @@
+{
+ "pct_edges_clipped_at_1": 1.454,
+ "score_percentiles": {
+  "p1": 0.3683,
+  "p5": 0.3802,
+  "p25": 0.4364,
+  "p50": 0.527,
+  "p75": 0.6458,
+  "p95": 0.8683,
+  "p99": 1.0
+ },
+ "median_within_artist_spread": 0.1926,
+ "median_cost_leverage_whole_neighbourhood": 0.5778,
+ "pct_artists_with_tied_top_neighbours": 2.126,
+ "ramp_at_20_presses_full_fame_range": 0.2,
+ "w_hop": 0.02,
+ "raw_p99": 839.0,
+ "raw_to_rescaled": {
+  "25": 0.4839,
+  "50": 0.5839,
+  "100": 0.6854,
+  "200": 0.7876,
+  "400": 0.8902,
+  "918": 1.0,
+  "2000": 1.0,
+  "5000": 1.0
+ },
+ "pct_raw_edges_at_or_above_p99": 1.002
+}
