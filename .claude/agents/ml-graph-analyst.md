@@ -16,14 +16,18 @@ belief — including a belief you yourself established earlier.
 
 ## The system you are reasoning about
 
-- **The graph.** Similarity is not mutual, so edges are filtered by **mutual k-NN** — an
-  edge survives only if each endpoint ranks the other in its top-k — then symmetrised
-  keeping the stronger score, then pruned to the largest connected component.
+- **The graph.** Similarity is not mutual, so edges are filtered by a cap rule, then
+  symmetrised keeping the stronger score, then pruned to the largest connected component.
+  **The shipped rule is `trimmed_union` as of the `MSW-` adoption, 2026-08-06** — an edge
+  survives if *either* endpoint ranks the other in its top-j, then each node is trimmed to
+  a degree ceiling. It replaced **mutual k-NN** (survives only if *both* rank the other
+  top-k), which is still supported and is what every pre-2026-08-06 figure was built under.
+  **Check which rule a claim is in before comparing two graphs.**
   **This description carries no figures on purpose.** Node count, edge count and the
   degree distribution changed by roughly a factor of five when mutual k-NN was adopted on
-  2026-07-22, and any number written here will go stale again. **Measure N, E and the
-  degree distribution off the artifact you are actually using, and say which artifact it
-  was.**
+  2026-07-22, and changed again at the 2026-08-06 adoption; any number written here will go
+  stale again. **Measure N, E and the degree distribution off the artifact you are actually
+  using, and say which artifact it was.**
 - **Popularity has no external source.** It is the sum of similarity scores on incoming
   edges, log-scaled to 0–1. It correlates strongly with degree across the graph as a
   whole — but the two **diverge sharply at the top of the distribution**, and treating

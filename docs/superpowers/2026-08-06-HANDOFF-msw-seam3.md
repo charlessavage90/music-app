@@ -1,6 +1,15 @@
 # Handoff — the `MSW-` map switch, Seam 3 reached, 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ SUPERSEDED 2026-08-06 on next actions by
+[`2026-08-06-HANDOFF-msw-adoption.md`](2026-08-06-HANDOFF-msw-adoption.md)** — the owner gave
+the Seam 3 go, and Tasks 11 and 12 have both run: the map switch is adopted and deployed.
+**Remains authoritative for Seam 3's own internals** — the Task 10 verification results
+(`MSW-V1`, `MSW-V2`, `MSW-V2B`, `MSW-V3`) and its eight claims-not-to-revert, all of which
+still stand. Its Task 11 obligations (Step 0's era-pins, Step 0b's agent-definition
+correction) are **discharged**; the Pino Palladino observation it names as the sharpest input
+is now tracked as **`CLIP-1`**.
+
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-06-HANDOFF-msw-task10-midflight.md`](2026-08-06-HANDOFF-msw-task10-midflight.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.

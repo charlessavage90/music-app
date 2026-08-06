@@ -51,7 +51,88 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ▶ QUEUED (latest) — 2026-08-06 (night) — the new map is running on your machine and waiting for you to press it
+## ▶ QUEUED (latest) — 2026-08-06 — the new map is LIVE on the website
+
+**This is the real one.** Everything you tested locally this morning is now what
+`https://musicapp.cmiller.io` serves, to you and to anyone you send it to. Nothing is running
+on your machine that matters any more.
+
+**It is already deployed and already checked mechanically.** The live engine is serving the new
+map — matched on checksum, artist count and edge count against the file it was built from — and
+the "dig deeper" behaviour is switched on. A journey built through the live site returns
+sensible results, every card tried resolved a clip, and pressing "know them already" changes the
+middle of the journey at every press.
+
+### What to exercise — twenty minutes
+
+1. **Two or three journeys between artists you know well.** Expect them to be **different from
+   last week** — that is the point of this release, not a fault. The old map is gone.
+2. **Play the cards in the middle**, not just the ends.
+3. **Press "know them already" ten or more times on one journey.** This is the button the whole
+   release is about. Watch whether the middle keeps getting less familiar, or stalls, or starts
+   wandering somewhere with no connection to where you started.
+4. **Do it on a phone too.** Nothing about the layout changed, but this is the first time the
+   new map has been on a real device.
+5. **Send someone a link** mid-journey and check it lands on that exact journey.
+
+### What "wrong" looks like
+
+- **A card with nothing to play** — silent or stuck. That class was filtered out, so one
+  appearing is a genuine finding, not bad luck.
+- **A card that plays something, but not that artist's own music.** This is `CLIP-1`, already
+  known and deliberately not fixed yet — the examples were Albert Hammond Jr. playing a track
+  he guests on, and Metric playing a remix. **Note names if you hit more**, because how often
+  it happens is what decides whether it is worth fixing.
+- **The middle stops making sense** — artists with no audible relation to either end.
+- **Pressing the button stops changing anything**, or changes it randomly rather than digging
+  further out.
+
+### What "right" looks like
+
+Journeys build quickly, every card plays, and the further you press the less familiar the
+middle gets **without losing the thread** between your two artists.
+
+**Report anything by name, and paste the URL** — every journey is in the address bar, so a link
+reproduces exactly what you saw however long afterwards.
+
+> **Rollback, if something is badly wrong:** the previous map is still in the bucket untouched
+> and redeploying it is one command. Ask and it takes a few minutes.
+>
+> **Two local servers from this morning are still running** (ports 5173 and 8000) and are now
+> redundant. Nothing owns them; say the word and they stop.
+>
+> Detail: `docs/superpowers/2026-08-05-msw-execution-log.md`, the Task 11 and 12 sections.
+
+---
+
+## ✅ DONE — 2026-08-06 — the new map on your machine: PRESSED, and it decided the release
+
+> ### ✅ RUN BY THE OWNER 2026-08-06. He pressed it, and it produced a go.
+>
+> **This entry existed to be the decision, and it was.** He tested enough tracks to say move
+> forward, and the map switch went to production the same day — see the newer entry above,
+> which owns what is now live.
+>
+> **One finding came out of it, and it is logged rather than fixed: `CLIP-1`.** A clip can be
+> the right artist and still be the wrong impression of them — a guest credit or someone
+> else's remix instead of the artist's own work. He named two: **Albert Hammond Jr.**, whose
+> card played *"Cinnamon (feat. Albert Hammond Jr.)"* from a Damiano David album, and
+> **Metric**, which played *"Help I'm Alive (BYNX Rework)"* rather than any Metric original.
+>
+> **It is not new and it is not a regression** — the new map did not cause it. It surfaced now
+> because journeys pass through less-famous artists more often, and because the earlier
+> listening work taught him what to look for. It is **distinct from** the wrong-artist fault
+> (a different artist of the same name) and from the artists-with-nothing-to-play class (both
+> already handled). Recorded with its condition in
+> `docs/superpowers/2026-08-05-msw-execution-log.md`; **whether it is worth fixing is his
+> call**, since the fix trades how often a clip is available against how representative it is.
+>
+> **The two local servers this entry left running are now redundant** — the live site serves
+> the same thing. Nothing owns them and they are still up; they can be stopped whenever.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-08-06 (night) — the new map is running on your machine and waiting for you to press it
 
 **This is the decision, not a check afterwards.** Nothing has been adopted and nothing has been
 deployed. The website is untouched and still serves the old map. What is running is a **local**
