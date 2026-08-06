@@ -30,6 +30,7 @@ from artistpath_builder.graph import (
     build_graph,
     largest_component,
     mutual_knn_cap,
+    trimmed_union_cap,
     symmetrise,
 )
 from artistpath_builder.models import ArtistStats
@@ -349,9 +350,21 @@ def build_from_archive(
         mbid: {dst: strength for dst, strength in scored}
         for mbid, scored in scored_adjacency.items()
     }
-    adjacency = mutual_knn_cap(
-        adjacency, config.max_neighbours_per_artist, ranking=ranking
-    )
+    # Both strategies rank on the unclipped strengths above and both bound
+    # degree; they differ in reciprocity. mutual_knn keeps an edge only if
+    # BOTH endpoints rank the other top-k; trimmed_union keeps it if EITHER
+    # does, then trims to a ceiling. See BuilderConfig.cap_strategy.
+    if config.cap_strategy == "trimmed_union":
+        adjacency = trimmed_union_cap(
+            adjacency,
+            config.union_top_j,
+            config.union_degree_ceiling,
+            ranking=ranking,
+        )
+    else:
+        adjacency = mutual_knn_cap(
+            adjacency, config.max_neighbours_per_artist, ranking=ranking
+        )
     adjacency = symmetrise(adjacency)
     keep = largest_component(adjacency)
     logger.info("largest component: %d of %d artists", len(keep), len(adjacency))
