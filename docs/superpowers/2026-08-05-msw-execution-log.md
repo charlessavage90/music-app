@@ -1186,3 +1186,55 @@ rule; a different rule could give a different divergence rate, and nothing here 
 And "the journeys differ" is not "the journeys are worse" — **this measurement carries no
 quality judgement in either direction**, which is the owner's, and is not evidence for or
 against adoption on its own.
+
+### `MSW-V3` — boot and press. The app works on the new artifact, under both configurations.
+
+**Two boots, because the plan asks for the Task 11 configuration and one field is not
+env-surfaced.** `config.py` reads env for `graph_path`, the sha, the origin secret, CORS and
+the clip cache — **not** `w_known_ramp_fame_pctl`. The plan allows "a one-line local override
+noted in the log": it was a factory module **in the session scratchpad**, outside the repo,
+constructing the same app as `build_default_app` with one field replaced. **`config.py` was not
+touched and no default was flipped** — the owner's hard stop on Task 11 stands, and killing the
+process returns the app to `0.0`.
+
+- **Ramp OFF (`w_known_ramp_fame_pctl = 0.0`, today's shipped default), port 8000.**
+- **Ramp ON (`0.01`, `P1a` — what Task 11 would adopt), port 8001.**
+
+**Both boot clean and `/health` reports the right artifact:** sha `43dd82bb…`, 58,838 artists,
+1,315,684 edges — **matching the sidecar**, which is the Task 12 Step 3 check performed early
+and locally. The boot guard that refuses a live ramp over a fameless artifact did not need to
+fire; this artifact carries fame.
+
+**Playwright e2e: 5 of 5 passed** (`fallback`, `responsive`, `path`, and both `playback`
+specs), against the new artifact through the Vite proxy. **Run at the shipped default**, so it
+exercises the artifact and the app, not the ramp.
+
+**Three pairs pressed to ten, five depths each, both configurations** — The War On Drugs →
+Sigur Rós, The Killers → The Beatles, Tame Impala → Fountains Of Wayne (MBIDs taken **verbatim
+from `gbl_pairs_approved.json`**; two of three were wrong when first guessed from the name,
+which is `BYP-13` exactly, caught before it reached a result). **The interior changed at every
+press step, on every pair, in both configurations.** Raw records in the scratchpad, summarised
+here.
+
+**Clips: every card on every final path resolved — zero dead cards.** And the resolution was
+checked past the JSON: the returned `preview_url`s fetch **HTTP 206, `audio/mpeg`, real bytes**.
+
+**⚠ AUDIBILITY IS NOT CONFIRMED AND IS NOT CLAIMED.** This session cannot listen. "A URL that
+returns audio bytes" is what was verified; whether it *sounds* like anything is the owner's
+hand test, and the standing instruction is to say so rather than claim it.
+
+**The most owner-relevant thing the hand test found, and it is a concrete instance of what
+`MSW-V2` counted.** In the ramp-off run **Pino Palladino** — who **is** in `ULC-D2` — reached
+an interior card on Tame Impala → Fountains Of Wayne at ten presses. His clip resolves happily
+to **"We Are The World (Live)"**: a charity ensemble recording, not his own work. So **"the
+clip resolves" is not the same property as "this artist has something of their own"**, and the
+dead-card check cannot see the difference. That is the `CAU-C3` complaint arriving through a
+card that passes every automated check.
+
+**One reading explicitly NOT taken.** The ramp-on run showed **zero** `ULC-D2` artists across
+its 41 interior cards against one in the ramp-off run's 42. **That is not evidence the ramp
+reduces exposure** — three pairs is a hand check, not a measurement, and `MSW-V2` is the
+measurement. Recorded so the number cannot be picked up later as though it were one.
+
+**Consistent with `MSW-V2B`:** the two configurations produce different journeys at depth and
+identical ones at `k = 0`, which is what a ramp that is not added at `k = 0` must do.
