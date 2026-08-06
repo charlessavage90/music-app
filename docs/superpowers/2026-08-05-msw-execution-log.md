@@ -1038,3 +1038,22 @@ same session as the build.
 reproduction of those figures. This session touched no standing-layer file: `CLAUDE.md` is
 correct as committed and its "Graph shape" section becomes false only at Task 11, where its
 correction is already listed. **Nothing is owed to the owner on this.**
+
+**B1 — `docs-lint` hard checks passed; the `doc-auditor` found NOTHING.** 27 `CAND`
+figure-restatement candidates, every one a pre-existing threshold in a preregistration spec
+and none introduced by this diff — checked file by file against the diff rather than assumed.
+The auditor was told the lint had run so it spent its budget on the semantic half, and it
+verified the load-bearing claims **against source**: both CLI flags present with
+`--require-fame` a `store_true`, both defaults still at `mutual_knn`/`False`, the recalibrated
+bounds as logged, `PRE_MSW_ACCEPTANCE` correctly implemented in the frozen probe, and the
+seven-term cost function in `.claude/agents/ml-graph-analyst.md` complete against
+`pathfinding.py` — that last being the exact defect-of-absence that agent definition was
+corrected for on 2026-07-23. It also confirmed the three-link handoff chain reads **forwards**.
+
+**A clean audit is recorded as a clean audit, not as an absence of one.** This branch's
+previous audit (Task 8) found a real MEDIUM — a `docs/README.md` row silent on work that had
+happened — and that finding was actioned. **B5's stale-figure finding above is this session's
+one documentation defect, and the auditor did not find it**, which is worth recording: it sits
+in a document outside the diff and was reached by the figure sweep rather than by the audit.
+The two checks are not substitutes, which is what the skill says and what this run
+demonstrates.
