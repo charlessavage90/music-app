@@ -21,9 +21,11 @@ Governing design:
 - **Billing alerts enabled** in the account's billing preferences. Without it the
   `AWS/Billing` metric does not exist and the alarm sits in `INSUFFICIENT_DATA` forever.
 - **Docker running**, for the image build.
-- **The artifact and its sidecar on this machine.** Both are gitignored (`DEP-9`), so a
-  deploy happens from a machine that has `builder/scratch/graph-t15-tiebreakfix.bin` and
-  `…bin.json`. There is no way to fetch them from git.
+- **The artifact and its sidecar on this machine.** Both are gitignored (`DEP-9`), so a deploy
+  happens from a machine that has `builder/scratch/$GRAPH` and `$GRAPH.json` — where `$GRAPH`
+  is the **currently adopted** artifact, named in §4. There is no way to fetch them from git.
+  (This bullet named `graph-t15-tiebreakfix.bin` until 2026-08-06, three weeks after that
+  artifact stopped being the adopted one.)
 - **`UV_LINK_MODE=copy` on every `uv` command** — hardlinking fails at `C:\dev\music-app`.
   uv falls back to copying by itself, so this suppresses the warning rather than being
   required. (The repository moved off OneDrive on 2026-07-27.)
@@ -49,8 +51,8 @@ committed** — a password in a CDK source file is in the repository's history p
 | `ARTISTPATH_DEPLOY_IMAGE_TAG` | **yes** | the commit tag being deployed — **never `latest`** (see below) |
 | `ARTISTPATH_SITE_HOSTNAME` | **yes** | the permanent public name, `musicapp.cmiller.io` (`PW-5`, `G3-A5`) |
 | `ARTISTPATH_CERTIFICATE_ARN` | **yes** | us-east-1 ACM certificate for that name (`PW-5`) |
-| `ARTISTPATH_DEPLOY_GRAPH_KEY` | no | defaults to `graph-t15-tiebreakfix.bin` |
-| `ARTISTPATH_DEPLOY_SIDECAR` | no | defaults to `../builder/scratch/graph-t15-tiebreakfix.bin.json` |
+| `ARTISTPATH_DEPLOY_GRAPH_KEY` | **in practice yes** | the artifact key in the bucket. **Defaults to `graph-t15-tiebreakfix.bin`, which is NOT what production serves** — see below |
+| `ARTISTPATH_DEPLOY_SIDECAR` | **in practice yes** | path to that artifact's manifest sidecar; the checksum is read from it. Same stale default |
 
 > **The certificate must be in `us-east-1`** — CloudFront accepts one from no other region —
 > and it is requested **out of band**, not by CDK. CDK could request it, but DNS validation
@@ -81,6 +83,29 @@ Unlike the image tag, both of these are **per-machine and stable**, so they belo
 > **The secret file (`infra/.env.deploy`) is gitignored and documented nowhere else**
 > (`ARC-11`). It holds the four secrets above and deliberately **not** the image tag — the tag
 > is per-deploy, not per-machine, so persisting it is how you deploy the wrong commit.
+
+> ### ⚠ `ARTISTPATH_DEPLOY_GRAPH_KEY` UNSET SILENTLY REVERTS THE MAP (`DEP-34`, 2026-08-06)
+>
+> **This is `ARC-6` again, one variable over, and it was still live when it bit.** The variable
+> defaults to `graph-t15-tiebreakfix.bin` — the **pre-`MSW-` artifact**. `.env.deploy` does not
+> set it, and it is per-deploy rather than per-machine, so it must be exported on the command
+> line every time. **An API-only deploy that forgets it also rolls the graph back**, reverting
+> an adoption nobody intended to touch.
+>
+> Caught on 2026-08-06 by running `cdk diff` before `cdk deploy` on a clip-image fix: the diff
+> showed `ARTISTPATH_GRAPH` and `ARTISTPATH_GRAPH_SHA256` both changing when only the image tag
+> should have. **Nothing downstream would have caught it.** §8's `/health` check compares the
+> served graph against *the sidecar the deploy just used*, so a wholesale revert is
+> self-consistent and passes — it reports a correct answer about the wrong artifact.
+>
+> **So: always `cdk diff` first, and read the variable block, not only the image tag.** On an
+> API-only deploy the diff must show `.ImageIdentifier` and nothing else.
+>
+> **The real fix is to make both variables required**, exactly as `ARC-6` did for the image tag
+> five lines below in `app.py` — a defaulted deploy input that names a specific artifact is the
+> same defect in the same file. Deliberately **not** done here: it is a change to deploy
+> behaviour and it is the owner's call, not a documentation session's. Until then this section
+> is the mitigation, and it is a weaker one.
 
 > **There is no longer a site password, and there is no username.** `PW-7` removed both on
 > 2026-07-28: `SITE_USERNAME`, `site_password` and `ARTISTPATH_DEPLOY_PASSWORD` are gone.
@@ -253,20 +278,32 @@ export ARTISTPATH_DEPLOY_IMAGE_TAG=$TAG
 **Before App Runner exists**, because it loads the graph at boot: a service created with
 nothing in the bucket fails its health check and rolls back.
 
+**Set the artifact once, here, and reuse it through §5** — hardcoding a filename in these
+commands is how the wrong artifact gets uploaded beside the right deploy, and vice versa
+(`DEP-34`). `GRAPH` is the ADOPTED artifact's basename; today that is `graph-msw-tu50.bin`.
+
 ```bash
+GRAPH=graph-msw-tu50.bin          # the ADOPTED artifact — never the app.py default
+export ARTISTPATH_DEPLOY_GRAPH_KEY=$GRAPH
+export ARTISTPATH_DEPLOY_SIDECAR=../builder/scratch/$GRAPH.json
+
 BUCKET=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
   --query "Stacks[0].Outputs[?OutputKey=='ArtifactBucketName'].OutputValue" --output text)
-aws s3 cp builder/scratch/graph-t15-tiebreakfix.bin      "s3://$BUCKET/graph-t15-tiebreakfix.bin"
-aws s3 cp builder/scratch/graph-t15-tiebreakfix.bin.json "s3://$BUCKET/graph-t15-tiebreakfix.bin.json"
+aws s3 cp builder/scratch/$GRAPH      "s3://$BUCKET/$GRAPH"
+aws s3 cp builder/scratch/$GRAPH.json "s3://$BUCKET/$GRAPH.json"
 ```
+
+**On an API-only deploy skip the two `s3 cp` lines but NOT the three `GRAPH` lines above them**
+— the artifact is already in the bucket, and it is precisely the deploy that changes no graph
+that most easily reverts one.
 
 The sidecar goes up too: it is what makes *which graph is live* answerable without
 transcribing a hash. Verify the upload is complete — a partial one presents at boot as a
 checksum mismatch:
 
 ```bash
-aws s3api head-object --bucket "$BUCKET" --key graph-t15-tiebreakfix.bin --query ContentLength
-python -c "import json;print(json.load(open('builder/scratch/graph-t15-tiebreakfix.bin.json'))['bytes'])"
+aws s3api head-object --bucket "$BUCKET" --key $GRAPH --query ContentLength
+python -c "import json;print(json.load(open('builder/scratch/$GRAPH.json'))['bytes'])"
 ```
 
 ## 5. Deploy the full stack
@@ -274,8 +311,18 @@ python -c "import json;print(json.load(open('builder/scratch/graph-t15-tiebreakf
 **This is where the money starts:** App Runner bills for a warm instance from here on
 (`DEP-17`, unmeasured).
 
+**`cdk diff` FIRST, every time, and read the whole diff — not only the image tag.** On an
+API-only deploy it must show `.ImageIdentifier` changing and nothing else. If
+`ARTISTPATH_GRAPH` or `ARTISTPATH_GRAPH_SHA256` appears, §4's `GRAPH` lines were not set and
+the deploy is about to revert the map (`DEP-34`).
+
 ```bash
 cd infra
+set -a; . ./.env.deploy; set +a          # the four secrets + hostname/cert
+export ARTISTPATH_DEPLOY_IMAGE_TAG=$TAG  # from §3 — per-deploy, never persisted
+# ARTISTPATH_DEPLOY_GRAPH_KEY and _SIDECAR come from §4 and are NOT optional here.
+
+UV_LINK_MODE=copy npx cdk diff   ArtistpathStack   # read it before the next line
 UV_LINK_MODE=copy npx cdk deploy ArtistpathStack
 ```
 
@@ -527,11 +574,20 @@ curl -s -o /dev/null -w "%{http_code}\n" "$API/api/artists/search?q=a"   # expec
 ```bash
 python -c "
 import json,sys,urllib.request
-s=json.load(open('builder/scratch/graph-t15-tiebreakfix.bin.json'))
+s=json.load(open('builder/scratch/'+sys.argv[2]+'.json'))
 h=json.load(urllib.request.urlopen(sys.argv[1]+'/health'))
 assert h['graph_sha256']==s['sha256'] and h['artists']==s['artists'] and h['edges']==s['edges']
-print('live graph matches the sidecar')" "$API"
+print('live graph matches the sidecar')" "$API" "$GRAPH"
 ```
+
+> **⚠ This check is weaker than it looks, and `DEP-34` is why.** It compares the live service
+> against **whichever sidecar you hand it**. Hand it the sidecar the deploy just used and a
+> wholesale artifact revert is perfectly self-consistent — it passes while reporting a correct
+> answer about the wrong graph. It catches a *partial upload*, which is what it was written
+> for; it does **not** catch *the wrong artifact*. Only `cdk diff` before the deploy does that.
+> (Until 2026-08-06 this snippet hardcoded `graph-t15-tiebreakfix.bin.json`, so on any deploy
+> after the `MSW-` switch it would have compared the live 75k graph against a stale sidecar and
+> failed the assert for a reason that had nothing to do with the deploy.)
 
 ### 8a. Prove the front door ADMITS — not only that it refuses (`FRO-4`, `RMD-13`)
 
