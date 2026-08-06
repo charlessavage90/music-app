@@ -861,3 +861,19 @@ true`, all three drop filters `true`, `union_top_j: 50`, `union_degree_ceiling: 
 value **455,551 — identical to its archive record**, which also confirms the Step 1 restoration
 was faithful. The null count is far below the fetch population's 5,150 because nulls are
 disproportionately the obscure artists the drop filters and largest-component prune remove.
+
+### Step 4 — determinism confirmed
+
+Built a second time to `graph-msw-tu50-determinism.bin` from the same archive with the same
+flags. Both runs produced sha256
+`43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8` — **byte-identical**, so
+spec §9 holds for this artifact under `trimmed_union` + `require_fame`, which is the first time
+that combination has been exercised.
+
+**The duplicate was then deleted.** It was byte-identical to the retained artifact, so nothing
+was lost, and this project's recorded pain is that *"several graphs exist and they are not
+interchangeable"* — an 18 MB twin with a near-identical name adds to exactly that. The
+comparison is the record; the second file is not.
+
+**Task 9 is complete.** Steps 1–5 all done: `MSW-G3` exercised red, artifact built and
+identified, manifest written, determinism confirmed, committed.

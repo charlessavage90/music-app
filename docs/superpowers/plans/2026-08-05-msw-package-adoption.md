@@ -680,9 +680,9 @@ git commit -m "MSW-: fame coverage complete over the candidate archive; counts a
 **Files:**
 - Operational; no source changes expected.
 
-- [ ] **Step 1: Exercise `MSW-G3` for real, before the real build.** Temporarily move one `fame/<mbid>.json` for a known-kept artist out of the archive, run `build`, confirm it **refuses** with `MissingFameError` naming the artist; restore the file. Record the refusal output in the execution log — a green instrument that has never gone red is not evidence (working-style memory).
+- [x] **Step 1: Exercise `MSW-G3` for real, before the real build.** Temporarily move one `fame/<mbid>.json` for a known-kept artist out of the archive, run `build`, confirm it **refuses** with `MissingFameError` naming the artist; restore the file. Record the refusal output in the execution log — a green instrument that has never gone red is not evidence (working-style memory).
 
-- [ ] **Step 2: Build.** From `builder/`:
+- [x] **Step 2: Build.** From `builder/`:
 
 ```bash
 UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u -m artistpath_builder.cli build \
@@ -711,11 +711,11 @@ UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u -m artistpath_builder.
 
 If the CLI has no `--cap-strategy` flag, add one in this task (mirroring how `cmd_build` already surfaces config fields; one flag, one test asserting it reaches `BuilderConfig`). `drop_unlistenable` is already the default (`config.py:192`). Acceptance checks (`acceptance.py`) run as part of build — a failure stops this plan and goes to the owner; do not route around it.
 
-- [ ] **Step 3: Manifest.** Confirm the sidecar `graph-msw-tu50.bin.json` was written (`manifest.py` — `build_manifest`/`write_manifest` are wired into `cmd_build`); add the fame snapshot provenance (fetch dates, seed sha) if the manifest supports notes, else record them beside the sha in the execution log. **The sha256 in this sidecar is the artifact's identity from here on** — every later step cites it from the sidecar, never by hand (`DEP-24`).
+- [x] **Step 3: Manifest.** Confirm the sidecar `graph-msw-tu50.bin.json` was written (`manifest.py` — `build_manifest`/`write_manifest` are wired into `cmd_build`); add the fame snapshot provenance (fetch dates, seed sha) if the manifest supports notes, else record them beside the sha in the execution log. **The sha256 in this sidecar is the artifact's identity from here on** — every later step cites it from the sidecar, never by hand (`DEP-24`).
 
-- [ ] **Step 4: Determinism spot-check.** Build a second time to a different filename; `sha256` must match byte-for-byte. Record both hashes in the log.
+- [x] **Step 4: Determinism spot-check.** Build a second time to a different filename; `sha256` must match byte-for-byte. Record both hashes in the log.
 
-- [ ] **Step 5: Commit** (log + any CLI flag change).
+- [x] **Step 5: Commit** (log + any CLI flag change).
 
 ```bash
 git add -- docs/superpowers/2026-08-05-msw-execution-log.md builder/src/artistpath_builder/cli.py builder/tests/
