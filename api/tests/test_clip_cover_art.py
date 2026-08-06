@@ -134,8 +134,13 @@ async def test_the_name_path_returns_the_same_kind_of_image():
 
 
 async def test_both_deezer_paths_agree_on_the_image():
-    # Stated as one assertion because it is the property that was violated, and
-    # the two tests above could both pass while drifting apart later.
+    # The property that was actually violated: a card must not change appearance
+    # based on which lookup answered.
+    #
+    # The non-empty assertion is NOT redundant, and mutation testing is what
+    # showed it. Agreement alone passes when both paths are EQUALLY broken --
+    # point them at a key neither response has and both return "", which agrees
+    # perfectly and is the exact production failure. Both halves are required.
     by_id = await _resolver({"artist/580/top": ARTIST_TOP}).resolve(
         MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID
     )
@@ -143,6 +148,7 @@ async def test_both_deezer_paths_agree_on_the_image():
         MBID, "Aphex Twin"
     )
     assert by_id.cover_url == by_name.cover_url
+    assert by_id.cover_url
 
 
 async def test_itunes_still_returns_its_album_art_unchanged():

@@ -12,14 +12,58 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06, when THE `MSW-` MAP SWITCH WAS ADOPTED AND DEPLOYED. All twelve
-tasks are done. THE NEW MAP IS LIVE at `https://musicapp.cmiller.io` — four shipped defaults are
-flipped and the app is routing on the trimmed-union graph with the `known` ramp priced. THE
-ADOPTION IS AN OWNER OVERRIDE of the `GBL-` null, NOT evidence-backed adoption. THE NEXT ACTION
-IS THE OWNER'S AND IT IS USE, NOT WORK: the queued hand test on the live site. Nothing is
-blocked and no session owes anything.**
+**Last updated: 2026-08-06 (later), when A CLIP COVER-ART DEFECT WAS FIXED AND DEPLOYED and a
+serious DEPLOY defect (`DEP-34`) was found and documented. THE NEXT ACTION IS THE OWNER'S:
+merge PR #85 — production runs AHEAD of `main` — and the queued hand test, now worth running.
+Nothing is blocked and no session owes anything.**
 
 ---
+
+> ## ✅ THE CLIP COVER-ART DEFECT IS FIXED AND LIVE, 2026-08-06 (later). **The owner's actions are MERGING PR #85 and the queued hand test.**
+>
+> **The owner reported album art loading inconsistently on the live site, clips fine. It was a
+> real defect, it is fixed, and `artistpath-api:641ced7` is deployed and verified.**
+> `_from_deezer_artist` read the card image from `row["artist"]["picture_medium"]`, which
+> Deezer's `/artist/{id}/top` **does not send** — only `/search` does. Every clip resolved by
+> artist id came back with an empty image while the clip played perfectly.
+>
+> **It shipped with the `MSW-` map switch without being caused by it**: the id path fires only
+> for artists carrying a `deezer_id`, and `graph-msw-tu50.bin` is the first artifact to carry
+> them. Authored 2026-08-02, detonated 2026-08-06. **The `MSW-` adoption is untouched** — the
+> graph, its checksum and its counts were verified unchanged after the deploy.
+>
+> **404 stale clip-cache entries were cleared after the deploy**, so the fix is visible now
+> rather than bleeding in over the 30-day TTL. Verified on the live site: two long journeys at
+> 0 / 10 / 20 `known` presses, **every card resolving both a clip and an image**.
+>
+> **Visible change, and it was the owner's call:** Deezer-resolved cards now show an **album
+> cover** rather than an artist photograph. iTunes cards always did.
+>
+> ### ⚠ THE MOST IMPORTANT THING HERE IS NOT THE CLIP FIX — it is `DEP-34`
+>
+> **An API-only deploy silently reverts the graph.** `ARTISTPATH_DEPLOY_GRAPH_KEY` defaults to
+> the pre-`MSW-` artifact, `.env.deploy` does not set it, and it is per-deploy rather than
+> per-machine. **This deploy would have rolled the map back and undone the previous day's
+> adoption**, from a session with no intention of touching it.
+>
+> Caught by `cdk diff` before `cdk deploy`. **Nothing downstream would have caught it** — the
+> runbook's `/health` check compares the live service against whichever sidecar it is handed,
+> so a wholesale revert is self-consistent and passes. `infra/README.md` §1, §4, §5, §0 and §8
+> are corrected. **Read §4 and §5 before any future deploy.**
+>
+> **`DEP-34-FIX` is open and is the owner's:** make both variables required in `infra/app.py`,
+> exactly as `ARC-6` did for the image tag five lines below. **Should be taken before the next
+> artifact adoption** — until then the mitigation depends on an operator reading a diff.
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-clip-cover-art.md`](2026-08-06-HANDOFF-clip-cover-art.md). Reasoning:
+> [`2026-08-06-clip-cover-art-execution-log.md`](2026-08-06-clip-cover-art-execution-log.md).
+> Branch `clip-cover-art-fix`, **PR #85 OPEN — not merged**, commits `641ced7` and `9183893`.
+>
+> **`CLIP-1` is untouched and must not be conflated with this** — that is about *which track*
+> a card plays, this was about *which image*. Still the owner's call.
+>
+> ---
 
 > ## ✅ THE `MSW-` MAP SWITCH IS ADOPTED AND DEPLOYED, 2026-08-06. **The next action is the OWNER'S and it is USE: press the live site.** Nothing is blocked; no session owes anything.
 >
