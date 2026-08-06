@@ -84,6 +84,10 @@ def _build(archive, **overrides):
     # it without reversing it) refuses synthetic populations its census never
     # saw. Its own tests: test_pipeline_unlistenable_drop.py.
     overrides.setdefault("drop_unlistenable", False)
+    # require_fame likewise, since the MSW- adoption (2026-08-06) turned it on
+    # by default: this file's synthetic archives have no fame stage and fame is
+    # not the subject. The default is exercised in test_pipeline_fame.py.
+    overrides.setdefault("require_fame", False)
     config = BuilderConfig(**overrides)
     return build_from_archive(config, archive, ListenBrainzSource(config))
 

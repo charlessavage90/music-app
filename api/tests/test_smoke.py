@@ -7,7 +7,13 @@ from artistpath_api.clips import ClipResolver, InMemoryClipCache
 from artistpath_api.config import ApiConfig
 from artistpath_api.search import ArtistSearch
 
-CFG = ApiConfig()
+# w_known_ramp_fame_pctl pinned off: the COMMITTED fixture predates fame and
+# carries no fame_lb key, and since the MSW- adoption of 2026-08-06 create_app
+# refuses to boot a live ramp over a fameless artifact. Pinned rather than
+# regenerating the fixture, which would change what every test in this file
+# asserts about specific artists. The ramp's own tests use synthetic stores
+# that do carry fame: test_pathfinding_fame_ramp.py.
+CFG = ApiConfig(w_known_ramp_fame_pctl=0.0)
 
 
 def _client(fixture_store):

@@ -54,7 +54,9 @@ def archive(tmp_path):
 def _build(archive):
     # drop_unlistenable pinned off: the nameless drop is the subject; the
     # synthetic archive is covered by no ULF- census (factor-table idiom).
-    config = BuilderConfig(drop_unlistenable=False)
+    # require_fame pinned off for the same reason, since the MSW- adoption
+    # (2026-08-06) turned it on by default and this archive has no fame stage.
+    config = BuilderConfig(drop_unlistenable=False, require_fame=False)
     return build_from_archive(config, archive, ListenBrainzSource(config))
 
 

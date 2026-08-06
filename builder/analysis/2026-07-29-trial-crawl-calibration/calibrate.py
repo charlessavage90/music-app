@@ -235,6 +235,13 @@ def main() -> int:
         # Era pin 2026-08-05 (ULF-): this probe's committed figures predate
         # the un-listenable filter, same reasoning as the two pins above.
         drop_unlistenable=False,
+        # Era pin 2026-08-06 (MSW- adoption): cap_strategy and require_fame
+        # both flipped at that adoption. This probe's figures were produced
+        # under mutual k-NN, and its archive has never had `fame` run against
+        # it — so left at the new defaults a re-run would both change the cap
+        # and refuse outright on missing fame coverage.
+        cap_strategy="mutual_knn",
+        require_fame=False,
     )
     archive = LocalArchive(ARCHIVE_DIR)
     source = ListenBrainzSource(config)

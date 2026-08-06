@@ -26,6 +26,13 @@ DEV_ORIGIN = "http://localhost:5173"
 
 
 def _client(cfg):
+    # The ramp is pinned off here, and only here: CORS is the subject, the
+    # synthetic store below carries no fame, and since the MSW- adoption of
+    # 2026-08-06 create_app refuses to boot a live ramp over a fameless
+    # artifact. Pinning keeps this file testing CORS instead of failing on an
+    # unrelated guard (factor-table-control idiom). The ramp's own boot
+    # behaviour is tested in test_pathfinding_fame_ramp.py.
+    cfg = replace(cfg, w_known_ramp_fame_pctl=0.0)
     store = make_store(
         names=["Radiohead", "Muse", "Coldplay"],
         pop_raw=[0.9, 0.7, 0.8],

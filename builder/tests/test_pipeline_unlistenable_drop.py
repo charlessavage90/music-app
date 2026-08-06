@@ -79,6 +79,11 @@ def _archive(tmp_path, similar, algorithm=PRODUCTION_ALGORITHM, subdir="archive"
 
 
 def _build(archive, **overrides):
+    # require_fame pinned off unless a test says otherwise: the MSW- adoption
+    # (2026-08-06) turned it on by default, and this file's synthetic archives
+    # have no fame stage. The ULF- drop is the subject here; the fame default
+    # is exercised in test_pipeline_fame.py (factor-table-control idiom).
+    overrides.setdefault("require_fame", False)
     config = BuilderConfig(**overrides)
     return build_from_archive(config, archive, ListenBrainzSource(config))
 

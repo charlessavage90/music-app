@@ -114,7 +114,20 @@ def _build(tmp_path, *, defective: bool) -> Graph:
     """Build the same archive with clipped (defective) or unclipped ranking."""
     # drop_unlistenable pinned off: acceptance is the subject; the synthetic
     # archive is covered by no ULF- census (factor-table-control idiom).
-    config = BuilderConfig(max_neighbours_per_artist=K, drop_unlistenable=False)
+    #
+    # cap_strategy pinned to mutual_knn since the MSW- adoption of 2026-08-06
+    # moved the default: this helper injects its defect by monkeypatching
+    # graph_mod.mutual_knn_cap below, which the trimmed_union path never
+    # calls — so left on the new default the `defective` arm would build a
+    # perfectly healthy graph and the rejection test would fail for a reason
+    # unrelated to acceptance. require_fame pinned off for the usual reason:
+    # this archive has no fame stage and fame is not the subject.
+    config = BuilderConfig(
+        max_neighbours_per_artist=K,
+        drop_unlistenable=False,
+        cap_strategy="mutual_knn",
+        require_fame=False,
+    )
     archive = LocalArchive(tmp_path / "archive")
     source = ListenBrainzSource(config)
     _seed(archive, source)

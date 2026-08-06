@@ -12,12 +12,18 @@ def test_config_has_sane_defaults():
     assert cfg.user_agent.startswith("artistpath-builder/")
 
 
-def test_phase2_adopted_defaults():
-    # The arm the owner chose in a blind listening test (execution log §16):
-    # mutual_knn cap, legacy p99 clip rescale, no damping. Pinned here so a
-    # silent default change is a test failure, not a rebuild nobody notices.
+def test_adopted_defaults():
+    # Pinned so a silent default change is a test failure, not a rebuild
+    # nobody notices.
+    #
+    # cap_strategy was "mutual_knn" — the arm the owner chose in a Phase 2
+    # blind listening test (execution log §16) — until the MSW- adoption of
+    # 2026-08-06 replaced it with "trimmed_union" (Track B's TUw-50-50, cell
+    # B-S1), flipped in one commit with require_fame and the API ramp. The
+    # rescale and damping pins are untouched by that adoption.
     cfg = BuilderConfig()
-    assert cfg.cap_strategy == "mutual_knn"
+    assert cfg.cap_strategy == "trimmed_union"
+    assert cfg.require_fame is True
     assert cfg.similarity_rescale == "p99_log_clip"
     assert cfg.similarity_damping == 0.0
 

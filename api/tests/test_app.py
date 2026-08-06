@@ -14,7 +14,12 @@ from artistpath_api.pathfinding import DISLIKE
 from artistpath_api.search import ArtistSearch
 from tests.conftest import make_store
 
-CFG = ApiConfig()
+# w_known_ramp_fame_pctl pinned off: these tests exercise routes, payloads and
+# error handling over synthetic stores that carry no fame, and since the MSW-
+# adoption of 2026-08-06 create_app refuses to boot a live ramp over a fameless
+# artifact (factor-table-control idiom). The ramp's own behaviour — routing and
+# boot — is tested in test_pathfinding_fame_ramp.py.
+CFG = ApiConfig(w_known_ramp_fame_pctl=0.0)
 
 
 def _client(clip_responses=None):

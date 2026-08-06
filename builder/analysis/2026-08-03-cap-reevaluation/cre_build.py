@@ -386,7 +386,21 @@ def _config(data_set: str) -> BuilderConfig:
     # two 2026-08-03-era drops, and this harness reproduces those cells.
     # Left at the new default, a re-run would additionally apply the
     # un-listenable filter and silently disagree with the committed shas.
-    return BuilderConfig(algorithm=ALGORITHMS[data_set], drop_unlistenable=False)
+    #
+    # Era pin 2026-08-06 (MSW- adoption): cap_strategy and require_fame both
+    # flipped there. This is the sharp case of the three — gate() below
+    # compares this harness's mirror against a live build_from_archive for
+    # byte-identity, so an unpinned cap_strategy would make that gate compare
+    # two different cap rules and report a MIRROR DIVERGENCE: the wrong
+    # diagnosis for the right symptom. require_fame is the harder half —
+    # these archives have never had `fame` run, so an unpinned flip makes
+    # every cell refuse to build outright.
+    return BuilderConfig(
+        algorithm=ALGORITHMS[data_set],
+        drop_unlistenable=False,
+        cap_strategy="mutual_knn",
+        require_fame=False,
+    )
 
 
 def _source(config: BuilderConfig):

@@ -202,9 +202,13 @@ def test_a_fameless_store_ignores_the_ramp_rather_than_crashing():
     assert find_path(store, 0, 2, [Exclusion(node=99, reason=KNOWN)], cfg) == [0, 1, 2]
 
 
-def test_the_default_knob_is_off():
-    # Flipped at adoption, in one commit, with cap_strategy and require_fame.
-    assert ApiConfig().w_known_ramp_fame_pctl == 0.0
+def test_the_default_knob_is_the_adopted_value():
+    # ADOPTED 2026-08-06 (MSW-) at 0.01 — the CRE- sweep's `P1a` arm, flipped
+    # from 0.0 in one commit with cap_strategy and require_fame. This assertion
+    # was `== 0.0` until that commit; it is pinned rather than deleted so a
+    # silent change to the adopted value is a test failure, not a reroute
+    # nobody notices.
+    assert ApiConfig().w_known_ramp_fame_pctl == 0.01
 
 
 # --- boot refusal ----------------------------------------------------------
@@ -230,6 +234,10 @@ def test_boot_refuses_the_ramp_over_a_fameless_artifact():
 
 
 def test_boot_allows_the_ramp_over_an_artifact_that_carries_fame():
+    # Deliberately built from a BARE ApiConfig() since the MSW- adoption of
+    # 2026-08-06: this is now the SHIPPED configuration, so this test is what
+    # catches a release that flips the ramp on while shipping a fameless
+    # artifact — the one combination create_app refuses.
     from artistpath_api.app import create_app
     from artistpath_api.search import ArtistSearch
 
@@ -237,17 +245,22 @@ def test_boot_allows_the_ramp_over_an_artifact_that_carries_fame():
         names=["a", "b"], pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
     )
     store.fame_lb_pctl = np.asarray([0.0, 1.0], dtype=np.float64)
-    cfg = ApiConfig(w_known_ramp_fame_pctl=0.01)
+    cfg = ApiConfig()
+    assert cfg.w_known_ramp_fame_pctl != 0.0  # the default carries the ramp
     assert create_app(store, ArtistSearch(store, cfg), None, cfg) is not None
 
 
 def test_boot_allows_a_fameless_artifact_while_the_ramp_is_off():
-    # Today's world: the app must keep booting exactly as it does now.
+    # The ramp is pinned OFF explicitly. It used to inherit the default, which
+    # was 0.0 until the MSW- adoption of 2026-08-06 — after which a bare
+    # ApiConfig() over a fameless store is exactly the combination the boot
+    # guard refuses, and this test asserted the opposite. Fame-less artifacts
+    # remain supported with the ramp off; that is what this pins.
     from artistpath_api.app import create_app
     from artistpath_api.search import ArtistSearch
 
     store = make_store(
         names=["a", "b"], pop_raw=[0.5, 0.5], undirected_edges=[(0, 1, 0.9)]
     )
-    cfg = ApiConfig()
+    cfg = ApiConfig(w_known_ramp_fame_pctl=0.0)
     assert create_app(store, ArtistSearch(store, cfg), None, cfg) is not None

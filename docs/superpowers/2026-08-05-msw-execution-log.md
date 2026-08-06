@@ -1347,3 +1347,140 @@ therefore left up (ports 8000 and 5173, PIDs in the handoff and the queue entry)
 after HEAD so they serve the work being tested, and both verified answering before being
 believed. The session-owned background shells they replaced were stopped first, so nothing can
 wake a retired session.
+
+---
+
+## Task 11 — ADOPTION. The three defaults are flipped, 2026-08-06
+
+**The owner gave the go at Seam 3** after pressing the local app himself, and asked for the
+rest of the plan including the production deploy. Seam 3 is discharged.
+
+### The override, recorded in the fixed words Task 11 Step 3 pre-committed
+
+> This adoption overrides the `GBL-` null (margin 3 vs bar 5; pre-registered consequence
+> "production stands"). The owner took it knowingly on 2026-08-05, on `CAU-`'s coherence pass
+> at his bar and the un-listenable filter fix, which make the deployed package a new candidate
+> under the run-once rule. Neither `GBL-` nor `CAU-` licensed it; his authority did.
+
+It is also written at the `w_known_ramp_fame_pctl` definition in `api/…/config.py`, so a
+reader of the knob meets it without reading this log.
+
+### What flipped
+
+| Knob | Was | Now |
+|---|---|---|
+| `ApiConfig.graph_path` | `graph-t15-tiebreakfix.bin` | `graph-msw-tu50.bin` |
+| `ApiConfig.w_known_ramp_fame_pctl` | `0.0` | `0.01` (`P1a`, source `cre_common.py`'s `RAMPS`) |
+| `BuilderConfig.cap_strategy` | `mutual_knn` | `trimmed_union` |
+| `BuilderConfig.require_fame` | `False` | `True` |
+
+Four knobs, not three: `require_fame` was always part of the same commit and the plan's own
+prose says so, but the "three defaults" phrasing in Task 11's title counts the API's two as
+one. Recorded because the count is quoted elsewhere.
+
+### Three defects in the plan's own Task 11, all found by executing it
+
+**1. Step 0's era-pin list was complete for its stated reason and incomplete in fact.** The
+three named callers (`grt_score.py`, `calibrate.py`, `cre_build.py`) are exactly the analysis
+scripts that call `build_from_archive`, which is where both `cap_strategy` (dispatch at
+`pipeline.py:390`) and `require_fame` (`pipeline.py:434`) are read — that much was verified by
+sweep, not assumed. But a **fourth** caller reads the default without going through
+`build_from_archive`: `2026-07-25-ceiling-ordering-headroom/measure_headroom.py:69` asserts
+`config.cap_strategy == "mutual_knn"` on a bare `BuilderConfig()`, having reimplemented the cap
+itself. Left alone the flip makes that assert fire and the frozen probe stops running. Pinned,
+not deleted: the assert stays the guard it was, and the pin is what keeps it true.
+
+**2. Step 1's named test could not have caught what it was named for.** The plan says to
+update `api/tests/test_config.py:18` (`test_default_graph_path_points_at_an_artifact`) by
+"updating the expected name", and Step 2 says "the api default-graph test pins the new name".
+It pinned no name: the whole assertion was `.endswith(".bin")`, which passes for every artifact
+ever built. There was nothing to update and the test could not have failed on a stale default —
+which is precisely what `closeout` relies on it for. Rewritten to pin the name.
+
+**3. The blast radius on the test suites was not anticipated anywhere in the plan, and it was
+97 tests.** 46 builder + 51 api, all failing on the two new guards firing exactly as designed:
+`require_fame=True` refusing archives with no `fame` stage, and `create_app` refusing a live
+ramp over a fameless artifact. **No guard was weakened to make a test pass.** Three shapes of
+fix, and the choice per site was "what is this test's subject?":
+
+- **Pin the unrelated knob off**, following this repo's existing factor-table-control idiom
+  (the `drop_unlistenable` pins already in those files). Used where fame or the cap is not the
+  subject — the drop-rule files, replay, CORS, the origin gate, routes, smoke.
+- **Make the archive meet the shipping requirement.** `test_cli.py` builds through `main`, and
+  `--require-fame` is `store_true` by design, so there is no flag to turn it off — the right
+  fix is a `fame/` stage in the test archive, the same shape as the ULF- fixture list that file
+  already installs. The alternative would have meant weakening a protected claim.
+- **Flip the default-pinning assertions rather than deleting them.** Four tests existed to
+  assert the defaults were still off (`test_the_default_knob_is_off`,
+  `test_default_strategy_is_still_mutual_knn`, `test_fame_is_not_required_by_default`,
+  `test_phase2_adopted_defaults`). Adoption is the commit they were written for. Each now pins
+  the adopted value, so a silent change to a shipped default is still a test failure.
+
+### Two confounds the flip introduced inside the test suites, both silent
+
+Neither would have failed a test. Both would have made a passing test stop testing its subject
+— the `w_floor` shape from `CLAUDE.md`'s dormant-term rule, appearing in test code:
+
+1. **`test_trimmed_union_supplies_more_edges_than_mutual_knn`** built its "mutual" arm as
+   `_build(tmp_path / "m", max_neighbours_per_artist=5)`, inheriting `cap_strategy` from the
+   default. After the flip both arms are `trimmed_union` and the test compares the rule against
+   itself. Now pinned explicitly.
+2. **`test_acceptance.py::_build`** injects its defect by monkeypatching
+   `graph_mod.mutual_knn_cap` — a function the `trimmed_union` path never calls. On the new
+   default the `defective` arm builds a healthy graph, and `test_tiebreak_defect_is_rejected`
+   fails for a reason with nothing to do with acceptance. Now pinned to `mutual_knn`.
+
+Both are the same lesson the plan's Step 0 recorded for shipped code, reproducing one layer
+down in tests nobody listed.
+
+### Step 0b — the agent definition
+
+`.claude/agents/ml-graph-analyst.md:50` said `w_degree_hub` and `w_known_ramp_fame_pctl` "both
+default to 0.0, so both terms are inert unless deliberately set." True until this commit, false
+after it. Corrected in the same commit, per the Seam 3 closeout's `B5` finding. It is auto-loaded
+on dispatch, so leaving it stale would have told a graph analyst the ramp was inert while the
+app routed on it.
+
+### `CLAUDE.md`'s Graph shape section
+
+Corrected in the same commit, as Step 0 requires. It described mutual k-NN as the shipped rule.
+It now names `trimmed_union` as shipped, keeps mutual k-NN as supported, and carries the
+comparison warning — every pre-2026-08-06 figure was built under the other rule, so the rule a
+claim is in has to be checked before two graphs are compared. **D6: +909 characters, +5 lines
+on the unconditional layer.** That growth is the owner's call and is reported to him rather
+than assumed; the correction itself was not optional, only its size.
+
+### `CLIP-1` — logged by the owner during his Seam 3 hand test. NOT addressed, deliberately.
+
+**He raised it while pressing the app and asked for it to be logged for work after this plan.
+Nothing here acts on it.** It is not new to this work and not a regression — the `MSW-` package
+neither caused it nor made it worse. It surfaced now because the new map routes through
+less-famous artists, so the class is met more often, and because the `CAU-` and `ULC-` work
+taught him what to look for.
+
+**`CLIP-1`: a clip can be the right artist and still be the wrong impression of them.** The
+resolver's job is "find a track by this artist", and it succeeds; what it does not do is prefer
+a track that is *theirs*. Two examples he named:
+
+- **Albert Hammond Jr.**, reached as an interior card, resolved to *"Cinnamon (feat. Albert
+  Hammond Jr.)"* — an album track of Damiano David's. Spotify lists both as main artists and it
+  is Hammond Jr.'s top track there, so this is **not** a `BYP-13` wrong-artist collision. The
+  identity is right; the choice is poor.
+- **Metric**, resolved to *"Help I'm Alive (BYNX Rework)"* rather than any Metric original.
+
+**Why it is its own thing and not a duplicate of anything already open.** `BYP-13` is a
+*different artist of the same name* — an identity failure, and the `deezer_ids` work addresses
+it. `ULC-`/`ULF-` cover artists with **nothing of their own to play at all**, and the filter
+removes them. `CLIP-1` is the case where the artist is correct and their catalogue is real, but
+the top-ranked track is a guest appearance or someone else's remix. **No existing filter or
+check can see it**, and the Pino Palladino case in the Seam 3 report is its close cousin from
+the other side: there, "the clip resolves" was not "this artist has music of their own".
+
+**Its condition, so it is not an unranked backlog item:** it becomes actionable when a resolver
+change is next opened, or immediately if the owner reports it on a pair he cares about. It is
+**not scheduled**, and whether it is worth fixing is his call — the fix is a ranking preference
+inside clip resolution (prefer tracks where the artist is the sole or primary credit, fall back
+to what is chosen today), and it trades clip *availability* against clip *representativeness*,
+which is a product judgement rather than a correctness one.
+
+**Not measured.** Two observed instances is not a rate, and no figure is claimed here.

@@ -141,6 +141,11 @@ def _arm_config(arm: str) -> tuple[BuilderConfig, object]:
     # produced without any of them, and Track B reproduces them. Left at the
     # defaults, a re-run would build cleaned graphs and disagree with the
     # record. See builder/analysis/README.md.
+    # Era pin 2026-08-06 (MSW- adoption): cap_strategy and require_fame both
+    # flipped at that adoption. This probe's GRT-P4 anchors were built under
+    # mutual k-NN with no fame stage, and its archives have never had `fame`
+    # run against them — so left at the new defaults a re-run would build a
+    # different cap AND refuse outright on missing fame coverage.
     if arm == "AB":
         cfg = BuilderConfig(
             algorithm=ALG_B,
@@ -148,6 +153,8 @@ def _arm_config(arm: str) -> tuple[BuilderConfig, object]:
             drop_no_release_tail=False,
             drop_featured_credit=False,
             drop_unlistenable=False,
+            cap_strategy="mutual_knn",
+            require_fame=False,
         )
         base = LocalArchive(SCRATCH / "grt-archive-algb")
         prefix = f"similar/listenbrainz/{ALG_B}/"
@@ -158,6 +165,8 @@ def _arm_config(arm: str) -> tuple[BuilderConfig, object]:
             drop_no_release_tail=False,
             drop_featured_credit=False,
             drop_unlistenable=False,
+            cap_strategy="mutual_knn",
+            require_fame=False,
         )
         base = OverlayReader(
             LocalArchive(PRODUCTION_ARCHIVE), LocalArchive(SCRATCH / "grt-overlay-alge")

@@ -47,9 +47,11 @@ belief — including a belief you yourself established earlier.
   percentile** (`fame_lb_pctl`, ListenBrainz listener rank within the served artifact's own
   population). **Two depth-graduated devices now, not one** — `floor_raw` and the ramp,
   where `k` is the number of `known` bypasses, fixed per request; everything else is static.
-  `w_degree_hub` and `w_known_ramp_fame_pctl` both default to 0.0, so both terms are inert
-  unless deliberately set, and the ramp additionally requires an artifact carrying fame
-  (`create_app` refuses to boot otherwise).
+  `w_degree_hub` defaults to 0.0, so that term is inert unless deliberately set.
+  **`w_known_ramp_fame_pctl` is LIVE as of the `MSW-` adoption, 2026-08-06** — it defaults to
+  `0.01` and the shipped artifact carries fame, so the ramp is priced on every request with at
+  least one `known` press. It is no longer a dormant term and must be carried in any cost
+  analysis. (`create_app` still refuses to boot if the ramp is live over a fameless artifact.)
   *(Seventh term added 2026-08-05 by `MSW-`. This exact file lost a whole term to a rename
   in 2026-07-23 — a defect of absence, invisible to any grep for stale names — so it is
   called out here: if you are reading this and `pathfinding.py` has a term this line does

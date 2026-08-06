@@ -43,6 +43,10 @@ def _seed(archive, source, *, n=40, per_node=20, seed=7):
 
 
 def _build(tmp_path, **overrides):
+    # require_fame pinned off since the MSW- adoption (2026-08-06) turned it
+    # on by default: the cap rule is the subject here and these synthetic
+    # archives have no fame stage.
+    overrides.setdefault("require_fame", False)
     config = BuilderConfig(
         requests_per_second=1000.0, drop_unlistenable=False, **overrides
     )
@@ -73,7 +77,13 @@ def test_trimmed_union_supplies_more_edges_than_mutual_knn(tmp_path):
         union_top_j=5,
         union_degree_ceiling=50,
     )
-    mutual = _build(tmp_path / "m", max_neighbours_per_artist=5)
+    # cap_strategy pinned EXPLICITLY on the mutual arm. It used to inherit the
+    # default, which was "mutual_knn" until the MSW- adoption of 2026-08-06 —
+    # after which this arm would have silently become a second trimmed_union
+    # build and the test would have compared the rule against itself.
+    mutual = _build(
+        tmp_path / "m", cap_strategy="mutual_knn", max_neighbours_per_artist=5
+    )
     assert union.edge_count > mutual.edge_count
 
 
@@ -85,8 +95,11 @@ def test_trimmed_union_build_is_deterministic(tmp_path):
     assert list(a.scores) == list(b.scores)
 
 
-def test_default_strategy_is_still_mutual_knn():
-    assert BuilderConfig().cap_strategy == "mutual_knn"
+def test_default_strategy_is_the_adopted_trimmed_union():
+    # Was `== "mutual_knn"` until the MSW- adoption of 2026-08-06. Flipped
+    # rather than deleted: this is the pin that makes a silent change to the
+    # shipped cap rule a test failure.
+    assert BuilderConfig().cap_strategy == "trimmed_union"
 
 
 def test_trimmed_union_is_a_permitted_strategy():
