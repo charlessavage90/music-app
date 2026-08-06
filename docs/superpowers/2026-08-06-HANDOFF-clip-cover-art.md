@@ -6,8 +6,10 @@ It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which 
 
 **A SEAM handoff, not mid-flight.** The work is finished, deployed and verified.
 
-**Branch** `clip-cover-art-fix`, **PR #85 — OPEN, not merged**, off `main` at `ff6b428`.
-Commits `641ced7` (fix) and `9183893` (runbook). Tree clean.
+**Branch** `clip-cover-art-fix`, **PR #85 — MERGED 2026-08-06** at `fee46e2`, off `main` at
+`ff6b428`. Commits `641ced7` (fix), `9183893` (runbook) and `a3a5217` (closeout). **The work
+is on `main`, so production and the trunk agree.** The branch is spent; new work branches from
+`main`. Tree clean.
 
 Reasoning: [`2026-08-06-clip-cover-art-execution-log.md`](2026-08-06-clip-cover-art-execution-log.md).
 
@@ -65,8 +67,8 @@ previous handoff's row demoted), `TEST-QUEUE.md` (new queued entry), `infra/READ
 
 ## What is owed, and by whom
 
-- **The owner: merge PR #85.** Production is running `641ced7` **ahead of `main`**, which is
-  the one genuinely untidy thing left.
+- ~~**The owner: merge PR #85.** Production is running `641ced7` **ahead of `main`**.~~
+  **✅ DISCHARGED 2026-08-06 — merged at `fee46e2`; production and `main` agree.**
 - **The owner: `DEP-34-FIX`** — make both deploy variables required in `infra/app.py`, as
   `ARC-6` did for the image tag. Should be taken before the next artifact adoption. Until
   then the runbook is the mitigation and it depends on someone reading a diff.

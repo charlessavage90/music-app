@@ -6,7 +6,8 @@ The measurement figures below have no other home (they are properties of a third
 and of the shipped artifact's id coverage, not path-quality figures), so they live here and
 are cited from elsewhere, never restated.
 
-Branch `clip-cover-art-fix`, PR #85. Commits `641ced7` (fix) and `9183893` (runbook).
+Branch `clip-cover-art-fix`, **PR #85 MERGED 2026-08-06** at `fee46e2`. Commits `641ced7`
+(fix), `9183893` (runbook) and `a3a5217` (closeout).
 
 ---
 
