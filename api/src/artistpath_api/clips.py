@@ -58,6 +58,27 @@ def same_artist(candidate: str | None, requested: str) -> bool:
     return bool(candidate) and _fold(candidate) == _fold(requested)
 
 
+def _album_cover(row: dict) -> str:
+    """The card's image, from a Deezer track row's ALBUM rather than its artist.
+
+    Deezer embeds a different artist object per endpoint: `/search` sends a full
+    one carrying `picture_medium`, `/artist/{id}/top` sends four keys and no
+    picture at all. Reading the photograph therefore worked on the name path and
+    silently produced "" on the id path -- a card that played but showed a blank
+    square, on roughly half of all artists once the clip cache drained.
+
+    The album block is on BOTH responses, so this needs no extra request, and it
+    is what the iTunes path already returns (`artworkUrl100`). One field, one
+    meaning, all three paths.
+
+    `or ""` throughout, not `.get` defaults: Deezer sends these keys present-and-
+    null, and TrackOut types cover_url as str, so a None here is a 500 at the
+    endpoint rather than a missing image.
+    """
+    album = row.get("album") or {}
+    return str(album.get("cover_medium") or "")
+
+
 @dataclass(frozen=True, slots=True)
 class Clip:
     """What a card plays. Short-lived: `preview_url` is signed and expires."""
@@ -350,13 +371,12 @@ class ClipResolver:
         for row in body.get("data", []):
             preview, track_id = row.get("preview"), row.get("id")
             if preview and track_id:
-                artist = row.get("artist") or {}
                 return (
                     TrackIdentity(
                         source="deezer",
                         track_id=str(track_id),
                         title=str(row.get("title") or ""),
-                        cover_url=str(artist.get("picture_medium") or ""),
+                        cover_url=_album_cover(row),
                     ),
                     preview,
                 )
@@ -379,7 +399,7 @@ class ClipResolver:
                     # with a JSON null, and TrackOut's fields are typed str,
                     # so None here becomes a 500 at the endpoint.
                     title=str(row.get("title") or ""),
-                    cover_url=str(artist.get("picture_medium") or ""),
+                    cover_url=_album_cover(row),
                 )
                 return identity, preview
         return None

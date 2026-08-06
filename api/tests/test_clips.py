@@ -8,11 +8,17 @@ from artistpath_api.config import ApiConfig
 CFG = ApiConfig()
 MBID = "a" * 36
 
+# A /search response, which carries a FULL artist object and an album block.
+# The card's image comes from the album (see clips.py `_album_cover`); the
+# artist photograph is kept here because the real response has one, and because
+# its presence is what distinguishes this endpoint from /artist/{id}/top.
 DEEZER_HIT = {
     "data": [
         {"id": 771, "preview": "https://cdn.deezer/clip.mp3",
          "title": "Paranoid Android",
-         "artist": {"name": "Radiohead", "picture_medium": "https://cdn/rh.jpg"}}
+         "artist": {"name": "Radiohead", "picture_medium": "https://cdn/rh.jpg"},
+         "album": {"id": 3, "title": "OK Computer",
+                   "cover_medium": "https://cdn/okc.jpg", "type": "album"}}
     ]
 }
 ITUNES_HIT = {
@@ -166,7 +172,7 @@ async def test_the_cache_never_holds_a_signed_url():
     identity = await cache.get(MBID)
     assert identity == TrackIdentity(
         source="deezer", track_id="771",
-        title="Paranoid Android", cover_url="https://cdn/rh.jpg",
+        title="Paranoid Android", cover_url="https://cdn/okc.jpg",
     )
     assert "clip.mp3" not in repr(identity)
 
@@ -228,7 +234,7 @@ async def test_a_track_pulled_from_the_catalogue_is_searched_for_again():
     clip = await r.resolve(MBID, "Radiohead")
     assert clip.preview_url == "https://cdn.deezer/clip.mp3"
     assert await cache.get(MBID) == TrackIdentity(
-        "deezer", "771", "Paranoid Android", "https://cdn/rh.jpg"
+        "deezer", "771", "Paranoid Android", "https://cdn/okc.jpg"
     )
 
 
