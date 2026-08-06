@@ -39,6 +39,18 @@ class GraphStore:
     # app serves — and for stores built in tests. Read it through
     # `deezer_id_of`, never by indexing, since it may be shorter than N.
     deezer_ids: list[str] = field(default_factory=list)
+    # Where each artist's ListenBrainz listener count ranks within THIS
+    # artifact's own population, 0-1. `None` when the artifact carries no fame
+    # data — every artifact built before 2026-08-05, including the one the app
+    # served until this adoption.
+    #
+    # Currency, and all three of these are different quantities: this is FAME
+    # (an external listener count), `pop_raw` is score-weighted in-degree
+    # computed from the similarity archive, and `degree_hub_penalty` is
+    # topological degree. Log §2.6/§2.11/§2.12 record a wrong conclusion caused
+    # by each conflation. `pctl` in the name because it is a RANK, never a
+    # value — the raw counts are not kept, since nothing routes on them.
+    fame_lb_pctl: np.ndarray | None = None  # float64 0-1, computed if not given
     # Derived from DEGREE, not from popularity and not from fame (log §2.6).
     degree_hub_penalty: np.ndarray | None = None  # float32 0-1, computed if not given
     # sha256 of the bytes this store was parsed from, when known. Empty for a
@@ -78,6 +90,54 @@ class GraphStore:
     @property
     def hub_penalty(self) -> np.ndarray | None:
         return self.degree_hub_penalty
+
+    @staticmethod
+    def fame_percentiles(fame_lb_raw: list[int | None]) -> np.ndarray:
+        """Rank listener counts within their own population, 0-1.
+
+        THE FRAME IS THIS ARTIFACT'S OWN non-null values, which is a deliberate
+        departure from the `CRE-` harness. That harness framed against the
+        previously adopted artifact — a fixed experimental ruler, which is the
+        right choice for comparing arms built from different data. A SHIPPED
+        ruler pinned to a retired artifact would go stale at the next adoption
+        and price today's artists against a population that no longer exists.
+
+        Nulls are measured absences: the instrument asked and ListenBrainz
+        reported no listeners. Under the novelty-likelihood construct that is
+        genuine maximal obscurity, so they take 0.0 — but they are EXCLUDED
+        from the frame, because counting them would drag every measured
+        artist's rank upward and make a poorly-covered population look
+        uniformly famous.
+
+        Ties take equal ranks: two artists with the same listener count are
+        equally obscure, and breaking that tie would invent a distinction the
+        instrument did not measure.
+
+        Plain sentence for the whole method: 0 means nobody on this map has
+        fewer recorded listeners, 1 means nobody has more.
+        """
+        values = np.array(
+            [np.nan if v is None else float(v) for v in fame_lb_raw],
+            dtype=np.float64,
+        )
+        measured = values[~np.isnan(values)]
+        out = np.zeros(len(values), dtype=np.float64)
+        if measured.size == 0:
+            # Nothing was measured anywhere: every artist is equally, maximally
+            # obscure. A real reading, not a failure.
+            return out
+
+        frame = np.sort(measured)
+        # `side="left"` counts strictly-smaller values, so equal counts share a
+        # rank. Divided by size-1 so the least-listened-to measured artist sits
+        # at 0.0 and the most-listened-to at 1.0; guarded because a
+        # single-measured-artist population would otherwise divide by zero.
+        denominator = max(1, frame.size - 1)
+        ranks = np.searchsorted(frame, values, side="left") / denominator
+        # NaN sorts above everything in searchsorted, so nulls must be written
+        # back explicitly rather than left with whatever rank that produced.
+        ranks[np.isnan(values)] = 0.0
+        return np.clip(ranks, 0.0, 1.0)
 
     def _compute_degree_hub_penalty(self) -> np.ndarray:
         """Per-node hub-ness in 0-1, for the cost function's anti-hub term.
@@ -179,6 +239,19 @@ class GraphStore:
                 f"metadata has {len(meta['mbids'])}"
             )
 
+        # Same class of defect as the check above, for the same reason: this
+        # list is indexed by node id inside the Dijkstra loop, so a length
+        # disagreement is an out-of-bounds read or a silently mispriced artist
+        # rather than a clean failure. Empty is not a disagreement — the
+        # builder omits the key when it has nothing to say, and an empty list
+        # from an older writer means the same thing.
+        fame_lb = meta.get("fame_lb")
+        if fame_lb and len(fame_lb) != n:
+            raise ValueError(
+                f"artifact inconsistent: header says {n} nodes, but fame_lb "
+                f"has {len(fame_lb)} entries"
+            )
+
         return cls(
             mbids=meta["mbids"],
             names=meta["names"],
@@ -195,4 +268,10 @@ class GraphStore:
             # including the one the app serves. Absence means "resolve by
             # name", which is what the app did before this existed.
             deezer_ids=meta.get("deezer_ids", []),
+            # Same additive-key reasoning as deezer_ids. Length is checked
+            # because this one is INDEXED BY NODE ID in the cost function: a
+            # short list would price one artist as another, or read out of
+            # bounds mid-request. deezer_ids escapes that check only because it
+            # is read through a bounds-checked accessor.
+            fame_lb_pctl=cls.fame_percentiles(fame_lb) if fame_lb else None,
         )
