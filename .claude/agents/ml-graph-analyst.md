@@ -39,11 +39,21 @@ belief — including a belief you yourself established earlier.
   (`graph-75k.bin` and successors; the dev API boots the adopted artifact by default).
 - **The router.** Pure Dijkstra in `api/…/pathfinding.py`, no I/O. Cost per edge:
   `w_sim·(1−similarity) + w_jump·|Δpop_raw| + w_floor·max(0, floor_raw−pop_raw_v)
-  + w_avoid·avoidance + w_degree_hub·degree_hub_penalty + w_hop`. Weights and their
-  defaults live in `ApiConfig` (`api/…/config.py`) and are cited from there, never
-  restated. Both popularity terms are in **raw** currency, not percentile, and
-  `floor_raw` is the only depth-graduated term — everything else is static per request.
-  `w_degree_hub` defaults to 0.0, so that term is inert unless deliberately set.
+  + w_avoid·avoidance + w_degree_hub·degree_hub_penalty + w_hop
+  + w_known_ramp_fame_pctl·k·fame_lb_pctl_v` (last term: `v ≠ target` only). Weights and
+  their defaults live in `ApiConfig` (`api/…/config.py`) and are cited from there, never
+  restated. **Three currencies, and they are not interchangeable:** `w_jump` and `w_floor`
+  price **raw popularity**; `w_degree_hub` prices **degree**; the ramp prices **fame
+  percentile** (`fame_lb_pctl`, ListenBrainz listener rank within the served artifact's own
+  population). **Two depth-graduated devices now, not one** — `floor_raw` and the ramp,
+  where `k` is the number of `known` bypasses, fixed per request; everything else is static.
+  `w_degree_hub` and `w_known_ramp_fame_pctl` both default to 0.0, so both terms are inert
+  unless deliberately set, and the ramp additionally requires an artifact carrying fame
+  (`create_app` refuses to boot otherwise).
+  *(Seventh term added 2026-08-05 by `MSW-`. This exact file lost a whole term to a rename
+  in 2026-07-23 — a defect of absence, invisible to any grep for stale names — so it is
+  called out here: if you are reading this and `pathfinding.py` has a term this line does
+  not, the line is wrong, not the code.)*
 - **Every journey gets at least one stop** (F1, the owner's decision, 2026-07-25). **The app
   calls `find_journey`, not `find_path`.** Where the least-cost path is exactly the two
   chosen artists, it searches again with their direct connection forbidden and returns that

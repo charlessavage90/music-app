@@ -12,16 +12,56 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-05 (night), when THE `ULF-` FILTER WORK WAS COMPLETED. The merged
-un-listenable filter is built, censused over both populations, wired and tested; `ULC-F1` and
-`ULC-F2` are discharged; CROOVE was struck from the acceptance canonical list by owner ruling.
-NOTHING IS ADOPTED — the app serves the same artifact as this morning. The next action is the
-OWNER'S: a DECISION (which form of the map switch, results §4.1) plus two merges. The `GBL-`
-null and the `CAU-` result both stand and are untouched.**
+**Last updated: 2026-08-05 (late night), when THE `MSW-` MAP SWITCH REACHED SEAM 2 — Tasks 1–7
+of 12. The owner DECIDED the map switch: the full `ULC-A4` package. Both outstanding merges are
+done. NOTHING IS ADOPTED — the app serves the same artifact as this morning, and every new
+default is off. The next action is WORK: Task 8, whose first step is a backup. The `GBL-` null
+and the `CAU-` result both stand; this adoption OVERRIDES the null on the owner's authority,
+which is not the same as reopening it.**
 
 ---
 
-> ## ✅ THE `ULF-` FILTER WORK IS COMPLETE, 2026-08-05 (night). **The next action is the OWNER'S: merge draft PR #78 then the `ulc-filter-fix` draft PR (in that order — the second builds on the first), and decide which form of the map switch to take** (results §4.1: data-only vs the listened-to package; the filter fix makes either a genuinely new candidate under the run-once rule).
+> ## ▶ THE `MSW-` MAP SWITCH IS IN FLIGHT AT SEAM 2, 2026-08-05 (late night). **The next action is WORK, not a decision: Task 8.** Its FIRST step is backing up `builder/analysis/2026-08-02-fame-instrument/fi_union_snapshot.json` and its manifest — gitignored, on this machine only, ~93k artists to refetch if lost.
+>
+> **Entry point:** the current handoff
+> [`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md). Operational document:
+> [`plans/2026-08-05-msw-package-adoption.md`](plans/2026-08-05-msw-package-adoption.md)
+> (12 tasks, seams at 5/7/10/12). Reasoning:
+> [`2026-08-05-msw-execution-log.md`](2026-08-05-msw-execution-log.md) — **its §0 is the
+> authority record and must be read before describing this work.** Branch
+> `msw-package-adoption-plan`, draft PR **#81**.
+>
+> **⚠ THIS ADOPTION IS AN OWNER OVERRIDE OF THE `GBL-` NULL.** The null's pre-registered
+> consequence was *"production stands and Option A closes without adoption"* (margin 3
+> against a bar of 5). The owner took the override knowingly on 2026-08-05, on `CAU-`'s
+> coherence pass at his own bar, the compromised instrument behind the null, and the `ULF-`
+> filter fix. **Neither `GBL-` nor `CAU-` licensed it** — `CAU-` §6 bars comparison at any
+> strength and `GBL-` §5's run-once rule still binds. **Never record this as
+> evidence-backed adoption.**
+>
+> **What stands, in one paragraph.** Tasks 1–7 build the whole capability and switch none of
+> it on. The builder gained the trimmed-union connection rule (ported from the frozen Track B
+> implementation and pinned to it by test), a `fame` fetch stage putting ListenBrainz listener
+> counts in the archive so `build` stays offline, a refusal to build when fame coverage has
+> drifted from the similarity population, and `fame_lb` as an additive APG1 key. The API reads
+> that key, ranks it against **the served artifact's own population**, and prices a `known`
+> ramp on it, refusing to boot if the ramp is live over a fameless artifact. **`cap_strategy`
+> is still `mutual_knn`, `require_fame` is `False`, `w_known_ramp_fame_pctl` is `0.0`, no
+> artifact has been built and the frontend is untouched.** 220 builder + 254 api tests pass;
+> Snyk clean on both packages.
+>
+> **Owner decisions taken, not to be re-litigated:** the full package over data-only
+> (`ULC-A2` has never been listened to or audited; the package is what `GBL-` heard and
+> `CAU-` judged); and adopt-and-live-with-it rather than spending a fresh listen.
+>
+> **Still owed and named:** Task 11 Step 0 must era-pin `cap_strategy` **and** `require_fame`
+> in three analysis callers, or they silently change what they build and one refuses outright;
+> `MSW-V4` is an `ml-graph-analyst` dispatch at Seam 3; **Seam 3 is an OWNER STOP** before any
+> default flips. One decision is his and is small: the D6 standing-layer cost, in the handoff.
+>
+> ---
+
+> ## ✅ THE `ULF-` FILTER WORK IS COMPLETE, 2026-08-05 (night). ~~**The next action is the OWNER'S: merge draft PR #78 then the `ulc-filter-fix` draft PR**~~ *(BOTH MERGED: #78 at `7961530`, #80 at `fd6b140`)* ~~**and decide which form of the map switch to take**~~ *(DECIDED 2026-08-05: the full listened-to package. That became the `MSW-` track in the block above, which owns current state.)*
 >
 > **Entry point for anything `ULF-`:** the governing rule document
 > [`specs/2026-08-05-unlistenable-filter-rule.md`](specs/2026-08-05-unlistenable-filter-rule.md)

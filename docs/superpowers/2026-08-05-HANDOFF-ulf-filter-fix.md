@@ -1,6 +1,12 @@
 # Handoff — the un-listenable filter (`ULF-`) is built, censused and wired, 2026-08-05
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions by
+[`2026-08-05-HANDOFF-msw-seam2.md`](2026-08-05-HANDOFF-msw-seam2.md)** — every action this
+note owed is discharged: PR #78 merged (`7961530`), the `ulc-filter-fix` PR merged as #80
+(`fd6b140`), and the owner took the map-switch decision on 2026-08-05, choosing the full
+`ULC-A4` package. **Remains authoritative for the `ULF-` filter work's own internals**, and
+its "must not be reverted" list still binds. *(Original role line:)* **ACTIVE — this is the
+CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-05-HANDOFF-ulc.md`](2026-08-05-HANDOFF-ulc.md) on next actions. It does **not**
 state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
