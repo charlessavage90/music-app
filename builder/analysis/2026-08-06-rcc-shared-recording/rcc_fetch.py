@@ -4,9 +4,13 @@ Governing document:
   docs/superpowers/specs/2026-08-06-shared-recording-preregistration.md
 committed at d478c84 BEFORE this script fetched anything.
 
-Within-artist control: each artist is asked about their rank-1 partner AND a
-partner from ranks 50-100 of their own list, so recording count and coverage
-are identical across the comparison by construction.
+Within-artist control: each artist is asked about their rank-1 partner AND
+the neighbour at 80% depth of their OWN list (`RCC-AM1`), so recording count
+and coverage are identical across the comparison by construction.
+
+The tail is a RELATIVE position, not an absolute rank. That is the amendment:
+an absolute rank-50-100 tail needs a list of >=100, and list length is itself
+a property of the arm, so it left CONTROL with 15 of 200.
 
 Run from `api/`:
   UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 PYTHONUNBUFFERED=1 uv run python -u \
@@ -16,7 +20,6 @@ This directory OWNS its figures. Cite it; never restate them.
 """
 import json
 import os
-import random
 import time
 import urllib.error
 import urllib.parse
@@ -31,8 +34,13 @@ USER_AGENT = "artistpath-research/1.0 (charlessavagemiller@gmail.com)"
 SEARCH = "https://musicbrainz.org/ws/2/recording?query={q}&fmt=json&limit=1"
 RAW = os.path.join(HERE, "rcc_raw.json")
 RESULT = os.path.join(HERE, "rcc_result.json")
-SEED = 20260806
-TAIL_LO, TAIL_HI = 50, 100
+# No RNG: RCC-AM1 makes the tail a deterministic position in each list.
+# RCC-AM1: the tail is a RELATIVE position in the artist's own list, not an
+# absolute rank. Requiring absolute ranks 50-100 required a list of >=100,
+# and list length is itself a property of the arm - it left CONTROL with
+# 15 of 200. See the prereg's RCC-AM1 section.
+TAIL_FRAC = 0.8
+MIN_LIST = 10
 
 
 def archived(mbid):
@@ -71,14 +79,13 @@ def main():
         ccr = json.load(fh)
     print(f"reusing the CCR- sample: {len(ccr)} artists")
 
-    rng = random.Random(SEED)
     work, skipped = [], 0
     for r in ccr:
         rows = archived(r["mbid"])
-        if not rows or len(rows) < TAIL_HI:
+        if not rows or len(rows) < MIN_LIST:
             skipped += 1
             continue
-        tail = rows[rng.randrange(TAIL_LO, min(TAIL_HI, len(rows)))]
+        tail = rows[int(TAIL_FRAC * (len(rows) - 1))]
         work.append({
             "arm": r["arm"], "mbid": r["mbid"], "name": r["name"],
             "rank1_mbid": r["top_partner_mbid"],
@@ -87,7 +94,7 @@ def main():
             "tail_mbid": tail["artist_mbid"], "tail_name": tail["name"],
             "tail_score": tail["score"],
         })
-    print(f"usable {len(work)}, skipped {skipped} (archived list < {TAIL_HI})")
+    print(f"usable {len(work)}, skipped {skipped} (archived list < {MIN_LIST})")
 
     cache = {}
     if os.path.exists(RAW):
@@ -115,8 +122,8 @@ def main():
 
 def score(records):
     res = {"governing": "specs/2026-08-06-shared-recording-preregistration.md",
-           "within_artist_control": f"rank 1 vs a partner from ranks "
-                                    f"{TAIL_LO}-{TAIL_HI} of the SAME list"}
+           "within_artist_control": f"rank 1 vs the neighbour at {int(TAIL_FRAC*100)}% depth "
+                                    f"of the SAME list (RCC-AM1)"}
     arms = {}
     for arm in ("CLASS", "CONTROL"):
         rs = [r for r in records if r["arm"] == arm]

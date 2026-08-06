@@ -34,6 +34,40 @@ genre and prolificacy are **identical across the comparison by construction**. A
 differs between rank-1 and tail is a property of *similarity rank*, which is the only thing
 under test.
 
+## `RCC-AM1` — the tail partner is defined by RELATIVE position, not absolute rank
+
+**Committed 2026-08-06, before any outcome value was observed.** A first run was started under
+the original §0 definition (tail drawn from **absolute** ranks 50–100), stopped after 20
+artists, and its partial data **deleted**. Only sampling diagnostics — archived list lengths —
+were inspected; **no `rank1_shared` or `tail_shared` value was read**, so nothing below is
+shaped by a result.
+
+**What broke.** Requiring an absolute rank-50–100 partner requires a list of ≥ 100 entries.
+Archived list length is **itself a property of the arm**:
+
+| Arm | Median archived list length | Usable under the original rule |
+|---|---|---|
+| CLASS | 100 | 183 / 200 (91.5 %) |
+| CONTROL-OBSCURE | 18 | **15 / 200 (7.5 %)** |
+
+**Selecting on list length selected the control arm away**, and the 15 survivors are atypical
+of it by construction. `RCC-C2` would have compared 183 artists against 15 unrepresentative
+ones, and `RCC-C1`'s CLASS reading would have been fine while the between-arm reading was
+quietly worthless.
+
+**The corrected rule.** The tail partner is the neighbour at index
+`floor(0.8 × (L − 1))` of the artist's **own** list of length `L`, requiring `L ≥ 10` so that
+rank 1 and the tail are meaningfully separated. Artists with `L < 10` are skipped and counted.
+
+**The trade-off, stated rather than hidden.** Under this rule the tail sits at a different
+**absolute** rank in each arm (≈ 80 for CLASS, ≈ 14 for CONTROL) while sitting at the same
+**relative** depth. That is the correct choice *because* list length is an arm property:
+matching absolute rank is precisely what destroyed the control. **`RCC-C2` therefore compares
+"top of your list vs bottom of your list" across arms, not "rank 1 vs rank 75" across arms**,
+and every citation of `RCC-C2` carries that sentence.
+
+**`RCC-C1` is unaffected in kind** — it was within-artist before and remains within-artist.
+
 ## 1. Sample — reused from `CCR-` deliberately
 
 **The same 400 artists, same arms, same seed (`20260806`)**, read from
