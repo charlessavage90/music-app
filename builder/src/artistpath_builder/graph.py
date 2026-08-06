@@ -125,6 +125,109 @@ def mutual_knn_cap(
     return result
 
 
+class _desc:
+    """Sort helper: reverses string order so ties drop the HIGHEST MBID first.
+
+    Deliberately the opposite of every other tie-break in this module. It
+    orders *deletions*, not selections, so dropping the highest MBID first
+    leaves the lowest standing — which is the same artist mutual k-NN's
+    lowest-MBID selection would have kept.
+    """
+
+    __slots__ = ("value",)
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+    def __lt__(self, other: "_desc") -> bool:
+        return self.value > other.value
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, _desc) and self.value == other.value
+
+
+def trimmed_union_cap(
+    adjacency: Adjacency,
+    top_j: int,
+    degree_ceiling: int,
+    *,
+    ranking: Adjacency,
+) -> Adjacency:
+    """Keep edge (u,v) if EITHER endpoint ranks the other top-j, then trim to a
+    hard degree ceiling by deleting the weakest edges.
+
+    ADOPTED 2026-08-05 with the map switch, as Track B's `TUw-50-50` (cell
+    `B-S1`). It is deliberately non-reciprocal where `mutual_knn_cap` is
+    reciprocal: an artist whose own list is crowded with famous neighbours
+    keeps the obscure neighbour that ranks *them* highly, which mutual k-NN
+    discards. That is the supply difference the whole cap re-evaluation was
+    about — see docs/superpowers/findings/2026-07-30-track-b-cap-selection-results.md.
+
+    The union alone bounds NOTHING — a famous artist appears in unboundedly
+    many neighbour lists, which is exactly the defect that killed the legacy
+    pre-symmetrise cap (configured 50, observed max degree 11,243). The
+    ceiling is what bounds it, and it deletes WHOLE EDGES rather than
+    truncating one endpoint's row, because per-node truncation breaks symmetry
+    again.
+
+    BOUND: degree <= degree_ceiling by construction. A single pass suffices —
+    nodes are processed in a fixed order and deletion only ever lowers a
+    degree, so a node brought to the ceiling cannot later rise above it.
+
+    Determinism (design §9): top-j ties break on lowest MBID; nodes are
+    processed by (-degree, mbid); deletions are ordered by symmetric pair
+    strength with ties dropping the highest MBID first. The surviving set is a
+    function of the input alone.
+
+    `ranking` supplies the values used to order both the top-j selection and
+    the trim, for the same reason `mutual_knn_cap` takes one: the p99 clip
+    ties the top ~1% of emitted scores at exactly 1.0, so selecting on them
+    would let the MBID tie-break decide which neighbours a saturated artist
+    kept (Phase 1 log §2.8). Emitted scores still come from `adjacency`.
+
+    Equivalence to the frozen rule that was actually selected is pinned by
+    test_graph.py::test_trimmed_union_cap_matches_the_frozen_track_b_implementation.
+    """
+    if set(ranking) != set(adjacency):
+        raise ValueError(
+            "ranking must cover exactly the nodes of adjacency; top-j "
+            "selection over a different node set is undefined"
+        )
+
+    keep: dict[str, set[str]] = {}
+    for node, edges in adjacency.items():
+        ranked = sorted(edges, key=lambda dst: (-ranking[node][dst], dst))
+        keep[node] = set(ranked[:top_j])
+
+    # Union, then symmetrise on the stronger score, giving an undirected graph.
+    unioned: Adjacency = {node: {} for node in adjacency}
+    for node, edges in adjacency.items():
+        for dst, score in edges.items():
+            if dst in keep[node] or node in keep.get(dst, set()):
+                unioned[node][dst] = score
+    result = symmetrise(unioned)
+
+    # Symmetric strength for the trim order: the pair's stronger unclipped
+    # ranking value, so both endpoints agree on which edge is weakest.
+    def strength(u: str, v: str) -> float:
+        return max(
+            ranking.get(u, {}).get(v, float("-inf")),
+            ranking.get(v, {}).get(u, float("-inf")),
+        )
+
+    for node in sorted(result, key=lambda n: (-len(result[n]), n)):
+        excess = len(result[node]) - degree_ceiling
+        if excess <= 0:
+            continue
+        doomed = sorted(result[node], key=lambda v: (strength(node, v), _desc(v)))[
+            :excess
+        ]
+        for victim in doomed:
+            result[node].pop(victim, None)
+            result[victim].pop(node, None)
+    return result
+
+
 def largest_component(adjacency: Adjacency) -> set[str]:
     """Return the biggest connected component.
 
