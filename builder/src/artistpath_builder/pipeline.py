@@ -115,6 +115,44 @@ def rescale_scores(
     )
 
 
+def similar_prefix(config: BuilderConfig, source: SimilaritySource) -> str:
+    """Archive key prefix for this config's similarity responses.
+
+    RC-H3, build side: responses are keyed by algorithm, so a build reads only
+    the tree its own algorithm wrote. Production keeps the flat layout (see
+    Crawler.similar_key); every other algorithm has a sub-tree.
+
+    Extracted so the `fame` stage enumerates exactly the population `build`
+    will read, from one definition rather than two. A second copy of this rule
+    is precisely the divergence class test_pipeline_mirrors.py guards.
+    """
+    if config.algorithm == PRODUCTION_ALGORITHM:
+        return f"similar/{source.name}/"
+    return f"similar/{source.name}/{config.algorithm}/"
+
+
+def archive_artists(
+    archive: RawArchive, config: BuilderConfig, source: SimilaritySource
+) -> set[str]:
+    """Every artist with an archived similarity response for this config.
+
+    A superset of the built graph's nodes — a node also needs to appear as
+    someone's neighbour, and the largest-component step prunes further — which
+    is the property the `fame` stage wants: fetch for everything that could
+    end up in the graph, so `load_fame` cannot come up short.
+    """
+    prefix = similar_prefix(config, source)
+    found: set[str] = set()
+    for key in archive.keys():
+        if not key.startswith(prefix) or not key.endswith(".json"):
+            continue
+        mbid = key[len(prefix) : -len(".json")]
+        if "/" in mbid:
+            continue
+        found.add(mbid)
+    return found
+
+
 def build_from_archive(
     config: BuilderConfig,
     archive: RawArchive,
@@ -127,13 +165,7 @@ def build_from_archive(
     to serve as popularity). Isolated artists cannot be routed and are dropped
     by the largest-component step regardless.
     """
-    # RC-H3, build side: responses are keyed by algorithm, so a build reads
-    # only the tree its own algorithm wrote. Production keeps the flat layout
-    # (see Crawler.similar_key); every other algorithm has a sub-tree.
-    if config.algorithm == PRODUCTION_ALGORITHM:
-        prefix = f"similar/{source.name}/"
-    else:
-        prefix = f"similar/{source.name}/{config.algorithm}/"
+    prefix = similar_prefix(config, source)
     payloads: dict[str, bytes] = {}
     for key in sorted(archive.keys()):
         if not key.startswith(prefix) or not key.endswith(".json"):

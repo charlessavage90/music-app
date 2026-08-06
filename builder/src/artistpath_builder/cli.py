@@ -2,11 +2,17 @@
 
     artistpath-build bootstrap  --out bootstrap.json
     artistpath-build crawl      --bootstrap bootstrap.json --archive-dir ./archive
+    artistpath-build fame       --archive-dir ./archive
     artistpath-build build      --archive-dir ./archive --out graph-v1.bin
     artistpath-build fixture    --graph graph-v1.bin --out fixture.bin --size 500
 
 Popularity is score-weighted in-degree, computed from the similarity archive
 during `build` (findings 6f). There is no separate popularity input.
+
+FAME is different and is NOT popularity: `fame` fetches ListenBrainz listener
+counts into the archive, because `build` may not touch the network (spec §9).
+It runs after `crawl` and before `build`. The two quantities are never read as
+each other — see fame.py and log §2.11/§2.12.
 """
 
 from __future__ import annotations
@@ -30,7 +36,8 @@ from artistpath_builder.config import PERMITTED_ALGORITHMS, BuilderConfig
 from artistpath_builder.crawl import Crawler, http_fetcher
 from artistpath_builder.fixture import extract_fixture
 from artistpath_builder.manifest import build_manifest, write_manifest
-from artistpath_builder.pipeline import build_from_archive
+from artistpath_builder.fame import fetch_fame, lb_fame_fetcher, seed_fame
+from artistpath_builder.pipeline import archive_artists, build_from_archive
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 from artistpath_builder.sources.seeds import (
     BOOTSTRAP_CEILING,
@@ -127,6 +134,59 @@ def cmd_crawl(args) -> int:
     return 0
 
 
+def cmd_fame(args) -> int:
+    """Fetch ListenBrainz listener counts into the archive.
+
+    Separate from `build` because `build` may not touch the network (spec §9).
+    Resumable: re-running costs only what is not already recorded, so an
+    interrupted fetch is picked up rather than restarted.
+    """
+    config = _config(args)
+    archive = _archive(args)
+    source = ListenBrainzSource(config)
+    mbids = archive_artists(archive, config, source)
+    logging.info("fame: %d artists in this archive", len(mbids))
+
+    if args.seed:
+        if not args.seed_sha:
+            raise SystemExit(
+                "--seed requires --seed-sha: the snapshot's sha256 IS the "
+                "instrument's identity (FAM-AM1.7), and an unverified file "
+                "has unknown provenance. Take it from the manifest sidecar."
+            )
+        report = seed_fame(
+            archive,
+            Path(args.seed),
+            expected_sha256=args.seed_sha,
+            fetched=args.seed_date,
+        )
+        logging.info(
+            "fame seed: %d imported, %d already present", report.seeded, report.skipped
+        )
+
+    started = time.monotonic()
+    report = fetch_fame(
+        archive,
+        mbids,
+        lb_fame_fetcher(config),
+        pause_seconds=config.request_delay_seconds,
+    )
+    logging.info(
+        "fame: %d fetched (%d null), %d already recorded, %d total, %.0fs",
+        report.fetched,
+        report.nulls,
+        report.skipped,
+        report.total,
+        time.monotonic() - started,
+    )
+    if report.total != len(mbids):
+        raise SystemExit(
+            f"fame covered {report.total} artists but the archive has "
+            f"{len(mbids)} — refusing to report success on a partial pass"
+        )
+    return 0
+
+
 def cmd_build(args) -> int:
     config = _config(args)
     started = time.monotonic()
@@ -201,6 +261,31 @@ def main(
     )
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
+
+    p_fame = sub.add_parser("fame")
+    p_fame.add_argument(
+        "--algorithm",
+        default=None,
+        help="which algorithm's archive tree to cover; default production's",
+    )
+    p_fame.add_argument(
+        "--seed",
+        default=None,
+        help="an already-fetched snapshot to import before fetching the rest",
+    )
+    p_fame.add_argument(
+        "--seed-sha",
+        default=None,
+        help="expected sha256 of --seed, from its manifest sidecar (required "
+        "with --seed; never transcribe it by hand)",
+    )
+    p_fame.add_argument(
+        "--seed-date",
+        default="unknown",
+        help="fetch date recorded for seeded records, from the seed's manifest",
+    )
+    add_archive_args(p_fame)
+    p_fame.set_defaults(func=cmd_fame)
 
     p_build = sub.add_parser("build")
     p_build.add_argument("--out", required=True)

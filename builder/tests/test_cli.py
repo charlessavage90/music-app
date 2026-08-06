@@ -151,3 +151,62 @@ def test_bootstrap_serialisation_round_trips(tmp_path):
 
     rows = json.loads(out.read_text(encoding="utf-8"))
     assert rows == [{"mbid": A, "name": "Alpha"}]
+
+
+def test_fame_command_covers_the_archive_population(tmp_path, monkeypatch):
+    """The `fame` subcommand reaches the archive's artists and records each.
+
+    The network fetcher is replaced, which is the point: the stage is testable
+    without touching ListenBrainz, exactly as the crawl is.
+    """
+    import json as _json
+
+    from artistpath_builder import cli as cli_module
+    from artistpath_builder.archive import LocalArchive
+    from artistpath_builder.config import BuilderConfig
+    from artistpath_builder.fame import fame_key
+    from artistpath_builder.sources.listenbrainz import ListenBrainzSource
+
+    config = BuilderConfig()
+    source = ListenBrainzSource(config)
+    archive_dir = tmp_path / "archive"
+    archive = LocalArchive(archive_dir)
+    mbids = ["a" * 36, "b" * 36]
+    for m in mbids:
+        archive.put(
+            f"similar/{source.name}/{m}.json",
+            _json.dumps(
+                [{"artist_mbid": "c" * 36, "name": "N", "comment": "", "score": 10}]
+            ).encode(),
+        )
+
+    asked = []
+
+    def fake_fetcher(_config):
+        def fetch(batch):
+            asked.extend(batch)
+            return {m: 42 for m in batch}
+
+        return fetch
+
+    monkeypatch.setattr(cli_module, "lb_fame_fetcher", fake_fetcher)
+    assert cli_module.main(["fame", "--archive-dir", str(archive_dir)]) == 0
+    assert sorted(asked) == sorted(mbids)
+    assert _json.loads(archive.get(fame_key(mbids[0])))["fame_lb_raw"] == 42
+
+
+def test_fame_seed_without_a_sha_is_refused(tmp_path):
+    from artistpath_builder import cli as cli_module
+
+    snapshot = tmp_path / "snap.json"
+    snapshot.write_text("{}")
+    with pytest.raises(SystemExit, match="seed-sha"):
+        cli_module.main(
+            [
+                "fame",
+                "--archive-dir",
+                str(tmp_path / "archive"),
+                "--seed",
+                str(snapshot),
+            ]
+        )

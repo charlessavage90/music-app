@@ -1,0 +1,131 @@
+# `MSW-` map switch — execution log
+
+**Role: ACTIVE, retained.** Reasoning and decisions per task, appended as the work
+happens rather than reconstructed at closeout. Status lives in
+[`NEXT.md`](superpowers/NEXT.md); this document owns no status and no figures — the
+artifact's figures live in its manifest sidecar, the `ULC-`/`GBL-`/`CAU-` figures in
+their own findings notes, cited and never restated.
+
+**Operational document:**
+[`plans/2026-08-05-msw-package-adoption.md`](plans/2026-08-05-msw-package-adoption.md).
+
+---
+
+## §0 The authority this work runs on, recorded before anything was built
+
+This adoption is an **owner override of the standing `GBL-` null**. The null's
+pre-registered consequence was *"production stands and Option A closes without
+adoption"*, margin 3 against a bar of 5.
+
+The owner took the override knowingly on 2026-08-05, having been shown the null and
+its margin explicitly, on this reasoning: `CAU-` found the arm's coherence meets his
+own bar (by one card); the instrument that produced the null was compromised in the
+direction that penalised this arm specifically (a 30-second clip cannot support a
+coherence judgement about an unfamiliar artist, and that failure activates only in the
+arm delivering unfamiliar artists); the `ULF-` filter fix addresses the largest
+identified defect underneath it; and Gate 1's blast radius is himself.
+
+**Neither `GBL-` nor `CAU-` licensed this.** `CAU-` §0 bars comparison with today's app
+on any strength, and `GBL-` §5's run-once rule still binds that verdict. The authority
+is the owner's and is recorded as his, which is the only thing that must not be
+misremembered later.
+
+**A session correction worth keeping:** this session first recommended shipping the
+data-only variant (`ULC-A2`) as the cheaper first step. That was wrong and was
+withdrawn — `ULC-A2` has never been listened to or audited by anyone, while the full
+package is what `GBL-` heard and `CAU-` audited. Shipping the cheaper thing would have
+shipped the *unevaluated* thing.
+
+## §1 Scope correction found before any code was written
+
+`ULC-` results §4.1 scoped the package as "two implementation jobs, not a config flip".
+Verified against the repo, it is **four**, and the owner was told before he confirmed:
+
+1. the trimmed-union connection rule (`cap_strategy` raised on anything but
+   `mutual_knn`),
+2. the gentle ramp (no ramp knob anywhere in `api/src`),
+3. **`fame_lb_raw` in the artifact** — nothing matching `fame_lb*` existed in
+   `builder/src` or `api/src`, and the APG1 metadata blob carried only mbids, names,
+   disambiguations, popularity and optionally `deezer_ids`,
+4. **fame data for the new population** — the only values in existence came from a
+   one-off analysis fetch (`fi_union_snapshot.json`), gitignored and on one machine.
+
+Job 3 is easier than it sounds (`artifact.py` documents the additive-key pattern from
+`deezer_ids`); job 4 is harder (`build` is contractually offline, so fame needs a
+crawl-shaped stage of its own).
+
+## §2 Named deviations from the listened arm
+
+Recorded in the plan's own section and repeated at each site in code. In brief: the
+un-listenable filter is ON (the listened builds predate it); the percentile frame is the
+**served artifact's own** non-null values rather than the retired artifact's fixed
+experimental ruler; and the harness's "absent from snapshot" null class cannot arise in
+a shipped artifact, because Task 4 refuses to build one.
+
+---
+
+## Task 1 — `trimmed_union_cap` ported into shipped builder
+
+Ported from the frozen `cb_build_variants.cap_trimmed_union` (`weakest_first` only;
+`banded_quota` lost Track B's selection and is not ported). An equivalence test against
+the frozen implementation pins the port, so a transcription slip fails loudly.
+
+**The equivalence test alone was not sufficient, and this is the entry worth keeping.**
+Suspecting a green from a new instrument, the tie-break was perturbed (`_desc(v)` → `v`,
+which reverses which MBID survives a strength tie) and **all four tests stayed green**.
+Random float strengths never tie, so the deletion tie-break was entirely uncovered — by
+a test whose whole purpose was to pin the rule. Two tie-specific tests now cover it, and
+both go red under that same perturbation; the frozen implementation fails identically,
+which is what confirms the ported behaviour matches its real behaviour rather than my
+reading of it.
+
+## Task 2 — `cap_strategy="trimmed_union"` wired through the pipeline seam
+
+`PERMITTED_CAP_STRATEGIES` replaces the single-value check. The deleted
+`pre_symmetrise` is deliberately *absent* from that tuple rather than listed-and-
+rejected, so adding a strategy can never reinstate it by accident; a test asserts it
+still raises by name.
+
+**`MSW-G1` passed.** A default (`mutual_knn`) build over a fixed synthetic archive is
+byte-identical across the seam change — 60 artists, 910 edges,
+`sha256=0f6f85a6a6153776006f0fd4cb50041c8a15255db5d2b997895c9aa65b4c75fe` before and
+after. Deliberately not committed as a golden test: a pinned sha in the suite would
+break on every unrelated legitimate change to the build. The before/after pair is the
+evidence and it lives here. Re-checked after Task 3's prefix extraction — unchanged.
+
+**`test_pipeline_mirrors.py` fired and earned its place.** The two new fields are inert
+today, but the guard surfaced that **Task 11's default flip is the build-affecting
+event**: `grt_score.py`, `calibrate.py` and `cre_build.py` each construct
+`BuilderConfig` without setting `cap_strategy`, so all three would silently change what
+they build. `cre_build.py` is the sharp case — its `gate()` compares its mirror against
+a live `build_from_archive` for byte-identity, so an unpinned flip would have it
+comparing two *different cap rules* and reporting a mirror divergence, which is the
+wrong diagnosis for the right symptom. The plan gained Task 11 Step 0 to pin all three;
+reasoning is recorded at the site in `RECORDED_FIELDS`.
+
+## Task 3 — the `fame` fetch stage
+
+`builder/src/artistpath_builder/fame.py` plus an `artistpath-build fame` subcommand.
+Network to archive, resumable by key presence, seedable from the frozen `FAM-` snapshot.
+`build` reads records offline, so the offline-build rule survives the addition of a
+network-sourced quantity.
+
+Decisions worth recording:
+
+- **A stored null occupies its key.** ListenBrainz returns not-found artists as explicit
+  nulls, so a null is a measured absence, not a gap. Had resume treated it as unfetched,
+  every null would be re-fetched on every run forever and the stage would never
+  terminate against a population with real absences in it.
+- **Absent-from-response is recorded as null too.** Batches above `MAX_PER_REQUEST` are
+  silently *truncated* rather than rejected, so a short response must not leave a hole
+  the next run reads as "never asked".
+- **The seed verifies its sha before writing anything.** The snapshot's sha *is* the
+  instrument's identity (`FAM-AM1`.7); an unverified file would put values of unknown
+  provenance into an artifact that routes on them. `--seed` without `--seed-sha` is
+  refused by the CLI rather than defaulted.
+- **Existing records win over a seed**, so the archive's contents do not depend on the
+  order the operator happened to run things in.
+- **`similar_prefix` / `archive_artists` were extracted rather than copied.** The fame
+  stage must enumerate exactly the population `build` will read; a second copy of the
+  `RC-H3` algorithm-scoping rule is precisely the divergence class
+  `test_pipeline_mirrors.py` exists to catch. `MSW-G1` re-verified after the extraction.
