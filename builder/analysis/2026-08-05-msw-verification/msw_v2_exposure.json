@@ -1,0 +1,367 @@
+{
+ "check": "MSW-V2",
+ "status": "diagnostic; report row, not a gate; adopts nothing, changes no default, touches no shipped code",
+ "no_branch_assigned": true,
+ "why_no_branch": "plan Task 10 Step 2: 'This is a report row, not a gate: no threshold was pre-registered, so no read fires.'",
+ "governing": "plans/2026-08-05-msw-package-adoption.md Task 10 Step 2",
+ "plain_question": "how often does a journey's middle land on an artist who has nothing of their own to play, now the filter is on?",
+ "subject": {
+  "artifact": "graph-msw-tu50.bin",
+  "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+  "nodes": 58838,
+  "pricing": "P1a"
+ },
+ "comparator": {
+  "arm": "ULC-A4",
+  "cell": "B-S1",
+  "source": "analysis/2026-08-05-unlistenable-class/ulc_exposure.json",
+  "provenance": "read from the owning file at run time, never transcribed; the ULC- results note owns this figure in prose",
+  "isolating_knob": "drop_unlistenable False -> True",
+  "run_state": {
+   "ulc_r1_readable": false,
+   "missing_slots_in_comparator_run": [
+    "ULC-A2@Led Zeppelin|Guster@d20"
+   ],
+   "inherited": "the comparator's run state was unmet, so ULC-R1 did not fire there and no ULC- read is revived here"
+  }
+ },
+ "class_definition": {
+  "source": "analysis/2026-08-05-unlistenable-class/ulc_flags.json",
+  "set": "ULC-D2",
+  "size": 19779,
+  "present_in_new_artifact": 2802,
+  "new_nodes_never_censused": 46382,
+  "under_count_warning": "an artist never in ULC-D2's census population cannot be counted however un-listenable they are, so a low share is evidence the KNOWN class was removed and NOT evidence that none remains"
+ },
+ "run_state": {
+  "slots_expected": 24,
+  "slots_measured": 24,
+  "readable": true,
+  "missing_slots": []
+ },
+ "mean_interior_share_pct": {
+  "new_artifact": {
+   "d0": 0.0,
+   "deep_d10_d20": 5.21
+  },
+  "ULC-A4_frozen": {
+   "d0": 2.5,
+   "deep_d10_d20": 15.36
+  }
+ },
+ "paired_vs_comparator": {
+  "primary_deep_d10_d20": {
+   "n_pairs": 16,
+   "median_diff_pp": 0.0,
+   "ci95_pp": [
+    0.0,
+    0.0
+   ],
+   "unpaired_slots": [],
+   "branch": null,
+   "sentence": "report row, not a gate: no effect size was pre-registered for MSW-V2, so no branch is assigned and no read fires",
+   "mean_diff_pp": -10.1562,
+   "slots_improved": 4,
+   "slots_unchanged": 10,
+   "slots_worsened": 2,
+   "median_caveat": "the paired MEDIAN inherits ULC-R1's recorded statistic defect: with the class concentrated in a minority of journeys, a median over mostly identical slots reads zero while the mean moves. Read the sign counts and the mean beside it; neither is a pre-registered read."
+  },
+  "anchor_d0": {
+   "n_pairs": 8,
+   "median_diff_pp": 0.0,
+   "ci95_pp": [
+    0.0,
+    0.0
+   ],
+   "unpaired_slots": [],
+   "branch": null,
+   "sentence": "report row, not a gate: no effect size was pre-registered for MSW-V2, so no branch is assigned and no read fires",
+   "mean_diff_pp": -2.5,
+   "slots_improved": 1,
+   "slots_unchanged": 7,
+   "slots_worsened": 0,
+   "median_caveat": "the paired MEDIAN inherits ULC-R1's recorded statistic defect: with the class concentrated in a minority of journeys, a median over mostly identical slots reads zero while the mean moves. Read the sign counts and the mean beside it; neither is a pre-registered read."
+  }
+ },
+ "class_members_still_appearing": [
+  {
+   "mbid": "1155a7a9-a7b4-46ba-ba27-6b6c98be487e",
+   "name": "Jack Antonoff",
+   "slots_appeared": 1
+  },
+  {
+   "mbid": "f077dcb1-d53b-4674-8a91-079c2db02e7c",
+   "name": "James Mercer",
+   "slots_appeared": 1
+  },
+  {
+   "mbid": "58433f65-12c0-42e2-a94d-16c22cdb5dd3",
+   "name": "Josh Kaufman",
+   "slots_appeared": 1
+  },
+  {
+   "mbid": "a1b61d0f-2333-44f5-afee-cc0c2eab71a4",
+   "name": "Maynard James Keenan",
+   "slots_appeared": 1
+  },
+  {
+   "mbid": "0dfd6aab-9056-4764-89b0-80bee7c9f998",
+   "name": "Pino Palladino",
+   "slots_appeared": 1
+  }
+ ],
+ "per_pair": {
+  "406f1b42-0c9e-4427-aeb7-02f78e188ec4|83d91898-7763-47d7-b03b-b92132375c47": {
+   "a": "Wishbone Ash",
+   "b": "Pink Floyd",
+   "depths": {
+    "0": {
+     "interior": 2,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 3,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 3,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    }
+   }
+  },
+  "2e111d6d-fce9-46ff-b33a-7eed7300f9d4|bc154a90-890b-409e-b850-53ca299ab0d6": {
+   "a": "Young Gun Silver Fox",
+   "b": "Eloy",
+   "depths": {
+    "0": {
+     "interior": 8,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 7,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 9,
+     "in_d2": 3,
+     "in_d1": 3,
+     "share_d2": 0.3333333333333333,
+     "share_d1": 0.3333333333333333,
+     "class_members": [
+      "Josh Kaufman",
+      "Jack Antonoff",
+      "Maynard James Keenan"
+     ]
+    }
+   }
+  },
+  "95e1ead9-4d31-4808-a7ac-32c3614c116b|b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d": {
+   "a": "The Killers",
+   "b": "The Beatles",
+   "depths": {
+    "0": {
+     "interior": 1,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 1,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 2,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    }
+   }
+  },
+  "87b9b3b8-ab93-426c-a200-4012d667a626|f6f2326f-6b25-4170-b89d-e235b25508e8": {
+   "a": "The War On Drugs",
+   "b": "Sigur Rós",
+   "depths": {
+    "0": {
+     "interior": 3,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 2,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 4,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    }
+   }
+  },
+  "97b1142f-c71e-4971-8736-4a8ceaf6b4c3|3630fff3-52fc-4e97-ab01-d68fd88e4135": {
+   "a": "The Decemberists",
+   "b": "Yellowcard",
+   "depths": {
+    "0": {
+     "interior": 3,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 3,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 4,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    }
+   }
+  },
+  "63aa26c3-d59b-4da4-84ac-716b54f1ef4d|0f82d6b5-12fb-4569-b047-a00194f572a7": {
+   "a": "Tame Impala",
+   "b": "Fountains Of Wayne",
+   "depths": {
+    "0": {
+     "interior": 3,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 2,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 4,
+     "in_d2": 1,
+     "in_d1": 1,
+     "share_d2": 0.25,
+     "share_d1": 0.25,
+     "class_members": [
+      "Pino Palladino"
+     ]
+    }
+   }
+  },
+  "52074ba6-e495-4ef3-9bb4-0703888a9f68|34cf95c7-4be9-4efd-a48a-c2ea4a0bb114": {
+   "a": "Arcade Fire",
+   "b": "America",
+   "depths": {
+    "0": {
+     "interior": 4,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 4,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 6,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    }
+   }
+  },
+  "678d88b2-87b0-403b-b63d-5da7465aecc3|6cbe1e63-5895-4168-ac7e-f0d2836ba0c1": {
+   "a": "Led Zeppelin",
+   "b": "Guster",
+   "depths": {
+    "0": {
+     "interior": 3,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "10": {
+     "interior": 4,
+     "in_d2": 0,
+     "in_d1": 0,
+     "share_d2": 0.0,
+     "share_d1": 0.0,
+     "class_members": []
+    },
+    "20": {
+     "interior": 4,
+     "in_d2": 1,
+     "in_d1": 1,
+     "share_d2": 0.25,
+     "share_d1": 0.25,
+     "class_members": [
+      "James Mercer"
+     ]
+    }
+   }
+  }
+ },
+ "bootstrap": {
+  "draws": 10000,
+  "seed": 20260805
+ }
+}

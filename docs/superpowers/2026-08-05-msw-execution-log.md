@@ -1057,3 +1057,70 @@ one documentation defect, and the auditor did not find it**, which is worth reco
 in a document outside the diff and was reached by the figure sweep rather than by the audit.
 The two checks are not substitutes, which is what the skill says and what this run
 demonstrates.
+
+---
+
+## Task 10 continued — the successor session, 2026-08-06 (later)
+
+Picked up mid-flight per the handoff. The cold-read check was run and confirmed by the owner
+before anything was touched; he confirmed the `MSW-V2` → `MSW-V3` → Seam 3 sequencing and
+**authorised folding in one extra measurement** — the journey-diff `MSW-V4` named and declined
+to run. That is `MSW-V2B` below.
+
+### `MSW-V2` — exposure to the un-listenable class, post-fix. A report row; no read fires.
+
+**Figures owned by `builder/analysis/2026-08-05-msw-verification/msw_v2_exposure.json`** —
+cited here, never restated. Script: `msw_v2_exposure.py`. The frozen
+`ulc_exposure.py` was **not edited**; its statistic, depth constants and bootstrap seed are
+**imported** from it, so the number is produced by the same object that produced the
+comparator. `ulc_exposure.branch` is deliberately **not** imported — it applies `ULC-` §3.1's
+pre-registered branch table, which was written for a different comparison.
+
+**One knob against the comparator.** The factor table is in the script's docstring: `MSW-V2`'s
+baseline is `ULC-A4` (cell `B-S1`), and the two differ in exactly one column,
+`drop_unlistenable` `False → True`. Cap rule (`TUw-50-50`), archive (`ALG-B`), pricing (`P1a`),
+pair set (the eight `GBL-AM1`), depths, instrument and fame column are all held.
+
+**The held-constant term the factor table would have missed, and why it is genuinely
+constant.** `require_fame` is `False` for `B-S1` and `True` for the new artifact. It is inert
+for structure, and this was **verified against source rather than inferred from node counts**:
+`pipeline.py:434` reads fame *after* `keep` is fixed, so it cannot add or remove a node. It
+changes the metadata blob only.
+
+**A precondition was asserted before any journey was walked, because the measurement could
+have been vacuous.** The shipped drop payload and `ULC-D2` are different objects censused over
+different populations, so it was not obvious the class could still appear at all. It can:
+**2,802 of `ULC-D2`'s members survive into the new artifact** (counts in the JSON). Had that
+intersection been empty, a 0 % share would have been structurally guaranteed and reporting it
+as a result would have been meaningless — the script exits saying so rather than printing the
+zero.
+
+**Run state MET, 24 of 24 slots.** All sixteen pair endpoints survive the filter; none of the
+eight pairs was lost.
+
+**The comparator's own run state was NOT met and that is inherited, not repaired.** `ULC-`'s
+run was 95/96 and `ULC-R1` never fired there. No `ULC-` read is revived here; any slot the
+comparator lacks is dropped from the pairing and named, never filled or averaged around.
+
+**⚠ The paired median reads zero and the mean moves by double digits. Both are in the JSON and
+neither may be reported alone.** The class is **concentrated in a minority of journeys**, not
+spread across them: of the 16 deep slots, **10 are identical, 4 improve sharply, and 2 get
+worse**. A paired median over mostly-identical slots therefore reads 0.00 while the mean falls
+by ~10 pp. This is **`ULC-R1`'s recorded statistic defect reproducing exactly** — `ULC-` results
+name it as a design defect and deliberately did not patch it, and it is **not patched here
+either**. The script reports median, mean and the three sign counts together, with the caveat
+stored beside the figure so it cannot travel without it.
+
+**Two slots got WORSE and the summary must carry them.** Tame Impala → Fountains Of Wayne at
+d20 and Led Zeppelin → Guster at d20 both gained class members the comparator did not have.
+Named in the JSON per slot.
+
+**The under-count, stated up front rather than found in the read.** 46,382 of the new
+artifact's 58,838 nodes were **never in `ULC-D2`'s census population** and cannot be counted
+however un-listenable they are. So a low share is evidence the **known** class was removed and
+is **not** evidence that none remains. The figure is stored beside the share.
+
+**Five class members still reach an interior**, one slot each, and they are named in the JSON
+rather than only counted — Jack Antonoff, James Mercer, Josh Kaufman, Maynard James Keenan,
+Pino Palladino. Producers, session players and front-men of bands: **the same shape `CAU-C3`
+described**, not a new class. No read fires on this; it is a report row for Seam 3.
