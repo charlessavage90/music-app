@@ -8,7 +8,7 @@
 everything is committed and pushed, nothing is in flight, and the degradation tell did not
 fire.
 
-Branch `cocredit-relationship-probe`, **draft PR #87**, pushed. Reasoning:
+Branch `cocredit-relationship-probe`, **PR #87 — MERGED 2026-08-07** at `95901d4`; the branch is spent. Reasoning:
 [`2026-08-06-tcr-rerun-execution-log.md`](2026-08-06-tcr-rerun-execution-log.md). Figures:
 `builder/analysis/2026-08-06-tcr-thin-catalogue-rerun/`, which **owns them**. **No shipped
 code was touched.**

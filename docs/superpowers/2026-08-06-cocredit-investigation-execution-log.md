@@ -5,7 +5,7 @@ project status — [`NEXT.md`](NEXT.md) owns that — and **owns no figures**: t
 `builder/analysis/2026-08-06-ccr-relationships/`, `…-rcc-shared-recording/` and
 `…-rescale-fidelity/`, each of which says so in its own README. Cited here, never restated.
 
-Branch `cocredit-relationship-probe`, **draft PR #87**. No shipped code was touched — nothing
+Branch `cocredit-relationship-probe`, **draft PR #87** *(since MERGED 2026-08-07 at `95901d4`)*. No shipped code was touched — nothing
 under `api/`, `frontend/` or `builder/src/`.
 
 ---

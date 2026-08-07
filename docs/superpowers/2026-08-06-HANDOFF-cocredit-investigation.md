@@ -22,7 +22,7 @@ rate is the tell, and the tell is a retirement trigger rather than a resolution 
 mid-flight form: the faculty being distrusted is exactly the one that would decide what is
 "worth mentioning".
 
-Branch `cocredit-relationship-probe`, **draft PR #87**, pushed. Tree clean.
+Branch `cocredit-relationship-probe`, **draft PR #87**, pushed *(since MERGED 2026-08-07 at `95901d4`)*. Tree clean.
 Reasoning: [`2026-08-06-cocredit-investigation-execution-log.md`](2026-08-06-cocredit-investigation-execution-log.md).
 **No shipped code was touched** — nothing under `api/`, `frontend/` or `builder/src/`.
 
