@@ -55,8 +55,8 @@ tests remain outstanding and are still his; `DEP-34-FIX` is open and is his.
 > [`2026-08-06-HANDOFF-tcr-rerun.md`](2026-08-06-HANDOFF-tcr-rerun.md). Reasoning:
 > [`2026-08-06-tcr-rerun-execution-log.md`](2026-08-06-tcr-rerun-execution-log.md).
 > Governing document: `specs/2026-08-06-thin-catalogue-rerun-preregistration.md`. Branch
-> `cocredit-relationship-probe`, **draft PR #87 — NOT merged; merging it is his call and
-> the natural next repo action.**
+> `cocredit-relationship-probe`, **PR #87 MERGED 2026-08-07** at `95901d4`. **The work is on
+> `main`; the branch is spent — new work branches from `main`.**
 >
 > **The stale Vite server the previous block flagged (port 5174, PID 249084) is GONE** —
 > verified at this closeout; nothing further is owed on it.
@@ -111,8 +111,8 @@ tests remain outstanding and are still his; `DEP-34-FIX` is open and is his.
 > [`2026-08-06-tce-thin-catalogue-execution-log.md`](2026-08-06-tce-thin-catalogue-execution-log.md)
 > — **its §7 lists what a re-run must not repeat and is the section to read before drafting.**
 > Governing document (VOID, retained): `specs/2026-08-06-thin-catalogue-edge-preregistration.md`
-> with `TCE-AM1` and `TCE-AM2`. Branch `cocredit-relationship-probe`, **draft PR #87 — NOT
-> merged.**
+> with `TCE-AM1` and `TCE-AM2`. Branch `cocredit-relationship-probe`, ~~**draft PR #87 — NOT
+> merged.**~~ *(MERGED 2026-08-07 at `95901d4`.)*
 >
 > **⚠ One thing needs the owner and is not blocked on anything:** a **stale Vite dev server on
 > port 5174, PID 249084**, started 08:24 and missed by the earlier sweep, which checked 5173 and
@@ -152,7 +152,7 @@ tests remain outstanding and are still his; `DEP-34-FIX` is open and is his.
 > Reasoning: [`2026-08-06-cocredit-investigation-execution-log.md`](2026-08-06-cocredit-investigation-execution-log.md).
 > Governing documents: `specs/2026-08-06-cocredit-relationship-preregistration.md` and
 > `specs/2026-08-06-shared-recording-preregistration.md` (the latter carrying `RCC-AM1`).
-> Branch `cocredit-relationship-probe`, **draft PR #87 — NOT merged.**
+> Branch `cocredit-relationship-probe`, ~~**draft PR #87 — NOT merged.**~~ *(MERGED 2026-08-07 at `95901d4`.)*
 >
 > **⚠ THIS SESSION RETIRED MID-FLIGHT on the degradation tell**, after four file-or-design
 > selection errors — **all four caught and corrected in-session, none reaching a committed

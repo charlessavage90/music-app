@@ -14,7 +14,7 @@ which owns it.
 which is an outcome the design provides for — everything is committed, nothing is half-built,
 and the owner has ruled the next action. The degradation tell did **not** fire.
 
-Branch `cocredit-relationship-probe`, **draft PR #87**, pushed. Reasoning:
+Branch `cocredit-relationship-probe`, **draft PR #87**, pushed *(since MERGED 2026-08-07 at `95901d4`)*. Reasoning:
 [`2026-08-06-tce-thin-catalogue-execution-log.md`](2026-08-06-tce-thin-catalogue-execution-log.md).
 **No shipped code was touched.**
 
