@@ -97,6 +97,15 @@ the instrument has been seen red, not only green.
   `git diff --name-only 13e54f2..HEAD -- CLAUDE.md .claude/` returning empty and no file
   under `memory/` being written this session.
 
+## §6b. Closeout check outcomes
+
+`docs-lint` hard checks green (after adding this session's two documents to the map, which
+the lint itself caught). **`doc-auditor` dispatched over the diff plus citing documents:
+CLEAN, zero findings** — the void/computed distinction, the §4 adjudication, the
+`no_read_licensed`-vs-`null` distinction, figure ownership and the handoff chain all
+verified. Snyk clean on the new scripts. No `TEST-QUEUE.md` entry — nothing this session
+changed is pressable. Ports 8000/5173/5174 clear; no listener left behind.
+
 ## §7. What is open
 
 - **The same-name population probe (Option C) is now UNBLOCKED**: the owner deferred it
