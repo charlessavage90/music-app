@@ -220,6 +220,44 @@ have `x_R = 0` while `E[x_R] > 0`. Pre-registering it against a nominal 0.5 woul
 
 ---
 
+## `TCE-AM2` — every run-state quantity is PER ARM. Committed before any outcome value was computed.
+
+**Clarifying, not redirecting.** `TCE-AM1` introduced quantities that depend on the census they
+are computed over, and did not say which census. **They are per arm, and reading arm B against
+arm A's numbers would be a category error**, because the two censuses are structurally
+different: arm A's lists run to 100 entries, **arm B's are capped at 50**
+(`union_degree_ceiling` / `max_neighbours_per_artist` in the adopted artifact's manifest), and
+**arm B has thin artists largely removed by the very filters that define the arm.**
+
+**Binding:**
+
+1. **`C` (the attainable ceiling), `TCE-G3`'s `T_R = 0` share, and `TCE-C5`'s exact null each
+   take an arm A value and an arm B value**, computed from **that arm's own** `(L_R, T_R)`.
+   Written `C_A` / `C_B`, and so on. The thin base rate is likewise per arm.
+2. **`§4.2`'s "read against the same four bands" means the same FUNCTIONAL FORM** — fractions of
+   **that arm's own** `C` — **never arm A's numeric bands.** `TCE-C2` is read against
+   `0.50·C_B`, `0.25·C_B` and so on.
+3. **`TCE-C3`, `TCE-C4` and `TCE-C5` are computed for BOTH arms.** `R1` and `R2` both read both
+   arms, so a single-arm value cannot serve either. Their nulls (0.500 and 1.000) are
+   base-rate-free and so are identical across arms; **`TCE-C5`'s null is not**, and is computed
+   per arm.
+4. **`TCE-G3` is evaluated per arm and can bar one arm's `TCE-C1` read while leaving the
+   other's standing.** If it bars arm B, `TCE-C2` is reported as `no_read_licensed` and `R1`
+   and `R2` rest on `TCE-C3`/`C4`/`C5` for that arm.
+
+> **⚠ Expect arm B to be the one at risk, and that is not a failure of the run.** The drop
+> filters remove artists with nothing of their own to play, which is close to this probe's
+> `thin`. Arm B's base rate may therefore be low enough to pin its median. **A pinned arm B is
+> a finding about the filters, not a broken probe** — but it must be reported as
+> `no_read_licensed`, never as `null`.
+
+**`TCE-G1`'s MBIDs are display-truncated in its table** (`50ef58c4…` and the rest). **The
+authoritative full MBIDs are `builder/analysis/2026-08-06-laura-lee-closure/ll_closure.json`**,
+a committed source. The run **must read them from there and record that it did so** in its
+output, rather than re-deriving them from a truncated string.
+
+---
+
 ## 1. Population — a CENSUS, not a sample
 
 **Compute is free once the instrument exists, so there is no sampling and no seed.** Every
