@@ -1,6 +1,11 @@
 # Handoff — the Laura Lee closure and the `TCE-` void run, 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED on next actions 2026-08-06 (night) by
+[`2026-08-06-HANDOFF-tcr-rerun.md`](2026-08-06-HANDOFF-tcr-rerun.md)** — the re-run it
+ruled has happened (`TCR-`, computed, nothing enriched) and the stale Vite server it
+flagged is gone. **Still authoritative for the void run's internals and its do-not-revert
+claims, all of which stand.** *(Original role:)* **ACTIVE — this is the CURRENT handoff.**
+Nothing supersedes it. Supersedes
 [`2026-08-06-HANDOFF-cocredit-investigation.md`](2026-08-06-HANDOFF-cocredit-investigation.md)
 on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.

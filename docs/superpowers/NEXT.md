@@ -12,15 +12,58 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (night), when THE LAURA LEE PUZZLE WAS CLOSED FOR ITS WORKED CASE
-and a third mechanism (`TCE-`) VOIDED ON ITS OWN GATE.** **Nothing was adopted, no default
-changed, and no shipped code was touched.** **THE NEXT ACTION IS WORK AND ITS REMIT IS RULED BY
-THE OWNER: re-run `TCE-` under a NEW pre-registration, by a FRESH session.** The two queued hand
-tests remain outstanding and are still his. `DEP-34-FIX` is open and is his.
+**Last updated: 2026-08-06 (night, later), when the RULED RE-RUN HAPPENED: `TCR-` ran to
+completion under externally anchored gates and NOTHING READS ENRICHED.** **The co-credit
+investigation is CLOSED — three mechanisms tried, none explains the class the owner saw.**
+**Nothing was adopted, no default changed, and no shipped code was touched.** **THE NEXT
+ACTION IS THE OWNER'S, and nothing is blocked:** his deferred **Option C (same-name
+population probe) is now UNBLOCKED** by the re-run having happened; the two queued hand
+tests remain outstanding and are still his; `DEP-34-FIX` is open and is his.
 
 ---
 
-> ## ▶ `TCE-` IS VOID — ITS GATE FIRED, 2026-08-06 (night). **The next action is WORK, and the owner has RULED its remit: RE-RUN under a NEW pre-registration, fresh session.**
+> ## ✅ THE `TCR-` RE-RUN IS COMPUTED, 2026-08-06 (night, later) — ALL GATES PASSED, NO ENRICHMENT ANYWHERE. **The next action is the OWNER'S: nothing is blocked, and Option C is now unblocked.**
+>
+> **The owner's Option A ruling was executed as ruled:** a NEW pre-registration
+> (`specs/2026-08-06-thin-catalogue-rerun-preregistration.md`, `TCR-`, committed with its
+> live-fetched anchors before the counter ran), a fresh session, the fired `TCE-` record
+> untouched. **`TCR-G1` passed 5 of 5 externally anchored cells** — total live↔dump drift
+> across four orders of magnitude was one release-group — **and the outcomes computed in
+> both arms.**
+>
+> **The result, in one sentence: artists with nothing of their own recorded do NOT crowd
+> the top of similar-lists — every licensed signal points the opposite way** (arm A's
+> supplements read *depleted*; arm B's primary read is barred by the pinning gate exactly
+> as predicted, which is a finding about the drop filters, not a fault). **⚠ No
+> pre-registered branch fires as written** — a recorded gap in the carried branch table
+> (`C1` null while `C3` landed beyond null at depleted) — **but both adjacent branches
+> carry the identical consequence, so the closure is licensed: the thin-catalogue
+> hypothesis is unsupported, and the co-credit investigation closes with three mechanisms
+> tried (`CCR-`, `RCC-`, `TCR-`) and none explaining the class.** Read the results
+> README's §4 before citing any branch.
+>
+> **⚠ The same-name POPULATION question is STILL OPEN and was NOT touched:** the
+> pre-registered eyeball read found top contributors dominated by **correctly resolved
+> credited personnel** (the `CAU-` class), not same-name junk — that neither surfaces nor
+> closes the population question. **Option C was deferred "until after the re-run"; the
+> re-run has happened, so scheduling it is now purely his call.**
+>
+> **Figures are owned by `builder/analysis/2026-08-06-tcr-thin-catalogue-rerun/` — cited,
+> never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-tcr-rerun.md`](2026-08-06-HANDOFF-tcr-rerun.md). Reasoning:
+> [`2026-08-06-tcr-rerun-execution-log.md`](2026-08-06-tcr-rerun-execution-log.md).
+> Governing document: `specs/2026-08-06-thin-catalogue-rerun-preregistration.md`. Branch
+> `cocredit-relationship-probe`, **draft PR #87 — NOT merged; merging it is his call and
+> the natural next repo action.**
+>
+> **The stale Vite server the previous block flagged (port 5174, PID 249084) is GONE** —
+> verified at this closeout; nothing further is owed on it.
+>
+> ---
+
+> ## ~~▶ `TCE-` IS VOID — ITS GATE FIRED, 2026-08-06 (night). **The next action is WORK, and the owner has RULED its remit: RE-RUN under a NEW pre-registration, fresh session.**~~ *(DONE — the ruled re-run happened and is the block above, which owns current state. The `TCE-` record itself remains VOID and untouched, as ruled.)*
 >
 > **The owner's decision, taken 2026-08-06 (night) and recorded as HIS — do not re-litigate it:**
 >
