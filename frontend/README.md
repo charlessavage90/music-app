@@ -4,10 +4,18 @@ React + Vite + TypeScript SPA for the artist-path app. Implements the
 Stage 3a spec (`docs/superpowers/specs/2026-07-20-stage3-web-frontend-design.md`).
 
 A vertical "journey" of artist cards between two chosen artists: each card has
-artwork, a 30-second clip with sequential autoplay, and two bypass controls
-("not for me" / "know them already") that reroll the whole path. All path state
-lives in the URL (`/path/:from/:to?dislike=…&known=…`), so paths are shareable
-and Back undoes a bypass.
+artwork and a 30-second clip with sequential autoplay.
+
+**Each interior card carries a recessed "Reroute from here" footer strip** that
+opens a tray offering the two bypass signals — **"Steer away"** (`dislike`) and
+**"Dig deeper"** (`known`) — either of which rerolls the **whole** path, not just
+that card. The two endpoint cards have no strip: there is nothing to reroute
+about an artist you chose. Restyled 2026-08-07; before that both controls sat on
+the card face and read "✕ Not for me" / "✓ I know them".
+
+All path state lives in the URL (`/path/:from/:to?dislike=…&known=…`), so paths
+are shareable and Back undoes a bypass. **The URL keys are the wire contract and
+did not change with the labels** — see `api/README.md`.
 
 ## Two-process dev loop
 

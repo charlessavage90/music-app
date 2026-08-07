@@ -18,8 +18,11 @@ Autocomplete over artist names, accent-insensitive, ranked by popularity.
 
 ### `POST /api/path`
 Build a path between two artists. `exclude` entries carry a `reason` of
-`"dislike"` ("not for me") or `"known"` ("know them already") — the two
-signals shape the reroll differently (see the spec §4.3).
+`"dislike"` or `"known"` — the two signals shape the reroll differently (see the
+spec §4.3). **The reason codes are the wire contract and have never changed**;
+the frontend has relabelled the buttons behind them twice, and as of 2026-08-07
+presents them as **"Steer away"** (`dislike`) and **"Dig deeper"** (`known`).
+Do not rename the codes to follow the labels.
 
 ```json
 // request

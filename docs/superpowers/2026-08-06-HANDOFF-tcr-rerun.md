@@ -1,8 +1,17 @@
 # Handoff — the `TCR-` re-run computed, 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-08-06-HANDOFF-tce-void.md`](2026-08-06-HANDOFF-tce-void.md) on next actions. It does
-**not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+**Role: ⚠ SUPERSEDED 2026-08-07 on next actions by
+[`2026-08-07-HANDOFF-bypass-tray-ux.md`](2026-08-07-HANDOFF-bypass-tray-ux.md)** — the UX
+track it did not anticipate has run, shipped and deployed, and that handoff owns what to do
+next. **This document remains authoritative for the `TCR-` re-run's internals and for its
+claims-not-to-revert, all of which still stand.** Its one forward-looking item, the owner's
+**Option C** (same-name population probe), is **still unblocked and still his** — the newer
+handoff does not take it.
+
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it.
+Supersedes [`2026-08-06-HANDOFF-tce-void.md`](2026-08-06-HANDOFF-tce-void.md) on next
+actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
+owns it.
 
 **A SEAM handoff.** The probe ran to completion under its committed pre-registration,
 everything is committed and pushed, nothing is in flight, and the degradation tell did not
