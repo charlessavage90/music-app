@@ -16,6 +16,22 @@ mocked tests structurally cannot.
 > owner and the PR body**, which he reads at the time. It is a fact about one session, not a
 > durable record, and storing it here is what broke this file.
 >
+> ## ⛔ AND ONLY FOR DEFECTS AND FUNCTIONALITY — NEVER FOR LONG-RUN JUDGEMENT
+>
+> **Owner ruling, 2026-08-07.** This file is for things that can be found *wrong*: a defect,
+> a regression, a thing that does not work. It is **not** for his ongoing evaluation of how
+> the app *feels* — where novelty shows up, whether a journey is satisfying after several
+> days and weeks of living with it. That evaluation is real, it is continuous, and **he is
+> doing it** — but it has no completion state, so an entry for it can never be discharged and
+> would sit here forever looking like a lapse.
+>
+> **So: never queue "tell me how it feels".** He raised this himself when closing the
+> `MSW-` map entry: he had fully exercised the new map for defects and found none, while
+> still forming a view on the experience — and stated that the second half is not an open
+> queue item. Where a session genuinely needs his taste (a blind listen, a
+> WHAT-GOOD-LOOKS-LIKE calibration), that is a **designed evaluation with its own
+> pre-registration**, not a queue entry.
+>
 > *Rule changed 2026-08-05, and the measurement is why: **42 of 69 entries were "nothing to
 > test", 1,630 lines — 57% of the file**, at an average of 39 lines each, which is about
 > three-quarters the length of a real test instruction. The old rule said "one entry per
@@ -35,8 +51,10 @@ Do not delete entries; the record of what was exercised is the point.**
 > heading is preserved deliberately — it is the record of what was asked — **but it means a
 > grep for `## QUEUED` returns discharged entries and over-reports.**
 >
-> **An item is live only if its topmost heading says so.** As of 2026-08-05 that is **zero
-> items.**
+> **An item is live only if its topmost heading says so.** As of **2026-08-07** that is
+> **zero items** — the two 2026-08-06 live-site entries were both discharged by the owner
+> that day. *(It was also zero on 2026-08-05; the count is restated rather than carried, per
+> the incident below.)*
 >
 > **This cost six consecutive closeouts**, each flagging a backlog that did not exist, the
 > count itself stale, each carrying the claim into a handoff and into `NEXT.md` without
@@ -51,7 +69,27 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ▶ QUEUED (latest) — 2026-08-06 (later) — the missing artwork is fixed, and it changed what the pictures are
+## ✅ DONE — 2026-08-07 — the missing artwork is fixed, and it changed what the pictures are
+
+> ### ✅ RUN BY THE OWNER 2026-08-07 — "Yes, all good." Nothing found.
+>
+> **Every card had a picture.** The defect he reported on 2026-08-06 is confirmed fixed in
+> use, on the live site, by the person who reported it — which is the only evidence that
+> closes it, since the fault was invisible to every automated check (the clip resolved
+> perfectly; only the image was missing).
+>
+> **The album-cover change is ACCEPTED.** The entry offered to revert to artist portraits at
+> the cost of artwork going missing for roughly half of artists; he did not take it. Cards
+> show album covers, deliberately, and that is now the settled behaviour rather than a
+> pending choice.
+>
+> **`CLIP-1` is untouched by this and stays open** — a card can still play the right artist
+> and the wrong impression of them. No new examples were reported beyond Albert Hammond Jr.
+> and Metric. Still his call whether it is worth fixing.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-08-06 (later) — the missing artwork is fixed, and it changed what the pictures are
 
 **You reported that the artwork on the cards was hit and miss while the music played fine. That
 was a real fault, it is fixed, and the fix is already on the website.** Nothing is running on
@@ -102,7 +140,32 @@ your way deeper into the journey.
 
 ---
 
-## ▶ QUEUED — 2026-08-06 — the new map is LIVE on the website
+## ✅ DONE — 2026-08-07 — the new map is LIVE on the website
+
+> ### ✅ RUN BY THE OWNER 2026-08-07 — fully exercised on **desktop and mobile**, no defects, no regressions.
+>
+> **His words:** *"from a defect, product functionality issue standpoint, I've fully tested
+> the new map on desktop and mobile, and I've found no defects or regressions (aside from the
+> missing album art defect that's already been resolved)."*
+>
+> **This is the release check for the `MSW-` map switch, and it passes.** The adoption was an
+> owner override of the `GBL-` null — taken knowingly, never evidence-backed — so this is the
+> first evidence of any kind that the new map holds up in real use by a person. It does not
+> retrospectively license the null, and must not be recorded as doing so.
+>
+> **Read this as a platform-level confirmation, not a per-step one.** He confirmed desktop and
+> mobile and made an explicit no-defect / no-regression claim, which is stronger than the
+> "nothing surfaced" passes elsewhere in this file — but he did not walk the five numbered
+> steps individually and this record does not claim he did.
+>
+> **⚠ What is deliberately NOT discharged here, and is not owed:** his continuing evaluation
+> of the *experience* — where novelty appears, how the map feels over days and weeks. He is
+> doing that and taking notes, and he ruled that **it is not an open test-queue item.** See
+> the rule at the top of this file, which was written from that ruling. **Do not re-queue it.**
+
+*Original queued text follows.*
+
+## QUEUED — 2026-08-06 — the new map is LIVE on the website
 
 **This is the real one.** Everything you tested locally this morning is now what
 `https://musicapp.cmiller.io` serves, to you and to anyone you send it to. Nothing is running
