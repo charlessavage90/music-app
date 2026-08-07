@@ -218,7 +218,7 @@ def load_reference_sets():
         raise SystemExit("artifact sha mismatch: %s" % g.source_sha256)
     arm_b = {}
     for i in range(g.artist_count):
-        nb = g.neighbours_of(i)
+        nb = list(g.neighbours_of(i))
         if len(nb) < MIN_LIST:
             continue
         nb = sorted(nb, key=lambda t: (-t[1], g.mbids[t[0]]))

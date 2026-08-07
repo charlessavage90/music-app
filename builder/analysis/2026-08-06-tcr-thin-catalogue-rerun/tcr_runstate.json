@@ -1,0 +1,32 @@
+{
+ "A": {
+  "reference_artists": 45689,
+  "thin_base_rate": 0.078991,
+  "TCR_G3_share_T_eq_0": 0.084068,
+  "TCR_G3_bars_C1_read": false,
+  "ceiling_C": 0.5,
+  "C1_bands": {
+   "enriched_at": 0.25,
+   "indeterminate_at": 0.125,
+   "no_resolution": false
+  },
+  "TCR_C5_null": 0.035551,
+  "list_len_median": 100,
+  "rank10_boundary_ties_post_exclusion": 11650
+ },
+ "B": {
+  "reference_artists": 19485,
+  "thin_base_rate": 0.005645,
+  "TCR_G3_share_T_eq_0": 0.854093,
+  "TCR_G3_bars_C1_read": true,
+  "ceiling_C": 0.0,
+  "C1_bands": {
+   "enriched_at": 0.0,
+   "indeterminate_at": 0.0,
+   "no_resolution": true
+  },
+  "TCR_C5_null": 0.001601,
+  "list_len_median": 48,
+  "rank10_boundary_ties_post_exclusion": 3977
+ }
+}
