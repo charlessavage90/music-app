@@ -487,7 +487,7 @@ entry instead: what changed, what to exercise, and what "wrong" would look like.
 **Write the entry for someone holding a mouse, not for the session that wrote the code.**
 Every step is a thing to *do* and a thing to *look at*. This is where an entry goes wrong:
 
-- **Never name an identifier, file or function in the steps.** "Press *know them already*
+- **Never name an identifier, file or function in the steps.** "Press *dig deeper*
   five or six times" is a step. "The floor relaxation is the part with the most renamed
   variables (`base_floor_raw`, `floor_raw`, …)" is the author narrating their diff, and it
   actively misleads — a reader reasonably asks whether it means one *kind* of bypass

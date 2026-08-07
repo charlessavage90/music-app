@@ -51,10 +51,11 @@ Do not delete entries; the record of what was exercised is the point.**
 > heading is preserved deliberately — it is the record of what was asked — **but it means a
 > grep for `## QUEUED` returns discharged entries and over-reports.**
 >
-> **An item is live only if its topmost heading says so.** As of **2026-08-07** that is
-> **zero items** — the two 2026-08-06 live-site entries were both discharged by the owner
-> that day. *(It was also zero on 2026-08-05; the count is restated rather than carried, per
-> the incident below.)*
+> **An item is live only if its topmost heading says so.** As of **2026-08-07 (closeout)**
+> that is **one item** — the bypass-tray UX entry at the top. The two 2026-08-06 live-site
+> entries were discharged by the owner earlier the same day, taking the count to zero before
+> this one was added. *(It was also zero on 2026-08-05; the count is re-counted rather than
+> carried forward, per the incident below.)*
 >
 > **This cost six consecutive closeouts**, each flagging a backlog that did not exist, the
 > count itself stale, each carrying the claim into a handoff and into `NEXT.md` without
@@ -66,6 +67,71 @@ Do not delete entries; the record of what was exercised is the point.**
 > record: before the cutover the app ran only on the owner's desktop, so a phone entry was not
 > merely inconvenient but unrunnable, and would sit here looking untested when it was
 > impossible.*
+
+---
+
+## ▶ QUEUED (latest) — 2026-08-07 — the two buttons have moved, and the website looks different
+
+**The app on `https://musicapp.cmiller.io` looks different from this morning.** It is already
+live and nothing is running on your machine. **The artists you get have not changed** — no
+routing, no map, no weighting was touched, so a journey you build now goes through the same
+people it would have yesterday. If a familiar pair gives you a *different* journey, that is
+wrong and it is the most important thing you could tell me.
+
+### The one thing to know before you start
+
+**The two buttons are no longer on the card.** Each artist in the middle now has a quiet strip
+across the bottom of their card reading **"Reroute from here"**. Press it and two choices open
+underneath: **Steer away** and **Dig deeper**. They are the same two buttons you have always
+had, one press further in, and they are no longer red and green — because both of them rebuild
+the entire journey, and the two colours suggested they were opposites.
+
+### What to exercise — fifteen minutes
+
+1. **Build a journey and press "Reroute from here" on somebody in the middle.** Then press
+   **Dig deeper**. Watch what happens on screen as it rebuilds — you should get a message
+   telling you what it is doing, long enough to actually read, and then the artists that
+   changed should glow for a moment. **Tell me if that glow marks artists you can see did not
+   change**, or misses ones that did.
+2. **Do that eight or ten times on the same journey.** This is the part I am least sure of:
+   whether the extra press each time becomes annoying when you are digging repeatedly.
+   **That is a judgement only you can make and I would like it.**
+3. **Look at the front page.** New wording, and three ready-made journeys underneath the two
+   boxes. **Press one of them.** They should behave exactly like a journey you typed in
+   yourself — shareable link, back button, everything.
+4. **Look at whether the two boxes on the front page invite you to type in them.** You said
+   they looked switched off. They should now look raised, with a small coloured dot in each.
+5. **On a phone as well.** The two choices sit side by side on a computer and stack on a
+   phone; both should be easy to hit with a thumb.
+
+### What "wrong" looks like
+
+- **A familiar pair giving you a different journey.** Nothing about routing changed, so this
+  would be serious.
+- **The strip appearing on the first or last card.** Those are the two artists you chose;
+  there is nothing to reroute.
+- **The message about what it is doing landing on top of something else**, or vanishing before
+  you can read it.
+- **The glow marking everybody**, or marking nobody after a rebuild that clearly changed the
+  middle.
+- **A ready-made journey landing on an error page.** That would mean one of those six artists
+  is no longer in the map, which is a real thing that can happen and nothing automatic can
+  catch it.
+- Anything that stopped playing. Clips were not touched, so a silent card would be unrelated —
+  tell me anyway.
+
+### What "right" looks like
+
+The journey is the same, the strip is easy to find, pressing a choice visibly does something,
+and the front page makes it obvious what to do first.
+
+**Paste the URL for anything you find** — the whole journey is in the address bar.
+
+> **Still open and unchanged:** a card can play the right artist and the wrong impression of
+> them — a guest appearance or someone else's remix. Albert Hammond Jr. and Metric were your
+> examples. Not fixed, still your call.
+>
+> Detail: `docs/superpowers/2026-08-07-bypass-tray-ux-execution-log.md`.
 
 ---
 

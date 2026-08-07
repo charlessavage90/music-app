@@ -71,8 +71,15 @@ input::placeholder { color: var(--color-placeholder); }
 /* Added 2026-08-07. Marks an artist who was NOT on the previous path, so a
    rebuild confirms itself even when the server answers faster than the notice
    can be read. Fades to nothing rather than switching off, so a run of presses
-   reads as motion and not as flicker. Literal rgba: a keyframe cannot resolve
-   a custom property through a colour-mix at every step in Safari 17. */
+   reads as motion and not as flicker.
+
+   Literal rgba rather than --color-accent, and the honest reason is that the
+   token is an opaque hex while these stops need alpha, so it cannot be used
+   here without a colour-mix. Whether a colour-mix on a custom property
+   interpolates correctly across keyframes in every browser we serve is NOT
+   something this project has tested — the literal sidesteps the question
+   rather than answering it. If the palette ever moves, this value moves by
+   hand; that cost is accepted and is why it is written down. */
 @keyframes ap-glow {
   0% {
     box-shadow: 0 0 0 2px rgba(74, 144, 217, .55), 0 0 18px -2px rgba(74, 144, 217, .38);

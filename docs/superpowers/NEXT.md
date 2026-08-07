@@ -12,17 +12,80 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (night, later), when the RULED RE-RUN HAPPENED: `TCR-` ran to
-completion under externally anchored gates and NOTHING READS ENRICHED.** **The co-credit
-investigation is CLOSED — three mechanisms tried, none explains the class the owner saw.**
-**Nothing was adopted, no default changed, and no shipped code was touched.** **THE NEXT
-ACTION IS THE OWNER'S, and nothing is blocked:** his deferred **Option C (same-name
-population probe) is now UNBLOCKED** by the re-run having happened; the two queued hand
-tests remain outstanding and are still his; `DEP-34-FIX` is open and is his.
+**Last updated: 2026-08-07, when THE NEW BYPASS UX SHIPPED TO PRODUCTION and `DEP-34-FIX`
+LANDED.** **The test queue is EMPTY — the owner discharged both live entries.** **THE NEXT
+ACTION IS THE OWNER'S and nothing is blocked.** Three things are his and none blocks
+another: **`SNS-1`** (the billing alarm has no subscriber — new, found by this closeout's
+drift gate), **Option C** (same-name population probe, still unblocked from 2026-08-06), and
+**pressing the new UI on the live site** (queued).
 
 ---
 
-> ## ✅ THE `TCR-` RE-RUN IS COMPUTED, 2026-08-06 (night, later) — ALL GATES PASSED, NO ENRICHMENT ANYWHERE. **The next action is the OWNER'S: nothing is blocked, and Option C is now unblocked.**
+> ## ✅ THE NEW BYPASS UX IS LIVE, 2026-08-07 — and `DEP-34-FIX` IS CLOSED. **The next action is the OWNER'S.**
+>
+> **The journey cards, the bypass interaction and the landing page were redesigned, merged
+> and deployed to `https://musicapp.cmiller.io` the same day.** Frontend only, plus one
+> infrastructure guard: **no graph, no artifact, no cost function, no router.** Which artists
+> a journey contains is untouched.
+>
+> **What a person sees.** Both bypass signals moved off the card face into a recessed
+> **"Reroute from here"** strip that opens a tray — **Steer away** (*less like this sound*)
+> and **Dig deeper** (*Same vibe, less familiar*) — with "Both options rebuild the whole
+> journey" said at the moment of choosing. Endpoint cards stay bare. Cards say **`· 0:30`**.
+> The landing page leads with a promise and offers **three ready-made journeys** for a first
+> visit. A rebuild now confirms itself even when the server answers faster than the eye: the
+> message is **held** long enough to read, then the artists that actually changed are
+> **ringed**.
+>
+> **⚠ Three claims an editor must not revert**, detail in the handoff: the strip says
+> "Reroute from here" and **not** the design's "Not this step"; the clip-length line stays
+> **off** the landing page; and the landing page carries **no mechanism sentence** — all
+> three are owner decisions, and two of them are deliberate departures from the supplied
+> design.
+>
+> **`DEP-34-FIX` is DONE.** Both `ARTISTPATH_DEPLOY_GRAPH_KEY` and
+> `ARTISTPATH_DEPLOY_SIDECAR` are now required. **Both, not just the key** — the two defaults
+> agreed with each other, so requiring one would only have moved the silent revert into the
+> checksum. `infra/app.py` had no test at all (`QUA-10`); it has three, all shown red against
+> the reinstated defaults before being kept.
+>
+> **⚠ NEW AND OPEN — `SNS-1`, and it is the owner's because it needs his inbox.** The
+> billing alarm's SNS topic has **zero subscriptions**, checked directly rather than inferred
+> from the drift report. If the billing alarm fires, nobody is told. **Pre-existing and not
+> caused by this deploy**, which touched no CloudFormation — surfaced by this closeout's
+> drift gate. `DEP-17` records App Runner billing as unmeasured, so this alarm is the only
+> thing watching cost.
+>
+> **⚠ ONE GATE DID NOT RUN and is not a pass:** the frontend dependency scan
+> (`npx snyk test`) hit the org's monthly limit. **Mitigation, not a pass:** no dependency
+> manifest changed — every lockfile is byte-identical to `main` — so the last passing scan
+> covers this exact set. Tracked as `FE-SNYK-1`.
+>
+> **✅ THE TEST QUEUE IS EMPTY.** The owner discharged both 2026-08-06 live-site entries on
+> 2026-08-07: the `MSW-` map **fully exercised on desktop and mobile, no defects or
+> regressions**, and the artwork fix confirmed. **⚠ That is the first evidence of any kind
+> that the `MSW-` map holds up in real use by a person — and it does NOT retrospectively
+> license the `GBL-` null**, which that adoption overrode knowingly. A new entry is queued
+> for the UI above.
+>
+> **New standing rule in `TEST-QUEUE.md`, from an owner ruling:** that file is for **defects
+> and functionality only, never for long-run judgement** of how the app feels. Such an entry
+> has no completion state and could never be discharged.
+>
+> **Entry point:** the current handoff
+> [`2026-08-07-HANDOFF-bypass-tray-ux.md`](2026-08-07-HANDOFF-bypass-tray-ux.md). Reasoning:
+> [`2026-08-07-bypass-tray-ux-execution-log.md`](2026-08-07-bypass-tray-ux-execution-log.md)
+> — **its §3 records four defects in this session's own work**, one of which reached the
+> owner as a false claim about the product and was caught by his disbelief. Design export:
+> `frontend/design/2026-08-07-bypass-tray/`. Branch `bypass-tray-ux`, **PR #89 MERGED** at
+> `a7a8b9a`. **The work is on `main` and in production, so the trunk and the live site
+> agree.**
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 were swept and are free.
+>
+> ---
+
+> ## ✅ THE `TCR-` RE-RUN IS COMPUTED, 2026-08-06 (night, later) — ALL GATES PASSED, NO ENRICHMENT ANYWHERE. ~~**The next action is the OWNER'S: nothing is blocked, and Option C is now unblocked.**~~ *(SUPERSEDED on next actions by the block above. **Option C is still unblocked and still his** — that half is unchanged, only its ranking as "the next action" is. The two hand tests it named are **DISCHARGED**, and `DEP-34-FIX` is **CLOSED**.)*
 >
 > **The owner's Option A ruling was executed as ruled:** a NEW pre-registration
 > (`specs/2026-08-06-thin-catalogue-rerun-preregistration.md`, `TCR-`, committed with its
