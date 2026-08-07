@@ -1,0 +1,23 @@
+[    0.0s] arm A: scanning 75000 archive files
+[  106.1s]    ...20000
+[  212.8s]    ...40000
+[  325.2s]    ...60000
+[  412.8s] arm A: 45693 reference artists (list >= 30)
+[  413.5s] arm B: 19485 reference artists (degree >= 30), 3977 with a rank-10 boundary tie
+[  413.5s] catalogue size needed for 110268 distinct MBIDs
+[  413.5s] counts: streaming the release-group dump (~2-3 min)
+[  436.4s]    ...500000 release-groups
+[  457.5s]    ...1000000 release-groups
+[  473.7s]    ...1500000 release-groups
+[  488.4s]    ...2000000 release-groups
+[  501.8s]    ...2500000 release-groups
+[  514.1s]    ...3000000 release-groups
+[  526.0s]    ...3500000 release-groups
+[  536.2s]    ...4000000 release-groups
+[  544.6s] counts: 4431141 release-groups scanned, 90414 needed MBIDs have >=1
+[  545.0s] phase 3: TCE-G1, first and alone
+[  545.0s]    laura_lee_khruangbin     Laura Lee (Khruangbin member, b.1986)    rg=0     required == 0   PASS
+[  545.0s]    laura_lee_soul           Laura Lee (soul & gospel, b.1945)        rg=16    required >= 20  FAIL
+[  545.0s]    leon_bridges             Leon Bridges                             rg=37    required >= 5   PASS
+[  545.0s]    khruangbin               Khruangbin                               rg=59    required >= 5   PASS
+[  545.0s] VOID: TCE-G1 failed. Stopping before any outcome value.

@@ -148,6 +148,34 @@ terminal state.**
    measurably shape similar-lists, **or** the owner rules it not worth pursuing. **Kill
    signal** (never a count): if ListenBrainz is shown to key similarity on MBIDs that our own
    archive can verify as correctly resolved, the mechanism is unreachable and this closes.
+
+   > **◐ PARTIALLY DISCHARGED 2026-08-06 (night). The WORKED CASE is closed; the POPULATION
+   > question is OPEN and must not be recorded as closed.** Results of record:
+   > `builder/analysis/2026-08-06-laura-lee-closure/README.md`, which **owns those figures**.
+   >
+   > **Discharged half — the kill signal fired for Laura Lee.** Both Laura Lees are separately
+   > present under distinct MBIDs; their lists are disjoint in character with no bleed either
+   > way; the soul singer holds her own catalogue and audience, so nothing leaked away from
+   > her. **`BYP-13` is not operating on the graph's edges here**, and the case cannot reach a
+   > user anyway — she is in `drop_mbids` of both ALG-B payloads and absent from the adopted
+   > artifact.
+   >
+   > **Open half, and it is why this deferral stays.** One correctly-resolved pair is **not** a
+   > demonstration that the matcher always resolves correctly. **No rate was measured and none
+   > may be inferred.** Where her 214 comes from also remains unexplained.
+   >
+   > **⚠ New evidence pointing AT this item, from an unrelated run.** `TCE-G1` surfaced a
+   > same-name mis-filing **inside MusicBrainz's own credits**: the *recording* of *Not Up for
+   > Discussion* is filed under the Khruangbin Laura Lee, the *release-group* of the same name
+   > under the 1945 soul singer. Reproducible check and machine record:
+   > `builder/analysis/2026-08-06-tce-thin-catalogue/miscredit_check.py` → `miscredit.json`
+   > (`inconsistent: true`). **This is a different level from the closure's** — MusicBrainz's
+   > artist credits, not ListenBrainz's listen resolution — and it is why `TCE-G1`'s first cell
+   > passed. **`n = 1`; it licenses no rate and is NOT evidence for the thin-catalogue
+   > mechanism.**
+   >
+   > **Owner's ruling 2026-08-06 (night): this item is DEFERRED until after the `TCE-` re-run.**
+   > It is not abandoned and not closed. See `NEXT.md`.
 2. **B2 — does an alternative rescale change *which artists appear*?** Testable **without a
    rebuild**: `trimmed_union` fixes the topology, so only stored weights vary — a genuine
    one-knob comparison. Needs a pre-registration. **B1 makes this less attractive, not more:

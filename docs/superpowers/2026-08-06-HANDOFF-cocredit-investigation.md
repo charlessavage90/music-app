@@ -1,6 +1,13 @@
 # Handoff — the co-credit investigation, 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-08-06 (night) by
+[`2026-08-06-HANDOFF-tce-void.md`](2026-08-06-HANDOFF-tce-void.md)** — its open item 1 (the
+Laura Lee puzzle) was taken and is partially discharged, and the next action is now a ruled
+decision rather than a choice among three. **Still authoritative for the `CCR-`/`RCC-`/B1
+internals**, for its enumerated lists, and for the owner's in-conversation rulings recorded
+nowhere else. **Its "which of the three open items to take first" is SPENT.**
+
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-06-HANDOFF-clip-cover-art.md`](2026-08-06-HANDOFF-clip-cover-art.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

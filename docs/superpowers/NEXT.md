@@ -12,16 +12,75 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (night), when AN INVESTIGATION INTO THE OWNER'S CO-CREDIT
-HYPOTHESIS RETURNED TWO NULLS and was written up. **Nothing was adopted, no default changed,
-and no shipped code was touched.** THE NEXT ACTION IS STILL THE OWNER'S AND IT IS STILL USE,
-NOT WORK: the two queued hand tests, unchanged and still outstanding. `DEP-34-FIX` is open and
-is his. Nothing is blocked. **The investigating session retired mid-flight on the degradation
-tell — read its handoff's enumerations before building on it.****
+**Last updated: 2026-08-06 (night), when THE LAURA LEE PUZZLE WAS CLOSED FOR ITS WORKED CASE
+and a third mechanism (`TCE-`) VOIDED ON ITS OWN GATE.** **Nothing was adopted, no default
+changed, and no shipped code was touched.** **THE NEXT ACTION IS WORK AND ITS REMIT IS RULED BY
+THE OWNER: re-run `TCE-` under a NEW pre-registration, by a FRESH session.** The two queued hand
+tests remain outstanding and are still his. `DEP-34-FIX` is open and is his.
 
 ---
 
-> ## ✅ THE CO-CREDIT INVESTIGATION IS COMPLETE, 2026-08-06 (night) — TWO NULLS, NOTHING ADOPTED. **The next action is the OWNER'S and it is USE: the two queued hand tests, unchanged.**
+> ## ▶ `TCE-` IS VOID — ITS GATE FIRED, 2026-08-06 (night). **The next action is WORK, and the owner has RULED its remit: RE-RUN under a NEW pre-registration, fresh session.**
+>
+> **The owner's decision, taken 2026-08-06 (night) and recorded as HIS — do not re-litigate it:**
+>
+> - **Option A: `TCE-` is re-run under a NEW pre-registration** — **not** an amendment — with
+>   **gate thresholds anchored on externally measured values**, by a **fresh session**.
+> - **The fired `TCE-` record STANDS UNTOUCHED.** The gate firing is the record. Do not amend
+>   `TCE-G1`, do not re-band it, do not retro-fit criteria to it.
+> - **Option C (a same-name POPULATION probe) is DEFERRED until after the re-run.**
+>   Deliberately. **Not abandoned and not closed.**
+> - **The replacement pre-registration was deliberately NOT drafted** by the retiring session.
+>   Its absence is intentional, not an oversight.
+>
+> **What happened.** Three mechanisms have now been tried against the owner's observed class.
+> `CCR-` (band membership) and `RCC-` (shared recording credits) both returned null. `TCE-`
+> (thin catalogue) **never produced an outcome at all**: `TCE-G1`, its instrument-validation
+> gate, ran first and alone and **one of four cells failed**, so the probe is **VOID** and the
+> run stopped at phase 3 of 7. **There is no `TCE-C1`/`C2`/`C3`/`C4`/`C5`, no `Δ_R`, and no
+> branch may be inferred.**
+>
+> **⚠ The instrument is CORRECT and the threshold was wrong — both halves travel together.**
+> The dump counter agrees **exactly** with the live MusicBrainz API and returns 0 for the
+> motivating case; the failing bar was set by reasoning from a *recording* count without
+> checking what it implies for *release-groups*. **That does not un-void the probe**, and a
+> threshold corrected after seeing the value it failed on is not a threshold. Recalibrating
+> after a gate fires has a precedent here — `MSW-G3` — and there too it was the owner's call.
+>
+> **⚠ THE LAURA LEE PUZZLE IS PARTIALLY DISCHARGED, AND THE HALVES MUST NOT BE COLLAPSED.** The
+> same-name collision hypothesis is **dead for Laura Lee** — both Laura Lees resolve separately
+> with disjoint coherent lists, so **`BYP-13` is not operating on the graph's edges** — and the
+> case cannot reach a user anyway, being dropped from the adopted artifact. **The POPULATION
+> question is OPEN**: one correctly-resolved pair demonstrates nothing about a rate. Struck in
+> place at the previous execution log's §6 item 1.
+>
+> **⚠ New evidence pointing at that open item, found by accident.** MusicBrainz **itself**
+> mis-files between the two Laura Lees, inconsistently across levels — the *recording* of *Not
+> Up for Discussion* under the Khruangbin member, the *release-group* under the soul singer. So
+> **`TCE-G1`'s first cell passed partly because of a mis-filing.** `n = 1`; it licenses no rate
+> and is **NOT** evidence for the thin-catalogue mechanism.
+>
+> **Figures are owned by the three `builder/analysis/2026-08-06-{laura-lee-closure,
+> tce-c1-statistic-behaviour,tce-thin-catalogue}/` directories — cited, never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-tce-void.md`](2026-08-06-HANDOFF-tce-void.md). Reasoning:
+> [`2026-08-06-tce-thin-catalogue-execution-log.md`](2026-08-06-tce-thin-catalogue-execution-log.md)
+> — **its §7 lists what a re-run must not repeat and is the section to read before drafting.**
+> Governing document (VOID, retained): `specs/2026-08-06-thin-catalogue-edge-preregistration.md`
+> with `TCE-AM1` and `TCE-AM2`. Branch `cocredit-relationship-probe`, **draft PR #87 — NOT
+> merged.**
+>
+> **⚠ One thing needs the owner and is not blocked on anything:** a **stale Vite dev server on
+> port 5174, PID 249084**, started 08:24 and missed by the earlier sweep, which checked 5173 and
+> 8000 only. Nothing queued needs a local server. The retiring session was blocked from stopping
+> it; the command is in the handoff.
+>
+> ---
+
+---
+
+> ## ✅ THE CO-CREDIT INVESTIGATION IS COMPLETE, 2026-08-06 (night) — TWO NULLS, NOTHING ADOPTED. ~~**The next action is the OWNER'S and it is USE: the two queued hand tests, unchanged.**~~ *(SUPERSEDED on next actions by the block above: its open item 1 was taken, and the next action is now ruled WORK. **The two queued hand tests are still outstanding and still his** — that half is unchanged, only its ranking as "the next action" is.)*
 >
 > **The owner observed that novel artists arriving at depth looked disproportionately like solo
 > acts of known bands, and hypothesised that ListenBrainz over-weights similarity between
