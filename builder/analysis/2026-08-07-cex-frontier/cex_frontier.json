@@ -1,0 +1,55 @@
+{
+  "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+  "archive": "C:\\dev\\music-app\\builder\\scratch\\grt-archive-algb\\similar\\listenbrainz\\session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+  "artifact": {
+    "edges": 1315684,
+    "nodes": 58838
+  },
+  "checkpoint": {
+    "discovered": 75000,
+    "done": 75000,
+    "recorded_frontier": 0
+  },
+  "frontier_by_inbound_refs": {
+    "1": 18644,
+    "2": 7760,
+    "3-5": 8976,
+    "6-20": 6244,
+    ">20": 678
+  },
+  "gap_75k_to_artifact": {
+    "crawled_not_shipped": 16162,
+    "drop_list_sizes": {
+      "featured_credit": 1940,
+      "no_release": 9501,
+      "unlistenable": 15708
+    },
+    "lost_otherwise": 454,
+    "on_a_drop_list": 15708
+  },
+  "named_artists": {
+    "commander-cody": {
+      "crawled": true,
+      "in_frontier": false,
+      "inbound_refs": 4,
+      "mbid": "2d67f7f4-1e85-4278-bac6-424e6204a8b9",
+      "shipped": true
+    },
+    "goose-jam-band": {
+      "crawled": false,
+      "goose_in_phish_list": false,
+      "in_frontier": false,
+      "inbound_refs": 0,
+      "mbid": "b925a474-d245-4217-bc13-2e153d82bebb",
+      "phish_list_length": 100,
+      "phish_lowest_score": 62,
+      "shipped": false
+    }
+  },
+  "reconstruction": {
+    "distinct_mbids_referenced": 117294,
+    "frontier_size": 42302,
+    "responses_read": 75000,
+    "unparseable": 0
+  }
+}
