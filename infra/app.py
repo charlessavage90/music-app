@@ -16,14 +16,6 @@ import aws_cdk as cdk
 from artistpath_infra.deploy_stage import CONFIRM_FLAG, resolve_include_service
 from artistpath_infra.stack import ArtistpathStack, DeployInputs
 
-_SIDECAR = Path(
-    os.environ.get(
-        "ARTISTPATH_DEPLOY_SIDECAR",
-        "../builder/scratch/graph-t15-tiebreakfix.bin.json",
-    )
-)
-
-
 def _require(name: str) -> str:
     value = os.environ.get(name, "")
     if not value:
@@ -31,8 +23,33 @@ def _require(name: str) -> str:
     return value
 
 
+# DEP-34-FIX: this and ARTISTPATH_DEPLOY_GRAPH_KEY below both DEFAULTED, to the
+# pre-MSW artifact. `.env.deploy` does not set either — they are per-deploy, from
+# README §4 — so an API-only deploy, from a session with no intention of touching
+# the map, silently reverted it to graph-t15-tiebreakfix.bin.
+#
+# What made it lethal rather than loud is that the two defaults AGREE WITH EACH
+# OTHER: the key names the old artifact and the sidecar carries the old artifact's
+# checksum, so the service boots, /health matches its sidecar, and every
+# downstream check passes on a wholesale revert. Caught on 2026-08-06 by reading
+# a `cdk diff`, which is a person, not a gate.
+#
+# Required now, exactly as ARC-6 did for the image tag thirteen lines below. A
+# deploy that cannot say which graph it is deploying should stop.
+_SIDECAR = Path(_require("ARTISTPATH_DEPLOY_SIDECAR")).resolve()
+
+
 def _sidecar_sha256() -> str:
-    if not _SIDECAR.exists():
+    # Named for what it must be, not merely for existing. §4 sets this beside
+    # ARTISTPATH_DEPLOY_GRAPH_KEY and the easy slip is pointing it at the .bin
+    # rather than the .bin.json — which otherwise surfaces much later as an
+    # opaque UnicodeDecodeError out of json.loads, mid-deploy.
+    if _SIDECAR.suffix != ".json":
+        raise SystemExit(
+            f"ARTISTPATH_DEPLOY_SIDECAR must name the .json manifest sidecar, "
+            f"not {_SIDECAR.name}; see infra/README.md §4."
+        )
+    if not _SIDECAR.is_file():
         raise SystemExit(
             f"{_SIDECAR} not found. The artifact and its sidecar are gitignored; "
             "deploy from a machine that has them (DEP-9)."
@@ -57,9 +74,11 @@ ArtistpathStack(
     app,
     "ArtistpathStack",
     deploy=DeployInputs(
-        graph_key=os.environ.get(
-            "ARTISTPATH_DEPLOY_GRAPH_KEY", "graph-t15-tiebreakfix.bin"
-        ),
+        # DEP-34-FIX: was `os.environ.get(..., "graph-t15-tiebreakfix.bin")`.
+        # See the note above _SIDECAR — the two travelled together and had to be
+        # fixed together, because a required key with a defaulted sidecar just
+        # moves the silent revert into the checksum.
+        graph_key=_require("ARTISTPATH_DEPLOY_GRAPH_KEY"),
         graph_sha256=_sidecar_sha256(),
         origin_secret=_require("ARTISTPATH_DEPLOY_ORIGIN_SECRET"),
         front_door_secret=_require("ARTISTPATH_FRONT_DOOR_SECRET"),
