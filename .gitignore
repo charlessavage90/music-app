@@ -45,3 +45,5 @@ api/scratch_server.log
 # the probe (~9 min). Committing them would put build output in the record.
 builder/analysis/2026-08-06-tce-thin-catalogue/rg_counts.json.gz
 builder/analysis/2026-08-06-tce-thin-catalogue/artist_exists.json.gz
+builder/analysis/2026-08-06-tcr-thin-catalogue-rerun/rg_counts.json.gz
+builder/analysis/2026-08-06-tcr-thin-catalogue-rerun/artist_exists.json.gz
