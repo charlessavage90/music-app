@@ -11,10 +11,17 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   await page.getByRole('button', { name: /daft punk/i }).first().click();
   await page.getByRole('button', { name: /discover a path/i }).click();
 
-  // The path renders as a list of cards.
-  await expect(page.getByText('Miles Davis')).toBeVisible();
+  // The path renders as a list of cards. Wait on the LIST, not on the artist's
+  // name: the name was doing duty as the wait for navigation, and that worked
+  // only for as long as the landing page never mentioned Miles Davis. It does
+  // now — one of the three sample journeys is his — so the old assertion passed
+  // instantly against the page we were trying to leave, and the read below then
+  // raced an empty list. An implicit wait that depends on text being ABSENT
+  // somewhere else is not a wait.
+  await expect(page.locator('ol li').first()).toBeVisible();
   const before = await page.locator('ol li').allInnerTexts();
   expect(before.length).toBeGreaterThan(1);
+  expect(before[0]).toContain('Miles Davis');
 
   // Bypass the second artist with "steer away", which now sits behind that
   // card's footer strip — so the walk is open the tray, then choose.

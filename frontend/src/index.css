@@ -17,7 +17,9 @@
   /* Added 2026-07-28 for the mockup. Named by role, not by shade. */
   --color-label: #6f7580;          /* uppercase field labels, landing footer */
   --color-note: #7d838e;           /* dropdown disambiguation, card eyebrows */
-  --color-placeholder: #5c626d;
+  /* Raised 2026-08-07 from #5c626d, per the mockup's own value. The old one sat
+     close enough to the field fill that "Search an artist" read as disabled. */
+  --color-placeholder: #6b7280;
   --color-endpoint: #3b4048;       /* endpoint card border */
   --color-border-hover: #343841;
   --color-inert: #20232a;          /* disabled play button, skeleton base */
@@ -29,6 +31,16 @@
      more card, and it is the whole visual argument of the 2c variant. */
   --color-strip: #14161b;          /* recessed footer strip and open tray */
   --color-strip-border: #23262d;   /* the hairline above both */
+
+  /* The two search fields, 2026-08-07. They had been built out of the CARD
+     tokens (--color-surface on --color-border), which are the tokens for a
+     RECESSED surface — so the one control the whole landing page exists to get
+     you into read as inert. These are the mockup's own field values, which the
+     original port did not carry across: a lighter fill and a lighter border, so
+     the field sits ABOVE the page rather than in it. */
+  --color-field: #1b1e25;
+  --color-field-hover: #1e2129;
+  --color-field-border: #363b44;
 }
 
 :root { color-scheme: dark; }

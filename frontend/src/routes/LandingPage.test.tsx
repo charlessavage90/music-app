@@ -18,6 +18,31 @@ function setup(url = '/') {
   );
 }
 
+test('offers the three sample journeys, each linking straight at a path', () => {
+  setup();
+  const links = screen.getAllByRole('link');
+  expect(links).toHaveLength(3);
+  // Accessible names, not textContent: the chevron is aria-hidden, so this is
+  // what a screen reader actually announces.
+  expect(links.map((l) => l.getAttribute('aria-label') ?? l.textContent?.replace('›', ''))).toEqual([
+    'Miles Davis→Radiohead',
+    'Dolly Parton→Daft Punk',
+    'Bad Bunny→Chappell Roan',
+  ]);
+  // Ordinary links, not buttons that navigate — so they are shareable, open in
+  // a new tab, and work with Back like any other journey.
+  for (const l of links) expect(l.getAttribute('href')).toMatch(/^\/path\/[0-9a-f-]{36}\/[0-9a-f-]{36}$/);
+});
+
+// A sample journey must reach the same route the form does, or it is a
+// different feature that happens to look like one.
+test('pressing a sample journey lands on the path route', async () => {
+  const user = userEvent.setup();
+  setup();
+  await user.click(screen.getByRole('link', { name: /miles davis/i }));
+  expect(screen.getByTestId('dest')).toBeInTheDocument();
+});
+
 test('navigates to the path route once both artists are chosen', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockImplementation(async (q) => [
