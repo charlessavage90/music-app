@@ -9,7 +9,7 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   await page.getByRole('button', { name: /miles davis/i }).first().click();
   await page.getByLabel('To').fill('daft punk');
   await page.getByRole('button', { name: /daft punk/i }).first().click();
-  await page.getByRole('button', { name: /find path/i }).click();
+  await page.getByRole('button', { name: /discover a path/i }).click();
 
   // The path renders as a list of cards.
   await expect(page.getByText('Miles Davis')).toBeVisible();
@@ -24,7 +24,7 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   // artist disappear, which it never can. A test hook must not be a style hook.
   const second = page.locator('ol li').nth(1);
   const secondName = await second.getByTestId('artist-name').innerText();
-  await second.getByRole('button', { name: /rebuild from here/i }).click();
+  await second.getByRole('button', { name: /reroute from here/i }).click();
   await second.getByRole('button', { name: /steer away/i }).click();
 
   // URL now carries the exclusion, and the bypassed artist is gone from the new path.

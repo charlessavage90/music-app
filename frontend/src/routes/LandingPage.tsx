@@ -33,22 +33,21 @@ export function LandingPage() {
       <h1 className="text-[27px] sm:text-[38px] font-medium tracking-[-.02em] sm:tracking-[-.025em] leading-[1.1] sm:leading-[1.05]">
         Artist Path
       </h1>
-      {/* Owner-chosen 2026-08-07, replacing the single paragraph of 2026-07-28.
+      {/* Owner-written 2026-08-07, replacing the single paragraph of 2026-07-28.
           Two lines with split roles, because one sentence was carrying both the
           promise and the mechanism and the promise kept losing: the page never
           said the app is FOR finding music you don't know.
 
-          The headline promises the outcome; the line beneath keeps the July
-          rationale intact and does the honest work, because the FIRST path
-          between two famous artists is expected to be famous. "Listeners share"
-          is literal — edges come from ListenBrainz similar-artists and every
-          edge in the artifact is behavioural. */}
+          These are HIS words verbatim, not a session's draft. The earlier
+          version explained the mechanism ("someone their listeners share") and
+          he cut it — the page now promises the outcome and leaves the how to
+          the journey page's explainer. Do not reinstate the mechanism line
+          here without asking him. */}
       <p className="mt-3 sm:mt-3.5 max-w-[320px] sm:max-w-[420px] text-[17px] sm:text-[19px] leading-[1.35] tracking-[-.01em] text-[var(--color-text)] text-pretty">
-        Start with two artists you know. Leave with ones you don&rsquo;t.
+        Find a smooth path between any two artists
       </p>
       <p className="mt-2.5 max-w-[300px] sm:max-w-[400px] text-[13.5px] sm:text-[14.5px] leading-[1.5] text-[var(--color-muted)] text-pretty">
-        Each step lands on someone their listeners share. Already know a name? Dig past it for
-        someone you don&rsquo;t.
+        Discover what lives in between
       </p>
 
       <div className="mt-11 sm:mt-10 flex flex-col gap-5">
@@ -63,7 +62,7 @@ export function LandingPage() {
           onClick={() => from && to && navigate(`/path/${from.mbid}/${to.mbid}`)}
           className="mt-1.5 h-[52px] sm:h-[54px] w-full rounded-full bg-[var(--color-accent)] text-[15.5px] sm:text-base font-semibold tracking-[.01em] text-[var(--color-bg)] transition-opacity enabled:hover:bg-[#5b9ce0] disabled:cursor-not-allowed disabled:opacity-30"
         >
-          Find path
+          Discover a path
         </button>
       </div>
 

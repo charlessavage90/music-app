@@ -128,34 +128,42 @@ export function ArtistCard({
                 : 'flex h-[38px] w-full items-center justify-center gap-1.5 text-[12.5px] text-[var(--color-note)] transition-colors hover:bg-[var(--color-accent)]/[.07] hover:text-[var(--color-accent)]'
             }
           >
-            {trayOpen ? 'Which direction?' : 'Rebuild from here'}
+            {trayOpen ? 'How should this change?' : 'Reroute from here'}
             <span aria-hidden className="text-[11px]">{trayOpen ? '▴' : '▾'}</span>
           </button>
 
           {trayOpen && (
-            // Stacked on a phone, side by side from sm up — the captions are
-            // what need the width, and two of them do not fit on 390px.
-            <div className="flex flex-col gap-2 px-3.5 pb-3.5 sm:flex-row sm:px-4">
-              <button
-                type="button"
-                onClick={() => onBypass(artist.mbid, 'dislike')}
-                className={`${TRAY_OPTION} border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10`}
-              >
-                <span className="whitespace-nowrap text-[13.5px]">Steer away</span>
-                <span className="truncate text-[11.5px] text-[var(--color-note)]">
-                  less like this sound
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={() => onBypass(artist.mbid, 'known')}
-                className={`${TRAY_OPTION} border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10`}
-              >
-                <span className="whitespace-nowrap text-[13.5px]">Go deeper</span>
-                <span className="truncate text-[11.5px] text-[var(--color-note)]">
-                  something more obscure
-                </span>
-              </button>
+            <div className="px-3.5 pb-3.5 sm:px-4">
+              {/* Stacked on a phone, side by side from sm up — the captions are
+                  what need the width, and two of them do not fit on 390px. */}
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => onBypass(artist.mbid, 'dislike')}
+                  className={`${TRAY_OPTION} border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10`}
+                >
+                  <span className="whitespace-nowrap text-[13.5px]">Steer away</span>
+                  <span className="truncate text-[11.5px] text-[var(--color-note)]">
+                    less like this sound
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onBypass(artist.mbid, 'known')}
+                  className={`${TRAY_OPTION} border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10`}
+                >
+                  <span className="whitespace-nowrap text-[13.5px]">Dig deeper</span>
+                  <span className="truncate text-[11.5px] text-[var(--color-note)]">
+                    Same vibe, less familiar
+                  </span>
+                </button>
+              </div>
+              {/* The one thing a person cannot infer from the two labels, said
+                  at the moment of choosing rather than only in the explainer
+                  they may have dismissed weeks ago. */}
+              <p className="mt-2.5 text-[11px] text-[var(--color-label)]">
+                Both options rebuild the whole journey
+              </p>
             </div>
           )}
         </div>

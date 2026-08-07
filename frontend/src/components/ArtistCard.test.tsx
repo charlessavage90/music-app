@@ -15,9 +15,9 @@ test('fires the two bypass signals with the right reason', async () => {
   const onBypass = vi.fn();
   render(<ArtistCard artist={artist('bypass')} isPlaying={false} onPlay={vi.fn()} onBypass={onBypass} />);
   // Both signals now sit behind the footer strip, so the tray is opened first.
-  await user.click(screen.getByRole('button', { name: /rebuild from here/i }));
+  await user.click(screen.getByRole('button', { name: /reroute from here/i }));
   await user.click(screen.getByRole('button', { name: /steer away/i }));
-  await user.click(screen.getByRole('button', { name: /go deeper/i }));
+  await user.click(screen.getByRole('button', { name: /dig deeper/i }));
   expect(onBypass).toHaveBeenNthCalledWith(1, 'bypass', 'dislike');
   expect(onBypass).toHaveBeenNthCalledWith(2, 'bypass', 'known');
 });
@@ -27,17 +27,20 @@ test('the tray is shut until the strip is pressed, and shuts again', async () =>
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
   render(<ArtistCard artist={artist('tray')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
 
-  const strip = screen.getByRole('button', { name: /rebuild from here/i });
+  const strip = screen.getByRole('button', { name: /reroute from here/i });
   expect(strip).toHaveAttribute('aria-expanded', 'false');
   expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
 
   await user.click(strip);
   expect(screen.getByRole('button', { name: /steer away/i })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: /go deeper/i })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /dig deeper/i })).toBeInTheDocument();
+  // The consequence neither label implies, said at the moment of choosing —
+  // the explainer above the path can be dismissed and usually has been.
+  expect(screen.getByText(/both options rebuild the whole journey/i)).toBeInTheDocument();
 
   // The design drew no way back out of the open tray. This is that way back:
   // the same control, relabelled — so it must genuinely close.
-  const heading = screen.getByRole('button', { name: /which direction/i });
+  const heading = screen.getByRole('button', { name: /how should this change/i });
   expect(heading).toHaveAttribute('aria-expanded', 'true');
   await user.click(heading);
   expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
@@ -101,9 +104,9 @@ test('an endpoint card stays bare — no strip, so no way to reach either signal
       onPlay={vi.fn()} onBypass={vi.fn()}
     />,
   );
-  expect(screen.queryByRole('button', { name: /rebuild from here/i })).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /reroute from here/i })).not.toBeInTheDocument();
   expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
-  expect(screen.queryByRole('button', { name: /go deeper/i })).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /dig deeper/i })).not.toBeInTheDocument();
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
 });
 

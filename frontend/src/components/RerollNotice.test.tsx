@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { expect, test } from 'vitest';
 import { RerollNotice } from './RerollNotice';
 
-// The two messages echo the tray's own verbs — "Steer away" and "Go deeper".
+// The two messages echo the tray's own verbs — "Steer away" and "Dig deeper".
 // That match is the point: the notice is the response to the press, and it read
 // as an unrelated event when the words diverged.
 test('names what the dislike signal does', () => {

@@ -64,7 +64,7 @@ export function PathIntro({ count, stopRule }: Props) {
         <div className="mt-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-[12.5px] leading-[1.55] text-[var(--color-muted)]">
           <p>
             Any artist in the middle has a{' '}
-            <span className="text-[var(--color-text)]">Rebuild from here</span> strip along the
+            <span className="text-[var(--color-text)]">Reroute from here</span> strip along the
             bottom of their card. Open it and you get two directions:
           </p>
           <p className="mt-2">
@@ -73,7 +73,7 @@ export function PathIntro({ count, stopRule }: Props) {
             them</em>, so you get a different sound rather than a near-identical substitute.
           </p>
           <p className="mt-2">
-            <span className="text-[var(--color-text)]">Go deeper</span> — digs for someone less
+            <span className="text-[var(--color-text)]">Dig deeper</span> — same vibe, but less
             familiar, since you&rsquo;ve already covered the obvious route.
           </p>
           <p className="mt-2 text-[var(--color-text)]">

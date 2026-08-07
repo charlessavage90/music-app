@@ -36,9 +36,9 @@ test('the explainer is open on a first visit and says a press rebuilds everythin
 // these three strings drift from the card's own wording, the help is wrong.
 test('the explainer names the strip and both directions by their real labels', () => {
   render(<PathIntro count={3} stopRule="natural" />);
-  expect(screen.getByText(/rebuild from here/i)).toBeInTheDocument();
+  expect(screen.getByText(/reroute from here/i)).toBeInTheDocument();
   expect(screen.getByText(/steer away/i)).toBeInTheDocument();
-  expect(screen.getByText(/go deeper/i)).toBeInTheDocument();
+  expect(screen.getByText(/dig deeper/i)).toBeInTheDocument();
 });
 
 test('dismissal persists across a remount', async () => {

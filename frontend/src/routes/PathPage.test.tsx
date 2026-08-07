@@ -17,12 +17,12 @@ function LandingProbe() {
 }
 
 /**
- * Both signals now sit behind the card's "Rebuild from here" footer strip, so a
+ * Both signals now sit behind the card's "Reroute from here" footer strip, so a
  * bypass press is two clicks rather than one. Every path these tests render has
  * exactly one interior card, so there is exactly one strip to open.
  */
 async function pressBypass(user: ReturnType<typeof userEvent.setup>, option: RegExp) {
-  await user.click(screen.getByRole('button', { name: /rebuild from here/i }));
+  await user.click(screen.getByRole('button', { name: /reroute from here/i }));
   await user.click(screen.getByRole('button', { name: option }));
 }
 
@@ -223,7 +223,7 @@ test('the reroll message names the signal that was actually pressed', async () =
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
 
-  await pressBypass(user, /go deeper/i);
+  await pressBypass(user, /dig deeper/i);
 
   expect(await screen.findByText(/digging deeper for someone newer/i)).toBeInTheDocument();
   expect(screen.queryByText(/steering away from that sound/i)).not.toBeInTheDocument();
