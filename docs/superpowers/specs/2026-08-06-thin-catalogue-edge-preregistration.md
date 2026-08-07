@@ -76,6 +76,150 @@ is not "absent", and this design must not inherit it as an assumption.**
   **average rank**, and the count of tied top-10 slots is **reported as run state**, not
   buried.
 
+## `TCE-AM1` — the `±0.10` absolute band was unreachable and blind. Committed before any outcome value was observed.
+
+**Status: this amendment GOVERNS where it and the original text disagree.** It was written after
+a bounded derivation of the statistic's behaviour — **no part of `TCE-` was run, no base rate was
+computed, and no `Δ_R` exists.** Derivation and figures:
+`builder/analysis/2026-08-06-tce-c1-statistic-behaviour/`, which **owns them**.
+
+### What was wrong
+
+`TCE-C1` as originally written is a census **median** of `Δ_R`, and it fails twice at small base
+rates. **Both were re-derived independently before this amendment was written**, not taken from
+the derivation on trust:
+
+1. **A ceiling failure — the statistic can be a CONSTANT.** If more than half the reference
+   artists have **no thin neighbour anywhere in their list**, more than half have `Δ_R = 0`
+   identically and the median is **exactly 0 whatever the placement does, in both directions**.
+   That happens whenever `b < 1 − 2^(−1/L)` — about **0.007** for 100-entry lists, **0.023** for
+   30-entry ones. Verified: at `b = 0.01`, `L = 60`, the median reads `+0.0000` at **every**
+   effect size including a total one.
+2. **A breakdown failure, and it is `ULC-R1` reproducing.** A median has a 50 % breakdown point,
+   so an effect confined to a **minority** of reference artists moves it **not at all, however
+   large**. Verified: at `b = 0.03`, an effect in **20 % of the census at maximum strength**
+   reads `+0.0000` — squarely `null`. **`§4.3`'s claim that `ULC-R1`'s defect "is deliberately
+   not repeated here" was false as written**, because recording the distribution does not help
+   when **no branch reads it** and the decision rests on the median alone.
+
+**The consequence that made this urgent:** `R3` fires on a null `TCE-C1` and closes the entire
+co-credit investigation. A real effect in a fifth of the census produces exactly that reading.
+
+### What changes
+
+- **`§4.1`'s bands become a function of run state** (below), replacing the fixed `±0.05 / ±0.10`.
+- **`§4.1`'s plain sentence is rewritten** to match `§1`'s population (below).
+- **`TCE-G3` is added** — a pinning gate that can bar any read of `TCE-C1`.
+- **`TCE-C3`, `TCE-C4`, `TCE-C5` are added**, because re-banding fixes *reachability* and does
+  nothing for *blindness*. Their nulls are exact and base-rate-free, which is the whole point.
+- **`R3` is conditioned on `TCE-C1` and `TCE-C3` both landing null.**
+
+**`TCE-C1` is NOT removed or weakened.** It is kept, re-banded, and reported. Removing it after
+seeing an inconvenient derivation — even a pre-outcome one — is the move this project's
+pre-registration discipline exists to prevent.
+
+### `TCE-G3` — the pinning gate. Computed from run state, before any `Δ_R` is read.
+
+**Record the share of reference artists with `T_R = 0`** (no thin neighbour anywhere in their
+list). **If that share exceeds 0.5, `TCE-C1` is a mathematical constant and NO read of it is
+licensed** — not `enriched`, not `null`, not `R3`. `TCE-C3`–`C5` are unaffected and still read.
+
+### `TCE-C1`'s bands, as a function of measured run state
+
+Fixed here as a **functional form**; the value is filled in as run state (§6) **before any
+`Δ_R` is read**, per the same discipline that fixes the base rate.
+
+Let `C` = the **attainable ceiling**, the median over reference artists of
+
+```
+min(10, T_R)/10 − (T_R − min(10, T_R))/(L_R − 10)
+```
+
+— what `Δ_R` would be if every thin neighbour that artist has were crowded into its top ten.
+**`C` depends only on `(L_R, T_R)`, so it is computable before any `x_R` is looked at.**
+
+| `TCE-C1` | Branch |
+|---|---|
+| **≥ 0.50 · C** | `enriched` |
+| **0.25 · C to 0.50 · C** | `indeterminate` — deliberately NEITHER |
+| **−0.25 · C to +0.25 · C** | `null` |
+| **≤ −0.25 · C** | `depleted` |
+
+**If `C < 0.10` the scale is finer than the statistic's own lattice** (`Δ_R` moves in steps of
+about 0.1 at the top) and **`TCE-C1` is reported as `no_resolution`, which fires no branch.**
+
+*Why a fraction of the ceiling rather than an absolute number: the ceiling is what a total
+effect would produce, so half of it is "the effect is at least half as big as it could possibly
+be" — a statement that means the same thing at every base rate, which `+0.10` did not.*
+
+### `§4.1`'s plain sentence — reconciled with the population, by rewriting the sentence
+
+**Original:** *"among a **famous** artist's ten strongest connections…"*. **`§1` carries no fame
+criterion**, so the sentence overclaimed.
+
+**Replacement, and this is the fixed sentence for `TCE-C1`:** *when the app looks at any
+artist's ten strongest connections, are artists with nothing of their own recorded
+over-represented there compared with the rest of that same artist's list?*
+
+**Rewritten rather than restricting the reference set by fame, for three reasons, recorded so
+the choice can be argued with:**
+
+1. **Arm A cannot compute it.** Arm A's reference set is the archive, and the archived
+   similar-artist responses carry `name`, `comment`, `type`, `gender` and `score` — **no fame
+   figure**. `fame_lb` enters only at build time. A fame criterion is therefore not computable
+   in the arm that is the *isolating baseline*, which would make the two arms differ by a third
+   column.
+2. **It would bake in a guess about the concentrating variable.** "Famous artists" is one
+   hypothesis about *where* an effect concentrates. `TCE-C5` locates concentration **without
+   naming its cause**, which is the better instrument for something nobody has measured.
+3. **It reintroduces a selection the census design exists to avoid.**
+
+**Descriptive companion, with NO pre-registered read:** `TCE-C3` broken down by fame band, for
+graph-present reference artists only. It keeps the owner's original intuition inspectable
+without committing a branch to it. **No branch reads it and it may not rescue or overturn
+anything.**
+
+### The three added criteria, with exact nulls
+
+| Criterion | Definition | **Exact null** | Bands |
+|---|---|---|---|
+| **`TCE-C3`** *(primary supplement)* | census **mean** of `M_R = P(X < x_R) + ½·P(X = x_R)` under that artist's own central hypergeometric on `(L_R, T_R)` | **exactly 0.500**, for every base rate and every list-length distribution | `≥0.55` enriched · `0.52–0.55` indeterminate · `0.48–0.52` null · `≤0.48` depleted |
+| **`TCE-C4`** *(interpretation)* | `Σ x_R / Σ E[x_R]` | **exactly 1.000**, for every base rate | `≥1.5` enriched · `1.2–1.5` indeterminate · `0.8–1.2` null |
+| **`TCE-C5`** *(locates concentration)* | share of reference artists with one-sided mid-p `≤ 0.05` | **base-rate dependent — computed exactly from the census's own `(L_R, T_R)` before any `x_R` is read**, and recorded in §6 | ratio to that computed null `≥ 2.0` = concentrated |
+
+**Plain sentences, fixed here before any result exists:**
+
+- **`TCE-C3`** — *pick an artist at random: how often does their real top ten hold more
+  artists-with-nothing-of-their-own than a reshuffle of that same artist's own list would give?
+  0.5 is a coin flip.*
+- **`TCE-C4`** — *across everyone, how many times more artists-with-nothing-recorded sit in
+  top-ten slots than chance puts there? 1.0 is exactly chance.*
+- **`TCE-C5`** — *what share of artists have a top ten too crowded with them to be luck, and how
+  does that compare with the share you would get by luck alone?*
+
+### ⚠ What this amendment COSTS, stated because it is a real trade and not a free upgrade
+
+**`TCE-C1`'s blindness to a minority was also robustness, and `TCE-C3`/`C4` give it up.**
+Counting release-groups will classify MusicBrainz editor accounts, placeholder entries and
+mis-merged MBIDs as `thin`. Under a median, a few dozen such entries change nothing; under a
+mean they contribute linearly and could produce the entire headline. **Three mitigations, all
+owed when this runs:**
+
+1. **Report `TCE-C5` alongside `TCE-C3`**, so "a small effect everywhere" is distinguishable
+   from "a large effect in 2 % of cases".
+2. **Read the actual top tens of the twenty reference artists contributing most to `TCE-C3`.**
+   Metrics and eyeballs, not metrics alone.
+3. **Feed the hypergeometric each artist's post-`TCE-G2` list length**, not its raw one, or the
+   null is computed for a list that was not scored. *(Implementation trap, not a judgement.)*
+
+**A statistic the derivation explicitly warns against, recorded so nobody reinvents it:** the
+naive "share of artists whose top-10 thin count **exceeds** its expectation" has a null of
+**0.33–0.48, not 0.5**, and moves non-monotonically with the base rate — because most artists
+have `x_R = 0` while `E[x_R] > 0`. Pre-registering it against a nominal 0.5 would read
+**depletion under a perfect null.** `TCE-C3`'s mid-p form is what fixes it.
+
+---
+
 ## 1. Population — a CENSUS, not a sample
 
 **Compute is free once the instrument exists, so there is no sampling and no seed.** Every
@@ -158,9 +302,14 @@ denominator**, never silently counted as thin.
 
 ### 4.1 `TCE-C1` — the primary outcome
 
-**Plain-language sentence, fixed here:** *among a famous artist's ten strongest connections,
-are artists with nothing of their own recorded over-represented compared with the rest of that
-same artist's list?*
+> **⚠ SUPERSEDED IN PART BY `TCE-AM1`** — the plain sentence below and the band table further
+> down are **replaced** there. The definition of `Δ_R` is unchanged. Read `TCE-AM1` first.
+
+**Plain-language sentence — ~~*among a famous artist's ten strongest connections, are artists
+with nothing of their own recorded over-represented compared with the rest of that same
+artist's list?*~~** *(struck by `TCE-AM1`: `§1` carries no fame criterion and arm A cannot
+compute one. The governing sentence is `TCE-AM1`'s. Struck rather than deleted — it is what was
+committed first.)*
 
 For each reference artist `R`:
 
@@ -173,14 +322,20 @@ p_rest  = share of R's ranks 11-end that are thin
 **`TCE-C1` = the median of `Δ_R` across the reference set**, reported separately for arm A and
 arm B. Positive means thin artists crowd the top of lists.
 
-**Pre-registered effect size:**
+**Pre-registered effect size — ⚠ THIS TABLE IS SUPERSEDED BY `TCE-AM1`.** It is retained
+because it is what was committed first and the record of what changed is the point. **Do not
+read a branch off it.**
 
-| `TCE-C1` | Branch |
+| ~~`TCE-C1`~~ | ~~Branch~~ |
 |---|---|
-| **≥ +0.10** | `enriched` |
-| **+0.05 to +0.10** | **`indeterminate` — deliberately NEITHER** |
-| **−0.05 to +0.05** | `null` |
-| **≤ −0.05** | `depleted` (the opposite of the hypothesis) |
+| ~~**≥ +0.10**~~ | ~~`enriched`~~ |
+| ~~**+0.05 to +0.10**~~ | ~~`indeterminate`~~ |
+| ~~**−0.05 to +0.05**~~ | ~~`null`~~ |
+| ~~**≤ −0.05**~~ | ~~`depleted`~~ |
+
+*Struck by `TCE-AM1`: at small base rates this band is unreachable — the statistic can be a
+constant 0 at every effect size — and it is blind to an effect concentrated in a minority. The
+governing bands are `TCE-AM1`'s, expressed as a fraction of the attainable ceiling `C`.*
 
 **The middle band names no default and none may be supplied afterwards.** It follows
 `CAU-C1`'s precedent. A result landing there is reported as landing there.
@@ -231,7 +386,11 @@ arm A.
   filters alone — two columns differ. **The investigation closes anyway**, because the
   decision-relevant arm is negative and no user is affected. Attribution would be a separate
   probe and is not owed.
-- **`R3` — `null` in arm A.** The thin-catalogue hypothesis is wrong. **Three mechanisms have
+- **`R3` — `null` in arm A. ⚠ AMENDED BY `TCE-AM1`: `R3` fires only when `TCE-C1` AND `TCE-C3`
+  BOTH land null.** A null `TCE-C1` alone is consistent with a real effect in a fifth of the
+  census at maximum strength, and `R3` closes an entire investigation — the two facts must not
+  meet. **If `TCE-G3` bars a `TCE-C1` read, `R3` rests on `TCE-C3` alone and says so.**
+  The thin-catalogue hypothesis is wrong. **Three mechanisms have
   now been ruled out** and the owner's original observation remains unexplained. **The
   co-credit investigation closes entirely**, and the honest statement is that we do not know
   what produces the class he saw. Arm B is still computed and reported; it cannot rescue a null
@@ -265,6 +424,11 @@ the only signal in fifteen.**
 - **`TCE-G2` passed**, with the coverage figure recorded.
 - **The thin base rate computed and recorded** for both reference sets (§4.1), before
   `TCE-C1` is read.
+- **`TCE-AM1`'s run-state quantities, ALL computed before any `Δ_R` or `x_R` is read:** the
+  share of reference artists with `T_R = 0` (`TCE-G3`); the attainable ceiling `C`, which fixes
+  `TCE-C1`'s bands; and `TCE-C5`'s exact null, computed from the census's own `(L_R, T_R)`.
+  **These are functions of list membership only. Computing them after looking at where the thin
+  artists sit would forfeit the pre-registration**, and the run must record that it did not.
 - **BOTH arms computed.** Arm A alone licenses nothing — not `R3`, not `R1`. If arm B is not
   run, the probe is incomplete and the correct report is "incomplete", never a partial read.
 - **The `Δ_R` distribution recorded**, not only its median (§4.3).
