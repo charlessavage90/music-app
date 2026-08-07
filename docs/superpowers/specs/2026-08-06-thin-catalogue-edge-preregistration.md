@@ -3,10 +3,20 @@
 **Role: ACTIVE — governing document for the `TCE-` probe.** Committed **before any outcome
 value is observed**; the git commit timestamp is the evidence, not this sentence.
 
-**Plain-language question, fixed here so it cannot be reshaped by a result:** *when the app
-looks at a famous artist's strongest connections, are artists with nothing of their own
-recorded over-represented among them — and if so, does that survive into the map the website
-actually serves?*
+**Plain-language question — ⚠ THE WORDING BELOW IS SUPERSEDED BY `TCE-AM1`, and the headline is
+the last place a cold reader would look for that.** ~~*when the app looks at a **famous**
+artist's strongest connections, are artists with nothing of their own recorded
+over-represented among them — and if so, does that survive into the map the website actually
+serves?*~~
+
+*(Struck for the same reason `TCE-AM1` struck it in §4.1: **§1 carries no fame criterion**, and
+arm A's archive holds no fame figure at all, so "famous" overclaims the scope. **The governing
+sentence is `TCE-AM1`'s** — "when the app looks at **any** artist's ten strongest connections,
+are artists with nothing of their own recorded over-represented there compared with the rest of
+that same artist's list?" — plus `TCE-C2`'s second half, whether it survives into the served
+map. Struck rather than rewritten, because the wording is what was committed first. **Found by
+the closeout audit 2026-08-06: `TCE-AM1` corrected §4.1 and left the document's own headline
+saying the thing it corrected.**)*
 
 **Prompted by:** the Laura Lee closure, `builder/analysis/2026-08-06-laura-lee-closure/README.md`,
 which **owns the figures** and against which this premise must be read.

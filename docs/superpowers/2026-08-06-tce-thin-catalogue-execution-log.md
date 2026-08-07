@@ -23,7 +23,7 @@ gate.** Nothing was adopted; no default changed.
   two MusicBrainz queries settled a hypothesis that had been "live but weakened" for a day.
   The cheapest decisive test was already sitting in the archive.
 - **Rewrote `TCE-`'s core comparison to be within-list and rank-based.** The observation that
-  motivated the probe (2 recordings scoring 214 against 288 scoring 65) is a **cross-artist
+  motivated the probe (the closure's §2 table, which owns those figures) is a **cross-artist
   score comparison**, which nothing licenses. `RCC-AM1` had already paid for this lesson;
   applying it cost the probe its most striking evidence and was still right.
 - **Rewrote `§4.1`'s plain sentence rather than restricting the population by fame**
@@ -121,9 +121,10 @@ Recorded here because it is the reasoning, not the status:
    unanchored. That distribution of strictness is the defect, not the one number.
 2. **Do not anchor a gate on artists with a known same-name problem.** Cell 1 passed *because*
    of a MusicBrainz mis-filing — the ground truth was contaminated.
-3. **Resolve rank-10 boundary ties explicitly.** `20.4 %` of arm B reference artists have one
-   (figure owned by `2026-08-06-tce-thin-catalogue/`), so sort order silently decides a fifth
-   of the arm B top-tens. `§0.1` predicted this and the run confirmed the size.
+3. **Resolve rank-10 boundary ties explicitly.** A substantial minority of arm B reference
+   artists have one — share owned by `2026-08-06-tce-thin-catalogue/README.md` §4 — so sort
+   order silently decides that many arm B top-tens. `§0.1` predicted this and the run confirmed
+   the size.
 4. **`TCE-AM1`'s three mitigations remain owed** and were never reached — including the eyeball
    read of the top contributors, which is what distinguishes a real effect from junk MBIDs
    inflating a mean.

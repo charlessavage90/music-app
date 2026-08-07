@@ -117,12 +117,22 @@ tests remain outstanding and are still his. `DEP-34-FIX` is open and is his.
 > rather than trusting its judgement**, and note it carries figures that exist in **no** other
 > file and will be lost if not re-run.
 >
-> **Open, each with a success condition in the execution log §6:** the **Laura Lee puzzle**
+> **Open, each with a success condition in the execution log §6:** ~~the **Laura Lee puzzle**
 > (her 214 edge is not a co-credit artefact under the validated definition — a same-name MBID
 > collision is live but weakened; **if it holds it is `BYP-13` reaching the graph's edges
-> rather than a clip**), **B2** (does an alternative rescale change which artists appear —
+> rather than a clip**)~~, **B2** (does an alternative rescale change which artists appear —
 > testable without a rebuild, needs a pre-registration), and the **duplicate-artwork detector**
 > for `CLIP-1`.
+>
+> > **◐ THE LAURA LEE PUZZLE IS STRUCK HERE AND ONLY HALF-DISCHARGED — 2026-08-06 (night).**
+> > The same-name collision hypothesis is **DEAD for Laura Lee** (so **`BYP-13` is NOT reaching
+> > the graph's edges**, and she is dropped from the adopted artifact anyway), and **OPEN as a
+> > population question** — one correctly-resolved pair measures no rate. **Do not collapse
+> > those two halves in either direction.** Owner's ruling: deferred until after the `TCE-`
+> > re-run. Detail in the top block; struck in place at the previous execution log's §6 item 1.
+> > *(Added by the closeout audit: this retained block's "superseded on next actions" line
+> > updates the ranking, not this claim, and a reader landing here from a citation would have
+> > read the item as simply open.)*
 >
 > **⚠ CLOSED, and not to be re-litigated: widening the drop rule.** The owner ruled it out
 > 2026-08-06 — **he does not think Andrew VanWyngarden or Zach Condon should have been dropped**
