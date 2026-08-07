@@ -99,10 +99,12 @@ export function ArtistCard({
             {artist.name}
           </div>
           {/* The duration sits in its own non-shrinking span so a long title
-              truncates and "0:30 sample" survives — the reverse would drop the
-              one fact this line was changed to carry. Only shown when there IS
+              truncates and "0:30" survives — the reverse would drop the one
+              fact this line was changed to carry. Only shown when there IS
               something to play; "No preview available" must not claim 30
-              seconds of it. */}
+              seconds of it. Bare "0:30" rather than "0:30 sample" at the
+              owner's request 2026-08-07: seven characters back for the title,
+              which truncates hard at 390px. */}
           <div className="mt-1 flex items-baseline gap-1.5 text-[12.5px]">
             <span
               className={`truncate ${
@@ -111,9 +113,7 @@ export function ArtistCard({
             >
               {clip.status === 'loading' ? '…' : clip.track?.title ?? 'No preview available'}
             </span>
-            {playable && (
-              <span className="flex-none text-[var(--color-label)]">· 0:30 sample</span>
-            )}
+            {playable && <span className="flex-none text-[var(--color-label)]">· 0:30</span>}
           </div>
           {isPlaying && (
             <div className="mt-1.5 text-[10.5px] font-medium uppercase tracking-[.1em] text-[var(--color-accent)]">

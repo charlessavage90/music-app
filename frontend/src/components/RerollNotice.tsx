@@ -29,7 +29,11 @@ const MESSAGE: Record<RerollReason, string> = {
  */
 export function RerollNotice({ reason }: { reason: RerollReason }) {
   return (
-    <div className="pointer-events-none absolute inset-0 z-10 flex items-start justify-center pt-24">
+    // Offset measured from the top of the PATH (PathPage owns that positioning
+    // context). It was pt-24 against a container that also held the explainer,
+    // which is how it came to sit on top of it. Over the first card is the
+    // right place: the notice describes the thing underneath it.
+    <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center pt-9">
       <div
         role="status"
         aria-live="polite"

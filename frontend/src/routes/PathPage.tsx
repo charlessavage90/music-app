@@ -93,18 +93,26 @@ export function PathPage() {
       ) : state.artists.length === 0 ? (
         <PathSkeleton from={endpoints.from} to={endpoints.to} />
       ) : (
-        <div className="relative">
+        <div>
           <PathIntro count={state.artists.length - 2} stopRule={state.stopRule} />
-          <div className={rebuilding ? 'opacity-60 transition-opacity' : ''}>
-            <JourneyList
-              ref={journey}
-              artists={state.artists}
-              stopRule={state.stopRule}
-              onBypass={handleBypass}
-              changed={feedback.changed}
-            />
+          {/* The positioning context is the PATH, not the path plus the
+              explainer above it. It used to wrap both, so on a first visit —
+              when the explainer is open and tall — the notice landed on top of
+              the explainer instead of over the journey it describes. Reported
+              2026-07-28 and cosmetic while the notice only flashed; holding it
+              for NOTICE_MIN_MS made it something you always see. */}
+          <div className="relative">
+            <div className={rebuilding ? 'opacity-60 transition-opacity' : ''}>
+              <JourneyList
+                ref={journey}
+                artists={state.artists}
+                stopRule={state.stopRule}
+                onBypass={handleBypass}
+                changed={feedback.changed}
+              />
+            </div>
+            {feedback.notice && <RerollNotice reason={feedback.notice} />}
           </div>
-          {feedback.notice && <RerollNotice reason={feedback.notice} />}
         </div>
       )}
     </main>
