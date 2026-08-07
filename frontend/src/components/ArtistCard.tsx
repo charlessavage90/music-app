@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useClip } from '@/hooks/useClip';
 import { PlayButton } from './PlayButton';
 import type { Artist, BypassReason } from '@/api/types';
@@ -22,8 +22,13 @@ interface Props {
   onClipResolved?: (mbid: string, hasClip: boolean) => void;
 }
 
-const BYPASS =
-  'flex-1 sm:flex-none h-[34px] sm:h-8 px-3.5 rounded-full border text-[12.5px] flex items-center justify-center whitespace-nowrap transition-colors';
+/**
+ * A choice inside the tray. Both rebuild the whole path — the difference is the
+ * direction, which is why neither is styled as an accept and neither as a
+ * reject. Red-vs-green signalled a conflict that does not exist.
+ */
+const TRAY_OPTION =
+  'flex w-full items-baseline gap-2 rounded-lg border px-3.5 py-2.5 text-left transition-colors sm:flex-1 sm:min-w-0';
 
 export function ArtistCard({
   artist, isPlaying, isCurrent, isEndpoint, endpointLabel,
@@ -32,6 +37,9 @@ export function ArtistCard({
   const clip = useClip(artist.mbid);
   const playable = clip.status === 'ready';
   const silent = clip.status === 'none';
+  // The tray is per-card and deliberately not lifted: two cards may be open at
+  // once, and a press rebuilds the path anyway, which unmounts every card.
+  const [trayOpen, setTrayOpen] = useState(false);
 
   useEffect(() => {
     if (clip.status === 'loading') return;
@@ -41,12 +49,18 @@ export function ArtistCard({
 
   return (
     <div
-      className={`rounded-xl border px-3.5 py-3.5 sm:px-4 ${
+      className={`rounded-xl border px-3.5 sm:px-4 ${
+        // A step card's footer strip bleeds to the card's edges, so the card
+        // owns no bottom padding and must clip: the strip supplies both.
+        isEndpoint ? 'py-3.5' : 'overflow-hidden pt-3.5 pb-0'
+      } ${
         isPlaying
           ? 'bg-[var(--color-accent)]/[.13] border-[var(--color-accent)]/[.34]'
           : isEndpoint
             ? 'bg-[var(--color-surface)] border-[var(--color-endpoint)] shadow-[inset_0_1px_0_rgba(231,233,238,.05)]'
-            : 'bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-border-hover)]'
+            : trayOpen
+              ? 'bg-[var(--color-surface)] border-[var(--color-border-hover)]'
+              : 'bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-border-hover)]'
       }`}
     >
       {endpointLabel && (
@@ -54,7 +68,10 @@ export function ArtistCard({
           {endpointLabel === 'start' ? 'Starting artist' : 'Destination artist'}
         </div>
       )}
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-0 sm:gap-x-3.5">
+      {/* No longer wraps: the two bypass signals moved out of this row into the
+          footer strip below, and they were the non-shrinkable pair that forced
+          the artist name toward zero at phone width (TR-16). */}
+      <div className="flex items-center gap-3 sm:gap-3.5">
         <div
           className={`flex-none rounded-[9px] bg-[var(--color-border)] bg-cover ${
             isEndpoint ? 'w-14 h-14' : 'w-[52px] h-[52px]'
@@ -84,29 +101,6 @@ export function ArtistCard({
             </div>
           )}
         </div>
-        {!isEndpoint && (
-          // On a phone this wrapper is full width and ordered last, so it takes a
-          // row of its own beneath the artist and the two signals stay labelled.
-          // From sm up it collapses back to an ordinary inline pair and the desktop
-          // row is exactly what it was. One copy of the markup, deliberately: the
-          // e2e specs resolve these by role and Playwright strict mode fails on two.
-          <div className="order-last w-full mt-3 flex gap-2 sm:order-none sm:w-auto sm:mt-0">
-            <button
-              type="button"
-              onClick={() => onBypass(artist.mbid, 'dislike')}
-              className={`${BYPASS} border-[var(--color-away)]/[.38] text-[var(--color-away)] hover:bg-[var(--color-away)]/10 hover:border-[var(--color-away)]/60`}
-            >
-              ✕ Not for me
-            </button>
-            <button
-              type="button"
-              onClick={() => onBypass(artist.mbid, 'known')}
-              className={`${BYPASS} border-[var(--color-dig)]/[.38] text-[var(--color-dig)] hover:bg-[var(--color-dig)]/10 hover:border-[var(--color-dig)]/60`}
-            >
-              ✓ I know them
-            </button>
-          </div>
-        )}
         <PlayButton
           state={isPlaying ? 'pause' : 'play'}
           size="card"
@@ -116,6 +110,56 @@ export function ArtistCard({
           onClick={() => (isCurrent ? onToggle?.() : onPlay(artist.mbid))}
         />
       </div>
+
+      {!isEndpoint && (
+        // The recessed footer strip. Negative margins cancel the card's own
+        // horizontal padding so it spans edge to edge; the card clips it.
+        <div className="-mx-3.5 sm:-mx-4 mt-3 border-t border-[var(--color-strip-border)] bg-[var(--color-strip)]">
+          {/* One control in both states, so the tray can be closed again. The
+              design drew the expanded tray with no way back — a gap, not a
+              decision. Collapsed it is the strip; open it heads the tray. */}
+          <button
+            type="button"
+            onClick={() => setTrayOpen((v) => !v)}
+            aria-expanded={trayOpen}
+            className={
+              trayOpen
+                ? 'flex w-full items-center gap-1.5 px-3.5 pt-3 pb-2.5 text-[11px] font-medium uppercase tracking-[.08em] text-[var(--color-label)] sm:px-4'
+                : 'flex h-[38px] w-full items-center justify-center gap-1.5 text-[12.5px] text-[var(--color-note)] transition-colors hover:bg-[var(--color-accent)]/[.07] hover:text-[var(--color-accent)]'
+            }
+          >
+            {trayOpen ? 'Which direction?' : 'Rebuild from here'}
+            <span aria-hidden className="text-[11px]">{trayOpen ? '▴' : '▾'}</span>
+          </button>
+
+          {trayOpen && (
+            // Stacked on a phone, side by side from sm up — the captions are
+            // what need the width, and two of them do not fit on 390px.
+            <div className="flex flex-col gap-2 px-3.5 pb-3.5 sm:flex-row sm:px-4">
+              <button
+                type="button"
+                onClick={() => onBypass(artist.mbid, 'dislike')}
+                className={`${TRAY_OPTION} border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10`}
+              >
+                <span className="whitespace-nowrap text-[13.5px]">Steer away</span>
+                <span className="truncate text-[11.5px] text-[var(--color-note)]">
+                  less like this sound
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onBypass(artist.mbid, 'known')}
+                className={`${TRAY_OPTION} border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10`}
+              >
+                <span className="whitespace-nowrap text-[13.5px]">Go deeper</span>
+                <span className="truncate text-[11.5px] text-[var(--color-note)]">
+                  something more obscure
+                </span>
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -33,15 +33,22 @@ export function LandingPage() {
       <h1 className="text-[27px] sm:text-[38px] font-medium tracking-[-.02em] sm:tracking-[-.025em] leading-[1.1] sm:leading-[1.05]">
         Artist Path
       </h1>
-      {/* Owner-chosen 2026-07-28. Explains the HOW at user level and stops
-          short of promising obscurity: the first path between two famous
-          artists is expected to be famous, and the bypass explainer on the
-          journey page is where digging is introduced. "Listeners share" is
-          literal — edges come from ListenBrainz similar-artists and every edge
-          in the artifact is behavioural. */}
-      <p className="mt-3 sm:mt-3.5 max-w-[290px] sm:max-w-[400px] text-[14.5px] sm:text-base leading-[1.5] text-[var(--color-muted)] text-pretty">
-        Name two artists and hear the route between them. Each step lands on someone their
-        listeners share, so one sound eases into the next.
+      {/* Owner-chosen 2026-08-07, replacing the single paragraph of 2026-07-28.
+          Two lines with split roles, because one sentence was carrying both the
+          promise and the mechanism and the promise kept losing: the page never
+          said the app is FOR finding music you don't know.
+
+          The headline promises the outcome; the line beneath keeps the July
+          rationale intact and does the honest work, because the FIRST path
+          between two famous artists is expected to be famous. "Listeners share"
+          is literal — edges come from ListenBrainz similar-artists and every
+          edge in the artifact is behavioural. */}
+      <p className="mt-3 sm:mt-3.5 max-w-[320px] sm:max-w-[420px] text-[17px] sm:text-[19px] leading-[1.35] tracking-[-.01em] text-[var(--color-text)] text-pretty">
+        Start with two artists you know. Leave with ones you don&rsquo;t.
+      </p>
+      <p className="mt-2.5 max-w-[300px] sm:max-w-[400px] text-[13.5px] sm:text-[14.5px] leading-[1.5] text-[var(--color-muted)] text-pretty">
+        Each step lands on someone their listeners share. Already know a name? Dig past it for
+        someone you don&rsquo;t.
       </p>
 
       <div className="mt-11 sm:mt-10 flex flex-col gap-5">

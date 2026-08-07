@@ -57,19 +57,24 @@ export function PathIntro({ count, stopRule }: Props) {
         aria-expanded={open}
         className="mt-2 text-[12.5px] text-[var(--color-accent)] hover:underline"
       >
-        {open ? '▾' : '▸'} What do the two buttons do?
+        {open ? '▾' : '▸'} How do I change the path?
       </button>
 
       {open && (
         <div className="mt-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-[12.5px] leading-[1.55] text-[var(--color-muted)]">
           <p>
-            <span className="text-[var(--color-away)]">✕ Not for me</span> — steers away from
-            that artist and the ones around them, so you get a different sound rather than a
-            near-identical substitute.
+            Any artist in the middle has a{' '}
+            <span className="text-[var(--color-text)]">Rebuild from here</span> strip along the
+            bottom of their card. Open it and you get two directions:
           </p>
           <p className="mt-2">
-            <span className="text-[var(--color-dig)]">✓ I know them</span> — digs for someone
-            less familiar, since you&rsquo;ve already covered the obvious route.
+            <span className="text-[var(--color-text)]">Steer away</span> — moves away from that
+            artist <em className="not-italic text-[var(--color-text)]">and the ones around
+            them</em>, so you get a different sound rather than a near-identical substitute.
+          </p>
+          <p className="mt-2">
+            <span className="text-[var(--color-text)]">Go deeper</span> — digs for someone less
+            familiar, since you&rsquo;ve already covered the obvious route.
           </p>
           <p className="mt-2 text-[var(--color-text)]">
             Either one rebuilds the whole journey, so every artist between your two can change —

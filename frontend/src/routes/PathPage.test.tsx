@@ -16,6 +16,16 @@ function LandingProbe() {
   return <div data-testid="landing">{shown}</div>;
 }
 
+/**
+ * Both signals now sit behind the card's "Rebuild from here" footer strip, so a
+ * bypass press is two clicks rather than one. Every path these tests render has
+ * exactly one interior card, so there is exactly one strip to open.
+ */
+async function pressBypass(user: ReturnType<typeof userEvent.setup>, option: RegExp) {
+  await user.click(screen.getByRole('button', { name: /rebuild from here/i }));
+  await user.click(screen.getByRole('button', { name: option }));
+}
+
 function renderAt(url: string) {
   return render(
     <MemoryRouter initialEntries={[url]}>
@@ -54,7 +64,7 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
   await screen.findByText('Herbie Hancock');
 
   // The only bypass on offer is Herbie's — the interior of a three-stop path.
-  await user.click(screen.getByRole('button', { name: /not for me/i }));
+  await pressBypass(user, /steer away/i);
 
   await waitFor(() =>
     expect(buildPath).toHaveBeenLastCalledWith(
@@ -142,7 +152,7 @@ test('pressing a bypass stops the audio at once, not when the new path arrives',
   const user = userEvent.setup();
   await renderPlaying(user, '/path/m/d');
 
-  await user.click(screen.getByRole('button', { name: /not for me/i }));
+  await pressBypass(user, /steer away/i);
 
   await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
 });
@@ -195,10 +205,10 @@ test('a bypass press holds the old path and names what it is doing', async () =>
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
 
-  await user.click(screen.getByRole('button', { name: /not for me/i }));
+  await pressBypass(user, /steer away/i);
 
   // UI-D4: the previous path is held and dimmed, never replaced by the skeleton.
-  expect(await screen.findByText(/steering around that sound/i)).toBeInTheDocument();
+  expect(await screen.findByText(/steering away from that sound/i)).toBeInTheDocument();
   expect(screen.getByText('Herbie Hancock')).toBeInTheDocument();
   expect(screen.queryByText(/listening for the steps between them/i)).not.toBeInTheDocument();
 });
@@ -213,10 +223,10 @@ test('the reroll message names the signal that was actually pressed', async () =
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
 
-  await user.click(screen.getByRole('button', { name: /know them/i }));
+  await pressBypass(user, /go deeper/i);
 
-  expect(await screen.findByText(/digging for someone newer/i)).toBeInTheDocument();
-  expect(screen.queryByText(/steering around that sound/i)).not.toBeInTheDocument();
+  expect(await screen.findByText(/digging deeper for someone newer/i)).toBeInTheDocument();
+  expect(screen.queryByText(/steering away from that sound/i)).not.toBeInTheDocument();
 });
 
 // UI-D7: what the line counts is the artists BETWEEN the two chosen, which is

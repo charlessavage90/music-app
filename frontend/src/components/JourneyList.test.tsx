@@ -36,8 +36,9 @@ test('bypass is offered on the artists in the middle, never on the two you chose
   ];
   render(<JourneyList artists={threeStop} stopRule="natural" onBypass={vi.fn()} />);
 
-  expect(screen.getAllByRole('button', { name: /not for me/i })).toHaveLength(1);
-  expect(screen.getAllByRole('button', { name: /know them/i })).toHaveLength(1);
+  // One footer strip, on the interior card only — the endpoints stay bare, so
+  // there is no route to either signal on them at all.
+  expect(screen.getAllByRole('button', { name: /rebuild from here/i })).toHaveLength(1);
   // and all three artists are still shown
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
   expect(screen.getByText('Kraftwerk')).toBeInTheDocument();

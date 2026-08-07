@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"><style>
+html,body{margin:0;background:#0b0c0f;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#4a90d9;text-decoration:none}a:hover{color:#6ba6e3}
+input{font-family:inherit}
+input::placeholder{color:#5c626d}
+*{box-sizing:border-box}
+@keyframes ap-caret{0%,45%{opacity:1}55%,100%{opacity:0}}
+@keyframes ap-shimmer{0%{background-position:-260px 0}100%{background-position:260px 0}}
+@keyframes ap-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes ap-grow{0%{transform:scaleY(.12)}100%{transform:scaleY(1)}}
+</style></helmet>
+<section style="background:#0b0c0f;padding:56px 40px 64px;font-family:'DM Sans',system-ui,sans-serif;border-bottom:1px solid #1c1f25">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6f7580">Turn 2 · Expanding bypass</div>
+    <p style="margin:12px 0 0;font-size:14.5px;line-height:1.6;color:#9aa0ab;max-width:660px;text-wrap:pretty">One quiet trigger per card that opens two named choices. Each option is shown collapsed (top) and expanded (below).</p>
+
+    <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+      <div id="2a" style="width:376px;background:#0f1115;border:1px solid #2a2d34;border-radius:16px;padding:22px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.08em;color:#0f1115;background:#4a90d9;border-radius:999px;padding:3px 9px">2a</span>
+          <span style="font-size:15px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">Trigger on its own row</span>
+        </div>
+        <p style="margin:10px 0 4px;font-size:12.5px;line-height:1.55;color:#7d838e;min-height:56px">A divider-separated row across the base of the card. The name row is untouched, so nothing competes with the artist.</p>
+        <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5c626d;margin:22px 0 9px">At rest</div>        <div style="position:relative;padding-left:19px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:#7d838e" style-hover="color:#4a90d9">
+              <span style="font-size:12.5px">Not this step</span><span style="font-size:11px">▾</span>
+            </div>
+          </div>
+        </div>        <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5c626d;margin:22px 0 9px">Expanded</div>        <div style="position:relative;padding-left:19px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+          <div style="background:#181a1f;border:1px solid #343841;border-radius:12px;padding:14px">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:19px;font-weight:500">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:#4a90d9">
+              <span style="font-size:12.5px">Not this step</span><span style="font-size:11px">▴</span>
+            </div>
+            <div style="margin-top:11px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid #343841;cursor:pointer" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9">
+                <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Steer away</span><span style="font-size:11.5px;color:#7d838e">· less like this</span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid #4a90d9;background:rgba(74,144,217,.10);cursor:pointer">
+                <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Go deeper</span><span style="font-size:11.5px;color:#7d838e">· more obscure</span>
+              </div>
+              <div style="font-size:11px;color:#6f7580;padding-left:4px">Both build a new path end to end</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;font-size:11.5px;line-height:1.55;color:#6f7580;text-wrap:pretty"><span style="color:#a0d9b4">＋</span> Full-width tap target; expansion reads as belonging to the card. <span style="color:#e8a0a0">−</span> Adds a permanent extra line to every card.</div>
+      </div>
+      <div id="2b" style="width:376px;background:#0f1115;border:1px solid #2a2d34;border-radius:16px;padding:22px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.08em;color:#0f1115;background:#4a90d9;border-radius:999px;padding:3px 9px">2b</span>
+          <span style="font-size:15px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">Compact pill under the name</span>
+        </div>
+        <p style="margin:10px 0 4px;font-size:12.5px;line-height:1.55;color:#7d838e;min-height:56px">A small pill tucked into the text block, so the collapsed card stays nearly as short as an endpoint card.</p>
+        <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5c626d;margin:22px 0 9px">At rest</div>        <div style="position:relative;padding-left:19px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+                <div style="margin-top:7px;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 11px;border-radius:999px;border:1px solid #2a2d34;color:#7d838e;font-size:11.5px;cursor:pointer" style-hover="border-color:#4a90d9;color:#4a90d9">Not this step ▾</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+          </div>
+        </div>        <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5c626d;margin:22px 0 9px">Expanded</div>        <div style="position:relative;padding-left:19px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+          <div style="background:#181a1f;border:1px solid #343841;border-radius:12px;padding:14px">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:19px;font-weight:500">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+                <div style="margin-top:7px;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 11px;border-radius:999px;border:1px solid #4a90d9;color:#4a90d9;font-size:11.5px;cursor:pointer">Not this step ▴</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <div style="flex:1;height:34px;border-radius:999px;border:1px solid #343841;color:#c3c8d1;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9;color:#e7e9ee">Steer away</div>
+              <div style="flex:1;height:34px;border-radius:999px;border:1px solid #4a90d9;background:rgba(74,144,217,.10);color:#e7e9ee;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer">Go deeper</div>
+            </div>
+            <div style="margin-top:9px;font-size:11px;color:#6f7580">Away from this sound · or further underground — either rebuilds the path</div>
+          </div>
+        </div>
+        <div style="margin-top:18px;font-size:11.5px;line-height:1.55;color:#6f7580;text-wrap:pretty"><span style="color:#a0d9b4">＋</span> Densest at rest — best for a 15-step path. <span style="color:#e8a0a0">−</span> Smaller target; short labels lean on the caption.</div>
+      </div>
+      <div id="2c" style="width:376px;background:#0f1115;border:1px solid #2a2d34;border-radius:16px;padding:22px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.08em;color:#0f1115;background:#4a90d9;border-radius:999px;padding:3px 9px">2c</span>
+          <span style="font-size:15px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">Footer bar into a tray</span>
+        </div>
+        <p style="margin:10px 0 4px;font-size:12.5px;line-height:1.55;color:#7d838e;min-height:56px">The trigger is a footer strip; expanding fills it into a recessed tray, clearly a panel of choices rather than a card swap.</p>
+        <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5c626d;margin:22px 0 9px">At rest</div>        <div style="position:relative;padding-left:19px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px 14px 0;overflow:hidden" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin:12px -14px 0;height:38px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+          </div>
+        </div>        <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5c626d;margin:22px 0 9px">Expanded</div>        <div style="position:relative;padding-left:19px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+          <div style="background:#181a1f;border:1px solid #343841;border-radius:12px;padding:14px 14px 0;overflow:hidden">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:19px;font-weight:500">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin:12px -14px 0;background:#14161b;border-top:1px solid #23262d;padding:12px 14px 14px">
+              <div style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#6f7580;margin-bottom:10px">Rebuild the path…</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:baseline;gap:8px;padding:10px 13px;border-radius:8px;background:#181a1f;border:1px solid #2a2d34;cursor:pointer" style-hover="border-color:#4a90d9;background:rgba(74,144,217,.10)">
+                  <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Steer away</span><span style="font-size:11.5px;color:#7d838e">less like this sound</span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:8px;padding:10px 13px;border-radius:8px;background:rgba(74,144,217,.10);border:1px solid #4a90d9;cursor:pointer">
+                  <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Go deeper</span><span style="font-size:11.5px;color:#7d838e">something more obscure</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;font-size:11.5px;line-height:1.55;color:#6f7580;text-wrap:pretty"><span style="color:#a0d9b4">＋</span> Most explicit — “Rebuild the path…” heads the tray. <span style="color:#e8a0a0">−</span> Heaviest visually; strongest change to card anatomy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0b0c0f;padding:56px 40px 64px;font-family:'DM Sans',system-ui,sans-serif;border-bottom:1px solid #1c1f25">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6f7580">Turn 1 · Bypass control</div>
+    <p style="margin:12px 0 0;font-size:14.5px;line-height:1.6;color:#9aa0ab;max-width:640px;text-wrap:pretty">Three ways to replace “✕ Not for me / ✓ I know them”. All three drop red-vs-green — both actions rebuild the whole path, so opposing colours signalled a conflict that doesn’t exist. Each names the <em style="font-style:normal;color:#e7e9ee">direction of the rebuild</em> instead of a verdict on the artist.</p>
+
+    <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+      <div id="1a" style="width:376px;background:#0f1115;border:1px solid #2a2d34;border-radius:16px;padding:22px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.08em;color:#0f1115;background:#4a90d9;border-radius:999px;padding:3px 9px">1a</span>
+          <span style="font-size:15px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">Two neutral directions</span>
+        </div>
+        <p style="margin:10px 0 20px;font-size:12.5px;line-height:1.55;color:#7d838e;min-height:56px">Same weight, same colour, both plainly a rebuild. The words carry the whole difference; a shared caption states the consequence once.</p>
+
+        <div style="position:relative;padding-left:19px;display:flex;flex-direction:column;gap:12px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:13px">
+              <div style="flex:1;height:34px;border-radius:999px;border:1px solid #343841;color:#c3c8d1;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9;color:#e7e9ee">Different sound</div>
+              <div style="flex:1;height:34px;border-radius:999px;border:1px solid #343841;color:#c3c8d1;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9;color:#e7e9ee">Deeper cuts</div>
+            </div>
+            <div style="margin-top:9px;font-size:11px;color:#6f7580;letter-spacing:.01em">Either one rebuilds the path around this step</div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:19px;font-weight:500">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:13px">
+              <div style="flex:1;height:34px;border-radius:999px;border:1px solid #343841;color:#c3c8d1;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9;color:#e7e9ee">Different sound</div>
+              <div style="flex:1;height:34px;border-radius:999px;border:1px solid #4a90d9;background:rgba(74,144,217,.10);color:#e7e9ee;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer">Deeper cuts</div>
+            </div>
+            <div style="margin-top:9px;font-size:11px;color:#6f7580;letter-spacing:.01em">Either one rebuilds the path around this step</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;font-size:11.5px;line-height:1.55;color:#6f7580;text-wrap:pretty"><span style="color:#a0d9b4">＋</span> Cheapest change, keeps both signals equally visible. <span style="color:#e8a0a0">−</span> Adds a caption line to every card.</div>
+      </div>
+
+      <div id="1b" style="width:376px;background:#0f1115;border:1px solid #2a2d34;border-radius:16px;padding:22px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.08em;color:#0f1115;background:#4a90d9;border-radius:999px;padding:3px 9px">1b</span>
+          <span style="font-size:15px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">One verb, two dials</span>
+        </div>
+        <p style="margin:10px 0 20px;font-size:12.5px;line-height:1.55;color:#7d838e;min-height:56px">The action is named once — “Rebuild from here” — and the two choices become the parameter of that action, so nothing implies a one-card swap.</p>
+
+        <div style="position:relative;padding-left:19px;display:flex;flex-direction:column;gap:12px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:13px">
+              <span style="flex:none;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#6f7580">Rebuild</span>
+              <div style="flex:1;display:flex;background:#14161b;border:1px solid #2a2d34;border-radius:999px;padding:3px">
+                <div style="flex:1;height:28px;border-radius:999px;color:#c3c8d1;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:rgba(74,144,217,.14);color:#e7e9ee">further off</div>
+                <div style="flex:1;height:28px;border-radius:999px;color:#c3c8d1;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:rgba(74,144,217,.14);color:#e7e9ee">more obscure</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:19px;font-weight:500">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:13px">
+              <span style="flex:none;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#6f7580">Rebuild</span>
+              <div style="flex:1;display:flex;background:#14161b;border:1px solid #2a2d34;border-radius:999px;padding:3px">
+                <div style="flex:1;height:28px;border-radius:999px;background:rgba(74,144,217,.16);color:#e7e9ee;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer">further off</div>
+                <div style="flex:1;height:28px;border-radius:999px;color:#c3c8d1;font-size:12.5px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:rgba(74,144,217,.14);color:#e7e9ee">more obscure</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;font-size:11.5px;line-height:1.55;color:#6f7580;text-wrap:pretty"><span style="color:#a0d9b4">＋</span> “Rebuild” said once, up front — the strongest cure for the swap misread. <span style="color:#e8a0a0">−</span> Segmented control reads slightly more settings-like.</div>
+      </div>
+
+      <div id="1c" style="width:376px;background:#0f1115;border:1px solid #2a2d34;border-radius:16px;padding:22px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.08em;color:#0f1115;background:#4a90d9;border-radius:999px;padding:3px 9px">1c</span>
+          <span style="font-size:15px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">Stacked rows, each explained</span>
+        </div>
+        <p style="margin:10px 0 20px;font-size:12.5px;line-height:1.55;color:#7d838e;min-height:56px">Both signals always visible, one per full-width row, each carrying its own plain-language consequence — the most explicit wording, no caption needed.</p>
+
+        <div style="position:relative;padding-left:19px;display:flex;flex-direction:column;gap:12px">
+          <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#a0d9b4)"></div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:999px;cursor:pointer;border:1px solid #343841;background:transparent" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9">
+                <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Steer away</span>
+                <span style="font-size:11.5px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">· less like this</span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:999px;cursor:pointer;border:1px solid #343841;background:transparent" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9">
+                <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Go deeper</span>
+                <span style="font-size:11.5px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">· more obscure</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:19px;font-weight:500">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin-top:13px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:999px;cursor:pointer;border:1px solid #343841;background:transparent" style-hover="background:rgba(74,144,217,.10);border-color:#4a90d9">
+                <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Steer away</span>
+                <span style="font-size:11.5px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">· less like this</span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:999px;cursor:pointer;border:1px solid #4a90d9;background:rgba(74,144,217,.10)">
+                <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Go deeper</span>
+                <span style="font-size:11.5px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">· more obscure</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;font-size:11.5px;line-height:1.55;color:#6f7580;text-wrap:pretty"><span style="color:#a0d9b4">＋</span> Clearest wording, both signals named at rest. <span style="color:#e8a0a0">−</span> Tallest cards — a 15-step path gets long.</div>
+
+    </div>
+  </div>
+</section>
+
+<div style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:48px;flex-wrap:wrap;padding:40px 24px;background:#0b0c0f">
+  <div data-screen-label="Landing" style="flex:none;width:390px;height:844px;background:#0f1115;border:1px solid #2a2d34;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 30px 80px -20px rgba(0,0,0,.8)">
+
+    <div style="height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#9aa0ab;font-size:12px;letter-spacing:.02em">
+      <span style="color:#e7e9ee;font-weight:500">9:41</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="width:16px;height:8px;border:1px solid #4b515b;border-radius:2px;display:block"></span>
+        <span style="width:22px;height:10px;border:1px solid #4b515b;border-radius:3px;display:block;position:relative"><span style="position:absolute;inset:2px;right:7px;background:#9aa0ab;border-radius:1px;display:block"></span></span>
+      </div>
+    </div>
+
+    <div style="flex:1;padding:44px 28px 0;display:flex;flex-direction:column">
+      <h1 style="margin:0;font-size:27px;font-weight:500;letter-spacing:-.02em;color:#e7e9ee;line-height:1.1">Artist Path</h1>
+      <p style="margin:12px 0 0;font-size:14.5px;line-height:1.5;color:#9aa0ab;max-width:290px;text-wrap:pretty">Name two artists and hear a smooth path between them.</p>
+
+      <div style="margin-top:44px;display:flex;flex-direction:column;gap:20px">
+
+        <div style="position:relative;z-index:5">
+          <div style="font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#6f7580;margin-bottom:9px">From</div>
+          <div style="display:flex;align-items:center;gap:11px;height:56px;padding:0 16px;background:#1b1e25;border:1.5px solid #4a90d9;border-radius:8px;box-shadow:0 0 0 4px rgba(74,144,217,.13),0 1px 0 rgba(231,233,238,.045) inset,0 6px 18px -10px rgba(0,0,0,.9)">
+            <span style="flex:none;width:7px;height:7px;border-radius:999px;background:#4a90d9;display:block"></span>
+            <span style="font-size:19px;font-weight:400;color:#e7e9ee;letter-spacing:-.01em">Nirv</span>
+            <span style="width:1.5px;height:22px;background:#4a90d9;border-radius:1px;animation:ap-caret 1.1s steps(1,end) infinite;display:block"></span>
+          </div>
+
+          <div style="position:absolute;left:0;right:0;top:calc(100% + 8px);background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:6px;box-shadow:0 24px 48px -12px rgba(0,0,0,.75),0 2px 6px rgba(0,0,0,.4)">
+            <sc-for list="{{ results }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;gap:7px;padding:12px 12px;border-radius:8px;cursor:pointer;background:{{ r.bg }}" style-hover="background:rgba(74,144,217,.10)">
+                <span style="font-size:15px;font-weight:400;color:#e7e9ee;letter-spacing:-.005em;white-space:nowrap">{{ r.name }}</span>
+                <span style="font-size:12.5px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="position:relative;z-index:1;margin-top:186px">
+          <div style="font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#6f7580;margin-bottom:9px">To</div>
+          <div style="display:flex;align-items:center;gap:11px;height:56px;padding:0 16px;background:#1b1e25;border:1.5px solid #363b44;border-radius:8px;box-shadow:0 1px 0 rgba(231,233,238,.045) inset,0 6px 18px -10px rgba(0,0,0,.9);cursor:text" style-hover="border-color:#4a90d9;background:#1e2129">
+            <span style="flex:none;width:7px;height:7px;border-radius:999px;background:#a0d9b4;display:block"></span>
+            <span style="font-size:19px;font-weight:400;color:#6b7280;letter-spacing:-.01em">Search an artist</span>
+          </div>
+        </div>
+
+        <button style="margin-top:4px;height:56px;width:100%;border:0;border-radius:999px;background:#4a90d9;color:#0f1115;font-family:inherit;font-size:15.5px;font-weight:600;letter-spacing:.01em;opacity:.28;cursor:not-allowed">Find path</button>
+      </div>
+
+      <div style="margin-top:auto;padding-bottom:34px;display:flex;flex-direction:column;gap:14px;align-items:center">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:5px;height:5px;border-radius:999px;background:#e8a0a0;display:block"></span>
+          <span style="width:22px;height:1px;background:#2a2d34;display:block"></span>
+          <span style="width:5px;height:5px;border-radius:999px;background:#9aa0ab;display:block"></span>
+          <span style="width:22px;height:1px;background:#2a2d34;display:block"></span>
+          <span style="width:5px;height:5px;border-radius:999px;background:#a0d9b4;display:block"></span>
+        </div>
+        <p style="margin:0;font-size:11.5px;color:#6f7580;letter-spacing:.02em">Path length varies — 30 seconds each</p>
+      </div>
+    </div>
+  </div>
+
+  <div data-screen-label="Journey" style="flex:none;width:390px;height:844px;background:#0f1115;border:1px solid #2a2d34;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 30px 80px -20px rgba(0,0,0,.8)">
+
+    <div style="height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#9aa0ab;font-size:12px;letter-spacing:.02em">
+      <span style="color:#e7e9ee;font-weight:500">9:41</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="width:16px;height:8px;border:1px solid #4b515b;border-radius:2px;display:block"></span>
+        <span style="width:22px;height:10px;border:1px solid #4b515b;border-radius:3px;display:block;position:relative"><span style="position:absolute;inset:2px;right:7px;background:#9aa0ab;border-radius:1px;display:block"></span></span>
+      </div>
+    </div>
+
+    <div style="flex:none;display:flex;align-items:center;gap:18px;padding:6px 22px 16px">
+      <a href="#" style="font-size:13px;color:#9aa0ab;letter-spacing:.01em" style-hover="color:#e7e9ee">← New path</a>
+      <a href="#" style="font-size:13px;color:#9aa0ab;letter-spacing:.01em" style-hover="color:#e7e9ee">↺ Reset path</a>
+    </div>
+
+    <div style="flex:1;overflow:hidden;position:relative">
+      <div style="height:100%;overflow-y:auto;padding:4px 22px 132px">
+
+        <div style="position:relative;padding-left:19px;display:flex;flex-direction:column;gap:14px">
+          <div style="position:absolute;left:0;top:6px;bottom:16px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#7bb0cf 45%,#a0d9b4)"></div>
+          <div style="position:absolute;left:-2px;bottom:0;font-size:10px;line-height:1;color:#a0d9b4">▾</div>
+
+          <div style="background:#181a1f;border:1px solid #3b4048;border-radius:12px;padding:16px 14px;box-shadow:inset 0 1px 0 rgba(231,233,238,.05)">
+            <div style="font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7d838e;margin-bottom:10px">Starting artist</div>
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:56px;height:56px;border-radius:9px;background:repeating-linear-gradient(115deg,#2b3340 0 6px,#232a35 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Nirvana</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Come As You Are</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px 14px 0;overflow:hidden" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin:12px -14px 0;height:38px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px 14px 0;overflow:hidden" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#2e3138 0 6px,#262930 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Screaming Trees</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Nearly Lost You</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin:12px -14px 0;height:38px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+          </div>
+
+          <div style="background:rgba(74,144,217,.13);border:1px solid rgba(74,144,217,.34);border-radius:12px;padding:14px 14px 0;overflow:hidden">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#2b3644 0 6px,#242d39 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Mazzy Star</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Fade Into You</div>
+                <div style="margin-top:6px;font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#4a90d9">▮▮▮ now playing</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;gap:3.5px;cursor:pointer"><span style="display:block;width:3.5px;height:14px;background:#fff;border-radius:1px"></span><span style="display:block;width:3.5px;height:14px;background:#fff;border-radius:1px"></span></div>
+            </div>
+            <div style="margin:12px -14px 0;height:38px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px 14px 0;overflow:hidden" style-hover="border-color:#343841">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:19px;font-weight:500;letter-spacing:.02em">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin:12px -14px 0;background:#14161b;border-top:1px solid #23262d;padding:12px 14px 14px">
+              <div style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#6f7580;margin-bottom:10px">Rebuild the path…</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:baseline;gap:8px;padding:10px 13px;border-radius:8px;background:#181a1f;border:1px solid #2a2d34;cursor:pointer" style-hover="border-color:#4a90d9;background:rgba(74,144,217,.10)">
+                  <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Steer away</span><span style="font-size:11.5px;color:#7d838e">less like this sound</span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:8px;padding:10px 13px;border-radius:8px;background:rgba(74,144,217,.10);border:1px solid #4a90d9;cursor:pointer">
+                  <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Go deeper</span><span style="font-size:11.5px;color:#7d838e">something more obscure</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px 14px 0;overflow:hidden">
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#2c2f36 0 6px,#25282e 6px 12px);opacity:.75"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cranes</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#6f7580;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">No preview available</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;cursor:default"><span style="display:block;width:0;height:0;border-left:11px solid #3c414a;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+            <div style="margin:12px -14px 0;height:38px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+          </div>
+
+          <div style="background:#181a1f;border:1px solid #3b4048;border-radius:12px;padding:16px 14px;box-shadow:inset 0 1px 0 rgba(231,233,238,.05)">
+            <div style="font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7d838e;margin-bottom:10px">Destination artist</div>
+            <div style="display:flex;align-items:center;gap:13px">
+              <div style="flex:none;width:56px;height:56px;border-radius:9px;background:repeating-linear-gradient(115deg,#2c3a33 0 6px,#25302b 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cocteau Twins</div>
+                <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cherry-Coloured Funk</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:none;background:#181a1f;border-top:1px solid #2a2d34;padding:14px 22px 30px;display:flex;align-items:center;gap:13px">
+      <div style="flex:none;width:36px;height:36px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="display:block;width:3px;height:12px;background:#fff;border-radius:1px"></span><span style="display:block;width:3px;height:12px;background:#fff;border-radius:1px"></span></div>
+      <div style="flex:1;min-width:0;font-size:13px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Mazzy Star — Fade Into You</div>
+    </div>
+  </div>
+
+  <div data-screen-label="Building path" style="flex:none;width:390px;height:844px;background:#0f1115;border:1px solid #2a2d34;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 30px 80px -20px rgba(0,0,0,.8)">
+
+    <div style="height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#9aa0ab;font-size:12px;letter-spacing:.02em">
+      <span style="color:#e7e9ee;font-weight:500">9:41</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="width:16px;height:8px;border:1px solid #4b515b;border-radius:2px;display:block"></span>
+        <span style="width:22px;height:10px;border:1px solid #4b515b;border-radius:3px;display:block;position:relative"><span style="position:absolute;inset:2px;right:7px;background:#9aa0ab;border-radius:1px;display:block"></span></span>
+      </div>
+    </div>
+
+    <div style="flex:none;display:flex;align-items:center;gap:18px;padding:6px 22px 16px">
+      <a href="#" style="font-size:13px;color:#9aa0ab;letter-spacing:.01em" style-hover="color:#e7e9ee">← New path</a>
+    </div>
+
+    <div style="flex:1;padding:0 22px;display:flex;flex-direction:column">
+      <div style="font-size:17px;font-weight:500;color:#e7e9ee;letter-spacing:-.01em">Nirvana <span style="color:#6f7580;font-weight:400">→</span> Cocteau Twins</div>
+      <div style="margin-top:8px;font-size:13px;color:#9aa0ab;animation:ap-pulse 1.8s ease-in-out infinite">Listening for the steps between them…</div>
+
+      <div style="margin-top:28px;position:relative;padding-left:19px;display:flex;flex-direction:column;gap:14px">
+        <div style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#7bb0cf 45%,#a0d9b4);transform-origin:top;animation:ap-grow 2.4s cubic-bezier(.32,.72,.28,1) infinite"></div>
+
+        <div style="background:#181a1f;border:1px solid #3b4048;border-radius:12px;padding:16px 14px;display:flex;align-items:center;gap:13px">
+          <div style="flex:none;width:56px;height:56px;border-radius:9px;background:repeating-linear-gradient(115deg,#2b3340 0 6px,#232a35 6px 12px)"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">Nirvana</div>
+            <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab">Come As You Are</div>
+          </div>
+        </div>
+
+        <sc-for list="{{ skeletons }}" as="s" hint-placeholder-count="4">
+          <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:14px;display:flex;align-items:center;gap:13px;opacity:{{ s.op }}">
+            <div style="flex:none;width:52px;height:52px;border-radius:9px;background:linear-gradient(90deg,#20232a 0%,#282c34 40%,#20232a 80%);background-size:260px 100%;animation:ap-shimmer 1.6s linear infinite"></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+              <div style="height:12px;width:{{ s.w1 }};border-radius:999px;background:linear-gradient(90deg,#20232a 0%,#282c34 40%,#20232a 80%);background-size:260px 100%;animation:ap-shimmer 1.6s linear infinite"></div>
+              <div style="height:9px;width:{{ s.w2 }};border-radius:999px;background:#1d2027"></div>
+            </div>
+            <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#20232a"></div>
+          </div>
+        </sc-for>
+
+        <div style="display:flex;align-items:center;gap:8px;padding:2px 0 4px;color:#4b515b;font-size:16px;letter-spacing:.35em">···</div>
+
+        <div style="background:#181a1f;border:1px solid #3b4048;border-radius:12px;padding:16px 14px;display:flex;align-items:center;gap:13px">
+          <div style="flex:none;width:56px;height:56px;border-radius:9px;background:repeating-linear-gradient(115deg,#2c3a33 0 6px,#25302b 6px 12px)"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:16px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em">Cocteau Twins</div>
+            <div style="margin-top:4px;font-size:12.5px;color:#9aa0ab">Cherry-Coloured Funk</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:auto;padding-bottom:34px;text-align:center;font-size:11.5px;color:#6f7580;letter-spacing:.02em">This usually takes a few seconds</div>
+    </div>
+  </div>
+
+  <x-import component-from-global-scope="ChromeWindow" style="flex:none" from="./browser-window.jsx" width="{{ deskW }}" height="{{ deskH }}" url="artistpath.fm" tabs="{{ tabs }}" hint-size="1180px,760px">
+    <div data-screen-label="Desktop landing" style="min-height:100%;background:#0f1115;display:flex;justify-content:center;padding:56px 40px 40px;font-family:'DM Sans',system-ui,sans-serif">
+      <div style="width:520px;display:flex;flex-direction:column">
+        <h1 style="margin:0;font-size:38px;font-weight:500;letter-spacing:-.025em;color:#e7e9ee;line-height:1.05">Artist Path</h1>
+        <p style="margin:14px 0 0;font-size:16px;line-height:1.5;color:#9aa0ab;max-width:400px;text-wrap:pretty">Name two artists and hear a smooth path between them.</p>
+
+        <div style="margin-top:40px;display:flex;flex-direction:column">
+          <div style="position:relative;z-index:5">
+            <div style="font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#6f7580;margin-bottom:9px">From</div>
+            <div style="display:flex;align-items:center;gap:12px;height:58px;padding:0 18px;background:#1b1e25;border:1.5px solid #4a90d9;border-radius:8px;box-shadow:0 0 0 4px rgba(74,144,217,.13),0 1px 0 rgba(231,233,238,.045) inset,0 6px 18px -10px rgba(0,0,0,.9)">
+              <span style="flex:none;width:7px;height:7px;border-radius:999px;background:#4a90d9;display:block"></span>
+              <span style="font-size:20px;font-weight:400;color:#e7e9ee;letter-spacing:-.01em">Nirv</span>
+              <span style="width:1.5px;height:23px;background:#4a90d9;border-radius:1px;animation:ap-caret 1.1s steps(1,end) infinite;display:block"></span>
+            </div>
+            <div style="position:absolute;left:0;right:0;top:calc(100% + 8px);background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:6px;box-shadow:0 24px 48px -12px rgba(0,0,0,.75),0 2px 6px rgba(0,0,0,.4)">
+              <sc-for list="{{ results }}" as="r" hint-placeholder-count="4">
+                <div style="display:flex;align-items:baseline;gap:7px;padding:12px 14px;border-radius:8px;cursor:pointer;background:{{ r.bg }}" style-hover="background:rgba(74,144,217,.10)">
+                  <span style="font-size:15.5px;font-weight:400;color:#e7e9ee;letter-spacing:-.005em;white-space:nowrap">{{ r.name }}</span>
+                  <span style="font-size:13px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.note }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="margin-top:202px">
+            <div style="font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:#6f7580;margin-bottom:9px">To</div>
+            <div style="display:flex;align-items:center;gap:12px;height:58px;padding:0 18px;background:#1b1e25;border:1.5px solid #363b44;border-radius:8px;box-shadow:0 1px 0 rgba(231,233,238,.045) inset,0 6px 18px -10px rgba(0,0,0,.9);cursor:text" style-hover="border-color:#4a90d9;background:#1e2129">
+              <span style="flex:none;width:7px;height:7px;border-radius:999px;background:#a0d9b4;display:block"></span>
+              <span style="font-size:20px;font-weight:400;color:#6b7280;letter-spacing:-.01em">Search an artist</span>
+            </div>
+          </div>
+
+          <button style="margin-top:22px;height:58px;width:100%;border:0;border-radius:999px;background:#4a90d9;color:#0f1115;font-family:inherit;font-size:16px;font-weight:600;letter-spacing:.01em;opacity:.28;cursor:not-allowed">Find path</button>
+        </div>
+      </div>
+    </div>
+  </x-import>
+
+  <x-import component-from-global-scope="ChromeWindow" style="flex:none" from="./browser-window.jsx" width="{{ deskW }}" height="{{ deskH }}" url="artistpath.fm/path/nirvana-cocteau-twins" tabs="{{ tabs }}" hint-size="1180px,760px">
+    <div data-screen-label="Desktop journey" style="height:100%;background:#0f1115;display:flex;flex-direction:column;font-family:'DM Sans',system-ui,sans-serif">
+      <div style="flex:1;overflow-y:auto;display:flex;justify-content:center;padding:34px 40px 120px">
+        <div style="width:620px">
+          <div style="display:flex;align-items:center;gap:20px;margin-bottom:26px">
+            <a href="#" style="font-size:13.5px;color:#9aa0ab" style-hover="color:#e7e9ee">← New path</a>
+            <a href="#" style="font-size:13.5px;color:#9aa0ab" style-hover="color:#e7e9ee">↺ Reset path</a>
+          </div>
+
+          <div style="position:relative;padding-left:22px;display:flex;flex-direction:column;gap:12px">
+            <div style="position:absolute;left:0;top:6px;bottom:16px;width:3px;border-radius:999px;background:linear-gradient(#4a90d9,#7bb0cf 45%,#a0d9b4)"></div>
+            <div style="position:absolute;left:-2px;bottom:0;font-size:10px;line-height:1;color:#a0d9b4">▾</div>
+
+            <div style="background:#181a1f;border:1px solid #3b4048;border-radius:12px;padding:13px 16px;box-shadow:inset 0 1px 0 rgba(231,233,238,.05);display:flex;align-items:center;gap:14px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#2b3340 0 6px,#232a35 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7d838e;margin-bottom:5px">Starting artist</div>
+                <div style="font-size:16.5px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Nirvana</div>
+                <div style="margin-top:3px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Come As You Are</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+
+            <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:11px 16px 0;overflow:hidden"><div style="display:flex;align-items:center;gap:14px" style-hover="border-color:#343841">
+              <div style="flex:none;width:48px;height:48px;border-radius:8px;background:repeating-linear-gradient(115deg,#33302e 0 6px,#2a2725 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16.5px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Soundgarden</div>
+                <div style="margin-top:3px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Black Hole Sun</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+              </div>
+              <div style="margin:11px -16px 0;height:36px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+            </div>
+
+            <div style="background:#181a1f;border:1px solid #343841;border-radius:12px;padding:11px 16px 0;overflow:hidden"><div style="display:flex;align-items:center;gap:14px">
+              <div style="flex:none;width:48px;height:48px;border-radius:8px;background:repeating-linear-gradient(115deg,#2e3138 0 6px,#262930 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16.5px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Screaming Trees</div>
+                <div style="margin-top:3px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Nearly Lost You</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+              </div>
+              <div style="margin:11px -16px 0;height:36px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+            </div>
+
+            <div style="background:rgba(74,144,217,.13);border:1px solid rgba(74,144,217,.34);border-radius:12px;padding:11px 16px 0;overflow:hidden"><div style="display:flex;align-items:center;gap:14px">
+              <div style="flex:none;width:48px;height:48px;border-radius:8px;background:repeating-linear-gradient(115deg,#2b3644 0 6px,#242d39 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16.5px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Mazzy Star</div>
+                <div style="margin-top:3px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Fade Into You</div>
+                <div style="margin-top:4px;font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#4a90d9">▮▮▮ now playing</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;gap:3.5px;cursor:pointer"><span style="display:block;width:3.5px;height:14px;background:#fff;border-radius:1px"></span><span style="display:block;width:3.5px;height:14px;background:#fff;border-radius:1px"></span></div>
+              </div>
+              <div style="margin:11px -16px 0;height:36px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+            </div>
+
+            <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:11px 16px 0;overflow:hidden"><div style="display:flex;align-items:center;gap:14px" style-hover="border-color:#343841">
+              <div style="flex:none;width:48px;height:48px;border-radius:8px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;color:#4b515b;font-size:18px;font-weight:500">B</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16.5px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Beach House</div>
+                <div style="margin-top:3px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Space Song</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#5b9ce0;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+              </div>
+              <div style="margin:11px -16px 0;background:#14161b;border-top:1px solid #23262d;padding:12px 16px 14px">
+                <div style="font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#6f7580;margin-bottom:10px">Rebuild the path…</div>
+                <div style="display:flex;gap:8px">
+                  <div style="flex:1;display:flex;align-items:baseline;gap:8px;padding:10px 13px;border-radius:8px;background:#181a1f;border:1px solid #2a2d34;cursor:pointer" style-hover="border-color:#4a90d9;background:rgba(74,144,217,.10)">
+                    <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Steer away</span><span style="font-size:11.5px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">less like this sound</span>
+                  </div>
+                  <div style="flex:1;display:flex;align-items:baseline;gap:8px;padding:10px 13px;border-radius:8px;background:rgba(74,144,217,.10);border:1px solid #4a90d9;cursor:pointer">
+                    <span style="font-size:13.5px;color:#e7e9ee;white-space:nowrap">Go deeper</span><span style="font-size:11.5px;color:#7d838e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">something more obscure</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#181a1f;border:1px solid #2a2d34;border-radius:12px;padding:11px 16px 0;overflow:hidden"><div style="display:flex;align-items:center;gap:14px">
+              <div style="flex:none;width:48px;height:48px;border-radius:8px;background:repeating-linear-gradient(115deg,#2c2f36 0 6px,#25282e 6px 12px);opacity:.75"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:16.5px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cranes</div>
+                <div style="margin-top:3px;font-size:12.5px;color:#6f7580;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">No preview available</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#20232a;border:1px solid #2a2d34;display:flex;align-items:center;justify-content:center;cursor:default"><span style="display:block;width:0;height:0;border-left:11px solid #3c414a;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+              </div>
+              <div style="margin:11px -16px 0;height:36px;background:#14161b;border-top:1px solid #23262d;display:flex;align-items:center;justify-content:center;gap:6px;color:#7d838e;font-size:12.5px;cursor:pointer" style-hover="color:#4a90d9;background:rgba(74,144,217,.07)">Not this step ▾</div>
+            </div>
+
+            <div style="background:#181a1f;border:1px solid #3b4048;border-radius:12px;padding:13px 16px;box-shadow:inset 0 1px 0 rgba(231,233,238,.05);display:flex;align-items:center;gap:14px">
+              <div style="flex:none;width:52px;height:52px;border-radius:9px;background:repeating-linear-gradient(115deg,#2c3a33 0 6px,#25302b 6px 12px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7d838e;margin-bottom:5px">Destination artist</div>
+                <div style="font-size:16.5px;font-weight:600;color:#e7e9ee;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cocteau Twins</div>
+                <div style="margin-top:3px;font-size:12.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cherry-Coloured Funk</div>
+              </div>
+              <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:0;height:0;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:none;background:#181a1f;border-top:1px solid #2a2d34;padding:14px 0;display:flex;justify-content:center">
+        <div style="width:620px;display:flex;align-items:center;gap:13px">
+          <div style="flex:none;width:36px;height:36px;border-radius:999px;background:#4a90d9;display:flex;align-items:center;justify-content:center;gap:3px;cursor:pointer" style-hover="background:#5b9ce0"><span style="display:block;width:3px;height:12px;background:#fff;border-radius:1px"></span><span style="display:block;width:3px;height:12px;background:#fff;border-radius:1px"></span></div>
+          <div style="flex:1;min-width:0;font-size:13.5px;color:#9aa0ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Mazzy Star — Fade Into You</div>
+        </div>
+      </div>
+    </div>
+  </x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1000}}">
+class Component extends DCLogic {
+  renderVals() {
+    const rows = [
+      { name: "Nirvana", note: "— US grunge band" },
+      { name: "Nirvana", note: "— UK psych rock, 1965" },
+      { name: "Nirvana 2002", note: "— Swedish death metal" },
+      { name: "Nirvanna The Band The Show", note: "" },
+    ];
+    const skeletons = [
+      { w1: "62%", w2: "44%", op: 1 },
+      { w1: "48%", w2: "56%", op: 0.82 },
+      { w1: "70%", w2: "38%", op: 0.62 },
+      { w1: "54%", w2: "48%", op: 0.42 },
+    ];
+    return {
+      deskW: 1180, deskH: 760,
+      tabs: [{ title: "Artist Path" }],
+      skeletons,
+      results: rows.map((r, i) => ({ ...r, bg: i === 0 ? "rgba(74,144,217,.10)" : "transparent" })),
+    };
+  }
+}
+</script>
+</body>
+</html>
