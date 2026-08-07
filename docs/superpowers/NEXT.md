@@ -12,13 +12,180 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-06 (later), when A CLIP COVER-ART DEFECT WAS FIXED, DEPLOYED AND
-MERGED, and a serious DEPLOY defect (`DEP-34`) was found and documented. PR #85 IS MERGED at
-`fee46e2`, so production and `main` now agree. THE NEXT ACTION IS THE OWNER'S AND IT IS USE,
-NOT WORK: the queued hand test. `DEP-34-FIX` is open and is his. Nothing is blocked and no
-session owes anything.**
+**Last updated: 2026-08-06 (night, later), when the RULED RE-RUN HAPPENED: `TCR-` ran to
+completion under externally anchored gates and NOTHING READS ENRICHED.** **The co-credit
+investigation is CLOSED — three mechanisms tried, none explains the class the owner saw.**
+**Nothing was adopted, no default changed, and no shipped code was touched.** **THE NEXT
+ACTION IS THE OWNER'S, and nothing is blocked:** his deferred **Option C (same-name
+population probe) is now UNBLOCKED** by the re-run having happened; the two queued hand
+tests remain outstanding and are still his; `DEP-34-FIX` is open and is his.
 
 ---
+
+> ## ✅ THE `TCR-` RE-RUN IS COMPUTED, 2026-08-06 (night, later) — ALL GATES PASSED, NO ENRICHMENT ANYWHERE. **The next action is the OWNER'S: nothing is blocked, and Option C is now unblocked.**
+>
+> **The owner's Option A ruling was executed as ruled:** a NEW pre-registration
+> (`specs/2026-08-06-thin-catalogue-rerun-preregistration.md`, `TCR-`, committed with its
+> live-fetched anchors before the counter ran), a fresh session, the fired `TCE-` record
+> untouched. **`TCR-G1` passed 5 of 5 externally anchored cells** — total live↔dump drift
+> across four orders of magnitude was one release-group — **and the outcomes computed in
+> both arms.**
+>
+> **The result, in one sentence: artists with nothing of their own recorded do NOT crowd
+> the top of similar-lists — every licensed signal points the opposite way** (arm A's
+> supplements read *depleted*; arm B's primary read is barred by the pinning gate exactly
+> as predicted, which is a finding about the drop filters, not a fault). **⚠ No
+> pre-registered branch fires as written** — a recorded gap in the carried branch table
+> (`C1` null while `C3` landed beyond null at depleted) — **but both adjacent branches
+> carry the identical consequence, so the closure is licensed: the thin-catalogue
+> hypothesis is unsupported, and the co-credit investigation closes with three mechanisms
+> tried (`CCR-`, `RCC-`, `TCR-`) and none explaining the class.** Read the results
+> README's §4 before citing any branch.
+>
+> **⚠ The same-name POPULATION question is STILL OPEN and was NOT touched:** the
+> pre-registered eyeball read found top contributors dominated by **correctly resolved
+> credited personnel** (the `CAU-` class), not same-name junk — that neither surfaces nor
+> closes the population question. **Option C was deferred "until after the re-run"; the
+> re-run has happened, so scheduling it is now purely his call.**
+>
+> **Figures are owned by `builder/analysis/2026-08-06-tcr-thin-catalogue-rerun/` — cited,
+> never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-tcr-rerun.md`](2026-08-06-HANDOFF-tcr-rerun.md). Reasoning:
+> [`2026-08-06-tcr-rerun-execution-log.md`](2026-08-06-tcr-rerun-execution-log.md).
+> Governing document: `specs/2026-08-06-thin-catalogue-rerun-preregistration.md`. Branch
+> `cocredit-relationship-probe`, **draft PR #87 — NOT merged; merging it is his call and
+> the natural next repo action.**
+>
+> **The stale Vite server the previous block flagged (port 5174, PID 249084) is GONE** —
+> verified at this closeout; nothing further is owed on it.
+>
+> ---
+
+> ## ~~▶ `TCE-` IS VOID — ITS GATE FIRED, 2026-08-06 (night). **The next action is WORK, and the owner has RULED its remit: RE-RUN under a NEW pre-registration, fresh session.**~~ *(DONE — the ruled re-run happened and is the block above, which owns current state. The `TCE-` record itself remains VOID and untouched, as ruled.)*
+>
+> **The owner's decision, taken 2026-08-06 (night) and recorded as HIS — do not re-litigate it:**
+>
+> - **Option A: `TCE-` is re-run under a NEW pre-registration** — **not** an amendment — with
+>   **gate thresholds anchored on externally measured values**, by a **fresh session**.
+> - **The fired `TCE-` record STANDS UNTOUCHED.** The gate firing is the record. Do not amend
+>   `TCE-G1`, do not re-band it, do not retro-fit criteria to it.
+> - **Option C (a same-name POPULATION probe) is DEFERRED until after the re-run.**
+>   Deliberately. **Not abandoned and not closed.**
+> - **The replacement pre-registration was deliberately NOT drafted** by the retiring session.
+>   Its absence is intentional, not an oversight.
+>
+> **What happened.** Three mechanisms have now been tried against the owner's observed class.
+> `CCR-` (band membership) and `RCC-` (shared recording credits) both returned null. `TCE-`
+> (thin catalogue) **never produced an outcome at all**: `TCE-G1`, its instrument-validation
+> gate, ran first and alone and **one of four cells failed**, so the probe is **VOID** and the
+> run stopped at phase 3 of 7. **There is no `TCE-C1`/`C2`/`C3`/`C4`/`C5`, no `Δ_R`, and no
+> branch may be inferred.**
+>
+> **⚠ The instrument is CORRECT and the threshold was wrong — both halves travel together.**
+> The dump counter agrees **exactly** with the live MusicBrainz API and returns 0 for the
+> motivating case; the failing bar was set by reasoning from a *recording* count without
+> checking what it implies for *release-groups*. **That does not un-void the probe**, and a
+> threshold corrected after seeing the value it failed on is not a threshold. Recalibrating
+> after a gate fires has a precedent here — `MSW-G3` — and there too it was the owner's call.
+>
+> **⚠ THE LAURA LEE PUZZLE IS PARTIALLY DISCHARGED, AND THE HALVES MUST NOT BE COLLAPSED.** The
+> same-name collision hypothesis is **dead for Laura Lee** — both Laura Lees resolve separately
+> with disjoint coherent lists, so **`BYP-13` is not operating on the graph's edges** — and the
+> case cannot reach a user anyway, being dropped from the adopted artifact. **The POPULATION
+> question is OPEN**: one correctly-resolved pair demonstrates nothing about a rate. Struck in
+> place at the previous execution log's §6 item 1.
+>
+> **⚠ New evidence pointing at that open item, found by accident.** MusicBrainz **itself**
+> mis-files between the two Laura Lees, inconsistently across levels — the *recording* of *Not
+> Up for Discussion* under the Khruangbin member, the *release-group* under the soul singer. So
+> **`TCE-G1`'s first cell passed partly because of a mis-filing.** `n = 1`; it licenses no rate
+> and is **NOT** evidence for the thin-catalogue mechanism.
+>
+> **Figures are owned by the three `builder/analysis/2026-08-06-{laura-lee-closure,
+> tce-c1-statistic-behaviour,tce-thin-catalogue}/` directories — cited, never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-tce-void.md`](2026-08-06-HANDOFF-tce-void.md). Reasoning:
+> [`2026-08-06-tce-thin-catalogue-execution-log.md`](2026-08-06-tce-thin-catalogue-execution-log.md)
+> — **its §7 lists what a re-run must not repeat and is the section to read before drafting.**
+> Governing document (VOID, retained): `specs/2026-08-06-thin-catalogue-edge-preregistration.md`
+> with `TCE-AM1` and `TCE-AM2`. Branch `cocredit-relationship-probe`, **draft PR #87 — NOT
+> merged.**
+>
+> **⚠ One thing needs the owner and is not blocked on anything:** a **stale Vite dev server on
+> port 5174, PID 249084**, started 08:24 and missed by the earlier sweep, which checked 5173 and
+> 8000 only. Nothing queued needs a local server. The retiring session was blocked from stopping
+> it; the command is in the handoff.
+>
+> ---
+
+---
+
+> ## ✅ THE CO-CREDIT INVESTIGATION IS COMPLETE, 2026-08-06 (night) — TWO NULLS, NOTHING ADOPTED. ~~**The next action is the OWNER'S and it is USE: the two queued hand tests, unchanged.**~~ *(SUPERSEDED on next actions by the block above: its open item 1 was taken, and the next action is now ruled WORK. **The two queued hand tests are still outstanding and still his** — that half is unchanged, only its ranking as "the next action" is.)*
+>
+> **The owner observed that novel artists arriving at depth looked disproportionately like solo
+> acts of known bands, and hypothesised that ListenBrainz over-weights similarity between
+> artists who record together.** His worked case: Laura Lee, a Khruangbin member with no solo
+> releases, at rank 2 on Leon Bridges' list. **The mechanism is confirmed at the source**
+> (`LBS-1`: a session pairs listens whose artists *and* credits differ, weight 1 main / 0.25
+> featured) **and is confirmed to operate** — but **two independent probes decline to attribute
+> the class he saw to it.**
+>
+> - **`CCR-` — `null`, and INSTRUMENT-LIMITED.** `inc=artist-rels` carries band membership, not
+>   shared recording credits, so **Laura Lee scores `False` on it**. **Read as: untested at
+>   population scale, and equally unsupported. Both halves travel together** — do not read it
+>   as evidence against the hypothesis.
+> - **`RCC-` — `null`, and the instrument WAS validated** (it finds the Khruangbin/Leon Bridges
+>   collaboration). `RCC-C2` came back `general` with **the sign opposite to the prediction**:
+>   ordinary obscure artists show *more* co-credit at rank 1 than the class does.
+> - **B1 (the `p99_log_clip` rescale) — descriptive, no pre-registration by design.** It
+>   **corrected an overstatement made earlier in the same session**: clipping is minor, ordering
+>   survives, and **a rescale change is NOT a low-risk win.**
+>
+> **Figures are owned by the three `builder/analysis/2026-08-06-*` directories — cited, never
+> restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-06-HANDOFF-cocredit-investigation.md`](2026-08-06-HANDOFF-cocredit-investigation.md).
+> Reasoning: [`2026-08-06-cocredit-investigation-execution-log.md`](2026-08-06-cocredit-investigation-execution-log.md).
+> Governing documents: `specs/2026-08-06-cocredit-relationship-preregistration.md` and
+> `specs/2026-08-06-shared-recording-preregistration.md` (the latter carrying `RCC-AM1`).
+> Branch `cocredit-relationship-probe`, **draft PR #87 — NOT merged.**
+>
+> **⚠ THIS SESSION RETIRED MID-FLIGHT on the degradation tell**, after four file-or-design
+> selection errors — **all four caught and corrected in-session, none reaching a committed
+> document uncorrected.** Its handoff is written in the enumerated form: **read its lists
+> rather than trusting its judgement**, and note it carries figures that exist in **no** other
+> file and will be lost if not re-run.
+>
+> **Open, each with a success condition in the execution log §6:** ~~the **Laura Lee puzzle**
+> (her 214 edge is not a co-credit artefact under the validated definition — a same-name MBID
+> collision is live but weakened; **if it holds it is `BYP-13` reaching the graph's edges
+> rather than a clip**)~~, **B2** (does an alternative rescale change which artists appear —
+> testable without a rebuild, needs a pre-registration), and the **duplicate-artwork detector**
+> for `CLIP-1`.
+>
+> > **◐ THE LAURA LEE PUZZLE IS STRUCK HERE AND ONLY HALF-DISCHARGED — 2026-08-06 (night).**
+> > The same-name collision hypothesis is **DEAD for Laura Lee** (so **`BYP-13` is NOT reaching
+> > the graph's edges**, and she is dropped from the adopted artifact anyway), and **OPEN as a
+> > population question** — one correctly-resolved pair measures no rate. **Do not collapse
+> > those two halves in either direction.** Owner's ruling: deferred until after the `TCE-`
+> > re-run. Detail in the top block; struck in place at the previous execution log's §6 item 1.
+> > *(Added by the closeout audit: this retained block's "superseded on next actions" line
+> > updates the ranking, not this claim, and a reader landing here from a citation would have
+> > read the item as simply open.)*
+>
+> **⚠ CLOSED, and not to be re-litigated: widening the drop rule.** The owner ruled it out
+> 2026-08-06 — **he does not think Andrew VanWyngarden or Zach Condon should have been dropped**
+> — and two nulls now point the same way. `ULF-` already catches the clearest cases.
+>
+> **`ULF-3` was RE-TESTED at this closeout rather than copied forward, per the instruction
+> below: it remains HALF-DUE, unchanged.** Era-pinned probes still name the old flags and all
+> three flags are still live in `BuilderConfig`.
+>
+> ---
 
 > ## ✅ THE CLIP COVER-ART DEFECT IS FIXED, LIVE AND MERGED, 2026-08-06 (later). **The next action is the OWNER'S and it is USE: the queued hand test.** `DEP-34-FIX` is open and is his.
 >

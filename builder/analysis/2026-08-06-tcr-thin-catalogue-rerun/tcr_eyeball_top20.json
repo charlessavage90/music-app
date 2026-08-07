@@ -1,0 +1,3606 @@
+{
+ "A": [
+  {
+   "reference_mbid": "a0494c21-5bc6-4267-88b7-36ab879552d7",
+   "reference_name": "Spyda",
+   "expected_mid_p": 0.999989,
+   "expected_thin_in_top10": 7.0,
+   "thin_total": 14,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "beff21d3-88c7-4ee0-8b7a-40b6db22c6d7",
+     "name": "Pendulum",
+     "score": 902.0,
+     "release_groups": 94,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "ca8f5844-3ab9-4071-bdc3-376ca2f44a65",
+     "name": "Rob Swire",
+     "score": 728.0,
+     "release_groups": 7,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "6c53d3b5-c533-4ed3-97a5-cb2deeb04d8f",
+     "name": "Peredur ap Gwynedd",
+     "score": 649.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "58095538-ba0e-4b01-a0a0-ff220fbf353b",
+     "name": "Andrew Francis Goddard",
+     "score": 531.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "33237951-c58d-4951-9663-26883c685d3f",
+     "name": "Jon Shenoy",
+     "score": 299.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "d160804b-0cfa-42b3-9089-f11e876930bb",
+     "name": "Gareth McGrillen",
+     "score": 283.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "38cda9ad-6020-4a63-95cb-6e41870a1123",
+     "name": "Jasmine Yee",
+     "score": 269.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "e1e86dcd-15a3-4df2-9ecf-172d1ef2c58f",
+     "name": "Paul Kodish",
+     "score": 246.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "7f522b57-4bcc-4cb8-b438-a5c0ddf4ab57",
+     "name": "Craig Wild",
+     "score": 237.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "089d1fca-4c56-448a-a5bd-bd03d81133e5",
+     "name": "Andy Greenwood",
+     "score": 130.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "60e4f021-bf91-41da-918f-615d73cc9da1",
+   "reference_name": "Cocc Pistol Cree",
+   "expected_mid_p": 0.999984,
+   "expected_thin_in_top10": 7.0,
+   "thin_total": 11,
+   "list_len": 69,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "84ca8fa4-7cca-4948-a90a-cb44db29853d",
+     "name": "clipping.",
+     "score": 462.0,
+     "release_groups": 40,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "2cdc3e37-c902-4cf4-8cf0-0f2e64067f40",
+     "name": "Derrick Estrada",
+     "score": 307.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "eedbacff-a9f1-4720-9d8f-53d212c1cf43",
+     "name": "Casey Anderson",
+     "score": 278.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "39964eb9-3bf1-42c2-9cd6-b14079aef98c",
+     "name": "Gangsta Boo",
+     "score": 248.0,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "aabe0058-6a48-4aa9-b2c3-36d68eba7ffe",
+     "name": "Nico Cary",
+     "score": 241.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "a566ddca-c283-495d-b633-047c7c142fbd",
+     "name": "Frank Chiaro",
+     "score": 173.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "04868bd3-1338-4088-9b5d-85e3bacdf214",
+     "name": "Karissa Lee",
+     "score": 141.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "f9133036-ab3d-4e97-bd11-7a2c98ad148a",
+     "name": "Death Grips",
+     "score": 126.0,
+     "release_groups": 35,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "f4304303-c66b-4665-b7ef-275c33664e6c",
+     "name": "Tom Erbe",
+     "score": 112.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "081c6fad-e20d-49f8-bd34-7289abc929b0",
+     "name": "Elizabeth Hayhurst",
+     "score": 106.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "14ec11c6-d275-405e-999b-d7629633e51d",
+   "reference_name": "Adonis Shropshire",
+   "expected_mid_p": 0.999983,
+   "expected_thin_in_top10": 5.0,
+   "thin_total": 5,
+   "list_len": 64,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "e0140a67-e4d1-4f13-8a01-364355bee46e",
+     "name": "Justin Bieber",
+     "score": 113.0,
+     "release_groups": 162,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "95203764-45d1-4bb8-bd54-d5b87a83d36f",
+     "name": "Kuk Harrell",
+     "score": 71.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "ae5ea89c-3217-4a67-8b86-b0d03f8e242b",
+     "name": "Tim Carmon",
+     "score": 68.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "4da8ac8e-8c0a-4a8d-a962-76b6465f41aa",
+     "name": "Adam Messinger",
+     "score": 62.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "cfbc0924-0035-4d6c-8197-f024653af823",
+     "name": "Nas",
+     "score": 57.0,
+     "release_groups": 180,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "f5dfa020-ad69-41cd-b3d4-fd7af0414e94",
+     "name": "Wiz Khalifa",
+     "score": 54.0,
+     "release_groups": 221,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "d94fb9c5-b962-469f-bcac-2c513378ba27",
+     "name": "Tom Strahle",
+     "score": 42.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "845f06df-022b-4c1c-898b-01bbb083218f",
+     "name": "S’Vone",
+     "score": 39.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "ac9a487a-d9d2-4f27-bb23-0f4686488345",
+     "name": "Lil Wayne",
+     "score": 39.0,
+     "release_groups": 367,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "942a9807-9c1a-4a0e-a285-1fde2c5be9d1",
+     "name": "Big Sean",
+     "score": 36.0,
+     "release_groups": 115,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "738f1b1b-ff9c-4156-b509-95060fe47b52",
+   "reference_name": "Sussan Deyhim",
+   "expected_mid_p": 0.999979,
+   "expected_thin_in_top10": 6.0,
+   "thin_total": 10,
+   "list_len": 96,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "0abc0280-7b0a-4fdc-bd18-39105cf19971",
+     "name": "Lucas Richman",
+     "score": 168.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "42cc5161-adfb-418f-85a1-586cf76d91cd",
+     "name": "Cait McWhir",
+     "score": 130.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "20fe3257-4c49-4518-827b-ae01fb8a0062",
+     "name": "Jerome Kavanagh",
+     "score": 124.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "69c045f9-2887-4400-a880-924e361b2e97",
+     "name": "Dulce Pontes",
+     "score": 123.0,
+     "release_groups": 15,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "299597ae-3a20-4bf1-973e-03704af69f6b",
+     "name": "Royal Philharmonic Orchestra",
+     "score": 121.0,
+     "release_groups": 1201,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "a6859eea-b92a-44fc-a60b-32c5f8c7f76c",
+     "name": "Maurice Soso-Williams",
+     "score": 117.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "5a74a5c3-7f6e-4c17-9aa9-528241e453eb",
+     "name": "Jia Ruhan",
+     "score": 115.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "c76368d4-12f5-4f84-99b3-fa6dccc81a63",
+     "name": "The Purcell Singers",
+     "score": 113.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "c8dbbadb-f5f1-449c-8827-43d00a73fe89",
+     "name": "DJ Spooky",
+     "score": 36.0,
+     "release_groups": 51,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "bdb47bdb-e832-49fc-80f1-ebaeb988be9a",
+     "name": "Esa Puolakka",
+     "score": 30.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "04ccdbef-0f32-403a-8ae2-bdcf5bb3265e",
+   "reference_name": "Guido “Quintessence” Maat",
+   "expected_mid_p": 0.999973,
+   "expected_thin_in_top10": 6.0,
+   "thin_total": 8,
+   "list_len": 67,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "4ef71a82-d57a-4f15-a421-4f29bed3bf3a",
+     "name": "Arts the Beatdoctor",
+     "score": 108.0,
+     "release_groups": 10,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "ae0930c6-11a5-4d9d-9235-2955f5291242",
+     "name": "Gijs Huijs",
+     "score": 107.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "28c3636a-744e-427b-a505-e424a0324ecc",
+     "name": "Skiggy Rapz",
+     "score": 98.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "74bf1b5d-2883-4595-afe3-c775250382c4",
+     "name": "Esther",
+     "score": 92.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "b7cc21f7-a141-4daf-b42f-5442d979d615",
+     "name": "DJ PCM",
+     "score": 82.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "e7286d0c-b984-4579-86ff-58d5d6b4eec9",
+     "name": "The Proov",
+     "score": 76.0,
+     "release_groups": 4,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "04fef166-cd6e-4fff-9c8d-26544d95da79",
+     "name": "Raina Mooyman",
+     "score": 63.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "33972022-56a1-4b31-8084-e69d008d18b8",
+     "name": "Mick John-Hopkins",
+     "score": 61.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "7d6e4391-2bb4-4d88-b031-718d2074e412",
+     "name": "Vincent van Haperen",
+     "score": 58.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "c0170663-daf4-4445-8ee8-64e0415d38a8",
+     "name": "Damu the Fudgemunk",
+     "score": 49.0,
+     "release_groups": 83,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "40ff8f06-f160-4841-b9ae-f4c6cac998f1",
+   "reference_name": "DarkeSword",
+   "expected_mid_p": 0.999957,
+   "expected_thin_in_top10": 10.0,
+   "thin_total": 42,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "14902ad3-bcce-424d-832e-d19a6c8ac8f1",
+     "name": "Claado Shou",
+     "score": 161.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "d2b2b0ee-2673-4b8e-8c55-7f0c46d1c114",
+     "name": "ellywu2",
+     "score": 147.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "8c99f6f2-c775-4ad4-a0e9-d707460e57d0",
+     "name": "sephfire",
+     "score": 145.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "9e512e78-03e9-4063-b131-12395706d986",
+     "name": "Sleepy Emp",
+     "score": 144.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "c9a857d0-accc-40ef-ae5c-99847abcd707",
+     "name": "Rellik",
+     "score": 144.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "d4cbf6ae-2424-4794-a928-4b07baa5c4d4",
+     "name": "Red Omen",
+     "score": 136.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "c0136fac-f51d-4da2-a735-817988713777",
+     "name": "SirRus",
+     "score": 135.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "21a16438-ceee-46a8-ae87-1d704ca2fb0a",
+     "name": "PLBenjaminZ",
+     "score": 131.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "7e79c2f3-3bb6-42ae-ae73-8f5a68daf597",
+     "name": "LunarHeart",
+     "score": 130.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "251d7af1-66cf-4512-962d-678f9e8c269e",
+     "name": "Russell Cox",
+     "score": 121.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "39964eb9-3bf1-42c2-9cd6-b14079aef98c",
+   "reference_name": "Gangsta Boo",
+   "expected_mid_p": 0.999957,
+   "expected_thin_in_top10": 5.5,
+   "thin_total": 8,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "84ca8fa4-7cca-4948-a90a-cb44db29853d",
+     "name": "clipping.",
+     "score": 365.0,
+     "release_groups": 40,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "2cdc3e37-c902-4cf4-8cf0-0f2e64067f40",
+     "name": "Derrick Estrada",
+     "score": 260.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "60e4f021-bf91-41da-918f-615d73cc9da1",
+     "name": "Cocc Pistol Cree",
+     "score": 248.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "eedbacff-a9f1-4720-9d8f-53d212c1cf43",
+     "name": "Casey Anderson",
+     "score": 247.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "aabe0058-6a48-4aa9-b2c3-36d68eba7ffe",
+     "name": "Nico Cary",
+     "score": 231.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "3d254f1e-7d18-431b-baeb-68e57695dfdb",
+     "name": "Blood Orange",
+     "score": 218.0,
+     "release_groups": 41,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "1a8bec5d-4c47-490e-a443-e34222863284",
+     "name": "Ian Isiah",
+     "score": 159.0,
+     "release_groups": 5,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "a566ddca-c283-495d-b633-047c7c142fbd",
+     "name": "Frank Chiaro",
+     "score": 157.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "b95ce3ff-3d05-4e87-9e01-c97b66af13d4",
+     "name": "Eminem",
+     "score": 143.0,
+     "release_groups": 306,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "04868bd3-1338-4088-9b5d-85e3bacdf214",
+     "name": "Karissa Lee",
+     "score": 142.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "fefeb63b-9430-4fe8-a332-0c400351af50",
+   "reference_name": "Selah Sue",
+   "expected_mid_p": 0.999946,
+   "expected_thin_in_top10": 6.0,
+   "thin_total": 10,
+   "list_len": 82,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "9869e6d3-b95f-4251-bad6-a9bebb9c460c",
+     "name": "Itai Shapira",
+     "score": 187.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "96f6ec97-998c-4991-b836-7b71feb3ca6f",
+     "name": "TOKiMONSTA",
+     "score": 136.0,
+     "release_groups": 69,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "4cbfd7ef-8c9e-4eef-b87d-ac4b3224d5d6",
+     "name": "Clément Dumoulin",
+     "score": 132.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "7c2c426a-066a-442b-9b29-60c468dfc344",
+     "name": "Chris Meredith",
+     "score": 103.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "c58c7817-420d-4268-bccf-f3d90565e2e6",
+     "name": "Yuna",
+     "score": 102.0,
+     "release_groups": 53,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "251a4779-72cd-4482-b9ca-cbd89bc1e165",
+     "name": "MNDR",
+     "score": 89.0,
+     "release_groups": 28,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "19a6cb68-df05-43a3-841c-768b7d11cdbb",
+     "name": "Yannick Werther",
+     "score": 88.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "e2f70f10-3b8e-4af1-9a0e-bba417efd993",
+     "name": "Pieterjan Seaux",
+     "score": 80.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "0bbc3882-bce8-4254-9f8b-a0ddf9a20225",
+     "name": "SAINTS",
+     "score": 73.0,
+     "release_groups": 3,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "3fa6b006-3727-4aab-8f1b-bf7dee82ed31",
+     "name": "Peter Lesage",
+     "score": 72.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "989276c4-d2e8-4599-a2a0-c9ebeba73104",
+   "reference_name": "Beirut",
+   "expected_mid_p": 0.999943,
+   "expected_thin_in_top10": 7.0,
+   "thin_total": 17,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "0af78501-5647-4c18-9a0d-66ac8789e13b",
+     "name": "Beirut",
+     "score": 499.0,
+     "release_groups": 47,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "14aa6fea-2c78-4081-b227-b3cb04496f1c",
+     "name": "Kelly Pratt",
+     "score": 398.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "92daa35a-a91f-4e4d-b2ce-259262a911a4",
+     "name": "Jason Poranski",
+     "score": 354.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "f358bc90-dcb9-4ecb-bac6-55d52ba755c9",
+     "name": "Zach Condon",
+     "score": 312.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "696f3ecb-29ea-43f0-8bac-e1f01b33c013",
+     "name": "Nick Petree",
+     "score": 296.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "2b437c15-9a9b-49ab-b147-eb164764cf31",
+     "name": "Jon Natchez",
+     "score": 242.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "12ff16b0-0494-4a78-b084-cf911f67c0a6",
+     "name": "Perrin Cloutier",
+     "score": 183.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "5d30449d-7549-4b3d-b61b-454fcd2a6eba",
+     "name": "Luba B. Glade",
+     "score": 146.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "3b13c6dc-b94e-4e7b-b88f-e58dc7369c32",
+     "name": "Tracy Pratt",
+     "score": 102.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "e66bf4cf-011b-4279-a83b-7476f981022b",
+     "name": "Jeremy Barnes",
+     "score": 99.0,
+     "release_groups": 1,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "28c3636a-744e-427b-a505-e424a0324ecc",
+   "reference_name": "Skiggy Rapz",
+   "expected_mid_p": 0.999934,
+   "expected_thin_in_top10": 7.0,
+   "thin_total": 8,
+   "list_len": 35,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "4ef71a82-d57a-4f15-a421-4f29bed3bf3a",
+     "name": "Arts the Beatdoctor",
+     "score": 115.0,
+     "release_groups": 10,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "04ccdbef-0f32-403a-8ae2-bdcf5bb3265e",
+     "name": "Guido “Quintessence” Maat",
+     "score": 98.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "b7cc21f7-a141-4daf-b42f-5442d979d615",
+     "name": "DJ PCM",
+     "score": 83.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "ae0930c6-11a5-4d9d-9235-2955f5291242",
+     "name": "Gijs Huijs",
+     "score": 79.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "74bf1b5d-2883-4595-afe3-c775250382c4",
+     "name": "Esther",
+     "score": 78.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "e7286d0c-b984-4579-86ff-58d5d6b4eec9",
+     "name": "The Proov",
+     "score": 56.0,
+     "release_groups": 4,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "04fef166-cd6e-4fff-9c8d-26544d95da79",
+     "name": "Raina Mooyman",
+     "score": 53.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "33972022-56a1-4b31-8084-e69d008d18b8",
+     "name": "Mick John-Hopkins",
+     "score": 51.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "7d6e4391-2bb4-4d88-b031-718d2074e412",
+     "name": "Vincent van Haperen",
+     "score": 50.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "e6a409c0-498f-4c86-97ec-df5630ccebf9",
+     "name": "Sound Providers",
+     "score": 23.0,
+     "release_groups": 17,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "02808ac2-15ad-4997-a33c-00ae94203e89",
+   "reference_name": "King Diamond",
+   "expected_mid_p": 0.999934,
+   "expected_thin_in_top10": 8.0,
+   "thin_total": 24,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "4753fcb7-9270-493a-974d-8daca4e49125",
+     "name": "Volbeat",
+     "score": 425.0,
+     "release_groups": 38,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "8fc47c1b-166f-46ac-a856-bf5505b3c6b4",
+     "name": "Anders Pedersen",
+     "score": 344.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "26fea071-1c0b-42ce-870e-30ba92613272",
+     "name": "Rob Caggiano",
+     "score": 311.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "0e5d7259-c9d9-4be4-83a0-5b0015451537",
+     "name": "Paul Lamb",
+     "score": 226.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "56f55351-ba96-4dec-a328-3593cd4e4fc4",
+     "name": "Kaspar Boye-Larsen",
+     "score": 174.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "1f7f5020-38ae-4e74-bd05-efb876246924",
+     "name": "Michael Poulsen",
+     "score": 162.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "b8af1a40-805f-4fb1-89ee-af16fabcae0c",
+     "name": "Jacob Hansen",
+     "score": 126.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "54320d39-f3ef-493a-adbf-830fe432c474",
+     "name": "Jakob Øelund",
+     "score": 97.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "e2190b35-1181-44f6-8587-4c04123a6f30",
+     "name": "Lars Ulrich",
+     "score": 80.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "48ab7ebf-9ab5-4229-a7b4-9bb4b39ec2ba",
+     "name": "Kristian Pedersen",
+     "score": 73.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "2cdc3e37-c902-4cf4-8cf0-0f2e64067f40",
+   "reference_name": "Derrick Estrada",
+   "expected_mid_p": 0.999933,
+   "expected_thin_in_top10": 6.0,
+   "thin_total": 12,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "84ca8fa4-7cca-4948-a90a-cb44db29853d",
+     "name": "clipping.",
+     "score": 662.0,
+     "release_groups": 40,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "aabe0058-6a48-4aa9-b2c3-36d68eba7ffe",
+     "name": "Nico Cary",
+     "score": 440.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "eedbacff-a9f1-4720-9d8f-53d212c1cf43",
+     "name": "Casey Anderson",
+     "score": 360.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "60e4f021-bf91-41da-918f-615d73cc9da1",
+     "name": "Cocc Pistol Cree",
+     "score": 307.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "39964eb9-3bf1-42c2-9cd6-b14079aef98c",
+     "name": "Gangsta Boo",
+     "score": 260.0,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "a566ddca-c283-495d-b633-047c7c142fbd",
+     "name": "Frank Chiaro",
+     "score": 219.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "df9a2d98-2381-4806-9fef-130d350163a9",
+     "name": "Kill Rogers",
+     "score": 193.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "04868bd3-1338-4088-9b5d-85e3bacdf214",
+     "name": "Karissa Lee",
+     "score": 191.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "e3c6f5a0-f88b-4abf-a732-3639300f8726",
+     "name": "Ezra Buchla",
+     "score": 174.0,
+     "release_groups": 3,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "f9133036-ab3d-4e97-bd11-7a2c98ad148a",
+     "name": "Death Grips",
+     "score": 159.0,
+     "release_groups": 35,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "0c2253ba-592b-4444-8cd2-3238877ca112",
+   "reference_name": "Tom Chant",
+   "expected_mid_p": 0.999916,
+   "expected_thin_in_top10": 5.0,
+   "thin_total": 8,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "40e92a44-e092-4407-af42-42454cc0e568",
+     "name": "Simon Green",
+     "score": 1640.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "9a709693-b4f8-4da9-8cc1-038c911a61be",
+     "name": "Bonobo",
+     "score": 1596.0,
+     "release_groups": 86,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "f7533313-24a9-490a-a648-700167d42ae6",
+     "name": "Andreya Triana",
+     "score": 864.0,
+     "release_groups": 29,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "630662ea-1c7d-4208-99fd-ba3afec20f0c",
+     "name": "Amon Tobin",
+     "score": 567.0,
+     "release_groups": 128,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "27d7238a-740a-4996-9714-a52c96b28722",
+     "name": "Michael Simmonds",
+     "score": 566.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "4a5af281-3105-4abc-9730-a240557afd25",
+     "name": "Mark Brown",
+     "score": 564.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "560fb74f-18ee-48d7-85ce-644e02c2084d",
+     "name": "Mike Lesirge",
+     "score": 549.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "69158f97-4c07-4c4e-baf8-4e4ab1ed666e",
+     "name": "Boards of Canada",
+     "score": 506.0,
+     "release_groups": 41,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "a505bb48-ad65-4af4-ae47-29149715bff9",
+     "name": "Thievery Corporation",
+     "score": 471.0,
+     "release_groups": 67,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "c30eb533-5ad7-4ca1-8cde-0ad336f1be06",
+     "name": "Simon Janes",
+     "score": 444.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "5aa8b4de-5e87-40c1-b230-e29e415578ec",
+   "reference_name": "The Soul Stirrers",
+   "expected_mid_p": 0.999916,
+   "expected_thin_in_top10": 5.0,
+   "thin_total": 8,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "6c8fd0be-d961-454c-aee0-4366a6dbc993",
+     "name": "Sam Cooke",
+     "score": 231.0,
+     "release_groups": 152,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "11cb30c7-5ad6-4c7d-b6ec-ad7d2334d189",
+     "name": "Harold Battiste",
+     "score": 112.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "5be4e7d4-5d51-4175-9ad5-5962040dcafb",
+     "name": "William Green",
+     "score": 110.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "d7428cd3-8ee3-4fb6-84d0-c19ccf99d54d",
+     "name": "René Hall",
+     "score": 109.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "5d4a0b9e-73f2-40e7-a32e-ae73b7c610ab",
+     "name": "Jewell Grant",
+     "score": 86.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "82b1f5fd-cd31-41a9-b5d4-7e33f0eb9751",
+     "name": "Otis Redding",
+     "score": 58.0,
+     "release_groups": 106,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "6b4810be-48c6-4d4c-86cc-7ea3f206570c",
+     "name": "Magnificent Montague",
+     "score": 47.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+     "name": "The Beatles",
+     "score": 46.0,
+     "release_groups": 1042,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "dfd0c422-5000-44a4-899a-d0540fc4b140",
+     "name": "Jack Hale",
+     "score": 44.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "e22d2f66-881e-41ca-9356-544697ee5f90",
+     "name": "Etta James",
+     "score": 41.0,
+     "release_groups": 158,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "1b8892e1-9c68-4fa5-b2ef-4b2f9dea0c3b",
+   "reference_name": "Spencer Petersen",
+   "expected_mid_p": 0.999897,
+   "expected_thin_in_top10": 5.0,
+   "thin_total": 5,
+   "list_len": 45,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "c0efb1ee-e36f-4d52-971a-bd8ffec15442",
+     "name": "CID",
+     "score": 67.0,
+     "release_groups": 46,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "a7e175fe-4c11-4d85-8629-a4bcb417be68",
+     "name": "Mark Phillips",
+     "score": 48.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "19573749-6102-4592-ba18-4379edd28a12",
+     "name": "Steve Mits",
+     "score": 44.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "98c09f94-10b5-426c-b27a-44345bb54528",
+     "name": "Sasha Alex Sloan",
+     "score": 42.0,
+     "release_groups": 42,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "d1fc999f-6184-41a6-bcb1-7c59bf74a6e1",
+     "name": "K.Flay",
+     "score": 39.0,
+     "release_groups": 81,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "d6118f4a-6740-4737-802f-d244d60ef312",
+     "name": "Tamra Keenan",
+     "score": 39.0,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "a3299ed0-5b7d-48e6-9425-23a3d51d7660",
+     "name": "Axident",
+     "score": 38.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "56c4b861-0922-4c3a-a9b9-3bfcb00f8274",
+     "name": "Zedd",
+     "score": 33.0,
+     "release_groups": 104,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "d58ec3c8-79d3-4274-8497-d39d24111e1d",
+     "name": "Teesa Houston",
+     "score": 32.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "eb741820-2a73-4274-914e-f3a278831144",
+     "name": "Scott Shepard",
+     "score": 28.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "a1fdaced-c497-4606-9f6e-941489e58263",
+   "reference_name": "Indica",
+   "expected_mid_p": 0.99989,
+   "expected_thin_in_top10": 7.5,
+   "thin_total": 20,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "bbb36859-0d26-4d55-8e4d-423ba075cd00",
+     "name": "Emppu Vuorinen",
+     "score": 92.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "eace2373-31c8-4aba-9a5c-7bce22dd140a",
+     "name": "Within Temptation",
+     "score": 85.0,
+     "release_groups": 107,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "f6a8c215-8e5d-4def-94e2-3c0dff2f1463",
+     "name": "Nemesea",
+     "score": 60.0,
+     "release_groups": 20,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "bb9fe2b7-87fa-43e6-95ca-bc4592d8d5bc",
+     "name": "Christoph Schneider",
+     "score": 48.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "f487f515-a646-46d4-a720-e821f6ea4b5c",
+     "name": "Davy Mickers",
+     "score": 45.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "a2969a0a-54fd-48c3-99d3-ad9a407ec21a",
+     "name": "Nicka Hellenberg",
+     "score": 41.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "ab7798f1-bd73-4459-99f2-b53aaf19ca08",
+     "name": "Linda van Summeren",
+     "score": 41.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "e2190b35-1181-44f6-8587-4c04123a6f30",
+     "name": "Lars Ulrich",
+     "score": 40.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "f1d3816a-98ec-4886-bd7b-0e07d43cde8d",
+     "name": "Cordula Rhode",
+     "score": 40.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "88fb8736-9e6e-431a-b00b-3219921f4ae4",
+     "name": "Tom Sagar",
+     "score": 35.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "1768242d-c4dd-4ca1-91a2-d119d7571283",
+   "reference_name": "Jack McManus",
+   "expected_mid_p": 0.999879,
+   "expected_thin_in_top10": 6.0,
+   "thin_total": 13,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "35723b60-732e-4bd8-957f-320b416e7b7f",
+     "name": "Groove Armada",
+     "score": 224.0,
+     "release_groups": 131,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "fbd8b628-351a-49c6-9c28-f470c5ae0faa",
+     "name": "Jonathan White",
+     "score": 160.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "54517488-953a-4ca1-80b7-5f443ae14b99",
+     "name": "Richard Archer",
+     "score": 146.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "a37337bd-bcf4-412a-9cce-434ca7c41e87",
+     "name": "Andrew Derek Cocup",
+     "score": 142.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "5cc7ba74-df3c-4724-a464-5ba93f135f9e",
+     "name": "Columbia Label Girls Choir",
+     "score": 138.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "12ea1095-4c8c-431f-a7b8-967cc36ebcd1",
+     "name": "Alan Donohoe",
+     "score": 127.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "6afcc957-d742-41c6-ad0b-31b2f1967353",
+     "name": "Candi Staton",
+     "score": 126.0,
+     "release_groups": 59,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "1b4c4778-43a4-4983-9439-bb201bf84055",
+     "name": "Jeb Loy Nichols",
+     "score": 125.0,
+     "release_groups": 34,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "af54825a-fdb0-4d4f-9629-a770ee9e89d4",
+     "name": "David Gabriel",
+     "score": 124.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "b7b6125c-1e77-4738-8e81-36affa0adc18",
+     "name": "Greg Wilson",
+     "score": 114.0,
+     "release_groups": 19,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "684ad17f-6f6c-4f47-bf92-cf8e673d9da7",
+   "reference_name": "Leslie Brown Katz",
+   "expected_mid_p": 0.999852,
+   "expected_thin_in_top10": 5.0,
+   "thin_total": 5,
+   "list_len": 42,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "4183708f-9f2a-4e7f-a151-bb574b9695f1",
+     "name": "Bob McChesney",
+     "score": 95.0,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "388c4445-b9bf-49eb-816b-b6e2fddf1195",
+     "name": "Alicia Engley",
+     "score": 88.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "77f4caa5-79fd-4eff-b421-051856c14ce4",
+     "name": "Sai Ly Acosta",
+     "score": 85.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "c4b66f4d-40a0-43dc-bc6b-04ada5074267",
+     "name": "Scott Higgins",
+     "score": 76.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "31d3fad1-8a78-42af-b893-7a4fc62eb271",
+     "name": "Fonzi Thornton",
+     "score": 75.0,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "ad2b2fd5-0adc-4e3e-9318-37c0d56f26fd",
+     "name": "Irv Kramer",
+     "score": 39.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "fce81917-235e-4892-bf20-ad3a174545a9",
+     "name": "Ronald Folsom",
+     "score": 32.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+     "name": "The Beatles",
+     "score": 26.0,
+     "release_groups": 1042,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+     "name": "U2",
+     "score": 24.0,
+     "release_groups": 1263,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "e6de1f3b-6484-491c-88dd-6d619f142abc",
+     "name": "Hans Zimmer",
+     "score": 22.0,
+     "release_groups": 298,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "509f3c6d-eed9-4a34-9eb2-07f1f4a96f36",
+   "reference_name": "SAFE",
+   "expected_mid_p": 0.999818,
+   "expected_thin_in_top10": 5.0,
+   "thin_total": 9,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "60add5d1-45f0-4c49-9c6f-fff71d307996",
+     "name": "Jamil Digi Chammas",
+     "score": 153.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "d271d98b-3530-432d-b145-508067818644",
+     "name": "John Hill",
+     "score": 120.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "5b1b48f6-9d07-46b2-aea2-995ab94a4ab3",
+     "name": "D’Mile",
+     "score": 112.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "48b29598-4835-4f8f-829e-020fa052ad5d",
+     "name": "Justin Lucas",
+     "score": 105.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "7835d77e-3b0c-42b1-b279-2bbc9a9f6874",
+     "name": "Christina Chow",
+     "score": 102.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "3da7c19e-9e09-41c3-8420-d834f6c95f51",
+     "name": "Al Shux",
+     "score": 91.0,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "1bf4e7b6-8a5a-4bc7-a558-7ce3798af0cb",
+     "name": "John Blanda",
+     "score": 81.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "f4abc0b5-3f7a-4eff-8f78-ac078dbce533",
+     "name": "Billie Eilish",
+     "score": 75.0,
+     "release_groups": 100,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "cfa75366-4aaa-44bd-8a9f-3c36d55f8fb4",
+     "name": "Rome Fortune",
+     "score": 69.0,
+     "release_groups": 26,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "4947690a-5cbf-484f-bdcf-32b19130679a",
+     "name": "Kool A.D.",
+     "score": 37.0,
+     "release_groups": 49,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "066d8578-8ab1-4cff-a2f8-3b0ea6c45258",
+   "reference_name": "Joi",
+   "expected_mid_p": 0.999795,
+   "expected_thin_in_top10": 6.0,
+   "thin_total": 14,
+   "list_len": 100,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "f563a1a9-069b-41ed-8b3b-e1b1a6f5b34b",
+     "name": "André 3000",
+     "score": 306.0,
+     "release_groups": 27,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "cc9ee8e0-0ecb-4c97-943a-6a5478579949",
+     "name": "Donny Mathis",
+     "score": 277.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "84683370-5eae-418b-acd8-883ac028a8a0",
+     "name": "George Clinton",
+     "score": 233.0,
+     "release_groups": 46,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "da5b84bd-9b0d-4de6-b4a2-4216218b0991",
+     "name": "Martin Terry",
+     "score": 216.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "73fdb566-a9b1-494c-9f32-51768ec9fd27",
+     "name": "OutKast",
+     "score": 213.0,
+     "release_groups": 52,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "b60ee7a4-1f2d-4df7-aecc-b1b35fd32bf4",
+     "name": "T‐Mo",
+     "score": 200.0,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "eb5db64d-94ad-48b2-b3b8-597264b0ecd8",
+     "name": "Nathaniel Elder",
+     "score": 191.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "37bca299-1ef3-463a-93df-839e6b5f6913",
+     "name": "Masada",
+     "score": 174.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "1b90728d-a656-41eb-bc98-144336ecf68b",
+     "name": "LaMarquis Jefferson",
+     "score": 161.0,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "94a22333-1e30-444b-a4a8-8c20c71974b9",
+     "name": "Darian Emory",
+     "score": 151.0,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  }
+ ],
+ "B": [
+  {
+   "reference_mbid": "5ffb73c0-b739-4231-ba22-f8d361be1d45",
+   "reference_name": "菅野よう子",
+   "expected_mid_p": 0.996939,
+   "expected_thin_in_top10": 3.0,
+   "thin_total": 3,
+   "list_len": 50,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "b5536488-a4da-4e87-9779-d5351c00729d",
+     "name": "ORIGA",
+     "score": 0.9157377481460571,
+     "release_groups": 22,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "7b36bd95-064e-4501-8027-5bcdb9f4c0d3",
+     "name": "Gabriela Robin",
+     "score": 0.8892039656639099,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "c8ca9709-d333-45fd-b2bb-e2209568aeb2",
+     "name": "Ilaria Graziano",
+     "score": 0.885101854801178,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "2540c8a2-c5bb-48e2-b3e9-3d4de92de034",
+     "name": "Scott Matthew",
+     "score": 0.8582280278205872,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "b6c18308-82c7-4ec1-a42d-e8488bce6618",
+     "name": "坂本真綾",
+     "score": 0.8512677550315857,
+     "release_groups": 73,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "f420af95-837c-42a0-a2c7-9d96516ad903",
+     "name": "jillmax",
+     "score": 0.8111379146575928,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "f6586e5c-37b8-4d77-b25f-26622254a974",
+     "name": "Emily Curtis",
+     "score": 0.8001531362533569,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "542e5d96-b53f-4dbe-a8d2-5a2e8aef6c78",
+     "name": "SHANTI",
+     "score": 0.7925853729248047,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "67e344da-ec54-4e26-b2a4-8351d744a14c",
+     "name": "梶浦由記",
+     "score": 0.7890134453773499,
+     "release_groups": 121,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "c50e52e1-01f4-494d-b1ef-376fe3581d90",
+     "name": "川井憲次",
+     "score": 0.7868282794952393,
+     "release_groups": 245,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "b5536488-a4da-4e87-9779-d5351c00729d",
+   "reference_name": "ORIGA",
+   "expected_mid_p": 0.996939,
+   "expected_thin_in_top10": 3.0,
+   "thin_total": 3,
+   "list_len": 50,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "5ffb73c0-b739-4231-ba22-f8d361be1d45",
+     "name": "菅野よう子",
+     "score": 0.9157377481460571,
+     "release_groups": 112,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "c8ca9709-d333-45fd-b2bb-e2209568aeb2",
+     "name": "Ilaria Graziano",
+     "score": 0.8573186993598938,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "2540c8a2-c5bb-48e2-b3e9-3d4de92de034",
+     "name": "Scott Matthew",
+     "score": 0.8507919311523438,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "7b36bd95-064e-4501-8027-5bcdb9f4c0d3",
+     "name": "Gabriela Robin",
+     "score": 0.8488730788230896,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "f420af95-837c-42a0-a2c7-9d96516ad903",
+     "name": "jillmax",
+     "score": 0.7904525399208069,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "f6586e5c-37b8-4d77-b25f-26622254a974",
+     "name": "Emily Curtis",
+     "score": 0.7407214641571045,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "093c5e3b-2c96-485c-a345-237a5ed53ac7",
+     "name": "Orkiestra Symfoniczna Filharmonii Narodowej",
+     "score": 0.7292736768722534,
+     "release_groups": 94,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "542e5d96-b53f-4dbe-a8d2-5a2e8aef6c78",
+     "name": "SHANTI",
+     "score": 0.7226355671882629,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "c50e52e1-01f4-494d-b1ef-376fe3581d90",
+     "name": "川井憲次",
+     "score": 0.7096352577209473,
+     "release_groups": 245,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "67e344da-ec54-4e26-b2a4-8351d744a14c",
+     "name": "梶浦由記",
+     "score": 0.7046101093292236,
+     "release_groups": 121,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "61513925-697a-4404-a428-521dbf3357ea",
+   "reference_name": "Campo",
+   "expected_mid_p": 0.996169,
+   "expected_thin_in_top10": 4.0,
+   "thin_total": 4,
+   "list_len": 30,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "593a682a-4161-4d62-a60a-5007d8d55d79",
+     "name": "Luciano Supervielle",
+     "score": 0.7192015647888184,
+     "release_groups": 5,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "4e6b78a7-c394-4c8e-87bf-fe83486f7160",
+     "name": "Orquesta del Plata",
+     "score": 0.6940179467201233,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "bd1acfbe-6acc-4d4d-b0a3-4c120765f64a",
+     "name": "Juan Blas",
+     "score": 0.6438689827919006,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "cc9dda02-a13f-4b00-a300-2b1ed67f00cd",
+     "name": "Otros Aires",
+     "score": 0.6339170932769775,
+     "release_groups": 9,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "2a0ec6d9-ca17-4383-9299-d930eed101cb",
+     "name": "Emilio Kauderer",
+     "score": 0.6318439841270447,
+     "release_groups": 11,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "2db43da6-401e-4dd7-898d-8f6da60c58da",
+     "name": "Federico Aubele",
+     "score": 0.6297414302825928,
+     "release_groups": 14,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "c55207b0-f0b8-4259-a478-5e1b17455694",
+     "name": "Didi Gutman",
+     "score": 0.6164584755897522,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "c78a5d46-c631-41bc-8772-439002e3d3aa",
+     "name": "Bajofondo",
+     "score": 0.5467913150787354,
+     "release_groups": 19,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "dcb94bff-31f9-4334-aac9-797a235f589e",
+     "name": "Tanghetto",
+     "score": 0.5352352857589722,
+     "release_groups": 12,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "2f681c0d-4599-4b3b-a44c-8743e1e22834",
+     "name": "Alacran",
+     "score": 0.5311740040779114,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "29cfc71a-2ac7-4841-bfaa-db447262c96f",
+   "reference_name": "Paul McCandless",
+   "expected_mid_p": 0.995772,
+   "expected_thin_in_top10": 3.0,
+   "thin_total": 3,
+   "list_len": 45,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "2733f73d-7af7-46b2-b519-8e7e39f406d6",
+     "name": "Marc Russo",
+     "score": 0.6476698517799377,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "b4b1c1d7-439d-4932-9310-c195778e2352",
+     "name": "Kirk Casey",
+     "score": 0.6276086568832397,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "514d919d-e2a6-4ceb-a426-e9d9fe7d5b34",
+     "name": "Kent Jolly",
+     "score": 0.6210196614265442,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "93f82db3-48da-436e-9f06-b85fd57693d4",
+     "name": "Robi Kauker",
+     "score": 0.6044008731842041,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "9df3cdb8-3595-4e80-b154-f64f3c1275bb",
+     "name": "Steve Erquiaga",
+     "score": 0.5992891192436218,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "0e115e0b-8ba9-4a10-9202-ce53e7cda84e",
+     "name": "Anna Karney",
+     "score": 0.5912748575210571,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "7bee0ff4-2513-4f25-9099-5b3c59281c05",
+     "name": "Liz Story",
+     "score": 0.5912748575210571,
+     "release_groups": 12,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "fbaba2b0-3a6f-41b1-9ecd-f89c1a666e99",
+     "name": "Michael Hedges",
+     "score": 0.5885041952133179,
+     "release_groups": 21,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "086321ef-15b3-434a-a57b-9f0de3023161",
+     "name": "Philip Aaberg",
+     "score": 0.5768725872039795,
+     "release_groups": 13,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "f940c4dd-f687-4c6a-872b-1cce3f78dc0a",
+     "name": "Alex de Grassi",
+     "score": 0.5768725872039795,
+     "release_groups": 21,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "c8ca9709-d333-45fd-b2bb-e2209568aeb2",
+   "reference_name": "Ilaria Graziano",
+   "expected_mid_p": 0.991597,
+   "expected_thin_in_top10": 3.0,
+   "thin_total": 3,
+   "list_len": 36,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "5ffb73c0-b739-4231-ba22-f8d361be1d45",
+     "name": "菅野よう子",
+     "score": 0.885101854801178,
+     "release_groups": 112,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "b5536488-a4da-4e87-9779-d5351c00729d",
+     "name": "ORIGA",
+     "score": 0.8573186993598938,
+     "release_groups": 22,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "7b36bd95-064e-4501-8027-5bcdb9f4c0d3",
+     "name": "Gabriela Robin",
+     "score": 0.8253786563873291,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "2540c8a2-c5bb-48e2-b3e9-3d4de92de034",
+     "name": "Scott Matthew",
+     "score": 0.76891028881073,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "f6586e5c-37b8-4d77-b25f-26622254a974",
+     "name": "Emily Curtis",
+     "score": 0.7504129409790039,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "f420af95-837c-42a0-a2c7-9d96516ad903",
+     "name": "jillmax",
+     "score": 0.7387047410011292,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "542e5d96-b53f-4dbe-a8d2-5a2e8aef6c78",
+     "name": "SHANTI",
+     "score": 0.7292736768722534,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "b6c18308-82c7-4ec1-a42d-e8488bce6618",
+     "name": "坂本真綾",
+     "score": 0.6855455636978149,
+     "release_groups": 73,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "f6beabda-c961-4642-850a-efa2d8d48a73",
+     "name": "Steve Conte",
+     "score": 0.6619678735733032,
+     "release_groups": 4,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "093c5e3b-2c96-485c-a345-237a5ed53ac7",
+     "name": "Orkiestra Symfoniczna Filharmonii Narodowej",
+     "score": 0.656766414642334,
+     "release_groups": 94,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "e4eaa11a-531e-42fc-8a7b-1e73a816d5c1",
+   "reference_name": "Mark Stoermer",
+   "expected_mid_p": 0.988667,
+   "expected_thin_in_top10": 3.0,
+   "thin_total": 4,
+   "list_len": 50,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "4c829576-6fc1-4a1d-ac27-7ff2b362c713",
+     "name": "Mike Kerr",
+     "score": 0.8699879050254822,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "1f8bdf5d-aed1-45aa-bf1f-94af1d7e71c1",
+     "name": "Patrick Wilson",
+     "score": 0.828180730342865,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "7ed36954-f027-43df-b353-c7239f4faa27",
+     "name": "Catfish and the Bottlemen",
+     "score": 0.8184292316436768,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "58433f65-12c0-42e2-a94d-16c22cdb5dd3",
+     "name": "Josh Kaufman",
+     "score": 0.8154346346855164,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "92dc699f-fcbc-4278-afbe-40b5ad060a55",
+     "name": "Death From Above 1979",
+     "score": 0.8060698509216309,
+     "release_groups": 31,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "aa62b28e-b6d4-4086-91d4-e5fac1ed56f3",
+     "name": "Royal Blood",
+     "score": 0.7946879267692566,
+     "release_groups": 33,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "bd9b60e5-f008-4e1d-a059-ca9c665789d3",
+     "name": "Sir Sly",
+     "score": 0.7925853729248047,
+     "release_groups": 22,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "1f2345fa-344e-4863-a1d7-3958d57f4301",
+     "name": "Liam Gallagher",
+     "score": 0.76891028881073,
+     "release_groups": 44,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "aa76ec08-45ab-4724-9411-d80b0e59ac59",
+     "name": "The Vaccines",
+     "score": 0.76891028881073,
+     "release_groups": 50,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "050fffd7-c7cc-4bb2-8f7a-a0ee4bc47678",
+     "name": "Circa Waves",
+     "score": 0.7559375762939453,
+     "release_groups": 58,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "7b36bd95-064e-4501-8027-5bcdb9f4c0d3",
+   "reference_name": "Gabriela Robin",
+   "expected_mid_p": 0.981633,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 50,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "5ffb73c0-b739-4231-ba22-f8d361be1d45",
+     "name": "菅野よう子",
+     "score": 0.8892039656639099,
+     "release_groups": 112,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "b5536488-a4da-4e87-9779-d5351c00729d",
+     "name": "ORIGA",
+     "score": 0.8488730788230896,
+     "release_groups": 22,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "c8ca9709-d333-45fd-b2bb-e2209568aeb2",
+     "name": "Ilaria Graziano",
+     "score": 0.8253786563873291,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "2540c8a2-c5bb-48e2-b3e9-3d4de92de034",
+     "name": "Scott Matthew",
+     "score": 0.7946879267692566,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "f420af95-837c-42a0-a2c7-9d96516ad903",
+     "name": "jillmax",
+     "score": 0.7407214641571045,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "b6c18308-82c7-4ec1-a42d-e8488bce6618",
+     "name": "坂本真綾",
+     "score": 0.7303517460823059,
+     "release_groups": 73,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "f6beabda-c961-4642-850a-efa2d8d48a73",
+     "name": "Steve Conte",
+     "score": 0.7237627506256104,
+     "release_groups": 4,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "093c5e3b-2c96-485c-a345-237a5ed53ac7",
+     "name": "Orkiestra Symfoniczna Filharmonii Narodowej",
+     "score": 0.7192015647888184,
+     "release_groups": 94,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "67e344da-ec54-4e26-b2a4-8351d744a14c",
+     "name": "梶浦由記",
+     "score": 0.682610273361206,
+     "release_groups": 121,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "f6586e5c-37b8-4d77-b25f-26622254a974",
+     "name": "Emily Curtis",
+     "score": 0.6636618971824646,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "c40a79e9-3b9e-492e-9469-0e5b952ad3e1",
+   "reference_name": "Against the Current",
+   "expected_mid_p": 0.981633,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 50,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "0976dbd8-e7fe-4161-9a49-58c57f7a7787",
+     "name": "Riot Games Music Team",
+     "score": 0.7446744441986084,
+     "release_groups": 184,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "de210c9e-fbf6-4827-987f-dd8885f5d890",
+     "name": "PVRIS",
+     "score": 0.7387047410011292,
+     "release_groups": 44,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "712dbd18-d8fd-4bd0-a5b5-edb9577c493f",
+     "name": "Tonight Alive",
+     "score": 0.7120853066444397,
+     "release_groups": 18,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "823ed9ad-3412-47dc-9caf-b7be02121fcf",
+     "name": "Set It Off",
+     "score": 0.7046101093292236,
+     "release_groups": 40,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "2e8ca124-e38a-4dab-93dd-c9f3d415902b",
+     "name": "Stand Atlantic",
+     "score": 0.6940179467201233,
+     "release_groups": 36,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "c4826995-fb1f-4545-8498-a7abbc3b619f",
+     "name": "Mike Davis",
+     "score": 0.6898422837257385,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "481fdbfd-ebb7-4a5b-8768-25b1321d2650",
+     "name": "Brian Macdonald",
+     "score": 0.6780954003334045,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "7ebbfea2-3202-4ae5-b351-879d2cbcce8c",
+     "name": "With Confidence",
+     "score": 0.6718533635139465,
+     "release_groups": 13,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "bfce9c6d-eff7-4965-b20e-cb21397470f5",
+     "name": "Icon for Hire",
+     "score": 0.6702508926391602,
+     "release_groups": 32,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "6d744917-187a-450f-a683-e2caa21591a5",
+     "name": "Alex Goot",
+     "score": 0.6669930219650269,
+     "release_groups": 125,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "f0be891f-6114-448a-ac55-a11bb2961f78",
+   "reference_name": "The Struts",
+   "expected_mid_p": 0.981633,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 50,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "afd55c72-d123-4237-9818-fa3ce634b3dd",
+     "name": "Highly Suspect",
+     "score": 0.837330162525177,
+     "release_groups": 20,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "aa62b28e-b6d4-4086-91d4-e5fac1ed56f3",
+     "name": "Royal Blood",
+     "score": 0.828180730342865,
+     "release_groups": 33,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "4c829576-6fc1-4a1d-ac27-7ff2b362c713",
+     "name": "Mike Kerr",
+     "score": 0.7960731983184814,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 4,
+     "mbid": "7bbd2f4c-b5b3-4ed1-92ce-53aef244f00d",
+     "name": "Kongos",
+     "score": 0.787560224533081,
+     "release_groups": 21,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "7ed36954-f027-43df-b353-c7239f4faa27",
+     "name": "Catfish and the Bottlemen",
+     "score": 0.7816005945205688,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "e1062c06-50de-4475-95df-edaccbddb487",
+     "name": "New Politics",
+     "score": 0.7680798768997192,
+     "release_groups": 11,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "6b025cf6-8f78-4efe-904c-8c08db13bea0",
+     "name": "DREAMERS",
+     "score": 0.7664049863815308,
+     "release_groups": 39,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "510fcf21-a1f3-40af-9087-40593af86f7f",
+     "name": "Barns Courtney",
+     "score": 0.7629973292350769,
+     "release_groups": 31,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "c4826995-fb1f-4545-8498-a7abbc3b619f",
+     "name": "Mike Davis",
+     "score": 0.7427111268043518,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "d60b3cac-e434-469d-8965-ead164d82a3e",
+     "name": "Dorothy",
+     "score": 0.7270938754081726,
+     "release_groups": 30,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "de210c9e-fbf6-4827-987f-dd8885f5d890",
+   "reference_name": "PVRIS",
+   "expected_mid_p": 0.976216,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 44,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "fb4fc5a6-cbe1-45ff-954c-ef45faceb54d",
+     "name": "You Me at Six",
+     "score": 0.8028119802474976,
+     "release_groups": 71,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "4c829576-6fc1-4a1d-ac27-7ff2b362c713",
+     "name": "Mike Kerr",
+     "score": 0.7911669015884399,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "3267d5a3-c72c-4c3b-bafe-ec8a569c0b74",
+     "name": "Sleeping With Sirens",
+     "score": 0.7745963931083679,
+     "release_groups": 33,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "712dbd18-d8fd-4bd0-a5b5-edb9577c493f",
+     "name": "Tonight Alive",
+     "score": 0.7745963931083679,
+     "release_groups": 18,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "7e2e4e3a-4e85-4d5a-b78e-5e4afd467a3e",
+     "name": "Nothing But Thieves",
+     "score": 0.7705572843551636,
+     "release_groups": 60,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "d1fc999f-6184-41a6-bcb1-7c59bf74a6e1",
+     "name": "K.Flay",
+     "score": 0.767244815826416,
+     "release_groups": 81,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "3ae6f3b9-0cb7-4083-ab23-34847f5fcda9",
+     "name": "YONAKA",
+     "score": 0.7603891491889954,
+     "release_groups": 29,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "c4826995-fb1f-4545-8498-a7abbc3b619f",
+     "name": "Mike Davis",
+     "score": 0.7550309896469116,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "1921c28c-ec61-4725-8e35-38dd656f7923",
+     "name": "I Prevail",
+     "score": 0.754118800163269,
+     "release_groups": 29,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "823ed9ad-3412-47dc-9caf-b7be02121fcf",
+     "name": "Set It Off",
+     "score": 0.7522774934768677,
+     "release_groups": 40,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "9c90ffbf-b137-4dee-bfcc-b8010787840d",
+   "reference_name": "Christine and the Queens",
+   "expected_mid_p": 0.975083,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 43,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "d8f43dc5-4613-48ac-8c23-a62b82f8c67a",
+     "name": "Caroline Polachek",
+     "score": 0.8661707043647766,
+     "release_groups": 54,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "698d1046-8c0a-4067-9355-fae393a4a5a7",
+     "name": "Marlon McClain",
+     "score": 0.8362826108932495,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "8fb5370b-9568-4b61-9da5-2aa12c9928db",
+     "name": "Lizzo",
+     "score": 0.7882886528968811,
+     "release_groups": 59,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "d8c5c228-0dff-4236-beae-3e2982714a72",
+     "name": "Tommy Cash",
+     "score": 0.7504129409790039,
+     "release_groups": 19,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "b12ef43e-72ad-43d0-b216-a8cd32f78852",
+     "name": "A. G. Cook",
+     "score": 0.7335395216941833,
+     "release_groups": 45,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "e5712ceb-c37a-4c49-a11c-ccf4e21852d4",
+     "name": "Troye Sivan",
+     "score": 0.7292736768722534,
+     "release_groups": 86,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "fb06ed54-a41a-4614-b27e-5bd650ea0b70",
+     "name": "BJ Burton",
+     "score": 0.7292736768722534,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 8,
+     "mbid": "05f3353e-e2d9-4344-a3c9-8009dd8e0427",
+     "name": "Sky Ferreira",
+     "score": 0.7180390357971191,
+     "release_groups": 22,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "cfcf3691-e7b9-4637-b0f4-294547f00ccf",
+     "name": "BIM",
+     "score": 0.6796156764030457,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "91cd6a5a-e0db-4329-837e-9b6479d1ed2d",
+     "name": "Empress Of",
+     "score": 0.6750072240829468,
+     "release_groups": 41,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "2b0ded23-3cc6-489a-9db4-58428af8d8dd",
+   "reference_name": "Palov & Mishkin",
+   "expected_mid_p": 0.971154,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 40,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "e10b4ba3-5a4b-4da8-afe3-86542bd46096",
+     "name": "Lyre Le Temps",
+     "score": 0.6898422837257385,
+     "release_groups": 13,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "fb0ebbf3-ea95-4391-a365-d0d679c132a9",
+     "name": "Analogik",
+     "score": 0.6796156764030457,
+     "release_groups": 10,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "10d9e76d-7504-414a-960e-33b59fd9df69",
+     "name": "Kormac",
+     "score": 0.6686308979988098,
+     "release_groups": 11,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "5c01e21f-8222-4728-abce-267abf83544a",
+     "name": "Tape Five",
+     "score": 0.6686308979988098,
+     "release_groups": 17,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "a49a45ed-a997-489d-afee-01ab9ea8ce88",
+     "name": "Nekta",
+     "score": 0.656766414642334,
+     "release_groups": 5,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "c35aeecb-55f7-4fdc-b827-d8012dca04e1",
+     "name": "Henrik Wager",
+     "score": 0.6339170932769775,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "18c8bdd1-4707-417b-930f-12e0b3a79f0b",
+     "name": "Nicolas Repac",
+     "score": 0.6276086568832397,
+     "release_groups": 10,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "8502205a-6a8d-4ad9-9bf4-9d21a43fcc28",
+     "name": "Benny Berigan",
+     "score": 0.6141241788864136,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "4d8d2c7c-978e-47ac-ba4a-9e798424bf83",
+     "name": "The Correspondents",
+     "score": 0.6093422174453735,
+     "release_groups": 13,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "c901fc47-d79d-442c-9a17-245bcb782aad",
+     "name": "Spark Arrester",
+     "score": 0.5912748575210571,
+     "release_groups": 1,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "593a682a-4161-4d62-a60a-5007d8d55d79",
+   "reference_name": "Luciano Supervielle",
+   "expected_mid_p": 0.969952,
+   "expected_thin_in_top10": 3.0,
+   "thin_total": 4,
+   "list_len": 36,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "61513925-697a-4404-a428-521dbf3357ea",
+     "name": "Campo",
+     "score": 0.7192015647888184,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "4e6b78a7-c394-4c8e-87bf-fe83486f7160",
+     "name": "Orquesta del Plata",
+     "score": 0.6669930219650269,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "66cc244d-6f96-4668-a6e9-0f9cd5acc940",
+     "name": "Gotan Project",
+     "score": 0.6669930219650269,
+     "release_groups": 32,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "2a0ec6d9-ca17-4383-9299-d930eed101cb",
+     "name": "Emilio Kauderer",
+     "score": 0.6419313549995422,
+     "release_groups": 11,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "bd1acfbe-6acc-4d4d-b0a3-4c120765f64a",
+     "name": "Juan Blas",
+     "score": 0.6419313549995422,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "cc9dda02-a13f-4b00-a300-2b1ed67f00cd",
+     "name": "Otros Aires",
+     "score": 0.6419313549995422,
+     "release_groups": 9,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "2db43da6-401e-4dd7-898d-8f6da60c58da",
+     "name": "Federico Aubele",
+     "score": 0.6297414302825928,
+     "release_groups": 14,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "c78a5d46-c631-41bc-8772-439002e3d3aa",
+     "name": "Bajofondo",
+     "score": 0.6117525100708008,
+     "release_groups": 19,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "dcb94bff-31f9-4334-aac9-797a235f589e",
+     "name": "Tanghetto",
+     "score": 0.5992891192436218,
+     "release_groups": 12,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "c55207b0-f0b8-4259-a478-5e1b17455694",
+     "name": "Didi Gutman",
+     "score": 0.5885041952133179,
+     "release_groups": 0,
+     "thin": true
+    }
+   ]
+  },
+  {
+   "reference_mbid": "aabe385c-379a-467f-9a6d-2560ffa0b730",
+   "reference_name": "Kara‐Lis Coverdale",
+   "expected_mid_p": 0.962185,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 35,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "61b94735-8bb8-4c25-b263-b3c95f472d8b",
+     "name": "Kaitlyn Aurelia Smith",
+     "score": 0.6898422837257385,
+     "release_groups": 40,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "c1fef64f-f0fc-4073-b544-aa05c0655f42",
+     "name": "Alain Bellaïche",
+     "score": 0.6602542400360107,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "77803ef6-1029-4901-adb9-29697fb97dad",
+     "name": "Sarah Davachi",
+     "score": 0.6164584755897522,
+     "release_groups": 34,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "f283588f-051e-4549-8b7d-f7f44cfa032e",
+     "name": "The Rationals",
+     "score": 0.6044008731842041,
+     "release_groups": 12,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "0ce74932-8f7b-4853-9fb6-24165a28462d",
+     "name": "Sweet and Innocent",
+     "score": 0.5885041952133179,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "4c075066-c3f1-412c-bbcf-31ede03c89fc",
+     "name": "The Defaulters",
+     "score": 0.5467913150787354,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "b3cc76ab-296a-440e-9702-59c08af2e76f",
+     "name": "Azimuth",
+     "score": 0.5391882658004761,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "2286039a-8f32-44dc-994f-6ce451a4b02f",
+     "name": "Lauren Laverne",
+     "score": 0.5311740040779114,
+     "release_groups": 4,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "f8f37e5d-5a2e-4272-a5bb-f057152bb9b8",
+     "name": "Robert Vanderbilt & the Foundation of Souls",
+     "score": 0.5269983410835266,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "b51e6950-2c00-4dde-a6b5-f8bc3b61826a",
+     "name": "中村としまる",
+     "score": 0.522701621055603,
+     "release_groups": 63,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "9b8c1662-ad83-41ab-8a73-071aad7d49e8",
+   "reference_name": "Unkle Ho",
+   "expected_mid_p": 0.959893,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 34,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "fb0ebbf3-ea95-4391-a365-d0d679c132a9",
+     "name": "Analogik",
+     "score": 0.6718533635139465,
+     "release_groups": 10,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "e10b4ba3-5a4b-4da8-afe3-86542bd46096",
+     "name": "Lyre Le Temps",
+     "score": 0.6585205793380737,
+     "release_groups": 13,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "a49a45ed-a997-489d-afee-01ab9ea8ce88",
+     "name": "Nekta",
+     "score": 0.6531944870948792,
+     "release_groups": 5,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "d74c95e2-f779-43e4-9e1d-6fbaaf0c6bae",
+     "name": "Movits!",
+     "score": 0.6379783749580383,
+     "release_groups": 16,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "c35aeecb-55f7-4fdc-b827-d8012dca04e1",
+     "name": "Henrik Wager",
+     "score": 0.6018670201301575,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "4d8d2c7c-978e-47ac-ba4a-9e798424bf83",
+     "name": "The Correspondents",
+     "score": 0.5992891192436218,
+     "release_groups": 13,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "27c9e2d8-084b-4af5-a8eb-815b4f204116",
+     "name": "Tim Tim",
+     "score": 0.5885041952133179,
+     "release_groups": 13,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "8502205a-6a8d-4ad9-9bf4-9d21a43fcc28",
+     "name": "Benny Berigan",
+     "score": 0.5856807231903076,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 9,
+     "mbid": "2b0ded23-3cc6-489a-9db4-58428af8d8dd",
+     "name": "Palov & Mishkin",
+     "score": 0.5768725872039795,
+     "release_groups": 3,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "18c8bdd1-4707-417b-930f-12e0b3a79f0b",
+     "name": "Nicolas Repac",
+     "score": 0.5706955790519714,
+     "release_groups": 10,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "f58c1a6a-6450-4b81-a409-1a6b6266ee88",
+   "reference_name": "Can Bonomo",
+   "expected_mid_p": 0.959893,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 34,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "380b799f-4aca-44e9-aade-5b0714cadb6c",
+     "name": "Željko Joksimović",
+     "score": 0.5642499327659607,
+     "release_groups": 21,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "0159c2ac-7e79-4dc2-98e0-608e29642e1e",
+     "name": "Eva Boto",
+     "score": 0.5467913150787354,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "328056e7-a317-49ac-9655-5e06ed2eedc2",
+     "name": "Бурановские бабушки",
+     "score": 0.5467913150787354,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "be1c85df-33ee-4694-acea-400517384be2",
+     "name": "Valentina Monetta",
+     "score": 0.543038547039032,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "913163fe-a214-4eb3-8b16-078c021f4d48",
+     "name": "Гайтана",
+     "score": 0.5391882658004761,
+     "release_groups": 7,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "b176b32a-ceeb-43f0-bcb9-c74a89b91b03",
+     "name": "Greta Salóme",
+     "score": 0.5352352857589722,
+     "release_groups": 3,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "9293f9c1-f064-4251-851d-dd22298dc632",
+     "name": "Kurt Calleja",
+     "score": 0.5269983410835266,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "fd673f97-a906-4eed-89a8-f58fe28ccc30",
+     "name": "Rambo Amadeus",
+     "score": 0.5269983410835266,
+     "release_groups": 23,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "bf3e11da-b517-45bf-835e-e9d021ea2d3e",
+     "name": "Filipa Sousa",
+     "score": 0.522701621055603,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "de4f4b1a-0fd7-4633-89a4-4f649246d8a7",
+     "name": "Nina Zilli",
+     "score": 0.522701621055603,
+     "release_groups": 9,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "09435962-d4bf-4b99-bec1-44c1d82a845c",
+   "reference_name": "Marijata",
+   "expected_mid_p": 0.954637,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 32,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "6690bce3-6fae-445f-b6f3-e0ee4da53f93",
+     "name": "The Apagya Show Band",
+     "score": 0.6855455636978149,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 2,
+     "mbid": "8b034085-b06d-4c42-9be3-d709be169d79",
+     "name": "Ebo Taylor",
+     "score": 0.6636618971824646,
+     "release_groups": 27,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "82537a62-9500-452d-af55-e6032a94134d",
+     "name": "Rob",
+     "score": 0.5966655611991882,
+     "release_groups": 3,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "a81d235c-6f0e-491e-9f90-d71523a3fa2a",
+     "name": "K. Frimpong and His Cubano Fiestas",
+     "score": 0.5912748575210571,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "5bdc8759-a592-4202-a48c-691d4bec5c6d",
+     "name": "The Funkees",
+     "score": 0.5798671841621399,
+     "release_groups": 4,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "84ce60fe-e864-488b-a1ff-0935305a693e",
+     "name": "The Ogyatanaa Show Band",
+     "score": 0.5540233254432678,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "b6d11332-8c76-4b77-b0a6-4b3542cd045e",
+     "name": "Super Sweet Talks International",
+     "score": 0.522701621055603,
+     "release_groups": 9,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "53dd0229-8a42-4bd7-8ffb-29bdec25e9c6",
+     "name": "William Onyeabor",
+     "score": 0.5182766318321228,
+     "release_groups": 12,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "6e2e4f60-1a79-41fc-892e-47d61edf4569",
+     "name": "T.P. Orchestre Poly‐Rythmo",
+     "score": 0.5041490793228149,
+     "release_groups": 95,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "9c5c0632-dbef-4674-a90c-af04412a1508",
+     "name": "Lijadu Sisters",
+     "score": 0.5041490793228149,
+     "release_groups": 7,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "9031b393-ced7-4685-9e25-d0b43996158a",
+   "reference_name": "Kristin Chenoweth",
+   "expected_mid_p": 0.951613,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 31,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "929ca8c3-5df3-4fe9-bc59-f8d603780bce",
+     "name": "Idina Menzel",
+     "score": 0.820197343826294,
+     "release_groups": 39,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "31e0deaf-7899-4ccf-956a-baaeb6f8513d",
+     "name": "Joel Grey",
+     "score": 0.7226355671882629,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "aa6341d6-7ae7-42f9-aedc-3dba6c68e9e6",
+     "name": "Christopher Fitzgerald",
+     "score": 0.6926391124725342,
+     "release_groups": 1,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "9a5ec695-2b9c-4e2c-b13d-a501d9a189d8",
+     "name": "William Youmans",
+     "score": 0.691247284412384,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 5,
+     "mbid": "86368c6a-5138-4922-bd5b-809a528ffe55",
+     "name": "Ben Platt",
+     "score": 0.5992891192436218,
+     "release_groups": 27,
+     "thin": false
+    },
+    {
+     "rank": 6,
+     "mbid": "16b36ee4-04d3-4cf9-bcbc-548fd6a2fd4c",
+     "name": "Okieriete Onaodowan",
+     "score": 0.5966655611991882,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 7,
+     "mbid": "980ee2d8-2ee9-407b-b48e-48360fbc7437",
+     "name": "Andrew Lloyd Webber",
+     "score": 0.5939947366714478,
+     "release_groups": 292,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "925c7673-0e85-410f-b7e4-d9705a7aa619",
+     "name": "Lin‐Manuel Miranda",
+     "score": 0.5642499327659607,
+     "release_groups": 97,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "b25c6c3f-3861-4687-be1d-3c8d238cfb34",
+     "name": "Zac Efron",
+     "score": 0.5575111508369446,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "e98fc8a6-f523-462a-b221-b55d935f19d8",
+     "name": "Phillipa Soo",
+     "score": 0.5467913150787354,
+     "release_groups": 2,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "913163fe-a214-4eb3-8b16-078c021f4d48",
+   "reference_name": "Гайтана",
+   "expected_mid_p": 0.951613,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 2,
+   "list_len": 31,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "be1c85df-33ee-4694-acea-400517384be2",
+     "name": "Valentina Monetta",
+     "score": 0.550451397895813,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "e4951664-69c1-4432-a898-5558f47aa695",
+     "name": "Софи Маринова",
+     "score": 0.543038547039032,
+     "release_groups": 20,
+     "thin": false
+    },
+    {
+     "rank": 3,
+     "mbid": "380b799f-4aca-44e9-aade-5b0714cadb6c",
+     "name": "Željko Joksimović",
+     "score": 0.5391882658004761,
+     "release_groups": 21,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "f58c1a6a-6450-4b81-a409-1a6b6266ee88",
+     "name": "Can Bonomo",
+     "score": 0.5391882658004761,
+     "release_groups": 27,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "0159c2ac-7e79-4dc2-98e0-608e29642e1e",
+     "name": "Eva Boto",
+     "score": 0.5311740040779114,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "c2543756-c98c-452e-b536-60f2ca877046",
+     "name": "Anggun",
+     "score": 0.5311740040779114,
+     "release_groups": 52,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "2d999b5f-fbb0-4ca7-bb0d-9f534c43ca41",
+     "name": "Калиопи",
+     "score": 0.5269983410835266,
+     "release_groups": 28,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "6571aaf2-c0dc-4464-83cb-a52e3c822d3e",
+     "name": "Ήβη Αδάμου",
+     "score": 0.5269983410835266,
+     "release_groups": 10,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "bf3e11da-b517-45bf-835e-e9d021ea2d3e",
+     "name": "Filipa Sousa",
+     "score": 0.5269983410835266,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 10,
+     "mbid": "105d132f-0bd8-4488-b340-87bfdde9f8af",
+     "name": "Pasha Parfeni",
+     "score": 0.522701621055603,
+     "release_groups": 1,
+     "thin": false
+    }
+   ]
+  },
+  {
+   "reference_mbid": "380b799f-4aca-44e9-aade-5b0714cadb6c",
+   "reference_name": "Željko Joksimović",
+   "expected_mid_p": 0.947959,
+   "expected_thin_in_top10": 2.0,
+   "thin_total": 3,
+   "list_len": 50,
+   "top10": [
+    {
+     "rank": 1,
+     "mbid": "be1c85df-33ee-4694-acea-400517384be2",
+     "name": "Valentina Monetta",
+     "score": 0.5706955790519714,
+     "release_groups": 6,
+     "thin": false
+    },
+    {
+     "rank": 2,
+     "mbid": "0159c2ac-7e79-4dc2-98e0-608e29642e1e",
+     "name": "Eva Boto",
+     "score": 0.567507803440094,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 3,
+     "mbid": "f58c1a6a-6450-4b81-a409-1a6b6266ee88",
+     "name": "Can Bonomo",
+     "score": 0.5642499327659607,
+     "release_groups": 27,
+     "thin": false
+    },
+    {
+     "rank": 4,
+     "mbid": "328056e7-a317-49ac-9655-5e06ed2eedc2",
+     "name": "Бурановские бабушки",
+     "score": 0.5575111508369446,
+     "release_groups": 2,
+     "thin": false
+    },
+    {
+     "rank": 5,
+     "mbid": "bf3e11da-b517-45bf-835e-e9d021ea2d3e",
+     "name": "Filipa Sousa",
+     "score": 0.5575111508369446,
+     "release_groups": 0,
+     "thin": true
+    },
+    {
+     "rank": 6,
+     "mbid": "b176b32a-ceeb-43f0-bcb9-c74a89b91b03",
+     "name": "Greta Salóme",
+     "score": 0.5540233254432678,
+     "release_groups": 3,
+     "thin": false
+    },
+    {
+     "rank": 7,
+     "mbid": "6571aaf2-c0dc-4464-83cb-a52e3c822d3e",
+     "name": "Ήβη Αδάμου",
+     "score": 0.543038547039032,
+     "release_groups": 10,
+     "thin": false
+    },
+    {
+     "rank": 8,
+     "mbid": "de4f4b1a-0fd7-4633-89a4-4f649246d8a7",
+     "name": "Nina Zilli",
+     "score": 0.543038547039032,
+     "release_groups": 9,
+     "thin": false
+    },
+    {
+     "rank": 9,
+     "mbid": "2d999b5f-fbb0-4ca7-bb0d-9f534c43ca41",
+     "name": "Калиопи",
+     "score": 0.5391882658004761,
+     "release_groups": 28,
+     "thin": false
+    },
+    {
+     "rank": 10,
+     "mbid": "913163fe-a214-4eb3-8b16-078c021f4d48",
+     "name": "Гайтана",
+     "score": 0.5391882658004761,
+     "release_groups": 7,
+     "thin": false
+    }
+   ]
+  }
+ ]
+}

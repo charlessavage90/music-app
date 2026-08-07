@@ -1,0 +1,178 @@
+{
+ "governing": "docs/superpowers/specs/2026-08-06-thin-catalogue-rerun-preregistration.md",
+ "predecessor_void_run": "builder/analysis/2026-08-06-tce-thin-catalogue/",
+ "artifact_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+ "anchor_source": "g1_anchors.json",
+ "laura_lee_source": "../builder/analysis/2026-08-06-laura-lee-closure/ll_closure.json",
+ "TCR_G1": {
+  "anchor_source": "g1_anchors.json",
+  "cells": {
+   "alana_haim": {
+    "mbid": "3e308b4a-c8d0-4883-8c38-e2953002a882",
+    "name": "Alana Haim",
+    "live_2026_08_06": 0,
+    "required_band": [
+     0,
+     0
+    ],
+    "dump_release_groups": 0,
+    "pass": true
+   },
+   "andrew_vanwyngarden": {
+    "mbid": "0576e68e-2dd8-41ad-975a-09bdc44422b6",
+    "name": "Andrew VanWyngarden",
+    "live_2026_08_06": 4,
+    "required_band": [
+     2,
+     6
+    ],
+    "dump_release_groups": 4,
+    "pass": true
+   },
+   "leon_bridges": {
+    "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+    "name": "Leon Bridges",
+    "live_2026_08_06": 37,
+    "required_band": [
+     35,
+     39
+    ],
+    "dump_release_groups": 37,
+    "pass": true
+   },
+   "khruangbin": {
+    "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634",
+    "name": "Khruangbin",
+    "live_2026_08_06": 59,
+    "required_band": [
+     56,
+     62
+    ],
+    "dump_release_groups": 59,
+    "pass": true
+   },
+   "radiohead": {
+    "mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+    "name": "Radiohead",
+    "live_2026_08_06": 584,
+    "required_band": [
+     554,
+     614
+    ],
+    "dump_release_groups": 583,
+    "pass": true
+   }
+  },
+  "passed": true
+ },
+ "laura_lee_reported_run_state": {
+  "laura_lee_khruangbin": {
+   "mbid": "50ef58c4-a61a-4b83-9e54-ad66cd4672c7",
+   "label": "Laura Lee (Khruangbin member, b.1986)",
+   "dump_release_groups": 0,
+   "gate_cell": false,
+   "reason": "known MusicBrainz mis-filing between the two Laura Lees (../2026-08-06-tce-thin-catalogue/miscredit.json) contaminates them as ground truth"
+  },
+  "laura_lee_soul": {
+   "mbid": "70a65cf5-9dee-4132-8e0e-143dcf3b8dcb",
+   "label": "Laura Lee (soul & gospel, b.1945)",
+   "dump_release_groups": 16,
+   "gate_cell": false,
+   "reason": "known MusicBrainz mis-filing between the two Laura Lees (../2026-08-06-tce-thin-catalogue/miscredit.json) contaminates them as ground truth"
+  }
+ },
+ "TCR_G2": {
+  "coverage": 0.999913,
+  "floor": 0.95,
+  "passed": true,
+  "arm_a_neighbour_slots": 3819306,
+  "resolved_slots": 3818973,
+  "basis": "presence in the MusicBrainz artist JSON dump",
+  "arm_a_refs_lost_to_exclusion": 4
+ },
+ "run_state": {
+  "A": {
+   "reference_artists": 45689,
+   "thin_base_rate": 0.078991,
+   "TCR_G3_share_T_eq_0": 0.084068,
+   "TCR_G3_bars_C1_read": false,
+   "ceiling_C": 0.5,
+   "C1_bands": {
+    "enriched_at": 0.25,
+    "indeterminate_at": 0.125,
+    "no_resolution": false
+   },
+   "TCR_C5_null": 0.035551,
+   "list_len_median": 100,
+   "rank10_boundary_ties_post_exclusion": 11650
+  },
+  "B": {
+   "reference_artists": 19485,
+   "thin_base_rate": 0.005645,
+   "TCR_G3_share_T_eq_0": 0.854093,
+   "TCR_G3_bars_C1_read": true,
+   "ceiling_C": 0.0,
+   "C1_bands": {
+    "enriched_at": 0.0,
+    "indeterminate_at": 0.0,
+    "no_resolution": true
+   },
+   "TCR_C5_null": 0.001601,
+   "list_len_median": 48,
+   "rank10_boundary_ties_post_exclusion": 3977
+  }
+ },
+ "outcomes": {
+  "A": {
+   "TCR_C1_median_delta": -0.033333,
+   "TCR_C1_band": "null",
+   "TCR_C3_mean_midp": 0.418456,
+   "TCR_C3_band": "depleted",
+   "TCR_C4_excess_ratio": 0.71552,
+   "TCR_C4_band": "depleted",
+   "TCR_C5_share": 0.021705,
+   "TCR_C5_null": 0.035551,
+   "TCR_C5_ratio_to_null": 0.6105,
+   "TCR_C5_concentrated": false,
+   "delta_distribution": {
+    "mean": -0.026231,
+    "p10": -0.113924,
+    "p90": 0.077778,
+    "share_positive": 0.218368,
+    "share_zero": 0.097529
+   },
+   "descriptive_gradient_median_delta": {
+    "thin_le_1": -0.044444,
+    "thin_le_2": -0.053968,
+    "thin_le_5": -0.077778,
+    "thin_le_10": -0.1
+   }
+  },
+  "B": {
+   "TCR_C1_median_delta": 0.0,
+   "TCR_C1_band": "no_read_licensed (TCR-G3: over half of reference artists have T_R=0)",
+   "TCR_C3_mean_midp": 0.489594,
+   "TCR_C3_band": "null",
+   "TCR_C4_excess_ratio": 0.567207,
+   "TCR_C4_band": "depleted",
+   "TCR_C5_share": 0.00107,
+   "TCR_C5_null": 0.001601,
+   "TCR_C5_ratio_to_null": 0.6683,
+   "TCR_C5_concentrated": false,
+   "delta_distribution": {
+    "mean": -0.00337,
+    "p10": -0.025,
+    "p90": 0.0,
+    "share_positive": 0.023813,
+    "share_zero": 0.856043
+   },
+   "descriptive_gradient_median_delta": {
+    "thin_le_1": 0.0,
+    "thin_le_2": -0.025,
+    "thin_le_5": -0.075,
+    "thin_le_10": -0.15
+   }
+  }
+ },
+ "verdict": "computed"
+}

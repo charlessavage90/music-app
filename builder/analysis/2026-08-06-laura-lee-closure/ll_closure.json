@@ -1,0 +1,537 @@
+{
+ "what": "Laura Lee closure - diagnosis of one case, not a probe",
+ "governing": "docs/superpowers/2026-08-06-cocredit-investigation-execution-log.md section 6 item 1",
+ "graph": {
+  "path": "../builder/scratch/graph-msw-tu50.bin",
+  "expected_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+  "artist_count": 58838,
+  "presence": {
+   "laura_lee_khruangbin": {
+    "present": false
+   },
+   "laura_lee_soul": {
+    "present": true,
+    "degree": 34,
+    "pop_raw": 0.6163
+   },
+   "leon_bridges": {
+    "present": true,
+    "degree": 43,
+    "pop_raw": 0.6617
+   },
+   "khruangbin": {
+    "present": true,
+    "degree": 46,
+    "pop_raw": 0.8059
+   }
+  }
+ },
+ "archive": "../builder/scratch/grt-archive-algb/similar/listenbrainz/session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30/",
+ "subjects": {
+  "laura_lee_khruangbin": {
+   "mbid": "50ef58c4-a61a-4b83-9e54-ad66cd4672c7",
+   "label": "Laura Lee (Khruangbin member, b.1986)",
+   "archived": true,
+   "list_length": 100,
+   "top_score": 214,
+   "median_score": 51,
+   "min_score": 38,
+   "top10": [
+    {
+     "rank": 1,
+     "name": "Leon Bridges",
+     "score": 214,
+     "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774"
+    },
+    {
+     "rank": 2,
+     "name": "Tame Impala",
+     "score": 204,
+     "mbid": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d"
+    },
+    {
+     "rank": 3,
+     "name": "Khruangbin",
+     "score": 133,
+     "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634"
+    },
+    {
+     "rank": 4,
+     "name": "SAULT",
+     "score": 114,
+     "mbid": "23b19bc5-813e-4456-bbae-ac3ca118f535"
+    },
+    {
+     "rank": 5,
+     "name": "Skinshape",
+     "score": 109,
+     "mbid": "848e0d89-4696-4c7b-a74c-a8e45292df6c"
+    },
+    {
+     "rank": 6,
+     "name": "Unknown Mortal Orchestra",
+     "score": 101,
+     "mbid": "e2305342-0bde-4a2c-aed0-4b88694834de"
+    },
+    {
+     "rank": 7,
+     "name": "Jungle",
+     "score": 97,
+     "mbid": "6bbb3983-ce8a-4971-96e0-7cae73268fc4"
+    },
+    {
+     "rank": 8,
+     "name": "Little Dragon",
+     "score": 96,
+     "mbid": "c8a9ae11-63bf-409b-8bf3-a96b3712a2ff"
+    },
+    {
+     "rank": 9,
+     "name": "Crumb",
+     "score": 95,
+     "mbid": "b747dabe-b66c-48f6-bae6-b5e16d86b9ab"
+    },
+    {
+     "rank": 10,
+     "name": "Rostam",
+     "score": 94,
+     "mbid": "66a7117a-4b67-4a85-83bf-94491340d22d"
+    }
+   ]
+  },
+  "laura_lee_soul": {
+   "mbid": "70a65cf5-9dee-4132-8e0e-143dcf3b8dcb",
+   "label": "Laura Lee (soul & gospel, b.1945)",
+   "archived": true,
+   "list_length": 100,
+   "top_score": 65,
+   "median_score": 23,
+   "min_score": 14,
+   "top10": [
+    {
+     "rank": 1,
+     "name": "Wilson Pickett",
+     "score": 65,
+     "mbid": "fc6214b3-6d82-4803-be74-01ece1723e42"
+    },
+    {
+     "rank": 2,
+     "name": "Otis Redding",
+     "score": 63,
+     "mbid": "82b1f5fd-cd31-41a9-b5d4-7e33f0eb9751"
+    },
+    {
+     "rank": 3,
+     "name": "Etta James",
+     "score": 62,
+     "mbid": "e22d2f66-881e-41ca-9356-544697ee5f90"
+    },
+    {
+     "rank": 4,
+     "name": "Joe Tex",
+     "score": 52,
+     "mbid": "bb25e0ba-fd11-4d2a-8ec3-f5674f67c874"
+    },
+    {
+     "rank": 5,
+     "name": "Muddy Waters",
+     "score": 50,
+     "mbid": "f86f1f07-d182-45ce-ae93-ef610880ca72"
+    },
+    {
+     "rank": 6,
+     "name": "Ann Peebles",
+     "score": 47,
+     "mbid": "a7e05e3f-7459-4ba6-9041-8b5cacf6338c"
+    },
+    {
+     "rank": 7,
+     "name": "Freda Payne",
+     "score": 44,
+     "mbid": "6d1a5b3d-730c-4b10-b83d-ef2c98ce86f3"
+    },
+    {
+     "rank": 8,
+     "name": "Clarence Carter",
+     "score": 44,
+     "mbid": "d24bd0d5-0bfe-43ca-9ddd-d731abda89d7"
+    },
+    {
+     "rank": 9,
+     "name": "Marvin Gaye",
+     "score": 42,
+     "mbid": "afdb7919-059d-43c1-b668-ba1d265e7e42"
+    },
+    {
+     "rank": 10,
+     "name": "Bo Diddley",
+     "score": 41,
+     "mbid": "bf659d74-0b61-488c-8a7d-594f43bed9e0"
+    }
+   ]
+  },
+  "leon_bridges": {
+   "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+   "label": "Leon Bridges",
+   "archived": true,
+   "list_length": 100,
+   "top_score": 437,
+   "median_score": 86,
+   "min_score": 65,
+   "top10": [
+    {
+     "rank": 1,
+     "name": "Khruangbin",
+     "score": 437,
+     "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634"
+    },
+    {
+     "rank": 2,
+     "name": "Laura Lee",
+     "score": 214,
+     "mbid": "50ef58c4-a61a-4b83-9e54-ad66cd4672c7"
+    },
+    {
+     "rank": 3,
+     "name": "Billie Eilish",
+     "score": 188,
+     "mbid": "f4abc0b5-3f7a-4eff-8f78-ac078dbce533"
+    },
+    {
+     "rank": 4,
+     "name": "The Lumineers",
+     "score": 179,
+     "mbid": "bfcb6630-9b31-4e63-b11f-7b0363be72b5"
+    },
+    {
+     "rank": 5,
+     "name": "Chase Jordan",
+     "score": 169,
+     "mbid": "db127348-3d64-4aa1-8caa-52df20464378"
+    },
+    {
+     "rank": 6,
+     "name": "Ray LaMontagne",
+     "score": 165,
+     "mbid": "b5c4ffa2-82e1-4b72-b7f3-c60afb74b860"
+    },
+    {
+     "rank": 7,
+     "name": "Vance Joy",
+     "score": 165,
+     "mbid": "df36f6db-5987-46ed-9d02-0cf36ed4e060"
+    },
+    {
+     "rank": 8,
+     "name": "Michael Kiwanuka",
+     "score": 164,
+     "mbid": "11f570ff-44d9-4e9c-8812-e6d56103c5c1"
+    },
+    {
+     "rank": 9,
+     "name": "Caribou",
+     "score": 148,
+     "mbid": "735e3514-a8ae-401f-af3b-6300df1b8d2c"
+    },
+    {
+     "rank": 10,
+     "name": "Tyler Johnson",
+     "score": 147,
+     "mbid": "ea9aa6dd-35a0-4558-8fe1-e1f3f3132920"
+    }
+   ]
+  },
+  "khruangbin": {
+   "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634",
+   "label": "Khruangbin",
+   "archived": true,
+   "list_length": 100,
+   "top_score": 579,
+   "median_score": 216,
+   "min_score": 163,
+   "top10": [
+    {
+     "rank": 1,
+     "name": "Menahan Street Band",
+     "score": 579,
+     "mbid": "93da8c8a-bd13-4418-a00e-2861b8518a8d"
+    },
+    {
+     "rank": 2,
+     "name": "Unknown Mortal Orchestra",
+     "score": 527,
+     "mbid": "e2305342-0bde-4a2c-aed0-4b88694834de"
+    },
+    {
+     "rank": 3,
+     "name": "Romare",
+     "score": 462,
+     "mbid": "b014d579-b549-4b21-b90d-5264e0433988"
+    },
+    {
+     "rank": 4,
+     "name": "Leon Bridges",
+     "score": 437,
+     "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774"
+    },
+    {
+     "rank": 5,
+     "name": "Dustin O’Halloran",
+     "score": 434,
+     "mbid": "40c9866d-ae1b-4445-9542-bcc4d5ab9d9e"
+    },
+    {
+     "rank": 6,
+     "name": "Maribou State",
+     "score": 416,
+     "mbid": "72034a05-bcd8-40c2-8255-3ee4ac0e7ef0"
+    },
+    {
+     "rank": 7,
+     "name": "Darondo",
+     "score": 397,
+     "mbid": "ae8e50f7-acd1-424b-8295-2c036b30d809"
+    },
+    {
+     "rank": 8,
+     "name": "Mac DeMarco",
+     "score": 390,
+     "mbid": "f2492c31-54a8-4347-a1fc-f81f72873bbf"
+    },
+    {
+     "rank": 9,
+     "name": "Skinshape",
+     "score": 387,
+     "mbid": "848e0d89-4696-4c7b-a74c-a8e45292df6c"
+    },
+    {
+     "rank": 10,
+     "name": "Jungle",
+     "score": 372,
+     "mbid": "6bbb3983-ce8a-4971-96e0-7cae73268fc4"
+    }
+   ]
+  }
+ },
+ "musicbrainz": {
+  "laura_lee_khruangbin": {
+   "count": 2,
+   "sample": [
+    {
+     "title": "Not Up for Discussion",
+     "credit": "Niia / Laura Lee"
+    },
+    {
+     "title": "Always on Time",
+     "credit": "Meshell Ndegeocello / Laura Lee"
+    }
+   ]
+  },
+  "laura_lee_soul": {
+   "count": 288,
+   "sample": [
+    {
+     "title": "Need It Just as Bad as You",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "Hang It Up",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "She Will Break Your Heart",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "(If You Want to Try Love Again) Remember Me",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "I Need It Just as Bad as You",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "Separation Line",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "Rip Off",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "Wedlock Is a Padlock",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "But You Know I Love You",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "It’s How You Make It Good",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "Separation Line",
+     "credit": "Laura Lee"
+    },
+    {
+     "title": "Rip Off",
+     "credit": "Laura Lee"
+    }
+   ]
+  },
+  "leon_bridges": {
+   "count": 177,
+   "sample": [
+    {
+     "title": "Naomi",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "Ivy",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "Peaceful Place",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "Smooth Sailin'",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "Katchi",
+     "credit": "Nick Waterhouse / Leon Bridges"
+    },
+    {
+     "title": "Shine",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "Coming Home",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "Beyond",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "Pony",
+     "credit": "Leon Bridges"
+    },
+    {
+     "title": "clear my rain",
+     "credit": "Gunna / Leon Bridges"
+    },
+    {
+     "title": "Across the Room (Durante remix)",
+     "credit": "ODESZA / Leon Bridges"
+    },
+    {
+     "title": "Smooth Sailin’",
+     "credit": "Leon Bridges"
+    }
+   ]
+  },
+  "khruangbin": {
+   "count": 310,
+   "sample": [
+    {
+     "title": "Time (You And I) [Karaoke Version]",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "If There Is No Question [Karaoke Version]",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "Blind Monorail",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "August 12",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "White Gloves",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "The Number Four",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "August 10 / Master of Life",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "Evan Finds the Third Room (Leslie Lello RMX)",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "The Number 3",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "Evan Finds the Third Room",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "People Everywhere (Shifting Sands remix)",
+     "credit": "Khruangbin"
+    },
+    {
+     "title": "White Gloves II",
+     "credit": "Khruangbin"
+    }
+   ]
+  }
+ },
+ "cross_lists": {
+  "laura_lee_soul__on__laura_lee_khruangbin": null,
+  "leon_bridges__on__laura_lee_khruangbin": {
+   "rank": 1,
+   "score": 214
+  },
+  "khruangbin__on__laura_lee_khruangbin": {
+   "rank": 3,
+   "score": 133
+  },
+  "laura_lee_khruangbin__on__laura_lee_soul": null,
+  "leon_bridges__on__laura_lee_soul": null,
+  "khruangbin__on__laura_lee_soul": null,
+  "laura_lee_khruangbin__on__leon_bridges": {
+   "rank": 2,
+   "score": 214
+  },
+  "laura_lee_soul__on__leon_bridges": null,
+  "khruangbin__on__leon_bridges": {
+   "rank": 1,
+   "score": 437
+  },
+  "laura_lee_khruangbin__on__khruangbin": null,
+  "laura_lee_soul__on__khruangbin": null,
+  "leon_bridges__on__khruangbin": {
+   "rank": 4,
+   "score": 437
+  }
+ },
+ "drop_payloads": {
+  "unlistenable_drop_algb_20260805": {
+   "laura_lee_khruangbin": [
+    "drop_mbids"
+   ],
+   "laura_lee_soul": [],
+   "leon_bridges": [],
+   "khruangbin": []
+  },
+  "no_release_drop_algb_20260802": {
+   "laura_lee_khruangbin": [
+    "drop_mbids"
+   ],
+   "laura_lee_soul": [],
+   "leon_bridges": [],
+   "khruangbin": []
+  }
+ }
+}

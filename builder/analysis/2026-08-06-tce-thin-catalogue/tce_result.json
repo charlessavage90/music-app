@@ -1,0 +1,43 @@
+{
+ "governing": "docs/superpowers/specs/2026-08-06-thin-catalogue-edge-preregistration.md",
+ "amendments_in_force": [
+  "TCE-AM1",
+  "TCE-AM2"
+ ],
+ "artifact_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+ "TCE_G1": {
+  "mbid_source": "../builder/analysis/2026-08-06-laura-lee-closure/ll_closure.json",
+  "cells": {
+   "laura_lee_khruangbin": {
+    "mbid": "50ef58c4-a61a-4b83-9e54-ad66cd4672c7",
+    "label": "Laura Lee (Khruangbin member, b.1986)",
+    "required": "== 0",
+    "release_groups": 0,
+    "pass": true
+   },
+   "laura_lee_soul": {
+    "mbid": "70a65cf5-9dee-4132-8e0e-143dcf3b8dcb",
+    "label": "Laura Lee (soul & gospel, b.1945)",
+    "required": ">= 20",
+    "release_groups": 16,
+    "pass": false
+   },
+   "leon_bridges": {
+    "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+    "label": "Leon Bridges",
+    "required": ">= 5",
+    "release_groups": 37,
+    "pass": true
+   },
+   "khruangbin": {
+    "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634",
+    "label": "Khruangbin",
+    "required": ">= 5",
+    "release_groups": 59,
+    "pass": true
+   }
+  },
+  "passed": false
+ },
+ "verdict": "VOID -- TCE-G1 failed. No outcome computed."
+}

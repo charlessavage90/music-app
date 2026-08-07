@@ -1,0 +1,47 @@
+{
+ "governing": "specs/2026-08-06-cocredit-relationship-preregistration.md",
+ "artifact_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+ "n_per_arm_target": 200,
+ "arms": {
+  "CLASS": {
+   "n": 200,
+   "fetch_errors": 0,
+   "error_rate": 0.0,
+   "median_relations": 2.0,
+   "mean_relations": 3.715,
+   "n_with_any_relation": 159,
+   "CCR_C1_raw": 2.0,
+   "CCR_C2_conditional": 2.5157232704402515
+  },
+  "CONTROL": {
+   "n": 200,
+   "fetch_errors": 0,
+   "error_rate": 0.0,
+   "median_relations": 1.0,
+   "mean_relations": 1.685,
+   "n_with_any_relation": 114,
+   "CCR_C1_raw": 3.0,
+   "CCR_C2_conditional": 5.2631578947368425
+  }
+ },
+ "CCR_G1": {
+  "plain": "does MusicBrainz simply know more about one group than the other?",
+  "median_relations_CLASS": 2.0,
+  "median_relations_CONTROL": 1.0,
+  "ratio": 2.0,
+  "documentation_confound": true,
+  "primary_outcome": "CCR_C2_conditional"
+ },
+ "primary": {
+  "outcome": "CCR_C2_conditional",
+  "delta_points": -2.75,
+  "branch": "null"
+ },
+ "CCR_C3_relation_types_CLASS": {
+  "member of band": 21,
+  "is person": 2,
+  "involved with": 1,
+  "parent": 1
+ },
+ "run_state_complete": true
+}

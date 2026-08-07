@@ -1,6 +1,9 @@
 # Handoff — the clip cover-art fix, shipped to production, 2026-08-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions 2026-08-06 (later)** by
+[`2026-08-06-HANDOFF-cocredit-investigation.md`](2026-08-06-HANDOFF-cocredit-investigation.md).
+**It remains authoritative for the clip cover-art fix, for `DEP-34`, and for the deploy
+internals** — none of that was touched by the investigation that followed. Supersedes
 [`2026-08-06-HANDOFF-msw-adoption.md`](2026-08-06-HANDOFF-msw-adoption.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

@@ -1,0 +1,43 @@
+{
+ "what": "same-name mis-filing between the two Laura Lees, MB's own credits",
+ "n": 1,
+ "licenses_no_rate": true,
+ "bears_on": "docs/superpowers/2026-08-06-cocredit-investigation-execution-log.md section 6 item 1 (population half, OPEN)",
+ "not_evidence_for": "the thin-catalogue mechanism (TCE-)",
+ "recording_by_khruangbin_laura_lee": [
+  {
+   "title": "Not Up for Discussion",
+   "credited": [
+    {
+     "name": "Niia",
+     "mbid": "0ea67756-cb14-4912-89aa-92deb5a02580",
+     "disambiguation": ""
+    },
+    {
+     "name": "Laura Lee",
+     "mbid": "50ef58c4-a61a-4b83-9e54-ad66cd4672c7",
+     "disambiguation": "member of Khruangbin"
+    }
+   ]
+  }
+ ],
+ "release_group_by_soul_laura_lee": [
+  {
+   "title": "Not Up for Discussion",
+   "credited": [
+    {
+     "name": "Niia",
+     "mbid": "0ea67756-cb14-4912-89aa-92deb5a02580",
+     "disambiguation": ""
+    },
+    {
+     "name": "Laura Lee",
+     "mbid": "70a65cf5-9dee-4132-8e0e-143dcf3b8dcb",
+     "disambiguation": "soul & gospel singer/songwriter"
+    }
+   ]
+  }
+ ],
+ "inconsistent": true,
+ "consequence_for_TCE_G1": "TCE-G1 cell 1 required the Khruangbin Laura Lee to hold 0 credited release-groups and she does. Had this release-group been filed under her rather than under the soul singer, her count would be >= 1 and that cell would have FAILED instead. The instrument is sound; the ground truth the gate was checked against is contaminated."
+}

@@ -1,0 +1,38 @@
+{
+ "governing": "specs/2026-08-06-shared-recording-preregistration.md",
+ "within_artist_control": "rank 1 vs the neighbour at 80% depth of the SAME list (RCC-AM1)",
+ "arms": {
+  "CLASS": {
+   "n_attempted": 200,
+   "n_answered": 200,
+   "answer_rate": 1.0,
+   "pct_shared_rank1": 7.5,
+   "pct_shared_tail": 1.0,
+   "lift_points": 6.5
+  },
+  "CONTROL": {
+   "n_attempted": 200,
+   "n_answered": 200,
+   "answer_rate": 1.0,
+   "pct_shared_rank1": 17.0,
+   "pct_shared_tail": 4.0,
+   "lift_points": 13.0
+  }
+ },
+ "RCC_G1": {
+  "plain": "did the search actually answer, for both partners, for most artists?",
+  "answer_rate_CLASS": 1.0,
+  "answer_rate_CONTROL": 1.0,
+  "run_readable": true
+ },
+ "RCC_C1": {
+  "plain": "is the artist the app rates as most similar more likely to be someone they are credited on a recording with, than an artist further down that same list?",
+  "lift_points_CLASS": 6.5,
+  "branch": "null"
+ },
+ "RCC_C2": {
+  "plain": "does this happen more to the central-but-unlistened artists than to ordinary obscure ones?",
+  "class_minus_control_points": -6.5,
+  "branch": "general"
+ }
+}
