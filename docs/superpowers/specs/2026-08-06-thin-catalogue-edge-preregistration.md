@@ -8,8 +8,20 @@ looks at a famous artist's strongest connections, are artists with nothing of th
 recorded over-represented among them — and if so, does that survive into the map the website
 actually serves?*
 
-**Prompted by:** the closure of the Laura Lee puzzle (`docs/superpowers/2026-08-06-cocredit-investigation-execution-log.md` §6 item 1,
-and the `TCE-` premise directory's README). Two probes have already declined to attribute the
+**Prompted by:** the Laura Lee closure, `builder/analysis/2026-08-06-laura-lee-closure/README.md`,
+which **owns the figures** and against which this premise must be read.
+
+> **⚠ The premise is PARTIAL, and this probe does not inherit a closed question.** The closure
+> kills the same-name MBID collision hypothesis **for Laura Lee** and explicitly **does not
+> settle it as a class** (its §4a). So
+> `docs/superpowers/2026-08-06-cocredit-investigation-execution-log.md` §6 item 1 is
+> **discharged for its worked case and OPEN as a population question** — it must not be
+> recorded as closed, and **`TCE-` neither tests nor closes it.** They are different
+> mechanisms.
+>
+> **And the case that motivated this probe does not support it** (closure §4c). A single artist
+> cannot evidence a population pattern, and the cross-artist score comparison that makes her
+> look striking is barred by §0 below. Two probes have already declined to attribute the
 owner's observed class to band membership (`CCR-`, null and instrument-limited) or to shared
 recording credits (`RCC-`, null and instrument-validated). **This is a third and different
 mechanism, and it is not a variant of either.**
