@@ -14,10 +14,12 @@ interface Props {
   artists: Artist[];
   stopRule: StopRule;
   onBypass: (mbid: string, reason: BypassReason) => void;
+  /** MBIDs that were not on the previous path — briefly marked on arrival. */
+  changed?: Set<string>;
   ref?: Ref<JourneyControls>;
 }
 
-export function JourneyList({ artists, stopRule, onBypass, ref }: Props) {
+export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props) {
   // Which artists have a clip — not where it lives. Holding the URL here is what
   // let a tab left open serve a dead signature (C2); the player re-signs on play.
   const [hasClip, setHasClip] = useState<Record<string, boolean>>({});
@@ -62,6 +64,7 @@ export function JourneyList({ artists, stopRule, onBypass, ref }: Props) {
               endpointLabel={
                 i === 0 ? 'start' : i === artists.length - 1 ? 'destination' : undefined
               }
+              isNew={changed?.has(artist.mbid) ?? false}
               onPlay={player.playFrom}
               onToggle={player.toggle}
               onBypass={onBypass}

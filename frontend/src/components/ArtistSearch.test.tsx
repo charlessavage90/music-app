@@ -12,7 +12,7 @@ test('debounces, shows results, and selects one', async () => {
     { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 0.8 },
   ]);
   const onSelect = vi.fn();
-  render(<ArtistSearch label="From" onSelect={onSelect} />);
+  render(<ArtistSearch label="From" end="start" onSelect={onSelect} />);
 
   await user.type(screen.getByLabelText('From'), 'miles');
   const option = await screen.findByText('Miles Davis');
@@ -28,6 +28,7 @@ test('reports null once the text no longer matches the chosen artist', async () 
   render(
     <ArtistSearch
       label="To"
+      end="destination"
       initial={{ mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 1 }}
       onSelect={onSelect}
     />,
@@ -44,7 +45,7 @@ test('reports null once the text no longer matches the chosen artist', async () 
 test('says so when the catalogue has no match', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
-  render(<ArtistSearch label="From" onSelect={vi.fn()} />);
+  render(<ArtistSearch label="From" end="start" onSelect={vi.fn()} />);
 
   await user.type(screen.getByLabelText('From'), 'zzzz');
 
@@ -54,7 +55,7 @@ test('says so when the catalogue has no match', async () => {
 test('distinguishes a failed search from an empty one', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockRejectedValue(new Error('network'));
-  render(<ArtistSearch label="From" onSelect={vi.fn()} />);
+  render(<ArtistSearch label="From" end="start" onSelect={vi.fn()} />);
 
   await user.type(screen.getByLabelText('From'), 'miles');
 
@@ -63,7 +64,7 @@ test('distinguishes a failed search from an empty one', async () => {
 });
 
 test('opts out of the iOS keyboard rewriting artist names', () => {
-  render(<ArtistSearch label="From" onSelect={vi.fn()} />);
+  render(<ArtistSearch label="From" end="start" onSelect={vi.fn()} />);
   const input = screen.getByLabelText('From');
 
   // Artist names are proper nouns autocorrect does not know, and iOS rewrites
@@ -75,7 +76,7 @@ test('opts out of the iOS keyboard rewriting artist names', () => {
 
 test('does not query for empty input', async () => {
   const spy = vi.spyOn(client, 'searchArtists').mockResolvedValue([]);
-  render(<ArtistSearch label="From" onSelect={vi.fn()} />);
+  render(<ArtistSearch label="From" end="start" onSelect={vi.fn()} />);
   await new Promise((r) => setTimeout(r, 300));
   expect(spy).not.toHaveBeenCalled();
 });

@@ -14,7 +14,7 @@ test('a journey is usable at phone width', async ({ page }) => {
   await page.getByRole('button', { name: /miles davis/i }).first().click();
   await page.getByLabel('To').fill('daft punk');
   await page.getByRole('button', { name: /daft punk/i }).first().click();
-  await page.getByRole('button', { name: /find path/i }).click();
+  await page.getByRole('button', { name: /discover a path/i }).click();
 
   await expect(page.locator('ol li').first()).toBeVisible();
 
@@ -43,7 +43,21 @@ test('a journey is usable at phone width', async ({ page }) => {
   expect(box).not.toBeNull();
   expect(box!.width).toBeGreaterThan(160);
 
-  // 3. Both bypass signals stay reachable and distinguishable.
-  await expect(interior.getByRole('button', { name: /not for me/i })).toBeVisible();
-  await expect(interior.getByRole('button', { name: /i know them/i })).toBeVisible();
+  // 3. Both bypass signals stay reachable and distinguishable — now one level
+  //    down, behind the footer strip. Opening the tray is part of the check:
+  //    a strip that renders but whose tray does not fit is the same defect in a
+  //    new place, and only a real browser can tell.
+  const strip = interior.getByRole('button', { name: /reroute from here/i });
+  await expect(strip).toBeVisible();
+  await strip.click();
+  await expect(interior.getByRole('button', { name: /steer away/i })).toBeVisible();
+  await expect(interior.getByRole('button', { name: /dig deeper/i })).toBeVisible();
+
+  // 4. The open tray must not introduce sideways scroll either. The two options
+  //    stack on a phone precisely because their captions do not fit side by
+  //    side at 390px, and nothing but a layout engine can confirm that.
+  const overflowOpen = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflowOpen).toBeLessThanOrEqual(1);
 });

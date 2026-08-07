@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { usePath } from '@/hooks/usePath';
 import { useEndpoints } from '@/hooks/useEndpoints';
+import { useRerollFeedback } from '@/hooks/useRerollFeedback';
 import { JourneyList, type JourneyControls } from '@/components/JourneyList';
 import { PathStatus } from '@/components/PathStatus';
 import { PathSkeleton } from '@/components/PathSkeleton';
@@ -17,12 +18,10 @@ export function PathPage() {
   const state = usePath();
   const journey = useRef<JourneyControls>(null);
 
-  // Which control started the rebuild currently in flight. Drives the message
-  // over the held path; cleared the moment a path lands.
-  const [reason, setReason] = useState<RerollReason | null>(null);
-  useEffect(() => {
-    if (state.status !== 'loading') setReason(null);
-  }, [state.status]);
+  // Confirmation of a press, on its own clock rather than the request's. The
+  // message used to be cleared the moment a path landed, which meant a fast
+  // rebuild showed it for less time than it takes to read.
+  const feedback = useRerollFeedback(state.status, state.artists);
 
   // Only needed while there is nothing on screen to name the endpoints.
   const endpoints = useEndpoints(from, to, state.artists.length > 0);
@@ -32,7 +31,7 @@ export function PathPage() {
   // until the new path arrived, which reads as the button not having worked.
   function go(next: URLSearchParams, why: RerollReason) {
     journey.current?.stop();
-    setReason(why);
+    feedback.begin(why);
     const qs = next.toString();
     navigate(`/path/${from}/${to}${qs ? `?${qs}` : ''}`);
   }
@@ -53,7 +52,12 @@ export function PathPage() {
     newPathParams.set('toName', state.artists[state.artists.length - 1].name);
   }
 
-  const rebuilding = state.status === 'loading' && state.artists.length > 0;
+  // Dim while a press is being answered AND while its message is still being
+  // held. Without the second half the path would brighten underneath a notice
+  // that still says it is working. The trailing clause keeps the dim for a
+  // rebuild nobody pressed — Back undoing a bypass — which has no message.
+  const rebuilding =
+    feedback.notice !== null || (state.status === 'loading' && state.artists.length > 0);
 
   return (
     <main className="mx-auto w-full max-w-[620px] px-5 py-6 pb-40 sm:py-9">
@@ -89,17 +93,26 @@ export function PathPage() {
       ) : state.artists.length === 0 ? (
         <PathSkeleton from={endpoints.from} to={endpoints.to} />
       ) : (
-        <div className="relative">
+        <div>
           <PathIntro count={state.artists.length - 2} stopRule={state.stopRule} />
-          <div className={rebuilding ? 'opacity-60 transition-opacity' : ''}>
-            <JourneyList
-              ref={journey}
-              artists={state.artists}
-              stopRule={state.stopRule}
-              onBypass={handleBypass}
-            />
+          {/* The positioning context is the PATH, not the path plus the
+              explainer above it. It used to wrap both, so on a first visit —
+              when the explainer is open and tall — the notice landed on top of
+              the explainer instead of over the journey it describes. Reported
+              2026-07-28 and cosmetic while the notice only flashed; holding it
+              for NOTICE_MIN_MS made it something you always see. */}
+          <div className="relative">
+            <div className={rebuilding ? 'opacity-60 transition-opacity' : ''}>
+              <JourneyList
+                ref={journey}
+                artists={state.artists}
+                stopRule={state.stopRule}
+                onBypass={handleBypass}
+                changed={feedback.changed}
+              />
+            </div>
+            {feedback.notice && <RerollNotice reason={feedback.notice} />}
           </div>
-          {rebuilding && reason && <RerollNotice reason={reason} />}
         </div>
       )}
     </main>

@@ -19,16 +19,26 @@ test('uses the singular for one', () => {
 });
 
 // JourneyList already says the useful thing for this case, and there is no
-// step count to state and no bypass buttons to explain.
+// step count to state and no footer strip anywhere to explain.
 test('stands down entirely when the two artists are adjacent', () => {
   render(<PathIntro count={0} stopRule="adjacent_only" />);
   expect(screen.queryByText(/we found a path/i)).not.toBeInTheDocument();
-  expect(screen.queryByText(/what do the two buttons do/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/how do i change the path/i)).not.toBeInTheDocument();
 });
 
 test('the explainer is open on a first visit and says a press rebuilds everything', () => {
   render(<PathIntro count={3} stopRule="natural" />);
   expect(screen.getByText(/either one rebuilds the whole journey/i)).toBeInTheDocument();
+});
+
+// The explainer's job changed with the tray: it now has to say where the
+// control IS, because it is no longer two buttons sitting in plain view. If
+// these three strings drift from the card's own wording, the help is wrong.
+test('the explainer names the strip and both directions by their real labels', () => {
+  render(<PathIntro count={3} stopRule="natural" />);
+  expect(screen.getByText(/reroute from here/i)).toBeInTheDocument();
+  expect(screen.getByText(/steer away/i)).toBeInTheDocument();
+  expect(screen.getByText(/dig deeper/i)).toBeInTheDocument();
 });
 
 test('dismissal persists across a remount', async () => {
@@ -41,5 +51,5 @@ test('dismissal persists across a remount', async () => {
   render(<PathIntro count={3} stopRule="natural" />);
   expect(screen.queryByText(/either one rebuilds the whole journey/i)).not.toBeInTheDocument();
   // Still reachable — dismissed is not deleted.
-  expect(screen.getByRole('button', { name: /what do the two buttons do/i })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /how do i change the path/i })).toBeInTheDocument();
 });

@@ -4,13 +4,19 @@ import type { Artist } from '@/api/types';
 
 interface Props {
   label: string;
+  /**
+   * Which end of the journey this box is. Drives only the dot's colour, which
+   * carries the same two colours as the journey rail's gradient — deliberately
+   * not derived from `label`, so the dot survives a wording change.
+   */
+  end: 'start' | 'destination';
   /** Already-chosen artist to open with — set when returning from a path. */
   initial?: Artist | null;
   /** An artist, or null when the box no longer holds a chosen one. */
   onSelect: (artist: Artist | null) => void;
 }
 
-export function ArtistSearch({ label, initial, onSelect }: Props) {
+export function ArtistSearch({ label, end, initial, onSelect }: Props) {
   const [query, setQuery] = useState(initial?.name ?? '');
   const [results, setResults] = useState<Artist[]>([]);
   const [open, setOpen] = useState(false);
@@ -70,9 +76,22 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
       >
         {label}
       </label>
+      {/* Its own positioning context, so the dot centres on the INPUT rather
+          than on the label-plus-input block. The dropdown below still hangs off
+          the outer wrapper, which is what puts it under the whole field. */}
+      <div className="relative">
+      {/* The mockup's dot, never ported. Purely decorative — it colour-codes the
+          two ends against the journey rail — so it is hidden from assistive
+          tech, and the input carries its own left padding to clear it. */}
+      <span
+        aria-hidden
+        className={`pointer-events-none absolute left-4 sm:left-[18px] top-1/2 z-10 block size-[7px] -translate-y-1/2 rounded-full ${
+          end === 'start' ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-dig)]'
+        }`}
+      />
       <input
         id={inputId}
-        className="w-full h-[52px] sm:h-[54px] rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] px-4 sm:px-[18px] text-[19px] sm:text-[20px] tracking-[-.01em] outline-none transition-shadow hover:border-[var(--color-border-hover)] focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_rgba(74,144,217,.14)]"
+        className="w-full h-[52px] sm:h-[54px] rounded-lg bg-[var(--color-field)] border-[1.5px] border-[var(--color-field-border)] pl-9 pr-4 sm:pl-[35px] sm:pr-[18px] text-[19px] sm:text-[20px] tracking-[-.01em] outline-none shadow-[0_1px_0_rgba(231,233,238,.045)_inset,0_6px_18px_-10px_rgba(0,0,0,.9)] transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-field-hover)] focus:border-[var(--color-accent)] focus:bg-[var(--color-field-hover)] focus:shadow-[0_0_0_4px_rgba(74,144,217,.13),0_1px_0_rgba(231,233,238,.045)_inset]"
         placeholder="Search an artist"
         value={query}
         onChange={(e) => {
@@ -97,6 +116,7 @@ export function ArtistSearch({ label, initial, onSelect }: Props) {
         autoCapitalize="off"
         spellCheck={false}
       />
+      </div>
       {open && results.length > 0 && (
         <ul className="absolute z-10 left-0 right-0 top-[calc(100%+8px)] rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-1.5 shadow-[0_24px_48px_-12px_rgba(0,0,0,.75),0_2px_6px_rgba(0,0,0,.4)]">
           {results.map((a) => (

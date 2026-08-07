@@ -10,10 +10,15 @@ export type RerollReason = BypassReason | 'reset';
  * penalty to the disliked artist's NEIGHBOURHOOD, decaying over `avoid_radius`
  * hops; `known` relaxes the obscurity floor more aggressively. If either
  * mechanism changes, these strings are wrong.
+ *
+ * Reworded 2026-08-07 to echo the tray's own verbs — the buttons now read
+ * "Steer away" and "Dig deeper", and a notice that said something else made the
+ * press and its response look like two different events. The mechanisms are
+ * unchanged, so the accuracy above still holds.
  */
 const MESSAGE: Record<RerollReason, string> = {
-  dislike: 'Steering around that sound',
-  known: 'Digging for someone newer',
+  dislike: 'Steering away from that sound',
+  known: 'Digging deeper for someone newer',
   reset: 'Back to the original path',
 };
 
@@ -24,7 +29,11 @@ const MESSAGE: Record<RerollReason, string> = {
  */
 export function RerollNotice({ reason }: { reason: RerollReason }) {
   return (
-    <div className="pointer-events-none absolute inset-0 z-10 flex items-start justify-center pt-24">
+    // Offset measured from the top of the PATH (PathPage owns that positioning
+    // context). It was pt-24 against a container that also held the explainer,
+    // which is how it came to sit on top of it. Over the first card is the
+    // right place: the notice describes the thing underneath it.
+    <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center pt-9">
       <div
         role="status"
         aria-live="polite"
