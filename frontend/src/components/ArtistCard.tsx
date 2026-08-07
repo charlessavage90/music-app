@@ -12,6 +12,11 @@ interface Props {
   isEndpoint?: boolean;
   /** Which end, when this is an endpoint. Drives the eyebrow label. */
   endpointLabel?: 'start' | 'destination';
+  /**
+   * This artist was not on the previous path. Marked briefly on arrival, which
+   * is the confirmation that survives a rebuild answering faster than the eye.
+   */
+  isNew?: boolean;
   onPlay: (mbid: string) => void;
   onToggle?: () => void;
   onBypass: (mbid: string, reason: BypassReason) => void;
@@ -31,7 +36,7 @@ const TRAY_OPTION =
   'flex w-full items-baseline gap-2 rounded-lg border px-3.5 py-2.5 text-left transition-colors sm:flex-1 sm:min-w-0';
 
 export function ArtistCard({
-  artist, isPlaying, isCurrent, isEndpoint, endpointLabel,
+  artist, isPlaying, isCurrent, isEndpoint, endpointLabel, isNew,
   onPlay, onToggle, onBypass, onClipResolved,
 }: Props) {
   const clip = useClip(artist.mbid);
@@ -53,6 +58,11 @@ export function ArtistCard({
         // A step card's footer strip bleeds to the card's edges, so the card
         // owns no bottom padding and must clip: the strip supplies both.
         isEndpoint ? 'py-3.5' : 'overflow-hidden pt-3.5 pb-0'
+      } ${
+        // Fades from an accent ring to nothing over GLOW_MS. The card is not
+        // re-mounted between paths when the artist survives, so this class
+        // arriving IS the animation trigger.
+        isNew ? '[animation:ap-glow_800ms_ease-out]' : ''
       } ${
         isPlaying
           ? 'bg-[var(--color-accent)]/[.13] border-[var(--color-accent)]/[.34]'
@@ -88,12 +98,22 @@ export function ArtistCard({
           >
             {artist.name}
           </div>
-          <div
-            className={`mt-1 text-[12.5px] truncate ${
-              silent ? 'text-[var(--color-label)]' : 'text-[var(--color-muted)]'
-            }`}
-          >
-            {clip.status === 'loading' ? '…' : clip.track?.title ?? 'No preview available'}
+          {/* The duration sits in its own non-shrinking span so a long title
+              truncates and "0:30 sample" survives — the reverse would drop the
+              one fact this line was changed to carry. Only shown when there IS
+              something to play; "No preview available" must not claim 30
+              seconds of it. */}
+          <div className="mt-1 flex items-baseline gap-1.5 text-[12.5px]">
+            <span
+              className={`truncate ${
+                silent ? 'text-[var(--color-label)]' : 'text-[var(--color-muted)]'
+              }`}
+            >
+              {clip.status === 'loading' ? '…' : clip.track?.title ?? 'No preview available'}
+            </span>
+            {playable && (
+              <span className="flex-none text-[var(--color-label)]">· 0:30 sample</span>
+            )}
           </div>
           {isPlaying && (
             <div className="mt-1.5 text-[10.5px] font-medium uppercase tracking-[.1em] text-[var(--color-accent)]">

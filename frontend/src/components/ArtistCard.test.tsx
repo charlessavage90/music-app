@@ -53,6 +53,21 @@ test('play disabled and card still present when clip is 204', async () => {
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
 });
 
+test('a card with a clip says how long it is', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  render(<ArtistCard artist={artist('len')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
+  expect(await screen.findByText(/0:30 sample/i)).toBeInTheDocument();
+});
+
+// The duration is a claim about a clip. A card with nothing to play must not
+// make it — that would read as "30 seconds of silence" rather than "nothing".
+test('a card with no clip claims no duration', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  render(<ArtistCard artist={artist('nolen')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
+  expect(await screen.findByText(/no preview available/i)).toBeInTheDocument();
+  expect(screen.queryByText(/0:30 sample/i)).not.toBeInTheDocument();
+});
+
 test('play fires onPlay when a clip exists', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });

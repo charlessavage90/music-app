@@ -55,3 +55,25 @@ input::placeholder { color: var(--color-placeholder); }
   0%   { transform: scaleY(.12); }
   100% { transform: scaleY(1); }
 }
+
+/* Added 2026-08-07. Marks an artist who was NOT on the previous path, so a
+   rebuild confirms itself even when the server answers faster than the notice
+   can be read. Fades to nothing rather than switching off, so a run of presses
+   reads as motion and not as flicker. Literal rgba: a keyframe cannot resolve
+   a custom property through a colour-mix at every step in Safari 17. */
+@keyframes ap-glow {
+  0% {
+    box-shadow: 0 0 0 2px rgba(74, 144, 217, .55), 0 0 18px -2px rgba(74, 144, 217, .38);
+  }
+  100% {
+    box-shadow: 0 0 0 2px rgba(74, 144, 217, 0), 0 0 18px -2px rgba(74, 144, 217, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The mark still has to happen — it is the confirmation, not decoration — so
+     it holds as a static ring and disappears rather than animating away. */
+  @keyframes ap-glow {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(74, 144, 217, .55); }
+  }
+}
