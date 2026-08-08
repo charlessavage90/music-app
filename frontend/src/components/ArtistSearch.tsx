@@ -118,7 +118,16 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
       />
       </div>
       {open && results.length > 0 && (
-        <ul className="absolute z-10 left-0 right-0 top-[calc(100%+8px)] rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-1.5 shadow-[0_24px_48px_-12px_rgba(0,0,0,.75),0_2px_6px_rgba(0,0,0,.4)]">
+        // z-20, NOT z-10, and the gap is the fix. This list hangs over the
+        // NEXT field, whose coloured dot is also absolutely positioned. Both
+        // boxes are plain flex siblings with no transform, filter or opacity
+        // between them, so nothing creates an intervening stacking context and
+        // every z-index here resolves against the same one. At EQUAL z-index
+        // the tie breaks on DOM order — and the next field's dot comes later
+        // in the document than this list, so it painted on top of the open
+        // dropdown. The invariant is that an open dropdown outranks every
+        // field decoration; matching the dot's z-10 is what broke it.
+        <ul className="absolute z-20 left-0 right-0 top-[calc(100%+8px)] rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-1.5 shadow-[0_24px_48px_-12px_rgba(0,0,0,.75),0_2px_6px_rgba(0,0,0,.4)]">
           {results.map((a) => (
             <li key={a.mbid}>
               <button
