@@ -74,7 +74,7 @@ uv run artistpath-build bootstrap --out bootstrap.json
 uv run artistpath-build crawl  --bootstrap bootstrap.json --archive-dir ./archive
 uv run artistpath-build build  --archive-dir ./archive --out graph-v1.bin
 uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 500
-# --target N caps discovery for trial runs; --s3-bucket/--s3-prefix use S3 archive
+# --target N caps artists FETCHED (CEX-2); --s3-bucket/--s3-prefix use S3 archive
 ```
 
 ### api (from `api/`)
