@@ -105,9 +105,19 @@ def rescale_scores(
                 "it before raising similarity_damping above 0."
             )
         log_scale = math.log1p(scale)
-        return [
-            min(1.0, math.log1p(max(0.0, v)) / log_scale) for v in raw
-        ]
+        rescaled = [min(1.0, math.log1p(max(0.0, v)) / log_scale) for v in raw]
+        # CEX-M1: both figures are population-dependent and price the router's
+        # primary term (w_sim). Logged so two builds can be compared rather
+        # than assumed.
+        saturated = sum(1 for value in rescaled if value >= 1.0)
+        logger.info(
+            "rescale p99 scale=%.6g | saturated edges %d of %d (%.3f%%)",
+            scale,
+            saturated,
+            len(rescaled),
+            100.0 * saturated / len(rescaled),
+        )
+        return rescaled
 
     raise ValueError(
         f"unsupported rescale strategy: {strategy!r}. 'percentile_rank' lost "
