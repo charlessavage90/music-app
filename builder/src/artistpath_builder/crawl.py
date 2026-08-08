@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import time
 from collections import deque
 from collections.abc import Callable
@@ -258,15 +259,20 @@ class Crawler:
         }
 
     def _save_checkpoint(self) -> None:
+        # Written temp-then-rename: this file is rewritten every
+        # checkpoint_every fetches across a multi-hour run, and it is the only
+        # record of what has been done. A truncated write loses the crawl
+        # (CEXR-10). os.replace is atomic on the same filesystem.
         self.checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
-        self.checkpoint_path.write_text(
-            json.dumps(
-                {
-                    "algorithm": self.config.algorithm,
-                    "done": sorted(self._done),
-                    "discovered": sorted(self.discovered),
-                    "exhausted": self._exhausted,
-                },
-                sort_keys=True,
-            )
+        payload = json.dumps(
+            {
+                "algorithm": self.config.algorithm,
+                "done": sorted(self._done),
+                "discovered": sorted(self.discovered),
+                "exhausted": self._exhausted,
+            },
+            sort_keys=True,
         )
+        temp = self.checkpoint_path.with_name(self.checkpoint_path.name + ".tmp")
+        temp.write_text(payload)
+        os.replace(temp, self.checkpoint_path)

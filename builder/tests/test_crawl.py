@@ -1,4 +1,5 @@
 import json
+import os
 
 import pytest
 
@@ -274,3 +275,21 @@ def test_a_completed_crawl_records_that_it_exhausted_the_graph(tmp_path, config)
     crawler = _crawler(tmp_path, config, FakeFetcher())
     crawler.crawl([A])
     assert json.loads((tmp_path / "checkpoint.json").read_text())["exhausted"] is True
+
+
+def test_checkpoint_is_written_via_a_temp_file_then_renamed(tmp_path, config, monkeypatch):
+    # A truncated checkpoint is the only unrecoverable failure in a 4-hour run.
+    seen: list[str] = []
+    real_replace = os.replace
+
+    def spy(src, dst):
+        seen.append(str(src))
+        return real_replace(src, dst)
+
+    monkeypatch.setattr(os, "replace", spy)
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+
+    assert seen, "checkpoint was not written through os.replace"
+    assert all(src.endswith(".tmp") for src in seen)
+    assert json.loads((tmp_path / "checkpoint.json").read_text())["done"]
