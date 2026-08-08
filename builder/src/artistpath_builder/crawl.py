@@ -30,6 +30,17 @@ class TransientFetchError(RuntimeError):
     """Retryable: rate limiting, timeouts, 5xx."""
 
 
+class FrontierExhausted(RuntimeError):
+    """Asked for more artists than are known, with nothing left to crawl.
+
+    ULC-F3's signature. The damage was never that the crawl stopped — it is
+    that it stopped while logging `0 processed` and exiting 0, which reads as
+    success. Distinguished from a genuinely exhausted graph by the
+    checkpoint's `exhausted` flag (CEXR-5): without it, an idempotent re-run
+    after a completed crawl is indistinguishable from the broken state.
+    """
+
+
 def http_fetcher(config: BuilderConfig) -> Fetcher:
     """The real network fetcher. Kept out of Crawler so tests inject a fake.
 
@@ -92,6 +103,7 @@ class Crawler:
         state = self._load_checkpoint()
         self._done: set[str] = state["done"]
         self.discovered: set[str] = state["discovered"]
+        self._exhausted: bool = state.get("exhausted", False)
 
     def similar_key(self, mbid: str) -> str:
         # The production archive predates algorithm-scoped keys and keeps its
@@ -121,6 +133,27 @@ class Crawler:
             if mbid not in self.discovered:
                 self.discovered.add(mbid)
                 queue.append(mbid)
+
+        # CEX-3: refuse rather than exit 0 with nothing done. The damage of
+        # ULC-F3 was never that the crawl stopped — it is that it stopped
+        # while reading as success. `_exhausted` is what separates this from a
+        # graph that was genuinely crawled out (CEXR-5): the queue is rebuilt
+        # from the checkpoint every run, so within a single invocation the two
+        # states are identical.
+        if (
+            not queue
+            and not self._exhausted
+            and len(self._done) < self.config.target_artist_count
+        ):
+            raise FrontierExhausted(
+                f"target is {self.config.target_artist_count} but only "
+                f"{len(self._done)} artists are done and the frontier is empty. "
+                "The checkpoint records no undiscovered artists, which is "
+                "ULC-F3: the frontier past the old target was never recorded. "
+                "Rebuild it from the archive first:\n"
+                "  artistpath-build refrontier --checkpoint <path> "
+                "--archive-dir <dir> --algorithm <alg>"
+            )
 
         processed = 0
         # CEX-2: the bound is on artists FETCHED, not artists discovered.
@@ -155,6 +188,10 @@ class Crawler:
                     len(queue),
                 )
 
+        # Record the terminal condition: an empty queue here means the graph
+        # was crawled out, which is what licenses a later re-run to decline to
+        # raise (CEXR-5).
+        self._exhausted = not queue
         self._save_checkpoint()
         logger.info(
             "crawl finished: %d processed, %d discovered, %d failures",
@@ -196,9 +233,9 @@ class Crawler:
             self.failures.append(mbid)
         return None
 
-    def _load_checkpoint(self) -> dict[str, set[str]]:
+    def _load_checkpoint(self) -> dict:
         if not self.checkpoint_path.is_file():
-            return {"done": set(), "discovered": set()}
+            return {"done": set(), "discovered": set(), "exhausted": False}
         state = json.loads(self.checkpoint_path.read_text())
         # Every checkpoint written before the algorithm was selectable
         # predates this field, so a missing one means the production
@@ -214,6 +251,10 @@ class Crawler:
         return {
             "done": set(state.get("done", [])),
             "discovered": set(state.get("discovered", [])),
+            # CEXR-5: absent on every checkpoint written before CEX-3, and
+            # False is the right reading — those crawls are exactly the ones
+            # that may be in the ULC-F3 state.
+            "exhausted": state.get("exhausted", False),
         }
 
     def _save_checkpoint(self) -> None:
@@ -224,6 +265,7 @@ class Crawler:
                     "algorithm": self.config.algorithm,
                     "done": sorted(self._done),
                     "discovered": sorted(self.discovered),
+                    "exhausted": self._exhausted,
                 },
                 sort_keys=True,
             )

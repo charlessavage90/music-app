@@ -310,3 +310,32 @@ def test_refrontier_recovers_the_frontier_from_the_archive(tmp_path, capsys):
     state = json.loads(checkpoint.read_text())
     assert set(state["discovered"]) == {A, B}
     assert "frontier" in capsys.readouterr().out
+
+
+def test_crawl_reports_an_exhausted_frontier_as_a_message_not_a_traceback(tmp_path):
+    # CEXR-14: FrontierExhausted's message CARRIES THE REMEDY (run refrontier),
+    # so it has to reach the operator as a message. Raised from crawl() it
+    # would surface as a traceback, where the remedy is the least visible line.
+    # No fetch happens: the refusal fires before the loop.
+    checkpoint = tmp_path / "checkpoint.json"
+    checkpoint.write_text(json.dumps({"done": [A], "discovered": [A]}))
+    bootstrap = tmp_path / "bootstrap.json"
+    bootstrap.write_text(json.dumps([{"mbid": A}]))
+
+    with pytest.raises(SystemExit) as exc:
+        main(
+            [
+                "crawl",
+                "--bootstrap",
+                str(bootstrap),
+                "--checkpoint",
+                str(checkpoint),
+                "--archive-dir",
+                str(tmp_path / "archive"),
+                "--target",
+                "99",
+            ]
+        )
+
+    assert "refrontier" in str(exc.value)
+    assert "ULC-F3" in str(exc.value)

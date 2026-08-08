@@ -37,7 +37,7 @@ from artistpath_builder.acceptance import (
 from artistpath_builder.archive import LocalArchive, S3Archive
 from artistpath_builder.artifact import deserialise, serialise
 from artistpath_builder.config import PERMITTED_ALGORITHMS, BuilderConfig
-from artistpath_builder.crawl import Crawler, http_fetcher
+from artistpath_builder.crawl import Crawler, FrontierExhausted, http_fetcher
 from artistpath_builder.fixture import extract_fixture
 from artistpath_builder.frontier import reconstruct_referenced, rewrite_checkpoint
 from artistpath_builder.manifest import build_manifest, write_manifest
@@ -148,7 +148,12 @@ def cmd_crawl(args) -> int:
         fetcher=http_fetcher(config),
         checkpoint_path=Path(args.checkpoint),
     )
-    crawler.crawl([row["mbid"] for row in bootstrap])
+    try:
+        crawler.crawl([row["mbid"] for row in bootstrap])
+    except FrontierExhausted as exc:
+        # CEXR-14: the message carries the remedy, so it must reach the
+        # operator as a message rather than as a traceback.
+        raise SystemExit(str(exc)) from exc
     if crawler.failures:
         logging.warning("%d artists failed permanently", len(crawler.failures))
     return 0
