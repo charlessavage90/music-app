@@ -303,7 +303,7 @@ def main(
     p_crawl.add_argument(
         "--algorithm",
         default=None,
-        help="source algorithm for trial runs; default is production's (ALG-E)",
+        help="source algorithm; default is ALG-E, NOT the adopted map's ALG-B",
     )
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
@@ -353,7 +353,7 @@ def main(
     p_build.add_argument(
         "--cap-strategy",
         default=None,
-        help="connection rule; default config's (mutual_knn until adoption)",
+        help="cap rule; default config's (trimmed_union since the MSW- adoption)",
     )
     p_build.add_argument(
         "--require-fame",
