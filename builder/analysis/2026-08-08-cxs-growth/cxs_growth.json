@@ -1,0 +1,47 @@
+{
+  "governing_document": "docs/superpowers/specs/2026-08-08-crawl-growth-subset-preregistration.md",
+  "cohort_size": 10783,
+  "cells": [
+    {
+      "cell": "CXS-25",
+      "population": 25000,
+      "nodes": 21566,
+      "edges": 615612,
+      "share_at_ceiling": 0.1729,
+      "share_degree_1": 0.0123,
+      "cohort_median_degree": 14,
+      "cohort_mean_degree": 14.81,
+      "cohort_absent": 0,
+      "cohort_absent_share": 0.0
+    },
+    {
+      "cell": "CXS-50",
+      "population": 50000,
+      "nodes": 42638,
+      "edges": 1066060,
+      "share_at_ceiling": 0.1506,
+      "share_degree_1": 0.0275,
+      "cohort_median_degree": 17,
+      "cohort_mean_degree": 18.97,
+      "cohort_absent": 6,
+      "cohort_absent_share": 0.0006
+    },
+    {
+      "cell": "CXS-75",
+      "population": 75000,
+      "nodes": 63056,
+      "edges": 1379944,
+      "share_at_ceiling": 0.1298,
+      "share_degree_1": 0.0492,
+      "cohort_median_degree": 19,
+      "cohort_mean_degree": 21.36,
+      "cohort_absent": 6,
+      "cohort_absent_share": 0.0006
+    }
+  ],
+  "CXS_C1_relative_change": 0.3571,
+  "CXS_C1_material": true,
+  "CXS_C1_monotonic": true,
+  "CXS_C2_final_share": 0.0006,
+  "CXS_C2_material": false
+}
