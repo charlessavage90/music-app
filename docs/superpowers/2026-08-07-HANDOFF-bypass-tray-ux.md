@@ -1,8 +1,11 @@
 # Handoff — the bypass tray UX shipped and deployed, 2026-08-07
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-08-06-HANDOFF-tcr-rerun.md`](2026-08-06-HANDOFF-tcr-rerun.md) on next actions. It does
-**not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+**Role: COMPLETE — ⚠ SUPERSEDED 2026-08-08 ON NEXT ACTIONS by
+[`2026-08-08-HANDOFF-cex-design.md`](2026-08-08-HANDOFF-cex-design.md).** Its own record of the
+bypass-tray track is untouched and remains accurate; only its ranking as "what to do next" has
+moved. Supersedes [`2026-08-06-HANDOFF-tcr-rerun.md`](2026-08-06-HANDOFF-tcr-rerun.md) on next
+actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns
+it.
 
 **A SEAM handoff.** The track ran to completion, everything is committed and pushed, PR #89
 is merged, the work is **deployed to production and verified**, nothing is in flight, no port

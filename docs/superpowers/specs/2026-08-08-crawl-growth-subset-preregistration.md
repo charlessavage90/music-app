@@ -63,6 +63,10 @@ the archive at 75,001.
 - **`pop_raw` is population-dependent by construction** — it is score-weighted in-degree over
   rescaled scores (`pipeline.py:365-375`), and `rescale_scores` normalises on the p99 of *this
   build's* edges. **This is the moving-ruler confound, and `CXS-4` below is the control for it.**
+  *(Correction noted 2026-08-08 at the closeout audit, text deliberately left as committed:
+  **`CXS-4` is a typo for §4** — the cohort section immediately below. No identifier `CXS-4`
+  exists. Recorded rather than silently edited, because this document's authority rests on
+  being the text that was committed before the run.)*
 - **The `no_release` and `featured_credit` drop lists are 75k-era snapshots** applied to each
   subset via `& known`, so a subset drops proportionally fewer artists. It shifts node counts
   slightly; it does not bias degree within the cohort, because the cohort is fixed.

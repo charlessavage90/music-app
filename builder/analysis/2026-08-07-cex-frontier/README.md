@@ -36,7 +36,15 @@ disagree with.
   responses. Its only two ALG-B neighbours, Phish and Fleet Foxes, are both crawled and
   shipped, and neither points back: Goose scores 15 against Phish, whose own
   hundred-artist list bottoms out at 62. **Growth cannot reach an artist nobody names**
-  — only seeding can (`CEX-R1`).
+  (`CEX-R1`).
+
+  > **⚠ FORWARD POINTER, added 2026-08-08 — this bullet originally ended "— only seeding
+  > can", and that half is now FALSIFIED.** Seeding was tested the next day and **does not
+  > work either**: a matched-pair build produced a zero-node, zero-edge delta, and Goose is
+  > absent at all three degree ceilings including the most permissive selectable one. See
+  > `docs/superpowers/specs/2026-08-07-crawl-extension-design.md` §3 and `CEX-R4`.
+  > **The figures in this file are unchanged and remain correct**; only the remedy the
+  > sentence proposed was wrong.
 - **Commander Cody was never missing.** Crawled, shipped, 4 inbound references. The
   owner could not find him because search is literal-substring and the map spells him
   *"& His Lost Planet Airmen"* against the queried *"and the Lost Planet Airmen"*. That

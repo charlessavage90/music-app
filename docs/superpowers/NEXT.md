@@ -12,16 +12,62 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-07, when THE NEW BYPASS UX SHIPPED TO PRODUCTION and `DEP-34-FIX`
-LANDED.** **The test queue is EMPTY — the owner discharged both live entries.** **THE NEXT
-ACTION IS THE OWNER'S and nothing is blocked.** Three things are his and none blocks
-another: **`SNS-1`** (the billing alarm has no subscriber — new, found by this closeout's
-drift gate), **Option C** (same-name population probe, still unblocked from 2026-08-06), and
-**pressing the new UI on the live site** (queued).
+**Last updated: 2026-08-08, when the `CEX-` CRAWL-EXTENSION DESIGN AND PLAN WERE COMMITTED.**
+**THE NEXT ACTION IS WORK, and its remit is set: EXECUTE THE `CEX-` PLAN, in a FRESH session,
+starting at Task 1.** **⚠ The test queue has ONE live item** — the bypass-tray UX entry of
+2026-08-07. *(The line here previously said the queue was empty; that was true for the hours
+between the owner discharging two entries and the same closeout queueing a third, and it went
+stale inside its own paragraph.)* Also his and blocking nothing: **`SNS-1`** (the billing alarm
+has no subscriber) and **Option C** (same-name population probe).
 
 ---
 
-> ## ✅ THE NEW BYPASS UX IS LIVE, 2026-08-07 — and `DEP-34-FIX` IS CLOSED. **The next action is the OWNER'S.**
+> ## ▶ THE `CEX-` CRAWL EXTENSION IS DESIGNED AND PLANNED, 2026-08-08 — **the next action is WORK: execute the plan in a FRESH session.** Nothing is blocked.
+>
+> **The owner approved the crawl expansion, conditional on snapshotting the archive so it can
+> be reverted.** That snapshot is **plan Task 9 Step 1 and a precondition for the whole
+> track**, not a nicety: after the crawl appends, today's graph cannot be rebuilt from source.
+>
+> **What this session did NOT do: change any shipped code.** The diff is three documents, two
+> doc-map rows and two analysis directories. No graph, no artifact, no cost function, no
+> router, no frontend.
+>
+> **⚠ HALF THE ORIGINAL MOTIVATION DISSOLVED UNDER TEN MINUTES OF CHECKING, and this is the
+> thing to carry.** The owner named two missing artists. **Commander Cody was never missing** —
+> crawled and shipped; he is unfindable because search is literal-substring and the map spells
+> him *"& His Lost Planet Airmen"* against the queried *"and the Lost Planet Airmen"*
+> (`CEX-R3`, **a search defect, its own track, and the only lever that addresses "I cannot find
+> this artist" for artists that are present**). **Goose cannot be in the map at all** — nobody
+> among 75,000 artists names them, so growth cannot reach them (`CEX-R1`), and **seeding does
+> not work either**: falsified by a matched-pair build with a zero-node, zero-edge delta and
+> again at three degree ceilings (`CEX-R4`). **Do not re-plan either as a crawl outcome.**
+>
+> **⚠ TWO CLAIMS MADE BY THAT SESSION WERE FALSIFIED BY MEASUREMENT AND MUST NOT BE REVERTED.**
+> That seeding would work (it does not — the original argument used half the cap algorithm),
+> and that growing the crawl would crowd the hubs and thin the obscure tail. **It does the
+> opposite:** `CXS-C1` rose monotonically and materially, and hub saturation *fell*. Figures
+> owned by `builder/analysis/2026-08-08-cxs-growth/` — cited, never restated.
+>
+> **⚠ `config.py:17` IS STALE IN THE TREE RIGHT NOW.** It calls ALG-E "the adopted 75k
+> archive's algorithm"; the adopted map's lineage is **ALG-B**. Recorded as `CEX-R5`, fixed by
+> **plan Task 7**, and live until then. `cli.py:314` carries the same rot.
+>
+> **Entry point:** the current handoff
+> [`2026-08-08-HANDOFF-cex-design.md`](2026-08-08-HANDOFF-cex-design.md) — **read the spec's
+> §10 amendment log before its §3**. Reasoning:
+> [`2026-08-08-cex-design-execution-log.md`](2026-08-08-cex-design-execution-log.md). Governing
+> document: [`specs/2026-08-07-crawl-extension-design.md`](specs/2026-08-07-crawl-extension-design.md).
+> Operational: [`plans/2026-08-08-crawl-extension.md`](plans/2026-08-08-crawl-extension.md)
+> (11 tasks; seam after Task 10, **owner stop** at the end of Task 11 where acceptance rejects
+> on both bounds). Pre-registration: [`specs/2026-08-08-crawl-growth-subset-preregistration.md`](specs/2026-08-08-crawl-growth-subset-preregistration.md)
+> — **EXECUTED, do not run again.** Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free. The ALG-B archive is
+> verified at exactly **75,000** responses after a probe mutated it mid-session.
+>
+> ---
+
+> ## ✅ THE NEW BYPASS UX IS LIVE, 2026-08-07 — and `DEP-34-FIX` IS CLOSED. ~~**The next action is the OWNER'S.**~~ *(SUPERSEDED on next actions by the `CEX-` block above: the next action is WORK. **`SNS-1`, Option C and the queued UI test are still his and still outstanding** — that half is unchanged, only its ranking as "the next action" is. ⚠ This block's "THE TEST QUEUE IS EMPTY" was true when written and is **now false**: the bypass-tray entry below it was queued by the same closeout.)*
 >
 > **The journey cards, the bypass interaction and the landing page were redesigned, merged
 > and deployed to `https://musicapp.cmiller.io` the same day.** Frontend only, plus one

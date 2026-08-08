@@ -1,5 +1,10 @@
 # Crawl Extension (`CEX-`) Implementation Plan
 
+**Role: ACTIVE operational plan for the `CEX-` track. NOT YET EXECUTED — do not mark tasks
+done without doing them.** The governing document is
+[`specs/2026-08-07-crawl-extension-design.md`](../specs/2026-08-07-crawl-extension-design.md)
+and **it governs where the two disagree**. Status lives in [`NEXT.md`](../NEXT.md), never here.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the crawl extendable — it currently exits `0 processed` and reads as success — then extend it from 75,000 to 117,302 artists.
@@ -863,20 +868,29 @@ Expected: FAIL — `AssertionError` on `"p99" in messages`
 
 - [ ] **Step 3: Write the implementation**
 
-At the end of `rescale_scores`, before returning, add:
+**⚠ `rescale_scores` has no "end of function" both paths reach, and no `rescaled` variable.**
+Its `p99_log_clip` branch **returns an inline list comprehension** (`pipeline.py:108-110`) and
+the other path raises. So this is a small refactor, not an append. Replace the `return` at
+`pipeline.py:108-110` with:
 
 ```python
-    # CEX-M1: both figures are population-dependent and price the router's
-    # primary term. Logged so two builds can be compared rather than assumed.
-    saturated = sum(1 for value in rescaled if value >= 1.0)
-    logger.info(
-        "rescale p99 scale=%.6g | saturated edges %d of %d (%.3f%%)",
-        scale,
-        saturated,
-        len(rescaled),
-        100.0 * saturated / len(rescaled) if rescaled else 0.0,
-    )
+        rescaled = [min(1.0, math.log1p(max(0.0, v)) / log_scale) for v in raw]
+        # CEX-M1: both figures are population-dependent and price the router's
+        # primary term (w_sim). Logged so two builds can be compared rather
+        # than assumed.
+        saturated = sum(1 for value in rescaled if value >= 1.0)
+        logger.info(
+            "rescale p99 scale=%.6g | saturated edges %d of %d (%.3f%%)",
+            scale,
+            saturated,
+            len(rescaled),
+            100.0 * saturated / len(rescaled),
+        )
+        return rescaled
 ```
+
+`len(rescaled)` cannot be zero here — `rescale_scores` returns early on an empty input at
+`pipeline.py:91-92` — so no zero-division guard is needed.
 
 - [ ] **Step 4: Run the full builder suite**
 
@@ -902,7 +916,7 @@ git push
 
 **⚠ Step 1 is the owner's precondition for the whole track.** After the crawl appends, today's graph **cannot be rebuilt from source** — `build_from_archive` reads everything under the algorithm prefix and has no "build only this population" option. The snapshot is what makes this reversible.
 
-- [ ] **Step 1: Snapshot the archive (1.2 GB; 486 GB free)**
+- [ ] **Step 1: Snapshot the archive** (size and free space are in the spec's §4 step 0)
 
 ```bash
 cp -r /c/dev/music-app/builder/scratch/grt-archive-algb \
@@ -1045,8 +1059,8 @@ From `cex-build.log`, record the **p99 scale** and the **saturated-edge share**,
 
 **Spec coverage.** `CEX-1` → Tasks 1–3. `CEX-2` → Task 4. `CEX-3` → Task 5. `CEX-4` → Task 6. `CEX-5` → Task 7. `CEX-M1` → Task 8. Step 0 snapshot + `CEX-G1` → Task 9. Steps 4–7 → Tasks 10–11. `CEX-G2` (the `--target` caller sweep) is folded into Task 4 Step 4, where a failing suite surfaces it. Seams at Tasks 10 and 11 match spec §6.
 
-**Review findings.** `CEXR-2` → Task 11 preamble. `CEXR-3` → Task 8. `CEXR-4` → Task 11 Step 4. `CEXR-5` → Task 5. `CEXR-6` → Task 11 Step 3 (drop lists) — **the `load_deezer_ids` half is NOT fixed by this plan and stays open**; it is a coverage regression, not a build failure, and belongs to §5's readable list. `CEXR-7a/b` → Tasks 1, 2, 9 Step 5. `CEXR-8` → Task 9 framing. `CEXR-9` → Task 11 Step 1. `CEXR-10` → Task 6. `CEXR-11` → Task 10 Step 1. `CEXR-12`/`13` → Task 4. `CEXR-14` → Task 5.
+**Review findings.** `CEXR-1` needs **no task** — its remedy (seeding) was *removed* from the design at spec §3 rather than implemented, so there is nothing here to build. `CEXR-2` → Task 11 preamble. `CEXR-3` → Task 8. `CEXR-4` → Task 11 Step 4. `CEXR-5` → Task 5. `CEXR-6` → Task 11 Step 3 (drop lists) — **the `load_deezer_ids` half is NOT fixed by this plan and stays open**; it is a coverage regression, not a build failure, and belongs to §5's readable list. `CEXR-7a/b` → Tasks 1, 2, 9 Step 5. `CEXR-8` → Task 9 framing. `CEXR-9` → Task 11 Step 1. `CEXR-10` → Task 6. `CEXR-11` → Task 10 Step 1. `CEXR-12`/`13` → Task 4. `CEXR-14` → Task 5.
 
-**Type consistency.** `reconstruct_referenced` and `rewrite_checkpoint` are named identically in Tasks 1, 2, 3 and 9. `FrontierExhausted` is used identically in Tasks 5 and 10. The checkpoint's `exhausted` key is written in Tasks 2, 5 and 6 and read in Task 5.
+**Type consistency.** `reconstruct_referenced` and `rewrite_checkpoint` are named identically in Tasks 1–3, and are reached in Task 9 through the `refrontier` CLI rather than by name. `FrontierExhausted` is used identically in Tasks 5 and 10. The checkpoint's `exhausted` key is written in Tasks 2, 5 and 6 and read in Task 5.
 
 **Known gap, stated rather than hidden:** `CEXR-6`'s `load_deezer_ids` finding is **not** remediated here. Every new artist gets `""` and falls back to name-based clip resolution (`BYP-13`). It needs its own track and is recorded in the spec's §5.
