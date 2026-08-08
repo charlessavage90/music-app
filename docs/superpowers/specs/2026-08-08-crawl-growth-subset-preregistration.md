@@ -115,6 +115,23 @@ justified by this evidence.** The null must not be reported as "no problem found
 null. `CXS-C2` **cannot overturn `CXS-C1`**: presence and connectedness are different failures,
 and `C1` is primary.
 
+> ### `CXS-AM1` — `CXS-C2`'s baseline is 0 by construction; read it in absolute terms
+>
+> **Written at execution time, BEFORE any cell was built and before any figure existed.** The
+> harness exposed it; no result informed it.
+>
+> §4 defines the cohort as artists **in the `CXS-25` build**, so by construction **none of them
+> is absent at `CXS-25` and `CXS-C2` is exactly 0 there.** A "≥ 50 % relative change" against a
+> zero baseline is undefined, so §6's `CXS-C2` clause as written cannot be evaluated.
+>
+> **Replacement, fixed here:** `CXS-C2` is read as an **absolute share** at each cell, with
+> `CXS-25` = 0 by construction and stated as such. **Any share ≥ 1 % of the cohort at
+> `CXS-75`** is material and corroborates hub competition; **below 1 % is null.** The
+> direction-only reading is unchanged, as is the rule that `CXS-C2` cannot overturn `CXS-C1`.
+>
+> **The cohort definition is NOT changed** — narrowing it to keep a relative threshold alive
+> would break the frozen-frame control in §4, which is the whole point of the design.
+
 **A trend that reverses between 25k→50k and 50k→75k** is read as **non-monotonic and
 inconclusive at this scale**, whatever the endpoints do, and licenses no extrapolation to
 117,302.
