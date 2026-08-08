@@ -67,7 +67,9 @@ def _config(args) -> BuilderConfig:
     """
     overrides: dict = {}
     target = getattr(args, "target", None)
-    if target:
+    # CEXR-13: `is not None`, not truthiness — `--target 0` is a meaningful
+    # instruction (fetch nothing) and was previously ignored in silence.
+    if target is not None:
         overrides["target_artist_count"] = target
     algorithm = getattr(args, "algorithm", None)
     if algorithm:
@@ -287,7 +289,11 @@ def main(
     p_crawl.add_argument("--bootstrap", required=True)
     p_crawl.add_argument("--checkpoint", default="./checkpoint.json")
     p_crawl.add_argument(
-        "--target", type=int, default=None, help="discovery cap; for trial runs"
+        "--target",
+        type=int,
+        default=None,
+        help="cap on artists FETCHED (CEX-2; it capped artists DISCOVERED "
+        "before 2026-08-08, which is what lost the frontier — ULC-F3)",
     )
     p_crawl.add_argument(
         "--algorithm",

@@ -123,7 +123,10 @@ class Crawler:
                 queue.append(mbid)
 
         processed = 0
-        while queue and len(self.discovered) <= self.config.target_artist_count:
+        # CEX-2: the bound is on artists FETCHED, not artists discovered.
+        # Bounding discovery meant the frontier past the target was never
+        # recorded (ULC-F3), so a later resume had nothing to resume from.
+        while queue and len(self._done) < self.config.target_artist_count:
             mbid = queue.popleft()
             if mbid in self._done:
                 continue
@@ -139,8 +142,6 @@ class Crawler:
             processed += 1
 
             for neighbour in self._neighbours(payload, mbid):
-                if len(self.discovered) >= self.config.target_artist_count:
-                    break
                 if neighbour not in self.discovered:
                     self.discovered.add(neighbour)
                     queue.append(neighbour)

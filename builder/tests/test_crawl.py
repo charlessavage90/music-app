@@ -94,13 +94,20 @@ def test_snowball_discovers_artists_beyond_the_bootstrap(tmp_path, config):
     assert crawler.discovered == {A, B, C, D}
 
 
-def test_discovery_stops_at_target_count(tmp_path, config):
+def test_target_caps_fetches_and_the_frontier_is_still_recorded(tmp_path, config):
+    # CEX-2: target_artist_count bounds artists FETCHED, not artists
+    # discovered. The old bound discarded neighbours at the target, which is
+    # ULC-F3: the frontier was never recorded, so a resume rebuilt an empty
+    # queue and exited 0 processed while reading as success.
     cfg = BuilderConfig(
         requests_per_second=1000.0, checkpoint_every=1, target_artist_count=2
     )
     crawler = _crawler(tmp_path, cfg, FakeFetcher())
     crawler.crawl([A])
-    assert len(crawler.discovered) == 2
+
+    assert len(crawler._done) == 2
+    assert len(crawler.discovered) > len(crawler._done)
+    assert crawler.discovered >= crawler._done
 
 
 def test_already_archived_artists_are_not_refetched(tmp_path, config):
