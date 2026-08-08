@@ -6,6 +6,10 @@
     artistpath-build build      --archive-dir ./archive --out graph-v1.bin
     artistpath-build fixture    --graph graph-v1.bin --out fixture.bin --size 500
 
+`refrontier` is a REPAIR step, not a pipeline stage: it rebuilds a checkpoint's
+`discovered` set from the archive when the frontier was never recorded
+(ULC-F3), and is run before a `crawl` that is meant to resume. Offline.
+
 Popularity is score-weighted in-degree, computed from the similarity archive
 during `build` (findings 6f). There is no separate popularity input.
 
@@ -35,6 +39,7 @@ from artistpath_builder.artifact import deserialise, serialise
 from artistpath_builder.config import PERMITTED_ALGORITHMS, BuilderConfig
 from artistpath_builder.crawl import Crawler, http_fetcher
 from artistpath_builder.fixture import extract_fixture
+from artistpath_builder.frontier import reconstruct_referenced, rewrite_checkpoint
 from artistpath_builder.manifest import build_manifest, write_manifest
 from artistpath_builder.fame import fetch_fame, lb_fame_fetcher, seed_fame
 from artistpath_builder.pipeline import archive_artists, build_from_archive
@@ -144,6 +149,22 @@ def cmd_crawl(args) -> int:
     crawler.crawl([row["mbid"] for row in bootstrap])
     if crawler.failures:
         logging.warning("%d artists failed permanently", len(crawler.failures))
+    return 0
+
+
+def cmd_refrontier(args) -> int:
+    """Rebuild the checkpoint's `discovered` set from the archive (ULC-F3).
+
+    Offline: reads archived responses only, never the network.
+    """
+    config = _config(args)
+    source = ListenBrainzSource(config)
+    referenced = reconstruct_referenced(_archive(args), config, source)
+    stats = rewrite_checkpoint(Path(args.checkpoint), config, referenced)
+    print(
+        f"done {stats['done']} | discovered {stats['discovered']} | "
+        f"frontier {stats['frontier']}"
+    )
     return 0
 
 
@@ -275,6 +296,16 @@ def main(
     )
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
+
+    p_refrontier = sub.add_parser("refrontier")
+    p_refrontier.add_argument("--checkpoint", default="./checkpoint.json")
+    p_refrontier.add_argument(
+        "--algorithm",
+        default=None,
+        help="which algorithm's archive tree to scan; default production's",
+    )
+    add_archive_args(p_refrontier)
+    p_refrontier.set_defaults(func=cmd_refrontier)
 
     p_fame = sub.add_parser("fame")
     p_fame.add_argument(

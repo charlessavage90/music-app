@@ -4,7 +4,7 @@ import pytest
 
 from artistpath_builder.acceptance import AcceptanceCriteria, ArtifactRejected
 from artistpath_builder.cli import main
-from artistpath_builder.config import PRODUCTION_ALGORITHM
+from artistpath_builder.config import CANDIDATE_ALGORITHM, PRODUCTION_ALGORITHM
 
 A, B = ("a" * 36, "b" * 36)
 
@@ -277,3 +277,36 @@ def test_fame_seed_without_a_sha_is_refused(tmp_path):
                 str(snapshot),
             ]
         )
+
+
+def test_refrontier_recovers_the_frontier_from_the_archive(tmp_path, capsys):
+    # CEX-1: the frontier past the old discovery bound was never recorded
+    # (ULC-F3), so a resume rebuilt an empty queue. `refrontier` reconstructs
+    # it offline from the archived responses.
+    prefix = f"similar/listenbrainz/{CANDIDATE_ALGORITHM}/"
+    archive_dir = tmp_path / "archive"
+    (archive_dir / prefix).mkdir(parents=True)
+    (archive_dir / prefix / f"{A}.json").write_text(
+        json.dumps([{"artist_mbid": B, "name": "B", "score": 90}])
+    )
+    checkpoint = tmp_path / "checkpoint.json"
+    checkpoint.write_text(
+        json.dumps({"algorithm": CANDIDATE_ALGORITHM, "done": [A], "discovered": [A]})
+    )
+
+    exit_code = main(
+        [
+            "refrontier",
+            "--checkpoint",
+            str(checkpoint),
+            "--archive-dir",
+            str(archive_dir),
+            "--algorithm",
+            CANDIDATE_ALGORITHM,
+        ]
+    )
+
+    assert exit_code == 0
+    state = json.loads(checkpoint.read_text())
+    assert set(state["discovered"]) == {A, B}
+    assert "frontier" in capsys.readouterr().out
