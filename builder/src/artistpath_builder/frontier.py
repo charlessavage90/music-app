@@ -11,10 +11,12 @@ divergence class `test_pipeline_mirrors.py` exists to guard.
 
 from __future__ import annotations
 
+import json
 import logging
+from pathlib import Path
 
 from artistpath_builder.archive import RawArchive
-from artistpath_builder.config import BuilderConfig
+from artistpath_builder.config import PRODUCTION_ALGORITHM, BuilderConfig
 from artistpath_builder.pipeline import similar_prefix
 from artistpath_builder.sources.base import SimilaritySource
 
@@ -57,3 +59,51 @@ def reconstruct_referenced(
         "scanned %d responses, %d distinct mbids referenced", scanned, len(referenced)
     )
     return referenced
+
+
+def rewrite_checkpoint(
+    checkpoint_path: Path,
+    config: BuilderConfig,
+    referenced: set[str],
+) -> dict[str, int]:
+    """Union `referenced` into the checkpoint's `discovered` set.
+
+    UNION, never replace (CEXR-7b): `discovered` must stay a superset of `done`
+    because `Crawler.crawl` rebuilds its queue as `discovered - done`. The real
+    archive holds artists that were crawled but that no response names, and a
+    replacing rewrite would drop them while still reporting the right frontier
+    size — the reported number cannot catch this, so the invariant is asserted
+    directly by test.
+
+    Backs the original up first: the checkpoint is the only record of a
+    completed crawl and there is no second copy.
+    """
+    state = json.loads(checkpoint_path.read_text())
+    stored = state.get("algorithm", PRODUCTION_ALGORITHM)
+    if stored != config.algorithm:
+        raise ValueError(
+            f"checkpoint {checkpoint_path} was written under {stored!r}; "
+            f"refusing to rewrite it under {config.algorithm!r} (RC-H3)"
+        )
+
+    done = set(state.get("done", []))
+    discovered = set(state.get("discovered", [])) | referenced | done
+
+    backup = checkpoint_path.with_name(checkpoint_path.name + ".bak")
+    backup.write_bytes(checkpoint_path.read_bytes())
+
+    payload = json.dumps(
+        {
+            "algorithm": config.algorithm,
+            "done": sorted(done),
+            "discovered": sorted(discovered),
+            "exhausted": bool(state.get("exhausted", False)),
+        },
+        sort_keys=True,
+    )
+    checkpoint_path.write_text(payload)
+    return {
+        "done": len(done),
+        "discovered": len(discovered),
+        "frontier": len(discovered - done),
+    }
