@@ -12,17 +12,79 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-08, when the `CEX-` CRAWL-EXTENSION DESIGN AND PLAN WERE COMMITTED.**
-**THE NEXT ACTION IS WORK, and its remit is set: EXECUTE THE `CEX-` PLAN, in a FRESH session,
-starting at Task 1.** **⚠ The test queue has ONE live item** — the bypass-tray UX entry of
-2026-08-07. *(The line here previously said the queue was empty; that was true for the hours
-between the owner discharging two entries and the same closeout queueing a third, and it went
-stale inside its own paragraph.)* Also his and blocking nothing: **`SNS-1`** (the billing alarm
-has no subscriber) and **Option C** (same-name population probe).
+**Last updated: 2026-08-08 (later), when the `CEX-` CRAWL WAS EXTENDED** (counts owned by `builder/analysis/2026-08-08-cex-g1/crawl_result.md`, cited here and never restated)**.**
+**THE NEXT ACTION IS WORK, and its remit is set: EXECUTE `CEX-` PLAN TASK 11, in a FRESH
+session — fame, re-census, build — which ENDS AT AN OWNER STOP.** **✅ The test queue is
+EMPTY:** the owner discharged the bypass-tray entry on 2026-08-08, finding one defect, which is
+fixed in **PR #92** and awaiting his merge. **✅ `SNS-1` is RESOLVED** — he added the billing
+alarm subscriber. Still his and blocking nothing: **Option C** (same-name population probe).
 
 ---
 
-> ## ▶ THE `CEX-` CRAWL EXTENSION IS DESIGNED AND PLANNED, 2026-08-08 — **the next action is WORK: execute the plan in a FRESH session.** Nothing is blocked.
+> ## ▶ THE `CEX-` CRAWL IS EXTENDED, 2026-08-08 — new population per `crawl_result.md`. **The next action is WORK: plan Task 11, in a FRESH session. It ends at an OWNER STOP.** Nothing is blocked.
+>
+> **Plan Tasks 1–10 are complete and pushed.** The `ULC-F3` block on extending a crawl is
+> **discharged**: the bound moved from artists *discovered* to artists *fetched*, so the
+> frontier survives; a crawl that cannot extend now **refuses instead of exiting 0**; the
+> checkpoint is written atomically; and `artistpath-build refrontier` repairs an older one.
+>
+> **What this did NOT do: build anything, or adopt anything.** No graph, no artifact, no cost
+> function, no router, no frontend. The archive got bigger. **Nothing a user can see has
+> changed.**
+>
+> **Figures are owned by `builder/analysis/2026-08-08-cex-g1/` (`g1_result.md`,
+> `crawl_result.md`) — cited, never restated.** `CEX-G1` passed exactly; the crawl completed
+> in under four hours with **zero failures** and every response HTTP 200.
+>
+> **⚠ THE ARCHIVE IS NOW ONE-WAY, AND THE SNAPSHOT IS THE ONLY WAY BACK.** After the append,
+> today's graph **cannot be rebuilt from source** — `build_from_archive` reads everything under
+> the algorithm prefix. The owner's precondition was met and **verified again after the crawl**:
+> `builder/scratch/grt-archive-algb.pre-cex-snapshot` still holds exactly 75,000 responses.
+> Both it and the checkpoint backup are gitignored, so `g1_result.md` is their only identity.
+>
+> **⚠ THREE CLAIMS AN EDITOR MUST NOT REVERT.** `exhausted: false` in the checkpoint is
+> **correct** — the crawl stopped on the fetch cap with a non-empty queue, so the graph was not
+> crawled out, and ~11,293 artists are now recorded as discovered-but-not-crawled. `grt_run.py`
+> **refuses to run**, deliberately: its era pin is a refusal because the old behaviour was
+> deleted from a loop body rather than defaulted. `calibrate.py`'s `_replay` is deliberately
+> left on the **old** stopping rule, because it exists to reproduce its own committed cells.
+>
+> **⚠ THE GATE THAT A GREEN TEST SUITE COULD NOT DISCHARGE.** `CEX-G2` was folded into "run the
+> suite", and the suite stayed green through the semantics change. The sweep found two frozen
+> probes depending on the old meaning — one of them, `calibrate.py`, **names no identifier that
+> changed**: it hand-copies the crawler's stopping rule, and its own docstring declared its
+> answers void if that rule ever moved. **A caller can depend on a rule without naming
+> anything the rule uses**, and `test_pipeline_mirrors.py` cannot see that class.
+>
+> **What Task 11 must do, and the trap in it:** every command passes `--algorithm`
+> **explicitly** (`CEXR-2`) — there is no `RC-H3` guard on the build side, so a defaulted build
+> reads ALG-E and could pass acceptance while describing a population nobody asked for. **Cost
+> the re-census on 500 artists and report before running the full pass** (`CEXR-9`); it is the
+> only uncosted step in the track. **The build WILL be rejected on BOTH acceptance bounds —
+> that is the designed outcome and an owner stop. Do not widen them** (`MSW-G3` is the
+> precedent, and there too it was the owner's).
+>
+> **Entry point:** the current handoff
+> [`2026-08-08-HANDOFF-cex-crawl.md`](2026-08-08-HANDOFF-cex-crawl.md). Reasoning:
+> [`2026-08-08-cex-crawl-execution-log.md`](2026-08-08-cex-crawl-execution-log.md) — **its §4
+> records two tests in this session's own work that passed while testing nothing**, both caught
+> by running them against the old code first. Governing document:
+> [`specs/2026-08-07-crawl-extension-design.md`](specs/2026-08-07-crawl-extension-design.md).
+> Operational: [`plans/2026-08-08-crawl-extension.md`](plans/2026-08-08-crawl-extension.md).
+> Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> **⚠ SEPARATE TRACK, OPEN AND HIS: PR #92 (`landing-dot-z-order`).** The owner found one defect
+> while discharging the test queue — the landing page's green indicator dot rendering on top of
+> the open artist dropdown — and **verified the fix locally**. It is **not deployed**: the live
+> site still shows it until he merges and publishes. Not part of `CEX-`.
+>
+> ---
+
+---
+
+> ## ▶ THE `CEX-` CRAWL EXTENSION IS DESIGNED AND PLANNED, 2026-08-08 — ~~**the next action is WORK: execute the plan in a FRESH session.**~~ *(SUPERSEDED by the block above: Tasks 1–10 ARE DONE. **Its two "must not be reverted" claims and its `CEX-R1`/`R3`/`R4` findings still stand in full** — only its ranking as the next action has moved. ⚠ Its `config.py:17` warning is now FALSE: Task 7 fixed it.)*
 >
 > **The owner approved the crawl expansion, conditional on snapshotting the archive so it can
 > be reverted.** That snapshot is **plan Task 9 Step 1 and a precondition for the whole

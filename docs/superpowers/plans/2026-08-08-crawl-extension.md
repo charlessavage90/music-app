@@ -1,7 +1,11 @@
 # Crawl Extension (`CEX-`) Implementation Plan
 
-**Role: ACTIVE operational plan for the `CEX-` track. NOT YET EXECUTED — do not mark tasks
-done without doing them.** The governing document is
+**Role: ACTIVE operational plan for the `CEX-` track. TASKS 1–10 ARE EXECUTED (2026-08-08);
+TASK 11 IS NOT, and it ends at an owner stop.** *(This line read "NOT YET EXECUTED" until the
+`CEX-` crawl closeout, which is what made it wrong — a reader landing here without `NEXT.md`
+would have concluded nothing had happened.)* **Do not mark Task 11 done without doing it.**
+Status lives in [`NEXT.md`](../NEXT.md), which owns it; outcomes live in
+`builder/analysis/2026-08-08-cex-g1/`. The governing document is
 [`specs/2026-08-07-crawl-extension-design.md`](../specs/2026-08-07-crawl-extension-design.md)
 and **it governs where the two disagree**. Status lives in [`NEXT.md`](../NEXT.md), never here.
 

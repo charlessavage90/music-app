@@ -1,7 +1,13 @@
 # Handoff — the `CEX-` crawl-extension design and plan, 2026-08-08
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-08-07-HANDOFF-bypass-tray-ux.md`](2026-08-07-HANDOFF-bypass-tray-ux.md) on next actions.
+**Role: ⚠ SUPERSEDED on next actions, 2026-08-08, by
+[`2026-08-08-HANDOFF-cex-crawl.md`](2026-08-08-HANDOFF-cex-crawl.md)** — which executed the plan
+this document handed over (Tasks 1–10) and owns the current next action. **One claim it carries
+is now FALSE rather than merely superseded:** `config.py:17` is no longer stale in the tree —
+plan Task 7 fixed it. Everything else it records remains accurate, including every "must not be
+reverted" claim below. *(Original role: the CURRENT handoff, 2026-08-08 — written at a seam
+after the `CEX-` design and plan were committed. Supersedes
+[`2026-08-07-HANDOFF-bypass-tray-ux.md`](2026-08-07-HANDOFF-bypass-tray-ux.md) on next actions.)*
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
 **A SEAM handoff.** The design and the plan are committed; nothing is in flight; no port is
