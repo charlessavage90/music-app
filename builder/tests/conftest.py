@@ -21,7 +21,10 @@ def install_ulf_list(monkeypatch, tmp_path):
     instead — the same factor-table-control idiom as the sibling flags.
     """
 
-    def install(algorithm, censused, drop=(), keep=(), mutate=None):
+    def install(algorithm, censused, drop=(), keep=(), mutate=None, register=True):
+        # register=False writes the payload but leaves it OUT of the registry,
+        # for the per-invocation override (SEL-, 2026-08-09): the case it exists
+        # for is a population the algorithm-keyed registry cannot name.
         ordered = sorted(censused)
         payload = {
             "rule": "ULF- (test fixture)",
@@ -38,11 +41,13 @@ def install_ulf_list(monkeypatch, tmp_path):
         }
         if mutate:
             mutate(payload)
-        path = tmp_path / f"ulf_{algorithm.replace('/', '_')}.json"
+        stem = f"ulf_{algorithm.replace('/', '_')}"
+        path = tmp_path / f"{stem}{'' if register else '_override'}.json"
         path.write_text(json.dumps(payload), encoding="utf-8")
-        monkeypatch.setitem(
-            unlistenable_drop.UNLISTENABLE_DROP_LISTS, algorithm, path
-        )
+        if register:
+            monkeypatch.setitem(
+                unlistenable_drop.UNLISTENABLE_DROP_LISTS, algorithm, path
+            )
         load_unlistenable_list.cache_clear()
         return path
 

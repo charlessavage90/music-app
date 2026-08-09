@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 from artistpath_builder import __version__
 
@@ -240,6 +241,22 @@ class BuilderConfig:
     # holds it explicitly on or off in a factor table. Turning it off is an
     # experimental control, never a shipping configuration.
     drop_unlistenable: bool = True
+
+    # Per-invocation override for WHICH un-listenable payload to apply, for
+    # the case the algorithm-keyed default cannot express: two populations of
+    # the SAME algorithm, which is what a crawl extension produces. `None`
+    # keeps the shipped default. Bypasses the lookup rather than substituting
+    # within it, so an uncensused algorithm can also be built from an explicit
+    # payload — the ULC-F1 population check still runs either way.
+    #
+    # Deliberately NOT a repointed default: the guard in pipeline.py refuses
+    # on artists OUTSIDE the censused set, so a LARGER list applied to a
+    # smaller archive passes silently. Repointing would therefore have changed
+    # every future build from the pre-crawl snapshot without saying so, on
+    # verdicts that drift as clip availability moves. Flipping the default is
+    # an adoption decision and belongs in the adoption commit. SEL- findings
+    # 2026-08-09; MSW- Task 9's --require-fame is the precedent.
+    unlistenable_list_path: Path | None = None
 
     # --- output ---------------------------------------------------------
     graph_version: str = "v1"

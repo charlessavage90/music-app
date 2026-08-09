@@ -178,6 +178,61 @@ def test_an_uncensused_algorithm_builds_with_the_drop_off(tmp_path):
     assert DROPPED in built
 
 
+# --- the per-invocation payload override (SEL-, 2026-08-09) ----------------
+# The case these exist for is the one the registry cannot name: an algorithm
+# whose archive has been EXTENDED, so one algorithm now means two populations.
+
+
+def test_override_builds_a_population_the_registry_cannot_express(
+    tmp_path, install_list
+):
+    # The registry's list predates a crawl extension and would refuse (it is
+    # the ULC-F1 case above). The override censuses the grown archive, so the
+    # build proceeds — and actually applies the overriding list's verdicts.
+    install_list(PRODUCTION_ALGORITHM, FULL_POPULATION - {C}, set())
+    extended = install_list(
+        PRODUCTION_ALGORITHM, FULL_POPULATION, {DROPPED}, register=False
+    )
+    archive = _archive(tmp_path, SIMILAR)
+    built = _build(archive, unlistenable_list_path=extended).mbids
+    assert DROPPED not in built, "the override's drop verdict was not applied"
+    assert C in built
+
+
+def test_override_does_not_bypass_the_population_check(tmp_path, install_list):
+    # The override selects WHICH payload, never whether ULC-F1 is enforced. A
+    # payload that does not cover the archive must still refuse, or the flag
+    # would be a way to silently switch the guard off.
+    install_list(PRODUCTION_ALGORITHM, FULL_POPULATION, set())
+    short = install_list(
+        PRODUCTION_ALGORITHM, FULL_POPULATION - {C}, set(), register=False
+    )
+    archive = _archive(tmp_path, SIMILAR)
+    with pytest.raises(PopulationNotCensused):
+        _build(archive, unlistenable_list_path=short)
+
+
+def test_override_bypasses_the_lookup_rather_than_substituting_in_it(
+    tmp_path, install_list
+):
+    # UNCENSUSED has no registry entry at all, so a substitution-in-the-dict
+    # implementation would still raise NoUnlistenableListForAlgorithm here.
+    # Building proves the lookup is bypassed, which is what lets a first-time
+    # census be built without editing unlistenable_drop.py.
+    payload = install_list(
+        UNCENSUSED, FULL_POPULATION, {DROPPED}, register=False
+    )
+    archive = _archive(tmp_path, SIMILAR, algorithm=UNCENSUSED, subdir="scoped")
+    built = _build(
+        archive,
+        algorithm=UNCENSUSED,
+        drop_no_release_tail=False,
+        drop_featured_credit=False,
+        unlistenable_list_path=payload,
+    ).mbids
+    assert DROPPED not in built
+
+
 def test_dropping_equals_never_having_been_archived(tmp_path, install_list):
     # Dropped BEFORE the mass computation, same invariant as the sibling
     # drops: the built graph must equal one from an archive the artist never

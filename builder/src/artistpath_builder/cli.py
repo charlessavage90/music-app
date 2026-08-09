@@ -93,6 +93,19 @@ def _config(args) -> BuilderConfig:
         overrides["cap_strategy"] = cap_strategy
     if getattr(args, "require_fame", False):
         overrides["require_fame"] = True
+    # SEL- 2026-08-09. Per-invocation by design: it selects WHICH censused
+    # payload this build applies, never which one ships. Validated here rather
+    # than at first read so a mistyped path fails before a build starts.
+    unlistenable_list = getattr(args, "unlistenable_list", None)
+    if unlistenable_list:
+        path = Path(unlistenable_list)
+        if not path.is_file():
+            raise SystemExit(
+                f"--unlistenable-list: no such file: {path}\n"
+                "This selects a censused ULF- payload for THIS build only. "
+                "Omit it to use the algorithm's shipped default."
+            )
+        overrides["unlistenable_list_path"] = path
     return BuilderConfig(**overrides)
 
 
@@ -360,6 +373,13 @@ def main(
         action="store_true",
         help="refuse to build unless every kept artist has a fame record "
         "(MSW-G3); the adopted artifact is built with this explicitly on",
+    )
+    p_build.add_argument(
+        "--unlistenable-list",
+        default=None,
+        help="path to a censused ULF- drop-list payload, overriding the "
+        "algorithm's shipped default for THIS build only. For a population "
+        "the algorithm-keyed default cannot express — e.g. an extended crawl",
     )
     add_archive_args(p_build)
     p_build.set_defaults(func=cmd_build)

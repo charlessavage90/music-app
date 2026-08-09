@@ -299,7 +299,9 @@ def build_from_archive(
     # identity only while one algorithm means one crawl; a crawl extension
     # breaks that silently, and this is the loud alternative.
     if config.drop_unlistenable:
-        ulf = load_unlistenable_list(config.algorithm)
+        ulf = load_unlistenable_list(
+            config.algorithm, config.unlistenable_list_path
+        )
         unevaluated = archive_population - ulf.censused_mbids
         if unevaluated:
             sample = ", ".join(sorted(unevaluated)[:3])

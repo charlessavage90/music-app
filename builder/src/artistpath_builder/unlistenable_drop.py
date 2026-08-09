@@ -96,15 +96,30 @@ class UnlistenableList:
 
 
 @lru_cache(maxsize=None)
-def load_unlistenable_list(algorithm: str) -> UnlistenableList:
+def load_unlistenable_list(
+    algorithm: str, override_path: Path | None = None
+) -> UnlistenableList:
     """The `ULF-` list for `algorithm`'s archive, with its censused population.
 
     Raises `NoUnlistenableListForAlgorithm` if that population has never been
     censused under the rule, and `ValueError` if the payload disagrees with
     its own identity block — a payload that cannot vouch for its population
     must not be trusted for a refusal decision any more than a drop one.
+
+    `override_path` BYPASSES the algorithm lookup entirely rather than
+    substituting a path for a known key, so a population with no entry — a
+    re-crawl, or an algorithm censused for the first time — can be built
+    without editing this module. It is per-invocation by design: a default
+    keyed on algorithm alone cannot express two populations of the SAME
+    algorithm, which is exactly what a crawl extension produces. Changing
+    which list is the DEFAULT is an adoption decision and belongs in the
+    adoption commit, never here.
+
+    The population check downstream is NOT bypassed: an overridden payload
+    still has to vouch for its own identity, and `pipeline.py` still refuses
+    when the archive holds artists the payload never evaluated.
     """
-    path = UNLISTENABLE_DROP_LISTS.get(algorithm)
+    path = override_path or UNLISTENABLE_DROP_LISTS.get(algorithm)
     if path is None:
         censused = "\n  ".join(sorted(UNLISTENABLE_DROP_LISTS)) or "(none yet)"
         raise NoUnlistenableListForAlgorithm(
