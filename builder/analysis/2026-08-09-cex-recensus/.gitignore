@@ -1,0 +1,9 @@
+# Large raw intermediates: regenerable by ulf_census.py from the archives and
+# dumps (the REL- template). The record that matters IS committed: the summary
+# (ulf_census.json), the clip capture (ulf_clips.json — the evidence the
+# verdicts rest on, per the fcf_clips precedent), the frozen droplist
+# payloads, and the scripts.
+ulf_worklist.json
+*.checkpoint.json
+*.log
+__pycache__/

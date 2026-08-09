@@ -4,5 +4,9 @@
 # scratchpad clean take it: regenerating costs ~1 h of dump passes, which is
 # exactly the cost ULC-F2 exists to stop re-paying.
 ulf_coverage.json
+# Pre-run backups of the store, same class as the store itself: a census
+# WRITES BACK, so taking one before a run is the cheap way to keep the hour
+# it would cost to regenerate. Ignored for the same reason the store is.
+ulf_coverage.json.*
 *.log
 __pycache__/
