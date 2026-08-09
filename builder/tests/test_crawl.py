@@ -293,3 +293,41 @@ def test_checkpoint_is_written_via_a_temp_file_then_renamed(tmp_path, config, mo
     assert seen, "checkpoint was not written through os.replace"
     assert all(src.endswith(".tmp") for src in seen)
     assert json.loads((tmp_path / "checkpoint.json").read_text())["done"]
+
+
+class HubFetcher:
+    """One artist with a wide fan-out, then dead ends.
+
+    The chain fixture above CANNOT distinguish a bound on `done` from a bound
+    on `discovered`: each fetch adds exactly one new artist, so the two move in
+    lockstep and every target gives the same answer under either rule. Found by
+    mutation at the CEX- closeout — reverting crawl.py's loop condition alone
+    left the whole suite green.
+    """
+
+    NEIGHBOURS = {A: (B, C, D), B: (), C: (), D: ()}
+
+    def __init__(self):
+        self.calls: list[str] = []
+
+    def __call__(self, url: str) -> bytes:
+        self.calls.append(url)
+        for mbid, neighbours in self.NEIGHBOURS.items():
+            if mbid in url:
+                return _similar(*neighbours)
+        return b"[]"
+
+
+def test_the_bound_is_on_fetches_even_when_one_artist_floods_discovery(tmp_path):
+    # CEX-2, the discriminating case. Fetching A alone discovers 4 artists, so
+    # a bound on DISCOVERED stops immediately at done == 1; a bound on FETCHED
+    # goes on to fetch the target. This is the assertion that actually pins the
+    # loop condition, and the chain-fixture test above does not.
+    cfg = BuilderConfig(
+        requests_per_second=1000.0, checkpoint_every=1, target_artist_count=2
+    )
+    crawler = _crawler(tmp_path, cfg, HubFetcher())
+    crawler.crawl([A])
+
+    assert len(crawler._done) == 2
+    assert len(crawler.discovered) == 4
