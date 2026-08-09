@@ -171,10 +171,15 @@ name"*:
 
 ---
 
-## Owed at the next closeout
+## ~~Owed at the next closeout~~ — ✅ BOTH DISCHARGED 2026-08-09
 
-- A row in [`docs/README.md`](../../README.md) classifying this document.
-- A mention in [`NEXT.md`](../NEXT.md) so a future session can find it.
+- ~~A row in [`docs/README.md`](../../README.md) classifying this document.~~ **Added at the
+  `CEX-` Task 11 closeout the same day.** It was also one of `docs-lint`'s two hard failures,
+  which is the mechanism that guaranteed it could not be forgotten.
+- ~~A mention in [`NEXT.md`](../NEXT.md) so a future session can find it.~~ **Added in the
+  same closeout**, in the top block, flagged as separate from `CEX-` and as the owner's.
 
-Neither was done here: both are maintenance-track edits to documents the `CEX-` track is not
-otherwise touching, and doing them in flight is what this document exists to avoid.
+*Struck rather than deleted: the record that these were tracked and discharged is the point.
+The original reasoning stands and is why they were not done inline —* both are maintenance-track
+edits to documents the `CEX-` track was not otherwise touching, and doing them in flight is what
+this document exists to avoid. *The closeout is exactly where that debt was designed to land.*

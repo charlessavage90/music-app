@@ -12,16 +12,74 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-08 (later), when the `CEX-` CRAWL WAS EXTENDED** (counts owned by `builder/analysis/2026-08-08-cex-g1/crawl_result.md`, cited here and never restated)**.**
-**THE NEXT ACTION IS WORK, and its remit is set: EXECUTE `CEX-` PLAN TASK 11, in a FRESH
-session — fame, re-census, build — which ENDS AT AN OWNER STOP.** **✅ The test queue is
-EMPTY:** the owner discharged the bypass-tray entry on 2026-08-08, finding one defect, which is
-fixed in **PR #92** and awaiting his merge. **✅ `SNS-1` is RESOLVED** — he added the billing
-alarm subscriber. Still his and blocking nothing: **Option C** (same-name population probe).
+**Last updated: 2026-08-09, when `CEX-` TASK 11 COMPLETED AND STOPPED AT ITS OWNER STOP** (figures owned by `builder/analysis/2026-08-09-cex-recensus/README.md`, cited here and never restated)**.**
+**THE NEXT ACTION IS THE OWNER'S: the extended graph was BUILT and REJECTED on both acceptance
+bounds, exactly as designed. Nothing is adopted, nothing is deployed, nothing is blocked.**
+**✅ The test queue is EMPTY** and this session deliberately added nothing to it — it changed
+nothing a person can press. **✅ PR #92 is MERGED** (`0a74f1c`); the landing-dot fix is on
+`main` but **NOT deployed**. Still his and blocking nothing: **Option C** (same-name population
+probe), and **publishing** whenever he wants the dot fix live.
 
 ---
 
-> ## ▶ THE `CEX-` CRAWL IS EXTENDED, 2026-08-08 — new population per `crawl_result.md`. **The next action is WORK: plan Task 11, in a FRESH session. It ends at an OWNER STOP.** Nothing is blocked.
+> ## ▶ `CEX-` TASK 11 IS COMPLETE AND THE TRACK IS AT ITS OWNER STOP, 2026-08-09. **The next action is HIS.** Nothing is blocked, nothing is half-done.
+>
+> **The build ran and was REJECTED on BOTH acceptance bounds. That is the designed outcome,
+> not a failure to fix, and the bounds were NOT widened.** No artifact was written — acceptance
+> rejects before serialising.
+>
+> **What this did NOT do: adopt anything, deploy anything, or change what any user sees.** The
+> live site is untouched and was never at risk.
+>
+> **Figures are owned by `builder/analysis/2026-08-09-cex-recensus/README.md` — cited, never
+> restated.**
+>
+> **⚠ THREE CLAIMS AN EDITOR MUST NOT REVERT.** **`CEX-M1`'s saturated-edge share is VACUOUS
+> by construction**, not "unchanged" — an edge saturates iff its raw score is at or above the
+> 99th percentile of raw scores, so ~1% of any distribution saturates at any crawl size;
+> reading it as "no effect" is a conclusion the instrument cannot support. **The new
+> `unlistenable_list_path` defaulting to `None` is deliberate and is NOT unshipped work** — it
+> is a per-invocation override, and flipping the default is an adoption decision on purpose,
+> because repointing it changes every future build from the pre-crawl snapshot *silently*.
+> **The regenerated ALG-E drop list is a by-product that must not be shipped** — its population
+> never changed, yet 30 artists became drops and 43 stopped being drops in four days.
+>
+> **⚠ A NEW GOVERNING DOCUMENT IS COMMITTED AND UNRUN.**
+> [`specs/2026-08-09-journey-fame-exposure-preregistration.md`](specs/2026-08-09-journey-fame-exposure-preregistration.md)
+> (`JFX-`) pre-registers the answer to his four product questions — do less famous artists find
+> it easier or harder to appear in journeys, does that differ by endpoint fame, does it change
+> with bypass depth, does it change journey length. **Its thresholds are his and were set before
+> any arm ran** (`G1b` = 67%; `C2`'s threshold withdrawn as inappropriate to a report row).
+> **Read its §0.1 before its §3** — two confounds bind every read, and a third has a stated
+> direction. **No arm has run.**
+>
+> **His options, and nothing expires:**
+>
+> - **Run the `JFX-` arms** — one diagnostic build (~17 min) then routing. It answers the
+>   product questions and would close `CEX-M1`'s blindness in the same pass.
+> - **Recalibrate the acceptance bounds** and adopt. `MSW-G3` is the precedent and there too it
+>   was his. **The artifact would be byte-identical to a post-widening rebuild**, so adoption
+>   costs no second build.
+> - **Stop the track.** Everything is recorded; nothing is owed.
+>
+> **Entry point:** the current handoff
+> [`2026-08-09-HANDOFF-cex-task11.md`](2026-08-09-HANDOFF-cex-task11.md). Reasoning:
+> [`2026-08-09-cex-task11-execution-log.md`](2026-08-09-cex-task11-execution-log.md) — **its §2
+> records three defects in the plan itself**, the sharpest being that Task 11 Step 4 could not
+> run as written and would have failed with a *refusal* that the plan primes a reader to log as
+> the designed *rejection*. Branch `crawl-extension-design`, **PR #91**.
+>
+> **⚠ SEPARATE AND HIS: `SEL-`.** A problem statement, deliberately not acted on
+> ([`findings/2026-08-09-selector-identity-drift.md`](findings/2026-08-09-selector-identity-drift.md)):
+> constants named for a role that has since moved, and population identity implemented in one
+> of three sibling drop modules. **No live defect is claimed.** He asked for it to be handled
+> as its own maintenance session rather than in flight.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> ---
+
+> ## ▶ THE `CEX-` CRAWL IS EXTENDED, 2026-08-08 — new population per `crawl_result.md`. ~~**The next action is WORK: plan Task 11, in a FRESH session. It ends at an OWNER STOP.**~~ *(SUPERSEDED by the block above: **Task 11 IS DONE** and the owner stop is reached. Its "must not be reverted" claims still stand in full; only its ranking as the next action has moved.)*
 >
 > **Plan Tasks 1–10 are complete and pushed.** The `ULC-F3` block on extending a crawl is
 > **discharged**: the bound moved from artists *discovered* to artists *fetched*, so the
