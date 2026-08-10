@@ -280,10 +280,20 @@ nothing in the bucket fails its health check and rolls back.
 
 **Set the artifact once, here, and reuse it through §5** — hardcoding a filename in these
 commands is how the wrong artifact gets uploaded beside the right deploy, and vice versa
-(`DEP-34`). `GRAPH` is the ADOPTED artifact's basename; today that is `graph-msw-tu50.bin`.
+(`DEP-34`). `GRAPH` is the ADOPTED artifact's basename; today that is
+`graph-cxa-adopted.bin` (`CXA-`, adopted 2026-08-10 — `ApiConfig.graph_path` is the
+authority, and this line follows it).
+
+> **⚠ As of 2026-08-10 the trunk and production DISAGREE, deliberately and temporarily.**
+> `CXA-` Tasks 1–4 are merged: the trunk's adopted artifact is `graph-cxa-adopted.bin`.
+> **Production still serves `graph-msw-tu50.bin`** — the `CXA-S2` deploy has not been taken.
+> Until it is, an **API-only** deploy using the name below would ship the new map as a side
+> effect. That is the deploy `CXA-` intends next, so it is not a trap in sequence — but a
+> deploy for some *other* reason before `CXA-S2` must use `graph-msw-tu50.bin` and say so.
+> Delete this block once `CXA-S2` is taken.
 
 ```bash
-GRAPH=graph-msw-tu50.bin          # the ADOPTED artifact — never the app.py default
+GRAPH=graph-cxa-adopted.bin       # the ADOPTED artifact — never the app.py default
 export ARTISTPATH_DEPLOY_GRAPH_KEY=$GRAPH
 export ARTISTPATH_DEPLOY_SIDECAR=../builder/scratch/$GRAPH.json
 
