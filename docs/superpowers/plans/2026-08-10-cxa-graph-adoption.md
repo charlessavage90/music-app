@@ -231,8 +231,14 @@ What the entry must say, and the second point is the one that matters:
   pre-`MSW-` map entirely. **This is the co-credit class three probes failed to attribute.**
   **Condition: needs its own pre-registration, and resuming path-quality work is the
   owner's trigger, never a session's.** Belongs to "improvements", not to this adoption.
-- **The fourth acceptance artifact** (Task 1). **Condition: built, or its absence recorded
-  in the comment.**
+- ~~**The fourth acceptance artifact** (Task 1). **Condition: built, or its absence recorded
+  in the comment.**~~ **✅ DISCHARGED 2026-08-10 — it was BUILT**, not waived. Mutual k-NN
+  over the extended archive: 81,749 artists / 905,558 edges, rejected by the new band on
+  **edges** while its node count sits **inside** the node band. Figures owned by
+  `builder/analysis/2026-08-10-cxa-acceptance-bounds/README.md`. It established something the
+  waiver would have missed: the previous band could not discriminate the cap rule at all, and
+  **the new edge floor is the only bound that can.** *(Struck rather than deleted: the record
+  that it was tracked and discharged is the point.)*
 
 ## §5 Handoff seams
 

@@ -1,6 +1,12 @@
 # Handoff — the `JFX-` arms ran and the adoption plan is written, 2026-08-10
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED ON NEXT ACTIONS by
+[`2026-08-10-HANDOFF-cxa-adoption.md`](2026-08-10-HANDOFF-cxa-adoption.md), 2026-08-10
+(later)** — the `CXA-` plan this note hands over is **executed, complete and deployed**, so
+its "Start here" is spent. **Its must-not-revert claims stand in full** and are carried
+forward there. ⚠ Its **"nothing adopted, no default flipped, nothing deployed"** is now false
+of the present and true only of what `JFX-` itself did. *(Original role: ACTIVE — the CURRENT
+handoff.)* Supersedes
 [`2026-08-09-HANDOFF-jfx-amendment.md`](2026-08-09-HANDOFF-jfx-amendment.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

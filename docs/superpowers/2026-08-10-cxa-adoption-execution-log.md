@@ -168,19 +168,88 @@ track touched it:
 
 ## §9 The standing context layer (closeout D6)
 
-**Zero delta in both layers.** `CLAUDE.md` was not touched, `memory/MEMORY.md` was not
-touched, and no skill or agent `description:` changed — checked against the working tree, not
-inferred from "nothing was intended". Everything this track added went into documents that
-load on demand: the execution log, the handoff, `NEXT.md`, `docs/README.md` rows, and an
-analysis README.
+Measured against `C:\Users\charl\.claude\projects\C--dev-music-app\memory`, the directory
+this session's own context names.
+
+| Layer | Now | Previously recorded | Delta |
+|---|---|---|---|
+| **Unconditional** | **45,854 characters** | 45,880 | **−26** |
+| **Conditional** | **2,475 lines** | 2,475 | **0** |
+
+**The unconditional delta is negative and it is a CORRECTION, not a saving to bank.** `B5`
+found four statements in `CLAUDE.md` that this track's own work made false — three describing
+the adopted artifact as "the adopted **75k** graph", and one figure: *"rebuild in ~30 s"*,
+which is now **~23 min** (1,372 s, measured at Task 3). A fresh clone following that line
+would have concluded the build had hung.
+
+Per D6's table this is row one — a statement in the layer that is false about the world, the
+session's call, net size ≈ 0, no new rule and no new narrative. The fix also removes the
+recurrence: the description no longer names a crawl size at all, and identity now points at
+**the artifact's own manifest sidecar** rather than at
+`findings/2026-07-23-tiebreak-fix-adoption.md` — which described `graph-t15-tiebreakfix.bin`
+and had been **two adoptions stale since `MSW-`**, a pre-existing defect this track surfaced
+rather than caused.
 
 **Nothing here asks the owner to buy an addition to the layer that taxes every future
 session.**
 
 ## §10 Security
 
+*(§10 is the security note; §11 below records the closeout's own findings.)*
+
 `snyk_code_scan` was run over the one new first-party source file
 (`builder/analysis/2026-08-10-cxa-acceptance-bounds/mknn_build.py`) and returned **0 issues**.
 No other first-party code was added; the remaining changes are two constant repoints, a
 config default, three test pins and documentation. **`FE-SNYK-1` is untouched — nothing here
 went near a frontend dependency**, and every lockfile is unchanged.
+
+## §11 Closeout outcomes
+
+**B3 — the vacuous-test check, and it earned its place.** The three pins added at Task 2 were
+verified by breaking the code, not by reading green:
+
+- Corrupting `CANDIDATE_UNLISTENABLE_DROP_SHA256` → red on the sha assert.
+- **Repointing the registry back at the 75k-era payload while leaving the pins alone → red on
+  `CANDIDATE_COUNT` (15,708 ≠ 27,262).** That is precisely the state executing Task 2 as
+  written would have produced, so the plan defect in §3 is now demonstrated rather than
+  argued.
+- Reverting `ApiConfig.graph_path` to `graph-msw-tu50.bin` → red on the name pin, confirming
+  the guard added after `MSW-` found nothing to update actually bites.
+
+**⚠ A near-miss worth recording, because the mechanism will recur.** Two of those deliberate
+breaks were reverted by a `git checkout` in a compound command that had already `cd`-ed into
+a package directory, so the pathspec did not resolve and **the break stayed in the tree**.
+The second instance left `ApiConfig.graph_path` pointing at the *previous* artifact — the
+exact A4 "unshipped work wearing a completion badge" defect, introduced by the check that
+exists to prevent it. Caught by reading `git status` rather than by any test. **Revert from
+the repository root, or verify the revert landed; a failed `git checkout` reports an error
+that a piped command hides.**
+
+**B2 — reachability.** `mknn_build.py` is imported by nothing, which matches the sibling
+precedent (`jfx_build_diagnostic.py` is equally self-referential). These are executable
+records of what was run, not library code. **Unfinished vs abandoned: neither — it is
+complete and spent.**
+
+**B4 — prose versus code.** One claim in the new `acceptance.py` comment was checked rather
+than accepted: *"both breaches trace to exactly ONE knob"*, when the build also used a
+different `ULF-` payload. **It holds by construction** — `pipeline.py:305` raises
+`PopulationNotCensused` when the archive contains artists the payload never evaluated, so the
+117k archive **cannot** be built with the 75k payload. The payload is determined by the
+archive rather than independently variable. Verified in code, not taken from the `CEX-`
+README.
+
+**B5 — stale-description sweep.** Two clean, one real. `.claude/agents/ml-graph-analyst.md`
+explicitly carries no figures (fixed after its own 2026-07-22 incident) and needed nothing.
+The `58,838 / 1,315,684` restatements are all inside the frozen `2026-08-05-msw-execution-log.md`,
+describing what *that* track did — correct in tense and correctly left alone. The real finding
+was `CLAUDE.md`; see §9.
+
+**D2 — committed fixtures: genuinely inapplicable, with evidence.** `git log --follow` shows
+both `tests/fixtures/graph-fixture.bin` were last regenerated for a **scoring/format** change
+and were **not** regenerated at the `MSW-` map switch. Established practice is that they track
+format and semantics, not which artifact is adopted; this track changed neither. Stated rather
+than skipped silently.
+
+**A5 — ports 8000, 5173 and 5174 are free.** No server was started this session and none was
+left behind: the app was exercised against the live address, which is also what the queued
+test needs, so C1 requires no local listener.
