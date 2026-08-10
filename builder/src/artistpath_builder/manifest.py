@@ -37,6 +37,30 @@ def _git_commit() -> str:
     return commit if result.returncode == 0 and len(commit) == 40 else "unknown"
 
 
+def _json_safe(value):
+    """Coerce a config value to something `json.dumps` accepts.
+
+    `BuilderConfig.unlistenable_list_path` is a `Path`, and `dataclasses.asdict`
+    preserves it as one — so the manifest write raised
+    `TypeError: Object of type WindowsPath is not JSON serializable` for any build
+    that set it. That had never fired: every build using `--unlistenable-list` so
+    far was REJECTED by acceptance before serialising, and every build that got
+    as far as a manifest used the shipped default of `None`. The first adoption
+    build off a censused payload would have hit it, AFTER the ~28 minutes of work,
+    with the artifact already on disk and no record of what produced it.
+
+    Found 2026-08-09 by the `JFX-` diagnostic build, which is the first build to
+    both set the flag and reach this line.
+    """
+    if isinstance(value, Path):
+        return str(value)
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(v) for v in value]
+    if isinstance(value, dict):
+        return {k: _json_safe(v) for k, v in value.items()}
+    return value
+
+
 def build_manifest(
     graph, config: BuilderConfig, payload: bytes, elapsed_seconds: float
 ) -> dict:
@@ -49,7 +73,7 @@ def build_manifest(
         "edges": graph.edge_count,
         "bytes": len(payload),
         "sha256": hashlib.sha256(payload).hexdigest(),
-        "config": dataclasses.asdict(config),
+        "config": _json_safe(dataclasses.asdict(config)),
     }
 
 
