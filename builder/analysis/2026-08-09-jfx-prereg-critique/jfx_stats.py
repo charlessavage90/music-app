@@ -14,10 +14,17 @@ Two further properties of the frozen function that come along with the import an
 here rather than discovered later:
 
 - `BOOTSTRAP = 10_000` is a module global.
-- It takes a **shared** `random.Random`, so every result depends on **call order**. `JFX-`
-  makes far more calls than `ULC-` did (2 arms x 4 depths x 3 strata, plus steps), so
-  inserting or reordering one statistic would silently change every later interval. Hence
-  `seeded()` below: a per-statistic seed derived from the statistic's own NAME.
+- It takes a **shared** `random.Random`, so in principle every result depends on **call
+  order**. `seeded()` below removes that by deriving a per-statistic seed from the
+  statistic's own NAME.
+
+  **⚠ The order dependence is real but NEGLIGIBLE at the production replicate count, and
+  saying otherwise was an overstatement this module's own test refused to support.** At
+  10,000 replicates the bootstrap distribution of a median over n≈40 is discrete enough
+  that forward and reverse call order give **identical** intervals; the effect reappears
+  around 50 replicates. So `seeded()` is kept for **reproducibility from a name alone**,
+  not because it repairs a live defect. `test_shared_rng_order_dependence_is_REAL_but_
+  negligible_at_10k` asserts both halves and will fail if either stops holding.
 """
 from __future__ import annotations
 

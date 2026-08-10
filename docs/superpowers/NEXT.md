@@ -12,17 +12,71 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-09, when `CEX-` TASK 11 COMPLETED AND STOPPED AT ITS OWNER STOP** (figures owned by `builder/analysis/2026-08-09-cex-recensus/README.md`, cited here and never restated)**.**
-**THE NEXT ACTION IS THE OWNER'S: the extended graph was BUILT and REJECTED on both acceptance
-bounds, exactly as designed. Nothing is adopted, nothing is deployed, nothing is blocked.**
+**Last updated: 2026-08-09 (later), when `JFX-AM1` WAS COMMITTED AND THE SESSION RETIRED AT A SEAM.**
+**THE NEXT ACTION IS WORK: build the `JFX-` routing harness and run the arms, in a FRESH
+session.** The owner chose to run `JFX-`; the pre-registration was then materially amended
+before any arm ran, and the amendment is itself the seam. **Nothing is adopted, nothing is
+deployed, nothing is blocked, and no arm has run.**
 **✅ The test queue is EMPTY** and this session deliberately added nothing to it — it changed
 nothing a person can press. **✅ PR #92 is MERGED** (`0a74f1c`); the landing-dot fix is on
 `main` but **NOT deployed**. Still his and blocking nothing: **Option C** (same-name population
-probe), and **publishing** whenever he wants the dot fix live.
+probe), **`SEL-`**, **closing or keeping the 2026-07-29 famous-to-famous defect ruling**, and
+**publishing** whenever he wants the dot fix live.
 
 ---
 
-> ## ▶ `CEX-` TASK 11 IS COMPLETE AND THE TRACK IS AT ITS OWNER STOP, 2026-08-09. **The next action is HIS.** Nothing is blocked, nothing is half-done.
+> ## ▶ `JFX-AM1` IS COMMITTED AND NO ARM HAS RUN, 2026-08-09 (later). **The next action is WORK: the routing harness, in a FRESH session.**
+>
+> **The owner said "we're doing JFX" and asked for an `ml-graph-analyst` review of the
+> pre-registration first. That review, two of his own corrections, and two defects found by
+> writing code against the document produced a twelve-clause amendment** — committed before
+> any arm ran, which is the whole point of the timestamp.
+>
+> **What this did NOT do: build an artifact, route a pair, compute a fame statistic, adopt
+> anything, or change what any user sees.** The live site is untouched and was never in scope.
+>
+> **⚠ READ `JFX-AM1` BEFORE §2, §3 OR §4 of the pre-registration.** It changes all three and
+> governs where they disagree. **Four clauses change what passes:** the fame quantity is now
+> **log-scaled** (`AM1.2`, his decision); **`G1b` is a bounded linear contrast** with a
+> viability clause, the ratio having declared an equal map broken far too often on a weak
+> denominator (`AM1.5`); **`G1a`'s steps move to one simultaneous band** and gain an effect
+> size (`AM1.6`); and **`C6`/`C7` get the effect sizes their branch triggers lacked**
+> (`AM1.7`). **`JFX-G1b` stays at 67%** — unchanged deliberately.
+>
+> **⚠ FIVE CLAIMS AN EDITOR MUST NOT REVERT.** **`DD-F1` is NOT overturned** — it survives in
+> **popularity** currency and fails to transfer to **fame**; both halves travel together, and
+> collapsing either direction repeats the currency error that caused this. **The
+> famous-to-famous measurement is STRUCTURE, not ROUTING** — famous endpoints *can* descend;
+> whether journeys *do* is what `JFX-` exists to measure. **The 2026-07-29 defect ruling is
+> OPEN** — its precondition changing is not the ruling closing, and that is his. **The `MSW-`
+> switch addressing famous-to-famous was BY DESIGN, not incidental** (his correction), and
+> **no `MSW-` record mentions it**, so that adoption is written up on narrower grounds than it
+> had. **`AM1.10` records an overstatement this session made and then measured false** — a
+> shared RNG does not materially move intervals at 10,000 replicates; do not restore the
+> stronger claim.
+>
+> **⚠ THE ROUTING HARNESS DOES NOT EXIST.** `AM1.3` now *names* the instrument — which nothing
+> did before — but the code that walks the pair set is unwritten. `jfx_stats.py` supplies the
+> tested primitives and **has no consumer yet: unfinished, not abandoned.** The §1 build
+> script **now exists** and had never been written despite the spec's present tense
+> (`AM1.12`).
+>
+> **Figures owned by `builder/analysis/2026-08-09-jfx-prereg-critique/README.md` — cited,
+> never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-09-HANDOFF-jfx-amendment.md`](2026-08-09-HANDOFF-jfx-amendment.md). Reasoning:
+> [`2026-08-09-jfx-prereg-amendment-execution-log.md`](2026-08-09-jfx-prereg-amendment-execution-log.md)
+> — **its §2 records this session reversing its own recommendation under owner challenge, and
+> its §4 records a claim it had to correct in its own amendment.** Governing document:
+> [`specs/2026-08-09-journey-fame-exposure-preregistration.md`](specs/2026-08-09-journey-fame-exposure-preregistration.md).
+> Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> ---
+
+> ## ▶ `CEX-` TASK 11 IS COMPLETE AND THE TRACK IS AT ITS OWNER STOP, 2026-08-09. ~~**The next action is HIS.**~~ *(SUPERSEDED on next actions by the block above: he chose **Run the `JFX-` arms**, and the next action is now WORK. **Its three "must not be reverted" claims and its `SEL-` item still stand in full** — only its ranking as the next action has moved. ⚠ Its `JFX-` description is **pre-amendment**: `JFX-AM1` changed §2, §3 and §4 on 2026-08-09.)* Nothing is blocked, nothing is half-done.
 >
 > **The build ran and was REJECTED on BOTH acceptance bounds. That is the designed outcome,
 > not a failure to fix, and the bounds were NOT widened.** No artifact was written — acceptance

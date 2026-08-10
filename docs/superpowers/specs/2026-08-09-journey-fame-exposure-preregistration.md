@@ -44,11 +44,12 @@ setting"*.
 **That claim does not transfer, and the proposal was wrong.** It was measured on the
 **pre-`MSW-`** artifact under **mutual k-NN**, in **popularity** currency, under the
 **retired** worldly-fame construct. Measured on the adopted artifact: in fame currency —
-which is what this document scores on — **1.07% of top-decile artists have zero
-below-decile neighbours, and at the top 0.2% it is 0.00%**, median 8.
+which is what this document scores on — **almost no top-decile artist is boxed in, and at
+the top 0.2% not one is.** Magnitudes in the critique README's "Result" section.
 
 **⚠ `DD-F1` is NOT refuted, and the halves must not be collapsed.** In *popularity*, at the
-top 0.2%, **44.07%** of artists still have zero such edges. The finding survives where it
+top 0.2%, **a large minority** of artists still have zero such edges — figure in the same
+README section. The finding survives where it
 was measured and fails to transfer — exactly the §2.6/§2.11/§2.12 currency trap. **Do not
 record `DD-F1` as overturned.**
 
@@ -121,8 +122,9 @@ writing the code, not by reading the spec.
 
 **Pooling.** §2 defines the statistic as the paired median *of per-pair differences*; §3
 stated the gate over *four pooled levels*. These are different statistics and this project
-has already had a **sign flip** from exactly that (`DD-P3H-2`: −0.158 as scored, +0.076 /
-+0.020 / +0.020 under three other poolings). **`G1a` and `G1b` are both computed on the §2
+has already had a **sign flip** from exactly that — `DD-P3H-2` scored one dataset four ways
+and the gradient changed sign between poolings; figures owned by
+`2026-07-28-track3-depth-descent-execution-log.md`. **`G1a` and `G1b` are both computed on the §2
 definition — the paired median of per-pair differences.** Per-stratum `G1b` ratios are
 reported beside the pooled figure as diagnostics.
 
@@ -144,7 +146,8 @@ pass/fail on the point estimate.** Pre-registered: the one-sided bootstrap inter
 when `D_A`'s own bootstrap interval excludes zero.** If it does not: `G1b` is **undefined,
 not passed and not fired**, the report says so in those words, and the adoption question
 falls to `G1a` plus the gradients. *(This is a live possibility, not a corner case: the ramp
-weight is 0.01, and `AM1.9`'s floor exhaustion removes the stronger device after press five.)*
+weight is small — `ApiConfig.w_known_ramp_fame_pctl`, cited never restated — and `AM1.9`'s
+floor exhaustion removes the stronger device after press five.)*
 
 ### `AM1.6` — `G1a`: one simultaneous band, and its REQ anchor is corrected.
 
@@ -284,7 +287,16 @@ bookkeeping fix.
 rejection, records it verbatim in the manifest, and serialises anyway"* — present tense, for
 something that had never been written. `check_acceptance` exists
 (`builder/src/artistpath_builder/acceptance.py:187`) and every caller lets the rejection
-propagate. **Written as part of this amendment**; §1's tense is now true.
+propagate. **Written as part of this amendment**, at
+`builder/analysis/2026-08-09-jfx-prereg-critique/jfx_build_diagnostic.py`; §1's tense is now
+true. It requires `--algorithm` and `--unlistenable-list` rather than defaulting either,
+sets `require_fame=True` (the `MSW-` Task 9 defect: without it the build emits a **fameless**
+artifact and exits 0, which would route with no ramp and read as a flat gradient), refuses to
+overwrite an existing artifact, and confines every CLI path to the repository tree.
+
+**The statistics module is `jfx_stats.py` in the same directory**, with `test_jfx_stats.py`
+covering it. **It has no consumer yet** — the routing harness that walks the pair set is the
+next piece of work and does not exist. That is unfinished, not abandoned.
 
 ---
 

@@ -11,8 +11,15 @@ bounds (artists 88,685 against [47,000, 71,000]; edges 1,618,164 against
 owner stop. `JFX-` needs the artifact anyway, to measure what a person would get if the
 bounds were widened.
 
-**So this mirrors `cmd_build` exactly, with ONE difference: it catches `ArtifactRejected`,
-records the rejection VERBATIM in the manifest, and serialises.**
+**So this mirrors `cmd_build`'s build-and-emit SEQUENCE — config, `build_from_archive`,
+`check_acceptance`, `serialise`, write, manifest — differing in one step: it catches
+`ArtifactRejected`, records the rejection VERBATIM in the manifest, and serialises anyway.**
+
+It is **not** a drop-in replacement for `cmd_build` and does not try to be: it builds its
+`BuilderConfig` directly from three explicit inputs rather than going through `cli._config`,
+so `--target`, `--cap-strategy` and the S3 archive options are **not** available here. That
+is deliberate — this script exists to emit one specific artifact, and every knob it does not
+expose is a knob that cannot silently differ from the pre-registered arm.
 
 - **The gate is not modified and the bounds are not widened.** `check_acceptance` and
   `PRODUCTION_ACCEPTANCE` are imported and called unchanged. Widening them is an adoption

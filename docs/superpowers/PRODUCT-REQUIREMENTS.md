@@ -325,9 +325,10 @@ REQ-37 is ~~currently~~ **unachievable on famous-to-famous pairs at any router s
 > zero hits), so that adoption is recorded as resting on narrower grounds than it had.
 >
 > **⚠ TWO HALVES, AND THEY MUST NOT BE COLLAPSED.** In **fame** currency — the construct
-> REQ-37 now runs in — the barrier is gone: 1.07% of top-decile artists have zero
-> below-decile neighbours, and **0.00%** at the top 0.2%. In **popularity** currency, where
-> `DD-F1` was measured, **44.07%** of top-0.2% artists still have zero such edges. **`DD-F1`
+> REQ-37 now runs in — **the barrier is gone**: almost no top-decile artist is boxed in, and
+> at the top 0.2% not one is. In **popularity** currency, where `DD-F1` was measured, **a
+> large minority of top-0.2% artists still have zero such edges.** Magnitudes in the critique
+> README's "Result" section, which owns them. **`DD-F1`
 > is not overturned** — it survives in its own currency and fails to transfer. Recording it
 > as refuted would be the §2.6/§2.11/§2.12 currency error again.
 >

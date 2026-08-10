@@ -1,8 +1,17 @@
 # Handoff — `CEX-` Task 11 complete and stopped at its owner stop, 2026-08-09
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions by
+[`2026-08-09-HANDOFF-jfx-amendment.md`](2026-08-09-HANDOFF-jfx-amendment.md), which is the
+CURRENT handoff.** This one remains authoritative for `CEX-` Task 11's internals and for its
+own "must not be reverted" list, **every item of which still stands in full** — only its
+ranking as the next action has moved. Supersedes
 [`2026-08-08-HANDOFF-cex-crawl.md`](2026-08-08-HANDOFF-cex-crawl.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+
+> **⚠ Its "What I would do if I were continuing" is PARTLY SPENT.** The `JFX-` arms have
+> still not run, but the pre-registration it points at was **materially amended** on
+> 2026-08-09 (`JFX-AM1`) and its run order changed. Read the current handoff's version, not
+> this one's.
 
 **A SEAM handoff.** The plan's last task is complete, the track is stopped at the owner stop
 it was designed to reach, and a **new governing document** — the `JFX-` pre-registration — is
