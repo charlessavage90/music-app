@@ -12,20 +12,75 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-09 (later), when `JFX-AM1` WAS COMMITTED AND THE SESSION RETIRED AT A SEAM.**
-**THE NEXT ACTION IS WORK: build the `JFX-` routing harness and run the arms, in a FRESH
-session.** The owner chose to run `JFX-`; the pre-registration was then materially amended
-before any arm ran, and the amendment is itself the seam. **Nothing is adopted, nothing is
-deployed, nothing is blocked, and no arm has run.**
+**Last updated: 2026-08-10, when THE `JFX-` ARMS RAN, BOTH GATE CLAUSES PASSED, AND THE OWNER
+DECIDED TO ADOPT.**
+**THE NEXT ACTION IS WORK: execute [`plans/2026-08-10-cxa-graph-adoption.md`](plans/2026-08-10-cxa-graph-adoption.md)
+(`CXA-`), INLINE and in a FRESH session.** Nine tasks, strictly sequential, **two owner
+stops**. **Nothing is adopted yet, nothing is deployed, nothing is blocked.**
 **✅ The test queue is EMPTY** and this session deliberately added nothing to it — it changed
-nothing a person can press. **✅ PR #92 is MERGED** (`0a74f1c`); the landing-dot fix is on
-`main` but **NOT deployed**. Still his and blocking nothing: **Option C** (same-name population
-probe), **`SEL-`**, **closing or keeping the 2026-07-29 famous-to-famous defect ruling**, and
-**publishing** whenever he wants the dot fix live.
+nothing a person can press. ⚠ **On this branch `TEST-QUEUE.md` LOOKS non-empty**: PR #92's
+discharge landed on `main` only, so the 2026-08-07 entry's topmost heading still reads
+`QUEUED` here. Reconcile at merge; **do not discharge it twice.** Still his and blocking
+nothing: **Option C** (same-name population probe), **`SEL-`**, **closing or keeping the
+2026-07-29 famous-to-famous defect ruling**, and **publishing** whenever he wants the
+landing-dot fix live.
 
 ---
 
-> ## ▶ `JFX-AM1` IS COMMITTED AND NO ARM HAS RUN, 2026-08-09 (later). **The next action is WORK: the routing harness, in a FRESH session.**
+> ## ▶ THE `JFX-` ARMS RAN AND THE OWNER CHOSE TO ADOPT, 2026-08-10. **The next action is WORK: execute the `CXA-` plan, INLINE, in a FRESH session.**
+>
+> **Both gate clauses passed.** `JFX-G1a` and `G1b` PASS, `JFX-C5` passes, journeys
+> do not get longer in any of twelve stratum-by-depth cells, and the pre-registered read is
+> **§4 read 5** — *the map got bigger and journeys did not measurably change*.
+>
+> **What this did NOT do: adopt anything, deploy anything, flip any default, or change what any
+> user sees.** The live site is untouched and was never in scope. The new artifact is
+> gitignored and its manifest says `DO_NOT_DEPLOY: true`, correctly — it was built against the
+> old bounds.
+>
+> **Figures owned by `builder/analysis/2026-08-09-jfx-prereg-critique/README.md` — cited, never
+> restated.**
+>
+> **⚠ THE OWNER'S ADOPTION DECISION AND HIS REVERT CRITERION ARE RECORDED IN `CXA-` §0, TAKEN
+> 2026-08-10, AND ARE NOT TO BE RE-LITIGATED.** He adopts and widens the bounds, on the
+> reasoning that these metrics are indicators and cannot say whether a change is perceptible.
+> His revert trigger — set **before** adoption so it is a trigger and not a rationalisation —
+> is *a noticeably worse experience on more than half of tested journeys*, measured by **how
+> hard it is to find novel artists**. **"Improvements needed" is a SEPARATE bucket from
+> "revert".** He judges revert unlikely.
+>
+> **⚠ SIX CLAIMS AN EDITOR MUST NOT REVERT.** **The shallower gradient is NOT established** —
+> `G1b` tested against the 0.67 bar, never against parity, and `D_B − D_A` spans zero; adoption
+> was taken with **no cost demonstrated**, and this equally does not establish the gradients
+> are equal. **The d20 famous-to-famous drift is POST-HOC** — three strata, one interval
+> clearing zero — and is where to look, never a finding. **`AM1.11` read 9 fires at d20 and the
+> gate still stays on the MEDIAN**; promoting the mean is his call. **`CRE-G1(a)` as originally
+> run covers the six static cost terms ONLY** — it ran at k = 0 with the ramp knob at 0.0, so
+> it is doubly inert on the ramp, and the `JFX-` re-verification is what covers that.
+> **`w_known_ramp_fame_pctl` stays at 0.01.** **The regenerated ALG-E drop payload must not
+> ship.**
+>
+> **⚠ THE TRAP IN `CXA-` TASK 2, because it is the one most likely to be got wrong:** repoint
+> `UNLISTENABLE_DROP_LISTS[CANDIDATE_ALGORITHM]`, **not** the `PRODUCTION_ALGORITHM` entry —
+> ALG-B is the adopted lineage bound to the constant named *candidate* (`SEL-R1`–`R4`,
+> deferred and live). `NoUnlistenableListForAlgorithm` will **not** catch a wrong entry; it
+> raises on an *absent* one.
+>
+> **Entry point:** the current handoff
+> [`2026-08-10-HANDOFF-jfx-run.md`](2026-08-10-HANDOFF-jfx-run.md). Reasoning:
+> [`2026-08-10-jfx-run-execution-log.md`](2026-08-10-jfx-run-execution-log.md) — **its §4
+> records a defect in this session's own analysis code that would have silently suppressed a
+> pre-registered read at the one depth it fires**, and its §6 records this session
+> misreporting build progress from a buffered log until the owner questioned it. Governing:
+> [`specs/2026-08-09-journey-fame-exposure-preregistration.md`](specs/2026-08-09-journey-fame-exposure-preregistration.md).
+> Operational: [`plans/2026-08-10-cxa-graph-adoption.md`](plans/2026-08-10-cxa-graph-adoption.md).
+> Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> ---
+
+> ## ▶ `JFX-AM1` IS COMMITTED AND NO ARM HAS RUN, 2026-08-09 (later). ~~**The next action is WORK: the routing harness, in a FRESH session.**~~ *(SUPERSEDED by the block above: **the arms HAVE run.** Its five "must not be reverted" claims still stand in full — only its ranking as the next action has moved.)*
 >
 > **The owner said "we're doing JFX" and asked for an `ml-graph-analyst` review of the
 > pre-registration first. That review, two of his own corrections, and two defects found by

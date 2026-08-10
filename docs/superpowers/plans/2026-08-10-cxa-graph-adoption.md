@@ -16,8 +16,8 @@ cited, never restated here.**
 ## §0 What this is and is not
 
 **This is an adoption, not an experiment. No arm runs and nothing is measured.** The
-measurement happened; `JFX-G1a` and `G1b` both passed, `JFX-C5` passed at 588/588, and
-the pre-registered read was §4 read 5.
+measurement happened; `JFX-G1a` and `G1b` both passed, `JFX-C5` passed, and the
+pre-registered read was §4 read 5. Figures in the README, cited never restated.
 
 **The owner's decision, taken 2026-08-10, recorded as HIS — do not re-litigate it:**
 

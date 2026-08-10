@@ -1,7 +1,11 @@
 # Handoff — `JFX-AM1` committed, arms not run, 2026-08-09
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-08-09-HANDOFF-cex-task11.md`](2026-08-09-HANDOFF-cex-task11.md) on next actions. It
+**Role: SUPERSEDED — this is NOT the current handoff.** Superseded **on everything** by
+[`2026-08-10-HANDOFF-jfx-run.md`](2026-08-10-HANDOFF-jfx-run.md), 2026-08-10: the arms it
+was written to hand over **have now run**, so its "Start here" and its "what I would do if
+I were continuing" are both spent. **Its "must not be reverted" list still stands in full**
+and is carried forward there. *(Original role: ACTIVE. Supersedes
+[`2026-08-09-HANDOFF-cex-task11.md`](2026-08-09-HANDOFF-cex-task11.md) on next actions.)* It
 does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
 **A SEAM handoff, and a deliberate one.** The governing document was materially amended and
