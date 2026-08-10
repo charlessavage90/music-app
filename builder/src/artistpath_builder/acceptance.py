@@ -165,12 +165,47 @@ PRODUCTION_ACCEPTANCE = AcceptanceCriteria(
     # builder/analysis/2026-07-23-acceptance-bounds/check.py is era-pinned to
     # the pre-adoption values rather than following this change.
     #
-    # PREVIOUS (retired 75k map): node_count=(60_000, 90_000),
-    #                             edge_count=(700_000, 1_100_000)
-    node_count=(47_000, 71_000),
-    edge_count=(1_050_000, 1_580_000),
+    # RECALIBRATED 2026-08-10 for the `CXA-` adoption of the extended archive,
+    # ON THE OWNER'S DECISION AT `CXA-S1`, TAKEN 2026-08-10, after the JFX-B
+    # build was refused by the MSW- values above. Recalibration is his, per §6
+    # of the JFX- pre-registration and the MSW-G3 precedent — the same
+    # protocol as that entry and for the same reason: the tolerance is
+    # UNCHANGED at about ±20 %, only the centre moved, and only the two bounds
+    # that actually failed were touched. Both breaches trace to exactly ONE
+    # knob — the archive going 75,000 → 117,302 responses (`CEX-`). No cost
+    # function, cap rule or drop rule moved with it.
+    #
+    # Sensitivity is preserved, and the band is checked against FOUR known
+    # artifacts rather than centred on one — each count read from its own
+    # manifest sidecar rather than carried from a document:
+    #
+    #   ACCEPT  JFX-B, the new build         88,685 / 1,618,164
+    #   reject  today's adopted MSW- map     58,838 / 1,315,684  ← on NODES
+    #   reject  retired pre-MSW mutual-kNN   74,193 /   898,006  ← on EDGES
+    #   reject  mutual-kNN of THIS archive   81,749 /   905,558  ← on EDGES
+    #
+    # ⚠ The fourth row is what this recalibration ADDED, and it is the only
+    # one that varies the CAP RULE rather than the crawl size: same archive,
+    # same ULF- payload, same k=50, `mutual_knn` instead of `trimmed_union`.
+    # It exists because the MSW- band could NOT discriminate the cap rule —
+    # the comment above records mutual k-NN on the 75k archive at 732,832
+    # edges, INSIDE the then-current band. Here the edge floor rejects it by
+    # roughly 30 %, while its node count (81,749) sits INSIDE the node band.
+    # So after this change the EDGE FLOOR is the only bound standing between a
+    # silent cap-rule revert and a shipped artifact; the node bound cannot see
+    # it. Weaken the edge floor and that protection is gone.
+    # Figures: builder/analysis/2026-08-10-cxa-acceptance-bounds/.
+    #
+    # PREVIOUS (MSW- candidate map): node_count=(47_000, 71_000),
+    #                                edge_count=(1_050_000, 1_580_000)
+    # PREVIOUS (retired 75k map):    node_count=(60_000, 90_000),
+    #                                edge_count=(700_000, 1_100_000)
+    node_count=(70_900, 106_400),
+    edge_count=(1_295_000, 1_942_000),
     # UNCHANGED and deliberately so: median degree PASSED on the candidate
-    # build. Only the two bounds that actually failed were moved.
+    # build, and again on the JFX-B build (whose rejection names only the two
+    # counts) and on the mutual-kNN row above, at 7. Only the two bounds that
+    # actually failed were moved.
     median_degree=(5.0, 25.0),
 )
 
