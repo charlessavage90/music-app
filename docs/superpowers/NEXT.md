@@ -12,22 +12,76 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-10, when THE `JFX-` ARMS RAN, BOTH GATE CLAUSES PASSED, AND THE OWNER
-DECIDED TO ADOPT.**
-**THE NEXT ACTION IS WORK: execute [`plans/2026-08-10-cxa-graph-adoption.md`](plans/2026-08-10-cxa-graph-adoption.md)
-(`CXA-`), INLINE and in a FRESH session.** Nine tasks, strictly sequential, **two owner
-stops**. **Nothing is adopted yet, nothing is deployed, nothing is blocked.**
-**✅ The test queue is EMPTY** and this session deliberately added nothing to it — it changed
-nothing a person can press. ⚠ **On this branch `TEST-QUEUE.md` LOOKS non-empty**: PR #92's
-discharge landed on `main` only, so the 2026-08-07 entry's topmost heading still reads
-`QUEUED` here. Reconcile at merge; **do not discharge it twice.** Still his and blocking
-nothing: **Option C** (same-name population probe), **`SEL-`**, **closing or keeping the
-2026-07-29 famous-to-famous defect ruling**, and **publishing** whenever he wants the
-landing-dot fix live.
+**Last updated: 2026-08-10 (later), when THE EXTENDED 117k GRAPH WAS ADOPTED AND DEPLOYED.**
+**THE NEXT ACTION IS THE OWNER'S AND IT IS USE: the queued entry in
+[`TEST-QUEUE.md`](TEST-QUEUE.md).** It carries his own revert criterion back to him.
+**Nothing is blocked and no session owes anything.** All nine `CXA-` tasks ran and **both
+owner stops were taken by him.**
+⚠ **The test queue has ONE live item** — the 2026-08-10 map entry at the top. The 2026-08-07
+bypass-tray entry **is discharged**: the branch merge reconciled it and its topmost heading
+now reads `DONE`. **Do not discharge it twice.**
+**The landing-dot fix (PR #92) is LIVE** — that item is closed. Still his and blocking
+nothing: **Option C** (same-name population probe), **`SEL-`**, and **closing or keeping the
+2026-07-29 famous-to-famous defect ruling**.
 
 ---
 
-> ## ▶ THE `JFX-` ARMS RAN AND THE OWNER CHOSE TO ADOPT, 2026-08-10. **The next action is WORK: execute the `CXA-` plan, INLINE, in a FRESH session.**
+> ## ▶ THE EXTENDED 117k GRAPH IS ADOPTED, DEPLOYED AND LIVE, 2026-08-10 (later). **The next action is the OWNER'S and it is USE.**
+>
+> **`https://musicapp.cmiller.io` now serves a map of 88,685 artists and 1,618,164 edges**,
+> built from the extended 117,302-response ALG-B archive — up from 58,838 artists. The owner
+> took **`CXA-S1`** (the bound values) and **`CXA-S2`** (the deploy), and separately
+> instructed that PR #92's UI fix ship with it and that the frontend sync run **`--prune`**.
+>
+> **PR #92's landing-dot fix is LIVE.** It was on `main` only; `origin/main` was merged in and
+> the image rebuilt at the merged commit so the tag records what actually shipped.
+>
+> **Both gates passed. `CXA-G1`** — the rebuild through the shipped path, with no
+> per-invocation override, is **byte-identical** to the artifact every `JFX-` figure was
+> measured on. **`CXA-G2`** — verified **from inside the built image**, not the branch.
+>
+> **Verified live, not inferred:** `/health` returns the `CXA-G1` sha and both counts; a
+> public journey returns Radiohead → Nine Inch Nails → Aphex Twin; a middle card resolves clip
+> and cover art.
+>
+> **⚠ THE DIRECTION OF STALENESS, again:** *"production serves `graph-msw-tu50.bin`"* is now
+> **false wherever it describes the present**, and **correct** inside a frozen `JFX-`/`CEX-`
+> record describing what that track did. **Read for tense; grep cannot do this.**
+>
+> **⚠ SIX CLAIMS AN EDITOR MUST NOT REVERT.** **The shallower gradient is NOT established** —
+> adoption was taken with **no cost demonstrated**, and this equally does not establish the
+> gradients are equal. **The d20 famous-to-famous drift is POST-HOC** — where to look, never a
+> finding, which is why the use-test points him there. **`w_known_ramp_fame_pctl` stays 0.01**,
+> confirmed in the running image. **`JFX-B`'s `DO_NOT_DEPLOY: true` is still CORRECT** — the
+> shipped artifact is a different file from a new build. **The ALG-E drop payload did not
+> ship**, and **the 75k-era ALG-B payload stays in `data/`** — three era-pinned probes load it
+> by name; superseded as a default, not orphaned.
+>
+> **⚠ NEW, AND THE MOST LOAD-BEARING THING THIS TRACK ADDED: the EDGE FLOOR in `acceptance.py`
+> is now the only bound that can catch a silent cap-rule revert.** The fourth acceptance
+> artifact — built here because the plan had it marked NOT RUN — showed the node bound cannot
+> see one. **Widening that floor to admit a build removes the protection with nothing going
+> red.**
+>
+> **Figures owned by `builder/analysis/2026-08-09-jfx-prereg-critique/README.md` and
+> `builder/analysis/2026-08-10-cxa-acceptance-bounds/README.md` — cited, never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-10-HANDOFF-cxa-adoption.md`](2026-08-10-HANDOFF-cxa-adoption.md). Reasoning:
+> [`2026-08-10-cxa-adoption-execution-log.md`](2026-08-10-cxa-adoption-execution-log.md) —
+> **its §3 records three defects in the plan itself**, the sharpest being that Task 2 named one
+> constant to move when three had to, which would have turned the suite red on what the plan
+> called a one-line change. Operational:
+> [`plans/2026-08-10-cxa-graph-adoption.md`](plans/2026-08-10-cxa-graph-adoption.md) — now
+> **COMPLETE**. Branch `crawl-extension-design`, **PR #91 — open, and now carrying the whole
+> track.**
+>
+> **Nothing is running on any port** — nothing was started this session and nothing was left
+> behind; the app was exercised against the live address.
+>
+> ---
+
+> ## ▶ THE `JFX-` ARMS RAN AND THE OWNER CHOSE TO ADOPT, 2026-08-10. ~~**The next action is WORK: execute the `CXA-` plan, INLINE, in a FRESH session.**~~ *(SUPERSEDED by the block above: **the `CXA-` plan is EXECUTED, COMPLETE and DEPLOYED.** Its six "must not be reverted" claims still stand in full — only its ranking as the next action has moved. ⚠ Its "nothing is adopted, nothing is deployed" is now FALSE of the present and true only of what `JFX-` itself did.)*
 >
 > **Both gate clauses passed.** `JFX-G1a` and `G1b` PASS, `JFX-C5` passes, journeys
 > do not get longer in any of twelve stratum-by-depth cells, and the pre-registered read is

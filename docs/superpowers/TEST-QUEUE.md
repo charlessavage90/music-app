@@ -70,7 +70,82 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ✅ DONE (latest) — 2026-08-07 — the two buttons have moved, and the website looks different
+## ▶ QUEUED (latest) — 2026-08-10 — the map is bigger, and it is live
+
+**`https://musicapp.cmiller.io` is now running a map built from a much bigger collection —
+about 88,700 artists instead of about 58,800.** It is already deployed. Nothing is running
+on your machine.
+
+### The one thing to know before you start
+
+**Journeys between artists you know well will be DIFFERENT from yesterday. That is the
+release, not a fault.** There are roughly 30,000 more artists for a journey to travel
+through, so routes that were the only way across before now have competition. Do not report
+"this journey changed" as a defect — report it if the change makes it *worse*, which is a
+different judgement and is the one below.
+
+### Your own test, in your own words
+
+You set this before any of it was adopted, so it is quoted back rather than paraphrased:
+
+> **a noticeably worse product experience on more than half of tested journeys**, where
+> "noticeably worse" means **how hard it is to find novel artists**.
+
+Your calibration was the last map switch, which you recognised as a clear improvement in
+under five minutes — so the instrument is known to be sensitive at that size of change.
+
+**"Things I would improve" is a SEPARATE bucket from "revert."** There are things you
+already wanted to improve about the current map and they will still be there. Keeping those
+two apart is the whole point; otherwise a revert trigger quietly becomes a wish list.
+
+### What to exercise — twenty minutes
+
+1. **Three or four journeys between artists you know well**, and press **Dig deeper** ten or
+   more times on each. That is the button this whole release is about: does the middle keep
+   getting less familiar, or does it stall, or wander somewhere with no connection to where
+   you started?
+2. **Lean hardest on famous-to-famous pairs** — two artists you would both call well known.
+   That is where the one unexplained signal in the measurements sat, and it is also the case
+   you can judge best, because you know both ends.
+3. **Play the cards in the middle**, not just the ends.
+4. **On a phone as well.**
+5. **The front page: open the artist dropdown and check the little coloured dot in the box
+   below is now behind it, not in front.** That is the fix you found and verified locally on
+   2026-08-08 — this is the first time it has been on the live site.
+
+### What "wrong" looks like
+
+- **A card with nothing to play**, or a card that plays but is not that artist's own music —
+  a guest spot or someone else's remix. **This is `CLIP-1` and I expect it to get MORE
+  common, not less**: the artists newly added are more obscure, and 31% of them have nothing
+  playable of their own against 25% of the ones already there. **Name any new examples you
+  hit** — Albert Hammond Jr. and Metric were your two. How often it happens is what decides
+  whether it is worth fixing.
+- **The middle stops making sense** — artists with no audible relation to either end.
+- **Pressing Dig deeper stops changing anything**, or changes it randomly rather than digging
+  further out.
+- **The dropdown still sitting behind the dot** on the front page.
+- **A blank white page.** Old unused files were deleted from the server in this publish, and
+  a blank page would mean one was still needed. Reload once; if it persists, tell me
+  immediately — it is a one-command fix.
+
+### What "right" looks like
+
+Journeys build quickly, every card plays, and the further you press the less familiar the
+middle gets **without losing the thread** between your two artists.
+
+**Paste the URL for anything you find** — the whole journey is in the address bar.
+
+> **Rollback is one command and a few minutes.** The previous map is still in the bucket,
+> untouched, along with the one before it.
+>
+> Detail: `docs/superpowers/2026-08-10-cxa-adoption-execution-log.md`.
+
+---
+
+<!-- "(latest)" stripped 2026-08-10: only the newest entry carries it, per the convention
+     above. This entry's content is unchanged and still accurate. -->
+## ✅ DONE — 2026-08-07 — the two buttons have moved, and the website looks different
 
 > ### ✅ RUN BY THE OWNER 2026-08-08 — fully functional, and it found ONE defect.
 >
