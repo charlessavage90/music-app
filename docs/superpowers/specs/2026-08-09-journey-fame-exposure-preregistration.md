@@ -16,6 +16,276 @@ stopped at its owner stop; this does not resume it.
 
 **Identifier series `JFX-`** — collision-checked across every ref, zero matches.
 
+**⚠ AMENDED by [`JFX-AM1`](#jfx-am1--the-critique-amendment-2026-08-09) — read it before
+§2, §3 and §4, all three of which it changes.** `JFX-AM1` governs where it and the original
+text disagree.
+
+---
+
+## `JFX-AM1` — the critique amendment, 2026-08-09
+
+**Committed 2026-08-09, before any arm ran and before any outcome value existed.** No
+artifact was built, no pair was routed, no fame statistic was computed. The only measurement
+taken is a **static graph property** of the already-adopted artifact (`AM1.1` below), which
+is an input to the design, not an outcome of it. **Nothing here is shaped by a result,
+because there are none.**
+
+Prompted by an `ml-graph-analyst` critique dispatched at the owner's instruction, plus two
+owner corrections and two defects found by the controlling session. **Figures owned by
+`builder/analysis/2026-08-09-jfx-prereg-critique/README.md` — cited, never restated.**
+
+### `AM1.1` — the `S1` stratum STAYS in the gate. A proposal to remove it is WITHDRAWN.
+
+The critique proposed removing the famous–famous stratum from `JFX-G1`, on
+`PRODUCT-REQUIREMENTS.md` §8's record that *"superstar endpoints have zero edges below the
+top popularity decile"* and REQ-37 is *"unachievable on famous-to-famous pairs at any router
+setting"*.
+
+**That claim does not transfer, and the proposal was wrong.** It was measured on the
+**pre-`MSW-`** artifact under **mutual k-NN**, in **popularity** currency, under the
+**retired** worldly-fame construct. Measured on the adopted artifact: in fame currency —
+which is what this document scores on — **1.07% of top-decile artists have zero
+below-decile neighbours, and at the top 0.2% it is 0.00%**, median 8.
+
+**⚠ `DD-F1` is NOT refuted, and the halves must not be collapsed.** In *popularity*, at the
+top 0.2%, **44.07%** of artists still have zero such edges. The finding survives where it
+was measured and fails to transfer — exactly the §2.6/§2.11/§2.12 currency trap. **Do not
+record `DD-F1` as overturned.**
+
+**⚠ This measures STRUCTURE, not ROUTING.** It licenses "famous endpoints *can* descend",
+never "journeys *do* descend" — which is what `JFX-G1` exists to measure.
+
+**All 300 pairs stay. §2's strata are unchanged.**
+
+### `AM1.2` — the fame quantity is LOG-SCALED. Owner decision, 2026-08-09.
+
+**§2's currency rule is amended: the primary statistic is `log10(1 + fame_lb)`, not raw
+`fame_lb`.** The `1 +` guards a zero listener count, which is a legitimate non-null value
+distinct from a measured absence (`FAM-AM1.8`); at the values in play the distortion is
+negligible.
+
+**Why.** Raw counts span 1 to 455,551. A pooled median over three strata is a rank
+statistic, so it lands inside `S2` and movement in `S1` or `S3` is invisible to it. Log is a
+**fixed monotone transform of the value**, independent of population — so it satisfies §2's
+currency rule's *reason* exactly as raw does, and unlike percentile — while making the three
+strata commensurable and making `G1b` a ratio of fold-changes.
+
+**⚠ This is not "raw" and it changes what passes**, which is why it is an owner decision and
+why it is recorded here rather than applied silently. **Percentile currency remains barred**
+(§2, unchanged): cross-arm percentile comparison compares two rulers.
+
+**Consequence for `G1b`, and it is the reason the bar is untouched.** The 67% bar was set on
+the translation *"no more than 50% more presses"*. Under raw counts a constant per-press
+*proportional* decline is strongly concave, so 67% of the raw drop is reached in a handful of
+presses and the bar is far looser than 30 presses. Under log, constant per-press work is a
+straight line and the translation holds. **The switch repairs the bar rather than disturbing
+it. `G1b` stays at 67%** (see `AM1.9` for what remains).
+
+### `AM1.3` — the instrument is NAMED. Nothing in this document was well-defined without it.
+
+The original fixed the depths, pairs, statistic and criteria, and never said **how a
+depth-20 journey is produced**. Each unstated choice changes the primary number.
+
+- **Routing:** `find_journey` semantics, not `find_path`. `cre_ladder.journey()` mirrors it
+  deliberately; the committed `walk` helpers mirror `find_path` and "silently unread exactly
+  the pairs union arms make adjacent". Both arms are `trimmed_union` with **different**
+  adjacency, so a `find_path` harness would drop a different pair set per arm — selection on
+  the outcome, in a paired design.
+- **Press selection:** the existing convention, `cre_ladder.victim_key` — highest-fame
+  interior artist first — **cited, not retyped**.
+
+  **⚠ Named as a limitation, because it is one.** A real user presses whichever card they
+  happen to know, which is not this. Under `victim_key` a fame decrease is *partly
+  mechanical*: the most famous interior is being deleted twenty times. **`JFX-G1a` is
+  therefore a weak test in the absolute** and its force comes almost entirely from the
+  **between-arm** comparison in `G1b`, where the mechanical component is present in both arms
+  and cancels. **No read may present `G1a` passing as evidence the product works for a
+  user.**
+- **Ruler frame:** the **production** frame — `graph_store.fame_percentiles`, ranked against
+  the served artifact's own population — because §0.1(a)'s confound is a statement about what
+  the API does. The `cre_common` frame is fixed against an external snapshot (`FRAME_N =
+  74_151`) and would make §0.1(a) **false and uncheckable**.
+- **Precondition:** if the CRE mirror supplies any routing code, `CRE-G1(a)`'s byte-identity
+  against today's `api/src/artistpath_api/pathfinding.py` is **re-verified first**. The mirror
+  was verified 2026-08-03; the seventh cost term landed 2026-08-05.
+
+### `AM1.4` — raw fame is NOT reachable from the serving store.
+
+§2's parenthetical *"in-memory `fame_lb_raw`"* names a **builder** field
+(`Graph.fame_lb_raw`). `GraphStore` computes `fame_lb_pctl` at load and **discards the
+values** — *"the raw counts are not kept, since nothing routes on them"*. The harness reads
+raw fame from the **artifact's APG1 metadata blob** (`fame_lb` key) directly. Found by
+writing the code, not by reading the spec.
+
+### `AM1.5` — the pooling is stated, and `G1b` gets an interval that behaves.
+
+**Pooling.** §2 defines the statistic as the paired median *of per-pair differences*; §3
+stated the gate over *four pooled levels*. These are different statistics and this project
+has already had a **sign flip** from exactly that (`DD-P3H-2`: −0.158 as scored, +0.076 /
++0.020 / +0.020 under three other poolings). **`G1a` and `G1b` are both computed on the §2
+definition — the paired median of per-pair differences.** Per-stratum `G1b` ratios are
+reported beside the pooled figure as diagnostics.
+
+**`G1b` as a linear contrast.** `R = D_B / D_A` is a ratio whose behaviour is governed by its
+denominator's signal-to-noise `t_A`; simulated at n=100, a **genuinely equal** map is
+declared broken **42%** of the time at `t_A = 1` and 22% at `t_A = 2`, with the interval
+spanning negative values. For `D_A > 0`, `R ≥ 0.67` is algebraically **identical** to:
+
+> **`T = D_B − 0.67 · D_A ≥ 0`**
+
+`T` is a linear contrast, always bounded, and free: the design is already paired across arms
+on the same pairs, so one **joint** bootstrap resamples pairs carrying both arms and all four
+depths together and recomputes `T` per replicate. **Same bar, same point estimate, same
+pass/fail on the point estimate.** Pre-registered: the one-sided bootstrap interval on `T`.
+**Report `R̂` as a point estimate; report the interval on `T`, never on `R̂`.**
+
+**`D_A` viability clause — a case the original had no branch for.** The equivalence holds
+**only when `D_A > 0`**, and nothing tested it. **`t_A` is reported. `G1b` is evaluated only
+when `D_A`'s own bootstrap interval excludes zero.** If it does not: `G1b` is **undefined,
+not passed and not fired**, the report says so in those words, and the adoption question
+falls to `G1a` plus the gradients. *(This is a live possibility, not a corner case: the ramp
+weight is 0.01, and `AM1.9`'s floor exhaustion removes the stronger device after press five.)*
+
+### `AM1.6` — `G1a`: one simultaneous band, and its REQ anchor is corrected.
+
+**The `REQ-37` classification in §3 is WRONG.** §3 states *"REQ-13 and REQ-37 are **Musts**"*.
+`REQ-13` is a Must (`PRODUCT-REQUIREMENTS.md` §8, `### Must`); **`REQ-37` is under `###
+Expect`**. **`JFX-G1` stands on `REQ-13` alone.**
+
+That matters beyond bookkeeping: `REQ-13`'s wording is a **trend** claim, which licenses the
+overall d0→d20 test and **does not license** a requirement that every consecutive step be
+non-increasing. The step tests were the half with no anchor *and* the statistically risky
+half.
+
+**Multiplicity.** Three step tests plus an overall test, correlated, at nominal coverage:
+simulated false-stop rate under a **truly flat** gradient is **7.5–8.2%** against a nominal
+5%. **Amended: the three steps are evaluated against a SIMULTANEOUS band via the
+max-statistic**, from the same joint bootstrap as `AM1.5` — family-wise error 5%, no extra
+data, no extra runs, and less conservative than Bonferroni because it uses the observed
+correlation. The overall d0→d20 clause is unchanged.
+
+**Effect size on the step-failure clause.** The original had none, so a rise of three
+listeners could stop the adoption — while the estimator's own home (`ulc_exposure.branch()`)
+pairs "CI excludes zero" with `EFFECT_PP`. **Amended: a step fails only if its simultaneous
+interval excludes zero AND the rise is at least 0.02 in log10 units** (≈ a 4.7% increase in
+listener count). Set here, before any arm ran, as the smallest rise that is not measurement
+grain; it is deliberately small because this is a catastrophe guard.
+
+### `AM1.7` — `C6` and `C7` get effect sizes, because both fire branches.
+
+§4's reads 7 and 8 fire on the words *"materially more"* and *"materially higher"*, undefined.
+Read 7's consequence is that **every one-knob reading in the document is void** — the most
+expensive branch here, firing on an undefined trigger. This is the Track 2 A0-vs-P pattern
+(`CLAUDE.md`: *"every gate and branch trigger needs its own effect size"*).
+
+The gradients `C1`/`C2`/`C3` correctly have **no** thresholds — REQ-42 makes the obscurity
+requirement a gradient with no absolute floor, and §3 argues that explicitly. **`C6` and `C7`
+are not gradients; they are validity checks whose branches fire consequences.**
+
+- **`JFX-C6` fires read 7** when the share of paths with a non-zero floor term is **at least
+  5 percentage points higher** in `JFX-B` than in `JFX-A`, at any depth.
+- **`JFX-C7` fires read 8** when the null share among interior artists is **at least 2
+  percentage points higher** in `JFX-B` than in `JFX-A`, at any depth.
+
+Both set before any arm ran. Both are "is this reading contaminated" bars, so they are set
+low.
+
+**Read 8 also becomes depth-conditional.** `graph_store.fame_percentiles` assigns
+`fame_lb_pctl = 0.0` to null-fame artists, so a null-fame artist pays **zero** ramp toll and
+is the cheapest possible interior at every depth — while §2 **excludes** it from the outcome.
+As `k` rises the ramp's toll spread grows and pulls routes onto exactly the artists the
+statistic discards. **So: if the null share among interiors RISES WITH DEPTH in an arm, that
+arm's measured gradient is attenuated and the report must say so.** The original framed this
+as a between-arm level difference only.
+
+**`REQ-Q1(a)` is now satisfied, and was not.** It requires any fame-currency scored criterion
+to be *"always reported twice — all interiors and matched-only"*. **Added: the primary
+statistic is recomputed over journeys with zero null interiors, alongside the headline.** The
+`DD-D8` precedent is why this is not cosmetic — there, ~45% of a passing arm's effect was
+carried by artists at the fame floor. *(`REQ-Q1(b)`'s A11 notability guard is from the retired
+worldly construct; flagged as possibly inapplicable, not asserted either way.)*
+
+### `AM1.8` — three corrections to §0, §2 and `C5`.
+
+- **The intervention is FOUR changes, not three.** §0.1 lists the drop flags as held
+  constant because they are `True` in both — but the **payload differs**, and
+  `2026-08-09-cex-recensus/README.md` measures **32 artists newly dropped and 30 no longer
+  dropped** on the shared population, because `ULF-` re-resolves clip availability. Up to 32
+  artists can be absent from `JFX-B` for a reason that is **not the crawl extension**. Moved
+  out of "held constant" into §0's intervention list.
+- **`C5`'s population is the 58,746 artists WITH a measurement**, not all 58,838 — implied by
+  §2's null rule, unstated in `C5`. **And `C5` is a catastrophe guard, not a detector:** under
+  a hypergeometric null it fires at 4.5 sd (p ≈ 3e-6), and the loss the mechanisms actually
+  produce is of **obscure, low-degree** artists, which `C5` is structurally blind to. **Added
+  as a report row: the direct count `|A \ B|`**, which no criterion currently owns.
+- **The two null shares in §2 are not comparable as written** — 0.16% is a *post-filter*
+  artifact rate, 6.3% is a *pre-filter* archive rate. `JFX-B`'s post-filter share is likely a
+  few tenths of a percent. Stated so `C7` is not read against the wrong expectation.
+
+### `AM1.9` — measured: the obscurity floor is spent by press five.
+
+`effective_floor_raw` subtracts `floor_relax_known = 0.15` per press from
+`min(pop_raw[source], pop_raw[target])`, clamped at zero. Over the committed candidate pairs
+the floor is **fully relaxed by press five for 96–100% of pairs in every stratum**.
+
+**Consequence, binding on §4:** the four depths do **not** sample one mechanism. `d0→d5` has
+two devices; `d5→d10` and `d10→d20` have the fame ramp and accumulating exclusions only.
+**No read may treat the three steps as homogeneous.**
+
+**And it bears on the 67% bar's reasoning.** §3's caveat said the gradient *"may be"*
+front-loaded; it **is**, by construction. `AM1.2`'s log switch removes the arithmetic
+component of that; the mechanical component remains, so 67% still corresponds to somewhat
+more than 30 presses. **The bar is UNCHANGED** — it is a "the map is broken" bar, and leniency
+on a stop-gate sends marginal maps to the owner as a judgement call rather than auto-rejecting
+them. **Added instead: the report states the REALISED press-count equivalence beside the
+ratio**, so the translation the bar was set on becomes a measured quantity rather than an
+assumption.
+
+### `AM1.10` — the estimator wrapper, and the reported units.
+
+`paired_median_ci` (`ulc_exposure.py:72`) multiplies by 100 and names its outputs
+`median_diff_pp` / `ci95_pp`, because `ULC-`'s statistic was a share. **JFX's is not**, so as
+imported it reports a true difference of 800 as **80,000 "pp"**. The estimator itself is
+sound — percentile bootstrap of the median of paired differences, correct index convention,
+10,000 draws.
+
+**Amended:** a thin wrapper in the JFX analysis directory divides by 100 and renames the
+keys; the frozen script is **imported, never edited**. `BOOTSTRAP = 10_000` is a module
+global and comes along with the import.
+
+**A per-statistic seed is pre-registered**, derived from the statistic's own name, so a
+result is reproducible from its name alone with no harness state involved.
+
+> **◐ This clause originally justified the seed by claiming a shared `random.Random` would
+> "silently change every later interval". Measured, and it does NOT — the claim was
+> overstated and is corrected here rather than quietly dropped.** The bootstrap distribution
+> of a median over n≈40 is highly discrete, and 10,000 replicates converge the percentiles
+> onto the same order statistics whatever the RNG offset; forward and reverse call order give
+> **identical** intervals. The mechanism is real and reappears at 50 replicates, which is
+> what the test asserts. **So the seed is kept for reproducibility, not because it repairs a
+> live defect** — and `test_jfx_stats.py` will fail if the negligibility ever stops holding.
+
+### `AM1.11` — §4 gets a read for the median and the mean disagreeing.
+
+§2 promises both at every depth and calls a divergence *"a finding, not a discrepancy to
+reconcile"*; §3 decides the gate on the **median only**; §4 has no branch for them
+disagreeing. Simulated, the median has **essentially zero power** when fewer than 50% of
+pairs change, with a cliff at exactly 50% — so a concentrated effect produces a **false
+stop**, not a false pass.
+
+**Added as read 9:** where the median is null and the mean's interval excludes zero (or the
+converse), the report states it explicitly and reports both. **The gate remains decided on
+the median** — promoting the mean would change what passes and is the owner's call, not a
+bookkeeping fix.
+
+### `AM1.12` — §1's build script did not exist.
+
+§1 says the artifact *"is built by a script that runs `check_acceptance`, CATCHES the
+rejection, records it verbatim in the manifest, and serialises anyway"* — present tense, for
+something that had never been written. `check_acceptance` exists
+(`builder/src/artistpath_builder/acceptance.py:187`) and every caller lets the rejection
+propagate. **Written as part of this amendment**; §1's tense is now true.
+
 ---
 
 ## §0 Factor table

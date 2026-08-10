@@ -307,10 +307,34 @@ the offline currency is a separate decision, flagged and not taken.*
   absence of a band is not itself a failure if the trend holds. Re-reading either is
   the owner's call, not automatic.
 
-⚠ **Known structural conflict, recorded 2026-07-29:** on the current artifact,
+⚠ **Known structural conflict, recorded 2026-07-29:** ~~on the current artifact,~~
 superstar endpoints have zero edges below the top popularity decile
 (`2026-07-28-track3-depth-descent-execution-log.md` `DD-F1` — figures owned there), so
-REQ-37 is currently **unachievable on famous-to-famous pairs at any router setting**.
+REQ-37 is ~~currently~~ **unachievable on famous-to-famous pairs at any router setting**.
+
+> **◐ THE STRUCTURAL PRECONDITION NO LONGER HOLDS — measured 2026-08-09 on the ADOPTED
+> artifact. The ruling below is NOT thereby closed; that is the owner's.** Figures owned by
+> `builder/analysis/2026-08-09-jfx-prereg-critique/README.md` — cited, never restated.
+>
+> **The sentence above was measured on the pre-`MSW-` artifact under mutual k-NN and is
+> stale as a present-tense claim.** The cap rule changed 2026-08-06 to `trimmed_union`,
+> which keeps an edge when *either* endpoint ranks the other — precisely the famous↔obscure
+> edges mutual k-NN destroyed. **Improving this pair class was one of the owner's reasons
+> for the switch (his statement, 2026-08-09): it is a designed remedy, not a side effect.**
+> ⚠ **The `MSW-` records do not mention it** (execution log, plan and handoff all swept,
+> zero hits), so that adoption is recorded as resting on narrower grounds than it had.
+>
+> **⚠ TWO HALVES, AND THEY MUST NOT BE COLLAPSED.** In **fame** currency — the construct
+> REQ-37 now runs in — the barrier is gone: 1.07% of top-decile artists have zero
+> below-decile neighbours, and **0.00%** at the top 0.2%. In **popularity** currency, where
+> `DD-F1` was measured, **44.07%** of top-0.2% artists still have zero such edges. **`DD-F1`
+> is not overturned** — it survives in its own currency and fails to transfer. Recording it
+> as refuted would be the §2.6/§2.11/§2.12 currency error again.
+>
+> **⚠ This measures STRUCTURE, not ROUTING.** Famous endpoints *can* now descend; whether
+> journeys *do* is unmeasured here and is what `JFX-G1` exists to answer. Owner-reported
+> live use corroborates it. **The 2026-07-29 defect ruling below therefore stands until he
+> closes it**, and a session must not close it on this evidence.
 
 > **⚠ Read the decile in that sentence as an OPERATIONALISATION, not the requirement
 > (REQ-42, 2026-08-01).** The requirement is the trend; "below the top popularity decile"
