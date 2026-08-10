@@ -35,7 +35,14 @@ import statistics
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+# parents[2] of the DIRECTORY, matching every sibling script here. It was
+# parents[2] of the FILE, which resolves to `builder/` and built the nonexistent
+# `builder/builder/analysis/...` — so this module could only ever be imported by
+# `test_jfx_stats.py`, which happens to insert the ULC- path itself first. It had
+# no other consumer, so nothing else ever executed this line. Found by writing the
+# first one.
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[2]
 sys.path.insert(0, str(ROOT / "builder/analysis/2026-08-05-unlistenable-class"))
 
 from ulc_exposure import BOOTSTRAP, paired_median_ci as _frozen_paired_median_ci  # noqa: E402

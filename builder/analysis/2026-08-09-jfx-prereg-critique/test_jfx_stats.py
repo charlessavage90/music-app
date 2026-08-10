@@ -266,3 +266,29 @@ def test_branch_trigger_effect_sizes_are_pinned():
     assert J.STEP_RISE_EFFECT_LOG10 == 0.02
     # ~4.7% in listener count, the plain-language figure AM1.6 quotes.
     assert (10 ** J.STEP_RISE_EFFECT_LOG10 - 1) == pytest.approx(0.047, abs=0.001)
+
+
+# --- the import path itself, which had no consumer to exercise it ----------
+
+def test_jfx_stats_imports_with_only_its_own_directory_on_the_path():
+    """`jfx_stats` must resolve the frozen ULC- estimator BY ITSELF.
+
+    Shown red before being kept: the module computed `ROOT` as `parents[2]` of the
+    FILE (= `builder/`) and inserted `builder/builder/analysis/...`, which does not
+    exist. Every test above passed anyway, because THIS FILE inserts the ULC- path
+    at line 22 before importing — so the module's own line was dead in the only
+    context that ever ran it.
+
+    A subprocess with a clean `sys.path` is what makes this a real check: importing
+    it here could never fail once the test module has already fixed the path.
+    """
+    import subprocess
+
+    result = subprocess.run(
+        [sys.executable, "-c", "import jfx_stats; print(jfx_stats.SEED_NAMESPACE)"],
+        cwd=str(HERE), capture_output=True, text=True,
+    )
+    assert result.returncode == 0, (
+        f"jfx_stats cannot import on its own:\n{result.stderr}"
+    )
+    assert "JFX-20260809" in result.stdout
