@@ -399,3 +399,36 @@ does the opposite** — the median less-famous artist gains connections monotoni
 grows, and hub saturation *falls*. The figures are owned by the `cxs-growth` directory. **One
 caveat travels with them and must not be dropped: artists arriving with exactly one connection
 quadrupled, and such an artist can end a journey but never appear in the middle of one.**
+
+---
+
+## §11 — Amendment, 2026-08-09: `CEX-M1`'s saturated-edge half is vacuous by construction
+
+**Added after Task 11 executed. It corrects this document forward rather than editing what it
+said, because the reasoning above was sound and the instrument was not.**
+
+**§2's `CEX-M1` proposal has two halves, and only one works.**
+
+- **The p99 scale half is sound and was informative.** It moved 850 → 769 on the extension,
+  and the consequence is derivable: every similarity is ~1.5% higher for the same raw
+  co-occurrence, and because cost is `(1 − similarity)` the discount is uneven — larger on
+  strong links than weak ones. **That points opposite to this document's stated worry:** the
+  extension mildly sharpens the router *toward* strong links rather than surrendering more of
+  the route to tie-breaks.
+- **⚠ The saturated-edge-share half cannot detect what it was written to detect.** An edge
+  saturates iff `raw >= percentile(raw, 99)`, and ~1% of any distribution sits at or above its
+  own 99th percentile. **The figure reads ~1% for any crawl at any size.** It read 1.0007% at
+  75,000 and 1.0019% at 117,302 — that difference is `np.percentile` interpolation, not a
+  population effect.
+
+**So §2's sentence "if the saturated share rises materially, that is a path-quality change"
+can never fire, and a future session must not read a flat ~1% as evidence of no effect.**
+
+**The fix, for whoever runs the next crawl: measure saturation on the FINAL graph, not at
+rescale time.** The routing graph is post-cap, post-symmetrise, post-prune, and the cap
+preferentially retains strong edges — so saturation there is *not* pinned. Measured on the
+adopted artifact it is **1.454%** against 1.001% at rescale time, which is the evidence that
+the post-cap figure carries signal.
+
+**Due before the next crawl extension.** Detail: `../2026-08-09-cex-task11-execution-log.md`
+§5; figures owned by `../../../builder/analysis/2026-08-09-cex-recensus/README.md`.

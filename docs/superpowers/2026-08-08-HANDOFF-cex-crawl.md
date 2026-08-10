@@ -3,7 +3,11 @@
 **Role: ⚠ SUPERSEDED 2026-08-09 ON NEXT ACTIONS by
 [`2026-08-09-HANDOFF-cex-task11.md`](2026-08-09-HANDOFF-cex-task11.md), which is the CURRENT
 handoff — Task 11 is now COMPLETE and this note's "Start here" describes work that is done.
-Its "Claims that must NOT be reverted" list is NOT superseded and still stands in full.**
+Its "Claims that must NOT be reverted" list is NOT superseded and still stands in full.
+⚠ One STATUS claim below has also moved and is stale by date rather than wrong: **PR #92 is
+now MERGED** (`0a74f1c`, 2026-08-09) and is no longer "open and unmerged". It remains
+**undeployed**. Left in place, per the rule that a superseded note is correct for its own
+date and is not edited.**
 *(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-08-HANDOFF-cex-design.md`](2026-08-08-HANDOFF-cex-design.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.

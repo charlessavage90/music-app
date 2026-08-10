@@ -167,3 +167,33 @@ D6's own comment warns about, in a form the comment does not name: not a wrong s
 | **`FE-SNYK-1`** | Org scan limit. Unchanged |
 
 **Nothing killed this session.**
+
+## 9. `closeout` B1 — the doc audit, and one finding adjudicated FALSE
+
+`docs-lint` had exactly two hard failures, both "not classified in `docs/README.md`" for this
+session's two new documents. Both fixed. Its candidates are pre-existing Track 2-era items,
+untouched.
+
+The `doc-auditor` returned five findings. **Three were valid and are fixed**; one was partial
+and got a cross-reference; **one was HIGH and is false.**
+
+- **HIGH, `PR #92 is MERGED (0a74f1c)` — FALSE, and the reason is worth recording.** The
+  auditor could not find that commit in git history and concluded the claim was unverifiable.
+  It is verifiable: the merge happened server-side via `gh pr merge`, and **this working tree
+  had never fetched `main` afterwards**, so the commit genuinely was absent locally. Confirmed
+  after `git fetch`: `0a74f1c` is on `origin/main`, merged 2026-08-09 16:22 UTC. **The lesson
+  is the auditor's, not the claim's** — a session that merges a PR server-side leaves its own
+  tree unable to corroborate the fact it just recorded, and any later reader auditing from
+  that tree draws the same wrong conclusion.
+- **VALID — the governing spec described `CEX-M1` as a working instrument with no forward
+  pointer to its vacuity.** This is the defect-of-absence class, and it is the one finding
+  here that would have cost something real: a future crawl would have re-used a blind
+  instrument on the spec's authority. Fixed by **spec §11**, an amendment forward rather than
+  an edit to what §2 said.
+- **VALID — `JFX-M1'` was defined in §3 with no read in §4.** Fixed, together with `C4`, in a
+  new subsection stating that both fire no branch by design and naming `M1'`'s run state.
+- **PARTIAL — `JFX-C3`'s read rule sits in §3 rather than §4.** Placement kept: it is an
+  interpretation rule spanning every outcome, not a branch of one. A pointer was added in §4
+  so a reader working through the reads cannot miss it.
+- **VALID but bounded — the superseded handoff still says PR #92 is open.** True for its own
+  date, so the note itself is **not** edited; its role line now carries the correction.

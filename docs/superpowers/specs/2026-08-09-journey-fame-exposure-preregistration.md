@@ -249,6 +249,25 @@ licensed by this document, however clean the headline numbers look.
    known upward bias in `JFX-B` (§2). Reads 3 and 5 survive it and are strengthened by it;
    **read 4 must state that some of the apparent fame increase is the bias, not the map.**
 
+### The two criteria that fire no branch, stated here so neither is orphaned
+
+**`JFX-C4` and `JFX-M1'` are reported under every read above and trigger none of them.** They
+carry no threshold and no branch **by design**, not by omission:
+
+- **`JFX-C4` (coverage)** is one half of the trade §3 reserves to the owner. It is reported
+  beside `C1` in reads 3, 4 and 5, and it is the reason read 5's null is not a failure.
+- **`JFX-M1'` (post-cap saturation)** is the repair of a separate instrument — `CEX-M1`'s
+  pre-registered saturated-edge share is vacuous by construction, and this measures the same
+  question where it is not. **It bears on no `JFX-` criterion and licenses no `JFX-` read.**
+  It is collected here only because the artifact this design builds is the one thing that can
+  supply it. **Presupposes: both arms built.** Reported for both, never compared to
+  `CEX-M1`'s rescale-time figure, which is measured at a different pipeline stage.
+
+**`JFX-C3`'s read rule lives in §3 and is not repeated here** — a length increase counts only
+where the same stratum also shows an interior-fame decrease. It is an interpretation rule
+spanning every outcome rather than a branch of any one, which is why it sits beside the
+criterion; **this pointer exists so a reader working through §4 does not miss it.**
+
 ## §5 What this design cannot support
 
 - **Any claim that *adding artists* caused an effect.** §0 — the arms differ by three things.
