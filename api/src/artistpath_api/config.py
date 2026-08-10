@@ -11,17 +11,27 @@ class ApiConfig:
     # --- graph ----------------------------------------------------------
     # Default is the ADOPTED artifact, by name — flipped at each adoption
     # (spec 2026-07-23 §1 decision 4; closeout checks this default is not
-    # stale). Adopted 2026-08-06 by MSW-: the trimmed-union build carrying
-    # fame_lb, replacing graph-t15-tiebreakfix.bin. Its identity (sha256, node
-    # and edge counts) is owned by the MSW- execution log's Task 9 section and
-    # by the artifact's own manifest sidecar — cited, never transcribed here.
+    # stale). Adopted 2026-08-10 by CXA-: the build off the EXTENDED 117,302-
+    # response ALG-B archive, replacing graph-msw-tu50.bin. Its identity
+    # (sha256, node and edge counts) is owned by the artifact's own manifest
+    # sidecar — cited, never transcribed here (DEP-24).
     # It is gitignored: a fresh clone copies it (or the archive) from another
     # machine and verifies the sha256 against the sidecar.
+    #
+    # What the adoption rests on: JFX-G1a, G1b and C5 all passed and the
+    # pre-registered read was §4 read 5 — the map got bigger and journeys did
+    # not measurably change. ⚠ The shallower gradient is NOT established
+    # (D_B − D_A spans zero); adoption was taken with no cost demonstrated,
+    # not in spite of a measured one. The owner's revert criterion is recorded
+    # in plans/2026-08-10-cxa-graph-adoption.md §0.
+    #
+    # PREVIOUS: graph-msw-tu50.bin (MSW-, adopted 2026-08-06; the trimmed-union
+    # build carrying fame_lb). Before it: graph-t15-tiebreakfix.bin.
     # The retired 5k dev fixture is NOT a substitute — its snowball shape
     # misrepresents the obscure tail, which is what bypass work exercises.
     # One env var swaps the graph without code changes.
     graph_path: str = os.environ.get(
-        "ARTISTPATH_GRAPH", "../builder/scratch/graph-msw-tu50.bin"
+        "ARTISTPATH_GRAPH", "../builder/scratch/graph-cxa-adopted.bin"
     )
     # Expected sha256 of the artifact. Empty skips verification (local dev);
     # production sets it and the service refuses to boot on a mismatch. The

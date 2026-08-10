@@ -22,6 +22,7 @@ def test_default_graph_path_points_at_the_adopted_artifact():
     # ever built and so could not have caught a stale default. Closeout checks
     # this default is not stale; that check now has something to fail on.
     #
-    # Adopted 2026-08-06 (MSW-), replacing graph-t15-tiebreakfix.bin.
+    # Adopted 2026-08-10 (CXA-), replacing graph-msw-tu50.bin — which had
+    # replaced graph-t15-tiebreakfix.bin on 2026-08-06 (MSW-).
     cfg = ApiConfig()
-    assert cfg.graph_path.endswith("graph-msw-tu50.bin")
+    assert cfg.graph_path.endswith("graph-cxa-adopted.bin")
