@@ -70,7 +70,41 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ▶ QUEUED (latest) — 2026-08-07 — the two buttons have moved, and the website looks different
+## ✅ DONE (latest) — 2026-08-07 — the two buttons have moved, and the website looks different
+
+> ### ✅ RUN BY THE OWNER 2026-08-08 — fully functional, and it found ONE defect.
+>
+> **His words:** *"the new site UI and changed buttons are fully functional."* **The serious
+> thing this entry existed to catch — a familiar pair giving a DIFFERENT journey — did not
+> happen**, which is the confirmation that mattered, since the release was supposed to move
+> nothing about routing.
+>
+> **⚠ ONE DEFECT FOUND, AND IT IS FIXED: the landing page's indicator dots.** Typing in the
+> **From** box opens the matching-artist list downward over the **To** box — and the To box's
+> **green dot showed through the list** instead of being hidden behind it.
+>
+> **A genuine stacking bug, not a cosmetic slip.** The list and the dot were both on the same
+> layer (`z-10`), and the two boxes are plain siblings with nothing between them starting a new
+> layering context. When two things claim the same layer the browser breaks the tie on document
+> order — and the second box's dot comes *later* in the document than the first box's list, so
+> the dot won. The list now sits a layer above every field decoration.
+>
+> **Verified by reproducing it, not by looking.** The regression test samples the actual
+> rendered pixel where the dot sits: against the shipped code that pixel is *exactly* the dot's
+> green, and after the fix it is the list's background. ⚠ **An earlier version of that test used
+> the obvious tool (`elementFromPoint`) and PASSED against the broken code** — the dot is
+> click-through, so hit-testing cannot see it however it is painted. Recorded because it would
+> otherwise have shipped as a green guard standing over a live defect.
+>
+> **Branch `landing-dot-z-order`. Not yet deployed** — the fix is on a branch, so the live site
+> still shows the dot until it is merged and published.
+>
+> **NOT covered by this pass and still open:** `CLIP-1` — a card can play the right artist and
+> the wrong impression of them (Albert Hammond Jr., Metric). No new examples were reported.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-08-07 — the two buttons have moved, and the website looks different
 
 **The app on `https://musicapp.cmiller.io` looks different from this morning.** It is already
 live and nothing is running on your machine. **The artists you get have not changed** — no

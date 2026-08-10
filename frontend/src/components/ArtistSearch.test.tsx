@@ -80,3 +80,41 @@ test('does not query for empty input', async () => {
   await new Promise((r) => setTimeout(r, 300));
   expect(spy).not.toHaveBeenCalled();
 });
+
+// The landing page renders two of these as flex siblings, and the first one's
+// open dropdown hangs over the second one's field. Both the dropdown and the
+// dot are absolutely positioned in the SAME stacking context (nothing between
+// them creates one), so at equal z-index the tie breaks on DOM order — and the
+// second field's dot comes later in the document than the first field's list.
+// That is the defect the owner found: the green dot sat on top of the open
+// dropdown. jsdom has no layout and cannot check paint order, so this asserts
+// the ordering invariant that governs it: a dropdown outranks a field dot.
+function zRank(el: Element | null | undefined): number {
+  const match = (el?.getAttribute('class') ?? '').match(/(?:^|\s)z-(\d+)(?:\s|$)/);
+  return match ? Number(match[1]) : 0;
+}
+
+test('an open dropdown outranks the next field\'s dot', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'searchArtists').mockResolvedValue([
+    { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 0.8 },
+  ]);
+  const { container } = render(
+    <>
+      <ArtistSearch label="From" end="start" onSelect={vi.fn()} />
+      <ArtistSearch label="To" end="destination" onSelect={vi.fn()} />
+    </>,
+  );
+
+  await user.type(screen.getByLabelText('From'), 'miles');
+  await screen.findByText('Miles Davis');
+
+  const dropdown = container.querySelector('ul');
+  const dots = container.querySelectorAll('span[aria-hidden]');
+  expect(dropdown).not.toBeNull();
+  expect(dots).toHaveLength(2);
+
+  // Strictly greater, not >=: equality IS the bug, because DOM order then
+  // decides and it decides against the dropdown.
+  expect(zRank(dropdown)).toBeGreaterThan(zRank(dots[1]));
+});
