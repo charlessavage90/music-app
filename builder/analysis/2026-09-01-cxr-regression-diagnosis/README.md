@@ -44,10 +44,17 @@ extended artifact, so the two sets are on one ruler:
 
 Median ratio **0.211**; `CXR-P2` was pre-set to fire below 0.50.
 
-**`CXR-M5`: 6,123 of the added artists — 20.48 % — have one connection or none.** They
+**`CXR-M5`: 6,123 of the added artists — 20.48 % — have EXACTLY ONE connection.** They
 **cannot be a card in the middle of a journey at any price**, because a journey enters and
 leaves every artist it passes through. The same figure for the pre-existing population is
 4.27 %.
+
+*(Exactly one, not "one or none": the artifact is pruned to the largest connected component,
+so its minimum degree is 1 and an isolated artist cannot be in it. Verified against the
+artifact — `deg.min() == 1`, zero occurrences of 0 — because the looser phrasing was written
+here first and is the kind of claim that gets quoted onward. `findings/2026-07-25-mutual-knn-stranding.md`
+uses "one connection or none" correctly: it measures BEFORE the component prune, where
+degree 0 does occur.)*
 
 The pre-existing artists were not harmed: their own paired degree change is **median +0.0,
 mean +1.40**, and only 5.72 % lost any connection. **This is not a case of the old map

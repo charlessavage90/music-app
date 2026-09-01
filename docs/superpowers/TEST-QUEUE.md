@@ -100,7 +100,7 @@ buttons, same landing page, only the map moved back.
 
 > **Why it went back**: it did not measurably help and it measurably cost. The extension
 > added ~29,900 artists with a median of **4** connections each against **19** for the
-> artists already there — a fifth of them had one connection or none, which means they could
+> artists already there — a fifth of them had exactly one connection, which means they could
 > never appear in the middle of a journey at all — and adding them flattened the scale the
 > app uses to tell "somebody you might not know" from "somebody everybody knows" by 21 %.
 > Figures: `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`.

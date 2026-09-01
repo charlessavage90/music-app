@@ -67,6 +67,9 @@ probe), **`SEL-`**, and **closing or keeping the 2026-07-29 famous-to-famous def
 >   now would confound the confirmation test.
 > - **Nothing here resumes path-quality work.** Three candidate fixes are visible in the `CXR-`
 >   README and **each needs its own pre-registration and is the owner's trigger to start.**
+>
+> Handoff: [`2026-09-01-HANDOFF-cxr-revert.md`](2026-09-01-HANDOFF-cxr-revert.md). Reasoning:
+> [`2026-09-01-cxr-revert-execution-log.md`](2026-09-01-cxr-revert-execution-log.md). PR #91.
 
 ---
 

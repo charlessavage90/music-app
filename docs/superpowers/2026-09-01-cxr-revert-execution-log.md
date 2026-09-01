@@ -49,9 +49,14 @@ rebuilding would have made the map not the only variable.
   self-consistent and would pass either way. **What makes this check real is that the counts
   are the OLD map's**, and they are not a value this session supplied to anything.
 
-**Deploy time 185 s.** The clip cache was **not** cleared: clips resolve per artist and the
-old map's artists are a subset of the new one's, so every cached entry is still correct for
-the artist it names.
+**Deploy time 185 s.** The clip cache was **not** cleared: cache entries are keyed by MBID
+and hold that artist's own clip, so which map is loaded cannot make an entry wrong.
+
+**⚠ The first version of this sentence justified that with "the old map's artists are a
+subset of the new one's", and that is FALSE** — the extension lost 45 artists as well as
+adding ~29,900 (`CXR-` README, populations table). The action was right and the reason given
+for it was not, which is the `B4` defect class this closeout exists to catch, caught in this
+session's own output.
 
 ## §3 Where the record was, and the thing a reader must not trip on
 
@@ -137,3 +142,114 @@ credential path was touched. **One credential did pass through this session's to
 App Runner environment listing includes `ARTISTPATH_ORIGIN_SECRET`, and the deploy sources
 `infra/.env.deploy`. Neither value was printed into any document, commit or report; the
 runbook's §5 warning about credentials in deploy output is the standing rule and it held.
+
+## §9 The standing context layer (closeout D6)
+
+**Two trees now have separate memory directories, and only one of them matters for work.**
+The repository is `C:\dev\music-app`; a session opened there loads
+`~/.claude/projects/C--dev-music-app/memory`. This session was opened in the retired OneDrive
+tree and loads a *different* directory.
+
+| Layer | `C--dev-music-app` (working sessions) | Previously recorded | Delta |
+|---|---|---|---|
+| **Unconditional** | **45,854 characters** | 45,854 | **0** |
+| **Conditional** | **2,475 lines** | 2,475 | **0** |
+
+**Zero in the layer that taxes working sessions.** Nothing in `CLAUDE.md`, the skill or agent
+descriptions, or that tree's memory index was touched.
+
+| Layer | `C--…-OneDrive-…` (retired tree) | Before | Delta |
+|---|---|---|---|
+| **Unconditional** | 45,654 characters | 45,468 | **+186** |
+| **Conditional** | 2,397 lines | 2,371 | **+26** |
+
+**The +186 is a new index row and it is the OWNER'S call, not this session's** — D6's table
+row two, a new row with a positive delta, not a correction. It is reported rather than
+assumed: `memory/repo-moved-to-c-dev.md` says the OneDrive tree is a stale copy and names the
+live path. **The case:** this session opened in that tree, and its `NEXT.md` was five tracks
+and one graph adoption behind; the first minutes went on discovering that. The tax falls only
+on sessions opened in a tree he has presumably stopped using. **If he would rather not carry
+it, deleting both the file and the index row costs nothing** — nothing else references them.
+
+## §10 Closeout outcomes
+
+**B3 — the vacuous-test check, and it earned its place again.** The default-artifact pin was
+verified by breaking the code, not by reading green: repointing `ApiConfig.graph_path` at
+`graph-cxa-adopted.bin` turns `test_default_graph_path_points_at_the_adopted_artifact` red
+**on the name assertion**, which is the right reason rather than an incidental one.
+
+**The restore was done WITHOUT git**, deliberately. The `CXA-` closeout recorded a near-miss
+where a `git checkout` inside a compound command that had already `cd`-ed into a package
+directory failed silently and left the deliberate break in the tree — the exact "unshipped
+work wearing a completion badge" defect, introduced by the check that exists to prevent it.
+Here the original text was held in memory and written back, then `git status --porcelain` was
+read and came back empty. **A restore that cannot fail beats a restore that reports failure
+into a pipe.**
+
+**B4 — prose versus code, and it found three defects in this session's own output.** All
+three are the documented shape: correct action, wrong sentence beside it.
+
+1. **"one connection or none"** — the artifact is pruned to the largest connected component,
+   so its minimum degree is **1** and an isolated artist cannot be in it. Verified against the
+   artifact rather than reasoned about. Corrected in the figures README and in the owner-facing
+   queue entry. *(`findings/2026-07-25-mutual-knn-stranding.md` uses the same phrase correctly
+   — it measures before the prune. Left alone.)*
+2. **The clip-cache justification** rested on "the old map's artists are a subset of the new
+   one's", which is false: 45 artists were lost. Corrected in §2, with the false claim kept
+   visible rather than quietly replaced.
+3. **The hand-rolled metadata read in `cxr_census.py` was cross-checked against the shipped
+   parser** rather than trusted: same length as the node count, and its 126 nulls reconcile
+   with the 197 zero percentiles the shipped `fame_lb_pctl` carries (126 nulls + 71 artists
+   legitimately at the bottom of the frame). No defect; recorded because an unverified second
+   parser is exactly what `JFX-` §3 removed from its own harness.
+
+**B2 — reachability.** `cxr_census.py` and `cxr_compression.py` are imported by nothing, which
+matches the sibling precedent (`jfx_build_diagnostic.py`, `mknn_build.py`). **Unfinished vs
+abandoned: neither — complete and spent.** They are executable records of what was run.
+
+**B5 — stale-description sweep, `.claude/` included.** `CLAUDE.md`, every agent definition and
+every skill file were swept for node counts, edge counts and adopted-artifact names: **no
+stale shape claims**, because the `CXA-` closeout had already removed crawl sizes from
+`CLAUDE.md` and pointed identity at the manifest sidecar. Every occurrence of
+`graph-cxa-adopted` in the tree is either a historical record of what that artifact is, or a
+deliberate warning that it is the rejected one. Nothing needed converting to a citation.
+
+**A3 — deferrals re-tested against reality, and two moved.**
+
+- **`CLIP-1`'s premise was removed by the revert.** Its condition (the owner rules on whether
+  the clip mismatch is worth fixing) has **not** fired, but the elevated exposure it was
+  written about — the newly crawled population's 31.36 % un-listenable rate — **is no longer
+  served**. He reported no new examples by name. The row stays open at its *pre-extension*
+  level rather than the raised one.
+- **⚠ `REQ-38`'s blind-listen deferral has a clause that arguably came due, and it is the
+  owner's to spend.** Its second condition is *"if a combined rebuild sounds worse and the
+  cause needs decomposing"*. A rebuild did sound worse to him and the cause did need
+  decomposing — but it was decomposed by measurement, not by listening, and the clause was
+  written about the drop rule being confounded inside a *cap* rebuild, which this was not.
+  **Named rather than silently passed over, and not claimed as fired.**
+- The **Snyk row** tracks one Low per `builder/analysis/` module *that takes a CLI path
+  argument*. **The two added here take none**, so they contribute **zero** — the same
+  reasoning that exempted `tail_exposure.py` and the eleven `cre_probe*.py` scripts.
+- Every other open row still has a condition and none has come due.
+
+**A4 — genuinely inapplicable, stated rather than skipped.** No config knob was added. The one
+knob in scope, `w_known_ramp_fame_pctl`, was deliberately **not** moved: changing it in the
+same release as the revert would confound the confirmation test. The default that *did* move
+is the adopted-artifact name, and it moved in the direction production moved, verified live.
+
+**A5 — ports 8000, 5173 and 5174 are free.** No listener on any of them, so nothing to stop
+and nothing stale to serve a test against. **No server was started and none is needed:** the
+queued confirmation test exercises the deployed site, which per the 2026-07-27 cutover rule
+requires nothing running locally.
+
+**D2 — committed fixtures: inapplicable, with evidence.** `git log --follow` shows both
+`tests/fixtures/graph-fixture.bin` were last regenerated for a **scoring/format** change
+(`49b206f`, `710670c`) and were not regenerated at the `MSW-` or `CXA-` map switches.
+Established practice is that they track format and semantics, not which artifact is adopted;
+this work changed neither.
+
+**D3 — provenance.** Both artifacts' sha256s, node and edge counts are in the figures README's
+identity table. They are gitignored and a checksum is the only identity they will ever have.
+
+**D4 — suites, run not remembered.** builder **246**, api **261**, infra **66**, frontend
+**122**. All green.

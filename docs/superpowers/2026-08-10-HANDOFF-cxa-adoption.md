@@ -1,8 +1,12 @@
 # Handoff — the extended graph is adopted and LIVE, 2026-08-10
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
-[`2026-08-10-HANDOFF-jfx-run.md`](2026-08-10-HANDOFF-jfx-run.md) on next actions. It does
-**not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+**Role: SUPERSEDED — this is NOT the current handoff.** Superseded on **everything**, next
+actions *and* status, by [`2026-09-01-HANDOFF-cxr-revert.md`](2026-09-01-HANDOFF-cxr-revert.md):
+**the extended graph this note announces as live was REVERTED on 2026-09-01**, on the owner's
+pre-set criterion, after three weeks of use. Everything below is accurate as a record of what
+was done and why; **its present-tense claims about what production serves are false.**
+Supersedes [`2026-08-10-HANDOFF-jfx-run.md`](2026-08-10-HANDOFF-jfx-run.md) on next actions.
+It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
 **A SEAM handoff.** The `CXA-` track is complete to its last task, deployed, and verified in
 production. **The degradation tell did not fire.**
