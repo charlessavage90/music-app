@@ -1,0 +1,33 @@
+{
+  "against_proposed_bounds": {
+    "passed": false,
+    "rejection_verbatim": "artifact rejected; not written:\n  - edge count 905558 outside bounds [1295000, 1942000]"
+  },
+  "against_shipped_bounds": {
+    "passed": false,
+    "rejection_verbatim": "artifact rejected; not written:\n  - artist count 81749 outside bounds [47000, 71000]\n  - edge count 905558 outside bounds [1050000, 1580000]"
+  },
+  "artists": 81749,
+  "config": {
+    "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+    "cap_strategy": "mutual_knn",
+    "max_neighbours_per_artist": 50,
+    "require_fame": true,
+    "unlistenable_list_path": "C:\\dev\\music-app\\builder\\analysis\\2026-08-09-cex-recensus\\ulf_droplist_algb.json"
+  },
+  "edges": 905558,
+  "elapsed_seconds": 1477.7,
+  "median_degree": 7,
+  "proposed_bounds": {
+    "edge_count": [
+      1295000,
+      1942000
+    ],
+    "node_count": [
+      70900,
+      106400
+    ]
+  },
+  "serialised": false,
+  "what": "mutual k-NN build of the extended ALG-B archive (CXA- Task 1, the fourth acceptance artifact)"
+}

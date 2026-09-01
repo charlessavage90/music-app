@@ -51,13 +51,29 @@ _DATA = Path(__file__).parent / "data"
 UNLISTENABLE_DROP_SHA256 = (
     "19ae2d038c5266e5999f227a4184a22699991df9a4bdffd2a24418ff249c85b1"
 )
+# REPOINTED 2026-08-10 (`CXA-` Task 2) from the 75,000-artist payload to the
+# re-censused 117,302-artist one, as part of adopting the extended crawl. This
+# is the adoption decision the `load_unlistenable_list` docstring below reserves
+# to an adoption commit — the `JFX-` measurement was taken with this payload
+# supplied as a per-invocation override, and shipping it as the DEFAULT is what
+# makes the shipped build reproduce the measured one (`CXA-G1`).
+#
+# PREVIOUS (the 75k-era ALG-B payload, superseded not deleted):
+#   unlistenable_drop_algb_20260805.json
+#   6b25232f637aa2a4841a81a0cfb251840b7352a3d0eaa36cd63fd04c33627ff3
+# ⚠ That FILE stays in data/ deliberately. Three era-pinned probes load it BY
+# NAME rather than through this registry — analysis/2026-08-07-cex-frontier/
+# frontier_census.py, 2026-08-06-laura-lee-closure/ll_closure.py, and
+# 2026-08-05-msw-verification/msw_v2_exposure.py — so deleting it would break
+# probes whose whole purpose is to reproduce their own committed figures. It is
+# superseded as a DEFAULT, not orphaned.
 CANDIDATE_UNLISTENABLE_DROP_SHA256 = (
-    "6b25232f637aa2a4841a81a0cfb251840b7352a3d0eaa36cd63fd04c33627ff3"
+    "ae67fbb3bbe78ada6092e7d30ba7bfa3315655b2936c882cd9ef8cd9cee584ce"
 )
 
 UNLISTENABLE_DROP_LIST_PATH = _DATA / "unlistenable_drop_20260805.json"
 CANDIDATE_UNLISTENABLE_DROP_LIST_PATH = (
-    _DATA / "unlistenable_drop_algb_20260805.json"
+    _DATA / "unlistenable_drop_algb_20260809.json"
 )
 
 # Censused populations only. An algorithm absent here has no list, and that
@@ -96,15 +112,30 @@ class UnlistenableList:
 
 
 @lru_cache(maxsize=None)
-def load_unlistenable_list(algorithm: str) -> UnlistenableList:
+def load_unlistenable_list(
+    algorithm: str, override_path: Path | None = None
+) -> UnlistenableList:
     """The `ULF-` list for `algorithm`'s archive, with its censused population.
 
     Raises `NoUnlistenableListForAlgorithm` if that population has never been
     censused under the rule, and `ValueError` if the payload disagrees with
     its own identity block — a payload that cannot vouch for its population
     must not be trusted for a refusal decision any more than a drop one.
+
+    `override_path` BYPASSES the algorithm lookup entirely rather than
+    substituting a path for a known key, so a population with no entry — a
+    re-crawl, or an algorithm censused for the first time — can be built
+    without editing this module. It is per-invocation by design: a default
+    keyed on algorithm alone cannot express two populations of the SAME
+    algorithm, which is exactly what a crawl extension produces. Changing
+    which list is the DEFAULT is an adoption decision and belongs in the
+    adoption commit, never here.
+
+    The population check downstream is NOT bypassed: an overridden payload
+    still has to vouch for its own identity, and `pipeline.py` still refuses
+    when the archive holds artists the payload never evaluated.
     """
-    path = UNLISTENABLE_DROP_LISTS.get(algorithm)
+    path = override_path or UNLISTENABLE_DROP_LISTS.get(algorithm)
     if path is None:
         censused = "\n  ".join(sorted(UNLISTENABLE_DROP_LISTS)) or "(none yet)"
         raise NoUnlistenableListForAlgorithm(

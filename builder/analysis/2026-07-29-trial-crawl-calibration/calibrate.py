@@ -147,6 +147,22 @@ def _replay(
     the real crawler would fetch, so the ordering rules must match
     `Crawler.crawl` exactly. Kept in step by hand — if `crawl.py`'s stopping
     rule changes, this is wrong and its answers are void.
+
+    ERA PIN 2026-08-08 (CEX-2, gate CEX-G2) — THAT CONDITION HAS NOW FIRED, and
+    the divergence below is deliberate and permanent. `crawl.py` now bounds
+    artists FETCHED (`len(self._done) < target`) and records every neighbour;
+    the loop below still bounds artists DISCOVERED and breaks out of the
+    neighbour scan, which is what `crawl.py` did when this probe's record was
+    produced. It is left that way ON PURPOSE: this harness exists to reproduce
+    its own committed cells, and updating it to the new rule would destroy
+    exactly that while making it predict a crawl nobody is going to run — the
+    `--target`-capped trial crawl was retired as an instrument on 2026-07-29.
+
+    So: read every figure this script produces as describing the OLD capped
+    crawl. It no longer predicts what `artistpath-build crawl` would fetch, and
+    must not be cited as if it did. `test_pipeline_mirrors.py` cannot catch
+    this class — it fires when `BuilderConfig` gains a field, and a stopping
+    rule that moved inside a loop body adds no field.
     """
     done: set[str] = set()
     discovered: set[str] = set()

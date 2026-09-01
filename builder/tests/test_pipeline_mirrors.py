@@ -103,6 +103,28 @@ RECORDED_FIELDS = frozenset(
         # has ever had the `fame` stage run against it. They must pin
         # require_fame=False beside cap_strategy="mutual_knn".
         "require_fame",
+        # Added 2026-08-09 (SEL-, the per-invocation ULF- payload override).
+        # Per-mirror decision AT THIS DATE: all three mirrors stay frozen and
+        # all three era-pinned callers are unaffected. The default is None,
+        # which selects the same shipped payload the algorithm lookup already
+        # returned, so a build that does not pass the flag is byte-identical to
+        # one from before the field existed.
+        #
+        # ⚠ THE FORWARD WARNING HERE IS THE OPPOSITE SHAPE TO THE THREE FIELDS
+        # ABOVE, and copying their wording would be wrong. There is no default
+        # flip coming for this field: adopting the extended population repoints
+        # CANDIDATE_UNLISTENABLE_DROP_LIST_PATH in unlistenable_drop.py, which
+        # this field does not go through. That is deliberate — the whole reason
+        # the override is per-invocation is that repointing the default changes
+        # every future build from the pre-crawl snapshot SILENTLY, because
+        # pipeline.py only refuses on artists outside the censused set and a
+        # larger list applied to a smaller archive passes.
+        #
+        # So the field a future reader must watch is not this one. It is the
+        # module constant, and the callers at risk from repointing it are those
+        # that build with drop_unlistenable left ON — the era-pinned three pin
+        # it False, so they read no list at all and are immune either way.
+        "unlistenable_list_path",
         "graph_version",
     }
 )

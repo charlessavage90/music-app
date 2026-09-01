@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 from artistpath_builder import __version__
 
@@ -14,7 +15,7 @@ CONTACT_EMAIL = "charlessavagemiller@gmail.com"
 # builder/analysis/2026-07-29-cap-selection-sim/cs_p0e_algorithms.json).
 # Arm labels ALG-A..ALG-F are the AS pre-registration's. Do not add values:
 # anything outside this set returns HTTP 400.
-PRODUCTION_ALGORITHM = (  # ALG-E — the adopted 75k archive's algorithm
+PRODUCTION_ALGORITHM = (  # ALG-E — the ORIGINAL production crawl's algorithm
     "session_based_days_7500_session_300_contribution_5"
     "_threshold_10_limit_100_filter_True_skip_30"
 )
@@ -26,6 +27,11 @@ CANDIDATE_ALGORITHM = (
     "session_based_days_7500_session_300_contribution_3"
     "_threshold_10_limit_100_filter_True_skip_30"
 )
+# ⚠ ALG-B is the ADOPTED map's lineage: graph-msw-tu50.bin was built from the
+# ALG-B archive (its manifest records contribution_3), and ApiConfig.graph_path
+# serves it. `algorithm` below still DEFAULTS to ALG-E, deliberately — flipping
+# that default is the re-crawl decision and is the owner's — so every command
+# touching the adopted lineage must pass --algorithm explicitly. CEX-R5.
 PERMITTED_ALGORITHMS = (
     PRODUCTION_ALGORITHM,
     CANDIDATE_ALGORITHM,
@@ -235,6 +241,22 @@ class BuilderConfig:
     # holds it explicitly on or off in a factor table. Turning it off is an
     # experimental control, never a shipping configuration.
     drop_unlistenable: bool = True
+
+    # Per-invocation override for WHICH un-listenable payload to apply, for
+    # the case the algorithm-keyed default cannot express: two populations of
+    # the SAME algorithm, which is what a crawl extension produces. `None`
+    # keeps the shipped default. Bypasses the lookup rather than substituting
+    # within it, so an uncensused algorithm can also be built from an explicit
+    # payload — the ULC-F1 population check still runs either way.
+    #
+    # Deliberately NOT a repointed default: the guard in pipeline.py refuses
+    # on artists OUTSIDE the censused set, so a LARGER list applied to a
+    # smaller archive passes silently. Repointing would therefore have changed
+    # every future build from the pre-crawl snapshot without saying so, on
+    # verdicts that drift as clip availability moves. Flipping the default is
+    # an adoption decision and belongs in the adoption commit. SEL- findings
+    # 2026-08-09; MSW- Task 9's --require-fame is the precedent.
+    unlistenable_list_path: Path | None = None
 
     # --- output ---------------------------------------------------------
     graph_version: str = "v1"

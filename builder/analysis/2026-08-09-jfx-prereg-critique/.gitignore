@@ -1,0 +1,6 @@
+# Raw run output, per the 2026-08-09-cex-recensus precedent: the log lines that
+# carry figures are reproduced verbatim in README.md, which is what makes them
+# durable. The routes file is NOT ignored — it is the evidence every JFX- figure
+# rests on, and is committed for the same reason ulf_clips.json is.
+*.log
+__pycache__/

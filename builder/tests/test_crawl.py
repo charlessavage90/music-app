@@ -1,10 +1,15 @@
 import json
+import os
 
 import pytest
 
 from artistpath_builder.archive import LocalArchive
 from artistpath_builder.config import BuilderConfig
-from artistpath_builder.crawl import Crawler, TransientFetchError
+from artistpath_builder.crawl import (
+    Crawler,
+    FrontierExhausted,
+    TransientFetchError,
+)
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
 
 A, B, C, D = ("a" * 36, "b" * 36, "c" * 36, "d" * 36)
@@ -94,13 +99,20 @@ def test_snowball_discovers_artists_beyond_the_bootstrap(tmp_path, config):
     assert crawler.discovered == {A, B, C, D}
 
 
-def test_discovery_stops_at_target_count(tmp_path, config):
+def test_target_caps_fetches_and_the_frontier_is_still_recorded(tmp_path, config):
+    # CEX-2: target_artist_count bounds artists FETCHED, not artists
+    # discovered. The old bound discarded neighbours at the target, which is
+    # ULC-F3: the frontier was never recorded, so a resume rebuilt an empty
+    # queue and exited 0 processed while reading as success.
     cfg = BuilderConfig(
         requests_per_second=1000.0, checkpoint_every=1, target_artist_count=2
     )
     crawler = _crawler(tmp_path, cfg, FakeFetcher())
     crawler.crawl([A])
-    assert len(crawler.discovered) == 2
+
+    assert len(crawler._done) == 2
+    assert len(crawler.discovered) > len(crawler._done)
+    assert crawler.discovered >= crawler._done
 
 
 def test_already_archived_artists_are_not_refetched(tmp_path, config):
@@ -219,3 +231,103 @@ def test_failed_artists_are_retried_on_a_fresh_run(tmp_path):
     recovered.crawl([A])
     assert recovered.archive.has(recovered.similar_key(A))
     assert A in recovered._done
+
+
+def test_raises_when_the_frontier_is_empty_but_more_was_asked_for(tmp_path):
+    # The ULC-F3 signature: discovered == done, target above done.
+    cfg = BuilderConfig(
+        requests_per_second=1000.0, checkpoint_every=1, target_artist_count=99
+    )
+    (tmp_path / "checkpoint.json").write_text(
+        json.dumps({"done": [A, B], "discovered": [A, B]})
+    )
+    crawler = _crawler(tmp_path, cfg, FakeFetcher())
+    with pytest.raises(FrontierExhausted, match="refrontier"):
+        crawler.crawl([])
+
+
+def test_does_not_raise_when_the_bootstrap_supplies_new_work(tmp_path):
+    cfg = BuilderConfig(
+        requests_per_second=1000.0, checkpoint_every=1, target_artist_count=99
+    )
+    (tmp_path / "checkpoint.json").write_text(
+        json.dumps({"done": [A], "discovered": [A]})
+    )
+    crawler = _crawler(tmp_path, cfg, FakeFetcher())
+    crawler.crawl([C])
+    assert C in crawler._done
+
+
+def test_does_not_raise_when_the_graph_was_genuinely_exhausted(tmp_path):
+    # CEXR-5: an idempotent re-run after a completed crawl must not be
+    # mistaken for ULC-F3.
+    cfg = BuilderConfig(
+        requests_per_second=1000.0, checkpoint_every=1, target_artist_count=99
+    )
+    (tmp_path / "checkpoint.json").write_text(
+        json.dumps({"done": [A, B], "discovered": [A, B], "exhausted": True})
+    )
+    crawler = _crawler(tmp_path, cfg, FakeFetcher())
+    crawler.crawl([])  # must not raise
+
+
+def test_a_completed_crawl_records_that_it_exhausted_the_graph(tmp_path, config):
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+    assert json.loads((tmp_path / "checkpoint.json").read_text())["exhausted"] is True
+
+
+def test_checkpoint_is_written_via_a_temp_file_then_renamed(tmp_path, config, monkeypatch):
+    # A truncated checkpoint is the only unrecoverable failure in a 4-hour run.
+    seen: list[str] = []
+    real_replace = os.replace
+
+    def spy(src, dst):
+        seen.append(str(src))
+        return real_replace(src, dst)
+
+    monkeypatch.setattr(os, "replace", spy)
+    crawler = _crawler(tmp_path, config, FakeFetcher())
+    crawler.crawl([A])
+
+    assert seen, "checkpoint was not written through os.replace"
+    assert all(src.endswith(".tmp") for src in seen)
+    assert json.loads((tmp_path / "checkpoint.json").read_text())["done"]
+
+
+class HubFetcher:
+    """One artist with a wide fan-out, then dead ends.
+
+    The chain fixture above CANNOT distinguish a bound on `done` from a bound
+    on `discovered`: each fetch adds exactly one new artist, so the two move in
+    lockstep and every target gives the same answer under either rule. Found by
+    mutation at the CEX- closeout — reverting crawl.py's loop condition alone
+    left the whole suite green.
+    """
+
+    NEIGHBOURS = {A: (B, C, D), B: (), C: (), D: ()}
+
+    def __init__(self):
+        self.calls: list[str] = []
+
+    def __call__(self, url: str) -> bytes:
+        self.calls.append(url)
+        for mbid, neighbours in self.NEIGHBOURS.items():
+            if mbid in url:
+                return _similar(*neighbours)
+        return b"[]"
+
+
+def test_the_bound_is_on_fetches_even_when_one_artist_floods_discovery(tmp_path):
+    # CEX-2, the discriminating case. Fetching A alone discovers 4 artists, so
+    # a bound on DISCOVERED stops immediately at done == 1; a bound on FETCHED
+    # goes on to fetch the target. This is the assertion that actually pins the
+    # loop condition, and the chain-fixture test above does not.
+    cfg = BuilderConfig(
+        requests_per_second=1000.0, checkpoint_every=1, target_artist_count=2
+    )
+    crawler = _crawler(tmp_path, cfg, HubFetcher())
+    crawler.crawl([A])
+
+    assert len(crawler._done) == 2
+    assert len(crawler.discovered) == 4

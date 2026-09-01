@@ -15,6 +15,21 @@ output. Both are committed before either produces a result.
 GRT-G1 (archive safety) is enforced structurally by that wrapper rather than
 checked afterwards, and is ALSO counted before and after, because a structural
 guarantee that is never verified is a belief.
+
+ERA PIN 2026-08-08 (CEX-2, gate CEX-G2): `target_artist_count` CHANGED MEANING.
+It bounded artists DISCOVERED when this probe ran; it now bounds artists
+FETCHED. `TARGET = 3_000` therefore no longer describes this record: the old
+bound stopped recording neighbours at 3,000 discovered (which is ULC-F3, the
+defect CEX- exists to fix), so both arms fetched well under 3,000. Re-run
+unchanged, this harness would fetch 3,000 and produce a materially larger
+population than the one grt_crawl_*.json records.
+
+Unlike the MSW- era pin in grt_score.py, this one CANNOT be expressed by
+setting config values back: the old behaviour lived in crawl.py's loop and was
+deleted, not defaulted. So the pin is a refusal — the record stands and needs
+no re-run, and a silently divergent re-run is the failure this project keeps
+paying for. Decide what TARGET should mean under the new semantics before
+lifting it.
 """
 
 from __future__ import annotations
@@ -123,7 +138,19 @@ def _count_files(root: Path) -> int:
     return sum(1 for p in root.rglob("*") if p.is_file())
 
 
-def run_arm(arm: str) -> dict:
+def run_arm(arm: str, *, accept_new_target_semantics: bool = False) -> dict:
+    # CEX-G2 era pin — see the module docstring. TARGET meant "discovered"
+    # when this record was produced and means "fetched" now, so an unguarded
+    # re-run would quietly measure a different population under the same name.
+    if not accept_new_target_semantics:
+        raise SystemExit(
+            "grt_run.py is era-pinned (CEX-2, 2026-08-08): target_artist_count "
+            "changed from bounding artists DISCOVERED to bounding artists "
+            "FETCHED, so this harness can no longer reproduce grt_crawl_*.json. "
+            "The record stands and needs no re-run. To run it deliberately "
+            "under the NEW semantics, pass accept_new_target_semantics=True and "
+            "record that the result is not comparable to the GRT- anchors."
+        )
     if arm == "AB":
         config = BuilderConfig(algorithm=ALG_B, target_artist_count=TARGET)
         archive: RawArchive = LocalArchive(SCRATCH / "grt-archive-algb")

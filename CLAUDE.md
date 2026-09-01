@@ -74,7 +74,7 @@ uv run artistpath-build bootstrap --out bootstrap.json
 uv run artistpath-build crawl  --bootstrap bootstrap.json --archive-dir ./archive
 uv run artistpath-build build  --archive-dir ./archive --out graph-v1.bin
 uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 500
-# --target N caps discovery for trial runs; --s3-bucket/--s3-prefix use S3 archive
+# --target N caps artists FETCHED (CEX-2); --s3-bucket/--s3-prefix use S3 archive
 ```
 
 ### api (from `api/`)
@@ -82,7 +82,7 @@ uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 50
 UV_LINK_MODE=copy uv run --extra dev pytest -q                 # all tests
 UV_LINK_MODE=copy uv run --extra dev pytest -q -k pathfinding  # single test / pattern
 
-# dev server — boots the ADOPTED 75k graph by default (ApiConfig.graph_path);
+# dev server — boots the ADOPTED graph by default (ApiConfig.graph_path);
 # ARTISTPATH_GRAPH overrides:
 uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 ```
@@ -92,9 +92,9 @@ uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
 clone has the two 500-node test fixtures but none of the dev graphs. (The `**/` matters
 and was wrong until 2026-07-22: a gitignore pattern containing a slash is anchored to the
 file's own directory, so the previous `!tests/fixtures/*.bin` exempted nothing and the
-fixtures were silently uncommitted.) On a fresh clone, copy the adopted 75k artifact (or
-the archive, and rebuild in ~30 s) from another machine — identity by the checksum in
-`docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`. The 5k dev fixture is
+fixtures were silently uncommitted.) On a fresh clone, copy the adopted artifact (or the
+archive, and rebuild in ~23 min) from another machine — identity by the checksum in its own
+manifest sidecar, which travels with it. The 5k dev fixture is
 retired; the `fixture` command remains only for the committed 500-node test fixtures.
 
 ### frontend (from `frontend/`)
@@ -215,9 +215,8 @@ Deezer by recorded artist id → by name → iTunes, cached) so the path renders
 
 ### Configuration is env-driven, all tunables centralized
 `ApiConfig` / `BuilderConfig` are the *only* place magic numbers live. Key API env vars:
-`ARTISTPATH_GRAPH` (overrides the default graph path — the default is the adopted 75k
-artifact itself, so this is for pointing at a *different* artifact, not for a dev-vs-prod
-swap),
+`ARTISTPATH_GRAPH` (overrides the default graph path — the default is the adopted artifact
+itself, so this is for pointing at a *different* artifact, not for a dev-vs-prod swap),
 `ARTISTPATH_CLIP_CACHE` (`memory` default — boots with **no AWS config** — or `dynamo`),
 `ARTISTPATH_CORS_ORIGINS`, `ARTISTPATH_GRAPH_SHA256` (verified at boot, so a wrong artifact
 refuses to start; optional locally, **required in production** — take the value from the

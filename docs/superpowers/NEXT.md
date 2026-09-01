@@ -12,16 +12,394 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-07, when THE NEW BYPASS UX SHIPPED TO PRODUCTION and `DEP-34-FIX`
-LANDED.** **The test queue is EMPTY — the owner discharged both live entries.** **THE NEXT
-ACTION IS THE OWNER'S and nothing is blocked.** Three things are his and none blocks
-another: **`SNS-1`** (the billing alarm has no subscriber — new, found by this closeout's
-drift gate), **Option C** (same-name population probe, still unblocked from 2026-08-06), and
-**pressing the new UI on the live site** (queued).
+**Last updated: 2026-09-01, when THE EXTENDED 117k GRAPH WAS REVERTED — the owner's test
+queue entry fired his revert criterion after three weeks of use.** **THE NEXT ACTION IS THE
+OWNER'S AND IT IS USE: the queued entry in [`TEST-QUEUE.md`](TEST-QUEUE.md)**, confirming the
+old map is back to how it was. **Nothing is blocked and no session owes anything.**
+⚠ **The test queue has ONE live item** — the 2026-09-01 revert-confirmation entry at the top.
+The 2026-08-10 map entry below it is **DONE and is the first entry in this file's history to
+fire a revert criterion**; do not discharge it twice.
+**The landing-dot fix (PR #92) is LIVE and was NOT reverted** — it is frontend and rode the
+frontend sync, not the map. Still his and blocking nothing: **Option C** (same-name population
+probe), **`SEL-`**, and **closing or keeping the 2026-07-29 famous-to-famous defect ruling**.
 
 ---
 
-> ## ✅ THE NEW BYPASS UX IS LIVE, 2026-08-07 — and `DEP-34-FIX` IS CLOSED. **The next action is the OWNER'S.**
+> ## ▶ THE EXTENDED 117k GRAPH IS REVERTED, 2026-09-01. **The next action is the OWNER'S and it is USE: confirm the old map is back.**
+>
+> **`https://musicapp.cmiller.io` serves `graph-msw-tu50.bin` again — 58,838 artists,
+> 1,315,684 edges, sha `43dd82bb…`.** Verified live from outside, not inferred: `/health`
+> reports that identity and a journey builds through the public address. The image tag is
+> **unchanged** at `994c203`, so the code, the buttons and the landing page are exactly what
+> they were — **only the map moved back.**
+>
+> **Why.** The owner ran the queued test and reported the extended map *"noticeably worse than
+> the old version — much harder to find unknown artists"*, **worse both before pressing
+> anything and while digging, mostly while digging**. That is the revert criterion he set on
+> 2026-08-10 in the words he set it in. He instructed the revert.
+>
+> **⚠ The pre-adoption measurements did not contradict him — one of them predicted this, and
+> the adoption record read it as a pass.** `JFX-G1b` is a **"the map is broken" stop-gate**
+> that **permitted materially more digging than the old map needed to reach the same
+> obscurity**, and the extended map used materially more. **Passing it never meant "no
+> worse", and no document said otherwise — but nothing said it loudly either.** The permitted
+> bound and the realised figure are owned by the `JFX-` results README, `JFX-G1` section —
+> **cited, never restated here.**
+>
+> **The mechanism is measured and owned by
+> [`builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`](../../builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md)**
+> — figures cited from there, never restated. Two things, and **the second is a standing trap
+> for every future map switch**: the fame ruler the `known` ramp steers on is framed on **the
+> served artifact's own population**, so growing the map reprices every artist in it.
+>
+> **What is UNEXPLAINED, and it is half his report:** nothing measured accounts for the
+> **first** journey being worse before any press. `JFX-C1` found no change at depth 0 across
+> 297 pairs, and `CXR-P3` found the popularity currency barely moved. **Do not quietly drop
+> this half.**
+>
+> **What must not be reverted by a well-meaning editor:**
+>
+> - **`graph-cxa-adopted.bin` is still in the bucket and is the REJECTED artifact.** Do not
+>   redeploy it as "the newer one". `ApiConfig.graph_path`, its test pin and `infra/README.md`
+>   §4 all point at `graph-msw-tu50.bin` deliberately, each with a comment saying why.
+> - **The `CEX-` crawl extension itself is NOT reverted and is not wasted.** The 117,302-
+>   response archive, the re-censused payload and the acceptance-bound work all stand; what was
+>   rejected is *building the served map from it as it stands*.
+> - **`w_known_ramp_fame_pctl` stays 0.01.** It was not touched in either direction. Moving it
+>   now would confound the confirmation test.
+> - **Nothing here resumes path-quality work.** Three candidate fixes are visible in the `CXR-`
+>   README and **each needs its own pre-registration and is the owner's trigger to start.**
+>
+> Handoff: [`2026-09-01-HANDOFF-cxr-revert.md`](2026-09-01-HANDOFF-cxr-revert.md). Reasoning:
+> [`2026-09-01-cxr-revert-execution-log.md`](2026-09-01-cxr-revert-execution-log.md). PR #91.
+
+---
+
+> ## ✅ THE EXTENDED 117k GRAPH WAS ADOPTED, DEPLOYED AND LIVE, 2026-08-10 (later). ~~**The next action is the OWNER'S and it is USE.**~~ *(SUPERSEDED by the block above: **it was reverted on 2026-09-01** after the owner's queued test fired his revert criterion. Everything this block records about what was done and why still stands as history; its claim that the extended map is what production serves is **now FALSE**.)*
+>
+> **`https://musicapp.cmiller.io` now serves a map of 88,685 artists and 1,618,164 edges**,
+> built from the extended 117,302-response ALG-B archive — up from 58,838 artists. The owner
+> took **`CXA-S1`** (the bound values) and **`CXA-S2`** (the deploy), and separately
+> instructed that PR #92's UI fix ship with it and that the frontend sync run **`--prune`**.
+>
+> **PR #92's landing-dot fix is LIVE.** It was on `main` only; `origin/main` was merged in and
+> the image rebuilt at the merged commit so the tag records what actually shipped.
+>
+> **Both gates passed. `CXA-G1`** — the rebuild through the shipped path, with no
+> per-invocation override, is **byte-identical** to the artifact every `JFX-` figure was
+> measured on. **`CXA-G2`** — verified **from inside the built image**, not the branch.
+>
+> **Verified live, not inferred:** `/health` returns the `CXA-G1` sha and both counts; a
+> public journey returns Radiohead → Nine Inch Nails → Aphex Twin; a middle card resolves clip
+> and cover art.
+>
+> **⚠ THE DIRECTION OF STALENESS, again:** *"production serves `graph-msw-tu50.bin`"* is now
+> **false wherever it describes the present**, and **correct** inside a frozen `JFX-`/`CEX-`
+> record describing what that track did. **Read for tense; grep cannot do this.**
+>
+> **⚠ SIX CLAIMS AN EDITOR MUST NOT REVERT.** **The shallower gradient is NOT established** —
+> adoption was taken with **no cost demonstrated**, and this equally does not establish the
+> gradients are equal. **The d20 famous-to-famous drift is POST-HOC** — where to look, never a
+> finding, which is why the use-test points him there. **`w_known_ramp_fame_pctl` stays 0.01**,
+> confirmed in the running image. **`JFX-B`'s `DO_NOT_DEPLOY: true` is still CORRECT** — the
+> shipped artifact is a different file from a new build. **The ALG-E drop payload did not
+> ship**, and **the 75k-era ALG-B payload stays in `data/`** — three era-pinned probes load it
+> by name; superseded as a default, not orphaned.
+>
+> **⚠ NEW, AND THE MOST LOAD-BEARING THING THIS TRACK ADDED: the EDGE FLOOR in `acceptance.py`
+> is now the only bound that can catch a silent cap-rule revert.** The fourth acceptance
+> artifact — built here because the plan had it marked NOT RUN — showed the node bound cannot
+> see one. **Widening that floor to admit a build removes the protection with nothing going
+> red.**
+>
+> **Figures owned by `builder/analysis/2026-08-09-jfx-prereg-critique/README.md` and
+> `builder/analysis/2026-08-10-cxa-acceptance-bounds/README.md` — cited, never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-10-HANDOFF-cxa-adoption.md`](2026-08-10-HANDOFF-cxa-adoption.md). Reasoning:
+> [`2026-08-10-cxa-adoption-execution-log.md`](2026-08-10-cxa-adoption-execution-log.md) —
+> **its §3 records three defects in the plan itself**, the sharpest being that Task 2 named one
+> constant to move when three had to, which would have turned the suite red on what the plan
+> called a one-line change. Operational:
+> [`plans/2026-08-10-cxa-graph-adoption.md`](plans/2026-08-10-cxa-graph-adoption.md) — now
+> **COMPLETE**. Branch `crawl-extension-design`, **PR #91 — open, and now carrying the whole
+> track.**
+>
+> **Nothing is running on any port** — nothing was started this session and nothing was left
+> behind; the app was exercised against the live address.
+>
+> ---
+
+> ## ▶ THE `JFX-` ARMS RAN AND THE OWNER CHOSE TO ADOPT, 2026-08-10. ~~**The next action is WORK: execute the `CXA-` plan, INLINE, in a FRESH session.**~~ *(SUPERSEDED by the block above: **the `CXA-` plan is EXECUTED, COMPLETE and DEPLOYED.** Its six "must not be reverted" claims still stand in full — only its ranking as the next action has moved. ⚠ Its "nothing is adopted, nothing is deployed" is now FALSE of the present and true only of what `JFX-` itself did.)*
+>
+> **Both gate clauses passed.** `JFX-G1a` and `G1b` PASS, `JFX-C5` passes, journeys
+> do not get longer in any of twelve stratum-by-depth cells, and the pre-registered read is
+> **§4 read 5** — *the map got bigger and journeys did not measurably change*.
+>
+> **What this did NOT do: adopt anything, deploy anything, flip any default, or change what any
+> user sees.** The live site is untouched and was never in scope. The new artifact is
+> gitignored and its manifest says `DO_NOT_DEPLOY: true`, correctly — it was built against the
+> old bounds.
+>
+> **Figures owned by `builder/analysis/2026-08-09-jfx-prereg-critique/README.md` — cited, never
+> restated.**
+>
+> **⚠ THE OWNER'S ADOPTION DECISION AND HIS REVERT CRITERION ARE RECORDED IN `CXA-` §0, TAKEN
+> 2026-08-10, AND ARE NOT TO BE RE-LITIGATED.** He adopts and widens the bounds, on the
+> reasoning that these metrics are indicators and cannot say whether a change is perceptible.
+> His revert trigger — set **before** adoption so it is a trigger and not a rationalisation —
+> is *a noticeably worse experience on more than half of tested journeys*, measured by **how
+> hard it is to find novel artists**. **"Improvements needed" is a SEPARATE bucket from
+> "revert".** He judges revert unlikely.
+>
+> **⚠ SIX CLAIMS AN EDITOR MUST NOT REVERT.** **The shallower gradient is NOT established** —
+> `G1b` tested against the 0.67 bar, never against parity, and `D_B − D_A` spans zero; adoption
+> was taken with **no cost demonstrated**, and this equally does not establish the gradients
+> are equal. **The d20 famous-to-famous drift is POST-HOC** — three strata, one interval
+> clearing zero — and is where to look, never a finding. **`AM1.11` read 9 fires at d20 and the
+> gate still stays on the MEDIAN**; promoting the mean is his call. **`CRE-G1(a)` as originally
+> run covers the six static cost terms ONLY** — it ran at k = 0 with the ramp knob at 0.0, so
+> it is doubly inert on the ramp, and the `JFX-` re-verification is what covers that.
+> **`w_known_ramp_fame_pctl` stays at 0.01.** **The regenerated ALG-E drop payload must not
+> ship.**
+>
+> **⚠ THE TRAP IN `CXA-` TASK 2, because it is the one most likely to be got wrong:** repoint
+> `UNLISTENABLE_DROP_LISTS[CANDIDATE_ALGORITHM]`, **not** the `PRODUCTION_ALGORITHM` entry —
+> ALG-B is the adopted lineage bound to the constant named *candidate* (`SEL-R1`–`R4`,
+> deferred and live). `NoUnlistenableListForAlgorithm` will **not** catch a wrong entry; it
+> raises on an *absent* one.
+>
+> **Entry point:** the current handoff
+> [`2026-08-10-HANDOFF-jfx-run.md`](2026-08-10-HANDOFF-jfx-run.md). Reasoning:
+> [`2026-08-10-jfx-run-execution-log.md`](2026-08-10-jfx-run-execution-log.md) — **its §4
+> records a defect in this session's own analysis code that would have silently suppressed a
+> pre-registered read at the one depth it fires**, and its §6 records this session
+> misreporting build progress from a buffered log until the owner questioned it. Governing:
+> [`specs/2026-08-09-journey-fame-exposure-preregistration.md`](specs/2026-08-09-journey-fame-exposure-preregistration.md).
+> Operational: [`plans/2026-08-10-cxa-graph-adoption.md`](plans/2026-08-10-cxa-graph-adoption.md).
+> Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> ---
+
+> ## ▶ `JFX-AM1` IS COMMITTED AND NO ARM HAS RUN, 2026-08-09 (later). ~~**The next action is WORK: the routing harness, in a FRESH session.**~~ *(SUPERSEDED by the block above: **the arms HAVE run.** Its five "must not be reverted" claims still stand in full — only its ranking as the next action has moved.)*
+>
+> **The owner said "we're doing JFX" and asked for an `ml-graph-analyst` review of the
+> pre-registration first. That review, two of his own corrections, and two defects found by
+> writing code against the document produced a twelve-clause amendment** — committed before
+> any arm ran, which is the whole point of the timestamp.
+>
+> **What this did NOT do: build an artifact, route a pair, compute a fame statistic, adopt
+> anything, or change what any user sees.** The live site is untouched and was never in scope.
+>
+> **⚠ READ `JFX-AM1` BEFORE §2, §3 OR §4 of the pre-registration.** It changes all three and
+> governs where they disagree. **Four clauses change what passes:** the fame quantity is now
+> **log-scaled** (`AM1.2`, his decision); **`G1b` is a bounded linear contrast** with a
+> viability clause, the ratio having declared an equal map broken far too often on a weak
+> denominator (`AM1.5`); **`G1a`'s steps move to one simultaneous band** and gain an effect
+> size (`AM1.6`); and **`C6`/`C7` get the effect sizes their branch triggers lacked**
+> (`AM1.7`). **`JFX-G1b` stays at 67%** — unchanged deliberately.
+>
+> **⚠ FIVE CLAIMS AN EDITOR MUST NOT REVERT.** **`DD-F1` is NOT overturned** — it survives in
+> **popularity** currency and fails to transfer to **fame**; both halves travel together, and
+> collapsing either direction repeats the currency error that caused this. **The
+> famous-to-famous measurement is STRUCTURE, not ROUTING** — famous endpoints *can* descend;
+> whether journeys *do* is what `JFX-` exists to measure. **The 2026-07-29 defect ruling is
+> OPEN** — its precondition changing is not the ruling closing, and that is his. **The `MSW-`
+> switch addressing famous-to-famous was BY DESIGN, not incidental** (his correction), and
+> **no `MSW-` record mentions it**, so that adoption is written up on narrower grounds than it
+> had. **`AM1.10` records an overstatement this session made and then measured false** — a
+> shared RNG does not materially move intervals at 10,000 replicates; do not restore the
+> stronger claim.
+>
+> **⚠ THE ROUTING HARNESS DOES NOT EXIST.** `AM1.3` now *names* the instrument — which nothing
+> did before — but the code that walks the pair set is unwritten. `jfx_stats.py` supplies the
+> tested primitives and **has no consumer yet: unfinished, not abandoned.** The §1 build
+> script **now exists** and had never been written despite the spec's present tense
+> (`AM1.12`).
+>
+> **Figures owned by `builder/analysis/2026-08-09-jfx-prereg-critique/README.md` — cited,
+> never restated.**
+>
+> **Entry point:** the current handoff
+> [`2026-08-09-HANDOFF-jfx-amendment.md`](2026-08-09-HANDOFF-jfx-amendment.md). Reasoning:
+> [`2026-08-09-jfx-prereg-amendment-execution-log.md`](2026-08-09-jfx-prereg-amendment-execution-log.md)
+> — **its §2 records this session reversing its own recommendation under owner challenge, and
+> its §4 records a claim it had to correct in its own amendment.** Governing document:
+> [`specs/2026-08-09-journey-fame-exposure-preregistration.md`](specs/2026-08-09-journey-fame-exposure-preregistration.md).
+> Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> ---
+
+> ## ▶ `CEX-` TASK 11 IS COMPLETE AND THE TRACK IS AT ITS OWNER STOP, 2026-08-09. ~~**The next action is HIS.**~~ *(SUPERSEDED on next actions by the block above: he chose **Run the `JFX-` arms**, and the next action is now WORK. **Its three "must not be reverted" claims and its `SEL-` item still stand in full** — only its ranking as the next action has moved. ⚠ Its `JFX-` description is **pre-amendment**: `JFX-AM1` changed §2, §3 and §4 on 2026-08-09.)* Nothing is blocked, nothing is half-done.
+>
+> **The build ran and was REJECTED on BOTH acceptance bounds. That is the designed outcome,
+> not a failure to fix, and the bounds were NOT widened.** No artifact was written — acceptance
+> rejects before serialising.
+>
+> **What this did NOT do: adopt anything, deploy anything, or change what any user sees.** The
+> live site is untouched and was never at risk.
+>
+> **Figures are owned by `builder/analysis/2026-08-09-cex-recensus/README.md` — cited, never
+> restated.**
+>
+> **⚠ THREE CLAIMS AN EDITOR MUST NOT REVERT.** **`CEX-M1`'s saturated-edge share is VACUOUS
+> by construction**, not "unchanged" — an edge saturates iff its raw score is at or above the
+> 99th percentile of raw scores, so ~1% of any distribution saturates at any crawl size;
+> reading it as "no effect" is a conclusion the instrument cannot support. **The new
+> `unlistenable_list_path` defaulting to `None` is deliberate and is NOT unshipped work** — it
+> is a per-invocation override, and flipping the default is an adoption decision on purpose,
+> because repointing it changes every future build from the pre-crawl snapshot *silently*.
+> **The regenerated ALG-E drop list is a by-product that must not be shipped** — its population
+> never changed, yet 30 artists became drops and 43 stopped being drops in four days.
+>
+> **⚠ A NEW GOVERNING DOCUMENT IS COMMITTED AND UNRUN.**
+> [`specs/2026-08-09-journey-fame-exposure-preregistration.md`](specs/2026-08-09-journey-fame-exposure-preregistration.md)
+> (`JFX-`) pre-registers the answer to his four product questions — do less famous artists find
+> it easier or harder to appear in journeys, does that differ by endpoint fame, does it change
+> with bypass depth, does it change journey length. **Its thresholds are his and were set before
+> any arm ran** (`G1b` = 67%; `C2`'s threshold withdrawn as inappropriate to a report row).
+> **Read its §0.1 before its §3** — two confounds bind every read, and a third has a stated
+> direction. **No arm has run.**
+>
+> **His options, and nothing expires:**
+>
+> - **Run the `JFX-` arms** — one diagnostic build (~17 min) then routing. It answers the
+>   product questions and would close `CEX-M1`'s blindness in the same pass.
+> - **Recalibrate the acceptance bounds** and adopt. `MSW-G3` is the precedent and there too it
+>   was his. **The artifact would be byte-identical to a post-widening rebuild**, so adoption
+>   costs no second build.
+> - **Stop the track.** Everything is recorded; nothing is owed.
+>
+> **Entry point:** the current handoff
+> [`2026-08-09-HANDOFF-cex-task11.md`](2026-08-09-HANDOFF-cex-task11.md). Reasoning:
+> [`2026-08-09-cex-task11-execution-log.md`](2026-08-09-cex-task11-execution-log.md) — **its §2
+> records three defects in the plan itself**, the sharpest being that Task 11 Step 4 could not
+> run as written and would have failed with a *refusal* that the plan primes a reader to log as
+> the designed *rejection*. Branch `crawl-extension-design`, **PR #91**.
+>
+> **⚠ SEPARATE AND HIS: `SEL-`.** A problem statement, deliberately not acted on
+> ([`findings/2026-08-09-selector-identity-drift.md`](findings/2026-08-09-selector-identity-drift.md)):
+> constants named for a role that has since moved, and population identity implemented in one
+> of three sibling drop modules. **No live defect is claimed.** He asked for it to be handled
+> as its own maintenance session rather than in flight.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> ---
+
+> ## ▶ THE `CEX-` CRAWL IS EXTENDED, 2026-08-08 — new population per `crawl_result.md`. ~~**The next action is WORK: plan Task 11, in a FRESH session. It ends at an OWNER STOP.**~~ *(SUPERSEDED by the block above: **Task 11 IS DONE** and the owner stop is reached. Its "must not be reverted" claims still stand in full; only its ranking as the next action has moved.)*
+>
+> **Plan Tasks 1–10 are complete and pushed.** The `ULC-F3` block on extending a crawl is
+> **discharged**: the bound moved from artists *discovered* to artists *fetched*, so the
+> frontier survives; a crawl that cannot extend now **refuses instead of exiting 0**; the
+> checkpoint is written atomically; and `artistpath-build refrontier` repairs an older one.
+>
+> **What this did NOT do: build anything, or adopt anything.** No graph, no artifact, no cost
+> function, no router, no frontend. The archive got bigger. **Nothing a user can see has
+> changed.**
+>
+> **Figures are owned by `builder/analysis/2026-08-08-cex-g1/` (`g1_result.md`,
+> `crawl_result.md`) — cited, never restated.** `CEX-G1` passed exactly; the crawl completed
+> in under four hours with **zero failures** and every response HTTP 200.
+>
+> **⚠ THE ARCHIVE IS NOW ONE-WAY, AND THE SNAPSHOT IS THE ONLY WAY BACK.** After the append,
+> today's graph **cannot be rebuilt from source** — `build_from_archive` reads everything under
+> the algorithm prefix. The owner's precondition was met and **verified again after the crawl**:
+> `builder/scratch/grt-archive-algb.pre-cex-snapshot` still holds exactly 75,000 responses.
+> Both it and the checkpoint backup are gitignored, so `g1_result.md` is their only identity.
+>
+> **⚠ THREE CLAIMS AN EDITOR MUST NOT REVERT.** `exhausted: false` in the checkpoint is
+> **correct** — the crawl stopped on the fetch cap with a non-empty queue, so the graph was not
+> crawled out, and ~11,293 artists are now recorded as discovered-but-not-crawled. `grt_run.py`
+> **refuses to run**, deliberately: its era pin is a refusal because the old behaviour was
+> deleted from a loop body rather than defaulted. `calibrate.py`'s `_replay` is deliberately
+> left on the **old** stopping rule, because it exists to reproduce its own committed cells.
+>
+> **⚠ THE GATE THAT A GREEN TEST SUITE COULD NOT DISCHARGE.** `CEX-G2` was folded into "run the
+> suite", and the suite stayed green through the semantics change. The sweep found two frozen
+> probes depending on the old meaning — one of them, `calibrate.py`, **names no identifier that
+> changed**: it hand-copies the crawler's stopping rule, and its own docstring declared its
+> answers void if that rule ever moved. **A caller can depend on a rule without naming
+> anything the rule uses**, and `test_pipeline_mirrors.py` cannot see that class.
+>
+> **What Task 11 must do, and the trap in it:** every command passes `--algorithm`
+> **explicitly** (`CEXR-2`) — there is no `RC-H3` guard on the build side, so a defaulted build
+> reads ALG-E and could pass acceptance while describing a population nobody asked for. **Cost
+> the re-census on 500 artists and report before running the full pass** (`CEXR-9`); it is the
+> only uncosted step in the track. **The build WILL be rejected on BOTH acceptance bounds —
+> that is the designed outcome and an owner stop. Do not widen them** (`MSW-G3` is the
+> precedent, and there too it was the owner's).
+>
+> **Entry point:** the current handoff
+> [`2026-08-08-HANDOFF-cex-crawl.md`](2026-08-08-HANDOFF-cex-crawl.md). Reasoning:
+> [`2026-08-08-cex-crawl-execution-log.md`](2026-08-08-cex-crawl-execution-log.md) — **its §4
+> records two tests in this session's own work that passed while testing nothing**, both caught
+> by running them against the old code first. Governing document:
+> [`specs/2026-08-07-crawl-extension-design.md`](specs/2026-08-07-crawl-extension-design.md).
+> Operational: [`plans/2026-08-08-crawl-extension.md`](plans/2026-08-08-crawl-extension.md).
+> Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free.
+>
+> **⚠ SEPARATE TRACK, OPEN AND HIS: PR #92 (`landing-dot-z-order`).** The owner found one defect
+> while discharging the test queue — the landing page's green indicator dot rendering on top of
+> the open artist dropdown — and **verified the fix locally**. It is **not deployed**: the live
+> site still shows it until he merges and publishes. Not part of `CEX-`.
+>
+> ---
+
+---
+
+> ## ▶ THE `CEX-` CRAWL EXTENSION IS DESIGNED AND PLANNED, 2026-08-08 — ~~**the next action is WORK: execute the plan in a FRESH session.**~~ *(SUPERSEDED by the block above: Tasks 1–10 ARE DONE. **Its two "must not be reverted" claims and its `CEX-R1`/`R3`/`R4` findings still stand in full** — only its ranking as the next action has moved. ⚠ Its `config.py:17` warning is now FALSE: Task 7 fixed it.)*
+>
+> **The owner approved the crawl expansion, conditional on snapshotting the archive so it can
+> be reverted.** That snapshot is **plan Task 9 Step 1 and a precondition for the whole
+> track**, not a nicety: after the crawl appends, today's graph cannot be rebuilt from source.
+>
+> **What this session did NOT do: change any shipped code.** The diff is three documents, two
+> doc-map rows and two analysis directories. No graph, no artifact, no cost function, no
+> router, no frontend.
+>
+> **⚠ HALF THE ORIGINAL MOTIVATION DISSOLVED UNDER TEN MINUTES OF CHECKING, and this is the
+> thing to carry.** The owner named two missing artists. **Commander Cody was never missing** —
+> crawled and shipped; he is unfindable because search is literal-substring and the map spells
+> him *"& His Lost Planet Airmen"* against the queried *"and the Lost Planet Airmen"*
+> (`CEX-R3`, **a search defect, its own track, and the only lever that addresses "I cannot find
+> this artist" for artists that are present**). **Goose cannot be in the map at all** — nobody
+> among 75,000 artists names them, so growth cannot reach them (`CEX-R1`), and **seeding does
+> not work either**: falsified by a matched-pair build with a zero-node, zero-edge delta and
+> again at three degree ceilings (`CEX-R4`). **Do not re-plan either as a crawl outcome.**
+>
+> **⚠ TWO CLAIMS MADE BY THAT SESSION WERE FALSIFIED BY MEASUREMENT AND MUST NOT BE REVERTED.**
+> That seeding would work (it does not — the original argument used half the cap algorithm),
+> and that growing the crawl would crowd the hubs and thin the obscure tail. **It does the
+> opposite:** `CXS-C1` rose monotonically and materially, and hub saturation *fell*. Figures
+> owned by `builder/analysis/2026-08-08-cxs-growth/` — cited, never restated.
+>
+> **⚠ `config.py:17` IS STALE IN THE TREE RIGHT NOW.** It calls ALG-E "the adopted 75k
+> archive's algorithm"; the adopted map's lineage is **ALG-B**. Recorded as `CEX-R5`, fixed by
+> **plan Task 7**, and live until then. `cli.py:314` carries the same rot.
+>
+> **Entry point:** the current handoff
+> [`2026-08-08-HANDOFF-cex-design.md`](2026-08-08-HANDOFF-cex-design.md) — **read the spec's
+> §10 amendment log before its §3**. Reasoning:
+> [`2026-08-08-cex-design-execution-log.md`](2026-08-08-cex-design-execution-log.md). Governing
+> document: [`specs/2026-08-07-crawl-extension-design.md`](specs/2026-08-07-crawl-extension-design.md).
+> Operational: [`plans/2026-08-08-crawl-extension.md`](plans/2026-08-08-crawl-extension.md)
+> (11 tasks; seam after Task 10, **owner stop** at the end of Task 11 where acceptance rejects
+> on both bounds). Pre-registration: [`specs/2026-08-08-crawl-growth-subset-preregistration.md`](specs/2026-08-08-crawl-growth-subset-preregistration.md)
+> — **EXECUTED, do not run again.** Branch `crawl-extension-design`, **PR #91**.
+>
+> **Nothing is running on any port** — 8000, 5173 and 5174 swept and free. The ALG-B archive is
+> verified at exactly **75,000** responses after a probe mutated it mid-session.
+>
+> ---
+
+> ## ✅ THE NEW BYPASS UX IS LIVE, 2026-08-07 — and `DEP-34-FIX` IS CLOSED. ~~**The next action is the OWNER'S.**~~ *(SUPERSEDED on next actions by the `CEX-` block above: the next action is WORK. **`SNS-1`, Option C and the queued UI test are still his and still outstanding** — that half is unchanged, only its ranking as "the next action" is. ⚠ This block's "THE TEST QUEUE IS EMPTY" was true when written and is **now false**: the bypass-tray entry below it was queued by the same closeout.)*
 >
 > **The journey cards, the bypass interaction and the landing page were redesigned, merged
 > and deployed to `https://musicapp.cmiller.io` the same day.** Frontend only, plus one

@@ -30,6 +30,19 @@ from pathlib import Path
 import numpy as np
 from dataclasses import replace
 
+# ⚠ THIS PATH RESOLVES TO THE RETIRED ONEDRIVE TREE, AND THAT TREE STILL EXISTS.
+# The `CXA-` execution log §8 records this probe as one that "cannot execute at
+# all". That is WRONG in the dangerous direction, corrected 2026-09-01: the
+# OneDrive copy still carries `builder/src/artistpath_builder/`, and its
+# `acceptance.py` DIFFERS from the live one — so this import succeeds and
+# silently pins the probe to builder code frozen at the 2026-07-27 migration.
+# A silent wrong answer, not a clean failure.
+#
+# Deliberately NOT repaired: this probe's bound values are era-pinned and must
+# not follow the live tree, so pointing ROOT at C:/dev/music-app would change
+# what it measures. Whether it should be repaired against a pinned commit or
+# explicitly retired is a judgement and remains the owner's.
+# Condition unchanged: closed when it is either repaired or explicitly retired.
 ROOT = Path("C:/Users/charl/OneDrive/Claude Projects/music-app")
 sys.path.insert(0, str(ROOT / "builder" / "src"))
 from artistpath_builder.acceptance import (  # noqa: E402

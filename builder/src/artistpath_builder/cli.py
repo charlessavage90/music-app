@@ -6,6 +6,10 @@
     artistpath-build build      --archive-dir ./archive --out graph-v1.bin
     artistpath-build fixture    --graph graph-v1.bin --out fixture.bin --size 500
 
+`refrontier` is a REPAIR step, not a pipeline stage: it rebuilds a checkpoint's
+`discovered` set from the archive when the frontier was never recorded
+(ULC-F3), and is run before a `crawl` that is meant to resume. Offline.
+
 Popularity is score-weighted in-degree, computed from the similarity archive
 during `build` (findings 6f). There is no separate popularity input.
 
@@ -33,8 +37,9 @@ from artistpath_builder.acceptance import (
 from artistpath_builder.archive import LocalArchive, S3Archive
 from artistpath_builder.artifact import deserialise, serialise
 from artistpath_builder.config import PERMITTED_ALGORITHMS, BuilderConfig
-from artistpath_builder.crawl import Crawler, http_fetcher
+from artistpath_builder.crawl import Crawler, FrontierExhausted, http_fetcher
 from artistpath_builder.fixture import extract_fixture
+from artistpath_builder.frontier import reconstruct_referenced, rewrite_checkpoint
 from artistpath_builder.manifest import build_manifest, write_manifest
 from artistpath_builder.fame import fetch_fame, lb_fame_fetcher, seed_fame
 from artistpath_builder.pipeline import archive_artists, build_from_archive
@@ -62,7 +67,9 @@ def _config(args) -> BuilderConfig:
     """
     overrides: dict = {}
     target = getattr(args, "target", None)
-    if target:
+    # CEXR-13: `is not None`, not truthiness — `--target 0` is a meaningful
+    # instruction (fetch nothing) and was previously ignored in silence.
+    if target is not None:
         overrides["target_artist_count"] = target
     algorithm = getattr(args, "algorithm", None)
     if algorithm:
@@ -86,6 +93,19 @@ def _config(args) -> BuilderConfig:
         overrides["cap_strategy"] = cap_strategy
     if getattr(args, "require_fame", False):
         overrides["require_fame"] = True
+    # SEL- 2026-08-09. Per-invocation by design: it selects WHICH censused
+    # payload this build applies, never which one ships. Validated here rather
+    # than at first read so a mistyped path fails before a build starts.
+    unlistenable_list = getattr(args, "unlistenable_list", None)
+    if unlistenable_list:
+        path = Path(unlistenable_list)
+        if not path.is_file():
+            raise SystemExit(
+                f"--unlistenable-list: no such file: {path}\n"
+                "This selects a censused ULF- payload for THIS build only. "
+                "Omit it to use the algorithm's shipped default."
+            )
+        overrides["unlistenable_list_path"] = path
     return BuilderConfig(**overrides)
 
 
@@ -141,9 +161,30 @@ def cmd_crawl(args) -> int:
         fetcher=http_fetcher(config),
         checkpoint_path=Path(args.checkpoint),
     )
-    crawler.crawl([row["mbid"] for row in bootstrap])
+    try:
+        crawler.crawl([row["mbid"] for row in bootstrap])
+    except FrontierExhausted as exc:
+        # CEXR-14: the message carries the remedy, so it must reach the
+        # operator as a message rather than as a traceback.
+        raise SystemExit(str(exc)) from exc
     if crawler.failures:
         logging.warning("%d artists failed permanently", len(crawler.failures))
+    return 0
+
+
+def cmd_refrontier(args) -> int:
+    """Rebuild the checkpoint's `discovered` set from the archive (ULC-F3).
+
+    Offline: reads archived responses only, never the network.
+    """
+    config = _config(args)
+    source = ListenBrainzSource(config)
+    referenced = reconstruct_referenced(_archive(args), config, source)
+    stats = rewrite_checkpoint(Path(args.checkpoint), config, referenced)
+    print(
+        f"done {stats['done']} | discovered {stats['discovered']} | "
+        f"frontier {stats['frontier']}"
+    )
     return 0
 
 
@@ -266,15 +307,29 @@ def main(
     p_crawl.add_argument("--bootstrap", required=True)
     p_crawl.add_argument("--checkpoint", default="./checkpoint.json")
     p_crawl.add_argument(
-        "--target", type=int, default=None, help="discovery cap; for trial runs"
+        "--target",
+        type=int,
+        default=None,
+        help="cap on artists FETCHED (CEX-2; it capped artists DISCOVERED "
+        "before 2026-08-08, which is what lost the frontier — ULC-F3)",
     )
     p_crawl.add_argument(
         "--algorithm",
         default=None,
-        help="source algorithm for trial runs; default is production's (ALG-E)",
+        help="source algorithm; default is ALG-E, NOT the adopted map's ALG-B",
     )
     add_archive_args(p_crawl)
     p_crawl.set_defaults(func=cmd_crawl)
+
+    p_refrontier = sub.add_parser("refrontier")
+    p_refrontier.add_argument("--checkpoint", default="./checkpoint.json")
+    p_refrontier.add_argument(
+        "--algorithm",
+        default=None,
+        help="which algorithm's archive tree to scan; default production's",
+    )
+    add_archive_args(p_refrontier)
+    p_refrontier.set_defaults(func=cmd_refrontier)
 
     p_fame = sub.add_parser("fame")
     p_fame.add_argument(
@@ -311,13 +366,20 @@ def main(
     p_build.add_argument(
         "--cap-strategy",
         default=None,
-        help="connection rule; default config's (mutual_knn until adoption)",
+        help="cap rule; default config's (trimmed_union since the MSW- adoption)",
     )
     p_build.add_argument(
         "--require-fame",
         action="store_true",
         help="refuse to build unless every kept artist has a fame record "
         "(MSW-G3); the adopted artifact is built with this explicitly on",
+    )
+    p_build.add_argument(
+        "--unlistenable-list",
+        default=None,
+        help="path to a censused ULF- drop-list payload, overriding the "
+        "algorithm's shipped default for THIS build only. For a population "
+        "the algorithm-keyed default cannot express — e.g. an extended crawl",
     )
     add_archive_args(p_build)
     p_build.set_defaults(func=cmd_build)

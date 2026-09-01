@@ -75,3 +75,30 @@ def test_p99_log_clip_raises_on_degenerate_scale():
         rescale_scores(
             [0.0] * 100, strategy="p99_log_clip", damping=0.5
         )
+
+
+def test_rescale_logs_the_scale_and_the_saturated_share(caplog):
+    # CEX-M1: the p99 scale is population-dependent and prices the router's
+    # primary term. Comparing two builds needs it as a figure, not a guess.
+    import logging
+
+    from artistpath_builder.pipeline import rescale_scores
+
+    # Input is LOG-SPACE (log1p(cooc) from damped_strength at d=0) because
+    # that is what every caller passes since Task 14 — the branch expm1s it
+    # back to raw. Feeding raw 1000.0 here overflows float on expm1(1000),
+    # which is what the value below is avoiding.
+    raw = [1.0] * 99 + [1000.0]
+    with caplog.at_level(logging.INFO, logger="artistpath_builder.pipeline"):
+        rescaled = rescale_scores(
+            [math.log1p(v) for v in raw], strategy="p99_log_clip", damping=0.0
+        )
+
+    # The population is chosen so exactly one edge saturates: p99 of the raw
+    # values interpolates well below 1000, so the top edge clips at 1.0.
+    assert rescaled[-1] == 1.0
+    assert sum(1 for v in rescaled if v >= 1.0) == 1
+
+    messages = " ".join(record.getMessage() for record in caplog.records)
+    assert "p99" in messages
+    assert "saturated" in messages

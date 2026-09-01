@@ -79,6 +79,41 @@ gains a field and names every script above. It catches a build rule arriving as
 a config knob, which is the usual shape; a stage added with no knob still needs
 a human.
 
+**And again on 2026-08-08 (`CEX-2`), in a shape neither previous pin covers.**
+`target_artist_count` changed from bounding artists **discovered** to bounding
+artists **fetched**. Only one frozen script crawls —
+`2026-07-29-algb-trial-build/grt_run.py` — and it is pinned differently from
+everything above, deliberately: **the old behaviour was in `crawl.py`'s loop and
+was deleted, not defaulted, so no config value restores it.** Setting a flag
+cannot pin this one, so `run_arm` **refuses to run** unless passed
+`accept_new_target_semantics=True`. Its `grt_crawl_*.json` record stands and
+needs no re-run; what a re-run would produce is a materially larger population
+under the same `TARGET = 3_000` label.
+
+`grt_score.py` carries `target_artist_count` too but **only builds**, and
+`build_from_archive` never reads it — so it needs no new pin. Checked rather
+than assumed.
+
+**`2026-07-29-trial-crawl-calibration/calibrate.py` needed a pin for a second,
+different reason, and the config-field sweep would have missed it.** It does not
+crawl either — but its `_replay` helper is a **hand-written copy of `crawl.py`'s
+stopping rule**, and its own docstring declared its answers void if that rule
+ever changed. It changed. `_replay` is deliberately left on the OLD rule, since
+this harness exists to reproduce its own committed cells and the `--target`-
+capped trial crawl was retired as an instrument on 2026-07-29 — so the
+divergence is now permanent and annotated at the function. **Read its figures as
+describing the old capped crawl; they no longer predict what `crawl` fetches.**
+
+That one is the general warning: **a caller can depend on a rule without naming
+any identifier the rule uses.** `test_pipeline_mirrors.py` fires when
+`BuilderConfig` gains a field, and a stopping rule that moved inside a loop body
+adds no field. Only reading the mirrors found it.
+
+**The lesson the two shapes share:** a config-flag pin works when the old
+behaviour survives as a value. When a change deletes the old behaviour outright,
+the faithful pin is a refusal, because the alternative is a probe that still
+runs and quietly answers a different question.
+
 ## Why this file exists
 
 On 2026-07-23 the shipped quantities were renamed so that **every popularity-

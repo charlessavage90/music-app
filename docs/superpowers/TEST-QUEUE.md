@@ -51,11 +51,11 @@ Do not delete entries; the record of what was exercised is the point.**
 > heading is preserved deliberately — it is the record of what was asked — **but it means a
 > grep for `## QUEUED` returns discharged entries and over-reports.**
 >
-> **An item is live only if its topmost heading says so.** As of **2026-08-07 (closeout)**
-> that is **one item** — the bypass-tray UX entry at the top. The two 2026-08-06 live-site
-> entries were discharged by the owner earlier the same day, taking the count to zero before
-> this one was added. *(It was also zero on 2026-08-05; the count is re-counted rather than
-> carried forward, per the incident below.)*
+> **An item is live only if its topmost heading says so.** As of **2026-09-01** that is
+> **one item** — the revert-confirmation entry at the top. The 2026-08-10 extended-map entry
+> below it is DONE: the owner ran it and it **fired his revert criterion**, which is the
+> first time an entry in this file has done so. *(The count is re-counted at each closeout
+> rather than carried forward, per the incident below.)*
 >
 > **This cost six consecutive closeouts**, each flagging a backlog that did not exist, the
 > count itself stale, each carrying the claim into a handoff and into `NEXT.md` without
@@ -70,7 +70,150 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ✅ DONE (latest) — 2026-08-07 — the two buttons have moved, and the website looks different
+## ▶ QUEUED (latest) — 2026-09-01 — the old map is back
+
+**`https://musicapp.cmiller.io` is running the map it ran before 10 August again** — 58,838
+artists, the one you had until three weeks ago. It is already deployed and verified from
+outside; nothing is running on your machine. **Nothing else changed**: same code, same
+buttons, same landing page, only the map moved back.
+
+### What to exercise — ten minutes, and it is a confirmation, not an evaluation
+
+1. **Two or three of the journeys that felt wrong**, and press **Dig deeper** ten or more
+   times on each. The question is narrow: **is it back to how it was**, not whether it is
+   good.
+2. **Play a few cards in the middle.** The clip cache was left alone, so anything that
+   played before should still play.
+3. **The front page**, including the artist dropdown and the coloured dot behind it — that
+   fix is frontend and was **not** reverted, so it should still be right.
+
+### What "wrong" looks like
+
+- **A journey that still feels like the last three weeks** rather than like before them.
+  That would mean the map was not what made it worse, and I would want to know immediately.
+- **A blank white page**, or a card that will not play where it played before.
+- **An error page from a link you had saved** from the last three weeks. Some of those
+  journeys ran through artists that only exist in the bigger map, so a saved link can now
+  point at somebody who is not there. Expected, but tell me how often it happens.
+
+**Paste the URL for anything you find.**
+
+> **Why it went back**: it did not measurably help and it measurably cost. The artists the
+> extension added have **a small fraction of the connections** the artists already there have,
+> and a large minority of them have only one — which means they could never appear in the
+> middle of a journey at all. And adding them **flattened the scale the app uses to tell
+> "somebody you might not know" from "somebody everybody knows"**. Every figure behind those
+> two sentences is owned by
+> `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md` — read it there.
+
+---
+
+## ✅ DONE — 2026-09-01 — RUN BY THE OWNER, AND IT FIRED THE REVERT CRITERION
+
+> **His words:** *"The app with the crawl extension is noticeably worse than the old version
+> — it's much harder to find unknown artists."* Asked where it goes wrong, he said it is
+> **worse on both**, before pressing anything and while digging, and that **the digging is
+> where it is noticeable**; he also noted that comparing single first journeys is weak
+> evidence because there is only one data point per pair and "unfamiliarity" is not a precise
+> measurement.
+>
+> **That is the criterion he set on 2026-08-10, in the words he set it in.** He instructed
+> the revert; it was executed and verified live the same day — `/health` reports the previous
+> map's identity and a journey builds through the public address.
+>
+> **⚠ The measurements did not contradict him, and one of them predicted this.** The
+> acceptance gate the extended map passed was a **"the map is broken" stop-gate**: it
+> **permitted materially more presses of *Dig deeper* to reach the same obscurity than the
+> old map needed**, and the extended map used materially more. **Passing it never meant "no
+> worse."** Both figures — what the gate permitted and what the map realised — are owned by
+> the `JFX-` results README, `JFX-G1` section.
+>
+> **The mechanism was measured after the revert** and is owned by
+> `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`. One half of his report is
+> **unexplained**: nothing measured accounts for the first journey being worse before any
+> press, and `JFX-C1` found no change at depth 0 across 297 pairs.
+>
+> **`CLIP-1` — no new examples were reported**, and the entry asked for them by name. It
+> stays open and unchanged.
+
+*Original queued text follows.*
+
+## QUEUED — 2026-08-10 — the map is bigger, and it is live
+
+**`https://musicapp.cmiller.io` is now running a map built from a much bigger collection —
+about 88,700 artists instead of about 58,800.** It is already deployed. Nothing is running
+on your machine.
+
+### The one thing to know before you start
+
+**Journeys between artists you know well will be DIFFERENT from yesterday. That is the
+release, not a fault.** There are roughly 30,000 more artists for a journey to travel
+through, so routes that were the only way across before now have competition. Do not report
+"this journey changed" as a defect — report it if the change makes it *worse*, which is a
+different judgement and is the one below.
+
+### Your own test, in your own words
+
+You set this before any of it was adopted, so it is quoted back rather than paraphrased:
+
+> **a noticeably worse product experience on more than half of tested journeys**, where
+> "noticeably worse" means **how hard it is to find novel artists**.
+
+Your calibration was the last map switch, which you recognised as a clear improvement in
+under five minutes — so the instrument is known to be sensitive at that size of change.
+
+**"Things I would improve" is a SEPARATE bucket from "revert."** There are things you
+already wanted to improve about the current map and they will still be there. Keeping those
+two apart is the whole point; otherwise a revert trigger quietly becomes a wish list.
+
+### What to exercise — twenty minutes
+
+1. **Three or four journeys between artists you know well**, and press **Dig deeper** ten or
+   more times on each. That is the button this whole release is about: does the middle keep
+   getting less familiar, or does it stall, or wander somewhere with no connection to where
+   you started?
+2. **Lean hardest on famous-to-famous pairs** — two artists you would both call well known.
+   That is where the one unexplained signal in the measurements sat, and it is also the case
+   you can judge best, because you know both ends.
+3. **Play the cards in the middle**, not just the ends.
+4. **On a phone as well.**
+5. **The front page: open the artist dropdown and check the little coloured dot in the box
+   below is now behind it, not in front.** That is the fix you found and verified locally on
+   2026-08-08 — this is the first time it has been on the live site.
+
+### What "wrong" looks like
+
+- **A card with nothing to play**, or a card that plays but is not that artist's own music —
+  a guest spot or someone else's remix. **This is `CLIP-1` and I expect it to get MORE
+  common, not less**: the artists newly added are more obscure, and 31% of them have nothing
+  playable of their own against 25% of the ones already there. **Name any new examples you
+  hit** — Albert Hammond Jr. and Metric were your two. How often it happens is what decides
+  whether it is worth fixing.
+- **The middle stops making sense** — artists with no audible relation to either end.
+- **Pressing Dig deeper stops changing anything**, or changes it randomly rather than digging
+  further out.
+- **The dropdown still sitting behind the dot** on the front page.
+- **A blank white page.** Old unused files were deleted from the server in this publish, and
+  a blank page would mean one was still needed. Reload once; if it persists, tell me
+  immediately — it is a one-command fix.
+
+### What "right" looks like
+
+Journeys build quickly, every card plays, and the further you press the less familiar the
+middle gets **without losing the thread** between your two artists.
+
+**Paste the URL for anything you find** — the whole journey is in the address bar.
+
+> **Rollback is one command and a few minutes.** The previous map is still in the bucket,
+> untouched, along with the one before it.
+>
+> Detail: `docs/superpowers/2026-08-10-cxa-adoption-execution-log.md`.
+
+---
+
+<!-- "(latest)" stripped 2026-08-10: only the newest entry carries it, per the convention
+     above. This entry's content is unchanged and still accurate. -->
+## ✅ DONE — 2026-08-07 — the two buttons have moved, and the website looks different
 
 > ### ✅ RUN BY THE OWNER 2026-08-08 — fully functional, and it found ONE defect.
 >

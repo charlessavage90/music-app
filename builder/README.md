@@ -33,8 +33,13 @@ uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 50
 - **`crawl` is resumable and safe to interrupt.** It checkpoints to
   `--checkpoint` (default `./checkpoint.json`) and rebuilds its queue as
   `discovered − done` on restart, which also retries anything that failed last
-  time. Ctrl-C is a normal way to stop it. `--target N` caps discovery for trial
-  runs; `--s3-bucket` / `--s3-prefix` put the archive in S3 instead of on disk.
+  time. Ctrl-C is a normal way to stop it. `--target N` caps how many artists are
+  **fetched** (`CEX-2`, 2026-08-08 — it capped how many were *discovered* before
+  that, which discarded the frontier past the cap and is `ULC-F3`);
+  `--s3-bucket` / `--s3-prefix` put the archive in S3 instead of on disk.
+- **`refrontier` repairs a checkpoint whose frontier was lost** (`ULC-F3`), by
+  rebuilding `discovered` from the archived responses. Offline. Run it before a
+  `crawl` that is meant to resume but reports nothing to do.
 - **`build` is offline by construction.** `tests/test_replay.py` builds twice
   from one archive, the second time with a fetcher that raises on any request,
   to prove it never reaches the network.

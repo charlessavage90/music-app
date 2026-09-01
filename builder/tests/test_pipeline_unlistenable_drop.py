@@ -178,6 +178,61 @@ def test_an_uncensused_algorithm_builds_with_the_drop_off(tmp_path):
     assert DROPPED in built
 
 
+# --- the per-invocation payload override (SEL-, 2026-08-09) ----------------
+# The case these exist for is the one the registry cannot name: an algorithm
+# whose archive has been EXTENDED, so one algorithm now means two populations.
+
+
+def test_override_builds_a_population_the_registry_cannot_express(
+    tmp_path, install_list
+):
+    # The registry's list predates a crawl extension and would refuse (it is
+    # the ULC-F1 case above). The override censuses the grown archive, so the
+    # build proceeds — and actually applies the overriding list's verdicts.
+    install_list(PRODUCTION_ALGORITHM, FULL_POPULATION - {C}, set())
+    extended = install_list(
+        PRODUCTION_ALGORITHM, FULL_POPULATION, {DROPPED}, register=False
+    )
+    archive = _archive(tmp_path, SIMILAR)
+    built = _build(archive, unlistenable_list_path=extended).mbids
+    assert DROPPED not in built, "the override's drop verdict was not applied"
+    assert C in built
+
+
+def test_override_does_not_bypass_the_population_check(tmp_path, install_list):
+    # The override selects WHICH payload, never whether ULC-F1 is enforced. A
+    # payload that does not cover the archive must still refuse, or the flag
+    # would be a way to silently switch the guard off.
+    install_list(PRODUCTION_ALGORITHM, FULL_POPULATION, set())
+    short = install_list(
+        PRODUCTION_ALGORITHM, FULL_POPULATION - {C}, set(), register=False
+    )
+    archive = _archive(tmp_path, SIMILAR)
+    with pytest.raises(PopulationNotCensused):
+        _build(archive, unlistenable_list_path=short)
+
+
+def test_override_bypasses_the_lookup_rather_than_substituting_in_it(
+    tmp_path, install_list
+):
+    # UNCENSUSED has no registry entry at all, so a substitution-in-the-dict
+    # implementation would still raise NoUnlistenableListForAlgorithm here.
+    # Building proves the lookup is bypassed, which is what lets a first-time
+    # census be built without editing unlistenable_drop.py.
+    payload = install_list(
+        UNCENSUSED, FULL_POPULATION, {DROPPED}, register=False
+    )
+    archive = _archive(tmp_path, SIMILAR, algorithm=UNCENSUSED, subdir="scoped")
+    built = _build(
+        archive,
+        algorithm=UNCENSUSED,
+        drop_no_release_tail=False,
+        drop_featured_credit=False,
+        unlistenable_list_path=payload,
+    ).mbids
+    assert DROPPED not in built
+
+
 def test_dropping_equals_never_having_been_archived(tmp_path, install_list):
     # Dropped BEFORE the mass computation, same invariant as the sibling
     # drops: the built graph must equal one from an archive the artist never
@@ -229,11 +284,21 @@ def test_a_drop_outside_the_censused_population_refuses_to_load(
         load_unlistenable_list(PRODUCTION_ALGORITHM)
 
 
-# --- the frozen 2026-08-05 snapshots ------------------------------------
+# --- the frozen shipped snapshots ---------------------------------------
 #
 # Counts and shas from the census's own payloads (ulf_droplist.py output),
 # recorded in the ULF- execution log. Same pinning idiom as the sibling
 # rules' snapshot tests.
+#
+# ⚠ These pin whatever UNLISTENABLE_DROP_LISTS resolves to, so they move with
+# a repoint — they are not free-standing history. The CANDIDATE three moved
+# together at `CXA-` Task 2 (2026-08-10) when the shipped ALG-B default went
+# from the 75,000-artist payload to the re-censused 117,302-artist one; the
+# PRODUCTION (ALG-E) three are untouched and must stay so, because the
+# regenerated ALG-E payload is a by-product that must not ship
+# (analysis/2026-08-09-cex-recensus/README.md).
+#
+# PREVIOUS (75k-era ALG-B): CANDIDATE_COUNT 15_708, CANDIDATE_POPULATION 75_000
 
 from artistpath_builder.unlistenable_drop import (  # noqa: E402
     CANDIDATE_UNLISTENABLE_DROP_SHA256,
@@ -242,8 +307,8 @@ from artistpath_builder.unlistenable_drop import (  # noqa: E402
 
 RECORDED_COUNT = 13_355
 RECORDED_POPULATION = 75_000
-CANDIDATE_COUNT = 15_708
-CANDIDATE_POPULATION = 75_000
+CANDIDATE_COUNT = 27_262
+CANDIDATE_POPULATION = 117_302
 
 
 @pytest.fixture

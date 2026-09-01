@@ -1,0 +1,7 @@
+# Raw run output, per the 2026-08-09-jfx-prereg-critique and 2026-08-09-cex-recensus
+# precedent: the log lines that carry figures are reproduced verbatim in README.md,
+# which is what makes them durable. mknn_result.json is NOT ignored — it is the
+# evidence the fourth acceptance row rests on, and this row serialises no artifact,
+# so that file is the only machine-readable record of the build.
+*.log
+__pycache__/
