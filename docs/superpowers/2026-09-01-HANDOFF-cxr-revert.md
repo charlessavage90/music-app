@@ -48,8 +48,9 @@ against both artifact files, with predictions committed first.
 - **`w_known_ramp_fame_pctl` stays 0.01.** Untouched in both directions, so the confirmation
   test is not confounded.
 - **The `JFX-` run was not wrong and the adoption was not a mistake in process.** `JFX-G1b` is
-  a *"the map is broken"* stop-gate that permitted ~30 presses to reach where the old map got
-  in 20; the extended map realised ~24. **Passing it never meant "no worse."** Do not rewrite
+  a *"the map is broken"* stop-gate that permitted materially more digging than the old map
+  needed for the same obscurity, and the extended map used materially more (both figures owned
+  by the `JFX-` results README, `JFX-G1`). **Passing it never meant "no worse."** Do not rewrite
   the `JFX-` record as a failure — rewrite nothing; the reading is what changed.
 - **One half of the owner's report is UNEXPLAINED** — the *first* journey, before any press.
   `CXR-P3` did not fire and `JFX-C1` measured no depth-0 change across 297 pairs. **Do not let

@@ -21,7 +21,14 @@ Both parse the artifacts through the **shipped** `GraphStore`, not a second pars
 | **extended** — live 2026-08-10 → 2026-09-01 | `graph-cxa-adopted.bin` | `bc0431c4…8e7ece46` | 88,685 | 1,618,164 |
 
 29,892 artists added, 45 lost, 58,793 in both. Mean connections per artist **fell**, 22.36
-→ 18.25.
+→ 18.25 — **measured here, from the two artifacts' own CSR offsets.**
+
+> ⚠ **Not the same number as the `CEX-` re-census's mean-degree figure**, which is coarser and
+> is owned by `builder/analysis/2026-08-09-cex-recensus/README.md`. Two independently sourced
+> figures for closely related quantities is exactly the shape that drifts, so: **this document
+> owns only what it measured itself, and cites that one.** Flagged by the `CXR-` closeout audit
+> after `PREDICTIONS.md` restated the re-census figure without citing it — that document is
+> frozen and was deliberately left alone (see below).
 
 ---
 

@@ -98,12 +98,13 @@ buttons, same landing page, only the map moved back.
 
 **Paste the URL for anything you find.**
 
-> **Why it went back**: it did not measurably help and it measurably cost. The extension
-> added ~29,900 artists with a median of **4** connections each against **19** for the
-> artists already there — a fifth of them had exactly one connection, which means they could
-> never appear in the middle of a journey at all — and adding them flattened the scale the
-> app uses to tell "somebody you might not know" from "somebody everybody knows" by 21 %.
-> Figures: `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`.
+> **Why it went back**: it did not measurably help and it measurably cost. The artists the
+> extension added have **a small fraction of the connections** the artists already there have,
+> and a large minority of them have only one — which means they could never appear in the
+> middle of a journey at all. And adding them **flattened the scale the app uses to tell
+> "somebody you might not know" from "somebody everybody knows"**. Every figure behind those
+> two sentences is owned by
+> `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md` — read it there.
 
 ---
 
@@ -122,9 +123,10 @@ buttons, same landing page, only the map moved back.
 >
 > **⚠ The measurements did not contradict him, and one of them predicted this.** The
 > acceptance gate the extended map passed was a **"the map is broken" stop-gate**: it
-> permitted up to ~30 presses of *Dig deeper* to reach where the old map got in 20, and the
-> extended map realised ~24. **Passing it never meant "no worse."** Figures: the `JFX-`
-> results README, cited not restated.
+> **permitted materially more presses of *Dig deeper* to reach the same obscurity than the
+> old map needed**, and the extended map used materially more. **Passing it never meant "no
+> worse."** Both figures — what the gate permitted and what the map realised — are owned by
+> the `JFX-` results README, `JFX-G1` section.
 >
 > **The mechanism was measured after the revert** and is owned by
 > `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`. One half of his report is

@@ -33,9 +33,12 @@ class ApiConfig:
     # reprices every artist in it (CXR-P1, CXR-M4).
     #
     # ⚠ The extended map was NOT adopted on a demonstrated gain: JFX-G1b is a
-    # "the map is broken" stop-gate that permitted up to ~30 presses to reach
-    # where this artifact gets in 20, and the extended map realised ~24.
-    # Passing it never meant "no worse". Cited: the JFX- figures README.
+    # "the map is broken" stop-gate, deliberately lenient — it permits
+    # materially more digging than this artifact needs to reach the same
+    # obscurity, and the extended map used materially more. Passing it never
+    # meant "no worse". Both figures live in the JFX- results README, JFX-G1
+    # section; they are cited and deliberately NOT copied here, because a
+    # source comment is exactly where a restated figure goes stale unseen.
     #
     # PREVIOUS: graph-t15-tiebreakfix.bin. This one is MSW-, adopted
     # 2026-08-06 (the trimmed-union build carrying fame_lb), and live again

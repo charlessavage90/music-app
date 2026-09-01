@@ -265,3 +265,59 @@ identity table. They are gitignored and a checksum is the only identity they wil
 
 **D4 — suites, run not remembered.** builder **246**, api **261**, infra **66**, frontend
 **122**. All green.
+
+## §11 B1 — the documentation audit, and what it found
+
+**`scripts/docs-lint.sh` ran first and its hard checks passed**; the `doc-auditor` was then
+dispatched scoped to the diff and told the lint had already run, so it spent its budget on the
+semantic half. **Invoking `closeout` is the request for it — it was not tabled as a choice.**
+
+**One HIGH, and it was live for a real window.** At the scope tip, `2026-08-10-HANDOFF-cxa-adoption.md`
+still declared itself *"ACTIVE — this is the CURRENT handoff. Nothing supersedes it"* and *"the
+extended 117k graph is ADOPTED and LIVE"*; `docs/README.md`'s row repeated it; and **the new
+`NEXT.md` block named no entry-point handoff at all**, unlike every earlier block — so a cold
+reader following this file's own pattern would have landed on the stale one. The auditor
+simulated the cold-start test and found question 4 (*which documents are superseded*) answerable
+**only incorrectly**.
+
+**It was closed by `764dd8d` while the audit was still running**, which is worth recording
+rather than quietly enjoying: the fix and the finding were independent, and the finding is the
+evidence that the gap was real and not merely theoretical. **The `NEXT.md` omission is the
+instructive half** — a new top block written from scratch dropped a pointer every previous block
+carried, and no rule was violated because no rule names it. That is the same shape as the
+handoff-header template in `closeout` A2: freeform writing stops emitting a structural element
+and nothing notices.
+
+**Five MEDIUMs, and four were one defect committed five times — mine.** The `JFX-G1b` reading
+(what the gate permitted, and what the extended map realised) was **restated verbatim in five
+documents**. It is the single most load-bearing sentence in this whole revert, which is exactly
+why it spread: every document that needed to warn against misreading the gate copied the numbers
+along with the warning. **The one-document rule does not exempt a correct restatement**, and five
+copies of one figure is the precise shape that produced three mutually contradictory positions
+here before.
+
+**Fixed in four: `NEXT.md`, `TEST-QUEUE.md`, `config.py`, and the handoff.** Each keeps the
+warning in full — *the gate never meant "no worse"* — and now carries the claim qualitatively
+with the figures cited to the `JFX-` results README. **The `config.py` one is the most important
+of the four**, because a source comment is where a restated figure goes stale with nobody
+looking.
+
+**Deliberately NOT fixed: `PREDICTIONS.md`.** It is a frozen pre-registration whose entire value
+is that its git timestamp proves it preceded every figure. Editing it after the fact to improve
+its citations trades that away for tidiness. **A frozen document's restatement cannot drift,
+because the document cannot change** — what it can do is be quoted onward, which is why the
+correction is recorded here and in the figures README instead. The same reasoning covers the
+auditor's separate finding that `PREDICTIONS.md` restates a `CEX-` re-census figure without
+citing it: **flagged, left frozen, and the figures README now warns that its own freshly
+measured mean-degree figure is not the same number.**
+
+**Two LOWs, both accepted as-is.** The closeout checklist's `A`–`D` identifiers share a shape
+with experiment-criterion identifiers — no actual collision found in scope, and namespacing the
+`closeout` skill is out of this diff's remit. And `NEXT.md`'s size, already recorded at §6; the
+auditor confirmed it could only tier-read the file as a result, which is the cost made concrete.
+
+**What the audit did NOT cover, in its own words:** the full `JFX-` figures README, the `JFX-`
+pre-registration, `PRODUCT-REQUIREMENTS.md` and both skill files were grepped rather than read;
+the `CXR-` identifier series was checked for collisions and is clean, but not exhaustively
+cross-checked against every letter-number series in the corpus. **Recorded because an audit's
+coverage statement is part of its result.**

@@ -40,9 +40,11 @@ probe), **`SEL-`**, and **closing or keeping the 2026-07-29 famous-to-famous def
 >
 > **⚠ The pre-adoption measurements did not contradict him — one of them predicted this, and
 > the adoption record read it as a pass.** `JFX-G1b` is a **"the map is broken" stop-gate**
-> that permitted up to ~30 presses of *Dig deeper* to reach where the old map got in 20; the
-> extended map realised ~24. **Passing it never meant "no worse", and no document said
-> otherwise — but nothing said it loudly either.** Figures: the `JFX-` results README.
+> that **permitted materially more digging than the old map needed to reach the same
+> obscurity**, and the extended map used materially more. **Passing it never meant "no
+> worse", and no document said otherwise — but nothing said it loudly either.** The permitted
+> bound and the realised figure are owned by the `JFX-` results README, `JFX-G1` section —
+> **cited, never restated here.**
 >
 > **The mechanism is measured and owned by
 > [`builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`](../../builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md)**
