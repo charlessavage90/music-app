@@ -10,6 +10,27 @@ nothing, so a threshold on it would have decided in advance which differences th
 calls material, which is framing dressed as rigour. It is a report row, on the `MSW-V2`
 precedent.
 
+> **⚠ QUALIFIED, NOT CORRECTED, 2026-09-01.** This pre-registration's design, thresholds and
+> discipline are unaffected, and its result stands: the arms ran, both `JFX-G1` clauses passed,
+> and **the run was not wrong.** What changed is what the result licenses.
+>
+> **The extended map this design was written to evaluate was adopted on 2026-08-10 and REVERTED
+> from production on 2026-09-01**, when three weeks of owner use fired the revert criterion he
+> set before adoption — it was harder to find unknown artists, both on the first journey and
+> while digging. **`JFX-G1b` is a stop-gate, not a quality bar**: it permits the new map to need
+> materially more digging than the old one to reach the same obscurity, and passing it never
+> meant "no worse".
+>
+> **Read this before reusing this design for a future map switch, which is the likely reason to
+> open it.** The mechanism behind the regression — the fame ruler being framed on the served
+> artifact's own population, so growing the map reprices every artist in it — is a standing trap
+> for every map switch, and **these gates were not built to catch it**. See
+> [`../2026-09-01-cxr-revert-execution-log.md`](../2026-09-01-cxr-revert-execution-log.md) and
+> `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`. One half of the owner's
+> report — the first journey, before any press — remains **unexplained**; do not design as
+> though it were closed.
+
+
 Governing: [`PRODUCT-REQUIREMENTS.md`](../PRODUCT-REQUIREMENTS.md) — every criterion here
 is anchored on a `REQ-`, none invented. Operational context: plan Task 11 is complete and
 stopped at its owner stop; this does not resume it.

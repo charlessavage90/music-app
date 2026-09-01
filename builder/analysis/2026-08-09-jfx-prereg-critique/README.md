@@ -94,6 +94,32 @@ so the adoption is recorded as resting on narrower grounds than it had. Correcte
 
 # `JFX-` RESULTS — the arms, run 2026-08-09/10
 
+> **⚠ QUALIFIED, NOT CORRECTED, 2026-09-01 — and this applies to THIS HALF ONLY.**
+> Everything below is accurate and nothing in it has been overturned: `JFX-G1` passed
+> exactly as recorded, on the artifacts named above. What changed is what a reader should
+> **conclude** from it.
+>
+> **`JFX-B` — the extended map these arms scored — was adopted on 2026-08-10 and REVERTED
+> from production on 2026-09-01**, after three weeks of owner use fired the revert criterion
+> he had set before adoption. **`JFX-G1b` is a "the map is broken" stop-gate, and passing it
+> never meant "no worse"**: the bar it clears explicitly permits the extended map to need
+> materially more digging than `JFX-A` to reach the same obscurity, and it used materially
+> more. The permitted bound and the realised figure are in the `JFX-G1` section below — read
+> them as a floor that was cleared, never as a quality result.
+>
+> **The barred read below still binds and is the reason this banner exists:** `AM1.3` records
+> that `G1a` is mechanically weak in the absolute and is **not** evidence the product works
+> for a user. Do not use a `JFX-G1` PASS to argue the extended map was an improvement.
+>
+> **`graph-cxa-adopted.bin` is the REJECTED artifact, not "the newer one"** — nothing here
+> licenses redeploying it. Mechanism:
+> [`../2026-09-01-cxr-regression-diagnosis/README.md`](../2026-09-01-cxr-regression-diagnosis/README.md).
+> Reasoning: `docs/superpowers/2026-09-01-cxr-revert-execution-log.md`.
+>
+> **The reachability critique above (through "What this changed in the pre-registration") is
+> NOT qualified by any of this.** It was measured on `graph-msw-tu50.bin`, which is the map
+> production serves again — the revert restored the artifact that half was run on.
+
 **Role: FIGURES OWNER for the `JFX-` run as well as for the reachability measurement
 above.** Everything below is cited, never restated — including in `NEXT.md`, the handoff
 and the PR body.
