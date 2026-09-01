@@ -333,7 +333,12 @@ REQ-37 is ~~currently~~ **unachievable on famous-to-famous pairs at any router s
 > as refuted would be the §2.6/§2.11/§2.12 currency error again.
 >
 > **⚠ This measures STRUCTURE, not ROUTING.** Famous endpoints *can* now descend; whether
-> journeys *do* is unmeasured here and is what `JFX-G1` exists to answer. Owner-reported
+> journeys *do* is unmeasured here. **`JFX-G1` has since run** (2026-08-09/10) and both clauses
+> pass — **but it does not settle this either, and must not be cited as though it did.**
+> Its own `AM1.3` records that `G1a` is mechanically weak in the absolute and is **not**
+> evidence the product works for a user; and the extended-map arm it scored was **reverted
+> from production on 2026-09-01** after the owner's use fired his revert criterion. Figures
+> in the critique README's `JFX-` RESULTS half, which owns them. Owner-reported
 > live use corroborates it. **The 2026-07-29 defect ruling below therefore stands until he
 > closes it**, and a session must not close it on this evidence.
 

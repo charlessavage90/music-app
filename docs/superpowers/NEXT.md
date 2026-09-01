@@ -12,20 +12,26 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-09-01, when THE EXTENDED 117k GRAPH WAS REVERTED — the owner's test
-queue entry fired his revert criterion after three weeks of use.** **THE NEXT ACTION IS THE
-OWNER'S AND IT IS USE: the queued entry in [`TEST-QUEUE.md`](TEST-QUEUE.md)**, confirming the
-old map is back to how it was. **Nothing is blocked and no session owes anything.**
-⚠ **The test queue has ONE live item** — the 2026-09-01 revert-confirmation entry at the top.
-The 2026-08-10 map entry below it is **DONE and is the first entry in this file's history to
-fire a revert criterion**; do not discharge it twice.
+**Last updated: 2026-09-01 (later), when THE OWNER CONFIRMED THE REVERT AND DISCHARGED THE
+QUEUE.** The extended 117k graph was reverted earlier the same day after his test fired the
+revert criterion he set on 2026-08-10; he has since confirmed the old map is live and
+**reported nothing wrong**. **THERE IS NO NEXT ACTION ASSIGNED. Nothing is blocked, no
+session owes anything, and the test queue is EMPTY** — zero live items, which is a valid and
+common state and never evidence a session forgot. Do not discharge either 2026-09-01 entry
+twice, and do not re-queue "tell me how it feels": his long-run evaluation is continuous and
+this file explicitly does not hold it (owner ruling, 2026-08-07).
 **The landing-dot fix (PR #92) is LIVE and was NOT reverted** — it is frontend and rode the
-frontend sync, not the map. Still his and blocking nothing: **Option C** (same-name population
-probe), **`SEL-`**, and **closing or keeping the 2026-07-29 famous-to-famous defect ruling**.
+frontend sync, not the map. **Everything open is his to trigger and none of it blocks
+anything else:** **Option C** (same-name population probe), **`SEL-`**, **closing or keeping
+the 2026-07-29 famous-to-famous defect ruling**, and the **three candidate path-quality fixes
+in the `CXR-` README — each needs its own pre-registration and none may start without him.**
+⚠ **One thing is still OPEN rather than done: the first journey, before any press, is
+UNEXPLAINED.** His confirmation did not close it and nothing measured accounts for it. It is
+not a queue item and not assigned; it must not be quietly dropped.
 
 ---
 
-> ## ▶ THE EXTENDED 117k GRAPH IS REVERTED, 2026-09-01. **The next action is the OWNER'S and it is USE: confirm the old map is back.**
+> ## ✅ THE EXTENDED 117k GRAPH IS REVERTED, 2026-09-01 — **AND THE OWNER HAS CONFIRMED IT.** ~~The next action is the OWNER'S and it is USE: confirm the old map is back.~~ *(Discharged 2026-09-01 (later) — he confirmed the old map is live and reported nothing wrong. Everything else this block records still stands.)*
 >
 > **`https://musicapp.cmiller.io` serves `graph-msw-tu50.bin` again — 58,838 artists,
 > 1,315,684 edges, sha `43dd82bb…`.** Verified live from outside, not inferred: `/health`
