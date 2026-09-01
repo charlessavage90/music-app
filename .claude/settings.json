@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(UV_LINK_MODE=copy uv run --extra dev pytest *)",
+      "Bash(UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run --extra dev pytest *)",
+      "Bash(UV_LINK_MODE=copy JSII_SILENCE_WARNING_DEPRECATED_NODE_VERSION=1 uv run --extra dev pytest *)",
+      "Bash(UV_LINK_MODE=copy uv run python -m pytest *)",
+      "Bash(npm test)",
+      "Bash(npm test -- *)",
+      "Bash(npm run test:e2e)",
+      "Bash(npm run build)",
+      "Bash(npm run lint)",
+      "Bash(aws sts get-caller-identity)",
+      "Bash(aws s3 ls *)",
+      "Bash(aws apprunner describe-service *)",
+      "Bash(aws apprunner list-services *)",
+      "Bash(docker info *)",
+      "mcp__Snyk__snyk_code_scan"
+    ]
+  }
+}
