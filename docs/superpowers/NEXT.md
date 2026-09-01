@@ -12,21 +12,65 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
-**Last updated: 2026-08-10 (later), when THE EXTENDED 117k GRAPH WAS ADOPTED AND DEPLOYED.**
-**THE NEXT ACTION IS THE OWNER'S AND IT IS USE: the queued entry in
-[`TEST-QUEUE.md`](TEST-QUEUE.md).** It carries his own revert criterion back to him.
-**Nothing is blocked and no session owes anything.** All nine `CXA-` tasks ran and **both
-owner stops were taken by him.**
-⚠ **The test queue has ONE live item** — the 2026-08-10 map entry at the top. The 2026-08-07
-bypass-tray entry **is discharged**: the branch merge reconciled it and its topmost heading
-now reads `DONE`. **Do not discharge it twice.**
-**The landing-dot fix (PR #92) is LIVE** — that item is closed. Still his and blocking
-nothing: **Option C** (same-name population probe), **`SEL-`**, and **closing or keeping the
-2026-07-29 famous-to-famous defect ruling**.
+**Last updated: 2026-09-01, when THE EXTENDED 117k GRAPH WAS REVERTED — the owner's test
+queue entry fired his revert criterion after three weeks of use.** **THE NEXT ACTION IS THE
+OWNER'S AND IT IS USE: the queued entry in [`TEST-QUEUE.md`](TEST-QUEUE.md)**, confirming the
+old map is back to how it was. **Nothing is blocked and no session owes anything.**
+⚠ **The test queue has ONE live item** — the 2026-09-01 revert-confirmation entry at the top.
+The 2026-08-10 map entry below it is **DONE and is the first entry in this file's history to
+fire a revert criterion**; do not discharge it twice.
+**The landing-dot fix (PR #92) is LIVE and was NOT reverted** — it is frontend and rode the
+frontend sync, not the map. Still his and blocking nothing: **Option C** (same-name population
+probe), **`SEL-`**, and **closing or keeping the 2026-07-29 famous-to-famous defect ruling**.
 
 ---
 
-> ## ▶ THE EXTENDED 117k GRAPH IS ADOPTED, DEPLOYED AND LIVE, 2026-08-10 (later). **The next action is the OWNER'S and it is USE.**
+> ## ▶ THE EXTENDED 117k GRAPH IS REVERTED, 2026-09-01. **The next action is the OWNER'S and it is USE: confirm the old map is back.**
+>
+> **`https://musicapp.cmiller.io` serves `graph-msw-tu50.bin` again — 58,838 artists,
+> 1,315,684 edges, sha `43dd82bb…`.** Verified live from outside, not inferred: `/health`
+> reports that identity and a journey builds through the public address. The image tag is
+> **unchanged** at `994c203`, so the code, the buttons and the landing page are exactly what
+> they were — **only the map moved back.**
+>
+> **Why.** The owner ran the queued test and reported the extended map *"noticeably worse than
+> the old version — much harder to find unknown artists"*, **worse both before pressing
+> anything and while digging, mostly while digging**. That is the revert criterion he set on
+> 2026-08-10 in the words he set it in. He instructed the revert.
+>
+> **⚠ The pre-adoption measurements did not contradict him — one of them predicted this, and
+> the adoption record read it as a pass.** `JFX-G1b` is a **"the map is broken" stop-gate**
+> that permitted up to ~30 presses of *Dig deeper* to reach where the old map got in 20; the
+> extended map realised ~24. **Passing it never meant "no worse", and no document said
+> otherwise — but nothing said it loudly either.** Figures: the `JFX-` results README.
+>
+> **The mechanism is measured and owned by
+> [`builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`](../../builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md)**
+> — figures cited from there, never restated. Two things, and **the second is a standing trap
+> for every future map switch**: the fame ruler the `known` ramp steers on is framed on **the
+> served artifact's own population**, so growing the map reprices every artist in it.
+>
+> **What is UNEXPLAINED, and it is half his report:** nothing measured accounts for the
+> **first** journey being worse before any press. `JFX-C1` found no change at depth 0 across
+> 297 pairs, and `CXR-P3` found the popularity currency barely moved. **Do not quietly drop
+> this half.**
+>
+> **What must not be reverted by a well-meaning editor:**
+>
+> - **`graph-cxa-adopted.bin` is still in the bucket and is the REJECTED artifact.** Do not
+>   redeploy it as "the newer one". `ApiConfig.graph_path`, its test pin and `infra/README.md`
+>   §4 all point at `graph-msw-tu50.bin` deliberately, each with a comment saying why.
+> - **The `CEX-` crawl extension itself is NOT reverted and is not wasted.** The 117,302-
+>   response archive, the re-censused payload and the acceptance-bound work all stand; what was
+>   rejected is *building the served map from it as it stands*.
+> - **`w_known_ramp_fame_pctl` stays 0.01.** It was not touched in either direction. Moving it
+>   now would confound the confirmation test.
+> - **Nothing here resumes path-quality work.** Three candidate fixes are visible in the `CXR-`
+>   README and **each needs its own pre-registration and is the owner's trigger to start.**
+
+---
+
+> ## ✅ THE EXTENDED 117k GRAPH WAS ADOPTED, DEPLOYED AND LIVE, 2026-08-10 (later). ~~**The next action is the OWNER'S and it is USE.**~~ *(SUPERSEDED by the block above: **it was reverted on 2026-09-01** after the owner's queued test fired his revert criterion. Everything this block records about what was done and why still stands as history; its claim that the extended map is what production serves is **now FALSE**.)*
 >
 > **`https://musicapp.cmiller.io` now serves a map of 88,685 artists and 1,618,164 edges**,
 > built from the extended 117,302-response ALG-B archive — up from 58,838 artists. The owner

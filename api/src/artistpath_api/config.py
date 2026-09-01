@@ -11,27 +11,40 @@ class ApiConfig:
     # --- graph ----------------------------------------------------------
     # Default is the ADOPTED artifact, by name — flipped at each adoption
     # (spec 2026-07-23 §1 decision 4; closeout checks this default is not
-    # stale). Adopted 2026-08-10 by CXA-: the build off the EXTENDED 117,302-
-    # response ALG-B archive, replacing graph-msw-tu50.bin. Its identity
-    # (sha256, node and edge counts) is owned by the artifact's own manifest
-    # sidecar — cited, never transcribed here (DEP-24).
-    # It is gitignored: a fresh clone copies it (or the archive) from another
-    # machine and verifies the sha256 against the sidecar.
+    # stale). Its identity (sha256, node and edge counts) is owned by the
+    # artifact's own manifest sidecar — cited, never transcribed here
+    # (DEP-24). It is gitignored: a fresh clone copies it (or the archive)
+    # from another machine and verifies the sha256 against the sidecar.
     #
-    # What the adoption rests on: JFX-G1a, G1b and C5 all passed and the
-    # pre-registered read was §4 read 5 — the map got bigger and journeys did
-    # not measurably change. ⚠ The shallower gradient is NOT established
-    # (D_B − D_A spans zero); adoption was taken with no cost demonstrated,
-    # not in spite of a measured one. The owner's revert criterion is recorded
-    # in plans/2026-08-10-cxa-graph-adoption.md §0.
+    # ⚠ THIS VALUE WENT FORWARD AND CAME BACK. graph-cxa-adopted.bin (the
+    # build off the EXTENDED 117,302-response ALG-B archive) was adopted
+    # 2026-08-10 by CXA- and served production until 2026-09-01, when the
+    # owner reported it noticeably worse at finding artists he did not know
+    # and invoked the revert criterion he had set before adoption
+    # (plans/2026-08-10-cxa-graph-adoption.md §0). It was reverted live the
+    # same day and this default followed it back. DO NOT "fix" this line to
+    # the newer artifact: the newer artifact is the one that was rejected.
     #
-    # PREVIOUS: graph-msw-tu50.bin (MSW-, adopted 2026-08-06; the trimmed-union
-    # build carrying fame_lb). Before it: graph-t15-tiebreakfix.bin.
+    # Why it lost, measured after the revert:
+    # builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md owns the
+    # figures. Two mechanisms, and the second is a trap for any future map
+    # switch — the fame ruler this file's w_known_ramp_fame_pctl steers on is
+    # framed on the SERVED ARTIFACT'S OWN POPULATION, so growing the map
+    # reprices every artist in it (CXR-P1, CXR-M4).
+    #
+    # ⚠ The extended map was NOT adopted on a demonstrated gain: JFX-G1b is a
+    # "the map is broken" stop-gate that permitted up to ~30 presses to reach
+    # where this artifact gets in 20, and the extended map realised ~24.
+    # Passing it never meant "no worse". Cited: the JFX- figures README.
+    #
+    # PREVIOUS: graph-t15-tiebreakfix.bin. This one is MSW-, adopted
+    # 2026-08-06 (the trimmed-union build carrying fame_lb), and live again
+    # since 2026-09-01.
     # The retired 5k dev fixture is NOT a substitute — its snowball shape
     # misrepresents the obscure tail, which is what bypass work exercises.
     # One env var swaps the graph without code changes.
     graph_path: str = os.environ.get(
-        "ARTISTPATH_GRAPH", "../builder/scratch/graph-cxa-adopted.bin"
+        "ARTISTPATH_GRAPH", "../builder/scratch/graph-msw-tu50.bin"
     )
     # Expected sha256 of the artifact. Empty skips verification (local dev);
     # production sets it and the service refuses to boot on a mismatch. The

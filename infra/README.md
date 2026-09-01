@@ -281,11 +281,16 @@ nothing in the bucket fails its health check and rolls back.
 **Set the artifact once, here, and reuse it through §5** — hardcoding a filename in these
 commands is how the wrong artifact gets uploaded beside the right deploy, and vice versa
 (`DEP-34`). `GRAPH` is the ADOPTED artifact's basename; today that is
-`graph-cxa-adopted.bin` (`CXA-`, adopted 2026-08-10 — `ApiConfig.graph_path` is the
-authority, and this line follows it).
+`graph-msw-tu50.bin` (`MSW-`, adopted 2026-08-06 and **live again since 2026-09-01** —
+`ApiConfig.graph_path` is the authority, and this line follows it).
+
+> ⚠ **`graph-cxa-adopted.bin` held this slot from 2026-08-10 to 2026-09-01 and was
+> REVERTED**, on the owner's pre-set criterion, after three weeks of use. It is still in the
+> bucket and must not be redeployed as "the newer one" — it is the one that was rejected.
+> Why it lost: `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`.
 
 ```bash
-GRAPH=graph-cxa-adopted.bin       # the ADOPTED artifact — never the app.py default
+GRAPH=graph-msw-tu50.bin          # the ADOPTED artifact — never the app.py default
 export ARTISTPATH_DEPLOY_GRAPH_KEY=$GRAPH
 export ARTISTPATH_DEPLOY_SIDECAR=../builder/scratch/$GRAPH.json
 
