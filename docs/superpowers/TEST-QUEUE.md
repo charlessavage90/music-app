@@ -51,8 +51,9 @@ Do not delete entries; the record of what was exercised is the point.**
 > heading is preserved deliberately — it is the record of what was asked — **but it means a
 > grep for `## QUEUED` returns discharged entries and over-reports.**
 >
-> **An item is live only if its topmost heading says so.** As of **2026-09-01** that is
-> **one item** — the revert-confirmation entry at the top. The 2026-08-10 extended-map entry
+> **An item is live only if its topmost heading says so.** As of **2026-09-01 (later)** that
+> is **ZERO items — the queue is empty, and that is a valid and common state.** The
+> revert-confirmation entry at the top was discharged by the owner the same day. The 2026-08-10 extended-map entry
 > below it is DONE: the owner ran it and it **fired his revert criterion**, which is the
 > first time an entry in this file has done so. *(The count is re-counted at each closeout
 > rather than carried forward, per the incident below.)*
@@ -69,6 +70,27 @@ Do not delete entries; the record of what was exercised is the point.**
 > impossible.*
 
 ---
+
+## ✅ DONE — 2026-09-01 — CONFIRMED BY THE OWNER; NOTHING FOUND
+
+> **His words:** *"I've confirmed the old map is live."*
+>
+> **What that settles.** The revert landed and the app is serving the map he had before
+> 10 August. He reported **nothing wrong** — no journey still feeling like the last three
+> weeks, no blank page, no card that would not play, no broken saved link. On this file's
+> convention, that is **DONE — nothing found**.
+>
+> **What it does not settle, and this is not a lapse.** He confirmed identity and reported no
+> defect; he did not report back on the three sub-checks individually, and **no session should
+> write as though he had.** In particular, "is it back to how it was" as a *feeling* is his
+> continuing long-run evaluation, which this file explicitly does **not** hold (owner ruling,
+> 2026-08-07, above) — so its absence here is correct and must not be re-queued.
+>
+> **The unexplained half stays unexplained.** Nothing measured accounts for the *first*
+> journey being worse before any press, and this discharge does not close it. It is recorded
+> in `NEXT.md` and in both 2026-09-01 records; **do not quietly drop it.**
+
+*Original queued text follows.*
 
 ## ▶ QUEUED (latest) — 2026-09-01 — the old map is back
 
