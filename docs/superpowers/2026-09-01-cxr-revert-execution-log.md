@@ -230,6 +230,18 @@ deliberate warning that it is the rejected one. Nothing needed converting to a c
 - The **Snyk row** tracks one Low per `builder/analysis/` module *that takes a CLI path
   argument*. **The two added here take none**, so they contribute **zero** — the same
   reasoning that exempted `tail_exposure.py` and the eleven `cre_probe*.py` scripts.
+- **⚠ One deferral's recorded DESCRIPTION is false in the dangerous direction, and re-testing
+  it against reality is what found that.** `CXA-` §8 records
+  `builder/analysis/2026-07-23-acceptance-bounds/check.py:33` as pointing at the retired
+  OneDrive tree and therefore *"cannot execute at all"*. **The OneDrive tree still exists**,
+  still carries `builder/src/artistpath_builder/`, and its `acceptance.py` **differs** from the
+  live one — so that probe would **execute and silently measure against builder code frozen at
+  the 2026-07-27 migration**. A silent wrong answer is a worse hazard than a clean failure, and
+  the record described the safer one. **Corrected at the point of use** — a comment at the line
+  itself, where a future session would trip — rather than by rewriting the frozen log. The
+  condition (repaired or explicitly retired) has still **not** fired and the judgement is still
+  the owner's; the probe was deliberately not repaired, because its bound values are era-pinned
+  and must not follow the live tree.
 - Every other open row still has a condition and none has come due.
 
 **A4 — genuinely inapplicable, stated rather than skipped.** No config knob was added. The one
