@@ -12,6 +12,18 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
+> ## 📍 STANDING FACT — THE APP'S ADDRESS IS `https://unsung.fm`, since 2026-09-03
+>
+> The domain was bought 2026-09-02 and cut over 2026-09-03: ACM certificate swapped,
+> CloudFront alias flipped, `viewer_function.js` re-synthed. **`musicapp.cmiller.io` 301s here
+> with the path preserved**, so every link already shared still works. Status blocks below
+> dated before 2026-09-03 name the old host and are left as written — they record what was
+> live at the time. **This note survives a `closeout` rewrite: it is a standing fact about the
+> deployment, not status.** The runbook is `infra/README.md` §1a.
+>
+> ⚠ **The app is still NAMED "Artist Path" in the UI.** Only the address moved. A rename to
+> "Unsung" is scoped but unapproved — do not assume it has happened.
+
 **Last updated: 2026-09-01 (later), when THE OWNER CONFIRMED THE REVERT AND DISCHARGED THE
 QUEUE.** The extended 117k graph was reverted earlier the same day after his test fired the
 revert criterion he set on 2026-08-10; he has since confirmed the old map is live and
