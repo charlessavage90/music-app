@@ -49,10 +49,10 @@ committed** — a password in a CDK source file is in the repository's history p
 | `ARTISTPATH_DEPLOY_BILLING_USD` | yes | billing alarm threshold, in dollars |
 | `ARTISTPATH_DEPLOY_ALARM_EMAIL` | yes | where the alarm goes (confirm the SNS subscription email once) |
 | `ARTISTPATH_DEPLOY_IMAGE_TAG` | **yes** | the commit tag being deployed — **never `latest`** (see below) |
-| `ARTISTPATH_SITE_HOSTNAME` | **yes** | the permanent public name, `musicapp.cmiller.io` (`PW-5`, `G3-A5`) |
+| `ARTISTPATH_SITE_HOSTNAME` | **yes** | the permanent public name, `unsung.fm` (`PW-5`, `G3-A5`). **Was `musicapp.cmiller.io` until 2026-09-03** — that name now 301s here from a Cloudflare Redirect Rule; see §1a |
 | `ARTISTPATH_CERTIFICATE_ARN` | **yes** | us-east-1 ACM certificate for that name (`PW-5`) |
-| `ARTISTPATH_DEPLOY_GRAPH_KEY` | **in practice yes** | the artifact key in the bucket. **Defaults to `graph-t15-tiebreakfix.bin`, which is NOT what production serves** — see below |
-| `ARTISTPATH_DEPLOY_SIDECAR` | **in practice yes** | path to that artifact's manifest sidecar; the checksum is read from it. Same stale default |
+| `ARTISTPATH_DEPLOY_GRAPH_KEY` | **yes** | the artifact key in the bucket. **No default since `DEP-34-FIX`** — synth refuses without it. Per-deploy: set in §4, never persisted |
+| `ARTISTPATH_DEPLOY_SIDECAR` | **yes** | path to that artifact's manifest sidecar; the checksum is read from it. Also required, also per-deploy |
 
 > **The certificate must be in `us-east-1`** — CloudFront accepts one from no other region —
 > and it is requested **out of band**, not by CDK. CDK could request it, but DNS validation
@@ -84,10 +84,10 @@ Unlike the image tag, both of these are **per-machine and stable**, so they belo
 > (`ARC-11`). It holds the four secrets above and deliberately **not** the image tag — the tag
 > is per-deploy, not per-machine, so persisting it is how you deploy the wrong commit.
 
-> ### ⚠ `ARTISTPATH_DEPLOY_GRAPH_KEY` UNSET SILENTLY REVERTS THE MAP (`DEP-34`, 2026-08-06)
+> ### `ARTISTPATH_DEPLOY_GRAPH_KEY` UNSET ONCE SILENTLY REVERTED THE MAP — CLOSED (`DEP-34`, 2026-08-06; fixed by `DEP-34-FIX`, 2026-08-07, `2930fac`)
 >
-> **This is `ARC-6` again, one variable over, and it was still live when it bit.** The variable
-> defaults to `graph-t15-tiebreakfix.bin` — the **pre-`MSW-` artifact**. `.env.deploy` does not
+> **This was `ARC-6` again, one variable over, and it was still live when it bit.** The variable
+> **defaulted** to `graph-t15-tiebreakfix.bin` — the **pre-`MSW-` artifact**. `.env.deploy` does not
 > set it, and it is per-deploy rather than per-machine, so it must be exported on the command
 > line every time. **An API-only deploy that forgets it also rolls the graph back**, reverting
 > an adoption nobody intended to touch.
@@ -101,11 +101,16 @@ Unlike the image tag, both of these are **per-machine and stable**, so they belo
 > **So: always `cdk diff` first, and read the variable block, not only the image tag.** On an
 > API-only deploy the diff must show `.ImageIdentifier` and nothing else.
 >
-> **The real fix is to make both variables required**, exactly as `ARC-6` did for the image tag
-> five lines below in `app.py` — a defaulted deploy input that names a specific artifact is the
-> same defect in the same file. Deliberately **not** done here: it is a change to deploy
-> behaviour and it is the owner's call, not a documentation session's. Until then this section
-> is the mitigation, and it is a weaker one.
+> **Both variables are now required**, exactly as `ARC-6` did for the image tag — a defaulted
+> deploy input naming a specific artifact is the same defect in the same file. `app.py`
+> `_require()`s both, so a synth that cannot say which graph it is deploying **stops**. This
+> section is no longer the mitigation; it is the record of why the guard exists.
+>
+> ⚠ **The guard is satisfied by a stale value, so never persist these in `.env.deploy`.**
+> `_require()` checks only that a variable is *set*. A value left in the secrets file passes it
+> while naming last month's graph — converting a loud failure back into the silent revert this
+> section is about. Same for `ARTISTPATH_DEPLOY_IMAGE_TAG`. *(Added 2026-09-03 after a session
+> persisted all three during the `unsung.fm` cutover and caught it re-reading §5.)*
 
 > **There is no longer a site password, and there is no username.** `PW-7` removed both on
 > 2026-07-28: `SITE_USERNAME`, `site_password` and `ARTISTPATH_DEPLOY_PASSWORD` are gone.
@@ -131,17 +136,26 @@ password the same day, and this front door is now the only access control there 
 the AWS WAF the Gate 2→3 review assumed. Traffic path:
 
 ```
-browser ──> Cloudflare (musicapp.cmiller.io) ──> CloudFront ──> App Runner
+browser ──> Cloudflare (unsung.fm) ──> CloudFront ──> App Runner
 ```
 
 | Setting | Value |
 |---|---|
-| DNS record | `CNAME musicapp` → `d2n3xqz3pttguf.cloudfront.net`, **Proxied (orange)** |
-| ACM validation record | `_09d26615…` — **DNS-only (grey), and must stay** |
+| Zone | **`unsung.fm`** (registered 2026-09-02). Cloudflare rules are **per-zone** — see the warning below |
+| DNS record | apex `CNAME unsung.fm` → `d2n3xqz3pttguf.cloudfront.net`, **Proxied (orange)**. Apex works via Cloudflare CNAME flattening |
+| ACM validation record | the `_…` CNAME ACM issued for `unsung.fm` — **DNS-only (grey), and must stay** |
 | SSL/TLS mode | **Full (strict)** |
 | Transform Rule | Modify Request Header, static `x-front-door`, value in `ARTISTPATH_FRONT_DOOR_SECRET` |
 | Rate limiting | `URI Path equals /api/path`, by IP, **10 requests / 10 s**, Block 10 s |
 | HTML caching | **Verified none** on 2026-07-28 — no Cache Rule or Page Rule caches HTML or sets "Cache Everything" |
+| Old name | **`cmiller.io` zone**: Redirect Rule `musicapp.cmiller.io/*` → `https://unsung.fm/$1`, 301, path preserved. Verified 2026-09-03 |
+
+> **⚠ Cloudflare rules are scoped to a zone and `unsung.fm` is a different zone from
+> `cmiller.io`.** The Transform Rule and the rate limit were recreated there on 2026-09-02; they
+> were **not** inherited. The ordering matters on any future rename: create them in the new zone
+> **before** flipping `ARTISTPATH_SITE_HOSTNAME`. Flip first and every request arrives with no
+> `x-front-door`, the host now matches `SITE_HOSTNAME`, and `viewer_function.js`'s loop guard
+> returns the refusal page to everyone — including everyone redirected from the old name.
 
 > **⚠ The rate-limit period is 10 s, not the 60 s the plan specifies.** This Cloudflare plan
 > offers **only** 10-second periods, for both the window and the block. **Do not scale the
@@ -567,7 +581,7 @@ SITE=$(aws cloudformation describe-stacks --stack-name ArtistpathStack \
   --query "Stacks[0].Outputs[?OutputKey=='SiteUrl'].OutputValue" --output text)
 
 curl -s "$API/health"                                    # identity of the live graph
-curl -s -o /dev/null -w "%{http_code}\n" "$SITE/"        # expect 301 -> musicapp.cmiller.io
+curl -s -o /dev/null -w "%{http_code}\n" "$SITE/"        # expect 301 -> unsung.fm
 curl -s -o /dev/null -w "%{http_code}\n" "$API/api/artists/search?q=a"   # expect 403
 ```
 
