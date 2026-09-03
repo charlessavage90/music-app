@@ -4,6 +4,14 @@
 the async counterpart to the test suites — it catches the defect class that code review and
 mocked tests structurally cannot.
 
+> ## 📍 THE APP'S ADDRESS IS `https://unsung.fm`, since 2026-09-03
+>
+> **Use it in every new entry.** Entries dated before 2026-09-03 name
+> `musicapp.cmiller.io` and are left exactly as written — they record what was pressed and
+> when, and that name is what was pressed. It is **not** dead: a Cloudflare Redirect Rule
+> 301s it to `unsung.fm` with the path preserved, so an old journey link still opens the
+> same journey. Nothing below needs re-running because of the move.
+
 > ## ⛔ WRITE AN ENTRY ONLY WHEN THERE IS SOMETHING TO PRESS
 >
 > **The trigger is a CHANGE THE OWNER CAN EXERCISE, not a closeout.** If a session changed

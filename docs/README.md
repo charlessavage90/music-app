@@ -1,5 +1,10 @@
 # Documentation map
 
+> **📍 The deployed app is `https://unsung.fm`, since 2026-09-03.** Rows below describe frozen
+> documents that name `musicapp.cmiller.io`; those descriptions are accurate to the documents
+> and are not edited. The old host 301s to the new one with the path preserved. The app is
+> still *named* "Artist Path" in the UI — only the address moved.
+
 **Role: AUTHORITATIVE.** The current classification of every document in `docs/`. Where
 another document disagrees with this one about a document's role, this wins.
 
