@@ -125,15 +125,34 @@ export async function getArtist(mbid: string, signal?: AbortSignal): Promise<Art
   return (await r.json()) as Artist;
 }
 
-export async function getTrack(mbid: string, signal?: AbortSignal): Promise<Track | null> {
+export async function getTrack(
+  mbid: string,
+  index = 0,
+  signal?: AbortSignal,
+): Promise<Track | null> {
+  // `index` is appended only when it is non-zero, so the overwhelmingly common
+  // request stays byte-identical to what it was before LUX-3.
+  const qs = index > 0 ? `?index=${index}` : '';
   const r = await fetchWithTimeout(
-    `${BASE}/artists/${encodeURIComponent(mbid)}/track`,
+    `${BASE}/artists/${encodeURIComponent(mbid)}/track${qs}`,
     { headers: withJourney() },
     TIMEOUT_MS.track,
     signal,
   );
   if (r.status === 204) return null;
   if (!r.ok) throw new ApiError(r.status);
-  const d = (await r.json()) as { preview_url: string; title: string; cover_url: string };
-  return { previewUrl: d.preview_url, title: d.title, coverUrl: d.cover_url };
+  const d = (await r.json()) as {
+    preview_url: string;
+    title: string;
+    cover_url: string;
+    candidate_count?: number;
+  };
+  return {
+    previewUrl: d.preview_url,
+    title: d.title,
+    coverUrl: d.cover_url,
+    // `?? 1` so a frontend deployed ahead of the API degrades to "one track,
+    // no control" rather than hiding every card's clip.
+    candidateCount: d.candidate_count ?? 1,
+  };
 }

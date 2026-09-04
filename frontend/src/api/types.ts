@@ -11,6 +11,8 @@ export interface Track {
   previewUrl: string;
   title: string;
   coverUrl: string;
+  /** Playable tracks this artist has. 1 means there is nothing to cycle to. */
+  candidateCount: number;
 }
 
 export interface Exclusion {

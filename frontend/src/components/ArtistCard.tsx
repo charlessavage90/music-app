@@ -25,15 +25,23 @@ interface Props {
    * signed and short-lived, so the player asks for one at the moment of play (C2).
    */
   onClipResolved?: (mbid: string, hasClip: boolean) => void;
+  /** Which of this artist's candidate clips to show. Owned by JourneyList. */
+  clipIndex?: number;
+  /**
+   * Cycle to this artist's next clip. Handed the candidate count so the caller
+   * can wrap without a second source of truth for it.
+   */
+  onCycleClip?: (candidateCount: number) => void;
 }
 
 export function ArtistCard({
   artist, isPlaying, isCurrent, isEndpoint, endpointLabel, isNew,
-  onPlay, onToggle, onBypass, onClipResolved,
+  onPlay, onToggle, onBypass, onClipResolved, clipIndex, onCycleClip,
 }: Props) {
-  const clip = useClip(artist.mbid);
+  const clip = useClip(artist.mbid, clipIndex ?? 0);
   const playable = clip.status === 'ready';
   const silent = clip.status === 'none';
+  const candidates = clip.track?.candidateCount ?? 0;
 
   useEffect(() => {
     if (clip.status === 'loading') return;
@@ -102,6 +110,24 @@ export function ArtistCard({
             </span>
             {playable && <span className="flex-none text-[var(--color-label)]">· 0:30</span>}
           </div>
+          {/* LUX-3. The app asks a listener to judge an unknown artist on one
+              30-second clip; if that clip is unrepresentative the artist is
+              rejected and nobody ever finds out. Absent when there is nothing to
+              cycle to — the endpoint states the count, the UI never guesses it,
+              and an artist with exactly one playable track is the population
+              this app exists to deliver (TCE-/TCR-).
+
+              Reads as "try another", never as a deep well: Deezer's /top is
+              popularity-ranked, so each press is genuinely a less-known track. */}
+          {playable && candidates > 1 && onCycleClip && (
+            <button
+              type="button"
+              onClick={() => onCycleClip(candidates)}
+              className="mt-1 text-[11.5px] text-[var(--color-note)] underline-offset-2 hover:text-[var(--color-accent)] hover:underline"
+            >
+              Try another track
+            </button>
+          )}
           {isPlaying && (
             <div className="mt-1.5 text-[10.5px] font-medium uppercase tracking-[.1em] text-[var(--color-accent)]">
               ▮▮▮ now playing

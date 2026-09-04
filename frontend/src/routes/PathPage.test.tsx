@@ -123,7 +123,7 @@ const AUDIBLE_THREE_STOP = [
 
 /** Renders a path whose cards have clips, and starts one playing. */
 async function renderPlaying(user: ReturnType<typeof userEvent.setup>, url: string) {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   vi.spyOn(client, 'buildPath')
     .mockResolvedValueOnce({ artists: AUDIBLE_THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] })
     // The rebuild never arrives, so anything that stops only on rebuild stays playing.

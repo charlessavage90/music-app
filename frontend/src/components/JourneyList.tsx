@@ -29,8 +29,26 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     [artists, hasClip],
   );
 
-  const player = usePlayer(playables, resolveFreshUrl);
+  // Which clip each card is showing. Per-journey rather than per-card so the
+  // player can resolve the SAME track the card is displaying — the card owns
+  // the choice, the player owns the audio, and they must not disagree.
+  const [clipIndex, setClipIndex] = useState<Record<string, number>>({});
+
+  const player = usePlayer(playables, (mbid) =>
+    resolveFreshUrl(mbid, clipIndex[mbid] ?? 0),
+  );
   const currentName = artists.find((a) => a.mbid === player.currentMbid)?.name ?? null;
+
+  function cycleClip(mbid: string, candidateCount: number) {
+    // The audio in flight is the OLD track. Restarting it here would race the
+    // state update that chooses the new one, so the card falls silent and the
+    // user presses play — one press, and unambiguous about what is playing.
+    if (player.currentMbid === mbid) player.stop();
+    setClipIndex((prev) => ({
+      ...prev,
+      [mbid]: ((prev[mbid] ?? 0) + 1) % candidateCount,
+    }));
+  }
 
   // Silence the previous path the moment a new one arrives — otherwise a clip
   // from an artist who is no longer on the journey keeps playing over it.
@@ -71,6 +89,8 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
               onClipResolved={(mbid, available) =>
                 setHasClip((prev) => ({ ...prev, [mbid]: available }))
               }
+              clipIndex={clipIndex[artist.mbid] ?? 0}
+              onCycleClip={(count) => cycleClip(artist.mbid, count)}
             />
             {/* Some pairs cannot be given a stop: one of the two holds a single
                 connection in the graph, and it is to the other. Saying so beats

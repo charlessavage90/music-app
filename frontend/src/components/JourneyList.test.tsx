@@ -11,7 +11,7 @@ const artists = [
 afterEach(() => vi.restoreAllMocks());
 
 test('renders every artist as a card', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   render(<JourneyList artists={artists} stopRule="natural" onBypass={vi.fn()} />);
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
   expect(screen.getByText('Kraftwerk')).toBeInTheDocument();
@@ -19,7 +19,7 @@ test('renders every artist as a card', async () => {
 
 test('clicking play marks that card now-playing', async () => {
   const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   render(<JourneyList artists={artists} stopRule="natural" onBypass={vi.fn()} />);
   const firstPlay = (await screen.findAllByRole('button', { name: /play/i }))[0];
   await waitFor(() => expect(firstPlay).toBeEnabled());
@@ -28,7 +28,7 @@ test('clicking play marks that card now-playing', async () => {
 });
 
 test('bypass is offered on the artists in the middle, never on the two you chose', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   const threeStop = [
     artists[0],
     { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
@@ -51,7 +51,7 @@ test('a card left mounted past the signature lifetime re-signs before playing', 
   const user = userEvent.setup();
   vi.spyOn(Date, 'now').mockReturnValue(0);
   const spy = vi.spyOn(client, 'getTrack');
-  spy.mockResolvedValue({ previewUrl: 'signed-at-zero', title: 'T', coverUrl: 'c' });
+  spy.mockResolvedValue({ previewUrl: 'signed-at-zero', title: 'T', coverUrl: 'c', candidateCount: 1 });
 
   const stale = [
     { mbid: 'stale-a', name: 'Alice Coltrane', disambiguation: '', popularity: 1 },
@@ -64,7 +64,7 @@ test('a card left mounted past the signature lifetime re-signs before playing', 
 
   // The tab sits open for twenty minutes. Nothing unmounts, nothing navigates.
   vi.spyOn(Date, 'now').mockReturnValue(20 * 60 * 1000);
-  spy.mockResolvedValue({ previewUrl: 'signed-later', title: 'T', coverUrl: 'c' });
+  spy.mockResolvedValue({ previewUrl: 'signed-later', title: 'T', coverUrl: 'c', candidateCount: 1 });
 
   await user.click(firstPlay);
 
@@ -73,7 +73,7 @@ test('a card left mounted past the signature lifetime re-signs before playing', 
 
 test('audio stops when the path is recomputed', async () => {
   const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   const { rerender } = render(<JourneyList artists={artists} stopRule="natural" onBypass={vi.fn()} />);
   const firstPlay = (await screen.findAllByRole('button', { name: /play/i }))[0];
   await waitFor(() => expect(firstPlay).toBeEnabled());
@@ -87,19 +87,19 @@ test('audio stops when the path is recomputed', async () => {
 });
 
 test('explains itself when the two artists have nobody between them', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   render(<JourneyList artists={artists} stopRule="adjacent_only" onBypass={vi.fn()} />);
   expect(screen.getByText(/next to each other/i)).toBeInTheDocument();
 });
 
 test('says nothing on an ordinary journey', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   render(<JourneyList artists={artists} stopRule="natural" onBypass={vi.fn()} />);
   expect(screen.queryByText(/next to each other/i)).not.toBeInTheDocument();
 });
 
 test('says nothing when a stop was forced in', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   render(<JourneyList artists={artists} stopRule="forced" onBypass={vi.fn()} />);
   expect(screen.queryByText(/next to each other/i)).not.toBeInTheDocument();
 });

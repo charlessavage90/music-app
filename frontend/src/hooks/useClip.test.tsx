@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, renderHook, screen, waitFor } from '@testing-library/react';
 import { afterEach, expect, test, vi } from 'vitest';
 import * as client from '@/api/client';
 import { resolveFreshUrl, useClip } from './useClip';
@@ -11,7 +11,7 @@ function Harness({ mbid }: { mbid: string }) {
 }
 
 test('loads a clip and exposes the track', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(<Harness mbid="miles" />);
   await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:So What'));
 });
@@ -23,7 +23,7 @@ test('204 becomes status none', async () => {
 });
 
 test('caches by mbid — second mount does not refetch', async () => {
-  const spy = vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  const spy = vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   const { unmount } = render(<Harness mbid="cached" />);
   await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:T'));
   unmount();
@@ -38,11 +38,11 @@ test('resolveFreshUrl re-signs a URL held longer than a signature lasts', async 
   // Pressing play must not hand the player that URL.
   vi.spyOn(Date, 'now').mockReturnValue(0);
   const spy = vi.spyOn(client, 'getTrack');
-  spy.mockResolvedValue({ previewUrl: 'signed-at-zero', title: 'T', coverUrl: 'c' });
+  spy.mockResolvedValue({ previewUrl: 'signed-at-zero', title: 'T', coverUrl: 'c', candidateCount: 1 });
 
   expect(await resolveFreshUrl('mounted')).toBe('signed-at-zero');
 
-  spy.mockResolvedValue({ previewUrl: 'signed-later', title: 'T', coverUrl: 'c' });
+  spy.mockResolvedValue({ previewUrl: 'signed-later', title: 'T', coverUrl: 'c', candidateCount: 1 });
   vi.spyOn(Date, 'now').mockReturnValue(20 * 60 * 1000); // 20 minutes on one card
 
   expect(await resolveFreshUrl('mounted')).toBe('signed-later');
@@ -54,7 +54,7 @@ test('resolveFreshUrl reuses a URL signed moments ago rather than refetching', a
   // twice in a row must not cost two round trips.
   vi.spyOn(Date, 'now').mockReturnValue(0);
   const spy = vi.spyOn(client, 'getTrack');
-  spy.mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  spy.mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
 
   expect(await resolveFreshUrl('impatient')).toBe('u');
   vi.spyOn(Date, 'now').mockReturnValue(30 * 1000);
@@ -73,11 +73,24 @@ test('resolveFreshUrl returns null rather than throwing when the lookup fails', 
   expect(await resolveFreshUrl('failing-resolve')).toBeNull();
 });
 
+test('a different index is a different cache entry, not a stale hit', async () => {
+  const getTrack = vi.spyOn(client, 'getTrack').mockImplementation(async (_m, index = 0) => ({
+    previewUrl: `u${index}`, title: `Track ${index}`, coverUrl: 'c', candidateCount: 3,
+  }));
+  const { result, rerender } = renderHook(({ i }) => useClip('same-mbid', i), {
+    initialProps: { i: 0 },
+  });
+  await waitFor(() => expect(result.current.track?.title).toBe('Track 0'));
+  rerender({ i: 1 });
+  await waitFor(() => expect(result.current.track?.title).toBe('Track 1'));
+  expect(getTrack).toHaveBeenCalledTimes(2);
+});
+
 test('refetches a clip old enough that its signed URL has expired', async () => {
   // C2, browser side: this cache holds the signed preview URL too, so on a tab
   // left open it serves dead audio exactly like the 30-day server cache did.
   vi.spyOn(Date, 'now').mockReturnValue(0);
-  const spy = vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  const spy = vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
 
   const { unmount } = render(<Harness mbid="longopen" />);
   await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:T'));
