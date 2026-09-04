@@ -8,6 +8,8 @@ import { PathStatus } from '@/components/PathStatus';
 import { PathSkeleton } from '@/components/PathSkeleton';
 import { PathIntro } from '@/components/PathIntro';
 import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
+import { RouteHistory } from '@/components/RouteHistory';
+import { useBypassedArtists } from '@/hooks/useBypassedArtists';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
 
 export function PathPage() {
@@ -42,7 +44,11 @@ export function PathPage() {
     go(addExclusion(params, mbid, 'known'), 'known');
   }
 
-  const hasBypasses = decodeExclusions(params).length > 0;
+  // Press order, oldest first — one signal means one comma list (LUX-1), and
+  // `addExclusion` appends. The panel reverses it for display.
+  const bypassedIds = decodeExclusions(params).map((e) => e.id);
+  const hasBypasses = bypassedIds.length > 0;
+  const bypassed = useBypassedArtists(bypassedIds);
 
   // The names come from the path itself; the ids from the URL, so the link
   // still works while the first path is loading or has failed.
@@ -115,6 +121,7 @@ export function PathPage() {
             </div>
             {feedback.notice && <RerollNotice reason={feedback.notice} />}
           </div>
+          <RouteHistory bypassed={bypassed} />
         </div>
       )}
     </main>
