@@ -148,8 +148,11 @@ change to authorize). **This is spec-sanctioned, not a defect** — §3's own pr
 cache-shape change is "pre-`C2` items are treated as a miss and overwritten; use it, do not
 write a migration," and `LUX-3` follows that precedent deliberately.
 
-This belongs on `TEST-QUEUE.md` or an equivalent pre-deploy checklist so a deployer sees it
-before, not after, flipping the switch — it was otherwise nowhere a deployer would look.
+This belongs on the deploy runbook (`infra/README.md`) and the PR body, not `TEST-QUEUE.md` —
+that file's own header restricts it to things the owner can press and, by his 2026-08-07
+ruling, to defects and functionality; a deploy-time caveat about expected cache behaviour is
+neither, and it was otherwise nowhere a deployer would look. Added to `infra/README.md` §5
+(deploy the full stack) so a deployer meets it before flipping the switch.
 
 ---
 

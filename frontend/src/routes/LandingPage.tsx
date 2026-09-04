@@ -128,9 +128,9 @@ export function LandingPage() {
 
       {/* A miniature of the journey the app builds: your artist, someone in
           between, their artist. Decorative — the three dots carry the same
-          colours used elsewhere on the page (an error state and the bypass
-          control) and the rail. The clip-length line that sat under this was
-          removed 2026-07-28 at the owner's request. */}
+          colours used elsewhere on the page (an error state and the
+          destination field's dot) and the rail. The clip-length line that sat
+          under this was removed 2026-07-28 at the owner's request. */}
       <div className="mt-auto flex flex-col items-center pt-10">
         <div className="flex items-center gap-2" aria-hidden>
           <span className="block size-[5px] rounded-full bg-[var(--color-away)]" />
