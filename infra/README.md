@@ -679,6 +679,16 @@ refusal does not contain the secret.
 - **Bad graph:** the artifact bucket is versioned (`TR-9`), so restore the previous version
   id and re-deploy. The bucket is `RETAIN` — deleting the stack does not delete the graph.
 - **Bad frontend:** rebuild from the previous commit, `s3 sync` again, invalidate.
+- **Bad hostname:** set `ARTISTPATH_SITE_HOSTNAME` and `ARTISTPATH_CERTIFICATE_ARN` back and
+  `cdk deploy` — about four minutes. The `musicapp.cmiller.io` certificate
+  (`…/0f61db68-cfc6-42e9-938c-70b5b6f081e5`) is **deliberately kept, unattached**, for exactly
+  this. It costs nothing and ACM auto-renews it from the validation CNAME still in the
+  `cmiller.io` zone.
+
+  > **Deferral, 2026-09-03 — success condition: the owner says the move is settled.** Then
+  > delete that certificate *and* its validation CNAME together, and delete this bullet. Until
+  > he does, both stay: deleting the CNAME alone breaks the renewal of a certificate we are
+  > still holding as the rollback path, which fails silently about thirteen months later.
 
 ## 10. If the stack is ever torn down and recreated
 

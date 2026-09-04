@@ -6,7 +6,10 @@ states what to do next. `CLAUDE.md` points here and does not restate it; so does
 document about status, **the fresher of those two wins and this document is stale** — fix it
 rather than working around it.
 
-**Maintenance.** Rewritten wholesale at `closeout`, not appended to. It is short by design:
+**Maintenance.** Rewritten wholesale at `closeout`, not appended to. **One exception: the
+STANDING FACT block below is preserved in place across every rewrite** — it is a durable fact
+about the deployment, not status, and it is the only thing here that a rewrite must carry
+forward rather than replace. It is short by design:
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and its raw
 `cb_scores.json`); the adopted graph's stay in
@@ -24,12 +27,22 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > ⚠ **The app is still NAMED "Artist Path" in the UI.** Only the address moved. A rename to
 > "Unsung" is scoped but unapproved — do not assume it has happened.
 
-**Last updated: 2026-09-01 (later), when THE OWNER CONFIRMED THE REVERT AND DISCHARGED THE
-QUEUE.** The extended 117k graph was reverted earlier the same day after his test fired the
+**Last updated: 2026-09-03, when THE APP MOVED TO `unsung.fm`** — infrastructure and
+documentation only: no application code, no graph, no cost function, and the served bytes are
+unchanged. The 2026-09-01 status below is **not superseded** and still holds in full.
+**Newly available and NOT approved: renaming the app to "Unsung"** to match the domain. The
+UI still says "Artist Path". It is scoped — `index.html`, `LandingPage.tsx`, two test
+assertions and the refusal page in `viewer_function.js` — and it needs two owner decisions:
+whether the landing lines he wrote on 2026-08-07 change, and whether the page should say the
+first journey is the on-ramp rather than the promise.
+
+**Previously, and still current: 2026-09-01 (later), when THE OWNER CONFIRMED THE REVERT AND
+DISCHARGED THE QUEUE.** The extended 117k graph was reverted earlier the same day after his test fired the
 revert criterion he set on 2026-08-10; he has since confirmed the old map is live and
 **reported nothing wrong**. **THERE IS NO NEXT ACTION ASSIGNED. Nothing is blocked, no
-session owes anything, and the test queue is EMPTY** — zero live items, which is a valid and
-common state and never evidence a session forgot. Do not discharge either 2026-09-01 entry
+session owes anything, and the test queue holds ONE live item** — the
+2026-09-03 press of the new address, two minutes. An *empty* queue is also a valid and common
+state and never evidence a session forgot. Do not discharge either 2026-09-01 entry
 twice, and do not re-queue "tell me how it feels": his long-run evaluation is continuous and
 this file explicitly does not hold it (owner ruling, 2026-08-07).
 **The landing-dot fix (PR #92) is LIVE and was NOT reverted** — it is frontend and rode the
