@@ -50,7 +50,7 @@ live and which entries are historical; the records stay as written.
 moved. Recorded in `NEXT.md` as available and unapproved, with what it touches, so no session
 reads `unsung.fm` and assumes the rename landed.
 
-## §3 Defects found — one in this session's own work
+## §3 Defects found — both in this session's own work, both caught before shipping
 
 **Per-deploy inputs were persisted into `infra/.env.deploy`, and that is `ARC-6`/`DEP-34`
 again.** The file set neither `ARTISTPATH_DEPLOY_IMAGE_TAG`, `_GRAPH_KEY` nor `_SIDECAR`, all
@@ -67,7 +67,7 @@ the `DEP-34` block so the next session does not repeat it.
 The deploy itself was unaffected — the values were read off the live service and the `cdk diff`
 confirmed they reproduced production rather than moving it.
 
-**A second defect in this session's own work, found by `doc-auditor` at B1.** The standing
+**The second, found by `doc-auditor` at B1.** The standing
 note added to `NEXT.md` claimed it *"survives a `closeout` rewrite"* — but that document's
 Maintenance rule says it is *"rewritten wholesale at `closeout`"* and carried no exception. The
 claim was a **directive wearing the clothes of a description**, and the next closeout could
