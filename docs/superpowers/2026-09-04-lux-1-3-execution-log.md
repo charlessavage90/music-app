@@ -112,6 +112,45 @@ discharged (see §2 below).
 
 ---
 
+**Final wave — take one more small documentary pass, deviating from "there is no second fix
+wave".** The fix-wave re-review returned five Minor residuals, and the process rule says to park
+them rather than open another round.
+
+**Decision:** park one, fix four. The deciding one is `LandingPage.tsx`'s rewritten comment,
+which claimed the landing dot shares a colour with the bypass control — it shares it with the
+destination field's dot and the rail. That is not a pre-existing residual: it is a **new false
+statement introduced by the wave whose entire purpose was removing false statements**, and
+leaving it would follow the rule against its own purpose. Folded in three other one-line
+documentary errors while there: a `docs/README.md` pointer saying "above" about a row that sits
+below, a `PF-3` note giving `_resolver`'s signature with a `breaker` parameter that
+`test_clip_identity.py`'s copy does not have, and the retarget below. Scope was held to
+documentation — no code, no tests, no assertions — and the resulting diff was read directly
+rather than spending a full review seat on four comment lines.
+**Cost if wrong:** one extra small dispatch.
+
+**Final wave — the deploy note does not belong on `TEST-QUEUE.md`, and that file says so.** §3 of
+this log originally said the operational note "belongs on `TEST-QUEUE.md` or an equivalent
+pre-deploy checklist".
+
+**Decision:** wrong destination, corrected. `TEST-QUEUE.md`'s own header states an entry is
+written **only when there is something the owner can press**, and **only for defects and
+functionality** (owner ruling, 2026-08-07). A deploy-time caveat is neither, and filing it there
+is exactly the misuse those rules exist to prevent — it is what broke that file before. The real
+destinations are `infra/README.md`, the runbook a deployer actually reads, and the PR body. Both
+the claim and the placement were fixed.
+**Cost if wrong:** the note sits in the runbook rather than the queue; it is committed in both
+the runbook and this log either way.
+
+**Parked, not fixed — the dead-index reset makes higher candidates briefly unreachable.** After a
+cycled clip returns nothing and the index resets to 0, a card whose second candidate is dead
+bounces between the first two on every press, and candidates beyond them stay unreachable for
+the client cache window.
+
+**Decision:** leave it. It is strictly better than the stranding it replaced — before the fix the
+control vanished entirely with no way back short of a reload — and it is exactly what the
+instruction asked for. **Success condition for revisiting:** a user reports pressing "try another
+track" and getting the same two tracks in rotation.
+
 ## 2. Deferred findings and their success conditions
 
 Some of these were fixed in this wave; they are listed anyway so this file is the complete
