@@ -235,7 +235,7 @@ def check_acceptance(graph: Graph, criteria: AcceptanceCriteria) -> None:
     # empty name matches no query, and an empty query returns nothing) and
     # cannot resolve a clip (`api/…/clips.py` passes the name itself as the
     # provider query). So the ONLY way one can ever reach a user is as a blank
-    # interior card that the bypass buttons will still operate on.
+    # interior card that the bypass control will still operate on.
     #
     # The cause is upstream and silent rather than a parse failure: an artist's
     # name is only ever observed when it appears as *someone else's* neighbour

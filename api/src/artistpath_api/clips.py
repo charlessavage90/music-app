@@ -42,11 +42,13 @@ class CatalogueUnavailable(Exception):
 
 
 def _fold(name: str) -> str:
-    """Casefold, strip accents, and collapse whitespace for artist matching.
+    """Casefold, strip accents, and collapse whitespace for name matching.
 
     MusicBrainz and the clip catalogues disagree routinely on diacritics and
     casing for the same artist, so an exact comparison would reject correct
-    matches and leave the card silent.
+    matches and leave the card silent. Also reused by `_dedupe_by_title`
+    (LUX-3): the same normalisation problem applies to comparing two track
+    titles from the same catalogue.
     """
     decomposed = unicodedata.normalize("NFKD", name)
     stripped = "".join(c for c in decomposed if not unicodedata.combining(c))
@@ -56,6 +58,47 @@ def _fold(name: str) -> str:
 def same_artist(candidate: str | None, requested: str) -> bool:
     """Does this search result actually belong to the artist we asked for? (C1)"""
     return bool(candidate) and _fold(candidate) == _fold(requested)
+
+
+def _dedupe_by_title(
+    found: list[tuple[TrackIdentity, str]],
+) -> list[tuple[TrackIdentity, str]]:
+    """Collapse rows that are the same recording under different track ids.
+
+    A catalogue routinely lists one recording several times -- as a single, on
+    an album, on a compilation -- each with its own track_id. That is most
+    visible on the NAME-SEARCH path (`_from_deezer`), which is what an artist
+    with no recorded Deezer id falls back to, and that population skews
+    obscure -- exactly who this app exists to serve. The spec's "try a
+    DIFFERENT clip" is not met by two rows that are the same song again, so
+    LUX-3's candidate list must not count them twice.
+
+    Keyed on the FOLDED TITLE, not track_id: distinct ids are exactly the
+    symptom being collapsed, so deduping on them would do nothing. Keeps the
+    FIRST occurrence, since every caller (and the ordering claim in their
+    docstrings) relies on the provider's own ordering -- popularity for
+    /top, relevance for search.
+
+    Accepted trade-off, decided here rather than left implicit: two
+    genuinely different recordings that happen to share a title -- a
+    re-recording, a live version with the same name -- are merged into one
+    candidate. That is judged cheaper than presenting "another track" that
+    turns out to be the same song again.
+
+    The opposite and more common gap is left open, deliberately, not fixed
+    here: `_fold` does not strip bracketed suffixes, so "Song" and "Song
+    (Remastered 2011)" fold to different keys and survive as two separate
+    candidates even though they are the same recording.
+    """
+    seen: set[str] = set()
+    deduped: list[tuple[TrackIdentity, str]] = []
+    for identity, preview in found:
+        key = _fold(identity.title)
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append((identity, preview))
+    return deduped
 
 
 def _album_cover(row: dict) -> str:
@@ -105,22 +148,36 @@ class TrackIdentity:
     cover_url: str
 
 
+@dataclass(frozen=True, slots=True)
+class Resolution:
+    """A clip and how many others the artist has.
+
+    `count` is what lets the UI hide a "try another" control that would do
+    nothing. Thin catalogues are a studied population here (TCE-/TCR-) and are
+    exactly the artists this app exists to deliver, so the endpoint states the
+    count rather than letting the frontend guess it.
+    """
+
+    clip: Clip | None
+    count: int
+
+
 class ClipCache(Protocol):
-    async def get(self, mbid: str) -> TrackIdentity | None: ...
-    async def put(self, mbid: str, identity: TrackIdentity) -> None: ...
+    async def get(self, mbid: str) -> list[TrackIdentity] | None: ...
+    async def put(self, mbid: str, identities: list[TrackIdentity]) -> None: ...
 
 
 class InMemoryClipCache:
     """Dev/test cache. Not shared across processes."""
 
     def __init__(self) -> None:
-        self._store: dict[str, TrackIdentity] = {}
+        self._store: dict[str, list[TrackIdentity]] = {}
 
-    async def get(self, mbid: str) -> TrackIdentity | None:
+    async def get(self, mbid: str) -> list[TrackIdentity] | None:
         return self._store.get(mbid)
 
-    async def put(self, mbid: str, identity: TrackIdentity) -> None:
-        self._store[mbid] = identity
+    async def put(self, mbid: str, identities: list[TrackIdentity]) -> None:
+        self._store[mbid] = identities
 
 
 class DynamoClipCache:
@@ -152,37 +209,48 @@ class DynamoClipCache:
             self._table = boto3.resource("dynamodb").Table(self._cfg.clip_table_name)
         return self._table
 
-    def _get_sync(self, mbid: str) -> TrackIdentity | None:
+    def _get_sync(self, mbid: str) -> list[TrackIdentity] | None:
         item = self._get_table().get_item(Key={"mbid": mbid}).get("Item")
         # Items written before C2 carry a long-expired URL and no track id.
-        # They cannot be re-resolved, so they are a miss and get overwritten.
-        if not item or "track_id" not in item:
+        # Items written before LUX-3 carry a single flat track and cannot say
+        # how many candidates there were. Both are a miss and get overwritten;
+        # the 30-day TTL (clip_ttl_days) drains the old shapes unaided, which is
+        # why there is no migration here and must not be one.
+        if not item or "tracks" not in item:
             return None
-        return TrackIdentity(
-            source=item["source"],
-            track_id=item["track_id"],
-            title=item["title"],
-            cover_url=item["cover_url"],
-        )
+        return [
+            TrackIdentity(
+                source=t["source"],
+                track_id=t["track_id"],
+                title=t["title"],
+                cover_url=t["cover_url"],
+            )
+            for t in item["tracks"]
+        ]
 
-    def _put_sync(self, mbid: str, identity: TrackIdentity) -> None:
+    def _put_sync(self, mbid: str, identities: list[TrackIdentity]) -> None:
         ttl = int(time.time()) + self._cfg.clip_ttl_days * 86400
         self._get_table().put_item(
             Item={
                 "mbid": mbid,
-                "source": identity.source,
-                "track_id": identity.track_id,
-                "title": identity.title,
-                "cover_url": identity.cover_url,
+                "tracks": [
+                    {
+                        "source": i.source,
+                        "track_id": i.track_id,
+                        "title": i.title,
+                        "cover_url": i.cover_url,
+                    }
+                    for i in identities
+                ],
                 "ttl": ttl,
             }
         )
 
-    async def get(self, mbid: str) -> TrackIdentity | None:
+    async def get(self, mbid: str) -> list[TrackIdentity] | None:
         return await asyncio.to_thread(self._get_sync, mbid)
 
-    async def put(self, mbid: str, identity: TrackIdentity) -> None:
-        await asyncio.to_thread(self._put_sync, mbid, identity)
+    async def put(self, mbid: str, identities: list[TrackIdentity]) -> None:
+        await asyncio.to_thread(self._put_sync, mbid, identities)
 
 
 class ClipResolver:
@@ -256,49 +324,64 @@ class ClipResolver:
         return body
 
     async def resolve(
-        self, mbid: str, artist_name: str, deezer_artist_id: str = ""
-    ) -> Clip | None:
+        self,
+        mbid: str,
+        artist_name: str,
+        deezer_artist_id: str = "",
+        index: int = 0,
+    ) -> Resolution:
         """Resolve a playable clip, re-signing the URL on every request (C2).
 
-        A cached identity costs one lookup. A cold artist costs one search,
-        whose response already carries a signed URL — so the common paths are
-        one round trip each.
+        A cached candidate list costs one lookup plus one re-sign. A cold artist
+        costs one search, whose response already carries a signed URL for every
+        row — so the common paths are one round trip each, as before LUX-3.
+
+        `index` selects among the artist's candidates and WRAPS: the frontend
+        holds it and can hold a stale one, and wrapping keeps "next" correct
+        rather than handing the user an error they cannot act on.
         """
         # A cache failure must never reach the caller. The endpoint's contract
         # is a clip or silence, never a 500 (see this module's docstring), and
         # in production the cache is DynamoDB, which can throttle (DEP-12).
         try:
-            identity = await self._cache.get(mbid)
+            identities = await self._cache.get(mbid)
         except Exception:
-            identity = None
+            identities = None
 
-        if identity is not None:
+        if identities:
+            chosen = identities[index % len(identities)]
             try:
-                url = await self._preview_url(identity)
+                url = await self._preview_url(chosen)
             except CatalogueUnavailable:
                 # Throttled, not missing. Falling through to _search would ask
                 # the SAME service twice more for the same artist and harden
                 # the block (G3-A4). The card is silent for this request; the
-                # identity stays cached, so once we are let back in the next
+                # identities stay cached, so once we are let back in the next
                 # request costs one call again.
-                return None
+                return Resolution(None, len(identities))
             if url:
-                return Clip(url, identity.title, identity.cover_url, identity.source)
-            # The track has left the catalogue. Identity is stable, not
-            # permanent, so fall through and find the artist another one.
+                return Resolution(
+                    Clip(url, chosen.title, chosen.cover_url, chosen.source),
+                    len(identities),
+                )
+            # That track has left the catalogue. Identity is stable, not
+            # permanent, so fall through and find the artist fresh ones.
 
         found = await self._search(artist_name, deezer_artist_id)
-        if found is None:
-            return None
-        identity, url = found
+        if not found:
+            return Resolution(None, 0)
+        identities = [identity for identity, _ in found]
         # A write failure happens AFTER a successful lookup, so the clip is
         # already in hand. Losing it to a cache error would discard work we
         # have done and silence a card that plays perfectly well (DEP-26).
         try:
-            await self._cache.put(mbid, identity)
+            await self._cache.put(mbid, identities)
         except Exception:
             pass
-        return Clip(url, identity.title, identity.cover_url, identity.source)
+        chosen, url = found[index % len(found)]
+        return Resolution(
+            Clip(url, chosen.title, chosen.cover_url, chosen.source), len(found)
+        )
 
     async def _preview_url(self, identity: TrackIdentity) -> str | None:
         """Re-sign a known track. Returns None if it is no longer available."""
@@ -317,7 +400,7 @@ class ClipResolver:
 
     async def _search(
         self, artist_name: str, deezer_artist_id: str = ""
-    ) -> tuple[TrackIdentity, str] | None:
+    ) -> list[tuple[TrackIdentity, str]]:
         """Try each catalogue once, skipping any that is refusing us.
 
         Falling through to a DIFFERENT service is not amplification — it is the
@@ -334,7 +417,7 @@ class ClipResolver:
         if deezer_artist_id:
             try:
                 found = await self._from_deezer_artist(deezer_artist_id)
-                if found is not None:
+                if found:
                     return found
             except CatalogueUnavailable:
                 # Deezer is refusing us. Searching it by name now would be the
@@ -346,65 +429,78 @@ class ClipResolver:
             try:
                 found = await self._from_deezer(artist_name)
             except CatalogueUnavailable:
-                found = None
-            if found is not None:
+                found = []
+            if found:
                 return found
         try:
             return await self._from_itunes(artist_name)
         except CatalogueUnavailable:
-            return None
+            return []
 
     async def _from_deezer_artist(
         self, deezer_artist_id: str
-    ) -> tuple[TrackIdentity, str] | None:
-        """Top track for a SPECIFIC Deezer artist. No name matching anywhere.
+    ) -> list[tuple[TrackIdentity, str]]:
+        """Top tracks for a SPECIFIC Deezer artist. No name matching anywhere.
 
         `same_artist` is deliberately not called: the id already names the
         artist, and there is nothing to compare a name against that would not
-        re-introduce the defect this exists to remove.
+        re-introduce the defect this exists to remove (BYP-13).
+
+        Every playable row is kept (LUX-3), in the order Deezer returned them,
+        which for /top is popularity-ranked — so the second candidate is
+        genuinely the second-best-known track.
         """
         body = await self._get_from(
             "deezer",
             f"{self._cfg.deezer_artist_url}/{deezer_artist_id}/top",
             {"limit": self._cfg.clip_search_limit},
         )
+        found: list[tuple[TrackIdentity, str]] = []
         for row in body.get("data", []):
             preview, track_id = row.get("preview"), row.get("id")
             if preview and track_id:
-                return (
-                    TrackIdentity(
-                        source="deezer",
-                        track_id=str(track_id),
-                        title=str(row.get("title") or ""),
-                        cover_url=_album_cover(row),
-                    ),
-                    preview,
+                found.append(
+                    (
+                        TrackIdentity(
+                            source="deezer",
+                            track_id=str(track_id),
+                            title=str(row.get("title") or ""),
+                            cover_url=_album_cover(row),
+                        ),
+                        preview,
+                    )
                 )
-        return None
+        return _dedupe_by_title(found)
 
-    async def _from_deezer(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
+    async def _from_deezer(self, artist_name: str) -> list[tuple[TrackIdentity, str]]:
         body = await self._get_from(
             "deezer",
             self._cfg.deezer_search_url,
             {"q": artist_name, "limit": self._cfg.clip_search_limit},
         )
+        found: list[tuple[TrackIdentity, str]] = []
         for row in body.get("data", []):
             preview, track_id = row.get("preview"), row.get("id")
             artist = row.get("artist") or {}
             if preview and track_id and same_artist(artist.get("name"), artist_name):
-                identity = TrackIdentity(
-                    source="deezer",
-                    track_id=str(track_id),
-                    # `or ""` not a .get default: these keys can be present
-                    # with a JSON null, and TrackOut's fields are typed str,
-                    # so None here becomes a 500 at the endpoint.
-                    title=str(row.get("title") or ""),
-                    cover_url=_album_cover(row),
+                found.append(
+                    (
+                        TrackIdentity(
+                            source="deezer",
+                            track_id=str(track_id),
+                            # `or ""` not a .get default: these keys can be
+                            # present with a JSON null, and TrackOut's fields
+                            # are typed str, so None here becomes a 500 at the
+                            # endpoint.
+                            title=str(row.get("title") or ""),
+                            cover_url=_album_cover(row),
+                        ),
+                        preview,
+                    )
                 )
-                return identity, preview
-        return None
+        return _dedupe_by_title(found)
 
-    async def _from_itunes(self, artist_name: str) -> tuple[TrackIdentity, str] | None:
+    async def _from_itunes(self, artist_name: str) -> list[tuple[TrackIdentity, str]]:
         body = await self._get_from(
             "itunes",
             self._cfg.itunes_search_url,
@@ -414,14 +510,19 @@ class ClipResolver:
                 "limit": self._cfg.clip_search_limit,
             },
         )
+        found: list[tuple[TrackIdentity, str]] = []
         for row in body.get("results", []):
             preview, track_id = row.get("previewUrl"), row.get("trackId")
             if preview and track_id and same_artist(row.get("artistName"), artist_name):
-                identity = TrackIdentity(
-                    source="itunes",
-                    track_id=str(track_id),
-                    title=str(row.get("trackName") or ""),
-                    cover_url=str(row.get("artworkUrl100") or ""),
+                found.append(
+                    (
+                        TrackIdentity(
+                            source="itunes",
+                            track_id=str(track_id),
+                            title=str(row.get("trackName") or ""),
+                            cover_url=str(row.get("artworkUrl100") or ""),
+                        ),
+                        preview,
+                    )
                 )
-                return identity, preview
-        return None
+        return _dedupe_by_title(found)

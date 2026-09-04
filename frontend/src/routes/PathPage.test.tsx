@@ -16,14 +16,8 @@ function LandingProbe() {
   return <div data-testid="landing">{shown}</div>;
 }
 
-/**
- * Both signals now sit behind the card's "Reroute from here" footer strip, so a
- * bypass press is two clicks rather than one. Every path these tests render has
- * exactly one interior card, so there is exactly one strip to open.
- */
-async function pressBypass(user: ReturnType<typeof userEvent.setup>, option: RegExp) {
-  await user.click(screen.getByRole('button', { name: /reroute from here/i }));
-  await user.click(screen.getByRole('button', { name: option }));
+async function pressBypass(user: ReturnType<typeof userEvent.setup>) {
+  await user.click(screen.getByRole('button', { name: /dig deeper/i }));
 }
 
 function renderAt(url: string) {
@@ -50,6 +44,8 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
         { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
       ],
       stopRule: 'natural',
+      bypassed: [],
+      unresolved: [],
     })
     .mockResolvedValueOnce({
       artists: [
@@ -58,18 +54,20 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
         { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
       ],
       stopRule: 'natural',
+      bypassed: [],
+      unresolved: [],
     });
 
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
 
   // The only bypass on offer is Herbie's — the interior of a three-stop path.
-  await pressBypass(user, /steer away/i);
+  await pressBypass(user);
 
   await waitFor(() =>
     expect(buildPath).toHaveBeenLastCalledWith(
       ['m', 'd'],
-      [{ id: 'h', reason: 'dislike' }],
+      [{ id: 'h', reason: 'known' }],
       expect.any(AbortSignal),
     ),
   );
@@ -85,7 +83,7 @@ const THREE_STOP = [
 test('"new path" goes back to choosing artists, carrying this pair with it', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
 
   renderAt('/path/m/d?known=h');
   await screen.findByText('Herbie Hancock');
@@ -103,7 +101,7 @@ test('"new path" goes back to choosing artists, carrying this pair with it', asy
 test('"reset path" drops every bypass and keeps the same two artists', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  const buildPath = vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
+  const buildPath = vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
 
   renderAt('/path/m/d?known=h&dislike=z');
   await screen.findByText('Herbie Hancock');
@@ -125,9 +123,9 @@ const AUDIBLE_THREE_STOP = [
 
 /** Renders a path whose cards have clips, and starts one playing. */
 async function renderPlaying(user: ReturnType<typeof userEvent.setup>, url: string) {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   vi.spyOn(client, 'buildPath')
-    .mockResolvedValueOnce({ artists: AUDIBLE_THREE_STOP, stopRule: 'natural' })
+    .mockResolvedValueOnce({ artists: AUDIBLE_THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] })
     // The rebuild never arrives, so anything that stops only on rebuild stays playing.
     .mockReturnValueOnce(new Promise(() => {}));
 
@@ -152,14 +150,14 @@ test('pressing a bypass stops the audio at once, not when the new path arrives',
   const user = userEvent.setup();
   await renderPlaying(user, '/path/m/d');
 
-  await pressBypass(user, /steer away/i);
+  await pressBypass(user);
 
   await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
 });
 
 test('there is nothing to reset before any bypass is pressed', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
 
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
@@ -198,44 +196,46 @@ test('a bypass press holds the old path and names what it is doing', async () =>
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
   vi.spyOn(client, 'buildPath')
-    .mockResolvedValueOnce({ artists: THREE_STOP, stopRule: 'natural' })
+    .mockResolvedValueOnce({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] })
     // The rebuild never lands, so the held path stays on screen to be asserted.
     .mockReturnValueOnce(new Promise(() => {}));
 
   renderAt('/path/m/d');
   await screen.findByText('Herbie Hancock');
 
-  await pressBypass(user, /steer away/i);
+  await pressBypass(user);
 
   // UI-D4: the previous path is held and dimmed, never replaced by the skeleton.
-  expect(await screen.findByText(/steering away from that sound/i)).toBeInTheDocument();
+  expect(await screen.findByText(/digging deeper for someone newer/i)).toBeInTheDocument();
   expect(screen.getByText('Herbie Hancock')).toBeInTheDocument();
   expect(screen.queryByText(/listening for the steps between them/i)).not.toBeInTheDocument();
-});
-
-test('the reroll message names the signal that was actually pressed', async () => {
-  const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  vi.spyOn(client, 'buildPath')
-    .mockResolvedValueOnce({ artists: THREE_STOP, stopRule: 'natural' })
-    .mockReturnValueOnce(new Promise(() => {}));
-
-  renderAt('/path/m/d');
-  await screen.findByText('Herbie Hancock');
-
-  await pressBypass(user, /dig deeper/i);
-
-  expect(await screen.findByText(/digging deeper for someone newer/i)).toBeInTheDocument();
-  expect(screen.queryByText(/steering away from that sound/i)).not.toBeInTheDocument();
 });
 
 // UI-D7: what the line counts is the artists BETWEEN the two chosen, which is
 // what is visible on screen — not hops. THREE_STOP has exactly one.
 test('the result line counts the artists in between', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
-  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural' });
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
 
   renderAt('/path/m/d');
 
   expect(await screen.findByText(/we found a path/i)).toHaveTextContent(/in 1 step\./i);
+});
+
+// This is the wiring between path state and the panel — no other PathPage test
+// supplies a non-empty bypassed/unresolved, so without this the two had never
+// been exercised together at any level.
+test('a bypassed artist from the path response is named in the route-history panel', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({
+    artists: THREE_STOP,
+    stopRule: 'natural',
+    bypassed: [{ mbid: 'z', name: 'Sun Ra', disambiguation: '', popularity: 0.2 }],
+    unresolved: [],
+  });
+
+  renderAt('/path/m/d?known=z');
+
+  await screen.findByText('Herbie Hancock');
+  expect(await screen.findByText('Sun Ra')).toBeInTheDocument();
 });

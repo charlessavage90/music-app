@@ -23,15 +23,20 @@ const PLAYABLE_URL_MAX_AGE_MS = 5 * 60 * 1000;
 
 const cache = new Map<string, { track: Track | null; at: number }>();
 
-function fresh(mbid: string, maxAgeMs = CLIP_TTL_MS) {
-  const entry = cache.get(mbid);
+/** Cache key. The index is part of the identity: two indices are two tracks. */
+function key(mbid: string, index: number) {
+  return `${mbid}:${index}`;
+}
+
+function fresh(mbid: string, index: number, maxAgeMs = CLIP_TTL_MS) {
+  const entry = cache.get(key(mbid, index));
   if (!entry || Date.now() - entry.at > maxAgeMs) return undefined;
   return entry;
 }
 
-async function load(mbid: string): Promise<Track | null> {
-  const track = await client.getTrack(mbid);
-  cache.set(mbid, { track, at: Date.now() });
+async function load(mbid: string, index: number): Promise<Track | null> {
+  const track = await client.getTrack(mbid, index);
+  cache.set(key(mbid, index), { track, at: Date.now() });
   return track;
 }
 
@@ -40,11 +45,11 @@ async function load(mbid: string): Promise<Track | null> {
  * clip. Called at the moment of play — never at the moment a card is drawn, which
  * is the distinction the whole seam exists for.
  */
-export async function resolveFreshUrl(mbid: string): Promise<string | null> {
-  const entry = fresh(mbid, PLAYABLE_URL_MAX_AGE_MS);
+export async function resolveFreshUrl(mbid: string, index = 0): Promise<string | null> {
+  const entry = fresh(mbid, index, PLAYABLE_URL_MAX_AGE_MS);
   if (entry) return entry.track?.previewUrl ?? null;
   try {
-    const track = await load(mbid);
+    const track = await load(mbid, index);
     return track?.previewUrl ?? null;
   } catch {
     // A rate-limited or failing catalogue must silence the card, not break play.
@@ -56,21 +61,21 @@ function stateFor(track: Track | null): ClipState {
   return { status: track ? 'ready' : 'none', track };
 }
 
-export function useClip(mbid: string): ClipState {
+export function useClip(mbid: string, index = 0): ClipState {
   const [state, setState] = useState<ClipState>(() => {
-    const entry = fresh(mbid);
+    const entry = fresh(mbid, index);
     return entry ? stateFor(entry.track) : { status: 'loading', track: null };
   });
 
   useEffect(() => {
-    const entry = fresh(mbid);
+    const entry = fresh(mbid, index);
     if (entry) {
       setState(stateFor(entry.track));
       return;
     }
     let active = true;
     setState({ status: 'loading', track: null });
-    load(mbid)
+    load(mbid, index)
       .then((track) => {
         if (active) setState(stateFor(track));
       })
@@ -80,7 +85,7 @@ export function useClip(mbid: string): ClipState {
     return () => {
       active = false;
     };
-  }, [mbid]);
+  }, [mbid, index]);
 
   return state;
 }

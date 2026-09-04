@@ -79,6 +79,67 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
+## ▶ QUEUED (latest) — 2026-09-04 — one button instead of two, a list of who you skipped, and a way to hear a different song
+
+**Not live yet.** This is on a branch waiting for you to merge it. Once it deploys, three
+things on the journey page are different, and one of them is the first thing anyone you share
+the app with will see.
+
+### What to exercise — about ten minutes
+
+1. **Build a journey and look at the bottom of a middle card.** There used to be a strip you
+   pressed to open a little panel with two choices. Now there is one control, directly on the
+   card, and no panel to open. Press it.
+2. **Read the wording on that control before you press it.** It is now the entire explanation
+   of what the button does — there is no second option to compare it against. If it reads as
+   "I don't like this artist", it is wrong: pressing it takes you to someone *similar but less
+   well known*, which is close to the opposite.
+3. **Press it three or four times, then look below the journey.** There is a new panel listing
+   the artists you skipped, most recent first. Check the names are right and in the order you
+   pressed them.
+4. **Press Back a few times.** The journey and that list should both wind backwards together.
+5. **On a card that is playing, look under the song title for a way to hear a different track
+   by the same artist.** Press it. You should get a different song by the same person, and the
+   card goes quiet — press play again to hear it. **On some artists this will not appear at
+   all**, and that is correct: they only have one playable track.
+6. **Open a journey link you saved weeks ago.** It must still open the same journey it always
+   did.
+
+### What "wrong" looks like
+
+- **Any wording on that one control that sounds like rejecting the artist**, rather than
+  digging for someone less known.
+- **A skipped artist missing from the list**, listed in the wrong order, or a row that says an
+  artist is no longer in the map when they plainly are.
+- **An old saved link opening a different journey than it used to**, or not opening at all.
+  This is the most serious thing on the list.
+- **"Try another track" giving you the same song again**, or appearing on a card and then
+  doing nothing.
+- **A card left silent with no way to get sound back** after trying another track.
+
+### Two things that are expected and are NOT faults
+
+- **The second button is gone on purpose.** The old one that steered sideways away from a
+  sound has been removed; only "dig deeper" remains. Everything underneath it still exists, so
+  restoring it later is one small change.
+- **For a little while after the deploy, cards may take slightly longer to find their clip.**
+  The way clips are remembered changed, so the stored ones are discarded once and rebuilt. It
+  settles on its own.
+
+**Paste the URL for anything you find.**
+
+**Wants a closer look than a defect: how the one-button version feels after a few days.** That
+is your ongoing evaluation, not a test, and it deliberately does not live in this file.
+
+## ✅ DONE — 2026-09-04 — RUN BY THE OWNER; NOTHING FOUND
+
+**He validated the site works as expected at the new address**, including the two things
+that could not be checked from outside: **clips on middle cards play**, and **journeys
+rebuild** when the buttons are pressed. Nothing wrong reported.
+
+**This discharges the entry below. Do not queue it again** — the address move is confirmed
+end to end from a real browser.
+
 ## ▶ QUEUED (latest) — 2026-09-03 — the app has a new address
 
 **The app now lives at `https://unsung.fm`.** Nothing about the app itself changed — same

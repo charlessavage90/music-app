@@ -23,18 +23,26 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   expect(before.length).toBeGreaterThan(1);
   expect(before[0]).toContain('Miles Davis');
 
-  // Bypass the second artist with "steer away", which now sits behind that
-  // card's footer strip — so the walk is open the tray, then choose.
+  // Bypass the second artist with the card's one control — there is no tray to
+  // open (LUX-1).
   // UI-13: located by data-testid, not `.font-semibold`. The endpoint eyebrow
   // ("Starting artist") is also font-semibold, so .nth(1) silently became the
   // FIRST card's name — and the assertion below then demanded that the start
   // artist disappear, which it never can. A test hook must not be a style hook.
   const second = page.locator('ol li').nth(1);
   const secondName = await second.getByTestId('artist-name').innerText();
-  await second.getByRole('button', { name: /reroute from here/i }).click();
-  await second.getByRole('button', { name: /steer away/i }).click();
+  await second.getByRole('button', { name: /dig deeper/i }).click();
 
-  // URL now carries the exclusion, and the bypassed artist is gone from the new path.
-  await expect(page).toHaveURL(/dislike=/);
-  await expect(page.getByText(secondName, { exact: true })).toHaveCount(0);
+  // URL now carries the exclusion, and the bypassed artist is gone from the new
+  // path — scoped to the journey's own cards (`artist-name`), not the whole
+  // page: LUX-2b legitimately names the bypassed artist again, in the "Artists
+  // you skipped" panel, so a page-wide text search would now find it there.
+  await expect(page).toHaveURL(/known=/);
+  await expect(page.getByTestId('artist-name').filter({ hasText: secondName })).toHaveCount(0);
+
+  // LUX-2b: the bypassed artist is not gone without trace — the panel names
+  // them. Only a real browser proves the data actually reaches the rendered
+  // page through the URL round trip and the path response together.
+  await expect(page.getByText('Artists you skipped')).toBeVisible();
+  await expect(page.getByText(secondName)).toBeVisible();
 });

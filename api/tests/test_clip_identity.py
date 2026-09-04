@@ -100,7 +100,7 @@ async def test_a_known_id_beats_a_same_named_impostor():
     # would accept it; the id path returns the right one.
     r = _resolver({"artist/12345/top": ARTIST_TOP_HIT,
                    "deezer.com/search": WRONG_SAME_NAME_ARTIST})
-    clip = await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)
+    clip = (await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)).clip
     assert clip.preview_url == "https://cdn.deezer/right.mp3"
     assert clip.title == "Smells Like Teen Spirit"
 
@@ -118,7 +118,7 @@ async def test_the_id_path_makes_no_name_search_at_all():
 async def test_no_id_falls_back_to_name_search_unchanged():
     # 52% of the graph has no id. Their behaviour must be exactly what it was.
     r = _resolver({"deezer.com/search": WRONG_SAME_NAME_ARTIST})
-    clip = await r.resolve(MBID, "Nirvana")
+    clip = (await r.resolve(MBID, "Nirvana")).clip
     assert clip.preview_url == "https://cdn.deezer/wrong.mp3"
     assert not any("/top" in url for url in _urls(r))
 
@@ -129,7 +129,7 @@ async def test_an_id_that_yields_nothing_falls_back_to_name_search():
     # is the common case there, not an edge case.
     r = _resolver({"artist/12345/top": {"data": []},
                    "deezer.com/search": WRONG_SAME_NAME_ARTIST})
-    clip = await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)
+    clip = (await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)).clip
     assert clip.preview_url == "https://cdn.deezer/wrong.mp3"
 
 
@@ -140,7 +140,7 @@ async def test_a_refusal_on_the_id_path_skips_deezer_search():
     # stale-id test below for the other kind of failure.
     r = _resolver({"artist/12345/top": CatalogueUnavailable("429"),
                    "itunes": ITUNES_HIT})
-    clip = await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)
+    clip = (await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)).clip
     assert clip.preview_url == "https://cdn.itunes/clip.m4a"
     assert not any("deezer.com/search" in url for url in _urls(r))
 
@@ -152,7 +152,7 @@ async def test_a_stale_id_falls_back_to_name_search_rather_than_giving_up():
     # This is the "fails safe" claim in deezer_ids.py, pinned.
     r = _resolver({"artist/12345/top": Boom(),
                    "deezer.com/search": WRONG_SAME_NAME_ARTIST})
-    clip = await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)
+    clip = (await r.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)).clip
     assert clip.preview_url == "https://cdn.deezer/wrong.mp3"
 
 
@@ -160,7 +160,7 @@ async def test_an_empty_id_is_treated_as_no_id():
     # The metadata blob carries "" for artists with no id, so the resolver sees
     # empty strings rather than None on every uncovered artist.
     r = _resolver({"deezer.com/search": WRONG_SAME_NAME_ARTIST})
-    clip = await r.resolve(MBID, "Nirvana", deezer_artist_id="")
+    clip = (await r.resolve(MBID, "Nirvana", deezer_artist_id="")).clip
     assert clip.preview_url == "https://cdn.deezer/wrong.mp3"
     assert not any("/top" in url for url in _urls(r))
 
@@ -175,6 +175,37 @@ async def test_the_identity_found_by_id_is_cached_and_replayable():
 
     r2 = _resolver({"track/2": {"preview": "https://cdn.deezer/resigned.mp3"}},
                    cache=cache)
-    clip = await r2.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)
+    clip = (await r2.resolve(MBID, "Nirvana", deezer_artist_id=DEEZER_ID)).clip
     assert clip.preview_url == "https://cdn.deezer/resigned.mp3"
     assert not any("/top" in url for url in _urls(r2))
+
+
+async def test_the_candidate_list_is_cached_so_a_second_index_costs_no_search():
+    # The old version of this test only checked the cached list's LENGTH and
+    # never actually resolved a second index -- it could not fail even if
+    # every index re-ran the search. This one resolves index=0, then index=1,
+    # and asserts on r.calls that the second resolve did not search again: a
+    # cache hit still pays for one re-sign (C2), but never a second search.
+    cache = InMemoryClipCache()
+    body = {"data": [
+        {"id": 1, "preview": "u1", "title": "One",
+         "artist": {"name": "Nirvana"}, "album": {}},
+        {"id": 2, "preview": "u2", "title": "Two",
+         "artist": {"name": "Nirvana"}, "album": {}},
+    ]}
+    r = _resolver(
+        {"deezer.com/search": body, "track/2": {"preview": "https://cdn.deezer/resigned.mp3"}},
+        cache=cache,
+    )
+    first = await r.resolve(MBID, "Nirvana")
+    assert first.clip.title == "One"
+    assert len(await cache.get(MBID)) == 2
+    calls_after_first = len(r.calls)
+    assert calls_after_first == 1  # the one search call
+
+    second = await r.resolve(MBID, "Nirvana", index=1)
+    assert second.clip.title == "Two"
+    assert second.clip.preview_url == "https://cdn.deezer/resigned.mp3"
+    # One more call happened (the re-sign), and none of it was a search.
+    assert len(r.calls) == calls_after_first + 1
+    assert not any("deezer.com/search" in url for url in _urls(r)[calls_after_first:])

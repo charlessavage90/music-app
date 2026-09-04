@@ -119,7 +119,7 @@ async def test_the_id_path_returns_an_image():
     # THE regression test. Before the fix this was "" and the card rendered a
     # blank square while the clip played perfectly.
     r = _resolver({"artist/580/top": ARTIST_TOP})
-    clip = await r.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)
+    clip = (await r.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)).clip
     assert clip.cover_url == ALBUM_COVER
 
 
@@ -128,7 +128,7 @@ async def test_the_name_path_returns_the_same_kind_of_image():
     # change appearance based on which lookup happened to answer, which is the
     # inconsistency the production report was actually about.
     r = _resolver({"deezer.com/search": NAME_SEARCH})
-    clip = await r.resolve(MBID, "Aphex Twin")
+    clip = (await r.resolve(MBID, "Aphex Twin")).clip
     assert clip.cover_url == ALBUM_COVER
     assert clip.cover_url != ARTIST_PHOTO
 
@@ -141,12 +141,12 @@ async def test_both_deezer_paths_agree_on_the_image():
     # showed it. Agreement alone passes when both paths are EQUALLY broken --
     # point them at a key neither response has and both return "", which agrees
     # perfectly and is the exact production failure. Both halves are required.
-    by_id = await _resolver({"artist/580/top": ARTIST_TOP}).resolve(
+    by_id = (await _resolver({"artist/580/top": ARTIST_TOP}).resolve(
         MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID
-    )
-    by_name = await _resolver({"deezer.com/search": NAME_SEARCH}).resolve(
+    )).clip
+    by_name = (await _resolver({"deezer.com/search": NAME_SEARCH}).resolve(
         MBID, "Aphex Twin"
-    )
+    )).clip
     assert by_id.cover_url == by_name.cover_url
     assert by_id.cover_url
 
@@ -155,7 +155,7 @@ async def test_itunes_still_returns_its_album_art_unchanged():
     # The fallback already returned album art. Pinned so the fix is understood
     # as making Deezer agree with iTunes, not as changing all three.
     r = _resolver({"itunes": ITUNES})
-    clip = await r.resolve(MBID, "Aphex Twin")
+    clip = (await r.resolve(MBID, "Aphex Twin")).clip
     assert clip.cover_url.endswith("100x100bb.jpg")
 
 
@@ -165,7 +165,7 @@ async def test_a_track_with_no_album_block_is_silent_not_a_crash():
     # the same `or ""` reasoning already commented on the title field.
     no_album = {"data": [dict(ARTIST_TOP["data"][0], album=None)]}
     r = _resolver({"artist/580/top": no_album})
-    clip = await r.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)
+    clip = (await r.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)).clip
     assert clip.cover_url == ""
     assert clip.preview_url
 
@@ -174,7 +174,7 @@ async def test_a_missing_cover_key_is_silent_not_a_crash():
     # Deezer can send an album block with no cover at all.
     bare = {"data": [dict(ARTIST_TOP["data"][0], album={"id": 1, "type": "album"})]}
     r = _resolver({"artist/580/top": bare})
-    clip = await r.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)
+    clip = (await r.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)).clip
     assert clip.cover_url == ""
     assert clip.preview_url
 
@@ -189,6 +189,6 @@ async def test_the_image_survives_a_cache_round_trip():
     )
     replay = _resolver({"track/3135556": {"preview": "https://cdn/resigned.mp3"}},
                        cache=cache)
-    clip = await replay.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)
+    clip = (await replay.resolve(MBID, "Aphex Twin", deezer_artist_id=DEEZER_ID)).clip
     assert clip.preview_url == "https://cdn/resigned.mp3"
     assert clip.cover_url == ALBUM_COVER

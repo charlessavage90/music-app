@@ -36,12 +36,27 @@ test('buildPath returns artists and the stop rule, and sends sources+exclude', a
 test('getTrack maps snake_case to camelCase', async () => {
   vi.stubGlobal('fetch', mockFetch(200, { preview_url: 'u', title: 't', cover_url: 'c' }));
   const track = await getTrack('a');
-  expect(track).toEqual({ previewUrl: 'u', title: 't', coverUrl: 'c' });
+  expect(track).toEqual({ previewUrl: 'u', title: 't', coverUrl: 'c', candidateCount: 1 });
 });
 
 test('getTrack returns null on 204', async () => {
   vi.stubGlobal('fetch', mockFetch(204, null));
   expect(await getTrack('a')).toBeNull();
+});
+
+test('getTrack maps the candidate count and only sends an index when there is one', async () => {
+  // A fresh Response per call — a Response body can only be read once, and
+  // getTrack is called twice below.
+  const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async () =>
+    new Response(JSON.stringify({
+      preview_url: 'u', title: 't', cover_url: 'c', candidate_count: 3,
+    }), { status: 200, headers: { 'content-type': 'application/json' } }),
+  );
+  expect((await getTrack('m'))?.candidateCount).toBe(3);
+  expect(fetchMock.mock.calls[0][0]).not.toContain('index=');
+  await getTrack('m', 2);
+  expect(fetchMock.mock.calls[1][0]).toContain('index=2');
+  fetchMock.mockRestore();
 });
 
 test('buildPath throws ApiError with status on 409', async () => {

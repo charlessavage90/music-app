@@ -27,39 +27,61 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > ⚠ **The app is still NAMED "Artist Path" in the UI.** Only the address moved. A rename to
 > "Unsung" is scoped but unapproved — do not assume it has happened.
 
-**Last updated: 2026-09-03, when THE APP MOVED TO `unsung.fm`** — infrastructure and
-documentation only: no application code, no graph, no cost function, and the served bytes are
-unchanged. The 2026-09-01 status below is **not superseded** and still holds in full.
-**Newly available and NOT approved: renaming the app to "Unsung"** to match the domain. The
-UI still says "Artist Path". It is scoped — `index.html`, `LandingPage.tsx`, two test
-assertions and the refusal page in `viewer_function.js` — and it needs two owner decisions:
-whether the landing lines he wrote on 2026-08-07 change, and whether the page should say the
-first journey is the on-ramp rather than the promise.
+**Last updated: 2026-09-04, when `LUX-1`, `LUX-2` AND `LUX-3` WERE BUILT AND PUT UP FOR
+REVIEW.** Branch `launch-ux-1-3`, **PR #101, open against `main` and NOT merged**. Nothing is
+deployed: the live site is unchanged and still serves what it served yesterday.
 
-**Previously, and still current: 2026-09-01 (later), when THE OWNER CONFIRMED THE REVERT AND
-DISCHARGED THE QUEUE.** The extended 117k graph was reverted earlier the same day after his test fired the
-revert criterion he set on 2026-08-10; he has since confirmed the old map is live and
-**reported nothing wrong**. **THERE IS NO NEXT ACTION ASSIGNED. Nothing is blocked, no
-session owes anything, and the test queue holds ONE live item** — the
-2026-09-03 press of the new address, two minutes. An *empty* queue is also a valid and common
-state and never evidence a session forgot. Do not discharge either 2026-09-01 entry
-twice, and do not re-queue "tell me how it feels": his long-run evaluation is continuous and
-this file explicitly does not hold it (owner ruling, 2026-08-07).
-**The landing-dot fix (PR #92) is LIVE and was NOT reverted** — it is frontend and rode the
-frontend sync, not the map. **Everything open is his to trigger and none of it blocks
-anything else:** **Option C** (same-name population probe), **`SEL-`**, **closing or keeping
-the 2026-07-29 famous-to-famous defect ruling**, and the **three candidate path-quality fixes
-in the `CXR-` README — each needs its own pre-registration and none may start without him.**
-**NEWLY SCOPED 2026-09-03 and UNSTARTED: the `LUX-` set** — four pre-launch UX features, his
-decisions taken and recorded, no code written and no plan yet:
-`specs/2026-09-03-launch-ux-scope.md`. Sequenced there (§6), with a handoff seam named before
-the last item. **`LUX-4` is GATED on `LUX-E1`** — a rebuild may not reproduce the live map,
-which would make it a graph adoption rather than a metadata change (§4.4); a session must not
-proceed past that on its own judgement. Its §7 carries a `PRODUCT-REQUIREMENTS.md` amendment
-**deliberately unapplied**, to land in the same commit as `LUX-1`'s code.
-⚠ **One thing is still OPEN rather than done: the first journey, before any press, is
-UNEXPLAINED.** His confirmation did not close it and nothing measured accounts for it. It is
-not a queue item and not assigned; it must not be quietly dropped.
+**THE NEXT ACTION IS THE OWNER'S, and it is one of three, none of which blocks the others:**
+merge PR #101; run the queued use-the-app test **after** it deploys; or run `snyk auth` so
+the owed scan on the modified `api/` code can be discharged. **The test queue holds ONE live
+item**, written 2026-09-04 and not exercisable until deploy.
+
+**⚠ PR #101 SUPERSEDES PR #100 rather than sitting beside it** — `launch-ux-1-3` was cut from
+`status-depth0-ruling`, so #100's commits are already inside #101. **Close #100 as superseded
+when #101 merges.** That is his call, not a session's.
+
+**What shipped, and the one promise it rests on.** `LUX-1` removes the second bypass button
+while **keeping the mechanism, the wire contract and the `?dislike=` URL parameter** — so
+every link ever shared still resolves. `exclusions.ts` and `pathfinding.py` both have **zero
+diff** across the whole branch and that is load-bearing. `LUX-2` adds the skipped-artists
+panel and stops the router silently discarding an unrecognised MBID. `LUX-3` lets a listener
+try another track by the same artist. Entry point: the handoff
+[`2026-09-04-HANDOFF-lux-1-3.md`](2026-09-04-HANDOFF-lux-1-3.md); reasoning:
+[`2026-09-04-lux-1-3-execution-log.md`](2026-09-04-lux-1-3-execution-log.md), which owns the
+ten rulings, the deferrals and **an operational deploy note** (the clip cache's item shape
+changed, so every live entry becomes a miss once — also in `infra/README.md`).
+
+**⚠ `LUX-E4` RAN AND ITS THRESHOLD COULD NOT BE READ — UNDEFINED, NOT PASSED.** Its
+denominator was empty: no lower-half artist reached a card. **Do not let any document soften
+this into a pass.** Two causes, and the first is a standing hazard: **the committed `TAS-`
+120-pair sample is damaged on the served map**, with the attrition falling almost entirely on
+the two obscure classes — and **`LUX-E2` reuses that same file**. §5 of the scope document now
+warns about it. The second is that these were depth-zero journeys, before any press. Whether
+to re-run at depth, redraw the sample, or accept the depth-zero reading is **his**. Figures
+owned by `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md`, cited never
+restated.
+
+**`LUX-4` IS STILL UNSTARTED and must stay that way until `LUX-E1` runs.** A rebuild may not
+reproduce the live map, which would make it a graph adoption rather than a metadata change —
+the operation reverted on 2026-09-01 after his own listening test. The `LUX-` plan
+deliberately excludes it; do not start it from there.
+
+**Everything else open is his to trigger and none of it blocks anything:** **Option C**
+(same-name population probe), **`SEL-`**, **closing or keeping the 2026-07-29
+famous-to-famous defect ruling**, the **three candidate path-quality fixes in the `CXR-`
+README** (each needs its own pre-registration), and **renaming the app to "Unsung"** — scoped,
+unapproved, and needing two decisions from him about the landing copy. The UI still says
+"Artist Path".
+
+**Do not re-litigate, and do not re-discharge:** the 2026-09-03 address test (**run and passed
+2026-09-04**), either 2026-09-01 entry, or the depth-0 half of his revert report — **ruled
+2026-09-04 (owner) NOT a defect and NOT open work**, on the grounds that a single offhand
+report with no mechanism behind it is not a factual assessment. That closed it as an item and
+**overturned no measurement**: `CXR-P3`'s null and the diagnosis README's "unexplained by
+anything here" both remain exactly true and must not be edited. Reopening it is his trigger,
+and the evidence would be more than one user reporting it after launch. Equally, do not
+re-queue "tell me how it feels" — his long-run evaluation is continuous and `TEST-QUEUE.md`
+explicitly does not hold it (owner ruling, 2026-08-07).
 
 ---
 

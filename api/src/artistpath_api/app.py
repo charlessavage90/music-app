@@ -8,7 +8,7 @@ import hmac
 import time
 
 import httpx
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -26,19 +26,42 @@ from artistpath_api.search import ArtistSearch
 from artistpath_api.telemetry import emit, safe_journey_id
 
 
-def _to_exclusions(store: GraphStore, raw: list[ExclusionIn]) -> list[Exclusion]:
+def _to_exclusions(
+    store: GraphStore, raw: list[ExclusionIn]
+) -> tuple[list[Exclusion], list[int], list[str]]:
     """Resolve wire exclusions to node ids, keeping the last reason per artist.
+
+    Returns the router's exclusions, the bypassed nodes in PRESS ORDER, and the
+    ids that resolved to nothing.
 
     Deduplicated because avoidance_map takes a max() per node, so a repeated
     dislike already changes nothing — it only costs another graph traversal.
+    `unresolved` is deduplicated the same way, preserving first-seen order: a
+    hand-built request repeating one bad id would otherwise yield duplicate
+    React keys and a redundant row in the route-history panel.
+
+    The unresolved ids used to be discarded silently (LUX-D2). An MBID that is
+    not in the graph makes the router build a path as if that press never
+    happened; that was invisible until the route-history panel had to draw a
+    row for it. They are returned now. The request still succeeds
+    deliberately: a shared link that works today must keep working.
     """
     by_node: dict[int, str] = {}
+    order: list[int] = []
+    unresolved: list[str] = []
+    seen_unresolved: set[str] = set()
     for e in raw:
         node = store.id_by_mbid.get(e.id)
         if node is None:
+            if e.id not in seen_unresolved:
+                seen_unresolved.add(e.id)
+                unresolved.append(e.id)
             continue
+        if node not in by_node:
+            order.append(node)
         by_node[node] = e.reason if e.reason in (DISLIKE, KNOWN) else DISLIKE
-    return [Exclusion(node, reason) for node, reason in by_node.items()]
+    exclusions = [Exclusion(node, reason) for node, reason in by_node.items()]
+    return exclusions, order, unresolved
 
 
 def create_app(
@@ -152,7 +175,7 @@ def create_app(
             raise HTTPException(
                 422, "pick two different artists — a journey needs somewhere to go"
             )
-        excludes = _to_exclusions(store, req.exclude)
+        excludes, bypassed_nodes, unresolved = _to_exclusions(store, req.exclude)
         started = time.perf_counter()
         journey = find_journey(store, source, target, excludes, cfg)
         duration_ms = (time.perf_counter() - started) * 1000.0
@@ -172,6 +195,11 @@ def create_app(
                 "bypass_depth": len(req.exclude),
                 "dislike_count": sum(1 for e in req.exclude if e.reason == DISLIKE),
                 "known_count": sum(1 for e in req.exclude if e.reason == KNOWN),
+                # Count only, not the ids: `exclude` above already carries them
+                # verbatim, and this line is billed per GB (G3-S3). A non-zero
+                # value means shared links are going stale, which is a fact
+                # nothing else can currently report.
+                "unresolved_count": len(unresolved),
                 # Logged although reproducible from the inputs, so offline
                 # analysis can VERIFY that the deployed router reproduces what
                 # the user actually saw — config or artifact drift is a failure
@@ -197,18 +225,30 @@ def create_app(
         )
 
         return PathResponse(
-            artists=[artist_out(n) for n in path], stop_rule=stop_rule
+            artists=[artist_out(n) for n in path],
+            stop_rule=stop_rule,
+            bypassed=[artist_out(n) for n in bypassed_nodes],
+            unresolved=unresolved,
         )
 
     @app.get("/api/artists/{mbid}/track")
-    async def get_track(mbid: str, request: Request, response: Response):
+    async def get_track(
+        mbid: str,
+        request: Request,
+        response: Response,
+        # ge=0 deliberately: a STALE index wraps inside the resolver, but a
+        # NEGATIVE one is a frontend bug, and Python's modulo would quietly
+        # turn -1 into the last candidate and hide it.
+        index: int = Query(0, ge=0),
+    ):
         node = store.id_by_mbid.get(mbid)
         if node is None:
             raise HTTPException(404, "unknown artist")
         started = time.perf_counter()
-        clip = await resolver.resolve(
-            mbid, store.names[node], store.deezer_id_of(node)
+        resolution = await resolver.resolve(
+            mbid, store.names[node], store.deezer_id_of(node), index
         )
+        clip = resolution.clip
         duration_ms = (time.perf_counter() - started) * 1000.0
 
         emit(
@@ -222,6 +262,11 @@ def create_app(
                 # silent card and they are visually identical; this is what
                 # separates them (TR-15).
                 "source": clip.source if clip else None,
+                # LUX-E4 measures the candidate distribution offline before
+                # launch; these two make the same question answerable from real
+                # use afterwards, which is the only population that matters.
+                "clip_index": index,
+                "candidate_count": resolution.count,
                 "duration_ms": round(duration_ms, 2),
             }
         )
@@ -230,7 +275,10 @@ def create_app(
             response.status_code = 204
             return None
         return TrackOut(
-            preview_url=clip.preview_url, title=clip.title, cover_url=clip.cover_url
+            preview_url=clip.preview_url,
+            title=clip.title,
+            cover_url=clip.cover_url,
+            candidate_count=resolution.count,
         )
 
     @app.get("/health")

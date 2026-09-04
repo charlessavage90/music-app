@@ -403,8 +403,21 @@ already owns.
 Same 120-pair sample: for each interior artist, how many playable candidates the resolver
 finds, split by band **and by resolution route** (deezer-id / deezer-name / itunes).
 
+> ⚠ **This eval, when it ran, found the 120-pair `TAS-` sample itself damaged on the
+> currently-served map** — a large minority of the pairs can no longer be routed at all, with
+> the loss concentrated almost entirely in the two obscure pair classes. Any later session
+> reusing this sample, including for `LUX-E2` above, inherits the same hole silently unless it
+> checks first. See `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md`, which owns
+> the figures — this is a qualitative pointer only, nothing here restates them.
+
 - **Plain sentence:** *for how many of the cards a user sees does a "try another track"
   button appear at all — and does it disappear exactly for the obscure artists?*
+- **Read — undefined (denominator empty).** ⚠ **Added 2026-09-04, after the run, and it is an
+  admission rather than a result:** no branch below anticipated the population simply not
+  being delivered, and that is exactly what happened. **A threshold whose denominator is
+  empty is reported as UNDEFINED and never as a pass**, and the same holds for every other
+  eval in this section. `LUX-E4`'s own run is the worked example —
+  `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md` owns it.
 - **Threshold:** if fewer than **half** of lower-half cards carry ≥ 2 candidates, `LUX-3`
   serves famous artists and not the ones the app is for. That is a **re-prioritisation
   trigger and the owner's call**, never a session's decision to drop it.

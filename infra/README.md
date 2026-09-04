@@ -332,6 +332,16 @@ python -c "import json;print(json.load(open('builder/scratch/$GRAPH.json'))['byt
 **This is where the money starts:** App Runner bills for a warm instance from here on
 (`DEP-17`, unmeasured).
 
+> ⚠ **Deploying `LUX-3`: every existing clip-cache item becomes a miss at once.** The item
+> shape stored in the clip cache changed, so on this deploy every live cache entry stops
+> matching. The first view of each artist afterward costs a catalogue *search* rather than a
+> cheap re-sign — the same number of external calls per card, but against the rate-limited
+> service, until the old items drain on their own. Item size also grows, bounded by
+> `clip_search_limit`. **No infrastructure change is needed**: the table is
+> `PAY_PER_REQUEST`, keyed on `mbid` with a TTL, and IAM grants only `GetItem`/`PutItem`.
+> **There is no migration and must not be one** — this is expected and spec-sanctioned, not a
+> defect (detail: `2026-09-04-lux-1-3-execution-log.md` §3).
+
 **`cdk diff` FIRST, every time, and read the whole diff — not only the image tag.** On an
 API-only deploy it must show `.ImageIdentifier` changing and nothing else. If
 `ARTISTPATH_GRAPH` or `ARTISTPATH_GRAPH_SHA256` appears, §4's `GRAPH` lines were not set and

@@ -1,0 +1,3600 @@
+{
+ "measures": "for how many of the cards a user sees does a \"try another track\" button appear at all -- and does it disappear exactly for the obscure artists?",
+ "artifact": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+ "artifact_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+ "pairs_file": "C:\\dev\\music-app\\builder\\analysis\\2026-07-30-tag-discrimination\\tas_pairs.json",
+ "pairs_routed": 71,
+ "pairs_total": 120,
+ "weights": {
+  "w_sim": 3.0,
+  "w_jump": 1.0,
+  "w_floor": 1.0,
+  "w_hop": 0.02,
+  "w_avoid": 1.0,
+  "w_degree_hub": 0.0,
+  "clip_search_limit": 25
+ },
+ "note": "Interiors only. Endpoints excluded -- they are the user's own picks. Candidates are de-duplicated by normalised title, so a count of 3 means three distinct titles; it does NOT collapse 'Song' and 'Song (Remastered 2011)'. Counts are CENSORED at clip_search_limit: a row reading 25 means 'at least 25'.",
+ "count_ceiling": 25,
+ "provenance": {
+  "pairs_unroutable_endpoint_absent_by_class": {
+   "fo": 18,
+   "oo": 31
+  },
+  "pairs_no_path_by_class": {},
+  "endpoint_bands_of_routed_pairs": {
+   "top 10%": 24,
+   "top 1%": 56,
+   "top 0.1%": 5,
+   "upper half": 25,
+   "lower half": 32
+  }
+ },
+ "min_interior_pop_pctl": 0.594711,
+ "complete": true,
+ "aborted": false,
+ "summary": {
+  "cards_total": 443,
+  "cards_resolved": 443,
+  "unique_artists_resolved": 304,
+  "all_cards": {
+   "n": 443,
+   "with_any_candidate": 441,
+   "with_2plus_candidates": 433,
+   "frac_2plus": 0.9774,
+   "mean_count": 22.41,
+   "count_histogram": {
+    "0": 2,
+    "1": 8,
+    "2": 6,
+    "3": 9,
+    "4": 2,
+    "5": 1,
+    "7": 4,
+    "8": 3,
+    "9": 3,
+    "10": 1,
+    "11": 2,
+    "12": 1,
+    "13": 8,
+    "14": 4,
+    "17": 1,
+    "18": 2,
+    "19": 3,
+    "20": 2,
+    "21": 3,
+    "22": 5,
+    "23": 9,
+    "24": 45,
+    "25": 319
+   }
+  },
+  "all_unique": {
+   "n": 304,
+   "with_any_candidate": 303,
+   "with_2plus_candidates": 298,
+   "frac_2plus": 0.9803,
+   "mean_count": 22.12,
+   "count_histogram": {
+    "0": 1,
+    "1": 5,
+    "2": 6,
+    "3": 5,
+    "4": 2,
+    "5": 1,
+    "7": 3,
+    "8": 2,
+    "9": 3,
+    "10": 1,
+    "11": 2,
+    "12": 1,
+    "13": 5,
+    "14": 4,
+    "17": 1,
+    "18": 2,
+    "19": 3,
+    "20": 1,
+    "21": 3,
+    "22": 5,
+    "23": 9,
+    "24": 34,
+    "25": 205
+   }
+  },
+  "cards_by_band": {
+   "top 0.1%": {
+    "n": 15,
+    "with_any_candidate": 15,
+    "with_2plus_candidates": 15,
+    "frac_2plus": 1.0,
+    "mean_count": 23.13,
+    "count_histogram": {
+     "2": 1,
+     "24": 5,
+     "25": 9
+    }
+   },
+   "top 1%": {
+    "n": 243,
+    "with_any_candidate": 243,
+    "with_2plus_candidates": 243,
+    "frac_2plus": 1.0,
+    "mean_count": 23.32,
+    "count_histogram": {
+     "2": 2,
+     "3": 8,
+     "7": 2,
+     "8": 3,
+     "11": 1,
+     "13": 4,
+     "19": 1,
+     "21": 1,
+     "22": 1,
+     "23": 2,
+     "24": 21,
+     "25": 197
+    }
+   },
+   "top 10%": {
+    "n": 137,
+    "with_any_candidate": 135,
+    "with_2plus_candidates": 128,
+    "frac_2plus": 0.9343,
+    "mean_count": 21.64,
+    "count_histogram": {
+     "0": 2,
+     "1": 7,
+     "2": 3,
+     "3": 1,
+     "7": 2,
+     "12": 1,
+     "13": 4,
+     "18": 1,
+     "20": 2,
+     "21": 1,
+     "22": 3,
+     "23": 5,
+     "24": 14,
+     "25": 91
+    }
+   },
+   "upper half": {
+    "n": 48,
+    "with_any_candidate": 48,
+    "with_2plus_candidates": 47,
+    "frac_2plus": 0.9792,
+    "mean_count": 19.79,
+    "count_histogram": {
+     "1": 1,
+     "4": 2,
+     "5": 1,
+     "9": 3,
+     "10": 1,
+     "11": 1,
+     "14": 4,
+     "17": 1,
+     "18": 1,
+     "19": 2,
+     "21": 1,
+     "22": 1,
+     "23": 2,
+     "24": 5,
+     "25": 22
+    }
+   }
+  },
+  "unique_by_band": {
+   "top 0.1%": {
+    "n": 10,
+    "with_any_candidate": 10,
+    "with_2plus_candidates": 10,
+    "frac_2plus": 1.0,
+    "mean_count": 22.4,
+    "count_histogram": {
+     "2": 1,
+     "24": 3,
+     "25": 6
+    }
+   },
+   "top 1%": {
+    "n": 135,
+    "with_any_candidate": 135,
+    "with_2plus_candidates": 135,
+    "frac_2plus": 1.0,
+    "mean_count": 22.99,
+    "count_histogram": {
+     "2": 2,
+     "3": 4,
+     "7": 2,
+     "8": 2,
+     "11": 1,
+     "13": 2,
+     "19": 1,
+     "21": 1,
+     "22": 1,
+     "23": 2,
+     "24": 13,
+     "25": 104
+    }
+   },
+   "top 10%": {
+    "n": 112,
+    "with_any_candidate": 111,
+    "with_2plus_candidates": 107,
+    "frac_2plus": 0.9554,
+    "mean_count": 22.08,
+    "count_histogram": {
+     "0": 1,
+     "1": 4,
+     "2": 3,
+     "3": 1,
+     "7": 1,
+     "12": 1,
+     "13": 3,
+     "18": 1,
+     "20": 1,
+     "21": 1,
+     "22": 3,
+     "23": 5,
+     "24": 13,
+     "25": 74
+    }
+   },
+   "upper half": {
+    "n": 47,
+    "with_any_candidate": 47,
+    "with_2plus_candidates": 46,
+    "frac_2plus": 0.9787,
+    "mean_count": 19.68,
+    "count_histogram": {
+     "1": 1,
+     "4": 2,
+     "5": 1,
+     "9": 3,
+     "10": 1,
+     "11": 1,
+     "14": 4,
+     "17": 1,
+     "18": 1,
+     "19": 2,
+     "21": 1,
+     "22": 1,
+     "23": 2,
+     "24": 5,
+     "25": 21
+    }
+   }
+  },
+  "cards_by_route": {
+   "deezer-id": {
+    "n": 414,
+    "with_any_candidate": 414,
+    "with_2plus_candidates": 407,
+    "frac_2plus": 0.9831,
+    "mean_count": 22.97,
+    "count_histogram": {
+     "1": 7,
+     "2": 5,
+     "3": 9,
+     "4": 1,
+     "5": 1,
+     "7": 2,
+     "8": 2,
+     "9": 2,
+     "10": 1,
+     "11": 1,
+     "12": 1,
+     "13": 2,
+     "14": 4,
+     "18": 2,
+     "19": 1,
+     "20": 2,
+     "21": 2,
+     "22": 3,
+     "23": 8,
+     "24": 44,
+     "25": 314
+    }
+   },
+   "deezer-name": {
+    "n": 26,
+    "with_any_candidate": 26,
+    "with_2plus_candidates": 25,
+    "frac_2plus": 0.9615,
+    "mean_count": 16.04,
+    "count_histogram": {
+     "1": 1,
+     "4": 1,
+     "7": 2,
+     "8": 1,
+     "9": 1,
+     "11": 1,
+     "13": 6,
+     "17": 1,
+     "19": 2,
+     "21": 1,
+     "22": 2,
+     "23": 1,
+     "24": 1,
+     "25": 5
+    }
+   },
+   "itunes": {
+    "n": 1,
+    "with_any_candidate": 1,
+    "with_2plus_candidates": 1,
+    "frac_2plus": 1.0,
+    "mean_count": 2.0,
+    "count_histogram": {
+     "2": 1
+    }
+   },
+   "none": {
+    "n": 2,
+    "with_any_candidate": 0,
+    "with_2plus_candidates": 0,
+    "frac_2plus": 0.0,
+    "mean_count": 0.0,
+    "count_histogram": {
+     "0": 2
+    }
+   }
+  },
+  "cards_by_band_and_route": {
+   "top 0.1% / deezer-id": {
+    "n": 15,
+    "with_any_candidate": 15,
+    "with_2plus_candidates": 15,
+    "frac_2plus": 1.0,
+    "mean_count": 23.13,
+    "count_histogram": {
+     "2": 1,
+     "24": 5,
+     "25": 9
+    }
+   },
+   "top 1% / deezer-id": {
+    "n": 237,
+    "with_any_candidate": 237,
+    "with_2plus_candidates": 237,
+    "frac_2plus": 1.0,
+    "mean_count": 23.58,
+    "count_histogram": {
+     "2": 2,
+     "3": 8,
+     "7": 2,
+     "8": 2,
+     "13": 1,
+     "21": 1,
+     "22": 1,
+     "23": 2,
+     "24": 21,
+     "25": 197
+    }
+   },
+   "top 1% / deezer-name": {
+    "n": 6,
+    "with_any_candidate": 6,
+    "with_2plus_candidates": 6,
+    "frac_2plus": 1.0,
+    "mean_count": 12.83,
+    "count_histogram": {
+     "8": 1,
+     "11": 1,
+     "13": 3,
+     "19": 1
+    }
+   },
+   "top 10% / deezer-id": {
+    "n": 124,
+    "with_any_candidate": 124,
+    "with_2plus_candidates": 118,
+    "frac_2plus": 0.9516,
+    "mean_count": 22.7,
+    "count_histogram": {
+     "1": 6,
+     "2": 2,
+     "3": 1,
+     "12": 1,
+     "13": 1,
+     "18": 1,
+     "20": 2,
+     "21": 1,
+     "22": 2,
+     "23": 4,
+     "24": 13,
+     "25": 90
+    }
+   },
+   "top 10% / deezer-name": {
+    "n": 10,
+    "with_any_candidate": 10,
+    "with_2plus_candidates": 9,
+    "frac_2plus": 0.9,
+    "mean_count": 14.8,
+    "count_histogram": {
+     "1": 1,
+     "7": 2,
+     "13": 3,
+     "22": 1,
+     "23": 1,
+     "24": 1,
+     "25": 1
+    }
+   },
+   "top 10% / itunes": {
+    "n": 1,
+    "with_any_candidate": 1,
+    "with_2plus_candidates": 1,
+    "frac_2plus": 1.0,
+    "mean_count": 2.0,
+    "count_histogram": {
+     "2": 1
+    }
+   },
+   "top 10% / none": {
+    "n": 2,
+    "with_any_candidate": 0,
+    "with_2plus_candidates": 0,
+    "frac_2plus": 0.0,
+    "mean_count": 0.0,
+    "count_histogram": {
+     "0": 2
+    }
+   },
+   "upper half / deezer-id": {
+    "n": 38,
+    "with_any_candidate": 38,
+    "with_2plus_candidates": 37,
+    "frac_2plus": 0.9737,
+    "mean_count": 19.95,
+    "count_histogram": {
+     "1": 1,
+     "4": 1,
+     "5": 1,
+     "9": 2,
+     "10": 1,
+     "11": 1,
+     "14": 4,
+     "18": 1,
+     "19": 1,
+     "23": 2,
+     "24": 5,
+     "25": 18
+    }
+   },
+   "upper half / deezer-name": {
+    "n": 10,
+    "with_any_candidate": 10,
+    "with_2plus_candidates": 10,
+    "frac_2plus": 1.0,
+    "mean_count": 19.2,
+    "count_histogram": {
+     "4": 1,
+     "9": 1,
+     "17": 1,
+     "19": 1,
+     "21": 1,
+     "22": 1,
+     "25": 4
+    }
+   }
+  },
+  "cards_by_pair_class": {
+   "ff": {
+    "n": 177,
+    "with_any_candidate": 177,
+    "with_2plus_candidates": 174,
+    "frac_2plus": 0.9831,
+    "mean_count": 22.34,
+    "count_histogram": {
+     "1": 3,
+     "2": 4,
+     "3": 5,
+     "7": 3,
+     "8": 2,
+     "11": 1,
+     "13": 6,
+     "19": 1,
+     "22": 1,
+     "24": 13,
+     "25": 138
+    }
+   },
+   "fo": {
+    "n": 193,
+    "with_any_candidate": 191,
+    "with_2plus_candidates": 188,
+    "frac_2plus": 0.9741,
+    "mean_count": 22.37,
+    "count_histogram": {
+     "0": 2,
+     "1": 3,
+     "2": 1,
+     "3": 3,
+     "4": 2,
+     "5": 1,
+     "7": 1,
+     "8": 1,
+     "9": 2,
+     "10": 1,
+     "12": 1,
+     "13": 1,
+     "14": 3,
+     "17": 1,
+     "18": 1,
+     "19": 2,
+     "20": 2,
+     "21": 3,
+     "22": 3,
+     "23": 7,
+     "24": 22,
+     "25": 130
+    }
+   },
+   "oo": {
+    "n": 73,
+    "with_any_candidate": 73,
+    "with_2plus_candidates": 71,
+    "frac_2plus": 0.9726,
+    "mean_count": 22.67,
+    "count_histogram": {
+     "1": 2,
+     "2": 1,
+     "3": 1,
+     "9": 1,
+     "11": 1,
+     "13": 1,
+     "14": 1,
+     "18": 1,
+     "22": 1,
+     "23": 2,
+     "24": 10,
+     "25": 51
+    }
+   }
+  }
+ },
+ "rows": [
+  {
+   "mbid": "36cf5c5e-14fb-42c0-a232-56bd449a81df",
+   "name": "Z‐Ro",
+   "pop_pctl": 0.594711,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d2974ed2-5624-42bd-a92d-488dd90b581a",
+   "name": "Rainbowdragoneyes",
+   "pop_pctl": 0.609073,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9bae247a-c674-46d5-83b0-9193e0618f71",
+   "name": "Kashmere Stage Band",
+   "pop_pctl": 0.626477,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "08e56714-b09d-4121-b319-524264c33749",
+   "name": "LM.C",
+   "pop_pctl": 0.669681,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 14,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7d3aa1dd-5e8b-47f3-a65b-41d78c725ce3",
+   "name": "George Cables",
+   "pop_pctl": 0.70386,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 19,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b62d7b00-7950-4305-b5b2-d2f966a8bc27",
+   "name": "U‐Recken",
+   "pop_pctl": 0.722556,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 9,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "56c6ebf8-a19d-4462-913d-049f954608ed",
+   "name": "Jazztronik",
+   "pop_pctl": 0.73639,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 21,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "26824a9b-fb6c-4b77-8cef-bf90177ac22c",
+   "name": "Kyoto Jazz Massive",
+   "pop_pctl": 0.743886,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7ff71aca-2ff2-4bfa-a33b-be94777cabee",
+   "name": "surrenderdorothy",
+   "pop_pctl": 0.7489,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 25,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "1063a13c-9649-4e37-a816-3c0772129aba",
+   "name": "Sticky Fingers",
+   "pop_pctl": 0.750463,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cffb263e-f6af-4127-b783-f4bbf28cad0c",
+   "name": "Talkdemonic",
+   "pop_pctl": 0.762666,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 14,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "16f23a87-d842-4609-ae91-9d3d635e8bea",
+   "name": "Clive Nolan",
+   "pop_pctl": 0.765828,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 14,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "da6d63da-e2ee-4a85-a91b-0f7b322a9212",
+   "name": "Northern Kings",
+   "pop_pctl": 0.770909,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 25,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "7d3996ec-e9e9-41ec-8f4d-e336f64fc7c6",
+   "name": "TOBACCO",
+   "pop_pctl": 0.777572,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f56025a9-5c4c-4865-82bf-d57124757c7d",
+   "name": "Telekinesis",
+   "pop_pctl": 0.78109,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 1,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5ccc33bc-7424-4a35-9357-6feb664bbddb",
+   "name": "Jan Lundgren",
+   "pop_pctl": 0.787311,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 4,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "abcc9179-5dae-4d0b-b634-edd1ee492635",
+   "name": "Taiwan MC",
+   "pop_pctl": 0.788228,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 17,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "940113ad-82d6-4e58-8ebb-96aa64d8e0d6",
+   "name": "Virtual Self",
+   "pop_pctl": 0.791118,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 9,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a6af6859-abf0-420b-be61-72812aa9d94e",
+   "name": "Tetsu Inoue",
+   "pop_pctl": 0.804936,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 22,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "822cb123-f728-4a1a-931c-fa27257bb83f",
+   "name": "Harvey Danger",
+   "pop_pctl": 0.805463,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "33fd78d9-3b93-49a2-9ccf-0d90b527fc8d",
+   "name": "Altar of Plagues",
+   "pop_pctl": 0.826827,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 10,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5ea48d60-26c9-406c-aed3-a450bb5d8e86",
+   "name": "Michael Schulte",
+   "pop_pctl": 0.827456,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "45f78429-6201-4534-95dd-4e23a8ff7d5b",
+   "name": "Persuader",
+   "pop_pctl": 0.830583,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 25,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "3ee5a97a-63e6-44b1-b7a2-b929f18794b1",
+   "name": "kenta-v.ez.",
+   "pop_pctl": 0.830668,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 4,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "80035dac-72ad-4b11-8046-f774070427a5",
+   "name": "David Wingo",
+   "pop_pctl": 0.831841,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 11,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "3b141e34-8c02-4074-b68a-7d64e3212acd",
+   "name": "Sister Hazel",
+   "pop_pctl": 0.8332,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ce4da5b1-5ee3-4e65-883b-09db55026f63",
+   "name": "Danimal Cannon",
+   "pop_pctl": 0.836412,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 18,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "72b0be76-ad7b-4766-b296-1994a917f7f9",
+   "name": "047",
+   "pop_pctl": 0.852134,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 19,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "8546949d-f46c-45ab-8391-85b26dda6b65",
+   "name": "Tim Buckley",
+   "pop_pctl": 0.859986,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "72d424d0-c349-4164-ae3e-8e5274f97b98",
+   "name": "Saweetie",
+   "pop_pctl": 0.864541,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e92d6330-65d2-445e-82e5-b98c683e727b",
+   "name": "Good Times Ahead",
+   "pop_pctl": 0.866173,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "500053c3-d673-4768-94d0-9e02aea5d0bf",
+   "name": "Luis Bacalov",
+   "pop_pctl": 0.866547,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 25,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "ed3e2de8-79ca-40ad-b8c5-7509a83d034f",
+   "name": "Dickie Harrell",
+   "pop_pctl": 0.867056,
+   "band": "upper half",
+   "has_deezer_id": false,
+   "count": 9,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "d5c98b21-0c73-4c15-bdeb-42d5db57a3b4",
+   "name": "Gavin Turek",
+   "pop_pctl": 0.868076,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f58853a7-916d-4f0b-83fe-3e80b5cda47c",
+   "name": "Adebisi Shank",
+   "pop_pctl": 0.868586,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 14,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7d45acc4-7c2a-4549-8929-d5907d9b6c7d",
+   "name": "D. Batistatos",
+   "pop_pctl": 0.875741,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 5,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "43fe7a49-2a63-48f1-871c-12450d21eeb1",
+   "name": "Mary Wells",
+   "pop_pctl": 0.877033,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "0837d2bc-ceb6-4512-9490-b30f5c0390fa",
+   "name": "Chinese Man",
+   "pop_pctl": 0.882523,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "2ce550e2-9045-480f-9e60-ae764f5b2ca8",
+   "name": "Shitmat",
+   "pop_pctl": 0.882778,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6958e806-1e14-4844-a0a7-07a27756aa0f",
+   "name": "A Great Big World",
+   "pop_pctl": 0.884698,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "505cc7ac-b92c-46dd-94f2-e22b18fdcf57",
+   "name": "Paul Wall",
+   "pop_pctl": 0.886245,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b3869d83-9fb5-4eac-b5ca-2d155fcbee12",
+   "name": "Tonedeff",
+   "pop_pctl": 0.887877,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "56cd15a1-0d74-438b-8244-c96ffe1cae03",
+   "name": "Barbra Streisand",
+   "pop_pctl": 0.89216,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "2c69465c-0f76-45ce-90a2-1ed0fdacc997",
+   "name": "CeeLo Green",
+   "pop_pctl": 0.894267,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b004d3c7-5402-4034-be67-13eeccc7b1af",
+   "name": "Felix da Housecat",
+   "pop_pctl": 0.895372,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "3a238c56-3790-4a6a-89af-4aa0c71fa732",
+   "name": "José Padilla",
+   "pop_pctl": 0.898618,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "13875f81-5bfc-4939-a6cc-296c3f8d0fa5",
+   "name": "Astrix",
+   "pop_pctl": 0.899145,
+   "band": "upper half",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "0fb7d725-4dfd-45d2-944c-6ffa375a142d",
+   "name": "And So I Watch You From Afar",
+   "pop_pctl": 0.900403,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "17995d1c-5b3c-4ee9-98f5-105ee3b4ada1",
+   "name": "Eddie Cochran",
+   "pop_pctl": 0.902986,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6f3d4a7b-45b2-4c08-9306-8d271e92cb4f",
+   "name": "Alif Tree",
+   "pop_pctl": 0.905553,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 18,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "0cd12ab3-9628-45ef-a97b-ff18624f14a0",
+   "name": "65daysofstatic",
+   "pop_pctl": 0.908,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ebe26895-c0d1-41c3-8bcc-a49d62c497a1",
+   "name": "CHUU",
+   "pop_pctl": 0.910465,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7e07ffb5-c0f6-4891-a74d-a5e12a247785",
+   "name": "Die Antwoord",
+   "pop_pctl": 0.911161,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "01809552-4f87-45b0-afff-2c6f0730a3be",
+   "name": "Elvis Presley",
+   "pop_pctl": 0.912674,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 22,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "87684162-ab42-4cfa-bf22-ebe237035f54",
+   "name": "L.A. Guns",
+   "pop_pctl": 0.91541,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 22,
+   "route": "deezer-name",
+   "calls": 2
+  },
+  {
+   "mbid": "0b30341b-b59d-4979-8130-b66c0e475321",
+   "name": "Lil Nas X",
+   "pop_pctl": 0.918487,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7e1666e2-b82d-40f6-98ff-920dc6fe3f8b",
+   "name": "Talamasca",
+   "pop_pctl": 0.918759,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e4f12dfc-1ee7-4250-8e24-549b6d46676d",
+   "name": "Ben Böhmer",
+   "pop_pctl": 0.922039,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "0182474b-8a1d-46d0-9d0f-e6df353335ea",
+   "name": "Perry Como",
+   "pop_pctl": 0.922226,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "841db5c8-7072-4b89-9bdb-0a0bd0e9d357",
+   "name": "Yiruma",
+   "pop_pctl": 0.92401,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 22,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "69c4cc43-8163-41c5-ac81-30946d27bb69",
+   "name": "CunninLynguists",
+   "pop_pctl": 0.924826,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "93bedd5b-d3b6-4d3c-9b07-c74989e410dc",
+   "name": "Albert “Tootie” Heath",
+   "pop_pctl": 0.925251,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 0,
+   "route": "none",
+   "calls": 2
+  },
+  {
+   "mbid": "3604c99d-c146-4276-aa0c-9376d333aeb8",
+   "name": "Everclear",
+   "pop_pctl": 0.92724,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "0d79fe8e-ba27-4859-bb8c-2f255f346853",
+   "name": "BTS",
+   "pop_pctl": 0.930877,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "186e216a-2f8a-41a1-935f-8e30c018a8fe",
+   "name": "Passenger",
+   "pop_pctl": 0.932423,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ae3e9b71-e738-492c-946f-e1fe81f12982",
+   "name": "This Patch of Sky",
+   "pop_pctl": 0.93708,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 25,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "964399c3-a4cd-4604-86d5-8051322705b9",
+   "name": "Maserati",
+   "pop_pctl": 0.937607,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f32e8860-3a92-43f6-999e-c684dca76c03",
+   "name": "gorse panshawe",
+   "pop_pctl": 0.938066,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 21,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cbe51088-e4d8-463e-9f4e-e83fa64d3f5e",
+   "name": "Little Big",
+   "pop_pctl": 0.939664,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "66e2a444-5303-4cdf-b20f-d377ecf465ed",
+   "name": "Carla Thomas",
+   "pop_pctl": 0.939987,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e0dfdd7f-01f9-4e40-98a1-6f5085bbfd89",
+   "name": "Vanilla",
+   "pop_pctl": 0.940157,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 3,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "fec55784-ff5c-4992-83dd-1f7c4b10c6bf",
+   "name": "Jerry Butler",
+   "pop_pctl": 0.942213,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e9ec4424-2d6f-4332-b969-6c07caedf371",
+   "name": "General Elektriks",
+   "pop_pctl": 0.946717,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "600c5212-a8e6-458e-bd3f-78b6fbfe329a",
+   "name": "Kim Carnes",
+   "pop_pctl": 0.946921,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f47fc54d-b334-4321-8218-00c5b11d4dd1",
+   "name": "Gogol Bordello",
+   "pop_pctl": 0.946955,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "06fb1c8b-566e-4cb2-985b-b467c90781d4",
+   "name": "Jimi Hendrix",
+   "pop_pctl": 0.947108,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "21267448-e8aa-40f5-90cb-f9ef26ccc009",
+   "name": "Fila Brazillia",
+   "pop_pctl": 0.948332,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "070d193a-845c-479f-980e-bef15710653e",
+   "name": "Prince",
+   "pop_pctl": 0.951935,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "2bcee108-1442-4ac6-b020-df056cf067b4",
+   "name": "Mega Drive",
+   "pop_pctl": 0.956541,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "3cb25fb2-5547-4b05-adec-1a5e37830d46",
+   "name": "Lionel Richie",
+   "pop_pctl": 0.95994,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8af64037-6d26-4d24-afd8-7e085abb01b1",
+   "name": "The Impressions",
+   "pop_pctl": 0.961453,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5b0c68ba-e685-4908-b359-9af26450df02",
+   "name": "Rachel Bolan",
+   "pop_pctl": 0.964155,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 2,
+   "route": "itunes",
+   "calls": 2
+  },
+  {
+   "mbid": "ae0534cf-9061-4825-96e7-7d8eba90dd9b",
+   "name": "Dubmood",
+   "pop_pctl": 0.966331,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "76a2eaff-b6ad-483a-a427-d3a2aa3c4f8f",
+   "name": "Black Sun Empire",
+   "pop_pctl": 0.966518,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "70923a5d-d3ba-4ef7-9064-ea5f709aa076",
+   "name": "Have a Nice Life",
+   "pop_pctl": 0.966977,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 12,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "870bd642-f7e2-4712-a89f-7b1950a693ac",
+   "name": "Alice Russell",
+   "pop_pctl": 0.969322,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "303abdee-ffca-4685-a582-6aaaefd81b01",
+   "name": "Carpenter Brut",
+   "pop_pctl": 0.969424,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 1,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8347dd6d-b9a2-4e96-a610-d1ed67b189f1",
+   "name": "Steve Roach",
+   "pop_pctl": 0.969645,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "39a31de6-763d-48b6-a45c-f7cfad58ffd8",
+   "name": "Sabaton",
+   "pop_pctl": 0.969781,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "395cc503-63b5-4a0b-a20a-604e3fcacea2",
+   "name": "Men at Work",
+   "pop_pctl": 0.969917,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "13b14a2e-470c-434c-8f89-c8763f849e2c",
+   "name": "Glenn Tipton",
+   "pop_pctl": 0.971005,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 13,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "0ab49580-c84f-44d4-875f-d83760ea2cfe",
+   "name": "Maroon 5",
+   "pop_pctl": 0.971124,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "df074f34-26fc-45fa-adf3-d19836dde2ec",
+   "name": "Demons & Wizards",
+   "pop_pctl": 0.971718,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 13,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "1036b808-f58c-4a3e-b461-a2c4492ecf1b",
+   "name": "Nicki Minaj",
+   "pop_pctl": 0.973214,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4c98aa1b-34eb-4336-987f-5e50aa059c00",
+   "name": "The Script",
+   "pop_pctl": 0.973316,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "2f3c4d70-0462-40da-bba3-0aec5772c556",
+   "name": "Cardi B",
+   "pop_pctl": 0.974098,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "0dfd6aab-9056-4764-89b0-80bee7c9f998",
+   "name": "Pino Palladino",
+   "pop_pctl": 0.974251,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "618b6900-0618-4f1e-b835-bccb17f84294",
+   "name": "Eric Clapton",
+   "pop_pctl": 0.974455,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ead4fa2d-2ecc-47f6-8ad0-01d26683e7db",
+   "name": "Halou",
+   "pop_pctl": 0.974897,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 24,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "20395131-fbde-43ce-b141-b700cfdae99c",
+   "name": "Glass Animals",
+   "pop_pctl": 0.975237,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "188711ed-c99b-439c-844a-ca831f63a727",
+   "name": "MF DOOM",
+   "pop_pctl": 0.976511,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a4f54716-24d9-4c6b-8ba7-1d7e7a5173d0",
+   "name": "Fischerspooner",
+   "pop_pctl": 0.976987,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "370bd5a3-4abf-4356-8576-3a8fc0c11d65",
+   "name": "Above & Beyond",
+   "pop_pctl": 0.977735,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f5a8f323-71b5-4666-94c6-032f395d694d",
+   "name": "Zero Cult",
+   "pop_pctl": 0.978381,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "67e344da-ec54-4e26-b2a4-8351d744a14c",
+   "name": "梶浦由記",
+   "pop_pctl": 0.978993,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "bd052b81-353a-4bce-8cd8-72ba9d4ce414",
+   "name": "Lane 8",
+   "pop_pctl": 0.979554,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "75be165a-ad83-4d12-bd28-f589a15c479f",
+   "name": "Major Lazer",
+   "pop_pctl": 0.979605,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "eb0cf932-29f0-4e42-a866-2440b18dc182",
+   "name": "goreshit",
+   "pop_pctl": 0.979622,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "1ee18fb3-18a6-4c7f-8ba0-bc41cdd0462e",
+   "name": "Stevie Wonder",
+   "pop_pctl": 0.979724,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "757ed661-fbad-4e45-b1cd-a6b09f06f54a",
+   "name": "Yung Lean",
+   "pop_pctl": 0.979741,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "56abaa47-0101-463b-b37e-e961136fec39",
+   "name": "Venetian Snares",
+   "pop_pctl": 0.98003,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "16cb4a74-225a-4262-a885-628083f12460",
+   "name": "Mike McCready",
+   "pop_pctl": 0.980217,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 13,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "123814ce-f7f7-44c9-b84d-0088b1e230a4",
+   "name": "Geezer Butler",
+   "pop_pctl": 0.981049,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 7,
+   "route": "deezer-name",
+   "calls": 2
+  },
+  {
+   "mbid": "92bb085a-2924-4479-b627-181a1835d2f5",
+   "name": "植松伸夫",
+   "pop_pctl": 0.9811,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c21db200-1f7c-4c23-b518-cf7fac6b8e85",
+   "name": "Blut aus Nord",
+   "pop_pctl": 0.98144,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4f0cb3b7-6c06-4317-ae35-ddf3106a17ee",
+   "name": "Red Velvet",
+   "pop_pctl": 0.981593,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6ca4886a-8f77-4133-b404-46fb3908e24a",
+   "name": "Brenda Lee",
+   "pop_pctl": 0.98161,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "260b6184-8828-48eb-945c-bc4cb6fc34ca",
+   "name": "Charli xcx",
+   "pop_pctl": 0.981797,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6a4c2d34-7f7f-4f87-b17f-b5540aa840db",
+   "name": "The Miracles",
+   "pop_pctl": 0.982103,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "25b7b584-d952-4662-a8b9-dd8cdfbfeb64",
+   "name": "A$AP Rocky",
+   "pop_pctl": 0.982171,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "382f1005-e9ab-4684-afd4-0bdae4ee37f2",
+   "name": "2Pac",
+   "pop_pctl": 0.982596,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "dbe35fab-1b3a-469b-87f0-6a54ef8de3c4",
+   "name": "M.O.P.",
+   "pop_pctl": 0.983072,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "96f6ec97-998c-4991-b836-7b71feb3ca6f",
+   "name": "TOKiMONSTA",
+   "pop_pctl": 0.983276,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "272989c8-5535-492d-a25c-9f58803e027f",
+   "name": "SZA",
+   "pop_pctl": 0.983293,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "73fdb566-a9b1-494c-9f32-51768ec9fd27",
+   "name": "OutKast",
+   "pop_pctl": 0.983327,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "611700cf-27f0-4dc9-ae80-c513a767853e",
+   "name": "Michael Bublé",
+   "pop_pctl": 0.983446,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ac69016f-42cc-4322-b70e-101458b769aa",
+   "name": "Sébastien Tellier",
+   "pop_pctl": 0.983548,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cc7d4686-ea02-45fd-956e-94c1a322558c",
+   "name": "Lykke Li",
+   "pop_pctl": 0.983922,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a21b2652-62ed-4767-a3d2-0aa802abf080",
+   "name": "Chet Faker",
+   "pop_pctl": 0.984822,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "1ba97964-8d70-4b33-a361-d1a4ed222672",
+   "name": "Josh Freese",
+   "pop_pctl": 0.984839,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 1,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9006da5a-73cc-4b98-9395-78570b827fb1",
+   "name": "Shigeto",
+   "pop_pctl": 0.984992,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 23,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "d2ad8774-9173-4970-8427-06b04df201c1",
+   "name": "Venom",
+   "pop_pctl": 0.985298,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4593d49a-7f67-46ba-9ec0-126bd676286f",
+   "name": "Flo Rida",
+   "pop_pctl": 0.985417,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "056e4f3e-d505-4dad-8ec1-d04f521cbb56",
+   "name": "Daft Punk",
+   "pop_pctl": 0.985723,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 1,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "beff21d3-88c7-4ee0-8b7a-40b6db22c6d7",
+   "name": "Pendulum",
+   "pop_pctl": 0.986199,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9512eed7-a1a9-4e2f-8cac-c10d1448c1ce",
+   "name": "This Will Destroy You",
+   "pop_pctl": 0.98625,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 20,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7d209631-ccb8-4a87-8516-64abe4c22dba",
+   "name": "Ulver",
+   "pop_pctl": 0.986369,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "93ccd76c-3790-4435-a8bf-02bc26294b93",
+   "name": "Bush",
+   "pop_pctl": 0.986522,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d24fb461-dee8-41fc-bb15-2f13bb2644a6",
+   "name": "Jessie J",
+   "pop_pctl": 0.986573,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5bf64d94-efd9-4334-96fd-e6197b0b02b8",
+   "name": "Tricky",
+   "pop_pctl": 0.986777,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "3a51b862-0144-40f6-aa17-6aaeefea29d9",
+   "name": "Steven Wilson",
+   "pop_pctl": 0.987066,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9e839dc3-55f3-4492-ad0e-a1a2e84275e2",
+   "name": "Xzibit",
+   "pop_pctl": 0.987508,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4ae36ade-1798-48c4-b06b-cc68b7d3d83f",
+   "name": "Porter Robinson",
+   "pop_pctl": 0.987627,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 2,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "50a32791-ee43-4c67-aabc-3dc65e4a9838",
+   "name": "Helios",
+   "pop_pctl": 0.987678,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4d86ad4e-28d8-4e9f-8cf4-735c57060fdc",
+   "name": "Squarepusher",
+   "pop_pctl": 0.987712,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ed785ff1-8b1b-4bc0-8a24-dcc831013059",
+   "name": "Martina Topley‐Bird",
+   "pop_pctl": 0.987797,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "23a03e33-a603-404e-bcbf-2c00159d7067",
+   "name": "The Offspring",
+   "pop_pctl": 0.987831,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "1946a82a-f927-40c2-8235-38d64f50d043",
+   "name": "The Chemical Brothers",
+   "pop_pctl": 0.988171,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "65314b12-0e08-43fa-ba33-baaa7b874c15",
+   "name": "Leonard Cohen",
+   "pop_pctl": 0.988324,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "aba64937-3334-4c65-90a1-4e6b9d4d7ada",
+   "name": "Aesop Rock",
+   "pop_pctl": 0.988596,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "50d0e9b4-0f89-44a0-ab97-a3ba71573346",
+   "name": "Matt Sharp",
+   "pop_pctl": 0.988698,
+   "band": "top 10%",
+   "has_deezer_id": false,
+   "count": 1,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "d72ae77d-ca32-498d-870e-8204165b8ee4",
+   "name": "t+pazolite",
+   "pop_pctl": 0.98897,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e3f7631b-e50b-4923-9049-2fa84dfcaf71",
+   "name": "BONES",
+   "pop_pctl": 0.988987,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "82eb8936-7bf6-4577-8320-a2639465206d",
+   "name": "Jason Mraz",
+   "pop_pctl": 0.989055,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7e35659f-f3bb-4c28-bcf5-47bd5cfa2bca",
+   "name": "The Tallest Man on Earth",
+   "pop_pctl": 0.989462,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "73dcbc17-9c8b-435c-a2b2-4c20ce6ccefc",
+   "name": "Kai Hansen",
+   "pop_pctl": 0.989513,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a2af1f31-c9eb-4fff-990c-c4f547a11b75",
+   "name": "Solar Fields",
+   "pop_pctl": 0.989615,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "bfd5aec5-62a2-4560-a316-7c46c17babda",
+   "name": "Train",
+   "pop_pctl": 0.989717,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 2,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "164f0d73-1234-4e2c-8743-d77bf2191051",
+   "name": "Ye",
+   "pop_pctl": 0.989853,
+   "band": "top 10%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "61ed9c9c-79eb-4e8f-8015-bd599ac0ab49",
+   "name": "Katatonia",
+   "pop_pctl": 0.990805,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "2944824d-4c26-476f-a981-be849081942f",
+   "name": "Nina Simone",
+   "pop_pctl": 0.99089,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
+   "name": "Stone Temple Pilots",
+   "pop_pctl": 0.990958,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "477b8c0c-c5fc-4ad2-b5b2-191f0bf2a9df",
+   "name": "Armin van Buuren",
+   "pop_pctl": 0.990992,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7e8571b1-7c5a-4739-bc51-73d422ee9d74",
+   "name": "Five Finger Death Punch",
+   "pop_pctl": 0.991111,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c3694ddc-f7e5-40dd-9fad-90d11a2c50fa",
+   "name": "Flogging Molly",
+   "pop_pctl": 0.991213,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402",
+   "name": "The Flaming Lips",
+   "pop_pctl": 0.991434,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "561d854a-6a28-4aa7-8c99-323e6ce46c2a",
+   "name": "Miles Davis",
+   "pop_pctl": 0.991468,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "fa37018e-3557-4cb7-973f-555003c30174",
+   "name": "London Philharmonic Orchestra",
+   "pop_pctl": 0.991519,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7fa7fc04-1011-4876-8095-ecd232edea87",
+   "name": "Blind Guardian",
+   "pop_pctl": 0.99157,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "410c9baf-5469-44f6-9852-826524b80c61",
+   "name": "Autechre",
+   "pop_pctl": 0.991638,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f1d7f1fd-8883-47e9-ad2b-e9ec9ff61aac",
+   "name": "Sam & Dave",
+   "pop_pctl": 0.991706,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 22,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "1c70a3fc-fa3c-4be1-8b55-c3192db8a884",
+   "name": "Röyksopp",
+   "pop_pctl": 0.991859,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "31745282-b1ea-4d62-939f-226b14d68e7c",
+   "name": "In Flames",
+   "pop_pctl": 0.991927,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8f9d6bb2-dba4-4cca-9967-cc02b9f4820c",
+   "name": "Limp Bizkit",
+   "pop_pctl": 0.992233,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "606bf117-494f-4864-891f-09d63ff6aa4b",
+   "name": "Rise Against",
+   "pop_pctl": 0.992471,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "fa34b363-79df-434f-a5b8-be4e6898543f",
+   "name": "Ludovico Einaudi",
+   "pop_pctl": 0.992522,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6e0c7c0e-cba5-4c2c-a652-38f71ef5785d",
+   "name": "Lily Allen",
+   "pop_pctl": 0.992896,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c729681b-c5c1-4509-a6d1-f916c51aefd7",
+   "name": "Pegboard Nerds",
+   "pop_pctl": 0.992947,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9ef8042a-2528-4f5c-b7c1-5e72b1efe170",
+   "name": "Gang Starr",
+   "pop_pctl": 0.993015,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c39a1eeb-e646-43e9-b984-4ffdc92b0241",
+   "name": "Tommy Flanagan",
+   "pop_pctl": 0.993066,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c24b47a1-2f52-44f3-a3c6-374dca844731",
+   "name": "Wax Tailor",
+   "pop_pctl": 0.993168,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4449ccf6-c948-4d33-aa97-b6ad98ce4b5b",
+   "name": "Metric",
+   "pop_pctl": 0.993202,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 3,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "95e9aba6-f85c-48a0-9ec9-395d4f0e3875",
+   "name": "Trentemøller",
+   "pop_pctl": 0.993321,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e9dfc148-d5f6-425e-b80b-f99ed2bd7c09",
+   "name": "God Is an Astronaut",
+   "pop_pctl": 0.993355,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c3da3346-2643-48a7-93cd-011f6834b3d7",
+   "name": "Sean Paul",
+   "pop_pctl": 0.99349,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 7,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "99ea432a-e3d8-42cb-9d5e-db316a6a8458",
+   "name": "Nick Drake",
+   "pop_pctl": 0.993507,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b476bc5e-19ca-4e5a-82c8-1a068d601a7d",
+   "name": "Nosaj Thing",
+   "pop_pctl": 0.993524,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a8ebde98-7e91-46c7-992c-90039ba42017",
+   "name": "De La Soul",
+   "pop_pctl": 0.993575,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a16e47f5-aa54-47fe-87e4-bb8af91a9fdd",
+   "name": "Ennio Morricone",
+   "pop_pctl": 0.993643,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a5ee1ebe-a645-45d2-8319-d101fe62e581",
+   "name": "Biosphere",
+   "pop_pctl": 0.993728,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 2,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "eb6de5f6-98f8-4b5a-bfdc-f87fa4936baa",
+   "name": "Kavinsky",
+   "pop_pctl": 0.993779,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ae002c5d-aac6-490b-a39a-30aa9e2edf2b",
+   "name": "Skrillex",
+   "pop_pctl": 0.993813,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7f2a8098-50e3-451c-8696-c5d9f64f4762",
+   "name": "Wire",
+   "pop_pctl": 0.993864,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "33ca19f4-18c8-4411-98df-ac23890ce9f5",
+   "name": "Ellie Goulding",
+   "pop_pctl": 0.994051,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a6de8ef9-b1a1-4756-97aa-481bbb8a4069",
+   "name": "Joni Mitchell",
+   "pop_pctl": 0.994085,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6de0f914-3e60-4418-be3b-42e0feb6eb4d",
+   "name": "Jason Derulo",
+   "pop_pctl": 0.994153,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+   "name": "Beck",
+   "pop_pctl": 0.994255,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5a85c140-dcf9-4dd2-b2c8-aff0471549f3",
+   "name": "Sam Smith",
+   "pop_pctl": 0.99434,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a0327dc2-dc76-44d5-aec6-47cd2dff1469",
+   "name": "Counting Crows",
+   "pop_pctl": 0.994374,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d8354b38-e942-4c89-ba93-29323432abc3",
+   "name": "Thirty Seconds to Mars",
+   "pop_pctl": 0.994391,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "44cf61b8-5197-448a-b82b-cef6ee89fac5",
+   "name": "Paramore",
+   "pop_pctl": 0.994527,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "898b645e-eed2-490a-8ce2-0e7a4d2d5bc8",
+   "name": "Robert Fripp",
+   "pop_pctl": 0.994578,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "94b0fb9d-a066-4823-b2ec-af1d324bcfcf",
+   "name": "The Velvet Underground",
+   "pop_pctl": 0.994595,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "437a0e49-c6ae-42f6-a6c1-84f25ed366bc",
+   "name": "Bon Iver",
+   "pop_pctl": 0.994612,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "56c4b861-0922-4c3a-a9b9-3bfcb00f8274",
+   "name": "Zedd",
+   "pop_pctl": 0.994629,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8b22acd6-20e6-4463-a75c-c14b5cfdb666",
+   "name": "Earl Sweatshirt",
+   "pop_pctl": 0.994646,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+   "name": "Muse",
+   "pop_pctl": 0.994663,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9e103f85-7af7-41d7-b83b-49ba8f0c5abf",
+   "name": "Of Monsters and Men",
+   "pop_pctl": 0.994748,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8e494408-8620-4c6a-82c2-c2ca4a1e4f12",
+   "name": "Lorde",
+   "pop_pctl": 0.994816,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "97b8d224-5660-419c-8dff-4b3bf0c33983",
+   "name": "The Neighbourhood",
+   "pop_pctl": 0.99485,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 3,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9e53f84d-ef44-4c16-9677-5fd4d78cbd7d",
+   "name": "Wilco",
+   "pop_pctl": 0.994867,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "82b1f5fd-cd31-41a9-b5d4-7e33f0eb9751",
+   "name": "Otis Redding",
+   "pop_pctl": 0.994901,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "83b9cbe7-9857-49e2-ab8e-b57b01038103",
+   "name": "Pearl Jam",
+   "pop_pctl": 0.994918,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "3bcff06f-675a-451f-9075-99e8657047e8",
+   "name": "Four Tet",
+   "pop_pctl": 0.994935,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "74a30f2a-dae6-4e99-8a75-cb0f93b31aa6",
+   "name": "Washed Out",
+   "pop_pctl": 0.994969,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "3c9b356d-d1db-4f4e-a7a3-2d00c1d70255",
+   "name": "Kurt Cobain",
+   "pop_pctl": 0.995003,
+   "band": "top 1%",
+   "has_deezer_id": false,
+   "count": 8,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "59a7fbcb-ff74-494d-abd0-9c82359040c9",
+   "name": "Grizzly Bear",
+   "pop_pctl": 0.995071,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "66fc5bf8-daa4-4241-b378-9bc9077939d2",
+   "name": "Tool",
+   "pop_pctl": 0.995088,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4a4ee089-93b1-4470-af9a-6ff575d32704",
+   "name": "The Prodigy",
+   "pop_pctl": 0.995105,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "be407b02-f3e6-4ed5-9489-f8e5f0ab36dc",
+   "name": "The Raconteurs",
+   "pop_pctl": 0.995122,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+   "name": "Hozier",
+   "pop_pctl": 0.995139,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6c8b9855-ba8b-48f9-ac1d-42167f7f7b18",
+   "name": "The Shins",
+   "pop_pctl": 0.995173,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "eab76c9f-ff91-4431-b6dd-3b976c598020",
+   "name": "Infected Mushroom",
+   "pop_pctl": 0.995207,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5cbef01b-cc35-4f52-af7b-d0df0c4f61b9",
+   "name": "Sonic Youth",
+   "pop_pctl": 0.995241,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "4a00ec9d-c635-463a-8cd4-eb61725f0c60",
+   "name": "deadmau5",
+   "pop_pctl": 0.995292,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b2029169-2574-4305-820f-252a5fde3697",
+   "name": "Meghan Trainor",
+   "pop_pctl": 0.995326,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d4aad415-9cd0-4845-9b05-0416fdcc9fc4",
+   "name": "WALK THE MOON",
+   "pop_pctl": 0.99536,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d03a54bc-6e07-4c04-a8d4-7fbf2bd07a01",
+   "name": "Nils Frahm",
+   "pop_pctl": 0.99553,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 23,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7fb57fba-a6ef-44c2-abab-2fa3bdee607e",
+   "name": "Childish Gambino",
+   "pop_pctl": 0.995615,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+   "name": "David Bowie",
+   "pop_pctl": 0.995666,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cf8b3b8c-118e-4136-8d1d-c37091173413",
+   "name": "Meshuggah",
+   "pop_pctl": 0.995683,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a41ac10f-0a56-4672-9161-b83f9b223559",
+   "name": "Van Morrison",
+   "pop_pctl": 0.995853,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "bc5e2ad6-0a4a-4d90-b911-e9a7e6861727",
+   "name": "Mastodon",
+   "pop_pctl": 0.995972,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8ca01f46-53ac-4af2-8516-55a909c0905e",
+   "name": "My Bloody Valentine",
+   "pop_pctl": 0.996023,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 21,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8ed2e0b3-aa4c-4e13-bec3-dc7393ed4d6b",
+   "name": "Thom Yorke",
+   "pop_pctl": 0.996125,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3",
+   "name": "The Decemberists",
+   "pop_pctl": 0.996176,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e8374874-4178-4869-b92e-fef6bf30dc04",
+   "name": "Dropkick Murphys",
+   "pop_pctl": 0.99621,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ec22a32b-acab-432e-a88c-ffe6ae68fa16",
+   "name": "Noisia",
+   "pop_pctl": 0.996227,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b45335d1-5219-4262-a44d-936aa36eeaed",
+   "name": "Ladytron",
+   "pop_pctl": 0.996312,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8dc08b1f-e393-4f85-a5dd-300f7693a8b8",
+   "name": "James Blake",
+   "pop_pctl": 0.99638,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 3,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ffb18e19-64a4-4a65-b4ce-979e00c3c69d",
+   "name": "The Album Leaf",
+   "pop_pctl": 0.996516,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7cf0ea9d-86b9-4dad-ba9e-2355a64899ea",
+   "name": "M.I.A.",
+   "pop_pctl": 0.996584,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b1e26560-60e5-4236-bbdb-9aa5a8d5ee19",
+   "name": "Post Malone",
+   "pop_pctl": 0.996635,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a16371b9-7d36-497a-a9d4-42b0a0440c5e",
+   "name": "Slowdive",
+   "pop_pctl": 0.996686,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e6de1f3b-6484-491c-88dd-6d619f142abc",
+   "name": "Hans Zimmer",
+   "pop_pctl": 0.996737,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6f1de078-6684-4792-820d-2ffad64c15ed",
+   "name": "Two Door Cinema Club",
+   "pop_pctl": 0.996822,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b46efb1e-ecd9-4044-9820-14c64c2d657e",
+   "name": "Romy",
+   "pop_pctl": 0.996873,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6f1a58bf-9b1b-49cf-a44a-6cefad7ae04f",
+   "name": "Dua Lipa",
+   "pop_pctl": 0.99689,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 2,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a506f761-2c22-4b2f-8a94-bd748c2c8f75",
+   "name": "Neutral Milk Hotel",
+   "pop_pctl": 0.996924,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 8,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "735e3514-a8ae-401f-af3b-6300df1b8d2c",
+   "name": "Caribou",
+   "pop_pctl": 0.996941,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b8c5cc4f-239f-4e02-b46f-b040b77c2030",
+   "name": "Nightmares on Wax",
+   "pop_pctl": 0.996958,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "faa28a33-5470-4b90-90c3-e71955d93a44",
+   "name": "BANKS",
+   "pop_pctl": 0.997043,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6d7b7cd4-254b-4c25-83f6-dd20f98ceacd",
+   "name": "M83",
+   "pop_pctl": 0.997077,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "bdacc37b-8633-4bf8-9dd5-4662ee651aec",
+   "name": "Slayer",
+   "pop_pctl": 0.997094,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f1560407-8826-4ec9-b78f-e0c3fa3ea4f5",
+   "name": "Quantic",
+   "pop_pctl": 0.997162,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "584c04d2-4acc-491b-8a0a-e63133f4bfc4",
+   "name": "Yeah Yeah Yeahs",
+   "pop_pctl": 0.997179,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ae65c507-d9a0-4d42-9a6c-2b1f82158b9f",
+   "name": "Disclosure",
+   "pop_pctl": 0.99723,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e3ea6186-7523-48de-8437-bac91bc47829",
+   "name": "Lemmy Kilmister",
+   "pop_pctl": 0.997247,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "dcaa4f81-bfb7-44eb-8594-4e74f004b6e4",
+   "name": "NOFX",
+   "pop_pctl": 0.997298,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "6fe07aa5-fec0-4eca-a456-f29bff451b04",
+   "name": "Weezer",
+   "pop_pctl": 0.997349,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "afdb7919-059d-43c1-b668-ba1d265e7e42",
+   "name": "Marvin Gaye",
+   "pop_pctl": 0.9974,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7d7a5fdd-0d04-4c36-8bee-906feeae239c",
+   "name": "Damon Albarn",
+   "pop_pctl": 0.997417,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cfbc0924-0035-4d6c-8197-f024653af823",
+   "name": "Nas",
+   "pop_pctl": 0.997468,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+   "name": "The National",
+   "pop_pctl": 0.997485,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "5d06fe54-485a-4a07-b506-5f6f719448cb",
+   "name": "Billie Joe Armstrong",
+   "pop_pctl": 0.99757,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a0498514-c21c-4e85-8dbf-a1b92374a06b",
+   "name": "Albert Hammond, Jr.",
+   "pop_pctl": 0.997587,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "960eb93f-e73c-4df8-864d-08a06c2dcc11",
+   "name": "Jerry Cantrell",
+   "pop_pctl": 0.997604,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cb67438a-7f50-4f2b-a6f1-2bb2729fd538",
+   "name": "Air",
+   "pop_pctl": 0.997638,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "84eac621-1c5a-49a1-9500-555099c6e184",
+   "name": "Spoon",
+   "pop_pctl": 0.997706,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9d1ebcfe-4c15-4d18-95d3-d919898638a1",
+   "name": "Lou Reed",
+   "pop_pctl": 0.997723,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "847e8284-8582-4b0e-9c26-b042a4f49e57",
+   "name": "Placebo",
+   "pop_pctl": 0.997791,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "7944ed53-2a58-4035-9b93-140a71e41c34",
+   "name": "Sting",
+   "pop_pctl": 0.997909,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a466c2a2-6517-42fb-a160-1087c3bafd9f",
+   "name": "Slipknot",
+   "pop_pctl": 0.99796,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9a709693-b4f8-4da9-8cc1-038c911a61be",
+   "name": "Bonobo",
+   "pop_pctl": 0.997977,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "650e7db6-b795-4eb5-a702-5ea2fc46c848",
+   "name": "Lady Gaga",
+   "pop_pctl": 0.998045,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d5be5333-4171-427e-8e12-732087c6b78e",
+   "name": "Black Eyed Peas",
+   "pop_pctl": 0.998164,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "79239441-bfd5-4981-a70c-55c3f15c1287",
+   "name": "Madonna",
+   "pop_pctl": 0.998181,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 3,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a9044915-8be3-4c7e-b11f-9e2d2ea0a91e",
+   "name": "Megadeth",
+   "pop_pctl": 0.998198,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f5dfa020-ad69-41cd-b3d4-fd7af0414e94",
+   "name": "Wiz Khalifa",
+   "pop_pctl": 0.998215,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f2492c31-54a8-4347-a1fc-f81f72873bbf",
+   "name": "Mac DeMarco",
+   "pop_pctl": 0.998317,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "a6c6897a-7415-4f8d-b5a5-3a5e05f3be67",
+   "name": "twenty one pilots",
+   "pop_pctl": 0.998453,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8c538f11-c141-4588-8ecb-931083524186",
+   "name": "Bloc Party",
+   "pop_pctl": 0.998572,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 11,
+   "route": "deezer-name",
+   "calls": 2
+  },
+  {
+   "mbid": "e520459c-dff4-491d-a6e4-c97be35e0044",
+   "name": "Frank Ocean",
+   "pop_pctl": 0.998589,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "e0e1db18-f7ba-4dee-95ff-7ae8cf545460",
+   "name": "Kid Cudi",
+   "pop_pctl": 0.998606,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "aa82f6eb-ded9-4c0b-951d-2e638ca25c76",
+   "name": "Nathan East",
+   "pop_pctl": 0.998623,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d",
+   "name": "Tame Impala",
+   "pop_pctl": 0.99864,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "9a58fda3-f4ed-4080-a3a5-f457aac9fcdd",
+   "name": "Joy Division",
+   "pop_pctl": 0.998725,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "fb3b8b9a-ef82-4a89-bbae-6361e2f999f3",
+   "name": "Nina Persson",
+   "pop_pctl": 0.998742,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 7,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c07f0676-9143-4217-8a9f-4c26bd636f13",
+   "name": "My Chemical Romance",
+   "pop_pctl": 0.998759,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "c3f28da8-662d-4f09-bdc7-3084bf685930",
+   "name": "Iron & Wine",
+   "pop_pctl": 0.998776,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d700b3f5-45af-4d02-95ed-57d301bda93e",
+   "name": "Mogwai",
+   "pop_pctl": 0.998844,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "b83bc61f-8451-4a5d-8b8e-7e9ed295e822",
+   "name": "Elton John",
+   "pop_pctl": 0.998861,
+   "band": "top 1%",
+   "has_deezer_id": true,
+   "count": 13,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cf58cc10-0145-48f5-9ac6-0f53183138fd",
+   "name": "Audrey Riley",
+   "pop_pctl": 0.998912,
+   "band": "top 1%",
+   "has_deezer_id": false,
+   "count": 19,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "f23feff0-ed20-4e9c-ae45-4ff68a83be70",
+   "name": "Dee Dee Ramone",
+   "pop_pctl": 0.99898,
+   "band": "top 1%",
+   "has_deezer_id": false,
+   "count": 13,
+   "route": "deezer-name",
+   "calls": 1
+  },
+  {
+   "mbid": "ef069340-5d44-4178-9e9f-87989fe79c1f",
+   "name": "The Sweet Inspirations",
+   "pop_pctl": 0.999116,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "72c536dc-7137-4477-a521-567eeb840fa8",
+   "name": "Bob Dylan",
+   "pop_pctl": 0.999184,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "ff6e677f-91dd-4986-a174-8db0474b1799",
+   "name": "Jack Johnson",
+   "pop_pctl": 0.999218,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d43d12a1-2dc9-4257-a2fd-0a3bb1081b86",
+   "name": "Johnny Cash",
+   "pop_pctl": 0.999235,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "aa659468-db56-41c9-b6fe-61f4bb2ef1a6",
+   "name": "Zack de la Rocha",
+   "pop_pctl": 0.999252,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 2,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "8970d868-0723-483b-a75b-51088913d3d4",
+   "name": "Moby",
+   "pop_pctl": 0.999337,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "f6f2326f-6b25-4170-b89d-e235b25508e8",
+   "name": "Sigur Rós",
+   "pop_pctl": 0.999405,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 24,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "d15721d8-56b4-453d-b506-fc915b14cba2",
+   "name": "The Black Keys",
+   "pop_pctl": 0.999473,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf",
+   "name": "The Cure",
+   "pop_pctl": 0.999711,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  },
+  {
+   "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+   "name": "Coldplay",
+   "pop_pctl": 0.999847,
+   "band": "top 0.1%",
+   "has_deezer_id": true,
+   "count": 25,
+   "route": "deezer-id",
+   "calls": 1
+  }
+ ]
+}

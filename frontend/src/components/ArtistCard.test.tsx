@@ -9,41 +9,27 @@ import { ArtistCard } from './ArtistCard';
 const artist = (mbid: string) => ({ mbid, name: 'Miles Davis', disambiguation: '', popularity: 1 });
 afterEach(() => vi.restoreAllMocks());
 
-test('fires the two bypass signals with the right reason', async () => {
+test('one bypass control, and it fires the known signal', async () => {
   const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   const onBypass = vi.fn();
   render(<ArtistCard artist={artist('bypass')} isPlaying={false} onPlay={vi.fn()} onBypass={onBypass} />);
-  // Both signals now sit behind the footer strip, so the tray is opened first.
-  await user.click(screen.getByRole('button', { name: /reroute from here/i }));
-  await user.click(screen.getByRole('button', { name: /steer away/i }));
+
+  // LUX-1: there is no tray to open. The footer strip IS the control.
   await user.click(screen.getByRole('button', { name: /dig deeper/i }));
-  expect(onBypass).toHaveBeenNthCalledWith(1, 'bypass', 'dislike');
-  expect(onBypass).toHaveBeenNthCalledWith(2, 'bypass', 'known');
+  expect(onBypass).toHaveBeenCalledTimes(1);
+  expect(onBypass).toHaveBeenCalledWith('bypass');
 });
 
-test('the tray is shut until the strip is pressed, and shuts again', async () => {
-  const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
-  render(<ArtistCard artist={artist('tray')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
-
-  const strip = screen.getByRole('button', { name: /reroute from here/i });
-  expect(strip).toHaveAttribute('aria-expanded', 'false');
+// REQ-45: a press routes to a MORE OBSCURE similar artist, so a label that reads
+// as rejection is a defect, not a wording preference. This test is the guard.
+test('the bypass control does not read as rejecting the artist', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(<ArtistCard artist={artist('wording')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
   expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
-
-  await user.click(strip);
-  expect(screen.getByRole('button', { name: /steer away/i })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: /dig deeper/i })).toBeInTheDocument();
-  // The consequence neither label implies, said at the moment of choosing —
-  // the explainer above the path can be dismissed and usually has been.
-  expect(screen.getByText(/both options rebuild the whole journey/i)).toBeInTheDocument();
-
-  // The design drew no way back out of the open tray. This is that way back:
-  // the same control, relabelled — so it must genuinely close.
-  const heading = screen.getByRole('button', { name: /how should this change/i });
-  expect(heading).toHaveAttribute('aria-expanded', 'true');
-  await user.click(heading);
-  expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
+  expect(screen.queryByText(/not for me|dislike|reject|no thanks/i)).not.toBeInTheDocument();
+  // The consequence a short label cannot carry, stated where the choice is made.
+  expect(screen.getByText(/rebuilds the whole journey/i)).toBeInTheDocument();
 });
 
 test('play disabled and card still present when clip is 204', async () => {
@@ -54,7 +40,7 @@ test('play disabled and card still present when clip is 204', async () => {
 });
 
 test('a card with a clip says how long it is', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(<ArtistCard artist={artist('len')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
   expect(await screen.findByText(/0:30/i)).toBeInTheDocument();
 });
@@ -70,7 +56,7 @@ test('a card with no clip claims no duration', async () => {
 
 test('play fires onPlay when a clip exists', async () => {
   const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   const onPlay = vi.fn();
   render(<ArtistCard artist={artist('playable')} isPlaying={false} onPlay={onPlay} onBypass={vi.fn()} />);
   await waitFor(() => expect(screen.getByRole('button', { name: /play/i })).toBeEnabled());
@@ -80,7 +66,7 @@ test('play fires onPlay when a clip exists', async () => {
 
 test('the button on the playing card pauses it instead of restarting it', async () => {
   const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   const onPlay = vi.fn();
   const onToggle = vi.fn();
   render(
@@ -96,7 +82,7 @@ test('the button on the playing card pauses it instead of restarting it', async 
 
 test('the button on a paused card resumes it instead of restarting it', async () => {
   const user = userEvent.setup();
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   const onPlay = vi.fn();
   const onToggle = vi.fn();
   render(
@@ -111,22 +97,20 @@ test('the button on a paused card resumes it instead of restarting it', async ()
   expect(onPlay).not.toHaveBeenCalled();
 });
 
-test('an endpoint card stays bare — no strip, so no way to reach either signal', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+test('an endpoint card stays bare — no strip, so no way to reach the bypass control', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(
     <ArtistCard
       artist={artist('endpoint')} isEndpoint isPlaying={false}
       onPlay={vi.fn()} onBypass={vi.fn()}
     />,
   );
-  expect(screen.queryByRole('button', { name: /reroute from here/i })).not.toBeInTheDocument();
-  expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
   expect(screen.queryByRole('button', { name: /dig deeper/i })).not.toBeInTheDocument();
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
 });
 
 test('an endpoint card carries its eyebrow label', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(
     <ArtistCard
       artist={artist('start')} isEndpoint endpointLabel="start" isPlaying={false}
@@ -137,7 +121,7 @@ test('an endpoint card carries its eyebrow label', async () => {
 });
 
 test('a destination card carries the other eyebrow label', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(
     <ArtistCard
       artist={artist('dest')} isEndpoint endpointLabel="destination" isPlaying={false}
@@ -150,7 +134,84 @@ test('a destination card carries the other eyebrow label', async () => {
 // UI-5: the e2e responsive spec used to find this by the Tailwind class
 // `.font-semibold`, which this task moves. A test hook must not be a style hook.
 test('the artist name carries a stable test hook', async () => {
-  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(<ArtistCard artist={artist('hook')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
   expect(screen.getByTestId('artist-name')).toHaveTextContent('Miles Davis');
+});
+
+test('offers another track when the artist has more than one', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({
+    previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 4,
+  });
+  const onCycleClip = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('cycle')} isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()} onCycleClip={onCycleClip}
+    />,
+  );
+  await user.click(await screen.findByRole('button', { name: /try another track/i }));
+  expect(onCycleClip).toHaveBeenCalledWith(4);
+});
+
+// Thin catalogues are exactly the artists this app exists to deliver (TCE-/TCR-).
+// A control that cannot do anything is worse than no control.
+test('offers nothing to cycle to when the artist has one track', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({
+    previewUrl: 'u', title: 'Only', coverUrl: 'c', candidateCount: 1,
+  });
+  render(
+    <ArtistCard
+      artist={artist('single')} isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()} onCycleClip={vi.fn()}
+    />,
+  );
+  expect(await screen.findByText('Only')).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /try another track/i })).not.toBeInTheDocument();
+});
+
+test('offers nothing to cycle to on a silent card', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  render(
+    <ArtistCard
+      artist={artist('silent-cycle')} isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()} onCycleClip={vi.fn()}
+    />,
+  );
+  await screen.findByText(/no preview available/i);
+  expect(screen.queryByRole('button', { name: /try another track/i })).not.toBeInTheDocument();
+});
+
+// A cycled index (clipIndex > 0) that comes back empty must not strand the
+// card: candidateCount arrives on the TrackOut body, which a 204 does not
+// carry, so the control that could cycle again also vanishes. Without a
+// reset there is no way back to track 1 short of a reload.
+test('a dead cycled index reports back so the caller can reset it', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  const onDeadIndex = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('dead-index')} isPlaying={false} clipIndex={2}
+      onPlay={vi.fn()} onBypass={vi.fn()} onCycleClip={vi.fn()} onDeadIndex={onDeadIndex}
+    />,
+  );
+  await screen.findByText(/no preview available/i);
+  expect(onDeadIndex).toHaveBeenCalledWith('dead-index');
+});
+
+// The ordinary silent card above (index 0, no clip at all) must NOT be read
+// as a dead index -- that would reset an index that was never cycled and is
+// not a defect to recover from.
+test('an ordinary silent card at index 0 does not report a dead index', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  const onDeadIndex = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('silent-not-dead')} isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()} onCycleClip={vi.fn()} onDeadIndex={onDeadIndex}
+    />,
+  );
+  await screen.findByText(/no preview available/i);
+  expect(onDeadIndex).not.toHaveBeenCalled();
 });

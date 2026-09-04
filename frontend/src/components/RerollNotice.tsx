@@ -1,23 +1,19 @@
-import type { BypassReason } from '@/api/types';
-
-export type RerollReason = BypassReason | 'reset';
+export type RerollReason = 'known' | 'reset';
 
 /**
  * Fixed at design time (spec §7) so wording cannot be reshaped to fit an
  * implementation. No trailing ellipsis — the animated dots supply it.
  *
- * These are accurate to the router, not decorative: `dislike` applies a soft
- * penalty to the disliked artist's NEIGHBOURHOOD, decaying over `avoid_radius`
- * hops; `known` relaxes the obscurity floor more aggressively. If either
- * mechanism changes, these strings are wrong.
+ * These are accurate to the router, not decorative: `known` relaxes the
+ * obscurity floor harder than `dislike` did and is the only signal carrying the
+ * fame ramp. If that mechanism changes, this string is wrong.
  *
- * Reworded 2026-08-07 to echo the tray's own verbs — the buttons now read
- * "Steer away" and "Dig deeper", and a notice that said something else made the
- * press and its response look like two different events. The mechanisms are
- * unchanged, so the accuracy above still holds.
+ * The `dislike` message went with its button (LUX-1). The signal, its router
+ * behaviour and its URL parameter all remain — nothing in the UI can now
+ * produce it, which is why this type no longer admits it. `BypassReason` in
+ * api/types.ts stays two-valued: that one is the wire contract.
  */
 const MESSAGE: Record<RerollReason, string> = {
-  dislike: 'Steering away from that sound',
   known: 'Digging deeper for someone newer',
   reset: 'Back to the original path',
 };

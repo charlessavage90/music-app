@@ -26,11 +26,13 @@
   --color-inert-fg: #3c414a;       /* disabled play glyph */
   --color-rail-mid: #7bb0cf;       /* the rail gradient's middle stop */
 
-  /* Added 2026-08-07 for the bypass tray. The strip is DARKER than the card it
-     sits in — that recess is what reads as "a panel of choices" rather than as
-     more card, and it is the whole visual argument of the 2c variant. */
-  --color-strip: #14161b;          /* recessed footer strip and open tray */
-  --color-strip-border: #23262d;   /* the hairline above both */
+  /* Added 2026-08-07 for the bypass footer strip. The strip is DARKER than the
+     card it sits in — that recess is what reads as "a panel of choices" rather
+     than as more card, and it is the whole visual argument of the 2c variant.
+     LUX-1 (2026-09) removed the tray this strip used to open; the strip itself
+     is now the whole control, and these two tokens still style it. */
+  --color-strip: #14161b;          /* recessed footer strip — the bypass control itself */
+  --color-strip-border: #23262d;   /* the hairline above it */
 
   /* The two search fields, 2026-08-07. They had been built out of the CARD
      tokens (--color-surface on --color-border), which are the tokens for a

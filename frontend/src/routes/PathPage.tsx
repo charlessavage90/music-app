@@ -8,8 +8,8 @@ import { PathStatus } from '@/components/PathStatus';
 import { PathSkeleton } from '@/components/PathSkeleton';
 import { PathIntro } from '@/components/PathIntro';
 import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
+import { RouteHistory } from '@/components/RouteHistory';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
-import type { BypassReason } from '@/api/types';
 
 export function PathPage() {
   const { from, to } = useParams();
@@ -36,10 +36,16 @@ export function PathPage() {
     navigate(`/path/${from}/${to}${qs ? `?${qs}` : ''}`);
   }
 
-  function handleBypass(mbid: string, why: BypassReason) {
-    go(addExclusion(params, mbid, why), why);
+  // One signal since LUX-1. `addExclusion` still writes the URL parameter for the
+  // signal it is handed, and `decodeExclusions` still reads BOTH, so a link shared
+  // before this change keeps resolving exactly as it did.
+  function handleBypass(mbid: string) {
+    go(addExclusion(params, mbid, 'known'), 'known');
   }
 
+  // Whether "Reset path" has anything to undo. The names and ids for the
+  // panel itself come from the path response, not the URL (LUX-2b) — this
+  // reads the URL only to answer yes/no.
   const hasBypasses = decodeExclusions(params).length > 0;
 
   // The names come from the path itself; the ids from the URL, so the link
@@ -110,6 +116,11 @@ export function PathPage() {
                 onBypass={handleBypass}
                 changed={feedback.changed}
               />
+              {/* Dimmed together with the journey (not rendered outside it):
+                  while a press is being answered, the panel still names the
+                  PREVIOUS path's skips, so leaving it undimmed would have the
+                  page disagree with itself about whether it has settled. */}
+              <RouteHistory bypassed={state.bypassed} unresolved={state.unresolved} />
             </div>
             {feedback.notice && <RerollNotice reason={feedback.notice} />}
           </div>

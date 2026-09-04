@@ -57,7 +57,7 @@ test('a slow rebuild is not padded — the floor is a minimum, not a delay', () 
   const { result, rerender } = setup();
   rerender({ status: 'ready', artists: FIRST });
 
-  act(() => result.current.begin('dislike'));
+  act(() => result.current.begin('known'));
   act(() => void vi.advanceTimersByTime(NOTICE_MIN_MS * 3));
   rerender({ status: 'ready', artists: SECOND });
 
@@ -126,7 +126,7 @@ test('a rebuild that changes nothing marks nothing', () => {
 test('an error drops the message rather than stranding it on screen', () => {
   const { result, rerender } = setup();
   rerender({ status: 'ready', artists: FIRST });
-  act(() => result.current.begin('dislike'));
+  act(() => result.current.begin('known'));
   rerender({ status: 'error', artists: [] });
   expect(result.current.notice).toBeNull();
 });

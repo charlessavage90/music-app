@@ -168,6 +168,45 @@ def test_track_endpoint_204_when_no_clip():
     assert r.status_code == 204
 
 
+# --- LUX-3: index and candidate_count -----------------------------------
+#
+# _client's fake fetcher answers every call with the SAME body (it is not
+# URL-keyed — api-test-fixtures.md), so a two-candidate body needs two rows
+# with two DIFFERENT titles here: candidates are now de-duplicated by
+# normalised title (clips.py's _dedupe_by_title), and two rows sharing a
+# title would collapse to one, making candidate_count == 1.
+_TWO_CANDIDATES = {"any": {"data": [
+    {"id": 1, "preview": "clip1.mp3", "title": "Song One",
+     "artist": {"name": "Radiohead"}},
+    {"id": 2, "preview": "clip2.mp3", "title": "Song Two",
+     "artist": {"name": "Radiohead"}},
+]}}
+
+
+def test_the_track_endpoint_reports_how_many_candidates_exist():
+    client, store = _client(_TWO_CANDIDATES)
+    data = client.get(f"/api/artists/{store.mbids[0]}/track").json()
+    # _TWO_CANDIDATES carries exactly 2 distinct titles. `>= 1` was unfailable —
+    # TrackOut.candidate_count defaults to 1, so the endpoint could ignore
+    # resolution.count entirely and this would still pass.
+    assert data["candidate_count"] == 2
+
+
+def test_the_track_endpoint_accepts_an_index():
+    client, store = _client(_TWO_CANDIDATES)
+    first = client.get(f"/api/artists/{store.mbids[0]}/track?index=0").json()
+    second = client.get(f"/api/artists/{store.mbids[0]}/track?index=1").json()
+    assert first["title"] != second["title"]
+
+
+def test_a_negative_index_is_rejected_rather_than_wrapping_backwards():
+    """Wrapping is for a STALE index, not a malformed one. Python's modulo would
+    quietly turn -1 into the last candidate, which hides a frontend bug."""
+    client, store = _client(_TWO_CANDIDATES)
+    r = client.get(f"/api/artists/{store.mbids[0]}/track?index=-1")
+    assert r.status_code == 422
+
+
 def test_path_response_reports_a_natural_journey():
     # The existing fixture routes Radiohead -> Muse -> Coldplay: already has a stop.
     client, store = _client()
@@ -251,6 +290,74 @@ def test_an_unrecognised_reason_is_still_coerced_to_dislike():
         json={"sources": [a, b], "exclude": [{"id": store.mbids[1], "reason": "BANANA"}]},
     )
     assert r.status_code == 200
+
+
+def test_path_returns_the_bypassed_artists_in_press_order():
+    # Two interior artists so press order is distinguishable from graph order.
+    # A(0)-Mid1(1)-Mid2(2)-B(3) chain, plus a weak direct A-B edge so a path
+    # still exists once both interior artists are hard-excluded.
+    store = make_store(
+        names=["A", "Mid1", "Mid2", "B"],
+        pop_raw=[0.5, 0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (2, 3, 0.9), (0, 3, 0.3)],
+    )
+    client = _client_over(store)
+    a, mid1, mid2, b = store.mbids
+    body = client.post(
+        "/api/path",
+        json={
+            "sources": [a, b],
+            "exclude": [
+                {"id": mid2, "reason": "known"},
+                {"id": mid1, "reason": "known"},
+            ],
+        },
+    ).json()
+    # Press order, not graph order: the panel draws chronology.
+    assert [x["mbid"] for x in body["bypassed"]] == [mid2, mid1]
+    assert body["unresolved"] == []
+
+
+def test_an_mbid_not_in_the_graph_is_reported_rather_than_dropped():
+    """LUX-D2. A shared link carrying a stale id used to build a path as if that
+    press never happened, invisibly. The request must still succeed — a link
+    that works today keeps working — but the id must come back."""
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [a, b],
+            "exclude": [{"id": "not-a-real-mbid", "reason": "known"}],
+        },
+    )
+    assert r.status_code == 200
+    data = r.json()
+    assert data["unresolved"] == ["not-a-real-mbid"]
+    assert data["bypassed"] == []
+
+
+def test_a_repeated_unresolved_id_is_reported_only_once():
+    """A hand-built request repeating one bad id used to yield a duplicate
+    entry -- a duplicate React key and a redundant row in the route-history
+    panel. `_to_exclusions` dedupes it, preserving first-seen order, the same
+    way it already dedupes resolved nodes."""
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [a, b],
+            "exclude": [
+                {"id": "not-a-real-mbid", "reason": "known"},
+                {"id": "also-not-real", "reason": "known"},
+                {"id": "not-a-real-mbid", "reason": "known"},
+            ],
+        },
+    )
+    assert r.status_code == 200
+    data = r.json()
+    assert data["unresolved"] == ["not-a-real-mbid", "also-not-real"]
 
 
 def test_health_reports_artifact_identity():
