@@ -40,10 +40,11 @@ first journey is the on-ramp rather than the promise.
 DISCHARGED THE QUEUE.** The extended 117k graph was reverted earlier the same day after his test fired the
 revert criterion he set on 2026-08-10; he has since confirmed the old map is live and
 **reported nothing wrong**. **THERE IS NO NEXT ACTION ASSIGNED. Nothing is blocked, no
-session owes anything, and the test queue holds ONE live item** — the
-2026-09-03 press of the new address, two minutes. An *empty* queue is also a valid and common
-state and never evidence a session forgot. Do not discharge either 2026-09-01 entry
-twice, and do not re-queue "tell me how it feels": his long-run evaluation is continuous and
+session owes anything, and the test queue is EMPTY** — the 2026-09-03 press of the new
+address was **run and passed by the owner on 2026-09-04**: the site works from the new
+address, a clip plays on a middle card, and journeys rebuild. An empty queue is a valid and
+common state and never evidence a session forgot. Do not discharge that entry, or either
+2026-09-01 entry, twice, and do not re-queue "tell me how it feels": his long-run evaluation is continuous and
 this file explicitly does not hold it (owner ruling, 2026-08-07).
 **The landing-dot fix (PR #92) is LIVE and was NOT reverted** — it is frontend and rode the
 frontend sync, not the map. **Everything open is his to trigger and none of it blocks
@@ -57,9 +58,18 @@ the last item. **`LUX-4` is GATED on `LUX-E1`** — a rebuild may not reproduce 
 which would make it a graph adoption rather than a metadata change (§4.4); a session must not
 proceed past that on its own judgement. Its §7 carries a `PRODUCT-REQUIREMENTS.md` amendment
 **deliberately unapplied**, to land in the same commit as `LUX-1`'s code.
-⚠ **One thing is still OPEN rather than done: the first journey, before any press, is
-UNEXPLAINED.** His confirmation did not close it and nothing measured accounts for it. It is
-not a queue item and not assigned; it must not be quietly dropped.
+✅ **RULED 2026-09-04 (owner) — the unexplained depth-0 half is NOT a defect and is NOT
+open work.** The `CXR-` record says the *first* journey, before any press, was reported worse
+and that nothing measured accounts for it (`CXR-P3` did not fire). **He has ruled his own
+report on that half unreliable:** he judges he was likely influenced by what he saw at other
+bypass depths, and that a single offhand report from one user, **with no mechanism to explain
+it**, is not to be treated as a factual assessment or a defect. **This closes it as an item
+and overturns no measurement** — `CXR-P3`'s null and the diagnosis README's "unexplained by
+anything here" are both still exactly true and **must not be edited**; what changed is that
+nothing is owed on them. **The other half of his report stands unchanged and IS explained** —
+the extended map really was worse while digging, the revert was correct, and `CXR-P1`/`P2`
+own why. **Reopening this is his trigger**, and the evidence that would do it is more than
+one user reporting the same thing after launch.
 
 ---
 

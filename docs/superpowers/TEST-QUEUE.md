@@ -79,6 +79,15 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
+## ✅ DONE — 2026-09-04 — RUN BY THE OWNER; NOTHING FOUND
+
+**He validated the site works as expected at the new address**, including the two things
+that could not be checked from outside: **clips on middle cards play**, and **journeys
+rebuild** when the buttons are pressed. Nothing wrong reported.
+
+**This discharges the entry below. Do not queue it again** — the address move is confirmed
+end to end from a real browser.
+
 ## ▶ QUEUED (latest) — 2026-09-03 — the app has a new address
 
 **The app now lives at `https://unsung.fm`.** Nothing about the app itself changed — same
