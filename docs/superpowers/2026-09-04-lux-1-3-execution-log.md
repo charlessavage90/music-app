@@ -251,3 +251,50 @@ contract.
   with the attrition concentrated almost entirely on the two obscure pair classes. Both facts are
   qualitative and load-bearing for anyone planning `LUX-4`; neither is a number, so neither is
   restated further than this.
+
+---
+
+## 7. Closeout measurements, 2026-09-04
+
+**Suites, run on the final tree rather than asserted from memory:** builder 246 passed,
+api 275 passed, frontend 132 passed, lint clean, build clean. Playwright 6/6 at the fix
+wave; only comments and documentation changed after that run.
+
+**Standing context layer (`D6`), measured against
+`C:/Users/charl/.claude/projects/C--dev-music-app/memory`:**
+
+| Layer | Unit | Value | Delta |
+|---|---|---|---|
+| Unconditional — loads in every session before it reads anything | characters | 45,854 | **0** |
+| Conditional — loads on invocation, dispatch or recall | lines | 2,475 | **0** |
+
+**Both deltas are zero because this branch touched no file in either layer** — no
+`CLAUDE.md`, no `.claude/`, no `memory/`. Verified from the diff, not assumed. These are the
+first figures recorded in this log's own unit convention; compare future closeouts against
+them rather than against the pre-2026-07-26 line counts, which were measured under a
+broader and now-corrected definition.
+
+**`B3` — vacuous-test spot check on the branch's most load-bearing invariant.** The shared-link
+promise was tested by deliberately breaking `decodeExclusions` so it stopped reading the
+legacy URL parameter. **Two tests went red, at two different layers** — the unit test for the
+decode itself and the hook test that pins the decoded list reaching the wire request. Reverted
+and re-confirmed green. The guard is real, not decorative. (The fix wave separately performed
+the same watched red/green on the cache's no-signed-URL guard.)
+
+**`B4` — the four load-bearing claims in this log were re-verified against source at
+closeout**, not carried forward on trust: `exclusions.ts` and `pathfinding.py` each show zero
+diff lines across the branch, `models.py:28` still declares `reason: str` rather than a
+`Literal`, and `app.py:61`'s explicit `order.append` is what makes the bypassed ordering
+reason-agnostic.
+
+**Inapplicable, stated rather than omitted so "inapplicable" and "forgotten" do not look
+alike:** `A4` — no config knob was added or changed by this branch, so there is no default to
+flip. `D2` — no graph artifact changed, so the committed test fixtures are not stale. `D3` —
+nothing was adopted and no artifacts were compared; the served artifact's identity was
+nonetheless confirmed before the browser and measurement runs (sha `43dd82bb…`, matched
+against its own manifest sidecar).
+
+**`A5` — no listener was left behind.** Ports 8000, 5173 and 5174 were swept at closeout and
+none was in use; this session started servers only inside tasks, each of which stopped its own
+before finishing. The queued test needs no local server — it exercises the deployed site after
+this merges.

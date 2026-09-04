@@ -1,6 +1,8 @@
 # Handoff — the extended graph is REVERTED and diagnosed, 2026-09-01
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ SUPERSEDED ON NEXT ACTIONS by [`2026-09-04-HANDOFF-lux-1-3.md`](2026-09-04-HANDOFF-lux-1-3.md), 2026-09-04** — the `LUX-1`/`LUX-2`/`LUX-3` work is built and in review, so this note's "Start here" is spent. **It remains AUTHORITATIVE for the `CXR-` revert's internals and for every must-not-revert claim below, all of which still stand.** ⚠ Its statement that the queued confirmation test is the next action was **discharged 2026-09-01 (later)** when the owner ran it and found nothing.
+
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-08-10-HANDOFF-cxa-adoption.md`](2026-08-10-HANDOFF-cxa-adoption.md) on **everything** —
 next actions *and* status, because that handoff's central claim (the extended map is live) is
 now false. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
