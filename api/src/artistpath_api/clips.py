@@ -42,11 +42,13 @@ class CatalogueUnavailable(Exception):
 
 
 def _fold(name: str) -> str:
-    """Casefold, strip accents, and collapse whitespace for artist matching.
+    """Casefold, strip accents, and collapse whitespace for name matching.
 
     MusicBrainz and the clip catalogues disagree routinely on diacritics and
     casing for the same artist, so an exact comparison would reject correct
-    matches and leave the card silent.
+    matches and leave the card silent. Also reused by `_dedupe_by_title`
+    (LUX-3): the same normalisation problem applies to comparing two track
+    titles from the same catalogue.
     """
     decomposed = unicodedata.normalize("NFKD", name)
     stripped = "".join(c for c in decomposed if not unicodedata.combining(c))
@@ -56,6 +58,42 @@ def _fold(name: str) -> str:
 def same_artist(candidate: str | None, requested: str) -> bool:
     """Does this search result actually belong to the artist we asked for? (C1)"""
     return bool(candidate) and _fold(candidate) == _fold(requested)
+
+
+def _dedupe_by_title(
+    found: list[tuple[TrackIdentity, str]],
+) -> list[tuple[TrackIdentity, str]]:
+    """Collapse rows that are the same recording under different track ids.
+
+    A catalogue routinely lists one recording several times -- as a single, on
+    an album, on a compilation -- each with its own track_id. That is most
+    visible on the NAME-SEARCH path (`_from_deezer`), which is what an artist
+    with no recorded Deezer id falls back to, and that population skews
+    obscure -- exactly who this app exists to serve. The spec's "try a
+    DIFFERENT clip" is not met by two rows that are the same song again, so
+    LUX-3's candidate list must not count them twice.
+
+    Keyed on the FOLDED TITLE, not track_id: distinct ids are exactly the
+    symptom being collapsed, so deduping on them would do nothing. Keeps the
+    FIRST occurrence, since every caller (and the ordering claim in their
+    docstrings) relies on the provider's own ordering -- popularity for
+    /top, relevance for search.
+
+    Accepted trade-off, decided here rather than left implicit: two
+    genuinely different recordings that happen to share a title -- a
+    re-recording, a live version with the same name -- are merged into one
+    candidate. That is judged cheaper than presenting "another track" that
+    turns out to be the same song again.
+    """
+    seen: set[str] = set()
+    deduped: list[tuple[TrackIdentity, str]] = []
+    for identity, preview in found:
+        key = _fold(identity.title)
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append((identity, preview))
+    return deduped
 
 
 def _album_cover(row: dict) -> str:
@@ -427,7 +465,7 @@ class ClipResolver:
                         preview,
                     )
                 )
-        return found
+        return _dedupe_by_title(found)
 
     async def _from_deezer(self, artist_name: str) -> list[tuple[TrackIdentity, str]]:
         body = await self._get_from(
@@ -455,7 +493,7 @@ class ClipResolver:
                         preview,
                     )
                 )
-        return found
+        return _dedupe_by_title(found)
 
     async def _from_itunes(self, artist_name: str) -> list[tuple[TrackIdentity, str]]:
         body = await self._get_from(
@@ -482,4 +520,4 @@ class ClipResolver:
                         preview,
                     )
                 )
-        return found
+        return _dedupe_by_title(found)

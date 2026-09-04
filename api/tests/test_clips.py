@@ -317,6 +317,23 @@ async def test_no_playable_row_is_still_a_silent_card():
     assert result.count == 0
 
 
+async def test_the_same_recording_under_two_track_ids_counts_once():
+    """A catalogue can list one song as a single AND on an album, each with
+    its own track_id. The spec's "try a DIFFERENT clip" is not met by the
+    same song again, so the duplicate must not inflate the count, and the
+    survivor must be the FIRST (best-ranked) occurrence."""
+    body = {"data": [
+        {"id": 1, "preview": "u1", "title": "One",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+        {"id": 2, "preview": "u2", "title": "One",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+    ]}
+    r = _resolver({"deezer": body})
+    result = await r.resolve(MBID, "Miles Davis")
+    assert result.count == 1
+    assert result.clip.preview_url == "u1"
+
+
 # --- C2: the production cache stores the same shape ---------------------
 
 
@@ -339,7 +356,11 @@ async def test_dynamo_cache_writes_identity_and_no_url():
     )
     assert table.written["tracks"][0]["track_id"] == "771"
     assert table.written["tracks"][0]["source"] == "deezer"
-    assert "preview_url" not in table.written
+    # Depth, not just the top level: the payload now lives under `tracks`, so
+    # checking only top-level keys would miss a signed URL written into a
+    # track entry -- the only way the C2 dead-audio defect could recur under
+    # this shape. `repr` reaches every nesting level in one check.
+    assert "preview" not in repr(table.written)
 
 
 # --- a failing catalogue must never reach the caller -------------------
