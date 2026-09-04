@@ -9,7 +9,7 @@ rather than working around it.
 **Maintenance.** Rewritten wholesale at `closeout`, not appended to. **One exception: the
 STANDING FACT block below is preserved in place across every rewrite** — it is a durable fact
 about the deployment, not status, and it is the only thing here that a rewrite must carry
-forward rather than replace. It is short by design:
+forward rather than replace. **This document** is short by design:
 if it is growing, status is being narrated instead of pointed at. It **owns no figures** —
 Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and its raw
 `cb_scores.json`); the adopted graph's stay in
