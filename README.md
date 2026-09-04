@@ -4,9 +4,11 @@ Give it two artists. It builds you a listenable journey between them — a path 
 cards, each with a 30-second clip, where every step sounds like a small sensible move
 from the last. Miles Davis to Daft Punk in eight hops, without a jolt.
 
-Two bypass signals reshape the route as you listen: **"not for me"** steers away from a
-whole stylistic region, and **"know them already"** pushes toward the unfamiliar. All
-path state lives in the URL, so any journey is shareable and Back undoes a bypass.
+One bypass control reshapes the route as you listen: **"dig deeper"** replaces an artist
+with someone who sounds similar but is less well known. A second signal — steering sideways
+away from a whole stylistic region — exists in the router and in the URL but is **not
+reachable from the UI** since 2026-09-04, so links shared before then still resolve. All path
+state lives in the URL, so any journey is shareable and Back undoes a bypass.
 
 It is a rebuild of the idea behind *Boil the Frog*, which stopped working when the music
 APIs it depended on were withdrawn.
@@ -32,8 +34,10 @@ Three independent packages. The only thing they share is a binary file format.
 The **`APG1` artifact is the contract** between builder and api — not shared Python code.
 Both parse the format independently and share no modules.
 
-Pathfinding is Dijkstra over an in-memory graph of ~75,000 artists, pruned by mutual
-k-NN to a fraction of its original edge count (exact counts:
+Pathfinding is Dijkstra over an in-memory graph of tens of thousands of artists, pruned by
+the `trimmed_union` cap rule — mutual k-NN until 2026-08-06, which is what every earlier
+figure was built under; see `CLAUDE.md`, "Graph shape" — to a fraction of its original edge
+count (exact counts:
 `docs/superpowers/findings/2026-07-23-tiebreak-fix-adoption.md`). A path query touches
 no database and no network. Clips are resolved separately per card, so the path renders
 immediately.
