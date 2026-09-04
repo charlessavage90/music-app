@@ -56,6 +56,14 @@ class PathResponse(BaseModel):
     # possible. Wire contract, so snake_case; the frontend reads it as
     # stopRule. Values are pathfinding.STOP_*.
     stop_rule: Literal["natural", "forced", "adjacent_only"]
+    # The artists a bypass removed, in PRESS ORDER. They are hard-excluded and
+    # so are absent from `artists`; without this the UI has nowhere to read
+    # their names from (REQ-46). Additive: a client that ignores it is fine.
+    bypassed: list[ArtistOut] = Field(default_factory=list)
+    # Exclusion ids that resolved to no artist. The router ignored them, so the
+    # path is built as if those presses never happened — reported rather than
+    # dropped so the UI can say so instead of lying (LUX-D2).
+    unresolved: list[str] = Field(default_factory=list)
 
 
 class TrackOut(BaseModel):

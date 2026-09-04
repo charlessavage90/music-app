@@ -253,6 +253,51 @@ def test_an_unrecognised_reason_is_still_coerced_to_dislike():
     assert r.status_code == 200
 
 
+def test_path_returns_the_bypassed_artists_in_press_order():
+    # Two interior artists so press order is distinguishable from graph order.
+    # A(0)-Mid1(1)-Mid2(2)-B(3) chain, plus a weak direct A-B edge so a path
+    # still exists once both interior artists are hard-excluded.
+    store = make_store(
+        names=["A", "Mid1", "Mid2", "B"],
+        pop_raw=[0.5, 0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (2, 3, 0.9), (0, 3, 0.3)],
+    )
+    client = _client_over(store)
+    a, mid1, mid2, b = store.mbids
+    body = client.post(
+        "/api/path",
+        json={
+            "sources": [a, b],
+            "exclude": [
+                {"id": mid2, "reason": "known"},
+                {"id": mid1, "reason": "known"},
+            ],
+        },
+    ).json()
+    # Press order, not graph order: the panel draws chronology.
+    assert [x["mbid"] for x in body["bypassed"]] == [mid2, mid1]
+    assert body["unresolved"] == []
+
+
+def test_an_mbid_not_in_the_graph_is_reported_rather_than_dropped():
+    """LUX-D2. A shared link carrying a stale id used to build a path as if that
+    press never happened, invisibly. The request must still succeed — a link
+    that works today keeps working — but the id must come back."""
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [a, b],
+            "exclude": [{"id": "not-a-real-mbid", "reason": "known"}],
+        },
+    )
+    assert r.status_code == 200
+    data = r.json()
+    assert data["unresolved"] == ["not-a-real-mbid"]
+    assert data["bypassed"] == []
+
+
 def test_health_reports_artifact_identity():
     client, store = _client()
     r = client.get("/health")

@@ -8,6 +8,8 @@ export interface PathState {
   status: 'loading' | 'ready' | 'error';
   artists: Artist[];
   stopRule: StopRule;
+  bypassed: Artist[];
+  unresolved: string[];
   error?: 'notfound' | 'nopath' | 'timeout' | 'unknown';
   /** Rebuilds the same path. The only error state with a useful response. */
   retry: () => void;
@@ -27,7 +29,7 @@ export function usePath(): PathState {
   const [params] = useSearchParams();
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<Omit<PathState, 'retry'>>({
-    status: 'loading', artists: [], stopRule: 'natural',
+    status: 'loading', artists: [], stopRule: 'natural', bypassed: [], unresolved: [],
   });
 
   // The URL is unchanged on a retry, so the attempt counter is what makes the
@@ -37,12 +39,21 @@ export function usePath(): PathState {
   useEffect(() => {
     if (!from || !to) return;
     const controller = new AbortController();
-    setState((prev) => ({ status: 'loading', artists: prev.artists, stopRule: prev.stopRule }));
+    setState((prev) => ({
+      status: 'loading',
+      artists: prev.artists,
+      stopRule: prev.stopRule,
+      bypassed: prev.bypassed,
+      unresolved: prev.unresolved,
+    }));
     buildPath([from, to], decodeExclusions(params), controller.signal)
-      .then(({ artists, stopRule }) => setState({ status: 'ready', artists, stopRule }))
+      .then((result) => setState({ status: 'ready', ...result }))
       .catch((err) => {
         if (controller.signal.aborted) return;
-        setState({ status: 'error', artists: [], stopRule: 'natural', error: classify(err) });
+        setState({
+          status: 'error', artists: [], stopRule: 'natural', bypassed: [], unresolved: [],
+          error: classify(err),
+        });
       });
     return () => controller.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps

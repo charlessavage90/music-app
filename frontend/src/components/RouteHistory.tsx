@@ -1,4 +1,4 @@
-import type { BypassedArtist } from '@/hooks/useBypassedArtists';
+import type { Artist } from '@/api/types';
 
 /**
  * The artists a bypass has removed from this journey.
@@ -16,9 +16,20 @@ import type { BypassedArtist } from '@/hooks/useBypassedArtists';
  * before LUX-1 can carry both, and its two blocks are then listed one after the
  * other rather than interleaved. That is a cosmetic limit on old links only —
  * no new link can have two blocks.
+ *
+ * Names arrive with the path response itself (LUX-2b) — the API knows for
+ * certain which ids are in the graph, so there is no loading state here and
+ * no client-side lookup.
  */
-export function RouteHistory({ bypassed }: { bypassed: BypassedArtist[] }) {
-  if (bypassed.length === 0) return null;
+interface Props {
+  /** Artists a bypass removed, in press order. */
+  bypassed: Artist[];
+  /** Exclusion ids the graph does not have (LUX-D2). */
+  unresolved: string[];
+}
+
+export function RouteHistory({ bypassed, unresolved }: Props) {
+  if (bypassed.length === 0 && unresolved.length === 0) return null;
   const recentFirst = [...bypassed].reverse();
 
   return (
@@ -30,17 +41,16 @@ export function RouteHistory({ bypassed }: { bypassed: BypassedArtist[] }) {
         {recentFirst.map((a) => (
           <li key={a.mbid} className="flex items-baseline gap-2 text-[13px]">
             <span aria-hidden className="text-[var(--color-label)]">·</span>
-            {a.loading ? (
-              <span className="text-[var(--color-label)]">…</span>
-            ) : a.name ? (
-              <span className="text-[var(--color-text)]">{a.name}</span>
-            ) : (
-              // Not a blank line and not a dropped row: the router ignored this
-              // press too, and saying so is the only honest thing here.
-              <span className="text-[var(--color-label)]">
-                An artist no longer in the map
-              </span>
-            )}
+            <span className="text-[var(--color-text)]">{a.name}</span>
+          </li>
+        ))}
+        {unresolved.map((id) => (
+          // Not a blank line and not a dropped row: the router ignored this
+          // press too, and saying so is the only honest thing here. Listed
+          // after the named rows because the URL cannot say where it belonged.
+          <li key={id} className="flex items-baseline gap-2 text-[13px]">
+            <span aria-hidden className="text-[var(--color-label)]">·</span>
+            <span className="text-[var(--color-label)]">An artist no longer in the map</span>
           </li>
         ))}
         <li className="flex items-baseline gap-2 border-t border-[var(--color-border)] pt-2 text-[13px] text-[var(--color-muted)]">

@@ -9,7 +9,6 @@ import { PathSkeleton } from '@/components/PathSkeleton';
 import { PathIntro } from '@/components/PathIntro';
 import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
 import { RouteHistory } from '@/components/RouteHistory';
-import { useBypassedArtists } from '@/hooks/useBypassedArtists';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
 
 export function PathPage() {
@@ -45,10 +44,11 @@ export function PathPage() {
   }
 
   // Press order, oldest first — one signal means one comma list (LUX-1), and
-  // `addExclusion` appends. The panel reverses it for display.
+  // `addExclusion` appends. The panel reverses it for display. The names
+  // themselves come from the path response (LUX-2b); this is only for
+  // deciding whether "Reset path" has anything to undo.
   const bypassedIds = decodeExclusions(params).map((e) => e.id);
   const hasBypasses = bypassedIds.length > 0;
-  const bypassed = useBypassedArtists(bypassedIds);
 
   // The names come from the path itself; the ids from the URL, so the link
   // still works while the first path is loading or has failed.
@@ -121,7 +121,7 @@ export function PathPage() {
             </div>
             {feedback.notice && <RerollNotice reason={feedback.notice} />}
           </div>
-          <RouteHistory bypassed={bypassed} />
+          <RouteHistory bypassed={state.bypassed} unresolved={state.unresolved} />
         </div>
       )}
     </main>

@@ -97,8 +97,18 @@ export async function buildPath(
     signal,
   );
   if (!r.ok) throw new ApiError(r.status);
-  const data = (await r.json()) as { artists: Artist[]; stop_rule: StopRule };
-  return { artists: data.artists, stopRule: data.stop_rule };
+  const data = (await r.json()) as {
+    artists: Artist[];
+    stop_rule: StopRule;
+    bypassed?: Artist[];
+    unresolved?: string[];
+  };
+  return {
+    artists: data.artists,
+    stopRule: data.stop_rule,
+    bypassed: data.bypassed ?? [],
+    unresolved: data.unresolved ?? [],
+  };
 }
 
 /**

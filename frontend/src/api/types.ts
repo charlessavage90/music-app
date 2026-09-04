@@ -24,4 +24,8 @@ export type StopRule = 'natural' | 'forced' | 'adjacent_only';
 export interface PathResult {
   artists: Artist[];
   stopRule: StopRule;
+  /** Artists a bypass removed, in press order. Absent from `artists`. */
+  bypassed: Artist[];
+  /** Exclusion ids the graph does not have. The router ignored these. */
+  unresolved: string[];
 }

@@ -33,7 +33,10 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   const secondName = await second.getByTestId('artist-name').innerText();
   await second.getByRole('button', { name: /dig deeper/i }).click();
 
-  // URL now carries the exclusion, and the bypassed artist is gone from the new path.
+  // URL now carries the exclusion, and the bypassed artist is gone from the new
+  // path — scoped to the journey's own cards (`artist-name`), not the whole
+  // page: LUX-2b legitimately names the bypassed artist again, in the "Artists
+  // you skipped" panel, so a page-wide text search would now find it there.
   await expect(page).toHaveURL(/known=/);
-  await expect(page.getByText(secondName, { exact: true })).toHaveCount(0);
+  await expect(page.getByTestId('artist-name').filter({ hasText: secondName })).toHaveCount(0);
 });
