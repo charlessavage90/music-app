@@ -28,16 +28,13 @@ test('stands down entirely when the two artists are adjacent', () => {
 
 test('the explainer is open on a first visit and says a press rebuilds everything', () => {
   render(<PathIntro count={3} stopRule="natural" />);
-  expect(screen.getByText(/either one rebuilds the whole journey/i)).toBeInTheDocument();
+  expect(screen.getByText(/rebuilds the whole journey/i)).toBeInTheDocument();
 });
 
-// The explainer's job changed with the tray: it now has to say where the
-// control IS, because it is no longer two buttons sitting in plain view. If
-// these three strings drift from the card's own wording, the help is wrong.
-test('the explainer names the strip and both directions by their real labels', () => {
+// The explainer names the one control by the card's own label. If this string
+// drifts from the card's own wording, the help is wrong.
+test('the explainer names the control by its real label', () => {
   render(<PathIntro count={3} stopRule="natural" />);
-  expect(screen.getByText(/reroute from here/i)).toBeInTheDocument();
-  expect(screen.getByText(/steer away/i)).toBeInTheDocument();
   expect(screen.getByText(/dig deeper/i)).toBeInTheDocument();
 });
 
@@ -45,11 +42,11 @@ test('dismissal persists across a remount', async () => {
   const user = userEvent.setup();
   const { unmount } = render(<PathIntro count={3} stopRule="natural" />);
   await user.click(screen.getByRole('button', { name: /got it/i }));
-  expect(screen.queryByText(/either one rebuilds the whole journey/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/rebuilds the whole journey/i)).not.toBeInTheDocument();
   unmount();
 
   render(<PathIntro count={3} stopRule="natural" />);
-  expect(screen.queryByText(/either one rebuilds the whole journey/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/rebuilds the whole journey/i)).not.toBeInTheDocument();
   // Still reachable — dismissed is not deleted.
   expect(screen.getByRole('button', { name: /how do i change the path/i })).toBeInTheDocument();
 });

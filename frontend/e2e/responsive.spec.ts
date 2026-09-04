@@ -43,21 +43,10 @@ test('a journey is usable at phone width', async ({ page }) => {
   expect(box).not.toBeNull();
   expect(box!.width).toBeGreaterThan(160);
 
-  // 3. Both bypass signals stay reachable and distinguishable — now one level
-  //    down, behind the footer strip. Opening the tray is part of the check:
-  //    a strip that renders but whose tray does not fit is the same defect in a
-  //    new place, and only a real browser can tell.
-  const strip = interior.getByRole('button', { name: /reroute from here/i });
-  await expect(strip).toBeVisible();
-  await strip.click();
-  await expect(interior.getByRole('button', { name: /steer away/i })).toBeVisible();
-  await expect(interior.getByRole('button', { name: /dig deeper/i })).toBeVisible();
-
-  // 4. The open tray must not introduce sideways scroll either. The two options
-  //    stack on a phone precisely because their captions do not fit side by
-  //    side at 390px, and nothing but a layout engine can confirm that.
-  const overflowOpen = await page.evaluate(
-    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
-  );
-  expect(overflowOpen).toBeLessThanOrEqual(1);
+  // 3. The bypass control stays reachable and legible at phone width. It is no
+  //    longer behind a disclosure (LUX-1), so there is no tray to open — but it
+  //    now carries two lines of text, which is the new thing only a layout
+  //    engine can confirm fits at 390px.
+  const bypass = interior.getByRole('button', { name: /dig deeper/i });
+  await expect(bypass).toBeVisible();
 });

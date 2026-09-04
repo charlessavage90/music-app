@@ -9,7 +9,6 @@ import { PathSkeleton } from '@/components/PathSkeleton';
 import { PathIntro } from '@/components/PathIntro';
 import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
-import type { BypassReason } from '@/api/types';
 
 export function PathPage() {
   const { from, to } = useParams();
@@ -36,8 +35,11 @@ export function PathPage() {
     navigate(`/path/${from}/${to}${qs ? `?${qs}` : ''}`);
   }
 
-  function handleBypass(mbid: string, why: BypassReason) {
-    go(addExclusion(params, mbid, why), why);
+  // One signal since LUX-1. `addExclusion` still writes the URL parameter for the
+  // signal it is handed, and `decodeExclusions` still reads BOTH, so a link shared
+  // before this change keeps resolving exactly as it did.
+  function handleBypass(mbid: string) {
+    go(addExclusion(params, mbid, 'known'), 'known');
   }
 
   const hasBypasses = decodeExclusions(params).length > 0;

@@ -64,21 +64,16 @@ export function PathIntro({ count, stopRule }: Props) {
         <div className="mt-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-[12.5px] leading-[1.55] text-[var(--color-muted)]">
           <p>
             Any artist in the middle has a{' '}
-            <span className="text-[var(--color-text)]">Reroute from here</span> strip along the
-            bottom of their card. Open it and you get two directions:
+            <span className="text-[var(--color-text)]">Dig deeper</span> control along the
+            bottom of their card.
           </p>
           <p className="mt-2">
-            <span className="text-[var(--color-text)]">Steer away</span> — moves away from that
-            artist <em className="not-italic text-[var(--color-text)]">and the ones around
-            them</em>, so you get a different sound rather than a near-identical substitute.
-          </p>
-          <p className="mt-2">
-            <span className="text-[var(--color-text)]">Dig deeper</span> — same vibe, but less
-            familiar, since you&rsquo;ve already covered the obvious route.
+            Press it and that artist is replaced by someone with a similar sound who is less
+            well known — you have already covered the obvious route.
           </p>
           <p className="mt-2 text-[var(--color-text)]">
-            Either one rebuilds the whole journey, so every artist between your two can change —
-            not just the one you pressed.
+            It rebuilds the whole journey, so every artist between your two can change — not
+            just the one you pressed.
           </p>
           <button
             type="button"

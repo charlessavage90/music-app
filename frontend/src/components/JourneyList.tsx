@@ -3,7 +3,7 @@ import { ArtistCard } from './ArtistCard';
 import { PlayerBar } from './PlayerBar';
 import { usePlayer } from '@/player/usePlayer';
 import { resolveFreshUrl } from '@/hooks/useClip';
-import type { Artist, BypassReason, StopRule } from '@/api/types';
+import type { Artist, StopRule } from '@/api/types';
 
 /** What the page can ask of the journey's audio from outside it. */
 export interface JourneyControls {
@@ -13,7 +13,7 @@ export interface JourneyControls {
 interface Props {
   artists: Artist[];
   stopRule: StopRule;
-  onBypass: (mbid: string, reason: BypassReason) => void;
+  onBypass: (mbid: string) => void;
   /** MBIDs that were not on the previous path — briefly marked on arrival. */
   changed?: Set<string>;
   ref?: Ref<JourneyControls>;

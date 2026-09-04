@@ -9,41 +9,27 @@ import { ArtistCard } from './ArtistCard';
 const artist = (mbid: string) => ({ mbid, name: 'Miles Davis', disambiguation: '', popularity: 1 });
 afterEach(() => vi.restoreAllMocks());
 
-test('fires the two bypass signals with the right reason', async () => {
+test('one bypass control, and it fires the known signal', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
   const onBypass = vi.fn();
   render(<ArtistCard artist={artist('bypass')} isPlaying={false} onPlay={vi.fn()} onBypass={onBypass} />);
-  // Both signals now sit behind the footer strip, so the tray is opened first.
-  await user.click(screen.getByRole('button', { name: /reroute from here/i }));
-  await user.click(screen.getByRole('button', { name: /steer away/i }));
+
+  // LUX-1: there is no tray to open. The footer strip IS the control.
   await user.click(screen.getByRole('button', { name: /dig deeper/i }));
-  expect(onBypass).toHaveBeenNthCalledWith(1, 'bypass', 'dislike');
-  expect(onBypass).toHaveBeenNthCalledWith(2, 'bypass', 'known');
+  expect(onBypass).toHaveBeenCalledTimes(1);
+  expect(onBypass).toHaveBeenCalledWith('bypass');
 });
 
-test('the tray is shut until the strip is pressed, and shuts again', async () => {
-  const user = userEvent.setup();
+// REQ-45: a press routes to a MORE OBSCURE similar artist, so a label that reads
+// as rejection is a defect, not a wording preference. This test is the guard.
+test('the bypass control does not read as rejecting the artist', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c' });
-  render(<ArtistCard artist={artist('tray')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
-
-  const strip = screen.getByRole('button', { name: /reroute from here/i });
-  expect(strip).toHaveAttribute('aria-expanded', 'false');
+  render(<ArtistCard artist={artist('wording')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
   expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
-
-  await user.click(strip);
-  expect(screen.getByRole('button', { name: /steer away/i })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: /dig deeper/i })).toBeInTheDocument();
-  // The consequence neither label implies, said at the moment of choosing —
-  // the explainer above the path can be dismissed and usually has been.
-  expect(screen.getByText(/both options rebuild the whole journey/i)).toBeInTheDocument();
-
-  // The design drew no way back out of the open tray. This is that way back:
-  // the same control, relabelled — so it must genuinely close.
-  const heading = screen.getByRole('button', { name: /how should this change/i });
-  expect(heading).toHaveAttribute('aria-expanded', 'true');
-  await user.click(heading);
-  expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
+  expect(screen.queryByText(/not for me|dislike|reject|no thanks/i)).not.toBeInTheDocument();
+  // The consequence a short label cannot carry, stated where the choice is made.
+  expect(screen.getByText(/rebuilds the whole journey/i)).toBeInTheDocument();
 });
 
 test('play disabled and card still present when clip is 204', async () => {
@@ -119,8 +105,6 @@ test('an endpoint card stays bare — no strip, so no way to reach either signal
       onPlay={vi.fn()} onBypass={vi.fn()}
     />,
   );
-  expect(screen.queryByRole('button', { name: /reroute from here/i })).not.toBeInTheDocument();
-  expect(screen.queryByRole('button', { name: /steer away/i })).not.toBeInTheDocument();
   expect(screen.queryByRole('button', { name: /dig deeper/i })).not.toBeInTheDocument();
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
 });
