@@ -8,7 +8,7 @@ import hmac
 import time
 
 import httpx
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -226,19 +226,23 @@ def create_app(
         )
 
     @app.get("/api/artists/{mbid}/track")
-    async def get_track(mbid: str, request: Request, response: Response):
+    async def get_track(
+        mbid: str,
+        request: Request,
+        response: Response,
+        # ge=0 deliberately: a STALE index wraps inside the resolver, but a
+        # NEGATIVE one is a frontend bug, and Python's modulo would quietly
+        # turn -1 into the last candidate and hide it.
+        index: int = Query(0, ge=0),
+    ):
         node = store.id_by_mbid.get(mbid)
         if node is None:
             raise HTTPException(404, "unknown artist")
         started = time.perf_counter()
-        result = await resolver.resolve(
-            mbid, store.names[node], store.deezer_id_of(node)
+        resolution = await resolver.resolve(
+            mbid, store.names[node], store.deezer_id_of(node), index
         )
-        # TEMPORARY bridge (LUX-T4): resolve() now returns a Resolution
-        # (clip, count) instead of a bare Clip. Wiring the index and count
-        # into this endpoint is LUX-T5's job; until then this keeps the
-        # endpoint's behaviour byte-identical.
-        clip = result.clip
+        clip = resolution.clip
         duration_ms = (time.perf_counter() - started) * 1000.0
 
         emit(
@@ -252,6 +256,11 @@ def create_app(
                 # silent card and they are visually identical; this is what
                 # separates them (TR-15).
                 "source": clip.source if clip else None,
+                # LUX-E4 measures the candidate distribution offline before
+                # launch; these two make the same question answerable from real
+                # use afterwards, which is the only population that matters.
+                "clip_index": index,
+                "candidate_count": resolution.count,
                 "duration_ms": round(duration_ms, 2),
             }
         )
@@ -260,7 +269,10 @@ def create_app(
             response.status_code = 204
             return None
         return TrackOut(
-            preview_url=clip.preview_url, title=clip.title, cover_url=clip.cover_url
+            preview_url=clip.preview_url,
+            title=clip.title,
+            cover_url=clip.cover_url,
+            candidate_count=resolution.count,
         )
 
     @app.get("/health")

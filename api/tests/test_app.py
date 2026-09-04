@@ -168,6 +168,42 @@ def test_track_endpoint_204_when_no_clip():
     assert r.status_code == 204
 
 
+# --- LUX-3: index and candidate_count -----------------------------------
+#
+# _client's fake fetcher answers every call with the SAME body (it is not
+# URL-keyed — api-test-fixtures.md), so a two-candidate body needs two rows
+# with two DIFFERENT titles here: candidates are now de-duplicated by
+# normalised title (clips.py's _dedupe_by_title), and two rows sharing a
+# title would collapse to one, making candidate_count == 1.
+_TWO_CANDIDATES = {"any": {"data": [
+    {"id": 1, "preview": "clip1.mp3", "title": "Song One",
+     "artist": {"name": "Radiohead"}},
+    {"id": 2, "preview": "clip2.mp3", "title": "Song Two",
+     "artist": {"name": "Radiohead"}},
+]}}
+
+
+def test_the_track_endpoint_reports_how_many_candidates_exist():
+    client, store = _client(_TWO_CANDIDATES)
+    data = client.get(f"/api/artists/{store.mbids[0]}/track").json()
+    assert data["candidate_count"] >= 1
+
+
+def test_the_track_endpoint_accepts_an_index():
+    client, store = _client(_TWO_CANDIDATES)
+    first = client.get(f"/api/artists/{store.mbids[0]}/track?index=0").json()
+    second = client.get(f"/api/artists/{store.mbids[0]}/track?index=1").json()
+    assert first["title"] != second["title"]
+
+
+def test_a_negative_index_is_rejected_rather_than_wrapping_backwards():
+    """Wrapping is for a STALE index, not a malformed one. Python's modulo would
+    quietly turn -1 into the last candidate, which hides a frontend bug."""
+    client, store = _client(_TWO_CANDIDATES)
+    r = client.get(f"/api/artists/{store.mbids[0]}/track?index=-1")
+    assert r.status_code == 422
+
+
 def test_path_response_reports_a_natural_journey():
     # The existing fixture routes Radiohead -> Muse -> Coldplay: already has a stop.
     client, store = _client()

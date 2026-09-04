@@ -70,6 +70,10 @@ class TrackOut(BaseModel):
     preview_url: str
     title: str
     cover_url: str
+    # How many playable tracks this artist has, so the UI can hide a "try
+    # another" control that would do nothing. Additive: a client that ignores
+    # it gets exactly the pre-LUX-3 behaviour.
+    candidate_count: int = 1
 
 
 class HealthOut(BaseModel):
