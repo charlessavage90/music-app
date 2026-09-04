@@ -50,6 +50,13 @@ frontend sync, not the map. **Everything open is his to trigger and none of it b
 anything else:** **Option C** (same-name population probe), **`SEL-`**, **closing or keeping
 the 2026-07-29 famous-to-famous defect ruling**, and the **three candidate path-quality fixes
 in the `CXR-` README — each needs its own pre-registration and none may start without him.**
+**NEWLY SCOPED 2026-09-03 and UNSTARTED: the `LUX-` set** — four pre-launch UX features, his
+decisions taken and recorded, no code written and no plan yet:
+`specs/2026-09-03-launch-ux-scope.md`. Sequenced there (§6), with a handoff seam named before
+the last item. **`LUX-4` is GATED on `LUX-E1`** — a rebuild may not reproduce the live map,
+which would make it a graph adoption rather than a metadata change (§4.4); a session must not
+proceed past that on its own judgement. Its §7 carries a `PRODUCT-REQUIREMENTS.md` amendment
+**deliberately unapplied**, to land in the same commit as `LUX-1`'s code.
 ⚠ **One thing is still OPEN rather than done: the first journey, before any press, is
 UNEXPLAINED.** His confirmation did not close it and nothing measured accounts for it. It is
 not a queue item and not assigned; it must not be quietly dropped.
