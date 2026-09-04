@@ -221,3 +221,21 @@ test('the result line counts the artists in between', async () => {
 
   expect(await screen.findByText(/we found a path/i)).toHaveTextContent(/in 1 step\./i);
 });
+
+// This is the wiring between path state and the panel — no other PathPage test
+// supplies a non-empty bypassed/unresolved, so without this the two had never
+// been exercised together at any level.
+test('a bypassed artist from the path response is named in the route-history panel', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({
+    artists: THREE_STOP,
+    stopRule: 'natural',
+    bypassed: [{ mbid: 'z', name: 'Sun Ra', disambiguation: '', popularity: 0.2 }],
+    unresolved: [],
+  });
+
+  renderAt('/path/m/d?known=z');
+
+  await screen.findByText('Herbie Hancock');
+  expect(await screen.findByText('Sun Ra')).toBeInTheDocument();
+});

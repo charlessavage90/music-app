@@ -205,6 +205,16 @@ the offline currency is a separate decision, flagged and not taken.*
 - **REQ-19** — Paths tend to **lengthen over repeated bypasses as a side-effect** of
   holding coherence at increasing obscurity — expected, not required, and not a goal.
 
+### Must
+- **REQ-45** — The bypass control **must not read as a rejection of the artist**. With
+  a single signal, a press routes to a highly similar and more obscure artist (`REQ-27`),
+  which is the wrong answer to *"I don't like this"*. Wording that invites that reading is
+  a defect.
+
+### Should
+- **REQ-46** — Artists removed by a bypass **should remain visible to the user**. Before
+  `LUX-2` they vanish without trace, which makes a press unreviewable and unexplainable.
+
 ## 4. Path length and attention
 
 ### Should
@@ -265,16 +275,10 @@ the offline currency is a separate decision, flagged and not taken.*
 ### Must
 - ~~**REQ-30** — `dislike` steers **away from the stylistic neighbourhood** of the
   disliked artist — it must not merely substitute a near-identical act.~~
-- **REQ-45** — The bypass control **must not read as a rejection of the artist**. With
-  a single signal, a press routes to a highly similar and more obscure artist (`REQ-27`),
-  which is the wrong answer to *"I don't like this"*. Wording that invites that reading is
-  a defect.
 
 ### Should
 - ~~**REQ-31** — 1:1 swaps on `dislike` are rare — materially rarer than on `known`,
   where they are occasionally fine (value 6).~~
-- **REQ-46** — Artists removed by a bypass **should remain visible to the user**. Before
-  `LUX-2` they vanish without trace, which makes a press unreviewable and unexplainable.
 
 ### Expect
 - ~~**REQ-32** — `dislike` and `known` produce observably different behaviour; the two

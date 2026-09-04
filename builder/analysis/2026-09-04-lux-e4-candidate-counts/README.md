@@ -154,9 +154,10 @@ this run could not observe, because the router did not put one on a card.
 - **The obscure end of the sample was largely lost before routing began** — 31 of 40 `oo` pairs
   and 18 of 40 `fo` pairs have an endpoint that is not in the adopted artifact (§2a). The `oo`
   row in §2f rests on 9 pairs, not 40.
-- **Depth zero only.** These are the paths a user sees *before pressing anything*. Both bypass
-  signals push a journey toward more obscure artists; every figure here is from the un-pressed
-  path, which is the popular end of what the app produces.
+- **Depth zero only.** These are the paths a user sees *before pressing anything*. The one bypass
+  control reachable from the UI (`known`, "Dig deeper" — `LUX-1` removed the other) pushes a
+  journey toward more obscure artists; every figure here is from the un-pressed path, which is
+  the popular end of what the app produces.
 - **Counts are censored at 25** (`ApiConfig.clip_search_limit`). 319 of 443 cards read exactly
   25, which means "at least 25", not "25". Every mean above is a censored mean and understates
   the true one. Nothing here depends on the difference — the question is ≥ 2, far from the

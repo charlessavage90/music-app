@@ -50,6 +50,13 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     }));
   }
 
+  // A cycled index that resolved to nothing must not strand the card: track 1
+  // is the one index every card that ever showed "Try another track" has
+  // already proven has a clip, so it is always safe to fall back to.
+  function resetDeadIndex(mbid: string) {
+    setClipIndex((prev) => (prev[mbid] ? { ...prev, [mbid]: 0 } : prev));
+  }
+
   // Silence the previous path the moment a new one arrives — otherwise a clip
   // from an artist who is no longer on the journey keeps playing over it.
   const pathKey = artists.map((a) => a.mbid).join('|');
@@ -76,8 +83,9 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
               artist={artist}
               isPlaying={player.currentMbid === artist.mbid && player.isPlaying}
               isCurrent={player.currentMbid === artist.mbid}
-              // The two artists you chose are the journey's endpoints; there is
-              // nothing to reroute if you reject them.
+              // The two artists you chose are the journey's endpoints; the
+              // bypass control does not apply to them — there is nothing to
+              // reroute for an artist who IS one end of the journey.
               isEndpoint={i === 0 || i === artists.length - 1}
               endpointLabel={
                 i === 0 ? 'start' : i === artists.length - 1 ? 'destination' : undefined
@@ -91,6 +99,7 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
               }
               clipIndex={clipIndex[artist.mbid] ?? 0}
               onCycleClip={(count) => cycleClip(artist.mbid, count)}
+              onDeadIndex={resetDeadIndex}
             />
             {/* Some pairs cannot be given a stop: one of the two holds a single
                 connection in the graph, and it is to the other. Saying so beats

@@ -20,9 +20,11 @@ Autocomplete over artist names, accent-insensitive, ranked by popularity.
 Build a path between two artists. `exclude` entries carry a `reason` of
 `"dislike"` or `"known"` — the two signals shape the reroll differently (see the
 spec §4.3). **The reason codes are the wire contract and have never changed**;
-the frontend has relabelled the buttons behind them twice, and as of 2026-08-07
-presents them as **"Steer away"** (`dislike`) and **"Dig deeper"** (`known`).
-Do not rename the codes to follow the labels.
+the frontend has relabelled the buttons behind them twice, and as of `LUX-1`
+(2026-09) ships only one UI control, labelled **"Dig deeper"** (`known`) — the
+`dislike` reason, the mechanism behind it, and the `?dislike=` URL parameter all
+still exist and still resolve, they are just not reachable from the UI. Do not
+rename the codes to follow the labels.
 
 ```json
 // request
@@ -32,8 +34,19 @@ Do not rename the codes to follow the labels.
 // response
 {"artists": [{"mbid": "…", "name": "Miles Davis", "disambiguation": "",
               "popularity": 0.80}, …],
- "stop_rule": "natural"}
+ "stop_rule": "natural",
+ "bypassed": [{"mbid": "…", "name": "Coleman Hawkins", "disambiguation": "",
+               "popularity": 0.62}],
+ "unresolved": ["<mbid-not-in-the-graph>"]}
 ```
+
+`bypassed` carries the artists a bypass removed, in press order — they are
+hard-excluded and so are absent from `artists`, and the route-history panel
+reads their names from here (`LUX-2b`). `unresolved` carries any `exclude` id
+that did not resolve to a node in the graph (a stale or bogus MBID on a shared
+link): the request still succeeds and the path is built as if that press never
+happened, but the id is reported rather than silently dropped. Both are
+additive — a client that ignores them is unaffected.
 
 `stop_rule` reports how the journey got its middle (F1; design
 `docs/superpowers/specs/2026-07-25-f1-minimum-stop-design.md`):
@@ -50,22 +63,41 @@ Do not rename the codes to follow the labels.
 The response contains artists only; clips are resolved separately per card so
 the path renders immediately (spec §5.2).
 
-### `GET /api/artists/{mbid}/track`
+### `GET /api/artists/{mbid}/track?index=<n>`
 Resolve a 30-second clip for one artist: Deezer first, iTunes fallback,
 cached. `204` when no clip is available (the card renders unplayable but the
 path is unaffected).
 
 **`204` also covers failure, never `5xx`.** A clip is decorative, so a
 catalogue that is down, rate-limiting, or missing the track degrades to a
-silent card. Only the *identity* of the track is cached; the signed preview
-URL is short-lived and is re-resolved on every request, so a repeat view costs
-one lookup per card where it previously cost none. The measured signature
-lifetime lives in `docs/superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md`
-§15 and is cited, never restated here.
+silent card. Only the *identity* of each candidate track is cached; the signed
+preview URL is short-lived and is re-resolved on every request, so a repeat
+view costs one lookup per card where it previously cost none. The measured
+signature lifetime lives in
+`docs/superpowers/2026-07-25-gate1-clips-and-ux-execution-log.md` §15 and is
+cited, never restated here.
+
+`index` (default `0`) selects among the candidate tracks the resolver found for
+this artist (`LUX-3`) — "try another track" on the card increments it. The
+response reports `candidate_count`, the total number of playable candidates,
+so the frontend knows when there is nothing left to cycle to rather than
+guessing.
 
 ```json
-{"preview_url": "https://…", "title": "So What", "cover_url": "https://…"}
+{"preview_url": "https://…", "title": "So What", "cover_url": "https://…",
+ "candidate_count": 3}
 ```
+
+**The out-of-range behaviour is deliberately asymmetric.** A negative `index`
+is rejected with `422`: the frontend never produces one on its own, so a
+negative value can only mean a bug on the caller's side, and silently wrapping
+it (Python's modulo would turn `-1` into the last candidate) would hide that
+bug rather than surface it. A positive `index` past `candidate_count` instead
+**wraps** (`index % candidate_count`): the frontend holds the index in
+component state and a stale one is normal — after a rebuild, a resolver
+returning fewer candidates than before, or a page loaded from a cached URL —
+so wrapping keeps "try another" trivially correct instead of handing the user
+an error they cannot act on.
 
 ## Configuration (environment variables)
 

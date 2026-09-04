@@ -186,7 +186,10 @@ _TWO_CANDIDATES = {"any": {"data": [
 def test_the_track_endpoint_reports_how_many_candidates_exist():
     client, store = _client(_TWO_CANDIDATES)
     data = client.get(f"/api/artists/{store.mbids[0]}/track").json()
-    assert data["candidate_count"] >= 1
+    # _TWO_CANDIDATES carries exactly 2 distinct titles. `>= 1` was unfailable —
+    # TrackOut.candidate_count defaults to 1, so the endpoint could ignore
+    # resolution.count entirely and this would still pass.
+    assert data["candidate_count"] == 2
 
 
 def test_the_track_endpoint_accepts_an_index():
@@ -332,6 +335,29 @@ def test_an_mbid_not_in_the_graph_is_reported_rather_than_dropped():
     data = r.json()
     assert data["unresolved"] == ["not-a-real-mbid"]
     assert data["bypassed"] == []
+
+
+def test_a_repeated_unresolved_id_is_reported_only_once():
+    """A hand-built request repeating one bad id used to yield a duplicate
+    entry -- a duplicate React key and a redundant row in the route-history
+    panel. `_to_exclusions` dedupes it, preserving first-seen order, the same
+    way it already dedupes resolved nodes."""
+    client, store = _client()
+    a, b = store.mbids[0], store.mbids[2]
+    r = client.post(
+        "/api/path",
+        json={
+            "sources": [a, b],
+            "exclude": [
+                {"id": "not-a-real-mbid", "reason": "known"},
+                {"id": "also-not-real", "reason": "known"},
+                {"id": "not-a-real-mbid", "reason": "known"},
+            ],
+        },
+    )
+    assert r.status_code == 200
+    data = r.json()
+    assert data["unresolved"] == ["not-a-real-mbid", "also-not-real"]
 
 
 def test_health_reports_artifact_identity():

@@ -97,7 +97,7 @@ test('the button on a paused card resumes it instead of restarting it', async ()
   expect(onPlay).not.toHaveBeenCalled();
 });
 
-test('an endpoint card stays bare — no strip, so no way to reach either signal', async () => {
+test('an endpoint card stays bare — no strip, so no way to reach the bypass control', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(
     <ArtistCard
@@ -181,4 +181,37 @@ test('offers nothing to cycle to on a silent card', async () => {
   );
   await screen.findByText(/no preview available/i);
   expect(screen.queryByRole('button', { name: /try another track/i })).not.toBeInTheDocument();
+});
+
+// A cycled index (clipIndex > 0) that comes back empty must not strand the
+// card: candidateCount arrives on the TrackOut body, which a 204 does not
+// carry, so the control that could cycle again also vanishes. Without a
+// reset there is no way back to track 1 short of a reload.
+test('a dead cycled index reports back so the caller can reset it', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  const onDeadIndex = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('dead-index')} isPlaying={false} clipIndex={2}
+      onPlay={vi.fn()} onBypass={vi.fn()} onCycleClip={vi.fn()} onDeadIndex={onDeadIndex}
+    />,
+  );
+  await screen.findByText(/no preview available/i);
+  expect(onDeadIndex).toHaveBeenCalledWith('dead-index');
+});
+
+// The ordinary silent card above (index 0, no clip at all) must NOT be read
+// as a dead index -- that would reset an index that was never cycled and is
+// not a defect to recover from.
+test('an ordinary silent card at index 0 does not report a dead index', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  const onDeadIndex = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('silent-not-dead')} isPlaying={false}
+      onPlay={vi.fn()} onBypass={vi.fn()} onCycleClip={vi.fn()} onDeadIndex={onDeadIndex}
+    />,
+  );
+  await screen.findByText(/no preview available/i);
+  expect(onDeadIndex).not.toHaveBeenCalled();
 });

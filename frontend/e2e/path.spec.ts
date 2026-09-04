@@ -39,4 +39,10 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   // you skipped" panel, so a page-wide text search would now find it there.
   await expect(page).toHaveURL(/known=/);
   await expect(page.getByTestId('artist-name').filter({ hasText: secondName })).toHaveCount(0);
+
+  // LUX-2b: the bypassed artist is not gone without trace — the panel names
+  // them. Only a real browser proves the data actually reaches the rendered
+  // page through the URL round trip and the path response together.
+  await expect(page.getByText('Artists you skipped')).toBeVisible();
+  await expect(page.getByText(secondName)).toBeVisible();
 });

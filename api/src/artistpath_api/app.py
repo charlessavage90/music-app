@@ -36,6 +36,9 @@ def _to_exclusions(
 
     Deduplicated because avoidance_map takes a max() per node, so a repeated
     dislike already changes nothing — it only costs another graph traversal.
+    `unresolved` is deduplicated the same way, preserving first-seen order: a
+    hand-built request repeating one bad id would otherwise yield duplicate
+    React keys and a redundant row in the route-history panel.
 
     The unresolved ids used to be discarded silently (LUX-D2). An MBID that is
     not in the graph makes the router build a path as if that press never
@@ -46,10 +49,13 @@ def _to_exclusions(
     by_node: dict[int, str] = {}
     order: list[int] = []
     unresolved: list[str] = []
+    seen_unresolved: set[str] = set()
     for e in raw:
         node = store.id_by_mbid.get(e.id)
         if node is None:
-            unresolved.append(e.id)
+            if e.id not in seen_unresolved:
+                seen_unresolved.add(e.id)
+                unresolved.append(e.id)
             continue
         if node not in by_node:
             order.append(node)

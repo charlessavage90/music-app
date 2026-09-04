@@ -84,6 +84,11 @@ def _dedupe_by_title(
     re-recording, a live version with the same name -- are merged into one
     candidate. That is judged cheaper than presenting "another track" that
     turns out to be the same song again.
+
+    The opposite and more common gap is left open, deliberately, not fixed
+    here: `_fold` does not strip bracketed suffixes, so "Song" and "Song
+    (Remastered 2011)" fold to different keys and survive as two separate
+    candidates even though they are the same recording.
     """
     seen: set[str] = set()
     deduped: list[tuple[TrackIdentity, str]] = []
@@ -442,8 +447,8 @@ class ClipResolver:
         re-introduce the defect this exists to remove (BYP-13).
 
         Every playable row is kept (LUX-3), in the order Deezer returned them,
-        which for /top is popularity-ranked — so candidate 2 is genuinely the
-        second-best-known track.
+        which for /top is popularity-ranked — so the second candidate is
+        genuinely the second-best-known track.
         """
         body = await self._get_from(
             "deezer",

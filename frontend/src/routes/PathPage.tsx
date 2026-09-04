@@ -43,12 +43,10 @@ export function PathPage() {
     go(addExclusion(params, mbid, 'known'), 'known');
   }
 
-  // Press order, oldest first — one signal means one comma list (LUX-1), and
-  // `addExclusion` appends. The panel reverses it for display. The names
-  // themselves come from the path response (LUX-2b); this is only for
-  // deciding whether "Reset path" has anything to undo.
-  const bypassedIds = decodeExclusions(params).map((e) => e.id);
-  const hasBypasses = bypassedIds.length > 0;
+  // Whether "Reset path" has anything to undo. The names and ids for the
+  // panel itself come from the path response, not the URL (LUX-2b) — this
+  // reads the URL only to answer yes/no.
+  const hasBypasses = decodeExclusions(params).length > 0;
 
   // The names come from the path itself; the ids from the URL, so the link
   // still works while the first path is loading or has failed.
@@ -118,10 +116,14 @@ export function PathPage() {
                 onBypass={handleBypass}
                 changed={feedback.changed}
               />
+              {/* Dimmed together with the journey (not rendered outside it):
+                  while a press is being answered, the panel still names the
+                  PREVIOUS path's skips, so leaving it undimmed would have the
+                  page disagree with itself about whether it has settled. */}
+              <RouteHistory bypassed={state.bypassed} unresolved={state.unresolved} />
             </div>
             {feedback.notice && <RerollNotice reason={feedback.notice} />}
           </div>
-          <RouteHistory bypassed={state.bypassed} unresolved={state.unresolved} />
         </div>
       )}
     </main>

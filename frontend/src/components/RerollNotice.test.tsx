@@ -15,7 +15,7 @@ test('names what a reset does', () => {
   expect(screen.getByText(/back to the original path/i)).toBeInTheDocument();
 });
 
-// The bypass buttons stay pressable underneath: they work today, and usePath
+// The bypass control stays pressable underneath: it works today, and usePath
 // aborts a superseded request safely.
 test('does not intercept pointer events', () => {
   const { container } = render(<RerollNotice reason="known" />);

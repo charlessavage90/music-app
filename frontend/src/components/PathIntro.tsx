@@ -24,7 +24,7 @@ interface Props {
  *
  * The result line is permanent; the explainer is onboarding, so it opens on a
  * first visit and stays closed once dismissed (UI-D6). Both stand down when the
- * two artists are adjacent: there is no count to state, no bypass buttons to
+ * two artists are adjacent: there is no count to state, no bypass control to
  * explain, and JourneyList already says the useful thing.
  */
 export function PathIntro({ count, stopRule }: Props) {

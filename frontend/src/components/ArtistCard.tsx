@@ -8,7 +8,7 @@ interface Props {
   isPlaying: boolean;
   /** This card owns the audio, playing or paused — so its button toggles. */
   isCurrent?: boolean;
-  /** One of the two artists you chose. Neither bypass signal applies to them. */
+  /** One of the two artists you chose. The bypass control does not apply to them. */
   isEndpoint?: boolean;
   /** Which end, when this is an endpoint. Drives the eyebrow label. */
   endpointLabel?: 'start' | 'destination';
@@ -32,11 +32,22 @@ interface Props {
    * can wrap without a second source of truth for it.
    */
   onCycleClip?: (candidateCount: number) => void;
+  /**
+   * A CYCLED index (clipIndex > 0) resolved to no clip at all — the candidate
+   * the card was showing dropped out from under it (the catalogue briefly
+   * refused us, or it lost the track). Without this the card is stranded: no
+   * track plays, and with candidateCount now 0 (a 204 carries no body, so the
+   * count that would size the control is gone with it) "Try another track"
+   * has nothing to render, leaving no way back to track 1 short of a reload.
+   * Never fires for a card that simply has no clip at index 0 — that is a
+   * normal silent card, not a dead index.
+   */
+  onDeadIndex?: (mbid: string) => void;
 }
 
 export function ArtistCard({
   artist, isPlaying, isCurrent, isEndpoint, endpointLabel, isNew,
-  onPlay, onToggle, onBypass, onClipResolved, clipIndex, onCycleClip,
+  onPlay, onToggle, onBypass, onClipResolved, clipIndex, onCycleClip, onDeadIndex,
 }: Props) {
   const clip = useClip(artist.mbid, clipIndex ?? 0);
   const playable = clip.status === 'ready';
@@ -46,6 +57,9 @@ export function ArtistCard({
   useEffect(() => {
     if (clip.status === 'loading') return;
     onClipResolved?.(artist.mbid, playable);
+    if (!playable && (clipIndex ?? 0) > 0) {
+      onDeadIndex?.(artist.mbid);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clip.status]);
 
@@ -73,8 +87,8 @@ export function ArtistCard({
           {endpointLabel === 'start' ? 'Starting artist' : 'Destination artist'}
         </div>
       )}
-      {/* No longer wraps: the two bypass signals moved out of this row into the
-          footer strip below, and they were the non-shrinkable pair that forced
+      {/* No longer wraps: the bypass control moved out of this row into the
+          footer strip below, and it was the non-shrinkable element that forced
           the artist name toward zero at phone width (TR-16). */}
       <div className="flex items-center gap-3 sm:gap-3.5">
         <div

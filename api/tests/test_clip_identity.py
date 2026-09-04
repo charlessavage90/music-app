@@ -181,6 +181,11 @@ async def test_the_identity_found_by_id_is_cached_and_replayable():
 
 
 async def test_the_candidate_list_is_cached_so_a_second_index_costs_no_search():
+    # The old version of this test only checked the cached list's LENGTH and
+    # never actually resolved a second index -- it could not fail even if
+    # every index re-ran the search. This one resolves index=0, then index=1,
+    # and asserts on r.calls that the second resolve did not search again: a
+    # cache hit still pays for one re-sign (C2), but never a second search.
     cache = InMemoryClipCache()
     body = {"data": [
         {"id": 1, "preview": "u1", "title": "One",
@@ -188,6 +193,19 @@ async def test_the_candidate_list_is_cached_so_a_second_index_costs_no_search():
         {"id": 2, "preview": "u2", "title": "Two",
          "artist": {"name": "Nirvana"}, "album": {}},
     ]}
-    r = _resolver({"deezer.com/search": body}, cache=cache)
-    await r.resolve(MBID, "Nirvana")
+    r = _resolver(
+        {"deezer.com/search": body, "track/2": {"preview": "https://cdn.deezer/resigned.mp3"}},
+        cache=cache,
+    )
+    first = await r.resolve(MBID, "Nirvana")
+    assert first.clip.title == "One"
     assert len(await cache.get(MBID)) == 2
+    calls_after_first = len(r.calls)
+    assert calls_after_first == 1  # the one search call
+
+    second = await r.resolve(MBID, "Nirvana", index=1)
+    assert second.clip.title == "Two"
+    assert second.clip.preview_url == "https://cdn.deezer/resigned.mp3"
+    # One more call happened (the re-sign), and none of it was a search.
+    assert len(r.calls) == calls_after_first + 1
+    assert not any("deezer.com/search" in url for url in _urls(r)[calls_after_first:])
