@@ -231,9 +231,14 @@ def create_app(
         if node is None:
             raise HTTPException(404, "unknown artist")
         started = time.perf_counter()
-        clip = await resolver.resolve(
+        result = await resolver.resolve(
             mbid, store.names[node], store.deezer_id_of(node)
         )
+        # TEMPORARY bridge (LUX-T4): resolve() now returns a Resolution
+        # (clip, count) instead of a bare Clip. Wiring the index and count
+        # into this endpoint is LUX-T5's job; until then this keeps the
+        # endpoint's behaviour byte-identical.
+        clip = result.clip
         duration_ms = (time.perf_counter() - started) * 1000.0
 
         emit(

@@ -77,21 +77,21 @@ def _resolver(responses, cache=None, breaker=None):
 
 async def test_resolves_from_deezer_first():
     r = _resolver({"deezer": DEEZER_HIT})
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.deezer/clip.mp3"
     assert clip.title == "Paranoid Android"
 
 
 async def test_falls_back_to_itunes_when_deezer_empty():
     r = _resolver({"deezer": {"data": []}, "itunes": ITUNES_HIT})
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.itunes/clip.m4a"
     assert clip.title == "Karma Police"
 
 
 async def test_returns_none_when_no_source_has_a_clip():
     r = _resolver({"deezer": {"data": []}, "itunes": {"results": []}})
-    assert await r.resolve(MBID, "Nobody") is None
+    assert (await r.resolve(MBID, "Nobody")).clip is None
 
 
 async def test_deezer_entry_without_preview_is_skipped():
@@ -99,7 +99,7 @@ async def test_deezer_entry_without_preview_is_skipped():
     no_preview = {"data": [{"id": 3, "preview": "", "title": "X",
                             "artist": {"name": "Radiohead"}}]}
     r = _resolver({"deezer": no_preview, "itunes": ITUNES_HIT})
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.itunes/clip.m4a"
 
 
@@ -109,7 +109,7 @@ async def test_deezer_entry_without_preview_is_skipped():
 async def test_skips_a_title_match_by_the_wrong_artist():
     """C1. 'The Format' returns a *song* called The Format by AZ above the band."""
     r = _resolver({"deezer": DEEZER_TITLE_COLLISION})
-    clip = await r.resolve(MBID, "The Format")
+    clip = (await r.resolve(MBID, "The Format")).clip
     assert clip.preview_url == "https://cdn.deezer/holy-roller.mp3"
     assert clip.title == "Holy Roller"
 
@@ -128,7 +128,7 @@ async def test_no_clip_at_all_beats_a_clip_by_the_wrong_artist():
                             "title": "The Format",
                             "artist": {"name": "AZ"}}]}
     r = _resolver({"deezer": only_wrong, "itunes": {"results": []}})
-    assert await r.resolve(MBID, "The Format") is None
+    assert (await r.resolve(MBID, "The Format")).clip is None
 
 
 async def test_itunes_results_are_matched_on_artist_too():
@@ -142,7 +142,7 @@ async def test_itunes_results_are_matched_on_artist_too():
         ]
     }
     r = _resolver({"deezer": {"data": []}, "itunes": wrong_then_right})
-    clip = await r.resolve(MBID, "The Format")
+    clip = (await r.resolve(MBID, "The Format")).clip
     assert clip.preview_url == "https://cdn.itunes/right.m4a"
 
 
@@ -152,7 +152,7 @@ async def test_artist_match_ignores_case_and_accents():
                       "title": "Army of Me",
                       "artist": {"name": "BJÖRK"}}]}
     r = _resolver({"deezer": body})
-    clip = await r.resolve(MBID, "Bjork")
+    clip = (await r.resolve(MBID, "Bjork")).clip
     assert clip.preview_url == "https://cdn.deezer/bjork.mp3"
 
 
@@ -170,22 +170,22 @@ async def test_the_cache_never_holds_a_signed_url():
     await r.resolve(MBID, "Radiohead")
 
     identity = await cache.get(MBID)
-    assert identity == TrackIdentity(
+    assert identity == [TrackIdentity(
         source="deezer", track_id="771",
         title="Paranoid Android", cover_url="https://cdn/okc.jpg",
-    )
+    )]
     assert "clip.mp3" not in repr(identity)
 
 
 async def test_a_cached_track_gets_a_freshly_signed_url():
     """C2. The URL is re-resolved per request, so it is never the stale one."""
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")])
     r = _resolver({
         "deezer.com/track/771": {"id": 771, "preview": "https://cdn.deezer/FRESH.mp3"},
     }, cache=cache)
 
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.deezer/FRESH.mp3"
     assert clip.title == "Paranoid Android"
 
@@ -193,7 +193,7 @@ async def test_a_cached_track_gets_a_freshly_signed_url():
 async def test_a_cached_track_is_not_searched_for_again():
     """C2. Identity is stable; only the URL is volatile. Search is the expensive call."""
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")])
     r = _resolver({
         "deezer.com/track/771": {"preview": "https://cdn.deezer/fresh.mp3"},
     }, cache=cache)
@@ -211,42 +211,110 @@ async def test_a_cold_lookup_does_not_pay_for_a_second_round_trip():
 
 async def test_an_itunes_track_is_re_resolved_through_itunes():
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("itunes", "991", "Karma Police", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("itunes", "991", "Karma Police", "cover.jpg")])
     r = _resolver({
         "itunes.apple.com/lookup": {
             "results": [{"trackId": 991, "previewUrl": "https://cdn.itunes/fresh.m4a"}]
         },
     }, cache=cache)
 
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.itunes/fresh.m4a"
 
 
 async def test_a_track_pulled_from_the_catalogue_is_searched_for_again():
     """Identity is stable but not permanent — a dead id must self-heal."""
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("deezer", "999", "Gone", "cover.jpg")])
     r = _resolver({
         "deezer.com/track/999": {"error": {"type": "DataException"}},
         "deezer.com/search": DEEZER_HIT,
     }, cache=cache)
 
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.deezer/clip.mp3"
-    assert await cache.get(MBID) == TrackIdentity(
+    assert await cache.get(MBID) == [TrackIdentity(
         "deezer", "771", "Paranoid Android", "https://cdn/okc.jpg"
-    )
+    )]
 
 
 async def test_no_clip_when_the_track_is_gone_and_the_artist_has_no_other():
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("deezer", "999", "Gone", "cover.jpg")])
     r = _resolver({
         "deezer.com/track/999": {},
         "deezer.com/search": {"data": []},
         "itunes": {"results": []},
     }, cache=cache)
-    assert await r.resolve(MBID, "Radiohead") is None
+    assert (await r.resolve(MBID, "Radiohead")).clip is None
+
+
+# --- LUX-3: the resolver keeps every playable candidate ------------------
+
+
+async def test_the_resolver_keeps_every_playable_row_not_just_the_first():
+    """Each provider is already asked for clip_search_limit rows and all but the
+    first were thrown away. LUX-3 keeps them so a user can try another track."""
+    body = {"data": [
+        {"id": 1, "preview": "u1", "title": "One",
+         "artist": {"name": "Miles Davis"}, "album": {"cover_medium": "c1"}},
+        {"id": 2, "preview": "u2", "title": "Two",
+         "artist": {"name": "Miles Davis"}, "album": {"cover_medium": "c2"}},
+        {"id": 3, "preview": None, "title": "Silent",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+    ]}
+    r = _resolver({"deezer": body})
+    result = await r.resolve(MBID, "Miles Davis")
+    assert result.count == 2          # the unplayable row is not a candidate
+    assert result.clip.title == "One"
+
+
+async def test_index_selects_a_later_candidate():
+    body = {"data": [
+        {"id": 1, "preview": "u1", "title": "One",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+        {"id": 2, "preview": "u2", "title": "Two",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+    ]}
+    r = _resolver({"deezer": body})
+    result = await r.resolve(MBID, "Miles Davis", index=1)
+    assert result.clip.title == "Two"
+    assert result.count == 2
+
+
+async def test_an_out_of_range_index_wraps_rather_than_failing():
+    """The frontend holds the index and can hold a stale one. Wrapping keeps
+    "next" correct and never hands the user an error they cannot act on."""
+    body = {"data": [
+        {"id": 1, "preview": "u1", "title": "One",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+        {"id": 2, "preview": "u2", "title": "Two",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+    ]}
+    r = _resolver({"deezer": body})
+    result = await r.resolve(MBID, "Miles Davis", index=5)
+    assert result.clip.title == "Two"   # 5 % 2 == 1
+
+
+async def test_a_single_candidate_artist_reports_a_count_of_one():
+    """Thin catalogues are the population this app exists to deliver (TCE-/TCR-).
+    The count is what lets the UI hide a control that would do nothing."""
+    body = {"data": [
+        {"id": 1, "preview": "u1", "title": "Only",
+         "artist": {"name": "Miles Davis"}, "album": {}},
+    ]}
+    r = _resolver({"deezer": body})
+    result = await r.resolve(MBID, "Miles Davis")
+    assert result.count == 1
+
+
+async def test_no_playable_row_is_still_a_silent_card():
+    body = {"data": [{"id": 1, "preview": None, "title": "x",
+                      "artist": {"name": "Miles Davis"}, "album": {}}]}
+    r = _resolver({"deezer": body})
+    result = await r.resolve(MBID, "Miles Davis")
+    assert result.clip is None
+    assert result.count == 0
 
 
 # --- C2: the production cache stores the same shape ---------------------
@@ -267,10 +335,10 @@ class FakeTable:
 async def test_dynamo_cache_writes_identity_and_no_url():
     table = FakeTable()
     await DynamoClipCache(CFG, table).put(
-        MBID, TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")
+        MBID, [TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")]
     )
-    assert table.written["track_id"] == "771"
-    assert table.written["source"] == "deezer"
+    assert table.written["tracks"][0]["track_id"] == "771"
+    assert table.written["tracks"][0]["source"] == "deezer"
     assert "preview_url" not in table.written
 
 
@@ -283,13 +351,13 @@ async def test_dynamo_cache_writes_identity_and_no_url():
 
 async def test_a_deezer_outage_falls_back_to_itunes():
     r = _resolver({"deezer": Boom("429 rate limited"), "itunes": ITUNES_HIT})
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.itunes/clip.m4a"
 
 
 async def test_both_catalogues_failing_yields_no_clip_rather_than_an_error():
     r = _resolver({"deezer": Boom("500"), "itunes": Boom("timeout")})
-    assert await r.resolve(MBID, "Radiohead") is None
+    assert (await r.resolve(MBID, "Radiohead")).clip is None
 
 
 async def test_a_404_on_the_cached_track_re_searches():
@@ -299,30 +367,30 @@ async def test_a_404_on_the_cached_track_re_searches():
     actually meet in production.
     """
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("deezer", "999", "Gone", "cover.jpg")])
     r = _resolver({
         "deezer.com/track/999": Boom("404 not found"),
         "deezer.com/search": DEEZER_HIT,
     }, cache=cache)
 
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
     assert clip.preview_url == "https://cdn.deezer/clip.mp3"
-    assert (await cache.get(MBID)).track_id == "771"
+    assert (await cache.get(MBID))[0].track_id == "771"
 
 
 async def test_a_rate_limited_lookup_does_not_evict_a_good_cached_track():
     """A transient failure must not cost us the identity we already had."""
     cache = InMemoryClipCache()
     known = TrackIdentity("deezer", "771", "Paranoid Android", "cover.jpg")
-    await cache.put(MBID, known)
+    await cache.put(MBID, [known])
     r = _resolver({
         "deezer.com/track/771": Boom("429 rate limited"),
         "deezer.com/search": Boom("429 rate limited"),
         "itunes": Boom("429 rate limited"),
     }, cache=cache)
 
-    assert await r.resolve(MBID, "Radiohead") is None
-    assert await cache.get(MBID) == known  # still there for the next request
+    assert (await r.resolve(MBID, "Radiohead")).clip is None
+    assert await cache.get(MBID) == [known]  # still there for the next request
 
 
 async def test_a_bug_in_our_own_parsing_is_not_swallowed():
@@ -348,6 +416,15 @@ async def test_dynamo_cache_treats_a_pre_c2_item_as_a_miss():
     stale = {"mbid": MBID, "preview_url": "https://cdn.deezer/expired.mp3",
              "title": "Old", "cover_url": "cover.jpg"}
     assert await DynamoClipCache(CFG, FakeTable(stale)).get(MBID) is None
+
+
+def test_a_pre_lux3_dynamo_item_is_a_miss_and_gets_overwritten():
+    """Same precedent as the pre-C2 items above: an item written in the old flat
+    shape cannot say how many candidates there were, so it is a miss. The 30-day
+    TTL drains the old shape unaided — do NOT write a migration."""
+    table = FakeTable({"mbid": "m", "source": "deezer", "track_id": "1",
+                       "title": "One", "cover_url": "c"})
+    assert DynamoClipCache(ApiConfig(), table)._get_sync("m") is None
 
 
 class ExplodingCache:
@@ -386,7 +463,7 @@ async def test_a_failing_cache_read_is_treated_as_a_miss():
         return _DEEZER_OK
 
     resolver = ClipResolver(cfg, ExplodingCache(fail_get=True, fail_put=False), fetch_json)
-    clip = await resolver.resolve("m1", "Some Artist")
+    clip = (await resolver.resolve("m1", "Some Artist")).clip
     assert clip is not None
     assert clip.preview_url == "https://p.example/x.mp3"
 
@@ -400,7 +477,7 @@ async def test_a_failing_cache_write_still_returns_the_clip():
         return _DEEZER_OK
 
     resolver = ClipResolver(cfg, ExplodingCache(fail_get=False, fail_put=True), fetch_json)
-    clip = await resolver.resolve("m1", "Some Artist")
+    clip = (await resolver.resolve("m1", "Some Artist")).clip
     assert clip is not None
     assert clip.title == "Song"
 
@@ -421,7 +498,7 @@ async def test_a_null_title_from_the_catalogue_does_not_crash():
         }
 
     resolver = ClipResolver(cfg, InMemoryClipCache(), fetch_json)
-    clip = await resolver.resolve("m1", "Some Artist")
+    clip = (await resolver.resolve("m1", "Some Artist")).clip
     assert clip is not None
     assert clip.title == ""
     assert clip.cover_url == ""
@@ -437,10 +514,9 @@ async def test_dynamo_cache_round_trips_through_the_resolver():
     table = FakeTable(
         item={
             "mbid": "m1",
-            "source": "deezer",
-            "track_id": "77",
-            "title": "T",
-            "cover_url": "c",
+            "tracks": [
+                {"source": "deezer", "track_id": "77", "title": "T", "cover_url": "c"}
+            ],
         }
     )
     cache = DynamoClipCache(cfg, table)
@@ -449,7 +525,7 @@ async def test_dynamo_cache_round_trips_through_the_resolver():
         return {"preview": "https://signed.example/x.mp3"}
 
     resolver = ClipResolver(cfg, cache, fetch_json)
-    clip = await resolver.resolve("m1", "Some Artist")
+    clip = (await resolver.resolve("m1", "Some Artist")).clip
     assert clip is not None
     assert clip.preview_url == "https://signed.example/x.mp3"
     assert clip.title == "T"
@@ -476,10 +552,10 @@ async def test_a_throttled_deezer_is_not_asked_again_for_the_same_artist():
     # back 429, falling through to _search asks the SAME service twice more.
     # One call is the correct number.
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("deezer", "999", "Song", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("deezer", "999", "Song", "cover.jpg")])
     r = _resolver({"deezer": CatalogueUnavailable("429")}, cache=cache)
 
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
 
     assert clip is None
     assert len(_deezer_calls(r)) == 1, (
@@ -492,13 +568,13 @@ async def test_a_track_that_left_the_catalogue_still_falls_through_to_a_search()
     # miss, and re-searching is what keeps the card playable. Only
     # UNAVAILABILITY stops the fall-through.
     cache = InMemoryClipCache()
-    await cache.put(MBID, TrackIdentity("deezer", "999", "Gone", "cover.jpg"))
+    await cache.put(MBID, [TrackIdentity("deezer", "999", "Gone", "cover.jpg")])
     r = _resolver({
         "deezer.com/track/999": Boom("404 not found"),
         "deezer.com/search": DEEZER_HIT,
     }, cache=cache)
 
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
 
     assert clip is not None
     assert clip.preview_url == "https://cdn.deezer/clip.mp3"
@@ -512,7 +588,7 @@ async def test_a_throttled_deezer_still_falls_through_to_itunes_on_a_cold_artist
         "itunes": ITUNES_HIT,
     })
 
-    clip = await r.resolve(MBID, "Radiohead")
+    clip = (await r.resolve(MBID, "Radiohead")).clip
 
     assert clip is not None
     assert clip.source == "itunes"
@@ -546,7 +622,7 @@ async def test_an_open_deezer_breaker_leaves_itunes_usable():
     }, breaker=breaker)
 
     await r.resolve(MBID, "Radiohead")          # trips the breaker
-    clip = await r.resolve("b" * 36, "Radiohead")
+    clip = (await r.resolve("b" * 36, "Radiohead")).clip
 
     assert clip is not None and clip.source == "itunes"
     assert len(_deezer_calls(r)) == 1
