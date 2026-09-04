@@ -79,6 +79,37 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
+## ▶ QUEUED (latest) — 2026-09-03 — the app has a new address
+
+**The app now lives at `https://unsung.fm`.** Nothing about the app itself changed — same
+code, same map, same buttons. Only the address moved, and the old one still works: every link
+you or anyone else has ever shared redirects to the new address and lands on the same journey.
+
+### What to exercise — two minutes
+
+1. **Open `https://unsung.fm` in a browser that has never seen it** (a private window is
+   enough). Build one journey.
+2. **Play a clip on a card in the middle.** This is the one thing that could not be checked
+   from outside: the page and the search were confirmed working by machine, but nothing
+   proved a clip actually plays from the new address.
+3. **Press each of the two buttons on a middle card once**, and check the journey rebuilds.
+
+### What "wrong" looks like
+
+- **A blank white page**, or the words "the app did not load".
+- **A card that will not play** where the same artist played before.
+- **A link you had saved that does not open**, or that opens a *different* journey than it
+  used to — the address change was supposed to carry the whole link across, including your
+  button presses.
+
+### One thing that is expected and is NOT a fault
+
+**The short "How do I change the path?" explainer will open again**, once, even though you
+dismissed it long ago. Browsers file that "already seen it" note under the website's address,
+and the address changed, so it starts fresh. Dismiss it once more and it stays gone.
+
+**Paste the URL for anything you find.**
+
 ## ✅ DONE — 2026-09-01 — CONFIRMED BY THE OWNER; NOTHING FOUND
 
 > **His words:** *"I've confirmed the old map is live."*
