@@ -273,8 +273,15 @@ there is dormant until a graph is rebuilt.
   strengthening it is an unclaimed design question, not part of Track B.
 - **The mirror's two device knobs (`w_known_ramp_pctl`, `w_known_thresh_pctl`) stay 0.0.**
 - **`BuilderConfig.algorithm` still carries `contribution_5`**; changing it *is* the
-  re-crawl decision. Likewise `max_neighbours_per_artist = 50` and
-  `cap_strategy = "mutual_knn"` — **Track B was analysis-only and moved no default.**
+  re-crawl decision. (Verified 2026-09-05: `PRODUCTION_ALGORITHM` = ALG-E, `…contribution_5…`.)
+- ⚠ **`cap_strategy` is `trimmed_union`, NOT `mutual_knn`** — corrected 2026-09-05. This entry
+  read `mutual_knn` because it was written before `MSW-` flipped it on 2026-08-06, and the
+  block recording that flip was demoted into the archive without the registry being updated.
+  It is the first distillation defect the split found, and it is the exact shape the archive
+  header warns about. The live knobs are **`union_top_j = 50` and `union_degree_ceiling = 50`**;
+  `max_neighbours_per_artist = 50` is still set but is **ignored under `trimmed_union`**, so
+  reading it as the live degree bound is wrong. `mutual_knn` remains supported, and every
+  pre-2026-08-06 figure was measured under it — **check which rule a claim is in.**
 
 ## Deferred, with conditions
 
