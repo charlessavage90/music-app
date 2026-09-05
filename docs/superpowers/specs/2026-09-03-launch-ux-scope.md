@@ -457,6 +457,24 @@ only change across that range is a log line and the override plumbing.
 - **⚠ Neither the archive nor the payload default is moved by this.** Both are pinned per
   invocation.
 
+> ### ✅ `LUX-E1` RAN 2026-09-05. Arm B′ is **BYTE-IDENTICAL**. The gate on `LUX-4` is DISCHARGED.
+>
+> The rebuild reproduced `43dd82bb…` exactly — artists, edges, bytes and sha all match. So the
+> drop-list pointer and the archive were the **only** build-side drifts, both are identified,
+> and **`LUX-4` is a metadata change as priced, not a graph adoption.** Determinism holds. It
+> also retro-validates that the pre-CEX snapshot is the tree the live map was built from, which
+> no manifest records. **Arm A was not run and does not need to be.**
+>
+> Figures owned by [`builder/analysis/2026-09-05-lux-e1-armb/README.md`](../../../builder/analysis/2026-09-05-lux-e1-armb/README.md) — cited, never restated.
+>
+> ⚠ **Running it surfaced a THIRD `CXA-` leftover and it blocks `LUX-4`:** `check_acceptance`
+> runs before `serialise` and the bounds were recalibrated for the extended population, so a
+> **correct rebuild of the served map is REJECTED and never written**. `LUX-4` must rebuild and
+> will hit the same refusal. Not a correctness problem — acceptance governs admission, never
+> content — but the `LUX-4` plan owes a fix, and **which fix is the owner's**: recalibrate the
+> bounds to the served population, or wire the `--criteria` hook `cmd_build` already reads but
+> no argument supplies. **A session must not widen a bound to admit its own build.**
+
 **Cost correction:** `AM1` and two other documents say `~23 min`. **The live artifact's own
 manifest records `elapsed_seconds: 39.2`**, and that timer spans the whole build —
 `cmd_build` starts it before `build_from_archive` and stops it after `serialise`. The 23-minute

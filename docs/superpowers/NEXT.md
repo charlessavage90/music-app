@@ -124,20 +124,36 @@ clip-availability eval on a damaged sample at depth zero is the wrong instrument
 Figures owned by `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md` and by
 `findings/2026-07-30-tag-discrimination.md`, cited never restated.
 
-**⚠ THE REVERT MOVED THE MAP BUT NOT THE DROP LIST — measured 2026-09-05, and it changes what
-`LUX-E1` is for.** `CXA-` Task 2 repointed the ALG-B unlistenable drop list default at a payload
-re-censused over the extended population, and the `CXR-` revert did not repoint it back.
-**Nothing served is affected** — the API never reads a drop list and the artifact is prebuilt —
-but **a rebuild from HEAD would drop 31 artists that are in the live map**, so `LUX-E1`'s
-default arm is red before it runs. `LUX-E1-AM1` adds the isolating arm that is actually
-informative. Figures owned by
+**⚠ THE REVERT MOVED THE MAP BUT NOT THE DROP LIST — measured 2026-09-05.** `CXA-` Task 2
+repointed the ALG-B unlistenable drop list default at a payload re-censused over the extended
+population, and the `CXR-` revert did not repoint it back. **Nothing served is affected** — the
+API never reads a drop list and the artifact is prebuilt — but **a rebuild from HEAD would drop
+31 artists that are in the live map**. Figures owned by
 [`builder/analysis/2026-09-05-lux-e1-drift-source/README.md`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md),
-cited never restated.
+cited never restated. **Whether to repoint the default back or accept the 31 is his one-line
+choice, and it is still open** — `LUX-E1` pinned the old list per invocation and moved no
+default. *(`LUX-E1-AM1` added the isolating arm; `LUX-E1-AM2` then found the archive drift the
+factor table had wrongly held constant. Both ran as B′ — see the discharge above.)*
 
-**`LUX-4` IS STILL UNSTARTED and must stay that way until `LUX-E1` runs.** A rebuild may not
-reproduce the live map, which would make it a graph adoption rather than a metadata change —
-the operation reverted on 2026-09-01 after his own listening test. The `LUX-` plan
-deliberately excludes it; do not start it from there.
+**✅ `LUX-E1` RAN 2026-09-05 AND ITS GATE ON `LUX-4` IS DISCHARGED.** Arm B′ — the archive and
+the drop list both pinned to what the live map was built with — rebuilt **byte-identically**.
+So a rebuild *does* reproduce the live map, and **`LUX-4` is a metadata change as priced, not a
+graph adoption.** Determinism holds. Figures owned by
+[`builder/analysis/2026-09-05-lux-e1-armb/README.md`](../../builder/analysis/2026-09-05-lux-e1-armb/README.md),
+cited never restated. `LUX-4` is still **unstarted**, and the `LUX-1..3` plan still deliberately
+excludes it — do not start it from there — but it is no longer blocked.
+
+**⚠ THREE `CXA-` LEFTOVERS, not one. The revert moved the map and moved none of them.** The
+drop-list pointer was known; `LUX-E1` found the other two. **(a)** The ALG-B **archive tree**
+gained 73,877 response files after the live map was built, so an unpinned rebuild reads the
+extended crawl — the pre-expansion state survives as `grt-archive-algb.pre-cex-snapshot`.
+**(b)** The **acceptance bounds** were recalibrated for the extended population, so
+`artistpath-build build` now **REJECTS a correct rebuild of the served map** before serialising
+it. **(b) blocks `LUX-4`**, which must rebuild to add its fields and lands on the same
+population. Neither is a correctness problem with the graph. **Which fix is his** —
+recalibrate the bounds to the served population, or wire the `--criteria` hook `cmd_build`
+already reads but no argument supplies; **a session must not widen a bound to admit its own
+build.**
 
 **Everything else open is his to trigger and none of it blocks anything:** **Option C**
 (same-name population probe), **`SEL-`**, **closing or keeping the 2026-07-29
