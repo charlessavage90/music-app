@@ -429,6 +429,16 @@ each link target, the fraction of **interior** cards carrying it, by popularity 
 - **Threshold:** any field below **50%** in the lower half needs a **designed empty state**,
   not a blank line. This is a design trigger, not a kill.
 - Endpoints are excluded — they are the user's own picks, per `delivered_coverage.py`'s note.
+- **⚠ BLOCKER — FIX THE SAMPLE BEFORE RUNNING THIS.** The 120-pair `TAS-` file this eval names
+  is **damaged on the currently-served map**: a large minority of pairs can no longer be routed
+  because an endpoint is absent from the graph, and the loss falls almost entirely on the two
+  obscure classes. Figures owned by
+  `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md` §2a — cited, never restated.
+  **This threshold is stated over the lower half, which is precisely the population the damage
+  removes**, so running as written would report a denominator that is empty or near-empty and
+  return the same undefined read `LUX-E4` did. Either redraw the sample against the adopted
+  artifact first, or report UNDEFINED — **never a pass**. Carried here 2026-09-05 from `LUX-E4`
+  below, where a session running this eval would not have seen it.
 
 ### `LUX-E3` — Spotify id coverage **(informs `LUX-4`)**
 
@@ -463,6 +473,30 @@ finds, split by band **and by resolution route** (deezer-id / deezer-name / itun
 - **Threshold:** if fewer than **half** of lower-half cards carry ≥ 2 candidates, `LUX-3`
   serves famous artists and not the ones the app is for. That is a **re-prioritisation
   trigger and the owner's call**, never a session's decision to drop it.
+- **⚠ THRESHOLD RETIRED 2026-09-05 (owner). `LUX-E4` IS CLOSED AND MUST NOT BE RE-RUN.**
+  The read above stands unchanged — it was and remains **undefined**, never a pass. What is
+  retired is the *threshold*, because it was **mis-specified**: it names a re-prioritisation
+  trigger for an outcome that costs nothing. `LUX-3`'s control is gated
+  `playable && candidates > 1` (`frontend/src/components/ArtistCard.tsx`), so when there is
+  nothing to cycle to **the element does not render** — no blank line, no placeholder, no
+  stranded card. It degrades exactly as a silent card already does today. The component's own
+  comment states the accepted position in advance: *"an artist with exactly one playable track
+  is the population this app exists to deliver"*. There is therefore no result the eval could
+  return that would change whether `LUX-3` ships or stays, and re-running it buys nothing.
+  **Contrast `LUX-E2`, whose threshold is NOT retired and does have teeth** — a missing field
+  there leaves a blank line in the card layout, and crossing 50% buys a designed empty state,
+  which is a real change to what someone builds.
+- **Do not re-open the empty denominator as a new question.** That zero is **`DD-F1`**, already
+  measured and long in the record — not a discovery of this run. `TAS-6`'s routing half measured
+  a baseline of zero sub-decile journey interiors on **this same 120-pair sample** on
+  2026-07-30, five weeks earlier and on the adopted artifact
+  (`findings/2026-07-30-tag-discrimination.md`, which owns that figure; `tas_guard.py:111`
+  early-returns on it). See also `PRODUCT-REQUIREMENTS.md` §8 for the `REQ-37`/`DD-F1`
+  structural conflict, and the `JFX-` reachability read for the currency split — `DD-F1` binds
+  in **popularity** and does not transfer to **fame**, and both halves travel together.
+  A session that reads `LUX-E4`'s empty denominator as a fresh path-quality signal has
+  rediscovered a known defect through a clip-availability eval, on a sample too damaged to
+  support it.
 
 ### `LUX-E5` — metadata blob and boot cost **(gates `LUX-4` shipping)**
 

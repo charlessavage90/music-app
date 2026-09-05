@@ -75,9 +75,14 @@ does not record how far down the list he has got.** `gh pr list` answers the mer
 3. **Run the queued use-the-app test** — **not exercisable until 2 has happened.** The test
    queue holds ONE live item, written 2026-09-04.
 
-**Independent of all three and blocking nothing:** run `snyk auth`, so the scan owed on the
-modified `api/` code can be discharged. `snyk` is not on this machine's `PATH`; a Snyk MCP
-server is configured, which is likely the easier route.
+~~**Independent of all three and blocking nothing:** run `snyk auth`.~~ **DONE 2026-09-05, and
+the scan it was owed for is discharged.** `api/` and `frontend/` both scanned clean of
+shipped-code findings; the five reported are a self-labelled test fixture constant and four in
+`frontend/design/**`, which is committed canvas exports referenced from nothing in `src/`,
+`index.html` or `vite.config.ts` and so never enters the bundle. **`snyk` is now on `PATH`**
+via `npm install -g snyk` — the MCP server's own bundled CLI is version-pathed and named
+`snyk-win.exe`, so adding *that* to `PATH` would not have worked; both CLIs share
+`~/.config/configstore/snyk.json`, so one auth covers both.
 
 **Work a future session picks up, none of it blocking any of the above.** All three are
 recorded where they will be found rather than only here: **(a)** make a graph's manifest
@@ -98,15 +103,26 @@ try another track by the same artist. Entry point: the handoff
 ten rulings, the deferrals and **an operational deploy note** (the clip cache's item shape
 changed, so every live entry becomes a miss once — also in `infra/README.md`).
 
-**⚠ `LUX-E4` RAN AND ITS THRESHOLD COULD NOT BE READ — UNDEFINED, NOT PASSED.** Its
-denominator was empty: no lower-half artist reached a card. **Do not let any document soften
-this into a pass.** Two causes, and the first is a standing hazard: **the committed `TAS-`
-120-pair sample is damaged on the served map**, with the attrition falling almost entirely on
-the two obscure classes — and **`LUX-E2` reuses that same file**. §5 of the scope document now
-warns about it. The second is that these were depth-zero journeys, before any press. Whether
-to re-run at depth, redraw the sample, or accept the depth-zero reading is **his**. Figures
-owned by `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md`, cited never
-restated.
+**`LUX-E4` RAN, ITS READ WAS UNDEFINED, AND IT IS NOW CLOSED — owner ruling 2026-09-05.** The
+read stands as written: the denominator was empty, no lower-half artist reached a card, and
+**no document may soften that into a pass.** What was retired is the **threshold**, which was
+mis-specified — it named a re-prioritisation trigger for an outcome that costs nothing.
+`LUX-3`'s control renders only when there is a second track to offer, so its absence draws
+nothing at all and degrades exactly as a silent card already does. No result the eval could
+return would change whether `LUX-3` ships. **It is not to be re-run, and this is not an open
+owner decision.** Reasoning and the verified code gate are in §5 of the scope document.
+
+**Two things survive that closure, and neither is `LUX-E4`.** First, **the committed `TAS-`
+120-pair sample is damaged on the served map**, attrition falling almost entirely on the two
+obscure classes — that now blocks **`LUX-E2`**, whose threshold *does* have teeth, and the
+warning has been moved onto `LUX-E2` itself where a session running it will see it. Second,
+the empty denominator is **`DD-F1`, already in the record and not a new finding**: `TAS-6`'s
+routing half measured zero sub-decile interiors on this same sample on 2026-07-30, on the
+adopted artifact. **Do not re-open it as a fresh path-quality question from here** — a
+clip-availability eval on a damaged sample at depth zero is the wrong instrument for it, and
+`DD-F1`'s currency split (binds in popularity, does not transfer to fame) is already settled.
+Figures owned by `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md` and by
+`findings/2026-07-30-tag-discrimination.md`, cited never restated.
 
 **⚠ THE REVERT MOVED THE MAP BUT NOT THE DROP LIST — measured 2026-09-05, and it changes what
 `LUX-E1` is for.** `CXA-` Task 2 repointed the ALG-B unlistenable drop list default at a payload

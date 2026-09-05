@@ -16,6 +16,29 @@
 ≥ 2 candidates, `LUX-3` serves famous artists and not the ones the app is for. That is a
 **re-prioritisation trigger and the owner's call.**
 
+> ### ⚠ `LUX-E4` IS CLOSED — owner ruling, 2026-09-05. Do not re-run it.
+>
+> **Everything measured below stands, and §3's read stands exactly as written: UNDEFINED,
+> never a pass.** Nothing in this file is retracted and no figure here changes.
+>
+> What was retired is the **threshold quoted immediately above**, because it was
+> mis-specified. `LUX-3`'s control is gated `playable && candidates > 1`
+> (`frontend/src/components/ArtistCard.tsx`), so when there is no second track the element
+> **does not render at all** — no blank line, no placeholder, no stranded card. There is
+> therefore no result this eval could have returned that would change whether `LUX-3` ships,
+> and the "re-prioritisation trigger" it names has nothing to trigger. **Do not read that
+> sentence as a live owner decision.** The governing text is
+> `docs/superpowers/specs/2026-09-03-launch-ux-scope.md` §5.
+>
+> **§4's first bullet is the part that still matters, and it is not this eval's to answer.**
+> The empty lower-half denominator is **`DD-F1`**, long in the record: `TAS-6`'s routing half
+> measured zero sub-decile journey interiors on **this same 120-pair sample** on 2026-07-30,
+> on this same adopted artifact. See `docs/superpowers/findings/2026-07-30-tag-discrimination.md`,
+> which owns that figure. Do not re-open it as a fresh path-quality question from here.
+>
+> **§2a's sample damage outlives this eval** and now blocks `LUX-E2`, whose threshold does
+> have consequences. The warning has been carried onto `LUX-E2` in the scope document.
+
 ---
 
 ## 1. Run state
