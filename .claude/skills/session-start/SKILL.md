@@ -55,7 +55,17 @@ still waste, and it is expensive to detect.
 
 ```bash
 git status --short && git log --oneline -3 && git branch -vv
+gh pr list --state all --limit 5 --json number,title,state,mergedAt
 ```
+
+- **Derive merge state; do not expect `NEXT.md` to carry it, and do not report its absence
+  as a finding.** The cadence is work → `closeout` → *then* the owner merges, so the status
+  document is written before the merge every time. It therefore names the branch and PR as
+  **addresses** and lists his remaining actions as an ordered sequence, deliberately without
+  saying where in that sequence he is — that is `closeout` A2-next, and it is the design.
+  **A PR merged since the last closeout is the process working.** What *is* worth raising is
+  the opposite: a branch with no PR, an unpushed branch, or a merge that contradicts what
+  `NEXT.md` says the work *was*.
 
 - **Uncommitted work you did not create means another session is live in this tree.**
   This is not hypothetical here — HEAD has moved mid-conversation while two sessions were

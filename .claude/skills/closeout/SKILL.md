@@ -126,6 +126,30 @@ Two categories a seam-time closeout never needs, because at a seam the work conc
 the handoff looks tidy is strong, and retirement is the worst moment to decide anything: a
 shaky conclusion reached while packing up enters the record as settled.
 
+#### A2-next — rewrite `NEXT.md`, and leave git state out of it
+
+`NEXT.md` is rewritten wholesale here, not appended to — its own preamble says so, and until
+2026-09-05 no step in this skill said to do it, which is why the constraint below had never
+been decided. **The one thing that is easy to get wrong: it must not restate anything `git`
+or `gh` is authoritative for.**
+
+**The reason is the cadence, not tidiness.** Work → `closeout` → *then* the owner merges. A
+closeout that writes *"PR #NN is open and not merged"* is writing something false by
+construction within the hour, and every fresh `session-start` then opens by reporting a
+discrepancy that is really just the process working. Six words of status manufacture a
+recurring false alarm, and a false alarm that fires every single time trains the reader to
+skip the check that raised it.
+
+So: name the branch and PR number as **addresses**, and write the owner's remaining actions
+as an **ordered sequence** — merge → deploy → run the queued test — with a line saying this
+file does not record where in it he has got to. `session-start` §C derives that in one
+command.
+
+**The same test covers everything else git owns:** which branches exist, what commits landed,
+whether the branch was pushed. If `git` or `gh` answers it in one command, do not write it
+here. What this file *does* own is what those commands cannot tell anyone — what the work was
+for, what is closed, what must not be reverted, and what the owner's remaining actions are.
+
 ### A3. Give every deferred finding an address
 
 A deferral without a success condition is not a decision, it is an unranked backlog

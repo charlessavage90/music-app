@@ -15,6 +15,15 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 `cb_scores.json`); the adopted graph's stay in
 `findings/2026-07-21-scoring-adjudication.md`. Cited, never restated.
 
+**It owns no git state either, and that is the same rule, not a second one.** Merge state,
+which branches exist, what commits landed — `git` and `gh` are authoritative for all of it,
+and `session-start` §C checks them anyway. **The cadence writes this file BEFORE the merge**
+(work → `closeout` → the owner merges), so any merge state written here is false by
+construction within the hour, and every fresh session then opens by reporting a discrepancy
+that is really the process working. So: name the branch and PR number as **addresses**, and
+write the owner's remaining actions as an **ordered sequence** — never as a position in one.
+**A session finding this file silent on merge state has found the design, not a defect.**
+
 > ## 📍 STANDING FACT — THE APP'S ADDRESS IS `https://unsung.fm`, since 2026-09-03
 >
 > The domain was bought 2026-09-02 and cut over 2026-09-03: ACM certificate swapped,
@@ -27,23 +36,26 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > ⚠ **The app is still NAMED "Artist Path" in the UI.** Only the address moved. A rename to
 > "Unsung" is scoped but unapproved — do not assume it has happened.
 
-**Last updated: 2026-09-05, correcting merge status only.** `LUX-1`, `LUX-2` and `LUX-3` were
-built on branch `launch-ux-1-3`; **PR #101 is MERGED into `main`** (2026-09-04, merge commit
-`40e61a2`), and **PR #100 is CLOSED as superseded**, as the paragraph below directed.
+**Last updated: 2026-09-05.** `LUX-1`, `LUX-2` and `LUX-3` are built. Address: branch
+`launch-ux-1-3`, **PR #101**. **PR #100 is superseded by it rather than sitting beside it** —
+`launch-ux-1-3` was cut from `status-depth0-ruling`, so #100's commits are already inside
+#101; close it as superseded when #101 goes in.
 
-**⚠ MERGED IS NOT DEPLOYED.** Deploys here are **manual and there is no CI**
-([`infra/README.md`](../../infra/README.md)), so the live site is unchanged and still serves
-what it served before the merge — including the clip cache's old item shape, which the deploy
-note in the execution log says becomes a miss once.
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
+does not record how far down the list he has got.** `gh pr view 101` answers the first;
+`infra/README.md` and `/health` answer the second.
 
-**THE NEXT ACTION IS THE OWNER'S, and it is one of two, neither blocking the other:** deploy
-`main` and then run the queued use-the-app test — **it is not exercisable until deploy**; or
-run `snyk auth` so the owed scan on the modified `api/` code can be discharged. **The test
-queue holds ONE live item**, written 2026-09-04.
+1. **Merge PR #101**, and close #100.
+2. **Deploy.** ⚠ **Merged is not deployed here** — deploys are manual and there is no CI
+   ([`infra/README.md`](../../infra/README.md)). Until this happens the live site serves what
+   it served before the merge. The execution log's deploy note applies: the clip cache's item
+   shape changed, so every live entry misses once and rebuilds.
+3. **Run the queued use-the-app test** — **not exercisable until 2 has happened.** The test
+   queue holds ONE live item, written 2026-09-04.
 
-~~**⚠ PR #101 SUPERSEDES PR #100 rather than sitting beside it** — `launch-ux-1-3` was cut from
-`status-depth0-ruling`, so #100's commits are already inside #101. **Close #100 as superseded
-when #101 merges.**~~ *(Discharged 2026-09-04 — #101 merged and #100 was closed.)*
+**Independent of all three and blocking nothing:** run `snyk auth`, so the scan owed on the
+modified `api/` code can be discharged. `snyk` is not on this machine's `PATH`; a Snyk MCP
+server is configured, which is likely the easier route.
 
 **What shipped, and the one promise it rests on.** `LUX-1` removes the second bypass button
 while **keeping the mechanism, the wire contract and the `?dislike=` URL parameter** — so
