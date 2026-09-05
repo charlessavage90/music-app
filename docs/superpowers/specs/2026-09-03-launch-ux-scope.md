@@ -397,11 +397,70 @@ open-ended graph adoption when the cause is already identified.
 | **A (original)** | HEAD's default (`…algb_20260809.json`) | HEAD | — |
 | **B (new)** | pinned to `…algb_20260805.json`, the list the live map was built with | HEAD | A |
 
-**Held constant, and why the intervention cannot change it:** the archive, the algorithm
+**Held constant, and why the intervention cannot change it:** ~~the archive,~~ the algorithm
 (`--algorithm` ALG-B explicitly, `CEX-R5`), every cap and rescale knob, and both other drop
 families — `7404a4c` touched only the unlistenable family, checked. `ce47106` (`SEL-`) already
 added the per-invocation payload override, so arm B needs no new code and no default is moved
 to run it.
+
+> ⚠ **"the archive" is STRUCK. It was never constant, and `LUX-E1-AM2` below is the
+> correction.** It is listed here as written so the error is legible rather than tidied away.
+
+#### `LUX-E1-AM2` — the archive is the second drift, and it must be pinned. Amended 2026-09-05, **still before either arm ran.**
+
+**Why:** `AM1`'s held-constant list names *the archive* and asserts the intervention cannot
+change its state. That is false, and not because the intervention changes it — because it had
+**already** moved before either arm was designed. The ALG-B archive tree gained **73,877
+response files after the live map was built**, all of them dated after 2026-08-06; the
+pre-expansion state survives beside it as `grt-archive-algb.pre-cex-snapshot`. The `CXR-`
+revert moved the map and moved neither the drop-list pointer (`AM1`) nor the archive (this).
+
+**Why no code diff could have caught it:** the archive is gitignored, so the 2026-09-05 drift
+analysis — which read source — could see the drop list move and could not see this. Its own §3
+says it establishes one input moved and **not** that it is the only one. This is the other one.
+
+**It is the larger of the two by two orders of magnitude.** `build_from_archive` reads the
+population from `archive_artists()`, which enumerates *every* archived response matching the
+algorithm prefix, so an unpinned rebuild reads whatever is in the tree. The drop-list drift is
+31 artists; this is the entire crawl extension.
+
+**And arm B as written in `AM1` could not have returned a sha at all.** `ULC-F1`
+(`pipeline.py`, the `PopulationNotCensused` raise) refuses a build whose archive holds artists
+the pinned list's census never evaluated — which is exactly what pinning the 75k-era payload
+against the grown tree does. It would have raised, not answered.
+
+**Corrected arm B — the archive is pinned alongside the payload:**
+
+| Arm | unlistenable ALG-B payload | archive | everything else | baseline |
+|---|---|---|---|---|
+| **A (original)** | HEAD's default (`…algb_20260809.json`) | HEAD's tree | HEAD | — |
+| **B (`AM1`, defective)** | pinned `…algb_20260805.json` | *unpinned* | HEAD | A |
+| **B′ (`AM2`, run this)** | pinned `…algb_20260805.json` | pinned `grt-archive-algb.pre-cex-snapshot` | HEAD | A |
+
+**Held constant, restated and each checked rather than asserted:** the algorithm (passed
+explicitly, and `CANDIDATE_ALGORITHM` matches the live manifest's recorded string exactly);
+`cap_strategy` and `require_fame` (their *defaults* moved between the build commit `3aa61f0b`
+and HEAD, but **toward** the values the live build passed explicitly, so the effective config
+is unchanged — checked by diffing `config.py` across those commits); and `pipeline.py`, whose
+only change across that range is a log line and the override plumbing.
+
+- **Plain sentence for B′:** *if we build the map again from the archive as it stood before the
+  expansion, using the exact artist-exclusion list the live map was built with, do we get the
+  live map back byte for byte?*
+- **Threshold: byte-identical to `43dd82bb…`, or not.** Unchanged.
+- **Read — B′ identical:** the drop-list pointer and the archive were the only build-side
+  drifts, and both are now identified. `LUX-4` is a metadata change as priced. **It also
+  retro-validates the one thing inspection could not confirm** — that the snapshot is the tree
+  the live map was built from, which no manifest records.
+- **Read — B′ different:** a third input moved and is unidentified. **Stop and find it**;
+  `AM1`'s "different" read then applies in full and `LUX-4` is a graph adoption.
+- **⚠ Neither the archive nor the payload default is moved by this.** Both are pinned per
+  invocation.
+
+**Cost correction:** `AM1` and two other documents say `~23 min`. **The live artifact's own
+manifest records `elapsed_seconds: 39.2`**, and that timer spans the whole build —
+`cmd_build` starts it before `build_from_archive` and stops it after `serialise`. The 23-minute
+figure is stale and should not be quoted again.
 
 - **Plain sentence for arm B:** *if we build the map again using the exact artist-exclusion
   list the live map was built with, do we get the live map back byte for byte?*
