@@ -682,7 +682,12 @@ M="<the memory directory your own context names>"
 #    carries a phantom byte, and `wc -c` counts bytes, so every em-dash and § costs 3.
 #    Together that was 2% of the total — and the CR half moves when prose is rewrapped,
 #    which is the exact blindness characters were adopted to remove.
-{ cat CLAUDE.md "$M/MEMORY.md"; \
+# WARNING: ~/.claude/CLAUDE.md is the OTHER unconditional file, and it was missing
+#   from this command until 2026-09-05. It is the owner's private cross-project
+#   instructions, so it loads in every session in EVERY project -- a standing tax on
+#   strictly more sessions than the project file. Found by a session that had just
+#   added 888 characters to it and then ran this check, which reported a delta of zero.
+{ cat ~/.claude/CLAUDE.md CLAUDE.md "$M/MEMORY.md"; \
   sed -n '/^description:/p' .claude/skills/*/SKILL.md .claude/agents/*.md; } \
   | tr -d '\r' | wc -m
 
@@ -695,8 +700,8 @@ cat .claude/skills/*/SKILL.md .claude/agents/*.md \
 
 | Unconditional | Conditional |
 |---|---|
-| `CLAUDE.md`, in full | `SKILL.md` **bodies** — only on invocation |
-| `MEMORY.md` — the index **only** | Agent definition **bodies** — only on dispatch |
+| **`~/.claude/CLAUDE.md`, in full** — cross-project, so it taxes more sessions than anything else here | `SKILL.md` **bodies** — only on invocation |
+| `CLAUDE.md` (this project's), in full, and `MEMORY.md` — the index **only** | Agent definition **bodies** — only on dispatch |
 | The `description:` line of every skill **and** every agent | `memory/*.md` **bodies** — only on recall, which is *unpredictable*: they load when not needed and miss when needed |
 
 **Two things this corrects, and both had been wrong for a while.** The rule used to name

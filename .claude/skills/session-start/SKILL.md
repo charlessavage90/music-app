@@ -137,10 +137,13 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
   notes is not independent evidence.
 - **Check the test queue.** Anything sitting untested gets flagged to the owner now. That
   flag is the only forcing function on the async use-the-app check, which is the one item
-  that catches defects tests structurally cannot. **Read only the topmost heading of each
-  entry** — a discharged item keeps its old `## QUEUED` heading beneath its `## DONE` one, and
-  greping for the former is what made six consecutive closeouts report a backlog that did not
-  exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
+  that catches defects tests structurally cannot. **Since 2026-09-05 a discharged entry LEAVES
+  the file** — `closeout` `C1-demote` moves it to `archive/TEST-QUEUE-discharged.md` — so
+  `TEST-QUEUE.md` holds only what is still to be pressed. **Read only the topmost heading of
+  each entry anyway.** That rule is now a safety net rather than a necessity here, and it is
+  still load-bearing in the two archives, where discharged entries do keep their old
+  `## QUEUED` heading beneath their `## DONE` one: greping for the former is what made six
+  consecutive closeouts report a backlog that did not exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
   only when there is something to press, so **absence of entries means nothing is owed — it is
   never evidence that a session forgot.**
   **If the entry records a detached dev server, check it is still alive and started after
