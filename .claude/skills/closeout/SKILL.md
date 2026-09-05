@@ -287,6 +287,22 @@ These want fresh eyes, and none of them need the finishing session's context. Ru
 them in a new session with the handoff note in hand — **except B1, whose eyes are a
 subagent's rather than the session's; see "Who runs B1" below.**
 
+#### C1-demote — move the entry the owner discharged, do not leave it in place
+
+**`TEST-QUEUE.md` holds only what is still to be pressed.** When an entry is discharged, it
+moves to `archive/TEST-QUEUE-discharged.md` — HISTORICAL, frozen, never edited again. The
+sibling `archive/TEST-QUEUE-nil-entries.md` holds the pre-2026-08-05 entries that queued
+nothing.
+
+**Same rule and same reason as `A2-next`.** Left in place, discharged entries accumulate:
+by 2026-09-05 the file was 1,996 lines of which **93% was history** behind a single live
+entry, and `session-start` had to be taught to read only each entry's *topmost* heading —
+a workaround for a problem that demoting removes. The entries are evidence and none is
+deleted; they are simply not work, and the file is a list of work.
+
+**Nothing to discharge and nothing to queue is a valid closeout.** An empty queue is a
+state, never a lapse.
+
 ### B1. Documentation audit
 
 **Run `scripts/docs-lint.sh` first. Paste its output.** Six mechanical checks in about ninety
