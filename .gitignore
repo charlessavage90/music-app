@@ -47,3 +47,4 @@ builder/analysis/2026-08-06-tce-thin-catalogue/rg_counts.json.gz
 builder/analysis/2026-08-06-tce-thin-catalogue/artist_exists.json.gz
 builder/analysis/2026-08-06-tcr-thin-catalogue-rerun/rg_counts.json.gz
 builder/analysis/2026-08-06-tcr-thin-catalogue-rerun/artist_exists.json.gz
+.dcignore

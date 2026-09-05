@@ -124,20 +124,36 @@ clip-availability eval on a damaged sample at depth zero is the wrong instrument
 Figures owned by `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md` and by
 `findings/2026-07-30-tag-discrimination.md`, cited never restated.
 
-**⚠ THE REVERT MOVED THE MAP BUT NOT THE DROP LIST — measured 2026-09-05, and it changes what
-`LUX-E1` is for.** `CXA-` Task 2 repointed the ALG-B unlistenable drop list default at a payload
-re-censused over the extended population, and the `CXR-` revert did not repoint it back.
-**Nothing served is affected** — the API never reads a drop list and the artifact is prebuilt —
-but **a rebuild from HEAD would drop 31 artists that are in the live map**, so `LUX-E1`'s
-default arm is red before it runs. `LUX-E1-AM1` adds the isolating arm that is actually
-informative. Figures owned by
+**⚠ THE REVERT MOVED THE MAP BUT NOT THE DROP LIST — measured 2026-09-05.** `CXA-` Task 2
+repointed the ALG-B unlistenable drop list default at a payload re-censused over the extended
+population, and the `CXR-` revert did not repoint it back. **Nothing served is affected** — the
+API never reads a drop list and the artifact is prebuilt — but **a rebuild from HEAD would drop
+31 artists that are in the live map**. Figures owned by
 [`builder/analysis/2026-09-05-lux-e1-drift-source/README.md`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md),
-cited never restated.
+cited never restated. **Whether to repoint the default back or accept the 31 is his one-line
+choice, and it is still open** — `LUX-E1` pinned the old list per invocation and moved no
+default. *(`LUX-E1-AM1` added the isolating arm; `LUX-E1-AM2` then found the archive drift the
+factor table had wrongly held constant. Both ran as B′ — see the discharge above.)*
 
-**`LUX-4` IS STILL UNSTARTED and must stay that way until `LUX-E1` runs.** A rebuild may not
-reproduce the live map, which would make it a graph adoption rather than a metadata change —
-the operation reverted on 2026-09-01 after his own listening test. The `LUX-` plan
-deliberately excludes it; do not start it from there.
+**✅ `LUX-E1` RAN 2026-09-05 AND ITS GATE ON `LUX-4` IS DISCHARGED.** Arm B′ — the archive and
+the drop list both pinned to what the live map was built with — rebuilt **byte-identically**.
+So a rebuild *does* reproduce the live map, and **`LUX-4` is a metadata change as priced, not a
+graph adoption.** Determinism holds. Figures owned by
+[`builder/analysis/2026-09-05-lux-e1-armb/README.md`](../../builder/analysis/2026-09-05-lux-e1-armb/README.md),
+cited never restated. `LUX-4` is still **unstarted**, and the `LUX-1..3` plan still deliberately
+excludes it — do not start it from there — but it is no longer blocked.
+
+**⚠ THREE `CXA-` LEFTOVERS, not one. The revert moved the map and moved none of them.** The
+drop-list pointer was known; `LUX-E1` found the other two. **(a)** The ALG-B **archive tree**
+gained tens of thousands of response files after the live map was built, so an unpinned rebuild
+reads the extended crawl — count owned by the README above, cited never restated — the pre-expansion state survives as `grt-archive-algb.pre-cex-snapshot`.
+**(b)** The **acceptance bounds** were recalibrated for the extended population, so
+`artistpath-build build` now **REJECTS a correct rebuild of the served map** before serialising
+it. **(b) blocks `LUX-4`**, which must rebuild to add its fields and lands on the same
+population. Neither is a correctness problem with the graph. **Which fix is his** —
+recalibrate the bounds to the served population, or wire the `--criteria` hook `cmd_build`
+already reads but no argument supplies; **a session must not widen a bound to admit its own
+build.**
 
 **Everything else open is his to trigger and none of it blocks anything:** **Option C**
 (same-name population probe), **`SEL-`**, **closing or keeping the 2026-07-29
@@ -350,7 +366,7 @@ its **topmost** heading says so.)*
 |---|---|
 | ✅ **Track B runs and reads** (`CB-5`/`CB-6`) | **DISCHARGED 2026-07-30** — run to completion; results note is the record. Struck, kept for the record. |
 | ✅ **`CRS-A5` endpoint re-verification** | **DISCHARGED 2026-07-30** — one request at scoring time, 200, companion delivered descriptive-only. Struck. |
-| ⚠ **A graph's manifest cannot say WHICH drop lists built it** — it records the flags (`drop_unlistenable: true`) and the override pointer (`null` when the default is used), never the resolved file. `null` means *"whatever the default was that day"*, and the default is mutable: `CXA-` Task 2 moved the ALG-B unlistenable default and the `CXR-` revert did not move it back, which is how a rebuild came to silently differ from the live map by 31 artists. **All three drop families share the identical `dict[algorithm → Path]` pattern**, so `no_release` and `featured_credit` are the same trap unsprung. | **Before any rebuild is compared to another, and ideally before `LUX-E1` runs** — it makes that eval self-evidencing rather than requiring the hand analysis of 2026-09-05. **The fix:** record the resolved filename **and the sha256 of the file's bytes** for each family actually applied, and log both at build **start** so an unintended mismatch shows in the first seconds rather than after ~23 minutes. Hash the bytes rather than reuse the payloads' own hash keys — they are inconsistent (`sha256_over_sorted_mbids`, `sha256_over_sorted_drop_mbids`, and `featured_credit` carries none). **Purely additive and cannot block a build**; the sidecar is written after the artifact is serialised, so it cannot perturb a sha or confound `LUX-E1`. **Whether a build should also REFUSE on a mismatch is the owner's** — a hard gate can kill a long build at the end and needs an escape hatch; decide it after `LUX-E1`, when we know whether mismatches are rare or routine. Mechanism and figures: [`builder/analysis/2026-09-05-lux-e1-drift-source/`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md). |
+| ⚠ **A graph's manifest cannot say WHICH drop lists built it** — it records the flags (`drop_unlistenable: true`) and the override pointer (`null` when the default is used), never the resolved file. `null` means *"whatever the default was that day"*, and the default is mutable: `CXA-` Task 2 moved the ALG-B unlistenable default and the `CXR-` revert did not move it back, which is how a rebuild came to silently differ from the live map by 31 artists. **All three drop families share the identical `dict[algorithm → Path]` pattern**, so `no_release` and `featured_credit` are the same trap unsprung. | **Before any rebuild is compared to another, and ideally before `LUX-E1` runs** — it makes that eval self-evidencing rather than requiring the hand analysis of 2026-09-05. **The fix:** record the resolved filename **and the sha256 of the file's bytes** for each family actually applied, and log both at build **start** so an unintended mismatch shows in the first seconds rather than at the end. ⚠ **CONDITION FIRED 2026-09-05 AND WAS NOT HONOURED — recorded rather than quietly re-deferred.** The condition read *"before any rebuild is compared to another, and ideally before `LUX-E1` runs"*; `LUX-E1` then ran and two rebuilds **were** compared, without this. The consequence is exactly what the deferral predicted: the comparison needed a **hand analysis** to establish which drop list and which archive each build used, because no manifest could say. **Re-deferred deliberately, with a tightened condition: before the `LUX-4` rebuild (`L4-T7`), which is the next rebuild comparison and is already planned.** *(The stale "~23 minutes" was struck here too — the live manifest records ~40 s for a whole build.)* Hash the bytes rather than reuse the payloads' own hash keys — they are inconsistent (`sha256_over_sorted_mbids`, `sha256_over_sorted_drop_mbids`, and `featured_credit` carries none). **Purely additive and cannot block a build**; the sidecar is written after the artifact is serialised, so it cannot perturb a sha or confound `LUX-E1`. **Whether a build should also REFUSE on a mismatch is the owner's** — a hard gate can kill a long build at the end and needs an escape hatch; decide it after `LUX-E1`, when we know whether mismatches are rare or routine. Mechanism and figures: [`builder/analysis/2026-09-05-lux-e1-drift-source/`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md). |
 | **`docs/README.md` restates its documents rather than routing to them** — 336 KB, the largest document in the project, 95% table rows, **275 rows at a median 1,180 characters**, and the file `CLAUDE.md` tells every session to read first. A probe of its longest rows against the documents they describe found **15/19, 25/25 and 17/17** of a row's identifiers also present in the document. That is the one-document rule violated in prose, and it drifts the same way — the 2026-09-04 audit found a HIGH where the document had been updated and its row had not. | **The owner's trigger; he deferred it deliberately on 2026-09-05.** ⚠ **The fix is NOT to strip the map** — the summaries earn their place by letting a reader decide whether to open a 105 KB execution log, and compressing live prose to make a number go down is the damage this project has already paid for twice. What is missing is a **rule for what belongs in a row**: role, supersession, what it owns, and the one thing a reader must not get wrong. Applying it going forward costs nothing; retrofitting the **22 rows over 2,000 characters** is about an hour and captures most of the win. Rewriting all 275 is not worth it. Measurements owned by the 2026-09-05 handoff. |
 | **`FPC-9`'s falsifier — an obscure-endpoint pair set for floor reach** | **If any realistic candidate device reaches materially more obscurity than production.** `FPC-9` used Track 3's `LIMIT` arm, a ceiling rather than a shippable route, and rests on 62 interiors from one arm on twelve pairs. Falsified by a device that reaches more obscurity *without* approaching `LIMIT`'s interior percentiles. |
 | ✅ **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **DISCHARGED 2026-08-02 — the condition fired and the edit landed.** The currency decision was made; the Definitions entry now carries `FPC-3`/`FPC-9`'s extent inside the retirement paragraph of the worldly-fame construct (owner-ratified edit). Struck, kept for the record. |
