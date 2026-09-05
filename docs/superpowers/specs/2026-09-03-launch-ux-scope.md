@@ -373,7 +373,10 @@ builder's own state — and nothing else may be varied.
   his ear), or to ship the links from the API package instead, accepting §4.3's second
   drift obligation. **Do not proceed on a session's own judgement.**
 - Read-only with respect to anything served; writes a candidate artifact to
-  `builder/scratch/` and adopts nothing. ~23 min.
+  `builder/scratch/` and adopts nothing. ~~~23 min.~~ **STRUCK — see `LUX-E1-AM2`'s cost
+  correction below: the whole build is ~40 s, and the 23-minute figure must not be quoted
+  again.** Left visible rather than overwritten, because the estimate is what made this eval
+  look expensive enough to defer.
 
 #### `LUX-E1-AM1` — a second, isolating arm. Amended 2026-09-05, **before either arm ran.**
 
@@ -386,9 +389,10 @@ would be newly dropped, and none return** — figures owned by
 cited never restated. A 31-node difference is a different population, and this eval has no
 partial credit.
 
-**So running the default arm alone now buys nothing** — it would spend 23 minutes confirming
-a foregone conclusion, and its "different" read sends the question to the owner as an
-open-ended graph adoption when the cause is already identified.
+**So running the default arm alone now buys nothing** — it would spend a build ~~(23 minutes)~~
+**(~40 s — `AM2`'s cost correction; the figure this clause was written with was wrong)**
+confirming a foregone conclusion, and its "different" read sends the question to the owner as
+an open-ended graph adoption when the cause is already identified.
 
 **The arm to add is its isolating baseline — differing by exactly one column:**
 
@@ -410,16 +414,20 @@ to run it.
 
 **Why:** `AM1`'s held-constant list names *the archive* and asserts the intervention cannot
 change its state. That is false, and not because the intervention changes it — because it had
-**already** moved before either arm was designed. The ALG-B archive tree gained **73,877
-response files after the live map was built**, all of them dated after 2026-08-06; the
-pre-expansion state survives beside it as `grt-archive-algb.pre-cex-snapshot`. The `CXR-`
+**already** moved before either arm was designed. The ALG-B archive tree **gained tens of
+thousands of response files after the live map was built**, all of them dated after
+2026-08-06; the pre-expansion state survives beside it as `grt-archive-algb.pre-cex-snapshot`.
+**The count is owned by
+[`builder/analysis/2026-09-05-lux-e1-armb/README.md`](../../../builder/analysis/2026-09-05-lux-e1-armb/README.md)
+§4 — cited, never restated here**, per this document's own "owns no figures" rule. The `CXR-`
 revert moved the map and moved neither the drop-list pointer (`AM1`) nor the archive (this).
 
 **Why no code diff could have caught it:** the archive is gitignored, so the 2026-09-05 drift
 analysis — which read source — could see the drop list move and could not see this. Its own §3
 says it establishes one input moved and **not** that it is the only one. This is the other one.
 
-**It is the larger of the two by two orders of magnitude.** `build_from_archive` reads the
+**It is the larger of the two by roughly three orders of magnitude** (figures in the README
+above; the drop-list side is owned by `2026-09-05-lux-e1-drift-source/`). `build_from_archive` reads the
 population from `archive_artists()`, which enumerates *every* archived response matching the
 algorithm prefix, so an unpinned rebuild reads whatever is in the tree. The drop-list drift is
 31 artists; this is the entire crawl extension.

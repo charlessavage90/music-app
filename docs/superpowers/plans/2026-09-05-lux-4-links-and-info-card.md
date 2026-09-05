@@ -1,5 +1,10 @@
 # `LUX-4` — streaming links and the artist info card: implementation plan
 
+**Role: ACTIVE — the implementation plan for `LUX-4`. UNSTARTED; no task has run.**
+Argues from [`specs/2026-09-03-launch-ux-scope.md`](../specs/2026-09-03-launch-ux-scope.md)
+§4, **which governs where the two disagree**; executors read both. **Owns no figures.**
+**⚠ `L4-T1` stops for an owner decision and blocks every other task.**
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development`
 > (recommended) or `superpowers:executing-plans` to implement this plan task-by-task. Steps use
 > checkbox (`- [ ]`) syntax for tracking.

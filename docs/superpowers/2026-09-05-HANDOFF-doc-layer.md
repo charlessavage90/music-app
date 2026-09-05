@@ -1,6 +1,11 @@
 # Handoff — the doc layer's accumulated history, split out and audited, 2026-09-05
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-05 (later) by
+[`2026-09-05-HANDOFF-lux-e1-and-lux-4-plan.md`](2026-09-05-HANDOFF-lux-e1-and-lux-4-plan.md)** —
+**its "Start here" is SPENT: item 2, `LUX-E1`, HAS RUN and returned byte-identical, and item 1's
+deferral condition fired during that run.** Everything it records about the doc-layer
+restructure remains accurate, and its must-not-revert list stands in full. *(Original role:
+**ACTIVE — this is the CURRENT handoff.** Nothing supersedes it.)* Supersedes
 [`2026-09-04-HANDOFF-lux-1-3.md`](2026-09-04-HANDOFF-lux-1-3.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
