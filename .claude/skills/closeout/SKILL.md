@@ -145,6 +145,21 @@ as an **ordered sequence** — merge → deploy → run the queued test — with
 file does not record where in it he has got to. `session-start` §C derives that in one
 command.
 
+**Demote the outgoing block — do not keep it inline.** "Rewritten wholesale" means the block
+you are replacing *leaves the file*. It moves to `NEXT-ARCHIVE.md`, which is HISTORICAL and
+frozen, and it is never annotated again once it is there.
+
+**Distil before you demote, and that is the step whose absence caused the problem.** Read the
+outgoing block for anything that still binds — a "must not be reverted" claim, a decision now
+closed, a deferral with a live condition — and write it into `NEXT.md`'s own registries
+(*Closed*, *Must not be changed*, *Deferred, with conditions*). Do that and the block is safe
+to freeze. Skip it and the only way to preserve the constraint is to keep the whole block,
+which is exactly how `NEXT.md` reached **2,063 lines by 2026-09-05, 1,738 of them superseded
+status**, growing monotonically from 150 lines on 2026-07-30 — every one of those closeouts
+believing it had rewritten the file wholesale, because it had rewritten the *top block*
+wholesale. **Cost of the distillation: a minute. Cost of skipping it: fifty lines per
+closeout, permanently, on the document every session reads first.**
+
 **The same test covers everything else git owns:** which branches exist, what commits landed,
 whether the branch was pushed. If `git` or `gh` answers it in one command, do not write it
 here. What this file *does* own is what those commands cannot tell anyone — what the work was
