@@ -97,6 +97,16 @@ to re-run at depth, redraw the sample, or accept the depth-zero reading is **his
 owned by `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md`, cited never
 restated.
 
+**⚠ THE REVERT MOVED THE MAP BUT NOT THE DROP LIST — measured 2026-09-05, and it changes what
+`LUX-E1` is for.** `CXA-` Task 2 repointed the ALG-B unlistenable drop list default at a payload
+re-censused over the extended population, and the `CXR-` revert did not repoint it back.
+**Nothing served is affected** — the API never reads a drop list and the artifact is prebuilt —
+but **a rebuild from HEAD would drop 31 artists that are in the live map**, so `LUX-E1`'s
+default arm is red before it runs. `LUX-E1-AM1` adds the isolating arm that is actually
+informative. Figures owned by
+[`builder/analysis/2026-09-05-lux-e1-drift-source/README.md`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md),
+cited never restated.
+
 **`LUX-4` IS STILL UNSTARTED and must stay that way until `LUX-E1` runs.** A rebuild may not
 reproduce the live map, which would make it a graph adoption rather than a metadata change —
 the operation reverted on 2026-09-01 after his own listening test. The `LUX-` plan
