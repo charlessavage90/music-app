@@ -27,18 +27,23 @@ Track B's live in `findings/2026-07-30-track-b-cap-selection-results.md` (and it
 > ⚠ **The app is still NAMED "Artist Path" in the UI.** Only the address moved. A rename to
 > "Unsung" is scoped but unapproved — do not assume it has happened.
 
-**Last updated: 2026-09-04, when `LUX-1`, `LUX-2` AND `LUX-3` WERE BUILT AND PUT UP FOR
-REVIEW.** Branch `launch-ux-1-3`, **PR #101, open against `main` and NOT merged**. Nothing is
-deployed: the live site is unchanged and still serves what it served yesterday.
+**Last updated: 2026-09-05, correcting merge status only.** `LUX-1`, `LUX-2` and `LUX-3` were
+built on branch `launch-ux-1-3`; **PR #101 is MERGED into `main`** (2026-09-04, merge commit
+`40e61a2`), and **PR #100 is CLOSED as superseded**, as the paragraph below directed.
 
-**THE NEXT ACTION IS THE OWNER'S, and it is one of three, none of which blocks the others:**
-merge PR #101; run the queued use-the-app test **after** it deploys; or run `snyk auth` so
-the owed scan on the modified `api/` code can be discharged. **The test queue holds ONE live
-item**, written 2026-09-04 and not exercisable until deploy.
+**⚠ MERGED IS NOT DEPLOYED.** Deploys here are **manual and there is no CI**
+([`infra/README.md`](../../infra/README.md)), so the live site is unchanged and still serves
+what it served before the merge — including the clip cache's old item shape, which the deploy
+note in the execution log says becomes a miss once.
 
-**⚠ PR #101 SUPERSEDES PR #100 rather than sitting beside it** — `launch-ux-1-3` was cut from
+**THE NEXT ACTION IS THE OWNER'S, and it is one of two, neither blocking the other:** deploy
+`main` and then run the queued use-the-app test — **it is not exercisable until deploy**; or
+run `snyk auth` so the owed scan on the modified `api/` code can be discharged. **The test
+queue holds ONE live item**, written 2026-09-04.
+
+~~**⚠ PR #101 SUPERSEDES PR #100 rather than sitting beside it** — `launch-ux-1-3` was cut from
 `status-depth0-ruling`, so #100's commits are already inside #101. **Close #100 as superseded
-when #101 merges.** That is his call, not a session's.
+when #101 merges.**~~ *(Discharged 2026-09-04 — #101 merged and #100 was closed.)*
 
 **What shipped, and the one promise it rests on.** `LUX-1` removes the second bypass button
 while **keeping the mechanism, the wire contract and the `?dislike=` URL parameter** — so
