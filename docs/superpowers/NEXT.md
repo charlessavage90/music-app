@@ -46,16 +46,19 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > ⚠ **The app is still NAMED "Artist Path" in the UI.** Only the address moved. A rename to
 > "Unsung" is scoped but unapproved — do not assume it has happened.
 
-**Last updated: 2026-09-05.** `LUX-1`, `LUX-2` and `LUX-3` are built. Address: branch
-`launch-ux-1-3`, **PR #101**. **PR #100 is superseded by it rather than sitting beside it** —
-`launch-ux-1-3` was cut from `status-depth0-ruling`, so #100's commits are already inside
-#101; close it as superseded when #101 goes in.
+**Last updated: 2026-09-05.** Two independent pieces of work have addresses. **`LUX-1`,
+`LUX-2` and `LUX-3`** — branch `launch-ux-1-3`, **PR #101**; **PR #100 is superseded by it
+rather than sitting beside it** (`launch-ux-1-3` was cut from `status-depth0-ruling`, so
+#100's commits are already inside #101). And the **2026-09-05 doc-layer maintenance** —
+branch `next-md-merge-status`, **PR #102**, which changed **no app code** and therefore
+cannot affect a deploy or a test.
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
-does not record how far down the list he has got.** `gh pr view 101` answers the first;
-`infra/README.md` and `/health` answer the second.
+does not record how far down the list he has got.** `gh pr list` answers the merge questions;
+`infra/README.md` and `/health` answer the deploy one.
 
-1. **Merge PR #101**, and close #100.
+1. **Merge PR #101**, and close #100. **Merge PR #102** whenever — it gates nothing and
+   nothing gates it.
 2. **Deploy.** ⚠ **Merged is not deployed here** — deploys are manual and there is no CI
    ([`infra/README.md`](../../infra/README.md)). Until this happens the live site serves what
    it served before the merge. The execution log's deploy note applies: the clip cache's item
@@ -75,6 +78,14 @@ does not record how far down the list he has got.** `gh pr view 101` answers the
 **Independent of all three and blocking nothing:** run `snyk auth`, so the scan owed on the
 modified `api/` code can be discharged. `snyk` is not on this machine's `PATH`; a Snyk MCP
 server is configured, which is likely the easier route.
+
+**Work a future session picks up, none of it blocking any of the above.** All three are
+recorded where they will be found rather than only here: **(a)** make a graph's manifest
+record *which* drop lists built it — the deferral table below carries the mechanism and the
+condition, and the owner asked for it to be another session's work; **(b)** run `LUX-E1` with
+`LUX-E1-AM1`'s second arm, which is the informative one; **(c)** `docs/README.md`'s row
+discipline, also in the deferral table, deferred on his explicit decision. Entry point for all
+three: the handoff [`2026-09-05-HANDOFF-doc-layer.md`](2026-09-05-HANDOFF-doc-layer.md).
 
 **What shipped, and the one promise it rests on.** `LUX-1` removes the second bypass button
 while **keeping the mechanism, the wire contract and the `?dislike=` URL parameter** — so
@@ -324,6 +335,7 @@ its **topmost** heading says so.)*
 | ✅ **Track B runs and reads** (`CB-5`/`CB-6`) | **DISCHARGED 2026-07-30** — run to completion; results note is the record. Struck, kept for the record. |
 | ✅ **`CRS-A5` endpoint re-verification** | **DISCHARGED 2026-07-30** — one request at scoring time, 200, companion delivered descriptive-only. Struck. |
 | ⚠ **A graph's manifest cannot say WHICH drop lists built it** — it records the flags (`drop_unlistenable: true`) and the override pointer (`null` when the default is used), never the resolved file. `null` means *"whatever the default was that day"*, and the default is mutable: `CXA-` Task 2 moved the ALG-B unlistenable default and the `CXR-` revert did not move it back, which is how a rebuild came to silently differ from the live map by 31 artists. **All three drop families share the identical `dict[algorithm → Path]` pattern**, so `no_release` and `featured_credit` are the same trap unsprung. | **Before any rebuild is compared to another, and ideally before `LUX-E1` runs** — it makes that eval self-evidencing rather than requiring the hand analysis of 2026-09-05. **The fix:** record the resolved filename **and the sha256 of the file's bytes** for each family actually applied, and log both at build **start** so an unintended mismatch shows in the first seconds rather than after ~23 minutes. Hash the bytes rather than reuse the payloads' own hash keys — they are inconsistent (`sha256_over_sorted_mbids`, `sha256_over_sorted_drop_mbids`, and `featured_credit` carries none). **Purely additive and cannot block a build**; the sidecar is written after the artifact is serialised, so it cannot perturb a sha or confound `LUX-E1`. **Whether a build should also REFUSE on a mismatch is the owner's** — a hard gate can kill a long build at the end and needs an escape hatch; decide it after `LUX-E1`, when we know whether mismatches are rare or routine. Mechanism and figures: [`builder/analysis/2026-09-05-lux-e1-drift-source/`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md). |
+| **`docs/README.md` restates its documents rather than routing to them** — 336 KB, the largest document in the project, 95% table rows, **275 rows at a median 1,180 characters**, and the file `CLAUDE.md` tells every session to read first. A probe of its longest rows against the documents they describe found **15/19, 25/25 and 17/17** of a row's identifiers also present in the document. That is the one-document rule violated in prose, and it drifts the same way — the 2026-09-04 audit found a HIGH where the document had been updated and its row had not. | **The owner's trigger; he deferred it deliberately on 2026-09-05.** ⚠ **The fix is NOT to strip the map** — the summaries earn their place by letting a reader decide whether to open a 105 KB execution log, and compressing live prose to make a number go down is the damage this project has already paid for twice. What is missing is a **rule for what belongs in a row**: role, supersession, what it owns, and the one thing a reader must not get wrong. Applying it going forward costs nothing; retrofitting the **22 rows over 2,000 characters** is about an hour and captures most of the win. Rewriting all 275 is not worth it. Measurements owned by the 2026-09-05 handoff. |
 | **`FPC-9`'s falsifier — an obscure-endpoint pair set for floor reach** | **If any realistic candidate device reaches materially more obscurity than production.** `FPC-9` used Track 3's `LIMIT` arm, a ceiling rather than a shippable route, and rests on 62 interiors from one arm on twelve pairs. Falsified by a device that reaches more obscurity *without* approaching `LIMIT`'s interior percentiles. |
 | ✅ **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **DISCHARGED 2026-08-02 — the condition fired and the edit landed.** The currency decision was made; the Definitions entry now carries `FPC-3`/`FPC-9`'s extent inside the retirement paragraph of the worldly-fame construct (owner-ratified edit). Struck, kept for the record. |
 | ✅ **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **CLOSED 2026-08-02 — the path is known-unreachable, not deferred again.** The currency decision adopted the LB proxy and **retired the worldly-fame construct**, so the condition ("adopts the MBID-keyed proxy") can never fire. Reopening requires a worldly-fame instrument to exist at all, which `RCS-` measured as currently unachievable. Struck, kept for the record. |

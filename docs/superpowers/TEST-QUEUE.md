@@ -59,12 +59,18 @@ Do not delete entries; the record of what was exercised is the point.**
 > heading is preserved deliberately — it is the record of what was asked — **but it means a
 > grep for `## QUEUED` returns discharged entries and over-reports.**
 >
-> **An item is live only if its topmost heading says so.** As of **2026-09-01 (later)** that
-> is **ZERO items — the queue is empty, and that is a valid and common state.** The
-> revert-confirmation entry at the top was discharged by the owner the same day. The 2026-08-10 extended-map entry
-> below it is DONE: the owner ran it and it **fired his revert criterion**, which is the
-> first time an entry in this file has done so. *(The count is re-counted at each closeout
-> rather than carried forward, per the incident below.)*
+> **⚠ SINCE 2026-09-05, DISCHARGED ENTRIES LEAVE THIS FILE** — `closeout` `C1-demote` moves
+> them to [`archive/TEST-QUEUE-discharged.md`](archive/TEST-QUEUE-discharged.md). **So the
+> over-reporting mechanic described above can no longer occur here**, and counting is just
+> counting the entries present. The rule is kept because it still governs both archives, where
+> discharged entries do carry both headings — and as a safety net if an entry is ever left in
+> place.
+>
+> **An item is live only if its topmost heading says so.** As of **2026-09-05** that is **ONE
+> item**, written 2026-09-04. *(This block read "**ZERO items** — the queue is empty" until
+> 2026-09-05, dated 2026-09-01 and never re-counted, while a live entry sat below it. That is
+> the incident below repeating inside the warning written to prevent it, which is why the count
+> is re-counted at each closeout and never carried forward.)*
 >
 > **This cost six consecutive closeouts**, each flagging a backlog that did not exist, the
 > count itself stale, each carrying the claim into a handoff and into `NEXT.md` without
