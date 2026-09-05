@@ -375,6 +375,48 @@ builder's own state — and nothing else may be varied.
 - Read-only with respect to anything served; writes a candidate artifact to
   `builder/scratch/` and adopts nothing. ~23 min.
 
+#### `LUX-E1-AM1` — a second, isolating arm. Amended 2026-09-05, **before either arm ran.**
+
+**Why:** the default arm's answer is now knowable from source, and it is RED. `CXA-` Task 2
+(`7404a4c`) repointed the ALG-B **unlistenable drop list** default at a payload re-censused
+over the extended 117k population, and the `CXR-` revert moved the map without moving that
+pointer. Measured on the served graph's own population: **31 artists that are in the live map
+would be newly dropped, and none return** — figures owned by
+[`builder/analysis/2026-09-05-lux-e1-drift-source/README.md`](../../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md),
+cited never restated. A 31-node difference is a different population, and this eval has no
+partial credit.
+
+**So running the default arm alone now buys nothing** — it would spend 23 minutes confirming
+a foregone conclusion, and its "different" read sends the question to the owner as an
+open-ended graph adoption when the cause is already identified.
+
+**The arm to add is its isolating baseline — differing by exactly one column:**
+
+| Arm | unlistenable ALG-B payload | everything else | baseline |
+|---|---|---|---|
+| **A (original)** | HEAD's default (`…algb_20260809.json`) | HEAD | — |
+| **B (new)** | pinned to `…algb_20260805.json`, the list the live map was built with | HEAD | A |
+
+**Held constant, and why the intervention cannot change it:** the archive, the algorithm
+(`--algorithm` ALG-B explicitly, `CEX-R5`), every cap and rescale knob, and both other drop
+families — `7404a4c` touched only the unlistenable family, checked. `ce47106` (`SEL-`) already
+added the per-invocation payload override, so arm B needs no new code and no default is moved
+to run it.
+
+- **Plain sentence for arm B:** *if we build the map again using the exact artist-exclusion
+  list the live map was built with, do we get the live map back byte for byte?*
+- **Threshold: byte-identical to `43dd82bb…`, or not.** Same standard as arm A.
+- **Read — B identical:** the drop-list pointer was the **only** build-side drift. `LUX-4` is
+  a metadata change as priced, and the owner has a genuine one-line choice: repoint the
+  default back, or accept 31 artists dropped. **Both are his; a session takes neither.**
+- **Read — B different:** something beyond the drop list moved and is not yet identified.
+  **Stop and find it before proposing anything** — the original "different" read then applies
+  in full, and `LUX-4` is a graph adoption.
+- **Run B first if only one is run.** A is predicted and B is diagnostic.
+
+⚠ **Neither arm adopts anything, and neither may repoint a default.** Arm B pins its payload
+per invocation precisely so the committed default is untouched while it runs.
+
 ### `LUX-E2` — per-field delivered coverage **(informs `LUX-4` design)**
 
 Over the 120 committed `TAS-` pairs (`builder/analysis/2026-07-30-tag-discrimination/tas_pairs.json`,

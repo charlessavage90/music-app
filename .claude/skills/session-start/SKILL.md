@@ -55,7 +55,17 @@ still waste, and it is expensive to detect.
 
 ```bash
 git status --short && git log --oneline -3 && git branch -vv
+gh pr list --state all --limit 5 --json number,title,state,mergedAt
 ```
+
+- **Derive merge state; do not expect `NEXT.md` to carry it, and do not report its absence
+  as a finding.** The cadence is work → `closeout` → *then* the owner merges, so the status
+  document is written before the merge every time. It therefore names the branch and PR as
+  **addresses** and lists his remaining actions as an ordered sequence, deliberately without
+  saying where in that sequence he is — that is `closeout` A2-next, and it is the design.
+  **A PR merged since the last closeout is the process working.** What *is* worth raising is
+  the opposite: a branch with no PR, an unpushed branch, or a merge that contradicts what
+  `NEXT.md` says the work *was*.
 
 - **Uncommitted work you did not create means another session is live in this tree.**
   This is not hypothetical here — HEAD has moved mid-conversation while two sessions were
@@ -127,10 +137,13 @@ git status --short && git log --oneline -3 && git branch -vv
   notes is not independent evidence.
 - **Check the test queue.** Anything sitting untested gets flagged to the owner now. That
   flag is the only forcing function on the async use-the-app check, which is the one item
-  that catches defects tests structurally cannot. **Read only the topmost heading of each
-  entry** — a discharged item keeps its old `## QUEUED` heading beneath its `## DONE` one, and
-  greping for the former is what made six consecutive closeouts report a backlog that did not
-  exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
+  that catches defects tests structurally cannot. **Since 2026-09-05 a discharged entry LEAVES
+  the file** — `closeout` `C1-demote` moves it to `archive/TEST-QUEUE-discharged.md` — so
+  `TEST-QUEUE.md` holds only what is still to be pressed. **Read only the topmost heading of
+  each entry anyway.** That rule is now a safety net rather than a necessity here, and it is
+  still load-bearing in the two archives, where discharged entries do keep their old
+  `## QUEUED` heading beneath their `## DONE` one: greping for the former is what made six
+  consecutive closeouts report a backlog that did not exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
   only when there is something to press, so **absence of entries means nothing is owed — it is
   never evidence that a session forgot.**
   **If the entry records a detached dev server, check it is still alive and started after

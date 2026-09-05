@@ -126,6 +126,45 @@ Two categories a seam-time closeout never needs, because at a seam the work conc
 the handoff looks tidy is strong, and retirement is the worst moment to decide anything: a
 shaky conclusion reached while packing up enters the record as settled.
 
+#### A2-next — rewrite `NEXT.md`, and leave git state out of it
+
+`NEXT.md` is rewritten wholesale here, not appended to — its own preamble says so, and until
+2026-09-05 no step in this skill said to do it, which is why the constraint below had never
+been decided. **The one thing that is easy to get wrong: it must not restate anything `git`
+or `gh` is authoritative for.**
+
+**The reason is the cadence, not tidiness.** Work → `closeout` → *then* the owner merges. A
+closeout that writes *"PR #NN is open and not merged"* is writing something false by
+construction within the hour, and every fresh `session-start` then opens by reporting a
+discrepancy that is really just the process working. Six words of status manufacture a
+recurring false alarm, and a false alarm that fires every single time trains the reader to
+skip the check that raised it.
+
+So: name the branch and PR number as **addresses**, and write the owner's remaining actions
+as an **ordered sequence** — merge → deploy → run the queued test — with a line saying this
+file does not record where in it he has got to. `session-start` §C derives that in one
+command.
+
+**Demote the outgoing block — do not keep it inline.** "Rewritten wholesale" means the block
+you are replacing *leaves the file*. It moves to `NEXT-ARCHIVE.md`, which is HISTORICAL and
+frozen, and it is never annotated again once it is there.
+
+**Distil before you demote, and that is the step whose absence caused the problem.** Read the
+outgoing block for anything that still binds — a "must not be reverted" claim, a decision now
+closed, a deferral with a live condition — and write it into `NEXT.md`'s own registries
+(*Closed*, *Must not be changed*, *Deferred, with conditions*). Do that and the block is safe
+to freeze. Skip it and the only way to preserve the constraint is to keep the whole block,
+which is exactly how `NEXT.md` reached **2,063 lines by 2026-09-05, 1,738 of them superseded
+status**, growing monotonically from 150 lines on 2026-07-30 — every one of those closeouts
+believing it had rewritten the file wholesale, because it had rewritten the *top block*
+wholesale. **Cost of the distillation: a minute. Cost of skipping it: fifty lines per
+closeout, permanently, on the document every session reads first.**
+
+**The same test covers everything else git owns:** which branches exist, what commits landed,
+whether the branch was pushed. If `git` or `gh` answers it in one command, do not write it
+here. What this file *does* own is what those commands cannot tell anyone — what the work was
+for, what is closed, what must not be reverted, and what the owner's remaining actions are.
+
 ### A3. Give every deferred finding an address
 
 A deferral without a success condition is not a decision, it is an unranked backlog
@@ -247,6 +286,22 @@ that same failure with more words.
 These want fresh eyes, and none of them need the finishing session's context. Run
 them in a new session with the handoff note in hand — **except B1, whose eyes are a
 subagent's rather than the session's; see "Who runs B1" below.**
+
+#### C1-demote — move the entry the owner discharged, do not leave it in place
+
+**`TEST-QUEUE.md` holds only what is still to be pressed.** When an entry is discharged, it
+moves to `archive/TEST-QUEUE-discharged.md` — HISTORICAL, frozen, never edited again. The
+sibling `archive/TEST-QUEUE-nil-entries.md` holds the pre-2026-08-05 entries that queued
+nothing.
+
+**Same rule and same reason as `A2-next`.** Left in place, discharged entries accumulate:
+by 2026-09-05 the file was 1,996 lines of which **93% was history** behind a single live
+entry, and `session-start` had to be taught to read only each entry's *topmost* heading —
+a workaround for a problem that demoting removes. The entries are evidence and none is
+deleted; they are simply not work, and the file is a list of work.
+
+**Nothing to discharge and nothing to queue is a valid closeout.** An empty queue is a
+state, never a lapse.
 
 ### B1. Documentation audit
 
@@ -627,7 +682,12 @@ M="<the memory directory your own context names>"
 #    carries a phantom byte, and `wc -c` counts bytes, so every em-dash and § costs 3.
 #    Together that was 2% of the total — and the CR half moves when prose is rewrapped,
 #    which is the exact blindness characters were adopted to remove.
-{ cat CLAUDE.md "$M/MEMORY.md"; \
+# WARNING: ~/.claude/CLAUDE.md is the OTHER unconditional file, and it was missing
+#   from this command until 2026-09-05. It is the owner's private cross-project
+#   instructions, so it loads in every session in EVERY project -- a standing tax on
+#   strictly more sessions than the project file. Found by a session that had just
+#   added 888 characters to it and then ran this check, which reported a delta of zero.
+{ cat ~/.claude/CLAUDE.md CLAUDE.md "$M/MEMORY.md"; \
   sed -n '/^description:/p' .claude/skills/*/SKILL.md .claude/agents/*.md; } \
   | tr -d '\r' | wc -m
 
@@ -640,8 +700,8 @@ cat .claude/skills/*/SKILL.md .claude/agents/*.md \
 
 | Unconditional | Conditional |
 |---|---|
-| `CLAUDE.md`, in full | `SKILL.md` **bodies** — only on invocation |
-| `MEMORY.md` — the index **only** | Agent definition **bodies** — only on dispatch |
+| **`~/.claude/CLAUDE.md`, in full** — cross-project, so it taxes more sessions than anything else here | `SKILL.md` **bodies** — only on invocation |
+| `CLAUDE.md` (this project's), in full, and `MEMORY.md` — the index **only** | Agent definition **bodies** — only on dispatch |
 | The `description:` line of every skill **and** every agent | `memory/*.md` **bodies** — only on recall, which is *unpredictable*: they load when not needed and miss when needed |
 
 **Two things this corrects, and both had been wrong for a while.** The rule used to name
