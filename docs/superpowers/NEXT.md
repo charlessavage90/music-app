@@ -141,8 +141,11 @@ read measured where it can and cannot be moved; the results note owns that readi
   **reopening of the instrument line on a route-population gate** (`COH-3`'s 74.2%
   on delivered interiors is the recorded argument; a reopening is a new
   pre-registration designed cold, never a re-read of the fired gate).
-  **⚠ The third strand is NO LONGER PARKED — the owner picked it up 2026-07-30 and it is
-  the live work; see "Next" above.** Its caveats below were all carried into the
+  **⚠ The third strand was UNPARKED 2026-07-30 and has since CONCLUDED** — the `TAS-` tag
+  discrimination probe ran to all eight tasks and found **neither architecture has an adoption
+  case** (see "Closed" below). *Corrected 2026-09-05: this read "it is the live work; see
+  'Next' above" for five weeks, and that pointer now dangles — the block it named is in
+  `NEXT-ARCHIVE.md`.* Its caveats below were all carried into the
   pre-registration rather than lost: the reordering limit is stated in `TAS-4`'s bound, the
   self-audit circularity is why the track has no offline scoreboard and ends at a blind
   listen, and the Track-B-shaped cost is why `TAS-` measures before proposing a rebuild.
@@ -165,9 +168,17 @@ read measured where it can and cannot be moved; the results note owns that readi
   `COH-5` makes the data side cheap (~47 min for a full tag frame).
 - **The cap-rule decision for any rebuild** — Track B's `R1` is its input; adoption of
   any rule owes the blind listen.
-- **`ALG-B` adoption** — Track B's `R0`, `R2`, `R3` (`CRS-C6`) are its inputs, beside
-  `RC-R1`'s stranding figures; adoption retires the existing path-quality figures and
-  owes a blind listen (`REQ-38`).
+- ⚠ ~~**`ALG-B` adoption**~~ — **THIS ALREADY HAPPENED. Corrected 2026-09-05.** `ALG-B` is
+  the **adopted map's lineage** and has been since 2026-08-06 — `graph-msw-tu50.bin` was built
+  from the `ALG-B` archive (its manifest records `contribution_3`) and `ApiConfig.graph_path`
+  serves it. Stated in source, at `builder/…/config.py`: *"⚠ ALG-B is the ADOPTED map's
+  lineage."* Left in the parked list it would send a cold session to re-decide a month-old
+  decision. **What is still open and must not be conflated with it:** `BuilderConfig.algorithm`
+  still *defaults* to ALG-E deliberately, so every command touching the adopted lineage passes
+  `--algorithm` explicitly (`CEX-R5`) — flipping that default is the **re-crawl** decision, it
+  is his, and it is the entry in "Must not be changed" below. Whether the `REQ-38` blind listen
+  this row claimed was owed was ever spent is **his to say, not this document's**; the original
+  inputs (Track B's `R0`/`R2`/`R3`, `RC-R1`'s stranding figures) stand as written.
 - **The router-side pricing track** (plan §0 ruling 2) — `R2`'s `ALG-E` null is its
   motivating evidence: the quota edges exist and production weights decline them. Needs
   its own pre-registration, which must consume `TB-P5H-7`.
@@ -179,7 +190,8 @@ read measured where it can and cannot be moved; the results note owns that readi
   `UC` reference rows now give it measured baselines; his trigger; owes its own blind
   listen.
 
-**Still owed by the owner:**
+**Owner actions, all three discharged 2026-08-02 — kept struck for the record.** *(Heading
+corrected 2026-09-05: it read "Still owed by the owner" over three items marked done.)*
 
 1. ✅ **The use-the-app test — DONE 2026-08-02.** The redesign entry was run in full against
    `https://musicapp.cmiller.io`, desktop and phone. Everything passed; journeys he knows well
@@ -193,20 +205,18 @@ read measured where it can and cannot be moved; the results note owns that readi
    pre-redesign build deleted; live site verified afterwards. See the deferral table for the
    pre-flight a successor should repeat.
 
-**One action is owed by the owner: merging draft PR #69**, which lands the execution
-plan and its review record on `main` — the executing session consumes both, and
-durability requires the merge. After that, opening the executing session is his too
-(fresh session, `/model opus` — Fable is his saved default — then `/session-start` and
-"execute the plan"). Everything else remaining for him is decisions only — the triggers
-named in the parked list and the deferral table. *(PR #68 was merged 2026-08-03,
-`cdf0033`; #67 `eecc361`; #66 `f9f42ce`.)*
+~~**One action is owed by the owner: merging draft PR #69.**~~ *(Discharged — #69 merged
+2026-08-03 at `2e3b017`. Struck 2026-09-05, having read as a live owner action for a month.
+**Current owner actions live in the top block, never here.** This section is the
+parked-decision registry; status accumulating in it is what made the whole document grow.)*
 
-**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).** Its newest entry (2026-08-03
-night, the execution-plan track) is N/A — nothing app-facing changed and nothing is
-running. The prior real check (2026-08-02, post-prune) came back clean. Everything else
-there is dormant until a graph is rebuilt.
+~~**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).**~~ *(FALSE since 2026-09-04;
+struck 2026-09-05. **This document must not state the queue's contents at all** — the same rule
+as merge state. `TEST-QUEUE.md` owns it, `session-start` reads it, and an entry is live only if
+its **topmost** heading says so.)*
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
+*(Verified 2026-09-05 — still the password-removal plan's only unrun task.)*
 
 ## Gate state
 
@@ -253,12 +263,17 @@ there is dormant until a graph is rebuilt.
 - **`RMD-6`, `RMD-11`, `RMD-12`, `RMD-13`, `FRO-1`, `FRO-4`**, the `DEP-33` blockers, the
   Gate 1 clip work, **Track 1**.
   - ⚠ **One exception:** `BYP-13` — a card playing a clip by a *different artist of
-    the same name*. Not path work and not inside any pause. **A fix is BUILT as of
-    2026-08-02 and is INERT until a rebuild** — the builder carries MusicBrainz-recorded
-    Deezer artist ids in the APG1 metadata blob and the api resolves by identity before
-    falling back to name search. **The defect is unchanged in the running app**, which
-    serves a pre-2026-08-02 artifact with no ids. It is *reduced*, not closed — see the
-    link-quality row in the deferral table.
+    the same name*. Not path work and not inside any pause. The builder carries
+    MusicBrainz-recorded Deezer artist ids in the APG1 metadata blob and the api resolves by
+    identity before falling back to name search.
+    **⚠ CORRECTED 2026-09-05. This entry read "a fix is BUILT and is INERT until a rebuild"
+    and "the defect is unchanged in the running app, which serves a pre-2026-08-02 artifact
+    with no ids". Both have been FALSE since 2026-08-06**, when the `MSW-` rebuild landed:
+    the served artifact `graph-msw-tu50.bin` (sha `43dd82bb…`) carries **`deezer_ids` for all
+    58,838 artists**, read from the artifact's own metadata blob rather than inferred.
+    **The fix is LIVE.** It is *reduced*, not closed — the id path inherits MusicBrainz's
+    link accuracy; the link-quality row in the deferral table is unaffected and still
+    governs.
 
 ## Must not be changed, and each has a reason
 
@@ -320,7 +335,7 @@ there is dormant until a graph is rebuilt.
 | **The label-affinity / clustering data asset** | **The owner's trigger.** `wgt_release_raw.json` side-collected record-label credits, countries and years per graph artist; nothing consumes it. His style-vocabulary read adds: for the curated Discogs styles, carrier count alone tracks usability — the clustering idea keeps its value for the open MB tag space, where frequency separates nothing. |
 | **Tag clustering as a junk-label filter, owner-raised 2026-08-01** | **Unmeasured; the owner's trigger.** The current whitelist keeps a tag only if MusicBrainz classifies it as a genre — an ontology decision, which is why `british invasion` is discarded despite binding coherent artists. The owner's proposal: a real label's carriers cluster in the map, a junk label's scatter. Frequency alone cannot separate them, since `seen live` and a genuine niche genre are both rare. |
 | **One new Snyk Low finding per module added under `builder/analysis/`** — *but only for modules taking a CLI path argument.* **The three added 2026-08-02 (`dsp_ids.py`, `delivered_coverage.py`, `id_quality.py`) contribute NONE**, the same reason `tail_exposure.py` did not: no CLI argument, so no input reaches a path. Full `builder/` scan at that closeout returns **32** — 27 Path Traversal Lows, 3 DOM-XSS in `listen.html`, 2 XML-parser Mediums (row above). *(2026-08-03 later: `wav_read.py` adds **2** of the same class — `--capture`/`--out` — recorded at its pre-registration commit; the eleven `cre_probe*.py` scripts add none, no CLI path arguments.)* | **Recorded, not fixed; extending the acceptance is the owner's.** A CLI `--out` path flows into `pathlib.Path` — the same class as the 13 already accepted here, **now 11 in the `TAS-` directory plus 6 in the `WGT-` directory** (`wgt_grid.py` ×2, `wgt_release_read.py` ×2, `wgt_style_filters.py` ×2). *(Corrected 2026-08-01 latest: this row said **4** and omitted `wgt_style_filters.py`'s two, which a re-scan surfaced. `tail_exposure.py` added the same day contributes **none** — it takes no CLI argument, so no input reaches a path.)* It cannot be meaningfully sanitised: captures deliberately live *outside* the repo, so confining the path breaks intended usage. |
-| ✅ **Tag-aware selection increases the map's total edge count** | **DISCHARGED 2026-08-03 — the condition fired and was satisfied as this row's own text prescribes**: the `CRE-` pre-registration states the owner's sole-source constraint (LB similarity the only source of edge existence; tags only re-order, re-weight or remove), under which the union bounds the count above and the `TAS-4` growth mechanism cannot operate. Struck, kept for the record; the corrected `w_degree_hub` half below stays live reading. *(Original condition:)* **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. Execution log §9.4/§9.5. **⚠ CORRECTED 2026-08-02 — this row previously said `w_degree_hub` "is dormant *because of the current graph's top-degree set*", which reads as the `w_floor` dormant-term confound about to repeat. It is not.** Checked from source: `w_degree_hub = 0.0` (`api/…/config.py:54`) and the term is a plain multiplication in the cost function (`pathfinding.py:135`), with no environment override anywhere — weights are not env-driven. **At a zero coefficient the graph's top-degree set cannot make the term fire, so it cannot switch itself on in the arms that succeed.** What *is* live is a decision, not a confound: the *reason* the weight is zero rests on a property of today's graph (§2.6 — the top-1%-by-degree set is largely insular micro-genre artists, so penalising them is not what you want), and a different connection rule changes that set. **So a rebuild pre-registration should decide `w_degree_hub` deliberately and record the decision — it does not need a control against the term waking up on its own.** |
+| ✅ **Tag-aware selection increases the map's total edge count** | **DISCHARGED 2026-08-03 — the condition fired and was satisfied as this row's own text prescribes**: the `CRE-` pre-registration states the owner's sole-source constraint (LB similarity the only source of edge existence; tags only re-order, re-weight or remove), under which the union bounds the count above and the `TAS-4` growth mechanism cannot operate. Struck, kept for the record; the corrected `w_degree_hub` half below stays live reading. *(Original condition:)* **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. Execution log §9.4/§9.5. **⚠ CORRECTED 2026-08-02 — this row previously said `w_degree_hub` "is dormant *because of the current graph's top-degree set*", which reads as the `w_floor` dormant-term confound about to repeat. It is not.** Checked from source: `w_degree_hub = 0.0` (`api/…/config.py:83` — cited as `:54` until 2026-09-05) and the term is a plain multiplication in the cost function (`pathfinding.py:160` — cited as `:135` until 2026-09-05), with no environment override anywhere — weights are not env-driven. **At a zero coefficient the graph's top-degree set cannot make the term fire, so it cannot switch itself on in the arms that succeed.** What *is* live is a decision, not a confound: the *reason* the weight is zero rests on a property of today's graph (§2.6 — the top-1%-by-degree set is largely insular micro-genre artists, so penalising them is not what you want), and a different connection rule changes that set. **So a rebuild pre-registration should decide `w_degree_hub` deliberately and record the decision — it does not need a control against the term waking up on its own.** |
 | **The 11 blind verdicts as a falsifier for any future coherence instrument** | **If the owner reopens the instrument line** (route-population gate, `COH-3`). The corpus is unconsumed; any scoring against it must be pre-registered cold, and `ct_retrodict.py`'s committed-but-unrun rule counts as the first attempt for reporting purposes. `SYN-7` binds. |
 | **42 ListenBrainz nulls and 24 MBIDs refused as ambiguous** | **Accepted, won't chase.** Both are recorded in the probe JSON. Reopen only if a criterion is built that depends on those specific artists being scored. |
 | **The `× lower` path-read redraw** | **If the owner asks for obscure-endpoint path reads under candidate rules** — a new §8 amendment designed cold; the committed draw's famous classes stay the record. |
@@ -340,7 +355,7 @@ there is dormant until a graph is rebuilt.
 | **App Runner's CLI tags vanish if the service is replaced** | **After any deploy that recreates the service** — `infra/README.md` §7. |
 | The near-geodesic ensemble re-read (PLA-R1's weakest link) | **Absorbed into DD-P1.** |
 | Medium CSRF in `react-router@7.18.1` | Only if the app adopts React Router's unstable RSC APIs. |
-| `env(safe-area-inset-bottom)` at `PlayerBar.tsx:10` is inert | Only if someone adds `viewport-fit=cover`. |
+| `env(safe-area-inset-bottom)` at `PlayerBar.tsx:12` is inert | Only if someone adds `viewport-fit=cover`. |
 | Reading the request stream to bound chunked bodies | The Content-Length guard covers every reachable path. |
 | **`G3-S4`'s disclosure half** — what the app records about visitors | **The owner's call.** |
 
