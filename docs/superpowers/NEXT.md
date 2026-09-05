@@ -60,6 +60,15 @@ does not record how far down the list he has got.** `gh pr view 101` answers the
    ([`infra/README.md`](../../infra/README.md)). Until this happens the live site serves what
    it served before the merge. The execution log's deploy note applies: the clip cache's item
    shape changed, so every live entry misses once and rebuilds.
+   **⚠ It also clears a latent hazard, recorded 2026-09-05.** The running image is still
+   `994c203`, built 2026-08-10 **before** the `CXR-` revert — so its baked-in
+   `ApiConfig.graph_path` default still names **`graph-cxa-adopted.bin`, the REJECTED
+   artifact**. Nothing is served wrong: production passes `ARTISTPATH_GRAPH` and
+   `ARTISTPATH_GRAPH_SHA256` explicitly per deploy, and `DEP-34-FIX` makes a synth without
+   `ARTISTPATH_DEPLOY_GRAPH_KEY` refuse. But it is a live instance of the `DEP-34` class — an
+   image that reaches for the rejected map if it ever boots without the env var. HEAD's default
+   is already back at `graph-msw-tu50.bin`, so **any image built from HEAD fixes this**; do not
+   deploy this branch under a stale image tag.
 3. **Run the queued use-the-app test** — **not exercisable until 2 has happened.** The test
    queue holds ONE live item, written 2026-09-04.
 
