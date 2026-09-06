@@ -107,6 +107,21 @@ prove `LUX-4` touches nothing that already existed. It is a **metadata-only** fi
 not need a listening test or acceptance gates, but it does need its own rebuild and its own
 control. **The owner's call, and its own track.**
 
+**Deferred, with a success condition — not merely flagged.** *Condition: the first rebuild
+after `LUX-4` merges.* At that point the control arm has served its purpose and a changed
+`deezer_ids` key costs nothing. The work is: re-run an extraction with `deezer` added to
+`KEPT_PLATFORMS` over this same three-artifact population, ship it as dated package data
+beside `deezer_artist_ids_20260802.json`, rebuild, and take the new checksum to a deploy.
+Roughly 40 minutes plus a deploy; **no listening test and no acceptance risk**, because it
+changes metadata and not one node, edge or score.
+
+**Sized, so the deferral is not open-ended.** Of the 2,687, **1,616 (60.1%) carry a Spotify or
+Apple id** — against a map-wide 69.1% / 50.9%, so they skew obscure. Inference rather than
+measurement: DSP presence on one service is not a direct predictor of a Deezer relation, but it
+indicates a real released artist with a footprint. **Expect to recover on the order of 1,300 to
+1,600, not 2,687**; the remaining ~1,071 likely have nothing to link to anywhere and stay on
+name search whatever is done.
+
 Related but distinct, and recorded separately at
 [`../2026-09-05-lux-e1-drift-source/README.md`](../2026-09-05-lux-e1-drift-source/README.md) §6:
 `ULC-F4`, where the un-listenable rule's keep-check measures the **name** route while the app
