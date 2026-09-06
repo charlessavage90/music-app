@@ -339,3 +339,39 @@ def test_crawl_reports_an_exhausted_frontier_as_a_message_not_a_traceback(tmp_pa
 
     assert "refrontier" in str(exc.value)
     assert "ULC-F3" in str(exc.value)
+
+
+def test_build_records_which_files_it_applied_in_the_manifest(
+    tmp_path, install_ulf_list, caplog
+):
+    """The wiring, end to end through `main` rather than through the helper.
+
+    `resolve_build_inputs` is unit-tested in test_manifest.py; what this pins
+    is that `cmd_build` actually calls it, logs it BEFORE the build, and hands
+    it to `build_manifest`. The recorded gap was a manifest that named a flag
+    and never a file, so a build's inputs could not be established afterwards
+    (builder/analysis/2026-09-05-lux-e1-drift-source/).
+    """
+    import json
+    import logging
+
+    install_ulf_list(PRODUCTION_ALGORITHM, {A, B})
+    archive_dir = tmp_path / "archive"
+    _write_archive(archive_dir)
+    out = tmp_path / "graph.bin"
+
+    with caplog.at_level(logging.INFO):
+        main(
+            ["build", "--archive-dir", str(archive_dir), "--out", str(out)],
+            criteria=PERMISSIVE,
+        )
+
+    manifest = json.loads(out.with_suffix(out.suffix + ".json").read_text())
+    recorded = manifest["build_inputs"]
+    assert recorded["archive_dir"] == str(archive_dir)
+    assert recorded["drop_lists"]["unlistenable"]["file"].endswith(".json")
+    assert len(recorded["drop_lists"]["unlistenable"]["sha256"]) == 64
+
+    # Logged at START: the value of the record is seeing a wrong input in the
+    # first seconds, not in a sidecar written after serialisation.
+    assert any("drop list" in r.message for r in caplog.records)

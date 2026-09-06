@@ -295,6 +295,45 @@ rejected before serialise. Owner chose option <A|B>."
 
 ---
 
+## Task `L4-T1b`: record which files built the graph — **ADDED 2026-09-05, ✅ DONE**
+
+**Not in the plan as authored.** Added because a deferral's condition fired on this plan:
+`NEXT.md` carries *"a graph's manifest cannot say WHICH drop lists built it"*, whose tightened
+condition reads **"before the `LUX-4` rebuild (`L4-T7`)"**. That condition had already fired
+once, during `LUX-E1`, and was honestly recorded as not honoured — the consequence being the
+hand analysis of 2026-09-05. `L4-T7` is the next rebuild comparison and its factor table is
+exactly what this serves, so it is discharged here rather than deferred a third time.
+
+**Files:** `manifest.py` (`resolve_build_inputs`, `log_build_inputs`, `build_manifest`),
+`cli.py` (`cmd_build`), `tests/test_manifest.py`, `tests/test_cli.py`.
+
+**What it records:** the resolved **filename and a sha256 over the file's bytes** for each drop
+family actually applied, plus the archive directory. Hashed over the bytes because the three
+payloads' own hash keys are inconsistent and `featured_credit` carries none. A family whose
+flag is off is **absent, never null** — absence reads as "not applied", a null reads as
+"applied, identity unknown", which is the ambiguity being removed.
+
+**Logged at build START**, so an unintended input shows in the first seconds rather than in a
+sidecar written after serialisation.
+
+**⚠ RECORDING ONLY — a mismatch is NOT a refusal. Owner's decision, 2026-09-05.** A gate here
+*could* fire in the first seconds (both inputs are known before any work happens), so the
+deferral's stated worry about "killing a long build at the end" does not apply to this check —
+it applies to the acceptance bounds. The reason to wait is different: an escape hatch reached
+reflexively removes the protection it guards. Revisit once we know whether mismatches are
+routine or rare. **A session must not add the gate on its own.**
+
+**Additive and cannot perturb a build.** `build_inputs` is a defaulted argument omitted
+entirely when absent — same discipline as `Graph.deezer_ids` — because a frozen probe
+(`analysis/2026-08-09-jfx-prereg-critique/`) calls `build_manifest` positionally with four
+arguments. The sidecar is written after serialisation, so no sha moves and `L4-T7`'s control
+arm is unaffected.
+
+- [x] Steps 1–5: tests first (5 red), implement, wire into `cmd_build`, end-to-end test
+      through `main`, full suite. **257 passed. Snyk `builder/src` 0 issues.**
+
+---
+
 ## Task `L4-T2`: extend the extraction pass — Spotify and structured fields
 
 **Files:**
