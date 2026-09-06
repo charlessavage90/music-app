@@ -29,7 +29,7 @@ _POPULATION = (
     "2026-08-02-era artifacts; a superset is safe by construction and keeps a "
     "future build of either lineage covered"
 )
-_DUMP = "MusicBrainz JSON artist dump, 2026-07-28"
+_DUMP = "MusicBrainz JSON artist dump, TIMESTAMP 2026-07-29T01:12:10Z (CC0 1.0, per the dump's own COPYING)"
 _SOURCE = "analysis/2026-09-05-lux4-extract/"
 
 

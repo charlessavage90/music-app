@@ -170,7 +170,7 @@ extracted and what is served.
 
 Substrates, each verified by sha before reading: `graph-msw-tu50.bin` (`43dd82bb…`),
 `graph-algb-full.bin` (`d008a2b5…`), `graph-t15-tiebreakfix.bin` (`4cb84ef9…`). Dump: the
-2026-07-28 MusicBrainz JSON artist export.
+2026-07-29 MusicBrainz JSON artist export.
 
 **The payloads are written compactly and the script pins those separators**, so `lux4_extract.py`
 reproduces the committed bytes exactly. A payload whose generator no longer reproduces it is not

@@ -135,7 +135,7 @@ def is_artist_url(url: str) -> bool:
 
     MusicBrainz artist records carry a handful of relations to albums and
     playlists alongside the artist pages -- 27 album and 2 playlist URLs in the
-    first 200,000 records of the 2026-07-28 dump, against 80,549 artist ones.
+    first 200,000 records of the 2026-07-29 dump, against 80,549 artist ones.
     A Spotify ALBUM id is also 22-character base62, so `normalise_id` cannot
     tell one from the other and would ship an album link on an artist card.
     Both services put the entity kind in the path, so check that instead.
@@ -170,7 +170,7 @@ def clean_date(value: str | None) -> str | None:
     """A MusicBrainz date, or None if it has no usable year.
 
     MusicBrainz partial dates can omit the YEAR while keeping month and day --
-    `????-06-05`. 404 artists in the 2026-07-28 dump carry one, and rendered
+    `????-06-05`. 404 artists in the 2026-07-29 dump carry one, and rendered
     verbatim they would put "????-06-05" on a card. A date with no year cannot
     say when an artist began or ended, so it is treated as absent.
     """
@@ -367,7 +367,7 @@ def main() -> None:
     }
     common = {
         "extracted_at": "2026-09-05",
-        "dump": "MusicBrainz JSON artist dump, 2026-07-28",
+        "dump": "MusicBrainz JSON artist dump, TIMESTAMP 2026-07-29T01:12:10Z (CC0 1.0, per the dump's own COPYING)",
         "population": (
             "union of the served map and both 2026-08-02-era artifacts; a "
             "superset is safe by construction and keeps a future build of "
