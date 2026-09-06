@@ -92,6 +92,18 @@ condition, and the owner asked for it to be another session's work; **(b)** run 
 discipline, also in the deferral table, deferred on his explicit decision. Entry point for all
 three: the handoff [`2026-09-05-HANDOFF-doc-layer.md`](2026-09-05-HANDOFF-doc-layer.md).
 
+**A new track opened 2026-09-06 by owner ruling — `LBD-`, computing our own artist similarity
+from ListenBrainz's published listens instead of the Labs endpoint.** Explore through its stage
+3; stage 4 (adoption) is a separate decision on stage 3's read. Blocks nothing above and
+nothing above blocks it. Governing document
+[`specs/2026-09-06-own-similarity-design.md`](specs/2026-09-06-own-similarity-design.md);
+plan [`plans/2026-09-06-lb-dump-exploration.md`](plans/2026-09-06-lb-dump-exploration.md);
+why the July finding that "the dumps carry no MBIDs" does not block it is in
+[`findings/2026-09-06-lb-dump-route-assessment.md`](findings/2026-09-06-lb-dump-route-assessment.md).
+**One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to
+`D:\unsung-large-data\`. **What it does not reopen:** the fame-currency rulings, the `ALG-B`
+lineage, `DD-F1`, or the router-side `CXR` fixes — each stays its own track (design §9).
+
 **What shipped, and the one promise it rests on.** `LUX-1` removes the second bypass button
 while **keeping the mechanism, the wire contract and the `?dislike=` URL parameter** — so
 every link ever shared still resolves. `exclusions.ts` and `pathfinding.py` both have **zero
