@@ -336,6 +336,49 @@ arm is unaffected.
 
 ## Task `L4-T2`: extend the extraction pass — Spotify and structured fields
 
+> ### ⚠ CORRECTED 2026-09-05 DURING EXECUTION — the files below are WRONG
+>
+> **The plan said to modify `2026-08-02-dsp-ids/dsp_ids.py` and reuse the population set it
+> already builds. Both halves are wrong, and the first is a coverage defect that would have
+> shipped silently.**
+>
+> **1. That script's population does not cover the served map.** It scans the union of
+> `graph-t15-tiebreakfix.bin` and `graph-algb-full.bin` — the artifacts adopted and under test
+> on 2026-08-02. `graph-msw-tu50.bin` was built four days later from a **later** ALG-B crawl,
+> and **2,687 of its 58,838 artists (4.6%) are in neither**. Its docstring's claim that the
+> ALG-B build is "a superset of anything a final ALG-B build produces" is true for a build from
+> the 2026-07-30 archive and **false across the crawl extension that followed**. Reusing it
+> would have omitted links and facts for 4.6% of every journey, invisibly.
+>
+> **2. Its outputs are pinned.** `deezer_ids.py` ships a map whose sha that script reproduces.
+> Re-running it over a different population changes that sha and breaks the shipped map's
+> reproduction claim. A frozen probe's value is that it is frozen.
+>
+> **So the extraction is a NEW script in a NEW directory**, and `dsp_ids.py` and its outputs are
+> untouched. Population is the union of **all three** artifacts, each sha-verified before it is
+> read — a superset is safe by construction and keeps either lineage covered.
+>
+> **⚠ `L4-T3` and `L4-T4` must read from the new paths**, not the ones below.
+>
+> **⚠ A LIVE DEFECT WAS FOUND HERE AND IS NOT FIXED BY THIS PLAN.** The shipped Deezer id map
+> was extracted over that same short population, so **all 2,687 of those served artists carry no
+> Deezer id** — against 55.2% coverage across the map as a whole. They can only resolve a clip
+> by **name search**, which is precisely the `BYP-13` exposure the id path exists to close.
+> Refreshing the Deezer map here would change the artifact's existing `deezer_ids` key and so
+> **break `L4-T7`'s control arm**, whose entire job is to prove this change touches nothing that
+> already existed. Recorded for the owner; it needs its own track.
+
+**Files (corrected):**
+- Create: `builder/analysis/2026-09-05-lux4-extract/lux4_extract.py`
+- Create: `builder/analysis/2026-09-05-lux4-extract/test_lux4_extract.py`
+- Create: `builder/analysis/2026-09-05-lux4-extract/dsp_links.json` (new output)
+- Create: `builder/analysis/2026-09-05-lux4-extract/artist_facts.json` (new output)
+- Create: `builder/analysis/2026-09-05-lux4-extract/README.md` (**figures owner**, incl. `LUX-E3`)
+- Modify: `docs/README.md` (one row classifying the new directory)
+- **UNTOUCHED, deliberately:** `builder/analysis/2026-08-02-dsp-ids/`
+
+*(Original file list, superseded:)*
+
 **Files:**
 - Modify: `builder/analysis/2026-08-02-dsp-ids/dsp_ids.py`
 - Create: `builder/analysis/2026-08-02-dsp-ids/dsp_links.json` (new output)
