@@ -10,7 +10,8 @@ exists, is verified, and its identity is committed"). Everything downstream read
 artifact rather than a live understanding. The degradation tell did not fire — but see
 "What I know that is not in the durable record" for an honest note on execution slips.
 
-Branch `lux-4-links-info-card`, **PR #105 (draft)**. Ten commits.
+Branch `lux-4-links-info-card`, **PR #105 (draft)** — both are addresses; `git` and `gh` own
+what has landed.
 
 ---
 
@@ -31,8 +32,9 @@ that is what found all four.
 
 ## What this session did
 
-`L4-T1`, `L4-T1b` (added), `L4-T2`, `L4-T3`, `L4-T4`, `L4-T5`, `L4-T6`, `L4-T7`. Builder suite
-**283 passed**; Snyk clean, including one new Low fixed rather than accepted.
+`L4-T1`, `L4-T1b` (added), `L4-T2`, `L4-T3`, `L4-T4`, `L4-T5`, `L4-T6`, `L4-T7`. All three
+suites green at closeout and Snyk clean, including one new Low fixed rather than accepted —
+run them rather than trusting a count written here.
 
 1. **`L4-T1`** — acceptance bounds restored; **the served map's own gate admits it again**, and
    a build through the restored defaults reproduces `43dd82bb` byte-identically.
@@ -42,9 +44,10 @@ that is what found all four.
 4. **`L4-T5`/`L4-T6`** — links and facts carried node-indexed into three additive APG1 keys.
 5. **`L4-T7`** — rebuilt, verified two independent ways, `LUX-E5` passed.
 
-**The artifact:** `builder/scratch/graph-lux4.bin`, sha `fd92a7352afb7321e80f3818262d08169fcfb3af1d6841d7ccfca0f5e5740369`,
-58,838 artists / 1,315,684 edges, 23,753,986 bytes. **Gitignored** — identity is by that sha
-and by its manifest sidecar. ⚠ Take the deploy checksum from the sidecar, never from here
+**The artifact:** `builder/scratch/graph-lux4.bin`, sha
+`fd92a7352afb7321e80f3818262d08169fcfb3af1d6841d7ccfca0f5e5740369`. **Gitignored**, so that
+sha and its manifest sidecar are the only identity it has. Counts and sizes:
+[`builder/analysis/2026-09-05-lux-4-rebuild/README.md`](../../builder/analysis/2026-09-05-lux-4-rebuild/README.md) §2. ⚠ Take the deploy checksum from the sidecar, never from here
 (`DEP-24`).
 
 ## Claims an editor must NOT revert
@@ -57,9 +60,9 @@ and by its manifest sidecar. ⚠ Take the deploy checksum from the sidecar, neve
   `build_from_archive`, which wires the maps unconditionally since `L4-T5`. Do not restore it
   as the control, and do not add a config knob to make it work — the no-knob decision is
   recorded at the `deezer_ids` call site.
-- **`LUX-E5` PASSED** — 261 MiB peak against 2 GB. **Nothing is dropped; `area` stays.**
-- **`LUX-E3`'s read: Spotify beats Apple in every band** (69.1% vs 50.9% served). The feature
-  is "both services" with a search fallback.
+- **`LUX-E5` PASSED**, with headroom. **Nothing is dropped; `area` stays.** Figures: rebuild README §4.
+- **`LUX-E3`'s read: Spotify beats Apple in every band**, so the feature is "both services"
+  with a search fallback. Figures: lux4-extract README §2.
 - **`artist_facts` per-field coverage is NOT a `LUX-E2` read.** `LUX-E2` is stated over
   delivered cards and remains BLOCKED on its damaged `TAS-` sample.
 - **The `2026-08-02-dsp-ids/` directory is frozen and was deliberately not touched** — its
@@ -70,28 +73,28 @@ and by its manifest sidecar. ⚠ Take the deploy checksum from the sidecar, neve
 ## Two findings that are work, not notes — both deferred with conditions
 
 - **`ULC-F4`** — the un-listenable keep-check measures the **name** search while the app
-  resolves by **identity** first, so both drop lists drop artists the app can play (220 of 740
-  clip-stage drops in the list that built the served map). Figures:
+  resolves by **identity** first, so both drop lists drop artists the app can play. Figures:
   `builder/analysis/2026-09-05-lux-e1-drift-source/README.md` §6. **Owner's call**; needs a
   re-census, a rebuild and its own pre-registration.
-- **The Deezer id gap** — 2,687 served artists (4.6%) carry no Deezer id at all, because the
+- **The Deezer id gap** — a slice of served artists carry no Deezer id at all, because the
   shipped map was extracted over a population predating the served map. **A session's work, not
-  a decision.** Condition: *the first rebuild after `LUX-4` merges.* Expect to recover
-  ~1,300–1,600. Figures: `builder/analysis/2026-09-05-lux4-extract/README.md` §4.
+  a decision.** Condition: *the first rebuild after `LUX-4` merges.* Counts and the expected
+  recovery: `builder/analysis/2026-09-05-lux4-extract/README.md` §4.
 
 ## What I know that is not in the durable record
 
 1. **The plan was wrong four times, in four different ways**, and every one was caught by
    checking against the repo rather than by reading carefully: a wrong commit hash for the
    acceptance band (`3aa61f0` is the *retired* map's, rejecting the served one on both
-   bounds); a population that misses 4.6% of the served map; a wiring location that
+   bounds); a population that does not cover the served map; a wiring location that
    contradicts `build_graph`'s own docstring; and a control arm invalidated by an earlier task
    in the same plan. **Treat the remaining tasks as unverified.**
 2. **The `artist_facts` shape is a deliberate trade-off, measured, and it is the thing to
-   revisit for `LUX-E6`.** List-of-dicts costs 4.27 MB against 2.37 MB as parallel arrays,
-   because it repeats key names per artist — and ~66 MiB of RSS, roughly 10× its JSON. It was
-   kept because a new fact then skips six of the nine steps. A genre-tag list per artist
-   multiplies the same way against a 2 GB ceiling. Recorded in `artifact.py`'s docstring.
+   revisit for `LUX-E6`.** List-of-dicts costs more than parallel arrays would, because it
+   repeats key names per artist, and its RSS cost is a large multiple of its JSON size — **that
+   multiplier, not the byte count, is what governs `LUX-E6`**, where a genre-tag list per artist
+   multiplies the same way against a fixed container ceiling. Measurements: rebuild README §4;
+   the shape trade-off is recorded at the contract point in `artifact.py`'s docstring.
 3. **Execution slips were more frequent than usual, and all were caught by my own checks**:
    a header-inclusive byte comparison that failed on a correct artifact, a regex that matched
    "i" plus optional "d", a path confined against the wrong root, two wrong working
