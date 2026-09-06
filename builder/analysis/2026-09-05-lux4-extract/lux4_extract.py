@@ -59,6 +59,7 @@ Run from `builder/`:
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from hashlib import sha256
@@ -120,6 +121,64 @@ def id_tail(url: str) -> str:
     return url.split("?")[0].rstrip("/").split("/")[-1]
 
 
+# Spotify web ids are 22-character base62. Apple artist ids are numeric, but
+# MusicBrainz records them under TWO URL shapes -- music.apple.com/.../657515
+# and itunes.apple.com/.../id657515 -- which yield different tails for the same
+# artist. Normalising here rather than in the frontend means one id shape ships
+# and the URL template stays a single string.
+_SPOTIFY_ID = re.compile(r"[A-Za-z0-9]{22}\Z")
+_APPLE_ID = re.compile(r"(?:id)?([0-9]+)", re.IGNORECASE)
+
+
+def is_artist_url(url: str) -> bool:
+    """Does this relation point at an ARTIST page rather than an album?
+
+    MusicBrainz artist records carry a handful of relations to albums and
+    playlists alongside the artist pages -- 27 album and 2 playlist URLs in the
+    first 200,000 records of the 2026-07-28 dump, against 80,549 artist ones.
+    A Spotify ALBUM id is also 22-character base62, so `normalise_id` cannot
+    tell one from the other and would ship an album link on an artist card.
+    Both services put the entity kind in the path, so check that instead.
+    """
+    segments = [seg for seg in url.split("?")[0].split("/") if seg]
+    return "artist" in segments
+
+
+def normalise_id(platform: str, tail: str) -> str:
+    """The platform id, or "" if this relation does not carry a usable one.
+
+    Returning "" rather than storing junk is load-bearing: the caller uses
+    `setdefault`, so a rejected id must NOT consume the slot -- an artist whose
+    first relation is malformed can still be rescued by a later, valid one.
+    That is why this runs during extraction and not as a post-pass over the
+    written payload, where the losing relations are already gone.
+
+    Observed in the 2026-09-05 dump and each rejected or repaired here:
+      `id1227497528`  15,140 iTunes-shaped Apple ids -> `1227497528`
+      `id293029227#`  a trailing fragment
+      `artist%3ALost%20Children%20Of%20Babylon`  a `spotify:` URI in a URL field
+    """
+    if platform == "spotify":
+        return tail if _SPOTIFY_ID.fullmatch(tail) else ""
+    if platform == "apple":
+        m = _APPLE_ID.fullmatch(tail)
+        return m.group(1) if m else ""
+    return ""
+
+
+def clean_date(value: str | None) -> str | None:
+    """A MusicBrainz date, or None if it has no usable year.
+
+    MusicBrainz partial dates can omit the YEAR while keeping month and day --
+    `????-06-05`. 404 artists in the 2026-07-28 dump carry one, and rendered
+    verbatim they would put "????-06-05" on a card. A date with no year cannot
+    say when an artist began or ended, so it is treated as absent.
+    """
+    if not value:
+        return None
+    return value if re.match(r"^\d{4}", value) else None
+
+
 def facts_of(record: dict) -> dict:
     """The structured MusicBrainz fields the info card renders.
 
@@ -138,10 +197,14 @@ def facts_of(record: dict) -> dict:
     if area.get("name"):
         facts["area"] = area["name"]
     span = record.get("life-span") or {}
-    if span.get("begin"):
-        facts["begin"] = span["begin"]
-    if span.get("begin") or span.get("end"):
-        facts["end"] = span.get("end")
+    begin = clean_date(span.get("begin"))
+    end = clean_date(span.get("end"))
+    if begin:
+        facts["begin"] = begin
+    # Cleaned values, deliberately: a life span whose only dates are yearless
+    # carries no information and must not produce an `end`/`ended` pair either.
+    if begin or end:
+        facts["end"] = end
         facts["ended"] = bool(span.get("ended"))
     return facts
 
@@ -216,6 +279,7 @@ def main() -> None:
     apple: dict[str, str] = {}
     artist_facts: dict[str, dict] = {}
     seen_in_dump: set[str] = set()
+    rejected: Counter = Counter()
     scanned = 0
 
     with DUMP.open(encoding="utf-8") as f:
@@ -244,13 +308,15 @@ def main() -> None:
                 platform = DSP.get(host_of(url))
                 if platform not in KEPT_PLATFORMS:
                     continue
-                tail = id_tail(url)
-                if not tail:
+                usable = is_artist_url(url)
+                ident = normalise_id(platform, id_tail(url)) if usable else ""
+                if not ident:
+                    rejected[platform] += 1
                     continue
-                # First wins, deterministically: the dump is read in its own
-                # order and setdefault makes a second relation a no-op.
+                # First VALID wins, deterministically: the dump is read in its
+                # own order and setdefault makes a later relation a no-op.
                 target = spotify if platform == "spotify" else apple
-                target.setdefault(mbid, tail)
+                target.setdefault(mbid, ident)
 
     # --- LUX-E3: coverage by popularity band, over the SERVED map ------------
     total: Counter = Counter()
@@ -325,6 +391,7 @@ def main() -> None:
                 "apple_ids": len(apple),
                 "spotify_ids_served": len(served_spotify),
                 "apple_ids_served": len(served_apple),
+                "relations_rejected_as_unusable": dict(rejected),
             },
             "coverage_by_popularity_percentile_band": {
                 b: {"artists": total[b], "spotify": s_band[b], "apple": a_band[b]}
@@ -360,6 +427,7 @@ def main() -> None:
     )
     _write(HERE / "artist_facts.json", facts_payload)
 
+    print(f"rejected relations (not an artist page, or unusable id): {dict(rejected)}")
     print(
         f"\nwrote dsp_links.json    spotify={_sha_items(spotify)[:12]} "
         f"apple={_sha_items(apple)[:12]}"

@@ -528,6 +528,38 @@ coverage read is recorded beside the existing Deezer and Apple columns."
 
 ## Task `L4-T3`: the frozen streaming-link module
 
+> ### ⚠ CORRECTED DURING EXECUTION — source path, and two data defects the plan's tests miss
+>
+> **Source is `analysis/2026-09-05-lux4-extract/dsp_links.json`**, not the `2026-08-02-dsp-ids/`
+> path below — see `L4-T2`'s correction for why that directory is left frozen.
+>
+> **The plan's `test_ids_are_tails_not_urls` passes on data that is wrong.** It asserts no
+> `http` and no `/`, and every malformed entry in the extracted payload satisfies both. Two
+> real defects were found by looking at the data instead:
+>
+> **(a) Apple ids ship in two incompatible shapes.** MusicBrainz records the same artist as
+> `music.apple.com/us/artist/name/657515` **and** `itunes.apple.com/us/artist/name/id657515`.
+> The first extraction produced **20,777** bare-numeric ids and **15,140** `id`-prefixed ones,
+> so a single frontend URL template could only ever have been correct for 58% of them.
+> Normalised to the bare numeric form during extraction.
+>
+> **(b) An album URL cannot be told from an artist URL by id shape.** A Spotify **album** id is
+> also 22-character base62. Artist records in the dump carry album and playlist relations —
+> **27 album and 2 playlist URLs in the first 200,000 records**, against 80,549 artist ones — so
+> without a path check an album link would ship on an artist card. Both services put the entity
+> kind in the URL path, which is what is now checked.
+>
+> **Both guards run DURING extraction, never as a post-pass**, because the map keeps the first
+> value per artist: a rejected relation must not consume the slot and block a later valid one.
+> Tests pin that reason specifically.
+>
+> **Tests added beyond the plan's three:** `test_every_apple_id_is_bare_numeric` and
+> `test_every_spotify_id_is_22_char_base62`, both over the **whole** map rather than a sample of
+> 50 — a sample cannot see a 42%-of-the-map shape split.
+
+*(Original task text follows.)*
+
+
 **Files:**
 - Create: `builder/src/artistpath_builder/dsp_links.py`
 - Create: `builder/src/artistpath_builder/data/dsp_links_20260905.json` (copied from `L4-T2`)

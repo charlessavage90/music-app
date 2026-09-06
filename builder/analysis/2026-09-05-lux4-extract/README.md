@@ -51,17 +51,17 @@ computed in the script; `pop_raw` in the artifact is a value and never a rank.)
 |---|---|---|---|---|---|
 | top 1% | 589 | 581 | 554 | **98.6%** | 94.1% |
 | 90–99% | 5,295 | 4,955 | 4,382 | **93.6%** | 82.8% |
-| 50–90% | 23,535 | 17,662 | 13,553 | **75.0%** | 57.6% |
-| 10–50% | 23,535 | 14,161 | 9,419 | **60.2%** | 40.0% |
-| bottom 10% | 5,884 | 3,291 | 2,038 | **55.9%** | 34.6% |
-| **SERVED** | **58,838** | **40,650** | **29,946** | **69.1%** | **50.9%** |
+| 50–90% | 23,535 | 17,661 | 13,546 | **75.0%** | 57.6% |
+| 10–50% | 23,535 | 14,155 | 9,406 | **60.1%** | 40.0% |
+| bottom 10% | 5,884 | 3,290 | 2,034 | **55.9%** | 34.6% |
+| **SERVED** | **58,838** | **40,642** | **29,922** | **69.1%** | **50.9%** |
 
 **Read: Spotify is better than Apple in every band, and the gap widens as artists get more
 obscure** — 4.5 points apart in the top 1%, 21.3 points apart in the bottom 10%. Both are
 comfortably above zero everywhere, so the feature is **"both services"**, with a search-URL
 fallback wherever an id is missing (spec §4.1's option A).
 
-Across the whole extraction population: 52,431 Spotify ids and 35,919 Apple ids.
+Across the whole extraction population: 52,421 Spotify ids and 35,888 Apple ids.
 
 ## 3. Fact coverage, per field — informative for `L4-D3`, and NOT a `LUX-E2` read
 
@@ -74,8 +74,8 @@ percentile:
 | `type` | 56,795 | 96.5% | 27,828 | 94.6% |
 | `country` | 52,167 | 88.7% | 24,511 | 83.3% |
 | `area` | 52,173 | 88.7% | 24,513 | 83.3% |
-| `begin` | 37,698 | 64.1% | 15,707 | **53.4%** |
-| `end` / `ended` | 37,833 | 64.3% | 15,787 | 53.7% |
+| `begin` | 37,496 | 63.7% | 15,582 | **53.0%** |
+| `end` / `ended` | 37,631 | 64.0% | 15,662 | 53.2% |
 | **any fact at all** | **57,204** | **97.2%** | **28,122** | **95.6%** |
 
 **⚠ This does NOT discharge `LUX-E2`, and must not be cited as if it did.** `LUX-E2`'s
@@ -84,11 +84,40 @@ over **delivered cards on a sample**, not over the raw population. `LUX-E2` rema
 its damaged `TAS-` sample.
 
 What this *does* support, labelled as inference rather than measurement: **every field clears
-50% in the population's lower half**, the lowest being `begin` at 53.4%. Routing skews famous,
+50% in the population's lower half**, the lowest being `begin` at 53.0%. Routing skews famous,
 so delivered interiors should carry *better* coverage than the population — which makes this a
 conservative floor rather than an optimistic one. On that basis `L4-D3` ("render only what is
 present, no placeholder rows") is not obviously wrong, and the artifact carries the data either
 way, so a designed empty state stays a frontend change and never another rebuild.
+
+## 3a. Three data defects the extraction rejects, and why none is visible to a shape test
+
+**Found by inspecting the extracted values, not by the plan's tests.** The plan's check was
+*an id contains no `http` and no `/`* — **every one of these passes that** and is still wrong.
+All three guards run **during** extraction rather than as a post-pass over the payload, because
+the maps keep the FIRST value per artist: a rejected relation must not consume the slot and
+block a later valid one.
+
+| defect | scale before the guard | what would have shipped |
+|---|---|---|
+| **Apple ids in two shapes** — MusicBrainz records the same artist as `music.apple.com/…/657515` and `itunes.apple.com/…/id657515` | **20,777** bare-numeric vs **15,140** `id`-prefixed | one frontend URL template correct for only 58% of Apple links |
+| **Album and playlist URLs on artist records** — a Spotify *album* id is also 22-char base62, so id shape cannot tell them apart | 27 album + 2 playlist URLs per 200,000 dump records (vs 80,549 artist ones) | a card deep-linking to an album instead of the artist |
+| **Dates with no year** — MusicBrainz partial dates may omit the year: `????-06-05` | **404 artists** | literally `????-06-05` rendered on a card |
+
+Guards, in the order they run: `is_artist_url` (entity kind from the URL path, since both
+services put it there), `normalise_id` (Apple → bare numeric, Spotify → 22-char base62 or
+reject), `clean_date` (no 4-digit year → treated as absent, and a life span with no usable date
+produces no `end`/`ended` pair either).
+
+**Rejected in the final run: 167 Spotify and 47 Apple relations.** The shipped maps now satisfy
+*every* Apple id is bare numeric, *every* Spotify id is 22-char base62, and no date lacks a
+year — asserted over the whole map in `tests/test_dsp_links.py`, not over a sample. A sample of
+50 could not have seen a 42%-of-the-map shape split.
+
+**Process note, recorded because it is the reusable part:** all three were found in one pass
+over the *value distributions* after the first extraction, but each was fixed in its own re-run
+— three passes over a 17 GB dump where one would have done. **Survey the distribution of an
+extracted field before trusting it, and do it once, before the first consumer is written.**
 
 ## 4. ⚠ A LIVE DEFECT, found here and deliberately NOT fixed by `LUX-4`
 
@@ -135,9 +164,9 @@ extracted and what is served.
 
 | payload | entries | sha256 over sorted items |
 |---|---|---|
-| `spotify_ids` | 52,431 | `738e85c3b02da628…` |
-| `apple_ids` | 35,919 | `d6d7a0719d0a8095…` |
-| `artist_facts` | 89,090 | `dbe168f54f5a23f0…` |
+| `spotify_ids` | 52,421 | `e618b286ae93d6b5…` |
+| `apple_ids` | 35,888 | `e33f67d22485c181…` |
+| `artist_facts` | 89,090 | `f55d3369986db8b4…` |
 
 Substrates, each verified by sha before reading: `graph-msw-tu50.bin` (`43dd82bb…`),
 `graph-algb-full.bin` (`d008a2b5…`), `graph-t15-tiebreakfix.bin` (`4cb84ef9…`). Dump: the
