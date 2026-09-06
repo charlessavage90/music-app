@@ -47,6 +47,22 @@ class Graph:
     # `build_graph` positionally, and an empty list makes `serialise` omit the
     # key so their artifacts stay byte-identical.
     fame_lb_raw: list[int | None] = field(default_factory=list)
+    # LUX-4. Streaming deep links and structured MusicBrainz facts, all three
+    # node-indexed and parallel to `mbids` exactly as `deezer_ids` is. The api
+    # indexes them BY NODE ID, so alignment is the whole contract: a rotated
+    # list would show every artist someone else's link and nothing downstream
+    # could detect it.
+    #
+    # Ids are platform id TAILS, never URLs (`L4-D2`) -- a hostname baked into
+    # tens of thousands of entries cannot be changed without a rebuild. Sources
+    # are the frozen snapshots in dsp_links.py and artist_facts.py.
+    #
+    # DEFAULTED for the same two reasons as `deezer_ids` and `fame_lb_raw`
+    # above: frozen probes call `build_graph` positionally, and an empty list
+    # makes `serialise` omit the key so their artifacts stay byte-identical.
+    spotify_ids: list[str] = field(default_factory=list)
+    apple_ids: list[str] = field(default_factory=list)
+    artist_facts: list[dict] = field(default_factory=list)
 
     @property
     def popularity(self) -> list[float]:
@@ -290,6 +306,9 @@ def build_graph(
     edge_type: EdgeType,
     deezer_ids: dict[str, str] | None = None,
     fame_lb_raw: dict[str, int | None] | None = None,
+    spotify_ids: dict[str, str] | None = None,
+    apple_ids: dict[str, str] | None = None,
+    artist_facts: dict[str, dict] | None = None,
 ) -> Graph:
     """Assemble CSR arrays. IDs are assigned in sorted-MBID order.
 
@@ -297,7 +316,8 @@ def build_graph(
     `measure_headroom.py:151` are frozen and call this with three positional
     arguments. Omitting it yields an empty list, which `serialise` then omits
     from the metadata blob, so those probes' artifacts stay byte-identical.
-    `fame_lb_raw` is keyword-optional for exactly the same reasons.
+    `fame_lb_raw` is keyword-optional for exactly the same reasons, as are
+    LUX-4's `spotify_ids`, `apple_ids` and `artist_facts`.
 
     `fame_lb_raw` maps mbid -> listener count or None. It is passed as a dict
     and indexed here rather than pre-ordered by the caller, because node ids
@@ -348,5 +368,14 @@ def build_graph(
         # this population) and must not be silently discarded as "empty".
         fame_lb_raw=(
             [fame_lb_raw.get(m) for m in mbids] if fame_lb_raw is not None else []
+        ),
+        # LUX-4, projected here rather than by the caller for the reason this
+        # function's docstring gives for `fame_lb_raw`: node ids are assigned
+        # in THIS function, so a caller pre-ordering the list would be
+        # re-deriving `sorted(...)` and could silently disagree with it.
+        spotify_ids=[spotify_ids.get(m, "") for m in mbids] if spotify_ids else [],
+        apple_ids=[apple_ids.get(m, "") for m in mbids] if apple_ids else [],
+        artist_facts=(
+            [artist_facts.get(m, {}) for m in mbids] if artist_facts else []
         ),
     )

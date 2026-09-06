@@ -143,3 +143,92 @@ def test_a_new_config_field_forces_a_mirror_check():
         "figures, era-pinning them if not:\n  "
         + "\n  ".join(ERA_PINNED_CALLERS)
     )
+
+
+# --- The other half of the gap: metadata added with NO config knob ----------
+#
+# This module's docstring says the guard above "is deliberately not complete: a
+# stage added with no config knob would still slip past". That is not
+# hypothetical -- `deezer_ids` (2026-08-02) and `fame_lb` (2026-08-05) both went
+# in that way and neither appears anywhere above, so no per-mirror decision was
+# ever recorded for them. `LUX-4` is the same shape: three metadata keys, no
+# `BuilderConfig` field, `RECORDED_FIELDS` unchanged, every test green.
+#
+# A metadata key added to `serialise` DOES change what the ERA_PINNED_CALLERS
+# build, because all three call `build_from_archive` and it wires these
+# unconditionally. It cannot change an edge, a score or a node -- so it is never
+# a path-quality question -- but it does change a sha, which is what those
+# probes' reproduction claims rest on.
+#
+# Pinning the emitted key set is the mechanical half of THAT gap.
+
+RECORDED_METADATA_KEYS = frozenset(
+    {
+        # Always written.
+        "mbids",
+        "names",
+        "disambiguations",
+        "popularity",
+        # Additive, omitted when empty. Each changed what the era-pinned
+        # callers produce on the day it landed.
+        "deezer_ids",  # 2026-08-02, BYP-13. Unrecorded at the time.
+        "fame_lb",  # 2026-08-05, MSW-. Unrecorded at the time.
+        # LUX-4, 2026-09-06. Per-mirror decision AT THIS DATE: all three
+        # PIPELINE_MIRRORS stay frozen -- they reimplement the stage order and
+        # do not call `build_from_archive`, so they emit none of these keys and
+        # reproduce their committed output unchanged. All three
+        # ERA_PINNED_CALLERS *do* call it and so now emit three more keys than
+        # when their figures were committed; that is the same condition
+        # `deezer_ids` and `fame_lb` already put them in, and it is accepted
+        # rather than newly introduced here. No knob is added, for the reason
+        # recorded at the deezer_ids call site: these change no edge, no score
+        # and no node, so there is nothing for a factor table to hold constant.
+        "spotify_ids",
+        "apple_ids",
+        "artist_facts",
+    }
+)
+
+
+def test_a_new_metadata_key_forces_a_mirror_check():
+    """The half `test_a_new_config_field_forces_a_mirror_check` cannot see.
+
+    Builds a graph with every optional map populated, so the emitted key set is
+    the FULL set `serialise` can produce rather than whatever this fixture
+    happens to trigger.
+    """
+    import json
+    import struct
+
+    from artistpath_builder.artifact import serialise
+    from artistpath_builder.graph import build_graph
+    from artistpath_builder.models import ArtistStats, EdgeType
+
+    a, b = "a" * 36, "b" * 36
+    graph = build_graph(
+        {a: {b: 1.0}, b: {a: 1.0}},
+        [
+            ArtistStats(mbid=a, name="A", pop_indegree_scaled=2, listen_count=2),
+            ArtistStats(mbid=b, name="B", pop_indegree_scaled=1, listen_count=1),
+        ],
+        EdgeType.BEHAVIOURAL,
+        deezer_ids={a: "1"},
+        fame_lb_raw={a: 5, b: None},
+        spotify_ids={a: "s" * 22},
+        apple_ids={a: "123"},
+        artist_facts={a: {"type": "Group"}},
+    )
+    payload = serialise(graph)
+    *_, meta_len = struct.Struct("<4sIIIQ").unpack_from(payload)
+    emitted = set(json.loads(payload[len(payload) - meta_len :].decode("utf-8")))
+
+    added = sorted(emitted - RECORDED_METADATA_KEYS)
+    removed = sorted(RECORDED_METADATA_KEYS - emitted)
+    assert emitted == RECORDED_METADATA_KEYS, (
+        f"serialise's metadata keys changed (added: {added}, removed: {removed}).\n"
+        "A new key changes the sha every ERA_PINNED_CALLER produces, because "
+        "each calls build_from_archive:\n  " + "\n  ".join(ERA_PINNED_CALLERS)
+        + "\nIt cannot change an edge, a score or a node, so it is never a "
+        "path-quality question. Record the per-mirror decision above before "
+        "updating RECORDED_METADATA_KEYS."
+    )

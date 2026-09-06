@@ -72,6 +72,28 @@ def serialise(graph: Graph) -> bytes:
     if graph.fame_lb_raw:
         meta["fame_lb"] = graph.fame_lb_raw
 
+    # LUX-4. SAME additive-key discipline as deezer_ids and fame_lb above and
+    # for the same two reasons: FORMAT_VERSION stays 1 because both parsers
+    # check it for strict equality, and the keys are omitted when empty so
+    # every artifact built before LUX-4 -- including the frozen probe mirrors
+    # whose shas Track B's identity gate pins -- stays byte-identical.
+    #
+    # These are WIRE KEYS and permanent: the api reads them by these exact
+    # strings, and renaming one invalidates every artifact carrying it.
+    # Values are platform id TAILS, never URLs (`L4-D2`).
+    #
+    # ⚠ `any(...)`, NOT truthiness of the list, and the difference is the whole
+    # guard. Once the pipeline runs these lists are node-indexed and therefore
+    # NEVER empty -- they are full of "" and {} when nothing was extracted, and
+    # `if graph.spotify_ids:` is true for such a list. That would write the key
+    # unconditionally and change the bytes of every artifact with no links.
+    if any(graph.spotify_ids):
+        meta["spotify_ids"] = graph.spotify_ids
+    if any(graph.apple_ids):
+        meta["apple_ids"] = graph.apple_ids
+    if any(graph.artist_facts):
+        meta["artist_facts"] = graph.artist_facts
+
     metadata = json.dumps(
         meta,
         sort_keys=True,
@@ -149,4 +171,12 @@ def deserialise(payload: bytes) -> Graph:
         # ramp, which the api turns into a refusal to boot ONLY if the ramp is
         # actually switched on.
         fame_lb_raw=metadata.get("fame_lb", []),
+        # LUX-4, read with `.get` for the same reason as the two above: the
+        # keys are additive and FORMAT_VERSION was not bumped, so every
+        # artifact built before today lacks all three -- including the served
+        # one. Absence means "no link recorded", which the api renders as a
+        # search fallback and an omitted info row.
+        spotify_ids=metadata.get("spotify_ids", []),
+        apple_ids=metadata.get("apple_ids", []),
+        artist_facts=metadata.get("artist_facts", []),
     )
