@@ -105,7 +105,10 @@ id path exists to close.
 `deezer_ids` key, which would break `L4-T7`'s control arm — the arm whose entire job is to
 prove `LUX-4` touches nothing that already existed. It is a **metadata-only** fix, so it does
 not need a listening test or acceptance gates, but it does need its own rebuild and its own
-control. **The owner's call, and its own track.**
+control. **It is a session's to do, not a decision to put to the owner** — the fix is obvious,
+the sequencing is methodology, and the only part that ever reaches him is the deploy, which is
+hands rather than a judgement. *(Corrected 2026-09-06: this read "the owner's call, and its own
+track", which is the flag-instead-of-a-state failure the condition below exists to close.)*
 
 **Deferred, with a success condition — not merely flagged.** *Condition: the first rebuild
 after `LUX-4` merges.* At that point the control arm has served its purpose and a changed
