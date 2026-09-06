@@ -172,6 +172,31 @@ reasoning, not narration.
 
 ## Task `L4-T1`: unblock the rebuild — the acceptance bounds
 
+**✅ DONE 2026-09-05. Option A, taken by the session — see the correction below.**
+
+**⚠ THE OWNER OVERRULED THE ESCALATION ITSELF, and the rule he set is worth carrying:**
+moving a bound so a **new, never-served** artifact can be adopted is risk acceptance and his
+(that is what `MSW-` `4b55144` and `CXA-` `c4cfbb1` both were). Moving one to re-admit the
+artifact **already in production** is bookkeeping and a session's. The mechanical test: *is
+the new bound derived from something known independently of the build that went red?*
+
+**⚠ AND THIS TASK NAMED THE WRONG COMMIT — corrected, because the record must not carry it.**
+It said to read the band from `3aa61f0b`. That is the band of the **retired 75k map**
+(`node_count=(60_000, 90_000)`, `edge_count=(700_000, 1_100_000)`) and it **rejects the served
+map on BOTH bounds** — 58,838 < 60,000 and 1,315,684 > 1,100,000. Following it literally
+leaves the rebuild still refused. The band that admitted `graph-msw-tu50.bin` is at
+**`4b55144`** (`MSW-` Task 9, ten minutes later): `node_count=(47_000, 71_000)`,
+`edge_count=(1_050_000, 1_580_000)`. The trap: the live artifact's manifest records
+`git_commit: 3aa61f0b`, because the build ran at that commit and the bounds moved right after
+it. **This is why the escalation was not the safeguard — the figure put to the owner was
+wrong, and approving it would not have caught that.** Arithmetic against the manifest did.
+
+**Also corrected: BOTH bounds moved, not just the artist count** the error message named. The
+`CXA-` edge band admitted `JFX-B` (1,618,164) — the adoption the owner's listening test
+rejected — so restoring only the node bound would have left the reverted artifact admissible.
+
+*(Original task text follows, for the record.)*
+
 **⚠ THIS TASK CONTAINS AN OWNER DECISION AND STOPS FOR IT.** Do not pick an option yourself.
 
 **Files:**
@@ -203,11 +228,12 @@ what it *contains*.
 **Option A — recalibrate the bounds to the served population.** Restores the pre-expansion
 state, consistent with the revert; makes the default path correct for every future build.
 Change `PRODUCTION_ACCEPTANCE`'s artist-count bound back to the band that admitted
-`graph-msw-tu50.bin`, taken from the pre-`c4cfbb1` value at commit `3aa61f0b` — **read it from
-git, never invent a band**:
+`graph-msw-tu50.bin`, taken from the pre-`c4cfbb1` value at commit **`4b55144`** — **read it from
+git, never invent a band**. *(This originally read `3aa61f0b`; see the correction at the head
+of this task.)*
 
 ```bash
-git show 3aa61f0b:builder/src/artistpath_builder/acceptance.py | grep -n -A 6 "PRODUCTION_ACCEPTANCE"
+git show 4b55144:builder/src/artistpath_builder/acceptance.py | grep -n -A 8 "PRODUCTION_ACCEPTANCE"
 ```
 
 **Option B — wire the `--criteria` hook the CLI lacks.** `cmd_build` already reads
