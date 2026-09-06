@@ -162,6 +162,17 @@ extracted and what is served.
 
 ## 5. Identity
 
+**⚠ The two extraction payloads (`dsp_links.json`, `artist_facts.json`) are NOT COMMITTED** —
+owner's decision, 2026-09-06, recorded in this directory's `.gitignore` with its cost. They are
+~14 MB carrying nothing unique: their maps are byte-identical to the shipped package data under
+`src/artistpath_builder/data/`, and every figure derived from them is reproduced above.
+
+**So this table is the record, not a convenience.** To check that a future re-extraction
+reproduces this one, compare against these shas — the files themselves will not be in a fresh
+clone, and cannot be rebuilt there, because the 17 GB dump is gitignored and is a rotating
+snapshot. What survives is the package data, which is what the builder actually reads.
+
+
 | payload | entries | sha256 over sorted items |
 |---|---|---|
 | `spotify_ids` | 52,421 | `e618b286ae93d6b5…` |

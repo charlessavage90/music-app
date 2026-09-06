@@ -1,0 +1,21 @@
+# The two extraction payloads are NOT committed. Owner's decision, 2026-09-06.
+#
+# They are ~14 MB and carry nothing unique: their maps are byte-identical to the
+# shipped package data in src/artistpath_builder/data/, and every figure derived
+# from them -- coverage by band, per-field fact coverage, rejection counts -- is
+# reproduced in README.md, which owns those figures.
+#
+# WHAT THIS COSTS, stated rather than discovered later. Regenerating them needs
+# lux4_extract.py AND the 17 GB MusicBrainz dump, which is itself gitignored and
+# is a rotating snapshot -- the 2026-07-29 export will not be fetchable forever.
+# So on a fresh clone these cannot be rebuilt, and make_package_data.py cannot
+# run. That is acceptable only because its OUTPUT is committed and is what the
+# builder actually reads; the irreplaceable content is preserved there.
+#
+# To verify a future re-extraction reproduces this one, compare against the three
+# shas in README.md section 5 rather than against these files.
+dsp_links.json
+artist_facts.json
+
+*.log
+__pycache__/
