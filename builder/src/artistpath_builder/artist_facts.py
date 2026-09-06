@@ -32,10 +32,10 @@ artifacts, never re-resolved at build time (`build_from_archive` is offline by
 a hard rule; spec section 9 requires byte-identical output for identical
 input). Before a DIFFERENT artifact is served, re-extract over its population.
 
-Coverage, cited never restated -- 97.2% of served artists carry at least one
-fact, and every individual field clears 50% in the lower half of the map by
-popularity percentile. Figures owner:
-builder/analysis/2026-09-05-lux4-extract/README.md section 3. That section is
+Coverage is measured and owned by
+builder/analysis/2026-09-05-lux4-extract/README.md section 3 -- read it there.
+That section is NOT a `LUX-E2` read: `LUX-E2`'s threshold is stated over
+delivered cards on a sample, and it remains blocked. That section is
 NOT a `LUX-E2` read: `LUX-E2`'s threshold is stated over delivered cards on a
 sample, and it remains blocked.
 """

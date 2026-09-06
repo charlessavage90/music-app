@@ -1,6 +1,13 @@
 # Handoff — `LUX-E4` closed, `LUX-E1` run, and `LUX-4` planned, 2026-09-05
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions — no longer the current handoff.** Succeeded by
+[`2026-09-06-HANDOFF-lux-4-artifact.md`](2026-09-06-HANDOFF-lux-4-artifact.md), **on next
+actions only**: everything below about `LUX-E4`, `LUX-E1` and the three `CXA-` leftovers still
+stands as written, and its "claims an editor must NOT revert" list is still binding **with one
+exception — "the rebuild is ~40 s" is OVERTURNED.** Two rebuilds on 2026-09-06 took 297 s and
+616 s on the same archive; budget ten minutes. The rest of that list stands. What it
+no longer owns is what to do next — `L4-T1`'s owner decision was taken, and two of the three
+leftovers are cleared. Supersedes
 [`2026-09-05-HANDOFF-doc-layer.md`](2026-09-05-HANDOFF-doc-layer.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

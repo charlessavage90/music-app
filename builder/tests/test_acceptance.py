@@ -350,12 +350,27 @@ def test_the_served_artifact_passes_its_own_acceptance_gate():
     check_acceptance(_graph_at_scale(*SERVED_MAP), PRODUCTION_ACCEPTANCE)
 
 
+# ⚠ Each of the three real artifacts below fails the EDGE bound as well as the
+# node bound, so on their own they cannot tell whether the node bound does
+# anything at all. Found by mutation testing at closeout (B3): widening
+# node_count to (1_000, 200_000) -- which admits every artifact ever built here,
+# including the one the owner's listening test rejected -- left this test GREEN.
+# The two synthetic rows isolate each bound by putting the OTHER count safely
+# inside its band, and they are what makes this test non-vacuous.
+NODE_FLOOR_ONLY = (40_000, 1_300_000)   # a fifth of the graph lost; edges fine
+NODE_CEILING_ONLY = (80_000, 1_300_000)  # a bigger population; edges fine
+EDGE_FLOOR_ONLY = (58_838, 900_000)      # the cap-rule revert signature
+
+
 @pytest.mark.parametrize(
     "label, counts",
     [
         ("JFX-B, the reverted CXA- adoption", JFX_B),
         ("the retired pre-MSW mutual-kNN map", RETIRED_MUTUAL_KNN),
         ("mutual-kNN of the extended archive", EXTENDED_MUTUAL_KNN),
+        ("a build that silently lost a fifth of the graph", NODE_FLOOR_ONLY),
+        ("a build over the node ceiling", NODE_CEILING_ONLY),
+        ("a cap-rule revert at the served node count", EDGE_FLOOR_ONLY),
     ],
 )
 def test_bounds_reject_every_artifact_that_is_not_the_served_map(label, counts):
