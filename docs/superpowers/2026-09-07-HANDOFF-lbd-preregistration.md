@@ -112,6 +112,29 @@ by `user_id`, so only the final cross-user `SUM` needs re-summing after a union 
    pathspec commits, and touched `docs/README.md` with two inserted rows and two appended
    clauses rather than any rewrite, so it reconciles in either merge order.
 
+## ⚠ One adjacency the next session must check before relying on `LBD-X1`
+
+**Another session was working on the degree ceiling while this one ran**, on branch
+`dcf-degree-ceiling-falsifier` under its own `DCF-` identifier series. As of this handoff that
+work is **not on `main`** and this session **deliberately did not read it** — a second opinion
+that has absorbed another session's working notes is not independent, and `LBD-X1` was written
+from the committed record only.
+
+**Why it matters here.** `LBD-X1` states that the ceiling's effect on the `CXR` added set is
+**genuinely unmeasured**, because both Track B sweeps predate the crawl extension. That is true
+of the committed record as of 2026-09-07. **If `DCF-` lands and measures that set, the claim
+goes stale**, and the pre-registration would be citing an absence that no longer exists.
+
+**The check, and it is cheap:** before executing Task 3, `git log origin/main` for `DCF-`. If it
+has landed, read what it establishes about the added set's degree and **record whether `LBD-X1`
+needs an amendment** — dated, with its reasoning, never an edit to the values. Nothing else in
+this pre-registration depends on it: `LBD-X1`'s operative consequence is the **bar** on reading
+a graph-level null as supporting the track's central risk, and that bar rests on the ceiling
+being an active term, which no measurement of its size would remove.
+
+**Do not treat this as a reason to pause.** The two tracks are independent by design §9, which
+puts any cap-rule or ceiling change outside `LBD-` entirely.
+
 ## Deferred, with conditions
 
 | item | condition |
