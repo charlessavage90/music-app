@@ -1,9 +1,17 @@
 # Handoff — `LUX-4` through the artifact, 2026-09-06
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ACTIVE — this is the CURRENT handoff FOR THE `LUX-4` TRACK.** Nothing supersedes it.
+Supersedes
 [`2026-09-05-HANDOFF-lux-e1-and-lux-4-plan.md`](2026-09-05-HANDOFF-lux-e1-and-lux-4-plan.md)
 on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.
+
+⚠ **A SECOND track went live 2026-09-07 and has its own current handoff** —
+[`2026-09-07-HANDOFF-lbd-preregistration.md`](2026-09-07-HANDOFF-lbd-preregistration.md) for
+`LBD-`. **Neither supersedes the other** and neither blocks the other. A reader who wants
+"the" next action wants [`NEXT.md`](NEXT.md), which sequences both. *(Track qualifier added
+2026-09-07: this line read "the CURRENT handoff" unqualified, which was true when written and
+became ambiguous the moment a second track opened.)*
 
 **A SEAM handoff, and the seam the plan chose at authoring time** (`L4-T7`, "the artifact
 exists, is verified, and its identity is committed"). Everything downstream reads a finished

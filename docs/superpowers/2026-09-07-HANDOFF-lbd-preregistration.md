@@ -145,6 +145,42 @@ puts any cap-rule or ceiling change outside `LBD-` entirely.
 | `LBD-C3`'s revisit threshold resting on no measurement | **Discharged at the full pass**, which produces the first real figure. `LBD-G3`'s 12 h bound is a working-session choice and is labelled as one |
 | **The Snyk scan did not run on the three new scripts** — credentials are expired (`401`, and the stored config holds an OAuth entry with no API token) | **Discharged when the owner runs `snyk auth`** and a session re-scans `builder/analysis/2026-09-07-lbd-inputs/`. **His hands, not a decision** — it opens a browser. Reviewed by hand meanwhile and reported honestly rather than as clean: read-only analysis scripts, no runtime network calls, no `eval`, `subprocess.run` with a fixed argument list and no shell, and the only externally-sourced values (the pinned MBID list) go in through `executemany` parameters rather than string interpolation. That is a hand review, **not** a substitute for the scan |
 
+## Closeout record
+
+Maintenance tier plus the code checks that applied. **Evidence, not assertions:**
+
+| check | outcome |
+|---|---|
+| `scripts/docs-lint.sh` | **1 hard failure, fixed, then `hard checks passed`.** The failure was this session's own: the new handoff had no row in `docs/README.md`. 150 restated-figure *candidates* remain, all pre-existing in older pre-registrations and none from this diff |
+| `doc-auditor`, scoped to the diff | **One LOW finding, fixed.** The `LUX-4` handoff's role line claimed "the CURRENT handoff" unqualified while a second track had opened. Its §10 amendment-register check came back clean on all ten claimed amendments, and the figures-ownership check clean |
+| builder suite | **286 passed.** `testpaths = ["tests"]`, so `builder/analysis/` is not collected and these scripts cannot affect it |
+| api suite | **275 passed** (one pre-existing Starlette deprecation warning) |
+| frontend suite | **not run — nothing under `frontend/` changed**, and design §10 puts it out of scope |
+| reachability | the three scripts are standalone frozen harnesses run directly, the `builder/analysis/` precedent; nothing in `builder/src`, `api/src` or `frontend/src` imports them, and each is named in the inputs README |
+| prose-versus-code | the minimum-listener constant computes to 4 as its comment claims, and the checksum guard does raise before `GraphStore.load`. One docstring was **wrong and was corrected**: it described `artist` as 17 columns |
+| `.claude/` sweep | says nothing about this track; no description went stale |
+| **D6 unconditional layer** | **51,694 characters — delta ZERO.** `CLAUDE.md`, `~/.claude/CLAUDE.md`, `MEMORY.md` and every skill/agent `description:` are untouched by this branch |
+| **D6 conditional layer** | **2,551 lines — delta ZERO.** No skill body, agent body or memory file changed |
+| ports 8000 / 5173 | **no listener on either.** Nothing was started, nothing left running, and nothing queued needs one |
+
+**Inapplicable, stated rather than skipped silently:** no config knob was added, so there is
+no default to flip; no test was added, so there is no vacuous-test check — the scripts'
+positive control is that the added set reproduces `CXR-P2`'s split exactly, and the inputs
+README says a failure to reproduce means a broken environment rather than a finding. No
+artifact changed, so the committed fixtures are unaffected. Provenance for what cannot be
+committed is in the inputs README: every produced parquet and pinned MBID list carries a
+sha256, and both graph artifacts were verified against their manifest sidecars before reading.
+
+**Nothing was queued in `TEST-QUEUE.md`, deliberately.** This session changed nothing the owner
+can press. Its one live entry is unchanged and still waits on a deploy.
+
+**One pre-existing map defect found and NOT fixed, reported instead.** Four August handoff rows
+in `docs/README.md` still read "ACTIVE — the CURRENT handoff": `2026-08-05-HANDOFF-ulf-filter-fix`,
+`2026-08-06-HANDOFF-clip-cover-art`, `2026-08-06-HANDOFF-cocredit-investigation` and
+`2026-08-05-HANDOFF-cau-scoring`. **Want of evidence, not of authority** — none of those files
+carries a successor pointer in its own role line, so correcting each needs a chain trace across
+a month of handoffs, which is outside this diff's scope and is a judgement call per row.
+
 ## Nothing is in flight
 
 No background jobs left running, no dispatched subagents, no half-written directories. Ports
