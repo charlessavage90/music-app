@@ -372,13 +372,36 @@ def restored_edge_composition(
     }
 
 
-def run_arm(ceiling: int, added: list[str], pre_existing: list[str]) -> dict:
-    """Build one arm through the SHIPPED build_from_archive and measure it."""
+def run_arm(ceiling: int, added: list[str], pre_existing: list[str],
+            ulf_path: Path | None = None) -> dict:
+    """Build one arm through the SHIPPED build_from_archive and measure it.
+
+    `ulf_path` selects the BRIDGE configuration and is None for the primary
+    sweep. Why it exists, since a reader will otherwise read the two sets of
+    arms as inconsistent:
+
+    `graph-cxa-adopted.bin`'s manifest records `drop_unlistenable: true` over
+    THIS archive, which at HEAD is impossible — the shipped ALG-B census covers
+    75,000 artists and the extended archive holds 117,302, so the ULC-F1 guard
+    refuses on 42,302 uncensused ones. It was possible at the commit that
+    artifact records (`7404a4c`, "ship the re-censused payload and repoint the
+    ALG-B default"); `4b4a0a6` (`L4-T1`) repointed the default BACK to the
+    75,000-artist list. The re-censused payload is still in package data.
+
+    So: the PRIMARY arms run `drop_unlistenable=False`, which is not merely a
+    choice but the only thing HEAD's default permits — and their population is
+    larger than the CXA artifact's, which is why `CXR-P2`'s absolute figures are
+    NOT their reference. The BRIDGE arms pass that payload through the shipped
+    per-invocation override, reproducing the CXA population so the control lands
+    on `CXR-P2`'s own ruler. The override does not bypass the population check:
+    an overridden payload still has to vouch for its own identity.
+    """
     config = BuilderConfig(
         algorithm=CANDIDATE_ALGORITHM,  # ALG-B — the extended archive's lineage
         union_degree_ceiling=ceiling,  # THE ONE COLUMN THAT VARIES
         require_fame=False,
-        drop_unlistenable=False,
+        drop_unlistenable=ulf_path is not None,
+        unlistenable_list_path=ulf_path,
     )
     source = ListenBrainzSource(config)
     archive = ReadOnlyArchive(LocalArchive(ARCHIVE))
@@ -442,6 +465,12 @@ def main() -> int:
         help="union_degree_ceiling values to build; 50 is the shipped control",
     )
     parser.add_argument("--out", default=str(HERE / "dcf_results.json"))
+    parser.add_argument(
+        "--unlistenable-list-path", default=None,
+        help="BRIDGE arms only: a censused ULF- payload for this archive's own "
+             "population, applied through the shipped per-invocation override. "
+             "Omit for the primary sweep.",
+    )
     args = parser.parse_args()
 
     if 50 not in args.ceilings:
@@ -452,6 +481,7 @@ def main() -> int:
         )
 
     added, pre_existing, identity = population_split()
+    ulf_path = Path(args.unlistenable_list_path) if args.unlistenable_list_path else None
     out = Path(args.out)
 
     results = {
@@ -480,7 +510,7 @@ def main() -> int:
     ordered = [50] + [c for c in sorted(args.ceilings) if c != 50]
     for ceiling in ordered:
         print(f"\n=== arm: union_degree_ceiling={ceiling} ===", flush=True)
-        arm, state = run_arm(ceiling, added, pre_existing)
+        arm, state = run_arm(ceiling, added, pre_existing, ulf_path)
         if ceiling == 50:
             control_state = state
         else:

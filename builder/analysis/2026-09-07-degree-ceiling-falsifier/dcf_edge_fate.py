@@ -319,10 +319,22 @@ def main() -> int:
     for mbid in served.mbids:
         band_artists[band_of(pctl_of[mbid])] += 1
 
-    # Cross-tab: for an edge that dies at the top-j cut, what band is the OTHER
-    # end in? This is the half that says whether mid-fame artists lose links to
-    # their own band.
-    topj_death_crosstab = {i: defaultdict(int) for i in range(10)}
+    # Cross-tab: what band is the OTHER end in? Computed for EVERY fate, not
+    # just top-j deaths, because the deaths alone cannot be read.
+    #
+    # ⚠ THE CONTROL THIS EXISTS TO SUPPLY. The top fame band holds a large share
+    # of all edges, so "most top-j deaths point at the famous" is what a base
+    # rate looks like as well as what a finding looks like. Only the death
+    # crosstab AGAINST the archive crosstab separates them: the quantity to read
+    # is ENRICHMENT — the share of a band's top-j deaths pointing at column c,
+    # divided by the share of that band's archive edges pointing at column c.
+    # 1.0 means the cut is indifferent to the other end; > 1 means it selects
+    # against that column.
+    crosstabs = {
+        fate: {i: defaultdict(int) for i in range(10)}
+        for fate in ("archive", "died_at_the_topj_cut",
+                     "died_at_the_degree_trim", "survived")
+    }
     OTHER_UNSERVED = "not-in-served-map"
 
     for a, b in archive_pairs:
@@ -343,12 +355,13 @@ def main() -> int:
             i = band_of(pctl_of[end])
             rows[i]["archive_edges"] += 1
             rows[i][fate] += 1
-            if fate == "died_at_the_topj_cut":
-                key = (
-                    band_label(band_of(pctl_of[other]))
-                    if other in served_set else OTHER_UNSERVED
-                )
-                topj_death_crosstab[i][key] += 1
+            key = (
+                band_label(band_of(pctl_of[other]))
+                if other in served_set else OTHER_UNSERVED
+            )
+            crosstabs["archive"][i][key] += 1
+            if fate in crosstabs:
+                crosstabs[fate][i][key] += 1
 
     table = []
     for i in range(10):
@@ -372,10 +385,21 @@ def main() -> int:
             "survived_per_artist": round(r["survived"] / n, 2) if n else 0.0,
         })
 
-    crosstab = {
-        band_label(i): dict(sorted(topj_death_crosstab[i].items()))
-        for i in range(10)
-    }
+    def as_dict(tab):
+        return {band_label(i): dict(sorted(tab[i].items())) for i in range(10)}
+
+    # Enrichment of top-j deaths over the archive base rate, per (row, column).
+    enrichment = {}
+    for i in range(10):
+        arch, dead = crosstabs["archive"][i], crosstabs["died_at_the_topj_cut"][i]
+        arch_total, dead_total = sum(arch.values()), sum(dead.values())
+        if not arch_total or not dead_total:
+            continue
+        enrichment[band_label(i)] = {
+            col: round((dead.get(col, 0) / dead_total) / (arch[col] / arch_total), 3)
+            for col in sorted(arch)
+            if arch[col]
+        }
 
     out = {
         "probe": "DCF- edge fate — which cap step kills an edge, by fame band",
@@ -395,7 +419,10 @@ def main() -> int:
                     "two ends, in that end's band. Band totals are therefore "
                     "double the pair counts above.",
         "by_fame_band": table,
-        "topj_deaths_by_band_of_the_other_end": crosstab,
+        "by_band_of_the_other_end": {
+            fate: as_dict(tab) for fate, tab in crosstabs.items()
+        },
+        "topj_death_enrichment_over_the_archive_base_rate": enrichment,
         "elapsed_seconds": round(time.monotonic() - started, 1),
     }
     (HERE / "dcf_edge_fate.json").write_text(
