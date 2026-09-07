@@ -95,7 +95,8 @@ of `LUX-4`: blocks nothing above and nothing above blocks it. Branch `lb-dump-ex
 **PR #106**. Governing document
 [`specs/2026-09-06-own-similarity-design.md`](specs/2026-09-06-own-similarity-design.md);
 plan [`plans/2026-09-06-lb-dump-exploration.md`](plans/2026-09-06-lb-dump-exploration.md),
-**unstarted, and REVIEWED 2026-09-06 — the verdict is NOT EXECUTABLE AS WRITTEN**
+**Tasks 1 and 2 DONE 2026-09-07; REVIEWED 2026-09-06 — the verdict on the plan as written was
+NOT EXECUTABLE**
 ([`findings/2026-09-06-lbd-plan-review.md`](findings/2026-09-06-lbd-plan-review.md); figures in
 `builder/analysis/2026-09-06-lbd-plan-review/`). Two independent reviews converged on one
 blocker: **every arm refuses to build, including the baseline**, and it would surface only
@@ -106,9 +107,26 @@ the added artists is attributable to **our own degree ceiling** rather than to m
 data, which is what `LBD-` set out to test. Nothing waits on it. Why the July finding that
 "the dumps carry no MBIDs" does not block it is in
 [`findings/2026-09-06-lb-dump-route-assessment.md`](findings/2026-09-06-lb-dump-route-assessment.md).
-**One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to
-`D:\unsung-large-data\`. **What it does not reopen:** the fame-currency rulings, the `ALG-B`
+~~**One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to
+`D:\unsung-large-data\`.~~ **DISCHARGED — the dump is on disk and pinned** (with one caveat
+on its identity that the inputs README states). **What it does not reopen:** the fame-currency rulings, the `ALG-B`
 lineage, `DD-F1`, or the router-side `CXR` fixes — each stays its own track (design §9).
+
+**`LBD-` Tasks 1 and 2 landed 2026-09-07 — branch `lb-dump-exploration`, PR #109 (draft), and
+this is a SEAM.** The **pre-registration is committed and now GOVERNS the track's criteria,
+arms, gates and reads**:
+[`specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md`](specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md).
+It carries every correction the review owed it, and **its §10 is the register of the six
+amendments it makes to the design and the four to the plan** — including that **the owner stop
+moves earlier**, to the end of Task 4, because the pair-table supply read answers the track's
+central risk with no graph built. **Neither the design nor the plan is edited**; do not "fix"
+either in place. Next task is **Task 3**. Entry point: the handoff
+[`2026-09-07-HANDOFF-lbd-preregistration.md`](2026-09-07-HANDOFF-lbd-preregistration.md);
+inputs and their figures:
+[`builder/analysis/2026-09-07-lbd-inputs/README.md`](../../builder/analysis/2026-09-07-lbd-inputs/README.md),
+cited never restated. **This adds nothing to the owner's list above** — one item is his and it
+is a tool, not a decision: **the Snyk credentials have expired**, so the new scripts were not
+scanned and `snyk auth` needs his browser.
 
 **⚠ The `LUX-4` plan was wrong about the repository four times**, each caught by grepping
 rather than by careful reading, and each carries a correction block at its task head. **Treat

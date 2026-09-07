@@ -22,7 +22,11 @@ COLUMN ORDER IS NOT GUESSED. The TSVs have no header; the order is read from
 checked against the dump's own SCHEMA_SEQUENCE. Verified 2026-09-07:
 
   artist             id, gid, name, sort_name, begin_date_{y,m,d}, end_date_{y,m,d},
-                     type, area, gender, comment (14th), edits_pending, last_updated, ended
+                     type, area, gender, comment (14th), edits_pending, last_updated,
+                     ended, begin_area, end_area          -- NINETEEN columns
+                     ^ the last two follow an INLINE CHECK CONSTRAINT in the DDL, so a
+                       reader who stops at the first constraint counts 17 and the parse
+                       fails. It failed here first, which is the cheap way to find out.
   artist_credit      id, name, artist_count, ref_count, created, edits_pending, gid
   artist_credit_name artist_credit, position, artist, name, join_phrase
   recording          id, gid, name, artist_credit, length, comment, edits_pending,
@@ -91,12 +95,28 @@ def extract() -> None:
         return
     print(f"extracting {len(WANTED)} tables from the tarball (bzip2, single-threaded)")
     t = time.time()
-    subprocess.run(
-        ["tar", "-xjf", str(TARBALL), "-C", str(MB_DIR), "mbdump/SCHEMA_SEQUENCE",
-         "mbdump/TIMESTAMP", *WANTED],
-        check=True,
-    )
+    subprocess.run(["tar", "-xjf", str(TARBALL), "-C", str(MB_DIR), *WANTED], check=True)
     print(f"  extracted in {(time.time()-t)/60:.1f} min")
+
+
+def dump_metadata() -> dict:
+    """`SCHEMA_SEQUENCE` and `TIMESTAMP`, wherever the archive puts them.
+
+    They are NOT under `mbdump/` -- measured 2026-09-07, and the plan assumed they
+    were. Best-effort and deliberately non-fatal: the four tables are the inputs, and
+    the schema sequence is corroboration for the column order that was already read
+    from MusicBrainz's own CreateTables.sql.
+    """
+    out = {}
+    for name in ("SCHEMA_SEQUENCE", "TIMESTAMP"):
+        found = None
+        for candidate in (MB_DIR / name, MB_DIR / "mbdump" / name):
+            if candidate.exists():
+                found = candidate.read_text().strip()
+                break
+        out[name] = found
+        print(f"  mbdump {name:<16} {found if found else 'NOT EXTRACTED (see README)'}")
+    return out
 
 
 def tsv(name: str, cols: list[tuple[str, str]]) -> str:
@@ -155,7 +175,8 @@ def build_frames(con: duckdb.DuckDBPyConnection) -> dict:
                                    ('end_d','BIGINT'),('type','BIGINT'),('area','BIGINT'),
                                    ('gender','BIGINT'),('comment','VARCHAR'),
                                    ('edits_pending','BIGINT'),('last_updated','VARCHAR'),
-                                   ('ended','VARCHAR')])} a
+                                   ('ended','VARCHAR'),('begin_area','BIGINT'),
+                                   ('end_area','BIGINT')])} a
                 ON a.id = acn.artist
               JOIN {tsv('artist_credit', [('id','BIGINT'),('name','VARCHAR'),
                                           ('artist_count','BIGINT'),('ref_count','BIGINT'),
@@ -184,7 +205,8 @@ def build_frames(con: duckdb.DuckDBPyConnection) -> dict:
                                    ('end_d','BIGINT'),('type','BIGINT'),('area','BIGINT'),
                                    ('gender','BIGINT'),('comment','VARCHAR'),
                                    ('edits_pending','BIGINT'),('last_updated','VARCHAR'),
-                                   ('ended','VARCHAR')])}
+                                   ('ended','VARCHAR'),('begin_area','BIGINT'),
+                                   ('end_area','BIGINT')])}
              ORDER BY artist_mbid
         ) TO '{dst}' (FORMAT PARQUET)
         """
@@ -265,11 +287,7 @@ def main() -> None:
     verify_tarball()
     extract()
 
-    meta = {}
-    for name in ("SCHEMA_SEQUENCE", "TIMESTAMP"):
-        p = MB_DIR / "mbdump" / name
-        meta[name] = p.read_text().strip() if p.exists() else None
-        print(f"  mbdump {name:<16} {meta[name]}")
+    meta = dump_metadata()
 
     con = duckdb.connect()
     con.execute("PRAGMA memory_limit='20GB'")

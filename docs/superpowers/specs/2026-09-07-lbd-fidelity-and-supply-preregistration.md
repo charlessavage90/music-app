@@ -53,6 +53,25 @@ every arm is `LBD-A0`, our own run at `ALG-B`'s parameters — never the archive
 `LBD-A0`'s parameters are `CANDIDATE_ALGORITHM` in `builder/…/config.py`, read from source
 2026-09-07, **less its `filter_True` token** — see `LBD-X3`.
 
+**Each arm's plain sentence, fixed here, before any result exists** (design §4; `CLAUDE.md`
+requires these beside the parameters so a report whose wording drifts from them is as visible
+as a moved number):
+
+- **`LBD-A0`** — *the same rules ListenBrainz used when they gave us the lists we ship today,
+  run on their raw listening data by us instead of by them.* Everything else is measured
+  against this, never against the lists themselves.
+- **`LBD-A1`** — *keep ListenBrainz's bar for how strong a connection has to be, but stop
+  cutting each artist's list at a hundred.* Tests whether the cap alone was hiding
+  connections.
+- **`LBD-A2`** — *keep the hundred-connection cut, but accept every connection the listening
+  data produces however weak.* Tests whether the strength bar alone was hiding connections.
+- **`LBD-A3`** — *no cut and no strength bar: every connection two artists' shared listeners
+  imply.* **This is the one that can say "there is nothing more to find."** If an artist is
+  still a dead end here, no choice of these two rules could have helped them.
+- **`LBD-A4`** — *count a pair once per session rather than once per pair of plays.* Someone
+  playing one artist twice and another once currently counts double; this asks whether that
+  choice matters.
+
 **`LBD-A3` is why this table exists.** With only `LBD-A1` and `LBD-A2`, each null is
 explicable by the other rule still binding: removing the cap helps only if the new pairs
 clear the threshold, and lowering the threshold helps only if the new pairs survive the cap.
