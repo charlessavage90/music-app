@@ -88,6 +88,20 @@ sample — and per-field population coverage measured during `L4-T2` is **not** 
 read for it. Figures are owned by the two `builder/analysis/2026-09-05-lux4-*` READMEs,
 cited never restated.
 
+**A second track opened 2026-09-06 by owner ruling — `LBD-`, computing our own artist
+similarity from ListenBrainz's published listens instead of the Labs endpoint.** Explore
+through its stage 3; stage 4 (adoption) is a separate decision on stage 3's read. Independent
+of `LUX-4`: blocks nothing above and nothing above blocks it. Branch `lb-dump-exploration`,
+**PR #106**. Governing document
+[`specs/2026-09-06-own-similarity-design.md`](specs/2026-09-06-own-similarity-design.md);
+plan [`plans/2026-09-06-lb-dump-exploration.md`](plans/2026-09-06-lb-dump-exploration.md),
+**unstarted, and the owner will have it reviewed before execution**; why the July finding that
+"the dumps carry no MBIDs" does not block it is in
+[`findings/2026-09-06-lb-dump-route-assessment.md`](findings/2026-09-06-lb-dump-route-assessment.md).
+**One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to
+`D:\unsung-large-data\`. **What it does not reopen:** the fame-currency rulings, the `ALG-B`
+lineage, `DD-F1`, or the router-side `CXR` fixes — each stays its own track (design §9).
+
 **⚠ The `LUX-4` plan was wrong about the repository four times**, each caught by grepping
 rather than by careful reading, and each carries a correction block at its task head. **Treat
 `L4-T8`–`L4-T11` as unverified** and grep every function, file and config value before
