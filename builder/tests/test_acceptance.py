@@ -16,6 +16,7 @@ import pytest
 from artistpath_builder import graph as graph_mod
 from artistpath_builder import pipeline as pipeline_mod
 from artistpath_builder.acceptance import (
+    PRODUCTION_ACCEPTANCE,
     AcceptanceCriteria,
     ArtifactRejected,
     check_acceptance,
@@ -291,3 +292,94 @@ def test_the_nameless_check_names_the_mbid_not_the_name():
     with pytest.raises(ArtifactRejected) as excinfo:
         check_acceptance(_graph(names, degrees, pop), CRITERIA)
     assert f"{5:036d}" in str(excinfo.value)
+
+
+# --- The served artifact must pass its own gate (L4-T1) ----------------------
+#
+# Regression for the third `CXA-` leftover. The `CXR-` revert (2026-09-01)
+# restored what is SERVED and left the bounds calibrated for the reverted
+# 117k population, so a correct rebuild of the live map was refused before
+# `serialise` and never written. Found by `LUX-E1`; mechanism recorded in
+# builder/analysis/2026-09-05-lux-e1-drift-source/README.md §4.
+#
+# The counts below are read from each artifact's own manifest sidecar or from
+# the recalibration comment in acceptance.py, never carried from a document.
+
+SERVED_MAP = (58_838, 1_315_684)          # graph-msw-tu50.bin, sha 43dd82bb…
+JFX_B = (88_685, 1_618_164)               # the CXA- adoption, REVERTED
+RETIRED_MUTUAL_KNN = (74_193, 898_006)    # pre-MSW map
+EXTENDED_MUTUAL_KNN = (81_749, 905_558)   # cap-rule tripwire: differs from
+                                          # JFX-B by the CAP RULE alone
+
+
+def _graph_at_scale(artist_count: int, edge_count: int) -> Graph:
+    """A graph with a real artifact's node and edge counts, healthy elsewhere.
+
+    Every non-shape criterion is satisfied by construction, so only the global
+    node/edge bounds can reject it. That isolation is the point: these tests
+    ask what the SHAPE bounds admit, and a famous-degree failure here would be
+    a fixture defect masquerading as a bound.
+    """
+    canonical = list(PRODUCTION_ACCEPTANCE.canonical_names)
+    names = canonical + [
+        f"filler-{i:06d}" for i in range(artist_count - len(canonical))
+    ]
+    famous = PRODUCTION_ACCEPTANCE.famous_sample
+    famous_degree = 60  # clears both famous floors with margin
+
+    degrees = np.zeros(artist_count, dtype=np.int64)
+    degrees[:famous] = famous_degree
+    rest = artist_count - famous
+    base, extra = divmod(edge_count - famous * famous_degree, rest)
+    degrees[famous:] = base
+    degrees[famous : famous + extra] += 1
+    assert int(degrees.sum()) == edge_count
+
+    # Descending, so the `famous` high-degree nodes are the ones the famous
+    # criteria select.
+    pop = [1.0 - i / artist_count for i in range(artist_count)]
+    return _graph(names, degrees.tolist(), pop)
+
+
+def test_the_served_artifact_passes_its_own_acceptance_gate():
+    """The map the app serves must be admissible by the shipped bounds.
+
+    If this fails, the builder cannot reproduce production: `cmd_build` runs
+    `check_acceptance` BEFORE `serialise`, so a rejected build writes nothing.
+    """
+    check_acceptance(_graph_at_scale(*SERVED_MAP), PRODUCTION_ACCEPTANCE)
+
+
+# ⚠ Each of the three real artifacts below fails the EDGE bound as well as the
+# node bound, so on their own they cannot tell whether the node bound does
+# anything at all. Found by mutation testing at closeout (B3): widening
+# node_count to (1_000, 200_000) -- which admits every artifact ever built here,
+# including the one the owner's listening test rejected -- left this test GREEN.
+# The two synthetic rows isolate each bound by putting the OTHER count safely
+# inside its band, and they are what makes this test non-vacuous.
+NODE_FLOOR_ONLY = (40_000, 1_300_000)   # a fifth of the graph lost; edges fine
+NODE_CEILING_ONLY = (80_000, 1_300_000)  # a bigger population; edges fine
+EDGE_FLOOR_ONLY = (58_838, 900_000)      # the cap-rule revert signature
+
+
+@pytest.mark.parametrize(
+    "label, counts",
+    [
+        ("JFX-B, the reverted CXA- adoption", JFX_B),
+        ("the retired pre-MSW mutual-kNN map", RETIRED_MUTUAL_KNN),
+        ("mutual-kNN of the extended archive", EXTENDED_MUTUAL_KNN),
+        ("a build that silently lost a fifth of the graph", NODE_FLOOR_ONLY),
+        ("a build over the node ceiling", NODE_CEILING_ONLY),
+        ("a cap-rule revert at the served node count", EDGE_FLOOR_ONLY),
+    ],
+)
+def test_bounds_reject_every_artifact_that_is_not_the_served_map(label, counts):
+    """Sensitivity, checked against known artifacts rather than one centre.
+
+    The third row is the CAP-RULE tripwire: it differs from JFX-B by the cap
+    rule alone, and the EDGE floor is the only bound that can see it — its
+    node count sits inside the band. Weaken the edge floor and a silent
+    cap-rule revert ships.
+    """
+    with pytest.raises(ArtifactRejected):
+        check_acceptance(_graph_at_scale(*counts), PRODUCTION_ACCEPTANCE)

@@ -182,8 +182,9 @@ graph structure.
 ### APG1 artifact
 One little-endian binary file: header (`APG1` magic, version, N, E, metadata length) +
 CSR arrays (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob
-(mbids, names, disambiguations, popularity, `deezer_ids`, `fame_lb` — the last two are
-additive keys, omitted when empty, and the version is NOT bumped for them).
+(mbids, names, disambiguations, popularity, then five additive keys — `deezer_ids`,
+`fame_lb`, `spotify_ids`, `apple_ids`, `artist_facts` — omitted when empty, and the
+version is NOT bumped for them).
 Loaded once into numpy typed arrays at API
 boot; path queries touch no database and no network. `edge_types` is written but unused
 in alpha (all edges behavioural). Versioned in S3 in production — **never a database**.

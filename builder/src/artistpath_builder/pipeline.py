@@ -34,7 +34,9 @@ from artistpath_builder.graph import (
     symmetrise,
 )
 from artistpath_builder.models import ArtistStats
+from artistpath_builder.artist_facts import load_artist_facts
 from artistpath_builder.deezer_ids import load_deezer_ids
+from artistpath_builder.dsp_links import load_dsp_links
 from artistpath_builder.fame import load_fame
 from artistpath_builder.featured_credit_drop import load_featured_credit_drop_mbids
 from artistpath_builder.no_release_drop import load_drop_mbids
@@ -451,10 +453,22 @@ def build_from_archive(
     # with no config knob: it changes no edge, no score and no node, so there is
     # nothing for a factor table to hold constant. A frozen snapshot, never a
     # build-time lookup — deezer_ids.py explains why that is mandatory.
+    # LUX-4 rides along the same way and under the same rule: frozen snapshots
+    # read from package data, never a build-time network lookup. Like the
+    # deezer ids above they change no edge, no score and no node, so there is
+    # nothing for a factor table to hold constant.
+    #
+    # Passed as DICTS, not pre-ordered lists: node ids are assigned inside
+    # `build_graph`, and a caller ordering them here would be re-deriving
+    # `sorted(...)` and could silently disagree with it.
+    spotify_ids, apple_ids = load_dsp_links()
     return build_graph(
         pruned,
         stats,
         source.edge_type,
         deezer_ids=load_deezer_ids(),
         fame_lb_raw=fame,
+        spotify_ids=spotify_ids,
+        apple_ids=apple_ids,
+        artist_facts=load_artist_facts(),
     )
