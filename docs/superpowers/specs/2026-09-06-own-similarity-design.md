@@ -1,5 +1,15 @@
 # Own similarity from ListenBrainz's listens — design (`LBD-`)
 
+**Role: ACTIVE, governing for the `LBD-` track.** Written 2026-09-06 from the assessment in
+[`../findings/2026-09-06-lb-dump-route-assessment.md`](../findings/2026-09-06-lb-dump-route-assessment.md)
+and the owner's ruling on it the same day. The operational document is
+[`../plans/2026-09-06-lb-dump-exploration.md`](../plans/2026-09-06-lb-dump-exploration.md);
+**this document governs where the two disagree.** Owns no figures —
+[`builder/analysis/2026-09-06-lb-dump-feasibility/README.md`](../../../builder/analysis/2026-09-06-lb-dump-feasibility/README.md)
+owns today's; later stages own theirs under `builder/analysis/`. Identifiers **`LBD-`**
+(design decisions `LBD-D`, criteria `LBD-C`, measurements `LBD-M`, stages `LBD-S`,
+risks `LBD-R`), collision-checked across every ref 2026-09-06.
+
 > ## ⚠ REVIEWED 2026-09-06 — §0 CONTAINS A FALSE CLAIM AND §4 RESTS ON IT.
 >
 > Outcome: [`../findings/2026-09-06-lbd-plan-review.md`](../findings/2026-09-06-lbd-plan-review.md).
@@ -23,16 +33,6 @@
 >
 > **What the review did not touch:** the track's ruling, its stages, `LBD-D1`–`D8`, and §9's
 > closed list all stand.
-
-**Role: ACTIVE, governing for the `LBD-` track.** Written 2026-09-06 from the assessment in
-[`../findings/2026-09-06-lb-dump-route-assessment.md`](../findings/2026-09-06-lb-dump-route-assessment.md)
-and the owner's ruling on it the same day. The operational document is
-[`../plans/2026-09-06-lb-dump-exploration.md`](../plans/2026-09-06-lb-dump-exploration.md);
-**this document governs where the two disagree.** Owns no figures —
-[`builder/analysis/2026-09-06-lb-dump-feasibility/README.md`](../../../builder/analysis/2026-09-06-lb-dump-feasibility/README.md)
-owns today's; later stages own theirs under `builder/analysis/`. Identifiers **`LBD-`**
-(design decisions `LBD-D`, criteria `LBD-C`, measurements `LBD-M`, stages `LBD-S`,
-risks `LBD-R`), collision-checked across every ref 2026-09-06.
 
 **The owner's ruling, 2026-09-06, verbatim in substance:** *worth investigating through stage
 3 or 4; the estimated sessions are not a huge scope against the potential improvement; the

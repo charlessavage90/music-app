@@ -13,11 +13,11 @@ and pointed at from the documents they concern.
 
 | review | what it checked | verdict |
 |---|---|---|
-| [`claims-review.md`](claims-review.md) | every path, function, flag and line number the design's §11 and the plan's self-review cite; three load-bearing mechanisms; Task 3's SQL against ListenBrainz's own source | **not executable as written** — 8 findings, `F1` and `F2` are false premises |
+| [`claims-review.md`](claims-review.md) | every path, function, flag and line number the design's §11 and the plan's self-review cite; three load-bearing mechanisms; Task 3's SQL against ListenBrainz's own source | **not executable as written** — 8 findings, `LBDR-F1` and `LBDR-F2` are false premises |
 | [`measurement-derivation.md`](measurement-derivation.md) | whether `LBD-C2` is population-independent; whether overlap is the right shape for `LBD-C1`; the effect size distinguishable from rebuild noise; whether Task 5's arms separate `LBD-R1` from the rules | **§0's population-independence claim is false**, and the two suggested arms cannot support the conclusion they exist to test |
 
 **The two reviews were run independently and did not see each other's work.** They converged
-on the same blocker by different routes — `claims-review.md` `F1` by tracing the mechanism,
+on the same blocker by different routes — `claims-review.md` `LBDR-F1` by tracing the mechanism,
 `measurement-derivation.md` Q4 by grep while measuring supply. That convergence is the
 strongest single result here, and it is why the blocker is stated as certain rather than
 likely.
@@ -35,7 +35,7 @@ owned there, not restated here.
 | artifacts read | `graph-msw-tu50.bin` (the served map), `graph-cxa-adopted.bin`, `graph-lux4.bin`, and the two byte-identical duplicates used as controls |
 | archives read | `grt-archive-algb.pre-cex-snapshot` (75,000 payloads) and `grt-archive-algb` (117,302), ALG-B sub-tree — **read-only** |
 | ListenBrainz's algorithm | `listenbrainz_spark/similarity/artist.py` plus its two upstream input builders, fetched from `metabrainz/listenbrainz-server` **master** by `curl` on 2026-09-06 — **not transcribed from the plan**, which was the point of the check |
-| MusicBrainz | one live web-service query, to confirm `join_phrase` spacing for `F2`'s second half |
+| MusicBrainz | one live web-service query, to confirm `join_phrase` spacing for `LBDR-F2`'s second half |
 | repo state | `main` at `da6a846`, clean; both `LUX-4` (#105) and the `LBD-` docs (#106) merged |
 
 **ListenBrainz's source is deliberately NOT vendored here.** It is third-party material, it

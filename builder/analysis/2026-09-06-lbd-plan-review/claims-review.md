@@ -38,7 +38,7 @@ worse than surfacing at Task 7.
 
 ## 2. Findings, most severe first
 
-### F1 — `drop_unlistenable` at its default refuses every `LBD-` build. Task 7 fails on `A0`.
+### LBDR-F1 — `drop_unlistenable` at its default refuses every `LBD-` build. Task 7 fails on `A0`.
 
 **Claimed** (plan, Task 6):
 
@@ -125,7 +125,7 @@ at Task 7.
 
 ---
 
-### F2 — the featured-weight bullet contradicts the SQL it quotes, and the synthetic check cannot catch it.
+### LBDR-F2 — the featured-weight bullet contradicts the SQL it quotes, and the synthetic check cannot catch it.
 
 **Claimed** (plan, Task 3):
 
@@ -204,7 +204,7 @@ match LB's eight literals — a one-line count over the extracted parquet, befor
 
 ---
 
-### F3 — `LBD-D5`'s "total order" is not total, and the credit fan-out is missing from the checklist.
+### LBDR-F3 — `LBD-D5`'s "total order" is not total, and the credit fan-out is missing from the checklist.
 
 **Claimed** (design `LBD-D5`; plan Task 3):
 
@@ -237,7 +237,7 @@ timestamp, for a 2-artist credit at time *t* after a listen *P*:
 
 So on real data LB systematically keeps only the *last-ordered* artist row of a multi-artist credit
 — and which one that is, is exactly what the untied ordering decides. This is the mechanism behind
-`LBD-P2`'s non-determinism, and it interacts directly with F2: it is these rows the featured weight
+`LBD-P2`'s non-determinism, and it interacts directly with LBDR-F2: it is these rows the featured weight
 is about. A "sensible" transcription (dedup listens before sessioning, or partition the `ordered`
 window by recording as well) would silently deviate from LB in the same direction.
 
@@ -254,7 +254,7 @@ Task 3 step 2 as a synthetic-fixture mismatch (cheap), if the fixture has a boun
 
 ---
 
-### F4 — Task 1 omits `recording_gid_redirect`; the resulting gap is pre-booked as irreducible lineage.
+### LBDR-F4 — Task 1 omits `recording_gid_redirect`; the resulting gap is pre-booked as irreducible lineage.
 
 **Claimed** (plan, Task 1 step 3 and Task 3):
 
@@ -280,7 +280,7 @@ LB's frame **does resolve redirects** — a redirected gid carries the *target r
 extract it. The consequence is that every listen on a redirected recording MBID falls to
 `DEFAULT_TRACK_LENGTH = 180` instead of its real length, which shifts `difference`, which shifts
 session boundaries **and** the `skipped` test — a systematic, one-directional divergence in exactly
-the stage F3 shows is already fragile.
+the stage LBDR-F3 shows is already fragile.
 
 The plan's second sentence turns this from an omission into a mis-attribution: it instructs the
 session to *record the unmatched share* rather than eliminate it, so a reproducible input difference
@@ -293,7 +293,7 @@ as a *defect*. Cost to fix now: one more table in Task 1's extraction, one `UNIO
 
 ---
 
-### F5 — the `skipped` / `sessions_filtered` stage is absent from Task 3's "easy to get wrong" list.
+### LBDR-F5 — the `skipped` / `sessions_filtered` stage is absent from Task 3's "easy to get wrong" list.
 
 Task 3 says *"Transcribe […] `build_sessioned_index` stage for stage"* and lists `--skip` as a
 parameter, but its twelve bullets of "points that are easy to get wrong, each already known" never
@@ -313,7 +313,7 @@ say it must. Worth adding one.
 
 ---
 
-### F6 — Task 6 and Task 7 have no scale budget, and `build_from_archive` reads the whole archive into RAM.
+### LBDR-F6 — Task 6 and Task 7 have no scale budget, and `build_from_archive` reads the whole archive into RAM.
 
 Task 6 (*"~half a session"*) writes one JSON file per artist, and Task 7 (*"~1 session"*) reads them
 through `LocalArchive`:
@@ -347,7 +347,7 @@ zero-node build rather than an error.
 
 ---
 
-### F7 — Task 2 fixes `LBD-C1`'s sample from an unpinned archive while Task 4 reads a pinned one.
+### LBDR-F7 — Task 2 fixes `LBD-C1`'s sample from an unpinned archive while Task 4 reads a pinned one.
 
 Task 4 step 2 **does** pin the fidelity archive, correctly and with a verification instruction:
 
@@ -375,7 +375,7 @@ unpinned; it should name the snapshot.
 
 ---
 
-### F8 — minor citation drift (both documents), no execution consequence.
+### LBDR-F8 — minor citation drift (both documents), no execution consequence.
 
 - Design §11: *"the **five** harnesses under `builder/analysis/` that call it directly"*. Actual: **eight**
   files, nine call sites (`grt_score.py:244`, `calibrate.py:209,286`, `cre_build.py:424`,
@@ -409,7 +409,7 @@ sentence says.
   unknown token ✓. `load_featured_credit_drop_mbids` — `featured_credit_drop.py:72` ✓,
   `NoFeaturedCreditListForAlgorithm` `:62` ✓. `load_unlistenable_list` — `unlistenable_drop.py:151` ✓,
   `override_path` present and it alone has one ✓ (`NoUnlistenableListForAlgorithm` `:123`). Keying and
-  raise-on-unknown are as described for all three; the population check is the part not described (F1).
+  raise-on-unknown are as described for all three; the population check is the part not described (LBDR-F1).
 - `LocalArchive` — `archive.py:28` ✓.
 - `grt_score.py:150-158` ✓ — `BuilderConfig(algorithm=ALG_B, …, drop_no_release_tail=False,
   drop_featured_credit=False, drop_unlistenable=False, cap_strategy="mutual_knn", require_fame=False)`;
@@ -418,7 +418,7 @@ sentence says.
   README owns the 29,892 / 58,793 / 58,838 figures the plan cites ✓.
 - `grt-archive-algb.pre-cex-snapshot` — **exists on disk** at
   `C:\dev\music-app\builder\scratch\grt-archive-algb.pre-cex-snapshot`, with `similar/` and `fame/`
-  subtrees, 75,000 similarity responses. Distinct from `grt-archive-algb` (117,302). See F7.
+  subtrees, 75,000 similarity responses. Distinct from `grt-archive-algb` (117,302). See LBDR-F7.
 - `resolve_build_inputs` — `manifest.py:67` ✓; `log_build_inputs` — `manifest.py:133` ✓; both called
   only from `cmd_build` (`cli.py:254,257`), so `S1`–`S3` genuinely do not touch them ✓.
 
@@ -450,7 +450,7 @@ steers exactly two things: the archive prefix — `similar/lbd/<ALG-B token>/`, 
 says and what Task 6's emitter writes — and drop-list selection. It does **not** touch source
 selection, scoring, the cap strategy, the rescale, or manifest contents. The plan's *"the token names
 the drop-list lineage, not the arm's parameters"* is correct as a statement about the token. The
-defect in F1 is not the token; it is that the list the token selects carries a population identity.
+defect in LBDR-F1 is not the token; it is that the list the token selects carries a population identity.
 
 **Mechanism (c): are `parse` and `harvest_identities` source-agnostic? — YES.**
 `parse` (`listenbrainz.py:65-100`) requires only: the payload is JSON (bytes accepted); rows are
@@ -479,14 +479,14 @@ design §6 and `LBD-R9` already say).
 | LB stage | plan | verdict |
 |---|---|---|
 | `listens` — `WHERE recording_mbid IS NOT NULL AND != ''` (`:34-35`) | bullet 3 | ✓ exact, including the inherited TODO |
-| `listens` — duration `COALESCE(r.length/1000, 180)` (`:23`) | bullet 4 | ✓ value, ✗ the `CAST(… AS BIGINT)` truncation (F3) |
-| `listens` — redirect resolution in the upstream frame | bullet 4 | ✗ **omitted input** (F4) |
-| `listens` — `after_ft_jp` window (`:28,36`) | bullet 5 | ✗ prose ≠ SQL (F2) |
-| `ordered` — `difference = listened_at − LAG(listened_at) − LAG(duration)` (`:40`) | implied | ✓ semantics; ordering not total (F3) |
+| `listens` — duration `COALESCE(r.length/1000, 180)` (`:23`) | bullet 4 | ✓ value, ✗ the `CAST(… AS BIGINT)` truncation (LBDR-F3) |
+| `listens` — redirect resolution in the upstream frame | bullet 4 | ✗ **omitted input** (LBDR-F4) |
+| `listens` — `after_ft_jp` window (`:28,36`) | bullet 5 | ✗ prose ≠ SQL (LBDR-F2) |
+| `ordered` — `difference = listened_at − LAG(listened_at) − LAG(duration)` (`:40`) | implied | ✓ semantics; ordering not total (LBDR-F3) |
 | `ordered` — `similarity = IF(after_ft_jp, 0.25, 1)` (`:43`) | bullet 5 | ✓ value |
-| `sessions` — `session_id = COUNT_IF(difference > {session}) OVER w` (`:49`) | — | ✗ **not named** (F5) |
-| `sessions` — `skipped = LEAD(difference) < {skip_threshold}`, `skip_threshold = −skip` (`:50,136`) | — | ✗ **not named** (F5); correct in `LBS-2` |
-| `sessions_filtered` — `WHERE NOT skipped` (`:56-63`) | — | ✗ **not named** (F5) |
+| `sessions` — `session_id = COUNT_IF(difference > {session}) OVER w` (`:49`) | — | ✗ **not named** (LBDR-F5) |
+| `sessions` — `skipped = LEAD(difference) < {skip_threshold}`, `skip_threshold = −skip` (`:50,136`) | — | ✗ **not named** (LBDR-F5); correct in `LBS-2` |
+| `sessions_filtered` — `WHERE NOT skipped` (`:56-63`) | — | ✗ **not named** (LBDR-F5) |
 | `user_grouped_mbids` — lexical `mbid0/mbid1`, `s1.sim * s2.sim`, `WHERE artist_mbid != AND artist_credit_mbids !=` (`:66-73`) | bullets 6, output spec | ✓ exact |
 | `user_contribtion_mbids` — `LEAST(SUM(similarity), {contribution})` grouped `(user, mbid0, mbid1)` (`:74-82`) | bullet 7 | ✓ exact, including "over the whole window" |
 | `thresholded_mbids` — `BIGINT(SUM(part_score))`, `HAVING score > {threshold}` (`:83-90`) | bullet 7 | ✓ exact, including the integer cast and strict `>` |
@@ -519,7 +519,7 @@ upper bound's inclusivity when it pins `to_date` to `END_TIMESTAMP`.
 - **`mbdump` column orders.** Task 1 step 3 quotes column orders for `recording`,
   `artist_credit_name` and `artist` read from `CreateTables.sql` at master. I did not re-fetch that
   file; the plan already instructs re-checking them against the dump's own schema sequence, which is
-  the correct control. My F4 finding adds a table to the extraction list; it does not depend on those
+  the correct control. My LBDR-F4 finding adds a table to the extraction list; it does not depend on those
   orders.
 - **`builder/scratch/mb-json-dumps/artist` (design `LBD-D3`)** exists on disk (`artist`, `release`,
   `release-group` subdirs) but I did not open it. Note the plan's Task 1 step 3 supersedes that
@@ -535,8 +535,8 @@ upper bound's inclusivity when it pins `to_date` to `END_TIMESTAMP`.
   (untrimmed comparison) and confirmed MusicBrainz's ' feat. ' spacing from the live web service on
   one credit. I did not measure the share of `artist_credit_name.join_phrase` values in `mbdump`
   matching LB's eight literals exactly — that is a one-line count in Task 1 and is the right place
-  for it. The F2 finding about prose-vs-SQL (the window frame) does not depend on this and is
+  for it. The LBDR-F2 finding about prose-vs-SQL (the window frame) does not depend on this and is
   verified from source.
-- **Task 6/7 scale (F6).** I did not estimate the artist count or neighbour count of any arm — that
+- **Task 6/7 scale (LBDR-F6).** I did not estimate the artist count or neighbour count of any arm — that
   is `LBD-M1`, which the track has not run. The finding is that no budget exists, not that a
   specific number is wrong.

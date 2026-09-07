@@ -18,7 +18,7 @@ and belongs to the author of the pre-registration, not to the reviewing session.
 
 | review | brief | verdict |
 |---|---|---|
-| **Claims against the repo** | every path, function, flag and line number the design's §11 and the plan's self-review cite; three load-bearing mechanisms; Task 3's SQL line-by-line against ListenBrainz's own source on master | **Not executable as written.** Eight findings; `F1` and `F2` are false premises |
+| **Claims against the repo** | every path, function, flag and line number the design's §11 and the plan's self-review cite; three load-bearing mechanisms; Task 3's SQL line-by-line against ListenBrainz's own source on master | **Not executable as written.** Eight findings; `LBDR-F1` and `LBDR-F2` are false premises |
 | **Measurement derivation** (`ml-graph-analyst`) | is `LBD-C2` population-independent; is overlap the right shape for `LBD-C1`; what effect size clears rebuild noise; do Task 5's arms separate `LBD-R1` from the rules | **§0's population-independence claim is false**, and the two suggested arms cannot support the conclusion they exist to test |
 
 **The two ran independently and did not see each other's work.** They reached the same
@@ -75,7 +75,7 @@ rather than ListenBrainz's.**
 ListenBrainz supplies the added artists with materially more candidate connections than the
 served map gives them. The gap is almost entirely our own degree ceiling — the rule that no
 artist may hold more than fifty connections — which is enforced by deleting the weakest
-edges of over-full artists. `graph.py:250-252` does `result[node].pop(victim)` **and**
+edges of over-full artists. `graph.py:251-253` does `result[node].pop(victim)` **and**
 `result[victim].pop(node)`: the deletion is bilateral, so the connection is taken from the
 obscure artist at the other end too. Its own docstring is explicit that the union alone
 bounds nothing and that the ceiling deletes whole edges. A meaningful share of the added
@@ -130,8 +130,15 @@ ListenBrainz's source rather than the plan's prose, and derive Task 2's syntheti
 from the source too — the whole value of that fixture is that it is independent of the
 transcription being checked.
 
-**Deliberately not resolved here:** Tasks 3 and 4 carry further correctness findings (an
-ordering that is not total, an omitted redirect table, a missing filter stage) and Task 6/7
-carry an uncosted scale risk. All are in
+**Deliberately not resolved here, each with its condition:** Tasks 3 and 4 carry further
+correctness findings (an ordering that is not total, an omitted redirect table, a missing
+filter stage) and Task 6/7 carry an uncosted scale risk. All are in
 [`claims-review.md`](../../../builder/analysis/2026-09-06-lbd-plan-review/claims-review.md),
-`F3`–`F8`, each with the task it breaks and the point at which it would surface.
+`LBDR-F3`–`LBDR-F8`, each with the task it breaks and the point at which it would surface.
+
+| deferral | success condition |
+|---|---|
+| `LBDR-F3`, `LBDR-F4`, `LBDR-F5` — ordering, the omitted redirect table, the missing filter stage | **Discharged when the task each names is executed** (`LBDR-F4` at Task 1; `LBDR-F3` and `LBDR-F5` at Task 3), by that task's session reading the finding first. Each is a correction to a step, not a decision. |
+| `LBDR-F6` — Task 6/7 have no scale budget, and the archive is read into memory whole | **Discharged when `LBD-M1` produces an arm's artist and neighbour counts** — that is the number the budget needs and the track has not run. Until then it is a named risk, not a defect. |
+| `LBDR-F7`, `LBDR-F8` — Task 2's unpinned fidelity sample; stale harness counts in two documents | `LBDR-F7` is in Task 2's list above. `LBDR-F8` is **accepted, won't fix** — the counts are inherited from a stale comment in `config.py` and correcting them is out of this track's scope. |
+| The isolating pair of builds that would turn the population-drift figure from an order of magnitude into a constant | **Discharged when the pre-registration either commissions it or states in writing that the order of magnitude is sufficient for its gate.** Costed at ~35 min in the derivation's Q1, which also names the exact pair. Cheap enough that deferring it needs a sentence, not a rationale. |

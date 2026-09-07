@@ -1,5 +1,12 @@
 # `LBD-` exploration — implementation plan, stages `S1`–`S3`
 
+**Role: ACTIVE implementation plan for the `LBD-` track. UNSTARTED.** Operational document for
+[`../specs/2026-09-06-own-similarity-design.md`](../specs/2026-09-06-own-similarity-design.md),
+**which governs where the two disagree.** Written 2026-09-06 in the exploratory session that
+produced the assessment; every file, function and config value named below was grepped in the
+worktree at `75d9642` the same day and re-resolved after `LUX-4` merged at `422530b`. Owns no figures:
+each task's analysis README owns its own.
+
 > ## ⛔ REVIEWED 2026-09-06 — NOT EXECUTABLE AS WRITTEN. Read the outcome before any task.
 >
 > Two independent reviews ran against this plan before any arm executed:
@@ -19,16 +26,9 @@
 > 3. **Task 5's two suggested arms cannot support `LBD-R1`.** Only the corner where both the
 >    cap and the threshold are relaxed can. Same shape as the Track 2 stage-2 corner.
 >
-> `F3`–`F8` (Tasks 1, 3, 4, 6, 7) are in the claims review beside the findings document, each
+> `LBDR-F3`–`LBDR-F8` (Tasks 1, 3, 4, 6, 7) are in the claims review beside the findings document, each
 > with the task it breaks and the point at which it would surface. **Treat every task as
 > unverified and grep before executing it** — that is what found all eight.
-
-**Role: ACTIVE implementation plan for the `LBD-` track. UNSTARTED.** Operational document for
-[`../specs/2026-09-06-own-similarity-design.md`](../specs/2026-09-06-own-similarity-design.md),
-**which governs where the two disagree.** Written 2026-09-06 in the exploratory session that
-produced the assessment; every file, function and config value named below was grepped in the
-worktree at `75d9642` the same day and re-resolved after `LUX-4` merged at `422530b`. Owns no figures:
-each task's analysis README owns its own.
 
 **Eight tasks, two seams.** Strictly sequential — every task consumes its predecessor's
 committed output. Recommended execution: **inline**, one session per seam-bounded stretch; the
