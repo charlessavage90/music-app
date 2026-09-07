@@ -95,7 +95,15 @@ of `LUX-4`: blocks nothing above and nothing above blocks it. Branch `lb-dump-ex
 **PR #106**. Governing document
 [`specs/2026-09-06-own-similarity-design.md`](specs/2026-09-06-own-similarity-design.md);
 plan [`plans/2026-09-06-lb-dump-exploration.md`](plans/2026-09-06-lb-dump-exploration.md),
-**unstarted, and the owner will have it reviewed before execution**; why the July finding that
+**unstarted, and REVIEWED 2026-09-06 — the verdict is NOT EXECUTABLE AS WRITTEN**
+([`findings/2026-09-06-lbd-plan-review.md`](findings/2026-09-06-lbd-plan-review.md); figures in
+`builder/analysis/2026-09-06-lbd-plan-review/`). Two independent reviews converged on one
+blocker: **every arm refuses to build, including the baseline**, and it would surface only
+after the expensive runs. Neither review edited the design or the plan — the corrections are
+owed to the pre-registration (Task 2), which is committed before results exist. **One item
+from it is the owner's and is a premise question, not a blocker:** most of today's sparsity for
+the added artists is attributable to **our own degree ceiling** rather than to missing listening
+data, which is what `LBD-` set out to test. Nothing waits on it. Why the July finding that
 "the dumps carry no MBIDs" does not block it is in
 [`findings/2026-09-06-lb-dump-route-assessment.md`](findings/2026-09-06-lb-dump-route-assessment.md).
 **One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to

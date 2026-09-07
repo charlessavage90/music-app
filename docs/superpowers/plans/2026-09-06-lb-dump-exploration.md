@@ -7,6 +7,29 @@ produced the assessment; every file, function and config value named below was g
 worktree at `75d9642` the same day and re-resolved after `LUX-4` merged at `422530b`. Owns no figures:
 each task's analysis README owns its own.
 
+> ## ⛔ REVIEWED 2026-09-06 — NOT EXECUTABLE AS WRITTEN. Read the outcome before any task.
+>
+> Two independent reviews ran against this plan before any arm executed:
+> [`findings/2026-09-06-lbd-plan-review.md`](../findings/2026-09-06-lbd-plan-review.md).
+> **Nothing below was corrected** — the plan is exactly as authored, deliberately, so the
+> corrections land in the pre-registration (Task 2) where they can be fixed before results
+> exist rather than after.
+>
+> **The three you cannot skip:**
+> 1. **Task 7's build config refuses to build on every arm, including `A0`** — the
+>    un-listenable drop list carries a frozen population census and `pipeline.py` raises
+>    `PopulationNotCensused`. One-line fix, but it falsifies a row of design §0. Surfaces
+>    **after** Task 4's full-history run and Task 5's per-arm hours.
+> 2. **Task 3's featured-weight bullet contradicts the SQL it quotes**, and Task 2's
+>    synthetic fixture would be derived from the same prose — so it passes while wrong, and
+>    the error is booked at `LBD-C1` as lineage gap. **Surfaces never.**
+> 3. **Task 5's two suggested arms cannot support `LBD-R1`.** Only the corner where both the
+>    cap and the threshold are relaxed can. Same shape as the Track 2 stage-2 corner.
+>
+> `LBDR-F3`–`LBDR-F8` (Tasks 1, 3, 4, 6, 7) are in the claims review beside the findings document, each
+> with the task it breaks and the point at which it would surface. **Treat every task as
+> unverified and grep before executing it** — that is what found all eight.
+
 **Eight tasks, two seams.** Strictly sequential — every task consumes its predecessor's
 committed output. Recommended execution: **inline**, one session per seam-bounded stretch; the
 tasks are sequential so subagent fan-out buys nothing and each cold subagent would re-derive the
