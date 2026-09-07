@@ -69,6 +69,29 @@ These matter more than the blocker, because the blocker is loud and these are si
 
 ## What the measurement changes about the track's premise
 
+> **⚠ FORWARD CORRECTION 2026-09-07 — the MAGNITUDE below is superseded by a direct
+> measurement; the MECHANISM is not.** This section's plain sentence was written from a
+> supply comparison, before the falsifier the derivation names had been run. It has since
+> been run — on the extended archive, and on the `CXA` artifact's own population,
+> reproduced exactly — and the split it measures moves the characterisation **from a
+> majority to a minority**: our degree ceiling is the **smaller** of the two causes of the
+> added set's dead ends, and what ListenBrainz's lists do not supply is the larger. So read
+> "mostly ours" below as **"partly ours"**.
+>
+> Figures are owned by
+> [`builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md`](../../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md)
+> §4 — **cited here, never restated.** This document owns no figures and that is unchanged.
+>
+> **What is CONFIRMED and must not be softened:** the bilateral-deletion mechanism and its
+> `graph.py` citation, and that a meaningful share of the added artists have more than two
+> candidates and still end as dead ends — the measurement reproduces that count exactly.
+> Only the share attributed to our own rule was overstated, and the arithmetic that shows it
+> was already in the derivation; what was wrong was the characterisation drawn from it.
+> **The three consequences for the pre-registration below are untouched** and all stand:
+> `LBD-C2`'s population dependence, the ceiling as a dormant term, and the two-arm
+> insufficiency.
+
+
 **Plain sentence: the sparsity this track exists to fix is, on today's map, mostly ours
 rather than ListenBrainz's.**
 

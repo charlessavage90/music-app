@@ -191,6 +191,13 @@ edges alone**, 135 on non-hub edges alone, 802 on both.
 stay near its current level when the ceiling is lifted: it falls from 34.36 % to 19.96 %,
 and the residual 19.96 % is what ListenBrainz's lists genuinely do not supply.
 
+**Two documents were corrected as a consequence of this section**, by pointer and without
+restating anything above: `findings/2026-09-06-lbd-plan-review.md`'s premise section and
+`NEXT.md`'s `LBD-` block both characterised this sparsity as *mostly* ours, and §4 measures
+it as the **minority** cause. Each carries a forward-correction note naming this section as
+the figures owner. **Only the magnitude moved** — both documents' mechanism, and the three
+consequences they draw for the `LBD-` pre-registration, are confirmed by these results.
+
 
 ## 5. Which edges the raised ceiling gives back, and to whom
 

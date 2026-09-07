@@ -101,9 +101,16 @@ plan [`plans/2026-09-06-lb-dump-exploration.md`](plans/2026-09-06-lb-dump-explor
 blocker: **every arm refuses to build, including the baseline**, and it would surface only
 after the expensive runs. Neither review edited the design or the plan — the corrections are
 owed to the pre-registration (Task 2), which is committed before results exist. **One item
-from it is the owner's and is a premise question, not a blocker:** most of today's sparsity for
-the added artists is attributable to **our own degree ceiling** rather than to missing listening
-data, which is what `LBD-` set out to test. Nothing waits on it. Why the July finding that
+from it is the owner's and is a premise question, not a blocker:** how much of today's sparsity
+for the added artists is **our own degree ceiling** rather than missing listening data, which is
+what `LBD-` set out to test. ⚠ **CORRECTED 2026-09-07.** This read *"most of today's sparsity
+… is attributable to our own degree ceiling"*; the falsifier the review named has since been
+run, and it moves that **from a majority to a minority** — the ceiling is the smaller of the two
+causes and the endpoint's own supply the larger. **Mechanism unchanged, magnitude only.** Figures
+are owned by
+[`builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md`](../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md)
+§4 — cited, never restated here; the finding carries the same forward correction beside the
+claim. Nothing waits on it. Why the July finding that
 "the dumps carry no MBIDs" does not block it is in
 [`findings/2026-09-06-lb-dump-route-assessment.md`](findings/2026-09-06-lb-dump-route-assessment.md).
 **One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to
