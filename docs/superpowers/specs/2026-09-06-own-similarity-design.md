@@ -38,7 +38,7 @@ while the population also moved.** `LBD-C2` is therefore stated over a *fixed* a
 |---|---|
 | cap strategy `trimmed_union`, `top_j`, `degree_ceiling` (`BuilderConfig`) | applied by `build` after the similarity table; a bulk archive enters `build` at the same point as a crawled one |
 | similarity rescale `p99_log_clip` | the only strategy `BuilderConfig.__post_init__` permits; the scale is recomputed per build and that recomputation is part of the population confound above, not a knob |
-| the drop lists (`ULF-` unlistenable, no-release, featured-credit) — **pinned per invocation to the lists the served map was built with** | `build` applies them by MBID before the mass computation; the track passes `unlistenable_list_path` explicitly (`SEL-` override) so HEAD's repointed default (`LUX-E1` finding) cannot leak in |
+| the drop lists (`ULF-` unlistenable, no-release, featured-credit) — **pinned per invocation to the lists the served map was built with** | `build` applies them by MBID before the mass computation; the track passes `unlistenable_list_path` explicitly (`SEL-` override) rather than relying on the default — `L4-T1` repointed that default back to the 2026-08-05 list on 2026-09-06, and pinning makes the build independent of it either way |
 | router weights and cost function (`ApiConfig`) | nothing in `builder/` writes them |
 | the fame source for any routing measurement — the existing `fame` stage (LB per-artist API) | dump-derived listener counts are a different currency; **`LBD-D4` bars their use for routing reads inside this track** |
 | the endpoint archive under `builder/scratch/` | read only, as the fidelity ground truth |
@@ -108,10 +108,10 @@ by `listened_at` alone, which is not a total order; `LBD-P2` showed two runs dif
 `lbd_similarity.py` orders on `(listened_at, recording_msid)` and its output on
 `(mbid0, mbid1)`. The archive's manifest records the dump id and sha, the incremental ids
 applied, the `mbdump` timestamp, the MB artist dump timestamp, and the parameter string —
-in a `MANIFEST.json` at each archive root, written by the emitter. **`resolve_build_inputs`
-(`manifest.py:67`) is `LUX-4` work on branch `lux-4-links-info-card` (PR #105) and is NOT on
-`main` as of this writing**; once merged, the archive manifest is what it should read. The
-track does not depend on that merge.
+in a `MANIFEST.json` at each archive root, written by the emitter. `resolve_build_inputs`
+(`manifest.py`, landed on `main` with `LUX-4`, PR #105, 2026-09-06) is the builder-side
+pattern for recording build inputs; the archive manifest is what a future `S4` integration
+would feed it. `S1`–`S3` build in-process and do not call it.
 
 **`LBD-D6` — The pairing semantics are decided in `S2`, explicitly, once.** LB self-joins
 listens within a session; the obvious optimisation self-joins distinct artists. `LBD-P2`
@@ -199,8 +199,9 @@ it by exactly the columns the factor table shows, and never the archive.
 
 Recorded from the assessment so `S4` starts from a list, not a memory. No live dependency on
 the Labs endpoint, the bootstrap endpoint, the rate limit or the enum; refresh becomes a
-local batch pinned to a dump id and parameter string; a standing stage of hours rather than
-40 s; ~213 GB + ~135 GB/yr on local disk, a full re-download twice monthly if deletions
+local batch pinned to a dump id and parameter string; a standing stage of hours in front of
+the archive replay, which itself takes minutes (`LUX-4` measured 297 s and 616 s on
+2026-09-06; the earlier ~40 s figure is overturned); ~213 GB + ~135 GB/yr on local disk, a full re-download twice monthly if deletions
 matter; LB's Sunday regeneration no longer reaches us; the population rule becomes a product
 decision; the API's hosting or router may need to change with it; fame and popularity could
 come from the same pass, each behind its own decision.
@@ -226,18 +227,20 @@ Serving anything built here; changing `PRODUCTION_ACCEPTANCE`; the population ru
 what `LBD-M1` needs to describe; API performance work; the "Unsung" rename; anything under
 `frontend/`.
 
-## §11 — Claims check (grepped 2026-09-06 in the worktree at `75d9642`)
+## §11 — Claims check (grepped 2026-09-06, re-resolved after `LUX-4` merged at `422530b`)
 
-`SimilaritySource` — `builder/src/artistpath_builder/sources/base.py`. `ListenBrainzSource.parse`,
-`harvest_identities` — `sources/listenbrainz.py:25,65`. `Crawler.similar_key` — `crawl.py:109`.
-`similar_prefix`, `archive_artists`, `build_from_archive` — `pipeline.py:129,145,167`.
+`SimilaritySource` — `builder/src/artistpath_builder/sources/base.py`. `ListenBrainzSource`
+(`:54`), its `parse` (`:65`), `harvest_identities` (`:25`) — `sources/listenbrainz.py`.
+`Crawler.similar_key` — `crawl.py:109`. `similar_prefix`, `archive_artists`,
+`build_from_archive` — `pipeline.py:131,147,169`; the nameless drop — `pipeline.py:235`.
 `require_fame` — `config.py:132`; `load_fame` — `fame.py:198`; `fame_key` — `fame.py:91`.
-`check_acceptance`, `PRODUCTION_ACCEPTANCE`, `AcceptanceCriteria` — `acceptance.py:54,118,222`;
-the call site and the not-a-flag docstring — `cli.py:268,303`. `PERMITTED_ALGORITHMS`,
-`PERMITTED_CAP_STRATEGIES`, `unlistenable_list_path` — `config.py:35,56,259`.
-`resolve_build_inputs`, `log_build_inputs` — **not on `main`**: `manifest.py:67,133` on branch
-`lux-4-links-info-card` only (grepped both trees 2026-09-06). `fame_percentiles` —
-`api/src/artistpath_api/graph_store.py:95`. `build_from_archive` does **not** call
+`AcceptanceCriteria`, `PRODUCTION_ACCEPTANCE`, `check_acceptance` — `acceptance.py:54,118,259`;
+the call site and the not-a-flag docstring — `cli.py:268,301`. `CANDIDATE_ALGORITHM`,
+`PERMITTED_ALGORITHMS`, `PERMITTED_CAP_STRATEGIES`, `unlistenable_list_path` —
+`config.py:26,35,55,259`. The three drop-list loaders — `no_release_drop.py:93`,
+`featured_credit_drop.py:72`, `unlistenable_drop.py:151`; `LocalArchive` — `archive.py:28`.
+`resolve_build_inputs`, `log_build_inputs` — `manifest.py:67,133`, on `main` since PR #105.
+`fame_percentiles` — `api/src/artistpath_api/graph_store.py:95`. `build_from_archive` does **not** call
 `check_acceptance` — only `cmd_build` does (`cli.py:268`) — so harness builds are never
 acceptance-checked and never written as servable artifacts; the five harnesses under
 `builder/analysis/` that call it directly are the precedent

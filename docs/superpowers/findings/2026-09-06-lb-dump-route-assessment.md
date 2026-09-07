@@ -174,7 +174,9 @@ parameter string in the manifest — `resolve_build_inputs` already exists for t
 popularity can come from the same pass. Determinism holds given a total ordering; `build`'s
 offline rule is untouched because the bulk source writes an archive.
 
-**Downsides.** A standing stage that takes hours, not 40 s; 213 GB + ~135 GB/yr local disk,
+**Downsides.** A standing stage that takes hours, in front of an archive replay that itself
+takes minutes (the `LUX-4` session measured 297 s and 616 s on 2026-09-06, overturning the
+earlier ~40 s figure); 213 GB + ~135 GB/yr local disk,
 and a full re-download twice monthly if deletions matter. LB's Sunday regeneration no longer
 reaches us. The mapping bias is inherited, not fixed — the unmapped 26 % concentrate where
 MusicBrainz is thin, the obscure end, exactly as with the endpoint. Bot and user filtering

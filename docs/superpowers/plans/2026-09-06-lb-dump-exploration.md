@@ -4,7 +4,7 @@
 [`../specs/2026-09-06-own-similarity-design.md`](../specs/2026-09-06-own-similarity-design.md),
 **which governs where the two disagree.** Written 2026-09-06 in the exploratory session that
 produced the assessment; every file, function and config value named below was grepped in the
-worktree at `75d9642` (`origin/main`) the same day — the exceptions are marked. Owns no figures:
+worktree at `75d9642` the same day and re-resolved after `LUX-4` merged at `422530b`. Owns no figures:
 each task's analysis README owns its own.
 
 **Eight tasks, two seams.** Strictly sequential — every task consumes its predecessor's
@@ -200,19 +200,20 @@ directly.
 
 **Effort:** ~half a session.
 
-**The source.** A subclass of `ListenBrainzSource` (`sources/listenbrainz.py:57`) with
+**The source.** A subclass of `ListenBrainzSource` (`sources/listenbrainz.py:54`) with
 `name = "lbd"`, inheriting `parse` and `edge_type`, and `request_url` raising — it is never
 fetched. Because it *is* a `SimilaritySource` with a different `name`, `similar_prefix`
-(`pipeline.py:129`) reads `similar/lbd/<algorithm>/` and nothing in `build` changes (`LBD-D3`).
+(`pipeline.py:131`) reads `similar/lbd/<algorithm>/` and nothing in `build` changes (`LBD-D3`).
 
 **The algorithm token — decided here, and the reasoning matters.** Three loaders key drop
 lists on `config.algorithm` and **raise** on an unknown token: `load_drop_mbids`
 (`no_release_drop.py:93`, `NoDropListForAlgorithm`), `load_featured_credit_drop_mbids`
-(`featured_credit_drop.py:72`), `load_unlistenable_list` (`unlistenable_drop.py:116`, which
+(`featured_credit_drop.py:72`), `load_unlistenable_list` (`unlistenable_drop.py:151`, which
 alone has an `override_path`). So every arm's `BuilderConfig` uses **`CANDIDATE_ALGORITHM`
 (the `ALG-B` string) as `config.algorithm`**, which makes all three resolve to the served map's
 lists — held constant per design §0 — with `unlistenable_list_path` pinned to
-`unlistenable_drop_algb_20260805.json` so HEAD's repointed default cannot leak in. **The token
+`unlistenable_drop_algb_20260805.json` explicitly (`L4-T1` repointed the default back to that
+file on 2026-09-06; pin it anyway, so the build does not depend on a default). **The token
 therefore names the drop-list lineage, not the arm's parameters**; the arm's parameters live in
 the archive root's `MANIFEST.json`, and **each arm gets its own archive root**
 (`D:\unsung-large-data\lbd-archives\<arm>\`) so nothing collides under one prefix. Write this
@@ -225,7 +226,7 @@ Task 1's identity frame, written to `similar/lbd/<ALG-B token>/<mbid>.json`. Uni
 two directions (the endpoint serves both partitions; `LBS-3`). Deterministic: neighbours
 sorted `(-score, mbid)`, files written in sorted MBID order, `json.dumps(sort_keys=True)`.
 **Artists with no identity row** get an empty name and are dropped by `build`'s nameless rule
-(`pipeline.py:219`) — count them and report; if it is more than a handful, the identity join is
+(`pipeline.py:235`) — count them and report; if it is more than a handful, the identity join is
 wrong.
 
 ### Task 7: build each arm and read `LBD-C2` — **OWNER STOP at the end**
@@ -273,16 +274,17 @@ ordering) and Task 6 (`MANIFEST.json`). `D6` → Task 4 step 3. `D7` → global 
 (`build_from_archive` only). `D8` → global constraint. `C1`/`C3` → Task 4. `C2`/`M1` → Task 7.
 Seams: after Task 4; owner stop at Task 7 — design §5.
 
-**Claims a reader should grep before executing** (all resolved 2026-09-06 at `75d9642` unless
-marked): `ListenBrainzSource` and `FIELD_*` — `sources/listenbrainz.py`; `similar_prefix`,
-`build_from_archive`, the nameless drop — `pipeline.py:129,167,219`; `require_fame`,
-`unlistenable_list_path`, `CANDIDATE_ALGORITHM` — `config.py:132,259,26`; the three drop-list
-loaders and their exceptions — `no_release_drop.py:93`, `featured_credit_drop.py:72`,
-`unlistenable_drop.py:116`; `LocalArchive` — `archive.py:31`; `grt_score.py:150-158` for the
-config-pinning precedent; `cxr_census.py` for reading two artifacts through `GraphStore`;
-`grt-archive-algb.pre-cex-snapshot` — **a path under gitignored `builder/scratch/`, confirm it
-exists and matches the `LUX-E1` README before Task 4**; `resolve_build_inputs` — **on the
-`LUX-4` branch only**, not required.
+**Claims a reader should grep before executing** (all resolved 2026-09-06, re-resolved after
+`LUX-4` merged at `422530b`): `ListenBrainzSource` and `FIELD_*` — `sources/listenbrainz.py`;
+`similar_prefix`, `build_from_archive`, the nameless drop — `pipeline.py:131,169,235`;
+`require_fame`, `unlistenable_list_path`, `CANDIDATE_ALGORITHM` — `config.py:132,259,26`; the
+three drop-list loaders and their exceptions — `no_release_drop.py:93`,
+`featured_credit_drop.py:72`, `unlistenable_drop.py:151`; `LocalArchive` — `archive.py:28`;
+`grt_score.py:150-158` for the config-pinning precedent; `cxr_census.py` for reading two
+artifacts through `GraphStore`; `grt-archive-algb.pre-cex-snapshot` — **a path under
+gitignored `builder/scratch/`; `NEXT.md` (2026-09-06) names it as the pin for any build of the
+served lineage, confirm it exists before Task 4**; `resolve_build_inputs` — `manifest.py:67`,
+on `main` since PR #105, not required by `S1`–`S3`.
 
 **What this plan does not close.** The population rule, API sizing, fame source and refresh
 procedure — all `S4`, all the owner's to open. The one-day probes' `~6 s` says nothing about
