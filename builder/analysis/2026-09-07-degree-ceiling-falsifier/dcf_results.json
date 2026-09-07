@@ -1,0 +1,342 @@
+{
+  "archive": {
+    "dir": "C:\\dev\\music-app\\builder\\scratch\\grt-archive-algb",
+    "payloads": 117302
+  },
+  "arms": [
+    {
+      "added": {
+        "max_degree": 50,
+        "mean_degree": 7.956,
+        "median_degree": 5.0,
+        "n": 29892,
+        "n_present": 29800,
+        "p10_degree": 1,
+        "p90_degree": 19,
+        "share_absent": 0.00308,
+        "share_eq_1": 0.19124,
+        "share_le_2": 0.32101,
+        "share_le_2_or_absent": 0.3231
+      },
+      "bound_holds": true,
+      "ceiling_binds": true,
+      "config": {
+        "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+        "cap_strategy": "trimmed_union",
+        "drop_featured_credit": true,
+        "drop_no_release_tail": true,
+        "drop_unlistenable": false,
+        "filter_special_purpose": true,
+        "require_fame": false,
+        "similarity_damping": 0.0,
+        "similarity_rescale": "p99_log_clip",
+        "union_degree_ceiling": 50,
+        "union_top_j": 50
+      },
+      "elapsed_seconds": 728.0,
+      "is_control": true,
+      "pre_existing": {
+        "max_degree": 50,
+        "mean_degree": 24.331,
+        "median_degree": 20.0,
+        "n": 58793,
+        "n_present": 58770,
+        "p10_degree": 3,
+        "p90_degree": 50,
+        "share_absent": 0.00039,
+        "share_eq_1": 0.03915,
+        "share_le_2": 0.07473,
+        "share_le_2_or_absent": 0.07509
+      },
+      "top_decile_by_degree": {
+        "boundary_degree": 49,
+        "cut_size": 10390,
+        "nodes_at_the_boundary_degree": 2180,
+        "nodes_strictly_above_the_boundary": 10095
+      },
+      "union_degree_ceiling": 50,
+      "whole_graph": {
+        "edges": 890208,
+        "max_degree": 50,
+        "mean_degree": 17.136,
+        "median_degree": 10.0,
+        "nodes": 103902,
+        "nodes_tied_at_the_top1pct_boundary_degree": 10095,
+        "p99_degree": 50,
+        "top1pct_cut_size": 1039,
+        "top1pct_degree_mass_frac": 0.02918
+      }
+    },
+    {
+      "added": {
+        "max_degree": 100,
+        "mean_degree": 10.002,
+        "median_degree": 6.0,
+        "n": 29892,
+        "n_present": 29891,
+        "p10_degree": 1,
+        "p90_degree": 24,
+        "share_absent": 3e-05,
+        "share_eq_1": 0.14178,
+        "share_le_2": 0.25476,
+        "share_le_2_or_absent": 0.25478
+      },
+      "bound_holds": true,
+      "ceiling_binds": true,
+      "config": {
+        "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+        "cap_strategy": "trimmed_union",
+        "drop_featured_credit": true,
+        "drop_no_release_tail": true,
+        "drop_unlistenable": false,
+        "filter_special_purpose": true,
+        "require_fame": false,
+        "similarity_damping": 0.0,
+        "similarity_rescale": "p99_log_clip",
+        "union_degree_ceiling": 100,
+        "union_top_j": 50
+      },
+      "elapsed_seconds": 657.5,
+      "is_control": false,
+      "pre_existing": {
+        "max_degree": 100,
+        "mean_degree": 35.645,
+        "median_degree": 26.0,
+        "n": 58793,
+        "n_present": 58793,
+        "p10_degree": 4,
+        "p90_degree": 96,
+        "share_absent": 0.0,
+        "share_eq_1": 0.02619,
+        "share_le_2": 0.05293,
+        "share_le_2_or_absent": 0.05293
+      },
+      "restored_vs_control": {
+        "added_artists_gaining_at_least_one_hub_edge": 15612,
+        "added_artists_gaining_at_least_one_non_hub_edge": 4229,
+        "between_two_added_artists": 672,
+        "left_the_two_or_fewer_group": {
+          "both_kinds": 310,
+          "only_hub_edges": 1599,
+          "only_non_hub_edges": 119,
+          "total": 2028,
+          "was_absent_from_the_control": 14
+        },
+        "restored_edges_total": 58414,
+        "share_between_two_added_artists": 0.0115,
+        "share_to_a_hub": 0.90877,
+        "share_to_a_non_hub": 0.09123,
+        "share_to_a_pre_existing_non_hub": 0.07972,
+        "share_to_a_top_decile_hub": 0.90877,
+        "to_a_pre_existing_non_hub": 4657,
+        "to_a_top_decile_hub": 53085
+      },
+      "top_decile_by_degree": {
+        "boundary_degree": 67,
+        "cut_size": 10514,
+        "nodes_at_the_boundary_degree": 251,
+        "nodes_strictly_above_the_boundary": 10417
+      },
+      "union_degree_ceiling": 100,
+      "whole_graph": {
+        "edges": 1269619,
+        "max_degree": 100,
+        "mean_degree": 24.15,
+        "median_degree": 13.0,
+        "nodes": 105145,
+        "nodes_tied_at_the_top1pct_boundary_degree": 5606,
+        "p99_degree": 100,
+        "top1pct_cut_size": 1051,
+        "top1pct_degree_mass_frac": 0.04139
+      }
+    },
+    {
+      "added": {
+        "max_degree": 165,
+        "mean_degree": 11.608,
+        "median_degree": 7.0,
+        "n": 29892,
+        "n_present": 29891,
+        "p10_degree": 1,
+        "p90_degree": 29,
+        "share_absent": 3e-05,
+        "share_eq_1": 0.11974,
+        "share_le_2": 0.22023,
+        "share_le_2_or_absent": 0.22026
+      },
+      "bound_holds": true,
+      "ceiling_binds": true,
+      "config": {
+        "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+        "cap_strategy": "trimmed_union",
+        "drop_featured_credit": true,
+        "drop_no_release_tail": true,
+        "drop_unlistenable": false,
+        "filter_special_purpose": true,
+        "require_fame": false,
+        "similarity_damping": 0.0,
+        "similarity_rescale": "p99_log_clip",
+        "union_degree_ceiling": 200,
+        "union_top_j": 50
+      },
+      "elapsed_seconds": 553.7,
+      "is_control": false,
+      "pre_existing": {
+        "max_degree": 200,
+        "mean_degree": 45.249,
+        "median_degree": 33.0,
+        "n": 58793,
+        "n_present": 58793,
+        "p10_degree": 5,
+        "p90_degree": 100,
+        "share_absent": 0.0,
+        "share_eq_1": 0.02147,
+        "share_le_2": 0.04259,
+        "share_le_2_or_absent": 0.04259
+      },
+      "restored_vs_control": {
+        "added_artists_gaining_at_least_one_hub_edge": 18852,
+        "added_artists_gaining_at_least_one_non_hub_edge": 4863,
+        "between_two_added_artists": 981,
+        "left_the_two_or_fewer_group": {
+          "both_kinds": 449,
+          "only_hub_edges": 2507,
+          "only_non_hub_edges": 89,
+          "total": 3045,
+          "was_absent_from_the_control": 29
+        },
+        "restored_edges_total": 106147,
+        "share_between_two_added_artists": 0.00924,
+        "share_to_a_hub": 0.93836,
+        "share_to_a_non_hub": 0.06164,
+        "share_to_a_pre_existing_non_hub": 0.0524,
+        "share_to_a_top_decile_hub": 0.93836,
+        "to_a_pre_existing_non_hub": 5562,
+        "to_a_top_decile_hub": 99604
+      },
+      "top_decile_by_degree": {
+        "boundary_degree": 72,
+        "cut_size": 10526,
+        "nodes_at_the_boundary_degree": 264,
+        "nodes_strictly_above_the_boundary": 10339
+      },
+      "union_degree_ceiling": 200,
+      "whole_graph": {
+        "edges": 1590329,
+        "max_degree": 200,
+        "mean_degree": 30.218,
+        "median_degree": 16.0,
+        "nodes": 105256,
+        "nodes_tied_at_the_top1pct_boundary_degree": 1988,
+        "p99_degree": 200,
+        "top1pct_cut_size": 1053,
+        "top1pct_degree_mass_frac": 0.06621
+      }
+    },
+    {
+      "added": {
+        "max_degree": 166,
+        "mean_degree": 15.178,
+        "median_degree": 9.0,
+        "n": 29892,
+        "n_present": 29891,
+        "p10_degree": 1,
+        "p90_degree": 45,
+        "share_absent": 3e-05,
+        "share_eq_1": 0.10036,
+        "share_le_2": 0.18414,
+        "share_le_2_or_absent": 0.18416
+      },
+      "bound_holds": true,
+      "ceiling_binds": false,
+      "config": {
+        "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+        "cap_strategy": "trimmed_union",
+        "drop_featured_credit": true,
+        "drop_no_release_tail": true,
+        "drop_unlistenable": false,
+        "filter_special_purpose": true,
+        "require_fame": false,
+        "similarity_damping": 0.0,
+        "similarity_rescale": "p99_log_clip",
+        "union_degree_ceiling": 20000,
+        "union_top_j": 50
+      },
+      "elapsed_seconds": 223.5,
+      "is_control": false,
+      "pre_existing": {
+        "max_degree": 15347,
+        "mean_degree": 64.528,
+        "median_degree": 51.0,
+        "n": 58793,
+        "n_present": 58793,
+        "p10_degree": 7,
+        "p90_degree": 106,
+        "share_absent": 0.0,
+        "share_eq_1": 0.01672,
+        "share_le_2": 0.03364,
+        "share_le_2_or_absent": 0.03364
+      },
+      "restored_vs_control": {
+        "added_artists_gaining_at_least_one_hub_edge": 21198,
+        "added_artists_gaining_at_least_one_non_hub_edge": 5177,
+        "between_two_added_artists": 1276,
+        "left_the_two_or_fewer_group": {
+          "both_kinds": 557,
+          "only_hub_edges": 3475,
+          "only_non_hub_edges": 80,
+          "total": 4112,
+          "was_absent_from_the_control": 41
+        },
+        "restored_edges_total": 212832,
+        "share_between_two_added_artists": 0.006,
+        "share_to_a_hub": 0.96407,
+        "share_to_a_non_hub": 0.03593,
+        "share_to_a_pre_existing_non_hub": 0.02993,
+        "share_to_a_top_decile_hub": 0.96407,
+        "to_a_pre_existing_non_hub": 6371,
+        "to_a_top_decile_hub": 205185
+      },
+      "top_decile_by_degree": {
+        "boundary_degree": 79,
+        "cut_size": 10535,
+        "nodes_at_the_boundary_degree": 292,
+        "nodes_strictly_above_the_boundary": 10429
+      },
+      "union_degree_ceiling": 20000,
+      "whole_graph": {
+        "edges": 2254246,
+        "max_degree": 15347,
+        "mean_degree": 42.795,
+        "median_degree": 21.0,
+        "nodes": 105351,
+        "nodes_tied_at_the_top1pct_boundary_degree": 6,
+        "p99_degree": 309,
+        "top1pct_cut_size": 1054,
+        "top1pct_degree_mass_frac": 0.18569
+      }
+    }
+  ],
+  "artifacts": {
+    "added": 29892,
+    "new": {
+      "artists": 88685,
+      "file": "graph-cxa-adopted.bin",
+      "sha256": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46"
+    },
+    "old": {
+      "artists": 58838,
+      "file": "graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+    },
+    "pre_existing": 58793
+  },
+  "gate": {
+    "green_control_bound_holds": true,
+    "green_note": "control max degree <= 50, the rule's stated bound (CRS-G2)",
+    "passed": true,
+    "red_knob_is_wired": true,
+    "red_note": "every raised arm exceeds degree 50, so the ceiling really reached trimmed_union_cap and the instrument can move"
+  },
+  "probe": "DCF- \u2014 does raising union_degree_ceiling move the CXR added set's dead-end share?"
+}

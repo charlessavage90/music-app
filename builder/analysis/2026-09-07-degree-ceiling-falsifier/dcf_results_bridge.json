@@ -1,0 +1,176 @@
+{
+  "archive": {
+    "dir": "C:\\dev\\music-app\\builder\\scratch\\grt-archive-algb",
+    "payloads": 117302
+  },
+  "arms": [
+    {
+      "added": {
+        "max_degree": 50,
+        "mean_degree": 7.376,
+        "median_degree": 4.0,
+        "n": 29892,
+        "n_present": 29892,
+        "p10_degree": 1,
+        "p90_degree": 18,
+        "share_absent": 0.0,
+        "share_eq_1": 0.20484,
+        "share_le_2": 0.34364,
+        "share_le_2_or_absent": 0.34364
+      },
+      "bound_holds": true,
+      "ceiling_binds": true,
+      "config": {
+        "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+        "cap_strategy": "trimmed_union",
+        "drop_featured_credit": true,
+        "drop_no_release_tail": true,
+        "drop_unlistenable": true,
+        "filter_special_purpose": true,
+        "require_fame": false,
+        "similarity_damping": 0.0,
+        "similarity_rescale": "p99_log_clip",
+        "union_degree_ceiling": 50,
+        "union_top_j": 50
+      },
+      "elapsed_seconds": 47.8,
+      "is_control": true,
+      "pre_existing": {
+        "max_degree": 50,
+        "mean_degree": 23.773,
+        "median_degree": 19.0,
+        "n": 58793,
+        "n_present": 58793,
+        "p10_degree": 3,
+        "p90_degree": 50,
+        "share_absent": 0.0,
+        "share_eq_1": 0.04271,
+        "share_le_2": 0.08074,
+        "share_le_2_or_absent": 0.08074
+      },
+      "top_decile_by_degree": {
+        "boundary_degree": 50,
+        "cut_size": 8868,
+        "nodes_at_the_boundary_degree": 9526,
+        "nodes_strictly_above_the_boundary": 0
+      },
+      "union_degree_ceiling": 50,
+      "whole_graph": {
+        "edges": 809082,
+        "max_degree": 50,
+        "mean_degree": 18.246,
+        "median_degree": 11.0,
+        "nodes": 88685,
+        "nodes_tied_at_the_top1pct_boundary_degree": 9526,
+        "p99_degree": 50,
+        "top1pct_cut_size": 887,
+        "top1pct_degree_mass_frac": 0.02741
+      }
+    },
+    {
+      "added": {
+        "max_degree": 153,
+        "mean_degree": 14.41,
+        "median_degree": 8.0,
+        "n": 29892,
+        "n_present": 29892,
+        "p10_degree": 1,
+        "p90_degree": 43,
+        "share_absent": 0.0,
+        "share_eq_1": 0.10856,
+        "share_le_2": 0.19962,
+        "share_le_2_or_absent": 0.19962
+      },
+      "bound_holds": true,
+      "ceiling_binds": false,
+      "config": {
+        "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+        "cap_strategy": "trimmed_union",
+        "drop_featured_credit": true,
+        "drop_no_release_tail": true,
+        "drop_unlistenable": true,
+        "filter_special_purpose": true,
+        "require_fame": false,
+        "similarity_damping": 0.0,
+        "similarity_rescale": "p99_log_clip",
+        "union_degree_ceiling": 20000,
+        "union_top_j": 50
+      },
+      "elapsed_seconds": 47.3,
+      "is_control": false,
+      "pre_existing": {
+        "max_degree": 14180,
+        "mean_degree": 62.37,
+        "median_degree": 51.0,
+        "n": 58793,
+        "n_present": 58793,
+        "p10_degree": 6,
+        "p90_degree": 104,
+        "share_absent": 0.0,
+        "share_eq_1": 0.01822,
+        "share_le_2": 0.0364,
+        "share_le_2_or_absent": 0.0364
+      },
+      "restored_vs_control": {
+        "added_artists_gaining_at_least_one_hub_edge": 20613,
+        "added_artists_gaining_at_least_one_non_hub_edge": 6946,
+        "between_two_added_artists": 1579,
+        "left_the_two_or_fewer_group": {
+          "both_kinds": 802,
+          "only_hub_edges": 3368,
+          "only_non_hub_edges": 135,
+          "total": 4305,
+          "was_absent_from_the_control": 0
+        },
+        "restored_edges_total": 206837,
+        "share_between_two_added_artists": 0.00763,
+        "share_to_a_hub": 0.94577,
+        "share_to_a_non_hub": 0.05423,
+        "share_to_a_pre_existing_non_hub": 0.0466,
+        "share_to_a_top_decile_hub": 0.94577,
+        "to_a_pre_existing_non_hub": 9638,
+        "to_a_top_decile_hub": 195620
+      },
+      "top_decile_by_degree": {
+        "boundary_degree": 83,
+        "cut_size": 8969,
+        "nodes_at_the_boundary_degree": 222,
+        "nodes_strictly_above_the_boundary": 8767
+      },
+      "union_degree_ceiling": 20000,
+      "whole_graph": {
+        "edges": 2050901,
+        "max_degree": 14180,
+        "mean_degree": 45.733,
+        "median_degree": 26.0,
+        "nodes": 89691,
+        "nodes_tied_at_the_top1pct_boundary_degree": 5,
+        "p99_degree": 322,
+        "top1pct_cut_size": 897,
+        "top1pct_degree_mass_frac": 0.17617
+      }
+    }
+  ],
+  "artifacts": {
+    "added": 29892,
+    "new": {
+      "artists": 88685,
+      "file": "graph-cxa-adopted.bin",
+      "sha256": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46"
+    },
+    "old": {
+      "artists": 58838,
+      "file": "graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+    },
+    "pre_existing": 58793
+  },
+  "gate": {
+    "green_control_bound_holds": true,
+    "green_note": "control max degree <= 50, the rule's stated bound (CRS-G2)",
+    "passed": true,
+    "red_knob_is_wired": true,
+    "red_note": "every raised arm exceeds degree 50, so the ceiling really reached trimmed_union_cap and the instrument can move"
+  },
+  "probe": "DCF- \u2014 does raising union_degree_ceiling move the CXR added set's dead-end share?"
+}

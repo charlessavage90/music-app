@@ -1,0 +1,28 @@
+INFO verified graph-msw-tu50.bin  sha 43dd82bb3771…  artists 58838  edges 1315684
+INFO verified graph-cxa-adopted.bin  sha bc0431c4b55a…  artists 88685  edges 1618164
+INFO split: added 29892, pre-existing 58793
+archive payloads: 117,302
+
+=== arm: union_degree_ceiling=50 ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 88685 of 90026 artists
+  ceiling     50  built in 0.8 min  nodes 88,685  edges 809,082  max deg 50  ADDED median 4 <=2 34.36% absent 0.00%
+
+=== arm: union_degree_ceiling=20000 ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 89691 of 90026 artists
+  ceiling  20000  built in 0.8 min  nodes 89,691  edges 2,050,901  max deg 14,180  ADDED median 8 <=2 19.96% absent 0.00%
+    restored 206,837 edges to added artists — 94.6% to a top-decile hub, 5.4% not; 4,305 left the <=2 group
+
+gate: green=True red=True -> PASS
+wrote analysis\2026-09-07-degree-ceiling-falsifier\dcf_results_bridge.json
