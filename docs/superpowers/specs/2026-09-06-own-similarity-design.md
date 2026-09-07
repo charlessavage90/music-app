@@ -1,5 +1,29 @@
 # Own similarity from ListenBrainz's listens — design (`LBD-`)
 
+> ## ⚠ REVIEWED 2026-09-06 — §0 CONTAINS A FALSE CLAIM AND §4 RESTS ON IT.
+>
+> Outcome: [`../findings/2026-09-06-lbd-plan-review.md`](../findings/2026-09-06-lbd-plan-review.md).
+> **This document is unedited below this banner** — the corrections belong to the
+> pre-registration (plan Task 2), which is committed before results exist and is therefore
+> where a threshold or control can still be fixed honestly. Do not "fix" §0 or §4 in place.
+>
+> - **§0: "`LBD-C2` … in degree, which is population-independent for a given cap rule" is
+>   false**, measured. Same MBIDs, same cap rule, no knob turned — a larger population alone
+>   moves the supply reading, in the direction that flatters every arm. Magnitude and the
+>   free control are owned by
+>   [`builder/analysis/2026-09-06-lbd-plan-review/`](../../../builder/analysis/2026-09-06-lbd-plan-review/README.md).
+> - **§0's drop-list row cannot hold.** Every arm must set `drop_unlistenable=False` or the
+>   build refuses outright; the lists then stay constant across arms but are no longer the
+>   served map's filtering.
+> - **§0's held-constant degree ceiling is a dormant term.** Its *effect* grows in exactly
+>   the arms that succeed — the shape §0 was written to catch, inside §0 itself.
+> - **§4's `LBD-C1` does not define "our top-N"**, and the two readings differ by more than
+>   any plausible lineage gap. §4's supply criterion also names `CXR-P2` as the baseline;
+>   per §6 the baseline is the arm's own run, and `CXR-P2` is context.
+>
+> **What the review did not touch:** the track's ruling, its stages, `LBD-D1`–`D8`, and §9's
+> closed list all stand.
+
 **Role: ACTIVE, governing for the `LBD-` track.** Written 2026-09-06 from the assessment in
 [`../findings/2026-09-06-lb-dump-route-assessment.md`](../findings/2026-09-06-lb-dump-route-assessment.md)
 and the owner's ruling on it the same day. The operational document is

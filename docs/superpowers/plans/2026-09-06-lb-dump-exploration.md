@@ -1,5 +1,28 @@
 # `LBD-` exploration — implementation plan, stages `S1`–`S3`
 
+> ## ⛔ REVIEWED 2026-09-06 — NOT EXECUTABLE AS WRITTEN. Read the outcome before any task.
+>
+> Two independent reviews ran against this plan before any arm executed:
+> [`findings/2026-09-06-lbd-plan-review.md`](../findings/2026-09-06-lbd-plan-review.md).
+> **Nothing below was corrected** — the plan is exactly as authored, deliberately, so the
+> corrections land in the pre-registration (Task 2) where they can be fixed before results
+> exist rather than after.
+>
+> **The three you cannot skip:**
+> 1. **Task 7's build config refuses to build on every arm, including `A0`** — the
+>    un-listenable drop list carries a frozen population census and `pipeline.py` raises
+>    `PopulationNotCensused`. One-line fix, but it falsifies a row of design §0. Surfaces
+>    **after** Task 4's full-history run and Task 5's per-arm hours.
+> 2. **Task 3's featured-weight bullet contradicts the SQL it quotes**, and Task 2's
+>    synthetic fixture would be derived from the same prose — so it passes while wrong, and
+>    the error is booked at `LBD-C1` as lineage gap. **Surfaces never.**
+> 3. **Task 5's two suggested arms cannot support `LBD-R1`.** Only the corner where both the
+>    cap and the threshold are relaxed can. Same shape as the Track 2 stage-2 corner.
+>
+> `F3`–`F8` (Tasks 1, 3, 4, 6, 7) are in the claims review beside the findings document, each
+> with the task it breaks and the point at which it would surface. **Treat every task as
+> unverified and grep before executing it** — that is what found all eight.
+
 **Role: ACTIVE implementation plan for the `LBD-` track. UNSTARTED.** Operational document for
 [`../specs/2026-09-06-own-similarity-design.md`](../specs/2026-09-06-own-similarity-design.md),
 **which governs where the two disagree.** Written 2026-09-06 in the exploratory session that
