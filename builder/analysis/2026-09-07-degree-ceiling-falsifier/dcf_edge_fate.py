@@ -20,10 +20,14 @@ THE HYPOTHESIS THIS TESTS (stated before the numbers exist, and it is not mine)
   counts SEPARATELY is the whole point of this script.
 
 WHY THIS IS NOT AN EDIT TO `q4_added_set_supply.py`
-  The instrument is that one — same read, same archive-to-artifact decomposition,
-  and its reproduction of `CXR-P2`/`CXR-M5` is still the check that the read is
-  being taken correctly (`dcf_edge_fate` re-runs that reproduction as its own
-  gate below). But `q4` is a COMMITTED probe whose outputs the `LBD-` plan
+  The instrument is that one — same read, same archive-to-artifact decomposition.
+  ⚠ But this script does NOT re-run `q4`'s `CXR-P2`/`CXR-M5` reproduction, and an
+  earlier draft of this docstring said it did. That reproduction is a property of
+  the ADDED SET's degrees on the CXA population, which is `dcf_ceiling_sweep.py`'s
+  bridge arms; this script's own gate is a different and stronger one — it
+  reproduces the SERVED artifact's entire edge set exactly. Both are checks that
+  a read is being taken correctly; they are not the same check.
+  But `q4` is a COMMITTED probe whose outputs the `LBD-` plan
   review cites, and `cb_build_variants.py`'s standing warning is explicit that a
   changed comparison needs a NEW harness rather than an edit to the old one, or
   the old figures stop being reproducible. So this extends it in place beside

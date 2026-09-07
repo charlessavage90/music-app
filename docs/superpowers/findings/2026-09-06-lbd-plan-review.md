@@ -132,8 +132,16 @@ instead; the derivation gives the effect sizes and what each rests on.
 ## What is owed, and by whom
 
 **The owner's, and only this one:** the `LBD-` track asks whether better similarity data
-fixes sparse artists, and the measurement says most of today's sparsity is attributable to
-our own ceiling. **Whether that changes where to spend** — press on with `LBD-`, or let the
+fixes sparse artists, and the measurement says a substantial part of today's sparsity is
+attributable to our own ceiling. ⚠ **CORRECTED 2026-09-07:** this read *"most of today's
+sparsity"*; the falsifier has since been run and the ceiling is the **minority** cause — see
+the forward-correction note above, and §4 of
+[`builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md`](../../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md),
+which owns the figures. **The decision below is unchanged in shape and its inputs have
+moved:** the ceiling now has a smaller case for jumping the queue than this section
+implied, and the endpoint's own supply a larger one — which is an argument the `LBD-`
+track's premise gets to make, not one against it.
+**Whether that changes where to spend** — press on with `LBD-`, or let the
 ceiling question jump the queue — cannot be settled by arithmetic. It is not a blocker on
 anything; nothing here needs a decision before the pre-registration is written.
 

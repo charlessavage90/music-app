@@ -113,6 +113,18 @@ are owned by
 claim. Nothing waits on it. Why the July finding that
 "the dumps carry no MBIDs" does not block it is in
 [`findings/2026-09-06-lb-dump-route-assessment.md`](findings/2026-09-06-lb-dump-route-assessment.md).
+**A probe answering that premise question RAN 2026-09-07 — `DCF-`, branch
+`dcf-degree-ceiling-falsifier`, PR #108 (draft).** It runs the falsifier the plan review named
+and did not run. **Descriptive only: no path was built, `CRS-C4` hub transit was not
+re-measured, and Track B's `C4` result stands against any ceiling raise.** Nothing is adopted
+and no rule change is proposed; the cap-rule decision stays parked and his. Figures:
+[`builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md`](../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md);
+reasoning:
+[`2026-09-07-dcf-degree-ceiling-execution-log.md`](2026-09-07-dcf-degree-ceiling-execution-log.md).
+⚠ **On merge it fires a condition the concurrent `LBD-` pre-registration left for it** —
+`LBD-X1` claims the ceiling's effect on the added set is unmeasured, and this measures it; that
+branch's handoff owns the check.
+
 **One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to
 `D:\unsung-large-data\`. **What it does not reopen:** the fame-currency rulings, the `ALG-B`
 lineage, `DD-F1`, or the router-side `CXR` fixes — each stays its own track (design §9).

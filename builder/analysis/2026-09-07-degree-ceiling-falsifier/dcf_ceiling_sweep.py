@@ -45,18 +45,20 @@ THIS KNOB IS NOT NEW AND THIS PROBE MUST NOT PRESENT IT AS NEW
   artists, and no criterion in either pre-registration measures that set's
   degree or its dead-end share. That set is the whole subject here.
 
-TWO DELIBERATE DEPARTURES FROM A SHIPPING CONFIG, held constant across arms
-  require_fame=False       the ALG-B fame tree is framed on a smaller
-                           population; `load_fame` refuses rather than
-                           defaulting (MSW-G3), and fame is read by no figure
-                           here.
-  drop_unlistenable=False  the shipped guard REFUSES on a population the ULF-
-                           census never evaluated (ULC-F1); the error message
-                           names this flag as "an experimental control and
-                           never a shipping configuration".
-  Consequence, stated so it is not read past: these arms are NOT byte-comparable
-  to `graph-cxa-adopted.bin`, which was built with both True. The within-build
-  pre-existing set is the reference, never the committed artifact's figures.
+DEPARTURES FROM A SHIPPING CONFIG — and they differ between the two arm sets
+  require_fame=False   EVERY arm. The ALG-B fame tree is framed on a smaller
+                       population, `load_fame` refuses rather than defaulting
+                       (MSW-G3), and fame is read by no figure here. It cannot
+                       change edge survival, so it is inert for every result.
+  drop_unlistenable    PRIMARY arms False; BRIDGE arms True via the shipped
+                       per-invocation override. See `run_arm` for why HEAD's
+                       default cannot build this archive with the drop on.
+  Consequence, stated so it is not read past: the PRIMARY arms sit on a larger
+  population than `graph-cxa-adopted.bin` and their absolute levels are NOT
+  comparable to that artifact's figures — the within-build pre-existing set is
+  their reference. The BRIDGE arms reproduce that artifact's population exactly
+  and are the ones that ARE comparable. Within either set the comparison is
+  clean, because every arm in it shares its population.
 
 Run from `builder/`:
     UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
