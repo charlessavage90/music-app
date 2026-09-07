@@ -1756,3 +1756,139 @@ next action is the OWNER'S and it is a decision, not work.**
 > parked below.
 >
 > **Nothing is queued for a working session.**
+
+---
+
+## Demoted 2026-09-06 — was the live top block from 2026-09-05
+
+*Superseded by the `LUX-4` block. Anything in it that still binds was distilled into
+`NEXT.md`'s registries before this was frozen: the `DEP-34` image hazard and the deploy
+it clears, the do-not-re-litigate list, and the `CXA-` archive leftover. Frozen; never
+edited again.*
+
+**Last updated: 2026-09-05.** Two independent pieces of work have addresses. **`LUX-1`,
+`LUX-2` and `LUX-3`** — branch `launch-ux-1-3`, **PR #101**; **PR #100 is superseded by it
+rather than sitting beside it** (`launch-ux-1-3` was cut from `status-depth0-ruling`, so
+#100's commits are already inside #101). And the **2026-09-05 doc-layer maintenance** —
+branch `next-md-merge-status`, **PR #102**, which changed **no app code** and therefore
+cannot affect a deploy or a test.
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
+does not record how far down the list he has got.** `gh pr list` answers the merge questions;
+`infra/README.md` and `/health` answer the deploy one.
+
+1. **Merge PR #101**, and close #100. **Merge PR #102** whenever — it gates nothing and
+   nothing gates it.
+2. **Deploy.** ⚠ **Merged is not deployed here** — deploys are manual and there is no CI
+   ([`infra/README.md`](../../infra/README.md)). Until this happens the live site serves what
+   it served before the merge. The execution log's deploy note applies: the clip cache's item
+   shape changed, so every live entry misses once and rebuilds.
+   **⚠ It also clears a latent hazard, recorded 2026-09-05.** The running image is still
+   `994c203`, built 2026-08-10 **before** the `CXR-` revert — so its baked-in
+   `ApiConfig.graph_path` default still names **`graph-cxa-adopted.bin`, the REJECTED
+   artifact**. Nothing is served wrong: production passes `ARTISTPATH_GRAPH` and
+   `ARTISTPATH_GRAPH_SHA256` explicitly per deploy, and `DEP-34-FIX` makes a synth without
+   `ARTISTPATH_DEPLOY_GRAPH_KEY` refuse. But it is a live instance of the `DEP-34` class — an
+   image that reaches for the rejected map if it ever boots without the env var. HEAD's default
+   is already back at `graph-msw-tu50.bin`, so **any image built from HEAD fixes this**; do not
+   deploy this branch under a stale image tag.
+3. **Run the queued use-the-app test** — **not exercisable until 2 has happened.** The test
+   queue holds ONE live item, written 2026-09-04.
+
+~~**Independent of all three and blocking nothing:** run `snyk auth`.~~ **DONE 2026-09-05, and
+the scan it was owed for is discharged.** `api/` and `frontend/` both scanned clean of
+shipped-code findings; the five reported are a self-labelled test fixture constant and four in
+`frontend/design/**`, which is committed canvas exports referenced from nothing in `src/`,
+`index.html` or `vite.config.ts` and so never enters the bundle. **`snyk` is now on `PATH`**
+via `npm install -g snyk` — the MCP server's own bundled CLI is version-pathed and named
+`snyk-win.exe`, so adding *that* to `PATH` would not have worked; both CLIs share
+`~/.config/configstore/snyk.json`, so one auth covers both.
+
+**Work a future session picks up, none of it blocking any of the above.** All three are
+recorded where they will be found rather than only here: **(a)** make a graph's manifest
+record *which* drop lists built it — the deferral table below carries the mechanism and the
+condition, and the owner asked for it to be another session's work; **(b)** run `LUX-E1` with
+`LUX-E1-AM1`'s second arm, which is the informative one; **(c)** `docs/README.md`'s row
+discipline, also in the deferral table, deferred on his explicit decision. Entry point for all
+three: the handoff [`2026-09-05-HANDOFF-doc-layer.md`](2026-09-05-HANDOFF-doc-layer.md).
+
+**What shipped, and the one promise it rests on.** `LUX-1` removes the second bypass button
+while **keeping the mechanism, the wire contract and the `?dislike=` URL parameter** — so
+every link ever shared still resolves. `exclusions.ts` and `pathfinding.py` both have **zero
+diff** across the whole branch and that is load-bearing. `LUX-2` adds the skipped-artists
+panel and stops the router silently discarding an unrecognised MBID. `LUX-3` lets a listener
+try another track by the same artist. Entry point: the handoff
+[`2026-09-04-HANDOFF-lux-1-3.md`](2026-09-04-HANDOFF-lux-1-3.md); reasoning:
+[`2026-09-04-lux-1-3-execution-log.md`](2026-09-04-lux-1-3-execution-log.md), which owns the
+ten rulings, the deferrals and **an operational deploy note** (the clip cache's item shape
+changed, so every live entry becomes a miss once — also in `infra/README.md`).
+
+**`LUX-E4` RAN, ITS READ WAS UNDEFINED, AND IT IS NOW CLOSED — owner ruling 2026-09-05.** The
+read stands as written: the denominator was empty, no lower-half artist reached a card, and
+**no document may soften that into a pass.** What was retired is the **threshold**, which was
+mis-specified — it named a re-prioritisation trigger for an outcome that costs nothing.
+`LUX-3`'s control renders only when there is a second track to offer, so its absence draws
+nothing at all and degrades exactly as a silent card already does. No result the eval could
+return would change whether `LUX-3` ships. **It is not to be re-run, and this is not an open
+owner decision.** Reasoning and the verified code gate are in §5 of the scope document.
+
+**Two things survive that closure, and neither is `LUX-E4`.** First, **the committed `TAS-`
+120-pair sample is damaged on the served map**, attrition falling almost entirely on the two
+obscure classes — that now blocks **`LUX-E2`**, whose threshold *does* have teeth, and the
+warning has been moved onto `LUX-E2` itself where a session running it will see it. Second,
+the empty denominator is **`DD-F1`, already in the record and not a new finding**: `TAS-6`'s
+routing half measured zero sub-decile interiors on this same sample on 2026-07-30, on the
+adopted artifact. **Do not re-open it as a fresh path-quality question from here** — a
+clip-availability eval on a damaged sample at depth zero is the wrong instrument for it, and
+`DD-F1`'s currency split (binds in popularity, does not transfer to fame) is already settled.
+Figures owned by `builder/analysis/2026-09-04-lux-e4-candidate-counts/README.md` and by
+`findings/2026-07-30-tag-discrimination.md`, cited never restated.
+
+**⚠ THE REVERT MOVED THE MAP BUT NOT THE DROP LIST — measured 2026-09-05.** `CXA-` Task 2
+repointed the ALG-B unlistenable drop list default at a payload re-censused over the extended
+population, and the `CXR-` revert did not repoint it back. **Nothing served is affected** — the
+API never reads a drop list and the artifact is prebuilt — but **a rebuild from HEAD would drop
+31 artists that are in the live map**. Figures owned by
+[`builder/analysis/2026-09-05-lux-e1-drift-source/README.md`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md),
+cited never restated. **Whether to repoint the default back or accept the 31 is his one-line
+choice, and it is still open** — `LUX-E1` pinned the old list per invocation and moved no
+default. *(`LUX-E1-AM1` added the isolating arm; `LUX-E1-AM2` then found the archive drift the
+factor table had wrongly held constant. Both ran as B′ — see the discharge above.)*
+
+**✅ `LUX-E1` RAN 2026-09-05 AND ITS GATE ON `LUX-4` IS DISCHARGED.** Arm B′ — the archive and
+the drop list both pinned to what the live map was built with — rebuilt **byte-identically**.
+So a rebuild *does* reproduce the live map, and **`LUX-4` is a metadata change as priced, not a
+graph adoption.** Determinism holds. Figures owned by
+[`builder/analysis/2026-09-05-lux-e1-armb/README.md`](../../builder/analysis/2026-09-05-lux-e1-armb/README.md),
+cited never restated. `LUX-4` is still **unstarted**, and the `LUX-1..3` plan still deliberately
+excludes it — do not start it from there — but it is no longer blocked.
+
+**⚠ THREE `CXA-` LEFTOVERS, not one. The revert moved the map and moved none of them.** The
+drop-list pointer was known; `LUX-E1` found the other two. **(a)** The ALG-B **archive tree**
+gained tens of thousands of response files after the live map was built, so an unpinned rebuild
+reads the extended crawl — count owned by the README above, cited never restated — the pre-expansion state survives as `grt-archive-algb.pre-cex-snapshot`.
+**(b)** The **acceptance bounds** were recalibrated for the extended population, so
+`artistpath-build build` now **REJECTS a correct rebuild of the served map** before serialising
+it. **(b) blocks `LUX-4`**, which must rebuild to add its fields and lands on the same
+population. Neither is a correctness problem with the graph. **Which fix is his** —
+recalibrate the bounds to the served population, or wire the `--criteria` hook `cmd_build`
+already reads but no argument supplies; **a session must not widen a bound to admit its own
+build.**
+
+**Everything else open is his to trigger and none of it blocks anything:** **Option C**
+(same-name population probe), **`SEL-`**, **closing or keeping the 2026-07-29
+famous-to-famous defect ruling**, the **three candidate path-quality fixes in the `CXR-`
+README** (each needs its own pre-registration), and **renaming the app to "Unsung"** — scoped,
+unapproved, and needing two decisions from him about the landing copy. The UI still says
+"Artist Path".
+
+**Do not re-litigate, and do not re-discharge:** the 2026-09-03 address test (**run and passed
+2026-09-04**), either 2026-09-01 entry, or the depth-0 half of his revert report — **ruled
+2026-09-04 (owner) NOT a defect and NOT open work**, on the grounds that a single offhand
+report with no mechanism behind it is not a factual assessment. That closed it as an item and
+**overturned no measurement**: `CXR-P3`'s null and the diagnosis README's "unexplained by
+anything here" both remain exactly true and must not be edited. Reopening it is his trigger,
+and the evidence would be more than one user reporting it after launch. Equally, do not
+re-queue "tell me how it feels" — his long-run evaluation is continuous and `TEST-QUEUE.md`
+explicitly does not hold it (owner ruling, 2026-08-07).
+

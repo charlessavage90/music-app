@@ -37,7 +37,8 @@ belief — including a belief you yourself established earlier.
   measure both and report them separately.
 - **The artifact.** `APG1`, a little-endian binary: header + CSR arrays
   (`offsets`, `neighbours`, `scores`, `edge_types`) + a JSON metadata blob (mbids,
-  names, disambiguations, popularity, `deezer_ids` — the last may be absent).
+  names, disambiguations, popularity, `deezer_ids`, `fame_lb`, `spotify_ids`,
+  `apple_ids`, `artist_facts` — every one after `popularity` may be absent).
   Written by `builder/…/artifact.py`, read
   independently by `api/…/graph_store.py`. Graphs live in `builder/scratch/`
   (`graph-75k.bin` and successors; the dev API boots the adopted artifact by default).

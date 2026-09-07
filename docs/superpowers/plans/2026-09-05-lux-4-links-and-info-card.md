@@ -172,6 +172,31 @@ reasoning, not narration.
 
 ## Task `L4-T1`: unblock the rebuild — the acceptance bounds
 
+**✅ DONE 2026-09-05. Option A, taken by the session — see the correction below.**
+
+**⚠ THE OWNER OVERRULED THE ESCALATION ITSELF, and the rule he set is worth carrying:**
+moving a bound so a **new, never-served** artifact can be adopted is risk acceptance and his
+(that is what `MSW-` `4b55144` and `CXA-` `c4cfbb1` both were). Moving one to re-admit the
+artifact **already in production** is bookkeeping and a session's. The mechanical test: *is
+the new bound derived from something known independently of the build that went red?*
+
+**⚠ AND THIS TASK NAMED THE WRONG COMMIT — corrected, because the record must not carry it.**
+It said to read the band from `3aa61f0b`. That is the band of the **retired 75k map**
+(`node_count=(60_000, 90_000)`, `edge_count=(700_000, 1_100_000)`) and it **rejects the served
+map on BOTH bounds** — 58,838 < 60,000 and 1,315,684 > 1,100,000. Following it literally
+leaves the rebuild still refused. The band that admitted `graph-msw-tu50.bin` is at
+**`4b55144`** (`MSW-` Task 9, ten minutes later): `node_count=(47_000, 71_000)`,
+`edge_count=(1_050_000, 1_580_000)`. The trap: the live artifact's manifest records
+`git_commit: 3aa61f0b`, because the build ran at that commit and the bounds moved right after
+it. **This is why the escalation was not the safeguard — the figure put to the owner was
+wrong, and approving it would not have caught that.** Arithmetic against the manifest did.
+
+**Also corrected: BOTH bounds moved, not just the artist count** the error message named. The
+`CXA-` edge band admitted `JFX-B` (1,618,164) — the adoption the owner's listening test
+rejected — so restoring only the node bound would have left the reverted artifact admissible.
+
+*(Original task text follows, for the record.)*
+
 **⚠ THIS TASK CONTAINS AN OWNER DECISION AND STOPS FOR IT.** Do not pick an option yourself.
 
 **Files:**
@@ -203,11 +228,12 @@ what it *contains*.
 **Option A — recalibrate the bounds to the served population.** Restores the pre-expansion
 state, consistent with the revert; makes the default path correct for every future build.
 Change `PRODUCTION_ACCEPTANCE`'s artist-count bound back to the band that admitted
-`graph-msw-tu50.bin`, taken from the pre-`c4cfbb1` value at commit `3aa61f0b` — **read it from
-git, never invent a band**:
+`graph-msw-tu50.bin`, taken from the pre-`c4cfbb1` value at commit **`4b55144`** — **read it from
+git, never invent a band**. *(This originally read `3aa61f0b`; see the correction at the head
+of this task.)*
 
 ```bash
-git show 3aa61f0b:builder/src/artistpath_builder/acceptance.py | grep -n -A 6 "PRODUCTION_ACCEPTANCE"
+git show 4b55144:builder/src/artistpath_builder/acceptance.py | grep -n -A 8 "PRODUCTION_ACCEPTANCE"
 ```
 
 **Option B — wire the `--criteria` hook the CLI lacks.** `cmd_build` already reads
@@ -269,7 +295,89 @@ rejected before serialise. Owner chose option <A|B>."
 
 ---
 
+## Task `L4-T1b`: record which files built the graph — **ADDED 2026-09-05, ✅ DONE**
+
+**Not in the plan as authored.** Added because a deferral's condition fired on this plan:
+`NEXT.md` carries *"a graph's manifest cannot say WHICH drop lists built it"*, whose tightened
+condition reads **"before the `LUX-4` rebuild (`L4-T7`)"**. That condition had already fired
+once, during `LUX-E1`, and was honestly recorded as not honoured — the consequence being the
+hand analysis of 2026-09-05. `L4-T7` is the next rebuild comparison and its factor table is
+exactly what this serves, so it is discharged here rather than deferred a third time.
+
+**Files:** `manifest.py` (`resolve_build_inputs`, `log_build_inputs`, `build_manifest`),
+`cli.py` (`cmd_build`), `tests/test_manifest.py`, `tests/test_cli.py`.
+
+**What it records:** the resolved **filename and a sha256 over the file's bytes** for each drop
+family actually applied, plus the archive directory. Hashed over the bytes because the three
+payloads' own hash keys are inconsistent and `featured_credit` carries none. A family whose
+flag is off is **absent, never null** — absence reads as "not applied", a null reads as
+"applied, identity unknown", which is the ambiguity being removed.
+
+**Logged at build START**, so an unintended input shows in the first seconds rather than in a
+sidecar written after serialisation.
+
+**⚠ RECORDING ONLY — a mismatch is NOT a refusal. Owner's decision, 2026-09-05.** A gate here
+*could* fire in the first seconds (both inputs are known before any work happens), so the
+deferral's stated worry about "killing a long build at the end" does not apply to this check —
+it applies to the acceptance bounds. The reason to wait is different: an escape hatch reached
+reflexively removes the protection it guards. Revisit once we know whether mismatches are
+routine or rare. **A session must not add the gate on its own.**
+
+**Additive and cannot perturb a build.** `build_inputs` is a defaulted argument omitted
+entirely when absent — same discipline as `Graph.deezer_ids` — because a frozen probe
+(`analysis/2026-08-09-jfx-prereg-critique/`) calls `build_manifest` positionally with four
+arguments. The sidecar is written after serialisation, so no sha moves and `L4-T7`'s control
+arm is unaffected.
+
+- [x] Steps 1–5: tests first (5 red), implement, wire into `cmd_build`, end-to-end test
+      through `main`, full suite. **257 passed. Snyk `builder/src` 0 issues.**
+
+---
+
 ## Task `L4-T2`: extend the extraction pass — Spotify and structured fields
+
+> ### ⚠ CORRECTED 2026-09-05 DURING EXECUTION — the files below are WRONG
+>
+> **The plan said to modify `2026-08-02-dsp-ids/dsp_ids.py` and reuse the population set it
+> already builds. Both halves are wrong, and the first is a coverage defect that would have
+> shipped silently.**
+>
+> **1. That script's population does not cover the served map.** It scans the union of
+> `graph-t15-tiebreakfix.bin` and `graph-algb-full.bin` — the artifacts adopted and under test
+> on 2026-08-02. `graph-msw-tu50.bin` was built four days later from a **later** ALG-B crawl,
+> and **2,687 of its 58,838 artists (4.6%) are in neither**. Its docstring's claim that the
+> ALG-B build is "a superset of anything a final ALG-B build produces" is true for a build from
+> the 2026-07-30 archive and **false across the crawl extension that followed**. Reusing it
+> would have omitted links and facts for 4.6% of every journey, invisibly.
+>
+> **2. Its outputs are pinned.** `deezer_ids.py` ships a map whose sha that script reproduces.
+> Re-running it over a different population changes that sha and breaks the shipped map's
+> reproduction claim. A frozen probe's value is that it is frozen.
+>
+> **So the extraction is a NEW script in a NEW directory**, and `dsp_ids.py` and its outputs are
+> untouched. Population is the union of **all three** artifacts, each sha-verified before it is
+> read — a superset is safe by construction and keeps either lineage covered.
+>
+> **⚠ `L4-T3` and `L4-T4` must read from the new paths**, not the ones below.
+>
+> **⚠ A LIVE DEFECT WAS FOUND HERE AND IS NOT FIXED BY THIS PLAN.** The shipped Deezer id map
+> was extracted over that same short population, so **all 2,687 of those served artists carry no
+> Deezer id** — against 55.2% coverage across the map as a whole. They can only resolve a clip
+> by **name search**, which is precisely the `BYP-13` exposure the id path exists to close.
+> Refreshing the Deezer map here would change the artifact's existing `deezer_ids` key and so
+> **break `L4-T7`'s control arm**, whose entire job is to prove this change touches nothing that
+> already existed. Recorded for the owner; it needs its own track.
+
+**Files (corrected):**
+- Create: `builder/analysis/2026-09-05-lux4-extract/lux4_extract.py`
+- Create: `builder/analysis/2026-09-05-lux4-extract/test_lux4_extract.py`
+- Create: `builder/analysis/2026-09-05-lux4-extract/dsp_links.json` (new output)
+- Create: `builder/analysis/2026-09-05-lux4-extract/artist_facts.json` (new output)
+- Create: `builder/analysis/2026-09-05-lux4-extract/README.md` (**figures owner**, incl. `LUX-E3`)
+- Modify: `docs/README.md` (one row classifying the new directory)
+- **UNTOUCHED, deliberately:** `builder/analysis/2026-08-02-dsp-ids/`
+
+*(Original file list, superseded:)*
 
 **Files:**
 - Modify: `builder/analysis/2026-08-02-dsp-ids/dsp_ids.py`
@@ -419,6 +527,38 @@ coverage read is recorded beside the existing Deezer and Apple columns."
 ---
 
 ## Task `L4-T3`: the frozen streaming-link module
+
+> ### ⚠ CORRECTED DURING EXECUTION — source path, and two data defects the plan's tests miss
+>
+> **Source is `analysis/2026-09-05-lux4-extract/dsp_links.json`**, not the `2026-08-02-dsp-ids/`
+> path below — see `L4-T2`'s correction for why that directory is left frozen.
+>
+> **The plan's `test_ids_are_tails_not_urls` passes on data that is wrong.** It asserts no
+> `http` and no `/`, and every malformed entry in the extracted payload satisfies both. Two
+> real defects were found by looking at the data instead:
+>
+> **(a) Apple ids ship in two incompatible shapes.** MusicBrainz records the same artist as
+> `music.apple.com/us/artist/name/657515` **and** `itunes.apple.com/us/artist/name/id657515`.
+> The first extraction produced **20,777** bare-numeric ids and **15,140** `id`-prefixed ones,
+> so a single frontend URL template could only ever have been correct for 58% of them.
+> Normalised to the bare numeric form during extraction.
+>
+> **(b) An album URL cannot be told from an artist URL by id shape.** A Spotify **album** id is
+> also 22-character base62. Artist records in the dump carry album and playlist relations —
+> **27 album and 2 playlist URLs in the first 200,000 records**, against 80,549 artist ones — so
+> without a path check an album link would ship on an artist card. Both services put the entity
+> kind in the URL path, which is what is now checked.
+>
+> **Both guards run DURING extraction, never as a post-pass**, because the map keeps the first
+> value per artist: a rejected relation must not consume the slot and block a later valid one.
+> Tests pin that reason specifically.
+>
+> **Tests added beyond the plan's three:** `test_every_apple_id_is_bare_numeric` and
+> `test_every_spotify_id_is_22_char_base62`, both over the **whole** map rather than a sample of
+> 50 — a sample cannot see a 42%-of-the-map shape split.
+
+*(Original task text follows.)*
+
 
 **Files:**
 - Create: `builder/src/artistpath_builder/dsp_links.py`

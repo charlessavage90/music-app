@@ -67,13 +67,49 @@ UNLISTENABLE_DROP_SHA256 = (
 # 2026-08-05-msw-verification/msw_v2_exposure.py — so deleting it would break
 # probes whose whole purpose is to reproduce their own committed figures. It is
 # superseded as a DEFAULT, not orphaned.
+# ⚠ REPOINTED BACK 2026-09-05 (`L4-T1`) TO THE 75k-ERA PAYLOAD. REVERT
+# CLEANUP — the second of the three `CXA-` leftovers, and the one the block
+# above describes as an adoption that has since been REVERTED. The `CXR-`
+# revert of 2026-09-01 restored what is SERVED and left this pointer aimed at
+# the extended-population census, so a rebuild from HEAD would have produced a
+# graph 31 artists smaller than the live map, strictly by subtraction.
+#
+# NOTHING SERVED WAS EVER AFFECTED: the API reads a prebuilt artifact and never
+# loads a drop list (verified by grep over api/src/), and drop lists are applied
+# by pipeline.py at BUILD time. This only ever governed what a rebuild produces.
+#
+# The failure mode was predicted here before it happened, in
+# tests/test_pipeline_mirrors.py's note on the per-invocation override:
+# "repointing the default changes every future build from the pre-crawl
+# snapshot SILENTLY, because pipeline.py only refuses on artists outside the
+# censused set and a larger list applied to a smaller archive passes."
+# That is exactly what occurred. Pointing back also restores the LOUD failure:
+# the 75k census refuses (`PopulationNotCensused`) against the extended
+# archive rather than quietly under-filtering it.
+#
+# ⚠ WHAT THIS DOES NOT FIX, and it is the larger finding. The keep-check's
+# criterion is the NAME search only, while the app resolves IDENTITY FIRST
+# (`api/…/clips.py` `_search`: "Identity before name", shipped 2026-08-02 at
+# `aff8fb5` — three days BEFORE the census). So both payloads drop artists
+# whose clips the app's primary route resolves: 220 of 740 clip-stage drops in
+# this list, 373 of 1,507 in the 2026-08-09 one. That is `ULC-F4`, deferred by
+# the owner to its own track, and it needs a re-census and a rebuild — NOT to
+# be folded into a metadata change. Figures and mechanism:
+# builder/analysis/2026-09-05-lux-e1-drift-source/README.md §6.
+#
+# PREVIOUS (the 117k-era ALG-B payload, superseded not deleted):
+#   unlistenable_drop_algb_20260809.json
+#   ae67fbb3bbe78ada6092e7d30ba7bfa3315655b2936c882cd9ef8cd9cee584ce
+# ⚠ That FILE stays in data/ for the same reason its predecessor did: it is the
+# census of the extended population, and re-adopting that population needs it.
+# Superseded as a DEFAULT, not orphaned.
 CANDIDATE_UNLISTENABLE_DROP_SHA256 = (
-    "ae67fbb3bbe78ada6092e7d30ba7bfa3315655b2936c882cd9ef8cd9cee584ce"
+    "6b25232f637aa2a4841a81a0cfb251840b7352a3d0eaa36cd63fd04c33627ff3"
 )
 
 UNLISTENABLE_DROP_LIST_PATH = _DATA / "unlistenable_drop_20260805.json"
 CANDIDATE_UNLISTENABLE_DROP_LIST_PATH = (
-    _DATA / "unlistenable_drop_algb_20260809.json"
+    _DATA / "unlistenable_drop_algb_20260805.json"
 )
 
 # Censused populations only. An algorithm absent here has no list, and that

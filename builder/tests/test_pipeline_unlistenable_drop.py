@@ -307,8 +307,11 @@ from artistpath_builder.unlistenable_drop import (  # noqa: E402
 
 RECORDED_COUNT = 13_355
 RECORDED_POPULATION = 75_000
-CANDIDATE_COUNT = 27_262
-CANDIDATE_POPULATION = 117_302
+# REPOINTED BACK 2026-09-05 (`L4-T1`): the CXA- revert cleanup returned the
+# ALG-B default to the 75k-era payload the SERVED map was built with.
+# PREVIOUS (117k-era ALG-B): CANDIDATE_COUNT 27_262, CANDIDATE_POPULATION 117_302
+CANDIDATE_COUNT = 15_708
+CANDIDATE_POPULATION = 75_000
 
 
 @pytest.fixture

@@ -17,6 +17,57 @@ Layout, all little-endian:
     ...     float32[E]    scores
     ...     uint8[E]      edge types
     ...     char[J]       metadata JSON (UTF-8)
+
+ADDING A NEW PIECE OF PER-ARTIST METADATA
+  Written down because it was spread across six files and three docstrings,
+  and three changes (`deezer_ids`, `fame_lb`, `LUX-4`) each rediscovered it.
+  Nothing here BLOCKS a new field: `FORMAT_VERSION` stays 1 because the keys
+  are additive, and J is a uint64, so there is no practical size limit.
+
+  The nine steps, in order:
+    1. Extract it offline into a dated payload (pattern: the scripts under
+       builder/analysis/, e.g. 2026-09-05-lux4-extract/).
+    2. Ship it as frozen, sha-pinned package data with a loader module
+       (pattern: deezer_ids.py, dsp_links.py, artist_facts.py).
+    3. Add a DEFAULTED field to `Graph` -- frozen probes call `build_graph`
+       positionally and an empty list must keep their artifacts byte-identical.
+    4. Project it onto node order INSIDE `build_graph`, never in the caller:
+       node ids are assigned there, and a caller ordering it itself would be
+       re-deriving `sorted(...)` and could silently disagree.
+    5. Pass the map to `build_graph` from `pipeline.py` as a DICT.
+    6. Write it here, guarded by `any(...)` -- see the warning at the write
+       site -- and read it back with `.get(key, [])`, never `meta[key]`.
+    7. Record it in `RECORDED_METADATA_KEYS` (tests/test_pipeline_mirrors.py),
+       which fails until you make a per-mirror decision. That guard exists
+       because steps 1-6 change what every ERA_PINNED_CALLER builds while
+       leaving every test green -- which is how the first two slipped through.
+    8. Read it in the api (`graph_store.py`). A key read through a
+       BOUNDS-CHECKED accessor may be shorter than N; a key indexed directly
+       in the cost function must have its length checked. Copy the right one.
+    9. Expose it on `ArtistOut` (three wire positions) and render it.
+
+  THE TWO COSTS, neither of which is avoidable:
+    - A REBUILD AND A DEPLOY. The artifact is prebuilt and immutable, so no
+      metadata reaches users without one, plus a new ARTISTPATH_GRAPH_SHA256
+      taken from the manifest (never transcribed by hand, `DEP-24`).
+    - RE-EXTRACTION REFRESHES EVERYTHING, and this is the trap. The dump is a
+      dated snapshot, gitignored, and MusicBrainz rotates it. Re-running an
+      extraction to add one field also picks up every upstream change to the
+      fields already shipped, so "add a field" silently becomes "refresh all
+      of them". To isolate, extract the new field alone and merge it into the
+      existing frozen payload rather than regenerating that payload.
+
+  ⚠ `artist_facts` IS THE CHEAP PLACE TO ADD A FACT, and it is deliberately
+  open-ended: a new key inside its per-artist dict needs NONE of steps 3-9 --
+  only a re-extraction, a rebuild, and frontend rendering. The price is that
+  the dict repeats its key NAMES once per artist, so each new fact costs
+  roughly (len(name) + 3) x N bytes of pure overhead. Measured 2026-09-06:
+  as a list of dicts it is 4.27 MB against 2.37 MB as parallel arrays and
+  1.54 MB with the categoricals interned. The list-of-dicts shape was kept
+  because 1.9 MB on a 22.7 MB artifact changes no decision and the artifact is
+  never sent to a browser. REVISIT THAT IF GENRE TAGS LAND (`LUX-E6`): a list
+  per artist is a different order of magnitude, and it is the case that would
+  justify the parallel-array shape under a new key.
 """
 
 from __future__ import annotations
@@ -71,6 +122,28 @@ def serialise(graph: Graph) -> bytes:
     # it must not be coerced to 0 on the way out.
     if graph.fame_lb_raw:
         meta["fame_lb"] = graph.fame_lb_raw
+
+    # LUX-4. SAME additive-key discipline as deezer_ids and fame_lb above and
+    # for the same two reasons: FORMAT_VERSION stays 1 because both parsers
+    # check it for strict equality, and the keys are omitted when empty so
+    # every artifact built before LUX-4 -- including the frozen probe mirrors
+    # whose shas Track B's identity gate pins -- stays byte-identical.
+    #
+    # These are WIRE KEYS and permanent: the api reads them by these exact
+    # strings, and renaming one invalidates every artifact carrying it.
+    # Values are platform id TAILS, never URLs (`L4-D2`).
+    #
+    # ⚠ `any(...)`, NOT truthiness of the list, and the difference is the whole
+    # guard. Once the pipeline runs these lists are node-indexed and therefore
+    # NEVER empty -- they are full of "" and {} when nothing was extracted, and
+    # `if graph.spotify_ids:` is true for such a list. That would write the key
+    # unconditionally and change the bytes of every artifact with no links.
+    if any(graph.spotify_ids):
+        meta["spotify_ids"] = graph.spotify_ids
+    if any(graph.apple_ids):
+        meta["apple_ids"] = graph.apple_ids
+    if any(graph.artist_facts):
+        meta["artist_facts"] = graph.artist_facts
 
     metadata = json.dumps(
         meta,
@@ -149,4 +222,12 @@ def deserialise(payload: bytes) -> Graph:
         # ramp, which the api turns into a refusal to boot ONLY if the ramp is
         # actually switched on.
         fame_lb_raw=metadata.get("fame_lb", []),
+        # LUX-4, read with `.get` for the same reason as the two above: the
+        # keys are additive and FORMAT_VERSION was not bumped, so every
+        # artifact built before today lacks all three -- including the served
+        # one. Absence means "no link recorded", which the api renders as a
+        # search fallback and an omitted info row.
+        spotify_ids=metadata.get("spotify_ids", []),
+        apple_ids=metadata.get("apple_ids", []),
+        artist_facts=metadata.get("artist_facts", []),
     )

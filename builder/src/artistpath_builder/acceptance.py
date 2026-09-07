@@ -196,12 +196,49 @@ PRODUCTION_ACCEPTANCE = AcceptanceCriteria(
     # it. Weaken the edge floor and that protection is gone.
     # Figures: builder/analysis/2026-08-10-cxa-acceptance-bounds/.
     #
-    # PREVIOUS (MSW- candidate map): node_count=(47_000, 71_000),
-    #                                edge_count=(1_050_000, 1_580_000)
-    # PREVIOUS (retired 75k map):    node_count=(60_000, 90_000),
-    #                                edge_count=(700_000, 1_100_000)
-    node_count=(70_900, 106_400),
-    edge_count=(1_295_000, 1_942_000),
+    # RESTORED 2026-09-05 (`L4-T1`) to the MSW- values above — REVERT
+    # CLEANUP, not a recalibration. The `CXR-` revert of 2026-09-01 moved
+    # what is SERVED back to `graph-msw-tu50.bin` and moved none of the three
+    # things calibrated around the extended population: the drop-list default,
+    # the archive, and these bounds. The consequence was measured by `LUX-E1`:
+    # a CORRECT rebuild of the live map was refused before `serialise` and
+    # never written. Mechanism and figures:
+    # builder/analysis/2026-09-05-lux-e1-drift-source/README.md §4.
+    #
+    # ⚠ WHY THIS IS NOT THE OWNER DECISION THE TWO ENTRIES ABOVE WERE, and the
+    # distinction is the one to apply next time: MSW- and CXA- each moved a
+    # bound so a NEW, never-served artifact could be adopted — risk acceptance,
+    # and his. This restores the band that admitted the artifact ALREADY IN
+    # PRODUCTION, whose counts are facts about what is running today, read from
+    # its own manifest sidecar. Nothing is being admitted that his ear has not
+    # already passed. The test that separates the two cases: is the new bound
+    # derived from something known INDEPENDENTLY of the build that went red?
+    # Here, yes. Taken by a session on the owner's explicit instruction
+    # (2026-09-05) that bounds tracking a deliberate population change are
+    # mechanical. NO BOUND WAS INVENTED OR WIDENED TO FIT A BUILD.
+    #
+    # Sensitivity is preserved, checked against the same four known artifacts,
+    # and `tests/test_acceptance.py` now asserts all four verdicts:
+    #
+    #   ACCEPT  the served MSW- map          58,838 / 1,315,684
+    #   reject  JFX-B, the REVERTED adoption 88,685 / 1,618,164  ← on BOTH
+    #   reject  retired pre-MSW mutual-kNN   74,193 /   898,006  ← on BOTH
+    #   reject  mutual-kNN of THIS archive   81,749 /   905,558  ← on BOTH
+    #
+    # ⚠ The cap-rule tripwire the CXA- entry above installed SURVIVES: its
+    # warning was that the edge floor is the only bound that can see a silent
+    # cap-rule revert. The restored floor of 1,050,000 rejects both mutual-kNN
+    # rows (898,006 and 905,558) by roughly 15%, so the protection is intact
+    # under this band too — it is not being traded away for the node floor.
+    # The second row is what the CXA- values got WRONG after the revert: they
+    # ACCEPTED the artifact the owner's listening test rejected.
+    #
+    # PREVIOUS (CXA- extended pop): node_count=(70_900, 106_400),
+    #                               edge_count=(1_295_000, 1_942_000)
+    # PREVIOUS (retired 75k map):   node_count=(60_000, 90_000),
+    #                               edge_count=(700_000, 1_100_000)
+    node_count=(47_000, 71_000),
+    edge_count=(1_050_000, 1_580_000),
     # UNCHANGED and deliberately so: median degree PASSED on the candidate
     # build, and again on the JFX-B build (whose rejection names only the two
     # counts) and on the mutual-kNN row above, at 7. Only the two bounds that

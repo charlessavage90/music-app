@@ -40,7 +40,12 @@ from artistpath_builder.config import PERMITTED_ALGORITHMS, BuilderConfig
 from artistpath_builder.crawl import Crawler, FrontierExhausted, http_fetcher
 from artistpath_builder.fixture import extract_fixture
 from artistpath_builder.frontier import reconstruct_referenced, rewrite_checkpoint
-from artistpath_builder.manifest import build_manifest, write_manifest
+from artistpath_builder.manifest import (
+    build_manifest,
+    log_build_inputs,
+    resolve_build_inputs,
+    write_manifest,
+)
 from artistpath_builder.fame import fetch_fame, lb_fame_fetcher, seed_fame
 from artistpath_builder.pipeline import archive_artists, build_from_archive
 from artistpath_builder.sources.listenbrainz import ListenBrainzSource
@@ -244,6 +249,16 @@ def cmd_fame(args) -> int:
 
 def cmd_build(args) -> int:
     config = _config(args)
+    # Resolved and logged BEFORE the build, so an unintended drop list or
+    # archive shows in the first seconds rather than in a sidecar written
+    # after serialisation. Recording only — a mismatch is not a refusal
+    # (owner, 2026-09-05). Why this exists: the CXR- revert left the ALG-B
+    # unlistenable default pointing at the extended-population census, and
+    # no manifest could say which list a build had applied.
+    build_inputs = resolve_build_inputs(
+        config, getattr(args, "archive_dir", None) or args.s3_prefix
+    )
+    log_build_inputs(build_inputs)
     started = time.monotonic()
     graph = build_from_archive(config, _archive(args), ListenBrainzSource(config))
     # Refuse to write an artifact with the log §2.8 failure signature. This is
@@ -255,7 +270,9 @@ def cmd_build(args) -> int:
     elapsed = time.monotonic() - started
     out = Path(args.out)
     out.write_bytes(payload)
-    write_manifest(out, build_manifest(graph, config, payload, elapsed))
+    write_manifest(
+        out, build_manifest(graph, config, payload, elapsed, build_inputs)
+    )
     mean_edges = graph.edge_count / graph.artist_count if graph.artist_count else 0
     logging.info(
         "wrote %s: %d artists, %d edges (%.1f per artist), %.1f MB, %.0fs",
