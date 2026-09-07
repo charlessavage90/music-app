@@ -14,11 +14,23 @@ the two experimental controls named below. Each arm's isolating baseline is the
 `ceiling=50` control, which differs from it in exactly one column.
 
 SCOPE, and it is narrow on purpose
-  This is a STRUCTURAL probe over graphs built in memory. It measures degree.
-  It does NOT route: no path is built, no `CRS-C4` hub transit is computed, no
-  routing criterion of any pre-registration is evaluated, and nothing here
-  adopts or proposes anything. The cap-rule decision is parked and the owner's
+  This is a STRUCTURAL probe over graphs built in memory. It measures degree,
+  and which edges a raised ceiling restores. It does NOT route: no path is
+  built, no `CRS-C4` hub transit is computed, no routing criterion of any
+  pre-registration is evaluated, and nothing here adopts or proposes anything.
+  The cap-rule decision is parked and the owner's
   (`specs/2026-09-06-own-similarity-design.md` §9).
+
+WHAT THE RESTORED EDGES ARE SPLIT BY, and why the raw dead-end count cannot
+  Restoring a tail artist's link to a famous hub and restoring a link between
+  two obscure artists are DIFFERENT PRODUCTS. The first puts an obscure artist
+  one hop from a hub without making a journey likely to stop there; the second
+  builds routes through the tail. A dead-end count cannot tell them apart, and
+  nothing in the record separates them. So every edge a raised arm restores to
+  an added artist is classified by what sits at the OTHER end, using DEGREE
+  WITHIN THAT ARM'S OWN BUILT GRAPH — never fame, never popularity, and never
+  the served map's degrees (§2.6: three currencies that have each been read as
+  another here, at a cost).
 
 THIS KNOB IS NOT NEW AND THIS PROBE MUST NOT PRESENT IT AS NEW
   Track B swept it. `TUw-50-100` is this exact rule at ceiling 100, isolated
@@ -233,6 +245,133 @@ def hub_stats(degrees: np.ndarray, mbids: list[str]) -> dict:
     }
 
 
+def top_decile_by_degree(degrees: np.ndarray, mbids: list[str]) -> tuple[set[str], dict]:
+    """The arm's own top 10% of nodes BY DEGREE, with the tie caveat measured.
+
+    Degree, and only degree — the classification the restored-edge split needs
+    is "is the other end a hub in THIS graph", which is a structural property.
+    Fame percentile and `pop_raw` are different quantities and are not used
+    here (§2.6/§2.11).
+
+    ⚠ The boundary is tie-dominated wherever many nodes sit at the ceiling, so
+    WHICH nodes fall inside the decile is partly arbitrary among equal degrees.
+    The boundary degree and the number of nodes tied at it are returned so the
+    arbitrariness is visible rather than implied.
+    """
+    cut = max(1, int(round(len(degrees) * 0.10)))
+    order = np.argsort(-degrees, kind="stable")[:cut]
+    boundary = int(degrees[order].min())
+    return (
+        {mbids[int(i)] for i in order},
+        {
+            "cut_size": cut,
+            "boundary_degree": boundary,
+            "nodes_at_the_boundary_degree": int(np.sum(degrees == boundary)),
+            "nodes_strictly_above_the_boundary": int(np.sum(degrees > boundary)),
+        },
+    )
+
+
+def neighbour_sets(graph, wanted: set[str]) -> dict[str, frozenset[str]]:
+    """Neighbour MBIDs for each wanted artist present in this build."""
+    out: dict[str, frozenset[str]] = {}
+    mbids = graph.mbids
+    for i, mbid in enumerate(mbids):
+        if mbid not in wanted:
+            continue
+        lo, hi = int(graph.offsets[i]), int(graph.offsets[i + 1])
+        out[mbid] = frozenset(mbids[int(j)] for j in graph.neighbours[lo:hi])
+    return out
+
+
+def restored_edge_composition(
+    control_nbrs: dict[str, frozenset[str]],
+    control_degree: dict[str, int],
+    arm_nbrs: dict[str, frozenset[str]],
+    arm_degree: dict[str, int],
+    added_set: set[str],
+    hub_set: set[str],
+) -> dict:
+    """Split the edges a raised ceiling gives back to the added artists.
+
+    An edge is "restored" if it is incident to an added artist and present in
+    this arm but not in the control. Counted as UNORDERED PAIRS, so an edge
+    between two added artists is one edge and not two.
+
+    Buckets, in the order they are tested (hub first, so a hub at either end
+    dominates):
+      to_a_top_decile_hub        at least one end is top-decile-by-degree here
+      between_two_added_artists  neither end is a hub, both are in the added set
+      to_a_pre_existing_non_hub  neither end is a hub, the other end is not added
+    """
+    hub_pairs: set[tuple[str, str]] = set()
+    added_added_pairs: set[tuple[str, str]] = set()
+    pre_existing_pairs: set[tuple[str, str]] = set()
+    gained_hub: set[str] = set()
+    gained_non_hub: set[str] = set()
+
+    for artist in added_set:
+        before = control_nbrs.get(artist, frozenset())
+        now = arm_nbrs.get(artist, frozenset())
+        for other in now - before:
+            pair = (artist, other) if artist < other else (other, artist)
+            if artist in hub_set or other in hub_set:
+                hub_pairs.add(pair)
+                gained_hub.add(artist)
+            else:
+                gained_non_hub.add(artist)
+                if other in added_set:
+                    added_added_pairs.add(pair)
+                else:
+                    pre_existing_pairs.add(pair)
+
+    total = len(hub_pairs) + len(added_added_pairs) + len(pre_existing_pairs)
+
+    def share(part: int) -> float:
+        return round(part / total, 5) if total else 0.0
+
+    # Who leaves the dead-end group, and on the strength of which kind of edge.
+    # An artist absent from the control has no degree there; counted separately
+    # rather than folded in as degree 0, because "absent" and "has one edge" are
+    # different states and only one of them is a dead end.
+    left_dead_end = {"total": 0, "only_hub_edges": 0, "only_non_hub_edges": 0,
+                     "both_kinds": 0, "was_absent_from_the_control": 0}
+    for artist in added_set:
+        now_degree = arm_degree.get(artist)
+        if now_degree is None or now_degree <= 2:
+            continue
+        was = control_degree.get(artist)
+        if was is None:
+            left_dead_end["was_absent_from_the_control"] += 1
+            continue
+        if was > 2:
+            continue
+        left_dead_end["total"] += 1
+        by_hub, by_other = artist in gained_hub, artist in gained_non_hub
+        if by_hub and by_other:
+            left_dead_end["both_kinds"] += 1
+        elif by_hub:
+            left_dead_end["only_hub_edges"] += 1
+        elif by_other:
+            left_dead_end["only_non_hub_edges"] += 1
+
+    return {
+        "restored_edges_total": total,
+        "to_a_top_decile_hub": len(hub_pairs),
+        "between_two_added_artists": len(added_added_pairs),
+        "to_a_pre_existing_non_hub": len(pre_existing_pairs),
+        "share_to_a_top_decile_hub": share(len(hub_pairs)),
+        "share_between_two_added_artists": share(len(added_added_pairs)),
+        "share_to_a_pre_existing_non_hub": share(len(pre_existing_pairs)),
+        # The two-way split the question is really about.
+        "share_to_a_hub": share(len(hub_pairs)),
+        "share_to_a_non_hub": share(len(added_added_pairs) + len(pre_existing_pairs)),
+        "added_artists_gaining_at_least_one_hub_edge": len(gained_hub),
+        "added_artists_gaining_at_least_one_non_hub_edge": len(gained_non_hub),
+        "left_the_two_or_fewer_group": left_dead_end,
+    }
+
+
 def run_arm(ceiling: int, added: list[str], pre_existing: list[str]) -> dict:
     """Build one arm through the SHIPPED build_from_archive and measure it."""
     config = BuilderConfig(
@@ -250,6 +389,8 @@ def run_arm(ceiling: int, added: list[str], pre_existing: list[str]) -> dict:
 
     degrees = np.diff(graph.offsets).astype(np.int64)
     degrees_by_mbid = {m: int(degrees[i]) for i, m in enumerate(graph.mbids)}
+    hub_set, hub_boundary = top_decile_by_degree(degrees, graph.mbids)
+    added_nbrs = neighbour_sets(graph, set(added))
 
     arm = {
         "union_degree_ceiling": ceiling,
@@ -269,6 +410,7 @@ def run_arm(ceiling: int, added: list[str], pre_existing: list[str]) -> dict:
             "require_fame": config.require_fame,
         },
         "whole_graph": hub_stats(degrees, graph.mbids),
+        "top_decile_by_degree": hub_boundary,
         "added": set_stats(degrees_by_mbid, added),
         "pre_existing": set_stats(degrees_by_mbid, pre_existing),
     }
@@ -286,7 +428,11 @@ def run_arm(ceiling: int, added: list[str], pre_existing: list[str]) -> dict:
         f"absent {100 * arm['added']['share_absent']:.2f}%",
         flush=True,
     )
-    return arm
+    return arm, {
+        "added_nbrs": added_nbrs,
+        "degrees_by_mbid": degrees_by_mbid,
+        "hub_set": hub_set,
+    }
 
 
 def main() -> int:
@@ -327,9 +473,33 @@ def main() -> int:
     # Sequential and re-read per arm: build_from_archive has no seam to inject a
     # cap step into, so each arm pays the full parse. Results are flushed after
     # every arm so a long run that dies late still yields what it finished.
-    for ceiling in args.ceilings:
+    # The control must run FIRST: every raised arm's restored-edge split is
+    # taken against it, and it is the only arm whose adjacency is retained.
+    added_set = set(added)
+    control_state: dict | None = None
+    ordered = [50] + [c for c in sorted(args.ceilings) if c != 50]
+    for ceiling in ordered:
         print(f"\n=== arm: union_degree_ceiling={ceiling} ===", flush=True)
-        results["arms"].append(run_arm(ceiling, added, pre_existing))
+        arm, state = run_arm(ceiling, added, pre_existing)
+        if ceiling == 50:
+            control_state = state
+        else:
+            assert control_state is not None
+            arm["restored_vs_control"] = restored_edge_composition(
+                control_state["added_nbrs"], control_state["degrees_by_mbid"],
+                state["added_nbrs"], state["degrees_by_mbid"],
+                added_set, state["hub_set"],
+            )
+            comp = arm["restored_vs_control"]
+            print(
+                f"    restored {comp['restored_edges_total']:,} edges to added "
+                f"artists — {100 * comp['share_to_a_hub']:.1f}% to a top-decile "
+                f"hub, {100 * comp['share_to_a_non_hub']:.1f}% not; "
+                f"{comp['left_the_two_or_fewer_group']['total']:,} left the "
+                f"<=2 group",
+                flush=True,
+            )
+        results["arms"].append(arm)
         out.write_text(json.dumps(results, indent=2, sort_keys=True), encoding="utf-8")
 
     # --- instrument gate, both halves -----------------------------------
