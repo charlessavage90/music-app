@@ -36,7 +36,41 @@ WHY THIS IS NOT AN EDIT TO `q4_added_set_supply.py`
   exactly), once at the shipped ceiling of 50 — so both stages are the shipped
   function's own output and the reconstruction caveat does not apply.
 
-BANDING — three different quantities, and they are not interchangeable
+HOW AN EDGE IS ATTRIBUTED TO A BAND - read this before any rate below
+  AT BOTH ENDS. Every archive edge is counted TWICE, once in each endpoint's
+  own band. A row therefore reads "what happened to the edges of the artists in
+  this band", and band totals are double the pair counts. Bands are FAME
+  PERCENTILE; every other column in the table is a count of edges or
+  connections.
+
+  THE PUZZLE THIS RESOLVES, and the answer is not the obvious one. An edge
+  survives the top-j cut if EITHER endpoint ranks the other inside its own top
+  fifty, so an artist holding a short list should lose nothing at that step -
+  every entry in a 12-long list is inside its own top fifty. Yet the bottom fame
+  band loses 21.75% of its slots there.
+
+  ⚠ The tempting resolution is that obscure artists hold mostly REVERSE slots
+  (someone else listed them, unreciprocated). MEASURED, THAT IS FALSE: the
+  median bottom-band artist has ZERO reverse slots, a 9-long own list, and
+  loses NOTHING at the top-j cut. This docstring asserted the reverse-slot
+  story before the denominators existed and was wrong; it is corrected here
+  rather than quietly dropped.
+
+  The real answer is that the band rate is not a typical-artist rate at all.
+  Only 13.9% of bottom-band artists lose anything at the top-j cut; the band's
+  21.75% is carried by that minority, whose slot counts are far above the
+  band median (mean 23.3 slots against a median of 9). Splitting those 831
+  artists by what makes a loss POSSIBLE: 484 have reverse slots, and 347 hold
+  own lists longer than fifty. Nobody else can lose a slot there, and the
+  measurement confirms it - across all ten bands, the count of artists losing
+  at the top-j cut with neither reverse slots nor an over-fifty own list is
+  exactly ZERO. That is a structural check on the whole read, not a coincidence.
+
+  So: read `%topj` as a property of a band's EDGES, never of its artists, and
+  read the `%artists losing anything` column beside it before saying who the
+  cut hurts.
+
+BANDING - three different quantities, and they are not interchangeable
   Bands are FAME PERCENTILE, computed within the served artifact by the shipped
   `GraphStore.fame_percentiles` (0 = nobody on this map has fewer recorded
   listeners; 1 = nobody has more). NOT raw fame (`fame_lb` is a value, never a
@@ -57,9 +91,12 @@ Run from `builder/`:
 
 from __future__ import annotations
 
+import csv
+import gzip
 import hashlib
 import json
 import logging
+import statistics
 import sys
 import time
 from collections import defaultdict
@@ -319,6 +356,17 @@ def main() -> int:
     for mbid in served.mbids:
         band_artists[band_of(pctl_of[mbid])] += 1
 
+    # Per-ARTIST fate counts, so every rate can be reported beside its own
+    # denominator and beside the currency the question was actually asked in --
+    # connections RETAINED. A share lost is not comparable across bands when
+    # list length varies with fame, which it does, by an order of magnitude.
+    per_artist = {
+        m: {"own_list_len": len(adjacency.get(m, ())), "archive_slots": 0,
+            "died_at_the_topj_cut": 0, "died_at_the_degree_trim": 0,
+            "died_at_the_component_prune": 0, "survived": 0}
+        for m in served.mbids
+    }
+
     # Cross-tab: what band is the OTHER end in? Computed for EVERY fate, not
     # just top-j deaths, because the deaths alone cannot be read.
     #
@@ -355,6 +403,9 @@ def main() -> int:
             i = band_of(pctl_of[end])
             rows[i]["archive_edges"] += 1
             rows[i][fate] += 1
+            pa = per_artist[end]
+            pa["archive_slots"] += 1
+            pa[fate] += 1
             key = (
                 band_label(band_of(pctl_of[other]))
                 if other in served_set else OTHER_UNSERVED
@@ -363,12 +414,36 @@ def main() -> int:
             if fate in crosstabs:
                 crosstabs[fate][i][key] += 1
 
+    by_band_artists = defaultdict(list)
+    for mbid in served.mbids:
+        by_band_artists[band_of(pctl_of[mbid])].append(per_artist[mbid])
+
+    def med(values):
+        return float(statistics.median(values)) if values else 0.0
+
     table = []
     for i in range(10):
         r = rows[i]
         total = r["archive_edges"]
         n = band_artists[i]
+        people = by_band_artists[i]
+        own = [q["own_list_len"] for q in people]
+        slots = [q["archive_slots"] for q in people]
+        rev = [q["archive_slots"] - q["own_list_len"] for q in people]
+        surv = [q["survived"] for q in people]
         table.append({
+            # --- denominators, so no rate below is read without one ---
+            # ALL of these are edge/connection COUNTS. The band is the only
+            # fame-percentile quantity in the row.
+            "median_own_list_len": med(own),
+            "median_reverse_only_slots": med(rev),
+            "median_archive_slots": med(slots),
+            "median_topj_deaths": med([q["died_at_the_topj_cut"] for q in people]),
+            "median_trim_deaths": med([q["died_at_the_degree_trim"] for q in people]),
+            # --- the currency the question was asked in: what is RETAINED ---
+            "median_surviving_connections": med(surv),
+            "share_with_two_or_fewer_surviving": round(
+                sum(1 for v in surv if v <= 2) / n, 5) if n else 0.0,
             "band": band_label(i),
             "artists": n,
             "archive_edges": total,
@@ -428,16 +503,43 @@ def main() -> int:
     (HERE / "dcf_edge_fate.json").write_text(
         json.dumps(out, indent=2, sort_keys=True), encoding="utf-8"
     )
+    # Every re-read of this measurement so far has cost a full re-run, because
+    # only the aggregates were kept. The per-artist table is the raw record and
+    # compresses small, so further questions are a read rather than 30 minutes.
+    with gzip.open(HERE / "dcf_edge_fate_per_artist.csv.gz", "wt",
+                   newline="", encoding="utf-8") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(["mbid", "fame_pctl_in_served_artifact", "band",
+                         "own_list_len", "archive_slots",
+                         "died_at_the_topj_cut", "died_at_the_degree_trim",
+                         "died_at_the_component_prune", "survived"])
+        for mbid in served.mbids:
+            q = per_artist[mbid]
+            writer.writerow([mbid, round(pctl_of[mbid], 6),
+                             band_label(band_of(pctl_of[mbid])),
+                             q["own_list_len"], q["archive_slots"],
+                             q["died_at_the_topj_cut"],
+                             q["died_at_the_degree_trim"],
+                             q["died_at_the_component_prune"], q["survived"]])
 
     print(f"\ngate exact={gate['exact']} agreement={gate['agreement']} "
           f"red={gate['red_stages_are_distinct']}")
-    print(f"{'band':>9} {'artists':>8} {'archive':>10} {'top-j died':>11} "
-          f"{'trim died':>10} {'survived':>10} {'%topj':>7} {'%trim':>7}")
+    print(f"{'band':>9} {'artists':>7} {'ownlist':>8} {'revonly':>8} "
+          f"{'slots':>7} {'topj#':>7} {'trim#':>7} {'kept':>6} {'<=2':>7} "
+          f"{'%topj':>7} {'%trim':>7}")
     for r in table:
-        print(f"{r['band']:>9} {r['artists']:>8,} {r['archive_edges']:>10,} "
-              f"{r['died_at_the_topj_cut']:>11,} {r['died_at_the_degree_trim']:>10,} "
-              f"{r['survived']:>10,} {100 * r['share_died_at_the_topj_cut']:>6.2f}% "
+        print(f"{r['band']:>9} {r['artists']:>7,} {r['median_own_list_len']:>8.0f} "
+              f"{r['median_reverse_only_slots']:>8.0f} "
+              f"{r['median_archive_slots']:>7.0f} {r['median_topj_deaths']:>7.0f} "
+              f"{r['median_trim_deaths']:>7.0f} "
+              f"{r['median_surviving_connections']:>6.0f} "
+              f"{100 * r['share_with_two_or_fewer_surviving']:>6.2f}% "
+              f"{100 * r['share_died_at_the_topj_cut']:>6.2f}% "
               f"{100 * r['share_died_at_the_degree_trim']:>6.2f}%")
+    print("medians are PER ARTIST; %topj/%trim are shares of that band's total "
+          "archive edge-slots, attributed AT BOTH ENDS. Bands are FAME "
+          "PERCENTILE within the served artifact; every other column is a count "
+          "of edges or connections.")
     return 0 if gate["exact"] and gate["red_stages_are_distinct"] else 1
 
 

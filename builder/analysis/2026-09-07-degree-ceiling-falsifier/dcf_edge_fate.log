@@ -5,14 +5,15 @@ INFO pre-cap directed edges: 3104719
 INFO gate: {"reconstructed_edges": 657842, "served_artifact_edges": 657842, "in_both": 657842, "only_in_reconstruction": 0, "only_in_served_artifact": 0, "exact": true, "agreement": 1.0, "red_stages_are_distinct": true}
 
 gate exact=True agreement=1.0 red=True
-     band  artists    archive  top-j died  trim died   survived   %topj   %trim
-  0.0-0.1    5,982    139,420      30,324     60,417     48,679  21.75%  43.34%
-  0.1-0.2    5,877    152,202      22,452     62,650     67,100  14.75%  41.16%
-  0.2-0.3    5,863    217,619      43,474     87,824     86,321  19.98%  40.36%
-  0.3-0.4    5,870    264,215      60,565    101,405    102,245  22.92%  38.38%
-  0.4-0.5    5,876    310,755      74,262    118,471    118,022  23.90%  38.12%
-  0.5-0.6    5,877    367,082      89,332    144,485    133,265  24.34%  39.36%
-  0.6-0.7    5,869    445,874     119,858    171,478    154,538  26.88%  38.46%
-  0.7-0.8    5,874    558,922     167,785    214,514    176,623  30.02%  38.38%
-  0.8-0.9    5,875    718,228     233,510    285,097    199,621  32.51%  39.69%
-  0.9-1.0    5,875  1,667,621     611,152    827,199    229,270  36.65%  49.60%
+     band artists  ownlist  revonly   slots   topj#   trim#   kept     <=2   %topj   %trim
+  0.0-0.1   5,982        9        0       9       0       2      5  29.96%  21.75%  43.34%
+  0.1-0.2   5,877       14        0      14       0       5      7  19.12%  14.75%  41.16%
+  0.2-0.3   5,863       21        0      21       0       9     10  13.53%  19.98%  40.36%
+  0.3-0.4   5,870       28        0      28       0      12     13   9.95%  22.92%  38.38%
+  0.4-0.5   5,876       37        0      37       0      16     15   6.47%  23.90%  38.12%
+  0.5-0.6   5,877       50        0      50       0      20     19   4.41%  24.34%  39.36%
+  0.6-0.7   5,869       72        0      74      17      24     24   2.21%  26.88%  38.46%
+  0.7-0.8   5,874       85        2      90      29      29     29   1.41%  30.02%  38.38%
+  0.8-0.9   5,875       90        9     100      37      35     38   0.89%  32.51%  39.69%
+  0.9-1.0   5,875       90       48     137      49      45     48   0.55%  36.65%  49.60%
+medians are PER ARTIST; %topj/%trim are shares of that band's total archive edge-slots, attributed AT BOTH ENDS. Bands are FAME PERCENTILE within the served artifact; every other column is a count of edges or connections.
