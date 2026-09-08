@@ -111,3 +111,47 @@ test('sends a journey id header on both calls', async () => {
   const headers = fetchMock.mock.calls[0][1].headers;
   expect(headers['x-journey-id']).toMatch(/^[A-Za-z0-9-]{8,64}$/);
 });
+
+// --- LUX-4 ------------------------------------------------------------------
+
+test('artists map snake_case ids and facts to camelCase', async () => {
+  vi.stubGlobal('fetch', mockFetch(200, [{
+    mbid: 'a', name: 'Radiohead', disambiguation: '', popularity: 1.0,
+    spotify_id: '4Z8W', apple_id: '657515',
+    facts: { type: 'Group', country: 'GB', area: 'United Kingdom',
+             begin: '1991', end: null, ended: false },
+  }]));
+  const [artist] = await searchArtists('radio');
+  expect(artist.spotifyId).toBe('4Z8W');
+  expect(artist.appleId).toBe('657515');
+  expect(artist.facts?.area).toBe('United Kingdom');
+});
+
+test('an api older than this frontend degrades to nulls, not undefined', async () => {
+  // A deploy is two images, not one, so the frontend can land first. `undefined`
+  // would flow into the components and render as a search link identically to a
+  // real absence — silently right, until something starts distinguishing them.
+  vi.stubGlobal('fetch', mockFetch(200, [
+    { mbid: 'a', name: 'Radiohead', disambiguation: '', popularity: 1.0 },
+  ]));
+  const [artist] = await searchArtists('radio');
+  expect(artist.spotifyId).toBeNull();
+  expect(artist.appleId).toBeNull();
+  expect(artist.facts).toBeNull();
+});
+
+test('bypassed artists are mapped too, not passed through raw', async () => {
+  // LUX-2's panel renders these. They went through a different code path from
+  // `artists` before this mapper existed, which is exactly how one of them
+  // would keep snake_case while the other did not.
+  vi.stubGlobal('fetch', mockFetch(200, {
+    artists: [{ mbid: 'x', name: 'A', disambiguation: '', popularity: 0.5 }],
+    stop_rule: 'natural',
+    bypassed: [{
+      mbid: 'y', name: 'B', disambiguation: '', popularity: 0.4, spotify_id: 'sp',
+    }],
+  }));
+  const result = await buildPath(['a', 'b'], []);
+  expect(result.bypassed[0].spotifyId).toBe('sp');
+  expect(result.artists[0].spotifyId).toBeNull();
+});

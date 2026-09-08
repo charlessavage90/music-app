@@ -43,11 +43,47 @@ class PathRequest(BaseModel):
     exclude: list[ExclusionIn] = Field(default_factory=list, max_length=200)
 
 
+class ArtistFacts(BaseModel):
+    """The structured MusicBrainz fields LUX-4 carries, all optional.
+
+    WIRE CONTRACT. Every field is optional because the extraction pass finds
+    different subsets per artist, and `L4-D3` renders only what is present with
+    no placeholder rows — so a null here is "show nothing", never "Unknown".
+
+    A prose description is DROPPED, not deferred (spec §4.5), and genre tags
+    are DEFERRED with `LUX-E6` as their entry condition (§4.6). Neither is a
+    gap to fill in here.
+    """
+
+    type: str | None = None       # "Group", "Person", …
+    country: str | None = None    # ISO code, e.g. "GB"
+    area: str | None = None       # human-readable, e.g. "United Kingdom"
+    begin: str | None = None      # "1995" or "1995-03-01"
+    end: str | None = None
+    ended: bool | None = None
+
+
 class ArtistOut(BaseModel):
     mbid: str
     name: str
     disambiguation: str
     popularity: float
+    # LUX-4. Additive: a client that ignores them gets exactly the pre-LUX-4
+    # behaviour, and a pre-LUX-4 ARTIFACT serves them as null — which is the
+    # state production is in until this deploys.
+    #
+    # Ids are platform id TAILS, not URLs (`L4-D2`): the frontend composes the
+    # URL, so a scheme change is a frontend edit rather than a graph rebuild.
+    # null does NOT mean "no button" — it means "render a search link"
+    # (spec §4.1 option A). The app routes to obscure artists, so the
+    # missing-id case is disproportionately the population this exists to
+    # serve, and a card showing one service while silently dropping the other
+    # reads as the artist being absent from it.
+    #
+    # These field names are a wire contract and cannot be renamed.
+    spotify_id: str | None = None
+    apple_id: str | None = None
+    facts: ArtistFacts | None = None
 
 
 class PathResponse(BaseModel):

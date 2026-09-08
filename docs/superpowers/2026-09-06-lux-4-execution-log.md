@@ -1,6 +1,9 @@
 # `LUX-4` execution log — through the artifact, 2026-09-06
 
-**Role: RETAINED EXECUTION LOG for `L4-T1`–`L4-T7`. ACTIVE.** Reasoning and corrections
+**Role: RETAINED EXECUTION LOG for `L4-T1`–`L4-T11` — the WHOLE plan. ACTIVE.** *(§1–§7 are
+the first session's, through the artifact; §8–§13 were appended 2026-09-08 by the second, which
+finished the plan. This line said `L4-T1`–`L4-T7` until then, and a reader who trusted it would
+have stopped at the halfway point.)* Reasoning and corrections
 only; git carries what each task did and the code carries how. **Owns no figures** — the
 `LUX-4` payload and coverage figures live in
 [`builder/analysis/2026-09-05-lux4-extract/README.md`](../../builder/analysis/2026-09-05-lux4-extract/README.md),
@@ -44,6 +47,13 @@ caught by the owner rather than by the session.
 
 Every one was caught by checking against the repository, and none by reading the plan
 carefully. **The remaining tasks (`L4-T8`–`L4-T11`) are unverified.**
+
+> **⚠ FORWARD CORRECTION, 2026-09-08 — both sentences above have moved, and the section below
+> is deliberately left as written.** There were **five**, not four: `L4-T10` claimed the
+> frontend already mapped `snake_case` artists at the API boundary and it did not, which is
+> **§8**. And `L4-T8`–`L4-T11` are **no longer unverified** — they were executed, each value
+> they name grepped first, and the plan is finished. The warning was correct and load-bearing
+> when written; it is discharged, not overturned.
 
 | # | Task | The defect | How it would have failed |
 |---|---|---|---|
@@ -137,3 +147,154 @@ against the repository as it stood when the plan was written.
   become false by omission — `CLAUDE.md`'s APG1 key list and the `ml-graph-analyst` definition's
   metadata-blob description, the latter already stale since `fame_lb` in August. **Nothing
   net-new was added to either layer, so nothing there is owed to the owner.**
+
+---
+
+# `L4-T8` – `L4-T11` — the wire and the card, 2026-09-08
+
+**A second session, cold, from the `L4-T7` seam.** PR #105 had merged, so all of `L4-T1`–
+`L4-T7` was on `main`; this branched `lux-4-wire-and-card` off `origin/main` and is **PR #112**.
+The `LBD-` track was live concurrently in a worktree at `C:\Users\charl\worktrees\music-app-lbd`
+on `lbd-task3` — separate branch, separate index, no shared files, and nothing here touched
+`NEXT.md`.
+
+## 8. The fifth plan defect, and it was the same shape as the other four
+
+The handoff's warning — *"the plan was wrong four times, in four different ways, and every one
+was caught by checking against the repo rather than by reading carefully"* — held for a fifth.
+
+**`L4-T10` step 6:** *"camelCase — the API layer already maps snake_case at the boundary; check
+how `candidateCount` is mapped and follow it."* **It does not.** `client.ts` maps `Track`
+(`candidate_count` to `candidateCount`) and `PathResponse` (`stop_rule` to `stopRule`), but
+artists were **cast straight through** — `as Artist[]`, `as Artist` — which worked only
+because no `Artist` field had ever been multi-word. `LUX-4` adds the first three.
+
+**Why this one was dangerous rather than merely wrong.** Declaring `spotifyId` on `Artist`
+while the object carried `spotify_id` compiles, passes every unit test that constructs an
+`Artist` literal, and yields `undefined` at runtime — which `spotifyUrl` renders as a **search
+link**, exactly as a genuine absence does. The failure is invisible in the only place anyone
+would look. The four earlier defects announced themselves; this one would have shipped.
+
+**Fix:** `ArtistWire` to `artistFrom` to `Artist`, applied at all four wire positions. Tests
+pin the mapping, the `bypassed` path (its own code path, and the one that would drift alone),
+and an api older than the frontend.
+
+## 9. Two counts the plan got wrong in the safe direction
+
+- **`ArtistOut` reaches the wire in FOUR positions, not three.** The plan names
+  `PathResponse.artists`, `PathResponse.bypassed` and `GET /api/artists/{mbid}`;
+  `GET /api/artists/search` is the fourth. `grep -rn "ArtistOut(" api/src/` returns **one**
+  construction site (`app.py`'s `artist_out`), which is why all four are consistent for free —
+  and that helper now carries a comment saying so, since the property is load-bearing and was
+  undocumented.
+- **`graph_store.py:70-71`** is the bounds check inside `deezer_id_of`, not the accessor's
+  definition. Close enough to follow; recorded because the plan's line references are
+  approximate throughout and a future reader should not treat one as exact.
+
+## 10. Three deviations from the plan, all deliberate
+
+| Plan says | Shipped | Why |
+|---|---|---|
+| `spotify_id(node)` / `facts(node)` | `spotify_id_of` / `apple_id_of` / `facts_of` | The file's one precedent is `deezer_id_of`. The bare form differs from the field `spotify_ids` by one character, and that typo yields a **truthy bound method**, not an error. |
+| Tests in `test_graph_store.py` | `test_graph_store_lux4_keys.py` | Mirrors `test_graph_store_deezer_ids.py` and `test_graph_store_fame.py`, which is what the repo already does per additive key. |
+| Accessors return `""` (copying `deezer_id_of`) | Return `None` | `deezer_id_of`'s `""` is consumed **inside** the api by the clip resolver, where it already means "fall back to name search". These three go **straight onto the wire**, where the contract is null-means-render-a-search-link. Normalising here keeps the frontend on one code path. |
+
+## 11. The one thing tests could not have found
+
+**The facts line truncated, and the life span was what it lost.** Every unit test passed, all
+eight e2e passed, `tsc` and `oxlint` were clean — and a screenshot of a real journey at 390px
+showed *"Person · United States · 1933–2…"* and *"English rock band · Group · Uni…"* on most
+cards. The dates sit at the end of the natural reading order, behind the longest and least
+useful field, so `truncate` ate precisely the most interesting fact.
+
+**Rejected fixes, both for the same reason:** reordering the line so truncation eats the area
+instead, and dropping `type` when a disambiguation is present. Each invents a ranking of which
+facts matter, which is what `L4-D3` exists to decline. **Shipped:** the line wraps. It shows
+all of it and costs one line on the cards that need it.
+
+**The new e2e assertion was shown to go RED before being trusted** — restoring `truncate`
+fails it, removing it passes. It measures `scrollWidth` against `clientWidth` in a real layout
+engine; jsdom computes no layout, so a unit test here could only have asserted a class name
+and would have passed either way (the `FMS-P1` / `TR-2` vacuous-check pattern).
+
+**Reusable lesson, and it is §7's in a different medium:** §7 said *survey a field's value
+distribution before writing its first consumer.* This is the rendering equivalent — **look at
+the real thing on real data before believing a green suite about a visual change.**
+
+## 12. Gate outcomes
+
+| Gate / check | Outcome |
+|---|---|
+| api suite | **PASSED** — 288 |
+| frontend unit | **PASSED** — 163 across 23 files |
+| `tsc -b` + `vite build` | **PASSED** |
+| `oxlint` | **PASSED** — one pre-existing `vite.config.ts` warning, untouched |
+| builder suite | **PASSED** — 286, untouched by this work, run to confirm no regression |
+| Playwright e2e | **PASSED** — 8, against the **real artifact** on `:8000` |
+| `e2e/responsive.spec.ts` (TR-16, 390px) | **PASSED**, plus two new assertions in the same file |
+| Artifact identity | **VERIFIED** — `graph-lux4.bin` sha256 `fd92a735…` matches its manifest sidecar, and `/health` reports the same |
+| Snyk, `api/` | **CLEAN on this diff.** One pre-existing Low in `tests/test_origin_secret.py`, last touched 2026-08-06, untouched here and not fixed |
+| Snyk, `frontend/` | **CLEAN on this diff.** Four findings, all in vendored `design/*/support.js` mockups, none in `src/` |
+
+**Snyk was initially blocked** — expired credentials, MCP returning "User not authenticated"
+and the CLI `SNYK-0005 401`, exactly as `NEXT.md` recorded. `L4-T9` was committed with the scan
+named as **owed, not waived**; the owner re-authed mid-session and both scans then ran.
+
+## 13. What is owed, and to whom
+
+- **The owner's, and nothing here changes his order:** merge, then deploy, then the queued
+  tests. **Two** test-queue entries are now live (2026-09-04 and 2026-09-08) and **both are
+  blocked on the same deploy**, so they are one sitting. The `TEST-QUEUE.md` live count was
+  re-counted rather than carried forward, per that file's own rule.
+- **`LUX-E2` is still BLOCKED and this did not touch it.** `L4-D3` shipped by assertion, as
+  the plan says it may. If `LUX-E2` later finds a field too sparse in the obscure half, the
+  consequence is a **designed empty state in `ArtistInfo.tsx`, not a rebuild** — the artifact
+  carries the data either way.
+- **The Deezer id gap deferral has NOT come due.** Its condition is *the first rebuild after
+  `LUX-4` merges*; no rebuild happened here.
+- **Nothing was added to the standing context layer.** `CLAUDE.md`, `memory/MEMORY.md` and
+  every skill and agent `description:` are untouched by this diff, so **D6 is zero and nothing
+  is owed to the owner** for it.
+
+## 14. Closeout figures and the checks that moved something
+
+**D6, measured against `~/.claude/projects/C--dev-music-app/memory/`.** Unconditional
+**51,694 characters — delta ZERO**, identical to §7's figure. Conditional **2,551 lines**
+against §7's 2,549: **the +2 is NOT this branch's.** `git diff --name-only origin/main...HEAD`
+returns nothing under `CLAUDE.md` or `.claude/`, and the two lines are in
+`memory/working-style.md`, modified 2026-09-06 21:59 — outside git, after §7 was written, and
+by another session. Attributing it here would have been the easy and wrong thing to record.
+
+**B3 mutation testing — four mutations, all red, none vacuous.** Removing `spotify_id_of`'s
+bounds check reddens 3 tests; leaking the in-band `""` instead of normalising to `None`
+reddens 1; restoring the artists-are-cast-not-mapped code the plan assumed reddens 3 in
+`client.test.ts`; restoring `truncate` reddens the new e2e layout assertion.
+
+**B2 reachability** — every new module (`ArtistInfo`, `StreamingLinks`, `dspUrls`,
+`ArtistFacts`) has an inbound import from production code. No orphans.
+
+**B4 found one defect, in this session's own prose.** Comments said the three keys are absent
+from artifacts built **before 2026-09-05**; `git log -S 'meta["spotify_ids"]'` puts the writing
+commit at **2026-09-06**. Wrong by one day and in the misleading direction — it implied a
+2026-09-05 artifact would carry them. Corrected in `graph_store.py` and the test docstring.
+Small, and exactly the "confident prose about correct code" class this ritual targets.
+
+**B1 — `docs-lint` hard checks passed; its CAND output is pre-existing threshold constants in
+frozen pre-registrations, none from this diff.** `doc-auditor` then found **three live stale
+status claims, all caused by this session's own append**: the execution log's own role line and
+`docs/README.md`'s row for it both still said `L4-T1`–`L4-T7`, and the 2026-09-06 handoff still
+claimed to be current. **A fourth was found by reading rather than by the auditor** — the
+`LBD-` handoff's row cross-referenced the superseded `LUX-4` handoff as the other live track's
+current note. All four fixed; a map row was added for the successor handoff.
+
+**A4 is inapplicable and that is stated rather than skipped: this work added no config knob.**
+`git diff origin/main...HEAD -- api/.../config.py builder/.../config.py` is empty, so there is
+no default to flip.
+
+**D2's condition is not met.** The APG1 keys are additive and `FORMAT_VERSION` stays `1`, so
+the committed 500-node fixtures are not stale — and `tests/fixtures/graph-fixture.bin` loads
+with all three lists empty and every accessor reading absent, which makes it a **real
+pre-`LUX-4` artifact exercising the absence path**, not merely an untouched file.
+
+**A5 — ports 8000 and 5173 are both free**, and deliberately so. Neither queued test needs a
+local server: both exercise the deployed site.

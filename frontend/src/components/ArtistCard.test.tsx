@@ -6,7 +6,7 @@ import { ArtistCard } from './ArtistCard';
 
 // Distinct MBIDs per test: useClip caches by MBID at module scope, so reusing
 // one id would bleed a resolved clip into the 204 test.
-const artist = (mbid: string) => ({ mbid, name: 'Miles Davis', disambiguation: '', popularity: 1 });
+const artist = (mbid: string) => ({ mbid, name: 'Miles Davis', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null });
 afterEach(() => vi.restoreAllMocks());
 
 test('one bypass control, and it fires the known signal', async () => {
@@ -214,4 +214,74 @@ test('an ordinary silent card at index 0 does not report a dead index', async ()
   );
   await screen.findByText(/no preview available/i);
   expect(onDeadIndex).not.toHaveBeenCalled();
+});
+
+// --- LUX-4 ------------------------------------------------------------------
+
+test('a card carries links out to both streaming services', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(
+    <ArtistCard
+      artist={{ ...artist('links'), spotifyId: 'sp', appleId: null }}
+      isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()}
+    />,
+  );
+  expect(screen.getByRole('link', { name: /on Spotify/i })).toHaveAttribute(
+    'href', 'https://open.spotify.com/artist/sp',
+  );
+  // No apple id: a SEARCH link, never a missing button.
+  expect(screen.getByRole('link', { name: /on Apple Music/i })).toHaveAttribute(
+    'href', 'https://music.apple.com/search?term=Miles%20Davis',
+  );
+});
+
+// An endpoint card is an artist you chose, so you probably know them — but the
+// links cost a line and still answer "where do I go to hear more", so they
+// render there too. Pinned because it is a decision, not an accident.
+test('endpoint cards carry the links too', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(
+    <ArtistCard
+      artist={artist('endpoint-links')} isPlaying={false} isEndpoint
+      endpointLabel="start" onPlay={vi.fn()} onBypass={vi.fn()}
+    />,
+  );
+  expect(screen.getAllByRole('link')).toHaveLength(2);
+});
+
+// A silent card is one whose clip never resolved. The links are the ONLY way
+// left to hear the artist at all, so they must not be tied to playability.
+test('a card with no clip still carries the links', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  render(
+    <ArtistCard artist={artist('silent-links')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />,
+  );
+  await waitFor(() => expect(screen.getByText('No preview available')).toBeInTheDocument());
+  expect(screen.getAllByRole('link')).toHaveLength(2);
+});
+
+test('a card shows the artist facts line', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(
+    <ArtistCard
+      artist={{
+        ...artist('facts'), disambiguation: 'US jazz trumpeter',
+        facts: { type: 'Person', country: 'US', area: 'United States',
+                 begin: '1926', end: '1991', ended: true },
+      }}
+      isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()}
+    />,
+  );
+  expect(screen.getByText(/US jazz trumpeter/)).toBeInTheDocument();
+  expect(screen.getByText(/1926–1991/)).toBeInTheDocument();
+});
+
+// The state production is in until the LUX-4 artifact deploys: the api serves
+// nulls for everything. The card must be exactly what it was before.
+test('a card with no facts at all is unchanged', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(<ArtistCard artist={artist('no-facts')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
+  expect(screen.getByTestId('artist-name')).toHaveTextContent('Miles Davis');
+  expect(screen.queryByText(/unknown/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(' · ')).not.toBeInTheDocument();
 });

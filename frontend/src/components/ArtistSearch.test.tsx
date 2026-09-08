@@ -9,7 +9,7 @@ afterEach(() => vi.restoreAllMocks());
 test('debounces, shows results, and selects one', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockResolvedValue([
-    { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 0.8 },
+    { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 0.8, spotifyId: null, appleId: null, facts: null },
   ]);
   const onSelect = vi.fn();
   render(<ArtistSearch label="From" end="start" onSelect={onSelect} />);
@@ -29,7 +29,7 @@ test('reports null once the text no longer matches the chosen artist', async () 
     <ArtistSearch
       label="To"
       end="destination"
-      initial={{ mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 1 }}
+      initial={{ mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null }}
       onSelect={onSelect}
     />,
   );
@@ -97,7 +97,7 @@ function zRank(el: Element | null | undefined): number {
 test('an open dropdown outranks the next field\'s dot', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockResolvedValue([
-    { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 0.8 },
+    { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 0.8, spotifyId: null, appleId: null, facts: null },
   ]);
   const { container } = render(
     <>

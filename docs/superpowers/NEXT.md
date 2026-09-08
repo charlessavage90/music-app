@@ -49,13 +49,17 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 **Last updated: 2026-09-08.** Three pieces of work have addresses. **None of them changes what
 a listener sees**, and the one thing that would is a deploy.
 
-**`LUX-4`** — branch `lux-4-links-info-card`, **PR #105**. Done through the artifact
-(`L4-T1`–`L4-T7`) and **not finished**: `L4-T8`–`L4-T11` put the new metadata on the wire and
-on the card, and until they land **nothing a listener sees has changed.** ⚠ **That plan was
-wrong about the repository four times**, each caught by grepping rather than careful reading —
-**treat `L4-T8`–`L4-T11` as unverified** and grep every function, file and config value before
-executing them. Entry point:
-[`2026-09-06-HANDOFF-lux-4-artifact.md`](2026-09-06-HANDOFF-lux-4-artifact.md).
+**`LUX-4`** — **the plan is fully executed**; `L4-T8`–`L4-T11` are on branch
+`lux-4-wire-and-card`, **PR #112**, and `L4-T1`–`L4-T7` are behind them. **This is the first
+work in a while that changes what a listener sees — but only once it is DEPLOYED**, and this
+one is not an API-only deploy: it ships a new artifact (`graph-lux4.bin`) as well as new code,
+so a graph-variable `cdk diff` is *expected* here rather than being the `DEP-34` warning
+firing. `infra/README.md` §4 and §5 carry it. ⚠ **That plan was wrong about the repository
+FIVE times** — the fifth was found during execution and is the dangerous one: it claimed the
+frontend already mapped `snake_case` artists at the API boundary, and it did not, so a
+declared `spotifyId` would have been `undefined` at runtime and rendered *identically to a
+genuine absence*. Entry point:
+[`2026-09-08-HANDOFF-lux-4-wire-and-card.md`](2026-09-08-HANDOFF-lux-4-wire-and-card.md).
 
 **`LBD-`** — branch `lb-dump-exploration`, **PR #109**; a worktree sits at
 `C:\Users\charl\worktrees\music-app-lbd` on `lbd-task3`. The pre-registration
