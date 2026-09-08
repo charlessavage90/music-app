@@ -103,6 +103,30 @@ visible from this side too**, rather than resting on one branch's handoff being 
 rather than a rewrite, so the two reconcile in either merge order — but expect the file in both
 PRs.
 
+## 3c. Merge resolution, and the Snyk ruling
+
+**`LBD-` (#109) merged first, deliberately** — that order preserves the pre-registration's
+"committed before results existed" property, which is its whole evidentiary value. `main` was
+then merged into this branch (not rebased: the branch is pushed, and rewriting pushed history
+is the owner's call).
+
+**Two conflicts, both resolved keeping BOTH sides.** `NEXT.md`: this branch's `DCF-` paragraph
+plus `main`'s now-discharged parquet-dump line. `docs/README.md`: three rows in one block,
+three in the other — and **`main`'s rewritten `LUX-4` handoff row was taken over this branch's
+stale copy**, because #109 deliberately reworded it to say two tracks are live and each has
+its own current handoff. That statement remains true after this merge: `DCF-` adds no handoff.
+
+⚠ **The audit's claim that a merge would silently revert a correction was tested and is
+false** — `git merge-tree` conflicts on both files, so the merge stops. Verified before the
+merge, and again by the merge itself.
+
+**Snyk: accepted / deferred by the owner, 2026-09-07**, on the grounds that none of this is
+live. That ruling covers **this branch's three probe scripts as well as #109's** — the
+credentials expired and no `snyk_code_scan` ran on either. Recorded here rather than left
+implicit, because the global instruction is to scan new first-party code and a silent skip is
+indistinguishable from an oversight. **Condition for revisiting: before anything under
+`builder/analysis/` is promoted into shipped code**, which nothing here proposes.
+
 ## 4. Defects found in the instructions, not the code
 
 - **A `tee` in the run pipeline masked a traceback as exit 0.** One run reported success while
