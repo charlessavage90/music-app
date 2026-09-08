@@ -10,11 +10,11 @@ test.use({ viewport: { width: 390, height: 844 } });
 test('a journey is usable at phone width', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('From').fill('miles davis');
+  await page.getByLabel('Start with').fill('miles davis');
   await page.getByRole('button', { name: /miles davis/i }).first().click();
-  await page.getByLabel('To').fill('daft punk');
+  await page.getByLabel('End with').fill('daft punk');
   await page.getByRole('button', { name: /daft punk/i }).first().click();
-  await page.getByRole('button', { name: /discover a path/i }).click();
+  await page.getByRole('button', { name: /build the path/i }).click();
 
   await expect(page.locator('ol li').first()).toBeVisible();
 
@@ -60,11 +60,11 @@ test('a journey is usable at phone width', async ({ page }) => {
 test('the streaming links survive phone width and carry a real href', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('From').fill('miles davis');
+  await page.getByLabel('Start with').fill('miles davis');
   await page.getByRole('button', { name: /miles davis/i }).first().click();
-  await page.getByLabel('To').fill('daft punk');
+  await page.getByLabel('End with').fill('daft punk');
   await page.getByRole('button', { name: /daft punk/i }).first().click();
-  await page.getByRole('button', { name: /discover a path/i }).click();
+  await page.getByRole('button', { name: /build the path/i }).click();
 
   const interior = page.locator('ol li').nth(1);
   await expect(interior).toBeVisible();
@@ -94,11 +94,11 @@ test('the streaming links survive phone width and carry a real href', async ({ p
 test('the artist facts line is never cut off at phone width', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('From').fill('miles davis');
+  await page.getByLabel('Start with').fill('miles davis');
   await page.getByRole('button', { name: /miles davis/i }).first().click();
-  await page.getByLabel('To').fill('daft punk');
+  await page.getByLabel('End with').fill('daft punk');
   await page.getByRole('button', { name: /daft punk/i }).first().click();
-  await page.getByRole('button', { name: /discover a path/i }).click();
+  await page.getByRole('button', { name: /build the path/i }).click();
 
   await expect(page.locator('ol li').nth(1)).toBeVisible();
 

@@ -5,11 +5,11 @@ import { expect, test } from '@playwright/test';
 test('search, path, bypass produces a new path without the bypassed artist', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('From').fill('miles davis');
+  await page.getByLabel('Start with').fill('miles davis');
   await page.getByRole('button', { name: /miles davis/i }).first().click();
-  await page.getByLabel('To').fill('daft punk');
+  await page.getByLabel('End with').fill('daft punk');
   await page.getByRole('button', { name: /daft punk/i }).first().click();
-  await page.getByRole('button', { name: /discover a path/i }).click();
+  await page.getByRole('button', { name: /build the path/i }).click();
 
   // The path renders as a list of cards. Wait on the LIST, not on the artist's
   // name: the name was doing duty as the wait for navigation, and that worked

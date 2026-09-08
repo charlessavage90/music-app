@@ -31,3 +31,23 @@ session takes over.
 - **The mark file `frontend/public/unsung-mark.png` did not exist at commit time** — it is
   the owner's export. Every test passes without it; the page shows a broken image until it
   lands.
+
+## §3 `UXR-T3` — the landing page
+
+- Copy is the mockup's verbatim under `UXR-D12` (flagged assumption; the 2026-08-07 lines
+  are quoted in a comment at the h1 so reverting is one edit). Labels "Start with" / "End
+  with" are the call site's — `ArtistSearch` is unchanged and its own tests still say From/To.
+- `SAMPLE_JOURNEYS` and `TEASER` live in **`src/lib/sampleJourneys.ts`, not in
+  `LandingPage.tsx` as the plan said**: oxlint's `react/only-export-components` flags constants
+  exported from a component file (fast refresh), and the e2e in `T10` wants them without a
+  component. `T10`'s import path changes accordingly.
+- **A test the new chips broke, and why it matters beyond the test.** "blocks identical
+  endpoints" selected the dropdown entry with `findByText('Radiohead')`; the chips now render
+  each name as its own text node inside a link, so the query clicked the chip and navigated
+  away. Fixed by selecting by role (the entries are buttons, the chips are links). The general
+  rule: on a page that names artists in more than one place, query controls by role.
+- The three new tests were not run red separately — they went in with the page in one
+  batch. They assert text ("3 steps", the h1 copy, five teaser names) that did not exist in
+  the old page, so red is by construction; recorded because the plan asked for the run.
+- Screenshots at 390 and 1280 match the artboards. The two broken image boxes are the mark
+  the owner has not yet exported.
