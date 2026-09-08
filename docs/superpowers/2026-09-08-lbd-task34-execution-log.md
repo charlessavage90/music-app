@@ -202,3 +202,48 @@ CPU-bound on a 7.5 GB file, so it *looks* like it should coexist with anything �
 contention is not for CPU but for **sequential read bandwidth on the same spindle**, against a
 scan reading two orders of magnitude more data. **Check what a job contends FOR, not how big
 it looks.**
+
+### The dump lives on a spinning disk, and that is the whole cost story
+
+**`D:` is `ST3000DM008` — a 3 TB SATA hard disk. The volume's own label is "Slow Storage".**
+Nothing in the plan, the design, the pre-registration or Task 1's README says so; every cost
+estimate in the track was written as though storage were uniform.
+
+Measured mid-scan: **~35 MB/s read, with a disk queue length of 13–14.** DuckDB defaults to
+one thread per core (24 here) and the dump is 1,409 files, so a dozen threads issue concurrent
+reads across the platter and **sequential streaming degrades into seek thrash.** On an SSD
+more readers is free; on a platter it is the dominant cost.
+
+This explains the 1-in-256 probe cleanly. The probe read the same ~127 GB of needed columns as
+a full pass would, because `user_id % 256 = 0` prunes rows, not bytes — so **almost all of its
+63.7 minutes was the scan, and almost none was the per-user work.** The naive reading of that
+probe ("64 minutes for 1/256, so 256× that for everything") is wrong by more than two orders
+of magnitude, and it is wrong in the direction that would have made the track look impossible.
+
+**It also inverts the pre-registration's fallback.** `LBD-D2`'s chunked form is exact and is
+named as the safe option when the full pass is too big — but each chunk **re-reads the entire
+dump**, so sixteen chunks is sixteen scans of a 35 MB/s disk. On this hardware the fallback is
+the expensive path, not the cheap one. The pre-registration could not have known this; it
+predates the measurement.
+
+Two facts that matter for whatever runs next, and neither was known when the plan was written:
+
+- **`C:` is a Samsung 980 PRO NVMe with ~582 GB free**, and `E:` a 970 EVO NVMe with ~300 GB
+  free. The dump is 214 GB total; the columns this job needs are a subset of that.
+- **DuckDB's spill directory was pointed at `D:`** — the slow disk — by this session's own
+  scripts. Every gate the pre-registration sets on spill volume assumed spilling was merely
+  large, not that it was landing on the slowest device in the machine.
+
+**Thread count on a platter, measured.** Same query, three thread settings, a different
+18-file span each time so nothing was served from the OS cache. Figures owned by the analysis
+README. **Cutting DuckDB from 12 threads to 1–2 roughly doubles read throughput**, and the
+difference between 1 and 2 is inside the noise. DuckDB defaults to one thread per core, so the
+default is the wrong setting here by a factor of two — and the 35 MB/s seen mid-scan was
+contention on top of that, not the floor.
+
+**The correction this forces to my own earlier reasoning:** on the strength of the 1-in-256
+probe alone I had the full pass somewhere between 14 and 180 hours. Both numbers came from
+treating the probe's 63.7 minutes as mostly per-user work. It is mostly scan, the scan is
+mostly avoidable overhead, and the honest position is that **the split between the two is
+still unmeasured** — which is what the next two runs are for, and why they hold thread count
+constant and vary only the slice fraction.

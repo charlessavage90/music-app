@@ -67,6 +67,32 @@ one artist survives); `T3-P2` every user's last listen is discarded by three-val
 `T3-P3` the self-join counts every pair twice, so `contribution` bites at half the co-listens
 it appears to. Each is LB's behaviour and each is deliberate.
 
+### The redirect arm of the duration frame (`T3-D6` / `LBDR-F4`)
+
+Task 1 extracted only `recording`, so every listen on a **redirected** recording MBID fell to
+the 180-second default instead of its real length — which shifts `difference`, and therefore
+session boundaries *and* the skip test, one way. Task 1's §5 deferred this to `LBD-S2` because
+the unmatched share is only measurable against the frame that consumes it. This is `LBD-S2`.
+
+`recording_gid_redirect` was extracted from the pinned `mbdump.tar.bz2` and joined to
+`recording` exactly as LB's `data/postgres/recording.py:16-33` does.
+
+| | |
+|---|---|
+| output | `D:\unsung-large-data\lbd-inputs\recording_gid_redirect_length.parquet` |
+| sha256 | `87cc25298143ba14cb40beabd1cb67d3f27fb77dc3a843f2e1700eb64b680941` |
+| rows | 615,188 |
+| rows carrying a length | 613,140 |
+| **gids appearing in BOTH arms** | **0** |
+| schema sequence | 31, matching the dump and MusicBrainz master |
+
+**The zero matters and was checked rather than assumed.** LB combines the two arms with
+`UNION ALL`, not `UNION`, so a gid present in both would fan out every listen on it and
+silently double that listen's weight. It does not happen here.
+
+`--no-redirects` reproduces the un-redirected frame, so the size of this input difference is
+**measured rather than argued** — which is what turns `LBDR-F4` from a caveat into a figure.
+
 ---
 
 ## 2. The synthetic sub-check — and the evidence it can fail
@@ -161,7 +187,61 @@ passed; the script refuses if either fails. That is stronger than either route a
 
 ## 4. `LBD-C3` — cost, and the scale of the full-history pass
 
-*Pending. `LBD-G4`'s slice and the full pass are recorded here when they run.*
+**Partial. The full pass has not run.** What is measured is the hardware the track runs on,
+which nothing in the plan, the design, the pre-registration or Task 1 records.
+
+### The dump is on a spinning disk
+
+| | |
+|---|---|
+| `D:` | `ST3000DM008`, 3 TB **SATA HDD**, volume label **"Slow Storage"** |
+| `C:` | Samsung 980 PRO **NVMe**, ~582 GB free |
+| `E:` | Samsung 970 EVO **NVMe**, ~300 GB free |
+| dump directory | 214 GB, 1,409 parquet files |
+
+### Read throughput against thread count
+
+Same two-column query, a different 18-file span per setting so nothing came from the OS
+cache, disk otherwise idle. Rates are over total file bytes spanned.
+
+| DuckDB threads | throughput |
+|---:|---:|
+| 12 | 128.9 MB/s |
+| 2 | 245.9 MB/s |
+| **1** | **253.6 MB/s** |
+
+**DuckDB defaults to one thread per core — 24 on this machine — and that default costs a
+factor of two here.** More concurrent readers on a platter converts sequential streaming into
+seek thrash; on an SSD the same setting is free. Measured mid-scan under contention from two
+other `D:` readers, throughput fell to ~35 MB/s at a disk queue length of 13.
+
+### What this does to the pre-registration's fallback
+
+`LBD-D2`'s chunked form is exact, and the pre-registration names it as the safe option when
+the full pass is too large. **On this hardware it is the expensive path**: each chunk re-reads
+the whole dump, because `user_id % k` prunes rows rather than bytes, so sixteen chunks is
+sixteen full scans of the slowest device in the machine. The pre-registration predates this
+measurement and could not have known.
+
+### The 1-in-256 probe, and what it does NOT establish
+
+| | |
+|---|---:|
+| rows in `T` | 5,970,495 |
+| wall clock | 63.7 min |
+| spill | none, at a 16 GB limit |
+| configuration | `--no-redirects`, 12 threads — **a cost measurement only, no criterion read off it** |
+
+Extrapolating rows linearly in users, as `LBD-G4` directs, gives roughly **1.5 billion** rows
+for a full pass — against the gate's 20 billion bar, which it clears by more than an order of
+magnitude, and the pre-registration notes linear extrapolation over-estimates here because
+pairs repeat across users.
+
+**The wall clock does NOT extrapolate the same way, and treating it as though it does is
+wrong in both directions.** `user_id % 256 = 0` prunes rows but not bytes, so the probe read
+the same columns a full pass would; most of its 63.7 minutes was scan, not per-user work.
+**The split between the two is not yet measured** — it is what `LBD-G4`'s slice is for, run at
+a fixed thread count so it differs from the probe by the slice fraction alone.
 
 ## 5. `LBD-C1` — fidelity
 
