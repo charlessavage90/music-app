@@ -1,0 +1,552 @@
+"""`DCF-` edge fate — which of our two cap steps kills an edge, by fame band.
+
+THE HYPOTHESIS THIS TESTS (stated before the numbers exist, and it is not mine)
+  `trimmed_union` cuts twice. First it keeps an edge only if EITHER endpoint
+  ranks the other in its own top fifty (`union_top_j`). Then it trims each
+  artist down to fifty connections by deleting its weakest (`union_degree_
+  ceiling`). Those two steps should hurt different artists:
+
+    an OBSCURE artist's list is short and points upward at artists it ranks
+    highly, so it survives the first cut and loses edges at the TRIM, from the
+    famous end;
+
+    a MIDDLE-FAME artist has a full list whose lower half points at other
+    middle-fame artists whose lists are also full, so neither ranks the other
+    in its top fifty and the edge dies at the FIRST CUT with nothing to rescue
+    it.
+
+  If that is right, the union-width cut is costless at the bottom and expensive
+  in the middle. Nothing in the record has looked. Reporting the two death
+  counts SEPARATELY is the whole point of this script.
+
+WHY THIS IS NOT AN EDIT TO `q4_added_set_supply.py`
+  The instrument is that one — same read, same archive-to-artifact decomposition.
+  ⚠ But this script does NOT re-run `q4`'s `CXR-P2`/`CXR-M5` reproduction, and an
+  earlier draft of this docstring said it did. That reproduction is a property of
+  the ADDED SET's degrees on the CXA population, which is `dcf_ceiling_sweep.py`'s
+  bridge arms; this script's own gate is a different and stronger one — it
+  reproduces the SERVED artifact's entire edge set exactly. Both are checks that
+  a read is being taken correctly; they are not the same check.
+  But `q4` is a COMMITTED probe whose outputs the `LBD-` plan
+  review cites, and `cb_build_variants.py`'s standing warning is explicit that a
+  changed comparison needs a NEW harness rather than an edit to the old one, or
+  the old figures stop being reproducible. So this extends it in place beside
+  the sweep, and leaves `q4` exactly as the review ran it.
+
+  ⚠ ONE THING IT FIXES RATHER THAN INHERITS. `q4`'s own weakest link is that
+  its top-j step is a RECONSTRUCTION of `trimmed_union_cap`'s first half, not
+  the builder's code path. This calls the SHIPPED `trimmed_union_cap` TWICE —
+  once with the ceiling set so high it cannot bind (isolating the top-j union
+  exactly), once at the shipped ceiling of 50 — so both stages are the shipped
+  function's own output and the reconstruction caveat does not apply.
+
+HOW AN EDGE IS ATTRIBUTED TO A BAND - read this before any rate below
+  AT BOTH ENDS. Every archive edge is counted TWICE, once in each endpoint's
+  own band. A row therefore reads "what happened to the edges of the artists in
+  this band", and band totals are double the pair counts. Bands are FAME
+  PERCENTILE; every other column in the table is a count of edges or
+  connections.
+
+  THE PUZZLE THIS RESOLVES, and the answer is not the obvious one. An edge
+  survives the top-j cut if EITHER endpoint ranks the other inside its own top
+  fifty, so an artist holding a short list should lose nothing at that step -
+  every entry in a 12-long list is inside its own top fifty. Yet the bottom fame
+  band loses 21.75% of its slots there.
+
+  ⚠ The tempting resolution is that obscure artists hold mostly REVERSE slots
+  (someone else listed them, unreciprocated). MEASURED, THAT IS FALSE: the
+  median bottom-band artist has ZERO reverse slots, a 9-long own list, and
+  loses NOTHING at the top-j cut. This docstring asserted the reverse-slot
+  story before the denominators existed and was wrong; it is corrected here
+  rather than quietly dropped.
+
+  The real answer is that the band rate is not a typical-artist rate at all.
+  Only 13.9% of bottom-band artists lose anything at the top-j cut; the band's
+  21.75% is carried by that minority, whose slot counts are far above the
+  band median (mean 23.3 slots against a median of 9). Splitting those 831
+  artists by what makes a loss POSSIBLE: 484 have reverse slots, and 347 hold
+  own lists longer than fifty. Nobody else can lose a slot there, and the
+  measurement confirms it - across all ten bands, the count of artists losing
+  at the top-j cut with neither reverse slots nor an over-fifty own list is
+  exactly ZERO. That is a structural check on the whole read, not a coincidence.
+
+  So: read `%topj` as a property of a band's EDGES, never of its artists, and
+  read the `%artists losing anything` column beside it before saying who the
+  cut hurts.
+
+BANDING - three different quantities, and they are not interchangeable
+  Bands are FAME PERCENTILE, computed within the served artifact by the shipped
+  `GraphStore.fame_percentiles` (0 = nobody on this map has fewer recorded
+  listeners; 1 = nobody has more). NOT raw fame (`fame_lb` is a value, never a
+  rank), and NOT degree, which is what the sweep's hub classification uses.
+  Reading one of these as another has produced three wrong conclusions here
+  (§2.6, §2.11, §2.12).
+
+SCOPE
+  Descriptive. It measures which edges our construction deletes. It does NOT
+  route: no path is built, no criterion is evaluated, and no rule change is
+  proposed — the union width is part of the parked cap-rule decision and is the
+  owner's (`specs/2026-09-06-own-similarity-design.md` §9).
+
+Run from `builder/`:
+    UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u \
+        analysis/2026-09-07-degree-ceiling-falsifier/dcf_edge_fate.py
+"""
+
+from __future__ import annotations
+
+import csv
+import gzip
+import hashlib
+import json
+import logging
+import statistics
+import sys
+import time
+from collections import defaultdict
+from pathlib import Path
+
+from artistpath_builder.config import CANDIDATE_ALGORITHM, BuilderConfig
+from artistpath_builder.featured_credit_drop import load_featured_credit_drop_mbids
+from artistpath_builder.no_release_drop import load_drop_mbids
+from artistpath_builder.unlistenable_drop import load_unlistenable_list
+from artistpath_builder.graph import (
+    largest_component,
+    symmetrise,
+    trimmed_union_cap,
+)
+from artistpath_builder.pipeline import damped_strength, is_special_purpose
+from artistpath_builder.sources.listenbrainz import (
+    ListenBrainzSource,
+    harvest_identities,
+)
+
+logger = logging.getLogger(__name__)
+
+HERE = Path(__file__).parent
+SCRATCH = HERE.parent.parent / "scratch"
+
+# The SERVED map and the archive it was built from. NEXT.md pins the
+# `.pre-cex-snapshot` tree for any build of the served lineage — the extended
+# sibling gained tens of thousands of payloads after this artifact was built,
+# and reading it here would measure a population this artifact never saw.
+SERVED = SCRATCH / "graph-msw-tu50.bin"
+ARCHIVE_ROOT = SCRATCH / "grt-archive-algb.pre-cex-snapshot"
+SUBTREE = ARCHIVE_ROOT / "similar" / "listenbrainz" / CANDIDATE_ALGORITHM
+
+# High enough that the trim provably cannot bind: the largest pre-trim degree
+# any ALG-B graph has shown is far below this. Asserted at run time, not
+# assumed — if it ever binds, the top-j isolation is silently wrong.
+NO_TRIM = 10_000_000
+
+BANDS = [(i / 10, (i + 1) / 10) for i in range(10)]
+
+
+def band_of(pctl: float) -> int:
+    """Index of the fame-percentile band. 1.0 belongs in the top band."""
+    return min(9, int(pctl * 10))
+
+
+def band_label(i: int) -> str:
+    lo, hi = BANDS[i]
+    return f"{lo:.1f}-{hi:.1f}"
+
+
+def verify_against_sidecar(path: Path) -> dict:
+    sidecar = path.with_suffix(".bin.json")
+    manifest = json.loads(sidecar.read_text(encoding="utf-8"))
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    if digest != manifest.get("sha256"):
+        raise ValueError(
+            f"{path.name} sha256 {digest[:12]}… does not match its sidecar. "
+            "Artifacts under scratch/ are not interchangeable."
+        )
+    logger.info("verified %s sha %s…", path.name, digest[:12])
+    return manifest
+
+
+def read_archive_payloads() -> dict[str, bytes]:
+    """Read-only, by construction: nothing here can write (GRT-A1).
+
+    Opened by direct iteration rather than through `LocalArchive`, whose
+    constructor `mkdir`s its root — a write, and the one thing a probe over an
+    irreplaceable archive must not do.
+    """
+    payloads: dict[str, bytes] = {}
+    for path in sorted(SUBTREE.iterdir()):
+        if path.suffix == ".json" and path.is_file():
+            payloads[path.stem] = path.read_bytes()
+    logger.info("read %d payloads (read-only)", len(payloads))
+    return payloads
+
+
+def surviving_population(
+    payloads: dict[str, bytes], config: BuilderConfig
+) -> tuple[set[str], set[str]]:
+    """`known` after the drops, in `build_from_archive`'s documented order.
+
+    Mirrors the shipped stage order and calls the shipped drop loaders, so the
+    only thing restated here is the ORDER — the `cb_build_variants.py` pattern.
+
+    ⚠ `drop_unlistenable` is ON here, unlike in the sweep, and the difference is
+    not an inconsistency — it is what makes the reproduction gate possible. The
+    served artifact's own manifest records `drop_unlistenable: true`, and this
+    population IS the one the ULF- census evaluated (the pre-CEX 75,000), so the
+    guard does not refuse. The sweep turns it off because its population is the
+    EXTENDED crawl, which the census never saw and which the guard therefore
+    refuses outright.
+
+    Validated downstream: if this set were wrong, the reconstructed final graph
+    would not reproduce the served artifact's edges, and the gate would fail.
+    """
+    known = set(payloads)
+    identities = harvest_identities(payloads.values())
+
+    excluded = {
+        mbid
+        for mbid, (_name, disambiguation) in identities.items()
+        if is_special_purpose(disambiguation)
+    } if config.filter_special_purpose else set()
+    known -= excluded
+
+    nameless = {m for m, (name, _d) in identities.items() if not name.strip()}
+    nameless |= known - identities.keys()
+    excluded |= nameless
+    known -= nameless
+
+    if config.drop_no_release_tail:
+        no_release = load_drop_mbids(config.algorithm) & known
+        excluded |= no_release
+        known -= no_release
+
+    if config.drop_featured_credit:
+        featured = load_featured_credit_drop_mbids(config.algorithm) & known
+        excluded |= featured
+        known -= featured
+
+    if config.drop_unlistenable:
+        ulf = load_unlistenable_list(config.algorithm, config.unlistenable_list_path)
+        unevaluated = frozenset(payloads) - ulf.censused_mbids
+        if unevaluated:
+            raise SystemExit(
+                f"{len(unevaluated)} artist(s) were never censused; this probe "
+                "is over the SERVED lineage and must not silently under-filter."
+            )
+        unlistenable = ulf.drop_mbids & known
+        excluded |= unlistenable
+        known -= unlistenable
+
+    logger.info("known after drops: %d (excluded %d)", len(known), len(excluded))
+    return known, excluded
+
+
+def build_stages(payloads, known, excluded, config, source):
+    """The two cap stages, both from the SHIPPED `trimmed_union_cap`."""
+    mass: dict[str, float] = {}
+    raw_lists = {}
+    for mbid in sorted(known):
+        neighbours = [
+            n for n in source.parse(payloads[mbid], exclude_mbid=mbid)
+            if n.mbid not in excluded
+        ]
+        raw_lists[mbid] = neighbours
+        mass[mbid] = sum(n.score for n in neighbours) or 1.0
+
+    damping = config.similarity_damping
+    adjacency: dict[str, dict[str, float]] = {}
+    for mbid in sorted(known):
+        mass_a = mass[mbid]
+        adjacency[mbid] = {
+            n.mbid: damped_strength(n.score, mass_a, mass[n.mbid], damping)
+            for n in raw_lists[mbid]
+            if n.mbid in known
+        }
+    # `ranking` is the same unclipped strengths the pipeline ranks on. The
+    # emitted (rescaled) scores are deliberately NOT computed: the p99 clip
+    # changes score VALUES and never edge survival, which is all this measures.
+    ranking = {m: dict(e) for m, e in adjacency.items()}
+
+    logger.info("pre-cap directed edges: %d", sum(len(e) for e in adjacency.values()))
+
+    after_topj = trimmed_union_cap(adjacency, config.union_top_j, NO_TRIM,
+                                   ranking=ranking)
+    after_trim = trimmed_union_cap(adjacency, config.union_top_j,
+                                   config.union_degree_ceiling, ranking=ranking)
+    return adjacency, after_topj, after_trim
+
+
+def pair_set(adjacency) -> set[tuple[str, str]]:
+    """Undirected pairs, deduped."""
+    pairs = set()
+    for node, edges in adjacency.items():
+        for dst in edges:
+            pairs.add((node, dst) if node < dst else (dst, node))
+    return pairs
+
+
+def main() -> int:
+    started = time.monotonic()
+    sys.path.insert(0, str((HERE.parent.parent.parent / "api" / "src").resolve()))
+    from artistpath_api.graph_store import GraphStore  # noqa: PLC0415
+
+    manifest = verify_against_sidecar(SERVED)
+    served = GraphStore.load(SERVED)
+    if served.fame_lb_pctl is None:
+        raise SystemExit("served artifact carries no fame_lb; cannot band")
+    pctl_of = dict(zip(served.mbids, served.fame_lb_pctl.tolist()))
+    served_set = set(served.mbids)
+
+    # Shipped config except `require_fame`, which cannot touch edge survival —
+    # fame is metadata, read here from the served artifact instead.
+    config = BuilderConfig(algorithm=CANDIDATE_ALGORITHM, require_fame=False)
+    source = ListenBrainzSource(config)
+    payloads = read_archive_payloads()
+    known, excluded = surviving_population(payloads, config)
+    adjacency, after_topj, after_trim = build_stages(
+        payloads, known, excluded, config, source
+    )
+
+    max_pre_trim = max((len(e) for e in after_topj.values()), default=0)
+    if max_pre_trim >= NO_TRIM:
+        raise SystemExit(
+            f"NO_TRIM={NO_TRIM} actually bound (max degree {max_pre_trim}); the "
+            "top-j isolation would be wrong. Raise it and re-run."
+        )
+
+    final_adj = symmetrise(after_trim)
+    keep = largest_component(final_adj)
+    final_pairs = {
+        (a, b) for (a, b) in pair_set(final_adj) if a in keep and b in keep
+    }
+
+    archive_pairs = pair_set(adjacency)
+    topj_pairs = pair_set(after_topj)
+    trim_pairs = pair_set(after_trim)
+
+    # ---- GATE: does the reconstruction reproduce the SERVED artifact? -----
+    # Green half. If `known` or the stage order were wrong, this fails — which
+    # is what makes every band figure below trustworthy rather than plausible.
+    served_pairs = set()
+    for i, mbid in enumerate(served.mbids):
+        lo, hi = int(served.offsets[i]), int(served.offsets[i + 1])
+        for j in served.neighbours[lo:hi]:
+            other = served.mbids[int(j)]
+            served_pairs.add((mbid, other) if mbid < other else (other, mbid))
+    matched = len(final_pairs & served_pairs)
+    gate = {
+        "reconstructed_edges": len(final_pairs),
+        "served_artifact_edges": len(served_pairs),
+        "in_both": matched,
+        "only_in_reconstruction": len(final_pairs - served_pairs),
+        "only_in_served_artifact": len(served_pairs - final_pairs),
+        "exact": final_pairs == served_pairs,
+        "agreement": round(matched / max(1, len(served_pairs)), 6),
+    }
+    # Red half: an instrument never shown to move is not an instrument. The
+    # top-j stage MUST hold strictly more edges than the trimmed stage, and the
+    # trimmed stage strictly more than the final component.
+    gate["red_stages_are_distinct"] = (
+        len(archive_pairs) > len(topj_pairs) > len(trim_pairs) >= len(final_pairs)
+    )
+    logger.info("gate: %s", json.dumps(gate))
+
+    # ---- per-band edge fate, counted in ENDPOINT SLOTS -------------------
+    # An edge between band 3 and band 7 is counted once in band 3 and once in
+    # band 7, so a band's row reads as "what happened to the edges of the
+    # artists in this band". Edge TOTALS are therefore double the pair counts;
+    # the pair counts are in the gate above.
+    rows = {i: defaultdict(int) for i in range(10)}
+    band_artists = defaultdict(int)
+    for mbid in served.mbids:
+        band_artists[band_of(pctl_of[mbid])] += 1
+
+    # Per-ARTIST fate counts, so every rate can be reported beside its own
+    # denominator and beside the currency the question was actually asked in --
+    # connections RETAINED. A share lost is not comparable across bands when
+    # list length varies with fame, which it does, by an order of magnitude.
+    per_artist = {
+        m: {"own_list_len": len(adjacency.get(m, ())), "archive_slots": 0,
+            "died_at_the_topj_cut": 0, "died_at_the_degree_trim": 0,
+            "died_at_the_component_prune": 0, "survived": 0}
+        for m in served.mbids
+    }
+
+    # Cross-tab: what band is the OTHER end in? Computed for EVERY fate, not
+    # just top-j deaths, because the deaths alone cannot be read.
+    #
+    # ⚠ THE CONTROL THIS EXISTS TO SUPPLY. The top fame band holds a large share
+    # of all edges, so "most top-j deaths point at the famous" is what a base
+    # rate looks like as well as what a finding looks like. Only the death
+    # crosstab AGAINST the archive crosstab separates them: the quantity to read
+    # is ENRICHMENT — the share of a band's top-j deaths pointing at column c,
+    # divided by the share of that band's archive edges pointing at column c.
+    # 1.0 means the cut is indifferent to the other end; > 1 means it selects
+    # against that column.
+    crosstabs = {
+        fate: {i: defaultdict(int) for i in range(10)}
+        for fate in ("archive", "died_at_the_topj_cut",
+                     "died_at_the_degree_trim", "survived")
+    }
+    OTHER_UNSERVED = "not-in-served-map"
+
+    for a, b in archive_pairs:
+        in_topj = (a, b) in topj_pairs
+        in_trim = (a, b) in trim_pairs
+        in_final = (a, b) in final_pairs
+        if in_final:
+            fate = "survived"
+        elif in_trim:
+            fate = "died_at_the_component_prune"
+        elif in_topj:
+            fate = "died_at_the_degree_trim"
+        else:
+            fate = "died_at_the_topj_cut"
+        for end, other in ((a, b), (b, a)):
+            if end not in served_set:
+                continue
+            i = band_of(pctl_of[end])
+            rows[i]["archive_edges"] += 1
+            rows[i][fate] += 1
+            pa = per_artist[end]
+            pa["archive_slots"] += 1
+            pa[fate] += 1
+            key = (
+                band_label(band_of(pctl_of[other]))
+                if other in served_set else OTHER_UNSERVED
+            )
+            crosstabs["archive"][i][key] += 1
+            if fate in crosstabs:
+                crosstabs[fate][i][key] += 1
+
+    by_band_artists = defaultdict(list)
+    for mbid in served.mbids:
+        by_band_artists[band_of(pctl_of[mbid])].append(per_artist[mbid])
+
+    def med(values):
+        return float(statistics.median(values)) if values else 0.0
+
+    table = []
+    for i in range(10):
+        r = rows[i]
+        total = r["archive_edges"]
+        n = band_artists[i]
+        people = by_band_artists[i]
+        own = [q["own_list_len"] for q in people]
+        slots = [q["archive_slots"] for q in people]
+        rev = [q["archive_slots"] - q["own_list_len"] for q in people]
+        surv = [q["survived"] for q in people]
+        table.append({
+            # --- denominators, so no rate below is read without one ---
+            # ALL of these are edge/connection COUNTS. The band is the only
+            # fame-percentile quantity in the row.
+            "median_own_list_len": med(own),
+            "median_reverse_only_slots": med(rev),
+            "median_archive_slots": med(slots),
+            "median_topj_deaths": med([q["died_at_the_topj_cut"] for q in people]),
+            "median_trim_deaths": med([q["died_at_the_degree_trim"] for q in people]),
+            # --- the currency the question was asked in: what is RETAINED ---
+            "median_surviving_connections": med(surv),
+            "share_with_two_or_fewer_surviving": round(
+                sum(1 for v in surv if v <= 2) / n, 5) if n else 0.0,
+            "band": band_label(i),
+            "artists": n,
+            "archive_edges": total,
+            "archive_edges_per_artist": round(total / n, 2) if n else 0.0,
+            "died_at_the_topj_cut": r["died_at_the_topj_cut"],
+            "died_at_the_degree_trim": r["died_at_the_degree_trim"],
+            "died_at_the_component_prune": r["died_at_the_component_prune"],
+            "survived": r["survived"],
+            "share_died_at_the_topj_cut": round(r["died_at_the_topj_cut"] / total, 5)
+            if total else 0.0,
+            "share_died_at_the_degree_trim": round(
+                r["died_at_the_degree_trim"] / total, 5) if total else 0.0,
+            "share_survived": round(r["survived"] / total, 5) if total else 0.0,
+            "survived_per_artist": round(r["survived"] / n, 2) if n else 0.0,
+        })
+
+    def as_dict(tab):
+        return {band_label(i): dict(sorted(tab[i].items())) for i in range(10)}
+
+    # Enrichment of top-j deaths over the archive base rate, per (row, column).
+    enrichment = {}
+    for i in range(10):
+        arch, dead = crosstabs["archive"][i], crosstabs["died_at_the_topj_cut"][i]
+        arch_total, dead_total = sum(arch.values()), sum(dead.values())
+        if not arch_total or not dead_total:
+            continue
+        enrichment[band_label(i)] = {
+            col: round((dead.get(col, 0) / dead_total) / (arch[col] / arch_total), 3)
+            for col in sorted(arch)
+            if arch[col]
+        }
+
+    out = {
+        "probe": "DCF- edge fate — which cap step kills an edge, by fame band",
+        "served_artifact": {
+            "file": SERVED.name, "sha256": manifest["sha256"],
+            "artists": manifest["artists"], "edges": manifest["edges"],
+        },
+        "archive": {"dir": str(SUBTREE), "payloads": len(payloads)},
+        "population": {"known_after_drops": len(known), "excluded": len(excluded)},
+        "stage_pair_counts": {
+            "archive": len(archive_pairs), "after_topj": len(topj_pairs),
+            "after_degree_trim": len(trim_pairs), "final_after_component": len(final_pairs),
+        },
+        "max_degree_after_topj_before_any_trim": max_pre_trim,
+        "gate": gate,
+        "counting": "ENDPOINT SLOTS — an edge is counted once for each of its "
+                    "two ends, in that end's band. Band totals are therefore "
+                    "double the pair counts above.",
+        "by_fame_band": table,
+        "by_band_of_the_other_end": {
+            fate: as_dict(tab) for fate, tab in crosstabs.items()
+        },
+        "topj_death_enrichment_over_the_archive_base_rate": enrichment,
+        "elapsed_seconds": round(time.monotonic() - started, 1),
+    }
+    (HERE / "dcf_edge_fate.json").write_text(
+        json.dumps(out, indent=2, sort_keys=True), encoding="utf-8"
+    )
+    # Every re-read of this measurement so far has cost a full re-run, because
+    # only the aggregates were kept. The per-artist table is the raw record and
+    # compresses small, so further questions are a read rather than 30 minutes.
+    with gzip.open(HERE / "dcf_edge_fate_per_artist.csv.gz", "wt",
+                   newline="", encoding="utf-8") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(["mbid", "fame_pctl_in_served_artifact", "band",
+                         "own_list_len", "archive_slots",
+                         "died_at_the_topj_cut", "died_at_the_degree_trim",
+                         "died_at_the_component_prune", "survived"])
+        for mbid in served.mbids:
+            q = per_artist[mbid]
+            writer.writerow([mbid, round(pctl_of[mbid], 6),
+                             band_label(band_of(pctl_of[mbid])),
+                             q["own_list_len"], q["archive_slots"],
+                             q["died_at_the_topj_cut"],
+                             q["died_at_the_degree_trim"],
+                             q["died_at_the_component_prune"], q["survived"]])
+
+    print(f"\ngate exact={gate['exact']} agreement={gate['agreement']} "
+          f"red={gate['red_stages_are_distinct']}")
+    print(f"{'band':>9} {'artists':>7} {'ownlist':>8} {'revonly':>8} "
+          f"{'slots':>7} {'topj#':>7} {'trim#':>7} {'kept':>6} {'<=2':>7} "
+          f"{'%topj':>7} {'%trim':>7}")
+    for r in table:
+        print(f"{r['band']:>9} {r['artists']:>7,} {r['median_own_list_len']:>8.0f} "
+              f"{r['median_reverse_only_slots']:>8.0f} "
+              f"{r['median_archive_slots']:>7.0f} {r['median_topj_deaths']:>7.0f} "
+              f"{r['median_trim_deaths']:>7.0f} "
+              f"{r['median_surviving_connections']:>6.0f} "
+              f"{100 * r['share_with_two_or_fewer_surviving']:>6.2f}% "
+              f"{100 * r['share_died_at_the_topj_cut']:>6.2f}% "
+              f"{100 * r['share_died_at_the_degree_trim']:>6.2f}%")
+    print("medians are PER ARTIST; %topj/%trim are shares of that band's total "
+          "archive edge-slots, attributed AT BOTH ENDS. Bands are FAME "
+          "PERCENTILE within the served artifact; every other column is a count "
+          "of edges or connections.")
+    return 0 if gate["exact"] and gate["red_stages_are_distinct"] else 1
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    raise SystemExit(main())

@@ -1,0 +1,46 @@
+INFO verified graph-msw-tu50.bin  sha 43dd82bb3771…  artists 58838  edges 1315684
+INFO verified graph-cxa-adopted.bin  sha bc0431c4b55a…  artists 88685  edges 1618164
+INFO split: added 29892, pre-existing 58793
+archive payloads: 117,302
+
+=== arm: union_degree_ceiling=50 ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO rescale p99 scale=763 | saturated edges 41141 of 4111299 (1.001%)
+INFO largest component: 103902 of 105800 artists
+  ceiling     50  built in 12.1 min  nodes 103,902  edges 890,208  max deg 50  ADDED median 5 <=2 32.10% absent 0.31%
+
+=== arm: union_degree_ceiling=100 ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO rescale p99 scale=763 | saturated edges 41141 of 4111299 (1.001%)
+INFO largest component: 105145 of 105800 artists
+  ceiling    100  built in 11.0 min  nodes 105,145  edges 1,269,619  max deg 100  ADDED median 6 <=2 25.48% absent 0.00%
+    restored 58,414 edges to added artists — 90.9% to a top-decile hub, 9.1% not; 2,028 left the <=2 group
+
+=== arm: union_degree_ceiling=200 ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO rescale p99 scale=763 | saturated edges 41141 of 4111299 (1.001%)
+INFO largest component: 105256 of 105800 artists
+  ceiling    200  built in 9.2 min  nodes 105,256  edges 1,590,329  max deg 200  ADDED median 7 <=2 22.02% absent 0.00%
+    restored 106,147 edges to added artists — 93.8% to a top-decile hub, 6.2% not; 3,045 left the <=2 group
+
+=== arm: union_degree_ceiling=20000 ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO rescale p99 scale=763 | saturated edges 41141 of 4111299 (1.001%)
+INFO largest component: 105351 of 105800 artists
+  ceiling  20000  built in 3.7 min  nodes 105,351  edges 2,254,246  max deg 15,347  ADDED median 9 <=2 18.41% absent 0.00%
+    restored 212,832 edges to added artists — 96.4% to a top-decile hub, 3.6% not; 4,112 left the <=2 group
+
+gate: green=True red=True -> PASS
+wrote C:\dev\music-app\builder\analysis\2026-09-07-degree-ceiling-falsifier\dcf_results.json

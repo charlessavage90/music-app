@@ -102,11 +102,32 @@ NOT EXECUTABLE**
 blocker: **every arm refuses to build, including the baseline**, and it would surface only
 after the expensive runs. Neither review edited the design or the plan — the corrections are
 owed to the pre-registration (Task 2), which is committed before results exist. **One item
-from it is the owner's and is a premise question, not a blocker:** most of today's sparsity for
-the added artists is attributable to **our own degree ceiling** rather than to missing listening
-data, which is what `LBD-` set out to test. Nothing waits on it. Why the July finding that
+from it is the owner's and is a premise question, not a blocker:** how much of today's sparsity
+for the added artists is **our own degree ceiling** rather than missing listening data, which is
+what `LBD-` set out to test. ⚠ **CORRECTED 2026-09-07.** This read *"most of today's sparsity
+… is attributable to our own degree ceiling"*; the falsifier the review named has since been
+run, and it moves that **from a majority to a minority** — the ceiling is the smaller of the two
+causes and the endpoint's own supply the larger. **Mechanism unchanged, magnitude only.** Figures
+are owned by
+[`builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md`](../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md)
+§4 — cited, never restated here; the finding carries the same forward correction beside the
+claim. Nothing waits on it. Why the July finding that
 "the dumps carry no MBIDs" does not block it is in
 [`findings/2026-09-06-lb-dump-route-assessment.md`](findings/2026-09-06-lb-dump-route-assessment.md).
+**A probe answering that premise question RAN 2026-09-07 — `DCF-`, branch
+`dcf-degree-ceiling-falsifier`, PR #108 (draft).** It runs the falsifier the plan review named
+and did not run. **Descriptive only: no path was built, `CRS-C4` hub transit was not
+re-measured, and Track B's `C4` result stands against any ceiling raise.** Nothing is adopted
+and no rule change is proposed; the cap-rule decision stays parked and his. Figures:
+[`builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md`](../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md);
+reasoning:
+[`2026-09-07-dcf-degree-ceiling-execution-log.md`](2026-09-07-dcf-degree-ceiling-execution-log.md).
+⚠ **`LBD-X1` NOW NEEDS ITS AMENDMENT.** That pre-registration claims the ceiling's effect on
+the `CXR` added set is unmeasured; this measures it. **`LBD-` Task 3 owns recording the
+amendment** — dated, in §10, never an edit to the values — per its own handoff. Also owed
+there: `docs/README.md`'s row for the pre-registration repeats "unmeasured"
+([`findings/2026-09-07-doc-audit-two-branch.md`](findings/2026-09-07-doc-audit-two-branch.md)).
+
 ~~**One owner precondition, underway 2026-09-06:** the 213 GB parquet dump downloading to
 `D:\unsung-large-data\`.~~ **DISCHARGED — the dump is on disk and pinned** (with one caveat
 on its identity that the inputs README states). **What it does not reopen:** the fame-currency rulings, the `ALG-B`
