@@ -398,3 +398,50 @@ layout regression and production.
 *(The commit for this work lost one phrase to an unquoted backtick in its message — it reads
 "waited on ," where it should name the list selector. Recorded here rather than amending a
 pushed commit.)*
+
+## §13 The deploy — 2026-09-08
+
+**Both owed deploys went out together**, at the owner's instruction, after PR #114 merged:
+`LUX-4`'s artifact and API, and the redesign's frontend. `infra/README.md` §§3–8a followed as
+written. **Image `7eb177b`**, built from HEAD, which is what clears the standing `DEP-34`
+hazard — the previously running image (`994c203`) predated the `CXR-` revert and carried a
+baked-in default naming the **rejected** artifact.
+
+**`cdk diff` before deploying showed exactly the four changes this deploy is allowed to make**
+and nothing else: the graph key, its checksum, the image tag, and the IAM statement scoped to
+the new key. Per §4 this is the one deploy where the graph variables moving is *expected*
+rather than being `DEP-34` firing.
+
+**Verification, all mechanical.** The live `/health` checksum, artist count and edge count were
+asserted equal to `graph-lux4.bin`'s sidecar by script, never by eye. App Runner's public URL
+still refuses a direct request (403, `TR-7`). §8a's seven checks passed, including the two that
+only fail in ways nothing else would notice: the old CloudFront address **301s with its query
+string intact** (bypass state survives a shared link), and a request claiming to be the real
+host while connecting straight to CloudFront is **refused, not redirected**. Drift detection
+returned **exactly the five documented non-drift rows** — the `ARTISTPATH_CORS_ORIGINS` one was
+matched **by name**, per the runbook's warning that its index moves.
+
+**Two scan findings, one fixed and one accepted.**
+
+- **Fixed:** `npx snyk test` on the frontend flagged a **Medium CSRF** advisory
+  (`SNYK-JS-REACTROUTER-18313151`) in `react-router@7.18.1`. Upgraded to `react-router-dom`
+  **7.18.2**, full suite and e2e re-run green, rescan clean, and the frontend was **republished
+  after the fix** — so what is live does not carry it.
+- **Accepted, and one of the three is new.** The image scan reports three highs. Two are the
+  `TKB-6` pair (`attr/libattr1`, `acl/libacl1`). The third, **`zlib/zlib1g`
+  (`SNYK-DEBIAN13-ZLIB-19520500`, CVE-2026-85091, out-of-bounds write)**, is not in that record
+  and is **new to it**. Same class and same disposition: a `python:3.12-slim` OS package with
+  **no fixed Debian version available** — Snyk reports `isUpgradable: false`, `isPatchable:
+  false`. The Alpine base Snyk suggests stays refused (musl, and numpy would build from
+  source). **Condition to revisit: a fixed Debian package exists**, which is a rebuild, not a
+  decision.
+
+**What a listener sees changed for the first time in weeks**, so `closeout` C1 wrote a
+`TEST-QUEUE.md` entry — and the two entries that had been waiting on this deploy were marked
+live, each with a note saying which of its own steps this work moved. **The 2026-09-04 entry's
+step 1 was describing a control that is no longer on the card**; leaving it would have sent him
+to look for something that is not there.
+
+**Seen working on the live site**, not just curled: a journey built from inside the app at 390
+and 1280, seven stops, covers loaded, the detail opened on an interior artist with its links and
+Dig deeper present, and **no JavaScript errors at either width**.
