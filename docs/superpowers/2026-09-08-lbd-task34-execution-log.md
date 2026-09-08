@@ -595,3 +595,38 @@ after the evidence was deleted; two mutants that could not find what they mutate
 patcher reporting success for a no-op. **The common form is that the *absence* of a check is
 indistinguishable from a *passing* check**, and the only remedy that has worked each time is
 the same one: assert the thing landed rather than assuming it did.
+
+### `T3-D13` in production: four buckets, then out of memory again
+
+The algebraic form ran buckets 0–3 and **failed at bucket 4** with DuckDB's own OOM at 5.5
+GiB. Completed buckets: ~23–27 M partial pair rows each, 109–117 s, **19–25 GB spill each**.
+
+**So the collapse is necessary but not sufficient.** It removed a 896× blow-up on the
+corpus's heaviest account, and buckets that failed before now pass — but the heavy tail is
+broader than the one user that motivated it, and 64 buckets is still too coarse for whatever
+sits in bucket 4. **Unresolved at retirement**, and it is the successor's first problem.
+
+### The algebraic partial emits rows the naive form does not — verified benign
+
+Bucket 0 under the two forms: **24,503,525 rows naive, 24,503,791 algebraic — a difference of
+exactly 266.** Measured on the output: **exactly 266 rows have `part_sum = 0`, and none is
+negative.**
+
+The cause is structural and worth stating so nobody reads it as a defect. Where two artists
+co-occur **only ever on the same credit**, LB's `WHERE` excludes every listen pair between
+them, so the naive form creates **no row at all**. The algebraic form computes
+`W_A·W_B − Σ_c W_{A,c}·W_{B,c}`, which for those artists is exactly zero, and emits a row
+carrying it. `combine`'s `HAVING score > 0` drops them, so **`T` is identical** — which is
+what the fixture asserts, and why the fixture did not surface the row-count difference: it
+compares thresholded output, which is the thing that matters.
+
+Two consequences a successor should have:
+
+- **The partial row counts are not comparable between the two forms.** Only the combined,
+  thresholded result is.
+- **An obvious improvement, deliberately NOT made at retirement:** adding
+  `HAVING SUM(term) > 0` to the partial would drop the zero rows, shrink every partial, and
+  make the counts match. It is safe — a pair contributing zero in one bucket contributes zero
+  to the cross-bucket sum — but it is an untested-at-scale change, and settling it while
+  packing up is how a shaky conclusion enters the record as a decision. It is written here as
+  a recommendation with its reasoning, for the successor to take or reject.

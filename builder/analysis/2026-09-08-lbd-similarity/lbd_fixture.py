@@ -445,6 +445,31 @@ def main() -> int:
         EXPECTED["T"],
     )
 
+    # T3-D13: the algebraic collapse of the session self-join, PROVED equal to the naive
+    # form rather than argued from the algebra. Both pairing modes, because the same-credit
+    # subtraction interacts with T3-D7's de-duplication and that interaction is exactly where
+    # an error would hide. The fixture's users 4 and 6 both carry two-artist credits, which
+    # are the rows the subtraction term exists to remove.
+    for pairing in ("listen", "distinct"):
+        pa = Params(threshold=0, limit=None, pairing=pairing)
+        con = duckdb.connect()
+        build_db(con, redirects=True)
+        sess = sessions_from_listens_sql(
+            listens_sql("artist_similarity_listens", "recording_length", "artist_credit"), pa
+        )
+        alg = con.execute(
+            "SELECT mbid0, mbid1, TRUNC(SUM(part_sum))::BIGINT AS s FROM ("
+            + partial_pairs_sql(sess, pa)
+            + ") GROUP BY 1,2 HAVING s > 0 ORDER BY 1,2"
+        ).fetchall()
+        con.close()
+        want = EXPECTED["T"] if pairing == "listen" else EXPECTED["distinct"]
+        check(
+            f"algebraic form == naive form, pairing={pairing} (T3-D13)",
+            [(a, b, int(c)) for a, b, c in alg],
+            want,
+        )
+
     print("\nThe check is shown to go RED -- each mutant must move the answer\n")
     base_sql = sql_for()
     limit_sql = sql_for(limit=1)

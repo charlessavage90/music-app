@@ -16,7 +16,7 @@ below are into that file. A review (`LBDR-F2`) established that the plan's prose
 a DIFFERENT computation from the SQL it quotes, so prose is not admissible evidence here.
 
 --------------------------------------------------------------------------------------
-THE TWELVE DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
+THE THIRTEEN DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
 --------------------------------------------------------------------------------------
 
 T3-D1. `to_date` is pinned to the dump's END_TIMESTAMP, not `date.today()` (`artist.py:121`).
@@ -446,6 +446,86 @@ def pairs_sql(
     """
 
 
+def _pair_source_cte(sessions_source: str, p: Params) -> str:
+    """The `WITH pair_source AS (...)` head shared by both pair formulations."""
+    if p.pairing == "distinct":
+        # T3-D7: our arm. Exact-duplicate-row removal ahead of pairing.
+        return f"""
+            WITH sessions_filtered AS ({sessions_source}),
+            pair_source AS (
+                SELECT DISTINCT user_id, session_id, artist_mbid, credit_key, similarity
+                  FROM sessions_filtered
+            )"""
+    if p.pairing == "listen":
+        return f"""
+            WITH pair_source AS ({sessions_source})"""
+    raise ValueError(f"unknown pairing {p.pairing!r}")
+
+
+def algebraic_contribution_sql(sessions_source: str, p: Params) -> str:
+    """`user_contribtion_mbids` (`artist.py:64-82`) without materialising the self-join.
+
+    T3-D13, and it is EXACT ARITHMETIC on LB's own definition, not an approximation.
+
+    LB sums `s_i * s_j` over ordered listen pairs within a session where the artists differ
+    AND the credits differ (`:72-73`). Split that condition:
+
+        sum over {a_i != a_j}  -  sum over {a_i != a_j AND c_i = c_j}
+
+    Let W_A be artist A's summed similarity in a session, and W_A,c the same restricted to
+    credit c. Then the first term is the sum of W_A * W_B over ordered artist pairs, and the
+    second is the sum of W_A,c * W_B,c over ordered artist pairs WITHIN each credit. So
+
+        contribution = SUM over artist pairs (W_A * W_B)  -  SUM over credit-sharing pairs
+
+    which costs quadratic in DISTINCT ARTISTS per session instead of quadratic in LISTENS.
+
+    WHY IT IS NEEDED, measured rather than assumed: the corpus's heaviest account (user
+    167111, 4.78M listens) has a 63,072-listen session touching only 1,312 distinct artists.
+    The naive join materialises 6,709,588,582 rows for that ONE user; this form materialises
+    7,488,586 -- 896x fewer. Buckets without such an account completed fine; bucket 7 did not,
+    which is what a heavy tail looks like.
+
+    Both joins here are symmetric and exclude only `artist_mbid` equality, so each unordered
+    pair is counted in both directions exactly as LB's unordered self-join does (`T3-P3`) --
+    the factor of two is inherited, not reintroduced.
+    """
+    return f"""{_pair_source_cte(sessions_source, p)}
+            , artist_session AS (
+                SELECT user_id, session_id, artist_mbid, SUM(similarity) AS w
+                  FROM pair_source
+              GROUP BY 1, 2, 3
+            ), credit_session AS (
+                SELECT user_id, session_id, credit_key, artist_mbid, SUM(similarity) AS w
+                  FROM pair_source
+              GROUP BY 1, 2, 3, 4
+            ), terms AS (
+                SELECT a.user_id AS user_id
+                     , IF(a.artist_mbid < b.artist_mbid, a.artist_mbid, b.artist_mbid) AS mbid0
+                     , IF(a.artist_mbid > b.artist_mbid, a.artist_mbid, b.artist_mbid) AS mbid1
+                     , a.w * b.w AS term
+                  FROM artist_session a
+                  JOIN artist_session b USING (user_id, session_id)
+                 WHERE a.artist_mbid != b.artist_mbid
+                 UNION ALL
+                SELECT a.user_id AS user_id
+                     , IF(a.artist_mbid < b.artist_mbid, a.artist_mbid, b.artist_mbid) AS mbid0
+                     , IF(a.artist_mbid > b.artist_mbid, a.artist_mbid, b.artist_mbid) AS mbid1
+                     -- subtract the same-credit pairs LB excludes at `:73`
+                     , -(a.w * b.w) AS term
+                  FROM credit_session a
+                  JOIN credit_session b USING (user_id, session_id, credit_key)
+                 WHERE a.artist_mbid != b.artist_mbid
+            )
+                SELECT user_id
+                     , mbid0
+                     , mbid1
+                     , LEAST(SUM(term), {p.contribution}) AS part_score
+                  FROM terms
+              GROUP BY 1, 2, 3
+    """
+
+
 def partial_pairs_sql(sessions_source: str, p: Params) -> str:
     """One chunk's contribution to the cross-user sum -- `LBD-D2`'s exact chunked form.
 
@@ -460,10 +540,8 @@ def partial_pairs_sql(sessions_source: str, p: Params) -> str:
     of magnitude. `combine_sql` does the final re-sum, and it is there and only there that the
     integer cast and the threshold are applied, exactly as LB applies them once.
     """
-    body = pairs_sql(sessions_source, p, apply_threshold=False, apply_limit=False)
-    # pairs_sql ends at `thresholded_mbids`; take user_contribtion_mbids instead.
-    head = body[: body.index("), thresholded_mbids AS (")]
-    return f"""{head})
+    return f"""
+            WITH user_contribtion_mbids AS ({algebraic_contribution_sql(sessions_source, p)})
                 SELECT mbid0, mbid1, SUM(part_score) AS part_sum
                   FROM user_contribtion_mbids
               GROUP BY mbid0, mbid1
