@@ -28,3 +28,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# UXR: screenshots from e2e/screenshot.mjs, looked at and thrown away
+e2e/screenshots/
