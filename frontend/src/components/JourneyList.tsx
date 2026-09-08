@@ -1,5 +1,8 @@
 import { useEffect, useImperativeHandle, useMemo, useRef, useState, type Ref } from 'react';
 import { ArtistCard } from './ArtistCard';
+import { ArtistDetail } from './ArtistDetail';
+import { DetailDock } from './DetailDock';
+import { DetailSheet } from './DetailSheet';
 import { PlayerBar } from './PlayerBar';
 import { usePlayer } from '@/player/usePlayer';
 import { cachedTrack, resolveFreshUrl } from '@/hooks/useClip';
@@ -65,12 +68,6 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     setClipIndex((prev) => (prev[mbid] ? { ...prev, [mbid]: 0 } : prev));
   }
 
-  // Both belong to ArtistDetail, which UXR-T7 mounts from `selected`. They are
-  // kept wired here rather than removed and re-added: the bypass is the page's
-  // own prop, and cycleClip owns the stop-then-swap rule above.
-  void onBypass;
-  void cycleClip;
-
   // Silence the previous path the moment a new one arrives — otherwise a clip
   // from an artist who is no longer on the journey keeps playing over it.
   const pathKey = artists.map((a) => a.mbid).join('|');
@@ -88,8 +85,29 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
   // response to the press. So the page can stop it the moment a button is pressed.
   useImperativeHandle(ref, () => ({ stop: () => stopRef.current() }), []);
 
+  // One element, two containers (UXR-D3): the dock at lg, the sheet below it.
+  // Built once here so the two cannot drift apart.
+  const selectedIndex = artists.findIndex((a) => a.mbid === selected);
+  const detail = selectedIndex >= 0 && (
+    <ArtistDetail
+      artist={artists[selectedIndex]}
+      index={selectedIndex}
+      total={artists.length}
+      isEndpoint={selectedIndex === 0 || selectedIndex === artists.length - 1}
+      clipIndex={clipIndex[artists[selectedIndex].mbid] ?? 0}
+      isPlaying={player.currentMbid === selected && player.isPlaying}
+      isCurrent={player.currentMbid === selected}
+      onPlay={player.playFrom}
+      onToggle={player.toggle}
+      onCycleClip={(count) => cycleClip(artists[selectedIndex].mbid, count)}
+      onBypass={onBypass}
+      onClose={() => setSelected(null)}
+    />
+  );
+
   return (
     <>
+      <div className="lg:grid lg:grid-cols-[1fr_400px] lg:items-start lg:gap-10">
       {/* Still no arrow at its foot — the owner's request, 2026-07-28. What
           changed on 2026-09-08 is where it starts and stops: the cards now
           carry a dot each, so the rail runs from the first dot to the last
@@ -139,6 +157,15 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
           </li>
         ))}
       </ol>
+        <DetailDock>
+          {detail || (
+            <p className="px-[18px] py-5 text-[13.5px] text-[var(--color-muted)]">
+              Open any artist with &rsaquo; for where to hear more, and to dig deeper from there.
+            </p>
+          )}
+        </DetailDock>
+      </div>
+      <DetailSheet open={!!detail} onClose={() => setSelected(null)}>{detail}</DetailSheet>
       <PlayerBar
         currentName={currentName}
         trackTitle={currentTrackTitle}

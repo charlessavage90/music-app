@@ -17,7 +17,11 @@ function LandingProbe() {
 }
 
 async function pressBypass(user: ReturnType<typeof userEvent.setup>) {
-  await user.click(screen.getByRole('button', { name: /dig deeper/i }));
+  // Two presses since 2026-09-08 (owner decision 2): open the artist's detail,
+  // then dig from there. The control is interior-only, so index 1 skips the
+  // endpoint whose detail has no Dig deeper at all.
+  await user.click(screen.getAllByRole('button', { name: /^About / })[1]);
+  await user.click(screen.getAllByRole('button', { name: /dig deeper/i })[0]);
 }
 
 function renderAt(url: string) {
@@ -210,7 +214,12 @@ test('a bypass press holds the old path and names what it is doing', async () =>
 
   // UI-D4: the previous path is held and dimmed, never replaced by the skeleton.
   expect(await screen.findByText(/digging deeper for someone newer/i)).toBeInTheDocument();
-  expect(screen.getByText('Herbie Hancock')).toBeInTheDocument();
+  // By the card's test hook, not by text: since UXR-T7 the open detail names
+  // the same artist in both of its containers (jsdom has no breakpoints, so
+  // dock and sheet both render), and a bare text query matches three nodes.
+  // What this asserts is that the CARD is still there — the held path.
+  expect(screen.getAllByTestId('artist-name').map((el) => el.textContent))
+    .toContain('Herbie Hancock');
   expect(screen.queryByText(/listening for the steps between them/i)).not.toBeInTheDocument();
 });
 

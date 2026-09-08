@@ -175,3 +175,55 @@ every section number in the plan from here is one behind this file. `UXR-T7` app
   as well. Committed separately from the task — it is tooling, not `T6`.
 - Card + JourneyList + player: 40 green. Lint clean (the pre-existing `vite.config.ts`
   warning), `tsc -b` and the production build clean.
+
+## §8 `UXR-T7` — the artist detail, docked and as a sheet
+
+**Numbered §8; the plan says §7.** See §7's first note — the offset is permanent.
+
+- **The plan's `ArtistDetail` tests shared one MBID across all five, and the clip cache would
+  have bled them.** `useClip` caches on `mbid:index` at module scope with a ten-minute TTL and
+  nothing clears it between tests, so the first test's `candidateCount: 1` would have been
+  served to the "Try another track" test asserting 3, and that test would have failed for a
+  reason having nothing to do with the component. Distinct ids per test, as
+  `ArtistCard.test.tsx` has done since `LUX-3` and for the same reason. **This is the fourth
+  plan-vs-repository defect in seven tasks**, and the first that would have looked like a
+  component bug rather than a test bug.
+- **The facts assertion is by fragment, not by the whole line.** The plan asserted
+  `/French duo · Group · Versailles · 1995–/` as one text node, which pins `ArtistInfo`'s
+  formatting from a second place; `ArtistInfo.test.tsx` owns that and asserts fragments. This
+  file asserts only that the detail *mounts* it.
+- **Three tests added beyond the plan, two of them the pins §7 recorded as owed.** An
+  endpoint's detail still carries both links (a `LUX-4` decision that moved with them, and
+  `T7` as written asserted only that an endpoint has no Dig deeper); "Try another track"
+  absent at `candidateCount === 1` and on a silent artist (the plan's test is named "only when
+  there is another track" but asserted one direction). Plus the ✕ button reporting the close —
+  at `lg` the dock has no scrim and no Escape, so it is the only way out.
+- **`DetailSheet`'s Escape listener is bound to `open`,** and a second test pins it: a closed
+  sheet left mounted must not go on answering Escape for the page behind it.
+- **A bare text query in `PathPage.test.tsx` now matches three nodes.** jsdom has no
+  breakpoints, so dock and sheet both render and the open artist's name appears on the card
+  and twice in the detail. "a bypass press holds the old path" asserted `getByText('Herbie
+  Hancock')`; it now reads the card's `data-testid="artist-name"` hook, which is what the
+  assertion always meant. Third instance of §3's rule: **on a page that names artists in more
+  than one place, query by role or by hook, never by text.**
+- **`pressBypass` takes the SECOND detail button, not the first.** The first card is an
+  endpoint and its detail has no Dig deeper at all, so the plan's `getByRole` form would have
+  opened a detail with nothing to press. The plan flagged this as a conditional; it is
+  unconditional in this file — every `pressBypass` caller renders a path whose first card is
+  an endpoint.
+- **`max-w-[1200px]` on the journey page is pulled FORWARD from `T8`.** The dock is a 400px
+  column inside a 620px `<main>`, so at `T7` as planned the journey page scrolled sideways at
+  1280 — measured at 249px of horizontal overflow, 0 after. One line moved so the commit
+  leaves a working app; `T8` still owns the header restyle inside that width and must not
+  re-apply it.
+- **Seen on the real thing** on `graph-lux4`: the sheet at 390 over its scrim, the dock at
+  1280 sticky beside the rail with the open card ringed and its dot recoloured, "Stop 3 of 7"
+  in both. Two knowingly-transient looks until `T8`: the header row and the explainer stretch
+  to the new width, and `PathIntro` still says the control is "along the bottom of their
+  card".
+- Whole unit suite **183 green** (from 176 at the seam, +10 detail, +2 sheet, +3 journey
+  list, −8 moved off the card). Lint clean, build clean.
+- **Known red outside the unit suite: `e2e/responsive.spec.ts`.** Its `LUX-4` case looks for
+  the streaming links *inside an interior card*, and they are in the detail now. `T10` rewrites
+  the e2e suite and owns it; it is Playwright, so it is not in `npm test` and does not gate
+  this commit.

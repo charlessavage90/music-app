@@ -66,7 +66,10 @@ export function PathPage() {
     feedback.notice !== null || (state.status === 'loading' && state.artists.length > 0);
 
   return (
-    <main className="mx-auto w-full max-w-[620px] px-5 py-6 pb-40 sm:py-9">
+    // Widened from 620px with the docked detail (UXR-T7): the dock is a 400px
+    // column beside the rail, and at 620 the page scrolled sideways at 1280.
+    // UXR-T8 restyles the header inside this width.
+    <main className="mx-auto w-full max-w-[1200px] px-5 py-6 pb-40 sm:py-9">
       <div className="mb-6 flex items-center gap-5 text-[13px] sm:text-[13.5px]">
         {/* Without this the path page is a dead end: every route back to
             picking two artists was the browser's Back button. The pair

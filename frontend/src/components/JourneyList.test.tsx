@@ -45,6 +45,61 @@ test('every artist, endpoints included, has a detail button', async () => {
   expect(screen.getByText('Kraftwerk')).toBeInTheDocument();
 });
 
+test('opening an artist shows its detail; Dig deeper there fires the bypass; a new path closes it', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
+  const onBypass = vi.fn();
+  const threeStop = [
+    artists[0],
+    { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9, spotifyId: null, appleId: null, facts: null },
+    artists[1],
+  ];
+  const { rerender } = render(<JourneyList artists={threeStop} stopRule="natural" onBypass={onBypass} />);
+
+  expect(screen.queryByText(/stop 2 of 3/i)).not.toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: 'About Herbie Hancock' }));
+  // Two containers, one visible at a time by CSS — jsdom has no breakpoints, so
+  // both render; assert on the first.
+  expect(screen.getAllByText('Stop 2 of 3').length).toBeGreaterThan(0);
+  await user.click(screen.getAllByRole('button', { name: /dig deeper/i })[0]);
+  expect(onBypass).toHaveBeenCalledWith('h');
+
+  // UXR-D3: the open artist may not be on the new path at all.
+  rerender(<JourneyList artists={[artists[0], artists[1]]} stopRule="natural" onBypass={onBypass} />);
+  expect(screen.queryByText(/stop 2 of 3/i)).not.toBeInTheDocument();
+});
+
+test('an endpoint opens a detail with no bypass control', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  render(<JourneyList artists={artists} stopRule="natural" onBypass={vi.fn()} />);
+  await user.click(screen.getByRole('button', { name: 'About Miles Davis' }));
+  expect(screen.getAllByText('Stop 1 of 2').length).toBeGreaterThan(0);
+  expect(screen.queryByRole('button', { name: /dig deeper/i })).not.toBeInTheDocument();
+});
+
+// The clip the detail shows must be the clip the card shows and the player
+// plays: one index per artist, owned here (the card owns the choice on screen,
+// the player owns the audio, and they must not disagree).
+test('cycling from the detail moves the card to the same track', async () => {
+  const user = userEvent.setup();
+  const spy = vi.spyOn(client, 'getTrack');
+  spy.mockResolvedValue({ previewUrl: 'u', title: 'First', coverUrl: 'c', candidateCount: 2 });
+  const cycled = [
+    artists[0],
+    { mbid: 'cyc', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9, spotifyId: null, appleId: null, facts: null },
+    artists[1],
+  ];
+  render(<JourneyList artists={cycled} stopRule="natural" onBypass={vi.fn()} />);
+  await user.click(screen.getByRole('button', { name: 'About Herbie Hancock' }));
+
+  spy.mockResolvedValue({ previewUrl: 'u2', title: 'Second', coverUrl: 'c', candidateCount: 2 });
+  await user.click((await screen.findAllByRole('button', { name: /try another track/i }))[0]);
+
+  await waitFor(() => expect(spy).toHaveBeenCalledWith('cyc', 1));
+  await waitFor(() => expect(screen.getAllByText('Second').length).toBeGreaterThan(0));
+});
+
 test('a card left mounted past the signature lifetime re-signs before playing', async () => {
   // The span nothing asserted before (execution log §15): the old browser test
   // advanced time and then *remounted*, which re-ran the effect and hid the bug.
