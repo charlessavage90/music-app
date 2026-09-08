@@ -27,7 +27,14 @@ owner's seven decisions and `UXR-D1`–`D18`), then the plan from **`UXR-T9`**
 §§7–9 for what the plan got wrong in `T6`–`T8`, because the same shapes recur.
 
 **Next task is `UXR-T9`** (the remaining surfaces restyled, and the `@theme` aliases removed).
-Then `T10` (the real-browser suite) and `T11` (the record). **`T9` is where a token deletion
+Then `T10` (the real-browser suite) and `T11` (the record).
+
+⚠ **`T10` owes one spec the plan does not list: the rail's geometry.** Every dot's centre equals
+the rail's centre, and the rail's ends equal the first and last dot centres — asserted from
+`getBoundingClientRect` at 390 and 1280. **Both halves of that were wrong from `T6` until the
+owner read a screenshot** (log §11), with the unit suite 188 green throughout, because jsdom has
+no layout engine and no test on this branch can see a rectangle. It is the only defect class
+here that a browser alone can report. **`T9` is where a token deletion
 can make something transparent**, which no test sees — `UXR-D17` is why the aliases survived
 this long, and the check is the one `T1` used: every `var(--color-*)` referenced under `src/`
 resolves to a definition in `index.css`.
@@ -58,9 +65,18 @@ brand, Share, the title and its steps tile. Reasoning per task in the log §§7�
   at module scope for ten minutes and nothing clears it between tests; a shared id serves one
   test's `candidateCount` to the next. The plan's version shared one and would have failed
   looking like a component bug.
-- **The rail runs first dot to last, not the full height** (`top-[41px] bottom-[41px]`). The
-  owner's 2026-07-28 request was *full height, and no arrow at the foot*; the no-arrow half is
-  untouched, the other half is the approved mockup, and it was flagged to him before `T6`.
+- **The rail runs first dot to last, not the full height.** The owner's 2026-07-28 request was
+  *full height, and no arrow at the foot*; the no-arrow half is untouched, the other half is
+  the approved mockup, and it was flagged to him before `T6`.
+- **The rail's ends are MEASURED, and must not go back to a constant** (log §11). It was
+  `top-[41px] bottom-[41px]`, which cannot be right at both widths: the endpoint cards carry an
+  eyebrow the interior cards do not, so they are taller by an amount that changes with width and
+  with whether the eyebrow wraps. A `useLayoutEffect` reads the first and last `[data-rail-dot]`
+  centres under a `ResizeObserver`. **`data-rail-dot` is that measurement's anchor** — it is not
+  a test hook and removing it silently returns the rail to spanning the whole list.
+- **The rail's `left-[2px]` and the dot's `-left-[29px]` are one geometry in two files**, both
+  hitting a centre 3.5px from the list's left edge. They were 3px apart from `T6` until the
+  owner spotted it. Change one and you must change the other; the note is at the dot.
 - **`max-w-[1200px]` on the journey page was pulled forward from `T8` into `T7`.** `T9`+ must
   not re-apply it. At 620px with the 400px dock the page scrolled sideways at 1280.
 - **`PathIntro` has no `count` prop and states no number.** The step count lives once, in
