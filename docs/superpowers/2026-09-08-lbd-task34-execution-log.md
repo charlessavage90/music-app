@@ -160,3 +160,30 @@ decides a skip.
 ## Task 4 — the fidelity run
 
 *(appended as it happens)*
+
+### The scale probe, and why it was run before `LBD-G4` rather than instead of it
+
+`LBD-G4` pre-registers a `user_id % 16` slice before the full pass, because the size of `T`
+is the one quantity nothing on disk bounds. A 1-in-16 slice is not cheap, so a **1-in-256**
+slice was run first — same code path, same pipeline, purely a resource measurement and not an
+arm. Figures are owned by the analysis README.
+
+It ran with `--no-redirects`, because the redirect frame was still extracting and durations
+shift row counts negligibly. That makes it a **cost measurement and nothing else**; no
+criterion is read off it.
+
+**Two measurement defects in this session's own script were found by it, and both would have
+disabled a pre-registered gate:**
+
+1. **Peak memory reported `0.0 GB`.** The `ctypes` call had no `argtypes`/`restype`, so the
+   64-bit process handle was truncated and the call failed silently — and the failure was not
+   checked. `LBD-G4` gates on peak memory above 24 GB, so a silent zero means **the gate can
+   never fire.** Fixed: explicit types, and the `BOOL` return is checked.
+2. **Spill was measured after the query finished**, by which time DuckDB has deleted its temp
+   files — so it always reported ~0. `LBD-G3` fires on spill above 500 GB, so that bound was
+   equally unable to fire. Fixed: a sampler thread polls working set and spill volume **during**
+   the run and keeps the maxima.
+
+Recorded because the shape generalises and this project has met it before: **an instrument
+that reports a comfortable number because it is broken is indistinguishable from one
+reporting a comfortable truth.** Both defects produced values on the safe side of their gate.

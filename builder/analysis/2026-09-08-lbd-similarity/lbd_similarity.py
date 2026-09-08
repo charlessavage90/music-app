@@ -114,6 +114,7 @@ import hashlib
 import json
 import platform
 import sys
+import threading
 import time
 from dataclasses import dataclass, asdict
 from datetime import datetime, timedelta
@@ -388,8 +389,15 @@ def sha256_of(path: Path) -> str:
     return h.hexdigest()
 
 
-def peak_rss_gb() -> float | None:
-    """Windows peak working set for this process. None rather than a guess elsewhere."""
+def _working_set_gb() -> float | None:
+    """Current working set for this process, GB. None rather than a wrong number.
+
+    argtypes/restype are set EXPLICITLY and the BOOL return is checked. Without them the
+    64-bit HANDLE is truncated to c_int and the call silently reports 0 -- which is exactly
+    what the first version of this function did, and a peak memory of 0.0 GB is not a
+    plausible reading for a query that ran for an hour. LBD-G4 gates on this number, so a
+    silent zero would have made the gate unable to fire.
+    """
     try:
         import ctypes
         from ctypes import wintypes
@@ -408,22 +416,67 @@ def peak_rss_gb() -> float | None:
                 ("PeakPagefileUsage", ctypes.c_size_t),
             ]
 
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        psapi = ctypes.WinDLL("psapi", use_last_error=True)
+        kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+        kernel32.GetCurrentProcess.argtypes = []
+        psapi.GetProcessMemoryInfo.restype = wintypes.BOOL
+        psapi.GetProcessMemoryInfo.argtypes = [
+            wintypes.HANDLE, ctypes.POINTER(PROCESS_MEMORY_COUNTERS), wintypes.DWORD
+        ]
+
         counters = PROCESS_MEMORY_COUNTERS()
         counters.cb = ctypes.sizeof(counters)
-        kernel32 = ctypes.WinDLL("kernel32")
-        psapi = ctypes.WinDLL("psapi")
-        psapi.GetProcessMemoryInfo(
+        ok = psapi.GetProcessMemoryInfo(
             kernel32.GetCurrentProcess(), ctypes.byref(counters), counters.cb
         )
-        return round(counters.PeakWorkingSetSize / 2**30, 2)
+        if not ok:
+            return None
+        return counters.PeakWorkingSetSize / 2**30
     except Exception:
         return None
 
 
-def spill_gb(temp_dir: Path) -> float:
-    if not temp_dir.exists():
+def dir_size_gb(path: Path) -> float:
+    if not path.exists():
         return 0.0
-    return sum(f.stat().st_size for f in temp_dir.rglob("*") if f.is_file()) / 2**30
+    total = 0
+    for f in path.rglob("*"):
+        try:
+            if f.is_file():
+                total += f.stat().st_size
+        except OSError:
+            pass  # DuckDB deletes spill files under us; a vanished file is not an error.
+    return total / 2**30
+
+
+class Sampler(threading.Thread):
+    """Poll peak working set and SPILL VOLUME while the query runs.
+
+    Spill has to be sampled DURING the query: DuckDB deletes its temp files on completion,
+    so measuring the directory afterwards always reports ~0 and LBD-G3's 500 GB spill bound
+    could never fire. The first version of this script measured it afterwards.
+    """
+
+    def __init__(self, temp_dir: Path, interval: float = 5.0) -> None:
+        super().__init__(daemon=True)
+        self.temp_dir = temp_dir
+        self.interval = interval
+        self.peak_rss_gb = 0.0
+        self.peak_spill_gb = 0.0
+        self._stop = threading.Event()
+
+    def run(self) -> None:
+        while not self._stop.is_set():
+            ws = _working_set_gb()
+            if ws is not None:
+                self.peak_rss_gb = max(self.peak_rss_gb, ws)
+            self.peak_spill_gb = max(self.peak_spill_gb, dir_size_gb(self.temp_dir))
+            self._stop.wait(self.interval)
+
+    def stop(self) -> None:
+        self._stop.set()
+        self.join(timeout=self.interval * 2)
 
 
 def connect(
@@ -502,12 +555,15 @@ def main(argv: list[str] | None = None) -> int:
     print(f"[lbd] chunk          mod={args.user_mod} rem={args.user_rem}", flush=True)
     print(f"[lbd] out            {args.out}", flush=True)
 
+    sampler = Sampler(args.temp_dir)
+    sampler.start()
     t0 = time.time()
     con.execute(
         f"COPY ({sql}) TO '{args.out.as_posix()}' "
         f"(FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 1000000)"
     )
     wall = time.time() - t0
+    sampler.stop()
 
     rows = con.execute(
         f"SELECT count(*) FROM read_parquet('{args.out.as_posix()}')"
@@ -528,8 +584,8 @@ def main(argv: list[str] | None = None) -> int:
         "out_sha256": sha256_of(args.out),
         "rows": rows,
         "wall_clock_s": round(wall, 1),
-        "peak_rss_gb": peak_rss_gb(),
-        "spill_gb_after": round(spill_gb(args.temp_dir), 2),
+        "peak_rss_gb": round(sampler.peak_rss_gb, 2),
+        "peak_spill_gb": round(sampler.peak_spill_gb, 2),
         "memory_limit_gb": args.memory_limit_gb,
         "duckdb": duckdb.__version__,
         "python": platform.python_version(),
@@ -539,7 +595,7 @@ def main(argv: list[str] | None = None) -> int:
         json.dumps(manifest, indent=2), encoding="utf-8"
     )
     print(
-        f"[lbd] rows {rows:,}  wall {wall / 60:.1f} min  peak {manifest['peak_rss_gb']} GB",
+        f"[lbd] rows {rows:,}  wall {wall / 60:.1f} min  peak RSS {manifest['peak_rss_gb']} GB  peak spill {manifest['peak_spill_gb']} GB",
         flush=True,
     )
     return 0
