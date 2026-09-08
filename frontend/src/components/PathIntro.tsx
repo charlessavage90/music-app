@@ -14,20 +14,20 @@ function wasDismissed(): boolean {
 }
 
 interface Props {
-  /** Artists BETWEEN the two chosen ones — what is visible on screen (UI-D7). */
-  count: number;
   stopRule: StopRule;
 }
 
 /**
- * The result line and the bypass explainer.
+ * The bypass explainer.
  *
- * The result line is permanent; the explainer is onboarding, so it opens on a
- * first visit and stays closed once dismissed (UI-D6). Both stand down when the
- * two artists are adjacent: there is no count to state, no bypass control to
- * explain, and JourneyList already says the useful thing.
+ * Onboarding, so it opens on a first visit and stays closed once dismissed
+ * (UI-D6). It stands down when the two artists are adjacent: there is no bypass
+ * control to explain, and JourneyList already says the useful thing.
+ *
+ * The result line left on 2026-09-08 (UXR-T8) — JourneyHeading's tile is the
+ * one place the step count is stated now (UXR-D6).
  */
-export function PathIntro({ count, stopRule }: Props) {
+export function PathIntro({ stopRule }: Props) {
   const [open, setOpen] = useState(() => !wasDismissed());
 
   if (stopRule === 'adjacent_only') return null;
@@ -43,14 +43,6 @@ export function PathIntro({ count, stopRule }: Props) {
 
   return (
     <div className="mb-5">
-      <p className="text-[13.5px] text-[var(--color-muted)]">
-        We found a path between these artists in{' '}
-        <span className="text-[var(--color-text)]">
-          {count} step{count === 1 ? '' : 's'}
-        </span>
-        .
-      </p>
-
       <button
         type="button"
         onClick={() => (open ? setOpen(false) : setOpen(true))}
@@ -62,10 +54,13 @@ export function PathIntro({ count, stopRule }: Props) {
 
       {open && (
         <div className="mt-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-[12.5px] leading-[1.55] text-[var(--color-muted)]">
+          {/* UXR-D5. The control moved into the artist detail on 2026-09-08
+              and now takes two presses to reach, so the placement this
+              sentence names has to move with it: help that sends the reader to
+              the bottom of a card is worse than no help. */}
           <p>
-            Any artist in the middle has a{' '}
-            <span className="text-[var(--color-text)]">Dig deeper</span> control along the
-            bottom of their card.
+            Open any artist in the middle with &rsaquo; and you will find{' '}
+            <span className="text-[var(--color-text)]">Dig deeper</span>.
           </p>
           <p className="mt-2">
             Press it and that artist is replaced by someone with a similar sound who is less

@@ -3,10 +3,13 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { usePath } from '@/hooks/usePath';
 import { useEndpoints } from '@/hooks/useEndpoints';
 import { useRerollFeedback } from '@/hooks/useRerollFeedback';
+import { Brand } from '@/components/Brand';
 import { JourneyList, type JourneyControls } from '@/components/JourneyList';
+import { JourneyHeading } from '@/components/JourneyHeading';
 import { PathStatus } from '@/components/PathStatus';
 import { PathSkeleton } from '@/components/PathSkeleton';
 import { PathIntro } from '@/components/PathIntro';
+import { ShareButton } from '@/components/ShareButton';
 import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
 import { RouteHistory } from '@/components/RouteHistory';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
@@ -70,27 +73,31 @@ export function PathPage() {
     // column beside the rail, and at 620 the page scrolled sideways at 1280.
     // UXR-T8 restyles the header inside this width.
     <main className="mx-auto w-full max-w-[1200px] px-5 py-6 pb-40 sm:py-9">
-      <div className="mb-6 flex items-center gap-5 text-[13px] sm:text-[13.5px]">
-        {/* Without this the path page is a dead end: every route back to
-            picking two artists was the browser's Back button. The pair
-            travels along so the boxes arrive filled in. */}
-        <Link
-          to={`/?${newPathParams.toString()}`}
-          onClick={() => journey.current?.stop()}
-          className="text-[var(--color-muted)] hover:text-[var(--color-text)]"
-        >
-          ← New path
-        </Link>
-        {/* Only offered once there is something to undo. */}
-        {hasBypasses && (
-          <button
-            type="button"
-            onClick={() => go(clearExclusions(params), 'reset')}
-            className="text-[var(--color-muted)] hover:text-[var(--color-text)]"
+      <div className="mb-8 flex items-center justify-between gap-5 text-[13px] sm:text-[13.5px]">
+        <Brand size="nav" />
+        <div className="flex items-center gap-2.5">
+          {/* Only offered once there is something to undo. */}
+          {hasBypasses && (
+            <button
+              type="button"
+              onClick={() => go(clearExclusions(params), 'reset')}
+              className="rounded-full border border-[var(--color-border-strong)] px-[15px] py-2 text-[13.5px] text-[var(--color-muted)] hover:text-[var(--color-text)]"
+            >
+              Reset path
+            </button>
+          )}
+          <ShareButton />
+          {/* Without this the path page is a dead end: every route back to
+              picking two artists was the browser's Back button. The pair
+              travels along so the boxes arrive filled in. */}
+          <Link
+            to={`/?${newPathParams.toString()}`}
+            onClick={() => journey.current?.stop()}
+            className="rounded-full border border-[var(--color-start)] px-[15px] py-2 text-[13.5px] text-[var(--color-text)]"
           >
-            ↺ Reset path
-          </button>
-        )}
+            New path
+          </Link>
+        </div>
       </div>
 
       {state.status === 'error' && state.error ? (
@@ -103,7 +110,14 @@ export function PathPage() {
         <PathSkeleton from={endpoints.from} to={endpoints.to} />
       ) : (
         <div>
-          <PathIntro count={state.artists.length - 2} stopRule={state.stopRule} />
+          <div className="mb-6">
+            <JourneyHeading
+              from={state.artists[0].name}
+              to={state.artists.at(-1)!.name}
+              steps={state.artists.length - 2}
+            />
+          </div>
+          <PathIntro stopRule={state.stopRule} />
           {/* The positioning context is the PATH, not the path plus the
               explainer above it. It used to wrap both, so on a first visit —
               when the explainer is open and tall — the notice landed on top of

@@ -227,3 +227,36 @@ every section number in the plan from here is one behind this file. `UXR-T7` app
   the streaming links *inside an interior card*, and they are in the detail now. `T10` rewrites
   the e2e suite and owns it; it is Playwright, so it is not in `npm test` and does not gate
   this commit.
+
+## §9 `UXR-T8` — the journey header, share, the title and its steps tile
+
+**Numbered §9; the plan says §8.** The offset is the same one §7 records.
+
+- **A `PathPage` test the plan did not mention asserted the old result line.** "the result line
+  counts the artists in between" pinned `/we found a path/` **and the singular** for one artist
+  between. The plan's replacement test happened to use a three-artist path, so it too rendered
+  the singular and would have left the plural unasserted while looking like coverage. Split:
+  the old test became "the steps tile uses the singular for one artist in between" (and asserts
+  the plural is *absent*), and the new heading test moved to a four-artist path so it pins the
+  plural. **Fifth plan-vs-repository defect.**
+- **`PathIntro` lost its `count` prop, not just its sentence.** Its tests were rewritten around
+  the explainer alone, plus a new one pinning `UXR-D5` from both directions: the copy names
+  where the control *is* ("Open any artist in the middle") and no longer says "along the bottom
+  of their card". Help that names the old placement is worse than no help — it sends the reader
+  to the bottom of a card that has nothing there.
+- **Two `ShareButton` tests beyond the plan, both about failure.** A refused clipboard
+  (insecure origin, denied permission) must leave the page alone — UI-7's rule for a decoration
+  applied to a convenience. And a **dismissed share sheet must not fall through to the
+  clipboard**: `navigator.share` rejects when the user swipes it away, and a fall-through would
+  claim a copy nobody asked for. The plan's component already returns early; nothing asserted it.
+- **`New path` moved from the far left to the right-hand pill group** and lost its arrow, with
+  `Brand` taking the left. It is still a `Link` carrying the pair, and still stops the audio on
+  click — the two tests that matter (`"new path" goes back to choosing artists` and the reset
+  pair) select it by role and were untouched.
+- **Seen on the real thing** at 390 and 1280: brand, Share and New path pills, "YOUR JOURNEY",
+  the title with its gradient dash, the steps tile reading 5, the corrected explainer, and the
+  dock's placeholder line. **The mark now renders** — the owner's export landed in
+  `frontend/public/` during this session, so the broken image box §2 and §3 recorded is gone.
+- Whole unit suite **188 green**, lint and build clean.
+
+**HANDOFF SEAM — `UXR-T1`–`T8` complete; `T9`–`T11` are the next session's.**
