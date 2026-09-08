@@ -1,0 +1,57 @@
+{
+  "complement": {
+    "absent_entirely": 36,
+    "at_least_10_distinct_listeners": 23706,
+    "at_least_4_distinct_listeners": 23831,
+    "at_least_50_distinct_listeners": 20590,
+    "distinct_listeners_p10_median_p90_over_present": [
+      41.0,
+      140.0,
+      468.0
+    ],
+    "n": 23925,
+    "present_in_mapped_listens": 23888,
+    "present_in_the_corpus": 23889,
+    "share_absent": 0.0015,
+    "share_at_least_4": 0.99607
+  },
+  "definition": "the residual set is the CXR-added artists still at <= 2 connections when union_degree_ceiling does not bind \u2014 the artists no cap-rule change can help. Measured on ONE population under ONE cap rule; it is a pinned MBID list, not a claim about any other build",
+  "figures_owner": "this file and the README beside it. Task 1's whole-set figures are owned by builder/analysis/2026-09-07-lbd-inputs/README.md section 2 and are cited, never restated here",
+  "inputs": {
+    "added_set": "D:\\unsung-large-data\\lbd-inputs\\cxr_added_mbids.txt",
+    "added_set_sha256": "bfed95ef74b0665c50b1532708091b4e43fab36247db391d04064870659a4339",
+    "dfa_record": "C:\\dev\\music-app\\builder\\analysis\\2026-09-07-degree-floor-at-admission\\dfa_benefit_identity.json",
+    "dfa_record_sha256": "f10b3329d29b36d896d30f1308bf1394961d4e86ca24a9d6c08f3038e2f26675",
+    "residual_list_pinned_at": "D:\\unsung-large-data\\lbd-inputs\\cxr_residual_mbids.txt",
+    "residual_list_pinned_sha256": "fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08",
+    "residual_list_sha256": "fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08",
+    "residual_list_source": "C:\\dev\\music-app\\builder\\analysis\\2026-09-07-degree-floor-at-admission\\dfa_residual_mbids.txt",
+    "task_1_supply_parquet": "D:\\unsung-large-data\\lbd-inputs\\cxr_added_dump_supply.parquet",
+    "task_1_supply_parquet_sha256": "9644d603cf9f12c69268c8b0ac15007031db8ee4442b7d37fbee525c2a6b4d6e"
+  },
+  "limits": [
+    "Enough distinct listeners is NECESSARY, not sufficient. A pair's score needs listeners who played BOTH artists in one session and nothing here measures co-occurrence. This raises the prior that supply exists; it does not establish it, and must not be cited as evidence that any arm will move LBD-C2.",
+    "The direction it settles is the negative one: a residual null cannot be explained away by the artists being absent.",
+    "Task 1's denominator caveat carries over unchanged \u2014 membership is read from artist_credit_mbids while LB's job joins artist_credit_id, and the two were not compared.",
+    "This proposes no cap-rule change and depends on none. That decision is parked and the owner's (design section 9)."
+  ],
+  "minimum_distinct_listeners_to_clear_threshold": 4,
+  "probe": "LBD-AM1 \u2014 what share of the residual set is reachable by the LBD- track even in principle?",
+  "residual": {
+    "absent_entirely": 8,
+    "at_least_10_distinct_listeners": 5894,
+    "at_least_4_distinct_listeners": 5947,
+    "at_least_50_distinct_listeners": 4178,
+    "distinct_listeners_p10_median_p90_over_present": [
+      26.0,
+      81.0,
+      321.2
+    ],
+    "n": 5967,
+    "present_in_mapped_listens": 5959,
+    "present_in_the_corpus": 5959,
+    "share_absent": 0.00134,
+    "share_at_least_4": 0.99665
+  },
+  "written": "2026-09-07, before any LBD- arm had run"
+}

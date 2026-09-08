@@ -26,6 +26,7 @@ Run from `builder/`:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import sys
@@ -171,6 +172,42 @@ def main() -> int:
             "note": "the enrichment half, which a rescue count cannot show",
         },
     }
+    # --- MBID lists, added 2026-09-07 ------------------------------------
+    # The JSON above recorded COUNTS ONLY. `LBD-AM1` needs the residual set as
+    # a pinned list of artists, so the two sets this run already computes are
+    # written out. Nothing else changes: every count above is recomputed by the
+    # same code path, so a re-run that did not reproduce the committed record
+    # byte-for-byte would be a defect, and the run log records that it did.
+    #
+    # The RESIDUAL set is the added artists still at two or fewer connections
+    # when the degree ceiling does not bind — `LBD-AM1`'s definition. It is
+    # computed here as `residual(ceiling)`, which additionally requires the
+    # artist to be at <= 2 in the control; the two definitions coincide on this
+    # population because lifting the ceiling only ever adds edges, and the
+    # coincidence is asserted rather than assumed.
+    ceiling_le2 = {
+        m for m in added
+        if ceiling.get(m) is None or ceiling[m] <= 2
+    }
+    if ceiling_le2 != res_ceiling:
+        raise SystemExit(
+            "the two residual definitions disagree on this population "
+            f"({len(ceiling_le2)} vs {len(res_ceiling)}); LBD-AM1 pins the "
+            "ceiling-only definition and it must be stated separately"
+        )
+    for fname, mbids in (
+        ("dfa_residual_mbids.txt", res_ceiling),
+        ("dfa_rescued_mbids.txt", r_ceiling),
+    ):
+        path = HERE / fname
+        path.write_text("\n".join(sorted(mbids)) + "\n", encoding="utf-8")
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        result.setdefault("mbid_lists", {})[fname] = {
+            "count": len(mbids),
+            "sha256": digest,
+        }
+        print(f"  wrote {fname}: {len(mbids):,} MBIDs, sha256 {digest}")
+
     out = HERE / "dfa_benefit_identity.json"
     out.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
     print(json.dumps(result["rescued_from_the_two_or_fewer_group"], indent=1))

@@ -1,0 +1,62 @@
+building three arms
+  ceiling     50 floor None  built in 12.2 min  nodes 88,685
+  ceiling     50 floor 2  built in 1.7 min  nodes 89,684
+  ceiling  20000 floor None  built in 1.7 min  nodes 89,691
+  wrote dfa_residual_mbids.txt: 5,967 MBIDs, sha256 fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08
+  wrote dfa_rescued_mbids.txt: 4,305 MBIDs, sha256 e8847eb03483e0e89c1f80d2ccd3b8153411aa4c5e0eddd3dfa626c73cf71b20
+{
+ "by_the_floor": 4305,
+ "by_the_ceiling_lift": 4305,
+ "by_both": 4305,
+ "by_the_floor_only": 0,
+ "by_the_ceiling_lift_only": 0,
+ "jaccard": 1.0,
+ "sets_are_identical": true
+}
+{
+ "under_the_floor": 5967,
+ "under_the_ceiling_lift": 5967,
+ "sets_are_identical": true
+}
+{
+ "under_the_floor": {
+  "n": 4305,
+  "median": 3.0,
+  "mean": 3.0,
+  "p90": 3,
+  "max": 3
+ },
+ "under_the_ceiling_lift": {
+  "n": 4305,
+  "median": 5.0,
+  "mean": 7.391,
+  "p90": 14,
+  "max": 52
+ },
+ "note": "same artists, both arms \u2014 how much each rule gives them"
+}
+{
+ "control": {
+  "n": 29892,
+  "median": 4.0,
+  "mean": 7.376,
+  "p90": 18,
+  "max": 50
+ },
+ "under_the_floor": {
+  "n": 29892,
+  "median": 4.0,
+  "mean": 7.583,
+  "p90": 18,
+  "max": 50
+ },
+ "under_the_ceiling_lift": {
+  "n": 29892,
+  "median": 8.0,
+  "mean": 14.41,
+  "p90": 43,
+  "max": 153
+ },
+ "note": "the enrichment half, which a rescue count cannot show"
+}
+wrote C:\dev\music-app\builder\analysis\2026-09-07-degree-floor-at-admission\dfa_benefit_identity.json

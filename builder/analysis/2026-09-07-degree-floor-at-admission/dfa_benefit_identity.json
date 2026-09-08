@@ -59,6 +59,16 @@
       "p90": 18
     }
   },
+  "mbid_lists": {
+    "dfa_rescued_mbids.txt": {
+      "count": 4305,
+      "sha256": "e8847eb03483e0e89c1f80d2ccd3b8153411aa4c5e0eddd3dfa626c73cf71b20"
+    },
+    "dfa_residual_mbids.txt": {
+      "count": 5967,
+      "sha256": "fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08"
+    }
+  },
   "probe": "DFA- \u2014 is the floor's rescued set the SAME set the ceiling lift rescues, or merely the same size?",
   "rescued_from_the_two_or_fewer_group": {
     "by_both": 4305,

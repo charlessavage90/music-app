@@ -1,0 +1,6 @@
+residual    n  5,967  absent    8 (0.13%)  >= 4 listeners  5,947 (99.67%)  listeners p10/median/p90 [26.0, 81.0, 321.2]
+complement  n 23,925  absent   36 (0.15%)  >= 4 listeners 23,831 (99.61%)  listeners p10/median/p90 [41.0, 140.0, 468.0]
+
+residual list sha256 fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08
+pinned at D:\unsung-large-data\lbd-inputs\cxr_residual_mbids.txt
+wrote C:\dev\music-app\builder\analysis\2026-09-07-lbd-am1-residual-reachability\lbd_am1_reachability.json
