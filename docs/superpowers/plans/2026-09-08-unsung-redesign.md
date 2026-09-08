@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Role: ACTIVE implementation plan for the `UXR-` set. IN PROGRESS: `T1`–`T5` executed 2026-09-08 (branch `unsung-redesign`, PR #114), `T6`–`T11` unstarted.** *(Role line updated at the first-seam closeout; the tasks below are as written, with two in-place corrections marked `⚠ CORRECTED`.)*
+**Role: ACTIVE implementation plan for the `UXR-` set. IN PROGRESS: `T1`–`T8` executed 2026-09-08 (branch `unsung-redesign`, PR #114), `T9`–`T11` unstarted.** *(Role line updated at each seam closeout — both named seams, after `T5` and after `T8`, have now been taken; the tasks below are as written, with two in-place corrections marked `⚠ CORRECTED`.)* ⚠ **This plan's log-section numbers are one behind the log's own from `T6` on** — the first seam's closeout took `## §6`, so `T6` is logged at §7 and `T9` appends §10. ⚠ **`max-w-[1200px]` on the journey page was pulled forward from `T8` into `T7`** and is already applied; do not re-apply it.
 Tasks are `UXR-T1`–`UXR-T11`. Retained execution log: `docs/superpowers/2026-09-08-unsung-redesign-execution-log.md`, created by `UXR-T1` and appended **per task**.
 
 **Goal:** Rename the app to Unsung.fm and rebuild the landing and journey pages to the owner's approved mockup, with the artist detail docked beside the rail (a bottom sheet on phones), a share button, a player progress line and a live artist count — and nothing the spec drops or defers.

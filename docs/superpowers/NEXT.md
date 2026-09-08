@@ -62,18 +62,22 @@ declared `spotifyId` would have been `undefined` at runtime and rendered *identi
 genuine absence*. Entry point:
 [`2026-09-08-HANDOFF-lux-4-wire-and-card.md`](2026-09-08-HANDOFF-lux-4-wire-and-card.md).
 
-**`UXR-`** — **the Unsung.fm redesign, half built.** Branch `unsung-redesign`, **PR #114**. The
+**`UXR-`** — **the Unsung.fm redesign, mostly built.** Branch `unsung-redesign`, **PR #114**. The
 rename is **APPROVED 2026-09-08** (it was scoped-and-unapproved above this line until then) and
-`UXR-T1`–`T5` are executed — palette and faces, the name, the landing page, `GET /api/meta` and
-the badge, the player bar's progress; `T6`–`T11` (the docked artist detail, the journey header
-and share, the restyle, the e2e suite, the record) are the next session's, from the plan's first
-seam. **Nothing a listener sees changes until this is DEPLOYED, and that deploy is two images**
+`UXR-T1`–`T8` are executed — palette and faces, the name, the landing page, `GET /api/meta` and
+the badge, the player bar's progress, the card stripped to the listening surface, the artist
+detail docked at `lg` and a sheet below it, and the journey header with share and the steps
+tile. `T9`–`T11` (the remaining surfaces and the token aliases, the e2e suite, the record) are
+the next session's, from the plan's second seam.
+**Nothing a listener sees changes until this is DEPLOYED, and that deploy is two images**
 (frontend, plus the API for `/api/meta`); it follows the owed `LUX-4` deploy and changes no
 artifact. Decisions over the mockup are his and recorded: the **reach pill is DROPPED**, "Save
 track" dropped, genres / "why this stop" / the extra pages deferred — spec §2 and §4. **`LUX-E6`**
 ran at his instruction and is **his to read** before any genre decision; it changes nothing by
-itself. Entry point:
-[`2026-09-08-HANDOFF-unsung-redesign-t5.md`](2026-09-08-HANDOFF-unsung-redesign-t5.md).
+itself. ⚠ **The mark he exported is in the working tree and still UNTRACKED** —
+`frontend/public/unsung-mark.png`; the deploy needs it committed and no session will commit a
+file it did not write. Entry point:
+[`2026-09-08-HANDOFF-unsung-redesign-t8.md`](2026-09-08-HANDOFF-unsung-redesign-t8.md).
 
 **`LBD-`** — branch `lb-dump-exploration`, **PR #109**; a worktree sits at
 `C:\Users\charl\worktrees\music-app-lbd` on `lbd-task3`. The pre-registration
@@ -98,9 +102,11 @@ exact failure this file's preamble warns about. Corrected by the session that wr
 not record how far down the list he has got.** `gh pr list` answers the merge questions;
 `infra/README.md` and `/health` answer the deploy one.
 
-1. **Export the mark** from the Claude Design project and save it as
-   `frontend/public/unsung-mark.png` — his hands (the MCP truncates it). The redesign renders a
-   broken image box until it lands; nothing else waits on it.
+1. **Commit the mark.** ~~Export it from the Claude Design project and save it as
+   `frontend/public/unsung-mark.png`~~ — **done 2026-09-08, and it renders.** It is
+   **untracked**, and a session does not commit a file it did not write, so the one line is his:
+   `git add frontend/public/unsung-mark.png` on `unsung-redesign`. **The deployed build needs
+   it**; nothing else waits on it.
 2. **Merge the open PRs.**
 3. **Deploy.** ⚠ **Merged is not deployed here** — deploys are manual and there is no CI
    ([`infra/README.md`](../../infra/README.md)). The clip cache's item shape changed, so every

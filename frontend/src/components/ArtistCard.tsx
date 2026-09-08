@@ -11,7 +11,11 @@ interface Props {
   isPlaying: boolean;
   /** This card owns the audio, playing or paused — so its button toggles. */
   isCurrent?: boolean;
-  /** One of the two artists you chose. Only the eyebrow depends on it now. */
+  /**
+   * One of the two artists you chose. Since 2026-09-08 it drives the eyebrow
+   * and the card's frame only — the bypass control it used to gate is in
+   * ArtistDetail, which decides interior-only for itself.
+   */
   isEndpoint?: boolean;
   /** Which end, when this is an endpoint. Drives the eyebrow label. */
   endpointLabel?: 'start' | 'destination';

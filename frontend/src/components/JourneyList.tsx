@@ -128,9 +128,10 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
               total={artists.length}
               isPlaying={player.currentMbid === artist.mbid && player.isPlaying}
               isCurrent={player.currentMbid === artist.mbid}
-              // The two artists you chose are the journey's endpoints; the
-              // bypass control does not apply to them — there is nothing to
-              // reroute for an artist who IS one end of the journey.
+              // Drives the eyebrow and the frame. The bypass is still
+              // interior-only — there is nothing to reroute for an artist who
+              // IS one end of the journey — but that gate moved to the detail
+              // below, which computes it from the same two indices.
               isEndpoint={i === 0 || i === artists.length - 1}
               endpointLabel={
                 i === 0 ? 'start' : i === artists.length - 1 ? 'destination' : undefined

@@ -260,3 +260,64 @@ every section number in the plan from here is one behind this file. `UXR-T7` app
 - Whole unit suite **188 green**, lint and build clean.
 
 **HANDOFF SEAM — `UXR-T1`–`T8` complete; `T9`–`T11` are the next session's.**
+
+## §10 Closeout at the second seam, 2026-09-08
+
+**Gate outcomes.** No gates in this plan; the per-task checks all passed. Every behaviour test
+went red before green — `T6`'s eight, `T7`'s three `JourneyList` cases and the two new modules'
+files (module-missing), `T8`'s three. Suites at closeout: builder **286**, api **290**, frontend
+**188**, all green; build and lint clean (the one pre-existing `vite.config.ts` warning).
+
+**Defects in the plan itself, `T6`–`T8`** — two, both recorded above and both of a shape the
+first seam did not see: an **under-specified test edit** (§7 — Step 1 named five changes and the
+task needed thirteen, because the `LUX-4` block it did not mention asserts what the card no
+longer has) and a **shared MBID the module-scope clip cache would have bled** (§8), which would
+have failed looking like a component bug. Running total across the plan: **five**.
+
+**Vacuous-test check (B3).** Three guards broken deliberately; each went red and each was
+restored, with `git status` clean afterwards. (a) `ArtistDetail`'s Dig deeper made
+unconditional — "an endpoint gets no bypass control" failed. (b) `StreamingLinks` put back on
+the card — "the card carries no links or facts itself" failed. (c) `DetailSheet`'s Escape
+listener unbound from `open` — "a closed sheet stops listening" failed. **The first attempt at
+(b) was itself a false green** and is worth recording: the edit that was supposed to break the
+card silently failed to apply (a `\n` pattern against a CRLF file), the suite passed, and
+without checking the edit landed that would have been logged as evidence the guard is sound.
+
+**Prose-versus-code (B4).** Two comments this session wrote had already drifted from the code
+beside them, both about `isEndpoint`: the card's prop doc claimed "only the eyebrow depends on
+it now" when it also drives the frame, and `JourneyList`'s call-site comment still explained
+`isEndpoint` as gating a bypass control that had moved to the detail. Both corrected.
+
+**Reachability (B2).** `ArtistDetail`, `DetailDock`, `DetailSheet` (all from `JourneyList`),
+`JourneyHeading` and `ShareButton` (both from `PathPage`) — each imported by a non-test module.
+
+**Deferrals (A3).** No condition came due. The Deezer id gap stays **armed and unsatisfied** —
+its condition is the first rebuild after `LUX-4` merged, `LUX-4` merged, and nothing here
+rebuilds. New work with an address rather than a deferral: `e2e/responsive.spec.ts` red until
+`T10`, and the `@theme` aliases until `T9` (`UXR-D17`).
+
+**Default-flip (A4).** No config knob was added or moved.
+
+**D2/D3.** No artifact changed and nothing was adopted, so neither fires. The graph the
+screenshots were taken against is `builder/scratch/graph-lux4.bin`, sha256 `fd92a735…`, verified
+against its own manifest sidecar at session start.
+
+**D6.** Unconditional layer **51,694 characters** (from 51,694, **±0**); conditional **2,561
+lines** (from 2,561, **±0**). Nothing in either layer was touched.
+
+**A5.** Both listeners were this session's (API :8000 on `graph-lux4.bin`, Vite :5173), started
+after HEAD. Both stopped; Vite's `node` child survived `TaskStop` and was stopped by PID. Both
+ports verified free. **C1: nothing written to `TEST-QUEUE.md`** — the redesign is still
+undeployed, so nothing the owner can press changed.
+
+**B1.** `docs-lint`: hard checks passed; the only candidates are the standing pre-registration
+figures, none from this work. `doc-auditor` over the diff: **one High** — the plan's own role
+line still said `T6`–`T11` unstarted, contradicting the map — corrected in place, and the same
+edit carries forward the two things a reader of the plan alone would get wrong (the log-section
+offset, and that `max-w-[1200px]` is already applied). It verified every code claim in the
+handoff and log against source, and the handoff chain as forward-readable.
+
+**B5.** One stale description found and corrected forward: the `LUX-4` handoff's must-not-revert
+clause cites `e2e/responsive.spec.ts` as pinning the facts line, and that spec is red until
+`T10` because the line it looks for moved off the card. The **rule** is unchanged and the note
+says so — the correction is attached where the clause lives, not in place of it.

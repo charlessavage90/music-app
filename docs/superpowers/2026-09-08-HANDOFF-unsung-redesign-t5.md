@@ -1,6 +1,11 @@
 # Handoff — `UXR-T1`–`UXR-T5` complete, the redesign's first seam, 2026-09-08
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED ON NEXT ACTIONS by
+[`2026-09-08-HANDOFF-unsung-redesign-t8.md`](2026-09-08-HANDOFF-unsung-redesign-t8.md),
+2026-09-08 — NOT the current handoff.** `UXR-T6`–`T8` are done and the next task is `T9`, which
+that note carries. **Its must-not-revert list still binds in full**, and two of its items were
+re-confirmed there rather than restated: the name is Unsung.fm in the UI only, and the step
+counts on the landing chips are measured. *(Was:)* the current handoff. Supersedes
 [`2026-09-08-HANDOFF-lux-4-wire-and-card.md`](2026-09-08-HANDOFF-lux-4-wire-and-card.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
