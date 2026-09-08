@@ -179,7 +179,13 @@ import duckdb
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lbd_similarity import Params, build_sessioned_index  # noqa: E402
+from lbd_similarity import (  # noqa: E402
+    Params,
+    build_sessioned_index,
+    listens_sql,
+    partial_pairs_sql,
+    sessions_from_listens_sql,
+)
 
 A = "00000000-0000-0000-0000-0000000000aa"
 B = "00000000-0000-0000-0000-0000000000bb"
@@ -405,6 +411,38 @@ def main() -> int:
         "no redirects (T3-D6)",
         run(sql_for(), redirects=False),
         EXPECTED["no_redirects"],
+    )
+
+    # LBD-D2's chunked form, PROVED equal to the one-shot form rather than asserted. Every
+    # stage through user_contribtion_mbids partitions by user_id, so splitting users changes
+    # no part_score; only the final cross-user SUM crosses a boundary. TRUNC is applied ONCE
+    # to the completed sum -- applying it per chunk would truncate N times and drift every
+    # score downward, which is the failure this assertion exists to catch.
+    p0 = Params(threshold=0, limit=None)
+    con = duckdb.connect()
+    build_db(con, redirects=True)
+    con.execute("CREATE TABLE parts(mbid0 VARCHAR, mbid1 VARCHAR, part_sum DOUBLE)")
+    for rem in (0, 1):
+        sub = f"(SELECT * FROM artist_similarity_listens WHERE user_id % 2 = {rem})"
+        chunk_sql = partial_pairs_sql(
+            sessions_from_listens_sql(
+                listens_sql(sub, "recording_length", "artist_credit"), p0
+            ),
+            p0,
+        )
+        con.executemany(
+            "INSERT INTO parts VALUES (?,?,?)",
+            con.execute(f"SELECT * FROM ({chunk_sql})").fetchall(),
+        )
+    chunked = con.execute(
+        "SELECT mbid0, mbid1, TRUNC(SUM(part_sum))::BIGINT AS score FROM parts "
+        "GROUP BY 1,2 HAVING score > 0 ORDER BY 1,2"
+    ).fetchall()
+    con.close()
+    check(
+        "chunked form == one-shot form (LBD-D2)",
+        [(a, b, int(c)) for a, b, c in chunked],
+        EXPECTED["T"],
     )
 
     print("\nThe check is shown to go RED -- each mutant must move the answer\n")

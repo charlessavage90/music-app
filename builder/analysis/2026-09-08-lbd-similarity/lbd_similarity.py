@@ -446,6 +446,48 @@ def pairs_sql(
     """
 
 
+def partial_pairs_sql(sessions_source: str, p: Params) -> str:
+    """One chunk's contribution to the cross-user sum -- `LBD-D2`'s exact chunked form.
+
+    LB's stages through `user_contribtion_mbids` (`artist.py:64-82`) ALL partition by
+    `user_id`: sessions, the skip filter, the self-join and the per-user cap each live inside
+    one user. So chunking by user changes nothing about `part_score`, and only the final
+    cross-user `SUM` (`:86`) crosses a chunk boundary.
+
+    This emits `SUM(part_score)` per pair **within the chunk**, which is a further collapse of
+    the same associative sum -- summing per bucket and then across buckets is identical to
+    summing everything at once, and it shrinks what has to be carried between stages by orders
+    of magnitude. `combine_sql` does the final re-sum, and it is there and only there that the
+    integer cast and the threshold are applied, exactly as LB applies them once.
+    """
+    body = pairs_sql(sessions_source, p, apply_threshold=False, apply_limit=False)
+    # pairs_sql ends at `thresholded_mbids`; take user_contribtion_mbids instead.
+    head = body[: body.index("), thresholded_mbids AS (")]
+    return f"""{head})
+                SELECT mbid0, mbid1, SUM(part_score) AS part_sum
+                  FROM user_contribtion_mbids
+              GROUP BY mbid0, mbid1
+    """
+
+
+def combine_sql(partial_glob: str, p: Params, *, apply_threshold: bool = True) -> str:
+    """Union the chunk partials and re-sum once -- the whole of `LBD-D2`'s correction.
+
+    `T3-D3` lives here: the integer cast is applied to the COMPLETED cross-user sum, never to
+    a partial, or truncation would be applied N times instead of once and every score would
+    drift down.
+    """
+    threshold_clause = f"HAVING score > {p.threshold}" if apply_threshold else "HAVING score > 0"
+    return f"""
+                SELECT mbid0
+                     , mbid1
+                     , TRUNC(SUM(part_sum))::BIGINT AS score
+                  FROM read_parquet('{partial_glob}')
+              GROUP BY mbid0, mbid1
+                {threshold_clause}
+    """
+
+
 def build_sessioned_index(
     listen_table: str,
     metadata_table: str,
@@ -740,6 +782,17 @@ def main(argv: list[str] | None = None) -> int:
         help="do the pair work from a materialised sessions parquet (stage 2 of 2)",
     )
     ap.add_argument(
+        "--emit-partial",
+        action="store_true",
+        help="one chunk's pair sums, for LBD-D2's exact chunked form",
+    )
+    ap.add_argument(
+        "--combine",
+        type=str,
+        default=None,
+        help="glob of chunk partials to union and re-sum into T",
+    )
+    ap.add_argument(
         "--verify-credit-key",
         action="store_true",
         help="T3-D9: prove hash(artist_credit_mbids) is collision-free on this corpus, then exit",
@@ -759,8 +812,11 @@ def main(argv: list[str] | None = None) -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     con = connect(args.memory_limit_gb, args.temp_dir, args.threads)
-    register_frames(con, args.inputs, redirects=not args.no_redirects)
-    register_listens(con, args.dump, p, user_mod=args.user_mod, user_rem=args.user_rem)
+    # Both are inputs to stage 0 ONLY. Reading a materialised stage 0 needs neither, and
+    # building the 40M-row duration frame for a query that never joins it is pure cost.
+    if not (args.from_listens or args.from_sessions or args.combine):
+        register_frames(con, args.inputs, redirects=not args.no_redirects)
+        register_listens(con, args.dump, p, user_mod=args.user_mod, user_rem=args.user_rem)
 
     if args.verify_credit_key:
         # T3-D9's precondition. A difference here invalidates every pair table the
@@ -791,13 +847,28 @@ def main(argv: list[str] | None = None) -> int:
     # sessions_filtered -- so NOTHING before this point differs between any of the five arms.
     # The fixture asserts the one-shot and two-stage paths agree.
     # A materialised stage 0 replaces the dump as the source for everything after it.
-    listens_source = (
-        f"SELECT * FROM read_parquet('{args.from_listens.as_posix()}')"
-        if args.from_listens
-        else listens_sql("artist_similarity_listens", "recording_length", "artist_credit")
-    )
+    # The chunk predicate has to follow the SOURCE. Against the dump it lives in
+    # register_listens; against a materialised stage 0 it belongs here. Either way it is
+    # EXACT: every stage-1 window partitions by user_id, so a user bucket is self-contained.
+    if args.from_listens:
+        chunk = (
+            f" WHERE user_id % {args.user_mod} = {args.user_rem}" if args.user_mod else ""
+        )
+        listens_source = (
+            f"SELECT * FROM read_parquet('{args.from_listens.as_posix()}'){chunk}"
+        )
+    else:
+        listens_source = listens_sql(
+            "artist_similarity_listens", "recording_length", "artist_credit"
+        )
 
-    if args.emit_listens:
+    if args.combine:
+        stage = "combine"
+        sql = combine_sql(args.combine, p, apply_threshold=not args.aggregate_only)
+    elif args.emit_partial:
+        stage = "emit-partial"
+        sql = partial_pairs_sql(sessions_from_listens_sql(listens_source, p), p)
+    elif args.emit_listens:
         stage = "emit-listens"
         # PARTITION BY a user bucket. Stage 1's windows all partition by user_id, so a bucket
         # is self-contained: chunking by it is EXACT, and -- unlike `user_id % k` against the

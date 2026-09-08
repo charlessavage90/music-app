@@ -541,3 +541,57 @@ subtlest semantics is now a twice-observed pattern here, not a one-off** — and
 occasions the only thing that caught it was a guard that fails loudly when a mutation cannot
 locate its target. Any mutation-style check needs that guard; without it, blind is
 indistinguishable from green.
+
+### Stage 0 landed, and the testbed predicted it
+
+| | measured | extrapolated from the 100-file testbed |
+|---|---:|---:|
+| rows | 2,647,691,119 | ~2.76 bn |
+| size | 53.9 GB | ~55 GB |
+| wall | 44.3 min | ~40 min |
+| spill | **0.0 GB** | — |
+
+Exit 0, and **no `recording_mbid` failed the UUID cast**, so nothing silently fell back to the
+180 s default — which is the specific way `T3-D12` could have re-created `LBDR-F4`'s defect.
+
+**It had to be run detached from the harness.** The harness kills background commands on low
+free physical memory, and a 55 GB streaming write fills Windows' write-back cache — memory that
+is reclaimable and not a sign of distress. DuckDB never left its 5 GB limit and spilled 8 KB
+across 34 GB of output before the last kill. The guard was firing on a symptom of healthy work,
+so the run was launched via `Start-Process` and the machine watched by hand instead. Settings
+were left conservative (5 GB, 2 threads of 24) because a second session shares this box.
+
+### Bucket count barely matters, because the re-read was never the cost
+
+| chunking | rows | wall/bucket | spill | all buckets |
+|---|---:|---:|---:|---:|
+| `user_id % 64` | 25,194,958 | 73 s | 0.62 GB | 78 min |
+| `user_id % 16` | 102,720,181 | 269 s | 16.98 GB | 72 min |
+
+Time scales with **rows**, not with the fixed per-pass read: 4.08x the rows for 3.68x the time.
+So re-reading a 53.9 GB intermediate from NVMe 64 times is nearly free, and **64 buckets is
+chosen for its far smaller spill, not for speed.** This also retires the assumption behind
+materialising `sessions_filtered` separately — writing and re-reading it would be pure I/O for
+no gain, so stage 1 and stage 2 run as one query per bucket.
+
+### `LBD-D2`'s chunked form is now PROVED equal, not asserted
+
+The fixture splits its users into two chunks, runs the partial form on each, unions and
+re-sums, and asserts the result is **identical** to the one-shot form. It is.
+
+The subtle part it pins: **`TRUNC` is applied once, to the completed cross-user sum, never per
+chunk.** Truncating per chunk would truncate N times instead of once and drift every score
+downward — a result that would look entirely plausible and be wrong by construction.
+
+### A fourth instance of a check reporting green while doing nothing
+
+The script adding that assertion **printed success having added nothing** — `str.replace`
+returns the string unchanged when its target is absent, with no error. The fixture then passed,
+because the new assertion was not in it. Caught only by grepping for the assertion's own output
+and finding none.
+
+That is now four in one session: a memory reading that was silently zero; a spill reading taken
+after the evidence was deleted; two mutants that could not find what they mutate (twice); and a
+patcher reporting success for a no-op. **The common form is that the *absence* of a check is
+indistinguishable from a *passing* check**, and the only remedy that has worked each time is
+the same one: assert the thing landed rather than assuming it did.
