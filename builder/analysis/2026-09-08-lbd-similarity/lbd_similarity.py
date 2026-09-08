@@ -16,7 +16,7 @@ below are into that file. A review (`LBDR-F2`) established that the plan's prose
 a DIFFERENT computation from the SQL it quotes, so prose is not admissible evidence here.
 
 --------------------------------------------------------------------------------------
-THE EIGHT DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
+THE NINE DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
 --------------------------------------------------------------------------------------
 
 T3-D1. `to_date` is pinned to the dump's END_TIMESTAMP, not `date.today()` (`artist.py:121`).
@@ -63,7 +63,7 @@ T3-D6. `recording_length` GAINS THE REDIRECT ARM. LB's frame is built by
 
 T3-D7. `--pairing distinct` IS OURS, NOT LB'S. LB self-joins listens (`artist.py:69-71`);
     `LBD-D6` schedules the cheaper form as an arm. We define it as `SELECT DISTINCT
-    user_id, session_id, artist_mbid, artist_credit_mbids, similarity` before the self-join
+    user_id, session_id, artist_mbid, credit_key, similarity` before the self-join
     -- exact-duplicate-row removal, which leaves both join predicates untouched and keeps an
     artist credited two different ways as two rows. `LBD-D6` says "self-joins distinct
     artists" and does not pin that tie; this is our pinning of it, and it is a deviation
@@ -81,6 +81,26 @@ T3-D8. `SUM(CASE WHEN ... THEN 1 ELSE 0 END)` REPLACES `COUNT_IF(...)` FOR `sess
     This one was found by the fixture rather than by reading, and it is the reason the
     fixture asserts on users 1 and 5 -- both of whose first rows are load-bearing. Mutant T3-M6
     reverts it, and must go red.
+
+T3-D9. `hash(artist_credit_mbids)` REPLACES THE LIST ITSELF THROUGH THE WINDOWED STAGES.
+    LB carries `artist_credit_mbids` (a `VARCHAR[]`) from `listens` all the way to the
+    self-join, where it is used for exactly one thing: the equality predicate
+    `s1.artist_credit_mbids != s2.artist_credit_mbids` (`artist.py:73`), which stops two
+    artists on the SAME track pairing with each other.
+
+    Carrying a nested type through a ~195-million-row sort partitioned by `user_id` and then
+    through a self-join of the same magnitude is what made the `user_id % 16` slice die with
+    `failed to allocate ... (7.4 GiB/7.4 GiB used)` AFTER it had already spilled 449 MB:
+    DuckDB's out-of-core paths for nested types are materially weaker than for flat ones.
+    A BIGINT key costs 8 bytes and spills.
+
+    THIS IS ONLY LEGITIMATE IF IT IS EXACT. A hash collision would make two genuinely
+    different credits compare equal, suppressing real pairs -- and it would bias supply
+    DOWNWARD, which is the direction that makes this track's central question look answered
+    when it is not. So it is verified rather than assumed: `--verify-credit-key` compares
+    `count(DISTINCT artist_credit_mbids)` against `count(DISTINCT hash(artist_credit_mbids))`
+    over the corpus and REFUSES on any difference. Measured collision-free on a 1-in-64 user
+    slice (430,644 distinct arrays, 430,644 distinct hashes) before this was adopted.
 
 --------------------------------------------------------------------------------------
 THREE PROPERTIES OF LB'S SQL THAT LOOK LIKE BUGS AND ARE FAITHFULLY REPRODUCED
@@ -202,7 +222,7 @@ def build_sessioned_index(
     if p.pairing == "distinct":
         pair_source = """
             , pair_source AS (
-                SELECT DISTINCT user_id, session_id, artist_mbid, artist_credit_mbids, similarity
+                SELECT DISTINCT user_id, session_id, artist_mbid, credit_key, similarity
                   FROM sessions_filtered
             )"""
         pair_from = "pair_source"
@@ -238,7 +258,8 @@ def build_sessioned_index(
                      -- T3-D3: TRUNC, not CAST -- DuckDB's cast rounds (`artist.py:23`).
                      , TRUNC(COALESCE(r.length / 1000, {DEFAULT_TRACK_LENGTH}))::BIGINT AS duration
                      , l.recording_msid
-                     , l.artist_credit_mbids
+                     -- T3-D9: a BIGINT key replaces the VARCHAR[] from here on.
+                     , hash(l.artist_credit_mbids) AS credit_key
                      , ac.artist_mbid
                      , ac.position
                      , ac.join_phrase
@@ -268,7 +289,7 @@ def build_sessioned_index(
                      -- T3-D2: the total order. LB's `ORDER BY listened_at` (`:45`) is not one.
                      , listened_at - LAG(listened_at, 1) OVER wt - LAG(duration, 1) OVER wt
                            AS difference
-                     , artist_credit_mbids
+                     , credit_key
                      , artist_mbid
                      , COALESCE(IF(after_ft_jp, {FEATURED_ARTIST_WEIGHT}, 1), 1) AS similarity
                   FROM listens
@@ -286,7 +307,7 @@ def build_sessioned_index(
                      -- ...while LEAD takes the total order, since it is nondeterministic in
                      -- LB regardless (`artist.py:50`).
                      , LEAD(difference, 1) OVER wt < {p.skip_threshold} AS skipped
-                     , artist_credit_mbids
+                     , credit_key
                      , artist_mbid
                      , similarity
                   FROM ordered
@@ -294,7 +315,7 @@ def build_sessioned_index(
                               RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
                      , wt AS (PARTITION BY user_id ORDER BY listened_at, recording_msid, position)
             ), sessions_filtered AS (
-                SELECT user_id, session_id, artist_credit_mbids, artist_mbid, similarity
+                SELECT user_id, session_id, credit_key, artist_mbid, similarity
                   FROM sessions
                  -- T3-P2: NULL `skipped` on each user's last row makes this drop it.
                  WHERE NOT skipped
@@ -308,7 +329,7 @@ def build_sessioned_index(
                   JOIN {pair_from} s2
                  USING (user_id, session_id)          -- T3-P3: unordered, so each pair twice.
                  WHERE s1.artist_mbid != s2.artist_mbid
-                   AND s1.artist_credit_mbids != s2.artist_credit_mbids
+                   AND s1.credit_key != s2.credit_key
             ), user_contribtion_mbids AS (            -- LB's spelling (`artist.py:74`).
                 SELECT user_id
                      , lexical_mbid0 AS mbid0
@@ -527,6 +548,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--threads", type=int, default=None)
     ap.add_argument("--temp-dir", type=Path, default=Path(r"D:/unsung-large-data/duckdb-temp"))
     ap.add_argument(
+        "--verify-credit-key",
+        action="store_true",
+        help="T3-D9: prove hash(artist_credit_mbids) is collision-free on this corpus, then exit",
+    )
+    ap.add_argument(
         "--aggregate-only",
         action="store_true",
         help="materialise T: HAVING score > 0, no rank cut (pre-registration section 1)",
@@ -543,6 +569,24 @@ def main(argv: list[str] | None = None) -> int:
     con = connect(args.memory_limit_gb, args.temp_dir, args.threads)
     register_frames(con, args.inputs, redirects=not args.no_redirects)
     register_listens(con, args.dump, p, user_mod=args.user_mod, user_rem=args.user_rem)
+
+    if args.verify_credit_key:
+        # T3-D9's precondition. A difference here invalidates every pair table the
+        # narrowed pipeline produces, so this refuses rather than warning.
+        rows = con.execute(
+            "SELECT count(DISTINCT artist_credit_mbids), count(DISTINCT hash(artist_credit_mbids)) "
+            "FROM artist_similarity_listens"
+        ).fetchone()
+        print(f"[lbd] distinct credit arrays {rows[0]:,}", flush=True)
+        print(f"[lbd] distinct hashes        {rows[1]:,}", flush=True)
+        if rows[0] != rows[1]:
+            raise SystemExit(
+                f"REFUSING: hash(artist_credit_mbids) collides on this corpus "
+                f"({rows[0]:,} arrays -> {rows[1]:,} hashes). T3-D9 is not exact here and "
+                "every pair table built with it under-counts pairs."
+            )
+        print("[lbd] T3-D9 verified collision-free", flush=True)
+        return 0
 
     sql = build_sessioned_index(
         "artist_similarity_listens",

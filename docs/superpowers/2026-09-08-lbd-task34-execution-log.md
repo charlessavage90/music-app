@@ -285,3 +285,61 @@ extrapolates to a full-pass peak memory above 24 GB"*, and a killed run yields *
 memory reading at all** — the number is missing, not high. Reading a crash as a gate firing
 would be inventing a measurement from an absence, which is the same move as reading a broken
 instrument's comfortable zero as a comfortable truth. The gate is read off the re-run.
+
+### The gate slice OOMs on its own terms, and the suspect is a column type
+
+Re-run at an 8 GB limit with spill on the NVMe, the `user_id % 16` slice failed with DuckDB's
+own error rather than an OS kill:
+
+    OutOfMemoryException: failed to allocate data of size 256.0 KiB (7.4 GiB/7.4 GiB used)
+
+It **had** spilled — 449 MB to the NVMe — and then could not spill further. So this is not
+"the limit was too low"; something in the pipeline is not spillable.
+
+**The suspect, stated as a hypothesis before it was tested:** `artist_credit_mbids` is a
+`VARCHAR[]`, and it is carried through every windowed stage — a sort of roughly 195 million
+rows partitioned by `user_id` — and then through a self-join on `(user_id, session_id)` whose
+build side is the same magnitude. DuckDB's out-of-core support for nested types in window and
+join operators is materially weaker than for flat ones. The column is used for exactly one
+thing: the equality predicate `s1.artist_credit_mbids != s2.artist_credit_mbids` at
+`artist.py:73`.
+
+**So the fix under test is to replace it with a `BIGINT` key through those stages** — which is
+only legitimate if the substitution is *exact*, not merely usually right. A hash collision
+would make two genuinely different credits compare equal and would **silently suppress real
+pairs**, in the direction that quietly lowers supply. Tested directly by comparing
+`count(DISTINCT artist_credit_mbids)` against `count(DISTINCT hash(artist_credit_mbids))` on
+the corpus rather than assuming 64 bits is enough.
+
+**Not yet known, and not to be assumed:** whether the window or the self-join is the actual
+consumer. Narrowing the column helps both, so the fix does not depend on resolving that — but
+the report must not claim the window was the cause on this evidence.
+
+### `T3-D9` — the LIST column narrowed to a key, and a fixture hole it exposed
+
+`artist_credit_mbids` is a `VARCHAR[]` carried from `listens` to the self-join, where LB uses
+it for exactly one thing: `s1.artist_credit_mbids != s2.artist_credit_mbids` (`artist.py:73`),
+which stops two artists on the same track pairing with each other. Replaced with
+`hash(...) AS credit_key`, a BIGINT, through every windowed stage.
+
+**Verified before adoption, not assumed:** `count(DISTINCT artist_credit_mbids)` against
+`count(DISTINCT hash(...))` on a 1-in-64 user slice — 430,644 against 430,644, collision-free.
+A collision would make two different credits compare equal and **suppress real pairs**, biasing
+supply *downward*, which is the direction that makes this track's central question look
+answered when it is not. `--verify-credit-key` now runs that check and **refuses** on any
+difference, rather than warning.
+
+**The fixture hole this uncovered is the more interesting half.** A mutant deleting the
+same-credit predicate entirely **did not move the answer**, so the fixture had never been
+testing `artist.py:73`. The reason: the only two-artist credit in it belonged to a *featured*
+pair at weight 0.25, so the suppressed pair was worth 0.125 — and `TRUNC` at the cross-user sum
+absorbed it completely. The assertion existed, looked right, and covered nothing.
+
+Fixed by adding a user whose two-artist credit carries **no** join phrase, so both artists
+weigh 1 and the suppressed pair is worth 2. Its three artists appear nowhere else, so no
+existing expectation moves. Seven mutants now, all red.
+
+**The generalisable form: a rounding or truncation step downstream of an assertion can make
+that assertion untestable, and it does so silently.** The mutant is what found it — reading the
+fixture would not have, and did not. This is the second time today the mutants caught something
+reading the code did not.

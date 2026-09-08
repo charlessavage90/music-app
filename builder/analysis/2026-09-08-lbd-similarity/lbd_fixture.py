@@ -124,6 +124,23 @@ USER 4 -- a SHORT featured track, so the main artist survives T3-P1 and the fram
         (A,B): artist_mbid differs BUT artist_credit_mbids are equal -> EXCLUDED by `:73`
         (A,C) = 0.25*1 * 2 = 0.5      (B,C) = 0.25*1 * 2 = 0.5
 
+USER 6 -- the same-credit exclusion, at a weight truncation cannot hide.
+    t=50000 ac=8 r5(20)   TWO artists F and G, NO join phrase -> BOTH weight 1
+    t=50100 H  r1(120)  |  t=50300 A  r1(120)
+        F(50000)  diff NULL                  skipped: LEAD = -20 -> not < -30   KEEP
+        G(50000)  diff 50000-50000-20 = -20  skipped: LEAD =  80 -> F           KEEP
+        H(50100)  diff 50100-50000-20 =  80  skipped: LEAD =  80 -> F           KEEP
+        A(50300)  diff 50300-50100-120 = 80  skipped: LEAD=NULL                 DROP
+    Session 0 holds F (1, [F,G]), G (1, [F,G]), H (1, [H]).
+        (F,G): artist_mbid differs BUT artist_credit_mbids are equal -> EXCLUDED by `:73`
+        (F,H) = 1*1 * 2 = 2        (G,H) = 1*1 * 2 = 2
+    WHY THIS USER EXISTS. User 4 already contains a two-artist credit, but its artists are
+    weighted 0.25, so the pair the exclusion suppresses is worth 0.125 -- and TRUNC(x) at the
+    cross-user sum absorbs it completely. The mutant that deletes the exclusion therefore did
+    NOT move the answer, and the fixture was silently not testing `:73` at all. At weight 1
+    the suppressed pair is worth 2 and cannot be absorbed. A and H are chosen so this user
+    perturbs no existing pair: F, G, H appear nowhere else.
+
 USER 5 -- the redirect arm, T3-D6. Sized so the duration decides a skip.
     t=40000 A  r6  |  t=40200 B  r1(120)  |  t=40500 C  r1(120)
     WITH redirects  (r6 -> 240 s):
@@ -166,6 +183,9 @@ B = "00000000-0000-0000-0000-0000000000bb"
 C = "00000000-0000-0000-0000-0000000000cc"
 D = "00000000-0000-0000-0000-0000000000dd"
 E = "00000000-0000-0000-0000-0000000000ee"
+F = "00000000-0000-0000-0000-0000000000ff"
+G = "00000000-0000-0000-0000-000000000f00"
+H = "00000000-0000-0000-0000-000000000f11"
 
 R1 = "11111111-1111-1111-1111-111111111001"
 R2 = "11111111-1111-1111-1111-111111111002"
@@ -185,6 +205,11 @@ ARTIST_CREDIT = [
     (5, B, 1, ""),
     (6, D, 0, ""),
     (7, E, 0, ""),
+    # TWO artists, NO featured phrase -> both weight 1, so the pair they would form with
+    # each other is worth 2 and survives truncation. That is what makes T3-M7 detectable.
+    (8, F, 0, ""),
+    (8, G, 1, ""),
+    (9, H, 0, ""),
 ]
 
 # (recording_mbid, length_ms)
@@ -214,6 +239,9 @@ LISTENS = [
     (5, 40000, "m19", R6, 1, [A]),
     (5, 40200, "m20", R1, 2, [B]),
     (5, 40500, "m21", R1, 3, [C]),
+    (6, 50000, "m22", R5, 8, [F, G]),
+    (6, 50100, "m23", R1, 9, [H]),
+    (6, 50300, "m24", R1, 1, [A]),
 ]
 
 # ---------------------------------------------------------------------------------------
@@ -222,17 +250,17 @@ LISTENS = [
 
 EXPECTED = {
     # threshold 0, no rank cut, LB's listen pairing, redirects applied. This is `T`.
-    "T": [(A, B, 3), (A, C, 3), (B, C, 4)],
+    "T": [(A, B, 3), (A, C, 3), (B, C, 4), (F, H, 2), (G, H, 2)],
     # threshold 3, strict `>` (artist.py:90) drops the two 3s and keeps only the 4.
     "threshold_3": [(B, C, 4)],
     # limit 1 with rank(), not row_number(): (A,B) and (A,C) tie at 3 under mbid0 = A, so
     # BOTH survive `rank <= 1` and mbid0 = A returns two rows for a limit of one.
-    "limit_1": [(A, B, 3), (A, C, 3), (B, C, 4)],
+    "limit_1": [(A, B, 3), (A, C, 3), (B, C, 4), (F, H, 2), (G, H, 2)],
     # our own arm (T3-D7): user 1's duplicate A collapses, so (A,B) and (A,C) fall from 3 to 2.
-    "distinct": [(A, B, 2), (A, C, 2), (B, C, 4)],
+    "distinct": [(A, B, 2), (A, C, 2), (B, C, 4), (F, H, 2), (G, H, 2)],
     # T3-D6: without the redirect arm user 5's 240 s track reads as 180 s, its first row stops
     # being skipped, and (A,B) gains that user's 2.
-    "no_redirects": [(A, B, 5), (A, C, 3), (B, C, 4)],
+    "no_redirects": [(A, B, 5), (A, C, 3), (B, C, 4), (F, H, 2), (G, H, 2)],
 }
 
 
@@ -296,6 +324,13 @@ MUTANTS = {
         "WHERE l.recording_mbid IS NOT NULL\n                   AND l.recording_mbid != ''",
         "WHERE TRUE",
     ),
+    # T3-D9. Dropping the same-credit predicate lets the two artists of one credit pair with
+    # each other. User 4's A and B share credit [A,B], so this is the assertion that holds the
+    # BIGINT-key substitution honest: if the key were wrong, that pair would appear.
+    "T3-M7 no same-credit exclusion (T3-D9 / artist.py:73)": (
+        "                   AND s1.credit_key != s2.credit_key",
+        "",
+    ),
     # T3-D8. Reverting to a literal COUNT_IF gives every user's first row a NULL session_id,
     # which then never joins -- so the first listen of every user vanishes from every pair.
     # This mutant is the one the fixture caught on its first run.
@@ -348,7 +383,7 @@ def main() -> int:
     if failures:
         print(f"FAILED: {len(failures)} -> {failures}")
         return 1
-    print("All fidelity checks pass and all six mutants are detected.")
+    print("All fidelity checks pass and all seven mutants are detected.")
     return 0
 
 
