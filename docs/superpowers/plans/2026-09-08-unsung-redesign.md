@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Role: ACTIVE implementation plan for the `UXR-` set. UNSTARTED; no task has run.**
+**Role: ACTIVE implementation plan for the `UXR-` set. IN PROGRESS: `T1`–`T5` executed 2026-09-08 (branch `unsung-redesign`, PR #114), `T6`–`T11` unstarted.** *(Role line updated at the first-seam closeout; the tasks below are as written, with two in-place corrections marked `⚠ CORRECTED`.)*
 Tasks are `UXR-T1`–`UXR-T11`. Retained execution log: `docs/superpowers/2026-09-08-unsung-redesign-execution-log.md`, created by `UXR-T1` and appended **per task**.
 
 **Goal:** Rename the app to Unsung.fm and rebuild the landing and journey pages to the owner's approved mockup, with the artist detail docked beside the rail (a bottom sheet on phones), a share button, a player progress line and a live artist count — and nothing the spec drops or defers.
@@ -328,7 +328,7 @@ Append `## §2 UXR-T2` to the execution log: note that the mark file is the owne
 
 **Interfaces:**
 - Consumes: `Brand`, `ArtistSearch` (unchanged), the tokens.
-- Produces: exported `SAMPLE_JOURNEYS` with a `steps: number` field and exported `TEASER` — `UXR-T10`'s e2e reads both.
+- Produces: exported `SAMPLE_JOURNEYS` with a `steps: number` field and exported `TEASER` — `UXR-T10`'s e2e reads both. **⚠ CORRECTED 2026-09-08:** they were placed in `frontend/src/lib/sampleJourneys.ts`, not in `LandingPage.tsx` (log §3).
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -1768,7 +1768,9 @@ Create `frontend/e2e/landing-samples.spec.ts`:
 
 ```ts
 import { expect, test } from '@playwright/test';
-import { SAMPLE_JOURNEYS, TEASER } from '../src/routes/LandingPage';
+// ⚠ CORRECTED 2026-09-08 (log §3): the constants live in src/lib/sampleJourneys.ts, not
+// in LandingPage.tsx as this plan first said — oxlint's fast-refresh rule moved them.
+import { SAMPLE_JOURNEYS, TEASER } from '../src/lib/sampleJourneys';
 
 // UXR-D7 / UXR-D14: the chips and the teaser carry counts and names measured on
 // the served graph. This is the re-check rule as a test: after any artifact

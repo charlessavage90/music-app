@@ -43,8 +43,9 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > live at the time. **This note survives a `closeout` rewrite: it is a standing fact about the
 > deployment, not status.** The runbook is `infra/README.md` §1a.
 >
-> ⚠ **The app is still NAMED "Artist Path" in the UI.** Only the address moved. A rename to
-> "Unsung" is scoped but unapproved — do not assume it has happened.
+> ⚠ **The app is still NAMED "Artist Path" in the DEPLOYED UI.** Only the address moved. The
+> rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
+> assume it has been deployed.
 
 **Last updated: 2026-09-08.** Three pieces of work have addresses. **None of them changes what
 a listener sees**, and the one thing that would is a deploy.
@@ -60,6 +61,19 @@ frontend already mapped `snake_case` artists at the API boundary, and it did not
 declared `spotifyId` would have been `undefined` at runtime and rendered *identically to a
 genuine absence*. Entry point:
 [`2026-09-08-HANDOFF-lux-4-wire-and-card.md`](2026-09-08-HANDOFF-lux-4-wire-and-card.md).
+
+**`UXR-`** — **the Unsung.fm redesign, half built.** Branch `unsung-redesign`, **PR #114**. The
+rename is **APPROVED 2026-09-08** (it was scoped-and-unapproved above this line until then) and
+`UXR-T1`–`T5` are executed — palette and faces, the name, the landing page, `GET /api/meta` and
+the badge, the player bar's progress; `T6`–`T11` (the docked artist detail, the journey header
+and share, the restyle, the e2e suite, the record) are the next session's, from the plan's first
+seam. **Nothing a listener sees changes until this is DEPLOYED, and that deploy is two images**
+(frontend, plus the API for `/api/meta`); it follows the owed `LUX-4` deploy and changes no
+artifact. Decisions over the mockup are his and recorded: the **reach pill is DROPPED**, "Save
+track" dropped, genres / "why this stop" / the extra pages deferred — spec §2 and §4. **`LUX-E6`**
+ran at his instruction and is **his to read** before any genre decision; it changes nothing by
+itself. Entry point:
+[`2026-09-08-HANDOFF-unsung-redesign-t5.md`](2026-09-08-HANDOFF-unsung-redesign-t5.md).
 
 **`LBD-`** — branch `lb-dump-exploration`, **PR #109**; a worktree sits at
 `C:\Users\charl\worktrees\music-app-lbd` on `lbd-task3`. The pre-registration
@@ -84,8 +98,11 @@ exact failure this file's preamble warns about. Corrected by the session that wr
 not record how far down the list he has got.** `gh pr list` answers the merge questions;
 `infra/README.md` and `/health` answer the deploy one.
 
-1. **Merge the open PRs.**
-2. **Deploy.** ⚠ **Merged is not deployed here** — deploys are manual and there is no CI
+1. **Export the mark** from the Claude Design project and save it as
+   `frontend/public/unsung-mark.png` — his hands (the MCP truncates it). The redesign renders a
+   broken image box until it lands; nothing else waits on it.
+2. **Merge the open PRs.**
+3. **Deploy.** ⚠ **Merged is not deployed here** — deploys are manual and there is no CI
    ([`infra/README.md`](../../infra/README.md)). The clip cache's item shape changed, so every
    live entry misses once and rebuilds. **⚠ It also clears a latent hazard:** the running image
    predates the `CXR-` revert, so its baked-in `ApiConfig.graph_path` default still names the
@@ -93,7 +110,7 @@ not record how far down the list he has got.** `gh pr list` answers the merge qu
    checksum per deploy, and `DEP-34-FIX` makes a synth without the deploy key refuse — but it
    is a live instance of the `DEP-34` class. HEAD's default is correct, so **any image built
    from HEAD fixes it; do not deploy under a stale image tag.**
-3. **Run the queued use-the-app test** — **not exercisable until 2 has happened.**
+4. **Run the queued use-the-app test** — **not exercisable until 3 has happened.**
 
 **Two corrections landed 2026-09-08 and a later editor must not revert either.** In both cases
 the arithmetic was always right; what was wrong was what it could be read as evidence of, so a
@@ -126,6 +143,8 @@ served lineage.
 **not** a substitute read for it. `LUX-E3` and `LUX-E5` are run and their reads recorded:
 nothing is dropped and `area` stays.
 
+**One deferral's condition is ARMED as of 2026-09-08 and not yet satisfied.** The Deezer id gap (registry below) waits on "the first rebuild after `LUX-4` merges"; `LUX-4` merged (PR #112) and no rebuild has happened. **The next rebuild of the served lineage must carry the Deezer re-extract**; nothing in `UXR-` rebuilds.
+
 **Two findings are open and neither blocks anything.** **`ULC-F4`** — the un-listenable
 keep-check measures the name-search route while the app resolves by identity first, so both
 drop lists drop artists the app can play; **the owner's**, needing a re-census, a rebuild and
@@ -151,8 +170,7 @@ not hold it (owner ruling, 2026-08-07).
 famous-to-famous defect ruling**, the **three candidate path-quality fixes in the `CXR-`
 README** (each needing its own pre-registration), **`PW-9`** (concurrency ladder, gated on his
 approval), the **cap-rule decision** (parked, and it owes a blind listen before any adoption
-whatever any probe says), and **renaming the app to "Unsung"** — scoped, unapproved, and
-needing two decisions from him about the landing copy. The UI still says "Artist Path".
+whatever any probe says), and **the "Unsung.fm" rename** — no longer his to trigger: **approved 2026-09-08** and in progress under `UXR-` (above). The deployed UI still says "Artist Path" until that ships.
 
 ---
 

@@ -1,6 +1,6 @@
 # Handoff — `LUX-4` complete, the wire and the card, 2026-09-08
 
-**Role: ACTIVE — this is the CURRENT handoff FOR THE `LUX-4` TRACK.** Nothing supersedes it.
+**Role: SUPERSEDED ON NEXT ACTIONS by [`2026-09-08-HANDOFF-unsung-redesign-t5.md`](2026-09-08-HANDOFF-unsung-redesign-t5.md), 2026-09-08 — NOT the current handoff.** `LUX-4` is finished and its next actions (merge, deploy, the queued tests) are carried forward there and in `NEXT.md`. **Everything this note records about `LUX-4`'s internals and its must-not-revert list still stands in full.**
 Supersedes [`2026-09-06-HANDOFF-lux-4-artifact.md`](2026-09-06-HANDOFF-lux-4-artifact.md)
 on **everything** — that handoff's remaining tasks are all done. It does **not** state project
 status: for that read [`NEXT.md`](NEXT.md), which owns it.

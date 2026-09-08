@@ -80,3 +80,46 @@ session takes over.
 **HANDOFF SEAM — `UXR-T1`–`T5` complete; `T6`–`T11` are the next session's.** Nothing in
 flight. The API on :8000 (graph-lux4, with `/api/meta`) and Vite on :5173 were this session's
 and are stopped at closeout.
+
+## §6 Closeout at the first seam, 2026-09-08
+
+**Gate outcomes.** No gates in this plan; the per-task checks all passed: every behaviour
+test went red before green except `T3`'s three (red by construction, §3); builder 286, api
+290, frontend 176 green at closeout; build and lint clean (one pre-existing lint warning in
+`vite.config.ts`).
+
+**Defects in the plan itself, `T1`–`T5`** — three, all small, all recorded above: a
+self-contradictory test (§2), constants exported from a component file (§3), and a text query
+a new chip hijacked (§3). The plan's code was otherwise executable as written.
+
+**Vacuous-test check (B3).** Three guards broken deliberately and each went red: `/api/meta`
+reverted to a sync `def` (the coroutine test failed); the badge's floor removed (its
+formatting test failed); the `timeupdate` listener never attached (both Player tests failed).
+All restored; the diff was empty afterwards.
+
+**Reachability (B2).** `Brand`, `ArtistCountBadge`, `sampleJourneys`, `cachedTrack`, `getMeta`,
+`onTimeUpdate` — each imported by at least one non-test module.
+
+**Deferrals (A3).** The Deezer id gap's condition is now armed (`LUX-4` merged) and not
+satisfied — recorded in `NEXT.md`'s top block, the registry row untouched. No condition came
+due. The spec's §4 items each carry a trigger.
+
+**Default-flip (A4).** No config knob was added; `TIMEOUT_MS.meta` is a constant with one
+value, not a switch.
+
+**D6.** Unconditional layer **51,694 characters** (from 51,694, **±0**); conditional **2,561
+lines** (from 2,549, **+12**) — `memory/project-state.md` rewritten: a false line ("paying
+users", contradicted by `REQ-43` since 2026-08-04) removed, and the owner's two deferred
+product ideas from the redesign decisions added. Correction plus recorded intent; nothing in
+the unconditional layer moved.
+
+**A5.** Both listeners were this session's (API :8000 on `graph-lux4.bin`, Vite :5173),
+started after HEAD; stopped, nothing queued needs one. **C1: nothing written to
+`TEST-QUEUE.md`** — the redesign is half built and undeployed; nothing he can press changed.
+
+**B1.** `docs-lint`: one hard failure (this log absent from the map), fixed; candidates are
+the standing pre-registration figures, none from this work. `doc-auditor` over the diff: one
+High — the plan's role line still said "unstarted" — and one Medium — the plan's `T10` import
+named the module `T3` moved the constants out of. Both corrected in place, marked
+`⚠ CORRECTED`. The handoff chain, `NEXT.md`'s rename wording and action list, figure
+ownership, identifiers and every reference were verified clean.
