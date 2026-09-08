@@ -2,7 +2,7 @@ import { useEffect, useImperativeHandle, useMemo, useRef, useState, type Ref } f
 import { ArtistCard } from './ArtistCard';
 import { PlayerBar } from './PlayerBar';
 import { usePlayer } from '@/player/usePlayer';
-import { resolveFreshUrl } from '@/hooks/useClip';
+import { cachedTrack, resolveFreshUrl } from '@/hooks/useClip';
 import type { Artist, StopRule } from '@/api/types';
 
 /** What the page can ask of the journey's audio from outside it. */
@@ -38,6 +38,9 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     resolveFreshUrl(mbid, clipIndex[mbid] ?? 0),
   );
   const currentName = artists.find((a) => a.mbid === player.currentMbid)?.name ?? null;
+  const currentTrackTitle = player.currentMbid
+    ? cachedTrack(player.currentMbid, clipIndex[player.currentMbid] ?? 0)?.title ?? null
+    : null;
 
   function cycleClip(mbid: string, candidateCount: number) {
     // The audio in flight is the OLD track. Restarting it here would race the
@@ -112,7 +115,16 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
           </li>
         ))}
       </ol>
-      <PlayerBar currentName={currentName} isPlaying={player.isPlaying} onToggle={player.toggle} />
+      <PlayerBar
+        currentName={currentName}
+        trackTitle={currentTrackTitle}
+        isPlaying={player.isPlaying}
+        position={player.position}
+        duration={player.duration}
+        stopIndex={artists.findIndex((a) => a.mbid === player.currentMbid)}
+        stopCount={artists.length}
+        onToggle={player.toggle}
+      />
     </>
   );
 }

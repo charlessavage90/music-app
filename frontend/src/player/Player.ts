@@ -4,6 +4,8 @@ export interface Player {
   onEnded(cb: () => void): void;
   /** Fired when the element cannot play the current source — a dead signed URL included. */
   onError(cb: () => void): void;
+  /** Position and duration in seconds, on every `timeupdate`. Duration is 0 until metadata loads. */
+  onTimeUpdate(cb: (position: number, duration: number) => void): void;
   dispose(): void;
 }
 
@@ -24,6 +26,7 @@ export class HtmlAudioPlayer implements Player {
   private audio = new Audio();
   private endedCb?: () => void;
   private errorCb?: () => void;
+  private timeCb?: () => void;
   private disposed = false;
 
   play(url: string): void {
@@ -72,14 +75,29 @@ export class HtmlAudioPlayer implements Player {
     this.audio.addEventListener('error', cb);
   }
 
+  // Same replace-never-accumulate rule as onEnded/onError, for the same
+  // StrictMode reason. Duration is NaN before metadata loads; report 0 then, so
+  // a consumer never divides by NaN.
+  onTimeUpdate(cb: (position: number, duration: number) => void): void {
+    if (this.timeCb) this.audio.removeEventListener('timeupdate', this.timeCb);
+    this.disposed = false;
+    this.timeCb = () => {
+      const d = this.audio.duration;
+      cb(this.audio.currentTime, Number.isFinite(d) ? d : 0);
+    };
+    this.audio.addEventListener('timeupdate', this.timeCb);
+  }
+
   dispose(): void {
     this.disposed = true;
     // Detach before clearing the source: assigning '' resolves against the document
     // URL and fires `error`, which must not reach a handler that would retry it.
     if (this.endedCb) this.audio.removeEventListener('ended', this.endedCb);
     if (this.errorCb) this.audio.removeEventListener('error', this.errorCb);
+    if (this.timeCb) this.audio.removeEventListener('timeupdate', this.timeCb);
     this.endedCb = undefined;
     this.errorCb = undefined;
+    this.timeCb = undefined;
     this.audio.pause();
     this.audio.src = '';
   }

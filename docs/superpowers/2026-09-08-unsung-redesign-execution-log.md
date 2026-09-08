@@ -62,3 +62,21 @@ session takes over.
   `getMeta` rejects in jsdom and the badge's designed failure mode is silence.
 - Snyk on `api/`: one finding, the pre-existing Low in `tests/test_origin_secret.py`
   (known, out of scope). Nothing new. api suite 290 green; frontend 171 green.
+
+## §5 `UXR-T5` — player progress and "Stop N of M"
+
+- `Player.onTimeUpdate` follows the replace-never-accumulate rule of the other two handlers
+  and reports duration as 0 while it is NaN, so no consumer divides by NaN. `usePlayer`
+  resets position and duration in `clear()` and zeroes position on every `start()`.
+- The bar's title comes from the clip cache (`cachedTrack`, a read-only export from
+  `useClip`) — never a fetch; the card that owns the clip has resolved it by the time
+  anything plays.
+- **Seen on the real thing**, not only in the suite: a one-off Playwright script pressed
+  play and captured the bar at 390 and 1280 — title, progress line, times, "Stop 2 of 7"
+  (hidden below `sm` by design). Deezer previews report ~0:29, and the bar says 0:29 rather
+  than the card's nominal 0:30; that is the element's clock and is left honest.
+- Frontend 176 green, build and lint clean.
+
+**HANDOFF SEAM — `UXR-T1`–`T5` complete; `T6`–`T11` are the next session's.** Nothing in
+flight. The API on :8000 (graph-lux4, with `/api/meta`) and Vite on :5173 were this session's
+and are stopped at closeout.

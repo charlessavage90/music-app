@@ -57,6 +57,15 @@ export async function resolveFreshUrl(mbid: string, index = 0): Promise<string |
   }
 }
 
+/**
+ * What the cache already knows about a track, for a DISPLAY that is not the
+ * card (the player bar's title). Never fetches: the card that owns the clip
+ * has already resolved it by the time anything plays.
+ */
+export function cachedTrack(mbid: string, index = 0): Track | null {
+  return fresh(mbid, index)?.track ?? null;
+}
+
 function stateFor(track: Track | null): ClipState {
   return { status: track ? 'ready' : 'none', track };
 }
