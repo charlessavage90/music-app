@@ -343,3 +343,41 @@ existing expectation moves. Seven mutants now, all red.
 that assertion untestable, and it does so silently.** The mutant is what found it — reading the
 fixture would not have, and did not. This is the second time today the mutants caught something
 reading the code did not.
+
+### Diagnosed by splitting, not by guessing again: it is the windows
+
+`T3-D9`'s narrowing did **not** fix the OOM — the slice died again at 9.3 GiB. **The hypothesis
+that the LIST column was the binding constraint was wrong**, and it is only not a false claim
+in this record because it was written down as an untested hypothesis rather than a finding.
+
+Rather than guess a third time, the pipeline was split at its natural seam — `sessions_sql`
+(LB's `listens` → `ordered` → `sessions` → `sessions_filtered`, `artist.py:20-63`) and
+`pairs_sql` (`:64-102`) — and stage 1 was run alone on the same slice. **It OOMs too, at 9.3
+GiB, with no join and no aggregate in the query at all.** So the consumer is the windowed
+stages: three window specifications over roughly 195 million rows partitioned by `user_id`.
+
+**The seam is worth having on its own merits, and this is the argument rather than the excuse:**
+every arm shares stage 1 exactly. `LBD-A0`–`LBD-A3` vary `threshold` and `limit`, both applied
+after the cross-user aggregation; `LBD-A4` varies pairing, applied after `sessions_filtered`.
+Nothing before that point differs between any of the five. It is the same move the
+pre-registration already makes one stage later when it derives four arms from one `T`. The
+fixture asserts the one-shot and two-stage paths agree, so the split cannot drift from the whole.
+
+### The constraint that actually governs what to do next
+
+**Every experiment costs a full scan of the dump.** `user_id % k` prunes *rows*, not *bytes* —
+the columns still have to be read to evaluate the predicate — so a 1-in-256 slice and a full
+pass read the same ~127 GB. On a 250 MB/s platter that is 20–30 minutes **per attempt,
+regardless of how small the slice is.**
+
+That is what makes the pre-registration's chunked fallback unaffordable here, and now with a
+number rather than an argument: stage 1 does not fit at 1-in-16, so chunking would need 1-in-32
+or finer, and **32 chunks is 32 rescans — north of thirteen hours of reading before any work is
+counted.**
+
+**So the intermediate is not an optimisation, it is the thing that makes the track affordable
+on this machine**, and that is a measured conclusion rather than a preference. Its size is
+**estimated, not measured** — roughly 50 GB, derived from Task 1's per-column compressed sizes
+with the two 36-character identifier columns replaced by keys and `artist_mbid` left to
+dictionary-encode. **Nobody has written it yet, and the estimate should not be cited as a
+figure.**

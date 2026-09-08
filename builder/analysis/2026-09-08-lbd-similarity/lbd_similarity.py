@@ -198,58 +198,19 @@ def _phrase_list_sql() -> str:
     return ", ".join("'" + p.replace("'", "''") + "'" for p in FEATURED_JOIN_PHRASES)
 
 
-def build_sessioned_index(
+def sessions_sql(
     listen_table: str,
     metadata_table: str,
     artist_credit_table: str,
     p: Params,
-    *,
-    apply_threshold: bool = True,
-    apply_limit: bool = True,
 ) -> str:
-    """LB's `build_sessioned_index` (`artist.py:17-103`), stage for stage, in DuckDB.
+    """LB's `listens` -> `ordered` -> `sessions` -> `sessions_filtered` (`artist.py:20-63`).
 
-    `apply_threshold` / `apply_limit` exist for the pre-registration's section 1 restructure:
-    the aggregated table `T` is materialised once at `HAVING score > 0` with no rank cut, and
-    LBD-A0..A3 are pure filters and window functions over it. They do not change any stage;
-    they only choose whether the last two are emitted here or applied later.
+    Split out from the pair stages so it can be MATERIALISED once. Every arm this track runs
+    shares it exactly: `LBD-A0`-`LBD-A3` vary `threshold`/`limit`, which are applied after the
+    cross-user aggregation, and `LBD-A4` varies pairing, which is applied after
+    `sessions_filtered`. Nothing before this point differs between any of the five.
     """
-    threshold_clause = (
-        f"HAVING score > {p.threshold}" if apply_threshold else "HAVING score > 0"
-    )
-
-    # T3-D7: our arm. Exact-duplicate-row removal ahead of the self-join.
-    if p.pairing == "distinct":
-        pair_source = """
-            , pair_source AS (
-                SELECT DISTINCT user_id, session_id, artist_mbid, credit_key, similarity
-                  FROM sessions_filtered
-            )"""
-        pair_from = "pair_source"
-    elif p.pairing == "listen":
-        pair_source = ""
-        pair_from = "sessions_filtered"
-    else:
-        raise ValueError(f"unknown pairing {p.pairing!r}")
-
-    ranked = f"""
-            , ranked_mbids AS (
-                SELECT mbid0
-                     , mbid1
-                     , score
-                     -- rank(), NOT row_number(): ties at the cut ALL survive, so an arm may
-                     -- return more than `limit` rows for one mbid0 (`artist.py:95`).
-                     , rank() OVER w AS rank
-                  FROM thresholded_mbids
-                WINDOW w AS (PARTITION BY mbid0 ORDER BY score DESC)
-            )   SELECT mbid0, mbid1, score
-                  FROM ranked_mbids
-                 WHERE rank <= {p.limit}"""
-    unranked = """
-                SELECT mbid0, mbid1, score
-                  FROM thresholded_mbids"""
-    tail = ranked if (apply_limit and p.limit is not None) else unranked
-
     return f"""
             WITH listens AS (
                 SELECT l.user_id
@@ -314,19 +275,71 @@ def build_sessioned_index(
                 WINDOW wr AS (PARTITION BY user_id ORDER BY listened_at
                               RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
                      , wt AS (PARTITION BY user_id ORDER BY listened_at, recording_msid, position)
-            ), sessions_filtered AS (
+            )
                 SELECT user_id, session_id, credit_key, artist_mbid, similarity
                   FROM sessions
                  -- T3-P2: NULL `skipped` on each user's last row makes this drop it.
                  WHERE NOT skipped
-            ){pair_source}
+    """
+
+
+def pairs_sql(
+    sessions_source: str,
+    p: Params,
+    *,
+    apply_threshold: bool = True,
+    apply_limit: bool = True,
+) -> str:
+    """LB's `user_grouped_mbids` -> output (`artist.py:64-102`), over a sessions source.
+
+    `sessions_source` is any SQL expression yielding
+    `(user_id, session_id, credit_key, artist_mbid, similarity)` -- a subquery in the one-shot
+    path, or `read_parquet(...)` over a materialised intermediate.
+    """
+    threshold_clause = (
+        f"HAVING score > {p.threshold}" if apply_threshold else "HAVING score > 0"
+    )
+
+    # T3-D7: our arm. Exact-duplicate-row removal ahead of the self-join.
+    if p.pairing == "distinct":
+        pair_cte = f"""
+            WITH sessions_filtered AS ({sessions_source}),
+            pair_source AS (
+                SELECT DISTINCT user_id, session_id, artist_mbid, credit_key, similarity
+                  FROM sessions_filtered
+            )"""
+    elif p.pairing == "listen":
+        pair_cte = f"""
+            WITH pair_source AS ({sessions_source})"""
+    else:
+        raise ValueError(f"unknown pairing {p.pairing!r}")
+
+    ranked = f"""
+            , ranked_mbids AS (
+                SELECT mbid0
+                     , mbid1
+                     , score
+                     -- rank(), NOT row_number(): ties at the cut ALL survive, so an arm may
+                     -- return more than `limit` rows for one mbid0 (`artist.py:95`).
+                     , rank() OVER w AS rank
+                  FROM thresholded_mbids
+                WINDOW w AS (PARTITION BY mbid0 ORDER BY score DESC)
+            )   SELECT mbid0, mbid1, score
+                  FROM ranked_mbids
+                 WHERE rank <= {p.limit}"""
+    unranked = """
+                SELECT mbid0, mbid1, score
+                  FROM thresholded_mbids"""
+    tail = ranked if (apply_limit and p.limit is not None) else unranked
+
+    return f"""{pair_cte}
             , user_grouped_mbids AS (
                 SELECT user_id
                      , IF(s1.artist_mbid < s2.artist_mbid, s1.artist_mbid, s2.artist_mbid) AS lexical_mbid0
                      , IF(s1.artist_mbid > s2.artist_mbid, s1.artist_mbid, s2.artist_mbid) AS lexical_mbid1
                      , s1.similarity * s2.similarity AS similarity
-                  FROM {pair_from} s1
-                  JOIN {pair_from} s2
+                  FROM pair_source s1
+                  JOIN pair_source s2
                  USING (user_id, session_id)          -- T3-P3: unordered, so each pair twice.
                  WHERE s1.artist_mbid != s2.artist_mbid
                    AND s1.credit_key != s2.credit_key
@@ -349,6 +362,27 @@ def build_sessioned_index(
             ){tail}
     """
 
+
+def build_sessioned_index(
+    listen_table: str,
+    metadata_table: str,
+    artist_credit_table: str,
+    p: Params,
+    *,
+    apply_threshold: bool = True,
+    apply_limit: bool = True,
+) -> str:
+    """The one-shot path: LB's whole job, `artist.py:17-103`, stage for stage.
+
+    Identical to composing `sessions_sql` into `pairs_sql`; the fixture asserts the one-shot
+    and two-stage paths agree, so the split cannot drift from the whole.
+    """
+    return pairs_sql(
+        sessions_sql(listen_table, metadata_table, artist_credit_table, p),
+        p,
+        apply_threshold=apply_threshold,
+        apply_limit=apply_limit,
+    )
 
 def register_frames(con: duckdb.DuckDBPyConnection, inputs: Path, *, redirects: bool) -> None:
     """The two MusicBrainz frames LB reads (`artist.py:130-134`), as DuckDB views."""
@@ -548,6 +582,17 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--threads", type=int, default=None)
     ap.add_argument("--temp-dir", type=Path, default=Path(r"D:/unsung-large-data/duckdb-temp"))
     ap.add_argument(
+        "--emit-sessions",
+        action="store_true",
+        help="materialise sessions_filtered only (stage 1 of 2); every arm shares it",
+    )
+    ap.add_argument(
+        "--from-sessions",
+        type=Path,
+        default=None,
+        help="do the pair work from a materialised sessions parquet (stage 2 of 2)",
+    )
+    ap.add_argument(
         "--verify-credit-key",
         action="store_true",
         help="T3-D9: prove hash(artist_credit_mbids) is collision-free on this corpus, then exit",
@@ -588,15 +633,41 @@ def main(argv: list[str] | None = None) -> int:
         print("[lbd] T3-D9 verified collision-free", flush=True)
         return 0
 
-    sql = build_sessioned_index(
-        "artist_similarity_listens",
-        "recording_length",
-        "artist_credit",
-        p,
-        apply_threshold=not args.aggregate_only,
-        apply_limit=not args.aggregate_only,
-    )
+    # THREE PATHS, and they are the same computation split at the same seam.
+    #
+    #   default            one shot: listens -> sessions -> pairs
+    #   --emit-sessions    stage 1 only, materialising sessions_filtered
+    #   --from-sessions    stage 2 only, reading a materialised sessions_filtered
+    #
+    # The seam is exact rather than convenient: LBD-A0..A3 vary threshold and limit, both
+    # applied after the cross-user aggregation, and LBD-A4 varies pairing, applied after
+    # sessions_filtered -- so NOTHING before this point differs between any of the five arms.
+    # The fixture asserts the one-shot and two-stage paths agree.
+    if args.emit_sessions:
+        stage = "emit-sessions"
+        sql = sessions_sql(
+            "artist_similarity_listens", "recording_length", "artist_credit", p
+        )
+    elif args.from_sessions:
+        stage = "from-sessions"
+        sql = pairs_sql(
+            f"SELECT * FROM read_parquet('{args.from_sessions.as_posix()}')",
+            p,
+            apply_threshold=not args.aggregate_only,
+            apply_limit=not args.aggregate_only,
+        )
+    else:
+        stage = "one-shot"
+        sql = build_sessioned_index(
+            "artist_similarity_listens",
+            "recording_length",
+            "artist_credit",
+            p,
+            apply_threshold=not args.aggregate_only,
+            apply_limit=not args.aggregate_only,
+        )
 
+    print(f"[lbd] stage          {stage}", flush=True)
     print(f"[lbd] algorithm      {p.algorithm}", flush=True)
     print(f"[lbd] pairing        {p.pairing}", flush=True)
     print(f"[lbd] redirects      {not args.no_redirects}", flush=True)
@@ -626,6 +697,7 @@ def main(argv: list[str] | None = None) -> int:
         "redirects_applied": not args.no_redirects,
         "params": asdict(p),
         "algorithm": p.algorithm,
+        "stage": stage,
         "aggregate_only": args.aggregate_only,
         "user_mod": args.user_mod,
         "user_rem": args.user_rem,
