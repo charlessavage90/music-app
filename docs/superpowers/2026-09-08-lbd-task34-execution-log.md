@@ -416,3 +416,53 @@ hash is safe by the same arithmetic run the other way: ~2 million distinct credi
 **477** on the first real file: an account logged 477 distinct recordings inside a single
 second — a bulk import or a bot. Widened to four bytes. Reading the code would not have
 produced that number, and the end-to-end test on one real file cost about a second.
+
+### `T3-D11` — stage 0 has no window functions at all, and why it took three attempts to get there
+
+**Three wrong models of the memory behaviour, each costing a full scan:**
+
+1. the `VARCHAR[]` column is the constraint — **wrong**, the narrowed pipeline still died;
+2. small window partitions are safe — **wrong**, stage 0's partitions are a *single listen*
+   and it died at the same 9.3 GiB;
+3. implicitly, that DuckDB streams window functions — **wrong**. It **materialises the entire
+   input** to a window operator regardless of partition size. That is the actual constraint,
+   and none of the three attempts was needed to discover it: it is a property of the engine,
+   not of this data.
+
+**The generalisable failure is not carelessness.** Every experiment here costs the same ~127 GB
+scan whatever the slice size, so measuring *feels* like the expensive option and reasoning
+feels like the cheap one. It is the other way round: one measurement would have cost less than
+three wrong guesses did. **When measurement is expensive, that is an argument for measuring
+sooner, not for thinking harder first.**
+
+**`T3-D11`: stage 0 now contains no window at all**, rather than smaller ones.
+
+- **The featured-artist flag is precomputed on the credit frame.** LB computes it per listen,
+  but the value depends only on which join phrases sit at positions ≤ this one *within that
+  credit* — so it is a function of `(artist_credit_id, position)` and nothing else, computable
+  once over 7.17M rows instead of billions. **One case is not identical and is stated in the
+  code rather than buried:** one user, two listens, same second, same `recording_mbid`,
+  *different* credits would have shared a partition in LB. Measurable from the intermediate.
+- **The msid ordinal moves to stage 1**, which is chunked by user bucket and therefore small.
+- **Both 36-character identifier columns become `UUID`** — which is what they already are, so
+  the cast is exact, and canonical-hex string order agrees with 128-bit numeric order so
+  sorting is unchanged. 16 bytes instead of 36.
+
+**Then a fourth, different failure: the partitioned write itself.** The windowless stage
+streamed correctly and had written **21 GB across all 64 buckets** when the harness killed it
+for system memory. A partitioned write holds one open parquet writer per bucket, each buffering
+a full row group — so the cost is `buckets x row_group_size x row width`, which at
+64 x 1,000,000 is gigabytes that **DuckDB's `memory_limit` does not account for.** Row groups
+cut to 20,000. Recorded because the number that mattered was not the memory limit at all.
+
+**And the size estimate moved.** Dropping the windows means carrying the raw msid rather than
+a one-byte ordinal, so the intermediate is now expected at **70–85 GB rather than ~50**. The
+owner approved staging on `C:` (578 GB free) and was told the number changed.
+
+### A fixture guard that earned its place
+
+Moving the featured-weight logic into the credit frame silently broke two mutants' patch
+targets — `T3-M1` and `T3-M2` could no longer find the text they mutate. **They did not fail;
+they would have reported nothing at all.** The mutant runner checks `if needle not in source`
+and fails loudly, which is the only reason this surfaced. A mutation check that cannot locate
+its target is not passing, it is blind, and it looks exactly like passing.

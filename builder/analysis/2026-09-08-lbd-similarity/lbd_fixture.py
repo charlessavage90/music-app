@@ -93,9 +93,12 @@ USER 3 -- the UNTRIMMED comparison, the 180 s default, a genuine skip, a same-se
             after_ft_jp is FALSE for A and, cumulatively, FALSE for B.
             BOTH are 1. This is the second assertion the pre-registration names.
     t=9300  D  r3 ABSENT -> COALESCE gives 180
-    t=9400  E  r1(120)  msid m12  |  t=9400  C  r4(120)  msid m13   <- same-second tie
+    t=9400  E  r1(120)  msid ...012  |  t=9400  C  r4(120)  msid ...013   <- same-second tie
     t=20000 A  r1(120)  |  t=20100 B  r1(120)
     order (t, msid, position): A(9000) B(9000) D(9300) E(9400) C(9400) A(20000) B(20100)
+    Fixture msids are real UUIDs (`aaaaaaaa-...-0000000000NN`) whose numeric suffix
+    preserves the m01..m24 ordering, because T3-D11 casts recording_msid to UUID and
+    the ordering between two listens in the same second is exactly what this tests.
         A(9000)   diff NULL                      skipped: LEAD=-240  -> TRUE  DROP
         B(9000)   diff 9000-9000-240   = -240    skipped: LEAD=60    -> F     KEEP
         D(9300)   diff 9300-9000-240   =   60    skipped: LEAD=-80   -> TRUE  DROP  <- a real
@@ -218,30 +221,30 @@ RECORDING_GID_REDIRECT_LENGTH = [(R6, 240000)]
 
 # (user_id, listened_at_epoch, recording_msid, recording_mbid, artist_credit_id, credit_mbids)
 LISTENS = [
-    (1, 1000, "m01", R1, 1, [A]),
-    (1, 1200, "m02", R1, 2, [B]),
-    (1, 1600, "m03", R1, 3, [C]),
-    (1, 1800, "m04", R1, 1, [A]),
-    (1, 2500, "m05", R1, 1, [A]),
-    (2, 5000, "m06", R2, 4, [A, B]),
-    (2, 5100, "m07", None, 3, [C]),  # unmapped: excluded by artist.py:34-35
-    (2, 5300, "m08", R1, 6, [D]),
-    (2, 5500, "m09", R1, 7, [E]),
-    (3, 9000, "m10", R2, 5, [A, B]),
-    (3, 9300, "m11", R3, 6, [D]),
-    (3, 9400, "m12", R1, 7, [E]),
-    (3, 9400, "m13", R4, 3, [C]),
-    (3, 20000, "m14", R1, 1, [A]),
-    (3, 20100, "m15", R1, 2, [B]),
-    (4, 30000, "m16", R5, 4, [A, B]),
-    (4, 30100, "m17", R1, 3, [C]),
-    (4, 30300, "m18", R1, 6, [D]),
-    (5, 40000, "m19", R6, 1, [A]),
-    (5, 40200, "m20", R1, 2, [B]),
-    (5, 40500, "m21", R1, 3, [C]),
-    (6, 50000, "m22", R5, 8, [F, G]),
-    (6, 50100, "m23", R1, 9, [H]),
-    (6, 50300, "m24", R1, 1, [A]),
+    (1, 1000, "aaaaaaaa-0000-0000-0000-000000000001", R1, 1, [A]),
+    (1, 1200, "aaaaaaaa-0000-0000-0000-000000000002", R1, 2, [B]),
+    (1, 1600, "aaaaaaaa-0000-0000-0000-000000000003", R1, 3, [C]),
+    (1, 1800, "aaaaaaaa-0000-0000-0000-000000000004", R1, 1, [A]),
+    (1, 2500, "aaaaaaaa-0000-0000-0000-000000000005", R1, 1, [A]),
+    (2, 5000, "aaaaaaaa-0000-0000-0000-000000000006", R2, 4, [A, B]),
+    (2, 5100, "aaaaaaaa-0000-0000-0000-000000000007", None, 3, [C]),  # unmapped: excluded by artist.py:34-35
+    (2, 5300, "aaaaaaaa-0000-0000-0000-000000000008", R1, 6, [D]),
+    (2, 5500, "aaaaaaaa-0000-0000-0000-000000000009", R1, 7, [E]),
+    (3, 9000, "aaaaaaaa-0000-0000-0000-000000000010", R2, 5, [A, B]),
+    (3, 9300, "aaaaaaaa-0000-0000-0000-000000000011", R3, 6, [D]),
+    (3, 9400, "aaaaaaaa-0000-0000-0000-000000000012", R1, 7, [E]),
+    (3, 9400, "aaaaaaaa-0000-0000-0000-000000000013", R4, 3, [C]),
+    (3, 20000, "aaaaaaaa-0000-0000-0000-000000000014", R1, 1, [A]),
+    (3, 20100, "aaaaaaaa-0000-0000-0000-000000000015", R1, 2, [B]),
+    (4, 30000, "aaaaaaaa-0000-0000-0000-000000000016", R5, 4, [A, B]),
+    (4, 30100, "aaaaaaaa-0000-0000-0000-000000000017", R1, 3, [C]),
+    (4, 30300, "aaaaaaaa-0000-0000-0000-000000000018", R1, 6, [D]),
+    (5, 40000, "aaaaaaaa-0000-0000-0000-000000000019", R6, 1, [A]),
+    (5, 40200, "aaaaaaaa-0000-0000-0000-000000000020", R1, 2, [B]),
+    (5, 40500, "aaaaaaaa-0000-0000-0000-000000000021", R1, 3, [C]),
+    (6, 50000, "aaaaaaaa-0000-0000-0000-000000000022", R5, 8, [F, G]),
+    (6, 50100, "aaaaaaaa-0000-0000-0000-000000000023", R1, 9, [H]),
+    (6, 50300, "aaaaaaaa-0000-0000-0000-000000000024", R1, 1, [A]),
 ]
 
 # ---------------------------------------------------------------------------------------
@@ -308,11 +311,12 @@ def sql_for(**kw) -> str:
 
 MUTANTS = {
     "T3-M1 trimmed join phrase (LBDR-F2b)": (
-        "ac.join_phrase IN (", "trim(ac.join_phrase) IN ("
+        "bool_or(join_phrase IN (", "bool_or(trim(join_phrase) IN ("
     ),
     "T3-M2 strictly-preceding frame (LBDR-F2a)": (
-        "ORDER BY ac.position)",
-        "ORDER BY ac.position ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING)",
+        "PARTITION BY artist_credit_id ORDER BY position)",
+        "PARTITION BY artist_credit_id ORDER BY position "
+        "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING)",
     ),
     "T3-M3 CAST instead of TRUNC (T3-D3)": (
         "TRUNC(SUM(part_score))::BIGINT", "CAST(SUM(part_score) AS BIGINT)"

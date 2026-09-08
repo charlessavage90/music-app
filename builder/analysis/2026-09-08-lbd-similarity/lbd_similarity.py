@@ -16,7 +16,7 @@ below are into that file. A review (`LBDR-F2`) established that the plan's prose
 a DIFFERENT computation from the SQL it quotes, so prose is not admissible evidence here.
 
 --------------------------------------------------------------------------------------
-THE TEN DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
+THE ELEVEN DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
 --------------------------------------------------------------------------------------
 
 T3-D1. `to_date` is pinned to the dump's END_TIMESTAMP, not `date.today()` (`artist.py:121`).
@@ -224,20 +224,49 @@ def _phrase_list_sql() -> str:
     return ", ".join("'" + p.replace("'", "''") + "'" for p in FEATURED_JOIN_PHRASES)
 
 
+def credit_ft_sql(artist_credit_table: str) -> str:
+    """`after_ft_jp` per `(artist_credit_id, position)`, over the CREDIT frame alone.
+
+    LB computes this with a window over the LISTENS (`artist.py:28,36`), partitioned by
+    `(user_id, listened_at, recording_mbid)` and ordered by `ac.position`. But a partition is
+    one listen, a listen is one `artist_credit_id`, and the value depends only on which join
+    phrases sit at positions <= this one WITHIN THAT CREDIT. So it is a function of
+    `(artist_credit_id, position)` and nothing else -- computable once over the 7.17M-row
+    credit frame instead of once per listen over billions.
+
+    THE ONE CASE WHERE THIS IS NOT IDENTICAL, stated rather than buried: if a single user
+    logged two listens in the SAME second with the SAME `recording_mbid` but DIFFERENT
+    `artist_credit_id`s, LB's partition would hold both credits' rows and the cumulative OR
+    would run across both. Here they stay separate. `--count-multicredit-seconds` measures an
+    upper bound on how often that can happen, from the materialised intermediate; it is
+    reported rather than assumed to be zero.
+    """
+    return f"""
+                SELECT artist_credit_id
+                     , position
+                     , bool_or(join_phrase IN ({_phrase_list_sql()})) OVER w AS after_ft_jp
+                  FROM {artist_credit_table}
+                WINDOW w AS (PARTITION BY artist_credit_id ORDER BY position)
+    """
+
+
 def listens_sql(
     listen_table: str,
     metadata_table: str,
     artist_credit_table: str,
 ) -> str:
-    """LB's `listens` CTE (`artist.py:20-36`), plus the two substitutions of `T3-D10`.
+    """LB's `listens` CTE (`artist.py:20-36`) with NO WINDOW FUNCTION -- it streams.
 
-    STAGE 0, and it is the one stage that can be materialised cheaply: its only window
-    partitions by `(user_id, listened_at, recording_mbid)` -- a SINGLE LISTEN -- so the
-    partitions are two or three rows and nothing has to be sorted at scale. Everything that
-    needs a big sort happens downstream of it.
+    STAGE 0. `T3-D11`: this stage contains no window at all, because DuckDB's window operator
+    MATERIALISES ITS ENTIRE INPUT regardless of how small the partitions are. Three separate
+    attempts died at 9.3 GiB on windows whose partitions were a single listen. Both windows
+    move out: the featured-artist flag is precomputed on the credit frame (`credit_ft_sql`),
+    and the msid ordinal moves into stage 1, which is chunked by user bucket and therefore
+    small.
 
-    It emits neither 36-character identifier column. Both are replaced exactly, not
-    approximately -- see `T3-D10`.
+    `recording_msid` and `recording_mbid` are carried as UUID, not VARCHAR: they ARE UUIDs,
+    the cast is exact and lossless, canonical-hex string order and 128-bit numeric order agree
+    so sorting is unchanged, and it costs 16 bytes instead of 36 characters.
     """
     return f"""
                 SELECT l.user_id
@@ -245,46 +274,24 @@ def listens_sql(
                      , epoch(l.listened_at)::BIGINT AS listened_at
                      -- T3-D3: TRUNC, not CAST -- DuckDB's cast rounds (`artist.py:23`).
                      , TRUNC(COALESCE(r.length / 1000, {DEFAULT_TRACK_LENGTH}))::BIGINT AS duration
-                     -- T3-D10: the ordinal of this listen's recording_msid WITHIN its own
-                     -- (user, second). The downstream total order is
-                     -- (listened_at, recording_msid, position) inside PARTITION BY user_id, so
-                     -- recording_msid only ever breaks ties among rows sharing a user AND a
-                     -- second -- exactly this group. A dense rank over it is order-preserving
-                     -- there, so the substitution is EXACT, and it costs four bytes instead
-                     -- of thirty-six.
-                     --
-                     -- UINTEGER, not UTINYINT: a one-byte ordinal overflowed on real data at
-                     -- 477. Some account logged 477 distinct recordings inside a SINGLE
-                     -- second -- a bulk import or a bot. Found by running stage 0 over one
-                     -- real parquet file; no amount of reading would have produced that
-                     -- number.
-                     , DENSE_RANK() OVER (PARTITION BY l.user_id, epoch(l.listened_at)
-                                          ORDER BY l.recording_msid)::UINTEGER AS msid_ord
+                     -- T3-D11: exact, and 16 bytes rather than 36 characters.
+                     , l.recording_msid::UUID AS msid
                      , ac.position::UTINYINT AS position
                      -- T3-D9: a BIGINT key replaces the VARCHAR[].
                      , hash(l.artist_credit_mbids) AS credit_key
                      , ac.artist_mbid
-                     -- `artist.py:43`, hoisted here because `after_ft_jp` is only computable
-                     -- inside this stage's window and takes just two values.
-                     , COALESCE(IF(
-                           bool_or(ac.join_phrase IN ({_phrase_list_sql()})) OVER w,
-                           {FEATURED_ARTIST_WEIGHT}, 1), 1)::FLOAT AS similarity
+                     -- `artist.py:43`, from the precomputed per-credit flag.
+                     , COALESCE(IF(ft.after_ft_jp, {FEATURED_ARTIST_WEIGHT}, 1), 1)::FLOAT AS similarity
                   FROM {listen_table} l
              LEFT JOIN {metadata_table} r
                  USING (recording_mbid)
                   JOIN {artist_credit_table} ac
                  USING (artist_credit_id)
+                  JOIN ({credit_ft_sql(artist_credit_table)}) ft
+                    ON ft.artist_credit_id = ac.artist_credit_id
+                   AND ft.position = ac.position
                  WHERE l.recording_mbid IS NOT NULL
                    AND l.recording_mbid != ''
-                -- T3-D4: bool_or for Spark's any(). NO EXPLICIT FRAME, exactly as
-                -- `artist.py:28,36` -- the default RANGE UNBOUNDED PRECEDING TO CURRENT ROW is
-                -- what makes after_ft_jp true for the row's OWN join phrase as well as its
-                -- predecessors'. In MusicBrainz the join phrase is the text FOLLOWING that
-                -- artist, so in "A feat. B" it is A -- the MAIN artist -- that carries 'feat.'
-                -- and is weighted 0.25, and B is weighted too through the cumulative frame.
-                -- Both. The plan's prose said otherwise (`LBDR-F2`).
-                WINDOW w AS (PARTITION BY l.user_id, epoch(l.listened_at), l.recording_mbid
-                             ORDER BY ac.position)
     """
 
 
@@ -297,7 +304,17 @@ def sessions_from_listens_sql(listens_source: str, p: Params) -> str:
     re-reading the intermediate is no longer a 127 GB scan of a platter.
     """
     return f"""
-            WITH listens AS ({listens_source}
+            WITH raw_listens AS ({listens_source}
+            ), listens AS (
+                SELECT *
+                     -- T3-D10, moved here from stage 0: the ordinal of this listen's msid
+                     -- within its own (user, second). The downstream order is
+                     -- (listened_at, msid, position) inside PARTITION BY user_id, so msid can
+                     -- only break ties among rows sharing a user AND a second -- exactly this
+                     -- group. A dense rank is order-preserving there, so this is EXACT.
+                     , DENSE_RANK() OVER (PARTITION BY user_id, listened_at ORDER BY msid)
+                           AS msid_ord
+                  FROM raw_listens
             ), ordered AS (
                 SELECT user_id
                      , listened_at
@@ -651,6 +668,12 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--threads", type=int, default=None)
     ap.add_argument("--temp-dir", type=Path, default=Path(r"D:/unsung-large-data/duckdb-temp"))
     ap.add_argument(
+        "--row-group-size",
+        type=int,
+        default=50_000,
+        help="rows per parquet row group; small for partitioned writes (buckets x this x width)",
+    )
+    ap.add_argument(
         "--buckets",
         type=int,
         default=64,
@@ -782,8 +805,13 @@ def main(argv: list[str] | None = None) -> int:
         args.out.mkdir(parents=True, exist_ok=True)
         con.execute(
             f"COPY ({sql}) TO '{args.out.as_posix()}' "
+            # ROW_GROUP_SIZE is deliberately SMALL here. A partitioned write holds one open
+            # writer per bucket, and each buffers a whole row group before flushing -- so the
+            # cost is (buckets x row_group x row width), which at 64 x 1,000,000 is gigabytes
+            # of buffer that DuckDB's memory_limit does not account for. That is what got the
+            # first attempt killed after it had correctly streamed 21 GB.
             f"(FORMAT PARQUET, COMPRESSION ZSTD, PARTITION_BY (ubucket), "
-            f"OVERWRITE_OR_IGNORE, ROW_GROUP_SIZE 1000000)"
+            f"OVERWRITE_OR_IGNORE, ROW_GROUP_SIZE {args.row_group_size})"
         )
     else:
         con.execute(
@@ -817,6 +845,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.emit_listens
         else args.out.stat().st_size,
         "buckets": args.buckets if args.emit_listens else None,
+        "row_group_size": args.row_group_size,
         "rows": rows,
         "wall_clock_s": round(wall, 1),
         "peak_rss_gb": round(sampler.peak_rss_gb, 2),
