@@ -66,13 +66,14 @@ end of Task 4**, not Task 7: the pair-table read answers the track's central que
 graph built, so the emitter and the builds are conditional on it. Entry point:
 [`2026-09-07-HANDOFF-lbd-preregistration.md`](2026-09-07-HANDOFF-lbd-preregistration.md).
 
-**`DFA-`** — branch `dfa-degree-floor-at-admission`, **PR #110 (draft)**. A structural probe of
+**`DFA-`** — branch `dfa-degree-floor-at-admission`, **PR #110**. A structural probe of
 one cap-rule candidate, **descriptive only**: no path built, no routing criterion evaluated,
 nothing adopted and no rule change proposed. It also carries **`LBD-AM1`** — an amendment to
 the `LBD-` pre-registration, **committed before any arm ran** — and **two forward corrections
-to the record** (see below). ⚠ **`LBD-AM1` lives on that branch because it pins a hash of a
-file that exists only there, so a `LBD-` Task 3 session will not see it until PR #110
-merges.** Entry point:
+to the record** (see below). ⚠ **`LBD-AM1` pins a sha256 of a file that landed with this
+work, so it is usable only in a tree that has it** — `git log` answers whether yours does.
+*(This clause named merge state until 2026-09-08 and was false within the hour, which is the
+exact failure this file's preamble warns about. Corrected by the session that wrote it.)* Entry point:
 [`2026-09-07-dfa-degree-floor-execution-log.md`](2026-09-07-dfa-degree-floor-execution-log.md).
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
