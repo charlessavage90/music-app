@@ -82,11 +82,19 @@ file it did not write. Entry point:
 **`LBD-`** — branch `lb-dump-exploration`, **PR #109**; a worktree sits at
 `C:\Users\charl\worktrees\music-app-lbd` on `lbd-task3`. The pre-registration
 [`specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md`](specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md)
-**governs** the track's criteria, arms, gates and reads; **neither the design nor the plan is
-edited — do not "fix" either in place.** **Next task is Task 3.** The **owner stop is at the
-end of Task 4**, not Task 7: the pair-table read answers the track's central question with no
-graph built, so the emitter and the builds are conditional on it. Entry point:
-[`2026-09-07-HANDOFF-lbd-preregistration.md`](2026-09-07-HANDOFF-lbd-preregistration.md).
+**governs** the track's criteria, arms, gates and reads — now including **`LBD-AM1` and
+`LBD-AM2`** in its §12; **neither the design nor the plan is edited — do not "fix" either in
+place.** The **owner stop is at the end of Task 4**, not Task 7: the pair-table read answers
+the track's central question with no graph built, so the emitter and the builds are
+conditional on it.
+
+**Task 3 is COMPLETE — the reimplementation is written and verified. Task 4 is MID-FLIGHT**
+and was retired before its seam on 2026-09-08. **No arm has run on real data, `LBD-C1` is
+unmeasured, and the owner stop has NOT been reached.** A second branch, `lbd-task3`, carries
+it. ⚠ **A 53.9 GB intermediate sits on `C:` and must not be rebuilt** — 44 minutes from a
+spinning disk — and one unsolved problem stands between it and the pair table. Entry point,
+which carries the checksum, the recommendation and the full enumeration:
+[`2026-09-08-HANDOFF-lbd-task4-midflight.md`](2026-09-08-HANDOFF-lbd-task4-midflight.md).
 
 **`DFA-`** — branch `dfa-degree-floor-at-admission`, **PR #110**. A structural probe of
 one cap-rule candidate, **descriptive only**: no path built, no routing criterion evaluated,
@@ -134,11 +142,16 @@ reader will find no contradiction to resolve and may mistake the notes for noise
   B's conclusions**, which rest on its other criteria and where `C3` was a flag rather than a
   gate; and it is **not evidence about any cap rule**, which stays parked and his.
 
-**One `LBD-` item was discharged 2026-09-08 and one was not.** `docs/README.md`'s row for the
-pre-registration no longer claims the degree ceiling's effect on the added set is unmeasured —
-`DCF-` measured it. **Still owed, and it is Task 3's:** `LBD-X1` in the pre-registration itself
-still says so, deliberately unedited, and the document's new **§12** exists to hold that
-amendment.
+**~~One `LBD-` item was discharged 2026-09-08 and one was not.~~ ✅ BOTH are now discharged.**
+`docs/README.md`'s row was corrected first; **`LBD-X1` itself was amended 2026-09-08 by
+`LBD-AM2`**, which records that its closing sentence — *the ceiling's effect on the added set
+is genuinely unmeasured* — was true when written and is not true now. Added **beside** the
+text it qualifies, per §12's own rule, never as a silent edit.
+
+⚠ **`LBD-AM2` adds no gate and changes no criterion.** It does **not** weaken `LBD-X1`'s bar —
+a graph-level `LBD-C2` null is still barred from supporting `LBD-R1`, because that bar rests
+on the ceiling *absorbing supply*, not on its effect being unmeasured — and it does **not**
+license a ceiling change. **The cap-rule decision stays parked and the owner's.**
 
 **One `CXA-` leftover remains live.** The ALG-B archive tree gained tens of thousands of
 response files after the served map was built, so **an unpinned rebuild reads the extended
