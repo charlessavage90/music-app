@@ -41,7 +41,7 @@ for the remaining buckets, then `--combine 'C:/unsung-fast/lbd-partials/*.parque
 
 | | |
 |---|---|
-| **Stage 0 intermediate** | `C:\unsung-fast\lbd-listens.parquet`, **53.9 GB, 2,647,691,119 rows**, manifest beside it. 44.3 min to rebuild from the spinning disk. **This is the expensive artifact.** |
+| **Stage 0 intermediate** | `C:\unsung-fast\lbd-listens.parquet`, **53.9 GB, 2,647,691,119 rows**, 44.3 min to rebuild from the spinning disk. **This is the expensive artifact.** sha256 `6d77a681…07707c08`; built by script sha256 `d0ae2e05…f2c1b798` from the dump pinned at `2026-09-01 00:00:02.462107+00:00`, LB source sha256 `7a8516be…b90de3`. Full manifest beside it — **it is gitignored and a checksum is the only identity it will ever have.** |
 | Partials done | `C:\unsung-fast\lbd-partials\p0..p3.parquet` — buckets 0–3 only, algebraic form |
 | Testbed | `D:\unsung-large-data\lbd-subset100\` — 100 **hardlinked** dump files, 16 GB addressable, **no extra disk**. A full stage-0 run over it takes ~4 min instead of ~25. **Use it before any full run.** |
 | Redirect frame | `D:\unsung-large-data\lbd-inputs\recording_gid_redirect_length.parquet` |
