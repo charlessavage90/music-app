@@ -367,12 +367,29 @@ def fixed_reference_mass(
 ) -> dict:
     """`top1pct_degree_mass_frac` scored against a FIXED node set.
 
-    Track B's companion column scored every cell against one artifact's top
-    nodes rather than each cell's own. The two scorings answer different
-    questions and can rank arms differently; this computes the fixed one so
-    both can be reported. The reference set here is the CONTROL arm's own top
-    1% by degree — the isolating baseline, which is the analogue of Track B's
-    single-artifact reference.
+    ⚠ CORRECTED 2026-09-07, after the run, and the correction matters. This
+    docstring said "Track B's companion column scored every cell against one
+    artifact's top nodes rather than each cell's own". THAT IS WRONG about the
+    repository. Track B's companion column is
+    `top_degree_node_set_overlap_with_production` — a SET OVERLAP FRACTION,
+    |own_top & reference_top| / |reference_top| (`cb_metrics.py:171-174`,
+    verified in source) — not a mass scored against a fixed set. Its reference
+    was the production cell, not a sweep's own control. The nearest fixed-set
+    mass in Track B is `hub_prod` (`cb_paths.py:193-196`) and that is a PATH
+    metric, a different quantity again.
+
+    So THIS IS A NEW QUANTITY, not a reproduction of Track B's, and it must not
+    be compared to `cb_scores.json`. It is retained because the two scorings do
+    diverge and both are reported — but the derivation in README section 8
+    showed it is structurally blind to concentration forming on nodes OUTSIDE
+    the reference, which is exactly what Track B's overlap column catches.
+    `dfa_overlap_and_ambiguity.py` computes that overlap statistic's shape
+    against this probe's control.
+
+    The reference set is the CONTROL arm's own top 1% by degree — the isolating
+    baseline. Because the control's top-1% boundary is tie-dominated, WHICH
+    nodes those are is arbitrary among equals; the exact width of that
+    ambiguity is measured in `dfa_overlap_and_ambiguity.py`, not estimated.
     """
     index = {m: i for i, m in enumerate(mbids)}
     present = [index[m] for m in reference_set if m in index]

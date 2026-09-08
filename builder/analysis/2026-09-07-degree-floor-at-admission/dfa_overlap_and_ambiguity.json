@@ -1,0 +1,157 @@
+{
+  "arms": [
+    {
+      "edges": 809082,
+      "fixed_reference_mass": {
+        "exact_ambiguity_width": 0.0,
+        "max_over_admissible_reference_sets": 0.027408,
+        "measured": 0.027408,
+        "min_over_admissible_reference_sets": 0.027408,
+        "note": "exact, not a bound \u2014 the admissible sets are exactly the subsets of the control's tie pool, so the extremes are its smallest and largest members in this arm"
+      },
+      "label": "control (shipped)",
+      "max_degree": 50,
+      "mean_degree": 18.2462,
+      "nodes": 88685,
+      "nodes_tied_at_the_top1pct_boundary_degree": 9526,
+      "saturation_identity_ceiling_over_100_mean": 0.0274,
+      "ties_over_cut": 10.74,
+      "top1pct_cut_size": 887,
+      "top1pct_degree_mass_frac_own": 0.02741,
+      "top_degree_node_set_overlap_with_the_control": {
+        "note": "Track B's statistic SHAPE (cb_metrics.py:171-174), referenced to this probe's control rather than to a production cell. Not comparable to cb_scores.json",
+        "top1pct": 1.0,
+        "top_decile": 1.0
+      }
+    },
+    {
+      "edges": 810439,
+      "fixed_reference_mass": {
+        "exact_ambiguity_width": 5.1e-05,
+        "max_over_admissible_reference_sets": 0.027362,
+        "measured": 0.027356,
+        "min_over_admissible_reference_sets": 0.027311,
+        "note": "exact, not a bound \u2014 the admissible sets are exactly the subsets of the control's tie pool, so the extremes are its smallest and largest members in this arm"
+      },
+      "label": "F=1 live/shipped",
+      "max_degree": 50,
+      "mean_degree": 18.0744,
+      "nodes": 89678,
+      "nodes_tied_at_the_top1pct_boundary_degree": 9480,
+      "saturation_identity_ceiling_over_100_mean": 0.02766,
+      "ties_over_cut": 10.569,
+      "top1pct_cut_size": 897,
+      "top1pct_degree_mass_frac_own": 0.02767,
+      "top_degree_node_set_overlap_with_the_control": {
+        "note": "Track B's statistic SHAPE (cb_metrics.py:171-174), referenced to this probe's control rather than to a production cell. Not comparable to cb_scores.json",
+        "top1pct": 0.99098,
+        "top_decile": 0.99188
+      }
+    },
+    {
+      "edges": 812425,
+      "fixed_reference_mass": {
+        "exact_ambiguity_width": 0.000117,
+        "max_over_admissible_reference_sets": 0.027295,
+        "measured": 0.027286,
+        "min_over_admissible_reference_sets": 0.027178,
+        "note": "exact, not a bound \u2014 the admissible sets are exactly the subsets of the control's tie pool, so the extremes are its smallest and largest members in this arm"
+      },
+      "label": "F=2 live/shipped",
+      "max_degree": 50,
+      "mean_degree": 18.1175,
+      "nodes": 89684,
+      "nodes_tied_at_the_top1pct_boundary_degree": 9422,
+      "saturation_identity_ceiling_over_100_mean": 0.0276,
+      "ties_over_cut": 10.504,
+      "top1pct_cut_size": 897,
+      "top1pct_degree_mass_frac_own": 0.0276,
+      "top_degree_node_set_overlap_with_the_control": {
+        "note": "Track B's statistic SHAPE (cb_metrics.py:171-174), referenced to this probe's control rather than to a production cell. Not comparable to cb_scores.json",
+        "top1pct": 0.98873,
+        "top_decile": 0.98275
+      }
+    },
+    {
+      "edges": 815073,
+      "fixed_reference_mass": {
+        "exact_ambiguity_width": 0.000245,
+        "max_over_admissible_reference_sets": 0.027227,
+        "measured": 0.027191,
+        "min_over_admissible_reference_sets": 0.026982,
+        "note": "exact, not a bound \u2014 the admissible sets are exactly the subsets of the control's tie pool, so the extremes are its smallest and largest members in this arm"
+      },
+      "label": "F=3 live/shipped",
+      "max_degree": 84,
+      "mean_degree": 18.1766,
+      "nodes": 89684,
+      "nodes_tied_at_the_top1pct_boundary_degree": 9332,
+      "saturation_identity_ceiling_over_100_mean": 0.02751,
+      "ties_over_cut": 10.404,
+      "top1pct_cut_size": 897,
+      "top1pct_degree_mass_frac_own": 0.02754,
+      "top_degree_node_set_overlap_with_the_control": {
+        "note": "Track B's statistic SHAPE (cb_metrics.py:171-174), referenced to this probe's control rather than to a production cell. Not comparable to cb_scores.json",
+        "top1pct": 0.98083,
+        "top_decile": 0.9691
+      }
+    },
+    {
+      "edges": 810727,
+      "fixed_reference_mass": {
+        "exact_ambiguity_width": 3.9e-05,
+        "max_over_admissible_reference_sets": 0.027352,
+        "measured": 0.027348,
+        "min_over_admissible_reference_sets": 0.027313,
+        "note": "exact, not a bound \u2014 the admissible sets are exactly the subsets of the control's tie pool, so the extremes are its smallest and largest members in this arm"
+      },
+      "label": "F=2 fixed pre-trim",
+      "max_degree": 50,
+      "mean_degree": 18.1385,
+      "nodes": 89393,
+      "nodes_tied_at_the_top1pct_boundary_degree": 9519,
+      "saturation_identity_ceiling_over_100_mean": 0.02757,
+      "ties_over_cut": 10.648,
+      "top1pct_cut_size": 894,
+      "top1pct_degree_mass_frac_own": 0.02757,
+      "top_degree_node_set_overlap_with_the_control": {
+        "note": "Track B's statistic SHAPE (cb_metrics.py:171-174), referenced to this probe's control rather than to a production cell. Not comparable to cb_scores.json",
+        "top1pct": 0.99436,
+        "top_decile": 0.99335
+      }
+    },
+    {
+      "edges": 513485,
+      "fixed_reference_mass": {
+        "exact_ambiguity_width": 0.035305,
+        "max_over_admissible_reference_sets": 0.045994,
+        "measured": 0.027588,
+        "min_over_admissible_reference_sets": 0.010689,
+        "note": "exact, not a bound \u2014 the admissible sets are exactly the subsets of the control's tie pool, so the extremes are its smallest and largest members in this arm"
+      },
+      "label": "F=2 ascending order",
+      "max_degree": 3055,
+      "mean_degree": 11.4534,
+      "nodes": 89665,
+      "nodes_tied_at_the_top1pct_boundary_degree": 219,
+      "saturation_identity_ceiling_over_100_mean": 0.04366,
+      "ties_over_cut": 0.244,
+      "top1pct_cut_size": 897,
+      "top1pct_degree_mass_frac_own": 0.05214,
+      "top_degree_node_set_overlap_with_the_control": {
+        "note": "Track B's statistic SHAPE (cb_metrics.py:171-174), referenced to this probe's control rather than to a production cell. Not comparable to cb_scores.json",
+        "top1pct": 0.05524,
+        "top_decile": 0.53033
+      }
+    }
+  ],
+  "commissioned_by": "the ml-graph-analyst derivation, README section 8",
+  "probe": "DFA- \u2014 exact fixed-reference ambiguity, and Track B's actual companion statistic (set overlap), on the arms already built",
+  "reference": "the CONTROL arm's own top 1% by degree. Track B's reference was its production cell, so this is that statistic's SHAPE on this probe's baseline and is NOT comparable to cb_scores.json",
+  "reference_set": {
+    "boundary_degree": 50,
+    "cut_size": 887,
+    "every_reference_node_is_at_the_boundary_degree": true,
+    "nodes_at_the_boundary_degree": 9526
+  }
+}

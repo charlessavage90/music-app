@@ -188,6 +188,14 @@ the largest component. No share in the tables above is affected.
 taking total edges to 2,050,901, max degree to 14,180 and own-scored concentration to 0.17617
 (`DCF-` §4).
 
+> ⚠ **Every concentration figure in the three sentences above must be read through §8, and none
+> of them is evidence of a concentration cost.** On these arms that measure is algebraically
+> `ceiling ÷ (100 × mean degree)` and cannot see edge arrangement at all; the differences are
+> node counts. The statistic that *can* detect a moved top set is §8.4's, and it says the
+> top-degree set is 98–99 % the same artists as the control's. **The defensible cost-side
+> statement is "no available measure detects a concentration cost, and one of them provably
+> cannot" — not "there is none."**
+
 **`F` = 2 is not an empirical knee — it is definitional, and that is the weakest link.** A
 floor at `F` guarantees no artist is *cut* to `F` or below. The dead-end criterion is degree
 ≤ 2. So `F` = 2 is exactly the value whose guarantee coincides with the criterion, and it
@@ -301,3 +309,211 @@ connections and are exempt, so they cannot reach the ceiling: refusals rise from
 > under the shipped order and fails badly under another. A rule whose degree bound depends on an
 > incidental convention is a different kind of object from one whose bound is structural, and
 > **any adoption discussion owes that difference an answer.** Nothing here proposes one.
+
+## 8. Commissioned derivation — is the cost side's measure comparable across these arms?
+
+**This was commissioned from `ml-graph-analyst` after the arms were built and before any
+comparison in §4 was written**, precisely so the cost side could not be framed first and
+checked afterwards. It was asked for arithmetic, explicitly not for a recommendation about
+which arm to prefer, which is outside its remit and is the owner's parked decision.
+
+> **The question, verbatim as it was put:**
+>
+> "Does the concentration measure used as the cost side here — the share of edge endpoints held
+> by the top 1% of nodes by degree — behave comparably across arms whose degree distributions
+> differ in shape, given that the shipped-ceiling control is tie-dominated at its top-1%
+> boundary while the raised and floored arms are not? Specifically: does scoring every arm
+> against a FIXED reference set of top-degree nodes taken from one artifact, as Track B's
+> companion column did, change the ranking of the arms compared with scoring each against its
+> own set, and if so by how much and in which direction?"
+
+**The question's premise was wrong and I supplied the correction with the dispatch.** It
+assumes the floored arms are not tie-dominated. They are, to the same degree as the control:
+the tie pool is 10.4 to 10.7 times the admitted cut in every shipped-ceiling arm. The
+derivation was asked to work from the measured facts and to say whether the premise as put
+would have led somewhere different.
+
+### 8.1 The answer, and it is larger than the question asked
+
+**On every shipped-ceiling arm here, this measure is not a concentration measure at all.**
+Where at least 1 % of nodes sit at the ceiling `C` — true of six of the seven arms by a factor
+of about ten — every node in the top 1 % by degree has degree exactly `C`, so the statistic
+reduces algebraically to
+
+```
+top1pct_degree_mass_frac  =  round(N/100) · C / 2E  =  C / (100 · mean_degree)
+```
+
+The derivation checked this against the measured values on all six saturated arms and they
+agree to about one part in a thousand. **Two graphs with the same node count, edge count and
+ceiling score identically however differently their edges are arranged.** So a difference
+between two saturated arms is a difference in node count and edge count wearing a
+concentration measure's name.
+
+**That reaches beyond this probe.** The derivation notes the same identity holds on `DCF-`'s
+ceiling 50, 100 and 200 arms, so the rise across those three is the ceiling rising against mean
+degree rather than evidence that lifting the ceiling concentrated the graph onto hubs. Its
+uncapped arm is the only one of the four where that figure measures concentration — and
+therefore the only one not on the same footing as the other three. **I have not edited that
+probe's README and will not: its figures are its own to annotate, and this is reported here as
+a pointer, not a correction made on its behalf.**
+
+### 8.2 Does the fixed-reference scoring change the ranking? Yes, and both directions are forced
+
+The sign flip in §3's two columns is real and **both signs are theorems rather than
+observations**:
+
+- **Own-set reads every floored arm as more concentrated.** The floored arms pull about a
+  thousand extra artists into the largest component, so the 1 % cut rises from 887 to 897, a
+  1.13 % numerator increase, while edges rise only 0.17 % to 0.74 %. The numerator must beat
+  the denominator. Equivalently, mean degree falls because the newly admitted artists are
+  low-degree, and the measure is inversely proportional to mean degree.
+- **Fixed-reference reads every floored arm as less concentrated.** All 887 reference nodes had
+  degree 50 in the control, and no node exceeds 50 in `F` = 1, `F` = 2 or the fixed-pre-trim
+  arm, so the numerator is capped at 887 × 50 while the denominator grows. `F` = 3 breaches the
+  ceiling by exactly two nodes and its bound still sits strictly below the control's.
+
+The entire gap between the two columns on these arms is the cut-size ratio 897/887, predicted
+at 1.01127 against 1.01133 and 1.01136 measured. **Neither column is reporting anything about
+hubs.** In plain terms: the two scorings disagree about the floored arms because one counts how
+many artists are in the graph and the other does not, and neither is looking at whether the
+graph routes through a small set of well-connected artists.
+
+### 8.3 Is a difference of that size meaningful? No, and not for the reason the question assumed
+
+**The own-set figure is exactly invariant under tie-breaks** — every boundary node has the same
+degree, so which of the tied nodes are admitted cannot change the sum. Its ambiguity width is
+zero. **Tie-domination is therefore not what makes the own-set differences uninformative; the
+saturation identity is.** For scale, the cut-size quantisation step is 3.09 × 10⁻⁵ and the
+measured own-set differences are four to eight such steps, all of it node count.
+
+**The fixed-reference figure does carry a genuine ambiguity**, because it inherits the
+control's arbitrary choice of 887 nodes from among equals.
+Because that choice is arbitrary among equals, the derivation bounded the resulting ambiguity
+distributionally and flagged the assumption behind it as **the one place it extrapolated**.
+That bound is now unnecessary: [`dfa_overlap_and_ambiguity.py`](dfa_overlap_and_ambiguity.py)
+records every tie-pool node's degree in every arm, so the extremes over admissible reference
+sets are **exact** — the 887 smallest and the 887 largest.
+
+| arm | fixed-reference, measured | exact range over admissible reference sets | **exact width** | difference from control | **inside its own ambiguity?** |
+|---|---:|---:|---:|---:|:--|
+| control | 0.027408 | [0.027408, 0.027408] | **0.000000** | — | — |
+| `F` = 1 | 0.027356 | [0.027311, 0.027362] | 0.000051 | 0.000052 | **essentially at it** |
+| `F` = 2 | 0.027286 | [0.027178, 0.027295] | 0.000117 | 0.000122 | just outside |
+| `F` = 3 | 0.027191 | [0.026982, 0.027227] | 0.000245 | 0.000217 | **yes — inside** |
+| `F` = 2 fixed pre-trim | 0.027348 | [0.027313, 0.027352] | 0.000039 | 0.000060 | just outside |
+| `F` = 2 ascending | 0.027588 | **[0.010689, 0.045994]** | **0.035305** | 0.000180 | **yes — by a factor of 196** |
+
+The control's width is zero, as it must be: every tie-pool node has the same degree there, so
+which 887 are chosen cannot matter. **The exact widths come out slightly narrower than the
+derivation's distributional bound and change none of its conclusions.** Two of the five
+differences sit inside or at their own ambiguity, and the ascending arm's fixed-reference
+reading is meaningless — the number moves by 0.00018 inside a window 196 times that wide.
+
+### 8.4 The statistic that does work, and what it says
+
+Track B's companion column is **not** a mass against a fixed set. It is
+`top_degree_node_set_overlap_with_production`, a **set overlap fraction**
+(`cb_metrics.py:171-174`, verified in source). My `fixed_reference_mass` is therefore a **new
+quantity and not a reproduction of Track B's**; its docstring said otherwise and is corrected.
+The distinction is not pedantic — the derivation predicted the overlap column would catch what
+the mass column misses, because it responds when the top set **moves** rather than when it
+grows. Computed here against this probe's control rather than a production cell, so it is
+**that statistic's shape on this baseline and is not comparable to `cb_scores.json`**:
+
+| arm | **top-1 % set overlap with the control** | top-decile overlap | own-set mass | saturation identity `50/(100·mean)` | ties ÷ cut |
+|---|---:|---:|---:|---:|---:|
+| control | 1.00000 | 1.00000 | 0.02741 | 0.02740 | 10.74 |
+| `F` = 1 | **0.99098** | 0.99188 | 0.02767 | 0.02766 | 10.57 |
+| `F` = 2 | **0.98873** | 0.98275 | 0.02760 | 0.02760 | 10.50 |
+| `F` = 3 | **0.98083** | 0.96910 | 0.02754 | 0.02751 | 10.40 |
+| `F` = 2 fixed pre-trim | 0.99436 | 0.99335 | 0.02757 | 0.02757 | 10.65 |
+| `F` = 2 ascending | **0.05524** | 0.53033 | 0.05214 | 0.04366 | **0.24** |
+
+**Read across the last two columns first: the saturation identity holds to the fifth decimal on
+every arm whose tie ratio exceeds 1, and breaks on the one arm where it does not.** That is the
+derivation's central claim, checked here rather than taken on trust.
+
+**Then the answer the cost side actually needed.** Under the floored arms at the shipped
+ceiling, **98 to 99 % of the top-degree set is the same artists as the control's**. The floor
+does not relocate the well-connected artists; it adds a small number of edges around the
+existing structure. Under the alternative node order, **94.5 % of the top-degree set is
+different** — the overlap collapses to 0.055 while the fixed-reference mass reported that same
+arm as 0.7 % above the control. **The mass column called that arm unchanged; the overlap column
+calls it a different graph, and the overlap column is right** — its max degree is 3,055.
+
+> **So the cost side of §3 and §4 should be read through this section, not on its own.** For
+> the shipped-ceiling arms the honest statement is: **no measure available here detects a
+> concentration cost, and one of them is provably incapable of detecting one** — while the
+> statistic that can detect a moved top set says it did not move. That is weaker than "the
+> floor costs nothing in concentration" and it is what the evidence supports.
+
+---
+
+# WHAT IS NOT ESTABLISHED HERE
+
+- **No routing, anywhere.** No path was built, no `CRS-C4` hub transit was computed, and no
+  criterion of any pre-registration was evaluated. **A candidate-supply gain is not a
+  delivered-connection gain, and neither is a journey the router would choose.** §6 says what
+  each floor *offers*; it says nothing about what the router would take, and the router is
+  known to decline structure of exactly this kind at production weights (`CRS-C5`/`R2`, cited).
+- **Track B's `C4` result stands against any looser bound until re-measured.** Nothing here
+  touches it, weakens it or is evidence about it. That matters more for `F` = 3 and for the
+  ascending-order arm than for `F` = 1 or `F` = 2, since those two leave the degree bound
+  intact — but "leaves the bound intact" is a statement about max degree, **not** a statement
+  about hub transit, which was not measured.
+- **"Hub" means TOP DECILE BY DEGREE within the arm's own built graph**, never famous and never
+  popular. §6 licenses no fame claim. The boundary is tie-dominated in every shipped-ceiling
+  arm (boundary degree 50, ~9,400 nodes tied, ~890 admitted), so *which* artists are in that
+  set is arbitrary among equals. **The own-set mass is nevertheless exactly invariant to that
+  choice** (§8.3) — the arbitrariness reaches the fixed-reference column and §6's membership,
+  not the mass.
+- **NO CONCENTRATION COST IS ESTABLISHED, AND NONE IS RULED OUT** (§8). On every
+  shipped-ceiling arm `top1pct_degree_mass_frac` reduces to `ceiling ÷ (100 × mean degree)`
+  and is structurally incapable of seeing how edges are arranged; the fixed-reference column is
+  blind to concentration forming outside its reference set, and two of its five differences sit
+  inside their own exact ambiguity. What *is* established is narrower: the **identity** of the
+  top-degree set is 98–99 % unchanged under the floored arms. An artist can gain endpoints
+  without the set moving, and nothing here would detect that.
+- **`F` = 2's perfect score on the dead-end criterion is partly definitional** (§4). It is the
+  floor value whose guarantee coincides with the criterion's threshold. Read as "the floor
+  achieves the criterion", it is close to a tautology; the non-trivial findings are the
+  *identity* of the rescued set (§5), the *cost* of achieving it (§3), and the fact that
+  `F` = 3 buys nothing further.
+- **Nothing here says three connections is enough.** §5 measures that every rescued artist
+  lands on exactly three. Whether an interior card with three connections is a *good* card is a
+  question about journeys and about the owner's taste, and neither is measured anywhere in this
+  probe.
+- **The two order conventions are not neutral** (§7), and the ascending-order arm shows the
+  floored rule's degree bound is not a guarantee. **No claim here holds under a different node
+  processing order** except the added set's dead-end share and the identity of the rescued set,
+  which are the two quantities measured to be robust to it.
+- **Only the `CXA`-lineage bridge population was built.** `DCF-`'s larger-population primary
+  arms were not reproduced, so no figure here is comparable to them — only to that probe's
+  §4 bridge arms.
+- **The drop lists under-filter in the same way `DCF-` records**, and for the same reason:
+  `drop_no_release_tail` and `drop_featured_credit` are keyed by algorithm rather than
+  population. Held identical across every arm, so the comparison is unaffected; the absolute
+  levels carry the caveat.
+- **The variant cap is a copy and copies drift** (§1). The `F` = 0 identity arm detects drift,
+  but only when the probe is re-run. Nothing detects it in between.
+- **No blind listen, and no evidence about how anything sounds.** Every figure here is a
+  property of files.
+- **The Snyk scan did not run on these scripts.** Credentials are expired, and the owner's
+  ruling of 2026-09-07 accepts that deferral for `builder/analysis/` code on the grounds that
+  none of it is live, with the revisit condition being promotion into shipped code — which
+  nothing here proposes. Reviewed by hand instead and reported as such, not as clean: read-only
+  analysis scripts, no network calls, no `eval`, no subprocess use, and no externally-sourced
+  value reaching a query or a path.
+
+# WHAT THIS DECIDES
+
+**Nothing.** It is measurement, and one arm of it.
+
+Whether the cap rule should change at all is the **owner's parked decision** (design §9). It
+owes a **blind listen** (`REQ-38`) before any adoption whatever these numbers say. Track B's
+`C4` flag travels with any candidate that loosens the bound, and `F` = 3 and the ascending-order
+arm loosen it.
+
+**The probe was asked for one arm and ran one arm.** It proposes no floor value, recommends no
+adoption, and changes no default.
