@@ -267,13 +267,48 @@ EXPECTED = {
 }
 
 
-def build_db(con: duckdb.DuckDBPyConnection, *, redirects: bool) -> None:
-    con.execute("CREATE TABLE artist_credit(artist_credit_id BIGINT, artist_mbid VARCHAR, position BIGINT, join_phrase VARCHAR)")
-    con.executemany("INSERT INTO artist_credit VALUES (?,?,?,?)", ARTIST_CREDIT)
+def build_db(
+    con: duckdb.DuckDBPyConnection, *, redirects: bool, frame_patch=None
+) -> None:
+    """Build the same NARROW frames `register_frames` builds, by the same expressions.
+
+    Not the raw shapes: `T3-D12` makes `recording_length` UUID-keyed and folds `after_ft_jp`
+    into the credit frame, and the fixture has to exercise the frames the pipeline actually
+    joins or it is checking a query nobody runs.
+    """
+    from lbd_similarity import _phrase_list_sql
+
+    con.execute(
+        "CREATE TABLE ac_raw(artist_credit_id BIGINT, artist_mbid VARCHAR, "
+        "position BIGINT, join_phrase VARCHAR)"
+    )
+    con.executemany("INSERT INTO ac_raw VALUES (?,?,?,?)", ARTIST_CREDIT)
+    credit_sql = f"""CREATE TABLE artist_credit AS
+                SELECT artist_credit_id
+                     , position::UTINYINT AS position
+                     , artist_mbid
+                     , bool_or(join_phrase IN ({_phrase_list_sql()})) OVER w AS after_ft_jp
+                  FROM ac_raw
+                WINDOW w AS (PARTITION BY artist_credit_id ORDER BY position)"""
+    # T3-D11 moved the featured-artist flag OUT of the query and into this frame. The two
+    # mutants the pre-registration names by hand -- the untrimmed comparison and the window
+    # frame -- therefore have to be patchable HERE, or they silently stop testing anything.
+    if frame_patch is not None:
+        needle, repl = frame_patch
+        if needle not in credit_sql:
+            raise AssertionError(f"frame patch target not present: {needle!r}")
+        credit_sql = credit_sql.replace(needle, repl)
+    con.execute(credit_sql)
 
     rows = list(RECORDING_LENGTH) + (list(RECORDING_GID_REDIRECT_LENGTH) if redirects else [])
-    con.execute("CREATE TABLE recording_length(recording_mbid VARCHAR, length BIGINT)")
-    con.executemany("INSERT INTO recording_length VALUES (?,?)", rows)
+    con.execute("CREATE TABLE rl_raw(recording_mbid VARCHAR, length BIGINT)")
+    con.executemany("INSERT INTO rl_raw VALUES (?,?)", rows)
+    con.execute(
+        """CREATE TABLE recording_length AS
+               SELECT TRY_CAST(recording_mbid AS UUID) AS rec_uuid, length::INTEGER AS length
+                 FROM rl_raw
+                WHERE TRY_CAST(recording_mbid AS UUID) IS NOT NULL"""
+    )
 
     con.execute(
         "CREATE TABLE artist_similarity_listens("
@@ -286,9 +321,9 @@ def build_db(con: duckdb.DuckDBPyConnection, *, redirects: bool) -> None:
     )
 
 
-def run(sql: str, *, redirects: bool = True) -> list[tuple[str, str, int]]:
+def run(sql: str, *, redirects: bool = True, frame_patch=None) -> list[tuple[str, str, int]]:
     con = duckdb.connect()
-    build_db(con, redirects=redirects)
+    build_db(con, redirects=redirects, frame_patch=frame_patch)
     rows = con.execute(f"SELECT mbid0, mbid1, score FROM ({sql}) ORDER BY mbid0, mbid1").fetchall()
     con.close()
     return [(a, b, int(s)) for a, b, s in rows]
@@ -309,7 +344,9 @@ def sql_for(**kw) -> str:
 # MUTANTS. Each patches ONE thing into the generated SQL and MUST change the output.
 # ---------------------------------------------------------------------------------------
 
-MUTANTS = {
+# Mutants that patch the CREDIT FRAME rather than the query. Both are the specifics the
+# pre-registration names by hand, and T3-D11 moved them out of the query.
+FRAME_MUTANTS = {
     "T3-M1 trimmed join phrase (LBDR-F2b)": (
         "bool_or(join_phrase IN (", "bool_or(trim(join_phrase) IN ("
     ),
@@ -318,6 +355,9 @@ MUTANTS = {
         "PARTITION BY artist_credit_id ORDER BY position "
         "ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING)",
     ),
+}
+
+MUTANTS = {
     "T3-M3 CAST instead of TRUNC (T3-D3)": (
         "TRUNC(SUM(part_score))::BIGINT", "CAST(SUM(part_score) AS BIGINT)"
     ),
@@ -370,6 +410,15 @@ def main() -> int:
     print("\nThe check is shown to go RED -- each mutant must move the answer\n")
     base_sql = sql_for()
     limit_sql = sql_for(limit=1)
+
+    for name, patch in FRAME_MUTANTS.items():
+        got = run(base_sql, frame_patch=patch)
+        moved = got != EXPECTED["T"]
+        print(f"  {'RED ' if moved else 'FAIL'}  {name}")
+        print(f"        {'-> ' + str(got) if moved else 'did NOT move the answer; the check cannot see this defect'}")
+        if not moved:
+            failures.append(name + " (undetected)")
+
     for name, (needle, repl) in MUTANTS.items():
         source, want = (limit_sql, EXPECTED["limit_1"]) if name.startswith("T3-M4") else (base_sql, EXPECTED["T"])
         if needle not in source:

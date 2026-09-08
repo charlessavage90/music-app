@@ -16,7 +16,7 @@ below are into that file. A review (`LBDR-F2`) established that the plan's prose
 a DIFFERENT computation from the SQL it quotes, so prose is not admissible evidence here.
 
 --------------------------------------------------------------------------------------
-THE ELEVEN DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
+THE TWELVE DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
 --------------------------------------------------------------------------------------
 
 T3-D1. `to_date` is pinned to the dump's END_TIMESTAMP, not `date.today()` (`artist.py:121`).
@@ -281,15 +281,12 @@ def listens_sql(
                      , hash(l.artist_credit_mbids) AS credit_key
                      , ac.artist_mbid
                      -- `artist.py:43`, from the precomputed per-credit flag.
-                     , COALESCE(IF(ft.after_ft_jp, {FEATURED_ARTIST_WEIGHT}, 1), 1)::FLOAT AS similarity
+                     , COALESCE(IF(ac.after_ft_jp, {FEATURED_ARTIST_WEIGHT}, 1), 1)::FLOAT AS similarity
                   FROM {listen_table} l
              LEFT JOIN {metadata_table} r
-                 USING (recording_mbid)
+                    ON r.rec_uuid = TRY_CAST(l.recording_mbid AS UUID)
                   JOIN {artist_credit_table} ac
                  USING (artist_credit_id)
-                  JOIN ({credit_ft_sql(artist_credit_table)}) ft
-                    ON ft.artist_credit_id = ac.artist_credit_id
-                   AND ft.position = ac.position
                  WHERE l.recording_mbid IS NOT NULL
                    AND l.recording_mbid != ''
     """
@@ -471,26 +468,67 @@ def build_sessioned_index(
     )
 
 def register_frames(con: duckdb.DuckDBPyConnection, inputs: Path, *, redirects: bool) -> None:
-    """The two MusicBrainz frames LB reads (`artist.py:130-134`), as DuckDB views."""
+    """The two MusicBrainz frames LB reads (`artist.py:130-134`), as NARROW TABLES.
+
+    `T3-D12`. These are the build sides of stage 0's joins, and their width is what decides
+    whether stage 0 streams or thrashes. Measured: with the frames left as views over the raw
+    parquet, a flat stage-0 run **spilled 70 GB** while producing 8.7 GB of output, because
+    `recording_length` is 40M rows keyed on a 36-CHARACTER STRING and its hash table does not
+    fit a sane memory limit. Nothing about that is visible as memory pressure -- the process
+    sits at its limit and spills, exactly as it is asked to.
+
+    Two changes, both exact:
+
+      * the join key becomes `UUID` (16 fixed bytes) instead of `VARCHAR` (36) -- recording
+        MBIDs already ARE UUIDs, so the cast is lossless. `TRY_CAST` and a count, because a
+        silently NULL key would drop the duration and fall back to the 180 s default, which is
+        precisely the `LBDR-F4` failure this track already corrected once.
+      * `after_ft_jp` is folded into the credit frame here rather than recomputed per listen
+        (`T3-D11`), so stage 0 joins one frame instead of two.
+
+    Both frames are MATERIALISED (`CREATE TABLE`), not views: a view is re-read and re-hashed
+    on every probe batch.
+    """
     rl = (inputs / "recording_length.parquet").as_posix()
     ac = (inputs / "artist_credit.parquet").as_posix()
+
+    arms = f"SELECT recording_mbid, length FROM read_parquet('{rl}')"
     if redirects:
         # T3-D6: LB's own frame resolves redirects (`data/postgres/recording.py:16-33`).
         rgr = (inputs / "recording_gid_redirect_length.parquet").as_posix()
-        con.execute(
-            f"""CREATE OR REPLACE VIEW recording_length AS
-                    SELECT recording_mbid, length FROM read_parquet('{rl}')
-                 UNION ALL
-                    SELECT recording_mbid, length FROM read_parquet('{rgr}')"""
-        )
-    else:
-        con.execute(
-            "CREATE OR REPLACE VIEW recording_length AS "
-            f"SELECT recording_mbid, length FROM read_parquet('{rl}')"
-        )
+        arms += f" UNION ALL SELECT recording_mbid, length FROM read_parquet('{rgr}')"
+
     con.execute(
-        f"CREATE OR REPLACE VIEW artist_credit AS SELECT * FROM read_parquet('{ac}')"
+        f"""CREATE OR REPLACE TABLE recording_length AS
+                SELECT TRY_CAST(recording_mbid AS UUID) AS rec_uuid
+                     , length::INTEGER AS length
+                  FROM ({arms})
+                 WHERE TRY_CAST(recording_mbid AS UUID) IS NOT NULL"""
     )
+    total, kept = con.execute(
+        f"SELECT (SELECT count(*) FROM ({arms})), (SELECT count(*) FROM recording_length)"
+    ).fetchone()
+    if total != kept:
+        print(
+            f"[lbd] WARNING recording_length: {total - kept:,} of {total:,} rows have a "
+            "recording_mbid that is not a UUID and were dropped; those listens fall to the "
+            "180 s default",
+            flush=True,
+        )
+    print(f"[lbd] recording_length {kept:,} rows (UUID-keyed)", flush=True)
+
+    con.execute(
+        f"""CREATE OR REPLACE TABLE artist_credit AS
+                SELECT artist_credit_id
+                     , position::UTINYINT AS position
+                     , artist_mbid
+                     -- T3-D11: `after_ft_jp` depends only on (artist_credit_id, position).
+                     , bool_or(join_phrase IN ({_phrase_list_sql()})) OVER w AS after_ft_jp
+                  FROM read_parquet('{ac}')
+                WINDOW w AS (PARTITION BY artist_credit_id ORDER BY position)"""
+    )
+    n = con.execute("SELECT count(*) FROM artist_credit").fetchone()[0]
+    print(f"[lbd] artist_credit    {n:,} rows (after_ft_jp folded in)", flush=True)
 
 
 def register_listens(

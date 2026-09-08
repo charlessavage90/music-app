@@ -501,3 +501,43 @@ measurement): ~2.8 billion rows and **~47 GB** for the flat intermediate, close 
 hardlinked subset costs seconds to build and would have shown that before any of them. **When
 each experiment is expensive, build the cheap experiment first** — the instinct to skip
 straight to the real run is exactly backwards.
+
+### `T3-D12` — it was the join build side, and spill went to zero
+
+Measured on the testbed, one variable, everything else held:
+
+| stage-0 frames | wall | peak RSS | spill | out |
+|---|---:|---:|---:|---:|
+| `VARCHAR`-keyed views over parquet | 4.1 min | 5.15 GB | **15.7 GB** | 3.36 GB |
+| **`UUID`-keyed materialised tables** | **2.8 min** | 4.9 GB | **0.0 GB** | 3.88 GB |
+
+**Spill to zero, and 1.5× faster.** `recording_length` is 40M rows keyed on a **36-character
+string**, so its hash table did not fit a sane memory limit and DuckDB spilled it — over and
+over, once per probe batch, because a *view* is re-read and re-hashed rather than built once.
+Two changes, both exact: the key becomes `UUID` (16 fixed bytes — recording MBIDs already ARE
+UUIDs, so the cast is lossless, with `TRY_CAST` and a count because a silently NULL key would
+drop the duration and re-create the very `LBDR-F4` defect this track already fixed), and both
+frames are `CREATE TABLE` rather than views.
+
+**Every earlier diagnosis in this stretch was of a symptom.** The process sat obediently at its
+memory limit the whole time; spilling is what DuckDB does *correctly* when a build side does
+not fit. Reading "spill" as "memory pressure" is what produced four fixes to `memory_limit`,
+`ROW_GROUP_SIZE` and `PARTITION_BY`, none of which touched the cause.
+
+**Extrapolated, and labelled as extrapolation:** ~2.76 bn rows, **~55 GB**, ~40 minutes for the
+full dump. The testbed ran `days=20000` and the real run uses `days=7500`, so the true figures
+are somewhat smaller.
+
+### The mutants went blind a second time, in a different way
+
+`T3-D11` moved the featured-artist flag out of the query into the credit frame; `T3-D12` then
+moved the frame out of the query text entirely into `register_frames`. **Both times `T3-M1`
+and `T3-M2` — the two specifics the pre-registration names by hand — stopped being able to
+find what they mutate.** They did not fail; they had nothing to report.
+
+The fixture now carries **frame-level mutants** with their own target assertion, alongside the
+query-level ones. **A structural refactor silently disarming the checks that guard the
+subtlest semantics is now a twice-observed pattern here, not a one-off** — and on both
+occasions the only thing that caught it was a guard that fails loudly when a mutation cannot
+locate its target. Any mutation-style check needs that guard; without it, blind is
+indistinguishable from green.
