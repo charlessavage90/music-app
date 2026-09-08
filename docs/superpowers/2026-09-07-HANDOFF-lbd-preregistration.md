@@ -1,6 +1,6 @@
 # Handoff — `LBD-` Tasks 1 and 2 done, 2026-09-07
 
-**Role: ACTIVE — this is the CURRENT handoff for the `LBD-` track.** It does **not** supersede
+**Role: SUPERSEDED on next actions, 2026-09-08.** [`2026-09-08-HANDOFF-lbd-task4-midflight.md`](2026-09-08-HANDOFF-lbd-task4-midflight.md) is the current handoff for the `LBD-` track and supersedes this one **on next actions**; this document's account of Tasks 1–2 and of what must not be reverted still stands. *(Was: the current handoff for the `LBD-` track.)* It does **not** supersede
 [`2026-09-06-HANDOFF-lux-4-artifact.md`](2026-09-06-HANDOFF-lux-4-artifact.md), which remains
 current for `LUX-4`: the two tracks are independent, neither blocks the other, and each has its
 own next task. It states no project status — [`NEXT.md`](NEXT.md) owns that.

@@ -390,12 +390,20 @@ own similarity job is still unchecked; it is not visible from the dump.
   other artists inside a session is the pair computation itself, and is `LBD-S2`'s.
 - **The size or run time of the all-history aggregation.** Still the track's largest unmeasured
   quantity; the pre-registration gates it (`LBD-G4`) rather than estimating it.
-- **Anything about `recording_gid_redirect`.** `LBDR-F4` notes Task 1 omits it, and this
+- ~~**Anything about `recording_gid_redirect`.** `LBDR-F4` notes Task 1 omits it, and this
   session did not add it: the recording table does not resolve redirects, so a share of
   `recording_mbid` values in the listens will not join and will fall back to the 180-second
   default duration. **Deferred to `LBD-S2`, where the unmatched share is measurable against
   the frame that consumes it** — measuring it here would need the join this session does not
-  yet build. The plan's Task 3 already says to record that share.
+  yet build. The plan's Task 3 already says to record that share.~~
+  **✅ DISCHARGED 2026-09-08 by `LBD-` Task 3.** The redirect table was extracted from the
+  same pinned `mbdump` and the frame rebuilt as LB builds it
+  (`data/postgres/recording.py:16-33`), so the omission no longer exists. Its **effect** was
+  then measured directly rather than argued, by running the same user slice with and without
+  the redirect arm: the difference is a small fraction of one percent of pairs.
+  **Figures are owned by [`../2026-09-08-lbd-similarity/README.md`](../2026-09-08-lbd-similarity/README.md)
+  §1 and are not restated here.** Struck rather than deleted: the deferral was tracked and
+  discharged, which is a different thing from never having been recorded.
 
 ## 6. One cross-reference correction for a later reader
 

@@ -125,7 +125,31 @@ appears only in the arms that succeed.
   >
   > **And both sweeps predate the crawl extension**, so neither graph contained the added
   > artists and **no criterion in either measured that set's degree**. The ceiling's effect
-  > *on them* is genuinely unmeasured. So the two facts point in opposite directions and
+  > *on them* is genuinely unmeasured.
+  >
+  > > ### ⚠ AMENDED 2026-09-08 by `LBD-AM2` — the last sentence above is no longer true
+  > >
+  > > **"The ceiling's effect *on them* is genuinely unmeasured" was true when written and is
+  > > not true now.** The `DCF-` probe measured exactly that on the extended archive, and the
+  > > `DFA-` probe measured the complementary question. **Nothing above is edited**, per §12's
+  > > rule; this note qualifies it in place.
+  > >
+  > > **Figures are owned by
+  > > [`builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md`](../../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md)
+  > > and [`builder/analysis/2026-09-07-degree-floor-at-admission/README.md`](../../../builder/analysis/2026-09-07-degree-floor-at-admission/README.md);
+  > > this document owns none of them and restates none.** Read the ceiling probe's §3 with
+  > > its own ⚠ forward-correction note, which bounds what one of its measures can support.
+  > >
+  > > **What this does NOT do, and the distinction is the whole point of the amendment.** It
+  > > does **not** weaken `LBD-X1`, and it does **not** license reading a graph-level
+  > > `LBD-C2` null as a supply null — that bar stands exactly as written, because it rests
+  > > on the ceiling *absorbing supply*, not on its effect being unmeasured. Nor does it
+  > > propose or support a ceiling change: design §9 keeps the cap-rule decision **parked and
+  > > the owner's**, and the measured cost on famous-pair journeys is unchanged.
+  > >
+  > > It is recorded because a later reader finding this sentence would otherwise conclude
+  > > the question is open when two committed probes have answered it — and, per `LBD-AM1`,
+  > > the residual set exists precisely *because* that answer came back. So the two facts point in opposite directions and
   > neither is discharged: a ceiling change has a measured cost on famous-pair journeys, and
   > an unmeasured benefit on the added set. **Any later reader proposing one owes a fresh
   > pre-registration** — it is a cap-rule decision, which design §9 places on the closed
@@ -625,6 +649,24 @@ makes the register worth having, exactly as it is for the document itself.
 **The rule that governs every entry here:** a criterion's *values* are never edited. If a
 later session finds one inconvenient, the answer is an amendment with its own reasoning and
 its own date. That property is the whole point of the document.
+
+---
+
+### `LBD-AM2` — `LBD-X1`'s "genuinely unmeasured" sentence is qualified, not weakened
+
+**Dated 2026-09-08. NO ARM HAD RUN AT THE TIME THIS WAS WRITTEN** — `LBD-` Task 3 completed
+the reimplementation and Task 4 was retired mid-flight with no arm read taken, so the
+document's commit-before-results property is intact and this amendment does not spend it.
+The full text is the block inside **`LBD-X1`** in §0. This entry is the register row.
+
+| | |
+|---|---|
+| **what it adds** | a note beside `LBD-X1` recording that its closing sentence — *"The ceiling's effect on them is genuinely unmeasured"* — **was true when written and is no longer true.** `DCF-` measured it; `DFA-` measured the complementary question |
+| **what it does NOT add** | **no gate, no effect size, no change to any criterion.** `LBD-X1`'s bar — that a graph-level `LBD-C2` null is barred from supporting `LBD-R1` — **stands unchanged**, because it rests on the ceiling absorbing supply, not on its effect being unmeasured |
+| **what it must not be read as** | licence for a ceiling change. Design §9 keeps the cap-rule decision **parked and the owner's**, and Track B's measured cost on famous-pair journeys is untouched |
+| **why now** | `NEXT.md` recorded this as owed and assigned it to Task 3. A later reader finding the sentence unqualified would conclude the question is open when two committed probes have answered it |
+| **figures** | owned by the two `builder/analysis/` probe READMEs named in the block; **none is restated here** |
+| **identifier** | **`LBD-AM2`**. Collision-checked across every ref on 2026-09-08 (`git grep -lE '\bLBD-AM2\b'` over `refs/remotes refs/heads`): free |
 
 ---
 

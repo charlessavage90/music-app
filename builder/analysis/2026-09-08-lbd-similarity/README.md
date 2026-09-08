@@ -1,7 +1,10 @@
 # `LBD-` Tasks 3–4 — the reimplementation, and what it measures
 
-**Role: FIGURES OWNER for `LBD-C1`, `LBD-C2`, `LBD-C3`, `LBD-M1` and the Task 3 verification.
-ACTIVE.** Every number below is owned here and **cited elsewhere, never restated** — by
+**Role: FIGURES OWNER for the Task 3 verification, and for `LBD-C1`, `LBD-C2`, `LBD-C3` and
+`LBD-M1` WHEN THEY ARE MEASURED. ACTIVE.** ⚠ **Task 4 is unfinished: `LBD-C1`, `LBD-C2` and
+`LBD-M1` are not measured at all yet, and `LBD-C3` only partly.** This document owns them in
+the sense that they will be recorded here and nowhere else — not in the sense that it already
+holds them. §§4–7 mark each one's true state. Every number below is owned here and **cited elsewhere, never restated** — by
 [`specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md`](../../docs/superpowers/specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md),
 which governs the criteria and owns no figures of its own, and by the retained execution log
 [`2026-09-08-lbd-task34-execution-log.md`](../../docs/superpowers/2026-09-08-lbd-task34-execution-log.md).
@@ -130,7 +133,10 @@ differ", and §7 retires `LBD-R2` on it. The pre-registration's §6 requires its
 to be **derived by executing LB's SQL by hand**; the derivation is written out stage by stage
 in `lbd_fixture.py`'s docstring so it can be checked without trusting either file.
 
-**Five users, twenty-one listens, five assertions — all pass.**
+**Six users, twenty-four listens, eight assertions — all pass.** Beyond the five below, two
+prove `T3-D13`'s algebraic collapse equals the naive self-join for **both** pairing modes, and
+one proves `LBD-D2`'s chunked form equals the one-shot form — each **demonstrated**, not
+argued from the algebra.
 
 Both specifics the pre-registration names by hand are asserted:
 
@@ -141,8 +147,12 @@ Both specifics the pre-registration names by hand are asserted:
 - **the untrimmed comparison** — the same credit stored `' feat. '` matches none of LB's eight
   literals and **both artists stay at weight 1**.
 
-**The check is shown to go RED before it is allowed to go green.** Six mutants each patch one
-thing into the generated SQL; **all six move the answer.**
+**The check is shown to go RED before it is allowed to go green.** Seven mutants each patch
+one thing into the generated SQL; **all seven move the answer.** Two of them patch the CREDIT
+FRAME rather than the query, because `T3-D11` and `T3-D12` moved the featured-artist logic out
+of the query text — and both times the mutants silently stopped being able to find what they
+mutate. They did not fail; they had nothing to report. The runner asserts its patch target is
+present, which is the only reason either was caught.
 
 | mutant | what it breaks |
 |---|---|
@@ -152,9 +162,18 @@ thing into the generated SQL; **all six move the answer.**
 | `T3-M4` | `row_number()` instead of `rank()` (`artist.py:95`) |
 | `T3-M5` | drops the mapped-listen filter (`artist.py:34-35`) |
 | `T3-M6` | literal `COUNT_IF` for `session_id` (`T3-D8`) |
+| `T3-M7` | drops the same-credit exclusion (`T3-D9`, `artist.py:73`) |
 
 `T3-M6` is there because that mutant is the defect the fixture actually caught on its first
 run. **A fixture that has never failed is not evidence that anything passed.**
+
+**`T3-M7` earned its place by failing.** Added to guard the same-credit exclusion, it did NOT
+move the answer — so the fixture had never been testing `artist.py:73` at all. The cause: the
+only two-artist credit in it was a *featured* pair at weight 0.25, so the pair the rule
+suppresses was worth 0.125 and `TRUNC` at the cross-user sum absorbed it entirely. A sixth
+user was added whose two-artist credit carries no join phrase, making the suppressed pair
+worth 2. **A rounding step downstream of an assertion can make that assertion untestable, and
+it does so silently.**
 
 Making `T3-M2` detectable required a deliberate fixture design decision: every featured credit
 long enough to trigger `T3-P1` loses the very row the frame question is about, so user 4's
@@ -279,6 +298,13 @@ derived from `T` are not read at all.*
 ## 6. `LBD-C2a` — pair-table candidate supply
 
 *Pending, and conditional on `LBD-G1` not firing.*
+
+## 6b. `LBD-M1` — population
+
+*Not measured.* Pre-registration §5: how many artists each arm produces, by fame band, against
+the served map's. Descriptive, decides nothing here, and it **discharges `LBDR-F6`** by
+supplying the artist and neighbour counts the Task 6/7 scale budget needs. It requires the
+derived arms, which do not exist yet.
 
 ## 7. What is NOT established here
 
