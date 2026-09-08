@@ -1,10 +1,39 @@
 export type BypassReason = 'dislike' | 'known';
 
+/**
+ * Structured MusicBrainz facts, all optional (LUX-4).
+ *
+ * A null field means "show nothing", never "Unknown": the card renders only
+ * what is present, with no placeholder rows (`L4-D3`).
+ */
+export interface ArtistFacts {
+  type: string | null;
+  /** ISO code, e.g. 'GB'. */
+  country: string | null;
+  /** Human-readable, e.g. 'United Kingdom'. */
+  area: string | null;
+  /** '1995' or '1995-03-01'. */
+  begin: string | null;
+  end: string | null;
+  ended: boolean | null;
+}
+
 export interface Artist {
   mbid: string;
   name: string;
   disambiguation: string;
   popularity: number;
+  /**
+   * Platform id TAILS, not URLs (`L4-D2`) — `lib/dspUrls` composes the link.
+   *
+   * null does NOT mean "no button": it means the button goes to a search
+   * instead of to an artist page. Null for every artist until the LUX-4
+   * artifact is deployed, and permanently null for artists no DSP relation
+   * covers.
+   */
+  spotifyId: string | null;
+  appleId: string | null;
+  facts: ArtistFacts | null;
 }
 
 export interface Track {

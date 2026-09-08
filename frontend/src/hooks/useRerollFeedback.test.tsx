@@ -3,7 +3,7 @@ import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import { GLOW_MS, NOTICE_MIN_MS, useRerollFeedback } from './useRerollFeedback';
 import type { Artist } from '@/api/types';
 
-const a = (mbid: string): Artist => ({ mbid, name: mbid, disambiguation: '', popularity: 0 });
+const a = (mbid: string): Artist => ({ mbid, name: mbid, disambiguation: '', popularity: 0, spotifyId: null, appleId: null, facts: null });
 const FIRST = [a('start'), a('mid1'), a('end')];
 const SECOND = [a('start'), a('mid2'), a('end')];
 

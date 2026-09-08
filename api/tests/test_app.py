@@ -371,6 +371,24 @@ def test_health_reports_artifact_identity():
     assert body["graph_sha256"] == store.source_sha256
 
 
+def test_meta_is_reachable_under_api_and_carries_the_count():
+    # UXR-D8: /health is deliberately off /api (App Runner reaches it directly)
+    # and CloudFront routes only /api/*, so the landing badge needs THIS route.
+    client, store = _client()
+    r = client.get("/api/meta")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["artists"] == store.artist_count
+    assert body["graph_sha256"] == store.source_sha256
+
+
+def test_meta_is_a_coroutine_so_it_never_queues_for_a_thread():
+    # Same discipline as /health (G3-A1): three in-memory reads, no I/O.
+    client, _ = _client()
+    route = next(r for r in client.app.routes if getattr(r, "path", "") == "/api/meta")
+    assert inspect.iscoroutinefunction(route.endpoint)
+
+
 def test_path_request_emits_a_telemetry_event(capsys):
     client, store = _client()
     a, b = store.mbids[0], store.mbids[2]
@@ -589,3 +607,127 @@ def test_artist_lookup_does_not_shadow_the_search_route():
     r = client.get("/api/artists/search", params={"q": "rad"})
     assert r.status_code == 200
     assert r.json()[0]["name"] == "Radiohead"
+
+
+# --- LUX-4: streaming ids and structured facts on the wire -------------------
+#
+# ArtistOut is the wire contract the frontend reads, and it appears in FOUR
+# positions, not the three the plan names: PathResponse.artists,
+# PathResponse.bypassed, GET /api/artists/{mbid}, and GET
+# /api/artists/search. All four are fed by app.py's one `artist_out` helper,
+# which is why they cannot drift apart — these tests pin that.
+
+
+def _lux4_store():
+    """The three-artist store, with LUX-4 metadata on some artists and not others.
+
+    Radiohead(0) has both ids and full facts; Muse(1) has an apple id only and
+    no facts; Coldplay(2) has nothing at all — the population the search
+    fallback exists for.
+    """
+    store = make_store(
+        names=["Radiohead", "Muse", "Coldplay"],
+        pop_raw=[0.9, 0.7, 0.8],
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (0, 2, 0.3)],
+    )
+    store.spotify_ids = ["4Z8W4fKeB5YxbusRsdQVPb", "", ""]
+    store.apple_ids = ["657515", "1006922", ""]
+    store.artist_facts = [
+        {"type": "Group", "country": "GB", "area": "United Kingdom",
+         "begin": "1991", "end": None, "ended": False},
+        {},
+        {},
+    ]
+    return store
+
+
+def test_path_artists_carry_links_and_facts():
+    store = _lux4_store()
+    client = _client_over(store)
+    a, c = store.mbids[0], store.mbids[2]
+    body = client.post("/api/path", json={"sources": [a, c]}).json()
+    first = body["artists"][0]
+    assert first["spotify_id"] == "4Z8W4fKeB5YxbusRsdQVPb"
+    assert first["apple_id"] == "657515"
+    assert first["facts"]["type"] == "Group"
+    assert first["facts"]["area"] == "United Kingdom"
+    assert first["facts"]["begin"] == "1991"
+    assert first["facts"]["ended"] is False
+
+
+def test_a_missing_id_serialises_as_null_not_as_an_empty_string():
+    """The builder records "no id known" as "", but the frontend's contract is
+    that NULL means "render a search link". One code path, not two."""
+    store = _lux4_store()
+    client = _client_over(store)
+    body = client.get(f"/api/artists/{store.mbids[1]}").json()
+    assert body["spotify_id"] is None      # "" in the artifact
+    assert body["apple_id"] == "1006922"
+    assert body["facts"] is None           # {} in the artifact
+
+
+def test_absent_data_serialises_as_null_not_missing():
+    """A pre-LUX-4 artifact must still serve — that is the one the app runs on
+    until this deploys. The keys are PRESENT and null, so the frontend has one
+    code path rather than two."""
+    client, store = _client()  # a store carrying no LUX-4 metadata at all
+    a, c = store.mbids[0], store.mbids[2]
+    body = client.post("/api/path", json={"sources": [a, c]}).json()
+    first = body["artists"][0]
+    assert "spotify_id" in first and first["spotify_id"] is None
+    assert "apple_id" in first and first["apple_id"] is None
+    assert "facts" in first and first["facts"] is None
+
+
+def test_bypassed_artists_carry_them_too():
+    """LUX-2's panel renders ArtistOut, so it gets these for free — and a
+    regression here would be invisible until someone pressed bypass."""
+    store = make_store(
+        names=["A", "Mid1", "Mid2", "B"],
+        pop_raw=[0.5, 0.5, 0.5, 0.5],
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (2, 3, 0.9), (0, 3, 0.3)],
+    )
+    store.spotify_ids = ["", "mid1-spotify", "", ""]
+    client = _client_over(store)
+    a, mid1, _mid2, b = store.mbids
+    body = client.post(
+        "/api/path",
+        json={"sources": [a, b], "exclude": [{"id": mid1, "reason": "known"}]},
+    ).json()
+    assert body["bypassed"][0]["spotify_id"] == "mid1-spotify"
+    assert "facts" in body["bypassed"][0]
+
+
+def test_search_results_carry_them_too():
+    """The fourth wire position. Not named in the plan, and free because every
+    ArtistOut on this api comes from one helper — pinned so it stays that way."""
+    store = _lux4_store()
+    client = _client_over(store)
+    body = client.get("/api/artists/search", params={"q": "rad"}).json()
+    assert body[0]["spotify_id"] == "4Z8W4fKeB5YxbusRsdQVPb"
+
+
+def test_facts_drop_fields_the_extraction_never_found():
+    """L4-D3 renders only what is present. A partial facts dict must not gain
+    invented keys on the way out, and must not fail validation either."""
+    store = _lux4_store()
+    store.artist_facts = [{"type": "Person"}, {}, {}]
+    client = _client_over(store)
+    facts = client.get(f"/api/artists/{store.mbids[0]}").json()["facts"]
+    assert facts["type"] == "Person"
+    assert facts["country"] is None and facts["begin"] is None
+
+
+def test_an_unknown_fact_field_does_not_break_the_api():
+    """artifact.py's docstring names artist_facts as the CHEAP place to add a
+    fact, so a future artifact will carry a key this ArtistFacts does not know.
+    It must be ignored, not raise — otherwise adding a fact in the builder
+    takes down every api instance running the older image."""
+    store = _lux4_store()
+    store.artist_facts = [{"type": "Group", "gender": "not-a-field-here"}, {}, {}]
+    client = _client_over(store)
+    r = client.get(f"/api/artists/{store.mbids[0]}")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["facts"]["type"] == "Group"
+    assert "gender" not in body["facts"]

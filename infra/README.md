@@ -303,6 +303,21 @@ commands is how the wrong artifact gets uploaded beside the right deploy, and vi
 > bucket and must not be redeployed as "the newer one" — it is the one that was rejected.
 > Why it lost: `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`.
 
+> ⚠ **`LUX-4` CHANGES THE ARTIFACT, so this is not an API-only deploy.** `graph-lux4.bin`
+> is `graph-msw-tu50.bin` plus exactly three additive metadata keys — the same graph, the
+> same population, the same routing, proven twice at `L4-T7` (subtracting the three keys
+> reproduces the served artifact byte for byte). **Its sha256 necessarily differs**, because
+> keys were added; a comparison that expects the shas to match is the wrong check.
+>
+> So on that deploy `GRAPH` below becomes `graph-lux4.bin`, **both `s3 cp` lines run**, and
+> `cdk diff` is *expected* to show `ARTISTPATH_GRAPH` and `ARTISTPATH_GRAPH_SHA256` changing —
+> which is the one case the `DEP-34` warning in §5 does not apply to. Take the checksum from
+> the sidecar via the `GRAPH` lines below, **never by transcribing it** (`DEP-24`); a wrong
+> value means the service refuses to boot, which is the design.
+>
+> **Nothing a listener sees changes until the frontend of §6 also ships**, because the API
+> serving the new keys is only half of it.
+
 ```bash
 GRAPH=graph-msw-tu50.bin          # the ADOPTED artifact — never the app.py default
 export ARTISTPATH_DEPLOY_GRAPH_KEY=$GRAPH
@@ -341,6 +356,14 @@ python -c "import json;print(json.load(open('builder/scratch/$GRAPH.json'))['byt
 > `PAY_PER_REQUEST`, keyed on `mbid` with a TTL, and IAM grants only `GetItem`/`PutItem`.
 > **There is no migration and must not be one** — this is expected and spec-sanctioned, not a
 > defect (detail: `2026-09-04-lux-1-3-execution-log.md` §3).
+
+> ⚠ **Do not deploy under a stale image tag.** The running image predates the `CXR-` revert,
+> so its baked-in `ApiConfig.graph_path` default still names the **REJECTED** artifact.
+> Nothing is served wrong today — production passes the graph and its checksum per deploy, and
+> `DEP-34-FIX` makes a synth without the deploy key refuse — but it is a live instance of the
+> `DEP-34` class. **HEAD's default is correct** (verified 2026-09-08 at
+> `api/src/artistpath_api/config.py`: `graph-msw-tu50.bin`), so any image built from HEAD in §3
+> clears it. Re-tagging an old image does not.
 
 **`cdk diff` FIRST, every time, and read the whole diff — not only the image tag.** On an
 API-only deploy it must show `.ImageIdentifier` changing and nothing else. If

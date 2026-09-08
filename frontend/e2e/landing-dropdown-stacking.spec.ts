@@ -29,6 +29,15 @@ const SURFACE = [24, 26, 31];
 const distance = (a: number[], b: number[]) =>
   Math.sqrt(a.reduce((sum, v, i) => sum + (v - b[i]) ** 2, 0));
 
+// The two fields have to be STACKED for one's dropdown to reach the other's
+// dot, and since UXR-T3 they are stacked only below `sm` — the landing page
+// puts them side by side at 640px and up (`grid gap-3.5 sm:grid-cols-2`). At
+// the default viewport the dropdown now opens beside the second field instead
+// of over it, so this spec's own precondition stopped holding and it failed
+// there rather than on the stacking it exists to check. Pinning the width is
+// what keeps it measuring the thing it was written for.
+test.use({ viewport: { width: 390, height: 844 } });
+
 test('the open dropdown covers the next field\'s dot', async ({ page }) => {
   await page.goto('/');
 

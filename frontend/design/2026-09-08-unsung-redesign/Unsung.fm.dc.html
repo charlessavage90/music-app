@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#08080b; color:#f2f0f7; font-family:'DM Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#2ec5ee; text-decoration:none; }
+  a:hover { color:#7fdcf7; }
+  @keyframes un-pulse { 0%,100% { opacity:.45; } 50% { opacity:1; } }
+  @keyframes un-breathe { 0%,100% { transform:scale(1); opacity:.75; } 50% { transform:scale(1.06); opacity:1; } }
+  @keyframes un-spin { to { transform:rotate(360deg); } }
+  @keyframes un-eq { 0%,100% { transform:scaleY(.35); } 50% { transform:scaleY(1); } }
+  @keyframes un-sheen { 0% { background-position:0% 50%; } 100% { background-position:200% 50%; } }
+</style>
+</helmet>
+
+<section style="padding:60px 64px 110px;background:#08080b;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:820px">
+    <div style="font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#6d6a7d">Unsung.fm · final</div>
+    <div style="font-size:34px;font-weight:500;letter-spacing:-.025em;font-family:'Space Grotesk',sans-serif">Signal, with docked artist detail</div>
+    <div style="font-size:15.5px;line-height:1.55;color:#9b98ab;text-wrap:pretty">Space Grotesk + DM Sans, cyan → violet → pink, the path as a lit rail. Every stop on the journey carries three separate targets: a 48px <strong style="color:#f2f0f7;font-weight:500">play</strong> circle, a tappable <strong style="color:#f2f0f7;font-weight:500">name row</strong> that docks the artist&rsquo;s detail beside the rail (a bottom sheet on mobile), and <strong style="color:#f2f0f7;font-weight:500">Dig deeper</strong> — the one reroute — living inside that detail, where it can&rsquo;t be hit by accident.</div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:72px;align-items:flex-start">
+
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-top:4px">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:500;letter-spacing:-.01em">Landing</span>
+        <span style="font-size:13.5px;color:#6d6a7d">Desktop and mobile</span>
+      </div>
+      <div style="width:1280px;background:#0a0a0f;border:1px solid #1e1e29;border-radius:18px;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 40px;border-bottom:1px solid #17171f">
+          <div style="display:flex;align-items:center;gap:11px">
+            <img src="assets/unsung-mark.png" alt="Unsung.fm" style="width:38px;height:38px;filter:saturate(1.05)">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em">unsung<span style="color:#6d6a7d;font-weight:400">.fm</span></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:28px;font-size:14px;color:#9b98ab">
+            <span>How it works</span>
+            <span>Sample journeys</span>
+            <span style="border:1px solid #262633;border-radius:999px;padding:8px 16px;color:#f2f0f7">About the map</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.08fr .92fr;gap:64px;padding:64px 40px 52px;align-items:center">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:8px;border:1px solid #262633;background:#101018;border-radius:999px;padding:6px 14px;font-size:12.5px;color:#9b98ab">
+              <span style="width:6px;height:6px;border-radius:999px;background:#2ec5ee;animation:un-pulse 1.8s ease-in-out infinite"></span>
+              75,000 artists mapped by who listens to whom
+            </div>
+            <h1 style="margin:22px 0 0;font-family:'Space Grotesk',sans-serif;font-size:60px;line-height:1.02;letter-spacing:-.035em;font-weight:500;text-wrap:balance">Hear what lives<br>between two<br>artists you love.</h1>
+            <p style="margin:22px 0 0;max-width:520px;font-size:18px;line-height:1.5;color:#9b98ab;text-wrap:pretty">Name two. Unsung.fm builds a listenable path between them — every step a small, sensible move from the last, with a 30-second clip. Then <span style="color:#f2f0f7">dig deeper</span> to swap the obvious names for the ones you have never heard.</p>
+
+            <div style="margin-top:34px;display:flex;flex-direction:column;gap:14px;max-width:600px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div>
+                  <div style="margin-bottom:9px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">Start with</div>
+                  <div style="position:relative">
+                    <span style="position:absolute;left:18px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:999px;background:#2ec5ee;box-shadow:0 0 12px 2px rgba(46,197,238,.55)"></span>
+                    <div style="height:58px;display:flex;align-items:center;padding:0 18px 0 40px;border-radius:12px;background:#14141c;border:1.5px solid #2ec5ee;font-size:19px;letter-spacing:-.01em;box-shadow:0 0 0 4px rgba(46,197,238,.1)">Miles Davis</div>
+                  </div>
+                </div>
+                <div>
+                  <div style="margin-bottom:9px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">End with</div>
+                  <div style="position:relative">
+                    <span style="position:absolute;left:18px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:999px;background:#f5479b;box-shadow:0 0 12px 2px rgba(245,71,155,.5)"></span>
+                    <div style="height:58px;display:flex;align-items:center;padding:0 18px 0 40px;border-radius:12px;background:#14141c;border:1.5px solid #262633;font-size:19px;letter-spacing:-.01em;color:#6d6a7d">Search an artist</div>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:16px">
+                <div style="height:56px;display:flex;align-items:center;justify-content:center;padding:0 34px;border-radius:999px;background:linear-gradient(90deg,#2ec5ee,#8f6cf5 55%,#f5479b);background-size:200% 100%;animation:un-sheen 9s linear infinite;color:#08080b;font-size:16.5px;font-weight:700;letter-spacing:-.01em">Build the path</div>
+                <span style="font-size:13.5px;color:#6d6a7d">Takes about three seconds · no account needed</span>
+              </div>
+            </div>
+
+            <div style="margin-top:30px;display:flex;flex-direction:column;gap:11px">
+              <div style="font-size:12.5px;color:#6d6a7d">Or start from one of these</div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <sc-for list="{{ samples }}" as="s" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:9px;border:1px solid #262633;background:#101018;border-radius:999px;padding:10px 16px;font-size:14px">
+                    <span>{{ s.from }}</span>
+                    <span style="color:#6d6a7d">→</span>
+                    <span>{{ s.to }}</span>
+                    <span style="color:#6d6a7d;font-size:12px">{{ s.hops }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:28px">
+            <div style="position:relative;width:300px;height:300px;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;inset:0;border-radius:999px;background:radial-gradient(circle at 50% 50%,rgba(143,108,245,.28),rgba(46,197,238,.12) 45%,transparent 70%);animation:un-breathe 7s ease-in-out infinite"></div>
+              <div style="position:absolute;inset:14px;border-radius:999px;border:2px dashed #2a2440;animation:un-spin 60s linear infinite"></div>
+              <img src="assets/unsung-mark.png" alt="" style="position:relative;width:246px;height:246px">
+            </div>
+            <div style="width:100%;max-width:420px;border:1px solid #1e1e29;background:#0e0e14;border-radius:16px;padding:20px 22px">
+              <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">A path, eight hops</div>
+              <div style="position:relative;margin-top:16px;padding-left:20px;display:flex;flex-direction:column;gap:13px">
+                <span style="position:absolute;left:3px;top:6px;bottom:6px;width:2px;border-radius:999px;background:linear-gradient(to bottom,#2ec5ee,#8f6cf5,#f5479b)"></span>
+                <sc-for list="{{ teaser }}" as="t" hint-placeholder-count="5">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <span style="position:absolute;left:-2px;width:8px;height:8px;border-radius:999px;background:#0e0e14;border:2px solid #8f6cf5"></span>
+                    <span style="font-size:14.5px;color:#f2f0f7">{{ t.name }}</span>
+                    <span style="font-size:12px;color:#6d6a7d">{{ t.tag }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ showHowItWorks }}" hint-placeholder-val="{{ true }}">
+          <div style="border-top:1px solid #17171f;padding:44px 40px 56px">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+              <div style="border:1px solid #1e1e29;background:#0e0e14;border-radius:16px;padding:26px 24px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;color:#2ec5ee">01</span>
+                  <span style="height:1px;flex:1;background:linear-gradient(90deg,#2ec5ee,transparent)"></span>
+                </div>
+                <div style="margin-top:16px;font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:500;letter-spacing:-.02em">Name two artists</div>
+                <div style="margin-top:9px;font-size:14.5px;line-height:1.55;color:#9b98ab;text-wrap:pretty">One you are in the mood for, one you are curious about. Anything in a graph of 75,000.</div>
+              </div>
+              <div style="border:1px solid #1e1e29;background:#0e0e14;border-radius:16px;padding:26px 24px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;color:#8f6cf5">02</span>
+                  <span style="height:1px;flex:1;background:linear-gradient(90deg,#8f6cf5,transparent)"></span>
+                </div>
+                <div style="margin-top:16px;font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:500;letter-spacing:-.02em">Listen to the path</div>
+                <div style="margin-top:9px;font-size:14.5px;line-height:1.55;color:#9b98ab;text-wrap:pretty">Every stop gets a 30-second clip, and every step sounds like a sensible move from the last. No jolts.</div>
+              </div>
+              <div style="border:1px solid #262633;background:linear-gradient(160deg,rgba(143,108,245,.14),rgba(46,197,238,.06));border-radius:16px;padding:26px 24px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;color:#f5479b">03</span>
+                  <span style="height:1px;flex:1;background:linear-gradient(90deg,#f5479b,transparent)"></span>
+                </div>
+                <div style="margin-top:16px;font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:500;letter-spacing:-.02em">Dig deeper</div>
+                <div style="margin-top:9px;font-size:14.5px;line-height:1.55;color:#9b98ab;text-wrap:pretty">Know a stop already? Press <span style="color:#f2f0f7">Dig deeper</span> and the route rebuilds through lower-reach artists — same feel, names you are far less likely to know.</div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+        <div style="width:390px;background:#0a0a0f;border:1px solid #1e1e29;border-radius:20px;overflow:hidden">
+          <div style="padding:26px 22px 30px;min-height:820px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;gap:9px">
+              <img src="assets/unsung-mark.png" alt="Unsung.fm" style="width:30px;height:30px">
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;letter-spacing:-.02em">unsung<span style="color:#6d6a7d;font-weight:400">.fm</span></span>
+            </div>
+            <div style="margin-top:26px;position:relative;height:150px;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;inset:0;border-radius:999px;background:radial-gradient(circle,rgba(143,108,245,.3),transparent 68%);animation:un-breathe 7s ease-in-out infinite"></div>
+              <img src="assets/unsung-mark.png" alt="" style="position:relative;width:150px;height:150px">
+            </div>
+            <h1 style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-size:31px;line-height:1.06;letter-spacing:-.03em;font-weight:500;text-wrap:balance">Hear what lives between two artists you love.</h1>
+            <p style="margin:14px 0 0;font-size:15px;line-height:1.5;color:#9b98ab;text-wrap:pretty">Name two. We build a listenable path, clip by clip — then <span style="color:#f2f0f7">dig deeper</span> for the names you have never heard.</p>
+
+            <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+              <div style="position:relative">
+                <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:999px;background:#2ec5ee;box-shadow:0 0 10px 2px rgba(46,197,238,.5)"></span>
+                <div style="height:56px;display:flex;align-items:center;padding:0 16px 0 36px;border-radius:12px;background:#14141c;border:1.5px solid #2ec5ee;font-size:18px">Miles Davis</div>
+              </div>
+              <div style="position:relative">
+                <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:999px;background:#f5479b;box-shadow:0 0 10px 2px rgba(245,71,155,.45)"></span>
+                <div style="height:56px;display:flex;align-items:center;padding:0 16px 0 36px;border-radius:12px;background:#14141c;border:1.5px solid #262633;font-size:18px;color:#6d6a7d">Search an artist</div>
+              </div>
+              <div style="margin-top:4px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(90deg,#2ec5ee,#8f6cf5 55%,#f5479b);background-size:200% 100%;animation:un-sheen 9s linear infinite;color:#08080b;font-size:16.5px;font-weight:700">Build the path</div>
+            </div>
+
+            <div style="margin-top:30px;display:flex;flex-direction:column;gap:14px">
+              <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">How it works</div>
+              <div style="display:flex;gap:13px">
+                <span style="font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:700;color:#2ec5ee;padding-top:2px">01</span>
+                <div><div style="font-size:15.5px;font-weight:600">Name two artists</div><div style="margin-top:4px;font-size:13.5px;line-height:1.5;color:#9b98ab">One you love, one you are curious about.</div></div>
+              </div>
+              <div style="display:flex;gap:13px">
+                <span style="font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:700;color:#8f6cf5;padding-top:2px">02</span>
+                <div><div style="font-size:15.5px;font-weight:600">Listen to the path</div><div style="margin-top:4px;font-size:13.5px;line-height:1.5;color:#9b98ab">Every stop a 30-second clip, every step a small move.</div></div>
+              </div>
+              <div style="display:flex;gap:13px">
+                <span style="font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:700;color:#f5479b;padding-top:2px">03</span>
+                <div><div style="font-size:15.5px;font-weight:600">Dig deeper</div><div style="margin-top:4px;font-size:13.5px;line-height:1.5;color:#9b98ab">Swap a name you know for one you do not, and rebuild the route.</div></div>
+              </div>
+            </div>
+
+            <div style="margin-top:auto;padding-top:28px;display:flex;flex-direction:column;gap:9px">
+              <div style="font-size:12.5px;color:#6d6a7d">Or try one of these</div>
+              <sc-for list="{{ samples }}" as="s" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:8px;border:1px solid #1e1e29;background:#0e0e14;border-radius:12px;padding:13px 15px;font-size:14px">
+                  <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.from }} <span style="color:#6d6a7d">→</span> {{ s.to }}</span>
+                  <span style="color:#6d6a7d;font-size:12px">{{ s.hops }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-top:4px">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:500;letter-spacing:-.01em">Journey</span>
+        <span style="font-size:13.5px;color:#6d6a7d">Detail docks in the sidebar · bottom sheet on mobile</span>
+      </div>
+      <div data-screen-label="2b desktop journey" style="width:1280px;background:#0a0a0f;border:1px solid #1e1e29;border-radius:18px;overflow:hidden;position:relative">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid #17171f">
+          <div style="display:flex;align-items:center;gap:11px">
+            <img src="assets/unsung-mark.png" alt="Unsung.fm" style="width:30px;height:30px">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:600;letter-spacing:-.02em">unsung<span style="color:#6d6a7d;font-weight:400">.fm</span></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13.5px">
+            <span style="border:1px solid #262633;border-radius:999px;padding:8px 15px;color:#9b98ab">↺ Reset path</span>
+            <span style="border:1px solid #262633;border-radius:999px;padding:8px 15px;color:#9b98ab">Share</span>
+            <span style="border:1px solid #2ec5ee;border-radius:999px;padding:8px 15px;color:#f2f0f7">New path</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 400px;gap:40px;padding:36px 40px 130px;align-items:start">
+          <div>
+            <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+              <div>
+                <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">Your journey</div>
+                <div style="margin-top:10px;display:flex;align-items:center;gap:14px;font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:500;letter-spacing:-.03em">
+                  Miles Davis
+                  <span style="width:46px;height:2px;border-radius:999px;background:linear-gradient(90deg,#2ec5ee,#f5479b)"></span>
+                  Daft Punk
+                </div>
+              </div>
+              <div style="display:flex;gap:10px">
+                <div style="border:1px solid #1e1e29;background:#0e0e14;border-radius:12px;padding:10px 16px;text-align:center">
+                  <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600">6</div>
+                  <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6d6a7d">steps</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:28px;position:relative;padding-left:26px;display:flex;flex-direction:column;gap:12px">
+              <span style="position:absolute;left:5px;top:41px;bottom:41px;width:3px;border-radius:999px;background:linear-gradient(to bottom,#2ec5ee,#8f6cf5,#f5479b)"></span>
+
+              <div style="position:relative">
+                <span style="position:absolute;left:-29px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:999px;background:#0a0a0f;border:3px solid #2ec5ee;box-shadow:0 0 14px 2px rgba(46,197,238,.45)"></span>
+                <div style="border:1px solid #2a2a38;background:#111119;border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:16px">
+                  <div style="flex:none;width:54px;height:54px;border-radius:12px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2ec5ee">You started here</div>
+                    <div style="margin-top:5px;font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em">Miles Davis</div>
+                    <div style="margin-top:2px;font-size:13px;color:#9b98ab">So What <span style="color:#6d6a7d">· 0:30</span></div>
+                  </div>
+                  <span style="flex:none;width:46px;height:46px;border-radius:999px;border:1px solid #2a2a38;display:flex;align-items:center;justify-content:center;font-size:15px;color:#9b98ab">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#2ec5ee;display:flex;align-items:center;justify-content:center">
+                    <span style="display:block;width:0;height:0;margin-left:3px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #08080b"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="position:relative">
+                <span style="position:absolute;left:-29px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:999px;background:#0a0a0f;border:3px solid #8f6cf5;box-shadow:0 0 16px 3px rgba(143,108,245,.6)"></span>
+                <div style="border:1px solid rgba(143,108,245,.45);background:linear-gradient(120deg,rgba(143,108,245,.16),rgba(46,197,238,.07));border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:16px">
+                  <div style="flex:none;width:54px;height:54px;border-radius:12px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em">Herbie Hancock</span>
+                      <span style="display:flex;align-items:flex-end;gap:2px;height:13px">
+                        <span style="width:3px;height:100%;border-radius:1px;background:#8f6cf5;animation:un-eq .9s ease-in-out infinite"></span>
+                        <span style="width:3px;height:100%;border-radius:1px;background:#8f6cf5;animation:un-eq .9s ease-in-out infinite;animation-delay:.15s"></span>
+                        <span style="width:3px;height:100%;border-radius:1px;background:#8f6cf5;animation:un-eq .9s ease-in-out infinite;animation-delay:.3s"></span>
+                      </span>
+                    </div>
+                    <div style="margin-top:4px;font-size:13px;color:#9b98ab">Watermelon Man <span style="color:#6d6a7d">· 0:30</span></div>
+                  </div>
+                  <span style="flex:none;width:46px;height:46px;border-radius:999px;border:1px solid #3a3352;display:flex;align-items:center;justify-content:center;font-size:15px;color:#c8c4d8">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#8f6cf5;display:flex;align-items:center;justify-content:center;gap:4px">
+                    <span style="display:block;width:4px;height:16px;border-radius:1px;background:#08080b"></span>
+                    <span style="display:block;width:4px;height:16px;border-radius:1px;background:#08080b"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- selected row -->
+              <div style="position:relative">
+                <span style="position:absolute;left:-29px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:999px;background:#0a0a0f;border:3px solid #4f7fe0;box-shadow:0 0 14px 3px rgba(79,127,224,.55)"></span>
+                <div style="border:1.5px solid #4f7fe0;background:#12141d;border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:16px;box-shadow:0 0 0 4px rgba(79,127,224,.1)">
+                  <div style="flex:none;width:54px;height:54px;border-radius:12px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em">Air</span>
+                      <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #2a2a38;border-radius:999px;padding:3px 9px 3px 8px">
+                        <span style="display:flex;align-items:flex-end;gap:2px;height:10px">
+                          <span style="width:3px;height:4px;border-radius:1px;background:#f5479b"></span>
+                          <span style="width:3px;height:7px;border-radius:1px;background:#2f2f3d"></span>
+                          <span style="width:3px;height:10px;border-radius:1px;background:#2f2f3d"></span>
+                        </span>
+                        <span style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b98ab">low reach</span>
+                      </span>
+                      <span style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#7fa4ec">showing detail</span>
+                    </div>
+                    <div style="margin-top:4px;font-size:13px;color:#9b98ab">La Femme d&rsquo;Argent <span style="color:#6d6a7d">· 0:30</span></div>
+                  </div>
+                  <span style="flex:none;width:46px;height:46px;border-radius:999px;border:1px solid #4f7fe0;background:rgba(79,127,224,.16);display:flex;align-items:center;justify-content:center;font-size:15px;color:#f2f0f7">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#191922;border:1px solid #2a2a38;display:flex;align-items:center;justify-content:center">
+                    <span style="display:block;width:0;height:0;margin-left:3px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #f2f0f7"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="position:relative">
+                <span style="position:absolute;left:-29px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:999px;background:#0a0a0f;border:3px solid #b95ec4"></span>
+                <div style="border:1px solid #1e1e29;background:#0e0e14;border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:16px">
+                  <div style="flex:none;width:54px;height:54px;border-radius:12px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em">Cortex</span>
+                      <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #2a2a38;border-radius:999px;padding:3px 9px 3px 8px">
+                        <span style="display:flex;align-items:flex-end;gap:2px;height:10px">
+                          <span style="width:3px;height:4px;border-radius:1px;background:#f5479b"></span>
+                          <span style="width:3px;height:7px;border-radius:1px;background:#2f2f3d"></span>
+                          <span style="width:3px;height:10px;border-radius:1px;background:#2f2f3d"></span>
+                        </span>
+                        <span style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b98ab">low reach</span>
+                      </span>
+                    </div>
+                    <div style="margin-top:4px;font-size:13px;color:#9b98ab">Huit Octobre 1971 <span style="color:#6d6a7d">· 0:30</span></div>
+                  </div>
+                  <span style="flex:none;width:46px;height:46px;border-radius:999px;border:1px solid #262633;display:flex;align-items:center;justify-content:center;font-size:15px;color:#9b98ab">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#191922;border:1px solid #2a2a38;display:flex;align-items:center;justify-content:center">
+                    <span style="display:block;width:0;height:0;margin-left:3px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #f2f0f7"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="position:relative">
+                <span style="position:absolute;left:-29px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:999px;background:#0a0a0f;border:3px solid #d94fb0"></span>
+                <div style="border:1px solid #1e1e29;background:#0e0e14;border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:16px">
+                  <div style="flex:none;width:54px;height:54px;border-radius:12px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em">Stereolab</div>
+                    <div style="margin-top:4px;font-size:13px;color:#9b98ab">Cybele&rsquo;s Reverie <span style="color:#6d6a7d">· 0:30</span></div>
+                  </div>
+                  <span style="flex:none;width:46px;height:46px;border-radius:999px;border:1px solid #262633;display:flex;align-items:center;justify-content:center;font-size:15px;color:#9b98ab">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#191922;border:1px solid #2a2a38;display:flex;align-items:center;justify-content:center">
+                    <span style="display:block;width:0;height:0;margin-left:3px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #f2f0f7"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="position:relative">
+                <span style="position:absolute;left:-29px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:999px;background:#0a0a0f;border:3px solid #f5479b;box-shadow:0 0 14px 2px rgba(245,71,155,.45)"></span>
+                <div style="border:1px solid #2a2a38;background:#111119;border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:16px">
+                  <div style="flex:none;width:54px;height:54px;border-radius:12px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#f5479b">You were heading here</div>
+                    <div style="margin-top:5px;font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em">Daft Punk</div>
+                    <div style="margin-top:2px;font-size:13px;color:#9b98ab">Digital Love <span style="color:#6d6a7d">· 0:30</span></div>
+                  </div>
+                  <span style="flex:none;width:46px;height:46px;border-radius:999px;border:1px solid #2a2a38;display:flex;align-items:center;justify-content:center;font-size:15px;color:#9b98ab">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#f5479b;display:flex;align-items:center;justify-content:center">
+                    <span style="display:block;width:0;height:0;margin-left:3px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #08080b"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- docked detail panel -->
+          <div style="position:sticky;top:24px;border:1px solid #2a3450;background:linear-gradient(180deg,#101420,#0c0c12 55%);border-radius:18px;overflow:hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #1c2233">
+              <span style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7fa4ec">Stop 3 of 6 · detail</span>
+              <span style="width:34px;height:34px;border-radius:999px;border:1px solid #2a3450;display:flex;align-items:center;justify-content:center;font-size:14px;color:#9b98ab">✕</span>
+            </div>
+            <div style="padding:20px 18px 22px;display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="flex:none;width:86px;height:86px;border-radius:14px;background:#1e1e29"></div>
+                <div style="min-width:0">
+                  <div style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:600;letter-spacing:-.03em">Air</div>
+                  <div style="margin-top:5px;font-size:13px;color:#9b98ab">Versailles, France · since 1995</div>
+                  <div style="margin-top:9px;display:inline-flex;align-items:center;gap:7px;border:1px solid #2a2a38;border-radius:999px;padding:4px 10px 4px 8px">
+                    <span style="display:flex;align-items:flex-end;gap:2px;height:10px">
+                      <span style="width:3px;height:4px;border-radius:1px;background:#f5479b"></span>
+                      <span style="width:3px;height:7px;border-radius:1px;background:#2f2f3d"></span>
+                      <span style="width:3px;height:10px;border-radius:1px;background:#2f2f3d"></span>
+                    </span>
+                    <span style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9b98ab">low reach</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">Genres</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <span style="border:1px solid #262633;background:#111119;border-radius:999px;padding:7px 13px;font-size:13px;color:#c8c4d8">french house</span>
+                  <span style="border:1px solid #262633;background:#111119;border-radius:999px;padding:7px 13px;font-size:13px;color:#c8c4d8">downtempo</span>
+                  <span style="border:1px solid #262633;background:#111119;border-radius:999px;padding:7px 13px;font-size:13px;color:#c8c4d8">ambient pop</span>
+                  <span style="border:1px solid #262633;background:#111119;border-radius:999px;padding:7px 13px;font-size:13px;color:#c8c4d8">trip hop</span>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">Why this stop</div>
+                <div style="font-size:14px;line-height:1.55;color:#9b98ab;text-wrap:pretty">Shares a listener base with Herbie Hancock through jazz-leaning electronica, and hands off cleanly to Daft Punk&rsquo;s side of French house.</div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">On Spotify</div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <span style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:999px;background:#1db954;color:#062d13;font-size:14.5px;font-weight:600">Open artist on Spotify</span>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                    <span style="display:flex;align-items:center;justify-content:center;height:46px;border-radius:999px;border:1px solid #2a2a38;background:#111119;font-size:13.5px;color:#f2f0f7">Play this clip</span>
+                    <span style="display:flex;align-items:center;justify-content:center;height:46px;border-radius:999px;border:1px solid #2a2a38;background:#111119;font-size:13.5px;color:#f2f0f7">Save track</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="height:1px;background:#1c2233"></div>
+
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6d6a7d">Reroute from here</div>
+                <div style="border:1px solid rgba(245,71,155,.45);background:linear-gradient(130deg,rgba(245,71,155,.14),rgba(143,108,245,.06));border-radius:12px;padding:14px 16px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                    <span style="font-size:15.5px;font-weight:600;color:#f2f0f7">Dig deeper</span>
+                    <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#f5479b">recommended</span>
+                  </div>
+                  <div style="margin-top:6px;font-size:13px;line-height:1.45;color:#9b98ab">Rebuilds the journey through lower-reach artists from this point on.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#0c0c12;border-top:1px solid #1c1c26;padding:16px 40px 20px">
+          <div style="display:flex;align-items:center;gap:20px">
+            <div style="flex:none;width:40px;height:40px;border-radius:999px;background:#8f6cf5;display:flex;align-items:center;justify-content:center;gap:4px">
+              <span style="display:block;width:3.5px;height:14px;border-radius:1px;background:#08080b"></span>
+              <span style="display:block;width:3.5px;height:14px;border-radius:1px;background:#08080b"></span>
+            </div>
+            <div style="flex:none;width:40px;height:40px;border-radius:10px;background:#1e1e29"></div>
+            <div style="min-width:0;flex:1">
+              <div style="font-size:14px;font-weight:600">Herbie Hancock <span style="color:#6d6a7d;font-weight:400">— Watermelon Man</span></div>
+              <div style="margin-top:8px;display:flex;align-items:center;gap:10px">
+                <span style="font-size:11.5px;color:#6d6a7d">0:11</span>
+                <span style="position:relative;flex:1;height:3px;border-radius:999px;background:#1e1e29">
+                  <span style="position:absolute;left:0;top:0;bottom:0;width:37%;border-radius:999px;background:linear-gradient(90deg,#2ec5ee,#8f6cf5)"></span>
+                </span>
+                <span style="font-size:11.5px;color:#6d6a7d">0:30</span>
+              </div>
+            </div>
+            <span style="flex:none;font-size:12.5px;color:#9b98ab;border:1px solid #262633;border-radius:999px;padding:8px 14px">Stop 2 of 6</span>
+          </div>
+        </div>
+      </div>
+
+        <div data-screen-label="2b mobile sheet" style="width:390px;background:#0a0a0f;border:1px solid #1e1e29;border-radius:20px;overflow:hidden;position:relative">
+          <div style="padding:22px 18px 30px;min-height:780px;filter:brightness(.62)">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:9px">
+                <img src="assets/unsung-mark.png" alt="" style="width:26px;height:26px">
+                <span style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;letter-spacing:-.02em">unsung<span style="color:#6d6a7d;font-weight:400">.fm</span></span>
+              </div>
+              <span style="border:1px solid #262633;border-radius:999px;padding:9px 14px;font-size:12.5px;color:#9b98ab">New path</span>
+            </div>
+            <div style="margin-top:20px;font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:500;letter-spacing:-.025em;line-height:1.2">Miles Davis <span style="color:#6d6a7d">→</span> Daft Punk</div>
+            <div style="margin-top:8px;font-size:13px;color:#6d6a7d">6 steps</div>
+            <div style="margin-top:22px;position:relative;padding-left:22px;display:flex;flex-direction:column;gap:10px">
+              <span style="position:absolute;left:4.5px;top:36px;bottom:36px;width:3px;border-radius:999px;background:linear-gradient(to bottom,#2ec5ee,#8f6cf5,#f5479b)"></span>
+              <div style="position:relative">
+                <span style="position:absolute;left:-24px;top:50%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:#0a0a0f;border:3px solid #2ec5ee"></span>
+                <div style="border:1px solid #2a2a38;background:#111119;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px">
+                  <div style="flex:none;width:48px;height:48px;border-radius:10px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:600;letter-spacing:-.02em">Miles Davis</div>
+                    <div style="margin-top:3px;font-size:12.5px;color:#9b98ab">So What</div>
+                  </div>
+                  <span style="flex:none;width:44px;height:44px;border-radius:999px;border:1px solid #2a2a38;display:flex;align-items:center;justify-content:center;font-size:14px;color:#9b98ab">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#2ec5ee;display:flex;align-items:center;justify-content:center">
+                    <span style="display:block;width:0;height:0;margin-left:3px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #08080b"></span>
+                  </div>
+                </div>
+              </div>
+              <div style="position:relative">
+                <span style="position:absolute;left:-24px;top:50%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:#0a0a0f;border:3px solid #8f6cf5"></span>
+                <div style="border:1px solid rgba(143,108,245,.45);background:linear-gradient(120deg,rgba(143,108,245,.18),rgba(46,197,238,.07));border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px">
+                  <div style="flex:none;width:48px;height:48px;border-radius:10px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:600;letter-spacing:-.02em">Herbie Hancock</div>
+                    <div style="margin-top:3px;font-size:12.5px;color:#9b98ab">Watermelon Man</div>
+                  </div>
+                  <span style="flex:none;width:44px;height:44px;border-radius:999px;border:1px solid #3a3352;display:flex;align-items:center;justify-content:center;font-size:14px;color:#c8c4d8">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#8f6cf5;display:flex;align-items:center;justify-content:center;gap:4px">
+                    <span style="display:block;width:4px;height:15px;border-radius:1px;background:#08080b"></span>
+                    <span style="display:block;width:4px;height:15px;border-radius:1px;background:#08080b"></span>
+                  </div>
+                </div>
+              </div>
+              <div style="position:relative">
+                <span style="position:absolute;left:-24px;top:50%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:#0a0a0f;border:3px solid #4f7fe0"></span>
+                <div style="border:1.5px solid #4f7fe0;background:#12141d;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px">
+                  <div style="flex:none;width:48px;height:48px;border-radius:10px;background:#1e1e29"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:600;letter-spacing:-.02em">Air</div>
+                    <div style="margin-top:3px;font-size:12.5px;color:#9b98ab">La Femme d&rsquo;Argent</div>
+                  </div>
+                  <span style="flex:none;width:44px;height:44px;border-radius:999px;border:1px solid #4f7fe0;background:rgba(79,127,224,.16);display:flex;align-items:center;justify-content:center;font-size:14px;color:#f2f0f7">›</span>
+                  <div style="flex:none;width:48px;height:48px;border-radius:999px;background:#191922;border:1px solid #2a2a38;display:flex;align-items:center;justify-content:center">
+                    <span style="display:block;width:0;height:0;margin-left:3px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #f2f0f7"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- bottom sheet -->
+          <div style="position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg,#101420,#0b0b11 55%);border-top:1px solid #2a3450;border-radius:22px 22px 0 0;box-shadow:0 -30px 60px -20px rgba(0,0,0,.9);display:flex;flex-direction:column">
+            <div style="padding:10px 0 4px;display:flex;justify-content:center">
+              <span style="width:44px;height:4px;border-radius:999px;background:#2a3450"></span>
+            </div>
+            <div style="padding:8px 18px 22px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7fa4ec">Stop 3 of 6</span>
+                <span style="width:36px;height:36px;border-radius:999px;border:1px solid #2a3450;display:flex;align-items:center;justify-content:center;font-size:13px;color:#9b98ab">✕</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="flex:none;width:76px;height:76px;border-radius:14px;background:#1e1e29"></div>
+                <div style="min-width:0">
+                  <div style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:600;letter-spacing:-.03em">Air</div>
+                  <div style="margin-top:4px;font-size:12.5px;color:#9b98ab">Versailles, France · since 1995</div>
+                  <div style="margin-top:8px;display:inline-flex;align-items:center;gap:7px;border:1px solid #2a2a38;border-radius:999px;padding:4px 10px 4px 8px">
+                    <span style="display:flex;align-items:flex-end;gap:2px;height:9px">
+                      <span style="width:3px;height:4px;border-radius:1px;background:#f5479b"></span>
+                      <span style="width:3px;height:6.5px;border-radius:1px;background:#2f2f3d"></span>
+                      <span style="width:3px;height:9px;border-radius:1px;background:#2f2f3d"></span>
+                    </span>
+                    <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9b98ab">low reach</span>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:7px">
+                <span style="border:1px solid #262633;background:#111119;border-radius:999px;padding:7px 12px;font-size:12.5px;color:#c8c4d8">french house</span>
+                <span style="border:1px solid #262633;background:#111119;border-radius:999px;padding:7px 12px;font-size:12.5px;color:#c8c4d8">downtempo</span>
+                <span style="border:1px solid #262633;background:#111119;border-radius:999px;padding:7px 12px;font-size:12.5px;color:#c8c4d8">ambient pop</span>
+              </div>
+              <div style="font-size:13.5px;line-height:1.55;color:#9b98ab;text-wrap:pretty">Shares a listener base with Herbie Hancock through jazz-leaning electronica, and hands off cleanly to Daft Punk&rsquo;s French house.</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <span style="display:flex;align-items:center;justify-content:center;height:48px;border-radius:999px;background:#1db954;color:#062d13;font-size:14.5px;font-weight:600">Open artist on Spotify</span>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <span style="display:flex;align-items:center;justify-content:center;height:46px;border-radius:999px;border:1px solid #2a2a38;background:#111119;font-size:13.5px;color:#f2f0f7">Play clip</span>
+                  <span style="display:flex;align-items:center;justify-content:center;height:46px;border-radius:999px;border:1px solid #2a2a38;background:#111119;font-size:13.5px;color:#f2f0f7">Save track</span>
+                </div>
+              </div>
+              <div style="height:1px;background:#1c2233"></div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="border:1px solid rgba(245,71,155,.5);background:linear-gradient(130deg,rgba(245,71,155,.16),rgba(143,108,245,.06));border-radius:12px;padding:13px 16px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                    <span style="font-size:15px;font-weight:600;color:#f2f0f7">Dig deeper</span>
+                    <span style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#f5479b">recommended</span>
+                  </div>
+                  <div style="margin-top:5px;font-size:12.5px;line-height:1.45;color:#9b98ab">Rebuilds the route through lower-reach artists.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showHowItWorks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Landing&quot;},&quot;showReach&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Journey&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showHowItWorks: this.props.showHowItWorks ?? true,
+      showReach: this.props.showReach ?? true,
+      samples: [
+        { from: 'Miles Davis', to: 'Radiohead', hops: '8 hops' },
+        { from: 'Dolly Parton', to: 'Daft Punk', hops: '6 hops' },
+        { from: 'Bad Bunny', to: 'Chappell Roan', hops: '5 hops' },
+      ],
+      teaser: [
+        { name: 'Miles Davis', tag: 'you picked this' },
+        { name: 'Herbie Hancock', tag: '' },
+        { name: 'Cortex', tag: 'low reach' },
+        { name: 'Air', tag: 'low reach' },
+        { name: 'Daft Punk', tag: 'you picked this' },
+      ],
+      middle: [
+        { name: 'Cortex', track: 'Huit Octobre 1971 · 0:30' },
+        { name: 'Stereolab', track: 'Cybele\u2019s Reverie · 0:30' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

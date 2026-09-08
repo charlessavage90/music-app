@@ -3,7 +3,7 @@ import { afterEach, expect, test, vi } from 'vitest';
 import * as client from '@/api/client';
 import { useEndpoints } from './useEndpoints';
 
-const artist = (mbid: string, name: string) => ({ mbid, name, disambiguation: '', popularity: 0 });
+const artist = (mbid: string, name: string) => ({ mbid, name, disambiguation: '', popularity: 0, spotifyId: null, appleId: null, facts: null });
 afterEach(() => vi.restoreAllMocks());
 
 test('resolves both endpoint artists', async () => {

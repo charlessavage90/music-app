@@ -8,7 +8,7 @@ test('landing page renders at root', () => {
       <App />
     </MemoryRouter>,
   );
-  expect(screen.getByRole('heading', { name: /artist path/i })).toBeInTheDocument();
+  expect(screen.getByRole('img', { name: 'Unsung.fm' })).toBeInTheDocument();
 });
 
 test('an unknown URL offers a way back rather than a blank page', () => {

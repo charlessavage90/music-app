@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { expect, test } from 'vitest';
 import { PathSkeleton } from './PathSkeleton';
 
-const artist = (name: string) => ({ mbid: name, name, disambiguation: '', popularity: 0 });
+const artist = (name: string) => ({ mbid: name, name, disambiguation: '', popularity: 0, spotifyId: null, appleId: null, facts: null });
 
 test('names both endpoints when they are known', () => {
   render(<PathSkeleton from={artist('Nirvana')} to={artist('Cocteau Twins')} />);

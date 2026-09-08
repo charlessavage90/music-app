@@ -148,3 +148,25 @@ test('a disposed player refuses to start playing again', () => {
   expect(el.src).not.toContain('clip.mp3');
   expect(started).not.toHaveBeenCalled();
 });
+
+test('timeupdate reports position and duration in seconds', () => {
+  const player = new HtmlAudioPlayer();
+  const audio = audioOf(player);
+  Object.defineProperty(audio, 'currentTime', { value: 11.2, configurable: true });
+  Object.defineProperty(audio, 'duration', { value: 30, configurable: true });
+  const cb = vi.fn();
+  player.onTimeUpdate(cb);
+  audio.dispatchEvent(new Event('timeupdate'));
+  expect(cb).toHaveBeenCalledWith(11.2, 30);
+});
+
+test('a second timeupdate handler replaces the first, like the other two', () => {
+  const player = new HtmlAudioPlayer();
+  const first = vi.fn();
+  const second = vi.fn();
+  player.onTimeUpdate(first);
+  player.onTimeUpdate(second);
+  audioOf(player).dispatchEvent(new Event('timeupdate'));
+  expect(first).not.toHaveBeenCalled();
+  expect(second).toHaveBeenCalledTimes(1);
+});

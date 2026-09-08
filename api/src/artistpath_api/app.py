@@ -19,7 +19,8 @@ from artistpath_api.clips import (
 from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.models import (
-    ArtistOut, ExclusionIn, HealthOut, PathRequest, PathResponse, TrackOut,
+    ArtistFacts, ArtistOut, ExclusionIn, HealthOut, MetaOut, PathRequest, PathResponse,
+    TrackOut,
 )
 from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion, find_journey
 from artistpath_api.search import ArtistSearch
@@ -138,6 +139,12 @@ def create_app(
             return await call_next(request)
 
     def artist_out(node: int) -> ArtistOut:
+        # THE ONLY PLACE ArtistOut IS CONSTRUCTED, and deliberately so: it
+        # reaches the wire in four positions — PathResponse.artists,
+        # PathResponse.bypassed, GET /api/artists/{mbid} and
+        # GET /api/artists/search — and one helper is what stops them drifting.
+        # Add a field here, not at a call site.
+        facts = store.facts_of(node)
         return ArtistOut(
             mbid=store.mbids[node],
             name=store.names[node],
@@ -145,6 +152,13 @@ def create_app(
             # `popularity` is the API's JSON field name, consumed by the
             # frontend (frontend/src/api/types.ts); it stays. The value is raw.
             popularity=float(store.pop_raw[node]),
+            # LUX-4. The accessors already normalise the artifact's in-band ""
+            # to None; `facts` normalises {} the same way, so "the extraction
+            # found nothing" and "this artifact predates LUX-4" arrive on the
+            # wire identically. Both render as nothing at all (`L4-D3`).
+            spotify_id=store.spotify_id_of(node),
+            apple_id=store.apple_id_of(node),
+            facts=ArtistFacts(**facts) if facts else None,
         )
 
     @app.get("/api/artists/search")
@@ -303,6 +317,12 @@ def create_app(
             artists=store.artist_count,
             edges=len(store.neighbours),
         )
+
+    @app.get("/api/meta")
+    async def meta() -> MetaOut:
+        # `async def` for the same reason /health is (G3-A1): in-memory reads
+        # only, so it must never queue behind build_path in the thread pool.
+        return MetaOut(artists=store.artist_count, graph_sha256=store.source_sha256)
 
     return app
 
