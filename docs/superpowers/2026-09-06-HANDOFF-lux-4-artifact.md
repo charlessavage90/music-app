@@ -1,7 +1,16 @@
 # Handoff — `LUX-4` through the artifact, 2026-09-06
 
-**Role: ACTIVE — this is the CURRENT handoff FOR THE `LUX-4` TRACK.** Nothing supersedes it.
-Supersedes
+**⚠ Role: SUPERSEDED ON EVERYTHING by
+[`2026-09-08-HANDOFF-lux-4-wire-and-card.md`](2026-09-08-HANDOFF-lux-4-wire-and-card.md),
+2026-09-08 — NOT the current handoff.** Its "Start here" is spent: `L4-T8`–`L4-T11` are done
+and the plan is finished, so the successor supersedes this on **next actions and status
+alike**, not on next actions only. **Everything this note records about `L4-T1`–`L4-T7` still
+stands in full**, including its whole must-not-revert list and the artifact's sha — with one
+count updated forward: it says the plan was wrong about the repository **four** times, which
+was true when written, and a **fifth** was found during `L4-T10`. The successor carries it.
+
+*(Original role:)* **ACTIVE — this is the CURRENT handoff FOR THE `LUX-4` TRACK.** Nothing
+supersedes it. Supersedes
 [`2026-09-05-HANDOFF-lux-e1-and-lux-4-plan.md`](2026-09-05-HANDOFF-lux-e1-and-lux-4-plan.md)
 on next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.

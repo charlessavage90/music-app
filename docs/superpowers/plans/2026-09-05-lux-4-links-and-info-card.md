@@ -1,9 +1,24 @@
 # `LUX-4` — streaming links and the artist info card: implementation plan
 
-**Role: ACTIVE — the implementation plan for `LUX-4`. UNSTARTED; no task has run.**
+**⚠ Role: FULLY EXECUTED — all eleven tasks ran, `L4-T1`–`L4-T11`, across PR #105 (the
+artifact, 2026-09-06) and PR #112 (the wire and the card, 2026-09-08). Nothing here is left to
+do.** The record is
+[`../2026-09-06-lux-4-execution-log.md`](../2026-09-06-lux-4-execution-log.md), which covers
+the whole plan. *(This line said "UNSTARTED; no task has run" until 2026-09-08 — through both
+sessions that executed it.)*
+
+**⚠ READ THE LOG BEFORE TRUSTING ANY TASK BELOW.** The plan was **wrong about the repository
+five times**, each caught by grepping rather than by reading. Four are tabulated at the log's
+§2; the fifth, and the only one that would have shipped silently, is its §8 — **`L4-T10` step 6
+claims the API layer already maps `snake_case` at the boundary, and it does not.** Three
+shipped interfaces also differ deliberately from what the tasks below specify; the log's §10
+tabulates them with reasons.
+
+*(Original role:)* **ACTIVE — the implementation plan for `LUX-4`.**
 Argues from [`specs/2026-09-03-launch-ux-scope.md`](../specs/2026-09-03-launch-ux-scope.md)
 §4, **which governs where the two disagree**; executors read both. **Owns no figures.**
-**⚠ `L4-T1` stops for an owner decision and blocks every other task.**
+~~**⚠ `L4-T1` stops for an owner decision and blocks every other task.**~~ *(Discharged
+2026-09-06 — the owner ruled and `L4-T1` ran; see the log's §1.)*
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development`
 > (recommended) or `superpowers:executing-plans` to implement this plan task-by-task. Steps use

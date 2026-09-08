@@ -1,6 +1,9 @@
 # `LUX-4` execution log — through the artifact, 2026-09-06
 
-**Role: RETAINED EXECUTION LOG for `L4-T1`–`L4-T7`. ACTIVE.** Reasoning and corrections
+**Role: RETAINED EXECUTION LOG for `L4-T1`–`L4-T11` — the WHOLE plan. ACTIVE.** *(§1–§7 are
+the first session's, through the artifact; §8–§13 were appended 2026-09-08 by the second, which
+finished the plan. This line said `L4-T1`–`L4-T7` until then, and a reader who trusted it would
+have stopped at the halfway point.)* Reasoning and corrections
 only; git carries what each task did and the code carries how. **Owns no figures** — the
 `LUX-4` payload and coverage figures live in
 [`builder/analysis/2026-09-05-lux4-extract/README.md`](../../builder/analysis/2026-09-05-lux4-extract/README.md),
@@ -44,6 +47,13 @@ caught by the owner rather than by the session.
 
 Every one was caught by checking against the repository, and none by reading the plan
 carefully. **The remaining tasks (`L4-T8`–`L4-T11`) are unverified.**
+
+> **⚠ FORWARD CORRECTION, 2026-09-08 — both sentences above have moved, and the section below
+> is deliberately left as written.** There were **five**, not four: `L4-T10` claimed the
+> frontend already mapped `snake_case` artists at the API boundary and it did not, which is
+> **§8**. And `L4-T8`–`L4-T11` are **no longer unverified** — they were executed, each value
+> they name grepped first, and the plan is finished. The warning was correct and load-bearing
+> when written; it is discharged, not overturned.
 
 | # | Task | The defect | How it would have failed |
 |---|---|---|---|
@@ -245,3 +255,46 @@ named as **owed, not waived**; the owner re-authed mid-session and both scans th
 - **Nothing was added to the standing context layer.** `CLAUDE.md`, `memory/MEMORY.md` and
   every skill and agent `description:` are untouched by this diff, so **D6 is zero and nothing
   is owed to the owner** for it.
+
+## 14. Closeout figures and the checks that moved something
+
+**D6, measured against `~/.claude/projects/C--dev-music-app/memory/`.** Unconditional
+**51,694 characters — delta ZERO**, identical to §7's figure. Conditional **2,551 lines**
+against §7's 2,549: **the +2 is NOT this branch's.** `git diff --name-only origin/main...HEAD`
+returns nothing under `CLAUDE.md` or `.claude/`, and the two lines are in
+`memory/working-style.md`, modified 2026-09-06 21:59 — outside git, after §7 was written, and
+by another session. Attributing it here would have been the easy and wrong thing to record.
+
+**B3 mutation testing — four mutations, all red, none vacuous.** Removing `spotify_id_of`'s
+bounds check reddens 3 tests; leaking the in-band `""` instead of normalising to `None`
+reddens 1; restoring the artists-are-cast-not-mapped code the plan assumed reddens 3 in
+`client.test.ts`; restoring `truncate` reddens the new e2e layout assertion.
+
+**B2 reachability** — every new module (`ArtistInfo`, `StreamingLinks`, `dspUrls`,
+`ArtistFacts`) has an inbound import from production code. No orphans.
+
+**B4 found one defect, in this session's own prose.** Comments said the three keys are absent
+from artifacts built **before 2026-09-05**; `git log -S 'meta["spotify_ids"]'` puts the writing
+commit at **2026-09-06**. Wrong by one day and in the misleading direction — it implied a
+2026-09-05 artifact would carry them. Corrected in `graph_store.py` and the test docstring.
+Small, and exactly the "confident prose about correct code" class this ritual targets.
+
+**B1 — `docs-lint` hard checks passed; its CAND output is pre-existing threshold constants in
+frozen pre-registrations, none from this diff.** `doc-auditor` then found **three live stale
+status claims, all caused by this session's own append**: the execution log's own role line and
+`docs/README.md`'s row for it both still said `L4-T1`–`L4-T7`, and the 2026-09-06 handoff still
+claimed to be current. **A fourth was found by reading rather than by the auditor** — the
+`LBD-` handoff's row cross-referenced the superseded `LUX-4` handoff as the other live track's
+current note. All four fixed; a map row was added for the successor handoff.
+
+**A4 is inapplicable and that is stated rather than skipped: this work added no config knob.**
+`git diff origin/main...HEAD -- api/.../config.py builder/.../config.py` is empty, so there is
+no default to flip.
+
+**D2's condition is not met.** The APG1 keys are additive and `FORMAT_VERSION` stays `1`, so
+the committed 500-node fixtures are not stale — and `tests/fixtures/graph-fixture.bin` loads
+with all three lists empty and every accessor reading absent, which makes it a **real
+pre-`LUX-4` artifact exercising the absence path**, not merely an untouched file.
+
+**A5 — ports 8000 and 5173 are both free**, and deliberately so. Neither queued test needs a
+local server: both exercise the deployed site.

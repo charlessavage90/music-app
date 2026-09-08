@@ -2,7 +2,7 @@
 
 Same additive-key contract as deezer_ids, for the same reason: FORMAT_VERSION
 is deliberately NOT bumped, both parsers check it for strict equality, and so
-every artifact built before 2026-09-05 lacks these keys — including the one the
+every artifact built before 2026-09-06 lacks these keys — including the one the
 app serves today. Absence must load clean and read as "nothing to show", which
 degrades to a search link on the card rather than to a missing button.
 

@@ -40,7 +40,7 @@ class GraphStore:
     # `deezer_id_of`, never by indexing, since it may be shorter than N.
     deezer_ids: list[str] = field(default_factory=list)
     # LUX-4. Streaming ids and structured MusicBrainz facts, indexed by node
-    # id. Additive keys, absent from every artifact built before 2026-09-05 —
+    # id. Additive keys, absent from every artifact built before 2026-09-06 —
     # including the one the app serves — so read them through the accessors
     # below, never by indexing.
     #
