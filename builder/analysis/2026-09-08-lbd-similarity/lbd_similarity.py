@@ -464,18 +464,23 @@ class Sampler(threading.Thread):
         self.interval = interval
         self.peak_rss_gb = 0.0
         self.peak_spill_gb = 0.0
-        self._stop = threading.Event()
+        self._stop_event = threading.Event()
 
     def run(self) -> None:
-        while not self._stop.is_set():
+        while not self._stop_event.is_set():
             ws = _working_set_gb()
             if ws is not None:
                 self.peak_rss_gb = max(self.peak_rss_gb, ws)
             self.peak_spill_gb = max(self.peak_spill_gb, dir_size_gb(self.temp_dir))
-            self._stop.wait(self.interval)
+            self._stop_event.wait(self.interval)
 
     def stop(self) -> None:
-        self._stop.set()
+        # NOT `self._stop`: threading.Thread ALREADY has a private _stop() method, and
+        # shadowing it with an Event makes Thread.join() call the Event and raise
+        # "'Event' object is not callable" -- after the query has finished but BEFORE the
+        # manifest is written, so the run's identity and timings are lost and the work has
+        # to be repeated. That happened once here.
+        self._stop_event.set()
         self.join(timeout=self.interval * 2)
 
 

@@ -67,6 +67,34 @@ one artist survives); `T3-P2` every user's last listen is discarded by three-val
 `T3-P3` the self-join counts every pair twice, so `contribution` bites at half the co-listens
 it appears to. Each is LB's behaviour and each is deliberate.
 
+### The redirect arm changes almost nothing — measured, on identical users
+
+`LBDR-F4`'s mechanism is real and the correction is kept. **Its magnitude is negligible**, and
+this is the figure Task 1's §5 deferred and the plan asked to be recorded.
+
+Same 1-in-256 user slice, run twice, differing **only** in whether the redirect arm is present:
+
+| | pairs in `T` |
+|---|---:|
+| redirects applied | 5,970,451 |
+| redirects absent | 5,970,495 |
+| **net delta** | **−44 (−0.001 %)** |
+| rows present only with redirects | 126 |
+| rows present only without | 170 |
+
+So **about 0.005 % of pairs move at all**, and the net effect on the pair count is four
+hundredths of a tenth of a percent. `LBDR-F4` said the omission would be "a systematic,
+one-directional divergence in exactly the stage `LBDR-F3` shows is already fragile" — the
+direction is real (the net is negative) and the size is not material.
+
+**What this does and does not license.** It discharges `LBDR-F4` with a number instead of a
+caveat, and it means the redirect omission **cannot account for any meaningful `LBD-C1` gap**
+— which is worth knowing before the fidelity read, because design §6 pre-authorises calling an
+unexplained gap "lineage". It is measured on one user slice at `LBD-A0`'s parameters, so it is
+not a claim about every arm. The correct frame is used from here on regardless: fidelity to
+LB's behaviour is the requirement whether the term moves the answer or not, which is the same
+reasoning `R-FEAT` applies to the featured-artist weight.
+
 ### The redirect arm of the duration frame (`T3-D6` / `LBDR-F4`)
 
 Task 1 extracted only `recording`, so every listen on a **redirected** recording MBID fell to

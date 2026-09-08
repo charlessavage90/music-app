@@ -247,3 +247,41 @@ treating the probe's 63.7 minutes as mostly per-user work. It is mostly scan, th
 mostly avoidable overhead, and the honest position is that **the split between the two is
 still unmeasured** — which is what the next two runs are for, and why they hold thread count
 constant and vary only the slice fraction.
+
+### A third defect in this session's own instruments, and this one destroyed a run
+
+The `Sampler` thread added to fix the previous two stored its stop flag as `self._stop`.
+**`threading.Thread` already has a private `_stop()` method**, so `Thread.join()` called the
+Event and raised `'Event' object is not callable` — *after* the 30-minute query had finished
+but *before* the manifest was written. The parquet survived; the run's recorded identity,
+timings and memory figures did not.
+
+Three instrument defects now, all in code written to measure rather than to compute: a memory
+reading that was silently zero, a spill reading taken after the evidence was deleted, and a
+crash in the fix for both. **The measurement scaffolding has been less reliable than the
+transcription it exists to check** — which is an argument for keeping the manifest write
+before anything optional, not for writing fewer instruments.
+
+### `LBD-G4`'s own slice could not be run as configured — and the reason is a configuration error, not the data
+
+The pre-registered `user_id % 16` slice was launched with a 20 GB DuckDB memory limit on a
+31.7 GB machine and **was killed for exhausting memory.** Its spill directory was **0 bytes at
+the time of death**: it grew in RAM rather than spilling.
+
+Nothing else on the machine was implicated — the largest other process held 0.58 GB and 17.3
+GB was free once the query died. This was one process, configured wrong by this session.
+
+**Two things worth separating**, because they point in opposite directions:
+
+1. **The configuration error is mine and is fixed.** A memory limit set to two-thirds of
+   physical RAM, on a machine with a second session live, leaves no headroom for the query's
+   own un-accounted allocations. Re-run at 8 GB with spill on the NVMe.
+2. **It is nonetheless evidence about the data.** The 1-in-16 slice's aggregation wants more
+   than ~20 GB resident, which is a real fact about the shape of the pair table and is the
+   sort of thing `LBD-G4` exists to discover before the full pass rather than during it.
+
+**What must NOT be concluded yet:** that `LBD-G4` fires. Its memory arm is *"the slice
+extrapolates to a full-pass peak memory above 24 GB"*, and a killed run yields **no peak
+memory reading at all** — the number is missing, not high. Reading a crash as a gate firing
+would be inventing a measurement from an absence, which is the same move as reading a broken
+instrument's comfortable zero as a comfortable truth. The gate is read off the re-run.
