@@ -466,3 +466,38 @@ targets — `T3-M1` and `T3-M2` could no longer find the text they mutate. **The
 they would have reported nothing at all.** The mutant runner checks `if needle not in source`
 and fails loudly, which is the only reason this surfaced. A mutation check that cannot locate
 its target is not passing, it is blind, and it looks exactly like passing.
+
+### The testbed, and what one controlled measurement said that four guesses did not
+
+**Built the thing that should have existed before the first wrong guess:** 100 dump files
+**hardlinked** into a directory on the same volume — 16 GB addressable, **no extra disk
+consumed**, and a full stage-0 run over it costs about four minutes instead of twenty-five.
+That single change converts "measuring is expensive" into "measuring is cheap", which is what
+had been distorting every decision in this stretch.
+
+Then one controlled comparison: identical query, identical everything, **one variable** — the
+write mode.
+
+| write mode | rows out | wall | peak RSS | spill | output |
+|---|---:|---:|---:|---:|---:|
+| `PARTITION_BY` (64 buckets) | 195,719,125 | 7.3 min | 5.09 GB | **111.2 GB** | 4.33 GB |
+| flat | 195,719,125 | 4.1 min | 5.15 GB | **15.7 GB** | 3.36 GB |
+
+**Peak memory was never the problem.** Both runs sit at the 5 GB limit — DuckDB was respecting
+`memory_limit` the whole time. The partitioned write **spills 111 GB to produce a 4 GB
+output**, and it is that write pressure, not resident memory, that had been killing the
+machine. Every earlier fix aimed at the memory limit was aimed at the wrong quantity.
+
+**So stage 0 writes flat**, and stage 1 filters `user_id % 64` on read. A 47 GB intermediate
+re-read 64 times from NVMe is roughly 25 minutes in total — affordable, where 64 re-reads of
+the dump would have been over twenty-six hours.
+
+**Extrapolated from the testbed** (100 of 1,409 files, and reported as an extrapolation, not a
+measurement): ~2.8 billion rows and **~47 GB** for the flat intermediate, close to the original
+~50 GB estimate and below the 70–85 GB the windowless design was feared to cost. ~58 minutes.
+
+**The reusable lesson is about proportion, not care.** Four attempts were spent tuning a knob
+(`memory_limit`, then `ROW_GROUP_SIZE`) that the measurement shows was never binding. A
+hardlinked subset costs seconds to build and would have shown that before any of them. **When
+each experiment is expensive, build the cheap experiment first** — the instinct to skip
+straight to the real run is exactly backwards.

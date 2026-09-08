@@ -766,7 +766,8 @@ def main(argv: list[str] | None = None) -> int:
         # dump -- it reads only that bucket's bytes instead of rescanning everything. That is
         # the whole point of materialising stage 0.
         sql = (
-            f"SELECT *, (user_id % {args.buckets})::USMALLINT AS ubucket FROM ("
+            (f"SELECT *, (user_id % {args.buckets})::USMALLINT AS ubucket FROM ("
+             if args.buckets > 0 else "SELECT * FROM (")
             + listens_sql("artist_similarity_listens", "recording_length", "artist_credit")
             + ")"
         )
@@ -801,7 +802,7 @@ def main(argv: list[str] | None = None) -> int:
     sampler = Sampler(args.temp_dir)
     sampler.start()
     t0 = time.time()
-    if args.emit_listens:
+    if args.emit_listens and args.buckets > 0:
         args.out.mkdir(parents=True, exist_ok=True)
         con.execute(
             f"COPY ({sql}) TO '{args.out.as_posix()}' "
@@ -822,7 +823,9 @@ def main(argv: list[str] | None = None) -> int:
     sampler.stop()
 
     target = (
-        f"{args.out.as_posix()}/**/*.parquet" if args.emit_listens else args.out.as_posix()
+        f"{args.out.as_posix()}/**/*.parquet"
+        if (args.emit_listens and args.buckets > 0)
+        else args.out.as_posix()
     )
     rows = con.execute(f"SELECT count(*) FROM read_parquet('{target}')").fetchone()[0]
     manifest = {
@@ -840,9 +843,9 @@ def main(argv: list[str] | None = None) -> int:
         "user_mod": args.user_mod,
         "user_rem": args.user_rem,
         "out": str(args.out),
-        "out_sha256": None if args.emit_listens else sha256_of(args.out),
+        "out_sha256": None if (args.emit_listens and args.buckets > 0) else sha256_of(args.out),
         "out_bytes": sum(f.stat().st_size for f in args.out.rglob("*.parquet"))
-        if args.emit_listens
+        if (args.emit_listens and args.buckets > 0)
         else args.out.stat().st_size,
         "buckets": args.buckets if args.emit_listens else None,
         "row_group_size": args.row_group_size,
@@ -856,7 +859,9 @@ def main(argv: list[str] | None = None) -> int:
         "finished_utc": datetime.utcnow().isoformat() + "Z",
     }
     manifest_path = (
-        args.out / "MANIFEST.json" if args.emit_listens else args.out.with_suffix(".manifest.json")
+        args.out / "MANIFEST.json"
+        if (args.emit_listens and args.buckets > 0)
+        else args.out.with_suffix(".manifest.json")
     )
     manifest_path.write_text(
         json.dumps(manifest, indent=2), encoding="utf-8"
