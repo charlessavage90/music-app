@@ -187,3 +187,18 @@ disabled a pre-registered gate:**
 Recorded because the shape generalises and this project has met it before: **an instrument
 that reports a comfortable number because it is broken is indistinguishable from one
 reporting a comfortable truth.** Both defects produced values on the safe side of their gate.
+
+### Disk starvation, walked into with the warning already read
+
+The `LBD-` handoff records that two long jobs on this machine "saturated `D:` and starved
+each other, one to about 1 second of CPU in twenty minutes". This session read that, then ran
+the redirect extraction, the 1-in-256 probe and a full-dump scan concurrently — all three
+reading `D:`. Measured mid-run: the extraction's `bzip2` had consumed **360 s of CPU in 82
+minutes of wall clock, about 7 % utilisation.** It was not wedged; it was starved, by this
+session.
+
+The reusable form is narrower than "don't run two jobs". `bzip2` is single-threaded and
+CPU-bound on a 7.5 GB file, so it *looks* like it should coexist with anything — the
+contention is not for CPU but for **sequential read bandwidth on the same spindle**, against a
+scan reading two orders of magnitude more data. **Check what a job contends FOR, not how big
+it looks.**
