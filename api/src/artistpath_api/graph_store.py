@@ -39,6 +39,18 @@ class GraphStore:
     # app serves — and for stores built in tests. Read it through
     # `deezer_id_of`, never by indexing, since it may be shorter than N.
     deezer_ids: list[str] = field(default_factory=list)
+    # LUX-4. Streaming ids and structured MusicBrainz facts, indexed by node
+    # id. Additive keys, absent from every artifact built before 2026-09-05 —
+    # including the one the app serves — so read them through the accessors
+    # below, never by indexing.
+    #
+    # DISPLAY-ONLY, and that is the whole reason they carry no length check
+    # while fame_lb does: nothing here is indexed inside the cost function, so
+    # a short list cannot misprice an artist. It can only fail to show a link.
+    # Ids are platform id TAILS, not URLs (`L4-D2`) — the frontend composes.
+    spotify_ids: list[str] = field(default_factory=list)
+    apple_ids: list[str] = field(default_factory=list)
+    artist_facts: list[dict] = field(default_factory=list)
     # Where each artist's ListenBrainz listener count ranks within THIS
     # artifact's own population, 0-1. `None` when the artifact carries no fame
     # data — every artifact built before 2026-08-05, including the one the app
@@ -70,6 +82,40 @@ class GraphStore:
         if node < len(self.deezer_ids):
             return self.deezer_ids[node]
         return ""
+
+    # LUX-4's three accessors. Bounds-checked for the same reason as
+    # `deezer_id_of` — out of range must read as absent, never as the next
+    # artist's row — but they return None where that one returns "".
+    #
+    # The divergence is deliberate and it is the wire's, not a style choice:
+    # `deezer_id_of`'s "" is consumed inside the api by the clip resolver,
+    # where "" already means "fall back to name search". These three go
+    # STRAIGHT ONTO THE WIRE as `spotify_id` / `apple_id` / `facts`, where the
+    # contract is null-means-render-a-search-link (`L4-D2`). Normalising the
+    # builder's in-band "" here keeps the frontend on one code path instead of
+    # having to treat "" and null alike.
+
+    def spotify_id_of(self, node: int) -> str | None:
+        if node < len(self.spotify_ids):
+            return self.spotify_ids[node] or None
+        return None
+
+    def apple_id_of(self, node: int) -> str | None:
+        if node < len(self.apple_ids):
+            return self.apple_ids[node] or None
+        return None
+
+    def facts_of(self, node: int) -> dict:
+        """Structured MusicBrainz facts, or {} when there are none.
+
+        {} rather than None so a caller can `.get()` without a null check: an
+        artist the extraction pass reached but found nothing for must be
+        indistinguishable from one it never covered, since both render as
+        nothing at all (`L4-D3`).
+        """
+        if node < len(self.artist_facts):
+            return self.artist_facts[node] or {}
+        return {}
 
     def __post_init__(self) -> None:
         if not self.id_by_mbid:
@@ -268,6 +314,13 @@ class GraphStore:
             # including the one the app serves. Absence means "resolve by
             # name", which is what the app did before this existed.
             deezer_ids=meta.get("deezer_ids", []),
+            # LUX-4. Same additive-key reasoning as deezer_ids, and the same
+            # exemption from fame_lb's length assertion below: these are
+            # display fields read through bounds-checked accessors, never
+            # indexed in the cost function.
+            spotify_ids=meta.get("spotify_ids", []),
+            apple_ids=meta.get("apple_ids", []),
+            artist_facts=meta.get("artist_facts", []),
             # Same additive-key reasoning as deezer_ids. Length is checked
             # because this one is INDEXED BY NODE ID in the cost function: a
             # short list would price one artist as another, or read out of
