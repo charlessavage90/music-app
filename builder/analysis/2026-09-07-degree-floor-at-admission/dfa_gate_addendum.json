@@ -1,0 +1,50 @@
+{
+  "corrected_red_half": {
+    "definition": "every floored arm holds strictly more edges than the control AND restores a non-zero count of edges to the added set",
+    "passes": true,
+    "per_arm": [
+      {
+        "ceiling_still_binds": true,
+        "edges": 810439,
+        "edges_added_vs_control": 1357,
+        "label": "F=1 live/shipped",
+        "max_degree": 50,
+        "restored_edges_to_added_artists": 3031
+      },
+      {
+        "ceiling_still_binds": true,
+        "edges": 812425,
+        "edges_added_vs_control": 3343,
+        "label": "F=2 live/shipped",
+        "max_degree": 50,
+        "restored_edges_to_added_artists": 7441
+      },
+      {
+        "ceiling_still_binds": false,
+        "edges": 815073,
+        "edges_added_vs_control": 5991,
+        "label": "F=3 live/shipped",
+        "max_degree": 84,
+        "restored_edges_to_added_artists": 12768
+      }
+    ]
+  },
+  "green_halves_unchanged": {
+    "control_bound_holds": true,
+    "f0_identity": true,
+    "note": "neither is affected by the defect above; both passed as written"
+  },
+  "role": "DATED ADDENDUM to dfa_results.json's `gate`. The original gate block is left EXACTLY as the run wrote it, including its FAIL. This does not replace it and no value in it is edited.",
+  "the_defect_and_it_is_mine": "The red half asserts `max_degree > 50` for EVERY floored arm. That clause encoded a PREDICTION about how the rule behaves, not a property of the instrument, and the prediction was wrong. An over-full artist that meets an exempt edge does not stay over-full: it deletes its next-weakest NON-exempt edge instead, so the ceiling still binds. It binds at F=1 and F=2 (max degree 50) and stops binding only at F=3 (max degree 84), where two nodes run out of non-exempt candidates. So the clause is false as an assertion about all arms while being true of the mechanism at some F.",
+  "what_the_run_reported": {
+    "green_bound_note": "control max degree <= 50, the shipped rule's stated bound (CRS-G2's check)",
+    "green_control_bound_holds": true,
+    "green_f0_build_reproduces_the_shipped_control": true,
+    "green_f0_note": "a floor of 0 exempts nothing, so the floored cap must reproduce trimmed_union_cap's build exactly \u2014 same whole-graph, added, pre-existing and degree-histogram figures, and zero restored edges. This is what detects drift between the copy and the shipped rule",
+    "passed": false,
+    "red_knob_is_wired": false,
+    "red_note": "every floored arm exceeds degree 50 AND holds more edges than the control, so the floor really reached the trim and the instrument can move. Exceeding the ceiling is the arm's own cost, not a defect: exemptions leave nodes over-full"
+  },
+  "why_this_is_not_a_result_being_explained_away": "The red half's PURPOSE is to show the instrument can move \u2014 that the knob reaches the trim rather than being silently inert. Two other clauses already demonstrate that and both passed on every floored arm: each holds more edges than the control, and each restores a non-zero count of edges to the added artists. The max-degree clause was a third, redundant, and wrongly-generalised way of asking the same question. The ceiling holding at 50 is itself a MEASURED RESULT and is reported as one in the cost table; it is not a gate outcome.",
+  "written": "2026-09-07, after the run, by the session that wrote the gate"
+}
