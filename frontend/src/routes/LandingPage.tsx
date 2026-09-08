@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArtistSearch } from '@/components/ArtistSearch';
+import { Brand } from '@/components/Brand';
 import type { Artist } from '@/api/types';
 
 /**
@@ -58,9 +59,10 @@ export function LandingPage() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-[520px] flex-col px-7 pt-11 pb-9 sm:pt-14">
-      <h1 className="text-[27px] sm:text-[38px] font-medium tracking-[-.02em] sm:tracking-[-.025em] leading-[1.1] sm:leading-[1.05]">
-        Artist Path
-      </h1>
+      {/* UXR-T2: the name only. The full hero is UXR-T3. */}
+      <div className="flex">
+        <Brand size="hero" />
+      </div>
       {/* Owner-written 2026-08-07, replacing the single paragraph of 2026-07-28.
           Two lines with split roles, because one sentence was carrying both the
           promise and the mechanism and the promise kept losing: the page never

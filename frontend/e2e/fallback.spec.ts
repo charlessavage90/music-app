@@ -17,5 +17,5 @@ test('the loading fallback is gone once the app has mounted', async ({ page }) =
   // a heading, so checking the heading first fails on a strict-mode violation —
   // a real detection, but one whose message says nothing about what broke.
   await expect(page.getByText(/the app did not load/i)).toHaveCount(0);
-  await expect(page.getByRole('heading', { name: /artist path/i })).toBeVisible();
+  await expect(page.getByRole('img', { name: 'Unsung.fm' })).toBeVisible();
 });
