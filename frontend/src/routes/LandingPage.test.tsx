@@ -46,7 +46,7 @@ test('pressing a sample journey lands on the path route', async () => {
 test('navigates to the path route once both artists are chosen', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockImplementation(async (q) => [
-    { mbid: q.includes('miles') ? 'm' : 'd', name: q, disambiguation: '', popularity: 1 },
+    { mbid: q.includes('miles') ? 'm' : 'd', name: q, disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
   ]);
   setup();
   await user.type(screen.getByLabelText('From'), 'miles');
@@ -104,7 +104,7 @@ test('a single edited character is enough to un-choose', async () => {
 test('blocks identical endpoints with a nudge', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'searchArtists').mockResolvedValue([
-    { mbid: 'same', name: 'Radiohead', disambiguation: '', popularity: 1 },
+    { mbid: 'same', name: 'Radiohead', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
   ]);
   setup();
   await user.type(screen.getByLabelText('From'), 'radio');

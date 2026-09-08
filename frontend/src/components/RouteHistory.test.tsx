@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { expect, test } from 'vitest';
 import { RouteHistory } from './RouteHistory';
 
-const ok = (mbid: string, name: string) => ({ mbid, name, disambiguation: '', popularity: 1 });
+const ok = (mbid: string, name: string) => ({ mbid, name, disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null });
 
 test('nothing is rendered when no artist has been skipped', () => {
   const { container } = render(<RouteHistory bypassed={[]} unresolved={[]} />);

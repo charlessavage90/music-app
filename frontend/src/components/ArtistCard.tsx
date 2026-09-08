@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useClip } from '@/hooks/useClip';
 import { PlayButton } from './PlayButton';
+import { StreamingLinks } from './StreamingLinks';
 import type { Artist } from '@/api/types';
 
 interface Props {
@@ -142,6 +143,11 @@ export function ArtistCard({
               Try another track
             </button>
           )}
+          {/* LUX-4. Deliberately BELOW the clip controls and above "now
+              playing": the clip is what this app is for, and these are where
+              you go once it has done its job. Both services always render —
+              a missing id becomes a search link, never a missing button. */}
+          <StreamingLinks artist={artist} />
           {isPlaying && (
             <div className="mt-1.5 text-[10.5px] font-medium uppercase tracking-[.1em] text-[var(--color-accent)]">
               ▮▮▮ now playing

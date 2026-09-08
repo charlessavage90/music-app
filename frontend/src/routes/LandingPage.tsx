@@ -42,7 +42,7 @@ function seedFrom(params: URLSearchParams, idKey: string, nameKey: string): Arti
   const mbid = params.get(idKey);
   const name = params.get(nameKey);
   if (!mbid || !name) return null;
-  return { mbid, name, disambiguation: '', popularity: 0 };
+  return { mbid, name, disambiguation: '', popularity: 0, spotifyId: null, appleId: null, facts: null };
 }
 
 export function LandingPage() {

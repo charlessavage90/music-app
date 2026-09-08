@@ -39,9 +39,9 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
   const buildPath = vi.spyOn(client, 'buildPath')
     .mockResolvedValueOnce({
       artists: [
-        { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
-        { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
-        { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
+        { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+        { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9, spotifyId: null, appleId: null, facts: null },
+        { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95, spotifyId: null, appleId: null, facts: null },
       ],
       stopRule: 'natural',
       bypassed: [],
@@ -49,9 +49,9 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
     })
     .mockResolvedValueOnce({
       artists: [
-        { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
-        { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7 },
-        { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
+        { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+        { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7, spotifyId: null, appleId: null, facts: null },
+        { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95, spotifyId: null, appleId: null, facts: null },
       ],
       stopRule: 'natural',
       bypassed: [],
@@ -75,9 +75,9 @@ test('renders the path, then a bypass triggers a new request carrying the exclus
 });
 
 const THREE_STOP = [
-  { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
-  { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
-  { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95 },
+  { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+  { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9, spotifyId: null, appleId: null, facts: null },
+  { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 0.95, spotifyId: null, appleId: null, facts: null },
 ];
 
 test('"new path" goes back to choosing artists, carrying this pair with it', async () => {
@@ -116,9 +116,9 @@ test('"reset path" drops every bypass and keeps the same two artists', async () 
 // Distinct mbids: the clip cache is module-level and lives for the whole file, so
 // reusing ids the other tests resolved to "no clip" leaves the play button disabled.
 const AUDIBLE_THREE_STOP = [
-  { mbid: 'aud-m', name: 'Alice Coltrane', disambiguation: '', popularity: 1 },
-  { mbid: 'aud-h', name: 'Pharoah Sanders', disambiguation: '', popularity: 0.9 },
-  { mbid: 'aud-d', name: 'Sun Ra', disambiguation: '', popularity: 0.95 },
+  { mbid: 'aud-m', name: 'Alice Coltrane', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+  { mbid: 'aud-h', name: 'Pharoah Sanders', disambiguation: '', popularity: 0.9, spotifyId: null, appleId: null, facts: null },
+  { mbid: 'aud-d', name: 'Sun Ra', disambiguation: '', popularity: 0.95, spotifyId: null, appleId: null, facts: null },
 ];
 
 /** Renders a path whose cards have clips, and starts one playing. */
@@ -181,6 +181,9 @@ test('a first load shows the skeleton, not the old text line', async () => {
     name: mbid === 'm' ? 'Miles Davis' : 'Daft Punk',
     disambiguation: '',
     popularity: 0,
+    spotifyId: null,
+    appleId: null,
+    facts: null,
   }));
 
   renderAt('/path/m/d');
@@ -230,7 +233,7 @@ test('a bypassed artist from the path response is named in the route-history pan
   vi.spyOn(client, 'buildPath').mockResolvedValue({
     artists: THREE_STOP,
     stopRule: 'natural',
-    bypassed: [{ mbid: 'z', name: 'Sun Ra', disambiguation: '', popularity: 0.2 }],
+    bypassed: [{ mbid: 'z', name: 'Sun Ra', disambiguation: '', popularity: 0.2, spotifyId: null, appleId: null, facts: null }],
     unresolved: [],
   });
 

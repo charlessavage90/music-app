@@ -26,7 +26,7 @@ afterEach(() => vi.restoreAllMocks());
 
 test('resolves and exposes artists', async () => {
   vi.spyOn(client, 'buildPath').mockResolvedValue({
-    artists: [{ mbid: 'a', name: 'Miles', disambiguation: '', popularity: 1 }],
+    artists: [{ mbid: 'a', name: 'Miles', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null }],
     stopRule: 'natural',
     bypassed: [],
     unresolved: [],
@@ -69,7 +69,7 @@ test('classifies a timeout distinctly from an unknown failure', async () => {
 
 test('exposes the stop rule from the response', async () => {
   vi.spyOn(client, 'buildPath').mockResolvedValue({
-    artists: [{ mbid: 'a', name: 'A', disambiguation: '', popularity: 0.5 }],
+    artists: [{ mbid: 'a', name: 'A', disambiguation: '', popularity: 0.5, spotifyId: null, appleId: null, facts: null }],
     stopRule: 'adjacent_only',
     bypassed: [],
     unresolved: [],

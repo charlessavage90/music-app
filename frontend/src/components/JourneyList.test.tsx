@@ -5,8 +5,8 @@ import * as client from '@/api/client';
 import { JourneyList } from './JourneyList';
 
 const artists = [
-  { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1 },
-  { mbid: 'k', name: 'Kraftwerk', disambiguation: '', popularity: 0.8 },
+  { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+  { mbid: 'k', name: 'Kraftwerk', disambiguation: '', popularity: 0.8, spotifyId: null, appleId: null, facts: null },
 ];
 afterEach(() => vi.restoreAllMocks());
 
@@ -31,7 +31,7 @@ test('bypass is offered on the artists in the middle, never on the two you chose
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   const threeStop = [
     artists[0],
-    { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9 },
+    { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9, spotifyId: null, appleId: null, facts: null },
     artists[1],
   ];
   render(<JourneyList artists={threeStop} stopRule="natural" onBypass={vi.fn()} />);
@@ -54,8 +54,8 @@ test('a card left mounted past the signature lifetime re-signs before playing', 
   spy.mockResolvedValue({ previewUrl: 'signed-at-zero', title: 'T', coverUrl: 'c', candidateCount: 1 });
 
   const stale = [
-    { mbid: 'stale-a', name: 'Alice Coltrane', disambiguation: '', popularity: 1 },
-    { mbid: 'stale-b', name: 'Sun Ra', disambiguation: '', popularity: 0.8 },
+    { mbid: 'stale-a', name: 'Alice Coltrane', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+    { mbid: 'stale-b', name: 'Sun Ra', disambiguation: '', popularity: 0.8, spotifyId: null, appleId: null, facts: null },
   ];
   render(<JourneyList artists={stale} stopRule="natural" onBypass={vi.fn()} />);
   const firstPlay = (await screen.findAllByRole('button', { name: /play/i }))[0];
@@ -80,7 +80,7 @@ test('audio stops when the path is recomputed', async () => {
   await user.click(firstPlay);
   expect(screen.getByText(/now playing/i)).toBeInTheDocument();
 
-  const rerouted = [artists[0], { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7 }];
+  const rerouted = [artists[0], { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7, spotifyId: null, appleId: null, facts: null }];
   rerender(<JourneyList artists={rerouted} stopRule="natural" onBypass={vi.fn()} />);
 
   await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());

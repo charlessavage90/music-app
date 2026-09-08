@@ -1,4 +1,4 @@
-import type { Artist, Exclusion, PathResult, StopRule, Track } from './types';
+import type { Artist, ArtistFacts, Exclusion, PathResult, StopRule, Track } from './types';
 
 const BASE = import.meta.env.VITE_API_BASE ?? '/api';
 
@@ -73,12 +73,53 @@ async function fetchWithTimeout(
   }
 }
 
+/**
+ * The wire shape of an artist. snake_case, and every LUX-4 field optional.
+ *
+ * Optional rather than nullable because the api that serves them may be older
+ * than this frontend — a deploy is two images, not one, and the frontend can
+ * land first. An absent key and a null one must reach the app identically.
+ */
+interface ArtistWire {
+  mbid: string;
+  name: string;
+  disambiguation: string;
+  popularity: number;
+  spotify_id?: string | null;
+  apple_id?: string | null;
+  facts?: ArtistFacts | null;
+}
+
+/**
+ * The snake_case → camelCase boundary for artists, mirroring what `getTrack`
+ * does for `candidate_count` and `buildPath` for `stop_rule`.
+ *
+ * Artists were previously cast straight through, which worked only because no
+ * field was multi-word. LUX-4 adds the first three, so the cast would have
+ * left `spotifyId` undefined on every card with nothing to notice it —
+ * silently, since `undefined` renders as a search link exactly like a real
+ * absence. Hence a real mapper and a test that a snake_case body maps.
+ */
+function artistFrom(d: ArtistWire): Artist {
+  return {
+    mbid: d.mbid,
+    name: d.name,
+    disambiguation: d.disambiguation,
+    popularity: d.popularity,
+    // `?? null` so a frontend deployed ahead of the API degrades to search
+    // links rather than to `undefined` leaking into the components.
+    spotifyId: d.spotify_id ?? null,
+    appleId: d.apple_id ?? null,
+    facts: d.facts ?? null,
+  };
+}
+
 export async function searchArtists(q: string, signal?: AbortSignal): Promise<Artist[]> {
   const r = await fetchWithTimeout(
     `${BASE}/artists/search?q=${encodeURIComponent(q)}`, {}, TIMEOUT_MS.search, signal,
   );
   if (!r.ok) throw new ApiError(r.status);
-  return (await r.json()) as Artist[];
+  return ((await r.json()) as ArtistWire[]).map(artistFrom);
 }
 
 export async function buildPath(
@@ -98,15 +139,15 @@ export async function buildPath(
   );
   if (!r.ok) throw new ApiError(r.status);
   const data = (await r.json()) as {
-    artists: Artist[];
+    artists: ArtistWire[];
     stop_rule: StopRule;
-    bypassed?: Artist[];
+    bypassed?: ArtistWire[];
     unresolved?: string[];
   };
   return {
-    artists: data.artists,
+    artists: data.artists.map(artistFrom),
     stopRule: data.stop_rule,
-    bypassed: data.bypassed ?? [],
+    bypassed: (data.bypassed ?? []).map(artistFrom),
     unresolved: data.unresolved ?? [],
   };
 }
@@ -122,7 +163,7 @@ export async function getArtist(mbid: string, signal?: AbortSignal): Promise<Art
     `${BASE}/artists/${encodeURIComponent(mbid)}`, {}, TIMEOUT_MS.artist, signal,
   );
   if (!r.ok) throw new ApiError(r.status);
-  return (await r.json()) as Artist;
+  return artistFrom((await r.json()) as ArtistWire);
 }
 
 export async function getTrack(
