@@ -133,9 +133,11 @@ PRs.
 | edge fate, red (three stages strictly decreasing) | **PASS** |
 | bridge arms, both halves | **PASS** |
 | `docs-lint` hard checks | **PASS**; `CAND` output is pre-existing constants in frozen pre-registrations, none from this diff |
-| `doc-auditor` semantic audit | ⚠ **DID NOT COMPLETE** — the agent terminated on a session rate limit. **B1 is partially run, not passed.** See below. |
+| `doc-auditor` semantic audit | ⚠ First attempt terminated on a session rate limit. **RE-RUN 2026-09-07 AND COMPLETE**, widened to cover PR #109 as well: [`findings/2026-09-07-doc-audit-two-branch.md`](findings/2026-09-07-doc-audit-two-branch.md). **B1 is now discharged.** Two HIGH cross-branch findings, both anticipated by §3b; one finding in the report is wrong and carries a verified correction banner. |
 
-**What is owed because of that**: the semantic half of B1 for this diff. Specifically unchecked
+~~**What is owed because of that**: the semantic half of B1 for this diff.~~ **DISCHARGED
+2026-09-07** by the re-run above. Struck, kept for the record. The original text follows,
+because it names what was uncovered and that remains true of any future diff here: Specifically unchecked
 by any tool — whether the new README's role marker conflicts with anything, whether
 `builder/analysis/`'s new files carry dead relative links (**`docs-lint` does not scan
 `builder/analysis/`; its `DOCS` is `$ROOT/docs`**, so the figures-owner document this session
