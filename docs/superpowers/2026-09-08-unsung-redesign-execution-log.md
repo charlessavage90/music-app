@@ -357,3 +357,44 @@ dot centre equals the rail centre and the rail's ends equal the end dots' centre
 failed on the first commit of `T6`.
 
 Suite 188 green after the fix; lint and build clean; both widths re-captured.
+
+## §12 The pre-deploy gate, and what it caught — 2026-09-08
+
+The owner asked for a deploy. `infra/README.md` §7 makes all four suites plus the e2e run a
+mandatory gate (`DEP-30`), and the e2e run **failed three of nine**. Only one was the stale
+spec this branch already knew about.
+
+- **A real regression, and the gate is the only thing that could see it.** `TR-16`'s guard
+  measures the artist name's width at 390px. It had gone from **~180px to 126px**, because
+  `T6` put a second round control on the card — the 44px chevron plus its 12px gap accounts
+  for the loss almost exactly. Recovered to **150px** by tightening the phone-only sizes and
+  gaps (`sm:` values untouched, so the approved desktop look is unchanged). **Over 160 is not
+  reachable** with two controls and a cover at that width without a sub-40px tap target, so
+  the bar moves **160 → 140** with the arithmetic written beside it. That is a recalibration
+  because the premise changed, and it is flagged to the owner rather than buried.
+- **The name element was also measuring the wrong thing.** `truncate` on a flex item sized to
+  its content meant the assertion read the width of *whichever artist the graph returned*, not
+  the width the layout affords. `min-w-0 flex-1` restores both the intended truncation and the
+  test's original meaning.
+- **`path.spec.ts` had two races stacked.** It waited on a list selector the `T3` landing page
+  now also renders, and — after that was fixed with a URL wait — the URL changes *before* React
+  swaps the page, so the old page satisfied it for an instant and the read that followed got an
+  empty list. It now waits on the card's own test hook, which no other component renders.
+- **The dropdown-stacking spec's precondition had quietly stopped holding.** It needs the two
+  landing fields stacked so one's dropdown reaches the other's dot; since `T3` they stack only
+  below `sm`. At the default viewport it was failing on its own precondition rather than on the
+  stacking it exists to check. Pinned to 390.
+
+**A new spec pins the rail geometry** the owner caught by eye (§11) — every dot centre on the
+rail centre, the rail's ends on the end dots, sub-pixel. **Shown to go red** under the exact
+3px offset that shipped. It is the T10 item the previous handoff recorded as owed, discharged
+early because the defect it guards was live.
+
+**The lesson is the one §11 already drew, now with a cost attached.** Three of these four were
+invisible to 188 green unit tests and visible immediately in a browser. The e2e suite is not a
+formality before a deploy here; on this deploy it was the only thing standing between a real
+layout regression and production.
+
+*(The commit for this work lost one phrase to an unquoted backtick in its message — it reads
+"waited on ," where it should name the list selector. Recorded here rather than amending a
+pushed commit.)*
