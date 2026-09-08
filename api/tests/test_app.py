@@ -371,6 +371,24 @@ def test_health_reports_artifact_identity():
     assert body["graph_sha256"] == store.source_sha256
 
 
+def test_meta_is_reachable_under_api_and_carries_the_count():
+    # UXR-D8: /health is deliberately off /api (App Runner reaches it directly)
+    # and CloudFront routes only /api/*, so the landing badge needs THIS route.
+    client, store = _client()
+    r = client.get("/api/meta")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["artists"] == store.artist_count
+    assert body["graph_sha256"] == store.source_sha256
+
+
+def test_meta_is_a_coroutine_so_it_never_queues_for_a_thread():
+    # Same discipline as /health (G3-A1): three in-memory reads, no I/O.
+    client, _ = _client()
+    route = next(r for r in client.app.routes if getattr(r, "path", "") == "/api/meta")
+    assert inspect.iscoroutinefunction(route.endpoint)
+
+
 def test_path_request_emits_a_telemetry_event(capsys):
     client, store = _client()
     a, b = store.mbids[0], store.mbids[2]

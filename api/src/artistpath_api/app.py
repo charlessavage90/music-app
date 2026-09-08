@@ -19,7 +19,7 @@ from artistpath_api.clips import (
 from artistpath_api.config import ApiConfig
 from artistpath_api.graph_store import GraphStore
 from artistpath_api.models import (
-    ArtistFacts, ArtistOut, ExclusionIn, HealthOut, PathRequest, PathResponse,
+    ArtistFacts, ArtistOut, ExclusionIn, HealthOut, MetaOut, PathRequest, PathResponse,
     TrackOut,
 )
 from artistpath_api.pathfinding import DISLIKE, KNOWN, Exclusion, find_journey
@@ -317,6 +317,12 @@ def create_app(
             artists=store.artist_count,
             edges=len(store.neighbours),
         )
+
+    @app.get("/api/meta")
+    async def meta() -> MetaOut:
+        # `async def` for the same reason /health is (G3-A1): in-memory reads
+        # only, so it must never queue behind build_path in the thread pool.
+        return MetaOut(artists=store.artist_count, graph_sha256=store.source_sha256)
 
     return app
 

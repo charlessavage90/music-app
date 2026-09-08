@@ -1,5 +1,5 @@
 import { afterEach, expect, test, vi } from 'vitest';
-import { ApiError, buildPath, getTrack, searchArtists } from './client';
+import { ApiError, buildPath, getMeta, getTrack, searchArtists } from './client';
 
 function mockFetch(status: number, body: unknown) {
   return vi.fn().mockResolvedValue({
@@ -154,4 +154,9 @@ test('bypassed artists are mapped too, not passed through raw', async () => {
   const result = await buildPath(['a', 'b'], []);
   expect(result.bypassed[0].spotifyId).toBe('sp');
   expect(result.artists[0].spotifyId).toBeNull();
+});
+
+test('getMeta reads the count and the artifact identity', async () => {
+  vi.stubGlobal('fetch', mockFetch(200, { artists: 58838, graph_sha256: 'abc' }));
+  await expect(getMeta()).resolves.toEqual({ artists: 58838, graphSha256: 'abc' });
 });

@@ -1,6 +1,6 @@
 # Handoff — `LUX-4` complete, the wire and the card, 2026-09-08
 
-**Role: ACTIVE — this is the CURRENT handoff FOR THE `LUX-4` TRACK.** Nothing supersedes it.
+**Role: SUPERSEDED ON NEXT ACTIONS by [`2026-09-08-HANDOFF-unsung-redesign-t5.md`](2026-09-08-HANDOFF-unsung-redesign-t5.md), 2026-09-08 — NOT the current handoff.** `LUX-4` is finished and its next actions (merge, deploy, the queued tests) are carried forward there and in `NEXT.md`. **Everything this note records about `LUX-4`'s internals and its must-not-revert list still stands in full.**
 Supersedes [`2026-09-06-HANDOFF-lux-4-artifact.md`](2026-09-06-HANDOFF-lux-4-artifact.md)
 on **everything** — that handoff's remaining tasks are all done. It does **not** state project
 status: for that read [`NEXT.md`](NEXT.md), which owns it.
@@ -64,6 +64,12 @@ the retained log, [`2026-09-06-lux-4-execution-log.md`](2026-09-06-lux-4-executi
 - **The facts line WRAPS. Do not restore `truncate`.** Under it the line lost its life span on
   most real artists at 390px. `e2e/responsive.spec.ts` pins this and **was shown to go red**
   under `truncate` before being trusted.
+  > ⚠ **CORRECTED 2026-09-08 — the rule stands, its pin does not, and do not "fix" the rule.**
+  > `UXR-T6`/`T7` moved the facts line and both links off the card and into `ArtistDetail`, so
+  > that spec's case looks for them inside an interior *card* and **is red until `UXR-T10`
+  > rewrites the e2e suite**. The wrap requirement is unchanged and is now easier to honour,
+  > not optional — the detail is wider than the card was. See
+  > [`2026-09-08-HANDOFF-unsung-redesign-t8.md`](2026-09-08-HANDOFF-unsung-redesign-t8.md).
 - **`L4-D3` — render only what is present, no placeholder rows — shipped by assertion**, as
   the plan permits while `LUX-E2` is blocked. That is not an oversight to "fix" with an
   "Unknown" row.

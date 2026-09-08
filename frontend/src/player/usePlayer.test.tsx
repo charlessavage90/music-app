@@ -7,6 +7,7 @@ import { usePlayer } from './usePlayer';
 const played: string[] = [];
 const ended: Array<() => void> = [];
 const errored: Array<() => void> = [];
+const timed: Array<(p: number, d: number) => void> = [];
 
 vi.mock('./Player', () => ({
   HtmlAudioPlayer: class {
@@ -15,6 +16,7 @@ vi.mock('./Player', () => ({
     dispose = vi.fn();
     onEnded(cb: () => void) { ended.push(cb); }
     onError(cb: () => void) { errored.push(cb); }
+    onTimeUpdate(cb: (p: number, d: number) => void) { timed.push(cb); }
   },
 }));
 
@@ -22,6 +24,7 @@ beforeEach(() => {
   played.length = 0;
   ended.length = 0;
   errored.length = 0;
+  timed.length = 0;
 });
 
 function Harness({ resolve }: { resolve: (mbid: string) => Promise<string | null> }) {
@@ -30,6 +33,7 @@ function Harness({ resolve }: { resolve: (mbid: string) => Promise<string | null
   return (
     <div>
       <span data-testid="current">{p.currentMbid ?? 'none'}</span>
+      <span data-testid="pos">{p.position}/{p.duration}</span>
       <button onClick={() => p.playFrom('miles')}>play</button>
     </div>
   );
@@ -134,4 +138,18 @@ test('gives up after one retry rather than looping on a permanently dead clip', 
   await act(async () => { errored.forEach((cb) => cb()); });
   await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('none'));
   expect(played).toHaveLength(2);
+});
+
+test('position and duration follow the audio element and reset when playback stops', async () => {
+  const user = userEvent.setup();
+  render(<Harness resolve={async (mbid) => `url-for-${mbid}`} />);
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(played).toEqual(['url-for-miles']));
+  act(() => timed.at(-1)?.(11.2, 30));
+  expect(screen.getByTestId('pos')).toHaveTextContent('11.2/30');
+  act(() => ended.at(-1)?.()); // miles ends, kraftwerk starts
+  await waitFor(() => expect(played).toHaveLength(2));
+  act(() => ended.at(-1)?.()); // kraftwerk ends, nothing next
+  await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('none'));
+  expect(screen.getByTestId('pos')).toHaveTextContent('0/0');
 });

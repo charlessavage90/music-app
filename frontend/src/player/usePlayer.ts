@@ -21,6 +21,9 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
   const player = useMemo(() => new HtmlAudioPlayer(), []);
   const [currentMbid, setCurrentMbid] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  // Seconds, straight from the element's own clock (UXR-D10) — never estimated.
+  const [position, setPosition] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const listRef = useRef(playables);
   listRef.current = playables;
@@ -40,6 +43,8 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     loadedUrlRef.current = null;
     setCurrentMbid(null);
     setIsPlaying(false);
+    setPosition(0);
+    setDuration(0);
   }
 
   async function start(mbid: string, { isRetry = false } = {}) {
@@ -57,6 +62,7 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     loadedUrlRef.current = url;
     setCurrentMbid(mbid);
     setIsPlaying(true);
+    setPosition(0);
     player.play(url);
   }
 
@@ -77,6 +83,11 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
       }
       retriedRef.current = true;
       void start(mbid, { isRetry: true });
+    });
+
+    player.onTimeUpdate((p, d) => {
+      setPosition(p);
+      setDuration(d);
     });
 
     return () => player.dispose();
@@ -111,5 +122,5 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     }
   }
 
-  return { currentMbid, isPlaying, playFrom, toggle, stop };
+  return { currentMbid, isPlaying, position, duration, playFrom, toggle, stop };
 }

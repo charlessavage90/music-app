@@ -1,0 +1,614 @@
+{
+ "artists": {
+  "total": 58838,
+  "with >= 1 label": 41371,
+  "share with >= 1 label": 0.7031,
+  "labels per labelled artist": {
+   "median": 6.0,
+   "p90": 14.0,
+   "max": 105,
+   "share with > 6": 0.4381
+  }
+ },
+ "vocabulary": {
+  "distinct labels": 2024,
+  "by frequency": {
+   "on >= 100 artists": 347,
+   "on 10-99 artists": 596,
+   "on 2-9 artists": 608,
+   "on exactly 1 artist": 473
+  },
+  "chip impressions by label frequency": {
+   "on >= 100 artists": 0.9195,
+   "on 10-99 artists": 0.0702,
+   "on 2-9 artists": 0.0088,
+   "on exactly 1 artist": 0.0016
+  },
+  "top 60": [
+   [
+    "electronic",
+    19110
+   ],
+   [
+    "rock",
+    16711
+   ],
+   [
+    "pop",
+    12620
+   ],
+   [
+    "hip hop",
+    6570
+   ],
+   [
+    "experimental",
+    5416
+   ],
+   [
+    "alternative rock",
+    5362
+   ],
+   [
+    "indie rock",
+    5051
+   ],
+   [
+    "pop rock",
+    4996
+   ],
+   [
+    "ambient",
+    4835
+   ],
+   [
+    "jazz",
+    4795
+   ],
+   [
+    "house",
+    4665
+   ],
+   [
+    "downtempo",
+    4438
+   ],
+   [
+    "electro",
+    4146
+   ],
+   [
+    "synth pop",
+    3569
+   ],
+   [
+    "techno",
+    3211
+   ],
+   [
+    "folk",
+    3118
+   ],
+   [
+    "indie pop",
+    2726
+   ],
+   [
+    "dance",
+    2602
+   ],
+   [
+    "soul",
+    2585
+   ],
+   [
+    "punk",
+    2416
+   ],
+   [
+    "folk rock",
+    2282
+   ],
+   [
+    "electronica",
+    2220
+   ],
+   [
+    "instrumental",
+    2141
+   ],
+   [
+    "metal",
+    2128
+   ],
+   [
+    "funk",
+    2048
+   ],
+   [
+    "blues",
+    1989
+   ],
+   [
+    "classical",
+    1949
+   ],
+   [
+    "disco",
+    1877
+   ],
+   [
+    "latin",
+    1854
+   ],
+   [
+    "heavy metal",
+    1819
+   ],
+   [
+    "trance",
+    1793
+   ],
+   [
+    "hard rock",
+    1752
+   ],
+   [
+    "ballad",
+    1705
+   ],
+   [
+    "deep house",
+    1662
+   ],
+   [
+    "lo fi",
+    1618
+   ],
+   [
+    "breakbeat",
+    1571
+   ],
+   [
+    "r&b",
+    1571
+   ],
+   [
+    "idm",
+    1569
+   ],
+   [
+    "singer songwriter",
+    1567
+   ],
+   [
+    "dubstep",
+    1524
+   ],
+   [
+    "psychedelic rock",
+    1490
+   ],
+   [
+    "reggae",
+    1489
+   ],
+   [
+    "punk rock",
+    1427
+   ],
+   [
+    "contemporary r&b",
+    1413
+   ],
+   [
+    "industrial",
+    1413
+   ],
+   [
+    "tech house",
+    1385
+   ],
+   [
+    "j pop",
+    1384
+   ],
+   [
+    "new wave",
+    1351
+   ],
+   [
+    "drum and bass",
+    1335
+   ],
+   [
+    "dub",
+    1335
+   ],
+   [
+    "leftfield",
+    1318
+   ],
+   [
+    "trip hop",
+    1315
+   ],
+   [
+    "dance pop",
+    1294
+   ],
+   [
+    "progressive house",
+    1288
+   ],
+   [
+    "country",
+    1279
+   ],
+   [
+    "breaks",
+    1259
+   ],
+   [
+    "trap",
+    1257
+   ],
+   [
+    "post rock",
+    1197
+   ],
+   [
+    "modern classical",
+    1186
+   ],
+   [
+    "rock and roll",
+    1083
+   ]
+  ]
+ },
+ "sources": {
+  "labels contributed ONLY by Wikidata P136": 646,
+  "their share of chip impressions": 0.0157,
+  "artists who lose their last label if wd-only labels are dropped": 147,
+  "labels in the MusicBrainz vocabulary (lb or rg contributes)": 1378,
+  "wd-only, most frequent 40": [
+   [
+    601,
+    "rhythm and blues"
+   ],
+   [
+    301,
+    "traditional folk"
+   ],
+   [
+    246,
+    "electronic dance"
+   ],
+   [
+    155,
+    "chanson"
+   ],
+   [
+    154,
+    "world"
+   ],
+   [
+    142,
+    "rapping"
+   ],
+   [
+    123,
+    "musica popular brasileira"
+   ],
+   [
+    74,
+    "video game"
+   ],
+   [
+    69,
+    "intelligent dance"
+   ],
+   [
+    54,
+    "anime song"
+   ],
+   [
+    54,
+    "acoustic"
+   ],
+   [
+    53,
+    "independent"
+   ],
+   [
+    50,
+    "traditional heavy metal"
+   ],
+   [
+    50,
+    "french hip hop"
+   ],
+   [
+    47,
+    "latin trap"
+   ],
+   [
+    47,
+    "film score"
+   ],
+   [
+    46,
+    "popular"
+   ],
+   [
+    45,
+    "psychedelic trance"
+   ],
+   [
+    43,
+    "uk rap"
+   ],
+   [
+    43,
+    "midwest hip hop"
+   ],
+   [
+    39,
+    "adult contemporary"
+   ],
+   [
+    38,
+    "hip hop culture"
+   ],
+   [
+    36,
+    "music of ireland"
+   ],
+   [
+    32,
+    "atlanta hip hop"
+   ],
+   [
+    31,
+    "electronic body"
+   ],
+   [
+    29,
+    "hardcore"
+   ],
+   [
+    26,
+    "indian film"
+   ],
+   [
+    26,
+    "alternative"
+   ],
+   [
+    25,
+    "crossover"
+   ],
+   [
+    24,
+    "urban contemporary"
+   ],
+   [
+    24,
+    "latin hip hop"
+   ],
+   [
+    23,
+    "dirty rap"
+   ],
+   [
+    22,
+    "reggae fusion"
+   ],
+   [
+    21,
+    "musical play"
+   ],
+   [
+    21,
+    "music of latin america"
+   ],
+   [
+    21,
+    "mumble rap"
+   ],
+   [
+    21,
+    "minimalist"
+   ],
+   [
+    21,
+    "german hip hop"
+   ],
+   [
+    20,
+    "african popular"
+   ],
+   [
+    20,
+    "a cappella"
+   ]
+  ],
+  "wd-only, a seeded 40 of the rest": [
+   "adventure film",
+   "arabic pop",
+   "australian hip hop",
+   "body horror film",
+   "british folk",
+   "british invasion",
+   "cafe chantant",
+   "choral",
+   "clubjazz",
+   "comedy song",
+   "ecm style jazz",
+   "emo subculture",
+   "environmentalist",
+   "epic",
+   "ethno jazz",
+   "film noir",
+   "french rock",
+   "german television comedy",
+   "glitch hop (edm)",
+   "gothic punk",
+   "historical drama film",
+   "historically informed performance",
+   "hungarian folk",
+   "indian film",
+   "mexican rock",
+   "michigan rap",
+   "monologue",
+   "musical improvisation",
+   "neo prog",
+   "nerd folk",
+   "new school hip hop",
+   "new wave of british heavy metal",
+   "orchestral pop",
+   "postminimalism",
+   "punk jazz",
+   "religious",
+   "rock alternative music prize",
+   "rock fusion",
+   "true metal",
+   "wind"
+  ]
+ },
+ "odd strings": {
+  "long (> 28 chars)": {
+   "count": 10,
+   "examples": [
+    "contemporary singer songwriter ·w",
+    "drum and bass electronic rock ·w",
+    "electroacoustic improvisation ·w",
+    "historically informed performance ·w",
+    "indigenous music of north america ·w",
+    "lgbt related television series ·w",
+    "musique concrete instrumentale ·r",
+    "national socialist black metal ·w",
+    "new wave of british heavy metal ·w",
+    "post apocalyptic television series ·w"
+   ]
+  },
+  "has a digit": {
+   "count": 6,
+   "examples": [
+    "2 step garage ·w",
+    "2 step ·lr",
+    "2 tone ·lrw",
+    "20th century classical ·w",
+    "c86 ·lr",
+    "uk82 ·lr"
+   ]
+  },
+  "odd characters": {
+   "count": 3,
+   "examples": [
+    "bass music (edm) ·w",
+    "glitch hop (edm) ·w",
+    "oi! ·w"
+   ]
+  },
+  "single character": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "singletons, a seeded 80": [
+  "absolute",
+  "action television series",
+  "adventure television series",
+  "afro",
+  "andalusi classical",
+  "animated film",
+  "australian rock",
+  "avant punk",
+  "bacardi",
+  "biographical film",
+  "blatnaya pesnya",
+  "breton rock",
+  "bullerengue",
+  "canon",
+  "cante alentejano",
+  "chalga",
+  "coco",
+  "coladeira",
+  "conceptual art",
+  "contemporary",
+  "crossover fiction",
+  "cruise",
+  "doskpop",
+  "dubstyle",
+  "dubtronica",
+  "ecm style jazz",
+  "educational entertainment",
+  "florida breaks",
+  "folk baroque",
+  "game",
+  "gangster film",
+  "haul",
+  "hipster",
+  "huapango",
+  "japanese reggae",
+  "jazz standard",
+  "jota",
+  "junkanoo",
+  "latin american fusion",
+  "lautareasca",
+  "leftist",
+  "lgbt",
+  "luk thung",
+  "madmans esprit",
+  "mainstream hardcore",
+  "mambo urbano",
+  "modern pagan",
+  "modernism",
+  "monologue",
+  "music of egypt",
+  "musica criolla",
+  "nederbeat",
+  "neofolklore",
+  "new rock",
+  "new school hip hop",
+  "philly club rap",
+  "postmodernism",
+  "q pop",
+  "romantica",
+  "rominimal",
+  "ryukoka",
+  "saeta",
+  "sexy drill",
+  "shangaan electro",
+  "shidaiqu",
+  "shima uta",
+  "sitarsploitation",
+  "slowed & reverb",
+  "splatter film",
+  "straight edge",
+  "supernatural horror film",
+  "tarantella",
+  "tenor",
+  "tradi moderne congolais",
+  "tuareg",
+  "type beat",
+  "ukrainian pop",
+  "vanguard",
+  "xian psych",
+  "yellow"
+ ],
+ "population": {
+  "served": 58838,
+  "absent_from_raw": {
+   "lb": 13488,
+   "wd": 13488
+  },
+  "reached by any collection": 45350,
+  "labelled, among reached": 41371,
+  "share labelled, among reached": 0.9123
+ },
+ "frame": "F1 = F0 (LB genre-whitelisted ∪ Wikidata P136) ∪ MB release-group genres, attributable only",
+ "seed": 20260908
+}

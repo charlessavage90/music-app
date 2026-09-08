@@ -17,7 +17,11 @@ function LandingProbe() {
 }
 
 async function pressBypass(user: ReturnType<typeof userEvent.setup>) {
-  await user.click(screen.getByRole('button', { name: /dig deeper/i }));
+  // Two presses since 2026-09-08 (owner decision 2): open the artist's detail,
+  // then dig from there. The control is interior-only, so index 1 skips the
+  // endpoint whose detail has no Dig deeper at all.
+  await user.click(screen.getAllByRole('button', { name: /^About / })[1]);
+  await user.click(screen.getAllByRole('button', { name: /dig deeper/i })[0]);
 }
 
 function renderAt(url: string) {
@@ -134,7 +138,7 @@ async function renderPlaying(user: ReturnType<typeof userEvent.setup>, url: stri
   const play = (await screen.findAllByRole('button', { name: /play/i }))[0];
   await waitFor(() => expect(play).toBeEnabled());
   await user.click(play);
-  await waitFor(() => expect(screen.getByText(/now playing/i)).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByRole('img', { name: /now playing/i })).toBeInTheDocument());
 }
 
 test('pressing reset path stops the audio at once, not when the new path arrives', async () => {
@@ -143,7 +147,7 @@ test('pressing reset path stops the audio at once, not when the new path arrives
 
   await user.click(screen.getByRole('button', { name: /reset path/i }));
 
-  await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
+  await waitFor(() => expect(screen.queryByRole('img', { name: /now playing/i })).not.toBeInTheDocument());
 });
 
 test('pressing a bypass stops the audio at once, not when the new path arrives', async () => {
@@ -152,7 +156,7 @@ test('pressing a bypass stops the audio at once, not when the new path arrives',
 
   await pressBypass(user);
 
-  await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
+  await waitFor(() => expect(screen.queryByRole('img', { name: /now playing/i })).not.toBeInTheDocument());
 });
 
 test('there is nothing to reset before any bypass is pressed', async () => {
@@ -210,19 +214,28 @@ test('a bypass press holds the old path and names what it is doing', async () =>
 
   // UI-D4: the previous path is held and dimmed, never replaced by the skeleton.
   expect(await screen.findByText(/digging deeper for someone newer/i)).toBeInTheDocument();
-  expect(screen.getByText('Herbie Hancock')).toBeInTheDocument();
+  // By the card's test hook, not by text: since UXR-T7 the open detail names
+  // the same artist in both of its containers (jsdom has no breakpoints, so
+  // dock and sheet both render), and a bare text query matches three nodes.
+  // What this asserts is that the CARD is still there — the held path.
+  expect(screen.getAllByTestId('artist-name').map((el) => el.textContent))
+    .toContain('Herbie Hancock');
   expect(screen.queryByText(/listening for the steps between them/i)).not.toBeInTheDocument();
 });
 
 // UI-D7: what the line counts is the artists BETWEEN the two chosen, which is
 // what is visible on screen — not hops. THREE_STOP has exactly one.
-test('the result line counts the artists in between', async () => {
+// The count moved from a sentence to JourneyHeading's tile on 2026-09-08
+// (UXR-T8), and the singular is still its own case.
+test('the steps tile uses the singular for one artist in between', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
   vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
 
   renderAt('/path/m/d');
 
-  expect(await screen.findByText(/we found a path/i)).toHaveTextContent(/in 1 step\./i);
+  expect(await screen.findByText('1')).toBeInTheDocument();
+  expect(screen.getByText('step')).toBeInTheDocument();
+  expect(screen.queryByText('steps')).not.toBeInTheDocument();
 });
 
 // This is the wiring between path state and the panel — no other PathPage test
@@ -241,4 +254,25 @@ test('a bypassed artist from the path response is named in the route-history pan
 
   await screen.findByText('Herbie Hancock');
   expect(await screen.findByText('Sun Ra')).toBeInTheDocument();
+});
+
+test('the heading names both artists and counts the steps between them', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({
+    artists: [
+      { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+      { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+      { mbid: 'a', name: 'Air', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+      { mbid: 'd', name: 'Daft Punk', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
+    ],
+    stopRule: 'natural', bypassed: [], unresolved: [],
+  });
+  renderAt('/path/m/d');
+  expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Miles DavisDaft Punk');
+  // UXR-D6's currency: artists BETWEEN the two you chose, stated once, here.
+  // Four artists, so two between them — and the plural, whose singular is its
+  // own test above.
+  expect(screen.getByText('2')).toBeInTheDocument();
+  expect(screen.getByText('steps')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /share/i })).toBeInTheDocument();
 });

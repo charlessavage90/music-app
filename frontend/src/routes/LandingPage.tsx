@@ -1,41 +1,28 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { ArtistCountBadge } from '@/components/ArtistCountBadge';
 import { ArtistSearch } from '@/components/ArtistSearch';
+import { Brand } from '@/components/Brand';
 import type { Artist } from '@/api/types';
+import { SAMPLE_JOURNEYS, TEASER } from '@/lib/sampleJourneys';
 
-/**
- * Ready-made pairs, so a first visit does not begin with a blank box and the
- * demand that you think of two artists. Owner-chosen 2026-08-07.
- *
- * ⚠ The MBIDs are hardcoded and therefore depend on the SERVED ARTIFACT. All
- * six were confirmed present in graph-msw-tu50.bin and all three pairs were
- * confirmed to build a natural path (5, 6 and 8 stops) on 2026-08-07. MBIDs are
- * stable in MusicBrainz, so the risk is not that one changes — it is that a
- * future artifact DROPS an artist, after which that card lands on the
- * "we couldn't find that artist" page. Re-check these three after any graph
- * adoption; there is no test that can, because the test fixtures are 500-node
- * samples that contain none of them.
- */
-const SAMPLE_JOURNEYS = [
-  {
-    from: '561d854a-6a28-4aa7-8c99-323e6ce46c2a', fromName: 'Miles Davis',
-    to: 'a74b1b7f-71a5-4011-9441-d0b5e4122711', toName: 'Radiohead',
-  },
-  {
-    from: '1d543e07-d0d2-4834-a8db-d65c50c2a856', fromName: 'Dolly Parton',
-    to: '056e4f3e-d505-4dad-8ec1-d04f521cbb56', toName: 'Daft Punk',
-  },
-  {
-    from: '89aa5ecb-59ad-46f5-b3eb-2d424e941f19', fromName: 'Bad Bunny',
-    to: '56a55378-f155-48de-80a5-d80104221267', toName: 'Chappell Roan',
-  },
+const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'] as const;
+
+/** The mockup's three cards, verbatim (UXR-D13). */
+const HOW = [
+  { n: '01', tone: 'var(--color-start)', title: 'Name two artists',
+    body: 'One you are in the mood for, one you are curious about.' },
+  { n: '02', tone: 'var(--color-playing)', title: 'Listen to the path',
+    body: 'Every stop gets a 30-second clip, and every step sounds like a sensible move from the last. No jolts.' },
+  { n: '03', tone: 'var(--color-end)', title: 'Dig deeper',
+    body: 'Know a stop already? Press Dig deeper and the route rebuilds through artists you are far less likely to know.' },
 ] as const;
 
 /**
  * The pair carried back by "New path", if we arrived that way.
  *
  * Only the id is used to route; the name is what fills the box. Both must be
- * present to count as a choice, or "Find path" would enable on a half-known
+ * present to count as a choice, or the button would enable on a half-known
  * artist.
  */
 function seedFrom(params: URLSearchParams, idKey: string, nameKey: string): Artist | null {
@@ -55,91 +42,114 @@ export function LandingPage() {
 
   const sameArtist = !!from && !!to && from.mbid === to.mbid;
   const ready = !!from && !!to && !sameArtist;
+  const teaserSteps = TEASER.names.length - 2;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-[520px] flex-col px-7 pt-11 pb-9 sm:pt-14">
-      <h1 className="text-[27px] sm:text-[38px] font-medium tracking-[-.02em] sm:tracking-[-.025em] leading-[1.1] sm:leading-[1.05]">
-        Artist Path
-      </h1>
-      {/* Owner-written 2026-08-07, replacing the single paragraph of 2026-07-28.
-          Two lines with split roles, because one sentence was carrying both the
-          promise and the mechanism and the promise kept losing: the page never
-          said the app is FOR finding music you don't know.
+    <main className="mx-auto w-full max-w-[1280px] px-6 pb-14 pt-6 sm:px-10">
+      <header className="flex items-center justify-between py-2">
+        <Brand size="hero" />
+        {/* UXR-D13: no nav until the pages behind it exist. */}
+      </header>
 
-          These are HIS words verbatim, not a session's draft. The earlier
-          version explained the mechanism ("someone their listeners share") and
-          he cut it — the page now promises the outcome and leaves the how to
-          the journey page's explainer. Do not reinstate the mechanism line
-          here without asking him. */}
-      <p className="mt-3 sm:mt-3.5 max-w-[320px] sm:max-w-[420px] text-[17px] sm:text-[19px] leading-[1.35] tracking-[-.01em] text-[var(--color-text)] text-pretty">
-        Find a smooth path between any two artists
-      </p>
-      <p className="mt-2.5 max-w-[300px] sm:max-w-[400px] text-[13.5px] sm:text-[14.5px] leading-[1.5] text-[var(--color-muted)] text-pretty">
-        Discover what lives in between
-      </p>
+      <div className="mt-10 grid items-center gap-12 lg:mt-16 lg:grid-cols-[1.08fr_.92fr] lg:gap-16">
+        <div>
+          <ArtistCountBadge />
+          {/* UXR-D12: the mockup's copy, verbatim. If the owner overrules that
+              decision, the 2026-08-07 lines return here under the new type:
+              "Find a smooth path between any two artists" / "Discover what lives in between". */}
+          <h1 className="mt-5 font-display text-[31px] font-medium leading-[1.06] tracking-[-.03em] text-balance sm:text-[44px] lg:text-[60px] lg:leading-[1.02] lg:tracking-[-.035em]">
+            Hear what lives between two artists you love.
+          </h1>
+          <p className="mt-4 max-w-[520px] text-[15px] leading-[1.5] text-[var(--color-muted)] text-pretty sm:text-[18px]">
+            Name two. Unsung.fm builds a listenable path between them — every step a small,
+            sensible move from the last, with a 30-second clip. Then{' '}
+            <span className="text-[var(--color-text)]">dig deeper</span> to swap the obvious
+            names for the ones you have never heard.
+          </p>
 
-      <div className="mt-11 sm:mt-10 flex flex-col gap-5">
-        <ArtistSearch label="From" end="start" initial={seedA} onSelect={setFrom} />
-        <ArtistSearch label="To" end="destination" initial={seedB} onSelect={setTo} />
-        {sameArtist && (
-          <p className="text-sm text-[var(--color-away)]">Pick two different artists.</p>
-        )}
-        <button
-          type="button"
-          disabled={!ready}
-          onClick={() => from && to && navigate(`/path/${from.mbid}/${to.mbid}`)}
-          className="mt-1.5 h-[52px] sm:h-[54px] w-full rounded-full bg-[var(--color-accent)] text-[15.5px] sm:text-base font-semibold tracking-[.01em] text-[var(--color-bg)] transition-opacity enabled:hover:bg-[#5b9ce0] disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          Discover a path
-        </button>
-      </div>
-
-      {/* The blank-box problem: the form asks you to think of two artists before
-          the app has shown you it is worth the effort. These cost one tap and
-          are ordinary links, so they are shareable and work with the back
-          button like any other journey. */}
-      <section className="mt-11 sm:mt-12">
-        <h2 className="text-[12.5px] sm:text-[13px] text-[var(--color-muted)]">
-          Not sure where to start? Try one of these.
-        </h2>
-        <ul className="mt-3.5 flex flex-col gap-2.5">
-          {SAMPLE_JOURNEYS.map((j) => (
-            <li key={j.from}>
-              <Link
-                to={`/path/${j.from}/${j.to}`}
-                className="group flex items-center gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3.5 transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/[.07]"
+          <div className="mt-8 flex max-w-[600px] flex-col gap-3.5">
+            <div className="grid gap-3.5 sm:grid-cols-2">
+              <ArtistSearch label="Start with" end="start" initial={seedA} onSelect={setFrom} />
+              <ArtistSearch label="End with" end="destination" initial={seedB} onSelect={setTo} />
+            </div>
+            {sameArtist && (
+              <p className="text-sm text-[var(--color-away)]">Pick two different artists.</p>
+            )}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <button
+                type="button"
+                disabled={!ready}
+                onClick={() => from && to && navigate(`/path/${from.mbid}/${to.mbid}`)}
+                className="h-14 rounded-full bg-[linear-gradient(90deg,var(--color-start),var(--color-playing)_55%,var(--color-end))] bg-[length:200%_100%] px-9 text-[16.5px] font-bold tracking-[-.01em] text-[var(--color-bg)] [animation:un-sheen_9s_linear_infinite] motion-safe-only disabled:cursor-not-allowed disabled:opacity-30"
               >
-                <span className="min-w-0 flex-1 truncate text-[14.5px] sm:text-[15px]">
-                  {j.fromName}
-                  <span className="mx-2 text-[var(--color-label)]">→</span>
-                  {j.toName}
-                </span>
-                <span
-                  aria-hidden
-                  className="flex-none text-[var(--color-label)] transition-colors group-hover:text-[var(--color-accent)]"
-                >
-                  ›
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+                Build the path
+              </button>
+              <span className="text-[13.5px] text-[var(--color-label)]">
+                Takes about three seconds · no account needed
+              </span>
+            </div>
+          </div>
 
-      {/* A miniature of the journey the app builds: your artist, someone in
-          between, their artist. Decorative — the three dots carry the same
-          colours used elsewhere on the page (an error state and the
-          destination field's dot) and the rail. The clip-length line that sat
-          under this was removed 2026-07-28 at the owner's request. */}
-      <div className="mt-auto flex flex-col items-center pt-10">
-        <div className="flex items-center gap-2" aria-hidden>
-          <span className="block size-[5px] rounded-full bg-[var(--color-away)]" />
-          <span className="block h-px w-[22px] bg-[var(--color-border)]" />
-          <span className="block size-[5px] rounded-full bg-[var(--color-muted)]" />
-          <span className="block h-px w-[22px] bg-[var(--color-border)]" />
-          <span className="block size-[5px] rounded-full bg-[var(--color-dig)]" />
+          {/* The blank-box problem: the form asks you to think of two artists before
+              the app has shown you it is worth the effort. These cost one tap and are
+              ordinary links, so they are shareable and work with Back like any journey. */}
+          <section className="mt-8">
+            <h2 className="text-[12.5px] text-[var(--color-label)]">Or start from one of these</h2>
+            <ul className="mt-3 flex flex-wrap gap-2.5">
+              {SAMPLE_JOURNEYS.map((j) => (
+                <li key={j.from}>
+                  <Link
+                    to={`/path/${j.from}/${j.to}`}
+                    aria-label={`${j.fromName} to ${j.toName}, ${j.steps} steps`}
+                    className="flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-2.5 text-[14px] transition-colors hover:border-[var(--color-start)]"
+                  >
+                    <span>{j.fromName}</span>
+                    <span aria-hidden className="text-[var(--color-label)]">→</span>
+                    <span>{j.toName}</span>
+                    <span className="text-[12px] text-[var(--color-label)]">{j.steps} steps</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        {/* The desktop hero's right column: the mark, breathing, and the teaser (UXR-D14).
+            Hidden below lg — the mobile artboard shows the mark alone, above the h1. */}
+        <div className="hidden flex-col items-center gap-7 lg:flex">
+          <div className="relative flex size-[300px] items-center justify-center">
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(143,108,245,.28),rgba(46,197,238,.12)_45%,transparent_70%)]" aria-hidden />
+            <img src="/unsung-mark.png" alt="" width={246} height={246} className="relative" />
+          </div>
+          <div className="w-full max-w-[420px] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-5">
+            <div className="text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--color-label)]">
+              A path, {WORDS[teaserSteps] ?? teaserSteps} steps
+            </div>
+            <ol className="relative mt-4 flex flex-col gap-3 pl-5">
+              <span aria-hidden className="absolute bottom-1.5 left-[3px] top-1.5 w-0.5 rounded-full bg-gradient-to-b from-[var(--color-start)] via-[var(--color-playing)] to-[var(--color-end)]" />
+              {TEASER.names.map((name) => (
+                <li key={name} className="relative flex items-center gap-2.5 text-[14.5px]">
+                  <span aria-hidden className="absolute -left-[22px] size-2 rounded-full border-2 border-[var(--color-playing)] bg-[var(--color-surface)]" />
+                  {name}
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
+
+      <section className="mt-14 grid gap-5 border-t border-[var(--color-border)] pt-10 md:grid-cols-3">
+        {HOW.map((h) => (
+          <div key={h.n} className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-6">
+            <div className="flex items-center gap-3">
+              <span className="font-display text-[13px] font-bold tracking-[.06em]" style={{ color: h.tone }}>{h.n}</span>
+              <span aria-hidden className="h-px flex-1" style={{ background: `linear-gradient(90deg, ${h.tone}, transparent)` }} />
+            </div>
+            <h3 className="mt-4 font-display text-[21px] font-medium tracking-[-.02em]">{h.title}</h3>
+            <p className="mt-2 text-[14.5px] leading-[1.55] text-[var(--color-muted)] text-pretty">{h.body}</p>
+          </div>
+        ))}
+      </section>
     </main>
   );
 }

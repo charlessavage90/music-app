@@ -1,48 +1,60 @@
 @import "tailwindcss";
 @import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/space-grotesk";
 
 @theme {
   --font-sans: 'DM Sans Variable', system-ui, sans-serif;
+  /* Display face: the h1, the wordmark, artist names, numbers in tiles. UXR-D11. */
+  --font-display: 'Space Grotesk Variable', 'DM Sans Variable', system-ui, sans-serif;
 
-  /* Existing eight — the mockup uses these exact values. Do not change. */
-  --color-bg: #0f1115;
-  --color-surface: #181a1f;
-  --color-border: #2a2d34;
-  --color-text: #e7e9ee;
-  --color-muted: #9aa0ab;
-  --color-accent: #4a90d9;
-  --color-away: #e8a0a0;
-  --color-dig: #a0d9b4;
+  /* The Unsung.fm palette (frontend/design/2026-09-08-unsung-redesign), named by
+     ROLE, never by shade. UXR-D17: changed in one commit; the aliases at the foot
+     of this block keep every pre-redesign token name resolving until UXR-T9
+     removes the unused ones — a token that resolves to nothing is transparent,
+     and no test sees transparent. */
+  --color-bg: #08080b;              /* the page */
+  --color-bg-raised: #0a0a0f;       /* a framed region on the page (the phone/desktop frames) */
+  --color-surface: #0e0e14;         /* an interior card, a chip, the skeleton rows */
+  --color-surface-raised: #111119;  /* an endpoint card; a hover-able chip */
+  --color-field: #14141c;           /* the two search inputs */
+  --color-border: #1e1e29;
+  --color-border-strong: #262633;   /* buttons, pills, the field's resting border */
+  --color-border-hover: #2a2a38;
+  --color-text: #f2f0f7;
+  --color-muted: #9b98ab;           /* body copy on dark */
+  --color-label: #6d6a7d;           /* uppercase eyebrows, captions, placeholders */
+  --color-chip: #c8c4d8;            /* text inside a bordered pill */
 
-  /* Added 2026-07-28 for the mockup. Named by role, not by shade. */
-  --color-label: #6f7580;          /* uppercase field labels, landing footer */
-  --color-note: #7d838e;           /* dropdown disambiguation, card eyebrows */
-  /* Raised 2026-08-07 from #5c626d, per the mockup's own value. The old one sat
-     close enough to the field fill that "Search an artist" read as disabled. */
-  --color-placeholder: #6b7280;
-  --color-endpoint: #3b4048;       /* endpoint card border */
-  --color-border-hover: #343841;
-  --color-inert: #20232a;          /* disabled play button, skeleton base */
-  --color-inert-fg: #3c414a;       /* disabled play glyph */
-  --color-rail-mid: #7bb0cf;       /* the rail gradient's middle stop */
+  /* The three lights of the rail. The mockup runs cyan → violet → pink top to
+     bottom; each also has a job: start / now playing / destination. */
+  --color-start: #2ec5ee;
+  --color-playing: #8f6cf5;
+  --color-end: #f5479b;
 
-  /* Added 2026-08-07 for the bypass footer strip. The strip is DARKER than the
-     card it sits in — that recess is what reads as "a panel of choices" rather
-     than as more card, and it is the whole visual argument of the 2c variant.
-     LUX-1 (2026-09) removed the tray this strip used to open; the strip itself
-     is now the whole control, and these two tokens still style it. */
-  --color-strip: #14161b;          /* recessed footer strip — the bypass control itself */
-  --color-strip-border: #23262d;   /* the hairline above it */
+  /* The selected card and the docked detail. A fourth hue, so "showing detail"
+     never reads as "playing". */
+  --color-detail: #4f7fe0;
+  --color-detail-fg: #7fa4ec;
+  --color-detail-border: #2a3450;
+  --color-detail-hairline: #1c2233;
 
-  /* The two search fields, 2026-08-07. They had been built out of the CARD
-     tokens (--color-surface on --color-border), which are the tokens for a
-     RECESSED surface — so the one control the whole landing page exists to get
-     you into read as inert. These are the mockup's own field values, which the
-     original port did not carry across: a lighter fill and a lighter border, so
-     the field sits ABOVE the page rather than in it. */
-  --color-field: #1b1e25;
-  --color-field-hover: #1e2129;
-  --color-field-border: #363b44;
+  --color-inert: #191922;           /* a play button with nothing to play */
+  --color-inert-fg: #3c414a;
+  --color-bar: #0c0c12;             /* the player bar */
+  --color-bar-border: #1c1c26;
+  --color-away: #e8a0a0;            /* the one error tint; unchanged */
+
+  /* ---- ALIASES, pre-redesign names. Removed in UXR-T9 once nothing uses them. ---- */
+  --color-accent: #2ec5ee;
+  --color-dig: #f5479b;
+  --color-note: #6d6a7d;
+  --color-placeholder: #6d6a7d;
+  --color-endpoint: #2a2a38;
+  --color-rail-mid: #8f6cf5;
+  --color-strip: #0e0e14;
+  --color-strip-border: #1e1e29;
+  --color-field-hover: #14141c;
+  --color-field-border: #262633;
 }
 
 :root { color-scheme: dark; }
@@ -70,6 +82,16 @@ input::placeholder { color: var(--color-placeholder); }
   100% { transform: scaleY(1); }
 }
 
+/* The mockup's equaliser on the playing card and the CTA's slow sheen. */
+@keyframes un-eq {
+  0%, 100% { transform: scaleY(.35); }
+  50%      { transform: scaleY(1); }
+}
+@keyframes un-sheen {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
 /* Added 2026-08-07. Marks an artist who was NOT on the previous path, so a
    rebuild confirms itself even when the server answers faster than the notice
    can be read. Fades to nothing rather than switching off, so a run of presses
@@ -92,6 +114,7 @@ input::placeholder { color: var(--color-placeholder); }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .motion-safe-only { animation: none !important; }
   /* The mark still has to happen — it is the confirmation, not decoration — so
      it holds as a static ring and disappears rather than animating away. */
   @keyframes ap-glow {
