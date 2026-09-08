@@ -321,3 +321,39 @@ handoff and log against source, and the handoff chain as forward-readable.
 clause cites `e2e/responsive.spec.ts` as pinning the facts line, and that spec is red until
 `T10` because the line it looks for moved off the card. The **rule** is unchanged and the note
 says so — the correction is attached where the clause lives, not in place of it.
+
+## §11 The rail was not aligned with its dots — owner-reported, 2026-09-08
+
+Reported by the owner from the closeout screenshots, after `T6`–`T8` had been committed and
+closed out. **Two independent defects, both introduced by `T6`, and both invisible to every
+check this plan runs.**
+
+- **Horizontal, 3px, every dot at every width.** The list pads its content 26px; the dot is
+  `-left-29px` from the card, so its centre sat 3.5px from the list's left edge. The rail was
+  `left-5px` at `w-3px` — centre 6.5px. Two numbers set in different files from the mockup's
+  drawing, neither wrong on its own. Fixed by moving the rail to `left-2px`; the two halves now
+  carry a shared geometry note naming the 3.5px they must both hit.
+- **Vertical, and a fixed inset could never have been right.** The rail's `top-41px
+  bottom-41px` assumed one card centre. **The two endpoint cards carry an eyebrow the interior
+  cards do not**, so they are taller, by an amount that changes with width and with whether the
+  eyebrow wraps. Measured: at 1280 the rail overshot each end dot by **7.5px**; at 390 it was
+  lopsided — **3.25px** past the top dot, **10.75px** past the bottom. Replaced by a
+  `useLayoutEffect` that measures the first and last `[data-rail-dot]` centres against the list
+  box, re-run under a `ResizeObserver`. After: **0.00px on every axis at both widths.**
+
+**Why nothing caught it.** jsdom has no layout engine, so no unit test can see a rectangle;
+the suite was 188 green throughout, before and after. The screenshots *did* contain the defect
+— three of them were sent to the owner — and neither the session nor its `doc-auditor` looked
+at the pixels, because both were checking that the elements *existed* and said the right
+things. **A screenshot is only evidence of what somebody measures in it.** The rail geometry is
+now the second thing on this branch that was wrong in a way only a browser could report, after
+`T7`'s horizontal overflow — and that one was caught only because the dock made it gross.
+
+**What guards it now:** the measured inset cannot drift, since there is no constant left to go
+stale. The horizontal pairing is still two numbers in two files, so it carries the note; a unit
+test cannot hold it and a Playwright assertion on `getBoundingClientRect` deltas is the only
+thing that could. **Recorded for `T10`, which owns the e2e suite** — one spec asserting every
+dot centre equals the rail centre and the rail's ends equal the end dots' centres would have
+failed on the first commit of `T6`.
+
+Suite 188 green after the fix; lint and build clean; both widths re-captured.

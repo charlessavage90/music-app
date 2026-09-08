@@ -93,9 +93,18 @@ export function ArtistCard({
 
   return (
     <div className="relative">
-      {/* The rail dot for this stop. Sits on the rail JourneyList draws. */}
+      {/* The rail dot for this stop, and the anchor JourneyList measures to
+          decide where its rail starts and stops (`data-rail-dot`).
+
+          GEOMETRY, and the two halves must stay in sync: the list pads its
+          content by 26px, so -29px here puts this dot's centre 3.5px from the
+          list's own left edge. The rail is 3px wide at left-2px, which is the
+          same 3.5px centre. Changing either number alone leaves the dots
+          sitting beside the line — which is what happened, by exactly 3px,
+          until it was measured in a browser on 2026-09-08. */}
       <span
         aria-hidden
+        data-rail-dot
         className="absolute -left-[29px] top-1/2 size-[13px] -translate-y-1/2 rounded-full border-[3px] bg-[var(--color-bg)]"
         style={{ borderColor: isSelected ? 'var(--color-detail)' : dotColour(index, total) }}
       />

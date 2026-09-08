@@ -1,4 +1,4 @@
-import { useEffect, useImperativeHandle, useMemo, useRef, useState, type Ref } from 'react';
+import { useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState, type Ref } from 'react';
 import { ArtistCard } from './ArtistCard';
 import { ArtistDetail } from './ArtistDetail';
 import { DetailDock } from './DetailDock';
@@ -80,6 +80,54 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     setSelected(null);
   }, [pathKey]);
 
+  // Where the rail starts and stops: the first dot's centre and the last
+  // dot's centre, measured rather than assumed.
+  //
+  // It was a fixed 41px inset at both ends until 2026-09-08, and a fixed inset
+  // CANNOT be right — the two endpoint cards carry an eyebrow the interior
+  // cards do not, so they are taller, by an amount that changes with width and
+  // with whether the eyebrow wraps. Measured in a browser, 41px overshot by
+  // 7.5px at each end at 1280, and at 390 it was lopsided: 3.25px past the top
+  // dot and 10.75px past the bottom one.
+  //
+  // Null until measured, and null wherever nothing can measure (jsdom has no
+  // layout, and ResizeObserver may be absent) — the rail then spans the list,
+  // which is what it did before and is never worse than a wrong inset.
+  const listRef = useRef<HTMLOListElement>(null);
+  const [railInset, setRailInset] = useState<{ top: number; bottom: number } | null>(null);
+
+  useLayoutEffect(() => {
+    const ol = listRef.current;
+    if (!ol) return;
+
+    function measure() {
+      if (!ol) return;
+      const dots = ol.querySelectorAll<HTMLElement>('[data-rail-dot]');
+      if (dots.length < 2) return setRailInset(null);
+      const box = ol.getBoundingClientRect();
+      const first = dots[0].getBoundingClientRect();
+      const last = dots[dots.length - 1].getBoundingClientRect();
+      // A layout-less environment reports zeros; that is the null case, not an
+      // inset of zero, which would draw a full-height rail claiming precision.
+      if (box.height === 0) return setRailInset(null);
+      const next = {
+        top: first.top + first.height / 2 - box.top,
+        bottom: box.bottom - (last.top + last.height / 2),
+      };
+      setRailInset((prev) =>
+        prev && prev.top === next.top && prev.bottom === next.bottom ? prev : next,
+      );
+    }
+
+    measure();
+    if (typeof ResizeObserver === 'undefined') return;
+    // Card heights move with width, with the eyebrow wrapping, and with the
+    // display face finishing loading — all after the first paint.
+    const ro = new ResizeObserver(measure);
+    ro.observe(ol);
+    return () => ro.disconnect();
+  }, [pathKey]);
+
   // The controls that leave or rebuild a path live on the page, not on a card, and
   // waiting for the rebuild to silence the audio reads as a lag rather than as a
   // response to the press. So the page can stop it the moment a button is pressed.
@@ -110,13 +158,15 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
       <div className="lg:grid lg:grid-cols-[1fr_400px] lg:items-start lg:gap-10">
       {/* Still no arrow at its foot — the owner's request, 2026-07-28. What
           changed on 2026-09-08 is where it starts and stops: the cards now
-          carry a dot each, so the rail runs from the first dot to the last
-          rather than the full height of the list, as the approved mockup draws
-          it. The 41px is the first card's centre at phone width. */}
-      <ol className="relative flex flex-col gap-3.5 pl-[26px]">
+          carry a dot each, so the rail runs dot to dot rather than the full
+          height of the list, as the approved mockup draws it.
+          `left-2px` with `w-3px` centres it 3.5px from this list's left edge —
+          the same centre the dots use; see the geometry note in ArtistCard. */}
+      <ol ref={listRef} className="relative flex flex-col gap-3.5 pl-[26px]">
         <span
           aria-hidden
-          className="absolute bottom-[41px] left-[5px] top-[41px] w-[3px] rounded-full bg-gradient-to-b from-[var(--color-start)] via-[var(--color-playing)] to-[var(--color-end)]"
+          className="absolute left-[2px] w-[3px] rounded-full bg-gradient-to-b from-[var(--color-start)] via-[var(--color-playing)] to-[var(--color-end)]"
+          style={railInset ? { top: railInset.top, bottom: railInset.bottom } : { top: 0, bottom: 0 }}
         />
         {artists.map((artist, i) => (
           <li key={artist.mbid}>
