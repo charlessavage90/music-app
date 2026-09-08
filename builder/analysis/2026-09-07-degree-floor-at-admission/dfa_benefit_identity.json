@@ -1,0 +1,77 @@
+{
+  "arms": {
+    "ceiling_20000": "shipped cap, union_degree_ceiling=20000 (does not bind)",
+    "control": "shipped cap, union_degree_ceiling=50",
+    "floor_f2": "ceiling 50, floor 2, live far-end degree, shipped order"
+  },
+  "artifacts": {
+    "added": 29892,
+    "new": {
+      "artists": 88685,
+      "file": "graph-cxa-adopted.bin",
+      "sha256": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46"
+    },
+    "old": {
+      "artists": 58838,
+      "file": "graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+    },
+    "pre_existing": 58793
+  },
+  "degrees_of_the_rescued_artists": {
+    "note": "same artists, both arms \u2014 how much each rule gives them",
+    "under_the_ceiling_lift": {
+      "max": 52,
+      "mean": 7.391,
+      "median": 5.0,
+      "n": 4305,
+      "p90": 14
+    },
+    "under_the_floor": {
+      "max": 3,
+      "mean": 3.0,
+      "median": 3.0,
+      "n": 4305,
+      "p90": 3
+    }
+  },
+  "degrees_of_the_whole_added_set": {
+    "control": {
+      "max": 50,
+      "mean": 7.376,
+      "median": 4.0,
+      "n": 29892,
+      "p90": 18
+    },
+    "note": "the enrichment half, which a rescue count cannot show",
+    "under_the_ceiling_lift": {
+      "max": 153,
+      "mean": 14.41,
+      "median": 8.0,
+      "n": 29892,
+      "p90": 43
+    },
+    "under_the_floor": {
+      "max": 50,
+      "mean": 7.583,
+      "median": 4.0,
+      "n": 29892,
+      "p90": 18
+    }
+  },
+  "probe": "DFA- \u2014 is the floor's rescued set the SAME set the ceiling lift rescues, or merely the same size?",
+  "rescued_from_the_two_or_fewer_group": {
+    "by_both": 4305,
+    "by_the_ceiling_lift": 4305,
+    "by_the_ceiling_lift_only": 0,
+    "by_the_floor": 4305,
+    "by_the_floor_only": 0,
+    "jaccard": 1.0,
+    "sets_are_identical": true
+  },
+  "residual_still_at_two_or_fewer": {
+    "sets_are_identical": true,
+    "under_the_ceiling_lift": 5967,
+    "under_the_floor": 5967
+  }
+}
