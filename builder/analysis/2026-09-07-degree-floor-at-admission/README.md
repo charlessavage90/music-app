@@ -13,7 +13,9 @@ instrument gate), [`dfa_benefit_identity.json`](dfa_benefit_identity.json) (the 
 check), [`dfa_overlap_and_ambiguity.json`](dfa_overlap_and_ambiguity.json) (§8's two
 commissioned reads), [`dfa_c3_identity_check.json`](dfa_c3_identity_check.json) (§9's test
 against Track B's committed record), [`dfa_cap_diff.txt`](dfa_cap_diff.txt) (the variant cap
-against the shipped one), and the run logs. **Added 2026-09-07 for `LBD-AM1`:**
+against the shipped one), [`dfa_scoring_comparability.py`](dfa_scoring_comparability.py)
+and its log (§8's derivation as a runnable harness — **written by the `ml-graph-analyst`,
+re-run at closeout and reproducing every figure in §8**), and the other run logs. **Added 2026-09-07 for `LBD-AM1`:**
 [`dfa_residual_mbids.txt`](dfa_residual_mbids.txt) (5,967) and
 [`dfa_rescued_mbids.txt`](dfa_rescued_mbids.txt) (4,305) — the two sets of §5 as artist lists.
 The record first held **counts only**; the lists were emitted by re-running that section's own
