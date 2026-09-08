@@ -16,7 +16,7 @@ below are into that file. A review (`LBDR-F2`) established that the plan's prose
 a DIFFERENT computation from the SQL it quotes, so prose is not admissible evidence here.
 
 --------------------------------------------------------------------------------------
-THE NINE DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
+THE TEN DECLARED DEVIATIONS FROM LB'S SQL. There are no others.
 --------------------------------------------------------------------------------------
 
 T3-D1. `to_date` is pinned to the dump's END_TIMESTAMP, not `date.today()` (`artist.py:121`).
@@ -101,6 +101,32 @@ T3-D9. `hash(artist_credit_mbids)` REPLACES THE LIST ITSELF THROUGH THE WINDOWED
     `count(DISTINCT artist_credit_mbids)` against `count(DISTINCT hash(artist_credit_mbids))`
     over the corpus and REFUSES on any difference. Measured collision-free on a 1-in-64 user
     slice (430,644 distinct arrays, 430,644 distinct hashes) before this was adopted.
+
+T3-D10. THE TWO 36-CHARACTER IDENTIFIER COLUMNS ARE REPLACED, EXACTLY, IN STAGE 0.
+    `recording_mbid` and `recording_msid` are the two largest columns in the dump and neither
+    survives stage 0.
+
+    `recording_mbid` is used for exactly two things -- the duration LEFT JOIN (`artist.py:30`)
+    and the `after_ft_jp` window partition (`:36`) -- and both happen inside stage 0, so it is
+    simply not needed afterwards.
+
+    `recording_msid` is used for nothing in LB at all; it is OURS, the tiebreak `T3-D2` adds to
+    make LB's non-total order total. The downstream sort is
+    `(listened_at, recording_msid, position)` inside `PARTITION BY user_id`, so
+    `recording_msid` can only ever break ties among rows sharing a user AND a second. Stage 0
+    therefore emits `DENSE_RANK() OVER (PARTITION BY user_id, listened_at ORDER BY
+    recording_msid)` -- its ordinal within precisely that group. A dense rank is
+    order-preserving on the group it ranks, so ordering by `(listened_at, msid_ord, position)`
+    is IDENTICAL to ordering by `(listened_at, recording_msid, position)` within any user.
+
+    NOT a hash, and the difference matters. A 64-bit hash over 2.4 billion near-unique msids
+    has roughly a one-in-six chance of at least one collision by the birthday bound, and a
+    collision would silently make the order non-total again -- reintroducing exactly the
+    nondeterminism `T3-D2` exists to remove. The dense rank has no such failure mode: the
+    groups it ranks hold a handful of rows each.
+
+    The fixture's user 3 carries two DIFFERENT listens in the same second, which is the case
+    this substitution could break, and it asserts the same answer either way.
 
 --------------------------------------------------------------------------------------
 THREE PROPERTIES OF LB'S SQL THAT LOOK LIKE BUGS AND ARE FAITHFULLY REPRODUCED
@@ -198,41 +224,51 @@ def _phrase_list_sql() -> str:
     return ", ".join("'" + p.replace("'", "''") + "'" for p in FEATURED_JOIN_PHRASES)
 
 
-def sessions_sql(
+def listens_sql(
     listen_table: str,
     metadata_table: str,
     artist_credit_table: str,
-    p: Params,
 ) -> str:
-    """LB's `listens` -> `ordered` -> `sessions` -> `sessions_filtered` (`artist.py:20-63`).
+    """LB's `listens` CTE (`artist.py:20-36`), plus the two substitutions of `T3-D10`.
 
-    Split out from the pair stages so it can be MATERIALISED once. Every arm this track runs
-    shares it exactly: `LBD-A0`-`LBD-A3` vary `threshold`/`limit`, which are applied after the
-    cross-user aggregation, and `LBD-A4` varies pairing, which is applied after
-    `sessions_filtered`. Nothing before this point differs between any of the five.
+    STAGE 0, and it is the one stage that can be materialised cheaply: its only window
+    partitions by `(user_id, listened_at, recording_mbid)` -- a SINGLE LISTEN -- so the
+    partitions are two or three rows and nothing has to be sorted at scale. Everything that
+    needs a big sort happens downstream of it.
+
+    It emits neither 36-character identifier column. Both are replaced exactly, not
+    approximately -- see `T3-D10`.
     """
     return f"""
-            WITH listens AS (
                 SELECT l.user_id
                      -- T3-D5: epoch() for Spark's BIGINT(<timestamp>) (`artist.py:22`).
                      , epoch(l.listened_at)::BIGINT AS listened_at
                      -- T3-D3: TRUNC, not CAST -- DuckDB's cast rounds (`artist.py:23`).
                      , TRUNC(COALESCE(r.length / 1000, {DEFAULT_TRACK_LENGTH}))::BIGINT AS duration
-                     , l.recording_msid
-                     -- T3-D9: a BIGINT key replaces the VARCHAR[] from here on.
+                     -- T3-D10: the ordinal of this listen's recording_msid WITHIN its own
+                     -- (user, second). The downstream total order is
+                     -- (listened_at, recording_msid, position) inside PARTITION BY user_id, so
+                     -- recording_msid only ever breaks ties among rows sharing a user AND a
+                     -- second -- exactly this group. A dense rank over it is order-preserving
+                     -- there, so the substitution is EXACT, and it costs four bytes instead
+                     -- of thirty-six.
+                     --
+                     -- UINTEGER, not UTINYINT: a one-byte ordinal overflowed on real data at
+                     -- 477. Some account logged 477 distinct recordings inside a SINGLE
+                     -- second -- a bulk import or a bot. Found by running stage 0 over one
+                     -- real parquet file; no amount of reading would have produced that
+                     -- number.
+                     , DENSE_RANK() OVER (PARTITION BY l.user_id, epoch(l.listened_at)
+                                          ORDER BY l.recording_msid)::UINTEGER AS msid_ord
+                     , ac.position::UTINYINT AS position
+                     -- T3-D9: a BIGINT key replaces the VARCHAR[].
                      , hash(l.artist_credit_mbids) AS credit_key
                      , ac.artist_mbid
-                     , ac.position
-                     , ac.join_phrase
-                     -- T3-D4: bool_or for Spark's any(). NO EXPLICIT FRAME, exactly as
-                     -- `artist.py:28,36` -- the default RANGE UNBOUNDED PRECEDING TO CURRENT
-                     -- ROW is what makes after_ft_jp true for the row's OWN join phrase as
-                     -- well as its predecessors'. In MusicBrainz the join phrase is the text
-                     -- FOLLOWING that artist, so in "A feat. B" it is A -- the MAIN artist --
-                     -- that carries 'feat.' and is weighted 0.25, and B is weighted too
-                     -- through the cumulative frame. Both. The plan's prose said otherwise
-                     -- and describes a strictly-preceding frame (`LBDR-F2`).
-                     , bool_or(ac.join_phrase IN ({_phrase_list_sql()})) OVER w AS after_ft_jp
+                     -- `artist.py:43`, hoisted here because `after_ft_jp` is only computable
+                     -- inside this stage's window and takes just two values.
+                     , COALESCE(IF(
+                           bool_or(ac.join_phrase IN ({_phrase_list_sql()})) OVER w,
+                           {FEATURED_ARTIST_WEIGHT}, 1), 1)::FLOAT AS similarity
                   FROM {listen_table} l
              LEFT JOIN {metadata_table} r
                  USING (recording_mbid)
@@ -240,21 +276,41 @@ def sessions_sql(
                  USING (artist_credit_id)
                  WHERE l.recording_mbid IS NOT NULL
                    AND l.recording_mbid != ''
+                -- T3-D4: bool_or for Spark's any(). NO EXPLICIT FRAME, exactly as
+                -- `artist.py:28,36` -- the default RANGE UNBOUNDED PRECEDING TO CURRENT ROW is
+                -- what makes after_ft_jp true for the row's OWN join phrase as well as its
+                -- predecessors'. In MusicBrainz the join phrase is the text FOLLOWING that
+                -- artist, so in "A feat. B" it is A -- the MAIN artist -- that carries 'feat.'
+                -- and is weighted 0.25, and B is weighted too through the cumulative frame.
+                -- Both. The plan's prose said otherwise (`LBDR-F2`).
                 WINDOW w AS (PARTITION BY l.user_id, epoch(l.listened_at), l.recording_mbid
                              ORDER BY ac.position)
+    """
+
+
+def sessions_from_listens_sql(listens_source: str, p: Params) -> str:
+    """LB's `ordered` -> `sessions` -> `sessions_filtered` (`artist.py:37-63`).
+
+    STAGE 1. This is where the big sort lives -- three window specifications partitioned by
+    `user_id` -- and it is what exhausted memory when fed straight from the dump. Fed from a
+    materialised stage 0 on fast storage it can be chunked by `user_id` cheaply, because
+    re-reading the intermediate is no longer a 127 GB scan of a platter.
+    """
+    return f"""
+            WITH listens AS ({listens_source}
             ), ordered AS (
                 SELECT user_id
                      , listened_at
-                     , recording_msid
+                     , msid_ord
                      , position
                      -- T3-D2: the total order. LB's `ORDER BY listened_at` (`:45`) is not one.
                      , listened_at - LAG(listened_at, 1) OVER wt - LAG(duration, 1) OVER wt
                            AS difference
                      , credit_key
                      , artist_mbid
-                     , COALESCE(IF(after_ft_jp, {FEATURED_ARTIST_WEIGHT}, 1), 1) AS similarity
+                     , similarity
                   FROM listens
-                WINDOW wt AS (PARTITION BY user_id ORDER BY listened_at, recording_msid, position)
+                WINDOW wt AS (PARTITION BY user_id ORDER BY listened_at, msid_ord, position)
             ), sessions AS (
                 SELECT user_id
                      -- T3-D2: LB's RANGE frame over listened_at is KEPT here. Peers at the same
@@ -274,13 +330,26 @@ def sessions_sql(
                   FROM ordered
                 WINDOW wr AS (PARTITION BY user_id ORDER BY listened_at
                               RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
-                     , wt AS (PARTITION BY user_id ORDER BY listened_at, recording_msid, position)
+                     , wt AS (PARTITION BY user_id ORDER BY listened_at, msid_ord, position)
             )
                 SELECT user_id, session_id, credit_key, artist_mbid, similarity
                   FROM sessions
                  -- T3-P2: NULL `skipped` on each user's last row makes this drop it.
                  WHERE NOT skipped
     """
+
+
+def sessions_sql(
+    listen_table: str,
+    metadata_table: str,
+    artist_credit_table: str,
+    p: Params,
+) -> str:
+    """Stage 0 and stage 1 composed -- LB's `artist.py:20-63` in one query."""
+    return sessions_from_listens_sql(
+        listens_sql(listen_table, metadata_table, artist_credit_table), p
+    )
+
 
 
 def pairs_sql(
@@ -582,6 +651,23 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--threads", type=int, default=None)
     ap.add_argument("--temp-dir", type=Path, default=Path(r"D:/unsung-large-data/duckdb-temp"))
     ap.add_argument(
+        "--buckets",
+        type=int,
+        default=64,
+        help="stage 0: partition the output by user_id %% N so stage 1 chunks without rescans",
+    )
+    ap.add_argument(
+        "--emit-listens",
+        action="store_true",
+        help="stage 0: project the dump once onto fast storage (small windows only)",
+    )
+    ap.add_argument(
+        "--from-listens",
+        type=Path,
+        default=None,
+        help="read a materialised stage 0 instead of the dump",
+    )
+    ap.add_argument(
         "--emit-sessions",
         action="store_true",
         help="materialise sessions_filtered only (stage 1 of 2); every arm shares it",
@@ -643,11 +729,27 @@ def main(argv: list[str] | None = None) -> int:
     # applied after the cross-user aggregation, and LBD-A4 varies pairing, applied after
     # sessions_filtered -- so NOTHING before this point differs between any of the five arms.
     # The fixture asserts the one-shot and two-stage paths agree.
-    if args.emit_sessions:
-        stage = "emit-sessions"
-        sql = sessions_sql(
-            "artist_similarity_listens", "recording_length", "artist_credit", p
+    # A materialised stage 0 replaces the dump as the source for everything after it.
+    listens_source = (
+        f"SELECT * FROM read_parquet('{args.from_listens.as_posix()}')"
+        if args.from_listens
+        else listens_sql("artist_similarity_listens", "recording_length", "artist_credit")
+    )
+
+    if args.emit_listens:
+        stage = "emit-listens"
+        # PARTITION BY a user bucket. Stage 1's windows all partition by user_id, so a bucket
+        # is self-contained: chunking by it is EXACT, and -- unlike `user_id % k` against the
+        # dump -- it reads only that bucket's bytes instead of rescanning everything. That is
+        # the whole point of materialising stage 0.
+        sql = (
+            f"SELECT *, (user_id % {args.buckets})::USMALLINT AS ubucket FROM ("
+            + listens_sql("artist_similarity_listens", "recording_length", "artist_credit")
+            + ")"
         )
+    elif args.emit_sessions:
+        stage = "emit-sessions"
+        sql = sessions_from_listens_sql(listens_source, p)
     elif args.from_sessions:
         stage = "from-sessions"
         sql = pairs_sql(
@@ -658,10 +760,8 @@ def main(argv: list[str] | None = None) -> int:
         )
     else:
         stage = "one-shot"
-        sql = build_sessioned_index(
-            "artist_similarity_listens",
-            "recording_length",
-            "artist_credit",
+        sql = pairs_sql(
+            sessions_from_listens_sql(listens_source, p),
             p,
             apply_threshold=not args.aggregate_only,
             apply_limit=not args.aggregate_only,
@@ -678,16 +778,25 @@ def main(argv: list[str] | None = None) -> int:
     sampler = Sampler(args.temp_dir)
     sampler.start()
     t0 = time.time()
-    con.execute(
-        f"COPY ({sql}) TO '{args.out.as_posix()}' "
-        f"(FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 1000000)"
-    )
+    if args.emit_listens:
+        args.out.mkdir(parents=True, exist_ok=True)
+        con.execute(
+            f"COPY ({sql}) TO '{args.out.as_posix()}' "
+            f"(FORMAT PARQUET, COMPRESSION ZSTD, PARTITION_BY (ubucket), "
+            f"OVERWRITE_OR_IGNORE, ROW_GROUP_SIZE 1000000)"
+        )
+    else:
+        con.execute(
+            f"COPY ({sql}) TO '{args.out.as_posix()}' "
+            f"(FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 1000000)"
+        )
     wall = time.time() - t0
     sampler.stop()
 
-    rows = con.execute(
-        f"SELECT count(*) FROM read_parquet('{args.out.as_posix()}')"
-    ).fetchone()[0]
+    target = (
+        f"{args.out.as_posix()}/**/*.parquet" if args.emit_listens else args.out.as_posix()
+    )
+    rows = con.execute(f"SELECT count(*) FROM read_parquet('{target}')").fetchone()[0]
     manifest = {
         "script_sha256": sha256_of(Path(__file__)),
         "lb_source_sha256": "7a8516be7fb0c25b99ef63f3210029c348cf69c987a3ce540f325262e4b90de3",
@@ -698,11 +807,16 @@ def main(argv: list[str] | None = None) -> int:
         "params": asdict(p),
         "algorithm": p.algorithm,
         "stage": stage,
+        "from_listens": str(args.from_listens) if args.from_listens else None,
         "aggregate_only": args.aggregate_only,
         "user_mod": args.user_mod,
         "user_rem": args.user_rem,
         "out": str(args.out),
-        "out_sha256": sha256_of(args.out),
+        "out_sha256": None if args.emit_listens else sha256_of(args.out),
+        "out_bytes": sum(f.stat().st_size for f in args.out.rglob("*.parquet"))
+        if args.emit_listens
+        else args.out.stat().st_size,
+        "buckets": args.buckets if args.emit_listens else None,
         "rows": rows,
         "wall_clock_s": round(wall, 1),
         "peak_rss_gb": round(sampler.peak_rss_gb, 2),
@@ -712,7 +826,10 @@ def main(argv: list[str] | None = None) -> int:
         "python": platform.python_version(),
         "finished_utc": datetime.utcnow().isoformat() + "Z",
     }
-    args.out.with_suffix(".manifest.json").write_text(
+    manifest_path = (
+        args.out / "MANIFEST.json" if args.emit_listens else args.out.with_suffix(".manifest.json")
+    )
+    manifest_path.write_text(
         json.dumps(manifest, indent=2), encoding="utf-8"
     )
     print(

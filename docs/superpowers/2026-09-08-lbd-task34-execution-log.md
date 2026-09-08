@@ -381,3 +381,38 @@ on this machine**, and that is a measured conclusion rather than a preference. I
 with the two 36-character identifier columns replaced by keys and `artist_mbid` left to
 dictionary-encode. **Nobody has written it yet, and the estimate should not be cited as a
 figure.**
+
+### `T3-D10` and the three-stage shape, approved by the owner 2026-09-08
+
+The owner approved staging onto `C:`. The pipeline is now three stages, split where the
+memory behaviour changes:
+
+| stage | LB's lines | window partitions | why it splits here |
+|---|---|---|---|
+| **0** `listens_sql` | `:20-36` | one **listen** | tiny partitions, nothing sorted at scale — materialisable |
+| **1** `sessions_from_listens_sql` | `:37-63` | one **user** | the big sort; this is what exhausted memory |
+| **2** `pairs_sql` | `:64-102` | — | self-join and aggregation |
+
+Stage 0 is written **partitioned by `user_id % 64`**. Every window in stage 1 partitions by
+`user_id`, so a bucket is self-contained and chunking by it is exact — and unlike `user_id % k`
+against the dump, it reads **only that bucket's bytes** instead of rescanning 127 GB. That is
+the entire point of materialising it.
+
+**`T3-D10` — both 36-character identifier columns are dropped, exactly.** `recording_mbid` is
+used only for the duration join and the featured-weight partition, both inside stage 0.
+`recording_msid` is used for nothing in LB at all — it is *ours*, the tiebreak `T3-D2` adds —
+and it can only ever break ties among rows sharing a user *and* a second, so stage 0 emits its
+dense rank within exactly that group. A dense rank is order-preserving on the group it ranks,
+so the substitution is identical, not approximate.
+
+**Deliberately NOT a hash, and the reason is arithmetic.** A 64-bit hash over ~2.4 billion
+near-unique msids has roughly a one-in-six chance of at least one collision by the birthday
+bound, and a collision would silently make the order non-total again — reintroducing the exact
+nondeterminism `T3-D2` exists to remove. The dense rank has no such failure mode. `T3-D9`'s
+hash is safe by the same arithmetic run the other way: ~2 million distinct credit arrays, not
+2.4 billion, and it was measured collision-free before adoption rather than assumed.
+
+**A one-byte ordinal was not enough, and only real data said so.** `msid_ord` overflowed at
+**477** on the first real file: an account logged 477 distinct recordings inside a single
+second — a bulk import or a bot. Widened to four bytes. Reading the code would not have
+produced that number, and the end-to-end test on one real file cost about a second.
