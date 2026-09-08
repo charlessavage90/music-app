@@ -1,0 +1,48 @@
+{
+  "sample_sha256": "59747e416428fb16be44d4f04a6d58d820ddbffa7c0c87e99fdcdf702344ba12",
+  "seed": 20260907,
+  "bands": 5,
+  "per_band": 600,
+  "n": 3000,
+  "snapshot": "C:\\dev\\music-app\\builder\\scratch\\grt-archive-algb.pre-cex-snapshot",
+  "algorithm_dir": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+  "served_artifact": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+  "served_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+  "snapshot_artists": 75000,
+  "served_artists": 58838,
+  "excluded_no_response_file": 0,
+  "excluded_fame_null": 92,
+  "eligible": 58746,
+  "band_ranges": [
+    {
+      "band": 0,
+      "pool": 11749,
+      "fame_lb_raw_min": 1,
+      "fame_lb_raw_max": 526
+    },
+    {
+      "band": 1,
+      "pool": 11749,
+      "fame_lb_raw_min": 526,
+      "fame_lb_raw_max": 1466
+    },
+    {
+      "band": 2,
+      "pool": 11750,
+      "fame_lb_raw_min": 1466,
+      "fame_lb_raw_max": 3584
+    },
+    {
+      "band": 3,
+      "pool": 11749,
+      "fame_lb_raw_min": 3584,
+      "fame_lb_raw_max": 9761
+    },
+    {
+      "band": 4,
+      "pool": 11749,
+      "fame_lb_raw_min": 9761,
+      "fame_lb_raw_max": 455551
+    }
+  ]
+}
