@@ -120,3 +120,14 @@ class HealthOut(BaseModel):
     graph_sha256: str
     artists: int
     edges: int
+
+
+class MetaOut(BaseModel):
+    """What the landing page may say about the map. UXR-D8.
+
+    A subset of HealthOut, served under /api because /health is not reachable
+    through CloudFront by design. Additive; nothing consumes it but the badge.
+    """
+
+    artists: int
+    graph_sha256: str

@@ -51,3 +51,14 @@ session takes over.
   the old page, so red is by construction; recorded because the plan asked for the run.
 - Screenshots at 390 and 1280 match the artboards. The two broken image boxes are the mark
   the owner has not yet exported.
+
+## §4 `UXR-T4` — `GET /api/meta` and the badge
+
+- Route is `async def` with the `/health` reasoning (`G3-A1`) and a test that introspects
+  the keyword, because that regression is invisible to any test that does not saturate the
+  pool first. Both api and models files are CRLF; edited byte-for-byte to keep them so.
+- `getMeta` gets its own 5 s timeout in `TIMEOUT_MS`; the badge floors to the thousand and
+  renders nothing on any failure (UI-7). `LandingPage.test.tsx` needed no mock: the real
+  `getMeta` rejects in jsdom and the badge's designed failure mode is silence.
+- Snyk on `api/`: one finding, the pre-existing Low in `tests/test_origin_secret.py`
+  (known, out of scope). Nothing new. api suite 290 green; frontend 171 green.

@@ -43,7 +43,7 @@ export class TimeoutError extends Error {
 }
 
 /** Chosen, not measured. Path is longest: Dijkstra at depth plus a cold instance. */
-const TIMEOUT_MS = { search: 8_000, path: 20_000, track: 10_000, artist: 8_000 } as const;
+const TIMEOUT_MS = { search: 8_000, path: 20_000, track: 10_000, artist: 8_000, meta: 5_000 } as const;
 
 async function fetchWithTimeout(
   url: string,
@@ -196,4 +196,12 @@ export async function getTrack(
     // no control" rather than hiding every card's clip.
     candidateCount: d.candidate_count ?? 1,
   };
+}
+
+/** What the landing page may say about the map (UXR-D8). Decorative: callers must tolerate failure. */
+export async function getMeta(signal?: AbortSignal): Promise<{ artists: number; graphSha256: string }> {
+  const r = await fetchWithTimeout(`${BASE}/meta`, {}, TIMEOUT_MS.meta, signal);
+  if (!r.ok) throw new ApiError(r.status);
+  const d = (await r.json()) as { artists: number; graph_sha256: string };
+  return { artists: d.artists, graphSha256: d.graph_sha256 };
 }
