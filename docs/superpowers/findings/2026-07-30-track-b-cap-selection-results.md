@@ -18,6 +18,38 @@ in every output. All instrument gates green and red at the scoring commit;
 `CRS-G2` (bound holds) passed in all 22 selectable cells; `CRS-G4` never
 fired.
 
+> ## ⚠ FORWARD CORRECTION, 2026-09-07 — `CRS-C3`'s silence carried no information
+>
+> **This document stays exactly as written and every figure in it stands as measured.** The
+> correction goes forward, and it concerns only how one criterion's *null* should be weighted.
+>
+> `CRS-C3` flags a cell whose `top1pct_degree_mass_frac` exceeds its archive's `MK50` by ≥ 50 %
+> relative, and §2 reports that **no selectable cell fires the `C3` flag**. That statement is
+> arithmetically correct. It is also **the only outcome the criterion could have produced**:
+> where at least 1 % of a cell's nodes sit at its degree bound, the statistic reduces
+> algebraically to `bound ÷ (100 × mean degree)` and cannot see how edges are arranged. Tested
+> against this document's own raw record, `cb_scores.json`: the identity holds on **all ten
+> `trimmed_union` cells** to within 1.6 × 10⁻⁴, and pins the `mutual_knn` and `proximity_select`
+> cells inside a window 4–12 % wide. **Given only its own bound and mean degree, no selectable cell
+> could have exceeded 73.5 % of its own flag threshold.** The two cells that would have fired,
+> by a factor of 32–35, are the **uncapped** pair — which the pre-registration barred from
+> candidacy.
+>
+> **Figures owner for that arithmetic:**
+> [`../../../builder/analysis/2026-09-07-degree-floor-at-admission/README.md`](../../../builder/analysis/2026-09-07-degree-floor-at-admission/README.md)
+> §9, with the derivation behind it in that document's §8, and the raw record beside them.
+> **The three numbers in the paragraph above are carried here deliberately** — a warning a reader
+> cannot size is not a warning — but they are that document's, not this one's, and this document
+> owns none of them. **Every figure this document does own is untouched.**
+>
+> **Three limits, because each is easy to overrun.** ① This says **nothing about `CRS-C4` hub
+> transit**, which is a routing measure over built paths, is not saturation-degenerate, and whose
+> bound-100 finding stands exactly as recorded below. ② It **overturns none of this document's
+> conclusions**, which rest on the other criteria; `C3` was *a flag, not a gate* by its own
+> pre-registration, and a flag that could not fire changed no verdict. ③ It is **not evidence
+> about any cap rule** — that decision is parked and the owner's and owes a blind listen before
+> any adoption.
+
 ## 1. Measured
 
 Anchors (`GRT-P4`, reproduced by the gates): `ALG-E`-`MK50` vs `ALG-B`-`MK50`

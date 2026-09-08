@@ -10,8 +10,10 @@ comparison is unreadable with the comparator in another document.
 Raw records beside this file: [`dfa_results.json`](dfa_results.json) (the seven arms),
 [`dfa_gate_addendum.json`](dfa_gate_addendum.json) (a dated correction to this probe's own
 instrument gate), [`dfa_benefit_identity.json`](dfa_benefit_identity.json) (the set-identity
-check), [`dfa_cap_diff.txt`](dfa_cap_diff.txt) (the variant cap against the shipped one),
-and the two run logs.
+check), [`dfa_overlap_and_ambiguity.json`](dfa_overlap_and_ambiguity.json) (§8's two
+commissioned reads), [`dfa_c3_identity_check.json`](dfa_c3_identity_check.json) (§9's test
+against Track B's committed record), [`dfa_cap_diff.txt`](dfa_cap_diff.txt) (the variant cap
+against the shipped one), and the run logs.
 
 **Scope: A DESCRIPTIVE STRUCTURAL PROBE, and one arm of an existing instrument.** Graphs built
 in memory, two artifacts read and sha-verified, archives opened read-only, nothing serialised.
@@ -447,6 +449,82 @@ calls it a different graph, and the overlap column is right** — its max degree
 > concentration cost, and one of them is provably incapable of detecting one** — while the
 > statistic that can detect a moved top set says it did not move. That is weaker than "the
 > floor costs nothing in concentration" and it is what the evidence supports.
+
+## 9. The identity tested against Track B's committed record, and what it means for `CRS-C3`
+
+**This section owns its own arithmetic and no other document's figures.** Every input is read
+from Track B's committed raw record
+[`../2026-07-30-track-b-cap-selection/cb_scores.json`](../2026-07-30-track-b-cap-selection/cb_scores.json)
+and **cited from there, never restated here** — the columns below are quantities computed in
+this probe, not Track B's own. Its results document remains frozen and unedited; it now carries
+a forward-correction warning pointing here.
+
+Raw record and the arithmetic itself: [`dfa_c3_identity_check.py`](dfa_c3_identity_check.py)
+and [`dfa_c3_identity_check.json`](dfa_c3_identity_check.json). **No artifact is opened, no
+graph is built and nothing is routed** — the test needs only the committed JSON.
+
+**The test.** §8.1 derived that where at least 1 % of nodes sit at the boundary degree,
+`top1pct_degree_mass_frac` collapses to `round(N/100) · C / (total degree)`. That condition is
+directly checkable in Track B's record without opening any artifact, because each cell stores
+its **p99 degree** alongside its **max degree**: `p99 = max` means at least 1 % of nodes sit at
+the maximum, which *is* the saturation condition. For each of the 24 cells I computed the
+predicted value from that cell's own node count, mean degree and max degree, and compared it
+with the mass the cell reports.
+
+| cell family | cells | saturated (`p99` = `max`) | reported ÷ predicted | reading |
+|---|---:|:--|---|---|
+| **`trimmed_union`** — the shipped rule's family | 10 | **all 10** | **0.9999 – 1.0002**, worst relative error 1.6 × 10⁻⁴ | the statistic is *exactly* `bound ÷ (100 × mean degree)` |
+| `mutual_knn` and `proximity_select` | 12 | none | 0.9367 – 0.9769 | not exact — the admissible window is **4 – 12 % wide**, and the reported value sits 2.3 – 6.3 % below its upper end |
+| `uncapped` reference, **barred from candidacy** | 2 | none | **0.093 – 0.106** | the identity fails completely — the only cells where the figure is a free measurement |
+
+**So the identity holds, and it holds hardest exactly where the shipped rule lives.** On all ten
+`trimmed_union` cells the statistic ranks cells purely by their bound-to-mean-degree ratio and
+is **blind to how edges are arranged among nodes below the bound.** On the `mutual_knn` and
+`proximity_select` cells it is not degenerate but is nearly so: the whole admissible range,
+between taking the top 1 % all at the p99 degree and all at the maximum, is 4 to 12 % wide.
+
+### 9.1 `CRS-C3` was structurally unable to fire on any selectable cell
+
+`CRS-C3` flags a cell whose `top1pct_degree_mass_frac` exceeds its archive's `MK50` cell by at
+least 50 % relative. The reported outcome was that **no selectable cell fires the flag.** That
+outcome is arithmetically correct, and this is what it rests on:
+
+| quantity, computed here | value |
+|---|---|
+| largest value the statistic *could* take on any **selectable** cell, given only that cell's own bound and mean degree, as a fraction of its own flag threshold | **0.735** |
+| range of that fraction across all 22 selectable cells | 0.391 – 0.735 |
+| mean degree a cell would have needed in order to fire, against the mean degree it actually had | **1.4× to 2.2× lower than actual, on every cell** |
+| the two cells whose statistic *would* have fired, by a factor of 32 – 35 | the **uncapped** reference pair, **barred from candidacy** |
+
+**No selectable cell could have fired, whatever its edges were doing.** The outcome was fixed by
+each cell's bound and mean degree before edge arrangement entered the calculation, and the
+closest any selectable cell came to its own threshold was 73.5 % — a gap that no rearrangement of
+that cell's edges could have closed, because rearrangement cannot move the statistic at all on
+the saturated cells and can move it by at most 4–12 % on the others.
+
+> **So `C3`'s null carried no information about concentration on the cells it was applied to.**
+> The criterion compared bound-to-mean-degree ratios. That is a real quantity and a defensible
+> crude proxy, but it is not what the criterion's plain-language sentence promises — *"do a
+> handful of artists own a disproportionate share of all connections?"* — because two cells with
+> the same bound, node count and edge count answer it identically however differently their
+> edges are arranged. **The one cell family where the statistic was a genuine free measurement
+> is the uncapped reference, which was barred from candidacy** — so the sweep excluded the only
+> cells the criterion could actually measure.
+
+### 9.2 Three limits on the paragraph above, stated because each is easy to overrun
+
+1. **This says nothing whatever about `CRS-C4` hub transit.** That is a *routing* measure — how
+   often the router's chosen paths pass through top-degree artists — computed over built paths,
+   not a degree distribution. It is untouched by this arithmetic, it is not saturation-degenerate,
+   and **its bound-100 finding stands exactly as recorded.**
+2. **This overturns none of Track B's conclusions.** Its selection rests on its other criteria —
+   candidate supply, component exclusion, hub transit, famous-pair sub-decile presence, survival
+   tilt — none of which is touched here. `C3` was explicitly *a flag, not a gate*, and the
+   pre-registration says so; a flag that could not fire changed no verdict. What is corrected is
+   the **weight a reader should give `C3`'s silence**, which is none.
+3. **This is not evidence about any cap rule.** No rule is better or worse for it. The cap-rule
+   decision is **parked and the owner's**, it owes a blind listen before any adoption, and
+   nothing in this section moves it in either direction.
 
 ---
 
