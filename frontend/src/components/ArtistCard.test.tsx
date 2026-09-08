@@ -259,3 +259,29 @@ test('a card with no clip still carries the links', async () => {
   await waitFor(() => expect(screen.getByText('No preview available')).toBeInTheDocument());
   expect(screen.getAllByRole('link')).toHaveLength(2);
 });
+
+test('a card shows the artist facts line', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(
+    <ArtistCard
+      artist={{
+        ...artist('facts'), disambiguation: 'US jazz trumpeter',
+        facts: { type: 'Person', country: 'US', area: 'United States',
+                 begin: '1926', end: '1991', ended: true },
+      }}
+      isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()}
+    />,
+  );
+  expect(screen.getByText(/US jazz trumpeter/)).toBeInTheDocument();
+  expect(screen.getByText(/1926–1991/)).toBeInTheDocument();
+});
+
+// The state production is in until the LUX-4 artifact deploys: the api serves
+// nulls for everything. The card must be exactly what it was before.
+test('a card with no facts at all is unchanged', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(<ArtistCard artist={artist('no-facts')} isPlaying={false} onPlay={vi.fn()} onBypass={vi.fn()} />);
+  expect(screen.getByTestId('artist-name')).toHaveTextContent('Miles Davis');
+  expect(screen.queryByText(/unknown/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(' · ')).not.toBeInTheDocument();
+});

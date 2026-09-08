@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useClip } from '@/hooks/useClip';
+import { ArtistInfo } from './ArtistInfo';
 import { PlayButton } from './PlayButton';
 import { StreamingLinks } from './StreamingLinks';
 import type { Artist } from '@/api/types';
@@ -125,6 +126,12 @@ export function ArtistCard({
             </span>
             {playable && <span className="flex-none text-[var(--color-label)]">· 0:30</span>}
           </div>
+          {/* LUX-4. Beneath the track title, above the clip controls: it is
+              about the ARTIST, so it belongs with the name, while everything
+              below is about this particular clip. Renders nothing at all when
+              there is nothing to say (L4-D3), so a card for an artist the
+              extraction never reached is exactly the card it was before. */}
+          <ArtistInfo artist={artist} />
           {/* LUX-3. The app asks a listener to judge an unknown artist on one
               30-second clip; if that clip is unrepresentative the artist is
               rejected and nobody ever finds out. Absent when there is nothing to

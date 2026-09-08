@@ -50,3 +50,66 @@ test('a journey is usable at phone width', async ({ page }) => {
   const bypass = interior.getByRole('button', { name: /dig deeper/i });
   await expect(bypass).toBeVisible();
 });
+
+// LUX-4 adds two lines to every card — the facts line and the links row — and
+// height at 390px is the scarcest thing on this page. Assertions 1 and 3 above
+// already cover overflow and reachability for the card as a whole; this adds
+// the new elements specifically, and is also the ONLY test in the suite that
+// exercises the whole chain for real: artifact -> APG1 keys -> ArtistOut ->
+// artistFrom -> card. Every other LUX-4 test mocks one end or the other.
+test('the streaming links survive phone width and carry a real href', async ({ page }) => {
+  await page.goto('/');
+
+  await page.getByLabel('From').fill('miles davis');
+  await page.getByRole('button', { name: /miles davis/i }).first().click();
+  await page.getByLabel('To').fill('daft punk');
+  await page.getByRole('button', { name: /daft punk/i }).first().click();
+  await page.getByRole('button', { name: /discover a path/i }).click();
+
+  const interior = page.locator('ol li').nth(1);
+  await expect(interior).toBeVisible();
+
+  // Both services, always — a missing id is a search link, never no button.
+  const spotify = interior.getByRole('link', { name: /on Spotify/i });
+  const apple = interior.getByRole('link', { name: /on Apple Music/i });
+  await expect(spotify).toBeVisible();
+  await expect(apple).toBeVisible();
+  await expect(spotify).toHaveAttribute('href', /open\.spotify\.com/);
+  await expect(apple).toHaveAttribute('href', /music\.apple\.com/);
+  await expect(spotify).toHaveAttribute('rel', /noopener/);
+
+  // Adding two lines must not have reintroduced the sideways scroll TR-16 fixed.
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(1);
+});
+
+// The facts line WRAPS rather than truncating, and only a layout engine can
+// tell. Under `truncate` this line lost its life span on most real artists at
+// 390px -- "Person . United States . 1933-2..." -- because the dates sit at
+// the end of the natural reading order behind the longest, least useful field.
+// A unit test could only assert a class name here and would pass either way,
+// which is the FMS-P1 / TR-2 vacuous-check pattern this file exists to avoid.
+test('the artist facts line is never cut off at phone width', async ({ page }) => {
+  await page.goto('/');
+
+  await page.getByLabel('From').fill('miles davis');
+  await page.getByRole('button', { name: /miles davis/i }).first().click();
+  await page.getByLabel('To').fill('daft punk');
+  await page.getByRole('button', { name: /daft punk/i }).first().click();
+  await page.getByRole('button', { name: /discover a path/i }).click();
+
+  await expect(page.locator('ol li').nth(1)).toBeVisible();
+
+  // Every facts line on the journey, not just one: the defect showed on the
+  // artists with the most to say, which is not predictable from the pair.
+  const clipped = await page.evaluate(() =>
+    [...document.querySelectorAll('ol li')]
+      .flatMap((li) => [...li.querySelectorAll('div')])
+      .filter((el) => / . /.test(el.textContent ?? '') && el.children.length === 0)
+      .filter((el) => el.scrollWidth > el.clientWidth + 1)
+      .map((el) => el.textContent),
+  );
+  expect(clipped).toEqual([]);
+});

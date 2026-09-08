@@ -66,8 +66,10 @@ Do not delete entries; the record of what was exercised is the point.**
 > discharged entries do carry both headings — and as a safety net if an entry is ever left in
 > place.
 >
-> **An item is live only if its topmost heading says so.** As of **2026-09-05** that is **ONE
-> item**, written 2026-09-04. *(This block read "**ZERO items** — the queue is empty" until
+> **An item is live only if its topmost heading says so.** As of **2026-09-08** that is **TWO
+> items**, written 2026-09-04 and 2026-09-08. **Both are blocked on the same deploy**, and the
+> 2026-09-08 one additionally needs a new graph file uploaded — so they are exercisable
+> together, in one sitting, once you have deployed. *(This block read "**ZERO items** — the queue is empty" until
 > 2026-09-05, dated 2026-09-01 and never re-counted, while a live entry sat below it. That is
 > the incident below repeating inside the warning written to prevent it, which is why the count
 > is re-counted at each closeout and never carried forward.)*
@@ -85,7 +87,59 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ▶ QUEUED (latest) — 2026-09-04 — one button instead of two, a list of who you skipped, and a way to hear a different song
+## ▶ QUEUED (latest) — 2026-09-08 — every card now says who the artist is, and where to go and hear more
+
+**Not live yet.** This is on a branch waiting for you to merge AND deploy — and this one
+needs the deploy more than usual, because it ships a new graph file as well as new code. Until
+both happen, nothing below exists.
+
+**Deploy note:** this is the `LUX-4` artifact, so §4 of `infra/README.md` changes `GRAPH` to
+`graph-lux4.bin` and both upload lines run. `cdk diff` showing the graph variables change is
+*expected here* and is not the `DEP-34` warning firing.
+
+### What to exercise — about ten minutes
+
+1. **Build a journey and read the line under each song title.** It is new. It should say
+   things like *Person · United States · 1926–1991* or *English rock band · Group ·
+   United Kingdom · 1967–2022* — whatever is actually known about that artist, and nothing
+   where nothing is known.
+2. **Find a card where that line is missing entirely.** That is correct and expected: it means
+   we know nothing structured about them. What is NOT correct is the word "Unknown", a dash, or
+   an empty gap where a fact would go.
+3. **Look at the bottom of any card for "Spotify" and "Apple Music".** Both should be on
+   **every** card, always — including the two artists you chose, and including a card with no
+   song playing.
+4. **Press both, on a well-known artist.** They should open a new tab straight on that
+   artist's page.
+5. **Press both on the most obscure artist in the journey** — press "Dig deeper" a few times
+   first to find one. Here the links will often go to a **search results page** for their name
+   instead of straight to their page. That is correct and is the point. What is wrong is a
+   missing button, or a search that plainly searched the wrong words.
+6. **Do all of the above on your phone.** These two additions cost every card two extra lines,
+   and the phone is where that is felt.
+7. **Open a journey link you saved weeks ago.** It must still open the same journey.
+
+### What "wrong" looks like
+
+- **The word "Unknown", "N/A", or a stray dot or dash** where a fact is missing. Missing facts
+  should show nothing at all.
+- **A fact line cut off mid-word** with a "…". It is meant to wrap onto a second line
+  instead. The dates are the part that used to get cut, so check the end of the line.
+- **Only one of the two services on a card**, or neither.
+- **A link opening the wrong artist.** Worth a close look on anyone with a common name — that
+  is the failure this data exists to prevent, arriving by a different route.
+- **The page scrolling sideways on your phone**, or an artist's name squeezed thin again.
+- **An old saved link opening a different journey.** The most serious thing on this list.
+
+### Two things that are expected and are NOT faults
+
+- **Search links instead of artist pages, on obscure artists.** Not every artist has a
+  recorded id on both services, and a search is deliberately better than no button.
+- **Cards are slightly taller.** Two lines were added to each one.
+
+**Paste the URL for anything you find.**
+
+## ▶ QUEUED — 2026-09-04 — one button instead of two, a list of who you skipped, and a way to hear a different song
 
 **Not live yet.** This is on a branch waiting for you to merge it. Once it deploys, three
 things on the journey page are different, and one of them is the first thing anyone you share
