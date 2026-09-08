@@ -51,7 +51,10 @@ async function playToEnd(page: import('@playwright/test').Page) {
 
 async function playingCardIndex(page: import('@playwright/test').Page, cards: number) {
   for (let i = 0; i < cards; i++) {
-    if ((await page.locator('ol li').nth(i).innerText()).match(/now playing/i)) return i;
+    // The words became an equaliser on 2026-09-08 (UXR-T6); the accessible
+    // name is what survived, so ask for that rather than for visible text.
+    const eq = page.locator('ol li').nth(i).getByRole('img', { name: /now playing/i });
+    if ((await eq.count()) > 0) return i;
   }
   return -1;
 }

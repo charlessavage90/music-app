@@ -24,10 +24,10 @@ test('clicking play marks that card now-playing', async () => {
   const firstPlay = (await screen.findAllByRole('button', { name: /play/i }))[0];
   await waitFor(() => expect(firstPlay).toBeEnabled());
   await user.click(firstPlay);
-  expect(screen.getByText(/now playing/i)).toBeInTheDocument();
+  expect(screen.getByRole('img', { name: /now playing/i })).toBeInTheDocument();
 });
 
-test('bypass is offered on the artists in the middle, never on the two you chose', async () => {
+test('every artist, endpoints included, has a detail button', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   const threeStop = [
     artists[0],
@@ -36,9 +36,10 @@ test('bypass is offered on the artists in the middle, never on the two you chose
   ];
   render(<JourneyList artists={threeStop} stopRule="natural" onBypass={vi.fn()} />);
 
-  // One footer strip, on the interior card only — the endpoints stay bare, so
-  // there is no route to the signal on them at all.
-  expect(screen.getAllByRole('button', { name: /dig deeper/i })).toHaveLength(1);
+  // The detail is where the links and the facts are, and those are worth
+  // reaching on an endpoint too (LUX-4). Interior-only is "Dig deeper", which
+  // UXR-T7 asserts inside the detail rather than here.
+  expect(screen.getAllByRole('button', { name: /^About / })).toHaveLength(3);
   // and all three artists are still shown
   expect(screen.getByText('Miles Davis')).toBeInTheDocument();
   expect(screen.getByText('Kraftwerk')).toBeInTheDocument();
@@ -78,12 +79,12 @@ test('audio stops when the path is recomputed', async () => {
   const firstPlay = (await screen.findAllByRole('button', { name: /play/i }))[0];
   await waitFor(() => expect(firstPlay).toBeEnabled());
   await user.click(firstPlay);
-  expect(screen.getByText(/now playing/i)).toBeInTheDocument();
+  expect(screen.getByRole('img', { name: /now playing/i })).toBeInTheDocument();
 
   const rerouted = [artists[0], { mbid: 'x', name: 'Sun Ra', disambiguation: '', popularity: 0.7, spotifyId: null, appleId: null, facts: null }];
   rerender(<JourneyList artists={rerouted} stopRule="natural" onBypass={vi.fn()} />);
 
-  await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
+  await waitFor(() => expect(screen.queryByRole('img', { name: /now playing/i })).not.toBeInTheDocument());
 });
 
 test('explains itself when the two artists have nobody between them', async () => {

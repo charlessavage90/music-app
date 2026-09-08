@@ -123,3 +123,55 @@ High — the plan's role line still said "unstarted" — and one Medium — the 
 named the module `T3` moved the constants out of. Both corrected in place, marked
 `⚠ CORRECTED`. The handoff chain, `NEXT.md`'s rename wording and action list, figure
 ownership, identifiers and every reference were verified clean.
+
+## §7 `UXR-T6` — the card sheds what it does not need to listen
+
+**Numbered §7, not §6 as the plan says.** The closeout took `## §6` at the first seam, so
+every section number in the plan from here is one behind this file. `UXR-T7` appends **§8**.
+
+- **The plan's Step 1 named five test edits and the task needed thirteen.** It covered the two
+  Dig-deeper tests, the eyebrow copy and the prop swap, and said nothing about the LUX-4
+  block. Removing the facts line and both links from the card also invalidates *a card carries
+  links out to both streaming services*, *endpoint cards carry the links too*, *a card with no
+  clip still carries the links*, *a card shows the artist facts line* and all three
+  "Try another track" tests. Same shape as the plan's three known defects: right about intent,
+  incomplete about the repository.
+- **What is unasserted between this commit and `UXR-T7`, deliberately:** `REQ-45`'s
+  no-rejection wording guard, both streaming links rendering, the facts line rendering, and
+  the clip-cycling control. Each is on the interior; each is re-asserted on `ArtistDetail` in
+  `T7`. `ArtistInfo.test.tsx` (11 tests) and `StreamingLinks.test.tsx` (6) never stopped
+  covering the components themselves — what lapsed is only that *something mounts them*.
+- **Two pins `T7`'s planned tests do NOT restore, and must be added there.** (a) *endpoint
+  cards carry the links too* — `T7` asserts an endpoint gets no Dig deeper but never that its
+  detail still carries both links, and that was a recorded decision (`L4-D3` neighbourhood),
+  not an accident. (b) *"Try another track" appears only when there is another track* — `T7`'s
+  test of that name asserts only the positive case; the `candidateCount === 1` and silent-card
+  directions are dropped. Both are cheap and belong in `ArtistDetail.test.tsx`.
+- **A vacuous assertion the plan would have left behind.** It listed three `getByText(/now
+  playing/i)` to convert to the `img` role, but `JourneyList.test.tsx` and `PathPage.test.tsx`
+  also hold *query*ByText forms asserting the opposite. Converted with them: after the words
+  became an equaliser, `queryByText(/now playing/i)` can never match, so "audio stops when the
+  path is recomputed" would have passed against a card that never stopped.
+- **`PathPage.test.tsx` is left with 3 red, not 4.** The two `renderPlaying` failures were the
+  now-playing change, which the plan assigns to this task; only `pressBypass` — `T7`'s — is
+  red at this commit.
+- **`selected` is reset in the existing `pathKey` effect** beside `stopRef.current()`
+  (`UXR-D3`): the open artist may not be on the new path. `onBypass` and `cycleClip` are
+  `void`-ed for this commit only; `T7` consumes both.
+- **The rail no longer spans the full height.** It runs first dot to last (`top-[41px]
+  bottom-[41px]`), which is the mockup. The owner's 2026-07-28 request was *full height, and
+  no arrow at the foot*; the no-arrow half is untouched and the comment at the element now
+  records both halves and which changed. Flagged to him before the task; one line reverts it.
+- **Seen on the real thing** at 390 and 1280 on `graph-lux4` (sha `fd92a735…`, matching the
+  sidecar): dots, gradient, eyebrows, detail button, play. Two observations, neither a defect.
+  "YOU WERE HEADING HERE" wraps to two lines at 390 — approved copy (`UXR-D15`) in a column
+  the second button narrowed; legible, and the copy is his. And `PathIntro` still says the
+  Dig deeper control is "along the bottom of their card", which is false from this commit
+  until `T8` rewrites it (`UXR-D5`, and `T8` owns it).
+- **A screenshot that lied, and the helper fixed so it cannot again.** The first journey shot
+  came back with seven empty cover boxes. They were the helper's 2500 ms wait, not the card:
+  the covers are background-images from Deezer's CDN, the computed `backgroundImage` was
+  correct, and an 8 s run rendered every one. `e2e/screenshot.mjs` now waits for network idle
+  as well. Committed separately from the task — it is tooling, not `T6`.
+- Card + JourneyList + player: 40 green. Lint clean (the pre-existing `vite.config.ts`
+  warning), `tsc -b` and the production build clean.

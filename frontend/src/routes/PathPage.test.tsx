@@ -134,7 +134,7 @@ async function renderPlaying(user: ReturnType<typeof userEvent.setup>, url: stri
   const play = (await screen.findAllByRole('button', { name: /play/i }))[0];
   await waitFor(() => expect(play).toBeEnabled());
   await user.click(play);
-  await waitFor(() => expect(screen.getByText(/now playing/i)).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByRole('img', { name: /now playing/i })).toBeInTheDocument());
 }
 
 test('pressing reset path stops the audio at once, not when the new path arrives', async () => {
@@ -143,7 +143,7 @@ test('pressing reset path stops the audio at once, not when the new path arrives
 
   await user.click(screen.getByRole('button', { name: /reset path/i }));
 
-  await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
+  await waitFor(() => expect(screen.queryByRole('img', { name: /now playing/i })).not.toBeInTheDocument());
 });
 
 test('pressing a bypass stops the audio at once, not when the new path arrives', async () => {
@@ -152,7 +152,7 @@ test('pressing a bypass stops the audio at once, not when the new path arrives',
 
   await pressBypass(user);
 
-  await waitFor(() => expect(screen.queryByText(/now playing/i)).not.toBeInTheDocument());
+  await waitFor(() => expect(screen.queryByRole('img', { name: /now playing/i })).not.toBeInTheDocument());
 });
 
 test('there is nothing to reset before any bypass is pressed', async () => {
