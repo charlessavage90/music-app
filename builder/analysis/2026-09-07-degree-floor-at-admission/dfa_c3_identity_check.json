@@ -1,0 +1,361 @@
+{
+  "CRS_C3_could_it_have_fired": {
+    "any_selectable_cell_could_have_fired": false,
+    "cells_that_would_have_fired": [
+      {
+        "cell": "ALG-B-UC",
+        "over_threshold_by": 35.2515,
+        "selectable": false
+      },
+      {
+        "cell": "ALG-E-UC",
+        "over_threshold_by": 32.21775,
+        "selectable": false
+      }
+    ],
+    "largest_max_possible_over_threshold_across_selectable_cells": 0.73516,
+    "range_across_selectable_cells": [
+      0.39121,
+      0.73516
+    ],
+    "reading": "the outcome was fixed by each cell's bound and mean degree before edge arrangement entered the calculation. On the saturated cells rearranging edges cannot move the statistic at all; on the others it can move it by at most the admissible window width",
+    "selectable_cells": 22
+  },
+  "by_rule_family": {
+    "mutual_knn": {
+      "all_saturated": false,
+      "cells": 8,
+      "reported_over_predicted_max": 0.95229,
+      "reported_over_predicted_min": 0.93668,
+      "worst_relative_error_from_the_identity": 0.06332
+    },
+    "proximity_select": {
+      "all_saturated": false,
+      "cells": 4,
+      "reported_over_predicted_max": 0.97686,
+      "reported_over_predicted_min": 0.93668,
+      "worst_relative_error_from_the_identity": 0.06332
+    },
+    "trimmed_union": {
+      "all_saturated": true,
+      "cells": 10,
+      "reported_over_predicted_max": 1.00016,
+      "reported_over_predicted_min": 0.99991,
+      "worst_relative_error_from_the_identity": 0.00016
+    },
+    "uncapped": {
+      "all_saturated": false,
+      "cells": 2,
+      "reported_over_predicted_max": 0.10579,
+      "reported_over_predicted_min": 0.0931,
+      "worst_relative_error_from_the_identity": 0.9069
+    }
+  },
+  "cells": [
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.09,
+      "cell": "ALG-B-MK100",
+      "max_possible_over_flag_threshold": 0.73205,
+      "mean_degree_actual_over_needed": 1.366,
+      "mean_degree_needed_to_fire": 16.652,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.95229,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.1,
+      "cell": "ALG-B-MK50",
+      "max_possible_over_flag_threshold": 0.70211,
+      "mean_degree_actual_over_needed": 1.424,
+      "mean_degree_needed_to_fire": 8.325,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.94953,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.1,
+      "cell": "ALG-B-MK60",
+      "max_possible_over_flag_threshold": 0.70537,
+      "mean_degree_actual_over_needed": 1.418,
+      "mean_degree_needed_to_fire": 9.978,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.94748,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.09333,
+      "cell": "ALG-B-MK75",
+      "max_possible_over_flag_threshold": 0.71259,
+      "mean_degree_actual_over_needed": 1.403,
+      "mean_degree_needed_to_fire": 12.487,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.94676,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.09,
+      "cell": "ALG-B-PS100",
+      "max_possible_over_flag_threshold": 0.73205,
+      "mean_degree_actual_over_needed": 1.366,
+      "mean_degree_needed_to_fire": 16.652,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.95229,
+      "rule": "proximity_select",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.04,
+      "cell": "ALG-B-PS50",
+      "max_possible_over_flag_threshold": 0.50256,
+      "mean_degree_actual_over_needed": 1.99,
+      "mean_degree_needed_to_fire": 8.322,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.97686,
+      "rule": "proximity_select",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-B-TUq-50-100",
+      "max_possible_over_flag_threshold": 0.55395,
+      "mean_degree_actual_over_needed": 1.805,
+      "mean_degree_needed_to_fire": 16.635,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 1.00009,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-B-TUq-50-50",
+      "max_possible_over_flag_threshold": 0.39718,
+      "mean_degree_actual_over_needed": 2.518,
+      "mean_degree_needed_to_fire": 8.317,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 1.00013,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-B-TUw-100-100",
+      "max_possible_over_flag_threshold": 0.4951,
+      "mean_degree_actual_over_needed": 2.02,
+      "mean_degree_needed_to_fire": 16.651,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 0.99999,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-B-TUw-50-100",
+      "max_possible_over_flag_threshold": 0.55569,
+      "mean_degree_actual_over_needed": 1.8,
+      "mean_degree_needed_to_fire": 16.635,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 0.99996,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-B-TUw-50-50",
+      "max_possible_over_flag_threshold": 0.39903,
+      "mean_degree_actual_over_needed": 2.506,
+      "mean_degree_needed_to_fire": 8.318,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 1.0001,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.96399,
+      "cell": "ALG-B-UC",
+      "max_possible_over_flag_threshold": 35.2515,
+      "mean_degree_actual_over_needed": 0.028,
+      "mean_degree_needed_to_fire": 2977.624,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.0931,
+      "rule": "uncapped",
+      "saturated_p99_equals_max": false,
+      "selectable": false
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.11,
+      "cell": "ALG-E-MK100",
+      "max_possible_over_flag_threshold": 0.73516,
+      "mean_degree_actual_over_needed": 1.36,
+      "mean_degree_needed_to_fire": 17.135,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.93668,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.12,
+      "cell": "ALG-E-MK50",
+      "max_possible_over_flag_threshold": 0.70854,
+      "mean_degree_actual_over_needed": 1.411,
+      "mean_degree_needed_to_fire": 8.576,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.9409,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.11667,
+      "cell": "ALG-E-MK60",
+      "max_possible_over_flag_threshold": 0.7076,
+      "mean_degree_actual_over_needed": 1.413,
+      "mean_degree_needed_to_fire": 10.291,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.93997,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.10667,
+      "cell": "ALG-E-MK75",
+      "max_possible_over_flag_threshold": 0.70764,
+      "mean_degree_actual_over_needed": 1.413,
+      "mean_degree_needed_to_fire": 12.849,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.93967,
+      "rule": "mutual_knn",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.11,
+      "cell": "ALG-E-PS100",
+      "max_possible_over_flag_threshold": 0.73516,
+      "mean_degree_actual_over_needed": 1.36,
+      "mean_degree_needed_to_fire": 17.135,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.93668,
+      "rule": "proximity_select",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.04,
+      "cell": "ALG-E-PS50",
+      "max_possible_over_flag_threshold": 0.50085,
+      "mean_degree_actual_over_needed": 1.997,
+      "mean_degree_needed_to_fire": 8.57,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.97613,
+      "rule": "proximity_select",
+      "saturated_p99_equals_max": false,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-E-TUq-50-100",
+      "max_possible_over_flag_threshold": 0.5556,
+      "mean_degree_actual_over_needed": 1.8,
+      "mean_degree_needed_to_fire": 17.152,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 0.99997,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-E-TUq-50-50",
+      "max_possible_over_flag_threshold": 0.39121,
+      "mean_degree_actual_over_needed": 2.556,
+      "mean_degree_needed_to_fire": 8.576,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 0.99993,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-E-TUw-100-100",
+      "max_possible_over_flag_threshold": 0.49551,
+      "mean_degree_actual_over_needed": 2.018,
+      "mean_degree_needed_to_fire": 17.152,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 1.00016,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-E-TUw-50-100",
+      "max_possible_over_flag_threshold": 0.55735,
+      "mean_degree_actual_over_needed": 1.794,
+      "mean_degree_needed_to_fire": 17.152,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 0.99991,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.0,
+      "cell": "ALG-E-TUw-50-50",
+      "max_possible_over_flag_threshold": 0.39292,
+      "mean_degree_actual_over_needed": 2.545,
+      "mean_degree_needed_to_fire": 8.576,
+      "reported_inside_its_own_window": false,
+      "reported_over_predicted": 0.99996,
+      "rule": "trimmed_union",
+      "saturated_p99_equals_max": true,
+      "selectable": true
+    },
+    {
+      "admissible_window_width_as_fraction_of_upper_bound": 0.9604,
+      "cell": "ALG-E-UC",
+      "max_possible_over_flag_threshold": 32.21775,
+      "mean_degree_actual_over_needed": 0.031,
+      "mean_degree_needed_to_fire": 2681.096,
+      "reported_inside_its_own_window": true,
+      "reported_over_predicted": 0.10579,
+      "rule": "uncapped",
+      "saturated_p99_equals_max": false,
+      "selectable": false
+    }
+  ],
+  "criterion": {
+    "definition": "flag when a cell's top1pct_degree_mass_frac exceeds its archive's MK50 cell by >= 50% relative",
+    "id": "CRS-C3",
+    "kind": "a FLAG, not a gate \u2014 the pre-registration says so explicitly"
+  },
+  "inputs": {
+    "file": "C:\\dev\\music-app\\builder\\analysis\\2026-07-30-track-b-cap-selection\\cb_scores.json",
+    "harness_commit_recorded_in_it": "997d7c4c77939b9945ff60ed898436141660ad81",
+    "note": "Track B's figures are INPUTS and are cited, never restated. Only the derived columns below are owned here."
+  },
+  "limits": [
+    "Says nothing about CRS-C4 hub transit, a routing measure over built paths. Untouched, not saturation-degenerate, and its finding stands.",
+    "Overturns none of Track B's conclusions, which rest on its other criteria. C3 was a flag, not a gate; a flag that could not fire changed no verdict. What changes is the weight a reader gives C3's silence.",
+    "Not evidence about any cap rule. That decision is parked and the owner's and owes a blind listen before any adoption."
+  ],
+  "probe": "DFA- section 9 \u2014 does top1pct_degree_mass_frac reduce to boundary_degree / (100 * mean_degree) on Track B's cells, and could CRS-C3 have fired on any selectable cell?",
+  "reasoning_owner": "this probe's README section 8.1"
+}

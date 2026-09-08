@@ -139,6 +139,40 @@ dead-end share, and "absent" is the share the build drops entirely.*
 unchanged from `cb_metrics.py` — the share of all edge **endpoints** held by the top 1 % of
 nodes **by degree**. Degree, never fame and never `pop_raw`.
 
+> ## ⚠ FORWARD CORRECTION, 2026-09-07 — read before using any `top1pct_degree_mass_frac` figure below
+>
+> **Every number in this document stands exactly as measured. What changes is what one of them
+> can be read as evidence of.** A derivation commissioned by the `DFA-` probe established that
+> where at least 1 % of nodes sit at the degree ceiling, this statistic reduces algebraically to
+> `ceiling ÷ (100 × mean degree)` and **cannot see how edges are arranged at all**. Reasoning and
+> its checks are owned by
+> [`../2026-09-07-degree-floor-at-admission/README.md`](../2026-09-07-degree-floor-at-admission/README.md)
+> §8; this note is a pointer and adds no figure here.
+>
+> **Which of this document's own arms the measure is valid on**, tested against
+> `dcf_results.json` and `dcf_results_bridge.json` themselves:
+>
+> | arm | at least 1 % of nodes at the boundary? | is its mass figure a concentration measurement? |
+> |---|:--|:--|
+> | §3 ceiling **50**, **100**, **200** | **yes** (tie pool 9.7×, 5.3× and 1.9× the admitted cut) | **no** — it equals `ceiling ÷ (100 × mean degree)` to within 1 part in 10⁴ |
+> | §3 ceiling **20000**, non-binding | **no** (0.01×) | **yes** — the only §3 arm where it is |
+> | §4 bridge ceiling **50** | **yes** (10.7×) | **no** |
+> | §4 bridge ceiling **20000**, non-binding | **no** (0.01×) | **yes** |
+>
+> **So the rise across §3's ceiling 50 → 100 → 200 is the ceiling rising against mean degree,
+> not evidence that those arms concentrated the graph onto hubs.** The ceiling-200 arm is the
+> closest to leaving that regime and is still inside it.
+>
+> **This does NOT rewrite this section's read, and the read does not depend on the corrected
+> quantity.** The conclusion that the non-binding arm is far more concentrated **stands**, and it
+> is supported independently by two figures in the tables below that are unaffected: its **max
+> degree** (15,347 in §3 and 14,180 in §4, against the ceiling's 50) and its **edge count**. Its
+> own mass figure is also unaffected, being the arm where the statistic works.
+>
+> **Nothing else here is touched.** §5's hub-attachment split is a top-**decile** membership
+> read, not this statistic. `CRS-C4` hub transit is a routing measure and was never computed
+> here. The cap-rule decision remains parked and the owner's.
+
 | ceiling | nodes | edges | max degree | mean degree | top-1 %-by-degree mass |
 |---:|---:|---:|---:|---:|---:|
 | 50 | 103,902 | 890,208 | 50 | 17.14 | 0.02918 |
@@ -321,6 +355,16 @@ Full ten-by-ten crosstabs for every fate are in `dcf_edge_fate.json`.
   and never asks whether that frame is right — `CXR-P1`/`M4` own that question.
 - **The top-1 %-by-degree set is tie-dominated at the shipped ceiling** (§3), so its
   membership is selection-order arbitrary; only the mass figure is stable.
+- ⚠ **ADDED 2026-09-07 — NO CONCENTRATION COST IS ESTABLISHED BY THE CAPPED ARMS, AND NONE IS
+  RULED OUT.** On every arm here whose ceiling binds — §3's 50, 100 and 200, and §4's 50 —
+  `top1pct_degree_mass_frac` is algebraically `ceiling ÷ (100 × mean degree)` and is
+  **structurally incapable** of distinguishing two graphs with the same node count, edge count
+  and ceiling however differently their edges are arranged. Only the **non-binding** arms'
+  figures measure concentration. See the forward correction at §3 and, for the derivation and
+  its checks,
+  [`../2026-09-07-degree-floor-at-admission/README.md`](../2026-09-07-degree-floor-at-admission/README.md)
+  §8. **Every figure in this document stands as measured** and §3's conclusion about the
+  non-binding arm is unaffected, resting independently on max degree and edge count.
 - **No blind listen, and no evidence about how anything sounds.** Every figure here is a
   property of files.
 

@@ -1,0 +1,9 @@
+mutual_knn         cells  8  all saturated False  reported/predicted 0.9367-0.9523  worst error 0.063320
+proximity_select   cells  4  all saturated False  reported/predicted 0.9367-0.9769  worst error 0.063320
+trimmed_union      cells 10  all saturated True   reported/predicted 0.9999-1.0002  worst error 0.000160
+uncapped           cells  2  all saturated False  reported/predicted 0.0931-0.1058  worst error 0.906900
+
+CRS-C3: could any selectable cell have fired? False  (closest reached 73.5% of its own threshold)
+  would have fired: ALG-B-UC by 35.3x — selectable=False
+  would have fired: ALG-E-UC by 32.2x — selectable=False
+wrote C:\dev\music-app\builder\analysis\2026-09-07-degree-floor-at-admission\dfa_c3_identity_check.json

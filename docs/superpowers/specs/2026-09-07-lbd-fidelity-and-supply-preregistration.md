@@ -346,6 +346,80 @@ declared sufficient for `LBD-G2` — because `LBD-G2`'s 10-point bar is set at t
 magnitude rather than inside it, and the 1-point path does not rely on the constant at all.
 That discharges the review's open deferral on it with a sentence, as it asked.
 
+> ### ⚠ AMENDED 2026-09-07 by `LBD-AM1` — `LBD-C2a` is additionally reported stratified
+>
+> **Written before any arm had run**, and it adds a **reporting requirement only**. Nothing
+> above this block is edited. **It adds no gate and no effect size**: it changes no threshold,
+> triggers no branch, and **does not alter the `LBD-C2a` read or `LBD-G2`**, both of which stand
+> exactly as written above and continue to be evaluated over all 29,892.
+>
+> **In addition to the whole-set figure, `LBD-C2a` is reported over two strata:**
+>
+> - **the residual set** — the added artists **still at two or fewer connections when our own
+>   degree ceiling does not bind**, `n` = 5,967; and
+> - **its complement**, `n` = 23,925.
+>
+> **Why this stratum and not another.** Two probes ran on 2026-09-07 and were read before this
+> was written: [`builder/analysis/2026-09-07-degree-ceiling-falsifier/`](../../../builder/analysis/2026-09-07-degree-ceiling-falsifier/README.md)
+> and [`builder/analysis/2026-09-07-degree-floor-at-admission/`](../../../builder/analysis/2026-09-07-degree-floor-at-admission/README.md),
+> which **own every figure in this paragraph; this document owns none of them.** Measured there:
+> with our own degree ceiling made non-binding, a **minority** of the added artists stop being
+> dead ends, and **the rest stay dead ends with the degree trim deleting nothing of theirs** —
+> the ceiling is not what was holding them back. That residual group is the part of the
+> problem **raising the degree ceiling cannot reach**, and it is the part `LBD-` addresses. A
+> whole-set figure mixes it with a group a ceiling change alone could rescue, so a whole-set
+> movement cannot tell the two apart.
+>
+> ⚠ **"The ceiling cannot reach them" is NOT "no rule of ours can."** Both probes held the
+> union width at `union_top_j = 50` and both kept the drop lists, and the top-*j* cut deletes a
+> large share of candidate edges before the trim ever runs — figures owned by the ceiling
+> probe's §6. **No arm anywhere has varied the union width**, so whether it would reach this
+> stratum is unmeasured, and this amendment must not be read as ruling it out. It is also
+> **not a reason to run one**: that is a cap-rule question, parked and the owner's.
+>
+> **The set is fixed and pinned, never re-derived per arm**, exactly as the added and
+> pre-existing sets above:
+>
+> | | identity |
+> |---|---|
+> | source | `builder/analysis/2026-09-07-degree-floor-at-admission/dfa_residual_mbids.txt`, sha256 `fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08` |
+> | pinned for the arms to read | `D:\unsung-large-data\lbd-inputs\cxr_residual_mbids.txt`, same sha256 |
+> | the record it was extracted from | `dfa_benefit_identity.json`, sha256 `f10b3329d29b36d896d30f1308bf1394961d4e86ca24a9d6c08f3038e2f26675` |
+>
+> *That record as first committed held **counts only, no MBIDs**. The list was produced by
+> re-running that probe's own committed script with list emission added, and every pre-existing
+> value in the record reproduced exactly. Stated because "taken from the committed record"
+> would otherwise overstate what the record held.*
+>
+> **`R12` — the one named failure mode this adds**, extending §9's own `R1`–`R11` branch series.
+> It is a read, not a gate, and it fires on no threshold of its own:
+>
+> > **If `LBD-C2a` clears its bar over the whole set while the residual set does not move, the
+> > report must say so in those words**, and the read is that **the loosened settings produce
+> > candidate connections but not for the artists this track exists to help.**
+>
+> **Two limits, both binding on any use of this stratum.**
+>
+> 1. **The residual set was measured on one population under one cap rule** and inherits that
+>    probe's caveats. It is **a pinned MBID list, not a claim about any other build**, and it
+>    must not be transferred to a different lineage or re-derived per arm.
+> 2. **The candidate fix for the complement sits outside this track.** Design §9 keeps the
+>    cap-rule decision **parked and the owner's**, and **nothing here proposes, runs or depends
+>    on one.**
+>
+> **Reachability, checked now rather than discovered at Task 4.** An artist nobody played can
+> gain no edge at any threshold or cap, so if a large share of the residual set were absent from
+> the dump that would bound the whole track. It was cross-checked against what Task 1 measured,
+> and **it is not a bound: 0.13 % of the residual set is absent from the corpus and 99.67 % have
+> at least the four distinct listeners a pair arithmetically requires, marginally better than
+> the complement.** They are nonetheless **listened to less** — a median of 81 distinct listeners
+> against the complement's 140 — which is not a reachability bound but leaves less room for the
+> co-occurrence a pair actually needs. **Figures owned by
+> [`builder/analysis/2026-09-07-lbd-am1-residual-reachability/README.md`](../../../builder/analysis/2026-09-07-lbd-am1-residual-reachability/README.md)
+> §3, carried here because a bound a reader cannot size is not a bound; this document owns
+> none of them.** Enough listeners is **necessary, not sufficient** — nothing measures
+> co-occurrence, so this must not be read as evidence that any arm will move `LBD-C2`.
+
 ---
 
 ## §4 — `LBD-C3`, cost
@@ -459,6 +533,7 @@ into graphs.
 | **R9** | `LBD-C2b` moves but the pre-existing 58,793 move by as much or more | a **population artefact**, not a supply gain. The within-arm reference is what distinguishes them and this is the reading it exists for | built |
 | **R10** | `LBD-A4` changes `LBD-C1` or edge count materially | the pairing semantics are load-bearing; record which every later arm uses and why, per `LBD-D6`. **Material = the `LBD-G2` bar applied to edge count, or 5 pp on the pooled `LBD-C1` rate** | pairing-read |
 | **R11** | `LBD-G4` fires on the slice | the full pass is not attempted; the chunked form is built first. **Not a finding about anything** — it is a resource fact | a `user_id % 16` slice only |
+| **R12** *(added 2026-09-07, `LBD-AM1`)* | `LBD-C2a` clears its bar **over the whole set** while the **residual set does not move** | **the loosened settings produce candidate connections, but not for the artists this track exists to help.** The report **must say so in those words**. Not a gate and carries no effect size of its own: the bar is `LBD-G2`'s, applied to each stratum and read side by side. Absence is already ruled out as the explanation (§3's block), so this reads as a genuine failure to reach the residual group, not as a gap in the corpus | T-materialised |
 
 **Nothing in this table is reachable before its run state.** In particular, **R4–R9 all
 presuppose that all four derivations exist**, and R6 and R7 are distinguishable *only* with
@@ -538,3 +613,35 @@ missing listening data — that is the owner's, is recorded as open in the revie
 document, and blocks nothing here. Adoption (`LBD-S4`), the population rule, API sizing, the
 fame source, and any cap-rule or ceiling change are all outside this pre-registration and
 each needs its own.
+
+
+## §12 — Amendments to THIS document, made after it was committed
+
+**§10 records what this document amends in the design and the plan. This section records what
+later sessions amend in *this* document.** Every entry is **dated and numbered, and is added
+beside the text it qualifies — never as a silent edit to it.** The commit timestamp is what
+makes the register worth having, exactly as it is for the document itself.
+
+**The rule that governs every entry here:** a criterion's *values* are never edited. If a
+later session finds one inconvenient, the answer is an amendment with its own reasoning and
+its own date. That property is the whole point of the document.
+
+---
+
+### `LBD-AM1` — `LBD-C2a` is additionally reported stratified by the residual set
+
+**Dated 2026-09-07. NO ARM HAD RUN AT THE TIME THIS WAS WRITTEN**, so the document's
+commit-before-results property is intact and this amendment does not spend it. The full text is
+the block at the end of **§3**; the result branch it adds is **`R12`** in §9. This entry is
+the register row.
+
+| | |
+|---|---|
+| **what it adds** | a **reporting requirement**: `LBD-C2a` is reported over two strata — the **residual set** (added artists still at ≤ 2 connections when our own degree ceiling does not bind, `n` = 5,967) and its **complement** (`n` = 23,925) — in addition to the whole-set figure |
+| **what it does NOT add** | **no gate and no effect size.** It changes no threshold, triggers no branch, and does not alter the `LBD-C2a` read or `LBD-G2`, which continue to be evaluated over all 29,892 exactly as §3 states |
+| **the one named failure mode** | **`R12`** — if `LBD-C2a` clears its bar over the whole set while the residual set does not move, the report must say so **in those words**, and the read is that the loosened settings produce candidate connections but not for the artists this track exists to help |
+| **why now** | the residual group is the part of the dead-end problem **no candidate outside this track can touch**, so a whole-set figure mixes it with a group our own cap rule could rescue. Motivated by two probes read before writing, which own the figures behind that sentence |
+| **the set's identity** | pinned by path and sha256 in §3's block, written beside the added and pre-existing sets, never re-derived per arm |
+| **bound checked, not deferred** | absence would have bounded the whole track and is **not** a bound here; measured before the amendment was written, figures owned by `builder/analysis/2026-09-07-lbd-am1-residual-reachability/README.md` |
+| **limits carried** | the residual set is one population under one cap rule, so it is a pinned list and not a claim about any other build; and the candidate fix for the complement is **outside this track**, with the cap-rule decision parked and the owner's per design §9 |
+| **identifiers introduced** | **`LBD-AM1`** and **`R12`**. Collision-checked across every ref on 2026-09-07 (`git grep -lE 'LBD-AM[0-9]'` and `'LBD-R1[0-9]'` over `refs/remotes refs/heads`): both free. ⚠ **The branch is `R12`, deliberately NOT `LBD-R12`.** §9's series is bare `R1`–`R11` and this extends it; meanwhile **`LBD-R1` already names the track's central risk hypothesis**, a different object entirely, so an `LBD-R12` beside it would read as its sibling. That is the exact collision shape `CLAUDE.md` records as having cost a session the rule that governed it |

@@ -1,0 +1,21 @@
+=== control ===
+    built in 8.5 min
+control: cut 887  boundary degree 50  nodes at that degree 9,526  (reference is 887 arbitrary members of that pool)
+=== control (shipped) ===
+  overlap top1% 1.00000  decile 1.00000  |  fixed-ref 0.027408 in [0.027408, 0.027408] width 0.000000  |  own 0.02741 vs identity 0.02740  ties/cut 10.74
+=== F=1 live/shipped ===
+    built in 0.8 min
+  overlap top1% 0.99098  decile 0.99188  |  fixed-ref 0.027356 in [0.027311, 0.027362] width 0.000051  |  own 0.02767 vs identity 0.02766  ties/cut 10.569
+=== F=2 live/shipped ===
+    built in 0.8 min
+  overlap top1% 0.98873  decile 0.98275  |  fixed-ref 0.027286 in [0.027178, 0.027295] width 0.000117  |  own 0.02760 vs identity 0.02760  ties/cut 10.504
+=== F=3 live/shipped ===
+    built in 0.8 min
+  overlap top1% 0.98083  decile 0.96910  |  fixed-ref 0.027191 in [0.026982, 0.027227] width 0.000245  |  own 0.02754 vs identity 0.02751  ties/cut 10.404
+=== F=2 fixed pre-trim ===
+    built in 0.8 min
+  overlap top1% 0.99436  decile 0.99335  |  fixed-ref 0.027348 in [0.027313, 0.027352] width 0.000039  |  own 0.02757 vs identity 0.02757  ties/cut 10.648
+=== F=2 ascending order ===
+    built in 0.8 min
+  overlap top1% 0.05524  decile 0.53033  |  fixed-ref 0.027588 in [0.010689, 0.045994] width 0.035305  |  own 0.05214 vs identity 0.04366  ties/cut 0.244
+wrote C:\dev\music-app\builder\analysis\2026-09-07-degree-floor-at-admission\dfa_overlap_and_ambiguity.json

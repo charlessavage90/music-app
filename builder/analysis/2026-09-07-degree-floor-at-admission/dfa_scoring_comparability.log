@@ -1,0 +1,49 @@
+======================================================================================================================
+1. OWN-SET vs FIXED-REFERENCE, and the closed form of each
+======================================================================================================================
+arm                         N        E  cut ties/cut      own  cut*C/2E  C/100mdeg    fixed   own-ctl   fix-ctl own/fixed
+control (shipped)       88685   809082  887    10.7x  0.02741   0.02741    0.02740  0.02741  +0.00000  +0.00000   1.00000
+F=0 identity            88685   809082  887    10.7x  0.02741   0.02741    0.02740  0.02741  +0.00000  +0.00000   1.00000
+F=1 live/shipped        89678   810439  897    10.6x  0.02767   0.02767    0.02766  0.02736  +0.00026  -0.00005   1.01133
+F=2 live/shipped        89684   812425  897    10.5x  0.02760   0.02760    0.02760  0.02729  +0.00019  -0.00012   1.01136
+F=3 live/shipped        89684   815073  897    10.4x  0.02754   0.02751    0.02751  0.02719  +0.00013  -0.00022   1.01287
+F=2 fixed pre-trim      89393   810727  894    10.6x  0.02757   0.02757    0.02757  0.02735  +0.00016  -0.00006   1.00804
+F=2 ascending order     89665   513485  897     0.2x  0.05214   0.04367    0.04366  0.02759  +0.02473  +0.00018   1.88982
+
+======================================================================================================================
+2. AMBIGUITY OF THE FIXED-REFERENCE FIGURE UNDER ADMISSIBLE TIE-BREAKS
+   own-set mass is EXACTLY tie-break invariant (all boundary nodes share
+   one degree), so only the fixed-reference column has a range.
+======================================================================================================================
+arm                           2E  max held  max frac  measured  sample deficit  D_pop 95%    width vs control
+control (shipped)        1618164     44350  0.027408   0.02741            4.2         98 0.000061   +0.00000
+F=0 identity             1618164     44350  0.027408   0.02741            4.2         98 0.000061   +0.00000
+F=1 live/shipped         1620878     44350  0.027362   0.02736           10.9        182 0.000112   -0.00005
+F=2 live/shipped         1624850     44350  0.027295   0.02729           16.0        248 0.000153   -0.00012
+F=3 live/shipped         1630146     44398  0.027236   0.02719           34.5        486 0.000298   -0.00022
+F=2 fixed pre-trim       1621454     44350  0.027352   0.02735           11.3        196 0.000121   -0.00006
+F=2 ascending order      1026970     53084  0.051690   0.02759        16021.0        n/a      n/a   +0.00018
+
+======================================================================================================================
+3. THE ONE ARM WHOSE SHAPE DIFFERS: F=2 ascending order
+======================================================================================================================
+  own numerator (top 897) = 53544
+  own numerator (top 887)                = 53084
+  fixed-reference held                  = 28334
+  denominator 2E                        = 1026970  (SHARED by both scorings)
+  gap own - fixed = 0.02455
+    cut-size component   0.00045  (1.8% of the gap)
+    membership component 0.02410  (98.2% of the gap)
+  own(asc)/own(control) = 1.2073 (numerator) x 1.5757 (1/edges) = 1.9023;  log share: edges 70.7%, numerator 29.3%
+  nodes above degree 50: 58, holding 13542 endpoints = 1.32% of all endpoints, 25.3% of the own top-1% numerator
+
+======================================================================================================================
+4. THE SATURATION IDENTITY ON THE `DCF-` CEILING ARMS (cited, not restated
+   -- the figures are that probe's; only the identity is computed here)
+======================================================================================================================
+  dcf_results.json         maxdeg 50     ties/cut   9.72x  saturated     C/(100*mean_degree) = 0.02918  measured = 0.02918  ratio 1.0001
+  dcf_results.json         maxdeg 100    ties/cut   5.33x  saturated     C/(100*mean_degree) = 0.04141  measured = 0.04139  ratio 0.9996
+  dcf_results.json         maxdeg 200    ties/cut   1.89x  saturated     C/(100*mean_degree) = 0.06619  measured = 0.06621  ratio 1.0004
+  dcf_results.json         maxdeg 15347  ties/cut   0.01x  NOT saturated C/(100*mean_degree) = 3.58617  measured = 0.18569  ratio 0.0518
+  dcf_results_bridge.json  maxdeg 50     ties/cut  10.74x  saturated     C/(100*mean_degree) = 0.02740  measured = 0.02741  ratio 1.0002
+  dcf_results_bridge.json  maxdeg 14180  ties/cut   0.01x  NOT saturated C/(100*mean_degree) = 3.10061  measured = 0.17617  ratio 0.0568

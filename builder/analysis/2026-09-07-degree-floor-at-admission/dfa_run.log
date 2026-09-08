@@ -1,0 +1,83 @@
+INFO verified graph-msw-tu50.bin  sha 43dd82bb3771…  artists 58838  edges 1315684
+INFO verified graph-cxa-adopted.bin  sha bc0431c4b55a…  artists 88685  edges 1618164
+INFO split: added 29892, pre-existing 58793
+archive payloads: 117,302
+
+=== arm: control (shipped) ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 88685 of 90026 artists
+  control (shipped)      built in 9.2 min  nodes 88,685  edges 809,082  max deg 50  top1pct 0.02741  ADDED median 4 <=2 34.36% absent 0.00%
+
+=== arm: F=0 identity ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 88685 of 90026 artists
+  F=0 identity           built in 0.8 min  nodes 88,685  edges 809,082  max deg 50  top1pct 0.02741  ADDED median 4 <=2 34.36% absent 0.00%
+    restored 0 edges to added artists — 0.0% to a top-decile hub; 0 left the <=2 group
+
+=== arm: F=1 live/shipped ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 89678 of 90026 artists
+  F=1 live/shipped       built in 0.8 min  nodes 89,678  edges 810,439  max deg 50  top1pct 0.02767  ADDED median 4 <=2 34.49% absent 0.00%
+    restored 3,031 edges to added artists — 61.2% to a top-decile hub; 9 left the <=2 group
+
+=== arm: F=2 live/shipped ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 89684 of 90026 artists
+  F=2 live/shipped       built in 0.8 min  nodes 89,684  edges 812,425  max deg 50  top1pct 0.02760  ADDED median 4 <=2 19.96% absent 0.00%
+    restored 7,441 edges to added artists — 60.2% to a top-decile hub; 4,305 left the <=2 group
+
+=== arm: F=3 live/shipped ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 89684 of 90026 artists
+  F=3 live/shipped       built in 0.8 min  nodes 89,684  edges 815,073  max deg 84  top1pct 0.02754  ADDED median 4 <=2 19.96% absent 0.00%
+    restored 12,768 edges to added artists — 60.5% to a top-decile hub; 4,305 left the <=2 group
+
+=== arm: F=2 fixed pre-trim ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 89393 of 90026 artists
+  F=2 fixed pre-trim     built in 0.8 min  nodes 89,393  edges 810,727  max deg 50  top1pct 0.02757  ADDED median 4 <=2 30.07% absent 0.01%
+    restored 3,106 edges to added artists — 53.7% to a top-decile hub; 1,314 left the <=2 group
+
+=== arm: F=2 ascending order ===
+INFO filtered 7 special-purpose entities
+INFO dropped 54 nameless artists
+INFO dropped 9501 no-release-tail artists
+INFO dropped 1940 featured-credit artists
+INFO dropped 15774 un-listenable artists
+INFO rescale p99 scale=769 | saturated edges 37053 of 3698308 (1.002%)
+INFO largest component: 89665 of 90026 artists
+  F=2 ascending order    built in 0.8 min  nodes 89,665  edges 513,485  max deg 3,055  top1pct 0.05214  ADDED median 3 <=2 19.95% absent 0.04%
+    restored 15,135 edges to added artists — 89.6% to a top-decile hub; 4,305 left the <=2 group
+
+gate: green_f0=True green_bound=True red=False -> FAIL
+wrote C:\dev\music-app\builder\analysis\2026-09-07-degree-floor-at-admission\dfa_results.json
