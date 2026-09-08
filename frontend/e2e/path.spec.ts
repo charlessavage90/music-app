@@ -11,27 +11,46 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   await page.getByRole('button', { name: /daft punk/i }).first().click();
   await page.getByRole('button', { name: /build the path/i }).click();
 
-  // The path renders as a list of cards. Wait on the LIST, not on the artist's
-  // name: the name was doing duty as the wait for navigation, and that worked
-  // only for as long as the landing page never mentioned Miles Davis. It does
-  // now — one of the three sample journeys is his — so the old assertion passed
-  // instantly against the page we were trying to leave, and the read below then
-  // raced an empty list. An implicit wait that depends on text being ABSENT
-  // somewhere else is not a wait.
-  await expect(page.locator('ol li').first()).toBeVisible();
+  // Wait for the NAVIGATION first, then for the list.
+  //
+  // The same defect has now bitten this line twice, from two different
+  // directions, and the lesson is the same both times: waiting on anything the
+  // page we are LEAVING also has is not a wait. First it was the artist's name
+  // (the landing page names Miles Davis in a sample journey). Then UXR-T3 gave
+  // the landing page a teaser that is itself an `<ol>` of names, so waiting on
+  // `ol li` also passed instantly against the landing page — and `allInnerTexts`
+  // then ran mid-navigation and read an empty list, which is a `length` of 0
+  // rather than a timeout, so it surfaced as a bewildering assertion failure.
+  // And the URL is not enough on its own: it changes before React swaps the
+  // page, so `ol li` still matched the landing teaser for an instant after
+  // `waitForURL` resolved. `artist-name` is rendered by ArtistCard and by
+  // nothing else in the app, so it belongs to the journey and cannot be
+  // satisfied by the page we are leaving or by the loading skeleton.
+  await page.waitForURL(/\/path\//);
+  await expect(page.getByTestId('artist-name').first()).toBeVisible();
   const before = await page.locator('ol li').allInnerTexts();
   expect(before.length).toBeGreaterThan(1);
   expect(before[0]).toContain('Miles Davis');
 
-  // Bypass the second artist with the card's one control — there is no tray to
-  // open (LUX-1).
+  // Bypass the second artist. Two presses since UXR-T7 (owner decision 2,
+  // 2026-09-08): open that artist's detail, then dig from inside it. The
+  // control is interior-only, so this must be a middle card — an endpoint's
+  // detail carries no Dig deeper at all.
   // UI-13: located by data-testid, not `.font-semibold`. The endpoint eyebrow
   // ("Starting artist") is also font-semibold, so .nth(1) silently became the
   // FIRST card's name — and the assertion below then demanded that the start
   // artist disappear, which it never can. A test hook must not be a style hook.
   const second = page.locator('ol li').nth(1);
   const secondName = await second.getByTestId('artist-name').innerText();
-  await second.getByRole('button', { name: /dig deeper/i }).click();
+  await second.getByRole('button', { name: /^About / }).click();
+  // One detail component, two containers (UXR-D3) — the dock at lg and up, the
+  // sheet below it. BOTH are in the DOM at every width and CSS hides one, so
+  // this filters on what is actually shown rather than assuming a viewport.
+  // This spec sets none, so it runs at Playwright's 1280 default and sees the
+  // dock; `e2e/responsive.spec.ts` pins the sheet at 390.
+  const digDeeper = page.getByRole('button', { name: /dig deeper/i }).filter({ visible: true });
+  await expect(digDeeper).toHaveCount(1);
+  await digDeeper.click();
 
   // URL now carries the exclusion, and the bypassed artist is gone from the new
   // path — scoped to the journey's own cards (`artist-name`), not the whole

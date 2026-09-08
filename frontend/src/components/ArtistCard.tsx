@@ -112,12 +112,16 @@ export function ArtistCard({
           re-mounted between paths when the artist survives, so the isNew class
           arriving IS the animation trigger. */}
       <div
-        className={`flex items-center gap-3 rounded-2xl px-3.5 py-3 sm:gap-4 sm:px-[18px] sm:py-3.5 ${frame} ${
+        // TR-16 budget at 390px, and it is tight: the card is 324px wide, so
+        // after padding there are 296px for a cover, the name, and two round
+        // controls. Every size below is `base sm:` — the phone values are what
+        // buy the name its width back, and the sm values are the mockup's.
+        className={`flex items-center gap-2 rounded-2xl px-3 py-3 sm:gap-4 sm:px-[18px] sm:py-3.5 ${frame} ${
           isNew ? '[animation:ap-glow_800ms_ease-out]' : ''
         }`}
       >
         <div
-          className={`size-12 flex-none rounded-[10px] bg-[var(--color-border)] bg-cover sm:size-[54px] ${
+          className={`size-11 flex-none rounded-[10px] bg-[var(--color-border)] bg-cover sm:size-[54px] ${
             silent ? 'opacity-75' : ''
           }`}
           style={clip.track ? { backgroundImage: `url(${clip.track.coverUrl})` } : undefined}
@@ -135,9 +139,14 @@ export function ArtistCard({
           <div className="flex items-center gap-2.5">
             {/* UI-5: data-testid, not a style class — e2e/responsive.spec.ts
                 measures this element and must not depend on its typography. */}
+            {/* `min-w-0 flex-1` so this OWNS the space rather than shrinking to
+                its text: a flex item sized to content makes `truncate` fire
+                late, and it made `e2e/responsive.spec.ts` measure the width of
+                whichever name the graph happened to return instead of the width
+                the layout affords. */}
             <div
               data-testid="artist-name"
-              className="truncate font-display text-[16.5px] font-semibold tracking-[-.02em] sm:text-[19px]"
+              className="min-w-0 flex-1 truncate font-display text-[16.5px] font-semibold tracking-[-.02em] sm:text-[19px]"
             >
               {artist.name}
             </div>
@@ -180,7 +189,7 @@ export function ArtistCard({
           onClick={onDetail}
           aria-label={`About ${artist.name}`}
           aria-expanded={isSelected ?? false}
-          className={`flex size-11 flex-none items-center justify-center rounded-full border text-[15px] sm:size-[46px] ${
+          className={`flex size-10 flex-none items-center justify-center rounded-full border text-[15px] sm:size-[46px] ${
             isSelected
               ? 'border-[var(--color-detail)] bg-[rgba(79,127,224,.16)] text-[var(--color-text)]'
               : 'border-[var(--color-border-strong)] text-[var(--color-muted)] hover:text-[var(--color-text)]'
