@@ -658,8 +658,16 @@ def register_listens(
     *,
     user_mod: int | None = None,
     user_rem: int = 0,
+    created_before: str | None = None,
 ) -> None:
     """`get_listens_from_dump(from_date, to_date)` (`artist.py:128`), windowed by T3-D1.
+
+    `created_before` is a DIAGNOSTIC filter and not part of LB's job: it keeps only listens
+    whose `created` (insertion) timestamp precedes the given instant, which reconstructs the
+    corpus roughly as it stood on that date -- the instrument the `LBD-G1` diagnosis of
+    2026-09-10 uses to test the dataset-date explanation. Roughly, because `created` was
+    backfilled in 2023-Q4 for everything older, deletions are invisible, and the msid->mbid
+    mapping is today's. Never set for an arm.
 
     The chunk predicate is `LBD-D2`'s fallback and it is EXACT, not an approximation: every
     stage through `user_contribtion_mbids` partitions by `user_id`, so only the final
@@ -669,6 +677,8 @@ def register_listens(
     from_date = to_date - timedelta(days=p.days)
     glob = (dump / "*.parquet").as_posix()
     chunk = f"AND user_id % {user_mod} = {user_rem}" if user_mod else ""
+    if created_before:
+        chunk += f" AND created < TIMESTAMP '{created_before}'"
     con.execute(
         f"""CREATE OR REPLACE VIEW artist_similarity_listens AS
             SELECT user_id, listened_at, recording_msid, recording_mbid,
@@ -820,6 +830,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument(
         "--no-redirects", action="store_true", help="T3-D6: reproduce the un-redirected frame"
     )
+    ap.add_argument(
+        "--created-before",
+        default=None,
+        help="DIAGNOSTIC: keep only listens inserted before this timestamp (see register_listens)",
+    )
     ap.add_argument("--user-mod", type=int, default=None)
     ap.add_argument("--user-rem", type=int, default=0)
     ap.add_argument("--memory-limit-gb", type=int, default=24)
@@ -894,7 +909,10 @@ def main(argv: list[str] | None = None) -> int:
     # building the 40M-row duration frame for a query that never joins it is pure cost.
     if not (args.from_listens or args.from_sessions or args.combine):
         register_frames(con, args.inputs, redirects=not args.no_redirects)
-        register_listens(con, args.dump, p, user_mod=args.user_mod, user_rem=args.user_rem)
+        register_listens(
+            con, args.dump, p, user_mod=args.user_mod, user_rem=args.user_rem,
+            created_before=args.created_before,
+        )
 
     if args.verify_credit_key:
         # T3-D9's precondition. A difference here invalidates every pair table the
@@ -1022,6 +1040,7 @@ def main(argv: list[str] | None = None) -> int:
         "dump_end_timestamp": DUMP_END_TIMESTAMP,
         "inputs": str(args.inputs),
         "redirects_applied": not args.no_redirects,
+        "created_before": args.created_before,
         "params": asdict(p),
         "algorithm": p.algorithm,
         "stage": stage,
