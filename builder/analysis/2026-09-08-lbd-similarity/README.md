@@ -359,10 +359,134 @@ fallback is exact and was not needed here.
 gate's prescribed response is the chunked form, which is what is running; recorded here so the
 gate is read honestly when §4 is completed rather than reported as clear.
 
-## 5. `LBD-C1` — fidelity
+## 5. `LBD-C1` — fidelity: **`LBD-G1` FIRES**
 
-*Pending. Read before `LBD-C2a`, because result `R1` says a `LBD-G1` failure means the arms
-derived from `T` are not read at all.*
+Read 2026-09-09 on `LBD-A0` (`C:\unsung-fast\lbd-pairs\A0\A0.parquet`, sha256 `f9bd1f83…`,
+11,340,639 rows), derived from `T` (`…\aggregate\T.parquet`, sha256 `03d47b05…`, 689,603,622
+rows at `score ≥ 1`, 21.0 GB). `T` combined in 8.0 min at 12 GB with 199 GB spill; the four
+derivations took 0.2–7.5 min each (`A1` 72,014,611 rows, `A2` 80,578,844, `A3` = `T`).
+
+**Pooled row-level rate by band** (matched rows ÷ archive rows; the definition is the
+pre-registration's §2 — the union of both partitions, cut at the archive's own N):
+
+| band | archive rows | pooled rate |
+|---:|---:|---:|
+| 0 | 16,382 | 0.3943 |
+| 1 | 25,098 | 0.5363 |
+| 2 | 34,212 | 0.5644 |
+| 3 | 47,107 | 0.6039 |
+| **4 (the gate's subject)** | 57,692 | **0.5844** |
+
+**`LBD-G1` fires: 0.5844 < 0.60.** Per result `R1`, the reimplementation is presumed wrong,
+**`LBD-C2a` is NOT read**, and the diagnosis below is what `R1` demands. 2,945 of the 3,000
+sampled artists appear in our table; 8 have an empty archive list (5, 2, 1, 0, 0 by band).
+
+⚠ **The per-artist quantiles `lbd_reads.py` printed alongside are WRONG and are not
+reproduced here**: an artist with an empty archive list yields a NaN share, and a NaN inside
+`sorted()` scrambles the order, which is why three bands showed a p75 below the median. The
+pooled rate does not touch those values and is unaffected. Corrected distribution, empty
+lists excluded (`lbd_c1_diagnose.py`):
+
+| band | artists | median | p10 | p25 | p75 |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 595 | 0.552 | 0.000 | 0.250 | 0.714 |
+| 1 | 598 | 0.547 | 0.200 | 0.400 | 0.660 |
+| 2 | 599 | 0.600 | 0.319 | 0.480 | 0.707 |
+| 3 | 600 | 0.630 | 0.416 | 0.530 | 0.705 |
+| 4 | 600 | 0.640 | 0.470 | 0.570 | 0.710 |
+
+### 5a. The diagnosis — where each archive entry went, and what our score is against theirs
+
+`lbd_c1_diagnose.py`, 2026-09-10, over `A0` and `T`. Every archive entry for a sampled artist
+is placed in exactly one bin; `T` is a superset of every arm, so "absent" means the pair never
+co-occurred in our corpus in a form that survives sessioning.
+
+| band | matched | in our list, past N | score > 10, cut by rank | 1 ≤ score ≤ 10 | absent from `T` |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 0.401 | 0.111 | 0.066 | 0.100 | 0.322 |
+| 1 | 0.544 | 0.134 | 0.173 | 0.053 | 0.096 |
+| 2 | 0.587 | 0.125 | 0.155 | 0.039 | 0.093 |
+| 3 | 0.619 | 0.100 | 0.164 | 0.029 | 0.089 |
+| 4 | 0.631 | 0.076 | 0.158 | 0.027 | 0.108 |
+
+**Our score against ListenBrainz's own `score` on the same pair** (every archive pair present
+in `T`):
+
+| band | pairs | median ratio ours ÷ LB | p10 | p90 | share where ours is lower |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 11,102 | 2.33 | 0.15 | 5.88 | 0.179 |
+| 1 | 22,686 | 3.31 | 0.92 | 9.07 | 0.104 |
+| 2 | 31,018 | 2.93 | 1.14 | 8.85 | 0.077 |
+| 3 | 42,923 | 2.61 | 1.31 | 6.33 | 0.055 |
+| 4 | 51,449 | 2.98 | 1.28 | 6.32 | 0.082 |
+
+**Overlap of our top-k with theirs**, pooled by band over artists whose list has ≥ k entries:
+
+| band | k=10 | k=25 | k=50 | k=100 |
+|---:|---:|---:|---:|---:|
+| 0 | 0.454 | 0.439 | 0.330 | 0.181 |
+| 1 | 0.503 | 0.535 | 0.545 | 0.538 |
+| 2 | 0.540 | 0.576 | 0.587 | 0.587 |
+| 3 | 0.566 | 0.610 | 0.622 | 0.629 |
+| 4 | 0.567 | 0.605 | 0.625 | 0.635 |
+
+**List length and the score at the cut** (medians): LB's N is 14 / 28 / 54 / 100 / 100 by
+band with a minimum score of 11–12 (41 in band 4); our `A0` union list is 52 / 113 / 117 /
+134 / 214 long, and our score at LB's rank N is 38 / 48 / 36 / 40 / 137.
+
+**The corpus, dated by the dump's `created` column** (insertion time; mapped listens inside
+the 7,500-day window, 2,347,045,263 rows). `created` begins in 2023-Q4, where everything older
+was backfilled, so the cumulative share is a *lower* bound on how much of today's corpus
+existed at a date after that:
+
+| existed by | share of today's mapped listens |
+|---|---:|
+| 2023-12-31 (backfill floor) | 0.29 |
+| 2024-09-30 | 0.35 |
+| 2024-12-31 | 0.39 |
+| 2025-12-31 | 0.59 |
+| 2026-03-31 | 0.68 |
+| 2026-06-30 | 0.85 |
+
+**The absent partners**, band 4 (6,243 rows): 2,308 name an artist that exists in
+MusicBrainz's `artist` table but has **no `artist_credit_name` row at all** (only 1 is a
+merged or deleted MBID); 1,086 have credits but appear in no pair in `T`; 2,849 appear in `T`
+with other artists, just not with this one. Of the 1,086, 311 are artists whose **every**
+credit line is a non-last member of a multi-artist credit — rows `T3-P1` drops under our
+deterministic tiebreak (`T3-D2`), where LB's nondeterministic order would drop each member
+some of the time. That last mechanism is **ours**, and it is ≈ 0.5 % of band-4 rows.
+
+### 5b. What is inferred, and the test that decides it — stated before the test ran
+
+*Inference, labelled as such.* The systematic ~3× score ratio in every band is not a
+reshuffle and not a few months of new listens: it says the deployed dataset was computed on
+roughly a third of today's co-listens. The `created` histogram makes that date **around
+autumn 2024** if insertion alone explains it, and later if the msid→mbid mapping also improved.
+That is the design's §6 "unknown dataset date" — a lineage difference, and the largest term.
+The rank-cut and past-N bins (a quarter of band-4 rows) are the same effect seen from the
+list end: with three times the mass, more pairs clear the threshold, lists lengthen, and the
+archive's tail entries are crowded out. What the ratio does **not** explain is the
+credit-less partners: an artist ListenBrainz paired with a famous artist, that today has no
+credit line in MusicBrainz, is a mapping or MusicBrainz-edit difference of a kind not yet
+identified, ≈ 4 % of band-4 rows.
+
+**The test, `C1-DIAG-1`, pre-stated:** rebuild the corpus as it stood on **2024-10-01** using
+`created < 2024-10-01` (`--created-before`; a diagnostic filter, not an arm), rerun the pair
+pass, derive `A0`, and re-take the `LBD-C1` read and this diagnosis on it.
+
+- **If the top-band pooled rate rises to ≥ 0.60 and the median score ratio falls toward 1**,
+  the gap is the dataset date and the reimplementation is not presumed wrong on that
+  account. **This does not un-fire `LBD-G1`**: the gate was read on the pinned corpus as
+  pre-registered and the reading stands. Whether the arms may then be read is an amendment
+  (`LBD-AM3`) made *after* a result exists, which spends that gate's commit-before-results
+  property, and **that is the owner's call**, not a session's.
+- **If the ratio falls toward 1 but the rate stays below 0.60**, the reshuffle has a cause the
+  corpus size does not explain, and the diagnosis continues from the credit-less partners.
+- **If the ratio does not fall**, `created` is not measuring what it appears to, and the
+  dataset-date inference is withdrawn.
+
+The dated corpus loses deletions (invisible in a dump) and carries today's mapping, so a
+residual below the ceiling is expected even on a perfect date match.
 
 ## 6. `LBD-C2a` — pair-table candidate supply
 

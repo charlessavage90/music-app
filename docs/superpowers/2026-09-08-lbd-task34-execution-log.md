@@ -713,3 +713,36 @@ reusable form: **on Windows, do not tail a file that a PowerShell job appends to
 The post-loop pipeline (combine → `LBD-A0`–`LBD-A3` → `LBD-C1`) runs next, detached, and
 **stops after `LBD-C1` by construction**: `R1` says the arms are not read if `LBD-G1` fires, so
 `LBD-C2a` is a separate launch after a person has read the gate.
+
+### `LBD-G1` fired, and the diagnosis was taken from disk before anything was rerun
+
+`T` combined, the four arms derived, and `LBD-C1` read on `A0` — figures in README §5. **The
+top band came in at 0.584 against the 0.60 floor.** `R1` governs: the reimplementation is
+presumed wrong, `LBD-C2a` is not read, and the arms sit on disk unread.
+
+**Two things were done before spending any machine time on a rerun.** First, the read's own
+per-artist quantiles were found to be wrong (NaN from empty archive lists scrambling
+`sorted()`) — the fifth instrument defect in this track's measurement scaffolding, and like the
+others it was on the safe side of nothing: the gate reads the pooled rate, which was unaffected.
+Second, the diagnosis was designed to *decompose* rather than to guess: the archive carries LB's
+own `score`, and `T` is a superset of every arm, so every archive entry we miss can be placed in
+one of four bins and every matched pair can be compared score for score. That took minutes.
+
+**The finding that reorganises the question: our scores are ~3× ListenBrainz's on the same
+pairs, in every band.** A reshuffle would give a ratio near 1 with the sets differing; a corpus
+three times the size gives exactly this. The dump's `created` column then supplied the date
+scale — only about a third of today's mapped listens existed by autumn 2024 — which is the
+design's §6 "unknown dataset date" made measurable rather than argued. The one candidate that is
+ours (the deterministic tiebreak deciding which member of a multi-artist credit survives) was
+sized at ≈ 0.5 % of band-4 rows. The one candidate not yet understood — partners that exist in
+MusicBrainz with no credit line — is ≈ 4 %.
+
+**The decisive test was written down with its three readings BEFORE it ran** (README §5b,
+`C1-DIAG-1`): rebuild the corpus as of 2024-10-01 by `created`, rerun, re-read. It costs about
+three hours of machine time and no owner time. It is a diagnostic, not an arm; it reads no supply
+criterion; and it cannot un-fire the gate — whether the arms may be read after an explained
+gap is an amendment after the fact, and the owner's.
+
+Bookkeeping: `--created-before` is a documented diagnostic knob in `lbd_similarity.py`,
+recorded in each manifest, and never set for an arm. A first launch failed on a timestamp with
+a space in it, which `Start-Process` split into two arguments; relaunched in ISO form.
