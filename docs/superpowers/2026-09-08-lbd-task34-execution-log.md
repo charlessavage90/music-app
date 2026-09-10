@@ -699,3 +699,17 @@ The remaining 58 buckets run as one detached loop (`Start-Process`, 12 GB, spill
 automatic split of any failing residue into four mod-256 sub-buckets), logging to
 `C:\unsung-fast\lbd-partials\loop.log`. Nothing else runs on the machine while it does — the
 combine sizing was run *before* the loop for that reason.
+
+### The pass finished, and the one tool that failed was mine
+
+All 64 buckets completed in one detached loop with no failure and no sub-bucket split, so the
+fallback never fired. Figures in README §4. **The loop's own progress log took one line and then
+nothing** — not because the loop was wrong but because a `tail -F` I had armed on that file to
+monitor it held a handle that blocks PowerShell's `Add-Content`, and the `tail.exe` outlived the
+monitor that spawned it. Confirmed by killing it and appending successfully. Each bucket writes
+its own manifest, so the pass was unaffected and progress was read from those instead. The
+reusable form: **on Windows, do not tail a file that a PowerShell job appends to; poll it.**
+
+The post-loop pipeline (combine → `LBD-A0`–`LBD-A3` → `LBD-C1`) runs next, detached, and
+**stops after `LBD-C1` by construction**: `R1` says the arms are not read if `LBD-G1` fires, so
+`LBD-C2a` is a separate launch after a person has read the gate.

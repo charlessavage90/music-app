@@ -323,6 +323,22 @@ Both pass, both sit at the limit, and bucket 7 is the largest there is — so ev
 at mod 64 with no code change. For comparison, buckets 0–3 at 6 GB: 23.4–27.5 M rows, 109–117 s,
 19–25 GB spill each.
 
+**The pass completed 2026-09-09, 64 of 64 buckets, no failures, no sub-bucket splits.**
+Buckets 0–3 are the 2026-09-08 runs at 6 GB; the other 60 ran at 12 GB in one detached loop.
+
+| | |
+|---|---:|
+| partial rows, all buckets | 1,769,954,945 |
+| partial parquet on disk | 17.1 GiB, `C:\unsung-fast\lbd-partials\p0..p63.parquet` |
+| wall, summed | 118.2 min |
+| per bucket at 12 GB | 81–154 s; 22.2–34.7 M rows; peak RSS 11.86–12.03 GB |
+| spill per bucket at 12 GB | 20–42 GB |
+| **spill, summed over the pass** | **1,724 GB** |
+
+Every bucket at 12 GB peaks within 0.15 GB of the limit, so 12 GB is the floor at which this
+query runs at mod 64, not a margin. **The summed spill is 3.4× `LBD-G3`'s 500 GB bar** — see
+the gate reading below. Each bucket's manifest carries its own sha256, rows and timings.
+
 **The combine, sized before it was run in anger.** The six partials on disk (buckets 0–4 and 7,
 ~166 M partial rows) combined with `--aggregate-only` (`HAVING score > 0`, no rank cut):
 
