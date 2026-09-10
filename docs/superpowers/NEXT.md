@@ -47,139 +47,50 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-08, after a deploy.** ⚠ **`LUX-4` AND the Unsung.fm redesign are LIVE**
-at https://unsung.fm — what a listener opens now carries the new name, the new look, the artist
-detail panel, the streaming links and the `LUX-4` graph. **`TEST-QUEUE.md` has three live entries
-and its top one is the redesign**; pressing them is the outstanding action, and it is his.
+**Last updated: 2026-09-10, at the `LBD-` owner stop.** **Nothing a listener sees changed in this
+work.** The live site is as the 2026-09-08 deploy left it, and **`TEST-QUEUE.md`'s three entries
+are still his to press** — untouched here.
 
-**`LUX-4`** — **the plan is fully executed**; `L4-T8`–`L4-T11` are on branch
-`lux-4-wire-and-card`, **PR #112**, and `L4-T1`–`L4-T7` are behind them. **This is the first
-work in a while that changes what a listener sees — but only once it is DEPLOYED**, and this
-one is not an API-only deploy: it ships a new artifact (`graph-lux4.bin`) as well as new code,
-so a graph-variable `cdk diff` is *expected* here rather than being the `DEP-34` warning
-firing. `infra/README.md` §4 and §5 carry it. ⚠ **That plan was wrong about the repository
-FIVE times** — the fifth was found during execution and is the dangerous one: it claimed the
-frontend already mapped `snake_case` artists at the API boundary, and it did not, so a
-declared `spotifyId` would have been `undefined` at runtime and rendered *identically to a
-genuine absence*. Entry point:
-[`2026-09-08-HANDOFF-lux-4-wire-and-card.md`](2026-09-08-HANDOFF-lux-4-wire-and-card.md).
+**`LBD-`** — **Task 4 is COMPLETE and the design's owner stop is reached.** Branch `lbd-task3`,
+**PR #113** (addresses only; `gh` says where they are). The pair pass ran to the end, `T` and the
+four arms exist on `C:`, and both pre-registered reads are taken. **What was found, in plain
+terms** (figures owned by `builder/analysis/2026-09-08-lbd-similarity/README.md` §4–§6 and
+restated nowhere): **the listening data IS there** — dropping ListenBrainz's strength bar removes
+almost every dead end among the ~29,900 added artists, and most of all among the ones our own
+ceiling cannot reach; lifting their hundred-connection cap on its own does not. `LBD-R1` is
+refuted; `R4` fires; `R12` does not. ⚠ **`LBD-G1` (fidelity) FIRED first and was OVERRIDDEN by
+the owner after a diagnosis** — ListenBrainz's deployed lists were computed on roughly a third
+of today's corpus — recorded as **`LBD-AM3`**, written after the result and saying so; **never
+cite `LBD-C1` as passed.** A second finding closes an old question: the "central but
+unlistened" band-member class the owner saw in July is uncredited personnel ListenBrainz's
+deployed job scored by a mechanism outside the recording credit, which is why three probes on
+our side found nothing. Entry point:
+[`2026-09-10-HANDOFF-lbd-task4-owner-stop.md`](2026-09-10-HANDOFF-lbd-task4-owner-stop.md).
 
-**`UXR-`** — **the Unsung.fm redesign, mostly built.** Branch `unsung-redesign`, **PR #114**. The
-rename is **APPROVED 2026-09-08** (it was scoped-and-unapproved above this line until then) and
-`UXR-T1`–`T8` are executed — palette and faces, the name, the landing page, `GET /api/meta` and
-the badge, the player bar's progress, the card stripped to the listening surface, the artist
-detail docked at `lg` and a sheet below it, and the journey header with share and the steps
-tile. `T9`–`T11` (the remaining surfaces and the token aliases, the e2e suite, the record) are
-the next session's, from the plan's second seam.
-**Nothing a listener sees changes until this is DEPLOYED, and that deploy is two images**
-(frontend, plus the API for `/api/meta`); it follows the owed `LUX-4` deploy and changes no
-artifact. Decisions over the mockup are his and recorded: the **reach pill is DROPPED**, "Save
-track" dropped, genres / "why this stop" / the extra pages deferred — spec §2 and §4. **`LUX-E6`**
-ran at his instruction and is **his to read** before any genre decision; it changes nothing by
-itself. ⚠ **The mark he exported is in the working tree and still UNTRACKED** —
-`frontend/public/unsung-mark.png`; the deploy needs it committed and no session will commit a
-file it did not write. Entry point:
-[`2026-09-08-HANDOFF-unsung-redesign-t8.md`](2026-09-08-HANDOFF-unsung-redesign-t8.md).
-
-**`LBD-`** — branch `lb-dump-exploration`, **PR #109**; a worktree sits at
-`C:\Users\charl\worktrees\music-app-lbd` on `lbd-task3`. The pre-registration
-[`specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md`](specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md)
-**governs** the track's criteria, arms, gates and reads; **neither the design nor the plan is
-edited — do not "fix" either in place.** **Next task is Task 3.** The **owner stop is at the
-end of Task 4**, not Task 7: the pair-table read answers the track's central question with no
-graph built, so the emitter and the builds are conditional on it. Entry point:
-[`2026-09-07-HANDOFF-lbd-preregistration.md`](2026-09-07-HANDOFF-lbd-preregistration.md).
-
-**`DFA-`** — branch `dfa-degree-floor-at-admission`, **PR #110**. A structural probe of
-one cap-rule candidate, **descriptive only**: no path built, no routing criterion evaluated,
-nothing adopted and no rule change proposed. It also carries **`LBD-AM1`** — an amendment to
-the `LBD-` pre-registration, **committed before any arm ran** — and **two forward corrections
-to the record** (see below). ⚠ **`LBD-AM1` pins a sha256 of a file that landed with this
-work, so it is usable only in a tree that has it** — `git log` answers whether yours does.
-*(This clause named merge state until 2026-09-08 and was false within the hour, which is the
-exact failure this file's preamble warns about. Corrected by the session that wrote it.)* Entry point:
-[`2026-09-07-dfa-degree-floor-execution-log.md`](2026-09-07-dfa-degree-floor-execution-log.md).
+**`LUX-4`, `UXR-`, `DFA-`** are deployed or merged and their records are closed; nothing from
+their 2026-09-08 block still needs saying here beyond what the registries below carry.
+`UXR-`'s remaining tasks after its second seam are the redesign handoff's to say, not this file's.
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
-not record how far down the list he has got.** `gh pr list` answers the merge questions;
-`infra/README.md` and `/health` answer the deploy one.
+not record how far down the list he has got.**
 
-1. ~~**Commit the mark.**~~ **DONE 2026-09-08** — exported by the owner, committed at his
-   instruction, and it renders on the live site.
-2. ~~**Merge the open PRs.**~~ **PR #114 merged 2026-09-08** at his instruction, with the Snyk
-   PR check green. `LBD-`'s PR #113 is a separate track and is not part of this.
-3. ~~**Deploy.**~~ **DONE 2026-09-08** — both images and the `LUX-4` artifact. The record is
-   [`2026-09-08-unsung-redesign-execution-log.md`](2026-09-08-unsung-redesign-execution-log.md)
-   §13; the live graph was verified against its sidecar mechanically, drift showed only the five
-   known non-drift rows, and §8a's seven front-door checks all passed. **⚠ The `DEP-34` latent
-   hazard this action carried is CLEARED**: the image is built from HEAD, whose
-   `ApiConfig.graph_path` default names the adopted artifact rather than the rejected one. The
-   clip cache's item shape changed, so **every live entry misses once and rebuilds** — expected,
-   spec-sanctioned, and not a defect if the first view of an artist is slow today.
-4. **Run the queued use-the-app tests — now exercisable, and this is the outstanding action.**
-   `TEST-QUEUE.md` has three live entries; the top one is the redesign. Two older ones went live
-   in the same deploy and carry notes saying what moved since they were written.
+1. **Run the three queued use-the-app tests** — the redesign, the artist card, the bypass
+   button — live since the 2026-09-08 deploy. Nothing here changed them.
+2. **Merge PR #113.**
+3. **Decide the `LBD-` next step.** The design's §5 places the stop here so the build work is
+   spent only if the pair table says the data exists, and it does. Three options were tabled
+   with the result, and the session's preference and reasoning are in the execution log:
+   **(1)** proceed to Tasks 6–7 — emit an arm, build, read `LBD-C2b`, blind-listen;
+   **(2)** pre-register an intermediate threshold arm first, because the one thing a pair
+   count cannot see is whether single-listener pairs are connections anyone wants;
+   **(3)** stop with the hypothesis refuted. **None of these starts on a session's initiative.**
+4. **If he proceeds:** `LBD-A4` and `LBD-M1` are the two unrun descriptive items, then Tasks 6
+   and 7 under a fresh read of the plan, with `drop_unlistenable=False` per `LBD-X3`.
 
-**Two corrections landed 2026-09-08 and a later editor must not revert either.** In both cases
-the arithmetic was always right; what was wrong was what it could be read as evidence of, so a
-reader will find no contradiction to resolve and may mistake the notes for noise.
-
-- **`top1pct_degree_mass_frac` is saturation-degenerate.** Where at least 1 % of nodes sit at
-  the degree bound it reduces algebraically to the bound over a hundred times mean degree and
-  cannot see edge arrangement. The `DCF-` README carries a forward-correction note naming which
-  of **its own** arms the measure is valid on; its numbers are untouched and its read stands on
-  max degree and edge count.
-- **`CRS-C3` was structurally unable to fire on any selectable Track B cell**, so its reported
-  null carried no information about concentration. Track B's results document is **unedited**
-  and carries the correction at its head. **Three limits travel with it:** it says nothing
-  about `CRS-C4` hub transit, a routing measure over built paths; it **overturns none of Track
-  B's conclusions**, which rest on its other criteria and where `C3` was a flag rather than a
-  gate; and it is **not evidence about any cap rule**, which stays parked and his.
-
-**One `LBD-` item was discharged 2026-09-08 and one was not.** `docs/README.md`'s row for the
-pre-registration no longer claims the degree ceiling's effect on the added set is unmeasured —
-`DCF-` measured it. **Still owed, and it is Task 3's:** `LBD-X1` in the pre-registration itself
-still says so, deliberately unedited, and the document's new **§12** exists to hold that
-amendment.
-
-**One `CXA-` leftover remains live.** The ALG-B archive tree gained tens of thousands of
-response files after the served map was built, so **an unpinned rebuild reads the extended
-crawl.** Pin `--archive-dir scratch/grt-archive-algb.pre-cex-snapshot` for any build of the
-served lineage.
-
-**`LUX-E2` remains BLOCKED** on the damaged `TAS-` sample, and per-field population coverage is
-**not** a substitute read for it. `LUX-E3` and `LUX-E5` are run and their reads recorded:
-nothing is dropped and `area` stays.
-
-**One deferral's condition is ARMED as of 2026-09-08 and not yet satisfied.** The Deezer id gap (registry below) waits on "the first rebuild after `LUX-4` merges"; `LUX-4` merged (PR #112) and no rebuild has happened. **The next rebuild of the served lineage must carry the Deezer re-extract**; nothing in `UXR-` rebuilds.
-
-**Two findings are open and neither blocks anything.** **`ULC-F4`** — the un-listenable
-keep-check measures the name-search route while the app resolves by identity first, so both
-drop lists drop artists the app can play; **the owner's**, needing a re-census, a rebuild and
-its own pre-registration. **The Deezer id gap** — a slice of served artists carry no recorded
-id and fall back to name search (`BYP-13` exposure); **a session's work, not a decision.**
-
-**Snyk has not run since 2026-09-07 and that is ruled, not forgotten.** Credentials are expired
-and the MCP server failed to connect on 2026-09-08. The owner **accepted and deferred**
-scanning for everything under `builder/analysis/` on the grounds that none of it is live, with
-the revisit condition being **promotion into shipped code** — which nothing proposes. His
-hands, not a decision: it opens a browser.
-
-**Do not re-litigate, and do not re-discharge:** the 2026-09-03 address test (**run and passed
-2026-09-04**), either 2026-09-01 entry, or the depth-0 half of his revert report — **ruled
-2026-09-04 (owner) NOT a defect and NOT open work.** That closed it as an item and
-**overturned no measurement**: `CXR-P3`'s null and the diagnosis README's "unexplained by
-anything here" both remain exactly true and must not be edited. Equally, do not re-queue "tell
-me how it feels" — his long-run evaluation is continuous and `TEST-QUEUE.md` explicitly does
-not hold it (owner ruling, 2026-08-07).
-
-**Everything else open is his to trigger and none of it blocks anything:** **Option C**
-(same-name population probe), **`SEL-`**, **closing or keeping the 2026-07-29
-famous-to-famous defect ruling**, the **three candidate path-quality fixes in the `CXR-`
-README** (each needing its own pre-registration), **`PW-9`** (concurrency ladder, gated on his
-approval), the **cap-rule decision** (parked, and it owes a blind listen before any adoption
-whatever any probe says), and **the "Unsung.fm" rename** — no longer his to trigger: **approved 2026-09-08** and in progress under `UXR-` (above). The deployed UI still says "Artist Path" until that ships.
-
+**The standing items that the 2026-09-08 block carried inline — the two corrections that must
+not be reverted, the archive pin, the 2026-09-04 rulings, `LUX-E2`, `ULC-F4`, the Snyk
+deferral, and the owner's open list — are distilled into the registries below and the block
+is in `NEXT-ARCHIVE.md`.**
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -193,6 +104,10 @@ disagreements). **`DD-F1` remains a defect, not an accepted limitation** — Tra
 read measured where it can and cannot be moved; the results note owns that reading.
 
 ## PARKED — owner's explicit decision; his trigger, never a session's
+- **Option C** (the same-name population probe), **`SEL-`**, **closing or keeping the
+  2026-07-29 famous-to-famous defect ruling**, and **the three candidate path-quality fixes in
+  the `CXR-` README** (each needs its own pre-registration) — all open, none blocking, all his
+  trigger. *(Carried from the 2026-09-08 status block, distilled 2026-09-10.)*
 
 - ~~**Whether the fame instrument is fixed BEFORE or AFTER the graph work**~~ — **RULED
   AND DONE 2026-08-02: before, and it was.** The `FPC-2`/`FPC-9` pairing rule stays for
@@ -346,6 +261,28 @@ its **topmost** heading says so.)*
     governs.
 
 ## Must not be changed, and each has a reason
+- **`LBD-G1` fired (2026-09-09) and was overridden by owner decision (`LBD-AM3`, 2026-09-10)
+  after a diagnosis.** The 0.5844 reading and the 0.60 floor both stand; the arms were read
+  anyway. Never cite `LBD-C1` as "passed", and never re-read that gate on the dated corpus for
+  the record — `C1-DIAG-1` is a diagnostic. `--created-before` in `lbd_similarity.py` is
+  likewise diagnostic and is never set for an arm.
+- **`top1pct_degree_mass_frac` is saturation-degenerate** (2026-09-08): where at least 1 % of
+  nodes sit at the degree bound it reduces to the bound over a hundred times mean degree and
+  cannot see edge arrangement. The `DCF-` README's forward note names which of its own arms the
+  measure is valid on; its numbers are untouched.
+- **`CRS-C3` was structurally unable to fire on any selectable Track B cell** (2026-09-08), so
+  its null carried no information about concentration. Track B's results document is unedited
+  and carries the correction at its head. It says nothing about `CRS-C4`, overturns none of
+  Track B's conclusions, and is not evidence about any cap rule.
+- **Pin `--archive-dir scratch/grt-archive-algb.pre-cex-snapshot` for any build of the served
+  lineage.** The ALG-B archive tree gained tens of thousands of response files after the served
+  map was built; an unpinned rebuild reads the extended crawl (`CXA-` leftover).
+- **Rulings of 2026-09-04, not to be re-litigated or re-discharged:** the 2026-09-03 address
+  test (run and passed), either 2026-09-01 test-queue entry, and the depth-0 half of the
+  owner's revert report — NOT a defect and NOT open work. That closed them as items and
+  overturned no measurement: `CXR-P3`'s null and the diagnosis README's "unexplained by anything
+  here" remain exactly true. And do not re-queue "tell me how it feels" (owner ruling,
+  2026-08-07): his long-run evaluation is continuous and `TEST-QUEUE.md` does not hold it.
 
 - **`max_size=2` (`stack.py`)** — the **cost ceiling**, the only automatic spend control.
 - **App Runner is excluded from CDK tagging** — tagging forces a replacement that cannot
@@ -372,7 +309,11 @@ its **topmost** heading says so.)*
 
 | Finding | Condition |
 |---|---|
-| ⚠ **A slice of served artists carry NO recorded Deezer id**, so the api cannot take its identity-first clip path for them and falls back to **name search** — the `BYP-13` exposure the id path exists to close. Cause: the shipped id map was extracted over a population that predates the served map, which was built later from a further ALG-B crawl. Counts, the expected recovery, and why it is not fixed inside `LUX-4`: [`builder/analysis/2026-09-05-lux4-extract/README.md`](../../builder/analysis/2026-09-05-lux4-extract/README.md) §4. | **The first rebuild after `LUX-4` merges.** Until then, refreshing that key would change the artifact's existing `deezer_ids` and break `L4-T7`'s control arm, whose whole job is to prove `LUX-4` touches nothing that already existed. **A SESSION'S WORK, NOT AN OWNER DECISION** — the fix is obvious, the sequencing is methodology, and only the deploy needs his hands. The work: re-extract with `deezer` added to `KEPT_PLATFORMS` over the three-artifact population, ship it as dated package data, rebuild, take the new checksum to a deploy. **Metadata-only: no listening test and no acceptance risk**, because it changes no node, edge or score. |
+| **`LBD-A4` (the pairing arm) and `LBD-M1` (population per arm)** — the two descriptive `LBD-` items not run at the owner stop. No `R1`–`R9` read depends on `A4`; `M1` is a `GROUP BY` over tables that now exist. | **If the owner proceeds past the `LBD-` stop** (options 1 or 2 above). If he stops, both are closed with the track. |
+| **`LUX-E2`** — blocked on the damaged `TAS-` sample; per-field population coverage is **not** a substitute read. | **A repaired sample.** Nothing in flight repairs it. |
+| **`ULC-F4`** — the un-listenable keep-check measures the name-search route while the app resolves by identity first, so both drop lists drop artists the app can play. | **The owner's**: a re-census, a rebuild and its own pre-registration. Nothing blocks on it. |
+| **Snyk has not scanned `builder/analysis/`** — credentials expired 2026-09-07, the MCP server failed to connect 2026-09-08 and 2026-09-10; the owner accepted and deferred scanning for everything there on the grounds that none of it is live. His hands, not a decision: it opens a browser. | **Promotion of anything under `builder/analysis/` into shipped code** — which nothing proposes. |
+| ⚠ **ARMED since 2026-09-08 — `LUX-4` merged and no rebuild has happened; the next rebuild of the served lineage must carry the re-extract.** **A slice of served artists carry NO recorded Deezer id**, so the api cannot take its identity-first clip path for them and falls back to **name search** — the `BYP-13` exposure the id path exists to close. Cause: the shipped id map was extracted over a population that predates the served map, which was built later from a further ALG-B crawl. Counts, the expected recovery, and why it is not fixed inside `LUX-4`: [`builder/analysis/2026-09-05-lux4-extract/README.md`](../../builder/analysis/2026-09-05-lux4-extract/README.md) §4. | **The first rebuild after `LUX-4` merges.** Until then, refreshing that key would change the artifact's existing `deezer_ids` and break `L4-T7`'s control arm, whose whole job is to prove `LUX-4` touches nothing that already existed. **A SESSION'S WORK, NOT AN OWNER DECISION** — the fix is obvious, the sequencing is methodology, and only the deploy needs his hands. The work: re-extract with `deezer` added to `KEPT_PLATFORMS` over the three-artifact population, ship it as dated package data, rebuild, take the new checksum to a deploy. **Metadata-only: no listening test and no acceptance risk**, because it changes no node, edge or score. |
 | ✅ **Track B runs and reads** (`CB-5`/`CB-6`) | **DISCHARGED 2026-07-30** — run to completion; results note is the record. Struck, kept for the record. |
 | ✅ **`CRS-A5` endpoint re-verification** | **DISCHARGED 2026-07-30** — one request at scoring time, 200, companion delivered descriptive-only. Struck. |
 | ~~⚠ **A graph's manifest cannot say WHICH drop lists built it**~~ ✅ **DISCHARGED 2026-09-06 by `L4-T1b`** — `resolve_build_inputs` records the resolved filename and a sha256 over each applied drop list's bytes, plus the archive directory, and `log_build_inputs` prints them at build **start**. First exercised on the `LUX-4` build, whose manifest is the first here that can say which files produced it. **Recording only; a mismatch is NOT a refusal — the owner's decision, 2026-09-06.** Noted at both code sites that a gate here *could* fire in the first seconds, since both inputs are known before any work, so the "kills a long build at the end" worry applies to the acceptance bounds and not to this check; the reason to wait is that a reflexively-reached escape hatch removes the protection it guards. **A session must not add the gate on its own.** *Struck, not deleted: the condition fired twice — unhonoured on 2026-09-05, honoured here — and that history is the evidence the tracking worked.* Original text follows. |
