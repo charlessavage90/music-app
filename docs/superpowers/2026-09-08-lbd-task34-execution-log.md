@@ -767,3 +767,30 @@ diagnosis explains it; whether the arms may be read on an explained gap is an am
 the result and the owner's call. The arms sit on disk, derived and unread, until he makes it.
 
 Machine cost of the whole diagnosis: about 90 minutes detached, no owner time.
+
+### The owner chose option 1; `LBD-AM3` was committed before the read; `R4` fires
+
+Order of events, because the order is the evidence: the three options were tabled with the
+diagnosis; the owner chose to amend and read; `LBD-AM3` was written beside the gate and in the
+§12 register **and committed** (`4282816`, 02:30:49); the first `LBD-C2a` read started thirty
+seconds later. The amendment says in its own text that it was written after a result existed
+and spends `LBD-G1`'s commit-before-results property and nothing else.
+
+**The result, README §6:** every arm moves the added set's dead-end share the right way, the
+corner `LBD-A3` by 3.34 points on the whole set and by **9.54 on the residual stratum** — the
+artists our own ceiling cannot reach move most. `R4` fires, `LBD-R1` is refuted, `R12` does
+not fire. The lever is the **threshold**, not the cap: `A2` alone carries the movement and `A1`
+alone does not clear the bar on the whole set.
+
+**Two things the session noticed and put in the record rather than in a conclusion.** First,
+the baseline itself: at ListenBrainz's own settings on today's corpus, only 3.7 % of the added
+artists are dead ends at the pair-table level — against a third of them in the served map.
+The dated corpus's `A0` (8 %, and 26 % for the residual set) says much of that gap is the age
+of ListenBrainz's dataset, which is the same finding as `LBD-G1`'s diagnosis seen from the
+supply side. It is descriptive and reads no criterion. Second, threshold 0 admits pairs a
+single listener's single session supports; whether those are connections anyone wants is a
+listening question, not a counting one, and this document does not answer it.
+
+**The owner stop is reached.** Tasks 6 and 7 are conditional on his read of §6. One
+pre-registered run is still unrun — `LBD-A4`, the pairing arm — and is not needed for that
+read; it was deferred to after his decision at the start of this session.

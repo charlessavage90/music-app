@@ -544,13 +544,100 @@ which was read as pre-registered on the pinned corpus and stands at 0.5844. Whet
 derived from the pinned corpus may now be read is **`LBD-AM3`, an amendment after a result
 exists, and the owner's decision**. Nothing in §6 is read until he makes it.
 
-## 6. `LBD-C2a` — pair-table candidate supply
+## 6. `LBD-C2a` — pair-table candidate supply: **`R4` — the listening data IS there**
 
-*Pending, and conditional on `LBD-G1` not firing.*
+Read 2026-09-10 **after `LBD-AM3`** (committed `4282816`, 02:30:49 −04:00; the first read ran
+02:31:19). The read is `lbd_reads.py --mode c2a` per arm and `lbd_c2a_compare.py` for the
+paired comparison; the arms are the four derivations of §5's `T`:
+
+| arm | rows | sha256 |
+|---|---:|---|
+| `LBD-A0` (LB's settings: threshold 10, cap 100) | 11,340,639 | `f9bd1f83…` |
+| `LBD-A1` (cap removed) | 72,014,611 | `07156d59…` |
+| `LBD-A2` (threshold floored to 0) | 80,578,844 | `34f92de7…` |
+| `LBD-A3` (both relaxed — `T` itself) | 689,603,622 | `56a7b373…` |
+
+**The statistic is the share of the fixed 29,892 added artists with ≤ 2 distinct partners in
+the arm's pair table, versus `LBD-A0`; `LBD-G2`'s bar is ≥ 1 percentage point.** Every arm is a
+superset of `A0`, so a degree can only rise; the sign test is reported because the
+pre-registration names it, and it is trivially significant for that reason.
+
+| set | arm | share ≤ 2 | Δ vs `A0` (pp) | gained / lost / same | absent | median partners (reported, NOT gated) |
+|---|---|---:|---:|---|---:|---:|
+| **added, all 29,892** | `A0` | **0.0374** | — | — | 0.0189 | 58 |
+| | `A1` | 0.0295 | −0.79 | 27,507 / 0 / 2,385 | 0.0162 | 98 |
+| | `A2` | 0.0044 | **−3.30** | 29,698 / 0 / 194 | 0.0036 | 228 |
+| | **`A3`** | **0.0040** | **−3.34** | 29,785 / 0 / 107 | 0.0034 | 2,660 |
+| **residual (`LBD-AM1`), 5,967** | `A0` | **0.1006** | — | — | 0.0325 | 18 |
+| | `A1` | 0.0712 | −2.93 | 5,068 / 0 / 899 | 0.0228 | 30 |
+| | `A2` | 0.0059 | **−9.47** | 5,927 / 0 / 40 | 0.0049 | 211 |
+| | **`A3`** | **0.0052** | **−9.54** | 5,939 / 0 / 28 | 0.0045 | 1,451 |
+| **complement, 23,925** | `A0` | 0.0217 | — | — | 0.0155 | 75 |
+| | `A1` | 0.0191 | −0.26 | | 0.0145 | 129 |
+| | `A2` | 0.0041 | −1.76 | | 0.0033 | 232 |
+| | `A3` | 0.0037 | −1.80 | | 0.0032 | 3,069 |
+| **pre-existing, 58,793 (within-arm reference)** | `A0` | 0.0253 | — | — | 0.0183 | 122 |
+| | `A1` | 0.0216 | −0.37 | | 0.0162 | 654 |
+| | `A2` | 0.0048 | −2.05 | | 0.0040 | 361 |
+| | `A3` | 0.0043 | −2.10 | | 0.0038 | 8,034 |
+
+Raw per-arm reads: `C:\unsung-fast\lbd-pairs\<arm>\c2a.json` and `.degrees.json`; the
+comparison: `…\lbd-pairs\c2a_compare.json`.
+
+### The pre-registered reads, each against its row in §9
+
+- **`R4` fires: `LBD-C2a` moves ≥ 1 pp on `LBD-A3`** (−3.34 pp on the whole set). *Plain:
+  the listening data IS there, and the rules were withholding it.* `LBD-R1` — that the
+  listening for these artists is not there in the co-occurring form similarity needs — is
+  **refuted**. Per `R4`, this is the result that makes the emitter and build work worth doing,
+  **and whether to do it is the owner's call.**
+- **`R5` (moves on `A1` or `A2` but not `A3`) is not observed** — `A3` moves at least as much
+  as either, as construction requires.
+- **`R12` does NOT fire.** The residual set — the added artists our own ceiling cannot reach —
+  moves **more** than the whole set (−9.54 pp against −3.34), not less. The loosened settings
+  reach the artists this track exists to help, first of all.
+- **Which knob.** `LBD-A2` (threshold floored, cap kept) carries almost all of `A3`'s
+  movement (−3.30 of −3.34 pp); **`LBD-A1` (cap removed, threshold kept) does NOT clear the
+  bar on the whole set** (−0.79 pp), though it does on the residual stratum (−2.93 pp). *Plain:
+  it is the strength bar, not the hundred-connection cut, that hides these artists' connections.*
+  Mechanically, a pair needs at least four distinct listeners to clear threshold 10, and one
+  to clear threshold 0 (pre-registration §7).
+- **The within-arm reference moves less than the added set** in every arm (−2.10 pp against
+  −3.34 on `A3`; the residual −9.54), so the movement is not a uniform population artefact of
+  the pair table growing. `R9` proper is a graph-level read and is not taken here.
+
+### Descriptive, not an arm: the same read on the dated corpus's `A0`
+
+`C1-DIAG-1`'s corpus (as of 2024-10-01, §5c) at LB's own settings — **no criterion is read
+off this**, it is context for the served map's sparsity:
+
+| set | share ≤ 2 | absent | median partners |
+|---|---:|---:|---:|
+| added, all 29,892 | 0.0805 | 0.0311 | 23 |
+| residual | **0.2636** | 0.0615 | 6 |
+| complement | 0.0348 | 0.0236 | 30 |
+| pre-existing | 0.0381 | 0.0266 | 107 |
+
+For comparison, the served map's own figures — **graph level, after the cap rule, a
+different currency** — are owned by
+[`../2026-09-01-cxr-regression-diagnosis/README.md`](../2026-09-01-cxr-regression-diagnosis/README.md)
+(`CXR-P2`) and [`../2026-09-07-degree-ceiling-falsifier/README.md`](../2026-09-07-degree-ceiling-falsifier/README.md)
+§4, cited and not restated. *Inference, labelled:* at ListenBrainz's own settings the added
+artists are not dead ends in today's listening data (3.7 % at ≤ 2 partners), were more so on a
+corpus a third the size (8 %, and 26 % for the residual set), and the deployed dataset is older
+still — so a large part of what the served map shows as dead ends is **when** ListenBrainz
+computed its lists, before any rule of theirs or ours.
+
+**What this does not establish.** Nothing about routing or path quality; nothing about which
+of these pairs survive our own `trimmed_union` and ceiling (`LBD-C2b`, Task 7, conditional on
+the owner); nothing about whether single-listener pairs (the ones threshold 0 admits) are
+connections a listener would want — that is `WHAT-GOOD-LOOKS-LIKE` territory and a blind
+listen, not a pair count.
 
 ## 6b. `LBD-M1` — population
 
-*Not measured.* Pre-registration §5: how many artists each arm produces, by fame band, against
+*Not measured, and no longer owed by Task 4:* the artist counts per arm are a
+`GROUP BY` over tables that now exist, and it is Task 6/7's input, conditional on the owner's read of §6. Pre-registration §5: how many artists each arm produces, by fame band, against
 the served map's. Descriptive, decides nothing here, and it **discharges `LBDR-F6`** by
 supplying the artist and neighbour counts the Task 6/7 scale budget needs. It requires the
 derived arms, which do not exist yet.
