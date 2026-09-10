@@ -630,3 +630,72 @@ Two consequences a successor should have:
   to the cross-bucket sum — but it is an untested-at-scale change, and settling it while
   packing up is how a shaky conclusion enters the record as a decision. It is written here as
   a recommendation with its reasoning, for the successor to take or reject.
+
+---
+
+## Task 4, resumed 2026-09-09 — the handoff's first problem, re-read against a measurement
+
+*(a fresh session, from the mid-flight handoff; the only session on the machine)*
+
+### The handoff's diagnosis was checked before it was acted on, and its premise was wrong
+
+The handoff reads the bucket-4 failure as a heavy tail — "buckets 0–3 pass; bucket 4 dies" —
+and proposes finer buckets *for the failures only*. Before running anything, the intermediate's
+per-bucket sizes were read off the file (three seconds, user column only). **Figures are owned
+by the analysis README §4.** Bucket 4 is a seven percent step up from the largest bucket that
+passed and its heaviest account is smaller than bucket 2's; a third of the unrun buckets are at
+or beyond it. So the pipeline was at the margin of a 6 GB memory limit, not tripping over one
+account, and "finer buckets for the failures" would have been the normal case.
+
+**The handoff's advice not to raise the memory limit does not transfer, and this is a
+disagreement with it, stated as one.** That advice was earned on stage 0, where the process sat
+at its limit while a join build side spilled and the binding quantity was write pressure. The
+pair pass fails differently: DuckDB refuses an allocation *at its own ceiling after spilling*,
+which means something in the query is not spillable and the ceiling is precisely what it is
+short of. The 6 GB was chosen because a second session shared the box; that constraint is gone.
+So the single-knob test was the memory limit, 6 → 12 GB, everything else identical — first on
+bucket 4, then on bucket 7, the largest bucket there is. **Both pass at the limit.** Every
+bucket therefore runs at mod 64 with no code change; the sub-bucket fallback stays in the loop
+as insurance and is exact.
+
+**Two of the handoff's three steps are declined, with the reason each time:**
+
+- **`HAVING SUM(term) > 0` on the partial** — the 266 zero rows reproduce exactly on bucket 0
+  (verified against the file), and they are one thousandth of a percent of it. The handoff said
+  it "shrinks every partial"; it does not, to any degree that matters. Not a lever.
+- **Capping session length** — unnecessary now that the algebraic collapse makes the heaviest
+  account cheap, and it changes what is computed. Not taken, and no pre-registration is spent.
+
+### The combine was sized before the buckets finished, so it cannot be discovered failing at hour two
+
+The steps *after* the buckets were the unsized ones, and they are the same shape at larger
+scale: one hash aggregate over ~1.7 bn string-keyed partial rows, then a rank window over all of
+`T` for the two capped arms. Combining the six partials already on disk cost under a minute at
+an 8 GB limit (README §4). Extrapolated ~11×, the full combine fits a 12 GB limit with spill in
+the low hundreds of GB. **The exact fallback if it does not** — partition the combine by a hash
+of `mbid0`, which is legitimate because the cross-user sum is per pair, and derive the capped
+arms per partition because `rank()` partitions on the same key — is recorded here and not built,
+per the rule against refining an instrument past the decision it changes.
+
+### Two gate readings that will be owed when `LBD-C3` is written, and neither is a decision
+
+- **`LBD-G3`'s spill bar will be exceeded** — cumulative spill across 64 buckets is around
+  1.5 TB against a 500 GB bar. Its prescribed consequence is the chunked form, which is what is
+  running. It is read as fired-and-already-satisfied, not as clear.
+- **`LBD-G4`'s slice was never readable as written** — the chunked form was adopted on hardware
+  grounds (the platter, README §4) before the slice could complete, and `R11` says a firing gate
+  leads to exactly that form. Moot, and recorded so nobody reports it as passed.
+
+### One reorder is proposed to the owner, not taken
+
+The plan's Task 4 runs the `LBD-A4` pairing rerun before the seam. No result among `R1`–`R9`
+depends on it, it is a second full pair pass, and the owner stop is on the pair-table read of
+`LBD-A0`–`LBD-A3`. It was stated to the owner as a proposed reorder in the review that preceded
+this work; **the go he gave was to the sequence as reviewed, and `LBD-A4` runs after his read.**
+
+### In flight
+
+The remaining 58 buckets run as one detached loop (`Start-Process`, 12 GB, spill on the NVMe,
+automatic split of any failing residue into four mod-256 sub-buckets), logging to
+`C:\unsung-fast\lbd-partials\loop.log`. Nothing else runs on the machine while it does — the
+combine sizing was run *before* the loop for that reason.

@@ -290,6 +290,59 @@ the same columns a full pass would; most of its 63.7 minutes was scan, not per-u
 **The split between the two is not yet measured** — it is what `LBD-G4`'s slice is for, run at
 a fixed thread count so it differs from the probe by the slice fraction alone.
 
+### The pair pass, measured on 2026-09-09 — the bucket that failed was not an outlier
+
+**Buckets are `user_id % 64` over the stage-0 intermediate** (`C:\unsung-fast\lbd-listens.parquet`,
+sha256 `6d77a681…07707c08`). Its row-group statistics show it is **not clustered by user** (0 of
+2,646 row groups span a narrow `user_id` range), so every bucket pass reads the whole file;
+the previous session measured that as cheap on the NVMe. Sizes read from the file:
+
+| bucket | listens | heaviest user's listens | 6 GB limit (2026-09-08) |
+|---:|---:|---:|---|
+| 0 | 37,035,986 | 1,133,854 | passed |
+| 1 | 42,150,182 | 618,596 | passed — the largest that did |
+| 2 | 38,884,229 | 1,383,570 | passed |
+| 3 | 37,777,357 | 939,768 | passed |
+| **4** | **45,277,966** | 1,312,155 | **out of memory** |
+| 7 | 56,654,604 | 4,779,043 | not run — the largest bucket |
+
+Across all 64: **8 buckets are larger than bucket 4** (7, 9, 12, 14, 45, 50, 51, 53) and **13
+more lie between bucket 1 and bucket 4**. Bucket 4 is a 7 % step up from the largest pass and
+its heaviest account is smaller than bucket 2's — so the failure was the pipeline at the
+margin of its memory limit, not a heavy-tail account.
+
+**One knob changed — the memory limit, 6 GB → 12 GB — everything else as the 2026-09-08 runs
+(script sha `40f9ee03…`, mod 64, spill on the NVMe, DuckDB's default thread count):**
+
+| bucket | partial rows | wall | peak RSS | spill | sha256 |
+|---:|---:|---:|---:|---:|---|
+| 4 | 34,652,332 | 2.1 min | 11.99 GB | 30.6 GB | `2cc2b1b3…` |
+| 7 | 32,996,182 | 2.4 min | 12.03 GB | 26.3 GB | `f6a1a3f7…` |
+
+Both pass, both sit at the limit, and bucket 7 is the largest there is — so every bucket passes
+at mod 64 with no code change. For comparison, buckets 0–3 at 6 GB: 23.4–27.5 M rows, 109–117 s,
+19–25 GB spill each.
+
+**The combine, sized before it was run in anger.** The six partials on disk (buckets 0–4 and 7,
+~166 M partial rows) combined with `--aggregate-only` (`HAVING score > 0`, no rank cut):
+
+| | |
+|---|---:|
+| distinct pairs (`score ≥ 1`) | 121,136,088 |
+| wall | 0.4 min |
+| peak RSS / limit | 8.03 GB / 8 GB |
+| spill | 12.2 GB |
+| output | 1.62 GB |
+
+Trial output `C:\unsung-fast\lbd-review\T6.parquet`, sha256 `ba83760a…`; **it is a sizing
+artefact, not `T`, and nothing is read off it.** The full combine has ~11× the input and is
+expected to fit a 12 GB limit with spill in the low hundreds of GB; the partition-by-`mbid0`
+fallback is exact and was not needed here.
+
+**Cumulative spill across the pass will exceed `LBD-G3`'s 500 GB bar** (≈ 64 × 20–30 GB). The
+gate's prescribed response is the chunked form, which is what is running; recorded here so the
+gate is read honestly when §4 is completed rather than reported as clear.
+
 ## 5. `LBD-C1` — fidelity
 
 *Pending. Read before `LBD-C2a`, because result `R1` says a `LBD-G1` failure means the arms
