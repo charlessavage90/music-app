@@ -87,11 +87,64 @@ Do not delete entries; the record of what was exercised is the point.**
 
 ---
 
-## ▶ QUEUED (latest) — 2026-09-08 — every card now says who the artist is, and where to go and hear more
+## ▶ QUEUED (latest) — 2026-09-08 — the app is called Unsung.fm now, and it looks different
 
-**Not live yet.** This is on a branch waiting for you to merge AND deploy — and this one
-needs the deploy more than usual, because it ships a new graph file as well as new code. Until
-both happen, nothing below exists.
+**✅ LIVE at https://unsung.fm** — deployed 2026-09-08. The biggest visible change the app has
+had: a new name, a new look, and the reroute button has moved. **The two entries below went
+live in the same deploy**, so their steps are exercisable too — read their notes first, because
+this change moved things they describe.
+
+### What to exercise — about fifteen minutes
+
+1. **Open it on your phone and just look at the first screen.** New name, new logo, new
+   typeface, and a line saying how many artists are on the map. That number is read live from
+   the server, so if the line is missing entirely something is wrong. It should say roughly
+   fifty-eight thousand.
+
+2. **Press one of the ready-made journeys on the front page.** Each claims a number of steps.
+   When it loads, count the artists between the two ends — the claim should match. Those
+   numbers are written into the page rather than measured on each visit, so a mismatch means
+   the map has shifted underneath them and I need to know.
+
+3. **Look at a journey card.** It should carry only what you need in order to listen: artwork,
+   name, track, a play button, and a › button. If the country-and-dates line or the Spotify and
+   Apple links are still on the card itself, the new layout did not ship.
+
+4. **Press the › on an artist in the middle.** On a phone a panel slides up from the bottom; on
+   a laptop it opens beside the journey. That panel is where the artist's details, both
+   streaming links, "try another track" and the reroute button now live. **Close it three ways:
+   the ✕, a press outside it, and the Escape key on a laptop.** All three should work.
+
+5. **Reroute from inside that panel, five or six times, on different journeys.** This is the
+   part to form an opinion about. It takes two presses now instead of one, and you said we may
+   want to revisit that. Tell me whether the second press reads as a cost or as a safeguard
+   against pressing it by accident.
+
+6. **Press play and watch the bar along the bottom.** It should name the track, show a line
+   that moves, count the seconds, and say which stop you are on. The clock says 0:29 where the
+   card says 0:30 — that is the real length of what Deezer sends and I left it honest. Say if
+   you would rather they agreed.
+
+7. **Press Share.** A phone should offer its usual share sheet; a laptop should say "Link
+   copied". Paste it into a new tab and confirm you land on the same journey, including any
+   rerouting you had already done.
+
+8. **The one thing nothing here could answer: does a clip actually play on an iPhone.**
+
+**What "wrong" looks like:** a blank white screen, a broken image where the logo should be, a
+card still carrying the links and dates, a panel that will not close, or a shared link that
+opens a different journey from the one you were looking at.
+
+**Paste the URL for anything you find.**
+
+---
+
+## ▶ QUEUED — 2026-09-08 — every card now says who the artist is, and where to go and hear more
+
+**✅ NOW LIVE — deployed 2026-09-08, so everything below is exercisable.** ⚠ **One thing
+moved after this was written:** the country-and-dates line and the two streaming links are
+no longer on the card itself — open an artist with the › button and they are in the panel
+that appears. Everything else below reads as written.
 
 **Deploy note:** this is the `LUX-4` artifact, so §4 of `infra/README.md` changes `GRAPH` to
 `graph-lux4.bin` and both upload lines run. `cdk diff` showing the graph variables change is
@@ -141,9 +194,9 @@ both happen, nothing below exists.
 
 ## ▶ QUEUED — 2026-09-04 — one button instead of two, a list of who you skipped, and a way to hear a different song
 
-**Not live yet.** This is on a branch waiting for you to merge it. Once it deploys, three
-things on the journey page are different, and one of them is the first thing anyone you share
-the app with will see.
+**✅ NOW LIVE — deployed 2026-09-08.** ⚠ **Step 1 below describes the old placement.** The
+reroute control is no longer on the card: open an artist with the › button and it is at the
+bottom of the panel that appears. Steps 2 and 3 read as written.
 
 ### What to exercise — about ten minutes
 

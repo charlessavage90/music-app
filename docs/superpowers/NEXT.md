@@ -47,8 +47,10 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-08.** Three pieces of work have addresses. **None of them changes what
-a listener sees**, and the one thing that would is a deploy.
+**Last updated: 2026-09-08, after a deploy.** ⚠ **`LUX-4` AND the Unsung.fm redesign are LIVE**
+at https://unsung.fm — what a listener opens now carries the new name, the new look, the artist
+detail panel, the streaming links and the `LUX-4` graph. **`TEST-QUEUE.md` has three live entries
+and its top one is the redesign**; pressing them is the outstanding action, and it is his.
 
 **`LUX-4`** — **the plan is fully executed**; `L4-T8`–`L4-T11` are on branch
 `lux-4-wire-and-card`, **PR #112**, and `L4-T1`–`L4-T7` are behind them. **This is the first
@@ -110,21 +112,21 @@ exact failure this file's preamble warns about. Corrected by the session that wr
 not record how far down the list he has got.** `gh pr list` answers the merge questions;
 `infra/README.md` and `/health` answer the deploy one.
 
-1. **Commit the mark.** ~~Export it from the Claude Design project and save it as
-   `frontend/public/unsung-mark.png`~~ — **done 2026-09-08, and it renders.** It is
-   **untracked**, and a session does not commit a file it did not write, so the one line is his:
-   `git add frontend/public/unsung-mark.png` on `unsung-redesign`. **The deployed build needs
-   it**; nothing else waits on it.
-2. **Merge the open PRs.**
-3. **Deploy.** ⚠ **Merged is not deployed here** — deploys are manual and there is no CI
-   ([`infra/README.md`](../../infra/README.md)). The clip cache's item shape changed, so every
-   live entry misses once and rebuilds. **⚠ It also clears a latent hazard:** the running image
-   predates the `CXR-` revert, so its baked-in `ApiConfig.graph_path` default still names the
-   **REJECTED** artifact. Nothing is served wrong — production passes the graph and its
-   checksum per deploy, and `DEP-34-FIX` makes a synth without the deploy key refuse — but it
-   is a live instance of the `DEP-34` class. HEAD's default is correct, so **any image built
-   from HEAD fixes it; do not deploy under a stale image tag.**
-4. **Run the queued use-the-app test** — **not exercisable until 3 has happened.**
+1. ~~**Commit the mark.**~~ **DONE 2026-09-08** — exported by the owner, committed at his
+   instruction, and it renders on the live site.
+2. ~~**Merge the open PRs.**~~ **PR #114 merged 2026-09-08** at his instruction, with the Snyk
+   PR check green. `LBD-`'s PR #113 is a separate track and is not part of this.
+3. ~~**Deploy.**~~ **DONE 2026-09-08** — both images and the `LUX-4` artifact. The record is
+   [`2026-09-08-unsung-redesign-execution-log.md`](2026-09-08-unsung-redesign-execution-log.md)
+   §13; the live graph was verified against its sidecar mechanically, drift showed only the five
+   known non-drift rows, and §8a's seven front-door checks all passed. **⚠ The `DEP-34` latent
+   hazard this action carried is CLEARED**: the image is built from HEAD, whose
+   `ApiConfig.graph_path` default names the adopted artifact rather than the rejected one. The
+   clip cache's item shape changed, so **every live entry misses once and rebuilds** — expected,
+   spec-sanctioned, and not a defect if the first view of an artist is slow today.
+4. **Run the queued use-the-app tests — now exercisable, and this is the outstanding action.**
+   `TEST-QUEUE.md` has three live entries; the top one is the redesign. Two older ones went live
+   in the same deploy and carry notes saying what moved since they were written.
 
 **Two corrections landed 2026-09-08 and a later editor must not revert either.** In both cases
 the arithmetic was always right; what was wrong was what it could be read as evidence of, so a
