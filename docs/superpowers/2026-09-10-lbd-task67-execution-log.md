@@ -127,3 +127,12 @@ docstring now says RUN ALONE. Nothing heavy runs beside it until it finishes.
   path as a query parameter (`read_parquet(?)`); rescan clean. The curve script has the same
   finding and gets the same fix **after** its run, so the `script_sha256` its output records
   is the code that ran (commit `57dfb70`).
+
+**Step 2, result.** The rerun finished in 9.6 min, green on both reproduction checks. Recorded as
+§6c of the Task 4 figures owner. Two things worth the log: thresholds 0 and 1 are the same arm
+because score 1 is nearly nonexistent in `T` (2,135 rows of 689 M — a single co-listen scores
+2 under LB's two-order self-join), so "threshold 0" is *one listener, one session*; and the
+score-2 mass is 46 % of `T`, yet dropping it moves the added set's dead-end share by only two
+tenths of a point at limit 100. Descriptive; the owner reads it. The A0 archive digest is
+identical across emitter versions 1 and 3 (`c13c2250…`, 86,854 payloads) — `LBD-D5`'s
+determinism, observed.

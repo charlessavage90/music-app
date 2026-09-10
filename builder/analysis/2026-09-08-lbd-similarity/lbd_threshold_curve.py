@@ -50,6 +50,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import statistics
 import sys
 import time
@@ -73,6 +74,14 @@ def sha256_of(path: Path) -> str:
         for chunk in iter(lambda: f.read(1 << 24), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def safe_literal(path: Path) -> str:
+    """A path allowed into a COPY target literal: resolved, and only path characters."""
+    text = path.resolve().as_posix()
+    if not re.fullmatch(r"[A-Za-z0-9_:/.\-]+", text):
+        raise SystemExit(f"REFUSING: {text!r} is not a plain path")
+    return text
 
 
 def load_set(path: Path) -> list[str]:
@@ -158,14 +167,14 @@ def main(argv: list[str] | None = None) -> int:
                 WITH r AS (
                     SELECT mbid0, mbid1, score,
                            rank() OVER (PARTITION BY mbid0 ORDER BY score DESC) AS rk
-                      FROM read_parquet('{args.table.as_posix()}')
+                      FROM read_parquet(?)
                 )
                 SELECT mbid0, mbid1, score, rk FROM r
                  WHERE mbid0 IN (SELECT mbid FROM q) OR mbid1 IN (SELECT mbid FROM q)
-            ) TO '{ranked.as_posix()}' (FORMAT PARQUET, ROW_GROUP_SIZE 500000)
-        """)
+            ) TO '{safe_literal(ranked)}' (FORMAT PARQUET, ROW_GROUP_SIZE 500000)
+        """, [args.table.as_posix()])
         print(f"[curve] ranked+filtered T written in {(time.monotonic() - t0) / 60:.1f} min", flush=True)
-    ranked_rows = con.execute(f"SELECT count(*) FROM read_parquet('{ranked.as_posix()}')").fetchone()[0]
+    ranked_rows = con.execute("SELECT count(*) FROM read_parquet(?)", [ranked.as_posix()]).fetchone()[0]
     print(f"[curve] ranked_P rows {ranked_rows:,}", flush=True)
 
     # Both directions, restricted to set members, then sixteen filtered counts in one pass.
@@ -178,13 +187,13 @@ def main(argv: list[str] | None = None) -> int:
     rows = con.execute(f"""
         WITH u AS (
             SELECT q.mbid AS artist, r.score, r.rk
-              FROM read_parquet('{ranked.as_posix()}') r JOIN q ON r.mbid0 = q.mbid
+              FROM read_parquet(?) r JOIN q ON r.mbid0 = q.mbid
             UNION ALL
             SELECT q.mbid AS artist, r.score, r.rk
-              FROM read_parquet('{ranked.as_posix()}') r JOIN q ON r.mbid1 = q.mbid
+              FROM read_parquet(?) r JOIN q ON r.mbid1 = q.mbid
         )
         SELECT artist, {", ".join(filters)} FROM u GROUP BY artist
-    """).fetchall()
+    """, [ranked.as_posix(), ranked.as_posix()]).fetchall()
     print(f"[curve] per-artist counts for {len(rows):,} artists in {(time.monotonic() - t0) / 60:.1f} min", flush=True)
     names = [col(t, l) for t in THRESHOLDS for l in LIMITS]
     counts = {row[0]: dict(zip(names, row[1:])) for row in rows}

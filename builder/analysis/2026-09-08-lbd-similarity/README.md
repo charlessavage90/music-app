@@ -642,6 +642,136 @@ the served map's. Descriptive, decides nothing here, and it **discharges `LBDR-F
 supplying the artist and neighbour counts the Task 6/7 scale budget needs. It requires the
 derived arms, which do not exist yet.
 
+## 6c. Descriptive — the threshold curve from `T` (`LBD-AM4-5`; no gate, no effect size)
+
+**Added 2026-09-10 under `LBD-AM4-5`, after the owner authorised the build stage. It decides
+nothing.** Plain sentence, fixed in the amendment before this ran: *before the second build,
+look at how the number of dead ends among the added artists changes as the strength bar is
+lowered one notch at a time — so the owner can see whether "accept every connection however
+weak" is where the gain is, or whether most of it arrives by a bar of 2 or 3.* It is presented
+as context for whether the second build stays at threshold 0; that choice is the owner's and
+is not made here, and a build at any other threshold would be a further amendment written
+before that build.
+
+`lbd_threshold_curve.py` (this directory; the run used the script at commit `57dfb70`,
+sha256 `6ba58b54…`, recorded in `threshold_curve.json` — the committed file differs only by
+the Snyk path-binding fix applied after the run). One `rank()` pass over `T` (sha256
+`03d47b05…`, verified before reading) partitioned on `mbid0`; the ranked rows touching any of
+the four sets were materialised (`ranked_P.parquet`, 613,774,275 rows, sha256 `ce48ca44…`,
+21.8 GB, gitignored), then sixteen filtered counts per artist in one `GROUP BY`. A row's rank
+is unchanged when lower-scored rows are filtered away, so one ranking serves every threshold —
+**verified, not asserted: the (10, 100) cell reproduces §6's `LBD-A0` row and the (0, 100)
+cell its `LBD-A2` row on all four sets to the last digit** (the script refuses to write
+otherwise). 9.6 min at a 12 GB limit and 8 threads, run alone; a first attempt beside another
+DuckDB process died with an access violation in DuckDB's native module (execution log, Step 2).
+
+Every cell is exactly the arm §1 of the pre-registration would derive at those tokens.
+"share ≤ 2" is the dead-end share over the whole set with an absent artist counted as 0;
+"limit none" is the cap removed. Results: `threshold_curve.json` beside this file.
+
+**added** (n = 29,892)
+
+| threshold | limit | share ≤ 2 | share absent | share = 1 | median partners |
+|---:|---|---:|---:|---:|---:|
+| 0 | 100 | 0.0044 | 0.0036 | 0.0005 | 228 |
+| 0 | none | 0.0040 | 0.0034 | 0.0003 | 2660 |
+| 1 | 100 | 0.0044 | 0.0036 | 0.0005 | 228 |
+| 1 | none | 0.0040 | 0.0034 | 0.0003 | 2660 |
+| 2 | 100 | 0.0063 | 0.0047 | 0.0010 | 174 |
+| 2 | none | 0.0055 | 0.0042 | 0.0006 | 1251.5 |
+| 3 | 100 | 0.0113 | 0.0083 | 0.0016 | 127 |
+| 3 | none | 0.0097 | 0.0075 | 0.0010 | 557 |
+| 4 | 100 | 0.0130 | 0.0090 | 0.0022 | 120 |
+| 4 | none | 0.0108 | 0.0081 | 0.0015 | 424 |
+| 5 | 100 | 0.0156 | 0.0105 | 0.0027 | 112 |
+| 5 | none | 0.0128 | 0.0091 | 0.0019 | 299 |
+| 7 | 100 | 0.0235 | 0.0145 | 0.0044 | 97 |
+| 7 | none | 0.0188 | 0.0127 | 0.0030 | 177 |
+| 10 | 100 | 0.0374 | 0.0189 | 0.0095 | 58 |
+| 10 | none | 0.0295 | 0.0162 | 0.0069 | 98 |
+
+**residual** (n = 5,967)
+
+| threshold | limit | share ≤ 2 | share absent | share = 1 | median partners |
+|---:|---|---:|---:|---:|---:|
+| 0 | 100 | 0.0059 | 0.0049 | 0.0005 | 211 |
+| 0 | none | 0.0052 | 0.0045 | 0.0003 | 1451 |
+| 1 | 100 | 0.0059 | 0.0049 | 0.0005 | 211 |
+| 1 | none | 0.0052 | 0.0045 | 0.0003 | 1451 |
+| 2 | 100 | 0.0094 | 0.0064 | 0.0022 | 157 |
+| 2 | none | 0.0075 | 0.0049 | 0.0010 | 614 |
+| 3 | 100 | 0.0183 | 0.0117 | 0.0034 | 104 |
+| 3 | none | 0.0141 | 0.0104 | 0.0012 | 227 |
+| 4 | 100 | 0.0221 | 0.0129 | 0.0045 | 81 |
+| 4 | none | 0.0159 | 0.0112 | 0.0022 | 167 |
+| 5 | 100 | 0.0278 | 0.0156 | 0.0062 | 57 |
+| 5 | none | 0.0206 | 0.0126 | 0.0034 | 111 |
+| 7 | 100 | 0.0525 | 0.0209 | 0.0141 | 33 |
+| 7 | none | 0.0352 | 0.0164 | 0.0085 | 60 |
+| 10 | 100 | 0.1006 | 0.0325 | 0.0342 | 18 |
+| 10 | none | 0.0712 | 0.0228 | 0.0241 | 30 |
+
+**complement** (n = 23,925)
+
+| threshold | limit | share ≤ 2 | share absent | share = 1 | median partners |
+|---:|---|---:|---:|---:|---:|
+| 0 | 100 | 0.0041 | 0.0033 | 0.0005 | 232 |
+| 0 | none | 0.0037 | 0.0032 | 0.0003 | 3069 |
+| 1 | 100 | 0.0041 | 0.0033 | 0.0005 | 232 |
+| 1 | none | 0.0037 | 0.0032 | 0.0003 | 3069 |
+| 2 | 100 | 0.0055 | 0.0043 | 0.0007 | 179 |
+| 2 | none | 0.0049 | 0.0041 | 0.0005 | 1459 |
+| 3 | 100 | 0.0096 | 0.0075 | 0.0012 | 131 |
+| 3 | none | 0.0086 | 0.0068 | 0.0010 | 682 |
+| 4 | 100 | 0.0107 | 0.0080 | 0.0016 | 124 |
+| 4 | none | 0.0095 | 0.0073 | 0.0013 | 523 |
+| 5 | 100 | 0.0126 | 0.0092 | 0.0018 | 117 |
+| 5 | none | 0.0109 | 0.0083 | 0.0016 | 374 |
+| 7 | 100 | 0.0163 | 0.0128 | 0.0020 | 106 |
+| 7 | none | 0.0147 | 0.0117 | 0.0016 | 227 |
+| 10 | 100 | 0.0217 | 0.0155 | 0.0033 | 75 |
+| 10 | none | 0.0191 | 0.0145 | 0.0026 | 129 |
+
+**preexisting** (n = 58,793)
+
+| threshold | limit | share ≤ 2 | share absent | share = 1 | median partners |
+|---:|---|---:|---:|---:|---:|
+| 0 | 100 | 0.0048 | 0.0040 | 0.0005 | 361 |
+| 0 | none | 0.0043 | 0.0038 | 0.0003 | 8034 |
+| 1 | 100 | 0.0048 | 0.0040 | 0.0005 | 361 |
+| 1 | none | 0.0043 | 0.0038 | 0.0003 | 8034 |
+| 2 | 100 | 0.0065 | 0.0051 | 0.0009 | 265 |
+| 2 | none | 0.0056 | 0.0046 | 0.0005 | 4249 |
+| 3 | 100 | 0.0120 | 0.0094 | 0.0014 | 173 |
+| 3 | none | 0.0105 | 0.0086 | 0.0011 | 2414 |
+| 4 | 100 | 0.0134 | 0.0103 | 0.0017 | 161 |
+| 4 | none | 0.0117 | 0.0094 | 0.0012 | 1926 |
+| 5 | 100 | 0.0153 | 0.0118 | 0.0022 | 149 |
+| 5 | none | 0.0136 | 0.0105 | 0.0017 | 1473 |
+| 7 | 100 | 0.0193 | 0.0145 | 0.0026 | 134 |
+| 7 | none | 0.0166 | 0.0132 | 0.0021 | 1004 |
+| 10 | 100 | 0.0253 | 0.0183 | 0.0040 | 122 |
+| 10 | none | 0.0216 | 0.0162 | 0.0033 | 654 |
+
+**Two facts a reader needs before reading the shape.** (1) **Thresholds 0 and 1 are the same
+arm in practice**: of `T`'s 689,603,622 pairs, **2,135** carry score 1 and 317,667,802 carry
+score 2 (measured 2026-09-10 on `T`) — ListenBrainz's `BIGINT(SUM(part_score))` over a
+self-join that counts a co-listen in both orders makes 2 the effective floor, so "threshold 0"
+means *one listener, one session*. (2) `HAVING score > threshold` is strict, so the row
+labelled threshold 2 has already dropped every score-2 pair — 46 % of `T`.
+
+*Descriptive reading, labelled as such and deciding nothing.* On the added set, most of the
+dead-end reduction between ListenBrainz's bar (10) and the floor arrives **before** the floor:
+at limit 100 the share ≤ 2 goes 3.74 % → 2.35 % (bar 7) → 1.56 % (bar 5) → 1.13 % (bar 3) →
+0.63 % (bar 2) → 0.44 % (floor). The residual stratum — the artists our own ceiling cannot
+reach — is where the bar bites hardest: 10.06 % at 10, 2.78 % at 5, 0.94 % at 2, 0.59 % at the
+floor. The cap matters little anywhere on the dead-end share (the "none" rows sit within a few
+tenths of a point of their "100" rows at every threshold) and matters enormously for list
+length (median partners at the floor: 228 capped, 2,660 uncapped on the added set; 361 vs
+8,034 pre-existing). **What this cannot say:** whether a pair supported by one listener's one
+session — the score-2 mass the floor admits — is a connection anyone wants. That is a
+listening question (`WHAT-GOOD-LOOKS-LIKE`), not a counting one.
+
 ## 7. What is NOT established here
 
 - **Nothing about routing or path quality.** No graph is built by this work and no path is
