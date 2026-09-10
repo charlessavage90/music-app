@@ -79,3 +79,51 @@ threshold 0 / limit 100 its `A2` row, or the instrument is wrong.
 **Where outputs land:** `C:\unsung-fast\lbd-archives\<arm>\` (NVMe; 88k small files per arm
 is the wrong shape for the spinning disk the plan named), consistent with the staging
 approval the 2026-09-10 handoff records.
+
+## Step 2 — the threshold curve: one instrument, one crash, one rerun
+
+**Design.** `rank()` inside an `mbid0` partition is unchanged by filtering away lower-scored
+rows, so one window pass over `T` serves all eight thresholds; the sixteen cells are filters
+on `(score, rank)` and a single `GROUP BY` with sixteen `FILTER` clauses. The instrument's
+green check is built in and is a refusal: the (10, 100) cell must reproduce `A0`'s committed
+`c2a.json` and (0, 100) `A2`'s on all four sets, or nothing is written. Pairs in `T` were
+checked unique and oriented `mbid0 < mbid1` on `A0` (0 rows the other way, 0 duplicates), so
+`count(*)` per direction is the distinct-partner count `lbd_reads.py` computes with
+`count(DISTINCT …)`.
+
+**The first attempt died, and the cause is recorded as a trap.** Launched 19:12 at a 16 GB
+limit and DuckDB's default 24 threads. At 19:22 the second `emit_archive.py` attempt (a
+per-artist `list(… ORDER BY …)` aggregation at an 8 GB limit) ran out of its own memory
+limit; at 19:24 the curve's Python process died with an access violation
+(`0xc0000005`) inside `_duckdb.cp312-win_amd64.pyd` — Application log event 1000 — with
+nothing on stderr, leaving `ranked_P.parquet` without a footer. Two DuckDB processes at a
+combined nominal 24 GB on a 32 GB machine, one of them at the moment of its own OOM, is the
+only thing that changed. **Rerun alone at 12 GB and 8 threads** (19:27); the script's
+docstring now says RUN ALONE. Nothing heavy runs beside it until it finishes.
+
+## Step 3 — Task 6, the emitter: what was decided
+
+- **`LbdBulkSource(ListenBrainzSource)` with `name = "lbd"`**, `request_url` raising. The
+  algorithm token is `CANDIDATE_ALGORITHM` (the `ALG-B` string, `filter_True` included)
+  because the three drop-list loaders key on it — the token names the drop-list lineage,
+  never the arm; the arm's tokens live in the archive root's `MANIFEST.json`.
+- **Payload rows carry exactly the four `FIELD_*` keys** (`artist_mbid`, `name`, `comment`,
+  `score`). The real endpoint also returns `type`, `gender` and `reference_mbid`; the
+  builder reads none of them (`sources/listenbrainz.py`), so they are not fabricated.
+- **The population filter is applied to the derived parquet, after the rank cut.** Counts
+  are recorded in the manifest: of `A0`'s rows, those with both ends in `P`, one end, neither.
+- **Identity.** All but 10 of the 88,685 have a row in Task 1's identity frame; all 10 are
+  absent from `A0` anyway, so `A0`'s archive has no nameless artist. The 10 MBIDs are listed
+  in the manifest for the README.
+- **Memory shape, twice corrected.** Version 1 pulled the filtered pairs into Python
+  (fine for `A0`, wrong for `A2`); version 2 aggregated per-artist lists inside DuckDB and
+  ran out of memory beside the curve; version 3 streams one sorted
+  `(artist, -score, partner)` query and groups consecutive rows — a sort spills cleanly.
+  `A0` was emitted by version 1 and re-emitted by version 3; the archive digest over every
+  payload is compared between the two runs before `A2` is emitted (determinism check, recorded
+  in the README).
+- **Snyk** (the MCP connected this session): one Medium, CLI path interpolated into DuckDB
+  SQL — the class the `builder/analysis/` deferral in `NEXT.md` names. Fixed by binding the
+  path as a query parameter (`read_parquet(?)`); rescan clean. The curve script has the same
+  finding and gets the same fix **after** its run, so the `script_sha256` its output records
+  is the code that ran (commit `57dfb70`).

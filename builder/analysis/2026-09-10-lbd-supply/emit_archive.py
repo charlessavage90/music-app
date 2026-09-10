@@ -126,15 +126,15 @@ def main(argv: list[str] | None = None) -> int:
     con.execute("CREATE TABLE p(mbid VARCHAR)")
     con.executemany("INSERT INTO p VALUES (?)", [(m,) for m in population])
     pq = args.pairs.as_posix()
-    total, both, one_end, none = con.execute(f"""
+    total, both, one_end, none = con.execute("""
         SELECT count(*),
                count(*) FILTER (WHERE m0 AND m1),
                count(*) FILTER (WHERE m0 <> m1),
                count(*) FILTER (WHERE NOT m0 AND NOT m1)
           FROM (SELECT (mbid0 IN (SELECT mbid FROM p)) AS m0,
                        (mbid1 IN (SELECT mbid FROM p)) AS m1
-                  FROM read_parquet('{pq}'))
-    """).fetchone()
+                  FROM read_parquet(?))
+    """, [pq]).fetchone()
     print(f"[emit] arm rows {total:,}: both in P {both:,}  one end {one_end:,}  neither {none:,}", flush=True)
     # --- the neighbour lists are assembled INSIDE DuckDB, both directions, sorted (-score, mbid)
     # per artist, and streamed out in sorted-MBID order. Python never holds the pair table:
@@ -154,9 +154,9 @@ def main(argv: list[str] | None = None) -> int:
     # consumed. A sort spills cleanly; a per-group list aggregation did not fit beside the
     # threshold curve on this machine (first attempt, 2026-09-10, out of memory at 8 GB).
     con.execute("PRAGMA preserve_insertion_order=false")
-    cur = con.execute(f"""
+    cur = con.execute("""
         WITH k AS (
-            SELECT mbid0, mbid1, score FROM read_parquet('{pq}')
+            SELECT mbid0, mbid1, score FROM read_parquet(?)
              WHERE mbid0 IN (SELECT mbid FROM p) AND mbid1 IN (SELECT mbid FROM p)
         ), u AS (
             SELECT mbid0 AS a, mbid1 AS b, score FROM k
@@ -164,7 +164,7 @@ def main(argv: list[str] | None = None) -> int:
             SELECT mbid1 AS a, mbid0 AS b, score FROM k
         )
         SELECT a, b, score FROM u ORDER BY a, score DESC, b
-    """)
+    """, [pq])
 
     # --- write, in sorted-MBID order, through the builder's own archive layout ---------------
     source = LbdBulkSource.__new__(LbdBulkSource)  # only .name is needed here; no config
