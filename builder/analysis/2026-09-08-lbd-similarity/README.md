@@ -503,6 +503,47 @@ pass, derive `A0`, and re-take the `LBD-C1` read and this diagnosis on it.
 The dated corpus loses deletions (invisible in a dump) and carries today's mapping, so a
 residual below the ceiling is expected even on a perfect date match.
 
+### 5c. `C1-DIAG-1` — the result, read against §5b as written
+
+Corpus rebuilt with `created < 2024-10-01`: stage 0 `C:\unsung-fast\lbd-listens-c2024q3.parquet`,
+sha256 `8a60e2f8…`, **901,308,413 rows (34 % of the full intermediate)**, 28.7 min; 64 buckets,
+796,844,211 partial rows, 26.7 min, 343 GB summed spill, no failure; `T` sha256 `b4a9d48b…`,
+369,762,827 pairs; `A0` sha256 `20f307bf…`, 6,342,139 rows. Same script, same parameters,
+same sample, same read.
+
+| | full corpus (2026-09-01) | dated corpus (as of 2024-10-01) |
+|---|---:|---:|
+| **top band pooled rate (`LBD-G1`'s statistic)** | **0.5844** | **0.6349** |
+| pooled rate, bands 0–3 | 0.394 / 0.536 / 0.564 / 0.604 | 0.430 / 0.579 / 0.630 / 0.659 |
+| median score ratio ours ÷ LB, band 4 | 2.98 | **1.50** |
+| median score ratio, bands 0–3 | 2.33 / 3.31 / 2.93 / 2.61 | 1.36 / 1.53 / 1.49 / 1.42 |
+| top-10 overlap, band 4 | 0.567 | 0.600 |
+| top-100 overlap, band 4 | 0.635 | 0.669 |
+| our `A0` list length, band 4 (median) | 214 | 178 |
+| per-artist median share, band 4 (empty lists excluded) | 0.640 | 0.680 |
+| sampled artists present in our table | 2,945 | 2,918 |
+
+Band-4 decomposition on the dated corpus: matched 0.666, past N 0.068, rank-cut 0.116,
+below threshold 0.033, absent 0.116.
+
+**Reading, per §5b's first branch:** the top-band rate rose above the floor and the score
+ratio halved toward 1. **The dataset date is the largest term in the gap.** Two residuals
+are recorded rather than argued away:
+
+- **The ratio did not reach 1.** At 1.5× on a corpus dated 2024-10, the deployed dataset
+  saw fewer co-listens still — an earlier date (which `created` cannot resolve below its
+  2023-Q4 backfill floor), today's msid→mbid mapping attaching listens the older mapping did
+  not, or both. Not separable from this dump.
+- **The absent bin did not shrink** (0.108 → 0.116): the band-member class (§5a) is dated-
+  corpus-invariant, as it must be — no corpus of ours contains listens attributed to
+  uncredited people.
+
+**What this does and does not license.** It explains the gap's dominant term with a
+controlled single-variable rerun and a pre-stated read. It **does not un-fire `LBD-G1`**,
+which was read as pre-registered on the pinned corpus and stands at 0.5844. Whether the arms
+derived from the pinned corpus may now be read is **`LBD-AM3`, an amendment after a result
+exists, and the owner's decision**. Nothing in §6 is read until he makes it.
+
 ## 6. `LBD-C2a` — pair-table candidate supply
 
 *Pending, and conditional on `LBD-G1` not firing.*

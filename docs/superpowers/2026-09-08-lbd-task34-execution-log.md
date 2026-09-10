@@ -746,3 +746,24 @@ gap is an amendment after the fact, and the owner's.
 Bookkeeping: `--created-before` is a documented diagnostic knob in `lbd_similarity.py`,
 recorded in each manifest, and never set for an arm. A first launch failed on a timestamp with
 a space in it, which `Start-Process` split into two arguments; relaunched in ISO form.
+
+### `C1-DIAG-1` ran and landed on the first of its three pre-stated readings
+
+Figures in README §5c. The corpus as of 2024-10-01 is a third of today's; on it the top band
+reads 0.635 against the 0.60 floor and the score ratio halves from ~3× to ~1.5×. Every band
+moved the same way. **So the dataset date is the largest term**, measured by turning one knob
+and reading a result whose interpretation was fixed before it existed.
+
+**Two residuals stay on the record.** The ratio stopped at 1.5, not 1 — the deployed dataset
+is older than the `created` column can reconstruct, or the mapping has grown, or both. And the
+absent bin is unchanged, because the band-member class is a property of how ListenBrainz
+attributed listens, not of any corpus we can build. That class is the one the owner observed
+in July and three probes could not attribute (`CCR-`, `RCC-`, `TCR-`); it is now known to be
+uncredited personnel scored by the deployed job through a mechanism outside the recording
+credit. Forward notes to those records are owed at closeout.
+
+**Nothing further is read.** `LBD-G1` fired on the pinned corpus as pre-registered; the
+diagnosis explains it; whether the arms may be read on an explained gap is an amendment after
+the result and the owner's call. The arms sit on disk, derived and unread, until he makes it.
+
+Machine cost of the whole diagnosis: about 90 minutes detached, no owner time.
