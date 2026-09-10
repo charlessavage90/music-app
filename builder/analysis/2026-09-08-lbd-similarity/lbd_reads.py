@@ -275,6 +275,11 @@ def read_c2a(con: duckdb.DuckDBPyConnection, pairs: Path, out: Path) -> dict:
         "preexisting_reference": summarise(deg_pre, "pre-existing (reference)"),
     }
     out.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    # Per-artist degrees, so the paired comparison LBD-G2 names ("paired sign test over the
+    # fixed 29,892") can be computed between arms without re-reading the pair tables.
+    out.with_suffix(".degrees.json").write_text(
+        json.dumps({"added": deg_added, "preexisting": deg_pre}), encoding="utf-8"
+    )
     return result
 
 
