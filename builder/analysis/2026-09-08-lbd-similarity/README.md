@@ -456,6 +456,21 @@ credit line is a non-last member of a multi-artist credit — rows `T3-P1` drops
 deterministic tiebreak (`T3-D2`), where LB's nondeterministic order would drop each member
 some of the time. That last mechanism is **ours**, and it is ≈ 0.5 % of band-4 rows.
 
+**The credit-less partners are band members, and this is a structural difference no
+reimplementation of current source can close.** Over all five bands, 5,932 archive rows
+(3.3 %) name 1,814 distinct artists that exist in MusicBrainz's `artist` table and have
+**no `artist_credit_name` row**. The most frequent: Christoph Schneider (Rammstein's drummer,
+in 243 sampled artists' lists at a median score of 37), Meg White (193), Matt Kean (Bring Me
+the Horizon's bassist, 105), Johan Söderberg (Amon Amarth, 55), Joey Kramer (Aerosmith's
+drummer, 32, median score 121). The MusicBrainz name matches the name ListenBrainz recorded in
+every one of the 5,932 rows, so these are not re-used MBIDs. Individual members are never
+credited on recordings — the band is — so the deployed job attributed listens to them through
+something other than the recording's artist credit, which is the only attribution
+`artist.py` on master performs. The mechanism is not identifiable from the source pinned
+here; its **size is**: 4.0 % of band-4 rows, which lowers the achievable ceiling on a perfect
+reimplementation of current master from the ≈ 0.99 the pre-registration derived (two-partition
+union only) to **at most ≈ 0.96** in the gate's band, before the dataset date is counted.
+
 ### 5b. What is inferred, and the test that decides it — stated before the test ran
 
 *Inference, labelled as such.* The systematic ~3× score ratio in every band is not a
