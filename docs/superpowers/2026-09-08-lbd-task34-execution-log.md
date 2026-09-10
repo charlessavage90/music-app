@@ -794,3 +794,20 @@ listening question, not a counting one, and this document does not answer it.
 **The owner stop is reached.** Tasks 6 and 7 are conditional on his read of §6. One
 pre-registered run is still unrun — `LBD-A4`, the pairing arm — and is not needed for that
 read; it was deferred to after his decision at the start of this session.
+
+### Closeout 2026-09-10 — the mechanical record
+
+- **Suites:** builder 286 passed, api 290 passed; frontend untouched by this work (its diff here
+  is `main`'s, merged in). The synthetic fixture passes with all seven mutants red after this
+  session's script changes.
+- **D6, the standing context layer**, measured against the memory directory this session's
+  context names (`C:/Users/charl/.claude/projects/C--dev-music-app/memory`): unconditional
+  **51,694 characters**, conditional **2,561 lines** before this closeout's one memory edit —
+  **delta zero on both** against the 2026-09-08 handoff's figures. The memory edit that followed
+  (one trap appended to `deploy-environment-traps.md`) is conditional-layer growth of about
+  seven lines, paid only on recall.
+- **A5:** no listener on 8000 or 5173, no process of this session's left running, every monitor
+  ended. **C1:** nothing written to `TEST-QUEUE.md` — nothing here is pressable. **D2/D3:** no
+  shipped artifact changed; every analysis artifact's identity is in the README.
+- **`NEXT.md`:** 446 → 376 lines; its 2026-09-08 block demoted to `NEXT-ARCHIVE.md` after the
+  seven binding items it carried inline were distilled into the registries.
