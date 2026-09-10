@@ -532,6 +532,41 @@ response either way.
 | **`LBD-G3`** cost | full pass **> 12 h** or spill **> 500 GB** | build and measure `LBD-D2`'s chunked form before any further pass | 12 h / 500 GB |
 | **`LBD-G4`** aggregation feasibility | the `user_id % 16` slice extrapolates to a full-pass peak memory above 24 GB **or** a `T` above 20 billion rows | **do not run the full pass**; go straight to the chunked form. Extrapolate rows linearly in users and memory linearly in rows — both are conservative here, since pairs repeat across users | 24 GB / 20 bn rows |
 
+> ### ⚠ AMENDED 2026-09-10 by `LBD-AM3` — `LBD-G1` FIRED, the gap is diagnosed, and the arms are read anyway, by owner decision
+>
+> **Written AFTER a result existed. This amendment spends the commit-before-results property
+> of `LBD-G1` and of nothing else**, and it is recorded as an owner decision, not a session's.
+>
+> **What happened.** `LBD-C1` read **0.5844** in the top band on the pinned corpus — below
+> the 0.60 floor — so `LBD-G1` fired and `R1` governed: no arm was read. Figures are owned by
+> [`builder/analysis/2026-09-08-lbd-similarity/README.md`](../../../builder/analysis/2026-09-08-lbd-similarity/README.md)
+> §5; **nothing above this note is edited and the 0.5844 reading stands.**
+>
+> **The diagnosis `R1` demanded was taken** (README §5a–5c), and it names the input
+> difference the gate's own consequence column asks for: **the deployed dataset was computed
+> on a far smaller listening corpus.** Our scores are ~3× ListenBrainz's on the same pairs in
+> every band; the dump's `created` column shows about a third of today's mapped listens
+> existed by autumn 2024; and a controlled rerun on the corpus as of 2024-10-01 — one knob,
+> with its three readings committed before it ran (`C1-DIAG-1`) — lifted the top band to
+> **0.6349** and halved the ratio to 1.5×. A second, smaller term is structural: ~4 % of the
+> top band's archive entries are uncredited band members, whom no job over the recording
+> credit can pair, so the "achievable ceiling of ≈ 0.99" in the row above is **≈ 0.96 at
+> most** for a perfect reimplementation of current source. The synthetic sub-check (§6)
+> passed with seven mutants red, which is what separates "inputs differ" from "implemented
+> wrong" here, exactly as the design's §6 intended.
+>
+> **The decision.** The owner ruled 2026-09-10 (option 1 of three, tabled with the diagnosis)
+> that the gap is explained and **`LBD-A0`–`LBD-A3`, already derived from the pinned corpus,
+> may be read** under `LBD-C2a` and `LBD-G2` exactly as written. **The floor is not moved,
+> the reading is not re-taken on the dated corpus, and no criterion value changes.** A later
+> reader must not cite `LBD-C1` as "passed": it fired, was explained, and was overridden.
+>
+> **What it must not be read as.** Not a finding that the reimplementation is faithful beyond
+> what §6's sub-check shows; not licence to re-read any other gate after its result; and not
+> a change to `LBD-C1`'s definition — the two residuals the diagnosis leaves (a ratio of 1.5
+> rather than 1, and the band-member class) are recorded there as lineage, unexplained in
+> mechanism and measured in size.
+
 **`LBD-G4` is a new gate this document adds to the plan**, and it exists because the size of
 `T` is the one quantity nothing on disk bounds. The 1-in-16 slice costs a small fraction of
 the full pass and is the cheapest thing that could change the run plan.
@@ -649,6 +684,24 @@ makes the register worth having, exactly as it is for the document itself.
 **The rule that governs every entry here:** a criterion's *values* are never edited. If a
 later session finds one inconvenient, the answer is an amendment with its own reasoning and
 its own date. That property is the whole point of the document.
+
+---
+
+### `LBD-AM3` — `LBD-G1` fired and was overridden by owner decision after diagnosis
+
+**Dated 2026-09-10. A RESULT EXISTED WHEN THIS WAS WRITTEN** — `LBD-C1` had been read and
+the gate had fired. **This amendment therefore spends the commit-before-results property of
+`LBD-G1`**, and only that; every other criterion, gate and read in this document keeps it.
+The full text is the block under §8's gate table. This entry is the register row.
+
+| | |
+|---|---|
+| **what it adds** | an owner decision: the arms derived from the pinned corpus are read under `LBD-C2a` / `LBD-G2` **despite** `LBD-G1` having fired, because the diagnosis `R1` demanded names the input difference (the deployed dataset's far smaller corpus) and a controlled single-knob rerun with a pre-stated read confirms it |
+| **what it does NOT add** | **no change to any value.** The 0.60 floor stands; the 0.5844 reading stands; `LBD-C1` is not re-taken on the dated corpus for the record; `LBD-G2`'s effect sizes and `LBD-C2a`'s definition are untouched |
+| **what it must not be read as** | "`LBD-C1` passed" — it fired, was explained, and was overridden. Nor as licence to re-read any other gate after its result |
+| **why now** | the alternative (stop at a fired gate with an explained gap) was tabled to the owner beside this one and a third; he chose this, and the read is worthless unless the choice is on the record before the read is taken |
+| **figures** | owned by `builder/analysis/2026-09-08-lbd-similarity/README.md` §5, §5a–5c; **none is restated here** beyond the two gate readings the decision turns on |
+| **identifier** | **`LBD-AM3`**. Collision-checked across every ref on 2026-09-10 (`git grep -lE '\bLBD-AM3\b'` over `refs/remotes refs/heads`): the only hits are this branch's own analysis README naming it prospectively |
 
 ---
 
