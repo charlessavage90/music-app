@@ -1,6 +1,10 @@
 # Handoff — `LBD-` Task 3 complete, Task 4 mid-flight, 2026-09-08
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions, 2026-09-10**, by
+[`2026-09-10-HANDOFF-lbd-task4-owner-stop.md`](2026-09-10-HANDOFF-lbd-task4-owner-stop.md) —
+Task 4 finished and the owner stop was reached. Its must-not-be-reverted list still stands;
+**its "open decision" section is overtaken** (the bucket-4 failure was the memory limit, not
+a heavy tail — see the successor). *(Was: ACTIVE — the CURRENT handoff.)* Superseded
 [`2026-09-07-HANDOFF-lbd-preregistration.md`](2026-09-07-HANDOFF-lbd-preregistration.md) on
 next actions **for the `LBD-` track only**. It does **not** supersede
 [`2026-09-06-HANDOFF-lux-4-artifact.md`](2026-09-06-HANDOFF-lux-4-artifact.md), which remains
