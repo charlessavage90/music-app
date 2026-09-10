@@ -1,0 +1,128 @@
+{
+  "bar_pp": 1.0,
+  "reads": {
+    "A0": {
+      "C2b_whole": {
+        "n": 29892,
+        "share_le_2": 0.09644720995584102,
+        "delta_pp_vs_A0": 0.0,
+        "share_absent": 0.0322494312859628,
+        "gained": 0,
+        "lost": 0,
+        "unchanged": 29892,
+        "sign_test_p": NaN
+      },
+      "C2b_residual": {
+        "n": 5967,
+        "share_le_2": 0.26730350259762026,
+        "delta_pp_vs_A0": 0.0,
+        "share_absent": 0.06753812636165578,
+        "gained": 0,
+        "lost": 0,
+        "unchanged": 5967,
+        "sign_test_p": NaN
+      },
+      "C2b_complement": {
+        "n": 23925,
+        "share_le_2": 0.05383490073145245,
+        "delta_pp_vs_A0": 0.0,
+        "share_absent": 0.023448275862068966,
+        "gained": 0,
+        "lost": 0,
+        "unchanged": 23925,
+        "sign_test_p": NaN
+      },
+      "control_preexisting": {
+        "n": 58793,
+        "share_le_2": 0.04963175888286021,
+        "delta_pp_vs_A0": 0.0,
+        "share_absent": 0.027809433095776707,
+        "gained": 0,
+        "lost": 0,
+        "unchanged": 58793,
+        "sign_test_p": NaN
+      },
+      "control_C2a_same_arm": {
+        "share_le_2": 0.03740131138766225,
+        "delta_pp_vs_A0": 0.0
+      }
+    },
+    "A2": {
+      "C2b_whole": {
+        "n": 29892,
+        "share_le_2": 0.012946607788036933,
+        "delta_pp_vs_A0": -8.350060216780408,
+        "share_absent": 0.00585440920647665,
+        "gained": 23424,
+        "lost": 256,
+        "unchanged": 6212,
+        "sign_test_p": 0.0
+      },
+      "C2b_residual": {
+        "n": 5967,
+        "share_le_2": 0.014412602647896766,
+        "delta_pp_vs_A0": -25.289089994972347,
+        "share_absent": 0.007876654935478464,
+        "gained": 5469,
+        "lost": 17,
+        "unchanged": 481,
+        "sign_test_p": 0.0
+      },
+      "C2b_complement": {
+        "n": 23925,
+        "share_le_2": 0.01258098223615465,
+        "delta_pp_vs_A0": -4.12539184952978,
+        "share_absent": 0.005350052246603971,
+        "gained": 17955,
+        "lost": 239,
+        "unchanged": 5731,
+        "sign_test_p": 0.0
+      },
+      "control_preexisting": {
+        "n": 58793,
+        "share_le_2": 0.011634038065756127,
+        "delta_pp_vs_A0": -3.7997720817104077,
+        "share_absent": 0.006429336825812597,
+        "gained": 32015,
+        "lost": 2028,
+        "unchanged": 24750,
+        "sign_test_p": 0.0
+      },
+      "control_C2a_same_arm": {
+        "share_le_2": 0.0044493509969222534,
+        "delta_pp_vs_A0": -3.295196039074
+      }
+    }
+  },
+  "R8": {
+    "fires": false,
+    "text": "LBD-C2a moves but LBD-C2b does not: our own degree ceiling is absorbing the gain; the graph-level null is BARRED from being read as a supply null (LBD-X1); do NOT propose a ceiling change on this evidence"
+  },
+  "R9": {
+    "fires": false,
+    "text": "LBD-C2b moves but the pre-existing 58,793 move by as much or more: a population artefact, not a supply gain"
+  },
+  "G2_graph_level": {
+    "A2_clears_1pp_bar_with_both_controls": true
+  },
+  "vs_bridge_control_and_CXR_P2": {
+    "A0": {
+      "added_share_le_2_or_absent_delta_pp": -24.719,
+      "added_median_delta": 10.0,
+      "added_share_absent_delta_pp": 3.225,
+      "preexisting_share_le_2_or_absent_delta_pp": -3.1110000000000007,
+      "preexisting_median_delta": 10.0,
+      "nodes_delta": -2599,
+      "edges_delta": 293346
+    },
+    "A2": {
+      "added_share_le_2_or_absent_delta_pp": -33.068999999999996,
+      "added_median_delta": 18.0,
+      "added_share_absent_delta_pp": 0.585,
+      "preexisting_share_le_2_or_absent_delta_pp": -6.9110000000000005,
+      "preexisting_median_delta": 15.0,
+      "nodes_delta": -553,
+      "edges_delta": 501436
+    }
+  }
+}

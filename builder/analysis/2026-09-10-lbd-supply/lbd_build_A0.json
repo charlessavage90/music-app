@@ -1,0 +1,136 @@
+{
+  "arm": "LBD-A0",
+  "amendment": "LBD-AM4 \u2014 fixed population P; bridge-arm drop-list configuration; require_fame=False",
+  "archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\A0",
+    "manifest_sha256": "d6f79076d7d98516b2cee5132d37fc8e6a1da41556da5cf4a0a9a4ef8c65ec50",
+    "payloads": 86854,
+    "neighbour_rows": 11274938,
+    "P_absent_from_arm": 1831
+  },
+  "population": {
+    "artifact": "graph-cxa-adopted.bin",
+    "sha256": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46",
+    "count": 88685
+  },
+  "config": {
+    "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+    "cap_strategy": "trimmed_union",
+    "union_top_j": 50,
+    "union_degree_ceiling": 50,
+    "similarity_rescale": "p99_log_clip",
+    "similarity_damping": 0.0,
+    "filter_special_purpose": true,
+    "drop_no_release_tail": true,
+    "drop_featured_credit": true,
+    "drop_unlistenable": true,
+    "unlistenable_list_path": "unlistenable_drop_algb_20260809.json",
+    "require_fame": false
+  },
+  "elapsed_seconds": 65.7,
+  "builder_log": [
+    "rescale p99 scale=2437 | saturated edges 112820 of 11274938 (1.001%)",
+    "largest component: 86086 of 86854 artists"
+  ],
+  "whole_graph": {
+    "nodes": 86086,
+    "edges": 1102428,
+    "mean_degree": 25.612,
+    "median_degree": 22.0,
+    "p99_degree": 50,
+    "max_degree": 50,
+    "top1pct_degree_mass_frac": 0.01953,
+    "top1pct_cut_size": 861,
+    "nodes_tied_at_the_top1pct_boundary_degree": 13150
+  },
+  "largest_component_retention_vs_P": 0.97069,
+  "ceiling_binds": true,
+  "bound_holds": true,
+  "sets": {
+    "added": {
+      "n": 29892,
+      "n_present": 28928,
+      "share_absent": 0.03225,
+      "median_degree": 14.0,
+      "mean_degree": 17.109,
+      "p10_degree": 3,
+      "p90_degree": 37,
+      "max_degree": 50,
+      "share_le_2": 0.06634,
+      "share_eq_1": 0.03184,
+      "share_le_2_or_absent": 0.09645
+    },
+    "residual": {
+      "n": 5967,
+      "n_present": 5564,
+      "share_absent": 0.06754,
+      "median_degree": 6.0,
+      "mean_degree": 9.385,
+      "p10_degree": 1,
+      "p90_degree": 22,
+      "max_degree": 50,
+      "share_le_2": 0.21423,
+      "share_eq_1": 0.11305,
+      "share_le_2_or_absent": 0.2673
+    },
+    "complement": {
+      "n": 23925,
+      "n_present": 23364,
+      "share_absent": 0.02345,
+      "median_degree": 16.0,
+      "mean_degree": 18.948,
+      "p10_degree": 5,
+      "p90_degree": 39,
+      "max_degree": 50,
+      "share_le_2": 0.03112,
+      "share_eq_1": 0.0125,
+      "share_le_2_or_absent": 0.05383
+    },
+    "preexisting": {
+      "n": 58793,
+      "n_present": 57158,
+      "share_absent": 0.02781,
+      "median_degree": 29.0,
+      "mean_degree": 29.916,
+      "p10_degree": 7,
+      "p90_degree": 50,
+      "max_degree": 50,
+      "share_le_2": 0.02245,
+      "share_eq_1": 0.01043,
+      "share_le_2_or_absent": 0.04963
+    }
+  },
+  "M1_nodes_by_fame_band": {
+    "0": {
+      "P": 17711,
+      "built": 15917,
+      "share_retained": 0.89871
+    },
+    "1": {
+      "P": 17711,
+      "built": 17337,
+      "share_retained": 0.97888
+    },
+    "2": {
+      "P": 17711,
+      "built": 17529,
+      "share_retained": 0.98972
+    },
+    "3": {
+      "P": 17711,
+      "built": 17631,
+      "share_retained": 0.99548
+    },
+    "4": {
+      "P": 17715,
+      "built": 17670,
+      "share_retained": 0.99746
+    },
+    "unknown": {
+      "P": 126,
+      "built": 2,
+      "share_retained": 0.01587
+    }
+  },
+  "finished_utc": "2026-09-10T23:53:19.073643+00:00"
+}

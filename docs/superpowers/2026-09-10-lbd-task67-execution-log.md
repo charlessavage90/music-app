@@ -136,3 +136,35 @@ score-2 mass is 46 % of `T`, yet dropping it moves the added set's dead-end shar
 tenths of a point at limit 100. Descriptive; the owner reads it. The A0 archive digest is
 identical across emitter versions 1 and 3 (`c13c2250…`, 86,854 payloads) — `LBD-D5`'s
 determinism, observed.
+
+## Step 4 — Task 7: the builds, the reads, and what was decided in reading them
+
+- **`A2` restricted to `P` is 1.6× `A0`, not 7×.** Of `A2`'s 80.6 M derived rows only 8.8 M have
+  both ends in `P`; 49.9 M have one end outside. That is the population confound as a number,
+  and it is exactly why `LBD-AM4-1` fixed `P`: a build over the table's own population would
+  have been read as "A2 is seven times richer" when, for the artists the app has, it is not.
+- **The drop lists were inert in the build, not just in the probe.** Neither build logged a
+  drop line (the builder logs only nonzero counts): 0 special-purpose, 0 nameless, 0 from each
+  list. The coverage probe predicted it; the build observed it.
+- **`A0` was built twice**: once against the archive from emitter version 3, once against the
+  re-emission by the final script (identical payload digest, new `MANIFEST.json`). The second
+  build's record is the committed one; the first is kept at `C:\unsung-fast\lbd-archives\
+  lbd_build_A0.first.json` and the two are compared below.
+- **Reads taken in the pre-registration's order** with `lbd_c2b_compare.py`: `LBD-G2` graph
+  level with both controls, then `R8`, then `R9`, then the strata descriptively. `A2` clears;
+  `R8` and `R9` do not fire. The one reading that needed thought: `LBD-C2b` moves *more* than
+  `LBD-C2a` (−8.35 against −3.30). The mechanism is that `A0`'s *map* is far sparser for the
+  added set than `A0`'s *table* (9.6 % dead ends against 3.7 %) — the top-*j* union and the
+  ceiling delete their weak edges — and `A2` supplies enough candidates that the cap rule keeps
+  more. That is `LBD-X1`'s mechanism running the other way; the amendment's held-constant table
+  said the ceiling is "not constant in effect", and here is the effect.
+- **256 added artists lose connections under `A2`.** Reported, not explained away: the cap
+  rule re-selects from a larger candidate set and an edge can be displaced. Small, real.
+- **Against the bridge control, differences only.** The control's figures stay in the ceiling
+  probe's README; the README here states the deltas as its own figures. The `A0` row's
+  difference is "our recomputation on today's data" against "the deployed lists", with every
+  lineage term of the Task 4 diagnosis bundled in — the README says so above the table, because
+  a reader will otherwise attribute the whole 25 points to the reimplementation.
+- **Not done, deliberately:** no path, no routing read, no blind listen, no `NEXT.md` rewrite
+  (that is `closeout`'s), no population rule. `top1pct_degree_mass_frac` is in the JSON and not
+  read, per the ceiling probe's own forward correction (the ceiling binds in both arms).
