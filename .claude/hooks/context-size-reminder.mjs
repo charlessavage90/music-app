@@ -7,9 +7,9 @@
 // threshold, it adds a single line of context, ONCE per session. It never blocks.
 //
 // Context size is the last assistant turn's input + cache-read + cache-creation tokens, read
-// from the tail of the transcript. Threshold: DLS_CONTEXT_REMIND_TOKENS, default 400000. The
-// 28 retained sessions of 2026-09-10 averaged 261k tokens per turn and peaked at 665k with no
-// compaction; 400k is a starting point, not a measured degradation onset.
+// from the tail of the transcript. Threshold: DLS_CONTEXT_REMIND_TOKENS, default 400000 — a
+// starting point set against the session-length measurements that findings `DLS-M2` owns, not
+// a measured onset of degradation.
 //
 // The once-per-session marker lives in .claude/logs/ (gitignored). Any failure is swallowed.
 

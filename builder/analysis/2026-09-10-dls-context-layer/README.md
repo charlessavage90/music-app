@@ -6,7 +6,7 @@ cite that document, not this directory.
 
 The scripts read Claude Code session transcripts under `~/.claude/projects/`, which are
 **machine-local and pruned by retention**. Re-running them later measures a different sample;
-the figures record what was on disk on 2026-09-10 (28 main sessions, 45 subagent transcripts).
+the figures record what was on disk on 2026-09-10 (the sample is described in the findings' §0).
 
 | Script | Measures |
 |---|---|
