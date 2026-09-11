@@ -180,3 +180,25 @@ cannot be shown to stay silent proves nothing by speaking.
 
 **The instrument stays in place until C1 is read.** No session removes the logging hook or the
 rule before three qualifying sessions have run or the window has closed, whichever comes first.
+
+### 6a. Instrument check, 2026-09-10, before merge
+
+These probes ran on the `doc-strategy` branch after the pre-registration above was written and
+before it was committed (`a00d484`). The sample `DLS-T1-C1` reads is sessions after merge, which
+none of this could have seen. Three `claude -p` probe sessions ran in the branch worktree on
+Claude Code 2.1.268:
+
+| Probe | What the session did | Log lines for `.claude/rules/plans.md` |
+|---|---|---|
+| Negative control | Read `builder/README.md` only | **none**: only the two CLAUDE.md files, at session start |
+| Positive control | Read a plan under `docs/superpowers/plans/` | **one**, load reason `path_glob_match` |
+| `DLS-T1-C2` probe (substitute, descriptive) | Wrote a new file under `docs/superpowers/plans/` without reading anything first | **none** |
+
+**Read:**
+- The instrument stays silent when it should and fires when it should, so a result from real use
+  will mean something.
+- The `C2` probe suggests, provisionally, that *creating* a plan without opening one does not bring
+  the rule in. It is one probe session, not the pre-registered sample.
+- **`DLS-T1-C1` is not yet readable**, because its sample starts at merge.
+
+§4's *State* column is as of this document's first commit; status lives in `NEXT.md`.
