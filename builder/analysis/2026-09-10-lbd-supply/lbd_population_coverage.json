@@ -1,0 +1,31 @@
+{
+  "artifact": "graph-cxa-adopted.bin",
+  "sha256": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46",
+  "nodes": 88685,
+  "lists": {
+    "unlistenable_drop_algb_20260809.json": {
+      "drop_list_size": 27262,
+      "drops_from_P": 0,
+      "censused": 117302,
+      "P_uncovered": 0
+    },
+    "unlistenable_drop_algb_20260805.json": {
+      "drop_list_size": 15708,
+      "drops_from_P": 30,
+      "censused": 75000,
+      "P_uncovered": 29837
+    },
+    "no_release_drop_algb_20260802.json": {
+      "drop_list_size": 9501,
+      "drops_from_P": 0,
+      "censused": null,
+      "P_uncovered": null
+    },
+    "featured_credit_drop_algb_20260803_am1.json": {
+      "drop_list_size": 1940,
+      "drops_from_P": 0,
+      "censused": null,
+      "P_uncovered": null
+    }
+  }
+}

@@ -175,6 +175,11 @@ appears only in the arms that succeed.
   cross-comparison with the served map's own figures may treat filtering as matched.
   A re-census is **not** required for this track, and this does not touch `ULC-F4`.
 
+  > ⚠ **Qualified 2026-09-10 by `LBD-AM4-3`** (§10's build-stage block): over the FIXED
+  > population `P` the census guard passes and all three lists are measured inert, so the
+  > build-stage arms pin `drop_unlistenable=True` through the override. `False` remains the
+  > rule for any arm over the table's own population. Nothing above is edited.
+
   Verified from source 2026-09-07, not from the review's prose: `drop_unlistenable: bool =
   True` at `builder/…/config.py:243`, and `pipeline.py:310` raises with a message that
   itself names `drop_unlistenable=False` as *"an experimental control and never a shipping
@@ -340,6 +345,10 @@ beside it carry committed sha256s in Task 1's README, and **every arm reads thos
 - **`LBD-C2b` — graph level, SECONDARY.** *Plain: how many connections do they actually end up
   with in a map we could ship?* Degree in the arm's built graph. It measures our cap rule at
   least as much as it measures ListenBrainz's, which is the point of calling it secondary.
+
+  > ⚠ **Build stage fixed 2026-09-10 by `LBD-AM4`** (§10's block): the arms are built over
+  > the served lineage's own population `P`, so this read lands on `CXR-P2`'s ruler. The
+  > read itself is unchanged.
 
 **Denominator and absence.** Both levels score over **all 29,892**, with an artist absent from
 the arm's table or graph counted as **degree 0**, so the figures are directly comparable with
@@ -643,6 +652,132 @@ ordering spent the build work to reach a decision the pair table already support
 a handoff seam** (`CLAUDE.md`). The session committing this document stops here; the next
 session reads it cold, which is the condition the amendment was written for.
 
+### ⚠ AMENDED 2026-09-10 by `LBD-AM4` — the build stage: population fixed, arms named, drop lists measured, and a descriptive threshold curve
+
+**Written AFTER Task 4's results existed (`LBD-C2a`, README §6) and BEFORE anything was
+emitted or built.** It spends nothing: `LBD-C2b`, `R8` and `R9` have not been read, and this
+amendment changes no value of theirs — it fixes *what is built* so that those reads, when
+taken, are on a controlled comparison. The owner authorised the build stage at the Task 4
+stop on 2026-09-10 (`NEXT.md`'s option 1). Nothing above this block is edited.
+
+**`LBD-AM4-1` — the population is FIXED, and it is the served lineage's own.** *Plain: we
+build the arms over exactly the artists the current extended map contains, and no others, so
+that the only thing that differs between "the map we have" and "the map our own similarity
+would give" is the similarity data.* The set `P` is the node set of `graph-cxa-adopted.bin`
+(sha256 `bc0431c4…`, verified against its manifest sidecar 2026-09-10 and read through the
+shipped `GraphStore`, the `cxr_added_set.py` precedent) — 88,685 artists, of which the added
+29,892 and the pre-existing 58,793 are the pinned files of §3. The emitter writes a payload
+only for an artist in `P`, and writes a neighbour row only when **both** endpoints are in
+`P`. **The arm's own threshold and rank cut are applied as derived over the full corpus**
+(the sha-pinned `A0.parquet` / `A2.parquet` of README §6, never re-ranked inside `P`): the
+restriction is a filter at emission, after the cut, so the arm keeps the meaning §1 gives it.
+**Why:** every graph-level read carries the population confound `LBD-X2` names and the plan
+review measured — a larger population alone moves the supply reading, in the direction that
+flatters every arm. Fixing `P` makes each arm differ from the served lineage's bridge control
+(the ceiling probe's §4, ceiling 50, same population by construction) in **one column, the
+data**, and puts `LBD-C2b` on `CXR-P2`'s own ruler exactly as those bridge arms did. **The
+population rule for adoption is an `S4` question and is NOT decided here**: `P` is an
+experimental control, chosen because it isolates, not because it is what a shipped map would
+contain.
+
+| arm (built) | similarity data | `threshold` | `limit` | population | drop lists | ceiling / top-*j* | isolating baseline |
+|---|---|---|---|---|---|---|---|
+| ceiling probe §4 bridge control *(context, not built here)* | ListenBrainz's deployed lists (`ALG-B` archive) | LB's 10 | LB's 100 | `P` | served (`20260809` via override) | 50 / 50 | — reproduces `CXR-P2` exactly |
+| **`LBD-A0`** | ours, today's corpus, LB's parameters | 10 | 100 | `P` | served, same override | 50 / 50 | the bridge control — **data only** (less `filter_True`, `LBD-X3`) |
+| **`LBD-A2`** | ours, today's corpus | **0** | 100 | `P` | served, same override | 50 / 50 | `LBD-A0` — **`threshold` only** |
+
+*Held constant, and why each genuinely is:* `P` — fixed by the emitter, no arm can add to
+it; the three drop lists — **measured inert on `P`** (`LBD-AM4-3`), so no arm can change what
+they remove; `require_fame=False`, `cap_strategy`, `union_top_j`, `union_degree_ceiling`,
+`similarity_rescale`, `similarity_damping` — `BuilderConfig` defaults, identical across the
+arms. *Named exposures, still not constant in effect:* **`LBD-X1` stands unchanged** — the
+ceiling absorbs more of the supply in the arm that supplies more, and that is exactly what
+`R8` reads; and the p99 rescale recomputes per arm but **cannot move a degree read**, because
+the cap ranks on unclipped strengths (`pipeline.py`, "Rank the cap on UNCLIPPED strengths")
+and with `similarity_damping = 0` those strengths are monotone in the raw score.
+
+**`LBD-AM4-2` — the arms built, in order: `LBD-A0`, then `LBD-A2`.** *Plain: first the
+control — our own recomputation at ListenBrainz's settings — then the one arm the pair table
+said carries the movement.* **`LBD-A1` is not built**: at the pair-table level it did not
+clear `LBD-G2` on the whole set (README §6), and a graph-level figure can only be smaller, so
+it cannot inform the build decision; it is not barred, and remains buildable under a later
+amendment. **`LBD-A3` is BARRED from building.** *Plain: the "everything, no cut" arm cannot
+be turned into a map on this machine and would tell us almost nothing `A2` does not.* Reason,
+from README §6's partner-count column: the corner's per-artist partner lists are roughly an
+order of magnitude longer than `A2`'s on every stratum (and more than that on the
+pre-existing set), so its archive is both directions of every row of `T` (row count owned by
+README §5) held as Python neighbour objects in `build_from_archive`'s first pass — far beyond
+this machine's memory — while its pair-level movement on the residual stratum is within a
+tenth of a point of `A2`'s (README §6). **`LBD-A4` is not run** (it stays deferred with the
+condition `NEXT.md` records; no read here depends on it).
+
+**`LBD-AM4-3` — the drop lists: `drop_unlistenable=True` through the shipped override, and
+this SUPERSEDES `LBD-X3`'s `False` for the fixed population ONLY.** *Plain: because we build
+over exactly the artists the extended map already kept, the filters that shaped that map can
+be applied unchanged and remove nobody — which is what "held constant" should mean.*
+Measured 2026-09-10 before this was written (`builder/analysis/2026-09-10-lbd-supply/lbd_population_coverage.py`, its JSON beside it;
+the figures are recorded here because the amendment turns on them and nowhere else owns them):
+
+| list | censused population covers `P`? | members of `P` it would drop |
+|---|---|---|
+| `unlistenable_drop_algb_20260809.json` (the re-censused payload, applied via `unlistenable_list_path` exactly as the ceiling probe's §4 bridge arms did) | **yes — 0 of 88,685 uncovered** | **0** |
+| `no_release_drop_algb_20260802.json` (`config.algorithm` = `CANDIDATE_ALGORITHM`, default on) | n/a — no guard | **0** |
+| `featured_credit_drop_algb_20260803_am1.json` (same key, default on) | n/a — no guard | **0** |
+| *for the record:* `unlistenable_drop_algb_20260805.json`, the current DEFAULT | no — 29,837 uncovered; would refuse | 30 |
+
+So every arm builds with `algorithm=CANDIDATE_ALGORITHM`, `drop_unlistenable=True`,
+`unlistenable_list_path=…/unlistenable_drop_algb_20260809.json`, and the other two drops at
+their defaults — the bridge arms' exact configuration, plus `require_fame=False`. **`LBD-X3`
+is not wrong and is not edited**: it describes an arm over the *table's own* population,
+where the census guard refuses; over `P` the guard passes and the lists are inert, which is a
+property of `P`, not of the arms. An arm ever built over a different population returns to
+`LBD-X3`'s `False`. `ULC-F4` is untouched.
+
+**`LBD-AM4-4` — the reads.** `LBD-C2b` is read **exactly as §3 and §9 fix it**: share ≤ 2
+over all 29,892 with absent counted as degree 0, versus `LBD-A0`, `LBD-G2`'s 1-point bar
+**with both controls** (the pre-existing 58,793 as the within-arm reference, and the arm's
+own `LBD-C2a` figure from README §6). `R8` and `R9` are read as written. In addition, and
+**descriptively only** (the shape `LBD-AM1` gave `LBD-C2a`): `LBD-C2b` is reported over the
+residual stratum and its complement, side by side; no gate is attached to either. **`LBD-M1`
+is reported descriptively** — node count per arm against `P`, by the served artifact's fame
+band where `fame_lb` is known from the `CXA` metadata and "unknown" otherwise; it decides
+nothing and feeds `S4`. And, **for each arm, its added-set figures are set beside `CXR-P2`
+and beside the ceiling probe's §4 bridge control**, cited from their owners and never
+restated — the bridge control is the row that differs from `LBD-A0` in the data alone.
+
+**`LBD-AM4-5` — a descriptive threshold curve from `T`, with no gate and no effect size.**
+*Plain: before the second build, look at how the number of dead ends among the added artists
+changes as the strength bar is lowered one notch at a time — so the owner can see whether
+"accept every connection however weak" is where the gain is, or whether most of it arrives by
+a bar of 2 or 3.* From `T` (sha256 `03d47b05…`, verified 2026-09-10), for the added set, the
+residual stratum, its complement and the pre-existing set: the dead-end share (≤ 2 distinct
+partners, absent counted as 0), the share absent, and the median partner count, at
+`threshold` ∈ {0, 1, 2, 3, 4, 5, 7, 10}, each at `limit` 100 and at no limit — sixteen
+derivations, each a pure filter and window over `T` exactly as §1 defines an arm (`rank()`
+partitioned on `mbid0`; a row's rank does not change when lower-scored rows are filtered
+away, so one ranking serves every threshold). Threshold 10 / limit 100 must reproduce README
+§6's `LBD-A0` row and threshold 0 / limit 100 its `LBD-A2` row, which is the instrument's own
+green check. **It decides nothing.** It is recorded in README §6c of the Task 4 figures
+owner and presented to the owner as **context for whether the second build stays at
+threshold 0** — that choice is his, is not made here, and a build at any other threshold
+would be a further amendment written before that build.
+
+**`LBD-AM4-6` — no criterion value changes.** `LBD-G1`–`LBD-G4`, `LBD-C1`–`LBD-C3`, `LBD-G2`'s
+bars, the 29,892 / 58,793 / 5,967 / 23,925 sets and their shas, and every read in §9 stand
+exactly as written. This amendment adds a population control, names which arms are built, and
+adds descriptive reporting; it moves no threshold and fires no branch.
+
+**Where the outputs land.** Archives at `C:\unsung-fast\lbd-archives\<arm>\` (the plan's
+`D:\unsung-large-data\lbd-archives\` is a spinning disk; the owner's earlier approval of
+staging on `C:` is recorded in the 2026-09-10 handoff), each with a `MANIFEST.json`; figures
+in `builder/analysis/2026-09-10-lbd-supply/README.md`, the emitter and census scripts beside
+it, the threshold-curve script beside the Task 4 scripts it reads with.
+
+**Identifier `LBD-AM4`** (and its sub-items `LBD-AM4-1`–`LBD-AM4-6`). Collision-checked
+across every ref 2026-09-10 (`git grep -lE '\bLBD-AM4\b'` over `refs/remotes refs/heads`,
+`*.md`): free.
+
+
 ## §11 — Claims check
 
 Grepped and fetched 2026-09-07, in the worktree at `lb-dump-exploration`:
@@ -684,6 +819,24 @@ makes the register worth having, exactly as it is for the document itself.
 **The rule that governs every entry here:** a criterion's *values* are never edited. If a
 later session finds one inconvenient, the answer is an amendment with its own reasoning and
 its own date. That property is the whole point of the document.
+
+---
+
+### `LBD-AM4` — the build stage: population fixed, arms named, drop lists measured, threshold curve
+
+**Dated 2026-09-10. Task 4's results existed when this was written; no build-stage read
+(`LBD-C2b`, `R8`, `R9`) did**, so it spends no commit-before-results property. The full text is
+the block at the end of **§10**, with pointer notes beside `LBD-X3` (§0) and `LBD-C2b` (§3).
+This entry is the register row.
+
+| | |
+|---|---|
+| **what it adds** | a population control: the arms are emitted and built over exactly the node set of `graph-cxa-adopted.bin` (`LBD-AM4-1`), so each differs from the ceiling probe's §4 bridge control in the data alone; the arm list — `LBD-A0` then `LBD-A2`, `A1` not built, `A3` barred, `A4` not run (`-2`); the drop-list configuration, measured rather than assumed — the re-censused payload covers `P` and all three lists remove nobody from it, so `drop_unlistenable=True` via the override supersedes `LBD-X3`'s `False` **for `P` only** (`-3`); descriptive reporting of `LBD-C2b` by stratum and of `LBD-M1` (`-4`); a descriptive threshold curve from `T` (`-5`) |
+| **what it does NOT add** | **no change to any value** (`-6`). `LBD-C2b`'s read and `LBD-G2`'s bars stand; `R8`/`R9` are read as written; no gate is attached to the curve or to the strata |
+| **what it must not be read as** | a population rule for adoption — `P` is an experimental control and `S4` is untouched; or a weakening of `LBD-X1` — the ceiling still absorbs supply and `R8` is where that shows; or a threshold decision — the curve is context for the owner |
+| **why now** | the owner authorised Tasks 6–7 at the Task 4 stop; the plan's Task 7 as written builds over the table's own population, which the review measured as a confound that flatters every arm, and the ceiling probe had already shown the fixed-population bridge form lands on `CXR-P2`'s ruler |
+| **figures** | the coverage counts the amendment turns on are recorded in its own block (nowhere else owns them); every build figure is owned by `builder/analysis/2026-09-10-lbd-supply/README.md`, the curve by the Task 4 README §6c |
+| **identifier** | **`LBD-AM4`**, sub-items `LBD-AM4-1`–`-6`. Collision-checked across every ref on 2026-09-10: free |
 
 ---
 
