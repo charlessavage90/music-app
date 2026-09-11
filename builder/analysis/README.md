@@ -137,7 +137,7 @@ against new code, this table says which quantities are the same quantity.
 | `GraphStore.popularity` | `GraphStore.pop_raw` | log-scaled score-weighted in-degree, 0–1. **A value, not a percentile.** |
 | `Graph.popularity` (builder) | `Graph.pop_raw` | same, builder side |
 | `GraphStore.hub_penalty` | `GraphStore.degree_hub_penalty` | derived from **degree**, not popularity and not fame |
-| `ApiConfig.w_hub` | `ApiConfig.w_degree_hub` | weight on the degree-based term above |
+| `ApiConfig.w_hub` | `ApiConfig.w_degree_hub` | weight on the degree-based term above — **no alias**: `e724e40` removed the field outright, and no script here reads it (the `w_hub` in `tb_p5_probe_rewalk.py` is a local bound to `cfg.w_degree_hub`; `2026-07-22-c3-bypass-mechanisms/` names it only in docstrings). *Row corrected 2026-09-10; it had claimed the alias was still readable.* |
 | `PathMetrics.hubfrac` | `PathMetrics.top1pct_degree_frac` | fraction of interior nodes in the frozen **top-1%-by-degree** set |
 | `PathMetrics.mean_interior_pop` | `PathMetrics.mean_interior_pop_raw` | mean **raw** popularity of interior nodes |
 | `PathMetrics.max_interior_pop` | `PathMetrics.max_interior_pop_raw` | max raw popularity of interior nodes |
