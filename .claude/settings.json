@@ -1,4 +1,12 @@
 {
+  "env": {
+    "UV_LINK_MODE": "copy",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "enabledPlugins": {
+    "notion@claude-plugins-official": false
+  },
   "permissions": {
     "allow": [
       "Bash(UV_LINK_MODE=copy uv run --extra dev pytest *)",
@@ -16,6 +24,9 @@
       "Bash(aws apprunner list-services *)",
       "Bash(docker info *)",
       "mcp__Snyk__snyk_code_scan"
+    ],
+    "deny": [
+      "Agent(consultant)"
     ]
   }
 }
