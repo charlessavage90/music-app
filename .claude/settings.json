@@ -18,6 +18,29 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/repo-state.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/context-size-reminder.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "permissions": {
@@ -39,7 +62,8 @@
       "mcp__Snyk__snyk_code_scan"
     ],
     "deny": [
-      "Agent(consultant)"
+      "Agent(consultant)",
+      "Read(./docs/reference/**)"
     ]
   }
 }

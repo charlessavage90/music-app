@@ -120,6 +120,18 @@ Each changes a governing convention or what sessions may read, which is why it i
 | `DLS-Q5` | Should reading `docs/reference/` and the narrative journal be blocked by a permission rule, rather than asked of sessions in prose? |
 | `DLS-Q6` | Two hooks: one that reports repo state (other worktrees, uncommitted files) when a session starts, reversing the preference recorded in memory; and one that tells a session when its context has grown past a threshold. |
 
+### 5a. The owner's answers, 2026-09-11
+
+| ID | Answer | What it unlocks |
+|---|---|---|
+| `DLS-Q1` | **Allow top banners** on frozen documents, with a lint check that nothing below the banner changed | Item 5: the frozen-document diff check; map rows stop carrying warnings |
+| `DLS-Q2` | **Generate the map from each document's own role line**; hand-written text only for warnings | Item 5 |
+| `DLS-Q3` | **Stories move word for word, with their rule, into the rule or skill file that loads when it is relevant**; pure history may become HTML comments | Item 4. The path-scoped half waits on the `DLS-T1` read |
+| `DLS-Q4` | **Move verbatim**, with a check that every sentence still exists somewhere; **remove a rule only on evidence that sessions no longer need it, plus his sign-off** | Item 4, which also carries the amendment to `CLAUDE.md`'s "rules never expire" and `closeout` D6's "compressing live prose" wording |
+| `DLS-Q5` | **Deny reads of `docs/reference/**` only**; the narrative journal stays readable, since a session may be asked to update it | Item 3, landed with the instrument |
+| `DLS-Q6a` | **Add the context-size reminder** | Item 3, landed with the instrument |
+| `DLS-Q6b` | **Add the repo-state report at session start** (facts only; it never runs or suggests `session-start`) | Item 3, landed with the instrument. Reverses the preference recorded in memory against a session-start hook |
+
 ## 6. `DLS-T1` — does a path-scoped rule load by itself? (pre-registration)
 
 **Committed before the instrument exists on `main`; the commit timestamp is the evidence.**
