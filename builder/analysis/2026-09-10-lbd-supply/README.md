@@ -28,10 +28,12 @@ only by the checksums below. The JSON results beside this file are committed:
 | identity frame | `D:\unsung-large-data\lbd-inputs\artist_identity.parquet`, sha256 `02b4c8dd…` (Task 1; the MusicBrainz `artist` table of the 2026-09-05 `mbdump`) |
 | the drop lists | `unlistenable_drop_algb_20260809.json` via the shipped `unlistenable_list_path` override; `no_release_drop_algb_20260802.json` and `featured_credit_drop_algb_20260803_am1.json` by `config.algorithm = CANDIDATE_ALGORITHM` |
 
-**`LBD-AM4-3`'s measurement** (`lbd_population_coverage.json`): the `20260809` census covers `P`
-with **0** uncovered, and each of the three lists intersects `P` in **0** artists. The current
-default list (`20260805`, 75,000 censused) leaves 29,837 of `P` uncovered and would refuse.
-**Observed again in the builds (§2): no drop stage removed anyone.**
+**`LBD-AM4-3`'s measurement** (`lbd_population_coverage.py`, its JSON beside this file): the
+coverage counts it produced are owned by the pre-registration's `LBD-AM4-3` block — the
+amendment turns on them and was committed before this document existed, so it carries them and
+this document cites it. In one sentence: the re-censused list covers `P` and no list removes
+anyone from it; the current default list does not cover `P`. **Observed again in the builds
+(§2): no drop stage removed anyone.**
 
 ## 1. The archives — Task 6
 

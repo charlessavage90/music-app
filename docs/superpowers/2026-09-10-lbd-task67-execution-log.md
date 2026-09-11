@@ -168,3 +168,55 @@ determinism, observed.
 - **Not done, deliberately:** no path, no routing read, no blind listen, no `NEXT.md` rewrite
   (that is `closeout`'s), no population rule. `top1pct_degree_mass_frac` is in the JSON and not
   read, per the ceiling probe's own forward correction (the ceiling binds in both arms).
+
+## Closeout 2026-09-10 (evening) — the mechanical record
+
+- **Gate outcomes.** `LBD-G2` at graph level: clears for `A2` with both controls (figures owner
+  §3). `R8`: does not fire. `R9`: does not fire. `R12`'s shape read descriptively: the residual
+  stratum moves most. `LBD-G1` remains fired-and-overridden (`LBD-AM3`); `LBD-G3`/`G4` were Task
+  4's and are unchanged. No gate in this stage failed and none was worked around.
+- **Defects found in the plan itself.** Task 6's pin of `unlistenable_drop_algb_20260805.json`
+  refuses over the fixed population (75,000 censused against 88,685); the `20260809` payload is
+  what covers it — recorded in `LBD-AM4-3`, plan unedited. Task 7's "build every arm" is
+  superseded by `LBD-AM4-2` (`A3` barred, `A1` not built).
+- **Corrections to the prior record.** None overturned. Qualified: `LBD-X3` (for the fixed
+  population only, by pointer note); the plan-review's expectation that a graph-level read
+  would be swamped by the population confound — it was, until the population was fixed, and
+  the size of the swamping is now a number (figures owner §1: `A2` restricted to `P` is 1.6×
+  `A0`, not 7×).
+- **Operational measurements with no other home.** Curve: 9.6 min at 12 GB / 8 threads; ranked
+  intermediate 21.8 GB. Emit: ~2 min per arm. Builds: `A0` 5.9 min, `A2` 7.1 min, each within a
+  few GB. The DuckDB access-violation trap is in Step 2 above and in the curve script's
+  docstring.
+- **Suites** (worktree venvs): builder **286 passed**, api **290 passed**; frontend run from the
+  main tree because the worktree has no `node_modules` and the frontend is untouched — result
+  in the closeout report. No shipped code changed; only `builder/analysis/` and docs.
+- **`docs-lint`:** hard checks passed; every candidate it listed predates this work (restated
+  adjudication figures in July/August pre-registrations).
+- **D6, the standing context layer**, measured against the memory directory this session's
+  context names (`C:/Users/charl/.claude/projects/C--dev-music-app/memory`): unconditional
+  **51,694 characters** (delta **zero** against the previous closeout's 51,694); conditional
+  **2,567 lines** (2,561 + the previous closeout's own memory append; delta from this session
+  **zero** — no memory, skill or agent file was touched).
+- **A4:** no config knob was added; the build configuration is an experimental control pinned
+  per invocation, not a default. **A5:** no listener on 8000 or 5173, no process of this
+  session's left running. **C1:** nothing written to `TEST-QUEUE.md` — nothing here is
+  pressable. **D2:** no shipped artifact and no fixture changed. **D3:** every artifact's
+  identity is in the figures owner and the handoff.
+- **B2 reachability:** `lbd_source.py` is imported by `emit_archive.py` and
+  `lbd_build_census.py`; nothing in shipped code imports any of the five scripts, by design
+  (frozen research code). **B3:** no tests were added; the two instruments carry their own
+  refusal checks — the curve refuses unless it reproduces `A0`/`A2`, the emitter refuses on any
+  checksum mismatch — and the curve's check was exercised only green (it never had cause to go
+  red); recorded as such rather than claimed as evidence.
+- **B1, the audit** (`doc-auditor`, scoped to the diff, lint already run): two findings, both
+  fixed from the record. HIGH — `docs/README.md` carried two rows claiming to be the current
+  handoff on next actions overall (the `UXR-` T8 row and the `LBD-` row; a pre-existing
+  duplication, since the `LBD-` Task 4 row made the same claim beside it); the `UXR-` row now
+  claims its track only. MEDIUM — the coverage counts the `LBD-AM4-3` block owns were restated
+  in the figures owner's §0; the amendment keeps them (it turns on them and was committed
+  first) and the figures owner now cites it. Five other checks clean: identifiers free, links
+  resolve, no frozen document edited, no contradiction with `LBD-AM4`, `NEXT.md` states no git
+  state. **B4:** the three new docstrings were read against their code (sort order, the
+  count-per-direction claim, the `set_stats` semantics) and match. **B5:** nothing in
+  `CLAUDE.md`, `.claude/` or memory describes this stage or the drop-list defaults.

@@ -1,6 +1,6 @@
 # Handoff — `LBD-` Task 4 complete, the owner stop reached, 2026-09-10
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions 2026-09-10 (evening) by [`2026-09-10-HANDOFF-lbd-task67-build-stage.md`](2026-09-10-HANDOFF-lbd-task67-build-stage.md)** — the owner chose option 1 and the build stage ran to its own stop; its "what is on disk" table and "claims that must not be reverted" remain accurate and are not repeated there. Was: ACTIVE, the current handoff. Supersedes
 [`2026-09-08-HANDOFF-lbd-task4-midflight.md`](2026-09-08-HANDOFF-lbd-task4-midflight.md) on
 next actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md),
 which owns it.

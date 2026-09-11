@@ -2178,3 +2178,50 @@ famous-to-famous defect ruling**, the **three candidate path-quality fixes in th
 README** (each needing its own pre-registration), **`PW-9`** (concurrency ladder, gated on his
 approval), the **cap-rule decision** (parked, and it owes a blind listen before any adoption
 whatever any probe says), and **the "Unsung.fm" rename** — no longer his to trigger: **approved 2026-09-08** and in progress under `UXR-` (above). The deployed UI still says "Artist Path" until that ships.
+
+## Demoted 2026-09-10 (evening) — the block current from the `LBD-` Task 4 owner stop
+
+**Last updated: 2026-09-10, at the `LBD-` owner stop.** **Nothing a listener sees changed in this
+work.** The live site is as the 2026-09-08 deploy left it, and **`TEST-QUEUE.md`'s three entries
+are still his to press** — untouched here.
+
+**`LBD-`** — **Task 4 is COMPLETE and the design's owner stop is reached.** Branch `lbd-task3`,
+**PR #113** (addresses only; `gh` says where they are). The pair pass ran to the end, `T` and the
+four arms exist on `C:`, and both pre-registered reads are taken. **What was found, in plain
+terms** (figures owned by `builder/analysis/2026-09-08-lbd-similarity/README.md` §4–§6 and
+restated nowhere): **the listening data IS there** — dropping ListenBrainz's strength bar removes
+almost every dead end among the ~29,900 added artists, and most of all among the ones our own
+ceiling cannot reach; lifting their hundred-connection cap on its own does not. `LBD-R1` is
+refuted; `R4` fires; `R12` does not. ⚠ **`LBD-G1` (fidelity) FIRED first and was OVERRIDDEN by
+the owner after a diagnosis** — ListenBrainz's deployed lists were computed on roughly a third
+of today's corpus — recorded as **`LBD-AM3`**, written after the result and saying so; **never
+cite `LBD-C1` as passed.** A second finding closes an old question: the "central but
+unlistened" band-member class the owner saw in July is uncredited personnel ListenBrainz's
+deployed job scored by a mechanism outside the recording credit, which is why three probes on
+our side found nothing. Entry point:
+[`2026-09-10-HANDOFF-lbd-task4-owner-stop.md`](2026-09-10-HANDOFF-lbd-task4-owner-stop.md).
+
+**`LUX-4`, `UXR-`, `DFA-`** are deployed or merged and their records are closed; nothing from
+their 2026-09-08 block still needs saying here beyond what the registries below carry.
+`UXR-`'s remaining tasks after its second seam are the redesign handoff's to say, not this file's.
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
+not record how far down the list he has got.**
+
+1. **Run the three queued use-the-app tests** — the redesign, the artist card, the bypass
+   button — live since the 2026-09-08 deploy. Nothing here changed them.
+2. **Merge PR #113.**
+3. **Decide the `LBD-` next step.** The design's §5 places the stop here so the build work is
+   spent only if the pair table says the data exists, and it does. Three options were tabled
+   with the result, and the session's preference and reasoning are in the execution log:
+   **(1)** proceed to Tasks 6–7 — emit an arm, build, read `LBD-C2b`, blind-listen;
+   **(2)** pre-register an intermediate threshold arm first, because the one thing a pair
+   count cannot see is whether single-listener pairs are connections anyone wants;
+   **(3)** stop with the hypothesis refuted. **None of these starts on a session's initiative.**
+4. **If he proceeds:** `LBD-A4` and `LBD-M1` are the two unrun descriptive items, then Tasks 6
+   and 7 under a fresh read of the plan, with `drop_unlistenable=False` per `LBD-X3`.
+
+**The standing items that the 2026-09-08 block carried inline — the two corrections that must
+not be reverted, the archive pin, the 2026-09-04 rulings, `LUX-E2`, `ULC-F4`, the Snyk
+deferral, and the owner's open list — are distilled into the registries below and the block
+is in `NEXT-ARCHIVE.md`.**
