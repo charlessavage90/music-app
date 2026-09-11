@@ -100,6 +100,10 @@ read measured where it can and cannot be moved; the results note owns that readi
   2026-07-29 famous-to-famous defect ruling**, and **the three candidate path-quality fixes in
   the `CXR-` README** (each needs its own pre-registration) — all open, none blocking, all his
   trigger. *(Carried from the 2026-09-08 status block, distilled 2026-09-10.)*
+- **`DLS-Q1`–`DLS-Q6`** — six documentation-strategy questions: frozen-document banners,
+  per-document map rows, where incident stories go, amending "never compress", blocking reads
+  of `docs/reference/`, and two session hooks. His; they gate the plan for `DLS-` items 4–6.
+  Entry point: [`findings/2026-09-10-documentation-layer-strategy.md`](findings/2026-09-10-documentation-layer-strategy.md) §5.
 
 - ~~**Whether the fame instrument is fixed BEFORE or AFTER the graph work**~~ — **RULED
   AND DONE 2026-08-02: before, and it was.** The `FPC-2`/`FPC-9` pairing rule stays for
@@ -309,6 +313,7 @@ its **topmost** heading says so.)*
 
 | Finding | Condition |
 |---|---|
+| **The `DLS-T1` read** (*when a session opens a plan or a spec, does a rule scoped to those folders arrive in its context without anyone asking for it?*). The instrument is armed by the `doc-strategy` PR: **do not remove `.claude/rules/plans.md` or the `InstructionsLoaded` logging hook before this is read.** | **Three qualifying sessions after merge, or 2026-09-24**, whichever comes first — read per [`findings/2026-09-10-documentation-layer-strategy.md`](findings/2026-09-10-documentation-layer-strategy.md) §6. |
 | ✅ **`LBD-M1` (population per arm)** | **DISCHARGED 2026-09-10** — reported descriptively by fame band for both built arms, figures owner §2. Struck, kept for the record. |
 | **`LBD-A4` (the pairing arm)** — still unrun; `LBD-AM4-2` said so and no read here depended on it. | **Before any further `LBD-` arm is pre-registered** (a threshold amendment, or `S4`): `LBD-D6` requires every later arm to record its pairing semantics. If the track stops at the build-stage stop, closed with it. |
 | **`LUX-E2`** — blocked on the damaged `TAS-` sample; per-field population coverage is **not** a substitute read. | **A repaired sample.** Nothing in flight repairs it. |
