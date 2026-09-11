@@ -5,6 +5,9 @@ dist/
 # Deploy-time secrets (site password, origin secret). Never committed — a
 # password in a committed file is in the repository's history permanently.
 .env.deploy
+# Per-machine Claude Code permissions. Was ignored only by the owner's machine-wide git
+# ignore, so a clone anywhere else would have offered it for commit.
+.claude/settings.local.json
 __pycache__/
 *.pyc
 .venv/
