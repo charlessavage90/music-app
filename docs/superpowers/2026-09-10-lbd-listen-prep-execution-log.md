@@ -64,3 +64,45 @@ owner; this task instructs the session to fix the set. A rule written and commit
 output exists is the form of that instruction that cannot select on anything: `lbl_pairs.py`'s
 docstring is the rule, and its commit precedes the commit of `lbl_pairs.json`. The owner may still
 amend the pairs **before any journey exists** without spending the pre-registration.
+
+**What the two measurements returned** (both committed beside their scripts; the amendment carries
+the counts it turns on):
+
+- **The drop lists — the one result that changed the configuration.** `LBD-AM4`'s `20260809`
+  payload covers `V` but **would drop 31 members of `V`**; the served lineage's own `20260805`
+  covers `V` and drops none; the other two drop none. The instruction said "same build configuration
+  as the fixed-population A0" *and* "re-measure coverage for this population" — the second exists
+  for exactly this case. Building with `20260809` would make listen 1 differ from the served map in
+  a second column (31 served artists removed), so `LBD-AM5-3` pins `20260805`. It is `LBD-AM4-3`'s
+  principle — use the list that removes nobody from the population — applied to `V`. These are very
+  likely the same 31 as `NEXT.md`'s "a rebuild came to silently differ from the live map by 31
+  artists"; not checked, because nothing turns on it.
+- **`V ∩ P` equals the pinned pre-existing set exactly (58,793); `V − P` = 45.** That is the
+  read-validity check.
+- **The pair draw:** 125 pool artists, 16 `GBL-AM1` endpoints excluded (the approved set has 16
+  distinct endpoints, not 15 as first assumed here), **109 eligible, no other exclusion fired**, 24
+  pairs drawn using the pool only to rank 64; four artists skipped a directly-connected candidate;
+  every paired artist has ≥ 100 partners inside `V` in `LBD-A0`'s table. `lbl_pairs.json` sha256
+  `da2ad2d7…`, rule script `4addf375…`.
+
+**Decisions taken in writing `LBD-AM5`, each the session's (methodology) rather than the owner's:**
+
+- **Two axes, each with its own bar, and d0 inside the tally.** `GBL-` §6.1 says the next protocol
+  must state what each row scores or give the axis questions thresholds; asking both per row does
+  both. d0 enters the tally because `GBL-`'s reason for excluding it (its intervention was a ramp,
+  inert before a press) does not apply to a map swap, and `GBL-` §2.4 is the record that a swap is
+  heard at d0. The bar follows `GBL-`'s own scaling rule (0.3 per row, rounded up → 8 of 24).
+- **Underpowered is a read, not a footnote** (`GBL-` §6.2): lost rows ≥ the bar on an axis with no
+  decisive margin.
+- **A split is FAIL**, on `WHAT-GOOD-LOOKS-LIKE` value 8.
+- **Clips: up to three per artist, keyed by MBID with the served artifact's Deezer id for both
+  sides.** `GBL-` forced name-based clips because its two artifacts disagreed on ids; here every
+  presented artist is in `V` and one id source serves both sides, so the app's own id-first path is
+  non-differential and closes the wrong-artist class (`BYP-13`) that cost `GBL-` rows. Extra tracks
+  answer `CAU-` §2.3.
+- **Mechanical reserves instead of an owner swap at the run-state gate.** `GBL-`'s runner had to
+  stop and wait for a replacement pair; ordered reserves applied by the script keep the runner
+  mechanics-only and no one sees a journey in the process.
+- **`LBD-D6` surfaced, not decided.** `NEXT.md` defers `LBD-A4` "before any further `LBD-` arm is
+  pre-registered"; `LBD-A5` is such an arm, registered on the owner's instruction. The amendment
+  records that it was not preceded by `LBD-A4` and leaves the ruling to him.

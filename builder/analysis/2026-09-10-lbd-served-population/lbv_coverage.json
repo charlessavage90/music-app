@@ -1,0 +1,98 @@
+{
+  "served": {
+    "artifact": "graph-msw-tu50.bin",
+    "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+    "nodes": 58838
+  },
+  "extended": {
+    "artifact": "graph-cxa-adopted.bin",
+    "sha256": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46",
+    "nodes": 88685
+  },
+  "V_intersect_P_equals_pinned_preexisting": true,
+  "preexisting": {
+    "file": "D:\\unsung-large-data\\lbd-inputs\\cxr_preexisting_mbids.txt",
+    "sha256": "768054b7e84769346193336ec7e9b3496af92d0d3e8d4ae2fb287057912b5229",
+    "count": 58793
+  },
+  "V_minus_P": {
+    "count": 45,
+    "mbids": [
+      "1a0a7f99-e6a8-40df-8b95-4f8bc5f45f63",
+      "1e8404c6-5404-466b-a664-d2587d5f075b",
+      "21de845b-4e38-42b7-a33a-399b4b7e424c",
+      "2660e90b-bf54-4503-a8cf-121169d8b93b",
+      "3adb3661-0d5b-4b0b-8ed4-f859d46d5494",
+      "3f2acb91-4593-4cc8-afea-582006f4ce98",
+      "496c911c-a78b-4608-ace4-c23c7d3119c2",
+      "4f00c667-eb8c-41c6-840d-a62cb3329c16",
+      "541bc91f-ec56-4873-a47e-c9d8a9efba92",
+      "6a0ce9fd-5cda-4b3e-9b32-e411f2c2a57f",
+      "6a5e76de-b181-4f3a-b7c8-c203d88a9331",
+      "76efdd0c-c2eb-4b80-8aee-a9a6d121033d",
+      "7d0b9703-bcb9-46b6-9f5b-3a3c67adf97b",
+      "80f0f9d7-c3ab-444a-b838-b47c8148746a",
+      "8eb58532-51a9-4f58-b4ca-4ac70a4a8fad",
+      "90a60c2c-3a13-4670-b72e-5452a61b0e83",
+      "92178ae0-3b97-4110-a822-d9bf76e81332",
+      "9db9e63c-7e4c-40e3-a9ba-8f87cf9521c1",
+      "9e02f0c0-82c0-437d-8876-29db7b47a614",
+      "9e1631aa-5dc9-48a0-9c59-6d60f497cbbf",
+      "9e585054-a9d2-4f81-912c-6baa1c79553a",
+      "a1b23e2e-9f94-405d-a2d2-32be49580eb2",
+      "a5a58171-7014-4299-b719-7b8d7d8af213",
+      "a5ff0a9e-67ff-4592-806b-dc5471947c76",
+      "aa7eda9c-dd3a-4796-9cc6-fe934eeb3261",
+      "afebcfe2-989d-49a1-9131-00ee84e88b6f",
+      "bcbb0e8a-6182-43e9-9186-3d8082e3a6ee",
+      "c61befd3-62ac-4db2-b3f2-dff87d85f578",
+      "cf63ea5c-aef4-4f1e-99e6-a65b3397b5c4",
+      "cfb6f910-9d7b-4d78-aa7c-1cb80d1e3fae",
+      "d75da228-2908-48a2-9ab0-eba8557add3e",
+      "d91d6fca-ea9c-4a5d-a0ba-5a666c81cd51",
+      "dbb214e0-53b8-467b-8ba8-296817d5bc16",
+      "dc12496b-b394-4a14-9054-f440a1a24951",
+      "dc5d653e-01d1-4260-9b4f-8d962b9f872c",
+      "de1f27e8-9b1b-469e-a74f-84a62d8e2598",
+      "dec89495-c1f5-4388-bb47-ed2a1e8f708f",
+      "e3b43b6a-14b0-4b2a-abd4-a41307cf10a0",
+      "e8379bdf-2e93-4069-abe0-a5e5188ba6d6",
+      "eb72c621-8956-4b0b-a9aa-854d32f31a4f",
+      "f0760509-3306-4bce-9932-a06c8c992adb",
+      "f0b766aa-b6a5-4cfc-98eb-914d1930a17f",
+      "f3a3f7f4-ce84-44d1-a5b7-ea311b3356a4",
+      "f6564fc9-488d-47e8-9406-69c25fd75c16",
+      "fbc407ac-a2cb-430f-be15-908e1a6ff5c9"
+    ]
+  },
+  "lists": {
+    "unlistenable_drop_algb_20260809.json": {
+      "sha256": "a6ec323138c48ceb26a40c8756cb9399caf56a42f27dc485e6e27bfb9b8ec677",
+      "drop_list_size": 27262,
+      "drops_from_V": 31,
+      "censused": 117302,
+      "V_uncovered": 0
+    },
+    "unlistenable_drop_algb_20260805.json": {
+      "sha256": "106ae420ae0eaad7334bdddf9715587cfdaf4fdcec93ffceab78d348598fb39d",
+      "drop_list_size": 15708,
+      "drops_from_V": 0,
+      "censused": 75000,
+      "V_uncovered": 0
+    },
+    "no_release_drop_algb_20260802.json": {
+      "sha256": "88c7f0b7dfacc58cdb749628ac3453ab7027ef12d03b8737be7ef2d1fc1d045d",
+      "drop_list_size": 9501,
+      "drops_from_V": 0,
+      "censused": null,
+      "V_uncovered": null
+    },
+    "featured_credit_drop_algb_20260803_am1.json": {
+      "sha256": "458f9b231002e01b446f07a5982483eedb1939c97ab9743a8b286c41fbfff2e4",
+      "drop_list_size": 1940,
+      "drops_from_V": 0,
+      "censused": null,
+      "V_uncovered": null
+    }
+  }
+}
