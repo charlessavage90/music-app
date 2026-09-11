@@ -297,8 +297,12 @@ def main(argv: list[str] | None = None) -> int:
         # bound is the production tolerance (about -20 %) around the served count.
         node_count=(int(0.8 * served_nodes), served_nodes),
         # Denser is this intervention's expected direction, so the upper bound is the physical one:
-        # every node of V at the degree ceiling.
-        edge_count=(int(0.8 * served_edges), served_nodes * ceiling // 2),
+        # every node of V at the degree ceiling. UNITS: `Graph.edge_count` and the sidecar's "edges"
+        # count CSR entries, i.e. each connection in BOTH directions — so the ceiling is N x c, not
+        # N x c / 2. (`hub_stats`' "edges" is the other unit, degree sum / 2.) The first run carried
+        # `// 2` and was refused on a correct map; corrected from the unit, never from the build's
+        # value — execution log, Step 2.
+        edge_count=(int(0.8 * served_edges), served_nodes * ceiling),
         # Supply moves median degree by design; only a value outside what the ceiling permits is a defect.
         median_degree=(1.0, float(ceiling)),
     )
@@ -363,7 +367,10 @@ def main(argv: list[str] | None = None) -> int:
         "acceptance": {"criteria": dataclasses.asdict(criteria), "passed": True,
                        "production_acceptance_used": False},
         "artifact": {"path": str(artifact), "sha256": manifest["sha256"], "bytes": len(payload),
-                     "artists": listenable.artist_count, "edges": listenable.edge_count},
+                     "artists": listenable.artist_count,
+                     "edge_count_csr_entries_both_directions": listenable.edge_count},
+        "units": "whole_graph.edges (census and served) = connections counted once (degree sum / 2); "
+                 "artifact.edge_count_csr_entries_both_directions and every sidecar's 'edges' = twice that",
         "finished_utc": datetime.now(timezone.utc).isoformat(),
     }
     out_json.write_text(json.dumps(result, indent=2), encoding="utf-8")

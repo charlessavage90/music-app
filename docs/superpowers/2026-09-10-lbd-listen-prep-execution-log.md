@@ -106,3 +106,69 @@ the counts it turns on):
 - **`LBD-D6` surfaced, not decided.** `NEXT.md` defers `LBD-A4` "before any further `LBD-` arm is
   pre-registered"; `LBD-A5` is such an arm, registered on the owner's instruction. The amendment
   records that it was not preceded by `LBD-A4` and leaves the ruling to him.
+
+**Committed:** the rule and probe at `13410fa`, then `LBD-AM5` with both pre-measurements at
+`6e47461` (21:30 −04:00), pushed; draft PR #116 opened. Nothing named by the amendment existed yet.
+
+## Step 2 — derive, emit, build
+
+- **`LBD-A5` derived by `lbd_derive.py` unedited**, through `lbv_derive_a5.py` (which extends its
+  `ARMS` table by one entry rather than copying the SQL). `T` verified before reading. **Green check,
+  and it is a refusal:** the derived table's dead-end share, absent share and median partner count on
+  all four pinned sets must equal the committed curve's (3, 100) cell to float precision — it did, on
+  all four. The instrument had cause to go red only if the derivation diverged from the curve's
+  ranking, which is the defect it exists to catch; it was not separately shown red.
+- **Both archives emitted by the Task 6 emitter unedited**, through `lbv_emit.py`, which verifies the
+  emitter's sha against the supply README's record, repoints the population constant at `V`, and
+  rewrites only the manifest's `amendment` field (payload bytes untouched). Run strictly one DuckDB
+  process at a time (the access-violation trap). Chain wall clock ≈ 6 min in total.
+- **Two defects in this session's own first drafts, caught before anything ran on them:** the derive
+  wrapper read the curve JSON by a key it does not have (`sets` for `curve`), and `lbv_build.py` let the
+  `--map` argument reach a path (Snyk Low, `python/PT`) — fixed by making every path a constant in
+  the `MAPS` table; rescan clean.
+- **The configuration is asserted, not assumed:** `lbv_build.py` refuses unless every held-constant
+  knob equals the served map's recorded configuration and the three drop-list files' bytes equal the
+  shas the served lineage's rebuild recorded (`graph-lux4.bin.json`).
+
+## Step 3 (harness) — written while the builds run; nothing generated
+
+- **A tell `GBL-` did not have, found in design and closed:** the two maps name artists from different
+  sources — `LBD-A0V` from Task 1's MusicBrainz identity frame, the served map from ListenBrainz's
+  neighbour rows. A spelling difference on the same MBID would identify a side. **Every name,
+  disambiguation and clip lookup on the page comes from the served map, by MBID, for both sides**;
+  every presented artist is a member of `V`, so the served map knows all of them.
+- **The press rule is imported, and the import is guarded.** `cre_ladder` puts a frozen copy of the
+  api on `sys.path`; `lbl_generate.py` imports the shipped api modules first and refuses if
+  `artistpath_api.pathfinding` resolves anywhere but `api/src` (`JFX-`'s import order, now asserted).
+- **Generation is exercised on the api's 500-node test fixture, never on the listen's maps** — the
+  seam still forbids this session from routing those (`GBL-` harness log §3.4). That retires most of
+  `GBL-` harness log §5's residual. **One expectation of mine was wrong and the test says so:** the
+  fixture's farthest pair reaches d10 and runs out of interior before d20; the test now asserts the
+  ladder's invariants where it reaches, and a new test shows run-state gate (c) firing on that pair,
+  beside tests for gates (a) and (b). **54 tests pass.**
+- **Committed at `916bc6f`**, pushed.
+- **Gate G2 pre-checked, because its failure would otherwise waste a sitting:** `graph-msw-tu50.bin`
+  (`43dd82bb…`) and `graph-lux4.bin` (`fd92a735…`) are routing-identical on every array
+  `find_journey` reads (`routing_identical`, both verified against their sidecars). It compares
+  artifacts only and computes no journey, so it stays inside the seam; the runner's G2 re-runs it.
+
+## Step 2, continued — the first build run was REFUSED by acceptance, on a defect in my bound
+
+**What happened.** `LBD-A0V`'s census build, all three `LBD-AM5-4` fame checks, and the structural
+comparison passed; then `check_acceptance` refused the listenable map: *"edge count 1569214 outside
+bounds [1052547, 1470950]"*. Nothing was serialised; `LBD-A5V` never started.
+
+**Diagnosis: a unit error in the scaled criteria, not a property of the map.** The census reported
+784,607 edges and the refusal 1,569,214 — exactly twice. `hub_stats` counts each connection once
+(degree sum / 2); `Graph.edge_count`, and every sidecar's `"edges"` (the served map's 1,315,684
+included), count CSR entries in both directions. My physical upper bound, "every node of `V` at the
+ceiling", was written `N × c / 2` — connections counted once — and compared against a
+both-directions count. In the right unit it is `N × c` = 2,941,900. The lower bound (0.8 × the
+sidecar's count) was already in the right unit.
+
+**Why correcting it is not fitting a bound to a build** (`acceptance.py`'s own test: is the new bound
+derived from something known independently of the build that went red?): the corrected value comes
+from the ceiling and the sidecar's unit, both known before any build, and it is the same physical
+ceiling the first draft described in words; the build's 1,569,214 played no part. The refusal also
+shows this instrument can go red. **Recorded rather than quietly fixed**, and the result JSON now
+names both units, because the same two currencies will otherwise be compared in the README.
