@@ -39,6 +39,18 @@ TOKENS = ("L", "R")
 PAIRS_PER_LISTEN = 8
 RESERVES_PER_LISTEN = 4
 
+PAIRS_FILE = HERE / "lbl_pairs.json"
+PAIRS_SHA = "da2ad2d71f5ee2f517a25477d9ba0899763f4066c20ae24aa0b4c5700062c3c9"   # LBD-AM5-5
+MAPS_PIN = HERE / "lbl_maps.json"   # each listen's two maps and their sha256s, from the Step 2 build records
+
+# LBD-AM5-5. The challenger is the LBD- map; the incumbent is the other. Arm roles are written ONLY
+# to the sealed file. Listen 2 is added here only after the owner has heard listen 1.
+ROLES = ("incumbent", "challenger")
+LISTENS = (1,)
+MARGIN = 8                    # ceil(0.3 * 24): GBL-'s scaling rule over 8 pairs x 3 depths
+CLIPS_PER_ARTIST = 3          # CAU- §2.3: one clip is not enough for an unfamiliar artist
+AXES = {"q1": "coherence", "q2": "novelty"}   # LBL-Q1, LBL-Q2
+
 
 def sha256_of(path: Path) -> str:
     h = hashlib.sha256()
@@ -72,6 +84,33 @@ def verified_store(path: Path):
     if len(store.mbids) != manifest["artists"]:
         raise SystemExit(f"REFUSING: {path.name} node count disagrees with its sidecar")
     return store, manifest, digest
+
+
+def load_map(path: Path, pinned_sha: str) -> dict:
+    """One map for a listen: refused unless its bytes match BOTH its sidecar and the pinned sha.
+
+    Also returns the raw `fame_lb` from the metadata blob (the shipped `GraphStore` keeps only
+    percentiles), located exactly as `graph_store.py` locates it and checked against its node order:
+    the press rule needs to know which artists ListenBrainz reported no listeners for.
+    """
+    use_api_src()
+    import artistpath_api.graph_store as gs
+
+    manifest = json.loads(path.with_suffix(path.suffix + ".json").read_text(encoding="utf-8"))
+    payload = path.read_bytes()
+    digest = hashlib.sha256(payload).hexdigest()
+    if digest != manifest["sha256"] or digest != pinned_sha:
+        raise SystemExit(f"WRONG ARTIFACT: {path.name} sha256 {digest}; sidecar {manifest['sha256']}; "
+                         f"pinned {pinned_sha}")
+    store = gs.GraphStore.from_bytes(payload)
+    _magic, _version, n, e, meta_len = gs._HEADER.unpack_from(payload)
+    cursor = gs._HEADER.size + (n + 1) * 4 + e * 4 + e * 4 + e * 1
+    meta = json.loads(payload[cursor : cursor + meta_len])
+    if list(meta["mbids"]) != list(store.mbids):
+        raise SystemExit(f"WRONG ARTIFACT: {path.name} metadata disagrees with the shipped parser")
+    if store.fame_lb_pctl is None or "fame_lb" not in meta:
+        raise SystemExit(f"WRONG ARTIFACT: {path.name} carries no fame; the router's ramp cannot price it")
+    return {"path": path, "sha256": digest, "store": store, "raw_fame": list(meta["fame_lb"])}
 
 
 def _bare(arg: str) -> str:
