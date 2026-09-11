@@ -1,0 +1,14 @@
+{
+  "_note": "LBD-AM5-5. Each listen's two maps, pinned by sha256 from the Step 2 build records (builder/analysis/2026-09-10-lbd-served-population/README.md §5). Roles only; the left/right assignment is sealed at generation. Listen 2 is added only after the owner has heard listen 1.",
+  "listen1": {
+    "incumbent": {
+      "path": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+    },
+    "challenger": {
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBD-A0V.bin",
+      "sha256": "494c53d52654f6918a4176eef91f291558b0e56d71a4ea16c8070ad8ba3e34bb"
+    },
+    "served_sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "map": "LBD-A0V",
+  "arm": "LBD-A0",
+  "amendment": "LBD-AM5",
+  "script_sha256": "877e8161fbe54d90ce29e3120f7aa63a9c690948a7149ba44c73949b893bd9ce",
+  "archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\A0V",
+    "manifest_sha256": "7f555e1439b97487d4dc95164dae980d3fa7c97f1f41017941f2d3f8f09199ae",
+    "payloads": 57620,
+    "neighbour_rows": 8350272,
+    "V_absent_from_arm": 1218
+  },
+  "served": {
+    "artifact": "graph-msw-tu50.bin",
+    "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+    "nodes": 58838,
+    "edges": 1315684,
+    "whole_graph": {
+      "nodes": 58838,
+      "edges": 657842,
+      "mean_degree": 22.361,
+      "median_degree": 17.0,
+      "p99_degree": 50,
+      "max_degree": 50,
+      "top1pct_degree_mass_frac": 0.02235,
+      "top1pct_cut_size": 588,
+      "nodes_tied_at_the_top1pct_boundary_degree": 7921
+    },
+    "sets": {
+      "preexisting": {
+        "n": 58793,
+        "n_present": 58793,
+        "share_absent": 0.0,
+        "median_degree": 17.0,
+        "mean_degree": 22.37,
+        "p10_degree": 3,
+        "p90_degree": 50,
+        "max_degree": 50,
+        "share_le_2": 0.08858,
+        "share_eq_1": 0.04691,
+        "share_le_2_or_absent": 0.08858
+      },
+      "V_minus_P": {
+        "n": 45,
+        "n_present": 45,
+        "share_absent": 0.0,
+        "median_degree": 3.0,
+        "mean_degree": 10.2,
+        "p10_degree": 1,
+        "p90_degree": 32,
+        "max_degree": 50,
+        "share_le_2": 0.46667,
+        "share_eq_1": 0.35556,
+        "share_le_2_or_absent": 0.46667
+      }
+    }
+  },
+  "config": {
+    "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+    "cap_strategy": "trimmed_union",
+    "union_top_j": 50,
+    "union_degree_ceiling": 50,
+    "similarity_rescale": "p99_log_clip",
+    "similarity_damping": 0.0,
+    "filter_special_purpose": true,
+    "drop_no_release_tail": true,
+    "drop_featured_credit": true,
+    "drop_unlistenable": true,
+    "unlistenable_list_path": "unlistenable_drop_algb_20260805.json",
+    "require_fame_census": false,
+    "require_fame_listenable": true
+  },
+  "held_constant_equal_to_served_config": true,
+  "drop_lists_equal_to_served_lineage": true,
+  "census": {
+    "elapsed_seconds": 47.2,
+    "builder_log": [
+      "rescale p99 scale=2926 | saturated edges 83534 of 8350272 (1.000%)",
+      "largest component: 57142 of 57620 artists"
+    ],
+    "whole_graph": {
+      "nodes": 57142,
+      "edges": 784607,
+      "mean_degree": 27.462,
+      "median_degree": 25.0,
+      "p99_degree": 50,
+      "max_degree": 50,
+      "top1pct_degree_mass_frac": 0.01819,
+      "top1pct_cut_size": 571,
+      "nodes_tied_at_the_top1pct_boundary_degree": 9545
+    },
+    "retention_vs_V": 0.97118,
+    "ceiling_binds": true,
+    "bound_holds": true,
+    "sets": {
+      "preexisting": {
+        "n": 58793,
+        "n_present": 57102,
+        "share_absent": 0.02876,
+        "median_degree": 25.0,
+        "mean_degree": 27.47,
+        "p10_degree": 7,
+        "p90_degree": 50,
+        "max_degree": 50,
+        "share_le_2": 0.02597,
+        "share_eq_1": 0.01187,
+        "share_le_2_or_absent": 0.05399
+      },
+      "V_minus_P": {
+        "n": 45,
+        "n_present": 40,
+        "share_absent": 0.11111,
+        "median_degree": 8.0,
+        "mean_degree": 15.475,
+        "p10_degree": 2,
+        "p90_degree": 41,
+        "max_degree": 50,
+        "share_le_2": 0.175,
+        "share_eq_1": 0.075,
+        "share_le_2_or_absent": 0.26667
+      }
+    },
+    "preexisting_paired_vs_served": {
+      "n": 58793,
+      "gained": 34216,
+      "lost": 16354,
+      "same": 8223,
+      "median_delta": 2.0,
+      "mean_delta": 4.31
+    }
+  },
+  "fame": {
+    "i_snapshot_records_missing_for_V": 0,
+    "ii_records_differing_from_served_fame_lb": 0,
+    "iii_listenable_structurally_identical_to_census": true,
+    "nulls_among_arm_nodes": 1,
+    "listenable_builder_log": [
+      "rescale p99 scale=2926 | saturated edges 83534 of 8350272 (1.000%)",
+      "largest component: 57142 of 57620 artists"
+    ],
+    "listenable_elapsed_seconds": 52.2
+  },
+  "acceptance": {
+    "criteria": {
+      "canonical_names": [
+        "Radiohead",
+        "The Beatles",
+        "Coldplay",
+        "R.E.M."
+      ],
+      "famous_sample": 25,
+      "famous_median_degree_floor": 25.0,
+      "famous_min_degree_floor": 8,
+      "node_count": [
+        47070,
+        58838
+      ],
+      "edge_count": [
+        1052547,
+        2941900
+      ],
+      "median_degree": [
+        1.0,
+        50.0
+      ]
+    },
+    "passed": true,
+    "production_acceptance_used": false
+  },
+  "artifact": {
+    "path": "C:\\unsung-fast\\lbd-artifacts\\LBD-A0V.bin",
+    "sha256": "494c53d52654f6918a4176eef91f291558b0e56d71a4ea16c8070ad8ba3e34bb",
+    "bytes": 25738850,
+    "artists": 57142,
+    "edge_count_csr_entries_both_directions": 1569214
+  },
+  "units": "whole_graph.edges (census and served) = connections counted once (degree sum / 2); artifact.edge_count_csr_entries_both_directions and every sidecar's 'edges' = twice that",
+  "finished_utc": "2026-09-11T01:54:07.318518+00:00"
+}

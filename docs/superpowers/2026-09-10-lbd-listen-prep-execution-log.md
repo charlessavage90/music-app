@@ -172,3 +172,26 @@ from the ceiling and the sidecar's unit, both known before any build, and it is 
 ceiling the first draft described in words; the build's 1,569,214 played no part. The refusal also
 shows this instrument can go red. **Recorded rather than quietly fixed**, and the result JSON now
 names both units, because the same two currencies will otherwise be compared in the README.
+
+**The rerun** (`ed66ed9`'s script, sha `877e8161…`): both maps built, passed all three fame checks and
+the corrected acceptance, and serialised. Figures owned by the README §3–§5. Decisions in reading them:
+
+- **The served map's figures on its own pre-existing set are measured here, not cited** — the task
+  said "cited from their owners", and a search found no document stating them for this map; `CXR-P2`'s
+  pre-existing row is on the extended map. The README says so beside the table so nobody lines the two
+  up.
+- **Listen 2's structural comparison (`LBD-A5V` against `LBD-A0V`, artist by artist) is added to the
+  README** from the committed degree files — a one-line computation, and the only row in §3a that
+  compares the two maps listen 2 will set side by side.
+- **The drop lists were inert in both builds**, observed from the builder's log (it prints only
+  non-zero counts), not only in the probe.
+- **Pins written** (`lbl_maps.json`, listen 1 only) and G1's loader pre-checked on `LBD-A0V`: fame
+  present, nodes ⊆ `V`. `LBD-A5V`'s pin waits for listen 2, so a runner cannot reach it by mistake.
+
+## Stop — Step 3 complete, the owner's
+
+Listen 1's materials are prepared exactly as `GBL-`'s procedure requires, with its recorded
+corrections: pinned pairs, a gated generation script that has never run on the listen's maps, clips,
+the page, unblinding, 54 tests, and a mechanics-only runner brief. **No journey exists.** Handoff:
+`2026-09-10-HANDOFF-lbd-listen-prep.md`. **Not done, deliberately:** `NEXT.md` (closeout's, and a
+concurrent documentation session is live); listen 2's materials; any closeout ritual.
