@@ -216,4 +216,48 @@ Claude Code 2.1.268:
   the rule in. It is one probe session, not the pre-registered sample.
 - **`DLS-T1-C1` is not yet readable**, because its sample starts at merge.
 
+### 6b. Instrument log after merge — observations, exclusions and confounds
+
+**Not part of the pre-registration.** §6 is frozen and nothing here amends it. This is the running
+record the read will consume, kept here so `NEXT.md` can point rather than grow. **Opened
+2026-09-12.**
+
+**Observations so far.** The underlying log is `.claude/logs/instructions-loaded.jsonl`, which is
+gitignored, so this table is the durable copy.
+
+| # | when (UTC) | session | `agent_type` | trigger | result | counts toward `C1`? |
+|---|---|---|---|---|---|---|
+| 1 | 2026-09-11 | the `LBL-` write-up session | none | specs, opened **via Bash** | no load | **No** — not a qualifying session; see the confound below |
+| 2 | 2026-09-12 15:59 | `58bcc7f5` | `consultant` | the `LBD-` fidelity spec | `path_glob_match` | **Unruled** — the read must settle it |
+| 3 | 2026-09-12 16:02 | `652d311c` | none | the alpha rollout roadmap | `path_glob_match` | **Yes — qualifying session 1 of 3** |
+| 4 | 2026-09-12 16:28 | `fb3fe80b` | none | none; read via Bash | no load | **No** — same confound as #1 |
+
+**`DLS-T1-X1` — the Bash-reading confound, and what it does and does not mean.** Sessions here
+often run under an instruction to read files with `cat`/`sed` through Bash rather than the `Read`
+tool. §6's unit is *"whose transcript shows a **Read** of any file under either path"*, so such a
+session is **not a qualifying session at all**: it contributes nothing, and it is **not** a miss
+against `C1`. **The danger is entirely in the reading.** A log showing a session that plainly
+worked on specs, with no rule load beside it, looks exactly like a failure. Two of the four rows
+above are already of that shape. **The read must exclude any session whose spec and plan opens
+were not `Read`-tool opens, and say how many it excluded.** *(Raised by a session that hit it,
+2026-09-12; its own framing was "a silent false negative against `C1`", corrected here to
+"not a qualifying session", which is the difference between repairing the instrument and
+documenting an exclusion.)*
+
+**`DLS-T1-X2` — worktree sessions are invisible.** The hook resolves its log directory from its
+own file location, so a session in a worktree writes to `<worktree>/.claude/logs/`, which is
+gitignored and is destroyed with the worktree. §6's unit already requires a session *started in
+`C:\dev\music-app`*, so `C1` is unaffected — but **the count accrues only from the main tree**. If
+most work moves to worktrees, the window can reach 2026-09-24 with fewer than three qualifying
+sessions and fall through to §6's substitute-probe branch. **The log is not being repointed**:
+§6 freezes the instrument until `C1` is read.
+
+**`DLS-T1-X3` — three synthetic rows to exclude, and they are mine.** Lines 15–17, timestamped
+**2026-09-12T16:16:01.650Z, 16:16:02.023Z and 16:16:02.400Z**, have every field null. They are not
+harness output. **This session produced them** by piping an empty JSON object into the hook three
+times while measuring its wall-clock for `DLS-M9`. **The read excludes all three.** They cannot be
+mistaken for a qualifying session, since they carry no session id, but they do mean a line count
+of the log overstates by three. It also establishes that the hook will append a blank row rather
+than reject malformed input, which is worth knowing before anyone treats the log as self-validating.
+
 §4's *State* column is as of this document's first commit; status lives in `NEXT.md`.

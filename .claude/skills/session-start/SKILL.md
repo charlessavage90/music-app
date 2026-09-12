@@ -39,6 +39,25 @@ expensive. Five minutes, then work.
 > §D.** Roughly half of A–E is inert for that work, and the four checks that catch its
 > characteristic damage are not in A–E at all.
 
+> ## ⛔ How to pick it — and **the checked-out branch is not the answer**
+>
+> **Scope above, if he gave one. Otherwise ask, in one line.** Those are the only two sources.
+>
+> **The branch you find yourself on may belong to another session, not to you.** He runs two
+> sessions in one tree routinely — maintenance in one, the app in the other — and the second to
+> arrive lands on whatever branch the first checked out. Reading the track off that branch name
+> gets it confidently, articulately wrong, and **nothing downstream will correct it**, because
+> every later check is scoped by the track you picked.
+>
+> *(Recorded 2026-09-12, from the live case: a session launched for the `LBD-`/`LBL-` listen work
+> found a `DLS-` branch in the tree, reasoned correctly from it to "apparatus, therefore the
+> maintenance track", and oriented for the wrong body of work. The inference was sound. The
+> premise was another session's.)*
+>
+> **So the branch is evidence about your track only if this session created it, or a handoff note
+> names it.** Otherwise: **one line to the owner naming what you would assume, then proceed on his
+> answer.** That is cheaper than it looks and far cheaper than orienting twice.
+
 ---
 
 ## A. What governs this work?
@@ -78,6 +97,28 @@ still waste, and it is expensive to detect.
 git status --short && git log --oneline -3 && git branch -vv
 gh pr list --state all --limit 5 --json number,title,state,mergedAt
 ```
+
+> ### ⚠ If another session is already live here, take your worktree BEFORE you finish orienting
+>
+> The `SessionStart` repo-state report and the owner both tell you this at the top. **Act on it
+> first, not after §C.** Orienting inside a tree someone else is working in is what produces the
+> two failures below, and both are avoided entirely by moving first:
+>
+> - **You orient against their branch** and pick the wrong track — see the track-picker warning
+>   above.
+> - **`HEAD` moves between two of your own commands**, and it looks like corruption. **It is
+>   not.** In a shared tree the other session is committing, cherry-picking and pushing while you
+>   read, so two commands a minute apart *should* disagree. **Do not spend turns establishing the
+>   facts of a moving HEAD** — note it, move, and re-run §C once in your own tree, where the
+>   answer holds still.
+>
+> **The command and the full rule are in the "Uncommitted work you did not create" bullet below
+> — this block only moves them earlier.** One addition to the gitignored list there: **`.claude/logs/`
+> does not come with you either.** The instructions log the `DLS-T1` probe reads is resolved from
+> the hook's own file location, so a worktree writes its own copy and it is destroyed with the
+> worktree.
+>
+> *(Added 2026-09-12, from a live two-session case that hit both failures in one orientation.)*
 
 - **Derive merge state; do not expect `NEXT.md` to carry it, and do not report its absence
   as a finding.** The cadence is work → `closeout` → *then* the owner merges, so the status
