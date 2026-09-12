@@ -1,4 +1,48 @@
 {
+  "env": {
+    "UV_LINK_MODE": "copy",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "enabledPlugins": {
+    "notion@claude-plugins-official": false
+  },
+  "hooks": {
+    "InstructionsLoaded": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/log-instructions-loaded.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/repo-state.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/context-size-reminder.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "Bash(UV_LINK_MODE=copy uv run --extra dev pytest *)",
@@ -16,6 +60,10 @@
       "Bash(aws apprunner list-services *)",
       "Bash(docker info *)",
       "mcp__Snyk__snyk_code_scan"
+    ],
+    "deny": [
+      "Agent(consultant)",
+      "Read(./docs/reference/**)"
     ]
   }
 }

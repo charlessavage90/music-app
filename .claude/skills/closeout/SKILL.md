@@ -672,7 +672,9 @@ The PR body is where a reviewer picks up the context, so it carries:
 # literal here is wrong for any session whose path differs — and the wrong directory EXISTS,
 # so it resolves, and both numbers below are then silently computed against another tree's
 # memory and can never move. That already happened once (2026-07-28, the pre-migration
-# OneDrive slug), and a session working from a git worktree reproduces it exactly.
+# OneDrive slug). A git worktree does NOT cause it: verified 2026-09-10, a session started
+# inside a worktree loads the main repository's memory directory, because auto memory is
+# keyed on the repository rather than the path. (Its transcripts DO go under a path slug.)
 #
 # Use the memory directory named in YOUR OWN context, and state which one you measured.
 M="<the memory directory your own context names>"
@@ -687,8 +689,17 @@ M="<the memory directory your own context names>"
 #   instructions, so it loads in every session in EVERY project -- a standing tax on
 #   strictly more sessions than the project file. Found by a session that had just
 #   added 888 characters to it and then ran this check, which reported a delta of zero.
+# Descriptions: until 2026-09-10 this was `sed -n '/^description:/p'`, which misses YAML
+#   block scalars and counts skills with `disable-model-invocation: true`, whose
+#   description never loads. Also until that date session-start's frontmatter was invalid
+#   YAML (an unquoted ": " in its description), so its description never loaded either and
+#   every earlier total overstated this layer by roughly its 850 characters.
 { cat ~/.claude/CLAUDE.md CLAUDE.md "$M/MEMORY.md"; \
-  sed -n '/^description:/p' .claude/skills/*/SKILL.md .claude/agents/*.md; } \
+  for f in .claude/skills/*/SKILL.md .claude/agents/*.md; do
+    grep -q '^disable-model-invocation: true' "$f" && continue
+    awk '/^---/{n++; next} n==1 && /^description:/{p=1; print; next}
+         n==1 && p && /^[A-Za-z_-]+:/{p=0} n==1 && p' "$f"
+  done; } \
   | tr -d '\r' | wc -m
 
 # 2. CONDITIONAL — loads only on invocation, dispatch or recall. Lines.
@@ -702,7 +713,7 @@ cat .claude/skills/*/SKILL.md .claude/agents/*.md \
 |---|---|
 | **`~/.claude/CLAUDE.md`, in full** — cross-project, so it taxes more sessions than anything else here | `SKILL.md` **bodies** — only on invocation |
 | `CLAUDE.md` (this project's), in full, and `MEMORY.md` — the index **only** | Agent definition **bodies** — only on dispatch |
-| The `description:` line of every skill **and** every agent | `memory/*.md` **bodies** — only on recall, which is *unpredictable*: they load when not needed and miss when needed |
+| The `description:` of every skill **and** every agent — except a skill with `disable-model-invocation: true`, whose description never loads | `memory/*.md` **bodies** — only on recall, which is *unpredictable*: they load when not needed and miss when needed |
 
 **Two things this corrects, and both had been wrong for a while.** The rule used to name
 "`memory/` and both `SKILL.md` bodies" as unconditional. Neither is. And skill *descriptions*

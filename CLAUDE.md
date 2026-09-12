@@ -362,8 +362,9 @@ working" gets it exactly backwards.
 > scaling (A2-mid, D1-mid) and `session-start`'s cold-read check.
 
 `closeout` triggers on **work** state — finishing; `session-start` triggers on the owner
-asking. Nothing triggers on **session** state, so this is the one boundary that has to be
-noticed deliberately rather than arriving on schedule. That asymmetry is why it has twice
+asking. Only a proxy triggers on **session** state — the context-size hook, which notes a long
+context once — so this is still the one boundary that has to be noticed deliberately rather
+than arriving on schedule. That asymmetry is why it has twice
 been the owner who spotted it.
 
 **How to ask for a plan review.** "Review this plan" finds prose problems. **"Check this
@@ -399,8 +400,8 @@ produces, change what the other consumes.
 
 **The standing context layer is budgeted, and it is smaller than it was long believed to
 be.** What loads unconditionally, before a session reads a single project document, is
-`CLAUDE.md` + `memory/MEMORY.md` (the **index only**) + the one-line `description:` of every
-skill and agent. What does **not**: `SKILL.md` bodies (invocation only), agent definition
+`CLAUDE.md` + `memory/MEMORY.md` (the **index only**) + the `description:` of every skill and
+agent, except a skill marked `disable-model-invocation: true`. What does **not**: `SKILL.md` bodies (invocation only), agent definition
 bodies (dispatch only), and `memory/*.md` bodies (recall only — which is *unpredictable*,
 so conditional is not the same as cheap). Verified by observation 2026-07-26; the earlier
 wording named `memory/` and both `SKILL.md` bodies as unconditional and was wrong on both,

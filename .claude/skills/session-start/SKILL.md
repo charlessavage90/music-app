@@ -1,6 +1,8 @@
 ---
 name: session-start
-description: Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. It is owed by any session that will act on repository state — edit, commit, run a job — not only by builders; but many sessions here only read and advise, and the owner starts the ones that act with it instinctively. A session that owes it and was not given it says so once and proceeds — a fact about itself, never a recommendation to run it. This is mechanical orientation, not exploration — about five minutes, with separate tracks for changing the app and changing the project's own apparatus.
+disable-model-invocation: true
+description: >-
+  Orientation ritual for artistpath. INVOKED BY THE OWNER ONLY — run it when he asks for it by name ("run session-start", "/session-start", "orient yourself first"). Do NOT invoke it on your own initiative, and do not suggest it: not when a session opens, not when handed a plan or a handoff note, not before executing work you did not plan. It is owed by any session that will act on repository state — edit, commit, run a job — not only by builders; but many sessions here only read and advise, and the owner starts the ones that act with it instinctively. A session that owes it and was not given it says so once and proceeds — a fact about itself, never a recommendation to run it. This is mechanical orientation, not exploration — about five minutes, with separate tracks for changing the app and changing the project's own apparatus.
 ---
 
 # Session start
@@ -306,7 +308,8 @@ consecutive closeouts.
 ### MT3. Am I about to touch the standing context layer?
 
 **`CLAUDE.md`, `memory/MEMORY.md`, and the `description:` of any skill or agent load into
-every future session whether or not it needs them.** Growing that layer is the owner's call,
+every future session whether or not it needs them** — except the description of a skill
+marked `disable-model-invocation: true`, which never loads. Growing that layer is the owner's call,
 never a session's.
 
 **Check before writing, not after.** `closeout` D6 measures the delta — but by then the text

@@ -190,6 +190,7 @@ that is how the drift began.
 
 | Document | Covers |
 |---|---|
+| `superpowers/findings/2026-09-10-documentation-layer-strategy.md` | **ACTIVE — AUTHORITATIVE for its own measurements (`DLS-M`) and the `DLS-T1` pre-registration.** What sessions here pay for context and where, measured from the repo and the retained session transcripts; where the current Claude Code guidance disagrees with this project's conventions; the seven-item plan of work (item 1 landed as PR #117) and six questions that are the owner's (`DLS-Q1`–`Q6`). Proposes; decides nothing. Scripts: `../builder/analysis/2026-09-10-dls-context-layer/`. |
 | `superpowers/specs/2026-09-08-unsung-redesign-scope.md` | **ACTIVE — the governing scope document for the `UXR-` set**, the Unsung.fm rename and UX redesign. Records the owner's seven decisions of 2026-09-08 over the Claude Design mockup (rebrand approved; reach pill **dropped**; "Save track" dropped; genres, "Why this stop" prose and the additional pages **deferred**) and eighteen session decisions `UXR-D1`–`UXR-D18` he can overrule one line at a time. **Where the mockup and this document disagree, this document governs.** `UXR-D12` (the landing copy) is its one flagged assumption. |
 | `superpowers/plans/2026-09-08-unsung-redesign.md` | **Implementation plan for `UXR-T1`–`UXR-T11`. IN PROGRESS: `T1`–`T8` executed 2026-09-08 (branch `unsung-redesign`, PR #114), `T9`–`T11` unstarted.** Argues from the spec above; **both named handoff seams have now been taken** (after `T5`, after `T8`). ⚠ **Five small plan-vs-repository defects across `T1`–`T8`**, all recorded in the log — the two in `T6`–`T8` were an under-specified test edit and a shared MBID the clip cache would have bled. ⚠ **The plan's log-section numbers are one behind the log's own**, because the first seam's closeout took `§ 6`. |
 | `superpowers/2026-09-08-unsung-redesign-execution-log.md` | **RETAINED EXECUTION LOG for `UXR-T1`–`UXR-T11`. ACTIVE. Owns no figures and no status.** §§1–5 are the first session's, through the plan's first seam; §6 is that seam's closeout; §§7–9 are `T6`–`T8`, through the second seam. Appended per task. **Its section numbers run one ahead of the plan's from §7 on** — forward-only, never renumbered. |
@@ -530,6 +531,12 @@ that is how the drift began.
   letter-number token without its plain-language sentence; and **J**, reads-of-results
   completeness for pre-registrations. It reports and never edits, and it may never propose
   renaming an identifier in a committed document. Dispatched by `closeout` B1.
+- **`.claude/hooks/` and `.claude/rules/`** — project hooks, wired in `.claude/settings.json`:
+  a repo-state report at session start (branch, uncommitted paths, other worktrees), a
+  once-per-session context-size note, and the `DLS-T1` instruction-load logger; plus the
+  `DLS-T1` probe rule. The owner's rulings behind them are
+  `superpowers/findings/2026-09-10-documentation-layer-strategy.md` §5a. A git-safety hook
+  that blocks whole-tree staging lives in the owner's user-level settings, outside the repo.
 - **The code is the truth about the code.** Where a document and the source disagree
   about behaviour, the source wins — and the document is a defect to be fixed.
 
