@@ -337,4 +337,72 @@ indistinguishable from a main session's own Read. Two consequences:
   qualifying session counted so far, at `16:02:16`, was a direct `Read` by the main session before
   any subagent had been dispatched in it.
 
+## 7. Proposal for item 4's delivery mechanism, 2026-09-12
+
+**Proposes; decides nothing.** Item 4 changes the rules every future session runs on, so adoption
+is the owner's. What is settled here is methodology: which mechanisms can carry load-bearing text
+and which cannot.
+
+### 7.1 Measured
+
+| | |
+|---|---|
+| `Bash` tool calls, all project transcripts | **3,205** |
+| `Read` tool calls, same | **185** |
+| ratio | **about 17 to 1** |
+| `Skill` invocations, same | 32 |
+| browser tool calls, all time | **26**, on two days, in 3 of 33 transcripts |
+| `CLAUDE.md`, total | 39,766 chars |
+| its "Writing and reviewing plans here" section | **9,048 chars, 22.8 %** |
+
+*(Transcript counts by the method `DLS-M7` used for Notion, over the same 33 transcripts.)*
+
+### 7.2 What I infer, in plain terms
+
+- **Path-scoped rules cannot carry load-bearing text here.** `DLS-T1-X4` showed the rule simply
+  does not arrive when a file is opened through the shell, and sessions here open files through the
+  shell about seventeen times for every once they use the `Read` tool. The guidance would be absent
+  for most sessions, **with nothing in the session to indicate anything was missed.**
+- **The disqualifying property is not the ratio, it is the invisibility.** Even if the ratio
+  changed tomorrow, delivery would still depend on a session mode that is set outside the
+  repository, is not recorded in it, and gives no signal when it flips. A mechanism that can be
+  switched off silently by something the project does not control is not one to move text onto that
+  a session must not lose.
+- **Do NOT disable the Chrome integration to fix this.** It is in **active use**: 25 calls on
+  2026-09-11 driving the blind-listen page. The Notion precedent in `DLS-M7` does not transfer,
+  because Notion's count was zero and this one is not.
+- **There is no free mechanism, and the honest framing is certainty against cost.** Always-loaded
+  text is the only delivery that is certain, and it is certain *because* it is always loaded, which
+  is the cost item 4 exists to reduce. A skill is cheap because only its `description` is standing,
+  but invocation is a judgement rather than a trigger. Path-scoped rules looked like the best of
+  both and are in fact the worst: conditional *and* silent.
+
+### 7.3 What I propose
+
+1. **Item 4 does not use path-scoped rules for anything a session must not lose.** This is `C1`'s
+   own failure branch, reached by measurement rather than by the read.
+2. **Sort text by one question: what happens if a session never sees it?** *Silent wrong work* →
+   it stays in `CLAUDE.md` and the cost is accepted. *Work that visibly stalls or asks* → a skill.
+3. **The first move is the plan-writing section**, because it is the largest single block with a
+   natural trigger and the ruling for it already exists (`DLS-Q3`: stories move word for word with
+   their rule). Moving it to a skill body trades **9,048 standing chars for a description of
+   roughly 300** — most of item 4's target in one step, with nothing reworded.
+4. **Keep reading `DLS-T1`, and report fidelity and coverage separately.** It is nearly free now,
+   it still answers whether the mechanism is *reliable when it fires*, and `DLS-T1-X4` records why
+   a pass must not be read as licence.
+
+### 7.4 Weakest link
+
+**That a skill is invoked when it is relevant.** It is a judgement, not a path match, and 32
+invocations across 28,292 records is thin evidence either way. What makes it acceptable where a
+path-scoped rule is not: **a skill that should have been invoked and was not is visible in the
+transcript**, whereas a rule that did not load leaves no trace anywhere. **What would falsify this:**
+a session writing a plan, with the skill available, that neither invokes it nor asks. That is worth
+watching for before the second and third blocks move, and it is the cheap reason to move one block
+first rather than all of them.
+
+**What I would abandon cheaply:** the claim that ~300 chars is the right description size, and the
+ordering of blocks after the first. **What I would defend:** that path-scoped rules are
+disqualified for load-bearing text, which rests on a controlled pair and a 17-to-1 ratio.
+
 §4's *State* column is as of this document's first commit; status lives in `NEXT.md`.
