@@ -292,7 +292,14 @@ subagent's rather than the session's; see "Who runs B1" below.**
 **`TEST-QUEUE.md` holds only what is still to be pressed.** When an entry is discharged, it
 moves to `archive/TEST-QUEUE-discharged.md` — HISTORICAL, frozen, never edited again. The
 sibling `archive/TEST-QUEUE-nil-entries.md` holds the pre-2026-08-05 entries that queued
-nothing.
+nothing, and `archive/TEST-QUEUE-notes-2026-09.md` holds the prose the 2026-09-12 checklist
+replaced.
+
+**Since 2026-09-12 the unit is a checklist line, not an entry.** The owner reports which numbered
+boxes failed and what he saw. **Demote the ticked ones** — move each to the discharged archive with
+his result beside it, and delete the line here. **A failed box does not leave**: it stays, with one
+added clause naming what he saw, until the defect is fixed. **Never re-word a box he has not yet
+pressed** — he is running down a list he has already partly read.
 
 **Same rule and same reason as `A2-next`.** Left in place, discharged entries accumulate:
 by 2026-09-05 the file was 1,996 lines of which **93% was history** behind a single live
@@ -466,6 +473,38 @@ have. In each case the code was right and the sentence was wrong.
 
 Pay particular attention to names. A fixture or function named for behaviour it does
 not have will mislead every future reader, and renaming is cheap.
+
+### B6-budget. Did a pointer document drift into an execution log?
+
+**This project's most repeated documentation failure, and it has now happened in four places.**
+A document whose job is to be *short* — a queue, an index, a status pointer — accretes a session's
+reasoning one closeout at a time. Every addition is defensible on its own. The file becomes
+unusable anyway, because the owner cannot find the four live lines among four hundred.
+
+| document | its job | budget | where it got to |
+|---|---|---|---|
+| [`NEXT.md`](../../../docs/superpowers/NEXT.md) | what to do next | **250 lines** | 2,063 on 2026-09-05, 1,738 of it superseded status |
+| [`docs/README.md`](../../../docs/README.md) | classify each document by role | **400 lines** | 538 lines, 82 % "Active", rows narrating progress |
+| [`TEST-QUEUE.md`](../../../docs/superpowers/TEST-QUEUE.md) | a checklist he can run down | **70 lines** | 255 on 2026-09-12, 89 of them front matter |
+| a `NEXT.md` **deferral row** | one finding, one condition | **~600 chars** | a 3,600-char essay, written inside one session on 2026-09-12 |
+
+```bash
+wc -l docs/superpowers/NEXT.md docs/README.md docs/superpowers/TEST-QUEUE.md
+```
+
+**Over budget is a prompt, not a failure.** Report the number and say which additions were
+*reasoning* rather than the document's own job. **The reasoning is not deleted — it moves** to the
+execution log, the PR body, or an archive file, all of which the owner reads at the time or never.
+
+⛔ **Never get under budget by compressing live prose.** That is D6's rule and it applies here with
+more force, because the thing being squeezed is an instruction someone still has to follow.
+Discharge an item, move reasoning out, or raise the budget deliberately and say why.
+
+**The tell, for a session that wants to catch itself before the measurement does:** you are adding
+a sentence that explains *why* a line is there, to a document whose reader only needs to know
+*what to do*. Worked example from the session that wrote this check — it appended two paragraphs of
+instrument findings to a `NEXT.md` deferral row, noticed the row had become an essay, and moved the
+record to a findings section, leaving a pointer.
 
 ### B5. Stale-description sweep — and it must include `.claude/`
 

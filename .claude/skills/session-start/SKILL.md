@@ -200,15 +200,19 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
   notes is not independent evidence.
 - **Check the test queue.** Anything sitting untested gets flagged to the owner now. That
   flag is the only forcing function on the async use-the-app check, which is the one item
-  that catches defects tests structurally cannot. **Since 2026-09-05 a discharged entry LEAVES
-  the file** — `closeout` `C1-demote` moves it to `archive/TEST-QUEUE-discharged.md` — so
-  `TEST-QUEUE.md` holds only what is still to be pressed. **Read only the topmost heading of
-  each entry anyway.** That rule is now a safety net rather than a necessity here, and it is
-  still load-bearing in the two archives, where discharged entries do keep their old
-  `## QUEUED` heading beneath their `## DONE` one: greping for the former is what made six
-  consecutive closeouts report a backlog that did not exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
-  only when there is something to press, so **absence of entries means nothing is owed — it is
-  never evidence that a session forgot.**
+  that catches defects tests structurally cannot. **Since 2026-09-12 it is a CHECKLIST**: count
+  the **unticked `- [ ]` boxes**, not headings. A discharged item leaves the file — `closeout`
+  `C1-demote` moves it to `archive/TEST-QUEUE-discharged.md` — so what remains is exactly what is
+  still to be pressed, and the file is budgeted at **70 lines** (`closeout` `B6-budget`).
+  ```bash
+  grep -c '^- \[ \]' docs/superpowers/TEST-QUEUE.md
+  ```
+  **Never grep the two archive files for a count.** Discharged entries there keep their old
+  `## QUEUED` heading beneath a `## DONE` one, which is what made six consecutive closeouts report
+  a backlog that did not exist. **An empty file is a valid and common state**: an entry is written
+  only when there is something to press, so **absence means nothing is owed — it is
+  never evidence that a session forgot.** Full prose behind the current checklist, if a session
+  needs to know why a check exists: `archive/TEST-QUEUE-notes-2026-09.md`.
   **If the entry records a detached dev server, check it is still alive and started after
   HEAD** — closeout leaves one running deliberately, owned by nobody, and a stale one fails
   the queued test for a reason that has nothing to do with the work.
