@@ -397,8 +397,18 @@ and which cannot.
 
 ### 7.3 What I propose
 
+0. **Change nothing in the environment. Neither switch is worth pulling, and that is now checked
+   rather than assumed.** Disabling the browser integration does not touch reading behaviour
+   (§7.2). `Auto Mode` does, but it is **a permission classifier** whose job is letting routine
+   operations run without an approval prompt; the Bash preference merely rides along with it.
+   **Turning off a session's permission handling to change how it opens files is a bad trade by a
+   wide margin.** *(Per-project mechanisms exist for both, if ever wanted for their own reasons:
+   `deniedMcpServers` for the integration, `/auto-mode-setup` for the mode. Documented, untested
+   here, and deliberately not applied.)*
 1. **Item 4 does not use path-scoped rules for anything a session must not lose.** This is `C1`'s
-   own failure branch, reached by measurement rather than by the read.
+   own failure branch, reached by measurement rather than by the read. **With step 0 settled there
+   is no configuration that rescues the mechanism**, so this is a determination rather than a
+   preference.
 2. **Sort text by one question: what happens if a session never sees it?** *Silent wrong work* →
    it stays in `CLAUDE.md` and the cost is accepted. *Work that visibly stalls or asks* → a skill.
 3. **The first move is the plan-writing section**, because it is the largest single block with a
