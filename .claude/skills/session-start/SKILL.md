@@ -7,6 +7,25 @@ description: >-
 
 # Session start
 
+> ## The owner's scope for this session, if he gave one
+>
+> $ARGUMENTS
+>
+> **If the line above is empty, or still reads `$ARGUMENTS` verbatim, he gave none.** Run the
+> ritual, then hand back and ask what the work is. That is the normal `/session-start` case and
+> nothing is wrong.
+>
+> **If it names the work, that is your scope.** Use it to pick the track immediately below, to
+> decide which of §A–§E or §MT actually apply, and to write §E's `/rename` line. Orient *for
+> that work* — do not re-derive it, and do not treat it as the whole instruction, since he may
+> add to it in the same breath.
+>
+> **He reaches this line by typing the scope after the command** — `/session-start continue the
+> documentation layer strategy work`. He cannot reach it by asking in prose: this skill is
+> marked `disable-model-invocation: true`, so a session **cannot** invoke it, however plainly it
+> is asked. **If he asks in prose, do not apologise and do not explain the mechanism** — reply
+> with the one line he can paste, `/session-start <his words>`, and nothing else.
+
 The mirror of the `closeout` skill: closeout writes, startup reads. Every check below
 consumes something a previous closeout produced, which is what keeps both cheap.
 
@@ -19,6 +38,25 @@ expensive. Five minutes, then work.
 > the map, `NEXT.md`, memory, bookkeeping — **run §MT, then §C and §E, and skip §A, §B and
 > §D.** Roughly half of A–E is inert for that work, and the four checks that catch its
 > characteristic damage are not in A–E at all.
+
+> ## ⛔ How to pick it — and **the checked-out branch is not the answer**
+>
+> **Scope above, if he gave one. Otherwise ask, in one line.** Those are the only two sources.
+>
+> **The branch you find yourself on may belong to another session, not to you.** He runs two
+> sessions in one tree routinely — maintenance in one, the app in the other — and the second to
+> arrive lands on whatever branch the first checked out. Reading the track off that branch name
+> gets it confidently, articulately wrong, and **nothing downstream will correct it**, because
+> every later check is scoped by the track you picked.
+>
+> *(Recorded 2026-09-12, from the live case: a session launched for the `LBD-`/`LBL-` listen work
+> found a `DLS-` branch in the tree, reasoned correctly from it to "apparatus, therefore the
+> maintenance track", and oriented for the wrong body of work. The inference was sound. The
+> premise was another session's.)*
+>
+> **So the branch is evidence about your track only if this session created it, or a handoff note
+> names it.** Otherwise: **one line to the owner naming what you would assume, then proceed on his
+> answer.** That is cheaper than it looks and far cheaper than orienting twice.
 
 ---
 
@@ -59,6 +97,29 @@ still waste, and it is expensive to detect.
 git status --short && git log --oneline -3 && git branch -vv
 gh pr list --state all --limit 5 --json number,title,state,mergedAt
 ```
+
+> ### ⚠ If another session is already live here, take your worktree BEFORE you finish orienting
+>
+> The `SessionStart` repo-state report and the owner both tell you this at the top. **Act on it
+> first, not after §C.** Orienting inside a tree someone else is working in is what produces the
+> two failures below, and both are avoided entirely by moving first:
+>
+> - **You orient against their branch** and pick the wrong track — see the track-picker warning
+>   above.
+> - **`HEAD` moves between two of your own commands**, and it looks like corruption. **It is
+>   not.** In a shared tree the other session is committing, cherry-picking and pushing while you
+>   read, so two commands a minute apart *should* disagree. **Do not spend turns establishing the
+>   facts of a moving HEAD** — note it, move, and re-run §C once in your own tree, where the
+>   answer holds still.
+>
+> **The command and the full rule are in the "Uncommitted work you did not create" bullet below
+> — this block only moves them earlier.** One thing that is *not* a worry, because a first draft of
+> this block got it wrong: **your hooks and settings are bound where the session was launched and
+> do not follow you across a `git worktree add`.** A session started in the main tree keeps writing
+> its `.claude/logs/` there and stays eligible for the `DLS-T1` count. Only a session *launched*
+> with its working directory already inside a worktree would use that worktree's copy.
+>
+> *(Added 2026-09-12, from a live two-session case that hit both failures in one orientation.)*
 
 - **Derive merge state; do not expect `NEXT.md` to carry it, and do not report its absence
   as a finding.** The cadence is work → `closeout` → *then* the owner merges, so the status
@@ -139,15 +200,19 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
   notes is not independent evidence.
 - **Check the test queue.** Anything sitting untested gets flagged to the owner now. That
   flag is the only forcing function on the async use-the-app check, which is the one item
-  that catches defects tests structurally cannot. **Since 2026-09-05 a discharged entry LEAVES
-  the file** — `closeout` `C1-demote` moves it to `archive/TEST-QUEUE-discharged.md` — so
-  `TEST-QUEUE.md` holds only what is still to be pressed. **Read only the topmost heading of
-  each entry anyway.** That rule is now a safety net rather than a necessity here, and it is
-  still load-bearing in the two archives, where discharged entries do keep their old
-  `## QUEUED` heading beneath their `## DONE` one: greping for the former is what made six
-  consecutive closeouts report a backlog that did not exist. **An empty file is a valid and common state**: since 2026-08-05 an entry is written
-  only when there is something to press, so **absence of entries means nothing is owed — it is
-  never evidence that a session forgot.**
+  that catches defects tests structurally cannot. **Since 2026-09-12 it is a CHECKLIST**: count
+  the **unticked `- [ ]` boxes**, not headings. A discharged item leaves the file — `closeout`
+  `C1-demote` moves it to `archive/TEST-QUEUE-discharged.md` — so what remains is exactly what is
+  still to be pressed, and the file is budgeted at **70 lines** (`closeout` `B6-budget`).
+  ```bash
+  grep -c '^- \[ \]' docs/superpowers/TEST-QUEUE.md
+  ```
+  **Never grep the two archive files for a count.** Discharged entries there keep their old
+  `## QUEUED` heading beneath a `## DONE` one, which is what made six consecutive closeouts report
+  a backlog that did not exist. **An empty file is a valid and common state**: an entry is written
+  only when there is something to press, so **absence means nothing is owed — it is
+  never evidence that a session forgot.** Full prose behind the current checklist, if a session
+  needs to know why a check exists: `archive/TEST-QUEUE-notes-2026-09.md`.
   **If the entry records a detached dev server, check it is still alive and started after
   HEAD** — closeout leaves one running deliberately, owned by nobody, and a stale one fails
   the queued test for a reason that has nothing to do with the work.
@@ -296,7 +361,7 @@ collects them**:
 
 - `NEXT.md`'s **current top block** — older blocks are history, never act on them
 - the current handoff's **"Owed, and by whom"**
-- `TEST-QUEUE.md` — **an item is live only if its topmost heading says so**
+- `TEST-QUEUE.md` — **every unticked `- [ ]` box is live**; it is a checklist, not dated entries
 - deferred findings whose **success condition has now come due**
 
 **Then verify one flag against source before acting on it.** A flag forwarded through several

@@ -36,8 +36,18 @@ try {
     }
   }
 
+  // How recently this branch was committed to. A branch that moved minutes ago is very likely
+  // another live session's, not this one's — the signal that stops a session reading its own
+  // track off someone else's checkout (session-start's track picker, 2026-09-12).
+  let age = '';
+  try {
+    const secs = Math.max(0, Math.floor(Date.now() / 1000) - Number(git(top, ['log', '-1', '--format=%ct']).trim()));
+    const mins = Math.floor(secs / 60);
+    age = mins < 60 ? `, last commit ${mins}m ago` : (mins < 2880 ? `, last commit ${Math.floor(mins / 60)}h ago` : '');
+  } catch { /* no commits yet */ }
+
   const out = [`Repo state at session start (project hook, facts only):`];
-  out.push(`- This tree: ${top} on ${branch}; ${dirty.length} uncommitted path(s)` +
+  out.push(`- This tree: ${top} on ${branch}${age}; ${dirty.length} uncommitted path(s)` +
     (dirty.length ? `: ${dirty.slice(0, MAX_PATHS).map((l) => l.slice(3)).join(', ')}` +
       (dirty.length > MAX_PATHS ? `, +${dirty.length - MAX_PATHS} more` : '') : ''));
   out.push(`- Other worktrees: ${others.length ? others.join('; ') : 'none'}`);
