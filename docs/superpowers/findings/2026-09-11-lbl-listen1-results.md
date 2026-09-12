@@ -10,7 +10,8 @@ and are cited by section here, never repeated.
 **Raw data**, all in `builder/analysis/2026-09-10-lbd-blind-listen/`:
 `lbl_listen1_verdicts.json` (the owner's saved picks and notes, exactly as the page wrote
 them), `lbl_listen1_page_data.json` (the stimulus as presented), `lbl_listen1_result.json`
-(the unblinded mapping and the mechanical tally).
+(the unblinded mapping and the mechanical tally), and `lbl_listen1_owner_notes.md` (his
+closing impression, verbatim, with its provenance caveat stated in the file — see §1.5).
 
 **Governing document:** [`specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md`](../specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md)
 — the **`LBD-AM5`** block at the end of §10, committed before any journey existed on any
@@ -44,7 +45,9 @@ shipped code is touched.
 - **A tie is the outcome a weak instrument produces by default.** 24 rows per axis and a
   bar of 8 is a coarse instrument, and the owner marked **no preference on 11 of 24
   coherence rows and 15 of 24 novelty rows** — most often because both sides held artists
-  he already knew, or because the journey was too short to differentiate.
+  he already knew, or because the journey was too short to differentiate. **He reached the
+  same diagnosis himself, unprompted** (§1.5): *"many were tough to differentiate,
+  especially because I knew most artists."*
 - **Two of the eight pairs contributed almost nothing.** Built to Spill → Spoon produced
   no clear pick at all, on either axis at any depth, and The Naked and Famous → Band of
   Horses produced three. Both ran one or two interior artists per journey; his own pair
@@ -132,6 +135,39 @@ famous on the fixed ruler. n = 9.
 served map's recorded Deezer id for both sides — against `GBL-`, where five of seven
 undecided deciding rows were undecided *because* of clip defects (`GBL-` results §0).
 
+### 1.5 The owner's overall impression, verbatim
+
+Given by the owner **directly to the runner session** as his closing comment and not
+committed by it; supplied to this session on 2026-09-11 in his words *"copied verbatim, not
+edited after seeing your summary"*. Committed unaltered at
+`builder/analysis/2026-09-10-lbd-blind-listen/lbl_listen1_owner_notes.md`, **which states
+the one provenance caveat**: its commit timestamp is this session's, so "written before he
+read the read" rests on his account rather than on a git timestamp, unlike `GBL-`'s
+`gbl_owner_notes.md`.
+
+> My overall feedback is that many were tough to differentiate, especially because I knew
+> most artists. There were a few examples where there was a clear winner on one side
+> though, and in those cases, the winner was very clear. In places where I voted coherent
+> winning on one side and novelty winning on the other, I generally felt like the coherent
+> side was the "better" path to show in the app
+
+**It decides nothing** — the read is fixed by the per-row answers and by nothing else, and
+`GBL-` §5's run-once rule binds the verdict. Three things it does do:
+
+1. **It confirms §3's weakest link from the listener's side, unprompted.** "Tough to
+   differentiate, especially because I knew most artists" is the same diagnosis this note
+   reached from the *no preference* counts. The resolution limit is familiarity, and he
+   named it himself.
+2. **It says the picks were bimodal, which the tally cannot see.** A pick is recorded as a
+   pick; his row notes separately describe several as *"slight"* and others as *"strong"*.
+   The instrument weighs them identically (§4.5).
+3. **His stated tiebreak changes no number.** Five of the 24 rows carried a clear pick on
+   both axes pointing to *opposite* sides — The Naked and Famous → Band of Horses at d20,
+   The Litter → Night Moves at d0 and d20, Sundara Karma → Modest Mouse at d0 and d20.
+   Resolving each to its coherence side, as he says he would, reproduces the coherence
+   column exactly: **7–6, margin +1, still under the bar of 8.** Recorded so that this note
+   cannot later be read as having moved the result; it did not, and could not.
+
 ---
 
 ## 2. What I infer from it — in plain language
@@ -169,6 +205,23 @@ undecided deciding rows were undecided *because* of clip defects (`GBL-` results
 5. **The instrument itself is now clean enough to be believed, and that is new.** No row
    was lost to a clip; the blind held. What limits this listen is its resolution and its
    pair draw, not a defect in the harness.
+
+6. **Coherence is the senior axis, and he said so from inside the blind.** His closing
+   comment (§1.5) is that where the two questions pointed opposite ways, the coherent side
+   was the better path to put in the app. That is `WHAT-GOOD-LOOKS-LIKE` **value 8** —
+   *novelty is delivered through coherence, not traded against it* — restated after
+   judging 24 rows without knowing which side was which, which is a stronger setting than
+   the one it was originally stated in. **It is preference, not evidence**, and WGLL is
+   where it is recorded as such. What it supports going forward: the pre-registered
+   treatment of a split as a FAIL was right, and a future protocol that has to choose one
+   axis should choose coherence.
+
+7. **The picks he did make, he made hard.** "A few examples where there was a clear
+   winner… and in those cases the winner was very clear." Taken with the number of rows he
+   could not call at all, the picture is not "the two maps are slightly different
+   everywhere" but "they are indistinguishable on most pairs and plainly different on a
+   few." **That is a better argument for re-drawing the pairs than for re-running the
+   protocol** — and it is inference from a sentence, not a measurement.
 
 ---
 
@@ -216,6 +269,16 @@ because the next listen's shuffle is worth checking for balance rather than leav
    protocol could ask directly (*"did you have to trade one against the other on this
    row?"*) rather than relying on a listener who happens to explain himself.
 4. **Three clips per artist fixed the clip problem.** Carry it forward unchanged.
+5. **The protocol records a pick but not its strength, and the owner's picks were
+   bimodal.** His row notes distinguish *"slight"* preferences from *"strong"* ones; the
+   tally cannot, and weighs a landslide row the same as a hairline one. **No re-tally on
+   the notes is possible or permitted here** — a strength coding invented after the fact by
+   the reader is exactly the framing failure this project's reporting rules exist to stop.
+   A future protocol should ask for strength **on the row, in advance**, with its own
+   pre-registered threshold, or state explicitly that it is counting rows and not
+   confidence.
+6. **The side shuffle should be balanced, not random per pair.** It landed 7–1 this time
+   (§3). Harmless here; cheap to fix by dealing sides rather than drawing them.
 
 ---
 
