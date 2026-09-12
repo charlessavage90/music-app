@@ -1111,8 +1111,13 @@ that ordering is the evidence, exactly as for `lbl_pairs.py` at `13410fa`.
   its direction.** Nothing in the screen or the ranking reads which map is longer, more obscure,
   more or less famous, or in any way better. A screen that preferred one map's journeys would choose
   the pairs on which that map wins, which is the one thing a blind listen cannot survive.
-- **Counts are owned by `builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md` and are
-  restated nowhere, including here.**
+- **Counts are owned by `builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md`, and no
+  prose restates one — including this amendment.** The single exception is machine-written and
+  self-checking: `lbl_pairs2.json`'s `selected_by` block records the thresholds and counts the
+  selection was made under **beside `lbl_prescreen2.json`'s own sha256**, so a copy that ever
+  disagreed with its source would be visible rather than silent. Both files are emitted, never
+  hand-edited, and both are sha-pinned. *(Stated because a documentation audit on 2026-09-12
+  correctly flagged the copy against this clause's original, over-broad wording.)*
 
 > ⚠ **The pre-screen's outputs are MAP-LABELLED and are on the runner brief's do-not-read list.**
 > `lbl_prescreen2.json` records each map's journey length per pair and depth; matching a length

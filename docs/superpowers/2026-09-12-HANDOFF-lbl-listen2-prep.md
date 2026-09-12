@@ -77,7 +77,7 @@ start, once by `load_map` on every run.
 | the two listenable maps | `C:\unsung-fast\lbd-artifacts\LBD-A0V.bin`, `LBD-A5V.bin`, each with its `.bin.json` sidecar. **Unchanged; nothing was rebuilt** |
 | listen 2's pairs | `lbl_pairs2.json`, sha256 `0a2eca01…`, pinned in `lbl_common.PAIRS2_SHA` and gated by G3 |
 | listen 2's page data, clips, verdicts | **do not exist.** Generation has never been run for listen 2 |
-| the sealed mapping | **does not exist** for listen 2. `.superpowers/lbl/` holds listen 1's, already unsealed |
+| the sealed mapping | **does not exist at all.** `.superpowers/lbl/` is gitignored and `sealed_path()` creates it on demand, so listen 1's died with the worktree it ran in — **nothing depends on it**, since it was already unsealed into the committed `lbl_listen1_result.json`. Listen 2's runner will create its own. |
 
 ## What I know that is not in the durable record
 
