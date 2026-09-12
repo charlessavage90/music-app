@@ -7,6 +7,25 @@ description: >-
 
 # Session start
 
+> ## The owner's scope for this session, if he gave one
+>
+> $ARGUMENTS
+>
+> **If the line above is empty, or still reads `$ARGUMENTS` verbatim, he gave none.** Run the
+> ritual, then hand back and ask what the work is. That is the normal `/session-start` case and
+> nothing is wrong.
+>
+> **If it names the work, that is your scope.** Use it to pick the track immediately below, to
+> decide which of §A–§E or §MT actually apply, and to write §E's `/rename` line. Orient *for
+> that work* — do not re-derive it, and do not treat it as the whole instruction, since he may
+> add to it in the same breath.
+>
+> **He reaches this line by typing the scope after the command** — `/session-start continue the
+> documentation layer strategy work`. He cannot reach it by asking in prose: this skill is
+> marked `disable-model-invocation: true`, so a session **cannot** invoke it, however plainly it
+> is asked. **If he asks in prose, do not apologise and do not explain the mechanism** — reply
+> with the one line he can paste, `/session-start <his words>`, and nothing else.
+
 The mirror of the `closeout` skill: closeout writes, startup reads. Every check below
 consumes something a previous closeout produced, which is what keeps both cheap.
 

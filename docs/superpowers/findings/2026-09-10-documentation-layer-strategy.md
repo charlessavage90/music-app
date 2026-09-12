@@ -41,6 +41,8 @@ with older models.
 | `DLS-M5` | Rituals | `closeout` 931 lines (~14.7k tokens); `session-start` 360 lines. `doc-auditor`: 20 dispatches, median 109 turns and 6.6M summed input tokens per run, the most per run of any subagent type |
 | `DLS-M6` | Harness, *verified* | (a) `session-start`'s frontmatter was **invalid YAML from `7ec8eab` (2026-07-25) until PR #117**, so its description never loaded; (b) a session started inside a git worktree loads the main repository's memory directory; (c) `permissions.deny: Agent(consultant)` refuses dispatch while `claude --agent consultant` still runs; (d) settings `env` reaches Bash commands; (e) disabling the Notion plugin for the project removed 43 tools, 10 slash commands, 1 MCP server and 1 plugin from every session |
 | `DLS-M7` | Notion usage | 0 tool calls in 7,889 turns |
+| `DLS-M8` | **Item 1's invocation consequences, *verified* 2026-09-12** | (a) `session-start`'s description has **never** loaded into any session: invalid YAML from `7ec8eab` (2026-07-25) until PR #117, and `disable-model-invocation: true` from PR #117 onward — so its **837 chars have never been standing context**, and the owner-only behaviour observed for seven weeks came from `CLAUDE.md` prose alone. Restoring model invocation would load that description for the **first** time, not restore a prior cost. (b) The flag blocks **prose** invocation absolutely — "run the session-start skill" cannot be honoured, however plainly asked — and **trailing arguments after the slash command are the only single-message route** to skill + scope. (c) Frontmatter sweep of all skills and agents: **all valid**, so `DLS-M6`(a) stays a single instance. (d) The global `doc-auditor` is fully shadowed by the project one and does **not** double-load its 335 chars |
+| `DLS-M9` | **Why the rituals feel slower, *measured* 2026-09-12** | `session-start`'s body: **7,132 chars (2026-07-22) → 22,083 (2026-09-10)**, a 3.1× growth, of which the single largest step is **+5,338 on 2026-08-05** (the `MT` maintenance track). **PR #117 added 130 chars of frontmatter and no body**, so it is not a cause. Hook wall-clock, 3 runs each: `repo-state` **340 ms** (once, at startup), `context-size-reminder` **244 ms** (every prompt), `log-instructions-loaded` **240 ms** (per instruction file loaded) — together **≈1.1 s** added across a session's opening, and ~0.24 s on every turn thereafter. The dominant cost is the body and the checks it prescribes, not the hooks |
 
 ## 2. What I infer from it
 
@@ -94,7 +96,7 @@ In plain terms, for someone who has not read the numbers:
 
 | Item | What | State | Gated by |
 |---|---|---|---|
-| 1 | Settings: `env` block, Notion off here, consultant dispatch denied, `session-start` owner-only | **Done — PR #117** | — |
+| 1 | Settings: `env` block, Notion off here, consultant dispatch denied, `session-start` owner-only | **Done — PR #117.** ⚠ **One unanticipated consequence, found in use 2026-09-12 and repaired the same day (`DLS-M8`):** making the skill owner-only also blocked the owner's own *prose* request for it, so "run session-start, your scope is X" could not be honoured in one message. **Repaired in the skill body, at no standing-context cost**, by consuming `$ARGUMENTS` so `/session-start <scope>` carries the scope. **What is still open is `DLS-Q7`** | — |
 | 2 | Guard tests: builder/API format lockstep (golden bytes), no new code against pre-rename aliases | In progress, branch `guard-tests` | — |
 | 3 | Hooks: git staging safety and stop-and-ask rules (user level); context-size reminder; repo-state report at session start | Git safety in progress at user level; the other two wait on `DLS-Q6` | `DLS-Q6` |
 | 4 | `CLAUDE.md` restructure: package-level CLAUDE.md files, `.claude/rules/`, narrative out of the always-loaded file, ≤200 lines | Not started | `DLS-T1` read, `DLS-Q3`, `DLS-Q4`, the live `LBD-` session's next closeout |
@@ -119,6 +121,7 @@ Each changes a governing convention or what sessions may read, which is why it i
 | `DLS-Q4` | Should "rules never expire" and "never compress live prose" become "move verbatim, then remove a rule only after observing that sessions no longer need it"? |
 | `DLS-Q5` | Should reading `docs/reference/` and the narrative journal be blocked by a permission rule, rather than asked of sessions in prose? |
 | `DLS-Q6` | Two hooks: one that reports repo state (other worktrees, uncommitted files) when a session starts, reversing the preference recorded in memory; and one that tells a session when its context has grown past a threshold. |
+| `DLS-Q7` | *(Raised 2026-09-12 by the owner, from use.)* The `$ARGUMENTS` repair covers `/session-start <scope>`. It does **not** cover him asking **in prose**, which the flag blocks absolutely. Should `CLAUDE.md`'s `session-start` bullet gain **one sentence** telling a session to answer a prose request with the paste-ready line and nothing else — **+147 chars on every future session, 39,766 → 39,913** — or is a single round trip on the rare prose ask the cheaper of the two? **His call because it grows the layer that taxes every session.** |
 
 ### 5a. The owner's answers, 2026-09-11
 
