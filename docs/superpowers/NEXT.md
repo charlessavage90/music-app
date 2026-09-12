@@ -47,56 +47,53 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-11, at the `LBL-` listen-1 read.** **Nothing a listener sees changed
-in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s
-three entries are still his to press, untouched here.
+**Last updated: 2026-09-12, at the `LBD-AM6` preparation of `LBL-` listen 2.** **Nothing a
+listener sees changed in this work** — the live site is as the 2026-09-08 deploy left it, and
+`TEST-QUEUE.md`'s three entries are still his to press, untouched here.
 
-**`LBL-` listen 1 has been RUN, unblinded and READ.** The served map against `LBD-A0V` —
-*the map the app serves today, against a map built from our own recomputation of
-ListenBrainz's listening data at their own settings, over exactly the artists the app
-serves.* Branch `lbd-listen`, **PR #116** (addresses only; `gh` says where they are).
-**The read is `LBL-R2`, the tie**, and its plain sentence was frozen before any journey
-existed: *"My ear cannot tell our recomputed lists from ListenBrainz's own."* **Nothing is
-adopted, no default changed, no shipped code touched.**
+**`LBL-` listen 2 is PREPARED and UNRUN.** The owner chose the route on 2026-09-12: keep the
+registered comparison — `LBD-A0V` against `LBD-A5V`, *does accepting a connection two listeners
+support, instead of four, give better journeys?* — and **re-draw the pairs**, with the six
+instrument fixes listen 1's findings note §4 asked for. Committed as **`LBD-AM6`**, before any
+listen-2 journey existed. Branch `lbl-listen2-prep`, **PR #122** (addresses only; `gh` says where
+they are).
 
-**What was found, in plain terms** (figures owned by
-[`findings/2026-09-11-lbl-listen1-results.md`](findings/2026-09-11-lbl-listen1-results.md),
-restated nowhere): **in a blind side-by-side he could not tell the two maps apart** — neither
-question came anywhere near the margin fixed before any journey existed (§1.1 there).
-⚠ **A tie is not "the maps are the same":** they differ a great deal in shape, and what the listen found is that the difference
-was **inaudible on this instrument**. Its limit was the pair draw — most rows he could not
-call were rows where he knew every artist on both sides, which **he said himself** — and
-**not one row was lost to a clip problem**, the first time that has held in this project's
-blind listens. **One pair moved, and it moved to our map**: obscure endpoints, long journeys,
-every depth on the coherence question, plus his only unprompted pair-level preference. One pair of eight
-carries no read; it is a hint about where to look. `WHAT-GOOD-LOOKS-LIKE` **value 8 gained a
-corroboration from inside the blind**, and no threshold comes off it.
-Entry point: [`2026-09-11-HANDOFF-lbl-listen1-read.md`](2026-09-11-HANDOFF-lbl-listen1-read.md).
+**What changed, in plain terms.** Listen 1 tied because the pairs were too easy, not because the
+maps are alike — most rows he could not call were rows where he knew every artist on both sides.
+So candidate pairs were screened, before the amendment was written, on two properties: the journey
+must be long enough to have a shape at every depth on both maps, and the two maps must actually
+disagree. Survivors were then ranked by how few of the artists in between he already knows. **The
+screen never looked at which map was better, only at how much they differed** — a screen that
+preferred one map's journeys would have hand-picked the pairs that map wins on. Counts are owned by
+[`../../builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md`](../../builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md)
+and restated nowhere.
 
-## ⛔ NO FURTHER BLIND LISTEN FOR NOW — owner's ruling, 2026-09-11
+**Every read is unchanged.** `LBL-R1`–`LBL-R4`, their listen-2 plain sentences, the margin bar and
+the row count are exactly as `LBD-AM5-5` registered them. Each row now also asks whether the two
+questions pulled him in opposite directions, and how strong each pick was — **and the tally does
+not read the strength.** A tally that did would be a different read wearing the same names.
 
-*"I don't want to do another blind listen immediately. I'll discuss with another session
-which route to take."* **Listen 2 does not start, and no session proposes starting it.**
+**`LBD-D6` is RULED** (2026-09-12; quoted verbatim in `LBD-AM6-7`): `LBD-A4` is **waived for
+listen 2 and enforced before `S4`**.
 
-**He is taking the route decision to a separate session, which reads only the committed
-record** — so the four options below are written to be decided from, not summarised from a
-conversation. **None of them starts on a session's initiative.**
+⛔ **No session starts the listen on its own initiative, and the session that prepared it may
+neither run it nor write it up** — it has seen journeys labelled by map. Entry point:
+[`2026-09-12-HANDOFF-lbl-listen2-prep.md`](2026-09-12-HANDOFF-lbl-listen2-prep.md).
 
-| # | the route | what it would settle | what it costs, and what gates it |
-|---|---|---|---|
-| **1** | **Spend listen 2** — `LBD-A0V` against `LBD-A5V`: *does accepting a connection two listeners support, instead of four, give better journeys?* | the threshold, and **only** the threshold. A listen-2 PASS does **not** say `LBD-A5V` beats the served map | his ear, on the same *kind* of pairs that produced this tie. **Gated on `LBD-D6`**, still unruled — `LBD-A4` was to run before any further arm was pre-registered and `LBD-A5` was registered without it. Pairs fixed, map built, materials not prepared |
-| **2** | **Re-draw the pairs and listen again on the harder ones** — a new amendment, new pairs, and the instrument fixes in the findings note §4 | **whether the tie is a fact about the maps or a limit of the instrument** — the question listen 1 leaves genuinely open | his ear again, plus a pre-registration. **Listen 1's verdict may NOT be re-listened** (`GBL-` §5): this is new pairs, never a re-run |
-| **3** | **Stop the `LBD-` track here.** The supply question is answered at the table, at the map and at the ear | nothing further; it closes the track with a null that is honestly bounded | nothing. `LBD-A4` closes with it — its deferral already says so |
-| **4** | **Go to `S4`** — the adoption decision proper: population rule, API sizing, fame source, refresh procedure | whether anything from this track ships | its own pre-registration and a rebuild. ⚠ **`LBL-R2` is not an adoption case**: a tie says "no audibly worse at this instrument's resolution", and `REQ-41` bars reading it as equivalence |
+**What stays open whichever way listen 2 reads:** stopping the `LBD-` track remains a complete
+outcome, and `S4` — the adoption decision proper (population rule, API sizing, fame source, refresh
+procedure) — remains its own pre-registration and rebuild. ⚠ **No listen outcome adopts anything**,
+and `REQ-41` bars reading a tie as equivalence.
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
 does not record how far down the list he has got.**
 
 1. **Run the three queued use-the-app tests** — live since the 2026-09-08 deploy. Nothing
    here changed them.
-2. **Merge PR #116.**
-3. **Rule on `LBD-D6`** if route 1 is in play; it gates that route and nothing else here.
-4. **Choose a route**, with the session he has said he will use for it.
+2. **Merge PR #122.**
+3. **Decide whether to spend listen 2.** Everything is prepared; it costs his ear and a sitting.
+4. **When he does:** a fresh, mechanics-only session runs `RUNNER-BRIEF.md` end to end, and a
+   further fresh session writes up the result.
 
 ---
 
@@ -289,7 +286,11 @@ its **topmost** heading says so.)*
   `LBD-A0V`'s, and the served-vs-`LBD-A0V` data gap is a bundle (corpus age, the absent
   `filter_True`, today's mapping, the uncredited band-member class, our tie-break) — **no
   attribution to "the data", and none inside the bundle.** **The listen-1 verdict may not be
-  re-listened** (`GBL-` §5's run-once rule); a further listen is a new amendment on new pairs.
+  re-listened** (`GBL-` §5's run-once rule); a further listen is a new amendment on new pairs. **`LBD-AM6` (2026-09-12) is that amendment**, and adds two bars of its
+  own: the pairs were selected on the **magnitude** of the two maps' difference and on
+  unfamiliarity, **never on direction** — a screen that saw direction would invalidate the listen;
+  and **`LBD-X6`**, listen 2's result may not be generalised to the cheaper pairing form until
+  `LBD-A4` has run and `R10` has been read. **Pick strength is recorded but never tallied.**
   The drop list for `V` is the served lineage's `20260805` file, never `LBD-AM4`'s `20260809`,
   which would drop 31 served artists. **The owner's closing note changed no number** — the
   findings note's §1.5 carries the arithmetic — and his "slight"/"strong" wording is not a

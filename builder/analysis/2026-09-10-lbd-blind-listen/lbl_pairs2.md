@@ -1,6 +1,6 @@
 # `LBL-` listen 2 pairs — `LBD-AM6`
 
-Selected by `lbl_prescreen2.py` from 46 candidate pairs; 28 survived both gates. Ranked by fewest familiar interior artists. Figures owned by `lbl_prescreen2.md`; this table restates none of them beyond each pair's own count.
+Selected by `lbl_prescreen2.py` from the candidate draw, ranked by fewest familiar interior artists. **Every count — pool, drawn, survivors, and why each rejected pair failed — is owned by [`lbl_prescreen2.md`](lbl_prescreen2.md) and is restated nowhere, including here.** The two figures on each row below are that pair's own.
 
 ## Primary
 

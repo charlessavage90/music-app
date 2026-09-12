@@ -15,6 +15,7 @@ blind runner to read, and `lbl_prescreen2.json` is not.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import datetime, timezone
@@ -34,7 +35,36 @@ def slim(row: dict) -> dict:
     }
 
 
+def render_md(out: dict) -> None:
+    """The human-readable table. Restates no count the pre-screen owns."""
+    lines = ["# `LBL-` listen 2 pairs — `LBD-AM6`", "",
+             "Selected by `lbl_prescreen2.py` from the candidate draw, ranked by fewest familiar "
+             "interior artists. **Every count — pool, drawn, survivors, and why each rejected pair "
+             "failed — is owned by [`lbl_prescreen2.md`](lbl_prescreen2.md) and is restated nowhere, "
+             "including here.** The two figures on each row below are that pair's own.", ""]
+    for part, title in (("primary", "Primary"), ("reserve", "Reserve, in order")):
+        lines += [f"## {title}", "", "| # | A | B | familiar interiors / distinct |", "|---|---|---|---:|"]
+        for i, p in enumerate(out[part], 1):
+            lines.append(f"| {i} | {p['a']['name']} | {p['b']['name']} | "
+                         f"{p['familiar_interior']}/{p['distinct_interior']} |")
+        lines.append("")
+    in_dir("lbl_pairs2.md").write_text("\n".join(lines), encoding="utf-8")
+
+
 def main(argv: list = None) -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--md-only", action="store_true",
+                    help="re-render the table from the committed lbl_pairs2.json. The pinned JSON is "
+                         "NOT rewritten: its sha256 is pinned in lbl_common and a fresh timestamp "
+                         "would break the harness's G3 gate for no gain.")
+    args = ap.parse_args(argv)
+
+    if args.md_only:
+        out = json.loads(in_dir("lbl_pairs2.json").read_text(encoding="utf-8"))
+        render_md(out)
+        print("[pairs2] re-rendered lbl_pairs2.md; lbl_pairs2.json untouched", flush=True)
+        return 0
+
     pre = json.loads(PRESCREEN.read_text(encoding="utf-8"))
     survivors = pre["survivors_ranked"]
     if len(survivors) < WANTED:
@@ -56,19 +86,7 @@ def main(argv: list = None) -> int:
         "finished_utc": datetime.now(timezone.utc).isoformat(),
     }
     in_dir("lbl_pairs2.json").write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
-
-    lines = ["# `LBL-` listen 2 pairs — `LBD-AM6`", "",
-             "Selected by `lbl_prescreen2.py` from "
-             f"{pre['counts']['drawn']} candidate pairs; {pre['counts']['survivors']} survived both "
-             "gates. Ranked by fewest familiar interior artists. Figures owned by "
-             "`lbl_prescreen2.md`; this table restates none of them beyond each pair's own count.", ""]
-    for part, title in (("primary", "Primary"), ("reserve", "Reserve, in order")):
-        lines += [f"## {title}", "", "| # | A | B | familiar interiors / distinct |", "|---|---|---|---:|"]
-        for i, p in enumerate(out[part], 1):
-            lines.append(f"| {i} | {p['a']['name']} | {p['b']['name']} | "
-                         f"{p['familiar_interior']}/{p['distinct_interior']} |")
-        lines.append("")
-    in_dir("lbl_pairs2.md").write_text("\n".join(lines), encoding="utf-8")
+    render_md(out)
     print(f"[pairs2] wrote lbl_pairs2.json sha256 {sha256_of(in_dir('lbl_pairs2.json'))}", flush=True)
     for p in out["primary"]:
         print(f"[pairs2] primary  {p['a']['name']} -> {p['b']['name']}", flush=True)

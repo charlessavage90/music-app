@@ -211,3 +211,34 @@ def test_maps_tuple_names_exactly_the_two_listen_two_maps():
 def test_screen_refuses_rather_than_silently_keeping_an_empty_result(bad):
     reason, _ = screen(bad)
     assert reason is not None
+
+
+# --- the bars themselves, pinned independently of the constants that set them -------------------
+# `long_enough` above builds its fixtures FROM `MIN_INTERIOR`, so every test using it moves with the
+# constant and passes at any value — it tests the mechanism, never the bar. Found by the closeout
+# mutation check on 2026-09-12: setting MIN_INTERIOR to 1 left the whole file green.
+
+def test_the_two_bars_are_the_values_lbd_am6_fixed():
+    assert MIN_INTERIOR == 3, "findings note §4.1: three interior artists at every depth"
+    assert MIN_DIFFERING_DEPTHS == 2, "two of the three depths must differ"
+
+
+def test_two_interior_artists_are_rejected_whatever_the_constant_happens_to_be():
+    """A literal fixture, so this goes red if the bar is ever lowered without the amendment."""
+    two = {d: ["x", "y"] for d in (0, 10, 20)}
+    other = {d: ["p", "q"] for d in (0, 10, 20)}
+    reason, _ = screen(per_map(two, other))
+    assert reason is not None and "interior artists" in reason
+
+
+def test_three_interior_artists_are_accepted():
+    three = {d: ["x", "y", "z"] for d in (0, 10, 20)}
+    other = {d: ["p", "q", "r"] for d in (0, 10, 20)}
+    assert screen(per_map(three, other))[0] is None
+
+
+def test_the_screen_and_the_generation_gate_use_the_SAME_bar():
+    """Pairs are SELECTED at the pre-screen's bar and GATED at the harness's. If the two ever
+    diverge, a pair chosen as long enough is rejected at generation, or worse, admitted short."""
+    from lbl_common import MIN_INTERIOR_BY_LISTEN
+    assert MIN_INTERIOR == MIN_INTERIOR_BY_LISTEN[2]
