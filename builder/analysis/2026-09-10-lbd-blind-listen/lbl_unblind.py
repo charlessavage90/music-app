@@ -11,14 +11,31 @@ import json
 import statistics
 import sys
 
-from lbl_common import AXES, DEPTHS, LISTENS, MARGIN, in_dir, sealed_path
+from lbl_common import (
+    AXES,
+    DEPTHS,
+    LISTENS,
+    MARGIN,
+    ROW_EXTRAS_BY_LISTEN,
+    STRENGTHS,
+    in_dir,
+    sealed_path,
+)
+from lbl_page import row_complete
 
-# LBD-AM5-5's plain sentences, quoted; [axis] is substituted.
+# LBD-AM5-5's plain sentences, quoted; [axis] is substituted. Listen 2's column is quoted from the
+# same table and is UNCHANGED by LBD-AM6 — the amendment re-draws the pairs; it never touches a read.
 SENTENCES = {
     1: {
         "LBL-R1": "Journeys from our own recomputation are better on [axis], and no worse on the other.",
         "LBL-R2": "My ear cannot tell our recomputed lists from ListenBrainz's own.",
         "LBL-R3": "The lists ListenBrainz published give better journeys on [axis].",
+        "LBL-R4": "Too many rows were lost to clip problems to read this listen.",
+    },
+    2: {
+        "LBL-R1": "The two-listener bar gives better journeys on [axis], and no worse on the other.",
+        "LBL-R2": "My ear cannot tell the two bars apart.",
+        "LBL-R3": "ListenBrainz's own bar gives better journeys on [axis].",
         "LBL-R4": "Too many rows were lost to clip problems to read this listen.",
     },
 }
@@ -66,15 +83,52 @@ def listen_read(axes: dict[str, dict]) -> tuple[str, list[str]]:
     return "LBL-R2", []
 
 
-def tally(state: dict, mapping: dict) -> dict:
+def tally(state: dict, mapping: dict, extras: tuple = ()) -> dict:
+    """The primary read. UNCHANGED by `LBD-AM6`: it counts rows, and nothing else enters it.
+
+    `extras` only tightens the run-state check — a listen that asked `LBL-Q3`/`LBL-Q4` is incomplete
+    until those are answered too. Neither ever reaches a verdict.
+    """
     missing = [f"{k}:d{d}" for k in mapping for d in DEPTHS
-               if not all(state["rows"].get(k, {}).get(str(d), {}).get(q) for q in AXES)]
+               if not row_complete(state["rows"].get(k, {}).get(str(d)), extras)]
     missing += [f"{k}:pair" for k in mapping if k not in state["pairs"]]
     if missing:
         raise RunIncomplete(f"LBD-AM5-5 run state unmet — no read exists. Missing: {missing}")
     axes = {AXES[q]: axis_read(state["rows"], mapping, q) for q in AXES}
     read, named = listen_read(axes)
     return {"axes": axes, "read": read, "axes_named": named}
+
+
+def descriptive_extras(state: dict, mapping: dict, extras: tuple) -> dict:
+    """`LBD-AM6`'s SECONDARY read: pre-registered, descriptive, and it DECIDES NOTHING.
+
+    `LBL-R1`–`LBL-R4` are unchanged, so pick strength cannot enter them — a tally that weighted
+    strength would be a different read, and the owner's instruction was to keep the reads as
+    written. What strength CAN do is say whether the rows carrying a margin were landslides or
+    hairlines, which listen 1 could not say at all (findings note §4.5, which also bars inventing
+    that coding after the fact — asking on the row, in advance, is what makes it admissible).
+
+    No threshold is attached to anything here and no branch reads it.
+    """
+    out = {"decides": "nothing — LBL-R1 to LBL-R4 read the row tally only"}
+    rows = [state["rows"][k][d] for k in mapping for d in map(str, DEPTHS)]
+    if "strength" in extras:
+        per_axis = {}
+        for q, axis in AXES.items():
+            counts = {s: {"challenger": 0, "incumbent": 0} for s in STRENGTHS}
+            for k, m in mapping.items():
+                for d in map(str, DEPTHS):
+                    entry = state["rows"][k][d]
+                    pick, s = entry[q], entry.get(f"{q}_strength")
+                    if pick in m and s in STRENGTHS:
+                        counts[s][m[pick]] += 1
+            per_axis[axis] = counts
+        out["pick_strength"] = per_axis
+    if "tradeoff" in extras:
+        out["tradeoff_rows"] = {"yes": sum(1 for r in rows if r.get("tradeoff") == "yes"),
+                                "no": sum(1 for r in rows if r.get("tradeoff") == "no"),
+                                "of_rows": len(rows)}
+    return out
 
 
 def sentence(listen: int, read: str, named: list[str]) -> str:
@@ -120,9 +174,12 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     state = json.loads(in_dir(f"lbl_listen{args.listen}_verdicts.json").read_text("utf-8"))
     sealed = json.loads(sealed_path(f"lbl_listen{args.listen}_sealed.json").read_text("utf-8"))
-    out = tally(state, sealed["mapping"])
+    extras = ROW_EXTRAS_BY_LISTEN[args.listen]
+    out = tally(state, sealed["mapping"], extras)
     out["sentence"] = sentence(args.listen, out["read"], out["axes_named"])
     out["ear_tracking"] = ear_tracking(state, sealed)
+    if extras:
+        out["descriptive_only"] = descriptive_extras(state, sealed["mapping"], extras)
     out["mapping_unsealed"] = sealed["mapping"]
     out["maps"] = sealed["maps"]
     out["substitutions"] = sealed["substitutions"]
