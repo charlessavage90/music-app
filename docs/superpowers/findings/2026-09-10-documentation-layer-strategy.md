@@ -244,6 +244,26 @@ were not `Read`-tool opens, and say how many it excluded.** *(Raised by a sessio
 "not a qualifying session", which is the difference between repairing the instrument and
 documenting an exclusion.)*
 
+**Why sessions differ, established 2026-09-12. It is configuration, not chance, and it changes the
+forecast.** Two separate causes, both verifiable:
+
+- **Tool grant.** `.claude/agents/consultant.md` declares `tools: Read, Grep, Glob` — **no Bash**.
+  A consultant session therefore *cannot* read through the shell, so every file it opens is a
+  `Read`-tool open. That is why the only non-authoring `path_glob_match` in the log came from one.
+- **An injected preference on main sessions.** When the Chrome integration is active a session
+  receives an instruction to prefer Bash for reading, searching and editing wherever Bash can do
+  the job, falling back to `Read`/`Edit`/`Write` only when it cannot. It is not a project setting
+  and appears in no repository config; it arrives with the integration. The authoring session of
+  this entry had that text in its own context while writing it.
+
+**Consequence for the read, and it is not small.** A qualifying session is in practice *a main
+session that overrode its own default*. Of the two main sessions on 2026-09-12, one qualified, and
+only because it chose `Read` deliberately for one plan. **So the 2026-09-24 window is considerably
+more likely to close on fewer than three qualifying sessions than the bare count suggests**, which
+sends `C1` to §6's substitute-probe branch. Deliberately opening a plan or spec with the `Read`
+tool is **not** gaming the result: `C1` asks whether the rule loads *on such an open*, not how
+often sessions choose one, and §6's own positive control did exactly that.
+
 **`DLS-T1-X2` — working in a worktree does NOT make a session invisible. Where it was *launched*
 is what decides.** ⚠ *This entry replaces a wrong version committed earlier the same day, which
 said a session working in a worktree writes to `<worktree>/.claude/logs/` and loses it. That is
