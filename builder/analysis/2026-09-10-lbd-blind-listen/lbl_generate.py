@@ -43,13 +43,14 @@ from lbl_common import (
     DEPTHS,
     LISTENS,
     MAPS_PIN,
-    PAIRS_FILE,
+    MIN_INTERIOR_BY_LISTEN,
+    PAIRS_BY_LISTEN,
     PAIRS_PER_LISTEN,
-    PAIRS_SHA,
     PRODUCTION,
     ROLES,
     ROOT,
     SERVED,
+    SIDE_ASSIGNMENT_BY_LISTEN,
     TOKENS,
     in_dir,
     load_map,
@@ -130,8 +131,13 @@ def adjacent(store, a: int, b: int) -> bool:
     return any(n == b for n, _ in store.neighbours_of(a))
 
 
-def check_pair(maps: dict, keys: dict, pair: dict, cfg) -> tuple[str | None, dict]:
-    """`LBD-AM5-5`'s (a), (b), (c) in that order. Returns (reason or None, ladders by role)."""
+def check_pair(maps: dict, keys: dict, pair: dict, cfg, min_interior: int = 1) -> tuple[str | None, dict]:
+    """`LBD-AM5-5`'s (a), (b), (c) in that order. Returns (reason or None, ladders by role).
+
+    `min_interior` is gate (c)'s bar, per listen (`MIN_INTERIOR_BY_LISTEN`). Listen 1 ran at 1, and
+    the findings note §4.1 is the record of what that cost; `LBD-AM6` raises it for listen 2. The
+    default is 1 so the frozen listen-1 behaviour is what an un-parameterised call still gets.
+    """
     a, b = pair["a"]["mbid"], pair["b"]["mbid"]
     for role in ROLES:
         store = maps[role]["store"]
@@ -147,6 +153,9 @@ def check_pair(maps: dict, keys: dict, pair: dict, cfg) -> tuple[str | None, dic
         ladders[role] = ladder(store, store.id_by_mbid[a], store.id_by_mbid[b], keys[role], cfg)
         if any(d not in ladders[role] for d in DEPTHS):
             return "(c) the pair does not reach every depth with an interior artist in one map", {}
+        if any(len(ladders[role][d][0]) - 2 < min_interior for d in DEPTHS):
+            return (f"(c) the pair does not reach every depth with {min_interior} interior artists "
+                    "in one map"), {}
     return None, ladders
 
 
@@ -247,12 +256,45 @@ def build_page(listen: int, chosen: list[tuple[dict, dict]], maps: dict, mapping
 
 
 def shuffle_mapping(keys: list[str], rng) -> dict[str, dict[str, str]]:
+    """Listen 1's rule: each pair drawn independently. It landed 7-1 (findings note §3)."""
     out = {}
     for k in keys:
         roles = list(ROLES)
         rng.shuffle(roles)
         out[k] = dict(zip(TOKENS, roles))
     return out
+
+
+def deal_mapping(keys: list[str], rng) -> dict[str, dict[str, str]]:
+    """`LBD-AM6`, findings note §4.6: DEAL the sides to a balanced split instead of drawing them.
+
+    Which pairs put the challenger on the left is still random; how MANY do is not. With an odd
+    number of pairs the split is as even as it can be and the extra side is drawn.
+    """
+    order = list(keys)
+    rng.shuffle(order)
+    half = len(order) // 2
+    if len(order) % 2 and rng.random() < 0.5:
+        half += 1
+    left_is_challenger = set(order[:half])
+    return {k: ({"L": "challenger", "R": "incumbent"} if k in left_is_challenger
+                else {"L": "incumbent", "R": "challenger"}) for k in keys}
+
+
+def assert_differential(chosen: list, maps: dict) -> None:
+    """G5. Refuse a page that serves one map against itself — every row would be identical.
+
+    Extracted so it can be tested: this is the guard that a mis-pinned `lbl_maps.json` naming the
+    same artifact under both roles cannot reach the owner. It fires on identity everywhere, which
+    is what a self-comparison produces, and passes on a single differing row.
+    """
+    def mbids_of(role: str, ladders: dict, d: int) -> list:
+        store = maps[role]["store"]
+        return [store.mbids[v] for v in ladders[role][d][0]]
+
+    if not any(mbids_of("incumbent", lad, d) != mbids_of("challenger", lad, d)
+               for _pair, lad in chosen for d in DEPTHS):
+        raise SystemExit("G5 FAILED: the two maps return the same journey everywhere")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -272,28 +314,28 @@ def main(argv: list[str] | None = None) -> int:
     from artistpath_api.graph_store import GraphStore
     if not routing_identical(served["store"], GraphStore.load(PRODUCTION)):
         raise SystemExit(f"G2 FAILED: {SERVED.name} does not route identically to {PRODUCTION.name}")
-    if sha256_of(PAIRS_FILE) != PAIRS_SHA:
-        raise SystemExit(f"G3 FAILED: {PAIRS_FILE.name} is not the pinned pair file")
-    pairs = json.loads(PAIRS_FILE.read_text(encoding="utf-8"))[f"listen{listen}"]
+    pairs_file, pairs_sha = PAIRS_BY_LISTEN[listen]
+    if sha256_of(pairs_file) != pairs_sha:
+        raise SystemExit(f"G3 FAILED: {pairs_file.name} is not the pinned pair file")
+    pair_doc = json.loads(pairs_file.read_text(encoding="utf-8"))
+    # Listen 1's file holds both listens' tables; LBD-AM6's file is listen 2's alone.
+    pairs = pair_doc[f"listen{listen}"] if f"listen{listen}" in pair_doc else pair_doc
     if len(pairs["primary"]) != PAIRS_PER_LISTEN:
         raise SystemExit(f"G3 FAILED: {len(pairs['primary'])} primary pairs, not {PAIRS_PER_LISTEN}")
-    print(f"[lbl] listen {listen}: maps verified; production twin identical; pairs pinned", flush=True)
+    min_interior = MIN_INTERIOR_BY_LISTEN[listen]
+    print(f"[lbl] listen {listen}: maps verified; production twin identical; pairs pinned "
+          f"({pairs_file.name}); gate (c) bar {min_interior} interior artist(s)", flush=True)
 
     # --- G4 --------------------------------------------------------------------------------------
     cfg = ApiConfig()
     keys = {role: press_key(maps[role]["store"], maps[role]["raw_fame"]) for role in ROLES}
     chosen, substitutions = choose_pairs(pairs["primary"], pairs["reserve"],
-                                         lambda pair: check_pair(maps, keys, pair, cfg))
+                                         lambda pair: check_pair(maps, keys, pair, cfg, min_interior))
     for s in substitutions:
         print(f"[lbl] slot {s['slot']}: {s['replaced']} replaced by the next reserve ({s['reason'][:3]})", flush=True)
 
     # --- G5 --------------------------------------------------------------------------------------
-    def mbids_of(role, ladders, d):
-        store = maps[role]["store"]
-        return [store.mbids[v] for v in ladders[role][d][0]]
-
-    if not any(mbids_of("incumbent", l, d) != mbids_of("challenger", l, d) for _p, l in chosen for d in DEPTHS):
-        raise SystemExit("G5 FAILED: the two maps return the same journey everywhere")
+    assert_differential(chosen, maps)
 
     # --- sealed record, page ---------------------------------------------------------------------
     sstore = served["store"]
@@ -307,9 +349,12 @@ def main(argv: list[str] | None = None) -> int:
 
     rng = random.SystemRandom()
     keys_order = [f"{p['a']['mbid']}|{p['b']['mbid']}" for p, _l in chosen]
-    mapping = shuffle_mapping(keys_order, rng)
+    assignment = SIDE_ASSIGNMENT_BY_LISTEN[listen]
+    mapping = (deal_mapping if assignment == "dealt_balanced" else shuffle_mapping)(keys_order, rng)
     sealed = {
         "listen": listen, "mapping": mapping, "substitutions": substitutions,
+        "side_assignment": assignment, "min_interior_gate": min_interior,
+        "pairs_file": {"name": pairs_file.name, "sha256": pairs_sha},
         "maps": {role: {"path": str(maps[role]["path"]), "sha256": maps[role]["sha256"]} for role in ROLES},
         "api_config": {k: v for k, v in dataclasses.asdict(cfg).items() if k.startswith(("w_", "floor", "avoid"))},
         "hub_set_frozen_on": SERVED.name, "fame_ruler": f"{SERVED.name} fame_lb_pctl by MBID",

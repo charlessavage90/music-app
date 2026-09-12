@@ -188,3 +188,107 @@ def test_routing_identity_sees_a_single_changed_score(store):
     scores = np.array(store.scores, copy=True)
     scores[0] = scores[0] * 0.5 + 0.01
     assert not routing_identical(store, dataclasses.replace(store, scores=scores))
+
+
+# --- LBD-AM6: the raised generation gate, balanced dealing, and the differential guard -----------
+
+def test_the_default_gate_bar_is_one_which_is_listen_one_exactly_as_it_ran():
+    from lbl_common import MIN_INTERIOR_BY_LISTEN
+    import inspect
+    from lbl_generate import check_pair
+    assert MIN_INTERIOR_BY_LISTEN[1] == 1 and MIN_INTERIOR_BY_LISTEN[2] == 3
+    assert inspect.signature(check_pair).parameters["min_interior"].default == 1
+
+
+def test_gate_c_fires_on_short_interiors_even_when_every_depth_is_reached(store, monkeypatch):
+    """The findings note §4.1 defect: listen 1's gate asked for a depth, not for a journey."""
+    import sys
+    sys.path.insert(0, str(ROOT / "api" / "src"))
+    from artistpath_api.config import ApiConfig
+
+    import lbl_generate as G
+    s, t = far_pair(store)
+    two_interiors = {d: ([s, 1, 2, t], "ok", []) for d in DEPTHS}
+    monkeypatch.setattr(G, "ladder", lambda *a, **k: two_interiors)
+    maps = {"incumbent": {"store": store}, "challenger": {"store": store}}
+    p = {"a": {"mbid": store.mbids[s], "name": "S"}, "b": {"mbid": store.mbids[t], "name": "T"}}
+    keys = {"incumbent": None, "challenger": None}
+
+    reason, ladders = G.check_pair(maps, keys, p, ApiConfig(), min_interior=3)
+    assert reason.startswith("(c)") and "3 interior artists" in reason and ladders == {}
+    reason, ladders = G.check_pair(maps, keys, p, ApiConfig(), min_interior=2)
+    assert reason is None and set(ladders) == {"incumbent", "challenger"}
+
+
+def test_the_sides_are_dealt_to_a_balanced_split():
+    from lbl_generate import deal_mapping
+    keys = [f"k{i}" for i in range(8)]
+    m = deal_mapping(keys, random.Random(0))
+    lefts = [m[k]["L"] for k in keys]
+    assert lefts.count("challenger") == 4 and lefts.count("incumbent") == 4
+    assert list(m) == keys
+
+
+def test_every_dealt_pair_still_carries_both_roles_exactly_once():
+    from lbl_generate import deal_mapping
+    m = deal_mapping([f"k{i}" for i in range(8)], random.Random(3))
+    assert all(sorted(v.values()) == ["challenger", "incumbent"] and set(v) == set(TOKENS)
+               for v in m.values())
+
+
+def test_dealing_still_randomises_which_pairs_get_which_side():
+    """Balanced is not fixed: the 4-4 split must land on different pairs from run to run."""
+    from lbl_generate import deal_mapping
+    keys = [f"k{i}" for i in range(8)]
+    seen = {tuple(deal_mapping(keys, random.Random(s))[k]["L"] for k in keys) for s in range(12)}
+    assert len(seen) > 1
+
+
+def test_an_odd_number_of_pairs_splits_as_evenly_as_it_can():
+    from lbl_generate import deal_mapping
+    keys = [f"k{i}" for i in range(7)]
+    counts = {[deal_mapping(keys, random.Random(s))[k]["L"] for k in keys].count("challenger")
+              for s in range(12)}
+    assert counts <= {3, 4}
+
+
+class _Store:
+    """Only what `assert_differential` reads."""
+
+    def __init__(self, n):
+        self.mbids = [f"m{i}" for i in range(n)]
+
+
+def _ladders(incumbent_paths, challenger_paths):
+    return {"incumbent": {d: (p, "ok", []) for d, p in incumbent_paths.items()},
+            "challenger": {d: (p, "ok", []) for d, p in challenger_paths.items()}}
+
+
+def test_a_page_serving_one_map_against_itself_is_refused():
+    store = _Store(8)
+    maps = {"incumbent": {"store": store}, "challenger": {"store": store}}
+    same = {d: [0, 1, 2, 7] for d in DEPTHS}
+    from lbl_generate import assert_differential
+    with pytest.raises(SystemExit, match="G5 FAILED"):
+        assert_differential([({"a": 1, "b": 2}, _ladders(same, dict(same)))], maps)
+
+
+def test_one_differing_row_anywhere_passes_the_differential():
+    store = _Store(8)
+    maps = {"incumbent": {"store": store}, "challenger": {"store": store}}
+    a = {d: [0, 1, 2, 7] for d in DEPTHS}
+    b = dict(a)
+    b[20] = [0, 3, 4, 7]
+    from lbl_generate import assert_differential
+    assert assert_differential([({"a": 1, "b": 2}, _ladders(a, b))], maps) is None
+
+
+def test_the_differential_looks_across_every_pair_not_only_the_first():
+    store = _Store(8)
+    maps = {"incumbent": {"store": store}, "challenger": {"store": store}}
+    same = {d: [0, 1, 2, 7] for d in DEPTHS}
+    other = {d: [0, 4, 5, 7] for d in DEPTHS}
+    from lbl_generate import assert_differential
+    chosen = [({"a": 1, "b": 2}, _ladders(same, dict(same))),
+              ({"a": 3, "b": 4}, _ladders(same, other))]
+    assert assert_differential(chosen, maps) is None
