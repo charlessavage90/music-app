@@ -244,13 +244,26 @@ were not `Read`-tool opens, and say how many it excluded.** *(Raised by a sessio
 "not a qualifying session", which is the difference between repairing the instrument and
 documenting an exclusion.)*
 
-**`DLS-T1-X2` — worktree sessions are invisible.** The hook resolves its log directory from its
-own file location, so a session in a worktree writes to `<worktree>/.claude/logs/`, which is
-gitignored and is destroyed with the worktree. §6's unit already requires a session *started in
-`C:\dev\music-app`*, so `C1` is unaffected — but **the count accrues only from the main tree**. If
-most work moves to worktrees, the window can reach 2026-09-24 with fewer than three qualifying
-sessions and fall through to §6's substitute-probe branch. **The log is not being repointed**:
-§6 freezes the instrument until `C1` is read.
+**`DLS-T1-X2` — working in a worktree does NOT make a session invisible. Where it was *launched*
+is what decides.** ⚠ *This entry replaces a wrong version committed earlier the same day, which
+said a session working in a worktree writes to `<worktree>/.claude/logs/` and loses it. That is
+false for the common case and the correction is the point of the entry.*
+
+**Verified 2026-09-12.** Session `e9f8ccc4` was launched in `C:\dev\music-app`, took a worktree as
+its first action, and did all its work there. Its log lines are in the **main tree's** log, stamped
+`cwd: C:\dev\music-app`. A session's settings and hooks are bound at launch and do not follow it
+across a `git worktree add`. So:
+
+- **A session launched in the main tree that then takes a worktree keeps logging to the main tree,
+  and stays eligible under §6's unit**, which asks where it was *started*. This is the pattern the
+  owner uses, so the count is not leaking.
+- **A session launched with its working directory already inside a worktree** would load that
+  worktree's settings, and its log would be gitignored and destroyed with the worktree. **Untested
+  — stated as inference, not observation.** Consistent with the `music-app-lbl` worktree having no
+  `.claude/logs/` directory at all as of 2026-09-12, which is what a hook that never ran there
+  looks like.
+
+**The log is not being repointed**: §6 freezes the instrument until `C1` is read.
 
 **`DLS-T1-X3` — three synthetic rows to exclude, and they are mine.** Lines 15–17, timestamped
 **2026-09-12T16:16:01.650Z, 16:16:02.023Z and 16:16:02.400Z**, have every field null. They are not

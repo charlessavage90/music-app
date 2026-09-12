@@ -113,10 +113,11 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
 >   answer holds still.
 >
 > **The command and the full rule are in the "Uncommitted work you did not create" bullet below
-> — this block only moves them earlier.** One addition to the gitignored list there: **`.claude/logs/`
-> does not come with you either.** The instructions log the `DLS-T1` probe reads is resolved from
-> the hook's own file location, so a worktree writes its own copy and it is destroyed with the
-> worktree.
+> — this block only moves them earlier.** One thing that is *not* a worry, because a first draft of
+> this block got it wrong: **your hooks and settings are bound where the session was launched and
+> do not follow you across a `git worktree add`.** A session started in the main tree keeps writing
+> its `.claude/logs/` there and stays eligible for the `DLS-T1` count. Only a session *launched*
+> with its working directory already inside a worktree would use that worktree's copy.
 >
 > *(Added 2026-09-12, from a live two-session case that hit both failures in one orientation.)*
 
