@@ -777,6 +777,291 @@ it, the threshold-curve script beside the Task 4 scripts it reads with.
 across every ref 2026-09-10 (`git grep -lE '\bLBD-AM4\b'` over `refs/remotes refs/heads`,
 `*.md`): free.
 
+### ⚠ AMENDED 2026-09-10 (night) by `LBD-AM5` — two arms over the SERVED population, and the blind listen's read
+
+**Written AFTER the build stage's reads existed** (`builder/analysis/2026-09-10-lbd-supply/README.md`)
+**and BEFORE anything this amendment names was derived, emitted or built, and before any journey
+was generated on any map.** It spends nothing: no criterion in §2–§9 is re-read, and **no value
+changes** (`LBD-AM5-7`). It adds two arms, one population control, two named exposures, and the
+read of a blind listen. The owner instructed it on 2026-09-10, at the build-stage stop.
+
+**Two measurements were taken before it was written, and nothing else.** Both are pre-build and
+neither computes a journey: `builder/analysis/2026-09-10-lbd-served-population/lbv_coverage.py`
+(the drop lists over the served population; `lbv_coverage.json`) and
+`builder/analysis/2026-09-10-lbd-blind-listen/lbl_pairs.py` (the pair draw; `lbl_pairs.json`),
+**whose rule was committed at `13410fa` before it ran.** Figures from the build this amendment
+commissions are owned by `builder/analysis/2026-09-10-lbd-served-population/README.md` once it
+exists; this block owns only the two pre-measurements it turns on.
+
+**`LBD-AM5-1` — the population `V` is the SERVED map's own.** *Plain: build the maps over exactly
+the artists the app serves today, so that "the map you use" and "the map our own similarity would
+give" differ in the similarity data — and in as little else as the pipeline allows, which §`LBD-X4`
+below sizes.* `V` is the node set of `graph-msw-tu50.bin` (sha256 `43dd82bb…`, matched its sidecar,
+read through the shipped `GraphStore`; `ApiConfig.graph_path`'s default) — **58,838** artists.
+`V ∩ P` is **exactly** the pinned pre-existing set of §3 (58,793) and `V − P` is **45** artists,
+which is the check that `V` was read correctly. **Same emitter** (`emit_archive.py`, unedited,
+pointed at `V`) and **the same rule as `LBD-AM4-1`**: a payload only for a member of `V`, a
+neighbour row only when both ends are in `V`, applied to the derived arm **after** its own threshold
+and rank cut over the full corpus, never re-ranked inside `V`.
+
+**`LBD-AM5-2` — the arms.**
+
+- **`LBD-A5` — a derivation of `T`: `score > 3`, ranked per `mbid0`, `rank <= 100`** — §1's
+  definition at those two tokens, by `lbd_derive.py`'s SQL unedited. *Plain: keep ListenBrainz's
+  hundred-connection cut, and accept a connection only when at least two different people's
+  listening supports it.* By §7's arithmetic a pair needs ⌈(3+1)/3⌉ = **2** distinct listeners,
+  against **4** at `LBD-A0`'s threshold 10 and **1** at the floor. **Threshold 3 was chosen from the
+  committed descriptive curve** (`builder/analysis/2026-09-08-lbd-similarity/README.md` §6c, figures
+  owned there and restated nowhere): that curve shows "threshold 0" means one listener in one
+  session, and that most of the drop in dead ends between ListenBrainz's bar and the floor has
+  arrived by a bar of 3. **It is a choice made with the curve in hand, and is named as one**; no
+  criterion here reads the curve, and `LBD-AM4-5`'s "it decides nothing" is unchanged.
+- **`LBD-A0V` — `LBD-A0` emitted over `V` and built.** *Plain: the rules ListenBrainz used for the
+  lists we ship, run by us on today's listening data, over exactly the artists the app serves.*
+- **`LBD-A5V` — `LBD-A5` emitted over `V` and built.** *Plain: the same, but a connection needs two
+  listeners rather than four.*
+
+**The factor table.** One row per map; the isolating baseline is the row that differs in exactly
+one column.
+
+| map | similarity data | `threshold` | `limit` | population the cap step sees | drop lists | cap / top-*j* / ceiling | fame records | router | isolating baseline |
+|---|---|---|---|---|---|---|---|---|---|
+| **served** — `graph-msw-tu50.bin` | ListenBrainz's deployed lists (`ALG-B`, `grt-archive-algb.pre-cex-snapshot`) | LB's 10 | LB's 100 | the archive's, after drops: **59,277** | `unlistenable_…20260805`, `no_release_…20260802`, `featured_credit_…20260803_am1` | `trimmed_union` 50 / 50 | the `fame` stage's records in that snapshot | `ApiConfig` defaults | — |
+| **`LBD-A0V`** | ours, today's corpus, LB's parameters less `filter_True` (`LBD-X3`) | 10 | 100 | `V`, after drops | the same three files, **measured inert on `V`** (`LBD-AM5-3`) | same | **the same records, by MBID** (`LBD-AM5-4`) | same | **served** — the data column, bundled (`LBD-X5`), plus `LBD-X4` |
+| **`LBD-A5V`** | ours, today's corpus | **3** | 100 | `V`, after drops | same | same | same | same | **`LBD-A0V` — `threshold` only** |
+
+*Held constant, and why each genuinely is:* the cap strategy, `union_top_j`, `union_degree_ceiling`,
+`similarity_rescale` and `similarity_damping` — `BuilderConfig` defaults, identical to the served
+map's recorded configuration (asserted against its sidecar by the build script before building);
+the three drop lists — the served lineage's own files (its rebuild's sidecar, `graph-lux4.bin.json`,
+records them) and **measured to remove no member of `V`**, so no arm can differ in what they remove;
+the fame records — identical per MBID by construction (`LBD-AM5-4`); the router — `ApiConfig`
+defaults and one code path for every map; the pairs, depths and press rule — identical by design
+(`LBD-AM5-5`).
+
+*Named exposures, not constant in effect:*
+
+- **`LBD-X4` — the population at the cap step.** The served build had **59,277** artists when its
+  cap rule chose neighbours and kept **58,838** after the largest-component prune (MSW execution log,
+  the refused-run counts, reproduced by the real build). So **439 artists (0.74 %) could hold
+  top-*j* slots in the served build and cannot in `LBD-A0V`**, because the emitter never writes them.
+  The effect can only run one way — it frees slots for members of `V` — and its size in journeys is
+  unmeasured. **Consequence, a bar:** no sentence may attribute a listen-1 verdict to "the similarity
+  data" without naming this term beside it. It does not touch listen 2, where both maps see `V`.
+- **`LBD-X5` — the data column is a bundle.** Between ListenBrainz's deployed lists and `LBD-A0`
+  lie a corpus roughly three times the size, the absent `filter_True` stage, today's msid→mbid
+  mapping, the uncredited band-member class and our tie-break (the Task 4 README §5a–5c; the supply
+  README §4's warning). **No listen here separates them, and no sentence may credit or blame any one.**
+- **The fame ruler, `pop_raw` and the p99 rescale recompute on each map's own nodes and data.** That
+  is what the app does, and it is how the data column reaches a journey: the ramp's percentile frame
+  moves when a map keeps fewer of `V`'s artists (the `CXR-P1` mechanism, at a far smaller size — the
+  arm's retention against `V` is its measure), and similarity strengths and raw popularity are the
+  data. Named so that nobody reads them as held.
+- **`LBD-X1` stands unchanged**: the ceiling absorbs more supply in the map that supplies more.
+
+**`LBD-AM5-3` — the drop lists: the served lineage's own, pinned by override.** *Plain: filter the
+new maps with exactly the lists that shaped the map the app serves, because over its own artists
+they remove nobody — and the newer list would not.* Measured before this was written
+(`lbv_coverage.py`, `lbv_coverage.json` beside it; recorded here because this clause turns on them
+and nothing else owns them):
+
+| list | censused population covers `V`? | members of `V` it would drop |
+|---|---|---|
+| `unlistenable_drop_algb_20260805.json` — the served lineage's | **yes — 0 uncovered** | **0** |
+| `no_release_drop_algb_20260802.json` | n/a — no guard | **0** |
+| `featured_credit_drop_algb_20260803_am1.json` | n/a — no guard | **0** |
+| *for the record:* `unlistenable_drop_algb_20260809.json` — `LBD-AM4-3`'s payload for `P` | yes — 0 uncovered | **31** |
+
+So both arms build with `algorithm=CANDIDATE_ALGORITHM`, `drop_unlistenable=True`,
+`unlistenable_list_path=…/unlistenable_drop_algb_20260805.json`, the other two drops at their
+defaults, and every other knob at its default. **This departs from `LBD-AM4`'s file and not from its
+principle**: `LBD-AM4-3` chose the list that removes nobody from its population, and over `V` that
+list is `20260805`. The `20260809` payload would remove 31 artists the app serves and add a second
+column to listen 1. `LBD-AM4-3` stays right for `P`; `LBD-X3` stays right for a table's own
+population. `ULC-F4` is untouched.
+
+**`LBD-AM5-4` — fame, and how a listenable map is produced.** *Plain: the new maps route on the same
+listener counts, artist by artist, as the map the app serves — not on counts fetched today.* The
+router prices fame (`ApiConfig.w_known_ramp_fame_pctl`), so a map without it cannot be listened to,
+and `LBD-D4` admits only the existing `fame` stage over the arm's population. **The rule, fixed now;
+its three checks run in Step 2 and are recorded in the figures owner:**
+
+- fame is read through the shipped `load_fame` from an archive view that serves the arm's similarity
+  responses from its emitted archive and `fame/<mbid>.json` records from
+  `grt-archive-algb.pre-cex-snapshot` — the archive the served map rebuilds from byte-identically
+  (`builder/analysis/2026-09-05-lux-e1-armb/README.md` §1–§2) — **both read-only**;
+- **(i)** every node of the arm is a member of `V` (the emitter's construction, asserted), and the
+  snapshot holds a record for every member of `V`;
+- **(ii)** for every member of `V`, the record's value **equals the served artifact's own `fame_lb`**
+  — so these are the records the served map routes on, not a later fetch;
+- **(iii)** the arm built with fame is structurally identical to its fame-free census build — node
+  order, CSR arrays, scores and popularity — because `require_fame` only attaches metadata after the
+  prune (`pipeline.py`, `load_fame(archive, sorted(keep))`).
+
+**That is `LBD-D4`'s condition met rather than worked around:** the same source (ListenBrainz's
+per-artist `total_user_count`, recorded per MBID and independent of batch composition —
+`fame.py`, `lb_fame_fetcher`), the same stage's records unmodified, and a population that contains
+every node of both arms. **Reuse is the better control, not only the cheaper one**: re-running the
+stage today would give each arm listener counts the served map does not have — a fame-date column.
+**If (i) or (ii) fails, the `fame` stage is re-run over the arm's population, the listen waits, and
+the factor table above gains that column** — named now so it is not decided after the fact.
+Serialisation is in-process: `check_acceptance` with **scaled criteria defined in the build script
+from quantities known independently of either build** (the served map's sidecar counts and the
+degree ceiling), **never `PRODUCTION_ACCEPTANCE`**, then `serialise`, `build_manifest` and
+`write_manifest` to `C:\unsung-fast\lbd-artifacts\`. **Nothing is deployed and nothing is written
+under `builder/scratch/`.**
+
+**`LBD-AM5-5` — the blind listens, series `LBL-`. Two comparisons, in order, each its own run-once
+listen.** The protocol is `GBL-`'s (`specs/2026-08-04-gentle-arm-blind-listen-design.md` §4–§7)
+with the corrections its results note §6 records for the next listen and the confound `CAU-`
+§2.3 measured; every departure below names which.
+
+| listen | the two maps | *plain question* |
+|---|---|---|
+| **1** | **served** against **`LBD-A0V`** | *"Would the app be as good or better if its similarity lists were our own recomputation of ListenBrainz's listening data, rather than the lists ListenBrainz published?"* |
+| **2** | **`LBD-A0V`** against **`LBD-A5V`** | *"Does accepting a connection that two listeners support, instead of four, give better journeys?"* |
+
+**Listen 2's materials are not prepared until the owner has heard listen 1.** Its read is fixed now,
+in the same shape; a protocol change for it is a later amendment committed before its journeys exist.
+
+**What is compared.** For each pair, the journeys production `find_journey` returns over each map
+under `ApiConfig` defaults, at **d0, d10 and d20** — *the first path, and the path after ten and
+after twenty presses of "dig deeper"* — along **the all-`known` ladder**: at each press the pressed
+artist is `cre_ladder.victim_key`'s choice over that map's own fame percentile (the most-listened
+interior first; ties by raw popularity, then lowest MBID), exactly as `JFX-` routed. **The limitation
+travels** (`JFX-` `AM1.3`): a real user presses whoever they happen to know, so the ladder is a
+fixed stand-in for a user, identical on both sides.
+
+**How journeys are drawn.** The pairs are `lbl_pairs.json` (sha256
+`da2ad2d71f5ee2f517a25477d9ba0899763f4066c20ae24aa0b4c5700062c3c9`), produced by the rule in
+`lbl_pairs.py`'s docstring (script sha256 `4addf375…`): the owner's familiarity-ranked artists from
+the `GBL-` export, **with every `GBL-AM1` endpoint removed** — he has heard and audited journeys
+between those artists, and the served map is that arm's lineage, so a remembered interior would
+identify a side — paired in ranking order with no pair directly connected in the served map, and
+dealt alternately to the two listens, **eight each plus four ordered reserves each; the two listens
+share no pair.** At generation, **in this order and mechanically, before any journey is shown to
+anyone**, a primary pair is replaced by its listen's next reserve when (a) an endpoint is not a node
+of both maps, (b) the endpoints are directly connected in either map, or (c) the pair does not reach
+all three depths on both maps with at least one interior artist at each. Reserves exhausted: stop,
+report, and the owner supplies a pair — no read exists until eight pairs are complete. **The owner
+may amend the pairs before any journey exists without spending this pre-registration**; after that,
+not.
+
+| listen 1 — primary | listen 2 — primary |
+|---|---|
+| MGMT → The Shins | Sufjan Stevens → The Format |
+| The Naked And Famous → Band of Horses | Beggars Opera → Frightened Rabbit |
+| The Litter → Night Moves | The Magnetic Fields → Okkervil River |
+| Built To Spill → Spoon | The New Pornographers → Crosby, Stills, Nash & Young |
+| DOPE LEMON → Grizzly Bear | Leon Bridges → The Who |
+| Sundara Karma → Modest Mouse | Unknown Mortal Orchestra → The Rural Alberta Advantage |
+| The Mountain Goats → Manchester Orchestra | Alvvays → Florence + The Machine |
+| Songs: Ohia → Wye Oak | F. J. McMahon → Geographer |
+
+*Reserves, in order — listen 1:* The Spinto Band → Hozier; Ryn Weaver → Uriah Heep; LCD Soundsystem →
+The Veils; Nektar → M83. *Listen 2:* Vampire Weekend → Neil Young; Fruit Bats → Death Cab for Cutie;
+Jefferson Airplane → Kishi Bashi; Sloan → Rush. MBIDs in the file, never transcribed.
+
+**What the listener sees.** One side-by-side section per pair, `GBL-` format: both maps' journeys at
+the three depths, **left and right shuffled per pair by a system random source**, no labels, no
+metrics; names with their MusicBrainz disambiguation. **Per artist, up to three clips**, resolved
+through the app's own resolver keyed by MBID with the **served artifact's recorded Deezer id for both
+sides** — non-differential by construction, since every presented artist is a member of `V` — so a
+card can be heard on a second or third track (*`CAU-` §2.3: one clip reversed the owner's judgement
+of an unfamiliar artist in two of three recorded cases*). **Per row, two questions printed on the
+row** (*`GBL-` results §6.1: the deciding rows asked nothing, and were answered on coherence while
+novelty went unthresholded*), each *left / right / no preference*:
+
+- **`LBL-Q1` — coherence:** *"At this point, which side holds together better as a journey — each
+  step a sensible next listen?"*
+- **`LBL-Q2` — novelty:** *"At this point, which side gives you more artists that are new to you?"*
+
+and a per-row box, **"a clip problem stopped me judging this row"**, plus notes. Per pair, at the end:
+*"Did either side collapse into a random walk into obscurity? If so, which and where?"* (`GBL-Q2`'s
+clause) and notes.
+
+**The blind.** `GBL-` §6 in substance: the mapping is written by script to the gitignored
+`.superpowers/lbl/` before serving and read by nothing until every verdict is on disk; generation and
+serving are run by **a fresh, mechanics-only session from a runner brief**, and the write-up by a
+**further fresh session**; this session runs neither. **No Spotify, monthly-listener or ListenBrainz
+lookups during the listen.** A differential check refuses a page serving one map against itself.
+**The blind is imperfect, disclosed now:** in `GBL-` the owner could tell the sides apart; here both
+sides share the router and every presented artist, which removes the tells that were structural
+there, and the pairs are new to him in this form — but a map can still carry a style. Recorded but
+hidden until after the verdict, deciding nothing: interior fame on **one fixed ruler** (the served
+artifact's `fame_lb_pctl`, by MBID), payload against a hub set frozen on the served map, the
+top-1 %-by-degree share, and length.
+
+**The reads — `LBL-R1`–`LBL-R4`, fixed before any journey exists.** Per axis, **24 rows** (8 pairs ×
+3 depths). **d0 is IN the tally**, departing from `GBL-` for a stated reason: `GBL-` excluded d0
+because its intervention — a ramp — does nothing before a press; here the intervention is the map,
+which acts on the very first path, and `GBL-` results §2.4 is the record that a map swap is heard
+there. A **clear pick** is left or right; *no preference* counts for neither. **Margin bar: 8** —
+`GBL-`'s own scaling rule (3 of 10, per row, rounded up: 24 × 0.3 = 7.2 → 8).
+
+Per axis, the challenger is `LBD-A0V` in listen 1 and `LBD-A5V` in listen 2; the incumbent is the
+other map:
+
+- **challenger better** — margin ≥ 8 toward the challenger;
+- **incumbent better** — margin ≥ 8 toward the incumbent;
+- **no detectable difference** — margin < 8;
+- **underpowered** — margin < 8 **and** at least 8 of that axis's *no-preference* rows carry the
+  clip-problem box. *`GBL-` results §6.2: a symmetric clip defect is unbiased, not harmless; the
+  bar is the number of lost rows that could alone have carried the margin.* A margin ≥ 8 stands
+  however many rows were lost.
+
+| read | when | *plain sentence, listen 1* | *plain sentence, listen 2* |
+|---|---|---|---|
+| **`LBL-R1` PASS** | no axis *incumbent better*; at least one *challenger better* | *"Journeys from our own recomputation are better on [axis], and no worse on the other."* | *"The two-listener bar gives better journeys on [axis], and no worse on the other."* |
+| **`LBL-R2` TIE** | both axes *no detectable difference* | *"My ear cannot tell our recomputed lists from ListenBrainz's own."* | *"My ear cannot tell the two bars apart."* |
+| **`LBL-R3` FAIL** | either axis *incumbent better* — **including a split** where the other axis went to the challenger | *"The lists ListenBrainz published give better journeys on [axis]."* | *"ListenBrainz's own bar gives better journeys on [axis]."* |
+| **`LBL-R4` UNDERPOWERED** | no axis *better* either way, and at least one axis *underpowered* | *"Too many rows were lost to clip problems to read this listen."* | same |
+
+A **split counts as FAIL deliberately**: `WHAT-GOOD-LOOKS-LIKE` value 8 — novelty is delivered
+through coherence, not traded against it — and a coherence loss is not bought with novelty; a
+novelty loss beside a coherence gain is reported as FAIL on novelty, in those words. Two axes with
+the same bar raise the chance that one crosses it by noise; accepted, and stated.
+
+**What each read means for the next step.**
+
+- **Listen 1 PASS or TIE:** listen 2 becomes available — spending it is the owner's call. `LBD-A0V`
+  is then a baseline no audibly worse than the served map *at this instrument's resolution*, and
+  nothing more.
+- **Listen 1 FAIL:** listen 2 is **not** the default next step, because its baseline would be a map
+  the ear placed below today's; running it anyway, stopping, or looking for the cause inside the
+  bundle (`LBD-X5`, which no listen here can do) is the owner's.
+- **UNDERPOWERED:** no read, and the listen is **not** repeated on the same pairs. A further listen
+  on new pairs, after the clip defect is addressed, is a new amendment.
+- **Listen 2, any read:** it bears on the threshold only. **A listen-2 PASS does not say `LBD-A5V`
+  beats the served map** — no verdict is carried across the two listens.
+
+**Barred reads, whatever the verdicts:** a transitive claim across the two listens; attribution
+inside the data bundle (`LBD-X5`) or to the data without `LBD-X4` beside it (listen 1); "equivalent"
+from a TIE (`REQ-41`); adoption on any outcome — `S4` owns adoption, the population rule, API sizing,
+the fame source and a refresh procedure, and `V` is an experimental control, not a population rule;
+any re-listen of a verdict (`GBL-` §5's run-once rule, bound to each listen's verdict); and any read
+of the hidden metrics as deciding anything. **Run state every read presupposes:** all 24 rows on both
+axes and all 8 pair entries saved for that listen; a partial run licenses no read.
+
+**`LBD-AM5-6` — where the outputs land.** `LBD-A5` at `C:\unsung-fast\lbd-pairs\A5\`; archives at
+`C:\unsung-fast\lbd-archives\A0V\` and `…\A5V\`; serialised maps and sidecars at
+`C:\unsung-fast\lbd-artifacts\`; build figures in
+`builder/analysis/2026-09-10-lbd-served-population/README.md` with their scripts; the listen harness,
+runner brief, pairs and (later) verdicts in `builder/analysis/2026-09-10-lbd-blind-listen/`;
+reasoning in `docs/superpowers/2026-09-10-lbd-listen-prep-execution-log.md`.
+
+**`LBD-AM5-7` — no criterion value changes.** `LBD-G1`–`LBD-G4`, `LBD-C1`–`LBD-C3`, `LBD-G2`'s bars,
+the 29,892 / 58,793 / 5,967 / 23,925 sets and their shas, `R1`–`R12`, and every clause of
+`LBD-AM1`–`LBD-AM4` stand exactly as written. `LBD-A1` stays unbuilt, `LBD-A3` barred, `LBD-A4`
+unrun — and **`LBD-D6`'s condition, that `LBD-A4` runs before any further arm is pre-registered, is
+the owner's to waive or enforce**: this amendment registers `LBD-A5` on his instruction and records
+that it was not preceded by `LBD-A4`.
+
+**Identifiers** `LBD-AM5` (sub-items `-1`–`-7`), `LBD-A5`, `LBD-A0V`, `LBD-A5V`, `LBD-X4`, `LBD-X5`,
+and the `LBL-` series (`LBL-Q1`, `LBL-Q2`, `LBL-R1`–`LBL-R4`). Collision-checked across every ref
+2026-09-10 (`git grep -nE '\bLBD-AM5|\bLBD-A5\b|\bLBD-X[4-9]|\bLBD-A0V|\bLBD-A5V|\bLBL-'` over
+`refs/remotes refs/heads`): free apart from this branch's own new files.
+
 
 ## §11 — Claims check
 
@@ -819,6 +1104,24 @@ makes the register worth having, exactly as it is for the document itself.
 **The rule that governs every entry here:** a criterion's *values* are never edited. If a
 later session finds one inconvenient, the answer is an amendment with its own reasoning and
 its own date. That property is the whole point of the document.
+
+---
+
+### `LBD-AM5` — two arms over the served population, and the blind listen's read
+
+**Dated 2026-09-10 (night). The build stage's reads existed when this was written; nothing it names
+had been derived, emitted or built, and no journey existed on any map**, so it spends no
+commit-before-results property. The full text is the block at the end of **§10**. This entry is the
+register row.
+
+| | |
+|---|---|
+| **what it adds** | the served population `V` as a control (`-1`); `LBD-A5` (threshold 3, limit 100) and the two maps `LBD-A0V`, `LBD-A5V` (`-2`); the drop lists pinned to the served lineage's own files, measured inert on `V` — the `20260809` payload would drop 31 members of `V` (`-3`); fame as the served map's own records by MBID under three checks (`-4`); the `LBL-` blind listens — served vs `LBD-A0V`, then `LBD-A0V` vs `LBD-A5V` — with pairs, protocol and reads `LBL-R1`–`R4` fixed (`-5`); two named exposures, `LBD-X4` (439 artists at the served build's cap step) and `LBD-X5` (the data bundle) |
+| **what it does NOT add** | **no change to any value** (`-7`); no adoption path; no population rule; no re-read of any `LBD-` criterion |
+| **what it must not be read as** | a population rule (`V` is a control; `S4` untouched); a threshold decision (the curve stays descriptive); a waiver of `LBD-D6` (recorded as not preceded by `LBD-A4`, the owner's to rule on); licence to carry a verdict across the two listens |
+| **why now** | the owner instructed a blind listen at the build-stage stop, with an intermediate threshold, and a listen needs a map the ear can compare with what it already uses |
+| **figures** | the two pre-measurements it turns on are recorded in its own block; every build figure is owned by `builder/analysis/2026-09-10-lbd-served-population/README.md` |
+| **identifiers** | **`LBD-AM5`** (`-1`–`-7`), `LBD-A5`, `LBD-A0V`, `LBD-A5V`, `LBD-X4`, `LBD-X5`, `LBL-`. Collision-checked across every ref on 2026-09-10: free |
 
 ---
 

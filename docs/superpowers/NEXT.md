@@ -47,42 +47,57 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-10 (evening), at the `LBD-` BUILD-STAGE stop.** **Nothing a listener
-sees changed in this work.** The live site is as the 2026-09-08 deploy left it, and
-**`TEST-QUEUE.md`'s three entries are still his to press** — untouched here.
+**Last updated: 2026-09-11, at the `LBL-` listen-1 read.** **Nothing a listener sees changed
+in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s
+three entries are still his to press, untouched here.
 
-**`LBD-`** — **Tasks 6 and 7 are COMPLETE under `LBD-AM4`, and the build stage's own stop is
-reached.** Branch `lbd-build`, **PR #115** (addresses only; `gh` says where they are). The
-owner chose option 1 at the Task 4 stop; the build-stage amendment was committed before anything
-was emitted; `LBD-A0` and `LBD-A2` were emitted and built over the extended map's own population
-(an experimental control, **not** a population rule); every pre-registered read is taken.
+**`LBL-` listen 1 has been RUN, unblinded and READ.** The served map against `LBD-A0V` —
+*the map the app serves today, against a map built from our own recomputation of
+ListenBrainz's listening data at their own settings, over exactly the artists the app
+serves.* Branch `lbd-listen`, **PR #116** (addresses only; `gh` says where they are).
+**The read is `LBL-R2`, the tie**, and its plain sentence was frozen before any journey
+existed: *"My ear cannot tell our recomputed lists from ListenBrainz's own."* **Nothing is
+adopted, no default changed, no shipped code touched.**
+
 **What was found, in plain terms** (figures owned by
-`builder/analysis/2026-09-10-lbd-supply/README.md` §1–§5 and the Task 4 README's §6c, restated
-nowhere): **in a map we could ship, dropping ListenBrainz's strength bar takes the added artists
-from about one in ten dead ends to about one in eighty**, the artists our own ceiling cannot
-reach improve most, and the pre-existing artists move less than half as much — `LBD-G2` clears
-at graph level with both controls, **`R8` and `R9` do not fire**. The descriptive threshold curve
-says "threshold 0" means one listener in one session, and that most of the gain arrives by a bar
-of 3; it decides nothing. ⚠ The gap between our `A0` and the served map bundles corpus age,
-`filter_True`, mapping and tie-break — never attribute it to the reimplementation. Entry point:
-[`2026-09-10-HANDOFF-lbd-task67-build-stage.md`](2026-09-10-HANDOFF-lbd-task67-build-stage.md).
+[`findings/2026-09-11-lbl-listen1-results.md`](findings/2026-09-11-lbl-listen1-results.md),
+restated nowhere): **in a blind side-by-side he could not tell the two maps apart** — neither
+question came anywhere near the margin fixed before any journey existed (§1.1 there).
+⚠ **A tie is not "the maps are the same":** they differ a great deal in shape, and what the listen found is that the difference
+was **inaudible on this instrument**. Its limit was the pair draw — most rows he could not
+call were rows where he knew every artist on both sides, which **he said himself** — and
+**not one row was lost to a clip problem**, the first time that has held in this project's
+blind listens. **One pair moved, and it moved to our map**: obscure endpoints, long journeys,
+every depth on the coherence question, plus his only unprompted pair-level preference. One pair of eight
+carries no read; it is a hint about where to look. `WHAT-GOOD-LOOKS-LIKE` **value 8 gained a
+corroboration from inside the blind**, and no threshold comes off it.
+Entry point: [`2026-09-11-HANDOFF-lbl-listen1-read.md`](2026-09-11-HANDOFF-lbl-listen1-read.md).
 
-**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
-not record how far down the list he has got.**
+## ⛔ NO FURTHER BLIND LISTEN FOR NOW — owner's ruling, 2026-09-11
 
-1. **Run the three queued use-the-app tests** — live since the 2026-09-08 deploy. Nothing here
-   changed them.
-2. **Merge PR #115.**
-3. **Decide the `LBD-` next step at the build-stage stop.** Three options were tabled with the
-   result; the session's own view is in the handoff's "not in the durable record" and is not a
-   decision: **(1)** blind-listen `LBD-A2` at threshold 0 (`REQ-38`; spends his ear, needs a
-   listen design and fame over the arm's population — plan Task 8, described and NOT scheduled);
-   **(2)** pre-register an intermediate threshold (2 or 3, per the curve), build that arm, then
-   listen; **(3)** stop, with the supply question answered at both the table and the map level.
-   **None of these starts on a session's initiative.** Adoption (`S4`) is a separate decision
-   after any of them.
-4. **If he proceeds to a further arm:** `LBD-A4` runs first (`LBD-D6` — every later arm records
-   its pairing semantics), then the new arm's amendment, emit, build, read.
+*"I don't want to do another blind listen immediately. I'll discuss with another session
+which route to take."* **Listen 2 does not start, and no session proposes starting it.**
+
+**He is taking the route decision to a separate session, which reads only the committed
+record** — so the four options below are written to be decided from, not summarised from a
+conversation. **None of them starts on a session's initiative.**
+
+| # | the route | what it would settle | what it costs, and what gates it |
+|---|---|---|---|
+| **1** | **Spend listen 2** — `LBD-A0V` against `LBD-A5V`: *does accepting a connection two listeners support, instead of four, give better journeys?* | the threshold, and **only** the threshold. A listen-2 PASS does **not** say `LBD-A5V` beats the served map | his ear, on the same *kind* of pairs that produced this tie. **Gated on `LBD-D6`**, still unruled — `LBD-A4` was to run before any further arm was pre-registered and `LBD-A5` was registered without it. Pairs fixed, map built, materials not prepared |
+| **2** | **Re-draw the pairs and listen again on the harder ones** — a new amendment, new pairs, and the instrument fixes in the findings note §4 | **whether the tie is a fact about the maps or a limit of the instrument** — the question listen 1 leaves genuinely open | his ear again, plus a pre-registration. **Listen 1's verdict may NOT be re-listened** (`GBL-` §5): this is new pairs, never a re-run |
+| **3** | **Stop the `LBD-` track here.** The supply question is answered at the table, at the map and at the ear | nothing further; it closes the track with a null that is honestly bounded | nothing. `LBD-A4` closes with it — its deferral already says so |
+| **4** | **Go to `S4`** — the adoption decision proper: population rule, API sizing, fame source, refresh procedure | whether anything from this track ships | its own pre-registration and a rebuild. ⚠ **`LBL-R2` is not an adoption case**: a tie says "no audibly worse at this instrument's resolution", and `REQ-41` bars reading it as equivalence |
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
+does not record how far down the list he has got.**
+
+1. **Run the three queued use-the-app tests** — live since the 2026-09-08 deploy. Nothing
+   here changed them.
+2. **Merge PR #116.**
+3. **Rule on `LBD-D6`** if route 1 is in play; it gates that route and nothing else here.
+4. **Choose a route**, with the session he has said he will use for it.
+
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -266,6 +281,19 @@ its **topmost** heading says so.)*
   builds); `LBD-X3` stays right for any arm over the table's own population. **`LBD-A3` is
   barred from building**, not deferred. And the `A0`-vs-served-map gap is a bundle of lineage
   terms — never cite it as the reimplementation's effect.
+- **`LBD-AM5` (2026-09-10) and the `LBL-` listen 1 (2026-09-11): the same shape, one level up.**
+  The served population `V` is an **experimental control, not a population rule** — `S4` still
+  owns the shipped population, the fame source, API sizing and a refresh procedure, and **no
+  listen outcome adopts anything.** **`LBD-X4` and `LBD-X5` travel with every listen-1
+  sentence**: 439 artists took part in the served build's cap step and could not in
+  `LBD-A0V`'s, and the served-vs-`LBD-A0V` data gap is a bundle (corpus age, the absent
+  `filter_True`, today's mapping, the uncredited band-member class, our tie-break) — **no
+  attribution to "the data", and none inside the bundle.** **The listen-1 verdict may not be
+  re-listened** (`GBL-` §5's run-once rule); a further listen is a new amendment on new pairs.
+  The drop list for `V` is the served lineage's `20260805` file, never `LBD-AM4`'s `20260809`,
+  which would drop 31 served artists. **The owner's closing note changed no number** — the
+  findings note's §1.5 carries the arithmetic — and his "slight"/"strong" wording is not a
+  strength coding and must not be tallied as one.
 - **`top1pct_degree_mass_frac` is saturation-degenerate** (2026-09-08): where at least 1 % of
   nodes sit at the degree bound it reduces to the bound over a hundred times mean degree and
   cannot see edge arrangement. The `DCF-` README's forward note names which of its own arms the
@@ -311,9 +339,9 @@ its **topmost** heading says so.)*
 |---|---|
 | **The plan for `DLS-` items 4–6** (restructure `CLAUDE.md`; rebuild the map around role lines and add the lint checks; slim the rituals). The owner answered `DLS-Q1`–`Q6` on 2026-09-11 ([findings §5a](findings/2026-09-10-documentation-layer-strategy.md)). **It also carries three items:** `CLAUDE.md` prose the harness now enforces or makes redundant (the `UV_LINK_MODE=copy` prefix; "never use `docs/reference/`"); `closeout` D6 counting `.claude/rules/*.md` files that have no `paths:`, which load in every session; and item 3's unbuilt remainder, a hook refusing commits on `main`, which the owner has not been asked about. | **After the `DLS-T1` read and the live `LBD-` session's next closeout.** Written by a fresh session from the findings document, with a handoff point between each item. The D6 fix is due earlier if any rule without `paths:` is added. |
 | **The APG1 lockstep tests (PR #118) pin only the fixture's four base metadata keys.** The committed fixture has no `deezer_ids`, `fame_lb`, `spotify_ids`, `apple_ids` or `artist_facts`, so those stay covered only by each package's own hand-built tests. | **The next time the committed fixtures are regenerated (`closeout` D2):** regenerate with those keys populated and re-derive the api test's pinned values. |
-| **The `DLS-T1` read** (*when a session opens a plan or a spec, does a rule scoped to those folders arrive in its context without anyone asking for it?*). The instrument is armed by the `doc-strategy` PR: **do not remove `.claude/rules/plans.md` or the `InstructionsLoaded` logging hook before this is read.** | **Three qualifying sessions after merge, or 2026-09-24**, whichever comes first — read per [`findings/2026-09-10-documentation-layer-strategy.md`](findings/2026-09-10-documentation-layer-strategy.md) §6. |
+| **The `DLS-T1` read** (*when a session opens a plan or a spec, does a rule scoped to those folders arrive in its context without anyone asking for it?*). The instrument is armed by the `doc-strategy` PR: **do not remove `.claude/rules/plans.md` or the `InstructionsLoaded` logging hook before this is read.** | **Three qualifying sessions after merge, or 2026-09-24**, whichever comes first — read per [`findings/2026-09-10-documentation-layer-strategy.md`](findings/2026-09-10-documentation-layer-strategy.md) §6. **One dated observation is already banked and the read must consume it:** the `LBL-` write-up session opened a spec repeatedly and the rule did **not** load (its own `instructions-loaded.jsonl` shows only the two session-start `CLAUDE.md` entries) — **but it read through Bash, not the `Read` tool**, so the observation cannot separate "the rule never fires" from "it fires only on a `Read`-tool open". **What the read still needs is a qualifying session that opens a spec with the `Read` tool.** Written up in [`2026-09-11-lbl-listen1-read-execution-log.md`](2026-09-11-lbl-listen1-read-execution-log.md) §5. |
 | ✅ **`LBD-M1` (population per arm)** | **DISCHARGED 2026-09-10** — reported descriptively by fame band for both built arms, figures owner §2. Struck, kept for the record. |
-| **`LBD-A4` (the pairing arm)** — still unrun; `LBD-AM4-2` said so and no read here depended on it. | **Before any further `LBD-` arm is pre-registered** (a threshold amendment, or `S4`): `LBD-D6` requires every later arm to record its pairing semantics. If the track stops at the build-stage stop, closed with it. |
+| **`LBD-A4` (the pairing arm)** — still unrun; `LBD-AM4-2` said so and no read here depended on it. | **Before any further `LBD-` arm is pre-registered** (a threshold amendment, or `S4`): `LBD-D6` requires every later arm to record its pairing semantics. **Still unrun, and `LBD-D6` itself is still unruled as of 2026-09-11** — `LBD-A5` was registered without it, which is the open ruling; listen 1 did not touch `LBD-A5V`, so its read is unaffected. **Condition RE-TESTED 2026-09-11 and NOT due:** the track did not stop at the build-stage stop, it ran the `LBL-` listen 1. This closes only if the owner takes route 3 (stop) in the current status block; route 1 (listen 2) is the route it gates. |
 | **`LUX-E2`** — blocked on the damaged `TAS-` sample; per-field population coverage is **not** a substitute read. | **A repaired sample.** Nothing in flight repairs it. |
 | **`ULC-F4`** — the un-listenable keep-check measures the name-search route while the app resolves by identity first, so both drop lists drop artists the app can play. | **The owner's**: a re-census, a rebuild and its own pre-registration. Nothing blocks on it. |
 | **Snyk has not scanned the FROZEN modules under `builder/analysis/`** — credentials expired 2026-09-07, the MCP server failed to connect 2026-09-08 and 2026-09-10 (morning); **it connected 2026-09-10 (evening) and the build-stage scripts added that day were scanned and are clean** (one Medium fixed by binding paths as DuckDB parameters); the pre-existing frozen modules remain unscanned; the owner accepted and deferred scanning for everything there on the grounds that none of it is live. His hands, not a decision: it opens a browser. | **Promotion of anything under `builder/analysis/` into shipped code** — which nothing proposes. |

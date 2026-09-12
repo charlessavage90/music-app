@@ -1,0 +1,98 @@
+{
+  "axes": {
+    "coherence": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 7,
+        "incumbent": 6
+      },
+      "margin_toward_challenger": 1,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "no_detectable_difference"
+    },
+    "novelty": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 5,
+        "incumbent": 4
+      },
+      "margin_toward_challenger": 1,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "no_detectable_difference"
+    }
+  },
+  "read": "LBL-R2",
+  "axes_named": [],
+  "sentence": "My ear cannot tell our recomputed lists from ListenBrainz's own.",
+  "ear_tracking": {
+    "coherence": {
+      "rows": 13,
+      "fame_rows": 13,
+      "fame_lower": 5,
+      "payload_higher": 4,
+      "top1pct_degree_frac_lower": 5,
+      "length_longer": 3
+    },
+    "novelty": {
+      "rows": 9,
+      "fame_rows": 9,
+      "fame_lower": 7,
+      "payload_higher": 2,
+      "top1pct_degree_frac_lower": 3,
+      "length_longer": 3
+    }
+  },
+  "mapping_unsealed": {
+    "86c20d59-4cd7-4814-b6b7-e371c1016097|b4691384-50c3-4afd-9988-51d3ec5db65d": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "216a7b44-3846-494c-93f5-f2d4d9b95b36|07b6020a-c539-4d68-aeef-f159f3befc76": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "eab6a6b9-fd38-4426-b679-5a6503d80877|cfe4a55b-b076-48c1-a9fe-585c59f14645": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "3ac482b8-1494-4071-a0e9-f192f9d2c2b0|84eac621-1c5a-49a1-9500-555099c6e184": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "77c5db7c-6d5b-49c2-9ea6-82f3efcd1da2|59a7fbcb-ff74-494d-abd0-9c82359040c9": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "ba3f1845-72c8-4122-850f-1a3a8f4bfe49|a96ac800-bfcb-412a-8a63-0a98df600700": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "9639cd52-c351-4a17-9797-58880e95a7ef|dd91eb4b-6d08-4c14-9eb2-197a02a35f6c": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "1305bd7e-27ef-4236-ae87-0a7d435234ca|3c8ff4c9-b5b9-4e78-ad9d-5157c323de24": {
+      "L": "challenger",
+      "R": "incumbent"
+    }
+  },
+  "maps": {
+    "incumbent": {
+      "path": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+    },
+    "challenger": {
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBD-A0V.bin",
+      "sha256": "494c53d52654f6918a4176eef91f291558b0e56d71a4ea16c8070ad8ba3e34bb"
+    }
+  },
+  "substitutions": [
+    {
+      "slot": 1,
+      "replaced": "MGMT → The Shins",
+      "reason": "(b) the endpoints are directly connected in one map"
+    }
+  ]
+}

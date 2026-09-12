@@ -114,6 +114,15 @@ owner's verdict — Phase 1 log §3.8, restated in its §4. His §3.9 verbatim v
 are the only description anywhere of what he means by coherent; start there, not from a
 metric.
 *Owner-stated, 2026-07-24, correcting a restatement of value 1 that had dropped the bound.*
+✅ **CORROBORATED 2026-09-11 from inside a blind listen, which is a stronger setting than
+the one it was stated in.** Closing the `LBL-` listen 1 he wrote, of the rows where his two
+answers pointed opposite ways: *"I generally felt like the coherent side was the 'better'
+path to show in the app."* He did not know which map was which. Verbatim and its provenance
+caveat: `../../builder/analysis/2026-09-10-lbd-blind-listen/lbl_listen1_owner_notes.md`;
+weighed in `findings/2026-09-11-lbl-listen1-results.md` §1.5, which also records that
+**applying that tiebreak to the five split rows changes no number in that listen.** Still
+preference, not evidence — this file's standing rule — so **no threshold may be read off
+it**; what it settles is which axis is senior when a protocol has to choose one.
 
 **9. Reducing famous artists is the live problem; eliminating them would be an
 over-correction.**
