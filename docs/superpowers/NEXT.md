@@ -49,7 +49,10 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 
 **Last updated: 2026-09-12, at the `LBD-AM6` preparation of `LBL-` listen 2.** **Nothing a
 listener sees changed in this work** — the live site is as the 2026-09-08 deploy left it, and
-`TEST-QUEUE.md`'s three entries are still his to press, untouched here.
+`TEST-QUEUE.md` is still his to press, untouched here. *(That sentence said "three entries" when
+the `LBL-` session wrote it, and was true then. The `DLS-` branch turned that file into a
+checklist in the same hours; the same three changes are now 15 boxes. Corrected at the merge by
+the branch that caused it, not by the one that wrote the sentence.)*
 
 **`LBL-` listen 2 is PREPARED and UNRUN.** The owner chose the route on 2026-09-12: keep the
 registered comparison — `LBD-A0V` against `LBD-A5V`, *does accepting a connection two listeners
