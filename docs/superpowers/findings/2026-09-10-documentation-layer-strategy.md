@@ -433,4 +433,59 @@ first rather than all of them.
 ordering of blocks after the first. **What I would defend:** that path-scoped rules are
 disqualified for load-bearing text, which rests on a controlled pair and a 17-to-1 ratio.
 
+## 8. Item 7 — memory entries that repeat the always-loaded file, 2026-09-12
+
+**Proposes; deletes nothing.** `DLS-Q4`'s ruling governs: a removal needs evidence that sessions no
+longer need the text **plus his sign-off**. Every claim below was checked against the file it
+duplicates, not assumed.
+
+**First, a correction to item 7's own framing.** Item 7 is worth doing, but **not for the reason it
+was written.** Deleting a memory file saves **nothing** in standing context — bodies load on recall
+only. The only standing cost is the one-line entry in `MEMORY.md`, and the four candidates are
+**750 of its 3,092 bytes**. **The real argument is contradiction:** a memory that restates
+`CLAUDE.md` is a second copy that can go stale, and when it does, a session gets two answers and no
+way to tell which is current. That is the same failure as restating a figure.
+
+| memory file | what it duplicates | verified | index line |
+|---|---|---|---|
+| `no-commercialization-ruling.md` | **The ruling is in the repo**, `PRODUCT-REQUIREMENTS.md` `REQ-43`. The memory says so itself. | `REQ-43` present, 6 mentions | 311 ch |
+| `path-quality.md` | *"figures live in exactly one file, cite it, never restate"* — `CLAUDE.md`'s orient table says this **twice** | "Exactly one file" ×2 | 97 ch |
+| `roadmap-pointer.md` | *"status and the next action live in `NEXT.md`"* — said by `CLAUDE.md`'s orient table **and** by `MEMORY.md`'s own header | both present | 244 ch |
+| `env-onedrive-uv.md` | `UV_LINK_MODE=copy`, in `CLAUDE.md` 7 times — **and now enforced by the harness**, `settings.json` sets it in `env` | both confirmed | 98 ch |
+
+**Two cautions, because three of these are load-bearing in a way a bare count misses.**
+
+- **`CLAUDE.md` points *at* `env-onedrive-uv.md` by name** (*"detail in `memory/env-onedrive-uv.md`"*).
+  Deleting it dangles that pointer. **Either keep it or edit `CLAUDE.md` in the same change** — and
+  the latter touches the standing layer, so it is his either way.
+- **`roadmap-pointer.md` is `MEMORY.md`'s designated "START HERE".** Removing it needs the index
+  line rewritten to point somewhere, not simply dropped.
+- **`no-commercialization-ruling.md` is the one clean removal**: the ruling lives in a governing
+  repository document, and the memory's own index line already says so. *(Its `REQ-44` gate — confirm
+  with the owner before building on it — would need to survive into whatever replaces it.)*
+
+**Not proposed for removal, and why, since the value is in the ruling-out:** `deploy-environment-traps`
+(richer than `session-start` §D, and that is a skill body which loads only on invocation),
+`working-style`, `stop-refining-instrumental-artifacts`, `cheapest-experiment-first` (duplicated in
+a skill body, not in `CLAUDE.md`), `clip-resolution-bugs`, `crawl-resume`, `no-session-start-hook`
+(rewritten today), and `project-state` — whose *deferred product ideas* half appears nowhere else.
+
+**Done without asking, because it is a correction rather than a removal:** `MEMORY.md`'s line for
+`no-session-start-hook` said a repo-state `SessionStart` hook *"IS wanted (2026-09-11)"*. It was
+built and shipped; the line now says so. `D6` governs *growing* the standing layer, not correcting
+it.
+
+⚠ **A first attempt at that line also added the prose-invocation fact, growing the index by 72
+bytes, and was rolled back to a pure correction.** Growing the always-loaded layer is the owner's
+call and this session had just written a check saying so. **The fact is not lost** — it is in
+`no-session-start-hook.md`'s body and `description`, which cost nothing standing. **Whether it is
+worth an index line too is part of `DLS-Q7`**, as its cheapest variant.
+
+**One measurement caveat, stated rather than smoothed over.** `MEMORY.md` was **3,092 bytes** at
+this session's start and is **3,092 bytes** now, but it read **3,072** immediately before the edit
+above. Something outside this session changed it in between. The edit was a single targeted
+replacement of one line and preserved every other, so nothing was clobbered — but **the net delta
+attributable to this session is not cleanly measurable**, and the figure should not be cited as if
+it were.
+
 §4's *State* column is as of this document's first commit; status lives in `NEXT.md`.
