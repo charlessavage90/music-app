@@ -481,12 +481,17 @@ A document whose job is to be *short* — a queue, an index, a status pointer �
 reasoning one closeout at a time. Every addition is defensible on its own. The file becomes
 unusable anyway, because the owner cannot find the four live lines among four hundred.
 
-| document | its job | budget | where it got to |
-|---|---|---|---|
-| [`NEXT.md`](../../../docs/superpowers/NEXT.md) | what to do next | **250 lines** | 2,063 on 2026-09-05, 1,738 of it superseded status |
-| [`docs/README.md`](../../../docs/README.md) | classify each document by role | **400 lines** | 538 lines, 82 % "Active", rows narrating progress |
-| [`TEST-QUEUE.md`](../../../docs/superpowers/TEST-QUEUE.md) | a checklist he can run down | **70 lines** | 255 on 2026-09-12, 89 of them front matter |
-| a `NEXT.md` **deferral row** | one finding, one condition | **~600 chars** | a 3,600-char essay, written inside one session on 2026-09-12 |
+| document | its job | budget |
+|---|---|---|
+| [`NEXT.md`](../../../docs/superpowers/NEXT.md) | what to do next | **250 lines** |
+| [`docs/README.md`](../../../docs/README.md) | classify each document by role | **400 lines** |
+| [`TEST-QUEUE.md`](../../../docs/superpowers/TEST-QUEUE.md) | a checklist he can run down | **70 lines** |
+| a `NEXT.md` **deferral row** | one finding, one condition | **~600 chars** |
+
+**How far each had drifted when its budget was set is measured, not restated here** — the
+documentation-layer findings own those figures (`DLS-M3`, `DLS-M4`) and `TEST-QUEUE.md`'s own
+header owns its own. Cite them; a copy in this file is a figure that will go stale exactly the way
+`docs/README.md`'s line count already has.
 
 ```bash
 wc -l docs/superpowers/NEXT.md docs/README.md docs/superpowers/TEST-QUEUE.md

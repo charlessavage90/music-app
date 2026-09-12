@@ -361,7 +361,7 @@ collects them**:
 
 - `NEXT.md`'s **current top block** — older blocks are history, never act on them
 - the current handoff's **"Owed, and by whom"**
-- `TEST-QUEUE.md` — **an item is live only if its topmost heading says so**
+- `TEST-QUEUE.md` — **every unticked `- [ ]` box is live**; it is a checklist, not dated entries
 - deferred findings whose **success condition has now come due**
 
 **Then verify one flag against source before acting on it.** A flag forwarded through several
