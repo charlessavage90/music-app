@@ -1,6 +1,12 @@
 # Handoff — `LBD-AM5`: the served-population maps built, the `LBL-` listen 1 ready, 2026-09-10 (night)
 
-**Role: ACTIVE — the CURRENT handoff for the `LBD-` track.** Supersedes
+**Role: SUPERSEDED on next actions by
+[`2026-09-11-HANDOFF-lbl-listen1-read.md`](2026-09-11-HANDOFF-lbl-listen1-read.md)** — the
+listen it prepared has since been run, unblinded and read. **Next actions only:** this
+document remains the record of what was built and why, and its "Claims that must NOT be
+reverted" all still bind. ⚠ **Its "the listen has NOT been run" statement is now false** and
+is left as written, because it was true when written. *(Original role:)* **ACTIVE — the
+CURRENT handoff for the `LBD-` track.** Supersedes
 [`2026-09-10-HANDOFF-lbd-task67-build-stage.md`](2026-09-10-HANDOFF-lbd-task67-build-stage.md) on
 `LBD-` next actions. It does **not** state project status — [`NEXT.md`](NEXT.md) owns that, and is
 **deliberately not updated by this session** (see "Owed").

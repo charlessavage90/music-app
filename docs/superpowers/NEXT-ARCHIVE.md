@@ -2225,3 +2225,44 @@ not record how far down the list he has got.**
 not be reverted, the archive pin, the 2026-09-04 rulings, `LUX-E2`, `ULC-F4`, the Snyk
 deferral, and the owner's open list — are distilled into the registries below and the block
 is in `NEXT-ARCHIVE.md`.**
+
+---
+
+## Demoted 2026-09-11 — the block current from 2026-09-10 (the `LBD-` build-stage stop)
+
+**Last updated: 2026-09-10 (evening), at the `LBD-` BUILD-STAGE stop.** **Nothing a listener
+sees changed in this work.** The live site is as the 2026-09-08 deploy left it, and
+**`TEST-QUEUE.md`'s three entries are still his to press** — untouched here.
+
+**`LBD-`** — **Tasks 6 and 7 are COMPLETE under `LBD-AM4`, and the build stage's own stop is
+reached.** Branch `lbd-build`, **PR #115** (addresses only; `gh` says where they are). The
+owner chose option 1 at the Task 4 stop; the build-stage amendment was committed before anything
+was emitted; `LBD-A0` and `LBD-A2` were emitted and built over the extended map's own population
+(an experimental control, **not** a population rule); every pre-registered read is taken.
+**What was found, in plain terms** (figures owned by
+`builder/analysis/2026-09-10-lbd-supply/README.md` §1–§5 and the Task 4 README's §6c, restated
+nowhere): **in a map we could ship, dropping ListenBrainz's strength bar takes the added artists
+from about one in ten dead ends to about one in eighty**, the artists our own ceiling cannot
+reach improve most, and the pre-existing artists move less than half as much — `LBD-G2` clears
+at graph level with both controls, **`R8` and `R9` do not fire**. The descriptive threshold curve
+says "threshold 0" means one listener in one session, and that most of the gain arrives by a bar
+of 3; it decides nothing. ⚠ The gap between our `A0` and the served map bundles corpus age,
+`filter_True`, mapping and tie-break — never attribute it to the reimplementation. Entry point:
+[`2026-09-10-HANDOFF-lbd-task67-build-stage.md`](2026-09-10-HANDOFF-lbd-task67-build-stage.md).
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
+not record how far down the list he has got.**
+
+1. **Run the three queued use-the-app tests** — live since the 2026-09-08 deploy. Nothing here
+   changed them.
+2. **Merge PR #115.**
+3. **Decide the `LBD-` next step at the build-stage stop.** Three options were tabled with the
+   result; the session's own view is in the handoff's "not in the durable record" and is not a
+   decision: **(1)** blind-listen `LBD-A2` at threshold 0 (`REQ-38`; spends his ear, needs a
+   listen design and fame over the arm's population — plan Task 8, described and NOT scheduled);
+   **(2)** pre-register an intermediate threshold (2 or 3, per the curve), build that arm, then
+   listen; **(3)** stop, with the supply question answered at both the table and the map level.
+   **None of these starts on a session's initiative.** Adoption (`S4`) is a separate decision
+   after any of them.
+4. **If he proceeds to a further arm:** `LBD-A4` runs first (`LBD-D6` — every later arm records
+   its pairing semantics), then the new arm's amendment, emit, build, read.
