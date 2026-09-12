@@ -252,11 +252,16 @@ forecast.** Two separate causes, both verifiable:
 - **Tool grant.** `.claude/agents/consultant.md` declares `tools: Read, Grep, Glob` — **no Bash**.
   A consultant session therefore *cannot* read through the shell, so every file it opens is a
   `Read`-tool open. That is why the only non-authoring `path_glob_match` in the log came from one.
-- **An injected preference on main sessions.** When the Chrome integration is active a session
-  receives an instruction to prefer Bash for reading, searching and editing wherever Bash can do
-  the job, falling back to `Read`/`Edit`/`Write` only when it cannot. It is not a project setting
-  and appears in no repository config; it arrives with the integration. The authoring session of
-  this entry had that text in its own context while writing it.
+- **An injected preference on main sessions, which belongs to `Auto Mode` and NOT to the browser
+  integration.** ⚠ *Corrected 2026-09-12, same day, after a probe quoted both blocks in full. The
+  first version of this bullet and of §7 said the Chrome integration delivered it. That was wrong,
+  and it was wrong because in the authoring session's own prompt the sentence sits directly below
+  the `claude-in-chrome` instructions. Adjacency was read as ownership.* The instruction is
+  *"Do your work through the Bash tool wherever it can accomplish the job: read files with cat,
+  head, or sed -n… rather than using the dedicated Read, Edit, or Write tools."* It lives in a
+  distinct **`## Auto Mode Active`** system-reminder, alongside that mode's bias against stopping
+  to ask and its git-safety guidance. **Neither block references the other and there is no
+  dependency between them.** It is not a project setting and appears in no repository config.
 
 **Consequence for the read, and it is not small.** A qualifying session is in practice *a main
 session that overrode its own default*. Of the two main sessions on 2026-09-12, one qualified, and
@@ -368,9 +373,22 @@ and which cannot.
   repository, is not recorded in it, and gives no signal when it flips. A mechanism that can be
   switched off silently by something the project does not control is not one to move text onto that
   a session must not lose.
-- **Do NOT disable the Chrome integration to fix this.** It is in **active use**: 25 calls on
-  2026-09-11 driving the blind-listen page. The Notion precedent in `DLS-M7` does not transfer,
-  because Notion's count was zero and this one is not.
+- **Disabling the Chrome integration would NOT fix this, and that is the load-bearing correction.**
+  *(Owner asked directly, 2026-09-12, and said he was comfortable removing it.)* A probe quoted
+  both injected blocks in full: the Bash preference is in **`## Auto Mode Active`**, not in the
+  `claude-in-chrome` instructions, and neither block references the other. **Removing the extension
+  would cost the browser tooling and change reading behaviour not at all.** Two earlier entries here
+  said otherwise and are corrected above.
+- **The switch is `Auto Mode`, and that makes the mechanism *worse* to depend on, not better.** Auto
+  Mode is toggled for reasons that have nothing to do with documentation — it also governs whether a
+  session presses on without asking. So whether guidance reaches a session would be a side effect of
+  an unrelated operating choice, made per session, recorded nowhere in the repository. **That is the
+  definition of conditional and silent**, and it is a stronger argument against path-scoped rules
+  than the raw ratio was.
+- *(Separately, on the extension's own merits: it is in genuine if rare use — 26 calls on two days
+  across 3 of 33 transcripts, the substantive run being 23 calls on 2026-09-11 driving the
+  blind-listen page at `127.0.0.1:8765` with screenshots, clicks and page scripting. Removing it
+  would cost that harness and save little. It is not this problem's lever either way.)*
 - **There is no free mechanism, and the honest framing is certainty against cost.** Always-loaded
   text is the only delivery that is certain, and it is certain *because* it is always loaded, which
   is the cost item 4 exists to reduce. A skill is cheap because only its `description` is standing,
