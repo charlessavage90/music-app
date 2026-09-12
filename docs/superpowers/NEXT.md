@@ -204,8 +204,10 @@ parked-decision registry; status accumulating in it is what made the whole docum
 
 ~~**Nothing is queued in [`TEST-QUEUE.md`](TEST-QUEUE.md).**~~ *(FALSE since 2026-09-04;
 struck 2026-09-05. **This document must not state the queue's contents at all** — the same rule
-as merge state. `TEST-QUEUE.md` owns it, `session-start` reads it, and an entry is live only if
-its **topmost** heading says so.)*
+as merge state. `TEST-QUEUE.md` owns it and `session-start` reads it. **Since 2026-09-12 a live
+item is an unticked `- [ ]` box** — that file is a checklist now, and the "topmost heading" rule
+this note used to give applies only to the two archives, where discharged prose entries keep their
+old heading.)*
 
 `PW-9` (concurrency ladder) remains gated on the owner's approval and blocks nothing.
 *(Verified 2026-09-05 — still the password-removal plan's only unrun task.)*

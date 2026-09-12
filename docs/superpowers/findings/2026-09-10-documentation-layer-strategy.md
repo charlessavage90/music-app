@@ -378,7 +378,9 @@ and which cannot.
   both injected blocks in full: the Bash preference is in **`## Auto Mode Active`**, not in the
   `claude-in-chrome` instructions, and neither block references the other. **Removing the extension
   would cost the browser tooling and change reading behaviour not at all.** Two earlier entries here
-  said otherwise and are corrected above.
+  said otherwise: **§6b's `DLS-M8` bullet and this section's own first version**, both corrected
+  there and here. *(Named rather than pointed at "above", because a reader who opens §7 first
+  never passes §6b — `doc-auditor`, 2026-09-12.)*
 - **The switch is `Auto Mode`, and that makes the mechanism *worse* to depend on, not better.** Auto
   Mode is toggled for reasons that have nothing to do with documentation — it also governs whether a
   session presses on without asking. So whether guidance reaches a session would be a side effect of
