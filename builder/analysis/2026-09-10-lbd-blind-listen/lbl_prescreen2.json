@@ -1,0 +1,4728 @@
+{
+  "what": "LBL- listen 2 differential pre-screen, run before LBD-AM6 was written",
+  "warning": "MAP-LABELLED. A blind runner must not read this file.",
+  "script_sha256": "83db952cefe8e17c9bcc2ca6c6de835e0e26f9b536b4436f692d8e5a34c67ed4",
+  "thresholds": {
+    "min_interior_per_depth": 3,
+    "min_differing_depths": 2,
+    "depths": [
+      0,
+      10,
+      20
+    ],
+    "wanted": 12
+  },
+  "inputs": {
+    "candidates": {
+      "file": "gbl_pair_candidates.json",
+      "sha256": "62f345219bbb839edf3c50f92e17f8d2a0ee2de6d83643de97969c763c9f114e",
+      "familiarity_mbids": 135
+    },
+    "gbl_am1": {
+      "file": "gbl_pairs_approved.json",
+      "sha256": "9831f77f8263894855726ac010908fb7b87e25aabfe83d54d3c39687f3ab623c",
+      "endpoints_excluded": 16
+    },
+    "committed_pairs": {
+      "file": "lbl_pairs.json",
+      "sha256": "da2ad2d71f5ee2f517a25477d9ba0899763f4066c20ae24aa0b4c5700062c3c9"
+    },
+    "served_map": {
+      "file": "graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+      "nodes": 58838
+    },
+    "A0V": {
+      "file": "LBD-A0V.bin",
+      "sha256": "494c53d52654f6918a4176eef91f291558b0e56d71a4ea16c8070ad8ba3e34bb",
+      "nodes": 57142
+    },
+    "A5V": {
+      "file": "LBD-A5V.bin",
+      "sha256": "2d34746e2cc8a6596ee15e390eea5a14ea7f13ede4ec2ba0608475157653ae63",
+      "nodes": 57932
+    }
+  },
+  "departures_from_lbl_pairs_rule": {
+    "D1": "listen-1 primary endpoints excluded at artist level",
+    "D2": "listen-1 reserve pairs banned as pairs, their artists kept",
+    "D3": "membership checked against both listen-2 maps instead of LBD-A0's table proxy"
+  },
+  "counts": {
+    "pool": 125,
+    "eligible": 93,
+    "drawn": 46,
+    "screened": 46,
+    "survivors": 28,
+    "wanted": 12,
+    "sufficient": true
+  },
+  "exclusion_counts": {
+    "GBL-AM1 endpoint": 16,
+    "listen-1 primary endpoint (D1)": 16,
+    "eligible": 93
+  },
+  "rejection_counts": {
+    "a map has fewer than 3 interior artists at some depth": 10,
+    "the two maps' interiors differ at fewer than 2 of 3 depths": 8
+  },
+  "pool": [
+    {
+      "rank": 1,
+      "name": "Wishbone Ash",
+      "mbid": "406f1b42-0c9e-4427-aeb7-02f78e188ec4",
+      "minutes": 1060,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 2,
+      "name": "Pink Floyd",
+      "mbid": "83d91898-7763-47d7-b03b-b92132375c47",
+      "minutes": 725,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 3,
+      "name": "Young Gun Silver Fox",
+      "mbid": "2e111d6d-fce9-46ff-b33a-7eed7300f9d4",
+      "minutes": 302,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 4,
+      "name": "Eloy",
+      "mbid": "bc154a90-890b-409e-b850-53ca299ab0d6",
+      "minutes": 233,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 5,
+      "name": "Tame Impala",
+      "mbid": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d",
+      "minutes": 164,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 6,
+      "name": "Led Zeppelin",
+      "mbid": "678d88b2-87b0-403b-b63d-5da7465aecc3",
+      "minutes": 142,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 7,
+      "name": "Arcade Fire",
+      "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+      "minutes": 135,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 8,
+      "name": "MGMT",
+      "mbid": "c485632c-b784-4ee9-8ea1-c5fb365681fc",
+      "minutes": 110,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 9,
+      "name": "The Killers",
+      "mbid": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+      "minutes": 106,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 10,
+      "name": "The Beatles",
+      "mbid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+      "minutes": 103,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 11,
+      "name": "The Shins",
+      "mbid": "6c8b9855-ba8b-48f9-ac1d-42167f7f7b18",
+      "minutes": 99,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 12,
+      "name": "Sufjan Stevens",
+      "mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c",
+      "minutes": 99
+    },
+    {
+      "rank": 13,
+      "name": "The Format",
+      "mbid": "81b07a2a-cdf0-4c5e-a68c-8d910e1f0ea6",
+      "minutes": 98
+    },
+    {
+      "rank": 14,
+      "name": "Guster",
+      "mbid": "6cbe1e63-5895-4168-ac7e-f0d2836ba0c1",
+      "minutes": 98,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 15,
+      "name": "The War On Drugs",
+      "mbid": "87b9b3b8-ab93-426c-a200-4012d667a626",
+      "minutes": 87,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 16,
+      "name": "Sigur Rós",
+      "mbid": "f6f2326f-6b25-4170-b89d-e235b25508e8",
+      "minutes": 74,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 17,
+      "name": "The Decemberists",
+      "mbid": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3",
+      "minutes": 71,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 18,
+      "name": "Yellowcard",
+      "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
+      "minutes": 54,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 19,
+      "name": "The Naked And Famous",
+      "mbid": "216a7b44-3846-494c-93f5-f2d4d9b95b36",
+      "minutes": 50,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 20,
+      "name": "Fountains Of Wayne",
+      "mbid": "0f82d6b5-12fb-4569-b047-a00194f572a7",
+      "minutes": 49,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 21,
+      "name": "Band of Horses",
+      "mbid": "07b6020a-c539-4d68-aeef-f159f3befc76",
+      "minutes": 49,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 22,
+      "name": "America",
+      "mbid": "34cf95c7-4be9-4efd-a48a-c2ea4a0bb114",
+      "minutes": 46,
+      "excluded": "GBL-AM1 endpoint"
+    },
+    {
+      "rank": 23,
+      "name": "Beggars Opera",
+      "mbid": "e61993e5-4c8a-4fed-b9f8-769d2726cb9b",
+      "minutes": 45
+    },
+    {
+      "rank": 24,
+      "name": "Frightened Rabbit",
+      "mbid": "dc21d171-7204-4759-9fd0-77d031aeb40c",
+      "minutes": 45
+    },
+    {
+      "rank": 25,
+      "name": "The Litter",
+      "mbid": "eab6a6b9-fd38-4426-b679-5a6503d80877",
+      "minutes": 43,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 26,
+      "name": "Night Moves",
+      "mbid": "cfe4a55b-b076-48c1-a9fe-585c59f14645",
+      "minutes": 41,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 27,
+      "name": "The Magnetic Fields",
+      "mbid": "3ff72a59-f39d-411d-9f93-2d4a86413013",
+      "minutes": 40
+    },
+    {
+      "rank": 28,
+      "name": "The New Pornographers",
+      "mbid": "25b75a66-ce83-4db3-b136-395a3c3784c4",
+      "minutes": 38,
+      "skipped_as_adjacent_to": [
+        "The Magnetic Fields"
+      ]
+    },
+    {
+      "rank": 29,
+      "name": "Built To Spill",
+      "mbid": "3ac482b8-1494-4071-a0e9-f192f9d2c2b0",
+      "minutes": 38,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 30,
+      "name": "Okkervil River",
+      "mbid": "9fa07bb4-8312-4cd7-a19a-4fdbc5797148",
+      "minutes": 36,
+      "skipped_as_adjacent_to": [
+        "The Magnetic Fields",
+        "The New Pornographers"
+      ]
+    },
+    {
+      "rank": 31,
+      "name": "Spoon",
+      "mbid": "84eac621-1c5a-49a1-9500-555099c6e184",
+      "minutes": 36,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 32,
+      "name": "Crosby, Stills, Nash & Young",
+      "mbid": "46a782ea-4308-476b-abd1-a91b197f3037",
+      "minutes": 34
+    },
+    {
+      "rank": 33,
+      "name": "DOPE LEMON",
+      "mbid": "77c5db7c-6d5b-49c2-9ea6-82f3efcd1da2",
+      "minutes": 34,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 34,
+      "name": "Leon Bridges",
+      "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+      "minutes": 33
+    },
+    {
+      "rank": 35,
+      "name": "Grizzly Bear",
+      "mbid": "59a7fbcb-ff74-494d-abd0-9c82359040c9",
+      "minutes": 31,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 36,
+      "name": "The Who",
+      "mbid": "9fdaa16b-a6c4-4831-b87c-bc9ca8ce7eaa",
+      "minutes": 31
+    },
+    {
+      "rank": 37,
+      "name": "Sundara Karma",
+      "mbid": "ba3f1845-72c8-4122-850f-1a3a8f4bfe49",
+      "minutes": 30,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 38,
+      "name": "Modest Mouse",
+      "mbid": "a96ac800-bfcb-412a-8a63-0a98df600700",
+      "minutes": 29,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 39,
+      "name": "Unknown Mortal Orchestra",
+      "mbid": "e2305342-0bde-4a2c-aed0-4b88694834de",
+      "minutes": 29
+    },
+    {
+      "rank": 40,
+      "name": "The Rural Alberta Advantage",
+      "mbid": "e0647eee-82ce-40e6-af54-953395ad1c08",
+      "minutes": 28
+    },
+    {
+      "rank": 41,
+      "name": "The Mountain Goats",
+      "mbid": "9639cd52-c351-4a17-9797-58880e95a7ef",
+      "minutes": 28,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 42,
+      "name": "Manchester Orchestra",
+      "mbid": "dd91eb4b-6d08-4c14-9eb2-197a02a35f6c",
+      "minutes": 28,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 43,
+      "name": "Alvvays",
+      "mbid": "99450990-b24e-4132-bb68-235f8c3e2564",
+      "minutes": 27
+    },
+    {
+      "rank": 44,
+      "name": "Florence + The Machine",
+      "mbid": "5fee3020-513b-48c2-b1f7-4681b01db0c6",
+      "minutes": 26
+    },
+    {
+      "rank": 45,
+      "name": "Songs: Ohia",
+      "mbid": "1305bd7e-27ef-4236-ae87-0a7d435234ca",
+      "minutes": 26,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 46,
+      "name": "Wye Oak",
+      "mbid": "3c8ff4c9-b5b9-4e78-ad9d-5157c323de24",
+      "minutes": 25,
+      "excluded": "listen-1 primary endpoint (D1)"
+    },
+    {
+      "rank": 47,
+      "name": "F. J. McMahon",
+      "mbid": "5384c176-beba-4a88-945e-001472d48dea",
+      "minutes": 25
+    },
+    {
+      "rank": 48,
+      "name": "Geographer",
+      "mbid": "c1213174-2d79-488d-93fd-1db2ef43da8e",
+      "minutes": 24
+    },
+    {
+      "rank": 49,
+      "name": "The Spinto Band",
+      "mbid": "86c20d59-4cd7-4814-b6b7-e371c1016097",
+      "minutes": 23
+    },
+    {
+      "rank": 50,
+      "name": "Hozier",
+      "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+      "minutes": 23,
+      "skipped_as_listen1_reserve_with": [
+        "The Spinto Band"
+      ]
+    },
+    {
+      "rank": 51,
+      "name": "Vampire Weekend",
+      "mbid": "af37c51c-0790-4a29-b995-456f98a6b8c9",
+      "minutes": 23
+    },
+    {
+      "rank": 52,
+      "name": "Neil Young",
+      "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+      "minutes": 22
+    },
+    {
+      "rank": 53,
+      "name": "Ryn Weaver",
+      "mbid": "46a811a4-a58b-4514-8db6-b6ecf63431fd",
+      "minutes": 22
+    },
+    {
+      "rank": 54,
+      "name": "Uriah Heep",
+      "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+      "minutes": 22,
+      "skipped_as_listen1_reserve_with": [
+        "Ryn Weaver"
+      ]
+    },
+    {
+      "rank": 55,
+      "name": "Fruit Bats",
+      "mbid": "e3f139c7-11bc-4803-82be-2bac85ca3c61",
+      "minutes": 22
+    },
+    {
+      "rank": 56,
+      "name": "Death Cab for Cutie",
+      "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+      "minutes": 22
+    },
+    {
+      "rank": 57,
+      "name": "LCD Soundsystem",
+      "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+      "minutes": 21
+    },
+    {
+      "rank": 58,
+      "name": "The Veils",
+      "mbid": "c3bf5aee-646e-4030-9ab4-d1fbd4947a97",
+      "minutes": 21,
+      "skipped_as_listen1_reserve_with": [
+        "LCD Soundsystem"
+      ]
+    },
+    {
+      "rank": 59,
+      "name": "Jefferson Airplane",
+      "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+      "minutes": 21
+    },
+    {
+      "rank": 60,
+      "name": "Kishi Bashi",
+      "mbid": "7c340ac5-6eda-4981-91d6-d5b1f4d1bbbf",
+      "minutes": 21
+    },
+    {
+      "rank": 61,
+      "name": "Nektar",
+      "mbid": "8a5c294f-8d3b-452d-a6f9-6332cfb408f3",
+      "minutes": 21
+    },
+    {
+      "rank": 62,
+      "name": "M83",
+      "mbid": "6d7b7cd4-254b-4c25-83f6-dd20f98ceacd",
+      "minutes": 20,
+      "skipped_as_listen1_reserve_with": [
+        "Nektar"
+      ]
+    },
+    {
+      "rank": 63,
+      "name": "Sloan",
+      "mbid": "5a63c831-5bdb-444d-a9db-974501e3317d",
+      "minutes": 20
+    },
+    {
+      "rank": 64,
+      "name": "Rush",
+      "mbid": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+      "minutes": 20
+    },
+    {
+      "rank": 65,
+      "name": "Fleetwood Mac",
+      "mbid": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+      "minutes": 20
+    },
+    {
+      "rank": 66,
+      "name": "The Anniversary",
+      "mbid": "db41efe6-867b-4427-820c-506ea17e5692",
+      "minutes": 19
+    },
+    {
+      "rank": 67,
+      "name": "Simon & Garfunkel",
+      "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a",
+      "minutes": 19
+    },
+    {
+      "rank": 68,
+      "name": "Japandroids",
+      "mbid": "2008d65c-31ee-4382-8960-5188523568d5",
+      "minutes": 19
+    },
+    {
+      "rank": 69,
+      "name": "Caroline Rose",
+      "mbid": "17862c0f-a9b1-46dd-b85d-7af965974afd",
+      "minutes": 18
+    },
+    {
+      "rank": 70,
+      "name": "Curved Air",
+      "mbid": "202d14e1-dbee-4fa1-8aeb-93bc4ba1b20b",
+      "minutes": 18
+    },
+    {
+      "rank": 71,
+      "name": "The Beaches",
+      "mbid": "cdf5b0a1-ce40-4bb8-92dc-baa602ff83c1",
+      "minutes": 18
+    },
+    {
+      "rank": 72,
+      "name": "Belle and Sebastian",
+      "mbid": "e5c7b94f-e264-473c-bb0f-37c85d4d5c70",
+      "minutes": 17
+    },
+    {
+      "rank": 73,
+      "name": "The Wombats",
+      "mbid": "e105c272-b5d7-4135-82ef-d60bded54345",
+      "minutes": 17
+    },
+    {
+      "rank": 74,
+      "name": "White Denim",
+      "mbid": "42e49814-6058-431c-80e2-a3aab424060d",
+      "minutes": 17
+    },
+    {
+      "rank": 75,
+      "name": "Talking Heads",
+      "mbid": "a94a7155-c79d-4409-9fcf-220cb0e4dc3a",
+      "minutes": 17
+    },
+    {
+      "rank": 76,
+      "name": "Love",
+      "mbid": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47",
+      "minutes": 17
+    },
+    {
+      "rank": 77,
+      "name": "Captain Beyond",
+      "mbid": "e20a361c-89e2-466d-ab04-2fd271524d69",
+      "minutes": 16
+    },
+    {
+      "rank": 78,
+      "name": "The Walkmen",
+      "mbid": "b7834ebd-64ae-46c3-a930-2d3a52ee743a",
+      "minutes": 16
+    },
+    {
+      "rank": 79,
+      "name": "Radiation City",
+      "mbid": "8ee36bb2-5658-4bf2-99d0-df99df4b2a38",
+      "minutes": 16
+    },
+    {
+      "rank": 80,
+      "name": "Parcels",
+      "mbid": "5318e774-f5b6-4ee0-82cb-4dcf398c3ff8",
+      "minutes": 16
+    },
+    {
+      "rank": 81,
+      "name": "Vaults",
+      "mbid": "577f9388-d382-4fd4-804c-e58e8527928b",
+      "minutes": 16
+    },
+    {
+      "rank": 82,
+      "name": "Future Islands",
+      "mbid": "74963434-dcb6-4b14-98cc-99873b06db66",
+      "minutes": 15
+    },
+    {
+      "rank": 83,
+      "name": "Father John Misty",
+      "mbid": "172053e5-a7fb-4548-a64d-c53858b5e775",
+      "minutes": 15
+    },
+    {
+      "rank": 84,
+      "name": "The Cars",
+      "mbid": "092b603f-eb4c-4958-b10e-02420de5885b",
+      "minutes": 15
+    },
+    {
+      "rank": 85,
+      "name": "Ray LaMontagne",
+      "mbid": "b5c4ffa2-82e1-4b72-b7f3-c60afb74b860",
+      "minutes": 14
+    },
+    {
+      "rank": 86,
+      "name": "Taste",
+      "mbid": "e48d590f-1352-46a0-9da1-2ce4ec6196b5",
+      "minutes": 14
+    },
+    {
+      "rank": 87,
+      "name": "BC Camplight",
+      "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+      "minutes": 14
+    },
+    {
+      "rank": 88,
+      "name": "The National",
+      "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+      "minutes": 14
+    },
+    {
+      "rank": 89,
+      "name": "Vertical Horizon",
+      "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+      "minutes": 14
+    },
+    {
+      "rank": 90,
+      "name": "The Postal Service",
+      "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+      "minutes": 14
+    },
+    {
+      "rank": 91,
+      "name": "Black Mountain",
+      "mbid": "4898b9ad-f564-4ff1-9046-b1a16dfd5200",
+      "minutes": 14
+    },
+    {
+      "rank": 92,
+      "name": "Broken Social Scene",
+      "mbid": "2eada8f8-056a-4093-bbc2-004909ce743b",
+      "minutes": 14
+    },
+    {
+      "rank": 93,
+      "name": "Mates of State",
+      "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+      "minutes": 14
+    },
+    {
+      "rank": 94,
+      "name": "Rachel Chinouriri",
+      "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+      "minutes": 14
+    },
+    {
+      "rank": 95,
+      "name": "Foreign Born",
+      "mbid": "2246a5d3-a9c2-4f5d-a20b-972301773d8c",
+      "minutes": 13
+    },
+    {
+      "rank": 96,
+      "name": "Spooky Tooth",
+      "mbid": "c8f8f706-2176-4fde-9f50-4e243dd096c8",
+      "minutes": 13
+    },
+    {
+      "rank": 97,
+      "name": "Say Hi",
+      "mbid": "f2cf6ceb-76c9-4822-8b6a-0119bc0ad867",
+      "minutes": 13
+    },
+    {
+      "rank": 98,
+      "name": "The Flaming Lips",
+      "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402",
+      "minutes": 13
+    },
+    {
+      "rank": 99,
+      "name": "Explosions In The Sky",
+      "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474",
+      "minutes": 13
+    },
+    {
+      "rank": 100,
+      "name": "Muse",
+      "mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+      "minutes": 13
+    },
+    {
+      "rank": 101,
+      "name": "Emerson, Lake & Palmer",
+      "mbid": "ad996aef-cc1c-42ac-af5c-619c370f4b8a",
+      "minutes": 13
+    },
+    {
+      "rank": 102,
+      "name": "Wolf Parade",
+      "mbid": "b7ddce8b-9e5c-46bd-9d33-41b134ce1a7f",
+      "minutes": 13
+    },
+    {
+      "rank": 103,
+      "name": "Sparklehorse",
+      "mbid": "45be8e20-3c3c-4e78-98f0-b5bdecf2f703",
+      "minutes": 13
+    },
+    {
+      "rank": 104,
+      "name": "Jimi Hendrix",
+      "mbid": "06fb1c8b-566e-4cb2-985b-b467c90781d4",
+      "minutes": 13
+    },
+    {
+      "rank": 105,
+      "name": "Khruangbin",
+      "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634",
+      "minutes": 12
+    },
+    {
+      "rank": 106,
+      "name": "Steely Dan",
+      "mbid": "e01c3376-15fa-40d7-b747-5f219bdefdd7",
+      "minutes": 12
+    },
+    {
+      "rank": 107,
+      "name": "The Alan Parsons Project",
+      "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+      "minutes": 12
+    },
+    {
+      "rank": 108,
+      "name": "Junip",
+      "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+      "minutes": 12
+    },
+    {
+      "rank": 109,
+      "name": "Dire Straits",
+      "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a",
+      "minutes": 12
+    },
+    {
+      "rank": 110,
+      "name": "Benjamin Gibbard",
+      "mbid": "02031e5c-f9ab-4b4e-bc08-a61ea11a455d",
+      "minutes": 12
+    },
+    {
+      "rank": 111,
+      "name": "Sea Girls",
+      "mbid": "c36c03f2-078e-4832-a4e5-8fcfa29d95b2",
+      "minutes": 12
+    },
+    {
+      "rank": 112,
+      "name": "Travis",
+      "mbid": "22a40b75-affc-4e69-8884-266d087e4751",
+      "minutes": 12
+    },
+    {
+      "rank": 113,
+      "name": "Blue Öyster Cult",
+      "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+      "minutes": 11
+    },
+    {
+      "rank": 114,
+      "name": "Jukebox The Ghost",
+      "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+      "minutes": 11
+    },
+    {
+      "rank": 115,
+      "name": "Mac Miller",
+      "mbid": "a0e8a1b1-5f8f-475a-a253-17415c17d0ff",
+      "minutes": 11
+    },
+    {
+      "rank": 116,
+      "name": "Midlake",
+      "mbid": "da90b5da-349e-4906-a0b4-805f5e46190d",
+      "minutes": 11
+    },
+    {
+      "rank": 117,
+      "name": "Van Morrison",
+      "mbid": "a41ac10f-0a56-4672-9161-b83f9b223559",
+      "minutes": 10
+    },
+    {
+      "rank": 118,
+      "name": "King Crimson",
+      "mbid": "b38225b8-8e5f-42aa-bcdc-7bae5b5bdab3",
+      "minutes": 10
+    },
+    {
+      "rank": 119,
+      "name": "Clap Your Hands Say Yeah",
+      "mbid": "4b2d6a23-034d-4a29-9bb9-d2462796da4e",
+      "minutes": 10
+    },
+    {
+      "rank": 120,
+      "name": "Robin Trower",
+      "mbid": "6605c2c6-f115-486c-8b1a-b786882de463",
+      "minutes": 10
+    },
+    {
+      "rank": 121,
+      "name": "Neal Francis",
+      "mbid": "5c5284c4-38b2-4018-b1ed-404d77fd2cf0",
+      "minutes": 10
+    },
+    {
+      "rank": 122,
+      "name": "Caamp",
+      "mbid": "8e868f14-7fb1-4e80-b783-b992f844b010",
+      "minutes": 10
+    },
+    {
+      "rank": 123,
+      "name": "Guided By Voices",
+      "mbid": "6c85f4c3-026c-4c16-9a7c-f546f42ed0fb",
+      "minutes": 10
+    },
+    {
+      "rank": 124,
+      "name": "The Twilight Sad",
+      "mbid": "d44d63b8-3da4-4f7d-aba1-a05ba8941b44",
+      "minutes": 10
+    },
+    {
+      "rank": 125,
+      "name": "Defiance, Ohio",
+      "mbid": "a78ef19a-5fba-46fd-b50e-ff95a45693aa",
+      "minutes": 10
+    }
+  ],
+  "candidates_in_draw_order": [
+    {
+      "a": {
+        "rank": 12,
+        "name": "Sufjan Stevens",
+        "mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c",
+        "minutes": 99
+      },
+      "b": {
+        "rank": 13,
+        "name": "The Format",
+        "mbid": "81b07a2a-cdf0-4c5e-a68c-8d910e1f0ea6",
+        "minutes": 98
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 2,
+            "10": 3,
+            "20": 4
+          },
+          "A5V": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.3333
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 23,
+        "name": "Beggars Opera",
+        "mbid": "e61993e5-4c8a-4fed-b9f8-769d2726cb9b",
+        "minutes": 45
+      },
+      "b": {
+        "rank": 24,
+        "name": "Frightened Rabbit",
+        "mbid": "dc21d171-7204-4759-9fd0-77d031aeb40c",
+        "minutes": 45
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 8,
+            "10": 4,
+            "20": 6
+          },
+          "A5V": {
+            "0": 8,
+            "10": 7,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.35
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 27,
+        "name": "The Magnetic Fields",
+        "mbid": "3ff72a59-f39d-411d-9f93-2d4a86413013",
+        "minutes": 40
+      },
+      "b": {
+        "rank": 32,
+        "name": "Crosby, Stills, Nash & Young",
+        "mbid": "46a782ea-4308-476b-abd1-a91b197f3037",
+        "minutes": 34
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 6,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": false
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 14,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1429
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 28,
+        "name": "The New Pornographers",
+        "mbid": "25b75a66-ce83-4db3-b136-395a3c3784c4",
+        "minutes": 38,
+        "skipped_as_adjacent_to": [
+          "The Magnetic Fields"
+        ]
+      },
+      "b": {
+        "rank": 34,
+        "name": "Leon Bridges",
+        "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+        "minutes": 33
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": false,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 10,
+        "familiar_interior": 5,
+        "familiar_fraction": 0.5
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 30,
+        "name": "Okkervil River",
+        "mbid": "9fa07bb4-8312-4cd7-a19a-4fdbc5797148",
+        "minutes": 36,
+        "skipped_as_adjacent_to": [
+          "The Magnetic Fields",
+          "The New Pornographers"
+        ]
+      },
+      "b": {
+        "rank": 36,
+        "name": "The Who",
+        "mbid": "9fdaa16b-a6c4-4831-b87c-bc9ca8ce7eaa",
+        "minutes": 31
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.4375
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 39,
+        "name": "Unknown Mortal Orchestra",
+        "mbid": "e2305342-0bde-4a2c-aed0-4b88694834de",
+        "minutes": 29
+      },
+      "b": {
+        "rank": 40,
+        "name": "The Rural Alberta Advantage",
+        "mbid": "e0647eee-82ce-40e6-af54-953395ad1c08",
+        "minutes": 28
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": false,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 5,
+        "familiar_fraction": 0.4167
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 43,
+        "name": "Alvvays",
+        "mbid": "99450990-b24e-4132-bb68-235f8c3e2564",
+        "minutes": 27
+      },
+      "b": {
+        "rank": 44,
+        "name": "Florence + The Machine",
+        "mbid": "5fee3020-513b-48c2-b1f7-4681b01db0c6",
+        "minutes": 26
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 2,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1667
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 47,
+        "name": "F. J. McMahon",
+        "mbid": "5384c176-beba-4a88-945e-001472d48dea",
+        "minutes": 25
+      },
+      "b": {
+        "rank": 48,
+        "name": "Geographer",
+        "mbid": "c1213174-2d79-488d-93fd-1db2ef43da8e",
+        "minutes": 24
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 7,
+            "10": 6,
+            "20": 4
+          },
+          "A5V": {
+            "0": 7,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": false
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0588
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 49,
+        "name": "The Spinto Band",
+        "mbid": "86c20d59-4cd7-4814-b6b7-e371c1016097",
+        "minutes": 23
+      },
+      "b": {
+        "rank": 51,
+        "name": "Vampire Weekend",
+        "mbid": "af37c51c-0790-4a29-b995-456f98a6b8c9",
+        "minutes": 23
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 2,
+            "20": 3
+          },
+          "A5V": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 14,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1429
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 50,
+        "name": "Hozier",
+        "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+        "minutes": 23,
+        "skipped_as_listen1_reserve_with": [
+          "The Spinto Band"
+        ]
+      },
+      "b": {
+        "rank": 52,
+        "name": "Neil Young",
+        "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+        "minutes": 22
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          },
+          "A5V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": false,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 13,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0769
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 53,
+        "name": "Ryn Weaver",
+        "mbid": "46a811a4-a58b-4514-8db6-b6ecf63431fd",
+        "minutes": 22
+      },
+      "b": {
+        "rank": 55,
+        "name": "Fruit Bats",
+        "mbid": "e3f139c7-11bc-4803-82be-2bac85ca3c61",
+        "minutes": 22
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 2,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.1875
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 54,
+        "name": "Uriah Heep",
+        "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+        "minutes": 22,
+        "skipped_as_listen1_reserve_with": [
+          "Ryn Weaver"
+        ]
+      },
+      "b": {
+        "rank": 56,
+        "name": "Death Cab for Cutie",
+        "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+        "minutes": 22
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 22,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.0909
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 57,
+        "name": "LCD Soundsystem",
+        "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+        "minutes": 21
+      },
+      "b": {
+        "rank": 59,
+        "name": "Jefferson Airplane",
+        "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+        "minutes": 21
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0588
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 58,
+        "name": "The Veils",
+        "mbid": "c3bf5aee-646e-4030-9ab4-d1fbd4947a97",
+        "minutes": 21,
+        "skipped_as_listen1_reserve_with": [
+          "LCD Soundsystem"
+        ]
+      },
+      "b": {
+        "rank": 60,
+        "name": "Kishi Bashi",
+        "mbid": "7c340ac5-6eda-4981-91d6-d5b1f4d1bbbf",
+        "minutes": 21
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 7,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 7,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2105
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 61,
+        "name": "Nektar",
+        "mbid": "8a5c294f-8d3b-452d-a6f9-6332cfb408f3",
+        "minutes": 21
+      },
+      "b": {
+        "rank": 63,
+        "name": "Sloan",
+        "mbid": "5a63c831-5bdb-444d-a9db-974501e3317d",
+        "minutes": 20
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 7,
+            "20": 5
+          },
+          "A5V": {
+            "0": 6,
+            "10": 6,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2222
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 62,
+        "name": "M83",
+        "mbid": "6d7b7cd4-254b-4c25-83f6-dd20f98ceacd",
+        "minutes": 20,
+        "skipped_as_listen1_reserve_with": [
+          "Nektar"
+        ]
+      },
+      "b": {
+        "rank": 64,
+        "name": "Rush",
+        "mbid": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+        "minutes": 20
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 5,
+        "familiar_fraction": 0.4545
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 65,
+        "name": "Fleetwood Mac",
+        "mbid": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+        "minutes": 20
+      },
+      "b": {
+        "rank": 66,
+        "name": "The Anniversary",
+        "mbid": "db41efe6-867b-4427-820c-506ea17e5692",
+        "minutes": 19
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 6,
+            "20": 5
+          },
+          "A5V": {
+            "0": 5,
+            "10": 6,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.1905
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 67,
+        "name": "Simon & Garfunkel",
+        "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a",
+        "minutes": 19
+      },
+      "b": {
+        "rank": 68,
+        "name": "Japandroids",
+        "mbid": "2008d65c-31ee-4382-8960-5188523568d5",
+        "minutes": 19
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": false
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1333
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 69,
+        "name": "Caroline Rose",
+        "mbid": "17862c0f-a9b1-46dd-b85d-7af965974afd",
+        "minutes": 18
+      },
+      "b": {
+        "rank": 70,
+        "name": "Curved Air",
+        "mbid": "202d14e1-dbee-4fa1-8aeb-93bc4ba1b20b",
+        "minutes": 18
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 9,
+            "10": 6,
+            "20": 6
+          },
+          "A5V": {
+            "0": 8,
+            "10": 8,
+            "20": 7
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 29,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.1034
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 71,
+        "name": "The Beaches",
+        "mbid": "cdf5b0a1-ce40-4bb8-92dc-baa602ff83c1",
+        "minutes": 18
+      },
+      "b": {
+        "rank": 72,
+        "name": "Belle and Sebastian",
+        "mbid": "e5c7b94f-e264-473c-bb0f-37c85d4d5c70",
+        "minutes": 17
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": false,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 10,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.2
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 73,
+        "name": "The Wombats",
+        "mbid": "e105c272-b5d7-4135-82ef-d60bded54345",
+        "minutes": 17
+      },
+      "b": {
+        "rank": 74,
+        "name": "White Denim",
+        "mbid": "42e49814-6058-431c-80e2-a3aab424060d",
+        "minutes": 17
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 14,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.5
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 75,
+        "name": "Talking Heads",
+        "mbid": "a94a7155-c79d-4409-9fcf-220cb0e4dc3a",
+        "minutes": 17
+      },
+      "b": {
+        "rank": 76,
+        "name": "Love",
+        "mbid": "34ec9a8d-c65b-48fd-bcdd-aad2f72fdb47",
+        "minutes": 17
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 1,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 1,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 8,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.25
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 77,
+        "name": "Captain Beyond",
+        "mbid": "e20a361c-89e2-466d-ab04-2fd271524d69",
+        "minutes": 16
+      },
+      "b": {
+        "rank": 78,
+        "name": "The Walkmen",
+        "mbid": "b7834ebd-64ae-46c3-a930-2d3a52ee743a",
+        "minutes": 16
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 8,
+            "10": 7,
+            "20": 6
+          },
+          "A5V": {
+            "0": 8,
+            "10": 7,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": false
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.0833
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 79,
+        "name": "Radiation City",
+        "mbid": "8ee36bb2-5658-4bf2-99d0-df99df4b2a38",
+        "minutes": 16
+      },
+      "b": {
+        "rank": 80,
+        "name": "Parcels",
+        "mbid": "5318e774-f5b6-4ee0-82cb-4dcf398c3ff8",
+        "minutes": 16
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 4,
+            "20": 5
+          },
+          "A5V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.1667
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 81,
+        "name": "Vaults",
+        "mbid": "577f9388-d382-4fd4-804c-e58e8527928b",
+        "minutes": 16
+      },
+      "b": {
+        "rank": 82,
+        "name": "Future Islands",
+        "mbid": "74963434-dcb6-4b14-98cc-99873b06db66",
+        "minutes": 15
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          },
+          "A5V": {
+            "0": 4,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 13,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1538
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 83,
+        "name": "Father John Misty",
+        "mbid": "172053e5-a7fb-4548-a64d-c53858b5e775",
+        "minutes": 15
+      },
+      "b": {
+        "rank": 84,
+        "name": "The Cars",
+        "mbid": "092b603f-eb4c-4958-b10e-02420de5885b",
+        "minutes": 15
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 6,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": false,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0667
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 85,
+        "name": "Ray LaMontagne",
+        "mbid": "b5c4ffa2-82e1-4b72-b7f3-c60afb74b860",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 86,
+        "name": "Taste",
+        "mbid": "e48d590f-1352-46a0-9da1-2ce4ec6196b5",
+        "minutes": 14
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 7,
+            "10": 6,
+            "20": 5
+          },
+          "A5V": {
+            "0": 7,
+            "10": 7,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2105
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 87,
+        "name": "BC Camplight",
+        "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 88,
+        "name": "The National",
+        "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+        "minutes": 14
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0556
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 89,
+        "name": "Vertical Horizon",
+        "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 90,
+        "name": "The Postal Service",
+        "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+        "minutes": 14
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0476
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 91,
+        "name": "Black Mountain",
+        "mbid": "4898b9ad-f564-4ff1-9046-b1a16dfd5200",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 92,
+        "name": "Broken Social Scene",
+        "mbid": "2eada8f8-056a-4093-bbc2-004909ce743b",
+        "minutes": 14
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2667
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 93,
+        "name": "Mates of State",
+        "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 94,
+        "name": "Rachel Chinouriri",
+        "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+        "minutes": 14
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1053
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 95,
+        "name": "Foreign Born",
+        "mbid": "2246a5d3-a9c2-4f5d-a20b-972301773d8c",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 96,
+        "name": "Spooky Tooth",
+        "mbid": "c8f8f706-2176-4fde-9f50-4e243dd096c8",
+        "minutes": 13
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 11,
+            "10": 10,
+            "20": 8
+          },
+          "A5V": {
+            "0": 11,
+            "10": 9,
+            "20": 8
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 30,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.2333
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 97,
+        "name": "Say Hi",
+        "mbid": "f2cf6ceb-76c9-4822-8b6a-0119bc0ad867",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 98,
+        "name": "The Flaming Lips",
+        "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402",
+        "minutes": 13
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.2727
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 99,
+        "name": "Explosions In The Sky",
+        "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 100,
+        "name": "Muse",
+        "mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+        "minutes": 13
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.125
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 101,
+        "name": "Emerson, Lake & Palmer",
+        "mbid": "ad996aef-cc1c-42ac-af5c-619c370f4b8a",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 102,
+        "name": "Wolf Parade",
+        "mbid": "b7ddce8b-9e5c-46bd-9d33-41b134ce1a7f",
+        "minutes": 13
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 8,
+            "10": 6,
+            "20": 3
+          },
+          "A5V": {
+            "0": 8,
+            "10": 6,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 6,
+        "familiar_fraction": 0.25
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 103,
+        "name": "Sparklehorse",
+        "mbid": "45be8e20-3c3c-4e78-98f0-b5bdecf2f703",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 104,
+        "name": "Jimi Hendrix",
+        "mbid": "06fb1c8b-566e-4cb2-985b-b467c90781d4",
+        "minutes": 13
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 3,
+            "20": 5
+          },
+          "A5V": {
+            "0": 6,
+            "10": 3,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": false
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 1
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.2
+      },
+      "rejected": "the two maps' interiors differ at fewer than 2 of 3 depths",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 105,
+        "name": "Khruangbin",
+        "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634",
+        "minutes": 12
+      },
+      "b": {
+        "rank": 106,
+        "name": "Steely Dan",
+        "mbid": "e01c3376-15fa-40d7-b747-5f219bdefdd7",
+        "minutes": 12
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 3,
+            "20": 4
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 6,
+        "familiar_fraction": 0.2857
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 107,
+        "name": "The Alan Parsons Project",
+        "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+        "minutes": 12
+      },
+      "b": {
+        "rank": 108,
+        "name": "Junip",
+        "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+        "minutes": 12
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 6,
+            "20": 5
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 25,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.08
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 109,
+        "name": "Dire Straits",
+        "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a",
+        "minutes": 12
+      },
+      "b": {
+        "rank": 110,
+        "name": "Benjamin Gibbard",
+        "mbid": "02031e5c-f9ab-4b4e-bc08-a61ea11a455d",
+        "minutes": 12
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 4,
+            "20": 5
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 5,
+        "familiar_fraction": 0.2381
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 111,
+        "name": "Sea Girls",
+        "mbid": "c36c03f2-078e-4832-a4e5-8fcfa29d95b2",
+        "minutes": 12
+      },
+      "b": {
+        "rank": 112,
+        "name": "Travis",
+        "mbid": "22a40b75-affc-4e69-8884-266d087e4751",
+        "minutes": 12
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 2,
+            "10": 4,
+            "20": 5
+          },
+          "A5V": {
+            "0": 2,
+            "10": 4,
+            "20": 5
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0526
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 113,
+        "name": "Blue Öyster Cult",
+        "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+        "minutes": 11
+      },
+      "b": {
+        "rank": 114,
+        "name": "Jukebox The Ghost",
+        "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+        "minutes": 11
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 7,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 7,
+            "10": 5,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0476
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 115,
+        "name": "Mac Miller",
+        "mbid": "a0e8a1b1-5f8f-475a-a253-17415c17d0ff",
+        "minutes": 11
+      },
+      "b": {
+        "rank": 116,
+        "name": "Midlake",
+        "mbid": "da90b5da-349e-4906-a0b4-805f5e46190d",
+        "minutes": 11
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 5
+          },
+          "A5V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 22,
+        "familiar_interior": 6,
+        "familiar_fraction": 0.2727
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 117,
+        "name": "Van Morrison",
+        "mbid": "a41ac10f-0a56-4672-9161-b83f9b223559",
+        "minutes": 10
+      },
+      "b": {
+        "rank": 118,
+        "name": "King Crimson",
+        "mbid": "b38225b8-8e5f-42aa-bcdc-7bae5b5bdab3",
+        "minutes": 10
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1667
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 119,
+        "name": "Clap Your Hands Say Yeah",
+        "mbid": "4b2d6a23-034d-4a29-9bb9-d2462796da4e",
+        "minutes": 10
+      },
+      "b": {
+        "rank": 120,
+        "name": "Robin Trower",
+        "mbid": "6605c2c6-f115-486c-8b1a-b786882de463",
+        "minutes": 10
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 8,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 8,
+            "10": 6,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.2917
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 121,
+        "name": "Neal Francis",
+        "mbid": "5c5284c4-38b2-4018-b1ed-404d77fd2cf0",
+        "minutes": 10
+      },
+      "b": {
+        "rank": 122,
+        "name": "Caamp",
+        "mbid": "8e868f14-7fb1-4e80-b783-b992f844b010",
+        "minutes": 10
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 2,
+            "20": 3
+          },
+          "A5V": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1333
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 123,
+        "name": "Guided By Voices",
+        "mbid": "6c85f4c3-026c-4c16-9a7c-f546f42ed0fb",
+        "minutes": 10
+      },
+      "b": {
+        "rank": 124,
+        "name": "The Twilight Sad",
+        "mbid": "d44d63b8-3da4-4f7d-aba1-a05ba8941b44",
+        "minutes": 10
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 5,
+        "familiar_fraction": 0.4167
+      },
+      "rejected": "a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    }
+  ],
+  "survivors_ranked": [
+    {
+      "a": {
+        "rank": 89,
+        "name": "Vertical Horizon",
+        "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 90,
+        "name": "The Postal Service",
+        "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+        "minutes": 14
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0476
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 113,
+        "name": "Blue Öyster Cult",
+        "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+        "minutes": 11
+      },
+      "b": {
+        "rank": 114,
+        "name": "Jukebox The Ghost",
+        "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+        "minutes": 11
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0476
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 7,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 7,
+            "10": 5,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 87,
+        "name": "BC Camplight",
+        "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 88,
+        "name": "The National",
+        "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+        "minutes": 14
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0556
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 57,
+        "name": "LCD Soundsystem",
+        "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+        "minutes": 21
+      },
+      "b": {
+        "rank": 59,
+        "name": "Jefferson Airplane",
+        "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+        "minutes": 21
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0588
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 50,
+        "name": "Hozier",
+        "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+        "minutes": 23,
+        "skipped_as_listen1_reserve_with": [
+          "The Spinto Band"
+        ]
+      },
+      "b": {
+        "rank": 52,
+        "name": "Neil Young",
+        "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+        "minutes": 22
+      },
+      "familiarity": {
+        "distinct_interior": 13,
+        "familiar_interior": 1,
+        "familiar_fraction": 0.0769
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          },
+          "A5V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": false,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 107,
+        "name": "The Alan Parsons Project",
+        "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+        "minutes": 12
+      },
+      "b": {
+        "rank": 108,
+        "name": "Junip",
+        "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+        "minutes": 12
+      },
+      "familiarity": {
+        "distinct_interior": 25,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.08
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 6,
+            "20": 5
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 54,
+        "name": "Uriah Heep",
+        "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+        "minutes": 22,
+        "skipped_as_listen1_reserve_with": [
+          "Ryn Weaver"
+        ]
+      },
+      "b": {
+        "rank": 56,
+        "name": "Death Cab for Cutie",
+        "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+        "minutes": 22
+      },
+      "familiarity": {
+        "distinct_interior": 22,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.0909
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 93,
+        "name": "Mates of State",
+        "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 94,
+        "name": "Rachel Chinouriri",
+        "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+        "minutes": 14
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1053
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 5,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 99,
+        "name": "Explosions In The Sky",
+        "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 100,
+        "name": "Muse",
+        "mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+        "minutes": 13
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.125
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 67,
+        "name": "Simon & Garfunkel",
+        "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a",
+        "minutes": 19
+      },
+      "b": {
+        "rank": 68,
+        "name": "Japandroids",
+        "mbid": "2008d65c-31ee-4382-8960-5188523568d5",
+        "minutes": 19
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 2,
+        "familiar_fraction": 0.1333
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": false
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 69,
+        "name": "Caroline Rose",
+        "mbid": "17862c0f-a9b1-46dd-b85d-7af965974afd",
+        "minutes": 18
+      },
+      "b": {
+        "rank": 70,
+        "name": "Curved Air",
+        "mbid": "202d14e1-dbee-4fa1-8aeb-93bc4ba1b20b",
+        "minutes": 18
+      },
+      "familiarity": {
+        "distinct_interior": 29,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.1034
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 9,
+            "10": 6,
+            "20": 6
+          },
+          "A5V": {
+            "0": 8,
+            "10": 8,
+            "20": 7
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 79,
+        "name": "Radiation City",
+        "mbid": "8ee36bb2-5658-4bf2-99d0-df99df4b2a38",
+        "minutes": 16
+      },
+      "b": {
+        "rank": 80,
+        "name": "Parcels",
+        "mbid": "5318e774-f5b6-4ee0-82cb-4dcf398c3ff8",
+        "minutes": 16
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.1667
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 4,
+            "20": 5
+          },
+          "A5V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 97,
+        "name": "Say Hi",
+        "mbid": "f2cf6ceb-76c9-4822-8b6a-0119bc0ad867",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 98,
+        "name": "The Flaming Lips",
+        "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402",
+        "minutes": 13
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 3,
+        "familiar_fraction": 0.2727
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 65,
+        "name": "Fleetwood Mac",
+        "mbid": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+        "minutes": 20
+      },
+      "b": {
+        "rank": 66,
+        "name": "The Anniversary",
+        "mbid": "db41efe6-867b-4427-820c-506ea17e5692",
+        "minutes": 19
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.1905
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 6,
+            "20": 5
+          },
+          "A5V": {
+            "0": 5,
+            "10": 6,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 58,
+        "name": "The Veils",
+        "mbid": "c3bf5aee-646e-4030-9ab4-d1fbd4947a97",
+        "minutes": 21,
+        "skipped_as_listen1_reserve_with": [
+          "LCD Soundsystem"
+        ]
+      },
+      "b": {
+        "rank": 60,
+        "name": "Kishi Bashi",
+        "mbid": "7c340ac5-6eda-4981-91d6-d5b1f4d1bbbf",
+        "minutes": 21
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2105
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 7,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 7,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 85,
+        "name": "Ray LaMontagne",
+        "mbid": "b5c4ffa2-82e1-4b72-b7f3-c60afb74b860",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 86,
+        "name": "Taste",
+        "mbid": "e48d590f-1352-46a0-9da1-2ce4ec6196b5",
+        "minutes": 14
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2105
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 7,
+            "10": 6,
+            "20": 5
+          },
+          "A5V": {
+            "0": 7,
+            "10": 7,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 61,
+        "name": "Nektar",
+        "mbid": "8a5c294f-8d3b-452d-a6f9-6332cfb408f3",
+        "minutes": 21
+      },
+      "b": {
+        "rank": 63,
+        "name": "Sloan",
+        "mbid": "5a63c831-5bdb-444d-a9db-974501e3317d",
+        "minutes": 20
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2222
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 7,
+            "20": 5
+          },
+          "A5V": {
+            "0": 6,
+            "10": 6,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 91,
+        "name": "Black Mountain",
+        "mbid": "4898b9ad-f564-4ff1-9046-b1a16dfd5200",
+        "minutes": 14
+      },
+      "b": {
+        "rank": 92,
+        "name": "Broken Social Scene",
+        "mbid": "2eada8f8-056a-4093-bbc2-004909ce743b",
+        "minutes": 14
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 4,
+        "familiar_fraction": 0.2667
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 109,
+        "name": "Dire Straits",
+        "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a",
+        "minutes": 12
+      },
+      "b": {
+        "rank": 110,
+        "name": "Benjamin Gibbard",
+        "mbid": "02031e5c-f9ab-4b4e-bc08-a61ea11a455d",
+        "minutes": 12
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 5,
+        "familiar_fraction": 0.2381
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 4,
+            "20": 5
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 62,
+        "name": "M83",
+        "mbid": "6d7b7cd4-254b-4c25-83f6-dd20f98ceacd",
+        "minutes": 20,
+        "skipped_as_listen1_reserve_with": [
+          "Nektar"
+        ]
+      },
+      "b": {
+        "rank": 64,
+        "name": "Rush",
+        "mbid": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+        "minutes": 20
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 5,
+        "familiar_fraction": 0.4545
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 101,
+        "name": "Emerson, Lake & Palmer",
+        "mbid": "ad996aef-cc1c-42ac-af5c-619c370f4b8a",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 102,
+        "name": "Wolf Parade",
+        "mbid": "b7ddce8b-9e5c-46bd-9d33-41b134ce1a7f",
+        "minutes": 13
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 6,
+        "familiar_fraction": 0.25
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 8,
+            "10": 6,
+            "20": 3
+          },
+          "A5V": {
+            "0": 8,
+            "10": 6,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 115,
+        "name": "Mac Miller",
+        "mbid": "a0e8a1b1-5f8f-475a-a253-17415c17d0ff",
+        "minutes": 11
+      },
+      "b": {
+        "rank": 116,
+        "name": "Midlake",
+        "mbid": "da90b5da-349e-4906-a0b4-805f5e46190d",
+        "minutes": 11
+      },
+      "familiarity": {
+        "distinct_interior": 22,
+        "familiar_interior": 6,
+        "familiar_fraction": 0.2727
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 5,
+            "10": 5,
+            "20": 5
+          },
+          "A5V": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 105,
+        "name": "Khruangbin",
+        "mbid": "aea4c9b9-9f8d-49dc-b2ca-57d6f26e8634",
+        "minutes": 12
+      },
+      "b": {
+        "rank": 106,
+        "name": "Steely Dan",
+        "mbid": "e01c3376-15fa-40d7-b747-5f219bdefdd7",
+        "minutes": 12
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 6,
+        "familiar_fraction": 0.2857
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 6,
+            "10": 3,
+            "20": 4
+          },
+          "A5V": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 95,
+        "name": "Foreign Born",
+        "mbid": "2246a5d3-a9c2-4f5d-a20b-972301773d8c",
+        "minutes": 13
+      },
+      "b": {
+        "rank": 96,
+        "name": "Spooky Tooth",
+        "mbid": "c8f8f706-2176-4fde-9f50-4e243dd096c8",
+        "minutes": 13
+      },
+      "familiarity": {
+        "distinct_interior": 30,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.2333
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 11,
+            "10": 10,
+            "20": 8
+          },
+          "A5V": {
+            "0": 11,
+            "10": 9,
+            "20": 8
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 119,
+        "name": "Clap Your Hands Say Yeah",
+        "mbid": "4b2d6a23-034d-4a29-9bb9-d2462796da4e",
+        "minutes": 10
+      },
+      "b": {
+        "rank": 120,
+        "name": "Robin Trower",
+        "mbid": "6605c2c6-f115-486c-8b1a-b786882de463",
+        "minutes": 10
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.2917
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 8,
+            "10": 4,
+            "20": 4
+          },
+          "A5V": {
+            "0": 8,
+            "10": 6,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 23,
+        "name": "Beggars Opera",
+        "mbid": "e61993e5-4c8a-4fed-b9f8-769d2726cb9b",
+        "minutes": 45
+      },
+      "b": {
+        "rank": 24,
+        "name": "Frightened Rabbit",
+        "mbid": "dc21d171-7204-4759-9fd0-77d031aeb40c",
+        "minutes": 45
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.35
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 8,
+            "10": 4,
+            "20": 6
+          },
+          "A5V": {
+            "0": 8,
+            "10": 7,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    },
+    {
+      "a": {
+        "rank": 30,
+        "name": "Okkervil River",
+        "mbid": "9fa07bb4-8312-4cd7-a19a-4fdbc5797148",
+        "minutes": 36,
+        "skipped_as_adjacent_to": [
+          "The Magnetic Fields",
+          "The New Pornographers"
+        ]
+      },
+      "b": {
+        "rank": 36,
+        "name": "The Who",
+        "mbid": "9fdaa16b-a6c4-4831-b87c-bc9ca8ce7eaa",
+        "minutes": 31
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.4375
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          },
+          "A5V": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 3
+      }
+    },
+    {
+      "a": {
+        "rank": 73,
+        "name": "The Wombats",
+        "mbid": "e105c272-b5d7-4135-82ef-d60bded54345",
+        "minutes": 17
+      },
+      "b": {
+        "rank": 74,
+        "name": "White Denim",
+        "mbid": "42e49814-6058-431c-80e2-a3aab424060d",
+        "minutes": 17
+      },
+      "familiarity": {
+        "distinct_interior": 14,
+        "familiar_interior": 7,
+        "familiar_fraction": 0.5
+      },
+      "detail": {
+        "interior_len": {
+          "A0V": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "A5V": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": false,
+          "10": true,
+          "20": true
+        },
+        "depths_reached": {
+          "A0V": [
+            0,
+            10,
+            20
+          ],
+          "A5V": [
+            0,
+            10,
+            20
+          ]
+        },
+        "differing_depths": 2
+      }
+    }
+  ],
+  "finished_utc": "2026-09-12T17:09:48.941293+00:00"
+}
