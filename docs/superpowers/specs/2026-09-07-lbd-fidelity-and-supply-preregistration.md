@@ -1063,6 +1063,178 @@ and the `LBL-` series (`LBL-Q1`, `LBL-Q2`, `LBL-R1`–`LBL-R4`). Collision-check
 `refs/remotes refs/heads`): free apart from this branch's own new files.
 
 
+### ⚠ AMENDED 2026-09-12 by `LBD-AM6` — listen 2's pairs re-drawn, and the six instrument fixes
+
+**Written AFTER listen 1's read exists** (`findings/2026-09-11-lbl-listen1-results.md`) **and BEFORE
+any journey exists on any map for listen 2.** It changes the **pairs** and the **protocol**. It
+changes **no comparison, no map, no read, and no criterion value** — `LBD-AM5-7` continues to hold
+in full. The owner instructed it on 2026-09-12, having ruled on 2026-09-11 that no further blind
+listen would start until he had chosen a route, and then chosen this one.
+
+> ⚠ **The session that wrote this amendment ran the pre-screen and has therefore seen journeys
+> labelled by map. It may not run listen 2 and may not write it up.** Both belong to fresh sessions,
+> as `LBD-AM5-5`'s blind already requires of the preparing session; this disclosure records that the
+> bar is higher here, because a pre-screen sees both maps' journeys side by side for 46 pairs.
+
+**Why the pairs and not the comparison.** Listen 1 returned `LBL-R2`, the tie, and its own §3
+measured the limiting factor rather than inferring it: most rows the owner could not call were rows
+where he knew every artist on both sides — *he said so himself, unprompted* — and two pairs produced
+three- and four-step journeys with nothing to judge. A tie is also what a weak instrument returns by
+default. So the question listen 2 asks is unchanged, and what changes is the instrument's ability to
+answer it.
+
+**`LBD-AM6-1` — the differential pre-screen, and its rule committed before it ran.** *Plain: before
+choosing which pairs of artists to use, generate the journeys both maps give for every candidate
+pair, and keep only the pairs that are long enough to judge and on which the two maps actually
+disagree.* The rule, both thresholds and the ranking are fixed in `lbl_prescreen2.py`'s docstring,
+**committed at `855b090` before the script was first run**; its output was committed afterwards, and
+that ordering is the evidence, exactly as for `lbl_pairs.py` at `13410fa`.
+
+- **Pool.** `lbl_pairs.py`'s rule (steps 1–4), with three departures, each recorded in the output as
+  `D1`–`D3`: **(D1)** listen 1's eight **primary** endpoints are excluded **at artist level** — he
+  has heard `LBD-A0V` journeys between those artists and `LBD-A0V` is listen 2's incumbent, so a
+  remembered interior would identify a side, which is `lbl_pairs.py` step 2's argument for
+  `GBL-AM1`; **(D2)** listen 1's four **reserve** pairs are banned **as pairs, not as artists** — no
+  substitution fired in listen 1, so none was ever heard and the artists carry no memory; **(D3)**
+  endpoint membership is checked directly against both listen-2 maps instead of through `LBD-A0`'s
+  derived table, which was a necessary condition standing in for maps that did not yet exist.
+  Adjacency is screened in **both** listen-2 maps. The previously dealt listen-2 table in
+  `lbl_pairs.json` is **not** excluded from the draw: no journey was ever generated on it and no
+  verdict exists, so re-drawing one of its pairs spends nothing.
+- **Gate 1 — length.** Every depth, on **both** maps, carries **at least 3 interior artists**.
+- **Gate 2 — difference.** The two maps' interior artist **sets** differ at **at least 2 of the 3
+  depths**.
+- **Ranking.** Survivors are ordered by **fewest interior artists the owner's own familiarity export
+  contains**, then by the same as a fraction, then by pool rank, then by MBID — a total order, so
+  the selection is reproducible from the committed output.
+- **Selection was on the MAGNITUDE of the journey difference and on familiarity, and was blind to
+  its direction.** Nothing in the screen or the ranking reads which map is longer, more obscure,
+  more or less famous, or in any way better. A screen that preferred one map's journeys would choose
+  the pairs on which that map wins, which is the one thing a blind listen cannot survive.
+- **Counts are owned by `builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md` and are
+  restated nowhere, including here.**
+
+> ⚠ **The pre-screen's outputs are MAP-LABELLED and are on the runner brief's do-not-read list.**
+> `lbl_prescreen2.json` records each map's journey length per pair and depth; matching a length
+> against the served page would unblind the listen. `lbl_pairs2.json`, by contrast, carries the
+> pairs and nothing about either map, and the runner may read it.
+
+**`LBD-AM6-2` — the pairs.** `lbl_pairs2.json`, sha256
+`0a2eca01c22985991da0d3628b42d8021c4089ec81227a4b786a6c613c9be0f7`, emitted from the pre-screen's
+ranked survivors by `lbl_pairs2.py`; **no MBID is transcribed by hand anywhere.** The substitution
+rule is `LBD-AM5-5`'s, unchanged: a primary is replaced by the next unused reserve, in order, when
+it fails (a), (b) or (c); reserves exhausted means stop and report, and the owner supplies a pair.
+**These pairs replace `lbl_pairs.json`'s listen-2 table**, which was never used and on which no
+journey was ever generated.
+
+| listen 2 — primary | listen 2 — reserve, in order |
+|---|---|
+| Vertical Horizon → The Postal Service | Explosions In The Sky → Muse |
+| Blue Öyster Cult → Jukebox The Ghost | Simon & Garfunkel → Japandroids |
+| BC Camplight → The National | Caroline Rose → Curved Air |
+| LCD Soundsystem → Jefferson Airplane | Radiation City → Parcels |
+| Hozier → Neil Young | |
+| The Alan Parsons Project → Junip | |
+| Uriah Heep → Death Cab for Cutie | |
+| Mates of State → Rachel Chinouriri | |
+
+**`LBD-AM6-3` — minimum interior length is now a GENERATION gate** (findings note §4.1). *Plain: a
+pair is only used if, on both maps and at every depth, the journey has at least three artists
+between the two you chose.* `LBD-AM5-5`'s gate (c) required **one** interior artist, which is a
+depth being reachable, not a journey having a shape. For listen 2 the bar is **3**, applied at
+generation in exactly the same place and with the same consequence — the next reserve. Listen 1's
+bar of 1 is left as it was: it is the frozen record of how that listen ran.
+
+**`LBD-AM6-4` — `LBL-Q3`, the trade-off, asked on the row** (findings note §4.3). *Plain: ask him
+directly whether the two questions pulled him in opposite directions on this row, instead of hoping
+he explains it in the notes.* Wording frozen here, before any journey exists:
+
+> **`LBL-Q3`:** *"Did you have to trade coherence against novelty on this row?"* — **yes / no**,
+> required on every row.
+
+He used the free-text notes for exactly this three times in listen 1, and the protocol had nowhere
+to record it. **It decides nothing** — see `LBD-AM6-5`'s treatment, which governs both new items.
+
+**`LBD-AM6-5` — `LBL-Q4`, pick strength, asked on the row and in advance; and its treatment, which
+is that the tally does not read it** (findings note §4.5). *Plain: when he picks a side, ask whether
+it was a slight preference or a strong one — and then count rows exactly as before, because the
+verdict must not depend on a scale we have never used.*
+
+> **`LBL-Q4`:** *"if you picked a side, how strong?"* — **slight / strong**, per axis, required
+> wherever that axis carries a clear pick and refused where it does not.
+
+**The treatment, fixed now:**
+
+- **`LBL-R1`–`LBL-R4` count ROWS. Strength does not enter the tally, the margin, the bar, or any
+  verdict.** The owner's instruction was that the reads stay as registered; a tally weighting
+  strength would be a different read wearing the same identifiers. `lbl_unblind.py` is tested for
+  this directly: the verdict is invariant under every strength answer.
+- **What strength does get is a pre-registered DESCRIPTIVE read that decides nothing**: the count of
+  clear picks by strength and by role, per axis, and the count of rows on which `LBL-Q3` was
+  answered *yes*. Reported beside the tally, marked as deciding nothing, and **no threshold is
+  attached to either and no branch reads them.**
+- **Why ask at all, then.** Listen 1's §4.5 records that his picks were bimodal and that the tally
+  could not tell a landslide row from a hairline one — *and* that inventing a strength coding
+  afterwards from his notes was barred, because a reader coding the listener's words after seeing
+  the result is the framing failure this project's reporting rules exist to stop. Asking on the row,
+  in advance, with the treatment fixed before any journey exists, is what makes the same quantity
+  admissible.
+- **What it may never be used for:** re-tallying listen 1, which asked nothing of the kind, and
+  which `GBL-` §5's run-once rule bars from re-reading in any case.
+
+**`LBD-AM6-6` — the sides are DEALT to a balanced 4–4, not drawn per pair** (findings note §4.6),
+**and three clips per artist are carried forward unchanged** (§4.4). *Plain: exactly four of the
+eight pairs put each map on the left, with which pairs still decided at random.* Listen 1 drew each
+pair independently and landed 7–1; it changed no read there and is cheap to remove. `CLIPS_PER_ARTIST`
+stays at 3 — §4.4 records that three clips are what fixed the clip problem, and **not one listen-1
+row was lost to a clip**, the first time that has held in this project's blind listens.
+
+**`LBD-AM6-7` — `LBD-D6`, ruled by the owner on 2026-09-12, recorded verbatim.** He was asked before
+any of this was written, and his ruling is quoted rather than paraphrased:
+
+> "LBD-D6 ruling from the owner: LBD-A4 is WAIVED for listen 2 and ENFORCED before S4. Record it in
+> the amendment in these terms: both listen-2 maps (LBD-A0V and LBD-A5V) were derived with
+> ListenBrainz's own pairing semantics, the faithful form that LBD-A4 measures the cheaper form
+> against, so no LBD-A4 result can change either map or listen 2's read; LBD-A4 must run and R10
+> must be read before any S4 arm is pre-registered, and every S4 arm records which pairing semantics
+> it uses and why, per LBD-D6. Update the LBD-A4 row of NEXT.md's deferral table so its condition
+> reads "before any S4 arm is pre-registered" rather than "before any further LBD- arm". Do not run
+> LBD-A4 in this session."
+
+`LBD-A4` was not run here. `NEXT.md`'s deferral row was updated as instructed.
+
+**`LBD-X6` — a named exposure the ruling makes explicit, and it is about generalisation, not about
+this comparison.** Both arms are derived from the same table by the same SQL and differ at
+`threshold` alone, so the pairing form is genuinely held constant **across the arms** — that is the
+ruling's point and it is correct. What is **not** constant is the form's *effect at a given
+threshold*: each user's contribution to a pair's score is capped at `contribution`, so the pairing
+form sets how fast one user saturates that cap, and the two arms sit at different points on that
+curve. The number of **distinct** users a pair needs is fixed arithmetic (§7: four at threshold 10,
+two at threshold 3); how many real users reach it is not. **Consequence, a bar:** listen 2's result
+holds for ListenBrainz's own pairing semantics, and **no sentence may generalise it to the cheaper
+pairing form** until `LBD-A4` has run and `R10` has been read.
+
+**`LBD-AM6-8` — what does NOT change, stated so that nothing is inferred from silence.**
+
+| | |
+|---|---|
+| the comparison | **`LBD-A0V` (incumbent) against `LBD-A5V` (challenger)** — `LBD-AM5-5`'s listen 2, untouched |
+| the maps | the same two artifacts at the same sha256s; **nothing is rebuilt**, and `lbl_maps.json` gains listen 2's entry from the build records |
+| the reads | **`LBL-R1`–`LBL-R4` exactly as registered**, and their listen-2 plain sentences exactly as the `LBD-AM5-5` table fixed them, before any journey existed |
+| the bar | **margin 8** over **24 rows** per axis (8 pairs × 3 depths), d0 in the tally, *no preference* counting for neither, and the `underpowered` clause unchanged |
+| the split rule | a split is still **FAIL**, on the losing axis, in those words (`WHAT-GOOD-LOOKS-LIKE` value 8) |
+| the depths, the ladder, the router | d0/d10/d20 along the all-`known` ladder, production `find_journey` under `ApiConfig` defaults, one code path per map |
+| `LBD-X5` | **the data bundle's bar stands: no sentence may credit or blame any one component of it** |
+| `LBD-X4` | listen 1's term, and it does not touch listen 2, where both maps see `V` — stated in `LBD-AM5-2` and unchanged |
+| across the listens | **no verdict carries.** A listen-2 PASS does not say `LBD-A5V` beats the served map, and listen 1's verdict may not be re-listened (`GBL-` §5) |
+| adoption | **none, on any outcome.** `S4` owns adoption, the population rule, API sizing, the fame source and the refresh procedure; `V` remains an experimental control |
+| every criterion value | `LBD-G1`–`G4`, `LBD-C1`–`C3`, `R1`–`R12` and every clause of `LBD-AM1`–`LBD-AM5` stand exactly as written |
+
+**Identifiers** `LBD-AM6` (sub-items `-1`–`-8`), `LBL-Q3`, `LBL-Q4`, `LBD-X6`. Collision-checked
+across every ref 2026-09-12 (`git grep -lE '\bLBD-AM6|\bLBL-Q[3-9]|\bLBD-X[6-9]'` over
+`refs/remotes refs/heads`): free.
+
+
 ## §11 — Claims check
 
 Grepped and fetched 2026-09-07, in the worktree at `lb-dump-exploration`:
@@ -1104,6 +1276,24 @@ makes the register worth having, exactly as it is for the document itself.
 **The rule that governs every entry here:** a criterion's *values* are never edited. If a
 later session finds one inconvenient, the answer is an amendment with its own reasoning and
 its own date. That property is the whole point of the document.
+
+---
+
+### `LBD-AM6` — listen 2's pairs re-drawn, and the six instrument fixes
+
+**Dated 2026-09-12. Listen 1's read existed when this was written; no journey existed on any map for
+listen 2**, and none has been generated since. The full text is the block at the end of **§10**.
+This entry is the register row.
+
+| | |
+|---|---|
+| **what it adds** | a differential pre-screen whose rule and two thresholds were committed before it ran, selecting on the magnitude of the journey difference and on unfamiliarity, blind to direction (`-1`); listen 2's twelve pairs, emitted from that screen and sha-pinned (`-2`); a minimum interior length of 3 as a generation gate (`-3`); `LBL-Q3`, the trade-off question (`-4`); `LBL-Q4`, pick strength, with the treatment that the tally does not read it (`-5`); sides dealt 4–4 (`-6`); the owner's `LBD-D6` ruling, verbatim (`-7`); `LBD-X6`, the pairing-generalisation exposure |
+| **what it does NOT add** | **no change to any value**; no change to the comparison, the maps, the reads `LBL-R1`–`LBL-R4` or their plain sentences, the bar, the depths, the ladder or the router; no rebuild; no adoption path; no re-read of any `LBD-` criterion (`-8` enumerates it) |
+| **what it must not be read as** | a new comparison (it is `LBD-AM5-5`'s listen 2); a re-listen of listen 1's verdict, which `GBL-` §5 bars; licence to weight strength in a verdict; licence to generalise listen 2's result to the cheaper pairing form (`LBD-X6`); a waiver of `LBD-A4` beyond listen 2 — the owner enforced it before `S4` |
+| **why now** | listen 1 tied, and its own §3 measured the limiting factor as the pair draw rather than the protocol: most undecided rows were rows where the owner knew everyone on both sides, and two pairs were too short to judge. The owner chose to keep the question and fix the instrument |
+| **figures** | the pre-screen's counts are owned by `builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md` and restated nowhere; listen 1's figures stay with `findings/2026-09-11-lbl-listen1-results.md` |
+| **the blind** | the session that wrote this ran the pre-screen and has seen journeys labelled by map. **It may not run listen 2 and may not write it up.** The pre-screen's outputs are map-labelled and are on the runner brief's do-not-read list |
+| **identifiers** | **`LBD-AM6`** (`-1`–`-8`), `LBL-Q3`, `LBL-Q4`, `LBD-X6`. Collision-checked across every ref on 2026-09-12: free |
 
 ---
 
