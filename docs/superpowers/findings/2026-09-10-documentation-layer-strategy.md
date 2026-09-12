@@ -236,7 +236,9 @@ gitignored, so this table is the durable copy.
 often run under an instruction to read files with `cat`/`sed` through Bash rather than the `Read`
 tool. §6's unit is *"whose transcript shows a **Read** of any file under either path"*, so such a
 session is **not a qualifying session at all**: it contributes nothing, and it is **not** a miss
-against `C1`. **The danger is entirely in the reading.** A log showing a session that plainly
+against `C1`. **For `C1`'s scoring the danger is in the reading** — corrected 2026-09-12 from "entirely in the
+reading", which understated it; see `DLS-T1-X4`, where the rule turns out not to reach such a
+session at all. A log showing a session that plainly
 worked on specs, with no rule load beside it, looks exactly like a failure. Two of the four rows
 above are already of that shape. **The read must exclude any session whose spec and plan opens
 were not `Read`-tool opens, and say how many it excluded.** *(Raised by a session that hit it,
@@ -292,5 +294,47 @@ times while measuring its wall-clock for `DLS-M9`. **The read excludes all three
 mistaken for a qualifying session, since they carry no session id, but they do mean a line count
 of the log overstates by three. It also establishes that the hook will append a blank row rather
 than reject malformed input, which is worth knowing before anyone treats the log as self-validating.
+
+**`DLS-T1-X4` — a Bash read defeats the RULE, not merely the logging. This is the finding that
+bears on item 4.** *(Owner's question, 2026-09-12; answered by a controlled pair rather than by
+reasoning.)*
+
+**Design.** Two fresh subagents, same file, same 40 lines, **one variable: the tool**. Both barred
+from touching `.claude/` so neither could obtain the rule text by reading it. Each was asked what
+had appeared in its own context.
+
+| arm | tool | rule in context? |
+|---|---|---|
+| A | `head -40` via Bash | **No** |
+| B | `Read`, limit 40 | **Yes** — quoted verbatim, delivered as a system-reminder immediately after the read result |
+
+**Arm A is a real negative, not a failure to observe.** It reported four *other* system-reminders
+arriving alongside its Bash output, including the auto-mode guidelines, so the injection channel
+was demonstrably working in that session. The rule specifically did not fire.
+
+**So the mechanism is defeated by how a file is opened, and the text simply never arrives.**
+
+⚠ **`C1` can pass and still not license item 4, and this is a blind spot in §6 rather than a
+defect in it.** `C1` measures reliability **conditional on a `Read`-open**. It says nothing about
+what share of real sessions open plans that way — and under `DLS-T1-X1` most sessions here do not.
+A rule that loads in 100 % of qualifying sessions while reaching almost no real ones is a mechanism
+item 4 must not move load-bearing text onto. **The decision item 4 needs is coverage; `C1` measures
+fidelity.** Whoever reads `C1` must state which of the two they are reporting.
+
+**`DLS-T1-X5` — subagent loads are attributed to the parent session and carry no agent marker, so
+`C3` is not readable from this log and `C1`'s count can be inflated.** Arm B above was an
+Agent-tool subagent. Its load was written as
+`2026-09-12T17:00:45.843Z`, `session_id: 652d311c…` — **the parent's id** — with `agent_type: null`,
+indistinguishable from a main session's own Read. Two consequences:
+
+- **`DLS-T1-C3`** says subagent behaviour is *"recorded from log lines carrying an `agent_type`"*.
+  Agent-tool subagents carry none, so **C3 cannot be read this way**. The one row that does carry
+  `agent_type: consultant` is a *launched session* using an agent flag, not a subagent, which is
+  why it looked as though the field worked.
+- **A session that never opens a plan itself, but dispatches a subagent that does, produces a
+  `path_glob_match` row under its own id** and reads as a qualifying session. **The read must
+  confirm from the transcript, not the log, that a counted session made the open itself.** The one
+  qualifying session counted so far, at `16:02:16`, was a direct `Read` by the main session before
+  any subagent had been dispatched in it.
 
 §4's *State* column is as of this document's first commit; status lives in `NEXT.md`.
