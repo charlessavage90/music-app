@@ -1,23 +1,51 @@
-# LBL runner brief — listen 1, mechanics only
+# LBL runner brief — listen 2, mechanics only
+
+> **This file is the brief for the CURRENT listen, which is listen 2 (`LBD-AM6`).** Listen 1 was
+> run from this file as it stood at commit `916bc6f`, and that text is what the listen-1 results
+> note means when it cites the runner brief. Read it there, in git, if you ever need it; it is not
+> reproduced here, and nothing about listen 1 is re-run.
 
 You are running a blind evaluation. **Say nothing to the owner beyond these mechanics.** You are
 deliberately not told what anyone expects, and you must not go looking. **Do not read:**
 `docs/superpowers/findings/`, `docs/superpowers/NEXT.md`, any handoff or execution log under
 `docs/superpowers/`, `docs/superpowers/specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md`,
-anything under `builder/analysis/2026-09-10-lbd-served-population/`, `lbl_maps.json`, or anything
-under `.superpowers/lbl/`. This brief is self-contained. `lbl_listen1_page_data.json` is safe to view.
+anything under `builder/analysis/2026-09-10-lbd-served-population/`, `lbl_maps.json`,
+**`lbl_prescreen2.json`, `lbl_prescreen2.md`, `lbl_prescreen2.py`**, or anything under
+`.superpowers/lbl/`. This brief is self-contained. `lbl_listen2_page_data.json` is safe to view, and
+so is `lbl_pairs2.json` — it carries the pairs and nothing about either map.
+
+⚠ **The three `lbl_prescreen2.*` files are new to this listen, and they are the addition to that
+list that matters.** They record, per pair and depth, how long each map's journey was. Matching a
+length against what the page shows would unblind the listen, and there is no second one of you.
 
 **No Spotify, monthly-listener or ListenBrainz lookups by you or on the owner's behalf until step 9.**
 
-Work in the worktree `C:\Users\charl\worktrees\music-app-lbd-listen`, from `builder/`. Prefix every
-uv command with `UV_LINK_MODE=copy`, and use `PYTHONIOENCODING=utf-8` on anything that prints names.
+Work in a worktree of your own, from `builder/`. Prefix every uv command with `UV_LINK_MODE=copy`,
+and use `PYTHONIOENCODING=utf-8` on anything that prints names.
 
-1. **Preflight.** `git status --short` is clean on branch `lbd-listen`, and
+## What is different from listen 1, as far as you need to know
+
+Four things. None of them tells you which map is which, and none of them is a result.
+
+1. **Every row now asks a third question** — whether he had to trade the two questions against each
+   other on that row — **and a strength for each pick he makes** (*slight* or *strong*). An axis he
+   marks *no preference* takes no strength.
+2. **A row will not save until all of that is answered.** The page says so, and `/status` counts a
+   row with a missing strength or trade-off answer as incomplete exactly as it counts a missing
+   pick. If he asks why a row will not save, point at the missing item and nothing else.
+3. **The pairs are different pairs.** Do not compare them with listen 1's, and do not mention
+   listen 1 to him at all.
+4. **Generation demands longer journeys**, so a pair that would have passed in listen 1 can be
+   replaced by a reserve here. Those lines are normal — see step 2.
+
+## Steps
+
+1. **Preflight.** `git status --short` is clean on your branch, and
    `UV_LINK_MODE=copy uv run --extra dev --with duckdb pytest analysis/2026-09-10-lbd-blind-listen -q`
    passes.
 
 2. **Generate.**
-   `UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-09-10-lbd-blind-listen/lbl_generate.py --listen 1`
+   `UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-09-10-lbd-blind-listen/lbl_generate.py --listen 2`
    - It checks six things and stops with its own message if one fails. **A `SystemExit` carrying
      one of its messages is the experiment speaking: stop, report the message to the owner
      verbatim, do not work around it.**
@@ -32,24 +60,28 @@ uv command with `UV_LINK_MODE=copy`, and use `PYTHONIOENCODING=utf-8` on anythin
      a blind runner, and there is no second one of you.
 
 3. **Clips — just before serving.** Preview links expire after about fifteen minutes.
-   `UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-09-10-lbd-blind-listen/lbl_clips.py --listen 1`
+   `UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run python -u analysis/2026-09-10-lbd-blind-listen/lbl_clips.py --listen 2`
    Some artists resolve to nothing; that is expected. It prints silent card slots for L and R —
    **mention it to the owner only if one side is conspicuously emptier than the other.**
 
 4. **Smoke test.**
-   `UV_LINK_MODE=copy uv run python analysis/2026-09-10-lbd-blind-listen/lbl_page.py --listen 1`,
-   then open `http://127.0.0.1:8765/` in a real browser yourself and confirm: the page renders; at
-   least one clip plays; on a card with more than one track, "another track" switches it; **answering
-   both questions on one row and pressing the page's own "save row" button writes through** (read
-   `lbl_listen1_verdicts.json` to see it); after stopping and restarting the server, `GET /status`
-   no longer lists that row. Then stop the server, **read the whole of `lbl_listen1_verdicts.json`
-   to confirm it holds only your smoke-test answer, and delete it** so the owner starts clean.
-   Re-run step 3 if more than a few minutes have passed, then start the server again.
+   `UV_LINK_MODE=copy uv run python analysis/2026-09-10-lbd-blind-listen/lbl_page.py --listen 2`,
+   then open `http://127.0.0.1:8765/` in a real browser yourself and confirm: the page renders; the
+   banner mentions the two extra per-row items; at least one clip plays; on a card with more than
+   one track, "another track" switches it; **answering both questions, the trade-off question and a
+   strength for each picked side, then pressing the page's own "save row" button, writes through**
+   (read `lbl_listen2_verdicts.json` to see it); **and that a row with a pick but no strength
+   refuses to save.** After stopping and restarting the server, `GET /status` no longer lists that
+   row. Then stop the server, **read the whole of `lbl_listen2_verdicts.json` to confirm it holds
+   only your smoke-test answer, and delete it** so the owner starts clean. Re-run step 3 if more
+   than a few minutes have passed, then start the server again.
 
 5. **Hand the owner exactly this and nothing else:**
-   > "The listen is at http://127.0.0.1:8765/. Work top to bottom: answer both questions and save
-   > every row, then save each pair. Clips expire after about fifteen minutes — tell me when you
-   > take a break or come back and I'll refresh them. Sittings can be split; saved answers persist."
+   > "The listen is at http://127.0.0.1:8765/. Work top to bottom. Each row asks two questions, then
+   > whether you had to trade one against the other, and how strong each pick was — a row will not
+   > save until all of that is answered. Save every row, then save each pair. Clips expire after
+   > about fifteen minutes — tell me when you take a break or come back and I'll refresh them.
+   > Sittings can be split; saved answers persist."
 
 6. **Refreshing clips, whenever he asks or returns from a break:** stop the server, re-run step 3,
    start the server again, and tell him "clips refreshed — reload the page." Saved answers survive
@@ -62,13 +94,13 @@ uv command with `UV_LINK_MODE=copy`, and use `PYTHONIOENCODING=utf-8` on anythin
 
 8. **Stop the server and commit the answers and the stimulus as presented**, then push:
    ```
-   git commit -m "LBL- listen 1: the owner's answers, as saved by the page, and the page data" -- analysis/2026-09-10-lbd-blind-listen/lbl_listen1_verdicts.json analysis/2026-09-10-lbd-blind-listen/lbl_listen1_page_data.json
+   git commit -m "LBL- listen 2: the owner's answers, as saved by the page, and the page data" -- analysis/2026-09-10-lbd-blind-listen/lbl_listen2_verdicts.json analysis/2026-09-10-lbd-blind-listen/lbl_listen2_page_data.json
    git push
    ```
    (`git add` those two paths first if git reports them untracked.)
 
 9. **Unblind.**
-   `UV_LINK_MODE=copy uv run python analysis/2026-09-10-lbd-blind-listen/lbl_unblind.py --listen 1`
-   Commit `analysis/2026-09-10-lbd-blind-listen/lbl_listen1_result.json` the same way and push.
+   `UV_LINK_MODE=copy uv run python analysis/2026-09-10-lbd-blind-listen/lbl_unblind.py --listen 2`
+   Commit `analysis/2026-09-10-lbd-blind-listen/lbl_listen2_result.json` the same way and push.
    Report to the owner only: **"the answers and the mechanical tally are committed; the write-up
    belongs to a fresh session."** Then stop.

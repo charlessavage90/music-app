@@ -1,0 +1,228 @@
+{
+  "amendment": "LBD-AM6",
+  "listen": 2,
+  "comparison": "LBD-A0V (incumbent) against LBD-A5V (challenger) — unchanged from LBD-AM5-5",
+  "selected_by": {
+    "script": "lbl_prescreen2.py",
+    "script_sha256": "83db952cefe8e17c9bcc2ca6c6de835e0e26f9b536b4436f692d8e5a34c67ed4",
+    "output": "lbl_prescreen2.json",
+    "output_sha256": "2609c5cd79ff890f7c853a0a199e78b2a3ee1f977540678fd1d04c9967a14e10",
+    "thresholds": {
+      "min_interior_per_depth": 3,
+      "min_differing_depths": 2,
+      "depths": [
+        0,
+        10,
+        20
+      ],
+      "wanted": 12
+    },
+    "counts": {
+      "pool": 125,
+      "eligible": 93,
+      "drawn": 46,
+      "screened": 46,
+      "survivors": 28,
+      "wanted": 12,
+      "sufficient": true
+    }
+  },
+  "note": "Ranked by fewest interior artists the owner's export shows he is familiar with. Selection was on the magnitude of journey difference and on familiarity, never on direction. Safe for a blind runner to read: no per-map detail is copied here.",
+  "primary": [
+    {
+      "a": {
+        "name": "Vertical Horizon",
+        "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+        "rank": 89,
+        "minutes": 14
+      },
+      "b": {
+        "name": "The Postal Service",
+        "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+        "rank": 90,
+        "minutes": 14
+      },
+      "familiar_interior": 1,
+      "distinct_interior": 21
+    },
+    {
+      "a": {
+        "name": "Blue Öyster Cult",
+        "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+        "rank": 113,
+        "minutes": 11
+      },
+      "b": {
+        "name": "Jukebox The Ghost",
+        "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+        "rank": 114,
+        "minutes": 11
+      },
+      "familiar_interior": 1,
+      "distinct_interior": 21
+    },
+    {
+      "a": {
+        "name": "BC Camplight",
+        "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+        "rank": 87,
+        "minutes": 14
+      },
+      "b": {
+        "name": "The National",
+        "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+        "rank": 88,
+        "minutes": 14
+      },
+      "familiar_interior": 1,
+      "distinct_interior": 18
+    },
+    {
+      "a": {
+        "name": "LCD Soundsystem",
+        "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+        "rank": 57,
+        "minutes": 21
+      },
+      "b": {
+        "name": "Jefferson Airplane",
+        "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+        "rank": 59,
+        "minutes": 21
+      },
+      "familiar_interior": 1,
+      "distinct_interior": 17
+    },
+    {
+      "a": {
+        "name": "Hozier",
+        "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+        "rank": 50,
+        "minutes": 23
+      },
+      "b": {
+        "name": "Neil Young",
+        "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+        "rank": 52,
+        "minutes": 22
+      },
+      "familiar_interior": 1,
+      "distinct_interior": 13
+    },
+    {
+      "a": {
+        "name": "The Alan Parsons Project",
+        "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+        "rank": 107,
+        "minutes": 12
+      },
+      "b": {
+        "name": "Junip",
+        "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+        "rank": 108,
+        "minutes": 12
+      },
+      "familiar_interior": 2,
+      "distinct_interior": 25
+    },
+    {
+      "a": {
+        "name": "Uriah Heep",
+        "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+        "rank": 54,
+        "minutes": 22
+      },
+      "b": {
+        "name": "Death Cab for Cutie",
+        "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+        "rank": 56,
+        "minutes": 22
+      },
+      "familiar_interior": 2,
+      "distinct_interior": 22
+    },
+    {
+      "a": {
+        "name": "Mates of State",
+        "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+        "rank": 93,
+        "minutes": 14
+      },
+      "b": {
+        "name": "Rachel Chinouriri",
+        "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+        "rank": 94,
+        "minutes": 14
+      },
+      "familiar_interior": 2,
+      "distinct_interior": 19
+    }
+  ],
+  "reserve": [
+    {
+      "a": {
+        "name": "Explosions In The Sky",
+        "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474",
+        "rank": 99,
+        "minutes": 13
+      },
+      "b": {
+        "name": "Muse",
+        "mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+        "rank": 100,
+        "minutes": 13
+      },
+      "familiar_interior": 2,
+      "distinct_interior": 16
+    },
+    {
+      "a": {
+        "name": "Simon & Garfunkel",
+        "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a",
+        "rank": 67,
+        "minutes": 19
+      },
+      "b": {
+        "name": "Japandroids",
+        "mbid": "2008d65c-31ee-4382-8960-5188523568d5",
+        "rank": 68,
+        "minutes": 19
+      },
+      "familiar_interior": 2,
+      "distinct_interior": 15
+    },
+    {
+      "a": {
+        "name": "Caroline Rose",
+        "mbid": "17862c0f-a9b1-46dd-b85d-7af965974afd",
+        "rank": 69,
+        "minutes": 18
+      },
+      "b": {
+        "name": "Curved Air",
+        "mbid": "202d14e1-dbee-4fa1-8aeb-93bc4ba1b20b",
+        "rank": 70,
+        "minutes": 18
+      },
+      "familiar_interior": 3,
+      "distinct_interior": 29
+    },
+    {
+      "a": {
+        "name": "Radiation City",
+        "mbid": "8ee36bb2-5658-4bf2-99d0-df99df4b2a38",
+        "rank": 79,
+        "minutes": 16
+      },
+      "b": {
+        "name": "Parcels",
+        "mbid": "5318e774-f5b6-4ee0-82cb-4dcf398c3ff8",
+        "rank": 80,
+        "minutes": 16
+      },
+      "familiar_interior": 3,
+      "distinct_interior": 18
+    }
+  ],
+  "finished_utc": "2026-09-12T17:11:53.685553+00:00"
+}

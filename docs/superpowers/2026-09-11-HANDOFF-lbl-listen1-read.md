@@ -1,6 +1,10 @@
 # Handoff — `LBL-` listen 1 run, read and written up, 2026-09-11
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-12 by
+[`2026-09-12-HANDOFF-lbl-listen2-prep.md`](2026-09-12-HANDOFF-lbl-listen2-prep.md)** — the owner
+chose a route and listen 2 has since been prepared under `LBD-AM6`. **It remains authoritative for
+the listen-1 read and for every claim-not-to-revert below**, none of which `LBD-AM6` touches.
+*(Original role:)* **ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-09-10-HANDOFF-lbd-listen-prep.md`](2026-09-10-HANDOFF-lbd-listen-prep.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which
 owns it.
@@ -80,7 +84,7 @@ future reader can tell which artifacts this verdict was drawn from without trust
 | the two listenable maps | `C:\unsung-fast\lbd-artifacts\LBD-A0V.bin`, `LBD-A5V.bin`, each with its `.bin.json` sidecar |
 | archives, `LBD-A5` table | `C:\unsung-fast\lbd-archives\…`, `C:\unsung-fast\lbd-pairs\A5\` |
 | the sealed listen-1 mapping | `.superpowers/lbl/` — gitignored, and **already unsealed into the committed result**; nothing depends on it now |
-| listen 2's materials | **do not exist.** Its pairs are fixed in `lbl_pairs.json`; its map is built; nothing else is prepared |
+| listen 2's materials | ~~**do not exist.** Its pairs are fixed in `lbl_pairs.json`; its map is built; nothing else is prepared~~ — **TRUE WHEN WRITTEN, FALSE SINCE 2026-09-12.** `LBD-AM6` prepared them and **superseded that pair table**: listen 2's pairs are now `lbl_pairs2.json`. See [`2026-09-12-HANDOFF-lbl-listen2-prep.md`](2026-09-12-HANDOFF-lbl-listen2-prep.md). The map is unchanged and was not rebuilt. |
 
 ## What I know that is not in the durable record
 

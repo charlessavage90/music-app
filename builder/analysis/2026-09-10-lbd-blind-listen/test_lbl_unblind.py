@@ -99,3 +99,98 @@ def test_listen_read_order_puts_a_loss_before_a_win():
 def test_sentences_are_the_amendments_with_the_axis_substituted():
     assert sentence(1, "LBL-R3", ["novelty"]) == "The lists ListenBrainz published give better journeys on novelty."
     assert sentence(1, "LBL-R2", []) == "My ear cannot tell our recomputed lists from ListenBrainz's own."
+
+
+# --- LBD-AM6: listen 2's reads are UNCHANGED, and the new items decide nothing --------------------
+
+EXTRAS = ("tradeoff", "strength")
+
+
+def with_extras(s: dict, strength: str = "strong", tradeoff: str = "no") -> dict:
+    """Add LBL-Q3 and LBL-Q4 answers to every row of a state built by `state()`."""
+    for k, depths in s["rows"].items():
+        for d, entry in depths.items():
+            entry["tradeoff"] = tradeoff
+            for q in ("q1", "q2"):
+                entry[f"{q}_strength"] = strength if entry[q] in ("L", "R") else None
+    return s
+
+
+def test_listen_twos_sentences_are_the_amendments_own():
+    assert sentence(2, "LBL-R2", []) == "My ear cannot tell the two bars apart."
+    assert sentence(2, "LBL-R1", ["coherence"]) == (
+        "The two-listener bar gives better journeys on coherence, and no worse on the other.")
+    assert sentence(2, "LBL-R3", ["novelty"]) == "ListenBrainz's own bar gives better journeys on novelty."
+
+
+def test_listen_two_says_bars_where_listen_one_said_lists():
+    """The comparison changed; the shape of the read did not. A copied listen-1 sentence here would
+    claim listen 2 measured something it does not."""
+    assert "recomputed lists" not in sentence(2, "LBL-R2", [])
+    assert "bar" in sentence(2, "LBL-R3", ["novelty"])
+
+
+def test_the_bar_and_the_row_count_are_unchanged_for_listen_two():
+    assert MARGIN == 8 and len(ROWS) == 24
+
+
+@pytest.mark.parametrize("strength", ["slight", "strong"])
+def test_the_verdict_does_not_move_with_pick_strength(strength):
+    """LBL-R1-R4 count rows. If strength could change a verdict, the reads would not be unchanged."""
+    out = tally(with_extras(state(picks(12, 1), picks(3, 3)), strength=strength), mapping(), EXTRAS)
+    assert out["read"] == "LBL-R1" and out["axes"]["coherence"]["margin_toward_challenger"] == 11
+
+
+@pytest.mark.parametrize("tradeoff", ["yes", "no"])
+def test_the_verdict_does_not_move_with_the_tradeoff_answer(tradeoff):
+    out = tally(with_extras(state(picks(5, 3), picks(4, 4)), tradeoff=tradeoff), mapping(), EXTRAS)
+    assert out["read"] == "LBL-R2"
+
+
+def test_a_listen_two_row_missing_its_strength_licenses_no_read():
+    s = with_extras(state(picks(12, 1), picks(3, 3)))
+    s["rows"][KEYS[2]]["10"]["q1_strength"] = None      # the pick is still "L"
+    with pytest.raises(RunIncomplete):
+        tally(s, mapping(), EXTRAS)
+
+
+def test_a_listen_two_row_missing_its_tradeoff_licenses_no_read():
+    s = with_extras(state(picks(12, 1), picks(3, 3)))
+    del s["rows"][KEYS[1]]["0"]["tradeoff"]
+    with pytest.raises(RunIncomplete):
+        tally(s, mapping(), EXTRAS)
+
+
+def test_the_same_state_reads_fine_without_the_extras_demanded():
+    """Listen 1's run state is not retroactively incomplete."""
+    assert tally(state(picks(12, 1), picks(3, 3)), mapping())["read"] == "LBL-R1"
+
+
+def test_the_descriptive_read_counts_strength_by_role_and_says_it_decides_nothing():
+    from lbl_unblind import descriptive_extras
+    s = with_extras(state(picks(10, 2), picks(0, 0)), strength="strong", tradeoff="yes")
+    out = descriptive_extras(s, mapping(), EXTRAS)
+    assert out["pick_strength"]["coherence"]["strong"] == {"challenger": 10, "incumbent": 2}
+    assert out["pick_strength"]["coherence"]["slight"] == {"challenger": 0, "incumbent": 0}
+    assert out["tradeoff_rows"] == {"yes": 24, "no": 0, "of_rows": 24}
+    assert "decides" in out and "nothing" in out["decides"]
+
+
+def test_the_descriptive_read_reports_a_mixture_as_a_mixture():
+    from lbl_unblind import descriptive_extras
+    s = state(picks(4, 0), picks(0, 0))
+    for i, (k, d) in enumerate(ROWS):
+        entry = s["rows"][k][d]
+        entry["tradeoff"] = "yes" if i < 5 else "no"
+        for q in ("q1", "q2"):
+            entry[f"{q}_strength"] = (["slight", "strong"][i % 2]) if entry[q] in ("L", "R") else None
+    out = descriptive_extras(s, mapping(), EXTRAS)
+    coherence = out["pick_strength"]["coherence"]
+    assert coherence["slight"]["challenger"] + coherence["strong"]["challenger"] == 4
+    assert out["tradeoff_rows"]["yes"] == 5
+
+
+def test_the_descriptive_read_is_absent_when_the_listen_did_not_ask():
+    from lbl_unblind import descriptive_extras
+    out = descriptive_extras(state(picks(4, 0), picks(0, 0)), mapping(), ())
+    assert set(out) == {"decides"}

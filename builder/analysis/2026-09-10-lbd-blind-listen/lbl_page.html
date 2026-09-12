@@ -31,6 +31,14 @@ saved answers persist.</div>
 <script>
 const DATA = __LBL_DATA__;
 const PICKS = ["L", "R", "none"];
+// LBL-Q3's and LBL-Q4's vocabularies. These MUST equal lbl_common.TRADEOFF and lbl_common.STRENGTHS:
+// `test_lbl_page.py` asserts every value appears in this file verbatim, because a drift here would
+// be caught by the server only after the owner had already answered the row.
+const TRADEOFF = ["yes", "no"];
+const STRENGTHS = ["slight", "strong"];
+const EXTRAS = DATA.extras || [];
+const WANT_TRADEOFF = EXTRAS.indexOf("tradeoff") >= 0;
+const WANT_STRENGTH = EXTRAS.indexOf("strength") >= 0;
 const app = document.getElementById("app");
 
 function el(tag, text) {
@@ -39,19 +47,30 @@ function el(tag, text) {
   return n;
 }
 
-function radios(name) {
+if (WANT_TRADEOFF || WANT_STRENGTH) {
+  const extra = el("b", " Two extra items on every row this time: whether you had to trade the two"
+    + " questions against each other, and how strong each pick was. Both are asked on the row, and"
+    + " a row will not save until they are answered.");
+  document.querySelector(".banner").appendChild(extra);
+}
+
+function choiceRadios(name, values, labelFor) {
   const wrap = el("span");
-  for (const p of PICKS) {
+  for (const v of values) {
     const label = el("label");
     const input = document.createElement("input");
     input.type = "radio";
     input.name = name;
-    input.value = p;
+    input.value = v;
     label.appendChild(input);
-    label.appendChild(el("span", " " + (p === "none" ? "no preference" : p)));
+    label.appendChild(el("span", " " + labelFor(v)));
     wrap.appendChild(label);
   }
   return wrap;
+}
+
+function radios(name) {
+  return choiceRadios(name, PICKS, p => (p === "none" ? "no preference" : p));
 }
 
 function player(clips) {
@@ -116,6 +135,12 @@ function question(label, wording, name) {
   p.appendChild(el("b", label));
   p.appendChild(el("span", wording + " "));
   p.appendChild(radios(name));
+  if (WANT_STRENGTH) {
+    // LBL-Q4, asked ON the row and in advance. Only meaningful beside a clear pick; the save
+    // handler sends null when the pick is "no preference".
+    p.appendChild(el("span", " — if you picked a side, how strong? "));
+    p.appendChild(choiceRadios(name + "-strength", STRENGTHS, v => v));
+  }
   return p;
 }
 
@@ -144,6 +169,15 @@ for (const pair of DATA.pairs) {
     // test can find it verbatim; split across a `+` that check would silently test nothing.
     answers.appendChild(question("Coherence: ", "At this point, which side holds together better as a journey — each step a sensible next listen?", "q1-" + base));
     answers.appendChild(question("Novelty: ", "At this point, which side gives you more artists that are new to you?", "q2-" + base));
+    if (WANT_TRADEOFF) {
+      // LBL-Q3, frozen by LBD-AM6. ONE unbroken literal, for the same reason as Q1 and Q2.
+      const t = el("p");
+      t.className = "q";
+      t.appendChild(el("b", "Trade-off: "));
+      t.appendChild(el("span", "Did you have to trade coherence against novelty on this row? "));
+      t.appendChild(choiceRadios("t-" + base, TRADEOFF, v => v));
+      answers.appendChild(t);
+    }
     const boxP = el("p");
     const box = document.createElement("input");
     box.type = "checkbox";
@@ -164,8 +198,22 @@ for (const pair of DATA.pairs) {
       const q1 = answers.querySelector('input[name="q1-' + base + '"]:checked');
       const q2 = answers.querySelector('input[name="q2-' + base + '"]:checked');
       if (!q1 || !q2) return alert("answer both questions (a side or no preference) first");
-      if (await post("/row", { pair: pair.key, depth: String(row.depth), q1: q1.value, q2: q2.value,
-                               clip_blocked: box.checked, notes: notes.value })) {
+      const body = { pair: pair.key, depth: String(row.depth), q1: q1.value, q2: q2.value,
+                     clip_blocked: box.checked, notes: notes.value };
+      if (WANT_TRADEOFF) {
+        const t = answers.querySelector('input[name="t-' + base + '"]:checked');
+        if (!t) return alert("answer the trade-off question first");
+        body.tradeoff = t.value;
+      }
+      if (WANT_STRENGTH) {
+        for (const pick of [["q1", q1], ["q2", q2]]) {
+          if (pick[1].value === "none") { body[pick[0] + "_strength"] = null; continue; }
+          const s = answers.querySelector('input[name="' + pick[0] + "-" + base + '-strength"]:checked');
+          if (!s) return alert("say how strong each pick was — slight or strong");
+          body[pick[0] + "_strength"] = s.value;
+        }
+      }
+      if (await post("/row", body)) {
         saved.textContent = " saved ✓";
         saved.className = "done";
       }

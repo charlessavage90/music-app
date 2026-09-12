@@ -41,15 +41,37 @@ RESERVES_PER_LISTEN = 4
 
 PAIRS_FILE = HERE / "lbl_pairs.json"
 PAIRS_SHA = "da2ad2d71f5ee2f517a25477d9ba0899763f4066c20ae24aa0b4c5700062c3c9"   # LBD-AM5-5
+PAIRS2_FILE = HERE / "lbl_pairs2.json"
+PAIRS2_SHA = "0a2eca01c22985991da0d3628b42d8021c4089ec81227a4b786a6c613c9be0f7"  # LBD-AM6
 MAPS_PIN = HERE / "lbl_maps.json"   # each listen's two maps and their sha256s, from the Step 2 build records
 
 # LBD-AM5-5. The challenger is the LBD- map; the incumbent is the other. Arm roles are written ONLY
-# to the sealed file. Listen 2 is added here only after the owner has heard listen 1.
+# to the sealed file.
 ROLES = ("incumbent", "challenger")
-LISTENS = (1,)
+LISTENS = (1, 2)              # listen 2 opened by LBD-AM6, 2026-09-12
 MARGIN = 8                    # ceil(0.3 * 24): GBL-'s scaling rule over 8 pairs x 3 depths
 CLIPS_PER_ARTIST = 3          # CAU- §2.3: one clip is not enough for an unfamiliar artist
 AXES = {"q1": "coherence", "q2": "novelty"}   # LBL-Q1, LBL-Q2
+
+# Everything below is PER LISTEN, and listen 1's entry is the frozen record of how it ran. No
+# LBD-AM6 change reaches back and alters it: the listen-1 verdict was produced under these values
+# and `lbl_unblind.py` must still read that file exactly as it was written.
+PAIRS_BY_LISTEN = {1: (PAIRS_FILE, PAIRS_SHA), 2: (PAIRS2_FILE, PAIRS2_SHA)}
+
+# G4 (c)'s bar: interior artists required at EVERY depth on BOTH maps. Listen 1 required one, which
+# is the findings note §4.1 defect — two of its pairs ran three or four steps with nothing to judge.
+MIN_INTERIOR_BY_LISTEN = {1: 1, 2: 3}   # LBD-AM6, from the findings note §4.1
+
+# How L and R are decided. Listen 1 drew per pair and landed 7-1 (findings note §3); listen 2 deals
+# a balanced split, which is the same randomisation with the imbalance removed (§4.6).
+SIDE_ASSIGNMENT_BY_LISTEN = {1: "shuffled_per_pair", 2: "dealt_balanced"}
+
+# Extra per-row items. Listen 1 asked neither (findings note §4.3, §4.5).
+#   LBL-Q3  the two questions conflicted on this row — asked directly instead of inferred from notes
+#   LBL-Q4  pick strength, per axis, asked ON the row and in advance
+ROW_EXTRAS_BY_LISTEN = {1: (), 2: ("tradeoff", "strength")}
+TRADEOFF = ("yes", "no")
+STRENGTHS = ("slight", "strong")
 
 
 def sha256_of(path: Path) -> str:

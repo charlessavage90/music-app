@@ -2266,3 +2266,63 @@ not record how far down the list he has got.**
    after any of them.
 4. **If he proceeds to a further arm:** `LBD-A4` runs first (`LBD-D6` — every later arm records
    its pairing semantics), then the new arm's amendment, emit, build, read.
+
+---
+
+## 2026-09-11 — the `LBL-` listen-1 read, and the four routes
+
+*Demoted 2026-09-12 at the `LBD-AM6` closeout. The owner chose a route on 2026-09-12 — keep the
+registered comparison, re-draw the pairs — so the four-route table and the "no further blind
+listen for now" ruling below are both spent. What still binds from it is in `NEXT.md`'s
+registries.*
+
+**Last updated: 2026-09-11, at the `LBL-` listen-1 read.** **Nothing a listener sees changed
+in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s
+three entries are still his to press, untouched here.
+
+**`LBL-` listen 1 has been RUN, unblinded and READ.** The served map against `LBD-A0V` —
+*the map the app serves today, against a map built from our own recomputation of
+ListenBrainz's listening data at their own settings, over exactly the artists the app
+serves.* Branch `lbd-listen`, **PR #116** (addresses only; `gh` says where they are).
+**The read is `LBL-R2`, the tie**, and its plain sentence was frozen before any journey
+existed: *"My ear cannot tell our recomputed lists from ListenBrainz's own."* **Nothing is
+adopted, no default changed, no shipped code touched.**
+
+**What was found, in plain terms** (figures owned by
+[`findings/2026-09-11-lbl-listen1-results.md`](findings/2026-09-11-lbl-listen1-results.md),
+restated nowhere): **in a blind side-by-side he could not tell the two maps apart** — neither
+question came anywhere near the margin fixed before any journey existed (§1.1 there).
+⚠ **A tie is not "the maps are the same":** they differ a great deal in shape, and what the listen found is that the difference
+was **inaudible on this instrument**. Its limit was the pair draw — most rows he could not
+call were rows where he knew every artist on both sides, which **he said himself** — and
+**not one row was lost to a clip problem**, the first time that has held in this project's
+blind listens. **One pair moved, and it moved to our map**: obscure endpoints, long journeys,
+every depth on the coherence question, plus his only unprompted pair-level preference. One pair of eight
+carries no read; it is a hint about where to look. `WHAT-GOOD-LOOKS-LIKE` **value 8 gained a
+corroboration from inside the blind**, and no threshold comes off it.
+Entry point: [`2026-09-11-HANDOFF-lbl-listen1-read.md`](2026-09-11-HANDOFF-lbl-listen1-read.md).
+
+## ⛔ NO FURTHER BLIND LISTEN FOR NOW — owner's ruling, 2026-09-11
+
+*"I don't want to do another blind listen immediately. I'll discuss with another session
+which route to take."* **Listen 2 does not start, and no session proposes starting it.**
+
+**He is taking the route decision to a separate session, which reads only the committed
+record** — so the four options below are written to be decided from, not summarised from a
+conversation. **None of them starts on a session's initiative.**
+
+| # | the route | what it would settle | what it costs, and what gates it |
+|---|---|---|---|
+| **1** | **Spend listen 2** — `LBD-A0V` against `LBD-A5V`: *does accepting a connection two listeners support, instead of four, give better journeys?* | the threshold, and **only** the threshold. A listen-2 PASS does **not** say `LBD-A5V` beats the served map | his ear, on the same *kind* of pairs that produced this tie. **Gated on `LBD-D6`**, still unruled — `LBD-A4` was to run before any further arm was pre-registered and `LBD-A5` was registered without it. Pairs fixed, map built, materials not prepared |
+| **2** | **Re-draw the pairs and listen again on the harder ones** — a new amendment, new pairs, and the instrument fixes in the findings note §4 | **whether the tie is a fact about the maps or a limit of the instrument** — the question listen 1 leaves genuinely open | his ear again, plus a pre-registration. **Listen 1's verdict may NOT be re-listened** (`GBL-` §5): this is new pairs, never a re-run |
+| **3** | **Stop the `LBD-` track here.** The supply question is answered at the table, at the map and at the ear | nothing further; it closes the track with a null that is honestly bounded | nothing. `LBD-A4` closes with it — its deferral already says so |
+| **4** | **Go to `S4`** — the adoption decision proper: population rule, API sizing, fame source, refresh procedure | whether anything from this track ships | its own pre-registration and a rebuild. ⚠ **`LBL-R2` is not an adoption case**: a tie says "no audibly worse at this instrument's resolution", and `REQ-41` bars reading it as equivalence |
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
+does not record how far down the list he has got.**
+
+1. **Run the three queued use-the-app tests** — live since the 2026-09-08 deploy. Nothing
+   here changed them.
+2. **Merge PR #116.**
+3. **Rule on `LBD-D6`** if route 1 is in play; it gates that route and nothing else here.
+4. **Choose a route**, with the session he has said he will use for it.
