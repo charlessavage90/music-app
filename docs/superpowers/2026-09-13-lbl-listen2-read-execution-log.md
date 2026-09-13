@@ -104,19 +104,51 @@ reconstruct it now.
 
 ## 4. Corrections this work made due
 
-Three `docs/README.md` rows and one pre-registration marker asserted that listen 2 was
-prepared and **unrun**. All were correct when written on 2026-09-12 and false by 2026-09-13:
+Four `docs/README.md` rows, the pre-registration's own §12 entry, the previous handoff's role
+line and `NEXT.md`'s top block all asserted that listen 2 was prepared and **unrun**. Every one
+was correct when written on 2026-09-12 and false by 2026-09-13:
 
-- the pre-registration's row and its `LBD-AM6` paragraph, which now carry an **EXECUTED**
-  marker in `GBL-`'s shape, including that `GBL-` §5's run-once rule now binds *both* verdicts;
-- the blind-listen harness directory's row (*"Listen 2's materials are prepared and the listen
-  is UNRUN"*);
-- the `2026-09-12-HANDOFF-lbl-listen2-prep.md` row, struck in place on status with the rest of
-  the row preserved — its "must not be reverted" claims still bind;
-- the pre-registration's §10 `LBD-AM6` block and §12 register row, which end by naming listen 2
-  as unrun.
+- **`docs/README.md`, the pre-registration's row** — *"Listen 2 is registered, its materials are
+  prepared, and it is UNRUN"* struck, with an **EXECUTED** marker added in `GBL-`'s shape,
+  including that `GBL-` §5's run-once rule now binds *both* verdicts;
+- **`docs/README.md`, the blind-listen harness directory's row** — *"Listen 2's materials are
+  prepared and the listen is UNRUN"* struck, the listen-2 raw record named, and the absence of a
+  listen-2 owner-notes file stated so that nothing is inferred from it;
+- **`docs/README.md`, the `2026-09-12-HANDOFF-lbl-listen2-prep.md` row** — struck on status with
+  the rest preserved, because its "must not be reverted" claims still bind;
+- **`docs/README.md`, the listen-1 findings row** — gained a forward pointer to listen 2 **and a
+  restatement of the no-carry bar**, so that a reader arriving at listen 1 from a citation cannot
+  read the second tie as bearing on the first;
+- **the pre-registration's §12 `LBD-AM6` register row** — *"and none has been generated since"*
+  struck, with a status marker added **beside** the entry rather than edited into it, per §12's
+  own rule. **No value in the document changed**;
+- **the previous handoff's role line** — now names this session's handoff as its successor on
+  next actions, so the chain reads forwards as well as backwards;
+- **`NEXT.md`** — top block rewritten; the outgoing block demoted whole to `NEXT-ARCHIVE.md`,
+  with what still binds distilled first into the *Closed* registry and two deferral conditions
+  (`DLS-` items 4–6, whose closeout half is now satisfied; `LBD-A4`, which gains `LBD-X6`).
 
-## 5. Working notes for a successor
+Three rows were **added**: the findings note, this log, and the new handoff.
+
+## 5. `closeout` D6 — the standing context layer
+
+Measured at the end of this work, per D6's commands against the memory directory this
+session's own context names (`C:\Users\charl\.claude\projects\C--dev-music-app\memory\`):
+
+| layer | unit | value |
+|---|---|---|
+| unconditional — `~/.claude/CLAUDE.md` + `CLAUDE.md` + `MEMORY.md` + every loading `description:` | characters | **50,977** |
+| conditional — `SKILL.md` and agent bodies, `memory/*.md` bodies | lines | **2,726** |
+
+**This session's delta in both: zero.** It touched no file in either layer — `git diff
+--name-only origin/main...HEAD` returns nothing under `CLAUDE.md` or `.claude/`, and nothing
+under `memory/`. The unconditional figure is **unchanged from the listen-1 read's 50,977**.
+The conditional figure is **+131 lines against that reading, and none of it is this
+session's** — it arrived on `main` from the `DLS-` work merged between the two closeouts,
+which this branch is based on. Recorded that way rather than as a delta, because attributing
+another branch's growth to this one is exactly the drift the two-number rule exists to stop.
+
+## 6. Working notes for a successor
 
 - **The sealed mapping lives outside git**, at `<tree>/.superpowers/lbl/lbl_listen2_sealed.json`
   in the **runner's** worktree (`C:/Users/charl/worktrees/music-app-lbl-listen2-run`), not in

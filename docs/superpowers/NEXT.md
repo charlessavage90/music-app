@@ -47,57 +47,50 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-12, at the `LBD-AM6` preparation of `LBL-` listen 2.** **Nothing a
-listener sees changed in this work** — the live site is as the 2026-09-08 deploy left it, and
-`TEST-QUEUE.md` is still his to press, untouched here. *(That sentence said "three entries" when
-the `LBL-` session wrote it, and was true then. The `DLS-` branch turned that file into a
-checklist in the same hours; the same three changes are now 15 boxes. Corrected at the merge by
-the branch that caused it, not by the one that wrote the sentence.)*
+**Last updated: 2026-09-13, at the `LBL-` listen-2 read.** **Nothing a listener sees changed in
+this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
+boxes are still his to press, untouched here.
 
-**`LBL-` listen 2 is PREPARED and UNRUN.** The owner chose the route on 2026-09-12: keep the
-registered comparison — `LBD-A0V` against `LBD-A5V`, *does accepting a connection two listeners
-support, instead of four, give better journeys?* — and **re-draw the pairs**, with the six
-instrument fixes listen 1's findings note §4 asked for. Committed as **`LBD-AM6`**, before any
-listen-2 journey existed. Branch `lbl-listen2-prep`, **PR #122** (addresses only; `gh` says where
-they are).
+**`LBL-` listen 2 has been RUN, unblinded and READ.** `LBD-A0V` against `LBD-A5V` — *does
+accepting a connection two listeners support, instead of four, give better journeys?* The
+pre-registered read is **`LBL-R2`, the tie**: *"My ear cannot tell the two bars apart."* Figures
+are owned by [`findings/2026-09-13-lbl-listen2-results.md`](findings/2026-09-13-lbl-listen2-results.md)
+and restated nowhere, including here.
 
-**What changed, in plain terms.** Listen 1 tied because the pairs were too easy, not because the
-maps are alike — most rows he could not call were rows where he knew every artist on both sides.
-So candidate pairs were screened, before the amendment was written, on two properties: the journey
-must be long enough to have a shape at every depth on both maps, and the two maps must actually
-disagree. Survivors were then ranked by how few of the artists in between he already knows. **The
-screen never looked at which map was better, only at how much they differed** — a screen that
-preferred one map's journeys would have hand-picked the pairs that map wins on. Counts are owned by
-[`../../builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md`](../../builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md)
-and restated nowhere.
+**What it means in plain terms, and what cuts against it.** He judged 24 side-by-side journeys
+blind, on coherence and on novelty, and came out two rows apart on each against a bar of eight.
+Against that: **five of the 24 comparisons showed the identical journey on both sides** — the
+pre-screen required the maps to differ at two of three depths, not three — and on many of the rest
+the artists he did not know were the same artists on both sides. **The six instrument fixes all did
+what they were asked and he still called fewer rows than in listen 1.** The findings note's §0 and
+§4 own that reading; §4 lists eight instrument items for any future protocol.
 
-**Every read is unchanged.** `LBL-R1`–`LBL-R4`, their listen-2 plain sentences, the margin bar and
-the row count are exactly as `LBD-AM5-5` registered them. Each row now also asks whether the two
-questions pulled him in opposite directions, and how strong each pick was — **and the tally does
-not read the strength.** A tally that did would be a different read wearing the same names.
+**Nothing is adopted, no default changed, no shipped code touched.** ⚠ **No verdict carries across
+the two listens** — a listen-2 tie says nothing about `LBD-A5V` against the served map — `REQ-41`
+bars reading either tie as equivalence, `GBL-` §5 bars re-listening either verdict, and **`LBD-X6`
+bars generalising listen 2's result to the cheaper pairing form** until `LBD-A4` has run and `R10`
+has been read. **`S4` — the adoption decision proper (population rule, API sizing, fame source,
+refresh procedure) — remains its own pre-registration and rebuild, and `LBD-D6` as ruled makes
+`LBD-A4` a precondition of any `S4` arm.**
 
-**`LBD-D6` is RULED** (2026-09-12; quoted verbatim in `LBD-AM6-7`): `LBD-A4` is **waived for
-listen 2 and enforced before `S4`**.
+**Stopping the `LBD-` track here remains a complete outcome**, not an abandonment: the supply
+question is now answered at the table level, at the map level, and at the ear twice. **Which route
+follows is the owner's and no session proposes one.**
 
-⛔ **No session starts the listen on its own initiative, and the session that prepared it may
-neither run it nor write it up** — it has seen journeys labelled by map. Entry point:
-[`2026-09-12-HANDOFF-lbl-listen2-prep.md`](2026-09-12-HANDOFF-lbl-listen2-prep.md).
+⛔ **The two `LBL-` verdicts are run-once and final.** Neither may be re-listened on any protocol
+(`GBL-` §5). A future listen on new pairs would be a new amendment and is nobody's to start.
 
-**What stays open whichever way listen 2 reads:** stopping the `LBD-` track remains a complete
-outcome, and `S4` — the adoption decision proper (population rule, API sizing, fame source, refresh
-procedure) — remains its own pre-registration and rebuild. ⚠ **No listen outcome adopts anything**,
-and `REQ-41` bars reading a tie as equivalence.
+Branch `lbl-listen2-writeup`, which carries the runner's two commits as well as the write-up
+(`gh` says where they are).
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
 does not record how far down the list he has got.**
 
-1. **Run the three queued use-the-app tests** — live since the 2026-09-08 deploy. Nothing
-   here changed them.
-2. **Merge PR #122.**
-3. **Decide whether to spend listen 2.** Everything is prepared; it costs his ear and a sitting.
-4. **When he does:** a fresh, mechanics-only session runs `RUNNER-BRIEF.md` end to end, and a
-   further fresh session writes up the result.
-
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
+   Nothing here changed them.
+2. **Merge the listen-2 write-up PR.**
+3. **Decide what follows the `LBD-` track** — stop, `S4`, or something else. The findings note's
+   §6 sets out what the result leaves open and deliberately recommends nothing.
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -270,6 +263,15 @@ old heading.)*
     governs.
 
 ## Must not be changed, and each has a reason
+- **Both `LBL-` blind-listen verdicts are RUN-ONCE and FINAL** (`GBL-` §5). Listen 1 (served map
+  against `LBD-A0V`, 2026-09-11) and listen 2 (`LBD-A0V` against `LBD-A5V`, 2026-09-13) each read
+  **`LBL-R2`, the tie**. Neither may be re-listened on any protocol; **no verdict carries across
+  them**; `REQ-41` bars reading either as equivalence; and **neither adopts anything** — `S4` owns
+  adoption and `V` is an experimental control, never a population rule. Figures and barred reads:
+  [`findings/2026-09-11-lbl-listen1-results.md`](findings/2026-09-11-lbl-listen1-results.md) and
+  [`findings/2026-09-13-lbl-listen2-results.md`](findings/2026-09-13-lbl-listen2-results.md) §5.
+  ⚠ **`LBD-X6` bars generalising listen 2's result to the cheaper pairing form** until `LBD-A4`
+  has run and `R10` has been read.
 - **`LBD-G1` fired (2026-09-09) and was overridden by owner decision (`LBD-AM3`, 2026-09-10)
   after a diagnosis.** The 0.5844 reading and the 0.60 floor both stand; the arms were read
   anyway. Never cite `LBD-C1` as "passed", and never re-read that gate on the dated corpus for
@@ -343,12 +345,12 @@ old heading.)*
 
 | Finding | Condition |
 |---|---|
-| **The plan for `DLS-` items 4–6** (restructure `CLAUDE.md`; rebuild the map around role lines and add the lint checks; slim the rituals). The owner answered `DLS-Q1`–`Q6` on 2026-09-11 ([findings §5a](findings/2026-09-10-documentation-layer-strategy.md)). **It also carries three items:** `CLAUDE.md` prose the harness now enforces or makes redundant (the `UV_LINK_MODE=copy` prefix; "never use `docs/reference/`"); `closeout` D6 counting `.claude/rules/*.md` files that have no `paths:`, which load in every session; and item 3's unbuilt remainder, a hook refusing commits on `main`, which the owner has not been asked about. | **After the `DLS-T1` read and the live `LBD-` session's next closeout.** Written by a fresh session from the findings document, with a handoff point between each item. The D6 fix is due earlier if any rule without `paths:` is added. |
+| **The plan for `DLS-` items 4–6** (restructure `CLAUDE.md`; rebuild the map around role lines and add the lint checks; slim the rituals). The owner answered `DLS-Q1`–`Q6` on 2026-09-11 ([findings §5a](findings/2026-09-10-documentation-layer-strategy.md)). **It also carries three items:** `CLAUDE.md` prose the harness now enforces or makes redundant (the `UV_LINK_MODE=copy` prefix; "never use `docs/reference/`"); `closeout` D6 counting `.claude/rules/*.md` files that have no `paths:`, which load in every session; and item 3's unbuilt remainder, a hook refusing commits on `main`, which the owner has not been asked about. | **After the `DLS-T1` read and ~~the live `LBD-` session's next closeout~~ — that half SATISFIED 2026-09-13**, at the `LBL-` listen-2 read closeout; the `DLS-T1` read is still owed.** Written by a fresh session from the findings document, with a handoff point between each item. The D6 fix is due earlier if any rule without `paths:` is added. |
 | **Two documents are over the line budgets set for them 2026-09-12** (`closeout` `B6-budget`): this file and `docs/README.md`. Both are the files concurrent sessions collide on, and demoting their accreted history is a wholesale table rewrite, which reconciles badly in either merge order. | **When no second session is live in the tree.** This file: demote the discharged deferral rows to `NEXT-ARCHIVE.md` per `A2-next`. `docs/README.md`: it is `DLS-` item 5, whose gates are all clear. **Deliberately not done 2026-09-12 because the `LBL-` session was live** — not forgotten, and not a judgement that the budgets are wrong. |
 | **The APG1 lockstep tests (PR #118) pin only the fixture's four base metadata keys.** The committed fixture has no `deezer_ids`, `fame_lb`, `spotify_ids`, `apple_ids` or `artist_facts`, so those stay covered only by each package's own hand-built tests. | **The next time the committed fixtures are regenerated (`closeout` D2):** regenerate with those keys populated and re-derive the api test's pinned values. |
 | **The `DLS-T1` read** (*when a session opens a plan or a spec, does a rule scoped to those folders arrive in its context without anyone asking for it?*). The instrument is armed by the `doc-strategy` PR: **do not remove `.claude/rules/plans.md` or the `InstructionsLoaded` logging hook before this is read.** | **Three qualifying sessions after merge, or 2026-09-24**, whichever comes first — read per [`findings/2026-09-10-documentation-layer-strategy.md`](findings/2026-09-10-documentation-layer-strategy.md) §6. **One dated observation is already banked and the read must consume it:** the `LBL-` write-up session opened a spec repeatedly and the rule did **not** load (its own `instructions-loaded.jsonl` shows only the two session-start `CLAUDE.md` entries) — **but it read through Bash, not the `Read` tool**, so the observation cannot separate "the rule never fires" from "it fires only on a `Read`-tool open". **What the read still needs is a qualifying session that opens a spec with the `Read` tool.** Written up in [`2026-09-11-lbl-listen1-read-execution-log.md`](2026-09-11-lbl-listen1-read-execution-log.md) §5. **2026-09-12 — that arrived and the ambiguity is resolved: the rule fires.** Standing at **1 qualifying session of 3**. ⚠ **The observations, the exclusions and three confounds now live in [findings §6b](findings/2026-09-10-documentation-layer-strategy.md#6b-instrument-log-after-merge--observations-exclusions-and-confounds), which the read must consume** — Bash-read sessions are not qualifying and must not be scored as misses, worktree sessions cannot contribute at all, and three synthetic log rows must be excluded. **The log is gitignored, so §6b is the durable copy. Record new observations there, not here.** |
 | ✅ **`LBD-M1` (population per arm)** | **DISCHARGED 2026-09-10** — reported descriptively by fame band for both built arms, figures owner §2. Struck, kept for the record. |
-| **`LBD-A4` (the pairing arm)** — still unrun; `LBD-AM4-2` said so and no read here depended on it. | **Before any `S4` arm is pre-registered** — ~~before any further `LBD-` arm~~, **narrowed 2026-09-12 by the owner's `LBD-D6` ruling**, quoted verbatim in `LBD-AM6-7`: `LBD-A4` is **waived for listen 2 and enforced before `S4`**, because both listen-2 maps were derived with ListenBrainz's own pairing semantics — the faithful form `LBD-A4` measures the cheaper form against — so no `LBD-A4` result can change either map or listen 2's read. `LBD-A4` must run and **`R10` must be read** before any `S4` arm is pre-registered, and **every `S4` arm records which pairing semantics it uses and why**, per `LBD-D6`. **Still unrun; `LBD-D6` itself is now RULED.** One bar travels with it meanwhile — `LBD-X6`: listen 2's result may not be generalised to the cheaper pairing form until `LBD-A4` has run and `R10` has been read. |
+| **`LBD-A4` (the pairing arm)** — still unrun; `LBD-AM4-2` said so and no read here depended on it. **Listen 2 ran and was read on 2026-09-13 under the waiver, exactly as the ruling allows** — and its result therefore carries `LBD-X6`: it holds for ListenBrainz's own pairing semantics and may not be generalised to the cheaper form until this arm has run and `R10` has been read. | **Before any `S4` arm is pre-registered** — ~~before any further `LBD-` arm~~, **narrowed 2026-09-12 by the owner's `LBD-D6` ruling**, quoted verbatim in `LBD-AM6-7`: `LBD-A4` is **waived for listen 2 and enforced before `S4`**, because both listen-2 maps were derived with ListenBrainz's own pairing semantics — the faithful form `LBD-A4` measures the cheaper form against — so no `LBD-A4` result can change either map or listen 2's read. `LBD-A4` must run and **`R10` must be read** before any `S4` arm is pre-registered, and **every `S4` arm records which pairing semantics it uses and why**, per `LBD-D6`. **Still unrun; `LBD-D6` itself is now RULED.** One bar travels with it meanwhile — `LBD-X6`: listen 2's result may not be generalised to the cheaper pairing form until `LBD-A4` has run and `R10` has been read. |
 | **`LUX-E2`** — blocked on the damaged `TAS-` sample; per-field population coverage is **not** a substitute read. | **A repaired sample.** Nothing in flight repairs it. |
 | **`ULC-F4`** — the un-listenable keep-check measures the name-search route while the app resolves by identity first, so both drop lists drop artists the app can play. | **The owner's**: a re-census, a rebuild and its own pre-registration. Nothing blocks on it. |
 | **Snyk has not scanned the FROZEN modules under `builder/analysis/`** — credentials expired 2026-09-07, the MCP server failed to connect 2026-09-08 and 2026-09-10 (morning); **it connected 2026-09-10 (evening) and the build-stage scripts added that day were scanned and are clean** (one Medium fixed by binding paths as DuckDB parameters); the pre-existing frozen modules remain unscanned; the owner accepted and deferred scanning for everything there on the grounds that none of it is live. His hands, not a decision: it opens a browser. | **Promotion of anything under `builder/analysis/` into shipped code** — which nothing proposes. |

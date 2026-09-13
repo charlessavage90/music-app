@@ -231,6 +231,7 @@ gitignored, so this table is the durable copy.
 | 2 | 2026-09-12 15:59 | `58bcc7f5` | `consultant` | the `LBD-` fidelity spec | `path_glob_match` | **Unruled** — the read must settle it |
 | 3 | 2026-09-12 16:02 | `652d311c` | none | the alpha rollout roadmap | `path_glob_match` | **Yes — qualifying session 1 of 3** |
 | 4 | 2026-09-12 16:28 | `fb3fe80b` | none | none; read via Bash | no load | **No** — same confound as #1 |
+| 5 | 2026-09-13 16:49 | `84c3abb9` | none | the `LBD-` fidelity spec, opened **via Bash** | `path_glob_match` | **Unruled, and it contradicts #1 and #4** — see `DLS-T1-X6` |
 
 **`DLS-T1-X1` — the Bash-reading confound, and what it does and does not mean.** Sessions here
 often run under an instruction to read files with `cat`/`sed` through Bash rather than the `Read`
@@ -341,6 +342,42 @@ indistinguishable from a main session's own Read. Two consequences:
   confirm from the transcript, not the log, that a counted session made the open itself.** The one
   qualifying session counted so far, at `16:02:16`, was a direct `Read` by the main session before
   any subagent had been dispatched in it.
+
+**`DLS-T1-X6` — a Bash-only session produced a `path_glob_match` row, which `DLS-T1-X4` says
+should not happen. The log and the controlled pair disagree, and the read must not average them.**
+*(Observed 2026-09-13 by the `LBL-` listen-2 write-up session, banked here per this section's own
+instruction. It is NOT the `DLS-T1` read and takes no position on `C1`.)*
+
+**What is verifiable from the log**, which is the strong half. Session `84c3abb9` carries three
+rows: two `session_start` `CLAUDE.md` loads, and one `path_glob_match` for
+`.claude/rules/plans.md` at `2026-09-13T16:49:59.909Z`, `trigger_file_path` the `LBD-` fidelity
+pre-registration, `agent_type: null`, `agent_id: null`.
+
+**What that session actually did**, which is checkable from its transcript. It opened that spec
+**six times and every one was a Bash call** — `grep -n`, four `sed -n` ranges and a `python`
+rewrite. **It made no `Read`-tool open of any file under `docs/superpowers/specs/` or
+`plans/` at any point.** `DLS-T1-X5`'s inflation path does not apply: its only subagent
+(`doc-auditor`) was dispatched roughly twenty-five minutes after the logged row.
+
+**Why this matters more than one row.** Rows #1 and #4 above recorded Bash-read sessions as **no
+load**, and `DLS-T1-X4` established by a controlled pair — same file, same 40 lines, one variable —
+that a Bash read does not deliver the rule at all. Row #5 is the same input with the opposite
+logged output. One of three things is true, and **this note deliberately does not pick**:
+
+- the hook matches on a path appearing in *any* tool's input, so the **log over-reports** relative
+  to what reaches a session's context — in which case `C1` read off this log measures the hook, not
+  the rule, and rows #1 and #4 need re-explaining rather than #5;
+- something distinguishes this session's Bash opens from #1's and #4's;
+- `DLS-T1-X4`'s pair generalises less far than its two arms suggest.
+
+**One weak-but-relevant self-report, flagged as weaker than the log**: the observing session did
+not see `plans.md`'s text arrive in its context at any point, which is consistent with the first
+explanation. A self-report about an absence is exactly the evidence class this project trusts
+least, so it is recorded as a pointer for whoever runs the read, not as a result.
+
+**What the read owes because of this:** state explicitly whether `C1` is being read as *the rule
+reached the session* or as *the hook logged a match*, and say which rows were counted under which.
+Until then row #5 is **unruled** and is not scored toward `C1` in either direction.
 
 ## 7. Proposal for item 4's delivery mechanism, 2026-09-12
 
