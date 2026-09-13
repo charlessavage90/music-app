@@ -23,9 +23,15 @@ THE ONE TOKEN, AND HOW THE PASS KEEPS IT TO ONE.
                       string; the stage does not branch on it.
   same side-tables    `D:\\unsung-large-data\\lbd-inputs`, redirects applied, and unread on
                       this path anyway: `register_frames` is skipped under `--from-listens`.
-  same chunking       `user_id % 64`, which `LBD-D2` establishes is EXACT rather than an
-                      approximation -- every stage through `user_contribtion_mbids`
-                      partitions by `user_id`.
+  chunking, and it   `user_id % 128` at an 8 GB limit, where `LBD-A0`'s pass used 64 at 12
+  is NOT "same"       GB. `LBD-D2` establishes that chunking by `user_id` is EXACT at ANY
+                      modulus -- every stage through `user_contribtion_mbids` partitions by
+                      user, and only the final cross-user SUM crosses a boundary, which
+                      `combine_sql` re-sums once. So this is a RESOURCE setting and not a
+                      token of the arm: it cannot move a figure, only the wall clock and the
+                      memory. Set from a measurement on this machine (README section 4), not
+                      inherited: 12 GB of 31.7 GB was killed under system memory pressure
+                      with other work live, and mod 128 at 8 GB peaks at 7.64 GB.
   same derivation     `lbd_derive.py`'s `A0` row IS `(threshold 10, limit 100)`, which is
                       `LBD-A4`'s pair. See `--stage derive` below for why that is the right
                       call and what it costs in the manifest.
@@ -63,8 +69,13 @@ PARTIALS = Path(r"C:\unsung-fast\lbd-partials-a4")
 PAIRS = Path(r"C:\unsung-fast\lbd-pairs-a4")
 TEMP = Path(r"C:\unsung-fast\duckdb-temp")
 
-BUCKETS = 64
-MEMORY_GB = 12  # the floor at which mod 64 runs, measured on the LBD-A0 pass (README section 4)
+# Chunking is a RESOURCE decision, not a measurement one: `LBD-D2` establishes that chunking
+# by `user_id` is EXACT at any modulus, because every stage through `user_contribtion_mbids`
+# partitions by user and only the final cross-user SUM crosses a boundary. So these two are
+# free to be whatever this machine can actually sustain, and they are set from a measurement
+# on this machine rather than from the `LBD-A0` pass's settings -- see the README's section 4.
+BUCKETS = 128
+MEMORY_GB = 8
 
 # Pre-registration section 0, the `LBD-A4` row. Every one of these except `pairing` is
 # `LBD-A0`'s value.
@@ -73,33 +84,57 @@ ARM = ["--days", "7500", "--session", "300", "--contribution", "3",
        "--pairing", "distinct"]
 
 
-def run(args: list[str], *, label: str) -> float:
+def run(args: list[str], *, label: str, check: bool = True) -> float | None:
     t0 = time.time()
     print(f"[a4] >>> {label}", flush=True)
     proc = subprocess.run([sys.executable, "-u", *args], text=True)
     wall = time.time() - t0
     if proc.returncode != 0:
+        if not check:
+            print(f"[a4] !!! {label} exit {proc.returncode} after {wall/60:.1f} min", flush=True)
+            return None
         raise SystemExit(f"[a4] FAILED {label} (exit {proc.returncode}) after {wall/60:.1f} min")
     print(f"[a4] <<< {label}  {wall/60:.1f} min", flush=True)
     return wall
 
 
-def stage_buckets() -> None:
+def _bucket(mod: int, rem: int, out: Path, *, memory_gb: int, check: bool) -> float | None:
+    return run([str(SIMILARITY), "--from-listens", str(LISTENS), "--emit-partial",
+                "--user-mod", str(mod), "--user-rem", str(rem),
+                "--memory-limit-gb", str(memory_gb), "--temp-dir", str(TEMP),
+                "--row-group-size", "100000", "--out", str(out), *ARM],
+               label=f"bucket mod {mod} rem {rem}", check=check)
+
+
+def stage_buckets(mod: int = BUCKETS, memory_gb: int = MEMORY_GB) -> None:
+    """One partial per user bucket, resumably.
+
+    THE SPLIT FALLBACK. A bucket that dies -- DuckDB's own OOM, or the harness killing it
+    under system memory pressure, which is what ended the first attempt -- is re-run as four
+    sub-buckets at `mod * 4`. That is exact for the same reason the chunking is: the four
+    sub-buckets partition the parent's users and nothing but the final cross-user SUM crosses
+    a boundary. `LBD-A0`'s own loop carried the same fallback and never fired it.
+    """
     PARTIALS.mkdir(parents=True, exist_ok=True)
-    done = skipped = 0
+    done = skipped = split = 0
     t0 = time.time()
-    for rem in range(BUCKETS):
+    for rem in range(mod):
         out = PARTIALS / f"p{rem}.parquet"
         if out.with_suffix(".manifest.json").exists():
             skipped += 1
             continue
-        run([str(SIMILARITY), "--from-listens", str(LISTENS), "--emit-partial",
-             "--user-mod", str(BUCKETS), "--user-rem", str(rem),
-             "--memory-limit-gb", str(MEMORY_GB), "--temp-dir", str(TEMP),
-             "--row-group-size", "100000", "--out", str(out), *ARM],
-            label=f"bucket {rem}/{BUCKETS - 1}")
-        done += 1
-    print(f"[a4] buckets: {done} run, {skipped} already present, "
+        if _bucket(mod, rem, out, memory_gb=memory_gb, check=False) is not None:
+            done += 1
+            continue
+        print(f"[a4] splitting bucket {rem} into 4 at mod {mod * 4}", flush=True)
+        for k in range(4):
+            sub_rem = rem + k * mod
+            sub = PARTIALS / f"p{rem}s{k}.parquet"
+            if sub.with_suffix(".manifest.json").exists():
+                continue
+            _bucket(mod * 4, sub_rem, sub, memory_gb=memory_gb, check=True)
+        split += 1
+    print(f"[a4] buckets: {done} run, {skipped} already present, {split} split, "
           f"{(time.time() - t0)/60:.1f} min", flush=True)
 
 
@@ -138,17 +173,28 @@ def stage_derive() -> None:
 
 
 def stage_summary() -> None:
-    """Collect the per-bucket manifests into one record. Reads, never recomputes."""
-    rows = []
-    for rem in range(BUCKETS):
-        mf = PARTIALS / f"p{rem}.manifest.json"
-        if mf.exists():
-            rows.append(json.loads(mf.read_text(encoding="utf-8")))
+    """Collect the per-bucket manifests into one record. Reads, never recomputes.
+
+    COVERAGE IS CHECKED, NOT ASSUMED. Every partial's manifest carries its own
+    `(user_mod, user_rem)`, and the set of them must cover every user exactly once or the
+    combine silently under- or double-counts. `residues_cover_all_users` is that check,
+    expanded to the finest modulus present.
+    """
+    rows = [json.loads(mf.read_text(encoding="utf-8"))
+            for mf in sorted(PARTIALS.glob("p*.manifest.json"))]
     if not rows:
         print("[a4] no bucket manifests yet", flush=True)
         return
+    finest = max(r["user_mod"] for r in rows)
+    covered: list[int] = []
+    for r in rows:
+        step = finest // r["user_mod"]
+        covered.extend(r["user_rem"] + i * r["user_mod"] for i in range(step))
     print(json.dumps({
         "buckets_present": len(rows),
+        "finest_modulus": finest,
+        "residues_cover_all_users": sorted(covered) == list(range(finest)),
+        "residues_duplicated": len(covered) != len(set(covered)),
         "partial_rows_total": sum(r["rows"] for r in rows),
         "wall_clock_s_summed": round(sum(r["wall_clock_s"] for r in rows), 1),
         "peak_rss_gb_max": max(r["peak_rss_gb"] for r in rows),

@@ -65,7 +65,7 @@ than by care:
 | the listen corpus | **the same stage-0 file**, `C:\unsung-fast\lbd-listens.parquet` sha256 `6d77a681…07707c08`, that `LBD-A0`'s own buckets read. Stage 0 is upstream of pairing — `lbd_similarity.py`'s three-path dispatch comment says *"NOTHING before this point differs between any of the five arms"* — so this is exactness, not thrift |
 | the MusicBrainz side-tables | `D:\unsung-large-data\lbd-inputs`, redirects applied — and **unread on this path**: `register_frames` is skipped entirely under `--from-listens` |
 | the pair computation | `lbd_similarity.py`'s `--pairing distinct` (`T3-D7`), already present and already fixtured; **no new implementation exists in this directory** |
-| the chunking | `user_id % 64`, which `LBD-D2` establishes is **exact**, not an approximation: every stage through `user_contribtion_mbids` partitions by `user_id` |
+| the *result* under chunking | `LBD-D2` establishes that chunking by `user_id` is **exact at any modulus** — every stage through `user_contribtion_mbids` partitions by user, and only the final cross-user `SUM` crosses a boundary, which `combine_sql` re-sums once. **The modulus itself is therefore NOT held constant and does not need to be**; see the exposure note below |
 | the threshold and rank cut | applied once, by `lbd_derive.py`, whose `A0` row **is** `(threshold 10, limit 100)` — `LBD-A4`'s own pair |
 | the `LBD-C1` sample | the same pinned 3,000 artists, `lbd_c1_sample.tsv`, against the same pinned snapshot `grt-archive-algb.pre-cex-snapshot` |
 
@@ -76,6 +76,20 @@ the `--created-before` diagnostic knob** added for the `LBD-G1` diagnosis, and i
 wholly inside `register_listens` — **stage 0, which `--from-listens` never calls.** So it is
 inert on this path by construction. Stated because a reader comparing two manifests sees two
 shas and is owed the reason rather than an assurance.
+
+**Not a confound, but named rather than left silent: this pass chunks differently from
+`LBD-A0`'s.** `LBD-A0` ran 64 buckets at a 12 GB DuckDB limit; this pass runs **128 at 8 GB**.
+The first attempt at `LBD-A0`'s settings was **killed by the system under memory pressure** —
+12 GB of a 31.7 GB machine with other work live — and the setting was then chosen by
+measurement rather than guessed: one bucket at mod 128 / 8 GB peaks at **7.64 GB** and takes
+1.1 min, which is also a shorter pass in total. **This cannot move a figure.** `LBD-D2`'s
+exactness is not a claim about 64 in particular; the partials are unioned and re-summed once,
+and `T3-D3`'s integer cast is applied to the completed cross-user sum in `combine_sql`, never
+to a partial. What it moves is wall clock and peak memory, which are `LBD-C3` quantities and
+are reported as such in §4. **The coverage of the residues is checked, not assumed** — the
+summary stage expands every partial's `(user_mod, user_rem)` to the finest modulus present
+and asserts they cover every user exactly once, which is the thing a mis-chunked pass would
+silently get wrong.
 
 **One inherited condition, and it is not this pass's to discharge.** `LBD-G1` fired on
 `LBD-A0` and was overridden by owner decision (`LBD-AM3`); the diagnosis named the input
