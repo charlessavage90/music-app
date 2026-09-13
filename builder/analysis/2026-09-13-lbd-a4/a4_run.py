@@ -106,7 +106,7 @@ def _bucket(mod: int, rem: int, out: Path, *, memory_gb: int, check: bool) -> fl
                label=f"bucket mod {mod} rem {rem}", check=check)
 
 
-def stage_buckets(mod: int = BUCKETS, memory_gb: int = MEMORY_GB) -> None:
+def stage_buckets(*, mod: int = BUCKETS, memory_gb: int = MEMORY_GB) -> None:
     """One partial per user bucket, resumably.
 
     THE SPLIT FALLBACK. A bucket that dies -- DuckDB's own OOM, or the harness killing it
@@ -138,7 +138,7 @@ def stage_buckets(mod: int = BUCKETS, memory_gb: int = MEMORY_GB) -> None:
           f"{(time.time() - t0)/60:.1f} min", flush=True)
 
 
-def stage_combine() -> None:
+def stage_combine(memory_gb: int = MEMORY_GB) -> None:
     """`T_A4` -- the cross-user re-sum at `HAVING score > 0`, no rank cut.
 
     Exactly `LBD-A0`'s route: the pre-registration's section 1 materialises the aggregate at
@@ -148,7 +148,7 @@ def stage_combine() -> None:
     out = PAIRS / "aggregate" / "T_A4.parquet"
     out.parent.mkdir(parents=True, exist_ok=True)
     run([str(SIMILARITY), "--combine", (PARTIALS / "p*.parquet").as_posix(),
-         "--aggregate-only", "--memory-limit-gb", str(MEMORY_GB),
+         "--aggregate-only", "--memory-limit-gb", str(memory_gb),
          "--temp-dir", str(TEMP), "--out", str(out), *ARM],
         label="combine -> T_A4")
 
@@ -213,8 +213,14 @@ STAGES = {"buckets": stage_buckets, "combine": stage_combine,
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", required=True, choices=sorted(STAGES))
+    ap.add_argument("--memory-gb", type=int, default=None,
+                    help="override the per-stage DuckDB limit; a resource knob, never a token")
     args = ap.parse_args(argv)
-    STAGES[args.stage]()
+    fn = STAGES[args.stage]
+    if args.memory_gb and fn in (stage_buckets, stage_combine):
+        fn(memory_gb=args.memory_gb)
+    else:
+        fn()
     return 0
 
 

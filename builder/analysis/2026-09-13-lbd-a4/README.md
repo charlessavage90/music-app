@@ -7,12 +7,14 @@ full-history pass's own README
 owns every `LBD-A0`–`LBD-A3` figure this document compares against and is **cited by section,
 never copied**.
 
-> ### ⚠ UNRUN AT THIS COMMIT
+> ### ✅ RUN 2026-09-13 — `R10` FIRES, on the edge-count half alone
 >
-> **Nothing below §1 holds a measurement yet.** This document is committed before the pass
-> runs so that the route, the one-token argument and the read of every possible result are on
-> the record first. Sections marked **PENDING** are written after the pass and are the only
-> ones that will carry numbers.
+> **§1–§3 were committed before the pass ran** (`44417b0`), which is what makes §3's read of
+> every possible result a pre-registration rather than a rationalisation. §§4–8 carry the
+> figures and were written after.
+>
+> **`LBD-X6` STANDS — it does not lift.** Its *condition* is discharged; the bar it protects is
+> confirmed. See §7.
 
 **Governed by** [`../../docs/superpowers/specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md`](../../docs/superpowers/specs/2026-09-07-lbd-fidelity-and-supply-preregistration.md)
 — §0's arm table (the `LBD-A4` row), §1's run plan, §2's `LBD-C1` definition and sample, and
@@ -131,12 +133,186 @@ would hear — `LBD-A4` is a pair table and no journey is generated from it. Not
 adoption: `S4` owns that. And **no re-reading of either `LBL-` verdict**, which `GBL-` §5
 makes run-once regardless of what this arm says.
 
-## §4 — The pass — PENDING
+## §4 — The pass
 
-## §5 — `LBD-C1` on `LBD-A4` — PENDING
+**Three stages, all frozen scripts driven by `a4_run.py`.** `LBD-C3` is descriptive and gates
+nothing here; `LBD-G3`'s spill bar was already exceeded on the `LBD-A0` pass and its
+prescribed response — the chunked form — is what both passes are.
 
-## §6 — Edge count — PENDING
+| stage | output | rows | wall | peak RSS | spill |
+|---|---|---:|---:|---:|---:|
+| 128 bucket partials | `p0…p127.parquet` | 1,934,651,015 | 178.7 min summed (64–145 s each) | 7.64–8.10 GB | 1,251 GB summed, 30.5 GB max |
+| combine (`--aggregate-only`) | `T_A4.parquet`, 20.66 GB, sha256 `e919bc89…` | **689,602,719** | 15.8 min | 12.05 GB | 225 GB |
+| derive (threshold 10, cap 100) | `A4.parquet`, sha256 `4ffa4acc…` | **10,823,170** | 50.8 s | — | — |
 
-## §7 — `R10`, read against §3 — PENDING
+**The one-token claim, checked at the level of the artefacts rather than the intent.** Across
+all 128 bucket manifests: one `script_sha256`, one `pairing` (`distinct`), one `from_listens`
+— the stage-0 file `LBD-A0`'s own buckets read. And the residues, expanded to the finest
+modulus present, **cover every user exactly once, with no duplication.** That last check is
+the one a mis-chunked pass fails silently.
 
-## §8 — What is NOT established here — PENDING
+**`T_A4` is 903 rows short of `T`** — 689,602,719, against a `T` whose figure is owned by
+[`../2026-09-08-lbd-similarity/README.md`](../2026-09-08-lbd-similarity/README.md) §5; a
+difference of 0.00013 %. This is not a result, and it is exactly what ListenBrainz's SQL
+predicts: the distinct form removes duplicate rows *before* the self-join, so it can lower a
+pair's score but can never destroy a pair that co-occurred. The only pairs it can delete are
+those whose score truncated below 1.
+
+**Not a figure: the partial row count.** 1.93 bn here against the `LBD-A0` pass's 1.77 bn is
+the **modulus**, not the pairing — a pair whose listeners fall in two buckets is counted once
+per bucket, so finer chunking mechanically inflates the partial total. Confirmed directly
+rather than argued: the one bucket run at mod 64 before the chunking changed produced a row
+count identical to `LBD-A0`'s bucket 0. Only the combined table is comparable.
+
+### Two instrument faults, both self-inflicted, neither touching a figure
+
+Recorded because a reader comparing logs will find two failed attempts.
+
+1. **The combine failed once on a spill cap, not on memory.** `max_temp_directory_size`
+   reached 142.6 GiB and refused. DuckDB sets that to ~90 % of free disk **at the moment the
+   connection opens**, and the attempt had been relaunched 15 s after a previous one was
+   killed, whose orphaned spill was still on disk. Re-run against a clean temp directory it
+   spilled 225 GB under a ~347 GB cap. A property of the restart, not of `LBD-A4`.
+2. **The corrected-quantile script faulted under `uv run --with duckdb`** with
+   `PyEval_SaveThread: the function must be called with the GIL held` — an interpreter-level
+   fault during a module import inside the ephemeral environment, not a defect in the script
+   and not a result that can be wrong. Re-run on a dedicated venv at **duckdb 1.5.5, the same
+   version every manifest in this track records**, so the instrument is unchanged.
+
+## §5 — `LBD-C1` on `LBD-A4`
+
+Read with the frozen `lbd_reads.py --mode c1` against **the same pinned sample and the same
+pinned snapshot** `LBD-A0`'s read used: 3,000 artists from `lbd_c1_sample.tsv`
+(content-identical to its committed `sample_sha256` once line endings are normalised), against
+`grt-archive-algb.pre-cex-snapshot`. Raw: `A4.c1.json` beside the arm.
+
+**Pooled row-level rate by fame band** — the statistic `LBD-G1` and `R10` both read:
+
+| band | archive rows | `LBD-A4` pooled rate | Δ vs `LBD-A0` (pp) |
+|---:|---:|---:|---:|
+| 0 | 16,382 | 0.3935 | −0.085 |
+| 1 | 25,098 | 0.5353 | −0.100 |
+| 2 | 34,212 | 0.5678 | +0.345 |
+| 3 | 47,107 | 0.6042 | +0.030 |
+| **4 (the gate's subject)** | 57,692 | **0.5900** | **+0.560** |
+
+**`LBD-A0`'s five rates are deliberately not reproduced here.** They are owned by
+[`../2026-09-08-lbd-similarity/README.md`](../2026-09-08-lbd-similarity/README.md) §5, and a
+second copy is how figures drift in this project. **The delta is the quantity `R10` reads**
+and is owned here; each `LBD-A0` rate is recoverable as this table's rate minus its delta.
+
+**The denominators are identical band for band** — 16,382 / 25,098 / 34,212 / 47,107 / 57,692
+in both arms. That is the check that the two reads are over the same sample and the same
+archive, rather than merely run by the same script. Our table covers **2,944** of the 3,000
+sampled artists; **56** are absent, against `LBD-A0`'s 55.
+
+### ⚠ `LBD-G1` fires on `LBD-A4`, and `LBD-AM3`'s override does not name this arm
+
+**0.5900 < 0.60.** The gate fires, as it did on `LBD-A0`. `LBD-AM3` records the owner's ruling
+that the gap is explained by the deployed dataset having been computed on a far smaller
+corpus, and that **`LBD-A0`–`LBD-A3` may be read anyway** — an enumeration that does not
+include `LBD-A4`, which did not exist when he ruled. **`LBD-C1` is not cited as passed, for
+either arm.**
+
+**Why `R10` is nonetheless read here — answered rather than escalated.** Four reasons, the
+first load-bearing:
+
+1. **`R10`'s bar is a difference between arms, not a level against the archive** — "5 pp on
+   the pooled `LBD-C1` rate". A lineage gap common to both arms cancels in that difference.
+   §2 above fixed that framing **before the pass ran**, for exactly this reason.
+2. **No new defect is indicated.** `LBD-A4`'s top-band rate is *higher* than `LBD-A0`'s, and
+   higher in three bands of five.
+3. **The instrument that separates "inputs differ" from "implemented wrong" was re-run on
+   this machine before the pass.** `lbd_fixture.py`: eight fidelity checks green, including
+   `pairing distinct (T3-D7)` and `algebraic form == naive form, pairing=distinct`, and all
+   seven mutants red. That is the same evidence class `LBD-AM3` rested on.
+4. **The owner's `LBD-D6` ruling of 2026-09-12 post-dates `LBD-AM3`** and requires `LBD-A4`
+   to run and `R10` to be read before any `S4` arm — taken in full knowledge that `LBD-G1`
+   had fired and been overridden.
+
+**What remains the owner's, and it is a scope question rather than a measurement one:**
+whether `LBD-AM3`'s override extends to `LBD-A4` as a statement about *absolute* fidelity.
+**`R10` does not depend on the answer, because `R10` reads a difference.** Nothing here
+extends that ruling, and nothing here needs to.
+
+## §6 — Edge count
+
+The arm's derived table, at `LBD-A4`'s own `threshold` 10 and `limit` 100:
+
+| | edges | Δ | relative |
+|---|---:|---:|---:|
+| **`LBD-A4`** | **10,823,170** | **−517,469** | **−4.563 %** |
+
+`LBD-A0`'s count is owned by
+[`../2026-09-08-lbd-similarity/README.md`](../2026-09-08-lbd-similarity/README.md) §5 and is
+named once here — 11,340,639 — because a relative change is unreadable without its base. The
+**delta and the relative change are owned here.**
+
+*Plain: counting a pair once per session instead of once per pair of plays removes about one
+connection in every twenty-two.*
+
+**The mechanism is checkable rather than asserted**, which matters because §4 showed the same
+two arms differing by only 903 rows at the floor. The distinct form cannot delete a
+co-occurrence, only weaken one. At `score > 0` almost nothing changes, because a pair needs
+only to reach 1. At `score > 10` half a million pairs fall out — the ones that were clearing
+ListenBrainz's strength bar **on repeat plays by a single listener**. That is the same knob
+`LBD-A0`↔`LBD-A2` already showed carries nearly all the supply movement (figures owned by the
+`LBD-A0` README's §6), seen from the other side.
+
+## §7 — `R10`, read against §3
+
+| half | bar (fixed in §3, before the pass) | measured | fires? |
+|---|---|---:|---|
+| pooled `LBD-C1` rate | 5 pp, any band | **0.560 pp** (largest, top band) | **no** — by a factor of nine |
+| edge count | 1 % relative | **4.563 %** | **yes** — by a factor of four and a half |
+
+> ### `R10` FIRES — on the row's own **or**, and on exactly one of its two halves
+>
+> **The pairing semantics are load-bearing.** Per `R10` and `LBD-D6`: **every later arm
+> records which pairing semantics it uses and why.**
+
+This is §3's third row, the disagreement case, which requires both figures side by side and a
+statement of which half fired. *In plain terms: which of the two ways of counting you use
+barely changes how much of ListenBrainz's own answer you reproduce — but it changes how many
+connections the map has, by about one in twenty-two.* The two are not in tension. Fidelity is
+scored against the archive's own list for each artist, cut at that list's length, which is
+mostly strong pairs surviving either rule; the half-million lost edges are weak ones sitting
+just above the strength bar.
+
+### `LBD-X6` STANDS. It does not lift.
+
+`LBD-X6` bars generalising the `LBL-` listen-2 result to the cheaper pairing form *"until
+`LBD-A4` has run and `R10` has been read"*. **Both conditions are now met** — and the answer
+`R10` returned is that the pairing form **does** change the map materially. So the *condition*
+is discharged and **the bar it was protecting is confirmed, not released**: listen 2's result
+holds for ListenBrainz's own pairing semantics, and no sentence may generalise it to the
+cheaper form. Under §3's other branch — had neither half fired — `LBD-X6` would have lifted.
+It did not.
+
+**`LBD-R4`** (design §7, *semantic drift from the cheaper pairing form*) is **retired as a
+risk and confirmed as a fact**: the drift is real, it is measured at 4.563 % of edges, and
+`LBD-D6`'s requirement that every later arm declare its pairing is what manages it.
+
+## §8 — What is NOT established here
+
+- **Nothing about routing, path quality, or what a listener would hear.** `LBD-A4` is a pair
+  table. **No graph was built from it** and no journey was generated.
+- **No direction of preference.** `R10` says the choice *matters*. It says **nothing** about
+  which pairing form is *better*: fewer edges is not worse, and 4.563 % fewer edges at a fixed
+  strength bar is not evidence about journeys in either direction.
+- **`LBD-C2a` (supply) was deliberately NOT taken on this arm**, and the temptation is the
+  point — it is a single `GROUP BY` over a table that now exists. Its reads (`LBD-G2`,
+  `R4`–`R12`) were pre-registered for the four `T`-derived arms, not for this one, and taking
+  an unregistered read *after* results exist is what the pre-registration discipline exists to
+  prevent. Anyone who wants it owes an amendment first. The same holds for `LBD-C2b` and
+  `LBD-M1` on this arm.
+- **No adoption, no default changed, no shipped code touched**, and **no `S4` design begun or
+  proposed.** `S4` owns adoption, the population rule, API sizing, the fame source and the
+  refresh procedure.
+- **Neither `LBL-` verdict is re-read or re-listened** (`GBL-` §5), and `REQ-41` still bars
+  reading either tie as equivalence.
+- **`LBD-C1` is not cited as passed**, for `LBD-A0` or for `LBD-A4`.
+- **`lbd_reads.py`'s per-artist quantiles are not reproduced anywhere in this document.** They
+  carry the NaN-sort defect the `LBD-A0` README documents, and this run shows the same
+  signature — band 0 printing p10 above the median. The corrected distribution the
+  pre-registration's §2 also requires is §5a below.
