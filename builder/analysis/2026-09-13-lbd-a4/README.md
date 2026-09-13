@@ -235,6 +235,57 @@ whether `LBD-AM3`'s override extends to `LBD-A4` as a statement about *absolute*
 **`R10` does not depend on the answer, because `R10` reads a difference.** Nothing here
 extends that ruling, and nothing here needs to.
 
+### §5a — The per-artist distribution, and a direct measurement of the mechanism
+
+The pre-registration's §2 requires `LBD-C1` **reported two ways, both required** — the pooled
+rate above, and a per-artist overlap distribution by band. This is the second.
+
+**Taken with `lbd_c1_diagnose.py`, not `lbd_reads.py`.** That is not a preference: `lbd_reads.py`
+gives an artist with an empty archive list a NaN share, and a NaN inside `sorted()` scrambles
+the order. Its quantiles for this run show the same signature the `LBD-A0` README records —
+band 0 printing p10 above the median — and **are reproduced nowhere in this document.** The
+pooled rate does not touch those values and is unaffected. Empty archive lists here: **5, 2,
+1, 0, 0 by band**, which is *identical* to `LBD-A0`'s, as is the truth load of **180,491
+archive pairs over 3,000 artists** — independent evidence that both arms were scored against
+the same sample and the same snapshot.
+
+| band | artists scored | median | p10 | p25 | p75 | Δ median vs `LBD-A0` |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 595 | 0.538 | 0.000 | 0.250 | 0.714 | −0.013 |
+| 1 | 598 | 0.545 | 0.200 | 0.400 | 0.660 | −0.002 |
+| 2 | 599 | 0.600 | 0.303 | 0.470 | 0.709 | ±0.000 |
+| 3 | 600 | 0.630 | 0.416 | 0.530 | 0.710 | ±0.000 |
+| 4 | 600 | 0.640 | 0.470 | 0.570 | 0.710 | ±0.000 |
+
+Quantiles now order correctly in every band, which is the defect's absence made visible.
+**The per-artist reading agrees with the pooled one**: the pairing change is invisible at this
+resolution in three bands of five and moves the median by at most 1.3 pp in the other two.
+
+**The decomposition, and what it adds beyond agreement.** For the top band, where each
+archive entry for a sampled artist is traced to where our pipeline put it, the two arms land
+within 0.1 pp of each other on every outcome — matched, below-cut, rank-cut, below-threshold
+and absent alike. *Inference, labelled:* the archive's own pairs for these artists fare
+identically under either counting rule, so **the half-million edges §6 measures are
+overwhelmingly pairs ListenBrainz does not list for them** — the arm is trimming our own
+surplus, not losing what LB told us.
+
+**And the mechanism §6 asserts is measured here rather than argued.** The diagnosis compares
+our score against ListenBrainz's on every truth pair present in our table. Both arms have
+**the same 51,449 comparable pairs** in the top band — as §4 predicts, since the distinct form
+cannot destroy a co-occurrence — but the ratio of our score to theirs falls from a median of
+2.979 under `LBD-A0`'s counting to **2.790** under `LBD-A4`'s, with p90 falling from 6.316 to
+**5.930**. *Plain: counting once per session instead of once per pair of plays makes our
+scores about 6 % smaller, and shrinks the long tail of pairs where we scored far above
+ListenBrainz by more.* That is exactly the quantity that has to move for half a million pairs
+to fall below a fixed strength bar while the pair set itself barely changes, and it closes the
+argument in §6 with a measurement instead of an assertion. *(`LBD-A0`'s two ratio figures are
+named once here for the comparison; they are owned by
+[`../2026-09-08-lbd-similarity/README.md`](../2026-09-08-lbd-similarity/README.md) §5a.)*
+
+**None of this is a fidelity verdict.** A ratio nearer 1 is *not* evidence that `LBD-A4` is
+the more faithful arm: the residual ratio is the corpus-date lineage gap `LBD-AM3` diagnosed,
+common to both arms, and `LBD-C1` is not cited as passed for either.
+
 ## §6 — Edge count
 
 The arm's derived table, at `LBD-A4`'s own `threshold` 10 and `limit` 100:
@@ -315,4 +366,6 @@ risk and confirmed as a fact**: the drift is real, it is measured at 4.563 % of 
 - **`lbd_reads.py`'s per-artist quantiles are not reproduced anywhere in this document.** They
   carry the NaN-sort defect the `LBD-A0` README documents, and this run shows the same
   signature — band 0 printing p10 above the median. The corrected distribution the
-  pre-registration's §2 also requires is §5a below.
+  pre-registration's §2 also requires is §5a, taken with `lbd_c1_diagnose.py`.
+- **A score ratio nearer 1 is not a fidelity verdict** (§5a). The residual ratio is the
+  corpus-date lineage gap `LBD-AM3` diagnosed, common to both arms.
