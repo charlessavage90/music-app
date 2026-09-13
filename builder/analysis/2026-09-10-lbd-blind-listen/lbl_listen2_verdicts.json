@@ -1,0 +1,270 @@
+{
+  "rows": {
+    "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f|299278d3-25dd-4f30-bae4-5b571c28034d": {
+      "0": {
+        "q1": "R",
+        "q2": "R",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "clip_blocked": false,
+        "notes": ""
+      },
+      "10": {
+        "q1": "L",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "I'm surprised we have no clip for the Goo Goo Dolls. No impact on this result since the artist appears in the same position on both sides. R side is not *not* coherent, but L stays more in the genre I think. No artist was unfamiliar here"
+      },
+      "20": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Really hard to tell apart on this one. No novelty difference. L and R are coherent in different ways, or maybe better said - they each take a different coherent journey. The artist that feels most out of place on each side is in the same position (3)"
+      }
+    },
+    "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062|43dcec48-1764-4055-91ac-afe8a4d25cd1": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Completely equivalent paths."
+      },
+      "10": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Nearly identical paths. The artists I don't know are the same on both sides"
+      },
+      "20": {
+        "q1": "none",
+        "q2": "R",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": "strong",
+        "clip_blocked": false,
+        "notes": "Both seem coherent. Several artists I don't know on the right side"
+      }
+    },
+    "52f612c7-9388-47aa-a3de-494d673671ac|664c3e0e-42d8-48c1-b209-1efca19c0325": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Same paths"
+      },
+      "10": {
+        "q1": "L",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Right side not *incoherent*, but L slightly more I think. Novelty is equal - one artist on each side that I don't know"
+      },
+      "20": {
+        "q1": "L",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Similar to last comment: Right side not *incoherent*, but L slightly more I think. Novelty equal"
+      }
+    },
+    "2aaf7396-6ab8-40f3-9776-a41c42c8e26b|39c2a93d-9afa-4a22-9bba-c087ab056e1c": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Same paths"
+      },
+      "10": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "No novelty difference. Paths are very different, but both seem coherent to me."
+      },
+      "20": {
+        "q1": "R",
+        "q2": "R",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": "strong",
+        "clip_blocked": false,
+        "notes": "Right side clearly wins on novelty. No new artists to me on L, two artists on R that I don't know. Slight win on R on coherence"
+      }
+    },
+    "b4691384-50c3-4afd-9988-51d3ec5db65d|75167b8b-44e4-407b-9d35-effe87b223cf": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Roughly equal coherence, no novelty on either side"
+      },
+      "10": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Same paths"
+      },
+      "20": {
+        "q1": "R",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Slightly more coherent path on the right. No novel artists on either side"
+      }
+    },
+    "f98711e5-06f7-43ed-8239-da0f61a9c460|fb2df245-81b0-4a2b-9d01-e0955ba68be7": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Very similar paths. Hard to differentiate coherence. No novelty on either side"
+      },
+      "10": {
+        "q1": "L",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Slightly more coherent on L, though both are reasonable paths. 1 novel artist on each side."
+      },
+      "20": {
+        "q1": "L",
+        "q2": "L",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": "strong",
+        "clip_blocked": false,
+        "notes": "Overall these paths are less coherent (or at least have some surprising jumps) compared to the earlier presses for this pair, but L is slightly more coherent. L is a strong novelty win where R doesn't have any novel artists."
+      }
+    },
+    "f1548c5b-329e-4036-921c-02213a04b525|0039c7ae-e1a7-4a7d-9b49-0cbc716821a6": {
+      "0": {
+        "q1": "R",
+        "q2": "L",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "clip_blocked": false,
+        "notes": "Slight coherence win for R - L has a jump from Fugazi to Elliott Smith which feels abrupt. L wins on novelty though, as I don't know Misfits and am not very familiar with Fugazi. All artists on R are known"
+      },
+      "10": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Roughly equal coherence, and no novelty on either side"
+      },
+      "20": {
+        "q1": "R",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "R is slightly more coherent, no novelty on either side."
+      }
+    },
+    "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64|bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": null,
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Same paths"
+      },
+      "10": {
+        "q1": "R",
+        "q2": "none",
+        "tradeoff": "no",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "clip_blocked": false,
+        "notes": "Slightly more coherent on the right, but not incoherent on the left. No real novelty difference"
+      },
+      "20": {
+        "q1": "R",
+        "q2": "R",
+        "tradeoff": "no",
+        "q1_strength": "strong",
+        "q2_strength": "strong",
+        "clip_blocked": false,
+        "notes": "R has more unfamiliar artists and is definitely more coherent than L"
+      }
+    }
+  },
+  "pairs": {
+    "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062|43dcec48-1764-4055-91ac-afe8a4d25cd1": {
+      "collapse": "",
+      "notes": ""
+    },
+    "52f612c7-9388-47aa-a3de-494d673671ac|664c3e0e-42d8-48c1-b209-1efca19c0325": {
+      "collapse": "",
+      "notes": ""
+    },
+    "2aaf7396-6ab8-40f3-9776-a41c42c8e26b|39c2a93d-9afa-4a22-9bba-c087ab056e1c": {
+      "collapse": "",
+      "notes": ""
+    },
+    "b4691384-50c3-4afd-9988-51d3ec5db65d|75167b8b-44e4-407b-9d35-effe87b223cf": {
+      "collapse": "",
+      "notes": ""
+    },
+    "f98711e5-06f7-43ed-8239-da0f61a9c460|fb2df245-81b0-4a2b-9d01-e0955ba68be7": {
+      "collapse": "",
+      "notes": ""
+    },
+    "f1548c5b-329e-4036-921c-02213a04b525|0039c7ae-e1a7-4a7d-9b49-0cbc716821a6": {
+      "collapse": "",
+      "notes": ""
+    },
+    "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64|bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a": {
+      "collapse": "",
+      "notes": ""
+    },
+    "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f|299278d3-25dd-4f30-bae4-5b571c28034d": {
+      "collapse": "",
+      "notes": ""
+    }
+  }
+}

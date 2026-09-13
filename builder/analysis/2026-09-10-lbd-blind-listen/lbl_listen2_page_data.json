@@ -1,0 +1,1865 @@
+{
+  "listen": 2,
+  "pairs": [
+    {
+      "key": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f|299278d3-25dd-4f30-bae4-5b571c28034d",
+      "a": "Vertical Horizon",
+      "b": "The Postal Service",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+                "name": "Vertical Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75af9d25-cf32-49c0-9192-60bd8e9784e6",
+                "name": "Matchbox Twenty",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4bdcee62-4902-4773-8cd1-e252e2e31225",
+                "name": "Alanis Morissette",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "3e55d51d-687f-4a9d-af96-2fabccf802e5",
+                "name": "The Cardigans",
+                "disambiguation": "Swedish rock band"
+              },
+              {
+                "mbid": "6386ddff-0d13-4685-9f0a-a82bf022fb1c",
+                "name": "Supergrass",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5f572b31-8fd9-45ae-9beb-358c98d839df",
+                "name": "The Dandy Warhols",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402",
+                "name": "The Flaming Lips",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+                "name": "The Postal Service",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+                "name": "Vertical Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75af9d25-cf32-49c0-9192-60bd8e9784e6",
+                "name": "Matchbox Twenty",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "aa266ac7-d919-4132-982e-76cbd95591a7",
+                "name": "Collective Soul",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "7509421d-1074-442f-be8f-b526167afcb3",
+                "name": "The Presidents of the United States of America",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "667e856e-f3a7-42e9-8244-95422ef31321",
+                "name": "The Breeders",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402",
+                "name": "The Flaming Lips",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+                "name": "The Postal Service",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+                "name": "Vertical Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e2c00c56-8365-4160-9f40-a64682917633",
+                "name": "Goo Goo Dolls",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bc710bcf-8815-42cf-bad2-3f1d12246aeb",
+                "name": "Nickelback",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "6ffb8ea9-2370-44d8-b678-e9237bbd347b",
+                "name": "Kings of Leon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "584c04d2-4acc-491b-8a0a-e63133f4bfc4",
+                "name": "Yeah Yeah Yeahs",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+                "name": "The Postal Service",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+                "name": "Vertical Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e2c00c56-8365-4160-9f40-a64682917633",
+                "name": "Goo Goo Dolls",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d4d17620-fd97-4574-92a8-a2cb7e72ce42",
+                "name": "The Verve",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e6e879c0-3d56-4f12-b3c5-3ce459661a8e",
+                "name": "Jeff Buckley",
+                "disambiguation": "American singer, guitarist and songwriter"
+              },
+              {
+                "mbid": "a506f761-2c22-4b2f-8a94-bd748c2c8f75",
+                "name": "Neutral Milk Hotel",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+                "name": "The Postal Service",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+                "name": "Vertical Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75af9d25-cf32-49c0-9192-60bd8e9784e6",
+                "name": "Matchbox Twenty",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "95f5b748-d370-47fe-85bd-0af2dc450bc0",
+                "name": "Sublime",
+                "disambiguation": "ska punk"
+              },
+              {
+                "mbid": "ff6e677f-91dd-4986-a174-8db0474b1799",
+                "name": "Jack Johnson",
+                "disambiguation": "singer‐songwriter from Hawaii"
+              },
+              {
+                "mbid": "78f797e3-4913-4026-aad0-1cd858bd735b",
+                "name": "Bright Eyes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+                "name": "The Postal Service",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f",
+                "name": "Vertical Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75af9d25-cf32-49c0-9192-60bd8e9784e6",
+                "name": "Matchbox Twenty",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4bdcee62-4902-4773-8cd1-e252e2e31225",
+                "name": "Alanis Morissette",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a9ee533f-8871-4f62-a6bb-91eb264abc90",
+                "name": "Fiona Apple",
+                "disambiguation": "singer-songwriter and pianist"
+              },
+              {
+                "mbid": "eaf6a7ca-105d-4a94-ba02-8c3e4040319a",
+                "name": "Rilo Kiley",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "299278d3-25dd-4f30-bae4-5b571c28034d",
+                "name": "The Postal Service",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062|43dcec48-1764-4055-91ac-afe8a4d25cd1",
+      "a": "Blue Öyster Cult",
+      "b": "Jukebox the Ghost",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+                "name": "Blue Öyster Cult",
+                "disambiguation": "US rock band"
+              },
+              {
+                "mbid": "8aa5b65a-5b3c-4029-92bf-47a544356934",
+                "name": "Ozzy Osbourne",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5dfdca28-9ddc-4853-933c-8bc97d87beec",
+                "name": "Marilyn Manson",
+                "disambiguation": "the band"
+              },
+              {
+                "mbid": "606bf117-494f-4864-891f-09d63ff6aa4b",
+                "name": "Rise Against",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "44cf61b8-5197-448a-b82b-cef6ee89fac5",
+                "name": "Paramore",
+                "disambiguation": "American pop rock band"
+              },
+              {
+                "mbid": "260b6184-8828-48eb-945c-bc4cb6fc34ca",
+                "name": "Charli xcx",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "7f3d82ee-3817-4367-9eec-f33a312247a1",
+                "name": "MARINA",
+                "disambiguation": "formerly Marina and the Diamonds"
+              },
+              {
+                "mbid": "69681b02-05b8-4685-80cb-e98983b7a96f",
+                "name": "Mother Mother",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+                "name": "Jukebox the Ghost",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+                "name": "Blue Öyster Cult",
+                "disambiguation": "US rock band"
+              },
+              {
+                "mbid": "8aa5b65a-5b3c-4029-92bf-47a544356934",
+                "name": "Ozzy Osbourne",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5dfdca28-9ddc-4853-933c-8bc97d87beec",
+                "name": "Marilyn Manson",
+                "disambiguation": "the band"
+              },
+              {
+                "mbid": "606bf117-494f-4864-891f-09d63ff6aa4b",
+                "name": "Rise Against",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "44cf61b8-5197-448a-b82b-cef6ee89fac5",
+                "name": "Paramore",
+                "disambiguation": "American pop rock band"
+              },
+              {
+                "mbid": "260b6184-8828-48eb-945c-bc4cb6fc34ca",
+                "name": "Charli xcx",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "7f3d82ee-3817-4367-9eec-f33a312247a1",
+                "name": "MARINA",
+                "disambiguation": "formerly Marina and the Diamonds"
+              },
+              {
+                "mbid": "69681b02-05b8-4685-80cb-e98983b7a96f",
+                "name": "Mother Mother",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+                "name": "Jukebox the Ghost",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+                "name": "Blue Öyster Cult",
+                "disambiguation": "US rock band"
+              },
+              {
+                "mbid": "6b335658-22c8-485d-93de-0bc29a1d0349",
+                "name": "Judas Priest",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "24e1b53c-3085-4581-8472-0b0088d2508c",
+                "name": "Avenged Sevenfold",
+                "disambiguation": "American metal band"
+              },
+              {
+                "mbid": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
+                "name": "Bring Me the Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4ad8190b-d2fd-46f8-a3d9-c0f55c034976",
+                "name": "Poppy",
+                "disambiguation": "US post‐genre artist, AKA That Poppy"
+              },
+              {
+                "mbid": "69681b02-05b8-4685-80cb-e98983b7a96f",
+                "name": "Mother Mother",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+                "name": "Jukebox the Ghost",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+                "name": "Blue Öyster Cult",
+                "disambiguation": "US rock band"
+              },
+              {
+                "mbid": "8aa5b65a-5b3c-4029-92bf-47a544356934",
+                "name": "Ozzy Osbourne",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4bb4e4e4-5f66-4509-98af-62dbb90c45c5",
+                "name": "Disturbed",
+                "disambiguation": "USA metal band"
+              },
+              {
+                "mbid": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
+                "name": "Bring Me the Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4ad8190b-d2fd-46f8-a3d9-c0f55c034976",
+                "name": "Poppy",
+                "disambiguation": "US post‐genre artist, AKA That Poppy"
+              },
+              {
+                "mbid": "69681b02-05b8-4685-80cb-e98983b7a96f",
+                "name": "Mother Mother",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+                "name": "Jukebox the Ghost",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+                "name": "Blue Öyster Cult",
+                "disambiguation": "US rock band"
+              },
+              {
+                "mbid": "678d88b2-87b0-403b-b63d-5da7465aecc3",
+                "name": "Led Zeppelin",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5",
+                "name": "The White Stripes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "be407b02-f3e6-4ed5-9489-f8e5f0ab36dc",
+                "name": "The Raconteurs",
+                "disambiguation": "in Australia known as The Saboteurs"
+              },
+              {
+                "mbid": "e132d370-2a59-4437-8610-756df28a5a02",
+                "name": "OK Go",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+                "name": "Jukebox the Ghost",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062",
+                "name": "Blue Öyster Cult",
+                "disambiguation": "US rock band"
+              },
+              {
+                "mbid": "160629ab-ec18-4931-8c95-02cb92d06186",
+                "name": "Foreigner",
+                "disambiguation": "British/American rock band"
+              },
+              {
+                "mbid": "15042d2b-2d4c-4451-a96a-6f547642de13",
+                "name": "Kenny Loggins",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "044fd265-79dd-43eb-afc4-8b20becf7e17",
+                "name": "Thundercat",
+                "disambiguation": "US singer-songwriter & bassist"
+              },
+              {
+                "mbid": "25ab7547-a4d2-480b-b028-c7f3497bc858",
+                "name": "Men I Trust",
+                "disambiguation": "band from Montreal"
+              },
+              {
+                "mbid": "4ae429fe-735c-4968-8253-a591421b1bd0",
+                "name": "girl in red",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "69681b02-05b8-4685-80cb-e98983b7a96f",
+                "name": "Mother Mother",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "43dcec48-1764-4055-91ac-afe8a4d25cd1",
+                "name": "Jukebox the Ghost",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "52f612c7-9388-47aa-a3de-494d673671ac|664c3e0e-42d8-48c1-b209-1efca19c0325",
+      "a": "BC Camplight",
+      "b": "The National",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+                "name": "BC Camplight",
+                "disambiguation": "Manchester singer/songwriter"
+              },
+              {
+                "mbid": "a9b2d360-0ebc-47d9-9870-a7e7b225b365",
+                "name": "Billy Nomates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "09d8290b-6ada-422f-8ce3-19349fb1c15d",
+                "name": "Sleaford Mods",
+                "disambiguation": "English post‐punk duo"
+              },
+              {
+                "mbid": "4a4ee089-93b1-4470-af9a-6ff575d32704",
+                "name": "The Prodigy",
+                "disambiguation": "UK electronic group, main member Liam Howlett"
+              },
+              {
+                "mbid": "847e8284-8582-4b0e-9c26-b042a4f49e57",
+                "name": "Placebo",
+                "disambiguation": "UK alternative rock band"
+              },
+              {
+                "mbid": "8c538f11-c141-4588-8ecb-931083524186",
+                "name": "Bloc Party",
+                "disambiguation": "English indie rock band"
+              },
+              {
+                "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+                "name": "The National",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+                "name": "BC Camplight",
+                "disambiguation": "Manchester singer/songwriter"
+              },
+              {
+                "mbid": "a9b2d360-0ebc-47d9-9870-a7e7b225b365",
+                "name": "Billy Nomates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "09d8290b-6ada-422f-8ce3-19349fb1c15d",
+                "name": "Sleaford Mods",
+                "disambiguation": "English post‐punk duo"
+              },
+              {
+                "mbid": "4a4ee089-93b1-4470-af9a-6ff575d32704",
+                "name": "The Prodigy",
+                "disambiguation": "UK electronic group, main member Liam Howlett"
+              },
+              {
+                "mbid": "847e8284-8582-4b0e-9c26-b042a4f49e57",
+                "name": "Placebo",
+                "disambiguation": "UK alternative rock band"
+              },
+              {
+                "mbid": "8c538f11-c141-4588-8ecb-931083524186",
+                "name": "Bloc Party",
+                "disambiguation": "English indie rock band"
+              },
+              {
+                "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+                "name": "The National",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+                "name": "BC Camplight",
+                "disambiguation": "Manchester singer/songwriter"
+              },
+              {
+                "mbid": "0935da47-cf41-4aa1-a91a-850ced520454",
+                "name": "Fat White Family",
+                "disambiguation": "English rock band"
+              },
+              {
+                "mbid": "3547f34a-db02-4ab7-b4a0-380e1ef951a9",
+                "name": "Wolf Alice",
+                "disambiguation": "British indie/rock band"
+              },
+              {
+                "mbid": "5334edc0-5faf-4ca5-b1df-000de3e1f752",
+                "name": "St. Vincent",
+                "disambiguation": "USA guitarist, singer and songwriter Annie Clark"
+              },
+              {
+                "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+                "name": "The National",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+                "name": "BC Camplight",
+                "disambiguation": "Manchester singer/songwriter"
+              },
+              {
+                "mbid": "65e668e9-9cd1-4809-b7e7-26439732e1eb",
+                "name": "Rolling Blackouts Coastal Fever",
+                "disambiguation": "Australian indie rock band"
+              },
+              {
+                "mbid": "e01755e3-58ab-4a5b-a9e9-a0a3bd3dff4c",
+                "name": "Parquet Courts",
+                "disambiguation": "US garage rock band"
+              },
+              {
+                "mbid": "55111838-f001-494a-a1b5-9d818db85810",
+                "name": "Courtney Barnett",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5a2e9cd3-010a-4aae-9f83-629253284202",
+                "name": "Sharon Van Etten",
+                "disambiguation": "US singer‐songwriter"
+              },
+              {
+                "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+                "name": "The National",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+                "name": "BC Camplight",
+                "disambiguation": "Manchester singer/songwriter"
+              },
+              {
+                "mbid": "65e668e9-9cd1-4809-b7e7-26439732e1eb",
+                "name": "Rolling Blackouts Coastal Fever",
+                "disambiguation": "Australian indie rock band"
+              },
+              {
+                "mbid": "fd87acc7-e0a0-4a45-bc2a-d2ab5c10be68",
+                "name": "Fontaines D.C.",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "74963434-dcb6-4b14-98cc-99873b06db66",
+                "name": "Future Islands",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+                "name": "The National",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "52f612c7-9388-47aa-a3de-494d673671ac",
+                "name": "BC Camplight",
+                "disambiguation": "Manchester singer/songwriter"
+              },
+              {
+                "mbid": "eeef9144-7983-4332-9ef6-6d6dcaff29f5",
+                "name": "Nadine Shah",
+                "disambiguation": "English singer-songwriter"
+              },
+              {
+                "mbid": "c79df192-153f-4cc3-b9bf-9c36bc797c73",
+                "name": "Lucy Rose",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a9d1d9b5-968c-486d-8a97-6077885f2ab8",
+                "name": "The Paper Kites",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "cd8c5019-5d75-4d5c-bc28-e1e26a7dd5c8",
+                "name": "José González",
+                "disambiguation": "Swedish singer-songwriter and guitarist"
+              },
+              {
+                "mbid": "664c3e0e-42d8-48c1-b209-1efca19c0325",
+                "name": "The National",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b|39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+      "a": "LCD Soundsystem",
+      "b": "Jefferson Airplane",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+                "name": "LCD Soundsystem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1946a82a-f927-40c2-8235-38d64f50d043",
+                "name": "The Chemical Brothers",
+                "disambiguation": "British electronic music duo"
+              },
+              {
+                "mbid": "056e4f3e-d505-4dad-8ec1-d04f521cbb56",
+                "name": "Daft Punk",
+                "disambiguation": "French electronic duo"
+              },
+              {
+                "mbid": "11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5",
+                "name": "The White Stripes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "109958eb-a335-4c5e-907e-597ff4c6af46",
+                "name": "Creedence Clearwater Revival",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+                "name": "Jefferson Airplane",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+                "name": "LCD Soundsystem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1946a82a-f927-40c2-8235-38d64f50d043",
+                "name": "The Chemical Brothers",
+                "disambiguation": "British electronic music duo"
+              },
+              {
+                "mbid": "056e4f3e-d505-4dad-8ec1-d04f521cbb56",
+                "name": "Daft Punk",
+                "disambiguation": "French electronic duo"
+              },
+              {
+                "mbid": "11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5",
+                "name": "The White Stripes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "109958eb-a335-4c5e-907e-597ff4c6af46",
+                "name": "Creedence Clearwater Revival",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+                "name": "Jefferson Airplane",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+                "name": "LCD Soundsystem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "10adbe5e-a2c0-4bf3-8249-2b4cbf6e6ca8",
+                "name": "Massive Attack",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d4d17620-fd97-4574-92a8-a2cb7e72ce42",
+                "name": "The Verve",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "39ab1aed-75e0-4140-bd47-540276886b60",
+                "name": "Oasis",
+                "disambiguation": "Noel & Liam Gallagher"
+              },
+              {
+                "mbid": "3d2b98e5-556f-4451-a3ff-c50ea18d57cb",
+                "name": "Aerosmith",
+                "disambiguation": "American hard rock band"
+              },
+              {
+                "mbid": "109958eb-a335-4c5e-907e-597ff4c6af46",
+                "name": "Creedence Clearwater Revival",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+                "name": "Jefferson Airplane",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+                "name": "LCD Soundsystem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+                "name": "Arcade Fire",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "40f5d9e4-2de7-4f2d-ad41-e31a9a9fea27",
+                "name": "The Smiths",
+                "disambiguation": "1980s English rock band"
+              },
+              {
+                "mbid": "9efff43b-3b29-4082-824e-bc82f646f93d",
+                "name": "The Doors",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+                "name": "Jefferson Airplane",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+                "name": "LCD Soundsystem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a506f761-2c22-4b2f-8a94-bd748c2c8f75",
+                "name": "Neutral Milk Hotel",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c0eee88b-47f2-4cd2-ac48-a045e902a432",
+                "name": "Ween",
+                "disambiguation": "US alternative rock band"
+              },
+              {
+                "mbid": "e20747e7-55a4-452e-8766-7b985585082d",
+                "name": "Frank Zappa",
+                "disambiguation": "US musician, composer, activist & filmmaker"
+              },
+              {
+                "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+                "name": "Jefferson Airplane",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "2aaf7396-6ab8-40f3-9776-a41c42c8e26b",
+                "name": "LCD Soundsystem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "be465d4f-c28d-4ba1-94ab-ebaada7db8af",
+                "name": "IDLES",
+                "disambiguation": "post‐punk"
+              },
+              {
+                "mbid": "f319b57a-a494-40f6-a467-3d196d3484e6",
+                "name": "Sparks",
+                "disambiguation": "US rock and pop duo, The Mael Brothers"
+              },
+              {
+                "mbid": "c842d29f-a297-48cd-bb71-4f77fd672b16",
+                "name": "T. Rex",
+                "disambiguation": "UK band"
+              },
+              {
+                "mbid": "39c2a93d-9afa-4a22-9bba-c087ab056e1c",
+                "name": "Jefferson Airplane",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "b4691384-50c3-4afd-9988-51d3ec5db65d|75167b8b-44e4-407b-9d35-effe87b223cf",
+      "a": "Hozier",
+      "b": "Neil Young",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+                "name": "Hozier",
+                "disambiguation": "Irish singer/songwriter"
+              },
+              {
+                "mbid": "96855c21-b832-4366-ba12-0d2330c36a86",
+                "name": "Phoebe Bridgers",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c48d4327-8122-4286-af66-05e1ee6ac4d8",
+                "name": "Mazzy Star",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "99ea432a-e3d8-42cb-9d5e-db316a6a8458",
+                "name": "Nick Drake",
+                "disambiguation": "English singer‐songwriter"
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+                "name": "Hozier",
+                "disambiguation": "Irish singer/songwriter"
+              },
+              {
+                "mbid": "df36f6db-5987-46ed-9d02-0cf36ed4e060",
+                "name": "Vance Joy",
+                "disambiguation": "Australian singer-songwriter"
+              },
+              {
+                "mbid": "cd8c5019-5d75-4d5c-bc28-e1e26a7dd5c8",
+                "name": "José González",
+                "disambiguation": "Swedish singer-songwriter and guitarist"
+              },
+              {
+                "mbid": "99ea432a-e3d8-42cb-9d5e-db316a6a8458",
+                "name": "Nick Drake",
+                "disambiguation": "English singer‐songwriter"
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+                "name": "Hozier",
+                "disambiguation": "Irish singer/songwriter"
+              },
+              {
+                "mbid": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+                "name": "Adele",
+                "disambiguation": "UK soul/jazz singer"
+              },
+              {
+                "mbid": "d339efbb-77b9-4147-ba9e-59f2f24550b2",
+                "name": "Kelly Clarkson",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "ba550d0e-adac-4864-b88b-407cab5e76af",
+                "name": "Paul McCartney",
+                "disambiguation": "The Beatles"
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+                "name": "Hozier",
+                "disambiguation": "Irish singer/songwriter"
+              },
+              {
+                "mbid": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+                "name": "Adele",
+                "disambiguation": "UK soul/jazz singer"
+              },
+              {
+                "mbid": "d339efbb-77b9-4147-ba9e-59f2f24550b2",
+                "name": "Kelly Clarkson",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "ba550d0e-adac-4864-b88b-407cab5e76af",
+                "name": "Paul McCartney",
+                "disambiguation": "The Beatles"
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+                "name": "Hozier",
+                "disambiguation": "Irish singer/songwriter"
+              },
+              {
+                "mbid": "fc7bbf00-fbaa-4736-986b-b3ac0266ca9b",
+                "name": "alt‐J",
+                "disambiguation": "English indie‐rock band"
+              },
+              {
+                "mbid": "f181961b-20f7-459e-89de-920ef03c7ed0",
+                "name": "The Strokes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "83d91898-7763-47d7-b03b-b92132375c47",
+                "name": "Pink Floyd",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "b4691384-50c3-4afd-9988-51d3ec5db65d",
+                "name": "Hozier",
+                "disambiguation": "Irish singer/songwriter"
+              },
+              {
+                "mbid": "96855c21-b832-4366-ba12-0d2330c36a86",
+                "name": "Phoebe Bridgers",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c48d4327-8122-4286-af66-05e1ee6ac4d8",
+                "name": "Mazzy Star",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e6e879c0-3d56-4f12-b3c5-3ce459661a8e",
+                "name": "Jeff Buckley",
+                "disambiguation": "American singer, guitarist and songwriter"
+              },
+              {
+                "mbid": "9d1ebcfe-4c15-4d18-95d3-d919898638a1",
+                "name": "Lou Reed",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "f98711e5-06f7-43ed-8239-da0f61a9c460|fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+      "a": "The Alan Parsons Project",
+      "b": "Junip",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+                "name": "The Alan Parsons Project",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d2ff6b6b-fc30-48dc-8952-06f9d8fc64f8",
+                "name": "Supertramp",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a",
+                "name": "Simon & Garfunkel",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "94b0fb9d-a066-4823-b2ec-af1d324bcfcf",
+                "name": "The Velvet Underground",
+                "disambiguation": "Lou Reed’s seminal rock band"
+              },
+              {
+                "mbid": "9e53f84d-ef44-4c16-9677-5fd4d78cbd7d",
+                "name": "Wilco",
+                "disambiguation": "American alternative rock band"
+              },
+              {
+                "mbid": "cd8c5019-5d75-4d5c-bc28-e1e26a7dd5c8",
+                "name": "José González",
+                "disambiguation": "Swedish singer-songwriter and guitarist"
+              },
+              {
+                "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+                "name": "Junip",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+                "name": "The Alan Parsons Project",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d2ff6b6b-fc30-48dc-8952-06f9d8fc64f8",
+                "name": "Supertramp",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a",
+                "name": "Simon & Garfunkel",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "99ea432a-e3d8-42cb-9d5e-db316a6a8458",
+                "name": "Nick Drake",
+                "disambiguation": "English singer‐songwriter"
+              },
+              {
+                "mbid": "cd8c5019-5d75-4d5c-bc28-e1e26a7dd5c8",
+                "name": "José González",
+                "disambiguation": "Swedish singer-songwriter and guitarist"
+              },
+              {
+                "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+                "name": "Junip",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+                "name": "The Alan Parsons Project",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d2ff6b6b-fc30-48dc-8952-06f9d8fc64f8",
+                "name": "Supertramp",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bf0f7e29-dfe1-416c-b5c6-f9ebc19ea810",
+                "name": "Bee Gees",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c296e10c-110a-4103-9e77-47bfebb7fb2e",
+                "name": "Bob Marley & The Wailers",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "ff6e677f-91dd-4986-a174-8db0474b1799",
+                "name": "Jack Johnson",
+                "disambiguation": "singer‐songwriter from Hawaii"
+              },
+              {
+                "mbid": "c3f28da8-662d-4f09-bdc7-3084bf685930",
+                "name": "Iron & Wine",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "cf0f4547-ffbd-4011-98ad-0bec9ba022db",
+                "name": "Kings of Convenience",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+                "name": "Junip",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+                "name": "The Alan Parsons Project",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8e66ea2b-b57b-47d9-8df0-df4630aeb8e5",
+                "name": "Peter Gabriel",
+                "disambiguation": "formerly of Genesis"
+              },
+              {
+                "mbid": "4b585938-f271-45e2-b19a-91c634b5e396",
+                "name": "Kate Bush",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a9ee533f-8871-4f62-a6bb-91eb264abc90",
+                "name": "Fiona Apple",
+                "disambiguation": "singer-songwriter and pianist"
+              },
+              {
+                "mbid": "5a2e9cd3-010a-4aae-9f83-629253284202",
+                "name": "Sharon Van Etten",
+                "disambiguation": "US singer‐songwriter"
+              },
+              {
+                "mbid": "739da2f1-0741-4c60-a6ed-f42d49bf2eb1",
+                "name": "Phosphorescent",
+                "disambiguation": "US singer‐songwriter Matthew Houck"
+              },
+              {
+                "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+                "name": "Junip",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+                "name": "The Alan Parsons Project",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "7944ed53-2a58-4035-9b93-140a71e41c34",
+                "name": "Sting",
+                "disambiguation": "singer, songwriter & member of The Police"
+              },
+              {
+                "mbid": "67930b3e-e00b-469f-8c74-fd69f20522ec",
+                "name": "Sade",
+                "disambiguation": "Group w/ singer of same performance name"
+              },
+              {
+                "mbid": "321531fc-db73-4ffa-a959-61a61a2908c1",
+                "name": "Erykah Badu",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "9a709693-b4f8-4da9-8cc1-038c911a61be",
+                "name": "Bonobo",
+                "disambiguation": "UK electronic artist Simon Green"
+              },
+              {
+                "mbid": "aa1d542d-11c6-4bf3-8219-28a781de29ea",
+                "name": "Fink",
+                "disambiguation": "indie artist from Brighton, UK, on ‘Ninja Tune’ label"
+              },
+              {
+                "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+                "name": "Junip",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f98711e5-06f7-43ed-8239-da0f61a9c460",
+                "name": "The Alan Parsons Project",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8e66ea2b-b57b-47d9-8df0-df4630aeb8e5",
+                "name": "Peter Gabriel",
+                "disambiguation": "formerly of Genesis"
+              },
+              {
+                "mbid": "c0b2500e-0cef-4130-869d-732b23ed9df5",
+                "name": "Tori Amos",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "fbb375f9-48bb-4635-824e-4120273b3ba7",
+                "name": "Regina Spektor",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "97b1142f-c71e-4971-8736-4a8ceaf6b4c3",
+                "name": "The Decemberists",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "6aa55ee1-4c46-4f7c-9a6d-5051dfe2c06d",
+                "name": "Rogue Wave",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "fb2df245-81b0-4a2b-9d01-e0955ba68be7",
+                "name": "Junip",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "f1548c5b-329e-4036-921c-02213a04b525|0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+      "a": "Uriah Heep",
+      "b": "Death Cab for Cutie",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+                "name": "Uriah Heep",
+                "disambiguation": "British prog/hard rock"
+              },
+              {
+                "mbid": "79491354-3d83-40e3-9d8e-7592d58d790a",
+                "name": "Deep Purple",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "57961a97-3796-4bf7-9f02-a985a8979ae9",
+                "name": "Motörhead",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "936addc3-91aa-49de-8ec0-0dc186de151f",
+                "name": "Misfits",
+                "disambiguation": "New Jersey punk band"
+              },
+              {
+                "mbid": "233fc3f3-6de2-465c-985e-e721dbabbace",
+                "name": "Fugazi",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "03ad1736-b7c9-412a-b442-82536d63a5c4",
+                "name": "Elliott Smith",
+                "disambiguation": "US singer‐songwriter"
+              },
+              {
+                "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+                "name": "Death Cab for Cutie",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+                "name": "Uriah Heep",
+                "disambiguation": "British prog/hard rock"
+              },
+              {
+                "mbid": "79491354-3d83-40e3-9d8e-7592d58d790a",
+                "name": "Deep Purple",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "618b6900-0618-4f1e-b835-bccb17f84294",
+                "name": "Eric Clapton",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              },
+              {
+                "mbid": "65314b12-0e08-43fa-ba33-baaa7b874c15",
+                "name": "Leonard Cohen",
+                "disambiguation": "Canadian singer‐songwriter and poet"
+              },
+              {
+                "mbid": "03ad1736-b7c9-412a-b442-82536d63a5c4",
+                "name": "Elliott Smith",
+                "disambiguation": "US singer‐songwriter"
+              },
+              {
+                "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+                "name": "Death Cab for Cutie",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+                "name": "Uriah Heep",
+                "disambiguation": "British prog/hard rock"
+              },
+              {
+                "mbid": "ece57992-dc2e-4f67-a269-fa43626c1a3d",
+                "name": "Jethro Tull",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e20747e7-55a4-452e-8766-7b985585082d",
+                "name": "Frank Zappa",
+                "disambiguation": "US musician, composer, activist & filmmaker"
+              },
+              {
+                "mbid": "c3aeb863-7b26-4388-94e8-5a240f2be21b",
+                "name": "Tom Waits",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "9e53f84d-ef44-4c16-9677-5fd4d78cbd7d",
+                "name": "Wilco",
+                "disambiguation": "American alternative rock band"
+              },
+              {
+                "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+                "name": "Death Cab for Cutie",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+                "name": "Uriah Heep",
+                "disambiguation": "British prog/hard rock"
+              },
+              {
+                "mbid": "6a726ac6-019e-455c-8bbb-571a77bed52e",
+                "name": "Thin Lizzy",
+                "disambiguation": "Irish hard rock band"
+              },
+              {
+                "mbid": "69689acf-d9cd-4d20-a972-47db4ed51b1a",
+                "name": "Kansas",
+                "disambiguation": "US prog rock band"
+              },
+              {
+                "mbid": "109958eb-a335-4c5e-907e-597ff4c6af46",
+                "name": "Creedence Clearwater Revival",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5",
+                "name": "The White Stripes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "584c04d2-4acc-491b-8a0a-e63133f4bfc4",
+                "name": "Yeah Yeah Yeahs",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+                "name": "Death Cab for Cutie",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+                "name": "Uriah Heep",
+                "disambiguation": "British prog/hard rock"
+              },
+              {
+                "mbid": "6a726ac6-019e-455c-8bbb-571a77bed52e",
+                "name": "Thin Lizzy",
+                "disambiguation": "Irish hard rock band"
+              },
+              {
+                "mbid": "d6ed7887-a401-47a8-893c-34b967444d26",
+                "name": "Ramones",
+                "disambiguation": "US punk rock band"
+              },
+              {
+                "mbid": "9beb62b2-88db-4cea-801e-162cd344ee53",
+                "name": "Beastie Boys",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "fa7b9055-3703-473a-8a09-adf2fe031a24",
+                "name": "CAKE",
+                "disambiguation": "US alt. rock band"
+              },
+              {
+                "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+                "name": "Death Cab for Cutie",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f1548c5b-329e-4036-921c-02213a04b525",
+                "name": "Uriah Heep",
+                "disambiguation": "British prog/hard rock"
+              },
+              {
+                "mbid": "6a726ac6-019e-455c-8bbb-571a77bed52e",
+                "name": "Thin Lizzy",
+                "disambiguation": "Irish hard rock band"
+              },
+              {
+                "mbid": "d6ed7887-a401-47a8-893c-34b967444d26",
+                "name": "Ramones",
+                "disambiguation": "US punk rock band"
+              },
+              {
+                "mbid": "9a58fda3-f4ed-4080-a3a5-f457aac9fcdd",
+                "name": "Joy Division",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "52074ba6-e495-4ef3-9bb4-0703888a9f68",
+                "name": "Arcade Fire",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "0039c7ae-e1a7-4a7d-9b49-0cbc716821a6",
+                "name": "Death Cab for Cutie",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64|bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+      "a": "Mates of State",
+      "b": "Rachel Chinouriri",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+                "name": "Mates of State",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5aeb21a3-4606-4a0d-8369-50c768d1e99a",
+                "name": "Stars",
+                "disambiguation": "Canadian indie pop band"
+              },
+              {
+                "mbid": "2eada8f8-056a-4093-bbc2-004909ce743b",
+                "name": "Broken Social Scene",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c",
+                "name": "Sufjan Stevens",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "34557d8f-ee4a-44ab-ae6e-49bb8ac604d0",
+                "name": "Cigarettes After Sex",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8389ff77-a7a4-4ba4-bf1b-17ded47d41a1",
+                "name": "Suki Waterhouse",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+                "name": "Rachel Chinouriri",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+                "name": "Mates of State",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5aeb21a3-4606-4a0d-8369-50c768d1e99a",
+                "name": "Stars",
+                "disambiguation": "Canadian indie pop band"
+              },
+              {
+                "mbid": "2eada8f8-056a-4093-bbc2-004909ce743b",
+                "name": "Broken Social Scene",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c",
+                "name": "Sufjan Stevens",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "34557d8f-ee4a-44ab-ae6e-49bb8ac604d0",
+                "name": "Cigarettes After Sex",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8389ff77-a7a4-4ba4-bf1b-17ded47d41a1",
+                "name": "Suki Waterhouse",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+                "name": "Rachel Chinouriri",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+                "name": "Mates of State",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5aeb21a3-4606-4a0d-8369-50c768d1e99a",
+                "name": "Stars",
+                "disambiguation": "Canadian indie pop band"
+              },
+              {
+                "mbid": "8475297d-fb78-4630-8d74-9b87b6bb7cc8",
+                "name": "of Montreal",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e9aed5e5-ed35-4244-872e-194862290295",
+                "name": "Dr. Dog",
+                "disambiguation": "Philadelphia rock band"
+              },
+              {
+                "mbid": "38f0c7ac-46eb-49ca-b3ab-c785ccd05a60",
+                "name": "TV Girl",
+                "disambiguation": "US indie pop band"
+              },
+              {
+                "mbid": "8389ff77-a7a4-4ba4-bf1b-17ded47d41a1",
+                "name": "Suki Waterhouse",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+                "name": "Rachel Chinouriri",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+                "name": "Mates of State",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "eaf6a7ca-105d-4a94-ba02-8c3e4040319a",
+                "name": "Rilo Kiley",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a9ee533f-8871-4f62-a6bb-91eb264abc90",
+                "name": "Fiona Apple",
+                "disambiguation": "singer-songwriter and pianist"
+              },
+              {
+                "mbid": "9f81247f-7f57-42f3-a8ba-75bef554e591",
+                "name": "Big Thief",
+                "disambiguation": "US indie folk band"
+              },
+              {
+                "mbid": "88d17133-abbc-42db-9526-4e2c1db60336",
+                "name": "beabadoobee",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8389ff77-a7a4-4ba4-bf1b-17ded47d41a1",
+                "name": "Suki Waterhouse",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+                "name": "Rachel Chinouriri",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+                "name": "Mates of State",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b91f0973-002e-4237-a39f-c7e02e786e53",
+                "name": "Architecture in Helsinki",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "caaba574-dfbc-4681-8e56-19b5150897d2",
+                "name": "Cut Copy",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "97b20fe3-0924-4a5f-9955-d0b5c5f9587f",
+                "name": "Santigold",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "9f75277c-b283-4846-ac8c-f932255cd0ac",
+                "name": "Doechii",
+                "disambiguation": "US rapper"
+              },
+              {
+                "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+                "name": "Rachel Chinouriri",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64",
+                "name": "Mates of State",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b91f0973-002e-4237-a39f-c7e02e786e53",
+                "name": "Architecture in Helsinki",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "caaba574-dfbc-4681-8e56-19b5150897d2",
+                "name": "Cut Copy",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "93eb7110-0bc9-4d3f-816b-4b52ef982ec8",
+                "name": "Metronomy",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "6bbb3983-ce8a-4971-96e0-7cae73268fc4",
+                "name": "Jungle",
+                "disambiguation": "London modern soul collective"
+              },
+              {
+                "mbid": "afb6cc6d-a060-4f5e-bc3a-00d4b6832e41",
+                "name": "Remi Wolf",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a",
+                "name": "Rachel Chinouriri",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
