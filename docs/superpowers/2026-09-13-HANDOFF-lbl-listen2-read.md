@@ -70,11 +70,19 @@ successor knows where they came from rather than re-deriving them:
    2026-09-13; no repository artifact records it and that session committed nothing. Execution log
    §1. The generalisable half: a runner must not read `NEXT.md`, `RUNNER-BRIEF.md` already says so,
    and a session reaches the brief only *after* orienting.
-2. **The sealed mapping lives in the runner's worktree**, `C:/Users/charl/worktrees/music-app-lbl-listen2-run/.superpowers/lbl/`,
-   outside git and not in the main tree. It is the only source of the journeys and the hidden
-   metrics; `lbl_listen2_result.json` copies the mapping but not those. **If that worktree is
-   removed, the journeys are unrecoverable** — the result file and the verdicts survive, the
-   stimulus survives in `lbl_listen2_page_data.json`, but the per-map journey metrics do not.
+2. **The sealed record is gitignored and was living only in the runner's disposable worktree.**
+   `lbl_listen2_sealed.json` is the only source of the per-map journeys and the hidden metrics;
+   `lbl_listen2_result.json` copies the mapping but not those, so removing that worktree would
+   have made them unrecoverable. **Mitigated 2026-09-13: both it and `lbl_listen2_clips.json`
+   were copied into the main tree's `.superpowers/lbl/`**, the same gitignored location, so they
+   no longer depend on a worktree anyone may reasonably delete. No convention changed — the seal
+   stays out of git, which is the point of it.
+   ⚠ **Listen 1's equivalent is already gone.** `lbl_listen1_sealed.json` is on disk nowhere
+   reachable (checked 2026-09-13 across both trees). What survives of listen 1 is enough for its
+   read to stand — the verdicts, the stimulus in `lbl_listen1_page_data.json`, the mapping and
+   the ear-tracking counts in `lbl_listen1_result.json`, and §1.3 of its findings note — but
+   **its per-map journeys cannot be recomputed**, so no new question may be asked of them. Stated
+   as a fact, not a defect to repair: nothing proposes to ask one.
 3. **A `DLS-T1` observation was banked** in
    [`findings/2026-09-10-documentation-layer-strategy.md`](findings/2026-09-10-documentation-layer-strategy.md)
    §6b as **`DLS-T1-X6`**: this session opened a spec six times, every one through Bash and none
