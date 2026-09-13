@@ -1,6 +1,13 @@
 # Handoff — `LBL-` listen 2 run and read, 2026-09-13
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-13 by
+[`2026-09-13-HANDOFF-lbd-a4.md`](2026-09-13-HANDOFF-lbd-a4.md)** — `LBD-A4` has since run and
+`R10` has been read. **It remains authoritative for the listen-2 read and for every
+claim-not-to-revert below**, none of which `LBD-A4` touches. ⚠ **One direction of change:** its
+`LBD-X6` bullet says listen 2 may not be generalised to the cheaper pairing form *"until
+`LBD-A4` has run"*. That condition is now **met, and the bar STANDS** — `R10` fired. Do not read
+the discharged condition as a lifted bar. *(Original role:)* **ACTIVE — this is the CURRENT
+handoff.** Nothing supersedes it. Supersedes
 [`2026-09-12-HANDOFF-lbl-listen2-prep.md`](2026-09-12-HANDOFF-lbl-listen2-prep.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
