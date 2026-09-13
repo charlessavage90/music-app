@@ -55,7 +55,7 @@ Had neither half fired, the pre-committed other branch would have lifted it. It 
 - **`LBD-C2a`, `LBD-C2b` and `LBD-M1` were deliberately not taken on this arm.** Their reads
   were pre-registered for the four `T`-derived arms. Taking one now needs an amendment first.
 - **The 128-bucket chunking is not a confound** and must not be "corrected" to match
-  `LBD-A0`'s 64. `LBD-D2`'s exactness holds at any modulus; the change was forced by system
+  `LBD-A0`'s 64. the exactness the pre-registration's §1 establishes holds at any modulus; the change was forced by system
   memory and chosen by measurement.
 - **Neither `LBL-` verdict may be re-listened** (`GBL-` §5), and `REQ-41` still bars reading
   either tie as equivalence. Unchanged by this work.

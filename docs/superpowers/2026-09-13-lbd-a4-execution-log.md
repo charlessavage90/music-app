@@ -64,7 +64,7 @@ had the machine to itself. Rather than retry the same setting or guess a smaller
 bucket was measured** at mod 128 / 8 GB: peak RSS 7.64 GB against 11.9, and a shorter pass in
 total.
 
-**`LBD-D2`'s exactness is not a claim about the number 64.** Every stage through
+**The exactness is not a claim about the number 64 — and it is the PRE-REGISTRATION'S §1 that establishes it, from LB's own SQL, not `LBD-D2`, which is the decision to run on DuckDB and names chunking only as the fallback.** Every stage through
 `user_contribtion_mbids` partitions by `user_id`; only the final cross-user `SUM` crosses a
 boundary, and `T3-D3`'s integer cast is applied by `combine_sql` to the completed sum and
 never to a partial. The modulus moves wall clock and peak memory — `LBD-C3` quantities — and

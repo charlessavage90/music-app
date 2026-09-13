@@ -24,8 +24,10 @@ THE ONE TOKEN, AND HOW THE PASS KEEPS IT TO ONE.
   same side-tables    `D:\\unsung-large-data\\lbd-inputs`, redirects applied, and unread on
                       this path anyway: `register_frames` is skipped under `--from-listens`.
   chunking, and it   `user_id % 128` at an 8 GB limit, where `LBD-A0`'s pass used 64 at 12
-  is NOT "same"       GB. `LBD-D2` establishes that chunking by `user_id` is EXACT at ANY
-                      modulus -- every stage through `user_contribtion_mbids` partitions by
+  is NOT "same"       GB. the PRE-REGISTRATION'S section 1 establishes -- read off LB's own
+                      SQL -- that chunking by `user_id` is EXACT at ANY modulus (this is
+                      `LBD-D2`'s chunked form; `LBD-D2` itself is the decision to run on
+                      DuckDB here, and names chunking only as the fallback) -- every stage through `user_contribtion_mbids` partitions by
                       user, and only the final cross-user SUM crosses a boundary, which
                       `combine_sql` re-sums once. So this is a RESOURCE setting and not a
                       token of the arm: it cannot move a figure, only the wall clock and the
@@ -69,9 +71,11 @@ PARTIALS = Path(r"C:\unsung-fast\lbd-partials-a4")
 PAIRS = Path(r"C:\unsung-fast\lbd-pairs-a4")
 TEMP = Path(r"C:\unsung-fast\duckdb-temp")
 
-# Chunking is a RESOURCE decision, not a measurement one: `LBD-D2` establishes that chunking
-# by `user_id` is EXACT at any modulus, because every stage through `user_contribtion_mbids`
-# partitions by user and only the final cross-user SUM crosses a boundary. So these two are
+# Chunking is a RESOURCE decision, not a measurement one: the pre-registration's section 1
+# establishes, from LB's own SQL, that chunking by `user_id` is EXACT at any modulus, because
+# every stage through `user_contribtion_mbids` partitions by user and only the final cross-user
+# SUM crosses a boundary. (`LBD-D2` is the decision to run on DuckDB and names chunking as the
+# fallback; the exactness proof is the pre-registration's, not that decision's.) So these two are
 # free to be whatever this machine can actually sustain, and they are set from a measurement
 # on this machine rather than from the `LBD-A0` pass's settings -- see the README's section 4.
 BUCKETS = 128
