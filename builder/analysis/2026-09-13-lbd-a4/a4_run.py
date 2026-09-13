@@ -1,0 +1,176 @@
+"""`LBD-A4` — the pairing-delta arm. Driver only; every computation is a frozen script's.
+
+`LBD-A4` differs from `LBD-A0` in ONE token: pairing. Pre-registration section 0's factor
+table gives `days` 7500, `session` 300, `contribution` 3, `threshold` 10, `limit` 100,
+pairing **distinct**, isolating baseline `LBD-A0` -- "pairing only".
+
+WHY THIS IS A DRIVER AND NOT A NEW IMPLEMENTATION. `--pairing distinct` is already in
+`../2026-09-08-lbd-similarity/lbd_similarity.py` as `T3-D7`, and its fixture asserts it in
+BOTH the naive and the algebraic form against hand-derived expected values. Nothing about
+the computation is new here, and nothing in this file computes anything: it invokes that
+script once per user bucket, combines, and derives, in the same three stages and with the
+same flags the `LBD-A0` pass used. Its own record is the per-stage manifests those scripts
+write, not anything this file prints.
+
+THE ONE TOKEN, AND HOW THE PASS KEEPS IT TO ONE.
+
+  same stage 0        `C:\\unsung-fast\\lbd-listens.parquet`, sha256 `6d77a681...07707c08`,
+                      the SAME file `LBD-A0`'s buckets read. Stage 0 is pre-pairing --
+                      `lbd_similarity.py`'s own comment at the three-path dispatch says
+                      "NOTHING before this point differs between any of the five arms" --
+                      so reusing it is exactness, not thrift. Its manifest records
+                      `"pairing": "listen"` because that was the invocation's parameter
+                      string; the stage does not branch on it.
+  same side-tables    `D:\\unsung-large-data\\lbd-inputs`, redirects applied, and unread on
+                      this path anyway: `register_frames` is skipped under `--from-listens`.
+  same chunking       `user_id % 64`, which `LBD-D2` establishes is EXACT rather than an
+                      approximation -- every stage through `user_contribtion_mbids`
+                      partitions by `user_id`.
+  same derivation     `lbd_derive.py`'s `A0` row IS `(threshold 10, limit 100)`, which is
+                      `LBD-A4`'s pair. See `--stage derive` below for why that is the right
+                      call and what it costs in the manifest.
+
+SCRIPT SHA, AND THE ONE DIFFERENCE FROM `LBD-A0`'S PASS THAT IS NOT PAIRING. `LBD-A0`'s
+partials carry `script_sha256` `40f9ee03...` (commit `1cb49c6`); this pass carries
+`eeb3c87b...` (commit `dda02a9`). The whole diff between them is the `--created-before`
+diagnostic knob added for the `LBD-G1` diagnosis, and it lives entirely inside
+`register_listens` -- which is stage 0, and which `--from-listens` does not call at all.
+So the difference is inert on this path by construction, not by inspection alone. Recorded
+because a reader comparing two manifests will see two shas and is owed the reason.
+
+RESUMABLE. A bucket whose manifest already exists is skipped, so an interrupted pass
+restarts where it stopped. Delete a manifest to force its bucket to re-run.
+
+    cd builder && UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 \\
+      uv run --with duckdb python -u analysis/2026-09-13-lbd-a4/a4_run.py --stage buckets
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+SIMILARITY = HERE.parent / "2026-09-08-lbd-similarity" / "lbd_similarity.py"
+DERIVE = HERE.parent / "2026-09-08-lbd-similarity" / "lbd_derive.py"
+
+LISTENS = Path(r"C:\unsung-fast\lbd-listens.parquet")
+PARTIALS = Path(r"C:\unsung-fast\lbd-partials-a4")
+PAIRS = Path(r"C:\unsung-fast\lbd-pairs-a4")
+TEMP = Path(r"C:\unsung-fast\duckdb-temp")
+
+BUCKETS = 64
+MEMORY_GB = 12  # the floor at which mod 64 runs, measured on the LBD-A0 pass (README section 4)
+
+# Pre-registration section 0, the `LBD-A4` row. Every one of these except `pairing` is
+# `LBD-A0`'s value.
+ARM = ["--days", "7500", "--session", "300", "--contribution", "3",
+       "--threshold", "10", "--limit", "100", "--skip", "30",
+       "--pairing", "distinct"]
+
+
+def run(args: list[str], *, label: str) -> float:
+    t0 = time.time()
+    print(f"[a4] >>> {label}", flush=True)
+    proc = subprocess.run([sys.executable, "-u", *args], text=True)
+    wall = time.time() - t0
+    if proc.returncode != 0:
+        raise SystemExit(f"[a4] FAILED {label} (exit {proc.returncode}) after {wall/60:.1f} min")
+    print(f"[a4] <<< {label}  {wall/60:.1f} min", flush=True)
+    return wall
+
+
+def stage_buckets() -> None:
+    PARTIALS.mkdir(parents=True, exist_ok=True)
+    done = skipped = 0
+    t0 = time.time()
+    for rem in range(BUCKETS):
+        out = PARTIALS / f"p{rem}.parquet"
+        if out.with_suffix(".manifest.json").exists():
+            skipped += 1
+            continue
+        run([str(SIMILARITY), "--from-listens", str(LISTENS), "--emit-partial",
+             "--user-mod", str(BUCKETS), "--user-rem", str(rem),
+             "--memory-limit-gb", str(MEMORY_GB), "--temp-dir", str(TEMP),
+             "--row-group-size", "100000", "--out", str(out), *ARM],
+            label=f"bucket {rem}/{BUCKETS - 1}")
+        done += 1
+    print(f"[a4] buckets: {done} run, {skipped} already present, "
+          f"{(time.time() - t0)/60:.1f} min", flush=True)
+
+
+def stage_combine() -> None:
+    """`T_A4` -- the cross-user re-sum at `HAVING score > 0`, no rank cut.
+
+    Exactly `LBD-A0`'s route: the pre-registration's section 1 materialises the aggregate at
+    the lowest threshold any arm uses and derives the arm from it, so the threshold and the
+    rank cut are applied once, in one place, by the same code that applied them for `A0`.
+    """
+    out = PAIRS / "aggregate" / "T_A4.parquet"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    run([str(SIMILARITY), "--combine", (PARTIALS / "p*.parquet").as_posix(),
+         "--aggregate-only", "--memory-limit-gb", str(MEMORY_GB),
+         "--temp-dir", str(TEMP), "--out", str(out), *ARM],
+        label="combine -> T_A4")
+
+
+def stage_derive() -> None:
+    """`LBD-A4` = `T_A4` filtered `score > 10`, ranked per `mbid0`, `rank <= 100`.
+
+    `lbd_derive.py --arm A0` IS that pair of tokens -- its `ARMS` table reads
+    `"A0": (10, 100)` -- so this invokes the frozen derivation rather than adding an `A4`
+    row to a frozen script. The cost is that `A4.manifest.json` records `"arm": "A0"`. That
+    field names the (threshold, limit) row, and `derived_from` names `T_A4.parquet` with its
+    sha256, which is what identifies the arm. Not an error, and not to be "fixed": editing
+    the frozen script to relabel it would change the script that produced `LBD-A0`'s own
+    numbers.
+    """
+    out = PAIRS / "A4" / "A4.parquet"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    run([str(DERIVE), "--table", str(PAIRS / "aggregate" / "T_A4.parquet"),
+         "--arm", "A0", "--out", str(out),
+         "--memory-limit-gb", "24", "--temp-dir", str(TEMP)],
+        label="derive -> A4")
+
+
+def stage_summary() -> None:
+    """Collect the per-bucket manifests into one record. Reads, never recomputes."""
+    rows = []
+    for rem in range(BUCKETS):
+        mf = PARTIALS / f"p{rem}.manifest.json"
+        if mf.exists():
+            rows.append(json.loads(mf.read_text(encoding="utf-8")))
+    if not rows:
+        print("[a4] no bucket manifests yet", flush=True)
+        return
+    print(json.dumps({
+        "buckets_present": len(rows),
+        "partial_rows_total": sum(r["rows"] for r in rows),
+        "wall_clock_s_summed": round(sum(r["wall_clock_s"] for r in rows), 1),
+        "peak_rss_gb_max": max(r["peak_rss_gb"] for r in rows),
+        "peak_spill_gb_summed": round(sum(r["peak_spill_gb"] for r in rows), 1),
+        "peak_spill_gb_max": max(r["peak_spill_gb"] for r in rows),
+        "script_sha256": sorted({r["script_sha256"] for r in rows}),
+        "pairing": sorted({r["params"]["pairing"] for r in rows}),
+        "from_listens": sorted({r["from_listens"] for r in rows}),
+    }, indent=2), flush=True)
+
+
+STAGES = {"buckets": stage_buckets, "combine": stage_combine,
+          "derive": stage_derive, "summary": stage_summary}
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--stage", required=True, choices=sorted(STAGES))
+    args = ap.parse_args(argv)
+    STAGES[args.stage]()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
