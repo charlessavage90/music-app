@@ -1,6 +1,9 @@
 # Handoff — `LBL-` listen 2 prepared under `LBD-AM6`, 2026-09-12
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-13 by**
+[`2026-09-13-HANDOFF-lbl-listen2-read.md`](2026-09-13-HANDOFF-lbl-listen2-read.md) — the listen
+it prepared has since been run, unblinded and read (`LBL-R2`, the tie). **It remains authoritative
+for what it records about the PREPARATION**, and its claims-not-to-revert still bind. Supersedes
 [`2026-09-11-HANDOFF-lbl-listen1-read.md`](2026-09-11-HANDOFF-lbl-listen1-read.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

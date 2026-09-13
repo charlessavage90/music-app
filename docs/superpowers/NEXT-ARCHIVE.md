@@ -2326,3 +2326,64 @@ does not record how far down the list he has got.**
 2. **Merge PR #116.**
 3. **Rule on `LBD-D6`** if route 1 is in play; it gates that route and nothing else here.
 4. **Choose a route**, with the session he has said he will use for it.
+
+---
+
+## 2026-09-12 — the `LBD-AM6` preparation of `LBL-` listen 2
+
+*Demoted 2026-09-13 at the `LBL-` listen-2 read closeout. The listen it prepared has since been
+run, unblinded and read — `LBL-R2`, the tie
+([`findings/2026-09-13-lbl-listen2-results.md`](findings/2026-09-13-lbl-listen2-results.md)) — so
+every "PREPARED and UNRUN" sentence below is spent. What still binds from it is in `NEXT.md`'s
+registries.*
+
+**Last updated: 2026-09-12, at the `LBD-AM6` preparation of `LBL-` listen 2.** **Nothing a
+listener sees changed in this work** — the live site is as the 2026-09-08 deploy left it, and
+`TEST-QUEUE.md` is still his to press, untouched here. *(That sentence said "three entries" when
+the `LBL-` session wrote it, and was true then. The `DLS-` branch turned that file into a
+checklist in the same hours; the same three changes are now 15 boxes. Corrected at the merge by
+the branch that caused it, not by the one that wrote the sentence.)*
+
+**`LBL-` listen 2 is PREPARED and UNRUN.** The owner chose the route on 2026-09-12: keep the
+registered comparison — `LBD-A0V` against `LBD-A5V`, *does accepting a connection two listeners
+support, instead of four, give better journeys?* — and **re-draw the pairs**, with the six
+instrument fixes listen 1's findings note §4 asked for. Committed as **`LBD-AM6`**, before any
+listen-2 journey existed. Branch `lbl-listen2-prep`, **PR #122** (addresses only; `gh` says where
+they are).
+
+**What changed, in plain terms.** Listen 1 tied because the pairs were too easy, not because the
+maps are alike — most rows he could not call were rows where he knew every artist on both sides.
+So candidate pairs were screened, before the amendment was written, on two properties: the journey
+must be long enough to have a shape at every depth on both maps, and the two maps must actually
+disagree. Survivors were then ranked by how few of the artists in between he already knows. **The
+screen never looked at which map was better, only at how much they differed** — a screen that
+preferred one map's journeys would have hand-picked the pairs that map wins on. Counts are owned by
+[`../../builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md`](../../builder/analysis/2026-09-10-lbd-blind-listen/lbl_prescreen2.md)
+and restated nowhere.
+
+**Every read is unchanged.** `LBL-R1`–`LBL-R4`, their listen-2 plain sentences, the margin bar and
+the row count are exactly as `LBD-AM5-5` registered them. Each row now also asks whether the two
+questions pulled him in opposite directions, and how strong each pick was — **and the tally does
+not read the strength.** A tally that did would be a different read wearing the same names.
+
+**`LBD-D6` is RULED** (2026-09-12; quoted verbatim in `LBD-AM6-7`): `LBD-A4` is **waived for
+listen 2 and enforced before `S4`**.
+
+⛔ **No session starts the listen on its own initiative, and the session that prepared it may
+neither run it nor write it up** — it has seen journeys labelled by map. Entry point:
+[`2026-09-12-HANDOFF-lbl-listen2-prep.md`](2026-09-12-HANDOFF-lbl-listen2-prep.md).
+
+**What stays open whichever way listen 2 reads:** stopping the `LBD-` track remains a complete
+outcome, and `S4` — the adoption decision proper (population rule, API sizing, fame source, refresh
+procedure) — remains its own pre-registration and rebuild. ⚠ **No listen outcome adopts anything**,
+and `REQ-41` bars reading a tie as equivalence.
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
+does not record how far down the list he has got.**
+
+1. **Run the three queued use-the-app tests** — live since the 2026-09-08 deploy. Nothing
+   here changed them.
+2. **Merge PR #122.**
+3. **Decide whether to spend listen 2.** Everything is prepared; it costs his ear and a sitting.
+4. **When he does:** a fresh, mechanics-only session runs `RUNNER-BRIEF.md` end to end, and a
+   further fresh session writes up the result.

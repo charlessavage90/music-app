@@ -1,0 +1,122 @@
+{
+  "axes": {
+    "coherence": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 5,
+        "incumbent": 7
+      },
+      "margin_toward_challenger": -2,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "no_detectable_difference"
+    },
+    "novelty": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 4,
+        "incumbent": 2
+      },
+      "margin_toward_challenger": 2,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "no_detectable_difference"
+    }
+  },
+  "read": "LBL-R2",
+  "axes_named": [],
+  "sentence": "My ear cannot tell the two bars apart.",
+  "ear_tracking": {
+    "coherence": {
+      "rows": 12,
+      "fame_rows": 12,
+      "fame_lower": 8,
+      "payload_higher": 4,
+      "top1pct_degree_frac_lower": 5,
+      "length_longer": 3
+    },
+    "novelty": {
+      "rows": 6,
+      "fame_rows": 6,
+      "fame_lower": 6,
+      "payload_higher": 2,
+      "top1pct_degree_frac_lower": 1,
+      "length_longer": 2
+    }
+  },
+  "descriptive_only": {
+    "decides": "nothing — LBL-R1 to LBL-R4 read the row tally only",
+    "pick_strength": {
+      "coherence": {
+        "slight": {
+          "challenger": 4,
+          "incumbent": 7
+        },
+        "strong": {
+          "challenger": 1,
+          "incumbent": 0
+        }
+      },
+      "novelty": {
+        "slight": {
+          "challenger": 2,
+          "incumbent": 0
+        },
+        "strong": {
+          "challenger": 2,
+          "incumbent": 2
+        }
+      }
+    },
+    "tradeoff_rows": {
+      "yes": 0,
+      "no": 24,
+      "of_rows": 24
+    }
+  },
+  "mapping_unsealed": {
+    "e25216bf-b0ac-4bd3-bc5a-1f82a7d0274f|299278d3-25dd-4f30-bae4-5b571c28034d": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "c7423e0c-ab3e-4ab4-be10-cdff5a9d3062|43dcec48-1764-4055-91ac-afe8a4d25cd1": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "52f612c7-9388-47aa-a3de-494d673671ac|664c3e0e-42d8-48c1-b209-1efca19c0325": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "2aaf7396-6ab8-40f3-9776-a41c42c8e26b|39c2a93d-9afa-4a22-9bba-c087ab056e1c": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "b4691384-50c3-4afd-9988-51d3ec5db65d|75167b8b-44e4-407b-9d35-effe87b223cf": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "f98711e5-06f7-43ed-8239-da0f61a9c460|fb2df245-81b0-4a2b-9d01-e0955ba68be7": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "f1548c5b-329e-4036-921c-02213a04b525|0039c7ae-e1a7-4a7d-9b49-0cbc716821a6": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "e9c97fdb-9fa0-4955-9a6c-1c43e1ac3f64|bb2b7bbf-75e5-43f8-8a9f-7769ae7d832a": {
+      "L": "incumbent",
+      "R": "challenger"
+    }
+  },
+  "maps": {
+    "incumbent": {
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBD-A0V.bin",
+      "sha256": "494c53d52654f6918a4176eef91f291558b0e56d71a4ea16c8070ad8ba3e34bb"
+    },
+    "challenger": {
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBD-A5V.bin",
+      "sha256": "2d34746e2cc8a6596ee15e390eea5a14ea7f13ede4ec2ba0608475157653ae63"
+    }
+  },
+  "substitutions": []
+}

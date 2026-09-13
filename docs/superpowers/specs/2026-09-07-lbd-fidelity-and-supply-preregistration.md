@@ -1287,8 +1287,17 @@ its own date. That property is the whole point of the document.
 ### `LBD-AM6` — listen 2's pairs re-drawn, and the six instrument fixes
 
 **Dated 2026-09-12. Listen 1's read existed when this was written; no journey existed on any map for
-listen 2**, and none has been generated since. The full text is the block at the end of **§10**.
+listen 2**, ~~and none has been generated since~~. The full text is the block at the end of **§10**.
 This entry is the register row.
+
+> ⚠ **EXECUTED 2026-09-13.** Listen 2 was generated, served, unblinded and read; the result is
+> [`../findings/2026-09-13-lbl-listen2-results.md`](../findings/2026-09-13-lbl-listen2-results.md) and it is
+> **`LBL-R2`, the tie** — margin 2 toward the incumbent on coherence, 2 toward the challenger on novelty,
+> against a bar of 8, with no row lost to a clip problem. The struck clause was true when written; it is
+> history, not status. **No value in this document changed and nothing is adopted** — `LBD-AM6-8`'s table
+> bars adoption on any outcome, `GBL-` §5's run-once rule now binds **both** listen verdicts, and
+> `LBD-X6` stands until `LBD-A4` has run and `R10` has been read. This paragraph is a status marker added
+> beside the entry it qualifies, per this section's own rule; nothing in the entry is edited.
 
 | | |
 |---|---|
