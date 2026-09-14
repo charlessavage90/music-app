@@ -47,7 +47,16 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-13, at the `LBD-A4` run and the `R10` read.** **Nothing a listener
+**Last updated: 2026-09-14 — a POINTER EDIT ONLY, not a `closeout` rewrite.** The `LBD-S4`
+adoption **pre-registration is now committed and UNEXECUTED**:
+[`specs/2026-09-14-lbd-s4-adoption-preregistration.md`](specs/2026-09-14-lbd-s4-adoption-preregistration.md)
+(identifiers `LBA-`), and the current handoff is
+[`2026-09-14-HANDOFF-lbd-s4-prereg.md`](2026-09-14-HANDOFF-lbd-s4-prereg.md), which supersedes the
+`LBD-A4` handoff on next actions. ⚠ **Committing it does NOT start it** — nothing was derived,
+emitted, built, censused or listened to, and **whether `S4` is executed at all is the owner's**.
+The block below is otherwise as the 2026-09-13 closeout left it and is not restated here.
+
+**Previously updated: 2026-09-13, at the `LBD-A4` run and the `R10` read.** **Nothing a listener
 sees changed in this work** — the live site is as the 2026-09-08 deploy left it, and
 `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
 
@@ -107,6 +116,11 @@ does not record how far down the list he has got.**
 4. **Decide what follows the `LBD-` track** — stop, `S4`, or something else. The listen-2
    findings note's §6 and the `LBD-A4` README's §8 set out what is left open, and both
    deliberately recommend nothing.
+   ⚠ **Amended 2026-09-14:** `S4`'s pre-registration now exists and is **committed and
+   unexecuted**, so this decision is now *whether to execute it*, against a design he can read
+   rather than a description. It recommends nothing, and **stopping the track here remains a
+   complete outcome.**
+5. **Merge the `lbd-s4-adoption-prereg` PR.**
 
 ---
 
