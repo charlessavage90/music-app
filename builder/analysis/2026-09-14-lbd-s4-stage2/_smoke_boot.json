@@ -1,0 +1,15 @@
+{
+  "label": "SMOKE-served",
+  "artifact": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+  "repeat": 0,
+  "artists": 58838,
+  "csr_entries": 1315684,
+  "working_set_before_load": 30597120,
+  "working_set_after_load": 65155072,
+  "working_set_delta": 34557952,
+  "process_peak_before_load": 30597120,
+  "process_peak_after_load": 101285888,
+  "process_peak_after_load_mib": 96.59,
+  "load_seconds": 0.062,
+  "measured_utc": "2026-09-14T23:22:30.791649+00:00"
+}

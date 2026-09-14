@@ -1,0 +1,9 @@
+# Working state of the stage-2 run, not its record.
+#
+# `_logs/` is `Tee-Object` output and is UTF-16; the durable per-cell record is the committed
+# `s4_build_*.json`, `s4_sizing.json` and the README, each of which carries the same figures in a
+# form a later reader can actually parse.
+_logs/
+# `_boot/` holds one JSON per boot-RSS repeat — three per artifact, a dozen-odd files whose only
+# consumer is `s4_sizing.py`, which folds the medians and every raw repeat into `s4_sizing.json`.
+_boot/
