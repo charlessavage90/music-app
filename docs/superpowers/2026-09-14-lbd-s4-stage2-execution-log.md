@@ -55,6 +55,54 @@ raw census figure is never compared with `LBA-G1`(a)'s bar directly."*
 
 ---
 
+## Which §7 reads stage 2 can reach — recorded BEFORE any build result existed
+
+**Written 2026-09-14, after task 1 and before the first build.** No cell had been built, no peak
+measured, no `LBA-G1` half read. It is recorded here rather than in the report so that it cannot
+have been shaped by which way a gate went — the reasoning below is the same whichever arm fires.
+
+**The session's instructions say "no read in §7 beyond `LBA-R0` is reachable until stage 3." The
+pre-registration's own run-state vocabulary says otherwise, and the pre-registration governs.**
+
+§7 defines *complete* = every cell either built or stopped by `LBA-G2` **with its bar recorded**,
+and *sized* = `LBA-M1`'s boot and query-cost halves taken on that arm. **Stage 2 as scoped produces
+both.** So:
+
+- **`LBA-R1`, `LBA-R2` and `LBA-R3` presuppose exactly "complete **and** sized" and nothing else.**
+  They are the three mutually exclusive hosting outcomes — no arm fires `LBA-G1`; some do and some
+  do not; every arm above `V` does — so **exactly one of them will be true**, and reporting none of
+  them would be withholding a read the design licenses.
+- **`LBA-R4`, `LBA-R4-V` and `LBA-R5`–`LBA-R9` are NOT reachable** and are not read. `LBA-R4` and
+  `LBA-R5`–`LBA-R7` rest on `LBA-M2` and `LBA-M3`, which stage 2 does not take; `LBA-R8` needs
+  *censused*, which `LBA-G3` has made unavailable; `LBA-R9` needs *complete, sized **and**
+  censused*. `LBA-R4-V` presupposes only *derived* and was **already settled on the committed
+  record before stage 1** — §7 says so in its own row, precisely so it cannot later be reported as
+  a finding of this design, and nothing here reports it as one.
+
+**So the report reads `LBA-R0` and exactly one of `LBA-R1`/`LBA-R2`/`LBA-R3`, and stops there.**
+The instruction is followed in substance — no decision read, no arm selected, nothing that needs
+stage 3 — and the one place it is narrower than the document is named rather than quietly obeyed,
+because silently withholding a licensed read is as much a departure from a pre-registration as
+taking an unlicensed one.
+
+⚠ **`LBA-R1`'s read contains a clause stage 2 cannot support, and it is not repeated.** Its text
+continues *"the decision then rests on `LBA-M2`, `LBA-M3` and `LBA-M4` alone"* — true as a statement
+about where the decision sits, but those three are unmeasured here, and **no sentence in the report
+may present that clause as though this stage had evidence about them.**
+
+## A contingency, fixed before it could arise
+
+**A build that dies on memory is NOT a cell "stopped by `LBA-G2`", and will not be reported as
+one.** The gate stops a cell *before* it is built, on a projection, with the bar recorded. A build
+that is attempted and then fails — `MemoryError`, or the OS killing it — is a different event, and
+the honest record says so in those words: *attempted and failed on memory, not stopped by
+`LBA-G2`*. §2.6's three barred conclusions apply to it just the same, because they are about what
+an **unbuilt** cell licenses, which is unchanged by how it came to be unbuilt. **No gate reading is
+invented for it**, and the projection that preceded it is reported beside the failure, since a
+projection that said "safe" before a build that then died is itself worth knowing.
+
+---
+
 ## Task 1 — the instrument, and the wrappers stage 2 needs
 
 **Done.** Self-test run on this machine; two wrappers and one shared module written as forward
