@@ -261,7 +261,7 @@ a test can be as wrong as the thing it tests.
 | **A2-next** `NEXT.md` | rewritten wholesale; the outgoing block and 22 discharged deferral rows demoted to `NEXT-ARCHIVE.md`. **Git state deliberately absent** — branch and PR named as addresses, the owner's actions as an ordered sequence |
 | **A3** deferrals | two conditions re-tested against reality rather than confirmed to exist; **both had come due** — see below |
 | **A4** default-flip | **inapplicable** — no config knob added, no default touched, no shipped code changed |
-| **A5** processes | **no listener on 8000 or 5173**; nothing to stop and nothing left running. C1 queued nothing, so no server is needed |
+| **A5** processes | **no listener on 8000 or 5173**; C1 queued nothing, so no server is needed. ⚠ **This row said "nothing left running" and that was WRONG** — see the correction below; one background shell task was still alive and the owner found it, not the check |
 | **B1** docs-lint + `doc-auditor` | lint: **2 hard failures, both my own new documents unclassified in the map; fixed, re-run passes.** Auditor: **1 MEDIUM, and a genuine defect of omission** — the stage-1 README is cited by three documents as the figures owner and had **no map row**. The lint could not see it: its `DOCS` root is `docs/`, and the README is under `builder/analysis/`. Fixed. Everything else the auditor checked came back clean, including the two claims most worth doubting — that no document asserts an `LBA-G2` result, and that `LBA-AM2` states its own position honestly |
 | **B2** reachability | six new scripts, **0 inbound imports each** — correct for frozen research code, which is run and not imported. **One genuine orphan, deliberately:** `stage2_build_instrument.py` exists to be imported by a stage-2 wrapper that does not exist yet. **Unfinished, not abandoned**, and the handoff names who wires it in |
 | **B3** vacuous tests | the only new test is the build instrument's self-test, and it was **shown going red before it was believed** — including once genuinely, when its own expectation was wrong |
@@ -318,3 +318,40 @@ picks that item up.**
 `docs/README.md` went **564 → 567**: one row added for the stage-1 README (the auditor's finding),
 two for the new handoff and log, one demotion edited in place. It was already 164 lines over budget
 before this work and is `DLS-` item 5's to fix.
+
+### ⚠ A5 correction — a background shell task was left running, and the check as written could not see it
+
+**Found by the owner after the closing message claimed nothing was left running.** A background
+Bash task had been alive for roughly two and a half hours and was stopped on his prompt, not by
+this closeout.
+
+**What it was.** The first attempt at resolving the thirteen truncated sha256 prefixes to their
+full digests: a loop running `grep -rhoE` **over the whole working tree**. That is precisely the
+pattern `CLAUDE.md` warns about for collision checks — *"never the working directory, which walks
+`builder/scratch/`'s multi-GB dumps and takes minutes"* — and the warning is about a sweep that
+takes minutes; over a tree holding a 21 GB table and dozens of graph artifacts it took hours. It
+exceeded the 120-second foreground timeout, was moved to the background by the harness, and **was
+never reclaimed**. When stopped it had resolved **one** of thirteen prefixes.
+
+**It produced nothing and nothing depended on it.** It was superseded within a minute by
+`git grep` over tracked refs, which resolved eleven of the thirteen in under a second; the
+remaining two came from the two build READMEs. Every digest it would eventually have printed is
+independently asserted by `stage1_verify.py`, which checks all fourteen pins against the files. **No
+figure, no read and no conclusion in this work touches its output.** The cost was wasted disk I/O
+running alongside the real work — which also means the wall clocks recorded for the `T7` derivation
+and the nine-cell counts were taken with a full-tree grep competing for the same disk, so they are
+**upper bounds** rather than clean timings. They are far enough inside their budgets that nothing
+reads differently.
+
+**The process defect, which is the part worth keeping.** `closeout` **A5 sweeps listening ports**
+— `Get-NetTCPConnection` on 8000 and 5173 — and its own text argues for sweeping by listener rather
+than by task list, because *"a session sees only the tasks it owns, so `TaskList` reports an empty
+machine while yesterday's servers are still serving"*. That reasoning is right about **servers** and
+it left a gap: **a background task that binds no port is invisible to a port sweep, and this
+session's own tasks are exactly the ones it *can* see.** The two checks are complementary and A5
+currently runs only one. **A5 should sweep both** — ports for what other sessions left behind, and
+the session's own task list for what it started itself and never reclaimed.
+
+**Recorded rather than quietly fixed**, and not fixed in `closeout` here: amending a skill grows or
+changes the standing apparatus, which is the owner's call under D6's table, and the wording is his
+to approve. The measurement and the proposed shape are above; the edit is not made.
