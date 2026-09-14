@@ -85,6 +85,8 @@ fame source, refresh procedure) — remains its own pre-registration and rebuild
 `S4` arm records which pairing semantics it uses and why**, which `R10` firing makes a live
 requirement rather than bookkeeping.
 
+**An `S4` input is on the record:** [`findings/2026-09-13-lbd-adoption-inputs.md`](findings/2026-09-13-lbd-adoption-inputs.md) — the owner's three points for adoption that no `LBD-` criterion measures, each with its supporting section and that section's nuance; it recommends nothing.
+
 **Stopping the `LBD-` track here remains a complete outcome**, not an abandonment. **Which
 route follows is the owner's and no session proposes one.**
 
