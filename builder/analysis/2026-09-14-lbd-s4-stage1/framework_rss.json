@@ -1,0 +1,164 @@
+{
+  "task": "LBA- stage 1, step 2(a) -- framework_rss",
+  "run_utc": "2026-09-14T20:46:22.026356+00:00",
+  "machine": "the owner's Windows 11 workstation; Python 3.12.13, api/.venv",
+  "metric": "WorkingSetSize differenced at stage boundaries within ONE process, framework imported first; PeakWorkingSetSize reported, never differenced",
+  "artifact": "../builder/scratch/graph-msw-tu50.bin",
+  "artifact_artists": 58838,
+  "repeats": 3,
+  "median_deltas_bytes": {
+    "framework_modules": 38207488,
+    "store": 35151872,
+    "search": 1380352,
+    "app_objects": 4472832
+  },
+  "framework_rss_bytes": 44060672,
+  "framework_rss_mib": 42.0,
+  "framework_rss_definition": "s4: a booted process minus the store's own contribution = framework modules + ArtistSearch + the app objects",
+  "population_dependence": {
+    "constant_bytes": 42680320,
+    "constant_mib": 40.7,
+    "scaling_bytes_per_artist": 23.5,
+    "scaling_term": "ArtistSearch holds one normalised Python str per artist (search.py:27)",
+    "note": "s4 defines framework_rss on the served artifact. Applying THIS single figure to a larger arm understates it; apply constant + per-artist x N."
+  },
+  "median_final_working_set_bytes": 97574912,
+  "median_process_peak_bytes": 127512576,
+  "runs": [
+    {
+      "artists": 58838,
+      "graph_path": "../builder/scratch/graph-msw-tu50.bin",
+      "routes": 10,
+      "stages": [
+        {
+          "stage": "baseline",
+          "working_set": 18776064,
+          "peak": 18776064,
+          "note": "interpreter + this script, before any artistpath import"
+        },
+        {
+          "stage": "framework_imported",
+          "working_set": 56954880,
+          "peak": 56954880,
+          "note": "fastapi + starlette + pydantic + httpx + the api package"
+        },
+        {
+          "stage": "store_loaded",
+          "working_set": 92106752,
+          "peak": 127799296,
+          "note": "load_graph -> GraphStore over the served artifact"
+        },
+        {
+          "stage": "search_built",
+          "working_set": 93487104,
+          "peak": 127799296,
+          "note": "ArtistSearch: one normalised Python str per artist (SCALES)"
+        },
+        {
+          "stage": "app_created",
+          "working_set": 97959936,
+          "peak": 127799296,
+          "note": "httpx client + in-memory clip cache + resolver + FastAPI + middleware"
+        }
+      ],
+      "deltas": {
+        "framework_modules": 38178816,
+        "store": 35151872,
+        "search": 1380352,
+        "app_objects": 4472832
+      },
+      "final_working_set": 97959936,
+      "process_peak": 127799296
+    },
+    {
+      "artists": 58838,
+      "graph_path": "../builder/scratch/graph-msw-tu50.bin",
+      "routes": 10,
+      "stages": [
+        {
+          "stage": "baseline",
+          "working_set": 18870272,
+          "peak": 18870272,
+          "note": "interpreter + this script, before any artistpath import"
+        },
+        {
+          "stage": "framework_imported",
+          "working_set": 57114624,
+          "peak": 57114624,
+          "note": "fastapi + starlette + pydantic + httpx + the api package"
+        },
+        {
+          "stage": "store_loaded",
+          "working_set": 91815936,
+          "peak": 127512576,
+          "note": "load_graph -> GraphStore over the served artifact"
+        },
+        {
+          "stage": "search_built",
+          "working_set": 93270016,
+          "peak": 127512576,
+          "note": "ArtistSearch: one normalised Python str per artist (SCALES)"
+        },
+        {
+          "stage": "app_created",
+          "working_set": 97488896,
+          "peak": 127512576,
+          "note": "httpx client + in-memory clip cache + resolver + FastAPI + middleware"
+        }
+      ],
+      "deltas": {
+        "framework_modules": 38244352,
+        "store": 34701312,
+        "search": 1454080,
+        "app_objects": 4218880
+      },
+      "final_working_set": 97488896,
+      "process_peak": 127512576
+    },
+    {
+      "artists": 58838,
+      "graph_path": "../builder/scratch/graph-msw-tu50.bin",
+      "routes": 10,
+      "stages": [
+        {
+          "stage": "baseline",
+          "working_set": 18862080,
+          "peak": 18862080,
+          "note": "interpreter + this script, before any artistpath import"
+        },
+        {
+          "stage": "framework_imported",
+          "working_set": 57069568,
+          "peak": 57069568,
+          "note": "fastapi + starlette + pydantic + httpx + the api package"
+        },
+        {
+          "stage": "store_loaded",
+          "working_set": 92631040,
+          "peak": 127344640,
+          "note": "load_graph -> GraphStore over the served artifact"
+        },
+        {
+          "stage": "search_built",
+          "working_set": 92921856,
+          "peak": 127344640,
+          "note": "ArtistSearch: one normalised Python str per artist (SCALES)"
+        },
+        {
+          "stage": "app_created",
+          "working_set": 97574912,
+          "peak": 127344640,
+          "note": "httpx client + in-memory clip cache + resolver + FastAPI + middleware"
+        }
+      ],
+      "deltas": {
+        "framework_modules": 38207488,
+        "store": 35561472,
+        "search": 290816,
+        "app_objects": 4653056
+      },
+      "final_working_set": 97574912,
+      "process_peak": 127344640
+    }
+  ]
+}

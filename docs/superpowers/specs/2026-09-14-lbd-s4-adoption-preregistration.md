@@ -1224,3 +1224,95 @@ what makes `LBA-M1`'s new bytes definition computable without a rebuild.
 
 **Identifier `LBA-AM1`.** Collision-checked across every ref on 2026-09-14 together with the rest of
 the `LBA-` series: free.
+
+---
+
+### `LBA-AM2` — how `LBA-G2`'s first projection is obtained, and which stage-2 order governs
+
+**Dated 2026-09-14, written at the stage-1 seam.**
+
+> ### ⚠ What existed when this was written, stated plainly — it is NOT the `LBA-AM1` position
+>
+> **`LBA-AM1` could say "nothing had run". This amendment cannot, and the difference is
+> load-bearing.** `LBA-D8` **stage 1 has been executed**: all nine cells are derived and counted,
+> and the author of this amendment **knows every cell's archive-neighbour-row count** — which is
+> precisely `LBA-G2`'s x-axis. Figures are owned by
+> [`builder/analysis/2026-09-14-lbd-s4-stage1/README.md`](../../../builder/analysis/2026-09-14-lbd-s4-stage1/README.md).
+>
+> **What does NOT exist is `LBA-G2`'s y-axis.** No cell has been emitted or built, no peak RSS has
+> been measured, and the instrument that would measure one is not yet written. **So there is no
+> value of the gate's statistic for any arm, and this amendment cannot have been shaped to admit or
+> exclude a cell** — nothing has been projected.
+>
+> **The honest statement of what it spends:** it spends none of `LBA-G2`'s commit-before-results
+> property, because no build result exists. It is **not** written in ignorance of the cells' sizes,
+> and a reader weighing it should know that the ordering rule it settles was chosen by an author who
+> could already see which cells are large. The resolution below is therefore argued from the two
+> committed passages and from `LBD-AM5`'s completed builds, **not** from which cells it would be
+> convenient to reach — and it **stops no cell and reduces nothing**.
+
+**The conflict.** Three committed passages cannot all be acted on as written.
+
+1. **§3, `LBA-D8` stage 1:** *"This is the only measurement that can rule a cell out on resources
+   before any of it is spent, and **both `LBA-G2` and `LBA-G3` read off it**."* And §7's `LBA-R0`
+   gives the run state `derived`.
+2. **§5, `LBA-G2`'s firing clause:** *"projected from a fit over **every build already instrumented
+   in this stage**"* — stage 2 — and its derivation: *"**Stage 2 builds in ascending order of
+   archive neighbour rows** ... A cell is stopped when its projection from **all** instrumented
+   builds so far exceeds 24 GB."*
+3. **§10:** *"**`LBA-G2` cannot be evaluated until stage 2 adds it**"* — the peak-RSS
+   instrumentation.
+
+And a second conflict inside the same pair: **§3 `LBA-D8` fixes the stage-2 order as `A1`, `A4`,
+`A7`, `A2`, `A5`, `A8`, `A3`, `A6`, `A9`** *("control first, then each threshold across all three
+population rules, so that a partial run always holds a complete one-column comparison")*, while
+**§5 requires ascending archive-neighbour-row order**. With stage 1's counts in hand these are
+**not the same order** and the difference is material: under `LBA-D8`'s order the second cell built
+is `LBA-A7`, whose archive is **about twice** the first built cell's, so its projection would be a
+2× extrapolation from a **single** instrumented point — which cannot even define a fit with an
+intercept. §5's ordering rule exists to prevent exactly that.
+
+#### The resolution
+
+**(a) `LBA-G2` is read progressively during stage 2; stage 1 supplies only the x-axis.** §5 and §10
+govern the mechanism, and they are specific where `LBA-D8`'s one clause is loose. `LBA-D8`'s
+sentence is read as: stage 1 produces the **input** to both gates. That is true of `LBA-G3`, which
+`LBA-AM1-A11` moved to stage 1 outright and which **has now been read there**, and it is true of
+`LBA-G2` in the weaker sense that its x-axis — every cell's archive neighbour rows — is a stage-1
+product. **§7's `LBA-R0` is correspondingly read as reachable only once stage 2 has begun**, not at
+the close of stage 1.
+
+**(b) The first build is not evaluable by `LBA-G2`, and proceeds unconditionally.** With zero
+instrumented builds there is no fit, and the gate is silent rather than permissive. **It is not an
+unguarded step:** under (c) the first built cell is the smallest, and its archive lies **between the
+two archives `LBD-AM5` already built successfully on this machine** (`LBD-A0V`'s and `LBD-A5V`'s —
+the served-population README §2 owns both counts). So the first build is an interpolation in
+archive size between two completed builds, even though neither recorded a peak RSS. Its measured
+peak RSS becomes the first instrumented point.
+
+**(c) Stage 2 builds in ascending archive-neighbour-row order — §5's rule governs the sequence.**
+**And this costs `LBA-D8`'s stated rationale nothing; it improves on it.** `LBA-D8`'s order was
+written as though the control had to be built. It does not: `LBA-A1` and `LBA-A3` are **reused**
+(`LBA-D9`) and both already exist, and both sit on the `V` row. So under ascending order **the
+complete `V` row exists after the first build**, and the complete `P` row — which carries the only
+two one-column threshold reads `LBA-AM1-A9` admits, `LBA-A5` and `LBA-A6` against `LBA-A4` — is
+complete **earlier** than under `LBA-D8`'s order. A partial run therefore holds a complete
+one-column comparison sooner, which is what that clause asked for.
+
+**(d) The fit, stated so it is not chosen later.** With **one** instrumented point the only
+available projection is proportional (through the origin) and is labelled as such; with **two or
+more** it is a least-squares line in archive neighbour rows, intercept free. A cell is stopped when
+its projection from **all** instrumented builds so far exceeds **24 GB**. The bar is unchanged.
+
+**(e) The unit is unchanged and is restated because it has caused a refusal here before:**
+**archive neighbour rows, pre-cap, two per pair — never CSR entries.**
+
+#### What this amendment does NOT do
+
+- **It changes no arm, no population rule, no threshold and no bar.** The 3 × 3 lattice is exactly
+  as it was, and `LBA-D8`'s prohibition stands: a cell is stopped only on `LBA-G2`'s stated bar.
+- **It does not make `LBA-G2` readable at the close of stage 1**, and the stage-1 report claims no
+  `LBA-G2` result.
+- **It does not touch `LBA-G1`, `LBA-G3` or `LBA-G4`**, nor any measurement, read or exposure.
+
+**Identifier `LBA-AM2`.** Collision-checked across every ref on 2026-09-14: free.
