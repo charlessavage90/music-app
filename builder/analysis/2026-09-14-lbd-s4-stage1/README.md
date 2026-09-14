@@ -25,7 +25,7 @@ stage 2's use). Committed beside this file: `verify_T.json`, `u_probe.json`, `co
 
 ## 0. Inputs, every one verified before it was read
 
-`LBA-D9`. `stage1_verify.py`, output `verify_T.json`. **All 14 match; nothing was refused.**
+`LBA-D9`. `stage1_verify.py`, output `verify_T.json`. **All 14 match; nothing was refused.** *(The `--skip-large` run's `verify.json` was a strict subset of it and is not kept.)*
 
 | input | sha256 | bytes |
 |---|---|---:|

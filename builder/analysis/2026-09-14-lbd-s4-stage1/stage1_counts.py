@@ -4,10 +4,13 @@
 distinct-artist count and pair count, and the count of union members absent from the census
 coverage store. Minutes to a couple of hours, no emission, no build."
 
-Three tables, all sha-verified, none re-derived here:
-    threshold 10 -> A0.parquet   (already existed; LBD-A0)
+Three tables, none re-derived here. The two that the record pins are CHECKED against their
+pins and the script refuses on a mismatch; the third has no pin because this session created
+it, so its digest is RECORDED rather than verified, and the output says which is which:
+    threshold 10 -> A0.parquet   (already existed; LBD-A0)      -- pinned, checked
     threshold  7 -> T7.parquet   (derived by stage1_derive_t7.py, lbd_derive.py unedited)
-    threshold  3 -> A5.parquet   (already existed; LBD-A5)
+                                                                -- no pin; digest recorded
+    threshold  3 -> A5.parquet   (already existed; LBD-A5)      -- pinned, checked
 
 Three population rules (s2.1):
     V -- the pinned node set of the served map      (58,838 artists)
@@ -19,9 +22,10 @@ CSR entries. s5's warning: three edge units are in play in this track and the se
 README s0 records a build refused once for confusing two of them.
 
 GREEN CHECK, not a criterion. `LBA-A1` and `LBA-A3` are `LBD-A0V` and `LBD-A5V`, whose emitted
-pair counts, payload counts and neighbour rows are owned by the served-population README s2.
-This script reproduces all six figures and REFUSES to write its output otherwise -- so a
-disagreement is an instrument defect caught before any cell is read.
+pair counts, payload counts, neighbour rows and absent-from-table counts are owned by the
+served-population README s2 and s3 -- four figures for each of the two arms. This script
+reproduces all EIGHT and REFUSES to write its output otherwise, so a disagreement is an
+instrument defect caught before any cell is read.
 
     C:\\unsung-fast\\lbd-venv\\Scripts\\python.exe -u stage1_counts.py --out counts.json
 """
@@ -121,7 +125,8 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit(f"REFUSING: threshold-{t} table is {got}, pinned {pinned}")
         inputs[f"threshold_{t}_table"] = {"path": raw, "sha256": got,
                                           "pinned_on_the_record": bool(pinned)}
-        print(f"[counts] threshold {t:>2} table verified  {got[:16]}...", flush=True)
+        state = "checked against its pin" if pinned else "no pin on the record; recorded"
+        print(f"[counts] threshold {t:>2} table  {got[:16]}...  ({state})", flush=True)
 
     # The coverage store's state BEFORE anything reads it (the handoff: it is active data,
     # the census scripts read AND write it; this session only reads).

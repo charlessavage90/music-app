@@ -249,3 +249,72 @@ a test can be as wrong as the thing it tests.
   pre-registration. It carries no guidance of its own and says so. **Recorded because that is
   exactly the observation the `DLS-T1` probe was set up to make** — it fires on opening a spec, and
   it fired.
+
+---
+
+## `closeout` — full ritual
+
+| item | result |
+|---|---|
+| **A1** distil the log | this document, appended **per task** rather than at the end |
+| **A2** handoff note | [`2026-09-14-HANDOFF-lbd-s4-stage1.md`](2026-09-14-HANDOFF-lbd-s4-stage1.md); the predecessor's role line demoted and the map row with it, so the chain reads **forwards** |
+| **A2-next** `NEXT.md` | rewritten wholesale; the outgoing block and 22 discharged deferral rows demoted to `NEXT-ARCHIVE.md`. **Git state deliberately absent** — branch and PR named as addresses, the owner's actions as an ordered sequence |
+| **A3** deferrals | two conditions re-tested against reality rather than confirmed to exist; **both had come due** — see below |
+| **A4** default-flip | **inapplicable** — no config knob added, no default touched, no shipped code changed |
+| **A5** processes | **no listener on 8000 or 5173**; nothing to stop and nothing left running. C1 queued nothing, so no server is needed |
+| **B1** docs-lint + `doc-auditor` | lint: **2 hard failures, both my own new documents unclassified in the map; fixed, re-run passes.** Auditor: **1 MEDIUM, and a genuine defect of omission** — the stage-1 README is cited by three documents as the figures owner and had **no map row**. The lint could not see it: its `DOCS` root is `docs/`, and the README is under `builder/analysis/`. Fixed. Everything else the auditor checked came back clean, including the two claims most worth doubting — that no document asserts an `LBA-G2` result, and that `LBA-AM2` states its own position honestly |
+| **B2** reachability | six new scripts, **0 inbound imports each** — correct for frozen research code, which is run and not imported. **One genuine orphan, deliberately:** `stage2_build_instrument.py` exists to be imported by a stage-2 wrapper that does not exist yet. **Unfinished, not abandoned**, and the handoff names who wires it in |
+| **B3** vacuous tests | the only new test is the build instrument's self-test, and it was **shown going red before it was believed** — including once genuinely, when its own expectation was wrong |
+| **B4** prose vs code | **three corrections, all in my own output.** `stage1_counts.py` claimed all three tables were sha-**verified** when the threshold-7 table has no pin to check against; it claimed **six** green-check figures when it compares **eight**; and its per-table print said *"verified"* for all three. All three were true-sounding and wrong. Also dropped `verify.json`, a strict subset of `verify_T.json` that the README did not list |
+| **B5** stale descriptions | **no `.claude/` or `memory/` file changed.** No figure this work produced is restated outside the stage-1 README, and the README restates none owned elsewhere — the auditor checked this independently |
+| **B6** budgets | `NEXT.md` **465 → 435** (budget 250), `docs/README.md` **564 → 567** (budget 400), `TEST-QUEUE.md` **70** (budget 70, at it). See below |
+| **C1** use the app | **nothing written in `TEST-QUEUE.md`, and that is the discharge.** This work changed nothing a listener or the owner can press: no shipped code, no default, no deploy |
+| **D1** clean tree | clean after the final commit |
+| **D2** fixtures | **inapplicable** — no artifact changed and no fixture is affected |
+| **D3** provenance | one uncommittable artifact produced, `T7.parquet`, sha256 and row count recorded in the README §0 and the handoff's artifacts table |
+| **D4** suites | **builder 290 passed, api 295 passed, frontend 188 passed across 29 files.** Run, not asserted from memory. No shipped code changed, so green was expected — it is evidence that nothing was disturbed, not that anything was proved |
+| **D5** PR | opened as a draft against `main` |
+| **D6** standing context layer | **unconditional 50,977 characters, conditional 2,726 lines — both EXACTLY unchanged** from the 2026-09-13 figures. This session added no rule, no memory, no skill or agent description |
+| **D7** retire | the `/rename` line is in the closing message |
+
+### A3 — the two conditions that had come due
+
+**Both were open items whose conditions had already been satisfied, which is the failure mode A3
+names: a satisfied condition nobody reads is indistinguishable from an open one.**
+
+1. **The line-budget row** — condition *"when no second session is live in the tree"*. The
+   `SessionStart` repo-state report says no other worktrees; §C found no uncommitted work this
+   session did not create. **First time the condition has held.** Its `NEXT.md` half is discharged
+   here: the outgoing status block and 22 discharged deferral rows are demoted. Its
+   `docs/README.md` half is **`DLS-` item 5's**, not this session's, and stays open.
+2. **The `DLS-T1` read** — its row says to record new observations in the findings' §6b, not in
+   `NEXT.md`. **Recorded**, as row 6 plus a new caveat `DLS-T1-X7`, from this session's own
+   `instructions-loaded.jsonl` rather than from recollection.
+
+⚠ **The observation cuts against the instrument's stated exclusion rule, and it is recorded that
+way rather than as a clean hit.** This session opened the pre-registration **exclusively through
+Bash**, never once through the `Read` tool, and `plans.md` loaded anyway. That is the second such
+row, so `DLS-T1-X1`'s premise — that a Bash-reading session cannot be a qualifying session — is now
+contradicted twice. **What it does not settle is the timing:** the load fired ~35 minutes after the
+first Bash read, well into the writing phase, so what the trigger keys on is still unknown. Two
+loads whose trigger nobody can name are weaker evidence than one whose trigger is known, and the
+caveat says so.
+
+### B6 — over budget, reported rather than fixed by compression
+
+`NEXT.md` is **435 lines against a 250-line budget** after the demotions, and the reason is not the
+status block: it is the registries. **16 table rows exceed the ~600-character per-row budget**, and
+the tables total ~29,200 characters. Those rows are *reasoning* — why a thing was closed, what was
+measured, what a future session must not re-propose — attached to documents whose job is to say
+*what to do*.
+
+**Not fixed here, deliberately.** The legitimate moves were taken (demote the status block, demote
+the discharged rows). The remaining excess would have to come from compressing live prose, which
+`B6-budget` and D6 both forbid, or from moving 16 rows' reasoning into findings documents and
+leaving pointers — which is a wholesale table rewrite of the file concurrent sessions collide on,
+and is `DLS-` item 5's shape. **Recorded as a measurement, with the mechanism named, for whoever
+picks that item up.**
+
+`docs/README.md` went **564 → 567**: one row added for the stage-1 README (the auditor's finding),
+two for the new handoff and log, one demotion edited in place. It was already 164 lines over budget
+before this work and is `DLS-` item 5's to fix.

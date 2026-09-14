@@ -232,6 +232,24 @@ gitignored, so this table is the durable copy.
 | 3 | 2026-09-12 16:02 | `652d311c` | none | the alpha rollout roadmap | `path_glob_match` | **Yes — qualifying session 1 of 3** |
 | 4 | 2026-09-12 16:28 | `fb3fe80b` | none | none; read via Bash | no load | **No** — same confound as #1 |
 | 5 | 2026-09-13 16:49 | `84c3abb9` | none | the `LBD-` fidelity spec, opened **via Bash** | `path_glob_match` | **Unruled, and it contradicts #1 and #4** — see `DLS-T1-X6` |
+| 6 | 2026-09-14 20:42 | `e3cd11fc` | none | the `LBA-` adoption pre-registration, opened **via Bash throughout** | `path_glob_match` | **Unruled, and it agrees with #5 against #1 and #4** — see `DLS-T1-X6` |
+| 7 | 2026-09-14 13:40, 13:57, 15:14 | `a20eb50d` | none | the `LBA-` adoption pre-registration | `path_glob_match` ×3 | **Unruled** — the authoring session; three loads, one session |
+
+**`DLS-T1-X7` — row 6 is a second Bash-only session that DID load the rule, and two of them now
+outweigh the original confound.** Added 2026-09-14 by the `LBA-` stage-1 session, from its own
+`instructions-loaded.jsonl`. That session opened the pre-registration **exclusively through Bash**
+(`sed -n`, `grep`) under Auto Mode's injected preference, never once through the `Read` tool, and
+appended to it through a Bash heredoc — and `plans.md` loaded anyway, `load_reason`
+`path_glob_match`, `trigger_file_path` the spec. **So rows 5 and 6 agree, and `DLS-T1-X1`'s
+premise — that a Bash-reading session cannot be a qualifying session because the rule cannot reach
+it — is now contradicted twice.** ⚠ **What this does not settle: the timing.** The load fired at
+20:42, roughly thirty-five minutes after that session's first Bash read of the spec and well into
+its writing phase, so **what the trigger actually keys on is not established by this row** — an
+open, a write, or something else. The read must not score rows 5 and 6 as plain qualifying
+sessions without ruling on that; two loads whose trigger nobody can name are weaker evidence than
+one whose trigger is known. **What it does settle is that `DLS-T1-X1`'s exclusion rule can no
+longer be applied mechanically**, and a read that silently excludes rows 1 and 4 on it now owes a
+sentence saying why those differ from 5 and 6.
 
 **`DLS-T1-X1` — the Bash-reading confound, and what it does and does not mean.** Sessions here
 often run under an instruction to read files with `cat`/`sed` through Bash rather than the `Read`
