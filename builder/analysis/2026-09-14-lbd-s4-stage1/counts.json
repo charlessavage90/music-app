@@ -1,0 +1,260 @@
+{
+  "task": "LBA- stage 1 -- derive and count all nine cells; read LBA-G3",
+  "run_utc": "2026-09-14T20:39:00.920783+00:00",
+  "duckdb_version": "1.5.5",
+  "inputs": {
+    "threshold_10_table": {
+      "path": "C:\\unsung-fast\\lbd-pairs\\A0\\A0.parquet",
+      "sha256": "f9bd1f835076f22f1b1da444e1aff92dc2ef8f34667a579c82a0848e7fe4821e",
+      "pinned_on_the_record": true
+    },
+    "threshold_7_table": {
+      "path": "C:\\unsung-fast\\lbd-pairs\\T7\\T7.parquet",
+      "sha256": "252b88d9e2f8e304e035a0befd709ad87c2753d2af4675a0139e71b076520c6c",
+      "pinned_on_the_record": false
+    },
+    "threshold_3_table": {
+      "path": "C:\\unsung-fast\\lbd-pairs\\A5\\A5.parquet",
+      "sha256": "f34cd88957d3ab42b000fb33d23ae7f9aad1dbdb72d2d0b1cab5d34f024a19ff",
+      "pinned_on_the_record": true
+    }
+  },
+  "coverage_store": {
+    "path": "C:\\dev\\music-app\\builder\\analysis\\census-coverage\\ulf_coverage.json",
+    "artists_before": 129746,
+    "sha256_before": "385f7c04072ddf375ac2f7ba0dd496b8c70093754e86582ab0ec41839b02321a",
+    "sha256_after": "385f7c04072ddf375ac2f7ba0dd496b8c70093754e86582ab0ec41839b02321a",
+    "unchanged": true,
+    "note": "this session READS the store and never writes it; the census pass is not run"
+  },
+  "population_sizes": {
+    "V": 58838,
+    "P": 88685
+  },
+  "cells": [
+    {
+      "arm": "LBA-A1",
+      "plain_sentence": "the artists the app serves today, connected by our own recomputation at the same strength bar ListenBrainz used",
+      "threshold": 10,
+      "distinct_listeners_required": 4,
+      "population_rule": "V",
+      "filter": "on, inert (20260805)",
+      "population_source_size": 58838,
+      "artists": 57620,
+      "pairs": 4175136,
+      "archive_neighbour_rows": 8350272,
+      "population_members_absent_from_table": 1218,
+      "population_absent_from_coverage_store": 0,
+      "wall_clock_s": 0.4
+    },
+    {
+      "arm": "LBA-A2",
+      "plain_sentence": "the same artists, but a connection is kept when three different people's listening supports it instead of four",
+      "threshold": 7,
+      "distinct_listeners_required": 3,
+      "population_rule": "V",
+      "filter": "on, inert (20260805)",
+      "population_source_size": 58838,
+      "artists": 57852,
+      "pairs": 4468365,
+      "archive_neighbour_rows": 8936730,
+      "population_members_absent_from_table": 986,
+      "population_absent_from_coverage_store": 0,
+      "wall_clock_s": 0.5
+    },
+    {
+      "arm": "LBA-A3",
+      "plain_sentence": "the same artists, but two people are enough",
+      "threshold": 3,
+      "distinct_listeners_required": 2,
+      "population_rule": "V",
+      "filter": "on, inert (20260805)",
+      "population_source_size": 58838,
+      "artists": 58197,
+      "pairs": 4970814,
+      "archive_neighbour_rows": 9941628,
+      "population_members_absent_from_table": 641,
+      "population_absent_from_coverage_store": 0,
+      "wall_clock_s": 0.6
+    },
+    {
+      "arm": "LBA-A4",
+      "plain_sentence": "every artist the deeper crawl found, at ListenBrainz's own bar",
+      "threshold": 10,
+      "distinct_listeners_required": 4,
+      "population_rule": "P",
+      "filter": "on, inert (20260809)",
+      "population_source_size": 88685,
+      "artists": 86854,
+      "pairs": 5637469,
+      "archive_neighbour_rows": 11274938,
+      "population_members_absent_from_table": 1831,
+      "population_absent_from_coverage_store": 0,
+      "wall_clock_s": 0.9
+    },
+    {
+      "arm": "LBA-A5",
+      "plain_sentence": "every artist the deeper crawl found, at the three-listener bar",
+      "threshold": 7,
+      "distinct_listeners_required": 3,
+      "population_rule": "P",
+      "filter": "on, inert (20260809)",
+      "population_source_size": 88685,
+      "artists": 87227,
+      "pairs": 6261508,
+      "archive_neighbour_rows": 12523016,
+      "population_members_absent_from_table": 1458,
+      "population_absent_from_coverage_store": 0,
+      "wall_clock_s": 1.1
+    },
+    {
+      "arm": "LBA-A6",
+      "plain_sentence": "every artist the deeper crawl found, at the two-listener bar",
+      "threshold": 3,
+      "distinct_listeners_required": 2,
+      "population_rule": "P",
+      "filter": "on, inert (20260809)",
+      "population_source_size": 88685,
+      "artists": 87764,
+      "pairs": 7396691,
+      "archive_neighbour_rows": 14793382,
+      "population_members_absent_from_table": 921,
+      "population_absent_from_coverage_store": 0,
+      "wall_clock_s": 1.4
+    },
+    {
+      "arm": "LBA-A7",
+      "plain_sentence": "every artist anywhere in ListenBrainz's listening data who gets a connection at ListenBrainz's own bar - not just the ones our crawl happened to discover",
+      "threshold": 10,
+      "distinct_listeners_required": 4,
+      "population_rule": "U",
+      "filter": "off, uncensused",
+      "population_source_size": null,
+      "artists": 366996,
+      "pairs": 11340639,
+      "archive_neighbour_rows": 22681278,
+      "population_members_absent_from_table": null,
+      "population_absent_from_coverage_store": 249587,
+      "wall_clock_s": 0.5,
+      "LBA-X6": "U's membership moves with the threshold; a U-row threshold comparison has the population as a dependent variable",
+      "caveat": "TABLE-LEVEL. U's definition applies the drop lists and the largest-component prune, both of which need a build. This count is an upper bound on the built node count."
+    },
+    {
+      "arm": "LBA-A8",
+      "plain_sentence": "the same, at the three-listener bar",
+      "threshold": 7,
+      "distinct_listeners_required": 3,
+      "population_rule": "U",
+      "filter": "off, uncensused",
+      "population_source_size": null,
+      "artists": 456469,
+      "pairs": 14654446,
+      "archive_neighbour_rows": 29308892,
+      "population_members_absent_from_table": null,
+      "population_absent_from_coverage_store": 338138,
+      "wall_clock_s": 0.6,
+      "LBA-X6": "U's membership moves with the threshold; a U-row threshold comparison has the population as a dependent variable",
+      "caveat": "TABLE-LEVEL. U's definition applies the drop lists and the largest-component prune, both of which need a build. This count is an upper bound on the built node count."
+    },
+    {
+      "arm": "LBA-A9",
+      "plain_sentence": "the same, at the two-listener bar",
+      "threshold": 3,
+      "distinct_listeners_required": 2,
+      "population_rule": "U",
+      "filter": "off, uncensused",
+      "population_source_size": null,
+      "artists": 679232,
+      "pairs": 26127091,
+      "archive_neighbour_rows": 52254182,
+      "population_members_absent_from_table": null,
+      "population_absent_from_coverage_store": 559759,
+      "wall_clock_s": 1.1,
+      "LBA-X6": "U's membership moves with the threshold; a U-row threshold comparison has the population as a dependent variable",
+      "caveat": "TABLE-LEVEL. U's definition applies the drop lists and the largest-component prune, both of which need a build. This count is an upper bound on the built node count."
+    }
+  ],
+  "green_check": {
+    "LBA-A1": {
+      "expected": [
+        4175136,
+        57620,
+        8350272,
+        1218
+      ],
+      "got": [
+        4175136,
+        57620,
+        8350272,
+        1218
+      ],
+      "match": true,
+      "source": "served-population README s2 and s3"
+    },
+    "LBA-A3": {
+      "expected": [
+        4970814,
+        58197,
+        9941628,
+        641
+      ],
+      "got": [
+        4970814,
+        58197,
+        9941628,
+        641
+      ],
+      "match": true,
+      "source": "served-population README s2 and s3"
+    }
+  },
+  "nesting_check": {
+    "U10_subset_of_U7": {
+      "members_outside": 0,
+      "holds": true
+    },
+    "U7_subset_of_U3": {
+      "members_outside": 0,
+      "holds": true
+    },
+    "U10_subset_of_U3": {
+      "members_outside": 0,
+      "holds": true
+    }
+  },
+  "LBA-G3": {
+    "gate": "LBA-G3",
+    "plain_sentence": "working out which artists are unplayable would take too long",
+    "bar_hours": 6.0,
+    "union_members": 680032,
+    "union_members_absent_from_coverage_store": 559759,
+    "coverage_store_artists": 129746,
+    "two_point_fit": {
+      "points": [
+        {
+          "census": "ulc-census-2026-08-05",
+          "elapsed_s": 3638.0,
+          "fresh_artists": 8137
+        },
+        {
+          "census": "cex-recensus-2026-08-09",
+          "elapsed_s": 5819.7,
+          "fresh_artists": 31450
+        }
+      ],
+      "scan_floor_s": 2876.5,
+      "marginal_s_per_artist": 0.093583,
+      "projected_s": 55260.4,
+      "projected_hours": 15.35
+    },
+    "single_point_sensitivity": {
+      "basis": "the 2026-08-09 pass alone: whole elapsed over its fresh artists, no floor",
+      "s_per_artist": 0.185046,
+      "projected_s": 103581.2,
+      "projected_hours": 28.77
+    },
+    "fires": true,
+    "fires_on_sensitivity": true,
+    "wall_clock_s": 0.6
+  }
+}

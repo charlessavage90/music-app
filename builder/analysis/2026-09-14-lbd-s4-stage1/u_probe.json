@@ -1,0 +1,42 @@
+{
+  "task": "LBA- stage 1 -- U population probe (proposal 1, run before the instruments)",
+  "run_utc": "2026-09-14T20:32:21.709914+00:00",
+  "caveat": "TABLE-LEVEL populations. U's definition applies the drop lists and the largest-component prune, both of which need a build. These counts are a superset of the built node count -- conservative for LBA-G3.",
+  "duckdb_version": "1.5.5",
+  "tables": {
+    "U(threshold 10)": {
+      "table": "C:\\unsung-fast\\lbd-pairs\\A0\\A0.parquet",
+      "threshold": 10,
+      "arm": "LBA-A7",
+      "pairs": 11340639,
+      "artists_table_level": 366996,
+      "archive_neighbour_rows_unrestricted": 22681278,
+      "wall_clock_s": 0.2
+    },
+    "U(threshold 3)": {
+      "table": "C:\\unsung-fast\\lbd-pairs\\A5\\A5.parquet",
+      "threshold": 3,
+      "arm": "LBA-A9",
+      "pairs": 26127091,
+      "artists_table_level": 679232,
+      "archive_neighbour_rows_unrestricted": 52254182,
+      "wall_clock_s": 0.5
+    }
+  },
+  "nesting_check": {
+    "claim": "U(10) is a subset of U(3) -- a looser bar cannot drop a pair a tighter bar kept",
+    "members_of_U10_absent_from_U3": 0,
+    "holds": true,
+    "wall_clock_s": 0.7
+  },
+  "union": {
+    "definition": "U(3) UNION V UNION P -- the union of all nine cells' populations, by the nesting above",
+    "union_members": 680032,
+    "in_U3_only": 591302,
+    "in_V_but_not_U3": 551,
+    "in_P_but_not_U3": 799,
+    "V_size": 58838,
+    "P_size": 88685,
+    "wall_clock_s": 0.7
+  }
+}

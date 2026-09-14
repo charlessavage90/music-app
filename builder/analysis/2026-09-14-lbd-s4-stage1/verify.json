@@ -1,0 +1,171 @@
+{
+  "task": "LBA- stage 1, task 1 -- pinned-artifact verification",
+  "run_utc": "2026-09-14T20:29:43.442649+00:00",
+  "machine": "the owner's Windows 11 workstation, repo at C:\\dev\\music-app",
+  "pins_checked": 13,
+  "failures": [],
+  "rows": [
+    {
+      "label": "A0.parquet",
+      "path": "C:\\unsung-fast\\lbd-pairs\\A0\\A0.parquet",
+      "bytes": 80282502,
+      "expected": "f9bd1f835076f22f1b1da444e1aff92dc2ef8f34667a579c82a0848e7fe4821e",
+      "expected_is_prefix_only": false,
+      "sha256": "f9bd1f835076f22f1b1da444e1aff92dc2ef8f34667a579c82a0848e7fe4821e",
+      "sha_status": "OK",
+      "source": "prereg s10; Task 4 README s6",
+      "status": "OK"
+    },
+    {
+      "label": "A5.parquet",
+      "path": "C:\\unsung-fast\\lbd-pairs\\A5\\A5.parquet",
+      "bytes": 214892336,
+      "expected": "f34cd88957d3ab42b000fb33d23ae7f9aad1dbdb72d2d0b1cab5d34f024a19ff",
+      "expected_is_prefix_only": false,
+      "sha256": "f34cd88957d3ab42b000fb33d23ae7f9aad1dbdb72d2d0b1cab5d34f024a19ff",
+      "sha_status": "OK",
+      "source": "prereg s10; served-population README s1",
+      "status": "OK"
+    },
+    {
+      "label": "LBD-A0V.bin (= LBA-A1)",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBD-A0V.bin",
+      "bytes": 25738850,
+      "expected": "494c53d52654f6918a4176eef91f291558b0e56d71a4ea16c8070ad8ba3e34bb",
+      "expected_is_prefix_only": false,
+      "sha256": "494c53d52654f6918a4176eef91f291558b0e56d71a4ea16c8070ad8ba3e34bb",
+      "sha_status": "OK",
+      "source": "served-population README s5",
+      "status": "OK"
+    },
+    {
+      "label": "LBD-A5V.bin (= LBA-A3)",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBD-A5V.bin",
+      "bytes": 26892406,
+      "expected": "2d34746e2cc8a6596ee15e390eea5a14ea7f13ede4ec2ba0608475157653ae63",
+      "expected_is_prefix_only": false,
+      "sha256": "2d34746e2cc8a6596ee15e390eea5a14ea7f13ede4ec2ba0608475157653ae63",
+      "sha_status": "OK",
+      "source": "served-population README s5",
+      "status": "OK"
+    },
+    {
+      "label": "A0V archive MANIFEST",
+      "path": "C:\\unsung-fast\\lbd-archives\\A0V\\MANIFEST.json",
+      "bytes": 3405,
+      "expected": "7f555e14",
+      "expected_is_prefix_only": true,
+      "sha256": "7f555e1439b97487d4dc95164dae980d3fa7c97f1f41017941f2d3f8f09199ae",
+      "sha_status": "OK",
+      "source": "served-population README s2 (8-char pin on the record)",
+      "status": "OK"
+    },
+    {
+      "label": "A5V archive MANIFEST",
+      "path": "C:\\unsung-fast\\lbd-archives\\A5V\\MANIFEST.json",
+      "bytes": 3404,
+      "expected": "41b66372",
+      "expected_is_prefix_only": true,
+      "sha256": "41b663720c69c0d0985554a86ef84f0836dec993e0a1e1bb60440878581813fa",
+      "sha_status": "OK",
+      "source": "served-population README s2 (8-char pin on the record)",
+      "status": "OK"
+    },
+    {
+      "label": "graph-msw-tu50.bin (V)",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+      "bytes": 17773958,
+      "expected": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+      "expected_is_prefix_only": false,
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8",
+      "sha_status": "OK",
+      "source": "prereg s2.1; served-population README s0",
+      "status": "OK"
+    },
+    {
+      "label": "graph-cxa-adopted.bin (P)",
+      "path": "C:\\dev\\music-app\\builder\\scratch\\graph-cxa-adopted.bin",
+      "bytes": 23410720,
+      "expected": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46",
+      "expected_is_prefix_only": false,
+      "sha256": "bc0431c4b55a2137e945b280270de7e7dc700e3dcf60f3656f6f97598e7ece46",
+      "sha_status": "OK",
+      "source": "prereg s2.1; supply README s0",
+      "status": "OK"
+    },
+    {
+      "label": "population_msw_mbids.txt (V)",
+      "path": "C:\\unsung-fast\\lbd-archives\\population_msw_mbids.txt",
+      "bytes": 2235844,
+      "expected": "b5e0cb94",
+      "expected_is_prefix_only": true,
+      "sha256": "b5e0cb9436208341aa892e68de2e82d0cc0566d2462dec8d0a7502d1baee1836",
+      "sha_status": "OK",
+      "source": "prereg s2.1 / s10 (8-char pin on the record)",
+      "lines": 58838,
+      "lines_expected": 58838,
+      "lines_source": "served-population README s0",
+      "lines_status": "OK",
+      "status": "OK"
+    },
+    {
+      "label": "population_cxa_mbids.txt (P)",
+      "path": "C:\\unsung-fast\\lbd-archives\\population_cxa_mbids.txt",
+      "bytes": 3370030,
+      "expected": "1bbff8fc",
+      "expected_is_prefix_only": true,
+      "sha256": "1bbff8fcfde78a07d276f727ccaf048c73da4bfd27709b64f6f6894d6d4d2d7b",
+      "sha_status": "OK",
+      "source": "prereg s2.1 / s10 (8-char pin on the record)",
+      "lines": 88685,
+      "lines_expected": 88685,
+      "lines_source": "supply README s0",
+      "lines_status": "OK",
+      "status": "OK"
+    },
+    {
+      "label": "cxr_added_mbids.txt",
+      "path": "D:\\unsung-large-data\\lbd-inputs\\cxr_added_mbids.txt",
+      "bytes": 1135896,
+      "expected": "bfed95ef74b0665c50b1532708091b4e43fab36247db391d04064870659a4339",
+      "expected_is_prefix_only": false,
+      "sha256": "bfed95ef74b0665c50b1532708091b4e43fab36247db391d04064870659a4339",
+      "sha_status": "OK",
+      "source": "prereg s10",
+      "status": "OK"
+    },
+    {
+      "label": "cxr_preexisting_mbids.txt",
+      "path": "D:\\unsung-large-data\\lbd-inputs\\cxr_preexisting_mbids.txt",
+      "bytes": 2234134,
+      "expected": "768054b7e84769346193336ec7e9b3496af92d0d3e8d4ae2fb287057912b5229",
+      "expected_is_prefix_only": false,
+      "sha256": "768054b7e84769346193336ec7e9b3496af92d0d3e8d4ae2fb287057912b5229",
+      "sha_status": "OK",
+      "source": "prereg s10",
+      "status": "OK"
+    },
+    {
+      "label": "cxr_residual_mbids.txt",
+      "path": "D:\\unsung-large-data\\lbd-inputs\\cxr_residual_mbids.txt",
+      "bytes": 226746,
+      "expected": "fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08",
+      "expected_is_prefix_only": false,
+      "sha256": "fa8d85cc12131f3cd39ecebeb5da0d52a1236104acbcbabf20232c72b4f43a08",
+      "sha_status": "OK",
+      "source": "prereg s10",
+      "status": "OK"
+    }
+  ],
+  "t_a4": {
+    "pinned_sha256": "e919bc89425ecb7538fb5092a51ffb5e8a4d507fb2546a40d19a88508202a1e1",
+    "role": "named in s10 only to be EXCLUDED (LBA-D1: no arm derives from it)",
+    "searched": [
+      "C:\\unsung-fast\\lbd-pairs\\aggregate\\T_A4.parquet",
+      "D:\\unsung-large-data\\lbd-pairs\\aggregate\\T_A4.parquet",
+      "D:\\unsung-large-data\\lbd-pairs\\T_A4.parquet"
+    ],
+    "present": false,
+    "found_at": []
+  }
+}
