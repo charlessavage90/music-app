@@ -2436,3 +2436,119 @@ does not record how far down the list he has got.**
 3. **Decide whether to spend listen 2.** Everything is prepared; it costs his ear and a sitting.
 4. **When he does:** a fresh, mechanics-only session runs `RUNNER-BRIEF.md` end to end, and a
    further fresh session writes up the result.
+
+
+---
+
+## Demoted 2026-09-14 at the `LBD-S4` stage-1 closeout
+
+**Frozen. History, never status.** Two things were demoted together, per `closeout`'s
+`A2-next` and the `B6-budget` deferral whose condition (*no second session live in the
+tree*) was met for the first time on this date.
+
+### The outgoing status block — the `LBD-A4` run, the `R10` read, and the 2026-09-14 pointer edit
+
+**Last updated: 2026-09-14 — a POINTER EDIT ONLY, not a `closeout` rewrite.** The `LBD-S4`
+adoption **pre-registration is now committed and UNEXECUTED**:
+[`specs/2026-09-14-lbd-s4-adoption-preregistration.md`](specs/2026-09-14-lbd-s4-adoption-preregistration.md)
+(identifiers `LBA-`), and the current handoff is
+[`2026-09-14-HANDOFF-lbd-s4-prereg.md`](2026-09-14-HANDOFF-lbd-s4-prereg.md), which supersedes the
+`LBD-A4` handoff on next actions. ⚠ **Committing it does NOT start it** — nothing was derived,
+emitted, built, censused or listened to, and **whether `S4` is executed at all is the owner's**.
+The block below is otherwise as the 2026-09-13 closeout left it and is not restated here.
+
+**Previously updated: 2026-09-13, at the `LBD-A4` run and the `R10` read.** **Nothing a listener
+sees changed in this work** — the live site is as the 2026-09-08 deploy left it, and
+`TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
+
+**`LBD-A4` has been RUN and `R10` has been READ.** The pairing-delta arm — *does counting a
+pair once per session, rather than once per pair of plays, matter?* **`R10` FIRES**, on the
+edge-count half alone. Figures are owned by
+[`../../builder/analysis/2026-09-13-lbd-a4/README.md`](../../builder/analysis/2026-09-13-lbd-a4/README.md)
+and restated nowhere, including here; the reasoning is
+[`2026-09-13-lbd-a4-execution-log.md`](2026-09-13-lbd-a4-execution-log.md).
+
+**What it means in plain terms.** Which of the two ways of counting you use **barely changes
+how much of ListenBrainz's own answer we reproduce**, but it **removes about one connection in
+twenty-two from the map**. Not a contradiction: fidelity is scored against each artist's
+archive list cut at its own length — mostly strong pairs that survive either rule — while the
+lost edges are weak ones that were clearing the strength bar on repeat plays by a single
+listener. That mechanism is measured, not asserted.
+
+> ## ⚠ `LBD-X6`'s CONDITION is discharged. `LBD-X6` ITSELF STANDS.
+>
+> `LBD-X6` barred generalising the `LBL-` listen-2 result to the cheaper pairing form *"until
+> `LBD-A4` has run and `R10` has been read"*. **Both have now happened, and the answer was
+> that the pairing form does change the map materially** — so the bar is **confirmed, not
+> released**. Listen 2's tie holds for ListenBrainz's own pairing semantics and **no sentence
+> may generalise it to the cheaper form.** Had neither half fired, the pre-committed other
+> branch would have lifted it. **Reading "condition met" as "bar lifted" inverts the result.**
+
+**Nothing is adopted, no default changed, no shipped code touched, and no graph was built from
+this arm.** `R10` says the pairing choice **matters**; it says nothing about which form is
+**better**. ⚠ **`LBD-C1` is not cited as passed, for `LBD-A0` or for `LBD-A4`** — `LBD-G1`
+fires on both, and `LBD-AM3`'s override enumerates `LBD-A0`–`LBD-A3` without naming this arm.
+
+**`LBD-A4` was the last arm the pre-registration schedules, and `LBD-D6`'s precondition on
+`S4` is now satisfied.** `S4` — the adoption decision proper (population rule, API sizing,
+fame source, refresh procedure) — remains its own pre-registration and rebuild, and **every
+`S4` arm records which pairing semantics it uses and why**, which `R10` firing makes a live
+requirement rather than bookkeeping.
+
+**An `S4` input is on the record:** [`findings/2026-09-13-lbd-adoption-inputs.md`](findings/2026-09-13-lbd-adoption-inputs.md) — the owner's three points for adoption that no `LBD-` criterion measures, each with its supporting section and that section's nuance; it recommends nothing.
+
+**Stopping the `LBD-` track here remains a complete outcome**, not an abandonment. **Which
+route follows is the owner's and no session proposes one.**
+
+⛔ **The two `LBL-` verdicts are run-once and final.** Neither may be re-listened on any
+protocol (`GBL-` §5). Unchanged by this work.
+
+Branch `lbd-a4-pairing-delta`, PR **#124** (`gh` says where they are).
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
+does not record how far down the list he has got.**
+
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
+   Nothing here changed them.
+2. **Merge PR #124.**
+3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
+   fidelity — a scope question about his own earlier ruling. **`R10` does not depend on it and
+   nothing is blocked by it.**
+4. **Decide what follows the `LBD-` track** — stop, `S4`, or something else. The listen-2
+   findings note's §6 and the `LBD-A4` README's §8 set out what is left open, and both
+   deliberately recommend nothing.
+   ⚠ **Amended 2026-09-14:** `S4`'s pre-registration now exists and is **committed and
+   unexecuted**, so this decision is now *whether to execute it*, against a design he can read
+   rather than a description. It recommends nothing, and **stopping the track here remains a
+   complete outcome.**
+5. **Merge the `lbd-s4-adoption-prereg` PR.**
+
+
+### Discharged deferral rows, struck in place and kept for the record
+
+These were all marked ✅ and carried a date and what satisfied them. They are evidence that an item was tracked and discharged rather than forgotten, which is why they are archived rather than deleted.
+
+| Finding | Condition |
+|---|---|
+| ✅ **`LBD-M1` (population per arm)** | **DISCHARGED 2026-09-10** — reported descriptively by fame band for both built arms, figures owner §2. Struck, kept for the record. |
+| ✅ **Track B runs and reads** (`CB-5`/`CB-6`) | **DISCHARGED 2026-07-30** — run to completion; results note is the record. Struck, kept for the record. |
+| ✅ **`CRS-A5` endpoint re-verification** | **DISCHARGED 2026-07-30** — one request at scoring time, 200, companion delivered descriptive-only. Struck. |
+| ✅ **`PRODUCT-REQUIREMENTS.md`'s Definitions section does not quantify the proxy's blindness** | **DISCHARGED 2026-08-02 — the condition fired and the edit landed.** The currency decision was made; the Definitions entry now carries `FPC-3`/`FPC-9`'s extent inside the retirement paragraph of the worldly-fame construct (owner-ratified edit). Struck, kept for the record. |
+| ✅ **Full-graph MBID-keyed fame values** (`fp_fame_mbid --build`) | **CLOSED 2026-08-02 — the path is known-unreachable, not deferred again.** The currency decision adopted the LB proxy and **retired the worldly-fame construct**, so the condition ("adopts the MBID-keyed proxy") can never fire. Reopening requires a worldly-fame instrument to exist at all, which `RCS-` measured as currently unachievable. Struck, kept for the record. |
+| ✅ **MusicBrainz tag/genre coverage as a coherence instrument** | **DISCHARGED 2026-07-30** — the coherence tag probe ran exactly this check and its kill gate fired (`COH-2`, vocabulary-robust per `COH-6`); the retrodiction stayed unrun. Struck, kept for the record. |
+| ✅ **Adding `analysis` to builder's `testpaths`** | **DECLINED BY THE OWNER 2026-08-01 — closed, not deferred again.** Its condition fired at the closeout retiring the `TAS-` probe, and he ruled: **frozen code should not be tested by default.** `testpaths` stays `["tests"]` (`builder/pyproject.toml:25`); probe tests run only when a directory is named explicitly. The reasoning is durable rather than circumstantial — probe tests guard research code nothing ships and nobody will edit again, so collecting them would gate unrelated builder merges on a frozen artifact's committed JSON or a vanished scratch capture. **A future probe does not reopen this**; it inherits the same answer. Struck, kept for the record. *(This row carried a count of "34" until 2026-07-30; it was stale, and the count was never this document's to own — read it off `pytest analysis/ -q`.)* |
+| ✅ **Replacing mutual k-NN with a tag-based degree limiter** | **DISCHARGED 2026-08-03 — the owner triggered it** (design-inputs family (c), 2026-08-02) **and it now has its cold-designed pre-registration**: `CRE-S2` (tag-guided ceiling on the union source, one-column isolated, `CRE-AM1`'s vote weighting inside it), with the family's premise tested by `CRE-D1` before the full arm set exists. Struck, kept for the record. |
+| ✅ **`TAS-4` is not believable until the red instrument check runs** | **DISCHARGED 2026-07-31 for the SELECTION side** — the original check was withdrawn as unachievable (`TAS-AM3`) and its replacement `TAS-AM3a` passed at every λ. Struck, kept for the record. |
+| ✅ **`TAS-5` is not believable until the ROUTING-side red check runs** | **DISCHARGED 2026-08-01.** `TAS-AM3`'s scope clause could not supply it — its pass conditions live on the pre-cap capture while `TAS-AM2` puts `TAS-5` on the artifact — so `TAS-AM5` constructed one, written **before any routing figure existed**. `TAS-AM5a` (equivalence) and `TAS-AM5b` (liveness) both passed on the full draw. Struck, kept for the record. |
+| ✅ **Task 8 — the `TAS-` findings document is unwritten** | **DISCHARGED 2026-08-01 (latest)** — `findings/2026-07-30-tag-discrimination.md`, with the owner-facing read in execution log §17. Both conditions honoured on the page: `TAS-AM5c`'s caveat is carried at `TAS-5`'s section head and repeated at its figures, and `TAS-6`'s routing half is marked **VACUOUS** with its mechanism (`tas_guard.py:111`) rather than read as a pass. Struck, kept for the record. |
+| ✅ **Rarity-weighted agreement is a measured candidate device** | **MEASURED IN FULL 2026-08-01 by the `WGT-` probe** — the single-frame diagnostic became a 15-cell grid; the `WGT-` findings own the result and the device recommendation (rarity over `W4`, input-only). The trigger half stands: adopting any weighted device changes §1, an §8 amendment, the owner's call. Struck as a deferral, kept for the record. |
+| ✅ **The no-release-tail product decision** | **DECIDED BY THE OWNER 2026-08-01 — a drop rule is ADOPTED and the list is frozen.** Keep a release-less artist only where a commercial-DSP link exists **and** a clip resolves; **7,035 of 7,686 dropped, 651 kept** (`builder/analysis/2026-08-01-label-weighting/tail_droplist.json`, drop-list sha256 `d876c7ba…`). Struck as an open question; the wiring row below is what remains. |
+| ✅ **The drop list is wired into the builder** | **DONE 2026-08-02, PR #62.** `drop_no_release_tail` (default on) applies the frozen list in `pipeline.py` beside the nameless drop, before the mass computation; the list ships as package data pinned by sha256. All three carried constraints are commented at their definitions. **The flag is an experimental control, never a shipping option** — it exists so a build-side experiment can hold the drop constant in a factor table, and so frozen probes can be era-pinned. Struck, kept for the record. |
+| ✅ **One list, applied to any archive** | **DISCHARGED 2026-08-02 (latest) — both halves, the per-archive list and the refusal.** The list is selected by `config.algorithm`, which already decides which archive sub-tree a build reads, so a build's algorithm *is* its archive identity and no new `BuilderConfig` field was needed (the mirrors guard stays quiet, and `PERMITTED_ALGORITHMS[1]` still resolves for every frozen probe). Both censused populations ship as sha-pinned package data — `ALG-E` 7,035, `ALG-B` 9,501. The four **uncensused** algorithms raise `NoDropListForAlgorithm` rather than borrowing a list; the refusal is conditional on `drop_no_release_tail` being on, so the era-pinned probes that build uncensused populations with it off are untouched. **The magnitude of the averted defect, since the row understated it:** the two lists share only **2,712** MBIDs, so applying today's to an `ALG-B` build would have dropped **4,323** artists that rule keeps *and* missed **6,789** it drops. Mutation-tested — reinstating the old one-list behaviour turns five tests red. Struck, kept for the record. |
+| ✅ **Whether the drop rule needs re-validating on the candidate population** | **RULED BY THE OWNER 2026-08-02: NO, and the reasoning is durable rather than circumstantial.** The rule does not rest on which artists are in the graph. It rests on three claims that hold for any population: release-less artists are generally poor recommendations to surface; the reason not to drop *all* of them is that MusicBrainz is incomplete, not that they are good (**both keepers in his 20 were real artists MB had simply failed to document**); and the DSP-link-plus-clip check is the best false-positive catcher available. **The decisive point is the one that closes it:** a measured false-positive rate on the candidate would change nothing, because no second refinement mechanism exists — so the follow-up question ("and then what?") has no answer, and dropping a large number of bad recommendations is a strong trade even carrying some false positives. **A future session must not propose a second hand sample on transferability grounds.** Distinct from the *magnitude* question — if a candidate tail were a far larger share of its population, that is a different-sized intervention, and `analysis/2026-08-02-candidate-tail-census/` measures it. |
+| ✅ **The Deezer id map covers only the adopted population** | **DISCHARGED 2026-08-02 — the map now covers the UNION of both populations**, so the cap re-evaluation cannot trip a coverage condition mid-experiment. 93,067 artists (adopted 74,193 + `ALG-B` 68,467, overlapping), **39,465 ids**. The `ALG-B` graph used is the 2026-07-30 full build (sha `d008a2b5…`, manifest-verified), which predates the drop rule and the nameless fix and is therefore a **superset** of any final `ALG-B` build — safe by construction, since an MBID absent from a build is a no-op, and the same reasoning the candidate tail census used. Adopted-population coverage is unchanged at 34,988 / 47.2%, which is the consistency check that the union did not perturb it; `ALG-B`-only artists cover 4,477 of 18,874 (**23.7%**), consistent with that population being deader. An artist outside the union still falls back to name search. Struck, kept for the record. |
+| ✅ **The featured-credit residual class in the release filter** — artists kept because credits count as release groups, while having no primary-artist existence (two worked instances: 田島賢, TJ Brown; mechanism closed via `LBS-1`'s 0.25 featured weight) | **EXECUTED AND ADOPTION-RULED 2026-08-03 — the `FCF-` rule; see the top block.** The detector ran on the release-**group** dump (cheaper than the release dump the original row guessed at), the keep-check ran with zero refusals, `FCF-AM1` closed the shared-credit exemption gap the owner's spot checks found, and the lists ship as package data behind `drop_featured_credit`. The calibration hand-review was **declined at adoption**. Struck, kept for the record. |
+| ✅ **Tag-aware selection increases the map's total edge count** | **DISCHARGED 2026-08-03 — the condition fired and was satisfied as this row's own text prescribes**: the `CRE-` pre-registration states the owner's sole-source constraint (LB similarity the only source of edge existence; tags only re-order, re-weight or remove), under which the union bounds the count above and the `TAS-4` growth mechanism cannot operate. Struck, kept for the record; the corrected `w_degree_hub` half below stays live reading. *(Original condition:)* **Before any rebuild pre-registration is written.** Opened by `TAS-4`: Jaccard is symmetric, so genre-sharing artists promote each other and creations exceed deletions at every λ. Mutual k-NN bounds each artist's own list, not the count of mutual pairs, so mean degree rises. Execution log §9.4/§9.5. **⚠ CORRECTED 2026-08-02 — this row previously said `w_degree_hub` "is dormant *because of the current graph's top-degree set*", which reads as the `w_floor` dormant-term confound about to repeat. It is not.** Checked from source: `w_degree_hub = 0.0` (`api/…/config.py:83` — cited as `:54` until 2026-09-05) and the term is a plain multiplication in the cost function (`pathfinding.py:160` — cited as `:135` until 2026-09-05), with no environment override anywhere — weights are not env-driven. **At a zero coefficient the graph's top-degree set cannot make the term fire, so it cannot switch itself on in the arms that succeed.** What *is* live is a decision, not a confound: the *reason* the weight is zero rests on a property of today's graph (§2.6 — the top-1%-by-degree set is largely insular micro-genre artists, so penalising them is not what you want), and a different connection rule changes that set. **So a rebuild pre-registration should decide `w_degree_hub` deliberately and record the decision — it does not need a control against the term waking up on its own.** |
+| ✅ **The `REL-` release-dump union pass** | **CLOSED 2026-07-31 — the path is known-unreachable, not deferred again.** Its §7 condition was "if and only if `REL-1` lands in 45.0–49.9%". `REL-1` cleared the bar outright, so the condition can never fire for this run. Reopening needs a new pre-registration designed cold. Struck, kept for the record. *(Correction 2026-08-01: this row and the frozen spec's §7 both said the 345 GB dump "was deleted after measurement" — **it was not**; it is on disk at `builder/scratch/mb-json-dumps/release/`, 322 GB, verified. The closure never depended on the deletion and stands. The `WGT-` pre-registration reads the dump for a different question — evidence strength, not coverage — designed cold as this row requires.)* |
+| ✅ **`TB-P5H-7`** | **DISCHARGED 2026-08-03 — the condition fired and was consumed.** The `CRE-` pre-registration is the successor router-pricing pre-registration, and it consumes the item as the source requires: the joint descent × delivered-payload outcome has its own pre-registered read (`CRE-C4`, read jointly with `CRE-C1` in every `CRE-R`; `CRE-R3` is the outcome class). Struck, kept for the record. |
+| ✅ The `--prune` publish pass | **DONE 2026-08-02.** Ran `sync_frontend.py --prune --skip-build` through the module, so it kept the `FRO-1` pass ordering and the between-passes content-type probe. **Two orphans deleted** — `assets/index-C-9fM9tV.js` and `assets/index-C4yz7h5J.css`, the pre-redesign 2026-07-27 build. The bucket is now 7 objects. **The pre-flight that made it safe, and a successor should repeat it:** `--skip-build` publishes `frontend/dist` *as it stands*, so a stale or different `dist/` would have pruned the assets the live page names. Verified first that `dist/index.html` referenced exactly the two hashed assets the **live** page referenced, then ran `aws s3 sync … --delete --dryrun` to see the deletion list before running it for real. Verified after: bucket contents, `200` plus correct `Content-Type` for html/js/css/woff2/svg, and a live search returning Radiohead. Struck, kept for the record. |

@@ -1,6 +1,6 @@
 # Handoff — the `LBD-S4` adoption pre-registration, 2026-09-14
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-14** by [`2026-09-14-HANDOFF-lbd-s4-stage1.md`](2026-09-14-HANDOFF-lbd-s4-stage1.md) — **`LBA-D8` stage 1 has since RUN.** This note remains ACTIVE for everything else it records, and its claims-not-to-revert list still binds. ⚠ **Its "committed and unexecuted" framing below is now false**: all nine cells are derived and counted, `LBA-G3` has been read, and `LBA-AM2` has been added to the pre-registration's §11. Its remark that no document states the size of the full pair table was true when written and is **now answered**. *(Original role:)* **ACTIVE — was the CURRENT handoff until 2026-09-14.** Nothing superseded it at the time. Supersedes
 [`2026-09-13-HANDOFF-lbd-a4.md`](2026-09-13-HANDOFF-lbd-a4.md) on next actions. It does **not**
 state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
