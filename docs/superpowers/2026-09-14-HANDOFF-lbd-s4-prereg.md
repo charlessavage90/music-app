@@ -24,18 +24,60 @@ It fixes, before any result exists:
 
 - **Nine arms** in a full 3 × 3 lattice — strength threshold (10, 7, 3) × population rule (`V`
   today's served artists, `P` the extended crawl's artists, `U` every artist the table names) —
-  each cell with an isolating baseline differing in exactly one column, and each with its plain
-  sentence.
+  each cell with its plain sentence and with its isolating baseline **and the number of columns
+  that baseline is actually away** — five are one column, **four are two**, and the table says so in
+  the column rather than in a disclaimer (`LBA-AM1`, finding `LBA-AM1-A8`).
 - **Five measurements** `LBA-M1`–`M5`, each with a plain sentence and either a stated effect size
   or an explicit *reported descriptively, no threshold*.
 - **Four gates** `LBA-G1`–`G4`, each with its own effect size and each with its bar's provenance
   stated — including the two that have no prior calibration and say so.
-- **Ten reads** `LBA-R0`–`R9`, each naming the run state it presupposes, covering every outcome
-  including *"the numbers say no"*.
+- **Eleven reads** `LBA-R0`–`R9` plus `LBA-R4-V`, each naming the run state it presupposes,
+  covering every outcome including *"the numbers say no"*.
 - **The owner's three rulings, verbatim** (`LBA-D1`–`D3`), and six methodology decisions
   (`LBA-D4`–`D9`).
 - **Eight named exposures** `LBA-X1`–`X8`, and a **claims check** resolving every function, file,
   config value and figures-owning document it names.
+
+> ### ⚠ A derivation-only critique has RUN, and the document was revised on its findings
+>
+> **The owner commissioned one `ml-graph-analyst` critique of the measurement design on 2026-09-14,
+> before this PR merged and before anything was executed**, on four questions and no judgement
+> question. It produced **twelve actionable findings, all twelve acted on**, plus six observations.
+> The full register is the pre-registration's own **§11, `LBA-AM1`**, which quotes the original
+> wording of every changed clause — read that before reading any section it touches.
+>
+> **Nothing had run when the changes were made**, so the commit-before-results property is intact
+> and the amendment spends none of it. **No arm, population rule or threshold changed**; the 3 × 3
+> lattice is exactly as it was. Every bar that moved, moved toward being harder to satisfy or toward
+> being **evaluable at all**.
+>
+> **The three that most change how a section reads:**
+>
+> 1. **`LBA-M2`'s gated statistic is retention, not Jaccard.** The original plain sentence and the
+>    original threshold described **different statistics** — at equal list lengths a Jaccard of 0.5
+>    fires when a third of the list changed, and the sentence's own condition is a Jaccard of 1/3.
+>    They disagreed at authoring time. Jaccard also carried a bound the original text explicitly
+>    denied: it is capped by the ratio of the two list lengths, so a large share of artists would
+>    have been flagged with **zero contribution from neighbour identity**.
+> 2. **`LBD-G2`'s bar is admissible as a one-column threshold read on exactly two arms** —
+>    `LBA-A5` and `LBA-A6`. On the `V` row it is **unfireable by construction** (the `CRS-C3`
+>    shape), and `LBA-R4` has been scoped away from that row accordingly, with `LBA-R4-V` stating
+>    what is already settled there on the committed record.
+> 3. **`LBA-G1`(a) and `LBA-G2` were not evaluable as written.** The first deducted one flat 30 %
+>    for four terms that scale differently; the second extrapolated peak memory from a basis that
+>    **does not exist on the record** — no build in this track reports a memory figure at all.
+>    Both now name their measured inputs, and **two quantities are recorded as unmeasured**:
+>    `framework_rss`, without which `LBA-G1`(a) cannot be read, and peak-RSS instrumentation in the
+>    build wrapper, without which `LBA-G2` cannot be read.
+>
+> **Four of the analyst's load-bearing claims were verified independently against source before any
+> change was made** — the calibration pair's identical artist and CSR counts, the absence of any
+> memory figure in both build READMEs and every committed JSON beside them, `w_degree_hub = 0.0`,
+> and the APG1 size expression reproducing three committed artifacts byte-for-byte.
+>
+> **The analyst declined to compute `LBA-M2`'s numerator on the two reused maps**, on the grounds
+> that it would spend the commit-before-results property for two of nine cells. That decision is
+> endorsed in `LBA-AM1` and should not be quietly reversed by an executing session.
 
 ---
 
@@ -153,8 +195,11 @@ the list he has got:
    unexecuted; committing it does **not** start it. **Stopping the `LBD-` track here remains a
    complete outcome**, and no session proposes a route.
 
-**A fresh session's, if he says execute:** read the pre-registration cold, verify the thirteen
-sha256s in its §10, then run `LBA-D8` stage 1 and stop at `LBA-G2`. **The owner stop is the
+**A fresh session's, if he says execute:** read the pre-registration cold **including §11's
+`LBA-AM1`**, verify the thirteen sha256s in its §10, take the two measurements §10 records as
+not-yet-built (`framework_rss`, and peak-RSS instrumentation in the build wrapper) **before any
+gate is read**, then run `LBA-D8` stage 1 and stop at `LBA-G2` — which now also carries `LBA-G3`'s
+projection. **The owner stop is the
 go/no-go read**, which presupposes the `complete` run state — every cell either built or stopped on
 `LBA-G2`'s stated bar with the bar recorded.
 

@@ -40,8 +40,8 @@ evidence of equivalence).
 
 **Identifiers introduced here: the `LBA-` series** — `LBA-A1`–`LBA-A9` (arms), `LBA-D1`–`LBA-D9`
 (decisions; `D1`–`D3` are the **owner's**, the rest are this document's), `LBA-M1`–`LBA-M5`
-(measurements), `LBA-G1`–`LBA-G4` (gates), `LBA-R0`–`LBA-R9` (reads), `LBA-X1`–`LBA-X8` (named
-exposures). **Collision-checked across every ref on 2026-09-14** —
+(measurements), `LBA-G1`–`LBA-G4` (gates), `LBA-R0`–`LBA-R9` plus `LBA-R4-V` (reads), `LBA-X1`–`LBA-X8` (named
+exposures), and `LBA-AM1` (the amendment register's first entry, §11). **Collision-checked across every ref on 2026-09-14** —
 `git grep -lE '\bLBA-' $(git for-each-ref --format='%(refname)' refs/remotes refs/heads) -- '*.md'`,
 and the same for each sub-pattern `LBA-A[0-9]`, `LBA-R[0-9]`, `LBA-M[0-9]`, `LBA-X[0-9]`,
 `LBA-D[0-9]`, `LBA-G[0-9]`: **all free**, with nothing in the working tree either.
@@ -117,17 +117,37 @@ re-listened on any protocol.
 **Two knobs vary and nothing else: the strength threshold, and the population rule.** A full
 3 × 3 lattice, so that every cell has a baseline differing from it in exactly one column.
 
-| arm | `threshold` | distinct listeners a pair needs | population rule | isolating baseline |
-|---|---:|---:|---|---|
-| **`LBA-A1`** *control* | **10** | 4 | **`V`** — today's served artists | — (it *is* the control) |
-| **`LBA-A2`** | **7** | 3 | `V` | `LBA-A1` — threshold only |
-| **`LBA-A3`** | **3** | 2 | `V` | `LBA-A1` — threshold only; **and** `LBA-A2` — threshold only |
-| **`LBA-A4`** | **10** | 4 | **`P`** — the extended crawl's artists | `LBA-A1` — population only |
-| **`LBA-A5`** | **7** | 3 | `P` | `LBA-A4` — threshold only; **and** `LBA-A2` — population only |
-| **`LBA-A6`** | **3** | 2 | `P` | `LBA-A4` — threshold only; **and** `LBA-A3` — population only |
-| **`LBA-A7`** | **10** | 4 | **`U`** — every artist the table names | `LBA-A4` — population only |
-| **`LBA-A8`** | **7** | 3 | `U` | `LBA-A7` — threshold only; **and** `LBA-A5` — population only |
-| **`LBA-A9`** | **3** | 2 | `U` | `LBA-A7` — threshold only; **and** `LBA-A6` — population only |
+| arm | `threshold` | distinct listeners a pair needs | population rule | **drop filter** | isolating baseline, and how many columns it is actually away |
+|---|---:|---:|---|---|---|
+| **`LBA-A1`** *control* | **10** | 4 | **`V`** — today's served artists | `on, inert (20260805)` | — (it *is* the control) |
+| **`LBA-A2`** | **7** | 3 | `V` | `on, inert (20260805)` | `LBA-A1` — **threshold only** ✓ |
+| **`LBA-A3`** | **3** | 2 | `V` | `on, inert (20260805)` | `LBA-A1` — **threshold only** ✓; **and** `LBA-A2` — **threshold only** ✓ |
+| **`LBA-A4`** | **10** | 4 | **`P`** — the extended crawl's artists | `on, inert (20260809)` | `LBA-A1` — population **and the drop-list payload** (two columns; see the note) |
+| **`LBA-A5`** | **7** | 3 | `P` | `on, inert (20260809)` | `LBA-A4` — **threshold only** ✓; **and** `LBA-A2` — population **and payload** |
+| **`LBA-A6`** | **3** | 2 | `P` | `on, inert (20260809)` | `LBA-A4` — **threshold only** ✓; **and** `LBA-A3` — population **and payload** |
+| **`LBA-A7`** | **10** | 4 | **`U`** — every artist the table names | **`off, uncensused`** | `LBA-A4` — population **and filter state** (**two columns**, and the second is §2.4's) |
+| **`LBA-A8`** | **7** | 3 | `U` | **`off, uncensused`** | `LBA-A7` — threshold, **with the population dependent on it** (`LBA-X6`); **and** `LBA-A5` — population **and filter state** |
+| **`LBA-A9`** | **3** | 2 | `U` | **`off, uncensused`** | `LBA-A7` — threshold, **with the population dependent on it** (`LBA-X6`); **and** `LBA-A6` — population **and filter state** |
+
+> ### ⚠ Four of these nine baselines are NOT one column away, and the table says so in the column rather than in a disclaimer
+>
+> **The drop-filter column was added on 2026-09-14 after the `ml-graph-analyst` critique** (§11,
+> `LBA-AM1`, finding `LBA-AM1-A8`). §2.4 already derived the hazard; what it did not do was put it where
+> a reader looks, which is the baseline column. `CLAUDE.md`'s own rule is that **a disclaimer
+> nothing later reads is not a control**, and the baseline column is what is later read.
+>
+> - **`V` → `P` also changes the payload.** `unlistenable_drop_algb_20260805.json` and
+>   `…20260809.json` are each *measured inert on their own population*, so neither removes anybody
+>   from the arms that use it — but they are **not interchangeable**: the `20260809` payload would
+>   drop 31 members of `V` (`LBD-AM5-3` owns that count). The column is real even where its effect
+>   is zero, and a one-column claim across it is wrong even though no artist moves.
+> - **`P` → `U` changes the filter's STATE, not its payload.** Inert-because-applicable becomes
+>   absent-because-refused. **This is the term §2.4 names as the dangerous one**, and it is present
+>   in exactly the three arms that grow the map most.
+>
+> **Consequence, a bar:** no read may describe an `LBA-A7`/`A8`/`A9` result as a *population*
+> effect without naming the filter state beside it, and no read may describe a `V`→`P` result as a
+> *population* effect without naming the payload beside it. `LBA-M4` is what sizes the first.
 
 **Every other token is `LBD-A0`'s** — `days` 7500, `session` 300, `skip` 30, `contribution` 3,
 `limit` 100, ListenBrainz's own pairing (`LBA-D1`) — i.e. `CANDIDATE_ALGORITHM` less its
@@ -318,7 +338,7 @@ succeed** — both carried forward rather than re-derived:
 
 **All nine cells are derived and their populations counted** (`LBA-D8` stage 1) — that costs
 filters and `GROUP BY`s over a table that already exists. **Whether every cell is emitted and
-built is a resource question, gated by `LBA-G2`, never a judgement.** The census is **one offline
+built is a resource question, gated by `LBA-G2`, never a judgement.** Whether the census pass is started is likewise a resource question, gated by `LBA-G3` at the same point. The census is **one offline
 pass over the union of all nine populations** (`LBA-D6`), so no arm is censused in preference to
 another.
 
@@ -387,9 +407,12 @@ carries a `filter` column saying `on, inert` or `off, uncensused`.** §2.4 is wh
 design.**
 
 - **Stage 1 — derive and count, all nine cells.** Filters and window functions over `T`, plus a
-  `GROUP BY` for each cell's distinct-artist count and pair count. Minutes to a couple of hours,
-  no emission, no build. **This is the only measurement that can rule a cell out on resources
-  before any of it is spent**, and `LBA-G2` reads off it.
+  `GROUP BY` for each cell's distinct-artist count and pair count, **and the count of union members
+  absent from the census coverage store**. Minutes to a couple of hours, no emission, no build.
+  **This is the only measurement that can rule a cell out on resources before any of it is spent**,
+  and **both `LBA-G2` and `LBA-G3` read off it** — the second moved here from stage 3 under
+  `LBA-AM1`'s finding `LBA-AM1-A11`, because a gate discovered six hours into a census pass has already cost
+  what it exists to save.
 - **Stage 2 — emit and build** every cell `LBA-G2` did not stop, in the order `A1`, `A4`, `A7`,
   `A2`, `A5`, `A8`, `A3`, `A6`, `A9` — control first, then each threshold across all three
   population rules, so that a partial run always holds a complete one-column comparison.
@@ -428,8 +451,8 @@ Per arm, four quantities and one comparison:
 |---|---|
 | **artists** | nodes after the largest-component prune, from the built graph |
 | **connections** | reported in **both** units, each labelled: *connections* (degree sum ÷ 2) and *CSR entries* (each connection in both directions, the unit every manifest sidecar's `"edges"` uses). The served-population README's §0 warning records that a build was once refused because a bound was written in one unit and checked in the other |
-| **bytes** | the serialised census build, through the shipped `serialise` — **a lower bound**, `LBA-X8` |
-| **boot memory** | peak RSS of a process that loads the artifact through the shipped `GraphStore` and nothing else, measured three times, median reported |
+| **bytes** | **the BARE-ARTIFACT size**, `24 + 4(N+1) + 9·E_csr + len(bare metadata JSON)`, where *bare* is the four mandatory metadata keys only — `mbids`, `names`, `disambiguations`, `popularity` (`artifact.py`'s `serialise`; the other five are additive and omitted when empty). Computed **identically for all nine arms**, by decoding, with **no rebuild** — which is what makes it comparable across the seven arms that are built here and the two that are reused (`LBA-D9`). Reported beside the **shipped projection** = bare + the measured per-node additive cost from the calibration pair below. *(Revised 2026-09-14, `LBA-AM1` finding `LBA-AM1-A12`: the previous definition was "the serialised census build", and no census build of `LBA-A1` or `LBA-A3` was ever serialised — their only artifacts carry all five additive keys, so seven arms would have been compared against two that were ~1.34× larger for a reason that is not the arm.)* |
+| **boot memory** | peak RSS of a process that loads the artifact through the shipped `GraphStore` and nothing else, measured three times, median reported — **then scaled to the shipped artifact by the measured calibration below.** The raw census figure is never compared with `LBA-G1`(a)'s bar directly |
 | **query cost** | median and p95 wall-clock of the shipped `find_journey` at **d0**, no exclusions, `ApiConfig` defaults, over a fixed pair set drawn once and reused for every arm — the same process, the same machine, the arm's map and the served map measured back to back. `LBA-D5`'s block is why this is the production cost function's exact values, and why **only** d0 is measured |
 
 **The pair set for the query-cost half is fixed before any arm is built**: 200 pairs drawn with
@@ -439,6 +462,33 @@ a file with its sha256 **before stage 2 begins**. A pair whose endpoints are adj
 is redrawn, since `find_journey`'s forced-detour branch is a different code path. *(The drawing
 rule is fixed now; the set cannot be drawn until stage 2 says which arms exist, which is stated
 here so the ordering is not discovered later.)*
+
+**Two calibration measurements, taken ONCE before stage 2 and fixed here as instrument work,
+not as results.** *Plain: work out how much bigger a real shipped map is than the stripped-down
+ones we measure, and how much memory the web service itself uses, so the size limit is about the
+thing we would actually run.*
+
+- **`metadata_ratio`** — median peak RSS of a `GraphStore`-only load of `graph-lux4.bin` ÷ the same
+  for `graph-msw-tu50.bin`. The two are **identical in N and in CSR entries** (both sidecars record
+  58,838 / 1,315,684, verified against the files 2026-09-14) and differ only in the three `LUX-4`
+  additive keys, so the ratio isolates the metadata. **It is a property of the artifacts, not of any
+  arm**, and it must be measured rather than assumed: the same pair differs by **1.336×** in
+  serialised bytes, and resident cost does not track bytes, because `GraphStore` holds these keys as
+  Python `list[str]` and `list[dict]` while the CSR arrays stay as numpy.
+- **`framework_rss`** — resident of a booted `build_default_app` process minus the store's own
+  contribution, measured once on the served artifact. **This term has never been measured in this
+  project**, and `LBA-G1`(a) cannot be evaluated without it.
+
+**What `LBA-M1` can and cannot separate, derived rather than discovered later.** The cap rule
+enforces `degree ≤ 50` (`graph.py`'s `trimmed_union_cap`), so for any arm `E_csr ≤ 50·N` and
+`N ≤ |population|`. On the `V` row that caps every arm at `|V|` nodes and `50·|V|` CSR entries —
+the same arithmetic the served-population README's §5 uses to derive its acceptance ceiling. The
+two committed `V`-row endpoints (that README's §3, which owns both figures) already span a small
+fraction of that headroom, while the `V`→`P` step at a fixed threshold moves both quantities by
+tens of percent. **So `LBA-M1` measures the population column with far more dynamic range than the
+threshold column, and `LBA-G1` is in practice a population gate.** It is not degenerate — the
+statistic moves — but a reader must not take a `V`-row null on `LBA-M1` as evidence that the
+threshold does not affect size. *(Recorded 2026-09-14, `LBA-AM1` finding **`LBA-AM1-O1`**.)*
 
 **Against the hosting baseline.** The service runs on App Runner at **1 vCPU and 2 GB memory**,
 `min_size=1`, `max_size=2` (`infra/src/artistpath_infra/stack.py:199-200,268-273`). The Gate 2→3
@@ -454,8 +504,8 @@ ceiling and the only automatic spend control, and `NEXT.md` places it in *must n
 ### `LBA-M2` — what happens to the artists the app serves today
 
 > **Plain sentence: of the artists the app can reach today, how many are simply not in this map
-> at all — and of the ones that are, for how many has more than half of who we show as similar to
-> them changed?**
+> at all — and of the ones that are, for how many have fewer than half the artists we show as
+> similar to them survived?**
 
 Both halves are reported **by fame band**: five equal-count bands by the served artifact's own
 `fame_lb` (band 0 least-listened, band 4 most), the `LBD-M1` precedent, a fixed ruler across arms
@@ -464,14 +514,82 @@ Both halves are reported **by fame band**: five equal-count bands by the served 
 - **Absent.** Members of `V` with no node in the arm's map, split into *no pair at all in the
   arm's table* and *pruned with the largest component* — the split the served-population README's
   §3 already reports for two maps, because they are different failures.
-- **Materially changed, defined before any build:** an artist present in **both** the served map
-  and the arm's map whose neighbour sets have a **Jaccard overlap below 0.5** — *plain: fewer
-  than half the artists we show as similar to them are the same artists.* Reported alongside the
-  share at overlap exactly **0** — *plain: nothing we show as similar to them is the same.* Both
-  neighbour lists are capped at 50 by the same cap rule, so the two sets are of comparable size
-  and Jaccard is not distorted by a length mismatch. **0.5 is a design choice with no prior
-  calibration and is stated as one**, chosen because it is the point at which a listener's
-  experience of an artist's neighbourhood is more new than familiar.
+- **Materially changed, defined before any build.** For an artist present in **both** the served
+  map and the arm's map, let `A` be its neighbour set in the **served** map, `B` its neighbour set
+  in the **arm's** map, and `c` the size of their intersection. The gated statistic is
+  **retention**:
+
+  > **`R = c / |A| < 0.5`** — *plain: fewer than half the artists we show as similar to them are
+  > still there.*
+
+  Reported alongside the share at **`R = 0`** — *plain: none of them is still there.*
+
+> ### ⚠ The statistic was JACCARD until 2026-09-14, and the plain sentence did not match it
+>
+> **Revised under `LBA-AM1`, findings `LBA-AM1-A1` and `LBA-AM1-A6`, before any arm ran.** The original read *"Jaccard
+> overlap below 0.5"* beside the sentence *"fewer than half the artists we show as similar to them
+> are the same artists."* **Those are different statistics, and the gap is one line of arithmetic.**
+> For two lists of equal length `d`, Jaccard is `c / (2d − c)`, so a Jaccard of 0.5 means
+> `c = 2d/3` — the bar fired when **more than a third** of the list changed, not more than half.
+> The sentence's own condition, `c < |A|/2`, is a Jaccard of **1/3**. `CLAUDE.md` requires the plain
+> sentence to be fixed beside the value *before any result exists* precisely so it cannot be
+> reshaped to fit one; here the two disagreed at authoring time, which is the cheapest possible
+> moment to find it.
+>
+> **Retention is adopted rather than simply moving the Jaccard bar to 1/3, and the reason is a
+> second defect the same critique derived.** Jaccard is bounded above by the ratio of the two list
+> lengths, so a Jaccard of 0.5 or more is **arithmetically impossible** whenever one list is more
+> than twice the other. The original text asserted the opposite — *"both neighbour lists are capped
+> at 50 by the same cap rule, so the two sets are of comparable size and Jaccard is not distorted by
+> a length mismatch"* — and **that does not follow: the ceiling bounds the maximum, not the
+> spread.** The served map's median degree and the two committed arms' medians differ by 8 and 10
+> (served-population README §3, which owns those figures), so a large share of artists would have
+> been flagged with **zero contribution from neighbour identity**. On the *tightest* comparison
+> available — the two committed arms against each other, same pinned population, medians two apart
+> — the analyst measured **5.42 %** of the common set forced below 0.5 by the length pair alone;
+> the served-versus-arm comparison `LBA-M2` actually makes has a wider median gap and therefore a
+> larger forced share. Retention has no such bound: its denominator is the served list alone, so an
+> arm holding a longer list is not penalised for holding one.
+
+**Four raw quantities are recorded per artist, and five shares per arm** — the controls the
+critique named `C-β` and `C-γ`, adopted in full. *Plain: write down enough per artist that three
+different reasons a neighbourhood changed can be told apart afterwards.*
+
+Recorded per artist: the served list's length, the arm list's length, the intersection size, and
+`b_out` — the number of the arm's neighbours that are **not** artists the app serves today.
+
+| reported per arm | what it is |
+|---|---|
+| **`R`** | intersection ÷ served list length — **the gated statistic** |
+| **`R_avail`** | intersection ÷ the number of served neighbours that are **in the arm's population at all** — *plain: of the artists we show today that this map could have chosen, how many did it keep?* **This is the control that separates "it chose differently" from "it was never available to choose"** |
+| **`b_out` share** | `b_out` ÷ the arm list's length — *plain: what fraction of the new neighbours are artists the app does not serve today* |
+| **forced share** | the share of the common set whose two list lengths differ by more than 2× — **the null model for a Jaccard-style read**, reported so the retired statistic's bound stays visible and a later reader cannot re-adopt it unknowingly |
+| **denominator, both ways** | the changed count as a share of the common set **and** as a share of `V`, so the absent half and the changed half compose additively (`C-γ`). Without this the two halves trade off: an arm that loses more served artists gets a **better**-looking changed share, because the artists whose neighbourhood moved most have been removed from the denominator |
+
+**Why `R_avail` is not optional, derived.** Writing `J` for the Jaccard of the same pair and `J_V`
+for the Jaccard with the arm's list restricted to the served population, the identity is
+`1/J − 1/J_V = b_out / c`: **the population contribution is exactly additive in inverse-Jaccard
+units**, so it can be reported as its own column rather than left bundled into one number. The same
+separation in retention terms is `R_avail − R`, which is non-zero exactly when some served
+neighbour was outside the arm's population. **Three causes lower any one-scalar overlap measure — a
+pure re-ranking, the cap re-selecting from a larger candidate set, and the population changing — and
+no single scalar separates them.** Retention sees the second and third; `R_avail` removes the third;
+a pure re-ranking is invisible to all of them, which is why the rank companion below exists.
+
+**A rank companion, descriptive and ungated: `overlap@10`** — the share of the served map's ten
+strongest neighbours still present in the arm's list. *Plain: of the ten artists we currently think
+are closest to them, how many survive?* A pure re-ranking — the same set in a different order —
+scores `R = 1.0` and is invisible to every membership statistic, and the top of the list is what a
+journey actually walks through. **No threshold attaches to it.**
+
+**An arm-to-arm comparison within each population row**, adopted as the critique's `A7`:
+`LBA-A1`↔`A2`↔`A3`, `LBA-A4`↔`A5`↔`A6`, `LBA-A7`↔`A8`↔`A9`, using the same statistics. *Plain:
+compare the maps to each other as well as to today's, so the effect of the strength bar can be seen
+without everything else moving at the same time.* **Both sides share a population and an emitter, so
+the population cause and the `LBA-X4` data bundle are absent by construction — this is the only
+`LBA-M2` comparison in the design that isolates the threshold.** ⚠ On the `U` row `LBA-X6` still
+applies: the population moves with the threshold there, so that row's arm-to-arm comparison is not
+one-column in the sense the other two rows are.
 
 **Effect size: reported descriptively, no threshold.** *Plain: this is what the owner is deciding
 about, not something a number can decide for him.* A map that changes a lot is what adoption
@@ -479,8 +597,9 @@ about, not something a number can decide for him.* A map that changes a lot is w
 his, on his product judgment, informed by §8's listen if he says go. **A session must not attach a
 bar to this and must not describe a high figure as a failure or a low one as a pass.**
 
-⚠ **`LBA-X4` and `LBA-X5` travel with every `LBA-M2` figure.** It is a comparison with the served
-map, so the data column is a bundle no arm separates, and the cap-step population term applies.
+⚠ **`LBA-X4` and `LBA-X5` travel with every `LBA-M2` figure taken against the served map** — the
+data column is a bundle no arm separates, and the cap-step population term applies. **Neither
+travels with the arm-to-arm comparison**, which is exactly its point.
 
 ### `LBA-M3` — the added artists' supply
 
@@ -498,14 +617,42 @@ gave `LBD-C2a`.
 baseline, admissible only with both controls reported; ≥ 10 points without them.** The bars and
 their derivation are the `LBD-` pre-registration's §3 and are not re-derived here.
 
-⚠ **`LBA-X6`, and it is a construction fact rather than a result: over a `V` arm this statistic
-is 1.0.** The added set is exactly `P − V`, so no member of it is in `V` and every one counts as
-absent. **That is not a finding and must never be reported as one** — it is the `V` population
-rule's own definition made visible, and it is arguably the single most decision-relevant thing on
-this page: *the population rule that keeps today's artists is the rule that keeps none of the
-artists this track exists to help.* **Consequence, a bar: `LBD-G2` is applied within a population
-rule and never across one.** An `LBA-A1`→`LBA-A4` difference on this statistic is the population
-rule's definition, not a supply movement.
+> ### ⚠ Where this bar is admissible, resolved here rather than left to an executing session
+>
+> **Revised 2026-09-14 under `LBA-AM1`, findings `LBA-AM1-A4` and `LBA-AM1-A9`.** The original text left two questions
+> open that a session running the arms would have had to answer with results in hand, which is the
+> one moment a pre-registration exists to take the decision away from.
+>
+> **On the `V` row the bar is UNFIREABLE, by construction.** The added set is exactly the artists
+> the extended crawl has and the served map does not, so no member of it is in `V`; the emitter
+> writes a payload only for a member of the arm's population, so no `V` arm can contain one. The
+> statistic is therefore **1.0 for `LBA-A1`, `LBA-A2` and `LBA-A3` alike**, and the difference
+> between any two of them is **identically zero**. §2.6 already said the value is a construction
+> fact; what it did not say is the consequence — **`LBD-G2`'s bar cannot fire on `A1`↔`A2`,
+> `A1`↔`A3` or `A2`↔`A3`, so a null there carries no information about the threshold.** This is the
+> shape `NEXT.md` records for `CRS-C3`, which was structurally unable to fire on any selectable
+> Track B cell and whose null therefore said nothing about concentration. **A null that cannot be
+> anything else is not evidence.** See `LBA-R4`, which is amended to match.
+>
+> **On the `U` row the bar is admissible DESCRIPTIVELY ONLY.** `LBA-M3`'s own rule is that
+> `LBD-G2` applies within a population rule and never across one; `LBA-X6` says the `U` population
+> is a *dependent* variable that moves with the threshold. Those two clauses conflicted as written.
+> **The resolution: the bar may be computed and reported on `A7`↔`A8`↔`A9`, and it may never be
+> read as a one-column threshold attribution there.** Every `U`-row sentence naming it carries
+> `LBA-X6` beside it.
+>
+> **So the bar is admissible as a one-column threshold read on exactly two arms** — `LBA-A5` and
+> `LBA-A6`, each against `LBA-A4`. Stated as a number rather than left to be counted later, because
+> a reader who believes the lattice supports nine such reads will over-weight the evidence by more
+> than four times.
+
+**A fourth stratum, added under `LBA-AM1` finding `LBA-AM1-A10` (`C-ε`): `nodes(arm) − V`, per arm,
+descriptive.** *Plain: the artists this map has that the app does not serve today — including the
+ones no crawl of ours ever found.* The three pinned strata are all subsets of the extended crawl's
+population, so **none of them can see the artists a `U` rule adds beyond it** — which is the only
+thing `LBA-A7`–`A9` exist to test. This stratum **cannot be pinned** and is derived per arm
+(`LBA-X6`), so it is descriptive, carries no bar, and its membership is recorded with the arm's
+figures so a later reader can tell which artists it covered.
 
 ### `LBA-M4` — playability
 
@@ -515,7 +662,16 @@ rule's definition, not a supply movement.
 **Run, not estimated: the class.** The offline census half (`LBA-D6`) applies `ULC-D2` — no
 sole-credited substantial release group — over the union population, using the coverage store at
 `builder/analysis/census-coverage/ulf_coverage.json` so that only genuinely new artists cost a
-dump pass. Each arm reads its own share off that one pass. **This is exact.**
+dump pass. Each arm reads its own share off that one pass.
+
+> ⚠ **"Exact" is exact only for freshly evaluated artists, and the qualification is now required
+> rather than optional** (`LBA-AM1`, finding `C-δ`). The coverage store carries verdicts from
+> three earlier censuses, each tagged with its source, and those verdicts were computed against
+> **earlier MusicBrainz snapshots than the pinned `20260905-002519` one**. The provenance is
+> recoverable per artist, so **every `LBA-M4` class figure is reported split by verdict source** —
+> freshly evaluated against this dump, versus each carried census — and the word *exact* is used
+> only of the fresh share. The store's own current membership is recorded before and after the
+> pass (`LBA-D6`), since the census both reads and writes it.
 
 **Estimated, and here is exactly how: the drop.** Dropping requires the network keep-check —
 a commercial-DSP link plus a resolving clip — which `LBA-D6` does not run. So the drop share is
@@ -526,7 +682,7 @@ different populations. Those rates are owned by
 `builder/analysis/2026-08-09-cex-recensus/ulf_census.json` and are **not restated here**. Every
 `LBA-M4` drop figure is labelled **estimated** wherever it appears.
 
-**Two bounds on the estimate, both stated now.**
+**Three bounds on the estimate, all stated now.**
 
 1. **It is an over-estimate of what the app cannot play, by `ULC-F4`'s mechanism** — `LBA-X2`(b).
    The size of the over-drop on the two committed payloads is owned by the LUX-E1 drift-source
@@ -534,9 +690,17 @@ different populations. Those rates are owned by
 2. **The carried verdicts are un-re-run.** Both committed payloads carry drop verdicts inherited
    from the earlier no-release and featured-credit rules, and those entries hold no clip record.
    The same README bounds that residue; it is unmeasured, not zero.
+3. **The within-class drop rate is being extrapolated outside the populations it was measured on**
+   (`LBA-AM1`, `C-δ`). Reporting both committed rates as a range is honest about their spread; it
+   is **not** a control for applying either to `U`, and no sentence may treat it as one.
 
 **Effect size: `LBA-G4`, §5** — on the *added* half only, because that is the half that discounts
 `LBA-M3`. The whole-population share is **reported descriptively, no threshold.**
+
+> ⚠ **`LBA-G4` is `n/a` on the `V` row, not zero** (`LBA-AM1`, finding `LBA-AM1-A5`). Its subject is the
+> artists an arm adds beyond `V`, and for a `V` arm that set is empty — a share of nothing, not a
+> share of zero. The per-arm table prints **`n/a`**; printing `0` would read as *perfectly
+> playable*, which is the opposite of *not measured*.
 
 ### `LBA-M5` — what it costs to operate
 
@@ -549,9 +713,13 @@ different populations. Those rates are owned by
    stage timings, spill and the combine are owned by `builder/analysis/2026-09-08-lbd-similarity/README.md`
    §4; the `LBD-A4` pass's by `builder/analysis/2026-09-13-lbd-a4/README.md` §4; the hardware
    context — the dump on a spinning disk and DuckDB's thread-count trap — by §4 of the first.
-   **What a refresh adds over today's pipeline is this pass and nothing else**: the archive replay
-   (emit, then build) is a cost the pipeline already pays, and its wall clocks are owned by
-   `builder/analysis/2026-09-10-lbd-supply/README.md` §1 and §2.
+   **What a refresh adds over today's pipeline at the SERVED population is this pass and nothing
+   else**: the archive replay (emit, then build) is a cost the pipeline already pays, and its wall
+   clocks are owned by `builder/analysis/2026-09-10-lbd-supply/README.md` §1 and §2. ⚠ **At any
+   population above `V` that sentence no longer holds** — §6's steps 6 and 7, the re-census and the
+   fame fetch, are additional and are sized by part 2 and by `LBA-G3`. *(Corrected 2026-09-14,
+   `LBA-AM1`, finding `LBA-AM1-O3`: as first written this part and §6's ⚠ contradicted each other for
+   every arm above `V`.)*
 2. **The fame fetch — estimated, and the method is fixed here.** `fetch_fame` posts batches of
    `MAX_PER_REQUEST = 1000` MBIDs (`fame.py:57`, the endpoint's own truncation limit read from
    ListenBrainz source) and pauses `BuilderConfig.request_delay_seconds` = 1 / `requests_per_second`
@@ -568,45 +736,110 @@ different populations. Those rates are owned by
    and a different cadence changes only step 1's frequency.
 4. **The refresh procedure**, §6 — a numbered list, which is the deliverable.
 
----
+⚠ **`LBA-M5` adds no arm-discriminating information beyond `LBA-M1`'s artist count, and no read may
+treat it as independent evidence about an arm** (`LBA-AM1`, finding `LBA-AM1-O2`). Parts 1 and 3 are
+identical across all nine arms — one pass over one shared table, one corpus — part 4 is a
+deliverable rather than a measurement, and part 2 is a deterministic function of `LBA-M1`'s N. It is
+a cost statement about a *candidate*, not a comparison between candidates.
 
 ## §5 — Gates, each with its own effect size
 
 **Every gate carries the size of difference that fires it.** A trigger without one cannot tell the
 finding it was written for from noise, and it fires the expensive response either way.
 
+> ### ⚠ All four gates were revised on 2026-09-14 under `LBA-AM1`, before any arm ran
+>
+> The `ml-graph-analyst` critique found that **two of the four were not evaluable as written** —
+> `LBA-G1`(a) compared a stripped-down build against a bar protecting a shipped one, and `LBA-G2`
+> extrapolated peak memory from a basis that does not exist on the record — and that a third fired
+> too late to act on. Each is re-derived below with its inputs named. **No result existed for any of
+> them**, so the commit-before-results property is intact and this revision spends none of it.
+
 | gate | plain sentence | fires when | consequence | effect size |
 |---|---|---|---|---|
-| **`LBA-G1`** hosting | *this map is too big for the machine the app runs on* | **either** half: (a) median peak RSS of a `GraphStore`-only boot exceeds **1.4 GB**; **or** (b) the arm's **median d0 query wall-clock exceeds 2× the served map's**, measured back to back in the same process on the same pair set | the arm is reported as **requiring a hosting or router change before it could ship**, and that requirement is named in every sentence about it. **It does not stop the arm being measured** — the other four measurements are taken and reported | 1.4 GB; 2× |
-| **`LBA-G2`** build feasibility | *we cannot build this map on this machine* | stage 1's counts project a build peak above **24 GB**, extrapolating linearly in **neighbour rows** from the three builds on the record whose rows and wall clocks are owned by the two build READMEs | the cell is **not emitted or built**. §2.6's three barred conclusions apply. **Not a finding about anything** — a resource fact, `LBD-G4`'s shape | 24 GB projected peak |
-| **`LBA-G3`** census feasibility | *working out which artists are unplayable is taking too long* | the offline census pass exceeds **6 hours** of wall-clock | stop it; `LBA-M4`'s class share for the uncensused part is **estimated** from the class rates the two committed censuses measured, labelled as such, and the report says which arms carry an estimated class rather than a measured one | 6 h |
-| **`LBA-G4`** playability discount | *the artists this rule adds are much more often unplayable than the ones we already have* | for an arm, the class share among the artists it adds **beyond `V`** exceeds the class share the committed censuses measured on their own populations by **≥ 10 percentage points** | `LBA-M3`'s supply figure for that arm is **reported twice** — as measured, and with the estimated drop applied — and the report says the gain is discounted. **It stops nothing** | 10 pp |
+| **`LBA-G1`** hosting | *this map is too big, or too slow, for the machine the app runs on* | **either** half: (a) **projected shipped peak RSS** — the census build's measured median peak × `metadata_ratio`, **plus** `framework_rss` — exceeds **1.6 GB**; **or** (b) the arm's **median d0 query wall-clock exceeds 2× the served map's**, measured back to back in the same process on the same pair set | the arm is reported as **requiring a hosting or router change before it could ship**, and that requirement is named in every sentence about it. **It does not stop the arm being measured** — the other four measurements are taken and reported | 1.6 GB; 2× |
+| **`LBA-G2`** build feasibility | *we cannot build this map on this machine* | the arm's projected build peak RSS exceeds **24 GB**, projected from a fit over **every build already instrumented in this stage**, in **archive neighbour rows** | the cell is **not emitted or built**. §2.6's three barred conclusions apply. **Not a finding about anything** — a resource fact, `LBD-G4`'s shape | 24 GB projected peak |
+| **`LBA-G3`** census feasibility | *working out which artists are unplayable would take too long* | **at stage 1**, the projected offline census pass exceeds **6 hours**, projected as a fixed scan floor plus (artists in the union population but absent from the coverage store) ÷ the per-artist rate the 2026-08-09 census measured | the pass is **not started**. `LBA-M4`'s class share for the uncovered part is **estimated** from the class rates the committed censuses measured, labelled as such, and the report says which arms carry an estimated class rather than a measured one | 6 h projected |
+| **`LBA-G4`** playability discount | *the artists this rule adds are much more often unplayable than the ones it keeps from today's map* | for an arm, **the class share over `nodes(arm) − V` exceeds the class share over `nodes(arm) ∩ V` by ≥ 10 percentage points** — both taken from the **same census pass, the same dump and the same arm** | `LBA-M3`'s supply figure for that arm is **reported twice** — as measured, and with the estimated drop applied — and the report says the gain is discounted. **It stops nothing** | 10 pp |
 
-**Where each bar comes from, since two have no prior calibration and saying so is the point.**
+### Where each bar comes from, and which of its inputs are measured rather than chosen
 
-- **`LBA-G1`(a), 1.4 GB.** 70 % of the instance's 2 GB. The 30 % headroom covers the Python
-  interpreter, FastAPI, the clip cache and — deliberately — `LBA-X8`'s metadata overhead, which a
-  census build does not carry. **A design choice with no prior calibration**, in the same sense
-  `LBD-G1`'s 0.60 floor was, and stated as one.
-- **`LBA-G1`(b), 2×.** The Gate 2→3 review's live calibration found the container **2.5–3.5×
-  slower per request than the dev laptop** and throughput flat under concurrency; its top blocking
-  finding rests on a single uncontended obscure request already costing about two seconds live.
-  **A 2× local increase therefore lands live somewhere past four seconds**, which is where that
-  review's health-check cascade begins to bite. The bar is set at the point where the review's own
-  argument changes, not at a round number.
-- **`LBA-G2`, 24 GB.** The machine has 32 GB; 24 GB is the same bar `LBD-G4` used for the same
-  machine and the same reason. `LBD-AM4-2` barred `LBD-A3` from building on exactly this ground,
-  and this gate is that judgement made mechanical and applied to every cell alike.
-- **`LBA-G3`, 6 h.** A working-session choice, not a measurement: the longest census pass that
-  still fits between two sessions without occupying the owner's machine for a working day. The
-  one census on the record at a comparable population is owned by the 2026-08-09 execution log
-  §6, and this bar sits above it with room. **Stated as a choice.**
-- **`LBA-G4`, 10 pp.** Roughly twice the spread between the class rates the three censused
-  populations on the record produced — the only calibration available for this quantity, and the
-  spread is what separates "a different population" from "a materially less playable population".
-  Figures owned by the two census JSONs named in `LBA-M4`.
+**`LBA-G1`(a) — 1.6 GB, and the two terms that make it evaluable.** *Plain: the limit is about the
+map the app would actually load, not the stripped-down one we measure.* The instance holds 2 GB
+(`stack.py:268-273`); 1.6 GB is **80 %**, leaving 20 % for request-time allocation and OS slack.
+That margin is **a design choice with no prior calibration and is stated as one.** What is *not*
+chosen is the rest of the expression:
 
----
+- **`metadata_ratio`** is measured (`LBA-M1`'s calibration block), not assumed. **The original bar
+  assumed 30 % of the instance would cover the interpreter, the framework, the clip cache *and*
+  the metadata a census build omits — one flat number standing in for four terms, three of which
+  scale differently.** The critique measured the metadata term alone on a pair of artifacts
+  identical in artist count and CSR entries: **it nearly doubles resident cost while adding only
+  about a third to serialised bytes**, because `GraphStore` holds those keys as Python lists of
+  strings and dicts while the CSR arrays stay as numpy. A flat deduction in the wrong direction by
+  that much admits an arm that cannot boot.
+- **`framework_rss`** is measured once and **has never been measured in this project**. Until it
+  is, `LBA-G1`(a) is **not evaluable**, and an executing session that reaches stage 2 without it
+  must take it before reading the gate rather than guessing it.
+
+**`LBA-G1`(b) — 2×, and what its justification does and does not rest on.** The ratio is
+self-normalising, which is its strength: it compares an arm with the served map in the same process
+on the same pairs, so machine state cancels. The Gate 2→3 review's live calibration found the
+container **2.5–3.5× slower per request than the dev laptop** with throughput flat under
+concurrency, and its top blocking finding rests on a single uncontended obscure request already
+costing about two seconds live — **all owned by that review and not restated.** ⚠ **Converting that
+into "a 2× local increase lands past four seconds live" requires the served map's own local median
+d0, which no document on the record states.** *(Corrected 2026-09-14, `LBA-AM1`, finding `LBA-AM1-O4`:
+the original text asserted the four-second figure as though it followed.)* Two consequences, both
+binding: the missing quantity **is measured as part of `LBA-M1` itself**, since the served map's
+median d0 is one of the two numbers the ratio is built from — so the gate supplies its own
+calibration; and **the cited two-second figure is a tail while the gate reads a median**, so the
+report gives **p50 and p95 side by side** and the gate fires on the median alone.
+
+**`LBA-G2` — 24 GB, and the basis it now has.** The machine has 32 GB; 24 GB is the bar `LBD-G4`
+used for the same machine and the same reason, and `LBD-AM4-2` barred `LBD-A3` from building on
+exactly this ground. ⚠ **The original text projected from "the three builds on the record whose
+rows and wall clocks are owned by the two build READMEs" — and that basis does not exist**: there
+are **four** such builds, not three, and **none of them records a memory figure at all.** Neither
+build README nor any committed JSON beside them carries one (checked 2026-09-14), and wall clock is
+not a proxy for peak memory — across those four builds it varies several-fold per neighbour row for
+reasons the served-population README itself attributes to OS cache state. So the projection is now
+**built rather than assumed**:
+
+- **Peak RSS is instrumented in the stage-2 build wrapper** and recorded per build, beside the
+  neighbour-row count already recorded. This is the missing instrument, and it is a few lines in
+  `lbv_build.py`'s shape.
+- **Stage 2 builds in ascending order of archive neighbour rows**, so every projection is an
+  interpolation or a short extrapolation from builds already completed, and the first builds are
+  the small safe ones. A cell is stopped when its projection from **all** instrumented builds so
+  far exceeds 24 GB.
+- ⚠ **The unit is ARCHIVE NEIGHBOUR ROWS — pre-cap, two per pair — and not CSR entries.** Three
+  edge units are in play in this track and the served-population README's §0 records a build
+  already refused once for confusing two of them. On the committed arms the pre-cap and post-cap
+  counts differ by a factor of several; reading one as the other misprojects a build peak by that
+  factor.
+
+**`LBA-G3` — 6 h, and it now fires at stage 1 rather than six hours into stage 3.** The bar is a
+working-session choice — the longest census pass that still fits between two sessions without
+occupying the owner's machine for a working day — and is **stated as a choice**. ⚠ **What changed
+is the variable, not the bar** (`LBA-AM1`, finding `LBA-AM1-A11`): the cost driver is the count of union
+members **not already in the coverage store**, which stage 1 produces for free, and the one census
+at a comparable population on the record (owned by the 2026-08-09 execution log §6) gives both the
+scan floor and the per-artist rate. Projecting at stage 1 costs nothing; discovering the overrun in
+stage 3 costs six hours and an unmeasured arm.
+
+**`LBA-G4` — 10 pp, and its baseline is now one column away.** ⚠ **The original baseline was the
+class rates the committed censuses measured on their own populations** — a different population, a
+different MusicBrainz dump, and a *whole-population* share set against an *added-subset* share:
+at least two columns, possibly three. *(Corrected 2026-09-14, `LBA-AM1`, finding `LBA-AM1-A5` / `C-δ`.)* The
+baseline is now **within the arm**: the class share over the artists it adds beyond `V` against the
+class share over the artists it keeps from `V` — **same rule, same dump, same pass, same arm, one
+column.** The 10-point size is unchanged and is still calibrated on the spread between the class
+rates the censuses on the record produced, which remains the only calibration available for this
+quantity; those figures are owned by the two census JSONs named in `LBA-M4`. *(The original
+derivation said "three censused populations" while the firing clause said "two committed censuses";
+the bar is calibrated on the spread across **all** censused populations on the record, and the
+firing clause is the within-arm comparison above.)*
 
 ## §6 — The refresh procedure
 
@@ -672,7 +905,8 @@ query-cost halves have been taken on that arm. *complete* = every cell either bu
 | **`LBA-R1`** | **no arm fires `LBA-G1`** | *Plain: every map we could build still fits the machine the app runs on, so size is not what decides this.* The decision then rests on `LBA-M2`, `LBA-M3` and `LBA-M4` alone, and the report says so | complete **and** sized |
 | **`LBA-R2`** | **`LBA-G1` fires on some arms and not others** | *Plain: some of these maps would need a bigger machine or a faster router before they could ship, and the report names which and on which half.* **The hosting requirement is a cost, not a disqualification** — whether to pay it is the owner's. The arms below the bar are reported unchanged beside them | complete **and** sized |
 | **`LBA-R3`** | **`LBA-G1` fires on every arm above `V`** | *Plain: any map bigger than the one we serve today would need the hosting to change.* The population question then **is** a hosting question, and `LBA-M5`'s operating cost is read beside it. This does not say the change is not worth making | complete **and** sized |
-| **`LBA-R4`** | within a population rule, the three thresholds **do not separate** on `LBA-M2`'s absent share, `LBA-M3` or `LBA-M1` — no pair differing in threshold alone moves `LBD-G2`'s bar on `LBA-M3`, and the absent shares lie within a point of each other | *Plain: how much listening evidence we demand barely changes the map, once the population is fixed.* **The threshold is then not the decision** and the report says so plainly. ⚠ **This is not evidence that the thresholds sound alike** — that is `REQ-38`'s question and no listen has been run (`LBA-D3`); `REQ-41` bars reading any absence of difference as equivalence | complete |
+| **`LBA-R4`** | **on the `P` row, and on the `U` row with `LBA-X6` beside it**: the three thresholds **do not separate** — neither `LBA-A5` nor `LBA-A6` moves `LBD-G2`'s bar on `LBA-M3` against `LBA-A4`, the absent shares lie within a point of each other, and `LBA-M1` does not fire `LBA-G1` differently across them | *Plain: how much listening evidence we demand barely changes the map, once the population is fixed.* **The threshold is then not the decision** and the report says so plainly. ⚠ **This is not evidence that the thresholds sound alike** — that is `REQ-38`'s question and no listen has been run (`LBA-D3`); `REQ-41` bars reading any absence of difference as equivalence | complete |
+| **`LBA-R4-V`** *(added 2026-09-14, `LBA-AM1`, finding `LBA-AM1-A4`)* | **the `V` row is excluded from `LBA-R4` and its outcome is stated here instead**, because two of that read's three clauses are already settled on the committed record and the third cannot fire at all | *Plain: on today's artists, we already know from work that is finished what the strength bar does to the map, and one of the three things `LBA-R4` looks at could never have told us anything.* **(i) The `LBA-M3` clause is UNFIREABLE** — the statistic is 1.0 for all three `V` arms by construction, so every threshold difference on it is identically zero and the null carries no information (`LBA-M3`'s block; the `CRS-C3` shape). **(ii) The absent-share clause is ALREADY RESOLVED and resolved AGAINST the read**: the two committed `V`-row arms' absent counts are owned by the served-population README's §3, and their difference as a share of `V` is **larger than one percentage point**, so `LBA-R4`'s "within a point" condition fails on this row before anything is run. **(iii) Only the `LBA-M1` clause is live**, and §4's block records that it measures the threshold with far less dynamic range than the population. **Consequence: no `LBA-R4`-shaped conclusion may be drawn about the `V` row**, and the `V` row's threshold evidence is the arm-to-arm `LBA-M2` comparison and nothing else | derived — **(ii) is already true on the committed record and is stated here, before stage 1, so that it cannot later be reported as a finding of this design** |
 | **`LBA-R5`** | within a population rule, the thresholds **do** separate | *Plain: how much listening evidence we demand visibly changes the map.* The report gives the three cells side by side with their plain sentences and **names no preferred value** — `LBA-D2` reserves that to the owner at the stop | complete |
 | **`LBA-R6`** | the population rules separate on `LBA-M3` but **not** on `LBA-M2`'s materially-changed share | *Plain: a bigger population reaches the artists that arrive unconnected without much disturbing the journeys between the artists the app already has.* **`LBA-X6` travels with the first half** — over `V` the added-set figure is 1.0 by construction, so this read is about the `P`-versus-`U` contrast and never about `V` | complete |
 | **`LBA-R7`** | the population rules separate on **both** | *Plain: a bigger population reaches the unconnected artists and also substantially rearranges who we show as similar to the artists you already see.* **Both halves are reported by fame band**, because the trade may fall differently at the two ends, and `LBA-X4`/`LBA-X5` travel with the second half | complete |
@@ -680,7 +914,7 @@ query-cost halves have been taken on that arm. *complete* = every cell either bu
 | **`LBA-R9`** | **the numbers say no** — for every arm, either `LBA-G1` fires, or the arm changes what the app serves substantially (`LBA-M2`) while adding little the app can play (`LBA-M3` discounted by `LBA-M4`) | *Plain: none of the maps we could build is both servable and clearly better than what we have.* **Stopping the `LBD-` track here is a complete outcome, not an abandonment** — the supply question is answered at the table level, at the map level and at the ear twice, and the listen-2 findings note's §6 says so. **No session proposes what follows** | complete, sized **and** censused |
 
 **Nothing in this table is reachable before its run state**, and a partial run licenses no read.
-In particular **`LBA-R4`–`LBA-R9` all presuppose `complete`** — every cell either built or stopped
+In particular **`LBA-R4` and `LBA-R5`–`LBA-R9` all presuppose `complete`** (`LBA-R4-V` is the one exception, and it presupposes only `derived`, because two of its three clauses are settled on the committed record and the third cannot fire) — every cell either built or stopped
 on `LBA-G2`'s stated bar with the bar recorded. A lattice reduced by judgement rather than by that
 gate does not reach `complete`, and none of these reads may be taken on it.
 
@@ -791,6 +1025,9 @@ resolved is marked *not-yet-built* with the dependency stated, or *stale*.
 | `BuilderConfig.requests_per_second`, `.request_delay_seconds` | `builder/src/artistpath_builder/config.py:74,289-290` | resolved |
 | `cmd_fame` | `builder/src/artistpath_builder/cli.py:196` | resolved |
 | `deezer_ids.py`, `dsp_links.py`, `artist_facts.py` | `builder/src/artistpath_builder/` | resolved |
+| `trimmed_union_cap` — the rule that enforces `degree ≤ degree_ceiling` | `builder/src/artistpath_builder/graph.py` | resolved — it is what bounds every arm's size and makes `LBA-M1`'s dynamic-range derivation possible |
+| `serialise`'s four mandatory metadata keys, and the five additive keys omitted when empty | `builder/src/artistpath_builder/artifact.py` | resolved — `LBA-M1`'s bytes definition rests on this split, and the size expression was checked against three committed artifacts byte-for-byte on 2026-09-14 |
+| `graph-lux4.bin` and its sidecar — `LBA-G1`(a)'s `metadata_ratio` calibration pair | `builder/scratch/` (gitignored; identity is its sidecar's sha256 `fd92a735…`) | resolved on this machine — **identical in artist count and CSR entries to `graph-msw-tu50.bin`**, verified against both sidecars 2026-09-14, which is what makes the pair a valid isolation of the metadata term |
 | App Runner `min_size=1`, `max_size=2`, `cpu="1 vCPU"`, `memory="2 GB"` | `infra/src/artistpath_infra/stack.py:199-200,268-273` | resolved |
 | the drop-list payloads `unlistenable_drop_algb_20260805.json`, `…20260809.json`, `no_release_drop_algb_20260802.json`, `featured_credit_drop_algb_20260803_am1.json` | `builder/src/artistpath_builder/data/` | resolved |
 
@@ -842,6 +1079,16 @@ GIT, and verified by the executing session before use.** `T.parquet` `03d47b05�
 - **The census coverage store's current membership** is `builder/analysis/census-coverage/ulf_coverage.json`,
   which the census scripts read **and write**; it is active data, not a frozen output, so its state
   at run time is whatever the last census left and stage 3 records it before and after.
+- **Peak-RSS instrumentation in the build wrapper does not exist** (`LBA-AM1`, finding `LBA-AM1-A3`). No
+  build on the record reports a memory figure — checked across both build READMEs and every
+  committed JSON beside them on 2026-09-14 — so **`LBA-G2` cannot be evaluated until stage 2 adds
+  it.** A few lines in `lbv_build.py`'s shape; named here rather than discovered at the gate.
+- **`framework_rss` has never been measured in this project** (`LBA-AM1`, finding `LBA-AM1-A2`), so
+  **`LBA-G1`(a) is not evaluable until it is.** One measurement on the served artifact, before
+  stage 2 reads the gate.
+- **The served map's local median d0 is on no document.** `LBA-M1`'s query-cost half produces it
+  as one of the two numbers its own ratio is built from, so the gate supplies its own calibration
+  — but nothing on the record states it today, and `LBA-G1`(b)'s narrative no longer assumes it.
 - **The `LBA-M1` query-cost pair set** is drawn in stage 2, after the built arms are known — the
   drawing rule is fixed in `LBA-M1` and the file is sha-pinned before any timing is taken.
 
@@ -865,4 +1112,115 @@ states plainly whether a result already existed when it was written and which cr
 commit-before-results property it therefore spends. That property is the whole point of the
 document.
 
-*(No amendments yet.)*
+---
+
+### `LBA-AM1` — the `ml-graph-analyst` critique, and the twelve changes it produced
+
+**Dated 2026-09-14. NOTHING HAD RUN AT THE TIME THIS WAS WRITTEN** — no arm derived, no archive
+emitted, no graph built, no census run, no listen designed. **The document's commit-before-results
+property is fully intact and this amendment spends none of it.** That is why the changes below are
+made **in place** rather than as notes beside the original text: there is no result any of them
+could have been reshaped to fit, and the register entry is what records that. **It is also why the
+original wording of each changed clause is quoted here** — the record of *why a definition is what
+it is* is the part that matters to a later reader, and it is the part a silent edit destroys.
+
+**Why it was run.** The owner commissioned one derivation-only critique of the measurement design
+before the PR merged and before anything was executed, on four questions and no judgement question:
+degeneracy and discriminating power; the exact behaviour of the "materially different neighbour
+list" statistic under three separate causes; population invariance and whether the stated controls
+isolate the arm's effect; and whether the effect sizes are in the statistic's own currency and every
+baseline genuinely one column away. The analyst was explicitly barred from being asked which arm
+should ship or how the owner should rule, and was not asked.
+
+**What the critique is, and what it is not.** It is a derivation over the committed record and the
+shipped code, plus three instrument probes on artifacts that already existed. **It read no arm of
+this document** — the analyst records declining to compute `LBA-M2`'s numerator on the two reused
+maps, on the grounds that doing so would spend the commit-before-results property for two of nine
+cells, and that decision is endorsed here. **Its figures are its own** and are cited, never restated
+as this document's.
+
+**Verified before acting, not taken on trust.** Four load-bearing claims were checked independently
+against source before any change was made: the two calibration artifacts are identical in artist
+count and CSR entries and differ only in the three `LUX-4` keys (both sidecars, and the files);
+**neither build README nor any committed JSON beside them records a peak-memory figure**, so
+`LBA-G2`'s stated extrapolation basis genuinely did not exist; `w_degree_hub` is `0.0`
+(`config.py:83`), so §2.3's reasoning about the saturation-degenerate top-1 %-by-degree set holds
+unchanged; and the APG1 size expression reproduces three committed artifacts byte-for-byte, which is
+what makes `LBA-M1`'s new bytes definition computable without a rebuild.
+
+> ### ⚠ The findings were numbered `A1`–`A12` bare, and that was itself a collision
+>
+> **Caught by `docs-lint` check 5 on 2026-09-14, in this very entry.** The analyst numbered its
+> findings `A1`–`A12`; written into this document as bare tokens they collided with **Track 2's
+> `A1`–`A7`, which are simultaneously factorial arms and amendment IDs** — the exact collision
+> `CLAUDE.md` records as having cost a session the rule that governed it, and which this
+> document's own header says it namespaces deliberately to avoid. The lint named seven other
+> documents already minting the same bare tokens.
+>
+> **They are now `LBA-AM1-A1`–`LBA-AM1-A12`, and the observations `LBA-AM1-O1`–`LBA-AM1-O4`**,
+> collision-checked across every ref: free. The numbering still matches the critique's own, so a
+> reader holding the analyst's report can map each finding one-to-one.
+>
+> **It is recorded rather than quietly fixed** because of where it happened: inside the register
+> entry whose subject is measurement discipline, written by a session that had checked the
+> `LBA-` series across every ref a few hours earlier. **Collision discipline does not transfer
+> from a series to the identifiers a later section mints inside it**, and a mechanical check is
+> what caught it, not a careful reading.
+
+#### The changes, each with the finding that produced it
+
+| # | what changed | the finding |
+|---|---|---|
+| **`LBA-AM1-A1`** | **`LBA-M2`'s gated statistic: Jaccard < 0.5 → retention `c/|A|` < 0.5.** The plain sentence is unchanged in meaning and now matches the value | *"Jaccard below 0.5"* and *"fewer than half the artists we show are the same"* are **different statistics**: at equal list lengths a Jaccard of 0.5 means a third of the list changed, and the sentence's own condition is a Jaccard of 1/3. They disagreed **at authoring time**, which `CLAUDE.md`'s fix-the-sentence-beside-the-value rule exists to surface |
+| **`LBA-AM1-A6`** | **Four raw quantities recorded per artist and five shares reported per arm**, including `R_avail`, the `b_out` share, the **forced share** as a null model, and the denominator both ways | Jaccard is bounded by the ratio of the two list lengths, so the original's *"both lists are capped at 50, so the two sets are of comparable size"* **does not follow — a ceiling bounds the maximum, not the spread.** A large share of artists would have been flagged with zero contribution from neighbour identity, and the rate would have been reported **with no null model** |
+| **`LBA-AM1-A7`** | **An arm-to-arm `LBA-M2` comparison within each population row**, plus `overlap@10` as an ungated rank companion | Three causes lower any one-scalar overlap measure and no scalar separates them; the arm-to-arm form removes the population cause and the `LBA-X4` bundle **by construction**, and a pure re-ranking is invisible to every membership statistic |
+| **`LBA-AM1-A4`** | **`LBA-R4` is scoped to the `P` and `U` rows; the new `LBA-R4-V` states the `V` row's position instead** | Two of `LBA-R4`'s three clauses were dead on the `V` row: `LBA-M3` is **unfireable** there by construction (the `CRS-C3` shape), and the absent-share clause is **already resolved against the read** by the committed record. A read partly settled before it is written must say so |
+| **`LBA-AM1-A9`** | **`LBD-G2`'s bar: admissible as a one-column threshold read on `LBA-A5` and `LBA-A6` only**; on the `U` row it is computed and reported but never read as a one-column attribution | `LBA-M3`'s *"within a population rule"* and `LBA-X6`'s *"the population is a dependent variable"* **conflicted**, and an executing session would have had to resolve it with results in hand |
+| **`LBA-AM1-A10`** | **A fourth descriptive stratum, `nodes(arm) − V`**, derived per arm | All three pinned strata are subsets of the extended crawl's population, so **none could see the artists a `U` rule adds beyond it** — the only thing `LBA-A7`–`A9` exist to test |
+| **`LBA-AM1-A8`** | **A `drop filter` column in §2.1, and four baselines restated as two columns** | §2.4 derived the hazard but the **baseline column** did not carry it, and the baseline column is what a later reader reads. `CLAUDE.md`: a disclaimer nothing later reads is not a control |
+| **`LBA-AM1-A2`** | **`LBA-G1`(a): 1.4 GB of a census build → 1.6 GB of a projected shipped build**, with `metadata_ratio` and `framework_rss` as measured inputs | The original deducted one flat 30 % to cover interpreter, framework, clip cache **and** the metadata a census build omits — four terms that scale differently. The metadata term alone was measured at nearly double the resident cost while adding about a third to bytes, so the bar was loose in the direction that admits an unbootable arm |
+| **`LBA-AM1-A3`** | **`LBA-G2`: peak RSS instrumented in the stage-2 build wrapper, builds ordered by ascending neighbour rows, the unit labelled** | **The stated extrapolation basis does not exist** — no build on the record reports memory, wall clock is not a proxy for it, and there are four such builds not three. The unit slip between archive neighbour rows and CSR entries is the one the served-population README records a refused build for |
+| **`LBA-AM1-A11`** | **`LBA-G3` moved from a stage-3 wall-clock stop to a stage-1 projection** | The cost driver is the count of union members absent from the coverage store, which stage 1 produces for free. As written the gate was discovered six hours into the pass |
+| **`LBA-AM1-A5`** | **`LBA-G4`: baseline moved inside the arm** (added-beyond-`V` against kept-from-`V`, same pass and dump), and **`n/a` rather than `0` on the `V` row** | The original baseline was two or three columns away — different population, different dump, whole-population share against added-subset share. And the gate's subject is empty on a `V` arm, so its value is a share of nothing; printing `0` would read as *perfectly playable* |
+| **`LBA-AM1-A12`** | **`LBA-M1`'s bytes: "the serialised census build" → the bare-artifact size**, computed identically for all nine arms by decoding | **No census build of `LBA-A1` or `LBA-A3` was ever serialised.** Their only artifacts carry all five additive keys, so seven arms would have been compared against two that were about a third larger for a reason that is not the arm — and `LBA-D9` forbids rebuilding them |
+
+#### Observations recorded, which changed no value
+
+- **`LBA-AM1-O1` — `LBA-G1` is in practice a population gate.** The cap rule bounds every arm's size by
+  its population, so `LBA-M1` measures the population column with far more dynamic range than the
+  threshold column. Recorded in `LBA-M1`; the statistic is **not** degenerate and no bar moved.
+- **`LBA-AM1-O2` — `LBA-M5` adds no arm-discriminating information beyond `LBA-M1`'s artist count.**
+  Three of its four parts are identical across all nine arms. Recorded as a bar on how it may be
+  read.
+- **`LBA-AM1-O3` — an internal contradiction**, corrected: `LBA-M5`(1)'s *"this pass and nothing else"*
+  and §6's ⚠ about steps 6 and 7 could not both be right for any arm above `V`. `LBA-M5`(1) is now
+  scoped to the served population.
+- **`LBA-AM1-O4` — `LBA-G1`(b)'s narrative overstated what follows.** The four-second live figure
+  requires the served map's local median d0, which no document states. The gate's **ratio** is
+  unchanged and sound; its justification now says what is measured and what is not, and the missing
+  quantity turns out to be one the gate measures itself.
+- **§2.3's `w_degree_hub` and rescale reasoning was checked and holds.** `w_degree_hub = 0.0` keeps
+  the saturation-degenerate top-1 %-by-degree set out of the router, and the cap's unclipped ranking
+  makes degree reads rescale-independent. **One case it does not cover, now named:** `LBA-M1`'s
+  query cost is neither a degree read nor a membership read, and the p99 rescale recomputes per map,
+  so an arm-to-arm wall-clock difference is not attributable to size alone.
+- **The distinct-listener arithmetic in §2.1 was re-derived and is correct**, including the warning
+  that an arm at threshold 5 would have been a dead arm.
+
+#### What this amendment does NOT do
+
+- **It changes no arm, no population rule and no threshold.** The 3 × 3 lattice is exactly as it was.
+- **It relaxes nothing.** Every bar it moves, it moves toward being harder to satisfy or toward being
+  evaluable at all; `LBA-G1`(a) is the only numeric bar to change and it is now applied to a larger
+  projected quantity.
+- **It does not reopen the owner's three rulings** (`LBA-D1`–`D3`), and the analyst was not asked
+  about them.
+- **It adopts nothing, changes no default, and touches no shipped code.** The critique named one
+  instrument that does not exist — peak-RSS recording in the build wrapper — and that is stage-2
+  work, not a change made here.
+- **It leaves two quantities explicitly unmeasured**, named so they are not discovered later:
+  `framework_rss`, without which `LBA-G1`(a) is not evaluable, and the served map's local median
+  d0, which `LBA-M1` now supplies as a by-product of its own comparison.
+
+**Identifier `LBA-AM1`.** Collision-checked across every ref on 2026-09-14 together with the rest of
+the `LBA-` series: free.
