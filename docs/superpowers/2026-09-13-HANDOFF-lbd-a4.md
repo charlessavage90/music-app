@@ -1,6 +1,10 @@
 # Handoff — `LBD-A4` run and `R10` read, 2026-09-13
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ACTIVE — ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-14 by
+[`2026-09-14-HANDOFF-lbd-s4-prereg.md`](2026-09-14-HANDOFF-lbd-s4-prereg.md), which is the
+CURRENT handoff.** **On that axis only** — everything else below still binds and must not be
+reverted: the `LBD-X6` block, the claims-not-to-revert list, and the artifact checksums, which
+are those artifacts' only identity. Supersedes
 [`2026-09-13-HANDOFF-lbl-listen2-read.md`](2026-09-13-HANDOFF-lbl-listen2-read.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns
 it.
