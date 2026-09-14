@@ -1299,6 +1299,30 @@ This entry is the register row.
 > `LBD-X6` stands until `LBD-A4` has run and `R10` has been read. This paragraph is a status marker added
 > beside the entry it qualifies, per this section's own rule; nothing in the entry is edited.
 
+> ⚠ **`LBD-A4` RAN and `R10` WAS READ, 2026-09-13 — and `LBD-X6` STANDS.** The line above says
+> `LBD-X6` stands *"until"* those two things happen. **They have now happened, and the result
+> CONFIRMED the bar rather than releasing it:** `R10` fires, on the edge-count half alone — the
+> pooled `LBD-C1` rate stays far inside its bar while edge count clears its own several times
+> over. So the pairing semantics are load-bearing, listen 2's result holds
+> for ListenBrainz's own pairing semantics only, and **no sentence may generalise it to the
+> cheaper form.** ⚠ **Reading the discharged condition as a lifted bar inverts the result** —
+> under the pre-committed other branch, had neither half fired, `LBD-X6` would have lifted.
+> Figures are owned by
+> [`../../../builder/analysis/2026-09-13-lbd-a4/README.md`](../../../builder/analysis/2026-09-13-lbd-a4/README.md)
+> §§4–7 and restated nowhere; the reasoning is
+> [`../2026-09-13-lbd-a4-execution-log.md`](../2026-09-13-lbd-a4-execution-log.md).
+> **`LBD-D6`'s precondition on `S4` is thereby satisfied**, and its requirement that every `S4`
+> arm record which pairing semantics it uses and why is now a live constraint rather than
+> bookkeeping. `LBD-R4` (design §7) is retired as a risk and confirmed as a fact.
+> ⚠ Two things this does **not** do. It does **not** widen `LBD-AM3`: **`LBD-G1` also fires on
+> `LBD-A4`** (top band below the floor), that override enumerates `LBD-A0`–`LBD-A3` and does not
+> name this arm, and whether it extends is the owner's and open — `R10` does not depend on it,
+> because its bar is a *difference between arms*, in which a lineage gap common to both cancels.
+> **`LBD-C1` is not cited as passed, for either arm.** And it does **not** say which pairing form
+> is *better*: `R10` establishes only that the choice matters. **No value in this document
+> changed and nothing is adopted.** Status marker added beside the entry, per this section's own
+> rule; nothing in the entry is edited.
+
 | | |
 |---|---|
 | **what it adds** | a differential pre-screen whose rule and two thresholds were committed before it ran, selecting on the magnitude of the journey difference and on unfamiliarity, blind to direction (`-1`); listen 2's twelve pairs, emitted from that screen and sha-pinned (`-2`); a minimum interior length of 3 as a generation gate (`-3`); `LBL-Q3`, the trade-off question (`-4`); `LBL-Q4`, pick strength, with the treatment that the tally does not read it (`-5`); sides dealt 4–4 (`-6`); the owner's `LBD-D6` ruling, verbatim (`-7`); `LBD-X6`, the pairing-generalisation exposure |

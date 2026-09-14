@@ -1105,6 +1105,55 @@ next action is the OWNER'S and it is a decision, not work.**
 
 ---
 
+## Status block — 2026-09-13, the `LBL-` listen-2 read (SUPERSEDED 2026-09-13 by the `LBD-A4` run)
+
+*Frozen. Never edited or annotated again. Anything in it that still binds was distilled into `NEXT.md`'s registries before it was demoted — in particular `LBD-X6`, whose condition has since been discharged while the bar itself STANDS.*
+
+**Last updated: 2026-09-13, at the `LBL-` listen-2 read.** **Nothing a listener sees changed in
+this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
+boxes are still his to press, untouched here.
+
+**`LBL-` listen 2 has been RUN, unblinded and READ.** `LBD-A0V` against `LBD-A5V` — *does
+accepting a connection two listeners support, instead of four, give better journeys?* The
+pre-registered read is **`LBL-R2`, the tie**: *"My ear cannot tell the two bars apart."* Figures
+are owned by [`findings/2026-09-13-lbl-listen2-results.md`](findings/2026-09-13-lbl-listen2-results.md)
+and restated nowhere, including here.
+
+**What it means in plain terms, and what cuts against it.** He judged 24 side-by-side journeys
+blind, on coherence and on novelty, and came out two rows apart on each against a bar of eight.
+Against that: **five of the 24 comparisons showed the identical journey on both sides** — the
+pre-screen required the maps to differ at two of three depths, not three — and on many of the rest
+the artists he did not know were the same artists on both sides. **The six instrument fixes all did
+what they were asked and he still called fewer rows than in listen 1.** The findings note's §0 and
+§4 own that reading; §4 lists eight instrument items for any future protocol.
+
+**Nothing is adopted, no default changed, no shipped code touched.** ⚠ **No verdict carries across
+the two listens** — a listen-2 tie says nothing about `LBD-A5V` against the served map — `REQ-41`
+bars reading either tie as equivalence, `GBL-` §5 bars re-listening either verdict, and **`LBD-X6`
+bars generalising listen 2's result to the cheaper pairing form** until `LBD-A4` has run and `R10`
+has been read. **`S4` — the adoption decision proper (population rule, API sizing, fame source,
+refresh procedure) — remains its own pre-registration and rebuild, and `LBD-D6` as ruled makes
+`LBD-A4` a precondition of any `S4` arm.**
+
+**Stopping the `LBD-` track here remains a complete outcome**, not an abandonment: the supply
+question is now answered at the table level, at the map level, and at the ear twice. **Which route
+follows is the owner's and no session proposes one.**
+
+⛔ **The two `LBL-` verdicts are run-once and final.** Neither may be re-listened on any protocol
+(`GBL-` §5). A future listen on new pairs would be a new amendment and is nobody's to start.
+
+Branch `lbl-listen2-writeup`, which carries the runner's two commits as well as the write-up
+(`gh` says where they are).
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file
+does not record how far down the list he has got.**
+
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
+   Nothing here changed them.
+2. **Merge the listen-2 write-up PR.**
+3. **Decide what follows the `LBD-` track** — stop, `S4`, or something else. The findings note's
+   §6 sets out what the result leaves open and deliberately recommends nothing.
+
 ## Next
 
 > ## ▶ THE GENTLE-ARM BLIND LISTEN IS RUN, UNBLINDED AND WRITTEN UP, 2026-08-04 (night). **The listen returned the pre-registered NULL. Option A CLOSES without adoption.** The owner's actions are a DECISION (below) and merging draft PR #77.
