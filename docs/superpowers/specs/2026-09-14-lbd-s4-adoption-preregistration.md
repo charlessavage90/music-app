@@ -723,7 +723,7 @@ different populations. Those rates are owned by
 2. **The fame fetch — estimated, and the method is fixed here.** `fetch_fame` posts batches of
    `MAX_PER_REQUEST = 1000` MBIDs (`fame.py:57`, the endpoint's own truncation limit read from
    ListenBrainz source) and pauses `BuilderConfig.request_delay_seconds` = 1 / `requests_per_second`
-   between batches, which at the shipped `requests_per_second = 5.0` (`config.py:74,289-290`) is
+   between batches, which at the shipped `requests_per_second = 5.0` (`builder/…/config.py:74,289-290` — **the builder's, not the API's**; both packages have a `config.py`) is
    0.2 s. So the estimate is **⌈N / 1000⌉ × (0.2 s + one round trip)**, with N the arm's measured
    artist count from `LBA-M1` and the round trip taken from the one measured fame run on the
    record (owned by `docs/superpowers/2026-08-09-cex-task11-execution-log.md` §6). The stage is
@@ -1144,7 +1144,7 @@ against source before any change was made: the two calibration artifacts are ide
 count and CSR entries and differ only in the three `LUX-4` keys (both sidecars, and the files);
 **neither build README nor any committed JSON beside them records a peak-memory figure**, so
 `LBA-G2`'s stated extrapolation basis genuinely did not exist; `w_degree_hub` is `0.0`
-(`config.py:83`), so §2.3's reasoning about the saturation-degenerate top-1 %-by-degree set holds
+(`api/…/config.py:83`), so §2.3's reasoning about the saturation-degenerate top-1 %-by-degree set holds
 unchanged; and the APG1 size expression reproduces three committed artifacts byte-for-byte, which is
 what makes `LBA-M1`'s new bytes definition computable without a rebuild.
 
