@@ -59,8 +59,9 @@ current handoff is [`2026-09-15-HANDOFF-lbd-s4-stage2.md`](2026-09-15-HANDOFF-lb
 
 **What it settled.** Seven archives emitted, **six cells built and one stopped**, and `LBA-M1`
 taken on eight arms. **`LBA-G2` FIRES on `LBA-A9`** — the corner is *unbuilt for a resource
-reason*. **`LBA-G1` fires on NOTHING.** Reads taken: `LBA-R0`, and `LBA-R1` of the three
-mutually exclusive hosting reads.
+reason*. **`LBA-G1` fires on NOTHING — on those eight arms**; `LBA-A9` was never sized, so the
+corner is outside that claim. Reads taken: `LBA-R0`, and `LBA-R1` of the three mutually exclusive
+hosting reads.
 
 **What it means in plain terms.** Every map we could actually assemble would still fit the machine
 the app runs on, with room to spare — so **size is not what decides this**. The biggest option of
