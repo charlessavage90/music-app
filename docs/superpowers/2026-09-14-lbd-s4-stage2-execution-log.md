@@ -256,6 +256,75 @@ stage-2 cell has its own `S4-<arm>` root. Both pinned population files came back
 `V`/`P` emit with the digests stage 1 recorded, so the emitter's rewrite-in-place redefined
 neither.
 
+### ⚠ Task 3, attempt 1 — the stage-1 instrument raises on every real build
+
+**The first build of `LBA-A2` failed, and the defect is in the instrument stage 1 wrote and
+pronounced self-tested, not in stage 2's wrapper.** Recorded here in full because the mechanism
+generalises and the *reason the self-test missed it* is the more useful half.
+
+```
+TypeError: 'Event' object is not callable
+  threading.py, _wait_for_tstate_lock -> self._stop()
+  stage2_build_instrument.py:127, in stop -> self.join(timeout=5)
+```
+
+**The mechanism.** `_Sampler` subclasses `threading.Thread` and assigns
+`self._stop = threading.Event()` (`:115`). **`Thread._stop` is a real method of the base class**,
+which CPython calls internally from `join()` → `_wait_for_tstate_lock()`. The assignment shadows
+it, so the first `join()` after the sampler thread has finished tries to call the `Event` and
+dies. A name collision with a private base-class method, not a logic error.
+
+**What it cost, and what it did not.** `build_from_archive` had already **returned** — the
+exception is raised in the `finally` that tears the sampler down — so the build succeeded and the
+graph was then thrown away. **No point was recorded, no artifact written, no result file
+produced, and `_points.json` did not exist.** The lattice is untouched and `LBA-G2` still has no
+result. The cost is about six minutes of `LBA-A2` build time.
+
+> #### Why a self-test that "passed" could not see it
+>
+> Stage 1's check 2 exercises the double-call guard by pre-populating `_ALREADY_BUILT` and calling
+> `instrumented_build(None, None, None, ...)`. **The guard raises at the TOP of the function,
+> before `_Sampler` is ever constructed.** So no self-test path reached `sampler.stop()`, and the
+> instrument was recorded as *"written and self-tested"* having never run a build to completion.
+> Checks 1 and 3 test the counters and the fit rule, neither of which touches the thread.
+>
+> **This is one step past the lesson stage 1 already recorded.** Its handoff says *"the self-test
+> for the build instrument was itself wrong at first and failed the instrument for being correct.
+> A test can be as wrong as the thing it tests."* True, and incomplete: **a test can also be
+> INCOMPLETE in a way that reads as green.** The stage-1 self-test was correct in everything it
+> asserted and never executed the one path that mattered. "Shown to go red" is necessary and is
+> not sufficient — it has to be shown to go red **on the path the instrument is actually used
+> on**.
+
+**The fix: `s4_instrument.py`, a forward copy, never an edit.** Stage 1's directory is a committed
+record whose README states the self-test was run and passed, quoting its output; editing that
+module in place would silently invalidate that statement and the sha the stage-1 record carries.
+The 2026-08-09 precedent refuses re-running a frozen script in place and this is the same shape.
+**Everything pure is IMPORTED from the stage-1 module rather than re-typed** — `BuildPoint`, the
+ctypes counters, `_LogCapture`, `rows_from_archive_manifest`, `record_point`, `project_peak_rss`
+and `LBA_G2_BAR_BYTES` — so **`LBA-AM2`(d)'s fit rule and the 24 GB bar are provably unchanged and
+this file cannot have moved a bar.** Only `_Sampler` and `instrumented_build` are redefined.
+
+**The new self-test covers the path the old one could not, and was shown to go red on it.** Check
+A runs `instrumented_build` end to end through sampler start, allocation, stop and join; it asserts
+the build's return value is passed through, a peak was recorded, the sampler thread actually
+recorded samples, and the sampler's maximum lies within the kernel's own peak. Adding it needed a
+`_build_fn` seam — with no way to inject a trivial build, no test could reach `sampler.stop()`,
+which is precisely where the instrument was broken; it defaults to the shipped
+`build_from_archive` and no stage-2 caller passes it.
+
+**Shown red, then green, and both were run rather than argued:** the same stub driven through the
+**stage-1** `instrumented_build` reproduces `TypeError: 'Event' object is not callable`; driven
+through `s4_instrument` it completes, reporting a 147.5 MiB peak over 4 samples with the sampler
+maximum inside the kernel peak. Check C re-asserts the imported fit rule still gives 16.676 GiB
+green and 31.353 GiB red at `LBA-A9`'s row count against a 24 GiB bar.
+
+**One artefact of the failed attempt is deliberately NOT erased.** `_projections.json` holds two
+`LBA-A2` entries, both *silent / not projectable*, timestamped a few minutes apart — one per
+attempt. The failed attempt genuinely happened, and a chronological record of every projection
+taken is worth more than a tidy one. The attempt-1 logs are kept beside it as
+`build_*.attempt1-instrument-defect.log`.
+
 ### A machine-state timeline, and why it is a separate file rather than a wrapper change
 
 The build chain's seven peaks form a fit, so the conditions each was measured under are part of the

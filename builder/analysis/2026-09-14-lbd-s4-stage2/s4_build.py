@@ -69,7 +69,11 @@ from dcf_ceiling_sweep import ReadOnlyArchive, hub_stats  # noqa: E402  (importe
 
 from lbd_source import LbdBulkSource  # noqa: E402
 from s4_common import bare_size_of_artifact, bare_size_of_graph, sha256_of  # noqa: E402
-from stage2_build_instrument import (  # noqa: E402
+# `s4_instrument` is a FORWARD COPY of stage 1's `stage2_build_instrument`, fixing a name
+# collision that made every real build die at teardown (`_Sampler` shadowed `Thread._stop`).
+# It IMPORTS the fit rule, the 24 GB bar and the unit-safe row reader from the stage-1 module
+# unchanged and redefines only the sampler and `instrumented_build`. See its docstring.
+from s4_instrument import (  # noqa: E402
     instrumented_build,
     project_peak_rss,
     record_point,
@@ -363,7 +367,14 @@ def main(argv: list[str] | None = None) -> int:
                                        if rule == "U" else "both applicable over this population"),
         "build_order_position": spec["order"],
         "script_sha256": sha256_of(Path(__file__)),
-        "instrument_sha256": sha256_of(HERE.parent / "2026-09-14-lbd-s4-stage1" / "stage2_build_instrument.py"),
+        "instrument_sha256": sha256_of(HERE / "s4_instrument.py"),
+        "instrument_note": ("s4_instrument.py — a forward copy of stage 1's "
+                            "stage2_build_instrument.py, fixing a Thread._stop name collision "
+                            "that made every real build raise at teardown. The fit rule, the "
+                            "24 GB bar and the row reader are IMPORTED from the stage-1 module "
+                            "unchanged."),
+        "stage1_instrument_sha256": sha256_of(
+            HERE.parent / "2026-09-14-lbd-s4-stage1" / "stage2_build_instrument.py"),
         "archive": {"root": str(archive_root),
                     "manifest_sha256": sha256_of(archive_manifest_path),
                     "payloads": archive_manifest["counts"]["payloads_written"],
