@@ -472,3 +472,49 @@ either side of that change. One unrelated Claude session on another project was 
 within the hour; its load therefore falls during the small early builds, where the machine is
 uncontended and a peak reads true, and is expected to be gone before `LBA-A9`, which is the only
 cell where contention could depress a peak.
+
+---
+
+## Closeout — mid-flight tier, 2026-09-15
+
+Run on the owner's instruction after the context-size hook fired at ~409k tokens. Tier:
+**A1, A2-mid, A3, A5, B1, B5, D1-mid, D3, D6, D7**. **B2, B3 and B4 are handed forward
+deliberately** — all three want a finished artifact — and are in `NEXT.md`'s deferral registry
+with a condition.
+
+| item | outcome |
+|---|---|
+| **A1** distil the log | This document, appended per task rather than at the end. |
+| **A2-mid** handoff | [`2026-09-15-HANDOFF-lbd-s4-stage2.md`](2026-09-15-HANDOFF-lbd-s4-stage2.md). Enumerations, not self-assessments. The previous handoff's role line was edited to name it as successor **and to carry the known-wrong instrument claim**. |
+| **A2-next** `NEXT.md` | Top block rewritten; the outgoing block **demoted to `NEXT-ARCHIVE.md`** and frozen. No git state written into it. |
+| **A3** deferrals | Four new rows, each with a condition. **One existing condition partly came due** — see below. |
+| **A5** processes | **No listeners on 8000 or 5173; this session never booted the app.** The machine-state sampler (PID 194136) was this session's, an infinite loop, and was **stopped here**. Two `powershell` processes started 2026-09-15 11:42 and 11:44 are **not this session's** and were left alone. **Nothing was left running and nothing needed to be.** |
+| **B1** docs audit | `docs-lint` found one hard failure — the stage-2 execution log unclassified in `docs/README.md` — **fixed**. Rows added for all three new documents. `doc-auditor` dispatched; its findings and their disposition are below. |
+| **B5** stale descriptions | **Clean both ways.** `.claude/` contains no description this work invalidated — the only matches are `logs/instructions-loaded.jsonl` rows, which are data. No document outside the figures owner restates a stage-2 number. |
+| **D1-mid** tree | **Clean, which is unusual for a mid-flight retirement and is deliberate**: every task was committed as it landed, so there are **no untracked paths to name** and nothing half-written. |
+| **D2** fixtures | **Inapplicable** — the committed test fixtures were not touched and no shipped artifact changed. Stated rather than omitted. |
+| **D3** provenance | Six built artifact sha256s recorded in the handoff and in each cell's `s4_build_*.json`. `LBA-A9` has none because it was never built. The pair set is sha-pinned. |
+| **D4** suites | **Not run, and this is a departure worth naming:** stage 2 touched **no shipped code** — every script is a forward copy under `builder/analysis/` — so no suite covers the diff. What was verified instead: the instrument's self-test (red **and** green), the emitter reproducing 21 committed counts, acceptance passing on six builds, and every artifact round-tripping through the shipped `GraphStore`. |
+| **D6** context layer | **Unconditional 50,977 characters; conditional 2,726 lines. Both EXACTLY unchanged.** This session added no rule, no memory, no skill or agent description. |
+| **B6-budget** | `NEXT.md` **431** lines (budget 250), `docs/README.md` **570** (budget 400), `TEST-QUEUE.md` **70** (budget 70, at it). ⚠ **This session grew both over-budget files** — four deferral rows and three map rows. Each is the document's **own job** rather than reasoning, but that is a reason they are not *deletable*, not a reason the files are not over. The standing deferral row for this remains live. |
+| **C1** use the app | **NOTHING written in `TEST-QUEUE.md`, and that is the discharge.** Stage 2 changed no shipped code and nothing the owner can press. Its 15 unticked boxes are untouched. |
+
+### The one existing deferral condition that partly came due
+
+**"Two documents are over the line budgets set for them 2026-09-12"** carries the condition *"when
+no second session is live in the tree"*, and names two actions: demote `NEXT.md`'s discharged
+deferral rows, and do `docs/README.md`'s `DLS-` item 5. **No second session was live, so the
+condition was met — and only half the first action was taken.** `A2-next`'s status-block demotion
+happened; **the discharged deferral rows were not demoted**, because this is a mid-flight
+retirement and a wholesale table rewrite is the thing least suited to it.
+
+**Recorded rather than quietly re-deferred**, which is what the `LUX-E1` row on that same registry
+exists to warn about: a condition that fires and is not honoured, un-noted, is indistinguishable
+afterwards from one that never fired. **The condition stays live and the row is unchanged.**
+
+### A note for whoever extends the `LBA-G2` fit
+
+The fit's coefficients were never recorded anywhere until the handoff: **slope 0.6164 GiB per
+million archive neighbour rows, intercept −0.165 GiB**, over six points. ⚠ **The intercept is
+slightly negative** — a fit artefact, not a physical claim, and a naive extrapolation far below the
+measured range would predict negative memory. The measured range is 8.9M–29.3M rows.
