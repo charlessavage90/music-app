@@ -1,0 +1,45 @@
+{
+  "arm": {
+    "p50_s": 0.965391,
+    "p95_s": 2.720201,
+    "mean_s": 1.144425,
+    "min_s": 0.003806,
+    "max_s": 4.211753,
+    "p50_ms": 965.391,
+    "p95_ms": 2720.201
+  },
+  "artifact": "C:\\unsung-fast\\lbd-artifacts\\LBA-A7-bare.bin",
+  "artifact_sha256": "f3a46525ac35be41739677d995deff5f3fc0d2e3a488e36896cff75538f8de7d",
+  "served_artifact": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+  "pairs": 200,
+  "pair_file_sha256": "2713e5369719dd39091363d8d0977b8ae2339b4df6a56ad707ca67a967528cc9",
+  "depth": "d0 \u2014 no exclusions, so n_known = 0, ramp_fame = 0.0 and the fame ramp is OFF (pathfinding.py:130-132). No deeper depth is measurable on a fame-free build.",
+  "interleaving": "per pair: served timed, then the arm timed, so drift cancels within each pair",
+  "served": {
+    "p50_s": 0.538887,
+    "p95_s": 0.837319,
+    "mean_s": 0.508439,
+    "min_s": 0.006191,
+    "max_s": 0.900203,
+    "p50_ms": 538.887,
+    "p95_ms": 837.319
+  },
+  "served_paths_empty": 0,
+  "arm_paths_empty": 0,
+  "lba_g1b": {
+    "statistic": "the arm's median d0 wall-clock / the served map's, same process, same pairs",
+    "ratio_p50": 1.7915,
+    "bar": 2.0,
+    "fires": false,
+    "reads_median_only": true,
+    "p95_reported_beside_it_not_read": {
+      "served_p95_ms": 837.319,
+      "arm_p95_ms": 2720.201
+    }
+  },
+  "served_local_median_d0_ms": 538.887,
+  "served_local_median_note": "the quantity \u00a75 records as being on NO document \u2014 LBA-M1 supplies it as a by-product of its own ratio, which is why the gate supplies its own calibration",
+  "bars": "This measures the COST of serving a query, never whether the answer is good (\u00a79).",
+  "script_sha256": "56d0890c8113e9798d63dff45bc1d843e28044c0ed29e1f8fa47ce2eec6c53fc",
+  "measured_utc": "2026-09-15T02:07:49.120865+00:00"
+}
