@@ -518,3 +518,33 @@ The fit's coefficients were never recorded anywhere until the handoff: **slope 0
 million archive neighbour rows, intercept −0.165 GiB**, over six points. ⚠ **The intercept is
 slightly negative** — a fit artefact, not a physical claim, and a naive extrapolation far below the
 measured range would predict negative memory. The measured range is 8.9M–29.3M rows.
+
+### B1 — the `doc-auditor`'s findings and their disposition
+
+Dispatched by this session rather than handed forward, per `closeout`'s *"Who runs B1"*. **All four
+findings were resolvable from the committed record; none is handed forward.**
+
+| finding | disposition |
+|---|---|
+| **Restated figures in the handoff** — four measured values owned by the stage-2 README (`LBA-A9`'s projection twice, the worst `LBA-G1`(b) ratio, the `U`-row p95s) | **Upheld and fixed.** Converted to citations by section. ⚠ **Naming a BAR is not a restatement** — 24 GiB and 2.0 are pre-registered constants from the governing document, and stage 1's handoff names its 6-hour bar the same way. The defect was the *measured* values. |
+| **`LBA-G1` fires on nothing — the eight-arm qualifier not inline** in `NEXT.md` and at the handoff's summary | **Upheld and fixed.** Both documents carried the qualifier prominently but later; on this project a claim read without its qualifier is a named failure mode, so it now travels with the claim itself. |
+| **Stage 1's README still says its instrument was "written and self-tested"** | **Upheld, and it corrects this session.** A forward-pointer block was added there. |
+| **Identifier collisions** | **None** — stage 2 minted no new series. |
+
+> #### The third finding corrected a judgement this session had already made and recorded
+>
+> This session treated `builder/analysis/2026-09-14-lbd-s4-stage1/README.md` as **frozen** and
+> deliberately annotated only the stage-1 *handoff*, reasoning that corrections go forward and a
+> figures owner for a completed stage should not be edited. **`docs/README.md` classifies that file
+> ACTIVE**, so `session-start` MT1's never-edit rule — which governs COMPLETE and HISTORICAL
+> documents — does not reach it, and an ACTIVE document carrying a now-incomplete claim is simply
+> stale.
+>
+> **The mistake was conflating "owns figures for finished work" with "frozen".** They are different
+> properties and only the map decides the second. The added block is a **forward pointer, not a
+> revision**: no figure in that document moves, and the original paragraph stands as the record of
+> what was believed on 2026-09-14.
+>
+> **Recorded because the question was asked explicitly and still answered wrongly.** The auditor was
+> asked, in those words, whether leaving the README untouched was the right call under this
+> project's rules — which is the only reason the error surfaced before the branch merged.

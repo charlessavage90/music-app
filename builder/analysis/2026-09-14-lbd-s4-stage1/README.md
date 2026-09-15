@@ -228,6 +228,28 @@ under `builder/src` and does not modify `lbv_build.py`, whose outputs are a froz
 as green** — 16.676 GiB under one slope and 31.353 GiB under a steeper one at the same row count.
 *A green reading from a new instrument is not evidence until it has been shown to move.*
 
+> ### ⚠ CORRECTION, 2026-09-15 — this module raises on every real build; use the stage-2 copy
+>
+> **Everything the self-test above asserts is true, and it is INCOMPLETE in the one way that
+> matters.** `stage2_build_instrument.py` raises `TypeError: 'Event' object is not callable` at
+> teardown on **every real build**: `_Sampler` assigns `self._stop = threading.Event()`, shadowing
+> `threading.Thread._stop`, which CPython calls internally from `join()`.
+>
+> **The self-test could not reach it.** Its only call to `instrumented_build` pre-populates the
+> double-call guard, which raises at the top of the function — before `_Sampler` is constructed. So
+> no path in it ever reached `sampler.stop()`, and the instrument was pronounced self-tested having
+> never run a build to completion. *"Shown to go red" is necessary and not sufficient — it has to
+> go red on the path the instrument is actually used on.*
+>
+> **Use `../2026-09-14-lbd-s4-stage2/s4_instrument.py`**, a corrected forward copy which **imports**
+> the fit rule, the 24 GiB bar and the counters from this module unchanged, so no bar moved. Its own
+> self-test drives a build end to end and was shown red on this module and green on that one.
+>
+> **This block is a forward pointer, not a revision.** Nothing else in this document changes, no
+> figure here moves, and the paragraph above stands as the record of what was believed on
+> 2026-09-14. Added because this README is **ACTIVE**, not frozen — a reader reaching for the
+> instrument arrives here.
+
 **No build has been instrumented.** `LBA-G2` has **no result**, and §7's `LBA-R0` is not reachable
 from this stage — `LBA-AM2`(a).
 

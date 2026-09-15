@@ -23,9 +23,11 @@ Reasoning is [`2026-09-14-lbd-s4-stage2-execution-log.md`](2026-09-14-lbd-s4-sta
 
 1. **All 14 pins re-verified** (`LBA-D9`). `T_A4.parquet` absent from every searched path.
 2. **Seven archives emitted.** All 21 counts reproduce stage 1 exactly.
-3. **Six cells built, one stopped.** **`LBA-G2` FIRES on `LBA-A9`** — the corner, projected
-   32.044 GiB against a 24 GiB bar. **Unbuilt for a resource reason.**
-4. **`LBA-M1` taken on eight arms. `LBA-G1` fires on NOTHING.**
+3. **Six cells built, one stopped.** **`LBA-G2` FIRES on `LBA-A9`** — the corner's projection
+   exceeded the 24 GiB bar (the figure is the stage-2 README's §2a). **Unbuilt for a resource
+   reason.**
+4. **`LBA-M1` taken on eight arms. `LBA-G1` fires on NOTHING — on those eight.** `LBA-A9` was
+   never built and never sized, so the corner is outside that claim; see point 2 below.
 5. **Reads taken: `LBA-R0` and `LBA-R1`.** Nothing else in §7 is reachable.
 
 ## ⚠ The five things a reader is most likely to get backwards
@@ -37,17 +39,18 @@ and the second needs `LBA-M1`, which that cell does not have. `build_from_archiv
 objects in a Python dict during its first pass — a property of the **builder**, not `GraphStore`.
 
 **2. "No arm fires `LBA-G1`" is a statement about the EIGHT SIZED arms.** `LBA-A9` was never built
-and never sized. The `LBA-G1`(b) ratio is monotone in population across all eight and `LBA-A8`
-reaches **1.860 against a 2.0 bar — 93 % of it**. Do not read `LBA-R1` as covering the corner.
+and never sized. The `LBA-G1`(b) ratio is monotone in population across all eight and the largest
+built arm reaches **93 % of that bar** (figures: stage-2 README §3b and §4). Do not read `LBA-R1`
+as covering the corner.
 
 **3. `LBA-R1`'s own text contains a clause this stage cannot support.** It reads *"the decision then
 rests on `LBA-M2`, `LBA-M3` and `LBA-M4` alone"* — true about where the decision sits, but **all
 three are unmeasured here**. No sentence anywhere presents that clause as evidence about them.
 
-**4. The gate reads the MEDIAN; the `U` row's cost is in the TAIL.** p95 is 2720 ms and 3065 ms on
-the two `U` arms against 1063–1430 ms on every `V` and `P` arm. §5 requires both reported and the
-gate to fire on the median alone. **It did not fire. That is the specified reading, and the tail is
-still the number worth looking at.**
+**4. The gate reads the MEDIAN; the `U` row's cost is in the TAIL.** On the two `U` arms p95 is
+roughly double what it is on every `V` and `P` arm (figures: stage-2 README §3b). §5 requires both
+reported and the gate to fire on the median alone. **It did not fire. That is the specified
+reading, and the tail is still the number worth looking at.**
 
 **5. Every `U` arm is built in a configuration the shipped code names.** `pipeline.py:303-318`'s
 refusal text calls `drop_unlistenable=False` *"an experimental control and never a shipping
@@ -79,8 +82,9 @@ silently under-filter over `U`.**
 *(Enumerated, not filtered for relevance — `closeout` A2-mid.)*
 
 1. **The final six-point `LBA-G2` fit's coefficients: slope 0.6164 GiB per million archive
-   neighbour rows, intercept −0.165 GiB.** Reproduces `LBA-A9`'s 32.044 GiB exactly. Only the
-   *projections* were recorded, never the fitted coefficients. ⚠ **The intercept is slightly
+   neighbour rows, intercept −0.165 GiB.** Reproduces `LBA-A9`'s projection (README §2a) exactly.
+   Only the *projections* were recorded, never the fitted coefficients. **These two numbers are
+   owned here** — they exist in no other document. ⚠ **The intercept is slightly
    NEGATIVE**, which is a fit artefact rather than a physical claim, and any future extrapolation
    far below the measured range should not use it naively.
 2. **Bare-versus-carrying ratio for the two reused artifacts:** 25.7 → 19.3 MB and 26.9 → 20.3 MB,
@@ -98,14 +102,18 @@ silently under-filter over `U`.**
 
 ## Everything decided against, and why
 
-1. **Editing stage 1's instrument in place** — rejected; stage 1's README states its self-test
-   passed and quotes the output. Forward copy instead.
+1. **Editing stage 1's instrument in place** — rejected; that README states its self-test passed
+   and quotes the output, and overwriting the module would silently invalidate a committed
+   statement. Forward copy instead. ⚠ **Partly revised at closeout**: the `doc-auditor` pointed out
+   that stage 1's README is classified **ACTIVE**, not frozen, so it *should* carry a correction —
+   a forward-pointer block was added there. The instrument module itself is still not edited, and
+   that half of the decision stands.
 2. **Reusing the existing `A0` archive for `LBA-A4`** — rejected; re-emitting it reproduced three
    committed counts and proved the wrapper against a **frozen record** before any novel cell.
 3. **An 80 % node floor on the `U` row** — rejected before any `U` build, because §2.4 records the
-   prune's effect there as unmeasured. *(It would in fact have passed: retention was 84.8 % and
-   85.5 %. The decision was still right on the information available, and two cells is still not a
-   calibration.)*
+   prune's effect there as unmeasured. *(It would in fact have passed — the measured retentions are
+   README §2e. The decision was still right on the information available, and two cells is still
+   not a calibration.)*
 4. **Adding per-build memory logging to `s4_build.py` mid-chain** — rejected; it would have raced
    the chain and split `script_sha256` across the lattice. Separate sampler instead.
 5. **Hand-writing `LBA-A2`'s record after the assertion failure** — rejected; rebuilt instead, even
@@ -143,8 +151,8 @@ can be argued with rather than re-derived:
 - **Dropping it now would also make `LBA-R6` and `LBA-R7` unreadable**, since both turn on the
   `P`-versus-`U` contrast.
 
-**What I would NOT do:** treat the query-cost result as settling speed. `LBA-A8` is at 93 % of the
-(b) bar and its p95 is triple the served map's. **I would measure d0 on the actual container before
+**What I would NOT do:** treat the query-cost result as settling speed. The largest built arm sits
+just under the (b) bar and its p95 is a multiple of the served map's (README §3b, §4). **I would measure d0 on the actual container before
 anyone concludes the bigger maps are fast enough** — cheap, and it replaces a multiplier taken on a
 retired artifact with a direct reading.
 
