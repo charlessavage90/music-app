@@ -1,0 +1,101 @@
+[
+  {
+    "arm": "LBA-A2",
+    "taken_utc": "2026-09-15T00:13:20.418469+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [],
+    "projectable": false,
+    "basis": "no instrumented build yet",
+    "note": "LBA-AM2(b): the first build is unevaluable by LBA-G2 and proceeds unconditionally; the gate is silent, not permissive."
+  },
+  {
+    "arm": "LBA-A4",
+    "taken_utc": "2026-09-15T00:14:14.595742+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [
+      "LBA-A2"
+    ],
+    "projectable": true,
+    "basis": "proportional through the origin (a single instrumented point)",
+    "points_used": 1,
+    "archive_neighbour_rows": 11274938,
+    "projected_peak_rss_bytes": 7282964114,
+    "projected_peak_rss_gib": 6.783,
+    "bar_gib": 24,
+    "fires": false
+  },
+  {
+    "arm": "LBA-A5",
+    "taken_utc": "2026-09-15T00:21:16.435654+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [
+      "LBA-A2",
+      "LBA-A4"
+    ],
+    "projectable": true,
+    "basis": "least-squares line over 2 instrumented builds, intercept free",
+    "points_used": 2,
+    "archive_neighbour_rows": 12523016,
+    "projected_peak_rss_bytes": 8155358056,
+    "projected_peak_rss_gib": 7.595,
+    "bar_gib": 24,
+    "fires": false
+  },
+  {
+    "arm": "LBA-A6",
+    "taken_utc": "2026-09-15T00:29:41.975600+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [
+      "LBA-A2",
+      "LBA-A4",
+      "LBA-A5"
+    ],
+    "projectable": true,
+    "basis": "least-squares line over 3 instrumented builds, intercept free",
+    "points_used": 3,
+    "archive_neighbour_rows": 14793382,
+    "projected_peak_rss_bytes": 9580353195,
+    "projected_peak_rss_gib": 8.922,
+    "bar_gib": 24,
+    "fires": false
+  },
+  {
+    "arm": "LBA-A7",
+    "taken_utc": "2026-09-15T00:37:32.911021+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [
+      "LBA-A2",
+      "LBA-A4",
+      "LBA-A5",
+      "LBA-A6"
+    ],
+    "projectable": true,
+    "basis": "least-squares line over 4 instrumented builds, intercept free",
+    "points_used": 4,
+    "archive_neighbour_rows": 22681278,
+    "projected_peak_rss_bytes": 14517794228,
+    "projected_peak_rss_gib": 13.521,
+    "bar_gib": 24,
+    "fires": false
+  },
+  {
+    "arm": "LBA-A8",
+    "taken_utc": "2026-09-15T01:03:28.546110+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [
+      "LBA-A2",
+      "LBA-A4",
+      "LBA-A5",
+      "LBA-A6",
+      "LBA-A7"
+    ],
+    "projectable": true,
+    "basis": "least-squares line over 5 instrumented builds, intercept free",
+    "points_used": 5,
+    "archive_neighbour_rows": 29308892,
+    "projected_peak_rss_bytes": 19300328433,
+    "projected_peak_rss_gib": 17.975,
+    "bar_gib": 24,
+    "fires": false
+  }
+]

@@ -146,10 +146,18 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"[sizing] {arm}: unbuilt for a resource reason — LBA-M1 unread", flush=True)
                 continue
 
-        # The artifact whose BARE form is measured. For the two reused arms that is the bare
-        # re-serialisation (`s4_bare_copy.py`); for the rest the census build itself, which already
-        # carries no additive key.
-        artifact = (ARTIFACTS / f"{arm}-bare.bin") if arm in REUSED else (ARTIFACTS / f"{arm}.bin")
+        # EVERY arm is measured on its BARE re-serialisation, the two reused ones and the seven
+        # built ones alike. `require_fame=False` removes FAME ONLY — `deezer_ids` and the three
+        # `LUX-4` keys load from frozen package data rather than a fetch — so a census build
+        # carries four of the five additive keys, and the two reused arms' artifacts carry all
+        # five. Applying `metadata_ratio` to either would scale metadata that is ALREADY THERE,
+        # double-counting the very term the ratio was calibrated to measure.
+        #
+        # This is the same treatment §4 already fixes for the bytes half — bare by decoding, then
+        # "reported beside the shipped projection = bare + the measured per-node additive cost" —
+        # applied to the memory half so the two halves are consistent. It is not a new bar: the
+        # 1.6 GB bar and the expression are untouched.
+        artifact = ARTIFACTS / f"{arm}-bare.bin"
         bare = bare_size_of_artifact(artifact)
         if bare["additive_keys_present"]:
             raise SystemExit(f"REFUSING: {artifact.name} carries additive keys — not comparable")

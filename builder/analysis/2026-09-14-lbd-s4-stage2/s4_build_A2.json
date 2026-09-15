@@ -1,0 +1,806 @@
+{
+  "arm": "LBA-A2",
+  "plain_sentence": "the same artists, but a connection is kept when three different people's listening supports it instead of four",
+  "population_rule": "V",
+  "population_rule_exposure": null,
+  "threshold": 7,
+  "filter": "on, inert (20260805)",
+  "filter_meaning": "the 20260805 payload censused V and drops none of it (LBD-AM5-3 owns the count): the filter is ON, APPLICABLE and removes nobody",
+  "unguarded_drop_stages": {
+    "drop_no_release_tail": true,
+    "drop_featured_credit": true
+  },
+  "unguarded_drop_stages_note": "both applicable over this population",
+  "build_order_position": 1,
+  "script_sha256": "575a5e0a9c4c900039b5e2eaa1212ac7ce862939a0bbf823e416244af51abf0a",
+  "instrument_sha256": "ad25acb18e5a749f54d81411cbb46c69ae1c06c7a73a21f52a43bebeada4aa26",
+  "instrument_note": "s4_instrument.py \u2014 a forward copy of stage 1's stage2_build_instrument.py, fixing a Thread._stop name collision that made every real build raise at teardown. The fit rule, the 24 GB bar and the row reader are IMPORTED from the stage-1 module unchanged.",
+  "stage1_instrument_sha256": "9db72f742a51e7f80d8705ba49585cbeaefd43fa72850a9acaf3f81e5ae51d18",
+  "archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\S4-A2",
+    "manifest_sha256": "cb55e04cdbed3b1ca68c51ae2574ae3b9e7292f28aa3333d9392fd43a91df17a",
+    "payloads": 57852,
+    "neighbour_rows": 8936730,
+    "population_absent_from_arm": 986
+  },
+  "lba_g2": {
+    "read_before_the_build": true,
+    "arm": "LBA-A2",
+    "taken_utc": "2026-09-15T00:13:20.418469+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [],
+    "projectable": false,
+    "basis": "no instrumented build yet",
+    "note": "LBA-AM2(b): the first build is unevaluable by LBA-G2 and proceeds unconditionally; the gate is silent, not permissive."
+  },
+  "peak_rss": {
+    "arm": "LBA-A2",
+    "archive_neighbour_rows": 8936730,
+    "unit": "archive neighbour rows, pre-cap, two per pair -- NOT CSR entries",
+    "peak_rss_bytes": 5772615680,
+    "peak_rss_gib": 5.376,
+    "wall_clock_s": 53.2,
+    "working_set_before": 34779136,
+    "sampler_max": 5768663040,
+    "sampler_within_kernel_peak": true,
+    "samples": [
+      [
+        0.0,
+        34930688
+      ],
+      [
+        0.28,
+        129912832
+      ],
+      [
+        0.55,
+        132194304
+      ],
+      [
+        0.8,
+        133373952
+      ],
+      [
+        1.06,
+        134750208
+      ],
+      [
+        1.33,
+        134811648
+      ],
+      [
+        1.59,
+        136241152
+      ],
+      [
+        1.84,
+        137601024
+      ],
+      [
+        2.09,
+        138964992
+      ],
+      [
+        2.36,
+        140345344
+      ],
+      [
+        2.62,
+        68173824
+      ],
+      [
+        2.89,
+        104562688
+      ],
+      [
+        3.14,
+        140091392
+      ],
+      [
+        3.41,
+        179847168
+      ],
+      [
+        3.66,
+        215912448
+      ],
+      [
+        3.92,
+        259338240
+      ],
+      [
+        4.19,
+        306319360
+      ],
+      [
+        4.45,
+        358268928
+      ],
+      [
+        4.7,
+        408580096
+      ],
+      [
+        4.97,
+        462950400
+      ],
+      [
+        5.23,
+        521740288
+      ],
+      [
+        5.5,
+        583155712
+      ],
+      [
+        5.75,
+        657010688
+      ],
+      [
+        6.02,
+        730361856
+      ],
+      [
+        6.27,
+        805064704
+      ],
+      [
+        6.53,
+        883101696
+      ],
+      [
+        6.78,
+        961257472
+      ],
+      [
+        7.05,
+        1057898496
+      ],
+      [
+        7.33,
+        1126572032
+      ],
+      [
+        7.62,
+        1132896256
+      ],
+      [
+        7.95,
+        1133969408
+      ],
+      [
+        8.23,
+        1135005696
+      ],
+      [
+        8.5,
+        1135505408
+      ],
+      [
+        8.81,
+        1137147904
+      ],
+      [
+        9.12,
+        1138851840
+      ],
+      [
+        9.41,
+        1139810304
+      ],
+      [
+        9.75,
+        1139879936
+      ],
+      [
+        10.06,
+        1140273152
+      ],
+      [
+        10.36,
+        1140518912
+      ],
+      [
+        10.66,
+        1140744192
+      ],
+      [
+        11.02,
+        1143537664
+      ],
+      [
+        11.33,
+        1144225792
+      ],
+      [
+        11.64,
+        1144229888
+      ],
+      [
+        11.98,
+        1144229888
+      ],
+      [
+        12.31,
+        1144745984
+      ],
+      [
+        12.66,
+        1144745984
+      ],
+      [
+        12.97,
+        1144745984
+      ],
+      [
+        13.3,
+        1144762368
+      ],
+      [
+        13.66,
+        1144762368
+      ],
+      [
+        13.98,
+        1146179584
+      ],
+      [
+        14.31,
+        1146191872
+      ],
+      [
+        14.62,
+        1146228736
+      ],
+      [
+        14.91,
+        1198284800
+      ],
+      [
+        15.27,
+        1249820672
+      ],
+      [
+        15.58,
+        1304866816
+      ],
+      [
+        15.97,
+        1357553664
+      ],
+      [
+        16.3,
+        1401905152
+      ],
+      [
+        16.69,
+        1467707392
+      ],
+      [
+        17.0,
+        1526280192
+      ],
+      [
+        17.3,
+        1571078144
+      ],
+      [
+        17.66,
+        1634328576
+      ],
+      [
+        17.95,
+        1671811072
+      ],
+      [
+        18.28,
+        1741479936
+      ],
+      [
+        18.64,
+        1772490752
+      ],
+      [
+        18.94,
+        1839968256
+      ],
+      [
+        19.3,
+        1906487296
+      ],
+      [
+        19.64,
+        1927184384
+      ],
+      [
+        19.94,
+        1990594560
+      ],
+      [
+        20.25,
+        2059853824
+      ],
+      [
+        20.58,
+        2116476928
+      ],
+      [
+        21.16,
+        2188726272
+      ],
+      [
+        21.48,
+        2256728064
+      ],
+      [
+        21.83,
+        2314366976
+      ],
+      [
+        22.44,
+        2371219456
+      ],
+      [
+        22.77,
+        2434605056
+      ],
+      [
+        23.06,
+        2503159808
+      ],
+      [
+        23.41,
+        2576797696
+      ],
+      [
+        23.75,
+        2634387456
+      ],
+      [
+        24.41,
+        2671996928
+      ],
+      [
+        24.69,
+        2737496064
+      ],
+      [
+        25.02,
+        2800300032
+      ],
+      [
+        25.31,
+        2860613632
+      ],
+      [
+        25.59,
+        2929000448
+      ],
+      [
+        25.94,
+        2996117504
+      ],
+      [
+        26.84,
+        3067019264
+      ],
+      [
+        27.19,
+        3130736640
+      ],
+      [
+        27.48,
+        3200512000
+      ],
+      [
+        27.81,
+        3259457536
+      ],
+      [
+        28.12,
+        3322908672
+      ],
+      [
+        28.44,
+        3377885184
+      ],
+      [
+        28.72,
+        3434237952
+      ],
+      [
+        29.02,
+        3510202368
+      ],
+      [
+        29.34,
+        3582251008
+      ],
+      [
+        29.66,
+        3637673984
+      ],
+      [
+        29.95,
+        3704279040
+      ],
+      [
+        30.27,
+        3769073664
+      ],
+      [
+        30.61,
+        3828305920
+      ],
+      [
+        30.92,
+        3895980032
+      ],
+      [
+        31.27,
+        3968028672
+      ],
+      [
+        31.61,
+        4039307264
+      ],
+      [
+        31.95,
+        4100743168
+      ],
+      [
+        32.27,
+        4164337664
+      ],
+      [
+        32.59,
+        4230795264
+      ],
+      [
+        32.94,
+        4301144064
+      ],
+      [
+        33.28,
+        4375535616
+      ],
+      [
+        33.61,
+        4462747648
+      ],
+      [
+        33.95,
+        4597411840
+      ],
+      [
+        34.28,
+        4742950912
+      ],
+      [
+        34.72,
+        4908969984
+      ],
+      [
+        34.98,
+        4906991616
+      ],
+      [
+        35.33,
+        4992450560
+      ],
+      [
+        35.66,
+        5070815232
+      ],
+      [
+        35.97,
+        5166489600
+      ],
+      [
+        36.34,
+        4860968960
+      ],
+      [
+        36.69,
+        4914270208
+      ],
+      [
+        37.02,
+        4959440896
+      ],
+      [
+        37.33,
+        5005144064
+      ],
+      [
+        37.64,
+        5044682752
+      ],
+      [
+        38.0,
+        5083062272
+      ],
+      [
+        38.31,
+        5172297728
+      ],
+      [
+        38.61,
+        5355077632
+      ],
+      [
+        38.89,
+        5424951296
+      ],
+      [
+        39.2,
+        5467979776
+      ],
+      [
+        39.53,
+        5498273792
+      ],
+      [
+        39.86,
+        5520478208
+      ],
+      [
+        40.14,
+        5540458496
+      ],
+      [
+        40.45,
+        5556768768
+      ],
+      [
+        40.72,
+        5572673536
+      ],
+      [
+        41.02,
+        5587505152
+      ],
+      [
+        41.33,
+        5600833536
+      ],
+      [
+        41.62,
+        5610827776
+      ],
+      [
+        41.91,
+        5621878784
+      ],
+      [
+        42.23,
+        5656276992
+      ],
+      [
+        42.56,
+        5765570560
+      ],
+      [
+        42.88,
+        5765574656
+      ],
+      [
+        43.16,
+        5765574656
+      ],
+      [
+        43.44,
+        5765574656
+      ],
+      [
+        43.75,
+        5765578752
+      ],
+      [
+        44.06,
+        5765578752
+      ],
+      [
+        44.33,
+        5765578752
+      ],
+      [
+        44.59,
+        5765582848
+      ],
+      [
+        44.88,
+        5765582848
+      ],
+      [
+        45.14,
+        5765586944
+      ],
+      [
+        45.42,
+        5765586944
+      ],
+      [
+        45.69,
+        5765591040
+      ],
+      [
+        46.0,
+        5765595136
+      ],
+      [
+        46.33,
+        5768421376
+      ],
+      [
+        46.59,
+        5768536064
+      ],
+      [
+        46.89,
+        5768654848
+      ],
+      [
+        47.22,
+        5768663040
+      ],
+      [
+        47.53,
+        5768663040
+      ],
+      [
+        47.84,
+        5768663040
+      ],
+      [
+        48.11,
+        5768663040
+      ],
+      [
+        48.42,
+        5768663040
+      ],
+      [
+        48.72,
+        5768663040
+      ],
+      [
+        48.98,
+        5768663040
+      ],
+      [
+        49.44,
+        5279502336
+      ],
+      [
+        49.72,
+        5304041472
+      ],
+      [
+        50.05,
+        5304041472
+      ],
+      [
+        50.31,
+        5304041472
+      ],
+      [
+        50.64,
+        5304041472
+      ],
+      [
+        50.97,
+        5184995328
+      ],
+      [
+        51.28,
+        5212577792
+      ],
+      [
+        51.55,
+        5305970688
+      ],
+      [
+        51.81,
+        5320531968
+      ],
+      [
+        52.09,
+        5343178752
+      ],
+      [
+        53.16,
+        2346172416
+      ]
+    ]
+  },
+  "built": {
+    "nodes_after_largest_component_prune": 57466,
+    "csr_entries": 1616598,
+    "connections_degree_sum_over_2": 808299,
+    "median_degree": 26.0,
+    "max_degree": 50,
+    "ceiling_binds": true,
+    "bound_holds": true,
+    "retention_vs_population": 0.97668,
+    "wall_clock_s": 53.2,
+    "builder_log": [
+      "rescale p99 scale=2811 | saturated edges 89386 of 8936730 (1.000%)",
+      "largest component: 57466 of 57852 artists"
+    ]
+  },
+  "bare_artifact": {
+    "artists": 57466,
+    "csr_entries": 1616598,
+    "bare_metadata_json_bytes": 4934370,
+    "bare_artifact_bytes": 19713644,
+    "serialised_bytes_on_disk": 25944742,
+    "additive_keys_present": [
+      "deezer_ids",
+      "spotify_ids",
+      "apple_ids",
+      "artist_facts"
+    ]
+  },
+  "additive_keys_note": "require_fame=False removes FAME ONLY. deezer_ids and the three LUX-4 keys come from frozen sha-pinned package data, not a fetch, so this census build carries four of the five additive keys. LBA-M1's bytes are computed BARE by decoding, so they are unaffected; the boot-memory half is measured on a bare copy for the same reason, so that metadata_ratio is not applied to an artifact that already carries the metadata it models.",
+  "artifact": {
+    "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A2.bin",
+    "sha256": "af49db6320465a158f0a1d9b12fef36d66a020dee0d33179bd7e304925cfc38f",
+    "serialised_bytes": 25944742
+  },
+  "acceptance": {
+    "criteria": {
+      "canonical_names": [
+        "Radiohead",
+        "The Beatles",
+        "Coldplay",
+        "R.E.M."
+      ],
+      "famous_sample": 25,
+      "famous_median_degree_floor": 25.0,
+      "famous_min_degree_floor": 8,
+      "node_count": [
+        47070,
+        58838
+      ],
+      "edge_count": [
+        1052547,
+        2941900
+      ],
+      "median_degree": [
+        1.0,
+        50.0
+      ]
+    },
+    "notes": {
+      "edge_count": "0.8 x the served map's CSR entries \u2014 the smallest comparable BUILT map on the record. Generous by design: it is the gross-loss tripwire, and on this row it is also what would see a silent cap-rule revert (acceptance.py's CXA- note)",
+      "famous_detectors": "unscaled at every population rule: acceptance.py group 1 describes a defect's SHAPE, not a population's size",
+      "basis": "population 58,838 (rule V, known before the build); served map 58,838 nodes / 1,315,684 CSR entries; degree ceiling 50"
+    },
+    "passed": true,
+    "production_acceptance_used": false
+  },
+  "config": {
+    "algorithm": "session_based_days_7500_session_300_contribution_3_threshold_10_limit_100_filter_True_skip_30",
+    "cap_strategy": "trimmed_union",
+    "union_top_j": 50,
+    "union_degree_ceiling": 50,
+    "similarity_rescale": "p99_log_clip",
+    "similarity_damping": 0.0,
+    "filter_special_purpose": true,
+    "drop_no_release_tail": true,
+    "drop_featured_credit": true,
+    "drop_unlistenable": true,
+    "unlistenable_list_path": "unlistenable_drop_algb_20260805.json",
+    "require_fame": false
+  },
+  "held_constant_equal_to_served_config": true,
+  "units": "csr_entries and every sidecar's 'edges' = each connection in BOTH directions; connections_degree_sum_over_2 = counted once; archive.neighbour_rows = pre-cap, two per pair. Three different units \u2014 never compared across.",
+  "not_taken_here": [
+    "LBA-M2",
+    "LBA-M3",
+    "LBA-M4",
+    "LBA-M5"
+  ],
+  "finished_utc": "2026-09-15T00:14:14.099574+00:00"
+}

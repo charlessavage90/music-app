@@ -345,8 +345,13 @@ def main(argv: list[str] | None = None) -> int:
     bare = bare_size_of_artifact(artifact)
     if bare["bare_artifact_bytes"] != bare_from_graph["bare_artifact_bytes"]:
         raise SystemExit("BUG: the bare size differs between the graph in hand and the decoded artifact")
-    if bare["additive_keys_present"]:
-        raise SystemExit(f"BUG: a fame-free census build carries additive keys {bare['additive_keys_present']}")
+    # `require_fame=False` removes FAME and nothing else. `deezer_ids` and the three `LUX-4` keys
+    # are loaded from frozen, sha-pinned PACKAGE DATA rather than fetched, so a census build
+    # carries four of the five additive keys. The real invariant for this configuration is
+    # therefore "fame_lb is absent", not "no additive key is present" — a first version of this
+    # check asserted the latter and refused a correct build.
+    if "fame_lb" in bare["additive_keys_present"]:
+        raise SystemExit(f"BUG: a require_fame=False build carries fame_lb: {bare['additive_keys_present']}")
     print(f"[s4] wrote {artifact}  sha256 {manifest['sha256']}  "
           f"on disk {len(payload) / 1e6:.1f} MB  bare {bare['bare_artifact_bytes'] / 1e6:.1f} MB", flush=True)
 
@@ -395,6 +400,13 @@ def main(argv: list[str] | None = None) -> int:
             "builder_log": build_log,
         },
         "bare_artifact": bare,
+        "additive_keys_note": ("require_fame=False removes FAME ONLY. deezer_ids and the three "
+                               "LUX-4 keys come from frozen sha-pinned package data, not a fetch, "
+                               "so this census build carries four of the five additive keys. "
+                               "LBA-M1's bytes are computed BARE by decoding, so they are "
+                               "unaffected; the boot-memory half is measured on a bare copy for "
+                               "the same reason, so that metadata_ratio is not applied to an "
+                               "artifact that already carries the metadata it models."),
         "artifact": {"path": str(artifact), "sha256": manifest["sha256"],
                      "serialised_bytes": len(payload)},
         "acceptance": {"criteria": dataclasses.asdict(criteria), "notes": criteria_notes,

@@ -319,11 +319,82 @@ through `s4_instrument` it completes, reporting a 147.5 MiB peak over 4 samples 
 maximum inside the kernel peak. Check C re-asserts the imported fit rule still gives 16.676 GiB
 green and 31.353 GiB red at `LBA-A9`'s row count against a 24 GiB bar.
 
-**One artefact of the failed attempt is deliberately NOT erased.** `_projections.json` holds two
-`LBA-A2` entries, both *silent / not projectable*, timestamped a few minutes apart — one per
-attempt. The failed attempt genuinely happened, and a chronological record of every projection
-taken is worth more than a tidy one. The attempt-1 logs are kept beside it as
-`build_*.attempt1-instrument-defect.log`.
+The attempt-1 logs are kept as `build_*.attempt1-instrument-defect.log`.
+
+> **Correction, and it is against something written a few paragraphs earlier in this same log.**
+> The sentence originally here said `_projections.json`'s two `LBA-A2` entries were *"deliberately
+> NOT erased"*, on the ground that a chronological record beats a tidy one. **Then attempt 2 failed
+> too and the file was deleted during the restart, so that statement did not survive its own
+> commit.** It was never committed — nothing in git to restore. The substance is recoverable and is
+> recorded here instead: both entries read *silent / not projectable*, which is `LBA-AM2`(b)
+> behaving correctly on a first cell; the timestamps are gone. **Left standing rather than
+> back-edited**, because a log that quietly repairs its own claims is worth less than one that
+> shows where a claim failed.
+
+### ⚠ Task 3, attempt 2 — a `require_fame=False` build carries FOUR of the five additive keys
+
+**`LBA-A2` built correctly and this session's own post-write assertion refused it.** The refusal
+was wrong, and what it revealed matters more than the stoppage.
+
+```
+BUG: a fame-free census build carries additive keys
+     ['deezer_ids', 'spotify_ids', 'apple_ids', 'artist_facts']
+```
+
+**`require_fame=False` removes FAME and nothing else.** `deezer_ids` and the three `LUX-4` keys
+are loaded from **frozen, sha-pinned package data** (`deezer_ids.py`, `dsp_links.py`,
+`artist_facts.py`) rather than fetched from a network, so nothing about a fame-free configuration
+suppresses them. The real invariant for this configuration is *"`fame_lb` is absent"*, and the
+check now asserts exactly that.
+
+**Nothing measured was lost, and the build was not wasted.** The refusal fires after
+`record_point`, `check_acceptance`, `serialise` and the artifact write have all succeeded — so the
+build, its peak and its acceptance all completed. Only the per-cell result JSON was never written.
+The point and artifact were **cleared before the rerun** so that `LBA-A2` could not be entered
+twice into `LBA-G2`'s fit, and the discarded measurement is kept as
+`_logs/discarded_point_A2_attempt2.json` — **an independent second measurement of the same cell's
+peak, which is a free reproducibility check on `LBA-G2`'s calibration point and is reported as
+one.**
+
+> #### The consequence that is NOT about an assertion, and it changes how boot memory is measured
+>
+> If a census build carries four additive keys, then **multiplying its boot peak by
+> `metadata_ratio` scales metadata that is already present.** `metadata_ratio` is calibrated on
+> `graph-lux4.bin` ÷ `graph-msw-tu50.bin`, a pair differing **only in the three `LUX-4` keys** — so
+> applying it to an artifact that already carries those keys double-counts the exact term the ratio
+> was built to measure.
+>
+> **So every arm's boot memory is measured on a BARE re-serialisation** — the seven built ones now
+> as well as the two reused ones, where this session had already taken the same step for the same
+> reason. `metadata_ratio` then adds the metadata term back exactly once.
+>
+> **This is not a new bar and not a reinterpretation of `LBA-G1`(a).** The 1.6 GB bar and §5's
+> expression are untouched. It is §4's *own* treatment of the bytes half — bare by decoding, then
+> *"reported beside the shipped projection = bare + the measured per-node additive cost"* — applied
+> to the memory half so the two halves are consistent. Measuring one half bare and the other half
+> loaded would have been the inconsistency.
+>
+> ⚠ **Direction of the residual error, stated because it is not symmetric.** The projection still
+> omits `fame_lb`, which a shipped artifact carries and which `metadata_ratio` does not model. So
+> the projected figure remains a **lower bound** on shipped resident cost — `LBA-X8` in the memory
+> dimension — and the report says so beside every `LBA-G1`(a) reading rather than once in a
+> footnote.
+
+### The accident bought a precision estimate for `LBA-G2`'s calibration point
+
+**`LBA-A2` was built twice, and the two peaks agree to 0.011 %** — 5,771,968,512 B discarded
+against 5,772,615,680 B of record, a difference of 647,168 B, at wall clocks of 54.6 s and 53.2 s.
+
+**This is worth more than it looks, because of where that cell sits.** `LBA-AM2`(b) makes the
+first build the **sole basis** of the one-point proportional projection, and every later
+least-squares line still carries it. Nothing in the design measured how repeatable a peak is, and
+a calibration point whose own reproducibility is unknown would have propagated that unknown into
+all seven projections. **Two runs of the same build on the same machine, minutes apart, give the
+same peak to four decimal places of a percent.** So the fit's residual error is a property of the
+row-count model, not of the instrument.
+
+It was obtained by accident — from a rerun forced by a bad assertion — and is reported as an
+**incidental measurement**, not as a designed one. No criterion rests on it.
 
 ### A machine-state timeline, and why it is a separate file rather than a wrapper change
 
