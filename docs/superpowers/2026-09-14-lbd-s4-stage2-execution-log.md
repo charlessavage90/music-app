@@ -219,3 +219,59 @@ ground** (`LBA-D8`).
 **archive neighbour rows, pre-cap, two per pair — never CSR entries.** The x-axis is taken from the
 emitter's own `counts.neighbour_rows_written` via `rows_from_archive_manifest`, so it cannot be
 re-derived wrongly at the call site.
+
+---
+
+## Task 2 — the seven archives, emitted
+
+**Done, 2026-09-14, 19:22–19:59 local; about 37 minutes of wall clock, one process per arm,
+sequentially (DuckDB).** Figures are the stage-2 README's; nothing is restated here.
+
+**Every one of the twenty-one counts reproduces stage 1 exactly** — payloads, archive neighbour
+rows and population-absent, for all seven cells. That is not a criterion and is not reported as
+one: it is the instrument's green check, and `s4_emit.py` **refuses to finish** on any
+disagreement, on the stated ground that *one of the two would then be wrong and neither may be
+used until it is known which*. The check had teeth — `LBA-A4` is a re-emission of the archive the
+supply work committed as `A0`, so its three counts were being matched against a frozen record
+rather than against another figure from the same session.
+
+**The two structural facts the `U` rule implies were asserted rather than assumed**, and both hold
+on all three `U` cells: `payloads_written` equals the population exactly, and
+`population_absent_from_arm` is **0**. Both follow from the rule — `U` is derived *from* the arm's
+own table, so no member of it can be missing from that table — and an emitter that produced
+anything else would have been filtering when it should not. The wrapper also refuses if any row of
+a `U` arm's table has an endpoint outside the population, which cannot happen under the rule and
+is checked for exactly that reason.
+
+**One figure worth carrying forward because it bears on a later bound.** Every `U` population
+member has an identity row — `0` with none, on all three cells, against `10` on each `P` cell. So
+`pipeline.py`'s nameless-artist rule removes **nobody** from a `U` arm at build time, and the gap
+between a `U` arm's table-level count and its built node count is attributable to the
+largest-component prune and the two unguarded drop stages alone. It does not make the `U` node
+floor calibrated — §2.4's *"unmeasured"* stands, and the floor stays a labelled gross-loss
+tripwire — but it removes one of the three candidate causes from any later account of that gap.
+
+**Nothing was written into the frozen archives.** `A0`, `A2`, `A0V` and `A5V` are untouched; each
+stage-2 cell has its own `S4-<arm>` root. Both pinned population files came back out of every
+`V`/`P` emit with the digests stage 1 recorded, so the emitter's rewrite-in-place redefined
+neither.
+
+### A machine-state timeline, and why it is a separate file rather than a wrapper change
+
+The build chain's seven peaks form a fit, so the conditions each was measured under are part of the
+record. The obvious way to capture that — record free physical memory inside `s4_build.py` — was
+**declined**, and the reason is worth keeping: by the time it was wanted the emit chain had just
+finished and the build chain was seconds from starting, so the edit would have raced the chain and
+left `LBA-A2` carrying a different `script_sha256` from the other six. **A provenance split across
+the lattice is a worse defect than the one the edit would have fixed**, and the factor table has no
+column for it.
+
+`sample_machine.ps1` logs free and total physical memory every 20 s to `_logs/machine_state.tsv`
+for the duration of the chain. It touches no build script, races nothing, and aligns with each
+build's own start and finish timestamps after the fact. **Known machine conditions for this run:**
+the owner left the machine at about 20:00 for at least an hour, having closed a browser **before
+any build started and before `_points.json` existed** — so no instrumented point was taken on
+either side of that change. One unrelated Claude session on another project was expected to finish
+within the hour; its load therefore falls during the small early builds, where the machine is
+uncontended and a peak reads true, and is expected to be gone before `LBA-A9`, which is the only
+cell where contention could depress a peak.
