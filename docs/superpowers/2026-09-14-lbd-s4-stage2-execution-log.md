@@ -531,6 +531,20 @@ findings were resolvable from the committed record; none is handed forward.**
 | **Stage 1's README still says its instrument was "written and self-tested"** | **Upheld, and it corrects this session.** A forward-pointer block was added there. |
 | **Identifier collisions** | **None** — stage 2 minted no new series. |
 
+**`docs-lint`, final state: the full script completes exit code 0 with all six checks clean.**
+Checks 1–3 report `ok`; checks 4, 5 and 6 list candidates beneath a header and all three listed
+none. ⚠ **Check 6 is *figures restated outside the document that owns them*, and it found nothing**
+— which is the mechanical confirmation that the four restatements B1 fixed by hand were the only
+ones, rather than the four that happened to be noticed.
+
+> **A closeout defect worth keeping, because it was self-inflicted and cost a wrong entry in the
+> deferral registry.** Two *foreground* lint runs timed out partway through check 3, and on that
+> evidence this session (a) told the auditor checks 4–6 had completed, which overstated what it had
+> seen, and then (b) filed a deferral saying they had never run. **A background run launched
+> earlier had already completed successfully and had not been read.** The deferral was struck
+> minutes after it was written. **A timeout is not a result** — and the answer was already on disk
+> while the row claiming otherwise was being committed.
+
 > #### The third finding corrected a judgement this session had already made and recorded
 >
 > This session treated `builder/analysis/2026-09-14-lbd-s4-stage1/README.md` as **frozen** and
