@@ -99,3 +99,71 @@ is used on.* The module was patched and then the real verification **re-run**, s
 `builder/analysis/2026-09-14-lbd-s4-stage3/`, run once when the stage's scripts exist rather
 than once per file.
 
+---
+
+## Task 2 — `LBA-AM3`, committed before `LBA-M4` runs
+
+**Three items, none of which moves a bar's value.** The amendment's own text is the record;
+this entry is the reasoning that produced it and is not a summary of it.
+
+**Why it had to be committed before task 4 rather than written alongside the report.** §11's
+rule is that a bar is never edited and a change of practice arrives dated, with the commit
+timestamp as the evidence that it preceded the result. Two of the three items would otherwise
+have been resolved by a session **with `LBA-M4`'s numbers in hand** — which is the one moment a
+pre-registration exists to take a decision away from. `LBA-M2` and `LBA-M3` depend on none of it,
+so nothing was blocked by writing it first.
+
+**The honest-position block was the hard part to write, and it is not `LBA-AM2`'s.** `LBA-AM1`
+could say *nothing had run*; `LBA-AM2` could say *the x-axis exists, the y-axis does not*. This
+one has two completed stages behind it, so the block enumerates exactly what its author could
+already see — every arm's size, boot memory and d0 cost; every arm's coverage-store absence
+count; the prune retention on two `U` cells — and states that **no class share, retention figure,
+supply share or provenance mix existed**, which is every quantity the three rules govern.
+
+**`LBA-AM3-1`, and it is the item with consequences beyond bookkeeping.** *censused* is
+unattainable now that `LBA-G3` has fired, so `LBA-R8` and `LBA-R9` can never be reached within
+`LBD-S4` as designed. **The half worth stating plainly: `LBA-R9` is the owner's own exit read** —
+the row that records stopping as a complete outcome rather than an abandonment — and the design
+cannot hand it to him licensed. His instruction to report the estimated `LBA-M4` as a labelled
+sensitivity is recorded **as his, quoted, and dated**, with an explicit statement that it makes
+no read reachable. The distinction between *the owner asked for a sensitivity he can weigh* and
+*a session took a barred read* is invisible in the output and survives only in the record, which
+is the whole reason it is an amendment and not a formatting choice.
+
+**`LBA-AM3-2` — the confound is measurable, so it is measured rather than argued about.**
+`LBA-G4` wants both class shares from one pass against one dump; with no pass they come from two
+censuses against two earlier snapshots. The *same arm* half of `LBA-AM1-A5`'s fix survives
+untouched. The failure mode is specific: if the added-beyond-`V` and kept-from-`V` subsets draw
+from the two censuses in **different proportions**, a dump column re-enters a comparison that was
+deliberately made one column wide. `d2_src` makes that per-artist, so the mix is reported beside
+the gate.
+
+**It needed its own effect size and nearly did not get one.** `CLAUDE.md`: a trigger without one
+cannot tell the finding it was written for from noise. The first draft said the gate would be
+withheld *"if the mix is skewed"*, which is a judgement call handed to a session holding the
+numbers — the same defect `LBA-AM1-A9` was written to remove. **Fixed at 10 percentage points**,
+chosen as `LBA-G4`'s own bar in `LBA-G4`'s own units: a provenance difference big enough to
+account for the gate's firing threshold is big enough to disqualify the comparison. Stated as a
+choice, not a measurement. The disqualifier can only ever **withhold** a gate result, never
+produce one, so it cannot admit an arm.
+
+**`LBA-AM3-3` — "estimated on every arm" was flattening two different situations.** `LBA-M4`'s
+own ⚠ and stage 1 §3 together establish that no arm has a fresh verdict. Neither says that six
+arms have a **complete** carried population while two have most of theirs absent from the store
+entirely, where the store's rule is *"absence of a field means UNKNOWN, never false."* The
+difference falls on exactly the arms `LBA-M4` exists to size, so a coverage column is now
+required per arm and cross-row comparison of class shares is barred.
+
+**One accuracy fix made in passing rather than listed.** The header's identifier register still
+read *"`LBA-AM1` (the amendment register's first entry)"* — true when written, and by omission
+wrong once `LBA-AM2` existed. It now names all three entries and the sub-identifiers minted
+inside them. This is the defect class `CLAUDE.md` describes as unfindable by grep, because the
+fault is an absence; `LBA-AM2` did not update it and the omission survived a `doc-auditor` pass.
+
+**Banked for the `DLS-T1` read, which `NEXT.md`'s deferral says must consume dated
+observations.** Editing
+`docs/superpowers/specs/2026-09-14-lbd-s4-adoption-preregistration.md` in this session caused
+`.claude/rules/plans.md` to arrive in context **without being asked for**, mid-task, immediately
+after the write. **Observation dated 2026-09-15, session `lbd-s4-stage3`: the path-scoped rule
+fired on a spec edit.** Recorded here rather than in `NEXT.md` so the read consumes it from a
+dated log; it is one qualifying session, not the three the condition needs.

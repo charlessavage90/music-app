@@ -41,7 +41,7 @@ evidence of equivalence).
 **Identifiers introduced here: the `LBA-` series** — `LBA-A1`–`LBA-A9` (arms), `LBA-D1`–`LBA-D9`
 (decisions; `D1`–`D3` are the **owner's**, the rest are this document's), `LBA-M1`–`LBA-M5`
 (measurements), `LBA-G1`–`LBA-G4` (gates), `LBA-R0`–`LBA-R9` plus `LBA-R4-V` (reads), `LBA-X1`–`LBA-X8` (named
-exposures), and `LBA-AM1` (the amendment register's first entry, §11). **Collision-checked across every ref on 2026-09-14** —
+exposures), and the amendment register's entries `LBA-AM1`, `LBA-AM2` and `LBA-AM3` (§11), with `LBA-AM1-A1`–`A12`, `LBA-AM1-O1`–`O4` and `LBA-AM3-1`–`-3` minted inside them. **Collision-checked across every ref on 2026-09-14** —
 `git grep -lE '\bLBA-' $(git for-each-ref --format='%(refname)' refs/remotes refs/heads) -- '*.md'`,
 and the same for each sub-pattern `LBA-A[0-9]`, `LBA-R[0-9]`, `LBA-M[0-9]`, `LBA-X[0-9]`,
 `LBA-D[0-9]`, `LBA-G[0-9]`: **all free**, with nothing in the working tree either.
@@ -1316,3 +1316,143 @@ its projection from **all** instrumented builds so far exceeds **24 GB**. The ba
 - **It does not touch `LBA-G1`, `LBA-G3` or `LBA-G4`**, nor any measurement, read or exposure.
 
 **Identifier `LBA-AM2`.** Collision-checked across every ref on 2026-09-14: free.
+
+---
+
+### `LBA-AM3` — what `LBA-G3`'s firing costs the read table, and how `LBA-G4` is read without a pass
+
+**Dated 2026-09-15, written at the stage-2/stage-3 seam, BEFORE `LBA-M2`, `M3`, `M4` or `M5` was
+taken.**
+
+> ### ⚠ What existed when this was written, stated plainly — it is neither `LBA-AM1`'s position nor `LBA-AM2`'s
+>
+> **Stages 1 and 2 are complete.** `LBA-M1` is taken on eight arms, `LBA-G1` fired on nothing,
+> `LBA-G2` stopped `LBA-A9`, `LBA-G3` fired at stage 1. Figures are owned by the two stage
+> READMEs.
+>
+> **What does NOT exist is any result of the four measurements this amendment touches.**
+> `LBA-M2`, `LBA-M3`, `LBA-M4` and `LBA-M5` have not been taken for any arm, so **no value of
+> `LBA-G4`'s statistic exists** and nothing below can have been shaped to admit or exclude an arm.
+>
+> **The honest statement of what it spends: none of `LBA-M2`–`M5`'s or `LBA-G4`'s
+> commit-before-results property.** It is **not** written in ignorance, and a reader weighing it
+> should know exactly what its author could already see: every arm's size, CSR entries, boot
+> memory and d0 query cost (stage 2 §3b); every arm's count of population members absent from the
+> coverage store (stage 1 §2); and the prune's measured retention on two `U` cells (stage 2 §2e).
+> **It could not see any class share, any retention figure, any supply share, or any provenance
+> mix** — which is every quantity the rules below govern.
+
+⚠ **`LBA-AM3` and `LBD-AM3` are different objects one character apart, and both are live in this
+stage.** `LBD-AM3` is the `LBD-` track's fidelity override, whose extension to `LBD-A4` is an open
+question of the owner's; this is `LBD-S4`'s third amendment. Neither is ever written bare as
+*"AM3"*. Recorded because `CLAUDE.md`'s collision rule is about what a reader can confuse, and a
+one-letter gap between two series that appear in the same paragraph is the case it is weakest
+against. **Collision-checked across every ref on 2026-09-15: `LBA-AM3` and `LBA-AM3-1`–`-3` free.**
+
+---
+
+#### `LBA-AM3-1` — `LBA-R8` and `LBA-R9` are formally UNREACHABLE, and the design therefore cannot deliver a licensed "no"
+
+**This is a consequence of `LBA-G3` firing at stage 1, not a new decision.** §7's run-state
+vocabulary defines *censused* as *"the offline census pass **has run** and the arm's class share
+is **measured rather than estimated**."* `LBA-G3` fired — the pass is not started and none is owed
+— so **no arm will ever reach *censused* within `LBD-S4` as designed.** `LBA-R8` presupposes
+*complete and censused*; `LBA-R9` presupposes *complete, sized and censused*. §7's closing rule is
+firm: *"Nothing in this table is reachable before its run state, and a partial run licenses no
+read."*
+
+**The consequence that matters, named because it is easy to miss:** `LBA-R9` is the row that reads
+*"the numbers say no"* and that records **stopping the `LBD-` track here as a complete outcome
+rather than an abandonment.** It is the owner's own exit read, and the design as executed cannot
+hand it to him licensed. §0's claim that every threshold outcome has a read survives; the claim
+that every *decision* outcome has one does not.
+
+**The reads stage 3 may take are exactly:** `LBA-R4` (on the `P` row, and on the `U` row with
+`LBA-X6` beside it), `LBA-R5`, `LBA-R6` and `LBA-R7`. `LBA-R4-V` is restated as **already settled
+on the committed record** and is never reported as a finding of this design. `LBA-R0` and `LBA-R1`
+were taken at stage 2 and are not re-read here.
+
+**The owner's instruction, recorded as his and dated 2026-09-15.** Given when he set stage 3's
+scope, with the unreachability already stated to him:
+
+> State that `LBA-R8` and `LBA-R9` presuppose censused and are formally unreachable, and give
+> beside that statement what the estimated `LBA-M4` would say if it were read as measured,
+> labelled so the owner can weigh it.
+
+**What that does and does not do.** It **does not** make either read reachable, does not license a
+§7 row, and does not enter the record as a finding. The content is reported as an **explicitly
+unlicensed sensitivity**, in its own block, under a heading that says so, carrying `LBA-X2`'s two
+bounds and the coverage split of `LBA-AM3-3`. **It is recorded here rather than done silently**
+because §11's own rule is that a change of practice against this document arrives as a dated
+amendment with its reasoning — and because the owner asking for a sensitivity he can weigh is a
+different act from a session taking a barred read, which only the record can distinguish
+afterwards.
+
+#### `LBA-AM3-2` — `LBA-G4` is computed with its residual confound MEASURED, and it has its own effect size
+
+**The problem.** §5's firing clause requires both class shares *"taken from the **same census
+pass, the same dump and the same arm**."* With no pass run, every verdict is carried from the
+2026-08-05 or the 2026-08-09 census, **against earlier MusicBrainz snapshots than the pinned
+`20260905-002519` one**. The *same arm* half holds — `LBA-AM1-A5` moved the baseline inside the
+arm and that is untouched. The *same pass, same dump* half does not.
+
+**Why "declare it unevaluable" is the wrong answer, and why "compute it quietly" is worse.** The
+confound is not that the verdicts are old — both subsets are equally old. It is that the two
+subsets may draw from the two censuses in **different proportions**, which would put a dump column
+back into a comparison `LBA-AM1-A5` had made one column wide. **That proportion is measurable**,
+per artist, from the coverage store's own `d2_src` field.
+
+**The resolution, fixed before any provenance mix has been looked at.**
+
+1. `LBA-G4` is computed within the arm as `LBA-AM1-A5` defines it, and **every figure is labelled
+   an estimate** wherever it appears.
+2. **The verdict-source mix of both subsets is reported beside it** — the share of each subset
+   whose `d2` verdict came from each census.
+3. **Effect size for the disqualifier, stated as a number rather than left to judgement:** if the
+   two subsets' shares of `cex-recensus-2026-08-09`-sourced verdicts **differ by 10 percentage
+   points or more**, `LBA-G4` is **reported unreadable for that arm** and no gate result is given
+   for it — only the two class shares, descriptively, with the mix beside them.
+4. Below that difference the gate reads as specified, still labelled an estimate.
+
+**Where the 10-point size comes from.** It is `LBA-G4`'s **own bar, in the same units** —
+percentage points of a share. The principle: a provenance difference large enough to account for
+the gate's own firing threshold is a difference large enough to disqualify the comparison. A looser
+disqualifier would admit a gate result the confound could have produced by itself; a tighter one
+would refuse comparisons whose residual column is smaller than the effect being measured.
+**Stated as a choice, not a measurement**, in §5's own manner.
+
+#### `LBA-AM3-3` — `LBA-M4`'s coverage is UNEVEN across the lattice, and the split is reported per arm
+
+**`LBA-M4`'s ⚠ already requires the split by verdict source and reserves *exact* for the fresh
+share. After `LBA-G3`, the fresh share is zero on every arm** — stage 1 §3 says so. What neither
+document says is that *"estimated on every arm"* covers **two different situations**, and the
+difference falls exactly on the arms the measurement exists to size.
+
+- On `LBA-A1`–`LBA-A6`, stage 1 §2 measured **zero** population members absent from the coverage
+  store. Every artist carries a verdict, so the class share is **carried-measured over a complete
+  population** and only the *drop* is extrapolated.
+- On `LBA-A7` and `LBA-A8`, a large majority of the population is **absent from the store
+  entirely** (stage 1 §2 owns the counts). The store's own status string binds here: *"absence of a
+  field means UNKNOWN, never false."* So for those arms **both** the class share and the drop are
+  extrapolated, over a population most of which no census has ever evaluated.
+
+**Consequence, a bar.** Every `LBA-M4` table carries a **coverage column per arm** — the share of
+the arm's built node set holding a `d2` verdict — and **no sentence compares a `U`-row class share
+with a `V`- or `P`-row one as though both were measured on the same basis.** The `U` figures are an
+extrapolation from the covered minority to the uncovered majority, and the report says so wherever
+they appear.
+
+#### What this amendment does NOT do
+
+- **It changes no arm, no population rule, no threshold, and no bar's value.** `LBA-G4`'s 10-point
+  bar is untouched; `LBA-AM3-2`'s 10-point disqualifier is a **new and separate** criterion that
+  can only ever *withhold* a gate result, never produce one.
+- **It does not make `LBA-R8` or `LBA-R9` reachable**, and the stage-3 report claims neither.
+- **It does not reopen the owner's three rulings** (`LBA-D1`–`D3`), select an arm, prefer a
+  threshold, or recommend a route.
+- **It adopts nothing, changes no default, and touches no shipped code.**
+- **It does not re-read any `LBD-` criterion**, and `LBD-AM3`'s extension to `LBD-A4` — a different
+  object, see the warning above — remains open and the owner's.
+
+**Identifier `LBA-AM3`.** Collision-checked across every ref on 2026-09-15, together with
+`LBA-AM3-1`–`LBA-AM3-3`: free.
