@@ -97,5 +97,26 @@
     "projected_peak_rss_gib": 17.975,
     "bar_gib": 24,
     "fires": false
+  },
+  {
+    "arm": "LBA-A9",
+    "taken_utc": "2026-09-15T01:36:50.043170+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [
+      "LBA-A2",
+      "LBA-A4",
+      "LBA-A5",
+      "LBA-A6",
+      "LBA-A7",
+      "LBA-A8"
+    ],
+    "projectable": true,
+    "basis": "least-squares line over 6 instrumented builds, intercept free",
+    "points_used": 6,
+    "archive_neighbour_rows": 52254182,
+    "projected_peak_rss_bytes": 34406583994,
+    "projected_peak_rss_gib": 32.044,
+    "bar_gib": 24,
+    "fires": true
   }
 ]

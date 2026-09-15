@@ -1,0 +1,34 @@
+{
+  "arm": "LBA-A9",
+  "status": "unbuilt for a resource reason",
+  "stopped_by": "LBA-G2",
+  "bar_gib": 24,
+  "projection": {
+    "arm": "LBA-A9",
+    "taken_utc": "2026-09-15T01:36:50.043170+00:00",
+    "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+    "instrumented_builds_so_far": [
+      "LBA-A2",
+      "LBA-A4",
+      "LBA-A5",
+      "LBA-A6",
+      "LBA-A7",
+      "LBA-A8"
+    ],
+    "projectable": true,
+    "basis": "least-squares line over 6 instrumented builds, intercept free",
+    "points_used": 6,
+    "archive_neighbour_rows": 52254182,
+    "projected_peak_rss_bytes": 34406583994,
+    "projected_peak_rss_gib": 32.044,
+    "bar_gib": 24,
+    "fires": true
+  },
+  "barred_conclusions": [
+    "No map-level read: LBA-M1, LBA-M2 and LBA-M3 are graph-level and are simply unread for this cell. Its table-level population and pair counts stand.",
+    "No inference that the rule is unservable: build_from_archive holds neighbour objects in a Python dict during its first pass, which is a property of the BUILDER, not of GraphStore. 'We could not build it here' and 'it is too big to serve' are different claims and the second needs LBA-M1.",
+    "No cross-population comparison at this threshold at the map level."
+  ],
+  "note": "A resource fact, LBD-G4's shape \u2014 NOT a finding about anything.",
+  "finished_utc": "2026-09-15T01:36:50.047172+00:00"
+}

@@ -1,0 +1,47 @@
+{
+  "task": "LBA-M1 query-cost pair set",
+  "rule": "200 pairs, random.Random(20260914), from the artists present in EVERY built arm and in the served map; a pair adjacent in ANY map is redrawn",
+  "seed": 20260914,
+  "n_pairs": 200,
+  "pool_drawn": 2000,
+  "pool_adjacent_in_at_least_one_map": 1,
+  "adjacent_candidates_by_map": {
+    "served": 0,
+    "LBA-A1": 1,
+    "LBA-A2": 1,
+    "LBA-A3": 1,
+    "LBA-A4": 1,
+    "LBA-A5": 1,
+    "LBA-A6": 1,
+    "LBA-A7": 1,
+    "LBA-A8": 1
+  },
+  "maps": {
+    "served": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+    "LBA-A1": "C:\\unsung-fast\\lbd-artifacts\\LBA-A1-bare.bin",
+    "LBA-A2": "C:\\unsung-fast\\lbd-artifacts\\LBA-A2-bare.bin",
+    "LBA-A3": "C:\\unsung-fast\\lbd-artifacts\\LBA-A3-bare.bin",
+    "LBA-A4": "C:\\unsung-fast\\lbd-artifacts\\LBA-A4-bare.bin",
+    "LBA-A5": "C:\\unsung-fast\\lbd-artifacts\\LBA-A5-bare.bin",
+    "LBA-A6": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-bare.bin",
+    "LBA-A7": "C:\\unsung-fast\\lbd-artifacts\\LBA-A7-bare.bin",
+    "LBA-A8": "C:\\unsung-fast\\lbd-artifacts\\LBA-A8-bare.bin"
+  },
+  "artists_per_map": {
+    "served": 58838,
+    "LBA-A1": 57142,
+    "LBA-A2": 57466,
+    "LBA-A3": 57932,
+    "LBA-A4": 86086,
+    "LBA-A5": 86649,
+    "LBA-A6": 87394,
+    "LBA-A7": 311335,
+    "LBA-A8": 390404
+  },
+  "common_artists": 57013,
+  "pair_file": "C:\\dev\\music-app\\builder\\analysis\\2026-09-14-lbd-s4-stage2\\s4_pairset.tsv",
+  "pair_file_sha256": "2713e5369719dd39091363d8d0977b8ae2339b4df6a56ad707ca67a967528cc9",
+  "drawn_utc": "2026-09-15T01:38:08.133830+00:00",
+  "script_sha256": "6448d3d823a3b21f33a88342971c4152ea9578dc89af13370ca820981541c1a0",
+  "note": "Written and sha-pinned BEFORE any timing is taken (\u00a74)."
+}

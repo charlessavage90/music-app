@@ -47,26 +47,34 @@ SEED = 20260914
 N_PAIRS = 200
 POOL_BLOCK = 2000
 
-# `LBA-A1` and `LBA-A3` are the reused arms (`LBA-D9`); the rest are stage 2's, and only those
-# actually built are included — a cell `LBA-G2` stopped is absent, which is what "every BUILT arm"
-# means.
-REUSED = {"LBA-A1": ARTIFACTS / "LBD-A0V.bin", "LBA-A3": ARTIFACTS / "LBD-A5V.bin"}
+# EVERY arm is represented by its BARE re-serialisation, the two reused and the built ones alike —
+# the same objects `LBA-M1`'s size and boot-memory halves are measured on, so one arm is never
+# timed on a different object from the one it is sized on. At d0 this cannot change a route
+# (`n_known = 0`, so the fame ramp is off — `pathfinding.py:130-132`), which is exactly why the
+# consistent choice is free here.
+#
+# A cell `LBA-G2` stopped is ABSENT, which is what "present in every BUILT arm" means.
+REUSED = ["LBA-A1", "LBA-A3"]
 BUILT_CANDIDATES = ["A2", "A4", "A5", "A6", "A7", "A8", "A9"]
 
 
 def maps_in_play() -> dict[str, Path]:
-    out = dict(REUSED)
+    out = {arm: ARTIFACTS / f"{arm}-bare.bin" for arm in REUSED}
     for arm in BUILT_CANDIDATES:
-        path = ARTIFACTS / f"LBA-{arm}.bin"
         result = HERE / f"s4_build_{arm}.json"
         if not result.exists():
             continue
         record = json.loads(result.read_text(encoding="utf-8"))
         if record.get("status") == "unbuilt for a resource reason":
+            print(f"[pairset] LBA-{arm}: unbuilt for a resource reason — excluded", flush=True)
             continue
+        path = ARTIFACTS / f"LBA-{arm}-bare.bin"
         if not path.exists():
             raise SystemExit(f"REFUSING: {result.name} reports a build but {path} is absent")
         out[f"LBA-{arm}"] = path
+    for arm, path in out.items():
+        if not path.exists():
+            raise SystemExit(f"REFUSING: {path} is absent — run run_boot_rss.ps1's bare-copy step first")
     return out
 
 

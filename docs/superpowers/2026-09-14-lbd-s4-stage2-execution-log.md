@@ -396,6 +396,63 @@ row-count model, not of the instrument.
 It was obtained by accident — from a rerun forced by a bad assertion — and is reported as an
 **incidental measurement**, not as a designed one. No criterion rests on it.
 
+## Task 3 — six cells built, one stopped by `LBA-G2`
+
+**Done, 20:13–21:36 local, attempt 3.** One process per build, ascending archive-neighbour-row
+order per `LBA-AM2`(c). Figures are the stage-2 README's and are not restated here.
+
+**The lattice is `complete` in §7's sense** — every cell either built or **stopped by `LBA-G2` with
+its bar recorded**. Six built (`LBA-A2`, `A4`, `A5`, `A6`, `A7`, `A8`), two reused (`LBA-A1`,
+`LBA-A3`), one stopped (`LBA-A9`).
+
+### `LBA-G2` fired on `LBA-A9`, and on nothing else
+
+**The corner is unbuilt for a resource reason.** Its projection — a least-squares line over all six
+instrumented builds, intercept free, in archive neighbour rows — exceeded the 24 GiB bar. **A
+resource fact, `LBD-G4`'s shape, and not a finding about anything.** §2.6's three barred
+conclusions are attached to the cell's own record verbatim, and the one that matters most is the
+second: *"we could not build it here"* and *"it is too big to serve"* are different claims, and the
+second needs `LBA-M1`, which this cell does not have.
+
+**`LBA-D8`'s prohibition held:** no cell was stopped on any other ground. `LBA-A9` is stopped on
+the stated bar, by a projection computed before the build from points that already existed, and
+the whole fit is on the record.
+
+### The fit turned out to be a good model, which nothing had established
+
+`LBA-AM2`(d) fixed the fit rule as a line in archive neighbour rows **before any build existed**,
+and no document had checked that peak memory is linear in that unit. **It is, closely.** Five
+projections were taken against a subsequently measured actual, and the signed residuals are
+**+0.6 %, −0.8 %, −0.9 %, +2.9 %, −0.6 %**.
+
+⚠ **Signed, not absolute, and the sign is the part worth watching.** An *under*-predicting fit is
+the one that admits a cell it should have stopped. The only residual above 1 % is the single
+under-prediction, and it is on the `U` row — the row `LBA-A9` sits on. **`LBA-A9`'s projection
+exceeded the bar by about a third**, which is an order of magnitude more headroom than that
+residual, so the stop does not turn on the fit's precision. Had it been marginal, this paragraph
+would have said so instead.
+
+### The `U` rule loses about 15 % of its population to the prune — the first measurement of a
+quantity §2.4 records as unmeasured
+
+Both built `U` arms retain **about 85 %** of the artists their own table names, against **over
+98.5 %** on `V` and `P`. §2.4 says the prune *"removes a small fraction of `V` and of `P` … and its
+effect over `U` is unmeasured, because `U` has a fringe neither smaller population has."* That
+fringe is now sized on two cells.
+
+**Consequence for this session's own bound, stated because it cuts both ways.** The `U` node floor
+was set at 50 % of the table count and labelled a gross-loss tripwire precisely because no
+calibrated floor existed. At 85 % retention an 80 % floor would in fact have passed on both built
+`U` arms — **but nothing before these builds said so**, the looser threshold has more fringe to
+lose, and a floor that refuses a correct build costs a rebuild while a loose one costs nothing
+here. The bound stays as it is and is still not calibrated; **two cells is not a calibration.**
+
+### A structural difference between the population rules, reported as measured and not interpreted
+
+**Median degree is 9 on both built `U` arms, against 22–26 on every `V` and `P` arm.** Max degree
+is 50 everywhere, so the ceiling binds on every arm and the bound holds on every arm. The
+interpretation belongs in the report's inference section, under the owner's eye, not here.
+
 ### A machine-state timeline, and why it is a separate file rather than a wrapper change
 
 The build chain's seven peaks form a fit, so the conditions each was measured under are part of the
