@@ -1,8 +1,21 @@
 # Handoff — `LBD-S4` stage 1 complete, 2026-09-14
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-15 by
+[`2026-09-15-HANDOFF-lbd-s4-stage2.md`](2026-09-15-HANDOFF-lbd-s4-stage2.md) — `LBA-D8` stage 2
+has since RUN. ACTIVE for everything else it records**, and its claims-not-to-revert list still
+binds. ⚠ **Its statement that "stage 2 has not begun" is now false**, as is its list of what a
+fresh session owes if stage 2 runs — all five items are discharged. **Its `LBA-G2` warning is now
+answered:** that gate had no result when this was written and now has one on every cell.
+*(Original role:)* **ACTIVE — was the CURRENT handoff until 2026-09-15.** Supersedes
 [`2026-09-14-HANDOFF-lbd-s4-prereg.md`](2026-09-14-HANDOFF-lbd-s4-prereg.md) on next actions. It
 does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
+
+⚠ **One claim in this note is now known to be wrong, and it matters to anyone reusing the
+instrument.** Its task-5 line that the stage-2 peak-RSS instrument was *"written and self-tested"*
+is true of what it asserted and **incomplete**: that module raises `TypeError: 'Event' object is
+not callable` on **every real build**, and its self-test could not reach the failing path.
+`builder/analysis/2026-09-14-lbd-s4-stage2/s4_instrument.py` is the corrected forward copy and
+supersedes it for any future use.
 
 **A seam, and a clean one.** `LBA-D8` **stage 1 is complete**; **stage 2 has not begun**. Nothing
 was emitted, built or censused, no journey was generated and no listen designed. The successor

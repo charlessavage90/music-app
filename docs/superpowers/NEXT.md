@@ -47,73 +47,66 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-14, at the `LBD-S4` stage-1 run.** **Nothing a listener sees changed in
-this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
+**Last updated: 2026-09-15, at the `LBD-S4` stage-2 closeout.** **Nothing a listener sees changed
+in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
 boxes are still his to press, untouched here.
 
-**`LBA-D8` STAGE 1 HAS RUN. Stage 2 has not begun.** Nothing was emitted, built or censused, no
-journey generated and no listen designed. Figures are owned by
-[`../../builder/analysis/2026-09-14-lbd-s4-stage1/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage1/README.md)
-and restated nowhere, including here; the reasoning is
-[`2026-09-14-lbd-s4-stage1-execution-log.md`](2026-09-14-lbd-s4-stage1-execution-log.md) and the
-current handoff is [`2026-09-14-HANDOFF-lbd-s4-stage1.md`](2026-09-14-HANDOFF-lbd-s4-stage1.md).
+**`LBA-D8` STAGE 2 HAS RUN — the measurement half. Stage 3 has not begun.** Figures are owned by
+[`../../builder/analysis/2026-09-14-lbd-s4-stage2/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage2/README.md)
+and restated nowhere, including here; reasoning is
+[`2026-09-14-lbd-s4-stage2-execution-log.md`](2026-09-14-lbd-s4-stage2-execution-log.md) and the
+current handoff is [`2026-09-15-HANDOFF-lbd-s4-stage2.md`](2026-09-15-HANDOFF-lbd-s4-stage2.md).
 
-**What it settled.** All nine cells of the 3 × 3 lattice are derived and counted. The one quantity
-no document on the record stated — how many artists ListenBrainz's pair table actually names — is
-now measured at three strength bars. **`LBA-G3` FIRES**: *working out which artists are unplayable
-would take too long*, on both its projections, each a multiple of the six-hour bar.
+**What it settled.** Seven archives emitted, **six cells built and one stopped**, and `LBA-M1`
+taken on eight arms. **`LBA-G2` FIRES on `LBA-A9`** — the corner is *unbuilt for a resource
+reason*. **`LBA-G1` fires on NOTHING — on those eight arms**; `LBA-A9` was never sized, so the
+corner is outside that claim. Reads taken: `LBA-R0`, and `LBA-R1` of the three mutually exclusive
+hosting reads.
 
-**What it means in plain terms.** Building a map over **every** artist in the listening data is not
-blocked by the map itself — it is blocked by the homework needed before we could trust it. Checking
-which of those artists we can actually play would take most of a day, so that check is not run, and
-any statement about playability for those maps is an **estimate**. Every artist the app serves
-today, and every artist the deeper crawl found, is already checked — **that cost is created
-entirely by the biggest option.**
+**What it means in plain terms.** Every map we could actually assemble would still fit the machine
+the app runs on, with room to spare — so **size is not what decides this**. The biggest option of
+the nine could not be assembled on this laptop at all, which is a fact about the laptop's memory
+during the build and **not** about whether such a map could be served. And the bigger population
+rules reach a large number of thinly-connected artists: the typical artist in those maps has about
+a third as many connections as in the maps we serve or crawl today.
 
-> ## ⚠ Three things about this result that are easy to get backwards
+> ## ⚠ Four things about this result that are easy to get backwards
 >
-> **`LBA-G3` firing is a resource fact, not a finding about any arm.** It says nothing about
-> whether any map is good, servable, or worth adopting.
+> **`LBA-G2` firing on `LBA-A9` is a resource fact, not a finding about the corner.** *"We could
+> not build it here"* and *"it is too big to serve"* are different claims and the second needs
+> `LBA-M1`, which that cell does not have.
 >
-> **"Fully covered by the census store" is NOT "measured".** The six arms over today's artists and
-> the deeper crawl's owe no census work — and still get no *measured* playability share, because
-> nothing was freshly evaluated and every verdict they would read is a **carried** one, taken
-> against an **earlier MusicBrainz snapshot** than the pinned one.
+> **"No arm fires `LBA-G1`" covers the EIGHT SIZED arms.** `LBA-A9` was never sized. The query-cost
+> ratio is monotone in population and the largest built arm reaches **93 % of that bar**.
 >
-> **`LBA-G2` has NO result and `LBA-R0` is not reachable from this stage.** Stage 1 produced only
-> that gate's x-axis. The y-axis needs an instrumented build, and no cell has been built.
+> **`LBA-R1`'s own text names `LBA-M2`, `LBA-M3` and `LBA-M4` — all three are UNMEASURED here.**
+> The clause says where the decision sits, not what this stage found.
+>
+> **Every `U` arm is built in a configuration the shipped code calls "an experimental control and
+> never a shipping configuration"** — the un-listenable filter is off, because no census covers
+> that population and the guard refuses.
 
-**One amendment was added to the pre-registration: `LBA-AM2` (§11).** It resolves two conflicts in
-the committed text — how `LBA-G2`'s first projection is obtained, and which of two stated stage-2
-build orders governs. **It changes no arm, no threshold, no population rule and no bar, and reduces
-nothing.** ⚠ **Unlike `LBA-AM1` it was written AFTER stage 1 ran**, by an author who knew the
-cells' sizes; it says so in its own text and must not later be described as pre-result.
-
-**Two instruments the pre-registration recorded as missing now exist:** `framework_rss` is measured
-for the first time in this project, and the stage-2 peak-RSS instrument is written and self-tested.
-**`metadata_ratio` is still not taken**, so `LBA-G1`(a) remains unevaluable until it is.
+**No amendment was added to the pre-registration by stage 2.** No arm is selected, no threshold
+preferred, no route recommended; `LBA-D2` reserves the threshold to the owner at the stop.
 
 **Nothing is adopted, no default changed, no shipped code touched.**
 
-⛔ **The two `LBL-` verdicts are run-once and final.** Neither may be re-listened on any protocol
-(`GBL-` §5). Unchanged by this work.
+⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
 
-Branch `lbd-s4-stage1`; the `LBD-A4` work was PR #124 and the pre-registration PR #126 (`gh` says
-where they are).
+Branch `lbd-s4-stage2`, PR **#128**.
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
 not record how far down the list he has got.**
 
 1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
    Nothing here changed them.
-2. **Merge the stage-1 PR.**
+2. **Merge the stage-2 PR.**
 3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
-   fidelity — a scope question about his own earlier ruling. **Nothing is blocked by it.**
-4. **Decide whether stage 2 runs.** Stage 1 is complete; stage 2 is the expensive half — seven
-   builds, the largest **5.3× the biggest archive ever built on this machine** (that ratio is the
-   stage-1 README's §6, cited not restated). **Stopping here remains a complete outcome**, and no
-   session proposes a route.
-
+   fidelity. **Nothing is blocked by it.**
+4. **Decide whether stage 3 runs, and over which arms.** Stage 3 is `LBA-M2`/`M3`/`M4` — where
+   `LBA-R1` says the decision now sits. **The retiring session's position, offered to be argued
+   with rather than as a menu, is in the handoff's "what I would do if I were continuing".**
+   **Stopping here remains a complete outcome**, and no session proposes a route.
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -385,6 +378,11 @@ old heading.)*
 
 | Finding | Condition |
 |---|---|
+| ~~**`docs-lint` checks 4, 5 and 6 were never observed to run at the stage-2 closeout**~~ ✅ **DISCHARGED 2026-09-15, minutes after it was written, by the background run that had been launched before it.** The full script completed **exit code 0 with all six checks clean** — checks 4, 5 and 6 print their headers and list candidates beneath, and all three listed **none**. ⚠ **Check 6 is restated figures, and it found nothing**, which is the mechanical confirmation the row below asked for: the four restatements this closeout fixed by hand were the only ones. *(Struck, kept for the record. The row was written on two foreground runs that both timed out partway through check 3; the background run launched earlier had already succeeded and had not been read. The lesson is the row's own: **a timeout is not a result**, and the answer was already on disk.)*
+| **`closeout` B2, B3 and B4 were NOT run for `LBD-S4` stage 2** — reachability, vacuous-test spot check, prose-versus-code. The mid-flight tier hands them forward deliberately: all three want a finished artifact and produce noise against half-built work. **Stage 2 added six scripts under `builder/analysis/2026-09-14-lbd-s4-stage2/` and no shipped code.** | **At stage 3's closeout, or whenever `LBD-S4` next reaches a seam** — whichever comes first. B2 is cheap here (the scripts import each other in one directory); B3 has no tests to spot-check, since stage 2 added none, and **saying so is the discharge**; B4 is the real one — the six scripts carry long docstrings making claims about `LBA-` rules. |
+| **`_logs/machine_state.tsv` was collected across the stage-2 build chain and NEVER ANALYSED** — 2,760 free-memory samples, taken so that *"was the machine quiet for this build"* would be answerable from the record rather than from anyone's memory. **Nobody has answered it.** The six build records carry the timestamps needed to align it. | **Before any future session compares a `LBA-G2` peak against these six**, or extends the fit with a new point. Until then the six peaks stand as measured and the residuals (README §2b) are the evidence that they are consistent. **Accepted-and-won't-chase is a legitimate discharge here**: the fit's residuals are all under 3 %, which already bounds what machine noise could have contributed. |
+| **The `LBA-G1`(b) query-cost result has never been measured on the actual container** — it converts by the Gate 2→3 review's 2.5–3.5× multiplier, which was measured on the **retired 75k artifact**, not the one served today. `LBA-A8` sits at **93 % of the (b) bar** and its p95 is roughly triple the served map's. | **Before anyone concludes the larger maps are fast enough to ship** — that is the claim the conversion supports and the direction it could be wrong in. A direct reading replaces a multiplier taken on a different artifact. **Cheap, and it is a session's work, not an owner decision**, except for the deploy access it needs. Nothing in stage 3 blocks on it. |
+| **The `U`-row acceptance floors are UNCALIBRATED and are labelled so** — node floor 50 % of the arm's table count, edge floor `CSR ≥ N`, both gross-loss tripwires. §2.4 records the prune's effect over `U` as unmeasured; stage 2 measured it on **two** cells (84.8 %, 85.5 %). ⚠ **On that row the edge floor cannot see a silent cap-rule revert**, which `acceptance.py`'s `CXA-` note calls the one thing it exists to catch. | **If a third `U` cell is ever built**, revisit whether two-plus-one cells calibrate a floor. **Not before** — two cells is not a calibration, and an 80 % floor would have passed on both only by hindsight. The lost sensitivity is **accepted for experimental control maps** and must be re-decided if any `U` arm is ever a shipping candidate. |
 | **The plan for `DLS-` items 4–6** (restructure `CLAUDE.md`; rebuild the map around role lines and add the lint checks; slim the rituals). The owner answered `DLS-Q1`–`Q6` on 2026-09-11 ([findings §5a](findings/2026-09-10-documentation-layer-strategy.md)). **It also carries three items:** `CLAUDE.md` prose the harness now enforces or makes redundant (the `UV_LINK_MODE=copy` prefix; "never use `docs/reference/`"); `closeout` D6 counting `.claude/rules/*.md` files that have no `paths:`, which load in every session; and item 3's unbuilt remainder, a hook refusing commits on `main`, which the owner has not been asked about. | **After the `DLS-T1` read and ~~the live `LBD-` session's next closeout~~ — that half SATISFIED 2026-09-13**, at the `LBL-` listen-2 read closeout; the `DLS-T1` read is still owed.** Written by a fresh session from the findings document, with a handoff point between each item. The D6 fix is due earlier if any rule without `paths:` is added. |
 | **Two documents are over the line budgets set for them 2026-09-12** (`closeout` `B6-budget`): this file and `docs/README.md`. Both are the files concurrent sessions collide on, and demoting their accreted history is a wholesale table rewrite, which reconciles badly in either merge order. | **When no second session is live in the tree.** This file: demote the discharged deferral rows to `NEXT-ARCHIVE.md` per `A2-next`. `docs/README.md`: it is `DLS-` item 5, whose gates are all clear. **Deliberately not done 2026-09-12 because the `LBL-` session was live** — not forgotten, and not a judgement that the budgets are wrong. |
 | **The APG1 lockstep tests (PR #118) pin only the fixture's four base metadata keys.** The committed fixture has no `deezer_ids`, `fame_lb`, `spotify_ids`, `apple_ids` or `artist_facts`, so those stay covered only by each package's own hand-built tests. | **The next time the committed fixtures are regenerated (`closeout` D2):** regenerate with those keys populated and re-derive the api test's pinned values. |

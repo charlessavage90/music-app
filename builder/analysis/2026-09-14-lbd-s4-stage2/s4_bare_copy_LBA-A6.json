@@ -1,0 +1,21 @@
+{
+  "label": "LBA-A6",
+  "source_artifact": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6.bin",
+  "source_sha256": "199b9e20a2fea4d998043bca83ed2f10a3696f84f3e5399f960834770f8f290e",
+  "source_additive_keys": [
+    "deezer_ids",
+    "spotify_ids",
+    "apple_ids",
+    "artist_facts"
+  ],
+  "source_serialised_bytes": 37576494,
+  "bare_artifact": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-bare.bin",
+  "bare_sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+  "bare_bytes": 30261096,
+  "bare_size_matches_decoded_original": true,
+  "structure_identical_to_source": true,
+  "method": "decode, empty the five additive lists, re-serialise \u2014 NOT a rebuild: no archive is read and build_from_archive is never called, so no build-date column is introduced and LBA-D9's prohibition is untouched",
+  "why": "LBA-G1(a) multiplies a census build's peak by metadata_ratio; loading a fame-carrying artifact instead would scale a figure that already contains metadata",
+  "written_utc": "2026-09-15T01:37:11.016882+00:00",
+  "script_sha256": "b36a85f216eb1af8a39fdb89b2ecd0c8242647b9eaa874be7ce76c76da332ed3"
+}

@@ -2552,3 +2552,77 @@ These were all marked ✅ and carried a date and what satisfied them. They are e
 | ✅ **The `REL-` release-dump union pass** | **CLOSED 2026-07-31 — the path is known-unreachable, not deferred again.** Its §7 condition was "if and only if `REL-1` lands in 45.0–49.9%". `REL-1` cleared the bar outright, so the condition can never fire for this run. Reopening needs a new pre-registration designed cold. Struck, kept for the record. *(Correction 2026-08-01: this row and the frozen spec's §7 both said the 345 GB dump "was deleted after measurement" — **it was not**; it is on disk at `builder/scratch/mb-json-dumps/release/`, 322 GB, verified. The closure never depended on the deletion and stands. The `WGT-` pre-registration reads the dump for a different question — evidence strength, not coverage — designed cold as this row requires.)* |
 | ✅ **`TB-P5H-7`** | **DISCHARGED 2026-08-03 — the condition fired and was consumed.** The `CRE-` pre-registration is the successor router-pricing pre-registration, and it consumes the item as the source requires: the joint descent × delivered-payload outcome has its own pre-registered read (`CRE-C4`, read jointly with `CRE-C1` in every `CRE-R`; `CRE-R3` is the outcome class). Struck, kept for the record. |
 | ✅ The `--prune` publish pass | **DONE 2026-08-02.** Ran `sync_frontend.py --prune --skip-build` through the module, so it kept the `FRO-1` pass ordering and the between-passes content-type probe. **Two orphans deleted** — `assets/index-C-9fM9tV.js` and `assets/index-C4yz7h5J.css`, the pre-redesign 2026-07-27 build. The bucket is now 7 objects. **The pre-flight that made it safe, and a successor should repeat it:** `--skip-build` publishes `frontend/dist` *as it stands*, so a stale or different `dist/` would have pruned the assets the live page names. Verified first that `dist/index.html` referenced exactly the two hashed assets the **live** page referenced, then ran `aws s3 sync … --delete --dryrun` to see the deletion list before running it for real. Verified after: bucket contents, `200` plus correct `Content-Type` for html/js/css/woff2/svg, and a live search returning Radiohead. Struck, kept for the record. |
+
+---
+
+## Demoted 2026-09-15 — the 2026-09-14 `LBD-S4` stage-1 status block
+
+*Frozen. Never edited or annotated again. Anything in it that still binds was distilled into
+`NEXT.md`'s registries before it was moved here.*
+
+**Last updated: 2026-09-14, at the `LBD-S4` stage-1 run.** **Nothing a listener sees changed in
+this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
+boxes are still his to press, untouched here.
+
+**`LBA-D8` STAGE 1 HAS RUN. Stage 2 has not begun.** Nothing was emitted, built or censused, no
+journey generated and no listen designed. Figures are owned by
+[`../../builder/analysis/2026-09-14-lbd-s4-stage1/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage1/README.md)
+and restated nowhere, including here; the reasoning is
+[`2026-09-14-lbd-s4-stage1-execution-log.md`](2026-09-14-lbd-s4-stage1-execution-log.md) and the
+current handoff is [`2026-09-14-HANDOFF-lbd-s4-stage1.md`](2026-09-14-HANDOFF-lbd-s4-stage1.md).
+
+**What it settled.** All nine cells of the 3 × 3 lattice are derived and counted. The one quantity
+no document on the record stated — how many artists ListenBrainz's pair table actually names — is
+now measured at three strength bars. **`LBA-G3` FIRES**: *working out which artists are unplayable
+would take too long*, on both its projections, each a multiple of the six-hour bar.
+
+**What it means in plain terms.** Building a map over **every** artist in the listening data is not
+blocked by the map itself — it is blocked by the homework needed before we could trust it. Checking
+which of those artists we can actually play would take most of a day, so that check is not run, and
+any statement about playability for those maps is an **estimate**. Every artist the app serves
+today, and every artist the deeper crawl found, is already checked — **that cost is created
+entirely by the biggest option.**
+
+> ## ⚠ Three things about this result that are easy to get backwards
+>
+> **`LBA-G3` firing is a resource fact, not a finding about any arm.** It says nothing about
+> whether any map is good, servable, or worth adopting.
+>
+> **"Fully covered by the census store" is NOT "measured".** The six arms over today's artists and
+> the deeper crawl's owe no census work — and still get no *measured* playability share, because
+> nothing was freshly evaluated and every verdict they would read is a **carried** one, taken
+> against an **earlier MusicBrainz snapshot** than the pinned one.
+>
+> **`LBA-G2` has NO result and `LBA-R0` is not reachable from this stage.** Stage 1 produced only
+> that gate's x-axis. The y-axis needs an instrumented build, and no cell has been built.
+
+**One amendment was added to the pre-registration: `LBA-AM2` (§11).** It resolves two conflicts in
+the committed text — how `LBA-G2`'s first projection is obtained, and which of two stated stage-2
+build orders governs. **It changes no arm, no threshold, no population rule and no bar, and reduces
+nothing.** ⚠ **Unlike `LBA-AM1` it was written AFTER stage 1 ran**, by an author who knew the
+cells' sizes; it says so in its own text and must not later be described as pre-result.
+
+**Two instruments the pre-registration recorded as missing now exist:** `framework_rss` is measured
+for the first time in this project, and the stage-2 peak-RSS instrument is written and self-tested.
+**`metadata_ratio` is still not taken**, so `LBA-G1`(a) remains unevaluable until it is.
+
+**Nothing is adopted, no default changed, no shipped code touched.**
+
+⛔ **The two `LBL-` verdicts are run-once and final.** Neither may be re-listened on any protocol
+(`GBL-` §5). Unchanged by this work.
+
+Branch `lbd-s4-stage1`; the `LBD-A4` work was PR #124 and the pre-registration PR #126 (`gh` says
+where they are).
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
+not record how far down the list he has got.**
+
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
+   Nothing here changed them.
+2. **Merge the stage-1 PR.**
+3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
+   fidelity — a scope question about his own earlier ruling. **Nothing is blocked by it.**
+4. **Decide whether stage 2 runs.** Stage 1 is complete; stage 2 is the expensive half — seven
+   builds, the largest **5.3× the biggest archive ever built on this machine** (that ratio is the
+   stage-1 README's §6, cited not restated). **Stopping here remains a complete outcome**, and no
+   session proposes a route.

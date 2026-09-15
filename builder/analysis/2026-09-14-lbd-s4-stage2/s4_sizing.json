@@ -1,0 +1,536 @@
+{
+  "task": "LBA-M1 \u2014 map size and what it costs to serve; LBA-G1 read on every built arm",
+  "calibration": {
+    "definition": "median GraphStore-only load peak of graph-lux4.bin / the same for graph-msw-tu50.bin \u2014 identical in N and CSR entries, differing only in the three LUX-4 additive keys",
+    "lux4_peaks_b": [
+      161390592,
+      161169408,
+      162070528
+    ],
+    "lux4_median_b": 161390592,
+    "served_peaks_b": [
+      100458496,
+      100777984,
+      100659200
+    ],
+    "served_median_b": 100659200,
+    "metadata_ratio": 1.60334,
+    "covers": "three of the five additive keys (spotify_ids, apple_ids, artist_facts). It does NOT cover deezer_ids or fame_lb, so the projection below is a LOWER bound on a shipped artifact's resident cost \u2014 LBA-X8, in the memory dimension",
+    "framework_rss_decomposition_b": {
+      "constant": 42680320,
+      "per_artist": 23.5,
+      "source": "stage 1 README \u00a74; the per-artist term is a median of three spanning 0.29-1.45 MB and is an order of magnitude, not a precise rate"
+    }
+  },
+  "arms": [
+    {
+      "arm": "LBA-A1",
+      "plain_sentence": "the artists the app serves today, connected by our own recomputation at the same strength bar ListenBrainz used",
+      "population_rule": "V",
+      "population_rule_exposure": null,
+      "filter": "on, inert (20260805)",
+      "reused": true,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A1-bare.bin",
+      "artifact_sha256": "e566ceaf5b4de8ae383000c782516f27211144581b31b5b7240f95d44bde78e0",
+      "lba_m1": {
+        "artists": 57142,
+        "csr_entries": 1569214,
+        "connections_each_counted_once": 784607,
+        "bare_artifact_bytes": 19259862,
+        "bare_artifact_mb": 19.26,
+        "shipped_projection_bytes": 30880044,
+        "boot_peak_repeats_b": [
+          96215040,
+          96387072,
+          96501760
+        ],
+        "boot_peak_median_b": 96387072,
+        "boot_peak_median_mib": 91.92,
+        "framework_rss_b": 44023157,
+        "projected_shipped_peak_rss_b": 198564089,
+        "projected_shipped_peak_rss_mib": 189.37,
+        "query_cost": {
+          "p50_s": 0.646395,
+          "p95_s": 1.115586,
+          "mean_s": 0.631582,
+          "min_s": 0.002977,
+          "max_s": 1.212838,
+          "p50_ms": 646.395,
+          "p95_ms": 1115.586
+        },
+        "served_query_cost": {
+          "p50_s": 0.610367,
+          "p95_s": 0.95345,
+          "mean_s": 0.568048,
+          "min_s": 0.006166,
+          "max_s": 1.096565,
+          "p50_ms": 610.367,
+          "p95_ms": 953.45
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 198564089,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.059,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A2",
+      "plain_sentence": "the same artists, but a connection is kept when three different people's listening supports it instead of four",
+      "population_rule": "V",
+      "population_rule_exposure": null,
+      "filter": "on, inert (20260805)",
+      "reused": false,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A2-bare.bin",
+      "artifact_sha256": "c78f8b592493f3affb3b98187ce5cc7ee19682e7a4349cd78a9f496c27b7b96d",
+      "lba_m1": {
+        "artists": 57466,
+        "csr_entries": 1616598,
+        "connections_each_counted_once": 808299,
+        "bare_artifact_bytes": 19713644,
+        "bare_artifact_mb": 19.71,
+        "shipped_projection_bytes": 31607609,
+        "boot_peak_repeats_b": [
+          97026048,
+          97148928,
+          97361920
+        ],
+        "boot_peak_median_b": 97148928,
+        "boot_peak_median_mib": 92.65,
+        "framework_rss_b": 44030771,
+        "projected_shipped_peak_rss_b": 199793214,
+        "projected_shipped_peak_rss_mib": 190.54,
+        "query_cost": {
+          "p50_s": 0.61254,
+          "p95_s": 1.062685,
+          "mean_s": 0.606234,
+          "min_s": 0.002873,
+          "max_s": 1.126206,
+          "p50_ms": 612.54,
+          "p95_ms": 1062.685
+        },
+        "served_query_cost": {
+          "p50_s": 0.572596,
+          "p95_s": 0.910627,
+          "mean_s": 0.540608,
+          "min_s": 0.006453,
+          "max_s": 0.964422,
+          "p50_ms": 572.596,
+          "p95_ms": 910.627
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 199793214,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.0698,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A3",
+      "plain_sentence": "the same artists, but two people are enough",
+      "population_rule": "V",
+      "population_rule_exposure": null,
+      "filter": "on, inert (20260805)",
+      "reused": true,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A3-bare.bin",
+      "artifact_sha256": "be76c92444a6a064278fbb55b38f986db85aa470187723be2356cba0cd87d438",
+      "lba_m1": {
+        "artists": 57932,
+        "csr_entries": 1681254,
+        "connections_each_counted_once": 840627,
+        "bare_artifact_bytes": 20335238,
+        "bare_artifact_mb": 20.34,
+        "shipped_projection_bytes": 32604233,
+        "boot_peak_repeats_b": [
+          98664448,
+          98390016,
+          98824192
+        ],
+        "boot_peak_median_b": 98664448,
+        "boot_peak_median_mib": 94.09,
+        "framework_rss_b": 44041722,
+        "projected_shipped_peak_rss_b": 202234054,
+        "projected_shipped_peak_rss_mib": 192.87,
+        "query_cost": {
+          "p50_s": 0.619632,
+          "p95_s": 1.123506,
+          "mean_s": 0.619006,
+          "min_s": 0.002826,
+          "max_s": 1.255555,
+          "p50_ms": 619.632,
+          "p95_ms": 1123.506
+        },
+        "served_query_cost": {
+          "p50_s": 0.575334,
+          "p95_s": 0.909559,
+          "mean_s": 0.539321,
+          "min_s": 0.006177,
+          "max_s": 0.979631,
+          "p50_ms": 575.334,
+          "p95_ms": 909.559
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 202234054,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.077,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A4",
+      "plain_sentence": "every artist the deeper crawl found, at ListenBrainz's own bar",
+      "population_rule": "P",
+      "population_rule_exposure": null,
+      "filter": "on, inert (20260809)",
+      "reused": false,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A4-bare.bin",
+      "artifact_sha256": "5b042d0cc2fbe67777013beca17264126404b022e446dcc0c3fd859733c96cc5",
+      "lba_m1": {
+        "artists": 86086,
+        "csr_entries": 2204856,
+        "connections_each_counted_once": 1102428,
+        "bare_artifact_bytes": 27576746,
+        "bare_artifact_mb": 27.58,
+        "shipped_projection_bytes": 44214809,
+        "boot_peak_repeats_b": [
+          126668800,
+          126783488,
+          126169088
+        ],
+        "boot_peak_median_b": 126668800,
+        "boot_peak_median_mib": 120.8,
+        "framework_rss_b": 44703341,
+        "projected_shipped_peak_rss_b": 247796079,
+        "projected_shipped_peak_rss_mib": 236.32,
+        "query_cost": {
+          "p50_s": 0.657411,
+          "p95_s": 1.336538,
+          "mean_s": 0.676948,
+          "min_s": 0.003625,
+          "max_s": 1.52281,
+          "p50_ms": 657.411,
+          "p95_ms": 1336.538
+        },
+        "served_query_cost": {
+          "p50_s": 0.551512,
+          "p95_s": 0.841218,
+          "mean_s": 0.514523,
+          "min_s": 0.005966,
+          "max_s": 0.903183,
+          "p50_ms": 551.512,
+          "p95_ms": 841.218
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 247796079,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.192,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A5",
+      "plain_sentence": "every artist the deeper crawl found, at the three-listener bar",
+      "population_rule": "P",
+      "population_rule_exposure": null,
+      "filter": "on, inert (20260809)",
+      "reused": false,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A5-bare.bin",
+      "artifact_sha256": "dbd7b666b2c17f7cac9233fa8a8b10fcc1941e220e670ad96828f8e4a268af6a",
+      "lba_m1": {
+        "artists": 86649,
+        "csr_entries": 2326654,
+        "connections_each_counted_once": 1163327,
+        "bare_artifact_bytes": 28721190,
+        "bare_artifact_mb": 28.72,
+        "shipped_projection_bytes": 46049738,
+        "boot_peak_repeats_b": [
+          129159168,
+          128651264,
+          129589248
+        ],
+        "boot_peak_median_b": 129159168,
+        "boot_peak_median_mib": 123.18,
+        "framework_rss_b": 44716571,
+        "projected_shipped_peak_rss_b": 251802208,
+        "projected_shipped_peak_rss_mib": 240.14,
+        "query_cost": {
+          "p50_s": 0.64851,
+          "p95_s": 1.350056,
+          "mean_s": 0.687944,
+          "min_s": 0.002288,
+          "max_s": 1.523011,
+          "p50_ms": 648.51,
+          "p95_ms": 1350.056
+        },
+        "served_query_cost": {
+          "p50_s": 0.53618,
+          "p95_s": 0.834613,
+          "mean_s": 0.508319,
+          "min_s": 0.005882,
+          "max_s": 0.921739,
+          "p50_ms": 536.18,
+          "p95_ms": 834.613
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 251802208,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.2095,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A6",
+      "plain_sentence": "every artist the deeper crawl found, at the two-listener bar",
+      "population_rule": "P",
+      "population_rule_exposure": null,
+      "filter": "on, inert (20260809)",
+      "reused": false,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-bare.bin",
+      "artifact_sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+      "lba_m1": {
+        "artists": 87394,
+        "csr_entries": 2490728,
+        "connections_each_counted_once": 1245364,
+        "bare_artifact_bytes": 30261096,
+        "bare_artifact_mb": 30.26,
+        "shipped_projection_bytes": 48518726,
+        "boot_peak_repeats_b": [
+          132206592,
+          132276224,
+          132444160
+        ],
+        "boot_peak_median_b": 132276224,
+        "boot_peak_median_mib": 126.15,
+        "framework_rss_b": 44734079,
+        "projected_shipped_peak_rss_b": 256817406,
+        "projected_shipped_peak_rss_mib": 244.92,
+        "query_cost": {
+          "p50_s": 0.657743,
+          "p95_s": 1.430359,
+          "mean_s": 0.70714,
+          "min_s": 0.00222,
+          "max_s": 1.656914,
+          "p50_ms": 657.743,
+          "p95_ms": 1430.359
+        },
+        "served_query_cost": {
+          "p50_s": 0.545204,
+          "p95_s": 0.838915,
+          "mean_s": 0.509454,
+          "min_s": 0.005759,
+          "max_s": 0.892776,
+          "p50_ms": 545.204,
+          "p95_ms": 838.915
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 256817406,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.2064,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A7",
+      "plain_sentence": "every artist anywhere in ListenBrainz's listening data who gets a connection at ListenBrainz's own bar \u2014 not just the ones our crawl happened to discover",
+      "population_rule": "U",
+      "population_rule_exposure": "LBA-X6 \u2014 U's membership moves with the threshold, so the population is a DEPENDENT variable on this row",
+      "filter": "off, uncensused",
+      "reused": false,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A7-bare.bin",
+      "artifact_sha256": "f3a46525ac35be41739677d995deff5f3fc0d2e3a488e36896cff75538f8de7d",
+      "lba_m1": {
+        "artists": 311335,
+        "csr_entries": 4869706,
+        "connections_each_counted_once": 2434853,
+        "bare_artifact_bytes": 71514795,
+        "bare_artifact_mb": 71.51,
+        "shipped_projection_bytes": 114662297,
+        "boot_peak_repeats_b": [
+          324194304,
+          324157440,
+          322072576
+        ],
+        "boot_peak_median_b": 324157440,
+        "boot_peak_median_mib": 309.14,
+        "framework_rss_b": 49996692,
+        "projected_shipped_peak_rss_b": 569730220,
+        "projected_shipped_peak_rss_mib": 543.34,
+        "query_cost": {
+          "p50_s": 0.965391,
+          "p95_s": 2.720201,
+          "mean_s": 1.144425,
+          "min_s": 0.003806,
+          "max_s": 4.211753,
+          "p50_ms": 965.391,
+          "p95_ms": 2720.201
+        },
+        "served_query_cost": {
+          "p50_s": 0.538887,
+          "p95_s": 0.837319,
+          "mean_s": 0.508439,
+          "min_s": 0.006191,
+          "max_s": 0.900203,
+          "p50_ms": 538.887,
+          "p95_ms": 837.319
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 569730220,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.7915,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A8",
+      "plain_sentence": "the same, at the three-listener bar",
+      "population_rule": "U",
+      "population_rule_exposure": "LBA-X6 \u2014 U's membership moves with the threshold, so the population is a DEPENDENT variable on this row",
+      "filter": "off, uncensused",
+      "reused": false,
+      "artifact_measured": "C:\\unsung-fast\\lbd-artifacts\\LBA-A8-bare.bin",
+      "artifact_sha256": "3c770f408b55b3a741b385ef82c3ba25fec44f10bbea9790623d915d5e79d730",
+      "lba_m1": {
+        "artists": 390404,
+        "csr_entries": 6132790,
+        "connections_each_counted_once": 3066395,
+        "bare_artifact_bytes": 89872626,
+        "bare_artifact_mb": 89.87,
+        "shipped_projection_bytes": 144096081,
+        "boot_peak_repeats_b": [
+          398303232,
+          397582336,
+          396431360
+        ],
+        "boot_peak_median_b": 397582336,
+        "boot_peak_median_mib": 379.16,
+        "framework_rss_b": 51854814,
+        "projected_shipped_peak_rss_b": 689313174,
+        "projected_shipped_peak_rss_mib": 657.38,
+        "query_cost": {
+          "p50_s": 1.00337,
+          "p95_s": 3.065206,
+          "mean_s": 1.237354,
+          "min_s": 0.010154,
+          "max_s": 4.817318,
+          "p50_ms": 1003.37,
+          "p95_ms": 3065.206
+        },
+        "served_query_cost": {
+          "p50_s": 0.539556,
+          "p95_s": 0.84005,
+          "mean_s": 0.508666,
+          "min_s": 0.005806,
+          "max_s": 0.881478,
+          "p50_ms": 539.556,
+          "p95_ms": 840.05
+        }
+      },
+      "lba_g1": {
+        "a_projected_shipped_peak_rss_b": 689313174,
+        "a_bar_b": 1600000000,
+        "a_bar": "1.6 GB",
+        "a_fires": false,
+        "b_ratio_p50": 1.8596,
+        "b_bar": 2.0,
+        "b_fires": false,
+        "fires": false,
+        "consequence_if_fired": "the arm REQUIRES A HOSTING OR ROUTER CHANGE before it could ship, and that requirement is named in every sentence about it. It stops nothing and the other measurements are still taken."
+      }
+    },
+    {
+      "arm": "LBA-A9",
+      "plain_sentence": "the same, at the two-listener bar",
+      "population_rule": "U",
+      "filter": "off, uncensused",
+      "status": "unbuilt for a resource reason",
+      "stopped_by": "LBA-G2",
+      "projection": {
+        "arm": "LBA-A9",
+        "taken_utc": "2026-09-15T01:36:50.043170+00:00",
+        "unit": "archive neighbour rows, pre-cap, two per pair \u2014 NEVER CSR entries",
+        "instrumented_builds_so_far": [
+          "LBA-A2",
+          "LBA-A4",
+          "LBA-A5",
+          "LBA-A6",
+          "LBA-A7",
+          "LBA-A8"
+        ],
+        "projectable": true,
+        "basis": "least-squares line over 6 instrumented builds, intercept free",
+        "points_used": 6,
+        "archive_neighbour_rows": 52254182,
+        "projected_peak_rss_bytes": 34406583994,
+        "projected_peak_rss_gib": 32.044,
+        "bar_gib": 24,
+        "fires": true
+      },
+      "barred_conclusions": [
+        "No map-level read: LBA-M1, LBA-M2 and LBA-M3 are graph-level and are simply unread for this cell. Its table-level population and pair counts stand.",
+        "No inference that the rule is unservable: build_from_archive holds neighbour objects in a Python dict during its first pass, which is a property of the BUILDER, not of GraphStore. 'We could not build it here' and 'it is too big to serve' are different claims and the second needs LBA-M1.",
+        "No cross-population comparison at this threshold at the map level."
+      ],
+      "lba_m1": null,
+      "lba_g1": null
+    }
+  ],
+  "bars": {
+    "LBA-G1(a)": "projected shipped peak RSS > 1.6 GB (80 % of the App Runner instance's 2 GB)",
+    "LBA-G1(b)": "the arm's median d0 query wall-clock > 2x the served map's, same process, same pair set; the gate reads the MEDIAN alone and p95 is reported beside it"
+  },
+  "standing_exposures": {
+    "LBA-X8": "every size figure here is a LOWER bound on a shipped artifact: these builds carry no fame and no clip ids, and metadata_ratio carries back only three of the five additive keys",
+    "LBA-AM1-O1": "the cap bounds every arm by its population, so LBA-G1 is in practice a POPULATION gate; a V-row null is not evidence the threshold does not affect size",
+    "LBA-AM1-O4": "the served map's local median d0 was on no document; LBA-M1 supplies it as a by-product of its own ratio"
+  },
+  "not_taken_here": [
+    "LBA-M2",
+    "LBA-M3",
+    "LBA-M4",
+    "LBA-M5"
+  ],
+  "script_sha256": "4e780d03420020d34b936d7908697249fff7eaad01e8129a2b5cb55fdeca1a08",
+  "written_utc": "2026-09-15T02:13:53.842754+00:00"
+}
