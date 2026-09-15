@@ -1,0 +1,141 @@
+{
+  "task": "LBA- stage 3, task 1 -- artifact verification (LBA-D9)",
+  "run_utc": "2026-09-15T17:06:26.524106+00:00",
+  "note": "Covers the artifacts stage 2 produced. The section 10 INPUT pins are covered by stage 1's frozen stage1_verify.py, re-run into _pins/stage3_verify_inputs.json. T.parquet is skipped: stage 3 derives nothing and never opens it.",
+  "artifacts_checked": 14,
+  "lba_a9": {
+    "status": "unbuilt for a resource reason",
+    "stop_record_clean": true,
+    "stopped_by": "LBA-G2"
+  },
+  "failures": [],
+  "rows": [
+    {
+      "label": "LBA-A1-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A1-bare.bin",
+      "status": "OK",
+      "sha256": "e566ceaf5b4de8ae383000c782516f27211144581b31b5b7240f95d44bde78e0",
+      "expected_sha256": "e566ceaf5b4de8ae383000c782516f27211144581b31b5b7240f95d44bde78e0",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 19259862
+    },
+    {
+      "label": "LBA-A2-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A2-bare.bin",
+      "status": "OK",
+      "sha256": "c78f8b592493f3affb3b98187ce5cc7ee19682e7a4349cd78a9f496c27b7b96d",
+      "expected_sha256": "c78f8b592493f3affb3b98187ce5cc7ee19682e7a4349cd78a9f496c27b7b96d",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 19713644
+    },
+    {
+      "label": "LBA-A3-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A3-bare.bin",
+      "status": "OK",
+      "sha256": "be76c92444a6a064278fbb55b38f986db85aa470187723be2356cba0cd87d438",
+      "expected_sha256": "be76c92444a6a064278fbb55b38f986db85aa470187723be2356cba0cd87d438",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 20335238
+    },
+    {
+      "label": "LBA-A4-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A4-bare.bin",
+      "status": "OK",
+      "sha256": "5b042d0cc2fbe67777013beca17264126404b022e446dcc0c3fd859733c96cc5",
+      "expected_sha256": "5b042d0cc2fbe67777013beca17264126404b022e446dcc0c3fd859733c96cc5",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 27576746
+    },
+    {
+      "label": "LBA-A5-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A5-bare.bin",
+      "status": "OK",
+      "sha256": "dbd7b666b2c17f7cac9233fa8a8b10fcc1941e220e670ad96828f8e4a268af6a",
+      "expected_sha256": "dbd7b666b2c17f7cac9233fa8a8b10fcc1941e220e670ad96828f8e4a268af6a",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 28721190
+    },
+    {
+      "label": "LBA-A6-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-bare.bin",
+      "status": "OK",
+      "sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+      "expected_sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 30261096
+    },
+    {
+      "label": "LBA-A7-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A7-bare.bin",
+      "status": "OK",
+      "sha256": "f3a46525ac35be41739677d995deff5f3fc0d2e3a488e36896cff75538f8de7d",
+      "expected_sha256": "f3a46525ac35be41739677d995deff5f3fc0d2e3a488e36896cff75538f8de7d",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 71514795
+    },
+    {
+      "label": "LBA-A8-bare.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A8-bare.bin",
+      "status": "OK",
+      "sha256": "3c770f408b55b3a741b385ef82c3ba25fec44f10bbea9790623d915d5e79d730",
+      "expected_sha256": "3c770f408b55b3a741b385ef82c3ba25fec44f10bbea9790623d915d5e79d730",
+      "expected_from": "s4_sizing.json artifact_sha256, cross-checked against s4_bare_copy bare_sha256",
+      "bytes": 89872626
+    },
+    {
+      "label": "LBA-A2.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A2.bin",
+      "status": "OK",
+      "sha256": "af49db6320465a158f0a1d9b12fef36d66a020dee0d33179bd7e304925cfc38f",
+      "expected_sha256": "af49db6320465a158f0a1d9b12fef36d66a020dee0d33179bd7e304925cfc38f",
+      "expected_from": "s4_build_A2.json artifact.sha256",
+      "bytes": 25944742
+    },
+    {
+      "label": "LBA-A4.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A4.bin",
+      "status": "OK",
+      "sha256": "facace5a038d46dbb51ecaa9b58939ee28bc15f830d2854f4b69b190d52920fa",
+      "expected_sha256": "facace5a038d46dbb51ecaa9b58939ee28bc15f830d2854f4b69b190d52920fa",
+      "expected_from": "s4_build_A4.json artifact.sha256",
+      "bytes": 34809997
+    },
+    {
+      "label": "LBA-A5.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A5.bin",
+      "status": "OK",
+      "sha256": "30bb396101d2bc6eddd99dc6ce733cb405d4e8d7047ca5dc2efd822a06232ee4",
+      "expected_sha256": "30bb396101d2bc6eddd99dc6ce733cb405d4e8d7047ca5dc2efd822a06232ee4",
+      "expected_from": "s4_build_A5.json artifact.sha256",
+      "bytes": 35988659
+    },
+    {
+      "label": "LBA-A6.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6.bin",
+      "status": "OK",
+      "sha256": "199b9e20a2fea4d998043bca83ed2f10a3696f84f3e5399f960834770f8f290e",
+      "expected_sha256": "199b9e20a2fea4d998043bca83ed2f10a3696f84f3e5399f960834770f8f290e",
+      "expected_from": "s4_build_A6.json artifact.sha256",
+      "bytes": 37576494
+    },
+    {
+      "label": "LBA-A7.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A7.bin",
+      "status": "OK",
+      "sha256": "45579077c7adb212bddf87421d35135eb98b71cacb1b9f0d9a741b8dc2d76dc4",
+      "expected_sha256": "45579077c7adb212bddf87421d35135eb98b71cacb1b9f0d9a741b8dc2d76dc4",
+      "expected_from": "s4_build_A7.json artifact.sha256",
+      "bytes": 82417794
+    },
+    {
+      "label": "LBA-A8.bin",
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A8.bin",
+      "status": "OK",
+      "sha256": "aa0a96757237f2f97196f69efab7dff0e5a91ad2a83923386f46789c2edd78b8",
+      "expected_sha256": "aa0a96757237f2f97196f69efab7dff0e5a91ad2a83923386f46789c2edd78b8",
+      "expected_from": "s4_build_A8.json artifact.sha256",
+      "bytes": 101771461
+    }
+  ],
+  "script_sha256": "19ec92f2aa2ecf2c6059f172d754a2accb7796872add7c61faab3bad51dbc66b"
+}
