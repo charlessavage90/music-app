@@ -246,3 +246,70 @@ than this arm's parameters. Stage 2 anticipated this: each manifest carries the 
 arm's real parameters sit in `parameters` (`threshold: 7` for `LBA-A2`) with `lba_arm` naming the
 cell. **No defect, and no correction is owed** — recorded only so a later reader who sees the
 path token does not re-derive the alarm.
+
+---
+
+## Task 5 (his step 2) — `LBA-M2`
+
+**Figures are the stage-3 README's §2 and are not restated here.** This entry is what was decided
+and what the numbers cost to believe.
+
+**Two instruments were written, `s3_common.py` and `s3_m2.py`, and neither touches shipped code.**
+`GraphStore` is imported from `api/src` rather than re-implemented: the APG1 format is the
+contract between the two packages and a third parser here would be a third thing to keep in
+lockstep by hand. Every artifact load re-checks its sha256 against task 4's output and refuses on
+a mismatch, so no statistic in this stage can be computed from an artifact the stage has not
+pinned.
+
+**Decoded BARE, not built, and this is stage 2's choice applied to a second half.** A census build
+carries four of the five additive metadata keys and the two reused artifacts carry all five, so
+decoding the built files would read some arms through metadata others lack. Stage 2 §3a made
+exactly this call for the memory half and said why; the structural half inherits it. **No bar
+moves either way** — metadata is not in any `LBA-M2` statistic — which is precisely why it was
+worth making the same choice rather than a different one for no reason.
+
+**The self-test drives `compare()` itself, RED and GREEN, on the path the measurement uses.** A
+hand-built pair of stores where every expected value is arithmetic: an arm that keeps one of three
+served neighbours and gains an unserved one (retention 1/3, the gate fires, `R_avail` still 1.0
+because the other two were never available); an identical arm (nothing fires, every share at its
+floor); and a 7-against-3 length pair at retention 1.0 that the forced-share null model sees.
+**That third case is the reason the statistic is retention and not Jaccard, asserted rather than
+described.** This is stage 1's correction applied rather than cited — *"shown to go red" has to be
+red on the path the instrument is actually used on.*
+
+**The instrument's green check, and it is a frozen record rather than another figure from this
+session.** On the three `V`-row arms, this session's *absent from the arm's own table* count plus
+the emitter's no-identity-row skip reproduces **stage 1 §1's committed absent counts exactly, all
+three**. The `P`-row and `U`-row arms have no such check because stage 1 counted absence over `P`
+and over the arm's own table, not over `V`.
+
+**A third absent cause was separated out rather than folded into one of §4's two.** The emitter
+skips a population member with no identity row: five artists on every `V` and `P` arm, none on a
+`U` arm. They **do** have pairs in the table, so filing them under *"no pair at all"* would have
+been false — and it is exactly those five that reconcile this session's count with stage 1's.
+
+**`b_out` is computed in the arm's own id space, and the first draft had it wrong.** It counts the
+arm's neighbours that are not artists the app serves today. Computing it as *"neighbours the base
+map does not contain"* is correct when the base **is** the served map and wrong for every
+arm-to-arm comparison, where a neighbour absent from the baseline arm may still be served. Caught
+before any run; recorded because the wrong version would have produced a plausible number on the
+comparison that matters least and a silently wrong one on the comparison `LBA-AM1-A7` added.
+
+**One result is worth naming here because it changes how the rest of the stage reads**, and it is
+reported rather than concluded: **the arm-to-arm comparisons are very nearly pure addition.**
+Mean retention within every population row is above 0.998 and the gated statistic fires on
+essentially nobody. That is stage 1 §1b's threshold nesting surviving the cap and the prune, which
+no document had established — nesting was proved at the **table** level, and whether a degree
+ceiling of 50 would undo it at the **map** level was open. It did not, because the median degree
+on every arm is well under the ceiling. **Consequence for the reads: within a fixed population the
+strength bar is close to a one-way addition**, so a difference between two arms measured against
+the served map is not a difference in *who is kept*.
+
+⚠ **`LBA-X4` and `LBA-X5` travel with every served-map figure and with none of the arm-to-arm
+ones** — which is the whole point of `LBA-AM1-A7` and is asserted in the output JSON rather than
+left to the report to remember.
+
+**One descriptive observation, offered as an observation and not a finding.** The 92 served
+artists with a null `fame_lb` — the "unknown" band — are absent from **every** arm bar one
+artist. No listens means no listener count and no co-listen pairs, so the two absences are the
+same absence. It is 0.16 % of `V` and nothing rests on it.
