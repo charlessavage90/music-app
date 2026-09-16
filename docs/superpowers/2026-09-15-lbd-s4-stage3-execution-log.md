@@ -313,3 +313,60 @@ left to the report to remember.
 artists with a null `fame_lb` — the "unknown" band — are absent from **every** arm bar one
 artist. No listens means no listener count and no co-listen pairs, so the two absences are the
 same absence. It is 0.16 % of `V` and nothing rests on it.
+
+---
+
+## Task 6 (his step 3) — `LBA-M3`
+
+**Figures are the stage-3 README's §3.** This entry is the reasoning.
+
+**The second control did not exist and had to be taken, and that is the only new computation in
+this task.** `LBD-G2`'s 1-point bar is admissible **only** with both controls reported: the
+pre-existing set as the within-arm reference, and **the arm's own table-level figure**. The
+table-level figure existed for threshold 10 (`LBD-A0`, owned by the similarity README §6) and for
+**neither** threshold 7 nor threshold 3 — `A5.parquet` was derived for the served-population work
+and its `LBD-C2a` read was never taken, and `T7.parquet` was derived at stage 1. Without them the
+bar would have been the **10-point** one, and both `P`-row reads would have been unreadable.
+
+**Taken by running the frozen `lbd_reads.py --mode c2a` UNEDITED on each of the three derived
+tables**, via `uv run --with duckdb`, which is that script's own documented invocation. No module
+was edited and nothing was written under `builder/src`.
+
+**The instrument's green check is against a frozen record.** Re-running it on `A0.parquet`
+reproduces the similarity README §6's four committed shares **exactly** — added, residual,
+complement and pre-existing. That is a figure nobody in this session could have tuned toward: it
+was committed on 2026-09-08.
+
+**A property of the second control worth stating before anyone reads it as arm evidence: it is a
+property of the THRESHOLD ALONE.** All three arms at a given threshold derive from one table, so
+the three population rules share a table-level figure and **it cannot distinguish them.** It is a
+control on the threshold column and on nothing else, which is exactly the column the only two
+admissible one-column reads sit in.
+
+**The `V` row's 1.0 is computed, not asserted.** §4 argues from construction that no member of the
+added set can be in a `V` arm, so the statistic must be 1.0 and every threshold difference on that
+row identically zero. The script computes it anyway and got 1.0000 on all three. **If the
+arithmetic had disagreed, the construction argument would have been the thing that was wrong** —
+which is the only reason to spend the cycles.
+
+**The fourth stratum is EMPTY on the `V` row, and that is `LBA-AM1-A10` seen from the other side.**
+`nodes(arm) − V` is empty for `LBA-A1`–`A3` because those arms' population *is* `V`. It is printed
+as empty rather than as a share of nothing, the same distinction `LBA-AM1-A5` made for `LBA-G4`'s
+`n/a`.
+
+**The fourth stratum cannot be pinned in advance and so is pinned after the fact.** It is a
+consequence of the arm (`LBA-X6`), so its membership is written out per arm and recorded by count
+and by **sha256 over its sorted MBIDs** — this track's own convention for a gitignored set, and
+the same form §2.1 uses for a population rule. The files live beside the artifacts and a fresh
+clone has none of them; the checksum is their identity.
+
+**What the reads are, stated without preferring anything.** Both `P`-row one-column deltas against
+`LBA-A4` clear `LBD-G2`'s 1-point bar, with both controls reported. The `U`-row delta is computed
+and is **not** a one-column attribution — `LBA-X6` travels with it. The `V` row is `n/a`. **No arm
+is preferred here and no threshold is selected; `LBA-D2` reserves that to the owner.**
+
+**One thing the controls do that a single figure would have hidden.** The within-arm control moves
+with the threshold too — the pre-existing set's share improves as the bar loosens. The added set
+moves **more**, by roughly a factor of three on both `P`-row comparisons. That ratio is what
+separates *"this rule helps the artists the track exists to help"* from *"everything got denser"*,
+and it is only visible because `LBD-G2` requires the control rather than recommending it.

@@ -1,0 +1,536 @@
+{
+  "LBD_G2_reads": {
+    "P_row_one_column_pp_vs_LBA-A4": {
+      "LBA-A5": -3.3822,
+      "LBA-A6": -6.3662
+    },
+    "U_row_pp_vs_LBA-A7_NOT_ONE_COLUMN": {
+      "LBA-A8": -2.8201
+    },
+    "V_row": "n/a -- unfireable by construction",
+    "bar": ">= 1 percentage point with both controls reported; >= 10 without"
+  },
+  "arms": {
+    "LBA-A1": {
+      "added": {
+        "count_absent": 29892,
+        "count_le_2_or_absent": 29892,
+        "median_degree_REPORTED_NOT_GATED": 0.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "arm": "LBA-A1",
+      "arm_nodes": 57142,
+      "bar": "n/a -- UNFIREABLE by construction (LBA-AM1-A9). No member of the added set is in V, so the statistic is 1.0 on every V arm and every threshold difference on this row is identically zero. Computed, not asserted.",
+      "complement_descriptive": {
+        "count_absent": 23925,
+        "count_le_2_or_absent": 23925,
+        "median_degree_REPORTED_NOT_GATED": 0,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "filter": "on, inert (20260805)",
+      "population_rule": "V",
+      "preexisting_within_arm_control": {
+        "count_absent": 1691,
+        "count_le_2_or_absent": 3174,
+        "median_degree_REPORTED_NOT_GATED": 24,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.028762,
+        "share_le_2_or_absent": 0.053986
+      },
+      "residual_descriptive": {
+        "count_absent": 5967,
+        "count_le_2_or_absent": 5967,
+        "median_degree_REPORTED_NOT_GATED": 0,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "sentence": "the artists the app serves today, connected by our own recomputation at the same strength bar ListenBrainz used",
+      "stratum4_nodes_minus_V_descriptive": {
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A1_nodes_minus_V.txt",
+        "membership_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "n": 0,
+        "set": "nodes(arm) - V (LBA-AM1-A10)"
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.037401,
+        "complement_share_le_2": 0.021651,
+        "preexisting_share_le_2": 0.025258,
+        "residual_share_le_2": 0.100553,
+        "source": "C:\\unsung-fast\\lbd-pairs\\A0\\c2a.json"
+      },
+      "threshold": 10
+    },
+    "LBA-A2": {
+      "added": {
+        "count_absent": 29892,
+        "count_le_2_or_absent": 29892,
+        "median_degree_REPORTED_NOT_GATED": 0.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "arm": "LBA-A2",
+      "arm_nodes": 57466,
+      "bar": "n/a -- UNFIREABLE by construction (LBA-AM1-A9). No member of the added set is in V, so the statistic is 1.0 on every V arm and every threshold difference on this row is identically zero. Computed, not asserted.",
+      "complement_descriptive": {
+        "count_absent": 23925,
+        "count_le_2_or_absent": 23925,
+        "median_degree_REPORTED_NOT_GATED": 0,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "filter": "on, inert (20260805)",
+      "population_rule": "V",
+      "preexisting_within_arm_control": {
+        "count_absent": 1369,
+        "count_le_2_or_absent": 2511,
+        "median_degree_REPORTED_NOT_GATED": 25,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.023285,
+        "share_le_2_or_absent": 0.042709
+      },
+      "residual_descriptive": {
+        "count_absent": 5967,
+        "count_le_2_or_absent": 5967,
+        "median_degree_REPORTED_NOT_GATED": 0,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "sentence": "the same artists, but a connection is kept when three different people's listening supports it instead of four",
+      "stratum4_nodes_minus_V_descriptive": {
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A2_nodes_minus_V.txt",
+        "membership_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "n": 0,
+        "set": "nodes(arm) - V (LBA-AM1-A10)"
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.023485,
+        "complement_share_le_2": 0.016259,
+        "preexisting_share_le_2": 0.019254,
+        "residual_share_le_2": 0.052455,
+        "source": "C:\\unsung-fast\\lbd-pairs\\T7\\c2a.json"
+      },
+      "threshold": 7
+    },
+    "LBA-A3": {
+      "added": {
+        "count_absent": 29892,
+        "count_le_2_or_absent": 29892,
+        "median_degree_REPORTED_NOT_GATED": 0.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "arm": "LBA-A3",
+      "arm_nodes": 57932,
+      "bar": "n/a -- UNFIREABLE by construction (LBA-AM1-A9). No member of the added set is in V, so the statistic is 1.0 on every V arm and every threshold difference on this row is identically zero. Computed, not asserted.",
+      "complement_descriptive": {
+        "count_absent": 23925,
+        "count_le_2_or_absent": 23925,
+        "median_degree_REPORTED_NOT_GATED": 0,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "filter": "on, inert (20260805)",
+      "population_rule": "V",
+      "preexisting_within_arm_control": {
+        "count_absent": 904,
+        "count_le_2_or_absent": 1644,
+        "median_degree_REPORTED_NOT_GATED": 27,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.015376,
+        "share_le_2_or_absent": 0.027963
+      },
+      "residual_descriptive": {
+        "count_absent": 5967,
+        "count_le_2_or_absent": 5967,
+        "median_degree_REPORTED_NOT_GATED": 0,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 1.0,
+        "share_le_2_or_absent": 1.0
+      },
+      "sentence": "the same artists, but two people are enough",
+      "stratum4_nodes_minus_V_descriptive": {
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A3_nodes_minus_V.txt",
+        "membership_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "n": 0,
+        "set": "nodes(arm) - V (LBA-AM1-A10)"
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.011307,
+        "complement_share_le_2": 0.009572,
+        "preexisting_share_le_2": 0.012025,
+        "residual_share_le_2": 0.018267,
+        "source": "C:\\unsung-fast\\lbd-pairs\\A5\\c2a.json"
+      },
+      "threshold": 3
+    },
+    "LBA-A4": {
+      "added": {
+        "count_absent": 964,
+        "count_le_2_or_absent": 2883,
+        "median_degree_REPORTED_NOT_GATED": 13.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 0.032249,
+        "share_le_2_or_absent": 0.096447
+      },
+      "arm": "LBA-A4",
+      "arm_nodes": 86086,
+      "bar": "LBD-G2 carried: >= 1 percentage point against LBA-A4, admissible with both controls reported. This row carries the only two one-column threshold reads the design admits (LBA-AM1-A9)",
+      "complement_descriptive": {
+        "count_absent": 561,
+        "count_le_2_or_absent": 1288,
+        "median_degree_REPORTED_NOT_GATED": 15,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 0.023448,
+        "share_le_2_or_absent": 0.053835
+      },
+      "filter": "on, inert (20260809)",
+      "population_rule": "P",
+      "preexisting_within_arm_control": {
+        "count_absent": 1635,
+        "count_le_2_or_absent": 2918,
+        "median_degree_REPORTED_NOT_GATED": 28,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.027809,
+        "share_le_2_or_absent": 0.049632
+      },
+      "residual_descriptive": {
+        "count_absent": 403,
+        "count_le_2_or_absent": 1595,
+        "median_degree_REPORTED_NOT_GATED": 6,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 0.067538,
+        "share_le_2_or_absent": 0.267304
+      },
+      "sentence": "every artist the deeper crawl found, at ListenBrainz's own bar",
+      "stratum4_nodes_minus_V_descriptive": {
+        "count_absent": 0,
+        "count_le_2_or_absent": 1919,
+        "median_degree_REPORTED_NOT_GATED": 14.0,
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A4_nodes_minus_V.txt",
+        "membership_sha256": "87b09836995c47c63bf768769ac7602458131ceea0f1b53ed70b73218f1ead64",
+        "n": 28928,
+        "set": "nodes(arm) - V (LBA-AM1-A10)",
+        "share_absent": 0.0,
+        "share_le_2_or_absent": 0.066337
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.037401,
+        "complement_share_le_2": 0.021651,
+        "preexisting_share_le_2": 0.025258,
+        "residual_share_le_2": 0.100553,
+        "source": "C:\\unsung-fast\\lbd-pairs\\A0\\c2a.json"
+      },
+      "threshold": 10
+    },
+    "LBA-A5": {
+      "added": {
+        "count_absent": 700,
+        "count_le_2_or_absent": 1872,
+        "median_degree_REPORTED_NOT_GATED": 16.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 0.023418,
+        "share_le_2_or_absent": 0.062625
+      },
+      "arm": "LBA-A5",
+      "arm_nodes": 86649,
+      "bar": "LBD-G2 carried: >= 1 percentage point against LBA-A4, admissible with both controls reported. This row carries the only two one-column threshold reads the design admits (LBA-AM1-A9)",
+      "complement_descriptive": {
+        "count_absent": 442,
+        "count_le_2_or_absent": 894,
+        "median_degree_REPORTED_NOT_GATED": 18,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 0.018474,
+        "share_le_2_or_absent": 0.037367
+      },
+      "filter": "on, inert (20260809)",
+      "population_rule": "P",
+      "preexisting_within_arm_control": {
+        "count_absent": 1336,
+        "count_le_2_or_absent": 2297,
+        "median_degree_REPORTED_NOT_GATED": 30,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.022724,
+        "share_le_2_or_absent": 0.039069
+      },
+      "residual_descriptive": {
+        "count_absent": 258,
+        "count_le_2_or_absent": 978,
+        "median_degree_REPORTED_NOT_GATED": 9,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 0.043238,
+        "share_le_2_or_absent": 0.163901
+      },
+      "sentence": "every artist the deeper crawl found, at the three-listener bar",
+      "stratum4_nodes_minus_V_descriptive": {
+        "count_absent": 0,
+        "count_le_2_or_absent": 1172,
+        "median_degree_REPORTED_NOT_GATED": 16.0,
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A5_nodes_minus_V.txt",
+        "membership_sha256": "fa69d009daf8c262e46104d30e5fcb94d77afa8c5dc1df2ec101b7333a22b405",
+        "n": 29192,
+        "set": "nodes(arm) - V (LBA-AM1-A10)",
+        "share_absent": 0.0,
+        "share_le_2_or_absent": 0.040148
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.023485,
+        "complement_share_le_2": 0.016259,
+        "preexisting_share_le_2": 0.019254,
+        "residual_share_le_2": 0.052455,
+        "source": "C:\\unsung-fast\\lbd-pairs\\T7\\c2a.json"
+      },
+      "threshold": 7
+    },
+    "LBA-A6": {
+      "added": {
+        "count_absent": 407,
+        "count_le_2_or_absent": 980,
+        "median_degree_REPORTED_NOT_GATED": 19.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 0.013616,
+        "share_le_2_or_absent": 0.032785
+      },
+      "arm": "LBA-A6",
+      "arm_nodes": 87394,
+      "bar": "LBD-G2 carried: >= 1 percentage point against LBA-A4, admissible with both controls reported. This row carries the only two one-column threshold reads the design admits (LBA-AM1-A9)",
+      "complement_descriptive": {
+        "count_absent": 285,
+        "count_le_2_or_absent": 588,
+        "median_degree_REPORTED_NOT_GATED": 21,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 0.011912,
+        "share_le_2_or_absent": 0.024577
+      },
+      "filter": "on, inert (20260809)",
+      "population_rule": "P",
+      "preexisting_within_arm_control": {
+        "count_absent": 884,
+        "count_le_2_or_absent": 1515,
+        "median_degree_REPORTED_NOT_GATED": 32,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.015036,
+        "share_le_2_or_absent": 0.025768
+      },
+      "residual_descriptive": {
+        "count_absent": 122,
+        "count_le_2_or_absent": 392,
+        "median_degree_REPORTED_NOT_GATED": 14,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 0.020446,
+        "share_le_2_or_absent": 0.065695
+      },
+      "sentence": "every artist the deeper crawl found, at the two-listener bar",
+      "stratum4_nodes_minus_V_descriptive": {
+        "count_absent": 0,
+        "count_le_2_or_absent": 573,
+        "median_degree_REPORTED_NOT_GATED": 19,
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A6_nodes_minus_V.txt",
+        "membership_sha256": "5ae92914c359a92549537985c912e2645f46bb82cd9be31e8995ad9466785f82",
+        "n": 29485,
+        "set": "nodes(arm) - V (LBA-AM1-A10)",
+        "share_absent": 0.0,
+        "share_le_2_or_absent": 0.019434
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.011307,
+        "complement_share_le_2": 0.009572,
+        "preexisting_share_le_2": 0.012025,
+        "residual_share_le_2": 0.018267,
+        "source": "C:\\unsung-fast\\lbd-pairs\\A5\\c2a.json"
+      },
+      "threshold": 3
+    },
+    "LBA-A7": {
+      "added": {
+        "count_absent": 854,
+        "count_le_2_or_absent": 2024,
+        "median_degree_REPORTED_NOT_GATED": 19.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 0.02857,
+        "share_le_2_or_absent": 0.06771
+      },
+      "arm": "LBA-A7",
+      "arm_nodes": 311335,
+      "bar": "computed and reported, NEVER read as a one-column threshold attribution -- LBA-X6: on the U row the population is a dependent variable that moves with the threshold",
+      "complement_descriptive": {
+        "count_absent": 516,
+        "count_le_2_or_absent": 961,
+        "median_degree_REPORTED_NOT_GATED": 21,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 0.021567,
+        "share_le_2_or_absent": 0.040167
+      },
+      "filter": "off, uncensused",
+      "population_rule": "U",
+      "preexisting_within_arm_control": {
+        "count_absent": 1441,
+        "count_le_2_or_absent": 2287,
+        "median_degree_REPORTED_NOT_GATED": 39,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.02451,
+        "share_le_2_or_absent": 0.038899
+      },
+      "residual_descriptive": {
+        "count_absent": 338,
+        "count_le_2_or_absent": 1063,
+        "median_degree_REPORTED_NOT_GATED": 10,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 0.056645,
+        "share_le_2_or_absent": 0.178146
+      },
+      "sentence": "every artist anywhere in ListenBrainz's listening data who gets a connection at ListenBrainz's own bar - not just the ones our crawl happened to discover",
+      "stratum4_nodes_minus_V_descriptive": {
+        "count_absent": 0,
+        "count_le_2_or_absent": 68838,
+        "median_degree_REPORTED_NOT_GATED": 6,
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A7_nodes_minus_V.txt",
+        "membership_sha256": "1532efcac1f83a7d098f93caf3a798ce4a021aa225d28ddb11501b9c12c146cf",
+        "n": 253941,
+        "set": "nodes(arm) - V (LBA-AM1-A10)",
+        "share_absent": 0.0,
+        "share_le_2_or_absent": 0.271079
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.037401,
+        "complement_share_le_2": 0.021651,
+        "preexisting_share_le_2": 0.025258,
+        "residual_share_le_2": 0.100553,
+        "source": "C:\\unsung-fast\\lbd-pairs\\A0\\c2a.json"
+      },
+      "threshold": 10
+    },
+    "LBA-A8": {
+      "added": {
+        "count_absent": 588,
+        "count_le_2_or_absent": 1181,
+        "median_degree_REPORTED_NOT_GATED": 24.0,
+        "n": 29892,
+        "set": "added (whole set)",
+        "share_absent": 0.019671,
+        "share_le_2_or_absent": 0.039509
+      },
+      "arm": "LBA-A8",
+      "arm_nodes": 390404,
+      "bar": "computed and reported, NEVER read as a one-column threshold attribution -- LBA-X6: on the U row the population is a dependent variable that moves with the threshold",
+      "complement_descriptive": {
+        "count_absent": 387,
+        "count_le_2_or_absent": 619,
+        "median_degree_REPORTED_NOT_GATED": 27,
+        "n": 23925,
+        "set": "LBD-AM1 complement",
+        "share_absent": 0.016176,
+        "share_le_2_or_absent": 0.025873
+      },
+      "filter": "off, uncensused",
+      "population_rule": "U",
+      "preexisting_within_arm_control": {
+        "count_absent": 1145,
+        "count_le_2_or_absent": 1705,
+        "median_degree_REPORTED_NOT_GATED": 44,
+        "n": 58793,
+        "set": "pre-existing (control)",
+        "share_absent": 0.019475,
+        "share_le_2_or_absent": 0.029
+      },
+      "residual_descriptive": {
+        "count_absent": 201,
+        "count_le_2_or_absent": 562,
+        "median_degree_REPORTED_NOT_GATED": 15,
+        "n": 5967,
+        "set": "LBD-AM1 residual",
+        "share_absent": 0.033685,
+        "share_le_2_or_absent": 0.094185
+      },
+      "sentence": "the same, at the three-listener bar",
+      "stratum4_nodes_minus_V_descriptive": {
+        "count_absent": 0,
+        "count_le_2_or_absent": 83133,
+        "median_degree_REPORTED_NOT_GATED": 7,
+        "membership_file": "C:\\unsung-fast\\lbd-artifacts\\s3_stratum4\\LBA-A8_nodes_minus_V.txt",
+        "membership_sha256": "cfdc01f4fd71fde7a02c15bf08b5bccd8e6d52969c81ee40cadf309dc8b9cad3",
+        "n": 332713,
+        "set": "nodes(arm) - V (LBA-AM1-A10)",
+        "share_absent": 0.0,
+        "share_le_2_or_absent": 0.249864
+      },
+      "table_level_second_control": {
+        "added_share_le_2": 0.023485,
+        "complement_share_le_2": 0.016259,
+        "preexisting_share_le_2": 0.019254,
+        "residual_share_le_2": 0.052455,
+        "source": "C:\\unsung-fast\\lbd-pairs\\T7\\c2a.json"
+      },
+      "threshold": 7
+    }
+  },
+  "measurement": "LBA-M3 -- share at or below 2 connections over the pinned added set, absent counted as 0",
+  "script": "s3_m3.py",
+  "script_sha256": "72db7598cca7ea0a7e0017f3cd03f0e49bd7caffd3dec91b67c9c86100f68bb5",
+  "sets": {
+    "added": 29892,
+    "complement": 23925,
+    "preexisting": 58793,
+    "residual": 5967
+  },
+  "table_level_second_control_by_threshold": {
+    "3": {
+      "added_share_le_2": 0.011307,
+      "complement_share_le_2": 0.009572,
+      "preexisting_share_le_2": 0.012025,
+      "residual_share_le_2": 0.018267,
+      "source": "C:\\unsung-fast\\lbd-pairs\\A5\\c2a.json"
+    },
+    "7": {
+      "added_share_le_2": 0.023485,
+      "complement_share_le_2": 0.016259,
+      "preexisting_share_le_2": 0.019254,
+      "residual_share_le_2": 0.052455,
+      "source": "C:\\unsung-fast\\lbd-pairs\\T7\\c2a.json"
+    },
+    "10": {
+      "added_share_le_2": 0.037401,
+      "complement_share_le_2": 0.021651,
+      "preexisting_share_le_2": 0.025258,
+      "residual_share_le_2": 0.100553,
+      "source": "C:\\unsung-fast\\lbd-pairs\\A0\\c2a.json"
+    }
+  }
+}
