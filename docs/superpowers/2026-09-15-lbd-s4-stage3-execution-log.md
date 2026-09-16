@@ -465,3 +465,72 @@ it is §6's step 6, the re-census**, whose projection is stage 1 §3's and is wh
 on. Recorded here because a reader comparing the fame column across arms and concluding *"a bigger
 map is cheap to operate"* would have read the one part of the cost that does not scale and missed
 the one that does.
+
+---
+
+## Task 9 (his step 6) — the §7 reads, evaluated clause by clause
+
+**Figures are the stage-3 README's §6.** Run state reached: **`complete` and `sized`, and NOT
+`censused`.**
+
+**Every read is a CONJUNCTION, and it is evaluated mechanically rather than in prose.** The
+failure this project has on record is a read taken on the clause a session *remembered* — Track
+2's `R1`, where a single retrieval surfaced the wrong one of two objects sharing an identifier. So
+`s3_reads.py` evaluates each clause from the committed JSONs, records the figure that decided it,
+and takes the AND. **No verdict below was reached by looking at one number.**
+
+**`LBA-R4` DOES NOT READ, on either row, and for different reasons.**
+
+- **`P` row: two of three clauses fail.** Both `P`-row `LBA-M3` deltas against `LBA-A4` clear
+  `LBD-G2`'s one-point bar, and the absent shares spread by more than one point. Clause 3 holds —
+  `LBA-G1` fired on nothing across all eight arms (stage 2 §4), so it cannot fire *differently*
+  across a subset of them.
+- **`U` row: one of three fails**, the `LBA-M3` clause. `LBA-X6` travels with the row: the
+  arithmetic is reported, the attribution is not.
+
+**`LBA-R5` therefore READS on both rows** — it is `LBA-R4`'s complement. The three cells are given
+side by side with their §2.2 sentences, and **no preferred value is named**: `LBA-D2` reserves the
+threshold to the owner.
+
+**`LBA-R4-V` is restated, never reported as a finding — and this session's independent measurement
+agrees with it, which is a check on the instrument and not a result.** The pre-registration stated
+before stage 1 that the `V` row's absent-share spread was already larger than one point on the
+committed record. It is. And the `LBA-M3` clause is 1.0 on all three `V` arms, computed rather
+than asserted.
+
+### `LBA-R6` / `LBA-R7` are NOT ADJUDICABLE BY THIS DESIGN, and that is a defect in the design rather than in the result
+
+**The two reads differ in exactly one thing: whether the population rules separate on `LBA-M2`'s
+materially-changed share. Neither read carries an effect size for that half, and `LBA-M2` carries
+none by design** — §4 fixes it as *reported descriptively, no threshold*, and explicitly bars a
+session from attaching a bar to it.
+
+**So the branch cannot be decided by any number this document fixed.** A session choosing between
+`LBA-R6` and `LBA-R7` here would be **fixing a threshold with results in hand**, which is the one
+thing a pre-registration exists to prevent. `CLAUDE.md`'s rule is the same from the other
+direction: *every gate and branch trigger needs its own effect size*, and these two are a branch
+with none.
+
+**What is done instead, which is not a workaround but the correct action:** both halves' figures
+are reported side by side, the branch is left open, and it goes to the owner — *what counts as
+substantially rearranging what the app shows* is the left-hand column of `CLAUDE.md`'s decision
+table and was always his. **The design is what failed to make this a session's call, and it
+failed in the safe direction.**
+
+⚠ **Two things travel with that contrast and are asserted in the output rather than left to the
+report.** `P` → `U` is **not one column**: it changes the population *and* the drop filter's
+**state**, from inert-because-applicable to absent-because-**refused**. And `LBD-G2`'s bar applies
+**within** a population rule and never across one, so the `LBA-M3` half of this contrast is
+descriptive and carries no bar either.
+
+### `LBA-R8` and `LBA-R9`, and the owner's sensitivity
+
+**Both are formally unreachable** (`LBA-AM3-1`). The half worth stating plainly: **`LBA-R9` is the
+owner's own exit read** — the row that records stopping as a *complete outcome* rather than an
+abandonment — and the design as executed cannot hand it to him licensed.
+
+**His requested sensitivity is computed in a separately named artifact**,
+`s3_unlicensed_sensitivity.py` / `.json`, whose every field carries the label. It is a separate
+file rather than a section of the results **because the distinction between *the owner asked for a
+sensitivity he can weigh* and *a session took a barred read* is invisible in the output and
+survives only in the record.** It makes nothing reachable and enters the record as no finding.

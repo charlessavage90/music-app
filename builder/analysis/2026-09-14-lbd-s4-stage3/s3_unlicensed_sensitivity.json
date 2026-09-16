@@ -1,0 +1,147 @@
+{
+  "STATUS": "EXPLICITLY UNLICENSED SENSITIVITY -- not a read, not a finding, not in the record. Requested by the owner 2026-09-15 with the unreachability of LBA-R8 and LBA-R9 already stated to him; recorded as his in LBA-AM3-1.",
+  "arms": {
+    "LBA-A1": {
+      "if_read_as_measured": "n/a -- the gate's subject is empty on a V arm"
+    },
+    "LBA-A2": {
+      "if_read_as_measured": "n/a -- the gate's subject is empty on a V arm"
+    },
+    "LBA-A3": {
+      "if_read_as_measured": "n/a -- the gate's subject is empty on a V arm"
+    },
+    "LBA-A4": {
+      "BUT_IT_IS_DISQUALIFIED": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them",
+      "IF_READ_AS_MEASURED_LBA_G4": "would not fire",
+      "LBA_M3_reported_twice_as_LBA_R8_would_require": {
+        "measured_share_le_2_or_absent_over_added_set": 0.096447,
+        "note": "the discount is the estimated drop range above, applied to the artists the arm adds. It is NOT a second measurement -- it is the same estimate read a second way, and it inherits every bound in this file.",
+        "stratum4_nodes_minus_V_share_le_2_or_absent": 0.066337
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.051542,
+        "coverage_share": 1.0,
+        "covered": 28928,
+        "estimated_drop_share_range": [
+          0.043629,
+          0.044155
+        ],
+        "n": 28928
+      },
+      "bar_pp": 10.0,
+      "delta_pp": 0.8311,
+      "population_rule": "P",
+      "provenance_skew_pp": 70.9451,
+      "sentence": "every artist the deeper crawl found, at ListenBrainz's own bar"
+    },
+    "LBA-A5": {
+      "BUT_IT_IS_DISQUALIFIED": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them",
+      "IF_READ_AS_MEASURED_LBA_G4": "would not fire",
+      "LBA_M3_reported_twice_as_LBA_R8_would_require": {
+        "measured_share_le_2_or_absent_over_added_set": 0.062625,
+        "note": "the discount is the estimated drop range above, applied to the artists the arm adds. It is NOT a second measurement -- it is the same estimate read a second way, and it inherits every bound in this file.",
+        "stratum4_nodes_minus_V_share_le_2_or_absent": 0.040148
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.051727,
+        "coverage_share": 1.0,
+        "covered": 29192,
+        "estimated_drop_share_range": [
+          0.043786,
+          0.044313
+        ],
+        "n": 29192
+      },
+      "bar_pp": 10.0,
+      "delta_pp": 0.8129,
+      "population_rule": "P",
+      "provenance_skew_pp": 71.0982,
+      "sentence": "every artist the deeper crawl found, at the three-listener bar"
+    },
+    "LBA-A6": {
+      "BUT_IT_IS_DISQUALIFIED": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them",
+      "IF_READ_AS_MEASURED_LBA_G4": "would not fire",
+      "LBA_M3_reported_twice_as_LBA_R8_would_require": {
+        "measured_share_le_2_or_absent_over_added_set": 0.032785,
+        "note": "the discount is the estimated drop range above, applied to the artists the arm adds. It is NOT a second measurement -- it is the same estimate read a second way, and it inherits every bound in this file.",
+        "stratum4_nodes_minus_V_share_le_2_or_absent": 0.019434
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.0524,
+        "coverage_share": 1.0,
+        "covered": 29485,
+        "estimated_drop_share_range": [
+          0.044355,
+          0.04489
+        ],
+        "n": 29485
+      },
+      "bar_pp": 10.0,
+      "delta_pp": 0.7796,
+      "population_rule": "P",
+      "provenance_skew_pp": 71.2905,
+      "sentence": "every artist the deeper crawl found, at the two-listener bar"
+    },
+    "LBA-A7": {
+      "BUT_IT_IS_DISQUALIFIED": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them",
+      "IF_READ_AS_MEASURED_LBA_G4": "would FIRE",
+      "LBA_M3_reported_twice_as_LBA_R8_would_require": {
+        "measured_share_le_2_or_absent_over_added_set": 0.06771,
+        "note": "the discount is the estimated drop range above, applied to the artists the arm adds. It is NOT a second measurement -- it is the same estimate read a second way, and it inherits every bound in this file.",
+        "stratum4_nodes_minus_V_share_le_2_or_absent": 0.271079
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.351468,
+        "coverage_share": 0.208824,
+        "covered": 53029,
+        "estimated_drop_share_range": [
+          0.297508,
+          0.301094
+        ],
+        "n": 253941
+      },
+      "bar_pp": 10.0,
+      "delta_pp": 30.716,
+      "population_rule": "U",
+      "provenance_skew_pp": 51.7038,
+      "sentence": "every artist anywhere in ListenBrainz's listening data who gets a connection at ListenBrainz's own bar - not just the ones our crawl happened to discover"
+    },
+    "LBA-A8": {
+      "BUT_IT_IS_DISQUALIFIED": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them",
+      "IF_READ_AS_MEASURED_LBA_G4": "would FIRE",
+      "LBA_M3_reported_twice_as_LBA_R8_would_require": {
+        "measured_share_le_2_or_absent_over_added_set": 0.039509,
+        "note": "the discount is the estimated drop range above, applied to the artists the arm adds. It is NOT a second measurement -- it is the same estimate read a second way, and it inherits every bound in this file.",
+        "stratum4_nodes_minus_V_share_le_2_or_absent": 0.249864
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.354789,
+        "coverage_share": 0.162263,
+        "covered": 53987,
+        "estimated_drop_share_range": [
+          0.300319,
+          0.303939
+        ],
+        "n": 332713
+      },
+      "bar_pp": 10.0,
+      "delta_pp": 31.0172,
+      "population_rule": "U",
+      "provenance_skew_pp": 51.6773,
+      "sentence": "the same, at the three-listener bar"
+    }
+  },
+  "bounds_that_travel_with_every_figure_here": [
+    "LBA-AM3-2's disqualifier FIRED on every evaluable arm (skew 51.7-71.3 pp against a 10-point bar). The comparison is disqualified, not wrong -- and not right either.",
+    "LBA-X2(a) / ULC-F4: an OVER-estimate of what the app cannot play; UNBOUNDED on U.",
+    "LBA-X2(b): the carried verdicts are un-re-run. Unmeasured, not zero.",
+    "LBA-AM3-3: on the U row the class share is measured on a MINORITY of the added-beyond-V subset and extrapolated to the rest."
+  ],
+  "makes_reachable": "NOTHING. LBA-R8 and LBA-R9 remain formally unreachable.",
+  "script": "s3_unlicensed_sensitivity.py",
+  "script_sha256": "8f74c3651c6d630b4ffdef417dd55e03b90619d85a185a680f96466c263cc589",
+  "within_class_drop_rate_range_never_averaged": [
+    0.846473,
+    0.856676
+  ]
+}
