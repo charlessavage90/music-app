@@ -370,3 +370,66 @@ with the threshold too — the pre-existing set's share improves as the bar loos
 moves **more**, by roughly a factor of three on both `P`-row comparisons. That ratio is what
 separates *"this rule helps the artists the track exists to help"* from *"everything got denser"*,
 and it is only visible because `LBD-G2` requires the control rather than recommending it.
+
+---
+
+## Task 7 (his step 4) — `LBA-M4`, and `LBA-AM3-2`'s disqualifier fires on every evaluable arm
+
+**Figures are the stage-3 README's §4.** This entry is the reasoning, and one derivation that
+changes what `LBA-G4` can mean in this stage.
+
+**The store was read and not written, and that is evidenced rather than asserted.** Its sha256 is
+recorded before and after and the script **refuses** if they differ. It is ACTIVE data — the
+census scripts read it *and write back* — so "we did not touch it" is exactly the kind of claim
+this project requires evidence for.
+
+**Zero freshly evaluated artists on every arm, as stage 1 said there would be.** The split by
+verdict source is computed and reported anyway, so the zero is **visible rather than inferred**.
+
+**The within-class drop rates are read from the two committed payloads rather than transcribed**,
+and reported as a **range, never averaged** — §4's rule, because they were taken on different
+populations.
+
+### `LBA-AM3-2`'s disqualifier fires on all five arms where `LBA-G4` is evaluable
+
+**And it is worth being precise about what that does and does not mean.** The gate is **reported
+unreadable** on `LBA-A4`–`A8`: only the two class shares stand, descriptively, with the
+verdict-source mix beside them. It is `n/a` on the `V` row, where its subject is empty.
+
+**The disqualifier's value was fixed on 2026-09-15 at ten percentage points, before any
+provenance mix had been looked at** — the amendment says so and the commit timestamp is the
+evidence. **The measured skew is between 51.7 and 71.3 points.** Nothing was tuned to reach that;
+it is five to seven times the bar.
+
+**The derivation that matters, and it is mine rather than an escalation: the skew is STRUCTURAL,
+not an accident of these arms.** Every `kept-from-V` subset draws **0.0 %** of its verdicts from
+the 2026-08-09 recensus — exactly zero, on all five arms — because the 2026-08-05 census covered
+the 75,000-artist `ALG-B` population, which contains `V` entirely, and the recensus only evaluated
+artists genuinely new to the store. The `added-beyond-V` subsets draw 51.7–71.3 % from it for the
+mirror-image reason. **So under the two censuses that exist, an added-beyond-`V` subset and a
+kept-from-`V` subset can NEVER have matching provenance.** `LBA-G4` as `LBA-AM1-A5` redefined it
+is therefore **not readable at all in this stage** — and its root cause is the same one that put
+`LBA-R8` and `LBA-R9` out of reach: `LBA-G3` fired, so there is no fresh pass to put both subsets
+on one footing.
+
+**What this does NOT license, stated because the temptation runs both ways.** The raw within-arm
+deltas are **+0.78 to +0.83 points on the `P` row and +30.7 / +31.0 points on the `U` row**. The
+disqualifier says those comparisons are **disqualified**, not that the `U`-row figure is wrong.
+**Neither "the artists a `U` rule adds are much less playable" nor "they are fine" is licensed by
+this stage**, and the report must not imply either. The confound is real and its size is
+unmeasured.
+
+**This is the clearest return the pre-registration discipline has paid in this stage.** Without
+`LBA-AM3-2`, a session holding these numbers would have read `LBA-G4` as **firing decisively on
+the `U` row** — a 31-point delta against a 10-point bar — and would have written it into the
+record as a finding about population rules. A provenance difference of fifty to seventy points
+could have produced it by itself.
+
+### `LBA-AM3-3`'s coverage column, and what it bars
+
+Coverage is **1.0000 on `LBA-A1`–`A6`** and **0.3547 / 0.2861 on `LBA-A7` / `LBA-A8`**. So the
+`U`-row class share is measured on roughly a third of the population and extrapolated to the rest,
+where the store's own rule is *"absence of a field means UNKNOWN, never false."* **The `U`-row
+whole-population class share is about four times the `V`- and `P`-row ones, and `LBA-AM3-3` bars
+comparing them as though both were measured on the same basis.** The report carries the coverage
+column beside every figure, which is the bar rather than a courtesy.

@@ -1,0 +1,595 @@
+{
+  "arms": {
+    "LBA-A1": {
+      "LBA-G4": {
+        "result": "n/a",
+        "why": "the gate's subject is the artists this arm adds beyond V, and on a V arm that set is EMPTY -- a share of nothing, not a share of zero (LBA-AM1-A5). Printing 0 would read as perfectly playable, which is the opposite of not measured"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": null,
+        "coverage_share": null,
+        "covered": 0,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 0,
+        "n": 0,
+        "verdict_source_counts": {},
+        "verdict_source_mix_of_covered": {}
+      },
+      "arm": "LBA-A1",
+      "basis": "class share carried-measured over a COMPLETE population; only the drop is extrapolated (stage 1 section 2 measured zero uncovered)",
+      "estimated_drop_share_of_whole_population": [
+        0.037064,
+        0.03751
+      ],
+      "filter": "on, inert (20260805)",
+      "kept_from_V": {
+        "class_share_of_covered": 0.043786,
+        "coverage_share": 1.0,
+        "covered": 57142,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2502,
+        "n": 57142,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57127,
+          "ulf-census-2026-08-05": 15
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999737,
+          "ulf-census-2026-08-05": 0.000263
+        }
+      },
+      "population_rule": "V",
+      "sentence": "the artists the app serves today, connected by our own recomputation at the same strength bar ListenBrainz used",
+      "threshold": 10,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.043786,
+        "coverage_share": 1.0,
+        "covered": 57142,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2502,
+        "n": 57142,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57127,
+          "ulf-census-2026-08-05": 15
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999737,
+          "ulf-census-2026-08-05": 0.000263
+        }
+      }
+    },
+    "LBA-A2": {
+      "LBA-G4": {
+        "result": "n/a",
+        "why": "the gate's subject is the artists this arm adds beyond V, and on a V arm that set is EMPTY -- a share of nothing, not a share of zero (LBA-AM1-A5). Printing 0 would read as perfectly playable, which is the opposite of not measured"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": null,
+        "coverage_share": null,
+        "covered": 0,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 0,
+        "n": 0,
+        "verdict_source_counts": {},
+        "verdict_source_mix_of_covered": {}
+      },
+      "arm": "LBA-A2",
+      "basis": "class share carried-measured over a COMPLETE population; only the drop is extrapolated (stage 1 section 2 measured zero uncovered)",
+      "estimated_drop_share_of_whole_population": [
+        0.037355,
+        0.037805
+      ],
+      "filter": "on, inert (20260805)",
+      "kept_from_V": {
+        "class_share_of_covered": 0.04413,
+        "coverage_share": 1.0,
+        "covered": 57466,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2536,
+        "n": 57466,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57448,
+          "ulf-census-2026-08-05": 18
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999687,
+          "ulf-census-2026-08-05": 0.000313
+        }
+      },
+      "population_rule": "V",
+      "sentence": "the same artists, but a connection is kept when three different people's listening supports it instead of four",
+      "threshold": 7,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.04413,
+        "coverage_share": 1.0,
+        "covered": 57466,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2536,
+        "n": 57466,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57448,
+          "ulf-census-2026-08-05": 18
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999687,
+          "ulf-census-2026-08-05": 0.000313
+        }
+      }
+    },
+    "LBA-A3": {
+      "LBA-G4": {
+        "result": "n/a",
+        "why": "the gate's subject is the artists this arm adds beyond V, and on a V arm that set is EMPTY -- a share of nothing, not a share of zero (LBA-AM1-A5). Printing 0 would read as perfectly playable, which is the opposite of not measured"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": null,
+        "coverage_share": null,
+        "covered": 0,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 0,
+        "n": 0,
+        "verdict_source_counts": {},
+        "verdict_source_mix_of_covered": {}
+      },
+      "arm": "LBA-A3",
+      "basis": "class share carried-measured over a COMPLETE population; only the drop is extrapolated (stage 1 section 2 measured zero uncovered)",
+      "estimated_drop_share_of_whole_population": [
+        0.038063,
+        0.038522
+      ],
+      "filter": "on, inert (20260805)",
+      "kept_from_V": {
+        "class_share_of_covered": 0.044967,
+        "coverage_share": 1.0,
+        "covered": 57932,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2605,
+        "n": 57932,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57911,
+          "ulf-census-2026-08-05": 21
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999638,
+          "ulf-census-2026-08-05": 0.000362
+        }
+      },
+      "population_rule": "V",
+      "sentence": "the same artists, but two people are enough",
+      "threshold": 3,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.044967,
+        "coverage_share": 1.0,
+        "covered": 57932,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2605,
+        "n": 57932,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57911,
+          "ulf-census-2026-08-05": 21
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999638,
+          "ulf-census-2026-08-05": 0.000362
+        }
+      }
+    },
+    "LBA-A4": {
+      "LBA-G4": {
+        "added_class_share_of_covered": 0.051542,
+        "bar_pp": 10.0,
+        "cex-recensus-2026-08-09_share_added": 0.709451,
+        "cex-recensus-2026-08-09_share_kept": 0.0,
+        "delta_pp": 0.8311,
+        "disqualifier_bar_pp": 10.0,
+        "kept_class_share_of_covered": 0.043231,
+        "label": "ESTIMATE -- no census pass was run; every verdict is carried",
+        "provenance_skew_pp": 70.9451,
+        "result": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.051542,
+        "coverage_share": 1.0,
+        "covered": 28928,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 1491,
+        "n": 28928,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 20523,
+          "ulc-census-2026-08-05": 8388,
+          "ulf-census-2026-08-05": 17
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.709451,
+          "ulc-census-2026-08-05": 0.289961,
+          "ulf-census-2026-08-05": 0.000588
+        }
+      },
+      "arm": "LBA-A4",
+      "basis": "class share carried-measured over a COMPLETE population; only the drop is extrapolated (stage 1 section 2 measured zero uncovered)",
+      "estimated_drop_share_of_whole_population": [
+        0.038958,
+        0.039428
+      ],
+      "filter": "on, inert (20260809)",
+      "kept_from_V": {
+        "class_share_of_covered": 0.043231,
+        "coverage_share": 1.0,
+        "covered": 57158,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2471,
+        "n": 57158,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57146,
+          "ulf-census-2026-08-05": 12
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.99979,
+          "ulf-census-2026-08-05": 0.00021
+        }
+      },
+      "population_rule": "P",
+      "sentence": "every artist the deeper crawl found, at ListenBrainz's own bar",
+      "threshold": 10,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.046024,
+        "coverage_share": 1.0,
+        "covered": 86086,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 3962,
+        "n": 86086,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 20523,
+          "ulc-census-2026-08-05": 65534,
+          "ulf-census-2026-08-05": 29
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.238401,
+          "ulc-census-2026-08-05": 0.761262,
+          "ulf-census-2026-08-05": 0.000337
+        }
+      }
+    },
+    "LBA-A5": {
+      "LBA-G4": {
+        "added_class_share_of_covered": 0.051727,
+        "bar_pp": 10.0,
+        "cex-recensus-2026-08-09_share_added": 0.710982,
+        "cex-recensus-2026-08-09_share_kept": 0.0,
+        "delta_pp": 0.8129,
+        "disqualifier_bar_pp": 10.0,
+        "kept_class_share_of_covered": 0.043598,
+        "label": "ESTIMATE -- no census pass was run; every verdict is carried",
+        "provenance_skew_pp": 71.0982,
+        "result": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.051727,
+        "coverage_share": 1.0,
+        "covered": 29192,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 1510,
+        "n": 29192,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 20755,
+          "ulc-census-2026-08-05": 8420,
+          "ulf-census-2026-08-05": 17
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.710982,
+          "ulc-census-2026-08-05": 0.288435,
+          "ulf-census-2026-08-05": 0.000582
+        }
+      },
+      "arm": "LBA-A5",
+      "basis": "class share carried-measured over a COMPLETE population; only the drop is extrapolated (stage 1 section 2 measured zero uncovered)",
+      "estimated_drop_share_of_whole_population": [
+        0.039222,
+        0.039695
+      ],
+      "filter": "on, inert (20260809)",
+      "kept_from_V": {
+        "class_share_of_covered": 0.043598,
+        "coverage_share": 1.0,
+        "covered": 57457,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2505,
+        "n": 57457,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57443,
+          "ulf-census-2026-08-05": 14
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999756,
+          "ulf-census-2026-08-05": 0.000244
+        }
+      },
+      "population_rule": "P",
+      "sentence": "every artist the deeper crawl found, at the three-listener bar",
+      "threshold": 7,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.046336,
+        "coverage_share": 1.0,
+        "covered": 86649,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 4015,
+        "n": 86649,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 20755,
+          "ulc-census-2026-08-05": 65863,
+          "ulf-census-2026-08-05": 31
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.23953,
+          "ulc-census-2026-08-05": 0.760113,
+          "ulf-census-2026-08-05": 0.000358
+        }
+      }
+    },
+    "LBA-A6": {
+      "LBA-G4": {
+        "added_class_share_of_covered": 0.0524,
+        "bar_pp": 10.0,
+        "cex-recensus-2026-08-09_share_added": 0.712905,
+        "cex-recensus-2026-08-09_share_kept": 0.0,
+        "delta_pp": 0.7796,
+        "disqualifier_bar_pp": 10.0,
+        "kept_class_share_of_covered": 0.044604,
+        "label": "ESTIMATE -- no census pass was run; every verdict is carried",
+        "provenance_skew_pp": 71.2905,
+        "result": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.0524,
+        "coverage_share": 1.0,
+        "covered": 29485,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 1545,
+        "n": 29485,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 21020,
+          "ulc-census-2026-08-05": 8448,
+          "ulf-census-2026-08-05": 17
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.712905,
+          "ulc-census-2026-08-05": 0.286519,
+          "ulf-census-2026-08-05": 0.000577
+        }
+      },
+      "arm": "LBA-A6",
+      "basis": "class share carried-measured over a COMPLETE population; only the drop is extrapolated (stage 1 section 2 measured zero uncovered)",
+      "estimated_drop_share_of_whole_population": [
+        0.039982,
+        0.040464
+      ],
+      "filter": "on, inert (20260809)",
+      "kept_from_V": {
+        "class_share_of_covered": 0.044604,
+        "coverage_share": 1.0,
+        "covered": 57909,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2583,
+        "n": 57909,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57893,
+          "ulf-census-2026-08-05": 16
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999724,
+          "ulf-census-2026-08-05": 0.000276
+        }
+      },
+      "population_rule": "P",
+      "sentence": "every artist the deeper crawl found, at the two-listener bar",
+      "threshold": 3,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.047234,
+        "coverage_share": 1.0,
+        "covered": 87394,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 4128,
+        "n": 87394,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 21020,
+          "ulc-census-2026-08-05": 66341,
+          "ulf-census-2026-08-05": 33
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.24052,
+          "ulc-census-2026-08-05": 0.759102,
+          "ulf-census-2026-08-05": 0.000378
+        }
+      }
+    },
+    "LBA-A7": {
+      "LBA-G4": {
+        "added_class_share_of_covered": 0.351468,
+        "bar_pp": 10.0,
+        "cex-recensus-2026-08-09_share_added": 0.517038,
+        "cex-recensus-2026-08-09_share_kept": 0.0,
+        "delta_pp": 30.716,
+        "disqualifier_bar_pp": 10.0,
+        "kept_class_share_of_covered": 0.044308,
+        "label": "ESTIMATE -- no census pass was run; every verdict is carried",
+        "provenance_skew_pp": 51.7038,
+        "result": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.351468,
+        "coverage_share": 0.208824,
+        "covered": 53029,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 18638,
+        "n": 253941,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 27418,
+          "ulc-census-2026-08-05": 25339,
+          "ulf-census-2026-08-05": 272
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.517038,
+          "ulc-census-2026-08-05": 0.477833,
+          "ulf-census-2026-08-05": 0.005129
+        }
+      },
+      "arm": "LBA-A7",
+      "basis": "BOTH the class share and the drop are extrapolated, over a population most of which no census has ever evaluated (LBA-AM3-3)",
+      "estimated_drop_share_of_whole_population": [
+        0.162368,
+        0.164325
+      ],
+      "filter": "off, uncensused",
+      "kept_from_V": {
+        "class_share_of_covered": 0.044308,
+        "coverage_share": 1.0,
+        "covered": 57394,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2543,
+        "n": 57394,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57375,
+          "ulf-census-2026-08-05": 19
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999669,
+          "ulf-census-2026-08-05": 0.000331
+        }
+      },
+      "population_rule": "U",
+      "sentence": "every artist anywhere in ListenBrainz's listening data who gets a connection at ListenBrainz's own bar - not just the ones our crawl happened to discover",
+      "threshold": 10,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.191817,
+        "coverage_share": 0.354676,
+        "covered": 110423,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 21181,
+        "n": 311335,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 27418,
+          "ulc-census-2026-08-05": 82714,
+          "ulf-census-2026-08-05": 291
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.2483,
+          "ulc-census-2026-08-05": 0.749065,
+          "ulf-census-2026-08-05": 0.002635
+        }
+      }
+    },
+    "LBA-A8": {
+      "LBA-G4": {
+        "added_class_share_of_covered": 0.354789,
+        "bar_pp": 10.0,
+        "cex-recensus-2026-08-09_share_added": 0.516773,
+        "cex-recensus-2026-08-09_share_kept": 0.0,
+        "delta_pp": 31.0172,
+        "disqualifier_bar_pp": 10.0,
+        "kept_class_share_of_covered": 0.044617,
+        "label": "ESTIMATE -- no census pass was run; every verdict is carried",
+        "provenance_skew_pp": 51.6773,
+        "result": "UNREADABLE for this arm (LBA-AM3-2): the two subsets draw from the censuses in materially different proportions, so a dump column has re-entered a comparison LBA-AM1-A5 made one column wide. Only the two class shares stand, descriptively, with the mix beside them"
+      },
+      "added_beyond_V": {
+        "class_share_of_covered": 0.354789,
+        "coverage_share": 0.162263,
+        "covered": 53987,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 19154,
+        "n": 332713,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 27899,
+          "ulc-census-2026-08-05": 25805,
+          "ulf-census-2026-08-05": 283
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.516773,
+          "ulc-census-2026-08-05": 0.477985,
+          "ulf-census-2026-08-05": 0.005242
+        }
+      },
+      "arm": "LBA-A8",
+      "basis": "BOTH the class share and the drop are extrapolated, over a population most of which no census has ever evaluated (LBA-AM3-3)",
+      "estimated_drop_share_of_whole_population": [
+        0.164689,
+        0.166674
+      ],
+      "filter": "off, uncensused",
+      "kept_from_V": {
+        "class_share_of_covered": 0.044617,
+        "coverage_share": 1.0,
+        "covered": 57691,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 2574,
+        "n": 57691,
+        "verdict_source_counts": {
+          "ulc-census-2026-08-05": 57671,
+          "ulf-census-2026-08-05": 20
+        },
+        "verdict_source_mix_of_covered": {
+          "ulc-census-2026-08-05": 0.999653,
+          "ulf-census-2026-08-05": 0.000347
+        }
+      },
+      "population_rule": "U",
+      "sentence": "the same, at the three-listener bar",
+      "threshold": 7,
+      "whole_population_DESCRIPTIVE_no_threshold": {
+        "class_share_of_covered": 0.194559,
+        "coverage_share": 0.286058,
+        "covered": 111678,
+        "freshly_evaluated_against_pinned_dump": 0,
+        "in_class_of_covered": 21728,
+        "n": 390404,
+        "verdict_source_counts": {
+          "cex-recensus-2026-08-09": 27899,
+          "ulc-census-2026-08-05": 83476,
+          "ulf-census-2026-08-05": 303
+        },
+        "verdict_source_mix_of_covered": {
+          "cex-recensus-2026-08-09": 0.249816,
+          "ulc-census-2026-08-05": 0.74747,
+          "ulf-census-2026-08-05": 0.002713
+        }
+      }
+    }
+  },
+  "bounds": [
+    "LBA-X2(b) / ULC-F4: an OVER-estimate of what the app cannot play -- the keep-check uses the name-search route while the app resolves identity first. Sized on the two committed payloads by the LUX-E1 drift-source README section 6.2; UNBOUNDED on U.",
+    "The carried verdicts are un-re-run: both payloads carry verdicts inherited from the earlier no-release and featured-credit rules, holding no clip record. Unmeasured, not zero.",
+    "The within-class drop rate is extrapolated outside the populations it was measured on. The range is honest about their spread; it is NOT a control for applying either to U."
+  ],
+  "coverage_store": {
+    "artists": 129746,
+    "path": "C:\\dev\\music-app\\builder\\analysis\\census-coverage\\ulf_coverage.json",
+    "sha256_after": "385f7c04072ddf375ac2f7ba0dd496b8c70093754e86582ab0ec41839b02321a",
+    "sha256_before": "385f7c04072ddf375ac2f7ba0dd496b8c70093754e86582ab0ec41839b02321a",
+    "status": "ACTIVE coverage store (ULC-F2), not a frozen probe output: censuses READ this and WRITE BACK what they freshly learn, so an expansion pays dump passes only for genuinely new artists. Each signal field carries its own provenance; absence of a field means UNKNOWN, never false.",
+    "written_by_this_stage": false
+  },
+  "measurement": "LBA-M4 -- playability, ESTIMATED on every arm",
+  "script": "s3_m4.py",
+  "script_sha256": "1e581d69a2383345f11becad3f22e8084866e6ca01a846b14720d6268e0a92a0",
+  "why_estimated": "LBA-G3 fired at stage 1: the projected offline census pass is multiples of its 6-hour bar, so no pass was started and none is owed. Every verdict is carried, against an earlier MusicBrainz snapshot than the pinned 20260905-002519 one. There is NO freshly evaluated artist on any arm.",
+  "within_class_drop_rate": {
+    "measured": {
+      "cex-recensus-2026-08-09": {
+        "class": 31823,
+        "drop": 27262,
+        "source": "unlistenable_drop_algb_20260809.json",
+        "within_class_drop_rate": 0.856676
+      },
+      "ulc/ulf-census-2026-08-05": {
+        "class": 18557,
+        "drop": 15708,
+        "source": "unlistenable_drop_algb_20260805.json",
+        "within_class_drop_rate": 0.846473
+      }
+    },
+    "range_never_averaged": [
+      0.846473,
+      0.856676
+    ]
+  }
+}
