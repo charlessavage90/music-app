@@ -47,66 +47,75 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-15, at the `LBD-S4` stage-2 closeout.** **Nothing a listener sees changed
+**Last updated: 2026-09-16, at the `LBD-S4` stage-3 closeout.** **Nothing a listener sees changed
 in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
 boxes are still his to press, untouched here.
 
-**`LBA-D8` STAGE 2 HAS RUN — the measurement half. Stage 3 has not begun.** Figures are owned by
-[`../../builder/analysis/2026-09-14-lbd-s4-stage2/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage2/README.md)
-and restated nowhere, including here; reasoning is
-[`2026-09-14-lbd-s4-stage2-execution-log.md`](2026-09-14-lbd-s4-stage2-execution-log.md) and the
-current handoff is [`2026-09-15-HANDOFF-lbd-s4-stage2.md`](2026-09-15-HANDOFF-lbd-s4-stage2.md).
+# ⛔ THE `LBD-S4` GO/NO-GO STOP IS REACHED. THE NEXT ACTION IS THE OWNER'S RULING.
 
-**What it settled.** Seven archives emitted, **six cells built and one stopped**, and `LBA-M1`
-taken on eight arms. **`LBA-G2` FIRES on `LBA-A9`** — the corner is *unbuilt for a resource
-reason*. **`LBA-G1` fires on NOTHING — on those eight arms**; `LBA-A9` was never sized, so the
-corner is outside that claim. Reads taken: `LBA-R0`, and `LBA-R1` of the three mutually exclusive
-hosting reads.
+**`LBA-D8` stage 3 has RUN and `LBD-S4` is measured out.** All four remaining measurements taken on
+the eight sized arms, every §7 read the run state licenses read, and the go/no-go report written.
+Figures are owned by
+[`../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md)
+and restated nowhere, including here. The owner-facing note is
+[`findings/2026-09-16-lbd-s4-stage3-go-no-go.md`](findings/2026-09-16-lbd-s4-stage3-go-no-go.md),
+reasoning is [`2026-09-15-lbd-s4-stage3-execution-log.md`](2026-09-15-lbd-s4-stage3-execution-log.md),
+and the current handoff is [`2026-09-16-HANDOFF-lbd-s4-stage3.md`](2026-09-16-HANDOFF-lbd-s4-stage3.md).
 
-**What it means in plain terms.** Every map we could actually assemble would still fit the machine
-the app runs on, with room to spare — so **size is not what decides this**. The biggest option of
-the nine could not be assembled on this laptop at all, which is a fact about the laptop's memory
-during the build and **not** about whether such a map could be served. And the bigger population
-rules reach a large number of thinly-connected artists: the typical artist in those maps has about
-a third as many connections as in the maps we serve or crawl today.
+**What he is ruling on.** Whether a map built from our own recomputation of ListenBrainz's raw
+listening data is worth shipping — **at what population of artists, and at what strength bar**. The
+options and what each commits to are stage-3 README §9; **no arm is preferred and no threshold is
+named**, because `LBA-D2` reserves the threshold to him and `LBA-D3` bars designing any listen
+before he rules. **One branch inside that ruling is also his and the design cannot decide it** —
+see the second warning below.
+
+**What it means in plain terms.** Cost is not what decides this: every map we could build fits the
+machine, and building one is not the expensive part. Within a fixed set of artists, how much
+listening evidence we demand barely changes *who* you see — it almost only ever adds. A **wider**
+set of artists changes what the app shows noticeably more, and the least-listened artists absorb
+most of that change at both ends. And we **cannot say** how playable the artists a wider map would
+add are — that is a fact about the census we never ran, not about those artists.
 
 > ## ⚠ Four things about this result that are easy to get backwards
 >
-> **`LBA-G2` firing on `LBA-A9` is a resource fact, not a finding about the corner.** *"We could
-> not build it here"* and *"it is too big to serve"* are different claims and the second needs
-> `LBA-M1`, which that cell does not have.
+> **The playability gate is DISQUALIFIED, not answered.** `LBA-AM3-2`'s disqualifier fired on every
+> arm where `LBA-G4` could be read, at many times its bar. **Neither "the artists a wider map adds
+> are much less playable" nor "they are fine" is licensed.** The raw figure on the widest row is
+> large and would have fired the gate; reporting it as a finding inverts the amendment.
 >
-> **"No arm fires `LBA-G1`" covers the EIGHT SIZED arms.** `LBA-A9` was never sized. The query-cost
-> ratio is monotone in population and the largest built arm reaches **93 % of that bar**.
+> **That disqualification is STRUCTURAL and must not be loosened away.** Under the two censuses
+> that exist, the artists a map *adds* and the artists it *keeps* can never have been evaluated at
+> the same time. Only a fresh census pass fixes it, and `LBA-G3` fired on that.
 >
-> **`LBA-R1`'s own text names `LBA-M2`, `LBA-M3` and `LBA-M4` — all three are UNMEASURED here.**
-> The clause says where the decision sits, not what this stage found.
+> **`LBA-R6`/`LBA-R7` being unadjudicable is a DESIGN defect, not a result.** They differ only in
+> whether a wider population changes what the app shows *substantially*, and `LBA-M2` carries no
+> effect size **by design**. A session picking one would be fixing a threshold with results in
+> hand. Both halves are reported side by side; **the branch is his.**
 >
-> **Every `U` arm is built in a configuration the shipped code calls "an experimental control and
-> never a shipping configuration"** — the un-listenable filter is off, because no census covers
-> that population and the guard refuses.
+> **`LBA-R9` — *the numbers say no*, the row that records stopping as a COMPLETE OUTCOME rather
+> than an abandonment — is formally unreachable.** Stopping remains a perfectly good decision.
+> What is missing is the design's own certificate for it, and that is not an argument either way.
 
-**No amendment was added to the pre-registration by stage 2.** No arm is selected, no threshold
-preferred, no route recommended; `LBA-D2` reserves the threshold to the owner at the stop.
-
-**Nothing is adopted, no default changed, no shipped code touched.**
+**No amendment was added to the pre-registration by stage 3**; `LBA-AM3` was committed by the
+previous session, before `LBA-M4` ran. **Nothing is adopted, no default changed, no shipped code
+touched.**
 
 ⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
 
-Branch `lbd-s4-stage2`, PR **#128**.
+Branch `lbd-s4-stage3`, PR **#129**.
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
 not record how far down the list he has got.**
 
 1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
    Nothing here changed them.
-2. **Merge the stage-2 PR.**
+2. **Merge the stage-3 PR.**
 3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
    fidelity. **Nothing is blocked by it.**
-4. **Decide whether stage 3 runs, and over which arms.** Stage 3 is `LBA-M2`/`M3`/`M4` — where
-   `LBA-R1` says the decision now sits. **The retiring session's position, offered to be argued
-   with rather than as a menu, is in the handoff's "what I would do if I were continuing".**
-   **Stopping here remains a complete outcome**, and no session proposes a route.
+4. **THE GO/NO-GO RULING.** Stage-3 README §9 has the options; §7 the inference in plain language;
+   §8 what it rests on. **If GO**, §8 of the pre-registration is what it commits to, and the
+   `REQ-38` blind listen is designed **cold**, as a separate amendment, when no journey exists on
+   either map. **If STOP**, nothing is owed but the record.
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -378,8 +387,9 @@ old heading.)*
 
 | Finding | Condition |
 |---|---|
+| **`LBA-G2`'s bar is written `24 GB` and implemented `24 GiB`** — five places in the pre-registration say 24 GB; `LBA_G2_BAR_BYTES = 24 * 1024**3` is 25.77 GB. Stage 1's instrument introduced it and stage 2's forward copy, README and handoff all adopted *"24 GiB"*, making the implementation self-consistent and diverging from the governing document silently. ⚠ **No cell's disposition changes under either reading, with comfortable margin on both sides** — recomputed in bytes at the stage-3 closeout; the arithmetic is in the stage-3 handoff. **Deliberately NOT fixed**: §11's rule is that a bar's value is never edited, and settling which unit governs after the results exist is changing a bar with results in hand. | **The owner's, and only if any future `LBD-` build gate is read.** Nothing is blocked by it and no committed result depends on which reading is taken. |
 | ~~**`docs-lint` checks 4, 5 and 6 were never observed to run at the stage-2 closeout**~~ ✅ **DISCHARGED 2026-09-15, minutes after it was written, by the background run that had been launched before it.** The full script completed **exit code 0 with all six checks clean** — checks 4, 5 and 6 print their headers and list candidates beneath, and all three listed **none**. ⚠ **Check 6 is restated figures, and it found nothing**, which is the mechanical confirmation the row below asked for: the four restatements this closeout fixed by hand were the only ones. *(Struck, kept for the record. The row was written on two foreground runs that both timed out partway through check 3; the background run launched earlier had already succeeded and had not been read. The lesson is the row's own: **a timeout is not a result**, and the answer was already on disk.)*
-| **`closeout` B2, B3 and B4 were NOT run for `LBD-S4` stage 2** — reachability, vacuous-test spot check, prose-versus-code. The mid-flight tier hands them forward deliberately: all three want a finished artifact and produce noise against half-built work. **Stage 2 added six scripts under `builder/analysis/2026-09-14-lbd-s4-stage2/` and no shipped code.** | **At stage 3's closeout, or whenever `LBD-S4` next reaches a seam** — whichever comes first. B2 is cheap here (the scripts import each other in one directory); B3 has no tests to spot-check, since stage 2 added none, and **saying so is the discharge**; B4 is the real one — the six scripts carry long docstrings making claims about `LBA-` rules. |
+| ~~**`closeout` B2, B3 and B4 were NOT run for `LBD-S4` stage 2**~~ ✅ **DISCHARGED 2026-09-16 at the stage-3 closeout, which is exactly the condition this row named.** **B2:** no orphans — `s3_common.py` and `s4_common.py` are each imported by every measurement script in their directory, `s4_instrument.py` by `s4_build.py`, and every other module is a CLI entry point that ran and left a committed output. **B3:** stage 2 and stage 3 added no tests, so there is nothing to spot-check — **saying so is the discharge**, as this row itself specified. **B4 is the one that paid**: it found that `LBA-G2`'s bar is written **24 GB** in the pre-registration and implemented **24 GiB** in the instrument (see the row below). Every other `LBA-` claim in the stage-2 and stage-3 docstrings checked out against the governing document. *(Struck, kept for the record.)*
 | **`_logs/machine_state.tsv` was collected across the stage-2 build chain and NEVER ANALYSED** — 2,760 free-memory samples, taken so that *"was the machine quiet for this build"* would be answerable from the record rather than from anyone's memory. **Nobody has answered it.** The six build records carry the timestamps needed to align it. | **Before any future session compares a `LBA-G2` peak against these six**, or extends the fit with a new point. Until then the six peaks stand as measured and the residuals (README §2b) are the evidence that they are consistent. **Accepted-and-won't-chase is a legitimate discharge here**: the fit's residuals are all under 3 %, which already bounds what machine noise could have contributed. |
 | **The `LBA-G1`(b) query-cost result has never been measured on the actual container** — it converts by the Gate 2→3 review's 2.5–3.5× multiplier, which was measured on the **retired 75k artifact**, not the one served today. `LBA-A8` sits at **93 % of the (b) bar** and its p95 is roughly triple the served map's. | **Before anyone concludes the larger maps are fast enough to ship** — that is the claim the conversion supports and the direction it could be wrong in. A direct reading replaces a multiplier taken on a different artifact. **Cheap, and it is a session's work, not an owner decision**, except for the deploy access it needs. Nothing in stage 3 blocks on it. |
 | **The `U`-row acceptance floors are UNCALIBRATED and are labelled so** — node floor 50 % of the arm's table count, edge floor `CSR ≥ N`, both gross-loss tripwires. §2.4 records the prune's effect over `U` as unmeasured; stage 2 measured it on **two** cells (84.8 %, 85.5 %). ⚠ **On that row the edge floor cannot see a silent cap-rule revert**, which `acceptance.py`'s `CXA-` note calls the one thing it exists to catch. | **If a third `U` cell is ever built**, revisit whether two-plus-one cells calibrate a floor. **Not before** — two cells is not a calibration, and an 80 % floor would have passed on both only by hindsight. The lost sensitivity is **accepted for experimental control maps** and must be re-decided if any `U` arm is ever a shipping candidate. |

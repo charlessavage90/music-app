@@ -18,6 +18,69 @@ here looks load-bearing and is not in one of those, that is a distillation defec
 Newest first.
 
 ---
+
+## Demoted 2026-09-16 — was the live top block from the `LBD-S4` stage-2 closeout (2026-09-15)
+
+**Last updated: 2026-09-15, at the `LBD-S4` stage-2 closeout.** **Nothing a listener sees changed
+in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
+boxes are still his to press, untouched here.
+
+**`LBA-D8` STAGE 2 HAS RUN — the measurement half. Stage 3 has not begun.** Figures are owned by
+[`../../builder/analysis/2026-09-14-lbd-s4-stage2/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage2/README.md)
+and restated nowhere, including here; reasoning is
+[`2026-09-14-lbd-s4-stage2-execution-log.md`](2026-09-14-lbd-s4-stage2-execution-log.md) and the
+current handoff is [`2026-09-15-HANDOFF-lbd-s4-stage2.md`](2026-09-15-HANDOFF-lbd-s4-stage2.md).
+
+**What it settled.** Seven archives emitted, **six cells built and one stopped**, and `LBA-M1`
+taken on eight arms. **`LBA-G2` FIRES on `LBA-A9`** — the corner is *unbuilt for a resource
+reason*. **`LBA-G1` fires on NOTHING — on those eight arms**; `LBA-A9` was never sized, so the
+corner is outside that claim. Reads taken: `LBA-R0`, and `LBA-R1` of the three mutually exclusive
+hosting reads.
+
+**What it means in plain terms.** Every map we could actually assemble would still fit the machine
+the app runs on, with room to spare — so **size is not what decides this**. The biggest option of
+the nine could not be assembled on this laptop at all, which is a fact about the laptop's memory
+during the build and **not** about whether such a map could be served. And the bigger population
+rules reach a large number of thinly-connected artists: the typical artist in those maps has about
+a third as many connections as in the maps we serve or crawl today.
+
+> ## ⚠ Four things about this result that are easy to get backwards
+>
+> **`LBA-G2` firing on `LBA-A9` is a resource fact, not a finding about the corner.** *"We could
+> not build it here"* and *"it is too big to serve"* are different claims and the second needs
+> `LBA-M1`, which that cell does not have.
+>
+> **"No arm fires `LBA-G1`" covers the EIGHT SIZED arms.** `LBA-A9` was never sized. The query-cost
+> ratio is monotone in population and the largest built arm reaches **93 % of that bar**.
+>
+> **`LBA-R1`'s own text names `LBA-M2`, `LBA-M3` and `LBA-M4` — all three are UNMEASURED here.**
+> The clause says where the decision sits, not what this stage found.
+>
+> **Every `U` arm is built in a configuration the shipped code calls "an experimental control and
+> never a shipping configuration"** — the un-listenable filter is off, because no census covers
+> that population and the guard refuses.
+
+**No amendment was added to the pre-registration by stage 2.** No arm is selected, no threshold
+preferred, no route recommended; `LBA-D2` reserves the threshold to the owner at the stop.
+
+**Nothing is adopted, no default changed, no shipped code touched.**
+
+⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
+
+Branch `lbd-s4-stage2`, PR **#128**.
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
+not record how far down the list he has got.**
+
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
+   Nothing here changed them.
+2. **Merge the stage-2 PR.**
+3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
+   fidelity. **Nothing is blocked by it.**
+4. **Decide whether stage 3 runs, and over which arms.** Stage 3 is `LBA-M2`/`M3`/`M4` — where
+   `LBA-R1` says the decision now sits. **The retiring session's position, offered to be argued
+   with rather than as a menu, is in the handoff's "what I would do if I were continuing".**
+   **Stopping here remains a complete outcome**, and no session proposes a route.
 > ## ✅ THE EXTENDED 117k GRAPH IS REVERTED, 2026-09-01 — **AND THE OWNER HAS CONFIRMED IT.** ~~The next action is the OWNER'S and it is USE: confirm the old map is back.~~ *(Discharged 2026-09-01 (later) — he confirmed the old map is live and reported nothing wrong. Everything else this block records still stands.)*
 >
 > **`https://musicapp.cmiller.io` serves `graph-msw-tu50.bin` again — 58,838 artists,

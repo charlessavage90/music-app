@@ -1,6 +1,13 @@
 # Handoff — `LBD-S4` stage 2 measurement complete, retired mid-flight, 2026-09-15
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-16 by
+[`2026-09-16-HANDOFF-lbd-s4-stage3.md`](2026-09-16-HANDOFF-lbd-s4-stage3.md) — `LBA-D8` stage 3
+has since RUN and the owner stop is reached. ACTIVE for everything else it records**, and its
+claims-not-to-revert list still binds. ⚠ **Its "Owed, by a fresh session" item 2 was wrong when
+written**: it names "the `doc-auditor` findings this session could not adjudicate" as handed
+forward, and the stage-2 execution log's B1 records that all four were resolved and **none** was
+handed forward. What genuinely carried was `closeout` B2/B3/B4, now discharged. *(Original role:)*
+**ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
 [`2026-09-14-HANDOFF-lbd-s4-stage1.md`](2026-09-14-HANDOFF-lbd-s4-stage1.md) on next actions. It
 does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

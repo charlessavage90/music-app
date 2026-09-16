@@ -1,0 +1,158 @@
+{
+  "LBA-AM1-O2": "adds no arm-discriminating information beyond LBA-M1's artist count. Parts 1 and 3 are identical across all eight arms; part 4 is a deliverable; part 2 is a deterministic function of N. A cost statement about a CANDIDATE, not a comparison between candidates.",
+  "measurement": "LBA-M5 -- what it costs to operate. Descriptive, no threshold.",
+  "part1_similarity_pass": {
+    "above_V": "section 6's steps 6 and 7 -- the re-census and the fame fetch -- are ADDITIONAL (LBA-AM1-O3)",
+    "at_the_served_population": "a refresh adds this pass and nothing else",
+    "owners": [
+      "builder/analysis/2026-09-08-lbd-similarity/README.md section 4 (LBD-A0 pass timings, spill, combine; and the hardware context)",
+      "builder/analysis/2026-09-13-lbd-a4/README.md section 4 (LBD-A4 pass)",
+      "builder/analysis/2026-09-10-lbd-supply/README.md sections 1 and 2 (the archive replay wall clocks, a cost the pipeline already pays)"
+    ],
+    "rule": "CITED, never re-run and never re-timed here"
+  },
+  "part2_fame_fetch": {
+    "MAX_PER_REQUEST": 1000,
+    "arms": {
+      "LBA-A1": {
+        "arm": "LBA-A1",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 58,
+        "first_build_seconds_estimate_range": [
+          38.3,
+          50.8
+        ],
+        "floor_seconds_rate_limit_only": 11.6,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "V",
+        "resumable": true,
+        "sentence": "the artists the app serves today, connected by our own recomputation at the same strength bar ListenBrainz used",
+        "threshold": 10
+      },
+      "LBA-A2": {
+        "arm": "LBA-A2",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 58,
+        "first_build_seconds_estimate_range": [
+          38.3,
+          50.8
+        ],
+        "floor_seconds_rate_limit_only": 11.6,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "V",
+        "resumable": true,
+        "sentence": "the same artists, but a connection is kept when three different people's listening supports it instead of four",
+        "threshold": 7
+      },
+      "LBA-A3": {
+        "arm": "LBA-A3",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 58,
+        "first_build_seconds_estimate_range": [
+          38.3,
+          50.8
+        ],
+        "floor_seconds_rate_limit_only": 11.6,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "V",
+        "resumable": true,
+        "sentence": "the same artists, but two people are enough",
+        "threshold": 3
+      },
+      "LBA-A4": {
+        "arm": "LBA-A4",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 87,
+        "first_build_seconds_estimate_range": [
+          57.5,
+          76.2
+        ],
+        "floor_seconds_rate_limit_only": 17.4,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "P",
+        "resumable": true,
+        "sentence": "every artist the deeper crawl found, at ListenBrainz's own bar",
+        "threshold": 10
+      },
+      "LBA-A5": {
+        "arm": "LBA-A5",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 87,
+        "first_build_seconds_estimate_range": [
+          57.5,
+          76.2
+        ],
+        "floor_seconds_rate_limit_only": 17.4,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "P",
+        "resumable": true,
+        "sentence": "every artist the deeper crawl found, at the three-listener bar",
+        "threshold": 7
+      },
+      "LBA-A6": {
+        "arm": "LBA-A6",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 88,
+        "first_build_seconds_estimate_range": [
+          58.2,
+          77.1
+        ],
+        "floor_seconds_rate_limit_only": 17.6,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "P",
+        "resumable": true,
+        "sentence": "every artist the deeper crawl found, at the two-listener bar",
+        "threshold": 3
+      },
+      "LBA-A7": {
+        "arm": "LBA-A7",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 312,
+        "first_build_seconds_estimate_range": [
+          206.2,
+          273.4
+        ],
+        "floor_seconds_rate_limit_only": 62.4,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "U",
+        "resumable": true,
+        "sentence": "every artist anywhere in ListenBrainz's listening data who gets a connection at ListenBrainz's own bar - not just the ones our crawl happened to discover",
+        "threshold": 10
+      },
+      "LBA-A8": {
+        "arm": "LBA-A8",
+        "artist_count_source": "stage 2 README section 3b owns N; reproduced here from the artifact as this script's own green check",
+        "batches": 391,
+        "first_build_seconds_estimate_range": [
+          258.5,
+          342.7
+        ],
+        "floor_seconds_rate_limit_only": 78.2,
+        "note": "FIRST-BUILD cost. The stage is resumable, so a refresh pays only for artists with no record.",
+        "population_rule": "U",
+        "resumable": true,
+        "sentence": "the same, at the three-listener bar",
+        "threshold": 7
+      }
+    },
+    "method": "ceil(N / 1000) x (0.2 s + one round trip), fixed in section 4 before any result existed",
+    "request_delay_seconds": 0.2,
+    "requests_per_second": 5.0,
+    "round_trip_basis": "the one measured fame run on the record, 78 s (2026-08-09-cex-task11-execution-log.md section 6). THAT LOG DOES NOT STATE THE POPULATION IT COVERED, so the per-batch figure is bracketed across the two populations that session handled rather than asserted.",
+    "round_trip_seconds_bracket": [
+      0.461,
+      0.676
+    ]
+  },
+  "part3_disk": {
+    "cadence": "MONTHLY full refresh -- A POLICY CHOICE, NOT A MEASUREMENT. A different cadence changes only step 1's frequency.",
+    "owners": [
+      "docs/superpowers/specs/2026-09-06-own-similarity-design.md section 8 (the standing corpus, its annual growth, and the re-download cadence a deletions-matter policy implies)",
+      "builder/analysis/2026-09-07-lbd-inputs/README.md section 1 (the pinned dump's own size and file count)"
+    ],
+    "rule": "cited, not measured here"
+  },
+  "part4_refresh_procedure": "section 6's ten steps; prose, in the stage-3 README section 5",
+  "script": "s3_m5.py",
+  "script_sha256": "76c33e22d57175a6816ce0f42f974091735bd268a184a4151e9b204b617fcf1d"
+}

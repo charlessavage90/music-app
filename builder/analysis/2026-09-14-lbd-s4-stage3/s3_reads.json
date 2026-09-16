@@ -1,0 +1,217 @@
+{
+  "reads": {
+    "LBA-R4 (P row)": {
+      "clause_1_no_LBD_G2_movement_on_LBA_M3": {
+        "bar_pp": 1.0,
+        "baseline": "LBA-A4",
+        "deltas_pp_vs_baseline": {
+          "LBA-A5": -3.3822,
+          "LBA-A6": -6.3662
+        },
+        "holds": false
+      },
+      "clause_2_absent_shares_within_a_point": {
+        "absent_share_of_V": {
+          "LBA-A4": 0.028553,
+          "LBA-A5": 0.023471,
+          "LBA-A6": 0.015789
+        },
+        "bar_pp": 1.0,
+        "holds": false,
+        "spread_pp": 1.2764
+      },
+      "clause_3_LBA_G1_does_not_fire_differently": {
+        "basis": "stage 2 section 4 -- LBA-G1 fires on NOTHING across the eight sized arms, so it cannot fire differently across this row. Cited.",
+        "holds": true
+      },
+      "read": "LBA-R4 -- the three thresholds DO NOT separate",
+      "row": "P",
+      "verdict": "DOES NOT READ",
+      "why": "a read is a conjunction: clause 1 (LBA-M3 movement) fails, clause 2 (absent shares) fails"
+    },
+    "LBA-R4 (U row, LBA-X6 beside it)": {
+      "LBA-X6": "the U population is a DEPENDENT variable that moves with the threshold, so this is not a one-column comparison in the sense the V and P rows are. The clause arithmetic is reported; the attribution is not.",
+      "clause_1_no_LBD_G2_movement_on_LBA_M3": {
+        "bar_pp": 1.0,
+        "baseline": "LBA-A7",
+        "deltas_pp_vs_baseline": {
+          "LBA-A8": -2.8201
+        },
+        "holds": false
+      },
+      "clause_2_absent_shares_within_a_point": {
+        "absent_share_of_V": {
+          "LBA-A7": 0.024542,
+          "LBA-A8": 0.019494
+        },
+        "bar_pp": 1.0,
+        "holds": true,
+        "spread_pp": 0.5048
+      },
+      "clause_3_LBA_G1_does_not_fire_differently": {
+        "basis": "stage 2 section 4 -- LBA-G1 fires on NOTHING across the eight sized arms, so it cannot fire differently across this row. Cited.",
+        "holds": true
+      },
+      "read": "LBA-R4 -- the three thresholds DO NOT separate",
+      "row": "U",
+      "verdict": "DOES NOT READ",
+      "why": "a read is a conjunction: clause 1 (LBA-M3 movement) fails"
+    },
+    "LBA-R4-V": {
+      "V_row_arm_to_arm_LBA_M2": {
+        "LBA-A1 -> LBA-A2": {
+          "R_mean": 0.999474,
+          "changed_share": 0.0,
+          "overlap_at_10_mean": 0.999581
+        },
+        "LBA-A1 -> LBA-A3": {
+          "R_mean": 0.998725,
+          "changed_share": 0.0,
+          "overlap_at_10_mean": 0.998932
+        },
+        "LBA-A2 -> LBA-A3": {
+          "R_mean": 0.999182,
+          "changed_share": 1.7e-05,
+          "overlap_at_10_mean": 0.999289
+        }
+      },
+      "clause_i_LBA_M3": {
+        "measured_here": {
+          "LBA-A1": 1.0,
+          "LBA-A2": 1.0,
+          "LBA-A3": 1.0
+        },
+        "note": "1.0 on all three, computed rather than asserted. Every threshold difference on this row is identically zero, so the null carries no information (the CRS-C3 shape).",
+        "unfireable": true
+      },
+      "clause_ii_absent_share": {
+        "already_resolved_against_the_read": true,
+        "note": "LBA-R4-V states this was larger than one point on the committed record BEFORE stage 1 ran. This session's independent measurement agrees, which is a check on the instrument and NOT a finding.",
+        "spread_pp": 1.3427
+      },
+      "clause_iii_LBA_M1": "the only live clause, and section 4 records that LBA-M1 measures the threshold with far less dynamic range than the population (LBA-AM1-O1)",
+      "consequence": "no LBA-R4-shaped conclusion may be drawn about the V row. The V row's threshold evidence is the arm-to-arm LBA-M2 comparison and nothing else.",
+      "read": "LBA-R4-V -- the V row is EXCLUDED from LBA-R4 and its outcome was stated in the pre-registration itself, before stage 1",
+      "status": "RESTATED, NEVER REPORTED AS A FINDING OF THIS DESIGN"
+    },
+    "LBA-R5 (P row)": {
+      "LBA-X6": null,
+      "cells_side_by_side": {
+        "LBA-A4": {
+          "LBA-M2 absent share of V": 0.028553,
+          "LBA-M2 changed share of common": 0.24658,
+          "LBA-M3 added share <=2 or absent": 0.096447,
+          "sentence": "every artist the deeper crawl found, at ListenBrainz's own bar"
+        },
+        "LBA-A5": {
+          "LBA-M2 absent share of V": 0.023471,
+          "LBA-M2 changed share of common": 0.249004,
+          "LBA-M3 added share <=2 or absent": 0.062625,
+          "sentence": "every artist the deeper crawl found, at the three-listener bar"
+        },
+        "LBA-A6": {
+          "LBA-M2 absent share of V": 0.015789,
+          "LBA-M2 changed share of common": 0.254296,
+          "LBA-M3 added share <=2 or absent": 0.032785,
+          "sentence": "every artist the deeper crawl found, at the two-listener bar"
+        }
+      },
+      "names_no_preferred_value": "LBA-D2 reserves the threshold to the owner at the stop",
+      "read": "LBA-R5 -- within a population rule, the thresholds DO separate",
+      "row": "P",
+      "verdict": "READS",
+      "why": "LBA-R5 is LBA-R4's complement: a read is a conjunction: clause 1 (LBA-M3 movement) fails, clause 2 (absent shares) fails"
+    },
+    "LBA-R5 (U row)": {
+      "LBA-X6": "travels with this row: the population moves with the threshold",
+      "cells_side_by_side": {
+        "LBA-A7": {
+          "LBA-M2 absent share of V": 0.024542,
+          "LBA-M2 changed share of common": 0.290379,
+          "LBA-M3 added share <=2 or absent": 0.06771,
+          "sentence": "every artist anywhere in ListenBrainz's listening data who gets a connection at ListenBrainz's own bar - not just the ones our crawl happened to discover"
+        },
+        "LBA-A8": {
+          "LBA-M2 absent share of V": 0.019494,
+          "LBA-M2 changed share of common": 0.293321,
+          "LBA-M3 added share <=2 or absent": 0.039509,
+          "sentence": "the same, at the three-listener bar"
+        }
+      },
+      "names_no_preferred_value": "LBA-D2 reserves the threshold to the owner at the stop",
+      "read": "LBA-R5 -- within a population rule, the thresholds DO separate",
+      "row": "U",
+      "verdict": "READS",
+      "why": "LBA-R5 is LBA-R4's complement: a read is a conjunction: clause 1 (LBA-M3 movement) fails"
+    },
+    "LBA-R6 / LBA-R7 (the P-versus-U contrast)": {
+      "LBA-M2_half": {
+        "threshold 10": {
+          "absent_share_of_V": {
+            "LBA-A4": 0.028553,
+            "LBA-A7": 0.024542
+          },
+          "changed_share_of_common": {
+            "LBA-A4": 0.24658,
+            "LBA-A7": 0.290379
+          },
+          "delta_pp_U_minus_P": 4.3799
+        },
+        "threshold 7": {
+          "absent_share_of_V": {
+            "LBA-A5": 0.023471,
+            "LBA-A8": 0.019494
+          },
+          "changed_share_of_common": {
+            "LBA-A5": 0.249004,
+            "LBA-A8": 0.293321
+          },
+          "delta_pp_U_minus_P": 4.4317
+        }
+      },
+      "LBA-M2_half_bar": "NONE. Section 4 fixes LBA-M2 as reported descriptively, no threshold, because what counts as too much change is the owner's product judgment.",
+      "LBA-M3_half": {
+        "threshold 10": {
+          "P_arm": "LBA-A4",
+          "U_arm": "LBA-A7",
+          "added_share_le_2_or_absent": {
+            "LBA-A4": 0.096447,
+            "LBA-A7": 0.06771
+          },
+          "delta_pp_U_minus_P": -2.8737
+        },
+        "threshold 7": {
+          "P_arm": "LBA-A5",
+          "U_arm": "LBA-A8",
+          "added_share_le_2_or_absent": {
+            "LBA-A5": 0.062625,
+            "LBA-A8": 0.039509
+          },
+          "delta_pp_U_minus_P": -2.3116
+        }
+      },
+      "LBA-M3_half_bar": "LBD-G2 applies WITHIN a population rule and NEVER across one (LBA-M3's own rule), so this contrast is DESCRIPTIVE and carries no bar. The magnitudes are reported; no attribution is made.",
+      "LBA-X4_LBA-X5": "travel with every LBA-M2 figure taken against the served map, which is both columns of the LBA-M2 half here",
+      "NOT_one_column": "P -> U changes the population AND the drop filter's STATE, from inert-because-applicable to absent-because-REFUSED (section 2.1's drop-filter column). No read may call this a population effect without naming the filter state beside it.",
+      "read": "LBA-R6 -- the population rules separate on LBA-M3 but NOT on LBA-M2's materially-changed share; LBA-R7 -- they separate on BOTH",
+      "scope": "the P-versus-U contrast and never about V -- over V the added-set figure is 1.0 by construction (LBA-R6's own text)",
+      "verdict": "NOT ADJUDICABLE BY THIS DESIGN -- see why",
+      "why": "LBA-R6 and LBA-R7 differ ONLY in whether the population rules separate on LBA-M2's materially-changed share, and NEITHER the read nor LBA-M2 carries an effect size for that half. Section 4 fixes LBA-M2 as descriptive BY DESIGN and bars a session from attaching a bar to it. So the branch between these two reads cannot be decided by any number this document fixed, and a session choosing one WOULD BE FIXING A THRESHOLD WITH RESULTS IN HAND -- which is the one thing a pre-registration exists to prevent. Both halves' figures are reported side by side and the branch is left to the owner, whose judgment it is under CLAUDE.md's decision table."
+    },
+    "LBA-R8 and LBA-R9": {
+      "status": "FORMALLY UNREACHABLE (LBA-AM3-1)",
+      "what_this_costs": "LBA-R9 is the row that reads 'the numbers say no' and that records STOPPING THE LBD- TRACK HERE AS A COMPLETE OUTCOME rather than an abandonment. It is the owner's own exit read, and the design as executed cannot hand it to him licensed.",
+      "why": "both presuppose the *censused* run state. Section 7 defines *censused* as the offline census pass HAVING RUN with the class share MEASURED rather than estimated. LBA-G3 fired at stage 1, so no pass is started and none is owed, and no arm will ever reach *censused* within LBD-S4 as designed. Section 7's closing rule is firm: nothing in the table is reachable before its run state, and a partial run licenses no read."
+    }
+  },
+  "run_state": {
+    "censused": false,
+    "censused_basis": "LBA-G3 fired at stage 1; no pass was started and none is owed",
+    "complete": true,
+    "complete_basis": "stage 2 section 7 -- every cell built or stopped by LBA-G2 with its bar recorded; the lattice was not reduced by judgement",
+    "sized": true,
+    "sized_basis": "stage 2 section 3b -- LBA-M1's boot and query-cost halves, eight arms"
+  },
+  "script": "s3_reads.py",
+  "script_sha256": "01e75df8a50049c947e37d3b434f48e49234e855eec914c749e9f973df92d2fe"
+}
