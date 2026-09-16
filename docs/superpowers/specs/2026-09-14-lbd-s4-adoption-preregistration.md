@@ -1102,6 +1102,35 @@ judgment, it is the owner's, and §7 gives it to him with the numbers rather tha
 
 ## §11 — Amendments to THIS document, made after it was committed
 
+> ### 📍 STATUS MARKER — added 2026-09-16, and it changes nothing above it
+>
+> **`LBA-D8` is fully executed.** Stage 1 (derive and count, 2026-09-14), stage 2 (emit, build and
+> size, 2026-09-15) and stage 3 (`LBA-M2`–`M5`, the reads, the report, 2026-09-16) have all run.
+> Figures are owned by the three stage READMEs under `builder/analysis/`; **this document owns no
+> figures and none is added here.**
+>
+> **Gate outcomes, including the failures:** `LBA-G3` **FIRED** at stage 1 — no census pass was
+> started and none is owed. `LBA-G2` **FIRED** on `LBA-A9` at stage 2 — *unbuilt for a resource
+> reason*, with §2.6's three barred conclusions attached. `LBA-G1` fired on **nothing**, across the
+> **eight sized** arms. `LBA-G4` is **reported unreadable** on every arm where it is evaluable,
+> under `LBA-AM3-2`'s disqualifier, and `n/a` on the `V` row.
+>
+> **Reads taken:** `LBA-R0` and `LBA-R1` (stage 2); `LBA-R5` on the `P` and `U` rows (stage 3).
+> `LBA-R4` does not read on either row. `LBA-R4-V` is restated, never reported as a finding.
+> **`LBA-R6`/`LBA-R7` are not adjudicable by this design** — they differ only on a half for which
+> neither they nor `LBA-M2` carries an effect size, and §4 fixes `LBA-M2` as descriptive on
+> purpose. **`LBA-R8` and `LBA-R9` are formally UNREACHABLE** (`LBA-AM3-1`).
+>
+> **The go/no-go stop is reached and is the owner's.** No arm is selected, no threshold preferred,
+> no route recommended; `LBA-D2` stands. **If he says go, §8 is what that commits to**, and the
+> `REQ-38` listen is designed cold as a later amendment (`LBA-D3`).
+>
+> ⚠ **One discrepancy found at the stage-3 closeout and deliberately NOT fixed here.** §5 writes
+> `LBA-G2`'s bar as **24 GB**; the instrument implements **24 GiB**. **No cell's disposition
+> changes under either reading.** §11's own rule is that a bar's value is never edited, and
+> settling this after the results exist would be changing a bar with results in hand. It is filed
+> in `NEXT.md`'s deferral registry as the owner's.
+
 **Every entry is dated and numbered, and is added beside the text it qualifies — never as a silent
 edit to it.** The commit timestamp is what makes the register worth having, exactly as it is for
 the document itself.

@@ -575,3 +575,85 @@ under `CLAUDE.md`'s decision table; what the design failed to do was say so.
 pre-registration) and what it costs, and the last line of the section says which parts of the
 decision are his and which are this session's. The `U` row's option carries its hole: `LBA-A9` is
 unbuilt, so *"there is no bigger map to have inside these rules"* is a sentence nobody can say.
+
+---
+
+## Task 11 (his step 8) — closeout, full tier
+
+| item | outcome |
+|---|---|
+| **A1** distil the log | this document, appended **per task** rather than at closeout — `CLAUDE.md`'s rule for what makes a handoff cheap |
+| **A2** handoff | `2026-09-16-HANDOFF-lbd-s4-stage3.md`, a **seam**. The stage-2 handoff's role line was edited to name it as successor **and to correct a wrong claim in it** — see below |
+| **A2-next** `NEXT.md` | top block rewritten; the outgoing block **demoted whole** to `NEXT-ARCHIVE.md`. Branch and PR named as **addresses**, remaining actions as an **ordered sequence** with no position in it |
+| **A3** deferrals | the `closeout` B2/B3/B4 row's condition **came due and is struck in place** with what discharged it. One new row filed (below). Every other condition re-tested; none else has come due |
+| **A4** default-flip | **inapplicable, stated rather than skipped** — this stage added no config knob and touched no shipped code. Nothing is sitting at an old default |
+| **A5** processes | ports 8000 and 5173 swept: **no listeners**. This session never booted the app and started no background work that outlives it. Nothing to stop, nothing left running |
+| **B1** docs audit | `docs-lint` run to completion in the **background** (stage 2's lesson: *a timeout is not a result*). **Two hard failures, both the two new documents unclassified in `docs/README.md`** — fixed, re-run, checks 1–3 clean. `doc-auditor` dispatched and its one MEDIUM fixed (below) |
+| **B2** reachability | **no orphans.** `s3_common.py` is imported by all six stage-3 measurement scripts; `s4_common.py` by five stage-2 scripts and `s4_instrument.py` by `s4_build.py`. Every other module is a CLI entry point that **ran and left a committed output** — checked, not assumed |
+| **B3** vacuous tests | **stage 2 and stage 3 added no tests, so there is nothing to spot-check.** The deferral row said saying so is the discharge, and this is it |
+| **B4** prose vs code | **paid** — see below |
+| **B5** stale descriptions | `.claude/` holds **no description of `LBD-S4` at all**, so nothing there went stale. The only hits are the `DLS-T1` hook's own log lines, which are data |
+| **B6** budgets | `NEXT.md` **442** (budget 250), `docs/README.md` **574** (400), `TEST-QUEUE.md` **70** (70, at budget). The first two are an **existing deferral row** whose condition is "when no second session is live"; four map rows were added here because the lint hard-fails without them |
+| **C1** use the app | **NOTHING written in `TEST-QUEUE.md`, and that is the correct discharge.** This stage changed nothing the owner can press — no shipped code, no deploy, no artifact adopted |
+| **D1** clean tree | clean; every task committed as it landed |
+| **D2** fixtures | **inapplicable on its own condition** — no artifact changed and no fixture is stale |
+| **D3** provenance | the eight bare and six built artifacts are stage 2's, **re-verified here**, digests in `_pins/stage3_verify_artifacts.json`. New gitignored outputs — the per-arm `nodes(arm) − V` membership files — are pinned by sha256 in `s3_m3.json` |
+| **D4** suites | builder **290 passed**, api **295 passed**, frontend **188 passed (29 files)**. Run, not asserted from memory |
+| **D5** PR | **#129, opened as a draft mid-session** when the work became coherent, not at the end. Body carries gate outcomes including the failures, the closed list, and the deferrals |
+| **D6** context layer | **unconditional 50,977 characters, conditional 2,726 lines — both EXACTLY unchanged** from stage 1's figures. Nothing in `CLAUDE.md`, `MEMORY.md`, `.claude/` or any `description:` was touched, and `git diff` over those paths is empty |
+| **D7** retire | the `/rename` line is in the closing message |
+
+### B4 paid, and this is what it found
+
+**`LBA-G2`'s bar is written `24 GB` in the pre-registration — five places — and implemented
+`24 GiB`.** `LBA_G2_BAR_BYTES = 24 * 1024**3` is 25.77 GB. Stage 1's instrument introduced it,
+stage 2's forward copy imports it unchanged, and **stage 2's README and handoff both adopted
+"24 GiB" in prose** — which made the implementation self-consistent and diverged from the
+governing document silently. Exactly B4's shape: the code was fine and the sentence beside it
+disagreed with the document above it.
+
+**Recomputed in bytes from `_points.json` and `_projections.json` rather than from either
+document's GiB figures: no cell's disposition changes under either reading, with comfortable
+margin on both sides.** The largest projection for a cell that *was* built is `LBA-A8`'s 19.30 GB,
+4.7 GB under even the tighter 24 GB reading; `LBA-A9`'s is 34.41 GB, 8.6 GB over even the looser
+24 GiB one. Every measured build peak is below both.
+
+**It is deliberately not fixed.** §11's rule is that a bar's value is never edited, and deciding
+which unit governs *after* the results exist is changing a bar with results in hand — the fact
+that the arithmetic shows it changes nothing is what makes the temptation safe-looking rather
+than what makes it permissible. Filed as a deferral with a condition, and named in the §11 status
+marker so it cannot be found again as if new.
+
+**Every other `LBA-` claim in the stage-2 and stage-3 docstrings checked out**, including one
+stage 2 had already got right and worth recording: `s4_boot_rss.py` and `s4_sizing.py` both warn
+that `LBA-G1`(a)'s multiplicand is the `GraphStore` **load** peak and not `LBA-G2`'s **build**
+peak. §5's phrase *"the census build's measured median peak"* genuinely admits both readings; the
+docstrings disambiguate it correctly against §4.
+
+### The auditor's one finding, and it is the project's named failure mode
+
+**MEDIUM: §6's clause-3 cell read *"`LBA-G1` fired on nothing across all eight arms"*** where the
+rest of the document says **eight *sized*** arms. Literally true — there are exactly eight arms in
+that table — and **still wrong**, because a claim read without its qualifier is a named failure
+mode here and `LBA-A9` was never sized. Fixed to match. Everything else it checked passed,
+including the findings note's claim about itself: **it restates no number.**
+
+### One correction made to a previous session's handoff
+
+The stage-2 handoff's *"Owed, by a fresh session"* item 2 names *"the `doc-auditor` findings this
+session could not adjudicate"* as handed forward. **There are none.** That session's own execution
+log records all four as resolved from the committed record with none handed forward, and
+`NEXT.md`'s deferral registry has no such row — checked both. What genuinely carried was `closeout`
+B2/B3/B4, now discharged. **Corrected in the handoff's role line rather than silently**, since a
+successor reading it cold would have gone looking for a list that does not exist.
+
+### Two observations banked, neither a finding
+
+- **`DLS-T1`, second dated observation.** Editing
+  `docs/superpowers/specs/2026-09-14-lbd-s4-adoption-preregistration.md` caused
+  `.claude/rules/plans.md` to arrive in context **without being asked for**, immediately after the
+  write — the same behaviour the previous session recorded on 2026-09-15. **Observation dated
+  2026-09-16, session `lbd-s4-stage3`.** That is two qualifying sessions of the three the
+  condition needs.
+- **`_logs/machine_state.tsv` is still unanalysed.** Its deferral row is unchanged and its
+  condition has not come due; this stage ran no builds, so it added no rows to it.
