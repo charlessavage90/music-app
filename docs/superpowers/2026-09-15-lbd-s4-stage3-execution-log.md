@@ -534,3 +534,44 @@ abandonment — and the design as executed cannot hand it to him licensed.
 file rather than a section of the results **because the distinction between *the owner asked for a
 sensitivity he can weigh* and *a session took a barred read* is invisible in the output and
 survives only in the record.** It makes nothing reachable and enters the record as no finding.
+
+---
+
+## Task 10 (his step 7) — the go/no-go report
+
+**Two documents, with different jobs.** `builder/analysis/2026-09-14-lbd-s4-stage3/README.md` is
+the **figures owner** and carries `CLAUDE.md`'s four parts in order; the findings note
+`docs/superpowers/findings/2026-09-16-lbd-s4-stage3-go-no-go.md` is **owner-facing, cites the
+README by section and restates no number**.
+
+**The four parts are in `CLAUDE.md`'s order and the order is load-bearing.** §1–§5 measured, tables
+and no adjectives. §7 inference, labelled. §8 weakest link. §9 options. Putting inference after
+measurement is what lets him disagree with the second while keeping the first.
+
+**The plain-language check was run in all three of its forms, not just the first.** (a) No bare
+letter-number token: every identifier in §7 and in the note carries its sentence. (b) Substitute
+the sentence for the identifier and re-read: done, and it caught nothing this time. (c) **Could the
+owner disagree with this?** — the senior test, and the one that changed the writing. §7's claims
+are phrased as *what a person using the app would see* rather than in the experiment's own
+coordinates: not *"retention is 0.62 at d0"* but *"roughly a quarter of the artists you can reach
+today would have a substantially different set of neighbours."*
+
+**Two restatements were caught and converted to citations before the commit.** Stage 2 §4 owns how
+close the largest sized arm sits to the query-cost bar; this document had that ratio written out
+twice. **Naming a bar is not a restatement** — 10 points, 24 GiB and 2× are pre-registered
+constants — but a measured ratio is, and the rule does not care that two other documents already
+restate it.
+
+**The summary names what cuts against it, in its own section rather than a footnote.** §3 of the
+note is the three things that cut against §2: nothing has been heard (`REQ-38`), playability is
+estimated and its gate disqualified everywhere, and two of the design's own reads are unreachable
+— one of them the owner's exit.
+
+**`LBA-R6`/`LBA-R7`'s unadjudicable branch is reported as a DESIGN defect, in both documents.**
+Not as a result, not as an escalation, and not as a question. The branch was always the owner's
+under `CLAUDE.md`'s decision table; what the design failed to do was say so.
+
+**§9's options name no preferred arm and no threshold.** Each carries what it commits to (§8 of the
+pre-registration) and what it costs, and the last line of the section says which parts of the
+decision are his and which are this session's. The `U` row's option carries its hole: `LBA-A9` is
+unbuilt, so *"there is no bigger map to have inside these rules"* is a sentence nobody can say.
