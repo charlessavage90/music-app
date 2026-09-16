@@ -433,3 +433,35 @@ where the store's own rule is *"absence of a field means UNKNOWN, never false."*
 whole-population class share is about four times the `V`- and `P`-row ones, and `LBA-AM3-3` bars
 comparing them as though both were measured on the same basis.** The report carries the coverage
 column beside every figure, which is the bar rather than a courtesy.
+
+---
+
+## Task 8 (his step 5) — `LBA-M5`
+
+**Figures are the stage-3 README's §5.** Nothing here was re-run or re-timed: parts 1 and 3 are
+**cited** from the four documents that own them, part 2 is arithmetic over values read from
+source, and part 4 is prose.
+
+**`LBA-AM1-O2` is applied rather than noted.** Three of the four parts are identical across all
+eight arms, so the only thing that varies is the fame fetch, and it is a deterministic function of
+`LBA-M1`'s N. **This measurement is a cost statement about a candidate, not a comparison between
+candidates**, and the report says so where it appears.
+
+**One input the record does not contain, named rather than invented.** §4 fixes the fame estimate
+as `⌈N / 1000⌉ × (0.2 s + one round trip)`. The batch size and the pause are read from source
+(`fame.py:57`; the **builder's** `config.py`, not the API's). **The round trip is not exactly
+recoverable**: the one measured fame run on the record took 78 s, and that log does not say which
+population it covered. It was one of the two that session handled, so the per-batch cost is
+**bracketed across both** — 0.66–0.88 s, giving a round trip of 0.46–0.68 s. This is `LBA-AM1`'s
+own treatment of `framework_rss` applied again: **name the missing input, do not guess it.**
+
+**The result makes `LBA-AM1-O2` concrete.** The fame fetch is a first-build cost of well under six
+minutes on **every** arm including the largest, and the stage is resumable, so a refresh pays only
+for artists with no record. **Nothing in `LBA-M5`'s own four parts separates the arms in a way a
+decision could rest on.**
+
+⚠ **The operating cost that does move with the population is not in `LBA-M5`'s arm table at all —
+it is §6's step 6, the re-census**, whose projection is stage 1 §3's and is what `LBA-G3` fired
+on. Recorded here because a reader comparing the fame column across arms and concluding *"a bigger
+map is cheap to operate"* would have read the one part of the cost that does not scale and missed
+the one that does.
