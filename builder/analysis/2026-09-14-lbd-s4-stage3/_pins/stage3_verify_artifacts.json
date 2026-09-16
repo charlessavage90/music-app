@@ -1,6 +1,6 @@
 {
   "task": "LBA- stage 3, task 1 -- artifact verification (LBA-D9)",
-  "run_utc": "2026-09-15T17:06:26.524106+00:00",
+  "run_utc": "2026-09-16T17:49:45.327990+00:00",
   "note": "Covers the artifacts stage 2 produced. The section 10 INPUT pins are covered by stage 1's frozen stage1_verify.py, re-run into _pins/stage3_verify_inputs.json. T.parquet is skipped: stage 3 derives nothing and never opens it.",
   "artifacts_checked": 14,
   "lba_a9": {

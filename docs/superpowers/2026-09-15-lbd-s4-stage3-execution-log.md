@@ -167,3 +167,82 @@ observations.** Editing
 after the write. **Observation dated 2026-09-15, session `lbd-s4-stage3`: the path-scoped rule
 fired on a spec edit.** Recorded here rather than in `NEXT.md` so the read consumes it from a
 dated log; it is one qualifying session, not the three the condition needs.
+
+---
+
+## Task 3 — the scope check, re-run against the owner's eight steps
+
+**Task 0 ran this same check against these same eight steps, in the previous session.** This is a
+second, independent run by a session that read the pre-registration cold — his instruction — and
+**it reaches the same verdict: it does not fire in the stop-and-do-something-cheaper sense.** That
+is recorded as a result rather than skipped, and the agreement between two cold runs is worth more
+than either alone. What is new below is item 3; items 1 and 2 restate task 0's conclusions because
+this run reached them independently, which is the only reason to write them twice.
+
+**Why not.** The check asks: the task ends in a number — name the cheapest experiment that could
+change the decision, and propose running it first. Every one of the eight steps is arithmetic over
+artifacts already on disk; there is no apparatus being built here whose question a cruder test
+would settle. The expensive thing in this track — a build, a census pass, a fame fetch, a listen —
+is barred by the owner's scope and by `LBA-D3`/`LBA-D5`/`LBA-G3`, and none of them is the cheap
+alternative to anything being done.
+
+**The one candidate that is genuinely cheaper and genuinely decisive, examined and set aside.**
+The stage-2 handoff proposes measuring d0 **on the actual container** rather than converting by
+the Gate 2→3 review's 2.5–3.5× multiplier, which was taken on the retired 75k artifact. It is
+cheap and it is the right instrument. It is **not** the cheapest experiment that changes *this*
+decision, because `LBA-G1` fired on nothing and `LBA-R1` already reads *size is not what decides
+this*: a container reading could only move an arm from "fits" to "needs hosting work", which is
+`LBA-R2`'s territory and mutually exclusive with a read already taken. It stays where it is — a
+deferral row in `NEXT.md` with its own condition — and this session does not build it.
+
+**Three things the check did yield.**
+
+1. **An ordering inside step 2, already adopted at task 0 and re-confirmed here:** the `V`-row
+   arm-to-arm comparison runs first. It is the cheapest decisive slice of the decision-carrying
+   measurement and the only one free of both population movement and the `LBA-X4` bundle.
+2. **A proportion observation about step 4, reported and not acted on.** `LBA-M4` is estimated on
+   every arm, its two census-dependent reads are unreachable (`LBA-AM3-1`), and `LBA-AM1-O2`
+   already removed `LBA-M5` from arm discrimination — so a session optimising for decision value
+   alone would shrink both. **`LBA-D8` bars that**: the executing session does not have the
+   authority to reduce the design, and steps 4 and 5 run as specified. Recorded because noticing
+   it and staying inside the rule is the thing worth having on the record.
+3. **A claims-check correction to step 8.** It names *"the pre-registration's §12 status marker"*.
+   **The `LBA-` document has no §12** — its last section is §11, the amendment register, and §12
+   belongs to the **`LBD-`** pre-registration (whose §10 and §12 this document's header cites).
+   The status marker goes in **§11**, following the `LBD-` §12 convention of a marker beside the
+   register rather than a new section. Resolved here rather than at the moment of writing it.
+
+---
+
+## Task 4 (his step 1) — the pins, re-verified by THIS session before anything was read
+
+**Result: 27 checks across two instruments, all match. Nothing was refused.** Digests are the
+stage-3 README's §0; nothing is restated here.
+
+**Re-run rather than inherited, and that is the point.** Task 1 verified these yesterday. A
+session that reads a conclusion from an artifact it has not itself checked is relying on another
+session's memory of a hash, and `CLAUDE.md`'s rule is that a conclusion drawn from the wrong
+artifact looks exactly like a correct one. Both instruments were re-run unedited; neither was
+modified, so the recorded `script_sha256`s are unchanged from task 1's.
+
+- **Inputs** — stage 1's frozen `stage1_verify.py`, `--skip-large`: **13 pins match**, and
+  `T_A4.parquet` **absent from every searched path** (`LBA-D1`). `T.parquet` is skipped
+  deliberately: stage 3 derives nothing and never opens it.
+- **Artifacts** — `s3_verify_artifacts.py`: **14 match** — eight bare, six built — and
+  **`LBA-A9`'s stop record asserted clean**, no `artifact` key, status still *unbuilt for a
+  resource reason*.
+
+**His step 1 named 20 objects and both scripts together check 27.** The 20 are exactly his list
+(8 bare + 6 built + the served map + 3 CXR strata + 2 population files); the extra 7 are the two
+derived tables, the two reused artifacts under their `LBD-` names, the two archive manifests and
+the extended-crawl graph, which stage 1's instrument checks as one unit and which there is no
+reason to skip.
+
+**One thing checked because it would have been easy to get wrong, and it was already right.**
+Every `S4-` archive's path token reads `…threshold_10…` **regardless of the arm's actual
+threshold** — it is ListenBrainz's canonical algorithm string, which is drop-list lineage rather
+than this arm's parameters. Stage 2 anticipated this: each manifest carries the key
+`algorithm_token_is_drop_list_lineage_not_parameters` holding that string verbatim, and the
+arm's real parameters sit in `parameters` (`threshold: 7` for `LBA-A2`) with `lba_arm` naming the
+cell. **No defect, and no correction is owed** — recorded only so a later reader who sees the
+path token does not re-derive the alarm.
