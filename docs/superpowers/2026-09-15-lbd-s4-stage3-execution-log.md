@@ -655,5 +655,16 @@ successor reading it cold would have gone looking for a list that does not exist
   write — the same behaviour the previous session recorded on 2026-09-15. **Observation dated
   2026-09-16, session `lbd-s4-stage3`.** That is two qualifying sessions of the three the
   condition needs.
+### Snyk, the item task 1 deferred rather than forgot
+
+Task 1 deferred the scan *"to the end of the script-writing, run once when the stage's scripts
+exist rather than once per file."* They now exist: seven modules under
+`builder/analysis/2026-09-14-lbd-s4-stage3/`. **`snyk_code_scan` over that directory: 0 issues.**
+No fix and therefore no rescan. **The deferral is discharged, on its own stated condition.**
+
+⚠ It stays worth noting that the standing deferral *"one new Snyk Low finding per module added
+under `builder/analysis/`"* is scoped to **modules taking a CLI path argument**, and none of these
+seven does — which is the same reason the three modules added on 2026-08-02 contributed none.
+
 - **`_logs/machine_state.tsv` is still unanalysed.** Its deferral row is unchanged and its
   condition has not come due; this stage ran no builds, so it added no rows to it.
