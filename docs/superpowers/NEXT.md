@@ -47,75 +47,66 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-16, at the `LBD-S4` stage-3 closeout.** **Nothing a listener sees changed
-in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
-boxes are still his to press, untouched here.
+**Last updated: 2026-09-21, at the `LBA-A6` candidate closeout.** **Nothing a listener sees has
+changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched,
+and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
 
-# ⛔ THE `LBD-S4` GO/NO-GO STOP IS REACHED. THE NEXT ACTION IS THE OWNER'S RULING.
+# ⛔ THE `LBA-A6` CANDIDATE IS BUILT. THE NEXT ACTION IS THE OWNER RUNNING THE USE GATE.
 
-**`LBA-D8` stage 3 has RUN and `LBD-S4` is measured out.** All four remaining measurements taken on
-the eight sized arms, every §7 read the run state licenses read, and the go/no-go report written.
-Figures are owned by
-[`../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md)
-and restated nowhere, including here. The owner-facing note is
-[`findings/2026-09-16-lbd-s4-stage3-go-no-go.md`](findings/2026-09-16-lbd-s4-stage3-go-no-go.md),
-reasoning is [`2026-09-15-lbd-s4-stage3-execution-log.md`](2026-09-15-lbd-s4-stage3-execution-log.md),
-and the current handoff is [`2026-09-16-HANDOFF-lbd-s4-stage3.md`](2026-09-16-HANDOFF-lbd-s4-stage3.md).
+**He ruled GO on 2026-09-21** at `LBA-A6` — *every artist the deeper crawl found, at the
+two-listener bar* — and gave two further rulings during the session: recalibrate acceptance to
+admit the candidate, and re-extract the id maps over its population first. **All four pieces of
+work landed.** Figures are owned by
+[`../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md)
+and restated nowhere, including here. Reasoning is
+[`2026-09-21-lbd-s4-a6-adoption-execution-log.md`](2026-09-21-lbd-s4-a6-adoption-execution-log.md);
+the current handoff is
+[`2026-09-21-HANDOFF-lbd-s4-a6-candidate.md`](2026-09-21-HANDOFF-lbd-s4-a6-candidate.md).
 
-**What he is ruling on.** Whether a map built from our own recomputation of ListenBrainz's raw
-listening data is worth shipping — **at what population of artists, and at what strength bar**. The
-options and what each commits to are stage-3 README §9; **no arm is preferred and no threshold is
-named**, because `LBA-D2` reserves the threshold to him and `LBA-D3` bars designing any listen
-before he rules. **One branch inside that ruling is also his and the design cannot decide it** —
-see the second warning below.
+**What `LBA-G5` is, in plain terms.** He uses the new map himself, locally, for **up to two days of
+actual use**, against a pass/fail criterion **he wrote before seeing a single journey on it**. It
+is a **stop-gate**: it can only ever stop the candidate. The governing text is `LBA-AM4`, added to
+the pre-registration's §11 **before any build work began**.
 
-**What it means in plain terms.** Cost is not what decides this: every map we could build fits the
-machine, and building one is not the expensive part. Within a fixed set of artists, how much
-listening evidence we demand barely changes *who* you see — it almost only ever adds. A **wider**
-set of artists changes what the app shows noticeably more, and the least-listened artists absorb
-most of that change at both ends. And we **cannot say** how playable the artists a wider map would
-add are — that is a fact about the census we never ran, not about those artists.
-
-> ## ⚠ Four things about this result that are easy to get backwards
+> ## ⚠ Four things about this state that are easy to get backwards
 >
-> **The playability gate is DISQUALIFIED, not answered.** `LBA-AM3-2`'s disqualifier fired on every
-> arm where `LBA-G4` could be read, at many times its bar. **Neither "the artists a wider map adds
-> are much less playable" nor "they are fine" is licensed.** The raw figure on the widest row is
-> large and would have fired the gate; reporting it as a finding inverts the amendment.
+> **A `LBA-G5` pass is NOT evidence of quality and does NOT replace `REQ-38`.** The blind listen is
+> still owed in full at §8 item 4, designed **cold**, by a session that has seen no journey on
+> either map (`LBA-D3`). `GBL-` §5's run-once rule will bind its verdict.
 >
-> **That disqualification is STRUCTURAL and must not be loosened away.** Under the two censuses
-> that exist, the artists a map *adds* and the artists it *keeps* can never have been evaluated at
-> the same time. Only a fresh census pass fixes it, and `LBA-G3` fired on that.
+> **The acceptance recalibration REJECTS the served map and REJECTS the fallback.** The builder
+> cannot reproduce `graph-msw-tu50.bin` while these bounds stand — the `LUX-E1` drift shape,
+> deliberately re-entered, raised before he ruled. **If the gate fails, restore `acceptance.py`'s
+> `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map.** A test asserts the
+> rejection so it cannot present as a mystery. Deferral registry below.
 >
-> **`LBA-R6`/`LBA-R7` being unadjudicable is a DESIGN defect, not a result.** They differ only in
-> whether a wider population changes what the app shows *substantially*, and `LBA-M2` carries no
-> effect size **by design**. A session picking one would be fixing a threshold with results in
-> hand. Both halves are reported side by side; **the branch is his.**
+> **A wrong-artist clip during the gate is NOT a `LBA-G5` signal.** Id coverage improved sharply
+> but is still partial; a missing id degrades to name search, which is today's behaviour and never
+> a wrong answer. It is a property of an id snapshot, not of the similarity graph, and his
+> criterion is about novelty and coherence.
 >
-> **`LBA-R9` — *the numbers say no*, the row that records stopping as a COMPLETE OUTCOME rather
-> than an abandonment — is formally unreachable.** Stopping remains a perfectly good decision.
-> What is missing is the design's own certificate for it, and that is not an argument either way.
+> **The id re-extraction only PARTIALLY discharges the `LUX-4` deferral** — for the candidate's
+> population. **The served lineage's own re-extract remains armed.**
 
-**No amendment was added to the pre-registration by stage 3**; `LBA-AM3` was committed by the
-previous session, before `LBA-M4` ran. **Nothing is adopted, no default changed, no shipped code
-touched.**
+**Nothing is deployed and no default is changed.** The candidate artifact is gitignored; its sha256
+lives in its manifest sidecar and must be taken from there, never transcribed (`DEP-24`).
 
 ⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
 
-Branch `lbd-s4-stage3`, PR **#129**.
+Branch `lbd-s4-a6-adoption`, PR **#131**.
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
 not record how far down the list he has got.**
 
-1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
-   Nothing here changed them.
-2. **Merge the stage-3 PR.**
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, 15 unticked. Nothing here changed them.
+2. **Merge the candidate PR.**
 3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
    fidelity. **Nothing is blocked by it.**
-4. **THE GO/NO-GO RULING.** Stage-3 README §9 has the options; §7 the inference in plain language;
-   §8 what it rests on. **If GO**, §8 of the pre-registration is what it commits to, and the
-   `REQ-38` blind listen is designed **cold**, as a separate amendment, when no journey exists on
-   either map. **If STOP**, nothing is owed but the record.
+4. **RUN `LBA-G5`, THE USE GATE.** Two days of actual use against his own criterion. The local run
+   command, and the check that tells him he is on the candidate rather than the served map, are
+   the candidate README §8. **If it PASSES**, the `REQ-38` listen amendment is next, written cold
+   by a separate session. **If it FAILS**, restore the acceptance bounds first, then the fallback
+   is `LBA-A3`.
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -387,8 +378,8 @@ old heading.)*
 
 | Finding | Condition |
 |---|---|
-| ⚠ **The 2026-09-21 acceptance recalibration REJECTS the served map and the `LBA-G5` fallback.** `PRODUCTION_ACCEPTANCE` is now centred on the `LBA-A6` candidate (node `(69_900, 105_000)`, edge `(1_990_000, 2_990_000)`, median degree ceiling 34). `graph-msw-tu50.bin` (58,838 / 1,315,684) and `LBD-A5V` (57,932 / 1,681,254) both sit outside it, so **the builder cannot reproduce what the app serves today** — the `LUX-E1` drift shape, deliberately re-entered. Raised before the ruling; the owner ruled anyway, and it is his call. Asserted by `tests/test_acceptance.py::test_the_served_map_and_the_fallback_are_outside_the_current_bounds` so it presents as a recorded decision rather than a mystery rejection. | **If `LBA-G5`'s use gate FAILS, or the candidate is not adopted: restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map**, and delete that test. If the candidate IS adopted, the row closes — the calibration target and the served map become the same artifact. |
-| **Deezer ids are extracted without the `is_artist_url` check that Spotify and Apple get.** The 2026-09-21 re-extraction kept `dsp_ids.py`'s original numeric-tail rule deliberately, so that the only thing changing was the population and a coverage difference could be attributed to it alone. `lux4_extract.py` added the artist-vs-album path check for the other two platforms in 2026-09-05 and it was never back-ported. A Deezer **album** URL ending in digits would currently be kept and shipped as an artist id. | **Whenever the Deezer map is next re-extracted for any other reason.** Size it first — the fix is one predicate, but it is a second column on any comparison it lands in, so it must not ride along with a population change. |
+| ⚠ **The 2026-09-21 acceptance recalibration REJECTS the served map and the `LBA-G5` fallback.** `PRODUCTION_ACCEPTANCE` is now centred on the `LBA-A6` candidate; `graph-msw-tu50.bin` and `LBD-A5V` both sit outside it, so **the builder cannot reproduce what the app serves today** — the `LUX-E1` drift shape, deliberately re-entered. Raised before the ruling; the owner ruled anyway, and it is his call. Bounds, basis and the sensitivity table are owned by `acceptance.py`'s own comment; the candidate's figures by `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §6. Asserted by `tests/test_acceptance.py::test_the_served_map_and_the_fallback_are_outside_the_current_bounds`, so it presents as a recorded decision rather than a mystery rejection. | **If `LBA-G5`'s use gate FAILS, or the candidate is not adopted: restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map**, and delete that test. If the candidate IS adopted, the row closes — the calibration target and the served map become one artifact. |
+| **Deezer ids are extracted without the `is_artist_url` check that Spotify and Apple get.** The 2026-09-21 re-extraction kept `dsp_ids.py`'s original numeric-tail rule deliberately, so the only thing changing was the population and a coverage difference could be attributed to it alone. `lux4_extract.py` added the artist-vs-album path check for the other two in 2026-09-05 and it was never back-ported, so a Deezer **album** URL ending in digits is currently kept and shipped as an artist id. | **Whenever the Deezer map is next re-extracted for any other reason.** The fix is one predicate, but it is a second column on any comparison it lands in, so it must not ride along with a population change. |
 | **`LBA-G2`'s bar is written `24 GB` and implemented `24 GiB`** — five places in the pre-registration say 24 GB; `LBA_G2_BAR_BYTES = 24 * 1024**3` is 25.77 GB. Stage 1's instrument introduced it and stage 2's forward copy, README and handoff all adopted *"24 GiB"*, making the implementation self-consistent and diverging from the governing document silently. ⚠ **No cell's disposition changes under either reading, with comfortable margin on both sides** — recomputed in bytes at the stage-3 closeout; the arithmetic is in the stage-3 handoff. **Deliberately NOT fixed**: §11's rule is that a bar's value is never edited, and settling which unit governs after the results exist is changing a bar with results in hand. | **The owner's, and only if any future `LBD-` build gate is read.** Nothing is blocked by it and no committed result depends on which reading is taken. |
 | ~~**`docs-lint` checks 4, 5 and 6 were never observed to run at the stage-2 closeout**~~ ✅ **DISCHARGED 2026-09-15, minutes after it was written, by the background run that had been launched before it.** The full script completed **exit code 0 with all six checks clean** — checks 4, 5 and 6 print their headers and list candidates beneath, and all three listed **none**. ⚠ **Check 6 is restated figures, and it found nothing**, which is the mechanical confirmation the row below asked for: the four restatements this closeout fixed by hand were the only ones. *(Struck, kept for the record. The row was written on two foreground runs that both timed out partway through check 3; the background run launched earlier had already succeeded and had not been read. The lesson is the row's own: **a timeout is not a result**, and the answer was already on disk.)*
 | ~~**`closeout` B2, B3 and B4 were NOT run for `LBD-S4` stage 2**~~ ✅ **DISCHARGED 2026-09-16 at the stage-3 closeout, which is exactly the condition this row named.** **B2:** no orphans — `s3_common.py` and `s4_common.py` are each imported by every measurement script in their directory, `s4_instrument.py` by `s4_build.py`, and every other module is a CLI entry point that ran and left a committed output. **B3:** stage 2 and stage 3 added no tests, so there is nothing to spot-check — **saying so is the discharge**, as this row itself specified. **B4 is the one that paid**: it found that `LBA-G2`'s bar is written **24 GB** in the pre-registration and implemented **24 GiB** in the instrument (see the row below). Every other `LBA-` claim in the stage-2 and stage-3 docstrings checked out against the governing document. *(Struck, kept for the record.)*

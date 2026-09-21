@@ -1,6 +1,9 @@
 # Handoff — `LBD-S4` stage 3 complete, the owner stop is reached, 2026-09-16
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-21** by
+[`2026-09-21-HANDOFF-lbd-s4-a6-candidate.md`](2026-09-21-HANDOFF-lbd-s4-a6-candidate.md) — the owner
+ruled GO and the `LBA-A6` candidate is built. **Still AUTHORITATIVE on what stage 3 measured and on
+its six easy-to-invert warnings.** Supersedes
 [`2026-09-15-HANDOFF-lbd-s4-stage2.md`](2026-09-15-HANDOFF-lbd-s4-stage2.md) on next actions. It
 does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

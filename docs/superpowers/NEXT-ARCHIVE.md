@@ -2689,3 +2689,80 @@ not record how far down the list he has got.**
    builds, the largest **5.3× the biggest archive ever built on this machine** (that ratio is the
    stage-1 README's §6, cited not restated). **Stopping here remains a complete outcome**, and no
    session proposes a route.
+
+---
+
+## ⛔ FROZEN 2026-09-21 — the stage-3 go/no-go stop block, superseded by the `LBA-A6` candidate
+
+*Demoted at the 2026-09-21 closeout. HISTORICAL: never edited or annotated again. Everything in
+it that still binds was distilled into `NEXT.md`'s registries before it was moved.*
+
+**Last updated: 2026-09-16, at the `LBD-S4` stage-3 closeout.** **Nothing a listener sees changed
+in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
+boxes are still his to press, untouched here.
+
+# ⛔ THE `LBD-S4` GO/NO-GO STOP IS REACHED. THE NEXT ACTION IS THE OWNER'S RULING.
+
+**`LBA-D8` stage 3 has RUN and `LBD-S4` is measured out.** All four remaining measurements taken on
+the eight sized arms, every §7 read the run state licenses read, and the go/no-go report written.
+Figures are owned by
+[`../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md)
+and restated nowhere, including here. The owner-facing note is
+[`findings/2026-09-16-lbd-s4-stage3-go-no-go.md`](findings/2026-09-16-lbd-s4-stage3-go-no-go.md),
+reasoning is [`2026-09-15-lbd-s4-stage3-execution-log.md`](2026-09-15-lbd-s4-stage3-execution-log.md),
+and the current handoff is [`2026-09-16-HANDOFF-lbd-s4-stage3.md`](2026-09-16-HANDOFF-lbd-s4-stage3.md).
+
+**What he is ruling on.** Whether a map built from our own recomputation of ListenBrainz's raw
+listening data is worth shipping — **at what population of artists, and at what strength bar**. The
+options and what each commits to are stage-3 README §9; **no arm is preferred and no threshold is
+named**, because `LBA-D2` reserves the threshold to him and `LBA-D3` bars designing any listen
+before he rules. **One branch inside that ruling is also his and the design cannot decide it** —
+see the second warning below.
+
+**What it means in plain terms.** Cost is not what decides this: every map we could build fits the
+machine, and building one is not the expensive part. Within a fixed set of artists, how much
+listening evidence we demand barely changes *who* you see — it almost only ever adds. A **wider**
+set of artists changes what the app shows noticeably more, and the least-listened artists absorb
+most of that change at both ends. And we **cannot say** how playable the artists a wider map would
+add are — that is a fact about the census we never ran, not about those artists.
+
+> ## ⚠ Four things about this result that are easy to get backwards
+>
+> **The playability gate is DISQUALIFIED, not answered.** `LBA-AM3-2`'s disqualifier fired on every
+> arm where `LBA-G4` could be read, at many times its bar. **Neither "the artists a wider map adds
+> are much less playable" nor "they are fine" is licensed.** The raw figure on the widest row is
+> large and would have fired the gate; reporting it as a finding inverts the amendment.
+>
+> **That disqualification is STRUCTURAL and must not be loosened away.** Under the two censuses
+> that exist, the artists a map *adds* and the artists it *keeps* can never have been evaluated at
+> the same time. Only a fresh census pass fixes it, and `LBA-G3` fired on that.
+>
+> **`LBA-R6`/`LBA-R7` being unadjudicable is a DESIGN defect, not a result.** They differ only in
+> whether a wider population changes what the app shows *substantially*, and `LBA-M2` carries no
+> effect size **by design**. A session picking one would be fixing a threshold with results in
+> hand. Both halves are reported side by side; **the branch is his.**
+>
+> **`LBA-R9` — *the numbers say no*, the row that records stopping as a COMPLETE OUTCOME rather
+> than an abandonment — is formally unreachable.** Stopping remains a perfectly good decision.
+> What is missing is the design's own certificate for it, and that is not an argument either way.
+
+**No amendment was added to the pre-registration by stage 3**; `LBA-AM3` was committed by the
+previous session, before `LBA-M4` ran. **Nothing is adopted, no default changed, no shipped code
+touched.**
+
+⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
+
+Branch `lbd-s4-stage3`, PR **#129**.
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
+not record how far down the list he has got.**
+
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
+   Nothing here changed them.
+2. **Merge the stage-3 PR.**
+3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
+   fidelity. **Nothing is blocked by it.**
+4. **THE GO/NO-GO RULING.** Stage-3 README §9 has the options; §7 the inference in plain language;
+   §8 what it rests on. **If GO**, §8 of the pre-registration is what it commits to, and the
+   `REQ-38` blind listen is designed **cold**, as a separate amendment, when no journey exists on
+   either map. **If STOP**, nothing is owed but the record.
