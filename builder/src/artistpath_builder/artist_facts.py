@@ -48,9 +48,9 @@ from pathlib import Path
 
 # sha256 of json.dumps(sorted(artist_facts.items()), sort_keys=True),
 # reproduced by builder/analysis/2026-09-05-lux4-extract/lux4_extract.py.
-ARTIST_FACTS_SHA256 = "f55d3369986db8b4e4b62c082d6a608d430b3bf91929998abfadbff072d3b88b"
+ARTIST_FACTS_SHA256 = "40b327992cf8803b89739d3e448171245d6b57575ec01c71856ffe8486fdee48"
 
-ARTIST_FACTS_PATH = Path(__file__).parent / "data" / "artist_facts_20260905.json"
+ARTIST_FACTS_PATH = Path(__file__).parent / "data" / "artist_facts_20260921.json"
 
 
 @lru_cache(maxsize=1)

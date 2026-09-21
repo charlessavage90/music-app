@@ -30,10 +30,25 @@ from artistpath_builder.deezer_ids import DEEZER_IDS_SHA256, load_deezer_ids
 from artistpath_builder.graph import build_graph
 from artistpath_builder.models import ArtistStats, EdgeType
 
-# Recorded in NEXT.md and reproduced from the frozen probe output:
-# sha256 of json.dumps(sorted(deezer_ids.items()), sort_keys=True).
-RECORDED_SHA256 = "7d204111284c7e50450d20af704168d26846a2607f761ef5103eef0514b52fb6"
-RECORDED_COUNT = 39465
+# sha256 of json.dumps(sorted(deezer_ids.items()), sort_keys=True), reproduced
+# from the extraction's own output.
+#
+# RE-PINNED 2026-09-21 for the re-extraction over the `LBA-A6` candidate's
+# population, on the owner's ruling. The 2026-08-02 map was extracted over the
+# ADOPTED artifact's population and covered only 11.41% of the 29,485 artists
+# the candidate adds, which sends their clips down the name-search path — the
+# `BYP-13` surface. Record: analysis/2026-09-21-lbd-s4-a6-candidate/.
+#
+# The re-extraction is STRICTLY ADDITIVE and the extractor refuses if it is
+# not: every MBID the 2026-08-02 map held is still present with the same id,
+# so this count can only ever have grown.
+#
+# PREVIOUS (2026-08-02, deezer_artist_ids_20260802.json — still on disk,
+# never edited in place):
+#   sha256 7d204111284c7e50450d20af704168d26846a2607f761ef5103eef0514b52fb6
+#   count  39465
+RECORDED_SHA256 = "3d089a54e968c2b78709ffc01f98500b98815415eda7e42ca1379c82b8936af3"
+RECORDED_COUNT = 47504
 
 A, B = ("a" * 36, "b" * 36)
 

@@ -229,3 +229,61 @@ decision with a named remedy**, not as a mystery rejection of a build everyone e
 which is exactly how `LUX-E1` presented, and it cost a session to diagnose.
 
 **Full builder suite: 292 passed.**
+
+---
+
+## Task 4 — the owner's id re-extraction ruling, 2026-09-21
+
+**His ruling:** before the use gate runs, re-extract `deezer_ids`, `spotify_ids`, `apple_ids` and
+`artist_facts` over the candidate's node set, following `deezer_ids.py`'s docstring and the
+`LUX-4` pattern — re-extract over the population, ship as dated package data, **never edit the
+existing dated files in place.** Report the wall clock first if it projects beyond a few hours.
+
+**Projection, reported before starting: minutes, not hours.** Both frozen extractors are
+**offline** passes over the local 17 GB MusicBrainz artist dump — `~2 minutes` and `"minutes"` in
+their own docstrings — and the dump was still on disk. No network, so nothing depends on a third
+party answering. It did not approach the threshold, so no stop was taken. **Actual: 2.2 minutes**,
+2,945,470 dump rows, all 112,855 population artists matched.
+
+### The frozen rules are IMPORTED, not copied
+
+`cand_ids_extract.py` imports `DSP`, `host_of`, `id_tail`, `is_artist_url`, `normalise_id` and
+`facts_of` from `2026-09-05-lux4-extract/lux4_extract.py`. Copying them would have been the moment
+a parsing rule could drift silently from the map it vouches for; importing makes drift impossible.
+
+### ⚠ ONE KNOB, and the one I deliberately did not turn
+
+**Only the population changes.** In particular **Deezer keeps `dsp_ids.py`'s original rule** — a
+numeric tail, with no `is_artist_url` check. `lux4_extract.py` added that artist-vs-album check for
+Spotify and Apple on 2026-09-05 and it was never back-ported to Deezer. Adding it here would
+probably be an improvement *and* would make this a two-column change, after which no coverage
+difference could be attributed to the population alone. **Filed as a deferral instead**, with the
+condition that it must not ride along with a population change.
+
+### The population is a SUPERSET of what he asked for, and the reason is a regression he did not ask me to accept
+
+He said "the candidate's actual node set". I extracted over **candidate ∪ served ∪ every key the
+three shipped maps already held** (112,855 artists). The candidate keeps 57,909 of the served
+map's 58,838 artists but not all of them, so a candidate-only extraction would have **silently
+dropped ids for 929 artists the served map still contains**. The dump read dominates the cost, so
+the superset is free. Both frozen extractors used a superset for the same reason.
+
+**The script refuses if the result is not strictly additive** — if any MBID the shipped maps held
+is missing from the new map, it exits rather than writing, because over a superset population that
+could only mean a parsing rule moved. It passed.
+
+### Test pins re-recorded, not deleted
+
+`test_deezer_ids.py` pinned the 2026-08-02 map's count and sha and failed, correctly. Re-pinned
+with the previous values kept in the comment and the reason recorded. The additive guard is what
+makes the new count safe to pin: it can only ever have grown.
+
+**Builder 292 passed, api 295 passed.** Snyk on the new module: 0 issues.
+
+### This PARTIALLY discharges `NEXT.md`'s `LUX-4`-armed deferral
+
+The deferral is *"before an `ALG-B` artifact is ever served, re-extract over its population"*.
+**It is discharged for the `LBA-A6` candidate's population only.** The served lineage's own
+re-extract **remains armed**: `graph-msw-tu50.bin` is still served, and while the new maps cover
+every artist it contains, the deferral's condition is about the lineage and not about this
+candidate. A session that reads this as fully discharged has over-read it.

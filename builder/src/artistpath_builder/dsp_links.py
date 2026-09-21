@@ -59,10 +59,10 @@ from pathlib import Path
 
 # sha256 of json.dumps(sorted(<map>.items()), sort_keys=True), reproduced by
 # builder/analysis/2026-09-05-lux4-extract/lux4_extract.py.
-SPOTIFY_IDS_SHA256 = "e618b286ae93d6b52c211a04b1195be03d6f804040c572265d125ca599dc4595"
-APPLE_IDS_SHA256 = "e33f67d22485c1817b3a0c7cabad5bc732d472d07531b3c5d74644cf0693e5a9"
+SPOTIFY_IDS_SHA256 = "d6567a3a7f4babf856ec8af2886f5f02c33228685353e2aa88520d570e507566"
+APPLE_IDS_SHA256 = "0fc1677e5c5b9fdabde21324c9b52b770280bebcc3e4422c30f6e58d56807c9c"
 
-DSP_LINKS_PATH = Path(__file__).parent / "data" / "dsp_links_20260905.json"
+DSP_LINKS_PATH = Path(__file__).parent / "data" / "dsp_links_20260921.json"
 
 
 @lru_cache(maxsize=1)
