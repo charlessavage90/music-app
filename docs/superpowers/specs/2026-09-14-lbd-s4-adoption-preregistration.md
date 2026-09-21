@@ -950,6 +950,18 @@ None of it runs before the stop.
 3. **Manifest pinning**, §6 steps 5, 9 and 10 — the archive `MANIFEST.json`, the artifact sidecar
    through `build_manifest`/`write_manifest`, and `ARTISTPATH_GRAPH_SHA256` taken from the sidecar
    so a wrong artifact refuses to boot (`DEP-24`).
+
+> ### ⚠ `LBA-AM4` INSERTS A STAGE HERE — between item 3 and item 4, dated 2026-09-21
+>
+> **`LBA-G5`, the unblinded use gate.** The owner uses the candidate locally for a bounded period
+> against a pass/fail criterion he wrote before seeing a single journey. It is a **stop-gate, not
+> a quality bar**, and it is **not** the `REQ-38` listen below and does not replace it. Failing it
+> means the candidate is never listened to. Passing it licenses **nothing except proceeding to
+> item 4**. Full text, his criterion verbatim, and the four bars: §11 `LBA-AM4`.
+>
+> **The numbering of items 1–4 is deliberately unchanged**, so that every document written before
+> 2026-09-21 that says *"§8's four items"* still resolves. §8 now has **five stages**; item 4 is
+> still item 4.
 4. **Then the `REQ-38` blind listen: today's map against the candidate, on today's artists** — the
    shape the owner can judge, and the only evidence class this project treats as primary.
    **Designed cold, as a separate amendment to this document, written when no journey exists on
@@ -1485,3 +1497,159 @@ they appear.
 
 **Identifier `LBA-AM3`.** Collision-checked across every ref on 2026-09-15, together with
 `LBA-AM3-1`–`LBA-AM3-3`: free.
+---
+
+### `LBA-AM4` — the unblinded use gate (`LBA-G5`), inserted between §8 item 3 and §8 item 4
+
+**Dated 2026-09-21, written AFTER the owner's go/no-go ruling and BEFORE any candidate build
+exists.**
+
+> ### ⚠ What existed when this was written, stated plainly — it is a later position than `LBA-AM1`, `LBA-AM2` or `LBA-AM3`
+>
+> **All three stages are complete and reported.** `LBA-M1`–`M5` are taken on the eight sized arms;
+> `LBA-G1` fired on nothing, `LBA-G2` stopped `LBA-A9`, `LBA-G3` fired at stage 1, `LBA-G4` is
+> reported unreadable under `LBA-AM3-2` wherever it is evaluable. Every read the run state
+> licensed has been read. **Figures are owned by the three stage READMEs and none is restated
+> here.**
+>
+> **The owner's go/no-go ruling exists and is GO**, at `LBA-A6` — population `P`, threshold 3,
+> ListenBrainz's own pairing (`LBA-D1`). Given 2026-09-21.
+>
+> **What does NOT exist is anything this amendment governs.** No candidate build exists: no
+> artifact of any arm carries `fame_lb`, because every arm built `require_fame=False` (`LBA-D5`).
+> **No journey has been generated on any `LBA-` map by anyone**, so no result of `LBA-G5` and no
+> result of the `REQ-38` listen can exist, and neither the criterion nor the period below can have
+> been shaped to admit or exclude an outcome.
+>
+> **The honest statement of what it spends: none of `LBA-M1`–`M5`'s or `LBA-G1`–`G4`'s
+> commit-before-results property**, all of which were read and reported before it was written. It
+> spends the commit-before-results property of **`LBA-G5` itself**, which is intact — its author
+> could see every structural and resource figure the three stages produced, and could see **no
+> journey, no candidate artifact, and no fame ranking over `P`**, which is every quantity the gate
+> below is about.
+
+⚠ **This amendment does not renumber §8.** Items 1–4 keep their numbers so that every document
+written before today which says *"§8's four items"* — stage-3 README §9 options B, C and D among
+them — still resolves. **§8 now has five stages**, and the gate sits between items 3 and 4.
+
+---
+
+#### `LBA-G5` — the unblinded use gate
+
+**Plain sentence, fixed here before any result exists:** *the owner uses the new map himself for a
+short, bounded period, and says whether it made the app worse.*
+
+**His pass/fail criterion, given 2026-09-21, recorded verbatim, written before he had seen a
+single journey on any `LBA-` map:**
+
+> a noticeably worse product experience on more than half of tested journeys
+
+**and, in his words, what "noticeably worse" means here — two limbs, either of which fires it:**
+
+> novel artists become more difficult to surface **OR** novelty is traded for coherence (meaning
+> novel artists surface but coherence of the path suffers as a result)
+
+**His bounded period, given at the same time:** **2 days of actual app use, maximum.**
+
+**The effect size is his and is in the criterion: *more than half* of tested journeys.** A
+minority of worse journeys does not fire this gate. It is recorded as an effect size and not as a
+sentiment because `CLAUDE.md`'s rule is that a gate without one cannot tell the finding it was
+written for from noise and fires the expensive response either way — and the expensive response
+here is discarding a candidate.
+
+⚠ **The second limb is NEW and has no precedent on this project.** The 2026-08-10 `CXA-` criterion
+had the novelty limb alone. A candidate that surfaced novel artists *at the cost of the path
+hanging together* would have **passed** that criterion and fires this one. Recorded because the
+difference is the owner's and is not a session's paraphrase of the older criterion.
+
+#### Why this gate exists — the `CXR-` defect class, and why no `LBA-` arm can see it
+
+**The `CXR-` regression is the case.** Its diagnosis is
+[`builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`](../../../builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md),
+whose figures are owned there and are **not restated here**. Its `CXR-P1` half is a
+**fame-ranking** mechanism: the ramp prices each artist by rank within *the artifact's own measured
+population* (`graph_store.fame_percentiles`), so adding artists below the existing population moves
+everyone and squeezes the only device that steers a journey toward unfamiliar artists at depth.
+
+**Any `P`-population map carries that mechanism by construction, and no arm in this document
+measured it.** Three of this document's own clauses say so and they interlock:
+
+- **`LBA-X1`** names the fame percentile as one of four population-relative quantities that
+  recompute over each arm's own node set, and names `CXR-P1` as the mechanism.
+- **`LBA-D5`** built every arm with `require_fame=False`. **No arm has a fame ranking at all.**
+- **`LBA-X7`** confines the fame ruler to `V`: banding uses the served artifact's own `fame_lb`
+  records, which exist only for artists the served map contains.
+
+**So the candidate acquires, at §8 item 1, the exact quantity that produced the August regression,
+and it acquires it after every measurement in this document was taken.** Nothing in stages 1–3 is
+wrong about it; the design simply never had it in hand.
+
+**Use is the cheapest known detector of this class, and the only demonstrated one.** No instrument
+in this project detected the `CXR-` regression in advance; the owner detected it **within minutes
+of use**.
+
+> ⚠ **A correction to the record, made here because the documents that carry the figure are
+> frozen.** Four documents state that the `CXR-` revert criterion fired *"after three weeks of
+> use"* — the `CXA-` adoption handoff, the `CXR-` revert handoff, the `CXR-` diagnosis README and
+> `findings/2026-09-16-cxr-revert-and-the-s4-population.md`. **That interval is TIME-TO-REPORT, not
+> time-to-detect.** The owner states (2026-09-21) that he noticed the degradation within minutes;
+> the delay was availability — he was away, and he is the app's only user, so he left it until he
+> had time to roll back. **None of those four documents says which quantity it is measuring**, and
+> a session reading them on 2026-09-21 took the three weeks for the detection latency and drew the
+> opposite conclusion about how long this gate needs to be. The four documents are COMPLETE or
+> HISTORICAL and are **not edited**; per `docs/README.md`'s rule the correction goes forward, and
+> this is where it lands.
+
+**Two days is therefore a bounded period chosen against a demonstrated detection latency**, not
+merely a cheap one. The `CXA-` plan's separate calibration points the same way: the
+`ALG-E → ALG-B` switch was recognised as a clear improvement in under five minutes.
+
+#### The four bars on this gate
+
+1. **It is a STOP-GATE, not a quality bar.** It can only ever *stop* the candidate. It produces no
+   score, ranks nothing, and no figure it yields may enter the record as a measurement of path
+   quality — that currency belongs to `findings/2026-07-21-scoring-adjudication.md` and this gate
+   adds nothing to it.
+2. **It is NOT the `REQ-38` listen and does not replace it.** It is unblinded, single-subject, and
+   the owner knows which map he is on throughout. `REQ-38` remains owed in full at §8 item 4,
+   designed cold as a separate amendment written when no journey exists on either map (`LBA-D3`),
+   and `GBL-` §5's run-once rule will bind its verdict. **A pass here is not evidence of quality
+   and must never be cited as one.**
+3. **Failing it means the candidate is not listened to**, and the fallback is **`LBA-A3`** —
+   `LBD-A5V`, already built, serialised and carrying fame, immediately servable. ⚠ **`LBA-A3`
+   differs from the candidate in TWO columns, not one: population (`V` vs `P`) and drop-list
+   payload (`…20260805.json` vs `…20260809.json`).** §2.1's baseline column and its boxed warning
+   own this: the payload column is real even where its effect is zero, and a one-column claim
+   across it is wrong even though no artist moves. The fallback is sound; **no comparison between
+   `LBA-A3` and the candidate may be reported as a population effect alone.**
+4. **Passing it licenses NOTHING except proceeding to §8 item 4.** It adopts nothing, changes no
+   default, selects no threshold for any future map, and says nothing about the `U` row, about
+   `LBA-A9`, or about any arm not built. `LBA-R9` remains unreachable and a pass here is not a
+   substitute certificate.
+
+#### What being unblinded costs, stated rather than glossed
+
+The owner knows he is on the candidate, expects it to differ, and chose the criterion. **That is
+exactly the `CXA-` precedent's shape and it worked** — the 2026-08-10 criterion fired on
+2026-09-01 and the revert followed. It is admissible here for the same reason: a stop-gate's
+failure mode is a *false pass*, and expectation bias on an unblinded subject who wants the
+candidate to succeed pushes toward the false pass, which is the direction that costs least —
+it forfeits nothing except the chance to stop early, and `REQ-38` still stands behind it.
+**The reverse is not true of a quality claim**, which is why bar 1 and bar 2 exist.
+
+#### What this amendment does NOT do
+
+- **It changes no arm, no population rule, no threshold, and no bar's value.** `LBA-G1`–`LBA-G4`
+  are untouched; `LBA-G5` is a new and separate criterion that can only ever *stop* a candidate.
+- **It does not design, shape, pre-empt or narrow the `REQ-38` listen**, whose amendment is owed
+  cold by a separate session (`LBA-D3`). It draws no pair, fixes no protocol and generates no
+  journey.
+- **It does not reopen the owner's three rulings** (`LBA-D1`–`D3`) or his go/no-go ruling.
+- **It re-reads no `LBD-` or `LBA-` criterion**, and both `LBL-` verdicts remain run-once and final.
+- **It adopts nothing, changes no default, touches no shipped code, and does not change
+  `ApiConfig.graph_path`.**
+- **It does not renumber §8.**
+
+**Identifiers `LBA-AM4` and `LBA-G5`.** Both collision-checked across every local and remote ref on
+2026-09-21, by `git grep -lE` over `refs/remotes` and `refs/heads` restricted to `*.md`: **both
+free.**
