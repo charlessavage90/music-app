@@ -95,9 +95,19 @@ none touched an artifact. Recorded because the shape is the point, not the indiv
 - The first serialising run died after writing the artifact and sidecar, so those files existed
   briefly from a run that exited non-zero. They were overwritten by the successful run; the
   committed checksum is the successful one's, and the build is deterministic.
-- `docs/README.md` has **four further rows claiming "ACTIVE — the CURRENT handoff"** with no track
-  scoping (lines ~260, ~265, ~277, ~292, all August). They are outside this work's chain and I did
-  not adjudicate them. The in-chain collision — the stage-2 row still claiming current — was fixed.
+- `docs/README.md` had **five stale rows claiming "ACTIVE — the CURRENT handoff"**: the in-chain
+  stage-2 row, plus four August ones. **All five are now fixed.** The four were adjudicable after
+  all — each file's *own* role line already said SUPERSEDED and named its successor, so the map
+  rows simply contradicted the files. ⚠ **The `doc-auditor` recommended track-scoping those four
+  instead** (*"ACTIVE — the CURRENT handoff FOR THE `ULF-` TRACK"*), which would have enshrined
+  four superseded handoffs as current for their tracks. The files settled it; the recommendation
+  was not followed, and the reason is recorded in the rows themselves.
+- **The invariant now holds and is cheap to re-check:** exactly one row may begin its role field
+  with an unscoped *"ACTIVE — the CURRENT handoff"*, and two more are legitimately track-scoped
+  (`UXR-`, `LBD-`):
+  ```bash
+  grep -cE '^\| `[^`]+` \| \*\*ACTIVE — the CURRENT handoff[.,]' docs/README.md   # must be 1
+  ```
 
 ## Owed, and by whom
 
