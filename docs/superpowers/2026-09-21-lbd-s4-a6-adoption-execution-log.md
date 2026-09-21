@@ -172,3 +172,60 @@ The candidate fails `PRODUCTION_ACCEPTANCE`. **No bound was widened and none is 
 script refuses `--serialise` unless `--acceptance-ruling` carries a decision the owner has actually
 given. **§8 item 3 (manifest pinning) is therefore not reached** — it operates on a serialised
 artifact, and there is none. Both items resume in minutes once he rules.
+
+---
+
+## Task 3 — the owner's acceptance ruling, 2026-09-21
+
+**His ruling:** recalibrate to admit the candidate, per §8 item 2 — move only the bounds that
+fail, take the new centre from the stage-2 node and CSR counts for `LBA-A6`, keep the tolerance at
+about ±20 %, preserve the edge floor, record the change and its basis here.
+
+**This is the `MSW-`/`CXA-` case, not the 2026-09-05 cleanup.** A bound is moving so a NEW,
+never-served artifact can be adopted. That is risk acceptance and his, by his own `LUX-4` ruling.
+
+### The basis, and why it satisfies "independent of the build that went red"
+
+The centres are read from
+[`builder/analysis/2026-09-14-lbd-s4-stage2/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage2/README.md)
+§3b, which recorded **87,394 artists / 2,490,728 CSR entries** for `LBA-A6` on 2026-09-15 — a
+different build, recorded six days before the candidate existed. The candidate was separately
+proved byte-identical to it (candidate README §3a), so the figures describe the same map without
+being derived from the artifact that was rejected.
+
+**`median_degree`: only the ceiling failed and only the ceiling moved.** Its basis is the same §3b
+row — 2,490,728 / 87,394 = 28.50 mean degree, ×1.2 = 34.2, taken as 34. **The floor stays at 5.0**,
+which is the half that catches a graph that lost most of its nodes. The four §2.8
+failure-signature detectors all passed on the candidate and none is touched.
+
+### The edge floor is "preserved" in the sense that matters, and it now does all the work
+
+The band raises the edge floor from 1,050,000 to 1,990,000, which **strengthens** the cap-rule
+protection rather than trading it away. Checked against the same known artifacts: all three
+must-reject rows are still rejected, and **every one of them is rejected on the edge bound alone**
+— the recalibrated node band admits all three, `JFX-B` included.
+
+**Consequence for the test suite, and it is not tidying.** The three synthetic isolating rows were
+built to fail exactly one bound under the *old* band and stopped doing so under the new one:
+`NODE_CEILING_ONLY = (80_000, 1_300_000)` now sits *inside* the node band and below the edge floor,
+so it would have been rejected on the wrong bound and the test would have stayed green while
+testing nothing. That is precisely the vacuity its own comment was written about, and the rows were
+re-derived.
+
+### ⚠ The accepted cost, recorded in three places so it cannot be rediscovered as a mystery
+
+**The new bounds reject the currently-served map (58,838 / 1,315,684) and reject `LBA-A3` =
+`LBD-A5V` (57,932 / 1,681,254), the fallback `LBA-G5` would revert to.** The builder cannot
+reproduce what the app serves today while these bounds stand. That is the `LUX-E1` drift shape
+deliberately re-entered.
+
+**It was raised before the ruling and he ruled anyway**, which is his call. It is recorded in
+`acceptance.py`'s own comment, **asserted as a test** rather than left implicit, and filed in
+`NEXT.md`'s deferral registry. The remedy, if the use gate fails or the candidate is not adopted,
+is to restore the `PREVIOUS (MSW- restore 2026-09-05)` line before rebuilding either map.
+
+The assertion is the part worth keeping: when this next bites it will present as a **recorded
+decision with a named remedy**, not as a mystery rejection of a build everyone expects to work —
+which is exactly how `LUX-E1` presented, and it cost a session to diagnose.
+
+**Full builder suite: 292 passed.**

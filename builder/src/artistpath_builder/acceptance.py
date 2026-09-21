@@ -233,17 +233,68 @@ PRODUCTION_ACCEPTANCE = AcceptanceCriteria(
     # The second row is what the CXA- values got WRONG after the revert: they
     # ACCEPTED the artifact the owner's listening test rejected.
     #
+    # RECALIBRATED 2026-09-21 for the `LBA-A6` candidate — the `LBD-S4`
+    # adoption at population `P`, threshold 3. THE OWNER'S DECISION, given
+    # explicitly after being shown the failing bounds AND the consequence in
+    # the row marked ⚠ below. This is the MSW-/CXA- case again, not the
+    # 2026-09-05 cleanup: a bound is moving so a NEW, never-served artifact
+    # can be adopted, which is risk acceptance and his (his LUX-4 ruling of
+    # 2026-09-05, and §8 item 2 of the S4 adoption pre-registration).
+    #
+    # Only the three bounds that ACTUALLY FAILED were moved. The four §2.8
+    # failure-signature detectors all passed with margin on the candidate
+    # (famous median degree 49.0 against a floor of 25.0; famous min degree 23
+    # against 8; no nameless artists; no canonical artist absent) and none is
+    # touched. Tolerance is UNCHANGED at about ±20 %.
+    #
+    # The centres are read from the stage-2 README's §3b table
+    # (builder/analysis/2026-09-14-lbd-s4-stage2/README.md), which recorded
+    # 87,394 artists / 2,490,728 CSR entries for `LBA-A6` on 2026-09-15 —
+    # a DIFFERENT build from the candidate, and recorded before it existed.
+    # That is the "derived independently of the build that went red" test.
+    # The candidate was separately proved byte-identical to that build
+    # (builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md §3a).
+    #
+    # median_degree: only the CEILING failed, at 26.0 against 25.0, and only
+    # the ceiling moved. Its basis is the same §3b row: 2,490,728 / 87,394 =
+    # 28.50 mean degree, ×1.2 = 34.2, taken as 34. The FLOOR stays at 5.0,
+    # which is the half that catches a graph that lost most of its nodes.
+    #
+    # Sensitivity, checked against the same known artifacts. All three
+    # must-reject rows are still rejected, and the EDGE FLOOR is what rejects
+    # every one of them — the node band admits all three, so the cap-rule
+    # protection the CXA- entry installed is not merely intact, it is now the
+    # only bound doing any work:
+    #
+    #   ACCEPT  the LBA-A6 candidate         87,394 / 2,490,728
+    #   reject  JFX-B, the REVERTED adoption 88,685 / 1,618,164  ← edge only
+    #   reject  retired pre-MSW mutual-kNN   74,193 /   898,006  ← edge only
+    #   reject  mutual-kNN of THIS archive   81,749 /   905,558  ← edge only
+    #
+    # ⚠ THE CONSEQUENCE, ACCEPTED DELIBERATELY AND NOT A DEFECT TO BE FIXED
+    # BY WIDENING. These bounds REJECT the currently-served map
+    # (58,838 / 1,315,684) and REJECT `LBA-A3` = `LBD-A5V` (57,932 /
+    # 1,681,254), which is the fallback if `LBA-G5`'s use gate fails. That is
+    # the LUX-E1 drift shape deliberately re-entered: the builder cannot
+    # reproduce what is served today while these bounds stand. It was raised
+    # before the ruling and the owner ruled anyway, which is his call to make.
+    #
+    # SO: if the use gate FAILS, or the candidate is not adopted, RESTORE the
+    # previous line before rebuilding either map. `tests/test_acceptance.py`
+    # asserts this rejection explicitly rather than leaving it implicit, so a
+    # later session cannot rediscover it as a mystery. Tracked in NEXT.md's
+    # deferral registry.
+    #
+    # PREVIOUS (MSW- restore 2026-09-05): node_count=(47_000, 71_000),
+    #                               edge_count=(1_050_000, 1_580_000),
+    #                               median_degree=(5.0, 25.0)
     # PREVIOUS (CXA- extended pop): node_count=(70_900, 106_400),
     #                               edge_count=(1_295_000, 1_942_000)
     # PREVIOUS (retired 75k map):   node_count=(60_000, 90_000),
     #                               edge_count=(700_000, 1_100_000)
-    node_count=(47_000, 71_000),
-    edge_count=(1_050_000, 1_580_000),
-    # UNCHANGED and deliberately so: median degree PASSED on the candidate
-    # build, and again on the JFX-B build (whose rejection names only the two
-    # counts) and on the mutual-kNN row above, at 7. Only the two bounds that
-    # actually failed were moved.
-    median_degree=(5.0, 25.0),
+    node_count=(69_900, 105_000),
+    edge_count=(1_990_000, 2_990_000),
+    median_degree=(5.0, 34.0),
 )
 
 

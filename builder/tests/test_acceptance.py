@@ -341,13 +341,57 @@ def _graph_at_scale(artist_count: int, edge_count: int) -> Graph:
     return _graph(names, degrees.tolist(), pop)
 
 
-def test_the_served_artifact_passes_its_own_acceptance_gate():
-    """The map the app serves must be admissible by the shipped bounds.
+LBA_A6_CANDIDATE = (87_394, 2_490_728)    # stage-2 README §3b; the 2026-09-21
+                                          # recalibration's centre
+LBD_A5V = (57_932, 1_681_254)             # LBA-A3, the LBA-G5 fallback
 
-    If this fails, the builder cannot reproduce production: `cmd_build` runs
-    `check_acceptance` BEFORE `serialise`, so a rejected build writes nothing.
+
+def test_the_current_calibration_target_passes_its_own_acceptance_gate():
+    """The artifact the bounds are calibrated FOR must be admissible.
+
+    If this fails, the builder cannot produce the map it is aimed at:
+    `cmd_build` runs `check_acceptance` BEFORE `serialise`, so a rejected
+    build writes nothing.
+
+    ⚠ The target is the `LBA-A6` CANDIDATE since the owner's recalibration of
+    2026-09-21, NOT the served map. The test below records what that costs.
     """
-    check_acceptance(_graph_at_scale(*SERVED_MAP), PRODUCTION_ACCEPTANCE)
+    check_acceptance(_graph_at_scale(*LBA_A6_CANDIDATE), PRODUCTION_ACCEPTANCE)
+
+
+# ⚠ ASSERTED, NOT OVERLOOKED. The 2026-09-21 recalibration centred the bounds
+# on the `LBA-A6` candidate, and the consequence is that the map the app
+# SERVES TODAY, and the fallback the `LBA-G5` use gate would revert to, are
+# both outside them. That is the `LUX-E1` drift shape deliberately re-entered:
+# a correct rebuild of either would be refused before `serialise` and written
+# nowhere.
+#
+# The owner was shown this before ruling and ruled anyway, which is his call.
+# It is asserted here rather than left implicit for one reason: when it next
+# bites, it must present as a RECORDED DECISION with a named remedy, not as a
+# mystery rejection of a build that everyone expects to work — which is
+# exactly how `LUX-E1` presented, and it cost a session to diagnose.
+#
+# THE REMEDY, if the use gate fails or the candidate is not adopted: restore
+# acceptance.py's PREVIOUS (MSW- restore 2026-09-05) line before rebuilding
+# either map. Then delete this test and restore the served-map one above.
+@pytest.mark.parametrize(
+    "label, counts",
+    [
+        ("the map the app serves today", SERVED_MAP),
+        ("LBA-A3 = LBD-A5V, the LBA-G5 fallback", LBD_A5V),
+    ],
+)
+def test_the_served_map_and_the_fallback_are_outside_the_current_bounds(
+    label, counts
+):
+    """A known, accepted cost of the 2026-09-21 recalibration — not a defect.
+
+    When this test starts FAILING, the bounds have been restored or moved
+    again, and the comment above says what that means.
+    """
+    with pytest.raises(ArtifactRejected):
+        check_acceptance(_graph_at_scale(*counts), PRODUCTION_ACCEPTANCE)
 
 
 # ⚠ Each of the three real artifacts below fails the EDGE bound as well as the
@@ -357,9 +401,20 @@ def test_the_served_artifact_passes_its_own_acceptance_gate():
 # including the one the owner's listening test rejected -- left this test GREEN.
 # The two synthetic rows isolate each bound by putting the OTHER count safely
 # inside its band, and they are what makes this test non-vacuous.
-NODE_FLOOR_ONLY = (40_000, 1_300_000)   # a fifth of the graph lost; edges fine
-NODE_CEILING_ONLY = (80_000, 1_300_000)  # a bigger population; edges fine
-EDGE_FLOOR_ONLY = (58_838, 900_000)      # the cap-rule revert signature
+#
+# ⚠ RE-DERIVED 2026-09-21 for the recalibrated band. The previous three rows
+# were isolating under the OLD bounds and stopped being so under the new ones
+# — (80_000, 1_300_000) was built to fail the node ceiling alone, but under
+# the new band its node count is INSIDE and its edge count is below the new
+# floor, so it would have been rejected on the wrong bound and the test would
+# have stayed green while testing nothing. Re-deriving them is not tidying:
+# it is the whole reason the rows exist.
+NODE_FLOOR_ONLY = (54_915, 2_490_728)    # a third of the graph lost; edges fine
+NODE_CEILING_ONLY = (119_873, 2_490_728)  # a bigger population; edges fine
+EDGE_FLOOR_ONLY = (87_394, 1_245_364)    # the cap-rule revert signature at the
+                                         # candidate's own node count: roughly
+                                         # half the CSR entries, which is what
+                                         # a reciprocal cap rule produces
 
 
 @pytest.mark.parametrize(
@@ -368,18 +423,25 @@ EDGE_FLOOR_ONLY = (58_838, 900_000)      # the cap-rule revert signature
         ("JFX-B, the reverted CXA- adoption", JFX_B),
         ("the retired pre-MSW mutual-kNN map", RETIRED_MUTUAL_KNN),
         ("mutual-kNN of the extended archive", EXTENDED_MUTUAL_KNN),
-        ("a build that silently lost a fifth of the graph", NODE_FLOOR_ONLY),
+        ("a build that silently lost a third of the graph", NODE_FLOOR_ONLY),
         ("a build over the node ceiling", NODE_CEILING_ONLY),
-        ("a cap-rule revert at the served node count", EDGE_FLOOR_ONLY),
+        ("a cap-rule revert at the candidate's node count", EDGE_FLOOR_ONLY),
     ],
 )
-def test_bounds_reject_every_artifact_that_is_not_the_served_map(label, counts):
+def test_bounds_reject_every_artifact_that_is_not_the_calibration_target(
+    label, counts
+):
     """Sensitivity, checked against known artifacts rather than one centre.
 
     The third row is the CAP-RULE tripwire: it differs from JFX-B by the cap
     rule alone, and the EDGE floor is the only bound that can see it — its
     node count sits inside the band. Weaken the edge floor and a silent
     cap-rule revert ships.
+
+    ⚠ Under the 2026-09-21 band the edge floor is the ONLY bound rejecting the
+    first three rows: the node band admits all of them, JFX-B included. The
+    node bound's own sensitivity therefore rests entirely on the two synthetic
+    rows above, which is why they were re-derived rather than left alone.
     """
     with pytest.raises(ArtifactRejected):
         check_acceptance(_graph_at_scale(*counts), PRODUCTION_ACCEPTANCE)
