@@ -1,0 +1,31 @@
+{
+  "task": "LBA- \u00a78 item 1 \u2014 the fame stage over P for the LBA-A6 candidate",
+  "run_utc": "2026-09-21T20:49:55.935670+00:00",
+  "arm": "LBA-A6",
+  "population_rule": "P",
+  "plain_sentence": "every artist the deeper crawl found, at the two-listener bar",
+  "source_archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\S4-A6",
+    "manifest_sha256_before": "950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3",
+    "manifest_sha256_after": "950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3",
+    "unchanged": true,
+    "opened": "ReadOnlyArchive (GRT-A1) \u2014 every write raises"
+  },
+  "fame_archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\S4-A6-fame",
+    "why_separate": "the shipped fame stage writes into the archive it is given; S4-A6 is a pinned instrument input behind committed stage-2 and stage-3 results, so the records go beside it and the build composes the two read-only (FameOverlayArchive, LBD-AM5-4's pattern)"
+  },
+  "mbid_set": {
+    "n": 87764,
+    "rule": "archive_artists(...) \u2014 exactly what the shipped cmd_fame uses; a superset of the built node set so load_fame cannot come up short"
+  },
+  "report": {
+    "fetched": 87764,
+    "nulls": 3,
+    "skipped": 0,
+    "total": 87764,
+    "elapsed_s": 79.6
+  },
+  "drop_list": "unlistenable_drop_algb_20260809.json",
+  "script_sha256": "ddc79d700dada7ab1dbee20cf66da49b99b0536c6ca12cbcbf437bd08dbd4d3c"
+}

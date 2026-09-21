@@ -1,0 +1,174 @@
+{
+  "task": "LBA- \u00a78 items 1-2 \u2014 the LBA-A6 candidate build with fame and clip/streaming ids",
+  "run_utc": "2026-09-21T21:25:46.938857+00:00",
+  "arm": "LBA-A6",
+  "plain_sentence": "every artist the deeper crawl found, at the two-listener bar",
+  "population_rule": "P",
+  "threshold": 3,
+  "pairing": {
+    "form": "ListenBrainz's own \u2014 once per PAIR OF PLAYS within a session",
+    "why": "LBA-D1, the owner's ruling of 2026-09-14: it is the only form with any listening evidence behind it, and both LBL- blind listens were run on maps derived that way, so a listen-based judgment transfers to this arm and to no other. The cheaper session-collapsed form is barred for S4 unless it gets its own blind listen.",
+    "bar": "LBD-X6 stands. Its condition was discharged 2026-09-13 and R10 FIRED, which confirmed the bar rather than lifting it. Nothing here licenses a sentence about the cheaper form.",
+    "derived_from": "T (sha256 03d47b05\u2026), never T_A4"
+  },
+  "filter": "on, inert (20260809)",
+  "drop_list": "unlistenable_drop_algb_20260809.json",
+  "config_delta_from_stage2": [
+    "require_fame"
+  ],
+  "source_archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\S4-A6",
+    "manifest_sha256_before": "950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3",
+    "manifest_sha256_after": "950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3",
+    "unchanged": true
+  },
+  "fame_archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\S4-A6-fame"
+  },
+  "built": {
+    "nodes": 87394,
+    "csr_entries": 2490728,
+    "wall_clock_s": 1001.8,
+    "serialised_bytes": 37986239,
+    "bare_serialised_bytes": 30261096
+  },
+  "structural_identity": {
+    "bare_sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+    "stage2_bare_sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+    "byte_identical": true,
+    "method": "re-serialise the candidate with its five additive lists emptied and compare to LBA-A6-bare.bin, which stage 2 produced from its own build by exactly that method (s4_bare_copy.py). Covers node ORDER and all four CSR arrays plus names, disambiguations and pop_raw in one comparison.",
+    "fields_checked_against_stage2_artifact": [
+      "mbids",
+      "names",
+      "disambiguations",
+      "deezer_ids",
+      "spotify_ids",
+      "apple_ids",
+      "artist_facts",
+      "offsets",
+      "neighbours",
+      "scores",
+      "edge_types",
+      "pop_raw"
+    ],
+    "fields_differing": []
+  },
+  "fame": {
+    "nodes_with_a_measured_count": 87391,
+    "nodes": 87394,
+    "nulls": 3,
+    "note": "a null is a MEASURED ABSENCE and is never a floor value (FAM-AM1.8)"
+  },
+  "id_coverage": {
+    "deezer_ids": 35720,
+    "spotify_ids": 44778,
+    "apple_ids": 32768,
+    "artist_facts": 64274
+  },
+  "acceptance": {
+    "criteria": "PRODUCTION_ACCEPTANCE, UNMODIFIED \u2014 no bound widened, none proposed",
+    "criteria_fields_covered": [
+      "canonical_names",
+      "edge_count",
+      "famous_median_degree_floor",
+      "famous_min_degree_floor",
+      "famous_sample",
+      "median_degree",
+      "node_count"
+    ],
+    "raised_ArtifactRejected": true,
+    "problems_as_the_shipped_check_reports_them": [
+      "artifact rejected; not written:",
+      "  - artist count 87394 outside bounds [47000, 71000]",
+      "  - edge count 2490728 outside bounds [1050000, 1580000]",
+      "  - median degree 26.0 outside bounds [5.0, 25.0]"
+    ],
+    "bounds": [
+      {
+        "bound": "famous median degree",
+        "measured": 49.0,
+        "floor": 25.0,
+        "ceiling": null,
+        "unit": "degree",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "famous min degree",
+        "measured": 23,
+        "floor": 8,
+        "ceiling": null,
+        "unit": "degree",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "artists with no name",
+        "measured": 0,
+        "floor": null,
+        "ceiling": 0,
+        "unit": "artists",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "canonical artists absent from the largest component",
+        "measured": 0,
+        "floor": null,
+        "ceiling": 0,
+        "unit": "artists",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "node count",
+        "measured": 87394,
+        "floor": 47000,
+        "ceiling": 71000,
+        "unit": "artists",
+        "kind": "tripwire",
+        "passes": false,
+        "margin_if_failed": "16,394 above the ceiling (123.1% of it)"
+      },
+      {
+        "bound": "edge count",
+        "measured": 2490728,
+        "floor": 1050000,
+        "ceiling": 1580000,
+        "unit": "CSR entries",
+        "kind": "tripwire",
+        "passes": false,
+        "margin_if_failed": "910,728 above the ceiling (157.6% of it)"
+      },
+      {
+        "bound": "median degree",
+        "measured": 26.0,
+        "floor": 5.0,
+        "ceiling": 25.0,
+        "unit": "degree",
+        "kind": "tripwire",
+        "passes": false,
+        "margin_if_failed": "1 above the ceiling (104.0% of it)"
+      }
+    ],
+    "failing": [
+      "node count",
+      "edge count",
+      "median degree"
+    ],
+    "passing": [
+      "famous median degree",
+      "famous min degree",
+      "artists with no name",
+      "canonical artists absent from the largest component"
+    ],
+    "note": "\u00a78 item 2: a candidate at any population above V breaches the node bound BY CONSTRUCTION. That breach is a decision, not a bug, and it is the owner's (his 2026-09-05 LUX-4 ruling). This script stops here."
+  },
+  "serialised": false,
+  "why_not_serialised": "\u00a78 item 2 reserves acceptance recalibration to the owner. This script refuses --serialise without --acceptance-ruling.",
+  "script_sha256": "19d89a16d145900cc194a0cd8f67c49631a8b9a9f0508db27f04e57aabb4c811"
+}

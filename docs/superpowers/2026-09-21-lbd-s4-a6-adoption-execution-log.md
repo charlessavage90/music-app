@@ -97,3 +97,78 @@ before it is relied on:
 
 No build, no journey, no listen design, no default changed, no shipped code touched, no `LBD-` or
 `LBA-` criterion re-read. `ApiConfig.graph_path` untouched.
+
+---
+
+## Task 2 — the candidate build, §8 items 1–3
+
+**Figures are owned by [`../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md)
+and by the two result JSONs beside it. None is restated here or in `NEXT.md`.**
+
+### The one design decision that mattered: fame must not be fetched into stage 2's archive
+
+The shipped `fame` stage writes `fame/<mbid>.json` **into the archive it is given**. Stage 2's
+`S4-A6` archive is a pinned instrument input behind committed stage-2 and stage-3 results, so
+running the stage against it would have mutated a pinned artifact and silently invalidated every
+figure those two stages recorded — the failure would have made no noise at all.
+
+**Resolution, and it is reuse rather than invention:** the fame records go into a separate
+directory, and the build composes the two halves read-only through a `FameOverlayArchive`. That is
+`lbv_build.py`'s pattern (`LBD-AM5-4`), which did the same thing for `LBD-A0V` and `LBD-A5V`. Both
+halves are wrapped in `ReadOnlyArchive` (`GRT-A1`) and the overlay refuses writes itself, so the
+composition cannot become the hole in the guard. `S4-A6`'s `MANIFEST.json` sha256 is asserted
+**before and after** both the fetch and the build.
+
+### Step 6 of the refresh procedure is NOT owed at `P`, and the reasoning is recorded because a frozen document reads the other way
+
+Stage-3 README §9 option C says a `P`-row go commits to *"a re-census and a fame fetch over a
+larger population"*. **The re-census half does not fire here.** `unlistenable_drop_algb_20260809.json`
+already censused `P` with **0 uncovered** (`LBD-AM4-3`; the `LBD-` prereg §10 table records it),
+which is why stage 2 could build this arm with the filter `on, inert (20260809)` in the first
+place. `LBA-G3` fired on the **union** of all nine populations — overwhelmingly the `U` row — not
+on `P`. Option C's step 6 is the general refresh step for a *new* population, not a prerequisite
+for this candidate. That is methodology and therefore this session's; it is written down because
+the frozen document reads the other way and a later reader will hit the same sentence.
+
+### The structural proof is one sha256, deliberately
+
+The candidate is re-serialised with its five additive lists emptied and compared to
+`LBA-A6-bare.bin`, which stage 2 produced from its own build by exactly that method
+(`s4_bare_copy.py`). Byte equality proves node **order** and all four CSR arrays plus names,
+disambiguations and `pop_raw` in a single comparison. The field-by-field comparison against stage
+2's `LBA-A6.bin` runs as well, because a sha tells you **that** something moved and never
+**which**.
+
+### A defect in this session's own instrument, found and fixed before the result was reported
+
+**The first run's acceptance table was incomplete.** `acceptance_report` tabulated the four bounds
+its author expected to matter and silently omitted the global `median_degree` band — which
+**failed**. The shipped `check_acceptance`'s own output named three failures; the table named two.
+Nothing downstream would have caught it, because the table looked complete.
+
+**It was caught only because the script prints the shipped check's verdict verbatim beside its own
+table.** That redundancy was not foresight — it was there to quote the canonical wording — and it
+is the reason this is a corrected instrument rather than a wrong report.
+
+**The fix is structural, not a patched row.** The report now mirrors `check_acceptance` check for
+check, and asserts its covered field set against `AcceptanceCriteria`'s dataclass fields, so a
+criterion added later cannot go untabulated. It also refuses if its own `failing` list disagrees
+with whether the shipped check raised. **A hand-written list of "the bounds that matter" is the
+same defect class as a restated figure that has gone stale** — this project's standing rule
+applied to a table instead of a number. The build was re-run from scratch rather than the JSON
+patched; it is deterministic, so the figures reproduce.
+
+### Bars honoured
+
+No journey generated on either map. No listen designed (`LBA-D3`). No deploy. `ApiConfig.graph_path`
+untouched. No `LBD-` or `LBA-` criterion re-read. Both `LBL-` verdicts untouched. The `P` drop
+payload is `unlistenable_drop_algb_20260809.json` and no other. Nothing written under
+`builder/scratch/`. Pairing is recorded in the result JSON rather than inferred from the config
+(`LBD-D6`).
+
+### Stopped, deliberately, at §8 item 2
+
+The candidate fails `PRODUCTION_ACCEPTANCE`. **No bound was widened and none is proposed**; the
+script refuses `--serialise` unless `--acceptance-ruling` carries a decision the owner has actually
+given. **§8 item 3 (manifest pinning) is therefore not reached** — it operates on a serialised
+artifact, and there is none. Both items resume in minutes once he rules.
