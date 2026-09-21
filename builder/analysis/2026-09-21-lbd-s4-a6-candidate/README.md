@@ -185,3 +185,41 @@ before rebuilding either map.
 - **Acceptance passing says nothing about whether the map is good.** It says the build is not
   malformed and is the shape the bounds were aimed at — which is, since 2026-09-21, this
   candidate.
+
+## 8. Running it locally for `LBA-G5` — the owner's gate
+
+⛔ **Nothing here deploys.** `ApiConfig.graph_path` is unchanged, so without `ARTISTPATH_GRAPH`
+the API still boots the served map. This points one local process at the candidate.
+
+**Terminal 1 — the API.** The checksum is read out of the sidecar by the command itself, never
+typed (`DEP-24`):
+
+```powershell
+cd C:\dev\music-app\api
+$env:ARTISTPATH_GRAPH = "C:\unsung-fast\lbd-artifacts\LBA-A6-candidate.bin"
+$env:ARTISTPATH_GRAPH_SHA256 = (Get-Content "$($env:ARTISTPATH_GRAPH).json" -Raw | ConvertFrom-Json).sha256
+$env:UV_LINK_MODE = "copy"
+uv run uvicorn artistpath_api.app:build_default_app --factory --port 8000
+```
+
+**Terminal 2 — the frontend**, which proxies `/api` to port 8000:
+
+```powershell
+cd C:\dev\music-app\frontend
+npm run dev
+```
+
+Then open the URL Vite prints (normally `http://localhost:5173`).
+
+**Confirm you are on the candidate, not the served map**, before judging anything:
+
+```powershell
+(Invoke-RestMethod http://localhost:8000/api/meta)
+```
+
+`artists` must read **87,394** and `graph_sha256` must start **`28311d81`**. If it says 58,838 you
+are on the served map and the environment variable did not take.
+
+**Verified before being written here:** the boot path was exercised with exactly these values —
+87,394 artists loaded, the fame ranking present, 43,730 Deezer ids — and a deliberately wrong
+checksum was confirmed to refuse the boot, so the guard is real rather than decorative.
