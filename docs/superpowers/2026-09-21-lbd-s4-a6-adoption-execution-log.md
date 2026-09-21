@@ -287,3 +287,58 @@ The deferral is *"before an `ALG-B` artifact is ever served, re-extract over its
 re-extract **remains armed**: `graph-msw-tu50.bin` is still served, and while the new maps cover
 every artist it contains, the deferral's condition is about the lineage and not about this
 candidate. A session that reads this as fully discharged has over-read it.
+
+---
+
+## Task 5 — the rebuild, §8 item 3, and two of this session's own defects
+
+**Figures: the candidate README.** The artifact is `LBA-A6-candidate.bin` — a NEW name, chosen so
+that stage 2's `LBA-A6.bin`, a pinned input behind committed results, cannot be overwritten.
+
+### The structural proof survived the re-extraction, which is the point of it
+
+Rebuilt with the new package data: the bare re-serialisation is **still byte-identical** to stage
+2's `LBA-A6-bare.bin`, and the eight structural fields are unchanged. **Neither fame nor the new id
+maps moved the map.** The four metadata id lists differ, as they must.
+
+### `DEP-24` is honoured mechanically rather than by care
+
+`ARTISTPATH_GRAPH_SHA256` is **read back out of the written sidecar** and verified against the
+file on disk before the run is called a success. Nothing transcribes it, and nothing carries it
+from the variable that wrote it.
+
+### Two guards on serialisation, and they ask different questions
+
+`--serialise` refuses without `--acceptance-ruling` — *did he decide?* — and refuses again if
+`check_acceptance` still rejects the build — *was the decision actually implemented in
+`acceptance.py`?* Keeping them separate is what makes it impossible for a ruling about
+**recalibrating bounds** to be discharged by **bypassing the check**, which is a different act
+with the same immediate effect.
+
+### Defect 1 — I guessed an attribute name instead of reading it
+
+The first serialising run built for 11.7 minutes, passed every check, wrote the artifact and the
+sidecar, and then died on `store.fame_lb`, which `GraphStore` does not have. It keeps
+**`fame_lb_pctl`**, the percentile ranking.
+
+**The correction is better than what I intended.** The check now asserts the *ranking* is present
+and correctly sized — which is the exact quantity `LBA-AM4` says the candidate acquires at §8 item
+1 and that no `LBA-` arm could measure. A candidate with no fame ranking would make `LBA-G5` test
+something other than what the amendment says it tests.
+
+⚠ **And the resulting number needs its caveat carried.** `fame_percentiles` gives a measured null
+**0.0** — maximal obscurity under the novelty construct — while excluding it from the frame, so no
+NaN survives and the count equals N. **It is not the measured count**, which is 87,391 of 87,394.
+Both are in `cand_build.json`; a reader taking the first for the second would conclude the
+instrument measured three artists it did not.
+
+### Defect 2 — a closing line that printed a false statement
+
+The script ended by printing *"STOPPING before serialisation"* unconditionally, so the successful
+serialising run announced that it had stopped before serialising, in the same output that recorded
+the artifact and its checksum. Harmless to the artifact and corrosive to the record — the run log
+is what a later session reads. Made conditional.
+
+**Both defects are the same shape as the acceptance-table one earlier in this session:** an
+instrument reporting something other than what it did. None of the three touched an artifact; all
+three touched what the record would have said about one.

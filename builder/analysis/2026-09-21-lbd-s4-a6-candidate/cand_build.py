@@ -4,12 +4,18 @@ is structurally identical to stage 2's build, and check it against `PRODUCTION_A
 THIS IS THE FIRST BUILD IN THE WHOLE TRACK THAT IS A CANDIDATE FOR SERVING. Every build before it
 pinned `require_fame=False` and was an experimental control (`LBD-D7`, `LBA-D5`).
 
-WHAT IT DELIBERATELY DOES NOT DO: it does not serialise, does not write a manifest, and does not
-widen a single acceptance bound. §8 item 2 reserves recalibration to the owner — his ruling of
+IT NEVER WIDENS AN ACCEPTANCE BOUND. §8 item 2 reserves recalibration to the owner — his ruling of
 2026-09-05 (`LUX-4`) makes moving a bound so a NEW artifact can be adopted risk acceptance and
 therefore his — and a candidate at any population above `V` breaches the node bound BY
-CONSTRUCTION. So this script reports exactly which bounds fail and by how much, and stops.
-`--serialise` refuses unless `--acceptance-ruling` records a decision he has actually given.
+CONSTRUCTION. Run bare, it reports exactly which bounds fail and by how much, and stops.
+
+`--serialise` (§8 item 3) refuses without `--acceptance-ruling`, and refuses again if the shipped
+`check_acceptance` still rejects the build: **the owner's ruling covers recalibrating the bounds
+in `acceptance.py`, never bypassing the check here.** The two guards are separate on purpose — the
+first asks whether he decided, the second asks whether the decision was actually implemented.
+`ARTISTPATH_GRAPH_SHA256` is READ BACK from the written sidecar and verified against the file on
+disk, never carried from a variable and never transcribed (`DEP-24`), and the artifact is reloaded
+through the shipped `GraphStore` the way the api will (§6 step 10).
 
 THE STRUCTURAL PROOF, and it is a single sha256 rather than a list of assertions. The candidate is
 re-serialised with its five additive metadata lists emptied and the bytes compared to
@@ -53,9 +59,11 @@ from artistpath_builder.acceptance import (  # noqa: E402
     _famous_order,
     check_acceptance,
 )
+import artistpath_api.graph_store as gs  # noqa: E402
 from artistpath_builder.archive import LocalArchive  # noqa: E402
 from artistpath_builder.artifact import deserialise, serialise  # noqa: E402
 from artistpath_builder.config import CANDIDATE_ALGORITHM, BuilderConfig  # noqa: E402
+from artistpath_builder.manifest import build_manifest, write_manifest  # noqa: E402
 from artistpath_builder.pipeline import build_from_archive  # noqa: E402
 from dcf_ceiling_sweep import ArchiveWriteRefused, ReadOnlyArchive  # noqa: E402
 from lbd_source import LbdBulkSource  # noqa: E402
@@ -68,6 +76,8 @@ OUT = HERE / "cand_build.json"
 
 STAGE2_ARTIFACT = ARTIFACTS / "LBA-A6.bin"
 STAGE2_BARE = ARTIFACTS / "LBA-A6-bare.bin"
+# The candidate itself. A NEW name: stage 2's LBA-A6.bin is a pinned input and is never touched.
+ARTIFACT = ARTIFACTS / "LBA-A6-candidate.bin"
 # All three from stage 2's own records; never re-derived here.
 ARCHIVE_MANIFEST_SHA = "950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3"
 STAGE2_ARTIFACT_SHA = "199b9e20a2fea4d998043bca83ed2f10a3696f84f3e5399f960834770f8f290e"
@@ -292,28 +302,53 @@ def main(argv: list[str] | None = None) -> int:
     print(f"[cand] bare re-serialisation sha256 {bare_sha[:16]}…  "
           f"{'IDENTICAL to' if identical else 'DIFFERS FROM'} stage 2's LBA-A6-bare.bin", flush=True)
 
+    # TWO CLASSES, and conflating them was a real risk once the id maps were re-extracted.
+    #
+    # STRUCTURAL fields ARE the map: node order, the four CSR arrays, names, disambiguations and
+    # popularity. Attaching fame or ids must not move ANY of them, and the bare sha above already
+    # proves it in one comparison — this loop exists to say WHICH, because a sha cannot.
+    #
+    # METADATA id fields are EXPECTED to differ from stage 2's artifact after the owner's
+    # 2026-09-21 re-extraction, and an earlier version of this script refused on exactly that.
+    # They are reported as a delta, never as a failure. The bare comparison is unaffected because
+    # it empties all five additive lists before serialising — which is why it is the proof.
     stage2 = deserialise(STAGE2_ARTIFACT.read_bytes())
-    fields_checked, fields_differing = [], []
-    for field in ("mbids", "names", "disambiguations", "deezer_ids", "spotify_ids",
-                  "apple_ids", "artist_facts"):
-        fields_checked.append(field)
+    STRUCTURAL_LISTS = ("mbids", "names", "disambiguations")
+    STRUCTURAL_ARRAYS = ("offsets", "neighbours", "scores", "edge_types")
+    METADATA_LISTS = ("deezer_ids", "spotify_ids", "apple_ids", "artist_facts")
+
+    structural_checked, structural_differing = [], []
+    for field in STRUCTURAL_LISTS:
+        structural_checked.append(field)
         if list(getattr(graph, field)) != list(getattr(stage2, field)):
-            fields_differing.append(field)
-    for field in ("offsets", "neighbours", "scores", "edge_types"):
-        fields_checked.append(field)
+            structural_differing.append(field)
+    for field in STRUCTURAL_ARRAYS:
+        structural_checked.append(field)
         if not np.array_equal(np.asarray(getattr(graph, field)),
                               np.asarray(getattr(stage2, field))):
-            fields_differing.append(field)
-    fields_checked.append("pop_raw")
+            structural_differing.append(field)
+    structural_checked.append("pop_raw")
     if not np.array_equal(np.asarray(graph.pop_raw, dtype=np.float64),
                           np.asarray(stage2.pop_raw, dtype=np.float64)):
-        fields_differing.append("pop_raw")
-    print(f"[cand] field-by-field vs stage 2's LBA-A6.bin: {len(fields_checked)} checked, "
-          f"{len(fields_differing)} differing {fields_differing}", flush=True)
-    if not identical or fields_differing:
+        structural_differing.append("pop_raw")
+
+    metadata_delta = {}
+    for field in METADATA_LISTS:
+        before = sum(1 for v in getattr(stage2, field) if v)
+        after = sum(1 for v in getattr(graph, field) if v)
+        metadata_delta[field] = {"stage2_artifact": before, "candidate": after,
+                                 "delta": after - before}
+
+    print(f"[cand] STRUCTURAL vs stage 2's LBA-A6.bin: {len(structural_checked)} checked, "
+          f"{len(structural_differing)} differing {structural_differing}", flush=True)
+    for field, d in metadata_delta.items():
+        print(f"[cand] metadata  {field:<14} {d['stage2_artifact']:>7,} -> {d['candidate']:>7,} "
+              f"({d['delta']:+,})", flush=True)
+
+    if not identical or structural_differing:
         raise SystemExit(
-            "REFUSING: attaching fame and ids moved the map. Nothing downstream is trustworthy "
-            f"if this fires. bare-identical={identical} differing={fields_differing}"
+            "REFUSING: attaching fame and ids moved the MAP. Nothing downstream is trustworthy "
+            f"if this fires. bare-identical={identical} structural_differing={structural_differing}"
         )
 
     fame_present = sum(1 for v in graph.fame_lb_raw if v is not None)
@@ -328,6 +363,100 @@ def main(argv: list[str] | None = None) -> int:
         flag = "PASS" if r["passes"] else "FAIL"
         print(f"[cand] acceptance {flag}  {r['bound']:<24} measured {r['measured']:>12,.1f}  "
               f"floor {r['floor']}  ceiling {r['ceiling']}  {r['margin_if_failed']}", flush=True)
+
+    # --- §8 item 3: serialise, manifest, sidecar, round-trip -----------------------------------
+    serialised = None
+    if args.serialise:
+        if acceptance["raised_ArtifactRejected"]:
+            raise SystemExit(
+                "REFUSING to serialise: the shipped check still rejects this build.\n  "
+                + "\n  ".join(acceptance["problems_as_the_shipped_check_reports_them"])
+                + "\nThe owner's ruling covers RECALIBRATING the bounds, not bypassing the check. "
+                  "Move the bounds in acceptance.py and re-run, or do not serialise."
+            )
+        payload = serialise(graph)
+        ARTIFACT.write_bytes(payload)
+        manifest = build_manifest(
+            graph, config, payload, elapsed,
+            build_inputs={
+                "arm": "LBA-A6",
+                "plain_sentence": "every artist the deeper crawl found, at the two-listener bar",
+                "population_rule": "P",
+                "threshold": 3,
+                "pairing": PAIRING,
+                "filter": "on, inert (20260809)",
+                "drop_list": DROP_LIST,
+                "similarity_archive": {"root": str(ARCHIVE),
+                                       "manifest_sha256": archive_before},
+                "fame_archive": {"root": str(FAME_DIR)},
+                "structural_identity": {
+                    "bare_sha256": bare_sha,
+                    "identical_to": "stage 2's LBA-A6-bare.bin",
+                },
+                "acceptance": {
+                    "criteria": "PRODUCTION_ACCEPTANCE as recalibrated 2026-09-21",
+                    "owner_ruling": args.acceptance_ruling,
+                },
+                "governing_document":
+                    "docs/superpowers/specs/2026-09-14-lbd-s4-adoption-preregistration.md §8, "
+                    "with §11 LBA-AM4's LBA-G5 use gate between items 3 and 4",
+            },
+        )
+        write_manifest(ARTIFACT, manifest)
+        sidecar = ARTIFACT.with_suffix(ARTIFACT.suffix + ".json")
+
+        # DEP-24: the checksum is READ BACK from the sidecar, never carried from the variable
+        # above and never transcribed. If these two ever disagree the sidecar is what boots.
+        recorded = json.loads(sidecar.read_text(encoding="utf-8"))["sha256"]
+        on_disk = sha256_of(ARTIFACT)
+        if recorded != on_disk:
+            raise SystemExit(
+                f"REFUSING: sidecar sha256 {recorded} != the file on disk {on_disk}"
+            )
+
+        # §6 step 10: reload through the SHIPPED GraphStore, the way the api will.
+        store = gs.GraphStore.load(ARTIFACT)
+        if list(store.mbids) != list(graph.mbids):
+            raise SystemExit("REFUSING: the round-tripped artifact's node order is not the build's")
+        if store.artist_count != n:
+            raise SystemExit("REFUSING: the round-tripped artifact's artist count is not the build's")
+        # `GraphStore` does not keep raw fame — it keeps `fame_lb_pctl`, the percentile
+        # RANKING computed over the artifact's own population (`graph_store.fame_percentiles`).
+        # Asserting that is the sharper check: it is the exact quantity `LBA-AM4` says this
+        # candidate acquires at §8 item 1 and that no `LBA-` arm could measure, because every
+        # arm built `require_fame=False`. If it is None here, the artifact carries no fame and
+        # the use gate would be run against a map without the mechanism it exists to test.
+        if store.fame_lb_pctl is None:
+            raise SystemExit(
+                "REFUSING: the round-tripped artifact carries no fame ranking. The candidate "
+                "must carry fame_lb for LBA-G5 to be testing what LBA-AM4 says it tests."
+            )
+        if len(store.fame_lb_pctl) != n:
+            raise SystemExit(
+                f"REFUSING: fame_lb_pctl has {len(store.fame_lb_pctl)} entries for {n} nodes"
+            )
+        round_trip_fame = int(np.count_nonzero(~np.isnan(store.fame_lb_pctl)))
+
+        serialised = {
+            "artifact": str(ARTIFACT),
+            "sidecar": str(sidecar),
+            "bytes": len(payload),
+            "sha256_from_sidecar": recorded,
+            "sha256_verified_against_file": on_disk == recorded,
+            "round_trip": {
+                "loaded_through": "the shipped api GraphStore",
+                "artists": store.artist_count,
+                "node_order_matches_build": True,
+                "fame_ranking_present": True,
+                "nodes_with_a_fame_percentile": round_trip_fame,
+                "note": "equals N by design and is NOT the measured count: graph_store.fame_percentiles gives a measured NULL 0.0 — genuine maximal obscurity under the novelty construct — while EXCLUDING it from the frame, so no NaN survives. The measured count is fame.nodes_with_a_measured_count above.",
+            },
+            "owner_ruling": args.acceptance_ruling,
+        }
+        print(f"[cand] serialised {len(payload) / 1e6:.1f} MB -> {ARTIFACT.name}", flush=True)
+        print(f"[cand] sidecar written; sha256 READ BACK from it: {recorded}", flush=True)
+        print(f"[cand] round-trip through the shipped GraphStore: {store.artist_count:,} artists, "
+              f"{round_trip_fame:,} fame records", flush=True)
 
     OUT.write_text(json.dumps({
         "task": "LBA- §8 items 1-2 — the LBA-A6 candidate build with fame and clip/streaming ids",
@@ -353,21 +482,30 @@ def main(argv: list[str] | None = None) -> int:
                       "to LBA-A6-bare.bin, which stage 2 produced from its own build by exactly "
                       "that method (s4_bare_copy.py). Covers node ORDER and all four CSR arrays "
                       "plus names, disambiguations and pop_raw in one comparison.",
-            "fields_checked_against_stage2_artifact": fields_checked,
-            "fields_differing": fields_differing,
+            "structural_fields_checked_against_stage2_artifact": structural_checked,
+            "structural_fields_differing": structural_differing,
+            "metadata_id_delta_vs_stage2_artifact": metadata_delta,
+            "why_metadata_may_differ": "the owner's 2026-09-21 re-extraction repointed the three "
+                                       "id/fact maps at new dated package data. Those lists are "
+                                       "EXPECTED to differ from stage 2's artifact; the bare "
+                                       "comparison empties all five before serialising, which is "
+                                       "why it remains the structural proof.",
         },
         "fame": {"nodes_with_a_measured_count": fame_present, "nodes": n,
                  "nulls": n - fame_present,
                  "note": "a null is a MEASURED ABSENCE and is never a floor value (FAM-AM1.8)"},
         "id_coverage": ids,
         "acceptance": acceptance,
-        "serialised": False,
-        "why_not_serialised": "§8 item 2 reserves acceptance recalibration to the owner. This "
-                              "script refuses --serialise without --acceptance-ruling.",
+        "serialised": serialised,
         "script_sha256": sha256_of(Path(__file__)),
     }, indent=2), encoding="utf-8")
     print(f"[cand] wrote {OUT.name}", flush=True)
-    print("[cand] STOPPING before serialisation — the failing bounds are the owner's ruling.", flush=True)
+    if serialised is None:
+        print("[cand] STOPPING before serialisation — the failing bounds are the owner's ruling.",
+              flush=True)
+    else:
+        print(f"[cand] §8 items 1-3 complete. ARTISTPATH_GRAPH_SHA256 is in "
+              f"{Path(serialised['sidecar']).name}; do not transcribe it (DEP-24).", flush=True)
     return 0
 
 
