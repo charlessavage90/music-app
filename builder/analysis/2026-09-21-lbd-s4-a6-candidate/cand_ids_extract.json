@@ -1,0 +1,122 @@
+{
+  "task": "re-extract the id and fact maps over the LBA-A6 candidate's population",
+  "ruling": "the owner's, 2026-09-21 \u2014 partially discharges NEXT.md's LUX-4 deferral",
+  "run_utc": "2026-09-21T22:14:33.557601+00:00",
+  "dump": "MusicBrainz JSON artist dump, 2026-07-28 (the same dump the 2026-08-02 and 2026-09-05 extractions read)",
+  "population": {
+    "rule": "union of the LBA-A6 candidate's node set (87,394, from LBA-A6-bare.bin f35cb19d...), the served artifact graph-msw-tu50.bin (43dd82bb...), and every key the 2026-08-02 and 2026-09-05 maps already held. Strictly additive: no lineage this project has ever built loses an id it previously had.",
+    "candidate": 87394,
+    "served": 58838,
+    "prior_map_keys": 90552,
+    "total": 112855,
+    "candidate_only_artists": 29485
+  },
+  "one_knob": "population only. Deezer keeps dsp_ids.py's original numeric-tail rule with no is_artist_url check; adding it would be a second column and is deferred.",
+  "scan": {
+    "dump_rows": 2945470,
+    "matched": 112855,
+    "elapsed_s": 131.3,
+    "rejected_relations": {
+      "apple": 58,
+      "spotify": 180,
+      "deezer": 4
+    }
+  },
+  "strictly_additive": {
+    "lost_from_shipped_maps": {
+      "deezer": 0,
+      "spotify": 0,
+      "apple": 0,
+      "artist_facts": 0
+    }
+  },
+  "coverage": {
+    "deezer_ids": {
+      "map_size": {
+        "before": 39465,
+        "after": 47504
+      },
+      "served_map_pct": {
+        "before": 55.22,
+        "after": 57.13
+      },
+      "candidate_pct": {
+        "before": 40.87,
+        "after": 50.04
+      },
+      "added_artists_pct": {
+        "before": 11.41,
+        "after": 34.87
+      },
+      "candidate_count_after": 43730
+    },
+    "spotify_ids": {
+      "map_size": {
+        "before": 52421,
+        "after": 61636
+      },
+      "served_map_pct": {
+        "before": 69.07,
+        "after": 69.07
+      },
+      "candidate_pct": {
+        "before": 51.24,
+        "after": 61.78
+      },
+      "added_artists_pct": {
+        "before": 15.25,
+        "after": 46.5
+      },
+      "candidate_count_after": 53993
+    },
+    "apple_ids": {
+      "map_size": {
+        "before": 35888,
+        "after": 42074
+      },
+      "served_map_pct": {
+        "before": 50.85,
+        "after": 50.85
+      },
+      "candidate_pct": {
+        "before": 37.49,
+        "after": 44.57
+      },
+      "added_artists_pct": {
+        "before": 10.1,
+        "after": 31.08
+      },
+      "candidate_count_after": 38954
+    },
+    "artist_facts": {
+      "map_size": {
+        "before": 89090,
+        "after": 109147
+      },
+      "served_map_pct": {
+        "before": 97.22,
+        "after": 97.22
+      },
+      "candidate_pct": {
+        "before": 73.55,
+        "after": 96.5
+      },
+      "added_artists_pct": {
+        "before": 26.99,
+        "after": 95.02
+      },
+      "candidate_count_after": 84331
+    }
+  },
+  "written": {
+    "deezer": "C:\\dev\\music-app\\builder\\src\\artistpath_builder\\data\\deezer_artist_ids_20260921.json",
+    "dsp": "C:\\dev\\music-app\\builder\\src\\artistpath_builder\\data\\dsp_links_20260921.json",
+    "facts": "C:\\dev\\music-app\\builder\\src\\artistpath_builder\\data\\artist_facts_20260921.json"
+  },
+  "previous_left_untouched": {
+    "deezer": "C:\\dev\\music-app\\builder\\src\\artistpath_builder\\data\\deezer_artist_ids_20260802.json",
+    "dsp": "C:\\dev\\music-app\\builder\\src\\artistpath_builder\\data\\dsp_links_20260905.json",
+    "facts": "C:\\dev\\music-app\\builder\\src\\artistpath_builder\\data\\artist_facts_20260905.json"
+  },
+  "script_sha256": "04dc52ccb1f3eeddcce5d2a420570ac629b20cca02369fbb84656f20c7fe9f7f"
+}

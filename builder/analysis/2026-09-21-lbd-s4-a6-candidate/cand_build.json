@@ -1,0 +1,200 @@
+{
+  "task": "LBA- \u00a78 items 1-2 \u2014 the LBA-A6 candidate build with fame and clip/streaming ids",
+  "run_utc": "2026-09-21T22:40:04.364637+00:00",
+  "arm": "LBA-A6",
+  "plain_sentence": "every artist the deeper crawl found, at the two-listener bar",
+  "population_rule": "P",
+  "threshold": 3,
+  "pairing": {
+    "form": "ListenBrainz's own \u2014 once per PAIR OF PLAYS within a session",
+    "why": "LBA-D1, the owner's ruling of 2026-09-14: it is the only form with any listening evidence behind it, and both LBL- blind listens were run on maps derived that way, so a listen-based judgment transfers to this arm and to no other. The cheaper session-collapsed form is barred for S4 unless it gets its own blind listen.",
+    "bar": "LBD-X6 stands. Its condition was discharged 2026-09-13 and R10 FIRED, which confirmed the bar rather than lifting it. Nothing here licenses a sentence about the cheaper form.",
+    "derived_from": "T (sha256 03d47b05\u2026), never T_A4"
+  },
+  "filter": "on, inert (20260809)",
+  "drop_list": "unlistenable_drop_algb_20260809.json",
+  "config_delta_from_stage2": [
+    "require_fame"
+  ],
+  "source_archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\S4-A6",
+    "manifest_sha256_before": "950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3",
+    "manifest_sha256_after": "950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3",
+    "unchanged": true
+  },
+  "fame_archive": {
+    "root": "C:\\unsung-fast\\lbd-archives\\S4-A6-fame"
+  },
+  "built": {
+    "nodes": 87394,
+    "csr_entries": 2490728,
+    "wall_clock_s": 677.0,
+    "serialised_bytes": 39697349,
+    "bare_serialised_bytes": 30261096
+  },
+  "structural_identity": {
+    "bare_sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+    "stage2_bare_sha256": "f35cb19d935d53a184173d006791334b42b0b64ee9b7593b1c3ab1029b7c8d6d",
+    "byte_identical": true,
+    "method": "re-serialise the candidate with its five additive lists emptied and compare to LBA-A6-bare.bin, which stage 2 produced from its own build by exactly that method (s4_bare_copy.py). Covers node ORDER and all four CSR arrays plus names, disambiguations and pop_raw in one comparison.",
+    "structural_fields_checked_against_stage2_artifact": [
+      "mbids",
+      "names",
+      "disambiguations",
+      "offsets",
+      "neighbours",
+      "scores",
+      "edge_types",
+      "pop_raw"
+    ],
+    "structural_fields_differing": [],
+    "metadata_id_delta_vs_stage2_artifact": {
+      "deezer_ids": {
+        "stage2_artifact": 35720,
+        "candidate": 43730,
+        "delta": 8010
+      },
+      "spotify_ids": {
+        "stage2_artifact": 44778,
+        "candidate": 53993,
+        "delta": 9215
+      },
+      "apple_ids": {
+        "stage2_artifact": 32768,
+        "candidate": 38954,
+        "delta": 6186
+      },
+      "artist_facts": {
+        "stage2_artifact": 64274,
+        "candidate": 84331,
+        "delta": 20057
+      }
+    },
+    "why_metadata_may_differ": "the owner's 2026-09-21 re-extraction repointed the three id/fact maps at new dated package data. Those lists are EXPECTED to differ from stage 2's artifact; the bare comparison empties all five before serialising, which is why it remains the structural proof."
+  },
+  "fame": {
+    "nodes_with_a_measured_count": 87391,
+    "nodes": 87394,
+    "nulls": 3,
+    "note": "a null is a MEASURED ABSENCE and is never a floor value (FAM-AM1.8)"
+  },
+  "id_coverage": {
+    "deezer_ids": 43730,
+    "spotify_ids": 53993,
+    "apple_ids": 38954,
+    "artist_facts": 84331
+  },
+  "acceptance": {
+    "criteria": "PRODUCTION_ACCEPTANCE, UNMODIFIED \u2014 no bound widened, none proposed",
+    "criteria_fields_covered": [
+      "canonical_names",
+      "edge_count",
+      "famous_median_degree_floor",
+      "famous_min_degree_floor",
+      "famous_sample",
+      "median_degree",
+      "node_count"
+    ],
+    "raised_ArtifactRejected": false,
+    "problems_as_the_shipped_check_reports_them": [],
+    "bounds": [
+      {
+        "bound": "famous median degree",
+        "measured": 49.0,
+        "floor": 25.0,
+        "ceiling": null,
+        "unit": "degree",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "famous min degree",
+        "measured": 23,
+        "floor": 8,
+        "ceiling": null,
+        "unit": "degree",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "artists with no name",
+        "measured": 0,
+        "floor": null,
+        "ceiling": 0,
+        "unit": "artists",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "canonical artists absent from the largest component",
+        "measured": 0,
+        "floor": null,
+        "ceiling": 0,
+        "unit": "artists",
+        "kind": "detector",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "node count",
+        "measured": 87394,
+        "floor": 69900,
+        "ceiling": 105000,
+        "unit": "artists",
+        "kind": "tripwire",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "edge count",
+        "measured": 2490728,
+        "floor": 1990000,
+        "ceiling": 2990000,
+        "unit": "CSR entries",
+        "kind": "tripwire",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      },
+      {
+        "bound": "median degree",
+        "measured": 26.0,
+        "floor": 5.0,
+        "ceiling": 34.0,
+        "unit": "degree",
+        "kind": "tripwire",
+        "passes": true,
+        "margin_if_failed": "\u2014"
+      }
+    ],
+    "failing": [],
+    "passing": [
+      "famous median degree",
+      "famous min degree",
+      "artists with no name",
+      "canonical artists absent from the largest component",
+      "node count",
+      "edge count",
+      "median degree"
+    ],
+    "note": "\u00a78 item 2: a candidate at any population above V breaches the node bound BY CONSTRUCTION. That breach is a decision, not a bug, and it is the owner's (his 2026-09-05 LUX-4 ruling). This script stops here."
+  },
+  "serialised": {
+    "artifact": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-candidate.bin",
+    "sidecar": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-candidate.bin.json",
+    "bytes": 39697349,
+    "sha256_from_sidecar": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b",
+    "sha256_verified_against_file": true,
+    "round_trip": {
+      "loaded_through": "the shipped api GraphStore",
+      "artists": 87394,
+      "node_order_matches_build": true,
+      "fame_ranking_present": true,
+      "nodes_with_a_fame_percentile": 87394
+    },
+    "owner_ruling": "Owner's ruling, 2026-09-21: recalibrate to admit the candidate, per \u00a78 item 2 \u2014 move only the bounds that fail, derive the new centre from the stage-2 node and CSR counts for LBA-A6, keep the tolerance at about \u00b120%, preserve the edge floor."
+  },
+  "script_sha256": "50a16a98b8fc7e19a75863f103c5fd1a0c0c474723a76099db06ef8a75ee85ea"
+}

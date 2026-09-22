@@ -47,75 +47,66 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-16, at the `LBD-S4` stage-3 closeout.** **Nothing a listener sees changed
-in this work** — the live site is as the 2026-09-08 deploy left it, and `TEST-QUEUE.md`'s unticked
-boxes are still his to press, untouched here.
+**Last updated: 2026-09-21, at the `LBA-A6` candidate closeout.** **Nothing a listener sees has
+changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched,
+and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
 
-# ⛔ THE `LBD-S4` GO/NO-GO STOP IS REACHED. THE NEXT ACTION IS THE OWNER'S RULING.
+# ⛔ THE `LBA-A6` CANDIDATE IS BUILT. THE NEXT ACTION IS THE OWNER RUNNING THE USE GATE.
 
-**`LBA-D8` stage 3 has RUN and `LBD-S4` is measured out.** All four remaining measurements taken on
-the eight sized arms, every §7 read the run state licenses read, and the go/no-go report written.
-Figures are owned by
-[`../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md`](../../builder/analysis/2026-09-14-lbd-s4-stage3/README.md)
-and restated nowhere, including here. The owner-facing note is
-[`findings/2026-09-16-lbd-s4-stage3-go-no-go.md`](findings/2026-09-16-lbd-s4-stage3-go-no-go.md),
-reasoning is [`2026-09-15-lbd-s4-stage3-execution-log.md`](2026-09-15-lbd-s4-stage3-execution-log.md),
-and the current handoff is [`2026-09-16-HANDOFF-lbd-s4-stage3.md`](2026-09-16-HANDOFF-lbd-s4-stage3.md).
+**He ruled GO on 2026-09-21** at `LBA-A6` — *every artist the deeper crawl found, at the
+two-listener bar* — and gave two further rulings during the session: recalibrate acceptance to
+admit the candidate, and re-extract the id maps over its population first. **All four pieces of
+work landed.** Figures are owned by
+[`../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md)
+and restated nowhere, including here. Reasoning is
+[`2026-09-21-lbd-s4-a6-adoption-execution-log.md`](2026-09-21-lbd-s4-a6-adoption-execution-log.md);
+the current handoff is
+[`2026-09-21-HANDOFF-lbd-s4-a6-candidate.md`](2026-09-21-HANDOFF-lbd-s4-a6-candidate.md).
 
-**What he is ruling on.** Whether a map built from our own recomputation of ListenBrainz's raw
-listening data is worth shipping — **at what population of artists, and at what strength bar**. The
-options and what each commits to are stage-3 README §9; **no arm is preferred and no threshold is
-named**, because `LBA-D2` reserves the threshold to him and `LBA-D3` bars designing any listen
-before he rules. **One branch inside that ruling is also his and the design cannot decide it** —
-see the second warning below.
+**What `LBA-G5` is, in plain terms.** He uses the new map himself, locally, for **up to two days of
+actual use**, against a pass/fail criterion **he wrote before seeing a single journey on it**. It
+is a **stop-gate**: it can only ever stop the candidate. The governing text is `LBA-AM4`, added to
+the pre-registration's §11 **before any build work began**.
 
-**What it means in plain terms.** Cost is not what decides this: every map we could build fits the
-machine, and building one is not the expensive part. Within a fixed set of artists, how much
-listening evidence we demand barely changes *who* you see — it almost only ever adds. A **wider**
-set of artists changes what the app shows noticeably more, and the least-listened artists absorb
-most of that change at both ends. And we **cannot say** how playable the artists a wider map would
-add are — that is a fact about the census we never ran, not about those artists.
-
-> ## ⚠ Four things about this result that are easy to get backwards
+> ## ⚠ Four things about this state that are easy to get backwards
 >
-> **The playability gate is DISQUALIFIED, not answered.** `LBA-AM3-2`'s disqualifier fired on every
-> arm where `LBA-G4` could be read, at many times its bar. **Neither "the artists a wider map adds
-> are much less playable" nor "they are fine" is licensed.** The raw figure on the widest row is
-> large and would have fired the gate; reporting it as a finding inverts the amendment.
+> **A `LBA-G5` pass is NOT evidence of quality and does NOT replace `REQ-38`.** The blind listen is
+> still owed in full at §8 item 4, designed **cold**, by a session that has seen no journey on
+> either map (`LBA-D3`). `GBL-` §5's run-once rule will bind its verdict.
 >
-> **That disqualification is STRUCTURAL and must not be loosened away.** Under the two censuses
-> that exist, the artists a map *adds* and the artists it *keeps* can never have been evaluated at
-> the same time. Only a fresh census pass fixes it, and `LBA-G3` fired on that.
+> **The acceptance recalibration REJECTS the served map and REJECTS the fallback.** The builder
+> cannot reproduce `graph-msw-tu50.bin` while these bounds stand — the `LUX-E1` drift shape,
+> deliberately re-entered, raised before he ruled. **If the gate fails, restore `acceptance.py`'s
+> `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map.** A test asserts the
+> rejection so it cannot present as a mystery. Deferral registry below.
 >
-> **`LBA-R6`/`LBA-R7` being unadjudicable is a DESIGN defect, not a result.** They differ only in
-> whether a wider population changes what the app shows *substantially*, and `LBA-M2` carries no
-> effect size **by design**. A session picking one would be fixing a threshold with results in
-> hand. Both halves are reported side by side; **the branch is his.**
+> **A wrong-artist clip during the gate is NOT a `LBA-G5` signal.** Id coverage improved sharply
+> but is still partial; a missing id degrades to name search, which is today's behaviour and never
+> a wrong answer. It is a property of an id snapshot, not of the similarity graph, and his
+> criterion is about novelty and coherence.
 >
-> **`LBA-R9` — *the numbers say no*, the row that records stopping as a COMPLETE OUTCOME rather
-> than an abandonment — is formally unreachable.** Stopping remains a perfectly good decision.
-> What is missing is the design's own certificate for it, and that is not an argument either way.
+> **The id re-extraction only PARTIALLY discharges the `LUX-4` deferral** — for the candidate's
+> population. **The served lineage's own re-extract remains armed.**
 
-**No amendment was added to the pre-registration by stage 3**; `LBA-AM3` was committed by the
-previous session, before `LBA-M4` ran. **Nothing is adopted, no default changed, no shipped code
-touched.**
+**Nothing is deployed and no default is changed.** The candidate artifact is gitignored; its sha256
+lives in its manifest sidecar and must be taken from there, never transcribed (`DEP-24`).
 
 ⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
 
-Branch `lbd-s4-stage3`, PR **#129**.
+Branch `lbd-s4-a6-adoption`, PR **#131**.
 
 **THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
 not record how far down the list he has got.**
 
-1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, live since the 2026-09-08 deploy.
-   Nothing here changed them.
-2. **Merge the stage-3 PR.**
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, 15 unticked. Nothing here changed them.
+2. **Merge the candidate PR.**
 3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
    fidelity. **Nothing is blocked by it.**
-4. **THE GO/NO-GO RULING.** Stage-3 README §9 has the options; §7 the inference in plain language;
-   §8 what it rests on. **If GO**, §8 of the pre-registration is what it commits to, and the
-   `REQ-38` blind listen is designed **cold**, as a separate amendment, when no journey exists on
-   either map. **If STOP**, nothing is owed but the record.
+4. **RUN `LBA-G5`, THE USE GATE.** Two days of actual use against his own criterion. The local run
+   command, and the check that tells him he is on the candidate rather than the served map, are
+   the candidate README §8. **If it PASSES**, the `REQ-38` listen amendment is next, written cold
+   by a separate session. **If it FAILS**, restore the acceptance bounds first, then the fallback
+   is `LBA-A3`.
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -387,6 +378,8 @@ old heading.)*
 
 | Finding | Condition |
 |---|---|
+| ⚠ **The 2026-09-21 acceptance recalibration REJECTS the served map and the `LBA-G5` fallback.** `PRODUCTION_ACCEPTANCE` is now centred on the `LBA-A6` candidate; `graph-msw-tu50.bin` and `LBD-A5V` both sit outside it, so **the builder cannot reproduce what the app serves today** — the `LUX-E1` drift shape, deliberately re-entered. Raised before the ruling; the owner ruled anyway, and it is his call. Bounds, basis and the sensitivity table are owned by `acceptance.py`'s own comment; the candidate's figures by `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §6. Asserted by `tests/test_acceptance.py::test_the_served_map_and_the_fallback_are_outside_the_current_bounds`, so it presents as a recorded decision rather than a mystery rejection. | **If `LBA-G5`'s use gate FAILS, or the candidate is not adopted: restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map**, and delete that test. If the candidate IS adopted, the row closes — the calibration target and the served map become one artifact. |
+| **Deezer ids are extracted without the `is_artist_url` check that Spotify and Apple get.** The 2026-09-21 re-extraction kept `dsp_ids.py`'s original numeric-tail rule deliberately, so the only thing changing was the population and a coverage difference could be attributed to it alone. `lux4_extract.py` added the artist-vs-album path check for the other two in 2026-09-05 and it was never back-ported, so a Deezer **album** URL ending in digits is currently kept and shipped as an artist id. | **Whenever the Deezer map is next re-extracted for any other reason.** The fix is one predicate, but it is a second column on any comparison it lands in, so it must not ride along with a population change. |
 | **`LBA-G2`'s bar is written `24 GB` and implemented `24 GiB`** — five places in the pre-registration say 24 GB; `LBA_G2_BAR_BYTES = 24 * 1024**3` is 25.77 GB. Stage 1's instrument introduced it and stage 2's forward copy, README and handoff all adopted *"24 GiB"*, making the implementation self-consistent and diverging from the governing document silently. ⚠ **No cell's disposition changes under either reading, with comfortable margin on both sides** — recomputed in bytes at the stage-3 closeout; the arithmetic is in the stage-3 handoff. **Deliberately NOT fixed**: §11's rule is that a bar's value is never edited, and settling which unit governs after the results exist is changing a bar with results in hand. | **The owner's, and only if any future `LBD-` build gate is read.** Nothing is blocked by it and no committed result depends on which reading is taken. |
 | ~~**`docs-lint` checks 4, 5 and 6 were never observed to run at the stage-2 closeout**~~ ✅ **DISCHARGED 2026-09-15, minutes after it was written, by the background run that had been launched before it.** The full script completed **exit code 0 with all six checks clean** — checks 4, 5 and 6 print their headers and list candidates beneath, and all three listed **none**. ⚠ **Check 6 is restated figures, and it found nothing**, which is the mechanical confirmation the row below asked for: the four restatements this closeout fixed by hand were the only ones. *(Struck, kept for the record. The row was written on two foreground runs that both timed out partway through check 3; the background run launched earlier had already succeeded and had not been read. The lesson is the row's own: **a timeout is not a result**, and the answer was already on disk.)*
 | ~~**`closeout` B2, B3 and B4 were NOT run for `LBD-S4` stage 2**~~ ✅ **DISCHARGED 2026-09-16 at the stage-3 closeout, which is exactly the condition this row named.** **B2:** no orphans — `s3_common.py` and `s4_common.py` are each imported by every measurement script in their directory, `s4_instrument.py` by `s4_build.py`, and every other module is a CLI entry point that ran and left a committed output. **B3:** stage 2 and stage 3 added no tests, so there is nothing to spot-check — **saying so is the discharge**, as this row itself specified. **B4 is the one that paid**: it found that `LBA-G2`'s bar is written **24 GB** in the pre-registration and implemented **24 GiB** in the instrument (see the row below). Every other `LBA-` claim in the stage-2 and stage-3 docstrings checked out against the governing document. *(Struck, kept for the record.)*
@@ -400,7 +393,7 @@ old heading.)*
 | ~~**`LBD-A4` (the pairing arm)**~~ — **DISCHARGED 2026-09-13: it RAN, and `R10` WAS READ.** `R10` **fires** on the edge-count half; figures owned by [`../../builder/analysis/2026-09-13-lbd-a4/README.md`](../../builder/analysis/2026-09-13-lbd-a4/README.md) §§5–7. *(Struck, kept for the record. Everything after this dash is the row as it stood, and its "Still unrun" was true when written.)* **`LBD-A4` (the pairing arm)** — still unrun; `LBD-AM4-2` said so and no read here depended on it. **Listen 2 ran and was read on 2026-09-13 under the waiver, exactly as the ruling allows** — and its result therefore carries `LBD-X6`: it holds for ListenBrainz's own pairing semantics and may not be generalised to the cheaper form until this arm has run and `R10` has been read. | **Before any `S4` arm is pre-registered** — ~~before any further `LBD-` arm~~, **narrowed 2026-09-12 by the owner's `LBD-D6` ruling**, quoted verbatim in `LBD-AM6-7`: `LBD-A4` is **waived for listen 2 and enforced before `S4`**, because both listen-2 maps were derived with ListenBrainz's own pairing semantics — the faithful form `LBD-A4` measures the cheaper form against — so no `LBD-A4` result can change either map or listen 2's read. `LBD-A4` must run and **`R10` must be read** before any `S4` arm is pre-registered, and **every `S4` arm records which pairing semantics it uses and why**, per `LBD-D6`. **Still unrun; `LBD-D6` itself is now RULED.** One bar travels with it meanwhile — `LBD-X6`: listen 2's result may not be generalised to the cheaper pairing form until `LBD-A4` has run and `R10` has been read. | | ⚠ **The condition is discharged; the BAR IS NOT.** `LBD-X6` **stands** — `R10` fired, so listen 2's result holds for ListenBrainz's own pairing semantics and may not be generalised to the cheaper form. What is now live instead is `LBD-D6`'s standing requirement, promoted to the *Must not be changed* registry: **every `S4` arm records which pairing semantics it uses and why.** |
 | **`LUX-E2`** — blocked on the damaged `TAS-` sample; per-field population coverage is **not** a substitute read. | **A repaired sample.** Nothing in flight repairs it. |
 | **`ULC-F4`** — the un-listenable keep-check measures the name-search route while the app resolves by identity first, so both drop lists drop artists the app can play. | **The owner's**: a re-census, a rebuild and its own pre-registration. Nothing blocks on it. |
-| **Snyk has not scanned the FROZEN modules under `builder/analysis/`** — credentials expired 2026-09-07, the MCP server failed to connect 2026-09-08 and 2026-09-10 (morning); **it connected 2026-09-10 (evening) and the build-stage scripts added that day were scanned and are clean** (one Medium fixed by binding paths as DuckDB parameters); the pre-existing frozen modules remain unscanned; the owner accepted and deferred scanning for everything there on the grounds that none of it is live. His hands, not a decision: it opens a browser. | **Promotion of anything under `builder/analysis/` into shipped code** — which nothing proposes. |
+| ⚠ **CONNECTIVITY BLOCKER CLEARED 2026-09-21** — the MCP server connected and scanned this session's three new modules (0 issues), so the credential/connection failures of 2026-09-08 and 2026-09-10 no longer bar the sweep. The frozen back-catalogue is still unscanned.  **Snyk has not scanned the FROZEN modules under `builder/analysis/`** — credentials expired 2026-09-07, the MCP server failed to connect 2026-09-08 and 2026-09-10 (morning); **it connected 2026-09-10 (evening) and the build-stage scripts added that day were scanned and are clean** (one Medium fixed by binding paths as DuckDB parameters); the pre-existing frozen modules remain unscanned; the owner accepted and deferred scanning for everything there on the grounds that none of it is live. His hands, not a decision: it opens a browser. | **Promotion of anything under `builder/analysis/` into shipped code** — which nothing proposes. |
 | ⚠ **ARMED since 2026-09-08 — `LUX-4` merged and no rebuild has happened; the next rebuild of the served lineage must carry the re-extract.** **A slice of served artists carry NO recorded Deezer id**, so the api cannot take its identity-first clip path for them and falls back to **name search** — the `BYP-13` exposure the id path exists to close. Cause: the shipped id map was extracted over a population that predates the served map, which was built later from a further ALG-B crawl. Counts, the expected recovery, and why it is not fixed inside `LUX-4`: [`builder/analysis/2026-09-05-lux4-extract/README.md`](../../builder/analysis/2026-09-05-lux4-extract/README.md) §4. | **The first rebuild after `LUX-4` merges.** Until then, refreshing that key would change the artifact's existing `deezer_ids` and break `L4-T7`'s control arm, whose whole job is to prove `LUX-4` touches nothing that already existed. **A SESSION'S WORK, NOT AN OWNER DECISION** — the fix is obvious, the sequencing is methodology, and only the deploy needs his hands. The work: re-extract with `deezer` added to `KEPT_PLATFORMS` over the three-artifact population, ship it as dated package data, rebuild, take the new checksum to a deploy. **Metadata-only: no listening test and no acceptance risk**, because it changes no node, edge or score. |
 | ~~⚠ **A graph's manifest cannot say WHICH drop lists built it**~~ ✅ **DISCHARGED 2026-09-06 by `L4-T1b`** — `resolve_build_inputs` records the resolved filename and a sha256 over each applied drop list's bytes, plus the archive directory, and `log_build_inputs` prints them at build **start**. First exercised on the `LUX-4` build, whose manifest is the first here that can say which files produced it. **Recording only; a mismatch is NOT a refusal — the owner's decision, 2026-09-06.** Noted at both code sites that a gate here *could* fire in the first seconds, since both inputs are known before any work, so the "kills a long build at the end" worry applies to the acceptance bounds and not to this check; the reason to wait is that a reflexively-reached escape hatch removes the protection it guards. **A session must not add the gate on its own.** *Struck, not deleted: the condition fired twice — unhonoured on 2026-09-05, honoured here — and that history is the evidence the tracking worked.* Original text follows. |
 | ⚠ **A graph's manifest cannot say WHICH drop lists built it** — it records the flags (`drop_unlistenable: true`) and the override pointer (`null` when the default is used), never the resolved file. `null` means *"whatever the default was that day"*, and the default is mutable: `CXA-` Task 2 moved the ALG-B unlistenable default and the `CXR-` revert did not move it back, which is how a rebuild came to silently differ from the live map by 31 artists. **All three drop families share the identical `dict[algorithm → Path]` pattern**, so `no_release` and `featured_credit` are the same trap unsprung. | **Before any rebuild is compared to another, and ideally before `LUX-E1` runs** — it makes that eval self-evidencing rather than requiring the hand analysis of 2026-09-05. **The fix:** record the resolved filename **and the sha256 of the file's bytes** for each family actually applied, and log both at build **start** so an unintended mismatch shows in the first seconds rather than at the end. ⚠ **CONDITION FIRED 2026-09-05 AND WAS NOT HONOURED — recorded rather than quietly re-deferred.** The condition read *"before any rebuild is compared to another, and ideally before `LUX-E1` runs"*; `LUX-E1` then ran and two rebuilds **were** compared, without this. The consequence is exactly what the deferral predicted: the comparison needed a **hand analysis** to establish which drop list and which archive each build used, because no manifest could say. **Re-deferred deliberately, with a tightened condition: before the `LUX-4` rebuild (`L4-T7`), which is the next rebuild comparison and is already planned.** *(The stale "~23 minutes" was struck here too — the live manifest records ~40 s for a whole build.)* Hash the bytes rather than reuse the payloads' own hash keys — they are inconsistent (`sha256_over_sorted_mbids`, `sha256_over_sorted_drop_mbids`, and `featured_credit` carries none). **Purely additive and cannot block a build**; the sidecar is written after the artifact is serialised, so it cannot perturb a sha or confound `LUX-E1`. **Whether a build should also REFUSE on a mismatch is the owner's** — a hard gate can kill a long build at the end and needs an escape hatch; decide it after `LUX-E1`, when we know whether mismatches are rare or routine. Mechanism and figures: [`builder/analysis/2026-09-05-lux-e1-drift-source/`](../../builder/analysis/2026-09-05-lux-e1-drift-source/README.md). |
@@ -411,7 +404,7 @@ old heading.)*
 | **Discogs alias expansion** | **If a frame amendment is ever triggered.** Discogs attribution goes through one MB-sourced ID; alias releases are invisible, so every Discogs figure is a lower bound (identical in every cell — no comparison threatened). `discogs_20260701_artists.xml` is already on disk; expansion is an exact ID join, no download, no name matching. |
 | **The Discogs `masters` export** | **Iff Discogs support-counting is ever wanted.** Irrelevant to every presence-based use (unions are reissue-proof by construction) and would *lose* tail coverage (single-version releases often have no master); but it is the album-grain collapse that avoids the pressing confound (`WGT-4c`) if Discogs evidence counts are ever proposed. **Owner spot check 2026-08-01 (DSotM, 1000+ releases):** individual pressings accrete stray labels beyond the master's (`art rock`, `classic rock`, `pop rock` beside the master's two) — so the release-built frames carry mild curatorial noise a master build would not, the flip side of the coverage loss. Recorded; changes no measured verdict. |
 | ⚠ **The Deezer id path inherits MusicBrainz's link accuracy — it is not "strictly better"** | **Before `BYP-13` is described as closed, and before any figure is put on the improvement.** MusicBrainz sometimes links an artist to a *duplicate* Deezer page rather than the real one. Two observed by hand: Radiohead's recorded link has 473 followers and **0 albums** (so it serves nothing and falls back to name search — fails safe), and Orbital's has **20 followers and does serve tracks** — where the id path would replace a correct name-search result with a worse one. Sampled over 60 delivered artists carrying an id: **59 of 60 serve a track from the id**, and 6 of those are thin pages, of which most are *genuinely* obscure artists rather than duplicates. So the new failure mode is real but small against the 9.4% / 6.1% it removes; **the net is clearly positive and the direction of every individual case is not guaranteed.** A session must not restate this as "strictly better by construction" — that claim was made on 2026-08-02 before this was measured, and is withdrawn. Cheap targeted mitigation if wanted: validate links for the top popularity decile only (~7,400 lookups), where a duplicate is both most detectable (expected follower count is high) and most damaging (those artists are delivered most often). |
-| **The Deezer id map is a dated snapshot and will age** | **Whenever it is next questioned; no automatic trigger exists.** Frozen 2026-08-02 because `build_from_archive` is offline by a hard rule and spec §9 requires byte-identical builds. A link that goes stale 404s, which `_get` treats as a miss rather than a refusal, so the card degrades to name search rather than going silent (pinned by `test_a_stale_id_falls_back_to_name_search_rather_than_giving_up`). Refreshing is a deliberate act with its own decision. |
+| ~~**The Deezer id map is a dated snapshot and will age**~~ ✅ **DISCHARGED 2026-09-21 by the owner's re-extraction ruling.** Its condition was *"whenever it is next questioned"* and it was questioned: measured at 11.41 % coverage over the artists the `LBA-A6` candidate adds, re-extracted over that population, and shipped as new dated package data. The 2026-08-02 file remains on disk, never edited. *(Struck, kept for the record.)* ⚠ **The row does not reopen for the SERVED lineage** — that re-extract is a separate condition and is still armed. | ~~Whenever it is next questioned; no automatic trigger exists.~~ **Discharged for the candidate population. The served lineage remains armed.** |
 | **Known-press telemetry as the novelty proxy's long-run validator** | **When enough `known` presses exist to read.** Named in the Definitions entry and `NOV-` §3; nothing to build now. |
 | **A worldly-fame instrument does not exist** | **Accepted; claims in that currency are barred until one does** (Definitions ruling). Reopen only if a product need for worldly fame appears — the `RCS-` corpus and its committed hand values are the reusable starting point. |
 | **The TJ Brown late hand read** (8,274 monthly listeners, ruler 218) | **Usable by a future corpus at design time only** — never a post-hoc addition to a read set (log §5a). |
