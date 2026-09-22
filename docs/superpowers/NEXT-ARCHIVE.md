@@ -19,6 +19,71 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-22 — was the live top block from the `LBA-A6` candidate closeout (2026-09-21)
+
+**Last updated: 2026-09-21, at the `LBA-A6` candidate closeout.** **Nothing a listener sees has
+changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched,
+and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
+
+# ⛔ THE `LBA-A6` CANDIDATE IS BUILT. THE NEXT ACTION IS THE OWNER RUNNING THE USE GATE.
+
+**He ruled GO on 2026-09-21** at `LBA-A6` — *every artist the deeper crawl found, at the
+two-listener bar* — and gave two further rulings during the session: recalibrate acceptance to
+admit the candidate, and re-extract the id maps over its population first. **All four pieces of
+work landed.** Figures are owned by
+[`../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md)
+and restated nowhere, including here. Reasoning is
+[`2026-09-21-lbd-s4-a6-adoption-execution-log.md`](2026-09-21-lbd-s4-a6-adoption-execution-log.md);
+the current handoff is
+[`2026-09-21-HANDOFF-lbd-s4-a6-candidate.md`](2026-09-21-HANDOFF-lbd-s4-a6-candidate.md).
+
+**What `LBA-G5` is, in plain terms.** He uses the new map himself, locally, for **up to two days of
+actual use**, against a pass/fail criterion **he wrote before seeing a single journey on it**. It
+is a **stop-gate**: it can only ever stop the candidate. The governing text is `LBA-AM4`, added to
+the pre-registration's §11 **before any build work began**.
+
+> ## ⚠ Four things about this state that are easy to get backwards
+>
+> **A `LBA-G5` pass is NOT evidence of quality and does NOT replace `REQ-38`.** The blind listen is
+> still owed in full at §8 item 4, designed **cold**, by a session that has seen no journey on
+> either map (`LBA-D3`). `GBL-` §5's run-once rule will bind its verdict.
+>
+> **The acceptance recalibration REJECTS the served map and REJECTS the fallback.** The builder
+> cannot reproduce `graph-msw-tu50.bin` while these bounds stand — the `LUX-E1` drift shape,
+> deliberately re-entered, raised before he ruled. **If the gate fails, restore `acceptance.py`'s
+> `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map.** A test asserts the
+> rejection so it cannot present as a mystery. Deferral registry below.
+>
+> **A wrong-artist clip during the gate is NOT a `LBA-G5` signal.** Id coverage improved sharply
+> but is still partial; a missing id degrades to name search, which is today's behaviour and never
+> a wrong answer. It is a property of an id snapshot, not of the similarity graph, and his
+> criterion is about novelty and coherence.
+>
+> **The id re-extraction only PARTIALLY discharges the `LUX-4` deferral** — for the candidate's
+> population. **The served lineage's own re-extract remains armed.**
+
+**Nothing is deployed and no default is changed.** The candidate artifact is gitignored; its sha256
+lives in its manifest sidecar and must be taken from there, never transcribed (`DEP-24`).
+
+⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
+
+Branch `lbd-s4-a6-adoption`, PR **#131**.
+
+**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
+not record how far down the list he has got.**
+
+1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, 15 unticked. Nothing here changed them.
+2. **Merge the candidate PR.**
+3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
+   fidelity. **Nothing is blocked by it.**
+4. **RUN `LBA-G5`, THE USE GATE.** Two days of actual use against his own criterion. The local run
+   command, and the check that tells him he is on the candidate rather than the served map, are
+   the candidate README §8. **If it PASSES**, the `REQ-38` listen amendment is next, written cold
+   by a separate session. **If it FAILS**, restore the acceptance bounds first, then the fallback
+   is `LBA-A3`.
+
+---
+
 ## Demoted 2026-09-16 — was the live top block from the `LBD-S4` stage-2 closeout (2026-09-15)
 
 **Last updated: 2026-09-15, at the `LBD-S4` stage-2 closeout.** **Nothing a listener sees changed

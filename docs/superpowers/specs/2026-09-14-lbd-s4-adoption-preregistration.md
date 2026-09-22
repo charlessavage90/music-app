@@ -962,6 +962,15 @@ None of it runs before the stop.
 > **The numbering of items 1–4 is deliberately unchanged**, so that every document written before
 > 2026-09-21 that says *"§8's four items"* still resolves. §8 now has **five stages**; item 4 is
 > still item 4.
+
+> ### ⚠ `LBA-AM5` REVERSES THE ORDER OF THE TWO STAGES BELOW — dated 2026-09-22
+>
+> **Item 4, the blind listen, runs FIRST; `LBA-G5`, the use gate, runs SECOND.** Running the gate
+> first would have had the listen's one listener using the candidate knowingly for up to two days
+> immediately before a run-once blind listen. The box above is `LBA-AM4`'s and is left as written;
+> the order it implies is superseded. Reasoning, and the gate's pair log: §11 `LBA-AM5`.
+>
+> **Item 4's design is `LBA-AM6`** (§11), written cold on 2026-09-22 before any journey existed.
 4. **Then the `REQ-38` blind listen: today's map against the candidate, on today's artists** — the
    shape the owner can judge, and the only evidence class this project treats as primary.
    **Designed cold, as a separate amendment to this document, written when no journey exists on
@@ -1653,3 +1662,483 @@ it forfeits nothing except the chance to stop early, and `REQ-38` still stands b
 **Identifiers `LBA-AM4` and `LBA-G5`.** Both collision-checked across every local and remote ref on
 2026-09-21, by `git grep -lE` over `refs/remotes` and `refs/heads` restricted to `*.md`: **both
 free.**
+
+---
+
+### `LBA-AM5` — the blind listen runs FIRST and the use gate SECOND: `LBA-AM4`'s sequence corrected
+
+**Dated 2026-09-22. Forward-only: `LBA-AM4`'s text above is not edited**, and neither is any bar's
+value. The owner instructed this amendment on 2026-09-22.
+
+> ### What exists when this is written, stated plainly
+>
+> - **The `LBA-A6` candidate is built, serialised and pinned** (§8 items 1–3), with its four
+>   id/fact maps **re-extracted over its own population** on the owner's ruling of 2026-09-21. Its
+>   identity is its manifest sidecar beside it in `C:\unsung-fast\lbd-artifacts\`; the checksum is
+>   taken from there and never transcribed (`DEP-24`). Figures are owned by
+>   [`builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md).
+> - **No journey has been generated on the candidate by any session** — that README says so, and
+>   no script in its directory calls the router. *Stated precisely rather than more broadly, because
+>   `LBA-AM4`'s wording ("no journey has been generated on any `LBA-` map by anyone") is wider than
+>   the record: stage 2's `LBA-M1` query-cost half (`s4_query_cost.py`) ran the shipped
+>   `find_journey` at d0 over 200 seeded random pairs on the **fame-free stage-2** `LBA-A6` arm and on
+>   the served map, for **wall-clock timing only**. It recorded times and hop counts, no artist, and
+>   nothing was shown to anyone. No listener has seen, heard or been told a journey on any `LBA-` map.*
+> - **The owner has not run the use gate `LBA-G5`.** No result of it exists.
+> - **No result of the `REQ-38` listen exists, and none of its design exists either** — it is
+>   `LBA-AM6`, written after this amendment is committed.
+>
+> **What it spends: nothing.** It moves the order of two stages, neither of which has run, and it
+> changes no criterion, no bar, no period and no read.
+
+#### The defect
+
+**`LBA-AM4` inserted an unblinded use stage that generates journeys on the candidate immediately
+before §8 item 4.** Item 4 is the `REQ-38` blind listen, whose precondition is that it is **designed
+when no journey exists** (§8 item 4; `LBA-AM4`'s own bar 2 restates it), and **whose listener is the
+same person who runs the use gate** — the owner. Running the gate first means the one listener
+arrives at a run-once blind listen having spent up to two days using the candidate knowingly.
+
+**That contamination can be neither measured nor undone.** `GBL-` §5 makes each listen's verdict
+run-once and final, so a contaminated verdict cannot be repeated clean; and nothing in the listen
+could separate a pick made on the journeys from a pick made on a remembered interior, a
+recognised style, or a feel learned during the gate. **This is not hypothetical here:** the `GBL-`
+run log §5
+([`../2026-08-04-gbl-run-execution-log.md`](../2026-08-04-gbl-run-execution-log.md)) records the
+listener volunteering, before he saw the result, that it was *"almost always really easy to tell
+which side was the 'new' graph"* — identification by feel, in an earlier listen, **without** two
+days of prior use. Two days of knowing use can only make that easier.
+
+`LBA-AM4` did not intend this: it states that it *"does not design, shape, pre-empt or narrow the
+`REQ-38` listen"*. The defect is in the sequence, not in the gate.
+
+#### The fix — the order of §8's fourth and fifth stages is reversed
+
+**The `REQ-38` blind listen (§8 item 4) runs FIRST. `LBA-G5`, the use gate, runs SECOND.** §8 items
+1–4 keep their numbers, as `LBA-AM4` requires; what changes is only which of the two post-build
+stages runs first. So the sequence is now: items 1–3 (done) → **item 4, the blind listen** →
+**`LBA-G5`, the use gate** → adoption, which is the owner's.
+
+**Why this order and not the other — an asymmetry, not a preference:**
+
+- **If the candidate FAILS the gate, the listen's verdict is discarded, whichever order they ran
+  in.** A failed gate stops the candidate (`LBA-AM4` bar 3), so a verdict about a candidate that
+  will not ship is spent either way. Running the listen first costs, at worst, a listen on a
+  candidate that is then stopped.
+- **If the candidate PASSES the gate, the listen is adoption's primary evidence** (`REQ-38`: offline
+  metrics must not override listener judgment), **and it must be uncontaminated.** Running the gate
+  first would put the adoption decision on a verdict whose blind had already been spent.
+
+So listen-first loses, at most, the ear on a candidate the gate would have stopped. Gate-first
+loses, whenever the candidate is good enough to adopt, the integrity of the only evidence the
+adoption rests on. **The cost named in `LBA-AM4` bar 3 — *"failing it means the candidate is not
+listened to"* — is thereby given up deliberately**, on the owner's instruction: the listen is now
+spent before the cheap gate can stop the candidate.
+
+**The gate is unblinded by design, and running it second does not weaken it.** It never depended on
+not knowing which map he was on (`LBA-AM4`, *"What being unblinded costs"*). What protects it from
+knowledge of the listen's verdict is **its pre-written criterion**, recorded verbatim in `LBA-AM4`
+on 2026-09-21 before any journey or verdict existed: *"a noticeably worse product experience on
+more than half of tested journeys"*, with its two limbs. He judges journeys against that sentence,
+not against the listen's result, and the sentence cannot be moved now that a verdict will exist
+before the gate runs — §11's rule that a bar's value is never edited binds it.
+
+**`LBA-G5`'s outcomes after a verdict exists, fixed now so neither is decided later:**
+
+- **Gate FAILS** — the candidate is stopped exactly as `LBA-AM4` bar 3 says. The listen's verdict is
+  recorded and stands as the run-once record of that comparison; it adopts nothing. The fallback,
+  and the restoration of `acceptance.py`'s previous bounds before any rebuild, are unchanged —
+  `NEXT.md`'s deferral row already keys the restoration on *"the candidate is not adopted"*, which
+  covers every route.
+- **Gate PASSES** — licenses nothing except proceeding to the owner's adoption decision, with the
+  listen's verdict as its primary evidence. `LBA-AM4` bar 4 is otherwise unchanged.
+
+#### One new requirement on the gate: the owner logs the artist pairs he uses
+
+**During `LBA-G5`, the owner records every artist pair he runs a journey on** — the two endpoint
+artists, in the order entered, one line per journey. *Plain: write down which two artists each
+journey went between, so that anyone reading the gate's result later can see what it was tested
+on.* Where the log lives is an operational choice and is `LBA-AM6`'s runner brief's to name. Two
+reasons, neither of which reaches the listen, which by then will already have run:
+
+1. **"More than half of tested journeys" needs a denominator.** Without a log, the effect size the
+   owner wrote into his own criterion has nothing to be counted against.
+2. **It makes the pairs available to any later listen** — as exclusions, because a pair he has used
+   knowingly on the candidate carries the memory tell `lbl_pairs.py` step 2 excludes for `GBL-AM1`.
+
+The log records **pairs, not verdicts per journey.** His criterion is his, applied as he wrote it;
+the log does not turn it into a scored instrument, and `LBA-AM4` bar 1 — *no figure it yields may
+enter the record as a measurement of path quality* — is unchanged.
+
+#### The owner's gate period stands
+
+**"2 days of actual app use, maximum"** is his, given 2026-09-21 and recorded verbatim in `LBA-AM4`.
+**This amendment does not shorten, lengthen or otherwise touch it.** Moving the gate after the
+listen changes when it starts, not how long it is.
+
+#### What this amendment does NOT do
+
+- **It edits no text of `LBA-AM4`** and moves no bar's value — `LBA-G5`'s criterion, its two limbs,
+  its effect size and its period all stand verbatim.
+- **It designs no part of the `REQ-38` listen.** That is `LBA-AM6`, written after this is committed.
+- **It generates, draws or describes no journey and no pair.**
+- **It does not reopen `LBA-D1`–`D3` or the go ruling**, re-reads no `LBD-` or `LBA-` criterion, and
+  leaves both `LBL-` verdicts run-once and final.
+- **It adopts nothing, changes no default and touches no shipped code.**
+- **It does not renumber §8.**
+
+**Identifier `LBA-AM5`.** Collision-checked 2026-09-22 across every local and remote ref, by
+`git grep -lE '\bLBA-AM5'` over `refs/remotes` and `refs/heads`: **free.**
+
+---
+
+### `LBA-AM6` — the `REQ-38` blind listen: today's served map against the `LBA-A6` candidate (§8 item 4)
+
+**Dated 2026-09-22. Designed cold**, as `LBA-D3` and §8 item 4 require, after `LBA-AM5` was
+committed (`e1cf884`) and on the owner's instruction of the same day.
+
+> ### What exists when this is written, stated plainly
+>
+> **No journey exists on the candidate** (`LBA-AM5`'s first box, unchanged since). **No pair has been
+> drawn, no pre-screen has run, and no harness for this listen exists.** The owner has not run
+> `LBA-G5`. **The session that wrote this amendment has generated, viewed and been told no journey
+> on either map**: it read no page-data, verdict, result or pre-screen file from either `LBL-`
+> listen or from `GBL-`, and it did not open the candidate artifact. It read the protocol documents,
+> the two listens' findings notes, and the harness's source.
+>
+> **What it spends: nothing.** Every read below is fixed before any journey this listen could
+> present exists, which is the property `GBL-` §5 and `LBA-D3` need and the commit timestamp
+> evidences.
+
+**The plain question, fixed here:** *"Would the app give better journeys if it served the new map
+instead of today's?"*
+
+**Identifiers.** Sub-items `LBA-AM6-1`–`LBA-AM6-11`. **This listen's own series is `LAL-`**
+(`LAL-Q1`–`LAL-Q4`, `LAL-K`, `LAL-R1`–`LAL-R4`) — deliberately **not** `LBL-`, whose `Q` and `R`
+identifiers are bound to listens 1 and 2 and whose `LBL-Q3`/`LBL-Q4` would collide with this
+listen's different questions. Two exposures, `LBA-X9` and `LBA-X10`.
+
+#### `LBA-AM6-1` — the comparison, and its factor table
+
+**Incumbent: today's served map**, `graph-msw-tu50.bin` (`ApiConfig.graph_path`'s default),
+verified at generation against its sidecar **and** against the deployed `graph-lux4.bin` by the
+routing-identity gate `lbl_generate.py` already carries, so that "today's map" is the one the site
+actually routes on. **Challenger: the `LBA-A6` candidate**, `LBA-A6-candidate.bin`, verified against
+its sidecar. Both shas are read from the sidecars by script into the listen's map pin, never
+transcribed.
+
+| map | similarity data | `threshold` | population | un-listenable drop payload | fame records | id / fact maps | router | isolating baseline |
+|---|---|---|---|---|---|---|---|---|
+| **served** — incumbent | ListenBrainz's deployed lists (`ALG-B` snapshot) | LB's 10 | `V` | `…20260805` | the `fame` stage's records in the served lineage's snapshot | the served lineage's | `ApiConfig` defaults | — |
+| **`LBA-A6` candidate** — challenger | our recomputation of ListenBrainz's listening data (`T`, ListenBrainz's own pairing, `LBA-D1`) | **3** | **`P`** | **`…20260809`** | **fetched over `P` at §8 item 1** | **re-extracted over `P`** | same | **none is one column away** |
+
+**No map differs from the candidate in exactly one column, and none can be built for this listen**:
+the candidate differs from the served map in at least five columns, and **that bundle is the thing
+adoption decides.** So the verdict is about **the candidate as a whole against today's map**, and
+it is **barred from attributing any difference to any one column or any subset of them** —
+threshold, population, payload, fame date or data source. The nearest built maps are no help:
+`LBA-A3` (`LBD-A5V`) is two columns from the candidate (§2.1), and listens 1 and 2 compared other
+pairs of maps (`LBA-AM6-9`). The id/fact column is **neutralised for the listen** by `LBA-AM6-6`
+(clips are a function of the artist alone), so it cannot reach a verdict.
+
+**Held constant, and why each genuinely is:** the router — the shipped `find_journey` under
+`ApiConfig` defaults, one code path for both maps; the press ladder — `cre_ladder.victim_key`,
+identical code on both sides; the pairs and depths — one set for both maps by construction; clip
+resolution — one rule keyed by MBID for both sides (`LBA-AM6-6`); the page, its questions and the
+listener.
+
+**Held constant in configuration, NOT in effect — the terms the intervention switches on.** The
+population column moves every population-relative quantity the router reads (`LBA-X1`):
+`fame_lb_pctl`, `pop_raw`, `degree_hub_penalty` and the p99 rescale all recompute over `P`. **This
+includes the fame-ranking mechanism behind the August `CXR-` regression** (`LBA-AM4`, *"Why this
+gate exists"*), which acts through the ramp and so only after presses. It is not an uncontrolled
+nuisance here — it is part of what adoption would ship, and it is **why d10 and d20 are in the
+listen**. **Consequence, a bar:** no sentence may attribute a d10 or d20 difference to the ramp,
+the fame ranking or any single recomputed quantity; the listen hears their joint effect and cannot
+separate them.
+
+#### `LBA-AM6-2` — the pair draw: the rule, fixed now, before any journey exists
+
+*Plain: take artists the owner is known to listen to, pair them up, and keep only pairs on which
+the two maps give genuinely different journeys — different at every depth, and different in
+artists he does not know — without ever looking at which map's journey is longer, more obscure or
+better.*
+
+**Who runs it.** A **fresh preparation session**, which commits the pre-screen script with this rule
+in its docstring **before first running it** — the `lbl_prescreen2.py` / `855b090` precedent, and
+the ordering is the evidence. **Its outputs are map-labelled**, so that session may not run the
+listen or write it up (`LBD-AM6`'s precedent), and its outputs go on the runner brief's do-not-read
+list.
+
+1. **Pool.** The owner's familiarity-ranked artists, `gbl_pair_candidates.json`'s `usable` list in
+   its committed order — so both endpoints are artists he demonstrably knows (`REQ-41`).
+2. **Excluded at ARTIST level — every endpoint of every pair on which journeys were presented to him
+   in any blind listen.** That is `GBL-AM1`'s eight pairs (`gbl_pairs_approved.json`, sha-pinned),
+   listen 1's eight primaries (`lbl_pairs.json`) and listen 2's eight primaries (`lbl_pairs2.json`).
+   No substitution fired in either `LBL-` listen (`LBD-AM6-1` D2; listen-2 findings §1.1), so the
+   primaries are exactly what was heard. The reason differs per listen, and each is sufficient:
+   `GBL-`'s arm is the served map's lineage; listen 1 presented journeys **on the served map**, this
+   listen's incumbent; and listen 2's `LBD-A5V` is the candidate's own threshold and pairing over
+   `V` (§2.1, `LBA-A3`), so a remembered listen-2 interior could identify the candidate's side.
+3. **Excluded as PAIRS, artists kept** — every reserve pair of both `LBL-` listens. None was ever
+   generated, so the artists carry no memory (`LBD-AM6-1` D2).
+4. **Membership.** Both endpoints are nodes of **both** maps, read from the two artifacts directly.
+5. **Pairing.** Greedily in pool order, each artist with the earliest still-unpaired artist to which
+   it is **not directly connected in either map** (`lbl_pairs.py` step 4, applied to both maps).
+6. **Pre-screen.** For each candidate pair, both maps' journeys are generated exactly as
+   `LBA-AM6-3` will generate them, and **three gates** are applied:
+   - **Gate L — length** (listen-2 findings §4 item 1's companion, `LBD-AM6-3`): **at least 3
+     interior artists** at **every** depth on **both** maps.
+   - **Gate D — difference at EVERY depth** (listen-2 findings §4 item 1): the two maps' interior
+     artist **sets** differ at **all three** depths, not two. Listen 2's gate of 2 of 3 let five
+     identical cells through, four of them at d0, which is in the tally.
+   - **Gate N — differential novelty at every depth** (listen-2 findings §4 item 2): at every depth,
+     the **symmetric difference** of the two interior sets contains **at least one artist absent
+     from the owner's familiarity list**. *Interior-set difference is not novelty difference; this
+     is the version of it that can be measured in advance.* **The familiarity list is exactly
+     `lbl_prescreen2.py`'s `familiarity_mbids`** — `gbl_pair_candidates.json`'s `usable` plus
+     `ambiguous` entries — used here, as there, only to count, never to exclude.
+7. **Ranking — magnitude and unfamiliarity, never direction.** Survivors are ordered by (a) the
+   **total count, over the three depths, of symmetric-difference artists absent from the familiarity
+   list**, most first; then (b) fewest interior artists the list contains, over both maps and all
+   depths (`LBD-AM6-1`'s key); then pool rank; then MBID — a total order, so the selection is
+   reproducible from the committed output. **Nothing in any gate or key reads which side an artist
+   is on, which map is longer, or which is more or less famous.**
+8. **Selection.** The first **8** are the primaries and the next **4** are ordered reserves. Fewer
+   than 12 survivors: stop and report; the owner supplies pairs, **which must pass the same gates**.
+9. **Owner's strike, before anything is shown to him.** The preparation session shows the owner the
+   twelve pairs as **endpoint names only** — no interior, no length, no map. **He may strike any
+   pair** — for instance one he has run on the live app — and the next reserve fills it. That spends
+   nothing: an endpoint name is not a journey. After the page is first served, no pair changes.
+
+> ⚠ **`LBA-X9` — the selection leans toward pairs on which the candidate's added artists appear,
+> and that is disclosed rather than corrected.** The artists the candidate adds (count owned by the
+> candidate README) are absent from the served map by construction and mostly absent from the
+> familiarity list, so a direction-blind count over the symmetric difference will rank highly the
+> pairs on which the candidate routes through them. **That is magnitude of difference — the
+> difference this listen exists to hear — not a preference for either map**, and no key reads
+> which side the artists sit on. **Consequence, a bar:** the verdict holds for **pairs on which the
+> two maps differ at every depth in artists he does not know**, and no sentence may generalise it
+> to the typical journey. The per-side split of those artists is computed at generation and
+> **sealed** (`LBA-AM6-5`).
+
+**Also disclosed, not controllable:** the owner uses the served map daily, and pairs he has run on
+the live app are recorded nowhere. Step 9 lets him strike any he recognises; the rest is measured on
+the row by `LAL-Q4` (`LBA-AM6-4`).
+
+**The familiarity list is known to under-read what he knows** (listen-2 findings §4 item 3): it
+can say an artist is unfamiliar when he knows them. No advance fix exists that does not show him
+journeys, so **the defect is measured on the row instead**, by `LAL-K` below, and reported beside
+the verdict.
+
+#### `LBA-AM6-3` — what is generated
+
+For each pair, the journeys production `find_journey` returns over each map under `ApiConfig`
+defaults, at **d0, d10 and d20** — *the first path, and the path after ten and after twenty presses
+of "Dig deeper"* (the `known` signal) — along **the all-`known` ladder**: at each press the pressed artist is
+`cre_ladder.victim_key`'s choice over **that map's own** fame percentile, exactly as both `LBL-`
+listens routed. **The limitation travels** (`JFX-` `AM1.3`): a real user presses whoever they know,
+so the ladder is a fixed stand-in for a user, identical on both sides. **Twenty presses is what
+exercises the ramp** — the mechanism `LBA-AM6-1` names.
+
+**Generation gates, in this order and mechanically, before anything is shown to anyone:** a primary
+is replaced by its next reserve if (a) an endpoint is not a node of both maps, (b) the endpoints are
+directly connected in either map, or (c) Gate L fails. Gates D and N are then **asserted** — they
+are deterministic and passed at the pre-screen, so a failure means the maps or the code moved, and
+generation stops. Reserves exhausted: stop and report; no read exists until eight pairs are
+complete. **Before serving**, the differential check refuses a page serving one map against itself,
+and the routing-identity gate (`LBA-AM6-1`) must pass.
+
+#### `LBA-AM6-4` — what the listener sees and answers
+
+**One side-by-side section per pair**, the `GBL-`/`LBL-` format: both maps' journeys at the three
+depths, depth order preserved within a side, no labels, no metrics, names with their MusicBrainz
+disambiguation. **Sides are DEALT to a balanced 4–4** — four pairs put each map on the left, which
+pairs being decided by a system random source (listen-2 findings §4 item 7; `LBD-AM6-6`). **Up to
+three clips per artist** (§4 item 6). **A card that resolved no clip says so on the card** — *"no
+clip found"* — instead of falling silent (§4 item 8: a silent, one-sided clip gap would cost a row
+without anyone noticing it was a resolver problem rather than a map problem).
+
+**Per row (pair × depth), wording frozen here, before any journey exists:**
+
+- **`LAL-Q1` — coherence:** *"At this point, which side holds together better as a journey — each
+  step a sensible next listen?"* — **left / right / no preference.** (`LBL-Q1`'s wording, unchanged.)
+- **`LAL-Q2` — novelty:** *"At this point, which side gives you more artists that are new to you?"* —
+  **left / right / no preference.** (`LBL-Q2`'s wording, unchanged.)
+- **`LAL-Q3` — pick strength:** *"if you picked a side, how strong?"* — **slight / strong**, per axis,
+  required wherever that axis carries a clear pick and refused where it does not. (`LBL-Q4`'s
+  wording and treatment, carried forward as listen-2 findings §4 item 5 records.)
+- **`LAL-Q4` — could you tell which side is the new map:** *"On this row, can you tell which side is
+  the new map?"* — **no / yes, left / yes, right**, required on every row, **shown only after
+  `LAL-Q1` and `LAL-Q2` are answered for that row**, so asking it cannot prime the picks.
+- **`LAL-K` — known-everyone box:** *"Every artist that differed between the two sides was already
+  known to me"* — a tick box.
+- **The clip-problem box**, *"a clip problem stopped me judging this row"*, and notes.
+
+**Per pair, at the end:** *"Did either side collapse into a random walk into obscurity? If so, which
+and where?"* (`GBL-Q2`'s clause) and notes.
+
+**Dropped: `LBL-Q3`'s trade-off question** (listen-2 findings §4 item 4: 24 "no"s including the
+opposite-picks row). Whether a row traded one axis against the other is **computed from the row** —
+it is exactly the rows on which `LAL-Q1` and `LAL-Q2` name opposite sides — and reported
+descriptively.
+
+#### `LBA-AM6-5` — the blind, and what is recorded but hidden
+
+**`GBL-` §6 in substance.** The side mapping is written by script to the gitignored
+`.superpowers/lal/` before serving and read by nothing until every verdict is on disk. **Three fresh
+sessions, none of them this one:** the **preparation** session (`LBA-AM6-2`; it sees map-labelled
+pre-screen output and so may do nothing after it), the **runner** — fresh and mechanics-only,
+working from a runner brief with no results, no expected outcome and no framing, and saying nothing
+to the owner beyond mechanics (`CLAUDE.md`, *"Exception — blind evaluations"*) — and a **further
+fresh write-up session**, which alone runs the unblind. **No Spotify, monthly-listener or
+ListenBrainz lookups during the listen.** **Nobody computes a running tally during the listen.**
+
+**The blind is imperfect, and three tells are disclosed now:**
+
+1. **`LBA-X10` — membership.** The candidate contains artists the served map lacks (count owned by
+   the candidate README). **A row on which the only difference is an artist the served map cannot
+   contain may be identifiable by membership alone**, and nothing in the design can hide that
+   without hiding the thing being compared. `LAL-Q4` measures it.
+2. **Feel.** The `GBL-` run log §5 records the listener identifying the new map *"almost always"*.
+3. **Daily use of the served map.** A remembered live-app journey identifies the incumbent's side.
+
+**Recorded at generation, sealed beside the mapping, shown to no one until after the verdict, and
+deciding nothing:** per journey, interior fame on the **candidate's own `fame_lb_pctl`** — the only
+ruler covering every artist either side can present, since the served map's records cannot reach
+the added artists (`LBA-X7`) — and on the served ruler where it is defined; per side, the count of
+presented artists outside `V`; per side, the count of symmetric-difference artists absent from the
+familiarity list (`LBA-X9`'s split); length; the non-hub interior count and `top1pct_degree_frac`;
+and per-side clip coverage.
+
+#### `LBA-AM6-6` — clips: one source, keyed by the artist alone
+
+Every presented artist resolves through the app's own `ClipResolver.resolve(mbid, name,
+deezer_artist_id, index)`, with the **name and Deezer id taken from one source for both sides**:
+the **candidate artifact's** recorded id where it records one, otherwise the **served artifact's**,
+otherwise name search — the same answer for an artist whichever side it appears on. *Plain: an
+artist sounds the same whichever map put them on the page.* **Generation refuses if the two
+artifacts record different Deezer ids for the same MBID.** The re-extraction was strictly additive,
+so they should agree, but that is exactly the kind of assumption this refusal exists to check
+rather than trust. An artist only one map can present gets the clip it would get in that map's
+app. **The listen judges maps, not id snapshots** — the same line `LBA-AM4` draws for the gate.
+
+#### `LBA-AM6-7` — the reads, `LAL-R1`–`LAL-R4`, fixed before any journey exists
+
+**Per axis, 24 rows** (8 pairs × 3 depths). **d0 is IN the tally**, for `LBD-AM5-5`'s reason: the
+intervention is the map, which acts on the very first path. A **clear pick** is left or right; *no
+preference* counts for neither. **Margin bar: 8** — `GBL-`'s scaling rule, 3 of 10 per row, rounded
+up: 24 × 0.3 = 7.2 → 8. Per axis, the challenger is the candidate and the incumbent is the served
+map:
+
+- **candidate better** — margin ≥ 8 toward the candidate;
+- **served better** — margin ≥ 8 toward the served map;
+- **no detectable difference** — margin < 8;
+- **underpowered** — margin < 8 **and** at least 8 of that axis's *no-preference* rows carry the
+  clip-problem box (`GBL-` results §6.2). A margin ≥ 8 stands however many rows were lost.
+
+| read | when | *plain sentence* |
+|---|---|---|
+| **`LAL-R1` PASS** | no axis *served better*; at least one *candidate better* | *"Journeys on the new map are better on [axis], and no worse on the other."* |
+| **`LAL-R2` TIE** | both axes *no detectable difference* | *"My ear cannot tell the new map from today's on these pairs."* |
+| **`LAL-R3` FAIL** | either axis *served better* — **including a split** where the other axis went to the candidate | *"Today's map gives better journeys on [axis]."* |
+| **`LAL-R4` UNDERPOWERED** | no axis *better* either way, and at least one axis *underpowered* | *"Too many rows were lost to clip problems to read this listen."* |
+
+**A split counts as FAIL deliberately**: `WHAT-GOOD-LOOKS-LIKE` value 8 — novelty is delivered
+through coherence, not traded against it — and it is the same judgement the owner wrote into
+`LBA-G5`'s second limb. A novelty loss beside a coherence gain is reported as FAIL on novelty, in
+those words. Two axes with the same bar raise the chance that one crosses by noise; accepted, and
+stated.
+
+> **`REQ-41`, beside the tie, because this is where it bites.** *"No difference" in unfamiliar
+> territory is uninformative, not evidence of equivalence.* **`LAL-R2` is not "the new map is as
+> good as today's"**, not "the new map is safe to ship", and not "the population change is
+> inaudible". It says the instrument could not separate them on these eight pairs at this margin.
+
+**What each read licenses** — consequences, not recommendations; adoption stays the owner's:
+
+- **PASS** — the ear evidence `REQ-38` asks for, on these pairs, favours the candidate. `LBA-G5`
+  runs next (`LBA-AM5`).
+- **TIE** — no ear evidence either way at this instrument's resolution. Nothing here licenses
+  adoption or rules it out; whether to run `LBA-G5` and adopt on a tie is the owner's.
+- **FAIL** — the ear placed today's map above the candidate on the named axis, and `REQ-38` bars
+  offline figures from overriding that. What follows is the owner's.
+- **UNDERPOWERED** — no read. **The listen is not repeated on the same pairs**; a further listen on
+  new pairs, after the clip defect is addressed, is a new amendment.
+
+**Run state each read presupposes, named per read:**
+
+- **`LAL-R1`–`LAL-R4`** presuppose **all 24 rows answered on both axes, `LAL-Q3` wherever owed,
+  `LAL-Q4` on every row, and all eight pair-end entries saved** — and the unblind run by the
+  write-up session after all of that is on disk. **No read is reachable before that**: a partial
+  run licenses nothing, whatever a partial tally would show. **A listen whose outcome looks settled
+  before row 24 still runs to row 24 and to the eighth pair's end entry**, because the run state
+  is part of the read, and because nobody may be computing a tally to know it looks settled.
+- **The descriptive reads in `LBA-AM6-8`** presuppose the same full run **and** the unblind.
+- **The pre-screen and the draw** (`LBA-AM6-2`) presuppose both artifacts passing their sidecar
+  checks and nothing else; they read no verdict.
+
+#### `LBA-AM6-8` — descriptive reads that decide nothing, including the identification field
+
+**Reported beside the verdict, marked as deciding nothing, with no threshold and no branch reading
+any of them:**
+
+- **`LAL-Q4` — identification.** Per row, what he answered and, after the unblind, whether it was
+  right: the counts of *no*, of *yes and right*, and of *yes and wrong*, per depth. **It never enters
+  the tally, the margin, the bar or any verdict.** A verdict reached on rows he could identify is
+  still the verdict; how much weight that leaves it is for the owner to judge, with the count in
+  front of him — **not** for the write-up to discount rows by.
+- **`LAL-Q3` — strength**: clear picks by strength and by role, per axis (`LBD-AM6-5`'s treatment).
+- **`LAL-K`**: rows ticked, per depth and per axis's *no-preference* rows.
+- **Computed trade-off rows**: rows on which `LAL-Q1` and `LAL-Q2` name opposite sides.
+- **The sealed metrics** of `LBA-AM6-5`, and whether any tracked his picks.
+
+**The unblind script is tested for invariance**: the verdict must be identical under every
+assignment of `LAL-Q3`, `LAL-Q4` and `LAL-K`, as `lbl_unblind.py` is for strength.
+
+#### `LBA-AM6-9` — run-once, and nothing carries across listens
+
+**This verdict is run-once and final under `GBL-` §5.** An unwelcome verdict stands; it may not be
+re-listened on any protocol, re-tallied on strength, identification or familiarity, or re-read
+after `LBA-G5`. A later listen on new pairs is a new amendment and produces a new verdict, never a
+correction of this one.
+
+**No verdict carries across listens.** Listen 1 (served against `LBD-A0V`) and listen 2 (`LBD-A0V`
+against `LBD-A5V`) both read the tie; **neither says anything about the candidate**, this listen
+says nothing about either of their comparisons, and **no transitive claim may be built across the
+three**. This verdict also says nothing about `LBA-A3`, any other threshold, the `U` row, `LBA-A9`,
+or any map not built; `LBA-R9` stays unreachable (`LBA-AM3-1`) and this listen is not a substitute
+for it.
+
+#### `LBA-AM6-10` — barred reads, whatever the verdict
+
+- **Attribution to any one column or subset** (`LBA-AM6-1`): threshold, population, payload, fame
+  date, data source — and, within the data column, any one component of the bundle (`LBA-X4`).
+- **A population effect without the payload beside it** (§2.1's bar), and a served-map comparison
+  attributed to "the similarity data" without `LBA-X5` beside it.
+- **Attribution to the ramp or the fame ranking alone** at d10/d20 (`LBA-AM6-1`).
+- **Generalisation to the typical journey** (`LBA-X9`), or to the cheaper pairing form — the
+  candidate uses ListenBrainz's own pairing (`LBA-D1`), and `LBD-X6`'s logic applies.
+- **"Equivalent" from a tie** (`REQ-41`).
+- **Any read of the descriptive or sealed quantities as deciding anything** (`LBA-AM6-8`).
+- **Any `LBA-G5` outcome as re-reading this verdict**, or this verdict as evidence about `LBA-G5`'s
+  criterion. The gate's pre-written criterion is what keeps the two apart (`LBA-AM5`).
+
+#### `LBA-AM6-11` — where things land, and what does NOT change
+
+**Outputs.** The listen's harness, runner brief, pairs, pre-screen output and (later) verdicts in
+`builder/analysis/2026-09-22-lba-a6-blind-listen/`, **adapted by copy** from
+`builder/analysis/2026-09-10-lbd-blind-listen/`, whose files stay frozen as the record of listens 1
+and 2. The sealed mapping and hidden metrics in `.superpowers/lal/`. The owner's `LBA-G5` pair log
+(`LBA-AM5`) at the location the runner brief names. The result in a findings note written by the
+write-up session.
+
+**What does not change:** every `LBA-` bar value, `LBA-G1`–`LBA-G5` and their criteria, `LBA-D1`–`D3`,
+the go ruling, `LBA-AM5`'s order, `LBA-G5`'s period, both `LBL-` verdicts, and `ApiConfig.graph_path`.
+**It adopts nothing, changes no default, touches no shipped code, recommends nothing and selects
+nothing.** Nothing in it was written with knowledge of any journey this listen could present.
+
+**Identifiers `LBA-AM6` (sub-items `-1`–`-11`), `LAL-` (`LAL-Q1`–`Q4`, `LAL-K`, `LAL-R1`–`R4`),
+`LBA-X9`, `LBA-X10`.** Collision-checked 2026-09-22 across every local and remote ref, by
+`git grep -lE` over `refs/remotes` and `refs/heads` for `\bLBA-AM6`, `\bLAL-`, `\bLBA-X9` and
+`\bLBA-X1[0-9]`: **all free.**
