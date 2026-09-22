@@ -1,6 +1,6 @@
 # Handoff — the `LBA-A6` candidate is built and the use gate is the owner's, 2026-09-21
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-22 by [`2026-09-22-HANDOFF-lba-listen-amendments.md`](2026-09-22-HANDOFF-lba-listen-amendments.md)** — `LBA-AM5` put the blind listen BEFORE the use gate, so this note's "run the gate next" is superseded. ACTIVE for everything else it records. Supersedes
 [`2026-09-16-HANDOFF-lbd-s4-stage3.md`](2026-09-16-HANDOFF-lbd-s4-stage3.md) on next actions. It
 does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

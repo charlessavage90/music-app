@@ -234,6 +234,7 @@ gitignored, so this table is the durable copy.
 | 5 | 2026-09-13 16:49 | `84c3abb9` | none | the `LBD-` fidelity spec, opened **via Bash** | `path_glob_match` | **Unruled, and it contradicts #1 and #4** — see `DLS-T1-X6` |
 | 6 | 2026-09-14 20:42 | `e3cd11fc` | none | the `LBA-` adoption pre-registration, opened **via Bash throughout** | `path_glob_match` | **Unruled, and it agrees with #5 against #1 and #4** — see `DLS-T1-X6` |
 | 7 | 2026-09-14 13:40, 13:57, 15:14 | `a20eb50d` | none | the `LBA-` adoption pre-registration | `path_glob_match` ×3 | **Unruled** — the authoring session; three loads, one session |
+| 8 | 2026-09-22 19:04 | `c3875352` | none | the `LBA-` adoption pre-registration — a Bash heading grep, then **`Read`-tool** opens; the load arrived with the `Read` | `path_glob_match` | **Unruled** — this session then wrote `LBA-AM5`/`LBA-AM6` into that spec, so it is an amending session, row 7's class; the read decides whether that class counts |
 
 **`DLS-T1-X7` — row 6 is a second Bash-only session that DID load the rule, and two of them now
 outweigh the original confound.** Added 2026-09-14 by the `LBA-` stage-1 session, from its own

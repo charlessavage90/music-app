@@ -47,66 +47,59 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-21, at the `LBA-A6` candidate closeout.** **Nothing a listener sees has
+**Last updated: 2026-09-22, at the `LBA-AM5`/`LBA-AM6` closeout.** **Nothing a listener sees has
 changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched,
 and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
 
-# ⛔ THE `LBA-A6` CANDIDATE IS BUILT. THE NEXT ACTION IS THE OWNER RUNNING THE USE GATE.
+# ⛔ THE BLIND LISTEN NOW RUNS BEFORE THE USE GATE. DO NOT RUN `LBA-G5` YET.
 
-**He ruled GO on 2026-09-21** at `LBA-A6` — *every artist the deeper crawl found, at the
-two-listener bar* — and gave two further rulings during the session: recalibrate acceptance to
-admit the candidate, and re-extract the id maps over its population first. **All four pieces of
-work landed.** Figures are owned by
-[`../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md)
-and restated nowhere, including here. Reasoning is
-[`2026-09-21-lbd-s4-a6-adoption-execution-log.md`](2026-09-21-lbd-s4-a6-adoption-execution-log.md);
+**`LBA-AM5` (2026-09-22) reversed `LBA-AM4`'s order.** The `REQ-38` blind listen (§8 item 4) runs
+**first**; `LBA-G5`, the owner's two-day use gate, runs **second**. Running the gate first would
+have had the listen's only listener using the candidate knowingly for up to two days immediately
+before a run-once blind listen. **`LBA-AM6` (same day) is that listen's design**, written cold
+before any journey existed on either map. Both are in the pre-registration's §11,
+[`specs/2026-09-14-lbd-s4-adoption-preregistration.md`](specs/2026-09-14-lbd-s4-adoption-preregistration.md);
 the current handoff is
-[`2026-09-21-HANDOFF-lbd-s4-a6-candidate.md`](2026-09-21-HANDOFF-lbd-s4-a6-candidate.md).
-
-**What `LBA-G5` is, in plain terms.** He uses the new map himself, locally, for **up to two days of
-actual use**, against a pass/fail criterion **he wrote before seeing a single journey on it**. It
-is a **stop-gate**: it can only ever stop the candidate. The governing text is `LBA-AM4`, added to
-the pre-registration's §11 **before any build work began**.
+[`2026-09-22-HANDOFF-lba-listen-amendments.md`](2026-09-22-HANDOFF-lba-listen-amendments.md).
+Candidate figures stay owned by
+[`../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md).
 
 > ## ⚠ Four things about this state that are easy to get backwards
 >
-> **A `LBA-G5` pass is NOT evidence of quality and does NOT replace `REQ-38`.** The blind listen is
-> still owed in full at §8 item 4, designed **cold**, by a session that has seen no journey on
-> either map (`LBA-D3`). `GBL-` §5's run-once rule will bind its verdict.
+> **No journey exists on the candidate, and nobody may generate one outside `LBA-AM6`'s
+> sessions.** Any journey shown to the owner before the listen spends its blind, which cannot be
+> recovered (`GBL-` §5).
 >
-> **The acceptance recalibration REJECTS the served map and REJECTS the fallback.** The builder
-> cannot reproduce `graph-msw-tu50.bin` while these bounds stand — the `LUX-E1` drift shape,
-> deliberately re-entered, raised before he ruled. **If the gate fails, restore `acceptance.py`'s
-> `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map.** A test asserts the
-> rejection so it cannot present as a mystery. Deferral registry below.
+> **The listen's verdict is run-once and final, and a `LBA-G5` pass is still not evidence of
+> quality.** A tie (`LAL-R2`) is not "no worse" (`REQ-41`). No verdict carries across the three
+> listens.
 >
-> **A wrong-artist clip during the gate is NOT a `LBA-G5` signal.** Id coverage improved sharply
-> but is still partial; a missing id degrades to name search, which is today's behaviour and never
-> a wrong answer. It is a property of an id snapshot, not of the similarity graph, and his
-> criterion is about novelty and coherence.
+> **The acceptance recalibration still REJECTS the served map and the fallback.** If the candidate
+> is not adopted, for any reason, restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)`
+> line BEFORE rebuilding either map. Deferral registry below.
 >
-> **The id re-extraction only PARTIALLY discharges the `LUX-4` deferral** — for the candidate's
-> population. **The served lineage's own re-extract remains armed.**
+> **A wrong-artist clip is NOT a `LBA-G5` signal** — it is a property of an id snapshot, not of
+> the similarity graph. And the id re-extraction discharged `LUX-4` **only** for the candidate's
+> population; the served lineage's re-extract remains armed.
 
-**Nothing is deployed and no default is changed.** The candidate artifact is gitignored; its sha256
-lives in its manifest sidecar and must be taken from there, never transcribed (`DEP-24`).
+Branch `lbd-s4-listen-amendments`, PR **#132**, stacked on `lbd-s4-a6-adoption`, PR **#131**.
 
-⛔ **The two `LBL-` verdicts are run-once and final.** Unchanged by this work.
+**THE REMAINING ACTIONS, in this order — and per the rule above, this file does not record how far
+down the list anyone has got.**
 
-Branch `lbd-s4-a6-adoption`, PR **#131**.
-
-**THE REMAINING ACTIONS ARE THE OWNER'S, in this order — and per the rule above, this file does
-not record how far down the list he has got.**
-
-1. **Run the queued use-the-app tests** — `TEST-QUEUE.md`, 15 unticked. Nothing here changed them.
-2. **Merge the candidate PR.**
-3. **Decide whether `LBD-AM3`'s override extends to `LBD-A4`** as a statement about *absolute*
-   fidelity. **Nothing is blocked by it.**
-4. **RUN `LBA-G5`, THE USE GATE.** Two days of actual use against his own criterion. The local run
-   command, and the check that tells him he is on the candidate rather than the served map, are
-   the candidate README §8. **If it PASSES**, the `REQ-38` listen amendment is next, written cold
-   by a separate session. **If it FAILS**, restore the acceptance bounds first, then the fallback
-   is `LBA-A3`.
+1. **The owner:** run the queued use-the-app tests (`TEST-QUEUE.md`); merge #131, then #132.
+   Decide whether `LBD-AM3`'s override extends to `LBD-A4` — nothing blocks on it.
+2. **A fresh PREPARATION session** (`LBA-AM6-2`, `-11`): builds the listen's harness by copy into
+   `builder/analysis/2026-09-22-lba-a6-blind-listen/`, **commits the pre-screen rule before first
+   running it**, runs the pre-screen and the pair draw, shows the owner the twelve pairs as
+   **endpoint names only** for his strike, and writes the runner brief. It sees map-labelled output,
+   so it may run neither the listen nor the write-up.
+3. **A fresh, mechanics-only RUNNER session**, from that brief: generation, clips, serving. The
+   owner listens: 8 pairs × 3 depths, every question on every row.
+4. **A further fresh WRITE-UP session:** the unblind and the findings note.
+5. **Then `LBA-G5`**, the owner's two days of use against his own criterion, **logging every artist
+   pair he uses** (`LBA-AM5`).
+6. **Then adoption — the owner's.**
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
