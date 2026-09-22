@@ -962,6 +962,13 @@ None of it runs before the stop.
 > **The numbering of items 1–4 is deliberately unchanged**, so that every document written before
 > 2026-09-21 that says *"§8's four items"* still resolves. §8 now has **five stages**; item 4 is
 > still item 4.
+
+> ### ⚠ `LBA-AM5` REVERSES THE ORDER OF THE TWO STAGES BELOW — dated 2026-09-22
+>
+> **Item 4, the blind listen, runs FIRST; `LBA-G5`, the use gate, runs SECOND.** Running the gate
+> first would have had the listen's one listener using the candidate knowingly for up to two days
+> immediately before a run-once blind listen. The box above is `LBA-AM4`'s and is left as written;
+> the order it implies is superseded. Reasoning, and the gate's pair log: §11 `LBA-AM5`.
 4. **Then the `REQ-38` blind listen: today's map against the candidate, on today's artists** — the
    shape the owner can judge, and the only evidence class this project treats as primary.
    **Designed cold, as a separate amendment to this document, written when no journey exists on
@@ -1653,3 +1660,130 @@ it forfeits nothing except the chance to stop early, and `REQ-38` still stands b
 **Identifiers `LBA-AM4` and `LBA-G5`.** Both collision-checked across every local and remote ref on
 2026-09-21, by `git grep -lE` over `refs/remotes` and `refs/heads` restricted to `*.md`: **both
 free.**
+
+---
+
+### `LBA-AM5` — the blind listen runs FIRST and the use gate SECOND: `LBA-AM4`'s sequence corrected
+
+**Dated 2026-09-22. Forward-only: `LBA-AM4`'s text above is not edited**, and neither is any bar's
+value. The owner instructed this amendment on 2026-09-22.
+
+> ### What exists when this is written, stated plainly
+>
+> - **The `LBA-A6` candidate is built, serialised and pinned** (§8 items 1–3), with its four
+>   id/fact maps **re-extracted over its own population** on the owner's ruling of 2026-09-21. Its
+>   identity is its manifest sidecar beside it in `C:\unsung-fast\lbd-artifacts\`; the checksum is
+>   taken from there and never transcribed (`DEP-24`). Figures are owned by
+>   [`builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md).
+> - **No journey has been generated on the candidate by any session** — that README says so, and
+>   no script in its directory calls the router. *Stated precisely rather than more broadly, because
+>   `LBA-AM4`'s wording ("no journey has been generated on any `LBA-` map by anyone") is wider than
+>   the record: stage 2's `LBA-M1` query-cost half (`s4_query_cost.py`) ran the shipped
+>   `find_journey` at d0 over 200 seeded random pairs on the **fame-free stage-2** `LBA-A6` arm and on
+>   the served map, for **wall-clock timing only**. It recorded times and hop counts, no artist, and
+>   nothing was shown to anyone. No listener has seen, heard or been told a journey on any `LBA-` map.*
+> - **The owner has not run the use gate `LBA-G5`.** No result of it exists.
+> - **No result of the `REQ-38` listen exists, and none of its design exists either** — it is
+>   `LBA-AM6`, written after this amendment is committed.
+>
+> **What it spends: nothing.** It moves the order of two stages, neither of which has run, and it
+> changes no criterion, no bar, no period and no read.
+
+#### The defect
+
+**`LBA-AM4` inserted an unblinded use stage that generates journeys on the candidate immediately
+before §8 item 4.** Item 4 is the `REQ-38` blind listen, whose precondition is that it is **designed
+when no journey exists** (§8 item 4; `LBA-AM4`'s own bar 2 restates it), and **whose listener is the
+same person who runs the use gate** — the owner. Running the gate first means the one listener
+arrives at a run-once blind listen having spent up to two days using the candidate knowingly.
+
+**That contamination can be neither measured nor undone.** `GBL-` §5 makes each listen's verdict
+run-once and final, so a contaminated verdict cannot be repeated clean; and nothing in the listen
+could separate a pick made on the journeys from a pick made on a remembered interior, a
+recognised style, or a feel learned during the gate. **This is not hypothetical here:** the `GBL-`
+run log §5
+([`../2026-08-04-gbl-run-execution-log.md`](../2026-08-04-gbl-run-execution-log.md)) records the
+listener volunteering, before he saw the result, that it was *"almost always really easy to tell
+which side was the 'new' graph"* — identification by feel, in an earlier listen, **without** two
+days of prior use. Two days of knowing use can only make that easier.
+
+`LBA-AM4` did not intend this: it states that it *"does not design, shape, pre-empt or narrow the
+`REQ-38` listen"*. The defect is in the sequence, not in the gate.
+
+#### The fix — the order of §8's fourth and fifth stages is reversed
+
+**The `REQ-38` blind listen (§8 item 4) runs FIRST. `LBA-G5`, the use gate, runs SECOND.** §8 items
+1–4 keep their numbers, as `LBA-AM4` requires; what changes is only which of the two post-build
+stages runs first. So the sequence is now: items 1–3 (done) → **item 4, the blind listen** →
+**`LBA-G5`, the use gate** → adoption, which is the owner's.
+
+**Why this order and not the other — an asymmetry, not a preference:**
+
+- **If the candidate FAILS the gate, the listen's verdict is discarded, whichever order they ran
+  in.** A failed gate stops the candidate (`LBA-AM4` bar 3), so a verdict about a candidate that
+  will not ship is spent either way. Running the listen first costs, at worst, a listen on a
+  candidate that is then stopped.
+- **If the candidate PASSES the gate, the listen is adoption's primary evidence** (`REQ-38`: offline
+  metrics must not override listener judgment), **and it must be uncontaminated.** Running the gate
+  first would put the adoption decision on a verdict whose blind had already been spent.
+
+So listen-first loses, at most, the ear on a candidate the gate would have stopped. Gate-first
+loses, whenever the candidate is good enough to adopt, the integrity of the only evidence the
+adoption rests on. **The cost named in `LBA-AM4` bar 3 — *"failing it means the candidate is not
+listened to"* — is thereby given up deliberately**, on the owner's instruction: the listen is now
+spent before the cheap gate can stop the candidate.
+
+**The gate is unblinded by design, and running it second does not weaken it.** It never depended on
+not knowing which map he was on (`LBA-AM4`, *"What being unblinded costs"*). What protects it from
+knowledge of the listen's verdict is **its pre-written criterion**, recorded verbatim in `LBA-AM4`
+on 2026-09-21 before any journey or verdict existed: *"a noticeably worse product experience on
+more than half of tested journeys"*, with its two limbs. He judges journeys against that sentence,
+not against the listen's result, and the sentence cannot be moved now that a verdict will exist
+before the gate runs — §11's rule that a bar's value is never edited binds it.
+
+**`LBA-G5`'s outcomes after a verdict exists, fixed now so neither is decided later:**
+
+- **Gate FAILS** — the candidate is stopped exactly as `LBA-AM4` bar 3 says. The listen's verdict is
+  recorded and stands as the run-once record of that comparison; it adopts nothing. The fallback,
+  and the restoration of `acceptance.py`'s previous bounds before any rebuild, are unchanged —
+  `NEXT.md`'s deferral row already keys the restoration on *"the candidate is not adopted"*, which
+  covers every route.
+- **Gate PASSES** — licenses nothing except proceeding to the owner's adoption decision, with the
+  listen's verdict as its primary evidence. `LBA-AM4` bar 4 is otherwise unchanged.
+
+#### One new requirement on the gate: the owner logs the artist pairs he uses
+
+**During `LBA-G5`, the owner records every artist pair he runs a journey on** — the two endpoint
+artists, in the order entered, one line per journey. *Plain: write down which two artists each
+journey went between, so that anyone reading the gate's result later can see what it was tested
+on.* Where the log lives is an operational choice and is `LBA-AM6`'s runner brief's to name. Two
+reasons, neither of which reaches the listen, which by then will already have run:
+
+1. **"More than half of tested journeys" needs a denominator.** Without a log, the effect size the
+   owner wrote into his own criterion has nothing to be counted against.
+2. **It makes the pairs available to any later listen** — as exclusions, because a pair he has used
+   knowingly on the candidate carries the memory tell `lbl_pairs.py` step 2 excludes for `GBL-AM1`.
+
+The log records **pairs, not verdicts per journey.** His criterion is his, applied as he wrote it;
+the log does not turn it into a scored instrument, and `LBA-AM4` bar 1 — *no figure it yields may
+enter the record as a measurement of path quality* — is unchanged.
+
+#### The owner's gate period stands
+
+**"2 days of actual app use, maximum"** is his, given 2026-09-21 and recorded verbatim in `LBA-AM4`.
+**This amendment does not shorten, lengthen or otherwise touch it.** Moving the gate after the
+listen changes when it starts, not how long it is.
+
+#### What this amendment does NOT do
+
+- **It edits no text of `LBA-AM4`** and moves no bar's value — `LBA-G5`'s criterion, its two limbs,
+  its effect size and its period all stand verbatim.
+- **It designs no part of the `REQ-38` listen.** That is `LBA-AM6`, written after this is committed.
+- **It generates, draws or describes no journey and no pair.**
+- **It does not reopen `LBA-D1`–`D3` or the go ruling**, re-reads no `LBD-` or `LBA-` criterion, and
+  leaves both `LBL-` verdicts run-once and final.
+- **It adopts nothing, changes no default and touches no shipped code.**
+- **It does not renumber §8.**
+
+**Identifier `LBA-AM5`.** Collision-checked 2026-09-22 across every local and remote ref, by
+`git grep -lE '\bLBA-AM5'` over `refs/remotes` and `refs/heads`: **free.**
