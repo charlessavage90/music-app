@@ -1,6 +1,6 @@
 # Handoff — the `LAL-` blind listen prepared (`LBA-AM6-2`, `-11`; `LBA-AM7`), 2026-09-23
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-23 by [`2026-09-23-HANDOFF-lal-listen-read.md`](2026-09-23-HANDOFF-lal-listen-read.md)** — the listen it prepared has run and been read. It remains authoritative for what it recorded about the preparation. ~~ACTIVE — this is the CURRENT handoff. Nothing supersedes it.~~ Supersedes
 [`2026-09-22-HANDOFF-lba-listen-amendments.md`](2026-09-22-HANDOFF-lba-listen-amendments.md) on next
 actions. It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

@@ -19,6 +19,58 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-23 — was the live top block from the `LAL-` listen preparation closeout (2026-09-23)
+
+**Last updated: 2026-09-23, at the `LAL-` listen PREPARATION closeout.** **Nothing a listener sees
+has changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is
+untouched, and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
+
+# ⛔ THE BLIND LISTEN IS PREPARED. THE NEXT ACTION IS A FRESH RUNNER SESSION — NOT `LBA-G5`.
+
+**`LBA-AM6`'s preparation step is done**, under an amendment: **`LBA-AM7` (2026-09-23) rebuilt the
+pair pool** from the owner's extended Spotify history and had him vet 150 names, after he did not know
+most endpoints of the first draw. Pairs are final and pinned (`lal_pairs.json`; he struck none), and a
+write-nothing generation dry-run passed every gate. The harness and `RUNNER-BRIEF.md` are in
+[`../../builder/analysis/2026-09-22-lba-a6-blind-listen/`](../../builder/analysis/2026-09-22-lba-a6-blind-listen/);
+the current handoff is [`2026-09-23-HANDOFF-lal-listen-prep.md`](2026-09-23-HANDOFF-lal-listen-prep.md).
+
+> ## ⚠ Five things about this state that are easy to get backwards
+>
+> **Only `LBA-AM6`'s own sessions may generate a journey on the candidate**, and the preparation
+> session is now barred from the listen and the write-up. Any journey shown to the owner before the
+> listen spends its blind, which cannot be recovered (`GBL-` §5).
+>
+> **The runner does not unblind, and its worktree must survive it** — the sealed mapping is
+> gitignored and lives there; the write-up session runs `lal_unblind.py` in that worktree.
+>
+> **The listen's verdict is run-once and final, and a `LBA-G5` pass is still not evidence of
+> quality.** A tie (`LAL-R2`) is not "no worse" (`REQ-41`). No verdict carries across the listens.
+>
+> **The acceptance recalibration still REJECTS the served map and the fallback.** If the candidate
+> is not adopted, for any reason, restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)`
+> line BEFORE rebuilding either map. Deferral registry below.
+>
+> **A wrong-artist clip is NOT a `LBA-G5` signal** — it is a property of an id snapshot, not of
+> the similarity graph (`LBA-AM4`).
+
+Branch `lba-a6-listen-prep`, PR **#133**.
+
+**THE REMAINING ACTIONS, in this order — this file does not record how far down the list anyone has
+got.**
+
+1. **The owner:** merge #133. Run the queued use-the-app tests (`TEST-QUEUE.md`) when convenient —
+   nothing below blocks on them. Decide whether `LBD-AM3`'s override extends to `LBD-A4` — nothing
+   blocks on it.
+2. **A fresh, mechanics-only RUNNER session**, given `RUNNER-BRIEF.md` and nothing else: generation,
+   clips, serving. The owner listens: 8 pairs × 3 depths, every question on every row.
+3. **A further fresh WRITE-UP session**, in the runner's worktree: `lal_unblind.py`, then the findings
+   note.
+4. **Then `LBA-G5`**, the owner's two days of use against his own criterion, **logging every artist
+   pair he uses** (`LBA-AM5`; the file is named in the runner brief).
+5. **Then adoption — the owner's.**
+
+---
+
 ## Demoted 2026-09-23 — was the live top block from the `LBA-AM5`/`LBA-AM6` closeout (2026-09-22)
 
 **Last updated: 2026-09-22, at the `LBA-AM5`/`LBA-AM6` closeout.** **Nothing a listener sees has
