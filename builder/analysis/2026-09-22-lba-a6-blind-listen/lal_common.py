@@ -44,7 +44,7 @@ MAPS_PIN = HERE / "lal_maps.json"   # written by `lal_pin_maps.py` from the side
 # The post-strike pair file (`LBA-AM6-2` step 9). Pinned here, by commit, after the owner's strike;
 # empty until then, so generation refuses rather than running on an un-struck draw.
 LAL_PAIRS = HERE / "lal_pairs.json"
-LAL_PAIRS_SHA = ""
+LAL_PAIRS_SHA = "b28d1d2b3db099f6fa4b25eb1edfbd67fc91ebbd5212fb80ea1241f695433a24"   # owner's strike 2026-09-23: none
 
 ROLES = ("incumbent", "challenger")   # served map, `LBA-A6` candidate. Roles are sealed, never shown.
 DEPTHS = (0, 10, 20)                  # `LBA-AM6-3`
