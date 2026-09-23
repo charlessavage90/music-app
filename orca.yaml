@@ -1,0 +1,17 @@
+# Orca worktree setup (github.com/stablyai/orca). Orca reads scripts.setup from the NEW worktree
+# and runs it once after creating it.
+#
+# The #! line is load-bearing on Windows: without it Orca runs the script under cmd.exe. With it,
+# Orca runs it in Git Bash (only if Orca's terminal shell resolves to Git Bash) and replays the
+# flags with `set`, so -eo pipefail really applies.
+#
+# Orca's parser uses uniqueKeys: true and discards the WHOLE file silently on any parse error —
+# a duplicate key here means no setup at all, with no message.
+scripts:
+  setup: |
+    #!/usr/bin/env -S bash -eo pipefail
+    export UV_LINK_MODE=copy
+    cd "${ORCA_WORKTREE_PATH:-.}"
+    (cd builder && uv sync --extra dev)
+    (cd api && uv sync --extra dev)
+    (cd frontend && npm ci)

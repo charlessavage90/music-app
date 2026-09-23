@@ -309,6 +309,13 @@ across a `git worktree add`. So:
   — stated as inference, not observation.** Consistent with the `music-app-lbl` worktree having no
   `.claude/logs/` directory at all as of 2026-09-12, which is what a hook that never ran there
   looks like.
+- **2026-09-23 — that second case is now observed, not inferred.** Session `bd8459ad` was launched
+  by Orca with its working directory already inside
+  `C:\Users\charl\worktrees\music-app\Orca-Environment-Setup`. Its two session-start rows are in
+  **that worktree's** `.claude/logs/instructions-loaded.jsonl`, stamped with the worktree `cwd`, and
+  nothing reached the main tree's log. **Consequence for the count: under Orca every session is
+  launched this way, so none can qualify** unless it is started in `C:\dev\music-app` itself. The
+  instrument stays frozen as below; the read's timing is the owner's call.
 
 **The log is not being repointed**: §6 freezes the instrument until `C1` is read.
 
