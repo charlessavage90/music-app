@@ -47,59 +47,53 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-22, at the `LBA-AM5`/`LBA-AM6` closeout.** **Nothing a listener sees has
-changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched,
-and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
+**Last updated: 2026-09-23, at the `LAL-` listen PREPARATION closeout.** **Nothing a listener sees
+has changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is
+untouched, and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
 
-# ⛔ THE BLIND LISTEN NOW RUNS BEFORE THE USE GATE. DO NOT RUN `LBA-G5` YET.
+# ⛔ THE BLIND LISTEN IS PREPARED. THE NEXT ACTION IS A FRESH RUNNER SESSION — NOT `LBA-G5`.
 
-**`LBA-AM5` (2026-09-22) reversed `LBA-AM4`'s order.** The `REQ-38` blind listen (§8 item 4) runs
-**first**; `LBA-G5`, the owner's two-day use gate, runs **second**. Running the gate first would
-have had the listen's only listener using the candidate knowingly for up to two days immediately
-before a run-once blind listen. **`LBA-AM6` (same day) is that listen's design**, written cold
-before any journey existed on either map. Both are in the pre-registration's §11,
-[`specs/2026-09-14-lbd-s4-adoption-preregistration.md`](specs/2026-09-14-lbd-s4-adoption-preregistration.md);
-the current handoff is
-[`2026-09-22-HANDOFF-lba-listen-amendments.md`](2026-09-22-HANDOFF-lba-listen-amendments.md).
-Candidate figures stay owned by
-[`../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`](../../builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md).
+**`LBA-AM6`'s preparation step is done**, under an amendment: **`LBA-AM7` (2026-09-23) rebuilt the
+pair pool** from the owner's extended Spotify history and had him vet 150 names, after he did not know
+most endpoints of the first draw. Pairs are final and pinned (`lal_pairs.json`; he struck none), and a
+write-nothing generation dry-run passed every gate. The harness and `RUNNER-BRIEF.md` are in
+[`../../builder/analysis/2026-09-22-lba-a6-blind-listen/`](../../builder/analysis/2026-09-22-lba-a6-blind-listen/);
+the current handoff is [`2026-09-23-HANDOFF-lal-listen-prep.md`](2026-09-23-HANDOFF-lal-listen-prep.md).
 
-> ## ⚠ Four things about this state that are easy to get backwards
+> ## ⚠ Five things about this state that are easy to get backwards
 >
-> **No journey exists on the candidate, and nobody may generate one outside `LBA-AM6`'s
-> sessions.** Any journey shown to the owner before the listen spends its blind, which cannot be
-> recovered (`GBL-` §5).
+> **Only `LBA-AM6`'s own sessions may generate a journey on the candidate**, and the preparation
+> session is now barred from the listen and the write-up. Any journey shown to the owner before the
+> listen spends its blind, which cannot be recovered (`GBL-` §5).
+>
+> **The runner does not unblind, and its worktree must survive it** — the sealed mapping is
+> gitignored and lives there; the write-up session runs `lal_unblind.py` in that worktree.
 >
 > **The listen's verdict is run-once and final, and a `LBA-G5` pass is still not evidence of
-> quality.** A tie (`LAL-R2`) is not "no worse" (`REQ-41`). No verdict carries across the three
-> listens.
+> quality.** A tie (`LAL-R2`) is not "no worse" (`REQ-41`). No verdict carries across the listens.
 >
 > **The acceptance recalibration still REJECTS the served map and the fallback.** If the candidate
 > is not adopted, for any reason, restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)`
 > line BEFORE rebuilding either map. Deferral registry below.
 >
 > **A wrong-artist clip is NOT a `LBA-G5` signal** — it is a property of an id snapshot, not of
-> the similarity graph. And the id re-extraction discharged `LUX-4` **only** for the candidate's
-> population; the served lineage's re-extract remains armed.
+> the similarity graph (`LBA-AM4`).
 
-Branch `lbd-s4-listen-amendments`, PR **#132**, stacked on `lbd-s4-a6-adoption`, PR **#131**.
+Branch `lba-a6-listen-prep`, PR **#133**.
 
-**THE REMAINING ACTIONS, in this order — and per the rule above, this file does not record how far
-down the list anyone has got.**
+**THE REMAINING ACTIONS, in this order — this file does not record how far down the list anyone has
+got.**
 
-1. **The owner:** run the queued use-the-app tests (`TEST-QUEUE.md`); merge #131, then #132.
-   Decide whether `LBD-AM3`'s override extends to `LBD-A4` — nothing blocks on it.
-2. **A fresh PREPARATION session** (`LBA-AM6-2`, `-11`): builds the listen's harness by copy into
-   `builder/analysis/2026-09-22-lba-a6-blind-listen/`, **commits the pre-screen rule before first
-   running it**, runs the pre-screen and the pair draw, shows the owner the twelve pairs as
-   **endpoint names only** for his strike, and writes the runner brief. It sees map-labelled output,
-   so it may run neither the listen nor the write-up.
-3. **A fresh, mechanics-only RUNNER session**, from that brief: generation, clips, serving. The
-   owner listens: 8 pairs × 3 depths, every question on every row.
-4. **A further fresh WRITE-UP session:** the unblind and the findings note.
-5. **Then `LBA-G5`**, the owner's two days of use against his own criterion, **logging every artist
-   pair he uses** (`LBA-AM5`).
-6. **Then adoption — the owner's.**
+1. **The owner:** merge #133. Run the queued use-the-app tests (`TEST-QUEUE.md`) when convenient —
+   nothing below blocks on them. Decide whether `LBD-AM3`'s override extends to `LBD-A4` — nothing
+   blocks on it.
+2. **A fresh, mechanics-only RUNNER session**, given `RUNNER-BRIEF.md` and nothing else: generation,
+   clips, serving. The owner listens: 8 pairs × 3 depths, every question on every row.
+3. **A further fresh WRITE-UP session**, in the runner's worktree: `lal_unblind.py`, then the findings
+   note.
+4. **Then `LBA-G5`**, the owner's two days of use against his own criterion, **logging every artist
+   pair he uses** (`LBA-AM5`; the file is named in the runner brief).
+5. **Then adoption — the owner's.**
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never

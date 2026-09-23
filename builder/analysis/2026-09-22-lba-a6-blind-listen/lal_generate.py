@@ -159,9 +159,10 @@ def conflicting_deezer_ids(served, candidate) -> list[str]:
 
 
 def artist_source(served, candidate):
-    """`LBA-AM6-6`: name, disambiguation and Deezer id from ONE source per artist — the candidate
-    where it holds the artist and records an id, otherwise the served map. The same answer whichever
-    side the artist is presented on."""
+    """`LBA-AM6-6`: one answer per artist, whichever side presents it. Name and disambiguation from
+    the candidate where it holds the artist, otherwise the served map; Deezer id from the candidate
+    where it records one, otherwise the served map's, otherwise "" (the resolver then searches by
+    name)."""
     def info(mbid: str) -> tuple[str, str, str]:
         ci = candidate.id_by_mbid.get(mbid)
         si = served.id_by_mbid.get(mbid)

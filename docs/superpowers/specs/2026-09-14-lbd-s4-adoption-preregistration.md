@@ -2230,7 +2230,7 @@ journey on it was shown to anyone.
 endpoints came from the same short export. Their verdicts are **run-once and stand** (`GBL-` §5); this
 amendment re-reads none of them. **Owed:** each of the three findings notes' rows in `docs/README.md`
 carries a pointer to this sub-item saying their endpoints' familiarity was not confirmed with the
-owner. **Condition:** done when those three rows point here.
+owner. **Condition:** done when those three rows point here. ✅ **DISCHARGED 2026-09-23** — the three rows carry the pointer (`92a4231`).
 
 #### `LBA-AM7-6` — what does NOT change
 
