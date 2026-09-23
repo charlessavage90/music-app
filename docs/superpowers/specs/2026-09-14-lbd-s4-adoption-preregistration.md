@@ -2142,3 +2142,101 @@ nothing.** Nothing in it was written with knowledge of any journey this listen c
 `LBA-X9`, `LBA-X10`.** Collision-checked 2026-09-22 across every local and remote ref, by
 `git grep -lE` over `refs/remotes` and `refs/heads` for `\bLBA-AM6`, `\bLAL-`, `\bLBA-X9` and
 `\bLBA-X1[0-9]`: **all free.**
+
+---
+
+### `LBA-AM7` — `LBA-AM6-2`'s pool rebuilt from the owner's extended history, and vetted by him by name
+
+**Dated 2026-09-23. Written by the preparation session, after its first pre-screen ran and before
+any code under this amendment has run.** What that session had seen when writing it: the first
+pre-screen's **counts** (pool, eligible, drawn, rejections by gate, survivors) and the **twelve drawn
+pairs' endpoint names**. It had not opened any per-pair row, length, interior or novelty figure in
+`lal_prescreen.json`/`.md`, and it has generated, viewed and been told no journey. **Nothing in this
+amendment reads either map except for name-to-MBID membership**, so it cannot steer toward a side.
+
+**The plain question is unchanged.** Every read, gate, depth, question, bar and exposure of
+`LBA-AM6` stands. Only **step 1 (the pool) and the familiarity list** change, and with them the
+pairs.
+
+#### `LBA-AM7-1` — the defect
+
+Shown the twelve drawn pairs as endpoint names only (`LBA-AM6-2` step 9), **the owner did not
+recognise 11 of the 16 endpoints in the eight pairs they occupy** — *"I think some of these artists
+are instances where one song by them is on a playlist that I listen to frequently."* Only four of
+twelve pairs had two artists he knows. Striking eight exceeds the four reserves, so under
+`LBA-AM6-2` the draw stops.
+
+**Cause, verified in source.** The pool (`gbl_pair_candidates.json`, built by `gbl_pairs.py` for
+`GBL-`) is ranked by **total minutes played** from `StreamingHistory_music_0.json` — Spotify's short
+account-data export — so one song on a frequently played playlist can rank an artist near the top.
+Step 1's premise, *"both endpoints are artists he demonstrably knows (`REQ-41`)"*, was never checked
+against him. The same list feeds Gate N and ranking key (b) as the familiarity list, which therefore
+**under-reads what he has heard** (no pre-2025 history) as well as over-reading what he knows.
+
+The owner's **extended streaming history**, 2014–2026, is on his machine at
+`D:\unsung-large-data\Owner's Spotify Extended Streaming History\` (`Streaming_History_Audio_*.json`).
+No script in the repo had read it. **It is personal data and carries IP addresses: nothing raw from
+it is committed** — only per-artist derived counts.
+
+#### `LBA-AM7-2` — the new pool, fixed before it is built
+
+*Plain: list the artists he has listened to most widely — many different songs, not one song many
+times — show him the names, keep only the ones he says he knows, and draw from those.*
+
+1. **Qualifying stream:** an `Audio` record with a `master_metadata_album_artist_name` and
+   `ms_played ≥ 30 000` (Spotify's own count-as-a-play threshold). Podcasts and video are not music
+   and are skipped.
+2. **Per artist** (the name as recorded): `distinct_tracks` — distinct `spotify_track_uri` with a
+   qualifying stream; `plays` — qualifying streams; `years` — distinct calendar years with one;
+   `minutes`.
+3. **Order:** `distinct_tracks` descending, then `plays` descending, then name. **Breadth of
+   listening, not volume**, because the defect is exactly one track played many times.
+4. **Resolution:** the name is matched with the app's own `artistpath_api.search.normalise` against
+   `names` in **both** maps (`gbl_pairs.py`'s rule). Pool-eligible only if it resolves to exactly
+   one node in each and **the same MBID** in both. Also excluded: every endpoint `LBA-AM6-2` step 2
+   excludes (the three presented listens), unchanged.
+5. **The list shown to him:** the first **150** pool-eligible artists in that order, **names only**,
+   numbered. **He names every artist on it he does not know;** every one he does not name is taken
+   as known, so he reviews all 150. His answer is committed verbatim, with the list, before the
+   pre-screen runs.
+6. **Pool:** the known artists, in step 3's order. **Pool rank** (ranking key (c)) is the position in
+   that pool.
+7. **Too few:** if fewer than 12 survive the pre-screen, the **next 100** eligible artists are listed
+   for him the same way and appended in order; then the pre-screen reruns over the enlarged pool. It
+   is deterministic, so the first pool's pairs are reproduced as the greedy draw's prefix only where
+   pairing allows — the rerun's output is the one that stands.
+
+#### `LBA-AM7-3` — the familiarity list, rebuilt
+
+**Every artist with at least one qualifying stream in the extended history**, resolved by
+`normalise` against both maps, **every matching node in either map** (homonyms included, as the old
+list included `ambiguous`), **plus** every artist he marked as known. Used only to count, never to
+exclude — as before. **Over-reading is the safe direction here:** an artist wrongly counted as
+familiar can only make Gate N harder to pass and key (a) smaller; it cannot make a pair look more
+novel than it is. `LAL-K` still measures the residual on the row.
+
+#### `LBA-AM7-4` — what runs, and in what order
+
+`lal_pool_am7.py` (steps 1–5 and `-3`) and `lal_prescreen_am7.py` (step 6 onward: `LBA-AM6-2` steps
+4–9 **unchanged**, importing `lal_prescreen.py`'s committed gate and ranking functions) are committed
+**with this amendment, before either runs**. Then: build the list → he names the unknown → commit →
+pre-screen → the twelve pairs by endpoint name → **his strike, exactly `LBA-AM6-2` step 9** → pin →
+runner. The first draw (`lal_pairs_drawn.json`, `a76ab8b`) is **superseded, kept as the record**; no
+journey on it was shown to anyone.
+
+#### `LBA-AM7-5` — disclosed, and deferred with a success condition
+
+**The same premise was unchecked in all three earlier blind listens** (`GBL-`, `LBL-` 1 and 2), whose
+endpoints came from the same short export. Their verdicts are **run-once and stand** (`GBL-` §5); this
+amendment re-reads none of them. **Owed:** each of the three findings notes' rows in `docs/README.md`
+carries a pointer to this sub-item saying their endpoints' familiarity was not confirmed with the
+owner. **Condition:** done when those three rows point here. ✅ **DISCHARGED 2026-09-23** — the three rows carry the pointer (`92a4231`).
+
+#### `LBA-AM7-6` — what does NOT change
+
+Every `LBA-AM6` read, bar, gate (L, D, N), depth, question, blind rule, exposure and barred read;
+`MIN_INTERIOR`; the 8 + 4 selection; the strike; the harness downstream of `lal_pairs.json`.
+`LBA-X9` still applies. **It adopts nothing and changes no default.**
+
+**Identifier `LBA-AM7` (sub-items `-1`–`-6`).** Collision-checked 2026-09-23 by `git grep -lE
+'\bLBA-AM7'` over every local and remote ref: **free.**

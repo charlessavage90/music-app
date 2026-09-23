@@ -1,0 +1,154 @@
+{
+  "what": "LBA-AM7: 8 primaries and 4 ordered reserves, before the owner's strike",
+  "note": "Endpoint names, MBIDs and pool ranks only.",
+  "prescreen_script_sha256": "e6481db4411d3e4dbcde7e5391cfca31e8e03a8eb5776bfa0181a77c854ad618",
+  "primary": [
+    {
+      "a": {
+        "name": "St. Paul & The Broken Bones",
+        "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9",
+        "rank": 83
+      },
+      "b": {
+        "name": "Journey",
+        "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+        "rank": 84
+      }
+    },
+    {
+      "a": {
+        "name": "Lake Street Dive",
+        "mbid": "584758b2-306b-4aea-8694-3876943c9968",
+        "rank": 123
+      },
+      "b": {
+        "name": "Unwritten Law",
+        "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+        "rank": 124
+      }
+    },
+    {
+      "a": {
+        "name": "Orville Peck",
+        "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4",
+        "rank": 113
+      },
+      "b": {
+        "name": "Best Coast",
+        "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5",
+        "rank": 114
+      }
+    },
+    {
+      "a": {
+        "name": "U2",
+        "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+        "rank": 57
+      },
+      "b": {
+        "name": "Day Wave",
+        "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3",
+        "rank": 58
+      }
+    },
+    {
+      "a": {
+        "name": "Daryl Hall & John Oates",
+        "mbid": "debabff3-2559-46e5-862d-ef2a906d7010",
+        "rank": 45
+      },
+      "b": {
+        "name": "Cold War Kids",
+        "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+        "rank": 46
+      }
+    },
+    {
+      "a": {
+        "name": "Bruce Springsteen",
+        "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f",
+        "rank": 99
+      },
+      "b": {
+        "name": "DISPATCH",
+        "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+        "rank": 100
+      }
+    },
+    {
+      "a": {
+        "name": "Beck",
+        "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+        "rank": 109
+      },
+      "b": {
+        "name": "J. Cole",
+        "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5",
+        "rank": 110
+      }
+    },
+    {
+      "a": {
+        "name": "The Gaslight Anthem",
+        "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3",
+        "rank": 67
+      },
+      "b": {
+        "name": "Alabama Shakes",
+        "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2",
+        "rank": 68
+      }
+    }
+  ],
+  "reserve": [
+    {
+      "a": {
+        "name": "Two Door Cinema Club",
+        "mbid": "6f1de078-6684-4792-820d-2ffad64c15ed",
+        "rank": 133
+      },
+      "b": {
+        "name": "Dire Straits",
+        "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a",
+        "rank": 135
+      }
+    },
+    {
+      "a": {
+        "name": "Graveyard",
+        "mbid": "4db1a745-6fd0-4801-9cce-99e88bf855e6",
+        "rank": 91
+      },
+      "b": {
+        "name": "Phosphorescent",
+        "mbid": "739da2f1-0741-4c60-a6ed-f42d49bf2eb1",
+        "rank": 92
+      }
+    },
+    {
+      "a": {
+        "name": "Taylor Swift",
+        "mbid": "20244d07-534f-4eff-b4d4-930878889970",
+        "rank": 23
+      },
+      "b": {
+        "name": "Kishi Bashi",
+        "mbid": "7c340ac5-6eda-4981-91d6-d5b1f4d1bbbf",
+        "rank": 24
+      }
+    },
+    {
+      "a": {
+        "name": "Simon & Garfunkel",
+        "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a",
+        "rank": 17
+      },
+      "b": {
+        "name": "Coheed and Cambria",
+        "mbid": "ae1b47d5-5128-431c-9d30-e08fd90e0767",
+        "rank": 19
+      }
+    }
+  ],
+  "finished_utc": "2026-09-23T18:49:44.473975+00:00"
+}

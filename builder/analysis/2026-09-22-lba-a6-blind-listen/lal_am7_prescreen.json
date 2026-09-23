@@ -1,0 +1,4169 @@
+{
+  "what": "LAL- pre-screen over the LBA-AM7 pool",
+  "warning": "MAP-LABELLED. A blind runner must not read this file.",
+  "script_sha256": "e6481db4411d3e4dbcde7e5391cfca31e8e03a8eb5776bfa0181a77c854ad618",
+  "prescreen_module_sha256": "9f61d97048e004245a29d0f6c4eb1134ad24b2c4f70cb97763741e8d492be146",
+  "journeys_module_sha256": "cdbf26f26d31240bc1e9eabf5aaf7b7977f18379c748e6193d719976999277b8",
+  "known_sha256": "779d2e602af1be0f5c94604ccbf4f901272dd815e578392f3e40f43721bc0228",
+  "maps_pin": {
+    "_note": "LBA-AM6-1. Incumbent = today's served map (ApiConfig.graph_path's default); challenger = the LBA-A6 candidate. Written by lal_pin_maps.py from the sidecars, each checked against its bytes. Roles only; the left/right assignment is sealed at generation.",
+    "incumbent": {
+      "path": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+    },
+    "challenger": {
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-candidate.bin",
+      "sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b"
+    },
+    "production_twin": {
+      "path": "C:\\dev\\music-app\\builder\\scratch\\graph-lux4.bin",
+      "sha256": "fd92a7352afb7321e80f3818262d08169fcfb3af1d6841d7ccfca0f5e5740369"
+    },
+    "written_utc": "2026-09-23T14:27:31.667923+00:00"
+  },
+  "depths": [
+    0,
+    10,
+    20
+  ],
+  "counts": {
+    "pool": 141,
+    "eligible": 141,
+    "drawn": 70,
+    "survivors": 18,
+    "wanted": 12,
+    "familiarity_mbids": 2865
+  },
+  "rejection_counts": {
+    "gate L": 38,
+    "gate N": 14
+  },
+  "pool": [
+    {
+      "rank": 1,
+      "name": "The New Pornographers",
+      "mbid": "25b75a66-ce83-4db3-b136-395a3c3784c4"
+    },
+    {
+      "rank": 2,
+      "name": "The Who",
+      "mbid": "9fdaa16b-a6c4-4831-b87c-bc9ca8ce7eaa"
+    },
+    {
+      "rank": 3,
+      "name": "CHVRCHES",
+      "mbid": "6a93afbb-257f-4166-b389-9f2a1e5c5df8"
+    },
+    {
+      "rank": 4,
+      "name": "Belle and Sebastian",
+      "mbid": "e5c7b94f-e264-473c-bb0f-37c85d4d5c70"
+    },
+    {
+      "rank": 5,
+      "name": "Guided By Voices",
+      "mbid": "6c85f4c3-026c-4c16-9a7c-f546f42ed0fb"
+    },
+    {
+      "rank": 6,
+      "name": "Sufjan Stevens",
+      "mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c"
+    },
+    {
+      "rank": 7,
+      "name": "The Rural Alberta Advantage",
+      "mbid": "e0647eee-82ce-40e6-af54-953395ad1c08"
+    },
+    {
+      "rank": 8,
+      "name": "Kurt Vile",
+      "mbid": "e07a111e-4e8a-4651-a849-01ac60551ab2"
+    },
+    {
+      "rank": 9,
+      "name": "Radiohead",
+      "mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711"
+    },
+    {
+      "rank": 10,
+      "name": "Frightened Rabbit",
+      "mbid": "dc21d171-7204-4759-9fd0-77d031aeb40c"
+    },
+    {
+      "rank": 11,
+      "name": "Fleetwood Mac",
+      "mbid": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a"
+    },
+    {
+      "rank": 12,
+      "name": "David Bowie",
+      "mbid": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+      "skipped_as_adjacent_to": [
+        "Fleetwood Mac"
+      ]
+    },
+    {
+      "rank": 13,
+      "name": "Metric",
+      "mbid": "4449ccf6-c948-4d33-aa97-b6ad98ce4b5b"
+    },
+    {
+      "rank": 14,
+      "name": "Kendrick Lamar",
+      "mbid": "381086ea-f511-4aba-bdf9-71c753dc5077"
+    },
+    {
+      "rank": 15,
+      "name": "Fleet Foxes",
+      "mbid": "fa97dd36-1b82-43d7-a6e4-2adeafd59cef"
+    },
+    {
+      "rank": 16,
+      "name": "Rush",
+      "mbid": "534ee493-bfac-4575-a44a-0ae41e2c3fe4"
+    },
+    {
+      "rank": 17,
+      "name": "Simon & Garfunkel",
+      "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a"
+    },
+    {
+      "rank": 18,
+      "name": "The Rolling Stones",
+      "mbid": "b071f9fa-14b0-4217-8e97-eb41da73f598",
+      "skipped_as_adjacent_to": [
+        "Simon & Garfunkel"
+      ]
+    },
+    {
+      "rank": 19,
+      "name": "Coheed and Cambria",
+      "mbid": "ae1b47d5-5128-431c-9d30-e08fd90e0767"
+    },
+    {
+      "rank": 20,
+      "name": "Kings of Leon",
+      "mbid": "6ffb8ea9-2370-44d8-b678-e9237bbd347b"
+    },
+    {
+      "rank": 21,
+      "name": "Portugal. The Man",
+      "mbid": "3599a39e-4e10-4cb5-90d4-c8a015ebc73b"
+    },
+    {
+      "rank": 22,
+      "name": "Okkervil River",
+      "mbid": "9fa07bb4-8312-4cd7-a19a-4fdbc5797148"
+    },
+    {
+      "rank": 23,
+      "name": "Taylor Swift",
+      "mbid": "20244d07-534f-4eff-b4d4-930878889970"
+    },
+    {
+      "rank": 24,
+      "name": "Kishi Bashi",
+      "mbid": "7c340ac5-6eda-4981-91d6-d5b1f4d1bbbf"
+    },
+    {
+      "rank": 25,
+      "name": "Porter Robinson",
+      "mbid": "4ae36ade-1798-48c4-b06b-cc68b7d3d83f"
+    },
+    {
+      "rank": 26,
+      "name": "Night Riots",
+      "mbid": "b476c4d1-9def-4452-a4e7-47bd5439d896"
+    },
+    {
+      "rank": 27,
+      "name": "Greta Van Fleet",
+      "mbid": "0be22557-d8c7-4706-a531-625c4c570162"
+    },
+    {
+      "rank": 28,
+      "name": "Grimes",
+      "mbid": "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222"
+    },
+    {
+      "rank": 29,
+      "name": "Fruit Bats",
+      "mbid": "e3f139c7-11bc-4803-82be-2bac85ca3c61"
+    },
+    {
+      "rank": 30,
+      "name": "Blitzen Trapper",
+      "mbid": "a186c93d-0f30-4c56-9265-98c0eba19242",
+      "skipped_as_adjacent_to": [
+        "Fruit Bats"
+      ]
+    },
+    {
+      "rank": 31,
+      "name": "The Police",
+      "mbid": "9e0e2b01-41db-4008-bd8b-988977d6019a"
+    },
+    {
+      "rank": 32,
+      "name": "The Magnetic Fields",
+      "mbid": "3ff72a59-f39d-411d-9f93-2d4a86413013"
+    },
+    {
+      "rank": 33,
+      "name": "Silversun Pickups",
+      "mbid": "b5bd9f88-962e-4730-84a7-795592ba42e8"
+    },
+    {
+      "rank": 34,
+      "name": "The Black Keys",
+      "mbid": "d15721d8-56b4-453d-b506-fc915b14cba2"
+    },
+    {
+      "rank": 35,
+      "name": "System Of A Down",
+      "mbid": "cc0b7089-c08d-4c10-b6b0-873582c17fd6"
+    },
+    {
+      "rank": 36,
+      "name": "Lil Wayne",
+      "mbid": "ac9a487a-d9d2-4f27-bb23-0f4686488345"
+    },
+    {
+      "rank": 37,
+      "name": "The Kinks",
+      "mbid": "17b53d9f-5c63-4a09-a593-dde4608e0db9"
+    },
+    {
+      "rank": 38,
+      "name": "Islands",
+      "mbid": "4de30660-26a8-4390-af6f-8fc0564e7e61"
+    },
+    {
+      "rank": 39,
+      "name": "Queen",
+      "mbid": "0383dadf-2a4e-4d10-a46a-e9e041da8eb3"
+    },
+    {
+      "rank": 40,
+      "name": "Creedence Clearwater Revival",
+      "mbid": "109958eb-a335-4c5e-907e-597ff4c6af46",
+      "skipped_as_adjacent_to": [
+        "Queen"
+      ]
+    },
+    {
+      "rank": 41,
+      "name": "The Velvet Underground",
+      "mbid": "94b0fb9d-a066-4823-b2ec-af1d324bcfcf"
+    },
+    {
+      "rank": 42,
+      "name": "My Morning Jacket",
+      "mbid": "ea5883b7-68ce-48b3-b115-61746ea53b8c"
+    },
+    {
+      "rank": 43,
+      "name": "A.C. Newman",
+      "mbid": "bb40af12-0dfd-4a53-bfe1-666a9e49dfb2"
+    },
+    {
+      "rank": 44,
+      "name": "Vampire Weekend",
+      "mbid": "af37c51c-0790-4a29-b995-456f98a6b8c9"
+    },
+    {
+      "rank": 45,
+      "name": "Daryl Hall & John Oates",
+      "mbid": "debabff3-2559-46e5-862d-ef2a906d7010"
+    },
+    {
+      "rank": 46,
+      "name": "Cold War Kids",
+      "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116"
+    },
+    {
+      "rank": 47,
+      "name": "First Aid Kit",
+      "mbid": "373faa02-74d7-4b1d-9b47-7574ad510f8d"
+    },
+    {
+      "rank": 48,
+      "name": "Noah Kahan",
+      "mbid": "a2a3f910-b188-43e7-81d0-f1ac2a2f3e12"
+    },
+    {
+      "rank": 49,
+      "name": "Bob Dylan",
+      "mbid": "72c536dc-7137-4477-a521-567eeb840fa8"
+    },
+    {
+      "rank": 50,
+      "name": "Local Natives",
+      "mbid": "1bbf31dc-dbc0-4a7a-bf3f-48bc665878e1"
+    },
+    {
+      "rank": 51,
+      "name": "Phantogram",
+      "mbid": "dfe78af2-779e-4137-826a-3073a16e3278"
+    },
+    {
+      "rank": 52,
+      "name": "TV On The Radio",
+      "mbid": "eb872766-98f6-453d-883f-2ae908a18315",
+      "skipped_as_adjacent_to": [
+        "Phantogram"
+      ]
+    },
+    {
+      "rank": 53,
+      "name": "Dr. Dog",
+      "mbid": "e9aed5e5-ed35-4244-872e-194862290295"
+    },
+    {
+      "rank": 54,
+      "name": "Alvvays",
+      "mbid": "99450990-b24e-4132-bb68-235f8c3e2564"
+    },
+    {
+      "rank": 55,
+      "name": "The Format",
+      "mbid": "81b07a2a-cdf0-4c5e-a68c-8d910e1f0ea6"
+    },
+    {
+      "rank": 56,
+      "name": "Wolf Parade",
+      "mbid": "b7ddce8b-9e5c-46bd-9d33-41b134ce1a7f"
+    },
+    {
+      "rank": 57,
+      "name": "U2",
+      "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432"
+    },
+    {
+      "rank": 58,
+      "name": "Day Wave",
+      "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3"
+    },
+    {
+      "rank": 59,
+      "name": "Ra Ra Riot",
+      "mbid": "d8f63b51-73e0-4f65-8bd3-bcfe6892fb0e"
+    },
+    {
+      "rank": 60,
+      "name": "ZZ Top",
+      "mbid": "a81259a0-a2f5-464b-866e-71220f2739f1"
+    },
+    {
+      "rank": 61,
+      "name": "Wilco",
+      "mbid": "9e53f84d-ef44-4c16-9677-5fd4d78cbd7d"
+    },
+    {
+      "rank": 62,
+      "name": "Caamp",
+      "mbid": "8e868f14-7fb1-4e80-b783-b992f844b010"
+    },
+    {
+      "rank": 63,
+      "name": "Dirty Projectors",
+      "mbid": "71a94ed8-03cc-459a-bd35-a081ca88a402"
+    },
+    {
+      "rank": 64,
+      "name": "King Gizzard & The Lizard Wizard",
+      "mbid": "f58384a4-2ad2-4f24-89c5-c7b74ae1cce7"
+    },
+    {
+      "rank": 65,
+      "name": "Matisyahu",
+      "mbid": "e8993e9d-9313-4447-ad23-791459a3790d"
+    },
+    {
+      "rank": 66,
+      "name": "The Hold Steady",
+      "mbid": "4883523d-fc0e-4d0d-802c-91379e767083"
+    },
+    {
+      "rank": 67,
+      "name": "The Gaslight Anthem",
+      "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3"
+    },
+    {
+      "rank": 68,
+      "name": "Alabama Shakes",
+      "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2"
+    },
+    {
+      "rank": 69,
+      "name": "Pavement",
+      "mbid": "36bfa85f-737b-41db-a8fc-b8825850ffc3"
+    },
+    {
+      "rank": 70,
+      "name": "Leon Bridges",
+      "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774"
+    },
+    {
+      "rank": 71,
+      "name": "Linkin Park",
+      "mbid": "f59c5520-5f46-4d2c-b2c4-822eabf53419"
+    },
+    {
+      "rank": 72,
+      "name": "Big Thief",
+      "mbid": "9f81247f-7f57-42f3-a8ba-75bef554e591"
+    },
+    {
+      "rank": 73,
+      "name": "Wilderado",
+      "mbid": "a4e19819-0867-404d-a0f1-d8c6f2912267"
+    },
+    {
+      "rank": 74,
+      "name": "Shakey Graves",
+      "mbid": "24ca022c-653e-4379-812a-71f729b900ef",
+      "skipped_as_adjacent_to": [
+        "Wilderado"
+      ]
+    },
+    {
+      "rank": 75,
+      "name": "Ratatat",
+      "mbid": "f467181e-d5e0-4285-b47e-e853dcc89ee7"
+    },
+    {
+      "rank": 76,
+      "name": "Neutral Milk Hotel",
+      "mbid": "a506f761-2c22-4b2f-8a94-bd748c2c8f75"
+    },
+    {
+      "rank": 77,
+      "name": "Elliott Smith",
+      "mbid": "03ad1736-b7c9-412a-b442-82536d63a5c4"
+    },
+    {
+      "rank": 78,
+      "name": "Big Star",
+      "mbid": "21d177ba-3d51-461e-9b3f-ad9a80b419dc"
+    },
+    {
+      "rank": 79,
+      "name": "Trampled by Turtles",
+      "mbid": "c6a5a49b-9885-42e6-9fb5-ccaaec05f753"
+    },
+    {
+      "rank": 80,
+      "name": "Crosby, Stills, Nash & Young",
+      "mbid": "46a782ea-4308-476b-abd1-a91b197f3037"
+    },
+    {
+      "rank": 81,
+      "name": "Iron & Wine",
+      "mbid": "c3f28da8-662d-4f09-bdc7-3084bf685930"
+    },
+    {
+      "rank": 82,
+      "name": "The Beach Boys",
+      "mbid": "ebfc1398-8d96-47e3-82c3-f782abcdb13d"
+    },
+    {
+      "rank": 83,
+      "name": "St. Paul & The Broken Bones",
+      "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9"
+    },
+    {
+      "rank": 84,
+      "name": "Journey",
+      "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b"
+    },
+    {
+      "rank": 85,
+      "name": "Dawes",
+      "mbid": "59bc9caa-5700-4c77-9ab7-f089aa7a357f"
+    },
+    {
+      "rank": 86,
+      "name": "Andrew Bird",
+      "mbid": "081b133e-ce74-42ba-92c1-c18234acb532"
+    },
+    {
+      "rank": 87,
+      "name": "Hiss Golden Messenger",
+      "mbid": "aa0b8b75-714f-465e-9d66-c54c17247f6f"
+    },
+    {
+      "rank": 88,
+      "name": "Whitney",
+      "mbid": "2e3a5b97-aec7-4b11-bb56-77ad52b99b86"
+    },
+    {
+      "rank": 89,
+      "name": "Courtney Barnett",
+      "mbid": "55111838-f001-494a-a1b5-9d818db85810"
+    },
+    {
+      "rank": 90,
+      "name": "Young the Giant",
+      "mbid": "7fe96b15-5608-430e-ad25-77a01353c5d9"
+    },
+    {
+      "rank": 91,
+      "name": "Graveyard",
+      "mbid": "4db1a745-6fd0-4801-9cce-99e88bf855e6"
+    },
+    {
+      "rank": 92,
+      "name": "Phosphorescent",
+      "mbid": "739da2f1-0741-4c60-a6ed-f42d49bf2eb1"
+    },
+    {
+      "rank": 93,
+      "name": "iamamiwhoami",
+      "mbid": "9aaa99df-9383-47df-92af-8bb5e5595815"
+    },
+    {
+      "rank": 94,
+      "name": "Passion Pit",
+      "mbid": "daeec599-bf5d-4428-994a-e76ba5f86e2f"
+    },
+    {
+      "rank": 95,
+      "name": "The Doors",
+      "mbid": "9efff43b-3b29-4082-824e-bc82f646f93d"
+    },
+    {
+      "rank": 96,
+      "name": "Jimi Hendrix",
+      "mbid": "06fb1c8b-566e-4cb2-985b-b467c90781d4",
+      "skipped_as_adjacent_to": [
+        "The Doors"
+      ]
+    },
+    {
+      "rank": 97,
+      "name": "Fall Out Boy",
+      "mbid": "516cef4d-0718-4007-9939-f9b38af3f784"
+    },
+    {
+      "rank": 98,
+      "name": "Father John Misty",
+      "mbid": "172053e5-a7fb-4548-a64d-c53858b5e775"
+    },
+    {
+      "rank": 99,
+      "name": "Bruce Springsteen",
+      "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f"
+    },
+    {
+      "rank": 100,
+      "name": "DISPATCH",
+      "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9"
+    },
+    {
+      "rank": 101,
+      "name": "Band Of Skulls",
+      "mbid": "1641141b-3c9c-4772-a5cc-7e23fdf17382"
+    },
+    {
+      "rank": 102,
+      "name": "Deer Tick",
+      "mbid": "c8c64bcc-48c6-47c9-8411-f5c4fd5a97bb"
+    },
+    {
+      "rank": 103,
+      "name": "Waxahatchee",
+      "mbid": "42321e24-42b6-4f08-b0d9-8325ee887a20"
+    },
+    {
+      "rank": 104,
+      "name": "The Jesus and Mary Chain",
+      "mbid": "e938a15c-b17e-4e7a-9f68-ff0d536cab44"
+    },
+    {
+      "rank": 105,
+      "name": "Broken Social Scene",
+      "mbid": "2eada8f8-056a-4093-bbc2-004909ce743b"
+    },
+    {
+      "rank": 106,
+      "name": "Lana Del Rey",
+      "mbid": "b7539c32-53e7-4908-bda3-81449c367da6"
+    },
+    {
+      "rank": 107,
+      "name": "Stars",
+      "mbid": "5aeb21a3-4606-4a0d-8369-50c768d1e99a"
+    },
+    {
+      "rank": 108,
+      "name": "Talking Heads",
+      "mbid": "a94a7155-c79d-4409-9fcf-220cb0e4dc3a"
+    },
+    {
+      "rank": 109,
+      "name": "Beck",
+      "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a"
+    },
+    {
+      "rank": 110,
+      "name": "J. Cole",
+      "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5"
+    },
+    {
+      "rank": 111,
+      "name": "The Thermals",
+      "mbid": "7cd2d860-c6d7-4be2-af50-57c51ee45687"
+    },
+    {
+      "rank": 112,
+      "name": "Badfinger",
+      "mbid": "44632683-c340-44de-a65d-328212559f91"
+    },
+    {
+      "rank": 113,
+      "name": "Orville Peck",
+      "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4"
+    },
+    {
+      "rank": 114,
+      "name": "Best Coast",
+      "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5"
+    },
+    {
+      "rank": 115,
+      "name": "Future Islands",
+      "mbid": "74963434-dcb6-4b14-98cc-99873b06db66"
+    },
+    {
+      "rank": 116,
+      "name": "M83",
+      "mbid": "6d7b7cd4-254b-4c25-83f6-dd20f98ceacd"
+    },
+    {
+      "rank": 117,
+      "name": "Feist",
+      "mbid": "a670e05a-cea8-4b37-bce9-d82daf1a0fa4"
+    },
+    {
+      "rank": 118,
+      "name": "The Avett Brothers",
+      "mbid": "0a176d0a-ef46-4e7f-b018-9f4d65614668"
+    },
+    {
+      "rank": 119,
+      "name": "Sjowgren",
+      "mbid": "446dd82d-1de2-4ea0-a1f9-2a5467241e35"
+    },
+    {
+      "rank": 120,
+      "name": "Rogue Wave",
+      "mbid": "6aa55ee1-4c46-4f7c-9a6d-5051dfe2c06d"
+    },
+    {
+      "rank": 121,
+      "name": "The Cure",
+      "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf"
+    },
+    {
+      "rank": 122,
+      "name": "Sleigh Bells",
+      "mbid": "95f7536d-b2f7-4087-8668-a663ec201f5a"
+    },
+    {
+      "rank": 123,
+      "name": "Lake Street Dive",
+      "mbid": "584758b2-306b-4aea-8694-3876943c9968"
+    },
+    {
+      "rank": 124,
+      "name": "Unwritten Law",
+      "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e"
+    },
+    {
+      "rank": 125,
+      "name": "The Front Bottoms",
+      "mbid": "622b6000-ff0d-4ab3-9e98-c4916f3692c3"
+    },
+    {
+      "rank": 126,
+      "name": "The Strokes",
+      "mbid": "f181961b-20f7-459e-89de-920ef03c7ed0"
+    },
+    {
+      "rank": 127,
+      "name": "Interpol",
+      "mbid": "b23e8a63-8f47-4882-b55b-df2c92ef400e"
+    },
+    {
+      "rank": 128,
+      "name": "Destroyer",
+      "mbid": "61604b45-8a91-4e33-a1b6-45d7b1fec4e5"
+    },
+    {
+      "rank": 129,
+      "name": "Weezer",
+      "mbid": "6fe07aa5-fec0-4eca-a456-f29bff451b04"
+    },
+    {
+      "rank": 130,
+      "name": "Tarkio",
+      "mbid": "9b07f7a3-6d1a-4592-935c-4c0c798d6cea"
+    },
+    {
+      "rank": 131,
+      "name": "The Flaming Lips",
+      "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402"
+    },
+    {
+      "rank": 132,
+      "name": "Chastity Belt",
+      "mbid": "944267d5-c0f0-4f4e-b3f2-7987d25d0441"
+    },
+    {
+      "rank": 133,
+      "name": "Two Door Cinema Club",
+      "mbid": "6f1de078-6684-4792-820d-2ffad64c15ed"
+    },
+    {
+      "rank": 134,
+      "name": "GROUPLOVE",
+      "mbid": "d8e41375-bd8d-4e39-9da7-f0c171e97086",
+      "skipped_as_adjacent_to": [
+        "Two Door Cinema Club"
+      ]
+    },
+    {
+      "rank": 135,
+      "name": "Dire Straits",
+      "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a"
+    },
+    {
+      "rank": 136,
+      "name": "WALK THE MOON",
+      "mbid": "d4aad415-9cd0-4845-9b05-0416fdcc9fc4",
+      "skipped_as_adjacent_to": [
+        "GROUPLOVE"
+      ]
+    },
+    {
+      "rank": 137,
+      "name": "Sea Power",
+      "mbid": "8830afec-83b3-4213-aad0-f6377f1d73ac"
+    },
+    {
+      "rank": 138,
+      "name": "The Head And The Heart",
+      "mbid": "98cb416e-5271-484c-ab3b-6bed6b4aae12"
+    },
+    {
+      "rank": 139,
+      "name": "The Joy Formidable",
+      "mbid": "072d4c31-8fd7-4073-9efc-7e192b517906"
+    },
+    {
+      "rank": 140,
+      "name": "Explosions In The Sky",
+      "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474"
+    },
+    {
+      "rank": 141,
+      "name": "The Airborne Toxic Event",
+      "mbid": "892fb2e4-0af4-42be-9e60-22898de51d32"
+    }
+  ],
+  "candidates_in_draw_order": [
+    {
+      "a": {
+        "rank": 1,
+        "name": "The New Pornographers",
+        "mbid": "25b75a66-ce83-4db3-b136-395a3c3784c4"
+      },
+      "b": {
+        "rank": 2,
+        "name": "The Who",
+        "mbid": "9fdaa16b-a6c4-4831-b87c-bc9ca8ce7eaa"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 13
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 3,
+        "name": "CHVRCHES",
+        "mbid": "6a93afbb-257f-4166-b389-9f2a1e5c5df8"
+      },
+      "b": {
+        "rank": 4,
+        "name": "Belle and Sebastian",
+        "mbid": "e5c7b94f-e264-473c-bb0f-37c85d4d5c70"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 10
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 5,
+        "name": "Guided By Voices",
+        "mbid": "6c85f4c3-026c-4c16-9a7c-f546f42ed0fb"
+      },
+      "b": {
+        "rank": 6,
+        "name": "Sufjan Stevens",
+        "mbid": "01d3c51b-9b98-418a-8d8e-37f6fab59d8c"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 1,
+            "20": 2
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 9,
+        "familiar_interior": 9
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 7,
+        "name": "The Rural Alberta Advantage",
+        "mbid": "e0647eee-82ce-40e6-af54-953395ad1c08"
+      },
+      "b": {
+        "rank": 8,
+        "name": "Kurt Vile",
+        "mbid": "e07a111e-4e8a-4651-a849-01ac60551ab2"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 16
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 9,
+        "name": "Radiohead",
+        "mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711"
+      },
+      "b": {
+        "rank": 10,
+        "name": "Frightened Rabbit",
+        "mbid": "dc21d171-7204-4759-9fd0-77d031aeb40c"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 3,
+            "20": 6
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 12
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 11,
+        "name": "Fleetwood Mac",
+        "mbid": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a"
+      },
+      "b": {
+        "rank": 13,
+        "name": "Metric",
+        "mbid": "4449ccf6-c948-4d33-aa97-b6ad98ce4b5b"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          },
+          "challenger": {
+            "0": 3,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 12
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 12,
+        "name": "David Bowie",
+        "mbid": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+        "skipped_as_adjacent_to": [
+          "Fleetwood Mac"
+        ]
+      },
+      "b": {
+        "rank": 14,
+        "name": "Kendrick Lamar",
+        "mbid": "381086ea-f511-4aba-bdf9-71c753dc5077"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 2,
+            "20": 5
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 8
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 15,
+        "name": "Fleet Foxes",
+        "mbid": "fa97dd36-1b82-43d7-a6e4-2adeafd59cef"
+      },
+      "b": {
+        "rank": 16,
+        "name": "Rush",
+        "mbid": "534ee493-bfac-4575-a44a-0ae41e2c3fe4"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 4,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 2,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 17
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 17,
+        "name": "Simon & Garfunkel",
+        "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a"
+      },
+      "b": {
+        "rank": 19,
+        "name": "Coheed and Cambria",
+        "mbid": "ae1b47d5-5128-431c-9d30-e08fd90e0767"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 4,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 1,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 15
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 18,
+        "name": "The Rolling Stones",
+        "mbid": "b071f9fa-14b0-4217-8e97-eb41da73f598",
+        "skipped_as_adjacent_to": [
+          "Simon & Garfunkel"
+        ]
+      },
+      "b": {
+        "rank": 20,
+        "name": "Kings of Leon",
+        "mbid": "6ffb8ea9-2370-44d8-b678-e9237bbd347b"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 9
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 21,
+        "name": "Portugal. The Man",
+        "mbid": "3599a39e-4e10-4cb5-90d4-c8a015ebc73b"
+      },
+      "b": {
+        "rank": 22,
+        "name": "Okkervil River",
+        "mbid": "9fa07bb4-8312-4cd7-a19a-4fdbc5797148"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 2
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 17
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 23,
+        "name": "Taylor Swift",
+        "mbid": "20244d07-534f-4eff-b4d4-930878889970"
+      },
+      "b": {
+        "rank": 24,
+        "name": "Kishi Bashi",
+        "mbid": "7c340ac5-6eda-4981-91d6-d5b1f4d1bbbf"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 3,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 2,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 14
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 25,
+        "name": "Porter Robinson",
+        "mbid": "4ae36ade-1798-48c4-b06b-cc68b7d3d83f"
+      },
+      "b": {
+        "rank": 26,
+        "name": "Night Riots",
+        "mbid": "b476c4d1-9def-4452-a4e7-47bd5439d896"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          },
+          "challenger": {
+            "0": 5,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 0,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 18
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 27,
+        "name": "Greta Van Fleet",
+        "mbid": "0be22557-d8c7-4706-a531-625c4c570162"
+      },
+      "b": {
+        "rank": 28,
+        "name": "Grimes",
+        "mbid": "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 1,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 15
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 29,
+        "name": "Fruit Bats",
+        "mbid": "e3f139c7-11bc-4803-82be-2bac85ca3c61"
+      },
+      "b": {
+        "rank": 31,
+        "name": "The Police",
+        "mbid": "9e0e2b01-41db-4008-bd8b-988977d6019a"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 3,
+            "20": 5
+          },
+          "challenger": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 3,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 17
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 30,
+        "name": "Blitzen Trapper",
+        "mbid": "a186c93d-0f30-4c56-9265-98c0eba19242",
+        "skipped_as_adjacent_to": [
+          "Fruit Bats"
+        ]
+      },
+      "b": {
+        "rank": 32,
+        "name": "The Magnetic Fields",
+        "mbid": "3ff72a59-f39d-411d-9f93-2d4a86413013"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          },
+          "challenger": {
+            "0": 5,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 0,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 17
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 33,
+        "name": "Silversun Pickups",
+        "mbid": "b5bd9f88-962e-4730-84a7-795592ba42e8"
+      },
+      "b": {
+        "rank": 34,
+        "name": "The Black Keys",
+        "mbid": "d15721d8-56b4-453d-b506-fc915b14cba2"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 1
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 9,
+        "familiar_interior": 9
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 35,
+        "name": "System Of A Down",
+        "mbid": "cc0b7089-c08d-4c10-b6b0-873582c17fd6"
+      },
+      "b": {
+        "rank": 36,
+        "name": "Lil Wayne",
+        "mbid": "ac9a487a-d9d2-4f27-bb23-0f4686488345"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 4,
+            "20": 5
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 11
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 37,
+        "name": "The Kinks",
+        "mbid": "17b53d9f-5c63-4a09-a593-dde4608e0db9"
+      },
+      "b": {
+        "rank": 38,
+        "name": "Islands",
+        "mbid": "4de30660-26a8-4390-af6f-8fc0564e7e61"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 3,
+            "20": 5
+          },
+          "challenger": {
+            "0": 7,
+            "10": 4,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 0,
+          "20": 5
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 26,
+        "familiar_interior": 18
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 39,
+        "name": "Queen",
+        "mbid": "0383dadf-2a4e-4d10-a46a-e9e041da8eb3"
+      },
+      "b": {
+        "rank": 41,
+        "name": "The Velvet Underground",
+        "mbid": "94b0fb9d-a066-4823-b2ec-af1d324bcfcf"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 9
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 40,
+        "name": "Creedence Clearwater Revival",
+        "mbid": "109958eb-a335-4c5e-907e-597ff4c6af46",
+        "skipped_as_adjacent_to": [
+          "Queen"
+        ]
+      },
+      "b": {
+        "rank": 42,
+        "name": "My Morning Jacket",
+        "mbid": "ea5883b7-68ce-48b3-b115-61746ea53b8c"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 1,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 22,
+        "familiar_interior": 17
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 43,
+        "name": "A.C. Newman",
+        "mbid": "bb40af12-0dfd-4a53-bfe1-666a9e49dfb2"
+      },
+      "b": {
+        "rank": 44,
+        "name": "Vampire Weekend",
+        "mbid": "af37c51c-0790-4a29-b995-456f98a6b8c9"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "challenger": {
+            "0": 3,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 14,
+        "familiar_interior": 14
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 45,
+        "name": "Daryl Hall & John Oates",
+        "mbid": "debabff3-2559-46e5-862d-ef2a906d7010"
+      },
+      "b": {
+        "rank": 46,
+        "name": "Cold War Kids",
+        "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 4,
+            "20": 6
+          },
+          "challenger": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 3,
+          "20": 5
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 23,
+        "familiar_interior": 15
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 47,
+        "name": "First Aid Kit",
+        "mbid": "373faa02-74d7-4b1d-9b47-7574ad510f8d"
+      },
+      "b": {
+        "rank": 48,
+        "name": "Noah Kahan",
+        "mbid": "a2a3f910-b188-43e7-81d0-f1ac2a2f3e12"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 7,
+            "10": 6,
+            "20": 5
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 14
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 49,
+        "name": "Bob Dylan",
+        "mbid": "72c536dc-7137-4477-a521-567eeb840fa8"
+      },
+      "b": {
+        "rank": 50,
+        "name": "Local Natives",
+        "mbid": "1bbf31dc-dbc0-4a7a-bf3f-48bc665878e1"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 2,
+            "20": 5
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 10
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 51,
+        "name": "Phantogram",
+        "mbid": "dfe78af2-779e-4137-826a-3073a16e3278"
+      },
+      "b": {
+        "rank": 53,
+        "name": "Dr. Dog",
+        "mbid": "e9aed5e5-ed35-4244-872e-194862290295"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 2,
+            "20": 1
+          },
+          "challenger": {
+            "0": 2,
+            "10": 1,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 11
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 52,
+        "name": "TV On The Radio",
+        "mbid": "eb872766-98f6-453d-883f-2ae908a18315",
+        "skipped_as_adjacent_to": [
+          "Phantogram"
+        ]
+      },
+      "b": {
+        "rank": 54,
+        "name": "Alvvays",
+        "mbid": "99450990-b24e-4132-bb68-235f8c3e2564"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 2,
+            "20": 3
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 12
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 55,
+        "name": "The Format",
+        "mbid": "81b07a2a-cdf0-4c5e-a68c-8d910e1f0ea6"
+      },
+      "b": {
+        "rank": 56,
+        "name": "Wolf Parade",
+        "mbid": "b7ddce8b-9e5c-46bd-9d33-41b134ce1a7f"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 8,
+            "10": 6,
+            "20": 7
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 17
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 57,
+        "name": "U2",
+        "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432"
+      },
+      "b": {
+        "rank": 58,
+        "name": "Day Wave",
+        "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "challenger": {
+            "0": 5,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 5,
+          "10": 2,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 26,
+        "familiar_interior": 17
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 59,
+        "name": "Ra Ra Riot",
+        "mbid": "d8f63b51-73e0-4f65-8bd3-bcfe6892fb0e"
+      },
+      "b": {
+        "rank": 60,
+        "name": "ZZ Top",
+        "mbid": "a81259a0-a2f5-464b-866e-71220f2739f1"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 7,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 6,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 2,
+          "20": 4
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 30,
+        "familiar_interior": 24
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 61,
+        "name": "Wilco",
+        "mbid": "9e53f84d-ef44-4c16-9677-5fd4d78cbd7d"
+      },
+      "b": {
+        "rank": 62,
+        "name": "Caamp",
+        "mbid": "8e868f14-7fb1-4e80-b783-b992f844b010"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 2
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 13,
+        "familiar_interior": 13
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 63,
+        "name": "Dirty Projectors",
+        "mbid": "71a94ed8-03cc-459a-bd35-a081ca88a402"
+      },
+      "b": {
+        "rank": 64,
+        "name": "King Gizzard & The Lizard Wizard",
+        "mbid": "f58384a4-2ad2-4f24-89c5-c7b74ae1cce7"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 3,
+            "20": 2
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 11
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 65,
+        "name": "Matisyahu",
+        "mbid": "e8993e9d-9313-4447-ad23-791459a3790d"
+      },
+      "b": {
+        "rank": 66,
+        "name": "The Hold Steady",
+        "mbid": "4883523d-fc0e-4d0d-802c-91379e767083"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 5,
+            "20": 3
+          },
+          "challenger": {
+            "0": 5,
+            "10": 4,
+            "20": 6
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 3,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 23,
+        "familiar_interior": 17
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 67,
+        "name": "The Gaslight Anthem",
+        "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3"
+      },
+      "b": {
+        "rank": 68,
+        "name": "Alabama Shakes",
+        "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 3,
+            "20": 5
+          },
+          "challenger": {
+            "0": 8,
+            "10": 6,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 3,
+          "20": 2
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 28,
+        "familiar_interior": 20
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 69,
+        "name": "Pavement",
+        "mbid": "36bfa85f-737b-41db-a8fc-b8825850ffc3"
+      },
+      "b": {
+        "rank": 70,
+        "name": "Leon Bridges",
+        "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 4,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 0,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 14
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 71,
+        "name": "Linkin Park",
+        "mbid": "f59c5520-5f46-4d2c-b2c4-822eabf53419"
+      },
+      "b": {
+        "rank": 72,
+        "name": "Big Thief",
+        "mbid": "9f81247f-7f57-42f3-a8ba-75bef554e591"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 5,
+            "20": 6
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 1,
+          "20": 2
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 18
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 73,
+        "name": "Wilderado",
+        "mbid": "a4e19819-0867-404d-a0f1-d8c6f2912267"
+      },
+      "b": {
+        "rank": 75,
+        "name": "Ratatat",
+        "mbid": "f467181e-d5e0-4285-b47e-e853dcc89ee7"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 5,
+            "20": 6
+          },
+          "challenger": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 2,
+          "20": 2
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 16
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 74,
+        "name": "Shakey Graves",
+        "mbid": "24ca022c-653e-4379-812a-71f729b900ef",
+        "skipped_as_adjacent_to": [
+          "Wilderado"
+        ]
+      },
+      "b": {
+        "rank": 76,
+        "name": "Neutral Milk Hotel",
+        "mbid": "a506f761-2c22-4b2f-8a94-bd748c2c8f75"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 6,
+            "20": 3
+          },
+          "challenger": {
+            "0": 4,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 15
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 77,
+        "name": "Elliott Smith",
+        "mbid": "03ad1736-b7c9-412a-b442-82536d63a5c4"
+      },
+      "b": {
+        "rank": 78,
+        "name": "Big Star",
+        "mbid": "21d177ba-3d51-461e-9b3f-ad9a80b419dc"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 11,
+        "familiar_interior": 10
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 79,
+        "name": "Trampled by Turtles",
+        "mbid": "c6a5a49b-9885-42e6-9fb5-ccaaec05f753"
+      },
+      "b": {
+        "rank": 80,
+        "name": "Crosby, Stills, Nash & Young",
+        "mbid": "46a782ea-4308-476b-abd1-a91b197f3037"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 9,
+            "20": 7
+          },
+          "challenger": {
+            "0": 7,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 29,
+        "familiar_interior": 13
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 81,
+        "name": "Iron & Wine",
+        "mbid": "c3f28da8-662d-4f09-bdc7-3084bf685930"
+      },
+      "b": {
+        "rank": 82,
+        "name": "The Beach Boys",
+        "mbid": "ebfc1398-8d96-47e3-82c3-f782abcdb13d"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 14
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 83,
+        "name": "St. Paul & The Broken Bones",
+        "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9"
+      },
+      "b": {
+        "rank": 84,
+        "name": "Journey",
+        "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 7,
+            "20": 5
+          },
+          "challenger": {
+            "0": 6,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 4,
+          "10": 6,
+          "20": 4
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 26,
+        "familiar_interior": 16
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 85,
+        "name": "Dawes",
+        "mbid": "59bc9caa-5700-4c77-9ab7-f089aa7a357f"
+      },
+      "b": {
+        "rank": 86,
+        "name": "Andrew Bird",
+        "mbid": "081b133e-ce74-42ba-92c1-c18234acb532"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 1,
+            "20": 2
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 10,
+        "familiar_interior": 10
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 87,
+        "name": "Hiss Golden Messenger",
+        "mbid": "aa0b8b75-714f-465e-9d66-c54c17247f6f"
+      },
+      "b": {
+        "rank": 88,
+        "name": "Whitney",
+        "mbid": "2e3a5b97-aec7-4b11-bb56-77ad52b99b86"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 1,
+            "10": 5,
+            "20": 5
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 17
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 89,
+        "name": "Courtney Barnett",
+        "mbid": "55111838-f001-494a-a1b5-9d818db85810"
+      },
+      "b": {
+        "rank": 90,
+        "name": "Young the Giant",
+        "mbid": "7fe96b15-5608-430e-ad25-77a01353c5d9"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 2,
+            "20": 3
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 14,
+        "familiar_interior": 14
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 91,
+        "name": "Graveyard",
+        "mbid": "4db1a745-6fd0-4801-9cce-99e88bf855e6"
+      },
+      "b": {
+        "rank": 92,
+        "name": "Phosphorescent",
+        "mbid": "739da2f1-0741-4c60-a6ed-f42d49bf2eb1"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 7,
+            "10": 7,
+            "20": 6
+          },
+          "challenger": {
+            "0": 6,
+            "10": 6,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 3,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 26,
+        "familiar_interior": 21
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 93,
+        "name": "iamamiwhoami",
+        "mbid": "9aaa99df-9383-47df-92af-8bb5e5595815"
+      },
+      "b": {
+        "rank": 94,
+        "name": "Passion Pit",
+        "mbid": "daeec599-bf5d-4428-994a-e76ba5f86e2f"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 15,
+        "familiar_interior": 12
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 95,
+        "name": "The Doors",
+        "mbid": "9efff43b-3b29-4082-824e-bc82f646f93d"
+      },
+      "b": {
+        "rank": 97,
+        "name": "Fall Out Boy",
+        "mbid": "516cef4d-0718-4007-9939-f9b38af3f784"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 7
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 10
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 96,
+        "name": "Jimi Hendrix",
+        "mbid": "06fb1c8b-566e-4cb2-985b-b467c90781d4",
+        "skipped_as_adjacent_to": [
+          "The Doors"
+        ]
+      },
+      "b": {
+        "rank": 98,
+        "name": "Father John Misty",
+        "mbid": "172053e5-a7fb-4548-a64d-c53858b5e775"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          },
+          "challenger": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 1,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 15
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 99,
+        "name": "Bruce Springsteen",
+        "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f"
+      },
+      "b": {
+        "rank": 100,
+        "name": "DISPATCH",
+        "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 5,
+            "20": 3
+          },
+          "challenger": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 4,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 13
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 101,
+        "name": "Band Of Skulls",
+        "mbid": "1641141b-3c9c-4772-a5cc-7e23fdf17382"
+      },
+      "b": {
+        "rank": 102,
+        "name": "Deer Tick",
+        "mbid": "c8c64bcc-48c6-47c9-8411-f5c4fd5a97bb"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 5,
+            "20": 2
+          },
+          "challenger": {
+            "0": 5,
+            "10": 4,
+            "20": 5
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 18
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 103,
+        "name": "Waxahatchee",
+        "mbid": "42321e24-42b6-4f08-b0d9-8325ee887a20"
+      },
+      "b": {
+        "rank": 104,
+        "name": "The Jesus and Mary Chain",
+        "mbid": "e938a15c-b17e-4e7a-9f68-ff0d536cab44"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 6,
+            "20": 4
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 18
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 105,
+        "name": "Broken Social Scene",
+        "mbid": "2eada8f8-056a-4093-bbc2-004909ce743b"
+      },
+      "b": {
+        "rank": 106,
+        "name": "Lana Del Rey",
+        "mbid": "b7539c32-53e7-4908-bda3-81449c367da6"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          },
+          "challenger": {
+            "0": 2,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 14
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 107,
+        "name": "Stars",
+        "mbid": "5aeb21a3-4606-4a0d-8369-50c768d1e99a"
+      },
+      "b": {
+        "rank": 108,
+        "name": "Talking Heads",
+        "mbid": "a94a7155-c79d-4409-9fcf-220cb0e4dc3a"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 1,
+          "20": 2
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 14
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 109,
+        "name": "Beck",
+        "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a"
+      },
+      "b": {
+        "rank": 110,
+        "name": "J. Cole",
+        "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          },
+          "challenger": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 1,
+          "20": 4
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 13
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 111,
+        "name": "The Thermals",
+        "mbid": "7cd2d860-c6d7-4be2-af50-57c51ee45687"
+      },
+      "b": {
+        "rank": 112,
+        "name": "Badfinger",
+        "mbid": "44632683-c340-44de-a65d-328212559f91"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 5,
+            "20": 7
+          },
+          "challenger": {
+            "0": 5,
+            "10": 7,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 3,
+          "20": 4
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 25,
+        "familiar_interior": 20
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 113,
+        "name": "Orville Peck",
+        "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4"
+      },
+      "b": {
+        "rank": 114,
+        "name": "Best Coast",
+        "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 7,
+            "20": 6
+          },
+          "challenger": {
+            "0": 4,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 5,
+          "20": 4
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 17
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 115,
+        "name": "Future Islands",
+        "mbid": "74963434-dcb6-4b14-98cc-99873b06db66"
+      },
+      "b": {
+        "rank": 116,
+        "name": "M83",
+        "mbid": "6d7b7cd4-254b-4c25-83f6-dd20f98ceacd"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 10,
+        "familiar_interior": 10
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 117,
+        "name": "Feist",
+        "mbid": "a670e05a-cea8-4b37-bce9-d82daf1a0fa4"
+      },
+      "b": {
+        "rank": 118,
+        "name": "The Avett Brothers",
+        "mbid": "0a176d0a-ef46-4e7f-b018-9f4d65614668"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 4,
+            "20": 2
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 12,
+        "familiar_interior": 12
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 119,
+        "name": "Sjowgren",
+        "mbid": "446dd82d-1de2-4ea0-a1f9-2a5467241e35"
+      },
+      "b": {
+        "rank": 120,
+        "name": "Rogue Wave",
+        "mbid": "6aa55ee1-4c46-4f7c-9a6d-5051dfe2c06d"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 2
+          },
+          "challenger": {
+            "0": 5,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 16
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 121,
+        "name": "The Cure",
+        "mbid": "69ee3720-a7cb-4402-b48d-a02c366f2bcf"
+      },
+      "b": {
+        "rank": 122,
+        "name": "Sleigh Bells",
+        "mbid": "95f7536d-b2f7-4087-8668-a663ec201f5a"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 5,
+            "20": 4
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 3,
+          "20": 2
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 16
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 123,
+        "name": "Lake Street Dive",
+        "mbid": "584758b2-306b-4aea-8694-3876943c9968"
+      },
+      "b": {
+        "rank": 124,
+        "name": "Unwritten Law",
+        "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 8,
+            "10": 7,
+            "20": 5
+          },
+          "challenger": {
+            "0": 7,
+            "10": 5,
+            "20": 7
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 5,
+          "20": 4
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 31,
+        "familiar_interior": 21
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 125,
+        "name": "The Front Bottoms",
+        "mbid": "622b6000-ff0d-4ab3-9e98-c4916f3692c3"
+      },
+      "b": {
+        "rank": 126,
+        "name": "The Strokes",
+        "mbid": "f181961b-20f7-459e-89de-920ef03c7ed0"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 5,
+            "20": 4
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 2,
+          "20": 0
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 16,
+        "familiar_interior": 14
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 127,
+        "name": "Interpol",
+        "mbid": "b23e8a63-8f47-4882-b55b-df2c92ef400e"
+      },
+      "b": {
+        "rank": 128,
+        "name": "Destroyer",
+        "mbid": "61604b45-8a91-4e33-a1b6-45d7b1fec4e5"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 2,
+            "20": 2
+          },
+          "challenger": {
+            "0": 2,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 13,
+        "familiar_interior": 13
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 129,
+        "name": "Weezer",
+        "mbid": "6fe07aa5-fec0-4eca-a456-f29bff451b04"
+      },
+      "b": {
+        "rank": 130,
+        "name": "Tarkio",
+        "mbid": "9b07f7a3-6d1a-4592-935c-4c0c798d6cea"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 5,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 2,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 15
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 131,
+        "name": "The Flaming Lips",
+        "mbid": "1f43d76f-8edf-44f6-aaf1-b65f05ad9402"
+      },
+      "b": {
+        "rank": 132,
+        "name": "Chastity Belt",
+        "mbid": "944267d5-c0f0-4f4e-b3f2-7987d25d0441"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          },
+          "challenger": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 0,
+          "10": 0,
+          "20": 0
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 18
+      },
+      "rejected": "N: at some depth every differing artist is on the familiarity list",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 133,
+        "name": "Two Door Cinema Club",
+        "mbid": "6f1de078-6684-4792-820d-2ffad64c15ed"
+      },
+      "b": {
+        "rank": 135,
+        "name": "Dire Straits",
+        "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 2,
+          "20": 3
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 14
+      },
+      "rejected": null,
+      "kept": true
+    },
+    {
+      "a": {
+        "rank": 134,
+        "name": "GROUPLOVE",
+        "mbid": "d8e41375-bd8d-4e39-9da7-f0c171e97086",
+        "skipped_as_adjacent_to": [
+          "Two Door Cinema Club"
+        ]
+      },
+      "b": {
+        "rank": 137,
+        "name": "Sea Power",
+        "mbid": "8830afec-83b3-4213-aad0-f6377f1d73ac"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 2,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 4,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 17,
+        "familiar_interior": 14
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 136,
+        "name": "WALK THE MOON",
+        "mbid": "d4aad415-9cd0-4845-9b05-0416fdcc9fc4",
+        "skipped_as_adjacent_to": [
+          "GROUPLOVE"
+        ]
+      },
+      "b": {
+        "rank": 138,
+        "name": "The Head And The Heart",
+        "mbid": "98cb416e-5271-484c-ab3b-6bed6b4aae12"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 1,
+            "10": 2,
+            "20": 2
+          },
+          "challenger": {
+            "0": 1,
+            "10": 2,
+            "20": 3
+          }
+        },
+        "sets_differ": {},
+        "novel_symdiff": {}
+      },
+      "familiarity": {
+        "distinct_interior": 10,
+        "familiar_interior": 3
+      },
+      "rejected": "L: a map has fewer than 3 interior artists at some depth",
+      "kept": false
+    },
+    {
+      "a": {
+        "rank": 139,
+        "name": "The Joy Formidable",
+        "mbid": "072d4c31-8fd7-4073-9efc-7e192b517906"
+      },
+      "b": {
+        "rank": 140,
+        "name": "Explosions In The Sky",
+        "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474"
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          },
+          "challenger": {
+            "0": 6,
+            "10": 4,
+            "20": 7
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 1,
+          "20": 1
+        }
+      },
+      "familiarity": {
+        "distinct_interior": 25,
+        "familiar_interior": 22
+      },
+      "rejected": null,
+      "kept": true
+    }
+  ],
+  "survivors_ranked": [
+    {
+      "a": {
+        "rank": 83,
+        "name": "St. Paul & The Broken Bones",
+        "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9"
+      },
+      "b": {
+        "rank": 84,
+        "name": "Journey",
+        "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b"
+      },
+      "familiarity": {
+        "distinct_interior": 26,
+        "familiar_interior": 16
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 7,
+            "20": 5
+          },
+          "challenger": {
+            "0": 6,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 4,
+          "10": 6,
+          "20": 4
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 123,
+        "name": "Lake Street Dive",
+        "mbid": "584758b2-306b-4aea-8694-3876943c9968"
+      },
+      "b": {
+        "rank": 124,
+        "name": "Unwritten Law",
+        "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e"
+      },
+      "familiarity": {
+        "distinct_interior": 31,
+        "familiar_interior": 21
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 8,
+            "10": 7,
+            "20": 5
+          },
+          "challenger": {
+            "0": 7,
+            "10": 5,
+            "20": 7
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 5,
+          "20": 4
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 113,
+        "name": "Orville Peck",
+        "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4"
+      },
+      "b": {
+        "rank": 114,
+        "name": "Best Coast",
+        "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5"
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 17
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 7,
+            "20": 6
+          },
+          "challenger": {
+            "0": 4,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 5,
+          "20": 4
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 57,
+        "name": "U2",
+        "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432"
+      },
+      "b": {
+        "rank": 58,
+        "name": "Day Wave",
+        "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3"
+      },
+      "familiarity": {
+        "distinct_interior": 26,
+        "familiar_interior": 17
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 5,
+            "20": 4
+          },
+          "challenger": {
+            "0": 5,
+            "10": 5,
+            "20": 5
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 5,
+          "10": 2,
+          "20": 3
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 45,
+        "name": "Daryl Hall & John Oates",
+        "mbid": "debabff3-2559-46e5-862d-ef2a906d7010"
+      },
+      "b": {
+        "rank": 46,
+        "name": "Cold War Kids",
+        "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116"
+      },
+      "familiarity": {
+        "distinct_interior": 23,
+        "familiar_interior": 15
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 4,
+            "20": 6
+          },
+          "challenger": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 3,
+          "20": 5
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 99,
+        "name": "Bruce Springsteen",
+        "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f"
+      },
+      "b": {
+        "rank": 100,
+        "name": "DISPATCH",
+        "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9"
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 13
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 5,
+            "20": 3
+          },
+          "challenger": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 4,
+          "20": 1
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 109,
+        "name": "Beck",
+        "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a"
+      },
+      "b": {
+        "rank": 110,
+        "name": "J. Cole",
+        "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5"
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 13
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          },
+          "challenger": {
+            "0": 4,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 1,
+          "20": 4
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 67,
+        "name": "The Gaslight Anthem",
+        "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3"
+      },
+      "b": {
+        "rank": 68,
+        "name": "Alabama Shakes",
+        "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2"
+      },
+      "familiarity": {
+        "distinct_interior": 28,
+        "familiar_interior": 20
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 3,
+            "20": 5
+          },
+          "challenger": {
+            "0": 8,
+            "10": 6,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 3,
+          "20": 2
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 133,
+        "name": "Two Door Cinema Club",
+        "mbid": "6f1de078-6684-4792-820d-2ffad64c15ed"
+      },
+      "b": {
+        "rank": 135,
+        "name": "Dire Straits",
+        "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a"
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 14
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 2,
+          "20": 3
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 91,
+        "name": "Graveyard",
+        "mbid": "4db1a745-6fd0-4801-9cce-99e88bf855e6"
+      },
+      "b": {
+        "rank": 92,
+        "name": "Phosphorescent",
+        "mbid": "739da2f1-0741-4c60-a6ed-f42d49bf2eb1"
+      },
+      "familiarity": {
+        "distinct_interior": 26,
+        "familiar_interior": 21
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 7,
+            "10": 7,
+            "20": 6
+          },
+          "challenger": {
+            "0": 6,
+            "10": 6,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 3,
+          "20": 1
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 23,
+        "name": "Taylor Swift",
+        "mbid": "20244d07-534f-4eff-b4d4-930878889970"
+      },
+      "b": {
+        "rank": 24,
+        "name": "Kishi Bashi",
+        "mbid": "7c340ac5-6eda-4981-91d6-d5b1f4d1bbbf"
+      },
+      "familiarity": {
+        "distinct_interior": 19,
+        "familiar_interior": 14
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 3,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 2,
+          "20": 3
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 17,
+        "name": "Simon & Garfunkel",
+        "mbid": "5d02f264-e225-41ff-83f7-d9b1f0b1874a"
+      },
+      "b": {
+        "rank": 19,
+        "name": "Coheed and Cambria",
+        "mbid": "ae1b47d5-5128-431c-9d30-e08fd90e0767"
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 15
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 4,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 1,
+          "20": 3
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 129,
+        "name": "Weezer",
+        "mbid": "6fe07aa5-fec0-4eca-a456-f29bff451b04"
+      },
+      "b": {
+        "rank": 130,
+        "name": "Tarkio",
+        "mbid": "9b07f7a3-6d1a-4592-935c-4c0c798d6cea"
+      },
+      "familiarity": {
+        "distinct_interior": 21,
+        "familiar_interior": 15
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 5,
+            "20": 5
+          },
+          "challenger": {
+            "0": 3,
+            "10": 5,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 2,
+          "20": 3
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 71,
+        "name": "Linkin Park",
+        "mbid": "f59c5520-5f46-4d2c-b2c4-822eabf53419"
+      },
+      "b": {
+        "rank": 72,
+        "name": "Big Thief",
+        "mbid": "9f81247f-7f57-42f3-a8ba-75bef554e591"
+      },
+      "familiarity": {
+        "distinct_interior": 24,
+        "familiar_interior": 18
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 6,
+            "10": 5,
+            "20": 6
+          },
+          "challenger": {
+            "0": 3,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 1,
+          "20": 2
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 96,
+        "name": "Jimi Hendrix",
+        "mbid": "06fb1c8b-566e-4cb2-985b-b467c90781d4",
+        "skipped_as_adjacent_to": [
+          "The Doors"
+        ]
+      },
+      "b": {
+        "rank": 98,
+        "name": "Father John Misty",
+        "mbid": "172053e5-a7fb-4548-a64d-c53858b5e775"
+      },
+      "familiarity": {
+        "distinct_interior": 20,
+        "familiar_interior": 15
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          },
+          "challenger": {
+            "0": 4,
+            "10": 3,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 1,
+          "20": 3
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 40,
+        "name": "Creedence Clearwater Revival",
+        "mbid": "109958eb-a335-4c5e-907e-597ff4c6af46",
+        "skipped_as_adjacent_to": [
+          "Queen"
+        ]
+      },
+      "b": {
+        "rank": 42,
+        "name": "My Morning Jacket",
+        "mbid": "ea5883b7-68ce-48b3-b115-61746ea53b8c"
+      },
+      "familiarity": {
+        "distinct_interior": 22,
+        "familiar_interior": 17
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 5,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 4
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 3,
+          "10": 1,
+          "20": 1
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 27,
+        "name": "Greta Van Fleet",
+        "mbid": "0be22557-d8c7-4706-a531-625c4c570162"
+      },
+      "b": {
+        "rank": 28,
+        "name": "Grimes",
+        "mbid": "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222"
+      },
+      "familiarity": {
+        "distinct_interior": 18,
+        "familiar_interior": 15
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 4,
+            "10": 4,
+            "20": 4
+          },
+          "challenger": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 2,
+          "10": 1,
+          "20": 1
+        }
+      }
+    },
+    {
+      "a": {
+        "rank": 139,
+        "name": "The Joy Formidable",
+        "mbid": "072d4c31-8fd7-4073-9efc-7e192b517906"
+      },
+      "b": {
+        "rank": 140,
+        "name": "Explosions In The Sky",
+        "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474"
+      },
+      "familiarity": {
+        "distinct_interior": 25,
+        "familiar_interior": 22
+      },
+      "detail": {
+        "interior_len": {
+          "incumbent": {
+            "0": 3,
+            "10": 4,
+            "20": 3
+          },
+          "challenger": {
+            "0": 6,
+            "10": 4,
+            "20": 7
+          }
+        },
+        "sets_differ": {
+          "0": true,
+          "10": true,
+          "20": true
+        },
+        "novel_symdiff": {
+          "0": 1,
+          "10": 1,
+          "20": 1
+        }
+      }
+    }
+  ],
+  "finished_utc": "2026-09-23T18:49:44.473975+00:00"
+}

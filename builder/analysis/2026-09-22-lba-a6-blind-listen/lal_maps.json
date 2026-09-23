@@ -1,0 +1,16 @@
+{
+  "_note": "LBA-AM6-1. Incumbent = today's served map (ApiConfig.graph_path's default); challenger = the LBA-A6 candidate. Written by lal_pin_maps.py from the sidecars, each checked against its bytes. Roles only; the left/right assignment is sealed at generation.",
+  "incumbent": {
+    "path": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+    "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+  },
+  "challenger": {
+    "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-candidate.bin",
+    "sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b"
+  },
+  "production_twin": {
+    "path": "C:\\dev\\music-app\\builder\\scratch\\graph-lux4.bin",
+    "sha256": "fd92a7352afb7321e80f3818262d08169fcfb3af1d6841d7ccfca0f5e5740369"
+  },
+  "written_utc": "2026-09-23T14:27:31.667923+00:00"
+}
