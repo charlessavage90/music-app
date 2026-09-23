@@ -1,0 +1,1974 @@
+{
+  "pairs": [
+    {
+      "key": "4486702e-7b26-43fd-babc-c0df7be0e1d9|abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+      "a": "St. Paul & The Broken Bones",
+      "b": "Journey",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9",
+                "name": "St. Paul & The Broken Bones",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+                "name": "Leon Bridges",
+                "disambiguation": "American soul singer‐songwriter"
+              },
+              {
+                "mbid": "b5c4ffa2-82e1-4b72-b7f3-c60afb74b860",
+                "name": "Ray LaMontagne",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c80f38a6-9980-485d-997c-5c1a9cbd0d64",
+                "name": "Ryan Adams",
+                "disambiguation": "US singer-songwriter, multi-instrumentalist, producer & poet"
+              },
+              {
+                "mbid": "99ea432a-e3d8-42cb-9d5e-db316a6a8458",
+                "name": "Nick Drake",
+                "disambiguation": "English singer‐songwriter"
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              },
+              {
+                "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a",
+                "name": "Dire Straits",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+                "name": "Journey",
+                "disambiguation": "American rock band"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9",
+                "name": "St. Paul & The Broken Bones",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8d50cd20-34f2-4abe-ba16-0759ee0fb9f5",
+                "name": "Sharon Jones and the Dap‐Kings",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "20ff3303-4fe2-4a47-a1b6-291e26aa3438",
+                "name": "James Brown",
+                "disambiguation": "The Godfather of Soul"
+              },
+              {
+                "mbid": "070d193a-845c-479f-980e-bef15710653e",
+                "name": "Prince",
+                "disambiguation": "“The Artist Formerly Known as…”"
+              },
+              {
+                "mbid": "395cc503-63b5-4a0b-a20a-604e3fcacea2",
+                "name": "Men at Work",
+                "disambiguation": "Australian rock band"
+              },
+              {
+                "mbid": "be400390-fc05-4906-8e15-1342da0e8e1b",
+                "name": "Tony Lewis",
+                "disambiguation": "lead vocalist, bassist in The Outfield"
+              },
+              {
+                "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+                "name": "Journey",
+                "disambiguation": "American rock band"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9",
+                "name": "St. Paul & The Broken Bones",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+                "name": "Leon Bridges",
+                "disambiguation": "American soul singer‐songwriter"
+              },
+              {
+                "mbid": "3d254f1e-7d18-431b-baeb-68e57695dfdb",
+                "name": "Blood Orange",
+                "disambiguation": "singer/songwriter Devonté Hynes"
+              },
+              {
+                "mbid": "469d6414-1f06-43de-80d5-17762d4a356a",
+                "name": "Weyes Blood",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4b585938-f271-45e2-b19a-91c634b5e396",
+                "name": "Kate Bush",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b4d32cff-f19e-455f-86c4-f347d824ca61",
+                "name": "Eurythmics",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+                "name": "Journey",
+                "disambiguation": "American rock band"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9",
+                "name": "St. Paul & The Broken Bones",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8d50cd20-34f2-4abe-ba16-0759ee0fb9f5",
+                "name": "Sharon Jones and the Dap‐Kings",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b7ec4c54-1f93-4bf2-957f-7b9921ab84ea",
+                "name": "Sly & the Family Stone",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "82b1f5fd-cd31-41a9-b5d4-7e33f0eb9751",
+                "name": "Otis Redding",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "17b53d9f-5c63-4a09-a593-dde4608e0db9",
+                "name": "The Kinks",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "11d2fcfe-669d-4596-8921-e07dbdae311f",
+                "name": "Roy Bittan",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "395cc503-63b5-4a0b-a20a-604e3fcacea2",
+                "name": "Men at Work",
+                "disambiguation": "Australian rock band"
+              },
+              {
+                "mbid": "be400390-fc05-4906-8e15-1342da0e8e1b",
+                "name": "Tony Lewis",
+                "disambiguation": "lead vocalist, bassist in The Outfield"
+              },
+              {
+                "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+                "name": "Journey",
+                "disambiguation": "American rock band"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9",
+                "name": "St. Paul & The Broken Bones",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8d50cd20-34f2-4abe-ba16-0759ee0fb9f5",
+                "name": "Sharon Jones and the Dap‐Kings",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "fd1a2d9d-9bb6-44de-83a3-41560658aba9",
+                "name": "Bill Withers",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e01c3376-15fa-40d7-b747-5f219bdefdd7",
+                "name": "Steely Dan",
+                "disambiguation": "group founded by Walter Becker and Donald Fagen"
+              },
+              {
+                "mbid": "8e3fcd7d-bda1-4ca0-b987-b8528d2ee74e",
+                "name": "Genesis",
+                "disambiguation": "English rock band"
+              },
+              {
+                "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+                "name": "Journey",
+                "disambiguation": "American rock band"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "4486702e-7b26-43fd-babc-c0df7be0e1d9",
+                "name": "St. Paul & The Broken Bones",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "99d79171-66fd-4626-8ba1-9d5862a4a9a5",
+                "name": "Allen Stone",
+                "disambiguation": "soul/R&B singer and musician"
+              },
+              {
+                "mbid": "97b226c8-7140-4da3-91ac-15e62e131a81",
+                "name": "Macklemore & Ryan Lewis",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "aa82f6eb-ded9-4c0b-951d-2e638ca25c76",
+                "name": "Nathan East",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e5362065-7a9c-4403-95bb-c0baac57b4e2",
+                "name": "Bill Wolfer",
+                "disambiguation": "record producer, songwriter, musician and synthesizer programmer from USA"
+              },
+              {
+                "mbid": "be400390-fc05-4906-8e15-1342da0e8e1b",
+                "name": "Tony Lewis",
+                "disambiguation": "lead vocalist, bassist in The Outfield"
+              },
+              {
+                "mbid": "abd506e1-6f2b-4d6f-b937-92c267f6f88b",
+                "name": "Journey",
+                "disambiguation": "American rock band"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "584758b2-306b-4aea-8694-3876943c9968|846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+      "a": "Lake Street Dive",
+      "b": "Unwritten Law",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "584758b2-306b-4aea-8694-3876943c9968",
+                "name": "Lake Street Dive",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4a18f60f-7aa9-4476-8d0f-84981d8ccb60",
+                "name": "Houndmouth",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "98cb416e-5271-484c-ab3b-6bed6b4aae12",
+                "name": "The Head and the Heart",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "9e103f85-7af7-41d7-b83b-49ba8f0c5abf",
+                "name": "Of Monsters and Men",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "97b8d224-5660-419c-8dff-4b3bf0c33983",
+                "name": "The Neighbourhood",
+                "disambiguation": "indie rock, avant‐garde, and alternative hip hop band"
+              },
+              {
+                "mbid": "8e494408-8620-4c6a-82c2-c2ca4a1e4f12",
+                "name": "Lorde",
+                "disambiguation": "New Zealand singer‐songwriter"
+              },
+              {
+                "mbid": "44cf61b8-5197-448a-b82b-cef6ee89fac5",
+                "name": "Paramore",
+                "disambiguation": "American pop rock band"
+              },
+              {
+                "mbid": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+                "name": "Good Charlotte",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "0cc9e56e-a623-47ea-b5f2-1a1757cc2426",
+                "name": "Sugarcult",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+                "name": "Unwritten Law",
+                "disambiguation": "1990- current American rock band"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "584758b2-306b-4aea-8694-3876943c9968",
+                "name": "Lake Street Dive",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+                "name": "Leon Bridges",
+                "disambiguation": "American soul singer‐songwriter"
+              },
+              {
+                "mbid": "144ef525-85e9-40c3-8335-02c32d0861f3",
+                "name": "John Mayer",
+                "disambiguation": "US singer‐songwriter"
+              },
+              {
+                "mbid": "2ddd167f-5b8a-4372-b350-6ad50493bac0",
+                "name": "The Fray",
+                "disambiguation": "US alternative rock band"
+              },
+              {
+                "mbid": "2386cd66-e923-4e8e-bf14-2eebe2e9b973",
+                "name": "3 Doors Down",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "0743b15a-3c32-48c8-ad58-cb325350befa",
+                "name": "blink‐182",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1c3919b2-43ca-4a4a-935d-9d50135ec0ef",
+                "name": "AFI",
+                "disambiguation": "US rock band"
+              },
+              {
+                "mbid": "57805d77-f947-4851-b7fb-78baad154451",
+                "name": "The Ataris",
+                "disambiguation": "US pop/punk band"
+              },
+              {
+                "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+                "name": "Unwritten Law",
+                "disambiguation": "1990- current American rock band"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "584758b2-306b-4aea-8694-3876943c9968",
+                "name": "Lake Street Dive",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4a18f60f-7aa9-4476-8d0f-84981d8ccb60",
+                "name": "Houndmouth",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "98cb416e-5271-484c-ab3b-6bed6b4aae12",
+                "name": "The Head and the Heart",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "df36f6db-5987-46ed-9d02-0cf36ed4e060",
+                "name": "Vance Joy",
+                "disambiguation": "Australian singer-songwriter"
+              },
+              {
+                "mbid": "a6c6897a-7415-4f8d-b5a5-3a5e05f3be67",
+                "name": "twenty one pilots",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b9472588-93f3-4922-a1a2-74082cdf9ce8",
+                "name": "Panic! at the Disco",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
+                "name": "Yellowcard",
+                "disambiguation": "US pop punk band"
+              },
+              {
+                "mbid": "0cc9e56e-a623-47ea-b5f2-1a1757cc2426",
+                "name": "Sugarcult",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+                "name": "Unwritten Law",
+                "disambiguation": "1990- current American rock band"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "584758b2-306b-4aea-8694-3876943c9968",
+                "name": "Lake Street Dive",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+                "name": "Leon Bridges",
+                "disambiguation": "American soul singer‐songwriter"
+              },
+              {
+                "mbid": "bc85c6f6-6b06-44c1-8754-ef32c1e6b824",
+                "name": "Corinne Bailey Rae",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8b477559-946e-4ef2-9fe1-446cff8fdd79",
+                "name": "Natasha Bedingfield",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b345af35-205e-4eca-8006-029e5c20127e",
+                "name": "Simple Plan",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "57805d77-f947-4851-b7fb-78baad154451",
+                "name": "The Ataris",
+                "disambiguation": "US pop/punk band"
+              },
+              {
+                "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+                "name": "Unwritten Law",
+                "disambiguation": "1990- current American rock band"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "584758b2-306b-4aea-8694-3876943c9968",
+                "name": "Lake Street Dive",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "52a4de43-92f5-4995-9a71-07d67dd35b7d",
+                "name": "Nathaniel Rateliff & The Night Sweats",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "ae278e0f-abc8-4c2b-ac72-0a4175e7f36b",
+                "name": "Lady Wray",
+                "disambiguation": "US R&B & hip hop singer Nicole Wray"
+              },
+              {
+                "mbid": "9c9f1380-2516-4fc9-a3e6-f9f61941d090",
+                "name": "Muse",
+                "disambiguation": "UK rock band"
+              },
+              {
+                "mbid": "d8354b38-e942-4c89-ba93-29323432abc3",
+                "name": "Thirty Seconds to Mars",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b4d3258d-9d40-4b0d-8a21-796360e52405",
+                "name": "Luke Wood",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+                "name": "Unwritten Law",
+                "disambiguation": "1990- current American rock band"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "584758b2-306b-4aea-8694-3876943c9968",
+                "name": "Lake Street Dive",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "69d9dfd7-19b7-4a75-8a53-9f733fb5d774",
+                "name": "Leon Bridges",
+                "disambiguation": "American soul singer‐songwriter"
+              },
+              {
+                "mbid": "51c76d97-0635-433c-b26d-66beb81657f8",
+                "name": "Lord Huron",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "484a4e90-6899-4e4b-a948-a2255d365340",
+                "name": "AURORA",
+                "disambiguation": "Norwegian singer"
+              },
+              {
+                "mbid": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
+                "name": "Bring Me the Horizon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "16a43d5e-c52d-4eaa-9c3b-00b2c1d8e816",
+                "name": "Skillet",
+                "disambiguation": "Christian rock band"
+              },
+              {
+                "mbid": "b345af35-205e-4eca-8006-029e5c20127e",
+                "name": "Simple Plan",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "57805d77-f947-4851-b7fb-78baad154451",
+                "name": "The Ataris",
+                "disambiguation": "US pop/punk band"
+              },
+              {
+                "mbid": "846cdb90-81a6-4c05-a7dc-9dd075f0db9e",
+                "name": "Unwritten Law",
+                "disambiguation": "1990- current American rock band"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "437b356d-88f1-4dde-af5e-dec1c9d7dde4|5ab8835e-ac44-4055-9c11-7878199606b5",
+      "a": "Orville Peck",
+      "b": "Best Coast",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4",
+                "name": "Orville Peck",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "469d6414-1f06-43de-80d5-17762d4a356a",
+                "name": "Weyes Blood",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c4ff10e0-ae5a-467d-a409-6e0b4bf241eb",
+                "name": "Perfume Genius",
+                "disambiguation": "US singer-songwriter Mike Hadreas"
+              },
+              {
+                "mbid": "5334edc0-5faf-4ca5-b1df-000de3e1f752",
+                "name": "St. Vincent",
+                "disambiguation": "USA guitarist, singer and songwriter Annie Clark"
+              },
+              {
+                "mbid": "2ff0dfc6-0542-4bbc-a44a-60605c074ba6",
+                "name": "Real Estate",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5",
+                "name": "Best Coast",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4",
+                "name": "Orville Peck",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5df148ae-78eb-495a-8a0b-d16f3105992d",
+                "name": "Noah Cyrus",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "850a8b03-98a7-4fd3-afbd-5e5520b4ef5f",
+                "name": "Conan Gray",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4ae429fe-735c-4968-8253-a591421b1bd0",
+                "name": "girl in red",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4c671d5a-7027-4398-8055-03e61d1a3967",
+                "name": "Cults",
+                "disambiguation": "NYC indie pop duo"
+              },
+              {
+                "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5",
+                "name": "Best Coast",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4",
+                "name": "Orville Peck",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e4356a15-5acc-400d-a707-592d66922e28",
+                "name": "Sevdaliza",
+                "disambiguation": "Dutch singer/producer"
+              },
+              {
+                "mbid": "f7625f34-1799-42a4-a1c6-22b5377c767b",
+                "name": "Arca",
+                "disambiguation": "Venezuelan producer & composer"
+              },
+              {
+                "mbid": "5a6131f9-f8db-4722-b4d7-6a0c7183c590",
+                "name": "benny blanco",
+                "disambiguation": "producer Benjamin Levin"
+              },
+              {
+                "mbid": "8e494408-8620-4c6a-82c2-c2ca4a1e4f12",
+                "name": "Lorde",
+                "disambiguation": "New Zealand singer‐songwriter"
+              },
+              {
+                "mbid": "6a93afbb-257f-4166-b389-9f2a1e5c5df8",
+                "name": "CHVRCHES",
+                "disambiguation": "Glaswegian electronic pop trio"
+              },
+              {
+                "mbid": "dfe78af2-779e-4137-826a-3073a16e3278",
+                "name": "Phantogram",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4c671d5a-7027-4398-8055-03e61d1a3967",
+                "name": "Cults",
+                "disambiguation": "NYC indie pop duo"
+              },
+              {
+                "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5",
+                "name": "Best Coast",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4",
+                "name": "Orville Peck",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5df148ae-78eb-495a-8a0b-d16f3105992d",
+                "name": "Noah Cyrus",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4757df70-6c3e-46b8-99c0-a68644595c9a",
+                "name": "Julia Michaels",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "3ab2ee23-1c2f-458c-9c8c-ca4844729120",
+                "name": "MØ",
+                "disambiguation": "Danish singer"
+              },
+              {
+                "mbid": "d8f43dc5-4613-48ac-8c23-a62b82f8c67a",
+                "name": "Caroline Polachek",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "99450990-b24e-4132-bb68-235f8c3e2564",
+                "name": "Alvvays",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5",
+                "name": "Best Coast",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4",
+                "name": "Orville Peck",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e4356a15-5acc-400d-a707-592d66922e28",
+                "name": "Sevdaliza",
+                "disambiguation": "Dutch singer/producer"
+              },
+              {
+                "mbid": "f7625f34-1799-42a4-a1c6-22b5377c767b",
+                "name": "Arca",
+                "disambiguation": "Venezuelan producer & composer"
+              },
+              {
+                "mbid": "5a6131f9-f8db-4722-b4d7-6a0c7183c590",
+                "name": "benny blanco",
+                "disambiguation": "producer Benjamin Levin"
+              },
+              {
+                "mbid": "8e494408-8620-4c6a-82c2-c2ca4a1e4f12",
+                "name": "Lorde",
+                "disambiguation": "New Zealand singer‐songwriter"
+              },
+              {
+                "mbid": "aef06569-098f-4218-a577-b413944d9493",
+                "name": "HAIM",
+                "disambiguation": "US pop‐rock trio"
+              },
+              {
+                "mbid": "66a7117a-4b67-4a85-83bf-94491340d22d",
+                "name": "Rostam",
+                "disambiguation": "American producer & songwriter"
+              },
+              {
+                "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5",
+                "name": "Best Coast",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "437b356d-88f1-4dde-af5e-dec1c9d7dde4",
+                "name": "Orville Peck",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5df148ae-78eb-495a-8a0b-d16f3105992d",
+                "name": "Noah Cyrus",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "f7441bc7-d7de-4813-a2fc-31a4033d396d",
+                "name": "Gracie Abrams",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "9f75277c-b283-4846-ac8c-f932255cd0ac",
+                "name": "Doechii",
+                "disambiguation": "US rapper"
+              },
+              {
+                "mbid": "97b20fe3-0924-4a5f-9955-d0b5c5f9587f",
+                "name": "Santigold",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "95f7536d-b2f7-4087-8668-a663ec201f5a",
+                "name": "Sleigh Bells",
+                "disambiguation": "US noise pop duo"
+              },
+              {
+                "mbid": "5ab8835e-ac44-4055-9c11-7878199606b5",
+                "name": "Best Coast",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|e46758a5-28e4-41c0-9893-2f5720d712f3",
+      "a": "U2",
+      "b": "Day Wave",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+                "name": "U2",
+                "disambiguation": "Irish rock band"
+              },
+              {
+                "mbid": "95e1ead9-4d31-4808-a7ac-32c3614c116b",
+                "name": "The Killers",
+                "disambiguation": "American rock band"
+              },
+              {
+                "mbid": "63aa26c3-d59b-4da4-84ac-716b54f1ef4d",
+                "name": "Tame Impala",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d786f59b-1836-4ddb-8393-ab753edbe984",
+                "name": "Clairo",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bfa6929d-8375-488d-b027-8a0691c73643",
+                "name": "Still Woozy",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "cf9655a8-ce1e-414e-9843-de1c4a60830d",
+                "name": "Hippo Campus",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3",
+                "name": "Day Wave",
+                "disambiguation": "US indie rock musician, multi-instrumentalist, and producer"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+                "name": "U2",
+                "disambiguation": "Irish rock band"
+              },
+              {
+                "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+                "name": "Coldplay",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "2f548675-008d-4332-876c-108b0c7ab9c5",
+                "name": "Sia",
+                "disambiguation": "Australian singer‐songwriter"
+              },
+              {
+                "mbid": "b7d92248-97e3-4450-8057-6fe06738f735",
+                "name": "Shawn Mendes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c0ef2ba5-a7b7-40ea-bd27-30acccfcac11",
+                "name": "Lauv",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "f1cc066a-6dd1-4b18-ae68-3708472ab4b1",
+                "name": "LANY",
+                "disambiguation": "LA alternative band"
+              },
+              {
+                "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3",
+                "name": "Day Wave",
+                "disambiguation": "US indie rock musician, multi-instrumentalist, and producer"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+                "name": "U2",
+                "disambiguation": "Irish rock band"
+              },
+              {
+                "mbid": "8f92558c-2baa-4758-8c38-615519e9deda",
+                "name": "The Clash",
+                "disambiguation": "70s–80s British punk rock band"
+              },
+              {
+                "mbid": "9a58fda3-f4ed-4080-a3a5-f457aac9fcdd",
+                "name": "Joy Division",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a16371b9-7d36-497a-a9d4-42b0a0440c5e",
+                "name": "Slowdive",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "99450990-b24e-4132-bb68-235f8c3e2564",
+                "name": "Alvvays",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "3df3818e-7984-4c62-bee3-81f95f8c6651",
+                "name": "Beach Fossils",
+                "disambiguation": "US indie rock band"
+              },
+              {
+                "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3",
+                "name": "Day Wave",
+                "disambiguation": "US indie rock musician, multi-instrumentalist, and producer"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+                "name": "U2",
+                "disambiguation": "Irish rock band"
+              },
+              {
+                "mbid": "309d9809-cf74-493a-b56b-1378258f20fd",
+                "name": "Ed O’Brien",
+                "disambiguation": "guitarist & songwriter in Radiohead"
+              },
+              {
+                "mbid": "a0498514-c21c-4e85-8dbf-a1b92374a06b",
+                "name": "Albert Hammond, Jr.",
+                "disambiguation": "member of The Strokes"
+              },
+              {
+                "mbid": "6f1de078-6684-4792-820d-2ffad64c15ed",
+                "name": "Two Door Cinema Club",
+                "disambiguation": "Northern Irish rock band"
+              },
+              {
+                "mbid": "5b6ebfe0-f72b-4902-bba9-74c8af0f1af0",
+                "name": "The 1975",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5db88fae-df24-490e-971a-1b3fe8d373ea",
+                "name": "The Japanese House",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3",
+                "name": "Day Wave",
+                "disambiguation": "US indie rock musician, multi-instrumentalist, and producer"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+                "name": "U2",
+                "disambiguation": "Irish rock band"
+              },
+              {
+                "mbid": "7c7f9c94-dee8-4903-892b-6cf44652e2de",
+                "name": "Tears for Fears",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "4b585938-f271-45e2-b19a-91c634b5e396",
+                "name": "Kate Bush",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "469d6414-1f06-43de-80d5-17762d4a356a",
+                "name": "Weyes Blood",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5e9adbe9-5721-4d66-88e4-0e3ff7129f1c",
+                "name": "Mild High Club",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "3df3818e-7984-4c62-bee3-81f95f8c6651",
+                "name": "Beach Fossils",
+                "disambiguation": "US indie rock band"
+              },
+              {
+                "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3",
+                "name": "Day Wave",
+                "disambiguation": "US indie rock musician, multi-instrumentalist, and producer"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432",
+                "name": "U2",
+                "disambiguation": "Irish rock band"
+              },
+              {
+                "mbid": "381086ea-f511-4aba-bdf9-71c753dc5077",
+                "name": "Kendrick Lamar",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "272989c8-5535-492d-a25c-9f58803e027f",
+                "name": "SZA",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c0ef2ba5-a7b7-40ea-bd27-30acccfcac11",
+                "name": "Lauv",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "f1cc066a-6dd1-4b18-ae68-3708472ab4b1",
+                "name": "LANY",
+                "disambiguation": "LA alternative band"
+              },
+              {
+                "mbid": "e46758a5-28e4-41c0-9893-2f5720d712f3",
+                "name": "Day Wave",
+                "disambiguation": "US indie rock musician, multi-instrumentalist, and producer"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "debabff3-2559-46e5-862d-ef2a906d7010|0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+      "a": "Daryl Hall & John Oates",
+      "b": "Cold War Kids",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "debabff3-2559-46e5-862d-ef2a906d7010",
+                "name": "Daryl Hall & John Oates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a41ac10f-0a56-4672-9161-b83f9b223559",
+                "name": "Van Morrison",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "99ea432a-e3d8-42cb-9d5e-db316a6a8458",
+                "name": "Nick Drake",
+                "disambiguation": "English singer‐songwriter"
+              },
+              {
+                "mbid": "437a0e49-c6ae-42f6-a6c1-84f25ed366bc",
+                "name": "Bon Iver",
+                "disambiguation": "US indie folk band"
+              },
+              {
+                "mbid": "4a069029-4f64-4946-b650-01aeb0b55d9d",
+                "name": "Edward Sharpe and the Magnetic Zeros",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+                "name": "Cold War Kids",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "debabff3-2559-46e5-862d-ef2a906d7010",
+                "name": "Daryl Hall & John Oates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8e3fcd7d-bda1-4ca0-b987-b8528d2ee74e",
+                "name": "Genesis",
+                "disambiguation": "English rock band"
+              },
+              {
+                "mbid": "1dce970e-34bc-48b2-ab51-48d87544a4c2",
+                "name": "David Gilmour",
+                "disambiguation": "Pink Floyd"
+              },
+              {
+                "mbid": "39ab1aed-75e0-4140-bd47-540276886b60",
+                "name": "Oasis",
+                "disambiguation": "Noel & Liam Gallagher"
+              },
+              {
+                "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+                "name": "Beck",
+                "disambiguation": "alt rock, multi‐instrumentalist Beck Hansen"
+              },
+              {
+                "mbid": "4449ccf6-c948-4d33-aa97-b6ad98ce4b5b",
+                "name": "Metric",
+                "disambiguation": "indie rock"
+              },
+              {
+                "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+                "name": "Cold War Kids",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "debabff3-2559-46e5-862d-ef2a906d7010",
+                "name": "Daryl Hall & John Oates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "9e0e2b01-41db-4008-bd8b-988977d6019a",
+                "name": "The Police",
+                "disambiguation": "British rock band"
+              },
+              {
+                "mbid": "40f5d9e4-2de7-4f2d-ad41-e31a9a9fea27",
+                "name": "The Smiths",
+                "disambiguation": "1980s English rock band"
+              },
+              {
+                "mbid": "b23e8a63-8f47-4882-b55b-df2c92ef400e",
+                "name": "Interpol",
+                "disambiguation": "NYC rock band"
+              },
+              {
+                "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+                "name": "Cold War Kids",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "debabff3-2559-46e5-862d-ef2a906d7010",
+                "name": "Daryl Hall & John Oates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a62f2bf6-2711-4948-a428-e06f626b706a",
+                "name": "Lenny Castro",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "ef069340-5d44-4178-9e9f-87989fe79c1f",
+                "name": "The Sweet Inspirations",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c7020c6d-cae9-4db3-92a7-e5c561cbad50",
+                "name": "Keane",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "f4ad883e-9a92-45ed-a540-a49c2d1c36dd",
+                "name": "The Fratellis",
+                "disambiguation": "Scottish rock band"
+              },
+              {
+                "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+                "name": "Cold War Kids",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "debabff3-2559-46e5-862d-ef2a906d7010",
+                "name": "Daryl Hall & John Oates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5dcdb5eb-cb72-4e6e-9e63-b7bace604965",
+                "name": "Bon Jovi",
+                "disambiguation": "group"
+              },
+              {
+                "mbid": "39ab1aed-75e0-4140-bd47-540276886b60",
+                "name": "Oasis",
+                "disambiguation": "Noel & Liam Gallagher"
+              },
+              {
+                "mbid": "6ffb8ea9-2370-44d8-b678-e9237bbd347b",
+                "name": "Kings of Leon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "be407b02-f3e6-4ed5-9489-f8e5f0ab36dc",
+                "name": "The Raconteurs",
+                "disambiguation": "in Australia known as The Saboteurs"
+              },
+              {
+                "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+                "name": "Cold War Kids",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "debabff3-2559-46e5-862d-ef2a906d7010",
+                "name": "Daryl Hall & John Oates",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a62f2bf6-2711-4948-a428-e06f626b706a",
+                "name": "Lenny Castro",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "ef069340-5d44-4178-9e9f-87989fe79c1f",
+                "name": "The Sweet Inspirations",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b553f0ad-4543-46f2-88ea-1dc94a11c91a",
+                "name": "Robby Krieger",
+                "disambiguation": "American guitarist, member of The Doors"
+              },
+              {
+                "mbid": "309d9809-cf74-493a-b56b-1378258f20fd",
+                "name": "Ed O’Brien",
+                "disambiguation": "guitarist & songwriter in Radiohead"
+              },
+              {
+                "mbid": "0576e68e-2dd8-41ad-975a-09bdc44422b6",
+                "name": "Andrew VanWyngarden",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "02b16a7f-0e8b-4df8-807c-aa40bae1d590",
+                "name": "Mark Foster",
+                "disambiguation": "of Foster the People"
+              },
+              {
+                "mbid": "0741b30d-e15b-4a8c-b2e5-8834a03d6116",
+                "name": "Cold War Kids",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "70248960-cb53-4ea4-943a-edb18f7d336f|c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+      "a": "Bruce Springsteen",
+      "b": "Dispatch",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f",
+                "name": "Bruce Springsteen",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "5dcdb5eb-cb72-4e6e-9e63-b7bace604965",
+                "name": "Bon Jovi",
+                "disambiguation": "group"
+              },
+              {
+                "mbid": "39ab1aed-75e0-4140-bd47-540276886b60",
+                "name": "Oasis",
+                "disambiguation": "Noel & Liam Gallagher"
+              },
+              {
+                "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
+                "name": "Stone Temple Pilots",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bf600e2b-dc2d-4839-a1be-6ebef4087cd0",
+                "name": "311",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+                "name": "Dispatch",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f",
+                "name": "Bruce Springsteen",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              },
+              {
+                "mbid": "65314b12-0e08-43fa-ba33-baaa7b874c15",
+                "name": "Leonard Cohen",
+                "disambiguation": "Canadian singer‐songwriter and poet"
+              },
+              {
+                "mbid": "03ad1736-b7c9-412a-b442-82536d63a5c4",
+                "name": "Elliott Smith",
+                "disambiguation": "US singer‐songwriter"
+              },
+              {
+                "mbid": "2119beb8-6ac5-4f21-82a4-b831c90c0024",
+                "name": "Damien Rice",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1582a5b8-538e-45e7-9ae4-4099439a0e79",
+                "name": "Ben Harper",
+                "disambiguation": "singer, guitarist, The Innocent Criminals"
+              },
+              {
+                "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+                "name": "Dispatch",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f",
+                "name": "Bruce Springsteen",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "66c662b6-6e2f-4930-8610-912e24c63ed1",
+                "name": "AC/DC",
+                "disambiguation": "Australian hard rock band"
+              },
+              {
+                "mbid": "67f66c07-6e61-4026-ade5-7e782fad3a5d",
+                "name": "Foo Fighters",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
+                "name": "Stone Temple Pilots",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bf600e2b-dc2d-4839-a1be-6ebef4087cd0",
+                "name": "311",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+                "name": "Dispatch",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f",
+                "name": "Bruce Springsteen",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a",
+                "name": "Dire Straits",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "123814ce-f7f7-44c9-b84d-0088b1e230a4",
+                "name": "Geezer Butler",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "16cb4a74-225a-4262-a885-628083f12460",
+                "name": "Mike McCready",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1a60d6dd-9d3e-40fc-a66d-3184f9ee0d61",
+                "name": "Eddie Vedder",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "1582a5b8-538e-45e7-9ae4-4099439a0e79",
+                "name": "Ben Harper",
+                "disambiguation": "singer, guitarist, The Innocent Criminals"
+              },
+              {
+                "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+                "name": "Dispatch",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f",
+                "name": "Bruce Springsteen",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "75167b8b-44e4-407b-9d35-effe87b223cf",
+                "name": "Neil Young",
+                "disambiguation": "Canadian singer, songwriter & musician"
+              },
+              {
+                "mbid": "6faa7ca7-0d99-4a5e-bfa6-1fd5037520c6",
+                "name": "Grateful Dead",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e01646f2-2a04-450d-8bf2-0d993082e058",
+                "name": "Phish",
+                "disambiguation": "American rock band formed in Burlington, Vermont, in 1983"
+              },
+              {
+                "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+                "name": "Dispatch",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "70248960-cb53-4ea4-943a-edb18f7d336f",
+                "name": "Bruce Springsteen",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a41ac10f-0a56-4672-9161-b83f9b223559",
+                "name": "Van Morrison",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c8a63580-9e6b-4852-bf93-c09760035e76",
+                "name": "Bob Weir",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "e01646f2-2a04-450d-8bf2-0d993082e058",
+                "name": "Phish",
+                "disambiguation": "American rock band formed in Burlington, Vermont, in 1983"
+              },
+              {
+                "mbid": "c4237bd8-b11a-4f22-b0b7-29beca7daab9",
+                "name": "Dispatch",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "309c62ba-7a22-4277-9f67-4a162526d18a|875203e1-8e58-4b86-8dcb-7190faf411c5",
+      "a": "Beck",
+      "b": "J. Cole",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+                "name": "Beck",
+                "disambiguation": "alt rock, multi‐instrumentalist Beck Hansen"
+              },
+              {
+                "mbid": "7d7a5fdd-0d04-4c36-8bee-906feeae239c",
+                "name": "Damon Albarn",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d0c7656d-8169-4f77-9dbe-b8f24e40105d",
+                "name": "Kali Uchis",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a0e8a1b1-5f8f-475a-a253-17415c17d0ff",
+                "name": "Mac Miller",
+                "disambiguation": "American rapper"
+              },
+              {
+                "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5",
+                "name": "J. Cole",
+                "disambiguation": "US rapper & producer"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+                "name": "Beck",
+                "disambiguation": "alt rock, multi‐instrumentalist Beck Hansen"
+              },
+              {
+                "mbid": "8d455809-96b3-4bb6-8829-ea4beb580d35",
+                "name": "Phoenix",
+                "disambiguation": "French indie band"
+              },
+              {
+                "mbid": "dfe78af2-779e-4137-826a-3073a16e3278",
+                "name": "Phantogram",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "c8a9ae11-63bf-409b-8bf3-a96b3712a2ff",
+                "name": "Little Dragon",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "d02dd67e-f655-4600-bc47-f789f59e7367",
+                "name": "Anderson .Paak",
+                "disambiguation": "American rapper and producer"
+              },
+              {
+                "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5",
+                "name": "J. Cole",
+                "disambiguation": "US rapper & producer"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+                "name": "Beck",
+                "disambiguation": "alt rock, multi‐instrumentalist Beck Hansen"
+              },
+              {
+                "mbid": "1946a82a-f927-40c2-8235-38d64f50d043",
+                "name": "The Chemical Brothers",
+                "disambiguation": "British electronic music duo"
+              },
+              {
+                "mbid": "7cf0ea9d-86b9-4dad-ba9e-2355a64899ea",
+                "name": "M.I.A.",
+                "disambiguation": "hip hop artist Maya Arulpragasam"
+              },
+              {
+                "mbid": "ac9a487a-d9d2-4f27-bb23-0f4686488345",
+                "name": "Lil Wayne",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5",
+                "name": "J. Cole",
+                "disambiguation": "US rapper & producer"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+                "name": "Beck",
+                "disambiguation": "alt rock, multi‐instrumentalist Beck Hansen"
+              },
+              {
+                "mbid": "6c8b9855-ba8b-48f9-ac1d-42167f7f7b18",
+                "name": "The Shins",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "6f1de078-6684-4792-820d-2ffad64c15ed",
+                "name": "Two Door Cinema Club",
+                "disambiguation": "Northern Irish rock band"
+              },
+              {
+                "mbid": "97b8d224-5660-419c-8dff-4b3bf0c33983",
+                "name": "The Neighbourhood",
+                "disambiguation": "indie rock, avant‐garde, and alternative hip hop band"
+              },
+              {
+                "mbid": "61af87f4-16ee-4431-8504-cc06187079fb",
+                "name": "XXXTENTACION",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5",
+                "name": "J. Cole",
+                "disambiguation": "US rapper & producer"
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+                "name": "Beck",
+                "disambiguation": "alt rock, multi‐instrumentalist Beck Hansen"
+              },
+              {
+                "mbid": "309d9809-cf74-493a-b56b-1378258f20fd",
+                "name": "Ed O’Brien",
+                "disambiguation": "guitarist & songwriter in Radiohead"
+              },
+              {
+                "mbid": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+                "name": "Coldplay",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "73e5e69d-3554-40d8-8516-00cb38737a1c",
+                "name": "Rihanna",
+                "disambiguation": "Barbadian R&B/pop singer"
+              },
+              {
+                "mbid": "f23ef341-33bd-47c1-b83c-846a78581f05",
+                "name": "PARTYNEXTDOOR",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5",
+                "name": "J. Cole",
+                "disambiguation": "US rapper & producer"
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "309c62ba-7a22-4277-9f67-4a162526d18a",
+                "name": "Beck",
+                "disambiguation": "alt rock, multi‐instrumentalist Beck Hansen"
+              },
+              {
+                "mbid": "ea4dfa26-f633-4da6-a52a-f49ea4897b58",
+                "name": "R.E.M.",
+                "disambiguation": "American rock band"
+              },
+              {
+                "mbid": "f27ec8db-af05-4f36-916e-3d57f91ecf5e",
+                "name": "Michael Jackson",
+                "disambiguation": "“King of Pop”"
+              },
+              {
+                "mbid": "b95ce3ff-3d05-4e87-9e01-c97b66af13d4",
+                "name": "Eminem",
+                "disambiguation": "US rapper"
+              },
+              {
+                "mbid": "875203e1-8e58-4b86-8dcb-7190faf411c5",
+                "name": "J. Cole",
+                "disambiguation": "US rapper & producer"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "f208f09e-b5b3-4b06-87cd-f7230fae17e3|40419b33-18e9-4d5a-a674-30b4bb14bac2",
+      "a": "The Gaslight Anthem",
+      "b": "Alabama Shakes",
+      "rows": [
+        {
+          "depth": 0,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3",
+                "name": "The Gaslight Anthem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a66ebddc-ff04-46b8-820a-15c63e80dba1",
+                "name": "Against Me!",
+                "disambiguation": "US punk rock band"
+              },
+              {
+                "mbid": "b88f21a7-a1b9-48fd-bbc4-ae758026f17f",
+                "name": "Anti‐Flag",
+                "disambiguation": "American punk rock band"
+              },
+              {
+                "mbid": "606bf117-494f-4864-891f-09d63ff6aa4b",
+                "name": "Rise Against",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "084308bd-1654-436f-ba03-df6697104e19",
+                "name": "Green Day",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5",
+                "name": "The White Stripes",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "3ae2fb37-8a23-429d-9920-bac811c4fc22",
+                "name": "Jack White",
+                "disambiguation": "rock & blues multi‐instrumentalist, The White Stripes, Third Man Records"
+              },
+              {
+                "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2",
+                "name": "Alabama Shakes",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3",
+                "name": "The Gaslight Anthem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a66ebddc-ff04-46b8-820a-15c63e80dba1",
+                "name": "Against Me!",
+                "disambiguation": "US punk rock band"
+              },
+              {
+                "mbid": "87fc1871-b74e-4bf5-a00d-8a89c288008b",
+                "name": "Goldfinger",
+                "disambiguation": "ska punk/pop punk band"
+              },
+              {
+                "mbid": "bcb95908-5c6e-453a-97fc-d69003d250ff",
+                "name": "Bowling for Soup",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "944e1036-8a03-4611-8aa0-31515a05c848",
+                "name": "Smash Mouth",
+                "disambiguation": "US rock band from San Jose, CA"
+              },
+              {
+                "mbid": "3e55d51d-687f-4a9d-af96-2fabccf802e5",
+                "name": "The Cardigans",
+                "disambiguation": "Swedish rock band"
+              },
+              {
+                "mbid": "6386ddff-0d13-4685-9f0a-a82bf022fb1c",
+                "name": "Supergrass",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "32b90c92-9978-4a07-90eb-caa4b22f4907",
+                "name": "Black Rebel Motorcycle Club",
+                "disambiguation": "US rock band from San Francisco"
+              },
+              {
+                "mbid": "3ae2fb37-8a23-429d-9920-bac811c4fc22",
+                "name": "Jack White",
+                "disambiguation": "rock & blues multi‐instrumentalist, The White Stripes, Third Man Records"
+              },
+              {
+                "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2",
+                "name": "Alabama Shakes",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 10,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3",
+                "name": "The Gaslight Anthem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "b5bd9f88-962e-4730-84a7-795592ba42e8",
+                "name": "Silversun Pickups",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "bb6eaced-69dd-4636-829f-9f987acc4fc3",
+                "name": "The Temper Trap",
+                "disambiguation": "Australian indie rock band"
+              },
+              {
+                "mbid": "4a069029-4f64-4946-b650-01aeb0b55d9d",
+                "name": "Edward Sharpe and the Magnetic Zeros",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2",
+                "name": "Alabama Shakes",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3",
+                "name": "The Gaslight Anthem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a66ebddc-ff04-46b8-820a-15c63e80dba1",
+                "name": "Against Me!",
+                "disambiguation": "US punk rock band"
+              },
+              {
+                "mbid": "87fc1871-b74e-4bf5-a00d-8a89c288008b",
+                "name": "Goldfinger",
+                "disambiguation": "ska punk/pop punk band"
+              },
+              {
+                "mbid": "7509421d-1074-442f-be8f-b526167afcb3",
+                "name": "The Presidents of the United States of America",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "667e856e-f3a7-42e9-8244-95422ef31321",
+                "name": "The Breeders",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "3f542031-b054-454d-b57b-812fa2a81b11",
+                "name": "Yo La Tengo",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "172053e5-a7fb-4548-a64d-c53858b5e775",
+                "name": "Father John Misty",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2",
+                "name": "Alabama Shakes",
+                "disambiguation": ""
+              }
+            ]
+          }
+        },
+        {
+          "depth": 20,
+          "L": {
+            "artists": [
+              {
+                "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3",
+                "name": "The Gaslight Anthem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "69421e11-e4c3-4854-951b-ceab4972e38e",
+                "name": "Alkaline Trio",
+                "disambiguation": "rock band"
+              },
+              {
+                "mbid": "3aebd566-7ff8-4b29-b017-051b6ec55861",
+                "name": "Travis Barker",
+                "disambiguation": "American producer and drummer of blink-182"
+              },
+              {
+                "mbid": "b9472588-93f3-4922-a1a2-74082cdf9ce8",
+                "name": "Panic! at the Disco",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "a6c6897a-7415-4f8d-b5a5-3a5e05f3be67",
+                "name": "twenty one pilots",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "77b29df2-056e-409e-a1b2-5e2bbfe421c4",
+                "name": "AWOLNATION",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2",
+                "name": "Alabama Shakes",
+                "disambiguation": ""
+              }
+            ]
+          },
+          "R": {
+            "artists": [
+              {
+                "mbid": "f208f09e-b5b3-4b06-87cd-f7230fae17e3",
+                "name": "The Gaslight Anthem",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "dc21d171-7204-4759-9fd0-77d031aeb40c",
+                "name": "Frightened Rabbit",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "9639cd52-c351-4a17-9797-58880e95a7ef",
+                "name": "The Mountain Goats",
+                "disambiguation": ""
+              },
+              {
+                "mbid": "081b133e-ce74-42ba-92c1-c18234acb532",
+                "name": "Andrew Bird",
+                "disambiguation": "US indie rock multi-instrumentalist, singer, and songwriter"
+              },
+              {
+                "mbid": "294d06f7-fd1f-4cbe-a433-bb9cd6ac937b",
+                "name": "Bahamas",
+                "disambiguation": "a.k.a. Afie Jurvanen"
+              },
+              {
+                "mbid": "40419b33-18e9-4d5a-a674-30b4bb14bac2",
+                "name": "Alabama Shakes",
+                "disambiguation": ""
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
