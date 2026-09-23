@@ -1,0 +1,154 @@
+{
+  "what": "LBA-AM6-2 step 8: 8 primaries and 4 ordered reserves, before the owner's strike",
+  "note": "Endpoint names, MBIDs and pool ranks only. Nothing here identifies a map.",
+  "prescreen_script_sha256": "9f61d97048e004245a29d0f6c4eb1134ad24b2c4f70cb97763741e8d492be146",
+  "primary": [
+    {
+      "a": {
+        "name": "F. J. McMahon",
+        "mbid": "5384c176-beba-4a88-945e-001472d48dea",
+        "rank": 47
+      },
+      "b": {
+        "name": "Geographer",
+        "mbid": "c1213174-2d79-488d-93fd-1db2ef43da8e",
+        "rank": 48
+      }
+    },
+    {
+      "a": {
+        "name": "Foreign Born",
+        "mbid": "2246a5d3-a9c2-4f5d-a20b-972301773d8c",
+        "rank": 95
+      },
+      "b": {
+        "name": "Spooky Tooth",
+        "mbid": "c8f8f706-2176-4fde-9f50-4e243dd096c8",
+        "rank": 96
+      }
+    },
+    {
+      "a": {
+        "name": "Japandroids",
+        "mbid": "2008d65c-31ee-4382-8960-5188523568d5",
+        "rank": 68
+      },
+      "b": {
+        "name": "Curved Air",
+        "mbid": "202d14e1-dbee-4fa1-8aeb-93bc4ba1b20b",
+        "rank": 70
+      }
+    },
+    {
+      "a": {
+        "name": "Radiation City",
+        "mbid": "8ee36bb2-5658-4bf2-99d0-df99df4b2a38",
+        "rank": 79
+      },
+      "b": {
+        "name": "Vaults",
+        "mbid": "577f9388-d382-4fd4-804c-e58e8527928b",
+        "rank": 81
+      }
+    },
+    {
+      "a": {
+        "name": "Beggars Opera",
+        "mbid": "e61993e5-4c8a-4fed-b9f8-769d2726cb9b",
+        "rank": 23
+      },
+      "b": {
+        "name": "Frightened Rabbit",
+        "mbid": "dc21d171-7204-4759-9fd0-77d031aeb40c",
+        "rank": 24
+      }
+    },
+    {
+      "a": {
+        "name": "Explosions In The Sky",
+        "mbid": "4236acde-2ce2-441c-a3d4-38d55f1b5474",
+        "rank": 99
+      },
+      "b": {
+        "name": "Emerson, Lake & Palmer",
+        "mbid": "ad996aef-cc1c-42ac-af5c-619c370f4b8a",
+        "rank": 101
+      }
+    },
+    {
+      "a": {
+        "name": "Father John Misty",
+        "mbid": "172053e5-a7fb-4548-a64d-c53858b5e775",
+        "rank": 83
+      },
+      "b": {
+        "name": "The Cars",
+        "mbid": "092b603f-eb4c-4958-b10e-02420de5885b",
+        "rank": 84
+      }
+    },
+    {
+      "a": {
+        "name": "Nektar",
+        "mbid": "8a5c294f-8d3b-452d-a6f9-6332cfb408f3",
+        "rank": 61
+      },
+      "b": {
+        "name": "Sloan",
+        "mbid": "5a63c831-5bdb-444d-a9db-974501e3317d",
+        "rank": 63
+      }
+    }
+  ],
+  "reserve": [
+    {
+      "a": {
+        "name": "Clap Your Hands Say Yeah",
+        "mbid": "4b2d6a23-034d-4a29-9bb9-d2462796da4e",
+        "rank": 119
+      },
+      "b": {
+        "name": "Robin Trower",
+        "mbid": "6605c2c6-f115-486c-8b1a-b786882de463",
+        "rank": 120
+      }
+    },
+    {
+      "a": {
+        "name": "Captain Beyond",
+        "mbid": "e20a361c-89e2-466d-ab04-2fd271524d69",
+        "rank": 77
+      },
+      "b": {
+        "name": "The Walkmen",
+        "mbid": "b7834ebd-64ae-46c3-a930-2d3a52ee743a",
+        "rank": 78
+      }
+    },
+    {
+      "a": {
+        "name": "Mac Miller",
+        "mbid": "a0e8a1b1-5f8f-475a-a253-17415c17d0ff",
+        "rank": 115
+      },
+      "b": {
+        "name": "Midlake",
+        "mbid": "da90b5da-349e-4906-a0b4-805f5e46190d",
+        "rank": 116
+      }
+    },
+    {
+      "a": {
+        "name": "Fleetwood Mac",
+        "mbid": "bd13909f-1c29-4c27-a874-d4aaf27c5b1a",
+        "rank": 65
+      },
+      "b": {
+        "name": "The Anniversary",
+        "mbid": "db41efe6-867b-4427-820c-506ea17e5692",
+        "rank": 66
+      }
+    }
+  ],
+  "finished_utc": "2026-09-23T14:38:31.829358+00:00"
+}
