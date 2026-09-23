@@ -1,0 +1,252 @@
+<!-- lal_page.html - the LAL blind listen page (LBA-AM6-4). Vanilla, no assets.
+     Every graph-supplied string is set with textContent, never innerHTML: names and
+     disambiguations come from MusicBrainz and ListenBrainz and contain quotes and angle brackets. -->
+<!doctype html>
+<meta charset="utf-8">
+<title>Blind listen</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 1150px; }
+  .banner { background: #fff3cd; border: 1px solid #ccc; padding: .6rem 1rem; }
+  .pair { border-top: 3px solid #444; margin-top: 2rem; padding-top: 1rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .side { border: 1px solid #ccc; padding: .6rem; }
+  .card { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin: .3rem 0; }
+  .endpoint { font-weight: 600; }
+  .dis { color: #666; font-size: .85em; }
+  .track { color: #444; font-size: .8em; }
+  .noclip { color: #a00; font-size: .85em; }
+  audio { height: 28px; }
+  textarea { width: 100%; }
+  .done { color: #060; }
+  .q { margin: .4rem 0; }
+  .hidden { display: none; }
+  label { margin-right: .75rem; }
+</style>
+<div class="banner"><b>Blind listen in progress.</b> Each section is one pair of artists you know.
+The rows show the journey before any presses of &ldquo;dig deeper&rdquo;, then after 10 and after 20
+presses. The first and last artist in every list are the same on both sides. <b>Answer every question
+on every row</b> &mdash; coherence, novelty, how strong each pick was, and, once those two are
+answered, whether you can tell which side is the new map. A row will not save until all of it is
+answered. If a card's first clip tells you nothing, use &ldquo;another track&rdquo;; a card that
+found no clip says so. If a clip problem still stopped you judging a row, tick the box. <b>No
+Spotify, monthly-listener or ListenBrainz lookups until every answer is saved.</b> Sittings can be
+split: saved answers persist.</div>
+<div id="app"></div>
+<script>
+const DATA = __LAL_DATA__;
+const PICKS = ["L", "R", "none"];
+// These MUST equal lal_common.STRENGTHS and lal_common.IDENTIFY: `test_lal_page.py` asserts every
+// value appears in this file verbatim.
+const STRENGTHS = ["slight", "strong"];
+const IDENTIFY = ["no", "yes_left", "yes_right"];
+const IDENTIFY_LABEL = { no: "no", yes_left: "yes, left", yes_right: "yes, right" };
+const app = document.getElementById("app");
+
+function el(tag, text) {
+  const n = document.createElement(tag);
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+
+function choiceRadios(name, values, labelFor) {
+  const wrap = el("span");
+  for (const v of values) {
+    const label = el("label");
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = name;
+    input.value = v;
+    label.appendChild(input);
+    label.appendChild(el("span", " " + labelFor(v)));
+    wrap.appendChild(label);
+  }
+  return wrap;
+}
+
+function player(clips) {
+  const wrap = el("span");
+  if (!clips || clips.length === 0) {
+    const n = el("em", "no clip found");
+    n.className = "noclip";
+    wrap.appendChild(n);
+    return wrap;
+  }
+  let i = 0;
+  const audio = document.createElement("audio");
+  audio.controls = true;
+  audio.preload = "none";
+  audio.src = clips[0].preview_url;
+  const title = el("span", clips[0].title);
+  title.className = "track";
+  wrap.appendChild(audio);
+  wrap.appendChild(title);
+  if (clips.length > 1) {
+    const next = el("button", "another track (1/" + clips.length + ")");
+    next.onclick = () => {
+      i = (i + 1) % clips.length;
+      audio.src = clips[i].preview_url;
+      title.textContent = clips[i].title;
+      next.textContent = "another track (" + (i + 1) + "/" + clips.length + ")";
+      audio.play();
+    };
+    wrap.appendChild(next);
+  }
+  return wrap;
+}
+
+function cards(artists) {
+  const box = el("div");
+  artists.forEach((a, i) => {
+    const card = el("div");
+    card.className = "card";
+    const name = el("span", a.name);
+    if (i === 0 || i === artists.length - 1) name.className = "endpoint";
+    card.appendChild(name);
+    if (a.disambiguation) {
+      const d = el("span", "(" + a.disambiguation + ")");
+      d.className = "dis";
+      card.appendChild(d);
+    }
+    card.appendChild(player(DATA.clips[a.mbid]));
+    box.appendChild(card);
+  });
+  return box;
+}
+
+async function post(path, body) {
+  const r = await fetch(path, { method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body) });
+  if (!r.ok) alert("save failed: " + await r.text());
+  return r.ok;
+}
+
+function question(label, wording, name) {
+  const p = el("p");
+  p.className = "q";
+  p.appendChild(el("b", label));
+  p.appendChild(el("span", wording + " "));
+  p.appendChild(choiceRadios(name, PICKS, v => (v === "none" ? "no preference" : v)));
+  // LAL-Q3, per axis: only meaningful beside a clear pick; the save sends null on "no preference".
+  p.appendChild(el("span", " — if you picked a side, how strong? "));
+  p.appendChild(choiceRadios(name + "-strength", STRENGTHS, v => v));
+  return p;
+}
+
+function checkbox(text) {
+  const p = el("p");
+  const box = document.createElement("input");
+  box.type = "checkbox";
+  const label = el("label");
+  label.appendChild(box);
+  label.appendChild(el("span", " " + text));
+  p.appendChild(label);
+  return [p, box];
+}
+
+for (const pair of DATA.pairs) {
+  const div = el("div");
+  div.className = "pair";
+  div.appendChild(el("h2", pair.a + " → " + pair.b));
+
+  for (const row of pair.rows) {
+    const r = el("div");
+    r.appendChild(el("h3", row.depth === 0 ? "before any presses" : "after " + row.depth + " presses"));
+    const grid = el("div");
+    grid.className = "row";
+    for (const side of ["L", "R"]) {
+      const s = el("div");
+      s.className = "side";
+      s.appendChild(el("h4", side));
+      s.appendChild(cards(row[side].artists));
+      grid.appendChild(s);
+    }
+    r.appendChild(grid);
+
+    const answers = el("div");
+    const base = pair.key + "-" + row.depth;
+    // LAL-Q1 and LAL-Q2, frozen by LBA-AM6-4. Each wording is ONE unbroken literal so the page's
+    // test can find it verbatim.
+    answers.appendChild(question("Coherence: ", "At this point, which side holds together better as a journey — each step a sensible next listen?", "q1-" + base));
+    answers.appendChild(question("Novelty: ", "At this point, which side gives you more artists that are new to you?", "q2-" + base));
+
+    // LAL-Q4, shown ONLY once Q1 and Q2 are both answered for this row, so asking it cannot prime
+    // the picks (LBA-AM6-4). ONE unbroken literal.
+    const idP = el("p");
+    idP.className = "q hidden";
+    idP.appendChild(el("b", "New map: "));
+    idP.appendChild(el("span", "On this row, can you tell which side is the new map? "));
+    idP.appendChild(choiceRadios("id-" + base, IDENTIFY, v => IDENTIFY_LABEL[v]));
+    answers.appendChild(idP);
+    const reveal = () => {
+      const q1 = answers.querySelector('input[name="q1-' + base + '"]:checked');
+      const q2 = answers.querySelector('input[name="q2-' + base + '"]:checked');
+      if (q1 && q2) idP.classList.remove("hidden");
+    };
+    answers.addEventListener("change", reveal);
+
+    const [kP, kBox] = checkbox("Every artist that differed between the two sides was already known to me");
+    answers.appendChild(kP);
+    const [cP, cBox] = checkbox("a clip problem stopped me judging this row");
+    answers.appendChild(cP);
+    const notes = document.createElement("textarea");
+    notes.rows = 2;
+    notes.placeholder = "notes on this row (optional)";
+    answers.appendChild(notes);
+    const btn = el("button", "save row");
+    const saved = el("span");
+    answers.appendChild(btn);
+    answers.appendChild(saved);
+    btn.onclick = async () => {
+      const q1 = answers.querySelector('input[name="q1-' + base + '"]:checked');
+      const q2 = answers.querySelector('input[name="q2-' + base + '"]:checked');
+      if (!q1 || !q2) return alert("answer both questions (a side or no preference) first");
+      const body = { pair: pair.key, depth: String(row.depth), q1: q1.value, q2: q2.value,
+                     known_everyone: kBox.checked, clip_blocked: cBox.checked, notes: notes.value };
+      for (const pick of [["q1", q1], ["q2", q2]]) {
+        if (pick[1].value === "none") { body[pick[0] + "_strength"] = null; continue; }
+        const s = answers.querySelector('input[name="' + pick[0] + "-" + base + '-strength"]:checked');
+        if (!s) return alert("say how strong each pick was — slight or strong");
+        body[pick[0] + "_strength"] = s.value;
+      }
+      const id = answers.querySelector('input[name="id-' + base + '"]:checked');
+      if (!id) return alert("answer whether you can tell which side is the new map");
+      body.identify = id.value;
+      if (await post("/row", body)) {
+        saved.textContent = " saved ✓";
+        saved.className = "done";
+      }
+    };
+    r.appendChild(answers);
+    div.appendChild(r);
+  }
+
+  const end = el("div");
+  end.appendChild(el("h3", "this pair, overall"));
+  const colP = el("p");
+  colP.appendChild(el("span", "Did either side collapse into a random walk into obscurity? If so, which and where? "));
+  const collapse = document.createElement("input");
+  collapse.size = 60;
+  colP.appendChild(collapse);
+  end.appendChild(colP);
+  const nP = el("p");
+  nP.appendChild(el("span", "Notes (what read as smooth vs jarring — these become the record):"));
+  nP.appendChild(document.createElement("br"));
+  const pnotes = document.createElement("textarea");
+  pnotes.rows = 4;
+  nP.appendChild(pnotes);
+  end.appendChild(nP);
+  const pbtn = el("button", "save pair");
+  const psaved = el("span");
+  end.appendChild(pbtn);
+  end.appendChild(psaved);
+  pbtn.onclick = async () => {
+    if (await post("/pair", { pair: pair.key, collapse: collapse.value, notes: pnotes.value })) {
+      psaved.textContent = " saved ✓";
+      psaved.className = "done";
+    }
+  };
+  div.appendChild(end);
+  app.appendChild(div);
+}
+</script>

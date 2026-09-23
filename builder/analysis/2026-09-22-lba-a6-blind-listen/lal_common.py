@@ -41,6 +41,11 @@ LBL_PAIRS2_SHA = "0a2eca01c22985991da0d3628b42d8021c4089ec81227a4b786a6c613c9be0
 
 MAPS_PIN = HERE / "lal_maps.json"   # written by `lal_pin_maps.py` from the sidecars, never by hand
 
+# The post-strike pair file (`LBA-AM6-2` step 9). Pinned here, by commit, after the owner's strike;
+# empty until then, so generation refuses rather than running on an un-struck draw.
+LAL_PAIRS = HERE / "lal_pairs.json"
+LAL_PAIRS_SHA = ""
+
 ROLES = ("incumbent", "challenger")   # served map, `LBA-A6` candidate. Roles are sealed, never shown.
 DEPTHS = (0, 10, 20)                  # `LBA-AM6-3`
 TOKENS = ("L", "R")
