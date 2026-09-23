@@ -47,53 +47,47 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-23, at the `LAL-` listen PREPARATION closeout.** **Nothing a listener sees
-has changed** — the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is
-untouched, and `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
+**Last updated: 2026-09-23, at the `LAL-` listen READ closeout.** **Nothing a listener sees has
+changed**: the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched, and
+`TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
 
-# ⛔ THE BLIND LISTEN IS PREPARED. THE NEXT ACTION IS A FRESH RUNNER SESSION — NOT `LBA-G5`.
+# THE BLIND LISTEN HAS RUN AND BEEN READ. THE NEXT ACTION IS `LBA-G5`, THE OWNER'S.
 
-**`LBA-AM6`'s preparation step is done**, under an amendment: **`LBA-AM7` (2026-09-23) rebuilt the
-pair pool** from the owner's extended Spotify history and had him vet 150 names, after he did not know
-most endpoints of the first draw. Pairs are final and pinned (`lal_pairs.json`; he struck none), and a
-write-nothing generation dry-run passed every gate. The harness and `RUNNER-BRIEF.md` are in
-[`../../builder/analysis/2026-09-22-lba-a6-blind-listen/`](../../builder/analysis/2026-09-22-lba-a6-blind-listen/);
-the current handoff is [`2026-09-23-HANDOFF-lal-listen-prep.md`](2026-09-23-HANDOFF-lal-listen-prep.md).
+**The read is `LAL-R1`, PASS on coherence.** Its plain sentence, frozen in `LBA-AM6-7`: *"Journeys on
+the new map are better on coherence, and no worse on the other."* It is run-once and final. The figures,
+**the counter-evidence to read beside the verdict (§0)** and the barred reads (§5) are all in
+[`findings/2026-09-23-lal-listen-results.md`](findings/2026-09-23-lal-listen-results.md). The current
+handoff is [`2026-09-23-HANDOFF-lal-listen-read.md`](2026-09-23-HANDOFF-lal-listen-read.md).
 
-> ## ⚠ Five things about this state that are easy to get backwards
+> ## ⚠ Four things about this state that are easy to get backwards
 >
-> **Only `LBA-AM6`'s own sessions may generate a journey on the candidate**, and the preparation
-> session is now barred from the listen and the write-up. Any journey shown to the owner before the
-> listen spends its blind, which cannot be recovered (`GBL-` §5).
+> **PASS is not evidence of quality at `LBA-G5`, and `LBA-G5` does not re-read the listen**
+> (`LBA-AM6-10`). "No worse" on novelty is a tie at the listen's resolution, not equivalence (`REQ-41`).
+> No verdict carries across the three listens.
 >
-> **The runner does not unblind, and its worktree must survive it** — the sealed mapping is
-> gitignored and lives there; the write-up session runs `lal_unblind.py` in that worktree.
->
-> **The listen's verdict is run-once and final, and a `LBA-G5` pass is still not evidence of
-> quality.** A tie (`LAL-R2`) is not "no worse" (`REQ-41`). No verdict carries across the listens.
+> **The blind is spent.** Journeys on the candidate may now be shown to him. `LBA-G5` is unblinded by
+> design.
 >
 > **The acceptance recalibration still REJECTS the served map and the fallback.** If the candidate
-> is not adopted, for any reason, restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)`
-> line BEFORE rebuilding either map. Deferral registry below.
+> is not adopted, for any reason, restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)` line
+> BEFORE rebuilding either map. See the deferral registry below.
 >
-> **A wrong-artist clip is NOT a `LBA-G5` signal** — it is a property of an id snapshot, not of
-> the similarity graph (`LBA-AM4`).
+> **A wrong-artist clip is NOT a `LBA-G5` signal.** It is a property of an id snapshot, not of the
+> similarity graph (`LBA-AM4`).
 
-Branch `lba-a6-listen-prep`, PR **#133**.
+Branch `lal-listen-run`, PR **#135**.
 
-**THE REMAINING ACTIONS, in this order — this file does not record how far down the list anyone has
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner:** merge #133. Run the queued use-the-app tests (`TEST-QUEUE.md`) when convenient —
-   nothing below blocks on them. Decide whether `LBD-AM3`'s override extends to `LBD-A4` — nothing
-   blocks on it.
-2. **A fresh, mechanics-only RUNNER session**, given `RUNNER-BRIEF.md` and nothing else: generation,
-   clips, serving. The owner listens: 8 pairs × 3 depths, every question on every row.
-3. **A further fresh WRITE-UP session**, in the runner's worktree: `lal_unblind.py`, then the findings
-   note.
-4. **Then `LBA-G5`**, the owner's two days of use against his own criterion, **logging every artist
-   pair he uses** (`LBA-AM5`; the file is named in the runner brief).
-5. **Then adoption — the owner's.**
+1. **The owner:** merge #135. Read the results note's §0 beside the verdict: how much weight it
+   carries is his by `LBA-AM6-8`. Decide whether to keep the runner's worktree
+   (`C:/Users/charl/worktrees/music-app-lal-runner`). It holds the only copy of the sealed per-journey
+   metrics, which nothing further needs. The queued use-the-app tests and `LBD-AM3`'s `LBD-A4` question
+   are unchanged and block nothing.
+2. **`LBA-G5`**: the owner's two days of use against his own criterion, **logging every artist pair he
+   uses** (`LBA-AM5`; the log file is named in `builder/analysis/2026-09-22-lba-a6-blind-listen/RUNNER-BRIEF.md`).
+3. **Then adoption, which is the owner's call.**
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -365,6 +359,7 @@ old heading.)*
 
 | Finding | Condition |
 |---|---|
+| **A clipless artist on one side only is a side tell** — in the `LAL-` listen one such card (Ed O'Brien, today's map) sat on exactly the three rows the owner identified ([results §0, §4.2](findings/2026-09-23-lal-listen-results.md)). The clip rule is artist-keyed, so this is not a map difference, but it marks a side. | **The next blind listen's pre-registration** either adds a per-row count of single-side clipless artists to its pre-screen, or states why not. |
 | ⚠ **The 2026-09-21 acceptance recalibration REJECTS the served map and the `LBA-G5` fallback.** `PRODUCTION_ACCEPTANCE` is now centred on the `LBA-A6` candidate; `graph-msw-tu50.bin` and `LBD-A5V` both sit outside it, so **the builder cannot reproduce what the app serves today** — the `LUX-E1` drift shape, deliberately re-entered. Raised before the ruling; the owner ruled anyway, and it is his call. Bounds, basis and the sensitivity table are owned by `acceptance.py`'s own comment; the candidate's figures by `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §6. Asserted by `tests/test_acceptance.py::test_the_served_map_and_the_fallback_are_outside_the_current_bounds`, so it presents as a recorded decision rather than a mystery rejection. | **If `LBA-G5`'s use gate FAILS, or the candidate is not adopted: restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)` line BEFORE rebuilding either map**, and delete that test. If the candidate IS adopted, the row closes — the calibration target and the served map become one artifact. |
 | **Deezer ids are extracted without the `is_artist_url` check that Spotify and Apple get.** The 2026-09-21 re-extraction kept `dsp_ids.py`'s original numeric-tail rule deliberately, so the only thing changing was the population and a coverage difference could be attributed to it alone. `lux4_extract.py` added the artist-vs-album path check for the other two in 2026-09-05 and it was never back-ported, so a Deezer **album** URL ending in digits is currently kept and shipped as an artist id. | **Whenever the Deezer map is next re-extracted for any other reason.** The fix is one predicate, but it is a second column on any comparison it lands in, so it must not ride along with a population change. |
 | **`LBA-G2`'s bar is written `24 GB` and implemented `24 GiB`** — five places in the pre-registration say 24 GB; `LBA_G2_BAR_BYTES = 24 * 1024**3` is 25.77 GB. Stage 1's instrument introduced it and stage 2's forward copy, README and handoff all adopted *"24 GiB"*, making the implementation self-consistent and diverging from the governing document silently. ⚠ **No cell's disposition changes under either reading, with comfortable margin on both sides** — recomputed in bytes at the stage-3 closeout; the arithmetic is in the stage-3 handoff. **Deliberately NOT fixed**: §11's rule is that a bar's value is never edited, and settling which unit governs after the results exist is changing a bar with results in hand. | **The owner's, and only if any future `LBD-` build gate is read.** Nothing is blocked by it and no committed result depends on which reading is taken. |

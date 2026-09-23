@@ -1,0 +1,294 @@
+{
+  "rows": {
+    "4486702e-7b26-43fd-babc-c0df7be0e1d9|abd506e1-6f2b-4d6f-b937-92c267f6f88b": {
+      "0": {
+        "q1": "none",
+        "q2": "R",
+        "q1_strength": null,
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Both coherent. Tony Lewis is the only artist unknown to me, and he only appear on R, so picked R for novelty"
+      },
+      "10": {
+        "q1": "L",
+        "q2": "L",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "A few novel artists on the left, and only one on the right. Roy Bittan on R is tough to place in coherence - only 2 tracks, and they both seem to be instrumental. He is the main reason I picked L for coherence"
+      },
+      "20": {
+        "q1": "L",
+        "q2": "R",
+        "q1_strength": "slight",
+        "q2_strength": "strong",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "I know all artists on L, so picking R for novelty, and strong since I don't know several of these names. It does feel like coherence of the path dropped though. Macklemore, Nathan East, and Bill Wolfer is a weird chain."
+      }
+    },
+    "584758b2-306b-4aea-8694-3876943c9968|846cdb90-81a6-4c05-a7dc-9dd075f0db9e": {
+      "0": {
+        "q1": "R",
+        "q2": "L",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "R is definitely coherent. L is coherent, but a little less so. The jump from Of Monsters and Men to The Neighbourhood is a little odd. L definitely has more novel artists (all artists on R are known to me)"
+      },
+      "10": {
+        "q1": "none",
+        "q2": "none",
+        "q1_strength": null,
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": true,
+        "clip_blocked": false,
+        "notes": "Both seem equally coherent and no novel artists on either side"
+      },
+      "20": {
+        "q1": "none",
+        "q2": "R",
+        "q1_strength": null,
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "L seems coherent other than Luke Wood, who just doesn't seem to fit in that position at all.\nR is somewhat coherent, but the jump from AURORA to Bring Me the Horizon is a big one.\nMore novelty on R."
+      }
+    },
+    "437b356d-88f1-4dde-af5e-dec1c9d7dde4|5ab8835e-ac44-4055-9c11-7878199606b5": {
+      "0": {
+        "q1": "none",
+        "q2": "R",
+        "q1_strength": null,
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "On R, I was confused about Noah Cyrus being next to Orville Peck until I listened to her 3rd clip - pretty sure Orville Peck is on that track based on the voice I heard. That makes it hard to evaluate coherence, since her first two tracks sound nothing like Peck. On the Left, Weyes Blood also doesn't seem super close to Peck.\n\n"
+      },
+      "10": {
+        "q1": "R",
+        "q2": "R",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Sevdaliza is a weird choice next to Peck. That makes the whole path weird / less coherent."
+      },
+      "20": {
+        "q1": "R",
+        "q2": "none",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Sevdaliza is still present on the R, which definitely makes me pick R for coherence. Roughly equal novelty at this depth."
+      }
+    },
+    "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|e46758a5-28e4-41c0-9893-2f5720d712f3": {
+      "0": {
+        "q1": "L",
+        "q2": "L",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Slightly more coherent on the L, mostly because R trends into pop in the middle section. Both sides have a surprising number of novel artists considering this is depth 0, but L has what I perceive as a small win on novelty. Both \"wins\" are pretty slight for L here."
+      },
+      "10": {
+        "q1": "L",
+        "q2": "L",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "yes_left",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Slight win on coherence and novelty on the left. The novel artists (e.g. Beach Fossils) fit very well in the path. I have a pretty strong suspicion that R is the current map's path due to the appearance of Ed O’Brien and Albert Hammond, Jr. as mid-path artists."
+      },
+      "20": {
+        "q1": "L",
+        "q2": "none",
+        "q1_strength": "strong",
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Definitely more coherent on L - Kendrick Lamar and SZA on the R feel out of place for sure. Same count of novel artists on each side, but R has dropped coherence significantly. "
+      }
+    },
+    "debabff3-2559-46e5-862d-ef2a906d7010|0741b30d-e15b-4a8c-b2e5-8834a03d6116": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "q1_strength": null,
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": true,
+        "clip_blocked": false,
+        "notes": "Not something that affected judgement, but no clip found for Edward Sharpe and the Magnetic Zeros is surprising to me. Roughly equal in both novelty and coherence. No novel artists on either side."
+      },
+      "10": {
+        "q1": "none",
+        "q2": "R",
+        "q1_strength": null,
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Too close to tell on coherence. Some novel artists on R, so picking that. Lenny Castro only had one available clip, so tough to judge his placement, but not enough to say \"a clip problem stopped me judging this row\""
+      },
+      "20": {
+        "q1": "L",
+        "q2": "R",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "yes_left",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Both sides are coherent, but L more so. R has a few novel artists to me, but they don't fit as well. L is 0 novel artists, but maintains its path coherence better. Ed O’Brien and Andrew VanWyngarden showing up is a sign to me that R is the current map."
+      }
+    },
+    "70248960-cb53-4ea4-943a-edb18f7d336f|c4237bd8-b11a-4f22-b0b7-29beca7daab9": {
+      "0": {
+        "q1": "none",
+        "q2": "R",
+        "q1_strength": null,
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Both sides take somewhat surprising paths. No difference on coherence. One artist on R I don't know (Ben Harper), but I'm not sure how well he fits in that position. Choosing R slight novelty because of that though"
+      },
+      "10": {
+        "q1": "L",
+        "q2": "R",
+        "q1_strength": "strong",
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Geezer Butler feels like a wild jump on R, so picking L for coherence. Mike McCready and Ben Harper are novel to me as far as I can remember, so picking R slight for novelty."
+      },
+      "20": {
+        "q1": "none",
+        "q2": "none",
+        "q1_strength": null,
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": true,
+        "clip_blocked": false,
+        "notes": "Pretty similar paths generally, and all artists are known to me."
+      }
+    },
+    "309c62ba-7a22-4277-9f67-4a162526d18a|875203e1-8e58-4b86-8dcb-7190faf411c5": {
+      "0": {
+        "q1": "L",
+        "q2": "none",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Each side is coherent, maybe slightly more on L. Roughly equal novelty - 2 artists I don't know on each side."
+      },
+      "10": {
+        "q1": "L",
+        "q2": "none",
+        "q1_strength": "slight",
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": true,
+        "clip_blocked": false,
+        "notes": ""
+      },
+      "20": {
+        "q1": "R",
+        "q2": "L",
+        "q1_strength": "strong",
+        "q2_strength": "slight",
+        "identify": "yes_right",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "L drops its coherence to gain novelty. Not really any novelty on R, but it's way more coherent."
+      }
+    },
+    "f208f09e-b5b3-4b06-87cd-f7230fae17e3|40419b33-18e9-4d5a-a674-30b4bb14bac2": {
+      "0": {
+        "q1": "none",
+        "q2": "none",
+        "q1_strength": null,
+        "q2_strength": null,
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": ""
+      },
+      "10": {
+        "q1": "R",
+        "q2": "R",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Slightly better coherence and novelty on the right, though the Left path is half as long, so that may be a factor."
+      },
+      "20": {
+        "q1": "R",
+        "q2": "R",
+        "q1_strength": "slight",
+        "q2_strength": "slight",
+        "identify": "no",
+        "known_everyone": false,
+        "clip_blocked": false,
+        "notes": "Right feels slightly better on coherence. Novelty is pretty close, but R slightly wins"
+      }
+    }
+  },
+  "pairs": {
+    "4486702e-7b26-43fd-babc-c0df7be0e1d9|abd506e1-6f2b-4d6f-b937-92c267f6f88b": {
+      "collapse": "Possibly R at hop 20",
+      "notes": ""
+    },
+    "584758b2-306b-4aea-8694-3876943c9968|846cdb90-81a6-4c05-a7dc-9dd075f0db9e": {
+      "collapse": "",
+      "notes": ""
+    },
+    "437b356d-88f1-4dde-af5e-dec1c9d7dde4|5ab8835e-ac44-4055-9c11-7878199606b5": {
+      "collapse": "",
+      "notes": ""
+    },
+    "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|e46758a5-28e4-41c0-9893-2f5720d712f3": {
+      "collapse": "",
+      "notes": ""
+    },
+    "debabff3-2559-46e5-862d-ef2a906d7010|0741b30d-e15b-4a8c-b2e5-8834a03d6116": {
+      "collapse": "",
+      "notes": ""
+    },
+    "70248960-cb53-4ea4-943a-edb18f7d336f|c4237bd8-b11a-4f22-b0b7-29beca7daab9": {
+      "collapse": "",
+      "notes": ""
+    },
+    "309c62ba-7a22-4277-9f67-4a162526d18a|875203e1-8e58-4b86-8dcb-7190faf411c5": {
+      "collapse": "",
+      "notes": ""
+    },
+    "f208f09e-b5b3-4b06-87cd-f7230fae17e3|40419b33-18e9-4d5a-a674-30b4bb14bac2": {
+      "collapse": "",
+      "notes": ""
+    }
+  }
+}
