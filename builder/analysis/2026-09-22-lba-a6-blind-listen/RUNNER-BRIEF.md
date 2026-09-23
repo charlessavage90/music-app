@@ -11,7 +11,8 @@ you: anything that unblinds you ends the listen.
 - `docs/superpowers/specs/2026-09-14-lbd-s4-adoption-preregistration.md`
 - anything under `builder/analysis/2026-09-21-lbd-s4-a6-candidate/` or
   `builder/analysis/2026-09-10-lbd-blind-listen/`
-- **`lal_prescreen.json`, `lal_prescreen.md`, `lal_prescreen.py`** in this directory — they record,
+- **`lal_prescreen.json`, `lal_prescreen.md`, `lal_prescreen.py`, `lal_am7_prescreen.json`,
+  `lal_am7_prescreen.md`, `lal_prescreen_am7.py`** in this directory — they record,
   per pair and depth, what each map's journey looked like. Matching them against the page unblinds
   the listen.
 - `lal_maps.json`

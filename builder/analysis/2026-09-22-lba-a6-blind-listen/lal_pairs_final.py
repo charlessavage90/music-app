@@ -36,8 +36,10 @@ def apply_strike(drawn: dict, struck: set[int]) -> dict:
 def main(argv: list | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--strike", type=int, nargs="*", default=[])
+    ap.add_argument("--drawn", default="lal_pairs_drawn_am7.json",
+                    help="the draw to strike from; LBA-AM7 supersedes lal_pairs_drawn.json")
     args = ap.parse_args(argv)
-    drawn_file = in_dir("lal_pairs_drawn.json")
+    drawn_file = in_dir(args.drawn)
     drawn = json.loads(drawn_file.read_text(encoding="utf-8"))
     final = apply_strike(drawn, set(args.strike))
     doc = {"what": "LBA-AM6-2: the listen's pairs after the owner's strike. Names, MBIDs, pool ranks only.",
