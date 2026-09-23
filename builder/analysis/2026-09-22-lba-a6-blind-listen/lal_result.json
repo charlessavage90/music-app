@@ -1,0 +1,163 @@
+{
+  "axes": {
+    "coherence": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 13,
+        "incumbent": 2
+      },
+      "margin_toward_candidate": 11,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "candidate_better"
+    },
+    "novelty": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 8,
+        "incumbent": 8
+      },
+      "margin_toward_candidate": 0,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "no_detectable_difference"
+    }
+  },
+  "read": "LAL-R1",
+  "axes_named": [
+    "coherence"
+  ],
+  "sentence": "Journeys on the new map are better on coherence, and no worse on the other.",
+  "descriptive_only": {
+    "decides": "nothing — LAL-R1 to LAL-R4 read the row tally only",
+    "LAL-Q4_identification": {
+      "0": {
+        "no": 8,
+        "yes_right": 0,
+        "yes_wrong": 0
+      },
+      "10": {
+        "no": 7,
+        "yes_right": 1,
+        "yes_wrong": 0
+      },
+      "20": {
+        "no": 6,
+        "yes_right": 2,
+        "yes_wrong": 0
+      }
+    },
+    "LAL-Q3_strength": {
+      "coherence": {
+        "slight": {
+          "challenger": 10,
+          "incumbent": 2
+        },
+        "strong": {
+          "challenger": 3,
+          "incumbent": 0
+        }
+      },
+      "novelty": {
+        "slight": {
+          "challenger": 8,
+          "incumbent": 7
+        },
+        "strong": {
+          "challenger": 0,
+          "incumbent": 1
+        }
+      }
+    },
+    "LAL-K_known_everyone": {
+      "by_depth": {
+        "0": 1,
+        "10": 2,
+        "20": 1
+      },
+      "on_no_preference_rows": {
+        "coherence": 3,
+        "novelty": 4
+      }
+    },
+    "computed_tradeoff_rows": {
+      "rows": 5,
+      "of": 24
+    },
+    "ear_tracking": {
+      "coherence": {
+        "rows": 15,
+        "fame_rows": 15,
+        "fame_lower": 4,
+        "non_hub_interior_higher": 8,
+        "top1pct_degree_frac_lower": 10,
+        "length_longer": 2,
+        "more_outside_served_map": 0
+      },
+      "novelty": {
+        "rows": 16,
+        "fame_rows": 16,
+        "fame_lower": 10,
+        "non_hub_interior_higher": 7,
+        "top1pct_degree_frac_lower": 6,
+        "length_longer": 9,
+        "more_outside_served_map": 0
+      }
+    },
+    "clip_coverage_by_map": {
+      "incumbent": {
+        "slots": 168,
+        "no_clip": 4
+      },
+      "challenger": {
+        "slots": 162,
+        "no_clip": 1
+      }
+    }
+  },
+  "mapping_unsealed": {
+    "4486702e-7b26-43fd-babc-c0df7be0e1d9|abd506e1-6f2b-4d6f-b937-92c267f6f88b": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "584758b2-306b-4aea-8694-3876943c9968|846cdb90-81a6-4c05-a7dc-9dd075f0db9e": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "437b356d-88f1-4dde-af5e-dec1c9d7dde4|5ab8835e-ac44-4055-9c11-7878199606b5": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "a3cb23fc-acd3-4ce0-8f36-1e5aa6a18432|e46758a5-28e4-41c0-9893-2f5720d712f3": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "debabff3-2559-46e5-862d-ef2a906d7010|0741b30d-e15b-4a8c-b2e5-8834a03d6116": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "70248960-cb53-4ea4-943a-edb18f7d336f|c4237bd8-b11a-4f22-b0b7-29beca7daab9": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "309c62ba-7a22-4277-9f67-4a162526d18a|875203e1-8e58-4b86-8dcb-7190faf411c5": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "f208f09e-b5b3-4b06-87cd-f7230fae17e3|40419b33-18e9-4d5a-a674-30b4bb14bac2": {
+      "L": "incumbent",
+      "R": "challenger"
+    }
+  },
+  "maps": {
+    "incumbent": {
+      "path": "C:\\dev\\music-app\\builder\\scratch\\graph-msw-tu50.bin",
+      "sha256": "43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8"
+    },
+    "challenger": {
+      "path": "C:\\unsung-fast\\lbd-artifacts\\LBA-A6-candidate.bin",
+      "sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b"
+    }
+  },
+  "substitutions": []
+}
