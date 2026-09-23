@@ -1,0 +1,11 @@
+# Gitignored files Orca copies from the PRIMARY checkout into each new worktree.
+# Orca reads this file from the primary checkout, not the new worktree, so an edit takes effect
+# only once it is on the branch checked out at C:\dev\music-app. Literal paths only: globs and
+# `!` negations are skipped, and a path that is not gitignored is dropped.
+#
+# Never list a graph artifact (*.bin), builder/scratch/, a .venv or node_modules: multi-GB, or
+# rebuilt by orca.yaml's setup script. Never list infra/.env.deploy: it holds deploy secrets and
+# no test reads it.
+
+# Per-machine Claude Code permission allowlist.
+.claude/settings.local.json
