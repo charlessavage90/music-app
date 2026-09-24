@@ -44,6 +44,23 @@ test('getTrack returns null on 204', async () => {
   expect(await getTrack('a')).toBeNull();
 });
 
+// G3-F11: a refusing catalogue is a 503, not a 204 — and it says when to ask again.
+test('getTrack rejects a 503 as transient, carrying Retry-After', async () => {
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue(
+    new Response(null, { status: 503, headers: { 'Retry-After': '60' } }),
+  ));
+  await expect(getTrack('a')).rejects.toMatchObject({ status: 503, retryAfterMs: 60_000 });
+});
+
+test('getTrack ignores a Retry-After it cannot read', async () => {
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue(
+    new Response(null, { status: 503, headers: { 'Retry-After': 'soon' } }),
+  ));
+  const err = await getTrack('a').catch((e: unknown) => e);
+  expect(err).toBeInstanceOf(ApiError);
+  expect((err as ApiError).retryAfterMs).toBeUndefined();
+});
+
 test('getTrack maps the candidate count and only sends an index when there is one', async () => {
   // A fresh Response per call — a Response body can only be read once, and
   // getTrack is called twice below.

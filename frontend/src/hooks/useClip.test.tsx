@@ -1,7 +1,7 @@
-import { render, renderHook, screen, waitFor } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import { afterEach, expect, test, vi } from 'vitest';
 import * as client from '@/api/client';
-import { resolveFreshUrl, useClip } from './useClip';
+import { AUTO_RETRY_DELAYS_MS, resolveFreshUrl, useClip } from './useClip';
 
 afterEach(() => vi.restoreAllMocks());
 
@@ -68,9 +68,95 @@ test('resolveFreshUrl returns null for an artist with no clip', async () => {
   expect(await resolveFreshUrl('silent-resolve')).toBeNull();
 });
 
-test('resolveFreshUrl returns null rather than throwing when the lookup fails', async () => {
-  vi.spyOn(client, 'getTrack').mockRejectedValue(new Error('rate limited'));
-  expect(await resolveFreshUrl('failing-resolve')).toBeNull();
+// G3-F1 route 3: this used to swallow the failure into null, which the player
+// read as "no clip" and answered by removing itself. A failed lookup is not a
+// missing clip; the player catches it and says so.
+test('resolveFreshUrl rejects when the lookup fails, rather than claiming there is no clip', async () => {
+  vi.spyOn(client, 'getTrack').mockRejectedValue(new Error('network down'));
+  await expect(resolveFreshUrl('failing-resolve')).rejects.toThrow('network down');
+});
+
+// --- G3-F11: three causes, three states, and the transient two retry ---------
+
+test('a refusing catalogue (503) is busy, not "no clip"', async () => {
+  vi.spyOn(client, 'getTrack').mockRejectedValue(new client.ApiError(503, null, null, 60_000));
+  render(<Harness mbid="busy-503" />);
+  await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('busy:'));
+});
+
+test('a lookup that failed outright is failed, not "no clip"', async () => {
+  vi.spyOn(client, 'getTrack').mockRejectedValue(new TypeError('Failed to fetch'));
+  render(<Harness mbid="failed-net" />);
+  await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('failed:'));
+});
+
+test('a transient failure is not cached — the next mount asks again', async () => {
+  const spy = vi.spyOn(client, 'getTrack').mockRejectedValueOnce(new client.ApiError(503));
+  const { unmount } = render(<Harness mbid="not-cached" />);
+  await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('busy:'));
+  unmount();
+  spy.mockResolvedValue({ previewUrl: 'u', title: 'Back', coverUrl: 'c', candidateCount: 1 });
+  render(<Harness mbid="not-cached" />);
+  await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:Back'));
+});
+
+test('a transient failure retries by itself, honouring Retry-After', async () => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+  try {
+    const spy = vi.spyOn(client, 'getTrack')
+      .mockRejectedValueOnce(new client.ApiError(503, null, null, 20_000))
+      .mockResolvedValue({ previewUrl: 'u', title: 'Recovered', coverUrl: 'c', candidateCount: 1 });
+    render(<Harness mbid="auto-retry" />);
+    await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('busy:'));
+
+    await act(async () => { await vi.advanceTimersByTimeAsync(19_000); });
+    expect(spy).toHaveBeenCalledTimes(1); // not before the server said
+
+    await act(async () => { await vi.advanceTimersByTimeAsync(2_000); });
+    await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:Recovered'));
+    expect(spy).toHaveBeenCalledTimes(2);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test('automatic retries stop, and a manual retry still works after they have', async () => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+  try {
+    const spy = vi.spyOn(client, 'getTrack').mockRejectedValue(new TypeError('Failed to fetch'));
+    const { result } = renderHook(() => useClip('gives-up'));
+    await waitFor(() => expect(result.current.status).toBe('failed'));
+
+    // One act per step: React applies the retry's state update when act exits,
+    // so a single long advance would never see the second timer scheduled.
+    for (let i = 0; i < 5; i++) {
+      await act(async () => { await vi.advanceTimersByTimeAsync(2 * 60_000); });
+    }
+    const afterAuto = spy.mock.calls.length;
+    expect(afterAuto).toBe(1 + AUTO_RETRY_DELAYS_MS.length);
+
+    spy.mockResolvedValue({ previewUrl: 'u', title: 'Manual', coverUrl: 'c', candidateCount: 1 });
+    act(() => result.current.retry());
+    await waitFor(() => expect(result.current.track?.title).toBe('Manual'));
+    expect(spy).toHaveBeenCalledTimes(afterAuto + 1);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test('a genuine 204 does not retry', async () => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+  try {
+    const spy = vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+    render(<Harness mbid="no-retry-204" />);
+    await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('none:'));
+    for (let i = 0; i < 3; i++) {
+      await act(async () => { await vi.advanceTimersByTimeAsync(2 * 60_000); });
+    }
+    expect(spy).toHaveBeenCalledTimes(1);
+  } finally {
+    vi.useRealTimers();
+  }
 });
 
 test('a different index is a different cache entry, not a stale hit', async () => {

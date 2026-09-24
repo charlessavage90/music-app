@@ -36,13 +36,27 @@ export class ApiError extends Error {
   detail: string | null;
   /** Set when the failure is a limit the UI can explain in its own words. */
   limit: ApiLimit | null;
-  constructor(status: number, detail: string | null = null, limit: ApiLimit | null = null) {
+  /** From a `Retry-After` in seconds, when the server sent one it could read. */
+  retryAfterMs?: number;
+  constructor(
+    status: number,
+    detail: string | null = null,
+    limit: ApiLimit | null = null,
+    retryAfterMs?: number,
+  ) {
     super(detail ? `API error ${status}: ${detail}` : `API error ${status}`);
     this.name = 'ApiError';
     this.status = status;
     this.detail = detail;
     this.limit = limit;
+    this.retryAfterMs = retryAfterMs;
   }
+}
+
+/** Seconds-form `Retry-After` only; the HTTP-date form is not something this API sends. */
+function retryAfterMs(r: Response): number | undefined {
+  const s = Number(r.headers?.get('retry-after'));
+  return Number.isFinite(s) && s > 0 ? s * 1000 : undefined;
 }
 
 interface ValidationItem {
@@ -60,14 +74,15 @@ interface ValidationItem {
  * is all the callers had before.
  */
 async function apiError(r: Response): Promise<ApiError> {
+  const retry = retryAfterMs(r);
   let body: unknown;
   try {
     body = await r.json();
   } catch {
-    return new ApiError(r.status);
+    return new ApiError(r.status, null, null, retry);
   }
   const detail = (body as { detail?: unknown } | null)?.detail;
-  if (typeof detail === 'string') return new ApiError(r.status, detail);
+  if (typeof detail === 'string') return new ApiError(r.status, detail, null, retry);
   if (Array.isArray(detail)) {
     const items = detail as ValidationItem[];
     const msgs = items.map((d) => d?.msg).filter((m): m is string => typeof m === 'string');
@@ -80,9 +95,9 @@ async function apiError(r: Response): Promise<ApiError> {
     const max = cap?.ctx?.max_length;
     const limit: ApiLimit | null =
       typeof max === 'number' ? { kind: 'too_many_exclusions', max } : null;
-    return new ApiError(r.status, msgs.length ? msgs.join('; ') : null, limit);
+    return new ApiError(r.status, msgs.length ? msgs.join('; ') : null, limit, retry);
   }
-  return new ApiError(r.status);
+  return new ApiError(r.status, null, null, retry);
 }
 
 /**
@@ -240,6 +255,8 @@ export async function getTrack(
     TIMEOUT_MS.track,
     signal,
   );
+  // 204 is "this artist has no clip". A refusing catalogue is a 503 since
+  // G3-F11 — transient, and never to be read or cached as a 204.
   if (r.status === 204) return null;
   if (!r.ok) throw await apiError(r);
   const d = (await r.json()) as {

@@ -8,6 +8,7 @@ import { RailLine } from './Rail';
 import { useRailInset } from '@/hooks/useRailInset';
 import { RAIL_LIST_CLASS } from '@/lib/rail';
 import { usePlayer } from '@/player/usePlayer';
+import { useMediaSession } from '@/player/useMediaSession';
 import { cachedTrack, resolveFreshUrl } from '@/hooks/useClip';
 import { journeyLength } from '@/lib/journeyLength';
 import type { Artist, StopRule } from '@/api/types';
@@ -61,9 +62,18 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     resolveFreshUrl(mbid, clipIndex[mbid] ?? 0),
   );
   const currentName = artists.find((a) => a.mbid === player.currentMbid)?.name ?? null;
-  const currentTrackTitle = player.currentMbid
-    ? cachedTrack(player.currentMbid, clipIndex[player.currentMbid] ?? 0)?.title ?? null
+  const currentTrack = player.currentMbid
+    ? cachedTrack(player.currentMbid, clipIndex[player.currentMbid] ?? 0)
     : null;
+  const currentTrackTitle = currentTrack?.title ?? null;
+
+  // The lock screen and a headset's buttons (G3-F8). Named only while there is
+  // something to name — a failed clip still names its artist, as the bar does.
+  useMediaSession(
+    currentName ? { artist: currentName, title: currentTrackTitle, artwork: currentTrack?.coverUrl ?? null } : null,
+    player.isPlaying,
+    { play: player.resume, pause: player.pause, stop: player.stop },
+  );
 
   function cycleClip(mbid: string, candidateCount: number) {
     // The audio in flight is the OLD track. Restarting it here would race the
@@ -194,11 +204,15 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
         currentName={currentName}
         trackTitle={currentTrackTitle}
         isPlaying={player.isPlaying}
+        failure={player.failure}
+        onRetry={player.retry}
         position={player.position}
         duration={player.duration}
         stopIndex={artists.findIndex((a) => a.mbid === player.currentMbid)}
         stopCount={journeyLength(artists)}
         onToggle={player.toggle}
+        volume={player.volume}
+        onVolume={player.setVolume}
       />
     </>
   );

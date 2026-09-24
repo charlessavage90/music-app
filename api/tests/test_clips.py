@@ -665,3 +665,50 @@ async def test_a_resolver_built_without_one_still_gets_a_breaker():
         f"{len(_deezer_calls(r))} calls to a refusing Deezer with the DEFAULT "
         f"breaker; expected it to stop at {CFG.clip_breaker_threshold}"
     )
+
+
+# --- G3-F11: a refusal must reach the caller as a refusal, not as a miss ----
+#
+# PW-3 stopped the resolver AMPLIFYING a refusal; it still reported one as an
+# ordinary miss, so the endpoint answered 204 and the card said "No preview
+# available" for ten minutes about an artist that has one. `refused` is what
+# lets the endpoint say "try again shortly" instead.
+
+
+async def test_a_throttled_re_sign_is_reported_as_refused():
+    cache = InMemoryClipCache()
+    await cache.put(MBID, [TrackIdentity("deezer", "999", "Song", "cover.jpg")])
+    r = _resolver({"deezer": CatalogueUnavailable("429")}, cache=cache)
+
+    res = await r.resolve(MBID, "Radiohead")
+
+    assert res.clip is None
+    assert res.refused
+
+
+async def test_a_refusal_then_an_itunes_miss_is_refused_not_a_miss():
+    # Deezer might well have this artist; we just could not ask it.
+    r = _resolver({"deezer": CatalogueUnavailable("429"), "itunes": {"results": []}})
+
+    res = await r.resolve(MBID, "Radiohead")
+
+    assert res.clip is None
+    assert res.refused
+
+
+async def test_a_genuine_miss_is_not_refused():
+    r = _resolver({"deezer": {"data": []}, "itunes": {"results": []}})
+
+    res = await r.resolve(MBID, "Radiohead")
+
+    assert res.clip is None
+    assert not res.refused
+
+
+async def test_a_refusal_the_fallback_answered_is_not_refused():
+    r = _resolver({"deezer": CatalogueUnavailable("429"), "itunes": ITUNES_HIT})
+
+    res = await r.resolve(MBID, "Radiohead")
+
+    assert res.clip is not None
+    assert not res.refused
