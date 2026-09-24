@@ -1,0 +1,6 @@
+# Conventions: docs/superpowers/ISSUES.md. Every issue is a dispatch brief for a cold session.
+blank_issues_enabled: false
+contact_links:
+  - name: Issue conventions
+    url: https://github.com/charlessavage90/music-app/blob/main/docs/superpowers/ISSUES.md
+    about: What becomes an issue here, how it is labelled, and what stays in a document.

@@ -1,0 +1,40 @@
+name: Bug or defect
+description: Something the app, the build or the apparatus does wrong.
+title: "[ID] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "This issue is the whole brief for a session Orca may dispatch from it. Write for a reader with nothing else. Conventions: docs/superpowers/ISSUES.md. **The repo is public — for a security finding use the Security label and cite the source; never a reproduction recipe.**"
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens
+      description: In plain language — what a user, operator or future session experiences. Include where (file:line) if known.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Path or permalink to the document that owns this finding. Figures are cited there, never restated here.
+    validations:
+      required: true
+  - type: dropdown
+    id: whose
+    attributes:
+      label: Whose is it?
+      description: "owner-decision = a session prepares it, never makes it. owner-hands = needs him physically."
+      options:
+        - "A session's"
+        - "The owner's decision (label owner-decision)"
+        - "The owner's hands (label owner-hands)"
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: The observable end state. A PR saying "Closes #N" must be able to satisfy it.
+    validations:
+      required: true
