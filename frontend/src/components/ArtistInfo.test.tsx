@@ -22,11 +22,16 @@ test('renders a compact fact line', () => {
   expect(screen.getByText(/Group/)).toBeInTheDocument();
 });
 
-test('an active artist shows an open-ended span', () => {
+// Issue #204: most artists have no end date, and "1995–" left a dangling dash
+// on nearly every panel. An open right-hand side reads "since"; an open
+// left-hand side reads "until" (the test further down), so neither is ever a
+// bare dash and neither reads as a single-year event.
+test('an active artist shows "since" its first year, with no dangling dash', () => {
   render(<ArtistInfo artist={{ ...base, facts: {
     type: null, country: null, area: null,
     begin: '1995', end: null, ended: false } }} />);
-  expect(screen.getByText(/1995–/)).toBeInTheDocument();
+  expect(screen.getByText(/since 1995/)).toBeInTheDocument();
+  expect(screen.queryByText(/1995–/)).not.toBeInTheDocument();
 });
 
 test('nothing renders when there are no facts', () => {
@@ -72,11 +77,13 @@ test('a full date is shown as its year', () => {
 });
 
 // An artist with an end date but no begin date. Rare, but MusicBrainz has
-// them, and "–2008" is honest where "2008" would read as a formation year.
-test('an end with no beginning is not shown as a beginning', () => {
+// them, and "until 2008" is honest where "2008" would read as a formation year
+// (issue #204: the same open-ended form as "since", never a bare dash).
+test('an end with no beginning reads "until", not as a beginning', () => {
   render(<ArtistInfo artist={{ ...base, facts: {
     type: null, country: null, area: null, begin: null, end: '2008', ended: true } }} />);
-  expect(screen.getByText(/–2008/)).toBeInTheDocument();
+  expect(screen.getByText(/until 2008/)).toBeInTheDocument();
+  expect(screen.queryByText(/–2008/)).not.toBeInTheDocument();
 });
 
 // The country code is redundant beside the human-readable area and reads as

@@ -46,6 +46,21 @@ test('one bypass control, on interior artists only, and it fires the known signa
   expect(onBypass).toHaveBeenCalledWith('detail-bypass');
 });
 
+// Issue #204, both the owner's stated preferences: Dig deeper is the app's
+// most important control, so it gets the hand cursor the streaming links
+// already have, and it is violet (the journey's own hue), not the pink that
+// read as a destructive action. jsdom lays nothing out, so this pins the
+// classes: the cursor utility, the violet token, and the absence of the pink
+// literal it replaced.
+test('Dig deeper shows a pointer and takes its colour from the violet token', () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  render(<ArtistDetail {...base('detail-dig-style')} />);
+  const dig = screen.getByRole('button', { name: /dig deeper/i });
+  expect(dig.className.split(' ')).toContain('cursor-pointer');
+  expect(dig.className).toContain('--color-playing');
+  expect(dig.className).not.toContain('245,71,155');
+});
+
 test('an endpoint gets no bypass control', () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
   render(<ArtistDetail {...base('detail-endpoint')} isEndpoint />);

@@ -10,18 +10,20 @@ function year(date: string | null): string | null {
 }
 
 /**
- * "1993–2008", "1995–", "–2008", or nothing.
+ * "1993–2008", "since 1995", "until 2008", or nothing.
  *
- * An open right-hand side is the point of the trailing dash: an artist still
- * active reads as ongoing rather than as a single-year event, and an end with
- * no beginning reads as an ending rather than as a formation year.
+ * An open side is worded, never a bare dash (issue #204: most artists have no
+ * end date, so "1995–" dangled on nearly every panel). "since" keeps an active
+ * artist reading as ongoing rather than as a single-year event, and "until"
+ * keeps an end with no beginning reading as an ending rather than as a
+ * formation year.
  */
 function lifeSpan(begin: string | null, end: string | null): string | null {
   const from = year(begin);
   const to = year(end);
   if (from && to) return `${from}–${to}`;
-  if (from) return `${from}–`;
-  if (to) return `–${to}`;
+  if (from) return `since ${from}`;
+  if (to) return `until ${to}`;
   return null;
 }
 
