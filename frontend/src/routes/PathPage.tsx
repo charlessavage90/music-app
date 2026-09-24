@@ -110,6 +110,8 @@ export function PathPage() {
       {state.status === 'error' && state.error ? (
         <PathStatus
           error={state.error}
+          message={state.message}
+          limit={state.limit}
           onClearExclusions={() => go(clearExclusions(params), 'reset')}
           onRetry={state.retry}
         />

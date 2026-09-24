@@ -10,18 +10,38 @@ export interface PathState {
   stopRule: StopRule;
   bypassed: Artist[];
   unresolved: string[];
-  error?: 'notfound' | 'nopath' | 'timeout' | 'unknown';
+  error?: PathError;
+  /**
+   * What the server said about the failure, when it said something a person can
+   * read (issue #193). Shown for `invalid`; the other kinds have fixed wording.
+   */
+  message?: string;
+  /** For `toomany`: the server's cap on exclusions, from its own error. */
+  limit?: number;
   /** Rebuilds the same path. The only error state with a useful response. */
   retry: () => void;
 }
 
-function classify(err: unknown): PathState['error'] {
-  if (err instanceof TimeoutError) return 'timeout';
+/**
+ * `invalid` is a 422 with a readable reason (two identical artists); `toomany`
+ * is the bypass cap, the one 422 a person reaches by pressing buttons. Both
+ * were 'unknown' — "Something went wrong" — until issue #193.
+ */
+export type PathError = 'notfound' | 'nopath' | 'timeout' | 'invalid' | 'toomany' | 'unknown';
+
+type Failure = Pick<PathState, 'error' | 'message' | 'limit'>;
+
+function classify(err: unknown): Failure {
+  if (err instanceof TimeoutError) return { error: 'timeout' };
   if (err instanceof ApiError) {
-    if (err.status === 404) return 'notfound';
-    if (err.status === 409) return 'nopath';
+    if (err.status === 404) return { error: 'notfound' };
+    if (err.status === 409) return { error: 'nopath' };
+    if (err.status === 422) {
+      if (err.limit?.kind === 'too_many_exclusions') return { error: 'toomany', limit: err.limit.max };
+      if (err.detail) return { error: 'invalid', message: err.detail };
+    }
   }
-  return 'unknown';
+  return { error: 'unknown' };
 }
 
 export function usePath(): PathState {
@@ -52,7 +72,7 @@ export function usePath(): PathState {
         if (controller.signal.aborted) return;
         setState({
           status: 'error', artists: [], stopRule: 'natural', bypassed: [], unresolved: [],
-          error: classify(err),
+          ...classify(err),
         });
       });
     return () => controller.abort();

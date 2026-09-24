@@ -64,6 +64,47 @@ test('buildPath throws ApiError with status on 409', async () => {
   await expect(buildPath(['a', 'b'], [])).rejects.toMatchObject({ status: 409 } as Partial<ApiError>);
 });
 
+// Issue #193: the two bodies below are what the API actually returns, captured
+// from api/'s TestClient on 2026-09-24 (the cap's `input` echo trimmed).
+test('ApiError carries the server\'s message from a handler 422', async () => {
+  vi.stubGlobal('fetch', mockFetch(422, {
+    detail: 'pick two different artists — a journey needs somewhere to go',
+  }));
+  await expect(buildPath(['a', 'a'], [])).rejects.toMatchObject({
+    status: 422,
+    detail: 'pick two different artists — a journey needs somewhere to go',
+    limit: null,
+  });
+});
+
+test('ApiError recognises the bypass cap from the schema 422', async () => {
+  vi.stubGlobal('fetch', mockFetch(422, {
+    detail: [{
+      type: 'too_long',
+      loc: ['body', 'exclude'],
+      msg: 'List should have at most 200 items after validation, not 201',
+      input: [],
+      ctx: { field_type: 'List', max_length: 200, actual_length: 201 },
+    }],
+  }));
+  await expect(buildPath(['a', 'b'], [])).rejects.toMatchObject({
+    status: 422,
+    detail: 'List should have at most 200 items after validation, not 201',
+    limit: { kind: 'too_many_exclusions', max: 200 },
+  });
+});
+
+test('an unreadable error body still yields an ApiError with its status', async () => {
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+    ok: false,
+    status: 502,
+    json: async () => { throw new SyntaxError('not json'); },
+  } as unknown as Response));
+  const err = await buildPath(['a', 'b'], []).catch((e: unknown) => e);
+  expect(err).toBeInstanceOf(ApiError);
+  expect(err).toMatchObject({ status: 502, detail: null, limit: null });
+});
+
 test('buildPath times out rather than hanging forever', async () => {
   vi.useFakeTimers();
   // A server that accepts the request and never answers — the App Runner cold
