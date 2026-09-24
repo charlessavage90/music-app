@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 import inspect
 import json
 import threading
@@ -8,11 +9,14 @@ from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
 
 from artistpath_api.app import create_app
+from artistpath_api.artifact_source import load_graph
 from artistpath_api.clips import ClipResolver, InMemoryClipCache
 from artistpath_api.config import ApiConfig
 from artistpath_api.pathfinding import DISLIKE
 from artistpath_api.search import ArtistSearch
-from tests.conftest import make_store
+from tests.conftest import FIXTURES, make_store
+
+FIXTURE_GRAPH = FIXTURES / "graph-fixture.bin"
 
 # w_known_ramp_fame_pctl pinned off: these tests exercise routes, payloads and
 # error handling over synthetic stores that carry no fame, and since the MSW-
@@ -360,26 +364,40 @@ def test_a_repeated_unresolved_id_is_reported_only_once():
     assert data["unresolved"] == ["not-a-real-mbid", "also-not-real"]
 
 
+def _client_over_the_committed_fixture():
+    """A client over a store LOADED FROM BYTES, so it carries a real sha256.
+
+    Every store built in code has source_sha256 == "", which made the identity
+    assertions below `'' == ''` — hardcoding `graph_sha256=""` in the route
+    passed them (G3-Q3). The expected digest is computed here, independently of
+    the loader, so the test also fails if load_graph stops recording it.
+    """
+    payload = FIXTURE_GRAPH.read_bytes()
+    store = load_graph(str(FIXTURE_GRAPH))
+    return _client_over(store), store, hashlib.sha256(payload).hexdigest()
+
+
 def test_health_reports_artifact_identity():
-    client, store = _client()
+    client, store, expected_sha = _client_over_the_committed_fixture()
+    assert len(expected_sha) == 64  # not vacuous: a real digest, not ""
     r = client.get("/health")
     assert r.status_code == 200
     body = r.json()
     assert body["status"] == "ok"
-    assert body["artists"] == store.artist_count
+    assert body["artists"] == store.artist_count == 500
     assert body["edges"] == len(store.neighbours)
-    assert body["graph_sha256"] == store.source_sha256
+    assert body["graph_sha256"] == expected_sha
 
 
 def test_meta_is_reachable_under_api_and_carries_the_count():
     # UXR-D8: /health is deliberately off /api (App Runner reaches it directly)
     # and CloudFront routes only /api/*, so the landing badge needs THIS route.
-    client, store = _client()
+    client, store, expected_sha = _client_over_the_committed_fixture()
     r = client.get("/api/meta")
     assert r.status_code == 200
     body = r.json()
-    assert body["artists"] == store.artist_count
-    assert body["graph_sha256"] == store.source_sha256
+    assert body["artists"] == store.artist_count == 500
+    assert body["graph_sha256"] == expected_sha
 
 
 def test_meta_is_a_coroutine_so_it_never_queues_for_a_thread():
