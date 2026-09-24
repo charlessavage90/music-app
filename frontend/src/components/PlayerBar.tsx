@@ -1,9 +1,13 @@
 import { PlayButton } from './PlayButton';
+import type { PlaybackFailure } from '@/player/usePlayer';
 
 interface Props {
   currentName: string | null;
   trackTitle: string | null;
   isPlaying: boolean;
+  /** Why the current artist is not playing, when it should be (G3-F1). */
+  failure?: PlaybackFailure | null;
+  onRetry: () => void;
   /** Seconds, from the audio element's own clock — never estimated. */
   position: number;
   duration: number;
@@ -11,7 +15,17 @@ interface Props {
   stopIndex: number;
   stopCount: number;
   onToggle: () => void;
+  /** 0–1, the listener's level for the session (#207). */
+  volume: number;
+  onVolume: (volume: number) => void;
 }
+
+/** One sentence per failure route — what went wrong, in words a listener can act on. */
+const FAILURE_TEXT: Record<PlaybackFailure, string> = {
+  'no-clip': 'No preview for this artist right now.',
+  unreachable: 'Couldn’t reach the preview service.',
+  'wont-play': 'This clip wouldn’t play.',
+};
 
 function mmss(s: number): string {
   const whole = Math.max(0, Math.floor(s));
@@ -25,37 +39,77 @@ function mmss(s: number): string {
  * the app's one length currency since issue #202, and the same M the heading's
  * tile shows. Named here because reading one count as another is a defect
  * class this project has met three times.
+ *
+ * A failed clip keeps the bar (G3-F1): it used to vanish, which read as the
+ * press not having registered. The progress line gives way to what went
+ * wrong and a Retry — the play button retries too.
  */
-export function PlayerBar({ currentName, trackTitle, isPlaying, position, duration, stopIndex, stopCount, onToggle }: Props) {
+export function PlayerBar({
+  currentName, trackTitle, isPlaying, failure, onRetry, position, duration, stopIndex, stopCount, onToggle,
+  volume, onVolume,
+}: Props) {
   if (!currentName) return null;
   const pct = duration > 0 ? Math.min(100, Math.round((position / duration) * 100)) : 0;
   return (
     <div className="fixed inset-x-0 bottom-0 border-t border-[var(--color-bar-border)] bg-[var(--color-bar)] px-5 pt-3.5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
       <div className="mx-auto flex w-full max-w-[1200px] items-center gap-4">
-        <PlayButton state={isPlaying ? 'pause' : 'play'} size="bar" onClick={onToggle} />
+        <PlayButton state={isPlaying ? 'pause' : 'play'} size="bar" name={currentName} onClick={onToggle} />
         <div className="min-w-0 flex-1">
           <div className="truncate text-[14px] font-semibold">
             {currentName}
             {trackTitle && <span className="font-normal text-[var(--color-label)]"> — {trackTitle}</span>}
           </div>
-          <div className="mt-2 flex items-center gap-2.5">
-            <span className="text-[11.5px] text-[var(--color-label)]">{mmss(position)}</span>
-            <div
-              role="progressbar"
-              aria-label="Clip progress"
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={pct}
-              className="relative h-[3px] flex-1 rounded-full bg-[var(--color-border)]"
-            >
-              <span
-                className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[var(--color-start)] to-[var(--color-playing)]"
-                style={{ width: `${pct}%` }}
-              />
+          {failure ? (
+            <div className="mt-1.5 flex items-center gap-2.5 text-[12.5px]">
+              <span role="status" className="min-w-0 truncate text-[var(--color-muted)]">
+                {FAILURE_TEXT[failure]}
+              </span>
+              <button
+                type="button"
+                onClick={onRetry}
+                aria-label={`Retry ${currentName}`}
+                className="flex-none cursor-pointer text-[var(--color-text)] underline underline-offset-2"
+              >
+                Retry
+              </button>
             </div>
-            <span className="text-[11.5px] text-[var(--color-label)]">{mmss(duration)}</span>
-          </div>
+          ) : (
+            <div className="mt-2 flex items-center gap-2.5">
+              <span className="text-[11.5px] text-[var(--color-label)]">{mmss(position)}</span>
+              <div
+                role="progressbar"
+                aria-label="Clip progress"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={pct}
+                className="relative h-[3px] flex-1 rounded-full bg-[var(--color-border)]"
+              >
+                <span
+                  className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[var(--color-start)] to-[var(--color-playing)]"
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+              <span className="text-[11.5px] text-[var(--color-label)]">{mmss(duration)}</span>
+            </div>
+          )}
         </div>
+        {/* Issue #207. From `sm` up only: on a phone the hardware keys already
+            do this, iOS Safari ignores an element's volume outright (the
+            slider would move and nothing would change), and the bar at 390px
+            has no width to spare — the stop pill is hidden there for the same
+            reason. A native range input, so the browser supplies the keyboard
+            (arrows, Home/End, Page keys) and the slider role. */}
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.05}
+          value={volume}
+          onChange={(e) => onVolume(Number(e.target.value))}
+          aria-label="Volume"
+          aria-valuetext={`${Math.round(volume * 100)}%`}
+          className="hidden w-24 flex-none cursor-pointer accent-[var(--color-playing)] sm:block"
+        />
         {stopIndex >= 0 && (
           <span className="hidden flex-none rounded-full border border-[var(--color-border-strong)] px-3.5 py-2 text-[12.5px] text-[var(--color-muted)] sm:inline">
             Stop {stopIndex + 1} of {stopCount}

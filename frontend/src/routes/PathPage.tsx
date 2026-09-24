@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { usePath } from '@/hooks/usePath';
 import { useEndpoints } from '@/hooks/useEndpoints';
@@ -39,6 +39,14 @@ export function PathPage() {
     const qs = next.toString();
     navigate(`/path/${from}/${to}${qs ? `?${qs}` : ''}`);
   }
+
+  // Back and Forward change the path too, and are not routed through go() — Back
+  // is the documented undo for a bypass (G3-F10). Stop on the URL change itself,
+  // as the buttons do on their press. For a press this is a second, harmless stop.
+  const pathUrl = `${from}/${to}?${params.toString()}`;
+  useEffect(() => {
+    journey.current?.stop();
+  }, [pathUrl]);
 
   // One signal since LUX-1. `addExclusion` still writes the URL parameter for the
   // signal it is handed, and `decodeExclusions` still reads BOTH, so a link shared

@@ -10,7 +10,7 @@ from httpx import ASGITransport, AsyncClient
 
 from artistpath_api.app import create_app
 from artistpath_api.artifact_source import load_graph
-from artistpath_api.clips import ClipResolver, InMemoryClipCache
+from artistpath_api.clips import CatalogueUnavailable, ClipResolver, InMemoryClipCache
 from artistpath_api.config import ApiConfig
 from artistpath_api.pathfinding import DISLIKE
 from artistpath_api.search import ArtistSearch
@@ -164,6 +164,29 @@ def test_track_endpoint_204_not_500_when_the_catalogue_fails():
 
     r = client.get(f"/api/artists/{store.mbids[0]}/track")
     assert r.status_code == 204
+
+
+def test_track_endpoint_503_with_retry_after_when_the_catalogue_refuses():
+    """G3-F11: throttled is not "no clip", and the card must be able to tell.
+
+    A 204 is what the browser caches as a real miss and shows as "No preview
+    available"; a 503 is a transient failure the card retries.
+    """
+    store = make_store(
+        names=["Radiohead", "Muse", "Coldplay"],
+        pop_raw=[0.9, 0.7, 0.8],
+        undirected_edges=[(0, 1, 0.9), (1, 2, 0.9), (0, 2, 0.3)],
+    )
+
+    async def fetch_json(url, params):
+        raise CatalogueUnavailable("429")
+
+    resolver = ClipResolver(CFG, InMemoryClipCache(), fetch_json)
+    client = TestClient(create_app(store, ArtistSearch(store, CFG), resolver, CFG))
+
+    r = client.get(f"/api/artists/{store.mbids[0]}/track")
+    assert r.status_code == 503
+    assert int(r.headers["retry-after"]) > 0
 
 
 def test_track_endpoint_204_when_no_clip():

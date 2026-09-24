@@ -18,11 +18,20 @@ function withJourney(headers: Record<string, string> = {}): Record<string, strin
 
 export class ApiError extends Error {
   status: number;
-  constructor(status: number) {
+  /** From a `Retry-After` in seconds, when the server sent one it could read. */
+  retryAfterMs?: number;
+  constructor(status: number, retryAfterMs?: number) {
     super(`API error ${status}`);
     this.name = 'ApiError';
     this.status = status;
+    this.retryAfterMs = retryAfterMs;
   }
+}
+
+/** Seconds-form `Retry-After` only; the HTTP-date form is not something this API sends. */
+function retryAfterMs(r: Response): number | undefined {
+  const s = Number(r.headers?.get('retry-after'));
+  return Number.isFinite(s) && s > 0 ? s * 1000 : undefined;
 }
 
 /**
@@ -180,8 +189,10 @@ export async function getTrack(
     TIMEOUT_MS.track,
     signal,
   );
+  // 204 is "this artist has no clip". A refusing catalogue is a 503 since
+  // G3-F11 — transient, and never to be read or cached as a 204.
   if (r.status === 204) return null;
-  if (!r.ok) throw new ApiError(r.status);
+  if (!r.ok) throw new ApiError(r.status, retryAfterMs(r));
   const d = (await r.json()) as {
     preview_url: string;
     title: string;

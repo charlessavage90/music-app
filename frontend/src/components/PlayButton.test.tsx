@@ -13,6 +13,15 @@ test('is labelled Pause when it will stop playback', () => {
   expect(screen.getByRole('button', { name: 'Pause' })).toBeInTheDocument();
 });
 
+// G3-F4 (issue #188): a journey is eight of these, and a screen reader's
+// button list read "Play, Play, Play…" with nothing to tell them apart.
+test('names the artist it plays when given one', () => {
+  const { rerender } = render(<PlayButton state="play" size="card" name="Miles Davis" onClick={vi.fn()} />);
+  expect(screen.getByRole('button', { name: 'Play Miles Davis' })).toBeInTheDocument();
+  rerender(<PlayButton state="pause" size="card" name="Miles Davis" onClick={vi.fn()} />);
+  expect(screen.getByRole('button', { name: 'Pause Miles Davis' })).toBeInTheDocument();
+});
+
 test('does not fire when disabled', async () => {
   const user = userEvent.setup();
   const onClick = vi.fn();

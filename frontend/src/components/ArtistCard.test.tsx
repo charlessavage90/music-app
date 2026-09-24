@@ -84,6 +84,13 @@ test('a card with no clip claims no duration', async () => {
   expect(screen.queryByText(/0:30/i)).not.toBeInTheDocument();
 });
 
+// G3-F4 (issue #188): eight cards, eight different button names.
+test('the play button names the artist it plays', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(<ArtistCard artist={artist('named-play')} index={1} total={3} isPlaying={false} onPlay={vi.fn()} onDetail={vi.fn()} />);
+  expect(await screen.findByRole('button', { name: 'Play Miles Davis' })).toBeInTheDocument();
+});
+
 test('play fires onPlay when a clip exists', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
@@ -155,6 +162,49 @@ test('the artist name carries a stable test hook', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
   render(<ArtistCard artist={artist('hook')} index={1} total={3} isPlaying={false} onPlay={vi.fn()} onDetail={vi.fn()} />);
   expect(screen.getByTestId('artist-name')).toHaveTextContent('Miles Davis');
+});
+
+// G3-F11: "No preview available" is only for an artist that has none.
+test('a busy catalogue says so, and offers a retry that asks again', async () => {
+  const user = userEvent.setup();
+  const spy = vi.spyOn(client, 'getTrack').mockRejectedValueOnce(new client.ApiError(503, 60_000));
+  render(<ArtistCard artist={artist('card-busy')} index={1} total={3} isPlaying={false} onPlay={vi.fn()} onDetail={vi.fn()} />);
+  expect(await screen.findByText(/preview service busy/i)).toBeInTheDocument();
+  expect(screen.queryByText(/no preview available/i)).not.toBeInTheDocument();
+
+  spy.mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  await user.click(screen.getByRole('button', { name: 'Retry preview for Miles Davis' }));
+  expect(await screen.findByText('So What')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Play Miles Davis' })).toBeEnabled();
+});
+
+test('a failed lookup says it could not load, not that there is nothing', async () => {
+  vi.spyOn(client, 'getTrack').mockRejectedValue(new TypeError('Failed to fetch'));
+  render(<ArtistCard artist={artist('card-failed')} index={1} total={3} isPlaying={false} onPlay={vi.fn()} onDetail={vi.fn()} />);
+  expect(await screen.findByText(/couldn.t load preview/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Retry preview for Miles Davis' })).toBeInTheDocument();
+});
+
+test('a genuine no-clip card offers no retry', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  render(<ArtistCard artist={artist('card-none')} index={1} total={3} isPlaying={false} onPlay={vi.fn()} onDetail={vi.fn()} />);
+  await screen.findByText(/no preview available/i);
+  expect(screen.queryByRole('button', { name: /retry/i })).not.toBeInTheDocument();
+});
+
+// A transient failure on a cycled index is not a dead index: the track is
+// probably still there, and resetting to track 1 would lose the user's place.
+test('a transient failure on a cycled index does not report it dead', async () => {
+  vi.spyOn(client, 'getTrack').mockRejectedValue(new client.ApiError(503));
+  const onDeadIndex = vi.fn();
+  render(
+    <ArtistCard
+      artist={artist('busy-index')} index={1} total={3} isPlaying={false} clipIndex={2}
+      onPlay={vi.fn()} onDetail={vi.fn()} onDeadIndex={onDeadIndex}
+    />,
+  );
+  await screen.findByText(/preview service busy/i);
+  expect(onDeadIndex).not.toHaveBeenCalled();
 });
 
 // A cycled index (clipIndex > 0) that comes back empty must not strand the
