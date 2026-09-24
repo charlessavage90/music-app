@@ -261,6 +261,25 @@ test('the logo on the journey page is a link to the landing page', async () => {
   expect(screen.getByRole('link', { name: /unsung\.fm.*home/i })).toHaveAttribute('href', '/');
 });
 
+// Issue #206: the player bar is fixed to the bottom of the viewport, so the
+// page keeps a bottom reserve (pb-40) for it — and from the `sm` breakpoint
+// up that reserve was silently gone, because `sm:py-9` compiles to
+// padding-block, which is later in the stylesheet and sets the bottom too.
+// The last skipped artist then sat under the bar and could not be scrolled
+// clear. jsdom lays nothing out, so this pins the shape of the classes: the
+// reserve is present, and no `py-` utility at any breakpoint can override it.
+test('the page keeps its bottom reserve for the player bar at every breakpoint', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
+
+  renderAt('/path/m/d');
+  await screen.findByText('Herbie Hancock');
+
+  const classes = screen.getByRole('main').className.split(' ');
+  expect(classes).toContain('pb-40');
+  expect(classes.filter((c) => /(^|:)py-/.test(c))).toEqual([]);
+});
+
 // This is the wiring between path state and the panel — no other PathPage test
 // supplies a non-empty bypassed/unresolved, so without this the two had never
 // been exercised together at any level.
