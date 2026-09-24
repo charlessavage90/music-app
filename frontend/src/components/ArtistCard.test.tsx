@@ -84,6 +84,13 @@ test('a card with no clip claims no duration', async () => {
   expect(screen.queryByText(/0:30/i)).not.toBeInTheDocument();
 });
 
+// G3-F4 (issue #188): eight cards, eight different button names.
+test('the play button names the artist it plays', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });
+  render(<ArtistCard artist={artist('named-play')} index={1} total={3} isPlaying={false} onPlay={vi.fn()} onDetail={vi.fn()} />);
+  expect(await screen.findByRole('button', { name: 'Play Miles Davis' })).toBeInTheDocument();
+});
+
 test('play fires onPlay when a clip exists', async () => {
   const user = userEvent.setup();
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'So What', coverUrl: 'c', candidateCount: 1 });

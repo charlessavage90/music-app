@@ -75,6 +75,7 @@ export function ArtistDetail({
             <PlayButton
               state={isPlaying ? 'pause' : 'play'}
               size="card"
+              name={artist.name}
               disabled={!playable}
               // As on the card: the surface that owns the audio toggles it,
               // because onPlay would re-seek to zero.

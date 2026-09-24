@@ -32,7 +32,7 @@ export function PlayerBar({ currentName, trackTitle, isPlaying, position, durati
   return (
     <div className="fixed inset-x-0 bottom-0 border-t border-[var(--color-bar-border)] bg-[var(--color-bar)] px-5 pt-3.5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
       <div className="mx-auto flex w-full max-w-[1200px] items-center gap-4">
-        <PlayButton state={isPlaying ? 'pause' : 'play'} size="bar" onClick={onToggle} />
+        <PlayButton state={isPlaying ? 'pause' : 'play'} size="bar" name={currentName} onClick={onToggle} />
         <div className="min-w-0 flex-1">
           <div className="truncate text-[14px] font-semibold">
             {currentName}

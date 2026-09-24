@@ -182,6 +182,7 @@ export function ArtistCard({
         <PlayButton
           state={isPlaying ? 'pause' : 'play'}
           size="card"
+          name={artist.name}
           disabled={!playable}
           // The card that owns the audio toggles it. Calling onPlay here would
           // re-seek to zero, which is why only the bottom bar could pause.

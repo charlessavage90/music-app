@@ -13,6 +13,11 @@ test('shows elapsed and total time and the stop position in the whole-journey cu
   expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '37');
 });
 
+test('the bar play button names what is playing', () => {
+  render(<PlayerBar {...base} position={0} duration={30} stopIndex={1} stopCount={6} />);
+  expect(screen.getByRole('button', { name: 'Pause Herbie Hancock' })).toBeInTheDocument();
+});
+
 test('renders nothing with no current artist', () => {
   const { container } = render(<PlayerBar {...base} currentName={null} position={0} duration={0} stopIndex={-1} stopCount={0} />);
   expect(container).toBeEmptyDOMElement();
