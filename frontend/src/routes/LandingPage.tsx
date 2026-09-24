@@ -4,6 +4,7 @@ import { ArtistCountBadge } from '@/components/ArtistCountBadge';
 import { ArtistSearch } from '@/components/ArtistSearch';
 import { Brand } from '@/components/Brand';
 import type { Artist } from '@/api/types';
+import { journeyLength } from '@/lib/journeyLength';
 import { SAMPLE_JOURNEYS, TEASER } from '@/lib/sampleJourneys';
 
 const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'] as const;
@@ -42,7 +43,7 @@ export function LandingPage() {
 
   const sameArtist = !!from && !!to && from.mbid === to.mbid;
   const ready = !!from && !!to && !sameArtist;
-  const teaserSteps = TEASER.names.length - 2;
+  const teaserStops = journeyLength(TEASER.names);
 
   return (
     <main className="mx-auto w-full max-w-[1280px] px-6 pb-14 pt-6 sm:px-10">
@@ -100,13 +101,13 @@ export function LandingPage() {
                 <li key={j.from}>
                   <Link
                     to={`/path/${j.from}/${j.to}`}
-                    aria-label={`${j.fromName} to ${j.toName}, ${j.steps} steps`}
+                    aria-label={`${j.fromName} to ${j.toName}, ${j.stops} stops`}
                     className="flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-2.5 text-[14px] transition-colors hover:border-[var(--color-start)]"
                   >
                     <span>{j.fromName}</span>
                     <span aria-hidden className="text-[var(--color-label)]">→</span>
                     <span>{j.toName}</span>
-                    <span className="text-[12px] text-[var(--color-label)]">{j.steps} steps</span>
+                    <span className="text-[12px] text-[var(--color-label)]">{j.stops} stops</span>
                   </Link>
                 </li>
               ))}
@@ -123,7 +124,7 @@ export function LandingPage() {
           </div>
           <div className="w-full max-w-[420px] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-5">
             <div className="text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--color-label)]">
-              A path, {WORDS[teaserSteps] ?? teaserSteps} steps
+              A path, {WORDS[teaserStops] ?? teaserStops} stops
             </div>
             <ol className="relative mt-4 flex flex-col gap-3 pl-5">
               <span aria-hidden className="absolute bottom-1.5 left-[3px] top-1.5 w-0.5 rounded-full bg-gradient-to-b from-[var(--color-start)] via-[var(--color-playing)] to-[var(--color-end)]" />

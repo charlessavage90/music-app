@@ -6,6 +6,7 @@ import { DetailSheet } from './DetailSheet';
 import { PlayerBar } from './PlayerBar';
 import { usePlayer } from '@/player/usePlayer';
 import { cachedTrack, resolveFreshUrl } from '@/hooks/useClip';
+import { journeyLength } from '@/lib/journeyLength';
 import type { Artist, StopRule } from '@/api/types';
 
 /** What the page can ask of the journey's audio from outside it. */
@@ -140,7 +141,7 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     <ArtistDetail
       artist={artists[selectedIndex]}
       index={selectedIndex}
-      total={artists.length}
+      total={journeyLength(artists)}
       isEndpoint={selectedIndex === 0 || selectedIndex === artists.length - 1}
       clipIndex={clipIndex[artists[selectedIndex].mbid] ?? 0}
       isPlaying={player.currentMbid === selected && player.isPlaying}
@@ -172,10 +173,10 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
           <li key={artist.mbid}>
             <ArtistCard
               artist={artist}
-              // Among ALL artists including the two you chose (UXR-D10's
-              // currency, not UXR-D6's "steps"): it colours the rail dot.
+              // Among ALL artists including the two you chose — the app's one
+              // count currency since issue #202: it colours the rail dot.
               index={i}
-              total={artists.length}
+              total={journeyLength(artists)}
               isPlaying={player.currentMbid === artist.mbid && player.isPlaying}
               isCurrent={player.currentMbid === artist.mbid}
               // Drives the eyebrow and the frame. The bypass is still
@@ -224,7 +225,7 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
         position={player.position}
         duration={player.duration}
         stopIndex={artists.findIndex((a) => a.mbid === player.currentMbid)}
-        stopCount={artists.length}
+        stopCount={journeyLength(artists)}
         onToggle={player.toggle}
       />
     </>

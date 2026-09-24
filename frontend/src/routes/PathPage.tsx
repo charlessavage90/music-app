@@ -13,6 +13,7 @@ import { ShareButton } from '@/components/ShareButton';
 import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
 import { RouteHistory } from '@/components/RouteHistory';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
+import { journeyLength } from '@/lib/journeyLength';
 
 export function PathPage() {
   const { from, to } = useParams();
@@ -114,7 +115,7 @@ export function PathPage() {
             <JourneyHeading
               from={state.artists[0].name}
               to={state.artists.at(-1)!.name}
-              steps={state.artists.length - 2}
+              stops={journeyLength(state.artists)}
             />
           </div>
           <PathIntro stopRule={state.stopRule} />

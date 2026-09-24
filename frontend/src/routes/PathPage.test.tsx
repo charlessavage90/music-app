@@ -223,19 +223,29 @@ test('a bypass press holds the old path and names what it is doing', async () =>
   expect(screen.queryByText(/listening for the steps between them/i)).not.toBeInTheDocument();
 });
 
-// UI-D7: what the line counts is the artists BETWEEN the two chosen, which is
-// what is visible on screen — not hops. THREE_STOP has exactly one.
-// The count moved from a sentence to JourneyHeading's tile on 2026-09-08
-// (UXR-T8), and the singular is still its own case.
-test('the steps tile uses the singular for one artist in between', async () => {
+// Issue #202: the tile counts every artist INCLUDING the two chosen — the same
+// number the player bar's "Stop N of M" and the artist panel put after "of".
+// THREE_STOP has three artists, so three stops; the interior-only "1 step" it
+// used to show is the reading the owner ruled out.
+test('the length tile counts the whole journey, endpoints included', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
   vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
 
   renderAt('/path/m/d');
 
-  expect(await screen.findByText('1')).toBeInTheDocument();
-  expect(screen.getByText('step')).toBeInTheDocument();
-  expect(screen.queryByText('steps')).not.toBeInTheDocument();
+  expect(await screen.findByText('3')).toBeInTheDocument();
+  expect(screen.getByText('stops')).toBeInTheDocument();
+  expect(screen.queryByText('1')).not.toBeInTheDocument();
+  expect(screen.queryByText(/steps?$/)).not.toBeInTheDocument();
+});
+
+test('the tile and the player bar state the same length for the same journey', async () => {
+  const user = userEvent.setup();
+  await renderPlaying(user, '/path/m/d');
+
+  // AUDIBLE_THREE_STOP: three artists. Tile "3 stops"; bar "Stop 1 of 3".
+  expect(screen.getByText('3')).toBeInTheDocument();
+  expect(screen.getByText('Stop 1 of 3')).toBeInTheDocument();
 });
 
 // This is the wiring between path state and the panel — no other PathPage test
@@ -256,7 +266,7 @@ test('a bypassed artist from the path response is named in the route-history pan
   expect(await screen.findByText('Sun Ra')).toBeInTheDocument();
 });
 
-test('the heading names both artists and counts the steps between them', async () => {
+test('the heading names both artists and counts every stop between and including them', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue(null);
   vi.spyOn(client, 'buildPath').mockResolvedValue({
     artists: [
@@ -269,10 +279,9 @@ test('the heading names both artists and counts the steps between them', async (
   });
   renderAt('/path/m/d');
   expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Miles DavisDaft Punk');
-  // UXR-D6's currency: artists BETWEEN the two you chose, stated once, here.
-  // Four artists, so two between them — and the plural, whose singular is its
-  // own test above.
-  expect(screen.getByText('2')).toBeInTheDocument();
-  expect(screen.getByText('steps')).toBeInTheDocument();
+  // Issue #202's currency: every artist including the two you chose. Four
+  // artists, four stops.
+  expect(screen.getByText('4')).toBeInTheDocument();
+  expect(screen.getByText('stops')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /share/i })).toBeInTheDocument();
 });

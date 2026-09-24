@@ -25,7 +25,7 @@ interface Props {
  * control to explain, and JourneyList already says the useful thing.
  *
  * The result line left on 2026-09-08 (UXR-T8) — JourneyHeading's tile is the
- * one place the step count is stated now (UXR-D6).
+ * one place the journey's length is stated now (`journeyLength`, issue #202).
  */
 export function PathIntro({ stopRule }: Props) {
   const [open, setOpen] = useState(() => !wasDismissed());

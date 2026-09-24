@@ -6,7 +6,7 @@ import type { Artist } from '@/api/types';
 
 interface Props {
   artist: Artist;
-  /** 0-based among ALL artists including endpoints; shown 1-based (UXR-D10 currency). */
+  /** 0-based among ALL artists including endpoints; shown 1-based (`journeyLength`'s currency, issue #202). */
   index: number;
   total: number;
   isEndpoint: boolean;
