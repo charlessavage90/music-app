@@ -31,8 +31,8 @@ written the wrong thing:
 
 ## QUEUED 2026-09-24 — the six UI fixes from your pass (PR #212)
 
-**Where:** locally, after merging #212 and pulling `main` in `C:\dev\music-app` — the Vite server on
-:5173 picks the new files up on its own; nothing to restart. Not on unsung.fm (not deployed).
+**Where:** on unsung.fm, after the next deploy. *(Changed 2026-09-24: the local servers stay on the
+`LBA-G5` candidate, on your instruction, and are not being pulled.)*
 
 - [ ] 1. **Desktop, landing page.** The "Build the path" button no longer shimmers. The example card
   says "A path, seven stops", and its coloured line runs through the centre of every dot, cyan dot
@@ -49,3 +49,22 @@ written the wrong thing:
 - [ ] 6. **Phone, press play on any card:** no panel opens; the clip plays.
 - [ ] 7. **Any width.** Press Dig deeper four or five times so "Artists you skipped" is long, with a
   clip playing. Scroll to the bottom: the last skipped name sits fully above the playing bar.
+
+## QUEUED 2026-09-24 — the issues sweep (PRs #216–#219)
+
+**Where:** on unsung.fm, after the same deploy.
+
+- [ ] 8. **Desktop, clip playing.** Drag the volume slider in the bottom bar: loudness changes, the clip
+  does not restart. Play another card: same level. **Phone:** no slider.
+- [ ] 9. **Clip playing.** Pause with a keyboard media key or headset button: the play button shows
+  Play, not Pause. **Phone:** the lock screen names the artist.
+- [ ] 10. **Any journey, clip playing.** Press Dig deeper, then the browser's Back: the audio stops at
+  once, not when the old path reappears.
+- [ ] 11. **Turn wifi off, press play on a card you have not played.** Wrong = the bar vanishes. Right
+  = it stays, says it couldn't reach the preview service, with Retry. Wifi on, Retry: it plays.
+- [ ] 12. **Search box, desktop and phone.** Type a name, then press Escape / click or tap elsewhere: the
+  list closes. Typing again and clicking a name still picks it.
+- [ ] 13. **Take a journey URL and paste the first artist's id over the second.** Wrong = "Something
+  went wrong". Right = a sentence saying to pick two different artists.
+- [ ] 14. **Press Dig deeper once, copy the URL, delete its last id (and the comma) and reload.** A
+  notice says the link looks cut short. The browser tab names both artists.
