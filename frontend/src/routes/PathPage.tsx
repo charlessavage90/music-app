@@ -75,7 +75,7 @@ export function PathPage() {
     // UXR-T8 restyles the header inside this width.
     <main className="mx-auto w-full max-w-[1200px] px-5 py-6 pb-40 sm:py-9">
       <div className="mb-8 flex items-center justify-between gap-5 text-[13px] sm:text-[13.5px]">
-        <Brand size="nav" />
+        <Brand size="nav" href="/" onNavigate={() => journey.current?.stop()} />
         <div className="flex items-center gap-2.5">
           {/* Only offered once there is something to undo. */}
           {hasBypasses && (

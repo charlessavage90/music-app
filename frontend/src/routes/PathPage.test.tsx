@@ -248,6 +248,19 @@ test('the tile and the player bar state the same length for the same journey', a
   expect(screen.getByText('Stop 1 of 3')).toBeInTheDocument();
 });
 
+// Issue #203: the logo in the journey page's header takes you back to the
+// landing page. The landing page itself keeps it non-interactive
+// (LandingPage.test pins exactly three links there, the sample journeys).
+test('the logo on the journey page is a link to the landing page', async () => {
+  vi.spyOn(client, 'getTrack').mockResolvedValue(null);
+  vi.spyOn(client, 'buildPath').mockResolvedValue({ artists: THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] });
+
+  renderAt('/path/m/d');
+  await screen.findByText('Herbie Hancock');
+
+  expect(screen.getByRole('link', { name: /unsung\.fm.*home/i })).toHaveAttribute('href', '/');
+});
+
 // This is the wiring between path state and the panel — no other PathPage test
 // supplies a non-empty bypassed/unresolved, so without this the two had never
 // been exercised together at any level.
