@@ -10,9 +10,11 @@
  * router itself (it returned 3, 4 and 6 artists between; +2 each).
  *
  * ⚠ MBIDs and stop counts both depend on the SERVED ARTIFACT. A future artifact can
- * drop an artist or move a count. Nothing re-checks these against the live router:
- * the real-browser spec that was to (`e2e/landing-samples.spec.ts`, UXR-T10) was
- * never written. Until it exists, a rebuild that moves a count lies on a chip.
+ * drop an artist or move a count. `e2e/landing-samples.spec.ts` (UXR-T10, issue
+ * #213) re-checks every chip and the teaser against the live router and fails
+ * when one disagrees — but only when `npm run test:e2e` is run against the
+ * artifact being served; it is not in `npm test`. Re-measured 2026-09-24 on
+ * sha256 43dd82bb…be79cc8 (graph-msw-tu50.bin): 5, 6, 8 and the teaser, unchanged.
  */
 export const SAMPLE_JOURNEYS = [
   { from: '561d854a-6a28-4aa7-8c99-323e6ce46c2a', fromName: 'Miles Davis',

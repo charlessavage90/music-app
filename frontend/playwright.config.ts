@@ -2,6 +2,14 @@ import { defineConfig } from '@playwright/test';
 import os from 'node:os';
 import path from 'node:path';
 
+// `reuseExistingServer` means ANY dev server already on the port is the one under
+// test — including one from a different worktree, serving different source. So the
+// port is overridable: `E2E_PORT=5183 VITE_API_PROXY=http://localhost:8010 npm run
+// test:e2e` runs this tree's code against a second API, beside a dev loop that is
+// already using 5173 and :8000 (issue #213, where both were taken by another tree).
+const port = Number(process.env.E2E_PORT ?? 5173);
+const baseURL = `http://localhost:${port}`;
+
 export default defineConfig({
   testDir: './e2e',
   // Outside the OneDrive-synced tree: the default location fails with
@@ -15,10 +23,10 @@ export default defineConfig({
   // outside sync, which is the same reasoning, and the same remedy, as
   // vite.config.ts's cacheDir.
   outputDir: path.join(os.tmpdir(), 'artistpath-playwright-results'),
-  use: { baseURL: 'http://localhost:5173' },
+  use: { baseURL },
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
+    command: `npm run dev -- --port ${port} --strictPort`,
+    url: baseURL,
     reuseExistingServer: true,
     timeout: 120_000,
   },
