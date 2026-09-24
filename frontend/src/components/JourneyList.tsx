@@ -12,6 +12,17 @@ import { cachedTrack, resolveFreshUrl } from '@/hooks/useClip';
 import { journeyLength } from '@/lib/journeyLength';
 import type { Artist, StopRule } from '@/api/types';
 
+/**
+ * Whether the artist panel is the column beside the journey (DetailDock) or
+ * the sheet over it (DetailSheet). The same `lg` breakpoint those two split on
+ * — 64rem is Tailwind's `lg` — asked of the browser, because that is the one
+ * source the CSS and this decision can agree on. Where nothing can answer
+ * (jsdom, an old browser), the answer is "over it", which opens nothing extra.
+ */
+function panelIsBeside(): boolean {
+  return typeof window.matchMedia === 'function' && window.matchMedia('(min-width: 64rem)').matches;
+}
+
 /** What the page can ask of the journey's audio from outside it. */
 export interface JourneyControls {
   stop: () => void;
@@ -144,7 +155,13 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
               }
               isNew={changed?.has(artist.mbid) ?? false}
               isSelected={selected === artist.mbid}
-              onPlay={player.playFrom}
+              // Issue #205: on desktop, play also opens this artist's panel when
+              // none is open, and never changes one that is. On a phone the
+              // panel would slide over what is playing, so it opens nothing.
+              onPlay={(mbid) => {
+                player.playFrom(mbid);
+                if (selected === null && panelIsBeside()) setSelected(mbid);
+              }}
               onToggle={player.toggle}
               onDetail={() => setSelected(artist.mbid)}
               onClipResolved={(mbid, available) =>

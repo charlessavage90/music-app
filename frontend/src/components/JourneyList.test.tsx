@@ -8,7 +8,7 @@ const artists = [
   { mbid: 'm', name: 'Miles Davis', disambiguation: '', popularity: 1, spotifyId: null, appleId: null, facts: null },
   { mbid: 'k', name: 'Kraftwerk', disambiguation: '', popularity: 0.8, spotifyId: null, appleId: null, facts: null },
 ];
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 test('renders every artist as a card', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
@@ -158,4 +158,74 @@ test('says nothing when a stop was forced in', async () => {
   vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
   render(<JourneyList artists={artists} stopRule="forced" onBypass={vi.fn()} />);
   expect(screen.queryByText(/next to each other/i)).not.toBeInTheDocument();
+});
+
+// Issue #205, the owner's ruling. On desktop, where the panel is a column
+// beside the journey, pressing play on a card also opens that artist's panel
+// when none is open — and leaves an open panel alone. On a phone the panel
+// slides over the journey and would hide what is playing, so play opens
+// nothing there. The split is the `lg` breakpoint DetailDock and DetailSheet
+// already use; jsdom has no layout, so the media query is stubbed.
+//
+// "Stop N of M" is no evidence here: the player bar prints it too. What only
+// a panel has is its Close button; what only an INTERIOR artist's panel has
+// is Dig deeper — so "Herbie's panel is open" is Close + Dig deeper, and
+// "Miles's panel is open" is Close without it.
+const closeButtons = () => screen.queryAllByRole('button', { name: 'Close' }).length;
+const digDeeper = () => screen.queryAllByRole('button', { name: /dig deeper/i }).length;
+function stubViewport(desktop: boolean) {
+  vi.stubGlobal('matchMedia', vi.fn((media: string) => ({
+    matches: desktop, media, onchange: null,
+    addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {},
+    dispatchEvent: () => false,
+  })));
+}
+const threeStopForPlay = [
+  artists[0],
+  { mbid: 'h', name: 'Herbie Hancock', disambiguation: '', popularity: 0.9, spotifyId: null, appleId: null, facts: null },
+  artists[1],
+];
+async function pressPlayOnHerbie(user: ReturnType<typeof userEvent.setup>) {
+  const play = (await screen.findAllByRole('button', { name: /play/i }))[1];
+  await waitFor(() => expect(play).toBeEnabled());
+  await user.click(play);
+}
+
+test('desktop, no panel open: play opens the played artist’s panel', async () => {
+  stubViewport(true);
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
+  render(<JourneyList artists={threeStopForPlay} stopRule="natural" onBypass={vi.fn()} />);
+
+  await pressPlayOnHerbie(user);
+
+  expect(closeButtons()).toBeGreaterThan(0);
+  expect(digDeeper()).toBeGreaterThan(0);
+});
+
+test('desktop, a panel already open: play leaves it as it was', async () => {
+  stubViewport(true);
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
+  render(<JourneyList artists={threeStopForPlay} stopRule="natural" onBypass={vi.fn()} />);
+  await user.click(screen.getByRole('button', { name: 'About Miles Davis' }));
+  expect(closeButtons()).toBeGreaterThan(0);
+  expect(digDeeper()).toBe(0);
+
+  await pressPlayOnHerbie(user);
+
+  expect(closeButtons()).toBeGreaterThan(0);
+  expect(digDeeper()).toBe(0);
+});
+
+test('phone: play opens no panel', async () => {
+  stubViewport(false);
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
+  render(<JourneyList artists={threeStopForPlay} stopRule="natural" onBypass={vi.fn()} />);
+
+  await pressPlayOnHerbie(user);
+
+  expect(screen.getByRole('img', { name: /now playing/i })).toBeInTheDocument();
+  expect(closeButtons()).toBe(0);
 });
