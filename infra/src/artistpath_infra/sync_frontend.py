@@ -22,7 +22,9 @@ AWS, without credentials and without a build — the same reason `deploy_stage.p
 is a pure function rather than a branch inside `app.py`. `plan_upload` returns
 the commands; `main` runs them. Every rule §6 used to state in prose is an
 assertion in `test_sync_frontend.py`, and each was checked by reintroducing the
-defect and confirming the suite goes red.
+defect and confirming the suite goes red. A correct plan proves nothing about
+what `main` executes, so `test_sync_frontend_main.py` drives `main` itself and
+fails if it runs the passes in any other order than the plan's (G3-Q2).
 
 **The content-type check has no counterpart in the old §6 commands.** It was a
 machine-state caveat there: `aws s3 sync` guesses `Content-Type` from the file
