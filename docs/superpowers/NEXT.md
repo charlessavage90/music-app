@@ -49,8 +49,8 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 
 **Last updated: 2026-09-24, at the closeout that STARTED `LBA-G5`.** **The live site's CODE changed
 2026-09-24** (image and frontend `759e80c`, PRs #212 and #216–#219; the served graph is unchanged,
-`graph-lux4.bin`), `ApiConfig.graph_path` is untouched, and `TEST-QUEUE.md`'s unticked boxes are now
-pressable on unsung.fm.
+`graph-lux4.bin`), `ApiConfig.graph_path` is untouched, and the owner pressed all 14 of its
+`TEST-QUEUE.md` boxes on unsung.fm the same day — **no findings**; the queue is empty.
 
 # THE BLIND LISTEN HAS RUN AND BEEN READ. THE NEXT ACTION IS `LBA-G5`, THE OWNER'S.
 
