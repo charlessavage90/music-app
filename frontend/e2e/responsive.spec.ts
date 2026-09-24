@@ -80,39 +80,52 @@ test('a journey is usable at phone width', async ({ page }) => {
 // 390 (3.25 top, 10.75 bottom). The unit suite was 188 green throughout, because
 // jsdom computes no layout; the owner found it by looking at a screenshot.
 // This is the assertion that would have failed on T6's first commit.
-test('the rail runs through the centre of every dot, and stops at the end ones', async ({ page }) => {
-  await page.goto('/');
+//
+// At BOTH widths the T8 handoff names (390 here, 1280 the desktop dock layout):
+// the overshoot differed between them, so one width cannot vouch for the other.
+for (const width of [390, 1280]) {
+  test.describe(`at ${width}px`, () => {
+    test.use({ viewport: { width, height: 844 } });
+    test('the rail runs through the centre of every dot, and stops at the end ones', async ({ page }) => {
+      await page.goto('/');
 
-  await page.getByLabel('Start with').fill('miles davis');
-  await page.getByRole('button', { name: /miles davis/i }).first().click();
-  await page.getByLabel('End with').fill('daft punk');
-  await page.getByRole('button', { name: /daft punk/i }).first().click();
-  await page.getByRole('button', { name: /build the path/i }).click();
+      await page.getByLabel('Start with').fill('miles davis');
+      await page.getByRole('button', { name: /miles davis/i }).first().click();
+      await page.getByLabel('End with').fill('daft punk');
+      await page.getByRole('button', { name: /daft punk/i }).first().click();
+      await page.getByRole('button', { name: /build the path/i }).click();
 
-  await expect(page.locator('ol li').nth(1)).toBeVisible();
+      // Not `ol li`: at 1280 the landing page's teaser is a visible railed `<ol>`
+      // too, so that wait (and the `querySelector('ol')` below) could pass on the
+      // page being left — path.spec.ts has the history. `artist-name` is the
+      // journey's alone.
+      await page.waitForURL(/\/path\//);
+      await expect(page.getByTestId('artist-name').nth(1)).toBeVisible();
 
-  const geometry = await page.evaluate(() => {
-    const ol = document.querySelector('ol')!;
-    const rail = ol.querySelector<HTMLElement>(':scope > span[aria-hidden]')!;
-    const r = rail.getBoundingClientRect();
-    const dots = [...ol.querySelectorAll<HTMLElement>('[data-rail-dot]')].map((d) => {
-      const b = d.getBoundingClientRect();
-      return { cx: b.left + b.width / 2, cy: b.top + b.height / 2 };
+      const geometry = await page.evaluate(() => {
+        const ol = document.querySelector('ol')!;
+        const rail = ol.querySelector<HTMLElement>(':scope > span[aria-hidden]')!;
+        const r = rail.getBoundingClientRect();
+        const dots = [...ol.querySelectorAll<HTMLElement>('[data-rail-dot]')].map((d) => {
+          const b = d.getBoundingClientRect();
+          return { cx: b.left + b.width / 2, cy: b.top + b.height / 2 };
+        });
+        return {
+          dx: dots.map((d) => Math.abs(d.cx - (r.left + r.width / 2))),
+          topGap: Math.abs(r.top - dots[0].cy),
+          bottomGap: Math.abs(r.bottom - dots[dots.length - 1].cy),
+          count: dots.length,
+        };
+      });
+
+      expect(geometry.count).toBeGreaterThan(2);
+      // Sub-pixel tolerance only: these are meant to coincide, not to be close.
+      for (const dx of geometry.dx) expect(dx).toBeLessThanOrEqual(0.5);
+      expect(geometry.topGap).toBeLessThanOrEqual(0.5);
+      expect(geometry.bottomGap).toBeLessThanOrEqual(0.5);
     });
-    return {
-      dx: dots.map((d) => Math.abs(d.cx - (r.left + r.width / 2))),
-      topGap: Math.abs(r.top - dots[0].cy),
-      bottomGap: Math.abs(r.bottom - dots[dots.length - 1].cy),
-      count: dots.length,
-    };
   });
-
-  expect(geometry.count).toBeGreaterThan(2);
-  // Sub-pixel tolerance only: these are meant to coincide, not to be close.
-  for (const dx of geometry.dx) expect(dx).toBeLessThanOrEqual(0.5);
-  expect(geometry.topGap).toBeLessThanOrEqual(0.5);
-  expect(geometry.bottomGap).toBeLessThanOrEqual(0.5);
-});
+}
 
 // LUX-4 adds two lines to every card — the facts line and the links row — and
 // height at 390px is the scarcest thing on this page. Assertions 1 and 3 above
