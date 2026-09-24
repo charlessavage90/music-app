@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useClip } from '@/hooks/useClip';
 import { PlayButton } from './PlayButton';
+import { RailDot } from './Rail';
 import type { Artist } from '@/api/types';
 
 interface Props {
@@ -53,12 +54,6 @@ interface Props {
   onDeadIndex?: (mbid: string) => void;
 }
 
-/** Cyan at the start, pink at the end, violet-ish between — the rail's own gradient, per stop. */
-function dotColour(index: number, total: number): string {
-  if (index === 0) return 'var(--color-start)';
-  if (index === total - 1) return 'var(--color-end)';
-  return 'var(--color-playing)';
-}
 
 /**
  * One stop on the journey — the LISTENING surface only (UXR-D2).
@@ -93,21 +88,8 @@ export function ArtistCard({
 
   return (
     <div className="relative">
-      {/* The rail dot for this stop, and the anchor JourneyList measures to
-          decide where its rail starts and stops (`data-rail-dot`).
-
-          GEOMETRY, and the two halves must stay in sync: the list pads its
-          content by 26px, so -29px here puts this dot's centre 3.5px from the
-          list's own left edge. The rail is 3px wide at left-2px, which is the
-          same 3.5px centre. Changing either number alone leaves the dots
-          sitting beside the line — which is what happened, by exactly 3px,
-          until it was measured in a browser on 2026-09-08. */}
-      <span
-        aria-hidden
-        data-rail-dot
-        className="absolute -left-[29px] top-1/2 size-[13px] -translate-y-1/2 rounded-full border-[3px] bg-[var(--color-bg)]"
-        style={{ borderColor: isSelected ? 'var(--color-detail)' : dotColour(index, total) }}
-      />
+      {/* The rail dot for this stop — geometry and colours in Rail.tsx. */}
+      <RailDot index={index} total={total} colour={isSelected ? 'var(--color-detail)' : undefined} />
       {/* Fades from an accent ring to nothing over GLOW_MS. The card is not
           re-mounted between paths when the artist survives, so the isNew class
           arriving IS the animation trigger. */}

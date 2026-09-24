@@ -136,6 +136,31 @@ test('each sample journey says how many stops it has, counting both artists you 
   expect(screen.getByRole('link', { name: /bad bunny.*chappell roan/i })).toHaveTextContent('8 stops');
 });
 
+// Issue #201 (1): the owner does not like the colour slide on the build button.
+// The gradient stays; nothing on the button animates.
+test('the build button has no colour animation', () => {
+  setup();
+  const button = screen.getByRole('button', { name: /build the path/i });
+  expect(button.className).not.toMatch(/animation|sheen/);
+});
+
+// Issue #201 (2): the example card's line was ~2px off its dots, drawn with
+// its own arithmetic. It now uses the journey page's rail construction —
+// the same list padding, line and dot classes, the same dot-to-dot measuring,
+// and the same start / between / end colouring — so the two cannot drift
+// apart again. The geometry itself is checked in a real layout engine; jsdom
+// can only pin that the pieces are the shared ones.
+test("the example card uses the journey page's rail and dots", () => {
+  setup();
+  const list = screen.getByText('Nina Simone').closest('ol')!;
+  expect(list.querySelector('[data-rail-line]')).not.toBeNull();
+  const dots = list.querySelectorAll<HTMLElement>('[data-rail-dot]');
+  expect(dots).toHaveLength(7);
+  expect(dots[0].style.borderColor).toBe('var(--color-start)');
+  expect(dots[3].style.borderColor).toBe('var(--color-playing)');
+  expect(dots[6].style.borderColor).toBe('var(--color-end)');
+});
+
 test('the hero carries the approved copy and a three-step "How it works"', () => {
   setup();
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
