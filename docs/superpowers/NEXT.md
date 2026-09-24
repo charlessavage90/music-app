@@ -194,7 +194,7 @@ corrected 2026-09-05: it read "Still owed by the owner" over three items marked 
    questions clean: clips play, the bottom bar clears the home indicator, artist-name typing is
    unaffected. **`G3-F2` is FALSIFIED** — see the gate table below.
 3. ✅ **The `--prune` publish pass — DONE 2026-08-02.** Two orphaned assets from the
-   pre-redesign build deleted; live site verified afterwards. See the deferral table for the
+   pre-redesign build deleted; live site verified afterwards. See `NEXT-ARCHIVE.md`'s *The `--prune` publish pass* row for the
    pre-flight a successor should repeat.
 
 ~~**One action is owed by the owner: merging draft PR #69.**~~ *(Discharged — #69 merged
@@ -266,7 +266,7 @@ old heading.)*
     the served artifact `graph-msw-tu50.bin` (sha `43dd82bb…`) carries **`deezer_ids` for all
     58,838 artists**, read from the artifact's own metadata blob rather than inferred.
     **The fix is LIVE.** It is *reduced*, not closed — the id path inherits MusicBrainz's
-    link accuracy; the link-quality row in the deferral table is unaffected and still
+    link accuracy; the link-quality deferral (issue #158) is unaffected and still
     governs.
 
 ## Must not be changed, and each has a reason
