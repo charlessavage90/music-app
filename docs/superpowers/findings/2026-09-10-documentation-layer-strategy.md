@@ -506,7 +506,7 @@ a session first opened a plan or spec, the rule was present in 5 of 17.**
 #### What I infer from it, in plain terms
 
 - **When a session opens a plan or spec the way the documentation assumes, the rule arrives, every
-  time, within seconds, and has done so across five CLI versions.** That is `C1`, it passes, and it
+  time, within seconds, and has done so across four CLI versions.** That is `C1`, it passes, and it
   is a statement about fidelity.
 - **Most sessions here do not open files that way, and for them the text does not arrive** — or
   arrives hours later, when they write, by a route nobody designed and that fires half the time.
