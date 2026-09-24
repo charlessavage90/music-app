@@ -23,6 +23,52 @@ closeouts report a backlog that did not exist.
 Newest first.
 
 ---
+## ✅ DONE — 2026-09-24 — RUN BY THE OWNER ON `unsung.fm`; ALL 14 BOXES TICKED, NO FINDINGS
+
+**Every box below was ticked** on the deployed site (`759e80c`, deployed 2026-09-24). His report,
+2026-09-24: *"No findings, all worked as expected."* Nothing is re-queued.
+
+## QUEUED 2026-09-24 — the six UI fixes from your pass (PR #212)
+
+**Where:** on unsung.fm — **deployed 2026-09-24 (`759e80c`), pressable now.** Not on the local
+servers, which stay on the `LBA-G5` candidate.
+
+- [x] 1. **Desktop, landing page.** The "Build the path" button no longer shimmers. The example card
+  says "A path, seven stops", and its coloured line runs through the centre of every dot, cyan dot
+  at the top, pink at the bottom. The three example chips say 5, 6 and 8 stops.
+- [x] 2. **Desktop, any journey.** The number in the top-right tile equals the number of cards on the
+  page, endpoints included, and says "stops". Press play on any card: the bar's "Stop N of M" has
+  the same M. Open any card with ›: the panel's "Stop N of M" has the same M.
+- [x] 3. **Desktop, any journey.** Click the Unsung.fm mark top-left: you land on the landing page and
+  the clip stops. On the landing page itself the mark does nothing when clicked.
+- [x] 4. **Desktop, open a few panels.** Wrong = a date line ending in a bare dash ("1985–"). Right =
+  "since 1985", "until 1990" or "1985–1990". Hover Dig deeper: hand cursor, and it is violet, not pink.
+- [x] 5. **Desktop, no panel open, press play on a middle card:** that artist's panel opens. Now, with
+  that panel open, press play on a different card: the panel does not change. Close the panel.
+- [x] 6. **Phone, press play on any card:** no panel opens; the clip plays.
+- [x] 7. **Any width.** Press Dig deeper four or five times so "Artists you skipped" is long, with a
+  clip playing. Scroll to the bottom: the last skipped name sits fully above the playing bar.
+
+## QUEUED 2026-09-24 — the issues sweep (PRs #216–#219)
+
+**Where:** on unsung.fm — the same 2026-09-24 deploy, pressable now.
+
+- [x] 8. **Desktop, clip playing.** Drag the volume slider in the bottom bar: loudness changes, the clip
+  does not restart. Play another card: same level. **Phone:** no slider.
+- [x] 9. **Clip playing.** Pause with a keyboard media key or headset button: the play button shows
+  Play, not Pause. **Phone:** the lock screen names the artist.
+- [x] 10. **Any journey, clip playing.** Press Dig deeper, then the browser's Back: the audio stops at
+  once, not when the old path reappears.
+- [x] 11. **Turn wifi off, press play on a card you have not played.** Wrong = the bar vanishes. Right
+  = it stays, says it couldn't reach the preview service, with Retry. Wifi on, Retry: it plays.
+- [x] 12. **Search box, desktop and phone.** Type a name, then press Escape / click or tap elsewhere: the
+  list closes. Typing again and clicking a name still picks it.
+- [x] 13. **Take a journey URL and paste the first artist's id over the second.** Wrong = "Something
+  went wrong". Right = a sentence saying to pick two different artists.
+- [x] 14. **Press Dig deeper once, copy the URL, delete its last id (and the comma) and reload.** A
+  notice says the link looks cut short. The browser tab names both artists.
+
+---
 ## ✅ DONE — 2026-09-24 — RUN BY THE OWNER ON `unsung.fm`; ALL 15 BOXES TICKED, ELEVEN UI/UX FINDINGS
 
 **Every box below was ticked**, on the deployed site. No box failed in the sense the checklist
