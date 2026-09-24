@@ -10,7 +10,7 @@ dist/
 .claude/settings.local.json
 # orca.yaml setup's progress marker, read by .claude/hooks/repo-state.mjs — one per worktree.
 .orca-setup-state
-# DLS-T1's InstructionsLoaded log — machine-local, one per tree.
+# .claude/logs/ — machine-local hook output, one per tree (the DLS-T1 log lived here until 2026-09-24)
 .claude/logs/
 __pycache__/
 *.pyc
