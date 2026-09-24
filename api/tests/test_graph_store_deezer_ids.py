@@ -15,6 +15,7 @@ import json
 import struct
 
 import numpy as np
+import pytest
 
 from artistpath_api.graph_store import GraphStore
 
@@ -73,10 +74,28 @@ def test_a_store_built_in_a_test_reports_no_ids():
     assert g.deezer_id_of(0) == ""
 
 
-def test_a_short_id_list_does_not_hand_one_artist_anothers_id(tmp_path):
-    # A truncated list would silently shift every id after the gap if it were
-    # indexed naively. Out of range must read as "no id", never as a neighbour's.
-    g = GraphStore.load(_write_apg1(tmp_path / "g.bin", ["111"]))
+def test_a_short_id_list_in_an_artifact_refuses_to_load(tmp_path):
+    # A truncated list would silently shift every id after the gap. The writer
+    # projects the key onto node order, so a present list of the wrong length
+    # is not what the builder wrote — refused at boot rather than served (G3-A6).
+    with pytest.raises(ValueError, match="inconsistent.*deezer_ids"):
+        GraphStore.load(_write_apg1(tmp_path / "g.bin", ["111"]))
+
+
+def test_a_short_id_list_does_not_hand_one_artist_anothers_id():
+    # The accessor stays bounds-checked as a second line: a store built in
+    # code (every test helper) never passes through the loader's check. Out of
+    # range must read as "no id", never as a neighbour's.
+    g = GraphStore(
+        mbids=MBIDS,
+        names=["Alpha", "Beta", "Gamma"],
+        disambiguations=["", "", ""],
+        pop_raw=np.asarray([0.9, 0.5, 0.1], dtype=np.float32),
+        offsets=np.asarray([0, 1, 3, 4], dtype=np.int32),
+        neighbours=np.asarray([1, 0, 2, 1], dtype=np.int32),
+        scores=np.asarray([0.8, 0.8, 0.6, 0.6], dtype=np.float32),
+        deezer_ids=["111"],
+    )
     assert g.deezer_id_of(0) == "111"
     assert g.deezer_id_of(1) == ""
     assert g.deezer_id_of(2) == ""

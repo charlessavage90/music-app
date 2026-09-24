@@ -143,3 +143,120 @@ def test_header_and_metadata_length_disagreement_raises():
     payload = _build_apg1(4, ["a", "b"], [0, 1, 1, 1, 1], [0], [0.9])
     with pytest.raises(ValueError, match="inconsistent"):
         GraphStore.from_bytes(payload)
+
+
+# --- G3-A6: every per-node key and the CSR arrays are checked at load ---------
+#
+# Each case below is an artifact that loaded CLEAN before G3-A6 and then failed
+# per request — the review's own example is `popularity` one entry short, which
+# 500'd for the last artist. Each must now refuse to load, naming what is wrong.
+
+def _apg1(*, meta_edit=None, offsets=None, neighbours=None, scores=None) -> bytes:
+    """A consistent three-node artifact, with one part optionally broken."""
+    mbids = ["a" * 36, "b" * 36, "c" * 36]
+    meta = {
+        "mbids": mbids,
+        "names": ["A", "B", "C"],
+        "disambiguations": ["", "", ""],
+        "popularity": [0.9, 0.5, 0.1],
+    }
+    if meta_edit:
+        meta_edit(meta)
+    offsets = [0, 1, 3, 4] if offsets is None else offsets
+    neighbours = [1, 0, 2, 1] if neighbours is None else neighbours
+    scores = [0.8, 0.8, 0.6, 0.6] if scores is None else scores
+    blob = json.dumps(meta).encode()
+    e = len(neighbours)
+    body = (
+        np.asarray(offsets, dtype="<i4").tobytes()
+        + np.asarray(neighbours, dtype="<i4").tobytes()
+        + np.asarray(scores, dtype="<f4").tobytes()
+        + bytes(e)
+    )
+    return _HEADER.pack(b"APG1", 1, len(mbids), e, len(blob)) + body + blob
+
+
+def _set(key, value):
+    return lambda meta: meta.__setitem__(key, value)
+
+
+def test_the_consistent_baseline_loads():
+    # Guards every case below against passing only because the helper is broken.
+    assert GraphStore.from_bytes(_apg1()).artist_count == 3
+
+
+@pytest.mark.parametrize("key", ["names", "disambiguations", "popularity"])
+def test_a_short_required_key_refuses_to_load(key):
+    def shorten(meta):
+        meta[key] = meta[key][:-1]
+    with pytest.raises(ValueError, match=f"inconsistent.*{key}"):
+        GraphStore.from_bytes(_apg1(meta_edit=shorten))
+
+
+@pytest.mark.parametrize("key", ["names", "disambiguations", "popularity"])
+def test_a_missing_required_key_refuses_to_load(key):
+    with pytest.raises(ValueError, match=f"inconsistent.*{key}"):
+        GraphStore.from_bytes(_apg1(meta_edit=lambda meta: meta.pop(key)))
+
+
+@pytest.mark.parametrize("key, value", [
+    ("deezer_ids", ["1", "2"]),
+    ("fame_lb", [1, 2]),
+    ("spotify_ids", ["s", "s", "s", "s"]),
+    ("apple_ids", ["a"]),
+    ("artist_facts", [{}, {}]),
+])
+def test_a_present_optional_key_of_the_wrong_length_refuses_to_load(key, value):
+    with pytest.raises(ValueError, match=f"inconsistent.*{key}"):
+        GraphStore.from_bytes(_apg1(meta_edit=_set(key, value)))
+
+
+@pytest.mark.parametrize("key", [
+    "deezer_ids", "fame_lb", "spotify_ids", "apple_ids", "artist_facts",
+])
+def test_an_empty_optional_key_still_loads(key):
+    # Additive keys: empty means "not recorded", which an older writer emits.
+    assert GraphStore.from_bytes(_apg1(meta_edit=_set(key, []))).artist_count == 3
+
+
+@pytest.mark.parametrize("bad", [[0.9, 0.5, 1.5], [0.9, -0.1, 0.1], [0.9, None, 0.1]])
+def test_popularity_outside_zero_to_one_refuses_to_load(bad):
+    with pytest.raises(ValueError, match="inconsistent.*popularity"):
+        GraphStore.from_bytes(_apg1(meta_edit=_set("popularity", bad)))
+
+
+def test_a_neighbour_id_past_the_last_node_refuses_to_load():
+    with pytest.raises(ValueError, match="inconsistent.*neighbour"):
+        GraphStore.from_bytes(_apg1(neighbours=[1, 0, 3, 1]))
+
+
+def test_a_negative_neighbour_id_refuses_to_load():
+    # Numpy would wrap -1 to the LAST node silently — the worst variant.
+    with pytest.raises(ValueError, match="inconsistent.*neighbour"):
+        GraphStore.from_bytes(_apg1(neighbours=[1, 0, -1, 1]))
+
+
+def test_offsets_not_ending_at_e_refuse_to_load():
+    with pytest.raises(ValueError, match="inconsistent.*offsets end"):
+        GraphStore.from_bytes(_apg1(offsets=[0, 1, 3, 3]))
+
+
+def test_offsets_not_starting_at_zero_refuse_to_load():
+    with pytest.raises(ValueError, match="inconsistent.*offsets do not start"):
+        GraphStore.from_bytes(_apg1(offsets=[1, 1, 3, 4]))
+
+
+def test_non_monotone_offsets_refuse_to_load():
+    with pytest.raises(ValueError, match="inconsistent.*monotone"):
+        GraphStore.from_bytes(_apg1(offsets=[0, 3, 1, 4]))
+
+
+@pytest.mark.parametrize("bad", [1.5, -0.2, float("nan")])
+def test_an_edge_score_outside_zero_to_one_refuses_to_load(bad):
+    with pytest.raises(ValueError, match="inconsistent.*score"):
+        GraphStore.from_bytes(_apg1(scores=[0.8, 0.8, bad, 0.6]))
+
+
+def test_the_committed_fixture_passes_every_check(fixture_store):
+    # The check must not refuse what the builder actually writes.
+    assert fixture_store.artist_count == 500
