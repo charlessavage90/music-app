@@ -31,11 +31,13 @@ follow `CLAUDE.md`'s namespacing and collision check.
 
 ## 2. Labels
 
-**Every issue carries exactly one kind, at most one whose, and one or more areas.**
+**Every issue carries exactly one kind, at most one whose, and one or more areas.** `research` is a
+modifier on top of the kind, not a kind.
 
 | Group | Labels | Meaning |
 |---|---|---|
-| kind | `bug` · `deferred` · `task` · `security` · `research` · `documentation` | `research` needs a committed pre-registration before any arm runs (`CLAUDE.md`) |
+| kind | `bug` · `deferred` · `task` · `security` · `documentation` | |
+| modifier | `research` | An analysis or experiment: needs a committed pre-registration before any arm runs (`CLAUDE.md`) |
 | whose | `owner-decision` · `owner-hands` | **No whose-label means it is a session's.** `owner-decision`: a session prepares the decision and presents it per `CLAUDE.md` "How to present results", **never makes it**. `owner-hands`: blocked on something only he can physically do |
 | readiness | `agent-ready` | **The condition is met AND it is a session's.** This is the dispatch signal for Orca. Never on an `owner-decision` issue |
 | area | `area:api` · `area:frontend` · `area:builder` · `area:infra` · `area:apparatus` | Which package, or the project's own docs/skills/agents |
