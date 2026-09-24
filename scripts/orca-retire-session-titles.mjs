@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Orca archive hook (orca.yaml scripts.archive): before Orca deletes a session worktree, rename every
-// Claude Code session run in it to `[retired-pr-<n>-]<branch>`, so retired sessions are recognisable
+// Claude Code session run in it to `[retired-pr-<n>] <branch>`, so retired sessions are recognisable
 // in `claude --resume` and Orca's session history after the worktree is gone. The branch, not the
 // session's own title: an auto title describes the latest request ("Merge PR"), not the work.
 // <branch> drops Orca's `<owner>/` prefix; with no branch (detached HEAD) the current title is kept.
@@ -107,7 +107,7 @@ function main() {
       log(`${file}: already retired ("${title}"), skipped`)
       continue
     }
-    const renamed = `[retired-pr-${pr}-]${name || title}`
+    const renamed = `[retired-pr-${pr}] ${name || title}`
     const record = JSON.stringify({ type: 'custom-title', customTitle: renamed, sessionId })
     const sep = content === '' || content.endsWith('\n') ? '' : '\n'
     if (!dryRun) appendFileSync(path, `${sep}${record}\n`)
