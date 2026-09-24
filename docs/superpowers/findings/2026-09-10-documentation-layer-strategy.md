@@ -405,6 +405,147 @@ least, so it is recorded as a pointer for whoever runs the read, not as a result
 reached the session* or as *the hook logged a match*, and say which rows were counted under which.
 Until then row #5 is **unruled** and is not scored toward `C1` in either direction.
 
+### 6c. The `DLS-T1` read, 2026-09-24
+
+**Window closed by date.** Sample: every session whose `session_start` row in the main tree's
+`instructions-loaded.jsonl` postdates the `doc-strategy` merge (`193fd89`, 2026-09-11 22:45 UTC),
+read against its retained transcript under `~/.claude/projects/C--dev-music-app/`, including the
+`subagents/` transcripts beneath it. §6b's table was **not** the durable copy it claimed to be: it
+banked 6 sessions with a `plans.md` row and the log held 13, so this read consumed the log and the
+transcripts directly. The three synthetic rows (`DLS-T1-X3`) are excluded. Scripts are not
+committed: the pass is three throwaway transcript scanners, and the tables below are the record.
+
+**Which reading of `C1` this is, as §6b demanded.** Both, and they agree. Every transcript carries
+the harness's own delivery record — an `attachment` of type `nested_memory` naming
+`.claude/rules/plans.md` — and **all 19 hook rows have one at the same second, in the transcript of
+the context that made the open (main session or subagent), and there is none without a hook row.**
+So "the hook logged a match" and "the rule text reached a context" select the same rows. What they
+do **not** say is *which* context: for the 9 subagent-triggered rows the text reached the subagent
+and the parent's transcript has no attachment. Those are scored under `C3`, never `C1`.
+
+#### Measured
+
+**Sessions.** 28 started after the merge; 23 have a readable transcript; 5 do not (`a88f25f7`,
+launched with `--agent claude`; `df4481b0`, `926cd1a8`, `ee57932b`, `3ac83d90`, empty or absent)
+and none of the 5 has a `plans.md` row — **excluded as unobservable**. Orca-launched sessions log
+to their worktree (`DLS-T1-X2`); the two worktree logs present today hold 6 session-start rows and
+no `plans.md` row, and contribute nothing, as §6b predicted.
+
+**Every `plans.md` load, by what triggered it** (19 rows, 13 sessions):
+
+| trigger | rows | delivered to | delay from trigger |
+|---|---:|---|---|
+| main session `Read` of an in-tree plan/spec | 5 | the main session | 1–4 s |
+| subagent `Read` of an in-tree plan/spec (`doc-auditor` ×7, `ml-graph-analyst` ×1, `general-purpose` ×1) | 9 | the subagent only; logged under the parent's id, `agent_type: null` | 0–1 s |
+| a Bash command that **modified** the spec (heredoc append, python rewrite) | 5 | the main session, attached to the *next* tool result | 5 s – 2 min 24 s |
+
+**`DLS-T1-C1`** (*does the rule load in every session that opens a plan or spec*). Qualifying
+sessions — a main session started in `C:\dev\music-app` whose transcript shows a `Read`-tool open
+of a plan or spec under that tree, made by the session itself and not a subagent:
+
+| session | CLI | first `Read` (UTC) | rule in context | delay |
+|---|---|---|---|---:|
+| `652d311c` | 2.1.269 | 09-12 16:02:15 roadmap plan | 16:02:15 | ≤1 s |
+| `58bcc7f5` (`--agent consultant`) | 2.1.269 | 09-12 15:59:32 `LBD-` spec | 15:59:35 | 3 s |
+| `b5d34136` | 2.1.268 | 09-14 12:21:06 own-similarity spec | 12:21:10 | 4 s |
+| `bafe5938` (`--agent consultant`) | 2.1.273 | 09-16 18:48:46 `LBA-` spec | 18:48:50 | 4 s |
+| `c3875352` | 2.1.280 | 09-22 19:04:28 `LBA-` spec | 19:04:30 | 2 s |
+
+**5 of 5, no miss, four CLI versions.** Every later `Read` of a plan or spec in these sessions
+(16 more opens) produced no further row, which is load-once-per-session behaviour, not a miss. The
+two consultant sessions are launched sessions with an agent flag, not subagents (`DLS-T1-X5`), and
+their opens are their own; **without them the count is 3 of 3**, which is exactly §6's sample.
+
+**Excluded from `C1`, with counts.**
+- **12 sessions whose in-tree opens by the main session were Bash-only** (`DLS-T1-X1` applied): 126 Bash read-only
+  opens of a plan or spec preceded any load across 14 sessions, and **none fired**. Not misses.
+- **2 sessions whose only `Read`-tool opens were of a worktree copy** — `e9f8ccc4` (main session,
+  2.1.269, `worktrees/music-app-lbl`) and `c29e6dbd` (its `doc-auditor` subagent, 2.1.269,
+  `worktrees/music-app-lbd-listen`). **Neither loaded, and neither is scored as a miss:** the rule's
+  globs are relative to the tree the rule lives in, and those files were not under it. §6's literal
+  unit (*"a Read of any file under either path"*) can be read to include them, in which case `C1`
+  fails on one miss; I rejected that reading because the file was outside the rule's scope, and I
+  say so here so the owner can take the other one. **The coverage consequence stands either way**,
+  below.
+- **1 session with no plan or spec open of any kind** (`fb3fe80b`, §6b row 4): nothing to score.
+
+**Rulings on §6b's eight rows.** 1 excluded (Bash-only). 2 **qualifying, pass**. 3 **qualifying,
+pass**. 4 excluded (no open). 5 not qualifying; **its load was the `doc-auditor` subagent's `Read`
+at 16:49:59, dispatched at 16:49:39** — §6b's "roughly twenty-five minutes after" was wrong by the
+transcript, and `DLS-T1-X6`'s three hypotheses were all beside the point: the fourth, `X5`'s own
+inflation path, is what happened. 6 not qualifying; its load at 20:42:31 followed a Bash heredoc
+append to the spec at 20:42:23 — **`DLS-T1-X7`'s unnamed trigger was a write, not a read**, which
+is why it came thirty-five minutes into a Bash-reading session. 7 not qualifying (no main-session
+`Read`); its three loads were subagent, Bash-modification, subagent. 8 **qualifying, pass**; that
+it went on to amend the spec does not bear on whether the rule loaded on the open.
+
+**`DLS-T1-C2`** (*does creating a new plan, without opening one, load the rule*). One real-use
+observation: `a20eb50d` created the `LBA-` spec with the `Write` tool at 13:00:49 on 2026-09-14
+(first commit 13:01:04 UTC) and **no load followed** until a subagent read it 39 minutes later.
+Agrees with §6a's probe. Descriptive, as pre-registered: **creation does not load it.**
+
+**`DLS-T1-C3`** (*do subagents load it when they open a plan*). **9 of 9 in-tree subagent
+`Read`-tool opens loaded it into the subagent**, 0 of 1 worktree-path open did. Read from the
+subagent transcripts, not from `agent_type` (`X5` stands: the field is null for Agent-tool
+subagents).
+
+**The Bash-modification trigger is real but unreliable, and this read does not characterise it.**
+Of 10 Bash commands that modified an in-tree spec while the rule was not yet in the main context,
+5 were followed by a load and 5 were not (`84c3abb9` 16:46; `886c2c59` 20:42 ×2; `b384d6c4` 18:32,
+19:06), with no pattern I could name from the transcripts. The one `Write`-tool creation did not
+fire. Nothing in §6 depends on this; it is recorded so nobody reads the five as evidence that
+writing through Bash brings the rule in.
+
+**Coverage, which is the figure item 4 needs (`DLS-T1-X4`'s blind spot).** 17 of the 23 observable
+sessions worked on a plan or spec. The rule reached the **main session's** context in 10 — 5 at the
+first open (the `Read`-tool sessions above), and 5 only on a later write, after 27 min, 47 min,
+1 h 15 min, 2 h 21 min and 5 h 45 min of reading the spec through Bash. It reached a subagent only in
+3, and no context at all in 4 (`c29e6dbd`, `e9f8ccc4`, `0d0fc5e6`, `3ebe8e9d`). **So at the moment
+a session first opened a plan or spec, the rule was present in 5 of 17.**
+
+#### What I infer from it, in plain terms
+
+- **When a session opens a plan or spec the way the documentation assumes, the rule arrives, every
+  time, within seconds, and has done so across four CLI versions.** That is `C1`, it passes, and it
+  is a statement about fidelity.
+- **Most sessions here do not open files that way, and for them the text does not arrive** — or
+  arrives hours later, when they write, by a route nobody designed and that fires half the time.
+  That is the coverage figure, and it is the one that decides whether guidance can live in a
+  path-scoped rule. **It cannot, for load-bearing text.** This is what `DLS-T1-X4` established on
+  2026-09-12 by a controlled pair; the window's real use confirms it at scale (126 Bash opens, none
+  fired) and the owner's recollection of it on 2026-09-24 was right.
+- **A session launched in the main tree and working in a worktree gets no path-scoped rule at all**,
+  though its hooks keep firing (`X2`). This is new, it is the owner's own working pattern, and it is
+  a third coverage hole beside Bash reads and Orca launches.
+- **Subagents get the rule when they `Read`, and log it as if the parent had.** Any future count off
+  this log must go to the transcripts, as this one did.
+
+#### Weakest link
+
+- The `nested_memory` attachment is taken as "the text reached that context". It is the harness's
+  own record and `X4`'s arm B corroborated it by quoting the rule verbatim, but no live probe was
+  re-run for this read. I would defend it; falsified by a session with the attachment in its
+  transcript that cannot quote the rule.
+- The Bash-modification trigger is uncharacterised, so the "10 of 17 ever" figure could move by a
+  session or two under a different definition of "modified". The "5 of 17 at first open" figure
+  cannot, and that is the one the inference rests on.
+- Opens were matched by path regex against tool inputs; a plan reached through a symlink or a bare
+  relative path would be missed. None was seen.
+
+#### Options and their consequences
+
+1. **Item 4 keeps load-bearing text out of path-scoped rules** and uses skills or the root file, as
+   §7 proposed. This read adds nothing against §7 and one thing for it (the worktree hole).
+2. **The instrument.** §6's freeze is discharged by this read. The rule and the logging hook can now
+   be removed, or kept as a monitor — kept, the hook is what answered `X2` and would answer the next
+   Orca-launch question for free; removed, the tree loses one `.claude/rules/` file and one hook
+   entry. **The owner's call**, because it is a standing-configuration choice and not this session's
+   work; nothing else waits on it.
+3. **The worktree hole** — done, not deferred: one sentence added to `session-start` §C's worktree
+   block in the same PR as this read, so a session that takes a worktree knows it has left the rule
+   behind. A skill body is conditional context, not the standing layer, so the addition cost nothing
+   a future session pays for unasked.
+
 ## 7. Proposal for item 4's delivery mechanism, 2026-09-12
 
 **Proposes; decides nothing.** Item 4 changes the rules every future session runs on, so adoption

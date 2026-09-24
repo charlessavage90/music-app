@@ -128,7 +128,7 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
 > — this block only moves them earlier.** One thing that is *not* a worry, because a first draft of
 > this block got it wrong: **your hooks and settings are bound where the session was launched and
 > do not follow you across a `git worktree add`.** A session started in the main tree keeps writing
-> its `.claude/logs/` there and stays eligible for the `DLS-T1` count. Only a session *launched*
+> its `.claude/logs/` there (and stayed eligible for the `DLS-T1` count, read 2026-09-24). Only a session *launched*
 > with its working directory already inside a worktree would use that worktree's copy.
 >
 > *(Added 2026-09-12, from a live two-session case that hit both failures in one orientation.)*
@@ -194,7 +194,11 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
   **The OneDrive reason for this path has expired** — the tree moved to `C:\dev` on
   2026-07-27, so a sibling of the main tree is no longer synced and any location works. The
   path above is kept because it is what the commands say. Note that **gitignored files do not come
-  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`.
+  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`. And **a path-scoped rule under
+  `.claude/rules/` does not follow you either**: the rule's globs are relative to the tree it lives
+  in, so a plan or spec opened at a worktree path loads no rule at all, while the hooks bound at
+  launch keep firing (`DLS-T1` read, findings §6c, 2026-09-24; two sessions observed, both on
+  2.1.269).
 
   **"Needs the graph" is NOT a reason to keep a session out of a worktree, and this rule used
   to say it was.** The artifact is read once at boot and never written (`Path(path).read_bytes()`
