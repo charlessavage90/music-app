@@ -14,6 +14,10 @@ import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
 import { RouteHistory } from '@/components/RouteHistory';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
 import { journeyLength } from '@/lib/journeyLength';
+import { linkIntegrity } from '@/lib/exclusions';
+import { journeyTitle, useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { useFocusAfterReroll } from '@/hooks/useFocusAfterReroll';
+import { LinkDamageNotice } from '@/components/LinkDamageNotice';
 
 export function PathPage() {
   const { from, to } = useParams();
@@ -29,6 +33,16 @@ export function PathPage() {
 
   // Only needed while there is nothing on screen to name the endpoints.
   const endpoints = useEndpoints(from, to, state.artists.length > 0);
+
+  // Issues #191 / #188 / #187 — tab title naming both ends, focus to the
+  // heading once a rebuild lands, and a warning for a link cut in transit.
+  const heading = useRef<HTMLHeadingElement>(null);
+  useDocumentTitle(journeyTitle(
+    state.artists[0]?.name ?? endpoints.from?.name,
+    state.artists.at(-1)?.name ?? endpoints.to?.name,
+  ));
+  useFocusAfterReroll(feedback.notice, state.status, heading);
+  const damage = linkIntegrity(params);
 
   // Every control that leaves or rebuilds the path silences the audio on the press
   // itself. Leaving it to the rebuild meant a clip carried on over a darkened page
@@ -107,6 +121,8 @@ export function PathPage() {
         </div>
       </div>
 
+      {damage && <LinkDamageNotice damage={damage} />}
+
       {state.status === 'error' && state.error ? (
         <PathStatus
           error={state.error}
@@ -124,6 +140,7 @@ export function PathPage() {
               from={state.artists[0].name}
               to={state.artists.at(-1)!.name}
               stops={journeyLength(state.artists)}
+              headingRef={heading}
             />
           </div>
           <PathIntro stopRule={state.stopRule} />

@@ -5,6 +5,32 @@
     <link rel="icon" type="image/png" href="/unsung-mark.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unsung.fm</title>
+    <!--
+      Issue #191. Link previews (chat apps, social cards) come from crawlers
+      that do not run JavaScript, so they read ONLY these static tags — the
+      same preview for every link. The tab title naming both artists is set at
+      runtime (useDocumentTitle), which a crawler never sees. A preview naming
+      a journey's artists needs the page rendered at the edge per link; the
+      site is a static SPA on S3/CloudFront, and that is not attempted here.
+      Copy is the landing page's own hero text.
+    -->
+    <meta
+      name="description"
+      content="Hear what lives between two artists you love. Name two, and Unsung.fm builds a listenable path between them, with a 30-second clip at every step."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Unsung.fm" />
+    <meta property="og:title" content="Unsung.fm" />
+    <meta
+      property="og:description"
+      content="Hear what lives between two artists you love. Name two, and Unsung.fm builds a listenable path between them, with a 30-second clip at every step."
+    />
+    <meta property="og:url" content="https://unsung.fm/" />
+    <meta property="og:image" content="https://unsung.fm/unsung-mark.png" />
+    <meta property="og:image:width" content="1152" />
+    <meta property="og:image:height" content="1152" />
+    <meta property="og:image:alt" content="The Unsung.fm mark" />
+    <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <!--
