@@ -12,6 +12,10 @@ scripts:
     #!/usr/bin/env -S bash -eo pipefail
     export UV_LINK_MODE=copy
     cd "${ORCA_WORKTREE_PATH:-.}"
+    # Progress marker (gitignored), reported by .claude/hooks/repo-state.mjs so a session started
+    # mid-setup knows not to run tests or installs yet. The EXIT trap fires on success and on -e.
+    echo "running since $(date '+%Y-%m-%d %H:%M:%S')" > .orca-setup-state
+    trap 'rc=$?; if [ $rc -eq 0 ]; then echo done; else echo "failed (exit $rc)"; fi > .orca-setup-state' EXIT
     (cd builder && uv sync --extra dev)
     (cd api && uv sync --extra dev)
     (cd frontend && npm ci)

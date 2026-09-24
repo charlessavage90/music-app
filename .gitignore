@@ -8,6 +8,8 @@ dist/
 # Per-machine Claude Code permissions. Was ignored only by the owner's machine-wide git
 # ignore, so a clone anywhere else would have offered it for commit.
 .claude/settings.local.json
+# orca.yaml setup's progress marker, read by .claude/hooks/repo-state.mjs — one per worktree.
+.orca-setup-state
 # DLS-T1's InstructionsLoaded log — machine-local, one per tree.
 .claude/logs/
 __pycache__/
