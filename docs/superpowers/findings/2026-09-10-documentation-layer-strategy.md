@@ -452,12 +452,12 @@ of a plan or spec under that tree, made by the session itself and not a subagent
 | `c3875352` | 2.1.280 | 09-22 19:04:28 `LBA-` spec | 19:04:30 | 2 s |
 
 **5 of 5, no miss, four CLI versions.** Every later `Read` of a plan or spec in these sessions
-(14 more opens) produced no further row, which is load-once-per-session behaviour, not a miss. The
+(16 more opens) produced no further row, which is load-once-per-session behaviour, not a miss. The
 two consultant sessions are launched sessions with an agent flag, not subagents (`DLS-T1-X5`), and
 their opens are their own; **without them the count is 3 of 3**, which is exactly §6's sample.
 
 **Excluded from `C1`, with counts.**
-- **12 sessions whose main-session opens were Bash-only** (`DLS-T1-X1` applied): 126 Bash read-only
+- **12 sessions whose in-tree opens by the main session were Bash-only** (`DLS-T1-X1` applied): 126 Bash read-only
   opens of a plan or spec preceded any load across 14 sessions, and **none fired**. Not misses.
 - **2 sessions whose only `Read`-tool opens were of a worktree copy** — `e9f8ccc4` (main session,
   2.1.269, `worktrees/music-app-lbl`) and `c29e6dbd` (its `doc-auditor` subagent, 2.1.269,
