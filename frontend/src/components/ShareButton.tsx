@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { APP_TITLE } from '@/hooks/useDocumentTitle';
 
 /**
  * Share the journey (UXR-D9). The URL already IS the journey — endpoints and
@@ -20,7 +21,9 @@ export function ShareButton() {
       // A swiped-away share sheet rejects. That is a dismissal, not a failure,
       // so it returns rather than falling through to the clipboard and
       // claiming a copy the user never asked for.
-      try { await navigator.share({ title: 'Unsung.fm', url }); } catch { /* user dismissed */ }
+      // The page's own title, which names both artists on a journey (#191).
+      const title = document.title || APP_TITLE;
+      try { await navigator.share({ title, url }); } catch { /* user dismissed */ }
       return;
     }
     try {

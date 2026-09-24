@@ -79,7 +79,7 @@ test('resolveFreshUrl rejects when the lookup fails, rather than claiming there 
 // --- G3-F11: three causes, three states, and the transient two retry ---------
 
 test('a refusing catalogue (503) is busy, not "no clip"', async () => {
-  vi.spyOn(client, 'getTrack').mockRejectedValue(new client.ApiError(503, 60_000));
+  vi.spyOn(client, 'getTrack').mockRejectedValue(new client.ApiError(503, null, null, 60_000));
   render(<Harness mbid="busy-503" />);
   await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('busy:'));
 });
@@ -104,7 +104,7 @@ test('a transient failure retries by itself, honouring Retry-After', async () =>
   vi.useFakeTimers({ shouldAdvanceTime: true });
   try {
     const spy = vi.spyOn(client, 'getTrack')
-      .mockRejectedValueOnce(new client.ApiError(503, 20_000))
+      .mockRejectedValueOnce(new client.ApiError(503, null, null, 20_000))
       .mockResolvedValue({ previewUrl: 'u', title: 'Recovered', coverUrl: 'c', candidateCount: 1 });
     render(<Harness mbid="auto-retry" />);
     await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('busy:'));

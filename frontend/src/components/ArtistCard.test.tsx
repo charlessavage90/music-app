@@ -167,7 +167,7 @@ test('the artist name carries a stable test hook', async () => {
 // G3-F11: "No preview available" is only for an artist that has none.
 test('a busy catalogue says so, and offers a retry that asks again', async () => {
   const user = userEvent.setup();
-  const spy = vi.spyOn(client, 'getTrack').mockRejectedValueOnce(new client.ApiError(503, 60_000));
+  const spy = vi.spyOn(client, 'getTrack').mockRejectedValueOnce(new client.ApiError(503, null, null, 60_000));
   render(<ArtistCard artist={artist('card-busy')} index={1} total={3} isPlaying={false} onPlay={vi.fn()} onDetail={vi.fn()} />);
   expect(await screen.findByText(/preview service busy/i)).toBeInTheDocument();
   expect(screen.queryByText(/no preview available/i)).not.toBeInTheDocument();

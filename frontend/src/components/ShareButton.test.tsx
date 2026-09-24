@@ -14,6 +14,21 @@ test('uses the Web Share API when the browser has one', async () => {
   expect(share).toHaveBeenCalledWith({ title: 'Unsung.fm', url: window.location.href });
 });
 
+test('the share sheet carries the page title, which names the journey', async () => {
+  const user = userEvent.setup();
+  const share = vi.fn().mockResolvedValue(undefined);
+  vi.stubGlobal('navigator', { ...navigator, share });
+  const before = document.title;
+  document.title = 'Miles Davis → Daft Punk · Unsung.fm';
+  try {
+    render(<ShareButton />);
+    await user.click(screen.getByRole('button', { name: /share/i }));
+    expect(share).toHaveBeenCalledWith({ title: 'Miles Davis → Daft Punk · Unsung.fm', url: window.location.href });
+  } finally {
+    document.title = before;
+  }
+});
+
 test('falls back to the clipboard and says so for a moment', async () => {
   const user = userEvent.setup();
   const writeText = vi.fn().mockResolvedValue(undefined);

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type FocusEvent, type KeyboardEvent } from 'react';
 import { searchArtists } from '@/api/client';
 import type { Artist } from '@/api/types';
 
@@ -24,6 +24,8 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
   // identically as nothing. After the deploy the second is a real event.
   const [status, setStatus] = useState<'idle' | 'empty' | 'failed'>('idle');
   const inputId = useRef(`search-${Math.random().toString(36).slice(2)}`).current;
+  const root = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLInputElement>(null);
   // A prefilled name is already a choice, so it must not fire a search and
   // drop a dropdown over the page the moment you arrive.
   const selectedName = useRef<string | null>(initial?.name ?? null);
@@ -59,15 +61,51 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
     };
   }, [query]);
 
+  // Issue #190: an outside press closes the list. Blur alone is not enough:
+  // iOS Safari does not blur a field when you tap a non-focusable part of the
+  // page, so on a phone the list would stay over the "To" field.
+  useEffect(() => {
+    if (!open) return;
+    function onPointerDown(e: PointerEvent) {
+      if (!root.current?.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
+  }, [open]);
+
   function choose(artist: Artist) {
     selectedName.current = artist.name;
     onSelect(artist);
     setQuery(artist.name);
     setOpen(false);
+    // Chosen from the keyboard, focus is on the entry that is about to
+    // unmount, and would fall to <body>. Back to the field instead, which now
+    // holds the choice. (A click never moved focus off the field: see the list.)
+    if (document.activeElement !== input.current && root.current?.contains(document.activeElement)) {
+      input.current?.focus();
+    }
   }
 
+  // Focus leaving the whole widget closes the list — but not focus moving
+  // from the field INTO the list, which is how a keyboard reaches an entry.
+  function onBlur(e: FocusEvent<HTMLDivElement>) {
+    if (!root.current?.contains(e.relatedTarget as Node | null)) setOpen(false);
+  }
+
+  function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key !== 'Escape' || !open) return;
+    // Only swallow the key when it did something, so an Escape with nothing
+    // open still reaches anything above that listens for it.
+    e.preventDefault();
+    setOpen(false);
+    input.current?.focus();
+  }
+
+  const showList = open && results.length > 0;
+
   return (
-    <div className="relative">
+    // Focus and key events bubble to here from both the field and the list.
+    <div ref={root} className="relative" onBlur={onBlur} onKeyDown={onKeyDown}>
       {/* UI-3: the text stays "From"/"To" and is uppercased in CSS.
           getByLabelText is an exact match and four test files depend on it. */}
       <label
@@ -90,7 +128,10 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
         }`}
       />
       <input
+        ref={input}
         id={inputId}
+        aria-expanded={showList}
+        aria-controls={showList ? `${inputId}-list` : undefined}
         className="w-full h-[52px] sm:h-[54px] rounded-lg bg-[var(--color-field)] border-[1.5px] border-[var(--color-field-border)] pl-9 pr-4 sm:pl-[35px] sm:pr-[18px] text-[19px] sm:text-[20px] tracking-[-.01em] outline-none shadow-[0_1px_0_rgba(231,233,238,.045)_inset,0_6px_18px_-10px_rgba(0,0,0,.9)] transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-field-hover)] focus:border-[var(--color-accent)] focus:bg-[var(--color-field-hover)] focus:shadow-[0_0_0_4px_rgba(74,144,217,.13),0_1px_0_rgba(231,233,238,.045)_inset]"
         placeholder="Search an artist"
         value={query}
@@ -107,6 +148,14 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
             onSelect(null);
           }
         }}
+        // A list dismissed by leaving the field comes back when you return to
+        // it, rather than only when you type again. Only on arrival from
+        // OUTSIDE the widget: Escape inside the list hands focus back here, and
+        // reopening then would undo the Escape.
+        onFocus={(e) => {
+          if (root.current?.contains(e.relatedTarget as Node | null)) return;
+          if (results.length > 0 && query.trim() !== selectedName.current) setOpen(true);
+        }}
         autoComplete="off"
         // Artist names are proper nouns the keyboard does not know — "Sigur Rós",
         // "MF DOOM", "!!!" — and iOS rewrites and auto-capitalises them mid-typing,
@@ -117,7 +166,7 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
         spellCheck={false}
       />
       </div>
-      {open && results.length > 0 && (
+      {showList && (
         // z-20, NOT z-10, and the gap is the fix. This list hangs over the
         // NEXT field, whose coloured dot is also absolutely positioned. Both
         // boxes are plain flex siblings with no transform, filter or opacity
@@ -127,7 +176,15 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
         // in the document than this list, so it painted on top of the open
         // dropdown. The invariant is that an open dropdown outranks every
         // field decoration; matching the dot's z-10 is what broke it.
-        <ul className="absolute z-20 left-0 right-0 top-[calc(100%+8px)] rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-1.5 shadow-[0_24px_48px_-12px_rgba(0,0,0,.75),0_2px_6px_rgba(0,0,0,.4)]">
+        //
+        // onMouseDown keeps focus in the field while an entry is pressed.
+        // Safari does not focus a button on click, so without this the field's
+        // blur carries no relatedTarget, closes the list, and the click that
+        // would have chosen the artist lands on nothing.
+        <ul
+          id={`${inputId}-list`}
+          onMouseDown={(e) => e.preventDefault()}
+          className="absolute z-20 left-0 right-0 top-[calc(100%+8px)] rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-1.5 shadow-[0_24px_48px_-12px_rgba(0,0,0,.75),0_2px_6px_rgba(0,0,0,.4)]">
           {results.map((a) => (
             <li key={a.mbid}>
               <button
@@ -146,11 +203,20 @@ export function ArtistSearch({ label, end, initial, onSelect }: Props) {
           ))}
         </ul>
       )}
-      {status !== 'idle' && (
-        <p className="mt-2 text-sm text-[var(--color-muted)]">
-          {status === 'empty' ? 'No artists found.' : 'Search is unavailable — try again.'}
-        </p>
-      )}
+      {/* Issue #188: results and errors were never announced. The region is
+          always mounted — a live region inserted together with its text is
+          often not read — and only its contents change. */}
+      <div role="status" aria-live="polite">
+        {status !== 'idle' ? (
+          <p className="mt-2 text-sm text-[var(--color-muted)]">
+            {status === 'empty' ? 'No artists found.' : 'Search is unavailable — try again.'}
+          </p>
+        ) : showList ? (
+          <span className="sr-only">
+            {results.length} {results.length === 1 ? 'artist' : 'artists'} found
+          </span>
+        ) : null}
+      </div>
     </div>
   );
 }

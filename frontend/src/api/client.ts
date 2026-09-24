@@ -16,14 +16,39 @@ function withJourney(headers: Record<string, string> = {}): Record<string, strin
   return { ...headers, 'x-journey-id': JOURNEY_ID };
 }
 
+/**
+ * A structured limit the server enforced, recognised from its validation body.
+ * Only the one a person can reach by pressing buttons is named (issue #193).
+ */
+export interface ApiLimit {
+  kind: 'too_many_exclusions';
+  max: number;
+}
+
 export class ApiError extends Error {
   status: number;
+  /**
+   * The server's own words, when it sent any (issue #193). FastAPI puts them in
+   * `detail`: a string for the handler's readable errors ("pick two different
+   * artists…"), a list for schema failures, whose `msg`s are joined here.
+   * Null when the body was absent or unreadable — never a made-up message.
+   */
+  detail: string | null;
+  /** Set when the failure is a limit the UI can explain in its own words. */
+  limit: ApiLimit | null;
   /** From a `Retry-After` in seconds, when the server sent one it could read. */
   retryAfterMs?: number;
-  constructor(status: number, retryAfterMs?: number) {
-    super(`API error ${status}`);
+  constructor(
+    status: number,
+    detail: string | null = null,
+    limit: ApiLimit | null = null,
+    retryAfterMs?: number,
+  ) {
+    super(detail ? `API error ${status}: ${detail}` : `API error ${status}`);
     this.name = 'ApiError';
     this.status = status;
+    this.detail = detail;
+    this.limit = limit;
     this.retryAfterMs = retryAfterMs;
   }
 }
@@ -32,6 +57,47 @@ export class ApiError extends Error {
 function retryAfterMs(r: Response): number | undefined {
   const s = Number(r.headers?.get('retry-after'));
   return Number.isFinite(s) && s > 0 ? s * 1000 : undefined;
+}
+
+interface ValidationItem {
+  type?: unknown;
+  loc?: unknown;
+  msg?: unknown;
+  ctx?: { max_length?: unknown };
+}
+
+/**
+ * Build an ApiError from a failed response, keeping what the server said.
+ *
+ * Reading the body must never be able to fail the failure: a proxy's HTML
+ * error page or an empty 502 still yields an ApiError with its status, which
+ * is all the callers had before.
+ */
+async function apiError(r: Response): Promise<ApiError> {
+  const retry = retryAfterMs(r);
+  let body: unknown;
+  try {
+    body = await r.json();
+  } catch {
+    return new ApiError(r.status, null, null, retry);
+  }
+  const detail = (body as { detail?: unknown } | null)?.detail;
+  if (typeof detail === 'string') return new ApiError(r.status, detail, null, retry);
+  if (Array.isArray(detail)) {
+    const items = detail as ValidationItem[];
+    const msgs = items.map((d) => d?.msg).filter((m): m is string => typeof m === 'string');
+    // The bypass cap (models.py `exclude` max_length): pydantic's own wording is
+    // "List should have at most 200 items…", which is true and unusable, so the
+    // limit is lifted out for the UI to phrase — the number stays the server's.
+    const cap = items.find(
+      (d) => d?.type === 'too_long' && Array.isArray(d.loc) && d.loc.at(-1) === 'exclude',
+    );
+    const max = cap?.ctx?.max_length;
+    const limit: ApiLimit | null =
+      typeof max === 'number' ? { kind: 'too_many_exclusions', max } : null;
+    return new ApiError(r.status, msgs.length ? msgs.join('; ') : null, limit, retry);
+  }
+  return new ApiError(r.status, null, null, retry);
 }
 
 /**
@@ -127,7 +193,7 @@ export async function searchArtists(q: string, signal?: AbortSignal): Promise<Ar
   const r = await fetchWithTimeout(
     `${BASE}/artists/search?q=${encodeURIComponent(q)}`, {}, TIMEOUT_MS.search, signal,
   );
-  if (!r.ok) throw new ApiError(r.status);
+  if (!r.ok) throw await apiError(r);
   return ((await r.json()) as ArtistWire[]).map(artistFrom);
 }
 
@@ -146,7 +212,7 @@ export async function buildPath(
     TIMEOUT_MS.path,
     signal,
   );
-  if (!r.ok) throw new ApiError(r.status);
+  if (!r.ok) throw await apiError(r);
   const data = (await r.json()) as {
     artists: ArtistWire[];
     stop_rule: StopRule;
@@ -171,7 +237,7 @@ export async function getArtist(mbid: string, signal?: AbortSignal): Promise<Art
   const r = await fetchWithTimeout(
     `${BASE}/artists/${encodeURIComponent(mbid)}`, {}, TIMEOUT_MS.artist, signal,
   );
-  if (!r.ok) throw new ApiError(r.status);
+  if (!r.ok) throw await apiError(r);
   return artistFrom((await r.json()) as ArtistWire);
 }
 
@@ -192,7 +258,7 @@ export async function getTrack(
   // 204 is "this artist has no clip". A refusing catalogue is a 503 since
   // G3-F11 — transient, and never to be read or cached as a 204.
   if (r.status === 204) return null;
-  if (!r.ok) throw new ApiError(r.status, retryAfterMs(r));
+  if (!r.ok) throw await apiError(r);
   const d = (await r.json()) as {
     preview_url: string;
     title: string;
@@ -212,7 +278,7 @@ export async function getTrack(
 /** What the landing page may say about the map (UXR-D8). Decorative: callers must tolerate failure. */
 export async function getMeta(signal?: AbortSignal): Promise<{ artists: number; graphSha256: string }> {
   const r = await fetchWithTimeout(`${BASE}/meta`, {}, TIMEOUT_MS.meta, signal);
-  if (!r.ok) throw new ApiError(r.status);
+  if (!r.ok) throw await apiError(r);
   const d = (await r.json()) as { artists: number; graph_sha256: string };
   return { artists: d.artists, graphSha256: d.graph_sha256 };
 }
