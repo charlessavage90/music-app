@@ -194,6 +194,8 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
         currentName={currentName}
         trackTitle={currentTrackTitle}
         isPlaying={player.isPlaying}
+        failure={player.failure}
+        onRetry={player.retry}
         position={player.position}
         duration={player.duration}
         stopIndex={artists.findIndex((a) => a.mbid === player.currentMbid)}

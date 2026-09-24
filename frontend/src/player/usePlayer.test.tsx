@@ -33,8 +33,13 @@ function Harness({ resolve }: { resolve: (mbid: string) => Promise<string | null
   return (
     <div>
       <span data-testid="current">{p.currentMbid ?? 'none'}</span>
+      <span data-testid="failure">{p.failure ?? 'ok'}</span>
+      <span data-testid="playing">{String(p.isPlaying)}</span>
       <span data-testid="pos">{p.position}/{p.duration}</span>
       <button onClick={() => p.playFrom('miles')}>play</button>
+      <button onClick={p.retry}>retry</button>
+      <button onClick={p.toggle}>toggle</button>
+      <button onClick={p.stop}>stop</button>
     </div>
   );
 }
@@ -100,12 +105,76 @@ test('resolves a fresh URL for the next track on auto-advance too', async () => 
   expect(seen).toEqual(['miles', 'kraftwerk']);
 });
 
-test('does not play an artist whose clip cannot be resolved', async () => {
+// G3-F1: each of the three failure routes used to end in clear() — the bar
+// vanished and nothing said why. Each now leaves the artist current, a named
+// failure, and a retry.
+test('an artist whose clip resolves to nothing stays current with a no-clip failure', async () => {
   const user = userEvent.setup();
   render(<Harness resolve={async () => null} />);
   await user.click(screen.getByText('play'));
-  await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('none'));
+  await waitFor(() => expect(screen.getByTestId('failure')).toHaveTextContent('no-clip'));
+  expect(screen.getByTestId('current')).toHaveTextContent('miles');
+  expect(screen.getByTestId('playing')).toHaveTextContent('false');
   expect(played).toEqual([]);
+});
+
+test('a lookup that fails is an unreachable failure, and retry plays it', async () => {
+  const user = userEvent.setup();
+  let fail = true;
+  const resolve = async () => {
+    if (fail) throw new Error('offline');
+    return 'signed';
+  };
+  render(<Harness resolve={resolve} />);
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(screen.getByTestId('failure')).toHaveTextContent('unreachable'));
+  expect(screen.getByTestId('current')).toHaveTextContent('miles');
+
+  fail = false;
+  await user.click(screen.getByText('retry'));
+  await waitFor(() => expect(played).toEqual(['signed']));
+  expect(screen.getByTestId('failure')).toHaveTextContent('ok');
+  expect(screen.getByTestId('playing')).toHaveTextContent('true');
+});
+
+test('the play control on a failed clip retries it rather than doing nothing', async () => {
+  const user = userEvent.setup();
+  let fail = true;
+  const resolve = async () => {
+    if (fail) throw new Error('offline');
+    return 'signed';
+  };
+  render(<Harness resolve={resolve} />);
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(screen.getByTestId('failure')).toHaveTextContent('unreachable'));
+  fail = false;
+  await user.click(screen.getByText('toggle'));
+  await waitFor(() => expect(played).toEqual(['signed']));
+});
+
+test('a failure that lands after the user moved on is not reported', async () => {
+  const user = userEvent.setup();
+  let reject!: (e: Error) => void;
+  const resolve = (mbid: string) =>
+    mbid === 'miles'
+      ? new Promise<string | null>((_, r) => { reject = r; })
+      : Promise.resolve(`url-for-${mbid}`);
+  render(<Harness resolve={resolve} />);
+  await user.click(screen.getByText('play'));
+  await user.click(screen.getByText('stop'));
+  await act(async () => { reject(new Error('late')); });
+  expect(screen.getByTestId('failure')).toHaveTextContent('ok');
+  expect(screen.getByTestId('current')).toHaveTextContent('none');
+});
+
+test('stop clears a failure along with everything else', async () => {
+  const user = userEvent.setup();
+  render(<Harness resolve={async () => null} />);
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(screen.getByTestId('failure')).toHaveTextContent('no-clip'));
+  await user.click(screen.getByText('stop'));
+  expect(screen.getByTestId('failure')).toHaveTextContent('ok');
+  expect(screen.getByTestId('current')).toHaveTextContent('none');
 });
 
 test('retries once with a newly signed URL when the audio element errors', async () => {
@@ -136,8 +205,15 @@ test('gives up after one retry rather than looping on a permanently dead clip', 
   await waitFor(() => expect(played).toHaveLength(2));
 
   await act(async () => { errored.forEach((cb) => cb()); });
-  await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('none'));
+  // G3-F1: giving up is visible — still current, named, and retryable.
+  await waitFor(() => expect(screen.getByTestId('failure')).toHaveTextContent('wont-play'));
+  expect(screen.getByTestId('current')).toHaveTextContent('miles');
   expect(played).toHaveLength(2);
+
+  // A manual retry is a fresh start, so it gets its own one silent retry too.
+  await userEvent.setup().click(screen.getByText('retry'));
+  await waitFor(() => expect(played).toHaveLength(3));
+  expect(screen.getByTestId('failure')).toHaveTextContent('ok');
 });
 
 test('position and duration follow the audio element and reset when playback stops', async () => {

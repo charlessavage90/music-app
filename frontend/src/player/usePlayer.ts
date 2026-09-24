@@ -5,8 +5,22 @@ interface Playable {
   mbid: string;
 }
 
-/** Returns a URL that is signed *now*, or null if the artist has no clip. */
+/**
+ * Returns a URL that is signed *now*, or null if the artist has no clip.
+ * Rejects when the lookup itself failed — which is not the same thing (G3-F1).
+ */
 type ResolveUrl = (mbid: string) => Promise<string | null>;
+
+/**
+ * Why the current artist is not playing, when it should be (G3-F1). Each of
+ * these used to end in clear(): the bar vanished and nothing said why.
+ *
+ * - `no-clip`     — asked at the moment of play, the server had no clip.
+ * - `unreachable` — the lookup failed: offline, timed out, catalogue busy.
+ * - `wont-play`   — we had a URL, the audio element refused it, and the one
+ *                   silent retry with a fresh signature failed too.
+ */
+export type PlaybackFailure = 'no-clip' | 'unreachable' | 'wont-play';
 
 /**
  * Owns playback for a journey.
@@ -24,6 +38,7 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
   // Seconds, straight from the element's own clock (UXR-D10) — never estimated.
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [failure, setFailure] = useState<PlaybackFailure | null>(null);
 
   const listRef = useRef(playables);
   listRef.current = playables;
@@ -45,22 +60,44 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     setIsPlaying(false);
     setPosition(0);
     setDuration(0);
+    setFailure(null);
+  }
+
+  // The failure routes' replacement for clear(): this artist stays current, so
+  // the bar stays up and names who failed, and says why with a way to retry.
+  // Nothing is loaded, so a toggle cannot resume a dead source — it retries.
+  function fail(mbid: string, why: PlaybackFailure) {
+    player.pause(); // whatever was playing before this press must not play on under the message
+    currentRef.current = mbid;
+    loadedUrlRef.current = null;
+    setCurrentMbid(mbid);
+    setIsPlaying(false);
+    setPosition(0);
+    setDuration(0);
+    setFailure(why);
   }
 
   async function start(mbid: string, { isRetry = false } = {}) {
     const token = ++startTokenRef.current;
     if (!isRetry) retriedRef.current = false;
 
-    const url = await resolveRef.current(mbid);
+    let url: string | null;
+    try {
+      url = await resolveRef.current(mbid);
+    } catch {
+      if (token === startTokenRef.current) fail(mbid, 'unreachable');
+      return;
+    }
     if (token !== startTokenRef.current) return; // superseded by a later press
     if (!url) {
-      clear();
+      fail(mbid, 'no-clip');
       return;
     }
 
     currentRef.current = mbid;
     loadedUrlRef.current = url;
     setCurrentMbid(mbid);
+    setFailure(null);
     setIsPlaying(true);
     setPosition(0);
     player.play(url);
@@ -77,8 +114,12 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
 
     player.onError(() => {
       const mbid = currentRef.current;
-      if (!mbid || retriedRef.current) {
+      if (!mbid) {
         clear();
+        return;
+      }
+      if (retriedRef.current) {
+        fail(mbid, 'wont-play');
         return;
       }
       retriedRef.current = true;
@@ -105,7 +146,17 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     clear();
   }
 
+  /** Start the current artist again from a failure — a fresh start, with its own silent retry. */
+  function retry() {
+    const mbid = currentRef.current;
+    if (mbid) void start(mbid);
+  }
+
   function toggle() {
+    if (failure) {
+      retry();
+      return;
+    }
     if (isPlaying) {
       player.pause();
       setIsPlaying(false);
@@ -122,5 +173,5 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     }
   }
 
-  return { currentMbid, isPlaying, position, duration, playFrom, toggle, stop };
+  return { currentMbid, isPlaying, position, duration, failure, playFrom, toggle, retry, stop };
 }
