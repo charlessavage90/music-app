@@ -1,0 +1,47 @@
+name: Deferred finding
+description: A finding parked with a success condition (closeout A3).
+title: "[ID] "
+labels: ["deferred"]
+body:
+  - type: markdown
+    attributes:
+      value: "A deferral without a success condition is an unranked backlog. When the condition comes due and the work is a session's, add **agent-ready**. Conventions: docs/superpowers/ISSUES.md."
+  - type: textarea
+    id: what
+    attributes:
+      label: The finding
+      description: In plain language.
+    validations:
+      required: true
+  - type: textarea
+    id: condition
+    attributes:
+      label: Condition
+      description: When this becomes actionable — testable by a cold reader. "Accepted, won't fix" is not a condition; close as not planned instead.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Path or permalink to the document that owns this finding. Figures are cited there, never restated here.
+    validations:
+      required: true
+  - type: dropdown
+    id: whose
+    attributes:
+      label: Whose is it?
+      description: "owner-decision = a session prepares it, never makes it. owner-hands = needs him physically."
+      options:
+        - "A session's"
+        - "The owner's decision (label owner-decision)"
+        - "The owner's hands (label owner-hands)"
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: The observable end state. A PR saying "Closes #N" must be able to satisfy it.
+    validations:
+      required: true

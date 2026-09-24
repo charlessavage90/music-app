@@ -1,0 +1,40 @@
+name: Task
+description: Task-like work a session could pick up — a fix, a measurement, a doc repair.
+title: "[ID] "
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: "Research tasks (label research) need a committed pre-registration before any arm runs. Conventions: docs/superpowers/ISSUES.md."
+  - type: textarea
+    id: what
+    attributes:
+      label: What and why
+      description: In plain language.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Path or permalink to the document that owns this finding. Figures are cited there, never restated here.
+    validations:
+      required: true
+  - type: dropdown
+    id: whose
+    attributes:
+      label: Whose is it?
+      description: "owner-decision = a session prepares it, never makes it. owner-hands = needs him physically."
+      options:
+        - "A session's"
+        - "The owner's decision (label owner-decision)"
+        - "The owner's hands (label owner-hands)"
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: The observable end state. A PR saying "Closes #N" must be able to satisfy it.
+    validations:
+      required: true

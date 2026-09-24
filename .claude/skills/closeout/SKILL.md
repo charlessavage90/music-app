@@ -152,7 +152,8 @@ frozen, and it is never annotated again once it is there.
 **Distil before you demote, and that is the step whose absence caused the problem.** Read the
 outgoing block for anything that still binds — a "must not be reverted" claim, a decision now
 closed, a deferral with a live condition — and write it into `NEXT.md`'s own registries
-(*Closed*, *Must not be changed*, *Deferred, with conditions*). Do that and the block is safe
+(*Closed*, *Must not be changed*, *Accepted residuals*) — or, for a live deferral, **a GitHub
+issue** (A3). Do that and the block is safe
 to freeze. Skip it and the only way to preserve the constraint is to keep the whole block,
 which is exactly how `NEXT.md` reached **2,063 lines by 2026-09-05, 1,738 of them superseded
 status**, growing monotonically from 150 lines on 2026-07-30 — every one of those closeouts
@@ -176,6 +177,22 @@ For each open finding, confirm it has a **success condition**: "before Gate 2", 
 X is reworked", "accepted, won't fix". That last one is a legitimate terminal state
 that clears the item with no work.
 
+**Since 2026-09-24 a deferral is a GitHub issue, not a `NEXT.md` row.** Conventions,
+labels and the body shape are owned by `docs/superpowers/ISSUES.md`; the templates in
+`.github/ISSUE_TEMPLATE/` enforce them. The owner dispatches agent sessions from issues
+in Orca, so **write each one as the whole brief for a session that has nothing else**:
+*Condition*, *Whose*, *Done when*, and a *Source* path. File it at deferral time:
+
+```bash
+gh issue create --title "[ID] plain-language title" --label deferred --label area:<pkg> --body-file <brief.md>  # + owner-decision / owner-hands if it is his
+gh issue list --state open --label deferred --limit 100   # the A3 re-test starts here
+```
+
+**"Accepted, won't fix" is an issue closed as *not planned*** with the reason, unless it
+binds future work — a standing condition goes in `NEXT.md`'s *Must not be changed*.
+**A bug found in this work and not fixed in it is an issue too** (`bug`), never only a
+sentence in the handoff.
+
 This is cheap *because it happens at deferral time*, not here. The closeout check is
 two mechanical questions: does every open finding have a condition, and has any
 condition now come due?
@@ -194,7 +211,9 @@ answers the first question.
 
 When a condition has come due, **strike the deferral in place where it lives** — struck, not
 deleted, with the date and what satisfied it. Deleting it destroys the evidence that it was
-tracked and discharged rather than forgotten.
+tracked and discharged rather than forgotten. **For an issue, that is: close it with a comment
+naming what satisfied it** (or let the PR's `Closes #N` do it), and **add `agent-ready`** to one
+whose condition came due but whose work remains and is a session's. Never delete an issue.
 
 ### A4. The default-flip check
 
@@ -486,7 +505,7 @@ unusable anyway, because the owner cannot find the four live lines among four hu
 | [`NEXT.md`](../../../docs/superpowers/NEXT.md) | what to do next | **250 lines** |
 | [`docs/README.md`](../../../docs/README.md) | classify each document by role | **400 lines** |
 | [`TEST-QUEUE.md`](../../../docs/superpowers/TEST-QUEUE.md) | a checklist he can run down | **70 lines** |
-| a `NEXT.md` **deferral row** | one finding, one condition | **~600 chars** |
+| a `NEXT.md` **accepted-residual row** | one finding, one condition | **~600 chars** |
 
 **How far each had drifted when its budget was set is measured, not restated here** — the
 documentation-layer findings own those figures (`DLS-M3`, `DLS-M4`) and `TEST-QUEUE.md`'s own
@@ -564,6 +583,10 @@ minutes of use surfaced immediately.
 > to test this time". Silence already means nothing is queued, because that file contains only
 > things to do. **Not writing is the correct discharge of C1**, and it gets one line in the
 > closeout report saying so.
+
+**A press that finds a defect is filed as a `bug` issue** (`docs/superpowers/ISSUES.md`), and
+the checklist box is ticked with the issue number beside it. The queue stays a file; the defect
+does not live in it.
 >
 > **The "did my app move?" answer still gets written — in the closeout report to him and the
 > PR body, not in that file.** He reads both at the time. It is a fact about one session, not
@@ -701,7 +724,8 @@ The PR body is where a reviewer picks up the context, so it carries:
 - A link to the retained execution log
 - **Gate outcomes, including failures** — a failed gate that was worked around is the
   single most important thing a reviewer needs to know
-- Deferred findings with their success conditions (A3)
+- Deferred findings with their success conditions (A3) — **by issue number**, each new one
+  filed and each discharged one closed; `Closes #N` for every issue this work fixes
 - Checksums for any adopted artifact (D3)
 - **What is closed and should not be re-litigated** — decisions already taken with
   reasoning recorded. Without this, review reopens settled questions, which is expensive

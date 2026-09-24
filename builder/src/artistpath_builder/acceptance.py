@@ -282,8 +282,8 @@ PRODUCTION_ACCEPTANCE = AcceptanceCriteria(
     # SO: if the use gate FAILS, or the candidate is not adopted, RESTORE the
     # previous line before rebuilding either map. `tests/test_acceptance.py`
     # asserts this rejection explicitly rather than leaving it implicit, so a
-    # later session cannot rediscover it as a mystery. Tracked in NEXT.md's
-    # deferral registry.
+    # later session cannot rediscover it as a mystery. Tracked as GitHub
+    # issue #138 (formerly NEXT.md's deferral registry).
     #
     # PREVIOUS (MSW- restore 2026-09-05): node_count=(47_000, 71_000),
     #                               edge_count=(1_050_000, 1_580_000),

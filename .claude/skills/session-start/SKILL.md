@@ -89,7 +89,19 @@ still waste, and it is expensive to detect.
   owner reverses it.
 - **Read the deferred findings and their success conditions**, and check whether any
   condition has now come due. That check is the entire forcing function behind the
-  closeout deferral rule — without it, deferral is just an unranked backlog.
+  closeout deferral rule — without it, deferral is just an unranked backlog. **Since
+  2026-09-24 they are GitHub issues** (conventions: `docs/superpowers/ISSUES.md`):
+  ```bash
+  gh issue list --state open --label deferred --limit 100
+  gh issue list --state open --label agent-ready
+  ```
+  A condition that has come due gets `agent-ready` if it is a session's work
+  (`gh issue edit N --add-label agent-ready`), or is named to the owner if it is his
+  (`owner-decision` / `owner-hands`). **Re-test each condition against reality; a list of
+  titles is not the check.**
+- **If Orca dispatched this session from an issue, that issue is the scope** — read it in
+  full, including its *Whose* and *Done when*. An `owner-decision` issue is prepared for
+  him, never decided.
 
 ## C. What state is the repo in, and is anyone else in it?
 
@@ -362,7 +374,9 @@ collects them**:
 - `NEXT.md`'s **current top block** — older blocks are history, never act on them
 - the current handoff's **"Owed, and by whom"**
 - `TEST-QUEUE.md` — **every unticked `- [ ]` box is live**; it is a checklist, not dated entries
-- deferred findings whose **success condition has now come due**
+- deferred findings whose **success condition has now come due** — GitHub issues labelled
+  `deferred` since 2026-09-24 (`gh issue list --state open --label deferred`; the
+  `area:apparatus` ones are this track's)
 
 **Then verify one flag against source before acting on it.** A flag forwarded through several
 closeouts is a claim about the repo that nobody has re-checked, and the forwarding is exactly
