@@ -20,6 +20,12 @@ closeout after the gate, `lal_g5_pairs.py` in this directory folds those events 
 one per journey in the order requested, with the number of rerolls that followed it. A journey is a
 request with no exclusions; rerolls are the same pair. `api-part1.log` covers the gate's first hours,
 captured before the restart that pointed the server at that folder; nothing was lost between them.
+**One gap is known:** the servers were killed when the session that started them was retired in
+Orca, so **no telemetry exists between the last request in `api-part3.log` (about 10:14 on
+2026-09-24, a Guster journey) and the first in `api-part4.log` (started 10:55)**. Journeys the owner
+ran in that window, if any, are missing from the derived lines; he was asked for them by hand on
+2026-09-24 and any he supplies are appended below marked `(hand-recorded, gap)`. A restart must keep
+appending to this folder — `start-servers.ps1` there does.
 
 ## Pairs, one per line: `from → to  (rerolls: N)` — written at the closeout after the gate
 

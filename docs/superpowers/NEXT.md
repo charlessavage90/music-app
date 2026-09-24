@@ -94,9 +94,11 @@ got.**
    captured to `C:/unsung-fast/lbd-artifacts/lba-g5-logs/`, and commits it. The candidate is served **locally only** by two detached servers started from
    `C:\dev\music-app` (API on :8000, booted with the checksum read from the sidecar, **stdout appended to
    that log folder — a restart must do the same or pairs are lost**; Vite on :5173 with `--host` so the
-   phone can reach it). Nothing is deployed. If either is down, the restart commands are in
-   `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §8, and `/api/meta` must report the
-   candidate before any journey is judged.
+   phone can reach it). Nothing is deployed. If either is down, restart them **detached** with
+   `C:\unsung-fast\lbd-artifacts\lba-g5-logs\start-servers.ps1` — never from a session's shell, which
+   Orca kills on retirement (`builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §8 says why;
+   the pair log records the one telemetry gap that cost) — and `/api/meta` must report the candidate
+   before any journey is judged.
 3. **Then adoption, which is the owner's call.**
 ---
 
