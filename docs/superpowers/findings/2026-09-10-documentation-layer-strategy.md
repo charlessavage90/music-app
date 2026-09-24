@@ -541,6 +541,9 @@ a session first opened a plan or spec, the rule was present in 5 of 17.**
    Orca-launch question for free; removed, the tree loses one `.claude/rules/` file and one hook
    entry. **The owner's call**, because it is a standing-configuration choice and not this session's
    work; nothing else waits on it.
+   **Ruled 2026-09-24, same day: removed.** The owner's reason: the rule carried no guidance and
+   the hook's one remaining use is answerable by a fresh probe. Both live in git history at
+   `224f297` (#211).
 3. **The worktree hole** — done, not deferred: one sentence added to `session-start` §C's worktree
    block in the same PR as this read, so a session that takes a worktree knows it has left the rule
    behind. A skill body is conditional context, not the standing layer, so the addition cost nothing
