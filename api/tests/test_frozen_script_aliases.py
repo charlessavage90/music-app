@@ -1,9 +1,21 @@
 """The 2026-07-23 rename kept aliases so frozen probe scripts keep running.
 
 `builder/analysis/` holds deliberate records of what was executed: hardcoded
-paths, never updated, kept so a result can be re-derived. Sixteen of those
-scripts import the shipped classes and read these attributes by their
-pre-2026-07-23 names, and four import `hub_node_set` by name.
+paths, never updated, kept so a result can be re-derived. Many of those
+scripts import the shipped package, some of them read these attributes by
+their pre-2026-07-23 names, and a handful import `hub_node_set` by name.
+
+The counts are deliberately not written here as bare numbers: this docstring
+said "sixteen" long after the true figure had passed fifty (G3-Q8). Re-derive
+them from the repo root instead — a snapshot, as measured 2026-09-24:
+
+    # scripts importing the api by an actual import statement (187)
+    git grep -lE '^\\s*(from|import)\\s+artistpath_api' -- 'builder/analysis/*.py' | wc -l
+    # scripts importing hub_node_set by its old name (4)
+    git grep -lw hub_node_set -- 'builder/analysis/*.py' | wc -l
+
+Count import STATEMENTS, not mentions: a plain `grep -F artistpath_api` also
+matches comments and overcounts (189 on the same date).
 
 Nothing else covers them — they are not part of any suite and do not run in
 CI — so without this test a future rename breaks the project's audit trail

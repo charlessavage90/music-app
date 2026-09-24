@@ -37,16 +37,23 @@ class GraphStore:
     # so a card cannot play a different artist of the SAME NAME (`BYP-13`).
     # Empty for every artifact built before 2026-08-02 — including the one the
     # app serves — and for stores built in tests. Read it through
-    # `deezer_id_of`, never by indexing, since it may be shorter than N.
+    # `deezer_id_of`, never by indexing: a store built in a test may carry a
+    # short list. A LOADED artifact cannot — `from_bytes` refuses any present
+    # per-node key whose length is not N (G3-A6).
     deezer_ids: list[str] = field(default_factory=list)
     # LUX-4. Streaming ids and structured MusicBrainz facts, indexed by node
     # id. Additive keys, absent from every artifact built before 2026-09-06 —
     # including the one the app serves — so read them through the accessors
     # below, never by indexing.
     #
-    # DISPLAY-ONLY, and that is the whole reason they carry no length check
-    # while fame_lb does: nothing here is indexed inside the cost function, so
-    # a short list cannot misprice an artist. It can only fail to show a link.
+    # DISPLAY-ONLY: nothing here is indexed inside the cost function, so a
+    # short list cannot misprice an artist. They were exempt from the load-time
+    # length check for that reason until G3-A6, which removed the exemption —
+    # the bounds-checked accessor catches OUT OF RANGE but not a list that is
+    # misaligned, and a length disagreement is the only visible sign of the
+    # second (one artist's link on another's card). The writer projects every
+    # key onto node order, so a present key of the wrong length is a file that
+    # is not what the builder wrote.
     # Ids are platform id TAILS, not URLs (`L4-D2`) — the frontend composes.
     spotify_ids: list[str] = field(default_factory=list)
     apple_ids: list[str] = field(default_factory=list)
@@ -275,28 +282,8 @@ class GraphStore:
         take(e, "<u1", 1)  # edge_types — unused in alpha (all behavioural)
         meta = json.loads(payload[cursor : cursor + meta_len])
 
-        # The header's N and the metadata's length are two independent
-        # statements of the same fact. When they disagree the artifact loads
-        # clean and leaves pop_raw and degree_hub_penalty at different lengths,
-        # both indexed by node id in the cost function (TR-3).
-        if len(meta["mbids"]) != n:
-            raise ValueError(
-                f"artifact inconsistent: header says {n} nodes, "
-                f"metadata has {len(meta['mbids'])}"
-            )
-
-        # Same class of defect as the check above, for the same reason: this
-        # list is indexed by node id inside the Dijkstra loop, so a length
-        # disagreement is an out-of-bounds read or a silently mispriced artist
-        # rather than a clean failure. Empty is not a disagreement — the
-        # builder omits the key when it has nothing to say, and an empty list
-        # from an older writer means the same thing.
+        _check_consistency(n, e, offsets, neighbours, scores, meta)
         fame_lb = meta.get("fame_lb")
-        if fame_lb and len(fame_lb) != n:
-            raise ValueError(
-                f"artifact inconsistent: header says {n} nodes, but fame_lb "
-                f"has {len(fame_lb)} entries"
-            )
 
         return cls(
             mbids=meta["mbids"],
@@ -314,17 +301,105 @@ class GraphStore:
             # including the one the app serves. Absence means "resolve by
             # name", which is what the app did before this existed.
             deezer_ids=meta.get("deezer_ids", []),
-            # LUX-4. Same additive-key reasoning as deezer_ids, and the same
-            # exemption from fame_lb's length assertion below: these are
-            # display fields read through bounds-checked accessors, never
-            # indexed in the cost function.
+            # LUX-4. Same additive-key reasoning as deezer_ids. Length-checked
+            # at load like every per-node key (G3-A6), and still read through
+            # bounds-checked accessors because test-built stores can be short.
             spotify_ids=meta.get("spotify_ids", []),
             apple_ids=meta.get("apple_ids", []),
             artist_facts=meta.get("artist_facts", []),
-            # Same additive-key reasoning as deezer_ids. Length is checked
-            # because this one is INDEXED BY NODE ID in the cost function: a
-            # short list would price one artist as another, or read out of
-            # bounds mid-request. deezer_ids escapes that check only because it
-            # is read through a bounds-checked accessor.
+            # Same additive-key reasoning as deezer_ids. This one is INDEXED BY
+            # NODE ID in the cost function, so a short list would price one
+            # artist as another, or read out of bounds mid-request — which is
+            # why its length check predates G3-A6's.
             fame_lb_pctl=cls.fame_percentiles(fame_lb) if fame_lb else None,
         )
+
+
+# Every node-indexed metadata key, and whether the artifact must carry it.
+# Optional keys are ADDITIVE (FORMAT_VERSION is not bumped for them), so their
+# absence — or an empty list from an older writer — means "not recorded", never
+# a disagreement. Present and non-empty, they must be exactly N long: the
+# builder projects each one onto node order (artifact.py, step 4).
+_REQUIRED_NODE_KEYS = ("mbids", "names", "disambiguations", "popularity")
+_OPTIONAL_NODE_KEYS = ("deezer_ids", "fame_lb", "spotify_ids", "apple_ids", "artist_facts")
+
+
+def _inconsistent(detail: str) -> ValueError:
+    return ValueError(f"artifact inconsistent: {detail}")
+
+
+def _check_consistency(
+    n: int,
+    e: int,
+    offsets: np.ndarray,
+    neighbours: np.ndarray,
+    scores: np.ndarray,
+    meta: dict,
+) -> None:
+    """Refuse an artifact whose parts disagree with each other (TR-3, G3-A6).
+
+    Fail CLOSED, at boot. Each of these, left unchecked, loads clean and then
+    fails per request — a 500 on one artist, an IndexError mid-Dijkstra, or,
+    worst, a silently mispriced or mislabelled artist — which is a defect found
+    by a user rather than by the deploy. The review's own example was
+    `popularity` one entry short: it loaded, and 500'd for the last artist.
+
+    Vectorised over the CSR arrays so it stays cheap at boot (the adopted
+    artifact is ~1.3M edges); the metadata checks are length comparisons.
+    """
+    # --- per-node metadata ---------------------------------------------
+    # The header's N and each key's length are independent statements of the
+    # same fact. `mbids` first: its message is the one TR-3's test pins.
+    for key in _REQUIRED_NODE_KEYS:
+        if key not in meta:
+            raise _inconsistent(f"metadata has no {key!r} key")
+        values = meta[key]
+        if not isinstance(values, list):
+            raise _inconsistent(f"{key!r} is {type(values).__name__}, not a list")
+        if len(values) != n:
+            if key == "mbids":
+                raise _inconsistent(f"header says {n} nodes, metadata has {len(values)}")
+            raise _inconsistent(
+                f"header says {n} nodes, but {key} has {len(values)} entries"
+            )
+    for key in _OPTIONAL_NODE_KEYS:
+        values = meta.get(key)
+        if not values:
+            continue
+        if not isinstance(values, list):
+            raise _inconsistent(f"{key!r} is {type(values).__name__}, not a list")
+        if len(values) != n:
+            raise _inconsistent(
+                f"header says {n} nodes, but {key} has {len(values)} entries"
+            )
+
+    # `popularity` is indexed by node id in two cost terms and must be a 0-1
+    # value (it is log-scaled to that range at build). NaN fails both
+    # comparisons, so `~(...)` catches it too.
+    try:
+        pop = np.asarray(meta["popularity"], dtype=np.float64)
+    except (TypeError, ValueError) as exc:
+        raise _inconsistent(f"popularity is not numeric: {exc}") from None
+    if pop.ndim != 1 or np.any(~((pop >= 0.0) & (pop <= 1.0))):
+        raise _inconsistent("popularity has values outside 0-1 (or non-finite)")
+
+    # --- CSR ------------------------------------------------------------
+    # offsets[i]:offsets[i+1] is node i's slice of `neighbours`; anything but
+    # a monotone run from 0 to E reads another node's edges, or past the end.
+    if offsets[0] != 0:
+        raise _inconsistent("offsets do not start at 0")
+    if offsets[-1] != e:
+        raise _inconsistent(f"offsets end at {int(offsets[-1])}, header says {e} edges")
+    if np.any(np.diff(offsets) < 0):
+        raise _inconsistent("offsets are not monotone non-decreasing")
+    # A neighbour id outside [0, N) is an IndexError inside Dijkstra — or,
+    # if negative, a silent wrap-around to the END of every node array.
+    if e and (int(neighbours.min()) < 0 or int(neighbours.max()) >= n):
+        raise _inconsistent(
+            f"neighbour ids span [{int(neighbours.min())}, {int(neighbours.max())}], "
+            f"outside [0, {n})"
+        )
+    # Similarity enters the cost as (1 - score): outside 0-1 makes an edge
+    # cost negative, which Dijkstra silently gets wrong.
+    if e and np.any(~((scores >= 0.0) & (scores <= 1.0))):
+        raise _inconsistent("edge scores outside 0-1 (or non-finite)")

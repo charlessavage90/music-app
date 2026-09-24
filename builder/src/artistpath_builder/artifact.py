@@ -41,9 +41,11 @@ ADDING A NEW PIECE OF PER-ARTIST METADATA
        which fails until you make a per-mirror decision. That guard exists
        because steps 1-6 change what every ERA_PINNED_CALLER builds while
        leaving every test green -- which is how the first two slipped through.
-    8. Read it in the api (`graph_store.py`). A key read through a
-       BOUNDS-CHECKED accessor may be shorter than N; a key indexed directly
-       in the cost function must have its length checked. Copy the right one.
+    8. Read it in the api (`graph_store.py`), and add the key to
+       `_OPTIONAL_NODE_KEYS` there: since G3-A6 the api refuses to load an
+       artifact carrying any per-node key whose length is not N. Read a
+       display-only key through a BOUNDS-CHECKED accessor as well, because a
+       store built in code never passes through that load-time check.
     9. Expose it on `ArtistOut` (three wire positions) and render it.
 
   THE TWO COSTS, neither of which is avoidable:
