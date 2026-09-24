@@ -1,6 +1,6 @@
 # Archive — discharged entries from the use-the-app queue
 
-**Role: HISTORICAL. Do not cite, do not act on, and do not add to.** Retained so the record
+**Role: HISTORICAL. Do not cite, do not act on; added to only by `closeout` C1-demote, newest first.** Retained so the record
 can be audited, not because anything here is owed. Sibling of
 [`TEST-QUEUE-nil-entries.md`](TEST-QUEUE-nil-entries.md), which holds the entries that queued
 nothing; this one holds entries that were **queued, pressed and discharged**.
@@ -52,7 +52,7 @@ message belong to the `LBA-G5` gate, not to this queue, and are not recorded her
 
 *Everything below is deployed and exercisable. It merges the three entries queued 2026-09-04 and
 2026-09-08, which all went live before you read this and overlapped heavily. Full original notes,
-and the reason each check exists: [`archive/TEST-QUEUE-notes-2026-09.md`](archive/TEST-QUEUE-notes-2026-09.md).*
+and the reason each check exists: [`archive/TEST-QUEUE-notes-2026-09.md`](TEST-QUEUE-notes-2026-09.md).*
 
 **On your phone**
 
