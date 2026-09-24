@@ -47,7 +47,7 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-23, at the `LAL-` listen READ closeout.** **Nothing a listener sees has
+**Last updated: 2026-09-24, at the closeout that STARTED `LBA-G5`.** **Nothing a listener sees has
 changed**: the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched, and
 `TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
 
@@ -81,12 +81,22 @@ Branch `lal-listen-run`, PR **#135**.
 got.**
 
 1. **The owner:** merge #135. Read the results note's §0 beside the verdict: how much weight it
-   carries is his by `LBA-AM6-8`. Decide whether to keep the runner's worktree
-   (`C:/Users/charl/worktrees/music-app-lal-runner`). It holds the only copy of the sealed per-journey
-   metrics, which nothing further needs. The queued use-the-app tests and `LBD-AM3`'s `LBD-A4` question
-   are unchanged and block nothing.
+   carries is his by `LBA-AM6-8`. ~~Decide whether to keep the runner's worktree
+   (`C:/Users/charl/worktrees/music-app-lal-runner`).~~ *Moot 2026-09-24: the worktree was already
+   gone and its folder empty, so the sealed per-journey metrics no longer exist on disk anywhere; the
+   results note §1.5 is what remains of them, and nothing further needs more.* The queued use-the-app
+   tests and `LBD-AM3`'s `LBD-A4` question are unchanged and block nothing.
 2. **`LBA-G5`**: the owner's two days of use against his own criterion, **logging every artist pair he
-   uses** (`LBA-AM5`; the log file is named in `builder/analysis/2026-09-22-lba-a6-blind-listen/RUNNER-BRIEF.md`).
+   uses** (`LBA-AM5`). **STARTED 2026-09-24.** The pair log exists, header only, at
+   `builder/analysis/2026-09-22-lba-a6-blind-listen/lba_g5_pair_log.md` on branch
+   `charlessavage90/lal-blind-listen-next` (PR #136, an address). **He writes nothing in it** (his ruling
+   2026-09-24): the closeout after the gate derives it with `lal_g5_pairs.py` from the API's own telemetry,
+   captured to `C:/unsung-fast/lbd-artifacts/lba-g5-logs/`, and commits it. The candidate is served **locally only** by two detached servers started from
+   `C:\dev\music-app` (API on :8000, booted with the checksum read from the sidecar, **stdout appended to
+   that log folder — a restart must do the same or pairs are lost**; Vite on :5173 with `--host` so the
+   phone can reach it). Nothing is deployed. If either is down, the restart commands are in
+   `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §8, and `/api/meta` must report the
+   candidate before any journey is judged.
 3. **Then adoption, which is the owner's call.**
 ---
 
