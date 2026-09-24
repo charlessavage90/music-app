@@ -294,15 +294,28 @@ nothing in the bucket fails its health check and rolls back.
 
 **Set the artifact once, here, and reuse it through §5** — hardcoding a filename in these
 commands is how the wrong artifact gets uploaded beside the right deploy, and vice versa
-(`DEP-34`). `GRAPH` is the ADOPTED artifact's basename; today that is
-`graph-msw-tu50.bin` (`MSW-`, adopted 2026-08-06 and **live again since 2026-09-01** —
-`ApiConfig.graph_path` is the authority, and this line follows it).
+(`DEP-34`). `GRAPH` is the SERVED artifact's basename; today that is **`graph-lux4.bin`**
+(`LUX-4`, live since the 2026-09-08 deploy): the adopted `MSW-` graph, `graph-msw-tu50.bin`,
+plus three additive metadata keys. **Read it off the running service, not off this line or
+`ApiConfig.graph_path`**, which names the key-less `graph-msw-tu50.bin` for local dev:
+
+```bash
+ARN=$(aws apprunner list-services \
+  --query "ServiceSummaryList[?ServiceName=='artistpath-api'].ServiceArn" --output text)
+aws apprunner describe-service --service-arn "$ARN" --query \
+  "Service.SourceConfiguration.ImageRepository.ImageConfiguration.RuntimeEnvironmentVariables.ARTISTPATH_GRAPH"
+```
+
+*(Corrected 2026-09-24. This line named `graph-msw-tu50.bin` for sixteen days after `LUX-4`
+shipped, and following it as written would have been `DEP-34` exactly: a code-only deploy
+stripping the three keys. Caught by comparing `/health` against both sidecars before `cdk diff`.)*
 
 > ⚠ **`graph-cxa-adopted.bin` held this slot from 2026-08-10 to 2026-09-01 and was
 > REVERTED**, on the owner's pre-set criterion, after three weeks of use. It is still in the
 > bucket and must not be redeployed as "the newer one" — it is the one that was rejected.
 > Why it lost: `builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`.
 
+> **Historical — `LUX-4` has shipped (2026-09-08); kept for the reasoning.**
 > ⚠ **`LUX-4` CHANGES THE ARTIFACT, so this is not an API-only deploy.** `graph-lux4.bin`
 > is `graph-msw-tu50.bin` plus exactly three additive metadata keys — the same graph, the
 > same population, the same routing, proven twice at `L4-T7` (subtracting the three keys
@@ -319,7 +332,7 @@ commands is how the wrong artifact gets uploaded beside the right deploy, and vi
 > serving the new keys is only half of it.
 
 ```bash
-GRAPH=graph-msw-tu50.bin          # the ADOPTED artifact — never the app.py default
+GRAPH=graph-lux4.bin              # the SERVED artifact (read it off the service, above) — never the app.py default
 export ARTISTPATH_DEPLOY_GRAPH_KEY=$GRAPH
 export ARTISTPATH_DEPLOY_SIDECAR=../builder/scratch/$GRAPH.json
 
@@ -357,6 +370,8 @@ python -c "import json;print(json.load(open('builder/scratch/$GRAPH.json'))['byt
 > **There is no migration and must not be one** — this is expected and spec-sanctioned, not a
 > defect (detail: `2026-09-04-lux-1-3-execution-log.md` §3).
 
+> *Cleared 2026-09-24: the running image is now `759e80c`, built from HEAD. The rule below
+> still stands for any future re-tag.*
 > ⚠ **Do not deploy under a stale image tag.** The running image predates the `CXR-` revert,
 > so its baked-in `ApiConfig.graph_path` default still names the **REJECTED** artifact.
 > Nothing is served wrong today — production passes the graph and its checksum per deploy, and

@@ -31,8 +31,8 @@ written the wrong thing:
 
 ## QUEUED 2026-09-24 — the six UI fixes from your pass (PR #212)
 
-**Where:** on unsung.fm, after the next deploy. *(Changed 2026-09-24: the local servers stay on the
-`LBA-G5` candidate, on your instruction, and are not being pulled.)*
+**Where:** on unsung.fm — **deployed 2026-09-24 (`759e80c`), pressable now.** Not on the local
+servers, which stay on the `LBA-G5` candidate.
 
 - [ ] 1. **Desktop, landing page.** The "Build the path" button no longer shimmers. The example card
   says "A path, seven stops", and its coloured line runs through the centre of every dot, cyan dot
@@ -52,7 +52,7 @@ written the wrong thing:
 
 ## QUEUED 2026-09-24 — the issues sweep (PRs #216–#219)
 
-**Where:** on unsung.fm, after the same deploy.
+**Where:** on unsung.fm — the same 2026-09-24 deploy, pressable now.
 
 - [ ] 8. **Desktop, clip playing.** Drag the volume slider in the bottom bar: loudness changes, the clip
   does not restart. Play another card: same level. **Phone:** no slider.

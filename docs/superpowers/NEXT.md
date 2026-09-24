@@ -47,9 +47,10 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
 > assume it has been deployed.
 
-**Last updated: 2026-09-24, at the closeout that STARTED `LBA-G5`.** **Nothing a listener sees has
-changed**: the live site is as the 2026-09-08 deploy left it, `ApiConfig.graph_path` is untouched, and
-`TEST-QUEUE.md`'s unticked boxes are still his to press, untouched here.
+**Last updated: 2026-09-24, at the closeout that STARTED `LBA-G5`.** **The live site's CODE changed
+2026-09-24** (image and frontend `759e80c`, PRs #212 and #216–#219; the served graph is unchanged,
+`graph-lux4.bin`), `ApiConfig.graph_path` is untouched, and `TEST-QUEUE.md`'s unticked boxes are now
+pressable on unsung.fm.
 
 # THE BLIND LISTEN HAS RUN AND BEEN READ. THE NEXT ACTION IS `LBA-G5`, THE OWNER'S.
 
