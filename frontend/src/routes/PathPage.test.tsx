@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes, useSearchParams } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 import { afterEach, expect, test, vi } from 'vitest';
 import * as client from '@/api/client';
 import { PathPage } from './PathPage';
@@ -155,6 +155,39 @@ test('pressing a bypass stops the audio at once, not when the new path arrives',
   await renderPlaying(user, '/path/m/d');
 
   await pressBypass(user);
+
+  await waitFor(() => expect(screen.queryByRole('img', { name: /now playing/i })).not.toBeInTheDocument());
+});
+
+// G3-F10: Back is the documented undo for a bypass, and it is not routed
+// through any button — so it used to leave the clip playing over the rebuild.
+test('the browser Back button stops the audio at once, not when the old path returns', async () => {
+  const user = userEvent.setup();
+  vi.spyOn(client, 'getTrack').mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
+  vi.spyOn(client, 'buildPath')
+    .mockResolvedValueOnce({ artists: AUDIBLE_THREE_STOP, stopRule: 'natural', bypassed: [], unresolved: [] })
+    // What Back returns to never arrives, so only a stop on the navigation itself passes.
+    .mockReturnValueOnce(new Promise(() => {}));
+
+  function Back() {
+    const navigate = useNavigate();
+    return <button onClick={() => navigate(-1)}>browser back</button>;
+  }
+  render(
+    <MemoryRouter initialEntries={['/path/m/d', '/path/m/d?known=z']} initialIndex={1}>
+      <Back />
+      <Routes>
+        <Route path="/path/:from/:to" element={<PathPage />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+  await screen.findByText('Pharoah Sanders');
+  const play = (await screen.findAllByRole('button', { name: /play/i }))[0];
+  await waitFor(() => expect(play).toBeEnabled());
+  await user.click(play);
+  await waitFor(() => expect(screen.getByRole('img', { name: /now playing/i })).toBeInTheDocument());
+
+  await user.click(screen.getByText('browser back'));
 
   await waitFor(() => expect(screen.queryByRole('img', { name: /now playing/i })).not.toBeInTheDocument());
 });

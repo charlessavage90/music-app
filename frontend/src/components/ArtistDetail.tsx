@@ -1,5 +1,6 @@
-import { useClip } from '@/hooks/useClip';
+import { isTransient, silentLabel, useClip } from '@/hooks/useClip';
 import { ArtistInfo } from './ArtistInfo';
+import { ClipRetry } from './ClipRetry';
 import { PlayButton } from './PlayButton';
 import { StreamingLinks } from './StreamingLinks';
 import type { Artist } from '@/api/types';
@@ -75,15 +76,21 @@ export function ArtistDetail({
             <PlayButton
               state={isPlaying ? 'pause' : 'play'}
               size="card"
+              name={artist.name}
               disabled={!playable}
               // As on the card: the surface that owns the audio toggles it,
               // because onPlay would re-seek to zero.
               onClick={() => (isCurrent ? onToggle() : onPlay(artist.mbid))}
             />
             <span className="min-w-0 truncate text-[13.5px] text-[var(--color-muted)]">
-              {clip.status === 'loading' ? '…' : clip.track?.title ?? 'No preview available'}
+              {clip.status === 'loading' ? '…' : clip.track?.title ?? silentLabel(clip.status)}
               {playable && <span className="text-[var(--color-label)]"> · 0:30</span>}
             </span>
+            {isTransient(clip.status) && (
+              <span className="text-[13.5px]">
+                <ClipRetry name={artist.name} onRetry={clip.retry} />
+              </span>
+            )}
           </div>
           {/* LUX-3. One 30-second clip decides whether an unknown artist is
               worth anything to you; if it is unrepresentative the artist is

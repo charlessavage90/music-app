@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { expect, test, vi } from 'vitest';
 import { PlayerBar } from './PlayerBar';
 
-const base = { currentName: 'Herbie Hancock', trackTitle: 'Watermelon Man', isPlaying: true, onToggle: vi.fn() };
+const base = { currentName: 'Herbie Hancock', trackTitle: 'Watermelon Man', isPlaying: true, onToggle: vi.fn(), onRetry: vi.fn(), volume: 1, onVolume: vi.fn() };
 
 test('shows elapsed and total time and the stop position in the whole-journey currency', () => {
   // UXR-D10: N of M counts EVERY artist including both endpoints; index is 0-based in.
@@ -11,6 +12,40 @@ test('shows elapsed and total time and the stop position in the whole-journey cu
   expect(screen.getByText('0:30')).toBeInTheDocument();
   expect(screen.getByText('Stop 2 of 6')).toBeInTheDocument();
   expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '37');
+});
+
+test('the bar play button names what is playing', () => {
+  render(<PlayerBar {...base} position={0} duration={30} stopIndex={1} stopCount={6} />);
+  expect(screen.getByRole('button', { name: 'Pause Herbie Hancock' })).toBeInTheDocument();
+});
+
+// G3-F1: a failed clip keeps the bar, says why, and offers a way back.
+test.each([
+  ['no-clip', /no preview for this artist right now/i],
+  ['unreachable', /couldn.t reach the preview service/i],
+  ['wont-play', /this clip wouldn.t play/i],
+] as const)('a %s failure is stated with a retry', async (failure, message) => {
+  const onRetry = vi.fn();
+  render(
+    <PlayerBar {...base} isPlaying={false} position={0} duration={0} stopIndex={1} stopCount={6}
+      failure={failure} onRetry={onRetry} />,
+  );
+  expect(screen.getByRole('status')).toHaveTextContent(message);
+  expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+  await userEvent.setup().click(screen.getByRole('button', { name: 'Retry Herbie Hancock' }));
+  expect(onRetry).toHaveBeenCalledTimes(1);
+});
+
+// Issue #207. A native range input: keyboard-operable (arrows, Home/End, Page
+// keys) by the browser itself, with an accessible name and a spoken value.
+test('the volume slider shows the level and reports a change', () => {
+  const onVolume = vi.fn();
+  render(<PlayerBar {...base} position={0} duration={30} stopIndex={1} stopCount={6} volume={0.6} onVolume={onVolume} />);
+  const slider = screen.getByRole('slider', { name: 'Volume' });
+  expect(slider).toHaveValue('0.6');
+  expect(slider).toHaveAttribute('aria-valuetext', '60%');
+  fireEvent.change(slider, { target: { value: '0.25' } });
+  expect(onVolume).toHaveBeenCalledWith(0.25);
 });
 
 test('renders nothing with no current artist', () => {
