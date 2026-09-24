@@ -6,6 +6,11 @@ export interface Player {
   onError(cb: () => void): void;
   /** Position and duration in seconds, on every `timeupdate`. Duration is 0 until metadata loads. */
   onTimeUpdate(cb: (position: number, duration: number) => void): void;
+  /**
+   * The element's own play/pause state, on its `play` and `pause` events —
+   * including the pauses nobody in the app asked for (G3-F8).
+   */
+  onPlayingChange(cb: (playing: boolean) => void): void;
   dispose(): void;
 }
 
@@ -27,6 +32,8 @@ export class HtmlAudioPlayer implements Player {
   private endedCb?: () => void;
   private errorCb?: () => void;
   private timeCb?: () => void;
+  private playCb?: () => void;
+  private pauseCb?: () => void;
   private disposed = false;
 
   play(url: string): void {
@@ -88,6 +95,18 @@ export class HtmlAudioPlayer implements Player {
     this.audio.addEventListener('timeupdate', this.timeCb);
   }
 
+  // Same replace-never-accumulate rule, and the same detach in dispose(): its
+  // own pause() and src='' must not reach a handler after the page has gone.
+  onPlayingChange(cb: (playing: boolean) => void): void {
+    if (this.playCb) this.audio.removeEventListener('play', this.playCb);
+    if (this.pauseCb) this.audio.removeEventListener('pause', this.pauseCb);
+    this.disposed = false;
+    this.playCb = () => cb(true);
+    this.pauseCb = () => cb(false);
+    this.audio.addEventListener('play', this.playCb);
+    this.audio.addEventListener('pause', this.pauseCb);
+  }
+
   dispose(): void {
     this.disposed = true;
     // Detach before clearing the source: assigning '' resolves against the document
@@ -95,9 +114,13 @@ export class HtmlAudioPlayer implements Player {
     if (this.endedCb) this.audio.removeEventListener('ended', this.endedCb);
     if (this.errorCb) this.audio.removeEventListener('error', this.errorCb);
     if (this.timeCb) this.audio.removeEventListener('timeupdate', this.timeCb);
+    if (this.playCb) this.audio.removeEventListener('play', this.playCb);
+    if (this.pauseCb) this.audio.removeEventListener('pause', this.pauseCb);
     this.endedCb = undefined;
     this.errorCb = undefined;
     this.timeCb = undefined;
+    this.playCb = undefined;
+    this.pauseCb = undefined;
     this.audio.pause();
     this.audio.src = '';
   }

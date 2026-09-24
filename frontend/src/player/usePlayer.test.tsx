@@ -8,6 +8,7 @@ const played: string[] = [];
 const ended: Array<() => void> = [];
 const errored: Array<() => void> = [];
 const timed: Array<(p: number, d: number) => void> = [];
+const playState: Array<(playing: boolean) => void> = [];
 
 vi.mock('./Player', () => ({
   HtmlAudioPlayer: class {
@@ -17,6 +18,7 @@ vi.mock('./Player', () => ({
     onEnded(cb: () => void) { ended.push(cb); }
     onError(cb: () => void) { errored.push(cb); }
     onTimeUpdate(cb: (p: number, d: number) => void) { timed.push(cb); }
+    onPlayingChange(cb: (playing: boolean) => void) { playState.push(cb); }
   },
 }));
 
@@ -25,6 +27,7 @@ beforeEach(() => {
   ended.length = 0;
   errored.length = 0;
   timed.length = 0;
+  playState.length = 0;
 });
 
 function Harness({ resolve }: { resolve: (mbid: string) => Promise<string | null> }) {
@@ -214,6 +217,32 @@ test('gives up after one retry rather than looping on a permanently dead clip', 
   await userEvent.setup().click(screen.getByText('retry'));
   await waitFor(() => expect(played).toHaveLength(3));
   expect(screen.getByTestId('failure')).toHaveTextContent('ok');
+});
+
+// G3-F8: an interruption the app did not ask for — a phone call, a Bluetooth
+// pause — used to leave the UI saying "playing" over silence.
+test('a pause the app did not ask for shows as paused, and a resume as playing', async () => {
+  const user = userEvent.setup();
+  render(<Harness resolve={async (mbid) => `url-for-${mbid}`} />);
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(screen.getByTestId('playing')).toHaveTextContent('true'));
+
+  act(() => playState.at(-1)?.(false));
+  expect(screen.getByTestId('playing')).toHaveTextContent('false');
+  expect(screen.getByTestId('current')).toHaveTextContent('miles'); // paused, not gone
+
+  act(() => playState.at(-1)?.(true));
+  expect(screen.getByTestId('playing')).toHaveTextContent('true');
+});
+
+test('after an external pause, the toggle resumes rather than pausing again', async () => {
+  const user = userEvent.setup();
+  render(<Harness resolve={async (mbid) => `url-for-${mbid}`} />);
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(played).toEqual(['url-for-miles']));
+  act(() => playState.at(-1)?.(false));
+  await user.click(screen.getByText('toggle'));
+  expect(played).toEqual(['url-for-miles', 'url-for-miles']);
 });
 
 test('position and duration follow the audio element and reset when playback stops', async () => {

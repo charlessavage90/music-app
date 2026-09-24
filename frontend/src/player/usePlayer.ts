@@ -131,6 +131,12 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
       setDuration(d);
     });
 
+    // G3-F8: the element has the last word on whether it is playing. The app
+    // still sets isPlaying on its own presses, so the button answers at once,
+    // but anything that pauses or resumes the element without asking — a phone
+    // call, a Bluetooth headset, the OS media keys — now shows as it is.
+    player.onPlayingChange(setIsPlaying);
+
     return () => player.dispose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [player]);
@@ -152,14 +158,14 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     if (mbid) void start(mbid);
   }
 
-  function toggle() {
+  function pause() {
+    player.pause();
+    setIsPlaying(false);
+  }
+
+  function resume() {
     if (failure) {
       retry();
-      return;
-    }
-    if (isPlaying) {
-      player.pause();
-      setIsPlaying(false);
       return;
     }
     // Resume the source already loaded rather than re-resolving: a new URL would
@@ -173,5 +179,13 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     }
   }
 
-  return { currentMbid, isPlaying, position, duration, failure, playFrom, toggle, retry, stop };
+  function toggle() {
+    if (isPlaying) pause();
+    else resume();
+  }
+
+  return {
+    currentMbid, isPlaying, position, duration, failure,
+    playFrom, toggle, pause, resume, retry, stop,
+  };
 }

@@ -160,6 +160,41 @@ test('timeupdate reports position and duration in seconds', () => {
   expect(cb).toHaveBeenCalledWith(11.2, 30);
 });
 
+// G3-F8: the UI must follow the element, not the app's own bookkeeping — an
+// incoming call, a Bluetooth pause or the OS media keys pause the element
+// without the app having asked.
+test('play and pause events report the element state', () => {
+  const player = new HtmlAudioPlayer();
+  const cb = vi.fn();
+  player.onPlayingChange(cb);
+  const el = audioOf(player);
+  el.dispatchEvent(new Event('play'));
+  el.dispatchEvent(new Event('pause'));
+  expect(cb.mock.calls).toEqual([[true], [false]]);
+});
+
+test('a second playing-change handler replaces the first, like the others', () => {
+  const player = new HtmlAudioPlayer();
+  const first = vi.fn();
+  const second = vi.fn();
+  player.onPlayingChange(first);
+  player.onPlayingChange(second);
+  audioOf(player).dispatchEvent(new Event('pause'));
+  expect(first).not.toHaveBeenCalled();
+  expect(second).toHaveBeenCalledWith(false);
+});
+
+test('a disposed player reports no play-state changes, including its own final pause', () => {
+  const player = new HtmlAudioPlayer();
+  const cb = vi.fn();
+  player.onPlayingChange(cb);
+  const el = audioOf(player);
+  player.dispose();
+  el.dispatchEvent(new Event('pause'));
+  el.dispatchEvent(new Event('play'));
+  expect(cb).not.toHaveBeenCalled();
+});
+
 test('a second timeupdate handler replaces the first, like the other two', () => {
   const player = new HtmlAudioPlayer();
   const first = vi.fn();
