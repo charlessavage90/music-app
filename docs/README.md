@@ -569,7 +569,8 @@ that is how the drift began.
   completeness for pre-registrations. It reports and never edits, and it may never propose
   renaming an identifier in a committed document. Dispatched by `closeout` B1.
 - **`.claude/hooks/` and `.claude/rules/`** — project hooks, wired in `.claude/settings.json`:
-  a repo-state report at session start (branch, uncommitted paths, other worktrees), a
+  a repo-state report at session start (branch, uncommitted paths, other worktrees, and an
+  Orca setup still running or failed — from the `.orca-setup-state` marker `orca.yaml` writes), a
   once-per-session context-size note, and the `DLS-T1` instruction-load logger; plus the
   `DLS-T1` probe rule. The owner's rulings behind them are
   `superpowers/findings/2026-09-10-documentation-layer-strategy.md` §5a. A git-safety hook

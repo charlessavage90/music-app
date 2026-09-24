@@ -51,6 +51,14 @@ try {
     (dirty.length ? `: ${dirty.slice(0, MAX_PATHS).map((l) => l.slice(3)).join(', ')}` +
       (dirty.length > MAX_PATHS ? `, +${dirty.length - MAX_PATHS} more` : '') : ''));
   out.push(`- Other worktrees: ${others.length ? others.join('; ') : 'none'}`);
+  // orca.yaml's setup script writes this marker. Absent (the primary checkout, or a worktree
+  // made before the marker existed) or "done" says nothing.
+  let setup = '';
+  try { setup = readFileSync(resolve(top, '.orca-setup-state'), 'utf8').trim(); } catch { /* absent */ }
+  if (setup && setup !== 'done') {
+    out.push(`- Orca worktree setup (uv sync, npm ci): ${setup}. Until .orca-setup-state reads "done", ` +
+      `test, build and install results are not evidence, and never run an install yourself.`);
+  }
   if (dirty.length) {
     out.push(`- Uncommitted work present at start was not made by this session: leave it, and commit only named paths.`);
   }
