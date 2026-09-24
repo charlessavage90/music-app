@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-// Orca archive hook (orca.yaml scripts.archive): before Orca deletes a session worktree, prefix the
-// title of every Claude Code session run in it with `[retired-pr-<n>-]`, so retired sessions are
-// recognisable in `claude --resume` and Orca's session history after the worktree is gone.
+// Orca archive hook (orca.yaml scripts.archive): before Orca deletes a session worktree, rename every
+// Claude Code session run in it to `[retired-pr-<n>-]<branch>`, so retired sessions are recognisable
+// in `claude --resume` and Orca's session history after the worktree is gone. The branch, not the
+// session's own title: an auto title describes the latest request ("Merge PR"), not the work.
+// <branch> drops Orca's `<owner>/` prefix; with no branch (detached HEAD) the current title is kept.
 //
 // It does what `/rename` does: appends a `custom-title` record to the session transcript under
 // <claude config dir>/projects/<slug of the worktree path>/. That record format is Claude Code's
@@ -42,19 +44,20 @@ function run(cmd, args, cwd) {
   }).trim()
 }
 
-function prNumber(worktree) {
+function branchAndPr(worktree) {
+  let branch = ''
   try {
-    const branch = run('git', ['branch', '--show-current'], worktree)
-    if (!branch) return 'none'
+    branch = run('git', ['branch', '--show-current'], worktree)
+    if (!branch) return { branch, pr: 'none' }
     const out = run(
       'gh',
       ['pr', 'list', '--head', branch, '--state', 'all', '--limit', '1', '--json', 'number', '--jq', '.[0].number // ""'],
       worktree,
     )
-    return out || 'none'
+    return { branch, pr: out || 'none' }
   } catch (err) {
-    log(`could not look up the PR (${err.message.split('\n')[0]}); using "none"`)
-    return 'none'
+    log(`could not look up the branch or PR (${err.message.split('\n')[0]}); using PR "none"`)
+    return { branch, pr: 'none' }
   }
 }
 
@@ -89,25 +92,26 @@ function main() {
     return
   }
 
-  const pr = prNumber(worktree)
+  const { branch, pr } = branchAndPr(worktree)
+  const name = branch.split('/').pop()
   const files = readdirSync(projectDir).filter((f) => f.endsWith('.jsonl'))
   for (const file of files) {
     const path = join(projectDir, file)
     const content = readFileSync(path, 'utf8')
     const { title, sessionId = file.replace(/\.jsonl$/, '') } = currentTitle(content.split('\n'))
-    if (!title) {
-      log(`${file}: no title yet, skipped`)
+    if (!name && !title) {
+      log(`${file}: no branch and no title, skipped`)
       continue
     }
-    if (title.startsWith(PREFIX_MARK)) {
+    if (title?.startsWith(PREFIX_MARK)) {
       log(`${file}: already retired ("${title}"), skipped`)
       continue
     }
-    const renamed = `[retired-pr-${pr}-]${title}`
+    const renamed = `[retired-pr-${pr}-]${name || title}`
     const record = JSON.stringify({ type: 'custom-title', customTitle: renamed, sessionId })
     const sep = content === '' || content.endsWith('\n') ? '' : '\n'
     if (!dryRun) appendFileSync(path, `${sep}${record}\n`)
-    log(`${file}: "${title}" -> "${renamed}"${dryRun ? ' (dry run)' : ''}`)
+    log(`${file}: "${title ?? '(untitled)'}" -> "${renamed}"${dryRun ? ' (dry run)' : ''}`)
   }
 }
 
