@@ -1,12 +1,27 @@
-import { useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState, type Ref } from 'react';
+import { useEffect, useImperativeHandle, useMemo, useRef, useState, type Ref } from 'react';
 import { ArtistCard } from './ArtistCard';
 import { ArtistDetail } from './ArtistDetail';
 import { DetailDock } from './DetailDock';
 import { DetailSheet } from './DetailSheet';
 import { PlayerBar } from './PlayerBar';
+import { RailLine } from './Rail';
+import { useRailInset } from '@/hooks/useRailInset';
+import { RAIL_LIST_CLASS } from '@/lib/rail';
 import { usePlayer } from '@/player/usePlayer';
 import { cachedTrack, resolveFreshUrl } from '@/hooks/useClip';
+import { journeyLength } from '@/lib/journeyLength';
 import type { Artist, StopRule } from '@/api/types';
+
+/**
+ * Whether the artist panel is the column beside the journey (DetailDock) or
+ * the sheet over it (DetailSheet). The same `lg` breakpoint those two split on
+ * — 64rem is Tailwind's `lg` — asked of the browser, because that is the one
+ * source the CSS and this decision can agree on. Where nothing can answer
+ * (jsdom, an old browser), the answer is "over it", which opens nothing extra.
+ */
+function panelIsBeside(): boolean {
+  return typeof window.matchMedia === 'function' && window.matchMedia('(min-width: 64rem)').matches;
+}
 
 /** What the page can ask of the journey's audio from outside it. */
 export interface JourneyControls {
@@ -80,53 +95,9 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     setSelected(null);
   }, [pathKey]);
 
-  // Where the rail starts and stops: the first dot's centre and the last
-  // dot's centre, measured rather than assumed.
-  //
-  // It was a fixed 41px inset at both ends until 2026-09-08, and a fixed inset
-  // CANNOT be right — the two endpoint cards carry an eyebrow the interior
-  // cards do not, so they are taller, by an amount that changes with width and
-  // with whether the eyebrow wraps. Measured in a browser, 41px overshot by
-  // 7.5px at each end at 1280, and at 390 it was lopsided: 3.25px past the top
-  // dot and 10.75px past the bottom one.
-  //
-  // Null until measured, and null wherever nothing can measure (jsdom has no
-  // layout, and ResizeObserver may be absent) — the rail then spans the list,
-  // which is what it did before and is never worse than a wrong inset.
+  // Where the rail starts and stops — dot to dot, measured (see Rail.tsx).
   const listRef = useRef<HTMLOListElement>(null);
-  const [railInset, setRailInset] = useState<{ top: number; bottom: number } | null>(null);
-
-  useLayoutEffect(() => {
-    const ol = listRef.current;
-    if (!ol) return;
-
-    function measure() {
-      if (!ol) return;
-      const dots = ol.querySelectorAll<HTMLElement>('[data-rail-dot]');
-      if (dots.length < 2) return setRailInset(null);
-      const box = ol.getBoundingClientRect();
-      const first = dots[0].getBoundingClientRect();
-      const last = dots[dots.length - 1].getBoundingClientRect();
-      // A layout-less environment reports zeros; that is the null case, not an
-      // inset of zero, which would draw a full-height rail claiming precision.
-      if (box.height === 0) return setRailInset(null);
-      const next = {
-        top: first.top + first.height / 2 - box.top,
-        bottom: box.bottom - (last.top + last.height / 2),
-      };
-      setRailInset((prev) =>
-        prev && prev.top === next.top && prev.bottom === next.bottom ? prev : next,
-      );
-    }
-
-    measure();
-    if (typeof ResizeObserver === 'undefined') return;
-    // Card heights move with width, with the eyebrow wrapping, and with the
-    // display face finishing loading — all after the first paint.
-    const ro = new ResizeObserver(measure);
-    ro.observe(ol);
-    return () => ro.disconnect();
-  }, [pathKey]);
+  const railInset = useRailInset(listRef, pathKey);
 
   // The controls that leave or rebuild a path live on the page, not on a card, and
   // waiting for the rebuild to silence the audio reads as a lag rather than as a
@@ -140,7 +111,7 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
     <ArtistDetail
       artist={artists[selectedIndex]}
       index={selectedIndex}
-      total={artists.length}
+      total={journeyLength(artists)}
       isEndpoint={selectedIndex === 0 || selectedIndex === artists.length - 1}
       clipIndex={clipIndex[artists[selectedIndex].mbid] ?? 0}
       isPlaying={player.currentMbid === selected && player.isPlaying}
@@ -160,22 +131,18 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
           changed on 2026-09-08 is where it starts and stops: the cards now
           carry a dot each, so the rail runs dot to dot rather than the full
           height of the list, as the approved mockup draws it.
-          `left-2px` with `w-3px` centres it 3.5px from this list's left edge —
-          the same centre the dots use; see the geometry note in ArtistCard. */}
-      <ol ref={listRef} className="relative flex flex-col gap-3.5 pl-[26px]">
-        <span
-          aria-hidden
-          className="absolute left-[2px] w-[3px] rounded-full bg-gradient-to-b from-[var(--color-start)] via-[var(--color-playing)] to-[var(--color-end)]"
-          style={railInset ? { top: railInset.top, bottom: railInset.bottom } : { top: 0, bottom: 0 }}
-        />
+          The line, the dots and the list padding are one construction, shared
+          with the landing page's example card since #201 — see Rail.tsx. */}
+      <ol ref={listRef} className={`${RAIL_LIST_CLASS} gap-3.5`}>
+        <RailLine inset={railInset} />
         {artists.map((artist, i) => (
           <li key={artist.mbid}>
             <ArtistCard
               artist={artist}
-              // Among ALL artists including the two you chose (UXR-D10's
-              // currency, not UXR-D6's "steps"): it colours the rail dot.
+              // Among ALL artists including the two you chose — the app's one
+              // count currency since issue #202: it colours the rail dot.
               index={i}
-              total={artists.length}
+              total={journeyLength(artists)}
               isPlaying={player.currentMbid === artist.mbid && player.isPlaying}
               isCurrent={player.currentMbid === artist.mbid}
               // Drives the eyebrow and the frame. The bypass is still
@@ -188,7 +155,13 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
               }
               isNew={changed?.has(artist.mbid) ?? false}
               isSelected={selected === artist.mbid}
-              onPlay={player.playFrom}
+              // Issue #205: on desktop, play also opens this artist's panel when
+              // none is open, and never changes one that is. On a phone the
+              // panel would slide over what is playing, so it opens nothing.
+              onPlay={(mbid) => {
+                player.playFrom(mbid);
+                if (selected === null && panelIsBeside()) setSelected(mbid);
+              }}
               onToggle={player.toggle}
               onDetail={() => setSelected(artist.mbid)}
               onClipResolved={(mbid, available) =>
@@ -224,7 +197,7 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
         position={player.position}
         duration={player.duration}
         stopIndex={artists.findIndex((a) => a.mbid === player.currentMbid)}
-        stopCount={artists.length}
+        stopCount={journeyLength(artists)}
         onToggle={player.toggle}
       />
     </>

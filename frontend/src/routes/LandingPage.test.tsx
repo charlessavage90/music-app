@@ -25,9 +25,9 @@ test('offers the three sample journeys, each linking straight at a path', () => 
   // Accessible names, not textContent: the chevron is aria-hidden, so this is
   // what a screen reader actually announces.
   expect(links.map((l) => l.getAttribute('aria-label'))).toEqual([
-    'Miles Davis to Radiohead, 3 steps',
-    'Dolly Parton to Daft Punk, 4 steps',
-    'Bad Bunny to Chappell Roan, 6 steps',
+    'Miles Davis to Radiohead, 5 stops',
+    'Dolly Parton to Daft Punk, 6 stops',
+    'Bad Bunny to Chappell Roan, 8 stops',
   ]);
   // Ordinary links, not buttons that navigate — so they are shareable, open in
   // a new tab, and work with Back like any other journey.
@@ -125,14 +125,40 @@ test('the landing page does not state clip length', () => {
   expect(screen.queryByText(/30 seconds/i)).not.toBeInTheDocument();
 });
 
-test('each sample journey says how many steps it takes, in the "between" currency', () => {
+test('each sample journey says how many stops it has, counting both artists you chose', () => {
   setup();
-  // UXR-D6/D7: "steps" = artists BETWEEN the two chosen. Measured on the served
-  // graph 2026-09-08; e2e/landing-samples.spec.ts pins these against the live
-  // router so a rebuild that moves them fails a test instead of lying on a chip.
-  expect(screen.getByRole('link', { name: /miles davis.*radiohead/i })).toHaveTextContent('3 steps');
-  expect(screen.getByRole('link', { name: /dolly parton.*daft punk/i })).toHaveTextContent('4 steps');
-  expect(screen.getByRole('link', { name: /bad bunny.*chappell roan/i })).toHaveTextContent('6 steps');
+  // Issue #202: one length convention everywhere, and it includes the endpoints
+  // (journeyLength). Measured on the served graph 2026-09-08. Nothing pins these
+  // to the live router yet — the redesign's real-browser suite (UXR-T10) was
+  // never built; see the issue filed from this session.
+  expect(screen.getByRole('link', { name: /miles davis.*radiohead/i })).toHaveTextContent('5 stops');
+  expect(screen.getByRole('link', { name: /dolly parton.*daft punk/i })).toHaveTextContent('6 stops');
+  expect(screen.getByRole('link', { name: /bad bunny.*chappell roan/i })).toHaveTextContent('8 stops');
+});
+
+// Issue #201 (1): the owner does not like the colour slide on the build button.
+// The gradient stays; nothing on the button animates.
+test('the build button has no colour animation', () => {
+  setup();
+  const button = screen.getByRole('button', { name: /build the path/i });
+  expect(button.className).not.toMatch(/animation|sheen/);
+});
+
+// Issue #201 (2): the example card's line was ~2px off its dots, drawn with
+// its own arithmetic. It now uses the journey page's rail construction —
+// the same list padding, line and dot classes, the same dot-to-dot measuring,
+// and the same start / between / end colouring — so the two cannot drift
+// apart again. The geometry itself is checked in a real layout engine; jsdom
+// can only pin that the pieces are the shared ones.
+test("the example card uses the journey page's rail and dots", () => {
+  setup();
+  const list = screen.getByText('Nina Simone').closest('ol')!;
+  expect(list.querySelector('[data-rail-line]')).not.toBeNull();
+  const dots = list.querySelectorAll<HTMLElement>('[data-rail-dot]');
+  expect(dots).toHaveLength(7);
+  expect(dots[0].style.borderColor).toBe('var(--color-start)');
+  expect(dots[3].style.borderColor).toBe('var(--color-playing)');
+  expect(dots[6].style.borderColor).toBe('var(--color-end)');
 });
 
 test('the hero carries the approved copy and a three-step "How it works"', () => {
@@ -151,4 +177,7 @@ test('the teaser names the measured Miles Davis to Daft Punk journey, without ta
     expect(screen.getByText(name)).toBeInTheDocument();
   }
   expect(screen.queryByText(/low reach/i)).not.toBeInTheDocument();
+  // Seven names on the card, so seven stops — the same inclusive count the
+  // journey page's tile and player bar state (issue #202).
+  expect(screen.getByText(/a path, seven stops/i)).toBeInTheDocument();
 });

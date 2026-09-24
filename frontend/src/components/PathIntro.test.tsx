@@ -6,12 +6,12 @@ import { PathIntro } from './PathIntro';
 beforeEach(() => localStorage.clear());
 
 // The result line moved to JourneyHeading's tile on 2026-09-08 (UXR-T8), which
-// is the one place the step count is stated now (UXR-D6). What is left here is
+// is the one place the journey's length is stated now (issue #202). What is left here is
 // the explainer alone.
 test('states no count of its own', () => {
   render(<PathIntro stopRule="natural" />);
   expect(screen.queryByText(/we found a path/i)).not.toBeInTheDocument();
-  expect(screen.queryByText(/steps?\./i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/st(ep|op)s?\./i)).not.toBeInTheDocument();
 });
 
 // JourneyList already says the useful thing for this case, and there is no

@@ -13,6 +13,7 @@ import { ShareButton } from '@/components/ShareButton';
 import { RerollNotice, type RerollReason } from '@/components/RerollNotice';
 import { RouteHistory } from '@/components/RouteHistory';
 import { addExclusion, clearExclusions, decodeExclusions } from '@/lib/exclusions';
+import { journeyLength } from '@/lib/journeyLength';
 
 export function PathPage() {
   const { from, to } = useParams();
@@ -72,9 +73,15 @@ export function PathPage() {
     // Widened from 620px with the docked detail (UXR-T7): the dock is a 400px
     // column beside the rail, and at 620 the page scrolled sideways at 1280.
     // UXR-T8 restyles the header inside this width.
-    <main className="mx-auto w-full max-w-[1200px] px-5 py-6 pb-40 sm:py-9">
+    //
+    // pb-40 is the reserve for the fixed player bar, and it is a separate
+    // utility from the top padding on purpose (issue #206): `sm:py-9` used to
+    // sit beside it, compiles to padding-block, comes later in the stylesheet,
+    // and so removed the reserve from 640px up — the last skipped artist sat
+    // under the bar. Never a `py-` here, at any breakpoint; a test pins that.
+    <main className="mx-auto w-full max-w-[1200px] px-5 pt-6 pb-40 sm:pt-9">
       <div className="mb-8 flex items-center justify-between gap-5 text-[13px] sm:text-[13.5px]">
-        <Brand size="nav" />
+        <Brand size="nav" href="/" onNavigate={() => journey.current?.stop()} />
         <div className="flex items-center gap-2.5">
           {/* Only offered once there is something to undo. */}
           {hasBypasses && (
@@ -114,7 +121,7 @@ export function PathPage() {
             <JourneyHeading
               from={state.artists[0].name}
               to={state.artists.at(-1)!.name}
-              steps={state.artists.length - 2}
+              stops={journeyLength(state.artists)}
             />
           </div>
           <PathIntro stopRule={state.stopRule} />

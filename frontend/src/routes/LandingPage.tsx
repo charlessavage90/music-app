@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArtistCountBadge } from '@/components/ArtistCountBadge';
 import { ArtistSearch } from '@/components/ArtistSearch';
 import { Brand } from '@/components/Brand';
+import { RailDot, RailLine } from '@/components/Rail';
+import { useRailInset } from '@/hooks/useRailInset';
+import { RAIL_LIST_CLASS } from '@/lib/rail';
 import type { Artist } from '@/api/types';
+import { journeyLength } from '@/lib/journeyLength';
 import { SAMPLE_JOURNEYS, TEASER } from '@/lib/sampleJourneys';
 
 const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'] as const;
@@ -42,7 +46,9 @@ export function LandingPage() {
 
   const sameArtist = !!from && !!to && from.mbid === to.mbid;
   const ready = !!from && !!to && !sameArtist;
-  const teaserSteps = TEASER.names.length - 2;
+  const teaserStops = journeyLength(TEASER.names);
+  const teaserRef = useRef<HTMLOListElement>(null);
+  const teaserInset = useRailInset(teaserRef, teaserStops);
 
   return (
     <main className="mx-auto w-full max-w-[1280px] px-6 pb-14 pt-6 sm:px-10">
@@ -80,7 +86,8 @@ export function LandingPage() {
                 type="button"
                 disabled={!ready}
                 onClick={() => from && to && navigate(`/path/${from.mbid}/${to.mbid}`)}
-                className="h-14 rounded-full bg-[linear-gradient(90deg,var(--color-start),var(--color-playing)_55%,var(--color-end))] bg-[length:200%_100%] px-9 text-[16.5px] font-bold tracking-[-.01em] text-[var(--color-bg)] [animation:un-sheen_9s_linear_infinite] motion-safe-only disabled:cursor-not-allowed disabled:opacity-30"
+                // No colour animation on this button — the owner's call, issue #201.
+                className="h-14 rounded-full bg-[linear-gradient(90deg,var(--color-start),var(--color-playing)_55%,var(--color-end))] px-9 text-[16.5px] font-bold tracking-[-.01em] text-[var(--color-bg)] disabled:cursor-not-allowed disabled:opacity-30"
               >
                 Build the path
               </button>
@@ -100,13 +107,13 @@ export function LandingPage() {
                 <li key={j.from}>
                   <Link
                     to={`/path/${j.from}/${j.to}`}
-                    aria-label={`${j.fromName} to ${j.toName}, ${j.steps} steps`}
+                    aria-label={`${j.fromName} to ${j.toName}, ${j.stops} stops`}
                     className="flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-2.5 text-[14px] transition-colors hover:border-[var(--color-start)]"
                   >
                     <span>{j.fromName}</span>
                     <span aria-hidden className="text-[var(--color-label)]">→</span>
                     <span>{j.toName}</span>
-                    <span className="text-[12px] text-[var(--color-label)]">{j.steps} steps</span>
+                    <span className="text-[12px] text-[var(--color-label)]">{j.stops} stops</span>
                   </Link>
                 </li>
               ))}
@@ -123,13 +130,16 @@ export function LandingPage() {
           </div>
           <div className="w-full max-w-[420px] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-5">
             <div className="text-[11px] font-semibold uppercase tracking-[.12em] text-[var(--color-label)]">
-              A path, {WORDS[teaserSteps] ?? teaserSteps} steps
+              A path, {WORDS[teaserStops] ?? teaserStops} stops
             </div>
-            <ol className="relative mt-4 flex flex-col gap-3 pl-5">
-              <span aria-hidden className="absolute bottom-1.5 left-[3px] top-1.5 w-0.5 rounded-full bg-gradient-to-b from-[var(--color-start)] via-[var(--color-playing)] to-[var(--color-end)]" />
-              {TEASER.names.map((name) => (
-                <li key={name} className="relative flex items-center gap-2.5 text-[14.5px]">
-                  <span aria-hidden className="absolute -left-[22px] size-2 rounded-full border-2 border-[var(--color-playing)] bg-[var(--color-surface)]" />
+            {/* The journey page's own rail construction, not a re-drawing of
+                it (issue #201): same list padding, line, dots, dot-to-dot
+                measuring and start / between / end colours — see Rail.tsx. */}
+            <ol ref={teaserRef} className={`${RAIL_LIST_CLASS} mt-4 gap-3`}>
+              <RailLine inset={teaserInset} />
+              {TEASER.names.map((name, i) => (
+                <li key={name} className="relative flex items-center text-[14.5px]">
+                  <RailDot index={i} total={teaserStops} />
                   {name}
                 </li>
               ))}

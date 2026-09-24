@@ -7,7 +7,7 @@ interface Props {
   /** Seconds, from the audio element's own clock — never estimated. */
   position: number;
   duration: number;
-  /** 0-based position among ALL artists including endpoints (UXR-D10). -1 when none. */
+  /** 0-based position among ALL artists including endpoints (`journeyLength`'s currency). -1 when none. */
   stopIndex: number;
   stopCount: number;
   onToggle: () => void;
@@ -21,10 +21,10 @@ function mmss(s: number): string {
 /**
  * The bottom bar: what is playing, how far through, and which stop it is.
  *
- * "Stop N of M" is the WHOLE-JOURNEY currency — every artist including both
- * endpoints — which is not the "steps" the heading counts (artists between).
- * Named here because reading one count as another is a defect class this
- * project has met three times.
+ * "Stop N of M" counts every artist including both endpoints — `journeyLength`,
+ * the app's one length currency since issue #202, and the same M the heading's
+ * tile shows. Named here because reading one count as another is a defect
+ * class this project has met three times.
  */
 export function PlayerBar({ currentName, trackTitle, isPlaying, position, duration, stopIndex, stopCount, onToggle }: Props) {
   if (!currentName) return null;

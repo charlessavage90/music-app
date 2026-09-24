@@ -2,15 +2,15 @@ interface Props {
   from: string;
   to: string;
   /**
-   * Artists BETWEEN the two chosen ones (UXR-D6, UI-D7) — the one count
-   * currency the UI states. Not the player bar's "Stop N of M", which counts
-   * every artist including both endpoints (UXR-D10).
+   * Every artist on the journey, including both chosen ones — `journeyLength`,
+   * the app's one length currency (issue #202). The same M the player bar's
+   * "Stop N of M" and the artist panel show.
    */
-  steps: number;
+  stops: number;
 }
 
-/** "Your journey" — both names in display type and the steps tile. */
-export function JourneyHeading({ from, to, steps }: Props) {
+/** "Your journey" — both names in display type and the stops tile. */
+export function JourneyHeading({ from, to, stops }: Props) {
   return (
     <div className="flex items-end justify-between gap-6">
       <div className="min-w-0">
@@ -29,9 +29,10 @@ export function JourneyHeading({ from, to, steps }: Props) {
         </h1>
       </div>
       <div className="flex-none rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2.5 text-center">
-        <div className="font-display text-[20px] font-semibold">{steps}</div>
+        <div className="font-display text-[20px] font-semibold">{stops}</div>
         <div className="text-[11px] uppercase tracking-[.08em] text-[var(--color-label)]">
-          {steps === 1 ? 'step' : 'steps'}
+          {/* A journey always has both endpoints, so never fewer than two: always plural. */}
+          stops
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import type { Artist } from '@/api/types';
 
 interface Props {
   artist: Artist;
-  /** 0-based among ALL artists including endpoints; shown 1-based (UXR-D10 currency). */
+  /** 0-based among ALL artists including endpoints; shown 1-based (`journeyLength`'s currency, issue #202). */
   index: number;
   total: number;
   isEndpoint: boolean;
@@ -118,11 +118,14 @@ export function ArtistDetail({
               {/* REQ-45: this routes to a MORE OBSCURE similar artist, so no
                   wording here may read as rejecting the artist. No
                   "recommended" either — there is one option, and recommending
-                  it against nothing is noise (UXR-D16). */}
+                  it against nothing is noise (UXR-D16).
+                  Violet — the journey's own hue, via the token — not the pink
+                  that read as a destructive action; and the hand cursor the
+                  streaming links get for free as <a> (issue #204). */}
               <button
                 type="button"
                 onClick={() => onBypass(artist.mbid)}
-                className="rounded-xl border border-[rgba(245,71,155,.45)] bg-[linear-gradient(130deg,rgba(245,71,155,.14),rgba(143,108,245,.06))] px-4 py-3.5 text-left"
+                className="cursor-pointer rounded-xl border border-(--color-playing)/45 bg-[linear-gradient(130deg,color-mix(in_oklab,var(--color-playing)_16%,transparent),color-mix(in_oklab,var(--color-playing)_5%,transparent))] px-4 py-3.5 text-left"
               >
                 <span className="block text-[15.5px] font-semibold">Dig deeper</span>
                 <span className="mt-1 block text-[13px] leading-[1.45] text-[var(--color-muted)]">
