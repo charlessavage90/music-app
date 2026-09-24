@@ -191,6 +191,15 @@ before rebuilding either map.
 ⛔ **Nothing here deploys.** `ApiConfig.graph_path` is unchanged, so without `ARTISTPATH_GRAPH`
 the API still boots the served map. This points one local process at the candidate.
 
+⚠ **Do not start these from a Claude session's shell if the session runs in Orca.** When Orca
+retires the session it kills the session's whole process tree, and both servers go with it — that
+is how the gate's servers died at about 10:14 on 2026-09-24, mid-request and with no shutdown line.
+**Start them detached instead:** run `C:\unsung-fast\lbd-artifacts\lba-g5-logs\start-servers.ps1`
+from any PowerShell (a session can launch it via WMI `Win32_Process.Create`, which parents it to
+the system rather than to the session). It sets the same three variables as below, appends API
+stdout to a new `api-partN.log` in that folder, and passes `--host` to Vite so the phone can reach
+it. The two terminal recipes below remain correct for a human at a keyboard.
+
 **Terminal 1 — the API.** The checksum is read out of the sidecar by the command itself, never
 typed (`DEP-24`):
 

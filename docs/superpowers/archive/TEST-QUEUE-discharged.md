@@ -1,6 +1,6 @@
 # Archive — discharged entries from the use-the-app queue
 
-**Role: HISTORICAL. Do not cite, do not act on, and do not add to.** Retained so the record
+**Role: HISTORICAL. Do not cite, do not act on; added to only by `closeout` C1-demote, newest first.** Retained so the record
 can be audited, not because anything here is owed. Sibling of
 [`TEST-QUEUE-nil-entries.md`](TEST-QUEUE-nil-entries.md), which holds the entries that queued
 nothing; this one holds entries that were **queued, pressed and discharged**.
@@ -21,6 +21,72 @@ entry is live only if its **topmost** heading says so. A discharged entry keeps 
 closeouts report a backlog that did not exist.
 
 Newest first.
+
+---
+## ✅ DONE — 2026-09-24 — RUN BY THE OWNER ON `unsung.fm`; ALL 15 BOXES TICKED, ELEVEN UI/UX FINDINGS
+
+**Every box below was ticked**, on the deployed site. No box failed in the sense the checklist
+defines — nothing blank, nothing broken, clips play, shared links reproduce. **The two questions
+that are not defect checks were ticked with no answer recorded**; they are his and are not re-queued.
+
+**What the pass found instead is UI/UX, reported in his own words on 2026-09-24 and filed as GitHub
+issues the same day (each issue cites this entry).** It applies to the live site and to the local
+`LBA-G5` candidate alike — none of it is a property of the graph:
+
+> - landing page: I don't like the animated color slide on the build path button
+> - landing page: on the card that shows an example path, the vertical line is misaligned with the dots next to the artist. It should match the visual of the line and dots on the journey page
+> - global: path lengths are described inconsistently. On the landing page, the example path card says "A path, five steps", counting only the interior artists. Similarly, on the journey page, the "step counter" counts the number of interior artists. But when you open an artist card, it says "stop 4 of 10", counting the endpoints. Globally, we should use the latter convention: when describing a path length, include the start and end artists
+> - Journey page: Unsung logo in upper left should return you to the landing page
+> - artist card: The dates for artists usually don't have an end date, so each artist shows something like "1985–" which doesn't look right
+> - artist card: on desktop, hovering over the "open on spotify / apple music" buttons gives you a finger pointer cursor, but hovering over the dig deeper button does not
+> - artist card: the red "dig deeper" button looks like a negative action due to the color. Can we make this purple instead?
+> - journey page: desktop only, if no artist card is open, clicking play on an artist's clip should also open the artist card. If an artist card is already open, this should not change the open artist card
+> - journey page: once a few artists have been skipped, the bottom of the "artists you skipped" card gets hidden by the playing clip trackbar
+> - journey page: the playing clip trackbar should have a volume control
+> - A more general piece of feedback: ideally, I would like the journey steps themselves to be the click target to open the artist details. The potential problem with this is that removing the current "card detail" button makes it non-obvious that the card is able to be interacted with, and the dig deeper button lives behind that button. The dig deeper button is one of the most important features of the app. This is a design question / problem, but it's an important one that I want to spend some time thinking through options
+
+**This discharges the checklist below in full.** The graph-side impressions he gave in the same
+message belong to the `LBA-G5` gate, not to this queue, and are not recorded here.
+
+## ▶ LIVE NOW — one pass, about 20 minutes, phone first
+
+*Everything below is deployed and exercisable. It merges the three entries queued 2026-09-04 and
+2026-09-08, which all went live before you read this and overlapped heavily. Full original notes,
+and the reason each check exists: [`archive/TEST-QUEUE-notes-2026-09.md`](TEST-QUEUE-notes-2026-09.md).*
+
+**On your phone**
+
+- [x] **1. First screen.** New name, logo and typeface, plus a line saying how many artists are on the map. It should read roughly 58,000. **A missing line is a failure**, because that number is read live from the server.
+- [x] **2. A ready-made journey from the front page.** Count the artists between the two ends. It should match the number of steps the button claimed.
+- [x] **3. A journey card.** Artwork, name, track, play, and a `›`. **Dates, or Spotify and Apple links, still on the card itself means the new layout did not ship.**
+- [x] **4. Press `›` on a middle artist.** A panel slides up. It holds the artist's details, both streaming links, "try another track" and reroute. Close it with the ✕ and with a press outside it. **Both must work.**
+- [x] **5. The line under each song title**, on several cards. Then find one where it is **missing entirely** and note who.
+- [x] **6. Both streaming links, from inside the panel** — once on a well-known artist, once on the most obscure artist in the journey. The obscure one is where a wrong match shows up.
+- [x] **7. Reroute from inside the panel**, five or six times, across different journeys. Read the wording on the control before the first press. Then look **below the journey** for the list of who you skipped.
+- [x] **8. Press play.** The bottom bar should name the track, show a moving line, count seconds, and say which stop you are on.
+- [x] **9. Press Share**, then open the link in a new tab. Same journey, **including any rerouting you had already done**.
+- [x] **10. Does a clip actually play?** No test here can answer this. It is the whole reason this file exists.
+
+**Either device**
+
+- [x] **11. Press Back a few times** after rerouting. Each press should undo one reroute.
+- [x] **12. Open a journey link you saved weeks ago.** It should still open the same journey.
+- [x] **13. On a laptop, the Escape key closes the panel**, and Share says "Link copied".
+
+**What "wrong" looks like anywhere:** a blank white screen, a broken image where the logo should
+be, a panel that will not close, a clip that plays the wrong artist, or a shared link that opens a
+different journey from the one you were looking at.
+
+---
+
+## ⚠ Two questions that are NOT defect checks
+
+**Flagged 2026-09-12: these sit against rule 2 above and are the owner's to strike or keep.** They
+were queued before that rule was applied to them, and both have a completion state, which is why
+they were not simply deleted.
+
+- [x] **Reroute now takes two presses instead of one.** Does the second press read as a cost, or as a safeguard against pressing it by accident?
+- [x] **The clock says 0:29 where the card says 0:30.** That is the true length of what Deezer sends, left honest rather than rounded. Say if you would rather they agreed.
 
 ---
 ## ✅ DONE — 2026-09-04 — RUN BY THE OWNER; NOTHING FOUND
