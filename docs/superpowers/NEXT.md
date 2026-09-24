@@ -89,10 +89,12 @@ got.**
 2. **`LBA-G5`**: the owner's two days of use against his own criterion, **logging every artist pair he
    uses** (`LBA-AM5`). **STARTED 2026-09-24.** The pair log exists, header only, at
    `builder/analysis/2026-09-22-lba-a6-blind-listen/lba_g5_pair_log.md` on branch
-   `charlessavage90/lal-blind-listen-next` (PR #136, an address); he appends to it there and the closeout
-   after the gate commits it. The candidate is served **locally only** by two detached servers started from
-   `C:\dev\music-app` (API on :8000, booted with the checksum read from the sidecar; Vite on :5173 with
-   `--host` so the phone can reach it). Nothing is deployed. If either is down, the restart commands are in
+   `charlessavage90/lal-blind-listen-next` (PR #136, an address). **He writes nothing in it** (his ruling
+   2026-09-24): the closeout after the gate derives it with `lal_g5_pairs.py` from the API's own telemetry,
+   captured to `C:/unsung-fast/lbd-artifacts/lba-g5-logs/`, and commits it. The candidate is served **locally only** by two detached servers started from
+   `C:\dev\music-app` (API on :8000, booted with the checksum read from the sidecar, **stdout appended to
+   that log folder — a restart must do the same or pairs are lost**; Vite on :5173 with `--host` so the
+   phone can reach it). Nothing is deployed. If either is down, the restart commands are in
    `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §8, and `/api/meta` must report the
    candidate before any journey is judged.
 3. **Then adoption, which is the owner's call.**

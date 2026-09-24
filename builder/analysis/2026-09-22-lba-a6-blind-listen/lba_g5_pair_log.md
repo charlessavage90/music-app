@@ -10,7 +10,16 @@ exclusions for any later listen (`GBL-AM1`, `lbl_pairs.py` step 2).
 candidate under the gate.** The candidate served was `LBA-A6-candidate.bin`, sha256
 `28311d81…`, booted with `ARTISTPATH_GRAPH_SHA256` read from its sidecar.
 
-**Gate period:** 2 days of actual app use, maximum (`LBA-AM4`). Started: _(owner fills in)_.
+**Gate period:** 2 days of actual app use, maximum (`LBA-AM4`). Started 2026-09-24.
 
-## Pairs, one per line: `from → to`
+**How this file is filled — DERIVED, never hand-written (owner's ruling 2026-09-24: tracking pairs
+by hand is not realistic).** The API already emits one telemetry event per journey request with both
+endpoint names (`api/src/artistpath_api/telemetry.py`), and during the gate its stdout is captured to
+`C:/unsung-fast/lbd-artifacts/lba-g5-logs/*.log` (outside the repo, beside the candidate). At the
+closeout after the gate, `lal_g5_pairs.py` in this directory folds those events into the lines below:
+one per journey in the order requested, with the number of rerolls that followed it. A journey is a
+request with no exclusions; rerolls are the same pair. `api-part1.log` covers the gate's first hours,
+captured before the restart that pointed the server at that folder; nothing was lost between them.
+
+## Pairs, one per line: `from → to  (rerolls: N)` — written at the closeout after the gate
 
