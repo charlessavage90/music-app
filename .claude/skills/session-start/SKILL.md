@@ -194,7 +194,11 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
   **The OneDrive reason for this path has expired** — the tree moved to `C:\dev` on
   2026-07-27, so a sibling of the main tree is no longer synced and any location works. The
   path above is kept because it is what the commands say. Note that **gitignored files do not come
-  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`.
+  along**: no `*.bin` artifacts, no `builder/scratch/`, no per-package `.venv`. And **a path-scoped rule under
+  `.claude/rules/` does not follow you either**: the rule's globs are relative to the tree it lives
+  in, so a plan or spec opened at a worktree path loads no rule at all, while the hooks bound at
+  launch keep firing (`DLS-T1` read, findings §6c, 2026-09-24; two sessions observed, both on
+  2.1.269).
 
   **"Needs the graph" is NOT a reason to keep a session out of a worktree, and this rule used
   to say it was.** The artifact is read once at boot and never written (`Path(path).read_bytes()`
