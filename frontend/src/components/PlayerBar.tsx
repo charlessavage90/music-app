@@ -15,6 +15,9 @@ interface Props {
   stopIndex: number;
   stopCount: number;
   onToggle: () => void;
+  /** 0–1, the listener's level for the session (#207). */
+  volume: number;
+  onVolume: (volume: number) => void;
 }
 
 /** One sentence per failure route — what went wrong, in words a listener can act on. */
@@ -43,6 +46,7 @@ function mmss(s: number): string {
  */
 export function PlayerBar({
   currentName, trackTitle, isPlaying, failure, onRetry, position, duration, stopIndex, stopCount, onToggle,
+  volume, onVolume,
 }: Props) {
   if (!currentName) return null;
   const pct = duration > 0 ? Math.min(100, Math.round((position / duration) * 100)) : 0;
@@ -89,6 +93,23 @@ export function PlayerBar({
             </div>
           )}
         </div>
+        {/* Issue #207. From `sm` up only: on a phone the hardware keys already
+            do this, iOS Safari ignores an element's volume outright (the
+            slider would move and nothing would change), and the bar at 390px
+            has no width to spare — the stop pill is hidden there for the same
+            reason. A native range input, so the browser supplies the keyboard
+            (arrows, Home/End, Page keys) and the slider role. */}
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.05}
+          value={volume}
+          onChange={(e) => onVolume(Number(e.target.value))}
+          aria-label="Volume"
+          aria-valuetext={`${Math.round(volume * 100)}%`}
+          className="hidden w-24 flex-none cursor-pointer accent-[var(--color-playing)] sm:block"
+        />
         {stopIndex >= 0 && (
           <span className="hidden flex-none rounded-full border border-[var(--color-border-strong)] px-3.5 py-2 text-[12.5px] text-[var(--color-muted)] sm:inline">
             Stop {stopIndex + 1} of {stopCount}

@@ -11,6 +11,8 @@ export interface Player {
    * including the pauses nobody in the app asked for (G3-F8).
    */
   onPlayingChange(cb: (playing: boolean) => void): void;
+  /** 0–1. Loudness only: never touches the source, so it cannot restart a clip (#207). */
+  setVolume(volume: number): void;
   dispose(): void;
 }
 
@@ -63,6 +65,14 @@ export class HtmlAudioPlayer implements Player {
 
   pause(): void {
     this.audio.pause();
+  }
+
+  // Deliberately NOT gated on `disposed`: it cannot make a sound, and the one
+  // element outlives every card, so the level set once carries to the next
+  // clip without being re-applied. Clamped because the element throws outside
+  // 0–1. iOS Safari ignores it entirely — its volume is the hardware's.
+  setVolume(volume: number): void {
+    this.audio.volume = Math.min(1, Math.max(0, volume));
   }
 
   // Subscribing is the revival signal. StrictMode mounts, cleans up, and mounts

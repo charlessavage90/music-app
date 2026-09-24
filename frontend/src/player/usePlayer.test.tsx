@@ -9,6 +9,7 @@ const ended: Array<() => void> = [];
 const errored: Array<() => void> = [];
 const timed: Array<(p: number, d: number) => void> = [];
 const playState: Array<(playing: boolean) => void> = [];
+const volumes: number[] = [];
 
 vi.mock('./Player', () => ({
   HtmlAudioPlayer: class {
@@ -19,10 +20,13 @@ vi.mock('./Player', () => ({
     onError(cb: () => void) { errored.push(cb); }
     onTimeUpdate(cb: (p: number, d: number) => void) { timed.push(cb); }
     onPlayingChange(cb: (playing: boolean) => void) { playState.push(cb); }
+    setVolume(v: number) { volumes.push(v); }
   },
 }));
 
 beforeEach(() => {
+  volumes.length = 0;
+  try { sessionStorage.clear(); } catch { /* no storage */ }
   played.length = 0;
   ended.length = 0;
   errored.length = 0;
@@ -39,7 +43,9 @@ function Harness({ resolve }: { resolve: (mbid: string) => Promise<string | null
       <span data-testid="failure">{p.failure ?? 'ok'}</span>
       <span data-testid="playing">{String(p.isPlaying)}</span>
       <span data-testid="pos">{p.position}/{p.duration}</span>
+      <span data-testid="volume">{p.volume}</span>
       <button onClick={() => p.playFrom('miles')}>play</button>
+      <button onClick={() => p.setVolume(0.3)}>quieter</button>
       <button onClick={p.retry}>retry</button>
       <button onClick={p.toggle}>toggle</button>
       <button onClick={p.stop}>stop</button>
@@ -243,6 +249,42 @@ test('after an external pause, the toggle resumes rather than pausing again', as
   act(() => playState.at(-1)?.(false));
   await user.click(screen.getByText('toggle'));
   expect(played).toEqual(['url-for-miles', 'url-for-miles']);
+});
+
+// --- issue #207: volume ------------------------------------------------------
+
+test('a volume change reaches the player without restarting or re-resolving the clip', async () => {
+  const user = userEvent.setup();
+  const resolve = vi.fn(async (mbid: string) => `url-for-${mbid}`);
+  render(<Harness resolve={resolve} />);
+  await user.click(screen.getByText('play'));
+  await waitFor(() => expect(played).toEqual(['url-for-miles']));
+
+  await user.click(screen.getByText('quieter'));
+
+  expect(volumes.at(-1)).toBe(0.3);
+  expect(screen.getByTestId('volume')).toHaveTextContent('0.3');
+  expect(played).toEqual(['url-for-miles']);
+  expect(resolve).toHaveBeenCalledTimes(1);
+  expect(screen.getByTestId('playing')).toHaveTextContent('true');
+});
+
+test('the volume carries to the next clip and survives a remount within the session', async () => {
+  const user = userEvent.setup();
+  const { unmount } = render(<Harness resolve={async (mbid) => `url-for-${mbid}`} />);
+  await user.click(screen.getByText('quieter'));
+  unmount();
+
+  volumes.length = 0;
+  render(<Harness resolve={async (mbid) => `url-for-${mbid}`} />);
+  expect(screen.getByTestId('volume')).toHaveTextContent('0.3');
+  expect(volumes).toContain(0.3); // applied to the new element on mount
+});
+
+test('an unreadable stored volume falls back to full', () => {
+  sessionStorage.setItem('artistpath.volume', 'loud');
+  render(<Harness resolve={async () => null} />);
+  expect(screen.getByTestId('volume')).toHaveTextContent('1');
 });
 
 test('position and duration follow the audio element and reset when playback stops', async () => {

@@ -211,6 +211,8 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
         stopIndex={artists.findIndex((a) => a.mbid === player.currentMbid)}
         stopCount={journeyLength(artists)}
         onToggle={player.toggle}
+        volume={player.volume}
+        onVolume={player.setVolume}
       />
     </>
   );

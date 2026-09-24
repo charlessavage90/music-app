@@ -195,6 +195,31 @@ test('a disposed player reports no play-state changes, including its own final p
   expect(cb).not.toHaveBeenCalled();
 });
 
+// Issue #207. A property of the element, not a playback action: it must not
+// touch the source (which would restart the clip) or start anything.
+test('setVolume changes loudness only — no restart, no play', () => {
+  const player = new HtmlAudioPlayer();
+  const el = audioOf(player);
+  const started = vi.spyOn(el, 'play').mockResolvedValue(undefined);
+  player.play('https://example.test/clip.mp3');
+  const src = el.src;
+  started.mockClear();
+
+  player.setVolume(0.4);
+
+  expect(el.volume).toBeCloseTo(0.4);
+  expect(el.src).toBe(src);
+  expect(started).not.toHaveBeenCalled();
+});
+
+test('setVolume clamps to what the element accepts rather than throwing', () => {
+  const player = new HtmlAudioPlayer();
+  player.setVolume(1.7);
+  expect(audioOf(player).volume).toBe(1);
+  player.setVolume(-0.2);
+  expect(audioOf(player).volume).toBe(0);
+});
+
 test('a second timeupdate handler replaces the first, like the other two', () => {
   const player = new HtmlAudioPlayer();
   const first = vi.fn();

@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, test, vi } from 'vitest';
 import { PlayerBar } from './PlayerBar';
 
-const base = { currentName: 'Herbie Hancock', trackTitle: 'Watermelon Man', isPlaying: true, onToggle: vi.fn(), onRetry: vi.fn() };
+const base = { currentName: 'Herbie Hancock', trackTitle: 'Watermelon Man', isPlaying: true, onToggle: vi.fn(), onRetry: vi.fn(), volume: 1, onVolume: vi.fn() };
 
 test('shows elapsed and total time and the stop position in the whole-journey currency', () => {
   // UXR-D10: N of M counts EVERY artist including both endpoints; index is 0-based in.
@@ -34,6 +34,18 @@ test.each([
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   await userEvent.setup().click(screen.getByRole('button', { name: 'Retry Herbie Hancock' }));
   expect(onRetry).toHaveBeenCalledTimes(1);
+});
+
+// Issue #207. A native range input: keyboard-operable (arrows, Home/End, Page
+// keys) by the browser itself, with an accessible name and a spoken value.
+test('the volume slider shows the level and reports a change', () => {
+  const onVolume = vi.fn();
+  render(<PlayerBar {...base} position={0} duration={30} stopIndex={1} stopCount={6} volume={0.6} onVolume={onVolume} />);
+  const slider = screen.getByRole('slider', { name: 'Volume' });
+  expect(slider).toHaveValue('0.6');
+  expect(slider).toHaveAttribute('aria-valuetext', '60%');
+  fireEvent.change(slider, { target: { value: '0.25' } });
+  expect(onVolume).toHaveBeenCalledWith(0.25);
 });
 
 test('renders nothing with no current artist', () => {

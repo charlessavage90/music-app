@@ -23,6 +23,32 @@ type ResolveUrl = (mbid: string) => Promise<string | null>;
 export type PlaybackFailure = 'no-clip' | 'unreachable' | 'wont-play';
 
 /**
+ * The listener's volume, for the rest of the tab's life (#207): sessionStorage,
+ * so it survives a new path or a reload but a new visit starts at full. A
+ * convenience, never state that must persist — every read and write tolerates
+ * storage that is missing, blocked or holding something unreadable.
+ */
+const VOLUME_KEY = 'artistpath.volume';
+
+function storedVolume(): number {
+  try {
+    const raw = sessionStorage.getItem(VOLUME_KEY);
+    const v = raw === null ? NaN : Number(raw);
+    return Number.isFinite(v) && v >= 0 && v <= 1 ? v : 1;
+  } catch {
+    return 1;
+  }
+}
+
+function storeVolume(v: number) {
+  try {
+    sessionStorage.setItem(VOLUME_KEY, String(v));
+  } catch {
+    /* storage unavailable: the volume still holds for this page */
+  }
+}
+
+/**
  * Owns playback for a journey.
  *
  * The player is handed a resolver rather than URLs (C2, browser side). A preview
@@ -39,11 +65,14 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
   const [failure, setFailure] = useState<PlaybackFailure | null>(null);
+  const [volume, setVolumeState] = useState(storedVolume);
 
   const listRef = useRef(playables);
   listRef.current = playables;
   const resolveRef = useRef(resolveUrl);
   resolveRef.current = resolveUrl;
+  const volumeRef = useRef(volume);
+  volumeRef.current = volume;
 
   // Playback state the callbacks need synchronously — an `ended` or `error` event
   // arrives outside React's render cycle and cannot wait for state to settle.
@@ -137,6 +166,10 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     // call, a Bluetooth headset, the OS media keys — now shows as it is.
     player.onPlayingChange(setIsPlaying);
 
+    // The element starts at full volume; bring it to the listener's level once.
+    // From then on setVolume() keeps the two in step.
+    player.setVolume(volumeRef.current);
+
     return () => player.dispose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [player]);
@@ -184,8 +217,16 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     else resume();
   }
 
+  /** Loudness only (#207): no restart, no re-resolve, playing or not. */
+  function setVolume(v: number) {
+    const next = Math.min(1, Math.max(0, v));
+    player.setVolume(next);
+    setVolumeState(next);
+    storeVolume(next);
+  }
+
   return {
-    currentMbid, isPlaying, position, duration, failure,
-    playFrom, toggle, pause, resume, retry, stop,
+    currentMbid, isPlaying, position, duration, failure, volume,
+    playFrom, toggle, pause, resume, retry, stop, setVolume,
   };
 }
