@@ -5,6 +5,7 @@ app is testable without loading a real artifact or touching the network.
 from __future__ import annotations
 
 import hmac
+import math
 import time
 
 import httpx
@@ -282,9 +283,20 @@ def create_app(
                 "clip_index": index,
                 "candidate_count": resolution.count,
                 "duration_ms": round(duration_ms, 2),
+                # A catalogue refused us, so the 503 below — not a real miss.
+                "refused": resolution.refused,
             }
         )
 
+        if clip is None and resolution.refused:
+            # Throttled or down, not "this artist has no clip" (G3-F11). A 204
+            # is cached by the browser as a real miss and shown as "No preview
+            # available"; a 503 is a transient failure the card retries. The
+            # wait is the breaker's cooldown: retrying sooner would be refused
+            # again without an outbound call, which is harmless but pointless.
+            response.status_code = 503
+            response.headers["Retry-After"] = str(math.ceil(cfg.clip_breaker_cooldown_s))
+            return None
         if clip is None:
             response.status_code = 204
             return None

@@ -156,10 +156,15 @@ class Resolution:
     nothing. Thin catalogues are a studied population here (TCE-/TCR-) and are
     exactly the artists this app exists to deliver, so the endpoint states the
     count rather than letting the frontend guess it.
+
+    `refused` is True only when there is no clip AND a catalogue refused us on
+    the way to that answer (G3-F11) — so the miss may not be real, and the
+    endpoint says "try again shortly" rather than "there is nothing here".
     """
 
     clip: Clip | None
     count: int
+    refused: bool = False
 
 
 class ClipCache(Protocol):
@@ -358,7 +363,7 @@ class ClipResolver:
                 # the block (G3-A4). The card is silent for this request; the
                 # identities stay cached, so once we are let back in the next
                 # request costs one call again.
-                return Resolution(None, len(identities))
+                return Resolution(None, len(identities), refused=True)
             if url:
                 return Resolution(
                     Clip(url, chosen.title, chosen.cover_url, chosen.source),
@@ -367,9 +372,9 @@ class ClipResolver:
             # That track has left the catalogue. Identity is stable, not
             # permanent, so fall through and find the artist fresh ones.
 
-        found = await self._search(artist_name, deezer_artist_id)
+        found, refused = await self._search(artist_name, deezer_artist_id)
         if not found:
-            return Resolution(None, 0)
+            return Resolution(None, 0, refused=refused)
         identities = [identity for identity, _ in found]
         # A write failure happens AFTER a successful lookup, so the clip is
         # already in hand. Losing it to a cache error would discard work we
@@ -400,8 +405,12 @@ class ClipResolver:
 
     async def _search(
         self, artist_name: str, deezer_artist_id: str = ""
-    ) -> list[tuple[TrackIdentity, str]]:
+    ) -> tuple[list[tuple[TrackIdentity, str]], bool]:
         """Try each catalogue once, skipping any that is refusing us.
+
+        Returns the candidates and whether any catalogue refused us on the way.
+        The flag only matters when the list is empty: a miss that a refusal
+        preceded may not be a real miss (G3-F11).
 
         Falling through to a DIFFERENT service is not amplification — it is the
         fallback doing its job. Only repeat calls to the service already saying
@@ -418,7 +427,7 @@ class ClipResolver:
             try:
                 found = await self._from_deezer_artist(deezer_artist_id)
                 if found:
-                    return found
+                    return found, False
             except CatalogueUnavailable:
                 # Deezer is refusing us. Searching it by name now would be the
                 # same service, twice, for the same artist — G3-A4's defect
@@ -430,12 +439,13 @@ class ClipResolver:
                 found = await self._from_deezer(artist_name)
             except CatalogueUnavailable:
                 found = []
+                deezer_refused = True
             if found:
-                return found
+                return found, False
         try:
-            return await self._from_itunes(artist_name)
+            return await self._from_itunes(artist_name), deezer_refused
         except CatalogueUnavailable:
-            return []
+            return [], True
 
     async def _from_deezer_artist(
         self, deezer_artist_id: str

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { useClip } from '@/hooks/useClip';
+import { isTransient, silentLabel, useClip } from '@/hooks/useClip';
+import { ClipRetry } from './ClipRetry';
 import { PlayButton } from './PlayButton';
 import { RailDot } from './Rail';
 import type { Artist } from '@/api/types';
@@ -69,12 +70,14 @@ export function ArtistCard({
 }: Props) {
   const clip = useClip(artist.mbid, clipIndex ?? 0);
   const playable = clip.status === 'ready';
-  const silent = clip.status === 'none';
+  const silent = !playable && clip.status !== 'loading';
 
   useEffect(() => {
     if (clip.status === 'loading') return;
     onClipResolved?.(artist.mbid, playable);
-    if (!playable && (clipIndex ?? 0) > 0) onDeadIndex?.(artist.mbid);
+    // Only a real "none" is a dead index. A busy or failed lookup (G3-F11) is
+    // retrying, and resetting to track 1 would throw away the user's place.
+    if (clip.status === 'none' && (clipIndex ?? 0) > 0) onDeadIndex?.(artist.mbid);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clip.status]);
 
@@ -158,9 +161,13 @@ export function ArtistCard({
             <span
               className={`truncate ${silent ? 'text-[var(--color-label)]' : 'text-[var(--color-muted)]'}`}
             >
-              {clip.status === 'loading' ? '…' : clip.track?.title ?? 'No preview available'}
+              {clip.status === 'loading' ? '…' : clip.track?.title ?? silentLabel(clip.status)}
             </span>
             {playable && <span className="flex-none text-[var(--color-label)]">· 0:30</span>}
+            {/* G3-F11: busy and failed are transient, so they are the two
+                silences that can be asked about again. Non-shrinking for the
+                same reason as the duration — it is the one control here. */}
+            {isTransient(clip.status) && <ClipRetry name={artist.name} onRetry={clip.retry} />}
           </div>
         </div>
         {/* The way to everything this card no longer carries. Present on every
