@@ -23,7 +23,7 @@ Newest first.
 
 **Not a status block.** On 2026-09-24 the registry moved to GitHub issues ([`ISSUES.md`](ISSUES.md) §6). This is the
 table verbatim at `6a03018`, so every execution log, spec and handoff that says *"`NEXT.md`'s deferral row"* still
-resolves. **Open rows became issues** (source line → issue: L362→#137, L363→#138, L364→#139, L365→#140, L368→#141, L369→#142, L370→#143, L371→#144, L372→#145, L373→#146, L374→#147, L376→#148, L377→#149, L378→#150, L379→#151, L382→#152, L383→#153, L384→#154, L385→#155, L386→#156, L387→#157, L388→#158, L390→#159, L393→#160, L394→#161, L395→#162, L396→#163, L397→#164, L399→#165, L401→#166, L402→#167, L406→#168, L408→#169, L409→#170, L411→#171; L410 and L417 are
+resolves. **Open rows became issues** (source line → issue: L362→#137, L363→#138, L364→#139, L365→#140, L368→#141, L369→#142, L370→#143, L371→#144, L372→#145, L373→#146, L374→#147, L376→#148, L377→#149, L378→#150, L379→#151, L382→#152, L383→#153, L384→#154, L385→#155, L386→#156, L387→#157, L388→#158, L390→#159, L393→#160, L394→#161, L395→#162, L396→#163, L397→#164, L399→#165, L401→#166, L402→#167, L406→#168, L408→#169, L409→#170, L411→#171; L410 → #173 and L417 → #178 are
 filed with the Gate 2→3 findings). **Struck or discharged rows** (L366, L367, L375, L380, L381, L389, L413) were not filed. **Accepted
 residuals and standing conditions** (L391, L392, L398, L400, L403, L404, L405, L407, L412, L414, L415, L416) stayed in `NEXT.md`. Relative links below resolve from this
 directory, as they did in `NEXT.md`.

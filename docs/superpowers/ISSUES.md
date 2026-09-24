@@ -98,4 +98,7 @@ once and proceeds** (`CLAUDE.md`). It reads the issue, then `CLAUDE.md`'s orient
 frozen in `NEXT-ARCHIVE.md`** (the block dated 2026-09-24). Each migrated issue quotes its row and
 permalinks it. Rows already struck or discharged were not filed. Accepted residuals and standing
 conditions stayed in `NEXT.md`. The Gate 2→3 review's findings were each re-checked against the
-current code before filing; only the open ones were filed.
+current code before filing; only the open and partial ones were filed (fixed: `G3-A4`, `A5`, `A7`,
+`S3`, `S7`, `Q6`; decided: `A3`, `Q5`; not filed as deliberate per the review itself: `Q7`).
+**Security-sensitive issues withhold the detail** and give file references instead; the dispatched
+session re-derives it from the review. `BYP-13` is an umbrella issue linking its three residuals.
