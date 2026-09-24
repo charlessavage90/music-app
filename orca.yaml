@@ -15,3 +15,8 @@ scripts:
     (cd builder && uv sync --extra dev)
     (cd api && uv sync --extra dev)
     (cd frontend && npm ci)
+  # Runs before Orca DELETES a worktree (not on Orca's "archive" flag) — see the script's header.
+  # Unlike setup, this is read from the PRIMARY checkout's orca.yaml (C:\dev\music-app), and on
+  # Windows Orca runs it with cmd.exe regardless of any #! line, so it stays a one-line cmd command.
+  # `& exit 0` because a non-zero exit blocks the deletion.
+  archive: node "%ORCA_ROOT_PATH%\scripts\orca-retire-session-titles.mjs" & exit 0
