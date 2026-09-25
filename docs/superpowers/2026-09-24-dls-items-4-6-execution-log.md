@@ -112,3 +112,20 @@ the owner's in-session approval.
 - **`DLP-G1` start condition:** the observation window opens at **PR #231's merge commit** (`M1`).
   Exposure is by branch ancestry from `M1`, not by date (plan §1). No edit to the skill's name,
   description or body, or to the `CLAUDE.md` pointer, until the gate is read. Any such edit restarts it.
+
+### 6. Final review and closeout B1
+
+- **Whole-branch review** (fresh reviewer, read-only): no Critical, no Important. Its own checks were
+  a `diff` of the moved block against the skill body (identical but for the H3→H1 heading and edge
+  blank lines) and survival without the allow-file (13 missing, exactly the 8 `DLP-Q5` and 5 `DLS-Q4`
+  sentences). **Minor 1, fixed:** `ISSUES.md` cited `CLAUDE.md` for the pre-registration rule. A
+  follow-up sweep found two more live pointers of the same kind, both fixed as well: `ISSUES.md`'s
+  namespacing/collision check, and `docs/README.md`'s row for the Track 2 pre-registration. The
+  `doc-auditor` (B1) reported no defects and **missed all three**, which is worth knowing about its
+  coverage of pointers phrased as "(`CLAUDE.md`)". **Minor 3:** frozen specs and a handoff still say
+  "`CLAUDE.md` requires"; they are historically true, so no action.
+- **Minor 2, carried to `DLP-S3` as a condition:** `prose-survival --allow` applies every entry to
+  every `--before` file, not only the file it was written for. Harmless here, because every entry is
+  file-specific in practice and the reviewer checked none is unused. **`DLP-S3` must either use one
+  allow-file per `--before` file or key entries by file before it runs a multi-file allow-list.**
+  Success condition: `DLP-S3.3`'s survival run uses per-file allow-lists.
