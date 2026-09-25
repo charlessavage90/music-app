@@ -80,3 +80,18 @@ the owner's in-session approval.
 - D6 after: unconditional **44,550** characters (**−7,014**); conditional **2,953** lines
   (**+131**). The new description is 360 characters of the unconditional figure. `CLAUDE.md` now 459
   lines, 32,317 characters.
+
+### 4. `DLP-S1.4` — the `DLS-Q4` amendment
+
+- `CLAUDE.md`'s "Rules here do not expire…" paragraph replaced by the plan's "Rules here move; they
+  are not reworded…" text, copied from the plan file. `closeout` D6 gains the plan's one sentence as
+  its own paragraph, after "…damage with a receipt." (the paragraph with D6's first "compress").
+  Nothing in D6 removed.
+- The five replaced sentences are exactly what survival reported missing, and nothing else. They
+  are appended to `scripts/prose-survival-allow/dlp-s1.txt` under
+  `# DLS-Q4, owner ruling 2026-09-11: replaced, not moved`.
+- **Cumulative stage check**, against the stage base `3053e1f` (ruled in pre-flight in place of the
+  plan's `HEAD~2`): `CLAUDE.md` → `CLAUDE.md` + `plan-discipline` with the allow-file: **302 of 302,
+  0 missing**. `session-start`, same base and allow-file: **216 of 216**. `closeout`, an addition
+  only, against its own `HEAD` with no allow-file: **515 of 515**.
+- D6 after: unconditional **44,498** characters (**−52**); conditional **2,955** lines (**+2**).

@@ -297,15 +297,14 @@ written in long single lines that `wc -l` cannot see change in.
 > usable, and line arithmetic cannot tell that from a saving. Checked at `closeout` **D6**,
 > from the diff.
 
-**Rules here do not expire, and must not be given expiry conditions.** "Figures live in one
-document", `UV_LINK_MODE=copy`, currency-in-the-name: these are invariants, and a review
-trigger on them would be discharged by re-affirming them, adding a line and subtracting
-nothing. What grows is not the rule (2 lines, permanent) but the **incident narrative**
-attached to it (4–6 lines, and it is load-bearing — knowing what a check is *for* is what
-lets you apply it to a case it was not written for). That is a real trade-off, not a defect.
-The budget rule prices it by making the cost visible and the decision the owner's; an expiry
-date would shred the half worth keeping — and so does compressing a narrative to free lines,
-which is why that is no longer the price of an addition.
+**Rules here move; they are not reworded, and they are removed only on evidence.** Owner ruling
+2026-09-11 (`DLS-Q4`, findings `2026-09-10-documentation-layer-strategy.md` §5a): text leaving this
+file **moves verbatim** to where it loads when relevant, and `scripts/prose-survival.py` shows every
+sentence still exists somewhere. **A rule is removed only on evidence that sessions no longer need
+it, plus the owner's sign-off**: never by giving it an expiry date, and never by compressing it. The
+incident narrative attached to a rule is load-bearing (knowing what a check is *for* is what lets
+you apply it to a case it was not written for), so it moves **with** its rule (`DLS-Q3`); only pure
+history may become an HTML comment.
 
 ### How to present results to the owner
 
