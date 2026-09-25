@@ -1,0 +1,14 @@
+# DLP-Q5, owner 2026-09-24: dropped, harness-enforced (settings env; Read deny; orca.yaml)
+# CLAUDE.md
+Never use as context: docs/how-we-map-similar-artists.md (a narrative journal) and anything under docs/reference/ (third-party material).
+Neither is maintained as project documentation.
+Prefix every uv command with UVLINKMODE=copy:
+bash UVLINKMODE=copy uv run --extra dev pytest -q
+Hardlinking still fails here; uv falls back to copying by itself, so the prefix suppresses a warning rather than being strictly required.
+Keep it — detail in memory/env-onedrive-uv.md.
+builder (from builder/) bash UVLINKMODE=copy uv run --extra dev pytest -q # all tests UVLINKMODE=copy uv run --extra dev pytest -q -k crawl # single test / pattern
+api (from api/) bash UVLINKMODE=copy uv run --extra dev pytest -q # all tests UVLINKMODE=copy uv run --extra dev pytest -q -k pathfinding # single test / pattern
+# .claude/skills/session-start/SKILL.md §D
+Only the first is in CLAUDE.md; the other two live in memory/deploy-environment-traps.md and the execution logs.
+UVLINKMODE=copy on every uv command — hardlinking still fails at C:\dev.
+Not strictly required since the move off OneDrive (uv falls back to copying), but keep it.

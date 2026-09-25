@@ -20,9 +20,8 @@ here. It owns **no figures and no status**; both are pointed at below, never res
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--dev-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
 | **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. Also `doc-auditor.md`, project-local and shadowing the global one; `closeout` B1 dispatches it, and `docs/README.md` says what it checks. And `consultant.md` — **not a subagent**: it is launched as its own session (`claude --agent consultant`), reads only the committed record, and gives one reasoned recommendation on one named decision. Its whole value is that its inputs are the owner's, not another session's paraphrase, so a working session must never dispatch it. |
 
-**Never use as context:** `docs/how-we-map-similar-artists.md` (a narrative journal) and
-anything under `docs/reference/` (third-party material). Neither is maintained as
-project documentation.
+**Never use as context:** `docs/how-we-map-similar-artists.md` (a narrative journal). It is not
+maintained as project documentation.
 
 ## What this is
 
@@ -50,15 +49,7 @@ no shared module to enforce it.
 ## Environment note (important)
 
 The project lives at **`C:\dev\music-app`** — it moved off OneDrive on 2026-07-27, and that
-tree is now a **permanent archive, never the working tree**. **Prefix every `uv` command with
-`UV_LINK_MODE=copy`:**
-
-```bash
-UV_LINK_MODE=copy uv run --extra dev pytest -q
-```
-
-Hardlinking still fails here; uv falls back to copying by itself, so the prefix suppresses a
-warning rather than being strictly required. Keep it — detail in `memory/env-onedrive-uv.md`.
+tree is now a **permanent archive, never the working tree**.
 
 Each Python package has its own `.venv` and `pyproject.toml`; `cd` into the package
 before running `uv`.
@@ -67,8 +58,8 @@ before running `uv`.
 
 ### builder (from `builder/`)
 ```bash
-UV_LINK_MODE=copy uv run --extra dev pytest -q          # all tests
-UV_LINK_MODE=copy uv run --extra dev pytest -q -k crawl # single test / pattern
+uv run --extra dev pytest -q          # all tests
+uv run --extra dev pytest -q -k crawl # single test / pattern
 
 # data pipeline (each step reads the previous step's output):
 uv run artistpath-build bootstrap --out bootstrap.json
@@ -80,8 +71,8 @@ uv run artistpath-build fixture --graph graph-v1.bin --out fixture.bin --size 50
 
 ### api (from `api/`)
 ```bash
-UV_LINK_MODE=copy uv run --extra dev pytest -q                 # all tests
-UV_LINK_MODE=copy uv run --extra dev pytest -q -k pathfinding  # single test / pattern
+uv run --extra dev pytest -q                 # all tests
+uv run --extra dev pytest -q -k pathfinding  # single test / pattern
 
 # dev server — boots the ADOPTED graph by default (ApiConfig.graph_path);
 # ARTISTPATH_GRAPH overrides:

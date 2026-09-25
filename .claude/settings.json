@@ -38,6 +38,8 @@
       "Bash(UV_LINK_MODE=copy PYTHONIOENCODING=utf-8 uv run --extra dev pytest *)",
       "Bash(UV_LINK_MODE=copy JSII_SILENCE_WARNING_DEPRECATED_NODE_VERSION=1 uv run --extra dev pytest *)",
       "Bash(UV_LINK_MODE=copy uv run python -m pytest *)",
+      "Bash(uv run --extra dev pytest *)",
+      "Bash(uv run python -m pytest *)",
       "Bash(npm test)",
       "Bash(npm test -- *)",
       "Bash(npm run test:e2e)",

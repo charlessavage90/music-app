@@ -242,11 +242,9 @@ gh pr list --state all --limit 5 --json number,title,state,mergedAt
 - **Named gates in the governing plan, and their current state** — including any that
   *failed* and were worked around. A failed gate that someone routed around is the single
   most important thing to know before adding work on top of it.
-- **Environment traps.** Only the first is in `CLAUDE.md`; the other two live in
+- **Environment traps.** They live in
   `memory/deploy-environment-traps.md` and the execution logs. They are still the first
   thing that breaks:
-  - `UV_LINK_MODE=copy` on every `uv` command — hardlinking still fails at `C:\dev`. Not
-    strictly required since the move off OneDrive (uv falls back to copying), but keep it.
   - `PYTHONIOENCODING=utf-8` on anything printing artist names.
   - Python buffers stdout when redirected here, so a long background job writes a 0-byte
     log and looks dead while running perfectly. Use `python -u` or `PYTHONUNBUFFERED=1`.
