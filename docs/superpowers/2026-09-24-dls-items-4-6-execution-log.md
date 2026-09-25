@@ -60,3 +60,23 @@ the owner's in-session approval.
   no prompt. **Caveat:** this session runs in auto mode, which could have allowed it regardless. The
   no-prompt check is proven for auto mode only; for default mode it rests on the rule's text.
 - D6 after: unconditional **51,564** characters (**−437**); conditional **2,822** lines (**−2**).
+
+### 3. `DLP-S1.3` — the plan-writing rules moved to the `plan-discipline` skill
+
+- Split exactly as the plan fixes it. **Moved, in order:** from "Five review rounds…" through
+  "…a plan that was under-recorded.", then "How to ask for a plan review". **Stays**, under the new
+  heading `### Long sessions degrade — the tell`: "The degradation tell…" through "…twice been the
+  owner who spotted it." The pointer paragraph and the skill's frontmatter are the plan's text,
+  copied from the plan file rather than retyped.
+- Survival: `--before HEAD:CLAUDE.md --after CLAUDE.md --after …/plan-discipline/SKILL.md` →
+  **298 of 298, 0 missing**. Retained half still **visible**: its 9 sentences against `CLAUDE.md`
+  with `--strip-comments` → **9 of 9**. Control, so that green means something: the same 9 against
+  the skill alone → **0 of 9**, so the check could have gone red.
+- Active references (`git grep "Writing and reviewing plans here"`): one, this plan's own header
+  line, now names the skill. The rest are execution logs, a findings table (the spec, which records
+  a measurement of the section) and completed plans, so frozen or historically true. A wider grep for
+  "`CLAUDE.md` + factor table / seams / grep every function" found only dated logs, handoffs, plans
+  and specs, and no skill or agent.
+- D6 after: unconditional **44,550** characters (**−7,014**); conditional **2,953** lines
+  (**+131**). The new description is 360 characters of the unconditional figure. `CLAUDE.md` now 459
+  lines, 32,317 characters.
