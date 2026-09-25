@@ -95,3 +95,20 @@ the owner's in-session approval.
   0 missing**. `session-start`, same base and allow-file: **216 of 216**. `closeout`, an addition
   only, against its own `HEAD` with no allow-file: **515 of 515**.
 - D6 after: unconditional **44,498** characters (**−52**); conditional **2,955** lines (**+2**).
+
+### 5. `DLP-S1.5` — close the stage
+
+- `bash scripts/docs-lint.sh --quiet` → `docs-lint: hard checks passed.` (before this log had its
+  map row: 1 hard failure, "not classified in docs/README.md", which the row fixed). No candidate
+  names a file this stage touched.
+- `bash scripts/docs-lint-selftest.sh` → `self-test: 7 passed, 0 failed.`
+- `bash scripts/prose-survival-selftest.sh` → `self-test: 5 passed, 0 failed.`
+- `docs/README.md`: a hand row for this log (until `DLP-S2` generates the map), and the plan's row
+  and its own role line now say `DLP-S1` is executed. Both add to `docs/README.md`'s line count, which
+  #145 already tracks as over budget.
+- **Stage D6, base `3053e1f` → end:** unconditional **52,001 → 44,498** characters (**−7,503**);
+  conditional **2,824 → 2,955** lines (**+131**). The conditional growth is the moved section
+  (now paid only by sessions that invoke `plan-discipline`), plus D6's added sentence.
+- **`DLP-G1` start condition:** the observation window opens at **PR #231's merge commit** (`M1`).
+  Exposure is by branch ancestry from `M1`, not by date (plan §1). No edit to the skill's name,
+  description or body, or to the `CLAUDE.md` pointer, until the gate is read. Any such edit restarts it.
