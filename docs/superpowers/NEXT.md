@@ -43,37 +43,28 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > live at the time. **This note survives a `closeout` rewrite: it is a standing fact about the
 > deployment, not status.** The runbook is `infra/README.md` §1a.
 >
-> ⚠ **The app is still NAMED "Artist Path" in the DEPLOYED UI.** Only the address moved. The
-> rename to "Unsung.fm" was **approved 2026-09-08** and is built on the `UXR-` branch — do not
-> assume it has been deployed.
+> **The app is NAMED "Unsung.fm" in the deployed UI too, since the 2026-09-08 deploy** (`UXR-`,
+> PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
+> Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-25, at the closeout that ADOPTED `LBA-A6`.** The live site is unchanged
-(image and frontend `759e80c`, graph `graph-lux4.bin`). **`ApiConfig.graph_path` now names
-`graph-lba-a6.bin`** on branch `charlessavage90/candidate-map-adoption-decision`. That is an
-address; `git`/`gh` own the merge state.
+**Last updated: 2026-09-25, at the closeout of the deploy that put `LBA-A6` in production.** The
+live site serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend built from `b3e197b`. The
+deploy's record is [`2026-09-25-lba-a6-deploy-execution-log.md`](2026-09-25-lba-a6-deploy-execution-log.md);
+its branch is `charlessavage90/deploy-lba-a6-production`, PR #236. Those are addresses; `git`/`gh`
+own the merge state.
 
-# THE NEW MAP IS ADOPTED. THE NEXT ACTION IS THE OWNER'S: MERGE, THEN DEPLOY IT.
-
-**`LBA-G5` PASSED and the owner ADOPTED the candidate on 2026-09-25.** His verdict is recorded verbatim,
-with its reading against his pre-written criterion, in
-[`2026-09-21-lbd-s4-a6-adoption-execution-log.md`](2026-09-21-lbd-s4-a6-adoption-execution-log.md) Task 6.
-The artifact's identity is owned by `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`. The
-current handoff is [`2026-09-25-HANDOFF-lba-a6-adoption.md`](2026-09-25-HANDOFF-lba-a6-adoption.md).
+# THE NEW MAP IS LIVE. NO SESSION WORK IS OWED; THE NEXT ACTIONS ARE THE OWNER'S.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner:** merge the adoption PR (branch above).
-2. **Deploy the new map to production**, which needs his go and his AWS hands. Follow `infra/README.md`
-   §4 exactly as its ⚠ block for this deploy says: `GRAPH=graph-lba-a6.bin`, **both** `s3 cp` lines,
-   and `cdk diff` expected to show the graph variables changing. The image must be built from the
-   merged HEAD, because it carries the search fix the new map needs. Then run the §7 sidecar check
-   and correct §4's served-artifact line. **In the same deploy session:** take the direct p95
-   reading on the container (#142, due now that a larger map ships).
-3. **The owner:** press the two `TEST-QUEUE.md` boxes on unsung.fm after that deploy.
-4. **Then his choices, none blocking:** #233 (keep the landing's re-measured sample journeys or
-   pick new ones) and #200 (deepen obscurity after several Dig-deeper presses; its step 1 becomes
-   a session's once the PR merges).
+1. **The owner:** merge PR #236 (runbook §4/§5/§9 corrections, the deploy log, #142's data).
+2. **The owner:** press the unticked `TEST-QUEUE.md` boxes on unsung.fm.
+3. **After a few days:** #237 — prune the previous frontend's assets (a session's, with his AWS hands).
+4. **Then his choices, none blocking:** #233 (keep the landing's re-measured sample journeys or pick
+   new ones) and #200 (whether "better" should also prefer less-listened artists; its step 1 is
+   `agent-ready`).
+
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -198,6 +189,9 @@ old heading.)*
 
 ## Closed — do not re-plan or re-investigate
 
+- **`LBA-A6` has NO pre-set production revert trigger** — owner ruling 2026-09-25, verbatim in the
+  deploy log §6: a revert is simply his decision, whenever he makes it. **Do not propose a revert
+  criterion, and do not read `LBA-G5`'s criterion as one.** The mechanics are `infra/README.md` §9.
 - **`LBA-A6` is ADOPTED (2026-09-25), and both of its human verdicts are run-once and final**:
   `LAL-R1` (the blind listen) and `LBA-G5` (the use gate). Neither is re-run or re-read, and no
   verdict carries across listens. Reasons: `LBA-AM5`, `LBA-AM6-10`, execution log Task 6.

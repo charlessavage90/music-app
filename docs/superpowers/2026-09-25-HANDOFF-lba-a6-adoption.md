@@ -1,6 +1,6 @@
 # Handoff — `LBA-G5` passed and `LBA-A6` adopted, 2026-09-25
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-25 by [`2026-09-25-HANDOFF-lba-a6-deploy.md`](2026-09-25-HANDOFF-lba-a6-deploy.md).** ~~ACTIVE — this is the CURRENT handoff. Nothing supersedes it.~~ Supersedes
 [`2026-09-23-HANDOFF-lal-listen-read.md`](2026-09-23-HANDOFF-lal-listen-read.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

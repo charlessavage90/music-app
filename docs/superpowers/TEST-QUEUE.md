@@ -31,7 +31,7 @@ written the wrong thing:
 
 ## QUEUED 2026-09-24 — the player sweep (#221–#223)
 
-**Where:** on unsung.fm, after the next deploy.
+**Where:** on unsung.fm — **live since the 2026-09-25 deploy**, so pressable now.
 
 - [ ] 1. **Clip playing, desktop or phone.** Press the keyboard's / headset's / lock screen's **next
   track**: the next card with a clip starts. **Previous track** goes back one. On the last card, next
@@ -39,7 +39,7 @@ written the wrong thing:
 
 ## QUEUED 2026-09-25 — the new map (`LBA-A6`), after the deploy that ships it
 
-**Where:** on unsung.fm, after the next deploy.
+**Where:** on unsung.fm — **live since the 2026-09-25 deploy**, so pressable now.
 
 - [ ] 2. **Landing page, any device.** The Bad Bunny → Chappell Roan example says **3 stops**. If it
   says 8, the site is still on the old map. Press it: the journey has exactly one artist between.

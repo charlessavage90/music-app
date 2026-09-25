@@ -294,20 +294,17 @@ nothing in the bucket fails its health check and rolls back.
 
 **Set the artifact once, here, and reuse it through §5** — hardcoding a filename in these
 commands is how the wrong artifact gets uploaded beside the right deploy, and vice versa
-(`DEP-34`). `GRAPH` is the SERVED artifact's basename; today that is **`graph-lux4.bin`**
-(`LUX-4`, live since the 2026-09-08 deploy): the adopted `MSW-` graph, `graph-msw-tu50.bin`,
-plus three additive metadata keys. **Read it off the running service, not off this line or
-`ApiConfig.graph_path`**, which since 2026-09-25 names the adopted-but-not-yet-deployed
-`graph-lba-a6.bin`:
+(`DEP-34`). `GRAPH` is the SERVED artifact's basename; today that is **`graph-lba-a6.bin`**
+(`LBA-A6`, adopted 2026-09-25 and live since that day's deploy, image `b3e197b`). **Read it off
+the running service, not off this line or `ApiConfig.graph_path`** — the two agree today, and
+the day they stop agreeing is the day this line is wrong:
 
-> ⚠ **THE NEXT DEPLOY CHANGES THE MAP (`LBA-A6`, adopted 2026-09-25).** On it, and only on it,
-> `GRAPH=graph-lba-a6.bin`, **both `s3 cp` lines run**, and `cdk diff` is *expected* to show
-> `ARTISTPATH_GRAPH` and `ARTISTPATH_GRAPH_SHA256` changing. That is the one deploy where that
-> diff is correct. The file and its sidecar are in the main tree's `builder/scratch/`, a verified
-> copy of `LBA-A6-candidate.bin` (execution log `2026-09-21-lbd-s4-a6-adoption-execution-log.md`
-> Task 6). The 87,394-artist map fits the host: `LBA-G1` fired on no arm
-> (`builder/analysis/2026-09-14-lbd-s4-stage2/README.md` §4). **After it ships, correct the
-> `graph-lux4.bin` line above to name it.**
+> **Historical — `LBA-A6` has shipped (2026-09-25); kept for the reasoning.** That deploy was the
+> one where `GRAPH` changed, **both `s3 cp` lines ran**, and `cdk diff` was *expected* to show
+> `ARTISTPATH_GRAPH` and `ARTISTPATH_GRAPH_SHA256` changing (plus the object-read IAM statement —
+> see §5). It replaced `graph-lux4.bin` (`LUX-4`, live 2026-09-08 → 2026-09-25), which is still
+> in the bucket and is the graph-only rollback target in §9. Record of the deploy:
+> `docs/superpowers/2026-09-25-lba-a6-deploy-execution-log.md`.
 
 ```bash
 ARN=$(aws apprunner list-services \
@@ -342,7 +339,7 @@ stripping the three keys. Caught by comparing `/health` against both sidecars be
 > serving the new keys is only half of it.
 
 ```bash
-GRAPH=graph-lux4.bin              # the SERVED artifact (read it off the service, above) — never the app.py default
+GRAPH=graph-lba-a6.bin            # the SERVED artifact (read it off the service, above) — never the app.py default
 export ARTISTPATH_DEPLOY_GRAPH_KEY=$GRAPH
 export ARTISTPATH_DEPLOY_SIDECAR=../builder/scratch/$GRAPH.json
 
@@ -405,14 +402,37 @@ UV_LINK_MODE=copy npx cdk diff   ArtistpathStack   # read it before the next lin
 UV_LINK_MODE=copy npx cdk deploy ArtistpathStack
 ```
 
+> **A deploy that changes the graph shows FOUR rows, not three, and needs
+> `--require-approval never`.** The instance role's S3 read statement is scoped to the object
+> key (`stack.py`, `grant_read(instance_role, deploy.graph_key)`), so **every artifact change
+> also moves that IAM statement** — expected rows: `.ImageIdentifier` (if the image moved),
+> `ARTISTPATH_GRAPH`, `ARTISTPATH_GRAPH_SHA256`, and the object-read statement swapping from the
+> old key to the new one. A fifth is a stop. CDK prompts on any IAM change and the prompt hangs
+> with no stdin, so the deploy is `cdk deploy ArtistpathStack --require-approval never` —
+> **and only after the IAM delta has been shown to the owner in full.** Passing the flag without
+> showing it skips the check rather than automating it. (Recorded as a one-off at `CXA-`
+> 2026-08-10, as structural at `CXR-` 2026-09-01, written here at the `LBA-A6` deploy
+> 2026-09-25.)
+>
+> **"Omitted 1 changes because they are likely mangled non-ASCII characters" is the viewer
+> function, and must be checked, not assumed.** The plain diff hides it; `cdk diff --strict`
+> shows `ViewerFunction` replacing its whole `FunctionCode`, because CloudFormation's *stored*
+> template lost the source's non-ASCII comment characters (`???`). Measured 2026-09-25: the live
+> code (`aws cloudfront get-function --stage LIVE`) and the synthesised template's
+> `FunctionCode` were **identical, 4,215 characters, zero differing lines** — so the row is
+> inert. **Compare those two before accepting it**, and do it into a file: the function body
+> contains `ARTISTPATH_FRONT_DOOR_SECRET`, and `--strict` prints it to the terminal.
+
 Outputs: `SiteUrl` (the CloudFront domain — this is the app), `ApiOriginUrl` (App Runner
 direct, used for `/health`), `ArtifactBucketName`, `SpaBucketName`, `EcrRepositoryUri`,
 `DistributionId`.
 
-> **`cdk diff` and `cdk deploy` print the site credential to your terminal**, base64-encoded,
-> as part of the viewer function's source. That is not a leak in the function — the gate has
-> to hold the credential to compare against it — but it does mean the deploy output is not
-> safe to paste into an issue, a chat, or a screenshot. Redact `Basic <...>` first.
+> **`cdk diff --strict` prints `ARTISTPATH_FRONT_DOOR_SECRET` to your terminal**, as part of the
+> viewer function's source. That is not a leak in the function — it has to hold the secret to
+> compare against it — but it does mean that output is not safe to paste into an issue, a chat,
+> or a screenshot. Measured 2026-09-25: the plain `cdk diff` and `cdk deploy` output contained
+> none of the three secrets; `--strict` contained the front-door one four times. *(This note
+> read "redact `Basic <...>`" until then — the site password `PW-7` removed.)*
 
 > **`.env.deploy`'s lines are `export NAME=value`, so it is shell-sourceable and PowerShell
 > is not.** `set -a; . ./.env.deploy; set +a` works in bash. In PowerShell the `export `
@@ -736,6 +756,41 @@ refusal does not contain the secret.
   and `cdk deploy` again.
 - **Bad graph:** the artifact bucket is versioned (`TR-9`), so restore the previous version
   id and re-deploy. The bucket is `RETAIN` — deleting the stack does not delete the graph.
+- **Graph-only rollback from `LBA-A6` to `graph-lux4.bin`** — nothing to work out at speed:
+
+  ```bash
+  # 1. The API: previous map, CURRENT image. graph-lux4.bin and its sidecar are still in the
+  #    bucket, so both s3 cp lines are SKIPPED. The sidecar must be on this machine.
+  GRAPH=graph-lux4.bin
+  export ARTISTPATH_DEPLOY_GRAPH_KEY=$GRAPH
+  export ARTISTPATH_DEPLOY_SIDECAR=/c/dev/music-app/builder/scratch/$GRAPH.json
+  ARN=$(aws apprunner list-services \
+    --query "ServiceSummaryList[?ServiceName=='artistpath-api'].ServiceArn" --output text)
+  export ARTISTPATH_DEPLOY_IMAGE_TAG=$(aws apprunner describe-service --service-arn "$ARN" \
+    --query "Service.SourceConfiguration.ImageRepository.ImageIdentifier" --output text | sed 's/.*://')
+  cd infra && set -a; . ./.env.deploy; set +a
+  UV_LINK_MODE=copy npx cdk diff ArtistpathStack   # expect exactly 3 rows: ARTISTPATH_GRAPH,
+                                                   # ARTISTPATH_GRAPH_SHA256, the IAM read statement
+                                                   # — NOT .ImageIdentifier. Show the owner the IAM row.
+  UV_LINK_MODE=copy npx cdk deploy ArtistpathStack --require-approval never
+
+  # 2. The frontend, from e5d8850 (main immediately before the adoption PR #234 merged).
+  #    The landing page's sample journeys (and its teaser) are MEASURED ON THE MAP — on LBA-A6
+  #    Bad Bunny -> Chappell Roan is 3; e5d8850 says 8, measured on graph-msw-tu50.bin, which
+  #    routes identically to graph-lux4.bin (L4-T7) — so an API-only revert leaves the landing
+  #    advertising journeys the served map does not build. frontend/e2e/landing-samples.spec.ts checks
+  #    them against whatever map the local API serves; run it there against graph-lux4.bin.
+  git worktree add C:/Users/charl/worktrees/music-app-rollback e5d8850
+  cd C:/Users/charl/worktrees/music-app-rollback/frontend && npm ci
+  cd ../infra && UV_LINK_MODE=copy uv run python -m artistpath_infra.sync_frontend   # no --prune
+  ```
+
+  **No rebuild is needed, so the recalibrated acceptance bounds (`acceptance.py`) do not block
+  this** — the API never checks them; they gate `build` only. The image stays: the exact-match
+  search fix is map-independent and correct on either map. `e5d8850`'s frontend still carries
+  #232's player changes, which are map-independent too. Then §8's sidecar check against
+  `graph-lux4.bin.json` — whose sha256 must also equal the `fd92a735…` this deploy's `cdk diff`
+  showed leaving, which is the independent half of that check.
 - **Bad frontend:** rebuild from the previous commit, `s3 sync` again, invalidate.
 - **Bad hostname:** set `ARTISTPATH_SITE_HOSTNAME` and `ARTISTPATH_CERTIFICATE_ARN` back and
   `cdk deploy` — about four minutes. The `musicapp.cmiller.io` certificate
