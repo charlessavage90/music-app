@@ -54,6 +54,34 @@ old-frame ≥ 0.99 minus the mean of old-frame 0.40–0.60, priced as weight × 
 here drops any shared artist that is null in either map. Both versions are reported. They differ by
 one artist, and no figure below changes at the precision shown.
 
+### Forward notes, 2026-09-25, added after the run; nothing was re-run
+
+- **What the figures measure.** "Fame percentile" is the adopted proxy for the *novelty-likelihood*
+  construct: how unlikely a typical user is to already know an artist
+  (`docs/superpowers/PRODUCT-REQUIREMENTS.md` Definitions, "Obscurity / novelty-likelihood"). No
+  figure here is a popularity figure.
+- **Fame snapshots differ, and this derivation does not separate their effects.** Each map's
+  `fame_lb` comes from a different fetch. The dates below come from the records' own `fetched`
+  field, read from a random sample of 400 records per archive:
+  - **lux4:** built from `grt-archive-algb.pre-cex-snapshot` (sidecar `build_inputs.archive_dir`).
+    Its `fame/` records were fetched **2026-08-02 to 2026-08-05**. This is the served lineage's
+    snapshot: the comparability check above found lux4's `fame_lb` byte-identical to `msw-tu50`'s.
+  - **lba-a6:** every one of its 87,764 records was fetched fresh on **2026-09-21** into
+    `C:\unsung-fast\lbd-archives\S4-A6-fame` (`../2026-09-21-lbd-s4-a6-candidate/README.md` §2–§3),
+    shared artists included.
+
+  So the paired shift **bundles the population change with about seven weeks of snapshot age**. The
+  two were not separated. Percentiles are rank-based, so growth that is uniform across artists does
+  not move them. Only growth that differs from artist to artist could contribute. The size of that
+  contribution is unmeasured. The added artists' low median percentile (§1) is the population
+  change, and it is consistent with the rise being driven by that change.
+- **Materiality, carried from `CXR-M4`.** `../2026-09-01-cxr-regression-diagnosis/README.md`,
+  section "`CXR-M4` — the shift is a SQUEEZE…", "Materiality": at twenty presses the ramp is worth
+  about five hops of cost and the squeeze about one. **So the 20 % is a real force weakened, not a
+  dominant one.** `w_hop` is unchanged (`config.py:82`), so the comparison with hop cost transfers to
+  this map. The comparison with similarity cost does not transfer, because lba-a6 replaces every
+  similarity score (§3).
+
 ---
 
 ## 1. Measured
@@ -214,7 +242,7 @@ behaviour a pass (issue #200, comment of 2026-09-25).
   would take a routing harness run on lba-a6.
 - **Nothing here says the squeeze is user-visible.** The owner's use gate passed on this map. These
   figures neither contradict nor explain that.
-- **Nothing here bears on Spotify-listener popularity**, which is issue #200's observation. That is a
+- **Nothing here bears on Spotify listener counts**, which are issue #200's observation. That is a
   different currency.
 - **Nothing here says a fix works**, or that one is needed.
 - **The depth-0 half** (2026-09-16 note §3c) is untouched.
