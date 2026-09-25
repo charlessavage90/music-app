@@ -342,3 +342,80 @@ is what a later session reads. Made conditional.
 **Both defects are the same shape as the acceptance-table one earlier in this session:** an
 instrument reporting something other than what it did. None of the three touched an artifact; all
 three touched what the record would have said about one.
+
+---
+
+## Task 6 — `LBA-G5` PASSES and the owner ADOPTS, 2026-09-25
+
+*Session of 2026-09-25, branch `charlessavage90/candidate-map-adoption-decision`. Scope from the owner:
+"I've tested the candidate map locally enough to make a decision on its use."*
+
+### The gate verdict, in his words, verbatim
+
+> The gate passes: the general user experience is improved compared to the live production graph.
+> Specifically:
+> - journeys as a whole are *more* coherent
+> - novel artists often show up earlier and at least as frequently as the live graph (one note on this below)
+> - Treating this as a separate point - the two things above hold true together as well. The novel
+>   artists are more often more coherent picks than the live graph
+> - One thing about the live graph became more clear when I was able to exercise it side by side with
+>   the candidate: the novel artists it produces are frequently the class of "solo / contributing"
+>   artists (e.g. a guitarist from a famous band releasing a single solo album). Frequently might be
+>   my perception, but it did feel like the first 1-3 novel artists that appear in a path in the live
+>   map are in that class, and when you bypass them, it returns to known artists
+> - The one note I had on novel artists in the candidate graph is that when I looked them up on
+>   spotify, those novel artists were not "obscure" - they were often fairly popular on spotify
+>   (500k+ monthly listens), just not known to me. Based on the product requirements / WGLL, this is a
+>   pass regardless, but in the future, I'd like to explore whether we can "deepen" obscurity by
+>   adjusting the routing within the graph, especially after multiple "dig deeper" presses
+>
+> 2. We adopt. Clear decision based on the results
+
+**Read against his pre-written criterion (`LBA-AM4`), not re-scored:** neither limb fires. The first
+limb, *novel artists become more difficult to surface*, is contradicted by his second bullet. The
+second limb, *novelty traded for coherence*, is contradicted by his third bullet. The
+more-than-half effect size is never reached. **`LBA-G5` PASSES**, and per `LBA-AM5` that licenses
+only the adoption decision, which he took in the same message. `LBA-AM4` bar 1 still holds: his
+bullets are a use verdict, not a measurement of path quality, and **no figure may be derived from
+them.**
+
+**His observation about the retired map** (the solo/contributing-artist class among its first
+novel artists) is recorded here as his, and **he marks it as a possible perception**. It is a lead,
+not a finding. No instrument has measured it.
+
+**His forward note** (the candidate's novel artists are often widely listened on Spotify, and he
+wants to explore deepening obscurity after several Dig-deeper presses) is the question in **issue
+#200**. It is recorded there as a comment. It is his to trigger, per the path-quality rule.
+
+### The pair log, and the #215 exclusion
+
+`builder/analysis/2026-09-22-lba-a6-blind-listen/lba_g5_pair_log.md` is now filled, derived by
+`lal_g5_pairs.py`, not by hand. The script gained `--exclude "FROM → TO"` (`drop_pairs`, applied
+**before** folding so a dropped pair's rerolls cannot attach to a neighbouring journey; test added).
+**He confirmed he never ran Miles Davis → Daft Punk**, so the whole pair is dropped, not only #215's
+journey ids. I checked this before relying on it: every event of that pair falls in `api-part4.log`
+lines 89–277, and its journey ids are exactly #215's seven plus `unknown`. So the two rules select
+the same events.
+
+### Adoption, mechanically
+
+- **`ApiConfig.graph_path` now defaults to `../builder/scratch/graph-lba-a6.bin`.** That file is
+  `LBA-A6-candidate.bin` copied under a served name into the main tree's `builder/scratch/` with its
+  sidecar. The sidecar names no file, so the copy is the same artifact. **After the copy I checked
+  the sha256 and byte count against the sidecar, and both match.** It carries the same five additive
+  metadata keys as the production artifact `graph-lux4.bin`, so no clip or streaming-link field is
+  lost.
+- **Issue #138 closes on the adopted branch.** The calibration target and the served map are one
+  artifact. The rejection test is kept, reworded, and renamed `…previous_served_map…`: rebuilding the
+  old map, for example to roll back, still needs the previous bounds restored first.
+- **The landing samples moved, as the e2e spec says they will after an adoption.** Re-measured
+  through the shipped app in-process on the candidate, never against the gate's :8000 listener
+  (#215's lesson). Two of three chips are unchanged. Bad Bunny → Chappell Roan went from 8 stops to 3,
+  and the desktop teaser re-routed. The constants follow the router. **Whether those remain the right
+  showcase pairs is a content question and his** (issue filed).
+- **The builder's lineage comment was corrected.** It said the adopted map descends from the ALG-B
+  crawl archive. The adopted map's similarity now comes from a ListenBrainz-dump archive, and its
+  rebuild is the pre-registration's §6.
+
+**Not done by this task: the production deploy.** `infra/README.md` §4 with `GRAPH=graph-lba-a6.bin`,
+both `s3 cp` lines, and the post-deploy sidecar check (§7). It is outward-facing, so it runs on his go.

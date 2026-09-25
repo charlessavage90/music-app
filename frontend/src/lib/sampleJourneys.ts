@@ -13,8 +13,10 @@
  * drop an artist or move a count. `e2e/landing-samples.spec.ts` (UXR-T10, issue
  * #213) re-checks every chip and the teaser against the live router and fails
  * when one disagrees — but only when `npm run test:e2e` is run against the
- * artifact being served; it is not in `npm test`. Re-measured 2026-09-24 on
- * sha256 43dd82bb…be79cc8 (graph-msw-tu50.bin): 5, 6, 8 and the teaser, unchanged.
+ * artifact being served; it is not in `npm test`. Re-measured 2026-09-25 on
+ * sha256 28311d81…395d5b (graph-lba-a6.bin, adopted that day) through the
+ * shipped app in-process: 5 and 6 unchanged; Bad Bunny → Chappell Roan 8 → 3;
+ * the teaser re-routed. (Previously 5, 6, 8 on 43dd82bb…, graph-msw-tu50.bin.)
  */
 export const SAMPLE_JOURNEYS = [
   { from: '561d854a-6a28-4aa7-8c99-323e6ce46c2a', fromName: 'Miles Davis',
@@ -22,12 +24,12 @@ export const SAMPLE_JOURNEYS = [
   { from: '1d543e07-d0d2-4834-a8db-d65c50c2a856', fromName: 'Dolly Parton',
     to: '056e4f3e-d505-4dad-8ec1-d04f521cbb56', toName: 'Daft Punk', stops: 6 },
   { from: '89aa5ecb-59ad-46f5-b3eb-2d424e941f19', fromName: 'Bad Bunny',
-    to: '56a55378-f155-48de-80a5-d80104221267', toName: 'Chappell Roan', stops: 8 },
+    to: '56a55378-f155-48de-80a5-d80104221267', toName: 'Chappell Roan', stops: 3 },
 ] as const;
 
 /** The desktop hero's illustrative journey (UXR-D14). Same drift rule, same test. */
 export const TEASER = {
   from: '561d854a-6a28-4aa7-8c99-323e6ce46c2a',
   to: '056e4f3e-d505-4dad-8ec1-d04f521cbb56',
-  names: ['Miles Davis', 'Nina Simone', 'Marvin Gaye', 'Daryl Hall & John Oates', 'Genesis', 'David Gilmour', 'Daft Punk'],
+  names: ['Miles Davis', 'Ella Fitzgerald', 'Mariah Carey', 'Usher', 'Flo Rida', 'Katy Perry', 'Daft Punk'],
 } as const;

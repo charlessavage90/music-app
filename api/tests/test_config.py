@@ -29,4 +29,4 @@ def test_default_graph_path_points_at_the_adopted_artifact():
     # it is moving to a NEWLY adopted artifact and not restoring a rejected
     # one.
     cfg = ApiConfig()
-    assert cfg.graph_path.endswith("graph-msw-tu50.bin")
+    assert cfg.graph_path.endswith("graph-lba-a6.bin")

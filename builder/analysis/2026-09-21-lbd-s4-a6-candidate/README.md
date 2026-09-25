@@ -14,7 +14,14 @@ Built on the owner's go/no-go ruling of 2026-09-21.
 ⚠ **This is the first build in the whole track that is a candidate for serving.** Every build
 before it pinned `require_fame=False` and was an experimental control (`LBD-D7`, `LBA-D5`).
 
-⛔ **NOT DEPLOYED, and `ApiConfig.graph_path` is UNCHANGED.** The app still serves
+✅ **ADOPTED 2026-09-25** on the owner's decision, after `LAL-R1` (the blind listen) passed and then
+`LBA-G5` (his use gate) passed. `ApiConfig.graph_path` now names **`graph-lba-a6.bin`**, which is this
+artifact copied into `builder/scratch/` under a served name. It is the same sha256, checked after
+the copy. **Production deploy: pending the owner's go** (`infra/README.md` §4). The record is the
+execution log's Task 6. *The paragraph below is left as written; it describes the state before
+2026-09-25.*
+
+⛔ *(Before 2026-09-25:)* **NOT DEPLOYED, and `ApiConfig.graph_path` is UNCHANGED.** The app still serves
 `graph-msw-tu50.bin`. This artifact exists to be run locally for `LBA-G5`, the unblinded use
 gate (`LBA-AM4`), which is the owner's to run. **No journey has been generated on it and no
 listen is designed** (`LBA-D3`).

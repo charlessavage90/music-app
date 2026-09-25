@@ -305,7 +305,7 @@ def test_the_nameless_check_names_the_mbid_not_the_name():
 # The counts below are read from each artifact's own manifest sidecar or from
 # the recalibration comment in acceptance.py, never carried from a document.
 
-SERVED_MAP = (58_838, 1_315_684)          # graph-msw-tu50.bin, sha 43dd82bb…
+PREVIOUS_SERVED_MAP = (58_838, 1_315_684) # graph-msw-tu50.bin, sha 43dd82bb…, served until 2026-09-25
 JFX_B = (88_685, 1_618_164)               # the CXA- adoption, REVERTED
 RETIRED_MUTUAL_KNN = (74_193, 898_006)    # pre-MSW map
 EXTENDED_MUTUAL_KNN = (81_749, 905_558)   # cap-rule tripwire: differs from
@@ -353,16 +353,17 @@ def test_the_current_calibration_target_passes_its_own_acceptance_gate():
     `cmd_build` runs `check_acceptance` BEFORE `serialise`, so a rejected
     build writes nothing.
 
-    ⚠ The target is the `LBA-A6` CANDIDATE since the owner's recalibration of
-    2026-09-21, NOT the served map. The test below records what that costs.
+    The target is `LBA-A6` since the owner's recalibration of 2026-09-21, and
+    since its adoption on 2026-09-25 it is also the SERVED map
+    (`graph-lba-a6.bin`), so this is again the served-map test.
     """
     check_acceptance(_graph_at_scale(*LBA_A6_CANDIDATE), PRODUCTION_ACCEPTANCE)
 
 
 # ⚠ ASSERTED, NOT OVERLOOKED. The 2026-09-21 recalibration centred the bounds
 # on the `LBA-A6` candidate, and the consequence is that the map the app
-# SERVES TODAY, and the fallback the `LBA-G5` use gate would revert to, are
-# both outside them. That is the `LUX-E1` drift shape deliberately re-entered:
+# served until 2026-09-25, and the fallback the `LBA-G5` use gate would have
+# reverted to, are both outside them. That is the `LUX-E1` drift shape deliberately re-entered:
 # a correct rebuild of either would be refused before `serialise` and written
 # nowhere.
 #
@@ -372,20 +373,21 @@ def test_the_current_calibration_target_passes_its_own_acceptance_gate():
 # mystery rejection of a build that everyone expects to work — which is
 # exactly how `LUX-E1` presented, and it cost a session to diagnose.
 #
-# THE REMEDY, if the use gate fails or the candidate is not adopted: restore
-# acceptance.py's PREVIOUS (MSW- restore 2026-09-05) line before rebuilding
-# either map. Then delete this test and restore the served-map one above.
+# RESOLVED 2026-09-25 (issue #138): the candidate was adopted, so the drift is
+# gone. Kept because it still guards a real case: rebuilding either of these
+# maps — say, to roll back — needs acceptance.py's PREVIOUS (MSW- restore
+# 2026-09-05) line restored first, and this test says so before a build does.
 @pytest.mark.parametrize(
     "label, counts",
     [
-        ("the map the app serves today", SERVED_MAP),
+        ("the map served until 2026-09-25", PREVIOUS_SERVED_MAP),
         ("LBA-A3 = LBD-A5V, the LBA-G5 fallback", LBD_A5V),
     ],
 )
-def test_the_served_map_and_the_fallback_are_outside_the_current_bounds(
+def test_the_previous_served_map_and_the_fallback_are_outside_the_current_bounds(
     label, counts
 ):
-    """A known, accepted cost of the 2026-09-21 recalibration — not a defect.
+    """A known, accepted consequence of the 2026-09-21 recalibration — not a defect.
 
     When this test starts FAILING, the bounds have been restored or moved
     again, and the comment above says what that means.

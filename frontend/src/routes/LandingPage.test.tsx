@@ -27,7 +27,7 @@ test('offers the three sample journeys, each linking straight at a path', () => 
   expect(links.map((l) => l.getAttribute('aria-label'))).toEqual([
     'Miles Davis to Radiohead, 5 stops',
     'Dolly Parton to Daft Punk, 6 stops',
-    'Bad Bunny to Chappell Roan, 8 stops',
+    'Bad Bunny to Chappell Roan, 3 stops',
   ]);
   // Ordinary links, not buttons that navigate — so they are shareable, open in
   // a new tab, and work with Back like any other journey.
@@ -133,7 +133,7 @@ test('each sample journey says how many stops it has, counting both artists you 
   // never built; see the issue filed from this session.
   expect(screen.getByRole('link', { name: /miles davis.*radiohead/i })).toHaveTextContent('5 stops');
   expect(screen.getByRole('link', { name: /dolly parton.*daft punk/i })).toHaveTextContent('6 stops');
-  expect(screen.getByRole('link', { name: /bad bunny.*chappell roan/i })).toHaveTextContent('8 stops');
+  expect(screen.getByRole('link', { name: /bad bunny.*chappell roan/i })).toHaveTextContent('3 stops');
 });
 
 // Issue #201 (1): the owner does not like the colour slide on the build button.
@@ -152,7 +152,7 @@ test('the build button has no colour animation', () => {
 // can only pin that the pieces are the shared ones.
 test("the example card uses the journey page's rail and dots", () => {
   setup();
-  const list = screen.getByText('Nina Simone').closest('ol')!;
+  const list = screen.getByText('Ella Fitzgerald').closest('ol')!;
   expect(list.querySelector('[data-rail-line]')).not.toBeNull();
   const dots = list.querySelectorAll<HTMLElement>('[data-rail-dot]');
   expect(dots).toHaveLength(7);
@@ -173,7 +173,7 @@ test('the hero carries the approved copy and a three-step "How it works"', () =>
 
 test('the teaser names the measured Miles Davis to Daft Punk journey, without tags', () => {
   setup();
-  for (const name of ['Nina Simone', 'Marvin Gaye', 'Daryl Hall & John Oates', 'Genesis', 'David Gilmour']) {
+  for (const name of ['Ella Fitzgerald', 'Mariah Carey', 'Usher', 'Flo Rida', 'Katy Perry']) {
     expect(screen.getByText(name)).toBeInTheDocument();
   }
   expect(screen.queryByText(/low reach/i)).not.toBeInTheDocument();

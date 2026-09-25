@@ -297,7 +297,17 @@ commands is how the wrong artifact gets uploaded beside the right deploy, and vi
 (`DEP-34`). `GRAPH` is the SERVED artifact's basename; today that is **`graph-lux4.bin`**
 (`LUX-4`, live since the 2026-09-08 deploy): the adopted `MSW-` graph, `graph-msw-tu50.bin`,
 plus three additive metadata keys. **Read it off the running service, not off this line or
-`ApiConfig.graph_path`**, which names the key-less `graph-msw-tu50.bin` for local dev:
+`ApiConfig.graph_path`**, which since 2026-09-25 names the adopted-but-not-yet-deployed
+`graph-lba-a6.bin`:
+
+> ⚠ **THE NEXT DEPLOY CHANGES THE MAP (`LBA-A6`, adopted 2026-09-25).** On it, and only on it,
+> `GRAPH=graph-lba-a6.bin`, **both `s3 cp` lines run**, and `cdk diff` is *expected* to show
+> `ARTISTPATH_GRAPH` and `ARTISTPATH_GRAPH_SHA256` changing. That is the one deploy where that
+> diff is correct. The file and its sidecar are in the main tree's `builder/scratch/`, a verified
+> copy of `LBA-A6-candidate.bin` (execution log `2026-09-21-lbd-s4-a6-adoption-execution-log.md`
+> Task 6). The 87,394-artist map fits the host: `LBA-G1` fired on no arm
+> (`builder/analysis/2026-09-14-lbd-s4-stage2/README.md` §4). **After it ships, correct the
+> `graph-lux4.bin` line above to name it.**
 
 ```bash
 ARN=$(aws apprunner list-services \

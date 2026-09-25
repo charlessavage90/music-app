@@ -29,3 +29,26 @@ appending to this folder — `start-servers.ps1` there does.
 
 ## Pairs, one per line: `from → to  (rerolls: N)` — written at the closeout after the gate
 
+
+**Derived 2026-09-25, at the adoption session after the gate**, by
+`python lal_g5_pairs.py --exclude "Miles Davis → Daft Punk" C:/unsung-fast/lbd-artifacts/lba-g5-logs`
+over `api-part1.log`–`api-part4.log` (`api-part2.log` holds no journey).
+
+**Excluded, issue #215:** every `Miles Davis → Daft Punk` event in `api-part4.log`. They are a
+session's headless browser check, not the owner's use: all fall in lines 89–277, and their journey ids
+are exactly the seven #215 names plus requests carrying `journey_id: "unknown"`. The owner confirmed
+on 2026-09-25 that he never ran that pair, so the whole pair is dropped, not only those ids.
+
+**The known gap (about 10:14–10:55 on 2026-09-24):** no hand-recorded pairs were supplied, so none
+are appended.
+
+- Young Gun Silver Fox → Wishbone Ash  (rerolls: 3)
+- Guster → Wishbone Ash  (rerolls: 21)
+- Guster → WITCH  (rerolls: 9)
+- Guster → WITCH  (rerolls: 0)
+- Guster → WITCH  (rerolls: 3)
+- Wishbone Ash → The Format  (rerolls: 0)
+- Goose → The Format  (rerolls: 0)
+- Radiohead → The Format  (rerolls: 20)
+- Commander Cody & His Lost Planet Airmen → Pink Floyd  (rerolls: 11)
+- Coheed and Cambria → The Format  (rerolls: 9)
