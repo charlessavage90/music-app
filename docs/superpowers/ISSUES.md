@@ -27,7 +27,7 @@ sees exactly what was tracked. A quote with provenance is a citation, not a rest
 **Project identifiers survive.** The title leads with the item's own ID when it has one —
 `[G3-A1] …`, `[LUX-E2] …` — so `git grep` and `gh issue list --search` meet in the same token. An
 issue number is an *address*, never a replacement for a project identifier. New ID series still
-follow `CLAUDE.md`'s namespacing and collision check.
+follow the `plan-discipline` skill's namespacing and collision check.
 
 ## 2. Labels
 
@@ -37,7 +37,7 @@ modifier on top of the kind, not a kind.
 | Group | Labels | Meaning |
 |---|---|---|
 | kind | `bug` · `deferred` · `task` · `security` · `documentation` | |
-| modifier | `research` | An analysis or experiment: needs a committed pre-registration before any arm runs (`CLAUDE.md`) |
+| modifier | `research` | An analysis or experiment: needs a committed pre-registration before any arm runs (the `plan-discipline` skill) |
 | whose | `owner-decision` · `owner-hands` | **No whose-label means it is a session's.** `owner-decision`: a session prepares the decision and presents it per `CLAUDE.md` "How to present results", **never makes it**. `owner-hands`: blocked on something only he can physically do |
 | readiness | `agent-ready` | **The condition is met AND it is a session's.** This is the dispatch signal for Orca. Never on an `owner-decision` issue |
 | area | `area:api` · `area:frontend` · `area:builder` · `area:infra` · `area:apparatus` | Which package, or the project's own docs/skills/agents |

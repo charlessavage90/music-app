@@ -1,0 +1,24 @@
+# DLP-Q5, owner 2026-09-24: dropped, harness-enforced (settings env; Read deny; orca.yaml)
+# CLAUDE.md
+Never use as context: docs/how-we-map-similar-artists.md (a narrative journal) and anything under docs/reference/ (third-party material).
+Neither is maintained as project documentation.
+Prefix every uv command with UVLINKMODE=copy:
+bash UVLINKMODE=copy uv run --extra dev pytest -q
+Hardlinking still fails here; uv falls back to copying by itself, so the prefix suppresses a warning rather than being strictly required.
+Keep it — detail in memory/env-onedrive-uv.md.
+builder (from builder/) bash UVLINKMODE=copy uv run --extra dev pytest -q # all tests UVLINKMODE=copy uv run --extra dev pytest -q -k crawl # single test / pattern
+api (from api/) bash UVLINKMODE=copy uv run --extra dev pytest -q # all tests UVLINKMODE=copy uv run --extra dev pytest -q -k pathfinding # single test / pattern
+# .claude/skills/session-start/SKILL.md §D
+Only the first is in CLAUDE.md; the other two live in memory/deploy-environment-traps.md and the execution logs.
+UVLINKMODE=copy on every uv command — hardlinking still fails at C:\dev.
+Not strictly required since the move off OneDrive (uv falls back to copying), but keep it.
+# DLS-Q4, owner ruling 2026-09-11: replaced, not moved
+Rules here do not expire, and must not be given expiry conditions.
+"Figures live in one document", UVLINKMODE=copy, currency-in-the-name: these are invariants, and a review trigger on them would be discharged by re-affirming them, adding a line and subtracting nothing.
+What grows is not the rule (2 lines, permanent) but the incident narrative attached to it (4–6 lines, and it is load-bearing — knowing what a check is for is what lets you apply it to a case it was not written for).
+That is a real trade-off, not a defect.
+The budget rule prices it by making the cost visible and the decision the owner's; an expiry date would shred the half worth keeping — and so does compressing a narrative to free lines, which is why that is no longer the price of an addition.
+# DLP-Q5 extended by the owner in-session 2026-09-24: the same prefix dropped from ml-graph-analyst and closeout
+Prefix every uv command with UVLINKMODE=copy — not strictly required any more, as uv falls back to copying on its own, but hardlinking still fails here and the prefix skips a doomed attempt.
+bash cd api && UVLINKMODE=copy uv run python eval/runbaseline.py cd builder && UVLINKMODE=copy uv run --extra dev pytest -q
+bash cd builder && UVLINKMODE=copy uv run --extra dev pytest -q cd ../api && UVLINKMODE=copy uv run --extra dev pytest -q cd ../frontend && npm test

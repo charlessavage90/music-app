@@ -691,8 +691,8 @@ analyses.
 ### D4. Run the suites and paste the output
 
 ```bash
-cd builder && UV_LINK_MODE=copy uv run --extra dev pytest -q
-cd ../api  && UV_LINK_MODE=copy uv run --extra dev pytest -q
+cd builder && uv run --extra dev pytest -q
+cd ../api  && uv run --extra dev pytest -q
 cd ../frontend && npm test
 ```
 
@@ -803,6 +803,8 @@ lines are paid by the sessions that ask for them. It
 need not name a removal: a displacement counts only where the thing removed had stopped
 earning its place, and **compressing live prose to make any of these numbers go down is not
 a displacement, it is damage with a receipt.**
+
+**Since 2026-09-11 (`DLS-Q4`) the alternative to compressing is moving:** text may leave a file verbatim to where it loads when relevant, checked with `scripts/prose-survival.py`; a rule is removed only on evidence that sessions no longer need it, plus the owner's sign-off.
 
 **That guardrail got more important when the unit got finer, not less.** Lines were coarse
 enough to resist the move — you could not shave a sentence off a paragraph and book a
