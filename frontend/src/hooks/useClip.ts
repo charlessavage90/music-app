@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 import * as client from '@/api/client';
 import type { Track } from '@/api/types';
 
@@ -40,6 +40,18 @@ export function silentLabel(status: ClipStatus): string {
 export const AUTO_RETRY_DELAYS_MS = [5_000, 30_000] as const;
 /** A ceiling on any server-requested wait, so a card never sits for longer. */
 const MAX_RETRY_WAIT_MS = 2 * 60 * 1000;
+/**
+ * Each automatic wait is stretched by up to this fraction of itself, at random
+ * (#222). A path view's cards fail together when the catalogue is busy, and on
+ * one fixed schedule they would all ask again in the same instant. Only ever
+ * added, so no card asks sooner than the schedule — or the server — said.
+ * Chosen, not measured.
+ */
+export const RETRY_JITTER = 0.5;
+
+function jittered(ms: number): number {
+  return ms * (1 + RETRY_JITTER * Math.random());
+}
 
 function failureStatus(err: unknown): 'busy' | 'failed' {
   return err instanceof client.ApiError && (err.status === 503 || err.status === 429)
@@ -116,57 +128,113 @@ function stateFor(track: Track | null): ClipState {
   return { status: track ? 'ready' : 'none', track };
 }
 
-export function useClip(mbid: string, index = 0): ClipState & { retry: () => void } {
-  const [state, setState] = useState<ClipState>(() => {
-    const entry = fresh(mbid, index);
-    return entry ? stateFor(entry.track) : { status: 'loading', track: null };
-  });
-  // Bumped to ask again. Part of the fetch effect's key, so a retry is the same
-  // code path as the first load, cancellation included.
-  const [attempt, setAttempt] = useState(0);
-  // Automatic retries spent on THIS clip. Reset by a new clip and by a manual
-  // retry, so pressing Retry buys the bounded schedule again.
-  const autoRetries = useRef(0);
+const LOADING: ClipState = { status: 'loading', track: null };
 
-  useEffect(() => {
-    autoRetries.current = 0;
-  }, [mbid, index]);
+/**
+ * One clip's live state, shared by everything showing it (#221). A card and its
+ * open detail used to hold a lookup each, so a Retry pressed on one left the
+ * other showing the failure. Now both subscribe to this, which also makes them
+ * one fetch and one retry schedule rather than two.
+ *
+ * `cache` above still holds only answers; this holds the transient states too,
+ * which is why it is separate — and why nothing here outlives its subscribers'
+ * interest: the last one leaving cancels any scheduled retry, and the next first
+ * subscriber asks afresh unless the cache can answer.
+ */
+type Live = {
+  state: ClipState;
+  listeners: Set<() => void>;
+  inflight: boolean;
+  timer: ReturnType<typeof setTimeout> | undefined;
+  // Automatic retries spent. Reset by a first subscriber and by a manual retry,
+  // so pressing Retry buys the bounded schedule again.
+  autoRetries: number;
+};
 
-  useEffect(() => {
-    const entry = fresh(mbid, index);
-    if (entry) {
-      setState(stateFor(entry.track));
-      return;
-    }
-    let active = true;
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    setState({ status: 'loading', track: null });
-    load(mbid, index)
-      .then((track) => {
-        if (active) setState(stateFor(track));
-      })
-      .catch((err: unknown) => {
-        if (!active) return;
-        setState({ status: failureStatus(err), track: null });
-        const step = autoRetries.current;
-        if (step >= AUTO_RETRY_DELAYS_MS.length) return;
-        const asked = err instanceof client.ApiError ? err.retryAfterMs : undefined;
-        const wait = Math.min(asked ?? AUTO_RETRY_DELAYS_MS[step], MAX_RETRY_WAIT_MS);
-        timer = setTimeout(() => {
-          autoRetries.current = step + 1;
-          setAttempt((a) => a + 1);
-        }, wait);
-      });
-    return () => {
-      active = false;
-      clearTimeout(timer);
+const live = new Map<string, Live>();
+
+function liveEntry(mbid: string, index: number): Live {
+  const k = key(mbid, index);
+  let entry = live.get(k);
+  if (!entry) {
+    const cached = fresh(mbid, index);
+    entry = {
+      state: cached ? stateFor(cached.track) : LOADING,
+      listeners: new Set(),
+      inflight: false,
+      timer: undefined,
+      autoRetries: 0,
     };
-  }, [mbid, index, attempt]);
+    live.set(k, entry);
+  }
+  return entry;
+}
 
-  const retry = useCallback(() => {
-    autoRetries.current = 0;
-    setAttempt((a) => a + 1);
-  }, []);
+function publish(entry: Live, state: ClipState) {
+  entry.state = state;
+  for (const listener of entry.listeners) listener();
+}
 
+function fetchInto(entry: Live, mbid: string, index: number) {
+  entry.inflight = true;
+  publish(entry, LOADING);
+  load(mbid, index)
+    .then((track) => {
+      entry.inflight = false;
+      publish(entry, stateFor(track));
+    })
+    .catch((err: unknown) => {
+      entry.inflight = false;
+      publish(entry, { status: failureStatus(err), track: null });
+      if (entry.listeners.size === 0) return; // nobody is looking; the next subscriber asks
+      const step = entry.autoRetries;
+      if (step >= AUTO_RETRY_DELAYS_MS.length) return;
+      const asked = err instanceof client.ApiError ? err.retryAfterMs : undefined;
+      const wait = Math.min(jittered(asked ?? AUTO_RETRY_DELAYS_MS[step]), MAX_RETRY_WAIT_MS);
+      entry.timer = setTimeout(() => {
+        entry.timer = undefined;
+        entry.autoRetries = step + 1;
+        fetchInto(entry, mbid, index);
+      }, wait);
+    });
+}
+
+function subscribe(mbid: string, index: number, listener: () => void): () => void {
+  const entry = liveEntry(mbid, index);
+  const first = entry.listeners.size === 0;
+  entry.listeners.add(listener);
+  if (first && !entry.inflight) {
+    const cached = fresh(mbid, index);
+    if (cached) {
+      publish(entry, stateFor(cached.track));
+    } else {
+      entry.autoRetries = 0;
+      fetchInto(entry, mbid, index);
+    }
+  }
+  return () => {
+    entry.listeners.delete(listener);
+    if (entry.listeners.size === 0) {
+      clearTimeout(entry.timer);
+      entry.timer = undefined;
+    }
+  };
+}
+
+function retryNow(mbid: string, index: number) {
+  const entry = liveEntry(mbid, index);
+  if (entry.inflight) return; // already asking; its answer reaches every subscriber
+  clearTimeout(entry.timer);
+  entry.timer = undefined;
+  entry.autoRetries = 0;
+  fetchInto(entry, mbid, index);
+}
+
+export function useClip(mbid: string, index = 0): ClipState & { retry: () => void } {
+  const state = useSyncExternalStore(
+    useCallback((listener: () => void) => subscribe(mbid, index, listener), [mbid, index]),
+    () => liveEntry(mbid, index).state,
+  );
+  const retry = useCallback(() => retryNow(mbid, index), [mbid, index]);
   return { ...state, retry };
 }

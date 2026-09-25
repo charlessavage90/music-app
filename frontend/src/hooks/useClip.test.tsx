@@ -1,7 +1,7 @@
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import { afterEach, expect, test, vi } from 'vitest';
 import * as client from '@/api/client';
-import { AUTO_RETRY_DELAYS_MS, resolveFreshUrl, useClip } from './useClip';
+import { AUTO_RETRY_DELAYS_MS, RETRY_JITTER, resolveFreshUrl, useClip } from './useClip';
 
 afterEach(() => vi.restoreAllMocks());
 
@@ -112,7 +112,8 @@ test('a transient failure retries by itself, honouring Retry-After', async () =>
     await act(async () => { await vi.advanceTimersByTimeAsync(19_000); });
     expect(spy).toHaveBeenCalledTimes(1); // not before the server said
 
-    await act(async () => { await vi.advanceTimersByTimeAsync(2_000); });
+    // By the latest the jitter allows (RETRY_JITTER on top of what was asked).
+    await act(async () => { await vi.advanceTimersByTimeAsync(20_000 * RETRY_JITTER + 2_000); });
     await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:Recovered'));
     expect(spy).toHaveBeenCalledTimes(2);
   } finally {
@@ -186,4 +187,61 @@ test('refetches a clip old enough that its signed URL has expired', async () => 
   render(<Harness mbid="longopen" />);
   await waitFor(() => expect(screen.getByTestId('c')).toHaveTextContent('ready:T'));
   expect(spy).toHaveBeenCalledTimes(2);
+});
+
+// --- #221: a card and its open detail share one clip -----------------------
+
+function WithRetry({ mbid, id }: { mbid: string; id: string }) {
+  const c = useClip(mbid);
+  return (
+    <div>
+      <div data-testid={id}>{c.status}:{c.track?.title ?? ''}</div>
+      <button onClick={c.retry}>retry-{id}</button>
+    </div>
+  );
+}
+
+test('Retry on the card refreshes its open detail too, and they share one lookup', async () => {
+  const spy = vi.spyOn(client, 'getTrack')
+    .mockRejectedValueOnce(new client.ApiError(503, null, null, 60_000));
+  render(<><WithRetry mbid="shared" id="card" /><WithRetry mbid="shared" id="detail" /></>);
+  await waitFor(() => expect(screen.getByTestId('detail')).toHaveTextContent('busy:'));
+  expect(screen.getByTestId('card')).toHaveTextContent('busy:');
+  expect(spy).toHaveBeenCalledTimes(1);
+
+  spy.mockResolvedValue({ previewUrl: 'u', title: 'Both', coverUrl: 'c', candidateCount: 1 });
+  act(() => screen.getByText('retry-card').click());
+  await waitFor(() => expect(screen.getByTestId('detail')).toHaveTextContent('ready:Both'));
+  expect(screen.getByTestId('card')).toHaveTextContent('ready:Both');
+  expect(spy).toHaveBeenCalledTimes(2);
+});
+
+// --- #222: cards that failed together do not retry together ----------------
+
+test('two busy cards do not retry at the same instant', async () => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+  try {
+    // The first card to fail draws no stretch, the second the most there is.
+    const draws = [0, 1];
+    vi.spyOn(Math, 'random').mockImplementation(() => draws.shift() ?? 0.5);
+    const spy = vi.spyOn(client, 'getTrack')
+      .mockRejectedValueOnce(new client.ApiError(503))
+      .mockRejectedValueOnce(new client.ApiError(503))
+      .mockResolvedValue({ previewUrl: 'u', title: 'T', coverUrl: 'c', candidateCount: 1 });
+    render(<><WithRetry mbid="jitter-a" id="a" /><WithRetry mbid="jitter-b" id="b" /></>);
+    await waitFor(() => expect(screen.getByTestId('b')).toHaveTextContent('busy:'));
+    expect(screen.getByTestId('a')).toHaveTextContent('busy:');
+
+    const base = AUTO_RETRY_DELAYS_MS[0];
+    await act(async () => { await vi.advanceTimersByTimeAsync(base + 100); });
+    expect(spy).toHaveBeenCalledTimes(3); // one card has asked again; the other has not
+    expect(screen.getByTestId('a')).toHaveTextContent('ready:T');
+    expect(screen.getByTestId('b')).toHaveTextContent('busy:');
+
+    await act(async () => { await vi.advanceTimersByTimeAsync(base * RETRY_JITTER); });
+    await waitFor(() => expect(screen.getByTestId('b')).toHaveTextContent('ready:T'));
+    expect(spy).toHaveBeenCalledTimes(4);
+  } finally {
+    vi.useRealTimers();
+  }
 });
