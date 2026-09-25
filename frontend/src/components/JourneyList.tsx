@@ -72,7 +72,7 @@ export function JourneyList({ artists, stopRule, onBypass, changed, ref }: Props
   useMediaSession(
     currentName ? { artist: currentName, title: currentTrackTitle, artwork: currentTrack?.coverUrl ?? null } : null,
     player.isPlaying,
-    { play: player.resume, pause: player.pause, stop: player.stop },
+    { play: player.resume, pause: player.pause, stop: player.stop, next: player.next, previous: player.previous },
   );
 
   function cycleClip(mbid: string, candidateCount: number) {

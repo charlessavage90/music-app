@@ -134,11 +134,7 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
 
   useEffect(() => {
     player.onEnded(() => {
-      const list = listRef.current;
-      const idx = list.findIndex((p) => p.mbid === currentRef.current);
-      const next = idx >= 0 ? list[idx + 1] : undefined;
-      if (next) void start(next.mbid);
-      else clear();
+      if (!step(1)) clear();
     });
 
     player.onError(() => {
@@ -173,6 +169,32 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
     return () => player.dispose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [player]);
+
+  /**
+   * Start the playable card `by` places from the current one. False, and nothing
+   * changes, when there is no current card or no card that far along.
+   */
+  function step(by: 1 | -1): boolean {
+    const list = listRef.current;
+    const idx = list.findIndex((p) => p.mbid === currentRef.current);
+    const target = idx >= 0 ? list[idx + by] : undefined;
+    if (!target) return false;
+    void start(target.mbid);
+    return true;
+  }
+
+  /**
+   * Skip to the next / previous card with a clip (#223) — the OS media keys. The
+   * same move a clip ending makes, except that running off either end changes
+   * nothing: a skip is a request, not an ending, so it never stops the player.
+   */
+  function next() {
+    step(1);
+  }
+
+  function previous() {
+    step(-1);
+  }
 
   function playFrom(mbid: string) {
     if (!listRef.current.some((p) => p.mbid === mbid)) return;
@@ -227,6 +249,6 @@ export function usePlayer(playables: Playable[], resolveUrl: ResolveUrl) {
 
   return {
     currentMbid, isPlaying, position, duration, failure, volume,
-    playFrom, toggle, pause, resume, retry, stop, setVolume,
+    playFrom, toggle, pause, resume, retry, stop, next, previous, setVolume,
   };
 }

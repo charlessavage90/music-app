@@ -10,6 +10,8 @@ interface Controls {
   play: () => void;
   pause: () => void;
   stop: () => void;
+  next: () => void;
+  previous: () => void;
 }
 
 function session(): MediaSession | null {
@@ -37,6 +39,8 @@ export function useMediaSession(now: NowPlaying | null, isPlaying: boolean, cont
       ['play', () => controlsRef.current.play()],
       ['pause', () => controlsRef.current.pause()],
       ['stop', () => controlsRef.current.stop()],
+      ['nexttrack', () => controlsRef.current.next()],
+      ['previoustrack', () => controlsRef.current.previous()],
     ];
     for (const [action, handler] of actions) {
       // An action a browser does not support throws rather than being ignored.

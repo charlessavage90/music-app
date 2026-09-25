@@ -28,3 +28,11 @@ written the wrong thing:
 > say why.
 
 ---
+
+## QUEUED 2026-09-24 — the player sweep (#221–#223)
+
+**Where:** on unsung.fm, after the next deploy.
+
+- [ ] 1. **Clip playing, desktop or phone.** Press the keyboard's / headset's / lock screen's **next
+  track**: the next card with a clip starts. **Previous track** goes back one. On the last card, next
+  does nothing — the clip keeps playing.
