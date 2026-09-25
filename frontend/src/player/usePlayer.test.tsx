@@ -49,6 +49,8 @@ function Harness({ resolve }: { resolve: (mbid: string) => Promise<string | null
       <button onClick={p.retry}>retry</button>
       <button onClick={p.toggle}>toggle</button>
       <button onClick={p.stop}>stop</button>
+      <button onClick={p.next}>next</button>
+      <button onClick={p.previous}>previous</button>
     </div>
   );
 }
@@ -299,4 +301,26 @@ test('position and duration follow the audio element and reset when playback sto
   act(() => ended.at(-1)?.()); // kraftwerk ends, nothing next
   await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('none'));
   expect(screen.getByTestId('pos')).toHaveTextContent('0/0');
+});
+
+// #223: the OS "next track" / "previous track" keys.
+test('next and previous move between playable cards, and do nothing past either end', async () => {
+  const user = userEvent.setup();
+  render(<Harness resolve={async (mbid) => `url-for-${mbid}`} />);
+
+  await user.click(screen.getByText('next')); // nothing current yet
+  expect(played).toEqual([]);
+
+  await user.click(screen.getByText('play'));
+  await user.click(screen.getByText('previous')); // already at the first card
+  await user.click(screen.getByText('next'));
+  await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('kraftwerk'));
+
+  await user.click(screen.getByText('next')); // already at the last: a skip never stops the player
+  expect(screen.getByTestId('current')).toHaveTextContent('kraftwerk');
+  expect(screen.getByTestId('playing')).toHaveTextContent('true');
+
+  await user.click(screen.getByText('previous'));
+  await waitFor(() => expect(screen.getByTestId('current')).toHaveTextContent('miles'));
+  expect(played).toEqual(['url-for-miles', 'url-for-kraftwerk', 'url-for-miles']);
 });

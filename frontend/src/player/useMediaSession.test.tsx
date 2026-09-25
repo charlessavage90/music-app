@@ -30,7 +30,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-const controls = () => ({ play: vi.fn(), pause: vi.fn(), stop: vi.fn() });
+const controls = () => ({ play: vi.fn(), pause: vi.fn(), stop: vi.fn(), next: vi.fn(), previous: vi.fn() });
 
 test('names what is playing to the OS, and says whether it is', () => {
   const c = controls();
@@ -55,7 +55,11 @@ test('the OS controls drive the player, through the latest handlers', () => {
   handlers.pause?.();
   handlers.play?.();
   handlers.stop?.();
+  handlers.nexttrack?.();
+  handlers.previoustrack?.();
   expect(first.pause).not.toHaveBeenCalled();
+  expect(latest.next).toHaveBeenCalledTimes(1);
+  expect(latest.previous).toHaveBeenCalledTimes(1);
   expect(latest.pause).toHaveBeenCalledTimes(1);
   expect(latest.play).toHaveBeenCalledTimes(1);
   expect(latest.stop).toHaveBeenCalledTimes(1);
@@ -72,6 +76,7 @@ test('nothing current clears the metadata, and unmounting releases the controls'
   unmount();
   expect(handlers.play).toBeNull();
   expect(handlers.pause).toBeNull();
+  expect(handlers.nexttrack).toBeNull();
 });
 
 test('is a no-op where the browser has no media session', () => {
