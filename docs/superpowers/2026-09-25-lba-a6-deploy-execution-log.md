@@ -147,7 +147,19 @@ its per-pair log (`prod_p95.jsonl`), and the CloudWatch events it was joined to
 
 ## §6 The revert trigger — the owner's answer
 
-<!-- recorded verbatim -->
+**Asked 2026-09-25, after the deploy:** does the `LBA-G5` criterion (pre-registration §11,
+`LBA-AM4`) carry forward as the production revert trigger? **His answer, verbatim:**
+
+> past this point, no rule needs to be set. The expectation is that the blind listen and the
+> adoption rule caught anything, and it's unlikely that the case will arise to revert at this
+> point. The need to revert might come up, but it's useless to try to predict what would drive
+> that. Reverting in the future is just owner decision, nothing to predict
+
+**So there is no pre-set revert trigger for `LBA-A6` in production.** A revert is the owner's
+decision whenever he makes it, and the mechanics are ready for it: `infra/README.md` §9's
+graph-only rollback recipe. **A session must not propose a revert criterion, or read the
+`LBA-G5` criterion as one** — the question was put to him and he closed it. This is unlike the
+`CXA-` adoption, which carried a pre-set revert criterion (`CXR-` log §1).
 
 ## §7 What changed in the runbook
 
