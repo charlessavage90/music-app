@@ -19,6 +19,65 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-25 — the top block as it stood from 2026-09-24 (`LBA-G5` started)
+
+**Last updated: 2026-09-24, at the closeout that STARTED `LBA-G5`.** **The live site's CODE changed
+2026-09-24** (image and frontend `759e80c`, PRs #212 and #216–#219; the served graph is unchanged,
+`graph-lux4.bin`), `ApiConfig.graph_path` is untouched, and the owner pressed all 14 of its
+`TEST-QUEUE.md` boxes on unsung.fm the same day — **no findings**; the queue is empty.
+
+# THE BLIND LISTEN HAS RUN AND BEEN READ. THE NEXT ACTION IS `LBA-G5`, THE OWNER'S.
+
+**The read is `LAL-R1`, PASS on coherence.** Its plain sentence, frozen in `LBA-AM6-7`: *"Journeys on
+the new map are better on coherence, and no worse on the other."* It is run-once and final. The figures,
+**the counter-evidence to read beside the verdict (§0)** and the barred reads (§5) are all in
+[`findings/2026-09-23-lal-listen-results.md`](findings/2026-09-23-lal-listen-results.md). The current
+handoff is [`2026-09-23-HANDOFF-lal-listen-read.md`](2026-09-23-HANDOFF-lal-listen-read.md).
+
+> ## ⚠ Four things about this state that are easy to get backwards
+>
+> **PASS is not evidence of quality at `LBA-G5`, and `LBA-G5` does not re-read the listen**
+> (`LBA-AM6-10`). "No worse" on novelty is a tie at the listen's resolution, not equivalence (`REQ-41`).
+> No verdict carries across the three listens.
+>
+> **The blind is spent.** Journeys on the candidate may now be shown to him. `LBA-G5` is unblinded by
+> design.
+>
+> **The acceptance recalibration still REJECTS the served map and the fallback.** If the candidate
+> is not adopted, for any reason, restore `acceptance.py`'s `PREVIOUS (MSW- restore 2026-09-05)` line
+> BEFORE rebuilding either map. Tracked as issue #138.
+>
+> **A wrong-artist clip is NOT a `LBA-G5` signal.** It is a property of an id snapshot, not of the
+> similarity graph (`LBA-AM4`).
+
+Branch `lal-listen-run`, PR **#135**.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner:** merge #135. Read the results note's §0 beside the verdict: how much weight it
+   carries is his by `LBA-AM6-8`. ~~Decide whether to keep the runner's worktree
+   (`C:/Users/charl/worktrees/music-app-lal-runner`).~~ *Moot 2026-09-24: the worktree was already
+   gone and its folder empty, so the sealed per-journey metrics no longer exist on disk anywhere; the
+   results note §1.5 is what remains of them, and nothing further needs more.* The queued use-the-app
+   tests and `LBD-AM3`'s `LBD-A4` question are unchanged and block nothing.
+2. **`LBA-G5`**: the owner's two days of use against his own criterion, **logging every artist pair he
+   uses** (`LBA-AM5`). **STARTED 2026-09-24.** The pair log exists, header only, at
+   `builder/analysis/2026-09-22-lba-a6-blind-listen/lba_g5_pair_log.md` on branch
+   `charlessavage90/lal-blind-listen-next` (PR #136, an address). **He writes nothing in it** (his ruling
+   2026-09-24): the closeout after the gate derives it with `lal_g5_pairs.py` from the API's own telemetry,
+   captured to `C:/unsung-fast/lbd-artifacts/lba-g5-logs/`, and commits it. The candidate is served **locally only** by two detached servers started from
+   `C:\dev\music-app` (API on :8000, booted with the checksum read from the sidecar, **stdout appended to
+   that log folder — a restart must do the same or pairs are lost**; Vite on :5173 with `--host` so the
+   phone can reach it). Nothing is deployed. If either is down, restart them **detached** with
+   `C:\unsung-fast\lbd-artifacts\lba-g5-logs\start-servers.ps1` — never from a session's shell, which
+   Orca kills on retirement (`builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md` §8 says why;
+   the pair log records the one telemetry gap that cost) — and `/api/meta` must report the candidate
+   before any journey is judged.
+3. **Then adoption, which is the owner's call.**
+
+---
+
 ## Demoted 2026-09-24 — `NEXT.md`'s *Deferred, with conditions* registry, as it stood when it moved to GitHub issues
 
 **Not a status block.** On 2026-09-24 the registry moved to GitHub issues ([`ISSUES.md`](ISSUES.md) §6). This is the

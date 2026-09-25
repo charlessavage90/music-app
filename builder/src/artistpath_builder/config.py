@@ -27,9 +27,12 @@ CANDIDATE_ALGORITHM = (
     "session_based_days_7500_session_300_contribution_3"
     "_threshold_10_limit_100_filter_True_skip_30"
 )
-# ⚠ ALG-B is the ADOPTED map's lineage: graph-msw-tu50.bin was built from the
-# ALG-B archive (its manifest records contribution_3), and ApiConfig.graph_path
-# serves it. `algorithm` below still DEFAULTS to ALG-E, deliberately — flipping
+# ⚠ ALG-B WAS the adopted map's lineage until 2026-09-25: graph-msw-tu50.bin was
+# built from the ALG-B archive (its manifest records contribution_3). SINCE
+# 2026-09-25 ApiConfig.graph_path serves graph-lba-a6.bin, whose similarity comes
+# from a ListenBrainz-dump archive, NOT from any crawl — its rebuild is the S4
+# adoption pre-registration's §6 refresh procedure, and its sidecar records the
+# archive and its manifest sha256. `algorithm` below still DEFAULTS to ALG-E, deliberately — flipping
 # that default is the re-crawl decision and is the owner's — so every command
 # touching the adopted lineage must pass --algorithm explicitly. CEX-R5.
 PERMITTED_ALGORITHMS = (

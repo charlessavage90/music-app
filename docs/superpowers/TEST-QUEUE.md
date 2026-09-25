@@ -36,3 +36,12 @@ written the wrong thing:
 - [ ] 1. **Clip playing, desktop or phone.** Press the keyboard's / headset's / lock screen's **next
   track**: the next card with a clip starts. **Previous track** goes back one. On the last card, next
   does nothing — the clip keeps playing.
+
+## QUEUED 2026-09-25 — the new map (`LBA-A6`), after the deploy that ships it
+
+**Where:** on unsung.fm, after the next deploy.
+
+- [ ] 2. **Landing page, any device.** The Bad Bunny → Chappell Roan example says **3 stops**. If it
+  says 8, the site is still on the old map. Press it: the journey has exactly one artist between.
+- [ ] 3. **Start a journey, any device.** Type `Miles Davis` in the first box. The **first**
+  suggestion is Miles Davis the trumpeter, not Miles Davis Quintet.

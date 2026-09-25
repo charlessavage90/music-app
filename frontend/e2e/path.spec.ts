@@ -57,7 +57,9 @@ test('search, path, bypass produces a new path without the bypassed artist', asy
   // page: LUX-2b legitimately names the bypassed artist again, in the "Artists
   // you skipped" panel, so a page-wide text search would now find it there.
   await expect(page).toHaveURL(/known=/);
-  await expect(page.getByTestId('artist-name').filter({ hasText: secondName })).toHaveCount(0);
+  // Exact name, not substring: on the LBA-A6 map "Miles Davis" is a substring
+  // of "Miles Davis Quintet", and a substring filter matched the wrong card.
+  await expect(page.getByTestId('artist-name').getByText(secondName, { exact: true })).toHaveCount(0);
 
   // LUX-2b: the bypassed artist is not gone without trace — the panel names
   // them. Only a real browser proves the data actually reaches the rendered

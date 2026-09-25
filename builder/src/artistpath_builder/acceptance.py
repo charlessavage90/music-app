@@ -285,6 +285,13 @@ PRODUCTION_ACCEPTANCE = AcceptanceCriteria(
     # later session cannot rediscover it as a mystery. Tracked as GitHub
     # issue #138 (formerly NEXT.md's deferral registry).
     #
+    # ✅ RESOLVED 2026-09-25: the candidate WAS ADOPTED (LBA-G5 passed; the
+    # owner's adoption decision). It is served as graph-lba-a6.bin, so the
+    # calibration target and the served map are one artifact again and the
+    # drift above no longer exists. What still holds: a rebuild of the
+    # PREVIOUS served map (graph-msw-tu50.bin / graph-lux4.bin) is refused
+    # under these bounds — restore the line below first if one is ever needed.
+    #
     # PREVIOUS (MSW- restore 2026-09-05): node_count=(47_000, 71_000),
     #                               edge_count=(1_050_000, 1_580_000),
     #                               median_degree=(5.0, 25.0)

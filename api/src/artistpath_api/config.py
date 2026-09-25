@@ -40,14 +40,20 @@ class ApiConfig:
     # section; they are cited and deliberately NOT copied here, because a
     # source comment is exactly where a restated figure goes stale unseen.
     #
-    # PREVIOUS: graph-t15-tiebreakfix.bin. This one is MSW-, adopted
-    # 2026-08-06 (the trimmed-union build carrying fame_lb), and live again
-    # since 2026-09-01.
+    # ADOPTED 2026-09-25: graph-lba-a6.bin, the LBA-A6 candidate (population
+    # P, threshold 3, ListenBrainz's own pairing) — the owner's decision after
+    # the LAL-R1 blind listen and the LBA-G5 use gate both passed. The file is
+    # LBA-A6-candidate.bin copied under this name; identity is its sha256 in
+    # the sidecar, never the filename (DEP-24). Figures and provenance:
+    # builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md.
+    # PREVIOUS: graph-msw-tu50.bin (MSW-, adopted 2026-08-06, live again
+    # 2026-09-01 → 2026-09-25; production served its metadata-extended twin
+    # graph-lux4.bin). Before that: graph-t15-tiebreakfix.bin.
     # The retired 5k dev fixture is NOT a substitute — its snowball shape
     # misrepresents the obscure tail, which is what bypass work exercises.
     # One env var swaps the graph without code changes.
     graph_path: str = os.environ.get(
-        "ARTISTPATH_GRAPH", "../builder/scratch/graph-msw-tu50.bin"
+        "ARTISTPATH_GRAPH", "../builder/scratch/graph-lba-a6.bin"
     )
     # Expected sha256 of the artifact. Empty skips verification (local dev);
     # production sets it and the service refuses to boot on a mismatch. The

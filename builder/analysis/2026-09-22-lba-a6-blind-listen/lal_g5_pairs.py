@@ -9,7 +9,9 @@ exclusions is a reroll of the journey before it, not a new pair. Output is one l
 in the order requested: `from → to  (rerolls: N)`. Pairs and counts only — never a verdict
 (`LBA-AM4` bar 1).
 
-Usage:  python lal_g5_pairs.py <log file or directory>...   (a directory means every *.log in it)
+Usage:  python lal_g5_pairs.py [--exclude "FROM → TO"]... <log file or directory>...
+        (a directory means every *.log in it; --exclude drops every event of that pair, for traffic
+        that was not the owner's — issue #215)
 """
 from __future__ import annotations
 
@@ -31,6 +33,12 @@ def path_events(lines):
             continue
         if event.get("event") == "path":
             yield event
+
+
+def drop_pairs(events, excluded):
+    """Drop every event whose (source, target) names are in `excluded`. Applied BEFORE folding, so
+    a dropped pair's rerolls cannot attach to a journey on either side of it."""
+    return [e for e in events if (e["source"]["name"], e["target"]["name"]) not in excluded]
 
 
 def journeys(events):
@@ -61,7 +69,12 @@ def read_paths(args):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    args, excluded = sys.argv[1:], set()
+    while args[:1] == ["--exclude"] and len(args) > 1:
+        a, _, b = args[1].partition(" → ")
+        excluded.add((a, b))
+        args = args[2:]
+    if not args:
         sys.exit(__doc__)
     sys.stdout.reconfigure(encoding="utf-8")
-    print("\n".join(render(journeys(path_events(read_paths(sys.argv[1:]))))))
+    print("\n".join(render(journeys(drop_pairs(path_events(read_paths(args)), excluded)))))

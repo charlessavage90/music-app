@@ -1,7 +1,7 @@
 """`lal_g5_pairs.py`: journeys and rerolls are folded correctly and nothing else is read."""
 import json
 
-from lal_g5_pairs import journeys, path_events, render
+from lal_g5_pairs import drop_pairs, journeys, path_events, render
 
 
 def ev(src, tgt, depth=0, event="path"):
@@ -21,3 +21,9 @@ def test_rerolls_count_against_the_journey_before_them_and_a_new_pair_opens_a_ne
 def test_a_log_that_starts_mid_walk_still_records_the_pair():
     events = list(path_events([ev("A", "B", 3), ev("A", "B", 4)]))
     assert render(journeys(events)) == ["A → B  (rerolls: 2)"]
+
+
+def test_an_excluded_pair_is_dropped_before_folding_so_its_rerolls_cannot_attach_elsewhere():
+    events = list(path_events([ev("A", "B"), ev("X", "Y"), ev("X", "Y", 1), ev("A", "B", 1)]))
+    kept = drop_pairs(events, {("X", "Y")})
+    assert render(journeys(kept)) == ["A → B  (rerolls: 1)"]
