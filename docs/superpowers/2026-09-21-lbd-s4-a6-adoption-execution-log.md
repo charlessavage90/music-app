@@ -419,3 +419,15 @@ the same events.
 
 **Not done by this task: the production deploy.** `infra/README.md` §4 with `GRAPH=graph-lba-a6.bin`,
 both `s3 cp` lines, and the post-deploy sidecar check (§7). It is outward-facing, so it runs on his go.
+
+### The full e2e suite on the adopted map found one user-visible regression, and I fixed it
+
+Issue #220 required `landing-samples` to pass against the newly adopted artifact. I ran the **whole**
+Playwright suite against it, on a private API at :8010 that booted the adopted file with its
+sidecar checksum. `path.spec` failed for a reason no unit test could see: **typing "Miles Davis"
+offered "Miles Davis Quintet" first.** Search ranks prefix matches by in-graph popularity, and on
+this map the group edges out the trumpeter. That is the popularity-is-not-fame gap again, this time
+in search. **The fix:** an exact name match now ranks above every prefix match (`api/…/search.py`,
+test first). The spec also matched the bypassed artist by substring, so "Miles Davis" was found
+inside "Miles Davis Quintet". It now matches the exact name. **After both fixes the whole suite
+passes against the adopted artifact**, which discharges #220.

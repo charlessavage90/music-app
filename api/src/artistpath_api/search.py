@@ -1,8 +1,10 @@
 """Artist-name autocomplete over the graph's name list.
 
 At 75k names a linear scan is well under a millisecond, so the index is a
-plain normalised-name list; prefix matches rank above substring matches, and
-both rank by popularity.
+plain normalised-name list; an exact name match ranks first, then prefix
+matches, then substring matches, each tier by popularity. The exact tier exists
+because in-graph popularity can put a group above its namesake leader
+("Miles Davis Quintet" over "Miles Davis" on the LBA-A6 map).
 """
 
 from __future__ import annotations
@@ -30,15 +32,18 @@ class ArtistSearch:
         q = normalise(query)
         if not q:
             return []
+        exact: list[int] = []
         prefix: list[int] = []
         substring: list[int] = []
         for i, name in enumerate(self._normalised):
-            if name.startswith(q):
+            if name == q:
+                exact.append(i)
+            elif name.startswith(q):
                 prefix.append(i)
             elif q in name:
                 substring.append(i)
 
         pop_raw = self._store.pop_raw
-        prefix.sort(key=lambda i: -pop_raw[i])
-        substring.sort(key=lambda i: -pop_raw[i])
-        return (prefix + substring)[: self._cfg.search_limit]
+        for tier in (exact, prefix, substring):
+            tier.sort(key=lambda i: -pop_raw[i])
+        return (exact + prefix + substring)[: self._cfg.search_limit]

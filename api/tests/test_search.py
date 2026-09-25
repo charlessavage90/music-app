@@ -26,6 +26,14 @@ def test_results_are_ranked_by_popularity():
     assert s.search("radio") == [1, 0]  # Radio Dept more popular here
 
 
+def test_an_exact_name_match_ranks_above_a_more_popular_prefix_match():
+    # The LBA-A6 adoption (2026-09-25) gave "Miles Davis Quintet" slightly more
+    # in-graph popularity than "Miles Davis", so typing the trumpeter's full
+    # name offered the group first — and the e2e journey spec started there.
+    s = _search(["Miles Davis Quintet", "Miles Davis", "Miles Davis Sextet"], [0.72, 0.71, 0.41])
+    assert s.search("Miles Davis") == [1, 0, 2]
+
+
 def test_accent_insensitive_match():
     s = _search(["Sigur Rós", "Other"], [0.9, 0.1])
     assert s.search("sigur ros") == [0]
